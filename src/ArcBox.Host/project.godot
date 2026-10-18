@@ -1,0 +1,15 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; but it's okay to create it by hand.
+
+config_version=5
+
+[application]
+
+config/name="ArcBox.Host"
+run/main_scene="res://Main.tscn"
+config/features=PackedStringArray("4.x", "C#")
+
+[dotnet]
+
+project/assembly_name="ArcBox.Host"

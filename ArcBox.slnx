@@ -1,2 +1,5 @@
 <Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ArcBox.Host/ArcBox.Host.csproj" />
+  </Folder>
 </Solution>
