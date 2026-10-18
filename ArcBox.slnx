@@ -1,5 +1,7 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/ArcBox.Host/ArcBox.Host.csproj" />
+    <Project Path="src/ArcBox.Sdk.Tests/ArcBox.Sdk.Tests.csproj" />
+    <Project Path="src/ArcBox.Sdk/ArcBox.Sdk.csproj" />
   </Folder>
 </Solution>
