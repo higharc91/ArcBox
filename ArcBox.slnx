@@ -1,6 +1,12 @@
 <Solution>
+  <Folder Name="/games/" />
+  <Folder Name="/games/Counter/">
+    <Project Path="games/Counter/Counter.Logic.Tests/Counter.Logic.Tests.csproj" />
+    <Project Path="games/Counter/Counter.Logic/Counter.Logic.csproj" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/ArcBox.Host/ArcBox.Host.csproj" />
+    <Project Path="src/ArcBox.Sdk.Testing/ArcBox.Sdk.Testing.csproj" />
     <Project Path="src/ArcBox.Sdk.Tests/ArcBox.Sdk.Tests.csproj" />
     <Project Path="src/ArcBox.Sdk/ArcBox.Sdk.csproj" />
   </Folder>
