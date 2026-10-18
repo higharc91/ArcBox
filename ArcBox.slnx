@@ -9,5 +9,7 @@
     <Project Path="src/ArcBox.Sdk.Testing/ArcBox.Sdk.Testing.csproj" />
     <Project Path="src/ArcBox.Sdk.Tests/ArcBox.Sdk.Tests.csproj" />
     <Project Path="src/ArcBox.Sdk/ArcBox.Sdk.csproj" />
+    <Project Path="src/ArcBox.Server.Tests/ArcBox.Server.Tests.csproj" />
+    <Project Path="src/ArcBox.Server/ArcBox.Server.csproj" />
   </Folder>
 </Solution>
