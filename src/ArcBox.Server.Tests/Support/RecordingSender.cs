@@ -1,4 +1,6 @@
 using System.Collections.Concurrent;
+using System.Text.Json;
+using ArcBox.Sdk.Protocol;
 using ArcBox.Server.Hubs;
 
 namespace ArcBox.Server.Tests.Support;
@@ -17,5 +19,12 @@ public sealed class RecordingSender : IClientSender
     public IReadOnlyList<SentMessage> Of(string connectionId, string method)
     {
         return _messages.Where(m => m.ConnectionId == connectionId && m.Method == method).ToList();
+    }
+
+    public string LastViewId(string conn)
+    {
+        var msg = Of(conn, ClientMethods.ControllerView).Last();
+        var element = (JsonElement)msg.Args[0]!;
+        return element.GetProperty("viewId").GetString()!;
     }
 }

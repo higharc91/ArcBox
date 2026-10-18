@@ -29,5 +29,5 @@ public sealed class HangerGame : IGame
 
     public object HostView() => new { };
 
-    public ControllerView PlayerView(PlayerId id) => new WaitView("");
+    public ControllerView PlayerView(PlayerId id) => new ButtonsView("Hang", [new Option("x", "Hang")]);
 }
