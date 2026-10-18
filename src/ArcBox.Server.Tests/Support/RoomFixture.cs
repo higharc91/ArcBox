@@ -1,4 +1,3 @@
-using System.Text.Json;
 using ArcBox.Sdk;
 using ArcBox.Sdk.Protocol;
 using ArcBox.Server.Games;
@@ -53,12 +52,7 @@ public sealed class RoomFixture : IAsyncDisposable
         return result;
     }
 
-    public string LastViewId(string conn)
-    {
-        var msg = Sender.Of(conn, ClientMethods.ControllerView).Last();
-        var element = (JsonElement)msg.Args[0]!;
-        return element.GetProperty("viewId").GetString()!;
-    }
+    public string LastViewId(string conn) => Sender.LastViewId(conn);
 
     public static async Task<RoomFixture> InGameAsync(string gameId, int players = 1)
     {
