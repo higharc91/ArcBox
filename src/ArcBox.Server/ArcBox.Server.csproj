@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ArcBox.Sdk\ArcBox.Sdk.csproj" />
+    <ProjectReference Include="..\..\games\Counter\Counter.Logic\Counter.Logic.csproj" />
+  </ItemGroup>
+
+</Project>
