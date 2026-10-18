@@ -47,6 +47,17 @@ public class RoomTests
         Assert.NotEmpty(f.Sender.Of("host", ClientMethods.HostView));
     }
 
+    [Fact]
+    public async Task Kicked_player_is_not_vip_of_empty_room()
+    {
+        await using var f = new RoomFixture();
+        await f.HostAsync();
+        await f.JoinAsync("Ann", "c1");
+        await f.Room.KickAsync("host", new PlayerId("p1"));
+        var ex = await Assert.ThrowsAsync<RoomException>(() => f.Room.SelectGameAsync("c1", "counter"));
+        Assert.Equal("Only the VIP or host can do that.", ex.Message);
+    }
+
     // Review Focus #4
     [Fact]
     public async Task Double_start_fails_and_game_keeps_running()
