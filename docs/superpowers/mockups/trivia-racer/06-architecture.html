@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,600;0,700;0,900;1,900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: #fff; --dim: #9a9aa8; --glass: #15151e; --edge: rgba(255,255,255,.12); --red: #e10600; --blue: #3671c6; --teal: #27f4d2; --amber: #ff8000; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: #0a0a0f; color: var(--ink); font-family: 'Titillium Web', sans-serif; padding: 40px; width: 1760px; }
+  .label { font-weight: 700; font-size: 15px; letter-spacing: 3px; color: var(--dim); margin-bottom: 22px; }
+  .label b { color: var(--red); }
+  .stage { position: relative; height: 860px; }
+  svg.wires { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .zone { position: absolute; border: 1px dashed var(--edge); padding: 34px 16px 16px; }
+  .zone > .zt { position: absolute; top: 10px; left: 16px; font-weight: 900; font-size: 13px; letter-spacing: 3px; color: var(--dim); }
+  .box { position: absolute; background: var(--glass); border: 1px solid var(--edge); border-left: 4px solid var(--c, var(--red)); padding: 12px 16px; }
+  .box h3 { font-weight: 900; font-size: 19px; letter-spacing: .5px; }
+  .box .tag { display: inline-block; font-weight: 900; font-size: 10px; letter-spacing: 1.5px; padding: 2px 6px; margin-left: 8px; vertical-align: 3px; }
+  .new { background: var(--red); } .chg { background: #fff; color: #111; } .ext { background: rgba(255,255,255,.12); color: var(--dim); }
+  .box p { color: #c8c8d4; font-size: 14px; line-height: 1.4; margin-top: 4px; }
+  code, .mono { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--teal); }
+  .wl { font-family: 'JetBrains Mono', monospace; font-size: 12px; fill: #c8c8d4; }
+  .legend { position: absolute; right: 0; bottom: 0; display: flex; gap: 18px; font-weight: 700; font-size: 13px; color: var(--dim); align-items: center; }
+  .legend span { display: flex; gap: 6px; align-items: center; }
+</style>
+</head>
+<body>
+<div class="label">DESIGN · <b>ARCHITECTURE</b> — where REDLINE lives, and how live questions reach a synchronous game</div>
+<div class="stage">
+  <div class="zone" style="left:-16px;top:180px;width:1792px;height:640px"><div class="zt" style="left:auto;right:16px">ONE PROCESS · ArcBox.Server</div></div>
+  <div class="zone" style="left:-6px;top:215px;width:806px;height:370px"><div class="zt" style="top:auto;bottom:10px">ArcBox.Server/Games/Redline/ · wired by AddRedline()</div></div>
+  <div class="zone" style="left:1064px;top:215px;width:696px;height:470px"><div class="zt" style="top:auto;bottom:10px">games/Redline/Redline.Logic · pure C#, no I/O</div></div>
+  <svg class="wires">
+    <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#9a9aa8"/></marker>
+          <marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e10600"/></marker></defs>
+    <path d="M150 154 L150 236" stroke="#9a9aa8" stroke-width="2" fill="none" marker-end="url(#a)" stroke-dasharray="6 5"/>
+    <text class="wl" x="162" y="205">HTTPS · ≤1 req / 5 s · 50 Qs</text>
+    <path d="M300 295 L396 295" stroke="#9a9aa8" stroke-width="2" fill="none" marker-end="url(#a)"/>
+    <path d="M560 360 L560 416" stroke="#9a9aa8" stroke-width="2" fill="none" marker-end="url(#a)"/>
+    <text class="wl" x="572" y="393">TryDequeue (lock-free)</text>
+    <path d="M1076 425 C 920 425, 900 455, 744 455" stroke="#9a9aa8" stroke-width="2" fill="none" marker-end="url(#a)" stroke-dasharray="6 5"/>
+    <text class="wl" x="800" y="405">top-up when pool is short</text>
+    <path d="M744 498 C 900 498, 920 562, 1072 562" stroke="#e10600" stroke-width="3" fill="none" marker-end="url(#r)"/>
+    <text class="wl" x="800" y="484" style="fill:#ff6b6b">IQuestionSource.Take(15) · sync · µs</text>
+    <path d="M560 690 C 820 690, 900 600, 1072 600" stroke="#9a9aa8" stroke-width="2" fill="none" marker-end="url(#a)"/>
+    <text class="wl" x="590" y="722">Start / OnInput / OnTimer · actor loop · 2 s watchdog</text>
+    <path d="M1240 231 L1240 152" stroke="#9a9aa8" stroke-width="2" fill="none" marker-end="url(#a)"/>
+    <text class="wl" x="1252" y="200">RedlineHostView · ControllerView</text>
+  </svg>
+
+  <div class="box" style="left:0;top:40px;width:300px;--c:#555"><h3>opentdb.com<span class="tag ext">EXTERNAL</span></h3><p>CC BY-SA 4.0 · <span class="mono">type=multiple&amp;encode=url3986</span> · session token</p></div>
+  <div class="box" style="left:1080px;top:40px;width:660px;--c:var(--blue)"><h3>TV (Godot, M3) · Phones (web/play, M2)</h3><p>Broadcast scene renders the HostView. Phones use the kit plus <code>Option.Hint</code><span class="tag chg">SDK +1 FIELD</span> and a <code>data-game="redline"</code> CSS theme.</p></div>
+
+  <div class="box" style="left:0;top:240px;width:300px;--c:var(--amber)"><h3>OpenTdbClient<span class="tag new">NEW</span></h3><p>Typed <code>HttpClient</code>. Maps <span class="mono">response_code</span> 0–5, URL-decodes, normalises categories.</p></div>
+  <div class="box" style="left:400px;top:240px;width:380px;--c:var(--amber)"><h3>OpenTdbQuestionPool<span class="tag new">NEW</span></h3><p><code>BackgroundService</code>. <code>ConcurrentQueue</code> kept at ~150, refills under 60. Spacing via <code>TimeProvider</code>, token reset, backoff, dedupe.</p></div>
+  <div class="box" style="left:400px;top:420px;width:340px;--c:var(--amber)"><h3>PooledQuestionSource<span class="tag new">NEW</span></h3><p>Implements <code>IQuestionSource</code>. Pool first, fallback fills any gap. Never throws, never blocks.</p></div>
+  <div class="box" style="left:0;top:640px;width:560px;--c:#888"><h3>Room actor · GameRegistry<span class="tag chg">+1 OVERLOAD</span></h3><p><code>AddArcGame(sp =&gt; new RedlineGame(sp.GetRequiredService&lt;IQuestionSource&gt;()))</code></p></div>
+
+  <div class="box" style="left:1080px;top:235px;width:320px;--c:var(--red)"><h3>RedlineHostView<span class="tag new">NEW</span></h3><p>Secret by construction: throttles &amp; picks are <code>null</code> until their phase.</p></div>
+  <div class="box" style="left:1420px;top:235px;width:320px;--c:var(--red)"><h3>IQuestionSource<span class="tag new">NEW</span></h3><p><code>Take(int count)</code> + <code>TriviaQuestion</code> record. Tests inject a fake.</p></div>
+  <div class="box" style="left:1080px;top:375px;width:660px;--c:var(--teal)"><h3>FallbackQuestions<span class="tag new">NEW</span></h3><p>Embedded <code>fallback-questions.json</code>, ~60 original questions across 8 categories. Covers cold starts, outages, offline dev.</p></div>
+  <div class="box" style="left:1080px;top:510px;width:660px;--c:var(--red)"><h3>RedlineGame : IGame<span class="tag new">NEW</span></h3><p>Grid → Throttle → Question → Reveal → … → Chequered. Takes 15 questions in <code>Start</code>, shuffles answers with <code>ctx.Random</code>. Rules from <code>RedlineRules</code>.</p></div>
+
+  <div class="legend"><span><span class="tag new" style="font-weight:900;font-size:10px;padding:2px 6px">NEW</span>REDLINE code</span><span><span class="tag chg" style="font-weight:900;font-size:10px;padding:2px 6px">+1</span>small platform change</span><span><svg width="40" height="6"><line x1="0" y1="3" x2="40" y2="3" stroke="#e10600" stroke-width="3"/></svg>the async→sync seam</span></div>
+</div>
+</body>
+</html>

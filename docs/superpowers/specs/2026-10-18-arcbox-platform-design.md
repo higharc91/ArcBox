@@ -27,7 +27,7 @@ ArcBox is a Jackbox-style party game platform for a group of friends who also wr
 - The game authors are trusted friends, so there's no hostile-code sandboxing.
 
 ### Success criteria for v1
-1. A group can create a room on the TV, join from iPhone and Android browsers, play **Prompt Duel** start to finish, and return to the lobby to play again.
+1. A group can create a room on the TV, join from iPhone and Android browsers, play **REDLINE** start to finish, and return to the lobby to play again.
 2. Locking a phone for 60 s mid-round and unlocking it puts that player back in the game with the correct screen.
 3. Force-quitting the Godot host mid-round and relaunching it resumes the same room.
 4. A deliberately throwing test game returns the room to the lobby without affecting other rooms.
@@ -170,7 +170,10 @@ Every `ControllerView` also carries `viewId` (a string the room assigns and chan
 ### 4.2 HostView
 `HostView()` returns a game-specific record defined in the game's `.Logic` project. The server sends it as JSON. The Godot host deserializes it into the same C# type, because Host references the Logic project, and hands it to the active scene's `Render(view)` method.
 
-### 4.3 First game: Prompt Duel
+### 4.3 First game: Prompt Duel (superseded)
+
+> **Superseded on 2026-10-25 by REDLINE**, a racing trivia game. See [2026-10-25-redline-design.md](2026-10-25-redline-design.md). The Prompt Duel description below is kept for history.
+
 A small Quiplash-style game that exercises the whole contract:
 - **Answer** (60 s, `textEntry`): each player answers two prompts. Each prompt is shared by two players.
 - **Vote** (20 s per matchup, `choice`): everyone except the two authors votes on that pair of answers.
@@ -310,7 +313,7 @@ Each milestone produces something runnable. M2 and M3 can run in parallel once M
 | **M1 — Platform core** | `ArcBox.Sdk`, `Sdk.Testing`, `ArcBox.Server` (rooms, join/rejoin, VIP, lobby, actor loop, timers, view publishing, watchdog, limits) plus test games (`Counter`, `Thrower`, `Hanger`) | All server integration tests pass. |
 | **M2 — Phone app** | `web/play` with join, lobby, all 5 widgets, reconnect, Wake Lock and the dev multi-phone page. Contract tests. | 6 dev phones play the `Counter` test game. Rejoin works after reloading a phone iframe. |
 | **M3 — TV host shell** | Godot app with Connect, Lobby with QR, scene switching, Results, resume-after-crash, and a `Counter` scene | Full lobby → game → lobby loop on the TV with dev phones. Killing and relaunching the host resumes the room. |
-| **M4 — Prompt Duel** | Logic, tests, Godot scene and a prompt list | Success criterion 1 works on the LAN with real phones. |
+| **M4 — REDLINE** | Logic, tests, OpenTDB question pool, fallback pack and Godot scene ([spec](2026-10-25-redline-design.md)) | Success criterion 1 works on the LAN with real phones. |
 | **M5 — Deploy and playtest** | Dockerfile, Fly.io app, production URL in host settings, `docs/playtest-checklist.md` | All 5 success criteria pass in a real playtest, including one remote friend over Discord. |
 | **M6 — Authoring kit** | `games/_Template`, `docs/authoring-a-game.md`, a script to copy and rename the template | A friend builds a trivial second game from the docs alone. |
 
