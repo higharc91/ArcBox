@@ -4,6 +4,10 @@
     <Project Path="games/Counter/Counter.Logic.Tests/Counter.Logic.Tests.csproj" />
     <Project Path="games/Counter/Counter.Logic/Counter.Logic.csproj" />
   </Folder>
+  <Folder Name="/games/Redline/">
+    <Project Path="games/Redline/Redline.Logic.Tests/Redline.Logic.Tests.csproj" />
+    <Project Path="games/Redline/Redline.Logic/Redline.Logic.csproj" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/ArcBox.Host/ArcBox.Host.csproj" />
     <Project Path="src/ArcBox.Sdk.Testing/ArcBox.Sdk.Testing.csproj" />
