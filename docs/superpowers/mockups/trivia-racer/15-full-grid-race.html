@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,600;0,700;0,900;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="broadcast.css">
+<link rel="stylesheet" href="hud3d.css">
+<script>window.__needs = { three: true };</script>
+<script type="importmap">{ "imports": { "three": "./node_modules/three/build/three.module.js", "three/addons/": "./node_modules/three/examples/jsm/" } }</script>
+<style>
+  .t22 { position: absolute; left: 28px; top: 120px; width: 232px; background: rgba(14,14,20,.82); backdrop-filter: blur(8px); border: 1px solid var(--edge); }
+  .r22 { display: grid; grid-template-columns: 24px 4px 1fr auto; gap: 6px; align-items: center; height: 20.5px; padding-right: 6px; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,.05); }
+  .r22 .p { height: 100%; display: grid; place-items: center; font-weight: 900; font-size: 12px; background: rgba(255,255,255,.05); }
+  .r22 i { height: 60%; display: block; }
+  .r22 .n { font-weight: 700; color: #8d8f9a; letter-spacing: .5px; }
+  .r22.me { background: rgba(255,255,255,.1); } .r22.me .n { color: #fff; } .r22.me .n small { color: #ffd12e; font-weight: 900; font-size: 10px; letter-spacing: 1px; margin-left: 4px; }
+  .r22 .c { font-weight: 900; font-size: 9px; letter-spacing: 1px; padding: 1px 4px; min-width: 50px; text-align: center; }
+  .r22 .c.CRUISE { background: rgba(255,255,255,.1); color: var(--dim); } .r22 .c.PUSH { background: #fff; color: #111; } .r22 .c.REDLINE { background: var(--red); color: #fff; }
+  .tmap { position: absolute; right: 28px; top: 132px; width: 300px; background: rgba(14,14,20,.78); backdrop-filter: blur(8px); border: 1px solid var(--edge); }
+  .tmap .th { padding: 6px 12px; } .tmap svg { display: block; width: 100%; height: 180px; }
+  .tag3d { font-size: 12px; } .tag3d.ai { opacity: .85; } .tag3d .pl { color: #ffd12e; font-weight: 900; margin-left: 4px; }
+  .hud .head { margin-left: 0; }
+</style>
+</head>
+<body>
+<div class="label">FULL GRID · <b>22 CARS</b> — 6 players among 16 AI drivers; the director frames the battle that involves players</div>
+<div class="row">
+  <div class="tv3d">
+    <canvas id="gl"></canvas>
+    <div class="hud">
+      <div class="head">
+        <div class="brand">REDLINE</div>
+        <div class="qpanel">
+          <div class="qmeta"><span>Round 4/15</span><span>Film</span><span class="diff">Easy<i></i><i class="off"></i><i class="off"></i></span></div>
+          <div class="q">Who directed the 1993 film "Jurassic Park"?</div>
+        </div>
+        <div class="clock"><small>TIME</small><b>0:11</b><div class="bar"><i style="width:55%"></i></div></div>
+      </div>
+      <div class="t22" id="tower"></div>
+      <div class="tmap"><div class="th"><span>COTA · 22 CARS</span><span>● PLAYER</span></div><svg id="map"></svg></div>
+      <div class="answers" id="answers" style="left:280px"></div>
+      <div id="tags"></div>
+    </div>
+  </div>
+  <div class="phone"><div class="screen">
+    <div class="pstatus"><div class="me"><i style="background:#dc0000"></i>ALEX · LEC 16</div><div class="pos">P4<small>/22</small></div></div>
+    <div class="pbet3"><b>REDLINE</b><span>+4 if right<br>spin out if wrong</span></div>
+    <div class="pq"><small>Film · Easy</small><div>Who directed the 1993 film "Jurassic Park"?</div></div>
+    <div class="pans" id="pans"></div>
+    <div class="ptimer"><span>0:11</span><div class="bar"><i style="width:55%"></i></div></div>
+  </div></div>
+</div>
+<script type="module">
+  import { loadCircuit, buildScene, FINISH } from './cota3d.js';
+  import { loadGrid, accent } from './grid2026.js';
+  import { field } from './race22.js';
+  await document.fonts.load('italic 900 92px "Titillium Web"');
+  const [circuit, grid] = await Promise.all([loadCircuit(), loadGrid()]);
+  const drivers = field(grid, accent);
+  const view = buildScene({
+    canvas: gl, width: 1280, height: 720, circuit, drivers,
+    cam: { fov: 32, frame: ['LEC', 'VER', 'HAM'], azimuth: 200, elevation: 17, dist: 42, aimOffset: [0, 0, 0], shadowSize: 160, sunAzimuth: 250, sunElevation: 30 },
+  });
+  const answers = ['James Cameron', 'Steven Spielberg', 'Ridley Scott', 'George Lucas'];
+  document.getElementById('answers').innerHTML = answers.map((a, i) => `<div class="ans"><span class="k">${'ABCD'[i]}</span>${a}</div>`).join('');
+  pans.innerHTML = answers.map((a, i) => `<div class="pbtn"><span class="k">${'ABCD'[i]}</span>${a}</div>`).join('');
+  tower.innerHTML = drivers.map((d, i) => `<div class="r22 ${d.player ? 'me' : ''}"><span class="p">${i + 1}</span><i style="background:${d.color}"></i>
+    <span class="n">${d.code}${d.player ? `<small>${d.player}</small>` : ''}</span><span class="c ${d.thr}">${d.thr}</span></div>`).join('');
+
+  const pts = circuit.data.points, xs = pts.map(p => p[0]), zs = pts.map(p => p[1]);
+  const W = 300, H = 180, pad = 14, sc = Math.min((W - 2 * pad) / (Math.max(...xs) - Math.min(...xs)), (H - 2 * pad) / (Math.max(...zs) - Math.min(...zs)));
+  const ox = (W - (Math.max(...xs) - Math.min(...xs)) * sc) / 2, oz = (H - (Math.max(...zs) - Math.min(...zs)) * sc) / 2;
+  const P = ([x, z]) => [ox + (x - Math.min(...xs)) * sc, oz + (z - Math.min(...zs)) * sc];
+  const cum = [0]; for (let i = 1; i <= pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i % pts.length][0] - pts[i - 1][0], pts[i % pts.length][1] - pts[i - 1][1]));
+  const at = s => { s = ((s % cum.at(-1)) + cum.at(-1)) % cum.at(-1); let i = 0; while (cum[i + 1] < s) i++; const k = (s - cum[i]) / (cum[i + 1] - cum[i]); const a = pts[i], b = pts[(i + 1) % pts.length]; return P([a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k]); };
+  const line = pts.map(P).map(p => p.join(',')).join(' ');
+  map.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  map.innerHTML = `<polygon points="${line}" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="7" stroke-linejoin="round"/><polygon points="${line}" fill="none" stroke="#e8e8ee" stroke-width="2.2" stroke-linejoin="round"/>` +
+    drivers.slice().sort((a, b) => !!a.player - !!b.player).map(d => { const [x, y] = at(view.carS(d.name) / FINISH * FINISH); return d.player
+      ? `<circle cx="${x}" cy="${y}" r="6" fill="${d.color}" stroke="#fff" stroke-width="2"/>`
+      : `<circle cx="${x}" cy="${y}" r="3.6" fill="${d.color}" stroke="#0b0b10" stroke-width="1"/>`; }).join('');
+  tags.innerHTML = drivers.map((d, i) => {
+    const s = view.project(d.name, 1.6);
+    if (!s.visible || s.x < 270 || s.y < 130) return '';
+    return `<div class="tag3d ${d.player ? '' : 'ai'}" style="left:${s.x}px;top:${s.y}px"><i style="background:${d.color}"></i><b>${i + 1}</b>${d.code}${d.player ? `<span class="pl">${d.player}</span>` : ''}</div>`;
+  }).join('');
+  window.__ready = true;
+</script>
+</body>
+</html>

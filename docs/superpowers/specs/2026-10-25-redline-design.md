@@ -5,7 +5,7 @@
 - **Author:** higharc91 with Claude
 - **Platform spec:** [2026-10-18-arcbox-platform-design.md](2026-10-18-arcbox-platform-design.md). Section numbers written as "platform §" refer to it.
 - **Mockups:** [`docs/superpowers/mockups/trivia-racer/`](../mockups/trivia-racer/). The HTML sources and PNG renders are the visual spec. Re-render them with `npm install && node shoot.js`.
-  - **TV (current):** `11-cota-grid.png`, `09-cota-question.png`, `10-cota-reveal.png`. These are realistic 3D at Circuit of the Americas, rendered with three.js as a stand-in for the Godot scene.
+  - **TV (current):** `14-driver-select.png`, `11-cota-grid.png`, `15-full-grid-race.png`, `09-cota-question.png`, `10-cota-reveal.png`, plus `12-grid-2026.png` (all 11 liveries) and `13-hero-2026.png` (car detail). These are realistic 3D at Circuit of the Americas with the 2026 field, rendered with three.js as a stand-in for the Godot scene.
   - **HUD and phone layout:** `03-phase-throttle.png`, `04-phase-reveal.png`, `05-phase-finish.png`. These still define the Broadcast graphics and phone screens; the 3D scene replaces only the flat track area.
   - **Superseded:** `07`/`08` (the low-poly diorama) and the flat-track areas of `02b`–`05`.
 
@@ -25,6 +25,10 @@ It is a racing trivia game for 2–8 players, shown on the TV as a **realistic 3
 - **3D cars on a real race track**, in a **realistic broadcast** look. The first circuit is **COTA** (Circuit of the Americas). Cars and track are **built in Godot**, with no external model assets.
 - A race is **one circuit lap**, and each question is a **round**.
 - The OpenTDB question pool lives **inside `ArcBox.Server`**.
+- The cars are the **actual 2026 drivers in cars that look like their teams'**, with more detail.
+- Players **pick their driver on their phone**.
+- The **full 22-car grid races**: AI drives every seat no player claims.
+- The TV PC has an **RTX 5080**, and the target is **1440p at 144 fps**.
 
 ### What we're assuming
 - Groups play 2–8 players, and some are remote, watching the TV over a laggy Discord stream. No mechanic may reward reaction speed.
@@ -37,14 +41,20 @@ It is a racing trivia game for 2–8 players, shown on the TV as a **realistic 3
 3. No HostView sent during the Throttle or Question phase contains any driver's throttle or answer choice. This is enforced by tests.
 4. Two rooms starting races at the same moment never receive the same OpenTDB question.
 5. All game logic is covered by `GameHarness` tests that are deterministic for a fixed seed.
-6. On the group's TV PC the 3D scene holds **60 fps at 1080p** on the High preset. The Low preset holds **≥ 30 fps on integrated graphics** (§4.8).
-7. Every car is identifiable at all times: either on screen with its name tag, or as a dot on the track map.
+6. On the TV PC (RTX 5080) the 3D scene holds **144 fps at 2560×1440** on the Ultra preset with all 22 cars. A Low preset exists for weaker machines (§4.8).
+7. Every car is identifiable at all times: either on screen with its name tag, or as a dot on the track map. Player cars are always distinguishable from AI cars.
+8. Every seat no player claims is driven by AI. AI never delays a phase, and an AI race is deterministic for a fixed seed.
+9. `GameResults` contains exactly the human players, in race order.
 
 ---
 
 ## 2. Rules
 
 ### 2.1 The race
+- **The field is the full 2026 grid: 22 cars** (11 teams × 2).
+  - Players claim seats in **Driver Select** (§3.1).
+  - Every unclaimed seat is an **AI driver** (§2.6).
+  - The grid order for the start is random, from `ctx.Random`.
 - The track is **20 units** long (`FinishLine`). Every car starts at 0.
 - The track is drawn as **one lap of the circuit**: distance 0 is the start/finish line and 20 is the line again.
 - A race has at most **15 rounds** (`MaxRounds`). One round is one question.
@@ -66,11 +76,13 @@ It is a racing trivia game for 2–8 players, shown on the TV as a **realistic 3
 - All numbers above live in one `RedlineRules` record (§4.3).
 
 ### 2.3 Ranking and results
-1. Order by distance, descending.
-2. Break ties by the number of correct answers, descending.
+1. All 22 cars are ranked together, by distance descending.
+2. Ties are broken by the number of correct answers, descending.
 3. Drivers still tied **share** a position number. The next position skips accordingly (1, 2, 2, 4).
-4. `GameResults.Scores` are the final distances in ranking order. `PlayerScore.Score` is the distance.
-5. `GameResults.Message` is `"{Name} wins!"`, or `"{Name} and {Name} share the win!"` for a tie at P1.
+4. `GameResults.Scores` lists **only the human players**, in race order. `PlayerScore.Name` is `"{Player} ({CODE})"` and `Score` is the distance.
+5. `GameResults.Message` names the race winner and, if that was an AI, the best player:
+   - `"JO (NOR) wins the race!"`;
+   - `"Verstappen (AI) wins the race · best player: ALEX (LEC), P3"`.
 
 ### 2.4 Awards (Chequered flag screen)
 
@@ -80,8 +92,23 @@ It is a racing trivia game for 2–8 players, shown on the TV as a **realistic 3
 | **Sharpest mind** | Most correct answers | At least 1 correct |
 | **Biggest crash** | Most spin-outs | At least 1 spin-out |
 
-- An award with no qualifying driver is omitted.
+- Awards go to **human players only**. An award with no qualifying player is omitted.
 - Ties go to the better-ranked driver.
+
+### 2.6 AI drivers
+- AI drivers follow exactly the same rules as players: the same throttles and payouts, the same pit limiter, and the same secrecy.
+- **They never block a phase.** An AI decides its throttle and answer the moment a phase begins. These choices stay hidden until the normal reveal points, and AI rows count as already decided for early advance.
+- **Accuracy:** `P(correct) = clamp(base[difficulty] × aiSkill, 0.08, 0.92)`.
+  - `base` is easy 0.72, medium 0.52 and hard 0.32.
+  - `aiSkill = 0.85 + 0.30 × √(points / leaderPoints)`, from the **real 2026 championship standings** (F1DB snapshot). That gives Antonelli 1.15, Verstappen 1.09, and a driver with no points 0.85.
+- **Throttle:** the AI scores each throttle by expected gain using its own `P(correct)`:
+  - Cruise = p.
+  - Push = 3p − 1.
+  - Redline = 6p − 2 − 0.6, where 0.6 is the expected cost of the pit limiter.
+  - It then picks with softmax noise. **Chase mode** applies when it is ≥ 6 units behind the leader with ≤ 5 rounds left, adding +0.5 to Redline.
+- **Answers:** an AI draws `correct ~ Bernoulli(p)`. A wrong answer picks uniformly among the three wrong options, so the TV's "who picked what" looks natural.
+- All randomness comes from `ctx.Random`, so AI races are reproducible in tests.
+- All the constants above live in `RedlineRules.Ai` and get tuned after playtests. The target is an average AI landing mid-pack against an average player.
 
 ### 2.5 Fairness and secrecy
 - There's no speed bonus anywhere. The question and answers show **on the phone** as well as the TV, so stream lag can't cost remote players.
@@ -98,7 +125,8 @@ Each phase uses the single timer key `"phase"`. Advancing early cancels that tim
 
 | Phase | Duration | Ends early when | TV (HostView) | Phone (ControllerView) |
 |---|---|---|---|---|
-| **Grid** (once) | 6 s | — | Drivers on the start line, rules card, OpenTDB attribution | `WaitView("Engines on. Lights out in a moment…")` |
+| **Driver Select** (once) | 20 s | Every connected player has a seat | Claim board for all 22 seats over the 3D line-up, plus a claim lower-third (`14-driver-select.png`) | `ChoiceView` of free drivers, or a wait view once seated |
+| **Grid** (once) | 6 s | — | The 22-car grid on the start line, rules strip, OpenTDB attribution (`11-cota-grid.png`) | `WaitView("You're {Driver Name}, #{n}, {Team}. Lights out in a moment…")` |
 | **Throttle** | 10 s | Every connected driver is locked | Category, difficulty, LOCKED/CHOOSING per driver (`03-phase-throttle.png`) | `ButtonsView` (3 throttles with hints), or a wait view once locked or pit-limited |
 | **Question** | 20 s | Every connected driver has answered | Question, 4 answers, all throttles revealed (`02b-style-broadcast.png`) | `ChoiceView` (4 options, single select), or a wait view once answered |
 | **Reveal** | 7 s | — | Correct answer, who picked what, movement, ▲▼ re-sort (`04-phase-reveal.png`) | `WaitView` with your personal round result |
@@ -114,7 +142,7 @@ After Reveal, the race either goes to the next round's Throttle phase or, if it 
 
 ### 3.3 Phone views in detail
 
-Every controller view sets `Header = "P{position} · ROUND {round}/{maxRounds}"`. Only the Grid view leaves it null.
+Every controller view sets `Header = "P{position} · ROUND {round}/{maxRounds}"`. The Driver Select and Grid views leave it null.
 
 **The live countdown comes from `DeadlineUtc`, never from the view itself.** Per the SDK, any change to a view mints a new `ViewId` and voids input already in flight. So a player's view changes only when that player's own state changes.
 
@@ -127,7 +155,15 @@ Every controller view sets `Header = "P{position} · ROUND {round}/{maxRounds}"`
 | Question, answered | `WaitView("Answer locked. Eyes on the TV!")` |
 | Reveal | `WaitView` with one of: `"Correct! +{n} · now P{p}"`, `"Wrong answer. No change · P{p}"` (Cruise), `"Wrong answer. −1 · now P{p}"` (Push), or `"Spun out! −2 · pit limiter next round · now P{p}"` (Redline). A missing answer uses the same wording with "No answer" in place of "Wrong answer". |
 
+**Driver Select:**
+- The phone shows `ChoiceView(Prompt: "Pick your driver", Options: one per **free** seat, id = driver code)`, with label `"#{number} {Full Name}"` and `Option.Hint` `"{Team} · {Chassis}"`.
+- A claim removes that seat from **every other undecided player's** list. Their views change, so a tap they had in flight is dropped as stale and they tap again. That's the price of never showing a seat that's already gone; with at most 8 players over 20 s, the collision window is tiny.
+- If two claims race for the same seat, the room's actor serialises them. The second claim is rejected, and that player's view is re-sent with `Header = "{CODE} was just taken: pick another"`.
+- A seated player sees `WaitView("You're {Full Name}. Waiting for the grid…")`.
+- When the timer runs out, unseated players get a random free seat.
+
 **Inputs accepted:**
+- Driver Select: `ChoiceInput.Selected[0]` must be a free driver code.
 - Throttle phase: `ButtonsInput.Pressed` ∈ {`cruise`, `push`, `redline`}.
 - Question phase: `ChoiceInput.Selected[0]` ∈ {`a`, `b`, `c`, `d`}.
 
@@ -201,9 +237,15 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
 }
 ```
 
-- Each driver's state lives in a private `Driver` class with these fields: `Distance`, `Throttle?`, `AnswerIndex?`, `PitLimiter`, `Correct`, `Redlines`, `SpinOuts`, `PositionAtRoundStart`, `Connected`, `Livery`.
-- `Livery` is the player's join index, 0–7. The TV maps it to a team color.
-- The phase lives in `RacePhase { Grid, Throttle, Question, Reveal, Chequered }`.
+- **Grid data:** `grid2026.json` is embedded in `Redline.Logic` (F1DB facts under CC BY 4.0, attributed in `THIRD_PARTY.md`). It holds:
+  - teams, chassis, drivers, codes and numbers;
+  - `points` and `aiSkill` from the standings snapshot;
+  - livery colours, which only the TV uses.
+
+  `Grid2026.Load()` validates it at startup: 11 teams, 22 unique codes and numbers. A small script refreshes the snapshot from F1DB when lineups change.
+- **`AiPolicy`** is a pure static class: `(driver, round, difficulty, gapToLeader, roundsLeft, Random) → (Throttle, bool correct, int answerIndex)`. It is unit-tested on its own.
+- Each car's state lives in a private `Driver` class with these fields: `Distance`, `Throttle?`, `AnswerIndex?`, `PitLimiter`, `Correct`, `Redlines`, `SpinOuts`, `PositionAtRoundStart`, `Connected`, `Code`, `PlayerId?` (null for AI).
+- The phase lives in `RacePhase` (§4.4).
 - The game follows the platform style rules: no I/O, no threads, no statics, and all time and randomness come from `ctx`.
 
 ### 4.4 HostView: secret by construction
@@ -213,7 +255,7 @@ public sealed record RedlineHostView(
     RacePhase Phase, int Round, int MaxRounds, int FinishLine, string CircuitId,
     QuestionCard? Question,             // null in Grid; Throttle: Text and Answers are null
     int? CorrectIndex,                  // Reveal only
-    IReadOnlyList<DriverRow> Drivers,   // sorted by ranking (§2.3)
+    IReadOnlyList<DriverRow> Drivers,   // all 22; sorted by ranking (§2.3), or by team order during Driver Select
     DateTimeOffset? DeadlineUtc,
     FinishSummary? Finish,              // Chequered only
     string Attribution);                // "Questions: Open Trivia DB (CC BY-SA 4.0)" or the fallback credit
@@ -221,14 +263,17 @@ public sealed record RedlineHostView(
 public sealed record QuestionCard(string Category, Difficulty Difficulty, string? Text, IReadOnlyList<string>? Answers);
 
 public sealed record DriverRow(
-    PlayerId Id, string Name, int Livery, int Position, int PositionChange,
+    string Code, int Number, string TeamId,  // e.g. "VER", 3, "red-bull"; the TV looks up the livery
+    PlayerId? Player, string? PlayerName,    // null for AI
+    int Position, int PositionChange,
     int Distance, int PreviousDistance, DriverStatus Status,
     Throttle? Throttle,                 // null during Grid and Throttle
     int? AnswerIndex,                   // null until Reveal
     RoundOutcome? Outcome,              // Reveal only
     bool PitLimiter, bool Connected);
 
-public enum DriverStatus { Ready, Choosing, Locked, Limited, Answering, Answered }
+public enum DriverStatus { Unclaimed, Seated, Ready, Choosing, Locked, Limited, Answering, Answered }
+public enum RacePhase { DriverSelect, Grid, Throttle, Question, Reveal, Chequered }
 public enum Throttle { Cruise, Push, Redline }
 public enum RoundOutcome { Correct, Wrong, NoAnswer, SpunOut }
 
@@ -313,33 +358,41 @@ A circuit is pure data: adding one means adding one JSON file, then picking it w
 - Terrain is a generated heightmap mesh that matches the track elevation near the asphalt and eases to rolling ground about 250 m out. Trees are `MultiMeshInstance3D` clusters of live oaks.
 - **Landmarks:** the main grandstand and pit building, the start gantry with five lights, the Turn 1 grandstand, and the Observation Tower.
 
-**Cars.**
-- A `CarBuilder` assembles a modern F1 car at real scale (5.6 m long, 2.0 m wide) from primitive and extruded meshes, as in the mockup: a tub with an extruded side profile, a tapered nose, rounded sidepods, a halo tube, multi-element wings, wishbones, mirrors, and tyres with the compound sidewall stripe.
-- Paint is `StandardMaterial3D` with clearcoat, tinted per `Livery` (8 team colours).
-- A car is a single scene, so swapping in a modelled `.glb` later changes nothing else.
+**Cars** (`f1car2026.js` in the mockups is the reference implementation):
+- **2026 regulations:** wheelbase 3.4 m, width 1.9 m, tyres about 280 / 375 mm wide, a simpler front wing, no beam wing, and active-aero flaps front and rear.
+- **Bodywork:** a `CarBuilder` lofts the chassis, nose, airbox, engine cover and sidepods through densified superellipse cross-sections into one smooth `ArrayMesh` each.
+- **Details:** wings are NACA-profile extrusions; tyres are lathed with shouldered profiles, compound sidewall stripes and spoked rims; plus the halo tube, wishbones and push/pull rods, mirrors, a floor with edge fences, and a diffuser.
+- **Liveries** come from `grid2026.json` per team, as colour zones painted per vertex: top, lower body, pinstripe, nose tip, wings, endplates and halo. Each team has a **matte or gloss** finish (Red Bull is matte), as a `StandardMaterial3D` with clearcoat for gloss.
+- **Identity:** car numbers as decals on the nose and on both rear-wing endplates; a **T-cam** in black for the team's first car and yellow for the second; and endplate and rear **rain lights**.
+- **No team, sponsor or series logos** are reproduced, and helmets are plain with a team-colour band.
+- A car is a single scene, so a modelled `.glb` can still replace it later.
 
 **Placement and motion.**
 - `LapMath` maps distance *d* to metres along the lap: `s = d / FinishLine × lapLength`.
-- Cars that share a distance sit side by side (±3.4 m); a third car drops back about 11 m.
+- **Packs:** 2 cars at one distance sit side by side (±3.4 m); 3 or more run three abreast (−4.4 / 0 / +4.4 m), with each further row 9 m back.
 - The Grid uses F1 stagger: two columns 8 m apart.
 - **In Reveal**, each car tweens along the curve from `PreviousDistance` to `Distance` over 4 s. Ease-out is used, and higher gains drive visibly faster.
 - A spin-out plays a yaw tween with `GPUParticles3D` tyre smoke and slides the car back.
 
 **HUD** (`CanvasLayer` + `Control`, Broadcast style):
-- the question panel, timing tower, answers, round result lower-third and rules strip, as mocked;
-- a **live track map** (`Line2D` of the circuit plus coloured dots per car);
+- the question panel, answers, round result lower-third and rules strip, as mocked;
+- a **compact 22-row timing tower**: player rows are highlighted, with their names in yellow beside the driver code, and AI rows are dimmed;
+- a **live track map** (`Line2D` of the circuit plus 22 team-coloured dots; player dots are larger with a white ring);
 - **name tags** projected with `Camera3D.unproject_position`.
 
-**Rendering:**
-- Forward+ renderer.
+**Rendering** (target: **RTX 5080, 2560×1440 at 144 fps**):
+- Forward+ renderer. `Engine.max_fps = 144`. VSync off, so G-Sync/FreeSync paces frames.
 - `WorldEnvironment`:
-  - a sky shader (a gradient dome with a sun glow; the physical sky blows out at track exposure) that also feeds reflections;
-  - ACES tonemapping, SSAO and subtle glow.
-- One shadowed `DirectionalLight3D`, with shadow distance limited to the camera's subject.
+  - a sky shader (a gradient dome with a sun glow) that also feeds reflections;
+  - **SDFGI** (half-resolution probes), **SSR**, **SSAO + SSIL** and subtle volumetric haze.
+- Tonemapping: Godot has no Khronos PBR Neutral (the mockups use it to keep livery hues true), so use **AgX** (Godot 4.4+), checked against the reference renders so papaya stays papaya and Ferrari red doesn't drift pink.
+- Shadows: one `DirectionalLight3D` with a 4-split PSSM and an 8192 shadow atlas.
+- Anti-aliasing: MSAA 4× + screen-space AA, at native resolution (no upscaling needed at 1440p).
+- **Budget:** 22 cars × about 60k triangles, plus about 2M for the circuit, crowds (instanced) and trees (MultiMesh). That's comfortable for a 5080. The frame-time risk is SDFGI and SSR, so each is a toggle.
 - **Presets:**
-  - **High:** SSAO on, 4096 shadows, MSAA 4×.
-  - **Low:** Mobile renderer, no SSAO, 2048 shadows, FXAA, trees halved.
-- **Livery colours**, in join order: `#2f6fd6`, `#d8001f`, `#ff7a00`, `#1ec8b0`, `#b9bcc4`, `#1f8f5f`, `#ffd12e`, `#b04cff`.
+  - **Ultra (default):** everything above.
+  - **High:** SDFGI off, SSR off.
+  - **Low:** for laptops: Mobile renderer, no screen-space effects, 2048 shadows, trees halved.
 
 ### 4.9 Camera director
 
@@ -350,13 +403,15 @@ A circuit is pure data: adding one means adding one JSON file, then picking it w
   - `Heli(subjects)` (frames one or two cars from about 60 m);
   - `Trackside(subject, side)` (a low front-quarter camera relative to the car);
   - `Finish` (start/finish line, then podium).
+- **Players first:** among 22 cars, a candidate shot must involve **at least one human player**. AI-only moments are used only when no player candidate exists.
 - **Rules by phase:**
   - Grid → `Grid`.
   - Throttle → `Heli` on the leader.
   - Question → `Heli` on the **closest battle**: the pair of adjacent cars with the smallest gap, ties going to the higher position.
   - Reveal → `Trackside` on a spun-out car if there is one (drama first). Otherwise the **biggest gainer**, ties going to the better position. After 3.5 s, cut to `Heli` on the new leader.
   - Chequered → `Finish`.
-- Cars off screen are always on the track map, so no rule needs to show everyone at once. That's success criterion 7.
+- Cars off screen are always on the track map and in the timing tower, so no rule needs to show everyone at once. That's success criterion 7.
+- **Driver Select:** an orbiting line-up camera holds on each newly claimed car for 2 s.
 
 ### 4.10 Phones (web/play, M2)
 - The root element gets `data-game="{SelectedGameId}"` while a game runs.
@@ -418,6 +473,17 @@ TDD: tests come before implementation.
   - **parallel `Take` calls from 8 tasks never return a duplicate pool question**.
 - `AddRedline` registers the game, and `GameRegistry.Manifests` contains `redline`.
 
+**More `Redline.Logic.Tests` for the 22-car grid:**
+- Driver Select: a claim seats the player; a taken code is rejected with the "just taken" header; other choosers' lists drop the claimed seat; a timeout seats unseated players randomly; early advance happens when all connected players are seated.
+- The field always has 22 cars: players' chosen seats plus AI in the rest, and `GameResults` lists humans only.
+- `AiPolicy`:
+  - accuracy over 10,000 seeded draws matches `base × skill` within ±2%;
+  - Redline is never chosen when p < 0.3 except in chase mode;
+  - chase mode triggers at the boundary;
+  - a fixed seed gives an identical race.
+- AI rows never block early advance, and their throttles and answers obey the same secrecy assertions as players'.
+- `Grid2026.Load()` validates the embedded data: 11 teams, 22 unique codes and numbers.
+
 **`Redline.Presentation.Tests`:**
 - `CircuitData` loads `cota.json`: 170 points, a lap length of 5,512 ± 5 m, and a closed loop.
 - `LapMath`:
@@ -425,7 +491,8 @@ TDD: tests come before implementation.
   - side-by-side offsets for 2 and 3 cars sharing a distance;
   - the grid has two columns 8 m apart.
 - `TrackGeometry`: the fold guard drops inner wall segments where the offset exceeds 0.7 × radius (Turn 1), and keeps them on straights.
-- `CameraDirector`, one test per rule above: closest battle, spin-out priority, biggest gainer, tie-breaks, and Grid/Finish by phase.
+- `CameraDirector`, one test per rule above: closest battle, spin-out priority, biggest gainer, tie-breaks, Grid/Finish by phase, and **an AI-only battle is never chosen while a player battle exists**.
+- `LapMath` packs: 1, 2, 3 and 6 cars at one distance land in the right lateral and row slots.
 
 **Manual** (added to `docs/playtest-checklist.md` in M5):
 - one race against live OpenTDB from a real network;
@@ -441,6 +508,8 @@ TDD: tests come before implementation.
 - Localization, and question moderation beyond OpenTDB's own curation.
 - Circuits beyond COTA (each one is data only, so they can be added later), plus weather and night races.
 - Modelled `.glb` cars. The procedural car is v1, and swapping it later changes nothing else.
+- Team, sponsor and series logos; real driver helmet designs; driver likenesses.
+- AI personalities beyond skill and the throttle policy (e.g. AI rivalries, mistakes under pressure).
 - Surveyed elevation data. The COTA profile is approximate.
 
 ## 8. Risks
@@ -454,4 +523,7 @@ TDD: tests come before implementation.
 | The 3D scene is too heavy for the TV PC | Ship the Low preset (§4.8). Geometry is baked at edit time. Measure early in M3 on the real machine. |
 | Real scale makes cars small | The camera director frames subjects closely, name tags follow cars, and the track map shows everyone (criterion 7). |
 | "Circuit of the Americas" and "COTA" are trademarks | Fine for a private hobby game. If REDLINE is ever distributed publicly, show the circuit as "Austin". |
+| AI too strong or too weak against players | Every constant is in `RedlineRules.Ai`. Balance against playtests, aiming for an average AI mid-pack. |
+| Real names, numbers and team colours | Used descriptively in a private, non-commercial game. No logos or likenesses. Facts are attributed to F1DB (CC BY 4.0). If REDLINE is ever distributed, switch to fictional teams with the same data shape. |
+| The 2026 lineup changes mid-season | The grid is a dated snapshot. A refresh script regenerates `grid2026.json` from F1DB. |
 | COTA elevation is approximate | It's labelled as approximate in the data file. Replace it with survey or DEM data whenever it matters. |

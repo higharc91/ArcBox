@@ -24,14 +24,18 @@
      "name": "Lando Norris",
      "code": "NOR",
      "number": 1,
-     "tcam": "black"
+     "tcam": "black",
+     "points": 201.0,
+     "aiSkill": 1.081
     },
     {
      "id": "oscar-piastri",
      "name": "Oscar Piastri",
      "code": "PIA",
      "number": 81,
-     "tcam": "yellow"
+     "tcam": "yellow",
+     "points": 138.0,
+     "aiSkill": 1.041
     }
    ]
   },
@@ -56,14 +60,18 @@
      "name": "Charles Leclerc",
      "code": "LEC",
      "number": 16,
-     "tcam": "black"
+     "tcam": "black",
+     "points": 215.0,
+     "aiSkill": 1.089
     },
     {
      "id": "lewis-hamilton",
      "name": "Lewis Hamilton",
      "code": "HAM",
      "number": 44,
-     "tcam": "yellow"
+     "tcam": "yellow",
+     "points": 229.0,
+     "aiSkill": 1.096
     }
    ]
   },
@@ -88,14 +96,18 @@
      "name": "Max Verstappen",
      "code": "VER",
      "number": 3,
-     "tcam": "black"
+     "tcam": "black",
+     "points": 221.0,
+     "aiSkill": 1.092
     },
     {
      "id": "isack-hadjar",
      "name": "Isack Hadjar",
      "code": "HAD",
      "number": 6,
-     "tcam": "yellow"
+     "tcam": "yellow",
+     "points": 97.0,
+     "aiSkill": 1.01
     }
    ]
   },
@@ -120,14 +132,18 @@
      "name": "George Russell",
      "code": "RUS",
      "number": 63,
-     "tcam": "black"
+     "tcam": "black",
+     "points": 238.0,
+     "aiSkill": 1.101
     },
     {
      "id": "kimi-antonelli",
      "name": "Kimi Antonelli",
      "code": "ANT",
      "number": 12,
-     "tcam": "yellow"
+     "tcam": "yellow",
+     "points": 340.0,
+     "aiSkill": 1.15
     }
    ]
   },
@@ -152,14 +168,18 @@
      "name": "Fernando Alonso",
      "code": "ALO",
      "number": 14,
-     "tcam": "black"
+     "tcam": "black",
+     "points": 7.0,
+     "aiSkill": 0.893
     },
     {
      "id": "lance-stroll",
      "name": "Lance Stroll",
      "code": "STR",
      "number": 18,
-     "tcam": "yellow"
+     "tcam": "yellow",
+     "points": 0.0,
+     "aiSkill": 0.85
     }
    ]
   },
@@ -184,14 +204,18 @@
      "name": "Pierre Gasly",
      "code": "GAS",
      "number": 10,
-     "tcam": "black"
+     "tcam": "black",
+     "points": 41.0,
+     "aiSkill": 0.954
     },
     {
      "id": "franco-colapinto",
      "name": "Franco Colapinto",
      "code": "COL",
      "number": 43,
-     "tcam": "yellow"
+     "tcam": "yellow",
+     "points": 27.0,
+     "aiSkill": 0.935
     }
    ]
   },
@@ -216,14 +240,18 @@
      "name": "Alex Albon",
      "code": "ALB",
      "number": 23,
-     "tcam": "black"
+     "tcam": "black",
+     "points": 5.0,
+     "aiSkill": 0.886
     },
     {
      "id": "carlos-sainz-jr",
      "name": "Carlos Sainz",
      "code": "SAI",
      "number": 55,
-     "tcam": "yellow"
+     "tcam": "yellow",
+     "points": 7.0,
+     "aiSkill": 0.893
     }
    ]
   },
@@ -248,14 +276,18 @@
      "name": "Liam Lawson",
      "code": "LAW",
      "number": 30,
-     "tcam": "black"
+     "tcam": "black",
+     "points": 75.0,
+     "aiSkill": 0.991
     },
     {
      "id": "arvid-lindblad",
      "name": "Arvid Lindblad",
      "code": "LIN",
      "number": 41,
-     "tcam": "yellow"
+     "tcam": "yellow",
+     "points": 38.0,
+     "aiSkill": 0.95
     }
    ]
   },
@@ -280,14 +312,18 @@
      "name": "Esteban Ocon",
      "code": "OCO",
      "number": 31,
-     "tcam": "black"
+     "tcam": "black",
+     "points": 7.0,
+     "aiSkill": 0.893
     },
     {
      "id": "oliver-bearman",
      "name": "Oliver Bearman",
      "code": "BEA",
      "number": 87,
-     "tcam": "yellow"
+     "tcam": "yellow",
+     "points": 23.0,
+     "aiSkill": 0.928
     }
    ]
   },
@@ -312,14 +348,18 @@
      "name": "Nico Hülkenberg",
      "code": "HUL",
      "number": 27,
-     "tcam": "black"
+     "tcam": "black",
+     "points": 13.0,
+     "aiSkill": 0.909
     },
     {
      "id": "gabriel-bortoleto",
      "name": "Gabriel Bortoleto",
      "code": "BOR",
      "number": 5,
-     "tcam": "yellow"
+     "tcam": "yellow",
+     "points": 10.0,
+     "aiSkill": 0.901
     }
    ]
   },
@@ -344,16 +384,21 @@
      "name": "Sergio Pérez",
      "code": "PER",
      "number": 11,
-     "tcam": "black"
+     "tcam": "black",
+     "points": 0.0,
+     "aiSkill": 0.85
     },
     {
      "id": "valtteri-bottas",
      "name": "Valtteri Bottas",
      "code": "BOT",
      "number": 77,
-     "tcam": "yellow"
+     "tcam": "yellow",
+     "points": 0.0,
+     "aiSkill": 0.85
     }
    ]
   }
- ]
+ ],
+ "form": "points: F1DB src/data/seasons/2026/driver-standings.yml (snapshot 2026-10-25); aiSkill = 0.85 + 0.30*sqrt(points/leaderPoints)"
 }

@@ -364,8 +364,11 @@ export function buildScene({ canvas, width, height, circuit, cam, drivers, trail
   for (const d of drivers) (groups[d.dist] ??= []).push(d);
   const carPose = d => {
     const grp = groups[d.dist], idx = grp.indexOf(d);
-    const lateral = d.lat ?? (grp.length === 1 ? 0 : [-3.4, 3.4, 0][idx % 3]);
-    const s = d.dist / FINISH * L - (d.lat === undefined && idx >= 2 ? 11 : 0) + (d.nudge ?? 0);
+    // packs: 1 = centre, 2 = side by side, 3+ = three abreast with each further row 9 m back
+    const n = grp.length;
+    const lateral = d.lat ?? (n === 1 ? 0 : n === 2 ? [-3.4, 3.4][idx] : [-4.4, 0, 4.4][idx % 3]);
+    const row = d.lat === undefined && n > 2 ? Math.floor(idx / 3) : 0;
+    const s = d.dist / FINISH * L - row * 9 + (d.nudge ?? 0);
     const q = sample(s), q2 = sample(s + 2);
     const pos = new THREE.Vector3(q.p.x + q.n.x * lateral, q.h + 0.08, q.p.z + q.n.z * lateral);
     const fwd = new THREE.Vector3(q2.p.x - q.p.x, q2.h - q.h, q2.p.z - q.p.z).normalize();

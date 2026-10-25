@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,600;0,700;0,900;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="broadcast.css">
+<link rel="stylesheet" href="hud3d.css">
+<script>window.__needs = { three: true };</script>
+<script type="importmap">{ "imports": { "three": "./node_modules/three/build/three.module.js", "three/addons/": "./node_modules/three/examples/jsm/" } }</script>
+<style>
+  .board { position: absolute; right: 28px; top: 24px; bottom: 24px; width: 520px; background: rgba(14,14,20,.88); backdrop-filter: blur(10px); border: 1px solid var(--edge); display: flex; flex-direction: column; }
+  .board .bh { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid var(--edge); }
+  .board .bh b { font: italic 900 28px 'Titillium Web'; } .board .bh small { display: block; font-weight: 700; letter-spacing: 2px; font-size: 11px; color: var(--dim); }
+  .board .bh .t { font-weight: 900; font-size: 34px; font-variant-numeric: tabular-nums; }
+  .teams { flex: 1; display: grid; grid-template-rows: repeat(11, 1fr); }
+  .tm { display: grid; grid-template-columns: 6px 110px 1fr 1fr; align-items: center; gap: 8px; border-bottom: 1px solid rgba(255,255,255,.05); padding-right: 10px; }
+  .tm > i { height: 70%; display: block; } .tm .tn { font-weight: 900; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #cfd2da; }
+  .seat { display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 8px; background: rgba(255,255,255,.04); font-weight: 700; font-size: 14px; color: #8d8f9a; }
+  .seat .num { font: italic 900 16px 'Titillium Web'; min-width: 22px; color: #fff; }
+  .seat .who { margin-left: auto; font-size: 10px; letter-spacing: 1.5px; font-weight: 900; }
+  .seat.claimed { background: #fff; color: #111; } .seat.claimed .num { color: #111; } .seat.claimed .who { color: #e10600; }
+  .seat.ai .who { color: #5d6070; }
+  .left { position: absolute; left: 28px; top: 24px; }
+  .left .brand { height: 56px; display: inline-flex; }
+  .claim { position: absolute; left: 28px; bottom: 28px; display: flex; box-shadow: 0 10px 30px rgba(0,0,0,.4); }
+  .claim > div { padding: 10px 18px; display: flex; flex-direction: column; justify-content: center; background: rgba(14,14,20,.9); }
+  .claim small { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--dim); } .claim b { font: italic 900 30px 'Titillium Web'; }
+  .claim .n { font: italic 900 44px 'Titillium Web'; background: #00594f; color: #fff; }
+  .plist { display: flex; flex-direction: column; gap: 7px; padding: 0 14px; overflow: hidden; flex: 1; }
+  .pd { display: grid; grid-template-columns: 40px 1fr; align-items: center; gap: 10px; height: 52px; background: rgba(255,255,255,.06); border: 1px solid var(--edge); }
+  .pd .nb { height: 100%; display: grid; place-items: center; font: italic 900 20px 'Titillium Web'; }
+  .pd b { display: block; font-weight: 700; font-size: 17px; line-height: 1.1; } .pd small { color: var(--dim); font-weight: 600; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="label">NEW PHASE · <b>DRIVER SELECT</b> — 20 s; claim a 2026 seat on your phone, first come first served; AI takes the rest</div>
+<div class="row">
+  <div class="tv3d">
+    <canvas id="gl"></canvas>
+    <div class="hud">
+      <div class="left"><div class="brand">REDLINE</div></div>
+      <div class="claim"><div class="n">14</div><div><small>MO CLAIMED</small><b>FERNANDO ALONSO</b></div><div><small>ASTON MARTIN</small><b>AMR26</b></div></div>
+      <div class="board">
+        <div class="bh"><div><small>COTA · 15 ROUNDS · 22-CAR GRID</small><b>Driver select</b></div><div class="t">0:12</div></div>
+        <div class="teams" id="board"></div>
+      </div>
+    </div>
+  </div>
+  <div class="phone"><div class="screen">
+    <div class="pstatus"><div class="me"><i style="background:#888"></i>ALEX</div><div class="pos" style="font-size:18px">0:12</div></div>
+    <div class="pq" style="padding-top:4px"><small>Driver select · 18 seats left</small><div>Pick your driver</div></div>
+    <div class="plist" id="plist"></div>
+  </div></div>
+</div>
+<script type="module">
+  import { loadCircuit, buildScene } from './cota3d.js';
+  import { loadGrid, accent } from './grid2026.js';
+  import { PLAYERS } from './race22.js';
+  await document.fonts.load('italic 900 92px "Titillium Web"');
+  const [circuit, grid] = await Promise.all([loadCircuit(), loadGrid()]);
+  // ALEX and KAI are still choosing
+  const claimed = Object.fromEntries(Object.entries(PLAYERS).filter(([, p]) => p !== 'ALEX' && p !== 'KAI'));
+  const showcase = ['ALO', 'NOR', 'VER', 'ANT'].map((code, i) => ({ name: code, ...grid.byCode[code], color: accent(grid.byCode[code].team), dist: 0, lat: [-1.5, 3.6, -5.5, 6.5][i], nudge: -60 + [0, -9, -10, -17][i], spin: [0.35, 0.2, 0.25, 0.15][i] }));
+  buildScene({
+    canvas: gl, width: 1280, height: 720, circuit, drivers: showcase,
+    cam: { fov: 30, track: { s: -47, lateral: -7.5, up: 2.2, lookS: -64, lookLateral: 6.5, lookUp: 0.6 }, shadowSize: 80, sunAzimuth: 160, sunElevation: 38 },
+  });
+  board.innerHTML = grid.teams.map(t => `<div class="tm"><i style="background:${accent(t)}"></i><span class="tn">${t.name}</span>${t.drivers.map(d => {
+    const who = claimed[d.code];
+    return `<div class="seat ${who ? 'claimed' : 'ai'}"><span class="num">${d.number}</span>${d.code}<span class="who">${who ?? 'AI'}</span></div>`;
+  }).join('')}</div>`).join('');
+  const ink = hex => { const n = parseInt(hex.slice(1), 16); return (0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) > 150 ? '#111' : '#fff'; };
+  const free = grid.teams.flatMap(t => t.drivers.filter(d => !claimed[d.code]).map(d => ({ t, d })));
+  plist.innerHTML = free.slice(0, 9).map(({ t, d }) => `<div class="pd"><span class="nb" style="background:${accent(t)};color:${ink(accent(t))}">${d.number}</span><div><b>${d.name}</b><small>${t.name} · ${t.chassis}</small></div></div>`).join('');
+  window.__ready = true;
+</script>
+</body>
+</html>
