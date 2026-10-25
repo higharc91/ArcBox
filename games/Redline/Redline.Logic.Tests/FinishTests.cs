@@ -218,6 +218,21 @@ public class FinishTests
             awards);
     }
 
+    [Fact]
+    public void Award_details_are_singular_for_one()
+    {
+        Driver[] field = [Human("NOR", 1, 12, 1, redlines: 1, spinOuts: 1)];
+        var awards = Ranking.Awards(Ranking.Rank(field), rounds: 9);
+
+        Assert.Equal(
+            [
+                new Award("Boldest driver", new PlayerId("p1"), "Player1", "1 Redline"),
+                new Award("Sharpest mind", new PlayerId("p1"), "Player1", "1 of 9 right"),
+                new Award("Biggest crash", new PlayerId("p1"), "Player1", "1 spin-out"),
+            ],
+            awards);
+    }
+
     // Review Focus 4
     [Fact]
     public void Two_finishers_same_reveal_bigger_overshoot_wins_equal_shares()

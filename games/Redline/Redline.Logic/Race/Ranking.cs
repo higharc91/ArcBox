@@ -35,9 +35,9 @@ public static class Ranking
     {
         var humans = ranked.Select(r => r.Driver).Where(d => d.IsHuman).ToList();
         var awards = new List<Award>(3);
-        Add(BoldestDriver, d => d.Redlines, n => $"{n} Redlines");
+        Add(BoldestDriver, d => d.Redlines, n => n == 1 ? "1 Redline" : $"{n} Redlines");
         Add(SharpestMind, d => d.Correct, n => $"{n} of {rounds} right");
-        Add(BiggestCrash, d => d.SpinOuts, n => $"{n} spin-outs");
+        Add(BiggestCrash, d => d.SpinOuts, n => n == 1 ? "1 spin-out" : $"{n} spin-outs");
         return awards;
 
         void Add(string title, Func<Driver, int> count, Func<int, string> detail)

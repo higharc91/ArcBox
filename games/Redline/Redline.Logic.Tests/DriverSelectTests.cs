@@ -18,6 +18,24 @@ public class DriverSelectTests
     }
 
     [Fact]
+    public void Start_throws_when_the_source_returns_fewer_than_max_rounds_questions()
+    {
+        var game = new RedlineGame(new ShortQuestionSource(14));
+        var h = new GameHarness<RedlineGame>(game);
+
+        var ex = Assert.Throws<InvalidOperationException>(h.Start);
+
+        Assert.Contains("14", ex.Message);
+        Assert.Contains("15", ex.Message);
+    }
+
+    private sealed class ShortQuestionSource(int available) : IQuestionSource
+    {
+        private readonly FakeQuestionSource _inner = new();
+        public IReadOnlyList<TriviaQuestion> Take(int count) => _inner.Take(Math.Min(count, available));
+    }
+
+    [Fact]
     public void Starts_in_driver_select_with_22_free_seats_and_hints()
     {
         var (h, _) = RedlineKit.Start();

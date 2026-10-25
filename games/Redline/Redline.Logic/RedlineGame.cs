@@ -59,6 +59,9 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         _ctx = ctx;
         _players = players;
         _questions = questions.Take(Rules.MaxRounds);
+        if (_questions.Count < Rules.MaxRounds)
+            throw new InvalidOperationException(
+                $"The question source returned {_questions.Count} questions; REDLINE needs {Rules.MaxRounds}, one per round.");
         _answers = [.. _questions.Select(q => ShuffleAnswers(q, ctx.Random))];
         _attribution = HostViews.Attribution(_questions);
 
