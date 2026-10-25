@@ -17,6 +17,8 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
     private IGameContext? _ctx;
     private IReadOnlyList<Player> _players = [];
     private IReadOnlyList<TriviaQuestion> _questions = [];
+    /// <summary>Per question (same index as <see cref="_questions"/>): its four answers in shuffled order and the correct one's index.</summary>
+    private IReadOnlyList<(IReadOnlyList<string> Answers, int CorrectIndex)> _answers = [];
     private string _attribution = HostViews.FallbackCredit;
 
     /// <summary>All 22 cars in team order; never reordered.</summary>
@@ -53,6 +55,7 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         _ctx = ctx;
         _players = players;
         _questions = questions.Take(Rules.MaxRounds);
+        _answers = [.. _questions.Select(q => ShuffleAnswers(q, ctx.Random))];
         _attribution = HostViews.Attribution(_questions);
 
         _field = [.. _grid.Seats.Select(s => new Driver(s))];
@@ -77,6 +80,12 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
                 case RacePhase.DriverSelect:
                     OnClaim(from, input.Read<ChoiceInput>());
                     break;
+                case RacePhase.Throttle:
+                    OnThrottle(from, input.Read<ButtonsInput>());
+                    break;
+                case RacePhase.Question:
+                    OnAnswer(from, input.Read<ChoiceInput>());
+                    break;
             }
         }
         catch (JsonException)
@@ -92,6 +101,9 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         {
             case RacePhase.DriverSelect: EndDriverSelect(); break;
             case RacePhase.Grid: StartRound(); break;
+            case RacePhase.Throttle: EndThrottle(); break;
+            case RacePhase.Question: Reveal(); break;
+            case RacePhase.Reveal: EndReveal(); break;
         }
     }
 
@@ -101,11 +113,16 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         _connected[id] = connected;
         if (_seatOf.TryGetValue(id, out var driver)) driver.Connected = connected;
 
-        if (Phase == RacePhase.DriverSelect) MaybeEndDriverSelectEarly();
+        switch (Phase)
+        {
+            case RacePhase.DriverSelect: MaybeEndDriverSelectEarly(); break;
+            case RacePhase.Throttle: MaybeEndThrottleEarly(); break;
+            case RacePhase.Question: MaybeEndQuestionEarly(); break;
+        }
     }
 
     public object HostView() => HostViews.Build(
-        Phase, Round, Rules, question: null, correctIndex: null, _standings,
+        Phase, Round, Rules, QuestionCard(), InRound ? _answers[Round - 1].CorrectIndex : null, _standings,
         _ctx?.TimerDeadline(PhaseTimer), finish: null, _attribution);
 
     public ControllerView PlayerView(PlayerId id)
@@ -191,11 +208,147 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
 
     // ---------------------------------------------------------------- Rounds
 
-    /// <summary>Lights out: round 1 begins. The round loop (Throttle → Question → Reveal) is added by Task 6.</summary>
+    private static (IReadOnlyList<string> Answers, int CorrectIndex) ShuffleAnswers(TriviaQuestion q, Random random)
+    {
+        string[] answers = [q.Correct, .. q.Incorrect];
+        random.Shuffle(answers);
+        return (answers, Array.IndexOf(answers, q.Correct));
+    }
+
+    /// <summary>True in Throttle, Question and Reveal, the phases that have a current question.</summary>
+    private bool InRound => Phase is RacePhase.Throttle or RacePhase.Question or RacePhase.Reveal;
+
+    private TriviaQuestion Current => _questions[Round - 1];
+
+    /// <summary>§4.4: category and difficulty in Throttle; the text and shuffled answers from Question on.</summary>
+    private QuestionCard? QuestionCard() => Phase switch
+    {
+        RacePhase.Throttle => new QuestionCard(Current.Category, Current.Difficulty, null, null),
+        RacePhase.Question or RacePhase.Reveal =>
+            new QuestionCard(Current.Category, Current.Difficulty, Current.Text, _answers[Round - 1].Answers),
+        _ => null,
+    };
+
+    private double AiAccuracy(Driver d) => AiPolicy.Accuracy(d.Seat.Driver.AiSkill, Current.Difficulty, Rules.Ai);
+
+    /// <summary>
+    /// Throttle phase. Resets the round state, forces pit-limited drivers to Cruise, and lets every other AI pick
+    /// its throttle now (in team order) so AI never blocks early advance (§2.6).
+    /// </summary>
     private void StartRound()
     {
         Round++;
         Phase = RacePhase.Throttle;
+        foreach (var d in _field)
+        {
+            d.PositionAtRoundStart = d.Position;
+            d.PreviousDistance = d.Distance;
+            d.Throttle = d.PitLimiter ? Throttle.Cruise : null;     // a limited driver counts as locked (§3.2)
+            d.AnswerIndex = null;
+            d.Outcome = null;
+        }
+
+        var random = _ctx!.Random;
+        var leader = _field.Max(d => d.Distance);
+        var roundsLeft = Rules.MaxRounds - Round + 1;
+        foreach (var d in _field.Where(d => !d.IsHuman && d.Throttle is null))
+            d.Throttle = AiPolicy.ChooseThrottle(AiAccuracy(d), leader - d.Distance, roundsLeft, Rules.Ai, random);
+
+        _ctx.SetTimer(PhaseTimer, Rules.Throttle);
+        MaybeEndThrottleEarly();
+    }
+
+    private void OnThrottle(PlayerId from, ButtonsInput input)
+    {
+        if (!_seatOf.TryGetValue(from, out var driver) || driver.Throttle is not null) return;   // decided or pit-limited
+        if (PlayerViews.ParseThrottle(input.Pressed) is not { } throttle) return;
+        driver.Throttle = throttle;
+        MaybeEndThrottleEarly();
+    }
+
+    private void MaybeEndThrottleEarly()
+    {
+        if (EveryConnectedHumanHas(d => d.Throttle is not null)) EndThrottle();
+    }
+
+    /// <summary>Question phase. Undecided drivers get Cruise; every AI answers now, in team order.</summary>
+    private void EndThrottle()
+    {
+        foreach (var d in _field) d.Throttle ??= Throttle.Cruise;
+        Phase = RacePhase.Question;
+
+        var random = _ctx!.Random;
+        var correctIndex = _answers[Round - 1].CorrectIndex;
+        foreach (var d in _field.Where(d => !d.IsHuman))
+            d.AnswerIndex = AiPolicy.Answer(AiAccuracy(d), correctIndex, random);
+
+        _ctx.SetTimer(PhaseTimer, Rules.Question);
+    }
+
+    private void OnAnswer(PlayerId from, ChoiceInput input)
+    {
+        if (!_seatOf.TryGetValue(from, out var driver) || driver.AnswerIndex is not null) return;  // a limited driver still answers
+        if (input.Selected is not [var id, ..] || PlayerViews.ParseAnswer(id) is not { } index) return;
+        driver.AnswerIndex = index;
+        MaybeEndQuestionEarly();
+    }
+
+    private void MaybeEndQuestionEarly()
+    {
+        if (EveryConnectedHumanHas(d => d.AnswerIndex is not null)) Reveal();
+    }
+
+    /// <summary>§3.2: AI never blocks. With no human connected, the phase runs on its timer alone.</summary>
+    private bool EveryConnectedHumanHas(Func<Driver, bool> decided)
+    {
+        var connected = _seatOf.Values.Where(d => d.Connected).ToList();
+        return connected.Count > 0 && connected.All(decided);
+    }
+
+    /// <summary>Reveal phase: scores all 22 cars (§2.2), sets next round's pit limiter, and re-ranks.</summary>
+    private void Reveal()
+    {
+        Phase = RacePhase.Reveal;
+        var correctIndex = _answers[Round - 1].CorrectIndex;
+        foreach (var d in _field)
+        {
+            var throttle = d.Throttle ?? Throttle.Cruise;
+            bool? correct = d.AnswerIndex is { } answer ? answer == correctIndex : null;
+            var (distance, outcome, spinOut) = Scoring.Apply(d.Distance, throttle, correct, Rules);
+
+            d.Distance = distance;
+            d.Outcome = outcome;
+            d.PitLimiter = spinOut;                                 // applies to the next round only
+            if (correct == true) d.Correct++;
+            if (throttle == Throttle.Redline) d.Redlines++;
+            if (spinOut) d.SpinOuts++;
+        }
+
+        Rerank();
+        _ctx!.SetTimer(PhaseTimer, Rules.Reveal);
+    }
+
+    /// <summary>
+    /// Interim ranking (controller Ruling 6): Distance desc, Correct desc, then PositionAtRoundStart asc, with
+    /// sequential positions. Task 7 replaces this body with the shared-position <c>Ranking.Rank</c>.
+    /// </summary>
+    private void Rerank()
+    {
+        _standings = [.. _field
+            .OrderByDescending(d => d.Distance)
+            .ThenByDescending(d => d.Correct)
+            .ThenBy(d => d.PositionAtRoundStart)];
+        for (var i = 0; i < _standings.Count; i++) _standings[i].Position = i + 1;
+    }
+
+    /// <summary>
+    /// After the Reveal timer: the next round, or Chequered after the last round. Task 7 adds the
+    /// FinishLine check, the Chequered timer and EndGame here.
+    /// </summary>
+    private void EndReveal()
+    {
+        if (Round < Rules.MaxRounds) StartRound();
+        else Phase = RacePhase.Chequered;
     }
 
     // ---------------------------------------------------------------- Phone views
@@ -203,9 +356,13 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
     private PlayerViewKey ViewKey(PlayerId id)
     {
         var seated = _seatOf.TryGetValue(id, out var driver);
-        return Phase == RacePhase.DriverSelect && !seated
-            ? new PlayerViewKey(Phase, Round, null, _freeSeatsVersion, _claimRejected.GetValueOrDefault(id))
-            : new PlayerViewKey(Phase, Round, driver?.Code, 0, null);
+        if (Phase == RacePhase.DriverSelect && !seated)
+            return new PlayerViewKey(Phase, Round, null, _freeSeatsVersion, _claimRejected.GetValueOrDefault(id));
+        if (InRound && driver is not null)
+            return new PlayerViewKey(Phase, Round, driver.Code, 0, null,
+                driver.Position, driver.Throttle, driver.AnswerIndex is not null, driver.PitLimiter,
+                Phase == RacePhase.Reveal ? driver.Outcome : null);
+        return new PlayerViewKey(Phase, Round, driver?.Code, 0, null);
     }
 
     private ControllerView BuildPlayerView(PlayerId id, PlayerViewKey key)
@@ -218,7 +375,24 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
                 _field.Where(d => !d.IsHuman).Select(d => d.Seat), key.Header, deadline),
             (RacePhase.DriverSelect, _) => PlayerViews.Seated(driver.Seat, deadline),
             (RacePhase.Grid, not null) => PlayerViews.OnGrid(driver.Seat, deadline),
-            _ => PlayerViews.Idle(),                                  // rounds: Task 6
+            (RacePhase.Throttle or RacePhase.Question or RacePhase.Reveal, not null) => RoundView(driver, deadline),
+            _ => PlayerViews.Idle(),                                  // Chequered: Task 7
+        };
+    }
+
+    /// <summary>The §3.3 round views for one seated player.</summary>
+    private ControllerView RoundView(Driver driver, DateTimeOffset? deadline)
+    {
+        var header = PlayerViews.RoundHeader(driver.Position, Round, Rules.MaxRounds);
+        return Phase switch
+        {
+            RacePhase.Throttle when driver.PitLimiter => PlayerViews.PitLimited(header, deadline),
+            RacePhase.Throttle when driver.Throttle is { } locked => PlayerViews.ThrottleLocked(locked, header, deadline),
+            RacePhase.Throttle => PlayerViews.ChooseThrottle(Current, header, deadline),
+            RacePhase.Question when driver.AnswerIndex is null => PlayerViews.Answer(
+                Current.Text, _answers[Round - 1].Answers, driver.Throttle ?? Throttle.Cruise, header, deadline),
+            RacePhase.Question => PlayerViews.Answered(header, deadline),
+            _ => PlayerViews.Result(driver, Rules, header, deadline),
         };
     }
 }

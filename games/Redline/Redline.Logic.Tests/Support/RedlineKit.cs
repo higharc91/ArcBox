@@ -1,3 +1,4 @@
+using ArcBox.Sdk;
 using ArcBox.Sdk.Testing;
 using Redline.Logic;
 
@@ -23,6 +24,25 @@ public static class RedlineKit
         for (var i = 0; i < codes.Length; i++) Claim(h, i, codes[i]);
         if (View(h).Phase == RacePhase.DriverSelect) h.Advance(h.Game.Rules.DriverSelect);   // not everyone claimed
         h.Advance(h.Game.Rules.Grid);
+    }
+
+    /// <summary>Throttle phase: presses <paramref name="id"/> (cruise / push / redline).</summary>
+    public static void Throttle(GameHarness<RedlineGame> h, int player, string id) =>
+        h.Input(player, new { pressed = id });
+
+    /// <summary>Question phase: picks the option whose Label starts with "right" (FakeQuestionSource's correct answer).</summary>
+    public static void AnswerRight(GameHarness<RedlineGame> h, int player) =>
+        Answer(h, player, o => o.Label.StartsWith("right", StringComparison.Ordinal));
+
+    /// <summary>Question phase: picks the option labelled "w1" (always wrong).</summary>
+    public static void AnswerWrong(GameHarness<RedlineGame> h, int player) =>
+        Answer(h, player, o => o.Label == "w1");
+
+    private static void Answer(GameHarness<RedlineGame> h, int player, Func<Option, bool> pick)
+    {
+        var view = h.PlayerView(player) as ChoiceView
+            ?? throw new InvalidOperationException($"Player {player} is not looking at a question.");
+        h.Input(player, new { selected = new[] { view.Options.First(pick).Id } });
     }
 
     public static RedlineHostView View(GameHarness<RedlineGame> h) => h.HostView<RedlineHostView>();
