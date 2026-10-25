@@ -159,8 +159,16 @@ public class RoundTests
         Assert.All(v.Drivers.Where(d => d.Player is null), d => Assert.NotNull(d.AnswerIndex));
         Assert.All(v.Drivers, d => Assert.Equal(DriverStatus.Ready, d.Status));
 
-        // Re-ranked: rows in position order 1..22, distance never increasing, PositionChange from the round start.
-        Assert.Equal(Enumerable.Range(1, 22), v.Drivers.Select(d => d.Position));
+        // Re-ranked: rows in position order, distance never increasing, PositionChange from the round start.
+        // Equal distances (all correct counts are 0 or 1 after round 1) share a position: 1 + cars strictly ahead (§2.3).
+        Assert.Equal(1, v.Drivers[0].Position);
+        foreach (var row in v.Drivers)
+        {
+            var correct = row.Outcome == RoundOutcome.Correct ? 1 : 0;
+            var ahead = v.Drivers.Count(d =>
+                d.Distance > row.Distance || (d.Distance == row.Distance && (d.Outcome == RoundOutcome.Correct ? 1 : 0) > correct));
+            Assert.Equal(1 + ahead, row.Position);
+        }
         Assert.True(v.Drivers.Zip(v.Drivers.Skip(1)).All(p => p.First.Distance >= p.Second.Distance));
         foreach (var row in v.Drivers)
             Assert.Equal(before.Drivers.Single(d => d.Code == row.Code).Position - row.Position, row.PositionChange);

@@ -80,6 +80,10 @@ internal static class PlayerViews
     public static WaitView Result(Driver d, RedlineRules rules, string header, DateTimeOffset? deadline) =>
         new(ResultMessage(d, rules)) { Header = header, DeadlineUtc = deadline };
 
+    /// <summary>Chequered (§3.1): "You finished P{n} of {total}." with the shared position and the whole field.</summary>
+    public static WaitView Finished(int position, int total, string header, DateTimeOffset? deadline) =>
+        new($"You finished P{position} of {total}.") { Header = header, DeadlineUtc = deadline };
+
     public static string ResultMessage(Driver d, RedlineRules rules)
     {
         var p = d.Position;
@@ -101,7 +105,8 @@ internal static class PlayerViews
 /// <remarks>
 /// Driver Select uses <see cref="FreeSeatsVersion"/> and <see cref="Header"/>. The round phases use the player's own
 /// <see cref="Position"/> (shown in the header), <see cref="Throttle"/> (locked in, or forced by the limiter),
-/// <see cref="Answered"/>, <see cref="PitLimiter"/> and, in Reveal, <see cref="Outcome"/>; these are default elsewhere.
+/// <see cref="Answered"/>, <see cref="PitLimiter"/> and, in Reveal, <see cref="Outcome"/>; Chequered uses <see cref="Position"/> too.
+/// These are default elsewhere.
 /// </remarks>
 internal readonly record struct PlayerViewKey(
     RacePhase Phase, int Round, string? Code, int FreeSeatsVersion, string? Header,

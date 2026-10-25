@@ -25,6 +25,10 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
     private List<Driver> _field = [];
     /// <summary>All 22 cars in display order: team order in Driver Select, start order on the Grid, ranking afterwards.</summary>
     private List<Driver> _standings = [];
+    /// <summary>The classification behind <see cref="_standings"/>, with shared positions (§2.3).</summary>
+    private IReadOnlyList<(Driver Driver, int Position)> _ranked = [];
+    /// <summary>Chequered only: the awards (§2.4).</summary>
+    private FinishSummary? _finish;
     private readonly Dictionary<PlayerId, Driver> _seatOf = new();
     private readonly Dictionary<PlayerId, bool> _connected = new();
 
@@ -60,6 +64,8 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
 
         _field = [.. _grid.Seats.Select(s => new Driver(s))];
         _standings = [.. _field];
+        _ranked = [];
+        _finish = null;
         _seatOf.Clear();
         _connected.Clear();
         _claimRejected.Clear();
@@ -104,6 +110,7 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
             case RacePhase.Throttle: EndThrottle(); break;
             case RacePhase.Question: Reveal(); break;
             case RacePhase.Reveal: EndReveal(); break;
+            case RacePhase.Chequered: _ctx.EndGame(Ranking.Results(_ranked)); break;
         }
     }
 
@@ -123,7 +130,7 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
 
     public object HostView() => HostViews.Build(
         Phase, Round, Rules, QuestionCard(), InRound ? _answers[Round - 1].CorrectIndex : null, _standings,
-        _ctx?.TimerDeadline(PhaseTimer), finish: null, _attribution);
+        _ctx?.TimerDeadline(PhaseTimer), _finish, _attribution);
 
     public ControllerView PlayerView(PlayerId id)
     {
@@ -329,26 +336,31 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
     }
 
     /// <summary>
-    /// Interim ranking (controller Ruling 6): Distance desc, Correct desc, then PositionAtRoundStart asc, with
-    /// sequential positions. Task 7 replaces this body with the shared-position <c>Ranking.Rank</c>.
+    /// §2.3 via <see cref="Ranking.Rank"/>: Distance desc, Correct desc, full ties sharing a position. Ranking the
+    /// previous display order keeps full ties in the order they were already shown.
     /// </summary>
     private void Rerank()
     {
-        _standings = [.. _field
-            .OrderByDescending(d => d.Distance)
-            .ThenByDescending(d => d.Correct)
-            .ThenBy(d => d.PositionAtRoundStart)];
-        for (var i = 0; i < _standings.Count; i++) _standings[i].Position = i + 1;
+        _ranked = Ranking.Rank(_standings);
+        _standings = [.. _ranked.Select(r => r.Driver)];
+        foreach (var (driver, position) in _ranked) driver.Position = position;
     }
 
-    /// <summary>
-    /// After the Reveal timer: the next round, or Chequered after the last round. Task 7 adds the
-    /// FinishLine check, the Chequered timer and EndGame here.
-    /// </summary>
+    /// <summary>After the Reveal timer: Chequered once any car has reached the line or the last round is done (§2.1), else the next round.</summary>
     private void EndReveal()
     {
-        if (Round < Rules.MaxRounds) StartRound();
-        else Phase = RacePhase.Chequered;
+        if (Round >= Rules.MaxRounds || _field.Any(d => d.Distance >= Rules.FinishLine)) BeginChequered();
+        else StartRound();
+    }
+
+    // ---------------------------------------------------------------- Chequered
+
+    /// <summary>The 10 s finish screen with the awards; its timer ends the game with the humans-only results.</summary>
+    private void BeginChequered()
+    {
+        Phase = RacePhase.Chequered;
+        _finish = new FinishSummary(Ranking.Awards(_ranked, Round));
+        _ctx!.SetTimer(PhaseTimer, Rules.Chequered);
     }
 
     // ---------------------------------------------------------------- Phone views
@@ -358,7 +370,7 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         var seated = _seatOf.TryGetValue(id, out var driver);
         if (Phase == RacePhase.DriverSelect && !seated)
             return new PlayerViewKey(Phase, Round, null, _freeSeatsVersion, _claimRejected.GetValueOrDefault(id));
-        if (InRound && driver is not null)
+        if ((InRound || Phase == RacePhase.Chequered) && driver is not null)
             return new PlayerViewKey(Phase, Round, driver.Code, 0, null,
                 driver.Position, driver.Throttle, driver.AnswerIndex is not null, driver.PitLimiter,
                 Phase == RacePhase.Reveal ? driver.Outcome : null);
@@ -376,7 +388,9 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
             (RacePhase.DriverSelect, _) => PlayerViews.Seated(driver.Seat, deadline),
             (RacePhase.Grid, not null) => PlayerViews.OnGrid(driver.Seat, deadline),
             (RacePhase.Throttle or RacePhase.Question or RacePhase.Reveal, not null) => RoundView(driver, deadline),
-            _ => PlayerViews.Idle(),                                  // Chequered: Task 7
+            (RacePhase.Chequered, not null) => PlayerViews.Finished(
+                driver.Position, _field.Count, PlayerViews.RoundHeader(driver.Position, Round, Rules.MaxRounds), deadline),
+            _ => PlayerViews.Idle(),
         };
     }
 
