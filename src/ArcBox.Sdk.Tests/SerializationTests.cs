@@ -29,6 +29,14 @@ public class SerializationTests
     }
 
     [Fact]
+    public void Option_without_hint_has_no_hint_property()
+    {
+        ControllerView v = new ButtonsView(null, [new Option("go", "GO")]) { ViewId = "v" };
+        var json = JsonSerializer.SerializeToElement(v, ArcJson.Options);
+        Assert.False(json.GetProperty("buttons")[0].TryGetProperty("hint", out _));
+    }
+
+    [Fact]
     public void ControllerView_includes_kind_discriminator_and_camelCase()
     {
         ControllerView v = new ChoiceView("Pick", [new Option("a", "A")]) { ViewId = "v3" };

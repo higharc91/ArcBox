@@ -2,7 +2,16 @@ using System.Text.Json.Serialization;
 
 namespace ArcBox.Sdk;
 
-public sealed record Option(string Id, string Label, string? Hint = null);
+public sealed record Option(
+    string Id,
+    string Label,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Hint = null)
+{
+    /// <summary>The original two-argument constructor, kept for binary compatibility with games built before Hint.</summary>
+    /// <remarks>Marked as the JSON constructor because two constructors are ambiguous to System.Text.Json; Hint is then read through its init accessor.</remarks>
+    [JsonConstructor]
+    public Option(string id, string label) : this(id, label, null) { }
+}
 
 /// <summary>
 /// Any change to a player's view gives it a new ViewId and invalidates input already in flight. Keep a view unchanged while it should accept repeated input.

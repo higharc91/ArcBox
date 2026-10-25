@@ -60,16 +60,18 @@ public class OpenTdbClientTests
     }
 
     [Theory]
-    [InlineData(3, "TokenEmpty")]
-    [InlineData(4, "TokenEmpty")]
-    [InlineData(5, "RateLimited")]
-    [InlineData(1, "Failed")]
-    [InlineData(2, "Failed")]
-    public async Task Maps_response_codes(int code, string expected)
+    [InlineData(3, "tok", "TokenEmpty")]
+    [InlineData(4, "tok", "TokenEmpty")]
+    [InlineData(5, "tok", "RateLimited")]
+    [InlineData(1, "tok", "TokenEmpty")] // a token with fewer than `amount` questions left: fetch a fresh token
+    [InlineData(1, null, "Failed")]
+    [InlineData(2, "tok", "Failed")]
+    [InlineData(2, null, "Failed")]
+    public async Task Maps_response_codes(int code, string? token, string expected)
     {
         var (client, _) = Create(_ => Json($$"""{"response_code":{{code}},"results":[]}"""));
 
-        var result = await client.FetchAsync("tok", 50, CancellationToken.None);
+        var result = await client.FetchAsync(token, 50, CancellationToken.None);
 
         Assert.Equal(expected, result.GetType().Name);
     }

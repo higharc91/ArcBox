@@ -76,6 +76,10 @@ public sealed class OpenTdbClient(HttpClient http)
                     break;
                 case 3 or 4:
                     return new OpenTdbResult.TokenEmpty();
+                // "No results" with a token can mean the token has fewer than `amount` questions left; a fresh
+                // token is the remedy (worst case: one extra token request). Without a token it is a plain failure.
+                case 1 when !string.IsNullOrEmpty(token):
+                    return new OpenTdbResult.TokenEmpty();
                 case 5:
                     return new OpenTdbResult.RateLimited();
                 default:

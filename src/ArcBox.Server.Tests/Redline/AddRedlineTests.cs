@@ -1,3 +1,5 @@
+using ArcBox.Sdk;
+using ArcBox.Sdk.Testing;
 using ArcBox.Server.Games;
 using ArcBox.Server.Games.Redline;
 using Microsoft.Extensions.Configuration;
@@ -41,6 +43,24 @@ public class AddRedlineTests
     }
 
     [Fact]
+    public void AddRedline_game_runs_a_full_race_on_fallback()
+    {
+        using var sp = Build(("Redline:OpenTdb:Enabled", "false"));
+        var game = sp.GetRequiredService<IGameRegistry>().Create("redline");
+        var h = new GameHarness<IGame>(game, playerCount: 3);
+
+        h.Start();
+        var attribution = ((RedlineHostView)game.HostView()).Attribution;
+        for (var step = 0; step < 2000 && !h.IsOver; step++)
+            h.Advance(TimeSpan.FromSeconds(1));
+
+        Assert.True(h.IsOver);
+        Assert.Equal("Questions: REDLINE fallback pack", attribution);
+        Assert.Equal(3, h.Results!.Scores.Count);
+        Assert.Equal(h.Players.Select(p => p.Id.Value).Order(), h.Results.Scores.Select(s => s.PlayerId.Value).Order());
+    }
+
+    [Fact]
     public void Enabled_by_default_registers_the_pool_instance_as_the_hosted_service()
     {
         using var sp = Build();
@@ -61,6 +81,19 @@ public class AddRedlineTests
         Assert.Equal(new Uri("https://example.test/trivia/"), http.BaseAddress);
         Assert.Equal(TimeSpan.FromSeconds(10), http.Timeout);
         Assert.Equal(new Uri("https://example.test/trivia/api.php"), new Uri(http.BaseAddress!, "api.php"));
+    }
+
+    [Fact]
+    public void Typed_client_primary_handler_recycles_pooled_connections()
+    {
+        using var sp = Build(("Redline:OpenTdb:Enabled", "false"));
+
+        HttpMessageHandler handler = sp.GetRequiredService<IHttpMessageHandlerFactory>().CreateHandler(nameof(OpenTdbClient));
+        while (handler is DelegatingHandler delegating)
+            handler = delegating.InnerHandler!;
+
+        var sockets = Assert.IsType<SocketsHttpHandler>(handler);
+        Assert.Equal(TimeSpan.FromMinutes(10), sockets.PooledConnectionLifetime);
     }
 
     [Fact]

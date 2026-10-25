@@ -33,7 +33,10 @@ public static class RedlineServiceCollectionExtensions
             var baseUrl = sp.GetRequiredService<IOptions<OpenTdbOptions>>().Value.BaseUrl;
             http.BaseAddress = new Uri(baseUrl.EndsWith('/') ? baseUrl : baseUrl + "/");
             http.Timeout = TimeSpan.FromSeconds(10);
-        });
+        })
+        // The singleton pool holds its typed client for the process lifetime, so the factory never rotates the
+        // handler; recycle pooled connections ourselves so DNS changes are picked up.
+        .ConfigurePrimaryHttpMessageHandler(() => new SocketsHttpHandler { PooledConnectionLifetime = TimeSpan.FromMinutes(10) });
 
         services.AddSingleton<OpenTdbQuestionPool>();
         if (section.GetValue("Enabled", true))
