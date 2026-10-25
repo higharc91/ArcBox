@@ -618,10 +618,10 @@
   {
     "category": "Video Games",
     "difficulty": "medium",
-    "text": "Which character do you play as in The Legend of Zelda series?",
+    "text": "Who is the usual hero of the Legend of Zelda games, wielding the Master Sword?",
     "correct": "Link",
     "incorrect": [
-      "Zelda",
+      "Impa",
       "Ganon",
       "Epona"
     ]
