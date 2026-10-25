@@ -1,0 +1,662 @@
+[
+  {
+    "category": "General Knowledge",
+    "difficulty": "easy",
+    "text": "How many sides does a hexagon have?",
+    "correct": "6",
+    "incorrect": [
+      "5",
+      "7",
+      "8"
+    ]
+  },
+  {
+    "category": "General Knowledge",
+    "difficulty": "easy",
+    "text": "Which colour do you get by mixing blue and yellow paint?",
+    "correct": "Green",
+    "incorrect": [
+      "Orange",
+      "Purple",
+      "Brown"
+    ]
+  },
+  {
+    "category": "General Knowledge",
+    "difficulty": "easy",
+    "text": "How many days are there in a leap year?",
+    "correct": "366",
+    "incorrect": [
+      "365",
+      "364",
+      "367"
+    ]
+  },
+  {
+    "category": "General Knowledge",
+    "difficulty": "medium",
+    "text": "Which language has the most native speakers in the world?",
+    "correct": "Mandarin Chinese",
+    "incorrect": [
+      "English",
+      "Spanish",
+      "Hindi"
+    ]
+  },
+  {
+    "category": "General Knowledge",
+    "difficulty": "medium",
+    "text": "In chess, which piece can only ever move diagonally?",
+    "correct": "Bishop",
+    "incorrect": [
+      "Rook",
+      "Knight",
+      "Pawn"
+    ]
+  },
+  {
+    "category": "General Knowledge",
+    "difficulty": "medium",
+    "text": "How many keys does a standard modern piano have?",
+    "correct": "88",
+    "incorrect": [
+      "76",
+      "82",
+      "92"
+    ]
+  },
+  {
+    "category": "General Knowledge",
+    "difficulty": "hard",
+    "text": "Which is the only letter that does not appear in any US state name?",
+    "correct": "Q",
+    "incorrect": [
+      "X",
+      "Z",
+      "J"
+    ]
+  },
+  {
+    "category": "General Knowledge",
+    "difficulty": "hard",
+    "text": "Which currency was launched as an electronic currency in 1999, with notes following in 2002?",
+    "correct": "Euro",
+    "incorrect": [
+      "Deutsche Mark",
+      "Swiss Franc",
+      "Swedish Krona"
+    ]
+  },
+  {
+    "category": "Science & Nature",
+    "difficulty": "easy",
+    "text": "Which gas do plants absorb from the air for photosynthesis?",
+    "correct": "Carbon dioxide",
+    "incorrect": [
+      "Oxygen",
+      "Nitrogen",
+      "Helium"
+    ]
+  },
+  {
+    "category": "Science & Nature",
+    "difficulty": "easy",
+    "text": "Which planet is known as the Red Planet?",
+    "correct": "Mars",
+    "incorrect": [
+      "Venus",
+      "Jupiter",
+      "Mercury"
+    ]
+  },
+  {
+    "category": "Science & Nature",
+    "difficulty": "easy",
+    "text": "What is the chemical formula for water?",
+    "correct": "H2O",
+    "incorrect": [
+      "CO2",
+      "NaCl",
+      "O2"
+    ]
+  },
+  {
+    "category": "Science & Nature",
+    "difficulty": "medium",
+    "text": "What is the chemical symbol for gold?",
+    "correct": "Au",
+    "incorrect": [
+      "Ag",
+      "Gd",
+      "Go"
+    ]
+  },
+  {
+    "category": "Science & Nature",
+    "difficulty": "medium",
+    "text": "Which part of a cell is often called its powerhouse?",
+    "correct": "Mitochondria",
+    "incorrect": [
+      "Ribosome",
+      "Nucleus",
+      "Golgi apparatus"
+    ]
+  },
+  {
+    "category": "Science & Nature",
+    "difficulty": "medium",
+    "text": "Which blood cells carry oxygen around the human body?",
+    "correct": "Red blood cells",
+    "incorrect": [
+      "White blood cells",
+      "Platelets",
+      "Neurons"
+    ]
+  },
+  {
+    "category": "Science & Nature",
+    "difficulty": "hard",
+    "text": "Roughly how fast does light travel in a vacuum?",
+    "correct": "300,000 km/s",
+    "incorrect": [
+      "30,000 km/s",
+      "150,000 km/s",
+      "3,000,000 km/s"
+    ]
+  },
+  {
+    "category": "Science & Nature",
+    "difficulty": "hard",
+    "text": "Which element has the atomic number 26?",
+    "correct": "Iron",
+    "incorrect": [
+      "Nickel",
+      "Cobalt",
+      "Copper"
+    ]
+  },
+  {
+    "category": "Geography",
+    "difficulty": "easy",
+    "text": "What is the largest ocean on Earth?",
+    "correct": "Pacific Ocean",
+    "incorrect": [
+      "Atlantic Ocean",
+      "Indian Ocean",
+      "Arctic Ocean"
+    ]
+  },
+  {
+    "category": "Geography",
+    "difficulty": "easy",
+    "text": "On which continent is the Sahara Desert found?",
+    "correct": "Africa",
+    "incorrect": [
+      "Asia",
+      "South America",
+      "Australia"
+    ]
+  },
+  {
+    "category": "Geography",
+    "difficulty": "medium",
+    "text": "What is the capital city of Canada?",
+    "correct": "Ottawa",
+    "incorrect": [
+      "Toronto",
+      "Vancouver",
+      "Montreal"
+    ]
+  },
+  {
+    "category": "Geography",
+    "difficulty": "medium",
+    "text": "Which river flows through the centre of Paris?",
+    "correct": "Seine",
+    "incorrect": [
+      "Loire",
+      "Rhine",
+      "Thames"
+    ]
+  },
+  {
+    "category": "Geography",
+    "difficulty": "hard",
+    "text": "What is the capital city of Australia?",
+    "correct": "Canberra",
+    "incorrect": [
+      "Sydney",
+      "Melbourne",
+      "Perth"
+    ]
+  },
+  {
+    "category": "Geography",
+    "difficulty": "hard",
+    "text": "Which is the longest river in Europe?",
+    "correct": "Volga",
+    "incorrect": [
+      "Danube",
+      "Rhine",
+      "Dnieper"
+    ]
+  },
+  {
+    "category": "Geography",
+    "difficulty": "hard",
+    "text": "In which country is the historic city of Timbuktu?",
+    "correct": "Mali",
+    "incorrect": [
+      "Niger",
+      "Chad",
+      "Mauritania"
+    ]
+  },
+  {
+    "category": "History",
+    "difficulty": "easy",
+    "text": "Which ancient civilisation built the pyramids at Giza?",
+    "correct": "Ancient Egyptians",
+    "incorrect": [
+      "Romans",
+      "Aztecs",
+      "Ancient Greeks"
+    ]
+  },
+  {
+    "category": "History",
+    "difficulty": "easy",
+    "text": "In which year did the Second World War end?",
+    "correct": "1945",
+    "incorrect": [
+      "1918",
+      "1939",
+      "1950"
+    ]
+  },
+  {
+    "category": "History",
+    "difficulty": "easy",
+    "text": "Who was the first President of the United States?",
+    "correct": "George Washington",
+    "incorrect": [
+      "Thomas Jefferson",
+      "Abraham Lincoln",
+      "John Adams"
+    ]
+  },
+  {
+    "category": "History",
+    "difficulty": "medium",
+    "text": "Which city was divided by a wall from 1961 until 1989?",
+    "correct": "Berlin",
+    "incorrect": [
+      "Vienna",
+      "Warsaw",
+      "Budapest"
+    ]
+  },
+  {
+    "category": "History",
+    "difficulty": "medium",
+    "text": "Who was the first Roman emperor?",
+    "correct": "Augustus",
+    "incorrect": [
+      "Julius Caesar",
+      "Nero",
+      "Caligula"
+    ]
+  },
+  {
+    "category": "History",
+    "difficulty": "medium",
+    "text": "In which year did the Titanic sink?",
+    "correct": "1912",
+    "incorrect": [
+      "1905",
+      "1915",
+      "1921"
+    ]
+  },
+  {
+    "category": "History",
+    "difficulty": "hard",
+    "text": "Which 1648 peace ended the Thirty Years' War?",
+    "correct": "Peace of Westphalia",
+    "incorrect": [
+      "Treaty of Versailles",
+      "Treaty of Utrecht",
+      "Congress of Vienna"
+    ]
+  },
+  {
+    "category": "History",
+    "difficulty": "hard",
+    "text": "At which 1066 battle did William of Normandy defeat King Harold?",
+    "correct": "Battle of Hastings",
+    "incorrect": [
+      "Battle of Agincourt",
+      "Battle of Bosworth",
+      "Battle of Crecy"
+    ]
+  },
+  {
+    "category": "Film",
+    "difficulty": "easy",
+    "text": "Which 1993 Spielberg film is about a theme park of cloned dinosaurs?",
+    "correct": "Jurassic Park",
+    "incorrect": [
+      "Godzilla",
+      "Jaws",
+      "E.T."
+    ]
+  },
+  {
+    "category": "Film",
+    "difficulty": "easy",
+    "text": "In Disney's Frozen, what is the name of the living snowman?",
+    "correct": "Olaf",
+    "incorrect": [
+      "Sven",
+      "Kristoff",
+      "Hans"
+    ]
+  },
+  {
+    "category": "Film",
+    "difficulty": "medium",
+    "text": "Who directed the 1997 film Titanic?",
+    "correct": "James Cameron",
+    "incorrect": [
+      "Steven Spielberg",
+      "Ridley Scott",
+      "Christopher Nolan"
+    ]
+  },
+  {
+    "category": "Film",
+    "difficulty": "medium",
+    "text": "In The Lord of the Rings, what is the name of Frodo's loyal gardener companion?",
+    "correct": "Samwise Gamgee",
+    "incorrect": [
+      "Merry Brandybuck",
+      "Pippin Took",
+      "Gimli"
+    ]
+  },
+  {
+    "category": "Film",
+    "difficulty": "hard",
+    "text": "Which 1941 Orson Welles film centres on the mystery of the word \"Rosebud\"?",
+    "correct": "Citizen Kane",
+    "incorrect": [
+      "Casablanca",
+      "The Maltese Falcon",
+      "Gone with the Wind"
+    ]
+  },
+  {
+    "category": "Film",
+    "difficulty": "hard",
+    "text": "Who directed the 1960 thriller Psycho?",
+    "correct": "Alfred Hitchcock",
+    "incorrect": [
+      "Orson Welles",
+      "Stanley Kubrick",
+      "Billy Wilder"
+    ]
+  },
+  {
+    "category": "Film",
+    "difficulty": "hard",
+    "text": "Which Japanese director made the 1954 film Seven Samurai?",
+    "correct": "Akira Kurosawa",
+    "incorrect": [
+      "Hayao Miyazaki",
+      "Yasujiro Ozu",
+      "Takeshi Kitano"
+    ]
+  },
+  {
+    "category": "Music",
+    "difficulty": "easy",
+    "text": "How many strings does a standard guitar have?",
+    "correct": "6",
+    "incorrect": [
+      "4",
+      "5",
+      "7"
+    ]
+  },
+  {
+    "category": "Music",
+    "difficulty": "easy",
+    "text": "Which band recorded the song \"Hey Jude\"?",
+    "correct": "The Beatles",
+    "incorrect": [
+      "The Rolling Stones",
+      "Queen",
+      "The Who"
+    ]
+  },
+  {
+    "category": "Music",
+    "difficulty": "medium",
+    "text": "Which composer wrote The Four Seasons violin concertos?",
+    "correct": "Antonio Vivaldi",
+    "incorrect": [
+      "Johann Sebastian Bach",
+      "George Frideric Handel",
+      "Joseph Haydn"
+    ]
+  },
+  {
+    "category": "Music",
+    "difficulty": "medium",
+    "text": "Who composed the Ninth Symphony that ends with the \"Ode to Joy\"?",
+    "correct": "Ludwig van Beethoven",
+    "incorrect": [
+      "Wolfgang Amadeus Mozart",
+      "Johannes Brahms",
+      "Franz Schubert"
+    ]
+  },
+  {
+    "category": "Music",
+    "difficulty": "hard",
+    "text": "Which 1975 Queen single contains a famous operatic middle section?",
+    "correct": "Bohemian Rhapsody",
+    "incorrect": [
+      "We Will Rock You",
+      "Don't Stop Me Now",
+      "Somebody to Love"
+    ]
+  },
+  {
+    "category": "Music",
+    "difficulty": "hard",
+    "text": "Which 1967 Beatles album cover shows a crowd of famous faces around the band?",
+    "correct": "Sgt. Pepper's Lonely Hearts Club Band",
+    "incorrect": [
+      "Abbey Road",
+      "Revolver",
+      "Let It Be"
+    ]
+  },
+  {
+    "category": "Music",
+    "difficulty": "hard",
+    "text": "Which composer wrote the opera The Magic Flute?",
+    "correct": "Wolfgang Amadeus Mozart",
+    "incorrect": [
+      "Ludwig van Beethoven",
+      "Franz Schubert",
+      "Giuseppe Verdi"
+    ]
+  },
+  {
+    "category": "Sports",
+    "difficulty": "easy",
+    "text": "How many players does one football (soccer) team have on the pitch?",
+    "correct": "11",
+    "incorrect": [
+      "9",
+      "10",
+      "12"
+    ]
+  },
+  {
+    "category": "Sports",
+    "difficulty": "easy",
+    "text": "In which sport would you perform a slam dunk?",
+    "correct": "Basketball",
+    "incorrect": [
+      "Volleyball",
+      "Tennis",
+      "Netball"
+    ]
+  },
+  {
+    "category": "Sports",
+    "difficulty": "easy",
+    "text": "How many rings are there on the Olympic flag?",
+    "correct": "5",
+    "incorrect": [
+      "4",
+      "6",
+      "7"
+    ]
+  },
+  {
+    "category": "Sports",
+    "difficulty": "medium",
+    "text": "Which country hosted the 2016 Summer Olympics?",
+    "correct": "Brazil",
+    "incorrect": [
+      "China",
+      "United Kingdom",
+      "Japan"
+    ]
+  },
+  {
+    "category": "Sports",
+    "difficulty": "medium",
+    "text": "In tennis, what is the word for a score of zero?",
+    "correct": "Love",
+    "incorrect": [
+      "Nil",
+      "Duck",
+      "Blank"
+    ]
+  },
+  {
+    "category": "Sports",
+    "difficulty": "medium",
+    "text": "In which city were the first modern Olympic Games held in 1896?",
+    "correct": "Athens",
+    "incorrect": [
+      "Paris",
+      "London",
+      "Rome"
+    ]
+  },
+  {
+    "category": "Sports",
+    "difficulty": "hard",
+    "text": "Which country won the first FIFA World Cup in 1930?",
+    "correct": "Uruguay",
+    "incorrect": [
+      "Brazil",
+      "Argentina",
+      "Italy"
+    ]
+  },
+  {
+    "category": "Sports",
+    "difficulty": "hard",
+    "text": "What is the official length of a marathon?",
+    "correct": "42.195 km",
+    "incorrect": [
+      "40 km",
+      "41.195 km",
+      "43.195 km"
+    ]
+  },
+  {
+    "category": "Video Games",
+    "difficulty": "easy",
+    "text": "What is the name of Mario's younger brother?",
+    "correct": "Luigi",
+    "incorrect": [
+      "Wario",
+      "Toad",
+      "Yoshi"
+    ]
+  },
+  {
+    "category": "Video Games",
+    "difficulty": "easy",
+    "text": "In Minecraft, which green mob sneaks up and explodes near the player?",
+    "correct": "Creeper",
+    "incorrect": [
+      "Zombie",
+      "Skeleton",
+      "Enderman"
+    ]
+  },
+  {
+    "category": "Video Games",
+    "difficulty": "medium",
+    "text": "Which Pokemon is number 25 in the original Pokedex?",
+    "correct": "Pikachu",
+    "incorrect": [
+      "Raichu",
+      "Jigglypuff",
+      "Meowth"
+    ]
+  },
+  {
+    "category": "Video Games",
+    "difficulty": "medium",
+    "text": "Which character do you play as in The Legend of Zelda series?",
+    "correct": "Link",
+    "incorrect": [
+      "Zelda",
+      "Ganon",
+      "Epona"
+    ]
+  },
+  {
+    "category": "Video Games",
+    "difficulty": "hard",
+    "text": "Which studio developed the Half-Life series?",
+    "correct": "Valve",
+    "incorrect": [
+      "id Software",
+      "Blizzard Entertainment",
+      "Epic Games"
+    ]
+  },
+  {
+    "category": "Video Games",
+    "difficulty": "hard",
+    "text": "Who is the bounty hunter hero of the Metroid series?",
+    "correct": "Samus Aran",
+    "incorrect": [
+      "Master Chief",
+      "Lara Croft",
+      "Ellen Ripley"
+    ]
+  },
+  {
+    "category": "Video Games",
+    "difficulty": "hard",
+    "text": "Which game series is set in the underwater city of Rapture?",
+    "correct": "BioShock",
+    "incorrect": [
+      "Fallout",
+      "Half-Life",
+      "Dishonored"
+    ]
+  }
+]
