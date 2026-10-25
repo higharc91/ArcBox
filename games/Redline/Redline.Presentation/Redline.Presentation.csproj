@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>$(ArcSdkTargetFrameworks)</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\ArcBox.Sdk\ArcBox.Sdk.csproj" />
+    <ProjectReference Include="..\Redline.Logic\Redline.Logic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Data\*.json" LogicalName="Redline.Presentation.Data.%(Filename)%(Extension)" />
+  </ItemGroup>
+</Project>
