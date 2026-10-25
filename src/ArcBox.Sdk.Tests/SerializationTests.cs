@@ -20,6 +20,15 @@ public class SerializationTests
         => Assert.Equal("\"p1\"", JsonSerializer.Serialize(new PlayerId("p1"), ArcJson.Options));
 
     [Fact]
+    public void Option_hint_serializes_camelCase_and_round_trips()
+    {
+        ControllerView v = new ButtonsView(null, [new Option("redline", "REDLINE", "+4 if right · spin out if wrong")]) { ViewId = "v" };
+        var json = JsonSerializer.SerializeToElement(v, ArcJson.Options);
+        Assert.Equal("+4 if right · spin out if wrong", json.GetProperty("buttons")[0].GetProperty("hint").GetString());
+        Assert.Equal(json.GetRawText(), JsonSerializer.SerializeToElement(JsonSerializer.Deserialize<ControllerView>(json, ArcJson.Options), ArcJson.Options).GetRawText());
+    }
+
+    [Fact]
     public void ControllerView_includes_kind_discriminator_and_camelCase()
     {
         ControllerView v = new ChoiceView("Pick", [new Option("a", "A")]) { ViewId = "v3" };

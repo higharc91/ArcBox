@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace ArcBox.Sdk;
 
-public sealed record Option(string Id, string Label);
+public sealed record Option(string Id, string Label, string? Hint = null);
 
 /// <summary>
 /// Any change to a player's view gives it a new ViewId and invalidates input already in flight. Keep a view unchanged while it should accept repeated input.
