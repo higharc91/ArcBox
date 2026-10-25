@@ -42,27 +42,30 @@
     </div>
   </div>
   <div class="phone"><div class="screen">
-    <div class="pstatus"><div class="me"><i style="background:#ff7a00"></i>ALEX</div><div class="pos">P3<small>/6</small></div></div>
+    <div class="pstatus"><div class="me"><i style="background:#dc0000"></i>ALEX · LEC 16</div><div class="pos">P3<small>/6</small></div></div>
     <div class="pq"><small>Round 1 · Grid</small><div>Engines on. Lights out in a moment…</div></div>
-    <div class="hint">You start P3 on the grid. Each round: pick a throttle, then answer. First past the flag wins.</div>
+    <div class="hint">You're Charles Leclerc, #16, Ferrari. You start P3. Each round: pick a throttle, then answer. First past the flag wins.</div>
     <div class="ptimer"></div>
   </div></div>
 </div>
 <script type="module">
-  import { loadCircuit, buildScene, TEAM, FINISH } from './cota3d.js';
+  import { loadCircuit, buildScene, FINISH } from './cota3d.js';
+  import { loadGrid, accent } from './grid2026.js';
   await document.fonts.load('italic 900 92px "Titillium Web"');
-  const circuit = await loadCircuit();
+  const [circuit, grid] = await Promise.all([loadCircuit(), loadGrid()]);
+  const CAR = { JO: 'NOR', SAM: 'VER', ALEX: 'LEC', RIA: 'ANT', MO: 'ALO', KAI: 'PER' };
   const drivers = [
     { name: 'JO', dist: 0, lat: -3.6, nudge: -6 }, { name: 'RIA', dist: 0, lat: 3.6, nudge: -14 },
     { name: 'ALEX', dist: 0, lat: -3.6, nudge: -22 }, { name: 'KAI', dist: 0, lat: 3.6, nudge: -30 },
     { name: 'SAM', dist: 0, lat: -3.6, nudge: -38 }, { name: 'MO', dist: 0, lat: 3.6, nudge: -46 },
   ];
+  drivers.forEach(d => { const c = grid.byCode[CAR[d.name]]; Object.assign(d, c, { code: CAR[d.name], color: accent(c.team) }); });
   const view = buildScene({
     canvas: gl, width: 1280, height: 720, circuit, drivers,
     cam: { fov: 42, azimuth: 236, elevation: 15, dist: 70, aimOffset: [0, 0, 0], shadowSize: 220, sunAzimuth: 250, sunElevation: 26 },
   });
-  tower.innerHTML = drivers.map((d, i) => `<div class="mt"><span class="p ${i ? '' : 'lead'}">${i + 1}</span><i style="background:${TEAM[d.name]}"></i>
-    <span class="n">${d.name}</span><span class="g">GRID</span><span class="chip LOCKED">READY</span></div>`).join('');
+  tower.innerHTML = drivers.map((d, i) => `<div class="mt"><span class="p ${i ? '' : 'lead'}">${i + 1}</span><i style="background:${d.color}"></i>
+    <span class="n">${d.code} <small style="font-size:11px;color:var(--dim);font-weight:600">${d.name}</small></span><span class="g">GRID</span><span class="chip LOCKED">READY</span></div>`).join('');
 
   // track map from the same circuit data
   const pts = circuit.data.points, xs = pts.map(p => p[0]), zs = pts.map(p => p[1]);
@@ -77,12 +80,12 @@
   map.innerHTML = `<polygon points="${line}" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="7" stroke-linejoin="round"/>
     <polygon points="${line}" fill="none" stroke="#e8e8ee" stroke-width="2.2" stroke-linejoin="round"/>
     <rect x="${sf[0] - 4}" y="${sf[1] - 4}" width="8" height="8" fill="#fff" stroke="#111"/>` +
-    drivers.slice().reverse().map(d => { const [x, y] = at(view.carS(d.name) / FINISH * FINISH * (cum.at(-1) / (cum.at(-1)))); return `<circle cx="${x}" cy="${y}" r="5.5" fill="${TEAM[d.name]}" stroke="#0b0b10" stroke-width="1.6"/>`; }).join('');
+    drivers.slice().reverse().map(d => { const [x, y] = at(view.carS(d.name) / FINISH * FINISH * (cum.at(-1) / (cum.at(-1)))); return `<circle cx="${x}" cy="${y}" r="5.5" fill="${d.color}" stroke="#0b0b10" stroke-width="1.6"/>`; }).join('');
 
   tags.innerHTML = drivers.map((d, i) => {
     const s = view.project(d.name, 2.6);
     if (!s.visible) return '';
-    return `<div class="tag3d" style="left:${s.x}px;top:${s.y}px"><i style="background:${TEAM[d.name]}"></i><b>${i + 1}</b>${d.name}</div>`;
+    return `<div class="tag3d" style="left:${s.x}px;top:${s.y}px"><i style="background:${d.color}"></i><b>${i + 1}</b>${d.code} <span style="color:var(--dim);font-weight:600">${d.name}</span></div>`;
   }).join('');
   window.__ready = true;
 </script>

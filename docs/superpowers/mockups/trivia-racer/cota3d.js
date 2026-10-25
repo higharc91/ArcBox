@@ -2,6 +2,7 @@
 // Race distance 0..FINISH maps to one lap; s = distance along the lap in metres from cota.json point 0.
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { makeF1Car } from './f1car2026.js';
 
 export const FINISH = 20;
 export const TEAM = { JO: '#2f6fd6', SAM: '#d8001f', ALEX: '#ff7a00', RIA: '#1ec8b0', MO: '#b9bcc4', KAI: '#1f8f5f' };
@@ -70,8 +71,8 @@ export function buildScene({ canvas, width, height, circuit, cam, drivers, trail
   renderer.setSize(width, height, false);
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 0.92;
+  renderer.toneMapping = THREE.NeutralToneMapping;   // Khronos PBR Neutral: keeps livery hues true (ACES skews saturated reds/oranges)
+  renderer.toneMappingExposure = 0.78;
 
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2('#cfdbe6', 0.00038);
@@ -372,7 +373,7 @@ export function buildScene({ canvas, width, height, circuit, cam, drivers, trail
   };
   const cars = {};
   for (const d of drivers) {
-    const car = makeCar(TEAM[d.name]);
+    const car = d.team ? makeF1Car(d.team, d.driver) : makeCar(TEAM[d.name]);
     const { pos, fwd } = carPose(d);
     const up = new THREE.Vector3(0, 1, 0);
     const side = new THREE.Vector3().crossVectors(fwd, up).normalize();     // x * y = z (right-handed basis)
@@ -386,7 +387,7 @@ export function buildScene({ canvas, width, height, circuit, cam, drivers, trail
   for (const tr of trails) {
     const d = drivers.find(x => x.name === tr.name), lat = carPose(d).lateral;
     const s0 = tr.from / FINISH * L, s1 = tr.to / FINISH * L - 8;
-    ribbon({ a: lat - 0.9, b: lat + 0.9, lift: 0.11, keep: i => S[i].s >= s0 && S[i].s <= s1, color: TEAM[tr.name], rough: 0.4 });
+    ribbon({ a: lat - 0.9, b: lat + 0.9, lift: 0.11, keep: i => S[i].s >= s0 && S[i].s <= s1, color: d.color ?? TEAM[tr.name], rough: 0.4 });
   }
   const puffM = new THREE.MeshStandardMaterial({ color: '#eceef0', transparent: true, opacity: 0.5, roughness: 1, depthWrite: false });
   for (const sm of smoke) {
@@ -402,7 +403,12 @@ export function buildScene({ canvas, width, height, circuit, cam, drivers, trail
   // --- camera
   const camera = new THREE.PerspectiveCamera(cam.fov, width / height, 0.5, 9000);
   let aim;
-  if (cam.chase) {
+  if (cam.track) {
+    // Track-relative rig: position and aim given as (metres along the lap, lateral offset, height above the track).
+    const c = cam.track, a = sample(c.s), b = sample(c.lookS);
+    camera.position.set(a.p.x + a.n.x * c.lateral, a.h + c.up, a.p.z + a.n.z * c.lateral);
+    aim = new THREE.Vector3(b.p.x + b.n.x * c.lookLateral, b.h + c.lookUp, b.p.z + b.n.z * c.lookLateral);
+  } else if (cam.chase) {
     const c = cam.chase, car = cars[c.name];
     const fwd = new THREE.Vector3(1, 0, 0).applyQuaternion(car.quaternion); fwd.y = 0; fwd.normalize();
     const left = new THREE.Vector3(fwd.z, 0, -fwd.x);

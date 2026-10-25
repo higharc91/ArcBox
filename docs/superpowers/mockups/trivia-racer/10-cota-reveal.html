@@ -17,7 +17,7 @@
   .correct b { background: var(--good); color: #04220f; padding: 6px 22px; font: italic 900 30px 'Titillium Web'; }
   .rtower { position: absolute; left: auto; right: 28px; top: 100px; width: 250px; }
   .lower { position: absolute; left: 28px; bottom: 28px; display: flex; align-items: stretch; box-shadow: 0 10px 30px rgba(0,0,0,.4); }
-  .lower .bar { width: 8px; background: #ff7a00; }
+  .lower .bar { width: 8px; background: #dc0000; }
   .lower .who { background: rgba(14,14,20,.9); padding: 10px 20px; }
   .lower .who small { display: block; font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--dim); }
   .lower .who b { font: italic 900 40px 'Titillium Web'; line-height: 1; }
@@ -39,7 +39,7 @@
 </style>
 </head>
 <body>
-<div class="label">REALISTIC · <b>REVEAL AT COTA</b> — low trackside camera in the esses: ALEX's Redline pays off, side by side with RIA</div>
+<div class="label">REALISTIC · <b>REVEAL AT COTA</b> — low trackside camera in the esses: Leclerc (ALEX) Redline pays off, side by side with Antonelli (RIA)</div>
 <div class="row">
   <div class="tv3d">
     <canvas id="gl"></canvas>
@@ -49,7 +49,7 @@
       <div class="mini-tower rtower" id="tower"></div>
       <div class="lower">
         <div class="bar"></div>
-        <div class="who"><small>BIGGEST MOVER</small><b>ALEX</b></div>
+        <div class="who"><small>BIGGEST MOVER · ALEX</small><b>LECLERC</b></div>
         <div class="pay"><small>REDLINE PAYS OFF</small><b>+4</b></div>
         <div class="mv"><small>POSITION</small><b>P5 → P1 <span>▲4</span></b></div>
       </div>
@@ -57,7 +57,7 @@
     </div>
   </div>
   <div class="phone"><div class="screen">
-    <div class="pstatus"><div class="me"><i style="background:#ff7a00"></i>ALEX</div><div class="pos">P1<small>/6</small></div></div>
+    <div class="pstatus"><div class="me"><i style="background:#dc0000"></i>ALEX · LEC 16</div><div class="pos">P1<small>/6</small></div></div>
     <div class="result"><b>CORRECT!</b><span>Redline on Alaska · +4</span></div>
     <div class="answer-line">Correct answer: <b>Alaska</b></div>
     <div class="stat"><div><small>WAS</small><b>P5</b></div><div style="font-size:26px;color:var(--good)">▲</div><div><small>NOW</small><b>P1</b></div></div>
@@ -65,27 +65,30 @@
   </div></div>
 </div>
 <script type="module">
-  import { loadCircuit, buildScene, TEAM } from './cota3d.js';
+  import { loadCircuit, buildScene } from './cota3d.js';
+  import { loadGrid, accent } from './grid2026.js';
   await document.fonts.load('italic 900 92px "Titillium Web"');
-  const circuit = await loadCircuit();
+  const [circuit, grid] = await Promise.all([loadCircuit(), loadGrid()]);
+  const CAR = { JO: 'NOR', SAM: 'VER', ALEX: 'LEC', RIA: 'ANT', MO: 'ALO', KAI: 'PER' };
   const drivers = [
     { name: 'ALEX', dist: 5, r: 'REDLINE +4', c: 'GOOD', d: '+4' }, { name: 'RIA', dist: 5, r: 'PUSH +2', c: 'GOOD', d: '+2' },
     { name: 'KAI', dist: 4, r: 'PUSH +2', c: 'GOOD' }, { name: 'JO', dist: 3, r: 'MISS · 0', c: 'BAD' },
     { name: 'MO', dist: 2, r: 'CRUISE +1', c: 'GOOD' }, { name: 'SAM', dist: 0, r: 'SPUN −2', c: 'SPIN', spin: 2.2 },
   ];
+  drivers.forEach(d => { const c = grid.byCode[CAR[d.name]]; Object.assign(d, c, { code: CAR[d.name], color: accent(c.team) }); });
   const view = buildScene({
     canvas: gl, width: 1280, height: 720, circuit, drivers,
     trails: [{ name: 'ALEX', from: 4.55, to: 5 }, { name: 'RIA', from: 4.7, to: 5 }],
     cam: { fov: 30, chase: { name: 'ALEX', fwd: 15, side: -9, up: 1.5, lookFwd: -3, lookSide: 3, lookY: 0.9 }, shadowSize: 120, sunAzimuth: 250, sunElevation: 24 },
   });
   const mv = { ALEX: 4, RIA: 1, KAI: 1, JO: -2, MO: 1, SAM: -2 };
-  tower.innerHTML = drivers.map((d, i) => `<div class="mt"><span class="p ${i ? '' : 'lead'}">${i + 1}</span><i style="background:${TEAM[d.name]}"></i>
-    <span class="n">${d.name}${mv[d.name] ? ` <span style="font-size:11px;color:${mv[d.name] > 0 ? 'var(--good)' : 'var(--bad)'}">${mv[d.name] > 0 ? '▲' : '▼'}${Math.abs(mv[d.name])}</span>` : ''}</span>
+  tower.innerHTML = drivers.map((d, i) => `<div class="mt"><span class="p ${i ? '' : 'lead'}">${i + 1}</span><i style="background:${d.color}"></i>
+    <span class="n">${d.code} <small style="font-size:11px;color:var(--dim);font-weight:600">${d.name}</small>${mv[d.name] ? ` <span style="font-size:11px;color:${mv[d.name] > 0 ? 'var(--good)' : 'var(--bad)'}">${mv[d.name] > 0 ? '▲' : '▼'}${Math.abs(mv[d.name])}</span>` : ''}</span>
     <span class="g"></span><span class="chip ${d.c}">${d.r}</span></div>`).join('');
   tags.innerHTML = drivers.filter(d => d.d).map(d => {
     const s = view.project(d.name, 1.9);
     if (!s.visible) return '';
-    return `<div class="tag3d" style="left:${s.x}px;top:${s.y}px"><i style="background:${TEAM[d.name]}"></i>${d.name}<span class="d" style="color:var(--good)">${d.d}</span></div>`;
+    return `<div class="tag3d" style="left:${s.x}px;top:${s.y}px"><i style="background:${d.color}"></i>${d.code} <span style="color:var(--dim);font-weight:600">${d.name}</span><span class="d" style="color:var(--good)">${d.d}</span></div>`;
   }).join('');
   window.__ready = true;
 </script>
