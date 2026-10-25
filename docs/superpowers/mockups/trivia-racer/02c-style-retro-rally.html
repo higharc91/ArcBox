@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Archivo:wght@500;700;800;900&display=swap" rel="stylesheet">
+<script src="kit.js"></script>
+<style>
+  :root { --paper: #f4ead5; --paper2: #eadcbf; --ink: #2b1d14; --dim: #8a7560; --asphalt: #3a2e27;
+          --orange: #e8572a; --amber: #f2a541; --teal: #1f7a74; --cream: #fff7e6; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: #1f1712; color: var(--ink); font-family: Archivo, sans-serif; padding: 40px; width: 1760px; }
+  .label { font-weight: 800; font-size: 15px; letter-spacing: 3px; color: #b9a58c; margin-bottom: 18px; }
+  .label b { color: var(--amber); }
+  .row { display: flex; gap: 40px; align-items: flex-start; }
+
+  .tv { width: 1280px; height: 720px; border-radius: 14px; overflow: hidden; position: relative; padding: 26px 36px 26px;
+        background: radial-gradient(ellipse at 30% 20%, var(--paper), var(--paper2)); display: flex; flex-direction: column; gap: 16px;
+        box-shadow: 0 30px 80px rgba(0,0,0,.6); }
+  .tv::before { content: ''; position: absolute; inset: 0; opacity: .35; pointer-events: none; mix-blend-mode: multiply;
+                background-image: radial-gradient(rgba(80,50,20,.18) 1px, transparent 1px); background-size: 4px 4px; }
+  .stripes { position: absolute; right: -60px; top: 0; width: 420px; height: 120px; transform: skewX(-24deg);
+             background: linear-gradient(90deg, var(--orange) 0 33%, var(--amber) 0 66%, var(--teal) 0); opacity: .95; }
+  .stripes::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent 0 28%, var(--paper) 28% 33.3%); }
+  .top { display: flex; align-items: flex-end; gap: 24px; position: relative; }
+  .logo { font: 64px 'Racing Sans One'; line-height: .85; color: var(--orange); text-shadow: 3px 3px 0 var(--ink); letter-spacing: 1px; }
+  .lap { font-weight: 900; font-size: 15px; letter-spacing: 3px; color: var(--dim); padding-bottom: 6px; }
+  .lap b { color: var(--ink); }
+  .clock { position: absolute; right: 34px; top: 18px; z-index: 2; width: 92px; height: 92px; border-radius: 50%; background: var(--ink); color: var(--cream);
+           display: grid; place-items: center; box-shadow: 0 0 0 5px var(--cream), 0 0 0 8px var(--ink); }
+  .clock b { font: 44px 'Racing Sans One'; line-height: 1; }
+
+  .qcard { position: relative; background: var(--cream); border: 3px solid var(--ink); border-radius: 14px; padding: 12px 20px; box-shadow: 6px 6px 0 var(--ink);
+           display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: center; }
+  .cat { background: var(--teal); color: var(--cream); border-radius: 10px; padding: 8px 14px; text-align: center; font-weight: 900; font-size: 13px; letter-spacing: 2px; line-height: 1.3; }
+  .cat .stars { color: var(--amber); font-size: 16px; letter-spacing: 3px; }
+  .q { font-weight: 900; font-size: 34px; letter-spacing: -.5px; line-height: 1.1; }
+
+  .track { flex: 1; background: var(--asphalt); border: 3px solid var(--ink); border-radius: 14px; padding: 10px 40px 10px 14px; position: relative;
+           display: flex; flex-direction: column; box-shadow: 6px 6px 0 var(--ink); }
+  .track::after { content: ''; position: absolute; right: 10px; top: 8px; bottom: 8px; width: 22px; border-radius: 3px;
+                  background: repeating-conic-gradient(var(--cream) 0 25%, var(--ink) 0 50%) 0 0 / 11px 11px; }
+  .lane { flex: 1; position: relative; display: grid; grid-template-columns: 110px 1fr; align-items: center; }
+  .lane + .lane { border-top: 2px dashed rgba(255,247,230,.25); }
+  .who { display: flex; align-items: center; gap: 8px; color: var(--cream); font-weight: 900; font-size: 18px; letter-spacing: 1px; }
+  .roundel { width: 30px; height: 30px; border-radius: 50%; background: var(--cream); color: var(--ink); display: grid; place-items: center; font: 17px 'Racing Sans One'; }
+  .road { position: relative; height: 100%; }
+  .car { position: absolute; top: 50%; transform: translate(-100%, -50%); width: 70px; height: 31px; }
+  .car-svg { width: 100%; height: 100%; display: block; filter: drop-shadow(2px 2px 0 rgba(0,0,0,.45)); }
+  .thr { position: absolute; top: 50%; transform: translateY(-50%) rotate(-3deg); font-weight: 900; font-size: 12px; letter-spacing: 1.5px; padding: 3px 9px; border-radius: 4px; border: 2px solid var(--ink); }
+  .thr.CRUISE { background: var(--paper2); color: var(--dim); }
+  .thr.PUSH { background: var(--amber); color: var(--ink); }
+  .thr.REDLINE { background: var(--orange); color: var(--cream); }
+
+  .answers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; position: relative; }
+  .ans { background: var(--cream); border: 3px solid var(--ink); border-radius: 12px; box-shadow: 4px 4px 0 var(--ink); height: 56px;
+         display: flex; align-items: center; gap: 12px; padding: 0 12px; font-weight: 800; font-size: 21px; }
+  .ans .k { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font: 20px 'Racing Sans One'; color: var(--cream); }
+
+  .phone { width: 340px; height: 720px; border-radius: 44px; padding: 14px; background: var(--ink); box-shadow: 0 30px 80px rgba(0,0,0,.6); }
+  .screen { height: 100%; border-radius: 32px; overflow: hidden; background: var(--paper); display: flex; flex-direction: column; position: relative; }
+  .pstripe { height: 16px; background: linear-gradient(90deg, var(--orange) 0 33%, var(--amber) 0 66%, var(--teal) 0); margin-top: 40px; }
+  .pme { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px 8px; }
+  .pme .id { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 20px; }
+  .pme .roundel { background: var(--ink); color: var(--cream); }
+  .pme .pos { font: 30px 'Racing Sans One'; } .pme .pos small { font: 800 13px Archivo; color: var(--dim); }
+  .pbet { margin: 6px 16px; background: var(--orange); color: var(--cream); border: 3px solid var(--ink); border-radius: 12px; box-shadow: 4px 4px 0 var(--ink);
+          padding: 8px 14px; display: flex; justify-content: space-between; align-items: center; }
+  .pbet b { font: 28px 'Racing Sans One'; } .pbet span { font-weight: 800; font-size: 12px; text-align: right; line-height: 1.25; }
+  .pq { padding: 14px 18px 10px; } .pq small { font-weight: 900; font-size: 11px; letter-spacing: 2px; color: var(--teal); }
+  .pq div { font-weight: 900; font-size: 22px; line-height: 1.15; margin-top: 4px; }
+  .pans { display: flex; flex-direction: column; gap: 10px; padding: 0 16px; }
+  .pbtn { background: var(--cream); border: 3px solid var(--ink); border-radius: 12px; box-shadow: 4px 4px 0 var(--ink); height: 60px;
+          display: flex; align-items: center; gap: 12px; padding: 0 12px; font-weight: 800; font-size: 19px; }
+  .pbtn .k { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font: 19px 'Racing Sans One'; color: var(--cream); }
+  .ptime { margin: auto 18px 26px; height: 12px; border: 3px solid var(--ink); border-radius: 8px; overflow: hidden; background: var(--cream); }
+  .ptime i { display: block; width: 60%; height: 100%; background: var(--teal); }
+</style>
+</head>
+<body>
+<div class="label">STYLE C · <b>RETRO RALLY</b> — 70s livery stripes, warm paper, bold sticker shapes</div>
+<div class="row">
+  <div class="tv">
+    <div class="stripes"></div>
+    <div class="clock"><b>9</b></div>
+    <div class="top"><div class="logo">Redline</div><div class="lap">LAP <b>2</b> OF 3 · QUESTION <b>7</b></div></div>
+    <div class="qcard">
+      <div class="cat">SCIENCE &amp;<br>NATURE<div class="stars">★★★</div></div>
+      <div class="q">Which planet has the most known moons?</div>
+    </div>
+    <div class="track" id="track"></div>
+    <div class="answers" id="answers"></div>
+  </div>
+
+  <div class="phone"><div class="screen">
+    <div class="pstripe"></div>
+    <div class="pme"><div class="id"><span class="roundel">5</span>MO</div><div class="pos">P6<small> of 6</small></div></div>
+    <div class="pbet"><b>Redline!</b><span>+4 if right<br>spin out if wrong</span></div>
+    <div class="pq"><small>SCIENCE &amp; NATURE · ★★★</small><div>Which planet has the most known moons?</div></div>
+    <div class="pans" id="pans"></div>
+    <div class="ptime"><i></i></div>
+  </div></div>
+</div>
+<script>
+  const livery = ['#e8572a', '#1f7a74', '#f2a541', '#d9c7a3', '#8bb8a8', '#c4442a'];
+  const keyCol = ['#e8572a', '#1f7a74', '#f2a541', '#2b1d14'];
+  const r = ranks();
+  track.innerHTML = RACE.drivers.map((d, i) => {
+    const x = 6 + d.pos / RACE.finish * 86;
+    return `<div class="lane"><div class="who"><span class="roundel">${i + 1}</span>${d.name}</div><div class="road">
+      <div class="car" style="left:${x}%">${carSvg(livery[i], { tyre: '#1a120d', cockpit: '#fff7e6'})}</div>
+      <div class="thr ${d.throttle}" style="left:calc(${x}% + 12px)">${d.throttle}</div></div></div>`;
+  }).join('');
+  answers.innerHTML = RACE.answers.map((a, i) => `<div class="ans"><span class="k" style="background:${keyCol[i]}">${'ABCD'[i]}</span>${a}</div>`).join('');
+  pans.innerHTML = RACE.answers.map((a, i) => `<div class="pbtn"><span class="k" style="background:${keyCol[i]}">${'ABCD'[i]}</span>${a}</div>`).join('');
+</script>
+</body>
+</html>

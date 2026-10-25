@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,600;0,700;0,900;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="broadcast.css">
+<script src="kit.js"></script><script src="broadcast.js"></script>
+<style>
+  .result { margin: 6px 16px 0; padding: 18px; background: var(--bad); }
+  .result b { display: block; font: italic 900 40px 'Titillium Web'; line-height: 1; }
+  .result span { font-weight: 700; font-size: 15px; }
+  .stat { margin: 10px 16px 0; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; background: rgba(255,255,255,.06); border: 1px solid var(--edge); padding: 14px; text-align: center; }
+  .stat small { display: block; font-weight: 700; font-size: 11px; letter-spacing: 2px; color: var(--dim); }
+  .stat b { font-weight: 900; font-size: 34px; }
+  .limiter { margin: 10px 16px 0; padding: 12px 14px; border: 1px dashed rgba(255,255,255,.3); font-weight: 700; font-size: 15px; display: flex; gap: 10px; align-items: center; }
+  .limiter i { font-style: normal; background: #fff; color: #111; font-weight: 900; font-size: 11px; letter-spacing: 1.5px; padding: 3px 7px; }
+  .answer-line { margin: 10px 16px 0; color: var(--dim); font-size: 14px; font-weight: 600; }
+  .answer-line b { color: var(--good); }
+</style>
+</head>
+<body>
+<div class="label">PHASE 3 · <b>REVEAL</b> — correct answer lights up, cars move, the tower re-sorts with ▲▼ movers</div>
+<div class="row">
+  <div class="tv">
+    <div class="head">
+      <div class="brand">REDLINE</div>
+      <div class="qpanel">
+        <div class="qmeta"><span>Lap 7/15</span><span>Science &amp; Nature</span><span class="diff">Hard<script>document.write(diffBars(3))</script></span></div>
+        <div class="q">Which planet has the most known moons?</div>
+      </div>
+      <div class="clock"><small>LAP</small><b>7</b><div class="bar"><i style="width:46%"></i></div></div>
+    </div>
+    <div class="race" id="race"></div>
+    <div class="answers" id="answers"></div>
+  </div>
+
+  <div class="phone"><div class="screen">
+    <div class="pstatus"><div class="me"><i style="background:#e8002d"></i>SAM</div><div class="pos">P5<small>/6</small></div></div>
+    <div class="result"><b>SPUN OUT</b><span>Redline gamble on Uranus · −2</span></div>
+    <div class="answer-line">Correct answer: <b>Saturn</b></div>
+    <div class="stat"><div><small>WAS</small><b>P3</b></div><div style="font-size:26px;color:var(--bad)">▼</div><div><small>NOW</small><b>P5</b></div></div>
+    <div class="limiter"><i>PIT LIMITER</i>Next lap you're locked to Cruise.</div>
+    <div class="ptimer"><span style="color:var(--dim);font-weight:700;font-size:14px;letter-spacing:2px">NEXT LAP IN 0:05</span></div>
+  </div></div>
+</div>
+<script>
+  renderRace(race, [
+    { name: 'JO', dist: 13, from: 13, chip: 'BAD', chipText: 'MISS · 0' },
+    { name: 'RIA', dist: 13, from: 11, chip: 'GOOD', chipText: 'PUSH +2', delta: '+2' },
+    { name: 'KAI', dist: 11, from: 7, chip: 'GOOD', chipText: 'REDLINE +4', delta: '+4', mv: 2 },
+    { name: 'ALEX', dist: 10, from: 8, chip: 'GOOD', chipText: 'PUSH +2', delta: '+2' },
+    { name: 'SAM', dist: 8, from: 10, chip: 'SPIN', chipText: 'SPUN −2', delta: '−2', spun: true, mv: -2 },
+    { name: 'MO', dist: 8, from: 4, chip: 'GOOD', chipText: 'REDLINE +4', delta: '+4' },
+  ], { towerRight: 'GAP · RESULT' });
+  const picks = [['JO'], ['RIA', 'KAI', 'ALEX', 'MO'], ['SAM'], []];
+  answers.innerHTML = RACE.answers.map((a, i) => `<div class="ans ${i === 1 ? 'right' : 'wrong'}"><span class="k">${'ABCD'[i]}</span>${a}
+    <div class="who">${picks[i].map(n => `<i style="background:${TEAM[n]}"></i>`).join('')}</div></div>`).join('');
+</script>
+</body>
+</html>

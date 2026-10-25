@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,600;0,700;0,900;1,900&display=swap" rel="stylesheet">
+<script src="kit.js"></script>
+<style>
+  :root { --ink: #fff; --dim: #9a9aa8; --glass: rgba(21,21,30,.86); --edge: rgba(255,255,255,.09); --red: #e10600; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: #0a0a0f; color: var(--ink); font-family: 'Titillium Web', sans-serif; padding: 40px; width: 1760px; }
+  .label { font-weight: 700; font-size: 15px; letter-spacing: 3px; color: var(--dim); margin-bottom: 18px; }
+  .label b { color: var(--red); }
+  .row { display: flex; gap: 40px; align-items: flex-start; }
+
+  .tv { width: 1280px; height: 720px; border-radius: 14px; overflow: hidden; position: relative; padding: 30px 36px;
+        background:
+          repeating-linear-gradient(115deg, rgba(255,255,255,.018) 0 2px, transparent 2px 22px),
+          radial-gradient(ellipse 70% 80% at 85% 20%, #2a2a3a, transparent 70%),
+          linear-gradient(160deg, #1c1c26, #0b0b10);
+        display: grid; grid-template-rows: auto 1fr auto; gap: 18px; box-shadow: 0 0 0 1px var(--edge), 0 30px 80px rgba(0,0,0,.6); }
+
+  .head { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: stretch; }
+  .brand { background: var(--red); padding: 0 18px; display: flex; align-items: center; font: italic 900 30px 'Titillium Web'; letter-spacing: 1px;
+           clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%); padding-right: 30px; }
+  .qpanel { background: var(--glass); border: 1px solid var(--edge); border-left: 4px solid var(--red); padding: 10px 20px; }
+  .qmeta { display: flex; gap: 14px; font-weight: 700; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: var(--dim); }
+  .qmeta .diff { color: #fff; }
+  .qmeta .diff i { display: inline-block; width: 14px; height: 5px; background: #fff; margin-left: 3px; transform: skewX(-20deg); }
+  .qmeta .diff i.off { background: rgba(255,255,255,.2); }
+  .q { font-weight: 700; font-size: 34px; line-height: 1.15; }
+  .clock { background: var(--glass); border: 1px solid var(--edge); width: 128px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+  .clock small { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--dim); }
+  .clock b { font-weight: 900; font-size: 46px; line-height: 1; font-variant-numeric: tabular-nums; }
+  .clock .bar { width: 80%; height: 4px; background: rgba(255,255,255,.12); margin-top: 6px; }
+  .clock .bar i { display: block; width: 60%; height: 100%; background: var(--red); }
+
+  .race { display: grid; grid-template-columns: 300px 1fr; background: var(--glass); border: 1px solid var(--edge); }
+  .tower { border-right: 1px solid var(--edge); display: flex; flex-direction: column; }
+  .tower .th { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--dim); padding: 8px 14px; border-bottom: 1px solid var(--edge); display: flex; justify-content: space-between; }
+  .lanes { display: flex; flex-direction: column; }
+  #tower, #lanes { flex: 1; display: flex; flex-direction: column; }
+  .trow, .lrow { flex: 1; border-bottom: 1px solid var(--edge); }
+  .trow:last-child, .lrow:last-child { border-bottom: 0; }
+  .trow { display: grid; grid-template-columns: 40px 6px 1fr auto auto; gap: 10px; align-items: center; padding-right: 12px; }
+  .trow .p { height: 100%; display: grid; place-items: center; font-weight: 900; font-size: 22px; background: rgba(255,255,255,.04); }
+  .trow:first-child .p { background: #fff; color: #111; }
+  .trow .c { height: 60%; }
+  .trow .n { font-weight: 700; font-size: 22px; letter-spacing: 1px; }
+  .trow .gap { font-weight: 600; font-size: 16px; color: var(--dim); font-variant-numeric: tabular-nums; }
+  .chip { font-weight: 900; font-size: 11px; letter-spacing: 1.5px; padding: 3px 8px; border-radius: 2px; min-width: 72px; text-align: center; }
+  .chip.CRUISE { background: rgba(255,255,255,.1); color: var(--dim); }
+  .chip.PUSH { background: #fff; color: #111; }
+  .chip.REDLINE { background: var(--red); color: #fff; }
+  .tracklane { display: flex; flex-direction: column; }
+  .tracklane .th { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--dim); padding: 8px 18px; border-bottom: 1px solid var(--edge); display: flex; justify-content: space-between; }
+  .lrow { position: relative; margin: 0 18px; }
+  .lrow::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: rgba(255,255,255,.1); }
+  .lrow .fill { position: absolute; left: 0; top: 50%; height: 2px; transform: translateY(-50%); }
+  .lrow .flag { position: absolute; right: 0; top: 14px; bottom: 14px; width: 14px; background: repeating-conic-gradient(#fff 0 25%, #222 0 50%) 0 0 / 7px 7px; }
+  .lrow .car { position: absolute; top: 50%; transform: translate(-100%, -50%); width: 58px; height: 25px; }
+  .car-svg { width: 100%; height: 100%; display: block; }
+  .ticks { position: absolute; inset: 0; background: repeating-linear-gradient(90deg, rgba(255,255,255,.06) 0 1px, transparent 1px 5%); pointer-events: none; }
+
+  .answers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .ans { background: var(--glass); border: 1px solid var(--edge); display: flex; align-items: center; gap: 14px; height: 58px; font-weight: 700; font-size: 22px; }
+  .ans .k { height: 100%; width: 52px; display: grid; place-items: center; font-weight: 900; font-size: 22px; background: rgba(255,255,255,.08); }
+
+  .phone { width: 340px; height: 720px; border-radius: 44px; padding: 14px; background: #24242e; box-shadow: 0 0 0 1px var(--edge), 0 30px 80px rgba(0,0,0,.6); }
+  .screen { height: 100%; border-radius: 32px; overflow: hidden; background: linear-gradient(180deg, #17171f, #0b0b10); display: flex; flex-direction: column; }
+  .pstatus { padding: 46px 20px 14px; display: flex; justify-content: space-between; align-items: center; }
+  .pstatus .me { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; }
+  .pstatus .me i { width: 5px; height: 26px; background: #b6babd; }
+  .pstatus .pos { font-weight: 900; font-size: 26px; } .pstatus .pos small { font-size: 13px; color: var(--dim); font-weight: 700; margin-left: 3px; }
+  .pbet { background: var(--red); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; }
+  .pbet b { font: italic 900 24px 'Titillium Web'; letter-spacing: 1px; } .pbet span { font-weight: 600; font-size: 13px; text-align: right; line-height: 1.2; }
+  .pq { padding: 18px 20px 10px; }
+  .pq small { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--dim); text-transform: uppercase; }
+  .pq div { font-weight: 700; font-size: 23px; line-height: 1.2; margin-top: 4px; }
+  .pans { display: flex; flex-direction: column; gap: 8px; padding: 0 16px; }
+  .pbtn { display: flex; align-items: center; gap: 14px; height: 64px; background: rgba(255,255,255,.06); border: 1px solid var(--edge); font-weight: 700; font-size: 20px; }
+  .pbtn .k { width: 48px; height: 100%; display: grid; place-items: center; font-weight: 900; background: rgba(255,255,255,.08); }
+  .ptimer { margin-top: auto; padding: 16px 20px 26px; display: flex; align-items: center; gap: 12px; font-weight: 900; font-size: 18px; }
+  .ptimer .bar { flex: 1; height: 4px; background: rgba(255,255,255,.12); } .ptimer .bar i { display: block; width: 60%; height: 100%; background: var(--red); }
+</style>
+</head>
+<body>
+<div class="label">STYLE B · <b>BROADCAST</b> — F1-TV graphics package, timing tower, sharp and clean</div>
+<div class="row">
+  <div class="tv">
+    <div class="head">
+      <div class="brand">REDLINE</div>
+      <div class="qpanel">
+        <div class="qmeta"><span>Lap 2/3 · Q7</span><span>Science &amp; Nature</span><span class="diff">Hard<i></i><i></i><i></i></span></div>
+        <div class="q">Which planet has the most known moons?</div>
+      </div>
+      <div class="clock"><small>TIME</small><b>0:09</b><div class="bar"><i></i></div></div>
+    </div>
+    <div class="race">
+      <div class="tower"><div class="th"><span>POS · DRIVER</span><span>GAP · THROTTLE</span></div><div id="tower"></div></div>
+      <div class="tracklane"><div class="th"><span>START</span><span>FINISH · 20</span></div><div id="lanes" style="position:relative"></div></div>
+    </div>
+    <div class="answers" id="answers"></div>
+  </div>
+
+  <div class="phone"><div class="screen">
+    <div class="pstatus"><div class="me"><i></i>MO</div><div class="pos">P6<small>/6</small></div></div>
+    <div class="pbet"><b>REDLINE</b><span>+4 if right<br>spin out if wrong</span></div>
+    <div class="pq"><small>Science &amp; Nature · Hard</small><div>Which planet has the most known moons?</div></div>
+    <div class="pans" id="pans"></div>
+    <div class="ptimer"><span>0:09</span><div class="bar"><i></i></div></div>
+  </div></div>
+</div>
+<script>
+  const team = { JO: '#3671c6', SAM: '#e8002d', ALEX: '#ff8000', RIA: '#27f4d2', MO: '#b6babd', KAI: '#229971' };
+  const sorted = [...RACE.drivers].sort((a, b) => b.pos - a.pos);
+  const lead = sorted[0].pos;
+  tower.innerHTML = sorted.map((d, i) => `<div class="trow"><div class="p">${i + 1}</div><div class="c" style="background:${team[d.name]}"></div>
+      <div class="n">${d.name}</div><div class="gap">${i ? '−' + (lead - d.pos) : 'LEAD'}</div><div class="chip ${d.throttle}">${d.throttle}</div></div>`).join('');
+  lanes.innerHTML = '<div class="ticks"></div>' + sorted.map(d => {
+    const x = 6 + d.pos / RACE.finish * 88;
+    return `<div class="lrow"><div class="fill" style="width:${x - 4}%;background:${team[d.name]}"></div><div class="flag"></div>
+      <div class="car" style="left:${x}%">${carSvg(team[d.name], {tyre:'#050507', cockpit:'#111'})}</div></div>`;
+  }).join('');
+  answers.innerHTML = RACE.answers.map((a, i) => `<div class="ans"><span class="k">${'ABCD'[i]}</span>${a}</div>`).join('');
+  pans.innerHTML = RACE.answers.map((a, i) => `<div class="pbtn"><span class="k">${'ABCD'[i]}</span>${a}</div>`).join('');
+</script>
+</body>
+</html>

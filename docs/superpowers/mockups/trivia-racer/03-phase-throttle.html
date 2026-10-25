@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,600;0,700;0,900;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="broadcast.css">
+<script src="kit.js"></script><script src="broadcast.js"></script>
+<style>
+  .hidden-q { display: flex; gap: 10px; margin-top: 8px; }
+  .hidden-q i { height: 22px; background: rgba(255,255,255,.1); display: block; }
+  .callout { display: flex; align-items: center; justify-content: space-between; background: var(--glass); border: 1px solid var(--edge); height: 58px; padding: 0 20px; }
+  .callout b { font: italic 900 26px 'Titillium Web'; letter-spacing: 1px; }
+  .callout span { color: var(--dim); font-weight: 700; letter-spacing: 2px; font-size: 14px; }
+  .callout .legend { display: flex; gap: 10px; }
+</style>
+</head>
+<body>
+<div class="label">PHASE 1 · <b>THROTTLE</b> — category + difficulty only; bets are secret until the question drops</div>
+<div class="row">
+  <div class="tv">
+    <div class="head">
+      <div class="brand">REDLINE</div>
+      <div class="qpanel">
+        <div class="qmeta"><span>Lap 7/15</span><span>Science &amp; Nature</span><span class="diff">Hard<script>document.write(diffBars(3))</script></span></div>
+        <div class="q">Choose your throttle</div>
+      </div>
+      <div class="clock"><small>TIME</small><b>0:06</b><div class="bar"><i style="width:60%"></i></div></div>
+    </div>
+    <div class="race" id="race"></div>
+    <div class="callout">
+      <span>4 OF 6 LOCKED · QUESTION DROPS WHEN ALL DRIVERS ARE IN</span>
+      <div class="legend"><div class="chip CRUISE">CRUISE +1 / 0</div><div class="chip PUSH">PUSH +2 / −1</div><div class="chip REDLINE">REDLINE +4 / SPIN</div></div>
+    </div>
+  </div>
+
+  <div class="phone"><div class="screen">
+    <div class="pstatus"><div class="me"><i style="background:#b6babd"></i>MO</div><div class="pos">P6<small>/6</small></div></div>
+    <div class="pq"><small>Lap 7 · Science &amp; Nature · Hard</small><div>How hard do you push?</div></div>
+    <div class="pbtns">
+      <div class="tbtn CRUISE"><b>CRUISE</b><span>+1 if right<br>nothing lost</span></div>
+      <div class="tbtn PUSH"><b>PUSH</b><span>+2 if right<br>−1 if wrong</span></div>
+      <div class="tbtn REDLINE"><b>REDLINE</b><span>+4 if right<br>spin out if wrong</span></div>
+    </div>
+    <div class="hint">Spin out = back 2 and pit limiter next lap (Cruise only). No pick = Cruise.</div>
+    <div class="ptimer"><span>0:06</span><div class="bar"><i style="width:60%"></i></div></div>
+  </div></div>
+</div>
+<script>
+  renderRace(race, [
+    { name: 'JO', dist: 13, chip: 'LOCKED', chipText: 'LOCKED ✓' },
+    { name: 'RIA', dist: 11, chip: 'WAIT', chipText: 'CHOOSING' },
+    { name: 'SAM', dist: 10, chip: 'LOCKED', chipText: 'LOCKED ✓' },
+    { name: 'ALEX', dist: 8, chip: 'LOCKED', chipText: 'LOCKED ✓' },
+    { name: 'KAI', dist: 7, chip: 'LOCKED', chipText: 'LOCKED ✓' },
+    { name: 'MO', dist: 4, chip: 'WAIT', chipText: 'CHOOSING' },
+  ], { towerRight: 'GAP · STATUS' });
+</script>
+</body>
+</html>
