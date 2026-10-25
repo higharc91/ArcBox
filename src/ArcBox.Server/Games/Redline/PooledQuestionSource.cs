@@ -28,7 +28,8 @@ public sealed class PooledQuestionSource(
         if (count <= 0)
             return [];
 
-        var result = new List<TriviaQuestion>(count);
+        // Cap the initial capacity so an absurd count cannot fail on the up-front allocation.
+        var result = new List<TriviaQuestion>(Math.Min(count, 1024));
         if (_enabled)
         {
             try
@@ -57,12 +58,40 @@ public sealed class PooledQuestionSource(
         var pack = FallbackQuestions.All;
         lock (_gate)
         {
+            var taken = new List<int>(Math.Min(count, pack.Count));
             for (var i = 0; i < count; i++)
             {
                 if (_cursor >= _order.Length)
+                {
                     Reshuffle(pack.Count);
-                into.Add(pack[_order[_cursor++]]);
+                    // A reshuffle mid-call must not re-serve what this call already took from the old cycle's tail.
+                    // Possible only when the call fits in the pack; a larger call repeats unavoidably.
+                    if (i > 0 && count <= pack.Count)
+                        MoveBeyondPrefix(taken, count - i);
+                }
+
+                var index = _order[_cursor++];
+                into.Add(pack[index]);
+                taken.Add(index);
             }
+        }
+    }
+
+    // Swaps every index in `avoid` that sits in the first `prefix` slots of the fresh order with a slot past the
+    // prefix that holds an index not in `avoid`. The order stays a permutation, so the cycle still covers the pack.
+    // When |avoid| + prefix <= pack size there are always enough such slots past the prefix.
+    private void MoveBeyondPrefix(List<int> avoid, int prefix)
+    {
+        var avoidSet = new HashSet<int>(avoid);
+        var next = prefix;
+        for (var p = 0; p < prefix; p++)
+        {
+            if (!avoidSet.Contains(_order[p]))
+                continue;
+            while (avoidSet.Contains(_order[next]))
+                next++;
+            (_order[p], _order[next]) = (_order[next], _order[p]);
+            next++;
         }
     }
 

@@ -97,6 +97,22 @@ public class PooledQuestionSourceTests
     }
 
     [Fact]
+    public async Task Fallback_never_repeats_a_question_within_one_take_across_a_reshuffle()
+    {
+        var pool = await SeededPool.CreateAsync(50);
+        var source = Source(pool, new ListLogger(), enabled: false);
+        var pack = FallbackQuestions.All;
+
+        source.Take(11); // offset the cursor so later takes straddle the cycle boundary
+        var calls = pack.Count * 40 / 15; // crosses about forty reshuffles
+        for (var call = 0; call < calls; call++)
+        {
+            var texts = source.Take(15).Select(q => q.Text).ToList();
+            Assert.Equal(15, texts.Distinct().Count());
+        }
+    }
+
+    [Fact]
     public async Task Parallel_takes_never_share_a_pool_question()
     {
         var pool = await SeededPool.CreateAsync(400);
