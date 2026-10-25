@@ -38,7 +38,7 @@ It is a racing trivia game for 2–8 players, shown on the TV as a **realistic 3
 ### Success criteria
 1. A group plays a full race on the platform from Grid to Chequered flag, and the room returns to the lobby with the results.
 2. A race starts and completes with opentdb.com unreachable, using fallback questions.
-3. No HostView sent during the Throttle or Question phase contains any driver's throttle or answer choice. This is enforced by tests.
+3. No HostView sent during the Throttle phase contains any driver's throttle, and none sent during the Throttle or Question phase contains any driver's answer choice. This is enforced by tests.
 4. Two rooms starting races at the same moment never receive the same OpenTDB question.
 5. All game logic is covered by `GameHarness` tests that are deterministic for a fixed seed.
 6. On the TV PC (RTX 5080) the 3D scene holds **144 fps at 2560×1440** on the Ultra preset with all 22 cars. A Low preset exists for weaker machines (§4.8).

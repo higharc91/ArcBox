@@ -9,9 +9,11 @@ Reads (relative to the F1DB checkout):
   src/data/drivers/<id>.yml                        name, abbreviation
 
 The team set and order, the livery blocks and every other top-level key of the
-existing grid file are kept. Drivers, codes and numbers come from the latest
-race result; points from the standings; aiSkill = 0.85 + 0.30*sqrt(points/leader),
-rounded to 3 places. Standard library only (a tiny regex reader stands in for YAML).
+existing grid file are kept, as is the display name of any driver id already in
+it (F1DB's name is used only for new ids, so e.g. "Alex Albon" stays as written).
+Drivers, codes and numbers come from the latest race result; points from the
+standings; aiSkill = 0.85 + 0.30*sqrt(points/leader), rounded to 3 places.
+Standard library only (a tiny regex reader stands in for YAML).
 F1DB data is CC BY 4.0, see Redline.Logic/THIRD_PARTY.md.
 """
 import argparse
@@ -114,7 +116,7 @@ def build(root, grid):
             pts = standings.get(did, 0.0)
             prev = old.get(did)
             drivers.append({
-                "id": did, "name": name, "code": code, "number": int(r["driverNumber"]),
+                "id": did, "name": prev[2]["name"] if prev else name, "code": code, "number": int(r["driverNumber"]),
                 "tcam": prev[2]["tcam"] if prev else "black",
                 "points": pts, "aiSkill": ai_skill(pts, leader),
             })
