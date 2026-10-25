@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,600;0,700;0,900;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="broadcast.css">
+<link rel="stylesheet" href="hud3d.css">
+<script>window.__needs = { three: true };</script>
+<script type="importmap">{ "imports": { "three": "./node_modules/three/build/three.module.js" } }</script>
+</head>
+<body>
+<div class="label">3D · <b>QUESTION PHASE</b> — broadcast camera over the circuit; HUD composited on top; tags track each car</div>
+<div class="row">
+  <div class="tv3d">
+    <canvas id="gl"></canvas>
+    <div class="hud">
+      <div class="head">
+        <div class="brand">REDLINE</div>
+        <div class="qpanel">
+          <div class="qmeta"><span>Lap 7/15</span><span>Science &amp; Nature</span><span class="diff">Hard<i></i><i></i><i></i></span></div>
+          <div class="q">Which planet has the most known moons?</div>
+        </div>
+        <div class="clock"><small>TIME</small><b>0:09</b><div class="bar"><i style="width:45%"></i></div></div>
+      </div>
+      <div class="mini-tower" id="tower"></div>
+      <div class="answers" id="answers"></div>
+      <div id="tags"></div>
+    </div>
+  </div>
+  <div class="phone"><div class="screen">
+    <div class="pstatus"><div class="me"><i style="background:#b6babd"></i>MO</div><div class="pos">P6<small>/6</small></div></div>
+    <div class="pbet3"><b>REDLINE</b><span>+4 if right<br>spin out if wrong</span></div>
+    <div class="pq"><small>Science &amp; Nature · Hard</small><div>Which planet has the most known moons?</div></div>
+    <div class="pans" id="pans"></div>
+    <div class="ptimer"><span>0:09</span><div class="bar"><i style="width:45%"></i></div></div>
+  </div></div>
+</div>
+<script type="module">
+  import { buildScene, TEAM } from './track3d.js';
+  await document.fonts.load('italic 900 92px "Titillium Web"');
+  const drivers = [
+    { name: 'JO', dist: 13, thr: 'CRUISE' }, { name: 'RIA', dist: 11, thr: 'PUSH' }, { name: 'SAM', dist: 10, thr: 'REDLINE' },
+    { name: 'ALEX', dist: 8, thr: 'PUSH' }, { name: 'KAI', dist: 7, thr: 'REDLINE' }, { name: 'MO', dist: 4, thr: 'REDLINE' },
+  ];
+  const view = buildScene({
+    canvas: gl, width: 1280, height: 720, drivers,
+    cam: { fov: 30, pos: [-20, 268, 326], target: [-20, 0, 6] },
+  });
+  tower.innerHTML = drivers.map((d, i) => `<div class="mt"><span class="p ${i ? '' : 'lead'}">${i + 1}</span><i style="background:${TEAM[d.name]}"></i>
+    <span class="n">${d.name}</span><span class="g">${i ? '−' + (13 - d.dist) : 'LEAD'}</span><span class="chip ${d.thr}">${d.thr}</span></div>`).join('');
+  answers.innerHTML = ['Jupiter', 'Saturn', 'Uranus', 'Neptune'].map((a, i) => `<div class="ans"><span class="k">${'ABCD'[i]}</span>${a}</div>`).join('');
+  pans.innerHTML = ['Jupiter', 'Saturn', 'Uranus', 'Neptune'].map((a, i) => `<div class="pbtn"><span class="k">${'ABCD'[i]}</span>${a}</div>`).join('');
+  tags.innerHTML = drivers.map((d, i) => {
+    const s = view.project(d.name, 4);
+    return `<div class="tag3d" style="left:${s.x}px;top:${s.y}px"><i style="background:${TEAM[d.name]}"></i><b>${i + 1}</b>${d.name}</div>`;
+  }).join('');
+  window.__ready = true;
+</script>
+</body>
+</html>
