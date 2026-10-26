@@ -90,10 +90,13 @@ internal static class PlayerViews
         var p = d.Position;
         if (d.Outcome == RoundOutcome.Correct) return $"Correct! +{d.Distance - d.PreviousDistance} · now P{p}";
         var miss = d.Outcome == RoundOutcome.NoAnswer ? "No answer" : "Wrong answer";
-        return d.Throttle switch
+        // The distance actually lost: a loss is floored at 0, so a car at the start can lose less than the rule says.
+        var lost = d.PreviousDistance - d.Distance;
+        return (d.Throttle, lost > 0) switch
         {
-            Throttle.Redline => $"Spun out! −{rules.RedlineLoss} · pit limiter next round · now P{p}",
-            Throttle.Push => $"{miss}. −{rules.PushLoss} · now P{p}",
+            (Throttle.Redline, true) => $"Spun out! −{lost} · pit limiter next round · now P{p}",
+            (Throttle.Redline, false) => $"Spun out! Pit limiter next round · P{p}",
+            (_, true) => $"{miss}. −{lost} · now P{p}",
             _ => $"{miss}. No change · P{p}",
         };
     }

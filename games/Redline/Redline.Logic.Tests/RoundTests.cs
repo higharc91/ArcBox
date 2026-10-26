@@ -189,7 +189,7 @@ public class RoundTests
         int Pos(int p) => RedlineKit.Row(h, p).Position;
         Assert.StartsWith("Correct! +4 · now P", Msg(0));
         Assert.Equal($"Correct! +4 · now P{Pos(0)}", Msg(0));
-        Assert.Equal($"Wrong answer. −1 · now P{Pos(1)}", Msg(1));
+        Assert.Equal($"Wrong answer. No change · P{Pos(1)}", Msg(1));   // −1 floored at distance 0
         Assert.Equal($"Correct! +1 · now P{Pos(2)}", Msg(2));
         Assert.Equal($"No answer. No change · P{Pos(3)}", Msg(3));
         Assert.Equal(Header(h, 0), h.PlayerView(0).Header);
@@ -220,11 +220,36 @@ public class RoundTests
         string Msg(int p) => Assert.IsType<WaitView>(h.PlayerView(p)).Message;
         int Pos(int p) => RedlineKit.Row(h, p).Position;
         Assert.Equal($"Wrong answer. No change · P{Pos(0)}", Msg(0));
-        Assert.Equal($"No answer. −1 · now P{Pos(1)}", Msg(1));
-        Assert.Equal($"Spun out! −2 · pit limiter next round · now P{Pos(2)}", Msg(2));
-        Assert.Equal($"Spun out! −2 · pit limiter next round · now P{Pos(3)}", Msg(3));
+        // Round 1 starts at distance 0, so the losses are floored and the message says so.
+        Assert.Equal($"No answer. No change · P{Pos(1)}", Msg(1));
+        Assert.Equal($"Spun out! Pit limiter next round · P{Pos(2)}", Msg(2));
+        Assert.Equal($"Spun out! Pit limiter next round · P{Pos(3)}", Msg(3));
         Assert.Equal(RoundOutcome.NoAnswer, RedlineKit.Row(h, 1).Outcome);
         Assert.Equal(RoundOutcome.SpunOut, RedlineKit.Row(h, 2).Outcome);
+    }
+
+    [Fact]
+    public void Reveal_reports_the_distance_actually_lost()
+    {
+        var h = Round1();
+        LockAll(h, "redline");
+        RedlineKit.AnswerRight(h, 0);
+        RedlineKit.AnswerRight(h, 1);
+        h.Advance(h.Game.Rules.Question);
+        h.Advance(h.Game.Rules.Reveal);
+
+        RedlineKit.Throttle(h, 0, "push");
+        RedlineKit.Throttle(h, 1, "redline");
+        RedlineKit.Throttle(h, 2, "cruise");
+        RedlineKit.Throttle(h, 3, "cruise");
+        RedlineKit.AnswerWrong(h, 0);
+        RedlineKit.AnswerWrong(h, 1);
+        h.Advance(h.Game.Rules.Question);
+
+        string Msg(int p) => Assert.IsType<WaitView>(h.PlayerView(p)).Message;
+        int Pos(int p) => RedlineKit.Row(h, p).Position;
+        Assert.Equal($"Wrong answer. −{h.Game.Rules.PushLoss} · now P{Pos(0)}", Msg(0));
+        Assert.Equal($"Spun out! −{h.Game.Rules.RedlineLoss} · pit limiter next round · now P{Pos(1)}", Msg(1));
     }
 
     [Fact]

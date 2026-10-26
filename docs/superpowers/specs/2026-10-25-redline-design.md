@@ -155,7 +155,7 @@ Every controller view sets `Header = "P{position} · ROUND {round}/{maxRounds}"`
 | Throttle, pit limiter | `WaitView("Pit limiter: you're on Cruise this round.")` |
 | Question, unanswered | `ChoiceView(Prompt: question text, Options: a/b/c/d in shuffled order)`. The Header becomes `"{THROTTLE} · P{position} · ROUND {round}/{maxRounds}"` |
 | Question, answered | `WaitView("Answer locked. Eyes on the TV!")` |
-| Reveal | `WaitView` with one of: `"Correct! +{n} · now P{p}"`, `"Wrong answer. No change · P{p}"` (Cruise), `"Wrong answer. −1 · now P{p}"` (Push), or `"Spun out! −2 · pit limiter next round · now P{p}"` (Redline). A missing answer uses the same wording with "No answer" in place of "Wrong answer". |
+| Reveal | `WaitView` with one of: `"Correct! +{n} · now P{p}"`, `"Wrong answer. No change · P{p}"` (Cruise), `"Wrong answer. −{lost} · now P{p}"` (Push), or `"Spun out! −{lost} · pit limiter next round · now P{p}"` (Redline). `{lost}` is the distance actually lost; when the floor at 0 absorbs it, Push reads `"Wrong answer. No change · P{p}"` and Redline `"Spun out! Pit limiter next round · P{p}"` (changed 2026-10-26 after the browser playthrough showed "−1" for a car that didn't move). A missing answer uses the same wording with "No answer" in place of "Wrong answer". |
 
 **Driver Select:**
 - The phone shows `ChoiceView(Prompt: "Pick your driver", Options: one per **free** seat, id = driver code)`, with label `"#{number} {Full Name}"` and `Option.Hint` `"{Team} · {Chassis}"`.
