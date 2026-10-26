@@ -1,5 +1,6 @@
 import { useRef, useState } from "preact/hooks";
 import type { Option } from "../protocol";
+import { useSkin } from "../skins/skin";
 
 export type Send = (payload: object) => void;
 
@@ -32,12 +33,16 @@ export function useViewState<T>(viewId: string, initial: T): [T, (v: T) => void]
   return [value, (v: T) => setState({ for: viewId, value: v })];
 }
 
-/** Label on the first line, the hint as a dim second line. */
+/** Label on the first line, the hint as a dim second line; a skin may add a coloured badge in front. */
 export function OptionLabel({ option }: { option: Option }) {
+  const badge = useSkin()?.optionBadge?.(option);
   return (
-    <span class="opt-text">
-      <span class="opt-label">{option.label}</span>
-      {option.hint ? <span class="opt-hint">{option.hint}</span> : null}
-    </span>
+    <>
+      {badge ? <span class="badge" style={{ background: badge.color, color: badge.ink }}>{badge.text}</span> : null}
+      <span class="opt-text">
+        <span class="opt-label">{badge ? badge.label : option.label}</span>
+        {option.hint ? <span class="opt-hint">{option.hint}</span> : null}
+      </span>
+    </>
   );
 }

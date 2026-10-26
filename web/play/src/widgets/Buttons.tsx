@@ -1,9 +1,11 @@
 import type { ButtonsView } from "../protocol";
+import { useSkin } from "../skins/skin";
 import { OptionLabel, useSendOnce, useViewState, type WidgetProps } from "./common";
 
 export function Buttons({ view, send }: WidgetProps<ButtonsView>) {
   const [locked, fire] = useSendOnce(view.viewId, send);
   const [picked, setPicked] = useViewState<string | null>(view.viewId, null);
+  const skin = useSkin();
 
   return (
     <div class="w-buttons">
@@ -14,7 +16,7 @@ export function Buttons({ view, send }: WidgetProps<ButtonsView>) {
             type="button"
             key={b.id}
             data-id={b.id}
-            class={`tbtn${picked === b.id ? " picked" : ""}`}
+            class={["tbtn", skin?.buttonClass?.(b), picked === b.id && "picked"].filter(Boolean).join(" ")}
             disabled={locked}
             onClick={() => {
               if (fire({ pressed: b.id })) setPicked(b.id);
