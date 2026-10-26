@@ -103,6 +103,20 @@ describe("Lobby", () => {
     expect(props.onSelectGame).toHaveBeenCalledWith("redline");
   });
 
+  it("last results without a message name the winner, or the tie (seen with 6 bots on Counter)", () => {
+    const score = (playerId: string, name: string, n: number) => ({ playerId, name, score: n });
+    const { rerender } = render(
+      <Lobby lobby={lobby({ lastResults: { scores: [score("p3", "P3", 50), score("p4", "P4", 45)] } })} me="p1" {...props} />,
+    );
+    expect(screen.getByText("P3 won with 50")).toBeTruthy();
+
+    rerender(<Lobby lobby={lobby({ lastResults: { scores: [score("p3", "P3", 50), score("p4", "P4", 50), score("p2", "P2", 45)] } })} me="p1" {...props} />);
+    expect(screen.getByText("P3 and P4 tied with 50")).toBeTruthy();
+
+    rerender(<Lobby lobby={lobby({ lastResults: { scores: [score("a", "A", 7), score("b", "B", 7), score("c", "C", 7)] } })} me="p1" {...props} />);
+    expect(screen.getByText("A, B and C tied with 7")).toBeTruthy();
+  });
+
   it("shows the last results and a lobby error", () => {
     render(<Lobby lobby={lobby()} me="p1" error="Pick a game first." {...props} />);
     expect(screen.getByText("ALEX (NOR) wins the race!")).toBeTruthy();

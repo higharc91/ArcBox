@@ -12,6 +12,16 @@ const TITLES: Partial<Record<RacePhase, string>> = {
   Chequered: "Chequered flag",
 };
 
+/** The tower's right-hand column heading; Grid and Chequered show only the gap. */
+const COLUMN: Record<RacePhase, string> = {
+  DriverSelect: "SEAT",
+  Grid: "GAP",
+  Throttle: "GAP · STATUS",
+  Question: "GAP · THROTTLE",
+  Reveal: "GAP · RESULT",
+  Chequered: "GAP",
+};
+
 const OUTCOME: Record<RoundOutcome, string> = { Correct: "✓", Wrong: "✗", NoAnswer: "MISS", SpunOut: "SPIN" };
 const DIFFICULTY = { Easy: 1, Medium: 2, Hard: 3 } as const;
 const minus = (n: number) => `−${Math.abs(n)}`;
@@ -129,7 +139,7 @@ export function RedlineBoard({ view }: { view: RedlineHostView }) {
         <section class="tower">
           <div class="th">
             <span>POS · DRIVER</span>
-            <span>{phase === "DriverSelect" ? "SEAT" : phase === "Reveal" ? "GAP · RESULT" : phase === "Throttle" ? "GAP · STATUS" : "GAP · THROTTLE"}</span>
+            <span>{COLUMN[phase]}</span>
           </div>
           <div class="rows">
             {view.drivers.map((row) => <TowerRow key={row.code} row={row} view={view} leader={leader} />)}
@@ -160,9 +170,10 @@ export function RedlineBoard({ view }: { view: RedlineHostView }) {
 
           {phase === "Throttle" ? (
             <div class="legend">
-              <span class="chip CRUISE">CRUISE +1 / 0</span>
-              <span class="chip PUSH">PUSH +2 / −1</span>
-              <span class="chip REDLINE">REDLINE +4 / SPIN</span>
+              {/* No numbers: the payouts are server balance (Redline.Logic RedlineRules) and the host view doesn't carry them. */}
+              <span class="chip CRUISE">CRUISE · safe</span>
+              <span class="chip PUSH">PUSH · lose ground if wrong</span>
+              <span class="chip REDLINE">REDLINE · spin out if wrong</span>
             </div>
           ) : null}
 

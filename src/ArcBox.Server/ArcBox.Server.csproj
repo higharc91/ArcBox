@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
+    <!-- dotnet run from any directory uses the project folder as the content root, like Visual Studio and Rider,
+         so relative settings such as Web:Root (../../web/play/dist) resolve the same everywhere. -->
+    <RunWorkingDirectory>$(MSBuildProjectDirectory)</RunWorkingDirectory>
   </PropertyGroup>
 
   <ItemGroup>

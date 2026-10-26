@@ -19,6 +19,8 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
     {
         // AddRedline reads this while Program registers services, so it must be a setting, not a test service.
         builder.UseSetting("Redline:OpenTdb:Enabled", "false");
+        // The factory runs as Development, whose Web:Root is web/play/dist when it has been built; tests serve wwwroot.
+        builder.UseSetting("Web:Root", "");
         builder.ConfigureTestServices(services =>
         {
             services.RemoveAllKeyed<TimeProvider>(RoomManager.ClockKey);

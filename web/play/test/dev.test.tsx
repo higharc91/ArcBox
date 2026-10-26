@@ -55,6 +55,15 @@ describe("RedlineBoard", () => {
     expect(rowOf(container, "LEC").querySelector(".mv")!.textContent).toBe("▼1");
   });
 
+  it("throttle legend names the risk without hardcoding payouts (they come from the server's balance)", () => {
+    const { container } = render(<RedlineBoard view={sampleRedlineView("Throttle")} />);
+    const legend = container.querySelector(".legend")!.textContent!;
+    expect(legend).toContain("CRUISE");
+    expect(legend).toContain("PUSH");
+    expect(legend).toContain("REDLINE");
+    expect(legend).not.toMatch(/\d/);
+  });
+
   it("shows players, AI, gaps, the pit limiter and the team colour", () => {
     const { container } = render(<RedlineBoard view={sampleRedlineView("Question")} />);
     expect(rowOf(container, "NOR").querySelector(".who")!.textContent).toBe("JO");
@@ -133,6 +142,37 @@ describe("DevPage", () => {
     expect(t2.methods()).toEqual(["ResumeHost", "CreateRoom"]);
     expect(store.getItem("arcbox-host:BCDF")).toBeNull();
     expect(container.querySelector("iframe")!.getAttribute("src")).toContain("room=GHJK");
+  });
+
+  it("when a reconnect finds the room gone (server restarted), hosts a new room and the phones follow it", async () => {
+    const t = new FakeTransport();
+    let rooms = 0;
+    t.responders.CreateRoom = () => (++rooms === 1 ? { code: "BCDF", hostToken: "tok" } : { code: "GHJK", hostToken: "tok2" });
+    const store = new MapStore();
+    const onRoom: string[] = [];
+    const { container } = render(<DevPage transport={t} search="?phones=2" store={store} onRoom={(c) => onRoom.push(c)} />);
+    await flush();
+    await flush();
+    t.fire("LobbyChanged", { ...structuredClone(lobbyFixture), code: "BCDF" });
+    expect(container.querySelector("iframe")!.getAttribute("src")).toContain("room=BCDF");
+
+    t.responders.ResumeHost = () => { throw hubError("ResumeHost", "Room not found."); };
+    t.fireReconnected();
+    await flush();
+    await flush();
+    await flush();
+
+    expect(t.methods()).toEqual(["CreateRoom", "ResumeHost", "CreateRoom"]);
+    expect(store.getItem("arcbox-host:BCDF")).toBeNull();
+    expect(store.getItem("arcbox-host:GHJK")).toBe("tok2");
+    expect([...container.querySelectorAll("iframe")].map((f) => f.getAttribute("src"))).toEqual([
+      "/?room=GHJK&slot=1&devName=P1",
+      "/?room=GHJK&slot=2&devName=P2",
+    ]);
+    expect(onRoom).toEqual(["BCDF", "GHJK"]);
+    expect(container.querySelector(".host-code b")!.textContent).toBe("GHJK");
+    expect(container.querySelector(".host-players")!.textContent).not.toContain("ALEX"); // the dead room's lobby is gone
+    expect(container.querySelector(".form-error")).toBeNull();
   });
 
   it("each phone has a reload button that remounts its iframe", async () => {

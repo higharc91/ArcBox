@@ -31,8 +31,7 @@ builder.Services
 
 var app = builder.Build();
 
-app.UseDefaultFiles();
-app.UseStaticFiles();
+app.UsePhoneApp();
 app.MapHub<ArcHub>("/hub", o => o.AllowStatefulReconnects = true);
 app.MapGet("/healthz", () => "ok");
 
