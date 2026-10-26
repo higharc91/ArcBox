@@ -71,6 +71,14 @@ public partial class Main : Control
         _serverUrl = (_args.Server ?? HostSettings.Load().ServerUrl ?? HostSettings.DefaultServer).TrimEnd('/');
         BuildBanner();
 
+        if (_args.RedlineDemo)
+        {
+            // Dev only: a scripted REDLINE race through the normal host-view path, no server.
+            GD.Print("REDLINE demo: no server connection");
+            AddChild(new Games.Redline.Demo.RedlineDemoFeeder(view => OnHostView(new HostViewEvent("redline", view)), _args.RedlineDemoFrom));
+            return;
+        }
+
         ShowConnect();
         _ = StartSessionAsync(_serverUrl, _args.NewRoom);
     }
@@ -288,6 +296,7 @@ public partial class Main : Control
     {
         _lobby = lobby;
         _roomReady = true;
+        GameSceneMap.Prewarm(lobby.SelectedGameId);
 
         if (lobby.InGame && lobby.SelectedGameId is { } gameId)
         {
