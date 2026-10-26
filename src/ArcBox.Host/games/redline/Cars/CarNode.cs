@@ -23,6 +23,9 @@ public partial class CarNode : Node3D
 
     public double Lateral { get; private set; }
 
+    /// <summary>Metres per second along the race right now (negative sliding back; 0 when parked in its slot). The engine sound follows it.</summary>
+    public double Speed { get; set; }
+
     /// <summary>The track frame under the car (before any spin yaw).</summary>
     public TrackPose TrackFrame { get; private set; }
 

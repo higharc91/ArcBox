@@ -76,7 +76,7 @@ public partial class TimingTower : Control
         _column = view.Phase switch
         {
             RacePhase.Throttle => "GAP · STATUS",
-            RacePhase.Question => "GAP · THROTTLE",
+            RacePhase.Reading or RacePhase.Question => "GAP · THROTTLE",
             RacePhase.Reveal => "GAP · RESULT",
             RacePhase.Chequered => "GAP · DISTANCE",
             _ => "GAP",

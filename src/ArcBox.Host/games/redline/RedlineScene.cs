@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using System.Text.Json;
+using ArcBox.Host.Audio;
+using ArcBox.Host.Games.Redline.Audio;
 using ArcBox.Host.Games.Redline.Camera;
 using ArcBox.Host.Games.Redline.Cars;
 using ArcBox.Host.Games.Redline.Hud;
@@ -21,8 +23,13 @@ namespace ArcBox.Host.Games.Redline;
 /// HUD seam (Task 6): <see cref="Hud"/> gets every view through <see cref="RedlineHud.Render"/> and, every frame,
 /// <see cref="RedlineHud.UpdateTags"/> with <see cref="ActiveCamera"/> and <see cref="Cars"/>.
 /// </para>
+/// <para>
+/// Sound (audio spec §3.3): <see cref="AudioDirector"/> gets every view, each start light as it comes on (in step with
+/// the gantry), each spin-out the camera shows, and a per-frame tick with the shot and the cars' speeds; it reads the
+/// question and the commentary through the shell's <see cref="Narrator"/>.
+/// </para>
 /// </summary>
-public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPreloadScene
+public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPreloadScene, IAudioScene
 {
     /// <summary>Seconds into Reveal when the camera cuts to the follow-up shot.</summary>
     public const double FollowUpSeconds = 3.5;
@@ -40,12 +47,15 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
     private BuiltWorld? _world;
     private CameraRig _rig = null!;
     private RedlineHud _hud = null!;
+    /// <summary>Made up front, so the shell can hand it the narrator before the scene enters the tree.</summary>
+    private readonly AudioDirector _audio = new();
     private Preset _preset = Preset.Ultra;
 
     private RedlineHostView? _view;
     private double _time;
     private double _phaseStart;
     private bool _followUp;
+    private int _lightsHeard;
     private readonly List<(double At, string Label)> _pendingShots = [];
 
     private enum WarmState { Off, Waiting, Drawing, Ready }
@@ -68,6 +78,8 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
     public RedlineHostView? View => _view;
 
     public void SetShots(Screenshotter? shots) => _shots = shots;
+
+    public void SetNarrator(Narrator narrator) => _audio.SetNarrator(narrator);
 
     /// <summary>Takes effect at once when the world is built (F2), else when it is.</summary>
     public void SetRenderPreset(string preset)
@@ -96,6 +108,7 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
         AddChild(_rig);
         _hud = new RedlineHud();
         AddChild(_hud);
+        AddChild(_audio);
     }
 
     // ---- Lobby warm-up ---------------------------------------------------------------------------------------
@@ -117,6 +130,7 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
             .DistinctBy(s => s.View.Phase)
             .Select(s => s.View)
             .ToList();
+        _audio.Lobby();
     }
 
     /// <summary>
@@ -129,6 +143,7 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
         _pendingShots.Clear();
         _view = null;
         Hide3D();
+        _audio.Lobby();
         GD.Print("REDLINE parked for the next race");
     }
 
@@ -216,6 +231,7 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
         {
             _phaseStart = _time;
             _followUp = false;
+            _lightsHeard = 0;
             _pendingShots.Clear();
             var label = v.Phase.ToString().ToLowerInvariant();
             QueueShot(ShotDelay, label);
@@ -263,6 +279,16 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
         _rig.Advance(_time);
 
         _hud.Render(v, before);
+        _audio.OnView(v, before);
+        if (v.Phase == RacePhase.Reveal && newPhase)
+        {
+            // Tyres and crunch for each spin-out the camera is on.
+            var onCamera = global::Redline.Presentation.Audio.EngineMix.Subjects(shot, v);
+            foreach (var code in _spun.Where(onCamera.Contains))
+            {
+                _audio.OnSpin(code);
+            }
+        }
     }
 
     public override void _Process(double delta)
@@ -272,6 +298,7 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
         {
             PreloadStep();
         }
+        _audio.Tick(delta, _warm == WarmState.Off ? _rig.Shot : null, code => _cars.TryGetValue(code, out var car) ? car.Speed : 0);
         if (_view is null || _assets is null)
         {
             return;
@@ -286,7 +313,12 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
             _rig.SetShot(CameraDirector.RevealFollowUp(_view));
         }
 
-        _world!.Gantry.SetLit(StartLights.Lit(_view.Phase, phaseTime));
+        var lit = StartLights.Lit(_view.Phase, phaseTime);
+        _world!.Gantry.SetLit(lit);
+        while (_warm == WarmState.Off && _lightsHeard < lit)
+        {
+            _audio.OnLight(++_lightsHeard);
+        }
         _rig.Advance(_time);
         _hud.UpdateTags(ActiveCamera, _carNodes);
 
@@ -329,11 +361,13 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
                 car.Place(samples, m.RaceMeters, m.Lateral, m.Yaw);
                 car.Roll(m.Speed * Math.Cos(m.Yaw) * delta);
                 car.Smoke((float)m.Smoke);
+                car.Speed = m.Speed;
             }
             else
             {
                 car.Place(samples, to.RaceMeters, to.Lateral, 0);
                 car.Smoke(0);
+                car.Speed = 0;
             }
         }
     }

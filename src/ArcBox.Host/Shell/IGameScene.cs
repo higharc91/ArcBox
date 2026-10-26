@@ -48,3 +48,14 @@ public interface IPreloadScene
 
     void EndPreload();
 }
+
+/// <summary>
+/// A scene that speaks: gets the shell's shared <see cref="Audio.Narrator"/> before its first <see cref="IGameScene.Render"/>
+/// (and when it starts warming up behind the lobby). Scenes say lines in their own voice themes, e.g.
+/// <c>narrator.Say(text, "redline.questions", NarrationPriority.Question)</c>; the narrator handles the server voice,
+/// the built-in fallback, queueing and ducking.
+/// </summary>
+public interface IAudioScene
+{
+    void SetNarrator(Audio.Narrator narrator);
+}

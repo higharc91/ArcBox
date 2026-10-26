@@ -142,7 +142,7 @@ public partial class RedlineHud : CanvasLayer
         _view = view;
 
         // The clock: time left read once against the local clock, clamped to the phase length, then run on frame time.
-        _phaseSeconds = HudClock.PhaseSeconds(view.Phase);
+        _phaseSeconds = HudClock.PhaseSeconds(view);
         _remaining = HudClock.Remaining(view.DeadlineUtc, DateTimeOffset.UtcNow, _phaseSeconds);
 
         _tags.Show(view);
@@ -172,8 +172,10 @@ public partial class RedlineHud : CanvasLayer
                 _strip.Show(view);
                 break;
 
+            case RacePhase.Reading:
             case RacePhase.Question:
             case RacePhase.Reveal:
+                // Reading: the question and its answers while it is read out, with LISTEN in place of the clock.
                 ShowOnly(_header, _tower, _map, _answers, _result);
                 _header.Show(HudText.Header(view), lights: false);
                 _tower.Show(view);

@@ -78,6 +78,19 @@ public class TowerTests
     }
 
     [Fact]
+    public void Reading_phase_shows_the_throttles_without_answer_marks()
+    {
+        var view = View(RacePhase.Reading,
+            Row("LEC", 1, 9, "ALEX", DriverStatus.Ready, Throttle.Push),
+            Row("VER", 2, 8, null, DriverStatus.Ready, Throttle.Redline));
+        var rows = Tower.Rows(view);
+
+        Assert.Equal(["PUSH", "REDLINE"], rows.Select(r => r.Chip?.Text));
+        Assert.All(rows, r => Assert.Equal(AnswerMark.None, r.Mark));
+        Assert.Equal(["LEAD", "−1"], rows.Select(r => r.Gap));
+    }
+
+    [Fact]
     public void Movement_is_zero_outside_reveal()
     {
         Assert.Equal(0, Tower.Rows(View(RacePhase.Question, Row("NOR", 1, 5, change: 3)))[0].Movement);
@@ -124,6 +137,19 @@ public class HudClockTests
     public void Format_rounds_up(double seconds, string text) => Assert.Equal(text, HudClock.Format(seconds));
 
     [Fact]
+    public void Reading_length_comes_from_the_question_text()
+    {
+        var rules = new RedlineRules();
+        var view = DemoRace.Steps().Last(s => s.View.Phase == RacePhase.Reading).View;
+
+        Assert.Equal(rules.ReadingTime(view.Question!.Text!).TotalSeconds, HudClock.PhaseSeconds(view));
+        Assert.Equal(20, HudClock.PhaseSeconds(view with { Phase = RacePhase.Question }));
+        // Without the text, the longest reading time (so a clamped deadline is never cut short).
+        Assert.Equal(10, HudClock.PhaseSeconds(RacePhase.Reading));
+        Assert.Equal(10, HudClock.PhaseSeconds(view with { Question = null }));
+    }
+
+    [Fact]
     public void Phase_lengths_come_from_the_rules()
     {
         Assert.Equal(20, HudClock.PhaseSeconds(RacePhase.Question));
@@ -168,6 +194,19 @@ public class HudTextTests
         var grid = HudText.Header(Demo(RacePhase.Grid));
         Assert.Equal("CIRCUIT OF THE AMERICAS", grid.Meta[0]);
         Assert.Equal("START", grid.ClockCaption);
+        Assert.Null(q.ClockText);
+    }
+
+    [Fact]
+    public void Reading_header_shows_the_question_and_listen_instead_of_the_clock()
+    {
+        var reading = HudText.Header(Demo(RacePhase.Reading));
+
+        Assert.Equal(["ROUND 4/15", "GEOGRAPHY"], reading.Meta);
+        Assert.Equal(("MEDIUM", 2), (reading.Difficulty, reading.Pips));
+        Assert.Equal("Which U.S. state has the longest coastline?", reading.Title);
+        Assert.Equal("LISTEN", reading.ClockText);
+        Assert.Equal("READING", reading.ClockCaption);
     }
 
     [Fact]

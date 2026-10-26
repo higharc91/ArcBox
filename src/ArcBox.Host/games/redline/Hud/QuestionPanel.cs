@@ -7,7 +7,8 @@ namespace ArcBox.Host.Games.Redline.Hud;
 
 /// <summary>
 /// The header strip (broadcast.css <c>.head</c>): the REDLINE slab, the question panel (meta line with difficulty pips and
-/// the big title / question) and the clock box (time + bar, or the five start lights during Grid).
+/// the big title / question) and the clock box (time + bar, "LISTEN" + bar while the question is read out, or the five
+/// start lights during Grid).
 /// </summary>
 public partial class QuestionPanel : HBoxContainer
 {
@@ -26,6 +27,7 @@ public partial class QuestionPanel : HBoxContainer
     private readonly ColorRect _barFill;
     private readonly StartLightsView _lights = new();
     private string _titleText = "";
+    private string? _clockText;
 
     public QuestionPanel()
     {
@@ -93,6 +95,9 @@ public partial class QuestionPanel : HBoxContainer
         FitTitle();
 
         _caption.Text = header.ClockCaption;
+        // Reading: "LISTEN" in place of the time (the bar still runs down the reading time).
+        _clockText = header.ClockText;
+        _time.AddThemeFontSizeOverride("font_size", _clockText is null ? 58 : 36);
         _lights.Visible = lights;
         _time.Visible = !lights;
         _bar.Visible = !lights;
@@ -101,7 +106,7 @@ public partial class QuestionPanel : HBoxContainer
     /// <summary>The clock: <paramref name="remaining"/> seconds (null = no deadline) and the bar fraction.</summary>
     public void SetClock(double? remaining, double fraction)
     {
-        _time.Text = remaining is { } r ? HudClock.Format(r) : "–";
+        _time.Text = _clockText ?? (remaining is { } r ? HudClock.Format(r) : "–");
         ShellLayout.SetBar(_barFill, (float)fraction);
     }
 
