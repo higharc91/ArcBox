@@ -181,6 +181,8 @@ In party-four, the strong player wins **55.6%** of races. Each casual player win
 
 Even with every timer running out, no baseline scenario's mean reaches the spec's 8–12 minute target. The cause is the round count, not the timers: 37 s × 6–10 rounds plus 36 s of fixed overhead.
 
+**Update (Reading phase, audio spec §2):** with the shipped rules every round now also holds the question for about 4.2 s before answers open (fallback-pack question lengths), which lengthens a race by 0.6–0.9 minutes without changing any balance number (N = 2,000: party-four 4.6 → 5.3 min measured and 7.2 → 7.9 min with all timers; solo-sensible-casual 4.0 → 4.8; eight-sensible 4.5 → 5.1; ai-only 8.2 → 9.1).
+
 ---
 
 ## 3. What-if runs

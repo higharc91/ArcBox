@@ -28,7 +28,7 @@ public static class CameraDirector
         RacePhase.DriverSelect => new LineupShot(NewlyClaimed(view, previous)),
         RacePhase.Grid => new GridShot(),
         RacePhase.Throttle => new HeliShot([(BestPlaced(view.Drivers, humanOnly: true) ?? BestPlaced(view.Drivers, humanOnly: false))!.Code]),
-        RacePhase.Question => ClosestBattle(view),
+        RacePhase.Reading or RacePhase.Question => ClosestBattle(view),     // Reading keeps the Question shot (audio spec §2)
         RacePhase.Reveal => RevealShot(view),
         _ => new FinishShot(),
     };

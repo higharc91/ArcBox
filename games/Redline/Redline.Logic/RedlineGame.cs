@@ -6,7 +6,7 @@ namespace Redline.Logic;
 
 /// <summary>
 /// REDLINE: a 22-car racing trivia game. Players claim seats in Driver Select, AI drives the rest,
-/// then every round is Throttle → Question → Reveal until a car crosses the line (spec §2, §3).
+/// then every round is Throttle → Reading → Question → Reveal until a car crosses the line (spec §2, §3; Reading: audio spec §2).
 /// </summary>
 public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules = null, Grid? grid = null) : IGame
 {
@@ -111,6 +111,7 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
             case RacePhase.DriverSelect: EndDriverSelect(); break;
             case RacePhase.Grid: StartRound(); break;
             case RacePhase.Throttle: EndThrottle(); break;
+            case RacePhase.Reading: OpenQuestion(); break;
             case RacePhase.Question: Reveal(); break;
             case RacePhase.Reveal: EndReveal(); break;
             case RacePhase.Chequered: _ctx.EndGame(Ranking.Results(_ranked)); break;
@@ -225,16 +226,16 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         return (answers, Array.IndexOf(answers, q.Correct));
     }
 
-    /// <summary>True in Throttle, Question and Reveal, the phases that have a current question.</summary>
-    private bool InRound => Phase is RacePhase.Throttle or RacePhase.Question or RacePhase.Reveal;
+    /// <summary>True in Throttle, Reading, Question and Reveal, the phases that have a current question.</summary>
+    private bool InRound => Phase is RacePhase.Throttle or RacePhase.Reading or RacePhase.Question or RacePhase.Reveal;
 
     private TriviaQuestion Current => _questions[Round - 1];
 
-    /// <summary>§4.4: category and difficulty in Throttle; the text and shuffled answers from Question on.</summary>
+    /// <summary>§4.4: category and difficulty in Throttle; the text and shuffled answers from Reading on.</summary>
     private QuestionCard? QuestionCard() => Phase switch
     {
         RacePhase.Throttle => new QuestionCard(Current.Category, Current.Difficulty, null, null),
-        RacePhase.Question or RacePhase.Reveal =>
+        RacePhase.Reading or RacePhase.Question or RacePhase.Reveal =>
             new QuestionCard(Current.Category, Current.Difficulty, Current.Text, _answers[Round - 1].Answers),
         _ => null,
     };
@@ -281,10 +282,26 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         if (EveryConnectedHumanHas(d => d.Throttle is not null)) EndThrottle();
     }
 
-    /// <summary>Question phase. Undecided drivers get Cruise; every AI answers now, in team order.</summary>
+    /// <summary>
+    /// Undecided drivers get Cruise. Then the Reading phase (audio spec §2): the question is shown and read out, input
+    /// is ignored, and only its timer ends it. With <see cref="RedlineRules.ReadQuestions"/> off, straight to Question.
+    /// </summary>
     private void EndThrottle()
     {
         foreach (var d in _field) d.Throttle ??= Throttle.Cruise;
+        if (!Rules.ReadQuestions)
+        {
+            OpenQuestion();
+            return;
+        }
+
+        Phase = RacePhase.Reading;
+        _ctx!.SetTimer(PhaseTimer, Rules.ReadingTime(Current.Text));
+    }
+
+    /// <summary>Question phase: the answer clock starts; every AI answers now, in team order.</summary>
+    private void OpenQuestion()
+    {
         Phase = RacePhase.Question;
 
         var random = _ctx!.Random;
@@ -390,7 +407,7 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
                 _field.Where(d => !d.IsHuman).Select(d => d.Seat), key.Header, deadline),
             (RacePhase.DriverSelect, _) => PlayerViews.Seated(driver.Seat, deadline),
             (RacePhase.Grid, not null) => PlayerViews.OnGrid(driver.Seat, deadline),
-            (RacePhase.Throttle or RacePhase.Question or RacePhase.Reveal, not null) => RoundView(driver, deadline),
+            (RacePhase.Throttle or RacePhase.Reading or RacePhase.Question or RacePhase.Reveal, not null) => RoundView(driver, deadline),
             (RacePhase.Chequered, not null) => PlayerViews.Finished(
                 driver.Position, _field.Count, PlayerViews.RoundHeader(driver.Position, Round, Rules.MaxRounds), deadline),
             _ => PlayerViews.Idle(),
@@ -406,8 +423,9 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
             RacePhase.Throttle when driver.PitLimiter => PlayerViews.PitLimited(header, deadline),
             RacePhase.Throttle when driver.Throttle is { } locked => PlayerViews.ThrottleLocked(locked, header, deadline),
             RacePhase.Throttle => PlayerViews.ChooseThrottle(Current, Rules, header, deadline),
+            RacePhase.Reading => PlayerViews.Listening(Current.Text, PlayerViews.WithThrottle(driver.Throttle, header), deadline),
             RacePhase.Question when driver.AnswerIndex is null => PlayerViews.Answer(
-                Current.Text, _answers[Round - 1].Answers, driver.Throttle ?? Throttle.Cruise, header, deadline),
+                Current.Text, _answers[Round - 1].Answers, PlayerViews.WithThrottle(driver.Throttle, header), deadline),
             RacePhase.Question => PlayerViews.Answered(header, deadline),
             _ => PlayerViews.Result(driver, Rules, header, deadline),
         };

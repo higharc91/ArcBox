@@ -30,6 +30,22 @@ public sealed record RedlineRules
     public TimeSpan Reveal { get; init; } = TimeSpan.FromSeconds(7);
     public TimeSpan Chequered { get; init; } = TimeSpan.FromSeconds(10);
 
+    /// <summary>
+    /// Audio spec §2: a Reading phase between Throttle and Question, while the TV reads the question out, before the
+    /// answer clock starts. Off: Throttle goes straight to Question.
+    /// </summary>
+    public bool ReadQuestions { get; init; } = true;
+
+    /// <summary>
+    /// How long the Reading phase lasts: clamp(0.6 s + words × 0.36 s, 2.5 s, 10 s), about Chirp 3: HD's 2.7 words a
+    /// second. An estimate from the text, never the real clip length, so the game does not depend on audio.
+    /// </summary>
+    public TimeSpan ReadingTime(string text)
+    {
+        var words = text.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).Length;
+        return TimeSpan.FromMilliseconds(Math.Clamp(600 + words * 360, 2500, 10_000));
+    }
+
     public int CruiseGain { get; init; } = 1;
     public int PushGain { get; init; } = 3;
     public int PushLoss { get; init; } = 1;

@@ -70,9 +70,18 @@ internal static class PlayerViews
     public static WaitView PitLimited(string header, DateTimeOffset? deadline) =>
         new(PitLimiterMessage) { Header = header, DeadlineUtc = deadline };
 
+    /// <summary>"PUSH · P5 · ROUND 3/15": the round header led by the player's throttle (Cruise when undecided).</summary>
+    public static string WithThrottle(Throttle? t, string header) => $"{Name(t ?? Throttle.Cruise)} · {header}";
+
+    /// <summary>Reading (audio spec §2): the question text while the TV reads it out; the answers open with the Question phase.</summary>
+    /// <param name="header">The throttle-led header, as on the answer view (<see cref="WithThrottle"/>).</param>
+    public static WaitView Listening(string text, string header, DateTimeOffset? deadline) =>
+        new(text) { Header = header, DeadlineUtc = deadline };
+
     /// <param name="answers">The four answers in shuffled order; option ids a–d follow it.</param>
-    public static ChoiceView Answer(string text, IReadOnlyList<string> answers, Throttle t, string header, DateTimeOffset? deadline) =>
-        new(text, [.. answers.Select((a, i) => new Option(AnswerId(i), a))]) { Header = $"{Name(t)} · {header}", DeadlineUtc = deadline };
+    /// <param name="header">The throttle-led header (<see cref="WithThrottle"/>).</param>
+    public static ChoiceView Answer(string text, IReadOnlyList<string> answers, string header, DateTimeOffset? deadline) =>
+        new(text, [.. answers.Select((a, i) => new Option(AnswerId(i), a))]) { Header = header, DeadlineUtc = deadline };
 
     public static WaitView Answered(string header, DateTimeOffset? deadline) =>
         new(AnsweredMessage) { Header = header, DeadlineUtc = deadline };

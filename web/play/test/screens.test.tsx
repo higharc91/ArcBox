@@ -224,6 +224,27 @@ describe("REDLINE skin", () => {
     rerender(<ControllerScreen view={wait("Answer locked. Eyes on the TV!")} send={() => {}} me="A" game="redline" />);
     expect(container.querySelector(".wait-banner")).toBeNull();
   });
+
+  it("styles the Reading wait view as the question with answers to come", () => {
+    // Reading: the message is the question text and the header leads with the throttle, as on the answer view.
+    const reading: WaitView = { kind: "wait", viewId: "v", message: "Which planet has the most known moons?", header: "PUSH · P5 · ROUND 3/15" };
+    const { container, rerender } = render(<ControllerScreen view={reading} send={() => {}} me="A" game="redline" />);
+    expect(container.querySelector(".w-wait .pq .prompt")!.textContent).toBe("Which planet has the most known moons?");
+    expect(container.querySelector(".w-wait .listen-note")!.textContent).toBe("Answers open in a moment…");
+    expect(container.querySelector(".wait-message")).toBeNull();
+    expect(container.querySelector(".pstatus .pos .chip")!.textContent).toBe("PUSH");
+    expect(container.querySelector("button")).toBeNull();                       // nothing to press yet
+
+    // Other round wait views have no throttle in the header and stay plain.
+    rerender(<ControllerScreen view={{ ...reading, message: "Locked in: PUSH. Waiting for the other drivers…", header: "P5 · ROUND 3/15" }} send={() => {}} me="A" game="redline" />);
+    expect(container.querySelector(".listen-note")).toBeNull();
+    expect(container.querySelector(".wait-message")!.textContent).toBe("Locked in: PUSH. Waiting for the other drivers…");
+
+    // Without the skin, the same view is a plain wait message.
+    rerender(<ControllerScreen view={reading} send={() => {}} me="A" game="counter" />);
+    expect(container.querySelector(".listen-note")).toBeNull();
+    expect(container.querySelector(".wait-message")!.textContent).toBe("Which planet has the most known moons?");
+  });
 });
 
 describe("App", () => {

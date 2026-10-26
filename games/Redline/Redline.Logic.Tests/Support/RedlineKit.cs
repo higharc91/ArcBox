@@ -7,10 +7,16 @@ namespace Redline.Logic.Tests;
 /// <summary>Shared helpers for driving a <see cref="RedlineGame"/> through a <see cref="GameHarness{TGame}"/>.</summary>
 public static class RedlineKit
 {
-    public static (GameHarness<RedlineGame> H, FakeQuestionSource Q) Start(int players = 4, int seed = 1, RedlineRules? rules = null)
+    /// <param name="reading">
+    /// Sets <see cref="RedlineRules.ReadQuestions"/>. Off by default, so the round tests written before the Reading phase
+    /// keep going straight from Throttle to Question; the Reading tests turn it on.
+    /// </param>
+    public static (GameHarness<RedlineGame> H, FakeQuestionSource Q) Start(
+        int players = 4, int seed = 1, RedlineRules? rules = null, bool reading = false, FakeQuestionSource? questions = null)
     {
-        var q = new FakeQuestionSource();
-        var h = new GameHarness<RedlineGame>(new RedlineGame(q, rules), players, seed);
+        var q = questions ?? new FakeQuestionSource();
+        var h = new GameHarness<RedlineGame>(
+            new RedlineGame(q, (rules ?? new RedlineRules()) with { ReadQuestions = reading }), players, seed);
         h.Start();
         return (h, q);
     }

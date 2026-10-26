@@ -63,6 +63,16 @@ public class CameraDirectorTests
     }
 
     [Fact]
+    public void Reading_uses_the_question_shot()
+    {
+        var rows = new[] { Row("AIA", 1, 12), Row("HAM", 2, 8, human: true), Row("AIB", 3, 7), Row("NOR", 4, 6, human: true) };
+        var reading = View(RacePhase.Reading, rows);
+
+        Assert.Equal(["HAM", "AIB"], HeliSubjects(CameraDirector.Pick(reading, View(RacePhase.Throttle, rows))));
+        Assert.Equal(HeliSubjects(CameraDirector.Pick(View(RacePhase.Question, rows), null)), HeliSubjects(CameraDirector.Pick(reading, null)));
+    }
+
+    [Fact]
     public void Question_tie_goes_to_higher_position()
     {
         var view = View(RacePhase.Question,

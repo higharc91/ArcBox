@@ -38,7 +38,7 @@ export function sampleRedlineView(phase: RacePhase, deadlineUtc: string | null =
         : phase === "Throttle" ? (i === 4 ? "Limited" : i % 4 === 1 ? "Choosing" : "Locked")
         : phase === "Question" ? (i % 3 === 0 ? "Answering" : "Answered")
         : "Ready",
-      throttle: phase === "Question" || phase === "Reveal" ? throttle : null,
+      throttle: phase === "Reading" || phase === "Question" || phase === "Reveal" ? throttle : null,
       answerIndex: phase === "Reveal" ? answerIndex : null,
       outcome: phase === "Reveal" ? outcome : null,
       pitLimiter: i === 4,

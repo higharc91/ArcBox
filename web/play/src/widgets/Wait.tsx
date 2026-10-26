@@ -1,5 +1,6 @@
 import type { WaitView } from "../protocol";
 import { useSkin } from "../skins/skin";
+import { Prompt } from "./common";
 
 /** "Spun out! −2 · now P5" → ["Spun out!", "−2 · now P5"]. */
 function splitTitle(message: string): [string, string] {
@@ -8,7 +9,18 @@ function splitTitle(message: string): [string, string] {
 }
 
 export function Wait({ view }: { view: WaitView }) {
-  const tone = useSkin()?.waitTone?.(view.message);
+  const skin = useSkin();
+  const note = skin?.waitQuestion?.(view);
+  if (note) {
+    // A question shown before its answers open: the question block, then the note.
+    return (
+      <div class="w-wait w-listen">
+        <Prompt text={view.message} />
+        <p class="listen-note">{note}</p>
+      </div>
+    );
+  }
+  const tone = skin?.waitTone?.(view.message);
   if (tone) {
     const [title, rest] = splitTitle(view.message);
     return (

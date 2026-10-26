@@ -29,7 +29,9 @@ public sealed record DifficultyMix(double Easy, double Medium, double Hard)
 }
 
 /// <summary>
-/// A seeded question source whose questions only matter for their difficulty. It also keeps the answer key
+/// A seeded question source whose questions only matter for their difficulty and, for the Reading phase, their length:
+/// question n is padded to the word count of fallback-pack question n (6–15 words, mean 9.4), without extra random draws,
+/// so the balance numbers do not move. It also keeps the answer key
 /// (question text → correct answer and difficulty) so a bot can tell which option on its phone is right before
 /// rolling its own accuracy, the way a person who knows the answer would.
 /// </summary>
@@ -49,7 +51,7 @@ public sealed class SyntheticQuestionSource(Random random, DifficultyMix mix) : 
             var n = ++_next;
             var difficulty = mix.Draw(random);
             var category = Categories[random.Next(Categories.Length)];
-            var text = $"Synthetic question {n} ({category}, {difficulty})";
+            var text = Pad($"Synthetic question {n} ({category}, {difficulty})", WordsLike(n));
             var correct = $"right-{n}";
             _key[text] = (correct, difficulty);
             list.Add(new TriviaQuestion(category, difficulty, text, correct,
@@ -59,4 +61,16 @@ public sealed class SyntheticQuestionSource(Random random, DifficultyMix mix) : 
     }
 
     public (string Correct, Difficulty Difficulty) Lookup(string questionText) => _key[questionText];
+
+    private static int WordsLike(int n)
+    {
+        var pack = FallbackQuestions.All;
+        return pack[(n - 1) % pack.Count].Text.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).Length;
+    }
+
+    private static string Pad(string text, int words)
+    {
+        var have = text.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length;
+        return have >= words ? text : text + string.Concat(Enumerable.Repeat(" word", words - have));
+    }
 }
