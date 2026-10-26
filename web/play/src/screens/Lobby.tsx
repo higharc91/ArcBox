@@ -1,4 +1,4 @@
-import type { LobbyState, PlayerId } from "../protocol";
+import type { LobbyState, PlayerId, PlayerScore } from "../protocol";
 
 interface Props {
   lobby: LobbyState;
@@ -9,6 +9,14 @@ interface Props {
 }
 
 const range = (min: number, max: number) => (min === max ? `${min}` : `${min}–${max}`);
+
+/** "Ann won with 12", or "Ann and Bo tied with 12" when the top scores are equal (Counter orders a tie by name). */
+function winnerLine(scores: PlayerScore[]): string {
+  const top = scores[0]!.score;
+  const names = scores.filter((s) => s.score === top).map((s) => s.name);
+  if (names.length === 1) return `${names[0]} won with ${top}`;
+  return `${names.slice(0, -1).join(", ")} and ${names.at(-1)} tied with ${top}`;
+}
 
 export function Lobby({ lobby, me, error, onSelectGame, onStart }: Props) {
   const vip = lobby.players.find((p) => p.isVip);
@@ -32,9 +40,7 @@ export function Lobby({ lobby, me, error, onSelectGame, onStart }: Props) {
         <section class="last-results">
           <small>LAST GAME</small>
           {lobby.lastResults.message ? <p>{lobby.lastResults.message}</p> : null}
-          {!lobby.lastResults.message && lobby.lastResults.scores[0] ? (
-            <p>{lobby.lastResults.scores[0].name} won with {lobby.lastResults.scores[0].score}</p>
-          ) : null}
+          {!lobby.lastResults.message && lobby.lastResults.scores[0] ? <p>{winnerLine(lobby.lastResults.scores)}</p> : null}
         </section>
       ) : null}
 
