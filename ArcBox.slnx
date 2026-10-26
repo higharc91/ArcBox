@@ -11,6 +11,8 @@
     <Project Path="games/Redline/Redline.Presentation/Redline.Presentation.csproj" />
   </Folder>
   <Folder Name="/src/">
+    <Project Path="src/ArcBox.Host.Core.Tests/ArcBox.Host.Core.Tests.csproj" />
+    <Project Path="src/ArcBox.Host.Core/ArcBox.Host.Core.csproj" />
     <Project Path="src/ArcBox.Host/ArcBox.Host.csproj" />
     <Project Path="src/ArcBox.Sdk.Testing/ArcBox.Sdk.Testing.csproj" />
     <Project Path="src/ArcBox.Sdk.Tests/ArcBox.Sdk.Tests.csproj" />
