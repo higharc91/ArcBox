@@ -2,6 +2,7 @@ using System.Text.Json;
 using ArcBox.Sdk;
 using ArcBox.Server;
 using ArcBox.Server.Games;
+using ArcBox.Server.Games.Redline;
 using ArcBox.Server.Hubs;
 using ArcBox.Server.Rooms;
 using Counter.Logic;
@@ -15,6 +16,7 @@ builder.Services.AddSingleton<RoomManager>();
 builder.Services.AddSingleton<IClientSender, HubClientSender>();
 builder.Services.AddSingleton<IGameRegistry, GameRegistry>();
 builder.Services.AddArcGame<CounterGame>();
+builder.Services.AddRedline(builder.Configuration);
 builder.Services.AddHostedService<RoomSweeper>();
 
 // Singleton so the per-connection buckets outlive each invocation.

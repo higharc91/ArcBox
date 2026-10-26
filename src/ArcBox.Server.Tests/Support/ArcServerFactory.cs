@@ -17,6 +17,8 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
+        // AddRedline reads this while Program registers services, so it must be a setting, not a test service.
+        builder.UseSetting("Redline:OpenTdb:Enabled", "false");
         builder.ConfigureTestServices(services =>
         {
             services.RemoveAllKeyed<TimeProvider>(RoomManager.ClockKey);

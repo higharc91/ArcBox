@@ -1,6 +1,9 @@
 using ArcBox.Sdk.Protocol;
+using ArcBox.Server.Games.Redline;
 using ArcBox.Server.Tests.Support;
 using Counter.Logic;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace ArcBox.Server.Tests;
 
@@ -164,5 +167,52 @@ public class HubIntegrationTests
         // Commands now go to the room this connection joined last.
         await ann.InvokeAsync("SelectGame", "counter");
         await host2.WaitForAsync(ClientMethods.LobbyChanged, l => l.GetProperty("selectedGameId").GetString() == "counter");
+    }
+
+    [Fact]
+    public async Task Lobby_lists_redline()
+    {
+        using var f = new ArcServerFactory();
+        await using var host = await TestClient.ConnectAsync(f);
+        await using var ann = await TestClient.ConnectAsync(f);
+
+        var room = await host.InvokeAsync<CreateRoomResult>("CreateRoom");
+        await ann.InvokeAsync<JoinResult>("Join", room.Code, "Ann");
+
+        var lobby = await ann.WaitForAsync(ClientMethods.LobbyChanged);
+        Assert.Contains("redline", lobby.GetProperty("games").EnumerateArray().Select(g => g.GetProperty("id").GetString()));
+    }
+
+    [Fact]
+    public void Test_server_never_runs_the_opentdb_pool()
+    {
+        using var f = new ArcServerFactory();
+
+        Assert.DoesNotContain(f.Services.GetServices<IHostedService>(), s => s is OpenTdbQuestionPool);
+    }
+
+    [Fact]
+    public async Task Redline_starts_over_signalr()
+    {
+        using var f = new ArcServerFactory();
+        await using var host = await TestClient.ConnectAsync(f);
+        await using var ann = await TestClient.ConnectAsync(f);
+        await using var bob = await TestClient.ConnectAsync(f);
+
+        var room = await host.InvokeAsync<CreateRoomResult>("CreateRoom");
+        await ann.InvokeAsync<JoinResult>("Join", room.Code, "Ann");
+        await bob.InvokeAsync<JoinResult>("Join", room.Code, "Bob");   // REDLINE needs at least 2 players
+        await ann.InvokeAsync("SelectGame", "redline");
+        await ann.InvokeAsync("StartGame");
+
+        var pick = await ann.WaitForAsync(ClientMethods.ControllerView);
+        Assert.Equal("choice", pick.GetProperty("kind").GetString());
+        Assert.Equal("Pick your driver", pick.GetProperty("prompt").GetString());
+        Assert.Equal(22, pick.GetProperty("options").GetArrayLength());
+
+        var hostView = await host.WaitForArgsAsync(ClientMethods.HostView);
+        Assert.Equal("redline", hostView[0].GetString());
+        Assert.Equal("DriverSelect", hostView[1].GetProperty("phase").GetString());
+        Assert.Equal(22, hostView[1].GetProperty("drivers").GetArrayLength());
     }
 }
