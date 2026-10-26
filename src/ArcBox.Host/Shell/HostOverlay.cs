@@ -1,10 +1,12 @@
+using ArcBox.Host.Audio;
 using Godot;
 
 namespace ArcBox.Host.Shell;
 
 /// <summary>
-/// The TV's top layer above every screen: the F3 performance readout (fps, frame time, draw calls, primitives) in the
-/// top-left corner, and a short toast at the top centre (F2's preset name). Draws only; <see cref="Main"/> owns the keys.
+/// The TV's top layer above every screen: the F3 performance readout (fps, frame time, draw calls, primitives, and the
+/// narrator's voice and last line) in the top-left corner, and a short toast at the top centre (F2's preset name, M's
+/// mute). Draws only; <see cref="Main"/> owns the keys.
 /// </summary>
 public partial class HostOverlay : CanvasLayer
 {
@@ -30,6 +32,9 @@ public partial class HostOverlay : CanvasLayer
     public string Preset { get; set; } = "";
 
     public bool PerfVisible => _perf.Visible;
+
+    /// <summary>The shell's narrator, whose state (Google / Fallback / Off) and last line the readout shows.</summary>
+    public Narrator? Narrator { get; set; }
 
     /// <summary>Also print the readout to the log every few seconds while it is on (<c>--perf</c>).</summary>
     public bool LogPerf { get; set; }
@@ -104,7 +109,8 @@ public partial class HostOverlay : CanvasLayer
         _perfText.Text =
             $"{1000 / avgMs:0} fps   {avgMs:0.0} ms (worst {_worst * 1000:0.0})\n" +
             $"{calls:N0} draw calls   {Primitives(prims)} primitives\n" +
-            $"{Preset.ToUpperInvariant()} · {window.X}×{window.Y}" + (size.X != window.X ? $" (UI {size.X:0}×{size.Y:0})" : "");
+            $"{Preset.ToUpperInvariant()} · {window.X}×{window.Y}" + (size.X != window.X ? $" (UI {size.X:0}×{size.Y:0})" : "") +
+            (Narrator is { } n ? $"\nVOICE {n.State.ToString().ToUpperInvariant()}{(AudioBuses.Levels.Muted ? " · MUTED" : "")}{LastLine(n.LastLine)}" : "");
         if (LogPerf && _sinceLog >= PerfLogEvery)
         {
             _sinceLog = 0;
@@ -113,6 +119,9 @@ public partial class HostOverlay : CanvasLayer
         _sum = _worst = _sinceRefresh = 0;
         _frames = 0;
     }
+
+    private static string LastLine(string? line) =>
+        line is null ? "" : $" · “{(line.Length > 44 ? line[..44] + "…" : line)}”";
 
     private static string Primitives(double n) => n >= 1e6 ? $"{n / 1e6:0.00} M" : n >= 1e3 ? $"{n / 1e3:0.0} k" : $"{n:0}";
 }

@@ -5,7 +5,8 @@ Google Cloud Text-to-Speech with **Chirp 3: HD** voices. The server holds the AP
 server's `/api/tts` endpoint and never sees the key.
 
 Speech is optional. With no key (or any Google problem) `/api/tts` answers 503 and the TV uses its built-in voice,
-so games still work, they just sound more robotic.
+so games still work, they just sound more robotic. How the TV narrates, falls back, ducks and logs is in
+[`redline-tv.md`](redline-tv.md#sound); press F3 on the TV to see which voice is in use.
 
 You need a Google account and a payment card (for the billing account; see step 3). Allow about 15 minutes.
 
@@ -121,7 +122,8 @@ curl -sS -o test.mp3 -w "%{http_code} %{content_type}\n" \
   http://localhost:5080/api/tts
 ```
 
-`200 audio/mpeg` and a playable `test.mp3` mean everything works. Otherwise:
+`200 audio/mpeg` and a playable `test.mp3` mean everything works. On the TV, F3 then shows `VOICE GOOGLE` once a
+line has been spoken. Otherwise:
 
 | Status | Meaning |
 |---|---|
@@ -239,3 +241,5 @@ The response is `audio/mpeg` (play it with Godot's `AudioStreamMP3`); `voice` ma
 On any non-200 answer, speak the text with the built-in voice using the theme's fallback hints, which
 `GET /api/tts/voices` (headers `X-ArcBox-Room`, `X-ArcBox-Host-Token`) lists as
 `[{"id","description","fallback":{"rate","pitch"}}]`. On a 503, wait a minute before asking the server again.
+The TV's shared narrator does all of this for you: implement `IAudioScene` in your scene and call
+`narrator.Say(text, "mygame.narrator", NarrationPriority.Commentary)` ([`tv-host.md`](tv-host.md#adding-a-game-scene)).

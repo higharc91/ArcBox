@@ -9,7 +9,7 @@ namespace ArcBox.Host.Shell;
 /// <c>--preset=ultra|high|low</c>, <c>--res=&lt;w&gt;x&lt;h&gt;</c>, and the dev-only <c>--redline-demo[=step]</c>
 /// (play a scripted REDLINE race into the TV without a server) and <c>--autostart=&lt;gameId&gt;[:&lt;players&gt;]</c>
 /// (select that game and start it once enough players are in; for scripted runs), and <c>--perf</c> (F3 overlay on
-/// from the start, logged every 5 s).
+/// from the start, logged every 5 s), and <c>--audio-log</c> (print <c>AUDIO &lt;bus&gt; &lt;name&gt;</c> for every sound played).
 /// </summary>
 public sealed record AppArgs
 {
@@ -28,6 +28,9 @@ public sealed record AppArgs
 
     /// <summary><c>--perf</c>: start with the F3 performance overlay on, and log it every 5 s.</summary>
     public bool Perf { get; init; }
+
+    /// <summary><c>--audio-log</c>: print <c>AUDIO &lt;bus&gt; &lt;name&gt;</c> for every sound played (no sound card needed).</summary>
+    public bool AudioLog { get; init; }
 
     /// <summary>Dev only: select and start this game by itself once enough players have joined.</summary>
     public AutoStartSpec? AutoStart { get; init; }
@@ -65,6 +68,9 @@ public sealed record AppArgs
                     break;
                 case "--perf" when value is null:
                     args = args with { Perf = true };
+                    break;
+                case "--audio-log" when value is null:
+                    args = args with { AudioLog = true };
                     break;
                 case "--autostart" when AutoStartSpec.TryParse(value, out var auto):
                     args = args with { AutoStart = auto };

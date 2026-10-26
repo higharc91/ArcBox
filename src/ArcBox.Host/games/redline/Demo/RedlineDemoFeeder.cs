@@ -10,7 +10,7 @@ namespace ArcBox.Host.Games.Redline.Demo;
 /// <summary>
 /// Dev-only <c>--redline-demo[=label]</c>: plays <see cref="DemoRace.Steps"/> into the TV as if the server had sent them,
 /// on the scene clock (so <c>--fixed-fps</c> runs are deterministic). With a label (driverselect, grid, throttle,
-/// question, reveal, chequered) it starts at that step, sending the step before it first so transitions still have a
+/// reading, question, reveal, chequered) it starts at that step, sending the step before it first so transitions still have a
 /// previous view. Each view is stamped with a deadline like the server's: the phase's full length from when the phase
 /// started, measured on the scene clock. Under <c>--fixed-fps</c> the wall clock runs far ahead of the scene, so the
 /// stamp is "now + what is left of the phase in scene time", and the HUD's countdown reads naturally in screenshots.
@@ -75,7 +75,7 @@ public partial class RedlineDemoFeeder : Node
             _phase = phase;
             _phaseStart = _clock;
         }
-        var left = Math.Max(0, HudClock.PhaseSeconds(step.View.Phase) - (_clock - _phaseStart));
+        var left = Math.Max(0, HudClock.PhaseSeconds(step.View) - (_clock - _phaseStart));
         var view = step.View with { DeadlineUtc = DateTimeOffset.UtcNow.AddSeconds(left) };
         _send(JsonSerializer.SerializeToElement(view, ArcJson.Options));
     }

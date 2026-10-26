@@ -20,6 +20,9 @@ the time, so it can be found in the logs.
       the Chequered podium. Target: 144 fps (≤ 6.9 ms). Press **F2** to check High and Low too, and write the numbers into
       `docs/redline-tv.md`. If Ultra misses 144, note which shot drops most.
 - [ ] Press **Esc** to end that race; the room returns to the lobby.
+- [ ] **Voice:** with a Google key set up ([`speech-setup.md`](speech-setup.md)), restart the server, start a race and
+      press **F3**: after the first line it reads `VOICE GOOGLE`. Without a key it reads `VOICE FALLBACK` (Windows'
+      built-in voice). Set the TV's volume so the commentator is comfortably loud from the sofa.
 
 ## Joining
 
@@ -48,6 +51,31 @@ the time, so it can be found in the logs.
 - [ ] **Results [P1, R9]:** the results list exactly the human players in race order; the room returns to the lobby and a
       second game can start.
 
+## Listening (audio spec §5: the sandbox has no sound card, so these are only checked here)
+
+- [ ] **Voice clarity:** every question is read in full, clearly, before the answers open on the phones; the reading
+      never gets cut off by the answer clock in a way that loses the question [audio 1]. Note any question that ran
+      long (the Reading time is an estimate from the word count).
+- [ ] **Built-in fallback [audio 2]:** stop Google mid-race (unplug the PC's internet, or remove the key and restart
+      the server): within a line or two the TV switches to the built-in voice (F3 `VOICE FALLBACK`), the race never
+      waits, and after reconnecting it goes back to `VOICE GOOGLE` within about a minute.
+- [ ] **Commentary timing [audio 3]:** the commentator uses players' names and pronounces them sensibly (an all-caps
+      name is read as a word); at most two lines per Reveal; it never talks over the question; nothing is said so late
+      it describes an earlier moment.
+- [ ] **Ducking:** music and effects dip while a voice speaks and come back smoothly afterwards, with no pumping on
+      short lines.
+- [ ] **Mix:** start beeps line up with the gantry lights; lights-out roar; engines are a quiet bed while players
+      think and roar in the Reveal drive; spin-outs screech and crunch; the correct sting / wrong buzz are clear but not
+      harsh; the fanfare and crowd at the flag; the lobby loop and race bed loop without a click or gap. Nothing clips
+      at the volume you set.
+- [ ] **M** mutes everything (toast "SOUND OFF"), including the built-in voice, and the setting survives a restart.
+- [ ] **Phone haptics on Android:** a tap on every input, a double pulse for a correct answer, a long buzz for a wrong
+      one, a stutter for a spin-out; short sounds play after the first tap on Join; the speaker toggle in the status
+      bar silences both and is remembered.
+- [ ] **iPhone silent switch:** iOS has no vibration for web pages, so only the sounds play; with the ring/silent
+      switch on silent, note whether they still play (Safari plays Web Audio through the silent switch on some iOS
+      versions); the speaker toggle mutes them either way.
+
 ## Robustness
 
 - [ ] **Lock a phone for 60 s** mid-round, unlock: the player is back on the right screen and their car kept racing
@@ -67,3 +95,4 @@ the time, so it can be found in the logs.
 
 - [ ] Save the server console log and the Godot log (`%APPDATA%\Godot\app_userdata\ArcBox\logs`) if anything failed.
 - [ ] Note the frame-rate numbers and any visual glitch with a phone photo of the TV.
+- [ ] Note the server's `Speech usage since start: … characters` line at shutdown (free tier: 1M characters a month).

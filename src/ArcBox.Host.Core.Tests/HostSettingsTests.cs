@@ -1,3 +1,5 @@
+using ArcBox.Host.Core.Audio;
+
 namespace ArcBox.Host.Core.Tests;
 
 public sealed class HostSettingsTests : IDisposable
@@ -64,5 +66,35 @@ public sealed class HostSettingsTests : IDisposable
         Assert.Equal(new HostSettings(), store.Load());
         store.Update(s => s with { Preset = "ultra" });
         Assert.Equal(new HostSettings(null, "ultra"), store.Load());
+    }
+
+    [Fact]
+    public void Volumes_mute_and_narration_voice_round_trip()
+    {
+        var store = new SettingsStore(FilePath);
+        store.Save(new HostSettings("http://10.0.0.2:5080", "high")
+        {
+            MasterVolume = 0.8, MusicVolume = 0.3, SfxVolume = 0.9, VoiceVolume = 1, Muted = true, NarrationVoice = "Zira",
+        });
+
+        var loaded = new SettingsStore(FilePath).Load();
+        Assert.Equal(0.3, loaded.MusicVolume);
+        Assert.True(loaded.Muted);
+        Assert.Equal("Zira", loaded.NarrationVoice);
+        var json = File.ReadAllText(FilePath);
+        Assert.Contains("\"musicVolume\"", json);
+        Assert.Contains("\"narrationVoice\"", json);
+    }
+
+    [Fact]
+    public void Audio_levels_default_and_clamp()
+    {
+        var levels = AudioSettings.From(new HostSettings());
+        Assert.Equal(new AudioSettings(1, AudioSettings.DefaultMusic, AudioSettings.DefaultSfx, 1, false), levels);
+
+        var wild = AudioSettings.From(new HostSettings { MasterVolume = 7, MusicVolume = -2, SfxVolume = double.NaN });
+        Assert.Equal(1, wild.Master);
+        Assert.Equal(0, wild.Music);
+        Assert.Equal(AudioSettings.DefaultSfx, wild.Sfx);
     }
 }

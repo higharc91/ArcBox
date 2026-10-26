@@ -12,7 +12,7 @@ public sealed record DemoStep(RedlineHostView View, double Seconds)
 
 /// <summary>
 /// The dev-only <c>--redline-demo</c> script: a realistic race told in host views, so the TV scene can be run and
-/// screenshotted without a server. Driver Select (claims arriving) → Grid → round 4's Throttle, Question and Reveal (a
+/// screenshotted without a server. Driver Select (claims arriving) → Grid → round 4's Throttle, Reading, Question and Reveal (a
 /// human Redline spin-out, a three-car pack at the front, a pair behind) → Chequered. Seven humans among the 22 cars,
 /// one with a 12-character name; everyone else is AI. Distances follow the rules' payouts (<see cref="RedlineRules"/>).
 /// <see cref="RedlineHostView.DeadlineUtc"/> is left null: the feeder stamps it when it plays a step.
@@ -110,6 +110,12 @@ public static class DemoRace
         var throttle = ordered.Select((p, i) => Row(grid.ByCode(p.Code), true, before[p.Code], 0, p.Before, p.Before,
             i % 4 == 3 ? DriverStatus.Choosing : DriverStatus.Locked)).ToList();
         steps.Add(new DemoStep(View(rules, RacePhase.Throttle, DemoRound, throttleCard, null, throttle), 4) { Label = "throttle" });
+
+        // Reading (audio spec §2): the question and every throttle on show while the question is read out.
+        var reading = ordered.Select(p => Row(grid.ByCode(p.Code), true, before[p.Code], 0, p.Before, p.Before,
+            DriverStatus.Ready) with { Throttle = p.Throttle }).ToList();
+        var readingSeconds = Math.Ceiling(rules.ReadingTime(Card.Text!).TotalSeconds * 10) / 10;
+        steps.Add(new DemoStep(View(rules, RacePhase.Reading, DemoRound, Card, null, reading), readingSeconds) { Label = "reading" });
 
         var question = ordered.Select((p, i) => Row(grid.ByCode(p.Code), true, before[p.Code], 0, p.Before, p.Before,
             i % 3 == 1 ? DriverStatus.Answering : DriverStatus.Answered) with { Throttle = p.Throttle }).ToList();

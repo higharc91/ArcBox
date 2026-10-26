@@ -1,6 +1,9 @@
 # Third-party material in the REDLINE TV scene
 
-Everything in `games/redline/` is generated at runtime from code: there are no image, model or sound assets.
+Everything in `games/redline/` is generated at runtime from code: there are no image, model or sound assets. The
+sound effects, engine voices and both music loops are synthesised in C# (`games/Redline/Redline.Presentation/Audio/Synth/`)
+and need no licence; no third-party audio is used (the CC0 music sources considered in the audio spec were not reachable
+when the loops were made).
 
 | What | Where it comes from | Licence |
 |---|---|---|

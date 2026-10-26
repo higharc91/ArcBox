@@ -12,6 +12,10 @@ config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 run/flush_stdout_on_print=true
 run/max_fps=144
 
+[audio]
+
+general/text_to_speech=true
+
 [display]
 
 window/size/viewport_width=1920

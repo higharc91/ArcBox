@@ -1,5 +1,7 @@
 using System.Text.Json;
+using ArcBox.Host.Audio;
 using ArcBox.Host.Core;
+using ArcBox.Host.Core.Audio;
 using ArcBox.Host.Shell;
 using ArcBox.Sdk;
 using ArcBox.Sdk.Protocol;
@@ -29,6 +31,7 @@ public partial class Main : Control
     private string _preset = RenderPresets.Ultra;
     private AutoStart? _autoStart;
     private HostOverlay _overlay = null!;
+    private Narrator _narrator = null!;
 
     /// <summary>The selected game's scene, getting ready behind the lobby (<see cref="IPreloadScene"/>).</summary>
     private Node? _warm;
@@ -92,8 +95,16 @@ public partial class Main : Control
             _autoStart = new AutoStart(auto);
             GD.Print($"Autostart: {auto.GameId} once {auto.MinPlayers} player(s) are in");
         }
+        // Sound: the buses with the saved volumes, the shared narrator and the voice ducking.
+        AudioLog.Enabled = _args.AudioLog;
+        AudioBuses.Ensure();
+        AudioBuses.Apply(AudioSettings.From(saved));
+        _narrator = new Narrator { PreferredVoice = saved.NarrationVoice };
+        AddChild(_narrator);
+        AddChild(new Ducking { VoiceActive = () => _narrator.Speaking });
+
         BuildBanner();
-        _overlay = new HostOverlay { Preset = _preset, LogPerf = _args.Perf };
+        _overlay = new HostOverlay { Preset = _preset, LogPerf = _args.Perf, Narrator = _narrator };
         AddChild(_overlay);
         if (_args.Perf)
         {
@@ -153,6 +164,21 @@ public partial class Main : Control
             GetViewport().SetInputAsHandled();
             _overlay.TogglePerf();
         }
+        else if (key.Keycode == Key.M && GetViewport().GuiGetFocusOwner() is not (LineEdit or TextEdit))
+        {
+            GetViewport().SetInputAsHandled();
+            ToggleMute();
+        }
+    }
+
+    /// <summary>M: mute or unmute everything (music, effects, voice), saved for the next launch.</summary>
+    private void ToggleMute()
+    {
+        var muted = !AudioBuses.Levels.Muted;
+        AudioBuses.Apply(AudioBuses.Levels with { Muted = muted });
+        _settings.Update(s => s with { Muted = muted });
+        _overlay.Toast(muted ? "SOUND OFF" : "SOUND ON");
+        GD.Print($"Sound {(muted ? "muted" : "on")} (M)");
     }
 
     /// <summary>F2: Ultra → High → Low → Ultra, applied to the scene on screen now and saved for the next launch.</summary>
@@ -208,6 +234,7 @@ public partial class Main : Control
 
         _serverUrl = serverUrl.TrimEnd('/');
         _roomReady = false;
+        _narrator.SetSession(null);
         _connect!.ServerUrl = _serverUrl;
         if (!Uri.TryCreate(_serverUrl, UriKind.Absolute, out var uri) || (uri.Scheme != "http" && uri.Scheme != "https"))
         {
@@ -247,6 +274,7 @@ public partial class Main : Control
                     {
                         _connect?.SetStatus("Resuming your room…", $"{_serverUrl} · room {saved.Code}", ArcTheme.Gold, true);
                         await client.ResumeHostAsync(saved.Code, saved.HostToken);
+                        SetSpeechSession(saved.Code, saved.HostToken);
                         GD.Print($"ROOM {saved.Code}");
                         GD.Print($"Resumed room {saved.Code} from {_store.Path}");
                         return;
@@ -261,6 +289,7 @@ public partial class Main : Control
                 _connect?.SetStatus("Opening a room…", _serverUrl, ArcTheme.Gold, true);
                 var room = await client.CreateRoomAsync();
                 _store.Save(new HostSession(_serverUrl, room.Code, room.HostToken));
+                SetSpeechSession(room.Code, room.HostToken);
                 GD.Print($"ROOM {room.Code}");
                 return;
             }
@@ -274,6 +303,10 @@ public partial class Main : Control
             }
         }
     }
+
+    /// <summary>The narrator asks this server's <c>/api/tts</c> as this room's host.</summary>
+    private void SetSpeechSession(string code, string hostToken) =>
+        _narrator.SetSession(new TtsSession(new Uri(_serverUrl + "/"), code, hostToken));
 
     private async Task DropClientAsync()
     {
@@ -452,6 +485,7 @@ public partial class Main : Control
     {
         GD.Print($"Room closed: {reason}");
         _store.Clear();
+        _narrator.SetSession(null);
         _roomReady = false;
         _lobby = null;
         ShowConnect();
@@ -569,6 +603,7 @@ public partial class Main : Control
             return;
         }
         (node as IRenderPresetScene)?.SetRenderPreset(_preset);
+        (node as IAudioScene)?.SetNarrator(_narrator);
         _warm = node;
         _warmGameId = gameId;
         AddChild(node);
@@ -637,6 +672,7 @@ public partial class Main : Control
 
         ((IGameScene)node!).SetShots(_shots);
         (node as IRenderPresetScene)?.SetRenderPreset(_preset);
+        (node as IAudioScene)?.SetNarrator(_narrator);
         SetScreen(node!, ScreenKind.Game, missing ? $"{gameId}-missing" : gameId);
         (node as IPreloadScene)?.EndPreload();
         _sceneGameId = gameId;

@@ -5,8 +5,9 @@ namespace Redline.Presentation.Hud;
 /// <summary>The header line above the question: meta items, difficulty pips and the big title.</summary>
 /// <param name="Meta">Small upper-case items left to right ("ROUND 4/15", "GEOGRAPHY").</param>
 /// <param name="Difficulty">"MEDIUM" with <paramref name="Pips"/> of 3 lit, or null.</param>
-/// <param name="ClockCaption">"TIME", "NEXT" or "START" (Grid shows the start lights instead of a time).</param>
-public sealed record HeaderText(IReadOnlyList<string> Meta, string? Difficulty, int Pips, string Title, string ClockCaption);
+/// <param name="ClockCaption">"TIME", "NEXT", "READING" or "START" (Grid shows the start lights instead of a time).</param>
+/// <param name="ClockText">Shown in place of the countdown ("LISTEN" while the question is read out), or null for the time.</param>
+public sealed record HeaderText(IReadOnlyList<string> Meta, string? Difficulty, int Pips, string Title, string ClockCaption, string? ClockText = null);
 
 /// <summary>One throttle in the rules strip: the chip and its payout, e.g. PUSH "+3 / −1".</summary>
 public sealed record RuleItem(Chip Chip, string Payout);
@@ -35,6 +36,7 @@ public static class HudText
                 [CircuitName(view.CircuitId).ToUpperInvariant(), $"{view.MaxRounds} ROUNDS · RACE TO THE FLAG"], null, 0,
                 "Lights out in a moment…", "START"),
             RacePhase.Throttle => new HeaderText(Meta(round, q), difficulty, pips, "Choose your throttle", "TIME"),
+            RacePhase.Reading => new HeaderText(Meta(round, q), difficulty, pips, q?.Text ?? "Listen…", "READING", "LISTEN"),
             RacePhase.Question => new HeaderText(Meta(round, q), difficulty, pips, q?.Text ?? "Choose your answer", "TIME"),
             RacePhase.Reveal => new HeaderText(Meta(round, q), difficulty, pips, q?.Text ?? "The answer is…", "NEXT"),
             _ => new HeaderText([$"CHEQUERED FLAG · ROUND {view.Round}/{view.MaxRounds}"], null, 0, Headline(view), ""),

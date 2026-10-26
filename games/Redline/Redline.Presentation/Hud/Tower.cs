@@ -73,7 +73,7 @@ public static class Tower
     };
 
     /// <summary>
-    /// Throttle: LOCKED / CHOOSING / PIT. Question: the revealed throttle. Reveal: the result with the distance actually
+    /// Throttle: LOCKED / CHOOSING / PIT. Reading and Question: the revealed throttle. Reveal: the result with the distance actually
     /// gained or lost. Grid: READY. Driver Select and Chequered: none.
     /// </summary>
     public static Chip? ChipFor(DriverRow d, RacePhase phase)
@@ -89,6 +89,7 @@ public static class Tower
                     DriverStatus.Choosing => new Chip("CHOOSING", ChipKind.Wait),
                     _ => new Chip("LOCKED", ChipKind.Locked),
                 };
+            case RacePhase.Reading:
             case RacePhase.Question:
                 return d.Throttle is { } t ? ThrottleChip(t) : null;
             case RacePhase.Reveal:

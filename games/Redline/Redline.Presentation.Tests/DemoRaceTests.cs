@@ -16,7 +16,7 @@ public class DemoRaceTests
     {
         var phases = Steps.Select(s => s.View.Phase).Distinct().ToList();
 
-        Assert.Equal([RacePhase.DriverSelect, RacePhase.Grid, RacePhase.Throttle, RacePhase.Question, RacePhase.Reveal, RacePhase.Chequered], phases);
+        Assert.Equal([RacePhase.DriverSelect, RacePhase.Grid, RacePhase.Throttle, RacePhase.Reading, RacePhase.Question, RacePhase.Reveal, RacePhase.Chequered], phases);
         Assert.All(Steps, s => Assert.Equal(22, s.View.Drivers.Count));
         Assert.All(Steps, s => Assert.True(s.Seconds > 0));
     }
@@ -74,6 +74,18 @@ public class DemoRaceTests
             Assert.Equal(before.Throttle, d.Throttle);
         }
         Assert.Null(Phase(RacePhase.Throttle).Question!.Text);
+    }
+
+    [Fact]
+    public void Reading_shows_the_question_and_throttles_for_as_long_as_the_rules_read_it()
+    {
+        var reading = Steps.Single(s => s.View.Phase == RacePhase.Reading);
+        var question = Phase(RacePhase.Question);
+
+        Assert.Equal(question.Question, reading.View.Question);
+        Assert.Equal(question.Drivers.Select(d => (d.Code, d.Throttle, d.Distance)), reading.View.Drivers.Select(d => (d.Code, d.Throttle, d.Distance)));
+        Assert.All(reading.View.Drivers, d => Assert.Equal(DriverStatus.Ready, d.Status));
+        Assert.InRange(reading.Seconds, new RedlineRules().ReadingTime(question.Question!.Text!).TotalSeconds, 10);
     }
 
     [Fact]

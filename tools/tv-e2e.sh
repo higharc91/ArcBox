@@ -8,11 +8,16 @@
 #   1. builds the phone app (web/play/dist), the server and the TV host (skip with --skip-build);
 #   2. starts the server in Development (serves web/play/dist, OpenTDB off) on a free port on 127.0.0.1;
 #   3. starts the TV on its own Xvfb display with software Vulkan:
-#        --new-room --shots=<out>/tv --preset=<low> --res=<1280x720> --server=<url> --autostart=redline:<phones>
+#        --new-room --shots=<out>/tv --preset=<low> --res=<1280x720> --server=<url> --autostart=redline:<phones> --audio-log
 #      and reads the room code from its `ROOM <CODE>` log line;
 #   4. runs web/play/e2e/redline.e2e.mjs with ARCBOX_ROOM=<CODE>, ARCBOX_START=host and <phones> bot phones;
 #      the TV selects REDLINE and starts it once they have all joined (--autostart);
-#   5. lets the TV finish its last shots, stops everything it started, and checks the TV log for errors.
+#   5. lets the TV finish its last shots, stops everything it started, and checks the TV log for errors;
+#   6. checks the TV's `AUDIO <bus> <name>` lines (--audio-log) for the race's sounds in order: the five start beeps,
+#      lights out, the commentator's first line, the question read out, the Reveal sting or buzz and the answer
+#      line (and, with ARCBOX_FULL=1, the fanfare and the winner's line). Without a Google key on the server,
+#      /api/tts answers 503 and the narration comes from the TV's built-in voice, or is only logged when the TV has
+#      none (Linux without speech-dispatcher): the AUDIO lines are the same either way.
 #
 # Environment (all optional except GODOT when `godot` is not on PATH):
 #   GODOT            Godot 4.7.2 .NET binary
@@ -28,7 +33,8 @@
 #   TV_REMATCH       1 (with ARCBOX_FULL=1) = after the race, the VIP phone starts a second one in the same room
 #                    and plays it to its first Reveal (shots in <out>/phones-rematch)
 #
-# Exit code 0 when the phones reached their goal and the TV log has no errors beyond the expected audio ones.
+# Exit code 0 when the phones reached their goal, the TV log has no errors beyond the expected audio-driver ones, and
+# the audio lines are all there in order.
 set -euo pipefail
 
 ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
@@ -117,7 +123,7 @@ QUIT_AFTER=$([[ "${ARCBOX_FULL:-}" == "1" ]] && echo 2700 || echo 900)
 log "starting the TV on :$DISPLAY_NUM ($RES, preset $PRESET)"
 DISPLAY=":$DISPLAY_NUM" "$GODOT" --path "$ROOT/src/ArcBox.Host" --rendering-driver vulkan -- \
   --new-room --shots="$OUT/tv" --preset="$PRESET" --res="$RES" --server="$URL" \
-  --autostart="redline:$PHONES" --quit-after="$QUIT_AFTER" ${TV_ARGS:-} > "$OUT/tv.log" 2>&1 &
+  --autostart="redline:$PHONES" --quit-after="$QUIT_AFTER" --audio-log ${TV_ARGS:-} > "$OUT/tv.log" 2>&1 &
 TV_PID=$!
 
 CODE=""
@@ -166,7 +172,42 @@ if [[ -n "$ERRORS" ]]; then
   log "errors in the TV log:"
   echo "$ERRORS"
 fi
-if (( PHONES_EXIT != 0 )) || [[ -n "$ERRORS" ]]; then
+
+# ---- 6. audio: each expected AUDIO line after the one before it ("label|regex").
+AUDIO_FAIL=0
+EXPECT=(
+  "start beep 1|^AUDIO Sfx start-beep #1$"
+  "start beep 2|^AUDIO Sfx start-beep #2$"
+  "start beep 3|^AUDIO Sfx start-beep #3$"
+  "start beep 4|^AUDIO Sfx start-beep #4$"
+  "start beep 5|^AUDIO Sfx start-beep #5$"
+  "lights out|^AUDIO Sfx lights-out$"
+  "round 1 commentary|^AUDIO Voice redline\.announcer: (And it's lights out!|Round 1\.)"
+  "question read out|^AUDIO Voice redline\.questions: "
+  "Reveal sting or buzz|^AUDIO Sfx (correct|wrong)$"
+  "the answer|^AUDIO Voice redline\.announcer: The answer is "
+)
+if [[ "${ARCBOX_FULL:-}" == "1" ]]; then
+  EXPECT+=("fanfare|^AUDIO Sfx fanfare$" "the winner|^AUDIO Voice redline\.announcer: (Chequered flag!|.* takes the win\.)")
+fi
+LAST=0
+for item in "${EXPECT[@]}"; do
+  label=${item%%|*}
+  re=${item#*|}
+  n=$(RE="$re" awk -v from="$LAST" 'NR > from && $0 ~ ENVIRON["RE"] { print NR; exit }' "$OUT/tv.log")
+  if [[ -z "$n" ]]; then
+    log "audio: MISSING $label (/$re/ after line $LAST)"
+    AUDIO_FAIL=1
+    break
+  fi
+  log "audio: $label · $(sed -n "${n}p" "$OUT/tv.log")"
+  LAST=$n
+done
+log "narrator: $(grep -E '^NARRATOR ' "$OUT/tv.log" | sed 's/^NARRATOR //' | awk '!seen[$0]++' | paste -sd '|' | sed 's/|/ | /g')"
+grep -E '^AUDIO ' "$OUT/tv.log" > "$OUT/audio.log" || true
+log "audio: $(wc -l < "$OUT/audio.log") AUDIO lines in $OUT/audio.log"
+
+if (( PHONES_EXIT != 0 )) || [[ -n "$ERRORS" ]] || (( AUDIO_FAIL )); then
   log "FAILED (phones exit $PHONES_EXIT)"
   exit 1
 fi
