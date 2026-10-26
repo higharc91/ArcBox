@@ -122,6 +122,30 @@ public class ShotFramingTests
         }
     }
 
+    /// <summary>
+    /// The pit building (the TV's <c>Landmarks</c>) runs along the pit side of the straight with its roof edge about 29 m
+    /// out and 10 m up. Found in the first TV + phones run: from 15 m up, most of the sweep looked into that roof.
+    /// </summary>
+    [Fact]
+    public void Lineup_orbit_sees_the_grid_over_the_pit_building_roof()
+    {
+        const float roofEdgeOut = 29, roofHeight = 10, margin = 1.5f;
+        var centre = TrackPose.At(Samples, -Formation.PoleSetback - 84, 0);
+        for (var t = 0.0; t < 90; t += 0.5)
+        {
+            var cam = ShotFraming.LineupOrbitPose(Samples, t);
+            var outward = Vector3.Dot(cam.Eye - centre.Position, centre.Left);
+            if (outward <= roofEdgeOut)
+            {
+                continue;   // in front of the building
+            }
+            // Height of the sight line to the middle of the grid where it crosses the roof edge.
+            var k = roofEdgeOut / outward;
+            var lineHeight = Vector3.Lerp(cam.Target, cam.Eye, k).Y - centre.Position.Y;
+            Assert.True(lineHeight > roofHeight + margin, $"t = {t}: sight line {lineHeight:0.0} m up at the roof edge");
+        }
+    }
+
     [Fact]
     public void Lerp_blends_every_part()
     {

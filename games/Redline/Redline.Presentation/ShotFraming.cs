@@ -34,7 +34,8 @@ public static class ShotFraming
 
     public const float GridFov = 36;
     public const float LineupRadius = 58;
-    public const float LineupHeight = 15;
+    /// <summary>High enough to look over the pit building's roof (10 m up, 29 m out) at the middle of the grid.</summary>
+    public const float LineupHeight = 24;
     public const float LineupOrbit = 3.5f;
 
     /// <summary>High behind the grid, looking down the straight towards the gantry and the climb to Turn 1.</summary>
