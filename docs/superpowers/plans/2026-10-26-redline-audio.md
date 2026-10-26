@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Question narration in a Google Chirp 3: HD voice (with a built-in fallback), a Reading phase that holds the answer clock, a race commentator using player names, TV sound effects and music, and phone haptics and sounds.
+**Goal:** A platform text-to-speech service with per-theme voices usable by every game, and for REDLINE: question narration in a Google Chirp 3: HD voice (with a built-in fallback), a Reading phase that holds the answer clock, a race commentator using player names, TV sound effects and music, and phone haptics and sounds.
 
 **Architecture:** Game logic gains a deterministic Reading phase and stays audio-free. A pure-C# `Commentary` turns host-view transitions into lines, and a pure-C# synth makes the sound effects. The server owns the Google key behind a host-authenticated, cached `/api/tts` endpoint and prewarms each race's questions. The TV plays everything through a Narrator and an AudioDirector on ducked buses. Phones add WebAudio and vibration.
 
@@ -65,7 +65,7 @@
 - [ ] **Step 2–4:** fail → implement → green.
 - [ ] **Step 5:** Commit `feat(redline): race commentary lines from host-view transitions`.
 
-### Task 3: Server speech service and `/api/tts`
+### Task 3: Platform speech service with voice themes and `/api/tts`
 
 **Files:**
 - Create: `src/ArcBox.Server/Speech/{SpeechOptions.cs, ISpeechSynthesizer.cs, GoogleTtsClient.cs, SpeechCache.cs, SpeechEndpoints.cs, NarratedQuestionSource.cs, SpeechServiceCollectionExtensions.cs}`
@@ -73,7 +73,7 @@
 - Test: `src/ArcBox.Server.Tests/Speech/*`
 - Create: `docs/speech-setup.md` (Google Cloud project, enable Text-to-Speech API, billing account, create a restricted API key limited to the Text-to-Speech API, `dotnet user-secrets set Speech:Google:ApiKey …` or env var, voice list link, free-tier note, the character counter log line)
 
-**Interfaces:** per spec §3.1. `ISpeechSynthesizer.SynthesizeAsync(string text, CancellationToken) → Task<byte[]>`; `SpeechCache.GetAsync(string text, CancellationToken) → Task<byte[]>`; `SpeechCache.CharactersSynthesized` (long).
+**Interfaces:** per spec §3.1 (platform service, voice themes in `src/ArcBox.Sdk/Speech/VoiceTheme.cs`, REDLINE themes in `games/Redline/Redline.Logic/RedlineVoices.cs`, `GET /api/tts/voices`, generic `ISpeechService.Prewarm(themeId, texts)`). Extra tests: `Unknown_voice_theme_is_400`, `Themes_from_game_and_config_merge`, `Duplicate_theme_id_fails_startup`, `Cache_key_changes_with_theme_voice`, `Voices_endpoint_lists_themes_without_provider_details`, `Unsupported_audioConfig_fields_are_not_sent`. `ISpeechSynthesizer.SynthesizeAsync(string text, CancellationToken) → Task<byte[]>`; `SpeechCache.GetAsync(string text, CancellationToken) → Task<byte[]>`; `SpeechCache.CharactersSynthesized` (long).
 
 - [ ] **Step 1:** Tests: `Google_request_shape` (URL with key, JSON body voice/encoding, no key in logs); `Decodes_audioContent`; `Cache_hit_skips_google` (incl. across instances via disk); `Concurrent_requests_share_one_synthesis` (Review Focus 2); `Failures_are_not_cached`; endpoint: `Tts_requires_valid_host_token` (401), `Tts_rejects_empty_and_long_text` (400), `Tts_rate_limited_per_room` (429), `Tts_returns_503_when_disabled_or_unconfigured`, `Tts_returns_503_when_google_fails` (Review Focus 1), `Tts_returns_mp3`; `Take_prewarms_question_texts` and `Prewarm_errors_do_not_affect_take`; `Character_counter_counts_only_synthesised_text`.
 - [ ] **Step 2–4:** fail → implement → `dotnet test --solution ArcBox.slnx` green. Tests use a fake `HttpMessageHandler`; no real Google calls.
@@ -109,7 +109,7 @@
 - Modify: `src/ArcBox.Host/Main.cs` (create the Narrator with the session's server/code/token; `M` mute), `Shell/HostSettings` (volumes), `Shell/AppArgs.cs` (`--audio-log`), `games/redline/RedlineScene.cs` (wire AudioDirector + Commentary → Narrator; narrate the question on Reading entry, or on Question entry when Reading is off), `games/redline/Hud/*` (Reading: question + answers + "LISTEN"), F3 overlay narrator state
 - Pure logic that can live in `ArcBox.Host.Core` (with tests): `NarrationQueue` (priority, preemption, staleness drop 4 s), `NarratorFallbackPolicy` (2.5 s timeout, 60 s cool-down), `TtsRequest` builder.
 
-**Interfaces:** `Narrator.Say(string text, NarrationPriority priority)`; `Narrator.State` (`Google | Fallback | Off`); `AudioDirector.OnView(RedlineHostView view, RedlineHostView? previous)`, `AudioDirector.OnSpin(string code)`, `AudioDirector.OnLight(int index)`.
+**Interfaces:** `Narrator.Say(string text, string voiceTheme, NarrationPriority priority)` (shared by all games; fallback rate/pitch per theme from `GET /api/tts/voices`); `Narrator.State` (`Google | Fallback | Off`); `AudioDirector.OnView(RedlineHostView view, RedlineHostView? previous)`, `AudioDirector.OnSpin(string code)`, `AudioDirector.OnLight(int index)`.
 - [ ] **Step 1:** Core tests: `Question_preempts_commentary`; `Stale_commentary_dropped`; `Narrator falls back on timeout and cools down` (Review Focus 1); `Fallback_retries_google_after_cooldown`.
 - [ ] **Step 2–4:** fail → implement → green; `dotnet build src/ArcBox.Host` clean.
 - [ ] **Step 5:** Run `--redline-demo --audio-log` under Xvfb and assert the log contains, in order: start beeps ×5, lights-out, round intro narration, question narration (fallback provider here, since no key and no sound card), Reveal sting, commentary event, fanfare. Look at the Reading-phase screenshots.
