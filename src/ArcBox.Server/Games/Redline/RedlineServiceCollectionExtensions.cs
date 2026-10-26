@@ -1,3 +1,4 @@
+using ArcBox.Server.Speech;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Redline.Logic;
@@ -10,7 +11,8 @@ public static class RedlineServiceCollectionExtensions
 
     /// <summary>
     /// Wires up REDLINE: binds <c>Redline:OpenTdb</c>, the OpenTDB client and question pool, the pooled question
-    /// source and the game itself.
+    /// source (decorated with <see cref="NarratedQuestionSource"/> when speech is available), REDLINE's voice themes
+    /// and the game itself.
     /// </summary>
     /// <remarks>
     /// The pool singleton is always registered because <see cref="PooledQuestionSource"/> depends on it. It is only
@@ -42,7 +44,16 @@ public static class RedlineServiceCollectionExtensions
         if (section.GetValue("Enabled", true))
             services.AddHostedService(sp => sp.GetRequiredService<OpenTdbQuestionPool>());
 
-        services.AddSingleton<IQuestionSource, PooledQuestionSource>();
+        services.AddVoiceThemes(RedlineVoices.All);
+        services.AddSingleton<PooledQuestionSource>();
+        services.AddSingleton<IQuestionSource>(sp =>
+        {
+            var pooled = sp.GetRequiredService<PooledQuestionSource>();
+            // Decorate only when the platform speech service is registered and usable; otherwise prewarming is moot.
+            return sp.GetService<ISpeechService>() is { IsAvailable: true } speech
+                ? new NarratedQuestionSource(pooled, speech, sp.GetRequiredService<ILogger<NarratedQuestionSource>>())
+                : pooled;
+        });
         services.AddArcGame(sp => new RedlineGame(sp.GetRequiredService<IQuestionSource>()));
         return services;
     }
