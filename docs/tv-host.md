@@ -43,6 +43,7 @@ Everything after `--` on the Godot command line; all optional.
 | `--quit-after=<seconds>` | Quit after that many seconds. |
 | `--preset=ultra\|high\|low` | Render preset for 3D scenes (parsed now; applied by the REDLINE scene). |
 | `--res=<w>x<h>` | Window size. The UI is laid out at 1920×1080 and scales (`canvas_items`, `expand`). |
+| `--redline-demo[=<step>]` | Dev only: play a scripted REDLINE race into the TV without a server (see below). |
 
 Unknown arguments are reported as warnings and ignored.
 
@@ -61,6 +62,38 @@ While running:
 - **Connection drops:** a "reconnecting" banner appears; SignalR reconnects with the platform backoff
   (0, 1, 2, 5, 10, 10… s) and the host calls `ResumeHost` again. If the room is gone, the TV opens a new one.
 - **`RoomClosed`:** the session is cleared and a new room opens.
+
+## REDLINE scene
+
+`games/redline/RedlineScene.tscn` draws the race in 3D: Circuit of the Americas with the 22 procedural 2026 cars. All
+geometry comes from the pure-C# builders in `games/Redline/Redline.Presentation` (track, terrain, cars), built at scene
+load on the thread pool and cached for the process (no baked `.res` files); placement (`Formation`), Reveal motion
+(`RevealMotion`), shot geometry (`ShotFraming`) and shot choice (`CameraDirector`) are unit-tested there too. The scene
+logs `REDLINE world ready in … ms` with the cold build times.
+
+The HUD hangs off `RedlineScene.Hud` (`RedlineHud`, a `CanvasLayer`): it gets every view through `Render(view,
+previous)` and, each frame, `UpdateTags(ActiveCamera, Cars)` with the live camera and the cars by driver code.
+
+**Demo without a server.** `--redline-demo` feeds the scene a scripted race (`DemoRace` in Redline.Presentation): Driver
+Select with claims arriving, Grid, then round 4's Throttle, Question and Reveal (a human Redline spin-out, a three-car pack
+at the front) and the Chequered flag. `--redline-demo=<step>` starts at `driverselect`, `grid`, `throttle`, `question`,
+`reveal` or `chequered`. The script runs on the scene clock, so Godot's `--fixed-fps` makes a capture deterministic
+however slowly frames render:
+
+```sh
+xvfb-run -a -s "-screen 0 1920x1080x24" godot --path src/ArcBox.Host --rendering-driver vulkan --fixed-fps 8 -- \
+  --redline-demo --shots=/tmp/redline --res=1920x1080 --preset=high --quit-after=48
+```
+
+With `--shots` the scene saves each phase about a second after it starts, each Driver Select claim, and Reveal at 2, 4
+and 6 s.
+
+**Presets.** `--preset=ultra` (default): SDFGI with half-resolution probes, SSR, SSAO + SSIL, volumetric haze, a 4-split
+8192 shadow atlas, MSAA 4× + SMAA, 144 fps cap with VSync off. `high`: Ultra without SDFGI and SSR. `low`: no
+screen-space effects, 2-split 2048 shadows, FXAA, half the trees (still Forward+).
+
+**Performance** must be measured on the target machine (RTX 5080, 2560×1440): this repository's sandbox renders with
+Mesa's CPU rasteriser (llvmpipe), where a 1080p frame takes several seconds, so frame rates from it mean nothing.
 
 ## Adding a game scene
 
