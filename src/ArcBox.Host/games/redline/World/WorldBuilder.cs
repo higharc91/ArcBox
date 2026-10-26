@@ -34,6 +34,8 @@ public static class WorldBuilder
             ReflectedLightSource = Environment.ReflectionSource.Sky,
             TonemapMode = Environment.ToneMapper.Agx,
             TonemapExposure = 1.0f,
+            TonemapAgxWhite = 8f,
+            TonemapAgxContrast = 1.45f,
             FogEnabled = true,
             FogMode = Environment.FogModeEnum.Exponential,
             FogLightColor = new Color("c9d6e2"),

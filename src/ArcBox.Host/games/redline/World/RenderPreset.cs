@@ -59,10 +59,11 @@ public static class RenderPreset
         env.SsilIntensity = 0.6f;
 
         env.VolumetricFogEnabled = !low;
-        env.VolumetricFogDensity = 0.0025f;
-        env.VolumetricFogLength = 160;
-        env.VolumetricFogAnisotropy = 0.45f;
-        env.VolumetricFogAlbedo = new Color("dfe7ef");
+        env.VolumetricFogDensity = 0.0007f;
+        env.VolumetricFogLength = 200;
+        env.VolumetricFogAnisotropy = 0.3f;
+        env.VolumetricFogGIInject = 0.3f;
+        env.VolumetricFogAlbedo = new Color("d2dce6");
         env.VolumetricFogSkyAffect = 0;
 
         sun.ShadowEnabled = true;
