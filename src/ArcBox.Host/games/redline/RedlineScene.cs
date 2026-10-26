@@ -9,6 +9,7 @@ using ArcBox.Sdk;
 using Godot;
 using Redline.Logic;
 using Redline.Presentation;
+using Redline.Presentation.Hud;
 
 namespace ArcBox.Host.Games.Redline;
 
@@ -158,7 +159,7 @@ public partial class RedlineScene : Node3D, IGameScene
             _rig.SetShot(CameraDirector.RevealFollowUp(_view));
         }
 
-        _world!.Gantry.SetLit(_view.Phase == RacePhase.Grid ? Math.Clamp((int)((phaseTime - 0.4) / 0.85) + 1, 0, 5) : 0);
+        _world!.Gantry.SetLit(StartLights.Lit(_view.Phase, phaseTime));
         _rig.Advance(_time);
         _hud.UpdateTags(ActiveCamera, _carNodes);
 

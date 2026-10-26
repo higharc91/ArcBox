@@ -74,6 +74,25 @@ logs `REDLINE world ready in … ms` with the cold build times.
 The HUD hangs off `RedlineScene.Hud` (`RedlineHud`, a `CanvasLayer`): it gets every view through `Render(view,
 previous)` and, each frame, `UpdateTags(ActiveCamera, Cars)` with the live camera and the cars by driver code.
 
+**HUD.** `games/redline/Hud/` is the broadcast graphics from the mockups (`03`–`05`, `09`–`11`, `14`, `15`), laid out on
+the 1920×1080 base that `canvas_items` stretch scales to any 16:9 window:
+
+| Phase | On screen |
+|---|---|
+| Driver Select | REDLINE slab; the claim board (11 teams × 2 seats, claimed seats white with the player in red) with the clock; the claim lower-third for the newest claim (the car the line-up camera holds) |
+| Grid | header with the five start lights; 22-row timing tower; track map; rules strip with the payouts from the view and the question credit |
+| Throttle | header (round, category, difficulty, clock); tower with LOCKED / CHOOSING / PIT; map; "n OF m LOCKED" strip with the payout chips |
+| Question | header with the question; tower with every throttle and a tick for players who answered; map; answers A–D |
+| Reveal | the correct answer green, wrong ones dimmed, team-colour pips of who picked each; tower result chips, ▲▼ and a 0.5 s re-sort; the round lower-third for the camera's subject until the follow-up cut |
+| Chequered | "ALEX WINS", podium, full classification, awards, credit |
+
+Name tags float over **player** cars only, and hide when the car is behind the camera, off screen, over 260 m away or
+under a panel; overlapping tags stack. Everything worded, ordered or culled is pure C# in
+`Redline.Presentation/Hud` (`Tower`, `HudText`, `HudClock`, `RoundResult`, `DriverSelectBoard`, `NameTagLayout`,
+`TrackMapLayout`, `StartLights`) with tests; the Godot classes only draw. The clock reads `deadlineUtc` against the local
+clock when a view arrives, clamps it to the phase length and then counts down on frame time; the demo stamps its
+deadlines on the scene clock, so `--fixed-fps` captures show a sensible countdown.
+
 **Demo without a server.** `--redline-demo` feeds the scene a scripted race (`DemoRace` in Redline.Presentation): Driver
 Select with claims arriving, Grid, then round 4's Throttle, Question and Reveal (a human Redline spin-out, a three-car pack
 at the front) and the Chequered flag. `--redline-demo=<step>` starts at `driverselect`, `grid`, `throttle`, `question`,
@@ -91,6 +110,10 @@ and 6 s.
 **Presets.** `--preset=ultra` (default): SDFGI with half-resolution probes, SSR, SSAO + SSIL, volumetric haze, a 4-split
 8192 shadow atlas, MSAA 4× + SMAA, 144 fps cap with VSync off. `high`: Ultra without SDFGI and SSR. `low`: no
 screen-space effects, 2-split 2048 shadows, FXAA, half the trees (still Forward+).
+
+**Haze.** Distance haze comes from the exponential fog's aerial perspective; the volumetric fog is kept thin (density
+0.0007, little GI inject) because at 60–70 m, the helicopter shots' distance to the cars, anything thicker lays a white veil
+over the whole frame. AgX runs with white 8 and contrast 1.45 (Godot's defaults, 16.29 and 1.25, look flat here).
 
 **Performance** must be measured on the target machine (RTX 5080, 2560×1440): this repository's sandbox renders with
 Mesa's CPU rasteriser (llvmpipe), where a 1080p frame takes several seconds, so frame rates from it mean nothing.

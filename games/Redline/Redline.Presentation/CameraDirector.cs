@@ -37,7 +37,8 @@ public static class CameraDirector
     public static Shot RevealFollowUp(RedlineHostView view) =>
         new HeliShot([BestPlaced(view.Drivers, humanOnly: false)!.Code]);
 
-    private static string? NewlyClaimed(RedlineHostView view, RedlineHostView? previous)
+    /// <summary>The first seat (view order) claimed in <paramref name="view"/> but not in <paramref name="previous"/>.</summary>
+    public static string? NewlyClaimed(RedlineHostView view, RedlineHostView? previous)
     {
         var already = previous is null
             ? []
