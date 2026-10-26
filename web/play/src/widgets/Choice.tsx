@@ -1,5 +1,5 @@
 import type { ChoiceView } from "../protocol";
-import { OptionLabel, useSendOnce, useViewState, type WidgetProps } from "./common";
+import { OptionLabel, Prompt, useSendOnce, useViewState, type WidgetProps } from "./common";
 
 /** Single choice sends on tap; multiple choice toggles up to maxSelections and sends on "Lock in". */
 export function Choice({ view, send }: WidgetProps<ChoiceView>) {
@@ -25,10 +25,7 @@ export function Choice({ view, send }: WidgetProps<ChoiceView>) {
 
   return (
     <div class="w-choice">
-      <div class="pq">
-        {view.allowMultiple ? <small>Pick up to {max}</small> : null}
-        <div class="prompt">{view.prompt}</div>
-      </div>
+      <Prompt text={view.prompt} note={view.allowMultiple ? `Pick up to ${max}` : undefined} />
       <div class="options">
         {view.options.map((o) => {
           const on = selected.includes(o.id);

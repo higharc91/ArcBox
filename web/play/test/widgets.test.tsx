@@ -41,6 +41,14 @@ describe("Buttons", () => {
     expect(send).toHaveBeenCalledTimes(2);
   });
 
+  it("a lone button is a mash button: every tap sends (Counter keeps one view for the whole game)", () => {
+    const send = vi.fn();
+    render(<Buttons view={{ kind: "buttons", viewId: "v1", prompt: "Mash it!", buttons: [{ id: "press", label: "+1" }] }} send={send} />);
+    for (let i = 0; i < 5; i++) fireEvent.click(screen.getByRole("button", { name: "+1" }));
+    expect(send).toHaveBeenCalledTimes(5);
+    expect(send).toHaveBeenCalledWith({ pressed: "press" });
+  });
+
   it("marks the pressed button", () => {
     render(<Buttons view={buttons()} send={() => {}} />);
     fireEvent.click(screen.getByRole("button", { name: /B/ }));

@@ -191,6 +191,16 @@ describe("REDLINE skin", () => {
     expect(container.querySelector(".pstatus .pos small")!.textContent).toBe("ROUND 3/15");
   });
 
+  it("splits the throttle prompt into a meta line and the question", () => {
+    const view = structuredClone(buttonsFixture) as ButtonsView;
+    const { container, rerender } = render(<ControllerScreen view={view} send={() => {}} me="ALEX" game="redline" />);
+    expect(container.querySelector(".pq small")!.textContent).toBe("Science & Nature · Hard");
+    expect(container.querySelector(".pq .prompt")!.textContent).toBe("How hard do you push?");
+    rerender(<ControllerScreen view={view} send={() => {}} me="ALEX" game="counter" />);
+    expect(container.querySelector(".pq small")).toBeNull();
+    expect(container.querySelector(".pq .prompt")!.textContent).toBe("Science & Nature · Hard. How hard do you push?");
+  });
+
   it("tones the reveal message", () => {
     const wait = (message: string): WaitView => ({ kind: "wait", viewId: "v", message, header: "P5 · ROUND 3/15" });
     const { container, rerender } = render(<ControllerScreen view={wait("Spun out! −2 · pit limiter next round · now P5")} send={() => {}} me="A" game="redline" />);

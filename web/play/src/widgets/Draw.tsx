@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import type { DrawView, Stroke } from "../protocol";
-import { useSendOnce, useViewState, type WidgetProps } from "./common";
+import { Prompt, useSendOnce, useViewState, type WidgetProps } from "./common";
 
 /** Stroke width as a fraction of the canvas width, so it scales with the screen like the points do. */
 export const STROKE_WIDTH = 0.012;
@@ -97,7 +97,7 @@ export function Draw({ view, send }: WidgetProps<DrawView>) {
 
   return (
     <div class="w-draw">
-      <div class="pq"><div class="prompt">{view.prompt}</div></div>
+      <Prompt text={view.prompt} />
       <canvas
         ref={canvasRef}
         class="draw-canvas"

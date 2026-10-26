@@ -33,6 +33,19 @@ export function useViewState<T>(viewId: string, initial: T): [T, (v: T) => void]
   return [value, (v: T) => setState({ for: viewId, value: v })];
 }
 
+/** The question block (.pq); a skin may split off a small meta line. `note` is a small line the widget adds. */
+export function Prompt({ text, note }: { text?: string | null; note?: string }) {
+  const skin = useSkin(); // hooks first, unconditionally
+  const parts = text ? skin?.prompt?.(text) : undefined;
+  if (!text && !note) return null;
+  return (
+    <div class="pq">
+      {parts || note ? <small>{[parts?.meta, note].filter(Boolean).join(" · ")}</small> : null}
+      {text ? <div class="prompt">{parts ? parts.text : text}</div> : null}
+    </div>
+  );
+}
+
 /** Label on the first line, the hint as a dim second line; a skin may add a coloured badge in front. */
 export function OptionLabel({ option }: { option: Option }) {
   const badge = useSkin()?.optionBadge?.(option);

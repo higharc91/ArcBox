@@ -12,7 +12,7 @@ const TITLES: Partial<Record<RacePhase, string>> = {
   Chequered: "Chequered flag",
 };
 
-const OUTCOME: Record<RoundOutcome, string> = { Correct: "✓", Wrong: "✗", NoAnswer: "–", SpunOut: "SPIN" };
+const OUTCOME: Record<RoundOutcome, string> = { Correct: "✓", Wrong: "✗", NoAnswer: "MISS", SpunOut: "SPIN" };
 const DIFFICULTY = { Easy: 1, Medium: 2, Hard: 3 } as const;
 const minus = (n: number) => `−${Math.abs(n)}`;
 const signed = (n: number) => (n > 0 ? `+${n}` : n < 0 ? minus(n) : "0");
@@ -64,6 +64,7 @@ function TowerRow({ row, view, leader }: { row: DriverRow; view: RedlineHostView
       <span class="n">
         {row.code}
         {moved ? <span class={`mv ${moved > 0 ? "up" : "down"}`}>{moved > 0 ? `▲${moved}` : `▼${-moved}`}</span> : null}
+        {row.pitLimiter && phase !== "Throttle" && !select ? <span class="pit">PIT</span> : null}
       </span>
       <span class="who">{row.playerName ?? "AI"}</span>
       {select ? <span class="dist" /> : (
@@ -77,7 +78,6 @@ function TowerRow({ row, view, leader }: { row: DriverRow; view: RedlineHostView
       )}
       <span class="gap">{select ? "" : row.position === 1 ? "LEAD" : gap === 0 ? "TIED" : minus(gap)}</span>
       <span class="state">
-        {row.pitLimiter && phase !== "Throttle" && !select ? <span class="pit">PIT</span> : null}
         <StatusChip row={row} phase={phase} />
         {phase === "Reveal" && row.outcome ? (
           <span class={`outcome ${row.outcome}`}>{OUTCOME[row.outcome]} {signed(row.distance - row.previousDistance)}</span>
@@ -89,7 +89,9 @@ function TowerRow({ row, view, leader }: { row: DriverRow; view: RedlineHostView
 
 export function RedlineBoard({ view }: { view: RedlineHostView }) {
   const now = useNow(!!view.deadlineUtc);
-  const { phase, question } = view;
+  const { phase } = view;
+  // The question belongs to the round phases; Grid and Chequered show none even if the view still carries one.
+  const question = phase === "Throttle" || phase === "Question" || phase === "Reveal" ? view.question : null;
   const leader = view.drivers.reduce((m, d) => Math.max(m, d.distance), 0);
   const humans = view.drivers.filter((d) => d.player);
   const title = (phase === "Question" || phase === "Reveal") && question?.text ? question.text : TITLES[phase] ?? phase;

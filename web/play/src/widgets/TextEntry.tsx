@@ -1,5 +1,5 @@
 import type { TextEntryView } from "../protocol";
-import { useSendOnce, useViewState, type WidgetProps } from "./common";
+import { Prompt, useSendOnce, useViewState, type WidgetProps } from "./common";
 
 export function TextEntry({ view, send }: WidgetProps<TextEntryView>) {
   const [locked, fire] = useSendOnce(view.viewId, send);
@@ -14,7 +14,7 @@ export function TextEntry({ view, send }: WidgetProps<TextEntryView>) {
 
   return (
     <form class="w-text" onSubmit={submit}>
-      <div class="pq"><div class="prompt">{view.prompt}</div></div>
+      <Prompt text={view.prompt} />
       <div class="field">
         <input
           class="text-input"

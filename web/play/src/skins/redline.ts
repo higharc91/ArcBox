@@ -66,11 +66,18 @@ export function splitHeader(header: string): HeaderParts | undefined {
   return { chip, big: parts[0]!, small: parts[1]! };
 }
 
+/** "Science & Nature · Hard. How hard do you push?" → meta "Science & Nature · Hard", text "How hard do you push?". */
+export function splitPrompt(prompt: string): { meta: string; text: string } | undefined {
+  const match = /^(.+ · (?:Easy|Medium|Hard))\.\s+(.+)$/.exec(prompt);
+  return match ? { meta: match[1]!, text: match[2]! } : undefined;
+}
+
 export const redlineSkin: Skin = {
   id: "redline",
   optionBadge: driverBadge,
   buttonClass: (o) => ((THROTTLES as readonly string[]).includes(o.id) ? `throttle throttle-${o.id}` : undefined),
   header: splitHeader,
+  prompt: splitPrompt,
   waitTone: (message) => {
     if (message.startsWith("Correct!")) return "good";
     if (message.startsWith("Spun out!") || message.startsWith("Wrong answer") || message.startsWith("No answer")) return "bad";

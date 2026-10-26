@@ -26,6 +26,8 @@ export interface Skin {
   optionBadge?(option: Option): Badge | undefined;
   buttonClass?(option: Option): string | undefined;
   header?(header: string): HeaderParts | undefined;
+  /** Splits a prompt into a small meta line and the prompt proper. */
+  prompt?(prompt: string): { meta: string; text: string } | undefined;
   waitTone?(message: string): "good" | "bad" | undefined;
 }
 

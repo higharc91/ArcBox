@@ -66,6 +66,7 @@ small { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--dim
 .hint { color: var(--dim); font-size: 14px; font-weight: 600; line-height: 1.35; }
 .actions { display: flex; gap: 10px; padding: 14px var(--gutter) 0; }
 .actions.two > * { flex: 1; }
+.actions button { font-weight: 700; font-size: 18px; }
 
 .screen {
   max-width: 520px;
@@ -100,6 +101,13 @@ small { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--dim
 .tbtn .opt-text { display: flex; justify-content: space-between; align-items: center; gap: 12px; width: 100%; }
 .tbtn .opt-label { font-weight: 700; font-size: 22px; }
 .tbtn .opt-hint { font-weight: 600; font-size: 13px; text-align: right; line-height: 1.25; color: #ddd; }
+
+/* A lone button (e.g. Counter's "+1") is a big mash target. */
+.pbtns.single { flex: 1; padding-bottom: 12px; }
+.pbtns.single .tbtn { flex: 1; min-height: 40vh; justify-content: center; }
+.pbtns.single .opt-text { justify-content: center; flex-direction: column; }
+.pbtns.single .opt-label { font: italic 900 72px "Titillium Web", sans-serif; }
+.pbtns.single .tbtn:active:not(:disabled) { background: var(--panel-hi); transform: scale(0.99); }
 
 /* ---------------------------------------------------------------- choice options */
 .options { display: flex; flex-direction: column; gap: 8px; padding: 0 var(--gutter); }
@@ -155,7 +163,7 @@ small { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--dim
 .brand { display: inline-flex; align-items: center; background: var(--red); font: italic 900 28px "Titillium Web", sans-serif; letter-spacing: 1px; padding: 6px 30px 6px 16px; clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%); }
 .join-form { display: flex; flex-direction: column; gap: 18px; padding: 28px var(--gutter) calc(24px + var(--safe-bottom)); }
 .join-form h1 { font-weight: 700; font-size: 30px; }
-.code-input { font-weight: 900; font-size: 34px; letter-spacing: 12px; text-transform: uppercase; text-align: center; }
+.code-input { font-weight: 900; font-size: 34px; letter-spacing: 12px; text-indent: 12px; text-transform: uppercase; text-align: center; }
 
 /* ---------------------------------------------------------------- lobby */
 .lobby { gap: 16px; padding-bottom: calc(24px + var(--safe-bottom)); }
