@@ -1,0 +1,24 @@
+{
+  "kind": "buttons",
+  "prompt": "Science & Nature · Hard. How hard do you push?",
+  "buttons": [
+    {
+      "id": "cruise",
+      "label": "CRUISE",
+      "hint": "+1 if right · nothing lost"
+    },
+    {
+      "id": "push",
+      "label": "PUSH",
+      "hint": "+2 if right · −1 if wrong"
+    },
+    {
+      "id": "redline",
+      "label": "REDLINE",
+      "hint": "+4 if right · spin out if wrong"
+    }
+  ],
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:00:00+00:00",
+  "header": "H"
+}

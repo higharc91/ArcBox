@@ -1,0 +1,7 @@
+{
+  "kind": "wait",
+  "message": "Waiting for the race…",
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:00:00+00:00",
+  "header": "H"
+}
