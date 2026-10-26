@@ -136,10 +136,11 @@ function phaseOf(s) {
   if (s.kind === "wait" && /Lights out/.test(m)) return "grid";
   if (s.kind === "buttons" && s.enabled.includes("cruise")) return "throttle";
   if (s.kind === "buttons") return "throttle-sent";
-  if (s.kind === "wait" && /^Locked in|Pit limiter/.test(m)) return "throttle-locked";
+  if (s.kind === "wait" && /Answers open in a moment/.test(m)) return "reading"; // the question, read out on the TV
+  if (s.kind === "wait" && /^(Correct!|Wrong answer|No answer|Spun out!)/.test(m)) return "reveal"; // before "Pit limiter"
+  if (s.kind === "wait" && /^Locked in|^Pit limiter/.test(m)) return "throttle-locked";
   if (s.kind === "choice") return "question";
   if (s.kind === "wait" && /Answer locked/.test(m)) return "answered";
-  if (s.kind === "wait" && /^(Correct!|Wrong answer|No answer|Spun out!)/.test(m)) return "reveal";
   if (s.kind === "wait" && /^You finished P/.test(m)) return "chequered";
   return `controller-${s.kind}`;
 }
@@ -326,7 +327,7 @@ async function run() {
       const s = await snapshot(phones[0]);
       const phase = phaseOf(s);
       const name = { "driver-select": "driver-select", seated: "seated", grid: "grid", throttle: "throttle", "throttle-locked": "throttle-locked",
-        question: "question", answered: "answered", reveal: "reveal", chequered: "chequered", mash: "mash", results: "results" }[phase];
+        reading: "reading", question: "question", answered: "answered", reveal: "reveal", chequered: "chequered", mash: "mash", results: "results" }[phase];
       if (name && !shots.has(name)) {
         shots.add(name);
         await sleep(250); // let fonts and the countdown settle
@@ -406,7 +407,7 @@ async function run() {
     await Promise.all([...bots, shooter, watchdog, rejoin]);
   }
   if (GAME === "redline") {
-    for (const phase of ["driver-select", "throttle", "question", "reveal"]) if (!phasesSeen.has(phase)) fail(`phone 1 never showed ${phase}`);
+    for (const phase of ["driver-select", "throttle", "reading", "question", "reveal"]) if (!phasesSeen.has(phase)) fail(`phone 1 never showed ${phase}`);
   }
   log(`phases seen on P1: ${[...phasesSeen].join(", ")}`);
   return 0;

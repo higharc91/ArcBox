@@ -47,6 +47,7 @@ Everything after `--` on the Godot command line; all optional.
 | `--quit-after=<seconds>` | Quit after that many seconds. |
 | `--preset=ultra\|high\|low` | Render preset for 3D scenes. Default: the one saved with F2 in `user://settings.json`, else `ultra`. |
 | `--perf` | Start with the F3 performance overlay on, and log it every 5 s (`PERF …` lines). |
+| `--audio-log` | Print `AUDIO <bus> <name>` for every sound played (narration: `AUDIO Voice <theme>: <text>`), for runs without a sound card. See [`redline-tv.md`](redline-tv.md#audio-log). |
 | `--autostart=<game>[:<players>]` | Dev only: select that game, and start it once that many players (default 1) are connected and the scene is ready. First game only. Used by `tools/tv-e2e.sh`. |
 | `--res=<w>x<h>` | Window size. The UI is laid out at 1920×1080 and scales (`canvas_items`, `expand`). |
 | `--redline-demo[=<step>]` | Dev only: play a scripted REDLINE race into the TV without a server (see below). |
@@ -139,5 +140,11 @@ with Mesa's CPU rasteriser (llvmpipe), where a 1080p frame takes several seconds
    are coalesced) and the one rendered before it; deserialize it with `ArcJson.Options`.
    `SetShots(Screenshotter?)` lets the scene capture its own phase changes.
 2. Map the game ID in `Shell/GameSceneMap.cs`.
+3. To speak, also implement `IAudioScene`: `SetNarrator(Narrator)` hands the scene the shell's shared narrator
+   (`Audio/Narrator.cs`), before its first `Render`. Call `narrator.Say(text, "<id>.<theme>", NarrationPriority.Question
+   or .Commentary)` with a voice theme your game registers on the server ([`speech-setup.md`](speech-setup.md#voice-themes-for-game-authors)).
+   The narrator fetches the server voice with the room's host credentials, falls back to the TV's built-in voice,
+   queues lines one at a time and ducks Music and Sfx while it speaks. Play your own sounds on the `Music` and `Sfx`
+   buses (`AudioBuses`) and log them with `AudioLog.Play(bus, name)`.
 
 Until the scene exists, the TV shows a "scene not installed" screen with the raw view JSON, and nothing crashes.

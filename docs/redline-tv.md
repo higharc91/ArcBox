@@ -1,7 +1,7 @@
 # REDLINE on the TV
 
-How the REDLINE scene renders on the TV PC, the keys and settings that control it, what performance to expect, and
-how to get screenshots of a whole race without a GPU. The shell (connect, lobby, sessions) is in
+How the REDLINE scene renders and sounds on the TV PC, the keys and settings that control it, what performance to
+expect, and how to get screenshots of a whole race without a GPU. The shell (connect, lobby, sessions) is in
 [`tv-host.md`](tv-host.md); the manual pass for a real game night is [`playtest-checklist.md`](playtest-checklist.md).
 
 ## Render presets
@@ -36,12 +36,88 @@ screen.
 | Key | Where | Does |
 |---|---|---|
 | **F2** | anywhere | Next preset, Ultra → High → Low → Ultra. Applies at once to the race on screen (or the scene warming up behind the lobby), shows "PRESET · HIGH" for two seconds, and saves the choice. |
-| **F3** | anywhere | Performance overlay, top-left: fps and average frame time with the worst frame over the last quarter second, draw calls and primitives in the last frame, the preset and the window size. Press again to hide. |
+| **F3** | anywhere | Performance overlay, top-left: fps and average frame time with the worst frame over the last quarter second, draw calls and primitives in the last frame, the preset and the window size, and the narrator's voice (`VOICE GOOGLE`, `FALLBACK` or `OFF`, `MUTED`) with the last line it spoke. Press again to hide. |
+| **M** | anywhere (not while typing the server address) | Mute or unmute all sound (music, effects and voice), shows "SOUND OFF" / "SOUND ON" and saves the choice. |
 | ← / → / Enter | lobby | Pick a game / start it. |
 | Esc | in a game | End the game for everyone (host override). |
 
 `--perf` starts with the F3 overlay on and also logs it every 5 s (`PERF 144 fps 6.9 ms (worst 8.1) | …`), which is
 the easiest way to record numbers from a run.
+
+## Sound
+
+REDLINE is narrated, commentated and scored (audio spec, `docs/superpowers/specs/2026-10-26-redline-audio-design.md`).
+Everything plays on three buses under Master, made in code at start-up: **Music**, **Sfx** and **Voice**.
+
+- **The question** is read out when the Reading phase starts (the HUD shows the question and its answers with
+  **LISTEN** in place of the clock, and the phones show the question with "Answers open in a moment…"); the answer
+  clock starts when Reading ends. With `ReadQuestions` off, it is read when the Question phase starts instead.
+- **The commentator** calls the race: the welcome on the grid, "And it's lights out!", each round's category, the
+  answer and the round's biggest player moment in Reveal, and the winner. It never talks over the question: a line
+  that comes up while the question is being read waits, and is dropped if it has waited 4 s.
+- **Effects:** a beep per start light (in step with the gantry), the lights-out launch, a click when a player locks a
+  throttle and a tick when one answers, countdown ticks for the last 5 s of Throttle and Question, a whoosh as the
+  question appears, the correct sting or wrong buzz in Reveal, tyres and a crunch for a spin-out on camera, a cheer for
+  a new leader, and the fanfare and crowd at the flag. A low crowd murmur runs under the race.
+- **Engines:** a synthesised V6 on each car the camera is on (two or three), revving with the start lights, a low
+  burble while players think, and a roar during the Reveal drive that follows each car's speed and is louder the
+  bigger the round's best gain.
+- **Music:** a lobby loop while REDLINE waits in the lobby and through Driver Select, then a low race bed to the flag.
+  All effects, engines and music are synthesised from code; there are no sound files (see `games/redline/THIRD_PARTY.md`).
+- **Ducking:** while a voice speaks, Music dips 12 dB and Sfx 6 dB (200 ms down, 600 ms back up), the built-in voice
+  included.
+
+### Voices: Google, fallback, off
+
+The narrator asks the server's `/api/tts` for each line (the questions in the `redline.questions` voice, the
+commentator in `redline.announcer`); with a Google key on the server these are **Chirp 3: HD** neural voices
+([`speech-setup.md`](speech-setup.md) sets that up). If the server has no key, Google fails, or a clip takes longer than
+2.5 s, the line is spoken at once by the **TV's built-in voice** (Windows' own voices; on Linux, speech-dispatcher)
+with each theme's fallback rate and pitch, and the server is not asked again for 60 s. The game never waits for audio:
+the Reading phase runs on its own timer either way. With no built-in voices either, the narrator is **off** and lines
+are only logged. F3 shows which (`VOICE GOOGLE`, `FALLBACK`, `OFF`); the log says why (`NARRATOR server voice
+unavailable (Unavailable 503); built-in voice for 60 s`).
+
+### Volumes
+
+Volumes live in `user://settings.json` next to the preset, linear from 0 to 1 (missing keys use the defaults):
+
+```json
+{
+  "masterVolume": 1,
+  "musicVolume": 0.55,
+  "sfxVolume": 0.85,
+  "voiceVolume": 1,
+  "muted": false,
+  "narrationVoice": "Zira"
+}
+```
+
+`muted` is what **M** toggles. `narrationVoice` picks the built-in fallback voice by part of its name or id (for
+example `Zira` or `David` on Windows); without it, the first English voice is used. Edit the file with the TV app
+closed; it is read at start-up.
+
+### Audio log
+
+`--audio-log` prints a line for every sound the TV plays, so a run without a sound card still shows what would have
+been heard and when:
+
+```
+AUDIO Sfx start-beep #1          … #5
+AUDIO Sfx lights-out
+AUDIO Voice redline.announcer: And it's lights out!
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: Which U.S. state has the longest coastline?
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: The answer is Alaska.
+AUDIO Sfx screech VER
+AUDIO Voice redline.announcer: Sam spins the Red Bull!
+AUDIO Sfx crunch
+AUDIO Sfx fanfare
+```
+
+plus `AUDIO Music lobby-loop|race-bed`, `AUDIO Sfx engine <car>` when an engine voice moves to a new car, and
+`AUDIO Sfx countdown <n>`. Narration is logged when it starts, whichever voice speaks it (or none).
 
 ## Performance
 
@@ -106,7 +182,7 @@ It builds the phone app, the server and the TV host (skip with `--skip-build`), 
 built phone app, bundled questions) on a free port, starts the TV on its own Xvfb display with software Vulkan:
 
 ```
---new-room --shots=<out>/tv --preset=low --res=1280x720 --server=<url> --autostart=redline:3
+--new-room --shots=<out>/tv --preset=low --res=1280x720 --server=<url> --autostart=redline:3 --audio-log
 ```
 
 waits for the TV's `ROOM <CODE>` line, then runs `web/play/e2e/redline.e2e.mjs` with three bot phones in that room
@@ -115,8 +191,16 @@ the race itself when all three are in (`--autostart=<game>:<players>`, a dev arg
 gives the TV a few seconds for its last shots, stops the TV, Xvfb and the server, and fails if the phones reported a
 problem or the TV log has an `error` or `exception` line other than the expected audio ones (there is no sound card).
 
+It then checks the TV's audio log for the race's sounds **in order**: the five start beeps, lights out, the
+commentator's first line of round 1, the question read out (`AUDIO Voice redline.questions: …`), the Reveal sting or
+buzz and "The answer is …" (and with `ARCBOX_FULL=1`, the fanfare and the winner's line), printing each line it
+matched and failing on the first one missing. The phone script also fails if phone 1 never showed the Reading view.
+The server runs without a Google key, so `/api/tts` answers 503 and the TV falls back to its built-in voice (or, on
+a Linux box without speech-dispatcher, logs the lines with the narrator off); the audio lines are the same.
+
 Everything lands in one folder (`ARCBOX_E2E_OUT`, default `/tmp/arcbox-tv-e2e-<time>`): `tv/*.png`, `phones/*.png`
-(phone 1 at each phase, plus phone 2 after its mid-game reload), `tv.log`, `phones.log`, `server.log`, `build.log`.
+(phone 1 at each phase, plus phone 2 after its mid-game reload), `tv.log`, `audio.log` (the TV's `AUDIO` lines),
+`phones.log`, `server.log`, `build.log`.
 
 | Variable | Default | |
 |---|---|---|
