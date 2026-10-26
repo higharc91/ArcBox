@@ -98,6 +98,24 @@ public class RoundTests
     }
 
     [Fact]
+    public void Host_view_carries_the_payouts_from_the_rules_in_every_phase()
+    {
+        var rules = new RedlineRules { CruiseGain = 2, PushGain = 5, PushLoss = 3, RedlineGain = 7, RedlineLoss = 4 };
+        var (h, _) = RedlineKit.Start(rules: rules);
+        var expected = new Payouts(2, 5, 3, 7, 4);
+        Assert.Equal(expected, RedlineKit.View(h).Payouts);          // Driver Select
+
+        RedlineKit.SeatAllAndGoToRound1(h, Codes);
+        Assert.Equal(expected, RedlineKit.View(h).Payouts);          // Throttle
+
+        // The shipped balance (§2.2), as the TV's JSON carries it.
+        var (shipped, _) = RedlineKit.Start();
+        Assert.Equal(new Payouts(1, 3, 1, 4, 2), RedlineKit.View(shipped).Payouts);
+        Assert.Contains("\"payouts\":{\"cruiseGain\":1,\"pushGain\":3,\"pushLoss\":1,\"redlineGain\":4,\"redlineLoss\":2}",
+            Snapshot(shipped));
+    }
+
+    [Fact]
     public void Question_phase_reveals_all_throttles_but_no_answers()
     {
         var h = Round1();

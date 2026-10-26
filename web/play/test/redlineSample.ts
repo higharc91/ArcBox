@@ -64,5 +64,6 @@ export function sampleRedlineView(phase: RacePhase, deadlineUtc: string | null =
       ],
     } : null,
     attribution: "Questions: Open Trivia DB (CC BY-SA 4.0)",
+    payouts: { cruiseGain: 1, pushGain: 3, pushLoss: 1, redlineGain: 4, redlineLoss: 2 },
   };
 }

@@ -55,8 +55,15 @@ describe("RedlineBoard", () => {
     expect(rowOf(container, "LEC").querySelector(".mv")!.textContent).toBe("▼1");
   });
 
-  it("throttle legend names the risk without hardcoding payouts (they come from the server's balance)", () => {
-    const { container } = render(<RedlineBoard view={sampleRedlineView("Throttle")} />);
+  it("throttle legend shows the view's payouts, never hardcoded ones", () => {
+    const view = sampleRedlineView("Throttle");
+    view.payouts = { cruiseGain: 2, pushGain: 5, pushLoss: 3, redlineGain: 7, redlineLoss: 4 };
+    const { container, rerender } = render(<RedlineBoard view={view} />);
+    const chips = [...container.querySelectorAll(".legend .chip")].map((c) => c.textContent);
+    expect(chips).toEqual(["CRUISE +2 / 0", "PUSH +5 / −3", "REDLINE +7 / −4 · spin"]);
+
+    // A view without payouts (an older server) names the risk in words only.
+    rerender(<RedlineBoard view={{ ...view, payouts: undefined }} />);
     const legend = container.querySelector(".legend")!.textContent!;
     expect(legend).toContain("CRUISE");
     expect(legend).toContain("PUSH");

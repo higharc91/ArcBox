@@ -176,5 +176,5 @@ public static class DemoRace
     }
 
     private static RedlineHostView View(RedlineRules rules, RacePhase phase, int round, QuestionCard? card, int? correct, IReadOnlyList<DriverRow> rows) =>
-        new(phase, round, rules.MaxRounds, rules.FinishLine, rules.CircuitId, card, correct, rows, null, null, Attribution);
+        new(phase, round, rules.MaxRounds, rules.FinishLine, rules.CircuitId, card, correct, rows, null, null, Attribution, Payouts.From(rules));
 }

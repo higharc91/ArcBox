@@ -11,7 +11,18 @@ public sealed record RedlineHostView(
     IReadOnlyList<DriverRow> Drivers,   // all 22; sorted by ranking (§2.3), or by team order during Driver Select
     DateTimeOffset? DeadlineUtc,
     FinishSummary? Finish,              // Chequered only
-    string Attribution);                // "Questions: Open Trivia DB (CC BY-SA 4.0)" or the fallback credit
+    string Attribution,                 // "Questions: Open Trivia DB (CC BY-SA 4.0)" or the fallback credit
+    Payouts Payouts);                   // the throttle payouts from RedlineRules, for the TV rules strip
+
+/// <summary>
+/// The throttle payouts (§2.2) as the TV shows them: gains when right, losses (positive numbers) when wrong.
+/// Built from <see cref="RedlineRules"/> so the rules strip never hard-codes balance.
+/// </summary>
+public sealed record Payouts(int CruiseGain, int PushGain, int PushLoss, int RedlineGain, int RedlineLoss)
+{
+    public static Payouts From(RedlineRules rules) =>
+        new(rules.CruiseGain, rules.PushGain, rules.PushLoss, rules.RedlineGain, rules.RedlineLoss);
+}
 
 public sealed record QuestionCard(string Category, Difficulty Difficulty, string? Text, IReadOnlyList<string>? Answers);
 
@@ -52,7 +63,7 @@ internal static class HostViews
         new(phase, round, rules.MaxRounds, rules.FinishLine, rules.CircuitId,
             question, phase == RacePhase.Reveal ? correctIndex : null,
             [.. standings.Select(d => Row(d, phase))],
-            deadline, phase == RacePhase.Chequered ? finish : null, attribution);
+            deadline, phase == RacePhase.Chequered ? finish : null, attribution, Payouts.From(rules));
 
     public static DriverRow Row(Driver d, RacePhase phase) =>
         new(d.Code, d.Seat.Driver.Number, d.Seat.Team.Id,

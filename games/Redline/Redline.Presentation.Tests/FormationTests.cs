@@ -11,7 +11,7 @@ public class FormationTests
         new(code, 1, "team", null, null, pos, change, dist, prev ?? dist, DriverStatus.Ready, null, null, null, false, true);
 
     private static RedlineHostView View(params DriverRow[] rows) =>
-        new(RacePhase.Question, 1, 15, 28, "cota", null, null, rows, null, null, "attribution");
+        new(RacePhase.Question, 1, 15, 28, "cota", null, null, rows, null, null, "attribution", Payouts.From(new RedlineRules()));
 
     [Fact]
     public void Distance_zero_lines_up_on_the_grid_in_ranking_order()

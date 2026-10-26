@@ -170,10 +170,20 @@ export function RedlineBoard({ view }: { view: RedlineHostView }) {
 
           {phase === "Throttle" ? (
             <div class="legend">
-              {/* No numbers: the payouts are server balance (Redline.Logic RedlineRules) and the host view doesn't carry them. */}
-              <span class="chip CRUISE">CRUISE · safe</span>
-              <span class="chip PUSH">PUSH · lose ground if wrong</span>
-              <span class="chip REDLINE">REDLINE · spin out if wrong</span>
+              {/* Numbers only from the view's payouts (server RedlineRules); a view without them gets the words alone. */}
+              {view.payouts ? (
+                <>
+                  <span class="chip CRUISE">CRUISE {signed(view.payouts.cruiseGain)} / 0</span>
+                  <span class="chip PUSH">PUSH {signed(view.payouts.pushGain)} / {signed(-view.payouts.pushLoss)}</span>
+                  <span class="chip REDLINE">REDLINE {signed(view.payouts.redlineGain)} / {signed(-view.payouts.redlineLoss)} · spin</span>
+                </>
+              ) : (
+                <>
+                  <span class="chip CRUISE">CRUISE · safe</span>
+                  <span class="chip PUSH">PUSH · lose ground if wrong</span>
+                  <span class="chip REDLINE">REDLINE · spin out if wrong</span>
+                </>
+              )}
             </div>
           ) : null}
 

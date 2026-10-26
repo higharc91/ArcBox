@@ -43,6 +43,15 @@ export interface Award {
   detail: string;
 }
 
+/** The throttle payouts from the server's RedlineRules (losses are positive numbers). */
+export interface Payouts {
+  cruiseGain: number;
+  pushGain: number;
+  pushLoss: number;
+  redlineGain: number;
+  redlineLoss: number;
+}
+
 export interface RedlineHostView {
   phase: RacePhase;
   round: number;
@@ -55,6 +64,8 @@ export interface RedlineHostView {
   deadlineUtc: string | null;
   finish: { awards: Award[] } | null;
   attribution: string;
+  /** Optional so a view from an older server still parses. */
+  payouts?: Payouts | null;
 }
 
 export function isRedlineHostView(v: unknown): v is RedlineHostView {

@@ -260,7 +260,10 @@ public sealed record RedlineHostView(
     IReadOnlyList<DriverRow> Drivers,   // all 22; sorted by ranking (§2.3), or by team order during Driver Select
     DateTimeOffset? DeadlineUtc,
     FinishSummary? Finish,              // Chequered only
-    string Attribution);                // "Questions: Open Trivia DB (CC BY-SA 4.0)" or the fallback credit
+    string Attribution,                 // "Questions: Open Trivia DB (CC BY-SA 4.0)" or the fallback credit
+    Payouts Payouts);                   // from RedlineRules, for the TV rules strip (§2.2)
+
+public sealed record Payouts(int CruiseGain, int PushGain, int PushLoss, int RedlineGain, int RedlineLoss);
 
 public sealed record QuestionCard(string Category, Difficulty Difficulty, string? Text, IReadOnlyList<string>? Answers);
 
