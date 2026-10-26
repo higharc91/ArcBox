@@ -11,6 +11,9 @@ export interface Badge {
   ink: string;
 }
 
+/** A round result a phone can cue with a sound and a vibration (src/feedback). */
+export type ResultKind = "correct" | "wrong" | "spin";
+
 export interface HeaderParts {
   chip?: string;
   big: string;
@@ -31,6 +34,8 @@ export interface Skin {
   waitTone?(message: string): "good" | "bad" | undefined;
   /** A wait view whose message is a question whose answers are not open yet: the note to show under it. */
   waitQuestion?(view: WaitView): string | undefined;
+  /** A wait view that reports this player's round result: which cue the phone plays. Null for any other view. */
+  classifyResult?(view: WaitView): ResultKind | null;
 }
 
 const skins: Record<string, Skin> = { redline: redlineSkin };

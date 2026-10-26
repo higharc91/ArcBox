@@ -1,4 +1,5 @@
 import { useState } from "preact/hooks";
+import { useFeedback } from "../feedback/feedback";
 
 export const NAME_MAX = 12;
 const CODE_LENGTH = 4;
@@ -22,9 +23,11 @@ export function Join({ code: initialCode = "", name: initialName = "", error, bu
   const [code, setCode] = useState(cleanCode(initialCode));
   const [name, setName] = useState(initialName);
   const valid = code.length === CODE_LENGTH && isValidName(name);
+  const feedback = useFeedback();
 
   const submit = (e: Event) => {
     e.preventDefault();
+    feedback?.unlock(); // the Join tap is the user gesture iOS needs before any sound
     if (valid && !busy) onJoin(code, name.trim());
   };
 

@@ -79,8 +79,9 @@ small { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--dim
 
 /* ---------------------------------------------------------------- status bar (.pstatus) */
 .pstatus { padding: 18px 20px 12px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.pstatus .me { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pstatus .me { flex: 1 1 auto; display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pstatus .me i { width: 5px; height: 26px; background: var(--red); flex: none; }
+.pstatus .me-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .pstatus .pos { font-weight: 900; font-size: 22px; display: flex; align-items: baseline; gap: 6px; white-space: nowrap; }
 .pstatus .pos b { font-weight: 900; font-size: 30px; line-height: 1; }
 .pstatus .pos small { font-size: 12px; letter-spacing: 1px; }
@@ -88,6 +89,12 @@ small { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--dim
 .chip.CRUISE { background: rgba(255, 255, 255, 0.1); color: var(--dim); }
 .chip.PUSH { background: #fff; color: #111; }
 .chip.REDLINE { background: var(--red); color: #fff; }
+
+/* Speaker toggle (src/feedback/MuteToggle.tsx): in the status bar of every screen after joining. */
+.mute-toggle { flex: none; width: 44px; height: 44px; min-height: 44px; padding: 0; display: grid; place-items: center; color: var(--ink); }
+.mute-toggle svg { display: block; }
+.mute-toggle.muted { color: var(--dim); background: transparent; border-style: dashed; }
+.mute-toggle:active { background: var(--panel-hi); }
 
 .widget { flex: 1; display: flex; flex-direction: column; }
 
@@ -171,7 +178,8 @@ small { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--dim
 .lobby { gap: 16px; padding-bottom: calc(24px + var(--safe-bottom)); }
 .lobby-head { display: flex; justify-content: space-between; align-items: flex-end; padding: 22px 20px 0; }
 .room-code { font-weight: 900; font-size: 52px; line-height: 1; letter-spacing: 6px; }
-.lobby-head .count { text-align: right; display: flex; flex-direction: column; }
+.lobby-head .count { text-align: right; display: flex; flex-direction: column; margin-left: auto; }
+.lobby-head .mute-toggle { margin-left: 14px; align-self: flex-start; }
 .lobby-head .count b { font-weight: 900; font-size: 34px; line-height: 1; }
 .last-results { margin: 0 var(--gutter); padding: 10px 14px; border-left: 4px solid var(--red); background: var(--glass); }
 .last-results p { font-weight: 700; font-size: 17px; margin-top: 2px; }
@@ -197,7 +205,8 @@ small { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--dim
 
 /* ---------------------------------------------------------------- results */
 .results { padding-bottom: calc(24px + var(--safe-bottom)); }
-.results-head { padding: 26px 20px 16px; }
+.results-head { padding: 26px 20px 16px; display: flex; align-items: flex-start; gap: 12px; }
+.results-title { flex: 1; min-width: 0; }
 .results-head h1 { font-weight: 700; font-size: 26px; line-height: 1.2; margin-top: 4px; }
 .scores { list-style: none; padding: 0 var(--gutter); display: flex; flex-direction: column; gap: 6px; }
 .score-row { display: grid; grid-template-columns: 48px 1fr auto; align-items: center; min-height: 52px; background: var(--panel); border: 1px solid var(--edge); }
