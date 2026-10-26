@@ -15,9 +15,12 @@ export function remainingSeconds(deadlineUtc: string, now: number): number {
 
 const format = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
 
-export function Countdown({ deadlineUtc }: { deadlineUtc: string }) {
+/** `onSecond` hears each whole second shown (for the phone's countdown ticks). */
+export function Countdown({ deadlineUtc, onSecond }: { deadlineUtc: string; onSecond?: (secondsLeft: number) => void }) {
   const [now, setNow] = useState(() => Date.now());
   const total = useRef<{ deadline: string; seconds: number } | null>(null);
+  const onSecondRef = useRef(onSecond);
+  onSecondRef.current = onSecond;
 
   useEffect(() => {
     const id = setInterval(() => setNow(Date.now()), 250);
@@ -25,6 +28,7 @@ export function Countdown({ deadlineUtc }: { deadlineUtc: string }) {
   }, []);
 
   const left = remainingSeconds(deadlineUtc, now);
+  useEffect(() => onSecondRef.current?.(left), [left, deadlineUtc]);
   // The bar's full length is the time left when this deadline was first seen.
   if (!total.current || total.current.deadline !== deadlineUtc) total.current = { deadline: deadlineUtc, seconds: Math.max(1, left) };
   const exact = Math.min(MAX_COUNTDOWN_SECONDS, Math.max(0, (Date.parse(deadlineUtc) - now) / 1000)) || 0;

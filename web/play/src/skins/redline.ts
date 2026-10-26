@@ -1,5 +1,5 @@
 import type { Option, WaitView } from "../protocol";
-import type { Badge, HeaderParts, Skin } from "./skin";
+import type { Badge, HeaderParts, ResultKind, Skin } from "./skin";
 
 export interface Team {
   id: string;
@@ -82,6 +82,19 @@ export function readingNote(view: WaitView): string | undefined {
   return view.header && splitHeader(view.header)?.chip ? LISTEN_NOTE : undefined;
 }
 
+/** The Reveal line (PlayerViews.ResultMessage): "Correct! …", "Wrong answer. …", "No answer. …" or "Spun out! …". */
+function resultOf(message: string): ResultKind | null {
+  if (message.startsWith("Correct!")) return "correct";
+  if (message.startsWith("Spun out!")) return "spin";
+  if (message.startsWith("Wrong answer") || message.startsWith("No answer")) return "wrong";
+  return null;
+}
+
+/** The player's round result, for the phone's haptics and sounds; null for every other view, Reading included. */
+export function classifyResult(view: WaitView): ResultKind | null {
+  return readingNote(view) ? null : resultOf(view.message);
+}
+
 export const redlineSkin: Skin = {
   id: "redline",
   optionBadge: driverBadge,
@@ -89,9 +102,9 @@ export const redlineSkin: Skin = {
   header: splitHeader,
   prompt: splitPrompt,
   waitTone: (message) => {
-    if (message.startsWith("Correct!")) return "good";
-    if (message.startsWith("Spun out!") || message.startsWith("Wrong answer") || message.startsWith("No answer")) return "bad";
-    return undefined;
+    const result = resultOf(message);
+    return result ? (result === "correct" ? "good" : "bad") : undefined;
   },
   waitQuestion: readingNote,
+  classifyResult,
 };

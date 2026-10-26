@@ -1,3 +1,4 @@
+import { MuteToggle } from "../feedback/MuteToggle";
 import type { GameResults, PlayerId } from "../protocol";
 
 /** Scores in the order the game ranked them (REDLINE sends race order, which breaks ties by more than score). */
@@ -5,8 +6,11 @@ export function Results({ results, me, onBack }: { results: GameResults; me: Pla
   return (
     <div class="screen results">
       <header class="results-head">
-        <small>RESULTS</small>
-        {results.message ? <h1>{results.message}</h1> : <h1>Game over</h1>}
+        <div class="results-title">
+          <small>RESULTS</small>
+          {results.message ? <h1>{results.message}</h1> : <h1>Game over</h1>}
+        </div>
+        <MuteToggle />
       </header>
       {results.scores.length ? (
         <ol class="scores">

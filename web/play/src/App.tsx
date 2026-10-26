@@ -1,4 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
+import { FeedbackContext, type Feedback } from "./feedback/feedback";
 import { Closed } from "./screens/Closed";
 import { Join } from "./screens/Join";
 import { Lobby } from "./screens/Lobby";
@@ -25,13 +26,22 @@ export async function boot(session: Session, store: KeyValueStore, search: strin
   if (devName && session.state.screen === "join" && !session.state.error) await session.join(room, devName);
 }
 
-export function App({ session }: { session: Session }) {
+/** `feedback` (haptics, sounds, the speaker toggle) is optional so tests and the dev board can leave it out. */
+export function App({ session, feedback = null }: { session: Session; feedback?: Feedback | null }) {
   const [state, setState] = useState<SessionState>(session.state);
   useEffect(() => {
     setState(session.state);
     return session.subscribe(setState);
   }, [session]);
 
+  return (
+    <FeedbackContext.Provider value={feedback}>
+      <Screen state={state} session={session} />
+    </FeedbackContext.Provider>
+  );
+}
+
+function Screen({ state, session }: { state: SessionState; session: Session }) {
   switch (state.screen) {
     case "join":
       return (

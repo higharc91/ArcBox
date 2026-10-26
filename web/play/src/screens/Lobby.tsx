@@ -1,3 +1,4 @@
+import { MuteToggle } from "../feedback/MuteToggle";
 import type { LobbyState, PlayerId, PlayerScore } from "../protocol";
 
 interface Props {
@@ -34,6 +35,7 @@ export function Lobby({ lobby, me, error, onSelectGame, onStart }: Props) {
           <div class="room-code">{lobby.code}</div>
         </div>
         <div class="count"><b>{count}</b><small>{count === 1 ? "PLAYER" : "PLAYERS"}</small></div>
+        <MuteToggle />
       </header>
 
       {lobby.lastResults?.message || lobby.lastResults?.scores.length ? (

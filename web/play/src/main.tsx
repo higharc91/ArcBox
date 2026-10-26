@@ -2,6 +2,7 @@ import { render } from "preact";
 import "./fonts";
 import "./theme.css";
 import { App, boot } from "./App";
+import { Feedback } from "./feedback/feedback";
 import { Session } from "./session/session";
 import { browserStore } from "./session/storage";
 import { signalrTransport } from "./session/transport";
@@ -18,5 +19,9 @@ document.addEventListener("visibilitychange", () => {
 window.addEventListener("pageshow", () => void session.onVisible());
 installWakeLockRefresh();
 
-render(<App session={session} />, document.getElementById("app")!);
+// Haptics and sounds. Audio unlocks on the Join tap, or on any tap after a rejoin that skipped the Join form.
+const feedback = new Feedback(store);
+feedback.installGestureUnlock(document);
+
+render(<App session={session} feedback={feedback} />, document.getElementById("app")!);
 void boot(session, store, location.search);
