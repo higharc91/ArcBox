@@ -62,10 +62,10 @@ rasteriser (llvmpipe), so its frame rates say nothing about the real thing. To m
 If Ultra falls short, the usual suspects in order of cost are SDFGI, SSR, volumetric fog and the 8192 shadow atlas;
 High drops the first two.
 
-What the sandbox *can* tell: the scene's load. With the Low preset at 1280×720 the F3 counters read 300–1,000 draw
-calls and 2.5–5.6 M primitives depending on the shot (the grid, looking down the main straight at the grandstand
-and all 22 cars, is the heaviest). On llvmpipe a 1280×720 Low frame takes 0.6–1.3 s and a 1080p Ultra frame several
-seconds.
+What the sandbox *can* tell: the scene's load, which doesn't depend on the GPU. On Low the F3 counters read 270–1,000
+draw calls and 2.5–5.6 M primitives depending on the shot (the grid, looking down the main straight at the
+grandstands and all 22 cars, is the heaviest); on High the Driver Select and grid shots read 900–1,300 draw calls and
+about 11 M primitives, most of it the 4-split shadow passes. On llvmpipe a 1280×720 Low frame takes 0.55–1.7 s.
 
 **Getting ready in the lobby.** When REDLINE is selected in the lobby, the TV builds the world (on Ultra about 1 s of
 main-thread work after the background geometry build) and draws it for a few frames behind the lobby, with each
@@ -84,8 +84,9 @@ server's wall-clock phase timers even when a frame is slow.
 
 `--shots=<dir>` saves `<seq>-<label>.png` on every screen change and lobby change, and in REDLINE about a second into
 every phase (`grid`, `throttle`, `question`, `reveal`, `chequered`…), on each Driver Select claim, at 2, 4 and 6 s into
-Reveal, and on the Chequered podium. Each shot is taken two frames after it is asked for, so at very low frame rates
-a shot near the end of a phase can show the start of the next one.
+Reveal, and on the Chequered podium. Each shot is taken two frames after it is asked for, so at the 1–2 fps of
+software rendering a shot shows a moment 1–3 s after its label: `reveal-2s` often already has the follow-up cut to the
+leader (due at 3.5 s), and a shot near the end of a short phase can show the start of the next one.
 
 Three ways to get them:
 
