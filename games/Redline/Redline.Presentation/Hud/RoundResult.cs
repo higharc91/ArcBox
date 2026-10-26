@@ -5,7 +5,7 @@ namespace Redline.Presentation.Hud;
 /// <summary>
 /// The Reveal lower-third (mockup 10): who it is about, what happened and the position change.
 /// </summary>
-/// <param name="Kicker">"BIGGEST MOVER · ALEX" or "SPUN OUT · SAM" ("· AI" for an AI driver).</param>
+/// <param name="Kicker">"BIGGEST MOVER · ALEX", "SPUN OUT · SAM" or "ROUND RESULT · JO" ("· AI" for an AI driver).</param>
 /// <param name="Surname">"LECLERC".</param>
 /// <param name="Caption">"REDLINE PAYS OFF", "REDLINE GAMBLE", "PUSH PAYS OFF"…</param>
 /// <param name="Delta">"+4", "−2".</param>
@@ -30,11 +30,13 @@ public static class RoundResult
         var delta = d.Distance - d.PreviousDistance;
         var who = d.PlayerName is { Length: > 0 } name ? name.ToUpperInvariant() : "AI";
         var throttle = (d.Throttle ?? Throttle.Cruise).ToString().ToUpperInvariant();
+        // The biggest human gain can still lose places when the AI gained more: then it isn't "the biggest mover".
+        var mover = d.PositionChange >= 0 ? "BIGGEST MOVER" : "ROUND RESULT";
         var (kicker, caption) = d.Outcome switch
         {
             RoundOutcome.SpunOut => ("SPUN OUT", $"{throttle} GAMBLE"),
-            RoundOutcome.Correct when d.Throttle == Throttle.Cruise => ("BIGGEST MOVER", "STEADY CRUISE"),
-            RoundOutcome.Correct => ("BIGGEST MOVER", $"{throttle} PAYS OFF"),
+            RoundOutcome.Correct when d.Throttle == Throttle.Cruise => (mover, "STEADY CRUISE"),
+            RoundOutcome.Correct => (mover, $"{throttle} PAYS OFF"),
             RoundOutcome.NoAnswer => ("ROUND RESULT", "NO ANSWER"),
             _ => ("ROUND RESULT", delta < 0 ? $"{throttle} BACKFIRES" : "MISSED IT"),
         };

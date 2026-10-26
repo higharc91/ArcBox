@@ -245,6 +245,32 @@ public class RoundResultTests
         Assert.True(card.Good);
     }
 
+    /// <summary>
+    /// Found in the TV run: a player's +1 Cruise was the biggest human gain, but the AI gained more, so they dropped
+    /// P7 → P12 under a "BIGGEST MOVER" kicker.
+    /// </summary>
+    [Fact]
+    public void A_gain_that_still_loses_places_is_not_the_biggest_mover()
+    {
+        var view = DemoRace.Steps().Single(s => s.View.Phase == RacePhase.Reveal).View;
+        var calm = view with
+        {
+            Drivers = [.. view.Drivers.Select(d => d.Outcome == RoundOutcome.SpunOut ? d with { Outcome = RoundOutcome.Wrong } : d)],
+        };
+        var subject = RoundResult.For(calm)!.Code;
+        var dropped = calm with
+        {
+            Drivers = [.. calm.Drivers.Select(d => d.Code == subject ? d with { Position = d.Position + 5, PositionChange = -5 } : d)],
+        };
+
+        var card = RoundResult.For(dropped)!;
+
+        Assert.Equal(subject, card.Code);
+        Assert.Equal("ROUND RESULT · RIA", card.Kicker);
+        Assert.Equal("REDLINE PAYS OFF", card.Caption);
+        Assert.Equal(-5, card.Change);
+    }
+
     [Fact]
     public void No_card_outside_reveal() =>
         Assert.Null(RoundResult.For(DemoRace.Steps().Single(s => s.View.Phase == RacePhase.Question).View));
