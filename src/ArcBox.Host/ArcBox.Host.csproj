@@ -2,8 +2,15 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <RootNamespace>ArcBox.Host</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="10.0.*" />
+    <PackageReference Include="QRCoder" Version="1.8.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ArcBox.Host.Core\ArcBox.Host.Core.csproj" />
+    <ProjectReference Include="..\ArcBox.Sdk\ArcBox.Sdk.csproj" />
+    <ProjectReference Include="..\..\games\Counter\Counter.Logic\Counter.Logic.csproj" />
   </ItemGroup>
 </Project>
