@@ -209,8 +209,19 @@ public class CommentaryTests
             "Welcome to the Circuit of the Americas. Twenty-two cars, 7 players. Lights out in a moment.",
             "Round 4. Geography, medium.",
             "The answer is Alaska.",
-            "SAM spins the Red Bull!",
-            "Chequered flag! ALEX wins at the Circuit of the Americas!",
+            "Sam spins the Red Bull!",
+            "Chequered flag! Alex wins at the Circuit of the Americas!",
         ], said);
     }
+
+    [Theory]
+    [InlineData("SAM", "Sam")]               // all caps would be spelled out letter by letter
+    [InlineData("JO", "Jo")]
+    [InlineData("CHRISTABELLA", "Christabella")]
+    [InlineData("MaxV", "MaxV")]             // mixed case is deliberate: leave it
+    [InlineData("alex", "alex")]
+    [InlineData("R2D2", "R2D2")]             // digits: not a plain word
+    [InlineData("A", "A")]
+    public void Spoken_name_softens_all_caps_words(string typed, string spoken) =>
+        Assert.Equal(spoken, Commentary.SpokenName(typed));
 }

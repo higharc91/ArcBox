@@ -130,7 +130,16 @@ public static class Commentary
     private static int Remaining(RedlineHostView view, int distance) => view.FinishLine - distance;
 
     /// <summary>The player's name as typed (spec §4), or the driver code if the view has none.</summary>
-    private static string Name(DriverRow d) => d.PlayerName is { Length: > 0 } name ? name : d.Code;
+    private static string Name(DriverRow d) => d.PlayerName is { Length: > 0 } name ? SpokenName(name) : d.Code;
+
+    /// <summary>
+    /// How a typed name is spoken: an all-caps word of two or more letters ("SAM") becomes "Sam", because a voice
+    /// tends to spell capitals out letter by letter. Any other name is read exactly as typed.
+    /// </summary>
+    public static string SpokenName(string typed) =>
+        typed.Length >= 2 && typed.All(char.IsLetter) && typed.All(char.IsUpper)
+            ? typed[0] + typed[1..].ToLowerInvariant()
+            : typed;
 
     private static Seat? Seat(Grid grid, string code) => grid.Seats.FirstOrDefault(s => s.Driver.Code == code);
 
