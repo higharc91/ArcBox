@@ -1,0 +1,69 @@
+# First playtest checklist
+
+A manual pass for the first real game night: the TV app on the RTX 5080 PC, real iPhones and Android phones on the
+LAN. It covers what the automated tests can't (platform spec §7) and maps to the success criteria in platform spec §1
+and REDLINE spec §1 (numbers in brackets: **P** = platform, **R** = REDLINE). Tick each box, and note anything odd with
+the time, so it can be found in the logs.
+
+## Before everyone arrives
+
+- [ ] Build: `cd web/play && npm ci && npm run build`, then `dotnet build ArcBox.slnx`.
+- [ ] Start the server reachable from the LAN: `dotnet run --project src/ArcBox.Server --urls http://0.0.0.0:5080`.
+      Allow TCP 5080 through the Windows firewall (private networks) when asked.
+- [ ] Questions: `dotnet run` uses Development, which turns OpenTDB off (bundled pack only). For the live-question race
+      add `--Redline:OpenTdb:Enabled=true` to the server command line, and check the Grid strip credits Open Trivia DB.
+      One race later in the evening runs with the PC's internet unplugged (R2 below).
+- [ ] Open `src/ArcBox.Host/project.godot` in Godot 4.7.2 .NET (or run an export) at 2560×1440 fullscreen.
+      Connect to `http://<pc-ip>:5080`; the lobby shows the room code and the QR.
+- [ ] **Frame rate [R6]:** start a 2-player race from two phones (or the dev page), press **F3** and note fps and ms on
+      the Ultra preset at 2560×1440 for: the grid, a helicopter shot of the pack in Reveal, the trackside follow-up, and
+      the Chequered podium. Target: 144 fps (≤ 6.9 ms). Press **F2** to check High and Low too, and write the numbers into
+      `docs/redline-tv.md`. If Ultra misses 144, note which shot drops most.
+- [ ] Press **Esc** to end that race; the room returns to the lobby.
+
+## Joining
+
+- [ ] Scan the QR from an **iPhone** (Safari) and an **Android** phone (Chrome): both open the join page with the code
+      filled in [P1].
+- [ ] Type the code by hand on a third phone.
+- [ ] A 12-character name fits on the TV lobby, the timing tower and the name tags.
+- [ ] The VIP badge is on the first player; the TV picks REDLINE with ←/→ and starts with Enter (or the VIP starts it).
+
+## The race
+
+- [ ] **Driver Select:** every phone can claim a different driver; a taken driver is greyed on the others; the TV
+      board shows the player in the claimed seat and the line-up camera holds on the new claim.
+- [ ] **Grid:** five red lights go out; the strip shows the payouts and the credit line.
+- [ ] **Throttle:** the phone shows only the category and difficulty; the tower says LOCKED / CHOOSING; nobody's
+      choice shows on the TV before Question [R3].
+- [ ] **Question:** answers on the phones match the TV; the tower shows a tick for each player who answered, never which
+      answer [R3].
+- [ ] **Reveal:** the right answer goes green, the cars move the right amount, a REDLINE spin-out spins and smokes;
+      the camera cuts to the follow-up after about 3.5 s.
+- [ ] **Every car identifiable [R7]:** each player car is either on screen with its name tag or on the track map, in
+      every shot; player cars stand out from AI (yellow names, bigger map dots with a ring).
+- [ ] **AI [R8]:** unclaimed seats race; no phase ever waits for an AI.
+- [ ] One race takes roughly 8–12 minutes.
+- [ ] **Chequered [R1]:** podium, classification and awards on the TV; each phone shows its finishing place.
+- [ ] **Results [P1, R9]:** the results list exactly the human players in race order; the room returns to the lobby and a
+      second game can start.
+
+## Robustness
+
+- [ ] **Lock a phone for 60 s** mid-round, unlock: the player is back on the right screen and their car kept racing
+      [P2].
+- [ ] Turn a phone's Wi-Fi off for 20 s and back on: same.
+- [ ] Reload a phone's browser tab mid-question: it rejoins on the current view.
+- [ ] **Force-quit the TV app** mid-round (Task Manager, or close the window) and relaunch it: it resumes the same room
+      and redraws the current phase; the phones never noticed [P3].
+- [ ] Stop and restart the server mid-round: the TV shows "reconnecting", then opens a new room (the old room is gone;
+      that's expected), and the phones show the room closed.
+- [ ] **Offline questions [R2]:** with the PC's internet off (and OpenTDB enabled), a race starts and finishes on the
+      fallback questions.
+- [ ] Remote player (optional): one player joins over a Discord screen share of the TV, with their own phone on the
+      server's public address or a tunnel; nothing in the game rewards reaction speed.
+
+## After
+
+- [ ] Save the server console log and the Godot log (`%APPDATA%\Godot\app_userdata\ArcBox\logs`) if anything failed.
+- [ ] Note the frame-rate numbers and any visual glitch with a phone photo of the TV.

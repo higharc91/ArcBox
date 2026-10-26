@@ -5,7 +5,9 @@ namespace ArcBox.Host.Games.Redline.World;
 
 /// <summary>
 /// Live oaks as one <see cref="MultiMeshInstance3D"/>: a short trunk under three wide, lumpy, squashed crowns (unit crown
-/// radius, scaled per instance), placed by <see cref="TreeScatter"/>. Per-instance colour varies the green.
+/// radius, scaled per instance), placed by <see cref="TreeScatter"/>. Per-instance colour varies the green. All
+/// <see cref="UltraCount"/> trees are placed; a preset draws a prefix of them (<see cref="SetFraction"/>), which is
+/// exactly what <see cref="TreeScatter"/> would place for the smaller count, so F2 can change it at runtime.
 /// </summary>
 public static class Trees
 {
@@ -13,9 +15,9 @@ public static class Trees
 
     private static ArrayMesh? _mesh;
 
-    public static MultiMeshInstance3D Build(CircuitAssets a, IReadOnlyList<Landmarks.Footprint> keepClear, float fraction)
+    public static MultiMeshInstance3D Build(CircuitAssets a, IReadOnlyList<Landmarks.Footprint> keepClear)
     {
-        var count = (int)(UltraCount * fraction);
+        const int count = UltraCount;
         var trees = TreeScatter.Place(a.Samples, a.Ground, count, seed: 99, minTrackDistance: 46, blocked: p =>
             keepClear.Any(f => (p.X - f.X) * (p.X - f.X) + (p.Y - f.Z) * (p.Y - f.Z) < f.Radius * f.Radius));
 
@@ -36,6 +38,13 @@ public static class Trees
             mm.SetInstanceColor(i, green.Lightened((t.Shade - 0.5f) * 0.1f));
         }
         return new MultiMeshInstance3D { Multimesh = mm, Name = "Trees" };
+    }
+
+    /// <summary>Draws the first <paramref name="fraction"/> of the trees.</summary>
+    public static void SetFraction(MultiMeshInstance3D trees, float fraction)
+    {
+        var mm = trees.Multimesh;
+        mm.VisibleInstanceCount = fraction >= 1 ? -1 : (int)(mm.InstanceCount * fraction);
     }
 
     private static ArrayMesh Mesh()

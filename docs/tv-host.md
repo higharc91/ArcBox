@@ -12,6 +12,8 @@ project only draws what the server sends.
 
 Keys on the lobby: **← / →** pick a game, **Enter** starts (when the server says the room can start). On Results, any
 key returns to the lobby once the room is back there. **Esc** during a game ends it for everyone (host override).
+Anywhere: **F2** cycles the render preset (Ultra → High → Low, saved for the next launch) and **F3** toggles the
+performance overlay; see [`redline-tv.md`](redline-tv.md).
 
 ## Run it headless with screenshots
 
@@ -30,6 +32,8 @@ Every screen change writes `<seq>-<screen>.png` (`001-connect.png`, `002-lobby.p
 seconds) are captured too. ALSA errors in the log are expected: there is no sound card.
 
 The app prints `ROOM <CODE>` on stdout whenever it creates or resumes a room, so scripts can find the code.
+`tools/tv-e2e.sh` uses that to run the TV, the server and bot phones together and collect screenshots from both
+([`redline-tv.md`](redline-tv.md#toolstv-e2esh-tv-server-and-phones-together)).
 
 ## Arguments
 
@@ -41,7 +45,9 @@ Everything after `--` on the Godot command line; all optional.
 | `--new-room` | Ignore the saved session and create a fresh room. |
 | `--shots=<dir>` | Save a PNG on every screen or phase change (see above). |
 | `--quit-after=<seconds>` | Quit after that many seconds. |
-| `--preset=ultra\|high\|low` | Render preset for 3D scenes (parsed now; applied by the REDLINE scene). |
+| `--preset=ultra\|high\|low` | Render preset for 3D scenes. Default: the one saved with F2 in `user://settings.json`, else `ultra`. |
+| `--perf` | Start with the F3 performance overlay on, and log it every 5 s (`PERF …` lines). |
+| `--autostart=<game>[:<players>]` | Dev only: select that game, and start it once that many players (default 1) are connected and the scene is ready. First game only. Used by `tools/tv-e2e.sh`. |
 | `--res=<w>x<h>` | Window size. The UI is laid out at 1920×1080 and scales (`canvas_items`, `expand`). |
 | `--redline-demo[=<step>]` | Dev only: play a scripted REDLINE race into the TV without a server (see below). |
 
@@ -107,16 +113,24 @@ xvfb-run -a -s "-screen 0 1920x1080x24" godot --path src/ArcBox.Host --rendering
 With `--shots` the scene saves each phase about a second after it starts, each Driver Select claim, and Reveal at 2, 4
 and 6 s.
 
-**Presets.** `--preset=ultra` (default): SDFGI with half-resolution probes, SSR, SSAO + SSIL, volumetric haze, a 4-split
-8192 shadow atlas, MSAA 4× + SMAA, 144 fps cap with VSync off. `high`: Ultra without SDFGI and SSR. `low`: no
-screen-space effects, 2-split 2048 shadows, FXAA, half the trees (still Forward+).
+**Presets.** Ultra (default): SDFGI with half-resolution probes, SSR, SSAO + SSIL, volumetric haze, a 4-split
+8192 shadow atlas, MSAA 4× + SMAA, 144 fps cap with VSync off. High: Ultra without SDFGI and SSR. Low: no
+screen-space effects, 2-split 2048 shadows, FXAA, half the trees (still Forward+). F2 switches between them while the
+race runs. Details, keys and performance notes: [`redline-tv.md`](redline-tv.md).
+
+**Lobby warm-up.** A scene that implements `IPreloadScene` is instantiated as soon as its game is selected in the
+lobby and gets ready behind it; REDLINE builds its world and draws it (and its HUD panels, under the lobby) for a few
+frames, so the world build and the first-frame shader compiles happen before lights out. When the game starts the TV
+shows that same instance. `--autostart` waits for it. When a game ends its scene is kept the same way (parked) for as
+long as that game stays selected, so a rematch starts at once; freeing it would also free its materials' compiled
+shaders.
 
 **Haze.** Distance haze comes from the exponential fog's aerial perspective; the volumetric fog is kept thin (density
 0.0007, little GI inject) because at 60–70 m, the helicopter shots' distance to the cars, anything thicker lays a white veil
 over the whole frame. AgX runs with white 8 and contrast 1.45 (Godot's defaults, 16.29 and 1.25, look flat here).
 
-**Performance** must be measured on the target machine (RTX 5080, 2560×1440): this repository's sandbox renders with
-Mesa's CPU rasteriser (llvmpipe), where a 1080p frame takes several seconds, so frame rates from it mean nothing.
+**Performance** must be measured on the target machine (RTX 5080, 2560×1440) with F3: this repository's sandbox renders
+with Mesa's CPU rasteriser (llvmpipe), where a 1080p frame takes several seconds, so frame rates from it mean nothing.
 
 ## Adding a game scene
 

@@ -1,4 +1,5 @@
 using System.Globalization;
+using ArcBox.Host.Core;
 
 namespace ArcBox.Host.Shell;
 
@@ -6,7 +7,9 @@ namespace ArcBox.Host.Shell;
 /// App arguments after <c>--</c> on the Godot command line (all optional):
 /// <c>--server=&lt;url&gt;</c>, <c>--new-room</c>, <c>--shots=&lt;dir&gt;</c>, <c>--quit-after=&lt;seconds&gt;</c>,
 /// <c>--preset=ultra|high|low</c>, <c>--res=&lt;w&gt;x&lt;h&gt;</c>, and the dev-only <c>--redline-demo[=step]</c>
-/// (play a scripted REDLINE race into the TV without a server).
+/// (play a scripted REDLINE race into the TV without a server) and <c>--autostart=&lt;gameId&gt;[:&lt;players&gt;]</c>
+/// (select that game and start it once enough players are in; for scripted runs), and <c>--perf</c> (F3 overlay on
+/// from the start, logged every 5 s).
 /// </summary>
 public sealed record AppArgs
 {
@@ -22,6 +25,12 @@ public sealed record AppArgs
 
     /// <summary>Dev only: the demo step to start from (e.g. "reveal"), or null for the whole script.</summary>
     public string? RedlineDemoFrom { get; init; }
+
+    /// <summary><c>--perf</c>: start with the F3 performance overlay on, and log it every 5 s.</summary>
+    public bool Perf { get; init; }
+
+    /// <summary>Dev only: select and start this game by itself once enough players have joined.</summary>
+    public AutoStartSpec? AutoStart { get; init; }
 
     /// <summary>Arguments that were not understood (reported once at start-up, never fatal).</summary>
     public IReadOnlyList<string> Unknown { get; init; } = [];
@@ -48,11 +57,17 @@ public sealed record AppArgs
                 case "--quit-after" when double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out var s) && s > 0:
                     args = args with { QuitAfterSeconds = s };
                     break;
-                case "--preset" when value is "ultra" or "high" or "low":
-                    args = args with { Preset = value };
+                case "--preset" when RenderPresets.Normalise(value) is { } preset:
+                    args = args with { Preset = preset };
                     break;
                 case "--redline-demo":
                     args = args with { RedlineDemo = true, RedlineDemoFrom = string.IsNullOrWhiteSpace(value) ? null : value };
+                    break;
+                case "--perf" when value is null:
+                    args = args with { Perf = true };
+                    break;
+                case "--autostart" when AutoStartSpec.TryParse(value, out var auto):
+                    args = args with { AutoStart = auto };
                     break;
                 case "--res" when TryParseResolution(value, out var res):
                     args = args with { Resolution = res };

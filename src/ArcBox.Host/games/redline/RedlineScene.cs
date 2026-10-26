@@ -22,7 +22,7 @@ namespace ArcBox.Host.Games.Redline;
 /// <see cref="RedlineHud.UpdateTags"/> with <see cref="ActiveCamera"/> and <see cref="Cars"/>.
 /// </para>
 /// </summary>
-public partial class RedlineScene : Node3D, IGameScene
+public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPreloadScene
 {
     /// <summary>Seconds into Reveal when the camera cuts to the follow-up shot.</summary>
     public const double FollowUpSeconds = 3.5;
@@ -48,6 +48,13 @@ public partial class RedlineScene : Node3D, IGameScene
     private bool _followUp;
     private readonly List<(double At, string Label)> _pendingShots = [];
 
+    private enum WarmState { Off, Waiting, Drawing, Ready }
+
+    /// <summary>The lobby warm-up (see <see cref="Preload"/>): Off while on air.</summary>
+    private WarmState _warm = WarmState.Off;
+    private int _warmFrame;
+    private List<RedlineHostView> _warmViews = [];
+
     /// <summary>The camera on air.</summary>
     public Camera3D ActiveCamera => _rig.Camera;
 
@@ -62,13 +69,129 @@ public partial class RedlineScene : Node3D, IGameScene
 
     public void SetShots(Screenshotter? shots) => _shots = shots;
 
+    /// <summary>Takes effect at once when the world is built (F2), else when it is.</summary>
+    public void SetRenderPreset(string preset)
+    {
+        var next = RenderPreset.Parse(preset);
+        if (next == _preset)
+        {
+            return;
+        }
+        _preset = next;
+        if (_world is not null && IsInsideTree())
+        {
+            ApplyPreset();
+        }
+    }
+
+    private void ApplyPreset()
+    {
+        RenderPreset.Apply(_world!.Environment.Environment, _world.Sun, GetViewport(), _preset);
+        Trees.SetFraction(_world.Trees, RenderPreset.TreeFraction(_preset));
+    }
+
     public override void _Ready()
     {
-        _preset = RenderPreset.Parse(AppArgs.Parse(OS.GetCmdlineUserArgs()).Preset);
         _rig = new CameraRig { Name = "CameraRig" };
         AddChild(_rig);
         _hud = new RedlineHud();
         AddChild(_hud);
+    }
+
+    // ---- Lobby warm-up ---------------------------------------------------------------------------------------
+
+    public bool PreloadDone => _warm == WarmState.Ready;
+
+    /// <summary>
+    /// Called while REDLINE is selected in the lobby: once the background geometry build is done, builds the world and
+    /// draws the grid line-up (one car smoking) behind the lobby, with the HUD under the lobby too, showing each phase's
+    /// panels from the demo script in turn. So the world build and the first-frame shader and pipeline compiles (tens of
+    /// seconds on a software renderer) are over before lights out. Then it stops drawing until <see cref="EndPreload"/>.
+    /// </summary>
+    public void Preload()
+    {
+        _warm = WarmState.Waiting;
+        _warmFrame = 0;
+        _hud.Layer = -1;   // under the lobby (layer 0), which is opaque
+        _warmViews = global::Redline.Presentation.Demo.DemoRace.Steps()
+            .DistinctBy(s => s.View.Phase)
+            .Select(s => s.View)
+            .ToList();
+    }
+
+    /// <summary>
+    /// The race is over and the lobby still has REDLINE selected: stop drawing and wait for the next start. Keeping
+    /// this instance (and so its materials and their compiled shaders) is what makes the next start quick.
+    /// </summary>
+    public void Park()
+    {
+        _warm = WarmState.Ready;
+        _pendingShots.Clear();
+        _view = null;
+        Hide3D();
+        GD.Print("REDLINE parked for the next race");
+    }
+
+    public void EndPreload()
+    {
+        if (_warm == WarmState.Off)
+        {
+            return;
+        }
+        _warm = WarmState.Off;
+        RemoveChild(_hud);
+        _hud.QueueFree();
+        _hud = new RedlineHud();
+        AddChild(_hud);
+        Visible = true;
+        ActiveCamera.MakeCurrent();
+        _view = null;
+        _from = _to = new Dictionary<string, CarSlot>();
+        foreach (var car in _cars.Values)
+        {
+            car.Smoke(0);
+        }
+    }
+
+    /// <summary>Stays in the tree (leaving it would recreate every render instance at the start) but draws nothing.</summary>
+    private void Hide3D()
+    {
+        Visible = false;
+        _hud.Visible = false;
+        ActiveCamera.Current = false;
+    }
+
+    private void PreloadStep()
+    {
+        if (_warm == WarmState.Waiting)
+        {
+            var circuit = new RedlineRules().CircuitId;
+            if (_world is null && !RedlineAssets.Prewarm(circuit).IsCompleted)
+            {
+                return;
+            }
+            EnsureWorld(circuit);
+            var grid = _warmViews.First(v => v.Phase == RacePhase.Grid);
+            _view = grid;
+            _from = _to = Formation.Current(grid, _assets!.Circuit.LapLength);
+            PlaceCars(0);
+            _cars.Values.First().Smoke(1);
+            _rig.SetShot(new GridShot());
+            _rig.Advance(_time);
+            _warm = WarmState.Drawing;
+            GD.Print("REDLINE warming up behind the lobby");
+            return;
+        }
+        if (_warmFrame < _warmViews.Count)
+        {
+            _hud.Render(_warmViews[_warmFrame], null);
+        }
+        if (++_warmFrame == _warmViews.Count + 2)
+        {
+            Hide3D();
+            _warm = WarmState.Ready;
+            GD.Print("REDLINE warm-up done");
+        }
     }
 
     /// <summary>
@@ -145,6 +268,10 @@ public partial class RedlineScene : Node3D, IGameScene
     public override void _Process(double delta)
     {
         _time += delta;
+        if (_warm is WarmState.Waiting or WarmState.Drawing)
+        {
+            PreloadStep();
+        }
         if (_view is null || _assets is null)
         {
             return;
@@ -226,7 +353,7 @@ public partial class RedlineScene : Node3D, IGameScene
         _world = WorldBuilder.Build(_assets, _preset);
         AddChild(_world.Root);
         MoveChild(_world.Root, 0);
-        RenderPreset.Apply(_world.Environment.Environment, _world.Sun, GetViewport(), _preset);
+        ApplyPreset();
 
         var cars = new Node3D { Name = "Cars" };
         _world.Root.AddChild(cars);

@@ -4,7 +4,7 @@ using Environment = Godot.Environment;
 namespace ArcBox.Host.Games.Redline.World;
 
 /// <summary>The built world: the root node plus the pieces the scene drives later.</summary>
-public sealed record BuiltWorld(Node3D Root, WorldEnvironment Environment, DirectionalLight3D Sun, StartGantry Gantry);
+public sealed record BuiltWorld(Node3D Root, WorldEnvironment Environment, DirectionalLight3D Sun, StartGantry Gantry, MultiMeshInstance3D Trees);
 
 /// <summary>
 /// Assembles the static COTA world from <see cref="RedlineAssets"/>: sky and environment, the sun, track layers, terrain,
@@ -94,9 +94,11 @@ public static class WorldBuilder
 
         var landmarks = Landmarks.Build(a, out var gantry);
         root.AddChild(landmarks);
-        root.AddChild(Trees.Build(a, Landmarks.Footprints(a), RenderPreset.TreeFraction(preset)));
+        var trees = Trees.Build(a, Landmarks.Footprints(a));
+        Trees.SetFraction(trees, RenderPreset.TreeFraction(preset));
+        root.AddChild(trees);
 
-        return new BuiltWorld(root, worldEnv, sun, gantry);
+        return new BuiltWorld(root, worldEnv, sun, gantry, trees);
     }
 
     private static ArrayMesh[] TrackMeshes(CircuitAssets a)

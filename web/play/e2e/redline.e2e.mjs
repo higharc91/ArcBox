@@ -12,10 +12,13 @@
 //   ARCBOX_GAME     redline (default) or counter
 //   ARCBOX_FULL     1 = play REDLINE to the end; Counter always plays to the end
 //   ARCBOX_ROOM     join this room code instead of hosting on /dev.html; the VIP phone (if ours) picks and starts
-//   ARCBOX_START    phone (default: the VIP phone picks the game and starts) or host (the dev page's host panel)
+//   ARCBOX_START    phone (default: the VIP phone picks the game and starts) or host (the dev page's host panel;
+//                   with ARCBOX_ROOM, the TV starts the game, e.g. `--autostart=redline:3`, and the phones wait)
 //   ARCBOX_REJOIN   0 to skip the mid-game reload of phone 2 (default on)
 //   ARCBOX_SHOTS    screenshot folder (default web/play/e2e/shots, git-ignored)
 //   ARCBOX_HEADED   1 to watch it in a visible browser
+//   ARCBOX_PACE     multiplier for the bots' reading time before each tap (default 1: 0.25–2.2 s)
+//   ARCBOX_NAME     with ARCBOX_ROOM: name prefix for the phones (default Bot: Bot1, Bot2…)
 //
 // Exit code 0 when the run reached its goal with no page errors; 1 otherwise.
 
@@ -33,10 +36,14 @@ const PHONES = clampInt(env.ARCBOX_PHONES, 3, 1, 8);
 const GAME = (env.ARCBOX_GAME ?? "redline").toLowerCase();
 const FULL = env.ARCBOX_FULL === "1" || process.argv.includes("--full");
 const ROOM = env.ARCBOX_ROOM?.trim().toUpperCase() || null;
-const START = env.ARCBOX_START === "host" && !ROOM ? "host" : "phone";
+const START = env.ARCBOX_START === "host" ? "host" : "phone";
 const REJOIN = env.ARCBOX_REJOIN !== "0";
 const SHOTS = resolve(env.ARCBOX_SHOTS ?? join(here, "shots"));
 const HEADED = env.ARCBOX_HEADED === "1";
+/** Multiplies the bots' reading time; > 1 keeps each phase on screen longer (a slow TV renderer needs that). */
+const PACE = Math.min(10, Math.max(0.1, Number(env.ARCBOX_PACE) || 1));
+/** Room mode: phones join as `${NAME}1`, `${NAME}2`… (a second run in the same room needs new names). */
+const NAME = (env.ARCBOX_NAME ?? "Bot").replace(/[^A-Za-z]/g, "").slice(0, 8) || "Bot";
 /** Plays to the end (results and back to the lobby) rather than stopping at the first Reveal. */
 const TO_THE_END = FULL || GAME !== "redline";
 const DEADLINE_MS = (TO_THE_END ? 20 : 4) * 60_000;
@@ -161,7 +168,7 @@ async function bot(phone, stop, onSnapshot) {
       if (s.screen === "controller" && s.enabled.length && decidedFor !== viewKey) {
         decidedFor = viewKey;
         if (Math.random() >= 0.06) {
-          await sleep(rand(250, 2200)); // reading time
+          await sleep(rand(250, 2200) * PACE); // reading time
           await act(phone, s);
         } else {
           log(`P${phone.slot} sits out ${phaseOf(s)}: the phase timer decides`);
@@ -242,7 +249,7 @@ async function run() {
       const page = await context.newPage();
       watchErrors(page);
       pages.push(page);
-      await page.goto(`${BASE}/?room=${ROOM}&slot=e2e${slot}&devName=Bot${slot}`);
+      await page.goto(`${BASE}/?room=${ROOM}&slot=e2e${slot}&devName=${NAME}${slot}`);
       phones.push(roomPhone(page, slot));
     }
   } else {
@@ -266,7 +273,10 @@ async function run() {
   if (dev) await dev.screenshot({ path: join(SHOTS, "dev-lobby.png"), fullPage: true });
 
   // -------- pick the game and start
-  if (START === "host") {
+  if (START === "host" && ROOM) {
+    log("waiting for the host to start the game");
+    await until("the host to start the game", async () => (await Promise.all(phones.map(snapshot))).some((s) => s.screen === "controller"), 5 * 60_000);
+  } else if (START === "host") {
     await dev.locator(".host-actions button", { hasText: new RegExp(`^${GAME}$`, "i") }).click();
     await dev.locator(".host-actions .primary:not([disabled])").click({ timeout: 10_000 });
   } else {

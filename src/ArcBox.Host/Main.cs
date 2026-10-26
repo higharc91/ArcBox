@@ -25,6 +25,15 @@ public partial class Main : Control
     private CancellationTokenSource? _connectCts;
     private int _generation;
     private string _serverUrl = HostSettings.DefaultServer;
+    private SettingsStore _settings = null!;
+    private string _preset = RenderPresets.Ultra;
+    private AutoStart? _autoStart;
+    private HostOverlay _overlay = null!;
+
+    /// <summary>The selected game's scene, getting ready behind the lobby (<see cref="IPreloadScene"/>).</summary>
+    private Node? _warm;
+    private string? _warmGameId;
+    private bool _warmReady;
 
     private Node? _screen;
     private ScreenKind _kind;
@@ -46,6 +55,11 @@ public partial class Main : Control
     {
         SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
         Theme = ArcTheme.Theme;
+        // Godot caps a frame's process delta at max_physics_steps_per_frame physics ticks (default 8 / 60 s = 133 ms).
+        // The TV's animations, Reveal follow-up cut and phase shots run on that delta while the server's phases run
+        // on the wall clock, so after any frame longer than that the scene would fall behind the race. The TV has no
+        // physics bodies, so allowing more steps costs nothing.
+        Engine.MaxPhysicsStepsPerFrame = 120;
         MouseFilter = MouseFilterEnum.Ignore;
 
         _args = AppArgs.Parse(OS.GetCmdlineUserArgs());
@@ -68,8 +82,23 @@ public partial class Main : Control
         }
 
         _store = new SessionStore(ProjectSettings.GlobalizePath("user://session.json"));
-        _serverUrl = (_args.Server ?? HostSettings.Load().ServerUrl ?? HostSettings.DefaultServer).TrimEnd('/');
+        _settings = new SettingsStore(ProjectSettings.GlobalizePath("user://settings.json"));
+        var saved = _settings.Load();
+        _serverUrl = (_args.Server ?? saved.ServerUrl ?? HostSettings.DefaultServer).TrimEnd('/');
+        _preset = RenderPresets.Resolve(_args.Preset, saved.Preset);
+        GD.Print($"Render preset {_preset}{(_args.Preset is not null ? " (--preset)" : saved.Preset is not null ? " (saved)" : "")}");
+        if (_args.AutoStart is { } auto)
+        {
+            _autoStart = new AutoStart(auto);
+            GD.Print($"Autostart: {auto.GameId} once {auto.MinPlayers} player(s) are in");
+        }
         BuildBanner();
+        _overlay = new HostOverlay { Preset = _preset, LogPerf = _args.Perf };
+        AddChild(_overlay);
+        if (_args.Perf)
+        {
+            _overlay.TogglePerf();
+        }
 
         if (_args.RedlineDemo)
         {
@@ -85,6 +114,15 @@ public partial class Main : Control
 
     public override void _Process(double delta)
     {
+        if (_warm is IPreloadScene { PreloadDone: true } && !_warmReady)
+        {
+            _warmReady = true;
+            if (_lobby is { } lobby)
+            {
+                AutoStartStep(lobby);
+            }
+        }
+
         foreach (var e in _queue.Drain())
         {
             try
@@ -96,6 +134,38 @@ public partial class Main : Control
                 GD.PushError($"Handling {e.GetType().Name} failed: {ex}");
             }
         }
+    }
+
+    public override void _Input(InputEvent e)
+    {
+        // F2 / F3 work on every screen, even with a text field focused.
+        if (e is not InputEventKey { Pressed: true, Echo: false } key)
+        {
+            return;
+        }
+        if (key.Keycode == Key.F2)
+        {
+            GetViewport().SetInputAsHandled();
+            CyclePreset();
+        }
+        else if (key.Keycode == Key.F3)
+        {
+            GetViewport().SetInputAsHandled();
+            _overlay.TogglePerf();
+        }
+    }
+
+    /// <summary>F2: Ultra → High → Low → Ultra, applied to the scene on screen now and saved for the next launch.</summary>
+    private void CyclePreset()
+    {
+        _preset = RenderPresets.Next(_preset);
+        _settings.Update(s => s with { Preset = _preset });
+        (_scene as IRenderPresetScene)?.SetRenderPreset(_preset);
+        (_warm as IRenderPresetScene)?.SetRenderPreset(_preset);
+        _overlay.Preset = _preset;
+        _overlay.Toast($"PRESET · {RenderPresets.Title(_preset)}");
+        _shots?.Capture($"preset-{_preset}");
+        GD.Print($"Render preset {_preset} (F2)");
     }
 
     public override void _UnhandledInput(InputEvent e)
@@ -110,6 +180,10 @@ public partial class Main : Control
 
     public override void _Notification(int what)
     {
+        if (what == NotificationPredelete)
+        {
+            DropWarm();
+        }
         if (what == NotificationWMCloseRequest || what == NotificationPredelete)
         {
             _connectCts?.Cancel();
@@ -297,6 +371,11 @@ public partial class Main : Control
         _lobby = lobby;
         _roomReady = true;
         GameSceneMap.Prewarm(lobby.SelectedGameId);
+        if (!lobby.InGame)
+        {
+            WarmUp(lobby.SelectedGameId);
+        }
+        AutoStartStep(lobby);
 
         if (lobby.InGame && lobby.SelectedGameId is { } gameId)
         {
@@ -319,6 +398,35 @@ public partial class Main : Control
             default:
                 ShowLobby();
                 break;
+        }
+    }
+
+    /// <summary><c>--autostart</c>: select the game, then start it once enough players are in (first game only).</summary>
+    private void AutoStartStep(LobbyState lobby)
+    {
+        var ready = _warm is not IPreloadScene { PreloadDone: false };
+        switch (_autoStart?.Next(lobby, ready))
+        {
+            case AutoStartAction.Select:
+                _ = CallAsync(c => c.SelectGameAsync(_autoStart.Spec.GameId));
+                break;
+            case AutoStartAction.Start:
+                GD.Print($"Autostart: starting {_autoStart.Spec.GameId} with {lobby.Players.Count(p => p.Connected)} player(s)");
+                _ = AutoStartAsync();
+                break;
+        }
+    }
+
+    private async Task AutoStartAsync()
+    {
+        try
+        {
+            await _client!.StartGameAsync();
+        }
+        catch (Exception ex)
+        {
+            GD.PushWarning($"Autostart failed: {ex.Message}");
+            _autoStart?.StartFailed();
         }
     }
 
@@ -355,7 +463,16 @@ public partial class Main : Control
 
     private void SetScreen(Node screen, ScreenKind kind, string? shot)
     {
-        if (_screen is not null)
+        if (_screen is IPreloadScene finished && _kind == ScreenKind.Game && _sceneGameId is { } finishedGame
+            && screen != _screen)
+        {
+            // Keep the finished game's scene, ready for a rematch; WarmUp drops it if another game is picked.
+            DropWarm();
+            finished.Park();
+            _warm = _screen;
+            _warmGameId = finishedGame;
+        }
+        else if (_screen is not null && screen != _screen)
         {
             RemoveChild(_screen);
             _screen.QueueFree();
@@ -372,7 +489,10 @@ public partial class Main : Control
 
         _screen = screen;
         _kind = kind;
-        AddChild(screen);
+        if (screen.GetParent() != this)
+        {
+            AddChild(screen);   // a scene warmed up behind the lobby is already in the tree
+        }
         MoveChild(screen, 0);
         if (shot is not null)
         {
@@ -389,7 +509,7 @@ public partial class Main : Control
         var screen = new ConnectScreen { ServerUrl = _serverUrl };
         screen.ConnectRequested += url =>
         {
-            new HostSettings(url.TrimEnd('/')).Save();
+            _settings.Update(s => s with { ServerUrl = url.TrimEnd('/') });
             _ = StartSessionAsync(url, false);
         };
         SetScreen(screen, ScreenKind.Connect, "connect");
@@ -430,20 +550,79 @@ public partial class Main : Control
         ? null
         : $"{l.Code}|{l.SelectedGameId}|{l.CanStart}|{string.Join(",", l.Players.Select(p => $"{p.Name}:{p.Connected}:{p.IsVip}"))}";
 
+    /// <summary>Starts getting the selected game's scene ready behind the lobby, if it supports that.</summary>
+    private void WarmUp(string? gameId)
+    {
+        if (gameId == _warmGameId)
+        {
+            return;
+        }
+        DropWarm();
+        if (gameId is null)
+        {
+            return;
+        }
+        var node = LoadScene(GameSceneMap.ScenePath(gameId));
+        if (node is not IPreloadScene preload)
+        {
+            node?.QueueFree();
+            return;
+        }
+        (node as IRenderPresetScene)?.SetRenderPreset(_preset);
+        _warm = node;
+        _warmGameId = gameId;
+        AddChild(node);
+        MoveChild(node, 0);
+        preload.Preload();
+    }
+
+    private void DropWarm()
+    {
+        if (_warm is { } node && IsInstanceValid(node))
+        {
+            if (node.IsInsideTree())
+            {
+                RemoveChild(node);
+            }
+            node.QueueFree();
+        }
+        _warm = null;
+        _warmGameId = null;
+        _warmReady = false;
+    }
+
+    private static Node? LoadScene(string? path)
+    {
+        if (path is null || !ResourceLoader.Exists(path))
+        {
+            return null;
+        }
+        try
+        {
+            return GD.Load<PackedScene>(path)?.Instantiate();
+        }
+        catch (Exception ex)
+        {
+            GD.PushError($"Loading {path} failed: {ex.Message}");
+            return null;
+        }
+    }
+
     private void ShowGame(string gameId)
     {
         var path = GameSceneMap.ScenePath(gameId);
-        Node? node = null;
-        if (path is not null && ResourceLoader.Exists(path))
+        Node? node;
+        if (_warm is not null && _warmGameId == gameId)
         {
-            try
-            {
-                node = GD.Load<PackedScene>(path)?.Instantiate();
-            }
-            catch (Exception ex)
-            {
-                GD.PushError($"Loading {path} failed: {ex.Message}");
-            }
+            // The scene that got ready behind the lobby (or was kept from the last game).
+            node = _warm;
+            _warm = null;
+            _warmGameId = null;
+            _warmReady = false;
+        }
+        else
+        {
+            node = LoadScene(path);
         }
 
         var missing = node is not IGameScene;
@@ -457,7 +636,9 @@ public partial class Main : Control
         }
 
         ((IGameScene)node!).SetShots(_shots);
+        (node as IRenderPresetScene)?.SetRenderPreset(_preset);
         SetScreen(node!, ScreenKind.Game, missing ? $"{gameId}-missing" : gameId);
+        (node as IPreloadScene)?.EndPreload();
         _sceneGameId = gameId;
         _previousView = null;
     }

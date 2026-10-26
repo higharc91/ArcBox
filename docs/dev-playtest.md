@@ -72,7 +72,11 @@ node web/play/e2e/redline.e2e.mjs                                  # REDLINE, 3 
 ARCBOX_FULL=1 node web/play/e2e/redline.e2e.mjs                    # race to the chequered flag and back to the lobby
 ARCBOX_GAME=counter ARCBOX_PHONES=6 node web/play/e2e/redline.e2e.mjs
 ARCBOX_ROOM=ABCD node web/play/e2e/redline.e2e.mjs                 # join a room hosted elsewhere with bot phones
+ARCBOX_ROOM=ABCD ARCBOX_START=host node web/play/e2e/redline.e2e.mjs   # …and wait for that host (the TV) to start
 ```
+
+To run it against the Godot TV app instead of the dev page, with screenshots from both, use `tools/tv-e2e.sh`
+([`redline-tv.md`](redline-tv.md)).
 
 It reloads phone 2 mid-game to check rejoin, fails if any phone sits on one view longer than a phase allows
 or a page throws, and saves screenshots of phone 1 at each phase (and the dev board) to `web/play/e2e/shots`
