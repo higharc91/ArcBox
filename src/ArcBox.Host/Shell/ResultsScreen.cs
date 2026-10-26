@@ -1,3 +1,4 @@
+using ArcBox.Host.Core;
 using ArcBox.Sdk;
 using Godot;
 
@@ -57,16 +58,12 @@ public partial class ResultsScreen : Control
         }
         else
         {
-            var rank = 0;
+            var ranks = ResultRanks.Compute(_results);
             for (var i = 0; i < _results.Scores.Count && i < 8; i++)
             {
                 var s = _results.Scores[i];
-                if (i == 0 || s.Score != _results.Scores[i - 1].Score)
-                {
-                    rank = i + 1;
-                }
                 var join = _joinOrder.ToList().IndexOf(s.PlayerId);
-                rows.AddChild(Row(rank, s, join >= 0 ? join : i));
+                rows.AddChild(Row(ranks[i], s, join >= 0 ? join : i));
             }
             // Keep rows a sensible height with few players.
             for (var i = _results.Scores.Count; i < 6; i++)
@@ -109,10 +106,10 @@ public partial class ResultsScreen : Control
         }
     }
 
-    private static Control Row(int rank, PlayerScore score, int colourIndex)
+    private static Control Row(ResultRank rank, PlayerScore score, int colourIndex)
     {
-        var lead = rank == 1;
-        var pos = ArcTheme.Label(rank.ToString(), ArcTheme.Black, 44, lead ? new Color("111111") : Colors.White);
+        var lead = rank.Place == 1;
+        var pos = ArcTheme.Label(rank.Place.ToString(), ArcTheme.Black, 44, lead ? new Color("111111") : Colors.White);
         pos.HorizontalAlignment = HorizontalAlignment.Center;
         pos.VerticalAlignment = VerticalAlignment.Center;
         var posCell = ArcTheme.Panel(ArcTheme.Flat(lead ? Colors.White : new Color(1, 1, 1, 0.04f)), pos);
@@ -126,7 +123,7 @@ public partial class ResultsScreen : Control
         name.ClipText = true;
 
         var content = ArcTheme.HBox(22, posCell, colour, name);
-        if (lead)
+        if (rank.Winner)
         {
             var chip = ArcTheme.Label("WINNER", ArcTheme.Spaced("Black", 2), 18, new Color("15151e"));
             var chipPanel = ArcTheme.Panel(ArcTheme.Flat(ArcTheme.Gold, 0), ArcTheme.Margin(14, 3, 12, 3, chip));
