@@ -10,7 +10,7 @@
     {
       "id": "push",
       "label": "PUSH",
-      "hint": "+2 if right · −1 if wrong"
+      "hint": "+3 if right · −1 if wrong"
     },
     {
       "id": "redline",

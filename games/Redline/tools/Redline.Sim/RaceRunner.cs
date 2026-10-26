@@ -127,13 +127,13 @@ public static class RaceRunner
                     break;
                 case RacePhase.Throttle:
                 {
-                    // The same chase condition as AiPolicy.ChooseThrottle, evaluated on the public distances.
+                    // AiPolicy's chase condition, evaluated on the public distances.
                     var leaderDistance = view.Drivers.Max(r => r.Distance);
                     var roundsLeft = o.Rules.MaxRounds - view.Round + 1;
                     foreach (var row in view.Drivers.Where(r => r.Player is null && !r.PitLimiter))
                     {
                         aiDecisions++;
-                        if (leaderDistance - row.Distance >= o.Rules.Ai.ChaseGap && roundsLeft <= o.Rules.Ai.ChaseRoundsLeft) aiChase++;
+                        if (AiPolicy.IsChasing(leaderDistance - row.Distance, roundsLeft, o.Rules.Ai)) aiChase++;
                     }
                     for (var i = 0; i < humans.Count; i++)
                     {

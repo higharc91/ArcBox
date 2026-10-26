@@ -17,20 +17,39 @@ public static class AiPolicy
     }
 
     /// <summary>
-    /// Softmax over expected-value scores. <paramref name="roundsLeft"/> counts the current round.
+    /// Expected distance gained this round for each throttle at P(correct) = <paramref name="p"/>, read from the
+    /// payout table in <paramref name="rules"/>:
+    /// Cruise = p·CruiseGain; Push = p·PushGain − (1−p)·PushLoss;
+    /// Redline = p·RedlineGain − (1−p)·(RedlineLoss + Ai.LimiterCost), plus Ai.ChaseBonus in chase mode.
+    /// The limiter cost is the value of the round lost to the pit limiter, so it is charged only on a wrong answer.
+    /// </summary>
+    public static (double Cruise, double Push, double Redline) Scores(double p, int gapToLeader, int roundsLeft, RedlineRules rules)
+    {
+        var ai = rules.Ai;
+        var q = 1 - p;
+        return (
+            p * rules.CruiseGain,
+            p * rules.PushGain - q * rules.PushLoss,
+            p * rules.RedlineGain - q * (rules.RedlineLoss + ai.LimiterCost) + (IsChasing(gapToLeader, roundsLeft, ai) ? ai.ChaseBonus : 0));
+    }
+
+    /// <summary>Chase mode: at least <c>ChaseGap</c> behind the leader with at most <c>ChaseRoundsLeft</c> rounds left.</summary>
+    public static bool IsChasing(int gapToLeader, int roundsLeft, AiRules ai) =>
+        gapToLeader >= ai.ChaseGap && roundsLeft <= ai.ChaseRoundsLeft;
+
+    /// <summary>
+    /// Softmax over the expected-value <see cref="Scores"/>. <paramref name="roundsLeft"/> counts the current round.
+    /// Redline is off the table below <c>Ai.RedlineFloor</c> unless chasing.
     /// Always consumes exactly one <c>NextDouble()</c> draw.
     /// </summary>
-    public static Throttle ChooseThrottle(double p, int gapToLeader, int roundsLeft, AiRules rules, Random random)
+    public static Throttle ChooseThrottle(double p, int gapToLeader, int roundsLeft, RedlineRules rules, Random random)
     {
-        var chasing = gapToLeader >= rules.ChaseGap && roundsLeft <= rules.ChaseRoundsLeft;
+        var ai = rules.Ai;
+        var chasing = IsChasing(gapToLeader, roundsLeft, ai);
+        var (cruise, push, redline) = Scores(p, gapToLeader, roundsLeft, rules);
 
-        Span<double> score =
-        [
-            p,
-            3 * p - 1,
-            6 * p - 2 - rules.LimiterCost + (chasing ? rules.ChaseBonus : 0),
-        ];
-        var redlineAllowed = chasing || p >= rules.RedlineFloor;
+        Span<double> score = [cruise, push, redline];
+        var redlineAllowed = chasing || p >= ai.RedlineFloor;
         var count = redlineAllowed ? 3 : 2;
 
         var max = double.NegativeInfinity;
@@ -40,7 +59,7 @@ public static class AiPolicy
         var total = 0.0;
         for (var i = 0; i < count; i++)
         {
-            weight[i] = Math.Exp((score[i] - max) / rules.Temperature);
+            weight[i] = Math.Exp((score[i] - max) / ai.Temperature);
             total += weight[i];
         }
 

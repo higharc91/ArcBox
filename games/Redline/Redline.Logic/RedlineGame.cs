@@ -262,7 +262,7 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         var leader = _field.Max(d => d.Distance);
         var roundsLeft = Rules.MaxRounds - Round + 1;
         foreach (var d in _field.Where(d => !d.IsHuman && d.Throttle is null))
-            d.Throttle = AiPolicy.ChooseThrottle(AiAccuracy(d), leader - d.Distance, roundsLeft, Rules.Ai, random);
+            d.Throttle = AiPolicy.ChooseThrottle(AiAccuracy(d), leader - d.Distance, roundsLeft, Rules, random);
 
         _ctx.SetTimer(PhaseTimer, Rules.Throttle);
         MaybeEndThrottleEarly();
@@ -405,7 +405,7 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         {
             RacePhase.Throttle when driver.PitLimiter => PlayerViews.PitLimited(header, deadline),
             RacePhase.Throttle when driver.Throttle is { } locked => PlayerViews.ThrottleLocked(locked, header, deadline),
-            RacePhase.Throttle => PlayerViews.ChooseThrottle(Current, header, deadline),
+            RacePhase.Throttle => PlayerViews.ChooseThrottle(Current, Rules, header, deadline),
             RacePhase.Question when driver.AnswerIndex is null => PlayerViews.Answer(
                 Current.Text, _answers[Round - 1].Answers, driver.Throttle ?? Throttle.Cruise, header, deadline),
             RacePhase.Question => PlayerViews.Answered(header, deadline),

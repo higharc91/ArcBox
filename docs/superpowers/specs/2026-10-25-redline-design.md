@@ -55,25 +55,27 @@ It is a racing trivia game for 2–8 players, shown on the TV as a **realistic 3
   - Players claim seats in **Driver Select** (§3.1).
   - Every unclaimed seat is an **AI driver** (§2.6).
   - The grid order for the start is random, from `ctx.Random`.
-- The track is **20 units** long (`FinishLine`). Every car starts at 0.
-- The track is drawn as **one lap of the circuit**: distance 0 is the start/finish line and 20 is the line again.
+- The track is **28 units** long (`FinishLine`). Every car starts at 0.
+- The track is drawn as **one lap of the circuit**: distance 0 is the start/finish line and 28 is the line again.
 - A race has at most **15 rounds** (`MaxRounds`). One round is one question.
-- The race ends after the Reveal of any round where at least one car's distance is **≥ 20**, or after round 15's Reveal, whichever comes first.
-- Distance can overshoot the line (e.g. 21), and the overshoot counts for ranking.
+- The race ends after the Reveal of any round where at least one car's distance is **≥ 28**, or after round 15's Reveal, whichever comes first.
+- Distance can overshoot the line (e.g. 29), and the overshoot counts for ranking.
 
 ### 2.2 Throttle and scoring
 
 | Throttle | Correct | Wrong or no answer |
 |---|---|---|
 | **CRUISE** | +1 | 0 |
-| **PUSH** | +2 | −1 |
+| **PUSH** | +3 | −1 |
 | **REDLINE** | +4 | −2 and **spin out** |
 
 - **Spin out:** the driver gets the **pit limiter** for the next round. They are locked to Cruise, and their phone skips the throttle screen.
 - Distance never drops below 0.
 - A driver who makes no throttle pick before the deadline is set to Cruise.
 - A driver who makes no answer before the deadline is treated as wrong.
-- All numbers above live in one `RedlineRules` record (§4.3).
+- All numbers above live in one `RedlineRules` record (§4.3). Nothing else may hard-code them: the phone hints (§3.3), the TV rules strip and the AI's throttle scores (§2.6) are all built from `RedlineRules`.
+
+> **Tuning note (2026-10-26).** `FinishLine` 28 (was 20) and PUSH +3 (was +2), with `MaxRounds` unchanged at 15, come from the balance simulation, [2026-10-26-redline-balance-sim.md](../reports/2026-10-26-redline-balance-sim.md) §4 tweaks 1–3. At 20 / +2, races lasted a median of 5–9 rounds and PUSH was never the best pick. These are simulated values, not playtested ones: **re-tune them after the first real playtest.**
 
 ### 2.3 Ranking and results
 1. All 22 cars are ranked together, by distance descending.
@@ -101,11 +103,11 @@ It is a racing trivia game for 2–8 players, shown on the TV as a **realistic 3
 - **Accuracy:** `P(correct) = clamp(base[difficulty] × aiSkill, 0.08, 0.92)`.
   - `base` is easy 0.72, medium 0.52 and hard 0.32.
   - `aiSkill = 0.85 + 0.30 × √(points / leaderPoints)`, from the **real 2026 championship standings** (F1DB snapshot). That gives Antonelli 1.15, Verstappen 1.09, and a driver with no points 0.85.
-- **Throttle:** the AI scores each throttle by expected gain using its own `P(correct)`:
-  - Cruise = p.
-  - Push = 3p − 1.
-  - Redline = 6p − 2 − 0.6, where 0.6 is the expected cost of the pit limiter.
-  - It then picks with softmax noise. **Chase mode** applies when it is ≥ 6 units behind the leader with ≤ 5 rounds left, adding +0.5 to Redline.
+- **Throttle:** the AI scores each throttle by expected gain using its own `P(correct)` *p* and the payouts in `RedlineRules` (never a copy of them):
+  - Cruise = p · `CruiseGain` (p with the shipped rules).
+  - Push = p · `PushGain` − (1 − p) · `PushLoss` (4p − 1).
+  - Redline = p · `RedlineGain` − (1 − p) · (`RedlineLoss` + `LimiterCost`) (6.6p − 2.6), where `LimiterCost` = 0.6 is the value of the round lost to the pit limiter, charged only when the answer is wrong.
+  - It then picks with softmax noise (temperature 0.35). Redline is never picked below p 0.3 unless chasing. **Chase mode** applies when it is ≥ 6 units behind the leader with ≤ 5 rounds left, adding +0.5 to Redline.
 - **Answers:** an AI draws `correct ~ Bernoulli(p)`. A wrong answer picks uniformly among the three wrong options, so the TV's "who picked what" looks natural.
 - All randomness comes from `ctx.Random`, so AI races are reproducible in tests.
 - All the constants above live in `RedlineRules.Ai` and get tuned after playtests. The target is an average AI landing mid-pack against an average player.
@@ -148,7 +150,7 @@ Every controller view sets `Header = "P{position} · ROUND {round}/{maxRounds}"`
 
 | State | View |
 |---|---|
-| Throttle, choosing | `ButtonsView(Prompt: "{Category} · {Difficulty}. How hard do you push?", Buttons: cruise / push / redline)`, with `Option.Hint` set to `"+1 if right · nothing lost"`, `"+2 if right · −1 if wrong"` and `"+4 if right · spin out if wrong"` |
+| Throttle, choosing | `ButtonsView(Prompt: "{Category} · {Difficulty}. How hard do you push?", Buttons: cruise / push / redline)`, with `Option.Hint` built from `RedlineRules`: `"+{CruiseGain} if right · nothing lost"`, `"+{PushGain} if right · −{PushLoss} if wrong"` and `"+{RedlineGain} if right · spin out if wrong"`, i.e. `"+1 if right · nothing lost"`, `"+3 if right · −1 if wrong"` and `"+4 if right · spin out if wrong"` with the shipped rules |
 | Throttle, locked | `WaitView("Locked in: {THROTTLE}. Waiting for the other drivers…")` |
 | Throttle, pit limiter | `WaitView("Pit limiter: you're on Cruise this round.")` |
 | Question, unanswered | `ChoiceView(Prompt: question text, Options: a/b/c/d in shuffled order)`. The Header becomes `"{THROTTLE} · P{position} · ROUND {round}/{maxRounds}"` |
@@ -217,7 +219,7 @@ public interface IQuestionSource
 ```csharp
 public sealed record RedlineRules
 {
-    public int FinishLine { get; init; } = 20;
+    public int FinishLine { get; init; } = 28;      // was 20; see the §2.2 tuning note
     public int MaxRounds { get; init; } = 15;
     public string CircuitId { get; init; } = "cota";   // which circuit the TV draws; data only, no logic effect
     public TimeSpan Grid { get; init; } = TimeSpan.FromSeconds(6);
@@ -227,7 +229,7 @@ public sealed record RedlineRules
     public TimeSpan Chequered { get; init; } = TimeSpan.FromSeconds(10);
     // (gain if right, loss if wrong) per throttle; a wrong REDLINE also spins out.
     public int CruiseGain { get; init; } = 1;
-    public int PushGain { get; init; } = 2;   public int PushLoss { get; init; } = 1;
+    public int PushGain { get; init; } = 3;   public int PushLoss { get; init; } = 1;   // PushGain was 2
     public int RedlineGain { get; init; } = 4; public int RedlineLoss { get; init; } = 2;
 }
 
@@ -375,7 +377,7 @@ A circuit is pure data: adding one means adding one JSON file, then picking it w
 - A spin-out plays a yaw tween with `GPUParticles3D` tyre smoke and slides the car back.
 
 **HUD** (`CanvasLayer` + `Control`, Broadcast style):
-- the question panel, answers, round result lower-third and rules strip, as mocked;
+- the question panel, answers, round result lower-third and rules strip, as mocked. The rules strip's payouts come from `RedlineRules` (§2.2); the mockups `03` and `11` still show the pre-tuning PUSH +2;
 - a **compact 22-row timing tower**: player rows are highlighted, with their names in yellow beside the driver code, and AI rows are dimmed;
 - a **live track map** (`Line2D` of the circuit plus 22 team-coloured dots; player dots are larger with a white ring);
 - **name tags** projected with `Camera3D.unproject_position`.
@@ -445,11 +447,11 @@ TDD: tests come before implementation.
 - Manifest values. The constructor never calls `Take`, and `Start` calls `Take(15)` exactly once.
 - The phase sequence and every timer duration. Early advance in Throttle and Question. An early advance triggered by a disconnect.
 - Each scoring-table cell: three throttles × right/wrong/no-answer. The 0-floor. A spin-out sets the pit limiter, and the limiter clears after one round. A pit-limited driver's throttle input is ignored.
-- The race ends at ≥ 20 after Reveal, not mid-round. It ends after round 15. Overshoot counts.
+- The race ends at ≥ `FinishLine` (28) after Reveal, not mid-round. It ends after round 15. Overshoot counts.
 - Ranking ties (correct-count tie-break, then shared positions). The `GameResults` order and message. Awards, including omission and tie rules.
 - **Secrecy:** during Grid, Throttle and Question, every `DriverRow.Throttle`/`AnswerIndex` is null where §4.4 says so, and `QuestionCard.Text` is null during Throttle.
 - Seeded determinism: two harnesses with the same seed produce identical HostView JSON at every step.
-- Phone views per state (§3.3): ids, hints, headers. A view stays reference-stable while the player's state is unchanged.
+- Phone views per state (§3.3): ids, hints (including hints that follow changed `RedlineRules` payouts), headers. A view stays reference-stable while the player's state is unchanged.
 - Malformed payloads, wrong-phase input and unknown ids are ignored.
 - `FallbackQuestions.All` passes its own validation and has ≥ 60 questions across 8 categories.
 
@@ -480,6 +482,7 @@ TDD: tests come before implementation.
   - accuracy over 10,000 seeded draws matches `base × skill` within ±2%;
   - Redline is never chosen when p < 0.3 except in chase mode;
   - chase mode triggers at the boundary;
+  - the throttle scores are the expected values computed from `RedlineRules`, and changing `PushGain` changes the AI's Push score and choice (the guard against a hard-coded payout table);
   - a fixed seed gives an identical race.
 - AI rows never block early advance, and their throttles and answers obey the same secrecy assertions as players'.
 - `Grid2026.Load()` validates the embedded data: 11 teams, 22 unique codes and numbers.
@@ -487,7 +490,7 @@ TDD: tests come before implementation.
 **`Redline.Presentation.Tests`:**
 - `CircuitData` loads `cota.json`: 170 points, a lap length of 5,512 ± 5 m, and a closed loop.
 - `LapMath`:
-  - distance 0 and 20 map to the same point;
+  - distance 0 and `FinishLine` map to the same point;
   - side-by-side offsets for 2 and 3 cars sharing a distance;
   - the grid has two columns 8 m apart.
 - `TrackGeometry`: the fold guard drops inner wall segments where the offset exceeds 0.7 × radius (Turn 1), and keeps them on straights.

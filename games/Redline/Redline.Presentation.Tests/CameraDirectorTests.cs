@@ -11,7 +11,7 @@ public class CameraDirectorTests
             pos, 0, dist, prevDist ?? dist, DriverStatus.Ready, null, null, outcome, false, true);
 
     private static RedlineHostView View(RacePhase phase, params DriverRow[] rows) =>
-        new(phase, 1, 15, 20, "cota", null, null, rows, null, null, "attribution");
+        new(phase, 1, 15, 28, "cota", null, null, rows, null, null, "attribution");
 
     private static IReadOnlyList<string> HeliSubjects(Shot shot) =>
         Assert.IsType<HeliShot>(shot).Subjects;

@@ -29,7 +29,7 @@ public class RoundTests
     [Theory]
     [InlineData(Throttle.Cruise, true, 5, 6, RoundOutcome.Correct, false)]
     [InlineData(Throttle.Cruise, false, 5, 5, RoundOutcome.Wrong, false)]
-    [InlineData(Throttle.Push, true, 5, 7, RoundOutcome.Correct, false)]
+    [InlineData(Throttle.Push, true, 5, 8, RoundOutcome.Correct, false)]
     [InlineData(Throttle.Push, false, 5, 4, RoundOutcome.Wrong, false)]
     [InlineData(Throttle.Redline, true, 5, 9, RoundOutcome.Correct, false)]
     [InlineData(Throttle.Redline, false, 5, 3, RoundOutcome.SpunOut, true)]
@@ -72,7 +72,7 @@ public class RoundTests
         Assert.Equal("Science & Nature · Medium. How hard do you push?", phone.Prompt);
         Assert.Equal(["cruise", "push", "redline"], phone.Buttons.Select(b => b.Id));
         Assert.Equal(
-            ["+1 if right · nothing lost", "+2 if right · −1 if wrong", "+4 if right · spin out if wrong"],
+            ["+1 if right · nothing lost", "+3 if right · −1 if wrong", "+4 if right · spin out if wrong"],
             phone.Buttons.Select(b => b.Hint));
         Assert.Equal(Header(h, 0), phone.Header);
         Assert.Equal(h.Now + TimeSpan.FromSeconds(10), phone.DeadlineUtc);
@@ -83,6 +83,18 @@ public class RoundTests
         var locked = Assert.IsType<WaitView>(h.PlayerView(0));
         Assert.Equal("Locked in: REDLINE. Waiting for the other drivers…", locked.Message);
         Assert.Equal(Header(h, 0), locked.Header);
+    }
+
+    [Fact]
+    public void Throttle_hints_follow_the_rules()
+    {
+        var (h, _) = RedlineKit.Start(rules: new RedlineRules { CruiseGain = 2, PushGain = 5, PushLoss = 3, RedlineGain = 7 });
+        RedlineKit.SeatAllAndGoToRound1(h, Codes);
+
+        var phone = Assert.IsType<ButtonsView>(h.PlayerView(0));
+        Assert.Equal(
+            ["+2 if right · nothing lost", "+5 if right · −3 if wrong", "+7 if right · spin out if wrong"],
+            phone.Buttons.Select(b => b.Hint));
     }
 
     [Fact]

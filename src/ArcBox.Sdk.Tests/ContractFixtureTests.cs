@@ -24,7 +24,7 @@ public class ContractFixtureTests
         ["buttons"] = View(new ButtonsView("Science & Nature · Hard. How hard do you push?",
         [
             new Option("cruise", "CRUISE", "+1 if right · nothing lost"),
-            new Option("push", "PUSH", "+2 if right · −1 if wrong"),
+            new Option("push", "PUSH", "+3 if right · −1 if wrong"),
             new Option("redline", "REDLINE", "+4 if right · spin out if wrong"),
         ])),
         ["draw"] = View(new DrawView("Draw a cat", ["#111111", "#e10600"])),

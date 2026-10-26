@@ -55,12 +55,13 @@ internal static class PlayerViews
     /// <summary>"CRUISE", "PUSH" or "REDLINE".</summary>
     public static string Name(Throttle t) => t.ToString().ToUpperInvariant();
 
-    public static ButtonsView ChooseThrottle(TriviaQuestion q, string header, DateTimeOffset? deadline) =>
+    /// <summary>The three throttle buttons; each hint states that throttle's payout from <paramref name="rules"/>.</summary>
+    public static ButtonsView ChooseThrottle(TriviaQuestion q, RedlineRules rules, string header, DateTimeOffset? deadline) =>
         new($"{q.Category} · {q.Difficulty}. How hard do you push?",
         [
-            new Option("cruise", "CRUISE", "+1 if right · nothing lost"),
-            new Option("push", "PUSH", "+2 if right · −1 if wrong"),
-            new Option("redline", "REDLINE", "+4 if right · spin out if wrong"),
+            new Option("cruise", "CRUISE", $"+{rules.CruiseGain} if right · nothing lost"),
+            new Option("push", "PUSH", $"+{rules.PushGain} if right · −{rules.PushLoss} if wrong"),
+            new Option("redline", "REDLINE", $"+{rules.RedlineGain} if right · spin out if wrong"),
         ]) { Header = header, DeadlineUtc = deadline };
 
     public static WaitView ThrottleLocked(Throttle t, string header, DateTimeOffset? deadline) =>

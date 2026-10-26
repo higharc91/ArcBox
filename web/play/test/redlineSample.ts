@@ -21,11 +21,11 @@ export function sampleRedlineView(phase: RacePhase, deadlineUtc: string | null =
   const drivers: DriverRow[] = GRID.map(([code, number, teamId], i) => {
     const human = PLAYERS[code];
     const racing = phase !== "DriverSelect" && phase !== "Grid";
-    const distance = racing ? Math.max(0, 19 - Math.floor(i * 0.8)) : 0;
+    const distance = racing ? Math.max(0, 27 - Math.floor(i * 1.1)) : 0;
     const throttle = THROTTLES[(i * 7) % 3]!;
     const answerIndex = (i * 5) % 4;
     const outcome = answerIndex !== correctIndex ? (throttle === "Redline" ? "SpunOut" : i % 5 === 0 ? "NoAnswer" : "Wrong") : "Correct";
-    const gain = outcome === "Correct" ? (throttle === "Cruise" ? 1 : throttle === "Push" ? 2 : 4) : throttle === "Cruise" ? 0 : throttle === "Push" ? -1 : -2;
+    const gain = outcome === "Correct" ? (throttle === "Cruise" ? 1 : throttle === "Push" ? 3 : 4) : throttle === "Cruise" ? 0 : throttle === "Push" ? -1 : -2;
     return {
       code, number, teamId,
       player: human ? human[0] : null,
@@ -46,7 +46,7 @@ export function sampleRedlineView(phase: RacePhase, deadlineUtc: string | null =
     };
   });
   return {
-    phase, round, maxRounds: 15, finishLine: 20, circuitId: "cota",
+    phase, round, maxRounds: 15, finishLine: 28, circuitId: "cota",
     question: phase === "Grid" || phase === "DriverSelect" ? null : {
       category: "Science & Nature",
       difficulty: "Hard",

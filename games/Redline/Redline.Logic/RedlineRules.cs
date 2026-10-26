@@ -19,7 +19,7 @@ public sealed record AiRules
 
 public sealed record RedlineRules
 {
-    public int FinishLine { get; init; } = 20;
+    public int FinishLine { get; init; } = 28;
     public int MaxRounds { get; init; } = 15;
     public string CircuitId { get; init; } = "cota";
 
@@ -31,7 +31,7 @@ public sealed record RedlineRules
     public TimeSpan Chequered { get; init; } = TimeSpan.FromSeconds(10);
 
     public int CruiseGain { get; init; } = 1;
-    public int PushGain { get; init; } = 2;
+    public int PushGain { get; init; } = 3;
     public int PushLoss { get; init; } = 1;
     public int RedlineGain { get; init; } = 4;
     public int RedlineLoss { get; init; } = 2;

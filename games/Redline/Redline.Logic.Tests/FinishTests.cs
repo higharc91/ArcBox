@@ -48,22 +48,24 @@ public class FinishTests
     }
 
     [Fact]
-    public void Race_ends_after_reveal_when_a_car_reaches_20()
+    public void Race_ends_after_reveal_when_a_car_reaches_the_finish_line()
     {
         var (h, _) = RedlineKit.Start();
         RedlineKit.SeatAllAndGoToRound1(h, Codes);
 
-        for (var round = 1; round <= 5; round++)
+        // 7 correct Redlines (+4) reach the 28-unit line exactly.
+        for (var round = 1; round <= 7; round++)
         {
             Assert.Equal(round, h.Game.Round);
             PlayRound(h, ["redline", "cruise", "cruise", "cruise"], [true, false, false, false]);
             Assert.Equal(4 * round, RedlineKit.Row(h, 0).Distance);
             h.Advance(h.Game.Rules.Reveal);
-            if (round < 5) Assert.Equal(RacePhase.Throttle, h.Game.Phase);
+            if (round < 7) Assert.Equal(RacePhase.Throttle, h.Game.Phase);
         }
 
         var v = RedlineKit.View(h);
-        Assert.Equal((RacePhase.Chequered, 5), (v.Phase, v.Round));
+        Assert.Equal((RacePhase.Chequered, 7), (v.Phase, v.Round));
+        Assert.Equal(28, v.FinishLine);
         Assert.Equal(h.Now + TimeSpan.FromSeconds(10), v.DeadlineUtc);
         Assert.NotNull(v.Finish);
         Assert.Null(v.Question);
@@ -74,7 +76,7 @@ public class FinishTests
 
         var phone = Assert.IsType<WaitView>(h.PlayerView(0));
         Assert.Equal("You finished P1 of 22.", phone.Message);
-        Assert.Equal("P1 · ROUND 5/15", phone.Header);
+        Assert.Equal("P1 · ROUND 7/15", phone.Header);
         Assert.Equal($"You finished P{RedlineKit.Row(h, 3).Position} of 22.", Assert.IsType<WaitView>(h.PlayerView(3)).Message);
 
         // Input during Chequered is ignored.
@@ -123,8 +125,8 @@ public class FinishTests
         var (h, _) = RedlineKit.Start(rules: HopelessAi);
         RedlineKit.SeatAllAndGoToRound1(h, Codes);
 
-        // P1 first (redline, 20), P3 second (push, 10), P2 third (cruise, 5), P4 last (wrong cruise, 0).
-        for (var round = 1; round <= 5; round++)
+        // P1 first (redline, 28), P3 second (push, 21), P2 third (cruise, 7), P4 last (wrong cruise, 0).
+        for (var round = 1; round <= 7; round++)
         {
             PlayRound(h, ["redline", "cruise", "push", "cruise"], [true, true, true, false]);
             h.Advance(h.Game.Rules.Reveal);
@@ -136,7 +138,7 @@ public class FinishTests
         Assert.NotNull(r);
         Assert.Equal(4, r.Scores.Count);
         Assert.Equal(["Player1 (NOR)", "Player3 (LEC)", "Player2 (VER)", "Player4 (ANT)"], r.Scores.Select(s => s.Name));
-        Assert.Equal([20, 10, 5, 0], r.Scores.Select(s => s.Score));
+        Assert.Equal([28, 21, 7, 0], r.Scores.Select(s => s.Score));
         Assert.Equal(new[] { 0, 2, 1, 3 }.Select(i => h.Players[i].Id), r.Scores.Select(s => s.PlayerId));
         Assert.Equal("Player1 (NOR) wins the race!", r.Message);
     }
@@ -158,7 +160,7 @@ public class FinishTests
         var winner = v.Drivers[0];
         Assert.Null(winner.Player);
         Assert.Equal(1, winner.Position);
-        Assert.True(winner.Distance >= 20);
+        Assert.True(winner.Distance >= h.Game.Rules.FinishLine);
         var best = RedlineKit.Row(h, 0);
         Assert.True(best.Position > 1);
 

@@ -1,7 +1,7 @@
 # REDLINE balance simulation: first report
 
 - **Date:** 2026-10-26
-- **Status:** First pass, before any playtest
+- **Status:** First pass, before any playtest. The recommended package (§4 tweaks 1–3) is now applied; §6 has the re-run.
 - **Spec:** [2026-10-25-redline-design.md](../specs/2026-10-25-redline-design.md)
 - **Tool:** `games/Redline/tools/Redline.Sim` (run it with `dotnet run --project games/Redline/tools/Redline.Sim -c Release -- --help`)
 - **Code under test:** `Redline.Logic` at `bf82a42`. Nothing in the game or the AI was changed. What-if runs pass a different `RedlineRules` into the unchanged `RedlineGame`.
@@ -318,27 +318,67 @@ Not recommended before a playtest.
 
 ---
 
-## 6. Reproduce
+## 6. After applying the package (2026-10-26)
+
+**What changed in the code:** `FinishLine` 20 → 28, `PushGain` 2 → 3 (`MaxRounds` stays 15), and `AiPolicy` now computes its throttle scores from `RedlineRules`: Cruise = p·CruiseGain, Push = p·PushGain − (1−p)·PushLoss, Redline = p·RedlineGain − (1−p)·(RedlineLoss + LimiterCost). The limiter cost is now weighted by the chance of a wrong answer. Temperature 0.35, the chase rule and the p < 0.3 Redline floor are unchanged, and `LimiterCost` stays 0.6. The phone hints are built from the rules too.
+
+**Run:** the full 29-scenario baseline, N = 20,000 per scenario, seed 2026, default options (the defaults *are* the package now), 339 s on 4 cores. "Predicted" is the §3 package row (N = 4,000, stale AI). "Before" is the §2 baseline.
+
+| Metric | Before (20 / +2) | Predicted (§3) | **After** | |
+|---|---:|---:|---:|---|
+| Median rounds: ai-only / solo casual / party-four / eight-sensible | 9 / 9 / 7 / 5 | 13 / 13 / 10 / 9 | **12 / 12 / 10 / 9** | ≈ (solo one round shorter) |
+| Shortest race | 5 | 7 | **7** | ✓ |
+| Ended at the line (rest hit R15): ai-only / solo casual / party-four / eight-sensible | 98 / 98 / 100 / 100% | 79 / 81 / 97 / –% | **85 / 86 / 97 / 100%** | ⚠ more races end at the line |
+| R15 with nobody across: ai-only / mixed-casual | 2.1 / 1.2% | – | **14.8 / 12.1%** | |
+| Casual Sensible picks C / P / R | 44 / 0 / 56% | 6 / 62 / 32% | **6 / 63 / 31%** | ✓ |
+| Strong Sensible picks C / P / R | 18 / 0 / 82% | 8 / 30 / 62% | **8 / 31 / 61%** | ✓ |
+| Sensible ahead of AlwaysRedline, mixed-casual / mixed-strong | 54.4 / 49.9% | 59.1 / –% | **59.6 / 52.7%** | ✓ |
+| AlwaysPush/strong solo win | 6.3% | 47.6% | **41.5%** | ⚠ −6 pts |
+| Shared P1: eight-sensible / mixed-eight / four-sensible | 38.2 / 29.2 / 15.5% | 20 / 8 / –% | **19.9 / 7.5 / 7.7%** | ✓ |
+| Casual Sensible solo: win / median pos (mean) | 18.4% / P6 (7.7) | 14.0% / – | **12.1% / P7 (7.9)** | ⚠ −2 pts |
+| Casual Random solo: win / median pos | 3.1% / P12 | – | **2.9% / P12** | ✓ |
+| party-four: strong win / each casual / AI | 55.6 / 8.9 / 22.3% | 63.7 / 5.0 / –% | **61.4 / 4.7 / 25.5%** | ≈ |
+| AI win: solo casual Sensible / mixed-casual | 81.6 / 50.2% | – | **87.9 / 61.1%** | ⚠ AI stronger |
+| AI in chase mode, ai-only / party-four | 5.5 / 1.7% | – | **15.0 / 8.8%** | |
+| Wall time, party-four: measured / all timers | 3.3 / 5.2 min | 4.6 / 7.2 | **4.6 / 7.2 min** | ✓ |
+| Wall time, Sensible/Chaser, mixed and party scenarios: measured / all timers | 2.6–4.1 / 4.2–6.3 min | 4.1–5.6 / 6.2–8.4 (§4) | **3.6–5.5 / 6.2–8.2 min** | ✓ (ai-only: 8.2) |
+
+**Deviations from the predictions**
+
+- **The AI is stronger than the §3 runs assumed.** It now values Push at +3, and with the limiter cost weighted by (1−p), Redline looks better to it when it is likely to be right. AI win rate against a solo casual sensible player rises from 81.6% to 87.9%, and in mixed-casual from 50.2% to 61.1%. A casual sensible player now wins 12.1% of solo races (predicted 14.0%) and a strong AlwaysPush player 41.5% (predicted 47.6%). A casual sensible player's median finish is P7 and a casual random player's P12, so "average AI mid-pack against an average player" still roughly holds.
+- **More AI-heavy races end at the line than predicted** (85–86% against 79–81%), for the same reason: the AI field now moves faster. Median rounds in ai-only and solo races is 12, not 13. Still, about 1 in 7 AI-heavy races ends at R15 with nobody across.
+- **Chase mode now fires more often** (15% of AI decisions in ai-only, up from 5.5%), because more races get within 5 rounds of `MaxRounds`.
+- Everything that depends only on the human side matched within noise: throttle mix, Sensible vs AlwaysRedline, shared wins, party-four timing.
+
+**`LimiterCost` was not re-tuned.** §4 item 3 suggested 0.75–0.84 once the cost is weighted by (1−p). A what-if at 0.84 (N = 4,000: ai-only, solo-sensible-casual, mixed-casual, party-four) changed nothing beyond noise: AI Redline share 31% → 28%, AI win and race length within ±3 points. 0.6 stays until playtest data says otherwise.
+
+**Next:** re-tune `FinishLine`, `PushGain` and the AI base accuracy after the first real playtest. If the stronger AI feels oppressive in small lobbies, lower the AI base accuracy together with `FinishLine` (§4 item 7), not on its own.
+
+---
+
+## 7. Reproduce
 
 ```bash
-# full baseline (29 scenarios × 20,000 races, ~2.5 min on 4 cores)
+# full baseline (29 scenarios × 20,000 races, ~6 min on 4 cores); the defaults are the §6 package
 dotnet run --project games/Redline/tools/Redline.Sim -c Release -- -n 20000 --out baseline.md
 
-# recommended package
-dotnet run --project games/Redline/tools/Redline.Sim -c Release -- -n 4000 --push-gain 3 --finish 28
+# the pre-package rules (§2), now with the rule-driven AI
+dotnet run --project games/Redline/tools/Redline.Sim -c Release -- -n 4000 --push-gain 2 --finish 20
 
 # the what-if subset used in §3
 dotnet run --project games/Redline/tools/Redline.Sim -c Release -- -n 4000 \
   --only ai-only,solo-sensible,solo-redline,solo-push-strong,four-sensible,eight-sensible,mixed-casual,mixed-strong,mixed-eight,party-four \
-  --finish 26          # or --finish 30 | --finish 36 --max-rounds 18 | --redline-loss 3 | --push-gain 3 [--finish 28|30]
-                       # | --ai-chase-rounds 15 | --seats top | --mix 0.3,0.45,0.25 | --latency instant
+  --push-gain 2 --finish 26   # or --finish 30 | --finish 36 --max-rounds 18 | --redline-loss 3 | --push-gain 3 [--finish 28|30]
+                              # | --ai-chase-rounds 15 | --seats top | --mix 0.3,0.45,0.25 | --latency instant
 ```
+
+§2 and §3 ran with the old defaults (`FinishLine` 20, `PushGain` 2) and the old hard-coded AI scores, so pass `--push-gain 2 --finish 20` (or the listed `--finish`) to compare against them. Their AI numbers will not reproduce exactly, because the AI now reads the rules.
 
 The master seed defaults to 2026 (`--seed`). Output goes to stdout as Markdown, with progress on stderr.
 
 ---
 
-## Appendix: full baseline output (N = 20,000 per scenario, shipped rules)
+## Appendix: full baseline output (N = 20,000 per scenario, pre-package rules and AI)
 
 - Races per scenario: **20000** (580000 total, 144 s wall time), master seed 2026
 - Rules: FinishLine 20, MaxRounds 15, Cruise +1/0, Push +2/−1, Redline +4/−2 + limiter

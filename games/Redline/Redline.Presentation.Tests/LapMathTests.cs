@@ -5,11 +5,12 @@ public class LapMathTests
     private const double L = 5512;
 
     [Fact]
-    public void Distance_0_and_20_are_the_same_point()
+    public void Distance_0_and_the_finish_line_are_the_same_point()
     {
-        Assert.Equal(0, LapMath.MetersAlongLap(20, 20, L));
-        Assert.Equal(0, LapMath.MetersAlongLap(0, 20, L));
-        Assert.Equal(L / 2, LapMath.MetersAlongLap(10, 20, L));
+        var f = new Redline.Logic.RedlineRules().FinishLine;
+        Assert.Equal(0, LapMath.MetersAlongLap(f, f, L));
+        Assert.Equal(0, LapMath.MetersAlongLap(0, f, L));
+        Assert.Equal(L / 2, LapMath.MetersAlongLap(f / 2.0, f, L));
     }
 
     [Theory]
