@@ -20,7 +20,10 @@ public static class Report
         return sorted[i];
     }
 
-    /// <summary>Wall-clock bound with every phase running to its timer: Driver Select + Grid + rounds × (Throttle + Question + Reveal) + Chequered.</summary>
+    /// <summary>
+    /// Wall-clock bound with every phase running to its timer: Driver Select + Grid + rounds × (Throttle + Question + Reveal) +
+    /// Chequered. The Reading phases depend on each question's text, so the caller adds <see cref="RaceRecord.ReadingSeconds"/>.
+    /// </summary>
     public static double FullTimerSeconds(int rounds, RedlineRules r) =>
         (r.DriverSelect + r.Grid + rounds * (r.Throttle + r.Question + r.Reveal) + r.Chequered).TotalSeconds;
 
@@ -32,7 +35,7 @@ public static class Report
         sb.AppendLine("# REDLINE balance simulation");
         sb.AppendLine();
         sb.AppendLine($"- Races per scenario: **{o.Races}** ({totalRaces} total, {F(elapsed.TotalSeconds, 0)} s wall time), master seed {o.Seed}");
-        sb.AppendLine($"- Rules: FinishLine {r.FinishLine}, MaxRounds {r.MaxRounds}, Cruise +{r.CruiseGain}/0, Push +{r.PushGain}/−{r.PushLoss}, Redline +{r.RedlineGain}/−{r.RedlineLoss} + limiter");
+        sb.AppendLine($"- Rules: FinishLine {r.FinishLine}, MaxRounds {r.MaxRounds}, Cruise +{r.CruiseGain}/0, Push +{r.PushGain}/−{r.PushLoss}, Redline +{r.RedlineGain}/−{r.RedlineLoss} + limiter, Reading phase {(r.ReadQuestions ? "on" : "off")}");
         sb.AppendLine($"- AI: base {F(a.Easy, 2)}/{F(a.Medium, 2)}/{F(a.Hard, 2)}, clamp [{F(a.MinP, 2)}, {F(a.MaxP, 2)}], temperature {F(a.Temperature, 2)}, limiter cost {F(a.LimiterCost, 2)}, Redline floor {F(a.RedlineFloor, 2)}, chase gap {a.ChaseGap} / rounds left {a.ChaseRoundsLeft} / bonus {F(a.ChaseBonus, 2)}");
         sb.AppendLine($"- Question mix: {o.Mix}; human latency: {o.Latency.Name}; human seat pick: {o.Seats}");
         sb.AppendLine($"- Skills: casual {F(Skill.Casual.Easy, 2)}/{F(Skill.Casual.Medium, 2)}/{F(Skill.Casual.Hard, 2)}, strong {F(Skill.Strong.Easy, 2)}/{F(Skill.Strong.Medium, 2)}/{F(Skill.Strong.Hard, 2)}; limiter cost used by Sensible/Chaser: casual {F(BotBrain.LimiterCost(Skill.Casual, o.Mix, r), 2)}, strong {F(BotBrain.LimiterCost(Skill.Strong, o.Mix, r), 2)}");
@@ -161,18 +164,20 @@ public static class Report
         sb.AppendLine("## Wall-clock game time (minutes)");
         sb.AppendLine();
         sb.AppendLine("Measured = the harness clock from Start to EndGame with the bots' reaction times (early advance as the code does it). " +
-                      "All timers = every phase runs to its timer for the same number of rounds.");
+                      "All timers = every phase runs to its timer for the same number of rounds. Reading = mean seconds per round spent " +
+                      "with the question read out before answers open (it never ends early).");
         sb.AppendLine();
-        sb.AppendLine("| Scenario | Measured mean | p10 | p90 | All timers mean | p90 | Saved by early advance | Throttle timeouts | Answer timeouts |");
-        sb.AppendLine("|---|---:|---:|---:|---:|---:|---:|---:|---:|");
+        sb.AppendLine("| Scenario | Measured mean | p10 | p90 | All timers mean | p90 | Saved by early advance | Reading s/round | Throttle timeouts | Answer timeouts |");
+        sb.AppendLine("|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|");
         foreach (var (s, r) in runs)
         {
             var measured = r.Select(x => x.GameSeconds).Order().ToList();
-            var full = r.Select(x => FullTimerSeconds(x.Rounds, rules)).Order().ToList();
+            var full = r.Select(x => FullTimerSeconds(x.Rounds, rules) + x.ReadingSeconds).Order().ToList();
+            var reading = r.Sum(x => x.ReadingSeconds) / r.Sum(x => x.Rounds);
             var td = r.Sum(x => x.ThrottleDecisions);
             var ad = r.Sum(x => x.AnswerDecisions);
             sb.AppendLine($"| {s.Name} | {Min(measured.Average())} | {Min(Quantile(measured, .1))} | {Min(Quantile(measured, .9))} | " +
-                          $"{Min(full.Average())} | {Min(Quantile(full, .9))} | {Pct(1 - measured.Average() / full.Average())} | " +
+                          $"{Min(full.Average())} | {Min(Quantile(full, .9))} | {Pct(1 - measured.Average() / full.Average())} | {F(reading)} | " +
                           $"{(td == 0 ? "–" : Pct(r.Sum(x => x.ThrottleTimeouts) / (double)td))} | {(ad == 0 ? "–" : Pct(r.Sum(x => x.AnswerTimeouts) / (double)ad))} |");
         }
         sb.AppendLine();

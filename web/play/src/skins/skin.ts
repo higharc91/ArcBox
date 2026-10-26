@@ -1,6 +1,6 @@
 import { createContext } from "preact";
 import { useContext } from "preact/hooks";
-import type { Option } from "../protocol";
+import type { Option, WaitView } from "../protocol";
 import { redlineSkin } from "./redline";
 
 export interface Badge {
@@ -29,6 +29,8 @@ export interface Skin {
   /** Splits a prompt into a small meta line and the prompt proper. */
   prompt?(prompt: string): { meta: string; text: string } | undefined;
   waitTone?(message: string): "good" | "bad" | undefined;
+  /** A wait view whose message is a question whose answers are not open yet: the note to show under it. */
+  waitQuestion?(view: WaitView): string | undefined;
 }
 
 const skins: Record<string, Skin> = { redline: redlineSkin };

@@ -1,4 +1,4 @@
-import type { Option } from "../protocol";
+import type { Option, WaitView } from "../protocol";
 import type { Badge, HeaderParts, Skin } from "./skin";
 
 export interface Team {
@@ -72,6 +72,16 @@ export function splitPrompt(prompt: string): { meta: string; text: string } | un
   return match ? { meta: match[1]!, text: match[2]! } : undefined;
 }
 
+export const LISTEN_NOTE = "Answers open in a moment…";
+
+/**
+ * Reading (audio spec §2): the question is read out on the TV and its text is the wait message. It is the only REDLINE
+ * wait view whose header leads with the throttle ("PUSH · P5 · ROUND 3/15"), as the answer view's does.
+ */
+export function readingNote(view: WaitView): string | undefined {
+  return view.header && splitHeader(view.header)?.chip ? LISTEN_NOTE : undefined;
+}
+
 export const redlineSkin: Skin = {
   id: "redline",
   optionBadge: driverBadge,
@@ -83,4 +93,5 @@ export const redlineSkin: Skin = {
     if (message.startsWith("Spun out!") || message.startsWith("Wrong answer") || message.startsWith("No answer")) return "bad";
     return undefined;
   },
+  waitQuestion: readingNote,
 };

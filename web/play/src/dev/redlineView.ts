@@ -1,7 +1,8 @@
 // Mirrors games/Redline/Redline.Logic/Views/HostView.cs (RedlineHostView) as serialized by ArcJson:
 // camelCase properties, enums as PascalCase strings, PlayerId as a plain string.
 
-export type RacePhase = "DriverSelect" | "Grid" | "Throttle" | "Question" | "Reveal" | "Chequered";
+/** Reading (audio spec §2): the question is read out before the answer clock starts; skipped when the server turns it off. */
+export type RacePhase = "DriverSelect" | "Grid" | "Throttle" | "Reading" | "Question" | "Reveal" | "Chequered";
 export type Throttle = "Cruise" | "Push" | "Redline";
 export type RoundOutcome = "Correct" | "Wrong" | "NoAnswer" | "SpunOut";
 export type DriverStatus = "Unclaimed" | "Seated" | "Ready" | "Choosing" | "Locked" | "Limited" | "Answering" | "Answered";
@@ -10,7 +11,7 @@ export type Difficulty = "Easy" | "Medium" | "Hard";
 export interface QuestionCard {
   category: string;
   difficulty: Difficulty;
-  /** Null during Throttle. */
+  /** Null during Throttle; set from Reading on. */
   text: string | null;
   answers: string[] | null;
 }
@@ -26,7 +27,7 @@ export interface DriverRow {
   distance: number;
   previousDistance: number;
   status: DriverStatus;
-  /** Null during Grid and Throttle. */
+  /** Null during Grid and Throttle; public from Reading on. */
   throttle: Throttle | null;
   /** Null until Reveal. */
   answerIndex: number | null;

@@ -31,7 +31,8 @@ public sealed record RaceRecord(
     int ThrottleDecisions,
     int AnswerDecisions,
     int AiThrottleDecisions,          // AI cars choosing a throttle (not pit-limited)
-    int AiChaseDecisions);            // ... of which with AiPolicy's chase condition met
+    int AiChaseDecisions,             // ... of which with AiPolicy's chase condition met
+    double ReadingSeconds);           // total length of the Reading phases (0 with ReadQuestions off)
 
 /// <summary>
 /// Drives one real <see cref="RedlineGame"/> through <see cref="GameHarness{TGame}"/>. Human bots only read their own
@@ -71,6 +72,7 @@ public static class RaceRunner
         var leaders = new List<string>();
         var aiLed = new List<bool>();
         int throttleTimeouts = 0, answerTimeouts = 0, throttleDecisions = 0, answerDecisions = 0, aiDecisions = 0, aiChase = 0;
+        var readingSeconds = 0.0;
         CarRecord[]? final = null;
         var finalRound = 0;
 
@@ -115,7 +117,7 @@ public static class RaceRunner
             final!,
             [.. leaders],
             [.. aiLed],
-            throttleTimeouts, answerTimeouts, throttleDecisions, answerDecisions, aiDecisions, aiChase);
+            throttleTimeouts, answerTimeouts, throttleDecisions, answerDecisions, aiDecisions, aiChase, readingSeconds);
 
         void OnPhaseStart(RedlineHostView view)
         {
@@ -143,6 +145,10 @@ public static class RaceRunner
                     }
                     break;
                 }
+                case RacePhase.Reading:
+                    // The question is on the phones but answers are not open yet: bots wait, and the phase runs to its timer.
+                    readingSeconds += (view.DeadlineUtc!.Value - h.Now).TotalSeconds;
+                    break;
                 case RacePhase.Question:
                     for (var i = 0; i < humans.Count; i++)
                     {

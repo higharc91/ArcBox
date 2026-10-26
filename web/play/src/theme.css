@@ -135,6 +135,8 @@ small { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--dim
 .w-wait { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 var(--gutter) 40px; }
 .wait-message { font-weight: 700; font-size: 24px; line-height: 1.25; padding: 0 4px; overflow-wrap: anywhere; }
 .wait-banner { padding: 20px; }
+.w-listen .pq { padding: 0 4px 12px; }
+.listen-note { font-size: 16px; opacity: 0.75; padding: 0 4px; }
 .wait-banner.bad { background: var(--bad); }
 .wait-banner.good { background: var(--good); color: #04220f; }
 .banner-title { font: italic 900 42px/1 "Titillium Web", sans-serif; text-transform: uppercase; letter-spacing: 0.5px; }

@@ -101,6 +101,21 @@ describe("RedlineBoard", () => {
     expect(rowOf(container, "LEC").querySelector(".who")!.textContent).toBe("AI");
     expect(screen.getByText("Driver select")).toBeTruthy();
   });
+
+  it("Reading shows the question and answers with LISTEN in place of the clock", () => {
+    const deadline = new Date(Date.now() + 4_000).toISOString();
+    const { container } = render(<RedlineBoard view={sampleRedlineView("Reading", deadline)} />);
+    expect(container.querySelector(".rb-head .q")!.textContent).toBe("Which planet has the most known moons?");
+    expect([...container.querySelectorAll(".ans .a")].map((a) => a.textContent)).toEqual(["Jupiter", "Saturn", "Uranus", "Neptune"]);
+    expect(container.querySelector(".ans.right, .ans.wrong")).toBeNull();
+    expect(container.querySelector(".clock b")!.textContent).toBe("LISTEN");
+    expect(container.querySelector(".clock")!.textContent).not.toMatch(/\d:\d\d/);
+    // Throttles are public from Reading on; no outcomes, no "answered" count yet.
+    expect(rowOf(container, "LEC").querySelector(".chip")!.textContent).toBe("REDLINE");
+    expect(container.querySelector(".tower .th")!.textContent).toContain("GAP · THROTTLE");
+    expect(container.querySelector(".outcome")).toBeNull();
+    expect(container.querySelector(".summary")).toBeNull();
+  });
 });
 
 describe("DevPage", () => {

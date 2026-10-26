@@ -24,6 +24,7 @@ const string Usage = """
 
     Rule overrides (for what-if runs; the game code is not changed, a different RedlineRules is passed in):
       --finish N  --max-rounds N  --cruise-gain N  --push-gain N  --push-loss N  --redline-gain N  --redline-loss N
+      --read-questions on|off  (the Reading phase before the answer clock; default on)
       --ai-easy X  --ai-medium X  --ai-hard X  --ai-min-p X  --ai-max-p X  --ai-temp X  --ai-limiter-cost X
       --ai-redline-floor X  --ai-chase-gap N  --ai-chase-rounds N  --ai-chase-bonus X
 
@@ -87,6 +88,17 @@ try
             case "--push-loss": rules = rules with { PushLoss = Int() }; break;
             case "--redline-gain": rules = rules with { RedlineGain = Int() }; break;
             case "--redline-loss": rules = rules with { RedlineLoss = Int() }; break;
+            case "--read-questions":
+                rules = rules with
+                {
+                    ReadQuestions = Next() switch
+                    {
+                        "on" => true,
+                        "off" => false,
+                        var x => throw new ArgumentException($"--read-questions takes on or off, not '{x}'."),
+                    },
+                };
+                break;
             case "--ai-easy": ai = ai with { Easy = Dbl() }; break;
             case "--ai-medium": ai = ai with { Medium = Dbl() }; break;
             case "--ai-hard": ai = ai with { Hard = Dbl() }; break;

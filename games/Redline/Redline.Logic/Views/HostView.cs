@@ -6,7 +6,7 @@ namespace Redline.Logic;
 
 public sealed record RedlineHostView(
     RacePhase Phase, int Round, int MaxRounds, int FinishLine, string CircuitId,
-    QuestionCard? Question,             // null in Grid; Throttle: Text and Answers are null
+    QuestionCard? Question,             // null in Grid; Throttle: Text and Answers are null; set from Reading on
     int? CorrectIndex,                  // Reveal only
     IReadOnlyList<DriverRow> Drivers,   // all 22; sorted by ranking (§2.3), or by team order during Driver Select
     DateTimeOffset? DeadlineUtc,
@@ -31,13 +31,13 @@ public sealed record DriverRow(
     PlayerId? Player, string? PlayerName,    // null for AI
     int Position, int PositionChange,
     int Distance, int PreviousDistance, DriverStatus Status,
-    Throttle? Throttle,                 // null during Grid and Throttle
+    Throttle? Throttle,                 // null during Grid and Throttle; public from Reading on
     int? AnswerIndex,                   // null until Reveal
     RoundOutcome? Outcome,              // Reveal only
     bool PitLimiter, bool Connected);
 
 public enum DriverStatus { Unclaimed, Seated, Ready, Choosing, Locked, Limited, Answering, Answered }
-public enum RacePhase { DriverSelect, Grid, Throttle, Question, Reveal, Chequered }
+public enum RacePhase { DriverSelect, Grid, Throttle, Reading, Question, Reveal, Chequered }
 public enum RoundOutcome { Correct, Wrong, NoAnswer, SpunOut }
 
 public sealed record FinishSummary(IReadOnlyList<Award> Awards);
@@ -45,7 +45,7 @@ public sealed record Award(string Title, PlayerId Winner, string Name, string De
 
 /// <summary>
 /// Builds the TV view. Secrecy lives here, so a hidden value can never leak through a caller:
-/// throttles appear from the Question phase on, answers and outcomes only in Reveal.
+/// throttles appear from the Reading phase on, answers and outcomes only in Reveal.
 /// </summary>
 internal static class HostViews
 {
@@ -70,7 +70,7 @@ internal static class HostViews
             d.PlayerId, d.PlayerName,
             d.Position, phase == RacePhase.Reveal ? d.PositionAtRoundStart - d.Position : 0,
             d.Distance, d.PreviousDistance, Status(d, phase),
-            phase is RacePhase.Question or RacePhase.Reveal ? d.Throttle : null,
+            phase is RacePhase.Reading or RacePhase.Question or RacePhase.Reveal ? d.Throttle : null,
             phase == RacePhase.Reveal ? d.AnswerIndex : null,
             phase == RacePhase.Reveal ? d.Outcome : null,
             d.PitLimiter, d.Connected);

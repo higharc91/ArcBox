@@ -17,6 +17,7 @@ const COLUMN: Record<RacePhase, string> = {
   DriverSelect: "SEAT",
   Grid: "GAP",
   Throttle: "GAP · STATUS",
+  Reading: "GAP · THROTTLE",
   Question: "GAP · THROTTLE",
   Reveal: "GAP · RESULT",
   Chequered: "GAP",
@@ -27,7 +28,9 @@ const DIFFICULTY = { Easy: 1, Medium: 2, Hard: 3 } as const;
 const minus = (n: number) => `−${Math.abs(n)}`;
 const signed = (n: number) => (n > 0 ? `+${n}` : n < 0 ? minus(n) : "0");
 const clock = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
-const throttleShown = (phase: RacePhase) => phase === "Question" || phase === "Reveal";
+/** Reading, Question and Reveal: the question text, the answers and every throttle are public. */
+const questionShown = (phase: RacePhase) => phase === "Reading" || phase === "Question" || phase === "Reveal";
+const throttleShown = questionShown;
 
 function useNow(active: boolean): number {
   const [now, setNow] = useState(() => Date.now());
@@ -101,10 +104,10 @@ export function RedlineBoard({ view }: { view: RedlineHostView }) {
   const now = useNow(!!view.deadlineUtc);
   const { phase } = view;
   // The question belongs to the round phases; Grid and Chequered show none even if the view still carries one.
-  const question = phase === "Throttle" || phase === "Question" || phase === "Reveal" ? view.question : null;
+  const question = phase === "Throttle" || questionShown(phase) ? view.question : null;
   const leader = view.drivers.reduce((m, d) => Math.max(m, d.distance), 0);
   const humans = view.drivers.filter((d) => d.player);
-  const title = (phase === "Question" || phase === "Reveal") && question?.text ? question.text : TITLES[phase] ?? phase;
+  const title = questionShown(phase) && question?.text ? question.text : TITLES[phase] ?? phase;
   const roundLabel = view.round > 0 ? `ROUND ${view.round}/${view.maxRounds}` : `${view.circuitId.toUpperCase()} · ${view.maxRounds} ROUNDS`;
   const left = view.deadlineUtc ? remainingSeconds(view.deadlineUtc, now) : null;
   const decided =
@@ -129,10 +132,18 @@ export function RedlineBoard({ view }: { view: RedlineHostView }) {
           </div>
           <div class="q">{title}</div>
         </div>
-        <div class="clock">
-          <small>{phase === "Reveal" ? "NEXT" : "TIME"}</small>
-          <b>{left === null ? "–" : clock(left)}</b>
-        </div>
+        {phase === "Reading" ? (
+          // The question is being read out; the answer clock starts when it opens.
+          <div class="clock listen">
+            <small>ANSWERS NEXT</small>
+            <b>LISTEN</b>
+          </div>
+        ) : (
+          <div class="clock">
+            <small>{phase === "Reveal" ? "NEXT" : "TIME"}</small>
+            <b>{left === null ? "–" : clock(left)}</b>
+          </div>
+        )}
       </header>
 
       <div class="rb-body">
