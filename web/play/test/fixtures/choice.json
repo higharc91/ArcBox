@@ -1,0 +1,25 @@
+{
+  "kind": "choice",
+  "prompt": "Pick your driver",
+  "options": [
+    {
+      "id": "PIA",
+      "label": "#81 Oscar Piastri",
+      "hint": "McLaren · MCL40"
+    },
+    {
+      "id": "LEC",
+      "label": "#16 Charles Leclerc",
+      "hint": "Ferrari · SF-26"
+    },
+    {
+      "id": "x",
+      "label": "No hint"
+    }
+  ],
+  "allowMultiple": false,
+  "maxSelections": 1,
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:00:00+00:00",
+  "header": "H"
+}

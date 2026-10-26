@@ -1,0 +1,46 @@
+{
+  "code": "BCDF",
+  "players": [
+    {
+      "id": "p1",
+      "name": "ALEX",
+      "isVip": true,
+      "connected": true
+    },
+    {
+      "id": "p2",
+      "name": "MO",
+      "isVip": false,
+      "connected": false
+    }
+  ],
+  "selectedGameId": "redline",
+  "games": [
+    {
+      "id": "counter",
+      "name": "Counter",
+      "description": "Tap to count",
+      "minPlayers": 1,
+      "maxPlayers": 8
+    },
+    {
+      "id": "redline",
+      "name": "REDLINE",
+      "description": "Racing trivia",
+      "minPlayers": 1,
+      "maxPlayers": 8
+    }
+  ],
+  "inGame": false,
+  "canStart": true,
+  "lastResults": {
+    "scores": [
+      {
+        "playerId": "p1",
+        "name": "ALEX (NOR)",
+        "score": 21
+      }
+    ],
+    "message": "ALEX (NOR) wins the race!"
+  }
+}

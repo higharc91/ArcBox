@@ -1,0 +1,11 @@
+{
+  "kind": "draw",
+  "prompt": "Draw a cat",
+  "colors": [
+    "#111111",
+    "#e10600"
+  ],
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:00:00+00:00",
+  "header": "H"
+}

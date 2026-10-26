@@ -1,0 +1,15 @@
+{
+  "scores": [
+    {
+      "playerId": "p1",
+      "name": "ALEX (NOR)",
+      "score": 21
+    },
+    {
+      "playerId": "p2",
+      "name": "MO (ALO)",
+      "score": 14
+    }
+  ],
+  "message": "ALEX (NOR) wins the race!"
+}
