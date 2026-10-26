@@ -1,7 +1,9 @@
+using System.Net;
 using ArcBox.Sdk.Protocol;
 using ArcBox.Server.Games.Redline;
 using ArcBox.Server.Tests.Support;
 using Counter.Logic;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -17,6 +19,67 @@ public class HubIntegrationTests
 
         Assert.Equal("ok", await http.GetStringAsync("/healthz", TestContext.Current.CancellationToken));
         Assert.Contains("ArcBox server is running", await http.GetStringAsync("/", TestContext.Current.CancellationToken));
+    }
+
+    [Fact]
+    public async Task Dev_web_root_serves_built_app()
+    {
+        var root = Directory.CreateTempSubdirectory("arcbox-web-");
+        try
+        {
+            File.WriteAllText(Path.Combine(root.FullName, "index.html"), "<p>PHONE-APP</p>");
+            File.WriteAllText(Path.Combine(root.FullName, "dev.html"), "<p>DEV-PAGE</p>");
+            Directory.CreateDirectory(Path.Combine(root.FullName, "assets"));
+            File.WriteAllText(Path.Combine(root.FullName, "assets", "index-AbC123.js"), "console.log('ok')");
+
+            using var f = new ArcServerFactory().WithWebHostBuilder(b => b.UseSetting("Web:Root", root.FullName));
+            var http = f.CreateClient();
+            var ct = TestContext.Current.CancellationToken;
+
+            Assert.Contains("PHONE-APP", await http.GetStringAsync("/", ct));
+            Assert.Contains("PHONE-APP", await http.GetStringAsync("/?room=ABCD&slot=1", ct));
+            Assert.Contains("DEV-PAGE", await http.GetStringAsync("/dev.html?phones=3", ct));
+
+            var asset = await http.GetAsync("/assets/index-AbC123.js", ct);
+            Assert.Equal(HttpStatusCode.OK, asset.StatusCode);
+            Assert.Equal("text/javascript", asset.Content.Headers.ContentType?.MediaType);
+            Assert.Equal("ok", await http.GetStringAsync("/healthz", ct));
+        }
+        finally
+        {
+            root.Delete(recursive: true);
+        }
+    }
+
+    [Theory]
+    [InlineData("/nope")]
+    [InlineData("/assets/missing.js")]
+    [InlineData("/../appsettings.json")]
+    [InlineData("/ABCD")]
+    public async Task Unknown_paths_are_404_not_500(string path)
+    {
+        var root = Directory.CreateTempSubdirectory("arcbox-web-");
+        try
+        {
+            File.WriteAllText(Path.Combine(root.FullName, "index.html"), "<p>PHONE-APP</p>");
+            using var f = new ArcServerFactory().WithWebHostBuilder(b => b.UseSetting("Web:Root", root.FullName));
+
+            var response = await f.CreateClient().GetAsync(path, TestContext.Current.CancellationToken);
+
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+        }
+        finally
+        {
+            root.Delete(recursive: true);
+        }
+    }
+
+    [Fact]
+    public async Task Missing_web_root_falls_back_to_placeholder()
+    {
+        using var f = new ArcServerFactory().WithWebHostBuilder(b => b.UseSetting("Web:Root", Path.Combine(Path.GetTempPath(), "arcbox-no-such-dir")));
+
+        Assert.Contains("ArcBox server is running", await f.CreateClient().GetStringAsync("/", TestContext.Current.CancellationToken));
     }
 
     [Fact]
