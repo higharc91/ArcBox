@@ -44,16 +44,20 @@ export function DevPage({ transport, search, store, onRoom }: Props) {
 
   useEffect(() => {
     const room = new URLSearchParams(search).get("room")?.trim().toUpperCase() || null;
-    let live = true;
-    void host.connect(room).then((c) => {
-      if (!live || !c) return;
+    // Follow the host's room code: the first connect, and a fresh room if the server lost the old one.
+    let current: string | null = null;
+    const follow = (c: string | null) => {
+      if (!c || c === current) return;
+      current = c;
       setCode(c);
       onRoom?.(c);
-    });
+    };
+    const unsubscribe = host.subscribe((s) => follow(s.code));
+    void host.connect(room).then(follow);
     const visible = () => document.visibilityState === "visible" && void host.onVisible();
     document.addEventListener("visibilitychange", visible);
     return () => {
-      live = false;
+      unsubscribe();
       document.removeEventListener("visibilitychange", visible);
     };
   }, [host, search]);

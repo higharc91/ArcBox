@@ -88,7 +88,16 @@ export class HostClient {
       if (!this.transport.connected) await this.transport.start();
       await this.transport.invoke("ResumeHost", code, this.token);
     } catch (err) {
-      this.update({ error: serverMessage(err) });
+      if (!isServerError(err)) {
+        this.update({ error: serverMessage(err) });
+        return;
+      }
+      // The server no longer knows the room (it restarted, or swept the room): host a fresh one.
+      // The dev page follows `code`, so its phones re-mount and join the new room.
+      this.store.removeItem(hostKey(code));
+      this.token = null;
+      this.update({ lobby: null, hostView: null, results: null, closed: null });
+      await this.connect(null);
     }
   }
 
