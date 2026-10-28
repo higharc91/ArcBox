@@ -44,13 +44,20 @@ public static class TerrainBuilder
         var z0 = (minZ + maxZ - (rows - 1) * cell) / 2;
 
         var field = new HeightField(samples, x0, z0, x0 + (cols - 1) * cell, z0 + (rows - 1) * cell);
+        var heights = new double[cols * rows];
+        var dists = new double[cols * rows];
+        for (var iz = 0; iz < rows; iz++)
+            for (var ix = 0; ix < cols; ix++)
+                (heights[iz * cols + ix], dists[iz * cols + ix]) = field.Height(x0 + ix * cell, z0 + iz * cell);
+        Relax(heights, dists, cols, rows, cell);
+
         var m = new MeshData();
         for (var iz = 0; iz < rows; iz++)
             for (var ix = 0; ix < cols; ix++)
             {
                 var x = x0 + ix * cell;
                 var z = z0 + iz * cell;
-                var (h, d) = field.Height(x, z);
+                var (h, d) = (heights[iz * cols + ix], dists[iz * cols + ix]);
                 var shade = (float)(1 + 0.04 * Math.Sin(x * 0.013 + 0.7) * Math.Sin(z * 0.017 - 1.1));
                 var colour = Vector4.Clamp(Vector4.Lerp(Mown, Field, (float)Smooth(d / 200)) * shade, Vector4.Zero, Vector4.One);
                 colour.W = 1;
@@ -67,6 +74,42 @@ public static class TerrainBuilder
 
         m.ComputeNormals();
         return m;
+    }
+
+    /// <summary>Relaxation sweeps over the blend zone (see <see cref="Relax"/>), and how far they reach.</summary>
+    public const int RelaxSweeps = 60;
+    public const double RelaxFrom = BlendStart + 2, RelaxTo = BlendEnd - 30;
+
+    /// <summary>
+    /// Between parts of the lap at different heights (the hill up to Turn 1 beside the low stadium section) the blend
+    /// zone held each part's height for 30 m and then dropped in a short, steep, shadowed bank. Relaxing it towards the
+    /// average of its neighbours (a harmonic fill between the track-following verge and the far field, each held fixed)
+    /// spreads that drop evenly over the whole gap. Vertices within <see cref="RelaxFrom"/> of the centre line and
+    /// beyond <see cref="RelaxTo"/> do not move; the strength eases in and out between.
+    /// </summary>
+    private static void Relax(double[] h, double[] d, int cols, int rows, double cell)
+    {
+        var weight = new double[h.Length];
+        var active = new List<int>();
+        for (var i = 0; i < h.Length; i++)
+        {
+            weight[i] = Smooth((d[i] - RelaxFrom) / (4 * cell)) * (1 - Smooth((d[i] - (RelaxTo - 40)) / 40));
+            var ix = i % cols;
+            var iz = i / cols;
+            if (weight[i] > 0 && ix > 0 && iz > 0 && ix < cols - 1 && iz < rows - 1)
+                active.Add(i);
+        }
+        var next = (double[])h.Clone();
+        for (var sweep = 0; sweep < RelaxSweeps; sweep++)
+        {
+            foreach (var i in active)
+            {
+                var avg = (h[i - 1] + h[i + 1] + h[i - cols] + h[i + cols]) / 4;
+                next[i] = h[i] + (avg - h[i]) * weight[i];
+            }
+            foreach (var i in active)
+                h[i] = next[i];
+        }
     }
 
     private static double Smooth(double t)
