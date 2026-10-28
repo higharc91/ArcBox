@@ -40,8 +40,8 @@ public class CameraDirectorTests
     {
         var rows = new[] { Row("VER", 1, 28, human: true), Row("HAM", 2, 20) };
 
-        Assert.IsType<PodiumShot>(CameraDirector.Pick(View(RacePhase.Anthem, rows), View(RacePhase.Chequered, rows)));
-        Assert.IsType<PodiumShot>(CameraDirector.Pick(View(RacePhase.Champagne, rows), View(RacePhase.Anthem, rows)));
+        Assert.Equal(new PodiumShot(Champagne: false), CameraDirector.Pick(View(RacePhase.Anthem, rows), View(RacePhase.Chequered, rows)));
+        Assert.Equal(new PodiumShot(Champagne: true), CameraDirector.Pick(View(RacePhase.Champagne, rows), View(RacePhase.Anthem, rows)));
     }
 
     [Fact]

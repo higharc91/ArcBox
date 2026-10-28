@@ -5,12 +5,14 @@ using ArcBox.Host.Games.Redline.Audio;
 using ArcBox.Host.Games.Redline.Camera;
 using ArcBox.Host.Games.Redline.Cars;
 using ArcBox.Host.Games.Redline.Hud;
+using ArcBox.Host.Games.Redline.Podium;
 using ArcBox.Host.Games.Redline.World;
 using ArcBox.Host.Shell;
 using ArcBox.Sdk;
 using Godot;
 using Redline.Logic;
 using Redline.Presentation;
+using Redline.Presentation.Ceremony;
 using Redline.Presentation.Hud;
 
 namespace ArcBox.Host.Games.Redline;
@@ -27,6 +29,11 @@ namespace ArcBox.Host.Games.Redline;
 /// Sound (audio spec §3.3): <see cref="AudioDirector"/> gets every view, each start light as it comes on (in step with
 /// the gantry), each spin-out the camera shows, and a per-frame tick with the shot and the cars' speeds; it reads the
 /// question and the commentary through the shell's <see cref="Narrator"/>.
+/// </para>
+/// <para>
+/// Podium (podium spec §5): in the Anthem and the Champagne the <see cref="PodiumSet"/> stands on the start straight with
+/// the three podium cars parked in front of it (every other car off air), and each new spray in the view
+/// (<see cref="SprayTracker"/>) fires on its step's bottle and in the sound.
 /// </para>
 /// </summary>
 public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPreloadScene, IAudioScene
@@ -57,6 +64,13 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
     private bool _followUp;
     private int _lightsHeard;
     private readonly List<(double At, string Label)> _pendingShots = [];
+
+    private PodiumLayout? _podiumLayout;
+    private PodiumSet? _podium;
+    private readonly SprayTracker _sprays = new();
+    /// <summary>Phase time of the latest spray per step, for the triple-spray screenshot.</summary>
+    private readonly double[] _sprayedAt = [double.NegativeInfinity, double.NegativeInfinity, double.NegativeInfinity];
+    private bool _tripleShot;
 
     private enum WarmState { Off, Waiting, Drawing, Ready }
 
@@ -142,6 +156,7 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
         _warm = WarmState.Ready;
         _pendingShots.Clear();
         _view = null;
+        _podium?.HideCeremony();
         Hide3D();
         _audio.Lobby();
         GD.Print("REDLINE parked for the next race");
@@ -156,9 +171,10 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
         _warm = WarmState.Off;
         RemoveChild(_hud);
         _hud.QueueFree();
-        _hud = new RedlineHud();
+        _hud = new RedlineHud { PodiumLayout = _podiumLayout };
         AddChild(_hud);
         Visible = true;
+        _podium?.HideCeremony();
         ActiveCamera.MakeCurrent();
         _view = null;
         _from = _to = new Dictionary<string, CarSlot>();
@@ -199,10 +215,23 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
         }
         if (_warmFrame < _warmViews.Count)
         {
-            _hud.Render(_warmViews[_warmFrame], null);
+            var warm = _warmViews[_warmFrame];
+            _hud.Render(warm, null);
+            if (warm.Podium is not null && _podium is not null)
+            {
+                // The podium too, with a spray and the confetti, so its shaders and particles compile now.
+                _podium.ShowCeremony(warm);
+                _rig.SetShot(new PodiumShot(warm.Phase == RacePhase.Champagne));
+                _rig.Advance(_time);
+                if (warm.Phase == RacePhase.Champagne)
+                {
+                    _podium.Spray(1, 1);
+                }
+            }
         }
         if (++_warmFrame == _warmViews.Count + 2)
         {
+            _podium?.HideCeremony();
             Hide3D();
             _warm = WarmState.Ready;
             GD.Print("REDLINE warm-up done");
@@ -246,6 +275,16 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
                     QueueShot(t, $"{label}-{t}s");
                 }
             }
+            if (v.Phase == RacePhase.Anthem)
+            {
+                QueueShot(PodiumFraming.PushSeconds * 0.75, "anthem-pushin");
+            }
+            if (v.Phase == RacePhase.Champagne)
+            {
+                _tripleShot = false;
+                Array.Fill(_sprayedAt, double.NegativeInfinity);
+                QueueShot(12, "champagne-confetti");
+            }
             GD.Print($"REDLINE {v.Phase} round {v.Round}");
         }
 
@@ -280,6 +319,7 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
 
         _hud.Render(v, before);
         _audio.OnView(v, before);
+        Ceremony(v, before);
         if (v.Phase == RacePhase.Reveal && newPhase)
         {
             // Tyres and crunch for each spin-out the camera is on.
@@ -332,6 +372,43 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
         }
     }
 
+    /// <summary>The podium set on or off air, and each new spray on its bottle and in the sound.</summary>
+    private void Ceremony(RedlineHostView v, RedlineHostView? before)
+    {
+        if (_podium is null)
+        {
+            return;
+        }
+        if (v.Podium is null)
+        {
+            if (_podium.Visible)
+            {
+                _podium.HideCeremony();
+            }
+            _sprays.Update(v, before);
+            return;
+        }
+        _podium.ShowCeremony(v);
+        var phaseTime = _time - _phaseStart;
+        foreach (var spray in _sprays.Update(v, before))
+        {
+            _podium.Spray(spray.Step, spray.Strength);
+            _audio.OnSpray(spray);
+            GD.Print($"REDLINE spray #{spray.Seq} step {spray.Step} strength {spray.Strength:0.00}");
+            if (spray.First)
+            {
+                QueueShot(phaseTime + 0.7, "champagne-first-spray");
+            }
+            _sprayedAt[spray.Step - 1] = phaseTime;
+        }
+        // All three bottles going at once: the money shot.
+        if (!_tripleShot && v.Podium.Steps.Count == 3 && _sprayedAt.All(t => phaseTime - t < 0.6))
+        {
+            _tripleShot = true;
+            QueueShot(phaseTime + 0.9, "champagne-triple");
+        }
+    }
+
     /// <summary>Captures <paramref name="label"/> once the phase has run <paramref name="at"/> seconds.</summary>
     private void QueueShot(double at, string label)
     {
@@ -345,6 +422,23 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
     private void PlaceCars(double delta)
     {
         var samples = _assets!.Samples;
+        if (_view!.Podium is { } podium && _podiumLayout is { } layout)
+        {
+            // The ceremony: the podium players' cars parked nose-in in front of their steps, the rest off air.
+            foreach (var (code, car) in _cars)
+            {
+                var step = podium.Steps.FirstOrDefault(s => s.Code == code);
+                car.Visible = step is not null;
+                if (step is not null)
+                {
+                    var park = layout.Car(step.Step);
+                    car.Place(samples, park.RaceMeters, park.Lateral, park.Yaw);
+                    car.Smoke(0);
+                    car.Speed = 0;
+                }
+            }
+            return;
+        }
         var reveal = _view!.Phase == RacePhase.Reveal;
         var t = _time - _phaseStart;
         foreach (var (code, car) in _cars)
@@ -398,6 +492,12 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
             _carNodes[code] = car;
             cars.AddChild(car);
         }
+
+        _podiumLayout = PodiumLayout.For(_assets.Samples, _assets.Circuit.LapLength);
+        _podium = new PodiumSet(_podiumLayout);
+        _world.Root.AddChild(_podium);
+        _rig.PodiumLayout = _podiumLayout;
+        _hud.PodiumLayout = _podiumLayout;
 
         _rig.Setup(_assets, () => _cars, () => _view?.Drivers.Select(d => d.Code).ToList() ?? []);
         var timings = string.Join(", ", RedlineAssets.Timings.Select(kv => $"{kv.Key} {kv.Value} ms"));

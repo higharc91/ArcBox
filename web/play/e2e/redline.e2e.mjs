@@ -2,7 +2,9 @@
 // Browser playthrough against a running ArcBox server: bots tap the phone app like players would.
 //
 //   node web/play/e2e/redline.e2e.mjs            REDLINE on /dev.html?phones=3, stop after the first Reveal
-//   ARCBOX_FULL=1 node …                         race to the chequered flag, results, and back to the lobby
+//   ARCBOX_FULL=1 node …                         race to the chequered flag, the podium (the podium phones tap their
+//                                                champagne bottles to charge them and pop the corks), results, and
+//                                                back to the lobby
 //   ARCBOX_GAME=counter ARCBOX_PHONES=6 node …   a full Counter game
 //   ARCBOX_ROOM=ABCD node …                      join a room hosted elsewhere (the TV app) with N phone pages
 //
@@ -115,6 +117,8 @@ async function snapshot(phone) {
         message: text(".w-wait"),
         error: text(".form-error"),
         enabled: [...document.querySelectorAll(".widget button[data-id]:not([disabled])")].map((b) => b.dataset.id),
+        // The champagne bottle (podium): "holding" while the anthem plays, "armed" once the cork can pop.
+        shake: document.querySelector(".w-shake")?.classList.contains("armed") ? "armed" : document.querySelector(".w-shake") ? "holding" : null,
         mash: !!document.querySelector(".pbtns.single"),
         vip: !!document.querySelector(".picker"),
         canStart: !!document.querySelector(".picker .start:not([disabled])"),
@@ -142,6 +146,8 @@ function phaseOf(s) {
   if (s.kind === "choice") return "question";
   if (s.kind === "wait" && /Answer locked/.test(m)) return "answered";
   if (s.kind === "wait" && /^You finished P/.test(m)) return "chequered";
+  if (s.kind === "shake") return s.shake === "armed" ? "champagne" : "anthem";
+  if (s.kind === "wait" && /Watch the podium/.test(m)) return "podium-watch";
   return `controller-${s.kind}`;
 }
 
@@ -161,6 +167,10 @@ async function bot(phone, stop, onSnapshot) {
     onSnapshot(phone, s);
     const viewKey = `${s.kind}|${s.header}|${s.prompt}|${s.message}|${s.enabled.join(",")}`;
     try {
+      if (s.screen === "controller" && s.kind === "shake") {
+        await shake(phone, s);
+        continue;
+      }
       if (s.screen === "controller" && s.mash) {
         await phone.$(".pbtns.single button").click({ timeout: 1000 });
         await sleep(rand(60, 220));
@@ -182,12 +192,51 @@ async function bot(phone, stop, onSnapshot) {
         decidedFor = viewKey;
         await scribble(phone);
       }
-    } catch {
+    } catch (err) {
       // The view moved on before the tap landed (or the tap failed): look again and retry if it's still there.
       decidedFor = null;
+      if (s.kind === "shake") log(`P${phone.slot} bottle: ${String(err?.message ?? err).split("\n")[0]}`);
     }
     await sleep(rand(150, 400));
   }
+}
+
+/** Per phone: champagne pops made and the strongest charge popped. */
+const pops = new Map();
+
+/**
+ * The podium's champagne bottle (the Shake widget). Desktop Chromium has `DeviceMotionEvent.requestPermission`, so the
+ * widget first offers "Tap to enable shaking"; with no motion samples it falls back to tapping the bottle after 1.5 s.
+ * Each phone charges by a different number of taps (P1 most), so the sprays on the TV differ in strength; once the
+ * Champagne arms the bottle, POP! fires and the bot charges again for the next one.
+ */
+async function shake(phone, s) {
+  const w = (sel) => phone.$(`.w-shake ${sel}`);
+  // The bottle wobbles after every tap, so Playwright would wait for it to keep still: click through (force).
+  const press = (sel) => w(sel).click({ timeout: 1000, force: true });
+  if (await w(".enable-motion").count()) {
+    await press(".enable-motion");
+    log(`P${phone.slot} enables shaking (no motion here: the tap fallback follows)`);
+    await sleep(1700);
+    return;
+  }
+  const taps = Math.max(4, 18 - 4 * phone.slot + Math.floor(rand(-1, 2)));
+  for (let i = 0; i < taps; i++) {
+    await press(".bottle-tap");
+    await sleep(rand(45, 90));
+  }
+  if (s.shake !== "armed") {
+    await sleep(rand(250, 600));
+    return;
+  }
+  const charge = Number(await phone.$(".w-shake").evaluate((el) => getComputedStyle(el).getPropertyValue("--charge")).catch(() => NaN));
+  await press(".pop-btn:not([disabled])");
+  const p = pops.get(phone.slot) ?? { count: 0, best: 0 };
+  p.count++;
+  p.best = Math.max(p.best, Number.isFinite(charge) ? charge : 0);
+  pops.set(phone.slot, p);
+  log(`P${phone.slot} pops the cork at ${Number.isFinite(charge) ? charge.toFixed(2) : "?"} (pop ${p.count})`);
+  await sleep(rand(500, 1100));
 }
 
 async function act(phone, s) {
@@ -327,12 +376,13 @@ async function run() {
       const s = await snapshot(phones[0]);
       const phase = phaseOf(s);
       const name = { "driver-select": "driver-select", seated: "seated", grid: "grid", throttle: "throttle", "throttle-locked": "throttle-locked",
-        reading: "reading", question: "question", answered: "answered", reveal: "reveal", chequered: "chequered", mash: "mash", results: "results" }[phase];
+        reading: "reading", question: "question", answered: "answered", reveal: "reveal", chequered: "chequered", mash: "mash", results: "results",
+        anthem: "anthem", champagne: "champagne", "podium-watch": "podium-watch" }[phase];
       if (name && !shots.has(name)) {
         shots.add(name);
         await sleep(250); // let fonts and the countdown settle
         await phones[0].shot(`${name}.png`).catch(() => shots.delete(name));
-        if (dev && (phase === "reveal" || phase === "chequered" || phase === "question" || phase === "driver-select" || phase === "mash")) {
+        if (dev && ["reveal", "chequered", "question", "driver-select", "mash", "anthem", "champagne"].includes(phase)) {
           await dev.screenshot({ path: join(SHOTS, `dev-${name}.png`), fullPage: true }).catch(() => {});
         }
       }
@@ -392,13 +442,20 @@ async function run() {
       if (dev) await dev.screenshot({ path: join(SHOTS, "dev-results.png"), fullPage: true });
       const results = await phones[0].$(".scores").innerText().catch(() => "");
       log(`results:\n${results}`);
-      await phones[0].$("button", { hasText: "Back to lobby" }).click();
+      await phones[0].$("button:has-text(\"Back to lobby\")").click();
       const lobby = await until("phone 1 back in the lobby", async () => {
         const s = await snapshot(phones[0]);
         return s.screen === "lobby" ? s : null;
       }, 10_000);
       await phones[0].shot("back-in-lobby.png");
       if (GAME === "redline" && !phasesSeen.has("chequered")) fail("never saw the Chequered view on phone 1");
+      if (GAME === "redline") {
+        // The podium: the top three players (every phone, with three or fewer) shook their bottles and popped them.
+        const podium = Math.min(3, PHONES);
+        if (PHONES <= 3) for (const phase of ["anthem", "champagne"]) if (!phasesSeen.has(phase)) fail(`phone 1 never showed the ${phase} bottle`);
+        if (pops.size < podium) fail(`only ${pops.size} of ${podium} podium phones popped a cork`);
+        log(`champagne: ${[...pops].map(([slot, p]) => `P${slot} ${p.count} pop(s), best ${p.best.toFixed(2)}`).join(", ") || "no pops"}`);
+      }
       if (GAME === "redline") log(`race over after round ${lastRound}`);
       log(`back in the lobby; ${lobby.picked ? `${lobby.picked} still picked` : "no game picked"}`);
     }

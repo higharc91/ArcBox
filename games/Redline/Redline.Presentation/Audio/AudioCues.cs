@@ -25,9 +25,21 @@ public static class AudioCues
     public const string Fanfare = "fanfare";
     /// <summary>The crowd murmur under the race (a loop).</summary>
     public const string CrowdBed = "crowd-bed";
+    /// <summary>A champagne cork popping (podium spec §5), once per spray.</summary>
+    public const string CorkPop = "cork-pop";
+    /// <summary>The foam roaring out of the bottle, once per spray, its level and pitch following the strength.</summary>
+    public const string SprayHiss = "spray-hiss";
+    /// <summary>The victory theme's brass hit, with the first spray of the ceremony.</summary>
+    public const string Sting = "victory-sting";
 
     /// <summary>Countdown ticks sound at this many seconds left and every second after, down to 1.</summary>
     public const int CountdownFrom = 5;
+
+    /// <summary>
+    /// The sounds of one champagne spray, in play order: the pop and the hiss, led by the victory sting on the
+    /// ceremony's first spray.
+    /// </summary>
+    public static IReadOnlyList<string> ForSpray(bool first) => first ? [Sting, CorkPop, SprayHiss] : [CorkPop, SprayHiss];
 
     /// <summary>The one-shot cues for <paramref name="view"/> arriving after <paramref name="previous"/>, in play order.</summary>
     public static IReadOnlyList<string> ForView(RedlineHostView view, RedlineHostView? previous)
@@ -67,6 +79,10 @@ public static class AudioCues
                 break;
             case RacePhase.Chequered:
                 cues.Add(Fanfare);
+                cues.Add(Cheer);
+                break;
+            case RacePhase.Champagne:
+                // The anthem is over: the crowd erupts as the drivers reach for the bottles.
                 cues.Add(Cheer);
                 break;
         }

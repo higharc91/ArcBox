@@ -22,6 +22,8 @@ public class SynthTests
         { nameof(Sfx.Fanfare), 2.9 },
         { nameof(Sfx.LockClick), 0.06 },
         { nameof(Sfx.CountdownTick), 0.08 },
+        { nameof(ChampagneSfx.CorkPop), 0.35 },
+        { nameof(ChampagneSfx.SprayHiss), 2.6 },
     };
 
     private static Pcm Make(string name) => name switch
@@ -39,6 +41,8 @@ public class SynthTests
         nameof(Sfx.Fanfare) => Sfx.Fanfare(),
         nameof(Sfx.LockClick) => Sfx.LockClick(),
         nameof(Sfx.CountdownTick) => Sfx.CountdownTick(),
+        nameof(ChampagneSfx.CorkPop) => ChampagneSfx.CorkPop(),
+        nameof(ChampagneSfx.SprayHiss) => ChampagneSfx.SprayHiss(),
         _ => throw new ArgumentOutOfRangeException(nameof(name)),
     };
 

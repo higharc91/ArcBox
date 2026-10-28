@@ -2,6 +2,7 @@ using ArcBox.Host.Games.Redline.Cars;
 using ArcBox.Host.Games.Redline.World;
 using Godot;
 using Redline.Presentation;
+using Redline.Presentation.Ceremony;
 using Redline.Presentation.Meshes;
 using NVector3 = System.Numerics.Vector3;
 
@@ -11,7 +12,8 @@ namespace ArcBox.Host.Games.Redline.Camera;
 /// Turns the director's <see cref="Shot"/> into the live camera (§4.9). Geometry comes from <see cref="ShotFraming"/>; the
 /// rig adds timing: a smooth <see cref="BlendSeconds"/> blend between shots of the same kind, a hard cut between kinds,
 /// the Driver Select hold of <see cref="HoldSeconds"/> on a newly claimed car (cut in and out, like a broadcast
-/// close-up), and the Finish sequence (over the line, then the podium).
+/// close-up), the Finish sequence (over the line, then the podium), and the podium ceremony (<see cref="PodiumFraming"/>:
+/// a push-in through the Anthem, a cut to the wide shot for the Champagne).
 /// </summary>
 public partial class CameraRig : Node3D
 {
@@ -35,6 +37,9 @@ public partial class CameraRig : Node3D
     private double _now;
 
     public Camera3D Camera { get; } = new() { Name = "Camera", Near = 0.25f, Far = 9000, Current = true };
+
+    /// <summary>Where the podium set stands (the scene sets it with the world).</summary>
+    public PodiumLayout? PodiumLayout { get; set; }
 
     public override void _Ready()
     {
@@ -76,7 +81,7 @@ public partial class CameraRig : Node3D
 
         // Same kind blends (a new battle, a new subject); a new kind, or a Driver Select close-up on a fresh claim (whose
         // straight-line blend from the orbit would fly through the grid), is a hard cut.
-        if (sameKind && shot is not LineupShot)
+        if (sameKind && shot is not (LineupShot or PodiumShot))
         {
             _blendFrom = _current;
             _blendStart = _now;
@@ -167,6 +172,8 @@ public partial class CameraRig : Node3D
                     var near = podium.Where(c => Math.Abs(cars[c].RaceMeters - winner.RaceMeters) < 80).ToList();
                     return ShotFraming.Heli([.. near.Select(c => cars[c].TrackFrame.Position)], winner.TrackFrame.Forward, -1, t - FinishLineSeconds, Ground);
                 }
+            case PodiumShot podium when PodiumLayout is { } layout:
+                return PodiumFraming.Pose(layout, podium.Champagne, t);
             default:
                 return _current;
         }
@@ -227,6 +234,7 @@ public partial class CameraRig : Node3D
         HeliShot h => "heli:" + string.Join(",", h.Subjects),
         TracksideShot t => "trackside:" + t.Subject,
         LineupShot l => "lineup:" + l.Subject,
+        PodiumShot p => p.Champagne ? "podium:champagne" : "podium:anthem",
         _ => shot.GetType().Name,
     };
 }

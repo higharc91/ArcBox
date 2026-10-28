@@ -86,6 +86,24 @@ public class AudioCuesTests
     }
 
     [Fact]
+    public void The_crowd_cheers_when_the_champagne_begins_but_not_for_the_anthem()
+    {
+        var anthem = Steps.First(s => s.View.Phase == RacePhase.Anthem).View;
+        var champagne = Steps.First(s => s.View.Phase == RacePhase.Champagne).View;
+
+        Assert.Empty(AudioCues.ForView(anthem, Demo(RacePhase.Chequered)));
+        Assert.Equal([AudioCues.Cheer], AudioCues.ForView(champagne, Demo(RacePhase.Anthem)));
+        Assert.Empty(AudioCues.ForView(Demo(RacePhase.Champagne), champagne));
+    }
+
+    [Fact]
+    public void Every_spray_pops_and_hisses_and_the_first_has_the_sting()
+    {
+        Assert.Equal([AudioCues.Sting, AudioCues.CorkPop, AudioCues.SprayHiss], AudioCues.ForSpray(first: true));
+        Assert.Equal([AudioCues.CorkPop, AudioCues.SprayHiss], AudioCues.ForSpray(first: false));
+    }
+
+    [Fact]
     public void Chequered_plays_the_fanfare_and_the_crowd()
     {
         Assert.Equal([AudioCues.Fanfare, AudioCues.Cheer], AudioCues.ForView(Demo(RacePhase.Chequered), Demo(RacePhase.Reveal)));

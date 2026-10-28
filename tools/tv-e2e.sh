@@ -15,7 +15,9 @@
 #   5. lets the TV finish its last shots, stops everything it started, and checks the TV log for errors;
 #   6. checks the TV's `AUDIO <bus> <name>` lines (--audio-log) for the race's sounds in order: the five start beeps,
 #      lights out, the commentator's first line, the question read out, the Reveal sting or buzz and the answer
-#      line (and, with ARCBOX_FULL=1, the fanfare and the winner's line). Without a Google key on the server,
+#      line (and, with ARCBOX_FULL=1, the fanfare and the winner's line, then the podium: the TV reaching the
+#      Champagne, the anthem — or the victory theme for a country without a melody — followed by the theme, the
+#      victory sting, and a cork pop and spray from every podium phone). Without a Google key on the server,
 #      /api/tts answers 503 and the narration comes from the TV's built-in voice, or is only logged when the TV has
 #      none (Linux without speech-dispatcher): the AUDIO lines are the same either way.
 #
@@ -203,6 +205,40 @@ for item in "${EXPECT[@]}"; do
   log "audio: $label · $(sed -n "${n}p" "$OUT/tv.log")"
   LAST=$n
 done
+
+# ---- 7. the podium (ARCBOX_FULL=1): the TV reaches the Champagne; the anthem (or, for a country without a melody,
+# the victory theme) plays in the Anthem and the theme follows it; every podium phone's cork pops on the TV, the
+# first with the victory sting.
+if [[ "${ARCBOX_FULL:-}" == "1" && $AUDIO_FAIL -eq 0 ]]; then
+  podium_fail() { log "podium: MISSING $*"; AUDIO_FAIL=1; }
+  ANTHEM_AT=$(grep -n -m1 -E '^REDLINE Anthem round ' "$OUT/tv.log" | cut -d: -f1 || true)
+  CHAMPAGNE_AT=$(grep -n -m1 -E '^REDLINE Champagne round ' "$OUT/tv.log" | cut -d: -f1 || true)
+  if [[ -z "$ANTHEM_AT" || -z "$CHAMPAGNE_AT" ]]; then
+    podium_fail "the TV never reached the Anthem and the Champagne"
+  else
+    log "podium: $(sed -n "${ANTHEM_AT}p" "$OUT/tv.log") → $(sed -n "${CHAMPAGNE_AT}p" "$OUT/tv.log")"
+    FIRST=$(awk -v from="$ANTHEM_AT" 'NR > from && /^AUDIO Music (anthem [a-z][a-z]|victory-theme)$/ { print NR": "$0; exit }' "$OUT/tv.log")
+    if [[ -z "$FIRST" ]]; then
+      podium_fail "the anthem or the victory theme"
+    else
+      log "podium: music · ${FIRST#*: }"
+      if [[ "$FIRST" == *anthem* ]]; then
+        THEME=$(awk -v from="${FIRST%%:*}" 'NR > from && /^AUDIO Music victory-theme$/ { print NR; exit }' "$OUT/tv.log")
+        [[ -n "$THEME" ]] && log "podium: music · victory-theme after the anthem" || podium_fail "the victory theme after the anthem"
+      fi
+    fi
+    grep -q -E '^AUDIO Sfx victory-sting$' "$OUT/tv.log" && log "podium: victory sting" || podium_fail "the victory sting on the first spray"
+    for step in $(seq 1 $(( PHONES < 3 ? PHONES : 3 ))); do
+      n=$(grep -c -E "^REDLINE spray #[0-9]+ step $step " "$OUT/tv.log" || true)
+      pop=$(grep -c -E "^AUDIO Sfx cork-pop step $step$" "$OUT/tv.log" || true)
+      if (( n > 0 && pop > 0 )); then
+        log "podium: step $step sprayed $n time(s) · $(grep -m1 -E "^REDLINE spray #[0-9]+ step $step " "$OUT/tv.log")"
+      else
+        podium_fail "a spray from podium step $step ($n sprays, $pop cork pops)"
+      fi
+    done
+  fi
+fi
 log "narrator: $(grep -E '^NARRATOR ' "$OUT/tv.log" | sed 's/^NARRATOR //' | awk '!seen[$0]++' | paste -sd '|' | sed 's/|/ | /g')"
 grep -E '^AUDIO ' "$OUT/tv.log" > "$OUT/audio.log" || true
 log "audio: $(wc -l < "$OUT/audio.log") AUDIO lines in $OUT/audio.log"

@@ -102,13 +102,15 @@ deadlines on the scene clock, so `--fixed-fps` captures show a sensible countdow
 
 **Demo without a server.** `--redline-demo` feeds the scene a scripted race (`DemoRace` in Redline.Presentation): Driver
 Select with claims arriving, Grid, then round 4's Throttle, Question and Reveal (a human Redline spin-out, a three-car pack
-at the front) and the Chequered flag. `--redline-demo=<step>` starts at `driverselect`, `grid`, `throttle`, `question`,
-`reveal` or `chequered`. The script runs on the scene clock, so Godot's `--fixed-fps` makes a capture deterministic
+at the front), the Chequered flag and the podium (Anthem, then Champagne with scripted sprays from all three steps).
+`--redline-demo=<step>` starts at `driverselect`, `grid`, `throttle`, `question`, `reveal`, `chequered`, `anthem` or
+`champagne`; `--redline-demo-winner=<code>` crowns another player's car (see [`redline-tv.md`](redline-tv.md#the-podium)).
+The script runs on the scene clock, so Godot's `--fixed-fps` makes a capture deterministic
 however slowly frames render:
 
 ```sh
 xvfb-run -a -s "-screen 0 1920x1080x24" godot --path src/ArcBox.Host --rendering-driver vulkan --fixed-fps 8 -- \
-  --redline-demo --shots=/tmp/redline --res=1920x1080 --preset=high --quit-after=48
+  --redline-demo --shots=/tmp/redline --res=1920x1080 --preset=high --quit-after=80
 ```
 
 With `--shots` the scene saves each phase about a second after it starts, each Driver Select claim, and Reveal at 2, 4

@@ -13,7 +13,10 @@ public sealed record DemoStep(RedlineHostView View, double Seconds)
 /// <summary>
 /// The dev-only <c>--redline-demo</c> script: a realistic race told in host views, so the TV scene can be run and
 /// screenshotted without a server. Driver Select (claims arriving) → Grid → round 4's Throttle, Reading, Question and Reveal (a
-/// human Redline spin-out, a three-car pack at the front, a pair behind) → Chequered. Seven humans among the 22 cars,
+/// human Redline spin-out, a three-car pack at the front, a pair behind) → Chequered → the podium: Anthem (the three
+/// players shaking their bottles) and Champagne (sprays from all three steps at different strengths, one triple spray).
+/// The winner is JO in the McLaren (Norris: God Save the King); <c>Steps(winner: "PER")</c> crowns KAI in the Cadillac
+/// instead (Pérez: Mexico, the REDLINE theme only). Seven humans among the 22 cars,
 /// one with a 12-character name; everyone else is AI. Distances follow the rules' payouts (<see cref="RedlineRules"/>).
 /// <see cref="RedlineHostView.DeadlineUtc"/> is left null: the feeder stamps it when it plays a step.
 /// </summary>
@@ -21,6 +24,9 @@ public static class DemoRace
 {
     public const string Attribution = "Questions: Open Trivia DB (CC BY-SA 4.0)";
     public const int DemoRound = 4;
+
+    /// <summary>The default race winner: a player whose driver's anthem has a melody (Norris, Great Britain).</summary>
+    public const string DefaultWinner = "NOR";
 
     /// <summary>Human seats: driver code → player name.</summary>
     public static readonly IReadOnlyDictionary<string, string> Humans = new Dictionary<string, string>(StringComparer.Ordinal)
@@ -72,17 +78,26 @@ public static class DemoRace
     ];
 
     // Where the race ends: the leader over the line.
-    private static readonly Dictionary<string, int> Final = new(StringComparer.Ordinal)
+    private static readonly Dictionary<string, int> FinalDefault = new(StringComparer.Ordinal)
     {
-        ["LEC"] = 29, ["NOR"] = 28, ["ANT"] = 27, ["PIA"] = 27, ["RUS"] = 26, ["VER"] = 25, ["PER"] = 24, ["HAM"] = 24,
+        ["NOR"] = 29, ["LEC"] = 28, ["ANT"] = 27, ["PIA"] = 27, ["RUS"] = 26, ["VER"] = 25, ["PER"] = 24, ["HAM"] = 24,
         ["GAS"] = 23, ["SAI"] = 22, ["HUL"] = 21, ["ALO"] = 21, ["HAD"] = 20, ["BEA"] = 19, ["LAW"] = 18, ["ALB"] = 17,
         ["BOR"] = 16, ["STR"] = 15, ["LIN"] = 15, ["OCO"] = 13, ["COL"] = 12, ["BOT"] = 11,
     };
 
     /// <summary>The whole script in play order.</summary>
-    public static IReadOnlyList<DemoStep> Steps(RedlineRules? rules = null)
+    /// <param name="winner">The driver code of the race winner: one of the <see cref="Humans"/>.</param>
+    public static IReadOnlyList<DemoStep> Steps(RedlineRules? rules = null, string winner = DefaultWinner)
     {
         rules ??= new RedlineRules();
+        if (!Humans.ContainsKey(winner))
+            throw new ArgumentException($"The demo winner must be a player's car ({string.Join(", ", Humans.Keys)}).", nameof(winner));
+        // The winner swaps finishing distances with the default winner.
+        var final = new Dictionary<string, int>(FinalDefault, StringComparer.Ordinal)
+        {
+            [DefaultWinner] = FinalDefault[winner],
+            [winner] = FinalDefault[DefaultWinner],
+        };
         var grid = Grid2026.Load();
         var seats = grid.Seats;
         var steps = new List<DemoStep>();
@@ -138,9 +153,9 @@ public static class DemoRace
         steps.Add(new DemoStep(View(rules, RacePhase.Reveal, DemoRound, Card, CorrectIndex, reveal), 7) { Label = "reveal" });
 
         // Chequered.
-        var finalRank = Rank(Final.Select(kv => (kv.Key, kv.Value)));
-        var classification = Final.Keys.OrderBy(c => finalRank[c])
-            .Select(c => Row(grid.ByCode(c), true, finalRank[c], 0, Final[c], Final[c], DriverStatus.Ready)).ToList();
+        var finalRank = Rank(FinalDefault.Keys.Select(c => (c, final[c])));
+        var classification = FinalDefault.Keys.OrderBy(c => finalRank[c])
+            .Select(c => Row(grid.ByCode(c), true, finalRank[c], 0, final[c], final[c], DriverStatus.Ready)).ToList();
         var awards = new FinishSummary(
         [
             new Award(Ranking.BoldestDriver, Player("ANT"), Humans["ANT"], "5 Redlines"),
@@ -148,6 +163,45 @@ public static class DemoRace
             new Award(Ranking.BiggestCrash, Player("VER"), Humans["VER"], "2 spin-outs"),
         ]);
         steps.Add(new DemoStep(View(rules, RacePhase.Chequered, 11, null, null, classification) with { Finish = awards }, 8) { Label = "chequered" });
+
+        // The podium: the three best-placed players, step 1 first.
+        var podium = classification.Where(d => d.Player is not null).Take(3).ToList();
+        var country = Countries.For(grid.ByCode(podium[0].Code).Driver.Nationality);
+        var sprays = new List<Spray>[] { [], [], [] };
+        var seq = 0;
+        Podium Ceremony(double c1, double c2, double c3, params int[] fire)
+        {
+            double[] charges = [c1, c2, c3];
+            foreach (var step in fire)
+            {
+                sprays[step - 1].Add(new Spray(++seq, Celebration.Strength(charges[step - 1])));
+            }
+            return new Podium(country.Name, country.AnthemId, [.. podium.Select((d, i) => new PodiumStep(
+                i + 1, d.Player!.Value, d.PlayerName!, d.Code, d.TeamId, d.Position,
+                fire.Contains(i + 1) ? 0 : Celebration.Quantise(charges[i]), [.. sprays[i]]))]);
+        }
+        DemoStep Stage(RacePhase phase, Podium p, double seconds) =>
+            new(View(rules, phase, 11, null, null, classification) with { Podium = p }, seconds) { Label = phase.ToString().ToLowerInvariant() };
+
+        // Anthem: everyone shakes; the bottles fill at different rates.
+        steps.Add(Stage(RacePhase.Anthem, Ceremony(0, 0, 0), 3));
+        steps.Add(Stage(RacePhase.Anthem, Ceremony(0.2, 0.1, 0.15), 3));
+        steps.Add(Stage(RacePhase.Anthem, Ceremony(0.45, 0.3, 0.25), 3));
+        steps.Add(Stage(RacePhase.Anthem, Ceremony(0.75, 0.5, 0.35), 3));
+        steps.Add(Stage(RacePhase.Anthem, Ceremony(1.0, 0.7, 0.4), 4));
+
+        // Champagne: the winner pops first at full pressure, then P2 and P3; all three at once; a second round.
+        steps.Add(Stage(RacePhase.Champagne, Ceremony(1.0, 0.7, 0.4), 1.4));
+        steps.Add(Stage(RacePhase.Champagne, Ceremony(1.0, 0.7, 0.4, 1), 1.6));
+        steps.Add(Stage(RacePhase.Champagne, Ceremony(0.1, 0.7, 0.4, 2), 0.8));
+        steps.Add(Stage(RacePhase.Champagne, Ceremony(0.15, 0.05, 0.4, 3), 1.2));
+        steps.Add(Stage(RacePhase.Champagne, Ceremony(0.6, 0.5, 0.85), 0.8));
+        steps.Add(Stage(RacePhase.Champagne, Ceremony(0.6, 0.5, 0.85, 1, 3, 2), 1.0));
+        steps.Add(Stage(RacePhase.Champagne, Ceremony(0.3, 0.2, 0.15), 2.2));
+        steps.Add(Stage(RacePhase.Champagne, Ceremony(1.0, 0.95, 0.3), 1.0));
+        steps.Add(Stage(RacePhase.Champagne, Ceremony(1.0, 0.95, 0.3, 1, 2), 1.5));
+        steps.Add(Stage(RacePhase.Champagne, Ceremony(0.1, 0.1, 0.3, 3), 1.5));
+        steps.Add(Stage(RacePhase.Champagne, Ceremony(0.2, 0.2, 0.2), 3.0));
         return steps;
 
         DriverRow Row(Seat s, bool showHuman, int position, int change, int distance, int previous, DriverStatus status)

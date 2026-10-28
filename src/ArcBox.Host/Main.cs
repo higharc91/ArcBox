@@ -115,7 +115,7 @@ public partial class Main : Control
         {
             // Dev only: a scripted REDLINE race through the normal host-view path, no server.
             GD.Print("REDLINE demo: no server connection");
-            AddChild(new Games.Redline.Demo.RedlineDemoFeeder(view => OnHostView(new HostViewEvent("redline", view)), _args.RedlineDemoFrom));
+            AddChild(new Games.Redline.Demo.RedlineDemoFeeder(view => OnHostView(new HostViewEvent("redline", view)), _args.RedlineDemoFrom, _args.RedlineDemoWinner));
             return;
         }
 

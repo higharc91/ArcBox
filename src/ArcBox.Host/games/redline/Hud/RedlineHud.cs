@@ -30,6 +30,7 @@ public partial class RedlineHud : CanvasLayer
     private readonly DriverSelectBoard _board = new();
     private readonly ClaimLowerThird _claim = new();
     private readonly ChequeredScreen _chequered = new();
+    private readonly PodiumHud _podium = new();
 
     private RedlineHostView? _view;
     private ClaimCard? _claimCard;
@@ -37,6 +38,9 @@ public partial class RedlineHud : CanvasLayer
     private double _phaseStart;
     private double? _remaining;
     private double _phaseSeconds = 1;
+
+    /// <summary>Where the podium set stands, for the podium labels (set by the scene when the world is built).</summary>
+    public global::Redline.Presentation.Ceremony.PodiumLayout? PodiumLayout { get; set; }
 
     public RedlineHud()
     {
@@ -68,6 +72,7 @@ public partial class RedlineHud : CanvasLayer
         Place(_claim, Control.LayoutPreset.BottomLeft, mx, -my - ClaimLowerThird.Height, mx + 1920 - (2 * mx) - DriverSelectBoard.BoardWidth - gap, -my);
         Place(_brand, Control.LayoutPreset.TopLeft, mx, my, mx + 260, my + HudStyle.HeaderHeight);
         Place(_chequered, Control.LayoutPreset.FullRect, mx, my, -mx, -my);
+        Place(_podium, Control.LayoutPreset.FullRect, mx, my, -mx, -my);
 
         // A two-line question can make the header a few pixels taller than planned: keep the panels below it.
         _header.Resized += () =>
@@ -125,7 +130,7 @@ public partial class RedlineHud : CanvasLayer
 
     private void ShowOnly(params Control[] visible)
     {
-        foreach (var c in new Control[] { _brand, _header, _tower, _map, _answers, _strip, _result, _board, _claim, _chequered })
+        foreach (var c in new Control[] { _brand, _header, _tower, _map, _answers, _strip, _result, _board, _claim, _chequered, _podium })
         {
             c.Visible = visible.Contains(c);
         }
@@ -192,6 +197,14 @@ public partial class RedlineHud : CanvasLayer
                 }
                 break;
 
+            case RacePhase.Anthem:
+            case RacePhase.Champagne:
+                // The podium: its own labels over the steps, so the car tags stand down.
+                ShowOnly(_brand, _podium);
+                _podium.Show(view);
+                _tags.Clear();
+                break;
+
             default:
                 ShowOnly(_chequered);
                 _chequered.Show(view);
@@ -231,6 +244,14 @@ public partial class RedlineHud : CanvasLayer
     {
         if (_view is null || !IsInsideTree())
         {
+            return;
+        }
+        if (_podium.Visible)
+        {
+            if (PodiumLayout is { } layout)
+            {
+                _podium.Track(camera, layout);
+            }
             return;
         }
         _map.Track(cars);

@@ -234,7 +234,7 @@ public class CommentaryTests
     }
 
     [Fact]
-    public void Demo_race_calls_the_spin_and_the_win()
+    public void Demo_race_calls_the_spin_the_win_and_the_podium()
     {
         var steps = DemoRace.Steps();
         var said = new List<string>();
@@ -251,7 +251,9 @@ public class CommentaryTests
             "Round 4. Geography, medium.",
             "The answer is Alaska.",
             "Sam spins the Red Bull!",
-            "Chequered flag! Alex wins at the Circuit of the Americas!",
+            "Chequered flag! Jo wins at the Circuit of the Americas!",
+            "The national anthem of Great Britain, for Jo in the McLaren!",
+            "Let the champagne fly!",
         ], said);
     }
 

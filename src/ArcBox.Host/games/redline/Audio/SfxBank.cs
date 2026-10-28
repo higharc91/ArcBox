@@ -8,7 +8,8 @@ namespace ArcBox.Host.Games.Redline.Audio;
 
 /// <summary>
 /// REDLINE's sounds, synthesised once per run on a background thread (about 1.5 s of CPU) while the world builds, like
-/// <c>RedlineAssets.Prewarm</c>: every <see cref="Sfx"/> clip by its <see cref="AudioCues"/> name, and the two music loops.
+/// <c>RedlineAssets.Prewarm</c>: every <see cref="Sfx"/> clip by its <see cref="AudioCues"/> name (with the podium's cork pop,
+/// spray hiss and victory sting), and the two music loops. The podium music is rendered later, by <see cref="PodiumMusicBank"/>.
 /// </summary>
 public static class SfxBank
 {
@@ -47,6 +48,9 @@ public static class SfxBank
             (AudioCues.Cheer, Sfx.CrowdCheer),
             (AudioCues.Fanfare, Sfx.Fanfare),
             (AudioCues.CrowdBed, () => Sfx.CrowdBed(CrowdBedSeconds)),
+            (AudioCues.CorkPop, ChampagneSfx.CorkPop),
+            (AudioCues.SprayHiss, ChampagneSfx.SprayHiss),
+            (AudioCues.Sting, VictoryTheme.Sting),
         };
         var clips = makers.AsParallel().Select(m => (m.Name, Pcm: m.Make())).ToDictionary(x => x.Name, x => x.Pcm);
         var lobby = Task.Run(SynthMusic.LobbyLoop);

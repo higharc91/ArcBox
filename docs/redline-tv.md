@@ -64,6 +64,14 @@ Everything plays on three buses under Master, made in code at start-up: **Music*
   bigger the round's best gain.
 - **Music:** a lobby loop while REDLINE waits in the lobby and through Driver Select, then a low race bed to the flag.
   All effects, engines and music are synthesised from code; there are no sound files (see `games/redline/THIRD_PARTY.md`).
+- **The podium** (podium spec, `docs/superpowers/specs/2026-10-28-redline-podium-design.md`): the anthem and the
+  victory theme are synthesised in the background when the flag falls (about a second of CPU each). In the Anthem the
+  commentator names it ("The national anthem of Great Britain, for Jo in the McLaren!") and the brass band follows the
+  line; if they would overlap the band starts on its timpani roll under the end of the line (ducked), so the anthem is
+  never cut short, and its last chord may ring a second into the Champagne. A country whose anthem has no melody yet
+  (Monaco, Argentina, New Zealand) or never will (Brazil, Mexico, Thailand) gets the REDLINE victory theme instead,
+  still captioned with the country. The Champagne gets the theme (looping) and a cheer; every spray pops a cork and
+  hisses at its strength, and the first one brings the victory sting.
 - **Ducking:** while a voice speaks, Music dips 12 dB and Sfx 6 dB (200 ms down, 600 ms back up), the built-in voice
   included.
 
@@ -117,7 +125,40 @@ AUDIO Sfx fanfare
 ```
 
 plus `AUDIO Music lobby-loop|race-bed`, `AUDIO Sfx engine <car>` when an engine voice moves to a new car, and
-`AUDIO Sfx countdown <n>`. Narration is logged when it starts, whichever voice speaks it (or none).
+`AUDIO Sfx countdown <n>`. Narration is logged when it starts, whichever voice speaks it (or none). The podium adds:
+
+```
+AUDIO Music anthem gb                  (or AUDIO Music victory-theme for a theme-only country)
+AUDIO Sfx cheer
+AUDIO Voice redline.announcer: Let the champagne fly!
+AUDIO Music victory-theme
+AUDIO Sfx victory-sting                (the first spray only)
+AUDIO Sfx cork-pop step 1
+AUDIO Sfx spray-hiss step 1 1.00       (step, strength)
+```
+
+and the scene logs each spray it launches: `REDLINE spray #<seq> step <step> strength <s>`.
+
+## The podium
+
+After the Chequered flag the race ends on an F1-style podium (podium spec §5) on the pit side of the start straight,
+150 m before the line: a stage with three stepped blocks (2 left, 1 centre and highest, 3 right) carrying their
+numerals, a REDLINE step-and-repeat backdrop framed by light towers and LED strips, a lighting truss, and the three
+podium players' cars parked nose-in in front (every other car is off air). A driver in team colours stands on each
+step holding a lathed champagne bottle with team-colour foil, shaking it harder as the player's charge rises.
+
+- **Anthem (16 s):** a slow push-in from the whole set to the three drivers; labels over the steps (place, name, car
+  number, code and team, and the bottle's pressure gauge), and the "NATIONAL ANTHEM · {Country}" lower-third with
+  "for {Name} · {Driver}, {Team}".
+- **Champagne (16 s):** a cut to a wider shot that drifts across the front; the "CHAMPAGNE!" banner; confetti cannons
+  on the backdrop fire and paper keeps falling; the labels move up to the top of the picture. Each new spray in the
+  host view (by `Seq`) pops that step's cork (a cork flies off with a little flash) and throws a golden, sparkling
+  jet of foam that arcs and falls, the bottle raised and waved about; size, speed, duration and amount follow the
+  spray's strength (`SprayLook`), and foam drips off the bottle afterwards.
+
+`--redline-demo=anthem` (or `=champagne`) plays just the ceremony, with scripted charges and sprays from all three
+steps at different strengths, including one triple spray. `--redline-demo-winner=PER` makes KAI in the Cadillac win
+instead of JO in the McLaren, so the podium plays the theme only (Mexico).
 
 ## Performance
 
@@ -159,8 +200,10 @@ server's wall-clock phase timers even when a frame is slow.
 ## Screenshots
 
 `--shots=<dir>` saves `<seq>-<label>.png` on every screen change and lobby change, and in REDLINE about a second into
-every phase (`grid`, `throttle`, `question`, `reveal`, `chequered`…), on each Driver Select claim, at 2, 4 and 6 s into
-Reveal, and on the Chequered podium. Each shot is taken two frames after it is asked for, so at the 1–2 fps of
+every phase (`grid`, `throttle`, `question`, `reveal`, `chequered`, `anthem`, `champagne`…), on each Driver Select
+claim, at 2, 4 and 6 s into Reveal, on the Chequered podium, 12 s into the Anthem (`anthem-pushin`), and in the
+Champagne just after the first spray (`champagne-first-spray`), when all three bottles are spraying at once
+(`champagne-triple`) and at 12 s (`champagne-confetti`). Each shot is taken two frames after it is asked for, so at the 1–2 fps of
 software rendering a shot shows a moment 1–3 s after its label: `reveal-2s` often already has the follow-up cut to the
 leader (due at 3.5 s), and a shot near the end of a short phase can show the start of the next one.
 
@@ -195,6 +238,12 @@ It then checks the TV's audio log for the race's sounds **in order**: the five s
 commentator's first line of round 1, the question read out (`AUDIO Voice redline.questions: …`), the Reveal sting or
 buzz and "The answer is …" (and with `ARCBOX_FULL=1`, the fanfare and the winner's line), printing each line it
 matched and failing on the first one missing. The phone script also fails if phone 1 never showed the Reading view.
+With `ARCBOX_FULL=1` the phones also play the podium: on the Shake widget each bot taps "Tap to enable shaking" (desktop
+Chromium has the iOS permission API but no motion, so the widget falls back to tapping), taps the bottle to charge it
+(phone 1 most, so the sprays differ) and presses POP! through the Champagne; the script fails unless every podium
+phone popped a cork. The TV log must then show the Anthem and the Champagne, `AUDIO Music anthem <id>` followed by
+`AUDIO Music victory-theme` (or the theme alone for a theme-only country), the victory sting, and a `REDLINE spray`
+line and a cork pop for every podium step.
 The server runs without a Google key, so `/api/tts` answers 503 and the TV falls back to its built-in voice (or, on
 a Linux box without speech-dispatcher, logs the lines with the narrator off); the audio lines are the same.
 

@@ -242,11 +242,11 @@ public class HudTextTests
     public void Chequered_headline_names_a_human_winner_by_player_and_an_ai_by_surname()
     {
         var view = Demo(RacePhase.Chequered);
-        Assert.Equal("ALEX WINS", HudText.Headline(view));
-        Assert.Equal("Charles Leclerc · Ferrari · 29", HudText.WinnerLine(view));
+        Assert.Equal("JO WINS", HudText.Headline(view));
+        Assert.Equal("Lando Norris · McLaren · 29", HudText.WinnerLine(view));
 
         var ai = view with { Drivers = [view.Drivers[0] with { Player = null, PlayerName = null }, .. view.Drivers.Skip(1)] };
-        Assert.Equal("LECLERC WINS", HudText.Headline(ai));
+        Assert.Equal("NORRIS WINS", HudText.Headline(ai));
         var tie = view with { Drivers = [view.Drivers[0], view.Drivers[1] with { Position = 1 }, .. view.Drivers.Skip(2)] };
         Assert.Equal("DEAD HEAT", HudText.Headline(tie));
     }

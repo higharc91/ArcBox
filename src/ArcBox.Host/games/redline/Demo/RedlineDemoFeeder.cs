@@ -10,15 +10,16 @@ namespace ArcBox.Host.Games.Redline.Demo;
 /// <summary>
 /// Dev-only <c>--redline-demo[=label]</c>: plays <see cref="DemoRace.Steps"/> into the TV as if the server had sent them,
 /// on the scene clock (so <c>--fixed-fps</c> runs are deterministic). With a label (driverselect, grid, throttle,
-/// reading, question, reveal, chequered) it starts at that step, sending the step before it first so transitions still have a
-/// previous view. Each view is stamped with a deadline like the server's: the phase's full length from when the phase
+/// reading, question, reveal, chequered, anthem, champagne) it starts at that step, sending the step before it first so
+/// transitions still have a previous view. <c>--redline-demo-winner=PER</c> makes another player's car win (and so
+/// changes the podium and its anthem). Each view is stamped with a deadline like the server's: the phase's full length from when the phase
 /// started, measured on the scene clock. Under <c>--fixed-fps</c> the wall clock runs far ahead of the scene, so the
 /// stamp is "now + what is left of the phase in scene time", and the HUD's countdown reads naturally in screenshots.
 /// </summary>
 public partial class RedlineDemoFeeder : Node
 {
     private readonly IReadOnlyList<DemoStep> _steps = DemoRace.Steps();
-    private readonly Action<JsonElement> _send;
+    private readonly Action<JsonElement> _send = _ => { };
     private int _next;
     private double _wait;
     private double _clock;
@@ -27,13 +28,24 @@ public partial class RedlineDemoFeeder : Node
 
     public RedlineDemoFeeder()
     {
-        _send = _ => { };
     }
 
-    public RedlineDemoFeeder(Action<JsonElement> send, string? from)
+    public RedlineDemoFeeder(Action<JsonElement> send, string? from, string? winner = null)
     {
         Name = "RedlineDemoFeeder";
         _send = send;
+        if (winner is not null)
+        {
+            try
+            {
+                _steps = DemoRace.Steps(winner: winner);
+                GD.Print($"DEMO winner {winner}");
+            }
+            catch (ArgumentException e)
+            {
+                GD.PushWarning($"--redline-demo-winner: {e.Message}");
+            }
+        }
         if (from is not null)
         {
             var index = _steps.ToList().FindIndex(s => s.Label == from);

@@ -48,6 +48,15 @@ the time, so it can be found in the logs.
 - [ ] **AI [R8]:** unclaimed seats race; no phase ever waits for an AI.
 - [ ] One race takes roughly 8–12 minutes.
 - [ ] **Chequered [R1]:** podium, classification and awards on the TV; each phone shows its finishing place.
+- [ ] **Podium:** the top three players' phones show the champagne bottle (everyone else "Watch the podium!"); the TV
+      shows the podium set with their names, cars and team colours, the anthem caption, then "CHAMPAGNE!" with confetti.
+- [ ] **Shaking on iPhone:** motion needs HTTPS. Over plain `http://<pc-ip>:5080` the bottle says "Tap the bottle fast
+      to shake it" (the tap fallback); behind HTTPS (e.g. a tunnel or a local certificate) "Tap to enable shaking"
+      asks for motion permission, and shaking fills the bottle. Deny it once: the tap fallback still works.
+- [ ] **Shaking on Android (Chrome):** shaking fills the bottle without a prompt (HTTPS needed here too); the gauge on
+      the TV follows within about a second.
+- [ ] **Champagne:** POP! (or a flick) fires; the TV sprays from that player's step, bigger and longer the fuller the
+      bottle; shaking again reloads it; all three can spray at once.
 - [ ] **Results [P1, R9]:** the results list exactly the human players in race order; the room returns to the lobby and a
       second game can start.
 
@@ -68,6 +77,14 @@ the time, so it can be found in the logs.
       think and roar in the Reveal drive; spin-outs screech and crunch; the correct sting / wrong buzz are clear but not
       harsh; the fanfare and crowd at the flag; the lobby loop and race bed loop without a click or gap. Nothing clips
       at the volume you set.
+- [ ] **Anthems:** listen to each anthem with a melody (God Save the King, Advance Australia Fair, Het Wilhelmus, La
+      Marseillaise, Il Canto degli Italiani, Marcha Real, O Canada, Das Lied der Deutschen, Maamme): the tune is right
+      and recognisable, the brass sounds like a band, the commentator's line comes first and the band does not talk
+      over it badly, and the victory theme follows cleanly. A Monaco, Mexico or Brazil winner gets the theme alone.
+      Quickest: `--redline-demo=anthem` with `--redline-demo-winner=<code>` for a player car in the demo (LEC, NOR,
+      VER, ANT, ALO, PER, HUL), or win a race with the right driver.
+- [ ] **Champagne sounds:** each pop is a crisp cork with a fizz behind it, the spray hiss follows the strength, the
+      first spray has the brass sting, and the victory theme loops without a gap.
 - [ ] **M** mutes everything (toast "SOUND OFF"), including the built-in voice, and the setting survives a restart.
 - [ ] **Phone haptics on Android:** a tap on every input, a double pulse for a correct answer, a long buzz for a wrong
       one, a stutter for a spin-out; short sounds play after the first tap on Join; the speaker toggle in the status
