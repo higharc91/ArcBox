@@ -177,3 +177,69 @@ internal static class Dsp
         return y;
     }
 }
+
+/// <summary>
+/// A small mono hall in the Freeverb style: eight damped feedback combs in parallel, then four allpasses in series.
+/// Deterministic, no allocation per sample.
+/// </summary>
+internal sealed class Reverb
+{
+    private static readonly int[] CombTunings = [1116, 1188, 1277, 1356, 1422, 1491, 1557, 1617];
+    private static readonly int[] AllpassTunings = [556, 441, 341, 225];
+
+    private readonly float[][] _combs;
+    private readonly float[] _combStore;
+    private readonly int[] _combIndex;
+    private readonly float[][] _allpasses;
+    private readonly int[] _allpassIndex;
+    private readonly float _feedback, _damp;
+
+    /// <param name="sampleRate">Output rate; the delay lines are scaled from their 44.1 kHz tunings.</param>
+    /// <param name="room">Comb feedback, 0.7 (small room) … 0.9 (large hall).</param>
+    /// <param name="damp">High-frequency damping in the tail, 0 (bright) … 0.6 (dark).</param>
+    public Reverb(int sampleRate, double room, double damp)
+    {
+        var scale = sampleRate / 44100.0;
+        _combs = [.. CombTunings.Select(n => new float[Math.Max(1, (int)(n * scale))])];
+        _combStore = new float[_combs.Length];
+        _combIndex = new int[_combs.Length];
+        _allpasses = [.. AllpassTunings.Select(n => new float[Math.Max(1, (int)(n * scale))])];
+        _allpassIndex = new int[_allpasses.Length];
+        _feedback = (float)room;
+        _damp = (float)damp;
+    }
+
+    /// <summary>The wet signal for one input sample.</summary>
+    public float Process(float x)
+    {
+        var input = x * 0.015f;
+        float sum = 0;
+        for (var c = 0; c < _combs.Length; c++)
+        {
+            var buf = _combs[c];
+            var i = _combIndex[c];
+            var y = buf[i];
+            _combStore[c] = y * (1 - _damp) + _combStore[c] * _damp;
+            buf[i] = input + _combStore[c] * _feedback;
+            _combIndex[c] = i + 1 == buf.Length ? 0 : i + 1;
+            sum += y;
+        }
+        for (var a = 0; a < _allpasses.Length; a++)
+        {
+            var buf = _allpasses[a];
+            var i = _allpassIndex[a];
+            var y = buf[i];
+            buf[i] = sum + y * 0.5f;
+            _allpassIndex[a] = i + 1 == buf.Length ? 0 : i + 1;
+            sum = y - sum;
+        }
+        return sum * 3;
+    }
+
+    /// <summary>Mixes a hall into <paramref name="x"/> in place: the dry signal plus <paramref name="wet"/> times the reverb.</summary>
+    public static void Apply(Span<float> x, int sampleRate, double wet, double room = 0.84, double damp = 0.3)
+    {
+        var reverb = new Reverb(sampleRate, room, damp);
+        for (var i = 0; i < x.Length; i++) x[i] += (float)(wet * reverb.Process(x[i]));
+    }
+}
