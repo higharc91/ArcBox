@@ -421,9 +421,13 @@ class Head:
         if n.length < 1e-14:
             return Vector((0, 1, 0))
         n.normalize()
-        p = self.pos(u, y)
-        if n.dot(Vector((p.x, 0.3 * (p.y - 0.0), p.z))) < 0:
-            n = -n
+        if b.z > 0.04 and self.eye_region(b.x, y):
+            # Round the eyes the lids fold over the eyeball (the map folds), so orient by a guess there.
+            p = self.pos(u, y)
+            return n if n.dot(Vector((p.x, 0.3 * p.y, p.z))) >= 0 else -n
+        # Elsewhere du x dv already points out: u runs round the head (+x at the front), y up, and the features
+        # displace horizontally, so the map never folds. Testing it against the guess instead flipped steep walls
+        # that face up, such as the lower lip rolling into the mouth line, into the head (dark sawtooth teeth).
         return n
 
     def spacing(self, u, y):
