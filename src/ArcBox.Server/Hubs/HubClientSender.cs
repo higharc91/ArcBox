@@ -2,29 +2,24 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace ArcBox.Server.Hubs;
 
-/// <summary>Fire-and-forget sends from rooms to connections; a failed send is logged, never thrown.</summary>
 public sealed class HubClientSender(IHubContext<ArcHub> hub, ILogger<HubClientSender> logger) : IClientSender
 {
+    // Fire-and-forget so the room loop never waits on a slow client. Sends still go out in
+    // call order: SendCoreAsync queues on the connection's write lock before it yields.
     public void Send(string connectionId, string method, params object?[] args)
     {
-        Task task;
+        _ = SendAsync(connectionId, method, args);
+    }
+
+    private async Task SendAsync(string connectionId, string method, object?[] args)
+    {
         try
         {
-            task = hub.Clients.Client(connectionId).SendCoreAsync(method, args);
+            await hub.Clients.Client(connectionId).SendCoreAsync(method, args);
         }
         catch (Exception ex)
         {
-            Log(ex, connectionId, method);
-            return;
-        }
-
-        if (!task.IsCompletedSuccessfully)
-        {
-            task.ContinueWith(t => Log(t.Exception, connectionId, method),
-                CancellationToken.None, TaskContinuationOptions.OnlyOnFaulted, TaskScheduler.Default);
+            logger.LogError(ex, "Failed to send {Method} to {ConnectionId}", method, connectionId);
         }
     }
-
-    private void Log(Exception? ex, string connectionId, string method) =>
-        logger.LogWarning(ex, "Failed to send {Method} to {ConnectionId}", method, connectionId);
 }

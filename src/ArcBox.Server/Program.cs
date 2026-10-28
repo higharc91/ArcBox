@@ -23,8 +23,6 @@ builder.Services.AddHostedService<RoomSweeper>();
 // Rooms live in memory and die with the process, so don't wait the default 30 s for stateful-reconnect clients.
 builder.Services.Configure<HostOptions>(o => o.ShutdownTimeout = TimeSpan.FromSeconds(5));
 
-// Singleton so the per-connection buckets outlive each invocation.
-builder.Services.AddSingleton<RateLimitHubFilter>();
 builder.Services
     .AddSignalR(o =>
     {

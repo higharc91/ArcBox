@@ -1,31 +1,63 @@
-using System.Collections.Concurrent;
 using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Options;
 
 namespace ArcBox.Server.Hubs;
 
-/// <summary>
-/// A token bucket per connection (spec §5.4, "Message flood"). Over the limit, <c>SendInput</c> is dropped
-/// silently and anything else fails with "Slow down.". Register as a singleton: it holds the buckets.
-/// </summary>
 public sealed class RateLimitHubFilter(IOptions<RoomOptions> options) : IHubFilter
 {
-    private readonly ConcurrentDictionary<string, TokenBucketRateLimiter> _limiters = new();
+    // Each connection's limiter lives in that connection's Items, so the filter itself is
+    // stateless: SignalR creates a fresh filter per invocation unless it's registered in DI.
+    private static readonly object LimiterKey = new();
 
-    public async ValueTask<object?> InvokeMethodAsync(HubInvocationContext context, Func<HubInvocationContext, ValueTask<object?>> next)
+    public async Task OnConnectedAsync(HubLifetimeContext context, Func<HubLifetimeContext, Task> next)
     {
-        var limiter = _limiters.GetOrAdd(context.Context.ConnectionId, _ => Create());
-        using var lease = limiter.AttemptAcquire();
-        if (!lease.IsAcquired)
+        var perSecond = options.Value.InvocationsPerSecond;
+        context.Context.Items[LimiterKey] = new TokenBucketRateLimiter(new TokenBucketRateLimiterOptions
         {
-            if (context.HubMethodName == nameof(ArcHub.SendInput)) return null;
-            throw new HubException("Slow down.");
+            TokenLimit = perSecond,
+            TokensPerPeriod = perSecond,
+            ReplenishmentPeriod = TimeSpan.FromSeconds(1),
+            QueueLimit = 0,
+        });
+
+        try
+        {
+            await next(context);
         }
-        return await next(context);
+        catch
+        {
+            // SignalR skips OnDisconnectedAsync when OnConnectedAsync fails.
+            DisposeLimiter(context.Context);
+            throw;
+        }
     }
 
-    public async Task OnDisconnectedAsync(HubLifetimeContext context, Exception? exception, Func<HubLifetimeContext, Exception?, Task> next)
+    public async ValueTask<object?> InvokeMethodAsync(
+        HubInvocationContext invocationContext,
+        Func<HubInvocationContext, ValueTask<object?>> next)
+    {
+        if (invocationContext.Context.Items.TryGetValue(LimiterKey, out var value) && value is RateLimiter limiter)
+        {
+            using var lease = limiter.AttemptAcquire();
+            if (!lease.IsAcquired)
+            {
+                // Button-mashing past the limit is normal play, so excess input is just dropped.
+                if (invocationContext.HubMethodName == nameof(ArcHub.SendInput))
+                {
+                    return null;
+                }
+                throw new HubException("Slow down.");
+            }
+        }
+
+        return await next(invocationContext);
+    }
+
+    public async Task OnDisconnectedAsync(
+        HubLifetimeContext context,
+        Exception? exception,
+        Func<HubLifetimeContext, Exception?, Task> next)
     {
         try
         {
@@ -33,23 +65,15 @@ public sealed class RateLimitHubFilter(IOptions<RoomOptions> options) : IHubFilt
         }
         finally
         {
-            if (_limiters.TryRemove(context.Context.ConnectionId, out var limiter))
-            {
-                limiter.Dispose();
-            }
+            DisposeLimiter(context.Context);
         }
     }
 
-    private TokenBucketRateLimiter Create()
+    private static void DisposeLimiter(HubCallerContext context)
     {
-        var perSecond = options.Value.InvocationsPerSecond;
-        return new TokenBucketRateLimiter(new TokenBucketRateLimiterOptions
+        if (context.Items.Remove(LimiterKey, out var value) && value is IDisposable limiter)
         {
-            TokenLimit = perSecond,
-            TokensPerPeriod = perSecond,
-            ReplenishmentPeriod = TimeSpan.FromSeconds(1),
-            QueueLimit = 0,
-            AutoReplenishment = true
-        });
+            limiter.Dispose();
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System.Net;
 using ArcBox.Sdk.Protocol;
 using ArcBox.Server.Games.Redline;
+using ArcBox.Server.Rooms;
 using ArcBox.Server.Tests.Support;
 using Counter.Logic;
 using Microsoft.AspNetCore.Hosting;
@@ -277,5 +278,41 @@ public class HubIntegrationTests
         Assert.Equal("redline", hostView[0].GetString());
         Assert.Equal("DriverSelect", hostView[1].GetProperty("phase").GetString());
         Assert.Equal(22, hostView[1].GetProperty("drivers").GetArrayLength());
+    }
+
+    // From main (#21): the old room is left only after the new one accepts the caller.
+    [Fact]
+    public async Task Failed_join_elsewhere_keeps_the_current_room()
+    {
+        using var f = new ArcServerFactory();
+        await using var hostA = await TestClient.ConnectAsync(f);
+        await using var hostB = await TestClient.ConnectAsync(f);
+        await using var ann = await TestClient.ConnectAsync(f);
+        var a = await hostA.InvokeAsync<CreateRoomResult>("CreateRoom");
+        var b = await hostB.InvokeAsync<CreateRoomResult>("CreateRoom");
+        await ann.InvokeAsync<JoinResult>("Join", a.Code, "Ann");
+
+        Assert.Equal("Name must be 1–12 characters.", await ann.ThrowsHubAsync("Join", b.Code, "   "));
+
+        // Still bound in room A as its VIP.
+        Assert.Null(await ann.TryInvokeMessageAsync("SelectGame", "counter"));
+    }
+
+    // A connection is tracked to one room at a time. If creating a second room didn't
+    // release the first, the first would keep a "connected" host forever and never expire.
+    [Fact]
+    public async Task Creating_a_second_room_releases_the_first()
+    {
+        using var f = new ArcServerFactory();
+        await using var host = await TestClient.ConnectAsync(f);
+        await using var ann = await TestClient.ConnectAsync(f);
+        var first = await host.InvokeAsync<CreateRoomResult>("CreateRoom");
+        var second = await host.InvokeAsync<CreateRoomResult>("CreateRoom");
+
+        f.Time.Advance(new RoomOptions().IdleTimeout);
+        await f.Services.GetRequiredService<RoomManager>().SweepAsync();
+
+        Assert.Equal("Room not found.", await ann.ThrowsHubAsync("Join", first.Code, "Ann"));
+        await ann.InvokeAsync<JoinResult>("Join", second.Code, "Ann");
     }
 }

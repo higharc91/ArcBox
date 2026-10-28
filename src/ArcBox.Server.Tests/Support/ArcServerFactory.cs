@@ -25,6 +25,8 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
         builder.UseSetting("Web:Root", "");
         builder.ConfigureTestServices(services =>
         {
+            // Only the rooms' clock is faked. The unkeyed TimeProvider drives SignalR's
+            // own keep-alives and timeouts, which must keep running on real time.
             services.RemoveAllKeyed<TimeProvider>(RoomManager.ClockKey);
             services.AddKeyedSingleton<TimeProvider>(RoomManager.ClockKey, Time);
             services.AddArcGame<ThrowerGame>();

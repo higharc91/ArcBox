@@ -6,79 +6,87 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace ArcBox.Server.Hubs;
 
-/// <summary>
-/// The one hub (spec §5.3). Methods only validate, look up the room and post to its inbox;
-/// a <see cref="RoomException"/> reaches the client as a <see cref="HubException"/> with the same message.
-/// </summary>
+// Hub methods only validate input, find the room and post to its inbox (spec §5.3).
 public sealed class ArcHub(RoomManager rooms) : Hub
 {
-    public Task<CreateRoomResult> CreateRoom() => Guard(async () =>
+    public Task<CreateRoomResult> CreateRoom() => WithHubErrors(async () =>
     {
-        await LeaveOtherRoomAsync(null);
+        var previous = rooms.RoomFor(Context.ConnectionId);
         var (_, result) = await rooms.CreateRoomAsync(Context.ConnectionId);
+        if (previous is not null)
+        {
+            await LeaveAsync(previous);
+        }
         return result;
     });
 
-    public Task ResumeHost(string code, string hostToken) => Guard(async () =>
+    public Task ResumeHost(string code, string hostToken) => WithHubErrors(async () =>
     {
-        var room = Find(code);
-        await LeaveOtherRoomAsync(room);
+        var room = FindRoom(code);
         await room.BindHostAsync(Context.ConnectionId, hostToken);
-        rooms.Track(Context.ConnectionId, room);
+        await MoveToAsync(room);
     });
 
-    public Task<JoinResult> Join(string code, string name) => Guard(async () =>
+    public Task<JoinResult> Join(string code, string name) => WithHubErrors(async () =>
     {
-        var room = Find(code);
-        await LeaveOtherRoomAsync(room);
+        var room = FindRoom(code);
         var result = await room.JoinAsync(Context.ConnectionId, name);
-        rooms.Track(Context.ConnectionId, room);
+        await MoveToAsync(room);
         return result;
     });
 
-    public Task Rejoin(string code, string playerId, string secret) => Guard(async () =>
+    public Task Rejoin(string code, string playerId, string secret) => WithHubErrors(async () =>
     {
-        var room = Find(code);
-        await LeaveOtherRoomAsync(room);
+        var room = FindRoom(code);
         await room.RejoinAsync(Context.ConnectionId, new PlayerId(playerId), secret);
-        rooms.Track(Context.ConnectionId, room);
+        await MoveToAsync(room);
     });
 
-    public Task SelectGame(string gameId) => Guard(() => Current().SelectGameAsync(Context.ConnectionId, gameId));
+    public Task SelectGame(string gameId) =>
+        WithHubErrors(() => CurrentRoom().SelectGameAsync(Context.ConnectionId, gameId));
 
-    public Task StartGame() => Guard(() => Current().StartGameAsync(Context.ConnectionId));
+    public Task StartGame() =>
+        WithHubErrors(() => CurrentRoom().StartGameAsync(Context.ConnectionId));
 
-    public Task ReturnToLobby() => Guard(() => Current().ReturnToLobbyAsync(Context.ConnectionId));
+    public Task ReturnToLobby() =>
+        WithHubErrors(() => CurrentRoom().ReturnToLobbyAsync(Context.ConnectionId));
 
-    public Task Kick(string playerId) => Guard(() => Current().KickAsync(Context.ConnectionId, new PlayerId(playerId)));
+    public Task Kick(string playerId) =>
+        WithHubErrors(() => CurrentRoom().KickAsync(Context.ConnectionId, new PlayerId(playerId)));
 
-    public Task SendInput(string viewId, JsonElement payload) => Guard(() => Current().SendInputAsync(Context.ConnectionId, viewId, payload));
+    public Task SendInput(string viewId, JsonElement payload) =>
+        WithHubErrors(() => CurrentRoom().SendInputAsync(Context.ConnectionId, viewId, payload));
 
     public override async Task OnDisconnectedAsync(Exception? exception)
     {
-        if (rooms.RoomFor(Context.ConnectionId) is { } room)
+        var room = rooms.RoomFor(Context.ConnectionId);
+        if (room is not null)
         {
-            await LoseConnectionAsync(room);
+            await LeaveAsync(room);
         }
         rooms.Untrack(Context.ConnectionId);
         await base.OnDisconnectedAsync(exception);
     }
 
-    private Room Find(string code) => rooms.Find(code) ?? throw new HubException("Room not found.");
+    private Room FindRoom(string code) =>
+        rooms.Find(code) ?? throw new HubException("Room not found.");
 
-    private Room Current() => rooms.RoomFor(Context.ConnectionId) ?? throw new HubException("You're not in a room.");
+    private Room CurrentRoom() =>
+        rooms.RoomFor(Context.ConnectionId) ?? throw new HubException("You're not in a room.");
 
-    /// <summary>A connection lives in one room: tell the room it was in that it has gone.</summary>
-    private async Task LeaveOtherRoomAsync(Room? next)
+    // A connection is in at most one room. The old room is left only after the new one
+    // has accepted the caller, so a failed Join or Rejoin doesn't strand them.
+    private async Task MoveToAsync(Room room)
     {
-        if (rooms.RoomFor(Context.ConnectionId) is { } old && old != next)
+        var previous = rooms.RoomFor(Context.ConnectionId);
+        if (previous is not null && previous != room)
         {
-            await LoseConnectionAsync(old);
-            rooms.Untrack(Context.ConnectionId);
+            await LeaveAsync(previous);
         }
+        rooms.Track(Context.ConnectionId, room);
     }
 
-    private async Task LoseConnectionAsync(Room room)
+    private async Task LeaveAsync(Room room)
     {
         try
         {
@@ -86,31 +94,33 @@ public sealed class ArcHub(RoomManager rooms) : Hub
         }
         catch (RoomException)
         {
-            // The room has already closed.
+            // The room has already closed, so there is nothing to leave.
         }
     }
 
-    private static async Task Guard(Func<Task> action)
+    // Room errors are user-facing; HubException is the only exception whose message
+    // SignalR forwards to the caller.
+    private static async Task WithHubErrors(Func<Task> call)
     {
         try
         {
-            await action();
+            await call();
         }
         catch (RoomException ex)
         {
-            throw new HubException(ex.Message);
+            throw new HubException(ex.Message, ex);
         }
     }
 
-    private static async Task<T> Guard<T>(Func<Task<T>> action)
+    private static async Task<T> WithHubErrors<T>(Func<Task<T>> call)
     {
         try
         {
-            return await action();
+            return await call();
         }
         catch (RoomException ex)
         {
-            throw new HubException(ex.Message);
+            throw new HubException(ex.Message, ex);
         }
     }
 }

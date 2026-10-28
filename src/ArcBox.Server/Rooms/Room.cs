@@ -347,7 +347,10 @@ public sealed class Room
     private void EnsureHostOrVip(string connectionId)
     {
         bool isHost = connectionId == _hostConnectionId;
-        bool isVip = _members.FindByConnection(connectionId)?.Id == _members.VipId;
+        // With nobody connected there is no VIP; without this check a connection bound to
+        // no slot would match it as null == null.
+        var vipId = _members.VipId;
+        bool isVip = vipId is not null && _members.FindByConnection(connectionId)?.Id == vipId;
         if (!isHost && !isVip)
         {
             throw new RoomException("Only the VIP or host can do that.");
