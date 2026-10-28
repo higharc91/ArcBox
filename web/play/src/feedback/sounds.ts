@@ -5,7 +5,7 @@
  * browser without WebAudio, `play` does nothing. Nothing here throws.
  */
 
-export type SoundName = "tap" | "tick" | "correct" | "wrong" | "spin";
+export type SoundName = "tap" | "tick" | "correct" | "wrong" | "spin" | "fizz" | "pop";
 
 /** The loudest any envelope goes: quiet by default, the phone's volume does the rest. */
 export const MAX_GAIN = 0.25;
@@ -52,7 +52,33 @@ function tone(ctx: AudioContext, at: number, t: Tone, into?: AudioNode): void {
   osc.stop(start + t.length);
 }
 
-const RECIPES: Record<SoundName, (ctx: AudioContext, at: number) => void> = {
+/**
+ * Champagne noise: mostly a soft hiss with sparse loud grains, the crackle of bubbles bursting. `density` is the share
+ * of samples that are grains.
+ */
+function fizzBuffer(ctx: AudioContext, length: number, density: number): AudioBuffer {
+  const buffer = ctx.createBuffer(1, Math.ceil(ctx.sampleRate * length), ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * (Math.random() < density ? 1 : 0.12);
+  return buffer;
+}
+
+/** Noise from `buffer` through a filter into an envelope, from `at` for `length` s. */
+function filteredNoise(ctx: AudioContext, at: number, buffer: AudioBuffer, filter: { type: BiquadFilterType; from: number; to?: number; q?: number }, peak: number, length: number, attack: number): void {
+  const src = ctx.createBufferSource();
+  src.buffer = buffer;
+  const f = ctx.createBiquadFilter();
+  f.type = filter.type;
+  f.Q.setValueAtTime(filter.q ?? 0.7, at);
+  f.frequency.setValueAtTime(filter.from, at);
+  if (filter.to) f.frequency.exponentialRampToValueAtTime(filter.to, at + length);
+  src.connect(f);
+  f.connect(envelope(ctx, at, peak, length, attack));
+  src.start(at);
+  src.stop(at + length);
+}
+
+const RECIPES: Record<SoundName, (ctx: AudioContext, at: number, level: number) => void> = {
   /** A soft "tok": a sine dropping an octave in 45 ms. */
   tap: (ctx, at) => tone(ctx, at, { type: "sine", from: 880, to: 440, peak: 0.18, length: 0.045 }),
 
@@ -96,6 +122,23 @@ const RECIPES: Record<SoundName, (ctx: AudioContext, at: number) => void> = {
     noise.start(at);
     noise.stop(at + length);
   },
+
+  /** Charging: a short fizz that gets brighter and louder as the pressure (`level` 0..1) rises; 0.22 s. */
+  fizz: (ctx, at, level) => {
+    const l = Math.min(1, Math.max(0, level));
+    filteredNoise(ctx, at, fizzBuffer(ctx, 0.22, 0.04 + 0.08 * l), { type: "highpass", from: 2400 + 3600 * l, q: 0.9 }, 0.03 + 0.08 * l, 0.22, 0.03);
+  },
+
+  /**
+   * The cork: a hollow "plock" (a sine falling from 640 Hz, the bottle mouth), a low thump and a click of air, then
+   * the champagne fizzing out, swelling and dying away; 0.9 s.
+   */
+  pop: (ctx, at) => {
+    tone(ctx, at, { type: "sine", from: 640, to: 250, peak: MAX_GAIN, length: 0.07 });
+    tone(ctx, at, { type: "sine", from: 160, to: 48, peak: 0.2, length: 0.14 });
+    filteredNoise(ctx, at, fizzBuffer(ctx, 0.03, 1), { type: "bandpass", from: 2200, q: 0.8 }, 0.18, 0.03, 0.001);
+    filteredNoise(ctx, at + 0.03, fizzBuffer(ctx, 0.85, 0.1), { type: "highpass", from: 5200, to: 2600, q: 0.8 }, 0.14, 0.85, 0.06);
+  },
 };
 
 export class Sounds {
@@ -132,13 +175,14 @@ export class Sounds {
     }
   }
 
-  play(name: SoundName): void {
+  /** `level` (0..1) shapes sounds that vary, e.g. the fizz rising with the charge; the others ignore it. */
+  play(name: SoundName, level = 1): void {
     const ctx = this.ctx;
     // A context that is suspended (or interrupted by a call on iOS) would queue sounds and play them all, late,
     // when it resumes: skip them instead, unless a resume from this very gesture is on its way.
     if (!ctx || (ctx.state !== "running" && !this.resuming)) return;
     try {
-      RECIPES[name](ctx, ctx.currentTime + 0.005);
+      RECIPES[name](ctx, ctx.currentTime + 0.005, level);
     } catch {
       // Audio is decoration: never let it break a tap.
     }

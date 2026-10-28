@@ -107,4 +107,6 @@ export const redlineSkin: Skin = {
   },
   waitQuestion: readingNote,
   classifyResult,
+  // The only REDLINE shake view that cannot fire is the podium phones' during the anthem (podium spec §2).
+  shakeHold: () => "Hold on — anthem playing.",
 };

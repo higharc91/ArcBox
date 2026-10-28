@@ -358,7 +358,7 @@ describe("feedback", () => {
   });
 
   it("sounds are short and quiet", () => {
-    const limits: Record<SoundName, number> = { tap: 0.3, tick: 0.3, wrong: 0.3, spin: 0.3, correct: 0.6 };
+    const limits: Record<SoundName, number> = { tap: 0.3, tick: 0.3, wrong: 0.3, spin: 0.3, correct: 0.6, fizz: 0.3, pop: 1 };
     for (const [name, limit] of Object.entries(limits) as [SoundName, number][]) {
       const sounds = new Sounds();
       sounds.unlock();
