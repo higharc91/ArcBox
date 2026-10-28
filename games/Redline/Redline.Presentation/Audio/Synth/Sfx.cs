@@ -501,34 +501,50 @@ public static class Sfx
         return Finish(x, -2, fadeIn: 0.003, fadeOut: 0.08);
     }
 
-    private static void BrassNote(float[] x, double hz, double at, double dur, double release, bool swell, double gain, int seed)
+    /// <summary>
+    /// Adds one brass note to <paramref name="x"/>: additive saw-like harmonics whose brightness follows loudness, a
+    /// pitch scoop into the note, two detuned players and delayed vibrato. <paramref name="brightness"/> scales how many
+    /// harmonics speak at full volume (below 1 for horns and tubas, above 1 for cornets and trumpets);
+    /// <paramref name="maxHarmonics"/> caps the partials rendered (a darker voice needs fewer, and renders faster).
+    /// </summary>
+    internal static void BrassNote(float[] x, double hz, double at, double dur, double release, bool swell, double gain, int seed,
+        double brightness = 1, double vibrato = 0.005, int maxHarmonics = 24)
     {
         var start = (int)(at * Sr);
         var end = Math.Min(x.Length, (int)((at + dur + release * 5) * Sr));
-        var harmonics = Math.Clamp((int)(9000 / hz), 1, 24);
+        var harmonics = Math.Clamp((int)(9000 / hz), 1, maxHarmonics);
         var rng = new Rng(seed);
         double[] detunes = [1 - 0.003, 1 + 0.0035];
         var phases = new[] { rng.NextDouble(), rng.NextDouble() };
         var weights = new double[harmonics + 1];
+        var rolloff = new double[harmonics + 1];
+        for (var k = 1; k <= harmonics; k++) rolloff[k] = 1 / Math.Pow(k, 0.6);
         for (var i = start; i < end; i++)
         {
             var t = (i - start) / (double)Sr;
-            var attack = Dsp.SmoothStep(0, 0.03, t) * (1 + 0.15 * Math.Exp(-Math.Pow((t - 0.035) / 0.02, 2)));
+            var bump = t < 0.2 ? (t - 0.035) / 0.02 : 0;
+            var attack = Dsp.SmoothStep(0, 0.03, t) * (t < 0.2 ? 1 + 0.15 * Math.Exp(-bump * bump) : 1);
             var sustain = swell ? 0.85 + 0.25 * Dsp.SmoothStep(0, 0.9, t) : 1;
             var rel = t < dur ? 1 : Math.Exp(-(t - dur) / release);
             var env = attack * sustain * rel;
             if ((i - start) % 16 == 0)
             {
                 // Brass: the louder the note, the more harmonics speak.
-                var bright = 0.8 + 9 * Math.Pow(Math.Min(env, 1), 1.5);
-                for (var k = 1; k <= harmonics; k++) weights[k] = Math.Exp(-(k - 1) / bright) / Math.Pow(k, 0.6);
+                var bright = (0.8 + 9 * Math.Pow(Math.Min(env, 1), 1.5)) * brightness;
+                var step = Math.Exp(-1 / bright);
+                var w = 1.0;
+                for (var k = 1; k <= harmonics; k++)
+                {
+                    weights[k] = w * rolloff[k];
+                    w *= step;
+                }
             }
-            var vibrato = 1 + 0.005 * Dsp.SmoothStep(0.25, 0.5, t) * Math.Sin(TwoPi * 5.3 * t);
-            var scoop = 1 - 0.02 * Math.Exp(-t / 0.03);
+            var wobble = vibrato > 0 && t > 0.25 ? 1 + vibrato * Dsp.SmoothStep(0.25, 0.5, t) * Math.Sin(TwoPi * 5.3 * t) : 1;
+            var scoop = t < 1.2 ? 1 - 0.02 * Math.Exp(-t / 0.03) : 1;
             double s = 0;
             for (var d = 0; d < 2; d++)
             {
-                phases[d] += hz * detunes[d] * vibrato * scoop / Sr;
+                phases[d] += hz * detunes[d] * wobble * scoop / Sr;
                 phases[d] -= Math.Floor(phases[d]);
                 var theta = TwoPi * phases[d];
                 var s1 = Math.Sin(theta);
