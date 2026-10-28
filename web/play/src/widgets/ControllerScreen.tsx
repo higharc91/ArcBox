@@ -8,6 +8,7 @@ import { Choice } from "./Choice";
 import type { Send } from "./common";
 import { Countdown } from "./Countdown";
 import { Draw } from "./Draw";
+import { Shake } from "./Shake";
 import { TextEntry } from "./TextEntry";
 import { Wait } from "./Wait";
 import { syncWakeLock } from "./wakeLock";
@@ -19,8 +20,7 @@ function Widget({ view, send }: { view: ControllerView; send: Send }) {
     case "choice": return <Choice view={view} send={send} />;
     case "textEntry": return <TextEntry view={view} send={send} />;
     case "draw": return <Draw view={view} send={send} />;
-    // Placeholder until the Shake widget lands: shows the prompt, sends nothing.
-    case "shake": return <Wait view={{ kind: "wait", viewId: view.viewId, message: view.prompt }} />;
+    case "shake": return <Shake view={view} send={send} />;
   }
 }
 
@@ -51,7 +51,8 @@ export function ControllerScreen({ view, send, me, game }: { view: ControllerVie
   useEffect(() => () => void syncWakeLock(false), []);
   // A layout effect, so the view is known before the Countdown's first tick (a child's passive effect).
   useLayoutEffect(() => feedback?.onView(view, game), [feedback, view.viewId]);
-  const sendWithFeedback: Send = feedback
+  // The shake widget streams charge updates and cues its own fizz and pop: no tap click on each of them.
+  const sendWithFeedback: Send = feedback && view.kind !== "shake"
     ? (payload) => {
         feedback.onSend();
         send(payload);

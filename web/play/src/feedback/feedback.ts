@@ -105,6 +105,20 @@ export class Feedback {
     if (!this.mutedValue) this.sounds.play("tick");
   }
 
+  /** The shake widget's charge climbed another tenth (`level` 0..1): a fizz that rises with it, and a light tick. */
+  charging(level: number): void {
+    if (this.mutedValue) return;
+    vibrate(PATTERNS.charge);
+    this.sounds.play("fizz", level);
+  }
+
+  /** The shake widget fired: a cork pop with a fizzing tail, and a strong buzz. */
+  pop(): void {
+    if (this.mutedValue) return;
+    vibrate(PATTERNS.pop);
+    this.sounds.play("pop");
+  }
+
   private cue(kind: "tap" | ResultKind): void {
     if (this.mutedValue) return;
     vibrate(PATTERNS[kind]);

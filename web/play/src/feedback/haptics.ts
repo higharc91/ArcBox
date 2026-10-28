@@ -4,6 +4,10 @@ export const PATTERNS = {
   correct: [30, 40, 30],
   wrong: 120,
   spin: [60, 30, 60, 30, 120],
+  /** A light tick for each tenth of charge while shaking (Android; iOS has no vibration). */
+  charge: 8,
+  /** The cork: a sharp kick, then a long rumble. */
+  pop: [45, 25, 160],
 } as const satisfies Record<string, number | readonly number[]>;
 
 export type HapticName = keyof typeof PATTERNS;

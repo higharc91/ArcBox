@@ -1,6 +1,6 @@
 import { createContext } from "preact";
 import { useContext } from "preact/hooks";
-import type { Option, WaitView } from "../protocol";
+import type { Option, ShakeView, WaitView } from "../protocol";
 import { redlineSkin } from "./redline";
 
 export interface Badge {
@@ -36,6 +36,8 @@ export interface Skin {
   waitQuestion?(view: WaitView): string | undefined;
   /** A wait view that reports this player's round result: which cue the phone plays. Null for any other view. */
   classifyResult?(view: WaitView): ResultKind | null;
+  /** A shake view that cannot fire yet: why, as a short sentence put in front of its prompt ("Hold on — …"). */
+  shakeHold?(view: ShakeView): string | undefined;
 }
 
 const skins: Record<string, Skin> = { redline: redlineSkin };

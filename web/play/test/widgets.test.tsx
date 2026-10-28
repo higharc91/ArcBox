@@ -189,6 +189,7 @@ describe("ControllerScreen", () => {
     ["choice", ".w-choice"],
     ["buttons", ".w-buttons"],
     ["draw", ".w-draw"],
+    ["shake", ".w-shake"],
   ])("ControllerScreen renders header and picks widget by kind (%s)", (kind, selector) => {
     const view = fixture(kind);
     const { container } = render(<ControllerScreen view={view} send={() => {}} me="ALEX" />);
@@ -205,10 +206,12 @@ describe("ControllerScreen", () => {
     expect(screen.getByText("Hold on")).toBeTruthy();
   });
 
-  it("shows a shake view's prompt until the Shake widget lands", () => {
+  it("shows the shake widget in the view's colour and sends nothing on its own", () => {
     const send = vi.fn();
     const { container } = render(<ControllerScreen view={fixture("shake")} send={send} me="ALEX" game="redline" />);
-    expect(container.querySelector(".controller.k-shake .w-wait")).not.toBeNull();
+    const widget = container.querySelector<HTMLElement>(".controller.k-shake .w-shake")!;
+    expect(widget).not.toBeNull();
+    expect(widget.style.getPropertyValue("--accent")).toBe("#ff8000");
     expect(container.textContent).toContain("Pop the cork!");
     expect(send).not.toHaveBeenCalled();
   });
