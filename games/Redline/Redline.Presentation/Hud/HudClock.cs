@@ -29,6 +29,8 @@ public static class HudClock
             RacePhase.Reading => MaxReadingSeconds,
             RacePhase.Question => r.Question.TotalSeconds,
             RacePhase.Reveal => r.Reveal.TotalSeconds,
+            RacePhase.Anthem => r.Anthem.TotalSeconds,
+            RacePhase.Champagne => r.Champagne.TotalSeconds,
             _ => r.Chequered.TotalSeconds,
         };
     }

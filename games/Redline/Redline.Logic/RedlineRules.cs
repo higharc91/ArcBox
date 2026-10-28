@@ -31,6 +31,17 @@ public sealed record RedlineRules
     public TimeSpan Chequered { get; init; } = TimeSpan.FromSeconds(10);
 
     /// <summary>
+    /// Podium spec §2: after the Chequered flag, the Anthem and Champagne phases with the top three players on the podium.
+    /// Off, or with no players in the room: the game ends when the Chequered timer runs out.
+    /// </summary>
+    public bool Celebrate { get; init; } = true;
+    public TimeSpan Anthem { get; init; } = TimeSpan.FromSeconds(16);
+    public TimeSpan Champagne { get; init; } = TimeSpan.FromSeconds(16);
+
+    /// <summary>The shortest time between two sprays from one podium player; a fire sooner than this is ignored.</summary>
+    public TimeSpan SprayCooldown { get; init; } = TimeSpan.FromMilliseconds(400);
+
+    /// <summary>
     /// Audio spec §2: a Reading phase between Throttle and Question, while the TV reads the question out, before the
     /// answer clock starts. Off: Throttle goes straight to Question.
     /// </summary>

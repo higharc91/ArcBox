@@ -155,6 +155,10 @@ public class HudClockTests
         Assert.Equal(20, HudClock.PhaseSeconds(RacePhase.Question));
         Assert.Equal(10, HudClock.PhaseSeconds(RacePhase.Throttle));
         Assert.Equal(7, HudClock.PhaseSeconds(RacePhase.Reveal));
+        Assert.Equal(10, HudClock.PhaseSeconds(RacePhase.Chequered));
+        Assert.Equal(16, HudClock.PhaseSeconds(RacePhase.Anthem));
+        Assert.Equal(16, HudClock.PhaseSeconds(RacePhase.Champagne));
+        Assert.Equal(12, HudClock.PhaseSeconds(RacePhase.Champagne, new RedlineRules { Champagne = TimeSpan.FromSeconds(12) }));
         Assert.Equal(0.5, HudClock.Fraction(10, 20));
         Assert.Equal(1, HudClock.Fraction(30, 20));
     }
@@ -195,6 +199,22 @@ public class HudTextTests
         Assert.Equal("CIRCUIT OF THE AMERICAS", grid.Meta[0]);
         Assert.Equal("START", grid.ClockCaption);
         Assert.Null(q.ClockText);
+    }
+
+    [Fact]
+    public void Podium_headers_name_the_anthem_country_then_the_champagne()
+    {
+        var chequered = Demo(RacePhase.Chequered);
+        var podium = new Podium("Monaco", "mc", [new PodiumStep(1, new PlayerId("p1"), "ALEX", "LEC", "ferrari", 1, 0, [])]);
+
+        var anthem = HudText.Header(chequered with { Phase = RacePhase.Anthem, Finish = null, Podium = podium });
+        Assert.Equal(["PODIUM · ROUND 11/15"], anthem.Meta);
+        Assert.Equal("National anthem · Monaco", anthem.Title);
+        Assert.Equal("", anthem.ClockCaption);
+
+        var champagne = HudText.Header(chequered with { Phase = RacePhase.Champagne, Finish = null, Podium = podium });
+        Assert.Equal(["PODIUM · ROUND 11/15"], champagne.Meta);
+        Assert.Equal("Champagne!", champagne.Title);
     }
 
     [Fact]

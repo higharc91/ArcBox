@@ -1,0 +1,10 @@
+{
+  "kind": "shake",
+  "prompt": "Pop the cork! Shake again to reload",
+  "color": "#ff8000",
+  "canFire": true,
+  "initialCharge": 0.35,
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:00:00+00:00",
+  "header": "H"
+}

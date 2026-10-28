@@ -22,10 +22,12 @@ public static class Report
 
     /// <summary>
     /// Wall-clock bound with every phase running to its timer: Driver Select + Grid + rounds × (Throttle + Question + Reveal) +
-    /// Chequered. The Reading phases depend on each question's text, so the caller adds <see cref="RaceRecord.ReadingSeconds"/>.
+    /// Chequered + the podium ceremony (Anthem + Champagne; every scenario has players, and bots never shake, so it just runs
+    /// on its timers). The Reading phases depend on each question's text, so the caller adds <see cref="RaceRecord.ReadingSeconds"/>.
     /// </summary>
     public static double FullTimerSeconds(int rounds, RedlineRules r) =>
-        (r.DriverSelect + r.Grid + rounds * (r.Throttle + r.Question + r.Reveal) + r.Chequered).TotalSeconds;
+        (r.DriverSelect + r.Grid + rounds * (r.Throttle + r.Question + r.Reveal) + r.Chequered
+         + (r.Celebrate ? r.Anthem + r.Champagne : TimeSpan.Zero)).TotalSeconds;
 
     public static string Header(SimOptions o, TimeSpan elapsed, int totalRaces)
     {

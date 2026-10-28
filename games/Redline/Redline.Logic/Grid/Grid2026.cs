@@ -40,6 +40,8 @@ public static class Grid2026
                     throw new InvalidDataException($"Duplicate driver code '{d.Code}'.");
                 if (!numbers.Add(d.Number))
                     throw new InvalidDataException($"Duplicate car number {d.Number}.");
+                if (d.Nationality is not { Length: 2 } nationality || !nationality.All(char.IsAsciiLetterUpper))
+                    throw new InvalidDataException($"Driver '{d.Code}' nationality '{d.Nationality}' is not an ISO 3166-1 alpha-2 code.");
                 if (double.IsNaN(d.AiSkill) || d.AiSkill < MinAiSkill || d.AiSkill > MaxAiSkill)
                     throw new InvalidDataException($"Driver '{d.Code}' aiSkill {d.AiSkill} is outside [{MinAiSkill}, {MaxAiSkill}].");
             }

@@ -45,7 +45,17 @@ export interface DrawView extends ViewBase {
   colors?: string[] | null;
 }
 
-export type ControllerView = WaitView | TextEntryView | ChoiceView | ButtonsView | DrawView;
+/** Shake to charge, tap to fire (ShakeView.cs). The charge lives on the phone; initialCharge (0..1) seeds it. */
+export interface ShakeView extends ViewBase {
+  kind: "shake";
+  prompt: string;
+  /** A team accent (#rrggbb), or null for the default. */
+  color?: string | null;
+  canFire: boolean;
+  initialCharge: number;
+}
+
+export type ControllerView = WaitView | TextEntryView | ChoiceView | ButtonsView | DrawView | ShakeView;
 export type ViewKind = ControllerView["kind"];
 
 export interface GameManifest {
@@ -105,6 +115,8 @@ export interface ChoiceInput { selected: string[] }
 export interface TextEntryInput { text: string }
 export interface Stroke { color: string; width: number; points: number[] }
 export interface DrawInput { strokes: Stroke[] }
+/** The ShakeView reply: charge 0..1 (required) and whether the player fired. */
+export interface ShakeInput { charge: number; fire: boolean }
 
 // ---------------------------------------------------------------- runtime checks
 
@@ -121,6 +133,7 @@ export const VIEW_SCHEMAS: Record<ViewKind, Record<string, FieldSpec>> = {
   choice: { ...base, prompt: "string", options: "options", allowMultiple: "boolean", maxSelections: "number?" },
   buttons: { ...base, prompt: "string?", buttons: "options" },
   draw: { ...base, prompt: "string", colors: "strings?" },
+  shake: { ...base, prompt: "string", color: "string?", canFire: "boolean", initialCharge: "number" },
 };
 
 const isRecord = (v: unknown): v is Record<string, unknown> => typeof v === "object" && v !== null && !Array.isArray(v);

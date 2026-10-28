@@ -174,6 +174,47 @@ public class CommentaryTests
         Assert.Equal(["Piastri takes the win."], Texts(aiOnly, null));
     }
 
+    private static Podium Podium(string country, string? anthemId, params (string Name, string Code)[] steps) =>
+        new(country, anthemId,
+            [.. steps.Select((s, i) => new PodiumStep(i + 1, new PlayerId(s.Name.ToLowerInvariant()), s.Name, s.Code,
+                Grid.ByCode(s.Code).Team.Id, i + 3, 0, []))]);
+
+    [Fact]
+    public void Anthem_names_the_country_the_best_player_and_their_team()
+    {
+        var rows = new[] { Row("PIA", 1, 29), Row("RUS", 2, 27), Row("NOR", 3, 26, player: "ALEX"), Row("VER", 4, 25, player: "Jo") };
+        var chequered = View(RacePhase.Chequered, 15, rows);
+        var anthem = chequered with { Phase = RacePhase.Anthem, Podium = Podium("Great Britain", "gb", ("ALEX", "NOR"), ("Jo", "VER")) };
+
+        var line = Assert.Single(Commentary.Lines(anthem, chequered, Grid));
+        Assert.Equal("The national anthem of Great Britain, for Alex in the McLaren!", line.Text);
+        Assert.Equal(CommentaryKind.Podium, line.Kind);
+        Assert.Equal(Commentary.Scripted, line.Priority);
+
+        // "the Netherlands"; a fallback country (theme only) is still named.
+        var dutch = anthem with { Podium = Podium("Netherlands", "nl", ("Jo", "VER")) };
+        Assert.Equal(["The national anthem of the Netherlands, for Jo in the Red Bull!"], Texts(dutch, chequered));
+        var mexico = anthem with { Podium = Podium("Mexico", null, ("Kai", "PER")) };
+        Assert.Equal(["The national anthem of Mexico, for Kai in the Cadillac!"], Texts(mexico, chequered));
+
+        // Said once, on entry.
+        Assert.Empty(Commentary.Lines(anthem, anthem, Grid));
+        Assert.Empty(Texts(anthem with { Podium = null }, chequered));
+    }
+
+    [Fact]
+    public void Champagne_lets_it_fly()
+    {
+        var rows = new[] { Row("NOR", 1, 29, player: "Alex") };
+        var anthem = View(RacePhase.Anthem, 15, rows) with { Podium = Podium("Great Britain", "gb", ("Alex", "NOR")) };
+        var champagne = anthem with { Phase = RacePhase.Champagne };
+
+        var line = Assert.Single(Commentary.Lines(champagne, anthem, Grid));
+        Assert.Equal("Let the champagne fly!", line.Text);
+        Assert.Equal(CommentaryKind.Podium, line.Kind);
+        Assert.Empty(Commentary.Lines(champagne, champagne, Grid));
+    }
+
     [Fact]
     public void No_lines_without_phase_change()
     {

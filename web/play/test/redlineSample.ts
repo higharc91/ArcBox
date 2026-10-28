@@ -1,4 +1,4 @@
-import type { DriverRow, RacePhase, RedlineHostView } from "../src/dev/redlineView";
+import type { DriverRow, Podium, PodiumStep, RacePhase, RedlineHostView, Spray } from "../src/dev/redlineView";
 
 // The 2026 grid in team order (games/Redline/Redline.Logic/Data/grid2026.json).
 const GRID: [code: string, number: number, teamId: string][] = [
@@ -16,7 +16,8 @@ const THROTTLES = ["Cruise", "Push", "Redline"] as const;
 
 /** A deterministic 22-car REDLINE HostView for tests and screenshots, shaped exactly like the server's JSON. */
 export function sampleRedlineView(phase: RacePhase, deadlineUtc: string | null = null): RedlineHostView {
-  const round = phase === "DriverSelect" || phase === "Grid" ? 0 : phase === "Chequered" ? 9 : 7;
+  const finished = phase === "Chequered" || phase === "Anthem" || phase === "Champagne";
+  const round = phase === "DriverSelect" || phase === "Grid" ? 0 : finished ? 9 : 7;
   const correctIndex = 1;
   const drivers: DriverRow[] = GRID.map(([code, number, teamId], i) => {
     const human = PLAYERS[code];
@@ -47,7 +48,7 @@ export function sampleRedlineView(phase: RacePhase, deadlineUtc: string | null =
   });
   return {
     phase, round, maxRounds: 15, finishLine: 28, circuitId: "cota",
-    question: phase === "Grid" || phase === "DriverSelect" ? null : {
+    question: phase === "Grid" || phase === "DriverSelect" || phase === "Anthem" || phase === "Champagne" ? null : {
       category: "Science & Nature",
       difficulty: "Hard",
       text: phase === "Throttle" ? null : "Which planet has the most known moons?",
@@ -65,5 +66,17 @@ export function sampleRedlineView(phase: RacePhase, deadlineUtc: string | null =
     } : null,
     attribution: "Questions: Open Trivia DB (CC BY-SA 4.0)",
     payouts: { cruiseGain: 1, pushGain: 3, pushLoss: 1, redlineGain: 4, redlineLoss: 2 },
+    podium: phase === "Anthem" || phase === "Champagne" ? podium(drivers, phase) : null,
   };
+}
+
+/** The top three players (JO/NOR, ALEX/PIA, KAI/HAM): charging in Anthem; three sprays so far in Champagne. */
+function podium(drivers: DriverRow[], phase: "Anthem" | "Champagne"): Podium {
+  const charges = phase === "Anthem" ? [0.45, 0.2, 0] : [0.1, 0.65, 0];
+  const sprays: Spray[][] = phase === "Anthem" ? [[], [], []] : [[{ seq: 1, strength: 0.8 }, { seq: 3, strength: 0.5 }], [{ seq: 2, strength: 0.15 }], []];
+  const steps: PodiumStep[] = drivers.filter((d) => d.player).slice(0, 3).map((d, i) => ({
+    step: i + 1, player: d.player!, name: d.playerName!, code: d.code, teamId: d.teamId, racePosition: d.position,
+    charge: charges[i]!, sprays: sprays[i]!,
+  }));
+  return { anthemCountry: "Great Britain", anthemId: "gb", steps };
 }

@@ -17,6 +17,9 @@ public sealed record TracksideShot(string Subject) : Shot;
 
 public sealed record FinishShot : Shot;
 
+/// <summary>Anthem and Champagne: in front of the podium (podium spec §5).</summary>
+public sealed record PodiumShot : Shot;
+
 /// <summary>
 /// §4.9: picks the TV camera shot from the host view. Players first: a candidate must involve a human,
 /// and AI-only candidates are used only when no human candidate exists.
@@ -30,6 +33,7 @@ public static class CameraDirector
         RacePhase.Throttle => new HeliShot([(BestPlaced(view.Drivers, humanOnly: true) ?? BestPlaced(view.Drivers, humanOnly: false))!.Code]),
         RacePhase.Reading or RacePhase.Question => ClosestBattle(view),     // Reading keeps the Question shot (audio spec §2)
         RacePhase.Reveal => RevealShot(view),
+        RacePhase.Anthem or RacePhase.Champagne => new PodiumShot(),
         _ => new FinishShot(),
     };
 

@@ -12,7 +12,25 @@ public sealed record RedlineHostView(
     DateTimeOffset? DeadlineUtc,
     FinishSummary? Finish,              // Chequered only
     string Attribution,                 // "Questions: Open Trivia DB (CC BY-SA 4.0)" or the fallback credit
-    Payouts Payouts);                   // the throttle payouts from RedlineRules, for the TV rules strip
+    Payouts Payouts,                    // the throttle payouts from RedlineRules, for the TV rules strip
+    Podium? Podium = null);             // Anthem and Champagne only (podium spec §2)
+
+/// <summary>Podium spec §2: the ceremony after the Chequered flag, for the top three players.</summary>
+/// <param name="AnthemCountry">The best player's driver's nationality as a display name ("Great Britain").</param>
+/// <param name="AnthemId">The anthem's key ("gb"), or null when only the REDLINE theme plays.</param>
+/// <param name="Steps">One per podium player, step 1 first.</param>
+public sealed record Podium(string AnthemCountry, string? AnthemId, IReadOnlyList<PodiumStep> Steps);
+
+/// <param name="Step">1..3, in race order of the players (ties keep the classification order).</param>
+/// <param name="RacePosition">The car's classified position among all 22 cars.</param>
+/// <param name="Charge">The bottle's pressure, 0..1, quantised to 0.05.</param>
+/// <param name="Sprays">Every spray so far, <see cref="Spray.Seq"/> increasing.</param>
+public sealed record PodiumStep(int Step, PlayerId Player, string Name, string Code, string TeamId,
+    int RacePosition, double Charge, IReadOnlyList<Spray> Sprays);
+
+/// <param name="Seq">1, 2, 3… across the whole podium, so the TV can tell a new spray from one it has shown.</param>
+/// <param name="Strength">0.15..1: the charge when the cork popped, at least <see cref="Celebration.MinSprayStrength"/>.</param>
+public sealed record Spray(int Seq, double Strength);
 
 /// <summary>
 /// The throttle payouts (§2.2) as the TV shows them: gains when right, losses (positive numbers) when wrong.
@@ -37,7 +55,7 @@ public sealed record DriverRow(
     bool PitLimiter, bool Connected);
 
 public enum DriverStatus { Unclaimed, Seated, Ready, Choosing, Locked, Limited, Answering, Answered }
-public enum RacePhase { DriverSelect, Grid, Throttle, Reading, Question, Reveal, Chequered }
+public enum RacePhase { DriverSelect, Grid, Throttle, Reading, Question, Reveal, Chequered, Anthem, Champagne }
 public enum RoundOutcome { Correct, Wrong, NoAnswer, SpunOut }
 
 public sealed record FinishSummary(IReadOnlyList<Award> Awards);
@@ -59,11 +77,12 @@ internal static class HostViews
     /// <param name="standings">Every car in display order (team order in Driver Select, ranking afterwards).</param>
     public static RedlineHostView Build(
         RacePhase phase, int round, RedlineRules rules, QuestionCard? question, int? correctIndex,
-        IEnumerable<Driver> standings, DateTimeOffset? deadline, FinishSummary? finish, string attribution) =>
+        IEnumerable<Driver> standings, DateTimeOffset? deadline, FinishSummary? finish, string attribution, Podium? podium = null) =>
         new(phase, round, rules.MaxRounds, rules.FinishLine, rules.CircuitId,
             question, phase == RacePhase.Reveal ? correctIndex : null,
             [.. standings.Select(d => Row(d, phase))],
-            deadline, phase == RacePhase.Chequered ? finish : null, attribution, Payouts.From(rules));
+            deadline, phase == RacePhase.Chequered ? finish : null, attribution, Payouts.From(rules),
+            phase is RacePhase.Anthem or RacePhase.Champagne ? podium : null);
 
     public static DriverRow Row(Driver d, RacePhase phase) =>
         new(d.Code, d.Seat.Driver.Number, d.Seat.Team.Id,

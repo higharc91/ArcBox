@@ -39,6 +39,9 @@ public static class HudText
             RacePhase.Reading => new HeaderText(Meta(round, q), difficulty, pips, q?.Text ?? "Listen…", "READING", "LISTEN"),
             RacePhase.Question => new HeaderText(Meta(round, q), difficulty, pips, q?.Text ?? "Choose your answer", "TIME"),
             RacePhase.Reveal => new HeaderText(Meta(round, q), difficulty, pips, q?.Text ?? "The answer is…", "NEXT"),
+            RacePhase.Anthem => new HeaderText([$"PODIUM · {round}"], null, 0,
+                view.Podium is { } p ? $"National anthem · {p.AnthemCountry}" : "National anthem", ""),
+            RacePhase.Champagne => new HeaderText([$"PODIUM · {round}"], null, 0, "Champagne!", ""),
             _ => new HeaderText([$"CHEQUERED FLAG · ROUND {view.Round}/{view.MaxRounds}"], null, 0, Headline(view), ""),
         };
     }

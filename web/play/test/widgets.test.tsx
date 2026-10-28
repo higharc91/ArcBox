@@ -205,6 +205,14 @@ describe("ControllerScreen", () => {
     expect(screen.getByText("Hold on")).toBeTruthy();
   });
 
+  it("shows a shake view's prompt until the Shake widget lands", () => {
+    const send = vi.fn();
+    const { container } = render(<ControllerScreen view={fixture("shake")} send={send} me="ALEX" game="redline" />);
+    expect(container.querySelector(".controller.k-shake .w-wait")).not.toBeNull();
+    expect(container.textContent).toContain("Pop the cork!");
+    expect(send).not.toHaveBeenCalled();
+  });
+
   it("forwards input to send", () => {
     const send = vi.fn();
     render(<ControllerScreen view={fixture("buttons")} send={send} me="ALEX" />);

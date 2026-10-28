@@ -51,6 +51,14 @@ public static class RedlineKit
         h.Input(player, new { selected = new[] { view.Options.First(pick).Id } });
     }
 
+    /// <summary>Anthem and Champagne: sends a <see cref="ShakeInput"/> as the phone does.</summary>
+    public static void Shake(GameHarness<RedlineGame> h, int player, double charge, bool fire = false) =>
+        h.Input(player, new { charge, fire });
+
+    /// <summary>From the Chequered flag: runs the clock to the end of the game, through the podium ceremony when there is one.</summary>
+    public static void RunToEnd(GameHarness<RedlineGame> h) =>
+        h.Advance(h.Game.Rules.Chequered + h.Game.Rules.Anthem + h.Game.Rules.Champagne);
+
     public static RedlineHostView View(GameHarness<RedlineGame> h) => h.HostView<RedlineHostView>();
 
     /// <summary>The row driven by <c>h.Players[player]</c>.</summary>

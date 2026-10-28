@@ -14,11 +14,7 @@ public static class TeamAccent
         new(() => Grid2026.Load().Teams.ToDictionary(t => t.Id, StringComparer.Ordinal));
 
     /// <summary>The accent as <c>#rrggbb</c>.</summary>
-    public static string Of(GridTeam team)
-    {
-        ArgumentNullException.ThrowIfNull(team);
-        return Luma(team.Livery.Top) > 200 ? team.Livery.Stripe : team.Livery.Top;
-    }
+    public static string Of(GridTeam team) => TeamColors.Accent(team);
 
     /// <summary>The accent for a <see cref="DriverRow.TeamId"/>; a neutral grey for an unknown id.</summary>
     public static string ById(string? teamId) =>
@@ -29,11 +25,5 @@ public static class TeamAccent
         teamId is not null && Teams.Value.TryGetValue(teamId, out var team) ? team : null;
 
     /// <summary>Perceived brightness 0–255 of a <c>#rrggbb</c> colour.</summary>
-    public static double Luma(string hex)
-    {
-        var h = hex.TrimStart('#');
-        if (h.Length != 6) return 0;
-        var n = Convert.ToInt32(h, 16);
-        return 0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255);
-    }
+    public static double Luma(string hex) => TeamColors.Luma(hex);
 }

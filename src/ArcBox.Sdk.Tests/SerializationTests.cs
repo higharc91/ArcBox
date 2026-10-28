@@ -13,6 +13,7 @@ public class SerializationTests
         new ChoiceView("Pick", [new Option("a", "A"), new Option("b", "B")], true, 2) { ViewId = "v3" },
         new ButtonsView("Tap a button", [new Option("btn1", "Button 1")]) { ViewId = "v4" },
         new DrawView("Draw a cat", ["#ff0000", "#00ff00"]) { ViewId = "v5" },
+        new ShakeView("Shake to build pressure!", "#ff8000", CanFire: true, InitialCharge: 0.35) { ViewId = "v6" },
     };
 
     [Fact]
@@ -53,6 +54,44 @@ public class SerializationTests
         var json = JsonSerializer.Serialize(view, ArcJson.Options);
         var back = JsonSerializer.Deserialize<ControllerView>(json, ArcJson.Options);
         Assert.Equal(json, JsonSerializer.Serialize(back, ArcJson.Options));
+    }
+
+    [Fact]
+    public void ShakeView_serializes_kind_shake_with_camelCase_fields()
+    {
+        ControllerView v = new ShakeView("Pop the cork!", "#dc0000", CanFire: true, InitialCharge: 0.4) { ViewId = "v7" };
+        var json = JsonSerializer.SerializeToElement(v, ArcJson.Options);
+        Assert.Equal("shake", json.GetProperty("kind").GetString());
+        Assert.Equal("Pop the cork!", json.GetProperty("prompt").GetString());
+        Assert.Equal("#dc0000", json.GetProperty("color").GetString());
+        Assert.True(json.GetProperty("canFire").GetBoolean());
+        Assert.Equal(0.4, json.GetProperty("initialCharge").GetDouble());
+    }
+
+    [Fact]
+    public void ShakeView_defaults_to_no_color_no_fire_and_empty_charge()
+    {
+        var v = new ShakeView("Shake!");
+        Assert.Null(v.Color);
+        Assert.False(v.CanFire);
+        Assert.Equal(0, v.InitialCharge);
+    }
+
+    [Fact]
+    public void ShakeInput_reads_charge_and_fire()
+    {
+        var input = new PlayerInput(JsonSerializer.SerializeToElement(new { charge = 0.75, fire = true }));
+        Assert.Equal(new ShakeInput(0.75, true), input.Read<ShakeInput>());
+        var chargeOnly = new PlayerInput(JsonSerializer.SerializeToElement(new { charge = 0.25 }));
+        Assert.Equal(new ShakeInput(0.25, false), chargeOnly.Read<ShakeInput>());
+    }
+
+    [Fact]
+    public void ShakeInput_without_a_numeric_charge_is_rejected()
+    {
+        Assert.Throws<JsonException>(() => new PlayerInput(JsonSerializer.SerializeToElement(new { fire = true })).Read<ShakeInput>());
+        Assert.Throws<JsonException>(() => new PlayerInput(JsonSerializer.SerializeToElement(new { pressed = "go" })).Read<ShakeInput>());
+        Assert.Throws<JsonException>(() => new PlayerInput(JsonSerializer.SerializeToElement(new { charge = "lots" })).Read<ShakeInput>());
     }
 
     [Fact]

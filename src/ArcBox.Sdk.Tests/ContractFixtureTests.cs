@@ -28,6 +28,7 @@ public class ContractFixtureTests
             new Option("redline", "REDLINE", "+4 if right · spin out if wrong"),
         ])),
         ["draw"] = View(new DrawView("Draw a cat", ["#111111", "#e10600"])),
+        ["shake"] = View(new ShakeView("Pop the cork! Shake again to reload", "#ff8000", CanFire: true, InitialCharge: 0.35)),
         ["lobby"] = new LobbyState(
             "BCDF",
             [new LobbyPlayer(new PlayerId("p1"), "ALEX", IsVip: true, Connected: true), new LobbyPlayer(new PlayerId("p2"), "MO", IsVip: false, Connected: false)],

@@ -84,8 +84,11 @@ public class FinishTests
         Assert.Equal(RacePhase.Chequered, h.Game.Phase);
 
         h.Advance(TimeSpan.FromSeconds(9));
-        Assert.Null(h.Results);
+        Assert.Equal(RacePhase.Chequered, h.Game.Phase);
         h.Advance(TimeSpan.FromSeconds(1));
+        Assert.Equal(RacePhase.Anthem, h.Game.Phase);                                // the podium ceremony (PodiumTests)
+        Assert.Null(h.Results);
+        h.Advance(h.Game.Rules.Anthem + h.Game.Rules.Champagne);
         Assert.NotNull(h.Results);
         Assert.Equal("Player1 (NOR) wins the race!", h.Results.Message);
     }
@@ -111,7 +114,7 @@ public class FinishTests
         Assert.Empty(v.Finish.Awards);                                                // nobody earned anything
         Assert.Equal("You finished P1 of 22.", Assert.IsType<WaitView>(h.PlayerView(2)).Message);
 
-        h.Advance(h.Game.Rules.Chequered);
+        RedlineKit.RunToEnd(h);
         Assert.NotNull(h.Results);
         Assert.Equal(4, h.Results.Scores.Count);
         // All four humans share P1, named in race (display) order.
@@ -132,7 +135,7 @@ public class FinishTests
             h.Advance(h.Game.Rules.Reveal);
         }
         Assert.Equal(RacePhase.Chequered, h.Game.Phase);
-        h.Advance(h.Game.Rules.Chequered);
+        RedlineKit.RunToEnd(h);
 
         var r = h.Results;
         Assert.NotNull(r);
@@ -164,7 +167,7 @@ public class FinishTests
         var best = RedlineKit.Row(h, 0);
         Assert.True(best.Position > 1);
 
-        h.Advance(h.Game.Rules.Chequered);
+        RedlineKit.RunToEnd(h);
         Assert.NotNull(h.Results);
         Assert.Equal($"{Surname(winner.Code)} (AI) wins the race · best player: Player1 (NOR), P{best.Position}", h.Results.Message);
         Assert.Equal(["Player1 (NOR)", "Player2 (VER)"], h.Results.Scores.Select(s => s.Name));
@@ -292,7 +295,13 @@ public class FinishTests
             Both(h => h.Advance(h.Game.Rules.Question));                              // player 4 never answers
             Both(h => h.Advance(h.Game.Rules.Reveal));
             phases.Add(a.Game.Phase);
-            if (a.Game.Phase == RacePhase.Chequered) Both(h => h.Advance(h.Game.Rules.Chequered));
+            if (a.Game.Phase != RacePhase.Chequered) continue;
+            Both(h => h.Advance(h.Game.Rules.Chequered));
+            Assert.Equal(RacePhase.Anthem, a.Game.Phase);
+            Both(h => RedlineKit.Shake(h, 0, 0.7));
+            Both(h => h.Advance(h.Game.Rules.Anthem));
+            Both(h => RedlineKit.Shake(h, 0, 0.7, fire: true));
+            Both(h => h.Advance(h.Game.Rules.Champagne));
         }
 
         Assert.True(b.IsOver);

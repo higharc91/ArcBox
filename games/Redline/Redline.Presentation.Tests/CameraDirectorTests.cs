@@ -36,6 +36,15 @@ public class CameraDirectorTests
     }
 
     [Fact]
+    public void Anthem_and_champagne_use_the_podium_shot()
+    {
+        var rows = new[] { Row("VER", 1, 28, human: true), Row("HAM", 2, 20) };
+
+        Assert.IsType<PodiumShot>(CameraDirector.Pick(View(RacePhase.Anthem, rows), View(RacePhase.Chequered, rows)));
+        Assert.IsType<PodiumShot>(CameraDirector.Pick(View(RacePhase.Champagne, rows), View(RacePhase.Anthem, rows)));
+    }
+
+    [Fact]
     public void Throttle_heli_on_best_placed_human()
     {
         var view = View(RacePhase.Throttle,

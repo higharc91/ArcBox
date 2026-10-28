@@ -16,7 +16,7 @@ const fixture = (name: string) => {
   return structuredClone(mod.default) as Record<string, unknown>;
 };
 
-const viewKinds = ["wait", "textEntry", "choice", "buttons", "draw"] as const;
+const viewKinds = ["wait", "textEntry", "choice", "buttons", "draw", "shake"] as const;
 
 describe("contract fixtures", () => {
   it("has a fixture for every view kind plus lobby and results", () => {
@@ -58,6 +58,19 @@ describe("contract fixtures", () => {
     const draw = parseControllerView(fixture("draw"));
     if (draw.kind !== "draw") throw new Error("expected draw");
     expect(draw.colors).toEqual(["#111111", "#e10600"]);
+  });
+
+  it("shake carries prompt, colour, canFire and initialCharge", () => {
+    const view = parseControllerView(fixture("shake"));
+    if (view.kind !== "shake") throw new Error("expected shake");
+    expect(view.prompt).toBe("Pop the cork! Shake again to reload");
+    expect(view.color).toBe("#ff8000");
+    expect(view.canFire).toBe(true);
+    expect(view.initialCharge).toBe(0.35);
+    // Colour is optional; the other fields are not.
+    expect(parseControllerView({ ...fixture("shake"), color: null }).kind).toBe("shake");
+    expect(() => parseControllerView({ ...fixture("shake"), canFire: "yes" })).toThrow(/canFire/);
+    expect(() => parseControllerView({ ...fixture("shake"), initialCharge: undefined })).toThrow(/initialCharge/);
   });
 
   it("an unknown kind throws", () => {

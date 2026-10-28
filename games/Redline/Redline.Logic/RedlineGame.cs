@@ -7,6 +7,7 @@ namespace Redline.Logic;
 /// <summary>
 /// REDLINE: a 22-car racing trivia game. Players claim seats in Driver Select, AI drives the rest,
 /// then every round is Throttle → Reading → Question → Reveal until a car crosses the line (spec §2, §3; Reading: audio spec §2).
+/// After the Chequered flag, the top three players take the podium: Anthem, then Champagne (podium spec §2).
 /// </summary>
 public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules = null, Grid? grid = null) : IGame
 {
@@ -29,6 +30,10 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
     private IReadOnlyList<(Driver Driver, int Position)> _ranked = [];
     /// <summary>Chequered only: the awards (§2.4).</summary>
     private FinishSummary? _finish;
+    /// <summary>Anthem and Champagne: the podium players, step 1 first, and the anthem's country.</summary>
+    private List<PodiumPlace> _podium = [];
+    private Country? _anthemCountry;
+    private int _spraySeq;
     private readonly Dictionary<PlayerId, Driver> _seatOf = new();
     private readonly Dictionary<PlayerId, bool> _connected = new();
 
@@ -69,6 +74,9 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         _standings = [.. _field];
         _ranked = [];
         _finish = null;
+        _podium = [];
+        _anthemCountry = null;
+        _spraySeq = 0;
         _seatOf.Clear();
         _connected.Clear();
         _claimRejected.Clear();
@@ -95,6 +103,9 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
                 case RacePhase.Question:
                     OnAnswer(from, input.Read<ChoiceInput>());
                     break;
+                case RacePhase.Anthem or RacePhase.Champagne:
+                    OnShake(from, input.Read<ShakeInput>());
+                    break;
             }
         }
         catch (JsonException)
@@ -114,7 +125,9 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
             case RacePhase.Reading: OpenQuestion(); break;
             case RacePhase.Question: Reveal(); break;
             case RacePhase.Reveal: EndReveal(); break;
-            case RacePhase.Chequered: _ctx.EndGame(Ranking.Results(_ranked)); break;
+            case RacePhase.Chequered: EndChequered(); break;
+            case RacePhase.Anthem: BeginChampagne(); break;
+            case RacePhase.Champagne: EndGame(); break;
         }
     }
 
@@ -134,7 +147,7 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
 
     public object HostView() => HostViews.Build(
         Phase, Round, Rules, QuestionCard(), InRound ? _answers[Round - 1].CorrectIndex : null, _standings,
-        _ctx?.TimerDeadline(PhaseTimer), _finish, _attribution);
+        _ctx?.TimerDeadline(PhaseTimer), _finish, _attribution, PodiumHostView());
 
     public ControllerView PlayerView(PlayerId id)
     {
@@ -383,6 +396,56 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         _ctx!.SetTimer(PhaseTimer, Rules.Chequered);
     }
 
+    /// <summary>After the Chequered flag: the podium ceremony, unless it is switched off or there are no players to stand on it.</summary>
+    private void EndChequered()
+    {
+        var podium = Celebration.PodiumDrivers(_ranked);
+        if (!Rules.Celebrate || podium.Count == 0)
+        {
+            EndGame();
+            return;
+        }
+
+        _podium = [.. podium.Select((d, i) => new PodiumPlace(i + 1, d))];
+        _anthemCountry = Countries.For(podium[0].Seat.Driver.Nationality);
+        Phase = RacePhase.Anthem;
+        _ctx!.SetTimer(PhaseTimer, Rules.Anthem);
+    }
+
+    // ---------------------------------------------------------------- Podium (podium spec §2)
+
+    private void BeginChampagne()
+    {
+        foreach (var place in _podium) place.ChargeAtChampagne = Celebration.Quantise(place.Charge);
+        Phase = RacePhase.Champagne;
+        _ctx!.SetTimer(PhaseTimer, Rules.Champagne);
+    }
+
+    private void EndGame() => _ctx!.EndGame(Ranking.Results(_ranked));
+
+    /// <summary>
+    /// Anthem and Champagne: a valid charge (finite; clamped to 0..1) replaces the stored one. In Champagne only, a fire
+    /// records a spray at the stored charge and empties the bottle, at most once per <see cref="RedlineRules.SprayCooldown"/>.
+    /// </summary>
+    private void OnShake(PlayerId from, ShakeInput input)
+    {
+        var place = _podium.Find(p => p.Player == from);
+        if (place is null || !double.IsFinite(input.Charge)) return;
+        place.Charge = Math.Clamp(input.Charge, 0, 1);
+
+        if (!input.Fire || Phase != RacePhase.Champagne) return;
+        var now = _ctx!.Now;
+        if (place.LastSprayAt is { } last && now - last < Rules.SprayCooldown) return;
+        place.Sprays.Add(new Spray(++_spraySeq, Celebration.Strength(place.Charge)));
+        place.LastSprayAt = now;
+        place.Charge = 0;
+    }
+
+    private Podium? PodiumHostView() =>
+        Phase is RacePhase.Anthem or RacePhase.Champagne && _anthemCountry is { } country
+            ? new Podium(country.Name, country.AnthemId, [.. _podium.Select(p => p.ToView())])
+            : null;
+
     // ---------------------------------------------------------------- Phone views
 
     private PlayerViewKey ViewKey(PlayerId id)
@@ -410,8 +473,23 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
             (RacePhase.Throttle or RacePhase.Reading or RacePhase.Question or RacePhase.Reveal, not null) => RoundView(driver, deadline),
             (RacePhase.Chequered, not null) => PlayerViews.Finished(
                 driver.Position, _field.Count, PlayerViews.RoundHeader(driver.Position, Round, Rules.MaxRounds), deadline),
+            (RacePhase.Anthem or RacePhase.Champagne, not null) => PodiumView(driver, deadline),
             _ => PlayerViews.Idle(),
         };
+    }
+
+    /// <summary>
+    /// Podium spec §2: a podium player shakes (and in Champagne fires) their bottle; everyone else watches. The view does not
+    /// depend on the charge, so it stays the same while the player shakes.
+    /// </summary>
+    private ControllerView PodiumView(Driver driver, DateTimeOffset? deadline)
+    {
+        var header = PlayerViews.RoundHeader(driver.Position, Round, Rules.MaxRounds);
+        var place = _podium.Find(p => p.Driver == driver);
+        if (place is null) return PlayerViews.WatchPodium(driver.Position, header, deadline);
+        return Phase == RacePhase.Anthem
+            ? PlayerViews.BuildPressure(driver.Seat.Team, header, deadline)
+            : PlayerViews.PopTheCork(driver.Seat.Team, place.ChargeAtChampagne, header, deadline);
     }
 
     /// <summary>The §3.3 round views for one seated player.</summary>

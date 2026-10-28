@@ -116,4 +116,11 @@ body.dev-body { background: #0a0a0f; }
 .award { background: var(--glass); border: 1px solid var(--edge); border-left: 4px solid var(--red); padding: 10px 14px; display: flex; flex-direction: column; }
 .award b { font: italic 900 24px "Titillium Web", sans-serif; }
 .award span { color: var(--dim); font-weight: 600; }
+.podium { display: flex; flex-direction: column; gap: 8px; }
+.podium .step { background: var(--glass); border: 1px solid var(--edge); border-left: 4px solid var(--red); padding: 10px 14px; display: flex; flex-direction: column; gap: 4px; }
+.podium .step small { color: var(--dim); font-weight: 700; letter-spacing: 2px; }
+.podium .step b { font: italic 900 24px "Titillium Web", sans-serif; }
+.podium .step span { color: var(--dim); font-weight: 600; }
+.podium .gauge { display: block; height: 6px; background: rgba(255, 255, 255, 0.1); }
+.podium .gauge i { display: block; height: 100%; }
 .rb-foot { color: var(--dim); font-size: 12px; font-weight: 600; letter-spacing: 1px; }

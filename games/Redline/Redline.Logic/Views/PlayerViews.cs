@@ -94,6 +94,23 @@ internal static class PlayerViews
     public static WaitView Finished(int position, int total, string header, DateTimeOffset? deadline) =>
         new($"You finished P{position} of {total}.") { Header = header, DeadlineUtc = deadline };
 
+    // ---------------------------------------------------------------- Podium (podium spec §2)
+
+    public const string BuildPressurePrompt = "Shake to build pressure!";
+    public const string PopTheCorkPrompt = "Pop the cork! Shake again to reload";
+
+    /// <summary>Anthem, podium player: shake to charge the bottle; it cannot fire yet.</summary>
+    public static ShakeView BuildPressure(GridTeam team, string header, DateTimeOffset? deadline) =>
+        new(BuildPressurePrompt, TeamColors.Accent(team)) { Header = header, DeadlineUtc = deadline };
+
+    /// <summary>Champagne, podium player: fire, starting from the charge built during the anthem.</summary>
+    public static ShakeView PopTheCork(GridTeam team, double initialCharge, string header, DateTimeOffset? deadline) =>
+        new(PopTheCorkPrompt, TeamColors.Accent(team), CanFire: true, InitialCharge: initialCharge) { Header = header, DeadlineUtc = deadline };
+
+    /// <summary>Anthem and Champagne, everyone off the podium.</summary>
+    public static WaitView WatchPodium(int position, string header, DateTimeOffset? deadline) =>
+        new($"P{position}. Watch the podium!") { Header = header, DeadlineUtc = deadline };
+
     public static string ResultMessage(Driver d, RedlineRules rules)
     {
         var p = d.Position;

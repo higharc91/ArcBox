@@ -95,6 +95,28 @@ describe("RedlineBoard", () => {
     expect(awards[0]).toContain("6 Redlines");
   });
 
+  it("shows the podium steps with their charge and spray counts", () => {
+    const { container, rerender } = render(<RedlineBoard view={sampleRedlineView("Anthem")} />);
+    expect(container.querySelector(".rb-head .q")!.textContent).toBe("National anthem · Great Britain");
+    const steps = () => [...container.querySelectorAll(".podium .step")].map((s) => s.textContent);
+    expect(steps()).toEqual([
+      expect.stringContaining("JO"),
+      expect.stringContaining("ALEX"),
+      expect.stringContaining("KAI"),
+    ]);
+    expect(steps()[0]).toContain("NOR");
+    expect(steps()[0]).toContain("45%");
+    expect(steps()[0]).toContain("0 sprays");
+    expect(container.querySelector(".awards")).toBeNull();
+
+    rerender(<RedlineBoard view={sampleRedlineView("Champagne")} />);
+    expect(container.querySelector(".rb-head .q")!.textContent).toBe("Champagne!");
+    expect(steps()[0]).toContain("2 sprays");
+    expect(steps()[1]).toContain("1 spray");
+    expect(steps()[1]).toContain("65%");
+    expect(container.querySelector<HTMLElement>(".podium .step .gauge i")!.style.width).toBe("10%");
+  });
+
   it("shows the claim board in Driver Select", () => {
     const { container } = render(<RedlineBoard view={sampleRedlineView("DriverSelect")} />);
     expect(rowOf(container, "NOR").classList.contains("claimed")).toBe(true);

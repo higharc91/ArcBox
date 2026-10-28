@@ -22,6 +22,7 @@ public sealed record Option(
 [JsonDerivedType(typeof(ChoiceView), "choice")]
 [JsonDerivedType(typeof(ButtonsView), "buttons")]
 [JsonDerivedType(typeof(DrawView), "draw")]
+[JsonDerivedType(typeof(ShakeView), "shake")]
 public abstract record ControllerView
 {
     public string ViewId { get; init; } = "";          // assigned by the server; games leave it empty
@@ -34,3 +35,12 @@ public sealed record TextEntryView(string Prompt, int MaxLength, string? Placeho
 public sealed record ChoiceView(string Prompt, IReadOnlyList<Option> Options, bool AllowMultiple = false, int? MaxSelections = null) : ControllerView;
 public sealed record ButtonsView(string? Prompt, IReadOnlyList<Option> Buttons) : ControllerView;
 public sealed record DrawView(string Prompt, IReadOnlyList<string>? Colors = null) : ControllerView;
+
+/// <summary>
+/// "Shake to charge, tap to fire": the phone shows a charge that builds as it is shaken (or tapped, without motion sensors)
+/// and sends <see cref="ShakeInput"/>. With <paramref name="CanFire"/> it also offers a fire button. The charge is kept on
+/// the phone, so the game can leave the view unchanged while the player shakes; <paramref name="InitialCharge"/> (0..1)
+/// seeds it when a new view arrives.
+/// </summary>
+/// <param name="Color">An accent for the widget (<c>#rrggbb</c>), or null for the default.</param>
+public sealed record ShakeView(string Prompt, string? Color = null, bool CanFire = false, double InitialCharge = 0) : ControllerView;

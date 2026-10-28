@@ -19,6 +19,8 @@ function Widget({ view, send }: { view: ControllerView; send: Send }) {
     case "choice": return <Choice view={view} send={send} />;
     case "textEntry": return <TextEntry view={view} send={send} />;
     case "draw": return <Draw view={view} send={send} />;
+    // Placeholder until the Shake widget lands: shows the prompt, sends nothing.
+    case "shake": return <Wait view={{ kind: "wait", viewId: view.viewId, message: view.prompt }} />;
   }
 }
 

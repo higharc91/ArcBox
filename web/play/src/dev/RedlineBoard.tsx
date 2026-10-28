@@ -10,6 +10,8 @@ const TITLES: Partial<Record<RacePhase, string>> = {
   Grid: "Lights out in a moment",
   Throttle: "Choose your throttle",
   Chequered: "Chequered flag",
+  Anthem: "National anthem",
+  Champagne: "Champagne!",
 };
 
 /** The tower's right-hand column heading; Grid and Chequered show only the gap. */
@@ -21,6 +23,8 @@ const COLUMN: Record<RacePhase, string> = {
   Question: "GAP · THROTTLE",
   Reveal: "GAP · RESULT",
   Chequered: "GAP",
+  Anthem: "GAP",
+  Champagne: "GAP",
 };
 
 const OUTCOME: Record<RoundOutcome, string> = { Correct: "✓", Wrong: "✗", NoAnswer: "MISS", SpunOut: "SPIN" };
@@ -107,7 +111,9 @@ export function RedlineBoard({ view }: { view: RedlineHostView }) {
   const question = phase === "Throttle" || questionShown(phase) ? view.question : null;
   const leader = view.drivers.reduce((m, d) => Math.max(m, d.distance), 0);
   const humans = view.drivers.filter((d) => d.player);
-  const title = questionShown(phase) && question?.text ? question.text : TITLES[phase] ?? phase;
+  const title = questionShown(phase) && question?.text ? question.text
+    : phase === "Anthem" && view.podium ? `National anthem · ${view.podium.anthemCountry}`
+    : TITLES[phase] ?? phase;
   const roundLabel = view.round > 0 ? `ROUND ${view.round}/${view.maxRounds}` : `${view.circuitId.toUpperCase()} · ${view.maxRounds} ROUNDS`;
   const left = view.deadlineUtc ? remainingSeconds(view.deadlineUtc, now) : null;
   const decided =
@@ -207,6 +213,23 @@ export function RedlineBoard({ view }: { view: RedlineHostView }) {
 
           {phase === "DriverSelect" ? (
             <div class="summary">{view.drivers.filter((d) => !d.player).length} seats left · AI takes the rest</div>
+          ) : null}
+
+          {(phase === "Anthem" || phase === "Champagne") && view.podium ? (
+            <div class="podium">
+              {view.podium.steps.map((s) => {
+                const color = teamColorById(s.teamId) ?? "#888";
+                const pct = `${Math.round(s.charge * 100)}%`;
+                return (
+                  <div class="step" key={s.player} style={{ borderLeftColor: color }}>
+                    <small>STEP {s.step} · P{s.racePosition} · {s.code}</small>
+                    <b>{s.name}</b>
+                    <span class="gauge" title={`pressure ${pct}`}><i style={{ width: pct, background: color }} /></span>
+                    <span>{pct} · {s.sprays.length} {s.sprays.length === 1 ? "spray" : "sprays"}</span>
+                  </div>
+                );
+              })}
+            </div>
           ) : null}
 
           {phase === "Chequered" && view.finish ? (

@@ -6,11 +6,13 @@ Usage:  python3 -I games/Redline/tools/refresh_grid.py PATH_TO_F1DB [--out FILE]
 Reads (relative to the F1DB checkout):
   src/data/seasons/2026/races/*/race-results.yml   latest race: driverNumber, driverId, constructorId
   src/data/seasons/2026/driver-standings.yml       position, driverId, points
-  src/data/drivers/<id>.yml                        name, abbreviation
+  src/data/drivers/<id>.yml                        name, abbreviation, nationalityCountryId
 
 The team set and order, the livery blocks and every other top-level key of the
 existing grid file are kept, as is the display name of any driver id already in
-it (F1DB's name is used only for new ids, so e.g. "Alex Albon" stays as written).
+it (F1DB's name is used only for new ids, so e.g. "Alex Albon" stays as written),
+and likewise its nationality (ISO 3166-1 alpha-2): only a new id maps F1DB's
+nationalityCountryId through NATIONALITY, and an unmapped country is an error.
 Drivers, codes and numbers come from the latest race result; points from the
 standings; aiSkill = 0.85 + 0.30*sqrt(points/leader), rounded to 3 places.
 Standard library only (a tiny regex reader stands in for YAML).
@@ -25,6 +27,26 @@ from pathlib import Path
 
 SEASON = 2026
 DEFAULT_GRID = Path(__file__).resolve().parent.parent / "Redline.Logic" / "Data" / "grid2026.json"
+
+# F1DB country id -> ISO 3166-1 alpha-2, for the drivers' nationalities. Every code also needs an entry in
+# Redline.Logic's Countries table (display name and anthem id); add both together when a new nationality arrives.
+NATIONALITY = {
+    "argentina": "AR",
+    "australia": "AU",
+    "brazil": "BR",
+    "canada": "CA",
+    "finland": "FI",
+    "france": "FR",
+    "germany": "DE",
+    "italy": "IT",
+    "mexico": "MX",
+    "monaco": "MC",
+    "netherlands": "NL",
+    "new-zealand": "NZ",
+    "spain": "ES",
+    "thailand": "TH",
+    "united-kingdom": "GB",
+}
 
 
 def scalar(text, key):
@@ -90,7 +112,17 @@ def read_driver(root, driver_id):
     name, code = scalar(text, "name"), scalar(text, "abbreviation")
     if not name or not code:
         sys.exit(f"error: {f} lacks name/abbreviation")
-    return name, code
+    return name, code, scalar(text, "nationalityCountryId")
+
+
+def nationality(driver_id, country_id, prev):
+    """The existing grid value when there is one, else F1DB's nationalityCountryId as ISO alpha-2."""
+    if prev and prev.get("nationality"):
+        return prev["nationality"]
+    iso = NATIONALITY.get(country_id or "")
+    if not iso:
+        sys.exit(f"error: driver '{driver_id}' has nationalityCountryId {country_id!r}, which NATIONALITY does not map")
+    return iso
 
 
 def ai_skill(points, leader):
@@ -112,11 +144,13 @@ def build(root, grid):
         drivers = []
         for r in rows:
             did = r["driverId"]
-            name, code = read_driver(root, did)
+            name, code, country = read_driver(root, did)
             pts = standings.get(did, 0.0)
             prev = old.get(did)
             drivers.append({
-                "id": did, "name": prev[2]["name"] if prev else name, "code": code, "number": int(r["driverNumber"]),
+                "id": did, "name": prev[2]["name"] if prev else name, "code": code,
+                "nationality": nationality(did, country, prev[2] if prev else None),
+                "number": int(r["driverNumber"]),
                 "tcam": prev[2]["tcam"] if prev else "black",
                 "points": pts, "aiSkill": ai_skill(pts, leader),
             })

@@ -3,7 +3,7 @@ using Redline.Presentation.Hud;
 
 namespace Redline.Presentation.Audio;
 
-public enum CommentaryKind { Intro, LightsOut, RoundIntro, Answer, Event, Finish }
+public enum CommentaryKind { Intro, LightsOut, RoundIntro, Answer, Event, Finish, Podium }
 
 /// <summary>One spoken line. Lines in a list are in speaking order; a higher <paramref name="Priority"/> matters more.</summary>
 public sealed record CommentaryLine(string Text, CommentaryKind Kind, int Priority);
@@ -14,7 +14,7 @@ public sealed record CommentaryLine(string Text, CommentaryKind Kind, int Priori
 /// </summary>
 public static class Commentary
 {
-    /// <summary>Scripted lines: the intro, lights out, the round, the answer and the finish.</summary>
+    /// <summary>Scripted lines: the intro, lights out, the round, the answer, the finish and the podium.</summary>
     public const int Scripted = 2;
 
     /// <summary>A player's spin, lead, charge or sight of the flag.</summary>
@@ -48,10 +48,26 @@ public static class Commentary
                 return Reveal(view, grid);
             case RacePhase.Chequered:
                 return Finish(view, grid);
+            case RacePhase.Anthem:
+                return Anthem(view, grid);
+            case RacePhase.Champagne:
+                return [new("Let the champagne fly!", CommentaryKind.Podium, Scripted)];
             default:
                 return [];
         }
     }
+
+    /// <summary>Podium spec §5: the anthem's country, for the player on the top step and their team.</summary>
+    private static IReadOnlyList<CommentaryLine> Anthem(RedlineHostView view, Grid grid)
+    {
+        if (view.Podium is not { Steps: [var top, ..] } podium) return [];
+        var name = top.Name is { Length: > 0 } typed ? SpokenName(typed) : top.Code;
+        var team = Seat(grid, top.Code)?.Team.Name ?? "car";
+        return [new($"The national anthem of {CountryPhrase(podium.AnthemCountry)}, for {name} in the {team}!", CommentaryKind.Podium, Scripted)];
+    }
+
+    /// <summary>A country as it is said mid-sentence: "the Netherlands", otherwise the name as shown.</summary>
+    private static string CountryPhrase(string country) => country == "Netherlands" ? "the Netherlands" : country;
 
     private static CommentaryLine Intro(RedlineHostView view)
     {
