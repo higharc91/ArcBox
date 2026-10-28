@@ -22,10 +22,19 @@ whenever it changes.
 | Anti-aliasing | MSAA 4× + SMAA, debanding | same | FXAA |
 | Anisotropic filtering | 16× | 16× | 4× |
 | Trees | 1,500 | 1,500 | 750 |
+| Surroundings: parked cars, shrubs, groves, distant clumps | 990 cars, 1,300 shrubs, 750 groves, 3,600 clumps | same | half of each, no shadows |
 | Cars ([Blender model](blender-models.md)) | LOD0 (~68k tris) within 60 m, LOD1 (~16k) beyond | same | LOD1 everywhere |
 | Frame cap | 144, VSync off | same | same |
 
 Exponential fog with aerial perspective, glow and AgX tonemapping are on in every preset.
+
+The surroundings (`World/Surroundings.cs`, placed by `Redline.Presentation.Course.Surroundings`) are the same in every
+preset apart from that row: the dry-grass terrain material, the far land out to 8.5 km, service roads, car parks,
+hospitality compounds, the Grand Plaza and amphitheatre by the Observation Tower, treelines and woods out to the
+horizon and the Austin skyline. They draw about 0.74 M triangles in all on Ultra and High (about 0.42 M on Low): the
+props instanced, one MultiMesh per variant, about 50 draw calls before shadow passes. Planning and building them
+takes 1–2 s of main-thread work in the sandbox when the world is first built (cached for the next race).
+`REDLINE_NO_SURROUNDINGS=1` leaves them out (comparison shots).
 
 **Which preset runs:** `--preset=ultra|high|low` on the command line, else the one saved in `user://settings.json`
 (`"preset"`, written by F2), else Ultra. On Windows the file is `%APPDATA%\Godot\app_userdata\ArcBox\settings.json`, on

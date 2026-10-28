@@ -356,32 +356,38 @@ class Head:
         return sto, upper, lower
 
     def _lips(self, x, y):
+        """The lips' relief. The vermilion bands close to nothing at the corners (lip_lines), so the relief fades out
+        (C1) over the outer fifth of the mouth and is zero from the corner outwards: any relief left there is a step
+        or a thin fin across the corner line, whose finite-difference normals showed as dark marks at the corners.
+        The rolled-in stomion has the same height from above and below, so the mouth line has no step either."""
         mw = self.mw
         ax = abs(x)
         d = 0.0
         sto, upper, lower = self.lip_lines(min(ax, mw))
         lat = max(0.0, 1 - (ax / (mw * 1.12)) ** 2)
+        fade = smoothstep(mw, 0.78 * mw, ax)
+        lat_u, lat_l = lat ** 0.8 * fade, lat ** 0.7 * fade
         full = 1 + 0.35 * self.lfull
         # Upper lip: from the subnasale down to the vermilion border, then rolled in to the stomion.
         ys = self.y_sub
         a_u, a_l = 0.0064 * full, 0.0072 * full
         if ys > y >= upper:
             q = (y - upper) / max(ys - upper, 1e-4)
-            d += (a_u * (1 - q) ** 1.35 + 0.0018 * bump(0, q - 0.75, 1, 0.25)) * lat ** 0.8
+            d += (a_u * (1 - q) ** 1.35 + 0.0018 * bump(0, q - 0.75, 1, 0.25)) * lat_u
             v = smoothstep(ys, ys - 0.004, y) * (1 - smoothstep(upper + 0.003, upper, y))
             d += v * (0.0010 * bump(ax - 0.0052, 0, 0.0032, 1) - 0.0006 * bump(x, 0, 0.003, 1))
         elif upper > y >= sto:
-            sv = (y - sto) / max(upper - sto, 1e-4)
-            d += (0.0030 + (a_u - 0.0030) * math.sin(min(1.0, sv / 0.8) * math.pi / 2)) * lat ** 0.8
+            sv = (y - sto) / max(upper - sto, 1e-9)
+            d += (0.0030 + (a_u - 0.0030) * math.sin(min(1.0, sv / 0.8) * math.pi / 2)) * lat_u
         elif sto > y > lower - 0.009:
-            sv = (sto - y) / max(sto - lower, 1e-4)
+            # 0.003 at the stomion (as the upper lip), rising to the lower lip's fullness, then down to the chin.
+            sv = (sto - y) / max(sto - lower, 1e-9)
             if sv <= 1:
-                v = 0.0030 + (a_l - 0.0030) * math.sin(math.pi * sv / 1.12)
+                d += 0.0030 * lat_u + (a_l - 0.0030) * math.sin(math.pi * sv / 1.12) * lat_l
             else:
-                border = 0.0030 + (a_l - 0.0030) * math.sin(math.pi / 1.12)
+                border = 0.0030 * lat_u + (a_l - 0.0030) * math.sin(math.pi / 1.12) * lat_l
                 q = (lower - y) / 0.009
-                v = border * (1 - smoothstep(0, 1, q)) - 0.0006 * bump(0, q - 0.6, 1, 0.4)
-            d += v * lat ** 0.7
+                d += border * (1 - smoothstep(0, 1, q)) - 0.0006 * bump(0, q - 0.6, 1, 0.4) * lat_l
         # The mouth line and the corners.
         d -= 0.0024 * bump(0, y - sto, 1, 0.0011) * (1 - smoothstep(mw * 0.9, mw * 1.05, ax))
         d -= 0.0008 * bump(ax - mw, y - sto - 0.0006, 0.004, 0.003)
@@ -415,9 +421,13 @@ class Head:
         if n.length < 1e-14:
             return Vector((0, 1, 0))
         n.normalize()
-        p = self.pos(u, y)
-        if n.dot(Vector((p.x, 0.3 * (p.y - 0.0), p.z))) < 0:
-            n = -n
+        if b.z > 0.04 and self.eye_region(b.x, y):
+            # Round the eyes the lids fold over the eyeball (the map folds), so orient by a guess there.
+            p = self.pos(u, y)
+            return n if n.dot(Vector((p.x, 0.3 * p.y, p.z))) >= 0 else -n
+        # Elsewhere du x dv already points out: u runs round the head (+x at the front), y up, and the features
+        # displace horizontally, so the map never folds. Testing it against the guess instead flipped steep walls
+        # that face up, such as the lower lip rolling into the mouth line, into the head (dark sawtooth teeth).
         return n
 
     def spacing(self, u, y):

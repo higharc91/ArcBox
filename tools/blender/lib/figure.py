@@ -138,14 +138,18 @@ def hash01(*ints):
 
 def adaptive_points(u0, u1, v0, v1, spacing, base, max_depth=7):
     """Quadtree samples of [u0, u1] x [v0, v1]: a cell splits while it is larger than 1.25 x the smallest spacing
-    found at its centre and corners. Returns a sorted list of (u, v) (the rectangle's corners always included)."""
+    found at its centre and corners. Returns a sorted list of (u, v) (the rectangle's corners always included).
+
+    The rounding (which merges cell corners shared by neighbours) is clamped to the rectangle: a sample on an edge
+    rounded a hair outside it falls outside the triangulated face, and `surface` drops every triangle touching it,
+    leaving long slivers to the corners along that edge (on the helmet, a seam down the lower sides)."""
     nu = max(1, math.ceil((u1 - u0) / base))
     nv = max(1, math.ceil((v1 - v0) / base))
     du, dv = (u1 - u0) / nu, (v1 - v0) / nv
     pts = set()
 
     def key(u, v):
-        return (round(u, 7), round(v, 7))
+        return (clamp(round(u, 7), u0, u1), clamp(round(v, 7), v0, v1))
 
     def visit(ua, ub, va, vb, depth):
         um, vm = 0.5 * (ua + ub), 0.5 * (va + vb)
@@ -200,14 +204,29 @@ def _clip_rect(poly, u0, u1, v0, v1):
     return p
 
 
+def _densify(points, max_edge, closed):
+    """Splits every segment of a polyline [(u, v)] longer than max_edge into equal parts."""
+    out = []
+    n = len(points)
+    for i in range(n if closed else n - 1):
+        (ua, va), (ub, vb) = points[i], points[(i + 1) % n]
+        k = max(1, math.ceil(math.hypot(ub - ua, vb - va) / max_edge))
+        out += [(ua + (ub - ua) * j / k, va + (vb - va) * j / k) for j in range(k)]
+    if not closed:
+        out.append(points[-1])
+    return out
+
+
 def surface(pos, domain, points, base_slot, regions=(), creases=(), normal=None, h=1e-4, weld=1e-6,
-            keep=None):
+            keep=None, max_edge=None):
     """Triangulates `points` (u, v) over `domain` (u0, u1, v0, v1) and maps them through pos(u, v).
 
     regions: [(slot, polygon [(u, v)])], later ones on top; each polygon becomes exact edges and its triangles take
     its slot. creases: polylines [(u, v)] that must appear as edges (no slot change). normal(u, v) -> Vector gives
     the shading normal (default: finite differences of pos, step h). keep(u, v) -> bool can drop triangles (by
     centroid) to cut holes. Vertices that land on the same 3D point (a pole, a seam) are welded.
+    max_edge (domain units) splits longer region and crease segments: a constraint edge stays one straight 3D
+    chord, so a long one sinks below a curved surface (and drags thin triangles down with it).
     Returns (Mesh, normals per vertex).
     """
     u0, u1, v0, v1 = domain
@@ -221,6 +240,8 @@ def surface(pos, domain, points, base_slot, regions=(), creases=(), normal=None,
     region_slots = []
     for slot, poly in regions:
         poly = _clip_rect(poly, u0, u1, v0, v1)
+        if max_edge and len(poly) >= 3:
+            poly = _densify(poly, max_edge, True)
         area = sum(poly[i - 1][0] * poly[i][1] - poly[i][0] * poly[i - 1][1] for i in range(len(poly)))
         if area < 0:
             poly = poly[::-1]   # the triangulator wants counter-clockwise faces
@@ -233,6 +254,8 @@ def surface(pos, domain, points, base_slot, regions=(), creases=(), normal=None,
         faces_in.append(list(range(b, b + len(poly))))
         region_slots.append(slot)
     for line in creases:
+        if max_edge and len(line) >= 2:
+            line = _densify(line, max_edge, False)
         b = len(verts)
         verts += [Vector(p) for p in line]
         edges_in += [(b + i, b + i + 1) for i in range(len(line) - 1)]

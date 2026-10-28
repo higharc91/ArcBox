@@ -162,7 +162,7 @@ missing or incomplete; `RedlineAssets.Prewarm` starts loading them all in the ba
 | File | Budget | Now | Nodes |
 |---|---|---|---|
 | `drivers/<CODE>.glb` (22) | ≤ 40k | 26.5k–33k triangles (Hamilton 39.1k: locs), 0.53–0.76 MB (~13.6 MB for all 22) | `legs`, `spine` › `torso`, `number_suit`, `name_suit`, `head` › (`face`, `hair`, `hair_top`, `locs`, `cap` › `number_cap`), `arm_r` › `forearm_r` › `hand_r` › `bottle`, `arm_l` › `forearm_l` › `hand_l` |
-| `helmets/<CODE>.glb` (22) | ≤ 12k | 8.6k–9.4k triangles, ~0.17 MB (~3.7 MB for all 22) | `helmet` |
+| `helmets/<CODE>.glb` (22) | ≤ 12k | 9.9k–10.8k triangles, ~0.2 MB (~4.5 MB for all 22) | `helmet` |
 
 **Likeness data.** The user chose face likenesses for this private build. `data/drivers.json` holds, per driver code,
 height, build, skin tone, eye colour, hair (colour, texture, style, length, shape: fringe, sweep, part, volume,
@@ -222,6 +222,53 @@ a usable glb it draws the procedural figure as before. `CarFactory.Helmet` puts 
 `helmet` empty (gloss clearcoat paint, iridium visor), else the procedural helmet. `CarFactory.Prewarm` starts
 loading the helmets and figures in the background. Tests: `Redline.Presentation.Tests/Models/DriverModelTests.cs`.
 
+## The surroundings (`surroundings.py`, group `surroundings`)
+
+COTA's surroundings (COTA upgrade spec §2.4). `Redline.Presentation.Course.Surroundings.Plan` decides where everything
+goes; these are the props it places. Every prop is drawn as a MultiMesh (one per variant), so the variants are one
+node and one mesh each, origin on the ground.
+
+| File | Budget | Now | Nodes |
+|---|---|---|---|
+| `surroundings/amphitheatre.glb` | ≤ 40k | ~5.5k triangles, ~0.4 MB | `amphitheatre` |
+| `surroundings/plaza_props.glb` | ≤ 8k | ~2.2k | `light_pole`, `planter`, `kiosk`, `flag_pole` |
+| `surroundings/tents.glb` | ≤ 8k | ~2.7k | `marquee`, `pagoda` |
+| `surroundings/parked_cars.glb` | ≤ 1k | 4 × 132 | `sedan`, `suv`, `pickup`, `hatch` |
+| `surroundings/shrubs.glb` | ≤ 400 | 100–112 each | `shrub_round`, `shrub_juniper`, `shrub_low` |
+| `surroundings/groves.glb` | ≤ 700 | 316 + 280 | `grove_oak`, `grove_cedar` |
+| `surroundings/far_clumps.glb` | ≤ 60 | 36 | `far_clump` |
+| `surroundings/skyline.glb` | ≤ 8k | ~1.8k | `skyline` |
+
+- **Amphitheatre** beside the Observation Tower (origin at the middle of the stage's front edge, +Z towards the
+  audience; footprint -42..42 × -16..48, everything skirted down to y = -8 because the TV stands it on the highest
+  ground under it): eleven concentric lawn terraces with concrete risers fanning ±50° from behind the stage, three
+  aisles, a rim walkway, earth berms, a paved floor, the stage with a REDLINE/ARCBOX back wall, two LED screens, the
+  covered stage (a white saddle-shaped tensile canopy on four masts with ties and an edge cable, a lighting truss
+  under it) and a mixing riser on the middle aisle.
+- **Plaza props:** an 8 m light pole with an LED head and a red banner, a concrete planter with a small tree, a food
+  kiosk (counter and red awning towards +Z, a REDLINE roof sign) and a 12 m flag pole with a red REDLINE flag.
+- **Tents:** a 21 × 11 m hospitality marquee (aluminium frame, glazing over a canvas dado, a gable roof, a red fascia
+  with REDLINE/ARCBOX lettering, a deck) and a 6 × 6 m pagoda with a red valance. Length along X.
+- **Parked cars:** a sedan, an SUV, a pickup and a hatchback at about 130 triangles each (+Z forward): a side-profile
+  body, a narrower glasshouse with a painted roof, six-sided wheels. Godot tints `car_paint` per instance from a
+  car-park palette (white, black, greys and silver first).
+- **Shrubs:** Texas scrub at unit scale (a round bush, a juniper, a low spreading clump), about 100 triangles each;
+  `shrub` takes the per-instance tint.
+- **Groves and far clumps:** tree clumps at unit scale for MultiMesh: `grove_oak` (four broad flattened crowns and
+  a middle one over trunk stubs) and `grove_cedar` (five tall narrow crowns), planted along the creek lines, property
+  boundaries and county roads; `far_clump`, one 36-triangle dome, for the woods out to the horizon. `grove` takes the
+  per-instance green.
+- **Skyline:** a generic downtown silhouette at real scale (a broad low-rise base, about 30 towers up to 215 m with
+  setbacks, pointed crowns and a spire, two cranes; no real building is copied). The TV stands it 6.5 km NNW of the
+  circuit on the far land, scaled by 6.5/18 so it subtends what Austin does from 18 km, and the fog makes it hazy.
+
+Material slots: `lawn paving concrete stage panel brand_white screen canopy steel steel_dark led_warm led_white red
+canvas glass deck kiosk bark shrub grove car_paint car_glass car_dark skyline skyline_glass`; `World/Surroundings.cs`
+binds its own (lawn, paving, canopy, screen, canvas, deck, kiosk, shrub, grove, the car slots, skyline) and
+`SetMaterials` the shared ones. Contracts: `Redline.Presentation.Models.SurroundingsModels`; tests:
+`Redline.Presentation.Tests/Course/SurroundingsModelTests.cs` (contracts, import files, and the whole surroundings'
+drawn triangles against the course budget).
+
 ## The `lib` API
 
 All geometry helpers work in the Godot frame. Shared modules belong to Task 1; later work adds **new** modules (e.g.
@@ -235,7 +282,7 @@ the same file.
 | `lib.mesh` | `Mesh` (`vert`, `face(idx, slot, uv=None, smooth=True)`, `extend(other, matrix)`, `transformed(m)`, `mirrored_x()`, `paint(slot)`, `orient_closed()`, `orient_outward(fn)`, `bounds()`), `merge(*meshes)`; transforms `T`, `Rx`, `Ry`, `Rz`, `S`; `spline(points, per)`; `Section` + `densify`, `section_at`, `ring_rels`, `loft(stations, per, rels, mat_fn, z_breaks, z_grooves, rel_grooves, ...)`; `airfoil`, `Span` + `wing(spans, slot, n, per)`; `plate(outline, thickness, origin, u, v, slot)`, `rounded_outline(points, radius)`; `tube(points, ra, rb, sides, major, slot, caps, per, taper)`; `lathe(profile, segs, slot_or_fn, outward)`; `box`, `ellipsoid`, `cylinder` |
 | `lib.blend` | `reset()`, `make(mesh, name) -> obj` (slots, smooth flags, UVs; faces without UVs get a planar projection), `subsurf(obj, levels)`, `bevel(obj, width, segments, angle)`, `boolean(obj, cutter)` (exact solver, cut faces take the cutter's slot), `weld`, `apply(obj)`, `mark_sharp(obj, angle)`, `finish(obj, angle)` (apply + sharp edges: the last step for every part), `join(objs, name)` (merges slots by name), `set_origin(obj, pos)`, `empty(name, pos, right, up, normal)`, `parent(child, parent)`, `delete(obj)`, `triangles(obj)`, `slot_names(obj)` |
 | `lib.arch` | `frame(origin, right, up, normal)`, `prism(profile_zy, x0, x1, slot)`, `stair_profile(n, run, rise, base)`, `beam(a, b, w, h, slot, up)`, `truss(a, b, w, h, bay, chord, brace, slot, up)`, `ring(points, r, sides, slot)`, `blob(centre, radii, seed, slot, ...)`, `text(body, height, depth, slot, align, shear)` (brand-face lettering, reads from +Z), `repaint(mesh, slot, where)`, `quad(a, b, c, d, slot, uv)` (podium and landmarks) |
-| `lib.figure` | `adaptive_points(u0, u1, v0, v1, spacing, base)` (quadtree samples), `surface(pos, domain, points, base_slot, regions, creases, normal, keep)` (constrained Delaunay with exact paint regions, analytic normals), `grid_surface(pos, us, vs, slot_fn, normal, wrap_u)`, `make_smooth(part, name)` (custom split normals, no UVs), `concat`, `transform`, `weld_mesh`, `flat_normals`; `Curve` (monotone cubic), `smoothstep`, `bump`, `clamp`, `lerp`, `seg_dist`; deterministic `fbm`, `cells`, `hash01` (drivers and helmets) |
+| `lib.figure` | `adaptive_points(u0, u1, v0, v1, spacing, base)` (quadtree samples), `surface(pos, domain, points, base_slot, regions, creases, normal, keep, max_edge)` (constrained Delaunay with exact paint regions, analytic normals; `max_edge` splits long region/crease edges so they follow a curved surface), `grid_surface(pos, us, vs, slot_fn, normal, wrap_u)`, `make_smooth(part, name)` (custom split normals, no UVs), `concat`, `transform`, `weld_mesh`, `flat_normals`; `Curve` (monotone cubic), `smoothstep`, `bump`, `clamp`, `lerp`, `seg_dist`; deterministic `fbm`, `cells`, `hash01` (drivers and helmets) |
 | `lib.head` | `Head(traits)` (`pos(u, y)`, `normal(u, y)`, `point(x, y)`, landmarks, `aperture`, `lip_regions`, `facial_hair_regions`), `skin`, `eyes`, `brows`, `ears`, `studs`; head-local frame: eye line y = 0, ear canal z = 0 |
 | `lib.hair` | `Style(traits)`, `shell(head, style, split)` (`hair` / `hair_top` at `cap_band`), `locs`, `beard` |
 | `lib.body` | `Rig(height, build)` (joints, `ik_elbow`), `torso`, `legs`, `boot`, `arm`, `right_hand`, `left_hand`, `bottle`, `flag_patch`, `surface_point`, `limb` |
@@ -271,6 +318,7 @@ Nothing has to be registered, so new modules never edit `build.py`. Planned owne
 | 1 (done) | `car.py` | `car_2026.glb`, `car_2026_lod1.glb` | `ModelLibrary`, `CarFactory`, `CarMaterials`, `CarModel` |
 | 2 (done) | `driver.py`, `helmet.py`, `data/drivers.json`, `lib/{figure,head,hair,body,cap,flags,studio}.py` (group `drivers`) | `drivers/<CODE>.glb`, `helmets/<CODE>.glb` | `PodiumDriver` (from `PodiumSet`), `FigureMaterials`, `DriverModel`, `HelmetModel`; `CarFactory.Helmet` puts `helmets/<CODE>.glb` at the car's `helmet` empty |
 | 3 (done) | `podium.py`, `landmarks.py`, `lib/arch.py` (groups `podium`, `landmarks`) | `podium.glb`, `landmarks/*.glb` | `PodiumStage` (from `PodiumSet`), `Landmarks`, `StartGantry`, `Trees`, `SetPieces`, `SetMaterials` |
+| COTA 4 (done) | `surroundings.py` (group `surroundings`) | `surroundings/*.glb` | `Surroundings`, `TerrainMaterials`; placement in `Redline.Presentation.Course.Surroundings` |
 
 For the Godot side, load through `ModelLibrary.Prewarm("drivers/NOR.glb")` and
 `ModelLibrary.Instantiate("drivers/NOR.glb", node => missingNames)`; put the naming contract in

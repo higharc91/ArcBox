@@ -8,7 +8,8 @@ public sealed record BuiltWorld(Node3D Root, WorldEnvironment Environment, Direc
 
 /// <summary>
 /// Assembles the static COTA world from <see cref="RedlineAssets"/>: sky and environment, the sun, track layers, terrain,
-/// landmarks and trees. Godot meshes for the track and terrain are converted once and cached for later scene instances.
+/// landmarks, trees and the surroundings (<see cref="Surroundings"/>). Godot meshes for the track and terrain are converted
+/// once and cached for later scene instances.
 /// </summary>
 public static class WorldBuilder
 {
@@ -95,7 +96,10 @@ public static class WorldBuilder
 
         var landmarks = Landmarks.Build(a, out var gantry);
         root.AddChild(landmarks);
-        var trees = Trees.Build(a, Landmarks.Footprints(a));
+        var footprints = Landmarks.Footprints(a);
+        var trees = Trees.Build(a, footprints);
+        root.AddChild(Surroundings.Build(a, footprints, trees, root.GetNode<MeshInstance3D>("Terrain")));
+        Surroundings.SetDensity(root, preset);
         Trees.SetFraction(trees, RenderPreset.TreeFraction(preset));
         root.AddChild(trees);
 

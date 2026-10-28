@@ -35,6 +35,7 @@ A0, A1 = -math.pi / 2, 1.5 * math.pi
 B0, B1 = -math.pi / 2 + 1e-4, math.pi / 2 - 1e-4
 R = 0.14          # metres per radian in the triangulation domain
 VISOR = (-0.10, 0.30, 0.9)      # a from, a to, half-width in b
+EDGE = 0.008      # longest paint-region edge in the domain (m): longer straight edges would cut chords under the shell
 
 
 def data():
@@ -48,20 +49,26 @@ def bottom_y(z):
 
 
 def shell_point(a, b):
+    """The shell at (a, b). The domain's two ends, a = -pi/2 and a = 3pi/2, are the same meridian (straight down):
+    near the side poles the shell is kept right down there, so every front- or back-only shaping term depends on
+    cos(a) and agrees on both ends (else the ends part and leave a slit down the lower sides), and the neck roll
+    vanishes at the poles (else they open up)."""
     ca, sa = math.cos(a), math.sin(a)
     cb, sb = math.cos(b), math.sin(b)
     x = RX * math.copysign(abs(sb) ** 0.9, sb)
     y = RY * cb * sa
     z = (RZF if ca >= 0 else RZB) * cb * ca
     # Chin bar: the lower front pushes forward and squares off.
-    low_front = smoothstep(0.1, -0.6, a) * smoothstep(0.5, -0.2, abs(b) - 0.2) if ca > 0 else 0.0
+    low_front = smoothstep(0.1, -0.6, a) * smoothstep(0.5, -0.2, abs(b) - 0.2) * smoothstep(0.0, 0.25, ca) \
+        if ca > 0 else 0.0
     z += 0.026 * low_front
     if y < 0:
-        y *= 1.0 + 0.08 * smoothstep(0.0, -0.8, a)
+        # The lower front is deeper; half way on the seam meridian, from both sides.
+        front = smoothstep(0.0, 0.8, math.acos(clamp(ca, -1.0, 1.0))) * smoothstep(-0.25, 0.25, ca)
+        y *= 1.0 + 0.08 * front
     # The back flares a little at the bottom (the neck roll).
     if ca < 0 and sa < 0:
-        r = Vector((x, 0, z))
-        z -= 0.008 * smoothstep(-0.2, -0.9, sa)
+        z -= 0.008 * smoothstep(-0.2, -0.9, sa) * smoothstep(0.0, -0.25, ca) * smoothstep(0.0, 0.4, cb)
     return Vector((x, y, z))
 
 
@@ -177,26 +184,52 @@ def keep(u, v):
     return p.y > bottom_y(p.z)
 
 
+def _rim(a, b):
+    """Height above the lower edge (negative: cut away)."""
+    p = shell_point(a, b)
+    return p.y - bottom_y(p.z)
+
+
+def _bisect(f, lo, hi, n=40):
+    flo = f(lo)
+    for _ in range(n):
+        m = 0.5 * (lo + hi)
+        if f(m) * flo > 0:
+            lo, flo = m, f(m)
+        else:
+            hi = m
+    return 0.5 * (lo + hi)
+
+
 def bottom_crease():
-    """The lower edge as an exact edge loop in the domain: for each b, the a where the shell meets bottom_y."""
+    """The lower edge as an exact edge loop in the domain: for each b, the a where the shell meets bottom_y.
+
+    At the sides the edge runs onto the seam meridian (a = -pi/2 = 3pi/2, the domain's two ends); both loops end
+    exactly there, at the b where the edge meets it, so the edge stays exact (not cut ragged by `keep`) right to the
+    seam and the ends of the two loops weld."""
     pts_f, pts_b = [], []
+    b_seam = _bisect(lambda b: _rim(A0, b), 0.0, B1)
     for i in range(49):
         b = B0 + (B1 - B0) * i / 48
-        for target, lst, lo, hi in ((0, pts_f, -math.pi / 2, 0.6), (1, pts_b, 2.5, 1.5 * math.pi)):
+        if abs(b) >= b_seam:
+            continue
+        for lst, lo, hi in ((pts_f, -math.pi / 2, 0.6), (pts_b, 2.5, 1.5 * math.pi)):
             # Bisection on a in [lo, hi] for y - bottom_y = 0 (above inside the range end nearer the top).
-            f = lambda a: shell_point(a, b).y - bottom_y(shell_point(a, b).z)
-            fa, fb = f(lo), f(hi)
-            if fa * fb > 0:
+            if _rim(lo, b) * _rim(hi, b) > 0:
                 continue
-            x0, x1 = lo, hi
-            for _ in range(40):
-                m = 0.5 * (x0 + x1)
-                if f(m) * fa > 0:
-                    x0, fa = m, f(m)
-                else:
-                    x1 = m
-            lst.append((0.5 * (x0 + x1) * R, b * R))
-    return [pts_f, pts_b]
+            lst.append((_bisect(lambda a: _rim(a, b), lo, hi) * R, b * R))
+    loops = []
+    for lst, a_end in ((pts_f, A0), (pts_b, A1)):
+        # Towards the seam the edge runs nearly along a: trace that last stretch in steps of a (solving for b).
+        a_l, b_l = lst[-1][0] / R, lst[-1][1] / R
+        n = max(2, math.ceil(abs(a_end - a_l) * R / 0.004))
+        tail = []
+        for k in range(1, n):
+            a = a_l + (a_end - a_l) * k / n
+            tail.append((a * R, _bisect(lambda b: _rim(a, b), b_l, B1) * R))
+        tail.append((a_end * R, b_seam * R))
+        loops.append([(u, -v) for u, v in reversed(tail)] + lst + tail)
+    return loops
 
 
 def build_helmet(code, scheme):
@@ -216,7 +249,8 @@ def build_helmet(code, scheme):
 
     pts = fg.adaptive_points(*domain, spacing, 0.03)
     regions = motif_regions(scheme["motif"]) + flag_regions(seat["nationality"]) + visor_regions()
-    shell = fg.surface(pos, domain, pts, "helmet_base", regions=regions, creases=bottom_crease(), keep=keep)
+    shell = fg.surface(pos, domain, pts, "helmet_base", regions=regions, creases=bottom_crease(), keep=keep,
+                       max_edge=EDGE)
     parts = [shell, spoiler(), neck_seal(), pivots()]
     obj = fg.make_smooth(fg.concat(parts), "helmet")
     return obj
@@ -247,13 +281,14 @@ def spoiler():
 
 
 def neck_seal():
-    """Closes the bottom opening with a dark padded seal a little inside the edge."""
+    """Closes the bottom opening with a dark padded seal a little inside the edge (at least ~4 mm inside the shell
+    all round: at 0.094 m wide it reached the shell's lower sides and showed through as a dark line)."""
     m = Mesh()
     ring = []
     n = 32
     for i in range(n):
         ph = 2 * math.pi * i / n
-        x, z = 0.094 * math.sin(ph), 0.112 * math.cos(ph) - 0.005
+        x, z = 0.088 * math.sin(ph), 0.108 * math.cos(ph) - 0.005
         y = bottom_y(z) + 0.012
         ring.append(m.vert(Vector((x, y, z))))
     c = m.vert(Vector((0, -0.095, 0.0)))
