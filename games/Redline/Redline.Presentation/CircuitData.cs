@@ -1,11 +1,14 @@
 using System.Numerics;
 using System.Text.Json;
+using Redline.Presentation.Course;
 
 namespace Redline.Presentation;
 
 /// <summary>
 /// A closed circuit centre line plus an elevation profile. Points are metres, x = east, y = south
 /// (the race direction is increasing index); elevation keyframes are (metres along the lap, height metres).
+/// <see cref="Corners"/> are the official turns in lap order and <see cref="StraightModeZones"/> the 2026 active-aero zones
+/// (both optional in the json, empty when absent).
 /// </summary>
 public sealed record CircuitData(string Name, IReadOnlyList<Vector2> Points, IReadOnlyList<(double S, double H)> Elevation)
 {
@@ -15,6 +18,12 @@ public sealed record CircuitData(string Name, IReadOnlyList<Vector2> Points, IRe
     {
         ["cota"] = new(() => LoadResource("cota")),
     };
+
+    /// <summary>The official turns, in lap order (strictly increasing apex s).</summary>
+    public IReadOnlyList<Corner> Corners { get; init; } = [];
+
+    /// <summary>The straight-mode (active aero) zones.</summary>
+    public IReadOnlyList<StraightModeZone> StraightModeZones { get; init; } = [];
 
     /// <summary>Length of the closed polyline through <see cref="Points"/>, in metres.</summary>
     public double LapLength { get; } = ClosedLength(Points);
@@ -58,7 +67,80 @@ public sealed record CircuitData(string Name, IReadOnlyList<Vector2> Points, IRe
             if (elevation[i].S <= elevation[i - 1].S)
                 throw new InvalidDataException($"{id}.json elevation keyframes must have strictly increasing s (index {i}).");
 
-        return new CircuitData(name, points, elevation);
+        return new CircuitData(name, points, elevation)
+        {
+            Corners = ReadCorners(root, id),
+            StraightModeZones = ReadZones(root, id),
+        };
+    }
+
+    private static Corner[] ReadCorners(JsonElement root, string id)
+    {
+        if (!root.TryGetProperty("corners", out var array))
+            return [];
+        if (array.ValueKind != JsonValueKind.Array)
+            throw new InvalidDataException($"{id}.json 'corners' must be an array.");
+        var result = new List<Corner>();
+        foreach (var item in array.EnumerateArray())
+        {
+            string Text(string key) => item.TryGetProperty(key, out var v) && v.ValueKind == JsonValueKind.String
+                ? v.GetString()!
+                : throw new InvalidDataException($"{id}.json corner {result.Count + 1} has no '{key}'.");
+            double Number(string key) => item.TryGetProperty(key, out var v) && v.ValueKind == JsonValueKind.Number
+                ? v.GetDouble()
+                : throw new InvalidDataException($"{id}.json corner {result.Count + 1} has no '{key}'.");
+            int Side(string key) => Text(key) switch
+            {
+                "left" => -1,
+                "right" => +1,
+                var other => throw new InvalidDataException($"{id}.json corner '{key}' must be left or right, not '{other}'."),
+            };
+            T Pick<T>(string key, params (string Name, T Value)[] options)
+            {
+                var text = Text(key);
+                foreach (var (optionName, value) in options)
+                    if (optionName == text) return value;
+                throw new InvalidDataException($"{id}.json corner '{key}' has unknown value '{text}'.");
+            }
+
+            var direction = Side("direction");
+            result.Add(new Corner(
+                (int)Number("turn"),
+                Number("s"),
+                direction,
+                // apexSide is stored as a direction word; as a lateral sign, left of travel is +1.
+                -Side("apexSide"),
+                Pick("kerb", ("flat", KerbKind.Flat), ("sawtooth", KerbKind.Sawtooth), ("sausage", KerbKind.Sausage)),
+                Pick("runoff", ("tarmac-striped", RunoffKind.TarmacStriped), ("tarmac", RunoffKind.Tarmac), ("gravel", RunoffKind.Gravel), ("grass", RunoffKind.Grass)),
+                Pick("barrier", ("tecpro", BarrierKind.TecPro), ("tyres", BarrierKind.Tyres), ("armco", BarrierKind.Armco), ("wall", BarrierKind.Wall)),
+                Pick("braking", ("none", Braking.None), ("light", Braking.Light), ("medium", Braking.Medium), ("heavy", Braking.Heavy)),
+                Pick("confidence", ("low", Confidence.Low), ("medium", Confidence.Medium), ("high", Confidence.High))));
+        }
+        for (var i = 0; i < result.Count; i++)
+        {
+            if (result[i].Turn != i + 1)
+                throw new InvalidDataException($"{id}.json corners must be numbered 1, 2, … in order (entry {i + 1} is turn {result[i].Turn}).");
+            if (i > 0 && result[i].S <= result[i - 1].S)
+                throw new InvalidDataException($"{id}.json corner apexes must have strictly increasing s (turn {i + 1}).");
+        }
+        return [.. result];
+    }
+
+    private static StraightModeZone[] ReadZones(JsonElement root, string id)
+    {
+        if (!root.TryGetProperty("straightMode", out var array))
+            return [];
+        if (array.ValueKind != JsonValueKind.Array)
+            throw new InvalidDataException($"{id}.json 'straightMode' must be an array.");
+        var result = new List<StraightModeZone>();
+        foreach (var item in array.EnumerateArray())
+        {
+            if (!item.TryGetProperty("activation", out var a) || a.ValueKind != JsonValueKind.Number
+                || !item.TryGetProperty("end", out var e) || e.ValueKind != JsonValueKind.Number)
+                throw new InvalidDataException($"{id}.json straight-mode zones need numeric 'activation' and 'end'.");
+            result.Add(new StraightModeZone(a.GetDouble(), e.GetDouble()));
+        }
+        return [.. result];
     }
 
     private static List<(double A, double B)> ReadPairs(JsonElement root, string property, string id)

@@ -1,4 +1,5 @@
 using System.Numerics;
+using Redline.Presentation.Course;
 using Redline.Presentation.Meshes;
 
 namespace Redline.Presentation.Tests.Meshes;
@@ -22,6 +23,7 @@ public class TrackMeshBuilderTests
         yield return ("Walls", t.Walls);
         yield return ("Fence", t.Fence);
         yield return ("Grass", t.Grass);
+        yield return ("Gravel", t.Gravel);
         yield return ("Terrain", Terrain.Value);
     }
 
@@ -74,6 +76,16 @@ public class TrackMeshBuilderTests
             if (d < best.Distance) best = (d, a.Height + (b.Height - a.Height) * t);
         }
         return best;
+    }
+
+    /// <summary>Distance to, and height at, the closest point of centre-line segment j → j + 1.</summary>
+    private static (double Distance, double Height) SegmentFoot(int j, Vector2 p)
+    {
+        var a = Samples[j];
+        var b = Samples[(j + 1) % M];
+        var ab = b.Position - a.Position;
+        var t = Math.Clamp(Vector2.Dot(p - a.Position, ab) / ab.LengthSquared(), 0, 1);
+        return (Vector2.Distance(p, a.Position + ab * t), a.Height + (b.Height - a.Height) * t);
     }
 
     private static IEnumerable<(Vector3 A, Vector3 B, Vector3 C, int Ia, int Ib, int Ic)> Triangles(MeshData m)
@@ -135,7 +147,10 @@ public class TrackMeshBuilderTests
             Assert.All(m.Uvs, uv => Assert.True(float.IsFinite(uv.X) && float.IsFinite(uv.Y), name));
             Assert.All(m.Colors, c => Assert.True(c.X is >= 0 and <= 1 && c.Y is >= 0 and <= 1 && c.Z is >= 0 and <= 1 && c.W == 1, name));
             Assert.All(m.Normals, n => Assert.InRange(n.Length(), 0.999f, 1.001f));
+            Assert.True(m.Custom.Count == 0 || m.Custom.Count == m.Positions.Count, name);
         }
+        Assert.Equal(Track.Value.Asphalt.Positions.Count, Track.Value.Asphalt.Custom.Count);
+        Assert.Equal(Track.Value.Curbs.Positions.Count, Track.Value.Curbs.Custom.Count);
     }
 
     [Fact]
@@ -210,57 +225,149 @@ public class TrackMeshBuilderTests
         }
     }
 
+    /// <summary>The lap position (metres, unwrapped near <paramref name="near"/>) and lateral of a point, from its nearest sample.</summary>
+    private static (double S, double Lateral, int Index) Locate(Vector3 v)
+    {
+        var (i, _) = NearestSample(v);
+        var q = Samples[i];
+        var rel = Flat(v) - q.Position;
+        return (q.S + Vector2.Dot(rel, q.Tangent), Vector2.Dot(rel, q.Left), i);
+    }
+
+    private static bool Covers(double from, double to, double s, double slack)
+    {
+        var lap = Samples[1].S * M;
+        for (var k = -1; k <= 1; k++)
+            if (s + k * lap >= from - slack && s + k * lap <= to + slack) return true;
+        return false;
+    }
+
     [Fact]
-    public void Curbs_only_at_corners()
+    public void Kerbs_follow_the_corner_runs_with_metre_stripes()
     {
         var curbs = Track.Value.Curbs;
-        var corners = Samples.Where(TrackGeometry.IsCorner).ToArray();
+        var course = Track.Value.Course;
 
-        // One quad per corner sample on each side.
-        Assert.Equal(2 * 2 * corners.Length, curbs.Indices.Count / 3);
-
+        // Every kerb vertex is beside the asphalt within a kerb or sausage run on its side.
         foreach (var v in curbs.Positions)
         {
-            var p = Flat(v);
-            Assert.Contains(corners, c => Vector2.Distance(c.Position, p) <= TrackGeometry.Width(c.S) / 2 + TrackMeshBuilder.CurbWidth + 0.5);
+            var (s, lat, i) = Locate(v);
+            var side = Math.Sign(lat);
+            Assert.True(course.Kerbs.Any(r => r.Side == side && Covers(r.From, r.To, s, 3))
+                || course.Sausages.Any(r => r.Side == side && Covers(r.From, r.To, s, 3)),
+                $"kerb vertex at s={s:F0}, lateral {lat:F1} belongs to no run");
         }
 
         var straight = Samples[NearestIndex(5300)];
         Assert.DoesNotContain(curbs.Positions, v => Vector2.Distance(Flat(v), straight.Position) < 30);
 
-        // Alternating red and white.
-        Assert.Contains(curbs.Colors, c => c.X > 0.8f && c.Y < 0.1f);
-        Assert.Contains(curbs.Colors, c => c.X > 0.9f && c.Y > 0.9f && c.Z > 0.9f);
+        // Red and white alternate every metre along the kerb (UV.x is metres along it); sausages are yellow.
+        var red = CourseMeshes.KerbRed;
+        var white = CourseMeshes.KerbWhite;
+        for (var t = 0; t < curbs.Indices.Count; t += 3)
+        {
+            int a = curbs.Indices[t], b = curbs.Indices[t + 1], c = curbs.Indices[t + 2];
+            var colour = curbs.Colors[a];
+            if (colour == CourseMeshes.SausageYellow)
+            {
+                Assert.Equal(CourseMeshes.SausageCode, curbs.Custom[a].X);
+                continue;
+            }
+            if (colour == CourseMeshes.KerbSeam)
+            {
+                // The sealed joint lies just inside the asphalt edge.
+                Assert.All(new[] { a, b, c }, k => Assert.InRange(curbs.Uvs[k].Y, -Kerbs.SeamWidth - 1e-4, 1e-4));
+                continue;
+            }
+            var us = new[] { curbs.Uvs[a].X, curbs.Uvs[b].X, curbs.Uvs[c].X };
+            Assert.True(us.Max() - us.Min() <= Kerbs.StripeLength + 1e-3, "a stripe facet is longer than a stripe");
+            var stripe = (int)Math.Floor((us.Max() + us.Min()) / 2 / Kerbs.StripeLength) % 2;
+            Assert.Equal(stripe == 0 ? red : white, colour);
+        }
+        Assert.Contains(curbs.Colors, c => c == CourseMeshes.SausageYellow);
+        Assert.Contains(curbs.Custom, c => c.X == CourseMeshes.SawtoothCode);
+        Assert.Contains(curbs.Custom, c => c.X == CourseMeshes.FlatCode);
     }
 
     [Fact]
-    public void Runoff_on_corner_outsides_only()
+    public void Runoff_and_gravel_lie_in_the_profile_on_corner_outsides()
     {
-        var runoff = Track.Value.Runoff;
-        var corners = Samples.Count(TrackGeometry.IsCorner);
+        var t = Track.Value;
+        var profile = t.Course.Runoff;
+        foreach (var (name, mesh) in new[] { ("Runoff", t.Runoff), ("Gravel", t.Gravel) })
+            foreach (var v in mesh.Positions)
+            {
+                var (s, lat, i) = Locate(v);
+                var side = Math.Sign(lat);
+                var half = TrackGeometry.Width(Samples[i].S) / 2;
+                Assert.True(profile.Areas.Any(a => a.Side == side && Covers(a.From, a.To, s, RunoffProfile.Taper + 3)),
+                    $"{name} vertex at s={s:F0} lateral {lat:F1} is outside every run-off area");
+                Assert.InRange(Math.Abs(lat), half - 0.6, half + Kerbs.Width + RunoffProfile.FullWidth(RunoffKind.TarmacStriped) + 0.6);
+            }
 
-        Assert.Equal(2 * corners, runoff.Indices.Count / 3);
+        // Turn 1 turns left: its painted run-off is on the right; the esses have gravel.
+        var t1 = Samples[NearestIndex(340)];
+        Assert.Contains(t.Runoff.Positions, v => Locate(v) is var p && Math.Abs(p.S - t1.S) < 10 && p.Lateral < 0
+            && t.Runoff.Colors[t.Runoff.Positions.IndexOf(v)] == CourseMeshes.RunoffBlue);
+        Assert.Contains(t.Gravel.Positions, v => Locate(v).S is > 820 and < 1100);
+        Assert.Contains(profile.Areas, a => a.Turn == 1 && a.Side < 0 && a.Kind == RunoffKind.TarmacStriped);
+    }
 
-        // Every piece sits on the outside of the bend it belongs to: right of a left turn, left of a right turn.
-        foreach (var v in runoff.Positions)
+    [Fact]
+    public void Walls_stay_behind_the_run_off()
+    {
+        var t = Track.Value;
+        foreach (var (name, mesh) in new[] { ("Walls", t.Walls), ("Fence", t.Fence) })
+            foreach (var v in mesh.Positions)
+            {
+                var (_, lat, i) = Locate(v);
+                Assert.True(Math.Abs(lat) >= t.Course.Runoff.Outer(i, Math.Sign(lat)) - 0.5,
+                    $"{name} vertex at s={Samples[i].S:F0} is {Math.Abs(lat):F1} m out, inside the run-off ({t.Course.Runoff.Outer(i, Math.Sign(lat)):F1} m)");
+            }
+    }
+
+    /// <summary>Review focus 1: nothing floats or sinks on the slopes.</summary>
+    [Fact]
+    public void Markings_kerbs_runoff_and_gravel_sit_on_the_track_surface()
+    {
+        var t = Track.Value;
+        // (layer, lowest and highest height above the surface at the vertex's foot on the centre line)
+        foreach (var (name, mesh, lo, hi) in new[]
+                 {
+                     ("Lines", t.Lines, 0.012, 0.03),
+                     ("Curbs", t.Curbs, -0.035, 0.16),
+                     ("Runoff", t.Runoff, 0.0, 0.015),
+                     ("Gravel", t.Gravel, -0.012, 0.0),
+                 })
         {
-            var (i, d) = NearestSample(v);
-            var q = Samples[i];
-            // (Slack below: the inner edge pinches where the polyline kinks inside the Turn 12 hairpin.)
-            Assert.InRange(d, TrackGeometry.Width(q.S) / 2 + TrackMeshBuilder.CurbWidth - 1,TrackGeometry.Width(q.S) / 2 + TrackMeshBuilder.CurbWidth + TrackMeshBuilder.RunoffWidth + 0.2);
-            Assert.Equal(q.Turn > 0 ? 1 : -1, Math.Sign(Vector2.Dot(Flat(v) - q.Position, q.Left)));
+            var checkedSlope = 0;
+            foreach (var v in mesh.Positions)
+            {
+                var (i, _) = NearestSample(v);
+                // The surface under a point is the height at its foot on the centre line. Near the centre of a hairpin many
+                // segments are almost equally close, so every segment foot within 0.15 m of the nearest is a fair foot.
+                var feet = Enumerable.Range(-40, 81)
+                    .Select(k => SegmentFoot(((i + k) % M + M) % M, Flat(v)))
+                    .ToArray();
+                var d = feet.Min(f => f.Distance);
+                var fair = feet.Where(f => f.Distance <= d + 0.15).Select(f => f.Height).ToArray();
+                var (foot, low, high) = (fair[0], fair.Min(), fair.Max());
+                const double Slack = 0.02;
+                // Fine if some fair foot puts it within [lo, hi] above the surface.
+                Assert.True(v.Y - low >= lo - Slack && v.Y - high <= hi + Slack,
+                    $"{name} vertex at s={Samples[i].S:F0} is {v.Y - foot:F3} m above the track surface ({v}; foot range {low:F3}..{high:F3}, d {d:F2})");
+                if (Samples[i].S is > 150 and < 330 or > 600 and < 1100) checkedSlope++;
+            }
+            if (name != "Gravel") Assert.True(checkedSlope > 50, $"{name}: too few vertices on the Turn 1 climb and the esses descent");
         }
-
-        // Turn 1 turns left, so its runoff is on the right.
-        var apex = NearestIndex(340);
-        Assert.Contains(runoff.Positions, v => NearestSample(v).Index == apex);
     }
 
     [Fact]
     public void Start_finish_chequer_at_s0()
     {
         var lines = Track.Value.Lines;
-        var black = lines.Positions.Where((_, i) => lines.Colors[i].X < 0.1f).ToArray();
+        // (Black paint, not the slightly lighter sealant of the repair seams.)
+        var black = lines.Positions.Where((_, i) => lines.Colors[i].X < 0.08f).ToArray();
 
         Assert.NotEmpty(black);
         Assert.All(black, v => Assert.True(Vector2.Distance(Flat(v), Samples[0].Position) < 15.0 / 2 + 1.5));

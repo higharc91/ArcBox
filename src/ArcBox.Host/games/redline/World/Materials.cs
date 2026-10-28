@@ -223,16 +223,10 @@ public static class Materials
             return m;
         });
 
-    public static ShaderMaterial Asphalt => AsphaltLike("asphalt", 1, 1, 0.9f, 1.05f);
-
-    /// <summary>Pit lane: the same asphalt, a little lighter and without a racing line.</summary>
+    /// <summary>Pit lane asphalt, a little lighter and without a racing line (the track surface is in <see cref="TrackMaterials"/>).</summary>
     public static ShaderMaterial PitLane => AsphaltLike("pitlane", 1, 0, 0.88f, 1.2f);
 
     public static ShaderMaterial Lines => AsphaltLike("lines", 0.3f, 0, 0.6f);
-
-    public static ShaderMaterial Curbs => AsphaltLike("curbs", 0.25f, 0, 0.5f);
-
-    public static ShaderMaterial Runoff => AsphaltLike("runoff", 0.6f, 0, 0.75f);
 
     private static ShaderMaterial GrassLike(string key, float stripes) => Cached(key, () =>
     {
@@ -242,8 +236,6 @@ public static class Materials
         m.SetShaderParameter("stripes", stripes);
         return m;
     });
-
-    public static ShaderMaterial Verge => GrassLike("verge", 1);
 
     public static ShaderMaterial Terrain => GrassLike("terrain", 0);
 

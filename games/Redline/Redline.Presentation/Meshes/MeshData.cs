@@ -15,7 +15,8 @@ namespace Redline.Presentation.Meshes;
 /// <item><see cref="Uvs"/> are in metres unless the builder says otherwise; materials set their own tiling.</item>
 /// </list>
 /// <see cref="Positions"/>, <see cref="Normals"/>, <see cref="Uvs"/> and <see cref="Colors"/> have one entry per vertex;
-/// <see cref="Indices"/> holds three entries per triangle.
+/// <see cref="Custom"/> is either empty or has one entry per vertex too (per-vertex shader data, Godot's <c>CUSTOM0</c>,
+/// whose meaning the builder documents). <see cref="Indices"/> holds three entries per triangle.
 /// </summary>
 public sealed class MeshData
 {
@@ -23,5 +24,6 @@ public sealed class MeshData
     public List<Vector3> Normals { get; } = new();
     public List<Vector2> Uvs { get; } = new();
     public List<Vector4> Colors { get; } = new();
+    public List<Vector4> Custom { get; } = new();
     public List<int> Indices { get; } = new();
 }

@@ -8,7 +8,8 @@ public enum Preset { Ultra, High, Low }
 /// <summary>
 /// The render presets (spec §4.8, plan Global Constraints). Ultra: SDFGI with half-resolution probes, SSR, SSAO + SSIL,
 /// light volumetric fog, a 4-split 8192 shadow atlas, MSAA 4× + SMAA, 144 fps cap with VSync off. High: Ultra without
-/// SDFGI and SSR. Low: no screen-space effects or volumetrics, 2048 shadows, 2 splits, FXAA only, half the trees.
+/// SDFGI and SSR. Low: no screen-space effects or volumetrics, 2048 shadows, 2 splits, FXAA only, half the trees, no skid
+/// marks or marbles.
 /// Low keeps Forward+ (switching to the Mobile renderer needs a restart). Everything here can change at runtime.
 /// </summary>
 public static class RenderPreset
@@ -26,12 +27,16 @@ public static class RenderPreset
     /// <summary>Screen-space subsurface scattering on the driver figures' skin: off on Low, like the other screen-space effects.</summary>
     public static bool SkinSubsurface(Preset p) => p != Preset.Low;
 
+    /// <summary>Skid marks, marbles and run-off tyre marks on the track surface: off on Low.</summary>
+    public static bool TrackDetail(Preset p) => p != Preset.Low;
+
     public static void Apply(Environment env, DirectionalLight3D sun, Viewport vp, Preset p)
     {
         var ultra = p == Preset.Ultra;
         var low = p == Preset.Low;
 
         Engine.MaxFps = 144;
+        TrackMaterials.SetDetail(TrackDetail(p));
         DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Disabled);
 
         env.SdfgiEnabled = ultra;

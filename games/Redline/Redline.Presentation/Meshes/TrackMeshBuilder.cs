@@ -1,14 +1,28 @@
 using System.Numerics;
+using Redline.Presentation.Course;
 
 namespace Redline.Presentation.Meshes;
 
-/// <summary>The track's layers, one mesh (one material) each. See <see cref="TrackMeshBuilder.Build"/>.</summary>
-public sealed record TrackMeshes(MeshData Asphalt, MeshData Lines, MeshData Curbs, MeshData Runoff, MeshData Walls, MeshData Fence, MeshData Grass);
+/// <summary>
+/// The track's layers, one mesh (one material) each, plus the <see cref="CourseLayout"/> they were dressed from. See
+/// <see cref="TrackMeshBuilder.Build"/>.
+/// </summary>
+public sealed record TrackMeshes(
+    MeshData Asphalt,
+    MeshData Lines,
+    MeshData Curbs,
+    MeshData Runoff,
+    MeshData Walls,
+    MeshData Fence,
+    MeshData Grass,
+    MeshData Gravel,
+    CourseLayout Course);
 
 /// <summary>
 /// Builds the circuit's ribbons and walls from <see cref="TrackGeometry.Resample"/>, porting the browser mockup's cota3d.js.
 /// Laterals are metres from the centre line, positive to the left of travel. Heights follow the sample's elevation with
-/// small lifts so coplanar layers never z-fight: grass -0.03, asphalt 0, lines and runoff +0.02, chequer +0.025, curbs +0.03.
+/// small lifts so coplanar layers never z-fight: grass -0.03, gravel -0.005, asphalt 0, sealant +0.016, lines and runoff
+/// +0.02, painted marks +0.023, chequer +0.025; kerbs follow their own profiles (<see cref="Kerbs.Profile"/>).
 /// </summary>
 public static class TrackMeshBuilder
 {
@@ -16,8 +30,7 @@ public static class TrackMeshBuilder
     public const double WallGap = 4;
     /// <summary>Catch fence distance from the centre line (pushed out to stay behind the wall where the wall is further).</summary>
     public const double FenceOffset = 19;
-    public const double CurbWidth = 1.5;
-    public const double RunoffWidth = 10;
+    public const double CurbWidth = Kerbs.Width;
     public const double LineWidth = 0.25;
     /// <summary>Gap between the white edge line and the asphalt edge.</summary>
     public const double LineInset = 0.05;
@@ -26,8 +39,7 @@ public static class TrackMeshBuilder
     /// <summary>Walls and fence reach this far below the track height so no gap shows over the terrain.</summary>
     public const double Footing = 0.3;
 
-    private const float GrassLift = -0.03f, LineLift = 0.02f, RunoffLift = 0.02f, ChequerLift = 0.025f, CurbLift = 0.03f;
-    private const int CurbStripeSamples = 2, RunoffStripeSamples = 4;
+    private const float GrassLift = -0.03f, LineLift = 0.02f, ChequerLift = 0.025f;
     private const double ChequerSquare = 0.75;
     private const int ChequerRows = 2;
     // Where the runoff sits, the wall moves out behind it: dilated then box-blurred twice so it ramps smoothly.
@@ -41,12 +53,11 @@ public static class TrackMeshBuilder
     // Shortest run of wall segments worth keeping.
     private const int MinWallRun = 5;
 
-    private static readonly Vector4 AsphaltColour = MeshOps.Hex("#3c3d42");
+    /// <summary>Dusty off-line asphalt; the racing line is darkened in the material from the asphalt's wear data.</summary>
+    private static readonly Vector4 AsphaltColour = MeshOps.Hex("#4a4a4b");
+    /// <summary>Resurfaced patches are fresher, darker asphalt.</summary>
+    private static readonly Vector4 PatchColour = MeshOps.Hex("#38383a");
     private static readonly Vector4 LineColour = MeshOps.Hex("#f1f1ee");
-    private static readonly Vector4 CurbRed = MeshOps.Hex("#d8001f");
-    private static readonly Vector4 CurbWhite = MeshOps.Hex("#f2f2f2");
-    private static readonly Vector4 RunoffBlue = MeshOps.Hex("#1d4f9e");
-    private static readonly Vector4 RunoffRed = MeshOps.Hex("#b3122a");
     private static readonly Vector4 WallColour = MeshOps.Hex("#e8e8e8");
     private static readonly Vector4 FenceColour = MeshOps.Hex("#b8bdc4");
     private static readonly Vector4 GrassColour = MeshOps.Hex("#6d8b3a");
@@ -57,16 +68,24 @@ public static class TrackMeshBuilder
     /// Builds every layer for the circuit:
     /// <list type="bullet">
     /// <item><b>Asphalt</b>: a closed ribbon of <c>Width(s)</c>, <c>M + 1</c> rows of (left, right) vertices, the last row repeating
-    /// the first, and <c>2M</c> triangles. UV = (s, lateral) in metres, as for every flat layer.</item>
-    /// <item><b>Lines</b>: 0.25 m white edge lines on both sides, plus a chequered start/finish strip across the asphalt at s = 0.</item>
-    /// <item><b>Curbs</b>: 1.5 m outside both asphalt edges wherever <see cref="TrackGeometry.IsCorner"/>, red/white every 2 samples.</item>
-    /// <item><b>Runoff</b>: 10 m of red/blue painted asphalt beyond the curb on the outside of corners.</item>
-    /// <item><b>Walls</b>: one-sided, facing the track, at <c>Width/2 + 4</c> (moved out behind any runoff), 1.2 m tall,
+    /// the first, and <c>2M</c> triangles. UV = (s, lateral) in metres, as for every flat layer. Colour is the surface tone
+    /// (resurfaced <see cref="Markings.Patches"/> darker); <see cref="MeshData.Custom"/> is the row's sample's
+    /// (<see cref="RacingLine.Lateral"/>, <see cref="RacingLine.Rubber"/>, <see cref="RacingLine.Skid"/>,
+    /// <see cref="RacingLine.Marbles"/>) on both vertices.</item>
+    /// <item><b>Lines</b>: 0.25 m white edge lines on both sides, a chequered start/finish strip across the asphalt at s = 0, and
+    /// every <see cref="Markings"/> mark (grid boxes and numbers, pit lines, straight-mode lines, sealant seams).</item>
+    /// <item><b>Curbs</b>: the <see cref="Kerbs.Runs"/> and <see cref="Kerbs.Sausages"/> with their profiles, one flat facet per
+    /// profile segment and stripe; UV = (metres along the kerb, metres beyond the asphalt edge), Custom.X = kind
+    /// (<see cref="CourseMeshes.FlatCode"/>, <see cref="CourseMeshes.SawtoothCode"/>, <see cref="CourseMeshes.SausageCode"/>).</item>
+    /// <item><b>Runoff</b>: the <see cref="RunoffProfile"/> areas from the asphalt edge outwards: painted stripes, plain tarmac,
+    /// or a tarmac verge before the gravel. UV = (s, metres from the asphalt edge).</item>
+    /// <item><b>Gravel</b>: the gravel beds of gravel run-off areas.</item>
+    /// <item><b>Walls</b>: one-sided, facing the track, at <c>Width/2 + 4</c> (moved out behind any run-off), 1.2 m tall,
     /// skipped where <see cref="TrackGeometry.WallAllowed"/> is false or where the wall would fold (see <c>VerticalStrip</c>).
     /// UV = (metres along, reading left to right from the track; metres below the top).</item>
     /// <item><b>Fence</b>: catch fence at 19 m from the centre (or 0.5 m behind the wall where that is further), 4.2 m tall,
     /// same facing, UV and fold rules; the material renders it double-sided and translucent.</item>
-    /// <item><b>Grass</b>: verge from the asphalt edge to just behind the wall on each side, under curbs and runoff.</item>
+    /// <item><b>Grass</b>: verge from the asphalt edge to just behind the wall on each side, under kerbs, run-off and gravel.</item>
     /// </list>
     /// Where a flat layer's edge would fold back on itself on the inside of a hairpin (Turn 1's true radius is about 13 m
     /// against a 12 m half-width) that edge pinches to a corner instead, so every triangle keeps its winding.
@@ -80,34 +99,37 @@ public static class TrackMeshBuilder
         var half = new double[n];
         for (var i = 0; i < n; i++)
             half[i] = TrackGeometry.Width(q[i].S) / 2;
+        var course = CourseLayout.Build(c, q);
 
-        var wall = new Dictionary<int, double[]> { [+1] = WallOffsets(q, half, +1), [-1] = WallOffsets(q, half, -1) };
+        var wall = new Dictionary<int, double[]> { [+1] = WallOffsets(q, half, course.Runoff, +1), [-1] = WallOffsets(q, half, course.Runoff, -1) };
         var fence = new Dictionary<int, double[]>
         {
             [+1] = wall[+1].Select(o => Math.Max(FenceOffset, o + 0.5)).ToArray(),
             [-1] = wall[-1].Select(o => Math.Max(FenceOffset, o + 0.5)).ToArray(),
         };
 
+        // Asphalt: colour is the surface tone (fresh patches darker); Custom carries the racing line and its wear.
+        var line = course.RacingLine;
+        var patched = new bool[n];
+        foreach (var (from, to) in Markings.Patches)
+            for (var i = 0; i < n; i++)
+                if (q[i].S >= from && q[i].S <= to) patched[i] = true;
         var asphalt = new MeshData();
-        Ribbon(asphalt, q, spacing, i => -half[i], i => half[i], 0, AsphaltColour);
+        Ribbon(asphalt, q, spacing, i => -half[i], i => half[i], 0, i => patched[i] ? PatchColour : AsphaltColour,
+            i => new Vector4((float)line.Lateral[i], (float)line.Rubber[i], (float)line.Skid[i], (float)line.Marbles[i]));
 
         var lines = new MeshData();
         Ribbon(lines, q, spacing, i => half[i] - LineInset - LineWidth, i => half[i] - LineInset, LineLift, LineColour);
         Ribbon(lines, q, spacing, i => -half[i] + LineInset, i => -half[i] + LineInset + LineWidth, LineLift, LineColour);
         Chequer(lines, q, half[0]);
+        CourseMeshes.Marks(lines, q, course.Marks);
 
         var curbs = new MeshData();
-        Vector4 CurbStripe(int i) => i / CurbStripeSamples % 2 == 0 ? CurbRed : CurbWhite;
-        bool Corner(int i) => TrackGeometry.IsCorner(q[i]);
-        Segments(curbs, q, spacing, i => half[i], i => half[i] + CurbWidth, CurbLift, Corner, CurbStripe);
-        Segments(curbs, q, spacing, i => -half[i] - CurbWidth, i => -half[i], CurbLift, Corner, CurbStripe);
-
         var runoff = new MeshData();
-        Vector4 RunoffStripe(int i) => i / RunoffStripeSamples % 2 == 0 ? RunoffBlue : RunoffRed;
-        Segments(runoff, q, spacing, i => half[i] + CurbWidth, i => half[i] + CurbWidth + RunoffWidth, RunoffLift,
-            i => Corner(i) && Outside(q[i]) > 0, RunoffStripe);
-        Segments(runoff, q, spacing, i => -half[i] - CurbWidth - RunoffWidth, i => -half[i] - CurbWidth, RunoffLift,
-            i => Corner(i) && Outside(q[i]) < 0, RunoffStripe);
+        var gravel = new MeshData();
+        var edges = new EdgeCache(q, half);
+        CourseMeshes.Kerbs(curbs, q, edges, course);
+        CourseMeshes.Runoff(runoff, gravel, q, edges, course.Runoff);
 
         var grid = new SampleGrid(q);
         var walls = new MeshData();
@@ -129,9 +151,10 @@ public static class TrackMeshBuilder
         Ribbon(grass, q, spacing, i => half[i], i => Verge(i, +1), GrassLift, GrassColour);
         Ribbon(grass, q, spacing, i => -Verge(i, -1), i => -half[i], GrassLift, GrassColour);
 
-        foreach (var m in new[] { asphalt, lines, curbs, runoff, walls, fences, grass })
+        // Kerb facets each have their own vertices, so these normals are flat per facet and the bevels stay crisp.
+        foreach (var m in new[] { asphalt, lines, curbs, runoff, walls, fences, grass, gravel })
             m.ComputeNormals();
-        return new TrackMeshes(asphalt, lines, curbs, runoff, walls, fences, grass);
+        return new TrackMeshes(asphalt, lines, curbs, runoff, walls, fences, grass, gravel, course);
     }
 
     /// <summary>
@@ -161,24 +184,27 @@ public static class TrackMeshBuilder
     /// <summary>+1 when the outside of the bend is the left (a right turn), -1 otherwise.</summary>
     private static int Outside(TrackSample t) => t.Turn > 0 ? 1 : -1;
 
-    private static Vector3 At(TrackSample t, double lateral, double lift) =>
+    internal static Vector3 At(TrackSample t, double lateral, double lift) =>
         new(t.Position.X + t.Left.X * (float)lateral, (float)(t.Height + lift), t.Position.Y + t.Left.Y * (float)lateral);
 
-    /// <summary>Wall lateral distance per sample on <paramref name="side"/>: Width/2 + 4, ramping out behind any runoff.</summary>
-    private static double[] WallOffsets(IReadOnlyList<TrackSample> q, double[] half, int side)
+    /// <summary>
+    /// Wall lateral distance per sample on <paramref name="side"/>: Width/2 + 4, or <see cref="RunoffWallClearance"/> behind the
+    /// run-off's outer edge where that is further, ramping out ahead of the run-off (dilated, then box-blurred twice).
+    /// </summary>
+    private static double[] WallOffsets(IReadOnlyList<TrackSample> q, double[] half, RunoffProfile runoff, int side)
     {
         var n = q.Count;
-        var runoff = new double[n];
+        var extra = new double[n];
         for (var i = 0; i < n; i++)
-            if (TrackGeometry.IsCorner(q[i]) && Outside(q[i]) == side)
-                for (var d = -RunoffDilate; d <= RunoffDilate; d++)
-                    runoff[((i + d) % n + n) % n] = 1;
-        runoff = BoxBlur(BoxBlur(runoff, RunoffBlur), RunoffBlur);
-
-        var extra = CurbWidth + RunoffWidth + RunoffWallClearance - WallGap;
+            extra[i] = Math.Max(0, runoff.Outer(i, side) + RunoffWallClearance - (half[i] + WallGap));
+        var dilated = new double[n];
+        for (var i = 0; i < n; i++)
+            for (var d = -RunoffDilate; d <= RunoffDilate; d++)
+                dilated[i] = Math.Max(dilated[i], extra[((i + d) % n + n) % n]);
+        var smooth = BoxBlur(BoxBlur(dilated, RunoffBlur), RunoffBlur);
         var result = new double[n];
         for (var i = 0; i < n; i++)
-            result[i] = half[i] + WallGap + extra * runoff[i];
+            result[i] = half[i] + WallGap + Math.Max(extra[i], smooth[i]);
         return result;
     }
 
@@ -197,7 +223,7 @@ public static class TrackMeshBuilder
     }
 
     /// <summary>Edge points of the band between laterals lo &lt; hi for rows k = 0..M (row M repeats row 0), each edge unfolded.</summary>
-    private static (Vector3[] Hi, Vector3[] Lo) Band(IReadOnlyList<TrackSample> q, Func<int, double> lo, Func<int, double> hi, float lift)
+    internal static (Vector3[] Hi, Vector3[] Lo) Band(IReadOnlyList<TrackSample> q, Func<int, double> lo, Func<int, double> hi, float lift)
     {
         var n = q.Count;
         var h = new Vector3[n + 1];
@@ -217,7 +243,7 @@ public static class TrackMeshBuilder
     /// inside of a bend the edge runs backwards against the track; that loop is replaced by the point where the edge crosses
     /// itself, so the edge pinches to a corner and every triangle keeps its winding.
     /// </summary>
-    private static void Unfold(Vector3[] e, IReadOnlyList<TrackSample> q)
+    internal static void Unfold(Vector3[] e, IReadOnlyList<TrackSample> q)
     {
         var n = q.Count;
         bool Backward(int k)
@@ -231,9 +257,13 @@ public static class TrackMeshBuilder
             if (!Backward(a)) continue;
             var b = a;
             while (b + 1 < n && Backward(b + 1)) b++;
-            if (!CutLoop(e, a, b))
+            if (!CutLoop(e, q, a, b))
+            {
+                var x = e[a];
+                x.Y = PinchHeight(e, q, x, a, a, b + 1);
                 for (var k = a + 1; k <= b + 1; k++)
-                    e[k] = e[a];
+                    e[k] = x;
+            }
             a = b;
         }
         e[n] = e[0];
@@ -241,9 +271,11 @@ public static class TrackMeshBuilder
 
     /// <summary>
     /// Finds the closest pair of segments (i before backward run a..b, j after it) that cross in the plane and moves every
-    /// point between them onto the crossing. False when there is none within reach.
+    /// point between them onto the crossing. The crossing takes the height of the centre-line sample nearest to it among
+    /// rows i..j + 1, plus the edge's own lift above the track (the crossing rows can be tens of metres apart on a slope).
+    /// False when there is none within reach.
     /// </summary>
-    private static bool CutLoop(Vector3[] e, int a, int b)
+    private static bool CutLoop(Vector3[] e, IReadOnlyList<TrackSample> q, int a, int b)
     {
         const int Reach = 60;
         var last = e.Length - 2;
@@ -255,12 +287,28 @@ public static class TrackMeshBuilder
                 if (i < 0 || j > last) continue;
                 if (!Cross(e[i], e[i + 1], e[j], e[j + 1], out var t, out var u)) continue;
                 var x = Vector3.Lerp(e[i], e[i + 1], t);
-                x.Y = (x.Y + Vector3.Lerp(e[j], e[j + 1], u).Y) / 2;
+                x.Y = PinchHeight(e, q, x, i, i, j + 1);
                 for (var k = i + 1; k <= j; k++)
                     e[k] = x;
                 return true;
             }
         return false;
+    }
+
+    /// <summary>
+    /// Height for a pinch point x: the track height at the centre-line sample nearest x among rows from..to, plus the edge's
+    /// lift above the track at row <paramref name="liftRow"/>.
+    /// </summary>
+    private static float PinchHeight(Vector3[] e, IReadOnlyList<TrackSample> q, Vector3 x, int liftRow, int from, int to)
+    {
+        var n = q.Count;
+        var flat = new Vector2(x.X, x.Z);
+        var lift = e[liftRow].Y - (float)q[liftRow % n].Height;
+        var nearest = from;
+        for (var k = from + 1; k <= to; k++)
+            if (Vector2.DistanceSquared(q[k % n].Position, flat) < Vector2.DistanceSquared(q[nearest % n].Position, flat))
+                nearest = k;
+        return (float)q[nearest % n].Height + lift;
     }
 
     /// <summary>Whether segments p0-p1 and r0-r1 intersect in the XZ plane, with the parameters along each.</summary>
@@ -279,7 +327,12 @@ public static class TrackMeshBuilder
 
     /// <summary>Continuous closed ribbon between laterals lo &lt; hi: M + 1 rows of (hi, lo), the last repeating the first.</summary>
     private static void Ribbon(MeshData m, IReadOnlyList<TrackSample> q, double spacing,
-        Func<int, double> lo, Func<int, double> hi, float lift, Vector4 colour)
+        Func<int, double> lo, Func<int, double> hi, float lift, Vector4 colour) =>
+        Ribbon(m, q, spacing, lo, hi, lift, _ => colour, null);
+
+    /// <summary>As above, coloured per row, with optional per-row <see cref="MeshData.Custom"/> data.</summary>
+    private static void Ribbon(MeshData m, IReadOnlyList<TrackSample> q, double spacing,
+        Func<int, double> lo, Func<int, double> hi, float lift, Func<int, Vector4> colour, Func<int, Vector4>? custom)
     {
         var n = q.Count;
         var (h, l) = Band(q, lo, hi, lift);
@@ -288,33 +341,19 @@ public static class TrackMeshBuilder
         {
             var i = k % n;
             var s = (float)(k * spacing);
-            var iHi = m.AddVertex(h[k], new Vector2(s, (float)hi(i)), colour);
-            var iLo = m.AddVertex(l[k], new Vector2(s, (float)lo(i)), colour);
+            var iHi = m.AddVertex(h[k], new Vector2(s, (float)hi(i)), colour(i));
+            var iLo = m.AddVertex(l[k], new Vector2(s, (float)lo(i)), colour(i));
+            if (custom is not null)
+            {
+                var data = custom(i);
+                m.Custom.Add(data);
+                m.Custom.Add(data);
+            }
             // Seen from above, travel runs "east" with the left (hi) edge "north": hi0 → hi1 → lo1 → lo0 is clockwise.
             if (k > 0)
                 m.AddQuad(prevHi, iHi, iLo, prevLo);
             prevHi = iHi;
             prevLo = iLo;
-        }
-    }
-
-    /// <summary>One independent quad per kept segment i → i + 1, flat-coloured by <paramref name="colour"/>(i).</summary>
-    private static void Segments(MeshData m, IReadOnlyList<TrackSample> q, double spacing,
-        Func<int, double> lo, Func<int, double> hi, float lift, Func<int, bool> keep, Func<int, Vector4> colour)
-    {
-        var n = q.Count;
-        var (h, l) = Band(q, lo, hi, lift);
-        for (var i = 0; i < n; i++)
-        {
-            if (!keep(i)) continue;
-            var j = (i + 1) % n;
-            var c = colour(i);
-            float s0 = (float)(i * spacing), s1 = (float)((i + 1) * spacing);
-            var a = m.AddVertex(h[i], new Vector2(s0, (float)hi(i)), c);
-            var b = m.AddVertex(h[i + 1], new Vector2(s1, (float)hi(j)), c);
-            var d = m.AddVertex(l[i + 1], new Vector2(s1, (float)lo(j)), c);
-            var e = m.AddVertex(l[i], new Vector2(s0, (float)lo(i)), c);
-            m.AddQuad(a, b, d, e);
         }
     }
 

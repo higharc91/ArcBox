@@ -11,7 +11,7 @@ namespace ArcBox.Host.Games.Redline.World;
 /// </summary>
 public static class MeshConvert
 {
-    /// <summary>One triangle surface with positions, normals, UVs and vertex colours.</summary>
+    /// <summary>One triangle surface with positions, normals, UVs, vertex colours and, if present, CUSTOM0 data.</summary>
     public static ArrayMesh ToArrayMesh(MeshData data, ArrayMesh? addTo = null)
     {
         var mesh = addTo ?? new ArrayMesh();
@@ -19,7 +19,11 @@ public static class MeshConvert
         {
             return mesh;
         }
-        mesh.AddSurfaceFromArrays(Mesh.PrimitiveType.Triangles, Arrays(data));
+        // MeshData.Custom, when present, goes to CUSTOM0 as four floats per vertex.
+        var flags = data.Custom.Count == data.Positions.Count
+            ? (Mesh.ArrayFormat)((long)Mesh.ArrayCustomFormat.RgbaFloat << (int)Mesh.ArrayFormat.FormatCustom0Shift)
+            : 0;
+        mesh.AddSurfaceFromArrays(Mesh.PrimitiveType.Triangles, Arrays(data), null, null, flags);
         return mesh;
     }
 
@@ -46,6 +50,16 @@ public static class MeshConvert
         arrays[(int)Mesh.ArrayType.TexUV] = uvs;
         arrays[(int)Mesh.ArrayType.Color] = colours;
         arrays[(int)Mesh.ArrayType.Index] = data.Indices.ToArray();
+        if (data.Custom.Count == n)
+        {
+            var custom = new float[n * 4];
+            for (var i = 0; i < n; i++)
+            {
+                var c = data.Custom[i];
+                (custom[4 * i], custom[4 * i + 1], custom[4 * i + 2], custom[4 * i + 3]) = (c.X, c.Y, c.Z, c.W);
+            }
+            arrays[(int)Mesh.ArrayType.Custom0] = custom;
+        }
         return arrays;
     }
 

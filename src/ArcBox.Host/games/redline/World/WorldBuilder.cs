@@ -71,14 +71,15 @@ public static class WorldBuilder
         var meshes = TrackMeshes(a);
         (string Name, Material Material, bool Shadow)[] layers =
         [
-            ("Asphalt", Materials.Asphalt, false),
-            ("Lines", Materials.Lines, false),
-            ("Curbs", Materials.Curbs, false),
-            ("Runoff", Materials.Runoff, false),
+            ("Asphalt", TrackMaterials.Asphalt, false),
+            ("Lines", TrackMaterials.Paint, false),
+            ("Curbs", TrackMaterials.Kerbs, false),
+            ("Runoff", TrackMaterials.Runoff, false),
             ("Walls", Materials.Walls, true),
             ("Fence", Materials.Fence, false),
-            ("Verge", Materials.Verge, false),
+            ("Verge", TrackMaterials.Verge, false),
             ("Terrain", Materials.Terrain, false),
+            ("Gravel", TrackMaterials.Gravel, false),
         ];
         for (var i = 0; i < layers.Length; i++)
         {
@@ -109,7 +110,7 @@ public static class WorldBuilder
             return cached;
         }
         var t = a.Track;
-        var meshes = new[] { t.Asphalt, t.Lines, t.Curbs, t.Runoff, t.Walls, t.Fence, t.Grass, a.Terrain }
+        var meshes = new[] { t.Asphalt, t.Lines, t.Curbs, t.Runoff, t.Walls, t.Fence, t.Grass, a.Terrain, t.Gravel }
             .Select(m => MeshConvert.ToArrayMesh(m))
             .ToArray();
         TrackCache[key] = meshes;
