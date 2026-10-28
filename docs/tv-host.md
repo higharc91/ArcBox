@@ -8,7 +8,8 @@ project only draws what the server sends.
 
 1. Install Godot 4.7.2 **.NET** and the .NET 10 SDK.
 2. Start a server: `dotnet run --project src/ArcBox.Server --urls http://localhost:5080`.
-3. Open `src/ArcBox.Host/project.godot` in Godot and press Play (F5). The first open imports the fonts.
+3. Open `src/ArcBox.Host/project.godot` in Godot and press Play (F5). The first open imports the fonts and the
+   Blender models.
 
 Keys on the lobby: **← / →** pick a game, **Enter** starts (when the server says the room can start). On Results, any
 key returns to the lobby once the room is back there. **Esc** during a game ends it for everyone (host override).
@@ -22,7 +23,7 @@ There is no GPU in CI or the dev container, so runs go through Xvfb with Mesa's 
 
 ```sh
 dotnet build src/ArcBox.Host
-godot --headless --editor --quit --path src/ArcBox.Host     # first run only: imports fonts into .godot/
+GODOT=$(command -v godot) tools/godot-import.sh               # imports fonts and models into .godot/ when needed
 xvfb-run -a -s "-screen 0 2560x1440x24" godot --path src/ArcBox.Host --rendering-driver vulkan -- \
   --new-room --shots=/tmp/shots --quit-after=30
 ```
@@ -72,9 +73,11 @@ While running:
 
 ## REDLINE scene
 
-`games/redline/RedlineScene.tscn` draws the race in 3D: Circuit of the Americas with the 22 procedural 2026 cars. All
-geometry comes from the pure-C# builders in `games/Redline/Redline.Presentation` (track, terrain, cars), built at scene
-load on the thread pool and cached for the process (no baked `.res` files); placement (`Formation`), Reveal motion
+`games/redline/RedlineScene.tscn` draws the race in 3D: Circuit of the Americas with the 22 2026 cars. The cars are
+the Blender-built `games/redline/models/car_2026*.glb` (see [`blender-models.md`](blender-models.md)), loaded once in
+the background with the team colours bound to named material slots, and fall back to the procedural car when the model
+is missing or broken. The rest of the geometry comes from the pure-C# builders in `games/Redline/Redline.Presentation`
+(track, terrain, the fallback cars), built at scene load on the thread pool and cached for the process; placement (`Formation`), Reveal motion
 (`RevealMotion`), shot geometry (`ShotFraming`) and shot choice (`CameraDirector`) are unit-tested there too. The scene
 logs `REDLINE world ready in … ms` with the cold build times.
 

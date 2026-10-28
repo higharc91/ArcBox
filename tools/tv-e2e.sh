@@ -96,9 +96,10 @@ if (( BUILD )); then
   dotnet build "$ROOT/src/ArcBox.Server" >> "$OUT/build.log" 2>&1
   dotnet build "$ROOT/src/ArcBox.Host" >> "$OUT/build.log" 2>&1
 fi
-if [[ ! -d "$ROOT/src/ArcBox.Host/.godot/imported" ]]; then
-  log "first run: importing the Godot project"
-  timeout -k 5 600 "$GODOT" --headless --editor --quit --path "$ROOT/src/ArcBox.Host" >> "$OUT/build.log" 2>&1 || true
+# Fonts and the Blender models: import whatever is missing or changed since its last import (a fresh clone, a re-export).
+if ! GODOT="$GODOT" "$ROOT/tools/godot-import.sh" --check > /dev/null; then
+  log "importing the Godot assets"
+  GODOT="$GODOT" "$ROOT/tools/godot-import.sh" >> "$OUT/build.log" 2>&1 || log "import incomplete (the TV falls back where it must)"
 fi
 
 # ---- 2. server

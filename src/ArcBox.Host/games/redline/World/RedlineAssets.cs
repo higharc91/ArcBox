@@ -42,9 +42,21 @@ public static class RedlineAssets
 
     private static readonly ConcurrentDictionary<string, Task> Prewarms = new(StringComparer.Ordinal);
 
-    /// <summary>Starts building the circuit and the cars on the thread pool (once per circuit); returns at once.</summary>
+    /// <summary>
+    /// Starts building the circuit on the thread pool and loading the Blender car in the background (once per circuit);
+    /// returns at once. The procedural cars are only built ahead when the Blender car isn't there (otherwise
+    /// <see cref="Cars"/> still builds them on first use, should the model fail to load).
+    /// </summary>
     public static Task Prewarm(string circuitId) =>
-        Prewarms.GetOrAdd(circuitId, id => Task.WhenAll(Task.Run(() => Circuit(id)), Task.Run(() => Cars)));
+        Prewarms.GetOrAdd(circuitId, id =>
+        {
+            ArcBox.Host.Games.Redline.Cars.CarFactory.Prewarm();
+            var procedural = !ArcBox.Host.Games.Redline.Cars.CarFactory.ModelLikelyAvailable;
+            return Task.WhenAll(Task.Run(() => Circuit(id)), procedural ? Task.Run(() => Cars) : Task.CompletedTask);
+        });
+
+    /// <summary>Every driver code on the grid, in grid order.</summary>
+    public static IReadOnlyList<string> Codes { get; } = [.. Grid2026.Load().Seats.Select(s => s.Driver.Code)];
 
     private static CircuitAssets BuildCircuit(string id)
     {

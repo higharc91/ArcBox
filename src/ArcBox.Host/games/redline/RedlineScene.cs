@@ -114,6 +114,10 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
     {
         RenderPreset.Apply(_world!.Environment.Environment, _world.Sun, GetViewport(), _preset);
         Trees.SetFraction(_world.Trees, RenderPreset.TreeFraction(_preset));
+        foreach (var car in _cars.Values)
+        {
+            car.SetLowDetail(_preset == Preset.Low);
+        }
     }
 
     public override void _Ready()
@@ -485,9 +489,10 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
 
         var cars = new Node3D { Name = "Cars" };
         _world.Root.AddChild(cars);
-        foreach (var code in RedlineAssets.Cars.Keys)
+        foreach (var code in RedlineAssets.Codes)
         {
             var car = CarFactory.Create(code);
+            car.SetLowDetail(_preset == Preset.Low);
             _cars[code] = car;
             _carNodes[code] = car;
             cars.AddChild(car);

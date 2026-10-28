@@ -51,6 +51,9 @@ public static class CarMeshBuilder
     public const float RearTyreRadius = 0.355f;
     public const float NumberSize = 0.24f;
 
+    /// <summary>Centre of the driver's helmet in the car frame.</summary>
+    public static readonly Vector3 HelmetCentre = new(0, 0.83f, 0.15f);
+
     public static readonly Vector4 TcamBlack = LiveryColours.Parse("#101012");
     public static readonly Vector4 TcamYellow = LiveryColours.Parse("#f6e600");
 
@@ -199,12 +202,7 @@ public static class CarMeshBuilder
         CarMeshOps.Append(car.Body, Loft.Box(new Vector3(0.28f, 0.035f, 0.07f), tcam == TcamColour.Yellow ? TcamYellow : TcamBlack),
             CarMeshOps.At(0, 1.04f, -0.42f));
 
-        // Helmet: plain white shell, team band, dark visor.
-        var band = Vector4.Distance(c.Top, HelmetWhite) < 0.15f ? c.Side : c.Top;
-        var helmetAt = CarMeshOps.At(0, 0.83f, 0.15f);
-        CarMeshOps.Append(car.Helmet, Loft.Ellipsoid(new Vector3(0.142f), 48, 32, HelmetWhite), helmetAt);
-        CarMeshOps.Append(car.Helmet, Loft.Ellipsoid(new Vector3(0.1435f), 48, 3, band, 0.49f, 0.67f), helmetAt);
-        CarMeshOps.Append(car.Helmet, Loft.Ellipsoid(new Vector3(0.1442f), 24, 6, Visor, -0.1f, 0.32f, -1.2f, 1.2f), helmetAt);
+        AddHelmet(car.Helmet, c, CarMeshOps.At(HelmetCentre));
 
         // Halo: hoop plus central pillar.
         Vector3[] hoop =
@@ -222,6 +220,27 @@ public static class CarMeshBuilder
             CarMeshOps.Append(car.Rims, Loft.Disc(0.07f, 0.028f, 24, MirrorGlass), Matrix4x4.CreateRotationY(MathF.PI) * CarMeshOps.At(s * 0.52f, 0.72f, 0.5695f));
             CarMeshOps.Append(car.Carbon, Loft.Tube([new(s * 0.30f, 0.66f, 0.62f), new(s * 0.47f, 0.72f, 0.6f)], 1, 8, 0.012f, 0.012f, CarbonColour));
         }
+    }
+
+    /// <summary>Helmet: plain white shell, team band, dark visor.</summary>
+    private static void AddHelmet(MeshData target, Colours c, Matrix4x4 at)
+    {
+        var band = Vector4.Distance(c.Top, HelmetWhite) < 0.15f ? c.Side : c.Top;
+        CarMeshOps.Append(target, Loft.Ellipsoid(new Vector3(0.142f), 48, 32, HelmetWhite), at);
+        CarMeshOps.Append(target, Loft.Ellipsoid(new Vector3(0.1435f), 48, 3, band, 0.49f, 0.67f), at);
+        CarMeshOps.Append(target, Loft.Ellipsoid(new Vector3(0.1442f), 24, 6, Visor, -0.1f, 0.32f, -1.2f, 1.2f), at);
+    }
+
+    /// <summary>
+    /// Just the in-car helmet of <see cref="Build(Livery, int, TcamColour)"/>, centred on the origin (car axes), for
+    /// models that carry their own bodywork and place the helmet at <see cref="HelmetCentre"/>.
+    /// </summary>
+    public static MeshData BuildHelmet(Livery livery)
+    {
+        ArgumentNullException.ThrowIfNull(livery);
+        var mesh = new MeshData();
+        AddHelmet(mesh, new Colours(livery), Matrix4x4.Identity);
+        return mesh;
     }
 
     private static void AddFloor(CarMeshes car)

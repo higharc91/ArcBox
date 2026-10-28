@@ -22,6 +22,7 @@ whenever it changes.
 | Anti-aliasing | MSAA 4× + SMAA, debanding | same | FXAA |
 | Anisotropic filtering | 16× | 16× | 4× |
 | Trees | 1,500 | 1,500 | 750 |
+| Cars ([Blender model](blender-models.md)) | LOD0 (~68k tris) within 60 m, LOD1 (~16k) beyond | same | LOD1 everywhere |
 | Frame cap | 144, VSync off | same | same |
 
 Exponential fog with aerial perspective, glow and AgX tonemapping are on in every preset.
