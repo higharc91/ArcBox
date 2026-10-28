@@ -114,6 +114,7 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
     {
         RenderPreset.Apply(_world!.Environment.Environment, _world.Sun, GetViewport(), _preset);
         Trees.SetFraction(_world.Trees, RenderPreset.TreeFraction(_preset));
+        FigureMaterials.SetSubsurface(RenderPreset.SkinSubsurface(_preset));
         foreach (var car in _cars.Values)
         {
             car.SetLowDetail(_preset == Preset.Low);

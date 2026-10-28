@@ -14,6 +14,8 @@ namespace ArcBox.Host.Games.Redline.World;
 public static class FigureMaterials
 {
     private static readonly Dictionary<string, Material> Cache = new(StringComparer.Ordinal);
+    private static readonly List<StandardMaterial3D> Skins = [];
+    private static bool _subsurface = true;
     /// <summary>Pores and sheen: roughness x 0.8..1.0 in fine blotches.</summary>
     private static readonly Lazy<NoiseTexture2D> SkinGrain = new(() =>
     {
@@ -123,7 +125,20 @@ public static class FigureMaterials
         RimTint = 0.7f,
     });
 
-    private static StandardMaterial3D Skin(Color albedo, float roughness) => Cached($"skin:{albedo.ToHtml(false)}:{roughness}", () => new StandardMaterial3D
+    /// <summary>
+    /// Turns the skin's subsurface scattering on or off for every figure, now and later (<see cref="RenderPreset.SkinSubsurface"/>).
+    /// It is a screen-space pass: on a software renderer it made the podium warm-up take minutes.
+    /// </summary>
+    public static void SetSubsurface(bool enabled)
+    {
+        _subsurface = enabled;
+        foreach (var skin in Skins)
+        {
+            skin.SubsurfScatterEnabled = enabled;
+        }
+    }
+
+    private static StandardMaterial3D Skin(Color albedo, float roughness) => Cached($"skin:{albedo.ToHtml(false)}:{roughness}", () => Track(new StandardMaterial3D
     {
         AlbedoColor = albedo,
         Roughness = roughness,
@@ -132,13 +147,19 @@ public static class FigureMaterials
         RoughnessTextureChannel = BaseMaterial3D.TextureChannel.Red,
         Uv1Triplanar = true,
         Uv1Scale = new Vector3(14, 14, 14),
-        SubsurfScatterEnabled = true,
+        SubsurfScatterEnabled = _subsurface,
         SubsurfScatterStrength = 0.35f,
         SubsurfScatterSkinMode = true,
         RimEnabled = true,
         Rim = 0.12f,
         RimTint = 0.8f,
-    });
+    }));
+
+    private static StandardMaterial3D Track(StandardMaterial3D skin)
+    {
+        Skins.Add(skin);
+        return skin;
+    }
 
     private static T Cached<T>(string key, Func<T> make) where T : Material
     {

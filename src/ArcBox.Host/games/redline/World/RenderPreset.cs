@@ -23,6 +23,9 @@ public static class RenderPreset
     /// <summary>Fraction of the tree instances drawn.</summary>
     public static float TreeFraction(Preset p) => p == Preset.Low ? 0.5f : 1f;
 
+    /// <summary>Screen-space subsurface scattering on the driver figures' skin: off on Low, like the other screen-space effects.</summary>
+    public static bool SkinSubsurface(Preset p) => p != Preset.Low;
+
     public static void Apply(Environment env, DirectionalLight3D sun, Viewport vp, Preset p)
     {
         var ultra = p == Preset.Ultra;
