@@ -51,6 +51,7 @@ public static class RedlineAssets
         Prewarms.GetOrAdd(circuitId, id =>
         {
             ArcBox.Host.Games.Redline.Cars.CarFactory.Prewarm();
+            SetPieces.Prewarm();
             var procedural = !ArcBox.Host.Games.Redline.Cars.CarFactory.ModelLikelyAvailable;
             return Task.WhenAll(Task.Run(() => Circuit(id)), procedural ? Task.Run(() => Cars) : Task.CompletedTask);
         });

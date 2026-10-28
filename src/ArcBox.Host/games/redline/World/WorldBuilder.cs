@@ -4,7 +4,7 @@ using Environment = Godot.Environment;
 namespace ArcBox.Host.Games.Redline.World;
 
 /// <summary>The built world: the root node plus the pieces the scene drives later.</summary>
-public sealed record BuiltWorld(Node3D Root, WorldEnvironment Environment, DirectionalLight3D Sun, StartGantry Gantry, MultiMeshInstance3D Trees);
+public sealed record BuiltWorld(Node3D Root, WorldEnvironment Environment, DirectionalLight3D Sun, StartGantry Gantry, Node3D Trees);
 
 /// <summary>
 /// Assembles the static COTA world from <see cref="RedlineAssets"/>: sky and environment, the sun, track layers, terrain,

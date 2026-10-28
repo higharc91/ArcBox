@@ -1,13 +1,17 @@
 using Godot;
 using Redline.Presentation;
 using Redline.Presentation.Meshes;
+using Redline.Presentation.Models;
 
 namespace ArcBox.Host.Games.Redline.World;
 
 /// <summary>
-/// COTA's landmarks as simple, clean primitives: the main grandstand (right of the start straight) and the pit building
-/// with its pit lane (left), the start gantry with five red lights over s = 0, the Turn 1 grandstand on the hill outside
-/// the hairpin with its red roof, and the Observation Tower with its red canopy inside the Turns 16–18 complex.
+/// COTA's landmarks: the main grandstand (right of the start straight) and the pit building with its pit lane (left),
+/// the start gantry with five red lights over s = 0, the Turn 1 grandstand on the hill outside the hairpin with its red
+/// roof, corner grandstands, and the Observation Tower with its red canopy inside the Turns 16–18 complex. Each is the
+/// Blender model (<see cref="LandmarkModels"/>, through <see cref="SetPieces"/>) when it loads, else the procedural
+/// primitives below, in the same place either way; the instanced crowd sits on the stands' tiers
+/// (<see cref="GrandstandModel"/>) and keeps out of the Blender stands' aisles.
 /// </summary>
 public static class Landmarks
 {
@@ -15,8 +19,6 @@ public static class Landmarks
     public readonly record struct Footprint(float X, float Z, float Radius);
 
     private const float MainStandLateral = 21;
-    private const float MainStandLength = 300;
-    private const int MainStandRows = 22;
     private const float PitLaneInner = 20;
     private const float PitLaneOuter = 31;
     private const float PitLength = 330;
@@ -51,17 +53,24 @@ public static class Landmarks
     {
         var root = new Node3D { Name = "Landmarks" };
 
-        var main = Grandstand(MainStandLength, MainStandRows, new Color("eeeff1"), seed: 5);
+        var main = Grandstand(LandmarkModels.MainStand, new Color("eeeff1"), seed: 5);
         main.Transform = Frame(a, MainStandS(a), -MainStandLateral, -1);
         main.Name = "MainGrandstand";
         root.AddChild(main);
 
         root.AddChild(PitLane(a));
-        var pit = PitBuilding();
+        root.AddChild(PitLaneLines(a));
+        root.AddChild(PitWall(a));
+        if (PitStations(a) is { } stations)
+        {
+            root.AddChild(stations);
+        }
+        var pit = SetPieces.Instantiate(LandmarkModels.PitBuilding) ?? PitBuilding();
+        pit.Name = "PitBuilding";
         pit.Transform = Frame(a, PitS(a), PitLaneOuter + 1, +1);
         root.AddChild(pit);
 
-        var t1 = Grandstand(130, 16, new Color("d0101c"), seed: 9);
+        var t1 = Grandstand(LandmarkModels.TurnOneStand, new Color("d0101c"), seed: 9);
         t1.Transform = TurnOneFrame(a);
         t1.Name = "TurnOneGrandstand";
         root.AddChild(t1);
@@ -71,7 +80,7 @@ public static class Landmarks
         var n = 0;
         foreach (var xf in CornerStandFrames(a))
         {
-            var stand = Grandstand(CornerStandLength, 10, n % 2 == 0 ? new Color("1b4f9c") : new Color("eeeff1"), seed: 20 + n);
+            var stand = Grandstand(LandmarkModels.CornerStand, n % 2 == 0 ? new Color("1b4f9c") : new Color("eeeff1"), seed: 20 + n);
             stand.Transform = xf;
             stand.Name = $"CornerGrandstand{++n}";
             root.AddChild(stand);
@@ -95,7 +104,7 @@ public static class Landmarks
         return new Transform3D(basis, MeshConvert.V(pose.Position));
     }
 
-    private const float CornerStandLength = 90;
+    private static readonly float CornerStandLength = LandmarkModels.CornerStand.Length;
     private const float CornerStandOffset = 30;
 
     /// <summary>
@@ -148,10 +157,30 @@ public static class Landmarks
         return new Vector3(x, a.Ground.Height(x, z), z);
     }
 
-    /// <summary>Stepped grandstand along local X, rows climbing away (+Z), with a crowd, a roof and pillars.</summary>
-    private static Node3D Grandstand(float length, int rows, Color roof, int seed)
+    /// <summary>
+    /// A grandstand along local X, rows climbing away (+Z), with its crowd: the Blender stand (roof, trim and lettering
+    /// in <paramref name="roof"/>'s colour) or the procedural one.
+    /// </summary>
+    private static Node3D Grandstand(GrandstandSpec spec, Color roof, int seed)
     {
         var node = new Node3D();
+        var model = SetPieces.Instantiate(spec.Contract, roof);
+        if (model is not null)
+        {
+            model.Name = "Stand";
+            node.AddChild(model);
+        }
+        else
+        {
+            node.AddChild(ProceduralStand(spec.Length, spec.Rows, roof));
+        }
+        node.AddChild(Crowd(spec.Length, spec.Rows, seed, seated: model is not null));
+        return node;
+    }
+
+    /// <summary>Stepped grandstand along local X, rows climbing away (+Z), with a roof and pillars.</summary>
+    private static MeshInstance3D ProceduralStand(float length, int rows, Color roof)
+    {
         var p = new Prims();
         for (var r = 0; r < rows; r++)
         {
@@ -172,24 +201,37 @@ public static class Landmarks
         p.Box(new Vector3(0, roofY - 0.6f, -4.3f), new Vector3(length + 4, 1.4f, 0.4f), roof.Darkened(0.12f));
         for (var x = -length / 2; x <= length / 2 + 0.1f; x += 25)
             p.Box(new Vector3(x, roofY / 2, depth - 0.2f), new Vector3(0.6f, roofY, 0.6f), new Color("d0d2d6"));
-        node.AddChild(new MeshInstance3D { Mesh = p.Commit(), MaterialOverride = Materials.VertexColour(0.75f, 0, "stand") });
+        return new MeshInstance3D { Mesh = p.Commit(), MaterialOverride = Materials.VertexColour(0.75f, 0, "stand") };
+    }
 
-        // Crowd: one capsule per seat, some seats empty.
+    /// <summary>
+    /// The crowd: one capsule per seat (<see cref="GrandstandModel.SeatXs"/>) on every tread, some seats empty. On the
+    /// Blender stands (<paramref name="seated"/>) the figures are slimmer and sit on the seat pans, about a seat-back
+    /// high, and none sit in the aisles (stairs there); on the procedural stand they stand on the tread as before.
+    /// </summary>
+    private static MultiMeshInstance3D Crowd(float length, int rows, int seed, bool seated)
+    {
         var rng = new Random(seed);
         var seats = new List<(Vector3 Pos, Color Colour)>();
+        IReadOnlyList<float> aisles = seated ? GrandstandModel.Aisles(length) : [];
+        var (radius, height, lift, depth) = seated ? (0.16f, 0.72f, 0.45f + 0.36f, 0.5f) : (0.21f, 0.86f, 0.42f, 0.45f);
+        var xs = GrandstandModel.SeatXs(length);
         for (var r = 0; r < rows; r++)
-            for (var x = -length / 2 + 0.6f; x < length / 2 - 0.4f; x += 0.85f)
+            foreach (var x in xs)
             {
+                if (aisles.Any(a => MathF.Abs(x - a) < GrandstandModel.AisleHalfWidth))
+                    continue;
                 if (rng.NextDouble() < 0.12)
                     continue;
                 var c = new Color(CrowdPalette[rng.Next(CrowdPalette.Length)]).Darkened((float)rng.NextDouble() * 0.15f);
-                seats.Add((new Vector3(x + (float)(rng.NextDouble() - 0.5) * 0.18f, 1 + r * 0.9f + 0.42f, r * 1.2f + 0.45f), c));
+                var y = GrandstandModel.TreadTop(r) + lift;
+                seats.Add((new Vector3(x + (float)(rng.NextDouble() - 0.5) * (seated ? 0.08f : 0.18f), y, (r * GrandstandModel.RowDepth) + depth), c));
             }
         var crowd = new MultiMesh
         {
             TransformFormat = MultiMesh.TransformFormatEnum.Transform3D,
             UseColors = true,
-            Mesh = new CapsuleMesh { Radius = 0.21f, Height = 0.86f, RadialSegments = 6, Rings = 1 },
+            Mesh = new CapsuleMesh { Radius = radius, Height = height, RadialSegments = 6, Rings = 1 },
             InstanceCount = seats.Count,
         };
         for (var i = 0; i < seats.Count; i++)
@@ -197,13 +239,13 @@ public static class Landmarks
             crowd.SetInstanceTransform(i, new Transform3D(Basis.Identity, seats[i].Pos));
             crowd.SetInstanceColor(i, seats[i].Colour);
         }
-        node.AddChild(new MultiMeshInstance3D
+        return new MultiMeshInstance3D
         {
+            Name = "Crowd",
             Multimesh = crowd,
             MaterialOverride = Materials.VertexColour(0.9f, 0, "crowd"),
             CastShadow = GeometryInstance3D.ShadowCastingSetting.Off,
-        });
-        return node;
+        };
     }
 
     private static MeshInstance3D PitBuilding()
@@ -248,9 +290,117 @@ public static class Landmarks
         return new MeshInstance3D { Mesh = st.Commit(), MaterialOverride = Materials.PitLane, Name = "PitLane" };
     }
 
+    /// <summary>
+    /// The pit lane's painted lines, following the track like the lane itself: the fast lane's inner line, the fast/
+    /// working lane divider and a box line at every garage divider.
+    /// </summary>
+    private static MeshInstance3D PitLaneLines(CircuitAssets a)
+    {
+        var st = new SurfaceTool();
+        st.Begin(Mesh.PrimitiveType.Triangles);
+        var white = new Color("ececec");
+        Vector3 P(float ss, float lat) => MeshConvert.V(TrackMeshBuilder.TrackPoint(a.Samples, ss, lat)) + new Vector3(0, 0.06f, 0);
+        void Strip(float s0, float s1, float lat0, float lat1)
+        {
+            // Seen from above, (s0, lat1) → (s1, lat1) → (s1, lat0) → (s0, lat0) is clockwise: Godot's front.
+            var q = new[] { (s0, lat1), (s1, lat1), (s1, lat0), (s0, lat1), (s1, lat0), (s0, lat0) };
+            foreach (var (ss, lat) in q)
+            {
+                st.SetColor(white);
+                st.SetNormal(Vector3.Up);
+                st.SetUV(new Vector2(ss, lat));
+                st.AddVertex(P(ss, lat));
+            }
+        }
+        var start = PitS(a) - (PitLength / 2) - 20;
+        var end = PitS(a) + (PitLength / 2) + 15;
+        foreach (var (from, to) in PitLaneModel.LaneLines)
+        {
+            for (var s = start; s < end; s += 2)
+            {
+                Strip(s, s + 2, from, to);
+            }
+        }
+        foreach (var x in PitLaneModel.GarageDividers)
+        {
+            var s = PitS(a) - x;
+            Strip(s - 0.07f, s + 0.07f, PitLaneModel.LaneLines[^1].To, PitLaneOuter - 0.2f);
+        }
+        return new MeshInstance3D { Mesh = st.Commit(), MaterialOverride = Materials.Lines, Name = "PitLaneLines" };
+    }
+
+    /// <summary>The concrete pit wall under the catch fence, between the track and the pit lane, following the track.</summary>
+    private static MeshInstance3D PitWall(CircuitAssets a)
+    {
+        var st = new SurfaceTool();
+        st.Begin(Mesh.PrimitiveType.Triangles);
+        var face = new Color("e6e7e9");
+        var top = new Color("c9ccd1");
+        Vector3 P(float ss, float lat, float dy) => MeshConvert.V(TrackMeshBuilder.TrackPoint(a.Samples, ss, lat)) + new Vector3(0, dy, 0);
+        void Quad(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, Vector3 outward, Color c, float u0, float u1)
+        {
+            // Emit p0 p1 p2 / p0 p2 p3 in whichever order is clockwise seen from `outward` (Godot's front face).
+            var n = (p1 - p0).Cross(p2 - p0);
+            var flip = n.Dot(outward) > 0;
+            var tris = flip ? new[] { p0, p2, p1, p0, p3, p2 } : new[] { p0, p1, p2, p0, p2, p3 };
+            var uvs = flip
+                ? new[] { new Vector2(u0, 0), new Vector2(u1, 1), new Vector2(u1, 0), new Vector2(u0, 0), new Vector2(u0, 1), new Vector2(u1, 1) }
+                : new[] { new Vector2(u0, 0), new Vector2(u1, 0), new Vector2(u1, 1), new Vector2(u0, 0), new Vector2(u1, 1), new Vector2(u0, 1) };
+            for (var i = 0; i < 6; i++)
+            {
+                st.SetColor(c);
+                st.SetNormal(outward.Normalized());
+                st.SetUV(uvs[i]);
+                st.AddVertex(tris[i]);
+            }
+        }
+        const float lo = -1.0f, hi = PitLaneModel.WallHeight, inner = PitLaneModel.WallInner, outer = PitLaneModel.WallOuter;
+        var start = PitS(a) - (PitLength / 2) - 30;
+        var end = PitS(a) + (PitLength / 2) + 25;
+        for (var s = start; s < end; s += 2)
+        {
+            var across = (P(s, outer, 0) - P(s, inner, 0)).Normalized();
+            Quad(P(s, inner, lo), P(s + 2, inner, lo), P(s + 2, inner, hi), P(s, inner, hi), -across, face, s, s + 2);
+            Quad(P(s, inner, hi), P(s + 2, inner, hi), P(s + 2, outer, hi), P(s, outer, hi), Vector3.Up, top, s, s + 2);
+            Quad(P(s, outer, hi), P(s + 2, outer, hi), P(s + 2, outer, lo), P(s, outer, lo), across, face, s, s + 2);
+        }
+        foreach (var (s, dir) in new[] { (start, -1f), (end, 1f) })
+        {
+            var along = (P(s + 1, inner, 0) - P(s - 1, inner, 0)).Normalized() * dir;
+            Quad(P(s, inner, lo), P(s, outer, lo), P(s, outer, hi), P(s, inner, hi), along, face, 0, 1);
+        }
+        return new MeshInstance3D { Mesh = st.Commit(), MaterialOverride = Materials.VertexColour(0.85f, 0, "pitwall"), Name = "PitWall" };
+    }
+
+    /// <summary>
+    /// The pit-wall stations (<see cref="LandmarkModels.PitStation"/>), each framed at its own point on the track so the
+    /// row follows the straight's rise; null when the model can't be used (the procedural pit has none).
+    /// </summary>
+    private static Node3D? PitStations(CircuitAssets a)
+    {
+        var root = new Node3D { Name = "PitWallStations" };
+        foreach (var x in PitLaneModel.StationOffsets)
+        {
+            if (SetPieces.Instantiate(LandmarkModels.PitStation) is not { } station)
+            {
+                root.Free();
+                return null;
+            }
+            station.Transform = Frame(a, PitS(a) - x, PitLaneModel.WallOuter, +1);
+            root.AddChild(station);
+        }
+        return root;
+    }
+
     private static Node3D Tower(CircuitAssets a)
     {
         var site = TowerSite(a);
+        if (SetPieces.Instantiate(LandmarkModels.Tower) is { } model)
+        {
+            model.Name = "ObservationTower";
+            model.Position = site;
+            return model;
+        }
         var p = new Prims();
         p.Cylinder(new Vector3(0, -2, 0), new Vector3(0, 70, 0), 2.6f, 1.5f, 24, new Color("eef0f2"));
         p.Cylinder(new Vector3(0, 68, 0), new Vector3(0, 71.5f, 0), 7.5f, 8.5f, 32, new Color("c9d2dc"));
@@ -293,6 +443,19 @@ public partial class StartGantry : Node3D
         var left = new Vector3(fwd.Z, 0, -fwd.X);
         // Local: X across the track (left), Y up, Z along travel.
         Transform = new Transform3D(new Basis(left, Vector3.Up, fwd), MeshConvert.V(pose.Position));
+
+        if (SetPieces.Instantiate(LandmarkModels.StartGantry) is { } model)
+        {
+            AddChild(model);
+            foreach (var name in StartGantryModel.Lights)
+            {
+                var pod = SetPieces.Mesh(model, name)!;
+                pod.MaterialOverride = Off;
+                pod.CastShadow = GeometryInstance3D.ShadowCastingSetting.Off;
+                _lights.Add(pod);
+            }
+            return;
+        }
 
         var p = new Prims();
         var steel = new Color("5d626b");

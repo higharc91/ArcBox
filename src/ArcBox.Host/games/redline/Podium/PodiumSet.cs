@@ -9,7 +9,8 @@ using NVector3 = System.Numerics.Vector3;
 namespace ArcBox.Host.Games.Redline.Podium;
 
 /// <summary>
-/// The podium set (podium spec §5), built in code where <see cref="PodiumLayout"/> puts it: a stage with three stepped
+/// The podium set (podium spec §5) where <see cref="PodiumLayout"/> puts it: the Blender set (<see cref="PodiumStage"/>)
+/// when it loads, else built in code: a stage with three stepped
 /// blocks carrying their numerals (2 left, 1 centre and highest, 3 right), a REDLINE media-wall backdrop framed by
 /// light towers and LED strips, a lighting truss, a driver on each step in team colours holding a lathed champagne
 /// bottle with team-colour foil, a pool of <see cref="ChampagneSpray"/>s per bottle and the <see cref="Confetti"/>.
@@ -59,10 +60,18 @@ public partial class PodiumSet : Node3D
 
     public override void _Ready()
     {
-        AddChild(Structure());
-        AddChild(Lamps());
-        AddChild(Backdrop());
-        AddNumerals();
+        var stage = PodiumStage.TryCreate(this);
+        if (stage is not null)
+        {
+            AddChild(stage);
+        }
+        else
+        {
+            AddChild(Structure());
+            AddChild(Lamps());
+            AddChild(Backdrop());
+            AddNumerals();
+        }
         AddLights();
         for (var step = 1; step <= 3; step++)
         {
@@ -70,10 +79,10 @@ public partial class PodiumSet : Node3D
         }
         var top = PodiumLayout.StageHeight + PodiumLayout.BackdropHeight + 0.4f;
         var edge = (PodiumLayout.BackdropWidth / 2) - 0.6f;
-        _confetti = new Confetti(
+        (Vector3, Vector3)[] cannons = stage is not null ? PodiumStage.Cannons(stage) :
             [(new Vector3(-edge, top, PodiumLayout.BackdropZ + 0.4f), new Vector3(0.35f, 1, 0.55f)),
-             (new Vector3(edge, top, PodiumLayout.BackdropZ + 0.4f), new Vector3(-0.35f, 1, 0.55f))],
-            new Vector3(0, top + 3.5f, 0.5f), new Vector3(10, 0.5f, 5));
+             (new Vector3(edge, top, PodiumLayout.BackdropZ + 0.4f), new Vector3(-0.35f, 1, 0.55f))];
+        _confetti = new Confetti(cannons, new Vector3(0, top + 3.5f, 0.5f), new Vector3(10, 0.5f, 5));
         AddChild(_confetti);
     }
 
