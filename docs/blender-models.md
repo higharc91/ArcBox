@@ -157,6 +157,71 @@ glass, seat plastic, shutter aluminium, LEDs, the dot-matrix board, bark and lea
 missing or incomplete; `RedlineAssets.Prewarm` starts loading them all in the background. Tests:
 `Redline.Presentation.Tests/Models/LandmarkModelTests.cs`.
 
+## Drivers and helmets (`driver.py`, `helmet.py`, `data/drivers.json`, group `drivers`)
+
+| File | Budget | Now | Nodes |
+|---|---|---|---|
+| `drivers/<CODE>.glb` (22) | ≤ 40k | 26.5k–33k triangles (Hamilton 39.1k: locs), 0.53–0.76 MB (~13.6 MB for all 22) | `legs`, `spine` › `torso`, `number_suit`, `name_suit`, `head` › (`face`, `hair`, `hair_top`, `locs`, `cap` › `number_cap`), `arm_r` › `forearm_r` › `hand_r` › `bottle`, `arm_l` › `forearm_l` › `hand_l` |
+| `helmets/<CODE>.glb` (22) | ≤ 12k | 8.6k–9.4k triangles, ~0.17 MB (~3.7 MB for all 22) | `helmet` |
+
+**Likeness data.** The user chose face likenesses for this private build. `data/drivers.json` holds, per driver code,
+height, build, skin tone, eye colour, hair (colour, texture, style, length, shape: fringe, sweep, part, volume,
+recession, sides, tied), facial hair, face shape (width, length, jaw width/squareness/definition, chin projection/
+width/height/cleft, cheekbones, cheek fullness, brow ridge, forehead slope, age lines), nose (length, width,
+projection, bridge, bridge width, tip, nostril flare), eyes (spacing, size, openness, tilt, depth, hooding), lips
+(fullness, width, smile), brows, ears, optional jewellery and the helmet scheme. **Every trait carries a
+`confidence` (high, medium, low)**: values are approximations of widely known public appearance, and low means a best
+guess for the user to correct. Shape numbers are small values round 0 (an average adult man), usually -1..1; the
+head applies them with a fixed gain (`lib.head.GAIN`). Edit the file and rebuild with `--only drivers`. Represent
+everyone respectfully: no exaggeration for comedy, no stereotyping; the numbers stay moderate.
+
+**The figure** (`lib.body`, `lib.head`, `lib.hair`, `lib.cap`, `lib.flags`): a stylised-realistic driver at their
+height (head about 1/7.2 of it) in a fitted two-tone race suit (main colour, side panels from hip to armpit, a chest
+band, epaulettes, arm and leg stripes, cuffs and the collar in the second colour, a raised belt), gloves, race boots,
+the team cap, and the nationality flag patch on the left chest by the shoulder (simplified flags, no emblems). The
+head is a parametric surface (`lib.head.Head`): two superellipse halves per height (front and back) interpolated over
+the height, with smooth displacements for the brow, nose, lips, chin, cheekbones, jaw and folds, and the orbit set
+outright: a bowl pressed into the face meeting lids that wrap a sphere round the eyeball (a smooth max), with an
+almond aperture whose margin is an exact edge loop and rolls in behind the eyeball; the upper lid covers the top of
+the iris and a dark lash line runs along it. Eyeballs carry sclera, iris (the driver's colour) and pupil; brows are
+tapered shells; ears have a helix, antihelix, concha and lobe. Hair is a shell over the scalp cut by a hairline
+polygon, thick by style and textured (combed clumps, curls, coils); locs are tubes over the scalp, tied at the back
+when `tied`. Facial hair is painted (light stubble and stubble with a soft two-step edge) or a shell (beard,
+moustache, goatee). Under the cap only `hair` shows; `hair_top` is the part the cap covers.
+
+Surfaces are triangulated adaptively (`lib.figure`): a quadtree sample of the (u, v) domain, fine round the eyelids
+(~1.5 mm), nose and lips and coarse on the back of the head, then Blender's constrained Delaunay triangulation with
+the paint regions (lips, lash lines, stubble, helmet motifs) as exact polygons and creases (lid margins) as edges,
+mapped onto the surface with analytic normals written as custom split normals. Parts with no textures drop their UV
+layer, which keeps the files small.
+
+**The rig.** Rest rotations are all identity: Godot poses the arms by rotating `arm_r`/`forearm_r`/`hand_r` (and the
+left chain) about the shoulder, elbow and wrist. The rest pose holds the bottle (a podium magnum, 0.48 m, the
+`BottleMesh` profile) upright in front of the stomach in both hands: the right round its body, the left under its
+base. `bottle` hangs off `hand_r` with its origin at its base; its mouth is at (0, 0.48, 0).
+
+**Helmets** (`helmet.py`): a 2026-style closed-face shell (chin bar, a proud dark visor with a rubber gasket and side
+pivots, a visor strip, a rear spoiler, a neck seal) centred on the head and facing +Z. The design is the driver's
+scheme from `drivers.json` (`base` + accents `a` and `b` in one motif: stripes, chevrons, halves, flag_bands, swirls)
+plus a small nationality flag on the back: colour schemes only, no copied artwork and no sponsor marks. The shell is
+parametrised round the lateral axis, so stripes over the crown are regular. Slots: `helmet_base`, `helmet_a`,
+`helmet_b`, `visor`, `helmet_trim`, `flag_1..4`.
+
+**Previews.** `--preview` renders every driver (cap off, front and three-quarter: `drivers_sheet.png`; cap on, full
+figure: `drivers_figures.png`, skipped with `figure=0`) and every helmet (`helmets_sheet.png`) with Cycles and studio
+lights (`lib.studio`), subset with `drivers=NOR,HAM`.
+
+**In Godot:** `Podium/PodiumDriver` puts each podium figure on its step: the driver's glb checked against
+`DriverModel` (`Redline.Presentation.Models`), team slots bound to the team's colours and the likeness slots to
+proper surfaces (`World/FigureMaterials`: skin with subsurface scattering and a faint triplanar roughness variation,
+wet eyes, fabric suits), `hair_top` hidden under the cap, the number and surname as `Label3D`s on `number_suit`,
+`name_suit` and `number_cap`. `PodiumSet` decides where the bottle goes (shaken at rest, raised and aimed with
+`SprayLook.Aim` while spraying); `PodiumDriver.Pose` reaches it with a two-bone IK through `arm_r` (the left hand
+stays under the base until the spray lifts it away), and the spray frame follows the figure's `bottle` node. Without
+a usable glb it draws the procedural figure as before. `CarFactory.Helmet` puts `helmets/<CODE>.glb` at the car's
+`helmet` empty (gloss clearcoat paint, iridium visor), else the procedural helmet. `CarFactory.Prewarm` starts
+loading the helmets and figures in the background. Tests: `Redline.Presentation.Tests/Models/DriverModelTests.cs`.
+
 ## The `lib` API
 
 All geometry helpers work in the Godot frame. Shared modules belong to Task 1; later work adds **new** modules (e.g.
@@ -170,6 +235,13 @@ the same file.
 | `lib.mesh` | `Mesh` (`vert`, `face(idx, slot, uv=None, smooth=True)`, `extend(other, matrix)`, `transformed(m)`, `mirrored_x()`, `paint(slot)`, `orient_closed()`, `orient_outward(fn)`, `bounds()`), `merge(*meshes)`; transforms `T`, `Rx`, `Ry`, `Rz`, `S`; `spline(points, per)`; `Section` + `densify`, `section_at`, `ring_rels`, `loft(stations, per, rels, mat_fn, z_breaks, z_grooves, rel_grooves, ...)`; `airfoil`, `Span` + `wing(spans, slot, n, per)`; `plate(outline, thickness, origin, u, v, slot)`, `rounded_outline(points, radius)`; `tube(points, ra, rb, sides, major, slot, caps, per, taper)`; `lathe(profile, segs, slot_or_fn, outward)`; `box`, `ellipsoid`, `cylinder` |
 | `lib.blend` | `reset()`, `make(mesh, name) -> obj` (slots, smooth flags, UVs; faces without UVs get a planar projection), `subsurf(obj, levels)`, `bevel(obj, width, segments, angle)`, `boolean(obj, cutter)` (exact solver, cut faces take the cutter's slot), `weld`, `apply(obj)`, `mark_sharp(obj, angle)`, `finish(obj, angle)` (apply + sharp edges: the last step for every part), `join(objs, name)` (merges slots by name), `set_origin(obj, pos)`, `empty(name, pos, right, up, normal)`, `parent(child, parent)`, `delete(obj)`, `triangles(obj)`, `slot_names(obj)` |
 | `lib.arch` | `frame(origin, right, up, normal)`, `prism(profile_zy, x0, x1, slot)`, `stair_profile(n, run, rise, base)`, `beam(a, b, w, h, slot, up)`, `truss(a, b, w, h, bay, chord, brace, slot, up)`, `ring(points, r, sides, slot)`, `blob(centre, radii, seed, slot, ...)`, `text(body, height, depth, slot, align, shear)` (brand-face lettering, reads from +Z), `repaint(mesh, slot, where)`, `quad(a, b, c, d, slot, uv)` (podium and landmarks) |
+| `lib.figure` | `adaptive_points(u0, u1, v0, v1, spacing, base)` (quadtree samples), `surface(pos, domain, points, base_slot, regions, creases, normal, keep)` (constrained Delaunay with exact paint regions, analytic normals), `grid_surface(pos, us, vs, slot_fn, normal, wrap_u)`, `make_smooth(part, name)` (custom split normals, no UVs), `concat`, `transform`, `weld_mesh`, `flat_normals`; `Curve` (monotone cubic), `smoothstep`, `bump`, `clamp`, `lerp`, `seg_dist`; deterministic `fbm`, `cells`, `hash01` (drivers and helmets) |
+| `lib.head` | `Head(traits)` (`pos(u, y)`, `normal(u, y)`, `point(x, y)`, landmarks, `aperture`, `lip_regions`, `facial_hair_regions`), `skin`, `eyes`, `brows`, `ears`, `studs`; head-local frame: eye line y = 0, ear canal z = 0 |
+| `lib.hair` | `Style(traits)`, `shell(head, style, split)` (`hair` / `hair_top` at `cap_band`), `locs`, `beard` |
+| `lib.body` | `Rig(height, build)` (joints, `ik_elbow`), `torso`, `legs`, `boot`, `arm`, `right_hand`, `left_hand`, `bottle`, `flag_patch`, `surface_point`, `limb` |
+| `lib.cap` | `cap(head, style)` (crown over the hair, brim, button, number frame) |
+| `lib.flags` | `FLAGS[iso]`: simplified national flags as coloured polygons (no emblems or text) |
+| `lib.studio` | `stage(target, scale)` (key, fill, rim, grey world), `render(path, eye, target, lens, res, samples)` (portrait previews) |
 | `lib.materials` | `define(name, colour, metallic, roughness, coat, coat_roughness, emission, emission_strength, alpha, anisotropic)`, presets `paint(name, hex, matte)`, `carbon`, `rubber`, `metal`, `emissive`, `glass`; `get(name)` |
 | `lib.export` | `glb(path, objects)` (the objects and their children only, so one scene can hold several exports) |
 | `lib.glb` | `read(path)`, `summary(path)` → nodes (world transforms), materials, used materials, base colours, triangles, bounds, bytes. Pure Python. |
@@ -197,7 +269,7 @@ Nothing has to be registered, so new modules never edit `build.py`. Planned owne
 | Task | Modules | Exports | Godot side |
 |---|---|---|---|
 | 1 (done) | `car.py` | `car_2026.glb`, `car_2026_lod1.glb` | `ModelLibrary`, `CarFactory`, `CarMaterials`, `CarModel` |
-| 2 | `driver.py`, `helmet.py`, `data/drivers.json` (group `drivers`) | `drivers/<CODE>.glb`, `helmets/<CODE>.glb` | podium figures; `CarFactory.Helmet` swaps to `helmets/<CODE>.glb` at the car's `helmet` empty |
+| 2 (done) | `driver.py`, `helmet.py`, `data/drivers.json`, `lib/{figure,head,hair,body,cap,flags,studio}.py` (group `drivers`) | `drivers/<CODE>.glb`, `helmets/<CODE>.glb` | `PodiumDriver` (from `PodiumSet`), `FigureMaterials`, `DriverModel`, `HelmetModel`; `CarFactory.Helmet` puts `helmets/<CODE>.glb` at the car's `helmet` empty |
 | 3 (done) | `podium.py`, `landmarks.py`, `lib/arch.py` (groups `podium`, `landmarks`) | `podium.glb`, `landmarks/*.glb` | `PodiumStage` (from `PodiumSet`), `Landmarks`, `StartGantry`, `Trees`, `SetPieces`, `SetMaterials` |
 
 For the Godot side, load through `ModelLibrary.Prewarm("drivers/NOR.glb")` and

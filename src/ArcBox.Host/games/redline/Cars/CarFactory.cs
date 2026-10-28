@@ -25,8 +25,16 @@ public static class CarFactory
     private static readonly Dictionary<string, ArrayMesh> Helmets = new(StringComparer.Ordinal);
     private static GradientTexture2D? _contactShadow;
 
-    /// <summary>Starts loading the Blender car in the background (safe to call repeatedly).</summary>
-    public static void Prewarm() => ModelLibrary.Prewarm(CarModel.Lod0File, CarModel.Lod1File);
+    /// <summary>
+    /// Starts loading the Blender car, the drivers' helmets and the podium figures in the background (safe to call
+    /// repeatedly).
+    /// </summary>
+    public static void Prewarm()
+    {
+        ModelLibrary.Prewarm(CarModel.Lod0File, CarModel.Lod1File);
+        ModelLibrary.Prewarm([.. Grid2026.Load().Seats.Select(s => HelmetModel.File(s.Driver.Code))]);
+        Podium.PodiumDriver.Prewarm();
+    }
 
     /// <summary>True unless the Blender car is known to be unusable, i.e. whether the procedural meshes can be skipped.</summary>
     public static bool ModelLikelyAvailable => ModelLibrary.LikelyAvailable(CarModel.Lod0File);
@@ -68,14 +76,7 @@ public static class CarFactory
         car.SetLowDetail(false);
 
         AddNumbers(car, seat, [.. CarModel.Numbers.Select(n => lod0.GetNode<Node3D>(n).Transform.Orthonormalized())], CarModel.NumberSizes);
-        car.AddChild(new MeshInstance3D
-        {
-            Name = "Helmet",
-            Mesh = Helmet(seat),
-            MaterialOverride = Materials.Helmet,
-            Layers = CarNode.CarLayer,
-            Position = lod0.GetNode<Node3D>(CarModel.Helmet).Position,
-        });
+        car.AddChild(Helmet(seat, lod0.GetNode<Node3D>(CarModel.Helmet).Position));
         car.AddChild(ContactShadow());
         car.SetSmoke(new SpinSmoke { Position = new Vector3(0, 0.25f, -1.75f) });
         return car;
@@ -109,8 +110,37 @@ public static class CarFactory
         }
     }
 
-    /// <summary>The in-car helmet (procedural until the per-driver helmet models arrive), centred on the helmet empty.</summary>
-    private static ArrayMesh Helmet(Seat seat)
+    /// <summary>
+    /// The driver's helmet at the car's helmet empty: the Blender helmet in the driver's own design
+    /// (<c>helmets/&lt;CODE&gt;.glb</c>, <see cref="HelmetModel"/>), else the procedural white shell with a team band.
+    /// </summary>
+    private static Node3D Helmet(Seat seat, Vector3 at)
+    {
+        var contract = HelmetModel.Contract(seat.Driver.Code);
+        var model = ModelLibrary.Instantiate(contract.File, n =>
+        {
+            var (nodes, mats) = ModelLibrary.Names(n);
+            return contract.Missing(nodes, mats);
+        });
+        if (model is not null)
+        {
+            model.Name = "Helmet";
+            model.Position = at;
+            FigureMaterials.Bind(model, FigureMaterials.Helmet, CarNode.CarLayer);
+            return model;
+        }
+        return new MeshInstance3D
+        {
+            Name = "Helmet",
+            Mesh = ProceduralHelmet(seat),
+            MaterialOverride = Materials.Helmet,
+            Layers = CarNode.CarLayer,
+            Position = at,
+        };
+    }
+
+    /// <summary>The procedural helmet mesh (cached per driver), centred on its origin.</summary>
+    private static ArrayMesh ProceduralHelmet(Seat seat)
     {
         if (!Helmets.TryGetValue(seat.Driver.Code, out var mesh))
         {

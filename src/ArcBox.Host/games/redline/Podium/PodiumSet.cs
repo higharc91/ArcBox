@@ -12,8 +12,9 @@ namespace ArcBox.Host.Games.Redline.Podium;
 /// The podium set (podium spec §5) where <see cref="PodiumLayout"/> puts it: the Blender set (<see cref="PodiumStage"/>)
 /// when it loads, else built in code: a stage with three stepped
 /// blocks carrying their numerals (2 left, 1 centre and highest, 3 right), a REDLINE media-wall backdrop framed by
-/// light towers and LED strips, a lighting truss, a driver on each step in team colours holding a lathed champagne
-/// bottle with team-colour foil, a pool of <see cref="ChampagneSpray"/>s per bottle and the <see cref="Confetti"/>.
+/// light towers and LED strips, a lighting truss; a driver on each step (<see cref="PodiumDriver"/>: the driver's Blender
+/// figure in team colours holding the champagne, else a procedural figure), a pool of <see cref="ChampagneSpray"/>s per
+/// bottle and the <see cref="Confetti"/>.
 /// <see cref="RedlineScene"/> shows it for the Anthem and the Champagne (<see cref="ShowCeremony"/>), hides it otherwise
 /// (<see cref="HideCeremony"/>) and fires sprays (<see cref="Spray"/>); the drivers shake their bottles as their charge rises.
 /// </summary>
@@ -29,15 +30,9 @@ public partial class PodiumSet : Node3D
 
     private sealed class Place
     {
-        public Node3D Figure = null!;
-        public MeshInstance3D Body = null!;
-        public MeshInstance3D[] Arms = null!;
-        public StandardMaterial3D Suit = null!;
-        public Node3D Bottle = null!;
-        public MeshInstance3D Glass = null!;
-        public MeshInstance3D Foil = null!;
+        /// <summary>The figure, its arms and its bottle (<see cref="PodiumDriver.Bottle"/> carries the sprays).</summary>
+        public PodiumDriver Driver = null!;
         public ChampagneSpray[] Sprays = null!;
-        public string? Code;
         public double Charge;
         /// <summary>0 at rest, 1 with the bottle raised and spraying (eased).</summary>
         public double Raise;
@@ -100,20 +95,16 @@ public partial class PodiumSet : Node3D
             {
                 var step = podium.Steps.FirstOrDefault(s => s.Step == i + 1);
                 var place = _places[i];
-                place.Figure.Visible = step is not null;
-                place.Bottle.Visible = step is not null;
-                foreach (var arm in place.Arms)
-                {
-                    arm.Visible = step is not null;
-                }
+                place.Driver.SetVisible(step is not null);
                 if (step is null)
                 {
                     continue;
                 }
                 place.Charge = step.Charge;
-                if (place.Code != step.Code)
+                if (place.Driver.Code != step.Code)
                 {
-                    Dress(place, step);
+                    place.Driver.Dress(step);
+                    Pose(place, i + 1, 0);
                 }
             }
         }
@@ -163,7 +154,7 @@ public partial class PodiumSet : Node3D
     }
 
     /// <summary>Where <paramref name="step"/>'s bottle mouth is now, in the world (the HUD and the camera may follow it).</summary>
-    public Vector3 Mouth(int step) => _places[step - 1].Bottle.ToGlobal(new Vector3(0, BottleMesh.Height, 0));
+    public Vector3 Mouth(int step) => _places[step - 1].Driver.Bottle.ToGlobal(new Vector3(0, BottleMesh.Height, 0));
 
     public override void _Process(double delta)
     {
@@ -190,9 +181,11 @@ public partial class PodiumSet : Node3D
     /// </summary>
     private void Pose(Place place, int step, double delta)
     {
-        var rest = V(PodiumLayout.Bottle(step));
+        var driver = place.Driver;
+        var rest = driver.RestBottle.Origin;
         var side = step == 2 ? 1f : step == 3 ? -1f : 0.4f;
-        var idleUp = new Vector3(0.18f * side, 1, 0.42f).Normalized();
+        // The Blender figure holds the bottle nearly upright in both hands; the procedural one leans it at the camera.
+        var idleUp = driver.HasModel ? new Vector3(0.06f * side, 1, 0.12f).Normalized() : new Vector3(0.18f * side, 1, 0.42f).Normalized();
         var shake = (float)(place.Raise < 0.5 && _phase is RacePhase.Anthem or RacePhase.Champagne ? 0.015 + (0.07 * place.Charge) : 0);
         var rate = 7.5 + step;
         var wobble = Mathf.Sin((float)(_time * rate * Mathf.Tau));
@@ -201,23 +194,14 @@ public partial class PodiumSet : Node3D
 
         var jet = place.Sprays.Where(s => s.Busy && IsJet(s)).MinBy(s => s.Age);
         var aimUp = V(SprayLook.Aim(step, jet?.Age ?? 0));
-        var raisedPos = rest + new Vector3(0, 0.32f, 0.16f);
+        var raisedPos = driver.RaisedBottle;
 
         var k = (float)RevealSmooth(place.Raise);
         var up = idleUp.Lerp(aimUp, k).Normalized();
         var pos = idlePos.Lerp(raisedPos, k);
-        var basis = BasisFromUp(up);
-        place.BottleXf = new Transform3D(basis, pos);
-        place.Bottle.Transform = place.BottleXf;
-
-        // Arms: the right hand round the body, the left under the punt (seen from the front: right is +X).
-        var top = V(PodiumLayout.StepTopCentre(step));
-        var shoulderR = top + new Vector3(0.23f, 1.42f, 0.02f);
-        var shoulderL = top + new Vector3(-0.23f, 1.42f, 0.02f);
-        var handR = place.BottleXf * new Vector3(0.05f, 0.2f, 0);
-        var handL = place.BottleXf * new Vector3(-0.03f, 0.04f, 0.02f);
-        Limb(place.Arms[0], shoulderR, handR);
-        Limb(place.Arms[1], shoulderL, handL);
+        place.BottleXf = new Transform3D(BasisFromUp(up), pos);
+        // The arms reach the bottle (two-bone IK on the Blender figure's arm_r); the spray frame follows the hand.
+        driver.Pose(place.BottleXf, k);
     }
 
     private static double RevealSmooth(double t) => global::Redline.Presentation.RevealMotion.SmoothStep(t);
@@ -233,107 +217,18 @@ public partial class PodiumSet : Node3D
         return new Basis(x, up, z);
     }
 
-    /// <summary>Stretches a unit-height cylinder from <paramref name="from"/> to <paramref name="to"/>.</summary>
-    private static void Limb(MeshInstance3D limb, Vector3 from, Vector3 to)
-    {
-        var d = to - from;
-        var len = Mathf.Max(0.05f, d.Length());
-        var y = d / len;
-        var b = BasisFromUp(y);
-        var basis = new Basis(b.X, b.Y * len, b.Z);
-        limb.Transform = new Transform3D(basis, from + (d / 2));
-    }
-
     // ---- people and bottles ---------------------------------------------------------------------------------
 
     private Place BuildPlace(int step)
     {
-        var place = new Place();
-        place.Suit = new StandardMaterial3D { AlbedoColor = new Color("cccccc"), Roughness = 0.62f };
-        place.Figure = new Node3D { Name = $"Driver{step}", Position = V(PodiumLayout.StepTopCentre(step)) };
-        place.Body = new MeshInstance3D { Name = "Body", MaterialOverride = Materials.VertexColour(0.6f, 0, "podium-figure") };
-        place.Figure.AddChild(place.Body);
-        AddChild(place.Figure);
-
-        var arm = new CylinderMesh { TopRadius = 0.052f, BottomRadius = 0.058f, Height = 1, RadialSegments = 10, Rings = 1 };
-        place.Arms = [.. Enumerable.Range(0, 2).Select(i => new MeshInstance3D { Name = $"Arm{i}", Mesh = arm, MaterialOverride = place.Suit })];
-        foreach (var a in place.Arms)
-        {
-            AddChild(a);
-        }
-
-        place.Bottle = new Node3D { Name = $"Bottle{step}" };
-        AddChild(place.Bottle);
-        place.Glass = new MeshInstance3D
-        {
-            Name = "Glass",
-            MaterialOverride = new StandardMaterial3D
-            {
-                VertexColorUseAsAlbedo = true,
-                VertexColorIsSrgb = true,
-                Roughness = 0.07f,
-                Metallic = 0.15f,
-                MetallicSpecular = 0.9f,
-                ClearcoatEnabled = true,
-                Clearcoat = 1,
-                RimEnabled = true,
-                Rim = 0.4f,
-            },
-        };
-        place.Foil = new MeshInstance3D { Name = "Foil", MaterialOverride = Materials.VertexColour(0.28f, 0.85f, "podium-foil") };
-        place.Bottle.AddChild(place.Glass);
-        place.Bottle.AddChild(place.Foil);
+        var place = new Place { Driver = new PodiumDriver(this, step) };
         place.Sprays = [.. Enumerable.Range(0, SpraysPerBottle).Select(_ => new ChampagneSpray { Position = new Vector3(0, BottleMesh.Height + 0.01f, 0) })];
         foreach (var s in place.Sprays)
         {
-            place.Bottle.AddChild(s);
+            place.Driver.Bottle.AddChild(s);
         }
-        Dress(place, null);
         Pose(place, step, 0);
         return place;
-    }
-
-    /// <summary>Puts the driver in their team's colours and gives them a bottle with that team's foil.</summary>
-    private static void Dress(Place place, PodiumStep? step)
-    {
-        place.Code = step?.Code;
-        var team = TeamAccent.Team(step?.TeamId);
-        var suit = team is null ? new Color("d0d0d4") : new Color(team.Livery.Top);
-        var accent = new Color(TeamAccent.ById(step?.TeamId));
-        place.Suit.AlbedoColor = suit;
-        place.Body.Mesh = Figure(suit, accent);
-        var bottle = BottleMesh.Build(TeamAccent.ById(step?.TeamId));
-        place.Glass.Mesh = MeshConvert.ToArrayMesh(bottle.Glass);
-        place.Foil.Mesh = MeshConvert.ToArrayMesh(bottle.Foil);
-    }
-
-    /// <summary>A driver in race suit and team cap, facing the camera (+Z), feet on the origin.</summary>
-    private static ArrayMesh Figure(Color suit, Color accent)
-    {
-        var p = new Prims();
-        var skin = new Color("c99a7a");
-        var boot = new Color("15151a");
-        var dark = suit.Darkened(0.25f);
-        foreach (var x in new[] { -0.11f, 0.11f })
-        {
-            p.Box(new Vector3(x, 0.05f, 0.04f), new Vector3(0.12f, 0.1f, 0.27f), boot);
-            p.Cylinder(new Vector3(x, 0.08f, 0), new Vector3(x * 0.95f, 0.88f, 0), 0.078f, 0.104f, 12, suit);
-        }
-        p.Ellipsoid(new Vector3(0, 0.92f, 0), new Vector3(0.2f, 0.12f, 0.14f), 14, 7, suit);
-        p.Cylinder(new Vector3(0, 0.88f, 0), new Vector3(0, 0.96f, 0), 0.198f, 0.198f, 16, dark);     // belt
-        p.Ellipsoid(new Vector3(0, 1.17f, 0), new Vector3(0.215f, 0.3f, 0.145f), 16, 9, suit);
-        p.Ellipsoid(new Vector3(0, 1.37f, 0), new Vector3(0.255f, 0.1f, 0.145f), 16, 6, suit);
-        // Accent panels down the sides of the torso.
-        foreach (var x in new[] { -0.2f, 0.2f })
-        {
-            p.Ellipsoid(new Vector3(x, 1.16f, 0), new Vector3(0.03f, 0.22f, 0.12f), 8, 6, accent);
-        }
-        p.Cylinder(new Vector3(0, 1.42f, 0), new Vector3(0, 1.53f, 0), 0.055f, 0.05f, 10, skin);
-        p.Ellipsoid(new Vector3(0, 1.62f, 0.005f), new Vector3(0.092f, 0.112f, 0.1f), 14, 9, skin);
-        // The cap: crown and a brim pointing at the camera.
-        p.Ellipsoid(new Vector3(0, 1.665f, -0.005f), new Vector3(0.102f, 0.072f, 0.11f), 14, 7, accent);
-        p.Ellipsoid(new Vector3(0, 1.655f, 0.1f), new Vector3(0.088f, 0.012f, 0.075f), 12, 4, accent.Darkened(0.15f));
-        return p.Commit();
     }
 
     // ---- the set --------------------------------------------------------------------------------------------
