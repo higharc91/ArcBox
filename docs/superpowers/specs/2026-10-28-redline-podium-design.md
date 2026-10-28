@@ -30,12 +30,14 @@ The music heard behind real F1 podium celebrations is the official F1 theme (Bri
 | AR (COL) | Himno Nacional Argentino (B. Parera, 1813) | PD |
 | NZ (LAW) | God Defend New Zealand (J. J. Woods, 1876) | PD |
 | DE (HUL) | Das Lied der Deutschen (J. Haydn, 1797) | PD |
-| BR (BOR) | Hino Nacional Brasileiro (F. M. da Silva, 1831) | PD |
+| BR (BOR) | Hino Nacional Brasileiro (F. M. da Silva, 1831) | **Fallback** — Brazilian law (Lei 5.700/1971, art. 34) restricts arrangements of the anthem |
 | FI (BOT) | Maamme (F. Pacius, 1848) | PD |
 | TH (ALB) | Phleng Chat Thai (Phra Chenduriyang, 1932) | **Fallback** — public-domain status outside Thailand unclear |
 | MX (PER) | Himno Nacional Mexicano (J. Nunó, 1854) | **Fallback** — Mexican law forbids arrangements of the anthem |
 
 Only the opening phrases are played (≈ 16 s), as F1 broadcasts often do.
+
+**Update 2026-10-28:** MC, AR and NZ are public domain but ship without a melody until each is checked against a score (the TV plays the theme when `Anthems.Find(id)?.HasMelody` is false). Brazil is a permanent fallback for the legal reason in the table.
 
 ## 2. Rules and flow
 

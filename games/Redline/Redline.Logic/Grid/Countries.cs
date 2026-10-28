@@ -25,7 +25,7 @@ public static class Countries
         new("AR", "Argentina", "ar"),
         new("NZ", "New Zealand", "nz"),
         new("DE", "Germany", "de"),
-        new("BR", "Brazil", "br"),
+        new("BR", "Brazil", null),     // Brazilian law (Lei 5.700/1971, art. 34) restricts arrangements of the anthem
         new("FI", "Finland", "fi"),
         new("TH", "Thailand", null),   // public-domain status outside Thailand unclear
         new("MX", "Mexico", null),     // Mexican law forbids arrangements of the anthem

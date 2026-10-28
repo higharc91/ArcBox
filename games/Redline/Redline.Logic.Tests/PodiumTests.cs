@@ -396,6 +396,7 @@ public class PodiumTests
         Assert.Equal(new Country("GB", "Great Britain", "gb"), Countries.Find("GB"));
         Assert.Equal(new Country("MX", "Mexico", null), Countries.Find("MX"));
         Assert.Equal(new Country("TH", "Thailand", null), Countries.Find("TH"));
+        Assert.Equal(new Country("BR", "Brazil", null), Countries.Find("BR"));   // Lei 5.700/1971 art. 34
         Assert.Null(Countries.Find("XX"));
         Assert.All(Countries.All.Where(c => c.AnthemId is not null), c => Assert.Equal(c.Code.ToLowerInvariant(), c.AnthemId));
         Assert.Equal(15, Countries.All.Count);
