@@ -8,6 +8,7 @@ public sealed class PlayerSlot
     public required string Name { get; init; }
     public required string SecretHash { get; set; }     // Secrets.Hash of the plaintext; the plaintext is never stored
     public required int JoinOrder { get; init; }
+    public ProfileId? Profile { get; set; }             // the person behind the seat in a campaign room; null otherwise
     public string? ConnectionId { get; set; }
     public bool Connected => ConnectionId is not null;
 }

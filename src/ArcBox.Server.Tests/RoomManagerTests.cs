@@ -2,21 +2,33 @@ using System.Text.Json;
 using ArcBox.Sdk;
 using ArcBox.Sdk.Protocol;
 using ArcBox.Server.Games;
+using ArcBox.Server.Profiles;
 using ArcBox.Server.Rooms;
+using ArcBox.Server.Storage;
+using ArcBox.Server.Tests.Storage;
 using ArcBox.Server.Tests.Support;
 using ArcBox.Server.Tests.TestGames;
 using Counter.Logic;
 using Microsoft.Extensions.Logging.Abstractions;
-using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Time.Testing;
 using Xunit;
 
 namespace ArcBox.Server.Tests;
 
-public class RoomManagerTests
+public sealed class RoomManagerTests : IDisposable
 {
     private readonly FakeTimeProvider time = new(new DateTimeOffset(2026, 1, 1, 0, 0, 0, TimeSpan.Zero));
     private readonly RecordingSender sender = new();
+    private readonly ArcDb db = StorageTestSupport.NewMemoryDb();
+    private readonly StorageWriter writer;
+
+    public RoomManagerTests() => writer = new StorageWriter(db, time, NullLogger<StorageWriter>.Instance);
+
+    public void Dispose()
+    {
+        writer.Dispose();
+        db.Dispose();
+    }
 
     private static JsonElement Json(object o) => JsonSerializer.SerializeToElement(o, ArcJson.Options);
 
@@ -31,8 +43,9 @@ public class RoomManagerTests
             registrations.Add(new(() => new HangerGame()));
         }
         var registry = new GameRegistry(registrations);
-        var options = Options.Create(new RoomOptions { MaxRooms = maxRooms });
-        return new RoomManager(registry, sender, time, options, NullLoggerFactory.Instance);
+        var services = new RoomServices(registry, sender, time, new RoomOptions { MaxRooms = maxRooms },
+            new ProfileService(db, writer, time), NullLoggerFactory.Instance);
+        return new RoomManager(services);
     }
 
     [Fact]

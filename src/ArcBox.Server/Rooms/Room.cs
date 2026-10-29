@@ -38,25 +38,18 @@ public sealed class Room
     private DateTimeOffset? _hostAbsentSince;
     private DateTimeOffset? _allAbsentSince;
 
-    public Room(
-        string code,
-        string hostToken,
-        IGameRegistry registry,
-        IClientSender sender,
-        TimeProvider time,
-        RoomOptions options,
-        ILogger<Room> logger)
+    public Room(string code, string hostToken, RoomServices services)
     {
         Code = code;
         _hostTokenHash = Secrets.Hash(hostToken);
-        _registry = registry;
-        _sender = sender;
-        _time = time;
-        _options = options;
-        _logger = logger;
-        _members = new RoomMembers(options);
+        _registry = services.Registry;
+        _sender = services.Sender;
+        _time = services.Time;
+        _options = services.Options;
+        _logger = services.Loggers.CreateLogger<Room>();
+        _members = new RoomMembers(_options);
 
-        var now = time.GetUtcNow();
+        var now = _time.GetUtcNow();
         _hostAbsentSince = now;
         _allAbsentSince = now;
     }
@@ -146,7 +139,49 @@ public sealed class Room
         }
     });
 
-    public Task<JoinResult> JoinAsync(string connectionId, string name) => EnqueueAsync(() =>
+    // --- Seats: how a phone gets into the room (spec §3.1-3.2) ---
+
+    /// <summary>What a phone with these profile keys may take. Creates and changes nothing.</summary>
+    public Task<RoomPeek> PeekAsync(IReadOnlyList<string> profileKeys) => EnqueueAsync(() =>
+    {
+        // Every offline seat is on offer, in join order. Profile-backed seats, and so Suggested, arrive with campaigns.
+        var offers = _members.Offline
+            .Select(s => new SeatOffer(new SeatRef(Slot: s.Id), new SeatCard(s.Name), Absent: true))
+            .ToList();
+
+        return new RoomPeek(Code, _selectedGameId, CampaignName: null, InGame: _status == RoomStatus.InGame,
+            offers, Suggested: null, CanJoinNew: _status != RoomStatus.InGame);
+    });
+
+    /// <summary>Takes a seat: either a new one under <c>NewName</c>, or an existing offline one.</summary>
+    public Task<JoinResult> TakeSeatAsync(string connectionId, TakeSeatRequest request) => EnqueueAsync(() =>
+    {
+        if ((request.Seat is null) == (request.NewName is null))
+        {
+            throw new RoomException("Pick a seat or enter a name.");
+        }
+
+        return request.NewName is not null
+            ? TakeNewSeat(connectionId, request.NewName)
+            : TakeOfflineSeat(connectionId, request.Seat!);
+    });
+
+    /// <summary>The pre-picker call; a stale phone tab still uses it.</summary>
+    public Task<JoinResult> JoinAsync(string connectionId, string name) =>
+        TakeSeatAsync(connectionId, new TakeSeatRequest(Code, NewName: name));
+
+    public Task RejoinAsync(string connectionId, PlayerId playerId, string secret) => EnqueueAsync(() =>
+    {
+        var slot = _members.FindBySecret(playerId, secret);
+        if (slot == null)
+        {
+            throw new RoomException("Couldn't rejoin. Please join again.");
+        }
+
+        SeatConnection(connectionId, slot);
+    });
+
+    private JoinResult TakeNewSeat(string connectionId, string name)
     {
         if (_status == RoomStatus.InGame)
         {
@@ -164,16 +199,31 @@ public sealed class Room
         BroadcastLobby();
 
         return new JoinResult(Code, slot!.Id, secret!);
-    });
+    }
 
-    public Task RejoinAsync(string connectionId, PlayerId playerId, string secret) => EnqueueAsync(() =>
+    private JoinResult TakeOfflineSeat(string connectionId, SeatRef seat)
     {
-        var slot = _members.FindBySecret(playerId, secret);
+        var slot = seat.Slot is { } id ? _members.Find(id) : null;
         if (slot == null)
         {
             throw new RoomException("Couldn't rejoin. Please join again.");
         }
 
+        // The inbox runs one message at a time, so of two phones tapping the same seat the second one sees it taken.
+        if (slot.Connected)
+        {
+            throw new RoomException($"Someone's already playing as {slot.Name}.");
+        }
+
+        // The old phone's secret stops working; if it comes back, its Rejoin fails and it lands on the picker.
+        var secret = _members.RotateSecret(slot);
+        SeatConnection(connectionId, slot);
+        return new JoinResult(Code, slot.Id, secret);
+    }
+
+    /// <summary>Binds <paramref name="connectionId"/> to an existing seat and brings the phone up to date.</summary>
+    private void SeatConnection(string connectionId, PlayerSlot slot)
+    {
         bool wasConnected = slot.Connected;
         _members.Bind(slot, connectionId);
         _knownConnections.TryAdd(connectionId, 0);
@@ -183,7 +233,7 @@ public sealed class Room
 
         if (_status == RoomStatus.InGame && _session != null)
         {
-            var playerView = _session.CurrentPlayerView(playerId);
+            var playerView = _session.CurrentPlayerView(slot.Id);
             if (playerView != null)
             {
                 _sender.Send(connectionId, ClientMethods.ControllerView, playerView.View);
@@ -191,13 +241,13 @@ public sealed class Room
 
             if (!wasConnected)
             {
-                _session.ConnectionChanged(playerId, true);
+                _session.ConnectionChanged(slot.Id, true);
                 Publish();
             }
         }
 
         BroadcastLobby();
-    });
+    }
 
     public Task SelectGameAsync(string connectionId, string gameId) => EnqueueAsync(() =>
     {
@@ -243,7 +293,7 @@ public sealed class Room
 
         var vipId = _members.VipId;
         var players = _members.All
-            .Select(s => new Player(s.Id, s.Name, IsVip: s.Id == vipId))
+            .Select(s => new Player(s.Id, s.Name, IsVip: s.Id == vipId, s.Profile))
             .ToList();
 
         var game = _registry.Create(_selectedGameId);

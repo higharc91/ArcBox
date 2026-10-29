@@ -64,6 +64,11 @@ public sealed class TestClient : IAsyncDisposable
 
     public string? ConnectionId => _connection.ConnectionId;
 
+    public Task<RoomPeek> PeekAsync(string code, IReadOnlyList<string>? profileKeys = null) =>
+        InvokeAsync<RoomPeek>("Peek", new PeekRequest(code, profileKeys));
+
+    public Task<JoinResult> TakeSeatAsync(TakeSeatRequest request) => InvokeAsync<JoinResult>("TakeSeat", request);
+
     public Task InvokeAsync(string method, params object?[] args) => _connection.InvokeCoreAsync(method, args);
 
     public Task<T> InvokeAsync<T>(string method, params object?[] args) => _connection.InvokeCoreAsync<T>(method, args);
