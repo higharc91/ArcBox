@@ -13,7 +13,7 @@ public sealed record LedgerHostView(IReadOnlyList<LedgerSeat> Seats, IReadOnlyLi
 
 /// <summary>
 /// Records what the platform tells a game: every connection change as <c>connected:{id}:true|false</c> and every input as
-/// <c>input:{id}</c>. The host view shows the seats and that log, so a test can wait for an entry. Input
+/// <c>input:{id}</c>, and every host signal as <c>signal:{kind}:{payload}</c> (kind <c>boom</c> throws instead). The host view shows the seats and that log, so a test can wait for an entry. Input
 /// <c>{"crash":true}</c> throws, and <c>{"save":"x"}</c> appends "x" to the campaign document's <c>notes</c> through the
 /// lease (see <see cref="LedgerRules"/>).
 /// </summary>
@@ -22,7 +22,7 @@ public sealed record LedgerHostView(IReadOnlyList<LedgerSeat> Seats, IReadOnlyLi
 /// with every player disconnected. The same game registered with <see cref="Plain"/> (<c>plain-ledger</c>) is a game
 /// without campaigns that isn't resumed (its manifest doesn't say so), for seat tests that don't need one.
 /// </remarks>
-public sealed class LedgerGame : IGame, ICampaignGame, IResumableGame
+public sealed class LedgerGame : IGame, ICampaignGame, IResumableGame, IHostAware
 {
     public static readonly GameManifest Campaign = new("ledger", "Ledger", "Test game", 1, 8, UsesCampaigns: true,
         ResumesAfterRestart: true);
@@ -82,6 +82,16 @@ public sealed class LedgerGame : IGame, ICampaignGame, IResumableGame
         }
 
         _log.Add($"input:{from}");
+    }
+
+    public void OnHostSignal(string kind, PlayerInput payload)
+    {
+        if (kind == "boom")
+        {
+            throw new InvalidOperationException("boom");
+        }
+
+        _log.Add($"signal:{kind}:{payload.Payload.GetRawText()}");
     }
 
     public void OnTimer(string key) { }

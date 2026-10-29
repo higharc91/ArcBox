@@ -136,6 +136,14 @@ public sealed class HostClient : IAsyncDisposable
 
     public Task KickAsync(string playerId) => CallAsync(() => _connection.InvokeAsync("Kick", playerId));
 
+    /// <summary>
+    /// Tells the running game something the TV saw, e.g. <c>SignalAsync("done", new { seq = 41 })</c>. The game may ignore
+    /// it; the server drops signals for games that don't listen. Throws <see cref="HubException"/>("Invalid signal.") for a
+    /// <paramref name="kind"/> outside <c>[A-Za-z0-9_.-]{1,32}</c> or a payload over 4096 bytes of JSON.
+    /// </summary>
+    public Task SignalAsync(string kind, object payload) =>
+        CallAsync(() => _connection.InvokeAsync("HostSignal", kind, JsonSerializer.SerializeToElement(payload, ArcJson.Options)));
+
     /// <summary>Test hook: fails the in-flight transport requests as if the network dropped. Needs a test handler.</summary>
     internal Task SimulateDropAsync()
     {

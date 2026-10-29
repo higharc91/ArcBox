@@ -141,6 +141,27 @@ public class HostClientTests
     }
 
     [Fact]
+    public async Task SignalAsync_invokes_hub()
+    {
+        using var f = new HostServerFactory();
+        await using var host = f.CreateHostClient();
+        var events = new EventRecorder(host);
+        await host.ConnectAsync(Ct);
+        var room = await host.CreateRoomAsync();
+        var (phone, _) = await f.JoinAsync(room.Code, "Ann");
+        await using var _phone = phone;
+        await host.SelectGameAsync(SignalEchoGame.Id);
+        await events.WaitForAsync<LobbyEvent>(e => e.Lobby.CanStart);
+        await host.StartGameAsync();
+        await events.WaitForAsync<HostViewEvent>();
+
+        await host.SignalAsync("done", new { seq = 41 });
+
+        var view = await events.WaitForAsync<HostViewEvent>(v => v.View.GetProperty("signals").GetArrayLength() == 1);
+        Assert.Equal("done:{\"seq\":41}", view.View.GetProperty("signals")[0].GetString());
+    }
+
+    [Fact]
     public async Task Return_to_lobby_ends_the_game_with_results()
     {
         using var f = new HostServerFactory();

@@ -76,6 +76,10 @@ public sealed class ArcHub(RoomManager rooms) : Hub
     public Task SendInput(string viewId, JsonElement payload) =>
         WithHubErrors(() => CurrentRoom().SendInputAsync(Context.ConnectionId, viewId, payload));
 
+    /// <summary>The TV tells the running game something, e.g. that an animation finished (spec §3.7). Host only.</summary>
+    public Task HostSignal(string kind, JsonElement payload) =>
+        WithHubErrors(() => CurrentRoom().HostSignalAsync(Context.ConnectionId, kind, payload));
+
     public override async Task OnDisconnectedAsync(Exception? exception)
     {
         var room = rooms.RoomFor(Context.ConnectionId);

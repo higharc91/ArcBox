@@ -60,3 +60,39 @@ back arrives as `OnPlayerConnectionChanged(id, true)`; it's the same call a phon
 **5. Never hand every seat to the AI on `Resume`.** If your game also sets `ResumesAfterRestart`, `IResumableGame.Resume`
 gets every player disconnected, because nobody has reconnected yet after the restart. Wait for them, for example with a
 "Resuming…" phase, and only give the AI the seats of people who were absent before the restart.
+
+## Host signals
+
+A game paces its presentation with timers that guess how long the TV takes: a question read-out, an animation chain.
+A game can instead let the TV say when it is done. Implement `IHostAware` (in `ArcBox.Sdk`):
+
+```csharp
+public sealed class MyGame : IGame, IHostAware
+{
+    public void OnHostSignal(string kind, PlayerInput payload)
+    {
+        if (kind != "AnimationDone") return;
+        var ack = payload.Read<Ack>();            // record Ack(int Seq)
+        if (ack.Seq != _animationSeq) return;     // stale: ignore it
+        ctx.CancelTimer("animation-fallback");
+        NextStep();
+    }
+}
+```
+
+The TV sends a signal with `HostClient.SignalAsync(kind, payload)`. The server runs `OnHostSignal` like `OnInput`: on the room's own thread, guarded (a
+throw ends the game with "Game crashed"), and followed by a view publish. A game that isn't `IHostAware` never sees
+signals; the server ignores them without an error.
+
+The convention:
+
+- **A signal only ever shortens a wait.** The TV reports and the game stays authoritative. Never make progress depend on
+  a signal arriving.
+- **Always keep a fallback timer.** Start the wait as a timer exactly as before; a signal only makes it end sooner. A
+  crashed, slow or disconnected TV then can't stall the game.
+- **Include `seq` and ignore stale signals.** Number the events you ask the TV to present, and have the TV send back the
+  number it is acknowledging (`{ "seq": 41 }`). Ignore a signal whose `seq` isn't the one you are waiting for: it
+  belongs to a wait that already ended, and acting on it would skip the current one.
+
+Limits: `kind` is 1-32 characters from `A-Z a-z 0-9 _ . -`, and the payload is at most 4096 bytes of JSON. Only the
+host connection can signal; anything else is rejected with "Invalid signal." (or "Only the host can do that.").
