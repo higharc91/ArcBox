@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(godot:*)",
+      "Bash(tools/tv-e2e.sh:*)",
+      "Bash(GODOT=* tools/tv-e2e.sh:*)"
+    ]
+  }
+}

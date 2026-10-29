@@ -1,0 +1,104 @@
+<!doctype html>
+<html data-shot="1360x1080@2">
+<head>
+<meta charset="utf-8">
+<title>Phone · Joining each week</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800&family=Cinzel:wght@600;700;800&family=Pixelify+Sans:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tactics.css">
+<link rel="stylesheet" href="phone.css">
+<style>
+  .room { text-align: center; padding: 6px 0 2px; }
+  .room small { font: 700 12px 'Cinzel'; letter-spacing: 0.2em; color: var(--muted); }
+  .room b { display: block; font: 800 24px 'Cinzel'; letter-spacing: 0.06em; }
+  .room span { color: var(--muted); font-size: 14px; }
+  .hero { padding: 22px 18px; border-radius: 14px; text-align: center; border: 2px solid var(--pc);
+    background: radial-gradient(circle at 50% 30%, color-mix(in srgb, var(--pc) 28%, transparent), rgba(255,255,255,.02) 70%); }
+  .hero canvas { width: 132px; height: 132px; border-radius: 10px; border: 3px solid var(--pc); margin: 0 auto 12px; }
+  .hero b { font: 800 30px 'Cinzel'; display: block; letter-spacing: .05em; }
+  .hero span { color: var(--muted); font-size: 16px; }
+  .link { text-align: center; color: var(--gold); font-weight: 800; font-size: 16px; padding: 10px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .seat { padding: 12px 10px; border-radius: 12px; text-align: center; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.14); position: relative; }
+  .seat canvas { width: 76px; height: 76px; border-radius: 8px; margin: 0 auto 8px; border: 2px solid var(--c); }
+  .seat b { font: 800 18px 'Cinzel'; display: block; }
+  .seat small { display: block; color: var(--muted); font-size: 13px; line-height: 1.3; }
+  .seat .who { color: var(--c); font-weight: 800; font-size: 14px; margin-top: 4px; }
+  .seat.taken { opacity: .38; }
+  .seat .badge { position: absolute; top: 8px; right: 8px; font: 800 10px 'Alegreya Sans'; letter-spacing: .08em; padding: 2px 6px; border-radius: 4px; }
+  .new { border-style: dashed; display: grid; place-items: center; color: var(--gold); font: 800 16px 'Alegreya Sans'; min-height: 150px; }
+  .row { display: flex; gap: 12px; align-items: center; padding: 12px; border-radius: 12px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.14); }
+  .row canvas { width: 64px; height: 64px; border-radius: 8px; border: 2px solid var(--c); flex: none; }
+  .row b { font: 800 19px 'Cinzel'; display: block; }
+  .row small { color: var(--muted); font-size: 14px; display: block; line-height: 1.3; }
+  .row .tag { margin-left: auto; font: 800 11px 'Alegreya Sans'; letter-spacing: .08em; padding: 4px 8px; border-radius: 5px; flex: none; }
+</style>
+</head>
+<body class="page" style="width:1360px">
+<h1>PHONE · JOINING EACH WEEK</h1>
+<p>Scan the QR code on the TV. A phone that has played before gets a one-tap "Continue as…". A new or wiped phone picks from the roster. Mid-game, a phone without a seat picks from the offline seats, which is how a late arrival takes their character back from the AI.</p>
+
+<div class="phones">
+  <!-- 1. Remembered -->
+  <div class="device">
+    <div class="phone"><div class="screen">
+      <div class="status"><span>7:02</span><span class="notch"></span><span>●●● ▮</span></div>
+      <div class="body" style="--pc:var(--p2);gap:16px">
+        <div class="room"><small>ROOM KQZT</small><b>Embers of the Vale</b><span>Session 8 · 3 of 5 here</span></div>
+        <div class="hero" style="margin-top:20px"><canvas class="px" width="132" height="132" data-portrait="aldric"></canvas>
+          <span>Welcome back</span><b>DAVE</b><span>Aldric · Dwarf Cleric · Lv 3</span></div>
+        <div class="note" style="text-align:center">You missed session 7. Aldric reached level 3. <b>Pick Aldric's domain</b> before the first battle.</div>
+        <div class="btn gold" style="margin-top:auto;height:62px;font-size:20px">CONTINUE AS DAVE</div>
+        <div class="link">Not you? Show everyone</div>
+      </div>
+    </div></div>
+    <div class="caption"><b>1 · Remembered phone</b><span>The phone kept a profile key from last time, so rejoining is one tap. "Not you?" opens the full roster (for a shared tablet, say).</span></div>
+  </div>
+
+  <!-- 2. Who are you -->
+  <div class="device">
+    <div class="phone"><div class="screen">
+      <div class="status"><span>7:02</span><span class="notch"></span><span>●●● ▮</span></div>
+      <div class="body" style="gap:12px">
+        <div class="room"><small>ROOM KQZT</small><b>Who are you?</b><span>Embers of the Vale</span></div>
+        <div class="grid">
+          <div class="seat" style="--c:var(--p1)"><canvas class="px" width="76" height="76" data-portrait="kara"></canvas><b>Kara</b><small>Human Fighter</small><div class="who">Jess</div></div>
+          <div class="seat taken" style="--c:var(--p2)"><span class="badge" style="background:var(--good);color:#0a2a12">HERE</span><canvas class="px" width="76" height="76" data-portrait="aldric"></canvas><b>Aldric</b><small>Dwarf Cleric</small><div class="who">Dave</div></div>
+          <div class="seat" style="--c:var(--p3)"><canvas class="px" width="76" height="76" data-portrait="wren"></canvas><b>Wren</b><small>Halfling Rogue</small><div class="who">Priya</div></div>
+          <div class="seat taken" style="--c:var(--p4)"><span class="badge" style="background:var(--good);color:#0a2a12">HERE</span><canvas class="px" width="76" height="76" data-portrait="ilyra"></canvas><b>Ilyra</b><small>Elf Wizard</small><div class="who">Sam</div></div>
+          <div class="seat" style="--c:var(--p5)"><canvas class="px" width="76" height="76" data-portrait="tamsin"></canvas><b>Tamsin</b><small>Half-Elf Ranger</small><div class="who">Marcus</div></div>
+          <div class="seat new">+ I'm new here</div>
+        </div>
+        <div style="font-size:13px;color:var(--muted);text-align:center;margin-top:auto">Characters already being played can't be picked. New players can join between games.</div>
+      </div>
+    </div></div>
+    <div class="caption"><b>2 · Who are you?</b><span>A new phone or cleared storage: tap your character. That stores a key, so next week is screen 1, and the same key opens the portal.</span></div>
+  </div>
+
+  <!-- 3. Mid-game pick a seat -->
+  <div class="device">
+    <div class="phone"><div class="screen">
+      <div class="status"><span>7:48</span><span class="notch"></span><span>●●● ▮</span></div>
+      <div class="body" style="gap:12px">
+        <div class="room"><small>ROOM KQZT · BATTLE IN PROGRESS</small><b>Pick your seat</b><span>These characters have no phone connected</span></div>
+        <div class="row" style="--c:var(--p2)"><canvas class="px" width="64" height="64" data-portrait="aldric"></canvas>
+          <div><b>Aldric</b><small>Dave · away since the start</small><small style="color:var(--p2)">The AI is playing Aldric</small></div><span class="tag" style="background:var(--p2);color:#062433">AI</span></div>
+        <div class="row" style="--c:var(--p3)"><canvas class="px" width="64" height="64" data-portrait="wren"></canvas>
+          <div><b>Wren</b><small>Priya · disconnected 2 min ago</small><small style="color:var(--p3)">The AI is covering Wren's turns</small></div><span class="tag" style="background:rgba(255,255,255,.1)">OFFLINE</span></div>
+        <div class="note" style="border-color:rgba(230,189,92,.5);background:rgba(230,189,92,.08)">Take your seat and you'll control it from your next turn. Your skill points and subclass choice are still waiting for you.</div>
+        <div style="font-size:13px;color:var(--muted);text-align:center;margin-top:auto">Kara, Ilyra and Tamsin are connected, so they aren't shown.</div>
+        <div class="btn gold">I'M ALDRIC</div>
+      </div>
+    </div></div>
+    <div class="caption"><b>3 · Joining mid-game</b><span>A late arrival or a dead battery: only offline seats are shown. Taking one hands control back from the AI. REDLINE gets this screen too.</span></div>
+  </div>
+</div>
+
+<script type="module">
+  import { portrait } from './kit.js';
+  import { fillPortraits } from './cast.js';
+  fillPortraits(portrait);
+  window.__ready = true;
+</script>
+</body>
+</html>

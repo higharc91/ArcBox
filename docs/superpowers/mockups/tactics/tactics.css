@@ -1,0 +1,59 @@
+/* ArcBox Tactics mockups: shared HD-2D UI look. Navy glass panels with a gold edge and corner studs,
+   Cinzel for titles, Alegreya Sans for body copy, Pixelify Sans for numbers that pop out of the world. */
+:root {
+  --ink: #f4ecd6; --muted: #bdb093; --dim: #8a826d;
+  --gold: #e6bd5c; --gold-2: #a07c33; --edge: rgba(230, 189, 92, 0.6);
+  --hp: #63d36f; --hp-bad: #e85148; --good: #74e08a; --bad: #ff6a5e; --magic: #7fc8ff;
+  --p1: #ff8a3d; --p2: #3ec7ff; --p3: #c08cff; --p4: #5fe08a; --p5: #ffd447; --p6: #ff7fb6;
+  --enemy: #e2534c;
+}
+* { box-sizing: border-box; margin: 0; }
+body { color: var(--ink); font-family: 'Alegreya Sans', sans-serif; background: #07080f; }
+.cinzel { font-family: 'Cinzel', serif; }
+.pix { font-family: 'Pixelify Sans', monospace; }
+
+.panel {
+  position: relative;
+  background: linear-gradient(180deg, rgba(26, 30, 58, 0.9), rgba(10, 11, 26, 0.94));
+  border: 1.5px solid var(--edge); border-radius: 6px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.65), inset 0 0 0 1px rgba(255, 255, 255, 0.05), 0 12px 30px rgba(0, 0, 0, 0.45);
+}
+.panel::before, .panel::after {
+  content: ''; position: absolute; top: -5px; width: 8px; height: 8px; transform: rotate(45deg);
+  background: var(--gold); box-shadow: 0 0 6px rgba(255, 210, 120, 0.8);
+}
+.panel::before { left: -5px; } .panel::after { right: -5px; }
+
+.bar { height: 12px; border-radius: 2px; background: rgba(0, 0, 0, 0.55); border: 1px solid rgba(255, 255, 255, 0.15); overflow: hidden; }
+.bar > i { display: block; height: 100%; background: linear-gradient(180deg, #9ff0a5, var(--hp) 45%, #3c9a49); }
+.bar.enemy > i { background: linear-gradient(180deg, #ffa49c, var(--hp-bad) 45%, #a3302a); }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px;
+  font-size: 14px; font-weight: 700; letter-spacing: 0.02em; border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+}
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; box-shadow: 0 0 6px currentColor; }
+.label { font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 0.16em; font-size: 13px; color: var(--gold); }
+canvas.px { image-rendering: pixelated; display: block; }
+
+/* phone frames */
+.phones { display: flex; gap: 44px; align-items: flex-start; }
+.device { width: 390px; }
+.phone { width: 390px; height: 844px; border-radius: 52px; padding: 11px; background: #04050a;
+  box-shadow: 0 0 0 2px #2b2e3d, 0 30px 60px rgba(0, 0, 0, 0.6); }
+.screen { position: relative; width: 100%; height: 100%; border-radius: 42px; overflow: hidden;
+  background: radial-gradient(120% 70% at 50% 0%, #20244a 0%, #0d0f22 55%, #07080f 100%); display: flex; flex-direction: column; }
+.screen::before { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
+  background: repeating-linear-gradient(45deg, rgba(230, 189, 92, 0.025) 0 2px, transparent 2px 14px); }
+.status { height: 46px; display: flex; justify-content: space-between; align-items: center; padding: 6px 30px 0; font: 600 15px 'Alegreya Sans'; color: #fff; flex: none; }
+.status .notch { width: 110px; height: 30px; background: #000; border-radius: 20px; }
+.caption { margin-top: 18px; }
+.caption b { font-family: 'Cinzel', serif; font-size: 18px; color: var(--gold); display: block; margin-bottom: 4px; }
+.caption span { color: var(--muted); font-size: 16px; line-height: 1.4; }
+
+.btn { display: flex; align-items: center; justify-content: center; gap: 8px; height: 56px; border-radius: 10px;
+  font: 800 18px 'Alegreya Sans'; letter-spacing: 0.03em; color: var(--ink);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03)); border: 1px solid rgba(255, 255, 255, 0.16); }
+.btn.gold { color: #2a1b04; background: linear-gradient(180deg, #ffe39a, #e6bd5c 50%, #b88a2c); border-color: #fff0c0;
+  box-shadow: 0 0 18px rgba(230, 189, 92, 0.45); font-family: 'Cinzel', serif; font-weight: 800; }
+.btn.ghost { background: transparent; }

@@ -1,0 +1,197 @@
+<!doctype html>
+<html data-shot="1920x1080@1">
+<head>
+<meta charset="utf-8">
+<title>TV · Battle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800&family=Cinzel:wght@600;700;800&family=Pixelify+Sans:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tactics.css">
+<style>
+  body { width: 1920px; height: 1080px; overflow: hidden; position: relative; }
+  #world { position: absolute; inset: 0; }
+  .banner { position: absolute; left: 36px; top: 30px; padding: 16px 26px 16px 22px; }
+  .banner h1 { font: 800 30px 'Cinzel'; letter-spacing: 0.08em; }
+  .banner p { color: var(--muted); font-size: 19px; margin-top: 4px; }
+  .banner p b { color: var(--ink); }
+  .away { position: absolute; left: 36px; top: 146px; padding: 10px 16px; display: flex; gap: 12px; align-items: center; font-size: 17px; border-color: rgba(62, 199, 255, 0.6); }
+  .away canvas { width: 40px; height: 40px; border-radius: 4px; }
+  .away b { color: var(--p2); }
+
+  .order { position: absolute; right: 36px; top: 30px; padding: 12px 16px 14px; }
+  .order .row { display: flex; gap: 10px; align-items: flex-end; margin-top: 8px; }
+  .slot { width: 66px; text-align: center; font-size: 13px; font-weight: 700; color: var(--muted); position: relative; }
+  .slot canvas { width: 66px; height: 66px; border-radius: 4px; border: 2px solid rgba(255, 255, 255, 0.2); }
+  .slot .who { height: 4px; border-radius: 2px; margin: 5px 6px 4px; }
+  .slot.now { width: 92px; color: var(--ink); }
+  .slot.now canvas { width: 92px; height: 92px; border: 3px solid var(--gold); box-shadow: 0 0 16px rgba(230, 189, 92, 0.7); }
+  .slot.foe canvas { border-color: rgba(226, 83, 76, 0.75); }
+  .slot .tag { position: absolute; top: -8px; right: -6px; font: 800 11px 'Alegreya Sans'; padding: 1px 6px; border-radius: 4px; }
+  .slot .tag.ai { background: var(--p2); color: #062433; }
+  .slot .tag.now { background: var(--gold); color: #2a1b04; left: -6px; right: auto; }
+
+  .ability { position: absolute; left: 50%; top: 40px; transform: translateX(-50%); padding: 10px 46px; text-align: center; }
+  .ability small { display: block; font: 700 13px 'Cinzel'; letter-spacing: 0.2em; color: var(--muted); }
+  .ability b { font: 800 34px 'Cinzel'; letter-spacing: 0.1em; color: #ffe7a8; text-shadow: 0 0 18px rgba(255, 200, 100, 0.6); }
+
+  .unit { position: absolute; bottom: 34px; padding: 18px 22px; display: flex; gap: 20px; }
+  .unit.mine { left: 36px; width: 610px; }
+  .unit.foe { right: 36px; width: 470px; border-color: rgba(226, 83, 76, 0.7); }
+  .unit canvas.face { width: 128px; height: 128px; border-radius: 6px; border: 2px solid rgba(255, 255, 255, 0.25); flex: none; }
+  .unit h2 { font: 800 34px 'Cinzel'; letter-spacing: 0.06em; line-height: 1; }
+  .unit .line { color: var(--muted); font-size: 18px; margin: 6px 0 10px; }
+  .unit .hp { display: flex; align-items: center; gap: 10px; font: 800 19px 'Alegreya Sans'; }
+  .unit .hp .bar { flex: 1; height: 14px; }
+  .stats { display: flex; gap: 18px; margin-top: 10px; font-size: 16px; color: var(--muted); }
+  .stats b { color: var(--ink); font: 800 19px 'Alegreya Sans'; margin-left: 4px; }
+  .econ { display: flex; gap: 8px; margin-top: 12px; }
+  .econ span { font: 800 12px 'Alegreya Sans'; letter-spacing: 0.1em; padding: 4px 10px; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.2); color: var(--muted); }
+  .econ .done { text-decoration: line-through; opacity: 0.5; }
+  .econ .on { color: #2a1b04; background: var(--gold); border-color: #fff0c0; }
+  .ctrl { display: flex; gap: 8px; align-items: center; font-size: 16px; margin-top: 2px; }
+  .timer { margin-left: auto; font: 700 22px 'Pixelify Sans'; color: #ffe7a8; }
+
+  .roll { position: absolute; padding: 14px 20px 14px 16px; display: flex; gap: 16px; align-items: center; }
+  .roll .math { font: 800 36px 'Alegreya Sans'; line-height: 1; }
+  .roll .math small { font-size: 22px; color: var(--muted); }
+  .roll .hit { font: 800 30px 'Cinzel'; color: var(--good); letter-spacing: 0.12em; text-shadow: 0 0 14px rgba(116, 224, 138, 0.7); }
+  .roll .why { font-size: 16px; color: var(--muted); margin-top: 4px; }
+  .roll .ghost { position: relative; }
+  .roll .ghost::after { content: ''; position: absolute; left: 6px; right: 6px; top: 50%; height: 3px; background: var(--bad); transform: rotate(-30deg); }
+  .dmg { position: absolute; font: 700 64px 'Pixelify Sans'; color: #fff; -webkit-text-stroke: 3px #7a1410;
+    text-shadow: 0 4px 0 #3a0806, 0 0 24px rgba(255, 90, 60, 0.9); }
+  .push { position: absolute; font: 800 18px 'Alegreya Sans'; color: #ffe7a8; padding: 6px 12px; }
+  .room { position: absolute; left: 50%; transform: translateX(-50%); bottom: 14px; font: 700 15px 'Alegreya Sans'; color: var(--muted); letter-spacing: 0.08em; }
+</style>
+</head>
+<body>
+<canvas id="world" class="px" width="1920" height="1080"></canvas>
+
+<div class="banner panel">
+  <h1>CHAPTER III · THE ASHEN FORD</h1>
+  <p>Battle · Round <b>2</b> · Objective: <b>Take the bridge</b></p>
+</div>
+<div class="away panel">
+  <canvas class="px" width="40" height="40" data-portrait="aldric"></canvas>
+  <div><b>Dave is away.</b> The AI is playing Aldric but won't spend Aldric's skill points</div>
+</div>
+
+<div class="ability panel"><small>KARA · VANGUARD</small><b>SHIELD BASH</b></div>
+
+<div class="order panel">
+  <div class="label">TURN ORDER</div>
+  <div class="row" id="order"></div>
+</div>
+
+<div class="unit mine panel">
+  <canvas class="face px" width="128" height="128" data-portrait="kara"></canvas>
+  <div style="flex:1">
+    <h2>KARA</h2>
+    <div class="line">Human Fighter · Vanguard · Lv 3</div>
+    <div class="hp"><span style="color:var(--muted)">HP</span><div class="bar"><i style="width:91%"></i></div>31/34</div>
+    <div class="stats"><span>AC<b>18</b></span><span>SPD<b>7</b></span><span>MOVE<b>4</b></span><span>JUMP<b>2</b></span><span class="chip" style="font-size:13px;padding:1px 8px">Shield Wall</span></div>
+    <div class="econ"><span class="done">MOVE</span><span class="on">ACTION</span><span>BONUS</span><span>REACTION</span></div>
+  </div>
+  <div style="position:absolute;right:20px;top:16px" class="ctrl"><span class="dot" style="color:var(--p1);background:var(--p1)"></span><b>Jess</b>&nbsp;<span style="color:var(--muted)">· choosing on phone</span></div>
+  <div style="position:absolute;right:22px;bottom:18px" class="timer">0:41</div>
+</div>
+
+<div class="unit foe panel">
+  <canvas class="face px" width="128" height="128" data-portrait="cutthroat"></canvas>
+  <div style="flex:1">
+    <h2 style="font-size:28px;color:#ffb3a8">GOBLIN CUTTHROAT</h2>
+    <div class="line">Enemy · Skirmisher</div>
+    <div class="hp"><span style="color:var(--muted)">HP</span><div class="bar enemy"><i style="width:56%"></i></div>9/16</div>
+    <div class="stats"><span>AC<b>13</b></span><span>SPD<b>8</b></span></div>
+    <div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap"><span class="chip">Back turned</span><span class="chip">Bloodied</span><span class="chip" style="color:#9fd8ff">Next to the river</span></div>
+  </div>
+</div>
+
+<div class="roll panel" id="roll">
+  <div style="display:flex;gap:4px;align-items:center"><span id="die"></span><span class="ghost" id="die2"></span></div>
+  <div>
+    <div class="math">17 <small>+ 5 =</small> 22 <small>vs AC</small> 13</div>
+    <div class="hit">HIT</div>
+    <div class="why">Advantage: its back is turned</div>
+  </div>
+</div>
+<div class="dmg" id="dmg">−9</div>
+<div class="push panel" id="push">Pushed 1 tile into the river · Prone</div>
+<div class="room">ROOM KQZT · SESSION 7</div>
+
+<script type="module">
+  import { makeMap, render, portrait, d20 } from './kit.js';
+  import { PARTY, ENEMIES, PLAYERS, fillPortraits } from './cast.js';
+
+  const m = makeMap([
+    'G g g g r r r r g w w g g G',
+    'g g g r r r r g g w w g G G',
+    'g g g g r r g g g w w g g G',
+    'g g g g g g g g g w w g g g',
+    'd d d g g g g g g w w g g g',
+    'g g d d d d d d d b b d d d',
+    'g g g g g g g g d b b d g g',
+    'g G g g g g g g g w w g g g',
+    'g g g g g G g g g w w g g G',
+    'G g g g g g g g w w g g g G',
+    'G G g g g g g g w w g g G G',
+    'G G G g g g g g w w g g G G',
+  ], [
+    '2 2 1 1 3 4 4 3 1 0 0 1 2 2',
+    '2 1 1 3 4 4 3 2 1 0 0 1 2 2',
+    '1 1 1 1 3 3 2 1 1 0 0 1 1 2',
+    '1 1 1 1 1 1 1 1 1 0 0 1 1 1',
+    '1 1 1 1 1 1 1 1 1 0 0 1 1 1',
+    '1 1 1 1 1 1 1 1 1 1 1 1 1 1',
+    '1 1 1 1 1 1 1 1 1 1 1 1 1 1',
+    '1 1 1 1 1 1 1 1 1 0 0 1 1 1',
+    '1 1 1 1 1 1 1 1 1 0 0 1 1 2',
+    '2 1 1 1 1 1 1 1 0 0 1 1 1 2',
+    '2 2 1 1 1 1 1 1 0 0 1 1 2 2',
+    '2 2 2 1 1 1 1 1 0 0 1 1 2 3',
+  ], 960, 590);
+
+  m.marks = { '7,3': 'attack', '7,5': 'attack', '6,4': 'attack', '8,4': 'target' };
+  m.props = [
+    { kind: 'tree', x: 0, y: 0, variant: 'pine' }, { kind: 'tree', x: 13, y: 0, variant: 'pine' }, { kind: 'tree', x: 13, y: 1 },
+    { kind: 'tree', x: 1, y: 7 }, { kind: 'tree', x: 5, y: 8, variant: 'autumn' }, { kind: 'tree', x: 0, y: 10 },
+    { kind: 'tree', x: 13, y: 9, variant: 'autumn' }, { kind: 'tree', x: 12, y: 11 }, { kind: 'crate', x: 2, y: 4 }, { kind: 'crate', x: 12, y: 3 },
+  ];
+  const ring = k => PLAYERS[PARTY[k].player].color;
+  m.units = [
+    { id: 'kara', x: 7, y: 4, sprite: PARTY.kara.sprite, ring: ring('kara'), active: true },
+    { id: 'cut', x: 8, y: 4, sprite: ENEMIES.cutthroat.sprite, ring: '#e2534c', scale: 4 },
+    { id: 'wren', x: 10, y: 6, sprite: PARTY.wren.sprite, ring: ring('wren'), scale: 4 },
+    { id: 'spear', x: 11, y: 6, sprite: ENEMIES.goblin.sprite, ring: '#e2534c', scale: 4 },
+    { id: 'brute', x: 12, y: 4, sprite: ENEMIES.brute.sprite, ring: '#e2534c', scale: 6 },
+    { id: 'shaman', x: 13, y: 8, sprite: ENEMIES.shaman.sprite, ring: '#e2534c', scale: 4, glow: '255,110,80' },
+    { id: 'ilyra', x: 5, y: 1, sprite: PARTY.ilyra.sprite, ring: ring('ilyra'), glow: '140,210,255' },
+    { id: 'tamsin', x: 6, y: 2, sprite: PARTY.tamsin.sprite, ring: ring('tamsin') },
+    { id: 'aldric', x: 6, y: 6, sprite: PARTY.aldric.sprite, ring: ring('aldric'), scale: 4.5 },
+  ];
+  const a = render(document.getElementById('world'), m, { seed: 11, focus: [0.26, 0.74] });
+
+  // turn order
+  const order = [['kara', 'now'], ['cutthroat', 'foe'], ['ilyra'], ['brute', 'foe'], ['aldric', 'ai'], ['wren'], ['shaman', 'foe'], ['tamsin'], ['goblin', 'foe']];
+  document.getElementById('order').innerHTML = order.map(([k, kind]) => {
+    const who = PARTY[k] || ENEMIES[k];
+    const col = PARTY[k] ? PLAYERS[PARTY[k].player].color : '#e2534c';
+    const cls = kind === 'now' ? 'now' : kind === 'foe' ? 'foe' : '';
+    const tag = kind === 'now' ? '<span class="tag now">NOW</span>' : kind === 'ai' ? '<span class="tag ai">AI</span>' : '';
+    const label = who.name.split(' ').pop();
+    return `<div class="slot ${cls}">${tag}<canvas class="px" width="96" height="96" data-portrait="${k}"></canvas><div class="who" style="background:${col}"></div>${label}</div>`;
+  }).join('');
+  fillPortraits(portrait);
+
+  // roll callout beside the target, damage above its head
+  document.getElementById('die').innerHTML = d20(17, { size: 96 });
+  document.getElementById('die2').innerHTML = d20(6, { size: 60, dim: true });
+  const roll = document.getElementById('roll'), t = a.cut;
+  roll.style.left = `${t.head.x + 90}px`; roll.style.top = `${t.head.y - 190}px`;
+  const dmg = document.getElementById('dmg');
+  dmg.style.left = `${t.head.x + 26}px`; dmg.style.top = `${t.head.y - 62}px`;
+  const push = document.getElementById('push');
+  push.style.left = `${t.feet.x + 60}px`; push.style.top = `${t.feet.y - 6}px`;
+  window.__ready = true;
+</script>
+</body>
+</html>

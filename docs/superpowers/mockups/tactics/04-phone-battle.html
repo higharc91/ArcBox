@@ -1,0 +1,110 @@
+<!doctype html>
+<html data-shot="1360x1080@2">
+<head>
+<meta charset="utf-8">
+<title>Phone · Battle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800&family=Cinzel:wght@600;700;800&family=Pixelify+Sans:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tactics.css">
+<link rel="stylesheet" href="phone.css">
+</head>
+<body class="page" style="width:1360px">
+<h1>PHONE · BATTLE</h1>
+<p>Jess controls Kara. The TV shows the battlefield and the phone is the controller: choose an action, aim at a target with a cursor that moves on the TV, then confirm. Between your turns the phone shows your character sheet and when you're up next.</p>
+
+<div class="phones">
+  <!-- 1. Your turn -->
+  <div class="device">
+    <div class="phone"><div class="screen">
+      <div class="status"><span>9:41</span><span class="notch"></span><span>●●● ▮</span></div>
+      <div class="body">
+        <div class="me" style="--pc:var(--p1)"><canvas class="px" width="52" height="52" data-portrait="kara"></canvas>
+          <div><b>KARA</b><span>Vanguard · Lv 3</span></div>
+          <div class="hpmini"><div class="bar"><i style="width:91%"></i></div><span>31/34 · AC 18</span></div></div>
+        <div class="turn"><b>YOUR TURN</b><span class="t">0:41</span></div>
+        <div class="econ"><span class="done">MOVE</span><span class="on">ACTION</span><span>BONUS</span><span>REACTION</span></div>
+        <div class="sect">ACTIONS</div>
+        <div class="act"><span class="ic"><i data-icon="sword"></i></span><div><b>Longsword</b><small>Melee · d20+5 to hit · 1d8+3 slashing</small></div></div>
+        <div class="act sel"><span class="ic"><i data-icon="bash"></i></span><div><b>Shield Bash</b><small>Melee · 1d6+3 · pushes 1 tile, knocks prone</small></div><span class="tag">VANGUARD</span></div>
+        <div class="act"><span class="ic"><i data-icon="fort"></i></span><div><b>Hold the Line</b><small>Enemies that step next to you stop moving</small></div><span class="tag">STANCE</span></div>
+        <div class="sect">BONUS</div>
+        <div class="act"><span class="ic"><i data-icon="heart"></i></span><div><b>Second Wind</b><small>Heal 1d10+3 · once per short rest</small></div></div>
+        <div class="act off"><span class="ic"><i data-icon="surge"></i></span><div><b>Action Surge</b><small>Used this battle</small></div></div>
+        <div class="foot">
+          <div class="btn"><i data-icon="bag"></i>Items</div>
+          <div class="btn"><i data-icon="sheet"></i>Sheet</div>
+          <div class="btn"><i data-icon="hourglass"></i>End turn</div>
+        </div>
+      </div>
+    </div></div>
+    <div class="caption"><b>1 · Your turn</b><span>You can only do what your action economy allows. Subclass abilities are tagged. Used abilities are dimmed but still visible.</span></div>
+  </div>
+
+  <!-- 2. Targeting -->
+  <div class="device">
+    <div class="phone"><div class="screen">
+      <div class="status"><span>9:41</span><span class="notch"></span><span>●●● ▮</span></div>
+      <div class="body">
+        <div class="me" style="--pc:var(--p1)"><canvas class="px" width="52" height="52" data-portrait="kara"></canvas>
+          <div><b>SHIELD BASH</b><span>Pick a target. Watch the cursor on the TV</span></div></div>
+        <div class="target"><canvas class="px" width="76" height="76" data-portrait="cutthroat"></canvas>
+          <div style="flex:1"><b>Goblin Cutthroat</b><div class="bar enemy"><i style="width:56%"></i></div><small>9/16 HP · AC 13 · adjacent</small></div></div>
+        <div style="font-size:15px;line-height:1.4">You roll <b>d20 + 5</b> against <b>AC 13</b>, with</div>
+        <div class="chips"><span class="chip good">Advantage: its back is turned</span><span class="chip water">Push into the river: prone</span></div>
+        <div class="cycle"><div class="btn">◀</div><span>Target 1 of 2 in reach</span><div class="btn">▶</div></div>
+        <div class="dpad">
+          <div class="k" style="left:6px;top:6px"><i data-icon="up" data-rot="-90"></i></div>
+          <div class="k" style="left:148px;top:6px"><i data-icon="up" data-rot="0"></i></div>
+          <div class="k" style="left:148px;top:148px"><i data-icon="up" data-rot="90"></i></div>
+          <div class="k" style="left:6px;top:148px"><i data-icon="up" data-rot="180"></i></div>
+          <div class="c">MOVE<br>CURSOR</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 2fr;gap:8px;margin-top:auto">
+          <div class="btn ghost">Back</div>
+          <div class="btn gold">CONFIRM</div>
+        </div>
+      </div>
+    </div></div>
+    <div class="caption"><b>2 · Targeting</b><span>◀ ▶ step through the targets in reach. The d-pad moves a free cursor for area spells. The arrows point along the TV's diagonal grid.</span></div>
+  </div>
+
+  <!-- 3. Waiting -->
+  <div class="device">
+    <div class="phone"><div class="screen">
+      <div class="status"><span>9:41</span><span class="notch"></span><span>●●● ▮</span></div>
+      <div class="body">
+        <div class="me" style="--pc:var(--p1)"><canvas class="px" width="52" height="52" data-portrait="kara"></canvas>
+          <div><b>KARA</b><span>Vanguard · Lv 3</span></div>
+          <div class="hpmini"><div class="bar"><i style="width:91%"></i></div><span>31/34 · AC 18</span></div></div>
+        <div class="big" style="border-color:rgba(95,224,138,.5)"><canvas class="px" width="72" height="72" data-portrait="ilyra"></canvas>
+          <div><div class="sect" style="color:var(--p4)">NOW ACTING</div><b style="font:800 22px Cinzel">Ilyra</b><div style="color:var(--muted);font-size:14px">Sam is choosing a spell…</div></div></div>
+        <div class="sect">YOU'RE UP IN 3</div>
+        <div class="queue">
+          <div><span class="n">1</span><canvas class="px" width="32" height="32" data-portrait="brute"></canvas>Orc Brute</div>
+          <div><span class="n">2</span><canvas class="px" width="32" height="32" data-portrait="aldric"></canvas>Aldric <span class="chip" style="font-size:11px;padding:1px 7px;margin-left:auto;color:var(--p2)">AI</span></div>
+          <div class="you"><span class="n">3</span><canvas class="px" width="32" height="32" data-portrait="kara"></canvas>Kara (you)</div>
+        </div>
+        <div class="chips"><span class="chip good"><i data-icon="check"></i>&nbsp;Reaction ready: Opportunity Attack</span></div>
+        <div class="tabs"><span>Abilities</span><span class="on">Sheet</span><span>Bag</span></div>
+        <div class="scores">
+          <div><small>STR</small><b>16</b><i>+3</i></div><div><small>DEX</small><b>12</b><i>+1</i></div><div><small>CON</small><b>14</b><i>+2</i></div>
+          <div><small>INT</small><b>8</b><i>−1</i></div><div><small>WIS</small><b>12</b><i>+1</i></div><div><small>CHA</small><b>12</b><i>+1</i></div>
+        </div>
+        <div class="act" style="padding:9px 12px"><div><b style="font-size:15px">Conditions</b><small>Shield Wall: allies next to you get +2 AC</small></div></div>
+        <div class="act" style="padding:9px 12px"><div><b style="font-size:15px">Unspent</b><small>None. Level 4 at 2,700 XP (2,240 now)</small></div></div>
+      </div>
+    </div></div>
+    <div class="caption"><b>3 · Waiting your turn</b><span>With speed-based turns there's a wait, so the phone stays useful: who's acting, when you're up, your reaction, and your full sheet.</span></div>
+  </div>
+</div>
+
+<script type="module">
+  import { portrait } from './kit.js';
+  import { fillPortraits } from './cast.js';
+  import { icons } from './icons.js';
+  fillPortraits(portrait);
+  icons();
+  window.__ready = true;
+</script>
+</body>
+</html>
