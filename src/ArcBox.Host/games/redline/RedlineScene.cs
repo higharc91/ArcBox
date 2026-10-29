@@ -48,6 +48,11 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
     private readonly HashSet<string> _spun = new(StringComparer.Ordinal);
     private IReadOnlyDictionary<string, CarSlot> _from = new Dictionary<string, CarSlot>();
     private IReadOnlyDictionary<string, CarSlot> _to = new Dictionary<string, CarSlot>();
+    /// <summary>
+    /// Qualifying: the slots the cars took when qualifying began (the seeded order). Every car is at distance 0 then, and the
+    /// classification only becomes the grid at Grid, so the cars stay parked here instead of swapping slots at each Result.
+    /// </summary>
+    private IReadOnlyDictionary<string, CarSlot>? _qualifyingSlots;
 
     private Screenshotter? _shots;
     private CircuitAssets? _assets;
@@ -188,6 +193,7 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
         _view = null;
         _gridLogged = false;
         _from = _to = new Dictionary<string, CarSlot>();
+        _qualifyingSlots = null;
         foreach (var car in _cars.Values)
         {
             car.Smoke(0);
@@ -308,7 +314,15 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
         }
         LogGrid(v);
 
-        _to = Formation.Current(v, lap);
+        if (QualifyingText.IsQualifying(v.Phase))
+        {
+            _to = _qualifyingSlots ??= Formation.Current(v, lap);
+        }
+        else
+        {
+            _qualifyingSlots = null;
+            _to = Formation.Current(v, lap);
+        }
         if (v.Phase == RacePhase.Reveal)
         {
             if (newPhase)

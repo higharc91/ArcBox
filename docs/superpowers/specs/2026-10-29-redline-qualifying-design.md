@@ -19,11 +19,11 @@ three easy questions, and the field lines up by who answers correctly, fastest.
 ## 2. Rules and flow
 Driver Select → **QualifyingReading → QualifyingQuestion → QualifyingResult** (× `QualifyingLaps`) → Grid → round 1.
 
-| Phase | Duration | Ends early |
-|---|---|---|
-| `QualifyingReading` | `RedlineRules.ReadingTime(text)` (2.5–10 s), plus `QualifyingIntro` (3.5 s) on lap 1 for the opener (§6); skipped when `ReadQuestions` is off | no |
-| `QualifyingQuestion` | `RedlineRules.QualifyingAnswer` = 10 s | when every connected player has answered |
-| `QualifyingResult` | `RedlineRules.QualifyingResult` = 5 s | no |
+| Phase | Duration | Ends early | TV shows |
+|---|---|---|---|
+| `QualifyingReading` | `RedlineRules.ReadingTime(text)` (2.5–10 s), plus `QualifyingIntro` (3.5 s) on lap 1 for the opener (§6); skipped when `ReadQuestions` is off | no | the question with its answers **hidden** (`Question.Answers` null), so nobody can pick before the phones' stopwatches start |
+| `QualifyingQuestion` | `RedlineRules.QualifyingAnswer` = 10 s | when every connected player has answered | the question and its four answers |
+| `QualifyingResult` | `RedlineRules.QualifyingResult` = 5 s | no | the question, its answers and the correct one |
 
 New `RedlineRules`: `Qualify` (bool, default **true**), `QualifyingLaps` = 3, `QualifyingAnswer` = 10 s,
 `QualifyingResult` = 5 s. `Qualify = false`, or a room with no players, keeps today's seeded shuffle and goes straight
@@ -55,7 +55,12 @@ to Grid.
 - New `AiRules` entries hold these numbers (`QualiSlowMedian`, `QualiFastMedian`, `QualiSigma`) so the sim can tune them.
 
 ### 2.4 Questions
-- **Easy only**, taken before the race's 15, never repeated in the same game.
+- **Easy only**, taken **after** the race's 15 (so the race gets the same questions with qualifying on or off), never
+  repeated in the same game. `Qualifying.TakeQuestions` de-duplicates against the race: it takes `Take(laps, Easy)`
+  batches in order and keeps each question whose text is neither one of the race's nor already kept, for at most
+  `Qualifying.MaxQuestionTakes` (8) batches; only if that still leaves a gap does it accept repeats, in the order they
+  came, rather than fail. (With the pool off, the fallback pack's easy cursor is independent of its all-questions
+  cursor, so a single batch would repeat a race question in more than half the games.)
 - `IQuestionSource` gains `Take(int count, Difficulty difficulty)`, a default interface method that returns
   `Take(count)` for sources that can't filter (test fakes keep working).
   - `PooledQuestionSource` overrides it.
@@ -101,13 +106,17 @@ public sealed record QualifyingRow(string Code, int Position, int PositionChange
     bool Answered,         // live tick during QualifyingQuestion, no time shown
     bool FastestLap);      // purple
 ```
-- `Question` and `CorrectIndex` are filled as in the race (CorrectIndex in QualifyingResult only).
+- `Question` and `CorrectIndex` are filled as in the race (CorrectIndex in QualifyingResult only), except that
+  `Question.Answers` is null in QualifyingReading (§2).
+- `PositionChange` is 0 on lap 1's Result: the seeded order is a tie-break, not a classification to move against.
 - `Drivers` are sorted by the qualifying classification; `Round` = 0.
 - No time or correctness is exposed before QualifyingResult.
 
 ## 6. TV
 - **Timing tower** in qualifying mode: POS · DRIVER · LAP · TOTAL; purple fastest lap; red "DELETED"; answered ticks
   during the question; rows slide on Result.
+- **Cars** stay parked in the seeded order they took when qualifying began, through every lap, and move to their
+  classification slots only at Grid.
 - **Question panel** reused, header "QUALIFYING · LAP n/3", with LISTEN during the read-out.
 - **Camera:** existing trackside and helicopter shots following the provisional pole car. On Result, a
   "PROVISIONAL POLE · {name}" card when the leader changes. After the last lap, "POLE POSITION" (name, team colour,

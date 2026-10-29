@@ -19,7 +19,7 @@ public static class AudioCues
     public const string Whoosh = "whoosh";
     public const string Correct = "correct";
     public const string Wrong = "wrong";
-    /// <summary>A player set the session's fastest lap (qualifying spec §6): a bright two-note chime.</summary>
+    /// <summary>A player set this lap's fastest correct time (qualifying spec §2.2, §6): a bright two-note chime.</summary>
     public const string Purple = "purple";
     public const string Screech = "screech";
     public const string Crunch = "crunch";

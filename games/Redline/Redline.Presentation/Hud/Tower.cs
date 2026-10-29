@@ -23,7 +23,7 @@ public enum ChipKind
     Bad,
     /// <summary>White on red-orange: a spin-out.</summary>
     Spin,
-    /// <summary>White on purple: a qualifying lap that is the session's fastest.</summary>
+    /// <summary>White on purple: the fastest correct time of one qualifying lap (per lap, not per session: qualifying spec §2.2).</summary>
     Purple,
 }
 
@@ -95,7 +95,7 @@ public static class Tower
     /// <summary>The total column before a car has a correct lap.</summary>
     public const string NoTime = "—";
 
-    /// <summary>A qualifying lap at the Result: "2.41" (purple when the session's fastest, else green) or a red "DELETED".</summary>
+    /// <summary>A qualifying lap at the Result: "2.41" (purple when it is this lap's fastest correct time, else green) or a red "DELETED".</summary>
     public static Chip LapChip(QualifyingRow q) => q.LastLapMs is { } ms
         ? new Chip(QualifyingText.Lap(ms), q.FastestLap ? ChipKind.Purple : ChipKind.Good)
         : new Chip("DELETED", ChipKind.Bad);

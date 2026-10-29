@@ -63,7 +63,7 @@ describe("Choice", () => {
     fireEvent.click(screen.getByRole("button", { name: /Bravo/ }));
     fireEvent.click(screen.getByRole("button", { name: /Charlie/ }));
     expect(send).toHaveBeenCalledTimes(1);
-    expect(send).toHaveBeenCalledWith(expect.objectContaining({ selected: ["b"] }));
+    expect(send).toHaveBeenCalledWith({ selected: ["b"], elapsedMs: expect.any(Number) });
   });
 
   it("Choice multiple respects maxSelections and sends on Lock in", () => {
@@ -81,7 +81,7 @@ describe("Choice", () => {
     fireEvent.click(lock());
     fireEvent.click(lock());
     expect(send).toHaveBeenCalledTimes(1);
-    expect(send).toHaveBeenCalledWith(expect.objectContaining({ selected: ["b", "c"] }));
+    expect(send).toHaveBeenCalledWith({ selected: ["b", "c"], elapsedMs: expect.any(Number) });
   });
 
   it("Option hint renders as second line", () => {

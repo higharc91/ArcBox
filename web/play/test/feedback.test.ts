@@ -139,7 +139,7 @@ describe("feedback", () => {
     render(h(FeedbackContext.Provider, { value: fb }, h(ControllerScreen, { view: choice, send, me: "A", game: "counter" })));
     const before = ctx().sounds.length;
     fireEvent.click(screen.getByRole("button", { name: /Alpha/ }));
-    expect(send).toHaveBeenCalledWith(expect.objectContaining({ selected: ["a"] }));
+    expect(send).toHaveBeenCalledWith({ selected: ["a"], elapsedMs: expect.any(Number) });
     expect(vibrateSpy).toHaveBeenCalledWith(15);
     expect(ctx().sounds.length).toBeGreaterThan(before);
   });

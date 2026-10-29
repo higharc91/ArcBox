@@ -177,24 +177,26 @@ Between Driver Select and the Grid, three easy questions set the starting order 
 laps, then the total time of the correct ones. It is on by default (`RedlineRules.Qualify`) and skipped in a room
 with no players.
 
-- **Flow, per lap:** QualifyingReading (the question read out, **LISTEN** in place of the clock), QualifyingQuestion
-  (10 s, ends early when every player has answered) and QualifyingResult (5 s). After the third Result, the Grid with
-  the cars in their new slots. The header reads "QUALIFYING · LAP n/3" with the category and the difficulty; the
-  answers A–D sit along the bottom and the correct one turns green at the Result. The track map is off (every car is
-  on the grid); the camera holds the provisional pole car trackside during the question and from the helicopter at the
-  Result.
+- **Flow, per lap:** QualifyingReading (the question read out without its answers, **LISTEN** in place of the
+  clock), QualifyingQuestion (10 s, ends early when every player has answered) and QualifyingResult (5 s). The header
+  reads "QUALIFYING · LAP n/3" with the category and the difficulty; the answers A–D appear along the bottom when the
+  question opens (with the phones' stopwatches, so nobody can pick early from the TV) and the correct one turns green
+  at the Result. The track map is off (every car is on the grid); the camera holds the provisional pole car trackside
+  during the question and from the helicopter at the Result.
+- **Cars:** parked on the grid in the seeded order they took when qualifying began, and they stay in those slots
+  through every lap while the tower reorders; after the third Result the Grid moves them to their qualifying slots.
 - **Tower:** the timing board, POS · DRIVER · LAP · TOTAL, in classification order. TOTAL is the sum of the correct
   laps so far ("6.82", "—" before a first correct lap), with the count of correct laps in small grey after a deleted
   one ("5.90 · 2/3"), since correct laps count before time. During the question a player row shows a tick once they have
-  answered (pulsing dots until then). At the Result the LAP column shows this lap: the time on green, the session's
-  fastest on **purple** (`#a020f0`, white text), or a red-outlined **DELETED** for a wrong or missing answer, at full
-  strength on AI rows too; the rows then slide to the new order with ▲▼ movement. P1's box turns white once it has a time.
+  answered (pulsing dots until then). At the Result the LAP column shows this lap: the time on green, the lap's
+  fastest correct time on **purple** (`#a020f0`, white text), or a red-outlined **DELETED** for a wrong or missing answer, at full
+  strength on AI rows too; the rows then slide to the new order with ▲▼ movement (none on lap 1, which has no earlier classification to move against). P1's box turns white once it has a time.
 - **Cards:** at a Result where P1 changed, a **PROVISIONAL POLE** lower-third with the new leader's name and team bar
   slides in for 3 s; after the last lap, **POLE POSITION** with the name, a wide team-colour bar and the total
   ("6.82s" on white) stays up for the rest of the Result. Both sit in the Reveal lower-third's place, right of the
   tower and above the answers. Names are as the player typed them (upper-cased), or the driver's surname for an AI.
 - **Sound:** the question is read through `redline.questions` as in the race; the commentator opens with
-  "Qualifying! Three questions, fastest correct answers take pole.", then calls "{Name} goes purple!", "Provisional
+  "Qualifying! Three questions, fastest correct answers take pole." (the count follows `QualifyingLaps`), then calls "{Name} goes purple!", "Provisional
   pole for {Name}." and finally "Pole position for {Name}, {total} seconds in total!". Each Result plays the correct
   sting when any player's lap counted (else the wrong buzz), then a bright two-note **purple** chime when a player has
   the lap's fastest time; answer ticks and the last-5-seconds countdown run as in the race.

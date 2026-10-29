@@ -277,6 +277,23 @@ public class CommentaryTests
 
     private static RedlineHostView Quali(RacePhase phase, int lap, params QualifyingViews.Car[] cars) => QualifyingViews.View(phase, lap, cars);
 
+    [Theory]
+    [InlineData(1, "Qualifying! One question, fastest correct answers take pole.")]
+    [InlineData(3, "Qualifying! Three questions, fastest correct answers take pole.")]
+    [InlineData(5, "Qualifying! Five questions, fastest correct answers take pole.")]
+    [InlineData(10, "Qualifying! Ten questions, fastest correct answers take pole.")]
+    [InlineData(12, "Qualifying! 12 questions, fastest correct answers take pole.")]
+    public void Qualifying_opener_counts_the_session_laps(int laps, string line)
+    {
+        Assert.Equal(line, Commentary.QualifyingOpener(laps));
+
+        // The opener reads the count from the view's session.
+        var first = Quali(RacePhase.QualifyingReading, 1, new QualifyingViews.Car("NOR", "JO"));
+        first = first with { Qualifying = first.Qualifying! with { Laps = laps } };
+        var select = View(RacePhase.DriverSelect, 0, Row("NOR", 1, 0));
+        Assert.Equal(line, Assert.Single(Commentary.Lines(first, select, Grid)).Text);
+    }
+
     [Fact]
     public void Commentary_qualifying_lines()
     {

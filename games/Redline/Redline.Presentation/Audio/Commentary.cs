@@ -1,3 +1,4 @@
+using System.Globalization;
 using Redline.Logic;
 using Redline.Presentation.Hud;
 
@@ -62,7 +63,7 @@ public static class Commentary
     }
 
     /// <summary>
-    /// Qualifying spec §6: "Qualifying! Three questions…", once, as lap 1 begins: at its Reading, or at its Question when Reading
+    /// Qualifying spec §6: "Qualifying! Three questions…" (the session's lap count), once, as lap 1 begins: at its Reading, or at its Question when Reading
     /// is off (arriving from Driver Select). A TV that joins mid-question stays quiet, and so does every later lap.
     /// </summary>
     private static IReadOnlyList<CommentaryLine> QualifyingStart(RedlineHostView view, RedlineHostView? previous)
@@ -70,8 +71,20 @@ public static class Commentary
         var firstLap = view.Qualifying is not { Lap: > 1 } && (previous is null || !QualifyingText.IsQualifying(previous.Phase));
         var begins = view.Phase == RacePhase.QualifyingReading ? firstLap : firstLap && previous is not null;
         return begins
-            ? [new("Qualifying! Three questions, fastest correct answers take pole.", CommentaryKind.Intro, Scripted)]
+            ? [new(QualifyingOpener(view.Qualifying?.Laps ?? new RedlineRules().QualifyingLaps), CommentaryKind.Intro, Scripted)]
             : [];
+    }
+
+    private static readonly string[] CountWords = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
+
+    /// <summary>
+    /// The session opener for <paramref name="laps"/> questions, counted in words up to ten and in digits after:
+    /// "Qualifying! Three questions, fastest correct answers take pole."
+    /// </summary>
+    public static string QualifyingOpener(int laps)
+    {
+        var count = laps >= 1 && laps <= CountWords.Length ? CountWords[laps - 1] : laps.ToString(CultureInfo.InvariantCulture);
+        return $"Qualifying! {count} question{(laps == 1 ? "" : "s")}, fastest correct answers take pole.";
     }
 
     /// <summary>
