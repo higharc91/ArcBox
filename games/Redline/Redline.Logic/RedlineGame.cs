@@ -5,7 +5,8 @@ using ArcBox.Sdk;
 namespace Redline.Logic;
 
 /// <summary>
-/// REDLINE: a 22-car racing trivia game. Players claim seats in Driver Select, AI drives the rest,
+/// REDLINE: a 22-car racing trivia game. Players claim seats in Driver Select, AI drives the rest, qualifying
+/// (QualifyingReading → QualifyingQuestion → QualifyingResult per lap) sets the grid (qualifying spec §2),
 /// then every round is Throttle → Reading → Question → Reveal until a car crosses the line (spec §2, §3; Reading: audio spec §2).
 /// After the Chequered flag, the top three players take the podium: Anthem, then Champagne (podium spec §2).
 /// </summary>
@@ -20,6 +21,12 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
     private IReadOnlyList<TriviaQuestion> _questions = [];
     /// <summary>Per question (same index as <see cref="_questions"/>): its four answers in shuffled order and the correct one's index.</summary>
     private IReadOnlyList<(IReadOnlyList<string> Answers, int CorrectIndex)> _answers = [];
+    /// <summary>
+    /// Qualifying's easy questions, one per lap (qualifying spec §2.4; empty when off), and their answers, shuffled when
+    /// qualifying begins.
+    /// </summary>
+    private IReadOnlyList<TriviaQuestion> _qualiQuestions = [];
+    private IReadOnlyList<(IReadOnlyList<string> Answers, int CorrectIndex)> _qualiAnswers = [];
     private string _attribution = HostViews.FallbackCredit;
 
     /// <summary>All 22 cars in team order; never reordered.</summary>
@@ -36,6 +43,15 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
     private int _spraySeq;
     private readonly Dictionary<PlayerId, Driver> _seatOf = new();
     private readonly Dictionary<PlayerId, bool> _connected = new();
+
+    /// <summary>The current qualifying lap, 1..QualifyingLaps; 0 before qualifying (and when it is skipped).</summary>
+    private int _qualiLap;
+    /// <summary>When the current QualifyingQuestion opened: the server's own lap clock starts here (§2.1).</summary>
+    private DateTimeOffset _qualiOpenedAt;
+    /// <summary>QualifyingResult: the code of the lap's fastest correct car (§2.2), or null.</summary>
+    private string? _fastestLap;
+    /// <summary>True once qualifying has set the grid, so the Grid phone view can say where the player qualified.</summary>
+    private bool _qualified;
 
     /// <summary>Driver Select: bumped whenever the free-seat set changes.</summary>
     private int _freeSeatsVersion;
@@ -68,7 +84,14 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
             throw new InvalidOperationException(
                 $"The question source returned {_questions.Count} questions; REDLINE needs {Rules.MaxRounds}, one per round.");
         _answers = [.. _questions.Select(q => ShuffleAnswers(q, ctx.Random))];
-        _attribution = HostViews.Attribution(_questions);
+        // Qualifying spec §2.4: taken after the race's, so the race keeps its questions with qualifying on or off. Their
+        // answers are shuffled only when qualifying begins, after the seeded start order is drawn (BeginQualifying).
+        _qualiQuestions = Rules.Qualify ? questions.Take(Rules.QualifyingLaps, Difficulty.Easy) : [];
+        if (_qualiQuestions.Count < (Rules.Qualify ? Rules.QualifyingLaps : 0))
+            throw new InvalidOperationException(
+                $"The question source returned {_qualiQuestions.Count} easy questions; qualifying needs {Rules.QualifyingLaps}, one per lap.");
+        _qualiAnswers = [];
+        _attribution = HostViews.Attribution([.. _questions, .. _qualiQuestions]);
 
         _field = [.. _grid.Seats.Select(s => new Driver(s))];
         _standings = [.. _field];
@@ -82,6 +105,10 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         _claimRejected.Clear();
         _views.Clear();
         _freeSeatsVersion = 0;
+        _qualiLap = 0;
+        _qualiOpenedAt = default;
+        _fastestLap = null;
+        _qualified = false;
         foreach (var p in players) _connected[p.Id] = true;
 
         BeginDriverSelect();
@@ -96,6 +123,9 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
             {
                 case RacePhase.DriverSelect:
                     OnClaim(from, input.Read<ChoiceInput>());
+                    break;
+                case RacePhase.QualifyingQuestion:
+                    OnLapAnswer(from, input.Read<ChoiceInput>());
                     break;
                 case RacePhase.Throttle:
                     OnThrottle(from, input.Read<ButtonsInput>());
@@ -120,6 +150,9 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         switch (Phase)
         {
             case RacePhase.DriverSelect: EndDriverSelect(); break;
+            case RacePhase.QualifyingReading: OpenLap(); break;
+            case RacePhase.QualifyingQuestion: LapResult(); break;
+            case RacePhase.QualifyingResult: EndLapResult(); break;
             case RacePhase.Grid: StartRound(); break;
             case RacePhase.Throttle: EndThrottle(); break;
             case RacePhase.Reading: OpenQuestion(); break;
@@ -140,14 +173,15 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         switch (Phase)
         {
             case RacePhase.DriverSelect: MaybeEndDriverSelectEarly(); break;
+            case RacePhase.QualifyingQuestion: MaybeEndLapEarly(); break;
             case RacePhase.Throttle: MaybeEndThrottleEarly(); break;
             case RacePhase.Question: MaybeEndQuestionEarly(); break;
         }
     }
 
     public object HostView() => HostViews.Build(
-        Phase, Round, Rules, QuestionCard(), InRound ? _answers[Round - 1].CorrectIndex : null, _standings,
-        _ctx?.TimerDeadline(PhaseTimer), _finish, _attribution, PodiumHostView());
+        Phase, Round, Rules, QuestionCard(), CurrentAnswers?.CorrectIndex, _standings,
+        _ctx?.TimerDeadline(PhaseTimer), _finish, _attribution, PodiumHostView(), (_qualiLap, _fastestLap));
 
     public ControllerView PlayerView(PlayerId id)
     {
@@ -215,10 +249,129 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         }
         // Every seat still without a player is now an AI driver (PlayerId stays null).
 
+        // The seeded start order: the grid when qualifying is skipped, else qualifying's tie order (qualifying spec §2.2).
+        // Every random draw up to here is the same with qualifying on, off or skipped, so this is today's shuffle.
         _standings = [.. _field];
         random.Shuffle(CollectionsMarshal.AsSpan(_standings));
-        for (var i = 0; i < _standings.Count; i++) _standings[i].Position = _standings[i].PositionAtRoundStart = i + 1;
+        for (var i = 0; i < _standings.Count; i++)
+            _standings[i].Position = _standings[i].PositionAtRoundStart = _standings[i].QualiTieOrder = i + 1;
 
+        if (Rules.Qualify && _field.Any(d => d.IsHuman)) BeginQualifying();
+        else BeginGrid();
+    }
+
+    // ---------------------------------------------------------------- Qualifying (qualifying spec §2)
+    //
+    // During qualifying _standings is the classification (the seeded order before lap 1's result), Position is the
+    // classification position and PositionAtRoundStart the previous one, so a Result's position change is their difference.
+
+    private TriviaQuestion CurrentLap => _qualiQuestions[_qualiLap - 1];
+
+    /// <summary>Shuffles every lap's answers (after the seeded start order, so that order is today's shuffle), then lap 1.</summary>
+    private void BeginQualifying()
+    {
+        _qualiAnswers = [.. _qualiQuestions.Select(q => ShuffleAnswers(q, _ctx!.Random))];
+        BeginLap();
+    }
+
+    /// <summary>The next lap: QualifyingReading while the TV reads the question, or straight to the question with ReadQuestions off.</summary>
+    private void BeginLap()
+    {
+        _qualiLap++;
+        _fastestLap = null;
+        foreach (var d in _field) d.PendingLapMs = d.PendingAnswer = null;
+        if (!Rules.ReadQuestions)
+        {
+            OpenLap();
+            return;
+        }
+
+        Phase = RacePhase.QualifyingReading;
+        _ctx!.SetTimer(PhaseTimer, Rules.ReadingTime(CurrentLap.Text));
+    }
+
+    /// <summary>
+    /// QualifyingQuestion: the server's lap clock starts, and every AI's lap is drawn now, in team order, hidden until the
+    /// Result like everyone else's (§2.3). An AI that runs out of time has no answer.
+    /// </summary>
+    private void OpenLap()
+    {
+        Phase = RacePhase.QualifyingQuestion;
+        _qualiOpenedAt = _ctx!.Now;
+
+        var random = _ctx.Random;
+        var correctIndex = _qualiAnswers[_qualiLap - 1].CorrectIndex;
+        foreach (var d in _field.Where(d => !d.IsHuman))
+        {
+            var (correct, ms) = Qualifying.AiLap(d.Seat.Driver.AiSkill, correctIndex, Rules, random);
+            d.PendingLapMs = ms;
+            d.PendingAnswer = ms is null ? null : correct ? correctIndex : (correctIndex + 1) % 4;
+        }
+
+        _ctx.SetTimer(PhaseTimer, Rules.QualifyingAnswer);
+    }
+
+    /// <summary>
+    /// §2.1: a player's first parseable answer counts, timed as the phone's elapsedMs clamped against the server's own
+    /// measurement since the question opened. Later inputs are ignored; so is anything after the window, which arrives in
+    /// another phase.
+    /// </summary>
+    private void OnLapAnswer(PlayerId from, ChoiceInput input)
+    {
+        if (!_seatOf.TryGetValue(from, out var driver) || driver.PendingAnswer is not null) return;
+        if (input.Selected is not [var id, ..] || PlayerViews.ParseAnswer(id) is not { } index) return;
+
+        var serverMs = (int)(_ctx!.Now - _qualiOpenedAt).TotalMilliseconds;
+        driver.PendingAnswer = index;
+        driver.PendingLapMs = Qualifying.LapTimeMs(input.ElapsedMs, serverMs);
+        MaybeEndLapEarly();
+    }
+
+    private void MaybeEndLapEarly()
+    {
+        if (EveryConnectedHumanHas(d => d.PendingAnswer is not null)) LapResult();
+    }
+
+    /// <summary>
+    /// QualifyingResult: commits every car's lap (a time only for a correct answer; wrong or none is deleted), then
+    /// classifies the field (§2.2) and finds the lap's fastest car.
+    /// </summary>
+    private void LapResult()
+    {
+        Phase = RacePhase.QualifyingResult;
+        var correctIndex = _qualiAnswers[_qualiLap - 1].CorrectIndex;
+        foreach (var d in _field)
+        {
+            int? lap = d.PendingAnswer == correctIndex ? d.PendingLapMs : null;
+            d.QualiLaps.Add(lap);
+            if (lap is not { } ms) continue;
+            d.QualiCorrect++;
+            d.QualiTotalMs += ms;
+        }
+
+        var classified = Qualifying.Classify(_field);
+        for (var i = 0; i < classified.Count; i++)
+        {
+            classified[i].PositionAtRoundStart = classified[i].Position;
+            classified[i].Position = i + 1;
+        }
+        _standings = [.. classified];
+        _fastestLap = Qualifying.FastestLap(classified);
+
+        _ctx!.SetTimer(PhaseTimer, Rules.QualifyingResult);
+    }
+
+    /// <summary>After a Result: the next lap, or after the last the classification becomes the grid (§2.2).</summary>
+    private void EndLapResult()
+    {
+        if (_qualiLap < Rules.QualifyingLaps)
+        {
+            BeginLap();
+            return;
+        }
+
+        foreach (var d in _standings) d.PositionAtRoundStart = d.Position;
+        _qualified = true;
         BeginGrid();
     }
 
@@ -242,14 +395,23 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
     /// <summary>True in Throttle, Reading, Question and Reveal, the phases that have a current question.</summary>
     private bool InRound => Phase is RacePhase.Throttle or RacePhase.Reading or RacePhase.Question or RacePhase.Reveal;
 
+    /// <summary>The current race question's or qualifying lap's shuffled answers; null in the phases without a question.</summary>
+    private (IReadOnlyList<string> Answers, int CorrectIndex)? CurrentAnswers =>
+        InRound ? _answers[Round - 1] : HostViews.IsQualifying(Phase) ? _qualiAnswers[_qualiLap - 1] : null;
+
     private TriviaQuestion Current => _questions[Round - 1];
 
-    /// <summary>§4.4: category and difficulty in Throttle; the text and shuffled answers from Reading on.</summary>
+    /// <summary>
+    /// §4.4: category and difficulty in Throttle; the text and shuffled answers from Reading on. Qualifying (spec §5): the
+    /// whole card in all three phases, as in Reading.
+    /// </summary>
     private QuestionCard? QuestionCard() => Phase switch
     {
         RacePhase.Throttle => new QuestionCard(Current.Category, Current.Difficulty, null, null),
         RacePhase.Reading or RacePhase.Question or RacePhase.Reveal =>
             new QuestionCard(Current.Category, Current.Difficulty, Current.Text, _answers[Round - 1].Answers),
+        RacePhase.QualifyingReading or RacePhase.QualifyingQuestion or RacePhase.QualifyingResult =>
+            new QuestionCard(CurrentLap.Category, CurrentLap.Difficulty, CurrentLap.Text, _qualiAnswers[_qualiLap - 1].Answers),
         _ => null,
     };
 
@@ -453,6 +615,15 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         var seated = _seatOf.TryGetValue(id, out var driver);
         if (Phase == RacePhase.DriverSelect && !seated)
             return new PlayerViewKey(Phase, Round, null, _freeSeatsVersion, _claimRejected.GetValueOrDefault(id));
+        if (HostViews.IsQualifying(Phase) && driver is not null)
+            return new PlayerViewKey(Phase, Round, driver.Code, 0, null,
+                Position: driver.Position, Answered: driver.PendingAnswer is not null, QualiLap: _qualiLap,
+                LapMs: Phase switch
+                {
+                    RacePhase.QualifyingQuestion => driver.PendingLapMs,
+                    RacePhase.QualifyingResult => driver.QualiLaps[^1],
+                    _ => null,
+                });
         if ((InRound || Phase == RacePhase.Chequered) && driver is not null)
             return new PlayerViewKey(Phase, Round, driver.Code, 0, null,
                 driver.Position, driver.Throttle, driver.AnswerIndex is not null, driver.PitLimiter,
@@ -469,7 +640,9 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
             (RacePhase.DriverSelect, null) => PlayerViews.PickDriver(
                 _field.Where(d => !d.IsHuman).Select(d => d.Seat), key.Header, deadline),
             (RacePhase.DriverSelect, _) => PlayerViews.Seated(driver.Seat, deadline),
-            (RacePhase.Grid, not null) => PlayerViews.OnGrid(driver.Seat, deadline),
+            (RacePhase.QualifyingReading or RacePhase.QualifyingQuestion or RacePhase.QualifyingResult, not null) =>
+                LapView(driver, deadline),
+            (RacePhase.Grid, not null) => PlayerViews.OnGrid(driver.Seat, _qualified ? driver.Position : null, deadline),
             (RacePhase.Throttle or RacePhase.Reading or RacePhase.Question or RacePhase.Reveal, not null) => RoundView(driver, deadline),
             (RacePhase.Chequered, not null) => PlayerViews.Finished(
                 driver.Position, _field.Count, PlayerViews.RoundHeader(driver.Position, Round, Rules.MaxRounds), deadline),
@@ -490,6 +663,20 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         return Phase == RacePhase.Anthem
             ? PlayerViews.BuildPressure(driver.Seat.Team, header, deadline)
             : PlayerViews.PopTheCork(driver.Seat.Team, place.ChargeAtChampagne, header, deadline);
+    }
+
+    /// <summary>Qualifying spec §4.2: the lap views for one seated player.</summary>
+    private ControllerView LapView(Driver driver, DateTimeOffset? deadline)
+    {
+        var header = PlayerViews.QualifyingHeader(_qualiLap, Rules.QualifyingLaps);
+        return Phase switch
+        {
+            RacePhase.QualifyingReading => PlayerViews.QualifyingListening(CurrentLap.Text, header, deadline),
+            RacePhase.QualifyingQuestion when driver.PendingLapMs is { } ms && driver.PendingAnswer is not null =>
+                PlayerViews.LapChecking(ms, header, deadline),
+            RacePhase.QualifyingQuestion => PlayerViews.Answer(CurrentLap.Text, _qualiAnswers[_qualiLap - 1].Answers, header, deadline),
+            _ => PlayerViews.LapResult(driver.QualiLaps[^1], driver.Position, driver.Code == _fastestLap, header, deadline),
+        };
     }
 
     /// <summary>The §3.3 round views for one seated player.</summary>

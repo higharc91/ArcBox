@@ -1,3 +1,4 @@
+using System.Globalization;
 using ArcBox.Sdk;
 
 namespace Redline.Logic;
@@ -20,8 +21,40 @@ internal static class PlayerViews
     public static WaitView Seated(Seat s, DateTimeOffset? deadline) =>
         new($"You're {s.Driver.Name}. Waiting for the grid…") { DeadlineUtc = deadline };
 
-    public static WaitView OnGrid(Seat s, DateTimeOffset? deadline) =>
-        new($"You're {s.Driver.Name}, #{s.Driver.Number}, {s.Team.Name}. Lights out in a moment…") { DeadlineUtc = deadline };
+    /// <param name="qualified">The grid slot won in qualifying (qualifying spec §4.2), or null when qualifying did not run.</param>
+    public static WaitView OnGrid(Seat s, int? qualified, DateTimeOffset? deadline) =>
+        new($"You're {s.Driver.Name}, #{s.Driver.Number}, {s.Team.Name}. Lights out in a moment…"
+            + (qualified is { } slot ? $" · Qualified P{slot}" : "")) { DeadlineUtc = deadline };
+
+    // ---------------------------------------------------------------- Qualifying (qualifying spec §4.2)
+
+    public const string AnswersSoon = "Answers in a moment…";
+
+    /// <summary>"QUALIFYING · LAP 1/3".</summary>
+    public static string QualifyingHeader(int lap, int laps) => $"QUALIFYING · LAP {lap}/{laps}";
+
+    /// <summary>
+    /// A lap time in seconds to two decimals, rounded half away from zero, invariant culture: 2405 ms → "2.41".
+    /// The one formatter for every qualifying time a phone shows.
+    /// </summary>
+    public static string LapSeconds(int ms) =>
+        Math.Round(ms / 1000m, 2, MidpointRounding.AwayFromZero).ToString("0.00", CultureInfo.InvariantCulture);
+
+    /// <summary>QualifyingReading: the question while the TV reads it out, then the note on its own line.</summary>
+    public static WaitView QualifyingListening(string text, string header, DateTimeOffset? deadline) =>
+        new($"{text}\n{AnswersSoon}") { Header = header, DeadlineUtc = deadline };
+
+    /// <summary>QualifyingQuestion, answered: the player's own clamped lap time; whether it counts waits for the Result.</summary>
+    public static WaitView LapChecking(int lapMs, string header, DateTimeOffset? deadline) =>
+        new($"Lap time {LapSeconds(lapMs)} s — checking…") { Header = header, DeadlineUtc = deadline };
+
+    /// <summary>QualifyingResult: "✔ 2.41 s · P3 so far" (" · Purple!" for the lap's fastest), or "✖ Lap deleted · P14 so far".</summary>
+    /// <param name="lapMs">This lap's committed time; null when it was deleted.</param>
+    /// <param name="position">The classification position after this lap.</param>
+    public static WaitView LapResult(int? lapMs, int position, bool fastestLap, string header, DateTimeOffset? deadline) =>
+        new(lapMs is { } ms
+            ? $"✔ {LapSeconds(ms)} s · P{position} so far" + (fastestLap ? " · Purple!" : "")
+            : $"✖ Lap deleted · P{position} so far") { Header = header, DeadlineUtc = deadline };
 
     // ---------------------------------------------------------------- Rounds (§3.3)
 
@@ -136,8 +169,10 @@ internal static class PlayerViews
 /// Driver Select uses <see cref="FreeSeatsVersion"/> and <see cref="Header"/>. The round phases use the player's own
 /// <see cref="Position"/> (shown in the header), <see cref="Throttle"/> (locked in, or forced by the limiter),
 /// <see cref="Answered"/>, <see cref="PitLimiter"/> and, in Reveal, <see cref="Outcome"/>; Chequered uses <see cref="Position"/> too.
-/// These are default elsewhere.
+/// The qualifying phases use <see cref="QualiLap"/>, <see cref="Position"/>, <see cref="Answered"/> and <see cref="LapMs"/>
+/// (the pending time once answered in QualifyingQuestion; the committed lap in QualifyingResult). These are default elsewhere.
 /// </remarks>
 internal readonly record struct PlayerViewKey(
     RacePhase Phase, int Round, string? Code, int FreeSeatsVersion, string? Header,
-    int Position = 0, Throttle? Throttle = null, bool Answered = false, bool PitLimiter = false, RoundOutcome? Outcome = null);
+    int Position = 0, Throttle? Throttle = null, bool Answered = false, bool PitLimiter = false, RoundOutcome? Outcome = null,
+    int QualiLap = 0, int? LapMs = null);
