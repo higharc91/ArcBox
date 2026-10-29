@@ -17,6 +17,7 @@ namespace ArcBox.Server.Tests.Support;
 public sealed class ArcServerFactory : WebApplicationFactory<Program>
 {
     private readonly string? _databaseFile;
+    private readonly DirectoryInfo _contentRoot = Directory.CreateTempSubdirectory("arcbox-content-");
 
     /// <summary>A server on a private in-memory database that lives as long as the factory.</summary>
     public ArcServerFactory()
@@ -26,6 +27,9 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
     /// <summary>A server on <paramref name="databaseFile"/>, so a second factory on the same file is a restart.</summary>
     public ArcServerFactory(string databaseFile) => _databaseFile = databaseFile;
 
+    /// <summary>The server's <c>Content:Root</c>: a private directory holding one pack, <c>ledger/base</c>.</summary>
+    public string ContentRoot => _contentRoot.FullName;
+
     public FakeTimeProvider Time { get; } = new(new DateTimeOffset(2026, 1, 1, 0, 0, 0, TimeSpan.Zero));
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -34,6 +38,9 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
         builder.UseSetting("Redline:OpenTdb:Enabled", "false");
         // The factory runs as Development, whose Web:Root is web/play/dist when it has been built; tests serve wwwroot.
         builder.UseSetting("Web:Root", "");
+        // Like the settings above, read while Program registers services.
+        SeedContent();
+        builder.UseSetting("Content:Root", _contentRoot.FullName);
         if (_databaseFile is null)
             builder.UseSetting("Storage:ConnectionString", $"Data Source=file:{Guid.NewGuid():N}?mode=memory&cache=shared");
         else
@@ -54,5 +61,28 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
             services.AddHttpClient<ISpeechSynthesizer, GoogleTtsClient>()
                 .ConfigurePrimaryHttpMessageHandler(() => new NoNetworkHandler());
         });
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        if (!disposing) return;
+        try
+        {
+            _contentRoot.Delete(true);
+        }
+        catch (IOException)
+        {
+            // A leftover temp directory is harmless.
+        }
+    }
+
+    private void SeedContent()
+    {
+        var pack = Path.Combine(_contentRoot.FullName, "ledger", "base");
+        Directory.CreateDirectory(Path.Combine(pack, "maps"));
+        File.WriteAllText(Path.Combine(pack, "hello.txt"), "hello");
+        File.WriteAllText(Path.Combine(pack, "maps", "arena.json"), "{\"w\":8}");
+        File.WriteAllText(Path.Combine(pack, "blob.xyzunknown"), "blob");
     }
 }

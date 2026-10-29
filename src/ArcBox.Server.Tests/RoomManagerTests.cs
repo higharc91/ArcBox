@@ -2,6 +2,7 @@ using System.Text.Json;
 using ArcBox.Sdk;
 using ArcBox.Sdk.Protocol;
 using ArcBox.Server.Campaigns;
+using ArcBox.Server.Content;
 using ArcBox.Server.Games;
 using ArcBox.Server.Profiles;
 using ArcBox.Server.Rooms;
@@ -48,7 +49,7 @@ public sealed class RoomManagerTests : IDisposable
         var services = new RoomServices(registry, sender, time, new RoomOptions { MaxRooms = maxRooms },
             new ProfileService(db, writer, time), NullLoggerFactory.Instance,
             new CampaignService(db, writer, rules, time, NullLogger<CampaignService>.Instance), rules,
-            new RoomStore(db, writer, time));
+            new RoomStore(db, writer, time), ContentPackRegistry.Empty);
         return new RoomManager(services);
     }
 

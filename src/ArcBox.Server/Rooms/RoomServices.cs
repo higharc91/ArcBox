@@ -1,4 +1,5 @@
 using ArcBox.Server.Campaigns;
+using ArcBox.Server.Content;
 using ArcBox.Server.Games;
 using ArcBox.Server.Hubs;
 using ArcBox.Server.Profiles;
@@ -15,4 +16,5 @@ public sealed record RoomServices(
     ILoggerFactory Loggers,
     CampaignService Campaigns,
     CampaignRulesRegistry Rules,
-    RoomStore Store);
+    RoomStore Store,
+    ContentPackRegistry Content);

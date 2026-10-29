@@ -2,6 +2,7 @@ using System.Text.Json;
 using ArcBox.Sdk;
 using ArcBox.Sdk.Protocol;
 using ArcBox.Server.Campaigns;
+using ArcBox.Server.Content;
 using ArcBox.Server.Games;
 using ArcBox.Server.Profiles;
 using ArcBox.Server.Rooms;
@@ -113,7 +114,7 @@ public sealed class DurableRoomTests
             var rules = new CampaignRulesRegistry([]);
             Services = new RoomServices(registry, Sender, Time, new RoomOptions(), new ProfileService(_db, Writer, Time),
                 NullLoggerFactory.Instance, new CampaignService(_db, Writer, rules, Time, NullLogger<CampaignService>.Instance),
-                rules, Store);
+                rules, Store, ContentPackRegistry.Empty);
         }
 
         public FakeTimeProvider Time { get; } = new(new DateTimeOffset(2026, 1, 1, 0, 0, 0, TimeSpan.Zero));
