@@ -273,6 +273,33 @@ small { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--dim
 .join-form h1 { font-weight: 700; font-size: 30px; }
 .code-input { font-weight: 900; font-size: 34px; letter-spacing: 12px; text-indent: 12px; text-transform: uppercase; text-align: center; }
 
+/* ---------------------------------------------------------------- picker (src/screens/Pick.tsx) */
+.pick { gap: 16px; padding-bottom: calc(24px + var(--safe-bottom)); }
+.pick-head { padding: 26px var(--gutter) 0; text-align: center; display: flex; flex-direction: column; gap: 4px; }
+.pick-head h1 { font: italic 900 32px "Titillium Web", sans-serif; line-height: 1.1; overflow-wrap: anywhere; }
+.pick-head p { color: var(--dim); font-weight: 600; }
+.pick-hero { --card: #fff; margin: 12px var(--gutter) 0; padding: 28px 16px; text-align: center; display: flex; flex-direction: column; gap: 6px; background: var(--glass); border: 1px solid var(--edge); border-left: 4px solid var(--card); }
+.pick-hero .hero-name { font: italic 900 44px "Titillium Web", sans-serif; line-height: 1.05; overflow-wrap: anywhere; }
+.pick-hero .hero-sub { color: var(--dim); font-weight: 600; font-size: 17px; }
+.pick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 var(--gutter); }
+.pick-tile { --card: #fff; min-height: 96px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2px; text-align: center; padding: 12px 10px; border-top: 3px solid var(--card); }
+.pick-tile b { font: italic 900 22px "Titillium Web", sans-serif; overflow-wrap: anywhere; }
+.pick-tile span { color: var(--dim); font-weight: 600; font-size: 14px; }
+.pick-tile:disabled { opacity: 0.5; }
+.pick-tile.pick-new { border-top: 1px dashed rgba(255, 255, 255, 0.4); border-style: dashed; font-weight: 700; font-size: 17px; }
+.pick-rows { list-style: none; padding: 0 var(--gutter); display: flex; flex-direction: column; gap: 8px; }
+.pick-row { --card: #fff; width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 12px; text-align: left; padding: 12px 14px; border-left: 4px solid var(--card); }
+.pick-row[aria-pressed="true"] { background: var(--panel-hi); border-color: #fff; border-left-color: var(--card); }
+.pick-row .row-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.pick-row b { font: italic 900 22px "Titillium Web", sans-serif; overflow-wrap: anywhere; }
+.pick-row .row-text span { color: var(--dim); font-weight: 600; font-size: 14px; }
+.pick-row em { font-style: normal; font-weight: 600; font-size: 14px; color: #c9c9d3; }
+.tag { flex: none; font-weight: 900; font-size: 11px; letter-spacing: 1.5px; padding: 3px 8px; border-radius: 2px; }
+.tag.ai { background: #fff; color: #111; }
+.tag.offline { background: rgba(255, 255, 255, 0.1); color: var(--dim); }
+.pick-foot { margin-top: auto; padding: 0 var(--gutter); display: flex; flex-direction: column; gap: 12px; text-align: center; }
+.link { background: none; border-color: transparent; color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+
 /* ---------------------------------------------------------------- lobby */
 .lobby { gap: 16px; padding-bottom: calc(24px + var(--safe-bottom)); }
 .lobby-head { display: flex; justify-content: space-between; align-items: flex-end; padding: 22px 20px 0; }
@@ -298,6 +325,21 @@ small { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--dim
 .game-card .gplayers { color: var(--dim); font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
 .game-card.picked { border-color: #fff; border-left: 4px solid var(--red); }
 .start { margin-top: 6px; }
+
+/* Campaign rooms (src/screens/Lobby.tsx): the VIP's campaign choice, and "Who are you in …?" for a phone not yet matched to a member. */
+.campaigns, .claim { padding: 0 var(--gutter); display: flex; flex-direction: column; gap: 10px; }
+.campaign-list { display: flex; flex-direction: column; gap: 8px; }
+.campaign-card { display: flex; justify-content: space-between; align-items: center; gap: 10px; text-align: left; padding: 12px 14px; }
+.campaign-card .cname { font: italic 900 20px "Titillium Web", sans-serif; overflow-wrap: anywhere; }
+.campaign-card .cmeta { color: var(--dim); font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; flex: none; }
+.campaign-card.picked { border-color: #fff; border-left: 4px solid var(--red); }
+.campaign-form { display: flex; flex-direction: column; gap: 10px; }
+.claim h2 { font-weight: 700; font-size: 22px; }
+.claim .claim-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.claim .claim-row { width: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; padding: 10px 14px; border-left: 4px solid var(--card, rgba(255, 255, 255, 0.25)); }
+.claim .claim-row b { font: italic 900 20px "Titillium Web", sans-serif; }
+.claim .claim-row span { color: var(--dim); font-size: 14px; font-weight: 600; }
+.claim .claim-new { border-style: dashed; font-weight: 700; }
 .waiting { padding-top: 12px; color: var(--dim); font-weight: 600; font-size: 18px; }
 .waiting .next-game { color: var(--ink); }
 .lobby > .form-error { margin: 0 var(--gutter); }

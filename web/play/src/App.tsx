@@ -3,14 +3,16 @@ import { FeedbackContext, type Feedback } from "./feedback/feedback";
 import { Closed } from "./screens/Closed";
 import { Join } from "./screens/Join";
 import { Lobby } from "./screens/Lobby";
+import { Pick } from "./screens/Pick";
 import { Results } from "./screens/Results";
 import type { Session, SessionState } from "./session/session";
 import { loadSeat, type KeyValueStore } from "./session/storage";
 import { ControllerScreen } from "./widgets/ControllerScreen";
 
 /**
- * First load: `?room=CODE` resumes a stored seat for that room, else shows Join with the code pre-filled.
- * `?slot=n` and `?devName=P1` come from the dev page: the slot namespaces storage, and devName joins automatically.
+ * First load: `?room=CODE` rejoins a stored seat for that room without asking anything (`Rejoin`). With no seat, or
+ * when the server no longer knows it, the phone asks the room what it can take (`Peek`) and shows the picker.
+ * `?slot=n` and `?devName=P1` come from the dev page: the slot namespaces storage, and devName joins under that name.
  */
 export async function boot(session: Session, store: KeyValueStore, search: string): Promise<void> {
   const params = new URLSearchParams(search);
@@ -18,12 +20,11 @@ export async function boot(session: Session, store: KeyValueStore, search: strin
   const slot = params.get("slot") ?? undefined;
   const devName = params.get("devName")?.trim();
   if (!room) return;
-  if (loadSeat(store, room, slot)) {
-    if (await session.resume(room)) return;
-  } else {
-    await session.resume(room); // shows Join with the code
-  }
-  if (devName && session.state.screen === "join" && !session.state.error) await session.join(room, devName);
+  const hasSeat = loadSeat(store, room, slot) !== null;
+  // A failed rejoin has already opened the picker (once); only a phone with no seat still needs to.
+  if (hasSeat && (await session.resume(room))) return;
+  if (devName && (session.state.screen === "join" || session.state.screen === "pick")) return session.joinNew(devName, room);
+  if (!hasSeat) await session.open(room);
 }
 
 /** `feedback` (haptics, sounds, the speaker toggle) is optional so tests and the dev board can leave it out. */
@@ -51,7 +52,7 @@ function Screen({ state, session }: { state: SessionState; session: Session }) {
           name={state.name}
           error={state.error}
           busy={state.busy}
-          onJoin={(code, name) => void session.join(code, name)}
+          onJoin={(code, name) => void session.joinRoom(code, name)}
         />
       );
     case "connecting":
@@ -61,6 +62,19 @@ function Screen({ state, session }: { state: SessionState; session: Session }) {
           <p>Connecting…</p>
         </div>
       );
+    case "pick":
+      return (
+        <Pick
+          peek={state.peek}
+          profiles={session.profiles()}
+          showAll={state.showAll}
+          error={state.error}
+          busy={state.busy}
+          onTake={(seat) => void session.takeSeat(seat)}
+          onNew={(name) => void session.joinNew(name)}
+          onShowAll={() => session.showEveryone()}
+        />
+      );
     case "lobby":
       return (
         <Lobby
@@ -69,6 +83,9 @@ function Screen({ state, session }: { state: SessionState; session: Session }) {
           error={state.error}
           onSelectGame={(id) => void session.selectGame(id)}
           onStart={() => void session.startGame()}
+          onSelectCampaign={(id) => void session.selectCampaign(id)}
+          onCreateCampaign={(name) => void session.createCampaign(name)}
+          onClaim={(member, name) => void session.claimMember(member, name)}
         />
       );
     case "game":

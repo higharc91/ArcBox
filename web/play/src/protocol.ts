@@ -78,8 +78,9 @@ export interface GameManifest {
   description: string;
   minPlayers: number;
   maxPlayers: number;
-  usesCampaigns: boolean;
-  resumesAfterRestart: boolean;
+  /** Absent from a stale server's manifest; read as false. */
+  usesCampaigns?: boolean;
+  resumesAfterRestart?: boolean;
 }
 export interface PlayerScore {
   playerId: PlayerId;
@@ -155,8 +156,11 @@ export interface ProfileKey { id: ProfileId; key: string; name: string }
 export interface PeekRequest { code: string; profileKeys?: string[] | null }
 /** How a seat is shown. The game supplies it in campaign rooms ("Aldric", "Dwarf Cleric · Lv 3"). */
 export interface SeatCard { title: string; subtitle: string | null; color: string | null; portrait: string | null }
-/** Exactly one is set: an existing (offline) seat, or a campaign member who has no seat yet. */
-export interface SeatRef { slot: PlayerId | null; member: ProfileId | null }
+/**
+ * Exactly one is set: an existing (offline) seat, or a campaign member who has no seat yet. The server writes both
+ * fields (the unused one null); a request sends only the one it means, so either may be omitted.
+ */
+export interface SeatRef { slot?: PlayerId | null; member?: ProfileId | null }
 export interface SeatOffer { ref: SeatRef; card: SeatCard; absent: boolean }
 export interface RoomPeek {
   code: string;
@@ -258,7 +262,9 @@ export function parseControllerView(json: unknown): ControllerView {
 const isManifest = (v: unknown): v is GameManifest =>
   isRecord(v) && typeof v.id === "string" && typeof v.name === "string" && typeof v.description === "string" &&
   typeof v.minPlayers === "number" && typeof v.maxPlayers === "number" &&
-  typeof v.usesCampaigns === "boolean" && typeof v.resumesAfterRestart === "boolean";
+  // The flags are newer than the rest: a stale server may not send them, but if it does they must be booleans.
+  (v.usesCampaigns === undefined || typeof v.usesCampaigns === "boolean") &&
+  (v.resumesAfterRestart === undefined || typeof v.resumesAfterRestart === "boolean");
 
 const isAbsent = (v: unknown) => v === undefined || v === null;
 const isStringOrAbsent = (v: unknown) => isAbsent(v) || typeof v === "string";
@@ -280,6 +286,19 @@ const isLobbyCampaign = (v: unknown): v is LobbyCampaign =>
 const isCampaignSummary = (v: unknown): v is CampaignSummary =>
   isRecord(v) && typeof v.id === "string" && typeof v.code === "string" && typeof v.name === "string" &&
   typeof v.members === "number" && typeof v.updatedUtc === "string";
+
+const isSeatRef = (v: unknown): v is SeatRef => isRecord(v) && isStringOrAbsent(v.slot) && isStringOrAbsent(v.member);
+
+const isSeatOffer = (v: unknown): v is SeatOffer =>
+  isRecord(v) && isSeatRef(v.ref) && isSeatCard(v.card) && typeof v.absent === "boolean";
+
+/** Checks the answer to `Peek` before the picker is built from it. */
+export function isRoomPeek(v: unknown): v is RoomPeek {
+  return isRecord(v) && typeof v.code === "string" && isStringOrAbsent(v.gameId) && isStringOrAbsent(v.campaignName) &&
+    typeof v.inGame === "boolean" && typeof v.canJoinNew === "boolean" &&
+    Array.isArray(v.offers) && v.offers.every(isSeatOffer) &&
+    (isAbsent(v.suggested) || isSeatOffer(v.suggested));
+}
 
 export function isGameResults(v: unknown): v is GameResults {
   return isRecord(v) && Array.isArray(v.scores) &&

@@ -1,5 +1,10 @@
+import { useState } from "preact/hooks";
 import { MuteToggle } from "../feedback/MuteToggle";
-import type { LobbyState, PlayerId, PlayerScore } from "../protocol";
+import type { LobbyState, PlayerId, PlayerScore, RosterEntry, SeatRef } from "../protocol";
+import { NAME_MAX, isValidName } from "./Join";
+import { cardStyle } from "./Pick";
+
+export const CAMPAIGN_NAME_MAX = 32;
 
 interface Props {
   lobby: LobbyState;
@@ -7,6 +12,10 @@ interface Props {
   error?: string;
   onSelectGame: (gameId: string) => void;
   onStart: () => void;
+  onSelectCampaign: (campaignId: string) => void;
+  onCreateCampaign: (name: string) => void;
+  /** Say which campaign member this phone is; a null member is "I'm new here", under `newName` when one was typed. */
+  onClaim: (member: SeatRef | null, newName?: string) => void;
 }
 
 const range = (min: number, max: number) => (min === max ? `${min}` : `${min}–${max}`);
@@ -19,13 +28,17 @@ function winnerLine(scores: PlayerScore[]): string {
   return `${names.slice(0, -1).join(", ")} and ${names.at(-1)} tied with ${top}`;
 }
 
-export function Lobby({ lobby, me, error, onSelectGame, onStart }: Props) {
+export function Lobby({ lobby, me, error, onSelectGame, onStart, onSelectCampaign, onCreateCampaign, onClaim }: Props) {
   const vip = lobby.players.find((p) => p.isVip);
   const iAmVip = vip?.id === me;
   const count = lobby.players.length;
   // Games that can never fit this many players are hidden; ones that need more are shown with their range.
   const games = lobby.games.filter((g) => count <= g.maxPlayers);
   const selected = lobby.games.find((g) => g.id === lobby.selectedGameId);
+  const campaign = lobby.campaign;
+  // A seated phone that isn't one of the campaign's members yet is asked who it is (members with no connected seat).
+  const mine = lobby.players.find((p) => p.id === me);
+  const unmatched = campaign && !lobby.inGame && !(mine?.profile && campaign.roster.some((r) => r.profile === mine.profile));
 
   return (
     <div class="screen lobby">
@@ -56,6 +69,15 @@ export function Lobby({ lobby, me, error, onSelectGame, onStart }: Props) {
         ))}
       </ul>
 
+      {campaign && unmatched ? (
+        <Claim
+          campaignName={campaign.name}
+          entries={campaign.roster.filter((r) => !r.connected)}
+          placeholder={mine?.name ?? ""}
+          onClaim={onClaim}
+        />
+      ) : null}
+
       {iAmVip ? (
         <section class="picker">
           <small>PICK A GAME</small>
@@ -77,6 +99,9 @@ export function Lobby({ lobby, me, error, onSelectGame, onStart }: Props) {
               );
             })}
           </div>
+          {selected?.usesCampaigns ? (
+            <Campaigns lobby={lobby} onSelect={onSelectCampaign} onCreate={onCreateCampaign} />
+          ) : null}
           <button type="button" class="primary big start" disabled={!lobby.canStart} onClick={onStart}>
             Everybody's in
           </button>
@@ -87,11 +112,126 @@ export function Lobby({ lobby, me, error, onSelectGame, onStart }: Props) {
       ) : (
         <section class="waiting">
           {selected ? <p class="next-game">Next up: <b>{selected.name}</b></p> : null}
+          {campaign ? <p class="next-game">Campaign: <b>{campaign.name}</b></p> : null}
           <p>{vip ? `Waiting for ${vip.name} to start` : "Waiting for the host to start"}</p>
         </section>
       )}
 
       {error ? <p class="form-error" role="alert">{error}</p> : null}
     </div>
+  );
+}
+
+/** The VIP's campaign step for a game that uses campaigns: pick one of the game's campaigns, or start a new one. */
+function Campaigns({ lobby, onSelect, onCreate }: { lobby: LobbyState; onSelect: (id: string) => void; onCreate: (name: string) => void }) {
+  const [creating, setCreating] = useState(false);
+  const [name, setName] = useState("");
+  const valid = name.trim().length >= 1 && name.trim().length <= CAMPAIGN_NAME_MAX;
+
+  const submit = (e: Event) => {
+    e.preventDefault();
+    if (!valid) return;
+    onCreate(name.trim());
+    setCreating(false);
+    setName("");
+  };
+
+  return (
+    <div class="campaigns">
+      <small>PICK A CAMPAIGN</small>
+      <div class="campaign-list">
+        {(lobby.campaigns ?? []).map((c) => {
+          const on = c.id === lobby.campaign?.id;
+          return (
+            <button
+              type="button"
+              key={c.id}
+              class={`campaign-card${on ? " picked" : ""}`}
+              aria-pressed={on ? "true" : "false"}
+              onClick={() => onSelect(c.id)}
+            >
+              <span class="cname">{c.name}</span>
+              <span class="cmeta">{c.members} {c.members === 1 ? "member" : "members"}</span>
+            </button>
+          );
+        })}
+      </div>
+      {creating ? (
+        <form class="campaign-form" onSubmit={submit}>
+          <label class="field">
+            <span>Campaign name</span>
+            <input
+              class="text-input"
+              name="campaignName"
+              value={name}
+              maxLength={CAMPAIGN_NAME_MAX}
+              placeholder={`Up to ${CAMPAIGN_NAME_MAX} characters`}
+              onInput={(e) => setName((e.currentTarget as HTMLInputElement).value)}
+            />
+          </label>
+          <button type="submit" class="primary" disabled={!valid}>Create</button>
+        </form>
+      ) : (
+        <button type="button" onClick={() => setCreating(true)}>New campaign</button>
+      )}
+    </div>
+  );
+}
+
+/** "Who are you in {campaign}?": the members nobody is playing, and "I'm new here" (with an optional name, so two Dans can differ). */
+function Claim({ campaignName, entries, placeholder, onClaim }: {
+  campaignName: string;
+  entries: RosterEntry[];
+  placeholder: string;
+  onClaim: (member: SeatRef | null, newName?: string) => void;
+}) {
+  const [adding, setAdding] = useState(false);
+  const [name, setName] = useState("");
+  const typed = name.trim();
+  const valid = typed === "" || isValidName(typed);
+
+  return (
+    <section class="claim">
+      <h2>Who are you in {campaignName}?</h2>
+      <ul class="claim-list">
+        {entries.map((r) => (
+          <li key={r.profile}>
+            <button
+              type="button"
+              class="claim-row"
+              style={cardStyle(r.card)}
+              onClick={() => onClaim(r.seatedAs ? { slot: r.seatedAs } : { member: r.profile })}
+            >
+              <b>{r.card.title}</b>
+              {r.card.subtitle ? <span>{r.card.subtitle}</span> : null}
+            </button>
+          </li>
+        ))}
+      </ul>
+      {adding ? (
+        <form
+          class="campaign-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (valid) onClaim(null, typed || undefined);
+          }}
+        >
+          <label class="field">
+            <span>Your name (optional)</span>
+            <input
+              class="text-input"
+              name="claimName"
+              value={name}
+              maxLength={NAME_MAX}
+              placeholder={placeholder}
+              onInput={(e) => setName((e.currentTarget as HTMLInputElement).value)}
+            />
+          </label>
+          <button type="submit" class="primary" disabled={!valid}>I'm new here</button>
+        </form>
+      ) : (
+        <button type="button" class="claim-new" onClick={() => setAdding(true)}>I'm new here</button>
+      )}
+    </section>
   );
 }

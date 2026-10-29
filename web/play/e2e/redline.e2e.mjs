@@ -124,7 +124,7 @@ async function snapshot(phone) {
     return await phone.$("body").evaluate(() => {
       const screen = document.querySelector(".screen");
       const cls = screen?.className ?? "";
-      const name = ["join", "connecting", "lobby", "controller", "results", "closed"].find((s) => cls.split(" ").includes(s)) ?? "blank";
+      const name = ["join", "pick", "connecting", "lobby", "controller", "results", "closed"].find((s) => cls.split(" ").includes(s)) ?? "blank";
       const kind = cls.match(/\bk-(\w+)/)?.[1] ?? null;
       // Text nodes joined by spaces: innerText would apply CSS text-transform, textContent glues "P5" to "ROUND".
       const text = (sel) => {
