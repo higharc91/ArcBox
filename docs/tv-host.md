@@ -121,8 +121,8 @@ and 6 s.
 
 **Presets.** Ultra (default): SDFGI with half-resolution probes, SSR, SSAO + SSIL, volumetric haze, a 4-split
 8192 shadow atlas, MSAA 4× + SMAA, 144 fps cap with VSync off. High: Ultra without SDFGI and SSR. Low: no
-screen-space effects, 2-split 2048 shadows, FXAA, half the trees, no skid marks or marbles on the track (still
-Forward+). F2 switches between them while the race runs. Details, keys and performance notes: [`redline-tv.md`](redline-tv.md).
+screen-space effects, 2-split 2048 shadows, FXAA, half the trees, no skid marks or marbles on the track, every other
+armco and fence post, barrier blocks at LOD and a static big screen (still Forward+). F2 switches between them while the race runs. Details, keys and performance notes: [`redline-tv.md`](redline-tv.md).
 
 **Lobby warm-up.** A scene that implements `IPreloadScene` is instantiated as soon as its game is selected in the
 lobby and gets ready behind it; REDLINE builds its world and draws it (and its HUD panels, under the lobby) for a few

@@ -16,7 +16,11 @@ public sealed record TrackMeshes(
     MeshData Fence,
     MeshData Grass,
     MeshData Gravel,
-    CourseLayout Course);
+    CourseLayout Course)
+{
+    /// <summary>The barriers along the track (the walls are drawn only where they are concrete walls).</summary>
+    public BarrierLayout? Barriers { get; init; }
+}
 
 /// <summary>
 /// Builds the circuit's ribbons and walls from <see cref="TrackGeometry.Resample"/>, porting the browser mockup's cota3d.js.
@@ -28,14 +32,15 @@ public static class TrackMeshBuilder
 {
     /// <summary>Gap from the asphalt edge to the advertising wall.</summary>
     public const double WallGap = 4;
-    /// <summary>Catch fence distance from the centre line (pushed out to stay behind the wall where the wall is further).</summary>
+    /// <summary>Catch fence distance from the centre line (pushed out to stay behind the barriers, see <see cref="BarrierLayout"/>).</summary>
     public const double FenceOffset = 19;
     public const double CurbWidth = Kerbs.Width;
     public const double LineWidth = 0.25;
     /// <summary>Gap between the white edge line and the asphalt edge.</summary>
     public const double LineInset = 0.05;
     public const double WallHeight = 1.2;
-    public const double FenceHeight = 4.2;
+    /// <summary>Catch fence height (also the top of its overhang at corner outsides, see <see cref="TracksideMeshes"/>).</summary>
+    public const double FenceHeight = 4.4;
     /// <summary>Walls and fence reach this far below the track height so no gap shows over the terrain.</summary>
     public const double Footing = 0.3;
 
@@ -59,7 +64,6 @@ public static class TrackMeshBuilder
     private static readonly Vector4 PatchColour = MeshOps.Hex("#38383a");
     private static readonly Vector4 LineColour = MeshOps.Hex("#f1f1ee");
     private static readonly Vector4 WallColour = MeshOps.Hex("#e8e8e8");
-    private static readonly Vector4 FenceColour = MeshOps.Hex("#b8bdc4");
     private static readonly Vector4 GrassColour = MeshOps.Hex("#6d8b3a");
     private static readonly Vector4 Black = MeshOps.Hex("#111111");
     private static readonly Vector4 White = MeshOps.Hex("#f4f4f4");
@@ -100,12 +104,11 @@ public static class TrackMeshBuilder
         for (var i = 0; i < n; i++)
             half[i] = TrackGeometry.Width(q[i].S) / 2;
         var course = CourseLayout.Build(c, q);
-
-        var wall = new Dictionary<int, double[]> { [+1] = WallOffsets(q, half, course.Runoff, +1), [-1] = WallOffsets(q, half, course.Runoff, -1) };
-        var fence = new Dictionary<int, double[]>
+        var barriers = BarrierLayout.Build(q, course, c.StraightModeZones);
+        var wall = new Dictionary<int, double[]>
         {
-            [+1] = wall[+1].Select(o => Math.Max(FenceOffset, o + 0.5)).ToArray(),
-            [-1] = wall[-1].Select(o => Math.Max(FenceOffset, o + 0.5)).ToArray(),
+            [+1] = Enumerable.Range(0, n).Select(i => barriers.Line(i, +1)).ToArray(),
+            [-1] = Enumerable.Range(0, n).Select(i => barriers.Line(i, -1)).ToArray(),
         };
 
         // Asphalt: colour is the surface tone (fresh patches darker); Custom carries the racing line and its wear.
@@ -128,17 +131,18 @@ public static class TrackMeshBuilder
         var runoff = new MeshData();
         var gravel = new MeshData();
         var edges = new EdgeCache(q, half);
-        CourseMeshes.Kerbs(curbs, q, edges, course);
+        var vergeEdge = new Dictionary<(int Side, int Row), Vector3>();
+        CourseMeshes.Kerbs(curbs, q, edges, course, vergeEdge);
         CourseMeshes.Runoff(runoff, gravel, q, edges, course.Runoff);
 
-        var grid = new SampleGrid(q);
         var walls = new MeshData();
-        var fences = new MeshData();
         foreach (var side in new[] { +1, -1 })
         {
-            VerticalStrip(walls, q, grid, spacing, side, wall[side], WallHeight, WallColour);
-            VerticalStrip(fences, q, grid, spacing, side, fence[side], FenceHeight, FenceColour);
+            // The concrete wall only where the barrier is a wall: TecPro, tyres and armco stand on its line elsewhere.
+            var keep = Enumerable.Range(0, n).Select(i => barriers.Kept(i, side) && barriers.Kind(i, side) == BarrierKind.Wall).ToArray();
+            VerticalStrip(walls, q, spacing, side, wall[side], keep, WallHeight, WallColour);
         }
+        var fences = TracksideMeshes.Fence(barriers);
 
         // The inner verge stops short of the fold radius where the wall itself is dropped.
         double Verge(int i, int side)
@@ -148,13 +152,16 @@ public static class TrackMeshBuilder
             return Math.Max(half[i] + 0.5, Math.Min(reach, 0.7 * TrackGeometry.LocalRadius(q[i])));
         }
         var grass = new MeshData();
-        Ribbon(grass, q, spacing, i => half[i], i => Verge(i, +1), GrassLift, GrassColour);
-        Ribbon(grass, q, spacing, i => -Verge(i, -1), i => -half[i], GrassLift, GrassColour);
+        // Where a kerb wraps round a hairpin's tip on its own curve, the verge starts at the kerb's outer edge (see Kerbs).
+        Ribbon(grass, q, spacing, i => half[i], i => Verge(i, +1), GrassLift, _ => GrassColour, null,
+            loEdge: k => vergeEdge.TryGetValue((+1, k), out var v) ? v : null);
+        Ribbon(grass, q, spacing, i => -Verge(i, -1), i => -half[i], GrassLift, _ => GrassColour, null,
+            hiEdge: k => vergeEdge.TryGetValue((-1, k), out var v) ? v : null);
 
         // Kerb facets each have their own vertices, so these normals are flat per facet and the bevels stay crisp.
-        foreach (var m in new[] { asphalt, lines, curbs, runoff, walls, fences, grass, gravel })
+        foreach (var m in new[] { asphalt, lines, curbs, runoff, walls, grass, gravel })
             m.ComputeNormals();
-        return new TrackMeshes(asphalt, lines, curbs, runoff, walls, fences, grass, gravel, course);
+        return new TrackMeshes(asphalt, lines, curbs, runoff, walls, fences, grass, gravel, course) { Barriers = barriers };
     }
 
     /// <summary>
@@ -191,7 +198,7 @@ public static class TrackMeshBuilder
     /// Wall lateral distance per sample on <paramref name="side"/>: Width/2 + 4, or <see cref="RunoffWallClearance"/> behind the
     /// run-off's outer edge where that is further, ramping out ahead of the run-off (dilated, then box-blurred twice).
     /// </summary>
-    private static double[] WallOffsets(IReadOnlyList<TrackSample> q, double[] half, RunoffProfile runoff, int side)
+    internal static double[] WallOffsets(IReadOnlyList<TrackSample> q, double[] half, RunoffProfile runoff, int side)
     {
         var n = q.Count;
         var extra = new double[n];
@@ -287,7 +294,10 @@ public static class TrackMeshBuilder
                 if (i < 0 || j > last) continue;
                 if (!Cross(e[i], e[i + 1], e[j], e[j + 1], out var t, out var u)) continue;
                 var x = Vector3.Lerp(e[i], e[i + 1], t);
-                x.Y = PinchHeight(e, q, x, i, i, j + 1);
+                // The pinch point is on both crossing segments: its height is midway between the edge's heights there, so it
+                // stays within the surface either side of the fold (the nearest row's height can be one end of the folded
+                // range, tens of centimetres off on a slope, which dents the asphalt and kerbs at a hairpin's tip).
+                x.Y = (x.Y + Vector3.Lerp(e[j], e[j + 1], u).Y) / 2;
                 for (var k = i + 1; k <= j; k++)
                     e[k] = x;
                 return true;
@@ -331,11 +341,18 @@ public static class TrackMeshBuilder
         Ribbon(m, q, spacing, lo, hi, lift, _ => colour, null);
 
     /// <summary>As above, coloured per row, with optional per-row <see cref="MeshData.Custom"/> data.</summary>
+    /// <paramref name="loEdge"/> and <paramref name="hiEdge"/> replace an edge's point at a row (0..M-1) where they give one.
     private static void Ribbon(MeshData m, IReadOnlyList<TrackSample> q, double spacing,
-        Func<int, double> lo, Func<int, double> hi, float lift, Func<int, Vector4> colour, Func<int, Vector4>? custom)
+        Func<int, double> lo, Func<int, double> hi, float lift, Func<int, Vector4> colour, Func<int, Vector4>? custom,
+        Func<int, Vector3?>? loEdge = null, Func<int, Vector3?>? hiEdge = null)
     {
         var n = q.Count;
         var (h, l) = Band(q, lo, hi, lift);
+        for (var k = 0; k <= n; k++)
+        {
+            if (hiEdge?.Invoke(k % n) is { } he) h[k] = he;
+            if (loEdge?.Invoke(k % n) is { } le) l[k] = le;
+        }
         int prevHi = -1, prevLo = -1;
         for (var k = 0; k <= n; k++)
         {
@@ -383,9 +400,8 @@ public static class TrackMeshBuilder
     }
 
     /// <summary>
-    /// A vertical ribbon <paramref name="offsets"/>[i] metres out on <paramref name="side"/> (+1 left, -1 right), from
-    /// <see cref="Footing"/> below the track to <paramref name="height"/> above it, facing the track. Segment i → i + 1 is
-    /// kept only when
+    /// Which segments of a wall, barrier or fence line <paramref name="offsets"/>[i] metres out on <paramref name="side"/>
+    /// (+1 left, -1 right) can stand. Segment i → i + 1 is kept only when
     /// <list type="bullet">
     /// <item>both ends pass <see cref="TrackGeometry.WallAllowed"/>;</item>
     /// <item>no centre-line point is closer to either end than its own offset (less <see cref="WallClearanceSlack"/>): the
@@ -395,10 +411,8 @@ public static class TrackMeshBuilder
     /// radius, as at the 11–12 m hairpins of Turns 11 and 15, compresses towards a fold);</item>
     /// <item>it belongs to a run of at least <see cref="MinWallRun"/> such segments, so no stubs are left in a hairpin.</item>
     /// </list>
-    /// Consecutive kept segments share vertices.
     /// </summary>
-    private static void VerticalStrip(MeshData m, IReadOnlyList<TrackSample> q, SampleGrid grid, double spacing, int side,
-        double[] offsets, double height, Vector4 colour)
+    internal static bool[] KeptSegments(IReadOnlyList<TrackSample> q, SampleGrid grid, int side, double[] offsets)
     {
         var n = q.Count;
         var foot = new Vector2[n];
@@ -419,7 +433,18 @@ public static class TrackMeshBuilder
             keep[i] = clear[i] && clear[j] && Vector2.Dot(foot[j] - foot[i], along) > MinWallProgress * step;
         }
         DropShortRuns(keep, MinWallRun);
+        return keep;
+    }
 
+    /// <summary>
+    /// A vertical ribbon <paramref name="offsets"/>[i] metres out on <paramref name="side"/> from <see cref="Footing"/> below
+    /// the track to <paramref name="height"/> above it, facing the track, over the segments <paramref name="keep"/> marks
+    /// (from <see cref="KeptSegments"/>). Consecutive kept segments share vertices.
+    /// </summary>
+    private static void VerticalStrip(MeshData m, IReadOnlyList<TrackSample> q, double spacing, int side,
+        double[] offsets, bool[] keep, double height, Vector4 colour)
+    {
+        var n = q.Count;
         var lastK = -1;
         int lastTop = -1, lastBottom = -1;
         for (var k = 0; k < n; k++)

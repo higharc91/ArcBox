@@ -110,7 +110,13 @@ public static class CourseMeshes
 
     // ---- Kerbs ----------------------------------------------------------------------------------------------
 
-    internal static void Kerbs(MeshData m, IReadOnlyList<TrackSample> q, EdgeCache edges, CourseLayout course)
+    /// <param name="vergeEdge">
+    /// Filled with the verge's inner edge where a kerb follows its own curve round a hairpin's tip (<see cref="Strip.Along"/>):
+    /// per (side, sample row), the point on the kerb's outer edge that row maps to, so the verge starts where the kerb ends
+    /// instead of running under it from the pinched asphalt edge.
+    /// </param>
+    internal static void Kerbs(MeshData m, IReadOnlyList<TrackSample> q, EdgeCache edges, CourseLayout course,
+        Dictionary<(int Side, int Row), Vector3>? vergeEdge = null)
     {
         foreach (var run in course.Kerbs)
         {
@@ -118,6 +124,14 @@ public static class CourseMeshes
             var lines = profile.Select(p => edges.Edge(run.Side, p.Offset, (float)p.Height)).ToArray();
             var strip = Strip.Of(q, lines, run.From, run.To, (line, k) => edges.Pinched(lines[line], run.Side, profile[line].Offset, k));
             if (strip is null) continue;
+            // Inside a hairpin the sample rows pinch: the kerb follows its own offset curve instead (see Strip.Along).
+            if (strip.AnyPinched)
+            {
+                strip = Strip.Along(edges.Edge(run.Side, 0, 0), q, run.From, run.To, run.Side, profile, 0) ?? strip;
+                if (vergeEdge is not null)
+                    foreach (var (row, point) in strip.RowOuterEdge())
+                        vergeEdge[(run.Side, ((row % q.Count) + q.Count) % q.Count)] = point;
+            }
             var code = run.Kind == KerbKind.Flat ? FlatCode : SawtoothCode;
             var total = strip.Length;
             var cuts = strip.Cuts(Enumerable.Range(1, (int)(total / Course.Kerbs.StripeLength)).Select(k => k * Course.Kerbs.StripeLength));
@@ -137,12 +151,15 @@ public static class CourseMeshes
             var lines = profile.Select(p => edges.Edge(run.Side, Course.Kerbs.SausageOffset + p.Offset, (float)p.Height)).ToArray();
             var strip = Strip.Of(q, lines, run.From, run.To, (line, k) => edges.Pinched(lines[line], run.Side, Course.Kerbs.SausageOffset + profile[line].Offset, k));
             if (strip is null) continue;
+            if (strip.AnyPinched)
+                strip = Strip.Along(edges.Edge(run.Side, 0, 0), q, run.From, run.To, run.Side, profile, Course.Kerbs.SausageOffset) ?? strip;
             var pitch = Course.Kerbs.SausageModule + Course.Kerbs.SausageGap;
             for (var u0 = 0.0; u0 + Course.Kerbs.SausageModule <= strip.Length; u0 += pitch)
             {
                 var u1 = u0 + Course.Kerbs.SausageModule;
                 // A module squeezed by a fold would be a sliver: skip it.
-                if (strip.Width(strip.T(u0)) < Course.Kerbs.SausageWidth * 0.8 || strip.Width(strip.T(u1)) < Course.Kerbs.SausageWidth * 0.8)
+                if (strip.Width(strip.T(u0)) < Course.Kerbs.SausageWidth * 0.8 || strip.Width(strip.T(u1)) < Course.Kerbs.SausageWidth * 0.8
+                    || strip.Pinched(strip.T(u0), strip.T(u1)))
                     continue;
                 var cuts = strip.Cuts([u0, u0 + SausageRamp, u1 - SausageRamp, u1]);
                 var from = cuts.IndexOf(strip.T(u0));
@@ -160,8 +177,8 @@ public static class CourseMeshes
     {
         var ra = ramp(ta);
         var rb = ramp(tb);
-        // Nothing where the unfolding pinched the kerb inside a tight bend: it would be a crumpled sliver.
-        if ((ra <= 0 && rb <= 0) || strip.Pinched(ta, tb)) return;
+        // Nothing on sample rows the unfolding pinched (a crumpled sliver); a strip built Along its own curve has none.
+        if ((ra <= 0 && rb <= 0) || (strip.SampleRows && strip.Pinched(ta, tb))) return;
         Vector3 P(int p, double t, double r)
         {
             var v = strip.At(p, t);
@@ -269,11 +286,192 @@ public static class CourseMeshes
         private readonly double[] _u;
         private readonly bool[] _pinched;
 
-        private Strip(Vector3[][] lines, double[] u, bool[] pinched)
+        private Strip(Vector3[][] lines, double[] u, bool[] pinched, bool sampleRows)
         {
             _lines = lines;
             _u = u;
             _pinched = pinched;
+            SampleRows = sampleRows;
+        }
+
+        private int _firstRow;
+        private double[]? _rowArc;
+        private double _baseLength;
+
+        /// <summary>
+        /// For a strip built <see cref="Along"/> its own curve: each sample row it was built from (first row on) and the point
+        /// on its outer line (the last profile line) at that row's place on the base curve. Rows the asphalt edge pinched onto
+        /// one point are spread evenly round the tip between their neighbours, so the points follow the kerb's rounded outer
+        /// edge. Empty for a strip on sample rows.
+        /// </summary>
+        public IEnumerable<(int Row, Vector3 Point)> RowOuterEdge()
+        {
+            if (_rowArc is null) yield break;
+            var outer = _lines[^1];
+            var rows = outer.Length;
+            for (var r = 0; r < _rowArc.Length; r++)
+            {
+                var f = Math.Clamp(_rowArc[r] / Math.Max(_baseLength, 1e-9), 0, 1) * (rows - 1);
+                var i = Math.Min((int)Math.Floor(f), rows - 2);
+                yield return (_firstRow + r, Vector3.Lerp(outer[i], outer[i + 1], (float)(f - i)));
+            }
+        }
+
+        /// <summary>True when the rows are the track's sample rows (<see cref="Of"/>), false for a strip built <see cref="Along"/> its own curve.</summary>
+        public bool SampleRows { get; }
+
+        public bool AnyPinched => _pinched.Any(p => p);
+
+        /// <summary>Rows of a strip built <see cref="Along"/> its own curve are this many metres apart.</summary>
+        public const double AlongStep = 0.5;
+
+        /// <summary>Half-window (rows) over which <see cref="Along"/> smooths the base curve's direction.</summary>
+        private const int AlongSmooth = 3;
+
+        /// <summary>
+        /// A strip that follows its own offset curve rather than the track's sample rows, for kerbs inside a hairpin, where the
+        /// rows pinch (the asphalt edge turns round a tip tighter than the kerb is wide). The base is the unfolded asphalt
+        /// edge <paramref name="edge"/> (offset 0, at the track height) over the run's rows with the pinched duplicates
+        /// removed, resampled every <see cref="AlongStep"/> metres along its length; each profile line is offset from it along
+        /// the base's smoothed outward normal by <paramref name="extra"/> + the profile offset and lifted by the profile height,
+        /// and any loop an offset makes round the tip is cut at its crossing (the line pinches to a corner there, like the
+        /// asphalt). Rows where a line was cut are flagged pinched; the kerb's facets there are still drawn, so it wraps
+        /// round the tip without a gap.
+        /// </summary>
+        public static Strip? Along(Vector3[] edge, IReadOnlyList<TrackSample> q, double from, double to, int side,
+            IReadOnlyList<(double Offset, double Height)> profile, double extra)
+        {
+            var n = q.Count;
+            var spacing = q[1].S - q[0].S;
+            var k0 = (int)Math.Round(from / spacing);
+            var k1 = (int)Math.Round(to / spacing);
+            if (k1 - k0 < 1) return null;
+            var raw = new List<Vector3>();
+            var rawOf = new int[k1 - k0 + 1];
+            for (var k = k0; k <= k1; k++)
+            {
+                var p = edge[((k % n) + n) % n];
+                if (raw.Count == 0 || Vector2.Distance(Flat(raw[^1]), Flat(p)) > 0.01f) raw.Add(p);
+                rawOf[k - k0] = raw.Count - 1;
+            }
+            if (raw.Count < 2) return null;
+            var arc = new double[raw.Count];
+            for (var i = 1; i < raw.Count; i++) arc[i] = arc[i - 1] + Vector2.Distance(Flat(raw[i - 1]), Flat(raw[i]));
+            // Each row's place along the base: its raw point's, with a pinched group of rows spread evenly over the middle
+            // half of the span between its neighbours (the tip, where the kerb rounds the corner).
+            var rowArc = new double[rawOf.Length];
+            for (var r = 0; r < rawOf.Length;)
+            {
+                var g = r;
+                while (g + 1 < rawOf.Length && rawOf[g + 1] == rawOf[r]) g++;
+                var ri = rawOf[r];
+                if (g == r)
+                    rowArc[r] = arc[ri];
+                else
+                {
+                    var lo = ri > 0 ? (arc[ri - 1] + arc[ri]) / 2 : arc[ri];
+                    var hi = ri + 1 < raw.Count ? (arc[ri] + arc[ri + 1]) / 2 : arc[ri];
+                    for (var k = r; k <= g; k++)
+                        rowArc[k] = lo + (hi - lo) * (k - r + 0.5) / (g - r + 1);
+                }
+                r = g + 1;
+            }
+            var length = arc[^1];
+            var rows = Math.Max(2, (int)Math.Ceiling(length / AlongStep) + 1);
+            var basePts = new Vector3[rows];
+            var seg = 0;
+            for (var r = 0; r < rows; r++)
+            {
+                var a = Math.Min(length, r * length / (rows - 1));
+                while (seg + 2 < raw.Count && arc[seg + 1] < a) seg++;
+                var f = arc[seg + 1] > arc[seg] ? (a - arc[seg]) / (arc[seg + 1] - arc[seg]) : 0;
+                basePts[r] = Vector3.Lerp(raw[seg], raw[seg + 1], (float)Math.Clamp(f, 0, 1));
+            }
+            // Outward normals from the base's direction smoothed over a few rows, so the offsets turn round a tip gradually.
+            var normals = new Vector2[rows];
+            var dirs = new Vector2[rows];
+            for (var r = 0; r < rows; r++)
+            {
+                var d = Flat(basePts[Math.Min(rows - 1, r + AlongSmooth)]) - Flat(basePts[Math.Max(0, r - AlongSmooth)]);
+                dirs[r] = d.LengthSquared() > 1e-12f ? Vector2.Normalize(d) : (r > 0 ? dirs[r - 1] : Vector2.UnitX);
+                normals[r] = side * new Vector2(dirs[r].Y, -dirs[r].X);
+            }
+            var lines = new Vector3[profile.Count][];
+            var flags = new bool[rows];
+            for (var p = 0; p < profile.Count; p++)
+            {
+                var off = (float)(extra + profile[p].Offset);
+                var line = new Vector3[rows];
+                for (var r = 0; r < rows; r++)
+                {
+                    var b = basePts[r];
+                    line[r] = new Vector3(b.X + normals[r].X * off, b.Y + (float)profile[p].Height, b.Z + normals[r].Y * off);
+                }
+                CutLoops(line, dirs, flags);
+                lines[p] = line;
+            }
+            var u = new double[rows];
+            for (var r = 1; r < rows; r++)
+                u[r] = u[r - 1] + Vector3.Distance(lines[0][r - 1], lines[0][r]);
+            return u[^1] <= 0 ? null : new Strip(lines, u, flags, sampleRows: false) { _firstRow = k0, _rowArc = rowArc, _baseLength = length };
+        }
+
+        private static Vector2 Flat(Vector3 v) => new(v.X, v.Z);
+
+        /// <summary>
+        /// Cuts the loops an offset line makes where it runs backwards against <paramref name="dirs"/> (offset beyond the
+        /// curve's radius): every point between the last forward segment before and the first after a backward run moves to
+        /// where those two cross (or, failing that, to the run's start), and those rows are flagged.
+        /// </summary>
+        private static void CutLoops(Vector3[] line, Vector2[] dirs, bool[] flags)
+        {
+            var rows = line.Length;
+            bool Backward(int r) => Vector2.Dot(Flat(line[r + 1]) - Flat(line[r]), dirs[r] + dirs[r + 1]) <= 1e-6f;
+            for (var a = 0; a + 1 < rows; a++)
+            {
+                if (!Backward(a)) continue;
+                var b = a;
+                while (b + 2 < rows && Backward(b + 1)) b++;
+                var cut = false;
+                for (var span = 0; span <= 80 && !cut; span++)
+                    for (var before = 0; before <= span && !cut; before++)
+                    {
+                        var i = a - 1 - before;
+                        var j = b + 1 + (span - before);
+                        if (i < 0 || j + 1 >= rows) continue;
+                        if (!SegmentsCross(line[i], line[i + 1], line[j], line[j + 1], out var t)) continue;
+                        var x = Vector3.Lerp(line[i], line[i + 1], t);
+                        for (var k = i + 1; k <= j; k++)
+                        {
+                            line[k] = x;
+                            flags[k] = true;
+                        }
+                        b = j - 1;
+                        cut = true;
+                    }
+                if (!cut)
+                {
+                    for (var k = a + 1; k <= Math.Min(rows - 1, b + 1); k++)
+                    {
+                        line[k] = line[a];
+                        flags[k] = true;
+                    }
+                }
+                a = b;
+            }
+        }
+
+        private static bool SegmentsCross(Vector3 p0, Vector3 p1, Vector3 r0, Vector3 r1, out float t)
+        {
+            var d1 = new Vector2(p1.X - p0.X, p1.Z - p0.Z);
+            var d2 = new Vector2(r1.X - r0.X, r1.Z - r0.Z);
+            var w = new Vector2(r0.X - p0.X, r0.Z - p0.Z);
+            var den = d1.X * d2.Y - d1.Y * d2.X;
+            t = 0;
+            if (MathF.Abs(den) < 1e-9f) return false;
+            t = (w.X * d2.Y - w.Y * d2.X) / den;
+            var u = (w.X * d1.Y - w.Y * d1.X) / den;
+            return t is >= 0 and <= 1 && u is >= 0 and <= 1;
         }
 
         /// <summary>Whether any line is pinched at a row touched by the span ta..tb.</summary>
@@ -312,7 +510,7 @@ public static class CourseMeshes
             for (var r = 0; r < rows; r++)
                 for (var p = 0; p < edges.Length && !flags[r]; p++)
                     flags[r] = pinched(p, ((k0 + r) % n + n) % n);
-            return u[^1] <= 0 ? null : new Strip(lines, u, flags);
+            return u[^1] <= 0 ? null : new Strip(lines, u, flags, sampleRows: true);
         }
 
         public Vector3 At(int line, double t)

@@ -269,6 +269,38 @@ binds its own (lawn, paving, canopy, screen, canvas, deck, kiosk, shrub, grove, 
 `Redline.Presentation.Tests/Course/SurroundingsModelTests.cs` (contracts, import files, and the whole surroundings'
 drawn triangles against the course budget).
 
+## Barriers and trackside furniture (`trackside.py`, group `trackside`)
+
+The COTA upgrade's barriers and furniture (spec §2.3). `Redline.Presentation.Course.Trackside.Plan` decides where every
+prop goes from the corner data and the `BarrierLayout`; `World/Trackside.cs` draws them as MultiMeshes. Every prop's
+origin is on the ground; a barrier's face is the plane z = 0 and it reaches back to +Z, everything else looks along -Z
+(towards the track).
+
+| File | Budget | Now | Nodes |
+|---|---|---|---|
+| `trackside/barriers.glb` | ≤ 1.2k | 488 triangles, ~42 KB | `tecpro_block` (98), `tecpro_block_lod` (10), `tyre_module` (264), `tyre_module_lod` (6), `armco_post` (38), `fence_post` (20), `fence_post_overhang` (52) |
+| `trackside/furniture.glb` | ≤ 4k | 1.1k, ~91 KB | `marshal_post` (190), `corner_board` (64), `brake_board` (22), `camera_platform` (840) |
+| `trackside/big_screen.glb` | ≤ 12k | 2.8k, ~190 KB | `big_screen` |
+
+- **TecPro block:** 1.5 × 0.95 × 1.0 m, rounded, two black straps; slot `tecpro` takes the per-instance red, white or
+  blue. **Tyre module:** 1.8 m of tyre wall, three stacks of four tyres two rows deep behind a bulging conveyor-belt
+  face (`belt`, UVs in metres). Both have a few-triangle LOD stand-in. **Armco post:** a post with two spacer blocks;
+  the double W-beam rails are track-following meshes (`TracksideMeshes.Rails`). **Fence posts:** 4.4 m, straight or
+  cranked over 1.0 m towards the track from the 3.4 m knee (the TV scales the crank by the fence's overhang there); the
+  mesh panel and its cables are `TracksideMeshes.Fence` and `.Cables`.
+- **Marshal post:** a white hut with a red roof on a plinth, an open front, a number board on the roof and a digital
+  light panel (`led_panel`) on a pole. **Corner board:** 2.4 × 1.5 m on two posts. **Brake board:** 1.2 × 0.75 m on a
+  post. The `number` slot is each board's face (UVs 0..1, top-left at (0, 0), aspect 1.6): the TV draws the instance's
+  `TracksideAtlas` cell (T1–T20, 100/200/300, the post numbers) from one atlas. **Camera platform:** a 4 m scaffold
+  tower with a deck, rails, a ladder, a broadcast camera, its operator and an umbrella.
+- **Big screen:** a 12 × 6.75 m LED screen (`screen`, UVs 0..1, top-left at (0, 0)) 5.5–12.25 m up in a black frame
+  with a REDLINE header, on two box-truss legs; the TV shows the broadcast picture on it.
+
+Material slots: `tecpro strap belt tyre tyre_inner galvanised`, `hut hut_dark hut_roof concrete number board_back
+steel_dark galvanised led_panel red camera operator canvas deck`, `screen screen_frame steel brand_white led_white`.
+Contracts: `Redline.Presentation.Models.TracksideModels`; tests: `Redline.Presentation.Tests/Course/TracksideTests.cs`
+(contracts, import files, placement and the whole trackside's drawn triangles against its 700k share of the budget).
+
 ## The `lib` API
 
 All geometry helpers work in the Godot frame. Shared modules belong to Task 1; later work adds **new** modules (e.g.
@@ -318,6 +350,7 @@ Nothing has to be registered, so new modules never edit `build.py`. Planned owne
 | 1 (done) | `car.py` | `car_2026.glb`, `car_2026_lod1.glb` | `ModelLibrary`, `CarFactory`, `CarMaterials`, `CarModel` |
 | 2 (done) | `driver.py`, `helmet.py`, `data/drivers.json`, `lib/{figure,head,hair,body,cap,flags,studio}.py` (group `drivers`) | `drivers/<CODE>.glb`, `helmets/<CODE>.glb` | `PodiumDriver` (from `PodiumSet`), `FigureMaterials`, `DriverModel`, `HelmetModel`; `CarFactory.Helmet` puts `helmets/<CODE>.glb` at the car's `helmet` empty |
 | 3 (done) | `podium.py`, `landmarks.py`, `lib/arch.py` (groups `podium`, `landmarks`) | `podium.glb`, `landmarks/*.glb` | `PodiumStage` (from `PodiumSet`), `Landmarks`, `StartGantry`, `Trees`, `SetPieces`, `SetMaterials` |
+| COTA 3 (done) | `trackside.py` (group `trackside`) | `trackside/*.glb` | `Trackside`; placement in `Redline.Presentation.Course.Trackside` |
 | COTA 4 (done) | `surroundings.py` (group `surroundings`) | `surroundings/*.glb` | `Surroundings`, `TerrainMaterials`; placement in `Redline.Presentation.Course.Surroundings` |
 
 For the Godot side, load through `ModelLibrary.Prewarm("drivers/NOR.glb")` and

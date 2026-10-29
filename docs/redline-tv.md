@@ -23,6 +23,8 @@ whenever it changes.
 | Anisotropic filtering | 16× | 16× | 4× |
 | Trees | 1,500 | 1,500 | 750 |
 | Surroundings: parked cars, shrubs, groves, distant clumps | 990 cars, 1,300 shrubs, 750 groves, 3,600 clumps | same | half of each, no shadows |
+| Trackside: barrier blocks, armco and fence posts | full models within 140 m, LOD beyond | same | LOD everywhere, every other post |
+| Big screen at the main grandstand | live broadcast feed (640×360, every 3rd frame, only while in shot) | same | static REDLINE card |
 | Cars ([Blender model](blender-models.md)) | LOD0 (~68k tris) within 60 m, LOD1 (~16k) beyond | same | LOD1 everywhere |
 | Frame cap | 144, VSync off | same | same |
 
@@ -35,6 +37,18 @@ horizon and the Austin skyline. They draw about 0.74 M triangles in all on Ultra
 props instanced, one MultiMesh per variant, about 50 draw calls before shadow passes. Planning and building them
 takes 1–2 s of main-thread work in the sandbox when the world is first built (cached for the next race).
 `REDLINE_NO_SURROUNDINGS=1` leaves them out (comparison shots).
+
+The barriers and trackside furniture (`World/Trackside.cs`, placed by `Redline.Presentation.Course.Trackside`) follow
+the corner data: TecPro blocks (red, white and blue) or tyre walls with a conveyor-belt face on the corner outsides,
+double armco rails on posts along the back straight and the armco corners, and the concrete wall with its ad boards
+elsewhere; a catch fence with posts, cables and a chain-link mesh that cranks over at corner outsides; 18 numbered
+marshal posts, corner boards T1–T20, brake boards 300/200/100 before the medium and heavy braking corners, four TV
+camera platforms and the big screen at the end of the main grandstand. The props are MultiMeshes in 100 m cells
+(culled per cell): about 0.57 M triangles if every prop drew its full model (the test's budget is 0.7 M), much less
+with the LOD; about 0.18 M on Low. In the sandbox's F3 counters (demo, 1920×1080) the trackside adds about 130 draw
+calls and 0.06 M primitives at the grid on High and Ultra (2,060 against 1,929; 2.88 against 2.82 M) and 85 calls and
+0.26 M on the next shot; on Low about 95 calls and 0.05 M at the grid, 55 calls and 0.17 M on the next shot. Planning
+takes about 0.2 s. `REDLINE_NO_TRACKSIDE=1` leaves them out (comparison shots).
 
 **Which preset runs:** `--preset=ultra|high|low` on the command line, else the one saved in `user://settings.json`
 (`"preset"`, written by F2), else Ultra. On Windows the file is `%APPDATA%\Godot\app_userdata\ArcBox\settings.json`, on

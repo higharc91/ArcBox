@@ -213,16 +213,121 @@ public class TrackMeshBuilderTests
             }
         }
 
-        // Turn 1 is a left hairpin: through the apex its inner (left) side has neither wall nor fence, while the outer
-        // (right) side keeps both.
+        // Turn 1 is a left hairpin: through the apex its inner (left) side has neither wall, barrier nor fence, while the
+        // outer (right) side keeps the fence and its barrier line, a TecPro barrier rather than the concrete wall.
         var apex = NearestIndex(340);
+        int Side((Vector3 V, int Index) p) => Math.Sign(Vector2.Dot(Flat(p.V) - Samples[p.Index].Position, Samples[p.Index].Left));
         foreach (var m in new[] { t.Walls, t.Fence })
         {
             var atApex = m.Positions.Select(v => (v, NearestSample(v).Index)).Where(p => Math.Abs(p.Index - apex) <= 8).ToArray();
-            int Side((Vector3 V, int Index) p) => Math.Sign(Vector2.Dot(Flat(p.V) - Samples[p.Index].Position, Samples[p.Index].Left));
             Assert.DoesNotContain(atApex, p => Side(p) > 0);
-            Assert.Contains(atApex, p => Side(p) < 0);
         }
+        var fence = t.Fence.Positions.Select(v => (v, NearestSample(v).Index)).Where(p => Math.Abs(p.Index - apex) <= 8).ToArray();
+        Assert.Contains(fence, p => Side(p) < 0);
+        var bl = t.Barriers!;
+        Assert.All(Enumerable.Range(apex - 8, 17), i => Assert.False(bl.Kept(i, +1)));
+        Assert.All(Enumerable.Range(apex - 8, 17), i => Assert.Equal(BarrierKind.TecPro, bl.Kind(i, -1)));
+        Assert.Contains(Enumerable.Range(apex - 8, 17), i => bl.Kept(i, -1));
+    }
+
+    /// <summary>
+    /// Inside a hairpin the sample rows pinch round the tip; the kerb there follows its own offset curve, so it wraps round
+    /// the tip in one piece. Its red and white stripes share their edges, so the kerb's triangles must form a single
+    /// connected strip (a gap at the tip would split it), and that strip must reach from the run's start to its end.
+    /// </summary>
+    [Theory]
+    [InlineData(1)]
+    [InlineData(11)]
+    [InlineData(15)]
+    public void Hairpin_inside_kerb_is_continuous(int turn)
+    {
+        var t = Track.Value;
+        var corner = t.Course.Corners.Single(c => c.Corner.Turn == turn).Corner;
+        var run = t.Course.Kerbs.Single(r => r.Turn == turn && r.Side == corner.ApexSide);
+        var spacing = Samples[1].S - Samples[0].S;
+        var (k0, k1) = ((int)Math.Round(run.From / spacing) - 2, (int)Math.Round(run.To / spacing) + 2);
+        var m = t.Curbs;
+        var tris = new List<(Vector3 A, Vector3 B, Vector3 C)>();
+        foreach (var (a, b, c, ia, _, _) in Triangles(m))
+        {
+            var colour = m.Colors[ia];
+            if (colour != CourseMeshes.KerbRed && colour != CourseMeshes.KerbWhite) continue;
+            var centroid = (a + b + c) / 3;
+            var (i, _) = NearestSample(centroid);
+            var k = i < k0 - (M / 2) ? i + M : i;
+            if (k < k0 || k > k1) continue;
+            if (Math.Sign(Vector2.Dot(Flat(centroid) - Samples[i].Position, Samples[i].Left)) != run.Side) continue;
+            tris.Add((a, b, c));
+        }
+        Assert.NotEmpty(tris);
+
+        // Union-find over triangles that share a vertex (to the centimetre).
+        var parent = Enumerable.Range(0, tris.Count).ToArray();
+        int Find(int x) => parent[x] == x ? x : parent[x] = Find(parent[x]);
+        var owner = new Dictionary<(long, long, long), int>();
+        for (var i = 0; i < tris.Count; i++)
+            foreach (var v in new[] { tris[i].A, tris[i].B, tris[i].C })
+            {
+                var key = ((long)MathF.Round(v.X * 100), (long)MathF.Round(v.Y * 100), (long)MathF.Round(v.Z * 100));
+                if (owner.TryGetValue(key, out var j)) parent[Find(i)] = Find(j);
+                else owner[key] = i;
+            }
+        var pieces = Enumerable.Range(0, tris.Count).GroupBy(Find).ToList();
+        Assert.True(pieces.Count == 1, $"T{turn} inside kerb is in {pieces.Count} pieces ({string.Join(", ", pieces.Select(p => p.Count()))} triangles)");
+
+        // The one piece spans the run: it reaches within a couple of metres of the asphalt edge at both ends.
+        var start = TrackMeshBuilder.TrackPoint(Samples, run.From, run.Side * TrackGeometry.Width(run.From) / 2);
+        var end = TrackMeshBuilder.TrackPoint(Samples, run.To, run.Side * TrackGeometry.Width(run.To) / 2);
+        var points = tris.SelectMany(x => new[] { x.A, x.B, x.C }).ToList();
+        Assert.True(points.Min(p => Vector2.Distance(Flat(p), Flat(start))) < 2.5, $"T{turn} inside kerb misses its start");
+        Assert.True(points.Min(p => Vector2.Distance(Flat(p), Flat(end))) < 2.5, $"T{turn} inside kerb misses its end");
+    }
+
+    /// <summary>
+    /// At a hairpin's tip the inside edges pinch onto one point while the rows folded onto it climb or fall (Turn 1 is the
+    /// top of the hill): the verge must start at the kerb's outer edge where the kerb wraps round the tip, and the pinch
+    /// heights must stay within the surface around them. So no grass shows through the kerb or the asphalt (no grass vertex
+    /// above them, and nowhere more than a centimetre over the kerb's outer bevel), and the terrain stays under the asphalt.
+    /// </summary>
+    [Theory]
+    [InlineData(1)]
+    [InlineData(11)]
+    [InlineData(15)]
+    public void Hairpin_tip_shows_no_grass_or_terrain_through_the_kerb_or_asphalt(int turn)
+    {
+        var t = Track.Value;
+        var apex = t.Course.Corners.Single(c => c.Corner.Turn == turn).Apex;
+        var centre = Samples[NearestIndex(apex)].Position;
+        var asphalt = new SurfaceIndex(t.Asphalt);
+        var kerb = new SurfaceIndex(t.Curbs);
+        var grass = new SurfaceIndex(t.Grass);
+        var terrain = new SurfaceIndex(Terrain.Value);
+        const float Reach = 35;
+
+        foreach (var v in t.Grass.Positions.Where(v => Vector2.Distance(Flat(v), centre) < Reach))
+        {
+            var at = Flat(v);
+            if (kerb.Height(at) is { } k)
+                Assert.True(v.Y <= k + 0.002f, $"T{turn}: grass vertex {v} is {v.Y - k:F3} m above the kerb");
+            if (asphalt.Height(at) is { } a)
+                Assert.True(v.Y <= a + 0.002f, $"T{turn}: grass vertex {v} is {v.Y - a:F3} m above the asphalt");
+        }
+
+        for (var dx = -Reach; dx <= Reach; dx += 0.25f)
+            for (var dz = -Reach; dz <= Reach; dz += 0.25f)
+            {
+                var p = centre + new Vector2(dx, dz);
+                var a = asphalt.Height(p);
+                if (grass.Height(p) is { } g)
+                {
+                    if (kerb.Height(p) is { } k)
+                        Assert.True(g <= k + 0.01f, $"T{turn}: grass {g - k:F3} m above the kerb at {p}");
+                    if (a is { } av)
+                        Assert.True(g <= av + 0.002f, $"T{turn}: grass {g - av:F3} m above the asphalt at {p}");
+                }
+                if (a is { } a2 && terrain.Height(p) is { } h)
+                    Assert.True(h <= a2, $"T{turn}: terrain {h - a2:F3} m above the asphalt at {p}");
+            }
     }
 
     /// <summary>The lap position (metres, unwrapped near <paramref name="near"/>) and lateral of a point, from its nearest sample.</summary>
