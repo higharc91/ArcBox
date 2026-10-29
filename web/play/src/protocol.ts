@@ -190,6 +190,13 @@ export interface CampaignInfo {
   version: number;
 }
 
+// The portal API's JSON (CampaignEndpoints.cs), as ArcJson writes it.
+/** A campaign and the game's own view of its document (`view` is opaque to the platform). `leasedBy` is the room code that has it checked out, or null. */
+export interface CampaignResponse { info: CampaignInfo; view: unknown; leasedBy: string | null }
+/** An error body; `current` is the campaign as it is now, sent with a 409 so the phone can refresh. */
+export interface ErrorResponse { error: string; current?: CampaignResponse | null }
+export interface MeResponse { id: ProfileId; displayName: string; campaigns: CampaignSummary[] }
+
 // ---------------------------------------------------------------- runtime checks
 
 /** A field type; a trailing "?" means the field may be missing or null. */

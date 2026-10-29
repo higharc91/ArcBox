@@ -9,6 +9,7 @@ import {
   type LobbyState,
   type PlayerId,
 } from "../protocol";
+import { loadModule } from "../games/registry";
 import { backoffDelays } from "./backoff";
 import { clearSeat, loadSeat, saveSeat, type KeyValueStore } from "./storage";
 import type { Transport } from "./transport";
@@ -220,6 +221,7 @@ export class Session {
 
   private onLobby(json: unknown): void {
     if (!isLobbyState(json)) return;
+    if (json.selectedGameId && json.selectedGameId !== this.lobby?.selectedGameId) void loadModule(json.selectedGameId);
     this.lobby = json;
     this.lobbyError = undefined;
     if (json.inGame) this.results = null; // a new game started

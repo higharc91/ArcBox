@@ -1,5 +1,5 @@
 import type { ButtonsView } from "../protocol";
-import { useSkin } from "../skins/skin";
+import { useSkin } from "../games/module";
 import { OptionLabel, Prompt, useSendOnce, useViewState, type WidgetProps } from "./common";
 
 /**

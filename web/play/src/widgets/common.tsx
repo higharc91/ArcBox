@@ -1,6 +1,6 @@
 import { useRef, useState } from "preact/hooks";
 import type { Option } from "../protocol";
-import { useSkin } from "../skins/skin";
+import { useSkin } from "../games/module";
 
 export type Send = (payload: object) => void;
 

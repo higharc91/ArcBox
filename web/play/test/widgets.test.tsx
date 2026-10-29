@@ -1,4 +1,5 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeAll, afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { loadModule } from "../src/games/registry";
 import { act, cleanup, fireEvent, render, screen } from "@testing-library/preact";
 import type { ButtonsView, ChoiceView, ControllerView, DrawView, TextEntryView } from "../src/protocol";
 import { Buttons } from "../src/widgets/Buttons";
@@ -11,6 +12,9 @@ import { syncWakeLock } from "../src/widgets/wakeLock";
 
 const fixtures = import.meta.glob<{ default: ControllerView }>("./fixtures/*.json", { eager: true });
 const fixture = <T extends ControllerView>(kind: string) => structuredClone(fixtures[`./fixtures/${kind}.json`]!.default) as T;
+
+// REDLINE's skin lives in a lazily loaded game module: load it before rendering REDLINE widgets.
+beforeAll(() => loadModule("redline"));
 
 afterEach(cleanup);
 

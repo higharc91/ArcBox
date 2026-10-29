@@ -61,6 +61,82 @@ back arrives as `OnPlayerConnectionChanged(id, true)`; it's the same call a phon
 gets every player disconnected, because nobody has reconnected yet after the restart. Wait for them, for example with a
 "Resuming…" phase, and only give the AI the seats of people who were absent before the restart.
 
+## Custom phone screens
+
+The generic controller kit (buttons, choice, text entry, draw, shake) covers most games. When a game needs a screen
+shaped like nothing else in it (a target picker with a d-pad, a character sheet, a point-buy form), the game ships that
+screen in its own phone module and shows it with a `CustomView`:
+
+```csharp
+public sealed record CustomView(string Module, string Screen, JsonElement Data) : ControllerView;
+public sealed record CustomInput(string Action, JsonElement? Data = null);
+
+// In IGame.PlayerView:
+return new CustomView("tactics", "targetPicker",
+    JsonSerializer.SerializeToElement(new { cursor = new { x = 2, y = 3 }, targets }, ArcJson.Options));
+```
+
+`Module` is the folder name under `web/play/src/games/` (normally your game id), `Screen` is a name that module exports
+and `Data` is whatever JSON that screen wants. The phone's generic code never looks inside `Data`.
+
+**The module folder.** The phone loads a game's module lazily, only when a room selects that game, so a game's screens
+cost the other games nothing. Each game gets one folder and one line in the registry:
+
+```
+web/play/src/games/
+  module.ts            GameModule, CustomScreenProps, Skin: the contract (don't edit for a new game)
+  registry.ts          game id -> () => import("./<id>"): add your game here
+  tactics/
+    index.ts           export const module: GameModule = { id: "tactics", screens: { targetPicker: TargetPicker } }
+    TargetPicker.tsx   a Preact component taking CustomScreenProps
+```
+
+```ts
+// registry.ts
+const loaders: Record<string, Loader> = {
+  redline: () => import("./redline"),
+  tactics: () => import("./tactics"),
+};
+```
+
+A module may also set `skin` (per-game decoration of the generic widgets; REDLINE's lives in
+`games/redline/skin.ts`) and `portal`. All three are optional.
+
+**Replying.** A screen is a component with `{ data, send }`. `send(action, data)` posts a `CustomInput` to your
+`OnInput`; `data` is omitted from the JSON when you don't pass any:
+
+```tsx
+export function TargetPicker({ data, send }: CustomScreenProps) {
+  const { targets } = data as { targets: { id: string; hit: number }[] };
+  return targets.map((t) => <button onClick={() => send("target", { id: t.id })}>{t.id} {t.hit}%</button>);
+}
+```
+
+```csharp
+public void OnInput(PlayerId from, PlayerInput input)
+{
+    var reply = input.Read<CustomInput>();      // reply.Action == "target", reply.Data == { "id": "orc1" }
+}
+```
+
+**`viewId` and repeated input.** Unlike the generic widgets, which send once per view, a custom screen may call `send`
+as often as it likes: it is never locked after a send. The server accepts input only for the player's *current*
+`viewId`, and mints a new one whenever the view's JSON changes. So a d-pad whose presses don't change the view (the
+game answers with the same `CustomView`) keeps one `viewId` and every press lands. If each press moves a cursor that is
+part of `Data`, the view changes and gets a new id, and the phone sends the next press with the new id. A press that
+was in flight while the id changed is dropped, so make actions safe to lose or repeat ("move to x,y" rather than "move
+right"), or keep fast-changing state on the phone and send it when the player commits.
+
+**Keep `Data` under 64 KB.** It is serialized into every update to that player. Above 64 KB (of JSON) the server logs a
+Warning with the game, the screen and the size, and still sends it. Send what the screen needs, not the whole campaign
+document, and use ids that the module can resolve from content it already has.
+
+**The fallback card.** A phone can be older than the server (a cached page, a deploy mid-session). If the module
+exists but doesn't export the screen, or there is no such module, the phone shows a card, "This screen needs a newer
+app", with a **Reload** button that reloads the page. While the module is still downloading, the phone shows the
+generic wait with a spinner. Never remove a screen from a module while servers might still send it; add a new one
+and retire the old name later.
+
 ## Host signals
 
 A game paces its presentation with timers that guess how long the TV takes: a question read-out, an animation chain.

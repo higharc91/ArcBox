@@ -2,7 +2,8 @@ import { createContext } from "preact";
 import { useContext } from "preact/hooks";
 import type { ControllerView } from "../protocol";
 import type { KeyValueStore } from "../session/storage";
-import { skinFor, type ResultKind } from "../skins/skin";
+import type { ResultKind } from "../games/module";
+import { moduleFor } from "../games/registry";
 import { PATTERNS, vibrate } from "./haptics";
 import { Sounds } from "./sounds";
 
@@ -90,7 +91,7 @@ export class Feedback {
     this.input = view.kind !== "wait";
     this.sent = false;
     this.lastTick = null;
-    const result = view.kind === "wait" ? skinFor(game)?.classifyResult?.(view) : null;
+    const result = view.kind === "wait" ? moduleFor(game)?.skin?.classifyResult?.(view) : null;
     const message = result && view.kind === "wait" ? view.message : null;
     // A result re-minted under a new id with the same wording (e.g. after a server restart) is the same result.
     const repeat = message !== null && message === this.lastResult;

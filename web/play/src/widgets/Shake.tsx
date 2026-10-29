@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 import { useFeedback } from "../feedback/feedback";
 import type { ShakeView } from "../protocol";
-import { useSkin } from "../skins/skin";
+import { useSkin } from "../games/module";
 import { Bottle, Gauge, mix, safeColor, type CorkState, type Spray } from "./Bottle";
 import { ChargeModel, G } from "./chargeModel";
 import { Prompt, type WidgetProps } from "./common";
