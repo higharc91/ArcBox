@@ -2,6 +2,7 @@ using System.Text.Json;
 using ArcBox.Sdk;
 using ArcBox.Server;
 using ArcBox.Server.Campaigns;
+using ArcBox.Server.Content;
 using ArcBox.Server.Games;
 using ArcBox.Server.Games.Redline;
 using ArcBox.Server.Hubs;
@@ -19,6 +20,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<RoomOptions>(builder.Configuration.GetSection("Rooms"));
 builder.Services.AddKeyedSingleton<TimeProvider>(RoomManager.ClockKey, TimeProvider.System);
+builder.Services.Configure<ContentOptions>(builder.Configuration.GetSection(ContentOptions.Section));
+builder.Services.AddSingleton(sp => new ContentPackRegistry(
+    sp.GetRequiredService<IOptions<ContentOptions>>(), sp.GetRequiredService<IHostEnvironment>()));
 builder.Services.AddSingleton<ProfileService>();
 builder.Services.AddSingleton(sp => new RoomServices(
     sp.GetRequiredService<IGameRegistry>(),
@@ -29,7 +33,8 @@ builder.Services.AddSingleton(sp => new RoomServices(
     sp.GetRequiredService<ILoggerFactory>(),
     sp.GetRequiredService<CampaignService>(),
     sp.GetRequiredService<CampaignRulesRegistry>(),
-    sp.GetRequiredService<RoomStore>()));
+    sp.GetRequiredService<RoomStore>(),
+    sp.GetRequiredService<ContentPackRegistry>()));
 builder.Services.AddSingleton<RoomStore>();
 builder.Services.AddSingleton<RoomManager>();
 builder.Services.AddSingleton<IClientSender, HubClientSender>();
@@ -72,6 +77,7 @@ app.UsePhoneApp();
 app.UseRateLimiter();
 app.MapHub<ArcHub>("/hub", o => o.AllowStatefulReconnects = true);
 app.MapSpeech();
+app.MapContent();
 app.MapCampaigns();
 app.MapHealthEndpoint();
 

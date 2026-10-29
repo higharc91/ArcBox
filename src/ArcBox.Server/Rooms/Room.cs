@@ -6,6 +6,7 @@ using System.Threading.Channels;
 using ArcBox.Sdk;
 using ArcBox.Sdk.Protocol;
 using ArcBox.Server.Campaigns;
+using ArcBox.Server.Content;
 using ArcBox.Server.Games;
 using ArcBox.Server.Hubs;
 using ArcBox.Server.Profiles;
@@ -34,6 +35,7 @@ public sealed partial class Room
     private readonly CampaignService _campaigns;
     private readonly CampaignRulesRegistry _rules;
     private readonly RoomStore _store;
+    private readonly ContentPackRegistry _content;
     private readonly DateTimeOffset _createdUtc;
 
     private readonly Channel<Action> _inbox = Channel.CreateUnbounded<Action>(new UnboundedChannelOptions
@@ -65,6 +67,7 @@ public sealed partial class Room
         _hostTokenHash = hostTokenHash;
         _createdUtc = createdUtc;
         _store = services.Store;
+        _content = services.Content;
         _registry = services.Registry;
         _sender = services.Sender;
         _time = services.Time;
@@ -160,6 +163,7 @@ public sealed partial class Room
         _allAbsentSince = null;
 
         _sender.Send(connectionId, ClientMethods.LobbyChanged, GetLobbyState());
+        SendContentRequired();
         if (TakeHostNotice() is { } notice)
         {
             _sender.Send(connectionId, ClientMethods.GameEnded, notice);
@@ -322,6 +326,18 @@ public sealed partial class Room
         BroadcastLobby();
     }
 
+    /// <summary>
+    /// Tells the host which content packs the selected game needs (spec §3.6): always sent, with an empty list for a game
+    /// that has none. Nothing is sent without a host or a selected game.
+    /// </summary>
+    private void SendContentRequired()
+    {
+        if (_hostConnectionId is not { } host || _selectedGameId is not { } gameId) return;
+
+        PackRef[] packs = [.. _content.For(gameId).Select(p => new PackRef(p.PackId, p.Hash))];
+        _sender.Send(host, ClientMethods.ContentRequired, gameId, packs);
+    }
+
     public Task SelectGameAsync(string connectionId, string gameId) => EnqueueAsync(() =>
     {
         EnsureHostOrVip(connectionId);
@@ -344,6 +360,7 @@ public sealed partial class Room
         }
 
         _selectedGameId = id;
+        SendContentRequired();
         BroadcastLobby();
         Save();
     });
@@ -365,6 +382,9 @@ public sealed partial class Room
 
         var game = _registry.Create(_selectedGameId!);
         var lease = campaign is null ? null : CheckOutForStart(campaign);
+
+        // Ahead of the first HostView, so the TV can show its loading card before the game.
+        SendContentRequired();
 
         _session = new GameSession(game, Players(), _time, Random.Shared.Next(), Enqueue, _logger, lease);
         _session.TimerFired += Publish;

@@ -26,6 +26,7 @@ public sealed class TestClient : IAsyncDisposable
         [ClientMethods.GameEnded] = 1,
         [ClientMethods.RoomClosed] = 1,
         [ClientMethods.Kicked] = 0,
+        [ClientMethods.ContentRequired] = 2,
     };
 
     private readonly HubConnection _connection;

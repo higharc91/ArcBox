@@ -96,3 +96,39 @@ The convention:
 
 Limits: `kind` is 1-32 characters from `A-Z a-z 0-9 _ . -`, and the payload is at most 4096 bytes of JSON. Only the
 host connection can signal; anything else is rejected with "Invalid signal." (or "Only the host can do that.").
+
+## Content packs
+
+Maps, sprite sheets and dialogue don't have to be compiled into the TV app. Put them in a **content pack** and the
+server delivers them, so a weekly expansion is a server deploy rather than a new TV install.
+
+**Layout.** Packs live in the repo under `content/<gameId>/<packId>/…`; any files and subfolders are fine:
+
+```
+content/
+  tactics/
+    base/
+      maps/arena.json
+      sprites/hero.png
+    expansion-1/
+      maps/ruins.json
+```
+
+The build copies `content/` into the server's output and publish folders, and the server scans `Content:Root` (default
+`content`; Development points it at `../../content`) when it starts. A game with no folder, or no packs (REDLINE,
+Counter), simply has none. A root that doesn't exist is an empty registry, not an error.
+
+**The hash is immutable.** Each pack has a hash: the SHA-256 of its files' sorted `(path, file hash)` list, computed at
+startup. Files are served at `/content/<gameId>/<packId>/<hash>/<path>` with `Cache-Control: public, max-age=31536000,
+immutable`, so a given URL's bytes must never change. **New content means a new hash**: edit or add a file, deploy, and
+the pack gets a new hash and so a new URL. Don't try to patch a file under an old hash; an unknown hash is a 404, and
+nothing cached against the old one is ever reused for new content. The same URLs work from phones (for example a
+`SeatCard.Portrait`), and `GET /content/<gameId>/index.json` lists a game's packs with each file's path, SHA-256 and size.
+
+**How the TV gets them.** The server sends `ContentRequired(gameId, [{packId, hash}])` to the host when a game is
+selected, when it starts, and when a host connects to a room that has a game selected (including after a server restart).
+The list is empty for a game with no packs. The TV's content cache (landing with the TV changes) downloads any pack it
+doesn't have into a temporary folder, verifies every file's SHA-256, then renames it into place, so a partial download is
+never read; it keeps the newest 3 hashes per pack. While a pack is missing the TV shows "Loading content… 42%" before it
+shows the game, and a scene finds its files through `IContentScene.ContentRoot(packId)`. Your game doesn't have to do
+anything to make this happen.
