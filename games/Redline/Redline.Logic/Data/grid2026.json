@@ -1,0 +1,426 @@
+{
+ "season": 2026,
+ "source": "Teams, chassis names, drivers, abbreviations, nationalities and car numbers: F1DB (https://github.com/f1db/f1db), src/data/seasons/2026/entrants.yml, drivers/*.yml and the 2026 Singapore race result, current lineup as of round 18.",
+ "license": "F1DB data is licensed CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Livery colours are our own approximations of each team's colour scheme, not official values; no team or sponsor logos are reproduced.",
+ "teams": [
+  {
+   "id": "mclaren",
+   "name": "McLaren",
+   "chassis": "MCL40",
+   "finish": "gloss",
+   "livery": {
+    "top": "#ff8000",
+    "side": "#26272b",
+    "stripe": "#ffffff",
+    "nose": "#ff8000",
+    "wing": "#26272b",
+    "endplate": "#ff8000",
+    "halo": "#26272b",
+    "number": "#26272b"
+   },
+   "drivers": [
+    {
+     "id": "lando-norris",
+     "name": "Lando Norris",
+     "code": "NOR",
+     "nationality": "GB",
+     "number": 1,
+     "tcam": "black",
+     "points": 201.0,
+     "aiSkill": 1.081
+    },
+    {
+     "id": "oscar-piastri",
+     "name": "Oscar Piastri",
+     "code": "PIA",
+     "nationality": "AU",
+     "number": 81,
+     "tcam": "yellow",
+     "points": 138.0,
+     "aiSkill": 1.041
+    }
+   ]
+  },
+  {
+   "id": "ferrari",
+   "name": "Ferrari",
+   "chassis": "SF-26",
+   "finish": "gloss",
+   "livery": {
+    "top": "#dc0000",
+    "side": "#dc0000",
+    "stripe": "#ffffff",
+    "nose": "#dc0000",
+    "wing": "#dc0000",
+    "endplate": "#1b1b1d",
+    "halo": "#1b1b1d",
+    "number": "#ffffff"
+   },
+   "drivers": [
+    {
+     "id": "charles-leclerc",
+     "name": "Charles Leclerc",
+     "code": "LEC",
+     "nationality": "MC",
+     "number": 16,
+     "tcam": "black",
+     "points": 215.0,
+     "aiSkill": 1.089
+    },
+    {
+     "id": "lewis-hamilton",
+     "name": "Lewis Hamilton",
+     "code": "HAM",
+     "nationality": "GB",
+     "number": 44,
+     "tcam": "yellow",
+     "points": 229.0,
+     "aiSkill": 1.096
+    }
+   ]
+  },
+  {
+   "id": "red-bull",
+   "name": "Red Bull",
+   "chassis": "RB22",
+   "finish": "matte",
+   "livery": {
+    "top": "#1b2550",
+    "side": "#1b2550",
+    "stripe": "#d4123a",
+    "nose": "#ffc906",
+    "wing": "#1b2550",
+    "endplate": "#d4123a",
+    "halo": "#1b2550",
+    "number": "#ffffff"
+   },
+   "drivers": [
+    {
+     "id": "max-verstappen",
+     "name": "Max Verstappen",
+     "code": "VER",
+     "nationality": "NL",
+     "number": 3,
+     "tcam": "black",
+     "points": 221.0,
+     "aiSkill": 1.092
+    },
+    {
+     "id": "isack-hadjar",
+     "name": "Isack Hadjar",
+     "code": "HAD",
+     "nationality": "FR",
+     "number": 6,
+     "tcam": "yellow",
+     "points": 97.0,
+     "aiSkill": 1.01
+    }
+   ]
+  },
+  {
+   "id": "mercedes",
+   "name": "Mercedes",
+   "chassis": "W17",
+   "finish": "gloss",
+   "livery": {
+    "top": "#c3c7cb",
+    "side": "#111214",
+    "stripe": "#00d2b4",
+    "nose": "#c3c7cb",
+    "wing": "#111214",
+    "endplate": "#00d2b4",
+    "halo": "#111214",
+    "number": "#111214"
+   },
+   "drivers": [
+    {
+     "id": "george-russell",
+     "name": "George Russell",
+     "code": "RUS",
+     "nationality": "GB",
+     "number": 63,
+     "tcam": "black",
+     "points": 238.0,
+     "aiSkill": 1.101
+    },
+    {
+     "id": "kimi-antonelli",
+     "name": "Kimi Antonelli",
+     "code": "ANT",
+     "nationality": "IT",
+     "number": 12,
+     "tcam": "yellow",
+     "points": 340.0,
+     "aiSkill": 1.15
+    }
+   ]
+  },
+  {
+   "id": "aston-martin",
+   "name": "Aston Martin",
+   "chassis": "AMR26",
+   "finish": "gloss",
+   "livery": {
+    "top": "#00594f",
+    "side": "#00594f",
+    "stripe": "#cedc00",
+    "nose": "#00594f",
+    "wing": "#00594f",
+    "endplate": "#cedc00",
+    "halo": "#00594f",
+    "number": "#ffffff"
+   },
+   "drivers": [
+    {
+     "id": "fernando-alonso",
+     "name": "Fernando Alonso",
+     "code": "ALO",
+     "nationality": "ES",
+     "number": 14,
+     "tcam": "black",
+     "points": 7.0,
+     "aiSkill": 0.893
+    },
+    {
+     "id": "lance-stroll",
+     "name": "Lance Stroll",
+     "code": "STR",
+     "nationality": "CA",
+     "number": 18,
+     "tcam": "yellow",
+     "points": 0.0,
+     "aiSkill": 0.85
+    }
+   ]
+  },
+  {
+   "id": "alpine",
+   "name": "Alpine",
+   "chassis": "A526",
+   "finish": "gloss",
+   "livery": {
+    "top": "#0a5fc2",
+    "side": "#0a5fc2",
+    "stripe": "#f25cb6",
+    "nose": "#f25cb6",
+    "wing": "#0a5fc2",
+    "endplate": "#f25cb6",
+    "halo": "#0a5fc2",
+    "number": "#ffffff"
+   },
+   "drivers": [
+    {
+     "id": "pierre-gasly",
+     "name": "Pierre Gasly",
+     "code": "GAS",
+     "nationality": "FR",
+     "number": 10,
+     "tcam": "black",
+     "points": 41.0,
+     "aiSkill": 0.954
+    },
+    {
+     "id": "franco-colapinto",
+     "name": "Franco Colapinto",
+     "code": "COL",
+     "nationality": "AR",
+     "number": 43,
+     "tcam": "yellow",
+     "points": 27.0,
+     "aiSkill": 0.935
+    }
+   ]
+  },
+  {
+   "id": "williams",
+   "name": "Williams",
+   "chassis": "FW48",
+   "finish": "gloss",
+   "livery": {
+    "top": "#0b2a5b",
+    "side": "#16a6e8",
+    "stripe": "#ffffff",
+    "nose": "#0b2a5b",
+    "wing": "#0b2a5b",
+    "endplate": "#16a6e8",
+    "halo": "#0b2a5b",
+    "number": "#ffffff"
+   },
+   "drivers": [
+    {
+     "id": "alexander-albon",
+     "name": "Alex Albon",
+     "code": "ALB",
+     "nationality": "TH",
+     "number": 23,
+     "tcam": "black",
+     "points": 5.0,
+     "aiSkill": 0.886
+    },
+    {
+     "id": "carlos-sainz-jr",
+     "name": "Carlos Sainz",
+     "code": "SAI",
+     "nationality": "ES",
+     "number": 55,
+     "tcam": "yellow",
+     "points": 7.0,
+     "aiSkill": 0.893
+    }
+   ]
+  },
+  {
+   "id": "racing-bulls",
+   "name": "Racing Bulls",
+   "chassis": "VCARB 03",
+   "finish": "gloss",
+   "livery": {
+    "top": "#f4f5f7",
+    "side": "#1c3fd0",
+    "stripe": "#e3102f",
+    "nose": "#f4f5f7",
+    "wing": "#1c3fd0",
+    "endplate": "#e3102f",
+    "halo": "#f4f5f7",
+    "number": "#1c3fd0"
+   },
+   "drivers": [
+    {
+     "id": "liam-lawson",
+     "name": "Liam Lawson",
+     "code": "LAW",
+     "nationality": "NZ",
+     "number": 30,
+     "tcam": "black",
+     "points": 75.0,
+     "aiSkill": 0.991
+    },
+    {
+     "id": "arvid-lindblad",
+     "name": "Arvid Lindblad",
+     "code": "LIN",
+     "nationality": "GB",
+     "number": 41,
+     "tcam": "yellow",
+     "points": 38.0,
+     "aiSkill": 0.95
+    }
+   ]
+  },
+  {
+   "id": "haas",
+   "name": "Haas",
+   "chassis": "VF-26",
+   "finish": "gloss",
+   "livery": {
+    "top": "#f4f5f7",
+    "side": "#18181a",
+    "stripe": "#e1061f",
+    "nose": "#f4f5f7",
+    "wing": "#18181a",
+    "endplate": "#e1061f",
+    "halo": "#18181a",
+    "number": "#18181a"
+   },
+   "drivers": [
+    {
+     "id": "esteban-ocon",
+     "name": "Esteban Ocon",
+     "code": "OCO",
+     "nationality": "FR",
+     "number": 31,
+     "tcam": "black",
+     "points": 7.0,
+     "aiSkill": 0.893
+    },
+    {
+     "id": "oliver-bearman",
+     "name": "Oliver Bearman",
+     "code": "BEA",
+     "nationality": "GB",
+     "number": 87,
+     "tcam": "yellow",
+     "points": 23.0,
+     "aiSkill": 0.928
+    }
+   ]
+  },
+  {
+   "id": "audi",
+   "name": "Audi",
+   "chassis": "R26",
+   "finish": "gloss",
+   "livery": {
+    "top": "#a7abb0",
+    "side": "#121315",
+    "stripe": "#e4002b",
+    "nose": "#a7abb0",
+    "wing": "#121315",
+    "endplate": "#e4002b",
+    "halo": "#121315",
+    "number": "#121315"
+   },
+   "drivers": [
+    {
+     "id": "nico-hulkenberg",
+     "name": "Nico Hülkenberg",
+     "code": "HUL",
+     "nationality": "DE",
+     "number": 27,
+     "tcam": "black",
+     "points": 13.0,
+     "aiSkill": 0.909
+    },
+    {
+     "id": "gabriel-bortoleto",
+     "name": "Gabriel Bortoleto",
+     "code": "BOR",
+     "nationality": "BR",
+     "number": 5,
+     "tcam": "yellow",
+     "points": 10.0,
+     "aiSkill": 0.901
+    }
+   ]
+  },
+  {
+   "id": "cadillac",
+   "name": "Cadillac",
+   "chassis": "CA01",
+   "finish": "gloss",
+   "livery": {
+    "top": "#f2f2f2",
+    "side": "#0c0c0e",
+    "stripe": "#b9bec4",
+    "nose": "#0c0c0e",
+    "wing": "#0c0c0e",
+    "endplate": "#f2f2f2",
+    "halo": "#0c0c0e",
+    "number": "#0c0c0e"
+   },
+   "drivers": [
+    {
+     "id": "sergio-perez",
+     "name": "Sergio Pérez",
+     "code": "PER",
+     "nationality": "MX",
+     "number": 11,
+     "tcam": "black",
+     "points": 0.0,
+     "aiSkill": 0.85
+    },
+    {
+     "id": "valtteri-bottas",
+     "name": "Valtteri Bottas",
+     "code": "BOT",
+     "nationality": "FI",
+     "number": 77,
+     "tcam": "yellow",
+     "points": 0.0,
+     "aiSkill": 0.85
+    }
+   ]
+  }
+ ],
+ "form": "points: F1DB src/data/seasons/2026/driver-standings.yml (snapshot 2026-10-25); aiSkill = 0.85 + 0.30*sqrt(points/leaderPoints)"
+}

@@ -2,11 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
+    <!-- dotnet run from any directory uses the project folder as the content root, like Visual Studio and Rider,
+         so relative settings such as Web:Root (../../web/play/dist) resolve the same everywhere. -->
+    <RunWorkingDirectory>$(MSBuildProjectDirectory)</RunWorkingDirectory>
+    <!-- Development reads secrets such as Speech:Google:ApiKey from `dotnet user-secrets` (docs/speech-setup.md). -->
+    <UserSecretsId>arcbox-server-5b0e7c1e-3f2a-4d8e-9a61-2c7d4f0b8e15</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ArcBox.Sdk\ArcBox.Sdk.csproj" />
     <ProjectReference Include="..\..\games\Counter\Counter.Logic\Counter.Logic.csproj" />
+    <ProjectReference Include="..\..\games\Redline\Redline.Logic\Redline.Logic.csproj" />
   </ItemGroup>
 
 </Project>

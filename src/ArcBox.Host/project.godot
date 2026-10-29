@@ -6,10 +6,34 @@ config_version=5
 
 [application]
 
-config/name="ArcBox.Host"
+config/name="ArcBox"
 run/main_scene="res://Main.tscn"
-config/features=PackedStringArray("4.x", "C#")
+config/features=PackedStringArray("4.7", "C#", "Forward Plus")
+run/flush_stdout_on_print=true
+run/max_fps=144
+
+[audio]
+
+general/text_to_speech=true
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/vsync/vsync_mode=0
 
 [dotnet]
 
 project/assembly_name="ArcBox.Host"
+
+[rendering]
+
+renderer/rendering_method="forward_plus"
+anti_aliasing/quality/msaa_3d=2
+anti_aliasing/quality/screen_space_aa=2
+lights_and_shadows/directional_shadow/size=8192
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=4
+global_illumination/gi/use_half_resolution=true
+environment/defaults/default_clear_color=Color(0.043, 0.043, 0.063, 1)

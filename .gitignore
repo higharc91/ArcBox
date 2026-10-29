@@ -485,3 +485,6 @@ $RECYCLE.BIN/
 node_modules/
 web/play/dist/
 src/ArcBox.Server/wwwroot/assets/
+web/play/e2e/shots/
+.tts-cache/
+tools/blender/out/

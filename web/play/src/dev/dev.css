@@ -1,0 +1,126 @@
+/* Dev page (/dev.html): browser host + N phone iframes, and the REDLINE board (a stand-in for the TV). */
+body.dev-body { background: #0a0a0f; }
+.dev { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; padding: 16px; align-items: start; min-height: 100vh; }
+@media (max-width: 1200px) { .dev { grid-template-columns: 1fr; } }
+
+/* ---------------------------------------------------------------- host panel */
+.host { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.host-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; background: var(--glass); border: 1px solid var(--edge); padding: 10px 14px; }
+.host-code { display: flex; flex-direction: column; }
+.host-code b { font-weight: 900; font-size: 34px; line-height: 1; letter-spacing: 4px; }
+.host-players { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; flex: 1; min-width: 200px; }
+.host-players li { display: flex; align-items: center; gap: 6px; background: var(--panel); border: 1px solid var(--edge); padding: 2px 4px 2px 10px; font-weight: 700; min-height: 32px; }
+.host-players li.offline { opacity: 0.5; }
+.host-players li.empty { color: var(--dim); font-weight: 600; padding-right: 10px; }
+.host-players .vip { font-weight: 900; font-size: 10px; letter-spacing: 1px; padding: 2px 6px; background: #ffc906; color: #111; }
+.host-players .kick { min-height: 26px; width: 26px; padding: 0; font-size: 16px; line-height: 1; color: var(--dim); }
+.host-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.host-actions button { min-height: 40px; padding: 6px 14px; font-weight: 700; }
+.host-actions .primary { width: auto; font-size: 16px; }
+.host-actions button.picked { border-color: #fff; background: var(--panel-hi); }
+.host-results { background: var(--glass); border-left: 4px solid var(--red); padding: 10px 14px; display: flex; flex-direction: column; gap: 4px; }
+.host-results b { font-size: 18px; }
+.host-results ol { padding-left: 22px; color: #ddd; font-weight: 600; }
+.host-results ol span { color: var(--dim); margin-left: 6px; }
+.host-json { background: var(--glass); border: 1px solid var(--edge); padding: 12px; font: 13px/1.4 ui-monospace, monospace; color: #cfd2da; overflow: auto; max-height: 70vh; }
+.host-idle { color: var(--dim); font-weight: 600; padding: 12px 2px; }
+
+/* ---------------------------------------------------------------- phones */
+.dev-phones { display: grid; grid-template-columns: repeat(2, 320px); gap: 12px; align-content: start; }
+@media (max-width: 1200px) { .dev-phones { grid-template-columns: repeat(auto-fill, 320px); } }
+.dev-phone { display: flex; flex-direction: column; background: #24242e; border-radius: 18px; padding: 6px 6px 8px; box-shadow: 0 0 0 1px var(--edge); }
+.dev-phone-bar { display: flex; justify-content: space-between; align-items: center; padding: 0 6px 6px; font-weight: 900; font-size: 13px; color: var(--dim); letter-spacing: 1px; }
+.dev-phone-bar button { min-height: 26px; padding: 2px 10px; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+.dev-phone iframe { width: 308px; height: 640px; border: 0; border-radius: 12px; background: #0b0b10; }
+
+/* ---------------------------------------------------------------- REDLINE board (.tower / .trow from broadcast.css) */
+.rboard {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 12px;
+  padding: 16px;
+  background:
+    repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.018) 0 2px, transparent 2px 22px),
+    radial-gradient(ellipse 70% 80% at 85% 20%, #2a2a3a, transparent 70%),
+    linear-gradient(160deg, #1c1c26, #0b0b10);
+  box-shadow: 0 0 0 1px var(--edge);
+  min-width: 0;
+}
+.rb-head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: stretch; }
+.rb-head .brand { font-size: 26px; padding: 0 30px 0 16px; }
+.qpanel { background: var(--glass); border: 1px solid var(--edge); border-left: 4px solid var(--red); padding: 8px 16px; min-width: 0; }
+.qmeta { display: flex; flex-wrap: wrap; gap: 4px 14px; font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--dim); }
+.qmeta .diff { color: #fff; display: inline-flex; align-items: center; }
+.qmeta .diff i { display: inline-block; width: 14px; height: 5px; background: #fff; margin-left: 3px; transform: skewX(-20deg); }
+.qmeta .diff i:first-child { margin-left: 8px; }
+.qmeta .diff i.off { background: rgba(255, 255, 255, 0.2); }
+.qpanel .q { font-weight: 700; font-size: 28px; line-height: 1.15; margin-top: 2px; }
+.rb-head .clock { background: var(--glass); border: 1px solid var(--edge); min-width: 104px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 4px 10px; }
+.rb-head .clock b { font-weight: 900; font-size: 38px; line-height: 1; font-variant-numeric: tabular-nums; }
+.rb-head .clock.listen b { font-size: 26px; letter-spacing: 0.06em; }
+
+.rb-body { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr); gap: 12px; min-height: 0; align-items: start; }
+@media (max-width: 1100px) { .rb-body { grid-template-columns: 1fr; } }
+.tower { background: var(--glass); border: 1px solid var(--edge); min-width: 0; }
+.tower .th { font-weight: 700; font-size: 11px; letter-spacing: 2px; color: var(--dim); padding: 6px 12px; border-bottom: 1px solid var(--edge); display: flex; justify-content: space-between; }
+.trow { display: grid; grid-template-columns: 34px 5px 104px minmax(40px, 0.8fr) minmax(80px, 1.3fr) 48px 132px; gap: 8px; align-items: center; height: 29px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-right: 8px; }
+.trow:last-child { border-bottom: 0; }
+.trow .p { height: 100%; display: grid; place-items: center; font-weight: 900; font-size: 15px; background: rgba(255, 255, 255, 0.04); }
+.phase-DriverSelect .trow .p { font-style: italic; }
+.trow.leader .p { background: #fff; color: #111; }
+.trow .c { height: 64%; }
+.trow .n { font-weight: 700; font-size: 15px; letter-spacing: 1px; display: flex; align-items: center; gap: 6px; }
+.trow .mv { font-size: 11px; font-weight: 900; letter-spacing: 0; }
+.trow .mv.up { color: var(--good); }
+.trow .mv.down { color: var(--bad); }
+.trow .who { font-weight: 700; font-size: 13px; color: #5d6070; letter-spacing: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.trow.human .who { color: #fff; }
+.trow.offline .who { color: var(--dim); text-decoration: line-through; }
+.trow.claimed { background: rgba(255, 255, 255, 0.92); color: #111; }
+.trow.claimed .who { color: var(--red); }
+.trow.claimed .p { background: transparent; }
+.trow .dist { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.trow .track { position: relative; flex: 1; height: 4px; background: rgba(255, 255, 255, 0.1); }
+.trow .track i { position: absolute; left: 0; top: 0; bottom: 0; }
+.trow .track .ghost { opacity: 0.35; height: 8px; top: -2px; }
+.trow .track .fill { box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35); }
+.trow .d { font-weight: 700; font-size: 12px; color: var(--dim); min-width: 16px; text-align: right; font-variant-numeric: tabular-nums; }
+.trow .gap { font-weight: 600; font-size: 13px; color: var(--dim); text-align: right; font-variant-numeric: tabular-nums; }
+.trow .state { display: flex; justify-content: flex-end; align-items: center; gap: 4px; }
+.trow .chip { font-size: 10px; padding: 2px 6px; min-width: 64px; text-align: center; }
+.chip.WAIT { border: 1px dashed rgba(255, 255, 255, 0.3); color: var(--dim); }
+.chip.LOCKED { background: rgba(255, 255, 255, 0.1); color: #fff; }
+.chip.LIMIT, .trow .pit { background: #fff; color: #111; }
+.trow .pit { font-weight: 900; font-size: 9px; letter-spacing: 1px; padding: 2px 4px; }
+.trow.answered .chip { box-shadow: 0 0 0 1px var(--good); }
+.trow .outcome { font-weight: 900; font-size: 11px; letter-spacing: 0.5px; padding: 2px 5px; min-width: 50px; text-align: center; border-radius: 2px; }
+.outcome.Correct { background: var(--good); color: #062; }
+.outcome.Wrong, .outcome.NoAnswer { background: rgba(255, 59, 59, 0.18); color: var(--bad); border: 1px solid var(--bad); }
+.outcome.SpunOut { background: var(--bad); color: #fff; }
+
+.rb-side { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.answers { display: grid; grid-template-columns: 1fr; gap: 8px; }
+.ans { background: var(--glass); border: 1px solid var(--edge); display: flex; align-items: center; gap: 12px; min-height: 50px; font-weight: 700; font-size: 19px; position: relative; padding-right: 10px; }
+.ans .k { align-self: stretch; width: 44px; display: grid; place-items: center; font-weight: 900; font-size: 19px; background: rgba(255, 255, 255, 0.08); flex: none; }
+.ans .a { flex: 1; min-width: 0; line-height: 1.15; padding: 6px 0; }
+.ans.right { background: var(--good); color: #04220f; border-color: var(--good); }
+.ans.right .k { background: rgba(0, 0, 0, 0.15); }
+.ans.wrong { opacity: 0.45; }
+.ans .pickers { display: flex; gap: 2px; flex-wrap: wrap; max-width: 45%; justify-content: flex-end; }
+.ans .pickers i { width: 5px; height: 14px; display: block; }
+.ans .pickers i.h { height: 22px; outline: 1px solid rgba(255, 255, 255, 0.7); }
+.legend { display: flex; flex-wrap: wrap; gap: 8px; }
+.legend .chip { font-size: 12px; padding: 4px 10px; }
+.summary { background: var(--glass); border: 1px solid var(--edge); padding: 10px 14px; font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #cfd2da; }
+.awards { display: flex; flex-direction: column; gap: 8px; }
+.award { background: var(--glass); border: 1px solid var(--edge); border-left: 4px solid var(--red); padding: 10px 14px; display: flex; flex-direction: column; }
+.award b { font: italic 900 24px "Titillium Web", sans-serif; }
+.award span { color: var(--dim); font-weight: 600; }
+.podium { display: flex; flex-direction: column; gap: 8px; }
+.podium .step { background: var(--glass); border: 1px solid var(--edge); border-left: 4px solid var(--red); padding: 10px 14px; display: flex; flex-direction: column; gap: 4px; }
+.podium .step small { color: var(--dim); font-weight: 700; letter-spacing: 2px; }
+.podium .step b { font: italic 900 24px "Titillium Web", sans-serif; }
+.podium .step span { color: var(--dim); font-weight: 600; }
+.podium .gauge { display: block; height: 6px; background: rgba(255, 255, 255, 0.1); }
+.podium .gauge i { display: block; height: 100%; }
+.rb-foot { color: var(--dim); font-size: 12px; font-weight: 600; letter-spacing: 1px; }

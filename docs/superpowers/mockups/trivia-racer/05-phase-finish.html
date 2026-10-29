@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,600;0,700;0,900;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="broadcast.css">
+<script src="kit.js"></script>
+<style>
+  .tv { grid-template-rows: auto 1fr auto; }
+  .flagband { height: 18px; background: repeating-conic-gradient(#fff 0 25%, #111 0 50%) 0 0 / 18px 18px; position: absolute; left: 0; right: 0; top: 0; opacity: .9; }
+  .title { display: flex; align-items: baseline; gap: 18px; margin-top: 10px; }
+  .title b { font: italic 900 56px 'Titillium Web'; line-height: 1; }
+  .title span { color: var(--dim); font-weight: 700; letter-spacing: 3px; font-size: 15px; }
+  .body { display: grid; grid-template-columns: 1fr 380px; gap: 18px; min-height: 0; }
+  .podium { background: var(--glass); border: 1px solid var(--edge); display: flex; align-items: flex-end; justify-content: center; gap: 14px; padding: 20px 28px 0; position: relative; }
+  .step { width: 210px; display: flex; flex-direction: column; align-items: center; }
+  .step .car { width: 120px; height: 52px; margin-bottom: 10px; }
+  .step .nm { font-weight: 900; font-size: 30px; letter-spacing: 1px; }
+  .step .dist { color: var(--dim); font-weight: 700; font-size: 14px; letter-spacing: 2px; margin-bottom: 10px; }
+  .step .block { width: 100%; display: grid; place-items: center; font: italic 900 64px 'Titillium Web'; background: rgba(255,255,255,.06); border-top: 4px solid; }
+  .class { background: var(--glass); border: 1px solid var(--edge); display: flex; flex-direction: column; }
+  .crow { flex: 1; display: grid; grid-template-columns: 40px 6px 1fr auto; gap: 10px; align-items: center; padding-right: 14px; border-bottom: 1px solid var(--edge); }
+  .crow:last-child { border-bottom: 0; }
+  .crow .p { height: 100%; display: grid; place-items: center; font-weight: 900; font-size: 20px; background: rgba(255,255,255,.04); }
+  .crow .c { height: 55%; } .crow .n { font-weight: 700; font-size: 20px; } .crow .d { color: var(--dim); font-weight: 700; }
+  .awards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .award { background: var(--glass); border: 1px solid var(--edge); border-left: 4px solid var(--red); padding: 8px 14px; }
+  .award small { display: block; font-weight: 700; font-size: 11px; letter-spacing: 2px; color: var(--dim); }
+  .award b { font-weight: 900; font-size: 20px; } .award span { color: var(--dim); font-weight: 600; margin-left: 6px; }
+
+  .win { margin: 6px 16px 0; padding: 22px 18px; background: var(--red); position: relative; overflow: hidden; }
+  .win::after { content: ''; position: absolute; right: -10px; top: 0; bottom: 0; width: 70px; background: repeating-conic-gradient(rgba(255,255,255,.9) 0 25%, transparent 0 50%) 0 0 / 14px 14px; transform: skewX(-12deg); }
+  .win small { font-weight: 700; letter-spacing: 2px; font-size: 12px; } .win b { display: block; font: italic 900 64px 'Titillium Web'; line-height: 1; }
+  .mystats { margin: 10px 16px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .mystats div { background: rgba(255,255,255,.06); border: 1px solid var(--edge); padding: 12px; }
+  .mystats small { display: block; font-weight: 700; font-size: 11px; letter-spacing: 2px; color: var(--dim); } .mystats b { font-weight: 900; font-size: 26px; }
+</style>
+</head>
+<body>
+<div class="label">PHASE 4 · <b>CHEQUERED FLAG</b> — podium, full classification, and fun awards computed from the race</div>
+<div class="row">
+  <div class="tv">
+    <div class="flagband"></div>
+    <div class="title"><b>RIA WINS</b><span>CHEQUERED FLAG · LAP 12/15</span></div>
+    <div class="body">
+      <div class="podium" id="podium"></div>
+      <div class="class" id="class"></div>
+    </div>
+    <div class="awards">
+      <div class="award"><small>BOLDEST DRIVER</small><b>MO</b><span>6 Redlines</span></div>
+      <div class="award"><small>SHARPEST MIND</small><b>JO</b><span>10 of 12 right</span></div>
+      <div class="award"><small>BIGGEST CRASH</small><b>SAM</b><span>3 spin-outs</span></div>
+    </div>
+  </div>
+
+  <div class="phone"><div class="screen">
+    <div class="pstatus"><div class="me"><i style="background:#27f4d2"></i>RIA</div><div class="pos">P1<small>/6</small></div></div>
+    <div class="win"><small>FINAL CLASSIFICATION</small><b>P1</b></div>
+    <div class="mystats">
+      <div><small>CORRECT</small><b>9/12</b></div>
+      <div><small>REDLINES</small><b>3</b></div>
+      <div><small>SPIN-OUTS</small><b>0</b></div>
+      <div><small>DISTANCE</small><b>21</b></div>
+    </div>
+    <div class="hint">Waiting for the VIP to pick the next game…</div>
+    <div class="ptimer"></div>
+  </div></div>
+</div>
+<script>
+  const TEAM = { JO: '#3671c6', SAM: '#e8002d', ALEX: '#ff8000', RIA: '#27f4d2', MO: '#b6babd', KAI: '#229971' };
+  const final = [['RIA', 21], ['JO', 19], ['KAI', 18], ['MO', 15], ['ALEX', 14], ['SAM', 12]];
+  const step = (i, h) => { const [n, d] = final[i]; return `<div class="step"><div class="car">${carSvg(TEAM[n], { tyre: '#050507', cockpit: '#111' })}</div>
+    <div class="nm">${n}</div><div class="dist">${d} · ${i ? '−' + (final[0][1] - d) : 'WINNER'}</div>
+    <div class="block" style="height:${h}px;border-color:${TEAM[n]}">${i + 1}</div></div>`; };
+  podium.innerHTML = step(1, 220) + step(0, 290) + step(2, 160);
+  document.getElementById('class').innerHTML = final.map(([n, d], i) => `<div class="crow"><div class="p">${i + 1}</div><div class="c" style="background:${TEAM[n]}"></div><div class="n">${n}</div><div class="d">${d}</div></div>`).join('');
+</script>
+</body>
+</html>

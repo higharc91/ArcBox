@@ -1,0 +1,41 @@
+{
+  "response_code": 0,
+  "results": [
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "Entertainment%3A%20Video%20Games",
+      "question": "In%20%22Portal%22%2C%20what%20is%20the%20name%20of%20the%20AI%20that%20guides%20the%20player%3F",
+      "correct_answer": "GLaDOS",
+      "incorrect_answers": [
+        "Wheatley",
+        "Cortana",
+        "SHODAN"
+      ]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Geography",
+      "question": "Which%20city%20is%20the%20capital%20of%20France%2C%20known%20for%20the%20Caf%C3%A9%20de%20Flore%3F",
+      "correct_answer": "Paris",
+      "incorrect_answers": [
+        "Lyon",
+        "Marseille",
+        "Nice"
+      ]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "hard",
+      "category": "Science%3A%20Computers",
+      "question": "Which%20unit%20measures%20electrical%20resistance%3F",
+      "correct_answer": "Ohm",
+      "incorrect_answers": [
+        "Volt",
+        "Ampere",
+        "Watt"
+      ]
+    }
+  ]
+}

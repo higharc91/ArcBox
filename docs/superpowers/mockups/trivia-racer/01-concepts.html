@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --bg: #0d0f1a; --panel: #161a2b; --ink: #f2f4ff; --muted: #8a90b0;
+    --track: #23283f; --line: #3a4166; --accent: #ffcc33; --good: #3ee08f; --bad: #ff5470;
+    --c1: #ff5470; --c2: #3ec3ff; --c3: #ffcc33; --c4: #3ee08f; --c5: #b77bff; --c6: #ff9a3e;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: Inter, sans-serif; padding: 36px; width: 1500px; }
+  h1 { font-size: 34px; letter-spacing: -0.5px; }
+  .sub { color: var(--muted); margin: 6px 0 28px; font-size: 17px; }
+  .concept { display: grid; grid-template-columns: 640px 170px 1fr; gap: 28px; align-items: center;
+             background: var(--panel); border-radius: 18px; padding: 24px; margin-bottom: 22px; }
+  .tag { display: inline-block; font-weight: 800; font-size: 13px; letter-spacing: 1.5px; color: var(--bg);
+         background: var(--accent); padding: 4px 10px; border-radius: 6px; margin-bottom: 10px; }
+  h2 { font-size: 26px; margin-bottom: 8px; }
+  p, li { color: #c9cde6; font-size: 15.5px; line-height: 1.5; }
+  ul { padding-left: 18px; margin-top: 8px; }
+  .pro { color: var(--good); } .con { color: var(--bad); }
+
+  /* TV */
+  .tv { aspect-ratio: 16/9; background: radial-gradient(ellipse at top, #1d2240, #0b0d17); border: 3px solid #2c3254;
+        border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; position: relative; overflow: hidden; }
+  .q { font-weight: 800; font-size: 17px; text-align: center; }
+  .qmeta { display: flex; justify-content: space-between; color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: 1px; }
+  .track { flex: 1; display: flex; flex-direction: column; gap: 4px; padding-right: 26px; position: relative; }
+  .lane { flex: 1; background: var(--track); border-radius: 4px; position: relative;
+          background-image: repeating-linear-gradient(90deg, transparent 0 9.5%, var(--line) 9.5% 10%); }
+  .finish { position: absolute; right: 0; top: 0; bottom: 0; width: 22px; border-radius: 3px;
+            background: repeating-conic-gradient(#fff 0 25%, #111 0 50%) 0 0 / 11px 11px; }
+  .car { position: absolute; top: 50%; transform: translate(-50%, -50%); height: 78%; aspect-ratio: 2.2/1; border-radius: 5px 9px 9px 5px;
+         font-size: 10px; font-weight: 800; color: #111; display: flex; align-items: center; justify-content: center; white-space: nowrap; }
+  .badge { position: absolute; top: 50%; transform: translateY(-50%); font-size: 10px; font-weight: 800; padding: 1px 5px; border-radius: 4px; white-space: nowrap; }
+  .opts { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 6px; }
+  .opts div { background: #262c4a; border-radius: 5px; font-size: 11px; font-weight: 700; padding: 5px 7px; }
+
+  /* Phone */
+  .phone { width: 170px; aspect-ratio: 9/19; background: #05060b; border: 3px solid #2c3254; border-radius: 24px; padding: 18px 10px;
+           display: flex; flex-direction: column; gap: 7px; }
+  .phone .hdr { font-size: 10px; color: var(--muted); font-weight: 700; display: flex; justify-content: space-between; }
+  .phone .pq { font-size: 12px; font-weight: 700; margin: 4px 0; }
+  .btn { border-radius: 9px; padding: 10px 8px; font-weight: 800; font-size: 13px; text-align: center; }
+  .small { font-size: 10px; font-weight: 600; opacity: .8; display: block; margin-top: 2px; }
+  .rec { outline: 3px solid var(--accent); }
+</style>
+</head>
+<body>
+<h1>Trivia racing: three directions for the twist</h1>
+<div class="sub">Same core loop for all three: question on TV and phones → answer on phone → cars move → first past the flag wins. The twist changes what you decide on your phone.</div>
+
+<!-- A: NITRO -->
+<div class="concept">
+  <div class="tv">
+    <div class="qmeta"><span>LAP 2 · Q7</span><span>⏱ 0:08</span></div>
+    <div class="q">Which planet has the most moons?</div>
+    <div class="track" id="trackA"><div class="finish"></div></div>
+    <div class="opts"><div>A · Jupiter</div><div>B · Saturn</div><div>C · Uranus</div><div>D · Neptune</div></div>
+  </div>
+  <div class="phone">
+    <div class="hdr"><span>Q7</span><span>0:08</span></div>
+    <div class="pq">Which planet has the most moons?</div>
+    <div class="btn" style="background:var(--c1)">Jupiter</div>
+    <div class="btn" style="background:var(--c2)">Saturn</div>
+    <div class="btn" style="background:var(--c3);color:#111">Uranus</div>
+    <div class="btn" style="background:var(--c4);color:#111">Neptune</div>
+  </div>
+  <div>
+    <span class="tag">A · NITRO</span>
+    <h2>Speed is distance</h2>
+    <p>Answer right and you move. The faster you lock in, the further you go: first correct +3, next +2, the rest +1. Wrong answers stall you.</p>
+    <ul>
+      <li class="pro">Simplest to learn and build; one tap per question.</li>
+      <li class="con">Rewards reflexes over knowledge. Unfair to remote players on a laggy Discord stream.</li>
+      <li class="con">Leader tends to run away; little drama late.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- B: THROTTLE -->
+<div class="concept rec">
+  <div class="tv">
+    <div class="qmeta"><span>LAP 2 · Q7 · CATEGORY: SPACE</span><span>⏱ 0:06</span></div>
+    <div class="q">Pick your throttle! 🔥 3 drivers at REDLINE</div>
+    <div class="track" id="trackB"><div class="finish"></div></div>
+    <div class="opts" style="grid-template-columns:1fr"><div style="text-align:center;color:var(--muted)">Question reveals once everyone has locked a throttle…</div></div>
+  </div>
+  <div class="phone">
+    <div class="hdr"><span>Category: SPACE</span><span>0:06</span></div>
+    <div class="pq">How hard do you push?</div>
+    <div class="btn" style="background:#2b3150">CRUISE<span class="small">+1 if right · safe</span></div>
+    <div class="btn" style="background:#3a64ff">PUSH<span class="small">+2 if right · −1 if wrong</span></div>
+    <div class="btn" style="background:var(--bad)">REDLINE<span class="small">+4 if right · SPIN OUT if wrong</span></div>
+  </div>
+  <div>
+    <span class="tag">B · THROTTLE &nbsp;★ RECOMMENDED</span>
+    <h2>Bet your engine on what you know</h2>
+    <p>You see only the <b>category</b> first and pick a throttle. Then the question appears. Right answers move you by your throttle; a wrong REDLINE spins you out (back 2, and you sit out the next question).</p>
+    <ul>
+      <li class="pro">Knowledge plus nerve, not reflexes: fair for remote players.</li>
+      <li class="pro">Built-in drama on the TV ("3 drivers at REDLINE"). Trailing players can catch up by gambling.</li>
+      <li class="pro">Fits existing widgets: <code>buttons</code> then <code>choice</code>.</li>
+      <li class="con">Two taps per question; slightly longer rounds.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- C: SABOTAGE -->
+<div class="concept">
+  <div class="tv">
+    <div class="qmeta"><span>LAP 2 · PIT STOP</span><span>⏱ 0:05</span></div>
+    <div class="q">💥 SAM dropped an OIL SLICK on JO!</div>
+    <div class="track" id="trackC"><div class="finish"></div></div>
+    <div class="opts" style="grid-template-columns:1fr 1fr 1fr"><div>🛢 Oil slick: car ahead −2</div><div>🚀 Boost: +2</div><div>🛡 Shield: block next hit</div></div>
+  </div>
+  <div class="phone">
+    <div class="hdr"><span>PIT STOP</span><span>0:05</span></div>
+    <div class="pq">You earned an OIL SLICK. Who gets it?</div>
+    <div class="btn" style="background:var(--c2)">JO <span class="small">P1</span></div>
+    <div class="btn" style="background:var(--c5)">ALEX <span class="small">P2</span></div>
+    <div class="btn" style="background:#2b3150">Save it</div>
+  </div>
+  <div>
+    <span class="tag">C · SABOTAGE</span>
+    <h2>Kart-style items</h2>
+    <p>Correct answers earn an item card. After every few questions there's a pit stop where you fire items at other drivers. Trailing drivers roll better items.</p>
+    <ul>
+      <li class="pro">Most social: grudges and table talk.</li>
+      <li class="con">Extra phase every lap; more rules to explain and balance.</li>
+      <li class="con">Can feel random; knowledge matters less.</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  const cols = ['--c1','--c2','--c3','--c4','--c5','--c6'];
+  const names = ['JO','SAM','ALEX','RIA','MO','KAI'];
+  function track(id, pos, badges) {
+    const t = document.getElementById(id);
+    pos.forEach((p, i) => {
+      const lane = document.createElement('div'); lane.className = 'lane';
+      const car = document.createElement('div'); car.className = 'car';
+      car.style.left = (p * 0.93 + 4) + '%'; car.style.background = `var(${cols[i]})`; car.textContent = names[i];
+      lane.appendChild(car);
+      if (badges && badges[i]) {
+        const b = document.createElement('div'); b.className = 'badge';
+        b.style.left = (p * 0.93 + 11) + '%'; b.style.background = badges[i][1]; b.style.color = '#111'; b.textContent = badges[i][0];
+        lane.appendChild(b);
+      }
+      t.insertBefore(lane, t.querySelector('.finish'));
+    });
+  }
+  track('trackA', [62, 48, 40, 55, 22, 35], {0:['✓ +3','#3ee08f'],3:['✓ +2','#3ee08f'],4:['✗','#ff5470']});
+  track('trackB', [62, 48, 40, 55, 22, 35], {1:['🔥 REDLINE','#ff5470'],4:['🔥 REDLINE','#ff5470'],5:['🔥 REDLINE','#ff5470'],0:['CRUISE','#8a90b0'],2:['locking…','#8a90b0']});
+  track('trackC', [55, 48, 40, 62, 22, 35], {0:['🛢 −2','#ff9a3e'],3:['🛡','#3ec3ff']});
+</script>
+</body>
+</html>

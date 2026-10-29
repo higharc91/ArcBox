@@ -1,0 +1,178 @@
+using System.Globalization;
+using ArcBox.Sdk;
+
+namespace Redline.Logic;
+
+/// <summary>Phone view factories with the exact §3.3 wording.</summary>
+internal static class PlayerViews
+{
+    public const string PickPrompt = "Pick your driver";
+
+    public static ControllerView Idle() => new WaitView("Waiting for the race…");
+
+    public static ChoiceView PickDriver(IEnumerable<Seat> freeSeats, string? header, DateTimeOffset? deadline) =>
+        new(PickPrompt, [.. freeSeats.Select(PickOption)]) { Header = header, DeadlineUtc = deadline };
+
+    public static Option PickOption(Seat s) =>
+        new(s.Driver.Code, $"#{s.Driver.Number} {s.Driver.Name}", $"{s.Team.Name} · {s.Team.Chassis}");
+
+    public static string TakenHeader(string code) => $"{code} was just taken: pick another";
+
+    public static WaitView Seated(Seat s, DateTimeOffset? deadline) =>
+        new($"You're {s.Driver.Name}. Waiting for the grid…") { DeadlineUtc = deadline };
+
+    /// <param name="qualified">The grid slot won in qualifying (qualifying spec §4.2), or null when qualifying did not run.</param>
+    public static WaitView OnGrid(Seat s, int? qualified, DateTimeOffset? deadline) =>
+        new($"You're {s.Driver.Name}, #{s.Driver.Number}, {s.Team.Name}. Lights out in a moment…"
+            + (qualified is { } slot ? $" · Qualified P{slot}" : "")) { DeadlineUtc = deadline };
+
+    // ---------------------------------------------------------------- Qualifying (qualifying spec §4.2)
+
+    public const string AnswersSoon = "Answers in a moment…";
+
+    /// <summary>"QUALIFYING · LAP 1/3".</summary>
+    public static string QualifyingHeader(int lap, int laps) => $"QUALIFYING · LAP {lap}/{laps}";
+
+    /// <summary>
+    /// A lap time in seconds to two decimals, rounded half away from zero, invariant culture: 2405 ms → "2.41".
+    /// The one formatter for every qualifying time a phone shows.
+    /// </summary>
+    public static string LapSeconds(int ms) =>
+        Math.Round(ms / 1000m, 2, MidpointRounding.AwayFromZero).ToString("0.00", CultureInfo.InvariantCulture);
+
+    /// <summary>QualifyingReading: the question while the TV reads it out, then the note on its own line.</summary>
+    public static WaitView QualifyingListening(string text, string header, DateTimeOffset? deadline) =>
+        new($"{text}\n{AnswersSoon}") { Header = header, DeadlineUtc = deadline };
+
+    /// <summary>QualifyingQuestion, answered: the player's own clamped lap time; whether it counts waits for the Result.</summary>
+    public static WaitView LapChecking(int lapMs, string header, DateTimeOffset? deadline) =>
+        new($"Lap time {LapSeconds(lapMs)} s — checking…") { Header = header, DeadlineUtc = deadline };
+
+    /// <summary>QualifyingResult: "✔ 2.41 s · P3 so far" (" · Purple!" for the lap's fastest), or "✖ Lap deleted · P14 so far".</summary>
+    /// <param name="lapMs">This lap's committed time; null when it was deleted.</param>
+    /// <param name="position">The classification position after this lap.</param>
+    public static WaitView LapResult(int? lapMs, int position, bool fastestLap, string header, DateTimeOffset? deadline) =>
+        new(lapMs is { } ms
+            ? $"✔ {LapSeconds(ms)} s · P{position} so far" + (fastestLap ? " · Purple!" : "")
+            : $"✖ Lap deleted · P{position} so far") { Header = header, DeadlineUtc = deadline };
+
+    // ---------------------------------------------------------------- Rounds (§3.3)
+
+    public const string PitLimiterMessage = "Pit limiter: you're on Cruise this round.";
+    public const string AnsweredMessage = "Answer locked. Eyes on the TV!";
+
+    /// <summary>Maps a throttle button id (cruise / push / redline) to its throttle; null for anything else.</summary>
+    public static Throttle? ParseThrottle(string? id) => id switch
+    {
+        "cruise" => Throttle.Cruise,
+        "push" => Throttle.Push,
+        "redline" => Throttle.Redline,
+        _ => null,
+    };
+
+    /// <summary>The wire id of answer option <paramref name="index"/> (0..3 → a..d) in the question's shuffled order.</summary>
+    public static string AnswerId(int index) => ((char)('a' + index)).ToString();
+
+    /// <summary>Maps an answer option id (a..d) to its index 0..3; null for anything else.</summary>
+    public static int? ParseAnswer(string? id) => id switch
+    {
+        "a" => 0,
+        "b" => 1,
+        "c" => 2,
+        "d" => 3,
+        _ => null,
+    };
+
+    public static string RoundHeader(int position, int round, int maxRounds) => $"P{position} · ROUND {round}/{maxRounds}";
+
+    /// <summary>"CRUISE", "PUSH" or "REDLINE".</summary>
+    public static string Name(Throttle t) => t.ToString().ToUpperInvariant();
+
+    /// <summary>The three throttle buttons; each hint states that throttle's payout from <paramref name="rules"/>.</summary>
+    public static ButtonsView ChooseThrottle(TriviaQuestion q, RedlineRules rules, string header, DateTimeOffset? deadline) =>
+        new($"{q.Category} · {q.Difficulty}. How hard do you push?",
+        [
+            new Option("cruise", "CRUISE", $"+{rules.CruiseGain} if right · nothing lost"),
+            new Option("push", "PUSH", $"+{rules.PushGain} if right · −{rules.PushLoss} if wrong"),
+            new Option("redline", "REDLINE", $"+{rules.RedlineGain} if right · spin out if wrong"),
+        ]) { Header = header, DeadlineUtc = deadline };
+
+    public static WaitView ThrottleLocked(Throttle t, string header, DateTimeOffset? deadline) =>
+        new($"Locked in: {Name(t)}. Waiting for the other drivers…") { Header = header, DeadlineUtc = deadline };
+
+    public static WaitView PitLimited(string header, DateTimeOffset? deadline) =>
+        new(PitLimiterMessage) { Header = header, DeadlineUtc = deadline };
+
+    /// <summary>"PUSH · P5 · ROUND 3/15": the round header led by the player's throttle (Cruise when undecided).</summary>
+    public static string WithThrottle(Throttle? t, string header) => $"{Name(t ?? Throttle.Cruise)} · {header}";
+
+    /// <summary>Reading (audio spec §2): the question text while the TV reads it out; the answers open with the Question phase.</summary>
+    /// <param name="header">The throttle-led header, as on the answer view (<see cref="WithThrottle"/>).</param>
+    public static WaitView Listening(string text, string header, DateTimeOffset? deadline) =>
+        new(text) { Header = header, DeadlineUtc = deadline };
+
+    /// <param name="answers">The four answers in shuffled order; option ids a–d follow it.</param>
+    /// <param name="header">The throttle-led header (<see cref="WithThrottle"/>).</param>
+    public static ChoiceView Answer(string text, IReadOnlyList<string> answers, string header, DateTimeOffset? deadline) =>
+        new(text, [.. answers.Select((a, i) => new Option(AnswerId(i), a))]) { Header = header, DeadlineUtc = deadline };
+
+    public static WaitView Answered(string header, DateTimeOffset? deadline) =>
+        new(AnsweredMessage) { Header = header, DeadlineUtc = deadline };
+
+    /// <summary>The §3.3 Reveal line for one driver after scoring (Outcome, Throttle, PreviousDistance, Distance, Position).</summary>
+    public static WaitView Result(Driver d, RedlineRules rules, string header, DateTimeOffset? deadline) =>
+        new(ResultMessage(d, rules)) { Header = header, DeadlineUtc = deadline };
+
+    /// <summary>Chequered (§3.1): "You finished P{n} of {total}." with the shared position and the whole field.</summary>
+    public static WaitView Finished(int position, int total, string header, DateTimeOffset? deadline) =>
+        new($"You finished P{position} of {total}.") { Header = header, DeadlineUtc = deadline };
+
+    // ---------------------------------------------------------------- Podium (podium spec §2)
+
+    public const string BuildPressurePrompt = "Shake to build pressure!";
+    public const string PopTheCorkPrompt = "Pop the cork! Shake again to reload";
+
+    /// <summary>Anthem, podium player: shake to charge the bottle; it cannot fire yet.</summary>
+    public static ShakeView BuildPressure(GridTeam team, string header, DateTimeOffset? deadline) =>
+        new(BuildPressurePrompt, TeamColors.Accent(team)) { Header = header, DeadlineUtc = deadline };
+
+    /// <summary>Champagne, podium player: fire, starting from the charge built during the anthem.</summary>
+    public static ShakeView PopTheCork(GridTeam team, double initialCharge, string header, DateTimeOffset? deadline) =>
+        new(PopTheCorkPrompt, TeamColors.Accent(team), CanFire: true, InitialCharge: initialCharge) { Header = header, DeadlineUtc = deadline };
+
+    /// <summary>Anthem and Champagne, everyone off the podium.</summary>
+    public static WaitView WatchPodium(int position, string header, DateTimeOffset? deadline) =>
+        new($"P{position}. Watch the podium!") { Header = header, DeadlineUtc = deadline };
+
+    public static string ResultMessage(Driver d, RedlineRules rules)
+    {
+        var p = d.Position;
+        if (d.Outcome == RoundOutcome.Correct) return $"Correct! +{d.Distance - d.PreviousDistance} · now P{p}";
+        var miss = d.Outcome == RoundOutcome.NoAnswer ? "No answer" : "Wrong answer";
+        // The distance actually lost: a loss is floored at 0, so a car at the start can lose less than the rule says.
+        var lost = d.PreviousDistance - d.Distance;
+        return (d.Throttle, lost > 0) switch
+        {
+            (Throttle.Redline, true) => $"Spun out! −{lost} · pit limiter next round · now P{p}",
+            (Throttle.Redline, false) => $"Spun out! Pit limiter next round · P{p}",
+            (_, true) => $"{miss}. −{lost} · now P{p}",
+            _ => $"{miss}. No change · P{p}",
+        };
+    }
+}
+
+/// <summary>
+/// Everything a player's view depends on. The game rebuilds a view only when this key changes, so the
+/// instance (and the ViewId the server mints for it) stays stable otherwise. Extend it as rounds add state.
+/// </summary>
+/// <remarks>
+/// Driver Select uses <see cref="FreeSeatsVersion"/> and <see cref="Header"/>. The round phases use the player's own
+/// <see cref="Position"/> (shown in the header), <see cref="Throttle"/> (locked in, or forced by the limiter),
+/// <see cref="Answered"/>, <see cref="PitLimiter"/> and, in Reveal, <see cref="Outcome"/>; Chequered uses <see cref="Position"/> too.
+/// The qualifying phases use <see cref="QualiLap"/>, <see cref="Position"/>, <see cref="Answered"/> and <see cref="LapMs"/>
+/// (the pending time once answered in QualifyingQuestion; the committed lap in QualifyingResult). These are default elsewhere.
+/// </remarks>
+internal readonly record struct PlayerViewKey(
+    RacePhase Phase, int Round, string? Code, int FreeSeatsVersion, string? Header,
+    int Position = 0, Throttle? Throttle = null, bool Answered = false, bool PitLimiter = false, RoundOutcome? Outcome = null,
+    int QualiLap = 0, int? LapMs = null);

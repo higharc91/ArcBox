@@ -10,4 +10,10 @@ public static class GameRegistrationExtensions
         s.AddSingleton(new GameRegistration(() => new TGame()));
         return s;
     }
+
+    public static IServiceCollection AddArcGame<TGame>(this IServiceCollection s, Func<IServiceProvider, TGame> factory) where TGame : IGame
+    {
+        s.AddSingleton(sp => new GameRegistration(() => factory(sp)));
+        return s;
+    }
 }

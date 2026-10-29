@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,600;0,700;0,900;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="broadcast.css">
+<link rel="stylesheet" href="hud3d.css">
+<script>window.__needs = { three: true };</script>
+<script type="importmap">{ "imports": { "three": "./node_modules/three/build/three.module.js", "three/addons/": "./node_modules/three/examples/jsm/" } }</script>
+<style>
+  .vs { position: absolute; left: 28px; bottom: 28px; display: flex; align-items: stretch; box-shadow: 0 10px 30px rgba(0,0,0,.4); }
+  .vs > div { padding: 10px 18px; display: flex; flex-direction: column; justify-content: center; }
+  .vs small { font-weight: 700; font-size: 12px; letter-spacing: 2px; opacity: .85; }
+  .vs b { font: italic 900 30px 'Titillium Web'; line-height: 1.05; }
+  .vs .n { font: italic 900 44px 'Titillium Web'; padding: 4px 16px; justify-content: center; }
+  .vs .mid { background: rgba(14,14,20,.9); color: var(--dim); font-weight: 900; font-size: 18px; }
+</style>
+</head>
+<body>
+<div class="label">2026 · <b>DETAIL</b> — lofted bodywork, NACA wing sections, lathed tyres, halo, T-cam, numbers, endplate rain lights</div>
+<div class="row" style="display:block">
+  <div class="tv3d">
+    <canvas id="gl"></canvas>
+    <div class="hud">
+      <div class="topbar" style="display:flex;gap:14px"><div class="brand" style="height:52px">REDLINE</div></div>
+      <div class="vs">
+        <div class="n" style="background:#ff8000;color:#1b1b1d">1</div>
+        <div style="background:rgba(14,14,20,.9)"><small>McLAREN · JO</small><b>NORRIS</b></div>
+        <div class="mid">VS</div>
+        <div style="background:rgba(14,14,20,.9)"><small>RED BULL · SAM</small><b>VERSTAPPEN</b></div>
+        <div class="n" style="background:#1b2550;color:#fff">3</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="module">
+  import { loadCircuit, buildScene } from './cota3d.js';
+  import { loadGrid, accent } from './grid2026.js';
+  await document.fonts.load('italic 900 92px "Titillium Web"');
+  const [circuit, grid] = await Promise.all([loadCircuit(), loadGrid()]);
+  const drivers = [['JO', 'NOR', 3.0, 0], ['SAM', 'VER', -3.0, -6.5]].map(([name, code, lat, nudge]) => {
+    const c = grid.byCode[code];
+    return { name, ...c, code, color: accent(c.team), dist: 0, lat, nudge: -150 + nudge };
+  });
+  buildScene({
+    canvas: gl, width: 1280, height: 720, circuit, drivers,
+    cam: { fov: 26, track: { s: -141, lateral: 6.6, up: 0.9, lookS: -152, lookLateral: 0.2, lookUp: 0.55 }, shadowSize: 60, sunAzimuth: 230, sunElevation: 22 },
+  });
+  window.__ready = true;
+</script>
+</body>
+</html>

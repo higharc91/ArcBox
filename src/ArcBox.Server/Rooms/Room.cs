@@ -65,6 +65,12 @@ public sealed class Room
 
     public DateTimeOffset? BusySince => _session?.BusySince;
 
+    /// <summary>
+    /// Constant-time check of the host token. Safe to call from any thread without the actor: the token is set in the
+    /// constructor and never changes.
+    /// </summary>
+    public bool IsHostToken(string? token) => token is not null && Secrets.Matches(_hostToken, token);
+
     public async Task RunAsync(CancellationToken ct)
     {
         try

@@ -1,0 +1,29 @@
+/* Broadcast HUD composited over the 3D view (07+). Builds on broadcast.css. */
+.tv3d { width: 1280px; height: 720px; border-radius: 14px; overflow: hidden; position: relative; box-shadow: 0 0 0 1px var(--edge), 0 30px 80px rgba(0,0,0,.6); }
+.tv3d canvas { position: absolute; inset: 0; width: 1280px; height: 720px; display: block; }
+.hud { position: absolute; inset: 0; padding: 24px 28px; pointer-events: none; }
+.tv3d::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 75% 70% at 55% 50%, transparent 60%, rgba(0,0,0,.45)); }
+.hud .head { grid-template-columns: auto 1fr auto; }
+.hud .qpanel, .hud .clock, .hud .ans, .mini-tower { background: rgba(14,14,20,.78); backdrop-filter: blur(8px); }
+.hud .q { font-size: 30px; }
+.hud .answers { position: absolute; left: 28px; right: 28px; bottom: 24px; }
+.hud .ans { height: 52px; font-size: 20px; }
+.mini-tower { position: absolute; left: 28px; top: 132px; width: 262px; border: 1px solid var(--edge); }
+.mt { display: grid; grid-template-columns: 30px 5px 1fr auto auto; gap: 8px; align-items: center; height: 40px; padding-right: 8px; border-bottom: 1px solid var(--edge); }
+.mt:last-child { border-bottom: 0; }
+.mt .p { height: 100%; display: grid; place-items: center; font-weight: 900; font-size: 17px; background: rgba(255,255,255,.05); }
+.mt .p.lead { background: #fff; color: #111; }
+.mt i { height: 55%; display: block; }
+.mt .n { font-weight: 700; font-size: 17px; letter-spacing: .5px; }
+.mt .g { font-weight: 600; font-size: 13px; color: var(--dim); }
+.mt .chip { min-width: 64px; font-size: 10px; padding: 2px 6px; }
+.tag3d { position: absolute; transform: translate(-50%, -100%); display: flex; align-items: center; gap: 5px; white-space: nowrap;
+         background: rgba(14,14,20,.88); border: 1px solid rgba(255,255,255,.18); padding: 2px 8px 2px 0; font-weight: 700; font-size: 13px; letter-spacing: .5px; }
+.tag3d::after { content: ''; position: absolute; left: 50%; top: 100%; width: 1px; height: 10px; background: rgba(255,255,255,.6); }
+.tag3d i { width: 4px; align-self: stretch; display: block; }
+.tag3d b { font-weight: 900; color: var(--dim); }
+.pbet3 { background: var(--red); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; }
+.pbet3 b { font: italic 900 24px 'Titillium Web'; letter-spacing: 1px; } .pbet3 span { font-weight: 600; font-size: 13px; text-align: right; line-height: 1.2; }
+.pans { display: flex; flex-direction: column; gap: 8px; padding: 0 16px; }
+.pbtn { display: flex; align-items: center; gap: 14px; height: 64px; background: rgba(255,255,255,.06); border: 1px solid var(--edge); font-weight: 700; font-size: 20px; }
+.pbtn .k { width: 48px; height: 100%; display: grid; place-items: center; font-weight: 900; background: rgba(255,255,255,.08); }

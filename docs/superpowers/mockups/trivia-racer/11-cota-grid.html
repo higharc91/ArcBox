@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,600;0,700;0,900;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="broadcast.css">
+<link rel="stylesheet" href="hud3d.css">
+<script>window.__needs = { three: true };</script>
+<script type="importmap">{ "imports": { "three": "./node_modules/three/build/three.module.js", "three/addons/": "./node_modules/three/examples/jsm/" } }</script>
+<style>
+  .tmap { position: absolute; right: 28px; top: 132px; width: 300px; background: rgba(14,14,20,.78); backdrop-filter: blur(8px); border: 1px solid var(--edge); }
+  .tmap .th { padding: 6px 12px; }
+  .tmap svg { display: block; width: 100%; height: 180px; }
+  .tag3d { font-size: 12px; }
+  .lights { width: 170px; }
+  .lamps { display: flex; gap: 6px; margin-top: 6px; } .lamps i { width: 20px; height: 20px; border-radius: 50%; background: #ff1a1a; box-shadow: 0 0 12px #ff1a1a; display: block; }
+  .lamps i.off { background: #2a1010; box-shadow: none; }
+  .rules { position: absolute; left: 28px; right: 28px; bottom: 24px; height: 52px; display: flex; align-items: center; gap: 12px; padding: 0 18px; background: rgba(14,14,20,.85); border: 1px solid var(--edge); font-weight: 700; font-size: 18px; color: #ddd; }
+  .rules b { font: italic 900 20px 'Titillium Web'; padding: 2px 10px; background: rgba(255,255,255,.12); color: #fff; } .rules b.w { background: #fff; color: #111; } .rules b.r { background: var(--red); }
+  .rules span { color: var(--dim); } .rules .src { margin-left: auto; font-size: 13px; font-weight: 600; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+<div class="label">REALISTIC · <b>GRID AT COTA</b> — Round 1: the field on the grid, lights on the gantry, Turn 1 hill ahead</div>
+<div class="row">
+  <div class="tv3d">
+    <canvas id="gl"></canvas>
+    <div class="hud">
+      <div class="head">
+        <div class="brand">REDLINE</div>
+        <div class="qpanel">
+          <div class="qmeta"><span>Circuit of the Americas · Austin</span><span>15 rounds · race to the flag</span></div>
+          <div class="q">Lights out in a moment…</div>
+        </div>
+        <div class="clock lights"><small>START</small><div class="lamps"><i></i><i></i><i></i><i class="off"></i><i class="off"></i></div></div>
+      </div>
+      <div class="rules"><b>CRUISE</b> +1 / 0 <span>·</span> <b class="w">PUSH</b> +2 / −1 <span>·</span> <b class="r">REDLINE</b> +4 / spin out <span class="src">Questions: Open Trivia DB (CC BY-SA 4.0)</span></div>
+      <div class="mini-tower" id="tower"></div>
+      <div class="tmap"><div class="th"><span>CIRCUIT OF THE AMERICAS</span><span>5.513 KM</span></div><svg id="map"></svg></div>
+      
+      <div id="tags"></div>
+    </div>
+  </div>
+  <div class="phone"><div class="screen">
+    <div class="pstatus"><div class="me"><i style="background:#dc0000"></i>ALEX · LEC 16</div><div class="pos">P3<small>/6</small></div></div>
+    <div class="pq"><small>Round 1 · Grid</small><div>Engines on. Lights out in a moment…</div></div>
+    <div class="hint">You're Charles Leclerc, #16, Ferrari. You start P3. Each round: pick a throttle, then answer. First past the flag wins.</div>
+    <div class="ptimer"></div>
+  </div></div>
+</div>
+<script type="module">
+  import { loadCircuit, buildScene, FINISH } from './cota3d.js';
+  import { loadGrid, accent } from './grid2026.js';
+  await document.fonts.load('italic 900 92px "Titillium Web"');
+  const [circuit, grid] = await Promise.all([loadCircuit(), loadGrid()]);
+  const CAR = { JO: 'NOR', SAM: 'VER', ALEX: 'LEC', RIA: 'ANT', MO: 'ALO', KAI: 'PER' };
+  const drivers = [
+    { name: 'JO', dist: 0, lat: -3.6, nudge: -6 }, { name: 'RIA', dist: 0, lat: 3.6, nudge: -14 },
+    { name: 'ALEX', dist: 0, lat: -3.6, nudge: -22 }, { name: 'KAI', dist: 0, lat: 3.6, nudge: -30 },
+    { name: 'SAM', dist: 0, lat: -3.6, nudge: -38 }, { name: 'MO', dist: 0, lat: 3.6, nudge: -46 },
+  ];
+  drivers.forEach(d => { const c = grid.byCode[CAR[d.name]]; Object.assign(d, c, { code: CAR[d.name], color: accent(c.team) }); });
+  const view = buildScene({
+    canvas: gl, width: 1280, height: 720, circuit, drivers,
+    cam: { fov: 42, azimuth: 236, elevation: 15, dist: 70, aimOffset: [0, 0, 0], shadowSize: 220, sunAzimuth: 250, sunElevation: 26 },
+  });
+  tower.innerHTML = drivers.map((d, i) => `<div class="mt"><span class="p ${i ? '' : 'lead'}">${i + 1}</span><i style="background:${d.color}"></i>
+    <span class="n">${d.code} <small style="font-size:11px;color:var(--dim);font-weight:600">${d.name}</small></span><span class="g">GRID</span><span class="chip LOCKED">READY</span></div>`).join('');
+
+  // track map from the same circuit data
+  const pts = circuit.data.points, xs = pts.map(p => p[0]), zs = pts.map(p => p[1]);
+  const W = 300, H = 180, pad = 14, sc = Math.min((W - 2 * pad) / (Math.max(...xs) - Math.min(...xs)), (H - 2 * pad) / (Math.max(...zs) - Math.min(...zs)));
+  const ox = (W - (Math.max(...xs) - Math.min(...xs)) * sc) / 2, oz = (H - (Math.max(...zs) - Math.min(...zs)) * sc) / 2;
+  const P = ([x, z]) => [ox + (x - Math.min(...xs)) * sc, oz + (z - Math.min(...zs)) * sc];
+  const cum = [0]; for (let i = 1; i <= pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i % pts.length][0] - pts[i - 1][0], pts[i % pts.length][1] - pts[i - 1][1]));
+  const at = s => { s = ((s % cum.at(-1)) + cum.at(-1)) % cum.at(-1); let i = 0; while (cum[i + 1] < s) i++; const k = (s - cum[i]) / (cum[i + 1] - cum[i]); const a = pts[i], b = pts[(i + 1) % pts.length]; return P([a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k]); };
+  const line = pts.map(P).map(p => p.join(',')).join(' ');
+  const sf = at(0);
+  map.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  map.innerHTML = `<polygon points="${line}" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="7" stroke-linejoin="round"/>
+    <polygon points="${line}" fill="none" stroke="#e8e8ee" stroke-width="2.2" stroke-linejoin="round"/>
+    <rect x="${sf[0] - 4}" y="${sf[1] - 4}" width="8" height="8" fill="#fff" stroke="#111"/>` +
+    drivers.slice().reverse().map(d => { const [x, y] = at(view.carS(d.name) / FINISH * FINISH * (cum.at(-1) / (cum.at(-1)))); return `<circle cx="${x}" cy="${y}" r="5.5" fill="${d.color}" stroke="#0b0b10" stroke-width="1.6"/>`; }).join('');
+
+  tags.innerHTML = drivers.map((d, i) => {
+    const s = view.project(d.name, 2.6);
+    if (!s.visible) return '';
+    return `<div class="tag3d" style="left:${s.x}px;top:${s.y}px"><i style="background:${d.color}"></i><b>${i + 1}</b>${d.code} <span style="color:var(--dim);font-weight:600">${d.name}</span></div>`;
+  }).join('');
+  window.__ready = true;
+</script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+import type { Option, WaitView } from "../protocol";
+import type { Badge, HeaderParts, ResultKind, Skin } from "./skin";
+
+export interface Team {
+  id: string;
+  name: string;
+  /** A readable accent for badges and tower bars. */
+  accent: string;
+}
+
+/**
+ * The 11 teams of the 2026 grid. Copied from games/Redline/Redline.Logic/Data/grid2026.json (`teams[].id`, `.name`,
+ * `.livery`): accent = `livery.top`, or `livery.stripe` for a white-bodied car (luma of top > 200), the same rule as
+ * `accent()` in docs/superpowers/mockups/trivia-racer/grid2026.js. Livery colours are approximations, not official values.
+ */
+export const TEAMS: readonly Team[] = [
+  { id: "mclaren", name: "McLaren", accent: "#ff8000" },
+  { id: "ferrari", name: "Ferrari", accent: "#dc0000" },
+  { id: "red-bull", name: "Red Bull", accent: "#1b2550" },
+  { id: "mercedes", name: "Mercedes", accent: "#c3c7cb" },
+  { id: "aston-martin", name: "Aston Martin", accent: "#00594f" },
+  { id: "alpine", name: "Alpine", accent: "#0a5fc2" },
+  { id: "williams", name: "Williams", accent: "#0b2a5b" },
+  { id: "racing-bulls", name: "Racing Bulls", accent: "#e3102f" },
+  { id: "haas", name: "Haas", accent: "#e1061f" },
+  { id: "audi", name: "Audi", accent: "#a7abb0" },
+  { id: "cadillac", name: "Cadillac", accent: "#b9bec4" },
+];
+
+const byName = new Map(TEAMS.map((t) => [t.name.toLowerCase(), t]));
+const byId = new Map(TEAMS.map((t) => [t.id, t]));
+
+/** Team accent from a Driver Select option hint, "{Team} · {Chassis}" (e.g. "McLaren · MCL40"). */
+export function teamColor(hint?: string | null): string | undefined {
+  if (!hint) return undefined;
+  return byName.get(hint.split("·")[0]!.trim().toLowerCase())?.accent;
+}
+
+/** Team accent from a HostView DriverRow.teamId (e.g. "red-bull"). */
+export function teamColorById(teamId?: string | null): string | undefined {
+  return teamId ? byId.get(teamId)?.accent : undefined;
+}
+
+/** Dark or light text, whichever reads on the given background. */
+export function inkFor(hex: string): string {
+  const n = parseInt(hex.replace("#", ""), 16);
+  const luma = 0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255);
+  return luma > 150 ? "#111" : "#fff";
+}
+
+/** A driver option ("#81 Oscar Piastri", hint "McLaren · MCL40") becomes a team-coloured number badge plus the name. */
+export function driverBadge(option: Option): Badge | undefined {
+  const color = teamColor(option.hint);
+  const match = /^#(\d+)\s+(.+)$/.exec(option.label);
+  if (!color || !match) return undefined;
+  return { text: match[1]!, label: match[2]!, color, ink: inkFor(color) };
+}
+
+export const THROTTLES = ["cruise", "push", "redline"] as const;
+
+/** "P5 · ROUND 3/15", optionally prefixed by the throttle ("PUSH · P5 · ROUND 3/15"). */
+export function splitHeader(header: string): HeaderParts | undefined {
+  const parts = header.split("·").map((p) => p.trim());
+  const chip = parts.length === 3 && THROTTLES.includes(parts[0]!.toLowerCase() as (typeof THROTTLES)[number]) ? parts.shift() : undefined;
+  if (parts.length !== 2 || !/^P\d+$/.test(parts[0]!)) return undefined;
+  return { chip, big: parts[0]!, small: parts[1]! };
+}
+
+/** "Science & Nature · Hard. How hard do you push?" → meta "Science & Nature · Hard", text "How hard do you push?". */
+export function splitPrompt(prompt: string): { meta: string; text: string } | undefined {
+  const match = /^(.+ · (?:Easy|Medium|Hard))\.\s+(.+)$/.exec(prompt);
+  return match ? { meta: match[1]!, text: match[2]! } : undefined;
+}
+
+export const LISTEN_NOTE = "Answers open in a moment…";
+
+/**
+ * Reading (audio spec §2): the question is read out on the TV and its text is the wait message. It is the only REDLINE
+ * wait view whose header leads with the throttle ("PUSH · P5 · ROUND 3/15"), as the answer view's does.
+ */
+export function readingNote(view: WaitView): string | undefined {
+  return view.header && splitHeader(view.header)?.chip ? LISTEN_NOTE : undefined;
+}
+
+/**
+ * The Reveal line (PlayerViews.ResultMessage): "Correct! …", "Wrong answer. …", "No answer. …" or "Spun out! …"; and a
+ * qualifying lap's result (PlayerViews.LapResult): "✔ 2.41 s · P3 so far" or "✖ Lap deleted · P14 so far".
+ */
+function resultOf(message: string): ResultKind | null {
+  if (message.startsWith("Correct!") || message.startsWith("✔")) return "correct";
+  if (message.startsWith("✖")) return "wrong";
+  if (message.startsWith("Spun out!")) return "spin";
+  if (message.startsWith("Wrong answer") || message.startsWith("No answer")) return "wrong";
+  return null;
+}
+
+/** The player's round result, for the phone's haptics and sounds; null for every other view, Reading included. */
+export function classifyResult(view: WaitView): ResultKind | null {
+  return readingNote(view) ? null : resultOf(view.message);
+}
+
+export const redlineSkin: Skin = {
+  id: "redline",
+  optionBadge: driverBadge,
+  buttonClass: (o) => ((THROTTLES as readonly string[]).includes(o.id) ? `throttle throttle-${o.id}` : undefined),
+  header: splitHeader,
+  prompt: splitPrompt,
+  waitTone: (message) => {
+    const result = resultOf(message);
+    return result ? (result === "correct" ? "good" : "bad") : undefined;
+  },
+  waitQuestion: readingNote,
+  classifyResult,
+  // The only REDLINE shake view that cannot fire is the podium phones' during the anthem (podium spec §2).
+  shakeHold: () => "Hold on — anthem playing.",
+};

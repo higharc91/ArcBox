@@ -1,0 +1,9 @@
+{
+  "kind": "textEntry",
+  "prompt": "Your answer",
+  "maxLength": 40,
+  "placeholder": "type here",
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:00:00+00:00",
+  "header": "H"
+}

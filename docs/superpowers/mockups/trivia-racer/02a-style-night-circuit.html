@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Inter:wght@500;700;800&display=swap" rel="stylesheet">
+<script src="kit.js"></script>
+<style>
+  :root {
+    --bg0: #07061a; --bg1: #120d33; --ink: #f1edff; --dim: #8d86b8; --lane: rgba(255,255,255,.04);
+    --pink: #ff2e88; --cyan: #22e4ff; --lime: #b6ff3b; --amber: #ffb02e; --violet: #9b6bff; --coral: #ff6b4a;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: #04030f; color: var(--ink); font-family: Inter, sans-serif; padding: 40px; width: 1760px; }
+  .label { font: 700 15px 'Chakra Petch'; letter-spacing: 3px; color: var(--dim); margin-bottom: 18px; }
+  .label b { color: var(--pink); }
+  .row { display: flex; gap: 40px; align-items: flex-start; }
+
+  .tv { width: 1280px; height: 720px; border-radius: 14px; overflow: hidden; position: relative; padding: 28px 36px 26px;
+        background:
+          radial-gradient(ellipse 80% 60% at 50% 115%, rgba(255,46,136,.35), transparent 70%),
+          radial-gradient(ellipse 60% 50% at 50% -10%, rgba(34,228,255,.18), transparent 70%),
+          linear-gradient(180deg, var(--bg1), var(--bg0));
+        display: flex; flex-direction: column; gap: 16px; box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 30px 80px rgba(0,0,0,.6); }
+  .tv::after { content: ''; position: absolute; inset: 0; pointer-events: none;
+               background: repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 3px); }
+  .top { display: flex; align-items: center; justify-content: space-between; }
+  .logo { font: 700 30px 'Chakra Petch'; letter-spacing: 6px; font-style: italic;
+          background: linear-gradient(90deg, var(--pink), var(--amber)); -webkit-background-clip: text; color: transparent;
+          filter: drop-shadow(0 0 12px rgba(255,46,136,.5)); }
+  .meta { font: 700 16px 'Chakra Petch'; letter-spacing: 3px; color: var(--dim); }
+  .meta span { color: var(--ink); }
+  .timer { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; font: 700 26px 'Chakra Petch';
+           background: conic-gradient(var(--cyan) 0 60%, rgba(255,255,255,.08) 60% 100%); position: relative; }
+  .timer::before { content: ''; position: absolute; inset: 5px; border-radius: 50%; background: var(--bg1); }
+  .timer b { position: relative; text-shadow: 0 0 10px var(--cyan); }
+
+  .qblock { text-align: center; }
+  .cat { display: inline-flex; gap: 10px; align-items: center; font: 700 14px 'Chakra Petch'; letter-spacing: 3px; text-transform: uppercase;
+         border: 1px solid rgba(34,228,255,.45); color: var(--cyan); padding: 5px 14px; border-radius: 99px; box-shadow: 0 0 18px rgba(34,228,255,.18) inset; }
+  .pips i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; background: var(--cyan); margin-left: 3px; box-shadow: 0 0 6px var(--cyan); }
+  .q { font: 800 38px Inter; letter-spacing: -.5px; margin-top: 12px; }
+
+  .track { flex: 1; display: flex; flex-direction: column; gap: 7px; }
+  .lane { flex: 1; display: grid; grid-template-columns: 92px 1fr; gap: 12px; align-items: center; }
+  .tag { font: 700 17px 'Chakra Petch'; letter-spacing: 1px; display: flex; gap: 8px; align-items: center; justify-content: flex-end; }
+  .tag small { font-size: 12px; color: var(--dim); }
+  .strip { height: 100%; position: relative; border-radius: 6px; background: var(--lane);
+           background-image: linear-gradient(90deg, transparent calc(100% - 26px), rgba(255,255,255,.06) 0),
+             repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0 1px, transparent 1px 5%); }
+  .strip::after { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 22px; border-radius: 0 6px 6px 0;
+                  background: repeating-conic-gradient(#fff 0 25%, #1a1440 0 50%) 0 0 / 11px 11px; opacity: .85; }
+  .trail { position: absolute; left: 0; top: 50%; height: 3px; transform: translateY(-50%); border-radius: 2px; }
+  .car { position: absolute; top: 50%; transform: translate(-100%, -50%); width: 66px; height: 29px; }
+  .car-svg { width: 100%; height: 100%; display: block; }
+  .thr { position: absolute; top: 50%; transform: translateY(-50%); font: 700 12px 'Chakra Petch'; letter-spacing: 2px; padding: 3px 9px; border-radius: 4px; }
+  .thr.CRUISE { color: var(--dim); border: 1px solid rgba(255,255,255,.18); }
+  .thr.PUSH { color: var(--cyan); border: 1px solid var(--cyan); box-shadow: 0 0 10px rgba(34,228,255,.35); }
+  .thr.REDLINE { color: #fff; background: var(--pink); box-shadow: 0 0 16px var(--pink); }
+
+  .answers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .ans { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 10px; font: 700 21px Inter;
+         background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); }
+  .ans .k { width: 34px; height: 34px; border-radius: 8px; display: grid; place-items: center; font: 700 17px 'Chakra Petch'; color: #07061a; }
+
+  .phone { width: 340px; height: 720px; border-radius: 44px; padding: 14px; background: #1b1838; box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 30px 80px rgba(0,0,0,.6); }
+  .screen { height: 100%; border-radius: 32px; overflow: hidden; padding: 46px 20px 22px; display: flex; flex-direction: column; gap: 14px;
+            background: radial-gradient(ellipse 120% 50% at 50% 0%, rgba(255,46,136,.35), transparent 70%), var(--bg0); }
+  .pbar { display: flex; justify-content: space-between; align-items: center; font: 700 13px 'Chakra Petch'; letter-spacing: 2px; color: var(--dim); }
+  .mine { display: flex; align-items: center; gap: 10px; }
+  .mine .car { position: static; transform: none; width: 48px; height: 21px; }
+  .bet { text-align: center; padding: 12px; border-radius: 14px; background: linear-gradient(90deg, #ff2e88, #ff6b4a);
+         font: 700 22px 'Chakra Petch'; letter-spacing: 4px; box-shadow: 0 0 30px rgba(255,46,136,.5); }
+  .bet small { display: block; font: 600 12px Inter; letter-spacing: 0; opacity: .9; margin-top: 2px; }
+  .pq { font: 800 21px Inter; line-height: 1.25; margin: 4px 2px; }
+  .pbtn { display: flex; align-items: center; gap: 12px; padding: 0 14px; height: 66px; border-radius: 14px; font: 700 19px Inter;
+          background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); }
+  .pbtn .k { width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; font: 700 16px 'Chakra Petch'; color: #07061a; }
+  .ptime { margin-top: auto; height: 6px; border-radius: 3px; background: rgba(255,255,255,.08); overflow: hidden; }
+  .ptime i { display: block; height: 100%; width: 60%; background: var(--cyan); box-shadow: 0 0 10px var(--cyan); }
+</style>
+</head>
+<body>
+<div class="label">STYLE A · <b>NIGHT CIRCUIT</b> — neon synthwave, glow trails, arcade energy</div>
+<div class="row">
+  <div class="tv">
+    <div class="top">
+      <div class="meta">LAP <span>2/3</span> · Q<span>7</span></div>
+      <div class="logo">REDLINE</div>
+      <div class="timer"><b>9</b></div>
+    </div>
+    <div class="qblock">
+      <div class="cat">Science &amp; Nature <span class="pips"><i></i><i></i><i></i></span></div>
+      <div class="q">Which planet has the most known moons?</div>
+    </div>
+    <div class="track" id="track"></div>
+    <div class="answers" id="answers"></div>
+  </div>
+
+  <div class="phone"><div class="screen">
+    <div class="pbar"><div class="mine" id="mine"></div><span>P6 · 9s</span></div>
+    <div class="bet">REDLINE<small>+4 if right · spin out if wrong</small></div>
+    <div class="pq">Which planet has the most known moons?</div>
+    <div id="pans" style="display:flex;flex-direction:column;gap:10px"></div>
+    <div class="ptime"><i></i></div>
+  </div></div>
+</div>
+<script>
+  const colors = ['var(--pink)','var(--cyan)','var(--lime)','var(--amber)','var(--violet)','var(--coral)'];
+  const hex = ['#ff2e88','#22e4ff','#b6ff3b','#ffb02e','#9b6bff','#ff6b4a'];
+  const keys = [['A','#ff2e88'],['B','#22e4ff'],['C','#b6ff3b'],['D','#ffb02e']];
+  const r = ranks();
+  track.innerHTML = RACE.drivers.map((d, i) => {
+    const x = 4 + d.pos / RACE.finish * 88;
+    return `<div class="lane">
+      <div class="tag"><small>P${r[d.name]}</small><span style="color:${hex[i]}">${d.name}</span></div>
+      <div class="strip">
+        <div class="trail" style="width:${x - 3}%;background:linear-gradient(90deg,transparent,${hex[i]});box-shadow:0 0 10px ${hex[i]}"></div>
+        <div class="car" style="left:${x}%;filter:drop-shadow(0 0 8px ${hex[i]})">${carSvg(hex[i], {tyre:'#0b0820'})}</div>
+        <div class="thr ${d.throttle}" style="left:calc(${x}% + 12px)">${d.throttle}</div>
+      </div></div>`;
+  }).join('');
+  answers.innerHTML = RACE.answers.map((a, i) => `<div class="ans"><span class="k" style="background:${keys[i][1]};box-shadow:0 0 12px ${keys[i][1]}">${keys[i][0]}</span>${a}</div>`).join('');
+  pans.innerHTML = RACE.answers.map((a, i) => `<div class="pbtn"><span class="k" style="background:${keys[i][1]}">${keys[i][0]}</span>${a}</div>`).join('');
+  mine.innerHTML = `<div class="car" style="filter:drop-shadow(0 0 6px #9b6bff)">${carSvg('#9b6bff',{tyre:'#0b0820'})}</div><span style="color:#9b6bff">MO</span>`;
+</script>
+</body>
+</html>

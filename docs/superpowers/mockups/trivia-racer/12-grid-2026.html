@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,600;0,700;0,900;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="broadcast.css">
+<link rel="stylesheet" href="hud3d.css">
+<script>window.__needs = { three: true };</script>
+<script type="importmap">{ "imports": { "three": "./node_modules/three/build/three.module.js", "three/addons/": "./node_modules/three/examples/jsm/" } }</script>
+<style>
+  .title { position: absolute; left: 28px; top: 24px; display: flex; align-items: stretch; }
+  .title .brand { height: 56px; }
+  .title .sub { background: rgba(14,14,20,.82); padding: 0 18px; display: flex; flex-direction: column; justify-content: center; }
+  .title .sub b { font: italic 900 24px 'Titillium Web'; letter-spacing: .5px; } .title .sub small { color: var(--dim); font-weight: 700; letter-spacing: 2px; font-size: 12px; }
+  .ttag { position: absolute; transform: translate(-50%, -100%); background: rgba(14,14,20,.9); border-left: 4px solid; padding: 3px 9px 4px; white-space: nowrap; }
+  .ttag b { display: block; font-weight: 900; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
+  .ttag span { font-weight: 700; font-size: 12px; color: #cfd2da; } .ttag span i { font-style: italic; font-weight: 900; color: #fff; margin-right: 3px; }
+  .ttag::after { content: ''; position: absolute; left: 50%; top: 100%; width: 1px; height: 12px; background: rgba(255,255,255,.6); }
+  .credit { position: absolute; right: 28px; bottom: 20px; font-size: 11px; color: rgba(255,255,255,.75); font-weight: 600; letter-spacing: .5px; text-shadow: 0 1px 2px #000; }
+</style>
+</head>
+<body>
+<div class="label">2026 · <b>THE GRID</b> — all 11 teams in 2026-regulation cars, liveries and race numbers; players pick their driver</div>
+<div class="row" style="display:block">
+  <div class="tv3d">
+    <canvas id="gl"></canvas>
+    <div class="hud">
+      <div class="title"><div class="brand">REDLINE</div><div class="sub"><small>CIRCUIT OF THE AMERICAS · PIT STRAIGHT</small><b>The 2026 grid</b></div></div>
+      <div id="tags"></div>
+      <div class="credit">Drivers &amp; numbers: F1DB (CC BY 4.0) · liveries approximated, no logos</div>
+    </div>
+  </div>
+</div>
+<script type="module">
+  import { loadCircuit, buildScene } from './cota3d.js';
+  import { loadGrid, accent } from './grid2026.js';
+  await document.fonts.load('italic 900 92px "Titillium Web"');
+  const [circuit, grid] = await Promise.all([loadCircuit(), loadGrid()]);
+  const order = ['mclaren', 'red-bull', 'ferrari', 'mercedes', 'aston-martin', 'williams', 'alpine', 'racing-bulls', 'haas', 'audi', 'cadillac'];
+  const teams = order.map(id => grid.teams.find(t => t.id === id));
+  // two rows across the track, grid-style: 6 in front, 5 staggered behind
+  const slots = [[-6.6, 0], [-3.95, 0], [-1.32, 0], [1.32, 0], [3.95, 0], [6.6, 0], [-5.3, -12], [-2.65, -12], [0, -12], [2.65, -12], [5.3, -12]];
+  const drivers = teams.map((t, i) => ({ name: t.id, team: t, driver: t.drivers[0], color: accent(t), dist: 0, lat: slots[i][0], nudge: -40 + slots[i][1] }));
+  const view = buildScene({
+    canvas: gl, width: 1280, height: 720, circuit, drivers,
+    cam: { fov: 36, track: { s: -20, lateral: -10, up: 10.5, lookS: -47, lookLateral: 0, lookUp: 0 }, shadowSize: 120, sunAzimuth: 150, sunElevation: 42 },
+  });
+  tags.innerHTML = drivers.map(d => {
+    const s = view.project(d.name, 1.35);
+    if (!s.visible) return '';
+    return `<div class="ttag" style="left:${s.x}px;top:${s.y}px;border-color:${d.color}"><b>${d.team.name}</b><span>${d.team.drivers.map(x => `<i>${x.number}</i>${x.code}`).join(' · ')}</span></div>`;
+  }).join('');
+  window.__ready = true;
+</script>
+</body>
+</html>

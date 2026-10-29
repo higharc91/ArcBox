@@ -1,0 +1,8 @@
+{
+  "name": "redline-mockups",
+  "private": true,
+  "description": "Renders the REDLINE design mockups. npm install, then node shoot.js.",
+  "dependencies": {
+    "three": "0.170.0"
+  }
+}

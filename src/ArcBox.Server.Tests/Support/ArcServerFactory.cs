@@ -1,5 +1,7 @@
 using ArcBox.Server.Games;
 using ArcBox.Server.Rooms;
+using ArcBox.Server.Speech;
+using ArcBox.Server.Tests.Speech.Support;
 using ArcBox.Server.Tests.TestGames;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -10,12 +12,17 @@ using Microsoft.Extensions.Time.Testing;
 
 namespace ArcBox.Server.Tests.Support;
 
+/// <summary>The real server in memory. Room time runs on <see cref="Time"/>; the global clock is left alone.</summary>
 public sealed class ArcServerFactory : WebApplicationFactory<Program>
 {
     public FakeTimeProvider Time { get; } = new(new DateTimeOffset(2026, 1, 1, 0, 0, 0, TimeSpan.Zero));
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
+        // AddRedline reads this while Program registers services, so it must be a setting, not a test service.
+        builder.UseSetting("Redline:OpenTdb:Enabled", "false");
+        // The factory runs as Development, whose Web:Root is web/play/dist when it has been built; tests serve wwwroot.
+        builder.UseSetting("Web:Root", "");
         builder.ConfigureTestServices(services =>
         {
             // Only the rooms' clock is faked. The unkeyed TimeProvider drives SignalR's
@@ -23,6 +30,11 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
             services.RemoveAllKeyed<TimeProvider>(RoomManager.ClockKey);
             services.AddKeyedSingleton<TimeProvider>(RoomManager.ClockKey, Time);
             services.AddArcGame<ThrowerGame>();
+            // Never reach Google from a test, even on a machine whose user-secrets hold a real key. Speech tests
+            // opt back in with their own key, cache directory and fake handler (registered after these).
+            services.PostConfigure<SpeechOptions>(o => o.Google.ApiKey = null);
+            services.AddHttpClient<ISpeechSynthesizer, GoogleTtsClient>()
+                .ConfigurePrimaryHttpMessageHandler(() => new NoNetworkHandler());
         });
     }
 }
