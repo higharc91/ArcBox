@@ -6,6 +6,7 @@ using ArcBox.Server.Games.Redline;
 using ArcBox.Server.Hubs;
 using ArcBox.Server.Rooms;
 using ArcBox.Server.Speech;
+using ArcBox.Server.Storage;
 using Counter.Logic;
 using Microsoft.AspNetCore.SignalR;
 
@@ -17,6 +18,7 @@ builder.Services.AddSingleton<RoomManager>();
 builder.Services.AddSingleton<IClientSender, HubClientSender>();
 builder.Services.AddSingleton<IGameRegistry, GameRegistry>();
 builder.Services.AddArcGame<CounterGame>();
+builder.Services.AddStorage(builder.Configuration);
 builder.Services.AddSpeech(builder.Configuration);
 builder.Services.AddRedline(builder.Configuration);
 builder.Services.AddHostedService<RoomSweeper>();
@@ -36,7 +38,7 @@ var app = builder.Build();
 app.UsePhoneApp();
 app.MapHub<ArcHub>("/hub", o => o.AllowStatefulReconnects = true);
 app.MapSpeech();
-app.MapGet("/healthz", () => "ok");
+app.MapHealthEndpoint();
 
 app.Run();
 

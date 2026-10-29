@@ -15,6 +15,16 @@ namespace ArcBox.Server.Tests.Support;
 /// <summary>The real server in memory. Room time runs on <see cref="Time"/>; the global clock is left alone.</summary>
 public sealed class ArcServerFactory : WebApplicationFactory<Program>
 {
+    private readonly string? _databaseFile;
+
+    /// <summary>A server on a private in-memory database that lives as long as the factory.</summary>
+    public ArcServerFactory()
+    {
+    }
+
+    /// <summary>A server on <paramref name="databaseFile"/>, so a second factory on the same file is a restart.</summary>
+    public ArcServerFactory(string databaseFile) => _databaseFile = databaseFile;
+
     public FakeTimeProvider Time { get; } = new(new DateTimeOffset(2026, 1, 1, 0, 0, 0, TimeSpan.Zero));
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -23,6 +33,10 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
         builder.UseSetting("Redline:OpenTdb:Enabled", "false");
         // The factory runs as Development, whose Web:Root is web/play/dist when it has been built; tests serve wwwroot.
         builder.UseSetting("Web:Root", "");
+        if (_databaseFile is null)
+            builder.UseSetting("Storage:ConnectionString", $"Data Source=file:{Guid.NewGuid():N}?mode=memory&cache=shared");
+        else
+            builder.UseSetting("Storage:Path", _databaseFile);
         builder.ConfigureTestServices(services =>
         {
             // Only the rooms' clock is faked. The unkeyed TimeProvider drives SignalR's
