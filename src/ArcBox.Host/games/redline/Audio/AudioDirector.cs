@@ -100,12 +100,15 @@ public partial class AudioDirector : Node
             Play(cue);
         }
 
-        // The commentator first, so a question read at the same moment cuts straight in over a round intro.
+        // The commentator first, so a question read at the same moment cuts straight in over a round intro. Qualifying's
+        // opener is the exception (spec §6): lap 1's question waits for it, and lap 1's Reading is longer to make room
+        // (RedlineRules.QualifyingIntro).
         if (_narrator is { } narrator)
         {
             foreach (var line in Commentary.Lines(view, previous, _grid))
             {
-                narrator.Say(line.Text, RedlineVoices.Announcer, NarrationPriority.Commentary);
+                var opener = line.Kind == CommentaryKind.Intro && QualifyingText.IsQualifying(view.Phase);
+                narrator.Say(line.Text, RedlineVoices.Announcer, NarrationPriority.Commentary, opener);
             }
             if (AudioCues.ReadsQuestion(view, previous))
             {

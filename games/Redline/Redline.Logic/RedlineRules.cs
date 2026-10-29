@@ -90,5 +90,20 @@ public sealed record RedlineRules
     /// <summary>Qualifying spec §2: how long each lap's result is shown before the next lap or the Grid.</summary>
     public TimeSpan QualifyingResult { get; init; } = TimeSpan.FromSeconds(5);
 
+    /// <summary>
+    /// Qualifying spec §6: room for the commentator's session opener ("Qualifying! Three questions, fastest correct answers
+    /// take pole.") before lap 1's question is read out. Lap 1's QualifyingReading lasts this much longer than its
+    /// <see cref="ReadingTime"/>, so the opener is heard in full and the read-out still ends before the answers open. Only
+    /// with <see cref="ReadQuestions"/> on; without a Reading phase the opener is said as lap 1's question opens.
+    /// </summary>
+    public TimeSpan QualifyingIntro { get; init; } = TimeSpan.FromSeconds(3.5);
+
+    /// <summary>
+    /// How long qualifying lap <paramref name="lap"/>'s QualifyingReading lasts: <see cref="ReadingTime"/> of its question,
+    /// plus <see cref="QualifyingIntro"/> on lap 1 (qualifying spec §6).
+    /// </summary>
+    public TimeSpan QualifyingReadingTime(string text, int lap) =>
+        ReadingTime(text) + (lap == 1 ? QualifyingIntro : TimeSpan.Zero);
+
     public AiRules Ai { get; init; } = new();
 }

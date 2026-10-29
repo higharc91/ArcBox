@@ -287,7 +287,7 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         }
 
         Phase = RacePhase.QualifyingReading;
-        _ctx!.SetTimer(PhaseTimer, Rules.ReadingTime(CurrentLap.Text));
+        _ctx!.SetTimer(PhaseTimer, Rules.QualifyingReadingTime(CurrentLap.Text, _qualiLap));
     }
 
     /// <summary>

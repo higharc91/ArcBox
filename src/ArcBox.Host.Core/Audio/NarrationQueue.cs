@@ -11,12 +11,17 @@ public enum NarrationPriority
 }
 
 /// <summary>One line to speak, queued at <paramref name="QueuedAt"/> seconds on the narrator's clock.</summary>
-public sealed record Narration(string Text, string Theme, NarrationPriority Priority, double QueuedAt);
+/// <param name="Opener">
+/// A commentary line that opens a session ahead of its first question (REDLINE's "Qualifying! …"): a question queued
+/// while it plays or waits goes behind it instead of cutting it off. The game leaves time for it.
+/// </param>
+public sealed record Narration(string Text, string Theme, NarrationPriority Priority, double QueuedAt, bool Opener = false);
 
 /// <summary>
 /// The narrator's one-voice queue (audio spec §3.3): one line at a time; a question preempts commentary (and an older
 /// question) and goes ahead of everything waiting; commentary that has waited more than <see cref="StaleSeconds"/>
 /// is dropped instead of being said late. Never talks over the question: commentary queued while it plays just waits.
+/// The one exception: a question never cuts off or jumps an <see cref="Narration.Opener"/>; it waits right behind it.
 /// Single-threaded (the narrator calls it on the main thread); times are seconds on any monotonic clock.
 /// </summary>
 public sealed class NarrationQueue
@@ -40,10 +45,11 @@ public sealed class NarrationQueue
             _pending.Add(line);
             return false;
         }
-        // Only the newest question matters; it goes ahead of any commentary still waiting.
+        // Only the newest question matters; it goes ahead of any commentary still waiting, except an opener: then it
+        // waits right behind the opener, and one that is playing is not cut off.
         _pending.RemoveAll(p => p.Priority == NarrationPriority.Question);
-        _pending.Insert(0, line);
-        return Current is not null;
+        _pending.Insert(_pending.FindLastIndex(p => p.Opener) + 1, line);
+        return Current is { Opener: false };
     }
 
     /// <summary>

@@ -21,7 +21,7 @@ Driver Select → **QualifyingReading → QualifyingQuestion → QualifyingResul
 
 | Phase | Duration | Ends early |
 |---|---|---|
-| `QualifyingReading` | `RedlineRules.ReadingTime(text)` (2.5–10 s); skipped when `ReadQuestions` is off | no |
+| `QualifyingReading` | `RedlineRules.ReadingTime(text)` (2.5–10 s), plus `QualifyingIntro` (3.5 s) on lap 1 for the opener (§6); skipped when `ReadQuestions` is off | no |
 | `QualifyingQuestion` | `RedlineRules.QualifyingAnswer` = 10 s | when every connected player has answered |
 | `QualifyingResult` | `RedlineRules.QualifyingResult` = 5 s | no |
 
@@ -116,7 +116,8 @@ public sealed record QualifyingRow(string Code, int Position, int PositionChange
 - **Audio:**
   - Questions via `redline.questions`.
   - Commentary via `redline.announcer`, with names through `Commentary.SpokenName`:
-    - session start: "Qualifying! Three questions, fastest correct answers take pole."
+    - session start: "Qualifying! Three questions, fastest correct answers take pole." Said first: lap 1's question waits
+      behind it rather than cutting it off (with `ReadQuestions` off it is said as lap 1's question opens).
     - purple lap: "{Name} goes purple!"
     - leader change: "Provisional pole for {Name}."
     - end: "Pole position for {Name}, {total} seconds in total!"

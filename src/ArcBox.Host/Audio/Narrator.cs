@@ -118,14 +118,18 @@ public partial class Narrator : Node
         Report();
     }
 
-    /// <summary>Queues <paramref name="text"/> in voice theme <paramref name="theme"/> (e.g. <c>redline.questions</c>).</summary>
-    public void Say(string text, string theme, NarrationPriority priority)
+    /// <summary>
+    /// Queues <paramref name="text"/> in voice theme <paramref name="theme"/> (e.g. <c>redline.questions</c>). An
+    /// <paramref name="opener"/> is a commentary line that a question waits behind instead of cutting off
+    /// (<see cref="Narration.Opener"/>).
+    /// </summary>
+    public void Say(string text, string theme, NarrationPriority priority, bool opener = false)
     {
         if (string.IsNullOrWhiteSpace(text))
         {
             return;
         }
-        if (_queue.Enqueue(new Narration(text.Trim(), theme, priority, Now)))
+        if (_queue.Enqueue(new Narration(text.Trim(), theme, priority, Now, opener)))
         {
             Cut();
         }

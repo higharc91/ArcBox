@@ -26,7 +26,8 @@ public static class HudClock
             RacePhase.DriverSelect => r.DriverSelect.TotalSeconds,
             RacePhase.Grid => r.Grid.TotalSeconds,
             RacePhase.Throttle => r.Throttle.TotalSeconds,
-            RacePhase.Reading or RacePhase.QualifyingReading => MaxReadingSeconds,
+            RacePhase.Reading => MaxReadingSeconds,
+            RacePhase.QualifyingReading => MaxReadingSeconds + r.QualifyingIntro.TotalSeconds,   // lap 1 has room for the opener
             RacePhase.QualifyingQuestion => r.QualifyingAnswer.TotalSeconds,
             RacePhase.QualifyingResult => r.QualifyingResult.TotalSeconds,
             RacePhase.Question => r.Question.TotalSeconds,
@@ -37,13 +38,21 @@ public static class HudClock
         };
     }
 
-    /// <summary>The length of <paramref name="view"/>'s phase; Reading (and QualifyingReading) is <see cref="RedlineRules.ReadingTime"/> of its question.</summary>
+    /// <summary>
+    /// The length of <paramref name="view"/>'s phase. Reading is <see cref="RedlineRules.ReadingTime"/> of its question;
+    /// QualifyingReading is <see cref="RedlineRules.QualifyingReadingTime"/>, with room for the opener on lap 1.
+    /// </summary>
     public static double PhaseSeconds(RedlineHostView view, RedlineRules? rules = null)
     {
         ArgumentNullException.ThrowIfNull(view);
-        return view is { Phase: RacePhase.Reading or RacePhase.QualifyingReading, Question.Text: { Length: > 0 } text }
-            ? (rules ?? Defaults).ReadingTime(text).TotalSeconds
-            : PhaseSeconds(view.Phase, rules);
+        var r = rules ?? Defaults;
+        return view switch
+        {
+            { Phase: RacePhase.Reading, Question.Text: { Length: > 0 } text } => r.ReadingTime(text).TotalSeconds,
+            { Phase: RacePhase.QualifyingReading, Question.Text: { Length: > 0 } text } =>
+                r.QualifyingReadingTime(text, view.Qualifying?.Lap ?? 1).TotalSeconds,
+            _ => PhaseSeconds(view.Phase, rules),
+        };
     }
 
     /// <summary>Seconds left at <paramref name="now"/>, in [0, <paramref name="phaseSeconds"/>]; null without a deadline.</summary>

@@ -300,7 +300,7 @@ public static class DemoRace
             var standing = before.Select((c, i) => new QualifyingRow(c.Code, i + 1, 0, c.Correct, c.Total, null, false, false)).ToList();
             var asked = standing.Select(r => r with { Answered = !Humans.ContainsKey(r.Code) || !slow.Contains(r.Code) }).ToList();
 
-            var readingSeconds = Math.Ceiling(rules.ReadingTime(QualifyingQuestions[lap - 1].Card.Text!).TotalSeconds * 10) / 10;
+            var readingSeconds = Math.Ceiling(rules.QualifyingReadingTime(QualifyingQuestions[lap - 1].Card.Text!, lap).TotalSeconds * 10) / 10;
             yield return new DemoStep(ViewOf(RacePhase.QualifyingReading, lap, lap - 1, standing), readingSeconds) { Label = "qualifying" };
             yield return new DemoStep(ViewOf(RacePhase.QualifyingQuestion, lap, lap - 1, asked), 4) { Label = "qualifying" };
 

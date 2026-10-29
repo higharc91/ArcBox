@@ -23,7 +23,7 @@
 5. **Qualifying did not change the race balance.** It only sets the grid order, which breaks ties in the standings. With qualifying on, every race number is within Monte-Carlo noise of the same run with `--qualify off` (§4).
    - The largest change in a scenario's human win rate is 2.0 points (1.5σ).
    - Human mean positions move by at most 0.2 places.
-6. **Qualifying takes about 33–37 s** with bots answering at 2.6 s. With every phase running to its timer it takes 45 s plus the read-outs.
+6. **Qualifying takes about 36–41 s** with bots answering at 2.6 s, including the 3.5 s `QualifyingIntro` that lap 1's Reading adds for the commentator's opener. With every phase running to its timer it takes 48.5 s plus the read-outs. The intro changes only these times. Pole odds, grid slots and race numbers are identical with and without it. The tables in §2 and §4 were run before it was added.
 
 ---
 

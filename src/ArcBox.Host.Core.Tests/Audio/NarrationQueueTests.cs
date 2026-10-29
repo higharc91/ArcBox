@@ -101,6 +101,52 @@ public class NarrationQueueTests
         Assert.Null(q.Next(2));
     }
 
+    private static Narration Opener(string text, double at) =>
+        new(text, "redline.announcer", NarrationPriority.Commentary, at, Opener: true);
+
+    [Fact]
+    public void A_question_waits_behind_a_playing_opener()
+    {
+        var q = new NarrationQueue();
+        q.Enqueue(Opener("Qualifying! Three questions, fastest correct answers take pole.", 0));
+        Assert.Equal("Qualifying! Three questions, fastest correct answers take pole.", q.Next(0)?.Text);
+
+        // Lap 1's question arrives at once: it does not cut the opener off, and plays as soon as it ends.
+        Assert.False(q.Enqueue(Question("Lap 1", 0)));
+        Assert.Null(q.Next(1));
+        q.Finish();
+        Assert.Equal("Lap 1", q.Next(3.4)?.Text);
+    }
+
+    [Fact]
+    public void A_question_goes_behind_a_waiting_opener_but_still_cuts_other_commentary()
+    {
+        var q = new NarrationQueue();
+        q.Enqueue(Line("Still talking", 0));
+        q.Next(0);
+        q.Enqueue(Opener("Opener", 0));
+        q.Enqueue(Line("Later", 0));
+
+        Assert.True(q.Enqueue(Question("Lap 1", 1)));       // cuts the ordinary line playing...
+        q.Finish();
+        Assert.Equal("Opener", q.Next(1)?.Text);            // ...but the opener goes first,
+        q.Finish();
+        Assert.Equal("Lap 1", q.Next(4)?.Text);             // then the question, ahead of the other commentary.
+        q.Finish();
+        Assert.Equal("Later", q.Next(4)?.Text);
+    }
+
+    [Fact]
+    public void Without_an_opener_a_question_still_preempts_as_before()
+    {
+        var q = new NarrationQueue();
+        q.Enqueue(Line("Round 1. Geography, easy.", 0));
+        q.Next(0);
+        q.Enqueue(Line("Waiting", 0));
+        Assert.True(q.Enqueue(Question("Q", 0.5)));
+        Assert.Equal(["Q", "Waiting"], q.Pending.Select(p => p.Text));
+    }
+
     [Fact]
     public void Clear_forgets_everything()
     {

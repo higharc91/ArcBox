@@ -130,12 +130,13 @@ public class QualifyingTests
             var text = $"Q{15 + lap}";
             var v = RedlineKit.View(h);
             Assert.Equal((RacePhase.QualifyingReading, 0, lap, 3), (v.Phase, v.Round, v.Qualifying!.Lap, v.Qualifying.Laps));
-            Assert.Equal(h.Now + rules.ReadingTime(text), v.DeadlineUtc);
+            var reading = rules.QualifyingReadingTime(text, lap);
+            Assert.Equal(h.Now + reading, v.DeadlineUtc);
             Assert.Equal(text, v.Question!.Text);
             Assert.Equal(4, v.Question.Answers!.Count);
             Assert.Null(v.CorrectIndex);
 
-            h.Advance(rules.ReadingTime(text));
+            h.Advance(reading);
             v = RedlineKit.View(h);
             Assert.Equal((RacePhase.QualifyingQuestion, lap), (v.Phase, v.Qualifying!.Lap));
             Assert.Equal(h.Now + rules.QualifyingAnswer, v.DeadlineUtc);
@@ -162,6 +163,45 @@ public class QualifyingTests
         var round1 = RedlineKit.View(h);
         Assert.Equal((RacePhase.Throttle, 1), (round1.Phase, round1.Round));
         Assert.Null(round1.Qualifying);
+    }
+
+    [Fact]
+    public void Lap_1_reading_makes_room_for_the_opener_and_laps_2_and_3_do_not()
+    {
+        // Spec §6: the commentator's "Qualifying! …" opener is said before lap 1's question is read out.
+        var rules = new RedlineRules();
+        Assert.Equal(TimeSpan.FromSeconds(3.5), rules.QualifyingIntro);
+        Assert.Equal(rules.ReadingTime("Q16") + rules.QualifyingIntro, rules.QualifyingReadingTime("Q16", 1));
+        Assert.Equal(rules.ReadingTime("Q17"), rules.QualifyingReadingTime("Q17", 2));
+
+        var (h, _) = RedlineKit.Start(reading: true, qualify: true);
+        RedlineKit.SeatAllAndGoToQualifying(h, "NOR", "VER", "LEC", "ANT");
+        for (var lap = 1; lap <= 3; lap++)
+        {
+            var text = $"Q{15 + lap}";
+            var extra = lap == 1 ? rules.QualifyingIntro : TimeSpan.Zero;
+            Assert.Equal((RacePhase.QualifyingReading, lap), (h.Game.Phase, Quali(h).Lap));
+            Assert.Equal(h.Now + rules.ReadingTime(text) + extra, RedlineKit.View(h).DeadlineUtc);
+            Assert.Equal(RedlineKit.View(h).DeadlineUtc, h.PlayerView(0).DeadlineUtc);
+
+            // Still reading just before the deadline; the question opens on it.
+            h.Advance(rules.ReadingTime(text) + extra - TimeSpan.FromMilliseconds(1));
+            Assert.Equal(RacePhase.QualifyingReading, h.Game.Phase);
+            h.Advance(TimeSpan.FromMilliseconds(1));
+            Assert.Equal(RacePhase.QualifyingQuestion, h.Game.Phase);
+            FinishLap(h);
+        }
+
+        // The race's Reading is untouched.
+        h.Advance(rules.Grid);
+        for (var i = 0; i < 4; i++) RedlineKit.Throttle(h, i, "cruise");
+        Assert.Equal(RacePhase.Reading, h.Game.Phase);
+        Assert.Equal(h.Now + rules.ReadingTime(RedlineKit.View(h).Question!.Text!), RedlineKit.View(h).DeadlineUtc);
+
+        // A custom intro length is used as given.
+        var (h2, _) = RedlineKit.Start(reading: true, qualify: true, rules: new RedlineRules { QualifyingIntro = TimeSpan.FromSeconds(5) });
+        RedlineKit.SeatAllAndGoToQualifying(h2, "NOR", "VER", "LEC", "ANT");
+        Assert.Equal(h2.Now + h2.Game.Rules.ReadingTime("Q16") + TimeSpan.FromSeconds(5), RedlineKit.View(h2).DeadlineUtc);
     }
 
     [Fact]
@@ -477,7 +517,7 @@ public class QualifyingTests
         var reading = Assert.IsType<WaitView>(h.PlayerView(0));
         Assert.Equal((Header(1), "Q16\nAnswers in a moment…"), (reading.Header, reading.Message));
         Assert.Equal(RedlineKit.View(h).DeadlineUtc, reading.DeadlineUtc);
-        h.Advance(h.Game.Rules.ReadingTime("Q16"));
+        h.Advance(h.Game.Rules.QualifyingReadingTime("Q16", 1));
 
         // QualifyingQuestion: the question and its four answers.
         var question = Assert.IsType<ChoiceView>(h.PlayerView(0));

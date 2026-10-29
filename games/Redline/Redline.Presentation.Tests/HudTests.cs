@@ -289,8 +289,12 @@ public class QualifyingHudTests
         var rules = new RedlineRules();
         Assert.Equal(rules.QualifyingAnswer.TotalSeconds, HudClock.PhaseSeconds(RacePhase.QualifyingQuestion));
         Assert.Equal(rules.QualifyingResult.TotalSeconds, HudClock.PhaseSeconds(RacePhase.QualifyingResult));
-        Assert.Equal(HudClock.MaxReadingSeconds, HudClock.PhaseSeconds(RacePhase.QualifyingReading));
-        Assert.Equal(rules.ReadingTime(QualifyingViews.Card.Text!).TotalSeconds, HudClock.PhaseSeconds(View(RacePhase.QualifyingReading, 1)));
+        // Without the view, the longest: a 10 s read-out plus lap 1's room for the opener.
+        Assert.Equal(HudClock.MaxReadingSeconds + rules.QualifyingIntro.TotalSeconds, HudClock.PhaseSeconds(RacePhase.QualifyingReading));
+        // Lap 1 reads its question after the opener; laps 2 and 3 only read it.
+        var reading = rules.ReadingTime(QualifyingViews.Card.Text!).TotalSeconds;
+        Assert.Equal(reading + rules.QualifyingIntro.TotalSeconds, HudClock.PhaseSeconds(View(RacePhase.QualifyingReading, 1)));
+        Assert.Equal(reading, HudClock.PhaseSeconds(View(RacePhase.QualifyingReading, 2)));
     }
 }
 
