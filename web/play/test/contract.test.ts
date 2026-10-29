@@ -5,6 +5,7 @@ import {
   isGameResults,
   isLobbyState,
   parseControllerView,
+  type ChoiceInput,
   type ControllerView,
 } from "../src/protocol";
 
@@ -19,9 +20,9 @@ const fixture = (name: string) => {
 const viewKinds = ["wait", "textEntry", "choice", "buttons", "draw", "shake"] as const;
 
 describe("contract fixtures", () => {
-  it("has a fixture for every view kind plus lobby and results", () => {
+  it("has a fixture for every view kind plus lobby, results and the choice input", () => {
     const names = Object.keys(fixtures).map((k) => k.replace("./fixtures/", "").replace(".json", "")).sort();
-    expect(names).toEqual([...viewKinds, "lobby", "results"].sort());
+    expect(names).toEqual([...viewKinds, "choiceInput", "lobby", "results"].sort());
   });
 
   it.each(viewKinds)("parseControllerView accepts %s with every schema field typed", (kind) => {
@@ -80,6 +81,13 @@ describe("contract fixtures", () => {
   it("a field with the wrong type throws", () => {
     expect(() => parseControllerView({ ...fixture("textEntry"), maxLength: "40" })).toThrow(/maxLength/);
     expect(() => parseControllerView({ ...fixture("choice"), options: [{ id: 1, label: "x" }] })).toThrow(/options/);
+  });
+
+  it("choiceInput fixture parses as a ChoiceInput with elapsedMs", () => {
+    const input = fixture("choiceInput") as unknown as ChoiceInput;
+    expect(input.selected).toEqual(["b"]);
+    expect(input.elapsedMs).toBe(2410.5);
+    expect(Object.keys(input).sort()).toEqual(["elapsedMs", "selected"]);
   });
 
   it("lobby fixture is a LobbyState", () => {

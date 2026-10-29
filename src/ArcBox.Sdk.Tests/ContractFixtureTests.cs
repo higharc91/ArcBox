@@ -29,6 +29,8 @@ public class ContractFixtureTests
         ])),
         ["draw"] = View(new DrawView("Draw a cat", ["#111111", "#e10600"])),
         ["shake"] = View(new ShakeView("Pop the cork! Shake again to reload", "#ff8000", CanFire: true, InitialCharge: 0.35)),
+        // Phone -> server (the others are server -> phone): the reply to a ChoiceView, with the phone-measured time to answer.
+        ["choiceInput"] = new ChoiceInput(["b"], 2410.5),
         ["lobby"] = new LobbyState(
             "BCDF",
             [new LobbyPlayer(new PlayerId("p1"), "ALEX", IsVip: true, Connected: true), new LobbyPlayer(new PlayerId("p2"), "MO", IsVip: false, Connected: false)],
@@ -66,6 +68,22 @@ public class ContractFixtureTests
         var expected = JsonNode.Parse(File.ReadAllText(path));
         Assert.True(JsonNode.DeepEquals(expected, actual),
             $"Fixture {name}.json is out of date.\nExpected: {expected?.ToJsonString()}\nActual:   {actual.ToJsonString()}\nRun with ARCBOX_WRITE_FIXTURES=1 to regenerate.");
+    }
+
+    [Fact]
+    public void ChoiceInput_round_trips_elapsedMs_and_reads_old_payloads()
+    {
+        var fixture = JsonNode.Parse(File.ReadAllText(Path.Combine(FixtureDir(), "choiceInput.json")))!;
+        Assert.True(JsonNode.DeepEquals(JsonNode.Parse("""{"selected":["b"],"elapsedMs":2410.5}"""), fixture));
+
+        var read = new PlayerInput(JsonSerializer.SerializeToElement(fixture)).Read<ChoiceInput>();
+        Assert.Equal(["b"], read.Selected);
+        Assert.Equal(2410.5, read.ElapsedMs);
+
+        // Older phones omit elapsedMs.
+        var old = new PlayerInput(JsonDocument.Parse("""{"selected":["a"]}""").RootElement).Read<ChoiceInput>();
+        Assert.Equal(["a"], old.Selected);
+        Assert.Null(old.ElapsedMs);
     }
 
     private static string FixtureDir()

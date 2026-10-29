@@ -111,7 +111,8 @@ export const ClientMethods = {
 
 /** Input payloads (PlayerInput.cs). Stroke points are a flat [x0, y0, x1, y1, …] list normalised to 0..1. */
 export interface ButtonsInput { pressed: string }
-export interface ChoiceInput { selected: string[] }
+/** `elapsedMs` is the phone-measured time from the options being painted to the tap; absent from older phones, and untrusted. */
+export interface ChoiceInput { selected: string[]; elapsedMs?: number }
 export interface TextEntryInput { text: string }
 export interface Stroke { color: string; width: number; points: number[] }
 export interface DrawInput { strokes: Stroke[] }

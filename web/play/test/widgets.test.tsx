@@ -1,5 +1,5 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
-import { cleanup, fireEvent, render, screen } from "@testing-library/preact";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { act, cleanup, fireEvent, render, screen } from "@testing-library/preact";
 import type { ButtonsView, ChoiceView, ControllerView, DrawView, TextEntryView } from "../src/protocol";
 import { Buttons } from "../src/widgets/Buttons";
 import { Choice } from "../src/widgets/Choice";
@@ -63,7 +63,7 @@ describe("Choice", () => {
     fireEvent.click(screen.getByRole("button", { name: /Bravo/ }));
     fireEvent.click(screen.getByRole("button", { name: /Charlie/ }));
     expect(send).toHaveBeenCalledTimes(1);
-    expect(send).toHaveBeenCalledWith({ selected: ["b"] });
+    expect(send).toHaveBeenCalledWith(expect.objectContaining({ selected: ["b"] }));
   });
 
   it("Choice multiple respects maxSelections and sends on Lock in", () => {
@@ -81,7 +81,7 @@ describe("Choice", () => {
     fireEvent.click(lock());
     fireEvent.click(lock());
     expect(send).toHaveBeenCalledTimes(1);
-    expect(send).toHaveBeenCalledWith({ selected: ["b", "c"] });
+    expect(send).toHaveBeenCalledWith(expect.objectContaining({ selected: ["b", "c"] }));
   });
 
   it("Option hint renders as second line", () => {
@@ -90,6 +90,124 @@ describe("Choice", () => {
     const lines = option.querySelectorAll(".opt-label, .opt-hint");
     expect([...lines].map((l) => l.textContent)).toEqual(["#81 Oscar Piastri", "McLaren · MCL40"]);
     expect(screen.getByRole("button", { name: /No hint/ }).querySelector(".opt-hint")).toBeNull();
+  });
+});
+
+describe("Choice stopwatch", () => {
+  // Fake rAF: frames run only when the test steps them, with the clock (performance.now) set by the test.
+  let now = 0;
+  let nextId = 1;
+  let frames = new Map<number, FrameRequestCallback>();
+  const stepFrame = (t: number) => {
+    now = t;
+    const due = [...frames.entries()];
+    frames = new Map();
+    act(() => { for (const [, cb] of due) cb(t); });
+  };
+  const setVisibility = (state: "visible" | "hidden") => {
+    Object.defineProperty(document, "visibilityState", { configurable: true, get: () => state });
+  };
+  const sent = (send: ReturnType<typeof vi.fn>) => (send.mock.calls.at(-1)![0] as { selected: string[]; elapsedMs?: number });
+
+  beforeEach(() => {
+    now = 0; nextId = 1; frames = new Map();
+    vi.spyOn(performance, "now").mockImplementation(() => now);
+    vi.stubGlobal("requestAnimationFrame", (cb: FrameRequestCallback) => { const id = nextId++; frames.set(id, cb); return id; });
+    vi.stubGlobal("cancelAnimationFrame", (id: number) => { frames.delete(id); });
+    setVisibility("visible");
+  });
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.unstubAllGlobals();
+    // @ts-expect-error remove the per-test override so the real getter is back
+    delete document.visibilityState;
+  });
+
+  it("Choice starts the clock on the second animation frame after mount", () => {
+    const send = vi.fn();
+    render(<Choice view={choice()} send={send} />);
+    stepFrame(16);
+    stepFrame(33);
+    now = 2433;
+    fireEvent.click(screen.getByRole("button", { name: /Bravo/ }));
+    expect(sent(send)).toEqual({ selected: ["b"], elapsedMs: 2400 });
+  });
+
+  it("a tap before the clock starts sends elapsedMs 0", () => {
+    const send = vi.fn();
+    render(<Choice view={choice()} send={send} />);
+    stepFrame(16); // only the first frame
+    now = 500;
+    fireEvent.click(screen.getByRole("button", { name: /Bravo/ }));
+    expect(sent(send)).toEqual({ selected: ["b"], elapsedMs: 0 });
+  });
+
+  it("Choice clock survives re-render of the same viewId", () => {
+    const send = vi.fn();
+    const { rerender } = render(<Choice view={choice()} send={send} />);
+    stepFrame(16);
+    stepFrame(33);
+    now = 1000;
+    rerender(<Choice view={choice({ prompt: "Pick again" })} send={send} />);
+    stepFrame(1016);
+    stepFrame(1033);
+    now = 2433;
+    fireEvent.click(screen.getByRole("button", { name: /Bravo/ }));
+    expect(sent(send).elapsedMs).toBe(2400);
+  });
+
+  it("Choice clock restarts for a new viewId", () => {
+    const send = vi.fn();
+    const { rerender } = render(<Choice view={choice({ viewId: "v1" })} send={send} />);
+    stepFrame(16);
+    stepFrame(33);
+    now = 5000;
+    rerender(<Choice view={choice({ viewId: "v2" })} send={send} />);
+    stepFrame(5016);
+    stepFrame(5033);
+    now = 5533;
+    fireEvent.click(screen.getByRole("button", { name: /Bravo/ }));
+    expect(sent(send)).toEqual({ selected: ["b"], elapsedMs: 500 });
+  });
+
+  it("Choice starts the clock when a hidden page becomes visible", () => {
+    setVisibility("hidden");
+    const send = vi.fn();
+    render(<Choice view={choice()} send={send} />);
+    expect(frames.size).toBe(0); // nothing is painted while hidden
+    now = 3000;
+    setVisibility("visible");
+    act(() => { document.dispatchEvent(new Event("visibilitychange")); });
+    stepFrame(3016); // the first frame after becoming visible starts the clock
+    now = 3716;
+    fireEvent.click(screen.getByRole("button", { name: /Bravo/ }));
+    expect(sent(send)).toEqual({ selected: ["b"], elapsedMs: 700 });
+  });
+
+  it("unmount cancels the pending frame and the visibility listener", () => {
+    setVisibility("hidden");
+    const removed = vi.spyOn(document, "removeEventListener");
+    const hidden = render(<Choice view={choice()} send={() => {}} />);
+    hidden.unmount();
+    expect(removed).toHaveBeenCalledWith("visibilitychange", expect.any(Function));
+
+    setVisibility("visible");
+    const shown = render(<Choice view={choice()} send={() => {}} />);
+    expect(frames.size).toBe(1);
+    shown.unmount();
+    expect(frames.size).toBe(0);
+  });
+
+  it("multiple choice sends elapsedMs on Lock in", () => {
+    const send = vi.fn();
+    render(<Choice view={choice({ allowMultiple: true, maxSelections: 2 })} send={send} />);
+    stepFrame(16);
+    stepFrame(33);
+    fireEvent.click(screen.getByRole("button", { name: /Charlie/ }));
+    fireEvent.click(screen.getByRole("button", { name: /Alpha/ }));
+    now = 4033;
+    fireEvent.click(screen.getByRole("button", { name: /Lock in/ }));
+    expect(sent(send)).toEqual({ selected: ["a", "c"], elapsedMs: 4000 });
   });
 });
 
