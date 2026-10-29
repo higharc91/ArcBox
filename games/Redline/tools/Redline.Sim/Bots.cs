@@ -45,6 +45,24 @@ public sealed record Latency(string Name, double ClaimMedian, double ThrottleMed
     }
 }
 
+/// <summary>
+/// Human qualifying laps (qualifying spec §7): every bot answers each lap at a log-normal time, median 2.6 s, σ 0.3 (of
+/// ln time), and is right with probability 0.8 whatever its race skill (qualifying questions are all easy, and 0.8 is
+/// the casual player's easy accuracy). The phone's <c>elapsedMs</c> is the drawn time.
+/// </summary>
+public sealed record QualiModel(double Median, double Sigma, double Accuracy)
+{
+    public static readonly QualiModel Default = new(2.6, 0.3, 0.8);
+
+    public TimeSpan Draw(Random random)
+    {
+        var u1 = 1.0 - random.NextDouble();
+        var u2 = random.NextDouble();
+        var z = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Cos(2 * Math.PI * u2);
+        return TimeSpan.FromSeconds(Median * Math.Exp(Sigma * z));
+    }
+}
+
 /// <summary>Throttle decisions for the human bots. Everything they use is on the phone or on the TV.</summary>
 public static class BotBrain
 {

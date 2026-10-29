@@ -36,7 +36,14 @@ the time, so it can be found in the logs.
 
 - [ ] **Driver Select:** every phone can claim a different driver; a taken driver is greyed on the others; the TV
       board shows the player in the claimed seat and the line-up camera holds on the new claim.
-- [ ] **Grid:** five red lights go out; the strip shows the payouts and the credit line.
+- [ ] **Qualifying:** three easy questions before the Grid. Each phone shows "QUALIFYING · LAP n/3", the question
+      while the TV reads it out, then the four answers. After a tap it shows "Lap time 2.41 s — checking…". At the
+      result it shows a green "✔ 2.41 s" banner (with "Purple!" for the lap's fastest) or a red "✖ Lap deleted"
+      banner, with the right buzz and sound. The TV tower lists the times, with purple for the fastest lap and red for
+      DELETED, and shows the provisional pole and pole position cards. The commentator opens with "Qualifying! …" and
+      closes with "Pole position for …".
+- [ ] **Grid:** the cars line up in the qualifying order and each phone adds "Qualified P<n>"; five red lights go out;
+      the strip shows the payouts and the credit line.
 - [ ] **Throttle:** the phone shows only the category and difficulty; the tower says LOCKED / CHOOSING; nobody's
       choice shows on the TV before Question [R3].
 - [ ] **Question:** answers on the phones match the TV; the tower shows a tick for each player who answered, never which

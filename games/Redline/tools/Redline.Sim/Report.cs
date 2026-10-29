@@ -23,11 +23,16 @@ public static class Report
     /// <summary>
     /// Wall-clock bound with every phase running to its timer: Driver Select + Grid + rounds × (Throttle + Question + Reveal) +
     /// Chequered + the podium ceremony (Anthem + Champagne; every scenario has players, and bots never shake, so it just runs
-    /// on its timers). The Reading phases depend on each question's text, so the caller adds <see cref="RaceRecord.ReadingSeconds"/>.
+    /// on its timers). The Reading phases depend on each question's text, so the caller adds <see cref="RaceRecord.ReadingSeconds"/>
+    /// and, for qualifying, <see cref="QualifyingTimerSeconds"/>.
     /// </summary>
     public static double FullTimerSeconds(int rounds, RedlineRules r) =>
         (r.DriverSelect + r.Grid + rounds * (r.Throttle + r.Question + r.Reveal) + r.Chequered
          + (r.Celebrate ? r.Anthem + r.Champagne : TimeSpan.Zero)).TotalSeconds;
+
+    /// <summary>Qualifying with every phase running to its timer: laps × (answer window + result) + the QualifyingReading phases.</summary>
+    public static double QualifyingTimerSeconds(RaceRecord race, RedlineRules r) =>
+        race.Qualified ? r.QualifyingLaps * (r.QualifyingAnswer + r.QualifyingResult).TotalSeconds + race.QualiReadingSeconds : 0;
 
     public static string Header(SimOptions o, TimeSpan elapsed, int totalRaces)
     {
@@ -39,6 +44,7 @@ public static class Report
         sb.AppendLine($"- Races per scenario: **{o.Races}** ({totalRaces} total, {F(elapsed.TotalSeconds, 0)} s wall time), master seed {o.Seed}");
         sb.AppendLine($"- Rules: FinishLine {r.FinishLine}, MaxRounds {r.MaxRounds}, Cruise +{r.CruiseGain}/0, Push +{r.PushGain}/−{r.PushLoss}, Redline +{r.RedlineGain}/−{r.RedlineLoss} + limiter, Reading phase {(r.ReadQuestions ? "on" : "off")}");
         sb.AppendLine($"- AI: base {F(a.Easy, 2)}/{F(a.Medium, 2)}/{F(a.Hard, 2)}, clamp [{F(a.MinP, 2)}, {F(a.MaxP, 2)}], temperature {F(a.Temperature, 2)}, limiter cost {F(a.LimiterCost, 2)}, Redline floor {F(a.RedlineFloor, 2)}, chase gap {a.ChaseGap} / rounds left {a.ChaseRoundsLeft} / bonus {F(a.ChaseBonus, 2)}");
+        sb.AppendLine($"- Qualifying: {(r.Qualify ? $"on, {r.QualifyingLaps} laps, {F(r.QualifyingAnswer.TotalSeconds, 0)} s to answer" : "off")}; AI lap median {F(a.QualiSlowMedian, 2)} s (aiSkill 0.85) → {F(a.QualiFastMedian, 2)} s (1.15), σ {F(a.QualiSigma, 2)}; human laps median {F(o.Quali.Median, 2)} s, σ {F(o.Quali.Sigma, 2)}, {Pct(o.Quali.Accuracy)} right");
         sb.AppendLine($"- Question mix: {o.Mix}; human latency: {o.Latency.Name}; human seat pick: {o.Seats}");
         sb.AppendLine($"- Skills: casual {F(Skill.Casual.Easy, 2)}/{F(Skill.Casual.Medium, 2)}/{F(Skill.Casual.Hard, 2)}, strong {F(Skill.Strong.Easy, 2)}/{F(Skill.Strong.Medium, 2)}/{F(Skill.Strong.Hard, 2)}; limiter cost used by Sensible/Chaser: casual {F(BotBrain.LimiterCost(Skill.Casual, o.Mix, r), 2)}, strong {F(BotBrain.LimiterCost(Skill.Strong, o.Mix, r), 2)}");
         sb.AppendLine();
@@ -69,6 +75,53 @@ public static class Report
             sb.AppendLine($"| {s.Name} | {s.Humans.Count} | {F(rounds.Average())} | {Quantile(rounds, .1)}/{Quantile(rounds, .5)}/{Quantile(rounds, .9)} | " +
                           $"{Pct(r.Count(x => x.EndedByLine) / (double)r.Length)} | {Pct(humanWin)} | {Pct(shared)} | {Pct(sharedWeighted)} | {Pct(aiLed)} | {F(changes)} | " +
                           $"{F(gaps.Average(), 2)} | {Pct(gaps.Count(g => g <= 1) / (double)gaps.Count)} | {F(r.Average(x => x.Cars[0].Distance))} | {F(r.Average(x => x.Cars[10].Distance))} |");
+        }
+        sb.AppendLine();
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Qualifying (spec §7): how the humans start. "Human pole" is the share of races whose grid P1 is a human, i.e. the best
+    /// of the humans takes pole. Grid slots are out of 22. Scenarios where qualifying did not run (no humans, or
+    /// <c>--qualify off</c>) are left out.
+    /// </summary>
+    public static string Qualifying(IReadOnlyList<(Scenario S, RaceRecord[] R)> runs, RedlineRules rules)
+    {
+        static string Tier(double skill) => skill >= 1.08 ? "top" : skill > 0.90 ? "mid" : "back";
+        var sb = new StringBuilder();
+        sb.AppendLine("## Qualifying (grid slots out of 22)");
+        sb.AppendLine();
+        var ran = runs.Where(x => x.R.All(r => r.Qualified)).ToList();
+        if (ran.Count == 0)
+        {
+            sb.AppendLine("Qualifying did not run in any scenario.");
+            sb.AppendLine();
+            return sb.ToString();
+        }
+        sb.AppendLine($"Human pole = a human starts P1 (the best of the humans takes pole). Best human slot = the best-placed human's grid slot. " +
+                      $"All {rules.QualifyingLaps}/{rules.QualifyingLaps} = share of human qualifying sessions with every lap correct. " +
+                      "AI pole by tier = which AI tier takes pole when an AI does (top ≥ 1.08, back ≤ 0.90). " +
+                      "Grid → race = mean finishing position of the human pole sitter (– when no human took pole).");
+        sb.AppendLine();
+        sb.AppendLine($"| Scenario | Humans | Human pole | Best human slot p10/p50/p90 | Human slot median (all seats) | Human mean slot | Human all {rules.QualifyingLaps}/{rules.QualifyingLaps} | Human correct laps | AI pole by tier top/mid/back | Pole time p50 (s) | Grid → race | Lap timeouts |");
+        sb.AppendLine("|---|---:|---:|---|---:|---:|---:|---:|---|---:|---:|---:|");
+        foreach (var (s, r) in ran)
+        {
+            var humans = r.SelectMany(x => x.Cars.Where(c => c.Bot >= 0)).ToList();
+            var best = r.Select(x => (double)x.Cars.Where(c => c.Bot >= 0).Min(c => c.GridSlot)).Order().ToList();
+            var slots = humans.Select(c => (double)c.GridSlot).Order().ToList();
+            var poles = r.Select(x => x.Cars.Single(c => c.GridSlot == 1)).ToList();
+            var aiPoles = poles.Where(c => c.Bot < 0).ToList();
+            string AiTier(string tier) => aiPoles.Count == 0 ? "–" : Pct(aiPoles.Count(c => Tier(c.AiSkill) == tier) / (double)aiPoles.Count);
+            var poleTimes = poles.Select(c => c.QualiTotalMs / 1000.0).Order().ToList();
+            var humanPoles = poles.Where(c => c.Bot >= 0).ToList();
+            var ld = r.Sum(x => x.LapDecisions);
+            sb.AppendLine($"| {s.Name} | {s.Humans.Count} | {Pct(humanPoles.Count / (double)r.Length)} | " +
+                          $"{Quantile(best, .1)}/{Quantile(best, .5)}/{Quantile(best, .9)} | {Quantile(slots, .5)} | {F(slots.Average())} | " +
+                          $"{Pct(humans.Count(c => c.QualiCorrect == rules.QualifyingLaps) / (double)humans.Count)} | " +
+                          $"{F(humans.Average(c => c.QualiCorrect), 2)} | {AiTier("top")}/{AiTier("mid")}/{AiTier("back")} | " +
+                          $"{F(Quantile(poleTimes, .5), 2)} | {(humanPoles.Count == 0 ? "–" : F(humanPoles.Average(c => c.Position)))} | " +
+                          $"{(ld == 0 ? "–" : Pct(r.Sum(x => x.LapTimeouts) / (double)ld))} |");
         }
         sb.AppendLine();
         return sb.ToString();
@@ -166,20 +219,21 @@ public static class Report
         sb.AppendLine("## Wall-clock game time (minutes)");
         sb.AppendLine();
         sb.AppendLine("Measured = the harness clock from Start to EndGame with the bots' reaction times (early advance as the code does it). " +
-                      "All timers = every phase runs to its timer for the same number of rounds. Reading = mean seconds per round spent " +
-                      "with the question read out before answers open (it never ends early).");
+                      "All timers = every phase runs to its timer for the same number of rounds (and qualifying laps). Reading = mean seconds per round spent " +
+                      "with the question read out before answers open (it never ends early). Qualifying = mean seconds from the first lap to the Grid.");
         sb.AppendLine();
-        sb.AppendLine("| Scenario | Measured mean | p10 | p90 | All timers mean | p90 | Saved by early advance | Reading s/round | Throttle timeouts | Answer timeouts |");
-        sb.AppendLine("|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|");
+        sb.AppendLine("| Scenario | Measured mean | p10 | p90 | All timers mean | p90 | Saved by early advance | Reading s/round | Qualifying s (measured) | Throttle timeouts | Answer timeouts |");
+        sb.AppendLine("|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|");
         foreach (var (s, r) in runs)
         {
             var measured = r.Select(x => x.GameSeconds).Order().ToList();
-            var full = r.Select(x => FullTimerSeconds(x.Rounds, rules) + x.ReadingSeconds).Order().ToList();
+            var full = r.Select(x => FullTimerSeconds(x.Rounds, rules) + x.ReadingSeconds + QualifyingTimerSeconds(x, rules)).Order().ToList();
             var reading = r.Sum(x => x.ReadingSeconds) / r.Sum(x => x.Rounds);
             var td = r.Sum(x => x.ThrottleDecisions);
             var ad = r.Sum(x => x.AnswerDecisions);
             sb.AppendLine($"| {s.Name} | {Min(measured.Average())} | {Min(Quantile(measured, .1))} | {Min(Quantile(measured, .9))} | " +
                           $"{Min(full.Average())} | {Min(Quantile(full, .9))} | {Pct(1 - measured.Average() / full.Average())} | {F(reading)} | " +
+                          $"{(r.Any(x => x.Qualified) ? F(r.Average(x => x.QualifyingSeconds)) : "–")} | " +
                           $"{(td == 0 ? "–" : Pct(r.Sum(x => x.ThrottleTimeouts) / (double)td))} | {(ad == 0 ? "–" : Pct(r.Sum(x => x.AnswerTimeouts) / (double)ad))} |");
         }
         sb.AppendLine();

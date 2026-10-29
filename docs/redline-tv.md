@@ -301,6 +301,19 @@ the race itself when all three are in (`--autostart=<game>:<players>`, a dev arg
 gives the TV a few seconds for its last shots, stops the TV, Xvfb and the server, and fails if the phones reported a
 problem or the TV log has an `error` or `exception` line other than the expected audio ones (there is no sound card).
 
+Qualifying runs first, as in every race with players. On each lap's question, bot k answers after (1 + k) s, scaled by
+`ARCBOX_PACE` but capped so the slowest bot still answers within 70% of the 10 s window (3.5, 5.25 and 7 s at the
+default pace). The bots answer right, looking the question up in the bundled fallback pack the Development server
+plays with, except bot 3 on lap 2, whose lap is deleted. The phone script fails unless phone 1 showed the
+QualifyingReading, QualifyingQuestion and QualifyingResult views, and it logs the bots' expected grid order, worked out
+from those delays and the wrong answer, as `QUALI order <CODE> <CODE> <CODE>` (fastest first). The script then checks
+three things:
+- the TV's phases before the Grid are QualifyingReading, QualifyingQuestion and QualifyingResult for laps 1–3. The
+  `TV phases:` line shows them as `QualifyingReading(L1)` and so on;
+- the audio log has the opening line, "Qualifying! Three questions, fastest correct answers take pole.", and then a
+  "Pole position for …" line;
+- the bots appear in the TV's `REDLINE grid` line in that `QUALI order`: bot 1 first, bot 3 last of the three.
+
 It then checks the TV's audio log for the race's sounds **in order**: the five start beeps, lights out, the
 commentator's first line of round 1, the question read out (`AUDIO Voice redline.questions: …`), the Reveal sting or
 buzz and "The answer is …" (and with `ARCBOX_FULL=1`, the fanfare and the winner's line), printing each line it
@@ -315,7 +328,8 @@ The server runs without a Google key, so `/api/tts` answers 503 and the TV falls
 a Linux box without speech-dispatcher, logs the lines with the narrator off); the audio lines are the same.
 
 Everything lands in one folder (`ARCBOX_E2E_OUT`, default `/tmp/arcbox-tv-e2e-<time>`): `tv/*.png`, `phones/*.png`
-(phone 1 at each phase, plus phone 2 after its mid-game reload), `tv.log`, `audio.log` (the TV's `AUDIO` lines),
+(phone 1 at each phase, with `quali-*-lap<n>.png` for each qualifying lap, phone 3's deleted lap as
+`quali-deleted-P3.png`, and phone 2 after its mid-game reload), `tv.log`, `audio.log` (the TV's `AUDIO` lines),
 `phones.log`, `server.log`, `build.log`.
 
 | Variable | Default | |
@@ -323,7 +337,7 @@ Everything lands in one folder (`ARCBOX_E2E_OUT`, default `/tmp/arcbox-tv-e2e-<t
 | `GODOT` | `godot` on PATH | Godot 4.7.2 .NET binary |
 | `ARCBOX_FULL` | – | `1`: whole race, results, back to the lobby |
 | `ARCBOX_PHONES` | 3 | bot phones |
-| `ARCBOX_PACE` | 4 | bots' reading-time multiplier: 1–9 s per decision, so each phase stays on the TV long enough to be captured |
+| `ARCBOX_PACE` | 4 | bots' reading-time multiplier: 1–9 s per decision, so each phase stays on the TV long enough to be captured (qualifying answers: see above) |
 | `TV_RES`, `TV_PRESET` | 1280x720, low | anything bigger or prettier can't keep up with real-time phases in software |
 | `TV_LINGER` | 12 | seconds the TV runs after the phones finish |
 | `TV_ARGS` | – | extra TV arguments, e.g. `--perf` |

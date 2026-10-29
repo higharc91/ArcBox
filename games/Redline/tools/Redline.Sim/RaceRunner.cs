@@ -8,7 +8,7 @@ public enum SeatPick { Random, Top }
 
 /// <summary>Everything that stays the same across the races of one run.</summary>
 public sealed record SimOptions(
-    int Races, int Seed, RedlineRules Rules, DifficultyMix Mix, Latency Latency, SeatPick Seats);
+    int Races, int Seed, RedlineRules Rules, DifficultyMix Mix, Latency Latency, SeatPick Seats, QualiModel Quali);
 
 public sealed record Scenario(string Name, string Description, IReadOnlyList<BotSpec> Humans);
 
@@ -17,7 +17,10 @@ public sealed record Scenario(string Name, string Description, IReadOnlyList<Bot
 public sealed record CarRecord(
     string Code, double AiSkill, int Bot, int Distance, int Position,
     int Correct, int Cruises, int Pushes, int Redlines, int SpinOuts, int NoAnswers,
-    int DifficultyPoints);            // correct answers weighted easy 1 / medium 2 / hard 3 (a candidate tie-break)
+    int DifficultyPoints,             // correct answers weighted easy 1 / medium 2 / hard 3 (a candidate tie-break)
+    int GridSlot,                     // the starting position: qualifying's classification, or the seeded shuffle without it
+    int QualiCorrect,                 // correct qualifying laps, 0..QualifyingLaps (0 when qualifying did not run)
+    int QualiTotalMs);                // the sum of the correct laps' times
 
 public sealed record RaceRecord(
     int Rounds,
@@ -32,7 +35,12 @@ public sealed record RaceRecord(
     int AnswerDecisions,
     int AiThrottleDecisions,          // AI cars choosing a throttle (not pit-limited)
     int AiChaseDecisions,             // ... of which with AiPolicy's chase condition met
-    double ReadingSeconds);           // total length of the Reading phases (0 with ReadQuestions off)
+    double ReadingSeconds,            // total length of the Reading phases (0 with ReadQuestions off)
+    bool Qualified,                   // qualifying ran (on in the rules and at least one human)
+    double QualifyingSeconds,         // harness time from the first QualifyingReading/Question to Grid
+    double QualiReadingSeconds,       // ... of which QualifyingReading (never ends early)
+    int LapTimeouts,                  // human qualifying answers drawn past the 10 s window
+    int LapDecisions);                // human qualifying answers drawn
 
 /// <summary>
 /// Drives one real <see cref="RedlineGame"/> through <see cref="GameHarness{TGame}"/>. Human bots only read their own
@@ -47,7 +55,7 @@ public static class RaceRunner
         public int Correct, Cruises, Pushes, Redlines, SpinOuts, NoAnswers, DifficultyPoints;
     }
 
-    private enum Act { Claim, Throttle, Answer }
+    private enum Act { Claim, Throttle, Answer, Lap }
 
     public static RaceRecord Run(Scenario scenario, int raceIndex, SimOptions o)
     {
@@ -57,6 +65,8 @@ public static class RaceRunner
         var humans = scenario.Humans;
         var h = new GameHarness<RedlineGame>(game, humans.Count, seed);
         var botRandom = new Random(unchecked(seed * 31 + 7));
+        // Qualifying draws come from their own stream, so the race bots' decisions are drawn exactly as without qualifying.
+        var qualiRandom = new Random(unchecked(seed * 37 + 11));
         var limiterCost = humans.Select(b => BotBrain.LimiterCost(b.Skill, o.Mix, o.Rules)).ToArray();
         var botOf = new Dictionary<PlayerId, int>();
         for (var i = 0; i < humans.Count; i++) botOf[h.Players[i].Id] = i;
@@ -73,18 +83,23 @@ public static class RaceRunner
         var aiLed = new List<bool>();
         int throttleTimeouts = 0, answerTimeouts = 0, throttleDecisions = 0, answerDecisions = 0, aiDecisions = 0, aiChase = 0;
         var readingSeconds = 0.0;
+        double qualiReadingSeconds = 0;
+        int lapTimeouts = 0, lapDecisions = 0;
+        DateTimeOffset? qualiStart = null, qualiEnd = null, lapOpenedAt = null;
+        Dictionary<string, int>? gridSlot = null;
+        Dictionary<string, (int Correct, int TotalMs)> qualiOf = [];
         CarRecord[]? final = null;
         var finalRound = 0;
 
         var pending = new List<(DateTimeOffset At, int Bot, Act Act)>();
-        (RacePhase Phase, int Round)? key = null;
+        (RacePhase Phase, int Round, int Lap)? key = null;
 
         while (!h.IsOver)
         {
             var view = h.HostView<RedlineHostView>();
-            if (key != (view.Phase, view.Round))
+            if (key != (view.Phase, view.Round, view.Qualifying?.Lap ?? 0))
             {
-                key = (view.Phase, view.Round);
+                key = (view.Phase, view.Round, view.Qualifying?.Lap ?? 0);
                 pending.Clear();
                 OnPhaseStart(view);
             }
@@ -104,6 +119,7 @@ public static class RaceRunner
                 {
                     if (act == Act.Throttle) throttleTimeouts++;
                     else if (act == Act.Answer) answerTimeouts++;
+                    else if (act == Act.Lap) lapTimeouts++;
                 }
                 pending.Clear();
                 h.Advance(deadline - h.Now);
@@ -117,7 +133,10 @@ public static class RaceRunner
             final!,
             [.. leaders],
             [.. aiLed],
-            throttleTimeouts, answerTimeouts, throttleDecisions, answerDecisions, aiDecisions, aiChase, readingSeconds);
+            throttleTimeouts, answerTimeouts, throttleDecisions, answerDecisions, aiDecisions, aiChase, readingSeconds,
+            qualiStart is not null,
+            qualiStart is { } qs ? (qualiEnd!.Value - qs).TotalSeconds : 0,
+            qualiReadingSeconds, lapTimeouts, lapDecisions);
 
         void OnPhaseStart(RedlineHostView view)
         {
@@ -145,6 +164,28 @@ public static class RaceRunner
                     }
                     break;
                 }
+                case RacePhase.QualifyingReading:
+                    // As in Reading: the question is on the phones, answers are not open yet, and the phase runs to its timer.
+                    qualiStart ??= h.Now;
+                    qualiReadingSeconds += (view.DeadlineUtc!.Value - h.Now).TotalSeconds;
+                    break;
+                case RacePhase.QualifyingQuestion:
+                    qualiStart ??= h.Now;
+                    lapOpenedAt = h.Now;
+                    for (var i = 0; i < humans.Count; i++)
+                    {
+                        if (h.PlayerView(i) is not ChoiceView) continue;
+                        lapDecisions++;
+                        pending.Add((h.Now + o.Quali.Draw(qualiRandom), i, Act.Lap));
+                    }
+                    break;
+                case RacePhase.QualifyingResult:
+                    qualiOf = view.Qualifying!.Rows.ToDictionary(r => r.Code, r => (r.Correct, r.TotalMs));
+                    break;
+                case RacePhase.Grid:
+                    if (qualiStart is not null) qualiEnd = h.Now;
+                    gridSlot = view.Drivers.ToDictionary(r => r.Code, r => r.Position);
+                    break;
                 case RacePhase.Reading:
                     // The question is on the phones but answers are not open yet: bots wait, and the phase runs to its timer.
                     readingSeconds += (view.DeadlineUtc!.Value - h.Now).TotalSeconds;
@@ -189,7 +230,8 @@ public static class RaceRunner
                         // A wrong Redline answer with no answer given counts as a spin-out, not a NoAnswer; both are rare.
                         return new CarRecord(r.Code, skillOf[r.Code], r.Player is { } p ? botOf[p] : -1,
                             r.Distance, r.Position, t.Correct, t.Cruises, t.Pushes, t.Redlines, t.SpinOuts, t.NoAnswers,
-                            t.DifficultyPoints);
+                            t.DifficultyPoints, gridSlot![r.Code],
+                            qualiOf.GetValueOrDefault(r.Code).Correct, qualiOf.GetValueOrDefault(r.Code).TotalMs);
                     })];
                     break;
             }
@@ -226,6 +268,16 @@ public static class RaceRunner
                         _ => throw new ArgumentOutOfRangeException(nameof(act)),
                     };
                     h.Input(bot, new { pressed = BotBrain.ButtonId(throttle) });
+                    break;
+                }
+                case Act.Lap when phone is ChoiceView lap:
+                {
+                    // The phone measures from answers-on-screen to tap; in the sim that is exactly the time since the lap opened.
+                    var (correct, _) = source.Lookup(lap.Prompt);
+                    var right = lap.Options.Single(opt => opt.Label == correct);
+                    var wrong = lap.Options.Where(opt => opt.Label != correct).ToList();
+                    var id = qualiRandom.NextDouble() < o.Quali.Accuracy ? right.Id : wrong[qualiRandom.Next(wrong.Count)].Id;
+                    h.Input(bot, new { selected = new[] { id }, elapsedMs = (h.Now - lapOpenedAt!.Value).TotalMilliseconds });
                     break;
                 }
                 case Act.Answer when phone is ChoiceView question:

@@ -64,7 +64,10 @@ comes back), but annoying in a long REDLINE race. To test with Wake Lock:
 
 ## 4. Scripted playthrough (Playwright)
 
-`web/play/e2e/redline.e2e.mjs` drives the same pages with bots that tap random options. It needs the server
+`web/play/e2e/redline.e2e.mjs` drives the same pages with bots that tap random options. REDLINE's qualifying is the
+exception: before the Grid, bot k answers each lap after (1 + k) s and always right, from the bundled question pack's
+answers, except bot 3 on lap 2. The run fails unless phone 1 showed all three qualifying views. It logs the bots'
+expected grid order as `QUALI order …`, which `tools/tv-e2e.sh` checks against the TV. It needs the server
 running as above and the pre-installed Playwright Chromium; it starts nothing itself.
 
 ```sh

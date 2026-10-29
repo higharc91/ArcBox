@@ -48,6 +48,8 @@ public static class Scenarios
             new(Strategy.AlwaysRedline, Skill.Strong), new(Strategy.AlwaysRedline, Skill.Casual),
             new(Strategy.Random, Skill.Casual), new(Strategy.AlwaysCruise, Skill.Casual),
         ]));
+        list.Add(new("party-three", "3 casual humans, all Sensible, + 19 AI (the qualifying headline: does the best of three take pole?)",
+            [new(Strategy.Sensible, Skill.Casual), new(Strategy.Sensible, Skill.Casual), new(Strategy.Sensible, Skill.Casual)]));
         list.Add(new("party-four", "4 humans as a realistic group: 1 strong + 3 casual, all Sensible, + 18 AI",
             [new(Strategy.Sensible, Skill.Strong), new(Strategy.Sensible, Skill.Casual), new(Strategy.Sensible, Skill.Casual), new(Strategy.Sensible, Skill.Casual)]));
         return list;

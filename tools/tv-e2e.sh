@@ -20,6 +20,10 @@
 #      victory sting, and a cork pop and spray from every podium phone). Without a Google key on the server,
 #      /api/tts answers 503 and the narration comes from the TV's built-in voice, or is only logged when the TV has
 #      none (Linux without speech-dispatcher): the AUDIO lines are the same either way.
+#   7. checks qualifying: the TV's phases before the Grid are QualifyingReading, QualifyingQuestion and
+#      QualifyingResult for laps 1–3; the AUDIO lines have the session's opening line and then "Pole position for …";
+#      and the bot phones' order in the TV's `REDLINE grid` line is the one their answer times give (the phone
+#      script's `QUALI order` line: bot 1 fastest, bot 3 last of them after its planned wrong answer on lap 2).
 #
 # Environment (all optional except GODOT when `godot` is not on PATH):
 #   GODOT            Godot 4.7.2 .NET binary
@@ -35,8 +39,8 @@
 #   TV_REMATCH       1 (with ARCBOX_FULL=1) = after the race, the VIP phone starts a second one in the same room
 #                    and plays it to its first Reveal (shots in <out>/phones-rematch)
 #
-# Exit code 0 when the phones reached their goal, the TV log has no errors beyond the expected audio-driver ones, and
-# the audio lines are all there in order.
+# Exit code 0 when the phones reached their goal, the TV log has no errors beyond the expected audio-driver ones, the
+# audio lines are all there in order, and qualifying ran and set the bots' grid order.
 set -euo pipefail
 
 ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
@@ -170,7 +174,12 @@ ERRORS=$(awk '
 SHOTS_TV=$(find "$OUT/tv" -name '*.png' | wc -l)
 SHOTS_PHONES=$(find "$OUT/phones" -name '*.png' | wc -l)
 log "screenshots: $SHOTS_TV from the TV in $OUT/tv, $SHOTS_PHONES from phone 1 in $OUT/phones"
-log "TV phases: $(grep -oE '^REDLINE [A-Za-z]+ round [0-9]+' "$OUT/tv.log" | awk '{print $2"("$4")"}' | tr '\n' ' ')"
+# Qualifying phases are all round 0: show their lap instead (L1…), counted from each lap's first phase.
+PHASES=$(grep -oE '^REDLINE [A-Za-z]+ round [0-9]+' "$OUT/tv.log" | awk '{print $2, $4}' | uniq)
+log "TV phases: $(awk '
+  $1 == "DriverSelect" { lap = 0 }
+  $1 == "QualifyingReading" || ($1 == "QualifyingQuestion" && prev != "QualifyingReading") { lap++ }
+  { print $1 "(" ($1 ~ /^Qualifying/ ? "L" lap : $2) ")"; prev = $1 }' <<< "$PHASES" | tr '\n' ' ')"
 if [[ -n "$ERRORS" ]]; then
   log "errors in the TV log:"
   echo "$ERRORS"
@@ -178,6 +187,27 @@ fi
 
 # ---- 6. audio: each expected AUDIO line after the one before it ("label|regex").
 AUDIO_FAIL=0
+# expect_in_order <what> <label|regex>…: each line after the one before it; sets AUDIO_FAIL on the first one missing.
+expect_in_order() {
+  local what=$1 last=0 item label re n
+  shift
+  for item in "$@"; do
+    label=${item%%|*}
+    re=${item#*|}
+    n=$(RE="$re" awk -v from="$last" 'NR > from && $0 ~ ENVIRON["RE"] { print NR; exit }' "$OUT/tv.log")
+    if [[ -z "$n" ]]; then
+      log "$what: MISSING $label (/$re/ after line $last)"
+      AUDIO_FAIL=1
+      return
+    fi
+    log "$what: $label · $(sed -n "${n}p" "$OUT/tv.log")"
+    last=$n
+  done
+}
+# Qualifying runs before the start lights; its closing line may overlap them, so it is checked on its own.
+expect_in_order "audio" \
+  "qualifying start|^AUDIO Voice redline\.announcer: Qualifying! Three questions, fastest correct answers take pole\.$" \
+  "pole position|^AUDIO Voice redline\.announcer: Pole position for "
 EXPECT=(
   "start beep 1|^AUDIO Sfx start-beep #1$"
   "start beep 2|^AUDIO Sfx start-beep #2$"
@@ -193,19 +223,7 @@ EXPECT=(
 if [[ "${ARCBOX_FULL:-}" == "1" ]]; then
   EXPECT+=("fanfare|^AUDIO Sfx fanfare$" "the winner|^AUDIO Voice redline\.announcer: (Chequered flag!|.* takes the win\.)")
 fi
-LAST=0
-for item in "${EXPECT[@]}"; do
-  label=${item%%|*}
-  re=${item#*|}
-  n=$(RE="$re" awk -v from="$LAST" 'NR > from && $0 ~ ENVIRON["RE"] { print NR; exit }' "$OUT/tv.log")
-  if [[ -z "$n" ]]; then
-    log "audio: MISSING $label (/$re/ after line $LAST)"
-    AUDIO_FAIL=1
-    break
-  fi
-  log "audio: $label · $(sed -n "${n}p" "$OUT/tv.log")"
-  LAST=$n
-done
+(( AUDIO_FAIL )) || expect_in_order "audio" "${EXPECT[@]}"
 
 # ---- 7. the podium (ARCBOX_FULL=1): the TV reaches the Champagne; the anthem (or, for a country without a melody,
 # the victory theme) plays in the Anthem and the theme follows it; every podium phone's cork pops on the TV, the
@@ -240,11 +258,42 @@ if [[ "${ARCBOX_FULL:-}" == "1" && $AUDIO_FAIL -eq 0 ]]; then
     done
   fi
 fi
+# ---- 8. qualifying: the phases before the first Grid, and the bots' grid order (each race: the rematch has its own).
+QUALI_FAIL=0
+QSEQ=$(awk '$1 == "Grid" { exit } $1 ~ /^Qualifying/ { printf "%s ", $1 }' <<< "$PHASES")
+QWANT=$(for _ in 1 2 3; do printf 'QualifyingReading QualifyingQuestion QualifyingResult '; done)
+if [[ "$QSEQ" == "$QWANT" ]]; then
+  log "qualifying: QualifyingReading → QualifyingQuestion → QualifyingResult for laps 1–3, then Grid"
+else
+  log "qualifying: WRONG phases before the Grid: '${QSEQ% }' (want '${QWANT% }')"
+  QUALI_FAIL=1
+fi
+race=0
+for plog in "$OUT/phones.log" "$OUT/phones-rematch.log"; do
+  [[ -f "$plog" ]] || continue
+  race=$((race + 1))
+  want=$(grep -oE 'QUALI order .*' "$plog" | tail -1 | cut -d' ' -f3-)
+  grid=$(grep -E '^REDLINE grid ' "$OUT/tv.log" | sed -n "${race}p" | cut -d' ' -f3-)
+  if [[ -z "$want" || "$want" == *"?"* || -z "$grid" ]]; then
+    log "qualifying: race $race: no bot order ('$want') or no grid line ('$grid')"
+    QUALI_FAIL=1
+    continue
+  fi
+  got=$(for c in $grid; do if [[ " $want " == *" $c "* ]]; then printf '%s ' "$c"; fi; done)
+  got=${got% }
+  if [[ "$got" == "$want" ]]; then
+    log "qualifying: race $race: bots on the grid as they qualified: $got · REDLINE grid $grid"
+  else
+    log "qualifying: race $race: bots on the grid in order '$got', qualifying says '$want' · REDLINE grid $grid"
+    QUALI_FAIL=1
+  fi
+done
+
 log "narrator: $(grep -E '^NARRATOR ' "$OUT/tv.log" | sed 's/^NARRATOR //' | awk '!seen[$0]++' | paste -sd '|' | sed 's/|/ | /g')"
 grep -E '^AUDIO ' "$OUT/tv.log" > "$OUT/audio.log" || true
 log "audio: $(wc -l < "$OUT/audio.log") AUDIO lines in $OUT/audio.log"
 
-if (( PHONES_EXIT != 0 )) || [[ -n "$ERRORS" ]] || (( AUDIO_FAIL )); then
+if (( PHONES_EXIT != 0 )) || [[ -n "$ERRORS" ]] || (( AUDIO_FAIL )) || (( QUALI_FAIL )); then
   log "FAILED (phones exit $PHONES_EXIT)"
   exit 1
 fi

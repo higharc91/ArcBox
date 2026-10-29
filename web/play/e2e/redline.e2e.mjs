@@ -19,13 +19,18 @@
 //   ARCBOX_REJOIN   0 to skip the mid-game reload of phone 2 (default on)
 //   ARCBOX_SHOTS    screenshot folder (default web/play/e2e/shots, git-ignored)
 //   ARCBOX_HEADED   1 to watch it in a visible browser
-//   ARCBOX_PACE     multiplier for the bots' reading time before each tap (default 1: 0.25–2.2 s)
+//   ARCBOX_PACE     multiplier for the bots' reading time before each tap (default 1: 0.25–2.2 s); in qualifying,
+//                   bot k answers after (1 + k) s times the pace, capped so the slowest bot still beats the 10 s window
 //   ARCBOX_NAME     with ARCBOX_ROOM: name prefix for the phones (default Bot: Bot1, Bot2…)
+//
+// REDLINE qualifying (before the Grid): bot k answers every lap after (1 + k) s (see ARCBOX_PACE), always right
+// except bot 3 on lap 2, using the answer key in the fallback question pack (the Development server has OpenTDB off).
+// The run logs the bots' expected grid order as `QUALI order <CODE> <CODE> …` (fastest first) for tools/tv-e2e.sh.
 //
 // Exit code 0 when the run reached its goal with no page errors; 1 otherwise.
 
 import { createRequire } from "node:module";
-import { mkdirSync } from "node:fs";
+import { mkdirSync, readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -51,6 +56,28 @@ const TO_THE_END = FULL || GAME !== "redline";
 const DEADLINE_MS = (TO_THE_END ? 20 : 4) * 60_000;
 /** Longest a phone may show the same view before the run counts as stuck (phase timers are ≤ 20 s). */
 const STUCK_MS = 75_000;
+
+// ---------------------------------------------------------------- qualifying plan
+
+/** RedlineRules.QualifyingLaps and QualifyingAnswer. */
+const QUALI_LAPS = 3;
+const QUALI_WINDOW_S = 10;
+/**
+ * Seconds bot k waits on a qualifying question: (1 + k) × the pace, the pace capped so the slowest bot answers within
+ * 70% of the window (with ARCBOX_PACE=4 and 3 phones: 3.5, 5.25 and 7 s).
+ */
+const QUALI_SCALE = Math.min(PACE, (0.7 * QUALI_WINDOW_S) / (1 + PHONES));
+const qualiDelayS = (slot) => (1 + slot) * QUALI_SCALE;
+/** The one planned wrong answer: bot 3, lap 2 (its lap is deleted, so it starts behind bots 1 and 2). */
+const answersWrong = (slot, lap) => slot === 3 && lap === 2;
+
+/** Question text → correct answer, from the fallback pack the Development server plays with. */
+const answerKey = new Map(
+  JSON.parse(readFileSync(join(here, "../../../games/Redline/Redline.Logic/Data/fallback-questions.json"), "utf8")).map((q) => [norm(q.text), q.correct]),
+);
+function norm(text) {
+  return String(text).replace(/\s+/g, " ").trim();
+}
 
 mkdirSync(SHOTS, { recursive: true });
 
@@ -117,6 +144,8 @@ async function snapshot(phone) {
         message: text(".w-wait"),
         error: text(".form-error"),
         enabled: [...document.querySelectorAll(".widget button[data-id]:not([disabled])")].map((b) => b.dataset.id),
+        // Choice options as shown ("Oscar Piastri" for a badged driver): for driver codes and the qualifying answer key.
+        options: [...document.querySelectorAll(".w-choice button[data-id]")].map((b) => ({ id: b.dataset.id, label: b.querySelector(".opt-label")?.textContent?.trim() ?? "" })),
         // The champagne bottle (podium): "holding" while the anthem plays, "armed" once the cork can pop.
         shake: document.querySelector(".w-shake")?.classList.contains("armed") ? "armed" : document.querySelector(".w-shake") ? "holding" : null,
         mash: !!document.querySelector(".pbtns.single"),
@@ -136,6 +165,11 @@ function phaseOf(s) {
   const m = s.message;
   if (GAME === "counter" || s.game === "counter") return s.kind === "buttons" ? "mash" : `counter-${s.kind}`;
   if (s.kind === "choice" && s.prompt === "Pick your driver") return "driver-select";
+  // Qualifying (PlayerViews: QualifyingListening, Answer, LapChecking, LapResult), header "QUALIFYING · LAP n/3".
+  if (s.kind === "wait" && /Answers in a moment/.test(m)) return "quali-reading";
+  if (s.kind === "choice" && /^QUALIFYING/.test(s.header ?? "")) return "quali-question";
+  if (s.kind === "wait" && /^Lap time .* checking/.test(m)) return "quali-answered";
+  if (s.kind === "wait" && /^[✔✖]/.test(m)) return "quali-result";
   if (s.kind === "wait" && /Waiting for the grid/.test(m)) return "seated";
   if (s.kind === "wait" && /Lights out/.test(m)) return "grid";
   if (s.kind === "buttons" && s.enabled.includes("cruise")) return "throttle";
@@ -152,6 +186,16 @@ function phaseOf(s) {
 }
 
 const roundOf = (s) => Number(/ROUND (\d+)/.exec(s.header ?? "")?.[1] ?? 0);
+const lapOf = (s) => Number(/LAP (\d+)/.exec(s.header ?? "")?.[1] ?? 0);
+
+/** Driver name → code from the Driver Select options, and phone slot → its driver's code once a view names it. */
+const codeByName = new Map();
+const codeOf = new Map();
+function learnDriver(slot, s) {
+  if (phaseOf(s) === "driver-select") for (const o of s.options ?? []) if (o.label) codeByName.set(o.label, o.id);
+  const name = /^You're ([^.,]+)[.,]/.exec(s.message ?? "")?.[1];
+  if (name && codeByName.has(name)) codeOf.set(slot, codeByName.get(name));
+}
 
 // ---------------------------------------------------------------- the bot
 
@@ -162,6 +206,7 @@ const roundOf = (s) => Number(/ROUND (\d+)/.exec(s.header ?? "")?.[1] ?? 0);
  */
 async function bot(phone, stop, onSnapshot) {
   let decidedFor = null;
+  let lapSeen = null; // the qualifying question on screen and when this bot first saw it (a retried tap keeps the time)
   while (!stop()) {
     const s = await snapshot(phone);
     onSnapshot(phone, s);
@@ -176,7 +221,11 @@ async function bot(phone, stop, onSnapshot) {
         await sleep(rand(60, 220));
         continue;
       }
-      if (s.screen === "controller" && s.enabled.length && decidedFor !== viewKey) {
+      if (s.screen === "controller" && phaseOf(s) === "quali-question" && s.enabled.length && decidedFor !== viewKey) {
+        decidedFor = viewKey;
+        if (lapSeen?.key !== viewKey) lapSeen = { key: viewKey, at: Date.now() };
+        await answerLap(phone, s, lapSeen.at);
+      } else if (s.screen === "controller" && s.enabled.length && decidedFor !== viewKey) {
         decidedFor = viewKey;
         if (Math.random() >= 0.06) {
           await sleep(rand(250, 2200) * PACE); // reading time
@@ -237,6 +286,37 @@ async function shake(phone, s) {
   pops.set(phone.slot, p);
   log(`P${phone.slot} pops the cork at ${Number.isFinite(charge) ? charge.toFixed(2) : "?"} (pop ${p.count})`);
   await sleep(rand(500, 1100));
+}
+
+/**
+ * A qualifying lap: wait out this bot's planned time since the question appeared, then tap the right answer (the
+ * wrong one for bot 3 on lap 2). The phone's Choice widget measures the time and sends it as elapsedMs.
+ */
+async function answerLap(phone, s, seenAt) {
+  const lap = lapOf(s);
+  const correct = answerKey.get(norm(s.prompt));
+  const wrong = answersWrong(phone.slot, lap);
+  let option = correct === undefined ? undefined : s.options.find((o) => (o.label === correct) !== wrong && s.enabled.includes(o.id));
+  if (!option) {
+    log(`P${phone.slot} lap ${lap}: "${s.prompt}" is not in the fallback pack; guessing`);
+    option = { id: pick(s.enabled), label: "?" };
+  }
+  await sleep(Math.max(0, seenAt + qualiDelayS(phone.slot) * 1000 - Date.now()));
+  await phone.$(`.widget button[data-id="${option.id}"]`).click({ timeout: 1500 });
+  log(`P${phone.slot} lap ${lap}: ${wrong ? "WRONG (planned)" : "right"} "${option.label}" after ${((Date.now() - seenAt) / 1000).toFixed(1)} s`);
+}
+
+/**
+ * The bots' grid order qualifying should produce, from the plan alone: most correct laps, then the least total time
+ * (every lap at the bot's delay), fastest first. Codes from the phones' own views; "?" when one never named its driver.
+ */
+function expectedQualiOrder() {
+  return Array.from({ length: PHONES }, (_, i) => i + 1)
+    .map((slot) => {
+      const laps = Array.from({ length: QUALI_LAPS }, (_, i) => i + 1).filter((lap) => !answersWrong(slot, lap));
+      return { slot, correct: laps.length, total: laps.length * qualiDelayS(slot), code: codeOf.get(slot) ?? "?" };
+    })
+    .sort((a, b) => b.correct - a.correct || a.total - b.total || a.slot - b.slot);
 }
 
 async function act(phone, s) {
@@ -358,6 +438,7 @@ async function run() {
 
   const onSnapshot = (phone, s) => {
     const phase = phaseOf(s);
+    learnDriver(phone.slot, s);
     const key = `${phase}|${s.header}|${s.message}|${s.prompt}`;
     const prev = seen.get(phone.slot);
     if (!prev || prev.key !== key) {
@@ -377,13 +458,24 @@ async function run() {
       const phase = phaseOf(s);
       const name = { "driver-select": "driver-select", seated: "seated", grid: "grid", throttle: "throttle", "throttle-locked": "throttle-locked",
         reading: "reading", question: "question", answered: "answered", reveal: "reveal", chequered: "chequered", mash: "mash", results: "results",
-        anthem: "anthem", champagne: "champagne", "podium-watch": "podium-watch" }[phase];
+        anthem: "anthem", champagne: "champagne", "podium-watch": "podium-watch",
+        "quali-reading": `quali-reading-lap${lapOf(s)}`, "quali-question": `quali-question-lap${lapOf(s)}`,
+        "quali-answered": `quali-answered-lap${lapOf(s)}`, "quali-result": `quali-result-lap${lapOf(s)}` }[phase];
       if (name && !shots.has(name)) {
         shots.add(name);
         await sleep(250); // let fonts and the countdown settle
         await phones[0].shot(`${name}.png`).catch(() => shots.delete(name));
-        if (dev && ["reveal", "chequered", "question", "driver-select", "mash", "anthem", "champagne"].includes(phase)) {
+        if (dev && ["reveal", "chequered", "question", "driver-select", "mash", "anthem", "champagne", "quali-result"].includes(phase)) {
           await dev.screenshot({ path: join(SHOTS, `dev-${name}.png`), fullPage: true }).catch(() => {});
+        }
+      }
+      // Bot 3's planned deleted lap, on its own phone.
+      if (phones[2] && !shots.has("quali-deleted-P3")) {
+        const s3 = await snapshot(phones[2]);
+        if (phaseOf(s3) === "quali-result" && /^✖/.test(s3.message)) {
+          shots.add("quali-deleted-P3");
+          await sleep(250);
+          await phones[2].shot("quali-deleted-P3.png").catch(() => shots.delete("quali-deleted-P3"));
         }
       }
       await sleep(200);
@@ -464,7 +556,13 @@ async function run() {
     await Promise.all([...bots, shooter, watchdog, rejoin]);
   }
   if (GAME === "redline") {
-    for (const phase of ["driver-select", "throttle", "reading", "question", "reveal"]) if (!phasesSeen.has(phase)) fail(`phone 1 never showed ${phase}`);
+    for (const phase of ["driver-select", "quali-reading", "quali-question", "quali-result", "throttle", "reading", "question", "reveal"]) {
+      if (!phasesSeen.has(phase)) fail(`phone 1 never showed ${phase}`);
+    }
+    // For tools/tv-e2e.sh: the bots' grid order qualifying should give, fastest first (compared with the TV's `REDLINE grid`).
+    const order = expectedQualiOrder();
+    log(`qualifying plan: ${order.map((b) => `P${b.slot} ${b.code} ${b.correct}/${QUALI_LAPS} laps, ${b.total.toFixed(2)} s`).join("; ")}`);
+    log(`QUALI order ${order.map((b) => b.code).join(" ")}`);
   }
   log(`phases seen on P1: ${[...phasesSeen].join(", ")}`);
   return 0;

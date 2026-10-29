@@ -25,8 +25,10 @@ const string Usage = """
     Rule overrides (for what-if runs; the game code is not changed, a different RedlineRules is passed in):
       --finish N  --max-rounds N  --cruise-gain N  --push-gain N  --push-loss N  --redline-gain N  --redline-loss N
       --read-questions on|off  (the Reading phase before the answer clock; default on)
+      --qualify on|off         (qualifying before the Grid; default on. Humans answer each lap at median 2.6 s, σ 0.3, 80% right)
       --ai-easy X  --ai-medium X  --ai-hard X  --ai-min-p X  --ai-max-p X  --ai-temp X  --ai-limiter-cost X
       --ai-redline-floor X  --ai-chase-gap N  --ai-chase-rounds N  --ai-chase-bonus X
+      --ai-quali-slow S  --ai-quali-fast S  --ai-quali-sigma X   (AI qualifying lap medians, seconds, and σ)
 
     Examples:
       dotnet run --project games/Redline/tools/Redline.Sim -c Release -- -n 500 --only solo
@@ -99,6 +101,20 @@ try
                     },
                 };
                 break;
+            case "--qualify":
+                rules = rules with
+                {
+                    Qualify = Next() switch
+                    {
+                        "on" => true,
+                        "off" => false,
+                        var x => throw new ArgumentException($"--qualify takes on or off, not '{x}'."),
+                    },
+                };
+                break;
+            case "--ai-quali-slow": ai = ai with { QualiSlowMedian = Dbl() }; break;
+            case "--ai-quali-fast": ai = ai with { QualiFastMedian = Dbl() }; break;
+            case "--ai-quali-sigma": ai = ai with { QualiSigma = Dbl() }; break;
             case "--ai-easy": ai = ai with { Easy = Dbl() }; break;
             case "--ai-medium": ai = ai with { Medium = Dbl() }; break;
             case "--ai-hard": ai = ai with { Hard = Dbl() }; break;
@@ -139,7 +155,7 @@ if (scenarios.Count == 0)
     return 2;
 }
 
-var options = new SimOptions(races, seed, rules, mix, latency, seats);
+var options = new SimOptions(races, seed, rules, mix, latency, seats, QualiModel.Default);
 var clock = Stopwatch.StartNew();
 var runs = new List<(Scenario, RaceRecord[])>();
 foreach (var s in scenarios)
@@ -159,6 +175,7 @@ var md = new StringBuilder()
     .AppendJoin(Environment.NewLine, scenarios.Select(s => $"- `{s.Name}`: {s.Description}"))
     .AppendLine().AppendLine()
     .Append(Report.Overview(runs, rules))
+    .Append(Report.Qualifying(runs, rules))
     .Append(Report.RoundHistogram(runs, rules))
     .Append(Report.Humans(runs))
     .Append(Report.HeadToHead(runs))
