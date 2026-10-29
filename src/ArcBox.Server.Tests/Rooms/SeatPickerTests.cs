@@ -17,6 +17,12 @@ public class SeatPickerTests
         return log.GetArrayLength() > 0 && log[log.GetArrayLength() - 1].GetString() == entry;
     }
 
+    private static bool LogTail(JsonElement hostView, params string[] entries)
+    {
+        var log = hostView.GetProperty("log").EnumerateArray().Select(e => e.GetString()).ToList();
+        return log.Count >= entries.Length && log.TakeLast(entries.Length).SequenceEqual(entries);
+    }
+
     /// <summary>A room running Ledger with phones p1 (Ann), p2 (Bea), p3 (Cy), all connected.</summary>
     private sealed class Table(ArcServerFactory factory, TestClient host, string code, TestClient[] phones, JoinResult[] joins)
         : IAsyncDisposable
@@ -183,6 +189,40 @@ public class SeatPickerTests
         // The new secret is the one that works.
         await using var third = await TestClient.ConnectAsync(f);
         await third.InvokeAsync("Rejoin", t.Code, "p2", taken.Secret);
+    }
+
+    // A phone sits in one seat: taking another moves it, as if its connection to the first had been lost.
+    [Fact]
+    public async Task A_seated_phone_taking_another_offline_seat_moves_and_frees_its_old_seat()
+    {
+        using var f = new ArcServerFactory();
+        await using var t = await Table.StartAsync(f);
+        await t.DropBeaAsync();
+
+        var taken = await t.Phones[0].TakeSeatAsync(new TakeSeatRequest(t.Code, Seat: Slot("p2")));
+
+        Assert.Equal(new PlayerId("p2"), taken.PlayerId);
+        await t.Host.WaitForAsync(ClientMethods.HostView, v => LogTail(v, "connected:p1:false", "connected:p2:true"));
+
+        // The phone's input now goes to p2, and when it drops both seats are offline again.
+        await t.Phones[0].DisposeAsync();
+        await t.Host.WaitForAsync(ClientMethods.HostView, v => LogEndsWith(v, "connected:p2:false"));
+        await using var stranger = await TestClient.ConnectAsync(f);
+        var peek = await stranger.PeekAsync(t.Code);
+        Assert.Equal([Slot("p1"), Slot("p2")], peek.Offers.Select(o => o.Ref));
+        var retaken = await stranger.TakeSeatAsync(new TakeSeatRequest(t.Code, Seat: Slot("p2")));
+        Assert.Equal(new PlayerId("p2"), retaken.PlayerId);
+    }
+
+    [Fact]
+    public async Task Legacy_Join_with_a_null_name_keeps_the_name_message()
+    {
+        using var f = new ArcServerFactory();
+        await using var host = await TestClient.ConnectAsync(f);
+        await using var c = await TestClient.ConnectAsync(f);
+        var room = await host.InvokeAsync<CreateRoomResult>("CreateRoom");
+
+        Assert.Equal("Name must be 1–12 characters.", await c.ThrowsHubAsync("Join", room.Code, null!));
     }
 
     [Fact]

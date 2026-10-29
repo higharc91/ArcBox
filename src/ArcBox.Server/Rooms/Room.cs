@@ -215,6 +215,12 @@ public sealed class Room
             throw new RoomException($"Someone's already playing as {slot.Name}.");
         }
 
+        // A phone sits in one seat: one that holds another seat moves, leaving it as a lost connection would.
+        if (_members.FindByConnection(connectionId) != null)
+        {
+            Unseat(connectionId);
+        }
+
         // The old phone's secret stops working; if it comes back, its Rejoin fails and it lands on the picker.
         var secret = _members.RotateSecret(slot);
         SeatConnection(connectionId, slot);
@@ -368,16 +374,7 @@ public sealed class Room
         }
         else
         {
-            var slot = _members.Unbind(connectionId);
-            if (slot != null)
-            {
-                if (_status == RoomStatus.InGame && _session != null)
-                {
-                    _session.ConnectionChanged(slot.Id, false);
-                    Publish();
-                }
-                BroadcastLobby();
-            }
+            Unseat(connectionId);
         }
 
         if (_hostConnectionId == null && !_members.AnyConnected)
@@ -385,6 +382,24 @@ public sealed class Room
             _allAbsentSince ??= _time.GetUtcNow();
         }
     });
+
+    /// <summary>Frees the seat <paramref name="connectionId"/> holds, telling the game and everyone's lobby.</summary>
+    private void Unseat(string connectionId)
+    {
+        var slot = _members.Unbind(connectionId);
+        if (slot == null)
+        {
+            return;
+        }
+
+        if (_status == RoomStatus.InGame && _session != null)
+        {
+            _session.ConnectionChanged(slot.Id, false);
+            Publish();
+        }
+
+        BroadcastLobby();
+    }
 
     public Task<bool> IsExpiredAsync() => EnqueueAsync(() =>
     {

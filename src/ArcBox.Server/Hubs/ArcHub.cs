@@ -40,7 +40,7 @@ public sealed class ArcHub(RoomManager rooms) : Hub
     });
 
     // Kept for one release so a stale phone tab still works.
-    public Task<JoinResult> Join(string code, string name) => TakeSeat(new TakeSeatRequest(code, NewName: name));
+    public Task<JoinResult> Join(string code, string name) => TakeSeat(new TakeSeatRequest(code, NewName: name ?? ""));
 
     public Task Rejoin(string code, string playerId, string secret) => WithHubErrors(async () =>
     {

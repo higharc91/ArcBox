@@ -82,6 +82,32 @@ public sealed class ProfileServiceTests : IDisposable
     }
 
     [Fact]
+    public async Task Pruning_drops_the_oldest_issued_key_even_if_it_was_used_recently_and_across_a_restart()
+    {
+        var profile = _profiles.Create("Dave");
+        var keys = Enumerable.Range(0, 10).Select(_ => _profiles.IssueKey(profile.Id).Key).ToList();
+        _profiles.Resolve(keys[0]); // the oldest key is the most recently used
+        var eleventh = _profiles.IssueKey(profile.Id).Key;
+        await FlushAsync();
+
+        void AssertOldestIssuedWasPruned(ProfileService service)
+        {
+            Assert.Null(service.Resolve(keys[0]));
+            Assert.All(keys.Skip(1).Append(eleventh), k => Assert.Equal(profile, service.Resolve(k)));
+        }
+
+        AssertOldestIssuedWasPruned(_profiles);
+
+        var restarted = new ProfileService(_db, _writer, _time);
+        AssertOldestIssuedWasPruned(restarted);
+
+        // Same again on the restarted service: use the oldest remaining key, issue another; keys[1] goes, not it.
+        var twelfth = restarted.IssueKey(profile.Id).Key;
+        Assert.Null(restarted.Resolve(keys[1]));
+        Assert.All(keys.Skip(2).Append(eleventh).Append(twelfth), k => Assert.Equal(profile, restarted.Resolve(k)));
+    }
+
+    [Fact]
     public async Task ForgetKeys_revokes_all()
     {
         var dave = _profiles.Create("Dave");

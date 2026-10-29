@@ -27,7 +27,7 @@ public sealed class ProfileService
     private readonly object _lock = new();
     private readonly Dictionary<ProfileId, Profile> _profiles = [];
     private readonly Dictionary<string, KeyEntry> _keys = new(StringComparer.Ordinal); // by key hash
-    private long _stamp; // breaks ties between keys issued or used within the same clock tick
+    private long _sequence; // orders keys by issue and by use, which the clock can't when several happen in one tick
 
     public ProfileService(ArcDb db, StorageWriter writer, [FromKeyedServices(RoomManager.ClockKey)] TimeProvider time)
     {
@@ -67,11 +67,12 @@ public sealed class ProfileService
             if (!_profiles.TryGetValue(id, out var profile))
                 throw new InvalidOperationException($"No profile {id}.");
 
-            var entry = new KeyEntry(Secrets.Hash(key), id, now) { LastUsed = now, Stamp = ++_stamp };
+            var entry = new KeyEntry(Secrets.Hash(key), id, now) { LastUsed = now, IssueOrder = ++_sequence };
+            entry.UseOrder = entry.IssueOrder;
             _keys[entry.Hash] = entry;
             QueueKey(entry);
 
-            var surplus = _keys.Values.Where(k => k.Profile == id).OrderBy(k => k.Stamp).SkipLast(MaxKeysPerProfile).ToList();
+            var surplus = _keys.Values.Where(k => k.Profile == id).OrderBy(k => k.IssueOrder).SkipLast(MaxKeysPerProfile).ToList();
             foreach (var old in surplus)
             {
                 _keys.Remove(old.Hash);
@@ -93,7 +94,7 @@ public sealed class ProfileService
             if (!_keys.TryGetValue(hash, out var entry)) return null;
             var profile = _profiles[entry.Profile];
             entry.LastUsed = now;
-            entry.Stamp = ++_stamp;
+            entry.UseOrder = ++_sequence;
             profile.LastSeen = now;
             QueueProfile(profile);
             QueueKey(entry);
@@ -110,7 +111,7 @@ public sealed class ProfileService
             return hashes
                 .Select(h => _keys.GetValueOrDefault(h))
                 .OfType<KeyEntry>()
-                .OrderByDescending(k => k.LastUsed).ThenByDescending(k => k.Stamp)
+                .OrderByDescending(k => k.LastUsed).ThenByDescending(k => k.UseOrder)
                 .Select(k => k.Profile)
                 .Distinct()
                 .Select(id => _profiles[id].Record)
@@ -189,8 +190,9 @@ public sealed class ProfileService
                 var entry = new KeyEntry(reader.GetString(0), new ProfileId(reader.GetString(1)), Parse(reader.GetString(2)))
                 {
                     LastUsed = Parse(reader.GetString(3)),
-                    Stamp = ++_stamp,
+                    IssueOrder = ++_sequence, // the query is in issue order
                 };
+                entry.UseOrder = entry.IssueOrder;
                 _keys[entry.Hash] = entry;
             }
         }
@@ -226,6 +228,7 @@ public sealed class ProfileService
         public ProfileId Profile { get; } = profile;
         public DateTimeOffset Issued { get; } = issued;
         public DateTimeOffset LastUsed { get; set; }
-        public long Stamp { get; set; }
+        public long IssueOrder { get; set; }   // set once; pruning keeps the highest
+        public long UseOrder { get; set; }     // moves on every use; only breaks ties in ResolveAll
     }
 }
