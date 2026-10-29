@@ -488,3 +488,8 @@ src/ArcBox.Server/wwwroot/assets/
 web/play/e2e/shots/
 .tts-cache/
 tools/blender/out/
+
+# SQLite database, its WAL files and backups (src/ArcBox.Server, or wherever Storage:Path points)
+arcbox.db
+arcbox.db-*
+backups/

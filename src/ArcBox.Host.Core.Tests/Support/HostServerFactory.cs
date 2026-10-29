@@ -16,6 +16,8 @@ public sealed class HostServerFactory : WebApplicationFactory<Program>
     {
         // AddRedline reads this while Program registers services, so it must be a setting.
         builder.UseSetting("Redline:OpenTdb:Enabled", "false");
+        // A private in-memory database, so no arcbox.db appears in the server's content root.
+        builder.UseSetting("Storage:ConnectionString", $"Data Source=file:{Guid.NewGuid():N}?mode=memory&cache=shared");
     }
 
     /// <summary>A host client that talks to this server over LongPolling through the in-memory handler.</summary>
