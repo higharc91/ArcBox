@@ -52,8 +52,28 @@ Everything after `--` on the Godot command line; all optional.
 | `--autostart=<game>[:<players>]` | Dev only: select that game, and start it once that many players (default 1) are connected and the scene is ready. First game only. Used by `tools/tv-e2e.sh`. |
 | `--res=<w>x<h>` | Window size. The UI is laid out at 1920×1080 and scales (`canvas_items`, `expand`). |
 | `--redline-demo[=<step>]` | Dev only: play a scripted REDLINE race into the TV without a server (see below). |
+| `--demo=campaign-lobby` | Dev only: show the lobby with a built-in campaign game selected, its campaign list and a roster with seated and away members (`Shell/CampaignLobbyDemo.cs`), without a server. With `--shots` it saves `001-lobby.png`. |
 
 Unknown arguments are reported as warnings and ignored.
+
+## Campaigns in the lobby
+
+When the selected game uses campaigns (`LobbyState.Campaigns` is set), the lobby adds a third column: the game's campaigns
+(click one to select it, `SelectCampaign`; "New campaign is created on the VIP's phone"), and, once one is selected, its
+roster: each member's card title and subtitle, a colour bar (the card's colour, else the seated player's colour) and
+SEATED or AWAY. Start says "Pick a campaign first" until one is selected. Games without campaigns (REDLINE, Counter) get
+the lobby exactly as before.
+
+## Content packs
+
+The server sends `ContentRequired(gameId, packs)` when a game is selected, when it starts and on resume (spec §3.6). The TV
+caches each pack under `user://content/<gameId>/<packId>/<hash>/` (on Linux
+`~/.local/share/godot/app_userdata/ArcBox/content/`), downloading it from the server it's connected to and verifying every
+file; the newest 3 hashes of each pack are kept. A game with no packs (REDLINE, Counter) is shown at once, as before.
+Otherwise, if a pack isn't cached yet when the game starts, the TV shows a "Loading content… 42%" card (the average
+across the game's packs) and shows the game once every pack is in, with the newest view it was sent meanwhile. If a
+download or its verification fails, the card says "Couldn't load game content" with **Retry** (click or Enter), and the
+error is logged; **Esc** ends the game as usual.
 
 ## Sessions and resume
 
@@ -154,5 +174,13 @@ with Mesa's CPU rasteriser (llvmpipe), where a 1080p frame takes several seconds
    The narrator fetches the server voice with the room's host credentials, falls back to the TV's built-in voice,
    queues lines one at a time and ducks Music and Sfx while it speaks. Play your own sounds on the `Music` and `Sfx`
    buses (`AudioBuses`) and log them with `AudioLog.Play(bus, name)`.
+
+4. To draw downloaded content (maps, sprite sheets, dialogue from `content/<id>/<packId>/` on the server), also implement
+   `IContentScene`: `SetContentRoots(rootsByPackId)` gives each pack's local, verified directory before the first
+   `Render` (empty for a game without packs).
+5. To tell the game when something on the TV finished (spec §3.7), also implement `ISignalingScene`: the shell sets
+   `Signal` when it creates the scene, and `Signal("done", new { seq = 41 })` reaches the game's `IHostAware.OnHostSignal`.
+   It's fire-and-forget (failures are logged). A signal may only shorten a wait the game already has a fallback timer
+   for, and should carry the sequence number of the event it acknowledges.
 
 Until the scene exists, the TV shows a "scene not installed" screen with the raw view JSON, and nothing crashes.

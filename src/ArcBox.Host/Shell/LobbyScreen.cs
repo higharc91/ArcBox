@@ -1,5 +1,6 @@
 using ArcBox.Host.Core;
 using ArcBox.Sdk;
+using ArcBox.Sdk.Campaigns;
 using ArcBox.Sdk.Protocol;
 using Godot;
 
@@ -8,16 +9,23 @@ namespace ArcBox.Host.Shell;
 /// <summary>
 /// Room code, QR, players (VIP and connection state), game picker and Start. Keyboard: ←/→ picks a game,
 /// Enter starts. The server decides everything; this only shows the latest <see cref="LobbyState"/>.
+/// For a game that uses campaigns, a third column lists its campaigns (click to select) and the selected campaign's
+/// roster; for other games the lobby is unchanged.
 /// </summary>
 public partial class LobbyScreen : Control
 {
     private const int Slots = 8;
+    private const int RoomPanelWidth = 1000;
+    private const int RoomPanelWidthWithCampaigns = 720;
 
     private readonly List<PlayerRow> _rows = [];
     private readonly Dictionary<string, (PanelContainer Card, Label Name, Label Players, ColorRect Bar)> _cards = new();
     private string _serverUrl = HostSettings.DefaultServer;
     private LobbyState? _lobby;
     private string? _qrFor;
+    private readonly Dictionary<string, (PanelContainer Card, Label Name, ColorRect Bar)> _campaignCards = new();
+    private string? _campaignListKey;
+    private string? _rosterKey;
 
     private Label _title = null!;
     private Label _code = null!;
@@ -31,7 +39,20 @@ public partial class LobbyScreen : Control
     private Label _toast = null!;
     private double _toastUntil;
 
+    private Control _roomPanel = null!;
+    private PanelContainer _campaignPanel = null!;
+    private Label _campaignCount = null!;
+    private Control _campaignListSection = null!;
+    private VBoxContainer _campaignList = null!;
+    private Control _rosterSection = null!;
+    private Label _rosterCode = null!;
+    private Label _rosterName = null!;
+    private VBoxContainer _roster = null!;
+
     public event Action<string>? GameSelected;
+
+    /// <summary>A campaign in the list was clicked (its id).</summary>
+    public event Action<string>? CampaignSelected;
     public event Action? StartPressed;
 
     public LobbyState? Lobby => _lobby;
@@ -43,7 +64,7 @@ public partial class LobbyScreen : Control
         _title = ArcTheme.Label("Grab your phone and join the room", ArcTheme.Bold, 40);
         column.AddChild(ShellLayout.Header("ARCBOX", ArcTheme.Meta("Lobby · join on your phone"), _title));
 
-        var body = ArcTheme.HBox(24, BuildRoomPanel(), BuildPlayersPanel());
+        var body = ArcTheme.HBox(24, BuildRoomPanel(), BuildPlayersPanel(), BuildCampaignPanel());
         body.SizeFlagsVertical = SizeFlags.ExpandFill;
         column.AddChild(body);
         column.AddChild(BuildFooter());
@@ -147,7 +168,8 @@ public partial class LobbyScreen : Control
 
         var content = ArcTheme.VBox(18, codeBlock, edge, ArcTheme.HBox(36, qrCard, steps));
         var panel = ArcTheme.Panel(ArcTheme.GlassBox(null, 40, 24), content);
-        panel.CustomMinimumSize = new Vector2(1000, 0);
+        panel.CustomMinimumSize = new Vector2(RoomPanelWidth, 0);
+        _roomPanel = panel;
         return panel;
     }
 
@@ -169,6 +191,53 @@ public partial class LobbyScreen : Control
         var panel = ArcTheme.Panel(ArcTheme.GlassBox(null, 0, 0), ArcTheme.VBox(0, headPanel, rows));
         panel.SizeFlagsHorizontal = SizeFlags.ExpandFill;
         return panel;
+    }
+
+    /// <summary>The campaign column: the selected game's campaigns, then the selected campaign's roster. Hidden for other games.</summary>
+    private Control BuildCampaignPanel()
+    {
+        _campaignCount = ArcTheme.Meta("");
+        var head = ArcTheme.HBox(0, ArcTheme.Meta("Campaign"), ArcTheme.Spacer(), _campaignCount);
+        var headPanel = ArcTheme.Panel(BottomEdge(new Color(0, 0, 0, 0), 24, 12), head);
+
+        var hint = ArcTheme.Label("New campaign is created on the VIP's phone", ArcTheme.SemiBold, 18, ArcTheme.Dim);
+        hint.AutowrapMode = TextServer.AutowrapMode.WordSmart;
+        _campaignList = ArcTheme.VBox(8);
+        _campaignList.SizeFlagsHorizontal = SizeFlags.ExpandFill;
+        var scroll = new ScrollContainer
+        {
+            HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled,
+            SizeFlagsVertical = SizeFlags.ExpandFill,
+        };
+        scroll.AddChild(_campaignList);
+        var list = ArcTheme.VBox(12, hint, scroll);
+        list.SizeFlagsVertical = SizeFlags.ExpandFill;
+        _campaignListSection = ArcTheme.Margin(24, 14, 24, 14, list);
+        _campaignListSection.SizeFlagsVertical = SizeFlags.ExpandFill;
+        _campaignListSection.SizeFlagsStretchRatio = 1;
+
+        _rosterCode = ArcTheme.Meta("", 15, ArcTheme.Red);
+        _rosterName = ArcTheme.Label("", ArcTheme.BlackItalic, 30);
+        _rosterName.TextOverrunBehavior = TextServer.OverrunBehavior.TrimEllipsis;
+        _rosterName.ClipText = true;
+        var rosterHead = ArcTheme.Panel(BottomEdge(new Color(1, 1, 1, 0.03f), 24, 10), ArcTheme.VBox(0, _rosterCode, _rosterName));
+        _roster = ArcTheme.VBox(0);
+        _roster.SizeFlagsHorizontal = SizeFlags.ExpandFill;
+        var rosterScroll = new ScrollContainer
+        {
+            HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled,
+            SizeFlagsVertical = SizeFlags.ExpandFill,
+        };
+        rosterScroll.AddChild(_roster);
+        // With both shown, the roster gets most of the column (five members fit without scrolling, and three campaigns).
+        _rosterSection = ArcTheme.VBox(0, rosterHead, rosterScroll);
+        _rosterSection.SizeFlagsVertical = SizeFlags.ExpandFill;
+        _rosterSection.SizeFlagsStretchRatio = 1.6f;
+
+        _campaignPanel = ArcTheme.Panel(ArcTheme.GlassBox(null, 0, 0), ArcTheme.VBox(0, headPanel, _campaignListSection, _rosterSection));
+        _campaignPanel.CustomMinimumSize = new Vector2(440, 0);
+        _campaignPanel.Visible = false;
+        return _campaignPanel;
     }
 
     private Control BuildFooter()
@@ -232,7 +301,165 @@ public partial class LobbyScreen : Control
             : vip is not null ? $"{vip.Name} is the VIP: pick a game, then start" : "Pick a game, then start";
 
         ApplyGames(lobby, selected);
+        ApplyCampaigns(lobby);
         ApplyStart(lobby, selected);
+    }
+
+    private void ApplyCampaigns(LobbyState lobby)
+    {
+        var shown = lobby.Campaigns is not null || lobby.Campaign is not null;
+        _campaignPanel.Visible = shown;
+        _roomPanel.CustomMinimumSize = new Vector2(shown ? RoomPanelWidthWithCampaigns : RoomPanelWidth, 0);
+        if (!shown)
+        {
+            return;
+        }
+
+        _campaignListSection.Visible = lobby.Campaigns is not null;
+        if (lobby.Campaigns is { } campaigns)
+        {
+            _campaignCount.Text = $"{campaigns.Count} SAVED";
+            var key = string.Join("|", campaigns.Select(c => $"{c.Id}:{c.Name}:{c.Code}:{c.Members}"));
+            if (key != _campaignListKey)
+            {
+                _campaignListKey = key;
+                BuildCampaignList(campaigns);
+            }
+            foreach (var (id, (card, name, bar)) in _campaignCards)
+            {
+                var on = id == lobby.Campaign?.Id;
+                card.AddThemeStyleboxOverride("panel", on
+                    ? ArcTheme.Flat(new Color(1, 1, 1, 0.10f), 0, new Color(1, 1, 1, 0.35f), 1)
+                    : ArcTheme.GlassBox(null, 0, 0));
+                bar.Color = on ? ArcTheme.Red : new Color(1, 1, 1, 0.08f);
+                name.AddThemeColorOverride("font_color", on ? Colors.White : new Color(1, 1, 1, 0.75f));
+            }
+        }
+        else
+        {
+            _campaignCount.Text = "";
+        }
+
+        _rosterSection.Visible = lobby.Campaign is not null;
+        if (lobby.Campaign is { } campaign)
+        {
+            _rosterCode.Text = $"{campaign.Code} · {campaign.Roster.Count(r => r.SeatedAs is not null && r.Connected)} OF {campaign.Roster.Count} HERE";
+            _rosterName.Text = campaign.Name;
+            var key = string.Join("|", campaign.Roster.Select(r =>
+                $"{r.Profile}:{r.Card}:{r.SeatedAs}:{r.Connected}:{PlayerIndex(lobby, r.SeatedAs)}"));
+            if (key != _rosterKey)
+            {
+                _rosterKey = key;
+                BuildRoster(lobby, campaign);
+            }
+        }
+    }
+
+    private void BuildCampaignList(IReadOnlyList<CampaignSummary> campaigns)
+    {
+        foreach (var child in _campaignList.GetChildren())
+        {
+            child.QueueFree();
+        }
+        _campaignCards.Clear();
+        if (campaigns.Count == 0)
+        {
+            _campaignList.AddChild(ArcTheme.Label("No campaigns yet", ArcTheme.SemiBold, 24, new Color(1, 1, 1, 0.22f)));
+            return;
+        }
+
+        foreach (var campaign in campaigns)
+        {
+            var bar = new ColorRect { CustomMinimumSize = new Vector2(6, 0) };
+            var name = ArcTheme.Label(campaign.Name, ArcTheme.Bold, 24);
+            name.TextOverrunBehavior = TextServer.OverrunBehavior.TrimEllipsis;
+            name.ClipText = true;
+            var meta = ArcTheme.Meta($"{campaign.Code} · {campaign.Members} MEMBER{(campaign.Members == 1 ? "" : "S")}", 13);
+            var text = ArcTheme.VBox(0, name, meta);
+            var inner = ArcTheme.Margin(0, 6, 14, 6, text);
+            inner.SizeFlagsHorizontal = SizeFlags.ExpandFill;
+            var card = ArcTheme.Panel(ArcTheme.GlassBox(null, 0, 0), ArcTheme.HBox(14, bar, inner));
+            card.MouseFilter = MouseFilterEnum.Stop;
+            card.MouseDefaultCursorShape = CursorShape.PointingHand;
+            foreach (var c in new Control[] { bar, name, meta, text, inner })
+            {
+                c.MouseFilter = MouseFilterEnum.Ignore;
+            }
+            var id = campaign.Id;
+            card.GuiInput += e =>
+            {
+                if (e is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left })
+                {
+                    CampaignSelected?.Invoke(id);
+                }
+            };
+            _campaignList.AddChild(card);
+            _campaignCards[id] = (card, name, bar);
+        }
+    }
+
+    private void BuildRoster(LobbyState lobby, LobbyCampaign campaign)
+    {
+        foreach (var child in _roster.GetChildren())
+        {
+            child.QueueFree();
+        }
+        for (var i = 0; i < campaign.Roster.Count; i++)
+        {
+            var entry = campaign.Roster[i];
+            var seated = entry.SeatedAs is not null && entry.Connected;
+            // The card's own colour, else the seated player's colour from the players list, else one by roster position.
+            var fallback = ArcTheme.PlayerColour(PlayerIndex(lobby, entry.SeatedAs) ?? i);
+            var colour = new ColorRect
+            {
+                Color = string.IsNullOrWhiteSpace(entry.Card.Color) ? fallback : Color.FromString(entry.Card.Color, fallback),
+                CustomMinimumSize = new Vector2(6, 36),
+                SizeFlagsVertical = SizeFlags.ShrinkCenter,
+            };
+            var title = ArcTheme.Label(entry.Card.Title, ArcTheme.Bold, 22, seated ? Colors.White : new Color(1, 1, 1, 0.45f));
+            title.TextOverrunBehavior = TextServer.OverrunBehavior.TrimEllipsis;
+            title.ClipText = true;
+            var text = ArcTheme.VBox(0, title);
+            if (!string.IsNullOrWhiteSpace(entry.Card.Subtitle))
+            {
+                var subtitle = ArcTheme.Label(entry.Card.Subtitle, ArcTheme.SemiBold, 15, ArcTheme.Dim);
+                subtitle.TextOverrunBehavior = TextServer.OverrunBehavior.TrimEllipsis;
+                subtitle.ClipText = true;
+                text.AddChild(subtitle);
+            }
+            text.SizeFlagsHorizontal = SizeFlags.ExpandFill;
+            text.Alignment = BoxContainer.AlignmentMode.Center;
+
+            var dot = new ColorRect
+            {
+                Color = seated ? ArcTheme.Good : ArcTheme.Dim,
+                CustomMinimumSize = new Vector2(10, 10),
+                SizeFlagsVertical = SizeFlags.ShrinkCenter,
+            };
+            var state = ArcTheme.Meta(seated ? "SEATED" : "AWAY", 15, seated ? ArcTheme.Good : ArcTheme.Dim);
+            state.CustomMinimumSize = new Vector2(76, 0);
+            var status = ArcTheme.HBox(8, dot, state);
+            status.SizeFlagsVertical = SizeFlags.ShrinkCenter;
+
+            _roster.AddChild(ArcTheme.Panel(BottomEdge(Colors.Transparent, 24, 6), ArcTheme.HBox(14, colour, text, status)));
+        }
+    }
+
+    /// <summary>Where a seated member sits in the players list, so the roster uses the same player colour.</summary>
+    private static int? PlayerIndex(LobbyState lobby, PlayerId? seat)
+    {
+        if (seat is not { } id)
+        {
+            return null;
+        }
+        for (var i = 0; i < lobby.Players.Count; i++)
+        {
+            if (lobby.Players[i].Id == id)
+            {
+                return i;
+            }
+        }
+        return null;
     }
 
     private void ApplyGames(LobbyState lobby, GameManifest? selected)
@@ -311,6 +538,10 @@ public partial class LobbyScreen : Control
         if (selected is null)
         {
             hint = "Pick a game first";
+        }
+        else if (selected.UsesCampaigns && lobby.Campaign is null)
+        {
+            hint = "Pick a campaign first";
         }
         else if (lobby.Players.Count < selected.MinPlayers)
         {

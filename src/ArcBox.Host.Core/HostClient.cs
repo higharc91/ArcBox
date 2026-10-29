@@ -131,6 +131,13 @@ public sealed class HostClient : IAsyncDisposable
 
     public Task SelectGameAsync(string id) => CallAsync(() => _connection.InvokeAsync("SelectGame", id));
 
+    /// <summary>
+    /// Selects one of the selected game's campaigns (<see cref="LobbyState.Campaigns"/>); the lobby then carries its roster.
+    /// Throws <see cref="HubException"/> with the room's message, e.g. "Campaign not found." or
+    /// "{Name} is being played in room {CODE}.".
+    /// </summary>
+    public Task SelectCampaignAsync(string campaignId) => CallAsync(() => _connection.InvokeAsync("SelectCampaign", campaignId));
+
     public Task StartGameAsync() => CallAsync(() => _connection.InvokeAsync("StartGame"));
 
     public Task ReturnToLobbyAsync() => CallAsync(() => _connection.InvokeAsync("ReturnToLobby"));

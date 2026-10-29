@@ -1,4 +1,5 @@
 using ArcBox.Host.Core.Tests.Support;
+using ArcBox.Sdk.Protocol;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.Client;
 
@@ -159,6 +160,44 @@ public class HostClientTests
 
         var view = await events.WaitForAsync<HostViewEvent>(v => v.View.GetProperty("signals").GetArrayLength() == 1);
         Assert.Equal("done:{\"seq\":41}", view.View.GetProperty("signals")[0].GetString());
+    }
+
+    [Fact]
+    public async Task SelectCampaignAsync_selects_one_of_the_games_campaigns()
+    {
+        using var f = new HostServerFactory();
+        await using var host = f.CreateHostClient();
+        var events = new EventRecorder(host);
+        await host.ConnectAsync(Ct);
+        var room = await host.CreateRoomAsync();
+        var (phone, _) = await f.JoinAsync(room.Code, "Ann");
+        await using var _phone = phone;
+        await host.SelectGameAsync(CampaignTestGame.Id);
+        // Only the VIP's phone creates campaigns; each new one is selected straight away.
+        await phone.InvokeAsync<ProfileKey>("CreateCampaign", "First", Ct);
+        await phone.InvokeAsync<ProfileKey>("CreateCampaign", "Second", Ct);
+        var listed = await events.WaitForAsync<LobbyEvent>(e => e.Lobby.Campaigns?.Count == 2 && e.Lobby.Campaign?.Name == "Second");
+        var first = listed.Lobby.Campaigns!.Single(c => c.Name == "First");
+        events.Clear();   // "First" was selected once already, when it was created
+
+        await host.SelectCampaignAsync(first.Id);
+
+        var selected = await events.WaitForAsync<LobbyEvent>(e => e.Lobby.Campaign?.Id == first.Id);
+        Assert.Equal("First", selected.Lobby.Campaign!.Name);
+        Assert.Equal("Ann", Assert.Single(selected.Lobby.Campaign.Roster).Card.Title);
+    }
+
+    [Fact]
+    public async Task SelectCampaignAsync_unknown_campaign_throws_room_message()
+    {
+        using var f = new HostServerFactory();
+        await using var host = f.CreateHostClient();
+        await host.ConnectAsync(Ct);
+        await host.CreateRoomAsync();
+        await host.SelectGameAsync(CampaignTestGame.Id);
+
+        var error = await Assert.ThrowsAsync<HubException>(() => host.SelectCampaignAsync("no-such-campaign"));
+        Assert.Equal("Campaign not found.", error.Message);
     }
 
     [Fact]

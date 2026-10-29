@@ -11,10 +11,14 @@ namespace ArcBox.Host.Shell;
 /// <c>--redline-demo-winner=PER</c> crowns another player's
 /// car, e.g. one whose country plays the theme only) and <c>--autostart=&lt;gameId&gt;[:&lt;players&gt;]</c>
 /// (select that game and start it once enough players are in; for scripted runs), and <c>--perf</c> (F3 overlay on
-/// from the start, logged every 5 s), and <c>--audio-log</c> (print <c>AUDIO &lt;bus&gt; &lt;name&gt;</c> for every sound played).
+/// from the start, logged every 5 s), and <c>--audio-log</c> (print <c>AUDIO &lt;bus&gt; &lt;name&gt;</c> for every sound played),
+/// and the dev-only <c>--demo=campaign-lobby</c> (show the lobby with a built-in campaign and roster, without a server).
 /// </summary>
 public sealed record AppArgs
 {
+    /// <summary><c>--demo=campaign-lobby</c>: the lobby with <see cref="Shell.CampaignLobbyDemo"/>'s sample state.</summary>
+    public const string DemoCampaignLobby = "campaign-lobby";
+
     public string? Server { get; init; }
     public bool NewRoom { get; init; }
     public string? ShotsDir { get; init; }
@@ -30,6 +34,9 @@ public sealed record AppArgs
 
     /// <summary>Dev only: the demo race winner's driver code (a player's car), or null for the script's own.</summary>
     public string? RedlineDemoWinner { get; init; }
+
+    /// <summary>Dev only: a built-in screen to show instead of connecting (<see cref="DemoCampaignLobby"/>), or null.</summary>
+    public string? Demo { get; init; }
 
     /// <summary><c>--perf</c>: start with the F3 performance overlay on, and log it every 5 s.</summary>
     public bool Perf { get; init; }
@@ -73,6 +80,9 @@ public sealed record AppArgs
                     break;
                 case "--redline-demo-winner" when !string.IsNullOrWhiteSpace(value):
                     args = args with { RedlineDemoWinner = value.Trim().ToUpperInvariant() };
+                    break;
+                case "--demo" when value == DemoCampaignLobby:
+                    args = args with { Demo = value };
                     break;
                 case "--perf" when value is null:
                     args = args with { Perf = true };

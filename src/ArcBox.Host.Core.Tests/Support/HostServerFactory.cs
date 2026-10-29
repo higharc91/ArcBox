@@ -3,6 +3,7 @@ using ArcBox.Sdk;
 using ArcBox.Sdk.Protocol;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Connections;
+using ArcBox.Server.Campaigns;
 using ArcBox.Server.Games;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -41,7 +42,12 @@ public sealed class HostServerFactory : WebApplicationFactory<Program>
         builder.UseSetting("Redline:OpenTdb:Enabled", "false");
         // A private in-memory database, so no arcbox.db appears in the server's content root.
         builder.UseSetting("Storage:ConnectionString", $"Data Source=file:{Guid.NewGuid():N}?mode=memory&cache=shared");
-        builder.ConfigureTestServices(services => services.AddArcGame<SignalEchoGame>());
+        builder.ConfigureTestServices(services =>
+        {
+            services.AddArcGame<SignalEchoGame>();
+            services.AddArcGame<CampaignTestGame>();
+            services.AddCampaignRules<CampaignTestRules>();
+        });
     }
 
     /// <summary>An <see cref="HttpClient"/> on this server (base address = the server) through the in-memory handler, or <paramref name="wrap"/> around it.</summary>

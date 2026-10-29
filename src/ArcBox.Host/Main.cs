@@ -13,11 +13,14 @@ namespace ArcBox.Host;
 /// <summary>
 /// Root of the TV app. Owns the <see cref="HostClient"/>, drains its events on the main thread every frame and
 /// shows exactly one screen: Connect → Lobby → game scene → Results → Lobby. Everything shown comes from the
-/// server's latest lobby / host view; the TV never decides anything.
+/// server's latest lobby / host view; the TV never decides anything. A game whose content packs aren't cached yet
+/// waits behind <see cref="ContentLoadingCard"/> until they are (spec §3.6).
 /// </summary>
 public partial class Main : Control
 {
-    private enum ScreenKind { None, Connect, Lobby, Game, Results }
+    private enum ScreenKind { None, Connect, Lobby, Loading, Game, Results }
+
+    private static readonly IReadOnlyDictionary<string, string> NoContent = new Dictionary<string, string>();
 
     private readonly MainThreadQueue _queue = new();
     private AppArgs _args = new();
@@ -33,6 +36,11 @@ public partial class Main : Control
     private HostOverlay _overlay = null!;
     private Narrator _narrator = null!;
 
+    /// <summary>Content packs (spec §3.6): one load per game, cached under <c>user://content</c>, fetched from the session's server.</summary>
+    private ContentLoader _content = null!;
+    private System.Net.Http.HttpClient? _contentHttp;
+    private ContentCache? _contentCache;
+
     /// <summary>The selected game's scene, getting ready behind the lobby (<see cref="IPreloadScene"/>).</summary>
     private Node? _warm;
     private string? _warmGameId;
@@ -43,9 +51,17 @@ public partial class Main : Control
     private ConnectScreen? _connect;
     private LobbyScreen? _lobbyScreen;
     private ResultsScreen? _results;
+    private ContentLoadingCard? _loading;
+    private string? _loadingGameId;
     private IGameScene? _scene;
     private string? _sceneGameId;
     private JsonElement? _previousView;
+
+    /// <summary>The newest view of the game waiting behind the loading card, rendered once its content is in.</summary>
+    private HostViewEvent? _pendingView;
+
+    /// <summary>The content load whose roots the scene on screen got (null: the game had no packs when it was shown).</summary>
+    private ContentLoad? _sceneContent;
 
     private LobbyState? _lobby;
     private string? _lobbyShotKey;
@@ -84,6 +100,7 @@ public partial class Main : Control
             GetTree().CreateTimer(seconds).Timeout += () => GetTree().Quit();
         }
 
+        _content = new ContentLoader(EnsurePackAsync, _queue.Post);
         _store = new SessionStore(ProjectSettings.GlobalizePath("user://session.json"));
         _settings = new SettingsStore(ProjectSettings.GlobalizePath("user://settings.json"));
         var saved = _settings.Load();
@@ -116,6 +133,13 @@ public partial class Main : Control
             // Dev only: a scripted REDLINE race through the normal host-view path, no server.
             GD.Print("REDLINE demo: no server connection");
             AddChild(new Games.Redline.Demo.RedlineDemoFeeder(view => OnHostView(new HostViewEvent("redline", view)), _args.RedlineDemoFrom, _args.RedlineDemoWinner));
+            return;
+        }
+        if (_args.Demo == AppArgs.DemoCampaignLobby)
+        {
+            // Dev only: the lobby of a campaign game with a built-in campaign list and roster, no server.
+            GD.Print("Campaign lobby demo: no server connection");
+            OnLobby(CampaignLobbyDemo.Lobby());
             return;
         }
 
@@ -197,7 +221,7 @@ public partial class Main : Control
     public override void _UnhandledInput(InputEvent e)
     {
         // Host override: Esc during a game ends it and returns everyone to the lobby.
-        if (_kind == ScreenKind.Game && e.IsActionPressed("ui_cancel"))
+        if (_kind is (ScreenKind.Game or ScreenKind.Loading) && e.IsActionPressed("ui_cancel"))
         {
             GetViewport().SetInputAsHandled();
             _ = CallAsync(c => c.ReturnToLobbyAsync());
@@ -212,6 +236,9 @@ public partial class Main : Control
         }
         if (what == NotificationWMCloseRequest || what == NotificationPredelete)
         {
+            _content?.Clear();
+            _contentHttp?.Dispose();
+            _contentHttp = null;
             _connectCts?.Cancel();
             _ = _client?.DisposeAsync().AsTask();
             _client = null;
@@ -245,6 +272,7 @@ public partial class Main : Control
         var client = new HostClient(uri);
         client.Event += _queue.Post;
         _client = client;
+        ResetContent(client.Server);
         try
         {
             await client.ConnectAsync(ct);
@@ -359,6 +387,12 @@ public partial class Main : Control
             case RoomClosedEvent r:
                 OnRoomClosed(r.Reason);
                 break;
+            case ContentRequiredEvent c:
+                OnContentRequired(c);
+                break;
+            case ContentLoadEvent l:
+                OnContentLoad(l);
+                break;
         }
     }
 
@@ -470,6 +504,12 @@ public partial class Main : Control
             ShowGame(v.GameId);
         }
 
+        if (_kind != ScreenKind.Game)
+        {
+            _pendingView = v;   // behind the loading card until the game's content is in
+            return;
+        }
+
         try
         {
             _scene!.Render(v.View, _previousView);
@@ -493,6 +533,151 @@ public partial class Main : Control
         _ = OpenRoomAsync(_generation, newRoom: true);
     }
 
+    // ---- Content ---------------------------------------------------------------------------------------------
+
+    /// <summary>A new session's server: one HTTP client for its content, and every earlier load forgotten (and cancelled).</summary>
+    private void ResetContent(Uri server)
+    {
+        _content.Clear();
+        _contentHttp?.Dispose();
+        _contentHttp = new System.Net.Http.HttpClient { BaseAddress = new Uri(server.AbsoluteUri.TrimEnd('/') + "/") };
+        _contentCache = new ContentCache(ProjectSettings.GlobalizePath("user://content"), _contentHttp);
+    }
+
+    /// <summary>
+    /// A cached pack is answered here at once (so the loading card doesn't even flash); a download runs on the thread pool,
+    /// so hashing and file writes stay off the main thread.
+    /// </summary>
+    private Task<string> EnsurePackAsync(string gameId, PackRef pack, IProgress<double> progress, CancellationToken ct)
+    {
+        var cache = _contentCache ?? throw new InvalidOperationException("No server to load content from.");
+        return cache.IsCached(gameId, pack.PackId, pack.Hash)
+            ? cache.EnsureAsync(gameId, pack.PackId, pack.Hash, progress, ct)
+            : Task.Run(() => cache.EnsureAsync(gameId, pack.PackId, pack.Hash, progress, ct), ct);
+    }
+
+    private void OnContentRequired(ContentRequiredEvent c)
+    {
+        var load = _content.Require(c.GameId, c.Packs);
+        if (load is { Ready: false, Error: null })
+        {
+            GD.Print($"Content for {c.GameId}: loading {string.Join(", ", load.Packs.Select(p => $"{p.PackId}@{p.Hash[..Math.Min(8, p.Hash.Length)]}"))}");
+        }
+
+        if (_kind == ScreenKind.Game && _sceneGameId == c.GameId && load is not null && load != _sceneContent)
+        {
+            // The game was shown before its content was known (a TV resuming a running game gets the lobby first).
+            if (_previousView is not null)
+            {
+                GD.PushWarning($"Content for {c.GameId} changed while its scene was running; it keeps the content it has");
+            }
+            else if (load.Ready)
+            {
+                (_scene as IContentScene)?.SetContentRoots(load.Roots);
+                _sceneContent = load;
+            }
+            else
+            {
+                ShowLoading(c.GameId);
+            }
+            return;
+        }
+        LoadingStep();
+    }
+
+    private void OnContentLoad(ContentLoadEvent e)
+    {
+        var load = _content.Apply(e);
+        if (load is null)
+        {
+            return;   // an earlier attempt, or a game whose packs changed since
+        }
+        if (e is ContentFailedEvent failed)
+        {
+            GD.PushError($"Loading content pack '{failed.PackId}' of {failed.GameId} failed: {failed.Error}");
+        }
+        LoadingStep();
+    }
+
+    /// <summary>Moves the loading card on: its percentage, the failure, or on to the game once every pack is in.</summary>
+    private void LoadingStep()
+    {
+        if (_kind != ScreenKind.Loading || _loadingGameId is not { } gameId)
+        {
+            return;
+        }
+
+        var load = _content.For(gameId);
+        if (load is null || load.Ready)
+        {
+            // Every pack is cached (or the game turned out to need none): show it, with the newest view it was sent.
+            var pending = _pendingView is { } v && v.GameId == gameId ? v : null;
+            GD.Print($"Content for {gameId} ready");
+            ShowGame(gameId);
+            if (pending is not null)
+            {
+                OnHostView(pending);
+            }
+            return;
+        }
+
+        if (load.Error is not null)
+        {
+            _loading!.ShowFailed();
+        }
+        else
+        {
+            _loading!.ShowProgress(load.Percent);
+        }
+    }
+
+    private void ShowLoading(string gameId)
+    {
+        if (_kind == ScreenKind.Loading && _loadingGameId == gameId)
+        {
+            LoadingStep();
+            return;
+        }
+
+        var card = new ContentLoadingCard();
+        card.Setup(_lobby?.Games.FirstOrDefault(g => g.Id == gameId)?.Name ?? gameId);
+        card.RetryPressed += () =>
+        {
+            GD.Print($"Retrying content for {gameId}");
+            _content.Retry(gameId);
+            LoadingStep();
+        };
+        SetScreen(card, ScreenKind.Loading, $"{gameId}-loading");
+        _loadingGameId = gameId;
+        GD.Print($"Waiting for {gameId} content");
+        LoadingStep();
+    }
+
+    // ---- Signals -------------------------------------------------------------------------------------------
+
+    /// <summary><see cref="ISignalingScene.Signal"/>: fire and forget, through whichever client is current; failures are logged.</summary>
+    private void SendSignal(string kind, object payload)
+    {
+        if (_client is not { } client)
+        {
+            GD.PushWarning($"Host signal '{kind}' dropped: not connected");
+            return;
+        }
+        _ = SignalAsync(client, kind, payload);
+    }
+
+    private static async Task SignalAsync(HostClient client, string kind, object payload)
+    {
+        try
+        {
+            await client.SignalAsync(kind, payload);
+        }
+        catch (Exception ex)
+        {
+            GD.PushWarning($"Host signal '{kind}' failed: {ex.Message}");
+        }
+    }
+
     // ---- Screens -------------------------------------------------------------------------------------------
 
     private void SetScreen(Node screen, ScreenKind kind, string? shot)
@@ -514,11 +699,18 @@ public partial class Main : Control
         _connect = screen as ConnectScreen;
         _lobbyScreen = screen as LobbyScreen;
         _results = screen as ResultsScreen;
+        _loading = screen as ContentLoadingCard;
         _scene = screen as IGameScene;
         if (kind != ScreenKind.Game)
         {
             _sceneGameId = null;
             _previousView = null;
+            _sceneContent = null;
+        }
+        if (kind != ScreenKind.Loading)
+        {
+            _loadingGameId = null;
+            _pendingView = null;
         }
 
         _screen = screen;
@@ -554,6 +746,7 @@ public partial class Main : Control
         var screen = new LobbyScreen();
         screen.SetServer(_serverUrl);
         screen.GameSelected += id => _ = CallAsync(c => c.SelectGameAsync(id));
+        screen.CampaignSelected += id => _ = CallAsync(c => c.SelectCampaignAsync(id));
         screen.StartPressed += () =>
         {
             if (_lobby is { CanStart: true })
@@ -582,7 +775,8 @@ public partial class Main : Control
 
     private static string? LobbyKey(LobbyState? l) => l is null
         ? null
-        : $"{l.Code}|{l.SelectedGameId}|{l.CanStart}|{string.Join(",", l.Players.Select(p => $"{p.Name}:{p.Connected}:{p.IsVip}"))}";
+        : $"{l.Code}|{l.SelectedGameId}|{l.CanStart}|{string.Join(",", l.Players.Select(p => $"{p.Name}:{p.Connected}:{p.IsVip}"))}"
+          + $"|{l.Campaigns?.Count}|{l.Campaign?.Id}|{string.Join(",", l.Campaign?.Roster.Select(r => $"{r.SeatedAs}:{r.Connected}") ?? [])}";
 
     /// <summary>Starts getting the selected game's scene ready behind the lobby, if it supports that.</summary>
     private void WarmUp(string? gameId)
@@ -602,8 +796,7 @@ public partial class Main : Control
             node?.QueueFree();
             return;
         }
-        (node as IRenderPresetScene)?.SetRenderPreset(_preset);
-        (node as IAudioScene)?.SetNarrator(_narrator);
+        PrepareScene(node);
         _warm = node;
         _warmGameId = gameId;
         AddChild(node);
@@ -643,8 +836,26 @@ public partial class Main : Control
         }
     }
 
+    /// <summary>What every game scene gets when it's created: the render preset, the narrator and the signal sender.</summary>
+    private void PrepareScene(Node node)
+    {
+        (node as IRenderPresetScene)?.SetRenderPreset(_preset);
+        (node as IAudioScene)?.SetNarrator(_narrator);
+        if (node is ISignalingScene signaling)
+        {
+            signaling.Signal = SendSignal;
+        }
+    }
+
     private void ShowGame(string gameId)
     {
+        var content = _content.For(gameId);
+        if (content is { Ready: false })
+        {
+            ShowLoading(gameId);
+            return;
+        }
+
         var path = GameSceneMap.ScenePath(gameId);
         Node? node;
         if (_warm is not null && _warmGameId == gameId)
@@ -671,11 +882,12 @@ public partial class Main : Control
         }
 
         ((IGameScene)node!).SetShots(_shots);
-        (node as IRenderPresetScene)?.SetRenderPreset(_preset);
-        (node as IAudioScene)?.SetNarrator(_narrator);
+        PrepareScene(node!);
+        (node as IContentScene)?.SetContentRoots(content?.Roots ?? NoContent);
         SetScreen(node!, ScreenKind.Game, missing ? $"{gameId}-missing" : gameId);
         (node as IPreloadScene)?.EndPreload();
         _sceneGameId = gameId;
+        _sceneContent = content;
         _previousView = null;
     }
 
