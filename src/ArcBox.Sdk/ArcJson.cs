@@ -16,6 +16,7 @@ public static class ArcJson
         };
         options.Converters.Add(new JsonStringEnumConverter());
         options.Converters.Add(new PlayerIdJsonConverter());
+        options.Converters.Add(new ProfileIdJsonConverter());
         options.MakeReadOnly();
         Options = options;
     }
@@ -30,6 +31,20 @@ public sealed class PlayerIdJsonConverter : JsonConverter<PlayerId>
     }
 
     public override void Write(Utf8JsonWriter writer, PlayerId value, JsonSerializerOptions options)
+    {
+        writer.WriteStringValue(value.Value);
+    }
+}
+
+public sealed class ProfileIdJsonConverter : JsonConverter<ProfileId>
+{
+    public override ProfileId Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        var value = reader.GetString();
+        return new ProfileId(value ?? string.Empty);
+    }
+
+    public override void Write(Utf8JsonWriter writer, ProfileId value, JsonSerializerOptions options)
     {
         writer.WriteStringValue(value.Value);
     }

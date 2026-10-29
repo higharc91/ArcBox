@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using ArcBox.Sdk.Campaigns;
 using ArcBox.Sdk.Protocol;
 
 namespace ArcBox.Sdk.Tests;
@@ -31,6 +32,31 @@ public class ContractFixtureTests
         ["shake"] = View(new ShakeView("Pop the cork! Shake again to reload", "#ff8000", CanFire: true, InitialCharge: 0.35)),
         // Phone -> server (the others are server -> phone): the reply to a ChoiceView, with the phone-measured time to answer.
         ["choiceInput"] = new ChoiceInput(["b"], 2410.5),
+        ["custom"] = View(new CustomView("tactics", "targetPicker", Json("""{"cursor":{"x":2,"y":3},"targets":[{"id":"orc1","hit":75}]}"""))),
+        ["customInput"] = new CustomInput("target", Json("""{"id":"orc1"}""")),
+        ["peek"] = new RoomPeek(
+            "BCDF", "tactics", "Embers of the Vale", InGame: false,
+            [
+                new SeatOffer(new SeatRef(Member: new ProfileId("pr_AbCdEfGhIjKlMnOp")), new SeatCard("Aldric", "Dwarf Cleric · Lv 3", "#c0a060", "/content/tactics/portraits/h1/aldric.png"), Absent: false),
+                new SeatOffer(new SeatRef(Slot: new PlayerId("p3")), new SeatCard("Mira"), Absent: true),
+            ],
+            Suggested: new SeatOffer(new SeatRef(Member: new ProfileId("pr_AbCdEfGhIjKlMnOp")), new SeatCard("Aldric", "Dwarf Cleric · Lv 3", "#c0a060", "/content/tactics/portraits/h1/aldric.png"), Absent: false),
+            CanJoinNew: true),
+        ["takeSeat"] = new JoinResult("BCDF", new PlayerId("p2"), "c2VjcmV0", new ProfileKey(new ProfileId("pr_AbCdEfGhIjKlMnOp"), "a2V5LWtleS1rZXk", "Dave")),
+        ["lobbyCampaign"] = new LobbyState(
+            "BCDF",
+            [new LobbyPlayer(new PlayerId("p1"), "Dave", IsVip: true, Connected: true, Profile: new ProfileId("pr_AbCdEfGhIjKlMnOp"))],
+            "tactics",
+            [new GameManifest("tactics", "Tactics", "Party tactics", 1, 8, UsesCampaigns: true, ResumesAfterRestart: true)],
+            InGame: false,
+            CanStart: false,
+            LastResults: null,
+            Campaign: new LobbyCampaign("c1", "KQZT", "Embers of the Vale",
+            [
+                new RosterEntry(new ProfileId("pr_AbCdEfGhIjKlMnOp"), new SeatCard("Aldric", "Dwarf Cleric · Lv 3"), new PlayerId("p1"), Connected: true),
+                new RosterEntry(new ProfileId("pr_QrStUvWxYz012345"), new SeatCard("Mira", Color: "#40a0ff"), SeatedAs: null, Connected: false),
+            ]),
+            Campaigns: [new CampaignSummary("c1", "KQZT", "Embers of the Vale", 2, Deadline)]),
         ["lobby"] = new LobbyState(
             "BCDF",
             [new LobbyPlayer(new PlayerId("p1"), "ALEX", IsVip: true, Connected: true), new LobbyPlayer(new PlayerId("p2"), "MO", IsVip: false, Connected: false)],
@@ -43,6 +69,8 @@ public class ContractFixtureTests
             [new PlayerScore(new PlayerId("p1"), "ALEX (NOR)", 21), new PlayerScore(new PlayerId("p2"), "MO (ALO)", 14)],
             "ALEX (NOR) wins the race!"),
     };
+
+    private static JsonElement Json(string raw) => JsonDocument.Parse(raw).RootElement;
 
     // Serialized through the base type so the "kind" discriminator is written, as the hub does.
     private static ControllerView View(ControllerView v) => v with { ViewId = "v1", Header = "H", DeadlineUtc = Deadline };

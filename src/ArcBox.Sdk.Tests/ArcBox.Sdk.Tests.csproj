@@ -19,5 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ArcBox.Sdk\ArcBox.Sdk.csproj" />
+    <ProjectReference Include="..\ArcBox.Sdk.Testing\ArcBox.Sdk.Testing.csproj" />
   </ItemGroup>
 </Project>

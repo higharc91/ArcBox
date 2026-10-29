@@ -21,14 +21,18 @@
       "name": "Counter",
       "description": "Tap to count",
       "minPlayers": 1,
-      "maxPlayers": 8
+      "maxPlayers": 8,
+      "usesCampaigns": false,
+      "resumesAfterRestart": false
     },
     {
       "id": "redline",
       "name": "REDLINE",
       "description": "Racing trivia",
       "minPlayers": 1,
-      "maxPlayers": 8
+      "maxPlayers": 8,
+      "usesCampaigns": false,
+      "resumesAfterRestart": false
     }
   ],
   "inGame": false,

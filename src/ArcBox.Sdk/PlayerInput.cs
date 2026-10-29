@@ -31,3 +31,6 @@ public sealed record DrawInput(IReadOnlyList<Stroke> Strokes);
 /// A payload without a numeric <c>charge</c> is rejected with a <see cref="JsonException"/>; a missing <c>fire</c> is false.
 /// </summary>
 public sealed record ShakeInput([property: JsonRequired] double Charge, bool Fire);
+
+/// <summary>The <see cref="CustomView"/> reply: a screen-defined action and its data.</summary>
+public sealed record CustomInput(string Action, JsonElement? Data = null);
