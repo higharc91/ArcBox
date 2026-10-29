@@ -76,6 +76,27 @@ public class HubIntegrationTests
     }
 
     [Fact]
+    public async Task PhoneApp_serves_index_for_c_code()
+    {
+        using var f = new ArcServerFactory();
+        var http = f.CreateClient();
+        var ct = TestContext.Current.CancellationToken;
+
+        var response = await http.GetAsync("/c/EMBR", ct);
+        var lower = await http.GetAsync("/c/embr/", ct);
+        var wrongLength = await http.GetAsync("/c/EMBRX", ct);
+        var post = await http.PostAsync("/c/EMBR", null, ct);
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Equal("text/html", response.Content.Headers.ContentType?.MediaType);
+        Assert.Equal("no-cache", response.Headers.CacheControl?.ToString());
+        Assert.Contains("ArcBox server is running", await response.Content.ReadAsStringAsync(ct));
+        Assert.Equal(HttpStatusCode.OK, lower.StatusCode);
+        Assert.Equal(HttpStatusCode.NotFound, wrongLength.StatusCode);
+        Assert.NotEqual(HttpStatusCode.OK, post.StatusCode);
+    }
+
+    [Fact]
     public async Task Missing_web_root_falls_back_to_placeholder()
     {
         using var f = new ArcServerFactory().WithWebHostBuilder(b => b.UseSetting("Web:Root", Path.Combine(Path.GetTempPath(), "arcbox-no-such-dir")));
