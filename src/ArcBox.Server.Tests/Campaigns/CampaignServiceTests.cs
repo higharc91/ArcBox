@@ -522,6 +522,27 @@ public sealed class CampaignServiceTests : IDisposable
         Assert.Equal("Lv 1", card.Subtitle);
     }
 
+    [Fact]
+    public void ForMember_lists_campaigns_the_profile_is_in_newest_first()
+    {
+        var embers = NewCampaign("Embers");
+        _time.Advance(TimeSpan.FromMinutes(1));
+        var frost = NewCampaign("Frost", _ann);
+        _time.Advance(TimeSpan.FromMinutes(1));
+        NewCampaign("Elsewhere", _ann);
+        _campaigns.AddMember(embers.Id, _ann);
+        _campaigns.AddMember(frost.Id, _dave);
+        _time.Advance(TimeSpan.FromMinutes(1));
+        _campaigns.AddMember(embers.Id, new ProfileRecord(new ProfileId("pr_bea"), "Bea")); // Embers changes last
+
+        var mine = _campaigns.ForMember(_dave.Id);
+
+        Assert.Equal(["Embers", "Frost"], mine.Select(c => c.Name));
+        Assert.Equal((embers.Id, embers.Code, 3), (mine[0].Id, mine[0].Code, mine[0].Members));
+        Assert.Equal(["Elsewhere", "Embers", "Frost"], _campaigns.ForMember(_ann.Id).Select(c => c.Name).Order());
+        Assert.Empty(_campaigns.ForMember(new ProfileId("pr_nobody")));
+    }
+
     private sealed class ErrorLog : ILogger<CampaignService>
     {
         public List<string> Errors { get; } = [];

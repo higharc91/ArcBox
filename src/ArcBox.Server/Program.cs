@@ -10,6 +10,8 @@ using ArcBox.Server.Rooms;
 using ArcBox.Server.Speech;
 using ArcBox.Server.Storage;
 using Counter.Logic;
+using System.Threading.RateLimiting;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Options;
 
@@ -47,11 +49,28 @@ builder.Services
     })
     .AddJsonProtocol(o => o.PayloadSerializerOptions = new JsonSerializerOptions(ArcJson.Options));
 
+// The portal API (spec §3.4): a fixed window per remote IP. Portal:PermitsPerMinute lowers it, for tests.
+var portalPermits = Math.Max(1, builder.Configuration.GetValue("Portal:PermitsPerMinute", 60));
+builder.Services.AddRateLimiter(o =>
+{
+    o.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    o.AddPolicy(CampaignEndpoints.RateLimitPolicy, http => RateLimitPartition.GetFixedWindowLimiter(
+        http.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+        _ => new FixedWindowRateLimiterOptions
+        {
+            PermitLimit = portalPermits,
+            Window = TimeSpan.FromMinutes(1),
+            QueueLimit = 0,
+        }));
+});
+
 var app = builder.Build();
 
 app.UsePhoneApp();
+app.UseRateLimiter();
 app.MapHub<ArcHub>("/hub", o => o.AllowStatefulReconnects = true);
 app.MapSpeech();
+app.MapCampaigns();
 app.MapHealthEndpoint();
 
 app.Run();

@@ -84,6 +84,20 @@ public sealed class CampaignService
         }
     }
 
+    /// <summary>The campaigns <paramref name="member"/> belongs to (as owner or player), most recently changed first.</summary>
+    public IReadOnlyList<CampaignSummary> ForMember(ProfileId member)
+    {
+        lock (_lock)
+        {
+            return _byId.Values
+                .Where(c => c.Info.Members.Any(m => m.Profile == member))
+                .OrderByDescending(c => c.Updated)
+                .ThenBy(c => c.Info.Name, StringComparer.OrdinalIgnoreCase)
+                .Select(c => new CampaignSummary(c.Info.Id, c.Info.Code, c.Info.Name, c.Info.Members.Count, c.Updated))
+                .ToList();
+        }
+    }
+
     public CampaignInfo? Find(string id)
     {
         lock (_lock) return _byId.GetValueOrDefault(id)?.Info;
