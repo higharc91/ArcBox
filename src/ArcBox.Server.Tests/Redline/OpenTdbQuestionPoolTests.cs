@@ -276,6 +276,70 @@ public class OpenTdbQuestionPoolTests
         h.Pool.Dispose();
     }
 
+    [Fact]
+    public async Task Pool_TryTake_by_difficulty_keeps_only_matches_and_requeues_the_rest()
+    {
+        await using var h = new Harness(fetch => fetch == 0 ? Ok(Mixed("EMEHE")) : Code(5), configure: o => (o.Target, o.LowWater) = (5, 5));
+        await h.StepUntil(() => h.Pool.Count >= 5);
+        await h.Settle();
+
+        var into = new List<TriviaQuestion>();
+        Assert.Equal(2, h.Pool.TryTake(2, into, Difficulty.Easy));
+
+        Assert.Equal(["Pool question 0?", "Pool question 2?"], into.Select(q => q.Text));
+        Assert.All(into, q => Assert.Equal(Difficulty.Easy, q.Difficulty));
+        Assert.Equal(3, h.Pool.Count);
+
+        var rest = new List<TriviaQuestion>();
+        Assert.Equal(3, h.Pool.TryTake(3, rest));
+        Assert.Equal(["Pool question 1?", "Pool question 3?", "Pool question 4?"], rest.Select(q => q.Text)); // M, H, E
+        Assert.Equal([Difficulty.Medium, Difficulty.Hard, Difficulty.Easy], rest.Select(q => q.Difficulty));
+    }
+
+    [Fact]
+    public async Task Pool_TryTake_by_difficulty_scans_at_most_Count_items()
+    {
+        await using var h = new Harness(fetch => fetch == 0 ? Ok(Mixed("MMMMM")) : Code(5), configure: o => (o.Target, o.LowWater) = (5, 5));
+        await h.StepUntil(() => h.Pool.Count >= 5);
+        await h.Settle();
+
+        var into = new List<TriviaQuestion>();
+        var taken = await Task.Run(() => h.Pool.TryTake(2, into, Difficulty.Easy)).WaitAsync(TimeSpan.FromSeconds(5), TestContext.Current.CancellationToken);
+
+        Assert.Equal(0, taken);
+        Assert.Empty(into);
+        Assert.Equal(5, h.Pool.Count);
+    }
+
+    [Fact]
+    public async Task Pool_concurrent_easy_takes_never_duplicate()
+    {
+        // 100 questions, every third one easy (34 of them): the takers drain the easy ones while rotating the rest.
+        await using var h = new Harness(fetch => fetch == 0 ? Ok(Mixed(string.Concat(Enumerable.Range(0, 100).Select(i => "EMH"[i % 3])))) : Code(5),
+            configure: o => (o.Target, o.LowWater) = (100, 100));
+        await h.StepUntil(() => h.Pool.Count >= 100);
+        await h.Settle();
+        var taken = new ConcurrentBag<TriviaQuestion>();
+        using var go = new ManualResetEventSlim();
+
+        var takers = Enumerable.Range(0, 8).Select(_ => Task.Run(() =>
+        {
+            go.Wait();
+            var mine = new List<TriviaQuestion>();
+            for (var i = 0; i < 10; i++)
+                h.Pool.TryTake(3, mine, Difficulty.Easy);
+            foreach (var q in mine)
+                taken.Add(q);
+        })).ToArray();
+        go.Set();
+        await Task.WhenAll(takers);
+
+        var texts = taken.Select(q => q.Text).ToList();
+        Assert.All(taken, q => Assert.Equal(Difficulty.Easy, q.Difficulty));
+        Assert.Equal(texts.Count, texts.Distinct().Count());
+        Assert.Equal(100 - texts.Count, h.Pool.Count); // nothing lost while rotating the non-matches
+    }
+
     // ---- helpers ----
 
     private static TimeSpan[] Seconds(params double[] s) => s.Select(TimeSpan.FromSeconds).ToArray();
@@ -300,6 +364,11 @@ public class OpenTdbQuestionPoolTests
         return string.Join(",", Enumerable.Range(first, 50).Select(i =>
             Q(text?.Invoke(i) ?? $"Pool question {i}?", $"Right {i}", $"Wrong {i}a", $"Wrong {i}b", $"Wrong {i}c")));
     }
+
+    /// <summary>One question per letter (E, M or H = difficulty), texts "Pool question {index}?".</summary>
+    private static string Mixed(string difficulties) => string.Join(",", difficulties.Select((d, i) =>
+        Q($"Pool question {i}?", $"Right {i}", $"Wrong {i}a", $"Wrong {i}b", $"Wrong {i}c")
+            .Replace("\"difficulty\":\"easy\"", $"\"difficulty\":\"{(d == 'E' ? "easy" : d == 'M' ? "medium" : "hard")}\"")));
 
     private static string Enc(string s) => Uri.EscapeDataString(s);
 

@@ -43,13 +43,18 @@ public sealed class SyntheticQuestionSource(Random random, DifficultyMix mix) : 
     private readonly Dictionary<string, (string Correct, Difficulty Difficulty)> _key = new(StringComparer.Ordinal);
     private int _next;
 
-    public IReadOnlyList<TriviaQuestion> Take(int count)
+    public IReadOnlyList<TriviaQuestion> Take(int count) => Generate(count, null);
+
+    /// <summary>Easy-only takes (qualifying): the same stream of questions, with the difficulty fixed instead of drawn from the mix.</summary>
+    public IReadOnlyList<TriviaQuestion> Take(int count, Difficulty difficulty) => Generate(count, difficulty);
+
+    private List<TriviaQuestion> Generate(int count, Difficulty? fixedDifficulty)
     {
         var list = new List<TriviaQuestion>(count);
         for (var i = 0; i < count; i++)
         {
             var n = ++_next;
-            var difficulty = mix.Draw(random);
+            var difficulty = fixedDifficulty ?? mix.Draw(random);
             var category = Categories[random.Next(Categories.Length)];
             var text = Pad($"Synthetic question {n} ({category}, {difficulty})", WordsLike(n));
             var correct = $"right-{n}";

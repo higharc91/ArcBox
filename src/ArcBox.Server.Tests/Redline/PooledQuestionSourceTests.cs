@@ -134,6 +134,60 @@ public class PooledQuestionSourceTests
         Assert.Equal(fromPool.Count, fromPool.Distinct().Count());
     }
 
+    [Fact]
+    public async Task Pooled_Take_easy_fills_shortfall_from_the_fallback_pack_easy_questions()
+    {
+        var pool = await SeededPool.CreateAsync(50);
+
+        var questions = Source(pool, new ListLogger(), enabled: false).Take(3, Difficulty.Easy);
+
+        Assert.Equal(3, questions.Count);
+        Assert.All(questions, q => Assert.Equal(Difficulty.Easy, q.Difficulty));
+        Assert.All(questions, q => Assert.Equal(QuestionOrigin.Fallback, q.Origin));
+        Assert.Equal(50, pool.Count); // never consulted
+    }
+
+    [Fact]
+    public async Task Easy_take_wraps_the_fallback_pack()
+    {
+        var pool = await SeededPool.CreateAsync(50);
+        var source = Source(pool, new ListLogger(), enabled: false);
+        var easy = FallbackQuestions.All.Where(q => q.Difficulty == Difficulty.Easy).ToList();
+        Assert.True(easy.Count < 25, "the wrap-around is only exercised if the easy subset is smaller than the take");
+
+        var questions = source.Take(25, Difficulty.Easy);
+
+        Assert.Equal(25, questions.Count);
+        Assert.All(questions, q => Assert.Equal(Difficulty.Easy, q.Difficulty));
+        Assert.Equal(easy.Count, questions.Take(easy.Count).Select(q => q.Text).Distinct().Count()); // a full cycle before any repeat
+    }
+
+    [Fact]
+    public async Task Easy_fallback_never_repeats_a_question_within_one_take_across_a_reshuffle()
+    {
+        var pool = await SeededPool.CreateAsync(50);
+        var source = Source(pool, new ListLogger(), enabled: false);
+
+        source.Take(7, Difficulty.Easy); // offset the cursor so later takes straddle the cycle boundary
+        for (var call = 0; call < 100; call++)
+        {
+            var texts = source.Take(15, Difficulty.Easy).Select(q => q.Text).ToList();
+            Assert.Equal(15, texts.Distinct().Count());
+        }
+    }
+
+    [Fact]
+    public async Task Easy_take_uses_pool_easy_questions_first_and_leaves_the_fallback_cursor_alone()
+    {
+        var pool = await SeededPool.CreateAsync(50); // all easy
+        var source = Source(pool, new ListLogger());
+
+        var questions = source.Take(10, Difficulty.Easy);
+
+        Assert.All(questions, q => Assert.Equal(QuestionOrigin.OpenTdb, q.Origin));
+        Assert.Equal(40, pool.Count);
+    }
+
     private sealed class ListLogger : ILogger<PooledQuestionSource>
     {
         public ConcurrentQueue<(LogLevel Level, string Message)> Entries { get; } = new();

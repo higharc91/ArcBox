@@ -15,9 +15,12 @@ namespace ArcBox.Server.Games.Redline;
 public sealed class NarratedQuestionSource(IQuestionSource inner, ISpeechService speech, ILogger<NarratedQuestionSource> log)
     : IQuestionSource
 {
-    public IReadOnlyList<TriviaQuestion> Take(int count)
+    public IReadOnlyList<TriviaQuestion> Take(int count) => Prewarmed(inner.Take(count));
+
+    public IReadOnlyList<TriviaQuestion> Take(int count, Difficulty difficulty) => Prewarmed(inner.Take(count, difficulty));
+
+    private IReadOnlyList<TriviaQuestion> Prewarmed(IReadOnlyList<TriviaQuestion> questions)
     {
-        var questions = inner.Take(count);
         try
         {
             speech.Prewarm(RedlineVoices.Questions, questions.Select(q => q.Text).ToArray());

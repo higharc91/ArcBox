@@ -17,7 +17,15 @@ public class NarratedQuestionSourceTests : IDisposable
 
     private sealed class FixedSource(params TriviaQuestion[] questions) : IQuestionSource
     {
+        public Difficulty? LastDifficulty { get; private set; }
+
         public IReadOnlyList<TriviaQuestion> Take(int count) => questions.Take(count).ToList();
+
+        public IReadOnlyList<TriviaQuestion> Take(int count, Difficulty difficulty)
+        {
+            LastDifficulty = difficulty;
+            return questions.Take(count).ToList();
+        }
     }
 
     private sealed class RecordingSpeech : ISpeechService
@@ -42,6 +50,22 @@ public class NarratedQuestionSourceTests : IDisposable
         new("Sport", Difficulty.Easy, text, "Yes", ["No", "Maybe", "Never"], QuestionOrigin.Fallback);
 
     private static readonly FixedSource Inner = new(Q("Who won in 2021?"), Q("How many laps?"), Q("Which team is red?"));
+
+    [Fact]
+    public void Take_by_difficulty_passes_through_to_the_inner_source_and_prewarms()
+    {
+        var speech = new RecordingSpeech();
+        var inner = new FixedSource(Q("Who won in 2021?"), Q("How many laps?"));
+        var source = new NarratedQuestionSource(inner, speech, NullLogger<NarratedQuestionSource>.Instance);
+
+        var questions = source.Take(2, Difficulty.Easy);
+
+        Assert.Equal(Difficulty.Easy, inner.LastDifficulty);
+        Assert.Equal(2, questions.Count);
+        var (theme, texts) = Assert.Single(speech.Prewarms);
+        Assert.Equal(RedlineVoices.Questions, theme);
+        Assert.Equal(["Who won in 2021?", "How many laps?"], texts);
+    }
 
     [Fact]
     public void Take_prewarms_question_texts()

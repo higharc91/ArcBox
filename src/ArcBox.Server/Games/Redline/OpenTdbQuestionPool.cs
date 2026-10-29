@@ -57,6 +57,37 @@ public sealed class OpenTdbQuestionPool(
         return taken;
     }
 
+    /// <summary>
+    /// Like <see cref="TryTake(int, List{TriviaQuestion})"/> but only takes questions of <paramref name="difficulty"/>.
+    /// Reads <see cref="Count"/> once and dequeues at most that many items, so it always terminates even when the queue
+    /// holds no match. Matches are kept until <paramref name="count"/> is reached; every other scanned item (non-matches
+    /// and surplus matches) goes back to the tail in the order it was seen, so the remaining questions keep their relative order.
+    /// </summary>
+    /// <remarks>
+    /// Other threads can briefly see the queue short while a scan is in flight (items are out of the queue until
+    /// requeued), so a concurrent taker may get fewer matches than are strictly present; callers fall back for the rest.
+    /// No question is ever handed out twice or lost.
+    /// </remarks>
+    public int TryTake(int count, List<TriviaQuestion> into, Difficulty difficulty)
+    {
+        ArgumentNullException.ThrowIfNull(into);
+        var taken = 0;
+        for (var scan = _queue.Count; scan > 0 && _queue.TryDequeue(out var question); scan--)
+        {
+            if (taken < count && question.Difficulty == difficulty)
+            {
+                into.Add(question);
+                taken++;
+            }
+            else
+            {
+                _queue.Enqueue(question);
+            }
+        }
+
+        return taken;
+    }
+
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         while (true)

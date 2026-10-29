@@ -23,4 +23,28 @@ public class FallbackQuestionsTests
         Assert.Throws<InvalidDataException>(() => FallbackQuestions.Validate([q, q]));
         Assert.Throws<InvalidDataException>(() => FallbackQuestions.Validate([q with { Incorrect = ["x", "y"] }]));
     }
+
+    [Fact]
+    public void Default_interface_Take_by_difficulty_returns_plain_Take()
+    {
+        var source = new PlainSource();
+
+        var questions = ((IQuestionSource)source).Take(2, Difficulty.Easy);
+
+        Assert.Equal(2, source.LastCount);
+        Assert.Equal(source.Result, questions);
+    }
+
+    private sealed class PlainSource : IQuestionSource
+    {
+        public int LastCount { get; private set; }
+
+        public IReadOnlyList<TriviaQuestion> Result { get; } = FallbackQuestions.All.Where(q => q.Difficulty == Difficulty.Hard).Take(2).ToList();
+
+        public IReadOnlyList<TriviaQuestion> Take(int count)
+        {
+            LastCount = count;
+            return Result;
+        }
+    }
 }
