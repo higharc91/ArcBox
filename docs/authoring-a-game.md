@@ -1,0 +1,62 @@
+# Authoring a game
+
+A game is an `IGame` (`src/ArcBox.Sdk`) registered on the server with `services.AddArcGame<MyGame>()`. The room calls
+it one message at a time, so a game needs no locks, but every call must return quickly and do no I/O.
+
+## Campaign games
+
+A campaign game keeps a document from session to session (characters, inventory, story progress), and the same group
+of people plays it week after week. The platform stores the document, its members and its snapshots; the game decides
+what is in it.
+
+**1. Set `UsesCampaigns` in the manifest.** The lobby then gets a campaign step: once your game is selected, the TV
+lists its campaigns, the host or VIP picks one (or the VIP creates one and becomes its owner), and every phone picks
+who it is. Start stays disabled until every connected phone is a member.
+
+```csharp
+public GameManifest Manifest { get; } = new("tactics", "Tactics", "Weekly co-op", MinPlayers: 2, MaxPlayers: 6,
+    UsesCampaigns: true);
+```
+
+`MinPlayers` and `MaxPlayers` count **every member**, including the ones who aren't here tonight. A campaign holds at
+most 8 members.
+
+**2. Implement `ICampaignGame`.** The room calls its `Start` instead of `IGame.Start` and hands you the campaign's
+lease:
+
+```csharp
+public void Start(IGameContext ctx, IReadOnlyList<Player> players, ICampaignLease campaign)
+{
+    _campaign = campaign;
+    _state = Load(campaign.Document);
+}
+```
+
+- `campaign.Document` is your JSON; `campaign.Info` has the name, the members and the version.
+- `campaign.Save(doc)` replaces the document (version + 1) and the write happens in the background, so it is cheap.
+  `campaign.Checkpoint(doc, "End of session 7")` also records a snapshot the owner can roll back to. Documents are
+  limited to 2 MB.
+- Keep the lease for the whole game, but never release it yourself: the room checks the campaign back in when the
+  game ends, when it crashes and when the room closes. After that, `Save` does nothing.
+- Every `Player` has `Profile` set: that is the person, stable across weeks, so key your characters by it, not by
+  `PlayerId` (which is per room).
+
+**3. Register `ICampaignRules`** with `services.AddCampaignRules<MyRules>()`. The rules are the game's code for
+documents outside a session:
+
+- `NewDocument(info)`: the document of a brand-new campaign.
+- `CardFor(info, document, member)`: how a member looks in the phone's "Who are you?" grid and on the TV roster
+  (`new SeatCard("Aldric", "Dwarf Cleric · Lv 3")`).
+- `PortalView` and `Handle`: what a member sees, and the commands they can run, in the between-sessions portal. The
+  portal is locked while a session runs, so `Handle` and your game never edit the document at the same time.
+
+Rules run inside the platform's locks: keep them quick and pure.
+
+**4. Handle absent members as disconnected players.** Every member gets a seat when the game starts. The members who
+aren't in the room are in `players` like everyone else, and straight after `Start` you get
+`OnPlayerConnectionChanged(id, false)` for each of them. Give those seats to your AI. A late arrival who takes a seat
+back arrives as `OnPlayerConnectionChanged(id, true)`; it's the same call a phone gets after a dropped connection.
+
+**5. Never hand every seat to the AI on `Resume`.** If your game also sets `ResumesAfterRestart`, `IResumableGame.Resume`
+gets every player disconnected, because nobody has reconnected yet after the restart. Wait for them, for example with a
+"Resuming…" phase, and only give the AI the seats of people who were absent before the restart.

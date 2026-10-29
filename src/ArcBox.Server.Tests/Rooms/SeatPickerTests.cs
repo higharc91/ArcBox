@@ -23,7 +23,7 @@ public class SeatPickerTests
         return log.Count >= entries.Length && log.TakeLast(entries.Length).SequenceEqual(entries);
     }
 
-    /// <summary>A room running Ledger with phones p1 (Ann), p2 (Bea), p3 (Cy), all connected.</summary>
+    /// <summary>A room running Ledger, as a game without campaigns, with phones p1 (Ann), p2 (Bea), p3 (Cy), all connected.</summary>
     private sealed class Table(ArcServerFactory factory, TestClient host, string code, TestClient[] phones, JoinResult[] joins)
         : IAsyncDisposable
     {
@@ -46,7 +46,7 @@ public class SeatPickerTests
                 joins[i] = await phones[i].InvokeAsync<JoinResult>("Join", code, names[i]);
             }
 
-            await host.InvokeAsync("SelectGame", "ledger");
+            await host.InvokeAsync("SelectGame", "plain-ledger");
             await host.InvokeAsync("StartGame");
             return new Table(f, host, code, phones, joins);
         }
@@ -157,13 +157,13 @@ public class SeatPickerTests
 
         Assert.True(peek.InGame);
         Assert.False(peek.CanJoinNew);
-        Assert.Equal("ledger", peek.GameId);
+        Assert.Equal("plain-ledger", peek.GameId);
         Assert.Null(peek.CampaignName);
         Assert.Null(peek.Suggested);
         var offer = Assert.Single(peek.Offers);
         Assert.Equal(Slot("p2"), offer.Ref);
         Assert.Equal(new SeatCard("Bea"), offer.Card);
-        Assert.True(offer.Absent);
+        Assert.False(offer.Absent); // Bea was there when the game started; Absent marks only seats nobody had then
     }
 
     [Fact]
@@ -258,6 +258,20 @@ public class SeatPickerTests
         Assert.Equal(expected, await c.ThrowsHubAsync("TakeSeat", new TakeSeatRequest(room.Code)));
         Assert.Equal(expected, await c.ThrowsHubAsync("TakeSeat",
             new TakeSeatRequest(room.Code, Seat: Slot("p1"), NewName: "Ann")));
+    }
+
+    [Fact]
+    public async Task A_seat_is_a_slot_or_a_member_never_both_or_neither()
+    {
+        using var f = new ArcServerFactory();
+        await using var t = await Table.StartAsync(f);
+        await t.DropBeaAsync();
+        await using var c = await TestClient.ConnectAsync(f);
+        const string expected = "Pick a seat or enter a name.";
+
+        Assert.Equal(expected, await c.ThrowsHubAsync("TakeSeat", new TakeSeatRequest(t.Code, Seat: new SeatRef())));
+        Assert.Equal(expected, await c.ThrowsHubAsync("TakeSeat",
+            new TakeSeatRequest(t.Code, Seat: new SeatRef(new PlayerId("p2"), new ProfileId("pr_bea")))));
     }
 
     [Fact]

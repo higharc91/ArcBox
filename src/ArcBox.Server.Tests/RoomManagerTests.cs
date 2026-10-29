@@ -1,6 +1,7 @@
 using System.Text.Json;
 using ArcBox.Sdk;
 using ArcBox.Sdk.Protocol;
+using ArcBox.Server.Campaigns;
 using ArcBox.Server.Games;
 using ArcBox.Server.Profiles;
 using ArcBox.Server.Rooms;
@@ -43,8 +44,10 @@ public sealed class RoomManagerTests : IDisposable
             registrations.Add(new(() => new HangerGame()));
         }
         var registry = new GameRegistry(registrations);
+        var rules = new CampaignRulesRegistry([]);
         var services = new RoomServices(registry, sender, time, new RoomOptions { MaxRooms = maxRooms },
-            new ProfileService(db, writer, time), NullLoggerFactory.Instance);
+            new ProfileService(db, writer, time), NullLoggerFactory.Instance,
+            new CampaignService(db, writer, rules, time, NullLogger<CampaignService>.Instance), rules);
         return new RoomManager(services);
     }
 

@@ -24,7 +24,9 @@ builder.Services.AddSingleton(sp => new RoomServices(
     sp.GetRequiredKeyedService<TimeProvider>(RoomManager.ClockKey),
     sp.GetRequiredService<IOptions<RoomOptions>>().Value,
     sp.GetRequiredService<ProfileService>(),
-    sp.GetRequiredService<ILoggerFactory>()));
+    sp.GetRequiredService<ILoggerFactory>(),
+    sp.GetRequiredService<CampaignService>(),
+    sp.GetRequiredService<CampaignRulesRegistry>()));
 builder.Services.AddSingleton<RoomManager>();
 builder.Services.AddSingleton<IClientSender, HubClientSender>();
 builder.Services.AddSingleton<IGameRegistry, GameRegistry>();

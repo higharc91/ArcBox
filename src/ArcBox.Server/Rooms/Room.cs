@@ -3,15 +3,17 @@ using System.Text.Json;
 using System.Threading.Channels;
 using ArcBox.Sdk;
 using ArcBox.Sdk.Protocol;
+using ArcBox.Server.Campaigns;
 using ArcBox.Server.Games;
 using ArcBox.Server.Hubs;
+using ArcBox.Server.Profiles;
 using Microsoft.Extensions.Logging;
 
 namespace ArcBox.Server.Rooms;
 
 public enum RoomStatus { Lobby, InGame, Closed }
 
-public sealed class Room
+public sealed partial class Room
 {
     private readonly string _hostTokenHash;
     private readonly IGameRegistry _registry;
@@ -19,6 +21,9 @@ public sealed class Room
     private readonly TimeProvider _time;
     private readonly RoomOptions _options;
     private readonly ILogger<Room> _logger;
+    private readonly ProfileService _profiles;
+    private readonly CampaignService _campaigns;
+    private readonly CampaignRulesRegistry _rules;
 
     private readonly Channel<Action> _inbox = Channel.CreateUnbounded<Action>(new UnboundedChannelOptions
     {
@@ -47,6 +52,9 @@ public sealed class Room
         _time = services.Time;
         _options = services.Options;
         _logger = services.Loggers.CreateLogger<Room>();
+        _profiles = services.Profiles;
+        _campaigns = services.Campaigns;
+        _rules = services.Rules;
         _members = new RoomMembers(_options);
 
         var now = _time.GetUtcNow();
@@ -92,6 +100,7 @@ public sealed class Room
         {
             _status = RoomStatus.Closed;
             _session?.Dispose();
+            ReleaseCampaign();
         }
     }
 
@@ -101,6 +110,7 @@ public sealed class Room
     {
         _status = RoomStatus.Closed;
         _session?.Dispose();
+        ReleaseCampaign();
 
         foreach (var conn in _knownConnections.Keys)
         {
@@ -144,13 +154,17 @@ public sealed class Room
     /// <summary>What a phone with these profile keys may take. Creates and changes nothing.</summary>
     public Task<RoomPeek> PeekAsync(IReadOnlyList<string> profileKeys) => EnqueueAsync(() =>
     {
-        // Every offline seat is on offer, in join order. Profile-backed seats, and so Suggested, arrive with campaigns.
-        var offers = _members.Offline
-            .Select(s => new SeatOffer(new SeatRef(Slot: s.Id), new SeatCard(s.Name), Absent: true))
-            .ToList();
+        bool inGame = _status == RoomStatus.InGame;
+        var campaign = SelectedCampaign();
 
-        return new RoomPeek(Code, _selectedGameId, CampaignName: null, InGame: _status == RoomStatus.InGame,
-            offers, Suggested: null, CanJoinNew: _status != RoomStatus.InGame);
+        // Without a campaign every offline seat is on offer, in join order; a campaign room offers its members instead.
+        List<Offer> offers = campaign is null
+            ? [.. _members.Offline.Select(s => new Offer(
+                new SeatOffer(new SeatRef(Slot: s.Id), new SeatCard(s.Name), Absent: inGame && s.AbsentAtStart), s.Profile))]
+            : CampaignOffers(campaign, inGame);
+
+        return new RoomPeek(Code, _selectedGameId, campaign?.Info.Name, inGame,
+            [.. offers.Select(o => o.Seat)], Suggest(offers, profileKeys), CanJoinNew: !inGame);
     });
 
     /// <summary>Takes a seat: either a new one under <c>NewName</c>, or an existing offline one.</summary>
@@ -161,9 +175,16 @@ public sealed class Room
             throw new RoomException("Pick a seat or enter a name.");
         }
 
-        return request.NewName is not null
-            ? TakeNewSeat(connectionId, request.NewName)
-            : TakeOfflineSeat(connectionId, request.Seat!);
+        var keys = request.ProfileKeys ?? [];
+        if (request.NewName is not null)
+        {
+            return TakeNewSeat(connectionId, request.NewName);
+        }
+
+        var seat = OneSeat(request.Seat!);
+        return seat.Member is { } member
+            ? TakeMemberSeat(connectionId, member, keys)
+            : TakeOfflineSeat(connectionId, seat.Slot!.Value, keys);
     });
 
     /// <summary>The pre-picker call; a stale phone tab still uses it.</summary>
@@ -188,22 +209,33 @@ public sealed class Room
             throw new RoomException("Game in progress, join after this round.");
         }
 
+        if (SelectedCampaign() is { } campaign)
+        {
+            return TakeNewMemberSeat(connectionId, name, campaign);
+        }
+
         if (!_members.TryAdd(name, connectionId, out var slot, out var secret, out var error))
         {
             throw new RoomException(error!);
         }
 
+        return Seated(connectionId, slot!, secret!, profileKey: null);
+    }
+
+    /// <summary>A phone has a new seat: the room knows it, and everyone's lobby shows it.</summary>
+    private JoinResult Seated(string connectionId, PlayerSlot slot, string secret, ProfileKey? profileKey)
+    {
         _knownConnections.TryAdd(connectionId, 0);
         _allAbsentSince = null;
 
         BroadcastLobby();
 
-        return new JoinResult(Code, slot!.Id, secret!);
+        return new JoinResult(Code, slot.Id, secret, profileKey);
     }
 
-    private JoinResult TakeOfflineSeat(string connectionId, SeatRef seat)
+    private JoinResult TakeOfflineSeat(string connectionId, PlayerId id, IReadOnlyList<string> profileKeys)
     {
-        var slot = seat.Slot is { } id ? _members.Find(id) : null;
+        var slot = _members.Find(id);
         if (slot == null)
         {
             throw new RoomException("Couldn't rejoin. Please join again.");
@@ -212,7 +244,7 @@ public sealed class Room
         // The inbox runs one message at a time, so of two phones tapping the same seat the second one sees it taken.
         if (slot.Connected)
         {
-            throw new RoomException($"Someone's already playing as {slot.Name}.");
+            throw new RoomException($"Someone's already playing as {TitleOf(slot)}.");
         }
 
         // A phone sits in one seat: one that holds another seat moves, leaving it as a lost connection would.
@@ -224,7 +256,7 @@ public sealed class Room
         // The old phone's secret stops working; if it comes back, its Rejoin fails and it lands on the picker.
         var secret = _members.RotateSecret(slot);
         SeatConnection(connectionId, slot);
-        return new JoinResult(Code, slot.Id, secret);
+        return new JoinResult(Code, slot.Id, secret, KeyFor(slot.Profile, profileKeys));
     }
 
     /// <summary>Binds <paramref name="connectionId"/> to an existing seat and brings the phone up to date.</summary>
@@ -232,6 +264,8 @@ public sealed class Room
     {
         bool wasConnected = slot.Connected;
         _members.Bind(slot, connectionId);
+        slot.AbsentAtStart = false; // someone has it now, by Rejoin or by taking it
+
         _knownConnections.TryAdd(connectionId, 0);
         _allAbsentSince = null;
 
@@ -269,7 +303,14 @@ public sealed class Room
             throw new RoomException("Unknown game.");
         }
 
-        _selectedGameId = gameId;
+        // The registry ignores case; the manifest's own id is what everything else compares with.
+        var id = _registry.Manifests.First(m => string.Equals(m.Id, gameId, StringComparison.OrdinalIgnoreCase)).Id;
+        if (id != _selectedGameId)
+        {
+            _campaignId = null;
+        }
+
+        _selectedGameId = id;
         BroadcastLobby();
     });
 
@@ -282,32 +323,34 @@ public sealed class Room
             throw new RoomException("A game is already running.");
         }
 
-        if (_selectedGameId == null)
+        var campaign = SelectedCampaign();
+        if (CannotStart(campaign) is { } problem)
         {
-            throw new RoomException("Pick a game first.");
+            throw new RoomException(problem);
         }
 
-        var manifest = _registry.Manifests.First(m => m.Id == _selectedGameId);
-        int max = Math.Min(manifest.MaxPlayers, _options.MaxPlayers);
-        int min = manifest.MinPlayers;
-        int count = _members.All.Count;
-
-        if (count < min || count > max)
-        {
-            throw new RoomException($"This game needs {min}–{max} players.");
-        }
+        var game = _registry.Create(_selectedGameId!);
+        var lease = campaign is null ? null : CheckOutForStart(campaign);
 
         var vipId = _members.VipId;
         var players = _members.All
             .Select(s => new Player(s.Id, s.Name, IsVip: s.Id == vipId, s.Profile))
             .ToList();
 
-        var game = _registry.Create(_selectedGameId);
-        _session = new GameSession(game, players, _time, Random.Shared.Next(), Enqueue, _logger);
+        _session = new GameSession(game, players, _time, Random.Shared.Next(), Enqueue, _logger, lease);
         _session.TimerFired += Publish;
 
         _status = RoomStatus.InGame;
         _session.Start();
+
+        // Every member is a player from the start; the game hears about the ones who aren't here as it would a lost phone.
+        if (lease is not null)
+        {
+            foreach (var slot in _members.All.Where(s => !s.Connected))
+            {
+                _session.ConnectionChanged(slot.Id, false);
+            }
+        }
 
         BroadcastLobby();
         Publish();
@@ -461,6 +504,11 @@ public sealed class Room
         _session = null;
         _status = RoomStatus.Lobby;
         _lastResults = results;
+        ReleaseCampaign();
+        foreach (var slot in _members.All)
+        {
+            slot.AbsentAtStart = false;
+        }
 
         if (_hostConnectionId != null)
         {
@@ -475,30 +523,57 @@ public sealed class Room
         BroadcastLobby();
     }
 
+    private GameManifest? SelectedManifest =>
+        _selectedGameId is null ? null : _registry.Manifests.FirstOrDefault(m => m.Id == _selectedGameId);
+
+    /// <summary>
+    /// Why the selected game can't start now, or null. In a campaign room every member gets a seat, so the player
+    /// count is the member count, absent members included.
+    /// </summary>
+    private string? CannotStart(CampaignView? campaign)
+    {
+        var manifest = SelectedManifest;
+        if (manifest == null)
+        {
+            return "Pick a game first.";
+        }
+
+        int count = _members.All.Count;
+        if (manifest.UsesCampaigns)
+        {
+            if (campaign is null)
+            {
+                return "Pick a campaign first.";
+            }
+
+            if (_members.All.Any(s => s.Connected && !campaign.Has(s.Profile)))
+            {
+                return "Everyone needs to pick who they are first.";
+            }
+
+            count = campaign.Info.Members.Count;
+        }
+
+        int max = Math.Min(manifest.MaxPlayers, _options.MaxPlayers);
+        int min = manifest.MinPlayers;
+        return count < min || count > max ? $"This game needs {min}–{max} players." : null;
+    }
+
     private LobbyState GetLobbyState()
     {
-        var players = _members.ToLobby();
         bool inGame = _status == RoomStatus.InGame;
-        bool canStart = false;
-
-        if (!inGame && _selectedGameId != null)
-        {
-            var manifest = _registry.Manifests.FirstOrDefault(m => m.Id == _selectedGameId);
-            if (manifest != null)
-            {
-                int max = Math.Min(manifest.MaxPlayers, _options.MaxPlayers);
-                canStart = players.Count >= manifest.MinPlayers && players.Count <= max;
-            }
-        }
+        var campaign = SelectedCampaign();
 
         return new LobbyState(
             Code,
-            players,
+            _members.ToLobby(),
             _selectedGameId,
             _registry.Manifests,
             inGame,
-            canStart,
-            _lastResults
+            CanStart: !inGame && CannotStart(campaign) is null,
+            _lastResults,
+            campaign is null ? null : new LobbyCampaign(campaign.Info.Id, campaign.Info.Code, campaign.Info.Name, Roster(campaign)),
+            SelectedManifest is { UsesCampaigns: true } ? _campaigns.ListForGame(_selectedGameId!) : null
         );
     }
 
@@ -550,6 +625,11 @@ public sealed class Room
             {
                 tcs.TrySetException(ex);
             }
+            catch (CampaignException ex)
+            {
+                // The campaign service's refusals are written for the player, like the room's own.
+                tcs.TrySetException(new RoomException(ex.Message));
+            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Unexpected error in room {Code}", Code);
@@ -590,6 +670,11 @@ public sealed class Room
             catch (RoomException ex)
             {
                 tcs.TrySetException(ex);
+            }
+            catch (CampaignException ex)
+            {
+                // The campaign service's refusals are written for the player, like the room's own.
+                tcs.TrySetException(new RoomException(ex.Message));
             }
             catch (Exception ex)
             {

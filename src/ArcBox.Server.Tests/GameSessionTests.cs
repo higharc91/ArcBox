@@ -3,6 +3,7 @@ using ArcBox.Sdk;
 using ArcBox.Server.Rooms;
 using ArcBox.Server.Tests.TestGames;
 using Counter.Logic;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Time.Testing;
 using Xunit;
@@ -142,6 +143,54 @@ public class GameSessionTests
         var s = NewSession(new CounterGame());
         s.Start();
         Assert.Null(s.BusySince);
+    }
+
+    [Fact]
+    public void Oversized_custom_view_logs_warning_and_is_sent()
+    {
+        var log = new RecordingLogger();
+        var s = new GameSession(new BigViewGame(), _players, time, 1, a => _queue.Add(a), log);
+
+        s.Start();
+
+        // p1's data is 70 002 bytes as JSON, over the limit; p2's is exactly 65 536, which is allowed.
+        var views = s.TakeViewUpdates().Players.ToDictionary(u => u.PlayerId.Value, u => u.View);
+        Assert.Equal("custom", views["p1"].GetProperty("kind").GetString());
+        Assert.Equal(70_000, views["p1"].GetProperty("data").GetString()!.Length);
+        Assert.Equal(65_534, views["p2"].GetProperty("data").GetString()!.Length);
+        var (level, message) = Assert.Single(log.Entries);
+        Assert.Equal(LogLevel.Warning, level);
+        Assert.Contains("big", message);
+        Assert.Contains("map", message);
+        Assert.Contains("70002", message);
+    }
+
+    private sealed class BigViewGame : IGame
+    {
+        public GameManifest Manifest { get; } = new("big", "Big", "", 1, 8);
+        public void Start(IGameContext ctx, IReadOnlyList<Player> players) { }
+        public void OnInput(PlayerId from, PlayerInput input) { }
+        public void OnTimer(string key) { }
+        public void OnPlayerConnectionChanged(PlayerId id, bool connected) { }
+        public object HostView() => new { };
+
+        public ControllerView PlayerView(PlayerId id) => id.Value switch
+        {
+            "p1" => new CustomView("big", "map", Json(new string('x', 70_000))),
+            "p2" => new CustomView("big", "map", Json(new string('y', 65_534))),
+            _ => new WaitView("Wait"),
+        };
+    }
+
+    private sealed class RecordingLogger : ILogger
+    {
+        public List<(LogLevel Level, string Message)> Entries { get; } = [];
+
+        public IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
+        public bool IsEnabled(LogLevel logLevel) => true;
+
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception,
+            Func<TState, Exception?, string> formatter) => Entries.Add((logLevel, formatter(state, exception)));
     }
 
     private sealed class EndsImmediatelyGame : IGame

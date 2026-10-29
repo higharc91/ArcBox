@@ -169,8 +169,8 @@ export interface RoomPeek {
 }
 /** Exactly one of `seat` or `newName` is set. */
 export interface TakeSeatRequest { code: string; seat?: SeatRef | null; newName?: string | null; profileKeys?: string[] | null }
-/** null `member` = "I'm new here". */
-export interface ClaimMemberRequest { member: SeatRef | null; profileKeys?: string[] | null }
+/** null `member` = "I'm new here", under `newName` (1–12 characters) or, without it, the seat's own name. */
+export interface ClaimMemberRequest { member: SeatRef | null; profileKeys?: string[] | null; newName?: string | null }
 export interface PackRef { packId: string; hash: string }
 
 // ---------------------------------------------------------------- campaigns (Campaigns/*.cs, Protocol/Seats.cs)
