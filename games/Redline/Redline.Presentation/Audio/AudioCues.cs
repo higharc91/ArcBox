@@ -19,6 +19,8 @@ public static class AudioCues
     public const string Whoosh = "whoosh";
     public const string Correct = "correct";
     public const string Wrong = "wrong";
+    /// <summary>A player set the session's fastest lap (qualifying spec §6): a bright two-note chime.</summary>
+    public const string Purple = "purple";
     public const string Screech = "screech";
     public const string Crunch = "crunch";
     public const string Cheer = "cheer";
@@ -53,7 +55,8 @@ public static class AudioCues
                 case RacePhase.Throttle when Humans(view, DriverStatus.Locked) > Humans(previous!, DriverStatus.Locked):
                     cues.Add(Lock);
                     break;
-                case RacePhase.Question when Humans(view, DriverStatus.Answered) > Humans(previous!, DriverStatus.Answered):
+                case RacePhase.Question or RacePhase.QualifyingQuestion
+                    when Humans(view, DriverStatus.Answered) > Humans(previous!, DriverStatus.Answered):
                     cues.Add(Answer);
                     break;
             }
@@ -77,6 +80,14 @@ public static class AudioCues
                     cues.Add(Cheer);
                 }
                 break;
+            case RacePhase.QualifyingResult:
+                // Qualifying spec §6: the sting when any player's lap counted, else the buzz; then the chime for a player's purple lap.
+                cues.Add(PlayersLapCounted(view) ? Correct : Wrong);
+                if (PlayerPurple(view))
+                {
+                    cues.Add(Purple);
+                }
+                break;
             case RacePhase.Chequered:
                 cues.Add(Fanfare);
                 cues.Add(Cheer);
@@ -91,7 +102,9 @@ public static class AudioCues
 
     /// <summary>
     /// True when the question should be read out now: on entering Reading, or on entering Question straight from the
-    /// same round's Throttle (Reading switched off). Never for a repeated view or a TV that joins mid-question.
+    /// same round's Throttle (Reading switched off). Qualifying reads the same way: on entering QualifyingReading, or on
+    /// entering QualifyingQuestion from anything but its own Reading (the previous lap's Result, or Driver Select for lap 1).
+    /// Never for a repeated view or a TV that joins mid-question.
     /// </summary>
     public static bool ReadsQuestion(RedlineHostView view, RedlineHostView? previous)
     {
@@ -100,14 +113,15 @@ public static class AudioCues
         {
             return false;
         }
-        return view.Phase == RacePhase.Reading
-               || (view.Phase == RacePhase.Question && previous is { Phase: RacePhase.Throttle } p && p.Round == view.Round);
+        return view.Phase is RacePhase.Reading or RacePhase.QualifyingReading
+               || (view.Phase == RacePhase.Question && previous is { Phase: RacePhase.Throttle } p && p.Round == view.Round)
+               || (view.Phase == RacePhase.QualifyingQuestion && previous is { Phase: not RacePhase.QualifyingReading });
     }
 
     /// <summary>Countdown ticks due as the clock runs from <paramref name="before"/> to <paramref name="after"/> seconds left.</summary>
     public static int CountdownTicks(RacePhase phase, double before, double after)
     {
-        if (phase is not (RacePhase.Throttle or RacePhase.Question) || after >= before)
+        if (phase is not (RacePhase.Throttle or RacePhase.Question or RacePhase.QualifyingQuestion) || after >= before)
         {
             return 0;
         }
@@ -134,6 +148,21 @@ public static class AudioCues
         var players = view.Drivers.Where(d => d.Player is not null).ToList();
         return (players.Count > 0 ? players : view.Drivers).Any(d => d.Outcome == RoundOutcome.Correct);
     }
+
+    /// <summary>
+    /// One sound for the room at a QualifyingResult, as <see cref="PlayersRight"/>: true when any player's lap counted (it has a
+    /// time; a wrong or missing answer is deleted), any car's with no players.
+    /// </summary>
+    private static bool PlayersLapCounted(RedlineHostView view)
+    {
+        var rows = view.Qualifying?.Rows ?? [];
+        var players = rows.Where(r => view.Drivers.Any(d => d.Code == r.Code && d.Player is not null)).ToList();
+        return (players.Count > 0 ? players : rows).Any(r => r.LastLapMs is not null);
+    }
+
+    /// <summary>A player's car has this lap's fastest time.</summary>
+    private static bool PlayerPurple(RedlineHostView view) =>
+        view.Qualifying?.Rows.Any(r => r.FastestLap && view.Drivers.Any(d => d.Code == r.Code && d.Player is not null)) == true;
 
     /// <summary>A sole leader who was not leading at the start of the round.</summary>
     private static bool NewLeader(RedlineHostView view) =>

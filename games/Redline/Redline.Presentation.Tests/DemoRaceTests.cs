@@ -2,6 +2,7 @@ using System.Text.Json;
 using ArcBox.Sdk;
 using Redline.Logic;
 using Redline.Presentation.Demo;
+using Redline.Presentation.Hud;
 
 namespace Redline.Presentation.Tests;
 
@@ -19,10 +20,12 @@ public class DemoRaceTests
     {
         var phases = Steps.Select(s => s.View.Phase).Distinct().ToList();
 
-        Assert.Equal([RacePhase.DriverSelect, RacePhase.Grid, RacePhase.Throttle, RacePhase.Reading, RacePhase.Question, RacePhase.Reveal,
+        Assert.Equal([RacePhase.DriverSelect, RacePhase.QualifyingReading, RacePhase.QualifyingQuestion, RacePhase.QualifyingResult,
+            RacePhase.Grid, RacePhase.Throttle, RacePhase.Reading, RacePhase.Question, RacePhase.Reveal,
             RacePhase.Chequered, RacePhase.Anthem, RacePhase.Champagne], phases);
-        // Each phase's steps sit together, so the podium phases each last as long as the rules say.
-        Assert.Equal(phases.Count, Steps.Select(s => s.View.Phase).Where((p, i) => i == 0 || Steps[i - 1].View.Phase != p).Count());
+        // Each phase's steps sit together, so the podium phases each last as long as the rules say. Qualifying runs its
+        // reading, question and result once per lap: three laps repeat the cycle twice more.
+        Assert.Equal(phases.Count + 2 * 3, Steps.Select(s => s.View.Phase).Where((p, i) => i == 0 || Steps[i - 1].View.Phase != p).Count());
         Assert.Equal(16, Steps.Where(s => s.View.Phase == RacePhase.Anthem).Sum(s => s.Seconds), 6);
         Assert.Equal(16, Steps.Where(s => s.View.Phase == RacePhase.Champagne).Sum(s => s.Seconds), 6);
         Assert.All(Steps, s => Assert.Equal(22, s.View.Drivers.Count));
@@ -189,6 +192,86 @@ public class DemoRaceTests
             Assert.Equal(step.View.Phase, back.Phase);
             Assert.Equal(step.View.Drivers.Select(d => (d.Code, d.Distance, d.Outcome)), back.Drivers.Select(d => (d.Code, d.Distance, d.Outcome)));
             Assert.Equal(step.View.Podium?.Steps.Select(s => (s.Code, s.Charge, s.Sprays.Count)), back.Podium?.Steps.Select(s => (s.Code, s.Charge, s.Sprays.Count)));
+        }
+    }
+
+    [Fact]
+    public void DemoRace_qualifying_step_has_a_deleted_lap_and_a_pole_change()
+    {
+        var qualifying = Steps.Where(s => s.Label == "qualifying").ToList();
+        var views = qualifying.Select(s => s.View).ToList();
+
+        // Between Driver Select and Grid, one reading, question and result per lap.
+        var first = Steps.ToList().IndexOf(qualifying[0]);
+        Assert.Equal(RacePhase.DriverSelect, Steps[first - 1].View.Phase);
+        Assert.Equal(RacePhase.Grid, Steps[first + qualifying.Count].View.Phase);
+        Assert.Equal(Enumerable.Range(1, 3).SelectMany(_ => new[] { RacePhase.QualifyingReading, RacePhase.QualifyingQuestion, RacePhase.QualifyingResult }),
+            views.Select(v => v.Phase));
+        Assert.Equal([1, 1, 1, 2, 2, 2, 3, 3, 3], views.Select(v => v.Qualifying!.Lap));
+        Assert.All(qualifying, s => Assert.True(s.Seconds > 0));
+        Assert.All(views, v => Assert.Equal((0, 3, 22), (v.Round, v.Qualifying!.Laps, v.Drivers.Count)));
+        Assert.All(views, v => Assert.Equal(v.Drivers.Select(d => (d.Code, d.Position)), v.Qualifying!.Rows.Select(r => (r.Code, r.Position))));
+        Assert.All(views, v => Assert.Equal(1, v.Qualifying!.Rows[0].Position));
+
+        // Nothing is shown before the result: no lap times, fastest lap, movement or answer.
+        foreach (var v in views.Where(v => v.Phase != RacePhase.QualifyingResult))
+        {
+            Assert.Null(v.CorrectIndex);
+            Assert.All(v.Qualifying!.Rows, r => Assert.Equal((null, false, 0), (r.LastLapMs, r.FastestLap, r.PositionChange)));
+        }
+        Assert.All(views.Where(v => v.Phase != RacePhase.QualifyingQuestion), v => Assert.All(v.Qualifying!.Rows, r => Assert.False(r.Answered)));
+        var question = views.First(v => v.Phase == RacePhase.QualifyingQuestion);
+        Assert.Contains(question.Qualifying!.Rows, r => r.Answered);
+        Assert.Contains(question.Drivers, d => d.Player is not null && d.Status == DriverStatus.Answering);
+        Assert.All(question.Drivers.Where(d => d.Player is null), d => Assert.Equal(DriverStatus.Answered, d.Status));
+        Assert.NotNull(question.Question!.Text);
+
+        var results = views.Where(v => v.Phase == RacePhase.QualifyingResult).ToList();
+        Assert.All(results, v => Assert.NotNull(v.CorrectIndex));
+
+        // Lap 1 deletes a human's lap.
+        var humans = results[0].Drivers.Where(d => d.Player is not null).Select(d => d.Code).ToHashSet();
+        Assert.Contains(results[0].Qualifying!.Rows, r => humans.Contains(r.Code) && r.LastLapMs is null);
+
+        // Lap 2 takes pole from the lap 1 leader, and the card for it appears.
+        var lap1Leader = results[0].Qualifying!.Rows[0].Code;
+        var lap2Leader = results[1].Qualifying!.Rows[0].Code;
+        Assert.NotEqual(lap1Leader, lap2Leader);
+        var lap2Question = views[4];
+        Assert.NotNull(QualifyingText.ProvisionalPole(results[1], lap2Question));
+        Assert.Equal("JO", QualifyingText.Pole(results[2])!.Value.Name);
+        Assert.Equal(results[2].Qualifying!.Rows[0].Code, results[1].Qualifying!.Rows[0].Code);
+
+        // Each result adds its lap to the totals, the classification follows correct laps then time, and one lap is purple.
+        for (var i = 0; i < results.Count; i++)
+        {
+            var rows = results[i].Qualifying!.Rows;
+            var before = (i == 0 ? views[1] : results[i - 1]).Qualifying!.Rows.ToDictionary(r => r.Code);
+            foreach (var r in rows)
+            {
+                Assert.Equal(before[r.Code].TotalMs + (r.LastLapMs ?? 0), r.TotalMs);
+                Assert.Equal(before[r.Code].Correct + (r.LastLapMs is null ? 0 : 1), r.Correct);
+                Assert.Equal(before[r.Code].Position - r.Position, r.PositionChange);
+            }
+            Assert.Equal(rows.OrderByDescending(r => r.Correct).ThenBy(r => r.TotalMs).Select(r => r.Code).Take(rows.Count(r => r.Correct > 0)),
+                rows.Where(r => r.Correct > 0).Select(r => r.Code));
+            Assert.Equal(rows.Where(r => r.LastLapMs is not null).MinBy(r => r.LastLapMs)!.Code, Assert.Single(rows, r => r.FastestLap).Code);
+        }
+        Assert.Contains(results, v => v.Qualifying!.Rows.Any(r => r.FastestLap && v.Drivers.Single(d => d.Code == r.Code).Player is not null));
+
+        // The last result is the grid: the same cars in the same slots.
+        Assert.Equal(Phase(RacePhase.Grid).Drivers.Select(d => d.Code), results[2].Drivers.Select(d => d.Code));
+        Assert.Equal(Phase(RacePhase.Grid).Drivers.Select(d => (d.Player, d.PlayerName)), results[2].Drivers.Select(d => (d.Player, d.PlayerName)));
+    }
+
+    [Fact]
+    public void Qualifying_views_round_trip_through_the_wire_format()
+    {
+        foreach (var step in Steps.Where(s => s.Label == "qualifying"))
+        {
+            var back = JsonSerializer.SerializeToElement(step.View, ArcJson.Options).Deserialize<RedlineHostView>(ArcJson.Options)!;
+            Assert.Equal(step.View.Qualifying!.Lap, back.Qualifying!.Lap);
+            Assert.Equal(step.View.Qualifying.Rows, back.Qualifying.Rows);
         }
     }
 }

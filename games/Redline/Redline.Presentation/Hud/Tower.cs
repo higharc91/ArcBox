@@ -23,6 +23,8 @@ public enum ChipKind
     Bad,
     /// <summary>White on red-orange: a spin-out.</summary>
     Spin,
+    /// <summary>White on purple: a qualifying lap that is the session's fastest.</summary>
+    Purple,
 }
 
 public readonly record struct Chip(string Text, ChipKind Kind);
@@ -34,8 +36,8 @@ public enum AnswerMark { None, Answering, Answered }
 /// <param name="Slot">Row index from the top (the view's ranking order).</param>
 /// <param name="Position">The shown position number (shared on ties).</param>
 /// <param name="PlayerName">Upper-case player name for humans, null for AI.</param>
-/// <param name="Gap">"LEAD", "TIED", "−3", "GRID", or "" when the phase has no gaps.</param>
-/// <param name="Movement">Places gained (+) or lost (−) this round; nonzero only in Reveal.</param>
+/// <param name="Gap">"LEAD", "TIED", "−3", "GRID", or "" when the phase has no gaps. In qualifying, the total time ("6.82"), or "—" before a first correct lap.</param>
+/// <param name="Movement">Places gained (+) or lost (−) this round; nonzero only in Reveal and QualifyingResult.</param>
 public sealed record TowerRow(
     int Slot, string Code, string TeamId, string Accent, int Position, string? PlayerName, string Gap, int Movement,
     Chip? Chip, AnswerMark Mark, bool Connected)
@@ -45,13 +47,15 @@ public sealed record TowerRow(
 
 /// <summary>
 /// The compact 22-row timing tower (spec §4.8 HUD): order, gap text, throttle / status / result chips and movement, all
-/// from the host view. Secrecy is the server's job, but the tower never shows a throttle before Question either.
+/// from the host view. Secrecy is the server's job, but the tower never shows a throttle before Question either. In qualifying
+/// (spec §6) it is the timing board: total in the gap column, the lap's chip (purple, green or DELETED) at the Result.
 /// </summary>
 public static class Tower
 {
     public static IReadOnlyList<TowerRow> Rows(RedlineHostView view)
     {
         ArgumentNullException.ThrowIfNull(view);
+        if (view.Qualifying is { } session && QualifyingText.IsQualifying(view.Phase)) return QualifyingRows(view, session);
         var leader = view.Drivers.Count == 0 ? 0 : view.Drivers.Max(d => d.Distance);
         return [.. view.Drivers.Select((d, i) => new TowerRow(
             i, d.Code, d.TeamId, TeamAccent.ById(d.TeamId), d.Position,
@@ -63,10 +67,43 @@ public static class Tower
             d.Connected))];
     }
 
+    /// <summary>
+    /// The qualifying board, in the view's classification order. Gap: the total of the completed correct laps. Chip: only at
+    /// the Result, this lap's time (purple for the fastest, green otherwise) or DELETED. Mark: who has answered, during the
+    /// question. Movement: the places gained or lost at the Result, which is when the rows slide.
+    /// </summary>
+    private static IReadOnlyList<TowerRow> QualifyingRows(RedlineHostView view, QualifyingSession session)
+    {
+        var cars = view.Drivers.ToDictionary(d => d.Code);
+        var result = view.Phase == RacePhase.QualifyingResult;
+        return [.. session.Rows.Select((q, i) =>
+        {
+            cars.TryGetValue(q.Code, out var d);
+            var teamId = d?.TeamId ?? "";
+            return new TowerRow(
+                i, q.Code, teamId, TeamAccent.ById(teamId), q.Position,
+                d?.Player is null ? null : (d.PlayerName ?? "PLAYER").ToUpperInvariant(),
+                q.Correct == 0 ? NoTime : QualifyingText.Total(q.TotalMs),
+                result ? q.PositionChange : 0,
+                result ? LapChip(q) : null,
+                view.Phase == RacePhase.QualifyingQuestion ? (q.Answered ? AnswerMark.Answered : AnswerMark.Answering) : AnswerMark.None,
+                d?.Connected ?? true);
+        })];
+    }
+
+    /// <summary>The total column before a car has a correct lap.</summary>
+    public const string NoTime = "—";
+
+    /// <summary>A qualifying lap at the Result: "2.41" (purple when the session's fastest, else green) or a red "DELETED".</summary>
+    public static Chip LapChip(QualifyingRow q) => q.LastLapMs is { } ms
+        ? new Chip(QualifyingText.Lap(ms), q.FastestLap ? ChipKind.Purple : ChipKind.Good)
+        : new Chip("DELETED", ChipKind.Bad);
+
     /// <summary>Gap to the leader: the first row with no gap leads, later rows level with the leader are TIED.</summary>
     public static string Gap(RacePhase phase, int slot, int behind) => phase switch
     {
         RacePhase.DriverSelect => "",
+        _ when QualifyingText.IsQualifying(phase) => "",
         RacePhase.Grid => "GRID",
         _ when behind <= 0 => slot == 0 ? "LEAD" : "TIED",
         _ => $"−{behind}",

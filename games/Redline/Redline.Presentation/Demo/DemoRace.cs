@@ -12,7 +12,9 @@ public sealed record DemoStep(RedlineHostView View, double Seconds)
 
 /// <summary>
 /// The dev-only <c>--redline-demo</c> script: a realistic race told in host views, so the TV scene can be run and
-/// screenshotted without a server. Driver Select (claims arriving) → Grid → round 4's Throttle, Reading, Question and Reveal (a
+/// screenshotted without a server. Driver Select (claims arriving) → Qualifying (three laps of Reading, Question and Result:
+/// one human lap deleted in lap 1, pole changing hands in lap 2, a player's purple lap in lap 3, the last classification being
+/// the grid) → Grid → round 4's Throttle, Reading, Question and Reveal (a
 /// human Redline spin-out, a three-car pack at the front, a pair behind) → Chequered → the podium: Anthem (the three
 /// players shaking their bottles) and Champagne (sprays from all three steps at different strengths, one triple spray).
 /// The winner is JO in the McLaren (Norris: God Save the King); <c>Steps(winner: "PER")</c> crowns KAI in the Cadillac
@@ -44,9 +46,50 @@ public static class DemoRace
         "Which U.S. state has the longest coastline?", ["Florida", "California", "Alaska", "Hawaii"]);
     private const int CorrectIndex = 2;
 
+    /// <summary>The qualifying laps the demo plays.</summary>
+    public const int QualifyingLaps = 3;
+
+    // Qualifying's easy questions, one per lap, with the correct answer's index.
+    private static readonly (QuestionCard Card, int Correct)[] QualifyingQuestions =
+    [
+        (new("Geography", Difficulty.Easy, "What is the capital of France?", ["Berlin", "Paris", "Madrid", "Rome"]), 1),
+        (new("Science", Difficulty.Easy, "How many legs does a spider have?", ["Six", "Ten", "Eight", "Four"]), 2),
+        (new("General Knowledge", Difficulty.Easy, "Which colour do you get by mixing blue and yellow?", ["Green", "Orange", "Purple", "Brown"]), 0),
+    ];
+
     // Qualifying order for the grid.
     private static readonly string[] GridOrder =
         ["NOR", "PIA", "LEC", "VER", "RUS", "HAM", "ANT", "ALO", "PER", "HAD", "GAS", "ALB", "SAI", "LAW", "HUL", "OCO", "BEA", "LIN", "COL", "STR", "BOR", "BOT"];
+
+    /// <summary>
+    /// Each car's three lap times in milliseconds, null for a deleted lap, so that the classification after lap 3 is
+    /// <see cref="GridOrder"/>: correct laps first, then the total. PIA leads after lap 1 (and has that lap's purple), JO takes
+    /// pole in lap 2 with the purple, ALEX has lap 3's purple; Christabella's first lap is deleted, as are three AI laps.
+    /// </summary>
+    private static readonly IReadOnlyDictionary<string, int?[]> LapTimes = BuildLapTimes();
+
+    private static Dictionary<string, int?[]> BuildLapTimes()
+    {
+        var laps = new Dictionary<string, int?[]>(StringComparer.Ordinal)
+        {
+            ["PIA"] = [2300, 2500, 2600],
+            ["NOR"] = [2450, 2200, 2400],
+            ["LEC"] = [2700, 2600, 2150],
+            ["HUL"] = [null, 3000, 2900],       // three correct laps would put Christabella ahead of the 14 cars above her
+            ["OCO"] = [3100, null, 2950],
+            ["BEA"] = [3100, 3000, null],
+            ["LIN"] = [3100, 3050, null],
+            ["COL"] = [null, 3100, 3100],
+            ["STR"] = [3000, null, null],
+            ["BOR"] = [3200, null, null],
+            ["BOT"] = [null, null, null],
+        };
+        // Everyone else is a steady three correct laps, slower the further down the grid.
+        for (var i = 0; i < GridOrder.Length; i++)
+            if (!laps.ContainsKey(GridOrder[i]))
+                laps[GridOrder[i]] = [2700 + 40 * i, 2650 + 40 * i, 2600 + 40 * i];
+        return laps;
+    }
 
     private sealed record Plan(string Code, int Before, Throttle Throttle, bool Right);
 
@@ -111,6 +154,8 @@ public static class DemoRace
                 claimed.Contains(s.Driver.Code) ? DriverStatus.Seated : DriverStatus.Unclaimed)).ToList();
             steps.Add(new DemoStep(View(rules, RacePhase.DriverSelect, 0, null, null, rows), i == 0 ? 2 : 3) { Label = "driverselect" });
         }
+
+        steps.AddRange(QualifyingSteps(rules, grid));
 
         // Grid: everyone at distance 0 in qualifying order.
         var gridRows = GridOrder.Select((code, i) => Row(grid.ByCode(code), true, i + 1, 0, 0, 0, DriverStatus.Ready)).ToList();
@@ -210,6 +255,61 @@ public static class DemoRace
             return new DriverRow(s.Driver.Code, s.Driver.Number, s.Team.Id,
                 human ? Player(s.Driver.Code) : null, human ? Humans[s.Driver.Code] : null,
                 position, change, distance, previous, status, null, null, null, false, true);
+        }
+    }
+
+    /// <summary>
+    /// The qualifying session: per lap a Reading (the question read out), a Question (some players still answering) and a
+    /// Result (times, deleted laps, the purple lap, rows moving). Every view carries the classification as it stands.
+    /// Nothing is shown before its Result, as the server guarantees.
+    /// </summary>
+    private static IEnumerable<DemoStep> QualifyingSteps(RedlineRules rules, Grid grid)
+    {
+        var seats = grid.Seats;
+        // Players still answering in the Question view; every AI car counts as answered from the start.
+        string[] slow = ["ALO", "HUL"];
+
+        // The classification after <done> laps: correct laps, then total, then the seeded (team) order.
+        List<(string Code, int Correct, int Total)> Board(int done) =>
+        [.. seats.Select((s, tie) =>
+            {
+                var times = LapTimes[s.Driver.Code].Take(done).OfType<int>().ToList();
+                return (Code: s.Driver.Code, Tie: tie, Correct: times.Count, Total: times.Sum());
+            })
+            .OrderByDescending(c => c.Correct).ThenBy(c => c.Total).ThenBy(c => c.Tie)
+            .Select(c => (c.Code, c.Correct, c.Total))];
+
+        RedlineHostView ViewOf(RacePhase phase, int lap, int question, IReadOnlyList<QualifyingRow> rows) =>
+            View(rules, phase, 0, QualifyingQuestions[question].Card, phase == RacePhase.QualifyingResult ? QualifyingQuestions[question].Correct : null,
+                [.. rows.Select(r => Driver(r.Code, r.Position, phase == RacePhase.QualifyingQuestion && r.Answered ? DriverStatus.Answered
+                    : phase == RacePhase.QualifyingQuestion ? DriverStatus.Answering : DriverStatus.Ready))])
+            with { Qualifying = new QualifyingSession(lap, QualifyingLaps, rows) };
+
+        DriverRow Driver(string code, int position, DriverStatus status)
+        {
+            var seat = grid.ByCode(code);
+            var human = Humans.TryGetValue(code, out var name);
+            return new DriverRow(code, seat.Driver.Number, seat.Team.Id, human ? Player(code) : null, human ? name : null,
+                position, 0, 0, 0, status, null, null, null, false, true);
+        }
+
+        for (var lap = 1; lap <= QualifyingLaps; lap++)
+        {
+            var before = Board(lap - 1);
+            var after = Board(lap);
+            var standing = before.Select((c, i) => new QualifyingRow(c.Code, i + 1, 0, c.Correct, c.Total, null, false, false)).ToList();
+            var asked = standing.Select(r => r with { Answered = !Humans.ContainsKey(r.Code) || !slow.Contains(r.Code) }).ToList();
+
+            var readingSeconds = Math.Ceiling(rules.ReadingTime(QualifyingQuestions[lap - 1].Card.Text!).TotalSeconds * 10) / 10;
+            yield return new DemoStep(ViewOf(RacePhase.QualifyingReading, lap, lap - 1, standing), readingSeconds) { Label = "qualifying" };
+            yield return new DemoStep(ViewOf(RacePhase.QualifyingQuestion, lap, lap - 1, asked), 4) { Label = "qualifying" };
+
+            // The lap's fastest correct time; the better classified keeps a tie.
+            var fastest = after.Select(c => (c.Code, Ms: LapTimes[c.Code][lap - 1])).Where(x => x.Ms is not null)
+                .OrderBy(x => x.Ms).Select(x => x.Code).FirstOrDefault();
+            var result = after.Select((c, i) => new QualifyingRow(c.Code, i + 1, before.FindIndex(b => b.Code == c.Code) - i,
+                c.Correct, c.Total, LapTimes[c.Code][lap - 1], false, c.Code == fastest)).ToList();
+            yield return new DemoStep(ViewOf(RacePhase.QualifyingResult, lap, lap - 1, result), rules.QualifyingResult.TotalSeconds) { Label = "qualifying" };
         }
     }
 

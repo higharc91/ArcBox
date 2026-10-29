@@ -109,6 +109,76 @@ public class AudioCuesTests
         Assert.Equal([AudioCues.Fanfare, AudioCues.Cheer], AudioCues.ForView(Demo(RacePhase.Chequered), Demo(RacePhase.Reveal)));
     }
 
+    private static RedlineHostView Quali(RacePhase phase, int lap, params QualifyingViews.Car[] cars) => QualifyingViews.View(phase, lap, cars);
+
+    [Fact]
+    public void AudioCues_qualifying_result_plays_correct_then_purple()
+    {
+        var question = Quali(RacePhase.QualifyingQuestion, 2, new("NOR", "JO", 1, 2450), new("PIA", null, 1, 2300), new("HUL", "Christabella", 0, 0));
+        var purple = Quali(RacePhase.QualifyingResult, 2,
+            new("NOR", "JO", 2, 4650, 2200, Fastest: true, Change: 1), new("PIA", null, 2, 4800, 2500), new("HUL", "Christabella", 0, 0, null));
+
+        Assert.Equal([AudioCues.Correct, AudioCues.Purple], AudioCues.ForView(purple, question));
+        Assert.Equal("purple", AudioCues.Purple);
+
+        // A purple lap by an AI car is not the players' chime; the players' laps still sound.
+        var aiPurple = Quali(RacePhase.QualifyingResult, 2,
+            new("PIA", null, 2, 4500, 2100, Fastest: true), new("NOR", "JO", 2, 4650, 2200), new("HUL", "Christabella", 0, 0, null));
+        Assert.Equal([AudioCues.Correct], AudioCues.ForView(aiPurple, question));
+
+        // Every player deleted: the buzz, even when an AI was right (and purple).
+        var allDeleted = Quali(RacePhase.QualifyingResult, 2,
+            new("PIA", null, 2, 4500, 2100, Fastest: true), new("NOR", "JO", 1, 2450, null), new("HUL", "Christabella", 0, 0, null));
+        Assert.Equal([AudioCues.Wrong], AudioCues.ForView(allDeleted, question));
+
+        // A player's deleted lap beside another player's good one is still the sting.
+        var mixed = Quali(RacePhase.QualifyingResult, 2,
+            new("NOR", "JO", 2, 4650, 2200), new("HUL", "Christabella", 0, 0, null));
+        Assert.Equal([AudioCues.Correct], AudioCues.ForView(mixed, question));
+
+        // Only on entering the Result.
+        Assert.Empty(AudioCues.ForView(purple, purple));
+    }
+
+    [Fact]
+    public void Qualifying_reads_the_question_with_a_whoosh_like_the_race()
+    {
+        var result1 = Quali(RacePhase.QualifyingResult, 1, new("NOR", "JO", 1, 2450, 2450), new("PIA", null, 1, 2300, 2300, Fastest: true));
+        var reading = Quali(RacePhase.QualifyingReading, 2, new("PIA", null, 1, 2300), new("NOR", "JO", 1, 2450));
+        var question = Quali(RacePhase.QualifyingQuestion, 2, new("PIA", null, 1, 2300), new("NOR", "JO", 1, 2450));
+        var select = Demo(RacePhase.DriverSelect);
+
+        // Reading on: the whoosh and the read-out come with the Reading, and the Question is silent.
+        Assert.Equal([AudioCues.Whoosh], AudioCues.ForView(reading, result1));
+        Assert.True(AudioCues.ReadsQuestion(reading, result1));
+        Assert.Empty(AudioCues.ForView(question, reading));
+        Assert.False(AudioCues.ReadsQuestion(question, reading));
+
+        // Reading off: the Question follows the Result (or Driver Select, for lap 1) and is read out then.
+        Assert.Equal([AudioCues.Whoosh], AudioCues.ForView(question, result1));
+        Assert.True(AudioCues.ReadsQuestion(question, result1));
+        Assert.Equal([AudioCues.Whoosh], AudioCues.ForView(question, select));
+        Assert.True(AudioCues.ReadsQuestion(question, select));
+
+        // A repeated view or a TV joining mid-question never reads it.
+        Assert.False(AudioCues.ReadsQuestion(question, question));
+        Assert.False(AudioCues.ReadsQuestion(question, null));
+        Assert.True(AudioCues.ReadsQuestion(reading, null));
+    }
+
+    [Fact]
+    public void Qualifying_ticks_when_a_player_answers_and_counts_down_the_last_five_seconds()
+    {
+        var waiting = Quali(RacePhase.QualifyingQuestion, 1, new("NOR", "JO"), new("PIA", null, Answered: true), new("LEC", "Alex"));
+        var one = Quali(RacePhase.QualifyingQuestion, 1, new("NOR", "JO", Answered: true), new("PIA", null, Answered: true), new("LEC", "Alex"));
+
+        Assert.Equal([AudioCues.Answer], AudioCues.ForView(one, waiting));
+        Assert.Empty(AudioCues.ForView(waiting, waiting));
+        Assert.Equal(1, AudioCues.CountdownTicks(RacePhase.QualifyingQuestion, 5.2, 4.9));
+        Assert.Equal(0, AudioCues.CountdownTicks(RacePhase.QualifyingReading, 5.2, 4.9));
+        Assert.Equal(0, AudioCues.CountdownTicks(RacePhase.QualifyingResult, 3.1, 2.9));
+    }
+
     [Fact]
     public void Driver_select_and_grid_have_no_cues()
     {

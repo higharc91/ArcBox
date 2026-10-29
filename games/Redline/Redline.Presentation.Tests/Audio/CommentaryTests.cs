@@ -247,6 +247,13 @@ public class CommentaryTests
 
         Assert.Equal(
         [
+            "Qualifying! Three questions, fastest correct answers take pole.",
+            "Piastri goes purple!",
+            "Provisional pole for Piastri.",
+            "Jo goes purple!",
+            "Provisional pole for Jo.",
+            "Alex goes purple!",
+            "Pole position for Jo, 7.05 seconds in total!",
             "Welcome to the Circuit of the Americas. Twenty-two cars, 7 players. Lights out in a moment.",
             "Round 4. Geography, medium.",
             "The answer is Alaska.",
@@ -267,4 +274,72 @@ public class CommentaryTests
     [InlineData("A", "A")]
     public void Spoken_name_softens_all_caps_words(string typed, string spoken) =>
         Assert.Equal(spoken, Commentary.SpokenName(typed));
+
+    private static RedlineHostView Quali(RacePhase phase, int lap, params QualifyingViews.Car[] cars) => QualifyingViews.View(phase, lap, cars);
+
+    [Fact]
+    public void Commentary_qualifying_lines()
+    {
+        var select = View(RacePhase.DriverSelect, 0, Row("NOR", 1, 0));
+
+        // Session start: once, at the first QualifyingReading.
+        var first = Quali(RacePhase.QualifyingReading, 1, new("NOR", "JO"), new("PIA"));
+        var start = Assert.Single(Commentary.Lines(first, select, Grid));
+        Assert.Equal("Qualifying! Three questions, fastest correct answers take pole.", start.Text);
+        Assert.Equal(CommentaryKind.Intro, start.Kind);
+        Assert.Equal(Commentary.Scripted, start.Priority);
+        Assert.Equal([start.Text], Texts(first, null));
+        Assert.Empty(Commentary.Lines(first, first, Grid));
+        Assert.Empty(Commentary.Lines(Quali(RacePhase.QualifyingReading, 2, new QualifyingViews.Car("NOR", "JO")), Quali(RacePhase.QualifyingResult, 1, new QualifyingViews.Car("NOR", "JO")), Grid));
+        Assert.Empty(Commentary.Lines(Quali(RacePhase.QualifyingQuestion, 1, new QualifyingViews.Car("NOR", "JO")), first, Grid));
+        // With reading off lap 1 begins at the question, straight from Driver Select; a TV joining mid-question stays quiet.
+        Assert.Equal([start.Text], Texts(Quali(RacePhase.QualifyingQuestion, 1, new QualifyingViews.Car("NOR", "JO")), select));
+        Assert.Empty(Commentary.Lines(Quali(RacePhase.QualifyingQuestion, 1, new QualifyingViews.Car("NOR", "JO")), null, Grid));
+
+        // Lap 2: a purple human lap and a new leader.
+        var question = Quali(RacePhase.QualifyingQuestion, 2, new("PIA", null, 1, 2300), new("NOR", "JO", 1, 2450));
+        var purple = Quali(RacePhase.QualifyingResult, 2,
+            new("NOR", "JO", 2, 4650, 2200, Fastest: true, Change: 1), new("PIA", null, 2, 4800, 2500, Change: -1));
+        var lines = Commentary.Lines(purple, question, Grid);
+        Assert.Equal(["Jo goes purple!", "Provisional pole for Jo."], lines.Select(l => l.Text));
+        Assert.Equal([CommentaryKind.Event, CommentaryKind.Event], lines.Select(l => l.Kind));
+        Assert.All(lines, l => Assert.Equal(Commentary.PlayerEvent, l.Priority));
+
+        // The leader held: only the purple lap is called, and an AI's is called by surname at the AI priority.
+        var held = Quali(RacePhase.QualifyingResult, 2,
+            new("PIA", null, 2, 4500, 2100, Fastest: true), new("NOR", "JO", 2, 4650, 2200));
+        var aiLine = Assert.Single(Commentary.Lines(held, question, Grid));
+        Assert.Equal("Piastri goes purple!", aiLine.Text);
+        Assert.Equal(Commentary.AiEvent, aiLine.Priority);
+
+        // Neither purple nor a new leader: silent.
+        var quiet = Quali(RacePhase.QualifyingResult, 2, new("PIA", null, 2, 4500, 2100), new("NOR", "JO", 2, 4650, 2200));
+        Assert.Empty(Commentary.Lines(quiet, question, Grid));
+
+        // Provisional pole for an AI leader, and typed names are spoken (SAM, not S-A-M).
+        var aiLeads = Quali(RacePhase.QualifyingResult, 2,
+            new("PIA", null, 2, 4500, 2100, Change: 1), new("VER", "SAM", 2, 4650, 2200));
+        var beforeAi = Quali(RacePhase.QualifyingQuestion, 2, new("VER", "SAM", 1, 2450), new("PIA", null, 1, 2300));
+        Assert.Equal(["Provisional pole for Piastri."], Texts(aiLeads, beforeAi));
+        var samPurple = Quali(RacePhase.QualifyingResult, 2, new("VER", "SAM", 2, 4650, 2200, Fastest: true), new("PIA", null, 2, 4800, 2500));
+        Assert.Equal(["Sam goes purple!"], Texts(samPurple, beforeAi));
+
+        // The last lap: the pole line, with the total, and no provisional line on top of it.
+        var lastQuestion = Quali(RacePhase.QualifyingQuestion, 3, new("PIA", null, 2, 4800), new("NOR", "JO", 2, 4650));
+        var last = Quali(RacePhase.QualifyingResult, 3,
+            new("NOR", "JO", 3, 7050, 2400, Change: 1), new("PIA", null, 3, 7400, 2600, Change: -1));
+        var pole = Assert.Single(Commentary.Lines(last, lastQuestion, Grid));
+        Assert.Equal("Pole position for Jo, 7.05 seconds in total!", pole.Text);
+        Assert.Equal((CommentaryKind.Finish, Commentary.Scripted), (pole.Kind, pole.Priority));
+
+        var lastPurple = Quali(RacePhase.QualifyingResult, 3,
+            new("NOR", "JO", 3, 7050, 2400, Fastest: true), new("PIA", null, 3, 7400, 2600));
+        Assert.Equal(["Jo goes purple!", "Pole position for Jo, 7.05 seconds in total!"], Texts(lastPurple, lastQuestion));
+        var aiPole = Quali(RacePhase.QualifyingResult, 3, new("PIA", null, 3, 7000, 2600), new("NOR", "JO", 3, 7050, 2400));
+        Assert.Equal(["Pole position for Piastri, 7.00 seconds in total!"], Texts(aiPole, lastQuestion));
+
+        // Nothing is said on entering the question or about a lap nobody completed.
+        Assert.Empty(Commentary.Lines(Quali(RacePhase.QualifyingQuestion, 2, new QualifyingViews.Car("NOR", "JO")), Quali(RacePhase.QualifyingReading, 2, new QualifyingViews.Car("NOR", "JO")), Grid));
+        Assert.Empty(Commentary.Lines(Quali(RacePhase.QualifyingResult, 3, new("NOR", "JO"), new("PIA")), lastQuestion, Grid));
+    }
 }

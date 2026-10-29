@@ -143,4 +143,23 @@ public class CameraDirectorTests
 
         Assert.Equal(["AIA"], HeliSubjects(CameraDirector.RevealFollowUp(view)));
     }
+
+    [Fact]
+    public void CameraDirector_qualifying_shots()
+    {
+        var cars = new[] { Row("PIA", 1, 0), Row("NOR", 2, 0, human: true), Row("LEC", 3, 0, human: true) };
+        var reading = View(RacePhase.QualifyingReading, cars);
+        var question = View(RacePhase.QualifyingQuestion, cars);
+        var result = View(RacePhase.QualifyingResult, cars);
+
+        // Trackside on the provisional pole car while the question is read and answered; heli on it at the Result.
+        Assert.Equal("PIA", Assert.IsType<TracksideShot>(CameraDirector.Pick(reading, null)).Subject);
+        Assert.Equal("PIA", Assert.IsType<TracksideShot>(CameraDirector.Pick(question, reading)).Subject);
+        Assert.Equal(["PIA"], HeliSubjects(CameraDirector.Pick(result, question)));
+
+        // The leader is whoever the classification puts at P1, human or AI.
+        var human = new[] { Row("NOR", 1, 0, human: true), Row("PIA", 2, 0) };
+        Assert.Equal("NOR", Assert.IsType<TracksideShot>(CameraDirector.Pick(View(RacePhase.QualifyingQuestion, human), null)).Subject);
+        Assert.Equal(["NOR"], HeliSubjects(CameraDirector.Pick(View(RacePhase.QualifyingResult, human), null)));
+    }
 }

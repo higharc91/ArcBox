@@ -36,6 +36,9 @@ public static class CameraDirector
         RacePhase.Throttle => new HeliShot([(BestPlaced(view.Drivers, humanOnly: true) ?? BestPlaced(view.Drivers, humanOnly: false))!.Code]),
         RacePhase.Reading or RacePhase.Question => ClosestBattle(view),     // Reading keeps the Question shot (audio spec §2)
         RacePhase.Reveal => RevealShot(view),
+        // Qualifying (spec §6): the provisional pole car, trackside while the question runs and from the air at the Result.
+        RacePhase.QualifyingReading or RacePhase.QualifyingQuestion => PoleCar(view) is { } p ? new TracksideShot(p) : new FinishShot(),
+        RacePhase.QualifyingResult => PoleCar(view) is { } p ? new HeliShot([p]) : new FinishShot(),
         RacePhase.Anthem => new PodiumShot(),
         RacePhase.Champagne => new PodiumShot(Champagne: true),
         _ => new FinishShot(),
@@ -53,6 +56,9 @@ public static class CameraDirector
             : previous.Drivers.Where(d => d.Player is not null).Select(d => d.Code).ToHashSet();
         return view.Drivers.FirstOrDefault(d => d.Player is not null && !already.Contains(d.Code))?.Code;
     }
+
+    /// <summary>The code of the car at P1 of the qualifying classification (view order), or null with no cars.</summary>
+    private static string? PoleCar(RedlineHostView view) => BestPlaced(view.Drivers, humanOnly: false)?.Code;
 
     /// <summary>Smallest Position wins; among equal positions the earlier entry in the ranking order.</summary>
     private static DriverRow? BestPlaced(IReadOnlyList<DriverRow> drivers, bool humanOnly) =>

@@ -38,6 +38,10 @@ public static class Commentary
         // Only the phases with lines; Driver Select, Question and anything newer (Reading) are silent.
         switch (view.Phase)
         {
+            case RacePhase.QualifyingReading or RacePhase.QualifyingQuestion:
+                return QualifyingStart(view, previous);
+            case RacePhase.QualifyingResult:
+                return QualifyingResult(view, previous);
             case RacePhase.Grid:
                 return [Intro(view)];
             case RacePhase.Throttle:
@@ -56,6 +60,48 @@ public static class Commentary
                 return [];
         }
     }
+
+    /// <summary>
+    /// Qualifying spec §6: "Qualifying! Three questions…", once, as lap 1 begins: at its Reading, or at its Question when Reading
+    /// is off (arriving from Driver Select). A TV that joins mid-question stays quiet, and so does every later lap.
+    /// </summary>
+    private static IReadOnlyList<CommentaryLine> QualifyingStart(RedlineHostView view, RedlineHostView? previous)
+    {
+        var firstLap = view.Qualifying is not { Lap: > 1 } && (previous is null || !QualifyingText.IsQualifying(previous.Phase));
+        var begins = view.Phase == RacePhase.QualifyingReading ? firstLap : firstLap && previous is not null;
+        return begins
+            ? [new("Qualifying! Three questions, fastest correct answers take pole.", CommentaryKind.Intro, Scripted)]
+            : [];
+    }
+
+    /// <summary>
+    /// Qualifying spec §6 at a Result: who went purple, then who now has pole. After the last lap the pole line is the
+    /// closing word ("Pole position for…") and replaces the provisional one. A player's line is a player event and an AI's an AI
+    /// event; the pole line is scripted.
+    /// </summary>
+    private static IReadOnlyList<CommentaryLine> QualifyingResult(RedlineHostView view, RedlineHostView? previous)
+    {
+        var lines = new List<CommentaryLine>(2);
+        if (view.Qualifying is not { } session) return lines;
+
+        if (session.Rows.FirstOrDefault(r => r.FastestLap) is { } purple && view.Drivers.FirstOrDefault(d => d.Code == purple.Code) is { } driver)
+            lines.Add(new($"{LapName(driver)} goes purple!", CommentaryKind.Event, driver.Player is not null ? PlayerEvent : AiEvent));
+
+        if (session.Lap >= session.Laps)
+        {
+            if (QualifyingText.Pole(view) is { } pole)
+                lines.Add(new($"Pole position for {SpokenName(pole.Name)}, {pole.Total} seconds in total!", CommentaryKind.Finish, Scripted));
+        }
+        else if (QualifyingText.ProvisionalPole(view, previous) is { } name)
+        {
+            var human = view.Drivers.FirstOrDefault(d => d.Code == session.Rows.MinBy(r => r.Position)?.Code)?.Player is not null;
+            lines.Add(new($"Provisional pole for {SpokenName(name)}.", CommentaryKind.Event, human ? PlayerEvent : AiEvent));
+        }
+        return lines;
+    }
+
+    /// <summary>The name for a qualifying line: a player as typed (spoken), an AI by its surname, as the race's winner line.</summary>
+    private static string LapName(DriverRow d) => d.Player is not null ? Name(d) : HudText.Surname(d.Code);
 
     /// <summary>Podium spec §5: the anthem's country, for the player on the top step and their team.</summary>
     private static IReadOnlyList<CommentaryLine> Anthem(RedlineHostView view, Grid grid)

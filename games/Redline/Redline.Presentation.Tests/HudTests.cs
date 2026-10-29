@@ -112,6 +112,161 @@ public class TowerTests
     [InlineData("red-bull", "#1b2550")]
     [InlineData("nobody", "#888888")]
     public void Team_accent_follows_the_mockup_rule(string team, string hex) => Assert.Equal(hex, TeamAccent.ById(team));
+
+    [Fact]
+    public void Tower_qualifying_shows_total_lap_chip_purple_and_deleted()
+    {
+        var result = QualifyingViews.View(RacePhase.QualifyingResult, 2,
+            new("NOR", "JO", Correct: 2, TotalMs: 4650, LastMs: 2200, Fastest: true, Change: 1),
+            new("PIA", null, Correct: 2, TotalMs: 4800, LastMs: 2500, Change: -1),
+            new("HUL", "Christabella", Correct: 1, TotalMs: 2900, LastMs: null),
+            new("BOT", null, Correct: 0, TotalMs: 0, LastMs: null));
+
+        var rows = Tower.Rows(result);
+
+        Assert.Equal(["4.65", "4.80", "2.90", "—"], rows.Select(r => r.Gap));
+        Assert.Equal([new Chip("2.20", ChipKind.Purple), new Chip("2.50", ChipKind.Good),
+            new Chip("DELETED", ChipKind.Bad), new Chip("DELETED", ChipKind.Bad)], rows.Select(r => r.Chip!.Value));
+        Assert.Equal([1, -1, 0, 0], rows.Select(r => r.Movement));
+        Assert.Equal([1, 2, 3, 4], rows.Select(r => r.Position));
+        Assert.Equal(["JO", null, "CHRISTABELLA", null], rows.Select(r => r.PlayerName));
+        Assert.All(rows, r => Assert.Equal(AnswerMark.None, r.Mark));
+
+        // Before the Result there is no lap chip and no movement; the question shows who has answered.
+        var question = Tower.Rows(QualifyingViews.View(RacePhase.QualifyingQuestion, 2,
+            new("NOR", "JO", 1, 2450, Answered: true), new("PIA", null, 1, 2300, Answered: true), new("HUL", "Christabella", 0, 0)));
+        Assert.All(question, r => Assert.Null(r.Chip));
+        Assert.Equal([AnswerMark.Answered, AnswerMark.Answered, AnswerMark.Answering], question.Select(r => r.Mark));
+        Assert.Equal(["2.45", "2.30", "—"], question.Select(r => r.Gap));
+
+        var reading = Tower.Rows(QualifyingViews.View(RacePhase.QualifyingReading, 1, new("NOR", "JO"), new("PIA")));
+        Assert.All(reading, r => Assert.Null(r.Chip));
+        Assert.All(reading, r => Assert.Equal(AnswerMark.None, r.Mark));
+        Assert.All(reading, r => Assert.Equal(0, r.Movement));
+    }
+
+    [Fact]
+    public void Tower_gap_text_is_empty_in_the_qualifying_phases_without_a_qualifying_board()
+    {
+        foreach (var phase in new[] { RacePhase.QualifyingReading, RacePhase.QualifyingQuestion, RacePhase.QualifyingResult })
+        {
+            var view = View(phase, Row("NOR", 1, 0), Row("ANT", 2, 0));
+            Assert.Equal(["", ""], Tower.Rows(view).Select(r => r.Gap));
+            Assert.All(Tower.Rows(view), r => Assert.Null(r.Chip));
+        }
+    }
+}
+
+public class QualifyingTextTests
+{
+    [Theory]
+    [InlineData(2405, "2.41")]
+    [InlineData(6815, "6.82")]
+    [InlineData(2404, "2.40")]
+    [InlineData(2395, "2.40")]
+    [InlineData(999, "1.00")]
+    [InlineData(10000, "10.00")]
+    [InlineData(5, "0.01")]
+    [InlineData(4, "0.00")]
+    [InlineData(0, "0.00")]
+    public void QualifyingText_formats_times_to_hundredths_rounding_half_up(int ms, string text)
+    {
+        Assert.Equal(text, QualifyingText.Lap(ms));
+        Assert.Equal(text, QualifyingText.Total(ms));
+    }
+
+    [Fact]
+    public void Times_use_the_invariant_culture()
+    {
+        var before = System.Globalization.CultureInfo.CurrentCulture;
+        try
+        {
+            System.Globalization.CultureInfo.CurrentCulture = new System.Globalization.CultureInfo("de-DE");
+            Assert.Equal("2.41", QualifyingText.Lap(2405));
+        }
+        finally
+        {
+            System.Globalization.CultureInfo.CurrentCulture = before;
+        }
+    }
+
+    [Fact]
+    public void Header_names_the_lap()
+    {
+        Assert.Equal("QUALIFYING · LAP 1/3", QualifyingText.Header(1, 3));
+        Assert.Equal("QUALIFYING · LAP 3/3", QualifyingText.Header(3, 3));
+    }
+
+    [Fact]
+    public void Provisional_pole_is_the_new_leader_only_when_p1_changed_at_a_result()
+    {
+        var before = QualifyingViews.View(RacePhase.QualifyingQuestion, 2, new("PIA", null, 1, 2300), new("NOR", "JO", 1, 2450));
+        var changed = QualifyingViews.View(RacePhase.QualifyingResult, 2,
+            new("NOR", "JO", 2, 4650, 2200, Fastest: true, Change: 1), new("PIA", null, 2, 4800, 2500, Change: -1));
+        var held = QualifyingViews.View(RacePhase.QualifyingResult, 2,
+            new("PIA", null, 2, 4700, 2400), new("NOR", "JO", 2, 4900, 2450));
+
+        Assert.Equal("JO", QualifyingText.ProvisionalPole(changed, before));
+        Assert.Null(QualifyingText.ProvisionalPole(held, before));
+        // An AI leader is named by surname.
+        Assert.Equal("Piastri", QualifyingText.ProvisionalPole(held, changed with { Phase = RacePhase.QualifyingQuestion }));
+        // Only a Result announces; without a previous view the leader's own position change says it.
+        Assert.Null(QualifyingText.ProvisionalPole(before, null));
+        Assert.Equal("JO", QualifyingText.ProvisionalPole(changed, null));
+        Assert.Null(QualifyingText.ProvisionalPole(held, null));
+    }
+
+    [Fact]
+    public void Pole_is_the_leader_with_team_and_total()
+    {
+        var last = QualifyingViews.View(RacePhase.QualifyingResult, 3,
+            new("NOR", "JO", 3, 7050, 2400), new("PIA", null, 3, 7400, 2600));
+        var ai = QualifyingViews.View(RacePhase.QualifyingResult, 3, new("PIA", null, 3, 7400, 2600), new("NOR", "JO", 3, 7500, 2400));
+
+        Assert.Equal(("JO", "mclaren", "7.05"), QualifyingText.Pole(last));
+        Assert.Equal(("Piastri", "mclaren", "7.40"), QualifyingText.Pole(ai));
+        // Nobody set a time: no pole to announce.
+        Assert.Null(QualifyingText.Pole(QualifyingViews.View(RacePhase.QualifyingResult, 3, new("NOR", "JO"), new("PIA"))));
+    }
+}
+
+public class QualifyingHudTests
+{
+    private static RedlineHostView View(RacePhase phase, int lap) =>
+        QualifyingViews.View(phase, lap, new("NOR", "JO", 1, 2450), new("PIA", null, 1, 2300));
+
+    [Fact]
+    public void Header_says_qualifying_lap_with_the_question_as_the_title()
+    {
+        var reading = HudText.Header(View(RacePhase.QualifyingReading, 2));
+        Assert.Equal(["QUALIFYING · LAP 2/3", "GEOGRAPHY"], reading.Meta);
+        Assert.Equal(("EASY", 1, "READING", "LISTEN"), (reading.Difficulty, reading.Pips, reading.ClockCaption, reading.ClockText));
+        Assert.Equal(QualifyingViews.Card.Text, reading.Title);
+
+        var question = HudText.Header(View(RacePhase.QualifyingQuestion, 3));
+        Assert.Equal(["QUALIFYING · LAP 3/3", "GEOGRAPHY"], question.Meta);
+        Assert.Equal(("TIME", (string?)null, QualifyingViews.Card.Text), (question.ClockCaption, question.ClockText, question.Title));
+
+        var result = HudText.Header(View(RacePhase.QualifyingResult, 1));
+        Assert.Equal(["QUALIFYING · LAP 1/3", "GEOGRAPHY"], result.Meta);
+        Assert.Equal("NEXT", result.ClockCaption);
+
+        // No question yet: the race's own placeholders.
+        var bare = View(RacePhase.QualifyingReading, 1) with { Question = null };
+        var bareHeader = HudText.Header(bare);
+        Assert.Equal(("Listen…", 0), (bareHeader.Title, bareHeader.Pips));
+        Assert.Equal(["QUALIFYING · LAP 1/3"], bareHeader.Meta);
+    }
+
+    [Fact]
+    public void The_clock_runs_the_qualifying_phases_at_their_own_lengths()
+    {
+        var rules = new RedlineRules();
+        Assert.Equal(rules.QualifyingAnswer.TotalSeconds, HudClock.PhaseSeconds(RacePhase.QualifyingQuestion));
+        Assert.Equal(rules.QualifyingResult.TotalSeconds, HudClock.PhaseSeconds(RacePhase.QualifyingResult));
+        Assert.Equal(HudClock.MaxReadingSeconds, HudClock.PhaseSeconds(RacePhase.QualifyingReading));
+        Assert.Equal(rules.ReadingTime(QualifyingViews.Card.Text!).TotalSeconds, HudClock.PhaseSeconds(View(RacePhase.QualifyingReading, 1)));
+    }
 }
 
 public class HudClockTests

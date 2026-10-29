@@ -14,6 +14,7 @@ public class SynthTests
         { nameof(Sfx.Tick), 0.045 },
         { nameof(Sfx.Whoosh), 0.75 },
         { nameof(Sfx.CorrectSting), 0.9 },
+        { nameof(Sfx.PurpleChime), 1.0 },
         { nameof(Sfx.WrongBuzz), 0.42 },
         { nameof(Sfx.TyreScreech), 1.2 },
         { nameof(Sfx.Crunch), 0.65 },
@@ -33,6 +34,7 @@ public class SynthTests
         nameof(Sfx.Tick) => Sfx.Tick(),
         nameof(Sfx.Whoosh) => Sfx.Whoosh(),
         nameof(Sfx.CorrectSting) => Sfx.CorrectSting(),
+        nameof(Sfx.PurpleChime) => Sfx.PurpleChime(),
         nameof(Sfx.WrongBuzz) => Sfx.WrongBuzz(),
         nameof(Sfx.TyreScreech) => Sfx.TyreScreech(),
         nameof(Sfx.Crunch) => Sfx.Crunch(),
@@ -93,6 +95,30 @@ public class SynthTests
 
         Assert.True(Math.Abs((int)s[0]) < 0.02 * short.MaxValue, $"{name} starts with a click");
         Assert.True(Math.Abs((int)s[^1]) < 0.02 * short.MaxValue, $"{name} ends with a click");
+    }
+
+    [Fact]
+    public void PurpleChime_renders_within_length_and_peak()
+    {
+        var pcm = Sfx.PurpleChime();
+
+        Assert.Equal(Rate, pcm.SampleRate);
+        Assert.InRange(pcm.Seconds, 0.3, 1.2);
+        Assert.True(pcm.PeakDbfs <= -1.0, $"peak {pcm.PeakDbfs:F2} dBFS");
+        Assert.True(pcm.PeakDbfs > -30.0);
+    }
+
+    [Fact]
+    public void PurpleChime_decays_and_is_not_the_correct_sting()
+    {
+        var chime = Sfx.PurpleChime();
+
+        // It rings out from a bright attack and is its own clip, not the correct sting.
+        Assert.NotEqual(Sfx.CorrectSting().Samples, chime.Samples);
+        double Rms(int from, int to) => Math.Sqrt(chime.Samples.Skip(from).Take(to - from).Sum(v => (double)v * v) / (to - from));
+        var early = Rms(0, Rate / 20);
+        var tail = Rms(chime.Samples.Length - Rate / 10, chime.Samples.Length);
+        Assert.True(early > tail * 2, "the chime decays");
     }
 
     [Fact]

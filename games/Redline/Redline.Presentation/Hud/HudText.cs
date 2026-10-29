@@ -35,6 +35,9 @@ public static class HudText
             RacePhase.Grid => new HeaderText(
                 [CircuitName(view.CircuitId).ToUpperInvariant(), $"{view.MaxRounds} ROUNDS · RACE TO THE FLAG"], null, 0,
                 "Lights out in a moment…", "START"),
+            RacePhase.QualifyingReading => new HeaderText(QualifyingMeta(view, q), difficulty, pips, q?.Text ?? "Listen…", "READING", "LISTEN"),
+            RacePhase.QualifyingQuestion => new HeaderText(QualifyingMeta(view, q), difficulty, pips, q?.Text ?? "Choose your answer", "TIME"),
+            RacePhase.QualifyingResult => new HeaderText(QualifyingMeta(view, q), difficulty, pips, q?.Text ?? "The answer is…", "NEXT"),
             RacePhase.Throttle => new HeaderText(Meta(round, q), difficulty, pips, "Choose your throttle", "TIME"),
             RacePhase.Reading => new HeaderText(Meta(round, q), difficulty, pips, q?.Text ?? "Listen…", "READING", "LISTEN"),
             RacePhase.Question => new HeaderText(Meta(round, q), difficulty, pips, q?.Text ?? "Choose your answer", "TIME"),
@@ -48,6 +51,10 @@ public static class HudText
 
     private static IReadOnlyList<string> Meta(string round, QuestionCard? q) =>
         q is null ? [round] : [round, q.Category.ToUpperInvariant()];
+
+    /// <summary>"QUALIFYING · LAP 2/3" and the category: the qualifying phases show the lap where the race shows the round.</summary>
+    private static IReadOnlyList<string> QualifyingMeta(RedlineHostView view, QuestionCard? q) =>
+        Meta(QualifyingText.Header(view.Qualifying?.Lap ?? 1, view.Qualifying?.Laps ?? new RedlineRules().QualifyingLaps), q);
 
     /// <summary>"Circuit of the Americas" for "cota"; the id itself for an unknown circuit.</summary>
     public static string CircuitName(string circuitId)

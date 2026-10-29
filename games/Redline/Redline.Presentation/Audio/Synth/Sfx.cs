@@ -181,6 +181,31 @@ public static class Sfx
         return Finish(x, -3, fadeIn: 0.002, fadeOut: 0.12);
     }
 
+    /// <summary>
+    /// A player's purple lap (qualifying spec §6): E6 then B6 (a rising fifth, higher and more open than the correct
+    /// sting's third) as glassy bells: slightly stretched upper partials that ring a little longer, and a detuned twin on
+    /// every partial for shimmer. 1.0 s.
+    /// </summary>
+    public static Pcm PurpleChime()
+    {
+        var x = Buffer(1.0);
+        (double Hz, double At, double Gain)[] notes = [(Dsp.Midi(88), 0, 0.7), (Dsp.Midi(95), 0.12, 1.0)];
+        (double Ratio, double Amp)[] partials = [(1, 1), (2, 0.4), (3.01, 0.22), (5.4, 0.08)];
+        foreach (var (hz, at, gain) in notes)
+            for (var i = (int)(at * Sr); i < x.Length; i++)
+            {
+                var t = i / (double)Sr - at;
+                double s = 0;
+                foreach (var (ratio, amp) in partials)
+                {
+                    var env = Dsp.AttackDecay(t, 0.004, 0.5 / Math.Pow(ratio, 0.7));
+                    s += amp * env * (Math.Sin(TwoPi * hz * ratio * t) + 0.35 * Math.Sin(TwoPi * hz * ratio * 1.0015 * t));
+                }
+                x[i] += (float)(s * gain);
+            }
+        return Finish(x, -3, fadeIn: 0.002, fadeOut: 0.15);
+    }
+
     /// <summary>Wrong answer: two band-limited squares at 98 and 103.5 Hz beating against each other over a sub sine, low-passed, sagging slightly. 0.42 s.</summary>
     public static Pcm WrongBuzz()
     {

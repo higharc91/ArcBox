@@ -26,7 +26,9 @@ public static class HudClock
             RacePhase.DriverSelect => r.DriverSelect.TotalSeconds,
             RacePhase.Grid => r.Grid.TotalSeconds,
             RacePhase.Throttle => r.Throttle.TotalSeconds,
-            RacePhase.Reading => MaxReadingSeconds,
+            RacePhase.Reading or RacePhase.QualifyingReading => MaxReadingSeconds,
+            RacePhase.QualifyingQuestion => r.QualifyingAnswer.TotalSeconds,
+            RacePhase.QualifyingResult => r.QualifyingResult.TotalSeconds,
             RacePhase.Question => r.Question.TotalSeconds,
             RacePhase.Reveal => r.Reveal.TotalSeconds,
             RacePhase.Anthem => r.Anthem.TotalSeconds,
@@ -35,11 +37,11 @@ public static class HudClock
         };
     }
 
-    /// <summary>The length of <paramref name="view"/>'s phase; Reading is <see cref="RedlineRules.ReadingTime"/> of its question.</summary>
+    /// <summary>The length of <paramref name="view"/>'s phase; Reading (and QualifyingReading) is <see cref="RedlineRules.ReadingTime"/> of its question.</summary>
     public static double PhaseSeconds(RedlineHostView view, RedlineRules? rules = null)
     {
         ArgumentNullException.ThrowIfNull(view);
-        return view is { Phase: RacePhase.Reading, Question.Text: { Length: > 0 } text }
+        return view is { Phase: RacePhase.Reading or RacePhase.QualifyingReading, Question.Text: { Length: > 0 } text }
             ? (rules ?? Defaults).ReadingTime(text).TotalSeconds
             : PhaseSeconds(view.Phase, rules);
     }
