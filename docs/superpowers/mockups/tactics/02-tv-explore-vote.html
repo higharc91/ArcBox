@@ -1,0 +1,84 @@
+<!doctype html>
+<html data-shot="1920x1080@1">
+<head>
+<meta charset="utf-8">
+<title>TV · Exploration and party vote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800&family=Cinzel:wght@600;700;800&family=Pixelify+Sans:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tactics.css">
+<style>
+  body { width: 1920px; height: 1080px; overflow: hidden; position: relative; }
+  #world { position: absolute; inset: 0; }
+  .banner { position: absolute; left: 36px; top: 30px; padding: 16px 26px 16px 22px; }
+  .banner h1 { font: 800 30px 'Cinzel'; letter-spacing: 0.08em; }
+  .banner p { color: var(--muted); font-size: 19px; margin-top: 4px; }
+  .leader { position: absolute; right: 36px; top: 30px; padding: 14px 20px; display: flex; gap: 16px; align-items: center; }
+  .leader canvas { width: 72px; height: 72px; border-radius: 4px; border: 2px solid var(--gold); }
+  .leader b { font: 800 22px 'Cinzel'; display: block; }
+  .leader span { color: var(--muted); font-size: 16px; }
+
+  .talk { position: absolute; left: 36px; bottom: 34px; width: 1230px; height: 250px; padding: 30px 40px 26px 250px; }
+  .talk canvas.bust { position: absolute; left: 26px; bottom: 22px; width: 200px; height: 236px; border-radius: 6px; border: 2px solid rgba(230, 189, 92, 0.7); }
+  .talk .name { position: absolute; left: 236px; top: -22px; padding: 6px 22px; font: 800 22px 'Cinzel'; letter-spacing: 0.08em; }
+  .talk p { font: 500 29px/1.42 'Alegreya Sans'; }
+  .talk p em { color: #ffd98a; font-style: normal; font-weight: 700; }
+  .talk .more { position: absolute; right: 30px; bottom: 18px; color: var(--gold); font-size: 24px; }
+
+  .vote { position: absolute; right: 36px; bottom: 34px; width: 584px; padding: 22px 24px 18px; }
+  .vote .head { display: flex; justify-content: space-between; align-items: baseline; }
+  .vote .clock { font: 700 30px 'Pixelify Sans'; color: #ffe7a8; }
+  .opt { display: flex; gap: 14px; align-items: center; padding: 12px 14px; margin-top: 12px; border-radius: 6px;
+    background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12); }
+  .opt .k { width: 34px; height: 34px; border-radius: 4px; display: grid; place-items: center; font: 800 18px 'Cinzel'; color: #2a1b04; background: var(--gold); flex: none; }
+  .opt .t { flex: 1; font-size: 20px; font-weight: 600; line-height: 1.25; }
+  .opt .t small { display: block; font-size: 15px; color: var(--magic); font-weight: 700; margin-top: 2px; }
+  .opt .pips { display: flex; gap: 5px; }
+  .opt .pips i { width: 16px; height: 16px; border-radius: 50%; box-shadow: 0 0 8px currentColor; }
+  .opt.tied { border-color: rgba(230, 189, 92, 0.65); background: rgba(230, 189, 92, 0.08); }
+  .foot { margin-top: 14px; font-size: 16px; color: var(--muted); display: flex; justify-content: space-between; }
+  .foot b { color: var(--ink); }
+  .bubble { position: absolute; padding: 4px 12px; font: 800 26px 'Cinzel'; color: #2a1b04; background: #fff1c8; border-radius: 10px; border: 2px solid #3a2a08; }
+</style>
+</head>
+<body>
+<canvas id="world" class="px" width="1920" height="1080"></canvas>
+
+<div class="banner panel">
+  <h1>CHAPTER III · EMBERWICK</h1>
+  <p>Exploring · Dusk, day 12 · Talk to the mayor</p>
+</div>
+<div class="leader panel">
+  <canvas class="px" width="72" height="72" data-portrait="ilyra"></canvas>
+  <div><div class="label">PARTY LEADER</div><b>Sam · Ilyra</b><span>Steers the party and breaks tied votes</span></div>
+</div>
+
+<div class="talk panel">
+  <canvas class="bust px" width="200" height="236" data-portrait="mayor" data-bg="#7a5a3a"></canvas>
+  <div class="name panel">MAYOR HALDEN</div>
+  <p>“The ford is the only road east. If those goblins hold the bridge past the new moon, Emberwick goes hungry this winter. <em>Will you clear them out, or will you talk to their chief?</em>”</p>
+  <div class="more">▼</div>
+</div>
+
+<div class="vote panel">
+  <div class="head"><span class="label" style="font-size:16px">PARTY VOTE</span><span class="clock">0:14</span></div>
+  <div class="opt tied"><span class="k">A</span><span class="t">“We'll clear the ford by force.”</span><span class="pips"><i style="color:var(--p1);background:var(--p1)"></i><i style="color:var(--p5);background:var(--p5)"></i></span></div>
+  <div class="opt tied"><span class="k">B</span><span class="t">“We'll go and parley with the chief.”</span><span class="pips"><i style="color:var(--p3);background:var(--p3)"></i><i style="color:var(--p4);background:var(--p4)"></i></span></div>
+  <div class="opt"><span class="k">C</span><span class="t">“First, what's it worth to you?”<small>◆ Persuasion check · DC 15</small></span><span class="pips"></span></div>
+  <div class="foot"><span>4 of 4 voted · <b>2–2 tie, Sam decides</b></span><span>Dave is away and doesn't vote</span></div>
+</div>
+<div class="bubble" id="bubble">!</div>
+
+<script type="module">
+  import { render, portrait } from './kit.js';
+  import { fillPortraits } from './cast.js';
+  import { village } from './scenes.js';
+
+  const m = village();
+  const a = render(document.getElementById('world'), m, { seed: 5, mood: 'dusk', focus: [0.22, 0.6], blur: 6 });
+  fillPortraits(portrait);
+  const b = document.getElementById('bubble');
+  b.style.left = `${a.mayor.head.x + 30}px`; b.style.top = `${a.mayor.head.y - 40}px`;
+  window.__ready = true;
+</script>
+</body>
+</html>

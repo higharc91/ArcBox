@@ -1,0 +1,118 @@
+/* Phone controller components for the ArcBox Tactics mockups (used with tactics.css). */
+.page { padding: 44px 50px 50px; background: radial-gradient(90% 60% at 50% 0%, #1a1d38, #07080f 70%); }
+.page h1 { font: 800 30px 'Cinzel'; letter-spacing: 0.08em; }
+.page > p { color: var(--muted); font-size: 18px; margin: 6px 0 30px; max-width: 1100px; }
+
+.body { flex: 1; display: flex; flex-direction: column; gap: 12px; padding: 4px 16px 16px; position: relative; min-height: 0; }
+.me { display: flex; gap: 12px; align-items: center; padding: 10px 12px; border-radius: 10px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--pc) 22%, transparent), rgba(255, 255, 255, 0.03));
+  border: 1px solid color-mix(in srgb, var(--pc) 55%, transparent); }
+.me canvas { width: 52px; height: 52px; border-radius: 6px; border: 2px solid var(--pc); flex: none; }
+.me b { font: 800 20px 'Cinzel'; letter-spacing: 0.06em; display: block; line-height: 1.1; }
+.me span { font-size: 14px; color: var(--muted); }
+.me .hpmini { margin-left: auto; width: 116px; text-align: right; }
+.me .hpmini .bar { height: 9px; margin-bottom: 4px; }
+.me .hpmini span { font-weight: 700; color: var(--ink); font-size: 13px; }
+
+.turn { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-radius: 8px;
+  background: linear-gradient(90deg, rgba(230, 189, 92, 0.28), rgba(230, 189, 92, 0.05)); border: 1px solid rgba(230, 189, 92, 0.6); }
+.turn b { font: 800 22px 'Cinzel'; letter-spacing: 0.12em; color: #ffe7a8; }
+.turn .t { font: 700 22px 'Pixelify Sans'; color: #ffe7a8; }
+.econ { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.econ span { text-align: center; font: 800 11px 'Alegreya Sans'; letter-spacing: 0.1em; padding: 6px 0; border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.18); color: var(--muted); }
+.econ .done { opacity: 0.45; text-decoration: line-through; }
+.econ .on { background: var(--gold); color: #2a1b04; border-color: #fff0c0; }
+.sect { font: 700 12px 'Cinzel'; letter-spacing: 0.2em; color: var(--gold); margin-top: 2px; }
+
+.act { display: flex; gap: 12px; align-items: center; padding: 11px 12px; border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12); }
+.act .ic { width: 40px; height: 40px; border-radius: 8px; display: grid; place-items: center; flex: none;
+  background: rgba(230, 189, 92, 0.12); border: 1px solid rgba(230, 189, 92, 0.4); color: #ffe7a8; }
+.act .ic svg { width: 24px; height: 24px; }
+.act b { font-size: 17px; display: block; }
+.act small { font-size: 13.5px; color: var(--muted); line-height: 1.3; display: block; }
+.act .tag { margin-left: auto; font: 800 10px 'Alegreya Sans'; letter-spacing: 0.1em; padding: 3px 7px; border-radius: 4px; background: rgba(255, 255, 255, 0.08); color: var(--muted); flex: none; }
+.act.sel { border-color: var(--gold); background: rgba(230, 189, 92, 0.12); box-shadow: 0 0 16px rgba(230, 189, 92, 0.25); }
+.act.off { opacity: 0.42; }
+.foot { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 8px; margin-top: auto; }
+.foot .btn { height: 50px; font-size: 16px; }
+
+.target { display: flex; gap: 12px; padding: 12px; border-radius: 10px; border: 1px solid rgba(226, 83, 76, 0.65); background: rgba(226, 83, 76, 0.08); }
+.target canvas { width: 76px; height: 76px; border-radius: 6px; border: 2px solid rgba(226, 83, 76, 0.8); flex: none; }
+.target b { font: 800 18px 'Cinzel'; color: #ffb3a8; display: block; }
+.target .bar { margin: 6px 0 4px; height: 9px; }
+.target small { color: var(--muted); font-size: 14px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips .chip { font-size: 12.5px; padding: 3px 9px; }
+.chip.good { color: var(--good); border-color: rgba(116, 224, 138, 0.5); }
+.chip.water { color: var(--magic); border-color: rgba(127, 200, 255, 0.5); }
+
+.cycle { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.cycle .btn { width: 56px; height: 48px; font-size: 20px; }
+.cycle span { font-size: 15px; color: var(--muted); }
+.dpad { position: relative; width: 230px; height: 230px; margin: 4px auto 0; }
+.dpad .k { position: absolute; width: 76px; height: 76px; border-radius: 14px; display: grid; place-items: center;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03)); border: 1px solid rgba(255, 255, 255, 0.2); transform: rotate(45deg); }
+.dpad .k svg { transform: rotate(-45deg); width: 28px; height: 28px; color: var(--ink); }
+.dpad .c { position: absolute; left: 77px; top: 77px; width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center;
+  font-size: 11px; font-weight: 800; color: var(--muted); letter-spacing: 0.08em; text-align: center; border: 1px dashed rgba(255, 255, 255, 0.25); }
+
+.big { padding: 14px; border-radius: 10px; display: flex; gap: 14px; align-items: center; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.14); }
+.big canvas { width: 72px; height: 72px; border-radius: 6px; flex: none; }
+.queue { display: flex; flex-direction: column; gap: 6px; }
+.queue div { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 7px; background: rgba(255, 255, 255, 0.03); font-size: 15px; font-weight: 700; }
+.queue canvas { width: 32px; height: 32px; border-radius: 4px; }
+.queue .n { width: 22px; color: var(--muted); font-family: 'Cinzel'; }
+.queue .you { border: 1px solid rgba(255, 138, 61, 0.7); background: rgba(255, 138, 61, 0.1); }
+.tabs { display: grid; grid-template-columns: repeat(3, 1fr); border-radius: 8px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15); }
+.tabs span { text-align: center; padding: 8px 0; font-weight: 800; font-size: 14px; color: var(--muted); }
+.tabs .on { background: rgba(230, 189, 92, 0.18); color: #ffe7a8; }
+.scores { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+.scores div { text-align: center; padding: 6px 0; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.14); background: rgba(255, 255, 255, 0.03); }
+.scores small { font: 700 10px 'Cinzel'; color: var(--muted); letter-spacing: 0.08em; display: block; }
+.scores b { font: 800 20px 'Alegreya Sans'; display: block; line-height: 1.1; }
+.scores i { font-style: normal; font-size: 12px; color: var(--gold); }
+
+.opt { display: flex; gap: 12px; align-items: center; padding: 14px 12px; border-radius: 10px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.14); }
+.opt .k { width: 34px; height: 34px; border-radius: 6px; display: grid; place-items: center; font: 800 17px 'Cinzel'; color: #2a1b04; background: var(--gold); flex: none; }
+.opt .t { flex: 1; font-size: 17px; font-weight: 600; line-height: 1.3; }
+.opt .t small { display: block; color: var(--magic); font-size: 13px; font-weight: 700; margin-top: 2px; }
+.opt .pips { display: flex; gap: 4px; }
+.opt .pips i { width: 12px; height: 12px; border-radius: 50%; }
+.opt.sel { border: 2px solid var(--pc); background: color-mix(in srgb, var(--pc) 14%, transparent); }
+.opt .mine { font: 800 10px 'Alegreya Sans'; letter-spacing: 0.1em; color: var(--pc); display: block; margin-top: 3px; }
+
+.url { margin: 0 16px; padding: 7px 12px; border-radius: 10px; background: rgba(255, 255, 255, 0.08); font-size: 14px; color: var(--muted); text-align: center; }
+.steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+.steps span { text-align: center; font-size: 11px; font-weight: 800; letter-spacing: 0.06em; color: var(--muted); padding-top: 7px; border-top: 3px solid rgba(255, 255, 255, 0.15); }
+.steps .done { color: var(--good); border-color: var(--good); }
+.steps .on { color: #ffe7a8; border-color: var(--gold); }
+.preview { display: flex; gap: 14px; align-items: center; padding: 12px; border-radius: 10px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.14); }
+.preview canvas { width: 92px; height: 120px; flex: none; border-radius: 8px; background: radial-gradient(circle at 50% 70%, rgba(181, 140, 255, 0.35), transparent 70%); }
+.ab { display: grid; grid-template-columns: 52px 1fr 46px 40px 40px; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 8px; background: rgba(255, 255, 255, 0.03); }
+.ab .n { font: 800 14px 'Cinzel'; color: var(--muted); }
+.ab .v { font: 800 22px 'Alegreya Sans'; }
+.ab .v em { font-style: normal; font-size: 12px; font-weight: 800; color: var(--gold); margin-left: 6px; padding: 1px 5px; border-radius: 3px; background: rgba(230, 189, 92, 0.15); }
+.ab .m { font: 700 16px 'Alegreya Sans'; color: var(--muted); text-align: right; }
+.ab .pm { height: 36px; border-radius: 8px; display: grid; place-items: center; font: 800 20px 'Alegreya Sans'; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.06); }
+
+.sub { padding: 12px 14px; border-radius: 10px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.14); }
+.sub b { font: 800 18px 'Cinzel'; letter-spacing: 0.04em; }
+.sub p { font-size: 14px; color: var(--muted); margin-top: 3px; line-height: 1.35; }
+.sub ul { margin: 6px 0 0; padding-left: 18px; font-size: 13.5px; line-height: 1.45; }
+.sub.sel { border: 2px solid var(--gold); background: rgba(230, 189, 92, 0.1); box-shadow: 0 0 18px rgba(230, 189, 92, 0.25); }
+.note { padding: 10px 12px; border-radius: 8px; font-size: 14px; line-height: 1.4; background: rgba(62, 199, 255, 0.08); border: 1px solid rgba(62, 199, 255, 0.45); }
+.note b { color: var(--p2); }
+.warn { font-size: 13px; color: #ffcf9a; text-align: center; }
+
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.side { padding: 10px; border-radius: 10px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.14); min-height: 220px; }
+.side .h { font: 700 12px 'Cinzel'; letter-spacing: 0.14em; color: var(--gold); margin-bottom: 8px; }
+.item { display: flex; gap: 8px; align-items: center; padding: 6px; border-radius: 6px; background: rgba(0, 0, 0, 0.25); margin-bottom: 6px; font-size: 14px; font-weight: 700; line-height: 1.2; }
+.item canvas { width: 36px; height: 36px; flex: none; }
+.item small { display: block; color: var(--muted); font-weight: 500; font-size: 12px; }
+.item.rare { border: 1px solid rgba(127, 200, 255, 0.55); }
+.ok { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 13px; font-weight: 800; }
+.btn svg { width: 20px; height: 20px; flex: none; }
+.chip svg { width: 14px; height: 14px; flex: none; }
