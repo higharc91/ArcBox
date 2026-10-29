@@ -13,7 +13,7 @@ public enum RoomStatus { Lobby, InGame, Closed }
 
 public sealed class Room
 {
-    private readonly string _hostToken;
+    private readonly string _hostTokenHash;
     private readonly IGameRegistry _registry;
     private readonly IClientSender _sender;
     private readonly TimeProvider _time;
@@ -48,7 +48,7 @@ public sealed class Room
         ILogger<Room> logger)
     {
         Code = code;
-        _hostToken = hostToken;
+        _hostTokenHash = Secrets.Hash(hostToken);
         _registry = registry;
         _sender = sender;
         _time = time;
@@ -69,7 +69,7 @@ public sealed class Room
     /// Constant-time check of the host token. Safe to call from any thread without the actor: the token is set in the
     /// constructor and never changes.
     /// </summary>
-    public bool IsHostToken(string? token) => token is not null && Secrets.Matches(_hostToken, token);
+    public bool IsHostToken(string? token) => token is not null && Secrets.Matches(_hostTokenHash, token);
 
     public async Task RunAsync(CancellationToken ct)
     {
@@ -128,7 +128,7 @@ public sealed class Room
 
     public Task BindHostAsync(string connectionId, string hostToken) => EnqueueAsync(() =>
     {
-        if (!Secrets.Matches(_hostToken, hostToken))
+        if (!Secrets.Matches(_hostTokenHash, hostToken))
         {
             throw new RoomException("Room not found.");
         }
@@ -153,7 +153,7 @@ public sealed class Room
             throw new RoomException("Game in progress, join after this round.");
         }
 
-        if (!_members.TryAdd(name, connectionId, out var slot, out var error))
+        if (!_members.TryAdd(name, connectionId, out var slot, out var secret, out var error))
         {
             throw new RoomException(error!);
         }
@@ -163,7 +163,7 @@ public sealed class Room
 
         BroadcastLobby();
 
-        return new JoinResult(Code, slot!.Id, slot.Secret);
+        return new JoinResult(Code, slot!.Id, secret!);
     });
 
     public Task RejoinAsync(string connectionId, PlayerId playerId, string secret) => EnqueueAsync(() =>

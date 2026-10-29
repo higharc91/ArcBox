@@ -14,7 +14,7 @@ public sealed class RoomMembers(RoomOptions options)
 
     public bool AnyConnected => _slots.Any(s => s.Connected);
 
-    public bool TryAdd(string rawName, string connectionId, out PlayerSlot? slot, out string? error)
+    public bool TryAdd(string rawName, string connectionId, out PlayerSlot? slot, out string? secret, out string? error)
     {
         var name = rawName?.Trim() ?? string.Empty;
 
@@ -22,6 +22,7 @@ public sealed class RoomMembers(RoomOptions options)
         {
             error = $"Name must be 1–{options.NameMaxLength} characters.";
             slot = null;
+            secret = null;
             return false;
         }
 
@@ -29,6 +30,7 @@ public sealed class RoomMembers(RoomOptions options)
         {
             error = "That name is taken.";
             slot = null;
+            secret = null;
             return false;
         }
 
@@ -36,14 +38,16 @@ public sealed class RoomMembers(RoomOptions options)
         {
             error = "Room is full.";
             slot = null;
+            secret = null;
             return false;
         }
 
+        secret = Secrets.NewToken();
         slot = new PlayerSlot
         {
             Id = new PlayerId($"p{_nextId++}"),
             Name = name,
-            Secret = Secrets.NewToken(),
+            SecretHash = Secrets.Hash(secret),
             JoinOrder = _slots.Count + 1,
             ConnectionId = connectionId
         };
@@ -52,10 +56,18 @@ public sealed class RoomMembers(RoomOptions options)
         return true;
     }
 
+    /// <summary>Issues a new secret for the slot, stores only its hash and returns the plaintext.</summary>
+    public string RotateSecret(PlayerSlot slot)
+    {
+        var secret = Secrets.NewToken();
+        slot.SecretHash = Secrets.Hash(secret);
+        return secret;
+    }
+
     public PlayerSlot? FindBySecret(PlayerId id, string secret)
     {
         var slot = Find(id);
-        if (slot != null && Secrets.Matches(slot.Secret, secret))
+        if (slot != null && Secrets.Matches(slot.SecretHash, secret))
         {
             return slot;
         }
