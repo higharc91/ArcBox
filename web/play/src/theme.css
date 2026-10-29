@@ -388,3 +388,8 @@ small { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--dim
   .ptimer .bar i { transition: none; }
   .bubble, .froth circle, .w-shake.full .bottle-body, .gauge.redline .needle-wrap, .w-shake.full.armed .pop-btn { animation: none; }
 }
+
+/* ---------------------------------------------------------------- campaign portal (/c/<code>, src/portal) */
+.portal { gap: 14px; padding: calc(var(--safe-top) + 24px) var(--gutter) 24px; }
+.portal-title { font: italic 900 32px/1.05 "Titillium Web", sans-serif; text-transform: uppercase; }
+.portal-banner { font-weight: 700; font-size: 16px; padding: 10px 12px; border-left: 3px solid var(--red); background: var(--panel); }

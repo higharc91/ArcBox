@@ -17,7 +17,19 @@ public static class PhoneApp
         var provider = WebRoot(app) is { } root ? new PhysicalFileProvider(root) : app.Environment.WebRootFileProvider;
         app.UseDefaultFiles(new DefaultFilesOptions { FileProvider = provider });
         app.UseStaticFiles(new StaticFileOptions { FileProvider = provider, OnPrepareResponse = SetCacheHeaders });
+        // The campaign portal (spec §3.4) is a route of the phone app, so a campaign code is answered with index.html.
+        app.MapGet("/c/{code:length(4)}", (string code, HttpContext http) =>
+            code.All(char.IsAsciiLetter) ? ServeIndex(http, provider) : Results.NotFound());
         return app;
+    }
+
+    private static IResult ServeIndex(HttpContext http, IFileProvider provider)
+    {
+        var index = provider.GetFileInfo("index.html");
+        if (!index.Exists) return Results.NotFound();
+        http.Response.Headers[HeaderNames.CacheControl] = "no-cache";
+        return Results.Stream(index.CreateReadStream(), "text/html", lastModified: index.LastModified,
+            entityTag: null, enableRangeProcessing: false);
     }
 
     private static string? WebRoot(WebApplication app)
