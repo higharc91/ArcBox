@@ -145,6 +145,35 @@ describe("portal shell", () => {
     expect(screen.getByTestId("gold").textContent).toBe("3"); // unchanged
   });
 
+  it("Read_only_send_does_not_post", async () => {
+    fetchMock.mockResolvedValue(json(200, campaign(3, { leasedBy: "ZZZZ" })));
+    render(<Portal code="EMBR" store={storeWith({ profileId: "a", key: "k", lastUsed: 1 })} />);
+    await screen.findByText(LEASE);
+    fireEvent.click(screen.getByText("spend"));
+    await new Promise((r) => setTimeout(r, 0));
+    expect(fetchMock).toHaveBeenCalledTimes(1); // just the GET
+  });
+
+  it("Send_while_pending_is_ignored", async () => {
+    fetchMock.mockResolvedValueOnce(json(200, campaign(3)));
+    render(<Portal code="EMBR" store={storeWith({ profileId: "a", key: "k", lastUsed: 1 })} />);
+    await screen.findByTestId("gold");
+
+    let finish!: (r: Response) => void;
+    fetchMock.mockReturnValueOnce(new Promise<Response>((resolve) => (finish = resolve)));
+    fireEvent.click(screen.getByText("spend"));
+    fireEvent.click(screen.getByText("spend")); // a double tap
+    expect(fetchMock).toHaveBeenCalledTimes(2); // GET + one POST
+    finish(json(200, campaign(4)));
+    await waitFor(() => expect(screen.getByTestId("gold").textContent).toBe("4"));
+    expect(screen.queryByText(STALE)).toBeNull();
+
+    fetchMock.mockResolvedValueOnce(json(200, campaign(5)));
+    fireEvent.click(screen.getByText("spend")); // free again
+    await waitFor(() => expect(screen.getByTestId("gold").textContent).toBe("5"));
+    expect(JSON.parse(fetchMock.mock.calls[2][1]?.body as string).version).toBe(4);
+  });
+
   it("Module_portal_renders_with_campaign", async () => {
     fetchMock.mockResolvedValue(json(200, campaign(5)));
     render(<Portal code="EMBR" store={storeWith({ profileId: "a", key: "k", lastUsed: 1 })} />);
@@ -188,12 +217,31 @@ describe("portal api", () => {
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
-  it("getCampaign_stops_at_a_403_that_is_not_401", async () => {
-    fetchMock.mockResolvedValueOnce(json(403));
+  it("getCampaign_continues_past_a_403_to_a_key_that_works", async () => {
+    fetchMock.mockResolvedValueOnce(json(403)).mockResolvedValueOnce(json(401)).mockResolvedValueOnce(json(200, campaign(2)));
+    const keys = [1, 2, 3].map((n) => ({ profileId: `p${n}`, key: `k${n}`, name: `P${n}`, lastUsed: 10 - n }));
+    const r = await getCampaign("EMBR", keys);
+    expect(r.key?.key).toBe("k3");
+    expect(r.result).toMatchObject({ ok: true, status: 200 });
+    expect(fetchMock).toHaveBeenCalledTimes(3);
+  });
+
+  it("getCampaign_returns_last_403_with_last_key_when_every_key_is_403", async () => {
+    fetchMock.mockResolvedValue(json(403));
+    const keys = [{ profileId: "a", key: "k1", name: "A", lastUsed: 2 }, { profileId: "b", key: "k2", name: "B", lastUsed: 1 }];
+    const r = await getCampaign("EMBR", keys);
+    expect(r.key?.key).toBe("k2");
+    expect(r.result).toMatchObject({ ok: false, status: 403 });
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+  });
+
+  it.each([404, 429, 0, 500])("getCampaign_stops_at_%i", async (status) => {
+    if (status === 0) fetchMock.mockRejectedValueOnce(new TypeError("offline"));
+    else fetchMock.mockResolvedValueOnce(json(status));
     const keys = [{ profileId: "a", key: "k1", name: "A", lastUsed: 2 }, { profileId: "b", key: "k2", name: "B", lastUsed: 1 }];
     const r = await getCampaign("EMBR", keys);
     expect(r.key?.key).toBe("k1");
-    expect(r.result).toMatchObject({ ok: false, status: 403 });
+    expect(r.result).toMatchObject({ ok: false, status });
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 

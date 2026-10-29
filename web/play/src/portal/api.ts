@@ -24,20 +24,22 @@ async function call<T>(method: string, url: string, key: StoredProfile, body?: u
 const campaignUrl = (code: string) => `/api/campaigns/${encodeURIComponent(code)}`;
 
 /**
- * Loads the campaign with the first of `keys` (most recent first) the server accepts: any answer other than 401 stops
- * the search. `key` is the one that was accepted, or null when none was (the result is then the last 401, or a 401 of
- * our own when there were no keys).
+ * Loads the campaign with the first of `keys` (most recent first) that gets through. The search moves on from a 401
+ * (the server doesn't know the key) and a 403 (a valid key whose profile isn't a member, e.g. someone else on a shared
+ * tablet) and stops at anything else (200, 404, 429, a network failure, 5xx). `key` is the key that answered. When no
+ * key got through: if some key got a 403, that last 403 and its key; otherwise a null key and a 401.
  */
 export async function getCampaign(
   code: string,
   keys: StoredProfile[],
 ): Promise<{ key: StoredProfile | null; result: ApiResult<CampaignResponse> }> {
-  let result: ApiResult<CampaignResponse> = { ok: false, status: 401, error: null };
+  let forbidden: { key: StoredProfile; result: ApiResult<CampaignResponse> } | null = null;
   for (const key of keys) {
-    result = await call<CampaignResponse>("GET", campaignUrl(code), key);
-    if (result.status !== 401) return { key, result };
+    const result = await call<CampaignResponse>("GET", campaignUrl(code), key);
+    if (result.status === 403) forbidden = { key, result };
+    else if (result.status !== 401) return { key, result };
   }
-  return { key: null, result };
+  return forbidden ?? { key: null, result: { ok: false, status: 401, error: null } };
 }
 
 /** Runs a portal command against the campaign `version` the phone last saw. */

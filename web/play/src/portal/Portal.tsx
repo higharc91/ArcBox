@@ -38,10 +38,16 @@ export function Portal({ code, store }: { code: string; store: KeyValueStore }) 
   // `send` is handed to the game and may be called from a stale render, so it reads what is on screen from refs.
   const key = useRef<StoredProfile | null>(null);
   const shown = useRef<CampaignResponse | null>(null);
+  const leased = useRef(false);
+  const sending = useRef(false);
 
+  const setLease = (message: string | null) => {
+    leased.current = message !== null;
+    setLeaseMessage(message);
+  };
   const show = (campaign: CampaignResponse, lease: string | null) => {
     shown.current = campaign;
-    setLeaseMessage(lease ?? (campaign.leasedBy ? LEASE_MESSAGE : null));
+    setLease(lease ?? (campaign.leasedBy ? LEASE_MESSAGE : null));
     setLoad({ phase: "ready", campaign });
   };
 
@@ -61,9 +67,16 @@ export function Portal({ code, store }: { code: string; store: KeyValueStore }) 
   const send = async (type: string, data: unknown): Promise<void> => {
     const current = shown.current;
     const as = key.current;
-    if (!current || !as) return;
+    // Read-only (a session has the campaign), or a tap while the last command is still out: nothing to send.
+    if (!current || !as || leased.current || sending.current) return;
+    sending.current = true;
     setError(null);
-    const result: ApiResult<CampaignResponse> = await sendCommand(code, as, type, data, current.info.version);
+    let result: ApiResult<CampaignResponse>;
+    try {
+      result = await sendCommand(code, as, type, data, current.info.version);
+    } finally {
+      sending.current = false;
+    }
     if (result.ok) {
       setNotice(null);
       show(result.body, null);
@@ -76,7 +89,7 @@ export function Portal({ code, store }: { code: string; store: KeyValueStore }) 
         const message = result.error?.error ?? LEASE_MESSAGE;
         setNotice(null);
         if (latest) show(latest, message);
-        else setLeaseMessage(message);
+        else setLease(message);
       } else {
         setNotice(STALE_MESSAGE);
         if (latest) show(latest, null);
