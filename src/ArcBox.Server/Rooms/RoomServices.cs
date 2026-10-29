@@ -1,3 +1,4 @@
+using ArcBox.Server.Campaigns;
 using ArcBox.Server.Games;
 using ArcBox.Server.Hubs;
 using ArcBox.Server.Profiles;
@@ -11,4 +12,6 @@ public sealed record RoomServices(
     TimeProvider Time,
     RoomOptions Options,
     ProfileService Profiles,
-    ILoggerFactory Loggers);
+    ILoggerFactory Loggers,
+    CampaignService Campaigns,
+    CampaignRulesRegistry Rules);

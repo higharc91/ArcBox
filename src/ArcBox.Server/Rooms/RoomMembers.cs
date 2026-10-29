@@ -19,44 +19,60 @@ public sealed class RoomMembers(RoomOptions options)
 
     public bool TryAdd(string rawName, string connectionId, out PlayerSlot? slot, out string? secret, out string? error)
     {
-        var name = rawName?.Trim() ?? string.Empty;
-
-        if (name.Length < 1 || name.Length > options.NameMaxLength)
+        error = CheckNew(rawName, out var name);
+        if (error is not null)
         {
-            error = $"Name must be 1–{options.NameMaxLength} characters.";
             slot = null;
             secret = null;
             return false;
         }
 
-        if (_slots.Any(s => string.Equals(s.Name, name, StringComparison.OrdinalIgnoreCase)))
+        slot = Add(name, connectionId, profile: null, out secret);
+        return true;
+    }
+
+    /// <summary>Why a new seat named <paramref name="rawName"/> can't be added, or null; <paramref name="name"/> is it trimmed.</summary>
+    public string? CheckNew(string rawName, out string name)
+    {
+        name = rawName?.Trim() ?? string.Empty;
+
+        if (name.Length < 1 || name.Length > options.NameMaxLength)
         {
-            error = "That name is taken.";
-            slot = null;
-            secret = null;
-            return false;
+            return $"Name must be 1–{options.NameMaxLength} characters.";
+        }
+
+        var trimmed = name;
+        if (_slots.Any(s => string.Equals(s.Name, trimmed, StringComparison.OrdinalIgnoreCase)))
+        {
+            return "That name is taken.";
         }
 
         if (_slots.Count >= options.MaxPlayers)
         {
-            error = "Room is full.";
-            slot = null;
-            secret = null;
-            return false;
+            return "Room is full.";
         }
 
+        return null;
+    }
+
+    /// <summary>
+    /// Adds a seat without checking the name or the room size (<see cref="CheckNew"/> does that). With a null
+    /// <paramref name="connectionId"/> the seat starts offline.
+    /// </summary>
+    public PlayerSlot Add(string name, string? connectionId, ProfileId? profile, out string secret)
+    {
         secret = Secrets.NewToken();
-        slot = new PlayerSlot
+        var slot = new PlayerSlot
         {
             Id = new PlayerId($"p{_nextId++}"),
             Name = name,
             SecretHash = Secrets.Hash(secret),
             JoinOrder = _slots.Count + 1,
-            ConnectionId = connectionId
+            ConnectionId = connectionId,
+            Profile = profile
         };
         _slots.Add(slot);
-        error = null;
-        return true;
+        return slot;
     }
 
     /// <summary>Issues a new secret for the slot, stores only its hash and returns the plaintext.</summary>
@@ -85,6 +101,9 @@ public sealed class RoomMembers(RoomOptions options)
         }
         return _slots.FirstOrDefault(s => s.ConnectionId == connectionId);
     }
+
+    /// <summary>The seat of the person behind <paramref name="profile"/>, if they have one in this room.</summary>
+    public PlayerSlot? FindByProfile(ProfileId profile) => _slots.FirstOrDefault(s => s.Profile == profile);
 
     public PlayerSlot? Find(PlayerId id)
     {

@@ -1,12 +1,18 @@
+using System.Text;
 using System.Text.Json;
 using ArcBox.Sdk;
+using ArcBox.Sdk.Campaigns;
 using Microsoft.Extensions.Logging;
 
 namespace ArcBox.Server.Rooms;
 
 public sealed class GameSession : IDisposable
 {
+    /// <summary>A <see cref="CustomView"/> whose data is bigger than this (as JSON) is logged at Warning, and still sent.</summary>
+    public const int CustomViewWarnBytes = 64 * 1024;
+
     private readonly IGame _game;
+    private readonly ICampaignLease? _campaign;
     private readonly IReadOnlyList<Player> _players;
     private readonly Dictionary<PlayerId, Player> _playersById;
     private readonly TimeProvider _time;
@@ -31,9 +37,11 @@ public sealed class GameSession : IDisposable
         TimeProvider time,
         int seed,
         Action<Action> postToRoom,
-        ILogger logger)
+        ILogger logger,
+        ICampaignLease? campaign = null)
     {
         _game = game;
+        _campaign = campaign;
         _players = players;
         _playersById = players.ToDictionary(p => p.Id);
         _time = time;
@@ -69,7 +77,15 @@ public sealed class GameSession : IDisposable
     {
         if (IsOver) return;
 
-        Guard(() => _game.Start(_context, _players));
+        // The lease stays the room's: it releases it when the game ends, however that happens.
+        if (_campaign is not null && _game is ICampaignGame campaignGame)
+        {
+            Guard(() => campaignGame.Start(_context, _players, _campaign));
+        }
+        else
+        {
+            Guard(() => _game.Start(_context, _players));
+        }
 
         if (!IsOver)
         {
@@ -155,12 +171,28 @@ public sealed class GameSession : IDisposable
             if (!_lastPlayerContentJson.TryGetValue(player.Id, out var lastJson) || lastJson != contentJsonText)
             {
                 _lastPlayerContentJson[player.Id] = contentJsonText;
+                WarnIfOversized(view);
                 var nextViewId = $"v{++_viewCounter}";
                 var viewWithId = JsonSerializer.SerializeToElement(view with { ViewId = nextViewId }, ArcJson.Options);
                 var update = new PlayerViewUpdate(player.Id, nextViewId, viewWithId);
                 _currentPlayerViews[player.Id] = update;
                 _pendingPlayerUpdates[player.Id] = update;
             }
+        }
+    }
+
+    private void WarnIfOversized(ControllerView view)
+    {
+        if (view is not CustomView custom)
+        {
+            return;
+        }
+
+        var bytes = Encoding.UTF8.GetByteCount(custom.Data.GetRawText());
+        if (bytes > CustomViewWarnBytes)
+        {
+            _logger.LogWarning("Game {GameId} sent a CustomView for screen {Screen} with {Bytes} bytes of data; keep it under 64 KB",
+                GameId, custom.Screen, bytes);
         }
     }
 

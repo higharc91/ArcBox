@@ -52,6 +52,18 @@ public sealed class ArcHub(RoomManager rooms) : Hub
     public Task SelectGame(string gameId) =>
         WithHubErrors(() => CurrentRoom().SelectGameAsync(Context.ConnectionId, gameId));
 
+    public Task SelectCampaign(string campaignId) =>
+        WithHubErrors(() => CurrentRoom().SelectCampaignAsync(Context.ConnectionId, campaignId ?? ""));
+
+    /// <summary>The VIP creates a campaign for the selected game and becomes its owner; returns the VIP's new profile key.</summary>
+    public Task<ProfileKey> CreateCampaign(string name) =>
+        WithHubErrors(() => CurrentRoom().CreateCampaignAsync(Context.ConnectionId, name ?? ""));
+
+    /// <summary>"Who are you in this campaign?": a member, or a null member for "I'm new here". Lobby only.</summary>
+    public Task<ProfileKey?> ClaimMember(ClaimMemberRequest request) =>
+        WithHubErrors(() => CurrentRoom().ClaimMemberAsync(Context.ConnectionId,
+            request ?? throw new HubException("Pick a seat or enter a name.")));
+
     public Task StartGame() =>
         WithHubErrors(() => CurrentRoom().StartGameAsync(Context.ConnectionId));
 
