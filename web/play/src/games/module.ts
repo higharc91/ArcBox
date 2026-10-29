@@ -1,7 +1,6 @@
-import { createContext } from "preact";
+import { createContext, type ComponentType } from "preact";
 import { useContext } from "preact/hooks";
-import type { Option, ShakeView, WaitView } from "../protocol";
-import { redlineSkin } from "./redline";
+import type { CampaignResponse, Option, ShakeView, WaitView } from "../protocol";
 
 export interface Badge {
   text: string;
@@ -40,10 +39,30 @@ export interface Skin {
   shakeHold?(view: ShakeView): string | undefined;
 }
 
-const skins: Record<string, Skin> = { redline: redlineSkin };
+/** What a CustomView screen is given: its `data` (screen-specific JSON) and a way to answer. */
+export interface CustomScreenProps {
+  data: unknown;
+  /** Posts a CustomInput `{ action, data }` for the current view; `data` is left out when undefined. Callable as often as needed. */
+  send(action: string, data?: unknown): void;
+}
 
-export function skinFor(gameId?: string | null): Skin | undefined {
-  return gameId ? skins[gameId] : undefined;
+/** What a game's between-sessions portal screen is given (portal API, spec §3.4). */
+export interface PortalProps {
+  campaign: CampaignResponse;
+  readOnly: boolean;
+  send(type: string, data: unknown): Promise<void>;
+}
+
+/**
+ * A game's phone code: the module `src/games/<id>/index.ts` exports as `module`. Loaded lazily (src/games/registry.ts),
+ * so a game's code is downloaded only when a room selects it.
+ */
+export interface GameModule {
+  id: string;
+  skin?: Skin;
+  /** The screens a CustomView can name, by CustomView.Screen. */
+  screens?: Record<string, ComponentType<CustomScreenProps>>;
+  portal?: ComponentType<PortalProps>;
 }
 
 export const SkinContext = createContext<Skin | undefined>(undefined);

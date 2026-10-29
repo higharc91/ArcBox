@@ -1,5 +1,5 @@
 import type { WaitView } from "../protocol";
-import { useSkin } from "../skins/skin";
+import { useSkin } from "../games/module";
 import { Prompt } from "./common";
 
 /**

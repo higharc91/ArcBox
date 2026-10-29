@@ -1,5 +1,5 @@
-import type { Option, WaitView } from "../protocol";
-import type { Badge, HeaderParts, ResultKind, Skin } from "./skin";
+import type { Option, WaitView } from "../../protocol";
+import type { Badge, HeaderParts, ResultKind, Skin } from "../module";
 
 export interface Team {
   id: string;

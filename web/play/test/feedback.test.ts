@@ -1,4 +1,5 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeAll, afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { loadModule } from "../src/games/registry";
 import { cleanup, fireEvent, render, screen } from "@testing-library/preact";
 import { h } from "preact";
 import type { ButtonsView, ChoiceView, GameResults, LobbyState, WaitView } from "../src/protocol";
@@ -11,7 +12,7 @@ import { MAX_GAIN, Sounds, type SoundName } from "../src/feedback/sounds";
 import { MuteToggle } from "../src/feedback/MuteToggle";
 import { Join } from "../src/screens/Join";
 import { ControllerScreen } from "../src/widgets/ControllerScreen";
-import { redlineSkin } from "../src/skins/redline";
+import { redlineSkin } from "../src/games/redline/skin";
 import type { KeyValueStore } from "../src/session/storage";
 
 // ---------------------------------------------------------------- fakes
@@ -102,6 +103,9 @@ class FakeAudioContext {
 const ctx = () => FakeAudioContext.instances.at(-1)!;
 
 let vibrateSpy: ReturnType<typeof vi.fn>;
+
+// REDLINE's skin lives in a lazily loaded game module: load it before rendering REDLINE widgets.
+beforeAll(() => loadModule("redline"));
 
 beforeEach(() => {
   FakeAudioContext.instances = [];

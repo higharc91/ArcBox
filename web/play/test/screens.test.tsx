@@ -1,4 +1,5 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { beforeAll, afterEach, describe, expect, it, vi } from "vitest";
+import { loadModule } from "../src/games/registry";
 import { cleanup, fireEvent, render, screen } from "@testing-library/preact";
 import type { ButtonsView, ChoiceView, GameResults, LobbyState, WaitView } from "../src/protocol";
 import { Join } from "../src/screens/Join";
@@ -7,13 +8,16 @@ import { Results } from "../src/screens/Results";
 import { Closed } from "../src/screens/Closed";
 import { App, boot } from "../src/App";
 import { ControllerScreen } from "../src/widgets/ControllerScreen";
-import { TEAMS, driverBadge, teamColor, teamColorById } from "../src/skins/redline";
+import { TEAMS, driverBadge, teamColor, teamColorById } from "../src/games/redline/skin";
 import { Session } from "../src/session/session";
 import { loadSeat, saveSeat, type KeyValueStore } from "../src/session/storage";
 import lobbyFixture from "./fixtures/lobby.json";
 import choiceFixture from "./fixtures/choice.json";
 import buttonsFixture from "./fixtures/buttons.json";
 import { FakeTransport, flush, hubError } from "./fakeTransport";
+
+// REDLINE's skin lives in a lazily loaded game module: load it before rendering REDLINE widgets.
+beforeAll(() => loadModule("redline"));
 
 afterEach(cleanup);
 

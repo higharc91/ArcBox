@@ -2,11 +2,13 @@ import { useEffect, useLayoutEffect } from "preact/hooks";
 import { useFeedback } from "../feedback/feedback";
 import { MuteToggle } from "../feedback/MuteToggle";
 import type { ControllerView } from "../protocol";
-import { SkinContext, skinFor, type Skin } from "../skins/skin";
+import { SkinContext, type Skin } from "../games/module";
+import { useGameModule } from "../games/registry";
 import { Buttons } from "./Buttons";
 import { Choice } from "./Choice";
 import type { Send } from "./common";
 import { Countdown } from "./Countdown";
+import { Custom } from "./Custom";
 import { Draw } from "./Draw";
 import { Shake } from "./Shake";
 import { TextEntry } from "./TextEntry";
@@ -21,6 +23,7 @@ function Widget({ view, send }: { view: ControllerView; send: Send }) {
     case "textEntry": return <TextEntry view={view} send={send} />;
     case "draw": return <Draw view={view} send={send} />;
     case "shake": return <Shake view={view} send={send} />;
+    case "custom": return <Custom view={view} send={send} />;
   }
 }
 
@@ -38,12 +41,12 @@ function Header({ header, skin }: { header: string; skin?: Skin }) {
 
 /**
  * The in-game screen: status bar (name, header, speaker toggle), the widget for the view's kind, and the countdown.
- * `game` is the lobby's selected game id; a known one (e.g. "redline") applies its skin.
+ * `game` is the lobby's selected game id; once that game's module has loaded (e.g. "redline"), its skin applies.
  * With a Feedback in context, sends tap, results cue, and the last seconds of an input view tick.
  */
 export function ControllerScreen({ view, send, me, game }: { view: ControllerView; send: Send; me: string; game?: string | null }) {
   const input = view.kind !== "wait";
-  const skin = skinFor(game);
+  const skin = useGameModule(game).module?.skin; // generic look until the game's module has loaded
   const feedback = useFeedback();
   useEffect(() => {
     void syncWakeLock(input);

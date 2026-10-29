@@ -1,5 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
-import { teamColorById } from "../skins/redline";
+import { teamColorById } from "../games/redline/skin";
 import { remainingSeconds } from "../widgets/Countdown";
 import type { DriverRow, RacePhase, RedlineHostView, RoundOutcome } from "./redlineView";
 
