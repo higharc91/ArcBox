@@ -27,8 +27,10 @@ public partial class TimingTower : Control
     private const float GapWidth = 46;
     private const float AuxWidth = 30;
     private const float Pad = 8;
-    /// <summary>Qualifying's TOTAL column at the right edge ("12.34", "—").</summary>
-    private const float TotalWidth = 66;
+    /// <summary>Qualifying's TOTAL column at the right edge ("12.34", "5.90 · 2/3", "—").</summary>
+    private const float TotalWidth = 92;
+    /// <summary>Qualifying's LAP chip: narrower than the race's, so TOTAL fits a correct-lap count ("DELETED" still fits).</summary>
+    private const float LapChipWidth = 84;
 
     private readonly Dictionary<string, (float From, float To, double Start)> _y = new(StringComparer.Ordinal);
     private IReadOnlyList<TowerRow> _rows = [];
@@ -104,12 +106,33 @@ public partial class TimingTower : Control
         }
     }
 
+    /// <summary>
+    /// Qualifying's TOTAL, right-aligned at <paramref name="right"/>: the time in white (dim "—" before a first correct lap),
+    /// and a correct-lap count after a deleted lap ("5.90 · 2/3") smaller and dimmer after it.
+    /// </summary>
+    private void DrawTotal(string text, float right, float mid, float alpha)
+    {
+        if (text == Tower.NoTime)
+        {
+            HudStyle.DrawRight(this, HudStyle.Bold, text, right, mid, 18, HudStyle.Faded(HudStyle.Dim, alpha));
+            return;
+        }
+        var parts = text.Split(" · ", 2);
+        if (parts.Length == 2)
+        {
+            var count = $"· {parts[1]}";
+            HudStyle.DrawRight(this, HudStyle.SemiBold, count, right, mid + 1, 14, HudStyle.Faded(HudStyle.Dim, alpha));
+            right -= HudStyle.Width(HudStyle.SemiBold, count, 14) + 5;
+        }
+        HudStyle.DrawRight(this, HudStyle.Bold, parts[0], right, mid, 18, HudStyle.Faded(Colors.White, alpha));
+    }
+
     /// <summary>Qualifying's LAP (chip) and TOTAL columns, in tower x.</summary>
     private static (Rect2 Lap, Rect2 Total) QualifyingColumns(float w)
     {
         var right = w - Pad;
         var total = new Rect2(right - TotalWidth, 0, TotalWidth, RowHeight);
-        var lap = new Rect2(total.Position.X - 10 - ChipWidth, 0, ChipWidth, RowHeight);
+        var lap = new Rect2(total.Position.X - 8 - LapChipWidth, 0, LapChipWidth, RowHeight);
         return (lap, total);
     }
 
@@ -185,7 +208,7 @@ public partial class TimingTower : Control
         {
             // POS · DRIVER · LAP · TOTAL: the chip column moves left of the total, the mark sits just before the chip.
             chipLeft = QualifyingColumns(w).Lap.Position.X;
-            auxLeft = chipLeft - 6 - AuxWidth;
+            auxLeft = chipLeft - 4 - AuxWidth;
         }
 
         if (row.PlayerName is { } name)
@@ -220,9 +243,7 @@ public partial class TimingTower : Control
         // Gap, or qualifying's total at the right edge.
         if (_qualifying)
         {
-            var timed = row.Gap != Tower.NoTime;
-            var ink = timed ? HudStyle.Faded(Colors.White, alpha) : HudStyle.Faded(HudStyle.Dim, alpha);
-            HudStyle.DrawRight(this, HudStyle.Bold, row.Gap, right - 4, mid, 18, ink);
+            DrawTotal(row.Gap, right - 4, mid, alpha);
         }
         else if (row.Gap.Length > 0)
         {
@@ -238,8 +259,10 @@ public partial class TimingTower : Control
         else if (row.Chip is { } chip)
         {
             // Qualifying's lap times are the figure the room watches for: a size up on the race's chips.
-            HudStyle.DrawChip(this, new Rect2(chipLeft, mid - (ChipHeight / 2), ChipWidth, ChipHeight), chip, _qualifying ? 14 : 12,
-                row.Human ? 1 : HudStyle.AiAlpha);
+            // Qualifying's lap chips stay at full strength on AI rows too: an AI's purple lap must read as purple.
+            var chipWidth = _qualifying ? LapChipWidth : ChipWidth;
+            HudStyle.DrawChip(this, new Rect2(chipLeft, mid - (ChipHeight / 2), chipWidth, ChipHeight), chip, _qualifying ? 14 : 12,
+                row.Human || _qualifying ? 1 : HudStyle.AiAlpha);
         }
     }
 }

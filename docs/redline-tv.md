@@ -184,10 +184,11 @@ with no players.
   on the grid); the camera holds the provisional pole car trackside during the question and from the helicopter at the
   Result.
 - **Tower:** the timing board, POS · DRIVER · LAP · TOTAL, in classification order. TOTAL is the sum of the correct
-  laps so far ("6.82", "—" before a first correct lap). During the question a player row shows a tick once they have
+  laps so far ("6.82", "—" before a first correct lap), with the count of correct laps in small grey after a deleted
+  one ("5.90 · 2/3"), since correct laps count before time. During the question a player row shows a tick once they have
   answered (pulsing dots until then). At the Result the LAP column shows this lap: the time on green, the session's
-  fastest on **purple** (`#a020f0`, white text), or a red-outlined **DELETED** for a wrong or missing answer; the rows
-  then slide to the new order with ▲▼ movement. P1's box turns white once it has a time.
+  fastest on **purple** (`#a020f0`, white text), or a red-outlined **DELETED** for a wrong or missing answer, at full
+  strength on AI rows too; the rows then slide to the new order with ▲▼ movement. P1's box turns white once it has a time.
 - **Cards:** at a Result where P1 changed, a **PROVISIONAL POLE** lower-third with the new leader's name and team bar
   slides in for 3 s; after the last lap, **POLE POSITION** with the name, a wide team-colour bar and the total
   ("6.82s" on white) stays up for the rest of the Result. Both sit in the Reveal lower-third's place, right of the

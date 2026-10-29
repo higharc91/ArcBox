@@ -124,7 +124,7 @@ public class TowerTests
 
         var rows = Tower.Rows(result);
 
-        Assert.Equal(["4.65", "4.80", "2.90", "—"], rows.Select(r => r.Gap));
+        Assert.Equal(["4.65", "4.80", "2.90 · 1/2", "—"], rows.Select(r => r.Gap));
         Assert.Equal([new Chip("2.20", ChipKind.Purple), new Chip("2.50", ChipKind.Good),
             new Chip("DELETED", ChipKind.Bad), new Chip("DELETED", ChipKind.Bad)], rows.Select(r => r.Chip!.Value));
         Assert.Equal([1, -1, 0, 0], rows.Select(r => r.Movement));
@@ -143,6 +143,31 @@ public class TowerTests
         Assert.All(reading, r => Assert.Null(r.Chip));
         Assert.All(reading, r => Assert.Equal(AnswerMark.None, r.Mark));
         Assert.All(reading, r => Assert.Equal(0, r.Movement));
+    }
+
+    [Fact]
+    public void Tower_qualifying_total_shows_the_correct_lap_count_after_a_deleted_lap()
+    {
+        QualifyingViews.Car[] cars =
+        [
+            new("NOR", "JO", Correct: 3, TotalMs: 7050, LastMs: 2400),
+            new("LAW", null, Correct: 3, TotalMs: 9510, LastMs: 3120),
+            new("HUL", "Christabella", Correct: 2, TotalMs: 5900, LastMs: 2900),
+            new("STR", null, Correct: 1, TotalMs: 3000, LastMs: null),
+            new("BOT", null, Correct: 0, TotalMs: 0, LastMs: null),
+        ];
+        // Lap 3's Result: three laps completed.
+        Assert.Equal(["7.05", "9.51", "5.90 · 2/3", "3.00 · 1/3", "—"],
+            Tower.Rows(QualifyingViews.View(RacePhase.QualifyingResult, 3, cars)).Select(r => r.Gap));
+        // Lap 3's question and reading: only two laps completed so far, so STR's single correct lap is 1/2.
+        var asked = cars.Select(c => c with { Correct = Math.Min(c.Correct, 2), TotalMs = c.Code == "STR" ? 3000 : c.TotalMs }).ToArray();
+        foreach (var phase in new[] { RacePhase.QualifyingReading, RacePhase.QualifyingQuestion })
+        {
+            Assert.Equal(["7.05", "9.51", "5.90", "3.00 · 1/2", "—"],
+                Tower.Rows(QualifyingViews.View(phase, 3, asked)).Select(r => r.Gap));
+        }
+        // Before lap 1's Result nothing is completed: no counts, only "—".
+        Assert.Equal(Tower.NoTime, QualifyingText.TotalColumn(new QualifyingRow("NOR", 1, 0, 0, 0, null, false, false), RacePhase.QualifyingReading, 1));
     }
 
     [Fact]

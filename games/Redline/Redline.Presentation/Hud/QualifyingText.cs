@@ -15,6 +15,19 @@ public static class QualifyingText
     /// <summary>A running total, in the same format as a lap: 6815 ms is "6.82".</summary>
     public static string Total(int ms) => Seconds(ms);
 
+    /// <summary>
+    /// The tower's TOTAL column for a car: the total of its correct laps ("7.05"), with the count of correct laps when it
+    /// has missed any of those completed so far ("5.90 · 2/3"), since the classification counts correct laps before time;
+    /// <see cref="Tower.NoTime"/> before a first correct lap. Laps completed: the current one at its Result, those before it otherwise.
+    /// </summary>
+    public static string TotalColumn(QualifyingRow row, RacePhase phase, int lap)
+    {
+        ArgumentNullException.ThrowIfNull(row);
+        if (row.Correct == 0) return Tower.NoTime;
+        var completed = phase == RacePhase.QualifyingResult ? lap : lap - 1;
+        return row.Correct < completed ? $"{Total(row.TotalMs)} · {row.Correct}/{completed}" : Total(row.TotalMs);
+    }
+
     /// <summary>"QUALIFYING · LAP 1/3": the question panel's header.</summary>
     public static string Header(int lap, int laps) => $"QUALIFYING · LAP {lap}/{laps}";
 

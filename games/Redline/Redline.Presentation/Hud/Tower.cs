@@ -36,7 +36,7 @@ public enum AnswerMark { None, Answering, Answered }
 /// <param name="Slot">Row index from the top (the view's ranking order).</param>
 /// <param name="Position">The shown position number (shared on ties).</param>
 /// <param name="PlayerName">Upper-case player name for humans, null for AI.</param>
-/// <param name="Gap">"LEAD", "TIED", "−3", "GRID", or "" when the phase has no gaps. In qualifying, the total time ("6.82"), or "—" before a first correct lap.</param>
+/// <param name="Gap">"LEAD", "TIED", "−3", "GRID", or "" when the phase has no gaps. In qualifying, the total time ("6.82", "5.90 · 2/3" after a deleted lap), or "—" before a first correct lap.</param>
 /// <param name="Movement">Places gained (+) or lost (−) this round; nonzero only in Reveal and QualifyingResult.</param>
 public sealed record TowerRow(
     int Slot, string Code, string TeamId, string Accent, int Position, string? PlayerName, string Gap, int Movement,
@@ -68,7 +68,8 @@ public static class Tower
     }
 
     /// <summary>
-    /// The qualifying board, in the view's classification order. Gap: the total of the completed correct laps. Chip: only at
+    /// The qualifying board, in the view's classification order. Gap: the total of the completed correct laps, with the
+    /// correct-lap count when the car missed any (<see cref="QualifyingText.TotalColumn"/>). Chip: only at
     /// the Result, this lap's time (purple for the fastest, green otherwise) or DELETED. Mark: who has answered, during the
     /// question. Movement: the places gained or lost at the Result, which is when the rows slide.
     /// </summary>
@@ -83,7 +84,7 @@ public static class Tower
             return new TowerRow(
                 i, q.Code, teamId, TeamAccent.ById(teamId), q.Position,
                 d?.Player is null ? null : (d.PlayerName ?? "PLAYER").ToUpperInvariant(),
-                q.Correct == 0 ? NoTime : QualifyingText.Total(q.TotalMs),
+                QualifyingText.TotalColumn(q, view.Phase, session.Lap),
                 result ? q.PositionChange : 0,
                 result ? LapChip(q) : null,
                 view.Phase == RacePhase.QualifyingQuestion ? (q.Answered ? AnswerMark.Answered : AnswerMark.Answering) : AnswerMark.None,
