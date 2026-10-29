@@ -310,9 +310,12 @@ public class HubIntegrationTests
         var second = await host.InvokeAsync<CreateRoomResult>("CreateRoom");
 
         f.Time.Advance(new RoomOptions().IdleTimeout);
-        await f.Services.GetRequiredService<RoomManager>().SweepAsync();
+        var rooms = f.Services.GetRequiredService<RoomManager>();
+        await rooms.SweepAsync();
 
-        Assert.Equal("Room not found.", await ann.ThrowsHubAsync("Join", first.Code, "Ann"));
+        // The first room was left, so it went idle and was parked (spec §3.5); the second is still live.
+        Assert.Null(rooms.FindLoaded(first.Code));
+        Assert.NotNull(rooms.FindLoaded(second.Code));
         await ann.InvokeAsync<JoinResult>("Join", second.Code, "Ann");
     }
 }

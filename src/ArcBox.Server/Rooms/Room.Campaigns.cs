@@ -41,6 +41,7 @@ public sealed partial class Room
 
         _campaignId = info.Id;
         BroadcastLobby();
+        Save();
     });
 
     /// <summary>
@@ -70,6 +71,7 @@ public sealed partial class Room
         vip.Profile = owner.Id;
         _campaignId = info.Id;
         BroadcastLobby();
+        Save();
         return _profiles.IssueKey(owner.Id);
     });
 
@@ -100,6 +102,7 @@ public sealed partial class Room
             ? ClaimNewMember(slot, campaign, keys, request.NewName)
             : ClaimExistingMember(slot, seat, campaign, keys);
         BroadcastLobby();
+        Save();
         return key;
     });
 

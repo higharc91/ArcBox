@@ -127,6 +127,19 @@ public sealed class TestClient : IAsyncDisposable
         }
     }
 
+    /// <summary>
+    /// How many <paramref name="method"/> messages have arrived and not been taken by a WaitFor. Messages on one
+    /// connection arrive in order, so after waiting for a later message this counts everything sent before it.
+    /// </summary>
+    public int Unclaimed(string method)
+    {
+        while (_inbox.Reader.TryRead(out var r))
+        {
+            _seen.Add(r);
+        }
+        return _seen.Count(r => r.Method == method);
+    }
+
     public async ValueTask DisposeAsync()
     {
         if (_disposed) return;

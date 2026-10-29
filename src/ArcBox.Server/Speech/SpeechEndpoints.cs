@@ -45,7 +45,7 @@ public static class SpeechEndpoints
     {
         NoStore(http);
 
-        var room = Authenticate(rooms, request.Code, request.HostToken);
+        var room = await AuthenticateAsync(rooms, request.Code, request.HostToken);
         if (room is null)
             return Problem(StatusCodes.Status401Unauthorized, "Unknown room or wrong host token.");
 
@@ -87,10 +87,10 @@ public static class SpeechEndpoints
         return Results.Bytes(audio, "audio/mpeg");
     }
 
-    private static IResult ListVoices(HttpContext http, RoomManager rooms, IVoiceThemeRegistry themes)
+    private static async Task<IResult> ListVoices(HttpContext http, RoomManager rooms, IVoiceThemeRegistry themes)
     {
         NoStore(http);
-        var room = Authenticate(rooms, http.Request.Headers[RoomHeader], http.Request.Headers[HostTokenHeader]);
+        var room = await AuthenticateAsync(rooms, http.Request.Headers[RoomHeader], http.Request.Headers[HostTokenHeader]);
         if (room is null)
             return Problem(StatusCodes.Status401Unauthorized, "Unknown room or wrong host token.");
 
@@ -99,11 +99,11 @@ public static class SpeechEndpoints
             .ToList());
     }
 
-    private static Room? Authenticate(RoomManager rooms, string? code, string? hostToken)
+    private static async Task<Room?> AuthenticateAsync(RoomManager rooms, string? code, string? hostToken)
     {
         if (string.IsNullOrWhiteSpace(code) || string.IsNullOrEmpty(hostToken))
             return null;
-        var room = rooms.Find(code);
+        var room = await rooms.FindAsync(code);
         return room is not null && room.IsHostToken(hostToken) ? room : null;
     }
 

@@ -22,18 +22,18 @@ public sealed class ArcHub(RoomManager rooms) : Hub
 
     public Task ResumeHost(string code, string hostToken) => WithHubErrors(async () =>
     {
-        var room = FindRoom(code);
+        var room = await FindRoomAsync(code);
         await room.BindHostAsync(Context.ConnectionId, hostToken);
         await MoveToAsync(room);
     });
 
     /// <summary>What this phone may take, without taking anything. The caller isn't placed in the room.</summary>
-    public Task<RoomPeek> Peek(PeekRequest request) => WithHubErrors(() =>
-        FindRoom(request.Code).PeekAsync(request.ProfileKeys ?? []));
+    public Task<RoomPeek> Peek(PeekRequest request) => WithHubErrors(async () =>
+        await (await FindRoomAsync(request.Code)).PeekAsync(request.ProfileKeys ?? []));
 
     public Task<JoinResult> TakeSeat(TakeSeatRequest request) => WithHubErrors(async () =>
     {
-        var room = FindRoom(request.Code);
+        var room = await FindRoomAsync(request.Code);
         var result = await room.TakeSeatAsync(Context.ConnectionId, request);
         await MoveToAsync(room);
         return result;
@@ -44,7 +44,7 @@ public sealed class ArcHub(RoomManager rooms) : Hub
 
     public Task Rejoin(string code, string playerId, string secret) => WithHubErrors(async () =>
     {
-        var room = FindRoom(code);
+        var room = await FindRoomAsync(code);
         await room.RejoinAsync(Context.ConnectionId, new PlayerId(playerId), secret);
         await MoveToAsync(room);
     });
@@ -87,8 +87,9 @@ public sealed class ArcHub(RoomManager rooms) : Hub
         await base.OnDisconnectedAsync(exception);
     }
 
-    private Room FindRoom(string code) =>
-        rooms.Find(code) ?? throw new HubException("Room not found.");
+    // A room that left memory (a restart, or parked when idle) is rebuilt here from its stored record.
+    private async Task<Room> FindRoomAsync(string code) =>
+        await rooms.FindAsync(code) ?? throw new HubException("Room not found.");
 
     private Room CurrentRoom() =>
         rooms.RoomFor(Context.ConnectionId) ?? throw new HubException("You're not in a room.");

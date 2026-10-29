@@ -28,7 +28,9 @@ builder.Services.AddSingleton(sp => new RoomServices(
     sp.GetRequiredService<ProfileService>(),
     sp.GetRequiredService<ILoggerFactory>(),
     sp.GetRequiredService<CampaignService>(),
-    sp.GetRequiredService<CampaignRulesRegistry>()));
+    sp.GetRequiredService<CampaignRulesRegistry>(),
+    sp.GetRequiredService<RoomStore>()));
+builder.Services.AddSingleton<RoomStore>();
 builder.Services.AddSingleton<RoomManager>();
 builder.Services.AddSingleton<IClientSender, HubClientSender>();
 builder.Services.AddSingleton<IGameRegistry, GameRegistry>();
