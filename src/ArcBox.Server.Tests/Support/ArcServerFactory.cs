@@ -1,3 +1,4 @@
+using ArcBox.Server.Campaigns;
 using ArcBox.Server.Games;
 using ArcBox.Server.Rooms;
 using ArcBox.Server.Speech;
@@ -45,6 +46,7 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
             services.AddKeyedSingleton<TimeProvider>(RoomManager.ClockKey, Time);
             services.AddArcGame<ThrowerGame>();
             services.AddArcGame<LedgerGame>();
+            services.AddCampaignRules<LedgerRules>();
             // Never reach Google from a test, even on a machine whose user-secrets hold a real key. Speech tests
             // opt back in with their own key, cache directory and fake handler (registered after these).
             services.PostConfigure<SpeechOptions>(o => o.Google.ApiKey = null);
