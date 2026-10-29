@@ -10,6 +10,8 @@ namespace ArcBox.Host.Games.Redline.Hud;
 /// yellow, gap, and a throttle / status / result chip; AI rows at 55 % opacity, player rows highlighted, ▲▼ movement in
 /// Reveal. Rows are keyed by driver code and glide to their new slot over 0.5 s when the order changes.
 /// In <see cref="ShowDistance"/> mode (Chequered classification) the chip column shows the distance instead.
+/// In qualifying (qualifying spec §6) it is the timing board, POS · DRIVER · LAP · TOTAL: the lap's chip (purple, green or
+/// DELETED, at the Result) and then the running total at the right edge, answered ticks during the question.
 /// Drawn in one <c>_Draw</c> so 22 rows stay cheap and pixel-exact.
 /// </summary>
 public partial class TimingTower : Control
@@ -25,6 +27,8 @@ public partial class TimingTower : Control
     private const float GapWidth = 46;
     private const float AuxWidth = 30;
     private const float Pad = 8;
+    /// <summary>Qualifying's TOTAL column at the right edge ("12.34", "—").</summary>
+    private const float TotalWidth = 66;
 
     private readonly Dictionary<string, (float From, float To, double Start)> _y = new(StringComparer.Ordinal);
     private IReadOnlyList<TowerRow> _rows = [];
@@ -32,6 +36,7 @@ public partial class TimingTower : Control
     private double _time;
     private string _heading = "POS · DRIVER";
     private string _column = "GAP";
+    private bool _qualifying;
     private readonly Dictionary<string, int> _distance = new(StringComparer.Ordinal);
 
     public TimingTower()
@@ -68,6 +73,7 @@ public partial class TimingTower : Control
         }
         _rows = rows;
         _phase = view.Phase;
+        _qualifying = QualifyingText.IsQualifying(view.Phase);
         _distance.Clear();
         foreach (var d in view.Drivers)
         {
@@ -91,10 +97,20 @@ public partial class TimingTower : Control
     {
         _time += delta;
         var gliding = _y.Values.Any(v => !Mathf.IsEqualApprox(v.From, v.To) && _time - v.Start <= SortSeconds + 0.05);
-        if (gliding || (_phase == RacePhase.Question && _rows.Any(r => r.Mark == AnswerMark.Answering && r.Human)))
+        var asking = _phase is RacePhase.Question or RacePhase.QualifyingQuestion;
+        if (gliding || (asking && _rows.Any(r => r.Mark == AnswerMark.Answering && r.Human)))
         {
             QueueRedraw();
         }
+    }
+
+    /// <summary>Qualifying's LAP (chip) and TOTAL columns, in tower x.</summary>
+    private static (Rect2 Lap, Rect2 Total) QualifyingColumns(float w)
+    {
+        var right = w - Pad;
+        var total = new Rect2(right - TotalWidth, 0, TotalWidth, RowHeight);
+        var lap = new Rect2(total.Position.X - 10 - ChipWidth, 0, ChipWidth, RowHeight);
+        return (lap, total);
     }
 
     private float Current((float From, float To, double Start) y)
@@ -112,7 +128,16 @@ public partial class TimingTower : Control
         // Heading row (.th).
         var head = ArcTheme.Spaced("Bold", 3);
         HudStyle.DrawLeft(this, head, _heading, 14, HeadHeight / 2, 15, HudStyle.Dim);
-        HudStyle.DrawRight(this, head, _column, w - 12, HeadHeight / 2, 15, HudStyle.Dim);
+        if (_qualifying)
+        {
+            var (lap, _) = QualifyingColumns(w);
+            HudStyle.DrawCentered(this, head, "LAP", new Rect2(lap.Position.X, 0, lap.Size.X, HeadHeight), 15, HudStyle.Dim);
+            HudStyle.DrawRight(this, head, "TOTAL", w - 12, HeadHeight / 2, 15, HudStyle.Dim);
+        }
+        else
+        {
+            HudStyle.DrawRight(this, head, _column, w - 12, HeadHeight / 2, 15, HudStyle.Dim);
+        }
         DrawLine(new Vector2(0, HeadHeight - 0.5f), new Vector2(w, HeadHeight - 0.5f), HudStyle.Edge, 1);
 
         // AI rows first so a gliding player row draws over them.
@@ -126,7 +151,9 @@ public partial class TimingTower : Control
     {
         var alpha = row.Human ? 1f : HudStyle.AiAlpha;
         var mid = top + (RowHeight / 2);
-        var leader = row.Position == 1 && _phase is not (RacePhase.DriverSelect or RacePhase.Grid);
+        // Qualifying: P1 is lit only once it has a time (before lap 1's result the order is just the seeded one).
+        var leader = row.Position == 1 && _phase is not (RacePhase.DriverSelect or RacePhase.Grid)
+                     && !(_qualifying && row.Gap == Tower.NoTime);
 
         if (row.Human)
         {
@@ -154,6 +181,12 @@ public partial class TimingTower : Control
         var chipLeft = right - ChipWidth;
         var gapRight = chipLeft - 10;
         var auxLeft = gapRight - GapWidth - AuxWidth;
+        if (_qualifying)
+        {
+            // POS · DRIVER · LAP · TOTAL: the chip column moves left of the total, the mark sits just before the chip.
+            chipLeft = QualifyingColumns(w).Lap.Position.X;
+            auxLeft = chipLeft - 6 - AuxWidth;
+        }
 
         if (row.PlayerName is { } name)
         {
@@ -184,8 +217,14 @@ public partial class TimingTower : Control
             }
         }
 
-        // Gap.
-        if (row.Gap.Length > 0)
+        // Gap, or qualifying's total at the right edge.
+        if (_qualifying)
+        {
+            var timed = row.Gap != Tower.NoTime;
+            var ink = timed ? HudStyle.Faded(Colors.White, alpha) : HudStyle.Faded(HudStyle.Dim, alpha);
+            HudStyle.DrawRight(this, HudStyle.Bold, row.Gap, right - 4, mid, 18, ink);
+        }
+        else if (row.Gap.Length > 0)
         {
             HudStyle.DrawRight(this, HudStyle.SemiBold, row.Gap, gapRight, mid, 16, HudStyle.Faded(HudStyle.Dim, row.Human ? 1 : 0.85f));
         }
@@ -198,7 +237,8 @@ public partial class TimingTower : Control
         }
         else if (row.Chip is { } chip)
         {
-            HudStyle.DrawChip(this, new Rect2(chipLeft, mid - (ChipHeight / 2), ChipWidth, ChipHeight), chip, 12,
+            // Qualifying's lap times are the figure the room watches for: a size up on the race's chips.
+            HudStyle.DrawChip(this, new Rect2(chipLeft, mid - (ChipHeight / 2), ChipWidth, ChipHeight), chip, _qualifying ? 14 : 12,
                 row.Human ? 1 : HudStyle.AiAlpha);
         }
     }

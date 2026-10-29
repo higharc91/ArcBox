@@ -167,7 +167,42 @@ AUDIO Sfx cork-pop step 1
 AUDIO Sfx spray-hiss step 1 1.00       (step, strength)
 ```
 
-and the scene logs each spray it launches: `REDLINE spray #<seq> step <step> strength <s>`.
+and the scene logs each spray it launches: `REDLINE spray #<seq> step <step> strength <s>`. Qualifying adds
+`AUDIO Sfx purple` after a Result's sting when a player set the lap's fastest time.
+
+## Qualifying
+
+Between Driver Select and the Grid, three easy questions set the starting order (qualifying spec,
+`docs/superpowers/specs/2026-10-29-redline-qualifying-design.md`): each is a lap, and the field lines up by correct
+laps, then the total time of the correct ones. It is on by default (`RedlineRules.Qualify`) and skipped in a room
+with no players.
+
+- **Flow, per lap:** QualifyingReading (the question read out, **LISTEN** in place of the clock), QualifyingQuestion
+  (10 s, ends early when every player has answered) and QualifyingResult (5 s). After the third Result, the Grid with
+  the cars in their new slots. The header reads "QUALIFYING · LAP n/3" with the category and the difficulty; the
+  answers A–D sit along the bottom and the correct one turns green at the Result. The track map is off (every car is
+  on the grid); the camera holds the provisional pole car trackside during the question and from the helicopter at the
+  Result.
+- **Tower:** the timing board, POS · DRIVER · LAP · TOTAL, in classification order. TOTAL is the sum of the correct
+  laps so far ("6.82", "—" before a first correct lap). During the question a player row shows a tick once they have
+  answered (pulsing dots until then). At the Result the LAP column shows this lap: the time on green, the session's
+  fastest on **purple** (`#a020f0`, white text), or a red-outlined **DELETED** for a wrong or missing answer; the rows
+  then slide to the new order with ▲▼ movement. P1's box turns white once it has a time.
+- **Cards:** at a Result where P1 changed, a **PROVISIONAL POLE** lower-third with the new leader's name and team bar
+  slides in for 3 s; after the last lap, **POLE POSITION** with the name, a wide team-colour bar and the total
+  ("6.82s" on white) stays up for the rest of the Result. Both sit in the Reveal lower-third's place, right of the
+  tower and above the answers. Names are as the player typed them (upper-cased), or the driver's surname for an AI.
+- **Sound:** the question is read through `redline.questions` as in the race; the commentator opens with
+  "Qualifying! Three questions, fastest correct answers take pole.", then calls "{Name} goes purple!", "Provisional
+  pole for {Name}." and finally "Pole position for {Name}, {total} seconds in total!". Each Result plays the correct
+  sting when any player's lap counted (else the wrong buzz), then a bright two-note **purple** chime when a player has
+  the lap's fastest time; answer ticks and the last-5-seconds countdown run as in the race.
+- **Log:** when the Grid starts the scene prints the starting order once per race, `REDLINE grid NOR PIA LEC …`
+  (scripted checks read it).
+
+`--redline-demo=qualifying` plays the scripted session: PIA takes provisional pole with lap 1's purple, JO takes it
+in lap 2 with another purple, ALEX goes purple in lap 3, and JO ends on pole; CHRISTABELLA's first lap and several AI
+laps are deleted.
 
 ## The podium
 
@@ -230,9 +265,10 @@ server's wall-clock phase timers even when a frame is slow.
 ## Screenshots
 
 `--shots=<dir>` saves `<seq>-<label>.png` on every screen change and lobby change, and in REDLINE about a second into
-every phase (`grid`, `throttle`, `question`, `reveal`, `chequered`, `anthem`, `champagne`…), on each Driver Select
-claim, at 2, 4 and 6 s into Reveal, on the Chequered podium, 12 s into the Anthem (`anthem-pushin`), and in the
-Champagne just after the first spray (`champagne-first-spray`), when all three bottles are spraying at once
+every phase (`grid`, `throttle`, `question`, `reveal`, `chequered`, `anthem`, `champagne`…; in qualifying with the
+lap, `qualifyingreading-lap1`, `qualifyingresult-lap3`), on each Driver Select claim, 2.2 s into each qualifying
+Result with its pole card in (`qualifyingresult-lap2-card`), at 2, 4 and 6 s into Reveal, on the Chequered podium,
+12 s into the Anthem (`anthem-pushin`), and in the Champagne just after the first spray (`champagne-first-spray`), when all three bottles are spraying at once
 (`champagne-triple`) and at 12 s (`champagne-confetti`). Each shot is taken two frames after it is asked for, so at the 1–2 fps of
 software rendering a shot shows a moment 1–3 s after its label: `reveal-2s` often already has the follow-up cut to the
 leader (due at 3.5 s), and a shot near the end of a short phase can show the start of the next one.

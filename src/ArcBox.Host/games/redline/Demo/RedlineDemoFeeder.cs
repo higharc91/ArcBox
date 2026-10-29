@@ -9,8 +9,8 @@ namespace ArcBox.Host.Games.Redline.Demo;
 
 /// <summary>
 /// Dev-only <c>--redline-demo[=label]</c>: plays <see cref="DemoRace.Steps"/> into the TV as if the server had sent them,
-/// on the scene clock (so <c>--fixed-fps</c> runs are deterministic). With a label (driverselect, grid, throttle,
-/// reading, question, reveal, chequered, anthem, champagne) it starts at that step, sending the step before it first so
+/// on the scene clock (so <c>--fixed-fps</c> runs are deterministic). With a label (driverselect, qualifying, grid,
+/// throttle, reading, question, reveal, chequered, anthem, champagne) it starts at that step, sending the step before it first so
 /// transitions still have a previous view. <c>--redline-demo-winner=PER</c> makes another player's car win (and so
 /// changes the podium and its anthem). Each view is stamped with a deadline like the server's: the phase's full length from when the phase
 /// started, measured on the scene clock. Under <c>--fixed-fps</c> the wall clock runs far ahead of the scene, so the

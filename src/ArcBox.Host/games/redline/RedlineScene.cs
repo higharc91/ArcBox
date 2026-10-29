@@ -63,6 +63,8 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
     private double _phaseStart;
     private bool _followUp;
     private int _lightsHeard;
+    /// <summary>The <c>REDLINE grid …</c> line is printed once per race, at the first Grid view.</summary>
+    private bool _gridLogged;
     private readonly List<(double At, string Label)> _pendingShots = [];
 
     private PodiumLayout? _podiumLayout;
@@ -184,6 +186,7 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
         _podium?.HideCeremony();
         ActiveCamera.MakeCurrent();
         _view = null;
+        _gridLogged = false;
         _from = _to = new Dictionary<string, CarSlot>();
         foreach (var car in _cars.Values)
         {
@@ -270,7 +273,16 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
             _lightsHeard = 0;
             _pendingShots.Clear();
             var label = v.Phase.ToString().ToLowerInvariant();
+            if (v.Qualifying is { } session)
+            {
+                label = $"{label}-lap{session.Lap}";
+            }
             QueueShot(ShotDelay, label);
+            if (v.Phase == RacePhase.QualifyingResult)
+            {
+                // The rows have slid and the pole card is fully in.
+                QueueShot(2.2, $"{label}-card");
+            }
             if (v.Phase == RacePhase.Chequered)
             {
                 QueueShot(CameraRig.FinishLineSeconds + 1.5, $"{label}-podium");
@@ -294,6 +306,7 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
             }
             GD.Print($"REDLINE {v.Phase} round {v.Round}");
         }
+        LogGrid(v);
 
         _to = Formation.Current(v, lap);
         if (v.Phase == RacePhase.Reveal)
@@ -376,6 +389,23 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
                 _shots?.Capture(_pendingShots[i].Label);
                 _pendingShots.RemoveAt(i);
             }
+        }
+    }
+
+    /// <summary>
+    /// <c>REDLINE grid NOR PIA LEC …</c>: the starting order (after qualifying, its classification), once per race when the
+    /// Grid starts. Tools read it (the e2e run checks qualifying set the grid).
+    /// </summary>
+    private void LogGrid(RedlineHostView v)
+    {
+        if (v.Phase == RacePhase.DriverSelect || QualifyingText.IsQualifying(v.Phase))
+        {
+            _gridLogged = false;
+        }
+        else if (v.Phase == RacePhase.Grid && !_gridLogged)
+        {
+            _gridLogged = true;
+            GD.Print($"REDLINE grid {string.Join(' ', v.Drivers.OrderBy(d => d.Position).Select(d => d.Code))}");
         }
     }
 

@@ -19,6 +19,8 @@ public static class HudStyle
     public static readonly Color Good = new("1ed760");
     public static readonly Color GoodInk = new("04220f");
     public static readonly Color Bad = new("ff3b3b");
+    /// <summary>Qualifying's fastest lap (qualifying spec §6), the F1 timing-screen purple.</summary>
+    public static readonly Color Purple = new("a020f0");
 
     /// <summary>hud3d.css: panels over the 3D view are a touch more transparent (rgba(14,14,20,.78–.82)).</summary>
     public static readonly Color Over3D = new(14 / 255f, 14 / 255f, 20 / 255f, 0.82f);
@@ -45,7 +47,7 @@ public static class HudStyle
 
     public static Color Faded(Color c, float alpha) => new(c, c.A * alpha);
 
-    /// <summary>Background and ink of a chip (broadcast.css <c>.chip.*</c>); Wait and Bad also draw an outline.</summary>
+    /// <summary>Background and ink of a chip (broadcast.css <c>.chip.*</c>, plus qualifying's purple); Wait and Bad also draw an outline.</summary>
     public static (Color Bg, Color Ink, Color? Outline) Chip(ChipKind kind) => kind switch
     {
         ChipKind.Cruise => (new Color(1, 1, 1, 0.1f), Dim, null),
@@ -56,6 +58,7 @@ public static class HudStyle
         ChipKind.Pit => (Colors.White, Dark, null),
         ChipKind.Good => (Good, new Color("006622"), null),
         ChipKind.Bad => (new Color(1, 59 / 255f, 59 / 255f, 0.18f), Bad, Bad),
+        ChipKind.Purple => (Purple, Colors.White, null),
         _ => (Bad, Colors.White, null),
     };
 

@@ -227,7 +227,8 @@ public partial class StartLightsView : Control
 
 /// <summary>
 /// Answers A–D along the bottom (broadcast.css <c>.answers</c>). In Reveal the correct one turns green, wrong ones dim,
-/// and each shows the team-colour pips of who picked it: tall pips for players, thin ones for AI.
+/// and each shows the team-colour pips of who picked it: tall pips for players, thin ones for AI. A qualifying Result
+/// lights the correct answer the same way, without pips.
 /// </summary>
 public partial class AnswerRow : Control
 {
@@ -246,7 +247,8 @@ public partial class AnswerRow : Control
     public void Show(RedlineHostView view)
     {
         _answers = view.Question?.Answers ?? [];
-        _correct = view.Phase == RacePhase.Reveal ? view.CorrectIndex : null;
+        // Qualifying's Result shows the answer too (no pickers: the host view never says who picked what there).
+        _correct = view.Phase is RacePhase.Reveal or RacePhase.QualifyingResult ? view.CorrectIndex : null;
         _pickers.Clear();
         for (var i = 0; i < _answers.Count; i++)
         {

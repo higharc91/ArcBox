@@ -43,6 +43,7 @@ public static class SfxBank
             (AudioCues.Whoosh, Sfx.Whoosh),
             (AudioCues.Correct, Sfx.CorrectSting),
             (AudioCues.Wrong, Sfx.WrongBuzz),
+            (AudioCues.Purple, Sfx.PurpleChime),
             (AudioCues.Screech, Sfx.TyreScreech),
             (AudioCues.Crunch, Sfx.Crunch),
             (AudioCues.Cheer, Sfx.CrowdCheer),

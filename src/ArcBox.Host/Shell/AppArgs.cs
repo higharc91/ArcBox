@@ -7,7 +7,8 @@ namespace ArcBox.Host.Shell;
 /// App arguments after <c>--</c> on the Godot command line (all optional):
 /// <c>--server=&lt;url&gt;</c>, <c>--new-room</c>, <c>--shots=&lt;dir&gt;</c>, <c>--quit-after=&lt;seconds&gt;</c>,
 /// <c>--preset=ultra|high|low</c>, <c>--res=&lt;w&gt;x&lt;h&gt;</c>, and the dev-only <c>--redline-demo[=step]</c>
-/// (play a scripted REDLINE race into the TV without a server; <c>--redline-demo-winner=PER</c> crowns another player's
+/// (play a scripted REDLINE race into the TV without a server, from a step such as <c>qualifying</c> or <c>reveal</c>;
+/// <c>--redline-demo-winner=PER</c> crowns another player's
 /// car, e.g. one whose country plays the theme only) and <c>--autostart=&lt;gameId&gt;[:&lt;players&gt;]</c>
 /// (select that game and start it once enough players are in; for scripted runs), and <c>--perf</c> (F3 overlay on
 /// from the start, logged every 5 s), and <c>--audio-log</c> (print <c>AUDIO &lt;bus&gt; &lt;name&gt;</c> for every sound played).

@@ -90,6 +90,7 @@ the 1920×1080 base that `canvas_items` stretch scales to any 16:9 window:
 | Phase | On screen |
 |---|---|
 | Driver Select | REDLINE slab; the claim board (11 teams × 2 seats, claimed seats white with the player in red) with the clock; the claim lower-third for the newest claim (the car the line-up camera holds) |
+| Qualifying (Reading, Question, Result) | header "QUALIFYING · LAP n/3" with the category and LISTEN while the question is read; the tower as a timing board (POS · DRIVER · LAP · TOTAL); answers A–D, the correct one green at the Result; no track map; the provisional pole and pole lower-thirds (see [`redline-tv.md`](redline-tv.md#qualifying)) |
 | Grid | header with the five start lights; 22-row timing tower; track map; rules strip with the payouts from the view and the question credit |
 | Throttle | header (round, category, difficulty, clock); tower with LOCKED / CHOOSING / PIT; map; "n OF m LOCKED" strip with the payout chips |
 | Question | header with the question; tower with every throttle and a tick for players who answered; map; answers A–D |
@@ -104,10 +105,11 @@ clock when a view arrives, clamps it to the phase length and then counts down on
 deadlines on the scene clock, so `--fixed-fps` captures show a sensible countdown.
 
 **Demo without a server.** `--redline-demo` feeds the scene a scripted race (`DemoRace` in Redline.Presentation): Driver
-Select with claims arriving, Grid, then round 4's Throttle, Question and Reveal (a human Redline spin-out, a three-car pack
+Select with claims arriving, three laps of qualifying (a deleted player lap, a purple lap each lap, a pole change), the
+Grid in the qualifying order, then round 4's Throttle, Question and Reveal (a human Redline spin-out, a three-car pack
 at the front), the Chequered flag and the podium (Anthem, then Champagne with scripted sprays from all three steps).
-`--redline-demo=<step>` starts at `driverselect`, `grid`, `throttle`, `question`, `reveal`, `chequered`, `anthem` or
-`champagne`; `--redline-demo-winner=<code>` crowns another player's car (see [`redline-tv.md`](redline-tv.md#the-podium)).
+`--redline-demo=<step>` starts at `driverselect`, `qualifying`, `grid`, `throttle`, `question`, `reveal`, `chequered`,
+`anthem` or `champagne`; `--redline-demo-winner=<code>` crowns another player's car (see [`redline-tv.md`](redline-tv.md#the-podium)).
 The script runs on the scene clock, so Godot's `--fixed-fps` makes a capture deterministic
 however slowly frames render:
 
@@ -116,8 +118,9 @@ xvfb-run -a -s "-screen 0 1920x1080x24" godot --path src/ArcBox.Host --rendering
   --redline-demo --shots=/tmp/redline --res=1920x1080 --preset=high --quit-after=80
 ```
 
-With `--shots` the scene saves each phase about a second after it starts, each Driver Select claim, and Reveal at 2, 4
-and 6 s.
+With `--shots` the scene saves each phase about a second after it starts, each Driver Select claim, Reveal at 2, 4
+and 6 s, and each qualifying Result again at 2.2 s with its card in (`qualifyingresult-lap2-card`; the qualifying
+shots carry the lap).
 
 **Presets.** Ultra (default): SDFGI with half-resolution probes, SSR, SSAO + SSIL, volumetric haze, a 4-split
 8192 shadow atlas, MSAA 4× + SMAA, 144 fps cap with VSync off. High: Ultra without SDFGI and SSR. Low: no

@@ -27,6 +27,7 @@ public partial class RedlineHud : CanvasLayer
     private readonly AnswerRow _answers = new();
     private readonly GridStrip _strip = new();
     private readonly RoundResult _result = new();
+    private readonly PoleCard _pole = new();
     private readonly DriverSelectBoard _board = new();
     private readonly ClaimLowerThird _claim = new();
     private readonly ChequeredScreen _chequered = new();
@@ -67,6 +68,8 @@ public partial class RedlineHud : CanvasLayer
         Place(_strip, Control.LayoutPreset.BottomWide, mx, -my - HudStyle.BottomBarHeight, -mx, -my);
         var resultLeft = mx + TimingTower.Width + gap;
         Place(_result, Control.LayoutPreset.BottomWide, resultLeft, -my - HudStyle.BottomBarHeight - gap - RoundResult.Height,
+            -mx, -my - HudStyle.BottomBarHeight - gap);
+        Place(_pole, Control.LayoutPreset.BottomWide, resultLeft, -my - HudStyle.BottomBarHeight - gap - PoleCard.Height,
             -mx, -my - HudStyle.BottomBarHeight - gap);
         Place(_board, Control.LayoutPreset.RightWide, -mx - DriverSelectBoard.BoardWidth, my, -mx, -my);
         Place(_claim, Control.LayoutPreset.BottomLeft, mx, -my - ClaimLowerThird.Height, mx + 1920 - (2 * mx) - DriverSelectBoard.BoardWidth - gap, -my);
@@ -130,7 +133,7 @@ public partial class RedlineHud : CanvasLayer
 
     private void ShowOnly(params Control[] visible)
     {
-        foreach (var c in new Control[] { _brand, _header, _tower, _map, _answers, _strip, _result, _board, _claim, _chequered, _podium })
+        foreach (var c in new Control[] { _brand, _header, _tower, _map, _answers, _strip, _result, _pole, _board, _claim, _chequered, _podium })
         {
             c.Visible = visible.Contains(c);
         }
@@ -197,6 +200,24 @@ public partial class RedlineHud : CanvasLayer
                 }
                 break;
 
+            case RacePhase.QualifyingReading:
+            case RacePhase.QualifyingQuestion:
+            case RacePhase.QualifyingResult:
+                // Qualifying spec §6: the timing board, the question and its answers; no track map (every car is on the grid).
+                ShowOnly(_header, _tower, _answers, _pole);
+                _header.Show(HudText.Header(view), lights: false);
+                _tower.Show(view);
+                _answers.Show(view);
+                if (view.Phase == RacePhase.QualifyingResult && newPhase)
+                {
+                    PoleCards(view, previous);
+                }
+                else if (view.Phase != RacePhase.QualifyingResult)
+                {
+                    _pole.Stop();
+                }
+                break;
+
             case RacePhase.Anthem:
             case RacePhase.Champagne:
                 // The podium: its own labels over the steps, so the car tags stand down.
@@ -221,6 +242,33 @@ public partial class RedlineHud : CanvasLayer
     {
         _time += delta;
         Tick(delta);
+    }
+
+    /// <summary>
+    /// A lap's Result: after the last lap the pole card for the rest of the Result; otherwise the provisional pole card when
+    /// the leader changed. The name is upper-cased for the card; the team is P1's.
+    /// </summary>
+    private void PoleCards(RedlineHostView view, RedlineHostView? previous)
+    {
+        _pole.Stop();
+        if (view.Qualifying is not { } session)
+        {
+            return;
+        }
+        var p1 = view.Drivers.FirstOrDefault(d => d.Code == session.Rows.MinBy(r => r.Position)?.Code);
+        var team = TeamAccent.Team(p1?.TeamId)?.Name.ToUpperInvariant() ?? "";
+        var accent = HudStyle.Hex(TeamAccent.ById(p1?.TeamId));
+        if (session.Lap >= session.Laps)
+        {
+            if (QualifyingText.Pole(view) is { } pole)
+            {
+                _pole.PlayPole(pole.Name.ToUpperInvariant(), team, accent, pole.Total, ResultIn, _phaseSeconds - 0.2);
+            }
+        }
+        else if (QualifyingText.ProvisionalPole(view, previous) is { } name)
+        {
+            _pole.PlayProvisional(name.ToUpperInvariant(), team, accent, ResultIn);
+        }
     }
 
     private void Tick(double delta)
@@ -272,6 +320,10 @@ public partial class RedlineHud : CanvasLayer
         if (_result.Visible && _result.Footprint is { Size.X: > 0 } footprint)
         {
             rects.Add(footprint);
+        }
+        if (_pole.Visible && _pole.Footprint is { Size.X: > 0 } card)
+        {
+            rects.Add(card);
         }
         if (_chequered.Visible)
         {
