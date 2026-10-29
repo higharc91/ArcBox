@@ -78,8 +78,9 @@ export interface GameManifest {
   description: string;
   minPlayers: number;
   maxPlayers: number;
-  usesCampaigns: boolean;
-  resumesAfterRestart: boolean;
+  /** Absent from a stale server's manifest; read as false. */
+  usesCampaigns?: boolean;
+  resumesAfterRestart?: boolean;
 }
 export interface PlayerScore {
   playerId: PlayerId;
@@ -155,8 +156,11 @@ export interface ProfileKey { id: ProfileId; key: string; name: string }
 export interface PeekRequest { code: string; profileKeys?: string[] | null }
 /** How a seat is shown. The game supplies it in campaign rooms ("Aldric", "Dwarf Cleric · Lv 3"). */
 export interface SeatCard { title: string; subtitle: string | null; color: string | null; portrait: string | null }
-/** Exactly one is set: an existing (offline) seat, or a campaign member who has no seat yet. */
-export interface SeatRef { slot: PlayerId | null; member: ProfileId | null }
+/**
+ * Exactly one is set: an existing (offline) seat, or a campaign member who has no seat yet. The server writes both
+ * fields (the unused one null); a request sends only the one it means, so either may be omitted.
+ */
+export interface SeatRef { slot?: PlayerId | null; member?: ProfileId | null }
 export interface SeatOffer { ref: SeatRef; card: SeatCard; absent: boolean }
 export interface RoomPeek {
   code: string;
@@ -258,7 +262,9 @@ export function parseControllerView(json: unknown): ControllerView {
 const isManifest = (v: unknown): v is GameManifest =>
   isRecord(v) && typeof v.id === "string" && typeof v.name === "string" && typeof v.description === "string" &&
   typeof v.minPlayers === "number" && typeof v.maxPlayers === "number" &&
-  typeof v.usesCampaigns === "boolean" && typeof v.resumesAfterRestart === "boolean";
+  // The flags are newer than the rest: a stale server may not send them, but if it does they must be booleans.
+  (v.usesCampaigns === undefined || typeof v.usesCampaigns === "boolean") &&
+  (v.resumesAfterRestart === undefined || typeof v.resumesAfterRestart === "boolean");
 
 const isAbsent = (v: unknown) => v === undefined || v === null;
 const isStringOrAbsent = (v: unknown) => isAbsent(v) || typeof v === "string";

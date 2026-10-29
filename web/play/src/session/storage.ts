@@ -1,4 +1,4 @@
-import type { PlayerId } from "../protocol";
+import type { PlayerId, ProfileKey } from "../protocol";
 
 /** The subset of Web Storage the session needs (localStorage in the app, a Map in tests). */
 export interface KeyValueStore {
@@ -44,6 +44,48 @@ export function clearSeat(store: KeyValueStore, code: string, slot?: string): vo
     store.removeItem(storageKey(code, slot));
   } catch {
     // ignore
+  }
+}
+
+/** A profile key this phone holds: who it is, the credential, and when it was last used to pick them. */
+export interface StoredProfile {
+  profileId: string;
+  key: string;
+  name: string;
+  lastUsed: number;
+}
+
+/** `arcbox:profiles`, or `arcbox:profiles:<slot>` on the dev page. */
+export function profilesKey(slot?: string): string {
+  return slot ? `arcbox:profiles:${slot}` : "arcbox:profiles";
+}
+
+/** The profile keys on this phone, most recently used first. Corrupt or blocked storage reads as none. */
+export function loadProfileKeys(store: KeyValueStore, slot?: string): StoredProfile[] {
+  try {
+    const raw = store.getItem(profilesKey(slot));
+    if (!raw) return [];
+    const list: unknown = JSON.parse(raw);
+    if (!Array.isArray(list)) return [];
+    return list
+      .filter((p): p is StoredProfile =>
+        typeof p === "object" && p !== null && typeof p.profileId === "string" && typeof p.key === "string" &&
+        typeof p.name === "string" && typeof p.lastUsed === "number")
+      .map((p) => ({ profileId: p.profileId, key: p.key, name: p.name, lastUsed: p.lastUsed }))
+      .sort((a, b) => b.lastUsed - a.lastUsed);
+  } catch {
+    return [];
+  }
+}
+
+/** Remembers a key the server just issued, replacing any entry for the same profile and marking it used `now`. */
+export function saveProfileKey(store: KeyValueStore, slot: string | undefined, key: ProfileKey, now: number): void {
+  try {
+    const others = loadProfileKeys(store, slot).filter((p) => p.profileId !== key.id);
+    const next: StoredProfile[] = [{ profileId: key.id, key: key.key, name: key.name, lastUsed: now }, ...others];
+    store.setItem(profilesKey(slot), JSON.stringify(next));
+  } catch {
+    // Storage blocked: the phone just won't remember who it is next week.
   }
 }
 

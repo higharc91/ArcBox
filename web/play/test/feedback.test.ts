@@ -257,7 +257,7 @@ describe("feedback", () => {
     const lobby = structuredClone(lobbyFixture) as LobbyState;
     const results: GameResults = { scores: [{ playerId: "p1", name: "Ann", score: 3 }], message: null };
     const { container: screens } = render(h(FeedbackContext.Provider, { value: fb }, h("div", null,
-      h(Lobby, { lobby, me: lobby.players[0]!.id, onSelectGame: () => {}, onStart: () => {} }),
+      h(Lobby, { lobby, me: lobby.players[0]!.id, onSelectGame: () => {}, onStart: () => {}, onSelectCampaign: () => {}, onCreateCampaign: () => {}, onClaim: () => {} }),
       h(Results, { results, me: "p1", onBack: () => {} }))));
     expect(screens.querySelector(".lobby-head .mute-toggle")).not.toBeNull();
     expect(screens.querySelector(".results-head .mute-toggle")).not.toBeNull();

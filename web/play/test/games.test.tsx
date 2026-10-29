@@ -45,8 +45,8 @@ describe("game modules", () => {
   it("Session_loads_module_when_lobby_selects_a_game", async () => {
     const t = new FakeTransport();
     const s = new Session(t, new MapStore());
-    t.responders.Join = () => ({ code: "BCDF", playerId: "p1", secret: "s" });
-    await s.join("bcdf", "ALEX");
+    t.responders.TakeSeat = () => ({ code: "BCDF", playerId: "p1", secret: "s" });
+    await s.joinNew("ALEX", "bcdf");
     expect(moduleFor("redline")).toBeUndefined();
 
     t.fire("LobbyChanged", { ...(structuredClone(lobbyFixture) as LobbyState), selectedGameId: "redline" });
@@ -57,8 +57,8 @@ describe("game modules", () => {
   it("Session does not load anything while no game is selected", async () => {
     const t = new FakeTransport();
     const s = new Session(t, new MapStore());
-    t.responders.Join = () => ({ code: "BCDF", playerId: "p1", secret: "s" });
-    await s.join("bcdf", "ALEX");
+    t.responders.TakeSeat = () => ({ code: "BCDF", playerId: "p1", secret: "s" });
+    await s.joinNew("ALEX", "bcdf");
     t.fire("LobbyChanged", { ...(structuredClone(lobbyFixture) as LobbyState), selectedGameId: null });
     await flush();
     expect(moduleFor("redline")).toBeUndefined();

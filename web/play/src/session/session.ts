@@ -8,10 +8,15 @@ import {
   type JoinResult,
   type LobbyState,
   type PlayerId,
+  type ProfileKey,
+  type RoomPeek,
+  type SeatOffer,
+  type SeatRef,
+  type TakeSeatRequest,
 } from "../protocol";
 import { loadModule } from "../games/registry";
 import { backoffDelays } from "./backoff";
-import { clearSeat, loadSeat, saveSeat, type KeyValueStore } from "./storage";
+import { clearSeat, loadProfileKeys, loadSeat, saveProfileKey, saveSeat, type KeyValueStore, type StoredProfile } from "./storage";
 import type { Transport } from "./transport";
 
 export type { Transport } from "./transport";
@@ -19,6 +24,7 @@ export type { Transport } from "./transport";
 export type SessionState =
   | { screen: "join"; code?: string; name?: string; error?: string; busy?: boolean }
   | { screen: "connecting" }
+  | { screen: "pick"; peek: RoomPeek; showAll?: boolean; error?: string; busy?: boolean }
   | { screen: "lobby"; lobby: LobbyState; me: PlayerId; error?: string }
   | { screen: "game"; view: ControllerView; lobby: LobbyState; me: PlayerId }
   | { screen: "results"; results: GameResults; lobby: LobbyState; me: PlayerId }
@@ -26,6 +32,7 @@ export type SessionState =
 
 const OFFLINE = "Can't reach the server. Check your connection and try again.";
 const KICKED = "You were removed from the room.";
+const IN_PROGRESS = "Game in progress, join after this round.";
 
 /** SignalR wraps a server HubException as "An unexpected error occurred invoking 'X' on the server. HubException: <message>". */
 const HUB_PREFIX = "HubException: ";
@@ -81,28 +88,81 @@ export class Session {
     return () => this.listeners.delete(fn);
   }
 
-  /** Join a room by code with a display name; on failure the join form keeps its values and shows the server's message. */
-  async join(code: string, name: string): Promise<void> {
+  /**
+   * Ask the room what this phone may take (`Peek`, with the profile keys it holds) and show the picker, or the name box
+   * when there is nothing to pick. `error` is carried onto whichever screen results (a rejoin that just failed).
+   */
+  async open(code: string, error?: string): Promise<void> {
     code = code.trim().toUpperCase();
-    name = name.trim();
     this.reset();
-    this.set({ screen: "join", code, name, busy: true });
+    this.code = code;
+    this.set({ screen: "connecting" });
     try {
       if (!this.transport.connected) await this.transport.start();
-      const result = await this.transport.invoke<JoinResult>("Join", code, name);
-      this.code = result.code;
-      this.me = result.playerId;
-      saveSeat(this.store, result.code, this.slot, { playerId: result.playerId, secret: result.secret, name });
-      if (this.lobby) this.render();
-      else this.set({ screen: "connecting" });
+      const peek = await this.transport.invoke<RoomPeek>("Peek", { code, profileKeys: this.keys() });
+      this.showPeek(code, peek, error);
     } catch (err) {
-      this.set({ screen: "join", code, name, error: serverMessage(err) });
+      this.set({ screen: "join", code, error: serverMessage(err) });
     }
   }
 
+  /** From "Not you? Show everyone": the full list of offers instead of the remembered one. */
+  showEveryone(): void {
+    if (this.state.screen === "pick") this.set({ ...this.state, showAll: true });
+  }
+
+  /** Take an offered seat: an offline seat, or a campaign member who has none yet. */
+  async takeSeat(seat: SeatRef): Promise<void> {
+    const from = this.state;
+    const code = this.code ?? (from.screen === "pick" ? from.peek.code : undefined);
+    if (!code) return;
+    // Exactly one of slot / member goes on the wire.
+    const ref: SeatRef = seat.slot ? { slot: seat.slot } : { member: seat.member };
+    const same = (o: SeatOffer | null) => o !== null && (o.ref.slot ?? null) === (seat.slot ?? null) && (o.ref.member ?? null) === (seat.member ?? null);
+    const offered = from.screen === "pick" ? [...from.peek.offers, from.peek.suggested].find(same) : undefined;
+    await this.enter({ code, seat: ref }, offered?.card.title ?? "", from, true);
+  }
+
   /**
-   * Rejoin a room this browser already has a seat in. Returns false (and shows Join with the code) when there is
-   * no seat or the server no longer knows it; true while the seat is still live, even if the network is down for now.
+   * "I'm new here" or the plain name box: TakeSeat under a new name. `code` is for the Join form, where the player typed
+   * it; from the picker the room is already known. On failure the form keeps its values and shows the server's message.
+   */
+  async joinNew(name: string, code?: string): Promise<void> {
+    const from = this.state;
+    code = (code ?? this.code ?? (from.screen === "pick" ? from.peek.code : from.screen === "join" ? from.code : undefined))?.trim().toUpperCase();
+    if (!code) return;
+    name = name.trim();
+    await this.enter({ code, newName: name }, name, from, false);
+  }
+
+  /** Seated in a campaign lobby: say which member you are. A null member is "I'm new here", under `newName` when given. */
+  async claimMember(member: SeatRef | null, newName?: string): Promise<void> {
+    const request: { member: SeatRef | null; profileKeys: string[]; newName?: string } = {
+      member: member && (member.slot ? { slot: member.slot } : { member: member.member }),
+      profileKeys: this.keys(),
+    };
+    if (member === null && newName?.trim()) request.newName = newName.trim();
+    await this.lobbyCall("ClaimMember", request, (key: ProfileKey | null) => this.remember(key));
+  }
+
+  selectCampaign(id: string): Promise<void> {
+    return this.lobbyCall("SelectCampaign", id);
+  }
+
+  /** VIP only: a new campaign under this name, which makes this player's profile its owner. */
+  createCampaign(name: string): Promise<void> {
+    return this.lobbyCall("CreateCampaign", name.trim(), (key: ProfileKey | null) => this.remember(key));
+  }
+
+  /** The profile keys this phone holds, most recently used first (the picker shows their names). */
+  profiles(): StoredProfile[] {
+    return loadProfileKeys(this.store, this.slot);
+  }
+
+  /**
+   * Rejoin a room this browser already has a seat in. Returns false when there is no seat (and shows Join with the
+   * code), or when the server no longer knows it (the stale seat is cleared and the picker is shown, once); true while
+   * the seat is still live, even if the network is down for now.
    */
   async resume(code: string): Promise<boolean> {
     code = code.trim().toUpperCase();
@@ -177,10 +237,10 @@ export class Session {
       return true;
     } catch (err) {
       if (isServerError(err)) {
-        // The room is gone or no longer knows this seat: start over from the Join form.
+        // The room is gone, or no longer knows this seat (someone took it): forget it and ask the room who this phone
+        // can be. Never Rejoin again: with the seat cleared nothing here retries.
         clearSeat(this.store, code, this.slot);
-        this.reset();
-        this.set({ screen: "join", code, name: seat.name, error: serverMessage(err) });
+        await this.open(code, serverMessage(err));
         return false;
       }
       this.set({ screen: "connecting" });
@@ -209,10 +269,68 @@ export class Session {
     this.retryTimer = null;
   }
 
-  private async lobbyCall(method: string, ...args: unknown[]): Promise<void> {
+  private keys(): string[] {
+    return this.profiles().map((p) => p.key);
+  }
+
+  private remember(key: ProfileKey | null | undefined): void {
+    if (key) saveProfileKey(this.store, this.slot, key, Date.now());
+  }
+
+  /** Where `Peek` says to go: the picker, or the name box when there is nothing to pick from. */
+  private showPeek(code: string, peek: RoomPeek, error?: string, showAll?: boolean): void {
+    if (!peek || !Array.isArray(peek.offers)) return this.set({ screen: "join", code, ...(error ? { error } : {}) });
+    if (peek.inGame && peek.offers.length === 0 && !peek.suggested) {
+      return this.set({ screen: "join", code: peek.code, error: error ?? IN_PROGRESS });
+    }
+    if (peek.suggested || peek.campaignName != null || (peek.inGame && peek.offers.length > 0)) {
+      const state: SessionState = { screen: "pick", peek };
+      if (showAll) state.showAll = true;
+      if (error) state.error = error;
+      return this.set(state);
+    }
+    this.set({ screen: "join", code: peek.code, ...(error ? { error } : {}) });
+  }
+
+  /** TakeSeat, then wait for the lobby: shared by taking an offered seat and joining under a new name. */
+  private async enter(request: Omit<TakeSeatRequest, "profileKeys">, name: string, from: SessionState, refresh: boolean): Promise<void> {
+    const { code } = request;
+    const full: TakeSeatRequest = { ...request, profileKeys: this.keys() };
+    const peek = from.screen === "pick" ? from.peek : null;
+    this.reset();
+    this.code = code;
+    this.set(peek ? { screen: "pick", peek, ...(from.screen === "pick" && from.showAll ? { showAll: true } : {}), busy: true } : { screen: "join", code, name, busy: true });
+    try {
+      if (!this.transport.connected) await this.transport.start();
+      const result = await this.transport.invoke<JoinResult>("TakeSeat", full);
+      this.code = result.code;
+      this.me = result.playerId;
+      saveSeat(this.store, result.code, this.slot, { playerId: result.playerId, secret: result.secret, name: result.profile?.name ?? name });
+      this.remember(result.profile);
+      if (this.lobby) this.render();
+      else this.set({ screen: "connecting" });
+    } catch (err) {
+      const message = serverMessage(err);
+      if (peek && refresh && isServerError(err)) {
+        // The offer may be stale (someone took the seat first): show what is on offer now, with the reason.
+        try {
+          return this.showPeek(code, await this.transport.invoke<RoomPeek>("Peek", { code, profileKeys: this.keys() }), message,
+            from.screen === "pick" && from.showAll);
+        } catch {
+          // Fall through to the old list.
+        }
+      }
+      if (peek) this.set({ screen: "pick", peek, ...(from.screen === "pick" && from.showAll ? { showAll: true } : {}), error: message });
+      else this.set({ screen: "join", code, name, error: message });
+    }
+  }
+
+  private async lobbyCall<T = unknown>(method: string, arg?: unknown, onResult?: (result: T) => void): Promise<void> {
     try {
       this.lobbyError = undefined;
-      await this.transport.invoke(method, ...args);
+      const args = arg === undefined ? [] : [arg];
+      const result = await this.transport.invoke<T>(method, ...args);
+      onResult?.(result);
     } catch (err) {
       this.lobbyError = serverMessage(err);
       this.render();

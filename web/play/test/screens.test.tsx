@@ -1,9 +1,10 @@
 import { beforeAll, afterEach, describe, expect, it, vi } from "vitest";
 import { loadModule } from "../src/games/registry";
 import { cleanup, fireEvent, render, screen } from "@testing-library/preact";
-import type { ButtonsView, ChoiceView, GameResults, LobbyState, WaitView } from "../src/protocol";
+import type { ButtonsView, ChoiceView, GameResults, LobbyState, RoomPeek, SeatOffer, WaitView } from "../src/protocol";
 import { Join } from "../src/screens/Join";
 import { Lobby } from "../src/screens/Lobby";
+import { Pick } from "../src/screens/Pick";
 import { Results } from "../src/screens/Results";
 import { Closed } from "../src/screens/Closed";
 import { App, boot } from "../src/App";
@@ -68,7 +69,7 @@ describe("Join", () => {
 });
 
 describe("Lobby", () => {
-  const props = { onSelectGame: vi.fn(), onStart: vi.fn() };
+  const props = { onSelectGame: vi.fn(), onStart: vi.fn(), onSelectCampaign: vi.fn(), onCreateCampaign: vi.fn(), onClaim: vi.fn() };
 
   it("Lobby shows start only for VIP and only when canStart", () => {
     const { rerender } = render(<Lobby lobby={lobby({ canStart: true })} me="p1" {...props} />);
@@ -286,7 +287,8 @@ describe("App", () => {
     const t = new FakeTransport();
     const store = new MapStore();
     const session = new Session(t, store);
-    await boot(session, store, "?room=bcdf");
+    await boot(session, store, "?room=bcdf"); // no seat: Peek (the fake answers nothing, so the name box)
+    expect(t.methods()).toEqual(["Peek"]);
     expect(session.state).toEqual({ screen: "join", code: "BCDF" });
 
     saveSeat(store, "BCDF", "2", { playerId: "p1", secret: "s", name: "ALEX" });
@@ -300,12 +302,12 @@ describe("App", () => {
     const t = new FakeTransport();
     const store = new MapStore();
     const session = new Session(t, store, "1");
-    t.responders.Join = () => {
+    t.responders.TakeSeat = () => {
       t.fire("LobbyChanged", lobby());
       return { code: "BCDF", playerId: "p1", secret: "s" };
     };
     await boot(session, store, "?room=BCDF&slot=1&devName=P1");
-    expect(t.invokes[0]).toEqual({ method: "Join", args: ["BCDF", "P1"] });
+    expect(t.invokes[0]).toEqual({ method: "TakeSeat", args: [{ code: "BCDF", newName: "P1", profileKeys: [] }] });
     expect(loadSeat(store, "BCDF", "1")).not.toBeNull();
   });
 
@@ -315,7 +317,7 @@ describe("App", () => {
     const { container } = render(<App session={session} />);
     expect(screen.getByLabelText(/Room code/)).toBeTruthy();
 
-    t.responders.Join = () => {
+    t.responders.TakeSeat = () => {
       t.fire("LobbyChanged", lobby({ selectedGameId: "redline", inGame: true }));
       return { code: "BCDF", playerId: "p1", secret: "s" };
     };
@@ -340,12 +342,224 @@ describe("App", () => {
     const t = new FakeTransport();
     const session = new Session(t, new MapStore());
     render(<App session={session} />);
-    t.responders.Join = () => { throw hubError("Join", "Game in progress, join after this round."); };
+    t.responders.TakeSeat = () => { throw hubError("TakeSeat", "Game in progress, join after this round."); };
     fireEvent.input(input(/Room code/), { target: { value: "BCDF" } });
     fireEvent.input(input(/Your name/), { target: { value: "ALEX" } });
     fireEvent.click(button(/Join/));
     await flush();
     expect(screen.getByRole("alert").textContent).toBe("Game in progress, join after this round.");
     expect(input(/Your name/).value).toBe("ALEX");
+  });
+});
+
+// ---------------------------------------------------------------- the picker (Task 13)
+
+const offer = (title: string, over: Partial<SeatOffer> = {}): SeatOffer => ({
+  ref: { slot: null, member: `pr_${title}` },
+  card: { title, subtitle: null, color: null, portrait: null },
+  absent: false,
+  ...over,
+});
+const peek = (over: Partial<RoomPeek> = {}): RoomPeek => ({
+  code: "KQZT", gameId: "tactics", campaignName: "Embers of the Vale", inGame: false,
+  offers: [], suggested: null, canJoinNew: true, ...over,
+});
+const pickProps = () => ({ onTake: vi.fn(), onNew: vi.fn(), onShowAll: vi.fn() });
+
+describe("Pick", () => {
+  it("Suggested_renders_continue_as", () => {
+    const p = pickProps();
+    const aldric = offer("Aldric", { card: { title: "Aldric", subtitle: "Dwarf Cleric · Lv 3", color: "#c0a060", portrait: null } });
+    render(<Pick peek={peek({ offers: [aldric, offer("Kara")], suggested: aldric })} profiles={[{ profileId: "pr_Aldric", key: "k", name: "Dave", lastUsed: 1 }]} {...p} />);
+    expect(screen.getByText("Embers of the Vale")).toBeTruthy();
+    expect(screen.getByText("Aldric · Dwarf Cleric · Lv 3")).toBeTruthy();
+    expect(screen.queryByText("Kara")).toBeNull(); // the list waits behind "Not you?"
+    fireEvent.click(button(/Continue as Dave/));
+    expect(p.onTake).toHaveBeenCalledWith(aldric.ref);
+  });
+
+  it("Suggested falls back to the card title when no stored profile matches", () => {
+    render(<Pick peek={peek({ suggested: offer("Aldric") })} {...pickProps()} />);
+    expect(button(/Continue as Aldric/)).toBeTruthy();
+  });
+
+  it("Not_you_shows_grid", () => {
+    const p = pickProps();
+    const aldric = offer("Aldric");
+    const { rerender } = render(<Pick peek={peek({ offers: [aldric, offer("Kara")], suggested: aldric })} {...p} />);
+    fireEvent.click(button(/Not you\? Show everyone/));
+    expect(p.onShowAll).toHaveBeenCalled();
+
+    rerender(<Pick peek={peek({ offers: [aldric, offer("Kara")], suggested: aldric })} showAll {...p} />);
+    expect(screen.getByText("Who are you?")).toBeTruthy();
+    expect(button(/Kara/)).toBeTruthy();
+    expect(screen.queryByRole("button", { name: /Continue as/ })).toBeNull();
+    fireEvent.click(button(/Kara/));
+    expect(p.onTake).toHaveBeenCalledWith(offer("Kara").ref);
+  });
+
+  it("Grid_marks_unavailable_and_offers_new", () => {
+    const p = pickProps();
+    render(<Pick peek={peek({ offers: [offer("Kara"), offer("Wren")] })} {...p} />);
+    expect(screen.getByText("Who are you?")).toBeTruthy();
+    expect(screen.getByText(/Characters already being played can't be picked\. New players can join between games\./)).toBeTruthy();
+
+    // "I'm new here" opens a name box that goes to onNew, trimmed, 1–12 characters.
+    fireEvent.click(button(/I'm new here/));
+    expect(button(/^Join$/).disabled).toBe(true);
+    fireEvent.input(input(/Your name/), { target: { value: "ThirteenChars" } });
+    expect(button(/^Join$/).disabled).toBe(true);
+    fireEvent.input(input(/Your name/), { target: { value: "  Dan " } });
+    fireEvent.click(button(/^Join$/));
+    expect(p.onNew).toHaveBeenCalledWith("Dan");
+    expect(p.onTake).not.toHaveBeenCalled();
+  });
+
+  it("no new-here tile when the room doesn't take new players", () => {
+    render(<Pick peek={peek({ offers: [offer("Kara")], canJoinNew: false })} {...pickProps()} />);
+    expect(screen.queryByRole("button", { name: /I'm new here/ })).toBeNull();
+  });
+
+  it("Mid_game_lists_offline_seats_with_AI_tag", () => {
+    const p = pickProps();
+    const aldric = offer("Aldric", { absent: true, card: { title: "Aldric", subtitle: "Dwarf Cleric", color: null, portrait: null } });
+    const wren = offer("Wren");
+    const { container } = render(<Pick peek={peek({ inGame: true, canJoinNew: false, offers: [aldric, wren] })} {...p} />);
+    expect(screen.getByText("Pick your seat")).toBeTruthy();
+    expect(screen.getByText("These characters have no phone connected")).toBeTruthy();
+    expect(screen.getByText(/ROOM KQZT · IN PROGRESS/)).toBeTruthy();
+    const tags = [...container.querySelectorAll(".tag")].map((t) => t.textContent);
+    expect(tags).toEqual(["AI", "OFFLINE"]);
+    expect(screen.getByText("The AI is playing Aldric")).toBeTruthy();
+
+    // The first seat is selected; pick another, then confirm.
+    expect(button(/I'm Aldric/)).toBeTruthy();
+    fireEvent.click(button(/^Wren/));
+    expect(button(/^Wren/).getAttribute("aria-pressed")).toBe("true");
+    fireEvent.click(button(/I'm Wren/));
+    expect(p.onTake).toHaveBeenCalledWith(wren.ref);
+  });
+
+  it("shows the error and disables taps while busy", () => {
+    render(<Pick peek={peek({ offers: [offer("Kara")] })} error="Someone's already playing as Aldric." busy {...pickProps()} />);
+    expect(screen.getByRole("alert").textContent).toBe("Someone's already playing as Aldric.");
+    expect(button(/Kara/).disabled).toBe(true);
+  });
+});
+
+describe("Lobby: campaigns", () => {
+  const props = { onSelectGame: vi.fn(), onStart: vi.fn(), onSelectCampaign: vi.fn(), onCreateCampaign: vi.fn(), onClaim: vi.fn() };
+  const flags = { resumesAfterRestart: false };
+  const games = [{ id: "tactics", name: "Tactics", description: "Fight", minPlayers: 1, maxPlayers: 8, usesCampaigns: true, ...flags }];
+  const summary = (id: string, name: string, members: number) => ({ id, code: "BCDF", name, members, updatedUtc: "2026-10-29T00:00:00Z" });
+  const entry = (profile: string, title: string, over = {}) => ({
+    profile, card: { title, subtitle: "Cleric", color: null, portrait: null }, seatedAs: null, connected: false, ...over,
+  });
+  const campaignLobby = (over: Partial<LobbyState> = {}) =>
+    lobby({ games, selectedGameId: "tactics", campaigns: [summary("c1", "Embers of the Vale", 5), summary("c2", "Sunken Keep", 1)], ...over });
+
+  it("VIP_sees_campaigns_and_new_campaign", () => {
+    render(<Lobby lobby={campaignLobby()} me="p1" {...props} />);
+    expect(button(/Embers of the Vale/).textContent).toContain("5 members");
+    expect(button(/Sunken Keep/).textContent).toContain("1 member");
+    fireEvent.click(button(/Sunken Keep/));
+    expect(props.onSelectCampaign).toHaveBeenCalledWith("c2");
+
+    fireEvent.click(button(/New campaign/));
+    expect(button(/^Create$/).disabled).toBe(true);
+    fireEvent.input(input(/Campaign name/), { target: { value: "x".repeat(33) } });
+    expect(button(/^Create$/).disabled).toBe(true); // 1–32 characters
+    fireEvent.input(input(/Campaign name/), { target: { value: "  Ashes  " } });
+    fireEvent.click(button(/^Create$/));
+    expect(props.onCreateCampaign).toHaveBeenCalledWith("Ashes");
+  });
+
+  it("the selected campaign is marked, and non-VIPs just see its name", () => {
+    const withCampaign = campaignLobby({ campaign: { id: "c1", code: "EMBR", name: "Embers of the Vale", roster: [] } });
+    const { rerender } = render(<Lobby lobby={withCampaign} me="p1" {...props} />);
+    expect(button(/Embers of the Vale/).getAttribute("aria-pressed")).toBe("true");
+    rerender(<Lobby lobby={withCampaign} me="p2" {...props} />);
+    expect(screen.queryByRole("button", { name: /New campaign/ })).toBeNull();
+    expect(screen.getByText("Embers of the Vale")).toBeTruthy();
+  });
+
+  it("Non_campaign_lobby_keeps_name_box", () => {
+    // A game without campaigns shows no campaign step in the lobby...
+    render(<Lobby lobby={lobby({ selectedGameId: "counter" })} me="p1" {...props} />);
+    expect(screen.queryByRole("button", { name: /New campaign/ })).toBeNull();
+    cleanup();
+
+    // ...and joining one without a campaign is the name box, not the picker.
+    const t = new FakeTransport();
+    t.responders.Peek = () => peek({ campaignName: null, offers: [] });
+    const session = new Session(t, new MapStore());
+    render(<App session={session} />);
+    return session.open("bcdf").then(async () => {
+      await flush();
+      expect(input(/Your name/)).toBeTruthy();
+      expect(input(/Room code/).value).toBe("KQZT");
+      expect(screen.queryByText("Who are you?")).toBeNull();
+    });
+  });
+
+  it("Lobby_unmatched_shows_who_are_you_in_campaign", () => {
+    const roster = [
+      entry("pr_kara", "Kara"),
+      entry("pr_wren", "Wren", { seatedAs: "p9" }), // an offline seat
+      entry("pr_ilyra", "Ilyra", { seatedAs: "p8", connected: true }), // being played: not offered
+    ];
+    const l = campaignLobby({ campaign: { id: "c1", code: "EMBR", name: "Embers of the Vale", roster } });
+    render(<Lobby lobby={l} me="p2" {...props} />);
+    expect(screen.getByText("Who are you in Embers of the Vale?")).toBeTruthy();
+    expect(screen.queryByRole("button", { name: /Ilyra/ })).toBeNull();
+    fireEvent.click(button(/Kara/));
+    expect(props.onClaim).toHaveBeenLastCalledWith({ member: "pr_kara" });
+    fireEvent.click(button(/Wren/));
+    expect(props.onClaim).toHaveBeenLastCalledWith({ slot: "p9" });
+
+    // "I'm new here": no name asks for the seat's own name; a typed name is passed along (R15).
+    fireEvent.click(button(/^I'm new here$/));
+    fireEvent.click(button(/^I'm new here$/));
+    expect(props.onClaim).toHaveBeenLastCalledWith(null, undefined);
+    fireEvent.input(input(/Your name/), { target: { value: " Dan " } });
+    fireEvent.click(button(/^I'm new here$/));
+    expect(props.onClaim).toHaveBeenLastCalledWith(null, "Dan");
+  });
+
+  it("a phone already matched to a member isn't asked, and nobody is asked mid-game", () => {
+    const roster = [entry("pr_kara", "Kara")];
+    const players = [
+      { id: "p1", name: "ALEX", isVip: true, connected: true, profile: "pr_kara" },
+      { id: "p2", name: "MO", isVip: false, connected: true },
+    ];
+    const l = campaignLobby({ players, campaign: { id: "c1", code: "EMBR", name: "Embers of the Vale", roster } });
+    const { rerender } = render(<Lobby lobby={l} me="p1" {...props} />);
+    expect(screen.queryByText(/Who are you in/)).toBeNull();
+    rerender(<Lobby lobby={l} me="p2" {...props} />);
+    expect(screen.getByText(/Who are you in/)).toBeTruthy();
+    rerender(<Lobby lobby={{ ...l, inGame: true }} me="p2" {...props} />);
+    expect(screen.queryByText(/Who are you in/)).toBeNull();
+  });
+});
+
+describe("App: the picker end to end", () => {
+  it("a remembered phone takes its seat with one tap", async () => {
+    const t = new FakeTransport();
+    const store = new MapStore();
+    store.setItem("arcbox:profiles", JSON.stringify([{ profileId: "pr_Aldric", key: "k-dave", name: "Dave", lastUsed: 5 }]));
+    const aldric = offer("Aldric");
+    t.responders.Peek = () => peek({ offers: [aldric], suggested: aldric });
+    t.responders.TakeSeat = () => {
+      t.fire("LobbyChanged", lobby());
+      return { code: "KQZT", playerId: "p1", secret: "s" };
+    };
+    const session = new Session(t, store);
+    const { container } = render(<App session={session} />);
+    await boot(session, store, "?room=kqzt");
+    await flush();
+    fireEvent.click(button(/Continue as Dave/));
+    await flush();
+    expect(t.invokes.at(-1)).toEqual({ method: "TakeSeat", args: [{ code: "KQZT", seat: { member: "pr_Aldric" }, profileKeys: ["k-dave"] }] });
+    expect(container.querySelector(".lobby")).not.toBeNull();
   });
 });

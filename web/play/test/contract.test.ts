@@ -192,3 +192,20 @@ describe("contract fixtures", () => {
     });
   });
 });
+
+describe("manifest leniency (a stale server or phone must not break lobby parsing)", () => {
+  const withGames = (games: unknown[]) => ({ ...fixture("lobby"), games });
+  const manifest = { id: "counter", name: "Counter", description: "Tap", minPlayers: 1, maxPlayers: 8 };
+
+  it("accepts a manifest that predates usesCampaigns and resumesAfterRestart", () => {
+    expect(isLobbyState(withGames([manifest]))).toBe(true);
+    expect(isLobbyState(withGames([{ ...manifest, usesCampaigns: true }]))).toBe(true);
+    expect(isLobbyState(withGames([{ ...manifest, resumesAfterRestart: false }]))).toBe(true);
+  });
+
+  it("rejects a manifest whose flags are present but not booleans", () => {
+    expect(isLobbyState(withGames([{ ...manifest, usesCampaigns: "yes" }]))).toBe(false);
+    expect(isLobbyState(withGames([{ ...manifest, resumesAfterRestart: 1 }]))).toBe(false);
+  });
+});
+
