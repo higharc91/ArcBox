@@ -1,0 +1,65 @@
+{
+  "code": "BCDF",
+  "players": [
+    {
+      "id": "p1",
+      "name": "Dave",
+      "isVip": true,
+      "connected": true,
+      "profile": "pr_AbCdEfGhIjKlMnOp"
+    }
+  ],
+  "selectedGameId": "tactics",
+  "games": [
+    {
+      "id": "tactics",
+      "name": "Tactics",
+      "description": "Party tactics",
+      "minPlayers": 1,
+      "maxPlayers": 8,
+      "usesCampaigns": true,
+      "resumesAfterRestart": true
+    }
+  ],
+  "inGame": false,
+  "canStart": false,
+  "lastResults": null,
+  "campaign": {
+    "id": "c1",
+    "code": "KQZT",
+    "name": "Embers of the Vale",
+    "roster": [
+      {
+        "profile": "pr_AbCdEfGhIjKlMnOp",
+        "card": {
+          "title": "Aldric",
+          "subtitle": "Dwarf Cleric · Lv 3",
+          "color": null,
+          "portrait": null
+        },
+        "seatedAs": "p1",
+        "connected": true
+      },
+      {
+        "profile": "pr_QrStUvWxYz012345",
+        "card": {
+          "title": "Mira",
+          "subtitle": null,
+          "color": "#40a0ff",
+          "portrait": null
+        },
+        "seatedAs": null,
+        "connected": false
+      }
+    ]
+  },
+  "campaigns": [
+    {
+      "id": "c1",
+      "code": "KQZT",
+      "name": "Embers of the Vale",
+      "members": 2,
+      "updatedUtc": "2026-01-01T00:00:00+00:00"
+    }
+  ]
+}

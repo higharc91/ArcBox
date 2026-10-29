@@ -1,0 +1,20 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "targetPicker",
+  "data": {
+    "cursor": {
+      "x": 2,
+      "y": 3
+    },
+    "targets": [
+      {
+        "id": "orc1",
+        "hit": 75
+      }
+    ]
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:00:00+00:00",
+  "header": "H"
+}

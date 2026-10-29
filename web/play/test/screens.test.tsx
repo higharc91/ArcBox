@@ -91,10 +91,11 @@ describe("Lobby", () => {
   });
 
   it("VIP picks a game from cards filtered by player count", () => {
+    const flags = { usesCampaigns: false, resumesAfterRestart: false };
     const games = [
-      { id: "counter", name: "Counter", description: "Tap", minPlayers: 1, maxPlayers: 8 },
-      { id: "solo", name: "Solo", description: "One only", minPlayers: 1, maxPlayers: 1 },
-      { id: "redline", name: "REDLINE", description: "Race", minPlayers: 2, maxPlayers: 8 },
+      { id: "counter", name: "Counter", description: "Tap", minPlayers: 1, maxPlayers: 8, ...flags },
+      { id: "solo", name: "Solo", description: "One only", minPlayers: 1, maxPlayers: 1, ...flags },
+      { id: "redline", name: "REDLINE", description: "Race", minPlayers: 2, maxPlayers: 8, ...flags },
     ];
     render(<Lobby lobby={lobby({ games, selectedGameId: "counter" })} me="p1" {...props} />);
     expect(screen.queryByRole("button", { name: /Solo/ })).toBeNull();

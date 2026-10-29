@@ -1,0 +1,48 @@
+{
+  "code": "BCDF",
+  "gameId": "tactics",
+  "campaignName": "Embers of the Vale",
+  "inGame": false,
+  "offers": [
+    {
+      "ref": {
+        "slot": null,
+        "member": "pr_AbCdEfGhIjKlMnOp"
+      },
+      "card": {
+        "title": "Aldric",
+        "subtitle": "Dwarf Cleric · Lv 3",
+        "color": "#c0a060",
+        "portrait": "/content/tactics/portraits/h1/aldric.png"
+      },
+      "absent": false
+    },
+    {
+      "ref": {
+        "slot": "p3",
+        "member": null
+      },
+      "card": {
+        "title": "Mira",
+        "subtitle": null,
+        "color": null,
+        "portrait": null
+      },
+      "absent": true
+    }
+  ],
+  "suggested": {
+    "ref": {
+      "slot": null,
+      "member": "pr_AbCdEfGhIjKlMnOp"
+    },
+    "card": {
+      "title": "Aldric",
+      "subtitle": "Dwarf Cleric · Lv 3",
+      "color": "#c0a060",
+      "portrait": "/content/tactics/portraits/h1/aldric.png"
+    },
+    "absent": false
+  },
+  "canJoinNew": true
+}

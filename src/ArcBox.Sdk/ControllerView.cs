@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace ArcBox.Sdk;
@@ -23,6 +24,7 @@ public sealed record Option(
 [JsonDerivedType(typeof(ButtonsView), "buttons")]
 [JsonDerivedType(typeof(DrawView), "draw")]
 [JsonDerivedType(typeof(ShakeView), "shake")]
+[JsonDerivedType(typeof(CustomView), "custom")]
 public abstract record ControllerView
 {
     public string ViewId { get; init; } = "";          // assigned by the server; games leave it empty
@@ -44,3 +46,13 @@ public sealed record DrawView(string Prompt, IReadOnlyList<string>? Colors = nul
 /// </summary>
 /// <param name="Color">An accent for the widget (<c>#rrggbb</c>), or null for the default.</param>
 public sealed record ShakeView(string Prompt, string? Color = null, bool CanFire = false, double InitialCharge = 0) : ControllerView;
+
+/// <summary>
+/// A screen defined by a game module on the phone (web/play/src/games/), for games whose screens don't fit the generic
+/// widgets. A phone that doesn't know the module or screen shows a "needs a newer app" card. Keep a view unchanged while
+/// it should accept repeated input (a d-pad cursor); the phone renders the cursor locally.
+/// </summary>
+/// <param name="Module">A game module in web/play/src/games/ (normally the game id).</param>
+/// <param name="Screen">A screen that module exports.</param>
+/// <param name="Data">Screen-specific JSON. Kept under 64 KB (logged at Warning above that).</param>
+public sealed record CustomView(string Module, string Screen, JsonElement Data) : ControllerView;

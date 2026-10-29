@@ -1,4 +1,5 @@
 using System.Text.Json;
+using ArcBox.Sdk.Campaigns;
 
 namespace ArcBox.Sdk.Testing;
 
@@ -7,14 +8,20 @@ public sealed class GameHarness<TGame> where TGame : IGame
     private readonly Dictionary<string, DateTimeOffset> _timers = new();
     private readonly HarnessGameContext _context;
 
-    public GameHarness(TGame game, int playerCount = 4, int seed = 1)
+    /// <param name="profiles">The profile of each player by index (null entries allowed); omitted, no player has one.</param>
+    public GameHarness(TGame game, int playerCount = 4, int seed = 1, IReadOnlyList<ProfileId?>? profiles = null)
     {
+        if (profiles is not null && profiles.Count > playerCount)
+        {
+            throw new ArgumentException($"{profiles.Count} profiles for {playerCount} players.", nameof(profiles));
+        }
+
         Game = game;
         Now = new DateTimeOffset(2026, 1, 1, 0, 0, 0, TimeSpan.Zero);
         var players = new List<Player>(playerCount);
         for (int i = 1; i <= playerCount; i++)
         {
-            players.Add(new Player(new PlayerId($"p{i}"), $"Player{i}", IsVip: i == 1));
+            players.Add(new Player(new PlayerId($"p{i}"), $"Player{i}", IsVip: i == 1, Profile: profiles is not null && i <= profiles.Count ? profiles[i - 1] : null));
         }
         Players = players;
         _context = new HarnessGameContext(this, seed);
@@ -30,6 +37,39 @@ public sealed class GameHarness<TGame> where TGame : IGame
     public void Start()
     {
         Game.Start(_context, Players);
+    }
+
+    /// <summary>Starts a campaign game with the lease, as the room does instead of <see cref="Start"/>.</summary>
+    public void StartCampaign(ICampaignLease lease)
+    {
+        if (Game is not ICampaignGame g)
+        {
+            throw new InvalidOperationException($"{typeof(TGame).Name} does not implement ICampaignGame.");
+        }
+
+        g.Start(_context, Players, lease);
+    }
+
+    /// <summary>Resumes a game after a restart, as the room does instead of <see cref="Start"/>.</summary>
+    public void Resume(ICampaignLease? lease)
+    {
+        if (Game is not IResumableGame g)
+        {
+            throw new InvalidOperationException($"{typeof(TGame).Name} does not implement IResumableGame.");
+        }
+
+        g.Resume(_context, Players, lease);
+    }
+
+    /// <summary>Delivers a signal from the TV to the game.</summary>
+    public void HostSignal(string kind, object payload)
+    {
+        if (Game is not IHostAware g)
+        {
+            throw new InvalidOperationException($"{typeof(TGame).Name} does not implement IHostAware.");
+        }
+
+        g.OnHostSignal(kind, new PlayerInput(JsonSerializer.SerializeToElement(payload, ArcJson.Options)));
     }
 
     public void Input(int playerIndex, object payload)
