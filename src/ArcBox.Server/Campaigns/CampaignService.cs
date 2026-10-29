@@ -16,6 +16,15 @@ public sealed record SnapshotInfo(long Id, long Version, string Label, DateTimeO
 
 public enum CommandStatus { Ok, NotMember, VersionConflict, SessionInProgress, Rejected }
 
+public enum RollbackStatus { Ok, NotFound, Leased, NoSuchSnapshot }
+
+/// <summary>
+/// The result of <see cref="CampaignService.Rollback"/>, decided in one step under the service lock. With
+/// <see cref="RollbackStatus.Ok"/>, <see cref="Info"/> and <see cref="View"/> are the campaign as the rollback left it
+/// (the member's view); otherwise they are null.
+/// </summary>
+public sealed record RollbackResult(RollbackStatus Status, CampaignInfo? Info = null, JsonElement? View = null);
+
 /// <summary>
 /// The result of a portal command. <see cref="View"/> is the member's view of the campaign as it is now, whatever the
 /// status, except for <see cref="CommandStatus.NotMember"/>, where it is an empty object: the game is never asked to
@@ -77,6 +86,20 @@ public sealed class CampaignService
         {
             return _byId.Values
                 .Where(c => c.Info.GameId == gameId)
+                .OrderByDescending(c => c.Updated)
+                .ThenBy(c => c.Info.Name, StringComparer.OrdinalIgnoreCase)
+                .Select(c => new CampaignSummary(c.Info.Id, c.Info.Code, c.Info.Name, c.Info.Members.Count, c.Updated))
+                .ToList();
+        }
+    }
+
+    /// <summary>The campaigns <paramref name="member"/> belongs to (as owner or player), most recently changed first.</summary>
+    public IReadOnlyList<CampaignSummary> ForMember(ProfileId member)
+    {
+        lock (_lock)
+        {
+            return _byId.Values
+                .Where(c => c.Info.Members.Any(m => m.Profile == member))
                 .OrderByDescending(c => c.Updated)
                 .ThenBy(c => c.Info.Name, StringComparer.OrdinalIgnoreCase)
                 .Select(c => new CampaignSummary(c.Info.Id, c.Info.Code, c.Info.Name, c.Info.Members.Count, c.Updated))
@@ -148,13 +171,16 @@ public sealed class CampaignService
     }
 
     /// <summary>Removes a player. Removing someone who isn't a member changes nothing.</summary>
-    /// <exception cref="CampaignException">No such campaign, or <paramref name="member"/> is its owner.</exception>
+    /// <exception cref="CampaignNotFoundException">No such campaign.</exception>
+    /// <exception cref="CampaignLeasedException">A room holds the campaign (checked under the same lock as <see cref="CheckOut"/>).</exception>
+    /// <exception cref="CampaignException"><paramref name="member"/> is the owner.</exception>
     public CampaignInfo RemoveMember(string id, ProfileId member)
     {
         var now = _time.GetUtcNow();
         lock (_lock)
         {
             var campaign = Get(id);
+            if (_leases.ContainsKey(id)) throw new CampaignLeasedException();
             if (campaign.Info.Owner == member) throw new CampaignException("The owner can't be removed.");
             if (campaign.Info.Members.All(m => m.Profile != member)) return campaign.Info;
 
@@ -203,7 +229,7 @@ public sealed class CampaignService
         lock (_lock)
         {
             var campaign = Get(id);
-            if (campaign.Info.Members.All(m => m.Profile != member)) throw new CampaignException("Campaign not found.");
+            if (campaign.Info.Members.All(m => m.Profile != member)) throw new CampaignNotFoundException();
             return ViewOf(campaign, member);
         }
     }
@@ -265,24 +291,27 @@ public sealed class CampaignService
 
     /// <summary>
     /// Restores a snapshot's document as a new version (so phones holding an older one conflict). The snapshot stays.
-    /// Returns false while a room holds the campaign, or when there is no such campaign or snapshot.
+    /// The checks and the change happen in one step under the lock, so the result says exactly why nothing changed:
+    /// no such campaign, a room holds it, or no such snapshot (checked in that order). <paramref name="member"/> is
+    /// whose view the result carries.
     /// </summary>
-    public bool Rollback(string id, long snapshotId)
+    public RollbackResult Rollback(string id, long snapshotId, ProfileId member)
     {
         var now = _time.GetUtcNow();
         lock (_lock)
         {
-            if (!_byId.TryGetValue(id, out var campaign) || _leases.ContainsKey(id)) return false;
+            if (!_byId.TryGetValue(id, out var campaign)) return new RollbackResult(RollbackStatus.NotFound);
+            if (_leases.ContainsKey(id)) return new RollbackResult(RollbackStatus.Leased);
             var snapshot = _snapshots.GetValueOrDefault(id)?.FirstOrDefault(s => s.Id == snapshotId);
-            if (snapshot is null) return false;
+            if (snapshot is null) return new RollbackResult(RollbackStatus.NoSuchSnapshot);
 
-            Replace(campaign with
+            var changed = Replace(campaign with
             {
                 Info = campaign.Info with { Version = campaign.Info.Version + 1 },
                 Document = JsonDocument.Parse(snapshot.Text).RootElement.Clone(),
                 Updated = now,
             });
-            return true;
+            return new RollbackResult(RollbackStatus.Ok, changed.Info, ViewOf(changed, member));
         }
     }
 
@@ -317,7 +346,7 @@ public sealed class CampaignService
         _idByCode.TryGetValue(RoomCodes.Normalize(code ?? string.Empty), out var id) ? _byId[id] : null;
 
     private Campaign Get(string id) =>
-        _byId.GetValueOrDefault(id) ?? throw new CampaignException("Campaign not found.");
+        _byId.GetValueOrDefault(id) ?? throw new CampaignNotFoundException();
 
     private bool TooBig(CampaignInfo info, string text)
     {
