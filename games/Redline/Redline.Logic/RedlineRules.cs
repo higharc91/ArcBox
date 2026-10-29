@@ -15,6 +15,18 @@ public sealed record AiRules
     public int ChaseGap { get; init; } = 6;
     public int ChaseRoundsLeft { get; init; } = 5;
     public double ChaseBonus { get; init; } = 0.5;
+
+    /// <summary>
+    /// Qualifying spec §2.3: the median qualifying lap, in seconds, of the slowest AI (aiSkill 0.85). The median is
+    /// linear in skill between this and <see cref="QualiFastMedian"/>, clamped at the ends.
+    /// </summary>
+    public double QualiSlowMedian { get; init; } = 3.6;
+
+    /// <summary>Qualifying spec §2.3: the median qualifying lap, in seconds, of the fastest AI (aiSkill 1.15).</summary>
+    public double QualiFastMedian { get; init; } = 1.9;
+
+    /// <summary>Qualifying spec §2.3: the σ of the log-normal lap time, i.e. of ln(time); unitless.</summary>
+    public double QualiSigma { get; init; } = 0.25;
 }
 
 public sealed record RedlineRules
@@ -62,6 +74,21 @@ public sealed record RedlineRules
     public int PushLoss { get; init; } = 1;
     public int RedlineGain { get; init; } = 4;
     public int RedlineLoss { get; init; } = 2;
+
+    /// <summary>
+    /// Qualifying spec §2: three easy timed questions before the race grid set the start order. Off, or with no players in
+    /// the room: today's seeded shuffle goes straight to the Grid.
+    /// </summary>
+    public bool Qualify { get; init; } = true;
+
+    /// <summary>Qualifying spec §2: how many questions (laps) qualifying lasts.</summary>
+    public int QualifyingLaps { get; init; } = 3;
+
+    /// <summary>Qualifying spec §2: the answer window for each lap; it also caps the AI's lap time.</summary>
+    public TimeSpan QualifyingAnswer { get; init; } = TimeSpan.FromSeconds(10);
+
+    /// <summary>Qualifying spec §2: how long each lap's result is shown before the next lap or the Grid.</summary>
+    public TimeSpan QualifyingResult { get; init; } = TimeSpan.FromSeconds(5);
 
     public AiRules Ai { get; init; } = new();
 }

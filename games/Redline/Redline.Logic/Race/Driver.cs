@@ -36,4 +36,25 @@ public sealed class Driver(Seat seat)
     public int Correct { get; set; }
     public int Redlines { get; set; }
     public int SpinOuts { get; set; }
+
+    /// <summary>
+    /// Qualifying spec §2.2: one entry per completed qualifying lap, the lap time in whole milliseconds, or null when the
+    /// lap was deleted (a wrong answer, or none).
+    /// </summary>
+    public List<int?> QualiLaps { get; } = [];
+
+    /// <summary>Qualifying spec §2: the current lap's time in milliseconds (null: no time), held until its Result phase.</summary>
+    public int? PendingLapMs { get; set; }
+
+    /// <summary>Qualifying spec §2: the current lap's answer (0..3), held until its Result phase.</summary>
+    public int? PendingAnswer { get; set; }
+
+    /// <summary>Qualifying spec §2.2: how many qualifying laps were answered correctly.</summary>
+    public int QualiCorrect { get; set; }
+
+    /// <summary>Qualifying spec §2.2: the sum of the correct laps' times, in milliseconds.</summary>
+    public int QualiTotalMs { get; set; }
+
+    /// <summary>Qualifying spec §2.2: the seeded random start order drawn when qualifying begins; it settles exact ties.</summary>
+    public int QualiTieOrder { get; set; }
 }
