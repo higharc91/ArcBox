@@ -48,6 +48,7 @@ public sealed class HostClient : IAsyncDisposable
         _connection.On<LobbyState>(ClientMethods.LobbyChanged, l => Raise(new LobbyEvent(l)));
         _connection.On<string, JsonElement>(ClientMethods.HostView, (game, view) => Raise(new HostViewEvent(game, view)));
         _connection.On<GameResults>(ClientMethods.GameEnded, r => Raise(new GameEndedEvent(r)));
+        _connection.On<string, PackRef[]>(ClientMethods.ContentRequired, (game, packs) => Raise(new ContentRequiredEvent(game, packs)));
         _connection.On<string>(ClientMethods.RoomClosed, reason =>
         {
             _room = null;

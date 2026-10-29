@@ -216,4 +216,29 @@ public class HostClientTests
     {
         Assert.Equal(expected, HubErrors.Clean(raw));
     }
+
+    [Fact]
+    public async Task HostClient_raises_ContentRequiredEvent()
+    {
+        using var f = new HostServerFactory();
+        await using var host = f.CreateHostClient();
+        var events = new EventRecorder(host);
+        await host.ConnectAsync(Ct);
+        await host.CreateRoomAsync();
+
+        await host.SelectGameAsync("counter");
+        var none = await events.WaitForAsync<ContentRequiredEvent>(e => e.GameId == "counter");
+        Assert.Empty(none.Packs);
+
+        await host.SelectGameAsync(SignalEchoGame.Id);
+        var required = await events.WaitForAsync<ContentRequiredEvent>(e => e.GameId == SignalEchoGame.Id);
+
+        var pack = Assert.Single(required.Packs);
+        Assert.Equal(HostServerFactory.PackId, pack.PackId);
+        Assert.Equal(64, pack.Hash.Length);
+        // The event carries what the cache needs: the hash the server's index lists for that pack.
+        using var http = f.CreateContentClient();
+        using var index = System.Text.Json.JsonDocument.Parse(await http.GetStringAsync($"content/{SignalEchoGame.Id}/index.json", Ct));
+        Assert.Equal(index.RootElement[0].GetProperty("hash").GetString(), pack.Hash);
+    }
 }

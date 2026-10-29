@@ -19,6 +19,13 @@ public sealed record GameEndedEvent(GameResults Results) : HostEvent;
 /// <summary><c>RoomClosed(reason)</c>, or the room vanished while the host was away (resume failed).</summary>
 public sealed record RoomClosedEvent(string Reason) : HostEvent;
 
+/// <summary>
+/// <c>ContentRequired(gameId, packs)</c>: the content packs the selected game needs cached before it can be shown (empty for a
+/// game without any). Sent on select, on start and after <c>ResumeHost</c>. The shell passes each pack to
+/// <see cref="ContentCache.EnsureAsync"/>.
+/// </summary>
+public sealed record ContentRequiredEvent(string GameId, IReadOnlyList<PackRef> Packs) : HostEvent;
+
 /// <summary>The connection changed state; <see cref="Error"/> is the last failure, if any.</summary>
 public sealed record ConnectionEvent(HostConnectionState State, string? Error) : HostEvent;
 
