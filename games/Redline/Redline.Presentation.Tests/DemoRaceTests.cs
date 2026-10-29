@@ -219,6 +219,13 @@ public class DemoRaceTests
             Assert.Null(v.CorrectIndex);
             Assert.All(v.Qualifying!.Rows, r => Assert.Equal((null, false, 0), (r.LastLapMs, r.FastestLap, r.PositionChange)));
         }
+        // The read-out shows the question but not its answers; they arrive with the question phase (qualifying spec §2).
+        Assert.All(views.Where(v => v.Phase == RacePhase.QualifyingReading), v =>
+        {
+            Assert.NotNull(v.Question!.Text);
+            Assert.Null(v.Question.Answers);
+        });
+        Assert.All(views.Where(v => v.Phase != RacePhase.QualifyingReading), v => Assert.Equal(4, v.Question!.Answers!.Count));
         Assert.All(views.Where(v => v.Phase != RacePhase.QualifyingQuestion), v => Assert.All(v.Qualifying!.Rows, r => Assert.False(r.Answered)));
         var question = views.First(v => v.Phase == RacePhase.QualifyingQuestion);
         Assert.Contains(question.Qualifying!.Rows, r => r.Answered);

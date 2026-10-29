@@ -6,7 +6,7 @@ namespace Redline.Logic;
 
 public sealed record RedlineHostView(
     RacePhase Phase, int Round, int MaxRounds, int FinishLine, string CircuitId,
-    QuestionCard? Question,             // null in Grid; Throttle: Text and Answers are null; set from Reading on (and in qualifying)
+    QuestionCard? Question,             // null in Grid; Throttle: Text and Answers are null; set from Reading on and in qualifying (no Answers in QualifyingReading)
     int? CorrectIndex,                  // Reveal and QualifyingResult only
     IReadOnlyList<DriverRow> Drivers,   // all 22; by ranking (§2.3), team order in Driver Select, qualifying classification in qualifying
     DateTimeOffset? DeadlineUtc,
@@ -26,7 +26,7 @@ public sealed record RedlineHostView(
 public sealed record QualifyingSession(int Lap, int Laps, IReadOnlyList<QualifyingRow> Rows);
 
 /// <param name="Position">The classification position, 1..22; never shared.</param>
-/// <param name="PositionChange">QualifyingResult only: the previous classification position minus this one; 0 otherwise.</param>
+/// <param name="PositionChange">QualifyingResult only: the previous classification position minus this one; 0 otherwise, and on lap 1 (no previous classification).</param>
 /// <param name="Correct">Correct laps among the completed ones.</param>
 /// <param name="TotalMs">The sum of the completed correct laps, in milliseconds.</param>
 /// <param name="LastLapMs">QualifyingResult only: this lap's time; null when deleted (wrong or no answer).</param>

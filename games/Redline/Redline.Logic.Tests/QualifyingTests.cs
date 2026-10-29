@@ -133,7 +133,7 @@ public class QualifyingTests
             var reading = rules.QualifyingReadingTime(text, lap);
             Assert.Equal(h.Now + reading, v.DeadlineUtc);
             Assert.Equal(text, v.Question!.Text);
-            Assert.Equal(4, v.Question.Answers!.Count);
+            Assert.Null(v.Question.Answers);                                                 // the read-out hides the answers (§2)
             Assert.Null(v.CorrectIndex);
 
             h.Advance(reading);
@@ -141,6 +141,7 @@ public class QualifyingTests
             Assert.Equal((RacePhase.QualifyingQuestion, lap), (v.Phase, v.Qualifying!.Lap));
             Assert.Equal(h.Now + rules.QualifyingAnswer, v.DeadlineUtc);
             Assert.Equal(text, v.Question!.Text);
+            Assert.Equal(4, v.Question.Answers!.Count);
             Assert.Null(v.CorrectIndex);
 
             h.Advance(rules.QualifyingAnswer);
@@ -239,6 +240,61 @@ public class QualifyingTests
         Assert.Equal(("Science & Nature", Difficulty.Hard), (round1.Category, round1.Difficulty));   // the race's own questions
         for (var i = 0; i < 4; i++) RedlineKit.Throttle(h, i, "cruise");
         Assert.Equal("Q1", RedlineKit.View(h).Question!.Text);
+    }
+
+    [Fact]
+    public void Qualifying_never_repeats_a_race_question()
+    {
+        // Lap questions 16 and 18 repeat race questions; 19 repeats 17, which qualifying already has.
+        var q = new FakeQuestionSource(text: i => i switch { 16 => "Q4", 18 => "Q9", 19 => "Q17", _ => $"Q{i}" });
+        var (h, _) = RedlineKit.Start(reading: true, qualify: true, questions: q);
+        Assert.Equal(1, q.TakeCalls);
+        Assert.Equal(new[] { (3, Difficulty.Easy), (3, Difficulty.Easy) }, q.DifficultyTakes);   // one more batch, in order
+        RedlineKit.SeatAllAndGoToQualifying(h, "NOR", "VER", "LEC", "ANT");
+
+        var laps = new List<string>();
+        for (var lap = 1; lap <= 3; lap++)
+        {
+            laps.Add(RedlineKit.View(h).Question!.Text!);
+            EndPhase(h);
+            FinishLap(h);
+        }
+        Assert.Equal(["Q17", "Q20", "Q21"], laps);
+
+        h.Advance(h.Game.Rules.Grid);
+        for (var i = 0; i < 4; i++) RedlineKit.Throttle(h, i, "cruise");
+        Assert.Equal("Q1", RedlineKit.View(h).Question!.Text);                          // the race keeps Q1..Q15
+    }
+
+    [Fact]
+    public void Qualifying_accepts_repeats_rather_than_fail_when_the_source_has_nothing_else()
+    {
+        // Every easy question repeats a race question: Q16 → "Q1", Q17 → "Q2", …
+        var q = new FakeQuestionSource(text: i => $"Q{(i - 1) % 15 + 1}");
+        var (h, _) = RedlineKit.Start(qualify: true, questions: q);
+        Assert.Equal(Qualifying.MaxQuestionTakes, q.DifficultyTakes.Count);             // bounded
+        RedlineKit.SeatAllAndGoToQualifying(h, "NOR", "VER", "LEC", "ANT");
+
+        var laps = new List<string>();
+        for (var lap = 1; lap <= 3; lap++)
+        {
+            laps.Add(RedlineKit.View(h).Question!.Text!);
+            FinishLap(h);
+        }
+        Assert.Equal(["Q1", "Q2", "Q3"], laps);                                          // the first ones taken
+        Assert.Equal(RacePhase.Grid, h.Game.Phase);
+    }
+
+    [Fact]
+    public void TakeQuestions_keeps_fresh_questions_in_the_order_taken()
+    {
+        TriviaQuestion Q(string text) => new("General Knowledge", Difficulty.Easy, text, "right", ["w1", "w2", "w3"], QuestionOrigin.Fallback);
+        var race = new[] { Q("a"), Q("b") };
+        var source = new FakeQuestionSource(text: i => i switch { 1 => "a", 2 => "x", 3 => "x", 4 => "b", _ => $"n{i}" });
+
+        Assert.Equal(["x", "n5", "n6"], Qualifying.TakeQuestions(source, race, 3).Select(q => q.Text));
+        Assert.Equal(2, source.DifficultyTakes.Count);
+        Assert.Empty(Qualifying.TakeQuestions(source, race, 0));
     }
 
     // ---------------------------------------------------------------- Answering
@@ -437,6 +493,37 @@ public class QualifyingTests
         Assert.NotNull(result.CorrectIndex);
         Assert.Equal(800, QRow(h, 0).LastLapMs);
         Assert.All(result.Qualifying!.Rows, r => Assert.False(r.Answered));
+    }
+
+    [Fact]
+    public void Lap_1_result_has_no_position_change_and_later_laps_do()
+    {
+        // The players answer fastest from furthest back in the seeded order, so lap 1 reorders them a lot.
+        var h = ToQualifying(players: 3, rules: WrongAi);
+        var order = Enumerable.Range(0, 3).OrderByDescending(i => RedlineKit.Row(h, i).Position).ToArray();
+        foreach (var player in order)
+        {
+            Wait(h, 1000);
+            RedlineKit.QualiAnswer(h, player, right: true, null);
+        }
+        var lap1 = RedlineKit.View(h);
+        Assert.Equal(RacePhase.QualifyingResult, lap1.Phase);
+        Assert.Equal(order.Select(i => RedlineKit.Row(h, i).Code), lap1.Drivers.Take(3).Select(d => d.Code));
+        Assert.All(lap1.Qualifying!.Rows, r => Assert.Equal(0, r.PositionChange));      // the seeded order is no classification
+        EndPhase(h);
+
+        // Lap 2: the order flips, measured against lap 1's classification.
+        Assert.Equal(RacePhase.QualifyingQuestion, h.Game.Phase);
+        foreach (var player in order.Reverse())
+        {
+            Wait(h, 1500);
+            RedlineKit.QualiAnswer(h, player, right: true, null);
+        }
+        var lap2 = RedlineKit.View(h);
+        Assert.Equal(RacePhase.QualifyingResult, lap2.Phase);
+        var before = lap1.Qualifying.Rows.ToDictionary(r => r.Code, r => r.Position);
+        Assert.All(lap2.Qualifying!.Rows, r => Assert.Equal(before[r.Code] - r.Position, r.PositionChange));
+        Assert.Contains(lap2.Qualifying.Rows, r => r.PositionChange != 0);
     }
 
     // ---------------------------------------------------------------- Grid order

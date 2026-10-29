@@ -84,9 +84,10 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
             throw new InvalidOperationException(
                 $"The question source returned {_questions.Count} questions; REDLINE needs {Rules.MaxRounds}, one per round.");
         _answers = [.. _questions.Select(q => ShuffleAnswers(q, ctx.Random))];
-        // Qualifying spec §2.4: taken after the race's, so the race keeps its questions with qualifying on or off. Their
-        // answers are shuffled only when qualifying begins, after the seeded start order is drawn (BeginQualifying).
-        _qualiQuestions = Rules.Qualify ? questions.Take(Rules.QualifyingLaps, Difficulty.Easy) : [];
+        // Qualifying spec §2.4: taken after the race's, so the race keeps its questions with qualifying on or off, and never
+        // one of the race's (Qualifying.TakeQuestions). Their answers are shuffled only when qualifying begins, after the
+        // seeded start order is drawn (BeginQualifying).
+        _qualiQuestions = Rules.Qualify ? Qualifying.TakeQuestions(questions, _questions, Rules.QualifyingLaps) : [];
         if (_qualiQuestions.Count < (Rules.Qualify ? Rules.QualifyingLaps : 0))
             throw new InvalidOperationException(
                 $"The question source returned {_qualiQuestions.Count} easy questions; qualifying needs {Rules.QualifyingLaps}, one per lap.");
@@ -263,7 +264,8 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
     // ---------------------------------------------------------------- Qualifying (qualifying spec §2)
     //
     // During qualifying _standings is the classification (the seeded order before lap 1's result), Position is the
-    // classification position and PositionAtRoundStart the previous one, so a Result's position change is their difference.
+    // classification position and PositionAtRoundStart the previous one, so a Result's position change is their difference
+    // (0 on lap 1, which has no previous classification).
 
     private TriviaQuestion CurrentLap => _qualiQuestions[_qualiLap - 1];
 
@@ -349,10 +351,12 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
             d.QualiTotalMs += ms;
         }
 
+        // Lap 1 has no earlier classification to move against (the seeded order is only the tie-break), so its position
+        // change is 0 for every car.
         var classified = Qualifying.Classify(_field);
         for (var i = 0; i < classified.Count; i++)
         {
-            classified[i].PositionAtRoundStart = classified[i].Position;
+            classified[i].PositionAtRoundStart = _qualiLap == 1 ? i + 1 : classified[i].Position;
             classified[i].Position = i + 1;
         }
         _standings = [.. classified];
@@ -402,15 +406,17 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
     private TriviaQuestion Current => _questions[Round - 1];
 
     /// <summary>
-    /// §4.4: category and difficulty in Throttle; the text and shuffled answers from Reading on. Qualifying (spec §5): the
-    /// whole card in all three phases, as in Reading.
+    /// §4.4: category and difficulty in Throttle; the text and shuffled answers from Reading on. Qualifying (spec §2, §5):
+    /// the text without the answers in QualifyingReading, since the lap clock only starts with QualifyingQuestion; the whole
+    /// card from then on.
     /// </summary>
     private QuestionCard? QuestionCard() => Phase switch
     {
         RacePhase.Throttle => new QuestionCard(Current.Category, Current.Difficulty, null, null),
         RacePhase.Reading or RacePhase.Question or RacePhase.Reveal =>
             new QuestionCard(Current.Category, Current.Difficulty, Current.Text, _answers[Round - 1].Answers),
-        RacePhase.QualifyingReading or RacePhase.QualifyingQuestion or RacePhase.QualifyingResult =>
+        RacePhase.QualifyingReading => new QuestionCard(CurrentLap.Category, CurrentLap.Difficulty, CurrentLap.Text, null),
+        RacePhase.QualifyingQuestion or RacePhase.QualifyingResult =>
             new QuestionCard(CurrentLap.Category, CurrentLap.Difficulty, CurrentLap.Text, _qualiAnswers[_qualiLap - 1].Answers),
         _ => null,
     };

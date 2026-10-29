@@ -279,8 +279,11 @@ public static class DemoRace
             .OrderByDescending(c => c.Correct).ThenBy(c => c.Total).ThenBy(c => c.Tie)
             .Select(c => (c.Code, c.Correct, c.Total))];
 
+        // The read-out shows the question without its answers, as the server does (qualifying spec §2).
         RedlineHostView ViewOf(RacePhase phase, int lap, int question, IReadOnlyList<QualifyingRow> rows) =>
-            View(rules, phase, 0, QualifyingQuestions[question].Card, phase == RacePhase.QualifyingResult ? QualifyingQuestions[question].Correct : null,
+            View(rules, phase, 0,
+                phase == RacePhase.QualifyingReading ? QualifyingQuestions[question].Card with { Answers = null } : QualifyingQuestions[question].Card,
+                phase == RacePhase.QualifyingResult ? QualifyingQuestions[question].Correct : null,
                 [.. rows.Select(r => Driver(r.Code, r.Position, phase == RacePhase.QualifyingQuestion && r.Answered ? DriverStatus.Answered
                     : phase == RacePhase.QualifyingQuestion ? DriverStatus.Answering : DriverStatus.Ready))])
             with { Qualifying = new QualifyingSession(lap, QualifyingLaps, rows) };

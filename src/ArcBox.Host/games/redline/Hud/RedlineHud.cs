@@ -204,7 +204,15 @@ public partial class RedlineHud : CanvasLayer
             case RacePhase.QualifyingQuestion:
             case RacePhase.QualifyingResult:
                 // Qualifying spec §6: the timing board, the question and its answers; no track map (every car is on the grid).
-                ShowOnly(_header, _tower, _answers, _pole);
+                // Reading: the question alone, as the answers arrive with the phones' lap clocks (spec §2).
+                if (view.Phase == RacePhase.QualifyingReading)
+                {
+                    ShowOnly(_header, _tower, _pole);
+                }
+                else
+                {
+                    ShowOnly(_header, _tower, _answers, _pole);
+                }
                 _header.Show(HudText.Header(view), lights: false);
                 _tower.Show(view);
                 _answers.Show(view);

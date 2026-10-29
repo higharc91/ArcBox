@@ -188,6 +188,29 @@ public class PooledQuestionSourceTests
         Assert.Equal(40, pool.Count);
     }
 
+    [Fact]
+    public async Task Fallback_qualifying_never_repeats_a_race_question()
+    {
+        // Qualifying spec §2.4 with the pool off: the fallback pack's all-questions and easy cursors are independent, so a
+        // single easy take repeats one of the race's 15 in more than half the games. Many games on a few servers' sources.
+        var pool = await SeededPool.CreateAsync(50);
+        for (var server = 0; server < 10; server++)
+        {
+            var source = Source(pool, new ListLogger(), enabled: false);
+            for (var game = 0; game < 1000; game++)
+            {
+                var race = source.Take(15);
+                var laps = Qualifying.TakeQuestions(source, race, 3);
+
+                Assert.Equal(3, laps.Count);
+                Assert.All(laps, q => Assert.Equal(Difficulty.Easy, q.Difficulty));
+                Assert.Equal(3, laps.Select(q => q.Text).Distinct().Count());
+                Assert.Empty(laps.Select(q => q.Text).Intersect(race.Select(q => q.Text)));
+            }
+        }
+        Assert.Equal(50, pool.Count); // never consulted
+    }
+
     private sealed class ListLogger : ILogger<PooledQuestionSource>
     {
         public ConcurrentQueue<(LogLevel Level, string Message)> Entries { get; } = new();

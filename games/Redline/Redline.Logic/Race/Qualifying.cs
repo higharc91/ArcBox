@@ -89,4 +89,34 @@ public static class Qualifying
         }
         return code;
     }
+
+    /// <summary>
+    /// How many <c>Take(laps, Easy)</c> calls <see cref="TakeQuestions"/> may make. Eight batches of three draw 24 questions,
+    /// more than the fallback pack's 20 easy ones, so even a race that holds many of those leaves enough fresh ones (§2.4).
+    /// </summary>
+    public const int MaxQuestionTakes = 8;
+
+    /// <summary>
+    /// §2.4: qualifying's <paramref name="laps"/> easy questions, taken after the race's <paramref name="race"/> and never
+    /// one of them. Takes <c>Take(laps, Easy)</c> batches in order, keeping each question whose text is neither in the race
+    /// nor already kept, for at most <see cref="MaxQuestionTakes"/> batches. As a last resort the rejected questions fill
+    /// the gap, in the order they came, rather than fail. The result depends only on what the source returns.
+    /// </summary>
+    public static IReadOnlyList<TriviaQuestion> TakeQuestions(IQuestionSource source, IEnumerable<TriviaQuestion> race, int laps)
+    {
+        if (laps <= 0) return [];
+        var seen = new HashSet<string>(race.Select(q => q.Text), StringComparer.Ordinal);
+        var kept = new List<TriviaQuestion>(laps);
+        var rejected = new List<TriviaQuestion>();
+        for (var take = 0; take < MaxQuestionTakes && kept.Count < laps; take++)
+        {
+            foreach (var q in source.Take(laps, Difficulty.Easy))
+            {
+                if (kept.Count < laps && seen.Add(q.Text)) kept.Add(q);
+                else rejected.Add(q);
+            }
+        }
+        kept.AddRange(rejected.Take(laps - kept.Count));
+        return kept;
+    }
 }
