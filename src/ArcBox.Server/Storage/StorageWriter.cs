@@ -29,8 +29,7 @@ public sealed class StorageWriter : BackgroundService
     private DateTimeOffset? _inFlightSince;
     private TaskCompletionSource _wake = NewWake();
 
-    private readonly SemaphoreSlim _flushing = new(1, 1); // one flush at a time, so one connection is enough
-    private SqliteConnection? _connection;
+    private readonly SemaphoreSlim _flushing = new(1, 1); // one flush at a time, so a flush never overlaps another
     private long _writesExecuted;
 
     public StorageWriter(ArcDb db, TimeProvider time, ILogger<StorageWriter> log)
@@ -141,17 +140,10 @@ public sealed class StorageWriter : BackgroundService
         await FlushAsync(cancellationToken).ConfigureAwait(false);
     }
 
-    public override void Dispose()
-    {
-        base.Dispose();
-        _connection?.Dispose();
-        _connection = null;
-    }
-
     private void Execute(Dictionary<string, Action<SqliteConnection>> ops, List<string> order)
     {
-        _connection ??= _db.Open();
-        var connection = _connection;
+        // A connection per flush: opening is cheap, and it leaves nothing for Dispose (or a drain that runs after it) to race with.
+        using var connection = _db.Open();
         try
         {
             using var transaction = connection.BeginTransaction();

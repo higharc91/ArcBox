@@ -90,6 +90,62 @@ public class StorageWriterTests
     }
 
     [Fact]
+    public async Task StopAsync_flushes_even_when_the_loop_never_ran()
+    {
+        // With no loop there is no loop-side final flush, so only StopAsync's own drain can write these.
+        var (db, writer, _) = Create();
+        using var _db = db;
+        using var _w = writer;
+        writer.Write("a", Insert("a", 1));
+
+        await writer.StopAsync(TestContext.Current.CancellationToken);
+
+        Assert.Equal(1, db.Scalar<int>("SELECT COUNT(*) FROM scratch"));
+    }
+
+    [Fact]
+    public async Task StopAsync_flushes_a_write_queued_after_the_loop_has_exited()
+    {
+        var (db, writer, _) = Create();
+        using var _db = db;
+        using var _w = writer;
+        var ct = TestContext.Current.CancellationToken;
+        await writer.StartAsync(ct);
+        await writer.StopAsync(ct); // the loop has exited and nothing is pending
+        writer.Write("late", Insert("late", 1));
+
+        await writer.StopAsync(ct);
+
+        Assert.Equal(1, db.Scalar<int>("SELECT COUNT(*) FROM scratch"));
+    }
+
+    [Fact]
+    public async Task Disposing_the_writer_mid_flush_does_not_lose_the_batch()
+    {
+        var (db, writer, _) = Create();
+        using var _db = db;
+        var ct = TestContext.Current.CancellationToken;
+        var started = new ManualResetEventSlim();
+        var release = new ManualResetEventSlim();
+        writer.Write("a", c =>
+        {
+            started.Set();
+            release.Wait(Patience, ct);
+            Insert("a", 1)(c);
+        });
+        writer.Write("b", Insert("b", 2));
+        var flush = writer.FlushAsync(ct);
+        Assert.True(started.Wait(Patience, ct));
+
+        writer.Dispose(); // the container disposing while the shutdown drain is mid-batch
+        release.Set();
+        await flush;
+
+        Assert.Equal(2, db.Scalar<int>("SELECT COUNT(*) FROM scratch"));
+        Assert.Equal(2, writer.WritesExecuted);
+    }
+
+    [Fact]
     public async Task Sixty_four_pending_writes_flush_without_waiting_for_the_timer()
     {
         // The fake clock never advances, so only the 64-operation trigger can wake the loop.

@@ -93,4 +93,33 @@ public class StorageHealthTests
             try { dir.Delete(true); } catch (IOException) { }
         }
     }
+
+    [Fact]
+    public async Task A_write_queued_just_before_the_factory_is_disposed_is_still_on_disk()
+    {
+        // WebApplicationFactory.Dispose disposes the container (and the writer) before it stops the host,
+        // so the shutdown drain runs after Dispose; the write must survive that.
+        var dir = Directory.CreateTempSubdirectory("arcbox-dispose-");
+        try
+        {
+            var file = Path.Combine(dir.FullName, "arcbox.db");
+            using (var f = new ArcServerFactory(file))
+            {
+                f.CreateClient();
+                f.Services.GetRequiredService<StorageWriter>().Write("p", c =>
+                {
+                    using var command = c.CreateCommand();
+                    command.CommandText = "INSERT INTO profiles (id, display_name, created_utc, last_seen_utc) VALUES ('pr_a', 'Ann', 't', 't')";
+                    command.ExecuteNonQuery();
+                });
+            }
+
+            using var db = StorageTestSupport.NewDb(new StorageOptions { Path = file });
+            Assert.Equal("Ann", db.Scalar<string>("SELECT display_name FROM profiles"));
+        }
+        finally
+        {
+            try { dir.Delete(true); } catch (IOException) { }
+        }
+    }
 }
