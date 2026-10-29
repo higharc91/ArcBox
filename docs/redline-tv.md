@@ -50,6 +50,12 @@ calls and 0.06 M primitives at the grid on High and Ultra (2,060 against 1,929; 
 0.26 M on the next shot; on Low about 95 calls and 0.05 M at the grid, 55 calls and 0.17 M on the next shot. Planning
 takes about 0.2 s. `REDLINE_NO_TRACKSIDE=1` leaves them out (comparison shots).
 
+With the whole COTA upgrade in (track surface, kerbs and run-off, surroundings, trackside), the full `tools/tv-e2e.sh`
+race (`ARCBOX_FULL=1`, Low, 1280×720, software Vulkan) passes: the TV opens its room in about 3 s and the scene is ready
+for Driver Select about 65 s later, the 15 rounds and the podium take about 9 minutes, and the busiest frame draws
+about 1,420 calls and 2.0 M primitives (`TV_ARGS=--perf`). Sandbox frame times say nothing about the RTX 5080; check
+144 fps at 1440p with F3 on the real machine.
+
 **Which preset runs:** `--preset=ultra|high|low` on the command line, else the one saved in `user://settings.json`
 (`"preset"`, written by F2), else Ultra. On Windows the file is `%APPDATA%\Godot\app_userdata\ArcBox\settings.json`, on
 Linux `~/.local/share/godot/app_userdata/ArcBox/settings.json`; it also keeps the server address from the Connect
