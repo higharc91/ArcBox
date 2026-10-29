@@ -75,7 +75,8 @@ public sealed partial class Room
 
     /// <summary>
     /// A phone already in the lobby answers "Who are you in {campaign}?": an existing member (by member or by that
-    /// member's offline seat), or null for "I'm new here". Its own seat takes the member's profile and name. Returns a
+    /// member's offline seat), or null for "I'm new here" (under <see cref="ClaimMemberRequest.NewName"/> or the seat's own
+    /// name). Its own seat takes the member's profile and name. Returns a
     /// new key, or null when one of <see cref="ClaimMemberRequest.ProfileKeys"/> already belongs to that profile.
     /// </summary>
     public Task<ProfileKey?> ClaimMemberAsync(string connectionId, ClaimMemberRequest request) => EnqueueAsync(() =>
@@ -87,10 +88,17 @@ public sealed partial class Room
 
         var campaign = SelectedCampaign() ?? throw new RoomException("Pick a campaign first.");
         var seat = request.Member is { } member ? OneSeat(member) : null;
+        if (seat is not null && request.NewName is not null)
+        {
+            throw new RoomException("Pick a seat or enter a name.");
+        }
+
         var slot = _members.FindByConnection(connectionId) ?? throw new RoomException("Couldn't rejoin. Please join again.");
         var keys = request.ProfileKeys ?? [];
 
-        var key = seat is null ? ClaimNewMember(slot, campaign, keys) : ClaimExistingMember(slot, seat, campaign, keys);
+        var key = seat is null
+            ? ClaimNewMember(slot, campaign, keys, request.NewName)
+            : ClaimExistingMember(slot, seat, campaign, keys);
         BroadcastLobby();
         return key;
     });
@@ -110,14 +118,25 @@ public sealed partial class Room
             member = held?.Profile is { } p && campaign.Has(p) ? p : throw new RoomException("Couldn't rejoin. Please join again.");
         }
 
-        if (held is not null && held != slot)
+        if (held == slot)
         {
-            if (held.Connected)
-            {
-                throw new RoomException($"Someone's already playing as {campaign.Card(member).Title}.");
-            }
+            return KeyFor(member, keys); // the caller is already this member
+        }
 
-            // The member's offline seat goes: the person is here now, in the caller's seat.
+        if (held is { Connected: true })
+        {
+            throw new RoomException($"Someone's already playing as {campaign.Card(member).Title}.");
+        }
+
+        // The caller's seat takes the member's name, which no other seat may have (the member's own seat goes).
+        if (_members.CheckName(campaign.Member(member).DisplayName, out _, slot, held) is { } error)
+        {
+            throw new RoomException(error);
+        }
+
+        // The member's offline seat goes: the person is here now, in the caller's seat.
+        if (held is not null)
+        {
             _members.Remove(held.Id);
         }
 
@@ -126,24 +145,34 @@ public sealed partial class Room
         return KeyFor(member, keys);
     }
 
-    private ProfileKey? ClaimNewMember(PlayerSlot slot, CampaignView campaign, IReadOnlyList<string> keys)
+    /// <summary>
+    /// "I'm new here" from a seated phone: a new member under <paramref name="newName"/>, or without it the seat's own
+    /// name, which the seat takes. A seat that already has a profile from another campaign is the same person, so it
+    /// joins this one as itself unless it asks for a different name.
+    /// </summary>
+    private ProfileKey? ClaimNewMember(PlayerSlot slot, CampaignView campaign, IReadOnlyList<string> keys, string? newName)
     {
-        // A seat that already has a profile from another campaign is the same person, so it joins this one as itself.
         var existing = slot.Profile is { } id && !campaign.Has(id) ? _profiles.Find(id) : null;
-        var name = existing?.DisplayName ?? slot.Name;
+        if (_members.CheckName(newName ?? existing?.DisplayName ?? slot.Name, out var name, slot) is { } error)
+        {
+            throw new RoomException(error);
+        }
+
         EnsureCanJoin(campaign, name);
 
-        var profile = existing ?? _profiles.Create(name);
+        var reuse = existing is not null && existing.DisplayName == name;
+        var profile = reuse ? existing! : _profiles.Create(name);
         _campaigns.AddMember(campaign.Info.Id, profile);
         slot.Profile = profile.Id;
         slot.Name = profile.DisplayName;
-        return existing is null ? _profiles.IssueKey(profile.Id) : KeyFor(profile.Id, keys);
+        return reuse ? KeyFor(profile.Id, keys) : _profiles.IssueKey(profile.Id);
     }
 
     /// <summary>"I'm new here" in a campaign lobby: a new profile, a membership and a seat.</summary>
     private JoinResult TakeNewMemberSeat(string connectionId, string rawName, CampaignView campaign)
     {
-        if (_members.CheckNew(rawName, out var name) is { } error)
+        var replacing = SeatToReplace(connectionId, campaign);
+        if (_members.CheckNew(rawName, out var name, replacing) is { } error)
         {
             throw new RoomException(error);
         }
@@ -152,6 +181,7 @@ public sealed partial class Room
 
         var profile = _profiles.Create(name);
         _campaigns.AddMember(campaign.Info.Id, profile);
+        LeaveSeat(connectionId, replacing);
         var slot = _members.Add(name, connectionId, profile.Id, out var secret);
         return Seated(connectionId, slot, secret, _profiles.IssueKey(profile.Id));
     }
@@ -178,19 +208,36 @@ public sealed partial class Room
             throw new RoomException("Game in progress, join after this round.");
         }
 
-        if (_members.CheckNew(campaign.Member(member).DisplayName, out var name) is { } error)
+        var replacing = SeatToReplace(connectionId, campaign);
+        if (_members.CheckNew(campaign.Member(member).DisplayName, out var name, replacing) is { } error)
         {
             throw new RoomException(error);
         }
 
-        // As with taking an offline seat, a phone that holds another seat moves.
-        if (_members.FindByConnection(connectionId) != null)
-        {
-            Unseat(connectionId);
-        }
-
+        LeaveSeat(connectionId, replacing);
         var slot = _members.Add(name, connectionId, member, out var secret);
         return Seated(connectionId, slot, secret, KeyFor(member, keys));
+    }
+
+    /// <summary>
+    /// The seat a phone gives up for good by taking a new one in a campaign lobby: the one it holds, unless that is a
+    /// member's seat. It counts against neither the new seat's name nor the room size.
+    /// </summary>
+    private PlayerSlot? SeatToReplace(string connectionId, CampaignView campaign) =>
+        _members.FindByConnection(connectionId) is { } current && !campaign.Has(current.Profile) ? current : null;
+
+    /// <summary>
+    /// A phone that holds a seat moves to a new one (ruling R9), leaving the old one through <see cref="Unseat"/> as a
+    /// lost connection would. A member's seat stays, offline, for that member; any other seat would only be dropped at
+    /// Start, so <paramref name="replacing"/> goes now.
+    /// </summary>
+    private void LeaveSeat(string connectionId, PlayerSlot? replacing)
+    {
+        Unseat(connectionId);
+        if (replacing is not null)
+        {
+            _members.Remove(replacing.Id);
+        }
     }
 
     /// <summary>
@@ -332,8 +379,14 @@ public sealed partial class Room
     }
 
     // Checked before a profile is created, so a refusal leaves nothing behind.
-    private static void EnsureCanJoin(CampaignView campaign, string name)
+    private void EnsureCanJoin(CampaignView campaign, string name)
     {
+        // A campaign another room is playing takes no new members: they would miss that session (ruling R14).
+        if (_campaigns.LeasedBy(campaign.Info.Id) is { } holder && holder != Code)
+        {
+            throw new RoomException($"{campaign.Info.Name} is being played in room {holder}.");
+        }
+
         if (campaign.Info.Members.Count >= CampaignService.MaxMembers)
         {
             throw new RoomException("This campaign is full (8 members).");

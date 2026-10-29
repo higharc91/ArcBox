@@ -59,7 +59,7 @@ public sealed class ArcHub(RoomManager rooms) : Hub
     public Task<ProfileKey> CreateCampaign(string name) =>
         WithHubErrors(() => CurrentRoom().CreateCampaignAsync(Context.ConnectionId, name ?? ""));
 
-    /// <summary>"Who are you in this campaign?": a member, or a null member for "I'm new here". Lobby only.</summary>
+    /// <summary>"Who are you in this campaign?": a member, or a null member for "I'm new here" (optionally under a new name). Lobby only.</summary>
     public Task<ProfileKey?> ClaimMember(ClaimMemberRequest request) =>
         WithHubErrors(() => CurrentRoom().ClaimMemberAsync(Context.ConnectionId,
             request ?? throw new HubException("Pick a seat or enter a name.")));

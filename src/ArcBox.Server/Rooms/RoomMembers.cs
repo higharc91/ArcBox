@@ -31,8 +31,31 @@ public sealed class RoomMembers(RoomOptions options)
         return true;
     }
 
-    /// <summary>Why a new seat named <paramref name="rawName"/> can't be added, or null; <paramref name="name"/> is it trimmed.</summary>
-    public string? CheckNew(string rawName, out string name)
+    /// <summary>
+    /// Why a new seat named <paramref name="rawName"/> can't be added, or null; <paramref name="name"/> is it trimmed.
+    /// <paramref name="replacing"/> is a seat that goes when the new one is added, so it counts against neither the name
+    /// nor the room size.
+    /// </summary>
+    public string? CheckNew(string rawName, out string name, PlayerSlot? replacing = null)
+    {
+        if (CheckName(rawName, out name, replacing) is { } error)
+        {
+            return error;
+        }
+
+        if (_slots.Count(s => s != replacing) >= options.MaxPlayers)
+        {
+            return "Room is full.";
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Why a seat can't be called <paramref name="rawName"/>, or null; <paramref name="name"/> is it trimmed. The name
+    /// rule and no other seat having it, except the seats in <paramref name="except"/> (the one being renamed, one that goes).
+    /// </summary>
+    public string? CheckName(string rawName, out string name, params PlayerSlot?[] except)
     {
         name = rawName?.Trim() ?? string.Empty;
 
@@ -42,14 +65,9 @@ public sealed class RoomMembers(RoomOptions options)
         }
 
         var trimmed = name;
-        if (_slots.Any(s => string.Equals(s.Name, trimmed, StringComparison.OrdinalIgnoreCase)))
+        if (_slots.Any(s => !except.Contains(s) && string.Equals(s.Name, trimmed, StringComparison.OrdinalIgnoreCase)))
         {
             return "That name is taken.";
-        }
-
-        if (_slots.Count >= options.MaxPlayers)
-        {
-            return "Room is full.";
         }
 
         return null;

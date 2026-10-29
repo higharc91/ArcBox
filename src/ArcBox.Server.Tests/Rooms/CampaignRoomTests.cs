@@ -507,6 +507,146 @@ public class CampaignRoomTests
             await bea.ThrowsHubAsync("ClaimMember", new ClaimMemberRequest(null)));
     }
 
+    // Review fix I1: Absent is cleared however the seat is re-seated, a Rejoin included.
+    [Fact]
+    public async Task Rejoining_an_absent_seat_clears_absent()
+    {
+        await using var f = new RoomFixture();
+        await EmbersAsync(f);
+        var bea = await f.Room.TakeSeatAsync("c2", NewName("Bea"));
+        await f.Room.ConnectionLostAsync("c2"); // drops in the lobby, so her seat is absent at Start
+        await f.Room.StartGameAsync("host");
+        Assert.True(Assert.Single((await f.Room.PeekAsync([])).Offers).Absent);
+
+        await f.Room.RejoinAsync("c3", bea.PlayerId, bea.Secret);
+        await f.Room.ConnectionLostAsync("c3");
+
+        var offer = Assert.Single((await f.Room.PeekAsync([])).Offers);
+        Assert.Equal(new SeatRef(Slot: bea.PlayerId), offer.Ref);
+        Assert.False(offer.Absent);
+    }
+
+    // Review fix I2 (R14): nobody joins a campaign while another room is playing it, by either "I'm new here" path.
+    [Fact]
+    public async Task Members_cannot_join_a_campaign_another_room_is_playing()
+    {
+        await using var f = new RoomFixture();
+        await f.HostAsync();
+        await f.JoinAsync("Ann", "c1");
+        await f.JoinAsync("Cy", "c3");
+        await f.Room.SelectGameAsync("host", "ledger");
+        await f.Room.CreateCampaignAsync("c1", "Embers");
+        var campaign = f.Campaigns.Find(Lobby(f).Campaign!.Id)!;
+
+        var other = await f.NewRoomAsync("OTHR");
+        await other.JoinAsync("c9", "Zed");
+        await other.SelectGameAsync("host-OTHR", "ledger");
+        await other.SelectCampaignAsync("host-OTHR", campaign.Id);
+        await other.ClaimMemberAsync("c9", new ClaimMemberRequest(null));
+        await other.StartGameAsync("c9");
+        const string playing = "Embers is being played in room OTHR.";
+
+        Assert.Equal(playing, await Fails(f.Room.TakeSeatAsync("c2", NewName("Bea"))));
+        Assert.Equal(playing, await Fails(f.Room.ClaimMemberAsync("c3", new ClaimMemberRequest(null))));
+        Assert.Equal(playing, await Fails(f.Room.ClaimMemberAsync("c3", new ClaimMemberRequest(null, NewName: "Cyrus"))));
+        Assert.Equal(["Ann", "Zed"], f.Campaigns.Find(campaign.Id)!.Members.Select(m => m.DisplayName));
+        Assert.Equal(["Ann", "Cy"], Lobby(f).Players.Select(p => p.Name));
+    }
+
+    // Review fix I3 (R15): "I'm new here" under another name gets a seated phone past a name the campaign has.
+    [Fact]
+    public async Task ClaimMember_new_name_gets_past_a_name_clash()
+    {
+        await using var f = new RoomFixture();
+        await f.HostAsync();
+        await f.JoinAsync("Ann", "c1");
+        await f.JoinAsync("Bea", "c2");
+        await f.JoinAsync("Dan", "c3");
+        await f.Room.SelectGameAsync("host", "ledger");
+        await f.Room.CreateCampaignAsync("c1", "Embers");
+        var campaign = f.Campaigns.Find(Lobby(f).Campaign!.Id)!;
+        AddMember(f, campaign, "Dan");
+
+        Assert.Equal("That name is taken.", await Fails(f.Room.ClaimMemberAsync("c3", new ClaimMemberRequest(null))));
+        Assert.Equal("Name must be 1–12 characters.",
+            await Fails(f.Room.ClaimMemberAsync("c3", new ClaimMemberRequest(null, NewName: "  "))));
+        Assert.Equal("That name is taken.", // another seat's name
+            await Fails(f.Room.ClaimMemberAsync("c3", new ClaimMemberRequest(null, NewName: "bea"))));
+        Assert.Equal("Pick a seat or enter a name.", await Fails(f.Room.ClaimMemberAsync("c3",
+            new ClaimMemberRequest(new SeatRef(Slot: new PlayerId("p1")), NewName: "Dan B"))));
+
+        var key = await f.Room.ClaimMemberAsync("c3", new ClaimMemberRequest(null, NewName: " Dan B "));
+
+        Assert.Equal("Dan B", key!.Name);
+        Assert.Contains(f.Campaigns.Find(campaign.Id)!.Members, m => m.Profile == key.Id && m.DisplayName == "Dan B");
+        var seat = Lobby(f).Players.Single(p => p.Id == new PlayerId("p3"));
+        Assert.Equal(("Dan B", key.Id), (seat.Name, seat.Profile));
+    }
+
+    // Review fix M1: a seated phone picking a seatless member isn't counted against itself (name, room size).
+    [Fact]
+    public async Task Seated_phone_taking_a_member_seat_is_not_counted_against_itself()
+    {
+        await using var f = new RoomFixture();
+        await f.HostAsync();
+        await f.JoinAsync("Ann", "c1");
+        for (var i = 2; i <= 7; i++) await f.JoinAsync($"P{i}", $"c{i}");
+        await f.JoinAsync("Cy", "c8"); // the room is full: 8 seats
+        await f.Room.SelectGameAsync("host", "ledger");
+        await f.Room.CreateCampaignAsync("c1", "Embers");
+        var campaign = f.Campaigns.Find(Lobby(f).Campaign!.Id)!;
+        var cy = AddMember(f, campaign, "Cy");
+
+        var taken = await f.Room.TakeSeatAsync("c8", Seat(new SeatRef(Member: cy.Id)));
+
+        var players = Lobby(f).Players;
+        Assert.Equal(8, players.Count);
+        var seat = Assert.Single(players, p => p.Name == "Cy");
+        Assert.Equal((taken.PlayerId, cy.Id, true), (seat.Id, seat.Profile, seat.Connected));
+    }
+
+    // Review fix M2: "I'm new here" from a seated phone moves it, leaving no second connected seat to block Start.
+    [Fact]
+    public async Task Seated_phone_saying_im_new_moves_and_leaves_no_ghost_seat()
+    {
+        await using var f = new RoomFixture();
+        await f.HostAsync();
+        await f.JoinAsync("Ann", "c1");
+        await f.JoinAsync("Bea", "c2");
+        await f.Room.SelectGameAsync("host", "ledger");
+        await f.Room.CreateCampaignAsync("c1", "Embers");
+
+        var bee = await f.Room.TakeSeatAsync("c2", NewName("Bee"));
+
+        var lobby = Lobby(f);
+        Assert.Equal(["Ann", "Bee"], lobby.Players.Select(p => p.Name));
+        Assert.Equal(bee.PlayerId, lobby.Players[1].Id);
+        Assert.True(lobby.CanStart);
+    }
+
+    // Review fix M3: claiming a member never leaves two seats with one name.
+    [Fact]
+    public async Task Claiming_a_member_whose_name_another_seat_has_is_refused()
+    {
+        await using var f = new RoomFixture();
+        await f.HostAsync();
+        await f.JoinAsync("Ann", "c1");
+        await f.JoinAsync("Eve", "c2");
+        await f.JoinAsync("Cy", "c3");
+        await f.Room.SelectGameAsync("host", "ledger");
+        await f.Room.CreateCampaignAsync("c1", "Embers");
+        var campaign = f.Campaigns.Find(Lobby(f).Campaign!.Id)!;
+        var eve = AddMember(f, campaign, "Eve");
+
+        Assert.Equal("That name is taken.",
+            await Fails(f.Room.ClaimMemberAsync("c3", new ClaimMemberRequest(new SeatRef(Member: eve.Id)))));
+        Assert.Equal(["Ann", "Eve", "Cy"], Lobby(f).Players.Select(p => p.Name));
+
+        // The seat that has the name may claim her.
+        await f.Room.ClaimMemberAsync("c2", new ClaimMemberRequest(new SeatRef(Member: eve.Id)));
+        Assert.Equal(eve.Id, Lobby(f).Players[1].Profile);
+    }
+
     private static void InsertCampaign(ArcDb db, string id, string code, string name, int members)
     {
         var list = Enumerable.Range(1, members)

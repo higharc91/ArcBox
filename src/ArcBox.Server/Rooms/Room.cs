@@ -255,7 +255,6 @@ public sealed partial class Room
 
         // The old phone's secret stops working; if it comes back, its Rejoin fails and it lands on the picker.
         var secret = _members.RotateSecret(slot);
-        slot.AbsentAtStart = false;
         SeatConnection(connectionId, slot);
         return new JoinResult(Code, slot.Id, secret, KeyFor(slot.Profile, profileKeys));
     }
@@ -265,6 +264,8 @@ public sealed partial class Room
     {
         bool wasConnected = slot.Connected;
         _members.Bind(slot, connectionId);
+        slot.AbsentAtStart = false; // someone has it now, by Rejoin or by taking it
+
         _knownConnections.TryAdd(connectionId, 0);
         _allAbsentSince = null;
 
