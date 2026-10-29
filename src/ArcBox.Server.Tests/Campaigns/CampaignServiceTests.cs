@@ -120,8 +120,23 @@ public sealed class CampaignServiceTests : IDisposable
         var ninth = Assert.Throws<CampaignException>(() => _campaigns.AddMember(c.Id, new ProfileRecord(new ProfileId("pr_9"), "P9")));
         Assert.Equal("This campaign is full (8 members).", ninth.Message);
 
-        var missing = Assert.Throws<CampaignException>(() => _campaigns.AddMember("nope", _ann));
+        var missing = Assert.Throws<CampaignNotFoundException>(() => _campaigns.AddMember("nope", _ann));
         Assert.Equal("Campaign not found.", missing.Message);
+    }
+
+    [Fact]
+    public void RemoveMember_while_leased_changes_nothing()
+    {
+        var c = NewCampaign();
+        _campaigns.AddMember(c.Id, _ann);
+        _campaigns.CheckOut(c.Id, "AAAA");
+
+        Assert.Equal("A session is in progress. Use the in-game menu.",
+            Assert.Throws<CampaignLeasedException>(() => _campaigns.RemoveMember(c.Id, _ann.Id)).Message);
+        Assert.Equal([_dave.Id, _ann.Id], _campaigns.Find(c.Id)!.Members.Select(m => m.Profile));
+
+        _campaigns.Release(c.Id, "AAAA");
+        Assert.Equal([_dave.Id], _campaigns.RemoveMember(c.Id, _ann.Id).Members.Select(m => m.Profile));
     }
 
     [Fact]
@@ -135,7 +150,7 @@ public sealed class CampaignServiceTests : IDisposable
         Assert.Equal(after, _campaigns.RemoveMember(c.Id, _ann.Id)); // already gone
 
         Assert.Throws<CampaignException>(() => _campaigns.RemoveMember(c.Id, _dave.Id));
-        Assert.Equal("Campaign not found.", Assert.Throws<CampaignException>(() => _campaigns.RemoveMember("nope", _ann.Id)).Message);
+        Assert.Equal("Campaign not found.", Assert.Throws<CampaignNotFoundException>(() => _campaigns.RemoveMember("nope", _ann.Id)).Message);
     }
 
     [Fact]
@@ -180,7 +195,7 @@ public sealed class CampaignServiceTests : IDisposable
     [Fact]
     public void CheckOut_of_unknown_campaign_throws()
     {
-        Assert.Equal("Campaign not found.", Assert.Throws<CampaignException>(() => _campaigns.CheckOut("nope", "AAAA")).Message);
+        Assert.Equal("Campaign not found.", Assert.Throws<CampaignNotFoundException>(() => _campaigns.CheckOut("nope", "AAAA")).Message);
         Assert.Null(_campaigns.LeasedBy("nope"));
     }
 
@@ -456,8 +471,8 @@ public sealed class CampaignServiceTests : IDisposable
     {
         var c = NewCampaign();
         Assert.Equal("""{"notes":[]}""", Text(_campaigns.PortalView(c.Id, _dave.Id)));
-        Assert.Equal("Campaign not found.", Assert.Throws<CampaignException>(() => _campaigns.PortalView(c.Id, _ann.Id)).Message);
-        Assert.Equal("Campaign not found.", Assert.Throws<CampaignException>(() => _campaigns.PortalView("nope", _dave.Id)).Message);
+        Assert.Equal("Campaign not found.", Assert.Throws<CampaignNotFoundException>(() => _campaigns.PortalView(c.Id, _ann.Id)).Message);
+        Assert.Equal("Campaign not found.", Assert.Throws<CampaignNotFoundException>(() => _campaigns.PortalView("nope", _dave.Id)).Message);
     }
 
     [Fact]
@@ -469,13 +484,17 @@ public sealed class CampaignServiceTests : IDisposable
         lease.Save(Doc("""{"notes":["one","two"]}"""));
         var snapshot = Assert.Single(_campaigns.Snapshots(c.Id));
 
-        Assert.False(_campaigns.Rollback(c.Id, snapshot.Id));
+        Assert.Equal(RollbackStatus.Leased, _campaigns.Rollback(c.Id, snapshot.Id, _dave.Id).Status);
+        Assert.Equal(RollbackStatus.Leased, _campaigns.Rollback(c.Id, 9999, _dave.Id).Status); // the lease wins over a bad id
         Assert.Equal("""{"notes":["one","two"]}""", Text(_campaigns.DocumentOf(c.Id)));
 
         _campaigns.Release(c.Id, "AAAA");
-        Assert.False(_campaigns.Rollback(c.Id, 9999));
-        Assert.False(_campaigns.Rollback("nope", snapshot.Id));
-        Assert.True(_campaigns.Rollback(c.Id, snapshot.Id));
+        Assert.Equal(RollbackStatus.NoSuchSnapshot, _campaigns.Rollback(c.Id, 9999, _dave.Id).Status);
+        Assert.Equal(RollbackStatus.NotFound, _campaigns.Rollback("nope", snapshot.Id, _dave.Id).Status);
+        var rolled = _campaigns.Rollback(c.Id, snapshot.Id, _dave.Id);
+        Assert.Equal(RollbackStatus.Ok, rolled.Status);
+        Assert.Equal(3, rolled.Info!.Version);
+        Assert.Equal("""{"notes":["one"]}""", Text(rolled.View!.Value));
 
         Assert.Equal("""{"notes":["one"]}""", Text(_campaigns.DocumentOf(c.Id)));
         Assert.Equal(3, _campaigns.Find(c.Id)!.Version); // forward, so a stale phone still conflicts

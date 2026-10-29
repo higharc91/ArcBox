@@ -124,7 +124,6 @@ public static class CampaignEndpoints
     private static IResult RemoveMember(string code, string profileId, HttpContext http, ProfileService profiles, CampaignService campaigns)
     {
         if (Owner(http, profiles, campaigns, code, out _, out var info) is { } denied) return denied;
-        if (campaigns.LeasedBy(info.Id) is not null) return Error(StatusCodes.Status409Conflict, SessionInProgress);
 
         try
         {
@@ -146,15 +145,21 @@ public static class CampaignEndpoints
         if (await ReadBody<RollbackRequest>(http) is not { } request)
             return Error(StatusCodes.Status400BadRequest, "Invalid request.");
 
-        if (!campaigns.Rollback(info.Id, request.SnapshotId))
+        try
         {
-            // Rollback says no for a held campaign and for an unknown snapshot alike; the lease is what the phone can act on.
-            return campaigns.LeasedBy(info.Id) is not null
-                ? Error(StatusCodes.Status409Conflict, SessionInProgress)
-                : Error(StatusCodes.Status404NotFound, "Snapshot not found.");
+            var result = campaigns.Rollback(info.Id, request.SnapshotId, me.Id);
+            return result switch
+            {
+                { Status: RollbackStatus.Ok, Info: { } rolled, View: { } view } => Json(new CampaignResponse(rolled, view, LeasedBy: null)),
+                { Status: RollbackStatus.Leased } => Error(StatusCodes.Status409Conflict, SessionInProgress),
+                { Status: RollbackStatus.NoSuchSnapshot } => Error(StatusCodes.Status404NotFound, "Snapshot not found."),
+                _ => Error(StatusCodes.Status404NotFound, NotFound),
+            };
         }
-
-        return GetCampaign(code, http, profiles, campaigns);
+        catch (CampaignException ex)
+        {
+            return Failed(ex);
+        }
     }
 
     /// <summary>Null when the caller is a member; otherwise the 401, 404 or 403 to send.</summary>
@@ -198,6 +203,10 @@ public static class CampaignEndpoints
     private static IResult Error(int status, string message, CampaignResponse? current = null) =>
         Results.Json(new ErrorResponse(message, current), ArcJson.Options, statusCode: status);
 
-    private static IResult Failed(CampaignException ex) =>
-        ex.Message == NotFound ? Error(StatusCodes.Status404NotFound, NotFound) : Error(StatusCodes.Status400BadRequest, ex.Message);
+    private static IResult Failed(CampaignException ex) => ex switch
+    {
+        CampaignNotFoundException => Error(StatusCodes.Status404NotFound, NotFound),
+        CampaignLeasedException => Error(StatusCodes.Status409Conflict, SessionInProgress),
+        _ => Error(StatusCodes.Status400BadRequest, ex.Message),
+    };
 }
