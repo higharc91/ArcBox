@@ -287,7 +287,8 @@ describe("App", () => {
     const t = new FakeTransport();
     const store = new MapStore();
     const session = new Session(t, store);
-    await boot(session, store, "?room=bcdf"); // no seat: Peek (the fake answers nothing, so the name box)
+    t.responders.Peek = () => peek({ campaignName: null, offers: [] });
+    await boot(session, store, "?room=bcdf"); // no seat: Peek, and a plain lobby is the name box
     expect(t.methods()).toEqual(["Peek"]);
     expect(session.state).toEqual({ screen: "join", code: "BCDF" });
 
@@ -316,6 +317,7 @@ describe("App", () => {
     const session = new Session(t, new MapStore());
     const { container } = render(<App session={session} />);
     expect(screen.getByLabelText(/Room code/)).toBeTruthy();
+    t.responders.Peek = () => peek({ campaignName: null, offers: [] });
 
     t.responders.TakeSeat = () => {
       t.fire("LobbyChanged", lobby({ selectedGameId: "redline", inGame: true }));
@@ -342,6 +344,7 @@ describe("App", () => {
     const t = new FakeTransport();
     const session = new Session(t, new MapStore());
     render(<App session={session} />);
+    t.responders.Peek = () => peek({ campaignName: null, offers: [] });
     t.responders.TakeSeat = () => { throw hubError("TakeSeat", "Game in progress, join after this round."); };
     fireEvent.input(input(/Room code/), { target: { value: "BCDF" } });
     fireEvent.input(input(/Your name/), { target: { value: "ALEX" } });
@@ -497,7 +500,7 @@ describe("Lobby: campaigns", () => {
     return session.open("bcdf").then(async () => {
       await flush();
       expect(input(/Your name/)).toBeTruthy();
-      expect(input(/Room code/).value).toBe("KQZT");
+      expect(input(/Room code/).value).toBe("BCDF");
       expect(screen.queryByText("Who are you?")).toBeNull();
     });
   });
@@ -560,6 +563,58 @@ describe("App: the picker end to end", () => {
     fireEvent.click(button(/Continue as Dave/));
     await flush();
     expect(t.invokes.at(-1)).toEqual({ method: "TakeSeat", args: [{ code: "KQZT", seat: { member: "pr_Aldric" }, profileKeys: ["k-dave"] }] });
+    expect(container.querySelector(".lobby")).not.toBeNull();
+  });
+});
+
+describe("App: a code typed into the Join form", () => {
+  const typeAndJoin = () => {
+    fireEvent.input(input(/Room code/), { target: { value: "kqzt" } });
+    fireEvent.input(input(/Your name/), { target: { value: "ALEX" } });
+    fireEvent.click(button(/Join/));
+  };
+
+  it("for a room in game shows the offline seats instead of a refusal", async () => {
+    const t = new FakeTransport();
+    const session = new Session(t, new MapStore());
+    render(<App session={session} />);
+    t.responders.Peek = () => peek({ campaignName: null, inGame: true, canJoinNew: false, offers: [offer("Wren", { ref: { slot: "p2", member: null } })] });
+    typeAndJoin();
+    await flush();
+    expect(t.methods()).toEqual(["Peek"]); // no TakeSeat(NewName) that the server would refuse
+    expect(screen.getByText("Pick your seat")).toBeTruthy();
+    expect(button(/I'm Wren/)).toBeTruthy();
+  });
+
+  it("for a campaign lobby offers Continue as for a remembered phone", async () => {
+    const t = new FakeTransport();
+    const store = new MapStore();
+    store.setItem("arcbox:profiles", JSON.stringify([{ profileId: "pr_Aldric", key: "k-dave", name: "Dave", lastUsed: 5 }]));
+    const session = new Session(t, store);
+    render(<App session={session} />);
+    const aldric = offer("Aldric");
+    t.responders.Peek = () => peek({ offers: [aldric], suggested: aldric });
+    typeAndJoin();
+    await flush();
+    expect(t.invokes[0]).toEqual({ method: "Peek", args: [{ code: "KQZT", profileKeys: ["k-dave"] }] });
+    expect(button(/Continue as Dave/)).toBeTruthy();
+  });
+
+  it("for a plain lobby still joins in one step with the typed name", async () => {
+    const t = new FakeTransport();
+    const session = new Session(t, new MapStore());
+    const { container } = render(<App session={session} />);
+    t.responders.Peek = () => peek({ campaignName: null, offers: [] });
+    t.responders.TakeSeat = () => {
+      t.fire("LobbyChanged", lobby());
+      return { code: "KQZT", playerId: "p1", secret: "s" };
+    };
+    typeAndJoin();
+    await flush();
+    expect(t.invokes).toEqual([
+      { method: "Peek", args: [{ code: "KQZT", profileKeys: [] }] },
+      { method: "TakeSeat", args: [{ code: "KQZT", newName: "ALEX", profileKeys: [] }] },
+    ]);
     expect(container.querySelector(".lobby")).not.toBeNull();
   });
 });

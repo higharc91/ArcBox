@@ -52,7 +52,7 @@ function Screen({ state, session }: { state: SessionState; session: Session }) {
           name={state.name}
           error={state.error}
           busy={state.busy}
-          onJoin={(code, name) => void session.joinNew(name, code)}
+          onJoin={(code, name) => void session.joinRoom(code, name)}
         />
       );
     case "connecting":

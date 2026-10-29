@@ -287,6 +287,19 @@ const isCampaignSummary = (v: unknown): v is CampaignSummary =>
   isRecord(v) && typeof v.id === "string" && typeof v.code === "string" && typeof v.name === "string" &&
   typeof v.members === "number" && typeof v.updatedUtc === "string";
 
+const isSeatRef = (v: unknown): v is SeatRef => isRecord(v) && isStringOrAbsent(v.slot) && isStringOrAbsent(v.member);
+
+const isSeatOffer = (v: unknown): v is SeatOffer =>
+  isRecord(v) && isSeatRef(v.ref) && isSeatCard(v.card) && typeof v.absent === "boolean";
+
+/** Checks the answer to `Peek` before the picker is built from it. */
+export function isRoomPeek(v: unknown): v is RoomPeek {
+  return isRecord(v) && typeof v.code === "string" && isStringOrAbsent(v.gameId) && isStringOrAbsent(v.campaignName) &&
+    typeof v.inGame === "boolean" && typeof v.canJoinNew === "boolean" &&
+    Array.isArray(v.offers) && v.offers.every(isSeatOffer) &&
+    (isAbsent(v.suggested) || isSeatOffer(v.suggested));
+}
+
 export function isGameResults(v: unknown): v is GameResults {
   return isRecord(v) && Array.isArray(v.scores) &&
     v.scores.every((s) => isRecord(s) && typeof s.playerId === "string" && typeof s.name === "string" && typeof s.score === "number") &&

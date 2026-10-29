@@ -2,6 +2,7 @@ import {
   ClientMethods,
   isGameResults,
   isLobbyState,
+  isRoomPeek,
   parseControllerView,
   type ControllerView,
   type GameResults,
@@ -33,6 +34,7 @@ export type SessionState =
 const OFFLINE = "Can't reach the server. Check your connection and try again.";
 const KICKED = "You were removed from the room.";
 const IN_PROGRESS = "Game in progress, join after this round.";
+const BAD_PEEK = "This room sent something this app can't read. Reload and try again.";
 
 /** SignalR wraps a server HubException as "An unexpected error occurred invoking 'X' on the server. HubException: <message>". */
 const HUB_PREFIX = "HubException: ";
@@ -48,6 +50,13 @@ export function serverMessage(err: unknown): string {
   const at = message.indexOf(HUB_PREFIX);
   if (at >= 0) return message.slice(at + HUB_PREFIX.length).trim();
   return isServerError(err) ? "Something went wrong on the server." : OFFLINE;
+}
+
+/** What a Peek answer means for the screen: the picker, the name box, or "nothing to take, the game is running". */
+function routeOf(peek: RoomPeek): "pick" | "name" | "in-progress" {
+  if (peek.inGame && peek.offers.length === 0 && !peek.suggested) return "in-progress";
+  if (peek.suggested || peek.campaignName != null || (peek.inGame && peek.offers.length > 0)) return "pick";
+  return "name";
 }
 
 /**
@@ -68,6 +77,8 @@ export class Session {
   private rejoining: Promise<boolean> | null = null;
   private retryTimer: ReturnType<typeof setTimeout> | null = null;
   private retryAttempt = 0;
+  private touchPending = false;
+  private inFlight = new Set<string>();
 
   constructor(
     private readonly transport: Transport,
@@ -91,19 +102,28 @@ export class Session {
   /**
    * Ask the room what this phone may take (`Peek`, with the profile keys it holds) and show the picker, or the name box
    * when there is nothing to pick. `error` is carried onto whichever screen results (a rejoin that just failed).
+   * `name` is what the player already typed on the Join form: kept if the picker or an error follows, and used to join
+   * in one step when the room turns out to be a plain lobby.
    */
-  async open(code: string, error?: string): Promise<void> {
+  async open(code: string, error?: string, name?: string): Promise<void> {
     code = code.trim().toUpperCase();
+    if (name !== undefined && this.state.screen === "join" && this.state.busy) return; // a double tap on Join
     this.reset();
     this.code = code;
-    this.set({ screen: "connecting" });
+    this.set(name !== undefined ? { screen: "join", code, name, busy: true } : { screen: "connecting" });
     try {
       if (!this.transport.connected) await this.transport.start();
       const peek = await this.transport.invoke<RoomPeek>("Peek", { code, profileKeys: this.keys() });
-      this.showPeek(code, peek, error);
+      if (name && !error && isRoomPeek(peek) && routeOf(peek) === "name") return await this.joinAs(name, code);
+      this.showPeek(code, peek, error, false, name);
     } catch (err) {
-      this.set({ screen: "join", code, error: serverMessage(err) });
+      this.set({ screen: "join", code, ...(name !== undefined ? { name } : {}), error: serverMessage(err) });
     }
+  }
+
+  /** The Join form's submit: look at the room first (a game in progress has offline seats to take), then join. */
+  joinRoom(code: string, name: string): Promise<void> {
+    return this.open(code, undefined, name.trim());
   }
 
   /** From "Not you? Show everyone": the full list of offers instead of the remembered one. */
@@ -114,6 +134,7 @@ export class Session {
   /** Take an offered seat: an offline seat, or a campaign member who has none yet. */
   async takeSeat(seat: SeatRef): Promise<void> {
     const from = this.state;
+    if (from.screen === "pick" && from.busy) return; // a double tap
     const code = this.code ?? (from.screen === "pick" ? from.peek.code : undefined);
     if (!code) return;
     // Exactly one of slot / member goes on the wire.
@@ -129,6 +150,12 @@ export class Session {
    */
   async joinNew(name: string, code?: string): Promise<void> {
     const from = this.state;
+    if ((from.screen === "pick" || from.screen === "join") && from.busy) return; // a double tap
+    await this.joinAs(name, code);
+  }
+
+  private async joinAs(name: string, code?: string): Promise<void> {
+    const from = this.state;
     code = (code ?? this.code ?? (from.screen === "pick" ? from.peek.code : from.screen === "join" ? from.code : undefined))?.trim().toUpperCase();
     if (!code) return;
     name = name.trim();
@@ -142,7 +169,11 @@ export class Session {
       profileKeys: this.keys(),
     };
     if (member === null && newName?.trim()) request.newName = newName.trim();
-    await this.lobbyCall("ClaimMember", request, (key: ProfileKey | null) => this.remember(key));
+    await this.lobbyCall("ClaimMember", request, (key: ProfileKey | null) => {
+      if (key) return this.remember(key);
+      const claimed = member?.member ?? this.lobby?.campaign?.roster.find((r) => r.seatedAs === member?.slot)?.profile;
+      if (claimed) this.touchSeated(claimed);
+    });
   }
 
   selectCampaign(id: string): Promise<void> {
@@ -277,19 +308,32 @@ export class Session {
     if (key) saveProfileKey(this.store, this.slot, key, Date.now());
   }
 
+  /**
+   * The server issues no new key when this phone already holds one for the profile it just became, so mark the stored
+   * entry as used now (it is then the one suggested next time). With the profile not known yet, the lobby supplies it.
+   */
+  private touchSeated(profile: string | null | undefined): void {
+    const stored = profile ? this.profiles().find((p) => p.profileId === profile) : undefined;
+    if (stored) saveProfileKey(this.store, this.slot, { id: stored.profileId, key: stored.key, name: stored.name }, Date.now());
+    this.touchPending = !profile;
+  }
+
   /** Where `Peek` says to go: the picker, or the name box when there is nothing to pick from. */
-  private showPeek(code: string, peek: RoomPeek, error?: string, showAll?: boolean): void {
-    if (!peek || !Array.isArray(peek.offers)) return this.set({ screen: "join", code, ...(error ? { error } : {}) });
-    if (peek.inGame && peek.offers.length === 0 && !peek.suggested) {
-      return this.set({ screen: "join", code: peek.code, error: error ?? IN_PROGRESS });
+  private showPeek(code: string, peek: RoomPeek, error?: string, showAll?: boolean, name?: string): void {
+    const typed = name !== undefined ? { name } : {};
+    if (!isRoomPeek(peek)) return this.set({ screen: "join", code, ...typed, error: BAD_PEEK });
+    switch (routeOf(peek)) {
+      case "in-progress":
+        return this.set({ screen: "join", code, ...typed, error: error ?? IN_PROGRESS });
+      case "pick": {
+        const state: SessionState = { screen: "pick", peek };
+        if (showAll) state.showAll = true;
+        if (error) state.error = error;
+        return this.set(state);
+      }
+      case "name":
+        return this.set({ screen: "join", code, ...typed, ...(error ? { error } : {}) });
     }
-    if (peek.suggested || peek.campaignName != null || (peek.inGame && peek.offers.length > 0)) {
-      const state: SessionState = { screen: "pick", peek };
-      if (showAll) state.showAll = true;
-      if (error) state.error = error;
-      return this.set(state);
-    }
-    this.set({ screen: "join", code: peek.code, ...(error ? { error } : {}) });
   }
 
   /** TakeSeat, then wait for the lobby: shared by taking an offered seat and joining under a new name. */
@@ -306,7 +350,8 @@ export class Session {
       this.code = result.code;
       this.me = result.playerId;
       saveSeat(this.store, result.code, this.slot, { playerId: result.playerId, secret: result.secret, name: result.profile?.name ?? name });
-      this.remember(result.profile);
+      if (result.profile) this.remember(result.profile);
+      else this.touchSeated(request.seat?.member ?? this.lobby?.players.find((p) => p.id === result.playerId)?.profile);
       if (this.lobby) this.render();
       else this.set({ screen: "connecting" });
     } catch (err) {
@@ -326,6 +371,8 @@ export class Session {
   }
 
   private async lobbyCall<T = unknown>(method: string, arg?: unknown, onResult?: (result: T) => void): Promise<void> {
+    if (this.inFlight.has(method)) return; // a double tap
+    this.inFlight.add(method);
     try {
       this.lobbyError = undefined;
       const args = arg === undefined ? [] : [arg];
@@ -334,6 +381,8 @@ export class Session {
     } catch (err) {
       this.lobbyError = serverMessage(err);
       this.render();
+    } finally {
+      this.inFlight.delete(method);
     }
   }
 
@@ -341,6 +390,11 @@ export class Session {
     if (!isLobbyState(json)) return;
     if (json.selectedGameId && json.selectedGameId !== this.lobby?.selectedGameId) void loadModule(json.selectedGameId);
     this.lobby = json;
+    if (this.touchPending && this.me) {
+      // Seated before the lobby said which profile this player is.
+      this.touchPending = false;
+      this.touchSeated(json.players.find((p) => p.id === this.me)?.profile);
+    }
     this.lobbyError = undefined;
     if (json.inGame) this.results = null; // a new game started
     else this.view = null; // the game is over; its last view is stale
@@ -381,6 +435,7 @@ export class Session {
     this.closedReason = null;
     this.lobbyError = undefined;
     this.retryAttempt = 0;
+    this.touchPending = false;
   }
 
   private render(): void {

@@ -4,6 +4,7 @@ import {
   VIEW_SCHEMAS,
   isGameResults,
   isLobbyState,
+  isRoomPeek,
   parseControllerView,
   type ChoiceInput,
   type ControllerView,
@@ -110,6 +111,7 @@ describe("contract fixtures", () => {
     expect(peek.offers[1]!.card).toEqual({ title: "Mira", subtitle: null, color: null, portrait: null });
     expect(peek.suggested?.ref.member).toBe("pr_AbCdEfGhIjKlMnOp");
     expect(peek.canJoinNew).toBe(true);
+    expect(isRoomPeek(fixture("peek"))).toBe(true); // the phone's runtime check accepts what the real serializer writes
   });
 
   it("takeSeat fixture is a JoinResult with a profile key", () => {

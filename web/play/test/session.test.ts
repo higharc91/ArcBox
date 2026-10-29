@@ -3,7 +3,7 @@ import { Session, serverMessage } from "../src/session/session";
 import { backoffDelays } from "../src/session/backoff";
 import { loadProfileKeys, loadSeat, saveProfileKey, saveSeat, storageKey, type KeyValueStore } from "../src/session/storage";
 import { boot } from "../src/App";
-import type { ControllerView, GameResults, LobbyState, RoomPeek, SeatOffer } from "../src/protocol";
+import { isRoomPeek, type ControllerView, type GameResults, type LobbyState, type RoomPeek, type SeatOffer } from "../src/protocol";
 import lobbyFixture from "./fixtures/lobby.json";
 import waitFixture from "./fixtures/wait.json";
 import resultsFixture from "./fixtures/results.json";
@@ -493,5 +493,162 @@ describe("Session: the picker", () => {
     t.responders.CreateCampaign = () => { throw hubError("CreateCampaign", "Only the VIP can create a campaign."); };
     await s.createCampaign("Embers");
     expect(s.state).toMatchObject({ screen: "lobby", error: "Only the VIP can create a campaign." });
+  });
+
+  // ---------------------------------------------------------------- the Join form
+
+  it("joinRoom on a plain lobby peeks, then joins in one step with the typed name", async () => {
+    t.responders.Peek = () => peek({ campaignName: null, offers: [] });
+    t.responders.TakeSeat = () => {
+      t.fire("LobbyChanged", lobby());
+      return { code: "BCDF", playerId: "p1", secret: "s" };
+    };
+    await s.joinRoom("bcdf", " ALEX ");
+    expect(t.invokes).toEqual([
+      { method: "Peek", args: [{ code: "BCDF", profileKeys: [] }] },
+      { method: "TakeSeat", args: [{ code: "BCDF", newName: "ALEX", profileKeys: [] }] },
+    ]);
+    expect(s.state).toMatchObject({ screen: "lobby", me: "p1" });
+  });
+
+  it("joinRoom mid-game with offline seats shows the picker and takes no seat", async () => {
+    t.responders.Peek = () => peek({ campaignName: null, inGame: true, canJoinNew: false });
+    await s.joinRoom("BCDF", "ALEX");
+    expect(t.methods()).toEqual(["Peek"]);
+    expect(s.state).toMatchObject({ screen: "pick", peek: { inGame: true } });
+  });
+
+  it("joinRoom mid-game with nothing to take keeps the name and shows the server's words", async () => {
+    t.responders.Peek = () => peek({ campaignName: null, inGame: true, offers: [], canJoinNew: false });
+    await s.joinRoom("BCDF", "ALEX");
+    expect(s.state).toEqual({ screen: "join", code: "BCDF", name: "ALEX", error: "Game in progress, join after this round." });
+  });
+
+  it("joinRoom keeps the typed values when the Peek fails", async () => {
+    t.responders.Peek = () => { throw hubError("Peek", "Room not found."); };
+    await s.joinRoom("BCDF", "ALEX");
+    expect(s.state).toEqual({ screen: "join", code: "BCDF", name: "ALEX", error: "Room not found." });
+  });
+
+  // ---------------------------------------------------------------- double taps
+
+  it("a second takeSeat or joinNew while one is in flight is ignored", async () => {
+    t.responders.Peek = () => peek();
+    let release!: () => void;
+    const gate = new Promise<void>((r) => (release = r));
+    t.responders.TakeSeat = async () => {
+      await gate;
+      t.fire("LobbyChanged", lobby());
+      return { code: "BCDF", playerId: "p4", secret: "x" };
+    };
+    await s.open("BCDF");
+    const first = s.takeSeat({ slot: null, member: "pr_dave" });
+    await s.takeSeat({ slot: null, member: "pr_dave" });
+    await s.joinNew("Dan");
+    release();
+    await first;
+    expect(t.methods()).toEqual(["Peek", "TakeSeat"]);
+  });
+
+  it("a second Join submit while the first is in flight is ignored", async () => {
+    let release!: () => void;
+    const gate = new Promise<void>((r) => (release = r));
+    t.responders.Peek = async () => { await gate; return peek({ campaignName: null, offers: [] }); };
+    t.responders.TakeSeat = () => {
+      t.fire("LobbyChanged", lobby());
+      return { code: "BCDF", playerId: "p1", secret: "s" };
+    };
+    const first = s.joinRoom("BCDF", "ALEX");
+    await s.joinRoom("BCDF", "ALEX");
+    release();
+    await first;
+    expect(t.methods()).toEqual(["Peek", "TakeSeat"]);
+  });
+
+  it("a second claimMember or createCampaign while one is in flight is ignored, and the next works", async () => {
+    await joined();
+    let release!: () => void;
+    const gate = new Promise<void>((r) => (release = r));
+    t.responders.ClaimMember = async () => { await gate; return null; };
+    const first = s.claimMember({ slot: null, member: "pr_dave" });
+    await s.claimMember({ slot: null, member: "pr_dave" });
+    release();
+    await first;
+    await s.claimMember({ slot: null, member: "pr_dave" });
+    expect(t.methods().filter((m) => m === "ClaimMember")).toHaveLength(2);
+  });
+
+  // ---------------------------------------------------------------- a Peek the phone can't read
+
+  it("a malformed Peek shows a clear error instead of throwing", async () => {
+    for (const bad of [undefined, null, {}, { ...peek(), offers: "none" }, { ...peek(), offers: [{ ref: {}, card: {}, absent: false }] }, { ...peek(), inGame: "no" }]) {
+      t.responders.Peek = () => bad;
+      await s.open("BCDF");
+      expect(s.state).toEqual({ screen: "join", code: "BCDF", error: "This room sent something this app can't read. Reload and try again." });
+    }
+  });
+
+  it("isRoomPeek accepts a real Peek, with optional fields absent or null", () => {
+    expect(isRoomPeek(peek())).toBe(true);
+    expect(isRoomPeek({ code: "BCDF", inGame: false, canJoinNew: true, offers: [] })).toBe(true);
+    expect(isRoomPeek(peek({ suggested: offer() }))).toBe(true);
+  });
+
+  // ---------------------------------------------------------------- lastUsed
+
+  it("taking a remembered member's seat bumps that stored key's lastUsed (the server issues no new key)", async () => {
+    saveProfileKey(store, undefined, { id: "pr_dave", key: "k-dave", name: "Dave" }, 1);
+    saveProfileKey(store, undefined, { id: "pr_other", key: "k-o", name: "Other" }, 2);
+    t.responders.Peek = () => peek();
+    t.responders.TakeSeat = () => {
+      t.fire("LobbyChanged", lobby());
+      return { code: "BCDF", playerId: "p4", secret: "x" };
+    };
+    await s.open("BCDF");
+    const before = Date.now();
+    await s.takeSeat({ slot: null, member: "pr_dave" });
+    const stored = loadProfileKeys(store);
+    expect(stored.map((p) => p.profileId)).toEqual(["pr_dave", "pr_other"]);
+    expect(stored[0]!.lastUsed).toBeGreaterThanOrEqual(before);
+    expect(stored[0]).toMatchObject({ key: "k-dave", name: "Dave" });
+  });
+
+  it("taking an offline seat by slot bumps the key of the profile the lobby says is on it", async () => {
+    saveProfileKey(store, undefined, { id: "pr_dave", key: "k-dave", name: "Dave" }, 1);
+    saveProfileKey(store, undefined, { id: "pr_other", key: "k-o", name: "Other" }, 2);
+    t.responders.Peek = () => peek({ campaignName: null, inGame: true });
+    t.responders.TakeSeat = () => {
+      t.fire("LobbyChanged", lobby({ players: [{ id: "p2", name: "Dave", isVip: false, connected: true, profile: "pr_dave" }] }));
+      return { code: "BCDF", playerId: "p2", secret: "x" };
+    };
+    await s.open("BCDF");
+    await s.takeSeat({ slot: "p2", member: null });
+    expect(loadProfileKeys(store).map((p) => p.profileId)).toEqual(["pr_dave", "pr_other"]);
+  });
+
+  it("when the lobby arrives after the TakeSeat result, its profile is used then", async () => {
+    saveProfileKey(store, undefined, { id: "pr_dave", key: "k-dave", name: "Dave" }, 1);
+    saveProfileKey(store, undefined, { id: "pr_other", key: "k-o", name: "Other" }, 2);
+    t.responders.Peek = () => peek({ campaignName: null, inGame: true });
+    t.responders.TakeSeat = () => ({ code: "BCDF", playerId: "p2", secret: "x" });
+    await s.open("BCDF");
+    await s.takeSeat({ slot: "p2", member: null });
+    expect(loadProfileKeys(store)[0]!.profileId).toBe("pr_other");
+    t.fire("LobbyChanged", lobby({ players: [{ id: "p2", name: "Dave", isVip: false, connected: true, profile: "pr_dave" }] }));
+    expect(loadProfileKeys(store).map((p) => p.profileId)).toEqual(["pr_dave", "pr_other"]);
+  });
+
+  it("a ClaimMember that returns no key bumps the claimed member's stored key", async () => {
+    await joined();
+    saveProfileKey(store, undefined, { id: "pr_dave", key: "k-dave", name: "Dave" }, 1);
+    saveProfileKey(store, undefined, { id: "pr_other", key: "k-o", name: "Other" }, 2);
+    t.responders.ClaimMember = () => null;
+    await s.claimMember({ slot: null, member: "pr_dave" });
+    expect(loadProfileKeys(store).map((p) => p.profileId)).toEqual(["pr_dave", "pr_other"]);
+
+    saveProfileKey(store, undefined, { id: "pr_third", key: "k-t", name: "Third" }, 5);
+    t.fire("LobbyChanged", lobby({ campaign: { id: "c", code: "EMBR", name: "Embers", roster: [{ profile: "pr_other", card: { title: "Kara", subtitle: null, color: null, portrait: null }, seatedAs: "p7", connected: false }] } }));
+    await s.claimMember({ slot: "p7", member: null }); // by seat: the roster says whose it is
+    expect(loadProfileKeys(store)[0]!.profileId).toBe("pr_other");
   });
 });
