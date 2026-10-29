@@ -1,5 +1,7 @@
 using System.Collections.Concurrent;
+using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Channels;
 using ArcBox.Sdk;
 using ArcBox.Sdk.Protocol;
@@ -15,6 +17,13 @@ public enum RoomStatus { Lobby, InGame, Closed }
 
 public sealed partial class Room
 {
+    /// <summary>The most UTF-8 bytes a host signal's payload may take, as raw JSON text.</summary>
+    public const int MaxSignalPayloadBytes = 4096;
+
+    // \z rather than $, which would also let a trailing newline through.
+    [GeneratedRegex(@"^[A-Za-z0-9_.-]{1,32}\z")]
+    private static partial Regex SignalKind { get; }
+
     private readonly string _hostTokenHash;
     private readonly IGameRegistry _registry;
     private readonly IClientSender _sender;
@@ -426,6 +435,32 @@ public sealed partial class Room
         }
 
         if (_session.Input(slot.Id, viewId, payload))
+        {
+            Publish();
+        }
+    });
+
+    /// <summary>
+    /// A signal from the TV for the running game (spec §3.7). Host only; the <paramref name="kind"/> and payload size are
+    /// checked after that. With no game running, or one that isn't <see cref="IHostAware"/>, it is dropped.
+    /// </summary>
+    public Task HostSignalAsync(string connectionId, string kind, JsonElement payload) => EnqueueAsync(() =>
+    {
+        EnsureHost(connectionId);
+
+        if (kind is null || !SignalKind.IsMatch(kind)
+            || Encoding.UTF8.GetByteCount(payload.GetRawText()) > MaxSignalPayloadBytes)
+        {
+            throw new RoomException("Invalid signal.");
+        }
+
+        if (_status != RoomStatus.InGame || _session == null)
+        {
+            _logger.LogDebug("Dropped host signal {Kind} in room {Code}: no game is running", kind, Code);
+            return;
+        }
+
+        if (_session.HostSignal(kind, payload))
         {
             Publish();
         }

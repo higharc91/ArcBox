@@ -3,8 +3,10 @@ using ArcBox.Sdk;
 using ArcBox.Sdk.Protocol;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Connections;
+using ArcBox.Server.Games;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ArcBox.Host.Core.Tests.Support;
@@ -18,6 +20,7 @@ public sealed class HostServerFactory : WebApplicationFactory<Program>
         builder.UseSetting("Redline:OpenTdb:Enabled", "false");
         // A private in-memory database, so no arcbox.db appears in the server's content root.
         builder.UseSetting("Storage:ConnectionString", $"Data Source=file:{Guid.NewGuid():N}?mode=memory&cache=shared");
+        builder.ConfigureTestServices(services => services.AddArcGame<SignalEchoGame>());
     }
 
     /// <summary>A host client that talks to this server over LongPolling through the in-memory handler.</summary>

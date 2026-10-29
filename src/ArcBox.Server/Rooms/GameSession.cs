@@ -131,6 +131,30 @@ public sealed class GameSession : IDisposable
         return true;
     }
 
+    /// <summary>
+    /// Delivers a signal from the TV to a game that is <see cref="IHostAware"/>, guarded and published like input.
+    /// Returns false, with a Debug log, when the game is over or doesn't listen for signals.
+    /// </summary>
+    public bool HostSignal(string kind, JsonElement payload)
+    {
+        if (IsOver) return false;
+
+        if (_game is not IHostAware aware)
+        {
+            _logger.LogDebug("Game {GameId} isn't IHostAware; ignored host signal {Kind}", GameId, kind);
+            return false;
+        }
+
+        Guard(() => aware.OnHostSignal(kind, new PlayerInput(payload)));
+
+        if (!IsOver)
+        {
+            PublishViews();
+        }
+
+        return true;
+    }
+
     public void ConnectionChanged(PlayerId id, bool connected)
     {
         if (IsOver) return;
