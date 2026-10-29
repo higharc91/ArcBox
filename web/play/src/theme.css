@@ -332,6 +332,9 @@ small { font-weight: 700; font-size: 12px; letter-spacing: 2px; color: var(--dim
 .tbtn.throttle-redline .opt-hint { color: #fff; }
 .tbtn.throttle.picked { outline: 3px solid #fff; outline-offset: 3px; }
 .tbtn.throttle-push.picked { outline-color: var(--red); }
+/* QualifyingReading's message is the question, a line break, then "Answers in a moment…": keep the break. No other
+   REDLINE wait message has one, so nothing else changes. */
+.screen[data-game="redline"] .wait-message { white-space: pre-line; }
 
 @media (prefers-reduced-motion: reduce) {
   .spinner { animation-duration: 3s; }

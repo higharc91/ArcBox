@@ -152,6 +152,12 @@ describe("feedback", () => {
     expect(skin(wait("Spun out! −2 · pit limiter next round · now P5"))).toBe("spin");
     expect(skin(wait("Spun out! Pit limiter next round · P5"))).toBe("spin");
     expect(skin(wait("Answer locked. Eyes on the TV!"))).toBeNull();
+    // Qualifying (PlayerViews.LapResult): a lap with a time is correct, a deleted lap is wrong; the lap time is not.
+    expect(skin(wait("✔ 2.41 s · P3 so far"))).toBe("correct");
+    expect(skin(wait("✔ 1.87 s · P1 so far · Purple!"))).toBe("correct");
+    expect(skin(wait("✖ Lap deleted · P14 so far"))).toBe("wrong");
+    expect(skin(wait("Lap time 2.41 s — checking…"))).toBeNull();
+    expect(skin({ kind: "wait", viewId: "q", message: "Which planet is closest to the Sun?\nAnswers in a moment…", header: "QUALIFYING · LAP 1/3" })).toBeNull();
     // Reading shows the question as the message; even a question that starts "Correct!" is not a result.
     expect(skin({ kind: "wait", viewId: "r", message: "Correct! is the catchphrase of which host?", header: "PUSH · P5 · ROUND 3/15" })).toBeNull();
 
@@ -162,6 +168,8 @@ describe("feedback", () => {
       ["Correct! +4 · now P2", [30, 40, 30], "correct"],
       ["Wrong answer. No change · P5", 120, "wrong"],
       ["No answer. −1 · now P7", 120, "wrong"],
+      ["✔ 2.41 s · P3 so far · Purple!", [30, 40, 30], "correct"],
+      ["✖ Lap deleted · P14 so far", 120, "wrong"],
       ["Spun out! −2 · pit limiter next round · now P5", [60, 30, 60, 30, 120], "spin"],
     ];
     for (const [message, pattern, sound] of cases) {
@@ -178,6 +186,15 @@ describe("feedback", () => {
     fb.onView(wait("Spun out! −2 · pit limiter next round · now P5"), "redline");
     fb.onView(wait("Spun out! −2 · pit limiter next round · now P5", "other-id"), "redline");
     expect(vibrateSpy).not.toHaveBeenCalled();
+
+    // Two qualifying laps in a row with the same wording each get their cue: the lap's other views come in between.
+    for (const lap of [1, 2]) {
+      vibrateSpy.mockClear();
+      fb.onView(wait("Lap time 3.10 s — checking…", `check-${lap}`), "redline");
+      fb.onView(wait("✖ Lap deleted · P14 so far", `result-${lap}`), "redline");
+      expect(vibrateSpy.mock.calls).toEqual([[120]]);
+    }
+    vibrateSpy.mockClear();
 
     // Other games get only the generic tap feedback: no result cues, even for the same wording.
     fb.onView(wait("Correct! +4 · now P2", "counter-1"), "counter");

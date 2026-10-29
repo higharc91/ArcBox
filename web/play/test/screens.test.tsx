@@ -225,6 +225,35 @@ describe("REDLINE skin", () => {
     expect(container.querySelector(".wait-banner")).toBeNull();
   });
 
+  it("tones a qualifying lap's result, the time or the deletion as the banner title", () => {
+    const wait = (message: string): WaitView => ({ kind: "wait", viewId: "v", message, header: "QUALIFYING · LAP 2/3" });
+    const { container, rerender } = render(<ControllerScreen view={wait("✔ 2.41 s · P3 so far · Purple!")} send={() => {}} me="A" game="redline" />);
+    expect(container.querySelector(".wait-banner.good .banner-title")!.textContent).toBe("✔ 2.41 s");
+    expect(container.querySelector(".wait-banner.good .banner-rest")!.textContent).toBe("P3 so far · Purple!");
+    rerender(<ControllerScreen view={wait("✖ Lap deleted · P14 so far")} send={() => {}} me="A" game="redline" />);
+    expect(container.querySelector(".wait-banner.bad .banner-title")!.textContent).toBe("✖ Lap deleted");
+    expect(container.querySelector(".wait-banner.bad .banner-rest")!.textContent).toBe("P14 so far");
+    // The race's titles still split at the sentence break, not at a " · ".
+    rerender(<ControllerScreen view={wait("Wrong answer. −1 · now P7")} send={() => {}} me="A" game="redline" />);
+    expect(container.querySelector(".wait-banner.bad .banner-title")!.textContent).toBe("Wrong answer.");
+    expect(container.querySelector(".wait-banner.bad .banner-rest")!.textContent).toBe("−1 · now P7");
+    // The answered view is plain, header and all (no P/ROUND to split).
+    rerender(<ControllerScreen view={wait("Lap time 2.41 s — checking…")} send={() => {}} me="A" game="redline" />);
+    expect(container.querySelector(".wait-banner")).toBeNull();
+    expect(container.querySelector(".wait-message")!.textContent).toBe("Lap time 2.41 s — checking…");
+    expect(container.querySelector(".pstatus .pos")!.textContent).toBe("QUALIFYING · LAP 2/3");
+  });
+
+  it("keeps QualifyingReading's line break before the note", () => {
+    // PlayerViews.QualifyingListening: the question, "\n", the note. A plain wait message under the REDLINE skin, whose
+    // .wait-message rule (theme.css) is white-space: pre-line, so the text node's line break shows.
+    const view: WaitView = { kind: "wait", viewId: "v", message: "Which planet is closest to the Sun?\nAnswers in a moment…", header: "QUALIFYING · LAP 1/3" };
+    const { container } = render(<ControllerScreen view={view} send={() => {}} me="A" game="redline" />);
+    const message = container.querySelector(".screen[data-game='redline'] .wait-message")!;
+    expect(message.textContent).toBe("Which planet is closest to the Sun?\nAnswers in a moment…");
+    expect(container.querySelector(".wait-banner, .listen-note")).toBeNull();
+  });
+
   it("styles the Reading wait view as the question with answers to come", () => {
     // Reading: the message is the question text and the header leads with the throttle, as on the answer view.
     const reading: WaitView = { kind: "wait", viewId: "v", message: "Which planet has the most known moons?", header: "PUSH · P5 · ROUND 3/15" };

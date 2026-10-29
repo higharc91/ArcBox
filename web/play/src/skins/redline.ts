@@ -82,9 +82,13 @@ export function readingNote(view: WaitView): string | undefined {
   return view.header && splitHeader(view.header)?.chip ? LISTEN_NOTE : undefined;
 }
 
-/** The Reveal line (PlayerViews.ResultMessage): "Correct! …", "Wrong answer. …", "No answer. …" or "Spun out! …". */
+/**
+ * The Reveal line (PlayerViews.ResultMessage): "Correct! …", "Wrong answer. …", "No answer. …" or "Spun out! …"; and a
+ * qualifying lap's result (PlayerViews.LapResult): "✔ 2.41 s · P3 so far" or "✖ Lap deleted · P14 so far".
+ */
 function resultOf(message: string): ResultKind | null {
-  if (message.startsWith("Correct!")) return "correct";
+  if (message.startsWith("Correct!") || message.startsWith("✔")) return "correct";
+  if (message.startsWith("✖")) return "wrong";
   if (message.startsWith("Spun out!")) return "spin";
   if (message.startsWith("Wrong answer") || message.startsWith("No answer")) return "wrong";
   return null;
