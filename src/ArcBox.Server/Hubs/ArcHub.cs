@@ -27,13 +27,20 @@ public sealed class ArcHub(RoomManager rooms) : Hub
         await MoveToAsync(room);
     });
 
-    public Task<JoinResult> Join(string code, string name) => WithHubErrors(async () =>
+    /// <summary>What this phone may take, without taking anything. The caller isn't placed in the room.</summary>
+    public Task<RoomPeek> Peek(PeekRequest request) => WithHubErrors(() =>
+        FindRoom(request.Code).PeekAsync(request.ProfileKeys ?? []));
+
+    public Task<JoinResult> TakeSeat(TakeSeatRequest request) => WithHubErrors(async () =>
     {
-        var room = FindRoom(code);
-        var result = await room.JoinAsync(Context.ConnectionId, name);
+        var room = FindRoom(request.Code);
+        var result = await room.TakeSeatAsync(Context.ConnectionId, request);
         await MoveToAsync(room);
         return result;
     });
+
+    // Kept for one release so a stale phone tab still works.
+    public Task<JoinResult> Join(string code, string name) => TakeSeat(new TakeSeatRequest(code, NewName: name ?? ""));
 
     public Task Rejoin(string code, string playerId, string secret) => WithHubErrors(async () =>
     {

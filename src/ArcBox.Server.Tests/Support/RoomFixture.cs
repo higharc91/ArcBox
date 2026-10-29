@@ -1,7 +1,10 @@
 using ArcBox.Sdk;
 using ArcBox.Sdk.Protocol;
 using ArcBox.Server.Games;
+using ArcBox.Server.Profiles;
 using ArcBox.Server.Rooms;
+using ArcBox.Server.Storage;
+using ArcBox.Server.Tests.Storage;
 using ArcBox.Server.Tests.TestGames;
 using Counter.Logic;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -13,6 +16,8 @@ public sealed class RoomFixture : IAsyncDisposable
 {
     private readonly CancellationTokenSource _cts = new();
     private readonly Task _runTask;
+    private readonly ArcDb _db;
+    private readonly StorageWriter _writer;
 
     public RoomFixture()
     {
@@ -20,18 +25,14 @@ public sealed class RoomFixture : IAsyncDisposable
         Sender = new RecordingSender();
         var registry = new GameRegistry([
             new(() => new CounterGame()),
-            new(() => new ThrowerGame())
+            new(() => new ThrowerGame()),
+            new(() => new LedgerGame())
         ]);
-        var options = new RoomOptions();
-        Room = new Room(
-            "TEST",
-            "host-token",
-            registry,
-            Sender,
-            Time,
-            options,
-            NullLogger<Room>.Instance
-        );
+        _db = StorageTestSupport.NewMemoryDb();
+        _writer = new StorageWriter(_db, Time, NullLogger<StorageWriter>.Instance);
+        var services = new RoomServices(registry, Sender, Time, new RoomOptions(),
+            new ProfileService(_db, _writer, Time), NullLoggerFactory.Instance);
+        Room = new Room("TEST", "host-token", services);
         _runTask = Task.Run(() => Room.RunAsync(_cts.Token));
     }
 
@@ -79,5 +80,8 @@ public sealed class RoomFixture : IAsyncDisposable
         {
             // Expected
         }
+
+        _writer.Dispose();
+        _db.Dispose();
     }
 }

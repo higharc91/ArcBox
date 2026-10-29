@@ -12,6 +12,9 @@ public sealed class RoomMembers(RoomOptions options)
 
     public PlayerId? VipId => _slots.FirstOrDefault(s => s.Connected)?.Id;
 
+    /// <summary>The seats nobody is sitting in, in join order.</summary>
+    public IEnumerable<PlayerSlot> Offline => _slots.Where(s => !s.Connected);
+
     public bool AnyConnected => _slots.Any(s => s.Connected);
 
     public bool TryAdd(string rawName, string connectionId, out PlayerSlot? slot, out string? secret, out string? error)
@@ -125,7 +128,7 @@ public sealed class RoomMembers(RoomOptions options)
     {
         var vip = VipId;
         return _slots
-            .Select(s => new LobbyPlayer(s.Id, s.Name, IsVip: s.Id == vip, Connected: s.Connected))
+            .Select(s => new LobbyPlayer(s.Id, s.Name, IsVip: s.Id == vip, Connected: s.Connected, s.Profile))
             .ToList();
     }
 }

@@ -4,16 +4,26 @@ using ArcBox.Server;
 using ArcBox.Server.Games;
 using ArcBox.Server.Games.Redline;
 using ArcBox.Server.Hubs;
+using ArcBox.Server.Profiles;
 using ArcBox.Server.Rooms;
 using ArcBox.Server.Speech;
 using ArcBox.Server.Storage;
 using Counter.Logic;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<RoomOptions>(builder.Configuration.GetSection("Rooms"));
 builder.Services.AddKeyedSingleton<TimeProvider>(RoomManager.ClockKey, TimeProvider.System);
+builder.Services.AddSingleton<ProfileService>();
+builder.Services.AddSingleton(sp => new RoomServices(
+    sp.GetRequiredService<IGameRegistry>(),
+    sp.GetRequiredService<IClientSender>(),
+    sp.GetRequiredKeyedService<TimeProvider>(RoomManager.ClockKey),
+    sp.GetRequiredService<IOptions<RoomOptions>>().Value,
+    sp.GetRequiredService<ProfileService>(),
+    sp.GetRequiredService<ILoggerFactory>()));
 builder.Services.AddSingleton<RoomManager>();
 builder.Services.AddSingleton<IClientSender, HubClientSender>();
 builder.Services.AddSingleton<IGameRegistry, GameRegistry>();

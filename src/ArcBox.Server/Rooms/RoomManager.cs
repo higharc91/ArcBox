@@ -1,10 +1,5 @@
 using System.Collections.Concurrent;
 using ArcBox.Sdk.Protocol;
-using ArcBox.Server.Games;
-using ArcBox.Server.Hubs;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace ArcBox.Server.Rooms;
 
@@ -12,45 +7,31 @@ public sealed class RoomManager : IAsyncDisposable
 {
     public const string ClockKey = "rooms";
 
-    private readonly IGameRegistry _registry;
-    private readonly IClientSender _sender;
-    private readonly TimeProvider _time;
-    private readonly RoomOptions _options;
-    private readonly ILoggerFactory _loggers;
+    private readonly RoomServices _services;
     private readonly ILogger<RoomManager> _logger;
 
     private readonly ConcurrentDictionary<string, RoomEntry> _rooms = new(StringComparer.OrdinalIgnoreCase);
     private readonly ConcurrentDictionary<string, Room> _connections = new();
 
-    public RoomManager(
-        IGameRegistry registry,
-        IClientSender sender,
-        [FromKeyedServices(ClockKey)] TimeProvider time,
-        IOptions<RoomOptions> options,
-        ILoggerFactory loggers)
+    public RoomManager(RoomServices services)
     {
-        _registry = registry;
-        _sender = sender;
-        _time = time;
-        _options = options.Value;
-        _loggers = loggers;
-        _logger = loggers.CreateLogger<RoomManager>();
+        _services = services;
+        _logger = services.Loggers.CreateLogger<RoomManager>();
     }
 
     public int Count => _rooms.Count;
 
     public async Task<(Room Room, CreateRoomResult Result)> CreateRoomAsync(string hostConnectionId)
     {
-        if (_rooms.Count >= _options.MaxRooms)
+        if (_rooms.Count >= _services.Options.MaxRooms)
         {
             throw new RoomException("Server is full, try again later.");
         }
 
         var code = RoomCodes.Generate(c => _rooms.ContainsKey(c));
         var hostToken = Secrets.NewToken();
-        var roomLogger = _loggers.CreateLogger<Room>();
 
-        var room = new Room(code, hostToken, _registry, _sender, _time, _options, roomLogger);
+        var room = new Room(code, hostToken, _services);
         var cts = new CancellationTokenSource();
         var runTask = Task.Run(() => room.RunAsync(cts.Token));
 
@@ -99,7 +80,7 @@ public sealed class RoomManager : IAsyncDisposable
 
     public async Task SweepAsync()
     {
-        var now = _time.GetUtcNow();
+        var now = _services.Time.GetUtcNow();
         var entries = _rooms.Values.ToList();
 
         foreach (var entry in entries)
@@ -108,7 +89,7 @@ public sealed class RoomManager : IAsyncDisposable
 
             // Watchdog check: without enqueueing
             var busySince = room.BusySince;
-            if (busySince.HasValue && (now - busySince.Value) > _options.GameCallTimeout)
+            if (busySince.HasValue && (now - busySince.Value) > _services.Options.GameCallTimeout)
             {
                 _logger.LogWarning("Room {Code} hung; force closing.", room.Code);
                 room.ForceClose("game stopped responding");
@@ -120,7 +101,7 @@ public sealed class RoomManager : IAsyncDisposable
             bool expired = false;
             try
             {
-                expired = await room.IsExpiredAsync().WaitAsync(TimeSpan.FromSeconds(1), _time);
+                expired = await room.IsExpiredAsync().WaitAsync(TimeSpan.FromSeconds(1), _services.Time);
             }
             catch (TimeoutException)
             {
