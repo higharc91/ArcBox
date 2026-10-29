@@ -10,6 +10,20 @@ public sealed class RoomMembers(RoomOptions options)
 
     public IReadOnlyList<PlayerSlot> All => _slots;
 
+    /// <summary>The number the next new seat gets (<c>p{n}</c>). Ids are never reused, so it is stored with the room.</summary>
+    public int NextSlotId => _nextId;
+
+    /// <summary>Puts back stored seats, every one offline, and carries on numbering from <paramref name="nextSlotId"/>.</summary>
+    public void Restore(IEnumerable<SlotRecord> slots, int nextSlotId)
+    {
+        foreach (var s in slots)
+        {
+            _slots.Add(new PlayerSlot { Id = s.Id, Name = s.Name, SecretHash = s.SecretHash, JoinOrder = s.JoinOrder, Profile = s.Profile });
+        }
+
+        _nextId = Math.Max(nextSlotId, 1);
+    }
+
     public PlayerId? VipId => _slots.FirstOrDefault(s => s.Connected)?.Id;
 
     /// <summary>The seats nobody is sitting in, in join order.</summary>

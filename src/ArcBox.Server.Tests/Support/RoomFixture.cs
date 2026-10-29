@@ -39,7 +39,7 @@ public sealed class RoomFixture : IAsyncDisposable
         Profiles = new ProfileService(_db, _writer, Time);
         Campaigns = new CampaignService(_db, _writer, rules, Time, NullLogger<CampaignService>.Instance);
         _services = new RoomServices(registry, Sender, Time, new RoomOptions(), Profiles, NullLoggerFactory.Instance,
-            Campaigns, rules);
+            Campaigns, rules, new RoomStore(_db, _writer, Time));
         Room = Run("TEST");
     }
 

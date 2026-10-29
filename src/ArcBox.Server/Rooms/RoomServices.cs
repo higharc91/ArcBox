@@ -14,4 +14,5 @@ public sealed record RoomServices(
     ProfileService Profiles,
     ILoggerFactory Loggers,
     CampaignService Campaigns,
-    CampaignRulesRegistry Rules);
+    CampaignRulesRegistry Rules,
+    RoomStore Store);

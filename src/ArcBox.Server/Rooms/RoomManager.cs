@@ -3,6 +3,10 @@ using ArcBox.Sdk.Protocol;
 
 namespace ArcBox.Server.Rooms;
 
+/// <summary>
+/// Owns the rooms in memory. A room that isn't in memory but has a stored record within
+/// <see cref="RoomOptions.RetainFor"/> is rebuilt the first time it is looked up (spec §3.5).
+/// </summary>
 public sealed class RoomManager : IAsyncDisposable
 {
     public const string ClockKey = "rooms";
@@ -12,6 +16,9 @@ public sealed class RoomManager : IAsyncDisposable
 
     private readonly ConcurrentDictionary<string, RoomEntry> _rooms = new(StringComparer.OrdinalIgnoreCase);
     private readonly ConcurrentDictionary<string, Room> _connections = new();
+
+    // Rebuilds in progress. Every lookup that misses memory for a code at the same time awaits the same one.
+    private readonly ConcurrentDictionary<string, Lazy<Task<RoomEntry?>>> _rebuilding = new(StringComparer.OrdinalIgnoreCase);
 
     public RoomManager(RoomServices services)
     {
@@ -28,39 +35,64 @@ public sealed class RoomManager : IAsyncDisposable
             throw new RoomException("Server is full, try again later.");
         }
 
-        var code = RoomCodes.Generate(c => _rooms.ContainsKey(c));
+        // A stored room may come back, so its code isn't handed out again while its row is kept.
+        var code = RoomCodes.Generate(c => _rooms.ContainsKey(c) || _services.Store.Exists(c));
         var hostToken = Secrets.NewToken();
 
         var room = new Room(code, hostToken, _services);
-        var cts = new CancellationTokenSource();
-        var runTask = Task.Run(() => room.RunAsync(cts.Token));
-
-        var entry = new RoomEntry(room, cts, runTask);
+        var entry = Run(room);
         if (!_rooms.TryAdd(code, entry))
         {
-            cts.Cancel();
+            entry.Cts.Cancel();
             throw new RoomException("Server is full, try again later.");
         }
 
         try
         {
+            await room.SaveAsync();
             await room.BindHostAsync(hostConnectionId, hostToken);
             Track(hostConnectionId, room);
         }
         catch
         {
-            RemoveRoom(code);
+            RemoveRoom(entry);
+            _services.Store.Delete(code);
             throw;
         }
 
         return (room, new CreateRoomResult(code, hostToken));
     }
 
-    public Room? Find(string rawCode)
+    /// <summary>The room with this code: from memory, else rebuilt from its stored record. Null if there is neither.</summary>
+    public async Task<Room?> FindAsync(string rawCode)
     {
         if (string.IsNullOrWhiteSpace(rawCode)) return null;
         var code = RoomCodes.Normalize(rawCode);
-        return _rooms.TryGetValue(code, out var entry) ? entry.Room : null;
+        if (_rooms.TryGetValue(code, out var live))
+        {
+            return live.Room;
+        }
+
+        var rebuild = _rebuilding.GetOrAdd(code, c => new Lazy<Task<RoomEntry?>>(() => Task.Run(() => Rebuild(c))));
+        try
+        {
+            return (await rebuild.Value)?.Room;
+        }
+        finally
+        {
+            // Only after the room is in _rooms (or known not to exist), so a later miss finds it there.
+            _rebuilding.TryRemove(new KeyValuePair<string, Lazy<Task<RoomEntry?>>>(code, rebuild));
+        }
+    }
+
+    /// <summary>
+    /// The room with this code if it is in memory; never rebuilds one. For bookkeeping that follows live rooms, such
+    /// as the speech rate limiter; callers acting for a client use <see cref="FindAsync"/>.
+    /// </summary>
+    public Room? FindLoaded(string rawCode)
+    {
+        if (string.IsNullOrWhiteSpace(rawCode)) return null;
+        return _rooms.TryGetValue(RoomCodes.Normalize(rawCode), out var entry) ? entry.Room : null;
     }
 
     public void Track(string connectionId, Room room)
@@ -87,37 +119,77 @@ public sealed class RoomManager : IAsyncDisposable
         {
             var room = entry.Room;
 
-            // Watchdog check: without enqueueing
+            // Parked by an earlier sweep whose wait for it timed out.
+            if (room.IsClosed)
+            {
+                RemoveRoom(entry);
+                continue;
+            }
+
+            // Watchdog check: without enqueueing. A room whose game hung doesn't come back, so its row goes too.
             var busySince = room.BusySince;
             if (busySince.HasValue && (now - busySince.Value) > _services.Options.GameCallTimeout)
             {
                 _logger.LogWarning("Room {Code} hung; force closing.", room.Code);
                 room.ForceClose("game stopped responding");
-                RemoveRoom(room.Code);
+                _services.Store.Delete(room.Code);
+                RemoveRoom(entry);
                 continue;
             }
 
-            // Expiry check
-            bool expired = false;
+            // Idle rooms are parked: out of memory, row kept, campaign given back.
+            bool parked = false;
             try
             {
-                expired = await room.IsExpiredAsync().WaitAsync(TimeSpan.FromSeconds(1), _services.Time);
+                parked = await room.TryParkAsync().WaitAsync(TimeSpan.FromSeconds(1), _services.Time);
             }
             catch (TimeoutException)
             {
                 _logger.LogWarning("Timeout checking expiry for room {Code}", room.Code);
+            }
+            catch (RoomException) when (room.IsClosed)
+            {
+                // Closed meanwhile (parked by a concurrent sweep, or force closed); removed below.
+                parked = true;
             }
             catch (Exception ex)
             {
                 _logger.LogWarning(ex, "Error checking expiry for room {Code}", room.Code);
             }
 
-            if (expired)
+            if (parked)
             {
-                room.ForceClose("Room closed after being idle.");
-                RemoveRoom(room.Code);
+                RemoveRoom(entry);
             }
         }
+    }
+
+    /// <summary>
+    /// Deletes stored rooms last saved more than <see cref="RoomOptions.RetainFor"/> ago; returns how many. A room still
+    /// in memory may have gone that long without a change (a TV left on in the lobby), so any that has gone half as long
+    /// saves itself again first.
+    /// </summary>
+    public async Task<int> DeleteExpiredRowsAsync()
+    {
+        var now = _services.Time.GetUtcNow();
+        var stale = _rooms.Values
+            .Select(e => e.Room)
+            .Where(r => !r.IsClosed && (r.SavedUtc is not { } saved || now - saved > _services.Options.RetainFor / 2))
+            .ToList();
+
+        foreach (var room in stale)
+        {
+            try
+            {
+                await room.SaveAsync().WaitAsync(TimeSpan.FromSeconds(1), _services.Time);
+            }
+            catch (Exception ex) when (ex is TimeoutException or RoomException)
+            {
+                // Hung (the watchdog deals with it) or closed meanwhile.
+            }
+        }
+
+        return _services.Store.DeleteOlderThan(now - _services.Options.RetainFor);
     }
 
     public async ValueTask DisposeAsync()
@@ -144,13 +216,47 @@ public sealed class RoomManager : IAsyncDisposable
         }
     }
 
-    private void RemoveRoom(string code)
+    private RoomEntry? Rebuild(string code)
     {
-        if (_rooms.TryRemove(code, out var entry))
+        // Another lookup may have finished rebuilding it just before this one began.
+        if (_rooms.TryGetValue(code, out var live))
+        {
+            return live;
+        }
+
+        var record = _services.Store.Load(code);
+        if (record is null || record.UpdatedUtc < _services.Time.GetUtcNow() - _services.Options.RetainFor)
+        {
+            return null;
+        }
+
+        var entry = Run(Room.Rebuild(record, _services));
+        if (!_rooms.TryAdd(code, entry))
+        {
+            entry.Cts.Cancel();
+            return _rooms.TryGetValue(code, out live) ? live : null;
+        }
+
+        _logger.LogInformation("Room {Code} rebuilt from storage", code);
+        return entry;
+    }
+
+    private static RoomEntry Run(Room room)
+    {
+        var cts = new CancellationTokenSource();
+        var runTask = Task.Run(() => room.RunAsync(cts.Token));
+        return new RoomEntry(room, cts, runTask);
+    }
+
+    /// <summary>Takes the room out of memory. Its run loop ends, and on the way out gives back any campaign it holds.</summary>
+    private void RemoveRoom(RoomEntry entry)
+    {
+        var code = entry.Room.Code;
+        if (_rooms.TryRemove(new KeyValuePair<string, RoomEntry>(code, entry)))
         {
             foreach (var kvp in _connections)
             {
-                if (kvp.Value.Code == code)
+                if (kvp.Value == entry.Room)
                 {
                     _connections.TryRemove(kvp.Key, out _);
                 }

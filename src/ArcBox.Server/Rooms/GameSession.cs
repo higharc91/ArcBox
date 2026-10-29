@@ -93,6 +93,28 @@ public sealed class GameSession : IDisposable
         }
     }
 
+    /// <summary>
+    /// Starts a game whose room was rebuilt (spec §3.5): <see cref="IResumableGame.Resume"/> instead of Start, with every
+    /// player disconnected. Like Start, the lease stays the room's.
+    /// </summary>
+    /// <exception cref="InvalidOperationException">The game isn't an <see cref="IResumableGame"/>; the room checks first.</exception>
+    public void Resume()
+    {
+        if (IsOver) return;
+
+        if (_game is not IResumableGame resumable)
+        {
+            throw new InvalidOperationException($"Game {GameId} can't be resumed.");
+        }
+
+        Guard(() => resumable.Resume(_context, _players, _campaign));
+
+        if (!IsOver)
+        {
+            PublishViews();
+        }
+    }
+
     public bool Input(PlayerId from, string viewId, JsonElement payload)
     {
         if (IsOver) return false;

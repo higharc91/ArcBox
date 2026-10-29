@@ -47,7 +47,8 @@ public sealed class RoomManagerTests : IDisposable
         var rules = new CampaignRulesRegistry([]);
         var services = new RoomServices(registry, sender, time, new RoomOptions { MaxRooms = maxRooms },
             new ProfileService(db, writer, time), NullLoggerFactory.Instance,
-            new CampaignService(db, writer, rules, time, NullLogger<CampaignService>.Instance), rules);
+            new CampaignService(db, writer, rules, time, NullLogger<CampaignService>.Instance), rules,
+            new RoomStore(db, writer, time));
         return new RoomManager(services);
     }
 
@@ -67,7 +68,7 @@ public sealed class RoomManagerTests : IDisposable
     {
         await using var m = NewManager();
         var (room, r) = await m.CreateRoomAsync("h1");
-        Assert.Same(room, m.Find($" {r.Code.ToLowerInvariant()} "));
+        Assert.Same(room, await m.FindAsync($" {r.Code.ToLowerInvariant()} "));
     }
 
     [Fact]

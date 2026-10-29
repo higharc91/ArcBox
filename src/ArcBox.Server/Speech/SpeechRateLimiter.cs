@@ -23,7 +23,7 @@ public sealed class SpeechRateLimiter : IDisposable
     private bool _disposed;
 
     public SpeechRateLimiter(RoomManager rooms, IOptions<SpeechOptions> options)
-        : this(code => rooms.Find(code), options.Value.RequestsPerMinutePerRoom)
+        : this(code => rooms.FindLoaded(code), options.Value.RequestsPerMinutePerRoom)
     {
     }
 

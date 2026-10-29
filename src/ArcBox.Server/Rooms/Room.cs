@@ -24,6 +24,8 @@ public sealed partial class Room
     private readonly ProfileService _profiles;
     private readonly CampaignService _campaigns;
     private readonly CampaignRulesRegistry _rules;
+    private readonly RoomStore _store;
+    private readonly DateTimeOffset _createdUtc;
 
     private readonly Channel<Action> _inbox = Channel.CreateUnbounded<Action>(new UnboundedChannelOptions
     {
@@ -44,9 +46,16 @@ public sealed partial class Room
     private DateTimeOffset? _allAbsentSince;
 
     public Room(string code, string hostToken, RoomServices services)
+        : this(code, Secrets.Hash(hostToken), services, services.Time.GetUtcNow())
+    {
+    }
+
+    private Room(string code, string hostTokenHash, RoomServices services, DateTimeOffset createdUtc)
     {
         Code = code;
-        _hostTokenHash = Secrets.Hash(hostToken);
+        _hostTokenHash = hostTokenHash;
+        _createdUtc = createdUtc;
+        _store = services.Store;
         _registry = services.Registry;
         _sender = services.Sender;
         _time = services.Time;
@@ -142,6 +151,10 @@ public sealed partial class Room
         _allAbsentSince = null;
 
         _sender.Send(connectionId, ClientMethods.LobbyChanged, GetLobbyState());
+        if (TakeHostNotice() is { } notice)
+        {
+            _sender.Send(connectionId, ClientMethods.GameEnded, notice);
+        }
 
         if (_status == RoomStatus.InGame && _session?.CurrentHostView != null)
         {
@@ -170,6 +183,13 @@ public sealed partial class Room
     /// <summary>Takes a seat: either a new one under <c>NewName</c>, or an existing offline one.</summary>
     public Task<JoinResult> TakeSeatAsync(string connectionId, TakeSeatRequest request) => EnqueueAsync(() =>
     {
+        var result = TakeSeat(connectionId, request);
+        Save();
+        return result;
+    });
+
+    private JoinResult TakeSeat(string connectionId, TakeSeatRequest request)
+    {
         if ((request.Seat is null) == (request.NewName is null))
         {
             throw new RoomException("Pick a seat or enter a name.");
@@ -185,7 +205,7 @@ public sealed partial class Room
         return seat.Member is { } member
             ? TakeMemberSeat(connectionId, member, keys)
             : TakeOfflineSeat(connectionId, seat.Slot!.Value, keys);
-    });
+    }
 
     /// <summary>The pre-picker call; a stale phone tab still uses it.</summary>
     public Task<JoinResult> JoinAsync(string connectionId, string name) =>
@@ -270,6 +290,10 @@ public sealed partial class Room
         _allAbsentSince = null;
 
         _sender.Send(connectionId, ClientMethods.LobbyChanged, GetLobbyState());
+        if (TakeSlotNotice(slot.Id) is { } notice)
+        {
+            _sender.Send(connectionId, ClientMethods.GameEnded, notice);
+        }
 
         if (_status == RoomStatus.InGame && _session != null)
         {
@@ -312,6 +336,7 @@ public sealed partial class Room
 
         _selectedGameId = id;
         BroadcastLobby();
+        Save();
     });
 
     public Task StartGameAsync(string connectionId) => EnqueueAsync(() =>
@@ -332,15 +357,11 @@ public sealed partial class Room
         var game = _registry.Create(_selectedGameId!);
         var lease = campaign is null ? null : CheckOutForStart(campaign);
 
-        var vipId = _members.VipId;
-        var players = _members.All
-            .Select(s => new Player(s.Id, s.Name, IsVip: s.Id == vipId, s.Profile))
-            .ToList();
-
-        _session = new GameSession(game, players, _time, Random.Shared.Next(), Enqueue, _logger, lease);
+        _session = new GameSession(game, Players(), _time, Random.Shared.Next(), Enqueue, _logger, lease);
         _session.TimerFired += Publish;
 
         _status = RoomStatus.InGame;
+        ForgetNotice();
         _session.Start();
 
         // Every member is a player from the start; the game hears about the ones who aren't here as it would a lost phone.
@@ -354,6 +375,7 @@ public sealed partial class Room
 
         BroadcastLobby();
         Publish();
+        Save();
     });
 
     public Task ReturnToLobbyAsync(string connectionId) => EnqueueAsync(() =>
@@ -386,6 +408,7 @@ public sealed partial class Room
             }
             _members.Remove(target);
             BroadcastLobby();
+            Save();
         }
     });
 
@@ -444,13 +467,15 @@ public sealed partial class Room
         BroadcastLobby();
     }
 
-    public Task<bool> IsExpiredAsync() => EnqueueAsync(() =>
+    public Task<bool> IsExpiredAsync() => EnqueueAsync(IsExpired);
+
+    private bool IsExpired()
     {
         var now = _time.GetUtcNow();
         bool hostExpired = _hostAbsentSince.HasValue && (now - _hostAbsentSince.Value) >= _options.IdleTimeout;
         bool allExpired = _allAbsentSince.HasValue && (now - _allAbsentSince.Value) >= _options.IdleTimeout;
         return hostExpired || allExpired;
-    });
+    }
 
     private void EnsureHostOrVip(string connectionId)
     {
@@ -509,6 +534,7 @@ public sealed partial class Room
         {
             slot.AbsentAtStart = false;
         }
+        Save();
 
         if (_hostConnectionId != null)
         {
@@ -521,6 +547,13 @@ public sealed partial class Room
         }
 
         BroadcastLobby();
+    }
+
+    /// <summary>Every seat as a player of the game about to begin; the VIP is the first seat with a phone in it.</summary>
+    private List<Player> Players()
+    {
+        var vipId = _members.VipId;
+        return [.. _members.All.Select(s => new Player(s.Id, s.Name, IsVip: s.Id == vipId, s.Profile))];
     }
 
     private GameManifest? SelectedManifest =>

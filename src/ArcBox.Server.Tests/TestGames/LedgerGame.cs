@@ -18,12 +18,14 @@ public sealed record LedgerHostView(IReadOnlyList<LedgerSeat> Seats, IReadOnlyLi
 /// lease (see <see cref="LedgerRules"/>).
 /// </summary>
 /// <remarks>
-/// <c>ledger</c> uses campaigns. The same game registered with <see cref="Plain"/> (<c>plain-ledger</c>) is a game
-/// without campaigns, for seat tests that don't need one.
+/// <c>ledger</c> uses campaigns and resumes after a restart: <see cref="Resume"/> logs <c>resume</c> and keeps the lease,
+/// with every player disconnected. The same game registered with <see cref="Plain"/> (<c>plain-ledger</c>) is a game
+/// without campaigns that isn't resumed (its manifest doesn't say so), for seat tests that don't need one.
 /// </remarks>
-public sealed class LedgerGame : IGame, ICampaignGame
+public sealed class LedgerGame : IGame, ICampaignGame, IResumableGame
 {
-    public static readonly GameManifest Campaign = new("ledger", "Ledger", "Test game", 1, 8, UsesCampaigns: true);
+    public static readonly GameManifest Campaign = new("ledger", "Ledger", "Test game", 1, 8, UsesCampaigns: true,
+        ResumesAfterRestart: true);
     public static readonly GameManifest Plain = new("plain-ledger", "Plain ledger", "Test game without campaigns", 1, 8);
 
     private readonly List<string> _log = [];
@@ -47,6 +49,14 @@ public sealed class LedgerGame : IGame, ICampaignGame
     {
         _players = players;
         foreach (var p in players) _connected[p.Id] = true;
+    }
+
+    public void Resume(IGameContext ctx, IReadOnlyList<Player> players, ICampaignLease? campaign)
+    {
+        _lease = campaign;
+        _players = players;
+        foreach (var p in players) _connected[p.Id] = false;
+        _log.Add("resume");
     }
 
     public void OnInput(PlayerId from, PlayerInput input)
