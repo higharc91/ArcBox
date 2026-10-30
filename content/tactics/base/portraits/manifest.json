@@ -1,0 +1,160 @@
+{
+  "size": 40,
+  "scale": 2,
+  "crop": {
+    "standard": [
+      6,
+      4,
+      26,
+      24
+    ],
+    "short": [
+      6,
+      9,
+      26,
+      29
+    ],
+    "large": [
+      6,
+      0,
+      26,
+      20
+    ],
+    "standard_f": [
+      6,
+      4,
+      26,
+      24
+    ],
+    "short_f": [
+      6,
+      9,
+      26,
+      29
+    ],
+    "large_f": [
+      6,
+      0,
+      26,
+      20
+    ]
+  },
+  "skipLayers": [
+    "weapon",
+    "offhand"
+  ],
+  "moods": {
+    "idle": {
+      "anim": "idle",
+      "frame": 0
+    },
+    "hurt": {
+      "anim": "hurt",
+      "frame": 0
+    }
+  },
+  "backdrops": {
+    "ally": "backdrops/ally.png",
+    "enemy": "backdrops/enemy.png",
+    "neutral": "backdrops/neutral.png"
+  },
+  "presets": {
+    "kara": {
+      "idle": "kara_idle.png",
+      "hurt": "kara_hurt.png"
+    },
+    "aldric": {
+      "idle": "aldric_idle.png",
+      "hurt": "aldric_hurt.png"
+    },
+    "wren": {
+      "idle": "wren_idle.png",
+      "hurt": "wren_hurt.png"
+    },
+    "ilyra": {
+      "idle": "ilyra_idle.png",
+      "hurt": "ilyra_hurt.png"
+    },
+    "tamsin": {
+      "idle": "tamsin_idle.png",
+      "hurt": "tamsin_hurt.png"
+    },
+    "sefa": {
+      "idle": "sefa_idle.png",
+      "hurt": "sefa_hurt.png"
+    },
+    "class_fighter": {
+      "idle": "class_fighter_idle.png",
+      "hurt": "class_fighter_hurt.png"
+    },
+    "class_rogue": {
+      "idle": "class_rogue_idle.png",
+      "hurt": "class_rogue_hurt.png"
+    },
+    "class_wizard": {
+      "idle": "class_wizard_idle.png",
+      "hurt": "class_wizard_hurt.png"
+    },
+    "class_cleric": {
+      "idle": "class_cleric_idle.png",
+      "hurt": "class_cleric_hurt.png"
+    },
+    "class_ranger": {
+      "idle": "class_ranger_idle.png",
+      "hurt": "class_ranger_hurt.png"
+    },
+    "class_paladin": {
+      "idle": "class_paladin_idle.png",
+      "hurt": "class_paladin_hurt.png"
+    },
+    "class_bard": {
+      "idle": "class_bard_idle.png",
+      "hurt": "class_bard_hurt.png"
+    },
+    "class_druid": {
+      "idle": "class_druid_idle.png",
+      "hurt": "class_druid_hurt.png"
+    },
+    "class_warlock": {
+      "idle": "class_warlock_idle.png",
+      "hurt": "class_warlock_hurt.png"
+    },
+    "class_monk": {
+      "idle": "class_monk_idle.png",
+      "hurt": "class_monk_hurt.png"
+    },
+    "goblin_cutthroat": {
+      "idle": "goblin_cutthroat_idle.png",
+      "hurt": "goblin_cutthroat_hurt.png"
+    },
+    "goblin_spear": {
+      "idle": "goblin_spear_idle.png",
+      "hurt": "goblin_spear_hurt.png"
+    },
+    "goblin_shaman": {
+      "idle": "goblin_shaman_idle.png",
+      "hurt": "goblin_shaman_hurt.png"
+    },
+    "orc_brute": {
+      "idle": "orc_brute_idle.png",
+      "hurt": "orc_brute_hurt.png"
+    },
+    "skeleton": {
+      "idle": "skeleton_idle.png",
+      "hurt": "skeleton_hurt.png"
+    },
+    "bandit": {
+      "idle": "bandit_idle.png",
+      "hurt": "bandit_hurt.png"
+    },
+    "black_knight": {
+      "idle": "black_knight_idle.png",
+      "hurt": "black_knight_hurt.png"
+    },
+    "cultist": {
+      "idle": "cultist_idle.png",
+      "hurt": "cultist_hurt.png"
+    }
+  },
+  "howTo": "compose the character's layers (except skipLayers) for the front facing in the mood's pose, crop to crop[build], draw over a backdrop, then scale by `scale` (nearest)"
+}
