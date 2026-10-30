@@ -77,7 +77,7 @@
     },
     "effect": {
       "type": "object",
-      "description": "One effect block: exactly one block key (attack, save, damage, heal, tempHp, revive, apply, remove, cleanse, dispel, help, push, pull, teleport, swap, dash, jumpTo, zone, alterTerrain, hazard, summon, transform, grantResource, extraAction, refreshReaction, statMod, mark, taunt, reveal, turnOrder, chain, repeat, if, random) holding its parameters, with branches (onHit, onMiss, onCrit, onFail, onSuccess, then, else, effects) and, for a shorthand block, its other parameters beside the key: {\"apply\": \"lit\", \"rounds\": 1}. attack.kind is \"weapon\" or \"spell\"; apply.untilSave needs an enclosing save. save.dcStat sets the DC to 8 + proficiency + that stat's modifier instead of the casting stat's (a shove's STR). grantResource.resource \"primary\" is the first resource on the target's sheet, and overMax lets the grant pass the sheet's pool. extraAction.kind is \"action\", \"bonus\" or \"move\" (the target gains its Move again: Dash).",
+      "description": "One effect block: exactly one block key (attack, save, damage, heal, tempHp, revive, apply, remove, cleanse, dispel, help, push, pull, teleport, swap, dash, jumpTo, zone, alterTerrain, hazard, summon, transform, grantResource, extraAction, refreshReaction, statMod, mark, taunt, reveal, turnOrder, chain, repeat, if, random) holding its parameters, with branches (onHit, onMiss, onCrit, onFail, onSuccess, then, else, effects) and, for a shorthand block, its other parameters beside the key: {\"apply\": \"lit\", \"rounds\": 1}. attack.kind is \"weapon\" or \"spell\"; apply.untilSave needs an enclosing save. save.dcStat sets the DC to 8 + proficiency + that stat's modifier instead of the casting stat's (a shove's STR). grantResource.amount may scale by level; grantResource.resource \"primary\" is the target's class primaryResource (else its first resource), and overMax lets the grant pass the sheet's pool. extraAction.kind is \"action\", \"bonus\" or \"move\" (the target gains its Move again: Dash). zone.blocksSight blocks line of sight into, out of and through its tiles.",
       "anyOf": [
         {
           "required": [
@@ -355,6 +355,45 @@
         "maxHp": {
           "type": "integer",
           "description": "Added to the maximum HP of a character's sheet when it is built (Cracked ribs: -5). Only passives and injuries may carry it; a condition can't (the loader rejects it)."
+        },
+        "saveEdges": {
+          "type": "object",
+          "propertyNames": {
+            "enum": [
+              "str",
+              "dex",
+              "con",
+              "int",
+              "wis",
+              "cha"
+            ]
+          },
+          "additionalProperties": {
+            "enum": [
+              "none",
+              "advantage",
+              "disadvantage"
+            ]
+          },
+          "description": "Advantage or disadvantage on saves of each stat (one source each)."
+        },
+        "saveProficiencies": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "str",
+              "dex",
+              "con",
+              "int",
+              "wis",
+              "cha"
+            ]
+          },
+          "description": "Saves of these stats add proficiency (once)."
+        },
+        "evasion": {
+          "type": "boolean",
+          "description": "DEX saves for half: none on a success, half on a failure."
         }
       },
       "description": "Modifiers that hold while their passive or condition does.",
@@ -494,7 +533,7 @@
         "size": {
           "type": "integer",
           "minimum": 0,
-          "maximum": 6
+          "maximum": 10
         },
         "includeSelf": {
           "type": "boolean"

@@ -48,7 +48,7 @@ public sealed class ValidationTests
             ErrorsOf("subclass_missing_level_6"));
 
     [Fact]
-    public void Default_picks_are_checked_like_a_characters_picks()
+    public void Default_picks_and_the_primary_resource_are_checked()
     {
         const string bard = "chapter-01/classes/bard.json";
         Assert.Equal(
@@ -56,6 +56,7 @@ public sealed class ValidationTests
             new ContentError(bard, "/defaultPicks/2", "A level 2 bard chooses 1 ability, not 2."),
             new ContentError(bard, "/defaultPicks/3/0", "'test.strike' isn't one of the abilities this class offers a choice of at level 3."),
             new ContentError(bard, "/defaultPicks/7/1", "'test.mend' is one pick too many: the level 2 choice takes 1 of test.bolt, test.mend."),
+            new ContentError(bard, "/primaryResource", "The primary resource 'grit' isn't one of the class's resources (mana)."),
         ], ErrorsOf("bad_default_picks"));
     }
 
@@ -112,7 +113,7 @@ public sealed class ValidationTests
         ContentError[] expected =
         [
             new(Abilities, "/abilities/0/target/range", "Range 13 is over the limit of 12."),
-            new(Abilities, "/abilities/0/target/area/size", "Area size 7 is over the limit of 6."),
+            new(Abilities, "/abilities/0/target/area/size", "Area size 11 is over the limit of 10."),
             new(Abilities, "/abilities/0/effects/0/attack/kind", "Unknown attack kind 'melee' (expected \"weapon\" or \"spell\")."),
             new(Abilities, "/abilities/0/effects/0/onHit/0/damage/bonus/0",
                 "Unknown addend 'mod.luck' (expected \"mod.<stat>\", \"mod.cast\", \"prof\" or \"level\")."),

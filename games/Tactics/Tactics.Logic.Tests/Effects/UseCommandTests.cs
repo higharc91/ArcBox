@@ -388,6 +388,24 @@ public sealed class UseCommandTests
     }
 
     [Fact]
+    public void A_sight_blocking_zone_stops_line_of_sight_through_it()
+    {
+        var battle = TestBattle.On(Field)
+            .Party("cleric", Cleric, new Tile(0, 1))
+            .Enemy("gob", Goblin, new Tile(5, 1))
+            .With(TestAbilities.GuidingBolt);
+        var (state, _) = battle.Start();
+        var bolt = new Use(U("cleric"), Bolt, new Target(Unit: U("gob")));
+
+        var (smoked, events) = battle.Run(state, "cleric", null, new Tile(3, 1),
+            new ZoneEffect("smoke", new AreaDef(AreaShape.Single), 2, [], BlocksSight: true));
+        Assert.True(Assert.IsType<ZoneCreated>(Assert.Single(events)).Zone.BlocksSight);
+
+        Assert.Equal(RejectCode.NoLineOfSight, Rejected(battle, smoked, bolt).Code);
+        Assert.Null(Battle.Apply(state, bolt, battle.Rules).Rejected);   // clear without the smoke
+    }
+
+    [Fact]
     public void Save_dc_stat_replaces_the_casting_modifier()
     {
         // The fighter has no casting stat (a casting modifier of 0); a shove's DC uses STR (+3) instead.

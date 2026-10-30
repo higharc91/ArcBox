@@ -1,6 +1,6 @@
 {
   "abilities": [
-    { "id": "fighter.second_wind", "name": "Second Wind", "tier": 0, "cost": { "bonus": 1, "uses": 2 },
+    { "id": "fighter.second_wind", "name": "Second Wind", "tier": 0, "cost": { "bonus": 1, "resource": { "second_wind": 1 } },
       "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "self" } },
       "effects": [ { "heal": { "dice": "1d10", "bonus": ["level"] } } ],
       "presentation": { "anim": "characters.ready", "fx": "fx.heal.nature" },

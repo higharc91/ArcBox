@@ -28,7 +28,7 @@ internal sealed partial class Validation(ArtManifest? art)
     public const int MaxRange = 12;
 
     /// <summary>The largest area size.</summary>
-    public const int MaxAreaSize = 6;
+    public const int MaxAreaSize = 10;
 
     private static readonly ImmutableSortedSet<string> HookNames = Ordinal.Set(
         typeof(HookKind).GetFields(BindingFlags.Public | BindingFlags.Static)

@@ -109,9 +109,11 @@ public sealed record DelayStep(UnitId Unit, int ToIndex) : Step
 /// Reaction; Move; resources; a per-battle use), and emits <see cref="AbilityUsed"/>. A concentration ability first ends
 /// the unit's current concentration (<see cref="Conditions.BreakConcentration"/>), then becomes it. A spell (tier 1 or
 /// more) opens a <see cref="ReactionTriggerKind.SpellCast"/> window: its <see cref="OfferReactionStep"/>s run before the
-/// ability's effects. The command was validated, so the cost is affordable.
+/// ability's effects. With an <see cref="Item"/> (the ability is that item's), one of it leaves the unit's bag and the use
+/// is recorded in <see cref="BattleState.ItemsUsed"/>. The command was validated, so the cost is affordable.
 /// </summary>
-public sealed record PayCostStep(UnitId Unit, AbilityId Ability, Target Target) : Step
+public sealed record PayCostStep(UnitId Unit, AbilityId Ability, Target Target,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ItemId? Item = null) : Step
 {
     /// <inheritdoc />
     public override void Run(BattleWriter w, RulesPack rules)
@@ -142,9 +144,16 @@ public sealed record PayCostStep(UnitId Unit, AbilityId Ability, Target Target) 
             Conditions.BreakConcentration(w, Unit);
             unit = w.Unit(Unit);
         }
+        var bag = unit.Bag;
+        if (Item is { } item)
+        {
+            var stack = bag.First(s => s.Item == item && s.Count > 0);
+            bag = stack.Count > 1 ? bag.Replace(stack, stack with { Count = stack.Count - 1 }) : bag.Remove(stack);
+            w.State = w.State with { ItemsUsed = w.State.ItemsUsed.Add(new ItemUse(Unit, item, ByAi: false)) };
+        }
         w.Set(unit with
         {
-            Economy = economy, Resources = resources, UsesLeft = usesLeft,
+            Economy = economy, Resources = resources, UsesLeft = usesLeft, Bag = bag,
             Concentrating = cost.Concentration ? Ability : unit.Concentrating,
         });
         w.Emit(new AbilityUsed(Unit, Ability, Target, ability.Presentation));

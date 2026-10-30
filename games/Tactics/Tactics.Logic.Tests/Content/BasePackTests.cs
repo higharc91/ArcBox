@@ -59,6 +59,7 @@ public sealed class BasePackTests
             Assert.False(cls.SubclassesPending, cls.Id);
             Assert.Single(cls.Subclasses);
             Assert.All(Enumerable.Range(1, 10), level => Assert.True(cls.DefaultPicks.ContainsKey(level), $"{cls.Id} has no default picks at {level}."));
+            Assert.Contains(cls.PrimaryResource!, cls.Resources.Keys);
         }
     }
 
@@ -169,7 +170,7 @@ public sealed class BasePackTests
         var base_ = Rules;
         var map = AsciiMap.Parse(field);
         var rules = RulesPack.InMemory("smoke", base_.Abilities.Values, base_.Passives.Values, base_.Conditions.Values, [map],
-            base_.Injuries.Values);
+            base_.Injuries.Values, items: base_.Items.Values);
         Invariants.Enabled = true;
         var owners = base_.Classes.Values
             .SelectMany(c => c.Subclasses.Select(s => SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter(c.Id, "human", c.Id, s.Id, 10, base_), base_)
@@ -178,13 +179,18 @@ public sealed class BasePackTests
         var ogre = SheetBuilder.ForMonster("hobgoblin", base_) with { MaxHp = 300, Tags = Ordinal.Set("humanoid", "undead") };
         var problems = new List<string>();
 
-        foreach (var ability in base_.Abilities.Values)
+        foreach (var ability in base_.Abilities.Values.Where(a => a.Id != Battle.UseItem))
         {
-            var sheet = owners.FirstOrDefault(o => o.Abilities.Contains(ability.Id)) ?? owners[0] with { Abilities = [ability.Id] };
+            // An item's ability runs through common.use_item, with one of the item in the bag.
+            var item = base_.Items.Values.FirstOrDefault(i => i.Use == ability.Id);
+            var sheet = owners.FirstOrDefault(o => o.Abilities.Contains(ability.Id))
+                        ?? owners[0] with { Abilities = item is null ? [ability.Id] : [] };
             var battle = new[] { ("user", sheet with { InitiativeBonus = 50, Side = Side.Party }, new Tile(1, 1)),
                 ("ally", owners[0] with { Side = Side.Party }, new Tile(1, 2)), ("enemy", ogre, new Tile(3, 1)) };
+            ImmutableArray<ItemStack> bag = item is null ? [] : [new ItemStack(item.Id, 1)];
             var setup = new BattleSetup(map, [.. battle.Select(b => new UnitPlacement(U(b.Item1), b.Item2,
-                b.Item2.Side == Side.Party ? new PlayerControlled(new ProfileId("pr_" + b.Item1)) : new AiControlled("brute"), b.Item3, []))],
+                b.Item2.Side == Side.Party ? new PlayerControlled(new ProfileId("pr_" + b.Item1)) : new AiControlled("brute"), b.Item3,
+                b.Item1 == "user" ? bag : []))],
                 ObjectivesDef.Default, [], Difficulty.Normal, 0, []);
             var state = Battle.Start(setup, rules, seed: 3).State;
             Assert.Equal(U("user"), state.Active);
@@ -206,7 +212,8 @@ public sealed class BasePackTests
                 target = new Target(Unit: U("user"));
             try
             {
-                var used = Battle.Apply(state, new Use(U("user"), ability.Id, target), rules);
+                var used = Battle.Apply(state, item is null ? new Use(U("user"), ability.Id, target)
+                    : new Use(U("user"), Battle.UseItem, target, item.Id), rules);
                 if (used.Rejected is { } refused)
                     problems.Add($"{ability.Id}: refused ({refused.Reason})");
             }
@@ -216,6 +223,25 @@ public sealed class BasePackTests
             }
         }
         Assert.True(problems.Count == 0, string.Join("\n", problems));
+    }
+
+    [Fact]
+    public void Resourceful_survives_arcane_recovery()
+    {
+        // A human wizard starts with one Mana over her pool of 4; Arcane Recovery (+1 at level 1) mustn't take it away.
+        var rules = Rules;
+        var setup = Encounters.Setup("river_crossing", Party(4, rules), Difficulty.Normal, rules);
+        var state = Battle.Start(setup, rules, seed: 7).State;
+        Assert.Equal(5, state.Units[U("wizard")].Resources["mana"]);
+        Assert.Equal(3, state.Units[U("fighter")].Resources["superiority"]);   // the declared primary, not second_wind
+        Assert.Equal(2, state.Units[U("fighter")].Resources["second_wind"]);
+
+        while (state.Active != U("wizard"))
+            state = Battle.Apply(state, new EndTurn(state.Active!.Value), rules).State;
+        var recovered = Battle.Apply(state, new Use(U("wizard"), new AbilityId("wizard.arcane_recovery"), new Target(Unit: U("wizard"))), rules);
+
+        Assert.Null(recovered.Rejected);
+        Assert.Equal(5, recovered.State.Units[U("wizard")].Resources["mana"]);
     }
 
     [Fact]

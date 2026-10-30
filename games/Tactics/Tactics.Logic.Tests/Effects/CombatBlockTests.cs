@@ -1,3 +1,5 @@
+using System.Collections.Immutable;
+
 namespace Tactics.Logic.Tests;
 
 public sealed class CombatBlockTests
@@ -165,6 +167,30 @@ public sealed class CombatBlockTests
         // A unit with no resources gains nothing.
         (after, _) = battle.Run(state, "cleric", "gob", null, new GrantResourceEffect(GrantResourceEffect.Primary, 1, OverMax: true));
         Assert.Empty(after.Units[U("gob")].Resources);
+
+        // A sheet's declared primary resource wins over the ordinal-first one.
+        var mana = state.Change("cleric", u => u with { Sheet = u.Sheet with { PrimaryResource = "mana" } });
+        (after, _) = battle.Run(mana, "cleric", "cleric", null, new GrantResourceEffect(GrantResourceEffect.Primary, 1, OverMax: true));
+        Assert.Equal((1, 5), (after.Units[U("cleric")].Resources["devotion"], after.Units[U("cleric")].Resources["mana"]));
+    }
+
+    [Fact]
+    public void A_normal_grant_never_takes_away_what_overMax_gave()
+    {
+        var battle = Build();
+        var (state, _) = battle.Start();
+        (state, _) = battle.Run(state, "cleric", "cleric", null, new GrantResourceEffect("mana", 2, OverMax: true));
+        Assert.Equal(6, state.Units[U("cleric")].Resources["mana"]);   // the pool is 4
+
+        var (after, _) = battle.Run(state, "cleric", "cleric", null, new GrantResourceEffect("mana", 1));
+        Assert.Equal(6, after.Units[U("cleric")].Resources["mana"]);
+        (after, _) = battle.Run(state, "cleric", "cleric", null, new GrantResourceEffect("mana", -1));
+        Assert.Equal(5, after.Units[U("cleric")].Resources["mana"]);
+
+        // The amount can scale by level: level 1 takes the first step.
+        var table = new ByLevel<int>(ImmutableSortedDictionary<int, int>.Empty.Add(1, 3).Add(5, 9));
+        (after, _) = battle.Run(state, "cleric", "kara", null, new GrantResourceEffect("second_wind", table, OverMax: true));
+        Assert.Equal(4, after.Units[U("kara")].Resources["second_wind"]);
     }
 
     [Fact]

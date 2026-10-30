@@ -22,16 +22,22 @@ public static class ZoneRules
                     yield return (passive, zone);
     }
 
+    /// <summary>The tiles of every zone that blocks line of sight (<see cref="Zone.BlocksSight"/>).</summary>
+    public static ImmutableSortedSet<Tile> Obscured(BattleState state)
+        => state.Zones.IsDefaultOrEmpty || !state.Zones.Any(z => z.BlocksSight)
+            ? ImmutableSortedSet<Tile>.Empty
+            : [.. state.Zones.Where(z => z.BlocksSight).SelectMany(z => z.Tiles)];
+
     /// <summary>
     /// Lays a zone numbered <see cref="BattleState.NextSerial"/> (which moves on) and emits <see cref="ZoneCreated"/>. Made
     /// during its owner's turn, it is marked <see cref="Zone.AppliedThisTurn"/>. A concentrating unit on its tiles that it
     /// leaves incapacitated loses its concentration. Units already there aren't "entering" it.
     /// </summary>
     public static Zone Create(BattleWriter w, UnitId? owner, string kind, ImmutableArray<Tile> tiles, int? rounds,
-        bool concentration, bool difficult, ImmutableArray<PassiveDef> passives)
+        bool concentration, bool difficult, ImmutableArray<PassiveDef> passives, bool blocksSight = false)
     {
         var zone = new Zone(w.State.NextSerial, owner, kind, tiles, rounds, concentration, difficult,
-            passives.IsDefault ? [] : passives, AppliedThisTurn: owner is { } id && w.State.Active == id);
+            passives.IsDefault ? [] : passives, AppliedThisTurn: owner is { } id && w.State.Active == id, BlocksSight: blocksSight);
         w.State = w.State with { Zones = w.State.Zones.Add(zone), NextSerial = w.State.NextSerial + 1 };
         w.Emit(new ZoneCreated(zone));
         foreach (var unit in w.State.Units.Values.Where(u => DownedRules.InBattle(u) && tiles.Contains(u.Pos)).Select(u => u.Id).ToArray())
@@ -98,6 +104,8 @@ public sealed class ZoneBlock : EffectBlock<ZoneEffect>
                    + (def.Rounds is { } rounds ? TooltipText.ForRounds(rounds) : "for the battle");
         if (def.Difficult)
             text += ", difficult terrain";
+        if (def.BlocksSight)
+            text += ", blocks line of sight";
         if (def.Concentration)
             text += ", ends if you lose concentration";
         if (!def.Passives.IsDefaultOrEmpty)
@@ -111,7 +119,8 @@ public sealed class ZoneBlock : EffectBlock<ZoneEffect>
         var source = ctx.SourceUnit;
         var tiles = Areas.Tiles(def.Area, source.Pos, ctx.Aim ?? source.Pos, ctx.W.Terrain);
         if (!tiles.IsEmpty)
-            ZoneRules.Create(ctx.W, source.Id, def.Kind, tiles, def.Rounds, def.Concentration, def.Difficult, def.Passives);
+            ZoneRules.Create(ctx.W, source.Id, def.Kind, tiles, def.Rounds, def.Concentration, def.Difficult, def.Passives,
+                def.BlocksSight);
     }
 }
 

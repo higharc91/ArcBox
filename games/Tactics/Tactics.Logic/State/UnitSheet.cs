@@ -21,6 +21,7 @@ public sealed record WeaponDef(string Id, Dice Damage, string DamageType, Stat S
 /// <summary>
 /// A unit's built character sheet, snapshotted into the battle at start. <see cref="Resources"/> holds each resource's
 /// maximum per battle; the battle refills to it. <see cref="CastingStat"/> names a <see cref="Stat"/> (e.g. <c>"Wis"</c>).
+/// <see cref="PrimaryResource"/> is the class's main resource, which <c>grantResource "primary"</c> means.
 /// </summary>
 public sealed record UnitSheet(
     string Name, Side Side, int Level, ImmutableSortedDictionary<Stat, int> Scores, int MaxHp, int Ac, ArmorKind Armor,
@@ -32,7 +33,8 @@ public sealed record UnitSheet(
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Immune,
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Vulnerable,
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Tags,
-    string? Sprite, string? AiProfile, string? CastingStat, int Xp = 0)
+    string? Sprite, string? AiProfile, string? CastingStat, int Xp = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? PrimaryResource = null)
 {
     /// <summary>The score for <paramref name="stat"/>, or 10 when the sheet doesn't list it.</summary>
     public int Score(Stat stat) => Scores.TryGetValue(stat, out var score) ? score : 10;

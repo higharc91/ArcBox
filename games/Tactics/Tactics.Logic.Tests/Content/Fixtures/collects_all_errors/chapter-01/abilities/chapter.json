@@ -1,6 +1,6 @@
 { "abilities": [
     { "id": "chapter.wild", "name": "Wild Swing", "tier": 0, "cost": { "action": 1 },
-      "target": { "kind": "enemy", "range": 13, "los": true, "area": { "shape": "burst", "size": 7 } },
+      "target": { "kind": "enemy", "range": 13, "los": true, "area": { "shape": "burst", "size": 11 } },
       "effects": [ { "attack": { "kind": "melee" }, "onHit": [ { "damage": { "dice": "1d6", "bonus": ["mod.luck"] } } ] } ] },
     { "id": "chapter.snare", "name": "Snare", "tier": 0, "cost": { "action": 1 },
       "target": { "kind": "enemy", "range": 4, "los": true, "area": { "shape": "single" } },

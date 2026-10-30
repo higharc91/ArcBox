@@ -118,6 +118,10 @@ public enum HookKind
 /// and attacks against it disadvantage.</item>
 /// <item><see cref="AutoFailSaves"/>: saves of these stats fail whatever the roll. <see cref="CritWhenAdjacent"/>: a hit
 /// from an adjacent attacker is a critical hit.</item>
+/// <item><see cref="SaveEdges"/>: one source of advantage or disadvantage on saves of each listed stat (Dodge: DEX
+/// advantage). <see cref="SaveProficiencies"/>: the unit adds its proficiency bonus to saves of these stats, once, if its
+/// sheet doesn't already. <see cref="Evasion"/>: on a DEX save against an effect that does half damage on a success, it
+/// takes none on a success and half on a failure.</item>
 /// <item><see cref="Resist"/> and <see cref="Immune"/> add damage types to the sheet's; <see cref="ExtraActions"/> adds
 /// actions to each turn's economy.</item>
 /// <item><see cref="MaxHp"/> adds to the sheet's maximum HP. It is applied once, by <see cref="SheetBuilder"/>, from the
@@ -145,7 +149,10 @@ public sealed record StaticMods(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(OrdinalJsonConverter))]
     ImmutableSortedSet<string>? Immune = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int ExtraActions = 0,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int MaxHp = 0)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int MaxHp = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableSortedDictionary<Stat, Edge>? SaveEdges = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableSortedSet<Stat>? SaveProficiencies = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Evasion = false)
 {
     /// <summary>No modifiers.</summary>
     public static StaticMods None { get; } = new();
@@ -235,11 +242,13 @@ public sealed record TriggerDef(string Id, JsonElement When, bool Once, JsonElem
 /// <see cref="BattleState.NextSerial"/> (see <see cref="ZoneRules"/>). <see cref="RoundsLeft"/> (null: the whole battle)
 /// counts its <see cref="Owner"/>'s turn ends like a condition's rounds, <see cref="AppliedThisTurn"/> marking one made
 /// during the owner's turn; a <see cref="Concentration"/> zone ends with its owner's concentration. A
-/// <see cref="Difficult"/> zone costs 2 Move per tile. Its <see cref="Passives"/> belong to every unit standing in it.
+/// <see cref="Difficult"/> zone costs 2 Move per tile. A <see cref="BlocksSight"/> zone (smoke) blocks line of sight into,
+/// out of and through its tiles (<see cref="Sight.Trace"/>). Its <see cref="Passives"/> belong to every unit standing in it.
 /// </summary>
 public sealed record Zone(int Serial, UnitId? Owner, string Kind, ImmutableArray<Tile> Tiles, int? RoundsLeft,
     bool Concentration, bool Difficult, ImmutableArray<PassiveDef> Passives,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool AppliedThisTurn = false);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool AppliedThisTurn = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool BlocksSight = false);
 
 /// <summary>
 /// An injury a party member can gain when it goes Out (spec §3.8), picked from the rules pack's table by
@@ -289,7 +298,8 @@ public sealed record SubclassDef(string Id, string Name, ImmutableSortedDictiona
 /// A class (spec §4.5, <c>classes/&lt;id&gt;.json</c>): hit die, save and gear proficiencies, skill choices, starting kit,
 /// per-level resource pools, the features gained at each level 1–10, its subclasses, the default picks (the whole loadout
 /// of the highest listed level at or below a character's level, used when it has chosen none), AI hints, the casting stat
-/// and the Jump score. <see cref="SubclassesPending"/> lets a class be loaded before its subclasses are written (a stop-gap
+/// and the Jump score. <see cref="PrimaryResource"/> (one of <see cref="Resources"/>) is what <c>grantResource
+/// "primary"</c> means for its characters. <see cref="SubclassesPending"/> lets a class be loaded before its subclasses are written (a stop-gap
 /// until every class has them). <see cref="Replaces"/> lets a later pack override an id.
 /// </summary>
 public sealed record ClassDef(string Id, string Name, string Role, int HitDie, ImmutableArray<Stat> Saves,
@@ -300,7 +310,8 @@ public sealed record ClassDef(string Id, string Name, string Role, int HitDie, I
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] Stat? CastingStat = null,
     int Jump = 2,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool SubclassesPending = false,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? PrimaryResource = null);
 
 /// <summary>
 /// A race (spec §4.6): size, Move, darkvision in tiles, an optional Jump override, resistances, trait passives, the racial

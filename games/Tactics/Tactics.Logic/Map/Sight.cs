@@ -29,13 +29,21 @@ public static class Sight
     /// height there (entry or exit) is strictly below the column top, or the column holds a blocking prop reaching strictly
     /// above it; touching exactly is grazing and does not block. <paramref name="unitTiles"/>: a standing unit on a column gives
     /// half cover against <paramref name="ranged"/> attacks. A prop with cover next to the target on the attacker's side
-    /// guarantees at least that cover. The result is the best of the three.
+    /// guarantees at least that cover. The result is the best of the three. Every ray is blocked when either end, or a column
+    /// between, is one of the <paramref name="obscured"/> tiles (a sight-blocking zone such as smoke).
     /// </summary>
-    public static SightResult Trace(Terrain terrain, Tile from, Tile to, ImmutableSortedSet<Tile> unitTiles, bool ranged)
+    public static SightResult Trace(Terrain terrain, Tile from, Tile to, ImmutableSortedSet<Tile> unitTiles, bool ranged,
+        ImmutableSortedSet<Tile>? obscured = null)
     {
         var eye = terrain.HeightAt(from) * Fixed + EyeHeight;
         var targetTop = terrain.HeightAt(to) * Fixed;
         var columns = Columns(from, to);
+
+        // An obscuring zone (smoke) blocks every ray at any height, so a ray through one of its tiles, or one that starts or
+        // ends in one, is blocked: no line of sight into, out of or through it.
+        if (from != to && obscured is { Count: > 0 }
+            && (obscured.Contains(from) || obscured.Contains(to) || columns.Any(c => obscured.Contains(c.Tile))))
+            return new SightResult(TargetHeights.Length, Cover.Total);
 
         var blocked = 0;
         foreach (var aim in TargetHeights)

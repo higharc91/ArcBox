@@ -5,7 +5,8 @@
                                          "insight", "persuasion", "survival"] },
   "startingKit": { "weapon": "longsword", "armor": "chain_mail", "shield": true,
                    "bag": [ { "item": "potion_of_healing", "count": 1 } ] },
-  "resources": { "superiority": { "1": 2, "4": 3, "7": 4, "10": 5 } },
+  "resources": { "superiority": { "1": 2, "4": 3, "7": 4, "10": 5 }, "second_wind": { "1": 2, "4": 3, "10": 4 } },
+  "primaryResource": "superiority",
   "features": {
     "1": [ { "choose": 1, "from": ["fighter.style_defense", "fighter.style_dueling", "fighter.style_great_weapon"] },
            { "ability": "fighter.second_wind" },

@@ -91,6 +91,7 @@ Alongside it come its rules content (12 classes at levels 1–10, 36 subclasses,
 | `NothingToReact` | "There's nothing to react to." |
 | `UnknownAbility` | "You don't have that ability." |
 | `BattleOver` | "The battle is over." |
+| `NoItem` | "You don't have that item." |
 
 - **Content conventions** (plan decisions that turn SRD 5.2 into this game; every content task follows them):
   - **Spell tier** = SRD spell level. **Mana cost = tier**; cantrips cost 0.

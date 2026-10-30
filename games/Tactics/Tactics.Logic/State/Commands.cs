@@ -15,8 +15,12 @@ public abstract record Command([property: JsonPropertyOrder(-1)] UnitId Actor);
 /// <summary>Walk along <see cref="Path"/>, which starts at the actor's tile.</summary>
 public sealed record Move(UnitId Actor, ImmutableArray<Tile> Path) : Command(Actor);
 
-/// <summary>Use an ability (attacks, spells, items, Dash, Shove, Help, …) on a target.</summary>
-public sealed record Use(UnitId Actor, AbilityId Ability, Target Target) : Command(Actor);
+/// <summary>
+/// Use an ability (attacks, spells, Dash, Shove, Help, …) on a target. To use a consumable, the ability is
+/// <c>common.use_item</c> and <see cref="Item"/> names the item from the actor's bag; the item's own ability runs.
+/// </summary>
+public sealed record Use(UnitId Actor, AbilityId Ability, Target Target,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ItemId? Item = null) : Command(Actor);
 
 /// <summary>Move the actor's turn <see cref="Slots"/> places later in the current round.</summary>
 public sealed record Delay(UnitId Actor, int Slots) : Command(Actor);

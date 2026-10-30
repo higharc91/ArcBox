@@ -22,5 +22,6 @@
   ],
   "defaultPicks": { "2": ["test.bolt", "test.mend"], "3": ["test.strike"], "7": ["test.bolt", "test.mend"], "8": ["test.bolt", "test.sneak"] },
   "aiTags": { "tags": ["support"], "priority": ["cha", "dex", "con", "wis", "int", "str"] },
-  "castingStat": "cha"
+  "castingStat": "cha",
+  "primaryResource": "grit"
 }

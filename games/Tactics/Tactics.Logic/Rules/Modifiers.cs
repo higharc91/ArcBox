@@ -57,7 +57,9 @@ public static class Modifiers
     public static StaticMods Sum(IEnumerable<StaticMods> sources)
     {
         var (ac, attack, damage, move, initiative, extra, maxHp) = (0, 0, 0, 0, 0, 0, 0);
-        var (incapacitated, cantMove, critWhenAdjacent, invisible) = (false, false, false, false);
+        var (incapacitated, cantMove, critWhenAdjacent, invisible, evasion) = (false, false, false, false, false);
+        var saveEdges = new SortedDictionary<Stat, EdgeCount>();
+        var saveProficiencies = ImmutableSortedSet.CreateBuilder<Stat>();
         var saves = ImmutableSortedDictionary.CreateBuilder<Stat, int>();
         var autoFail = ImmutableSortedSet.CreateBuilder<Stat>();
         var resist = ImmutableSortedSet.CreateBuilder<string>(StringComparer.Ordinal);
@@ -79,6 +81,14 @@ public static class Modifiers
             cantMove |= m.CantMove;
             critWhenAdjacent |= m.CritWhenAdjacent;
             invisible |= m.Invisible;
+            evasion |= m.Evasion;
+            foreach (var (stat, edge) in m.SaveEdges ?? ImmutableSortedDictionary<Stat, Edge>.Empty)
+            {
+                if (!saveEdges.TryGetValue(stat, out var count))
+                    saveEdges[stat] = count = new EdgeCount();
+                count.Add(edge);
+            }
+            saveProficiencies.UnionWith(m.SaveProficiencies ?? []);
             foreach (var (stat, bonus) in m.Saves ?? ImmutableSortedDictionary<Stat, int>.Empty)
                 saves[stat] = saves.GetValueOrDefault(stat) + bonus;
             autoFail.UnionWith(m.AutoFailSaves ?? []);
@@ -91,7 +101,9 @@ public static class Modifiers
 
         return new StaticMods(ac, attack, damage, move, initiative, saves.ToImmutable(), incapacitated, cantMove,
             own.Edge, melee.Edge, ranged.Edge, autoFail.ToImmutable(), critWhenAdjacent, invisible, resist.ToImmutable(),
-            immune.ToImmutable(), extra, maxHp);
+            immune.ToImmutable(), extra, maxHp,
+            saveEdges.Where(e => e.Value.Edge != Edge.None).ToImmutableSortedDictionary(e => e.Key, e => e.Value.Edge),
+            saveProficiencies.ToImmutable(), evasion);
     }
 
     /// <summary>True when <paramref name="unit"/> is Up and not incapacitated, so it can act, react and flank.</summary>
@@ -127,7 +139,7 @@ public static class Modifiers
         if (from == target)
             return 0;
         var standing = w.State.Units.Values.Where(u => u.Life == LifeState.Up).Select(u => u.Pos).ToImmutableSortedSet();
-        return CoverBonus(Sight.Trace(w.Terrain, from, target, standing, ranged).Cover);
+        return CoverBonus(Sight.Trace(w.Terrain, from, target, standing, ranged, ZoneRules.Obscured(w.State)).Cover);
     }
 
     /// <summary>The unit's effective Move: the sheet's plus modifiers, never negative, and 0 when it can't move.</summary>

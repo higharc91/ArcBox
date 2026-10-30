@@ -39,6 +39,9 @@ public enum RejectCode
     BattleOver,
     /// <summary>Delay is only allowed before spending anything, once per round, with a later slot to move to.</summary>
     CantDelay,
+
+    /// <summary>The item to use isn't in the actor's bag (or no item was named for <c>common.use_item</c>).</summary>
+    NoItem,
 }
 
 /// <summary>A refused command: the code and the exact text shown on the phone.</summary>
@@ -65,6 +68,7 @@ public sealed record Rejection(RejectCode Code, string Reason)
         RejectCode.UnknownAbility => "You don't have that ability.",
         RejectCode.BattleOver => "The battle is over.",
         RejectCode.CantDelay => "You can only delay at the start of your turn, once per round.",
+        RejectCode.NoItem => "You don't have that item.",
         _ => throw new ArgumentOutOfRangeException(nameof(code), code, null),
     });
 }

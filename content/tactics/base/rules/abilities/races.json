@@ -39,10 +39,10 @@
   "passives": [
     { "id": "human.resourceful", "hook": "onBattleStart", "target": "self",
       "effects": [ { "grantResource": { "resource": "primary", "amount": 1, "overMax": true } } ] },
-    { "id": "elf.fey_ancestry", "static": { "saves": { "wis": 2 } } },
+    { "id": "elf.fey_ancestry", "static": { "saveEdges": { "wis": "advantage" } } },
     { "id": "halfling.lucky", "hook": "onAttackMiss", "usesPerBattle": 1, "when": { "isSpell": false },
       "effects": [ { "attack": { "kind": "weapon" }, "onHit": [ { "damage": { "weapon": true } } ] } ] },
-    { "id": "gnome.cunning", "static": { "saves": { "int": 2, "wis": 2, "cha": 2 } } },
+    { "id": "gnome.cunning", "static": { "saveEdges": { "int": "advantage", "wis": "advantage", "cha": "advantage" } } },
     { "id": "half_orc.relentless_endurance", "hook": "onDowned", "target": "self", "usesPerBattle": 1,
       "effects": [ { "revive": { "hp": 1 } } ] }
   ]

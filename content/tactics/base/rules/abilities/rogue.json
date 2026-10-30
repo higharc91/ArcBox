@@ -88,8 +88,8 @@
     { "id": "rogue.sneak_attack", "hook": "onAttackHit", "oncePerTurn": true,
       "when": { "all": [ { "weapon": ["finesse", "ranged"] }, { "any": [ { "advantage": true }, { "flanked": true } ] } ] },
       "effects": [ { "damage": { "dice": { "byLevel": { "1": "1d6", "3": "2d6", "5": "3d6", "7": "4d6", "9": "5d6" } } } } ] },
-    { "id": "rogue.evasion", "static": { "saves": { "dex": 2 } } },
-    { "id": "rogue.slippery_mind", "static": { "saves": { "wis": 2, "cha": 2 } } },
+    { "id": "rogue.evasion", "static": { "evasion": true } },
+    { "id": "rogue.slippery_mind", "static": { "saveProficiencies": ["wis", "cha"] } },
     { "id": "shadow.death_from_the_shadows", "hook": "onAttackHit", "oncePerTurn": true, "when": { "advantage": true },
       "effects": [ { "damage": { "dice": "2d6", "type": "necrotic" } } ] }
   ]

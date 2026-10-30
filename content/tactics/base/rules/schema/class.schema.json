@@ -189,6 +189,10 @@
     },
     "replaces": {
       "$ref": "common.schema.json#/$defs/replaces"
+    },
+    "primaryResource": {
+      "type": "string",
+      "description": "One of resources: what grantResource \"primary\" means for this class."
     }
   },
   "required": [

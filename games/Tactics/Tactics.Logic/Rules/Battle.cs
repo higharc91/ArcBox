@@ -136,8 +136,17 @@ public static partial class Battle
         var user = w.Unit(use.Actor);
         if (!Modifiers.CanAct(w.State, user.Id, rules))
             return Rejection.Of(RejectCode.Incapacitated);
-        if (!rules.Abilities.TryGetValue(use.Ability, out var ability) || !Knows(user.Sheet, ability.Id))
+        if (!rules.Abilities.TryGetValue(use.Ability, out var ability) || !Knows(user.Sheet, ability.Id)
+            || rules.Items.Values.Any(i => i.Use == ability.Id))   // an item's ability runs only through common.use_item
             return Rejection.Of(RejectCode.UnknownAbility);
+        if (use.Item is not null || ability.Id == UseItem)
+        {
+            // common.use_item runs the named item's own ability (its cost, target and effects) and uses one up.
+            if (ability.Id != UseItem || use.Item is not { } item || !rules.Items.TryGetValue(item, out var itemDef)
+                || !user.Bag.Any(s => s.Item == item && s.Count > 0) || !rules.Abilities.TryGetValue(itemDef.Use, out var itemAbility))
+                return Rejection.Of(RejectCode.NoItem);
+            ability = itemAbility;
+        }
         if (CostRefusal(user, ability) is { } cost)
             return cost;
         if (ResolveTarget(w, user, ability, use.Target, out var aim, out var targets) is { } target)
@@ -147,7 +156,7 @@ public static partial class Battle
         if (ability.IsWeaponAttack)
             effects = [.. Enumerable.Repeat(effects, Math.Max(1, user.Sheet.Attacks)).SelectMany(e => e)];
 
-        var steps = new List<Step> { new PayCostStep(user.Id, ability.Id, use.Target) };
+        var steps = new List<Step> { new PayCostStep(user.Id, ability.Id, use.Target, use.Item) };
         for (var start = 0; start < effects.Length;)
         {
             var onTile = effects[start].OnTile;
@@ -275,7 +284,7 @@ public static partial class Battle
         if (los)
         {
             var standing = s.Units.Values.Where(u => u.Life == LifeState.Up).Select(u => u.Pos).ToImmutableSortedSet();
-            if (!Sight.Trace(terrain, user.Pos, aim, standing, ranged).HasLineOfSight)
+            if (!Sight.Trace(terrain, user.Pos, aim, standing, ranged, ZoneRules.Obscured(s)).HasLineOfSight)
                 return Rejection.Of(RejectCode.NoLineOfSight);
         }
         return null;
@@ -296,6 +305,9 @@ public static partial class Battle
     }
 
     /// <summary>A unit knows the abilities on its sheet and every built-in <c>common.*</c> action.</summary>
+    /// <summary>The built-in action that uses an item from the bag (<see cref="Use.Item"/>).</summary>
+    public static readonly AbilityId UseItem = new("common.use_item");
+
     private static bool Knows(UnitSheet sheet, AbilityId ability)
         => ability.Value.StartsWith("common.", StringComparison.Ordinal) || sheet.Abilities.Contains(ability);
 

@@ -111,6 +111,7 @@ internal static class TooltipText
         }
         if (mods.AutoFailSaves is { Count: > 0 } fails)
             clauses.Add($"automatically fails {string.Join(" and ", fails)} saves");
+        clauses.AddRange(SaveClauses(mods));
         if (mods.CritWhenAdjacent)
             clauses.Add("hits from adjacent attackers are critical hits");
         if (mods.Invisible)
@@ -172,6 +173,7 @@ internal static class TooltipText
         }
         if (mods.AutoFailSaves is { Count: > 0 } fails)
             parts.Add($"automatically fails {string.Join(" and ", fails)} saves");
+        parts.AddRange(SaveClauses(mods).Select(c => c.StartsWith("evades", StringComparison.Ordinal) ? c : "has " + c));
         if (mods.CritWhenAdjacent)
             parts.Add("takes critical hits from adjacent attackers");
         if (mods.Invisible)
@@ -187,6 +189,21 @@ internal static class TooltipText
             1 => parts[0],
             _ => $"{string.Join(", ", parts.Take(parts.Count - 1))} and {parts[^1]}",
         };
+    }
+
+    /// <summary>
+    /// Save edges, proficiencies and Evasion: <c>"advantage on Dex saves"</c>, <c>"proficiency in Wis and Cha saves"</c>,
+    /// <c>"evades area damage on Dex saves"</c>.
+    /// </summary>
+    private static IEnumerable<string> SaveClauses(StaticMods mods)
+    {
+        foreach (var edge in new[] { Edge.Advantage, Edge.Disadvantage })
+            if (mods.SaveEdges?.Where(e => e.Value == edge).Select(e => e.Key).ToArray() is { Length: > 0 } stats)
+                yield return $"{EdgeWord(edge)} on {string.Join(" and ", stats)} saves";
+        if (mods.SaveProficiencies is { Count: > 0 } proficient)
+            yield return $"proficiency in {string.Join(" and ", proficient)} saves";
+        if (mods.Evasion)
+            yield return "evades area damage on Dex saves (none on a success, half on a failure)";
     }
 
     private static string Signed(int n) => n > 0 ? $"+{n}" : $"-{-n}";

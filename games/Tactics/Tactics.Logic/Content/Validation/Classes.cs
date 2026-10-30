@@ -12,7 +12,7 @@ internal sealed partial class Validation
     /// (unless <see cref="ClassDef.SubclassesPending"/>), the stat priority, and every id its features and kit name (an empty
     /// kit armour is none). Each level's <c>defaultPicks</c> must be a loadout a character of that level could pick from the
     /// class's own <c>choose</c> features (<see cref="PickRules"/>; subclass choices aren't counted, since the default
-    /// loadout serves every subclass).
+    /// loadout serves every subclass). A <c>primaryResource</c> must be one of the class's resources.
     /// </summary>
     public ClassDef? Class(JsonElement e, string file, string ptr)
         => Guarded(file, ptr, () =>
@@ -64,6 +64,9 @@ internal sealed partial class Validation
                     foreach (var (pointer, message) in PickRules.Check(picks, PickRules.Choices(def, null, level), def.Id, level, _ => true))
                         Error(file, at + pointer, message);
             }
+            if (def.PrimaryResource is { } primary && !def.Resources.ContainsKey(primary))
+                Error(file, Pointer.Append(ptr, "primaryResource"),
+                    $"The primary resource '{primary}' isn't one of the class's resources ({string.Join(", ", def.Resources.Keys)}).");
             var kit = Pointer.Append(ptr, "startingKit");
             Ref(RefKind.Weapon, def.StartingKit.Weapon, file, Pointer.Append(kit, "weapon"));
             if (def.StartingKit.Armor.Length > 0)

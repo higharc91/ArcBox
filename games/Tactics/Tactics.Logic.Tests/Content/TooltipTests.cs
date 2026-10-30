@@ -223,7 +223,7 @@ public sealed class TooltipTests
     {
         Assert.Equal("Self: target gains its Move again", Tooltips.For(Ability(TargetKind.Self, 0, new AreaDef(AreaShape.Self), null,
             new ExtraActionEffect("move")), 1, Rules));
-        Assert.Equal("Self: target gains 1 of its first resource, even above its maximum", Tooltips.For(Ability(TargetKind.Self, 0,
+        Assert.Equal("Self: target gains 1 of its class resource, even above its maximum", Tooltips.For(Ability(TargetKind.Self, 0,
             new AreaDef(AreaShape.Self), null, new GrantResourceEffect(GrantResourceEffect.Primary, 1, OverMax: true)), 1, Rules));
     }
 

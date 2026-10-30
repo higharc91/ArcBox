@@ -21,6 +21,19 @@ public sealed class SightTests
     }
 
     [Fact]
+    public void Obscured_tiles_block_every_ray_through_them_or_at_either_end()
+    {
+        var terrain = TerrainOf("0. 0. 0. 0. 0.");
+        var none = ImmutableSortedSet<Tile>.Empty;
+        var smoke = ImmutableSortedSet.Create(new Tile(2, 0));
+
+        Assert.Equal(new SightResult(3, Cover.Total), Sight.Trace(terrain, new Tile(0, 0), new Tile(4, 0), none, true, smoke));
+        Assert.False(Sight.Trace(terrain, new Tile(0, 0), new Tile(2, 0), none, true, smoke).HasLineOfSight);   // into it
+        Assert.False(Sight.Trace(terrain, new Tile(2, 0), new Tile(4, 0), none, true, smoke).HasLineOfSight);   // out of it
+        Assert.True(Sight.Trace(terrain, new Tile(3, 0), new Tile(4, 0), none, true, smoke).HasLineOfSight);    // beside it
+    }
+
+    [Fact]
     public void Adjacent_tiles_have_no_columns_between_them()
     {
         var result = Trace("0. 0.", new Tile(0, 0), new Tile(1, 0));

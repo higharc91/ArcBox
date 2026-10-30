@@ -6,6 +6,7 @@
   "startingKit": { "weapon": "shortsword", "armor": "leather", "shield": false,
                    "bag": [ { "item": "potion_of_healing", "count": 1 } ] },
   "resources": { "edge": { "1": 2, "6": 3, "10": 4 } },
+  "primaryResource": "edge",
   "features": {
     "1": [ { "passive": "rogue.sneak_attack" } ],
     "2": [ { "ability": "rogue.cunning_dash" }, { "ability": "rogue.cunning_disengage" }, { "ability": "rogue.cunning_hide" } ],

@@ -151,6 +151,9 @@ internal sealed partial class Validation
             case ExtraActionEffect extra when !ExtraActionBlock.Kinds.Contains(extra.Kind):
                 Error(file, At("kind"), $"Unknown extra action '{extra.Kind}' (expected {OneOf(ExtraActionBlock.Kinds)}).");
                 break;
+            case GrantResourceEffect grant:
+                Levels(grant.Amount, file, At("amount"));
+                break;
             case RevealEffect reveal:
                 AreaSize(reveal.Area, file, At("area"));
                 break;

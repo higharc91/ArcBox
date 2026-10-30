@@ -41,8 +41,8 @@ public static class SheetBuilder
     /// the chosen subclass's features up to the level (at 3, 6 and 10), the picks (<see cref="CharacterRecord.Picks"/>, or
     /// the class's default loadout when empty), and one <see cref="RulesPack.InjuryPassiveId"/> passive per injury.
     /// A <c>resourceRegen</c> feature isn't part of the sheet.</item>
-    /// <item>Resources are the class's tables at the level. Saves are the class's. Skills are the background's two and the
-    /// first few of the class's list (its skill choice count, plus the race's extra skills).</item>
+    /// <item>Resources are the class's tables at the level, with its primary resource. Saves are the class's. Skills are the
+    /// background's two and the first few of the class's list (its skill choice count, plus the race's extra skills).</item>
     /// <item>Tags are <c>humanoid</c> and the race id. There is no sprite: the portal draws a character from its creator look.</item>
     /// </list>
     /// Throws <see cref="ContentException"/> with every bad id: race, class, subclass, background, weapon, armour, injuries,
@@ -142,7 +142,7 @@ public static class SheetBuilder
             Resources: Ordinal.Map(cls.Resources.Select(r => (r.Key, r.Value.At(c.Level)))),
             Abilities: [.. abilities.Distinct()], Passives: [.. passives.Distinct()], Weapon: weapon, Attacks: attacks,
             Resist: race.Resist, Immune: Ordinal.Set(), Vulnerable: Ordinal.Set(), Tags: Ordinal.Set("humanoid", race.Id),
-            Sprite: null, AiProfile: null, CastingStat: cls.CastingStat?.ToString());
+            Sprite: null, AiProfile: null, CastingStat: cls.CastingStat?.ToString(), PrimaryResource: cls.PrimaryResource);
     }
 
     private static IEnumerable<FeatureRef> Features(ClassDef cls, int level)

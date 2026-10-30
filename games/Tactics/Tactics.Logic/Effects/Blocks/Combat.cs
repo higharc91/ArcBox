@@ -4,8 +4,8 @@ namespace Tactics.Logic;
 
 /// <summary>
 /// <c>"grantResource"</c>: adds the amount to the target's resource (a negative amount drains it), never below 0 and, when
-/// its sheet has a maximum for it, never above that unless the effect is <c>overMax</c>. <c>"primary"</c> names the first
-/// resource on the target's sheet (see <see cref="GrantResourceEffect.Primary"/>).
+/// its sheet has a maximum for it, never above that (or what it already holds, if more) unless the effect is
+/// <c>overMax</c>. <c>"primary"</c> names the target's class resource (see <see cref="GrantResourceEffect.Primary"/>).
 /// </summary>
 public sealed class GrantResourceBlock : EffectBlock<GrantResourceEffect>
 {
@@ -15,9 +15,10 @@ public sealed class GrantResourceBlock : EffectBlock<GrantResourceEffect>
     /// <inheritdoc />
     protected override string? Describe(GrantResourceEffect def, int level, RulesPack rules)
     {
-        var resource = def.Resource == GrantResourceEffect.Primary ? "of its first resource" : TooltipText.Humanize(def.Resource);
-        var text = def.Amount >= 0 ? $"target gains {def.Amount} {resource}" : $"target loses {-def.Amount} {resource}";
-        return def.OverMax && def.Amount > 0 ? text + ", even above its maximum" : text;
+        var resource = def.Resource == GrantResourceEffect.Primary ? "of its class resource" : TooltipText.Humanize(def.Resource);
+        var amount = def.Amount.At(level);
+        var text = amount >= 0 ? $"target gains {amount} {resource}" : $"target loses {-amount} {resource}";
+        return def.OverMax && amount > 0 ? text + ", even above its maximum" : text;
     }
 
     /// <inheritdoc />
@@ -29,11 +30,14 @@ public sealed class GrantResourceBlock : EffectBlock<GrantResourceEffect>
         {
             if (target.Sheet.Resources.IsEmpty)
                 return;
-            resource = target.Sheet.Resources.Keys.Min(StringComparer.Ordinal)!;
+            resource = target.Sheet.PrimaryResource is { } primary && target.Sheet.Resources.ContainsKey(primary)
+                ? primary
+                : target.Sheet.Resources.Keys.Min(StringComparer.Ordinal)!;
         }
-        var amount = Math.Max(0, target.Resources.GetValueOrDefault(resource) + def.Amount);
+        var current = target.Resources.GetValueOrDefault(resource);
+        var amount = Math.Max(0, current + def.Amount.At(ctx.Level));
         if (!def.OverMax && target.Sheet.Resources.TryGetValue(resource, out var max))
-            amount = Math.Min(amount, max);
+            amount = Math.Min(amount, Math.Max(max, current));
         ctx.W.Set(target with { Resources = target.Resources.SetItem(resource, amount) });
     }
 }

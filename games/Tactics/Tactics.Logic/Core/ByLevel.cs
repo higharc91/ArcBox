@@ -29,6 +29,9 @@ public sealed record ByLevel<T>(ImmutableSortedDictionary<int, T> Steps)
     /// <summary>A table that gives <paramref name="value"/> at every level.</summary>
     public static ByLevel<T> Constant(T value)
         => new(ImmutableSortedDictionary<int, T>.Empty.Add(1, value));
+
+    /// <summary>A value that is the same at every level (<see cref="Constant"/>).</summary>
+    public static implicit operator ByLevel<T>(T value) => Constant(value);
 }
 
 /// <summary>Creates the <see cref="ByLevel{T}"/> JSON converter for each element type.</summary>

@@ -138,12 +138,13 @@ public sealed record DispelEffect(bool Concentration = false, bool Zones = false
 /// <summary>
 /// <c>"zone"</c>: a lasting area (<see cref="Zone"/>) of <see cref="Kind"/> on the tiles of <see cref="Area"/> around the
 /// aim, owned by the user, for <see cref="Rounds"/> rounds of its owner's turns (null: the whole battle), tied to the
-/// user's concentration with <see cref="Concentration"/>. A <see cref="Difficult"/> zone costs 2 Move per tile. Its
+/// user's concentration with <see cref="Concentration"/>. A <see cref="Difficult"/> zone costs 2 Move per tile; a
+/// <see cref="BlocksSight"/> one blocks line of sight (smoke, darkness). Its
 /// <see cref="Passives"/> belong to every unit standing in it (usually <c>onEnterTile</c> and <c>onTurnStart</c> with
 /// <c>"target": "self"</c>), their effects coming from the zone's owner.
 /// </summary>
 public sealed record ZoneEffect(string Kind, AreaDef Area, int? Rounds, ImmutableArray<PassiveDef> Passives,
-    bool Concentration = false, bool Difficult = false) : EffectDef
+    bool Concentration = false, bool Difficult = false, bool BlocksSight = false) : EffectDef
 {
     /// <inheritdoc />
     public override bool OnTile => true;
@@ -195,12 +196,13 @@ public sealed record TransformEffect(string Hook, JsonElement Args) : EffectDef
 // ---- Combat ---------------------------------------------------------------------------------------------------------
 
 /// <summary>
-/// <c>"grantResource"</c>: the target gains <see cref="Amount"/> of <see cref="Resource"/> (a negative amount drains it),
-/// never below 0 nor, unless <see cref="OverMax"/>, above its sheet's maximum when the sheet has one. The resource
-/// <see cref="Primary"/> is the first (ordinal) resource on the target's sheet, for content that can't know the class (a
-/// race's passive); a target with no resources gains nothing.
+/// <c>"grantResource"</c>: the target gains <see cref="Amount"/> (at the user's level) of <see cref="Resource"/> (a negative
+/// amount drains it), never below 0 and, unless <see cref="OverMax"/>, never above the larger of its sheet's maximum (when
+/// the sheet has one) and what it holds now, so a normal grant never takes away what an over-the-pool grant gave. The
+/// resource <see cref="Primary"/> is the sheet's <see cref="UnitSheet.PrimaryResource"/>, or else its first (ordinal)
+/// resource, for content that can't know the class (a race's passive); a target with no resources gains nothing.
 /// </summary>
-public sealed record GrantResourceEffect(string Resource, int Amount, bool OverMax = false) : EffectDef
+public sealed record GrantResourceEffect(string Resource, ByLevel<int> Amount, bool OverMax = false) : EffectDef
 {
     /// <summary>The resource name that means the first resource on the target's sheet.</summary>
     public const string Primary = "primary";

@@ -18,6 +18,7 @@ public sealed class TestBattle
     private readonly List<ConditionDef> _conditions = [];
     private readonly List<InjuryDef> _injuries = [];
     private readonly List<(string Id, UnitSheet Sheet)> _monsters = [];
+    private readonly List<ItemDef> _items = [];
 
     /// <summary>Tests check the engine's invariants after every command, in any build configuration.</summary>
     static TestBattle() => Invariants.Enabled = true;
@@ -69,6 +70,13 @@ public sealed class TestBattle
         return Rebuild();
     }
 
+    /// <summary>Adds consumable items to the rules pack.</summary>
+    public TestBattle WithItems(params ItemDef[] items)
+    {
+        _items.AddRange(items);
+        return Rebuild();
+    }
+
     /// <summary>Adds monster sheets (for summons and transformations) to the rules pack.</summary>
     public TestBattle WithMonsters(params (string Id, UnitSheet Sheet)[] monsters)
     {
@@ -79,17 +87,17 @@ public sealed class TestBattle
     private TestBattle Rebuild()
     {
         Rules = RulesPack.InMemory("test", abilities: _abilities, passives: _passives, conditions: _conditions, maps: [_map],
-            injuries: _injuries.Count > 0 ? _injuries : null, monsters: _monsters);
+            injuries: _injuries.Count > 0 ? _injuries : null, monsters: _monsters, items: _items);
         return this;
     }
 
     /// <summary>Adds a party member.</summary>
-    public TestBattle Party(string id, UnitSheet sheet, Tile at, Controller? controller = null)
-        => Add(id, sheet with { Side = Side.Party }, controller ?? new PlayerControlled(new ProfileId("pr_" + id)), at);
+    public TestBattle Party(string id, UnitSheet sheet, Tile at, Controller? controller = null, ImmutableArray<ItemStack> bag = default)
+        => Add(id, sheet with { Side = Side.Party }, controller ?? new PlayerControlled(new ProfileId("pr_" + id)), at, bag);
 
     /// <summary>Adds an enemy.</summary>
     public TestBattle Enemy(string id, UnitSheet sheet, Tile at, Controller? controller = null)
-        => Add(id, sheet with { Side = Side.Enemy }, controller ?? new AiControlled(sheet.AiProfile ?? "brute"), at);
+        => Add(id, sheet with { Side = Side.Enemy }, controller ?? new AiControlled(sheet.AiProfile ?? "brute"), at, default);
 
     /// <summary>Starts the battle and returns its first state and events.</summary>
     public (BattleState State, ImmutableArray<BattleEvent> Events) Start(ulong seed = 1)
@@ -122,9 +130,9 @@ public sealed class TestBattle
         return (w.Freeze(), w.Events);
     }
 
-    private TestBattle Add(string id, UnitSheet sheet, Controller controller, Tile at)
+    private TestBattle Add(string id, UnitSheet sheet, Controller controller, Tile at, ImmutableArray<ItemStack> bag)
     {
-        _units.Add(new UnitPlacement(new UnitId(id), sheet, controller, at, []));
+        _units.Add(new UnitPlacement(new UnitId(id), sheet, controller, at, bag.IsDefault ? [] : bag));
         return this;
     }
 }
