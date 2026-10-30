@@ -109,6 +109,7 @@ public sealed record MoveStep(UnitId Unit, Tile From, Tile To, Tile LastFree, bo
 
         w.Set(unit with { Pos = To, Economy = unit.Economy with { MoveLeft = unit.Economy.MoveLeft - cost } });
         w.Emit(new Moved(Unit, [From, To]));
+        Conditions.BreakIfIncapacitated(w, Unit);
         var hooks = new List<Step>();
         Hooks.Collect(w, HookKind.OnMove, new HookArgs(Unit, Tile: To), rules, hooks);
         Hooks.Collect(w, HookKind.OnEnterTile, new HookArgs(Unit, Tile: To), rules, hooks);

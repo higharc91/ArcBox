@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Tactics.Logic;
 
 /// <summary>
@@ -8,8 +10,12 @@ namespace Tactics.Logic;
 public sealed record HookArgs(UnitId Owner, UnitId? Other = null, RollResult? Roll = null, int Amount = 0, Tile? Tile = null,
     AbilityId? Ability = null, string? AttackKind = null, Edge Edge = Edge.None, string? DamageType = null);
 
-/// <summary>The passive a hook's effects belong to: whose it is and its id.</summary>
-public sealed record PassiveRef(UnitId Owner, string Id);
+/// <summary>
+/// The passive a hook's effects belong to: whose it is and its id, and for a zone's passive the zone's serial
+/// (<see cref="Zone"/>).
+/// </summary>
+public sealed record PassiveRef(UnitId Owner, string Id,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Zone = null);
 
 /// <summary>
 /// Fires passives on hooks (spec §4.4). A passive fires when its <see cref="PassiveDef.Hook"/> matches, its limits allow
@@ -27,7 +33,8 @@ public static class Hooks
 
     /// <summary>
     /// Fires <paramref name="hook"/> for <see cref="HookArgs.Owner"/> (Up or Downed): its sheet passives in sheet order,
-    /// then its conditions' passives in the order the conditions were applied. Each passive that fires queues a
+    /// then its conditions' passives in the order the conditions were applied, then the passives of the zones it stands in
+    /// (<see cref="ZoneRules"/>), whose effects come from the zone's owner. Each passive that fires queues a
     /// <see cref="RunEffectsStep"/> that spends its limits (once per turn, once per round, per-battle uses), emits
     /// <see cref="PassiveTriggered"/> and runs its effects, following <see cref="HookArgs.Roll"/>.
     /// </summary>
@@ -61,7 +68,7 @@ public static class Hooks
         if (!w.State.Units.TryGetValue(args.Owner, out var owner) || owner.Life is LifeState.Dead or LifeState.Out)
             return;
 
-        foreach (var (passive, source) in Candidates(w.State, owner, rules).Where(c => c.Passive.Hook == hook).ToArray())
+        foreach (var (passive, source, zone) in Candidates(w.State, owner, rules).Where(c => c.Passive.Hook == hook).ToArray())
         {
             if (passive.Effects.IsDefaultOrEmpty || !Available(w.Unit(owner.Id), passive))
                 continue;
@@ -80,19 +87,22 @@ public static class Hooks
                 throw new RulesInvariantException(
                     $"Hooks nested deeper than {MaxDepth}: '{passive.Id}' of {owner.Id} on {hook}.");
             into.Add(new RunEffectsStep(source, target, args.Tile ?? w.Unit(target).Pos, null, passive.Effects, args.Roll,
-                HookDepth: depth, Passive: new PassiveRef(owner.Id, passive.Id)));
+                HookDepth: depth, Passive: new PassiveRef(owner.Id, passive.Id, zone)));
         }
     }
 
     /// <summary>
     /// Spends the limits of the passive <paramref name="passive"/> names as its effects start to run: false (nothing
-    /// spent) when its owner no longer has it or its limits are used up.
+    /// spent) when its owner no longer has it or its limits are used up. A zone's passive needs the zone to be still there,
+    /// not the owner to be still in it (a unit pushed through a fire zone is burnt).
     /// </summary>
     internal static bool TrySpend(BattleWriter w, PassiveRef passive, RulesPack rules)
     {
         if (!w.State.Units.TryGetValue(passive.Owner, out var owner))
             return false;
-        var def = Candidates(w.State, owner, rules).Select(c => c.Passive).FirstOrDefault(p => p.Id == passive.Id);
+        var def = passive.Zone is { } serial
+            ? w.State.Zones.FirstOrDefault(z => z.Serial == serial)?.Passives.FirstOrDefault(p => p.Id == passive.Id)
+            : Candidates(w.State, owner, rules).Where(c => c.Zone is null).Select(c => c.Passive).FirstOrDefault(p => p.Id == passive.Id);
         if (def is null || !Available(owner, def))
             return false;
         w.Set(Spend(owner, def));
@@ -102,17 +112,24 @@ public static class Hooks
     /// <summary>
     /// The owner's passives with the unit their effects come from: sheet passives in sheet order (from the owner), then its
     /// conditions' passives in the order the conditions were applied (from the condition's source while that unit is in
-    /// the battle's roster, else the owner).
+    /// the battle's roster, else the owner), then the passives of the zones it stands in, in serial order (from the zone's
+    /// owner while that unit is in the roster, else the owner; with the zone's serial).
     /// </summary>
-    private static IEnumerable<(PassiveDef Passive, UnitId Source)> Candidates(BattleState state, UnitState owner, RulesPack rules)
+    private static IEnumerable<(PassiveDef Passive, UnitId Source, int? Zone)> Candidates(BattleState state, UnitState owner,
+        RulesPack rules)
     {
         foreach (var passive in Modifiers.Passives(owner, rules))
-            yield return (passive, owner.Id);
+            yield return (passive, owner.Id, null);
         foreach (var (def, from) in Conditions.Active(owner, rules))
         {
             var source = from.Source is { } s && state.Units.ContainsKey(s) ? s : owner.Id;
             foreach (var passive in def.Passives.IsDefault ? [] : def.Passives)
-                yield return (passive, source);
+                yield return (passive, source, null);
+        }
+        foreach (var (passive, zone) in ZoneRules.PassivesAt(state, owner))
+        {
+            var source = zone.Owner is { } s && state.Units.ContainsKey(s) ? s : owner.Id;
+            yield return (passive, source, zone.Serial);
         }
     }
 
@@ -161,6 +178,8 @@ public static class Hooks
         if (when.IsSpell is { } spell && IsSpell(args, rules) != spell)
             return false;
         if (when.DamageType is { } type && args.DamageType != type)
+            return false;
+        if (when.Success is { } success && (args.Roll?.Success == true) != success)
             return false;
         return when.TargetTag is not { } tag || subject.Sheet.Tags.Contains(tag);
     }

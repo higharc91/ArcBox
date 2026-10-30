@@ -17,6 +17,7 @@ public sealed class TestBattle
     private readonly List<PassiveDef> _passives = [];
     private readonly List<ConditionDef> _conditions = [];
     private readonly List<InjuryDef> _injuries = [];
+    private readonly List<(string Id, UnitSheet Sheet)> _monsters = [];
 
     /// <summary>Tests check the engine's invariants after every command, in any build configuration.</summary>
     static TestBattle() => Invariants.Enabled = true;
@@ -36,6 +37,9 @@ public sealed class TestBattle
 
     /// <summary>Starts a builder on the given ASCII map (see <see cref="AsciiMap"/>).</summary>
     public static TestBattle On(string ascii) => new(AsciiMap.Parse(ascii));
+
+    /// <summary>Starts a builder on <paramref name="map"/>.</summary>
+    public static TestBattle On(BattleMap map) => new(map);
 
     /// <summary>Adds abilities to the rules pack.</summary>
     public TestBattle With(params AbilityDef[] abilities)
@@ -65,10 +69,17 @@ public sealed class TestBattle
         return Rebuild();
     }
 
+    /// <summary>Adds monster sheets (for summons and transformations) to the rules pack.</summary>
+    public TestBattle WithMonsters(params (string Id, UnitSheet Sheet)[] monsters)
+    {
+        _monsters.AddRange(monsters);
+        return Rebuild();
+    }
+
     private TestBattle Rebuild()
     {
         Rules = RulesPack.InMemory("test", abilities: _abilities, passives: _passives, conditions: _conditions, maps: [_map],
-            injuries: _injuries.Count > 0 ? _injuries : null);
+            injuries: _injuries.Count > 0 ? _injuries : null, monsters: _monsters);
         return this;
     }
 
@@ -94,6 +105,21 @@ public sealed class TestBattle
         var resolution = Battle.Apply(state, command, Rules);
         Assert.Null(resolution.Rejected);
         return (resolution.State, resolution.Events);
+    }
+
+    /// <summary>
+    /// Runs <paramref name="effects"/> from <paramref name="source"/> on <paramref name="target"/> (null for a tile run) aimed
+    /// at <paramref name="aim"/>, outside any ability, and drains the queue. The result must keep the engine's invariants.
+    /// </summary>
+    public (BattleState State, ImmutableArray<BattleEvent> Events) Run(BattleState state, string source, string? target, Tile? aim,
+        params EffectDef[] effects)
+    {
+        var w = new BattleWriter(state, Rules);
+        w.PushFront(new RunEffectsStep(new UnitId(source), target is null ? null : new UnitId(target), aim, null, [.. effects]));
+        while (w.PopFront() is { } step)
+            step.Run(w, Rules);
+        Invariants.Check(w.State, Rules);
+        return (w.Freeze(), w.Events);
     }
 
     private TestBattle Add(string id, UnitSheet sheet, Controller controller, Tile at)

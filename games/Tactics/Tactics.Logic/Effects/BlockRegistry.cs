@@ -13,9 +13,15 @@ public static class BlockRegistry
         IEffectBlock[] blocks =
         [
             new AttackBlock(), new SaveBlock(),
-            new DamageBlock(), new HealBlock(),
-            new ApplyBlock(), new RemoveBlock(), new HelpBlock(),
+            new DamageBlock(), new HealBlock(), new TempHpBlock(), new ReviveBlock(),
+            new ApplyBlock(), new RemoveBlock(), new CleanseBlock(), new DispelBlock(), new HelpBlock(),
             new PushBlock(), new PullBlock(), new TeleportBlock(), new SwapBlock(), new DashBlock(), new JumpToBlock(),
+            new ZoneBlock(), new AlterTerrainBlock(), new HazardBlock(),
+            new SummonBlock(), new TransformBlock(),
+            new GrantResourceBlock(), new ExtraActionBlock(), new RefreshReactionBlock(), new StatModBlock(), new MarkBlock(),
+            new TauntBlock(), new RevealBlock(),
+            new TurnOrderBlock(),
+            new ChainBlock(), new RepeatBlock(), new IfBlock(), new RandomBlock(),
         ];
         ByKey = blocks.ToImmutableSortedDictionary(b => b.Key, b => b, StringComparer.Ordinal);
         ByType = blocks.ToImmutableDictionary(b => b.DefType, b => b);

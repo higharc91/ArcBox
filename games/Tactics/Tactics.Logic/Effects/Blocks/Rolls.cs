@@ -40,7 +40,8 @@ public sealed class AttackBlock : EffectBlock<AttackEffect>
 /// effect's stat overrides either) + proficiency + the effect's bonus + static attack modifiers + high ground, against AC +
 /// static AC modifiers + cover (ranged and spell attacks, from <see cref="Sight.Trace"/>). The edge combines the attacker's
 /// own-attack edges, the target's attacked-in-melee or attacked-at-range edges, invisibility on either side, flanking
-/// (melee) and help (<see cref="HelpBlock.Consume"/>, used up by the roll). Emits <see cref="Rolled"/>; on a hit, opens a
+/// (melee), a taunt drawing the attacker to someone else (<see cref="TauntBlock"/>) and help (<see cref="HelpBlock.Consume"/>,
+/// used up by the roll). Emits <see cref="Rolled"/>; on a hit, opens a
 /// <see cref="ReactionTriggerKind.BeforeHit"/> window whose <see cref="OfferReactionStep"/>s run before this step comes back
 /// with the roll.</item>
 /// <item>With <see cref="Roll"/>: the hit is re-judged against the target's AC now (a reaction may have raised it), with
@@ -104,6 +105,8 @@ public sealed record AttackStep(UnitId Source, UnitId Target, Tile? Aim, Ability
         }
         if (!ranged && Modifiers.Flanked(w.State, Source, Target, rules))
             advantages++;
+        if (TauntBlock.TauntedAway(w.State, Source, Target))
+            disadvantages++;
         if (HelpBlock.Consume(w, Source))
             advantages++;
         var edge = Rolls.Combine(advantages, disadvantages);

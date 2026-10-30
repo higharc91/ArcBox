@@ -149,6 +149,7 @@ public sealed class ConcentrationTests
             new ConcentrationBroken(U("cleric"), HoldAll.Id),
             new ConditionRemoved(U("gob"), Held),
             new ConditionRemoved(U("hob"), Held),
+            new ZoneEnded(1),
         ], events[3..]);
         Assert.Equal([Marked], after.Units[U("gob")].Conditions.Select(c => c.Id));
         Assert.Empty(after.Units[U("hob")].Conditions);

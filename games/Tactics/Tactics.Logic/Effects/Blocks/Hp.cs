@@ -8,7 +8,8 @@ public static class Hp
     /// <paramref name="source"/> (if a unit dealt it): immunity (the sheet's or a static modifier's) cancels it, resistance
     /// halves it (rounded down), vulnerability doubles it. Returns the damage dealt.
     /// <list type="bullet">
-    /// <item>An Up unit: temporary HP absorbs it first; emits <see cref="Damaged"/>. Damage over 0 that leaves it at 0 HP
+    /// <item>An Up unit: temporary HP absorbs it first; emits <see cref="Damaged"/>. A transformed unit whose temporary HP
+    /// run out turns back (<see cref="Transforms.Revert"/>), the rest of the damage carrying over. Damage over 0 that leaves it at 0 HP
     /// drops it (<see cref="DownedRules.Drop"/>); otherwise a concentrating unit saves to keep its concentration
     /// (<see cref="Conditions.ConcentrationDc"/>) and the unit's <see cref="HookKind.OnDamaged"/> hooks fire.</item>
     /// <item>A Downed unit takes no damage (0 is returned): damage over 0 is a hit on its countdown, 2 for a
@@ -45,6 +46,8 @@ public static class Hp
         var hp = Math.Max(0, u.Hp - (amount - absorbed));
         w.Set(u with { TempHp = u.TempHp - absorbed, Hp = hp });
         w.Emit(new Damaged(unit, amount, type, hp));
+        if (absorbed > 0 && absorbed == u.TempHp && u.TrueSheet is not null)
+            Transforms.Revert(w, unit);
         if (amount <= 0)
             return amount;
         if (hp == 0)
@@ -160,4 +163,35 @@ public sealed class HelpBlock : EffectBlock<HelpEffect>
         Conditions.Remove(w, unit, RulesPack.Helped.Id);
         return true;
     }
+}
+
+/// <summary>
+/// <c>"tempHp"</c>: the dice at the source's level plus named addends as temporary HP for a target still in the battle;
+/// it keeps the higher of that and what it has (<see cref="TempHpGained"/> when it rises).
+/// </summary>
+public sealed class TempHpBlock : EffectBlock<TempHpEffect>
+{
+    /// <inheritdoc />
+    public override string Key => "tempHp";
+
+    /// <inheritdoc />
+    protected override void Run(TempHpEffect def, EffectContext ctx)
+    {
+        var target = ctx.TargetUnit(Key);
+        var amount = Rolls.Damage(ctx.W, def.Dice.At(ctx.Level), crit: false) + ctx.Sum(def.Bonus);
+        if (!DownedRules.InBattle(target) || amount <= target.TempHp)
+            return;
+        ctx.W.Set(target with { TempHp = amount });
+        ctx.W.Emit(new TempHpGained(target.Id, amount));
+    }
+}
+
+/// <summary><c>"revive"</c>: a Downed target gets up with the given HP (<see cref="DownedRules.Revive"/>); anyone else is untouched.</summary>
+public sealed class ReviveBlock : EffectBlock<ReviveEffect>
+{
+    /// <inheritdoc />
+    public override string Key => "revive";
+
+    /// <inheritdoc />
+    protected override void Run(ReviveEffect def, EffectContext ctx) => DownedRules.Revive(ctx.W, ctx.TargetUnit(Key).Id, def.Hp);
 }

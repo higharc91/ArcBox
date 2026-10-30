@@ -30,7 +30,8 @@ public static class Invariants
     /// <item>every unit's HP is between 0 and its max, and nothing it has is negative (temporary HP, resources, per-battle
     /// uses, Move, extra actions, countdown);</item>
     /// <item><see cref="BattleState.Order"/> names only units in the battle's roster, each at most once, and holds every
-    /// Up or Downed unit;</item>
+    /// Up or Downed unit except those <see cref="BattleState.Joining"/> it next round, which are in the battle and not in
+    /// it;</item>
     /// <item>while the battle goes on, <see cref="BattleState.TurnIndex"/> is a valid index into the order.</item>
     /// </list>
     /// </summary>
@@ -65,8 +66,15 @@ public static class Invariants
             if (!seen.Add(id))
                 Fail($"{id} is in the turn order twice.");
         }
+        foreach (var id in s.Joining)
+        {
+            if (!s.Units.TryGetValue(id, out var joining) || !DownedRules.InBattle(joining))
+                Fail($"{id} is joining the turn order but isn't in the battle.");
+            if (seen.Contains(id))
+                Fail($"{id} is joining the turn order but already in it.");
+        }
         foreach (var u in s.Units.Values)
-            if (DownedRules.InBattle(u) && !seen.Contains(u.Id))
+            if (DownedRules.InBattle(u) && !seen.Contains(u.Id) && !s.Joining.Contains(u.Id))
                 Fail($"{u.Id} is {u.Life} but missing from the turn order.");
 
         if (s.Outcome is null && (s.TurnIndex < 0 || s.TurnIndex >= s.Order.Length))

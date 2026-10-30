@@ -12,8 +12,8 @@ public static class AsciiMap
     /// <summary>The material list every ASCII map uses; every tile has material 0.</summary>
     public static readonly ImmutableArray<string> Materials = ["ground"];
 
-    /// <summary>Parses the picture into a map with id <c>"ascii"</c>.</summary>
-    public static BattleMap Parse(string text)
+    /// <summary>Parses the picture into a map with id <c>"ascii"</c>, with the named tile <paramref name="zones"/> if given.</summary>
+    public static BattleMap Parse(string text, ImmutableSortedDictionary<string, ImmutableArray<Tile>>? zones = null)
     {
         var rows = text.Split('\n', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
         if (rows.Length == 0)
@@ -56,6 +56,6 @@ public static class AsciiMap
         }
 
         return BattleMap.FromBytes("ascii", width, height, bytes, Materials, props.ToImmutable(),
-            ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty.WithComparers(StringComparer.Ordinal));
+            zones ?? ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty.WithComparers(StringComparer.Ordinal));
     }
 }

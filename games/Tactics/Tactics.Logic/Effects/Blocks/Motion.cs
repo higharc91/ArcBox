@@ -125,9 +125,15 @@ public static class Motion
         Entered(w, unit, to);
     }
 
-    /// <summary>Fires <paramref name="unit"/>'s <see cref="HookKind.OnEnterTile"/> hooks for <paramref name="tile"/>.</summary>
+    /// <summary>
+    /// Fires <paramref name="unit"/>'s <see cref="HookKind.OnEnterTile"/> hooks for <paramref name="tile"/> (a zone there
+    /// adds its own), after ending its concentration if a zone there leaves it incapacitated.
+    /// </summary>
     internal static void Entered(BattleWriter w, UnitId unit, Tile tile)
-        => Hooks.Fire(w, HookKind.OnEnterTile, new HookArgs(unit, Tile: tile), w.Rules);
+    {
+        Conditions.BreakIfIncapacitated(w, unit);
+        Hooks.Fire(w, HookKind.OnEnterTile, new HookArgs(unit, Tile: tile), w.Rules);
+    }
 }
 
 /// <summary><c>"push"</c>: pushes the target away from the source (or the aimed tile); see <see cref="Motion.Push"/>.</summary>
@@ -237,6 +243,7 @@ public sealed class DashBlock : EffectBlock<DashEffect>
 
         ctx.W.Set(source with { Pos = at });
         ctx.W.Emit(new Moved(source.Id, [.. path]));
+        Conditions.BreakIfIncapacitated(ctx.W, source.Id);
         var hooks = new List<Step>();
         Hooks.Collect(ctx.W, HookKind.OnMove, new HookArgs(source.Id, Tile: at), ctx.Rules, hooks);
         Hooks.Collect(ctx.W, HookKind.OnEnterTile, new HookArgs(source.Id, Tile: at), ctx.Rules, hooks);

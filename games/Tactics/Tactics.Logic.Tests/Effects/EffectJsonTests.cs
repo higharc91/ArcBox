@@ -142,9 +142,11 @@ public sealed class EffectJsonTests
     }
 
     [Fact]
-    public void Registry_knows_every_block_so_far()
+    public void Registry_finds_blocks_by_key_and_type()
     {
-        Assert.Equal(["apply", "attack", "damage", "dash", "heal", "help", "jumpTo", "pull", "push", "remove", "save", "swap", "teleport"], BlockRegistry.Keys);
+        // FlowBlockTests.Every_registered_key_has_a_test pins the full key list.
+        Assert.Subset(BlockRegistry.Keys.ToHashSet(),
+            new HashSet<string> { "apply", "attack", "damage", "dash", "heal", "help", "jumpTo", "pull", "push", "remove", "save", "swap", "teleport" });
         Assert.Equal("damage", BlockRegistry.For(new DamageEffect(null, null, [], Weapon: true)).Key);
         Assert.Equal(typeof(SaveEffect), BlockRegistry.For("save").DefType);
         Assert.Throws<KeyNotFoundException>(() => BlockRegistry.For("explode"));

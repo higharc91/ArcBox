@@ -27,25 +27,65 @@ public sealed class ApplyBlock : EffectBlock<ApplyEffect>
             Concentration: ctx.Ability?.Cost.Concentration == true, AppliedThisTurn: ctx.W.State.Active == ctx.Source);
         ctx.W.Set(target with { Conditions = target.Conditions.RemoveAll(c => c.Id == def.Condition).Add(condition) });
         ctx.W.Emit(new ConditionApplied(target.Id, def.Condition));
-        if (target.Concentrating is not null && Modifiers.For(ctx.W, target.Id, ctx.Rules).Incapacitated)
-            Conditions.BreakConcentration(ctx.W, target.Id);
+        Conditions.BreakIfIncapacitated(ctx.W, target.Id);
     }
 }
 
-/// <summary><c>"remove"</c>: ends the condition on the target. Emits <see cref="ConditionRemoved"/> if it had it.</summary>
+/// <summary>
+/// <c>"remove"</c>: ends the condition on the target (<see cref="Conditions.Remove"/>). Emits <see cref="ConditionRemoved"/>
+/// if it had it.
+/// </summary>
 public sealed class RemoveBlock : EffectBlock<RemoveEffect>
 {
     /// <inheritdoc />
     public override string Key => "remove";
 
     /// <inheritdoc />
-    protected override void Run(RemoveEffect def, EffectContext ctx)
+    protected override void Run(RemoveEffect def, EffectContext ctx) => Conditions.Remove(ctx.W, ctx.TargetUnit(Key).Id, def.Condition);
+}
+
+/// <summary>
+/// <c>"cleanse"</c>: ends each condition on the target whose definition (or one it implies) has any of the tags, in the
+/// order applied (<see cref="ConditionRemoved"/> each).
+/// </summary>
+public sealed class CleanseBlock : EffectBlock<CleanseEffect>
+{
+    /// <inheritdoc />
+    public override string Key => "cleanse";
+
+    /// <inheritdoc />
+    protected override void Run(CleanseEffect def, EffectContext ctx)
     {
         var target = ctx.TargetUnit(Key);
-        var kept = target.Conditions.RemoveAll(c => c.Id == def.Condition);
-        if (kept.Length == target.Conditions.Length)
-            return;
-        ctx.W.Set(target with { Conditions = kept });
-        ctx.W.Emit(new ConditionRemoved(target.Id, def.Condition));
+        var matching = Conditions.Active(target, ctx.Rules)
+            .Where(a => a.Def.Tags.Overlaps(def.Tags))
+            .Select(a => a.From.Id)
+            .Distinct()
+            .ToArray();
+        foreach (var id in matching)
+            Conditions.Remove(ctx.W, target.Id, id);
+    }
+}
+
+/// <summary>
+/// <c>"dispel"</c>: ends the concentration of the target, or on a tile run of the unit on the aimed tile
+/// (<see cref="Conditions.BreakConcentration"/>), and/or every zone covering the aimed tile (<see cref="ZoneRules.End"/>).
+/// </summary>
+public sealed class DispelBlock : EffectBlock<DispelEffect>
+{
+    /// <inheritdoc />
+    public override string Key => "dispel";
+
+    /// <inheritdoc />
+    protected override void Run(DispelEffect def, EffectContext ctx)
+    {
+        if (def.Concentration)
+        {
+            var unit = ctx.Target ?? (ctx.Aim is { } at ? Motion.OccupantAt(ctx.W, at, except: default)?.Id : null);
+            if (unit is { } id)
+                Conditions.BreakConcentration(ctx.W, id);
+        }
+        if (def.Zones && ctx.Aim is { } aim)
+            ZoneRules.End(ctx.W, z => z.Tiles.Contains(aim));
     }
 }

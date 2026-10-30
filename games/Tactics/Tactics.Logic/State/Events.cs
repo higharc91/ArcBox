@@ -33,6 +33,16 @@ namespace Tactics.Logic;
 [JsonDerivedType(typeof(Died), nameof(Died))]
 [JsonDerivedType(typeof(TurnSkipped), nameof(TurnSkipped))]
 [JsonDerivedType(typeof(BattleEnded), nameof(BattleEnded))]
+[JsonDerivedType(typeof(ZoneCreated), nameof(ZoneCreated))]
+[JsonDerivedType(typeof(ZoneEnded), nameof(ZoneEnded))]
+[JsonDerivedType(typeof(TerrainAltered), nameof(TerrainAltered))]
+[JsonDerivedType(typeof(Spawned), nameof(Spawned))]
+[JsonDerivedType(typeof(Despawned), nameof(Despawned))]
+[JsonDerivedType(typeof(Transformed), nameof(Transformed))]
+[JsonDerivedType(typeof(TurnOrderChanged), nameof(TurnOrderChanged))]
+[JsonDerivedType(typeof(Marked), nameof(Marked))]
+[JsonDerivedType(typeof(TempHpGained), nameof(TempHpGained))]
+[JsonDerivedType(typeof(Countered), nameof(Countered))]
 public abstract record BattleEvent;
 
 /// <summary>A new round began with this turn order.</summary>
@@ -125,3 +135,34 @@ public sealed record TurnSkipped(UnitId Unit, string Reason) : BattleEvent;
 
 /// <summary>The battle is over: emitted once, as the last event of the battle.</summary>
 public sealed record BattleEnded(BattleOutcome Outcome) : BattleEvent;
+
+/// <summary>A zone was laid on the map.</summary>
+public sealed record ZoneCreated(Zone Zone) : BattleEvent;
+
+/// <summary>The zone with this serial ended (its rounds ran out, its owner's concentration ended, or it was dispelled).</summary>
+public sealed record ZoneEnded(int Serial) : BattleEvent;
+
+/// <summary>These tiles were raised (or sunk, for a negative <see cref="Delta"/>); units on them moved with them.</summary>
+public sealed record TerrainAltered(ImmutableArray<Tile> Tiles, int Delta) : BattleEvent;
+
+/// <summary>A unit entered the battle (a summon) on <see cref="At"/>, shown with <see cref="Sprite"/>.</summary>
+public sealed record Spawned(UnitId Unit, Tile At, string? Sprite) : BattleEvent;
+
+/// <summary>A summon left the battle: its time ran out or its summoner's concentration ended.</summary>
+public sealed record Despawned(UnitId Unit) : BattleEvent;
+
+/// <summary>A unit took another form, or went back to its own: <see cref="Into"/> is the sprite it now shows (its sheet's
+/// name when the sheet has none).</summary>
+public sealed record Transformed(UnitId Unit, string Into) : BattleEvent;
+
+/// <summary>This round's turn order changed (a <c>turnOrder</c> effect).</summary>
+public sealed record TurnOrderChanged(ImmutableArray<UnitId> Order) : BattleEvent;
+
+/// <summary><see cref="Unit"/> is now <see cref="By"/>'s marked target.</summary>
+public sealed record Marked(UnitId Unit, UnitId By) : BattleEvent;
+
+/// <summary>A unit's temporary HP rose to <see cref="TempHp"/>.</summary>
+public sealed record TempHpGained(UnitId Unit, int TempHp) : BattleEvent;
+
+/// <summary><see cref="By"/> countered <see cref="Caster"/>'s <see cref="Ability"/>: its effects don't happen.</summary>
+public sealed record Countered(UnitId Caster, AbilityId Ability, UnitId By) : BattleEvent;

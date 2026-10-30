@@ -3,9 +3,10 @@ using System.Collections.Immutable;
 namespace Tactics.Logic;
 
 /// <summary>
-/// A unit's static modifiers: the <see cref="StaticMods"/> of its sheet passives (in sheet order) and of its conditions
-/// (in the order applied, each followed by the conditions it implies), added up. Ids the rules pack doesn't define add
-/// nothing.
+/// A unit's static modifiers: the <see cref="StaticMods"/> of its sheet passives (in sheet order), of its conditions
+/// (in the order applied, each followed by the conditions it implies), those its conditions carry themselves
+/// (<see cref="ActiveCondition.Mods"/>) and those of the passives of the zones it stands in, added up. Ids the rules pack
+/// doesn't define add nothing.
 /// </summary>
 public static class Modifiers
 {
@@ -30,6 +31,12 @@ public static class Modifiers
                 if (passive.Static is { } passiveMods)
                     yield return passiveMods;
         }
+        foreach (var condition in u.Conditions.IsDefault ? [] : u.Conditions)
+            if (condition.Mods is { } carried)
+                yield return carried;
+        foreach (var (passive, _) in ZoneRules.PassivesAt(state, u))
+            if (passive.Static is { } zoneMods)
+                yield return zoneMods;
     }
 
     /// <summary>The passives on <paramref name="unit"/>'s sheet that the rules pack defines, in sheet order.</summary>

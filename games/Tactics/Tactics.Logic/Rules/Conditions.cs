@@ -35,7 +35,11 @@ public static class Conditions
     public static bool Has(UnitState unit, ConditionId condition, RulesPack rules)
         => (!unit.Conditions.IsDefault && unit.Conditions.Any(c => c.Id == condition)) || Defs(unit, rules).Any(d => d.Id == condition);
 
-    /// <summary>Ends <paramref name="condition"/> on <paramref name="unit"/>, emitting <see cref="ConditionRemoved"/> if it had it.</summary>
+    /// <summary>
+    /// Ends <paramref name="condition"/> on <paramref name="unit"/>, emitting <see cref="ConditionRemoved"/> if it had it.
+    /// Ending <see cref="Summons.Marker"/> despawns the summon (<see cref="DownedRules.Despawn"/>); ending
+    /// <see cref="Transforms.Marker"/> turns the unit back (<see cref="Transforms.Revert"/>).
+    /// </summary>
     public static void Remove(BattleWriter w, UnitId unit, ConditionId condition)
     {
         var u = w.Unit(unit);
@@ -44,6 +48,10 @@ public static class Conditions
             return;
         w.Set(u with { Conditions = kept });
         w.Emit(new ConditionRemoved(unit, condition));
+        if (condition == Summons.Marker)
+            DownedRules.Despawn(w, unit);
+        else if (condition == Transforms.Marker)
+            Transforms.Revert(w, unit);
     }
 
     /// <summary>The concentration save DC for <paramref name="damage"/>: max(10, ⌊damage ÷ 2⌋).</summary>
@@ -51,8 +59,8 @@ public static class Conditions
 
     /// <summary>
     /// Ends <paramref name="caster"/>'s concentration, if any: emits <see cref="ConcentrationBroken"/>, then removes every
-    /// concentration condition it applied (units in sorted <see cref="UnitId"/> order, <see cref="ConditionRemoved"/> each)
-    /// and its concentration zones.
+    /// concentration condition it applied (units in sorted <see cref="UnitId"/> order, <see cref="ConditionRemoved"/> each;
+    /// a concentration summon's marker despawns it) and ends its concentration zones (<see cref="ZoneEnded"/> each).
     /// </summary>
     public static void BreakConcentration(BattleWriter w, UnitId caster)
     {
@@ -65,8 +73,17 @@ public static class Conditions
         foreach (var id in w.State.Units.Keys)
             foreach (var condition in w.Unit(id).Conditions.Where(c => c.Concentration && c.Source == caster).Select(c => c.Id).ToArray())
                 Remove(w, id, condition);
-        // Task 10 emits ZoneEnded for these.
-        w.State = w.State with { Zones = w.State.Zones.RemoveAll(z => z.Concentration && z.Owner == caster) };
+        ZoneRules.End(w, z => z.Concentration && z.Owner == caster);
+    }
+
+    /// <summary>
+    /// Ends <paramref name="unit"/>'s concentration if it is now incapacitated, by whatever means: a condition, a
+    /// <c>statMod</c> or a zone it stands in.
+    /// </summary>
+    public static void BreakIfIncapacitated(BattleWriter w, UnitId unit)
+    {
+        if (w.Unit(unit).Concentrating is not null && Modifiers.For(w, unit, w.Rules).Incapacitated)
+            BreakConcentration(w, unit);
     }
 
     /// <summary>
@@ -91,6 +108,7 @@ public static class Conditions
     /// (<see cref="ActiveCondition.AppliedThisTurn"/>) only loses that mark; any other loses a round and ends at 0. So
     /// <c>rounds: 0</c> lasts until the end of the source's current turn, and <c>rounds: 1</c> until the end of its next
     /// one. Units go in sorted <see cref="UnitId"/> order, conditions in the order applied.</item>
+    /// <item>the zones <paramref name="unit"/> owns tick the same way (<see cref="ZoneRules.EndTurn"/>).</item>
     /// </list>
     /// </summary>
     internal static void EndTurn(BattleWriter w, UnitId unit, RulesPack rules)
@@ -127,6 +145,8 @@ public static class Conditions
             foreach (var condition in expired)
                 Remove(w, id, condition);
         }
+
+        ZoneRules.EndTurn(w, unit);
     }
 
     /// <summary>Whose turn end ticks <paramref name="condition"/> on <paramref name="unit"/>: its source while that source is

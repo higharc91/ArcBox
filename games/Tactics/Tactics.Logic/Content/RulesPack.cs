@@ -11,8 +11,9 @@ public sealed partial class RulesPack
     private RulesPack(string hash, ImmutableSortedDictionary<AbilityId, AbilityDef> abilities,
         ImmutableSortedDictionary<string, PassiveDef> passives, ImmutableSortedDictionary<ConditionId, ConditionDef> conditions,
         ImmutableSortedDictionary<InjuryId, InjuryDef> injuries, ImmutableSortedDictionary<string, BattleMap> maps,
-        Catalog? catalog = null)
+        Catalog? catalog = null, ImmutableSortedDictionary<string, UnitSheet>? monsterSheets = null)
     {
+        _monsterSheets = monsterSheets ?? Ordinal.Map<UnitSheet>();
         Hash = hash;
         Abilities = abilities;
         Passives = passives;
@@ -29,6 +30,8 @@ public sealed partial class RulesPack
         AiProfiles = catalog.AiProfiles;
         Xp = catalog.Xp;
     }
+
+    private readonly ImmutableSortedDictionary<string, UnitSheet> _monsterSheets;
 
     /// <summary>The content hash; a battle records it in <see cref="BattleState.ContentHash"/>.</summary>
     public string Hash { get; }
@@ -74,6 +77,22 @@ public sealed partial class RulesPack
 
     /// <summary>The base map with this id, or null.</summary>
     public BattleMap? MapFor(string id) => Maps.GetValueOrDefault(id);
+
+    /// <summary>
+    /// The unit sheet of the monster <paramref name="id"/> (for summons and transformations), or null when there is none:
+    /// a sheet given to <see cref="InMemory"/>, else one built from <see cref="Monsters"/> at the stat block's own level.
+    /// The sheet is on the enemy side; a summoner puts it on its own. (Task 12's sheet builder replaces the conversion.)
+    /// </summary>
+    public UnitSheet? MonsterSheet(string id)
+    {
+        if (_monsterSheets.TryGetValue(id, out var sheet))
+            return sheet;
+        if (!Monsters.TryGetValue(id, out var m))
+            return null;
+        return new UnitSheet(m.Name, Side.Enemy, m.Level, m.Scores, m.Hp, m.Ac, m.Armor, m.Move, m.Jump, m.InitiativeBonus,
+            m.Saves, m.Skills, m.Resources, m.Abilities, m.Passives, m.Weapon, m.Attacks, m.Resist, m.Immune, m.Vulnerable,
+            m.Tags, m.Sprite, m.AiProfile, m.CastingStat?.ToString(), m.Xp);
+    }
 
     /// <summary>
     /// Loads rules packs (spec §4.9) in dependency order, <c>"base"</c> first and then by <c>requires</c>, whatever order the
@@ -132,17 +151,21 @@ public sealed partial class RulesPack
     /// <summary>
     /// A pack built from the given definitions, plus the built-ins (<see cref="CommonAttack"/>, <see cref="CommonHelp"/>
     /// and <see cref="Helped"/>) unless it defines their ids itself, and <see cref="TestInjury"/> when no injuries are
-    /// given. It has no classes, races, monsters or other catalogue content, and <see cref="XpTable.Default"/>. Nothing is
-    /// validated. Throws <see cref="ArgumentException"/> on a duplicate id.
+    /// given. It has no classes, races, monster stat blocks or other catalogue content, and <see cref="XpTable.Default"/>;
+    /// <paramref name="monsters"/> are ready-made sheets for <see cref="MonsterSheet"/>. Nothing is validated. Throws
+    /// <see cref="ArgumentException"/> on a duplicate id.
     /// </summary>
     public static RulesPack InMemory(string hash, IEnumerable<AbilityDef>? abilities = null, IEnumerable<PassiveDef>? passives = null,
-        IEnumerable<ConditionDef>? conditions = null, IEnumerable<BattleMap>? maps = null, IEnumerable<InjuryDef>? injuries = null)
+        IEnumerable<ConditionDef>? conditions = null, IEnumerable<BattleMap>? maps = null, IEnumerable<InjuryDef>? injuries = null,
+        IEnumerable<(string Id, UnitSheet Sheet)>? monsters = null)
         => new(hash,
             WithBuiltIn(Index(abilities, a => a.Id, Comparer<AbilityId>.Default, "ability"), a => a.Id, CommonAttack, CommonHelp),
             Index(passives, p => p.Id, StringComparer.Ordinal, "passive"),
             WithBuiltIn(Index(conditions, c => c.Id, Comparer<ConditionId>.Default, "condition"), c => c.Id, Helped),
             Index(injuries ?? [TestInjury], i => i.Id, Comparer<InjuryId>.Default, "injury"),
-            Index(maps, m => m.Id, StringComparer.Ordinal, "map"));
+            Index(maps, m => m.Id, StringComparer.Ordinal, "map"),
+            monsterSheets: Index(monsters, m => m.Id, StringComparer.Ordinal, "monster").ToImmutableSortedDictionary(
+                kv => kv.Key, kv => kv.Value.Sheet, StringComparer.Ordinal));
 
     private static ImmutableSortedDictionary<TKey, TValue> WithBuiltIn<TKey, TValue>(ImmutableSortedDictionary<TKey, TValue> defs,
         Func<TValue, TKey> key, params TValue[] builtIns) where TKey : notnull

@@ -27,6 +27,8 @@ public sealed class EffectShorthandAttribute(string parameter) : Attribute
 /// the key, the rest inside it. Parameters at their default (an optional value, null, an empty list) are left out.</item>
 /// <item>A <see cref="ByLevel{T}"/> parameter is written <c>{"byLevel": {...}}</c>, or as the bare value when it is the same
 /// at every level, and is read from either form or from a bare level-keyed object.</item>
+/// <item>A parameter whose property carries <see cref="JsonConverterAttribute"/> (e.g. an ordinal string set) is read and
+/// written with that converter.</item>
 /// <item>An unknown key, two block keys, an unknown or repeated parameter, or a missing required one throws
 /// <see cref="JsonException"/> naming it.</item>
 /// </list>
@@ -129,7 +131,7 @@ public sealed class EffectJsonConverter : JsonConverter<EffectDef>
         }
         try
         {
-            return node.Deserialize(p.Type, options);
+            return node.Deserialize(p.Type, p.Options ?? options);
         }
         catch (JsonException ex)
         {
@@ -139,7 +141,7 @@ public sealed class EffectJsonConverter : JsonConverter<EffectDef>
 
     private static JsonNode? Serialize(Param p, object? value, JsonSerializerOptions options)
     {
-        var node = JsonSerializer.SerializeToNode(value, p.Type, options);
+        var node = JsonSerializer.SerializeToNode(value, p.Type, p.Options ?? options);
         if (!p.IsByLevel || node is not JsonObject table)
             return node;
         if (table.Count == 1 && table.ContainsKey("1"))
@@ -149,7 +151,7 @@ public sealed class EffectJsonConverter : JsonConverter<EffectDef>
 
     /// <summary>One constructor parameter of an effect record.</summary>
     private sealed record Param(string JsonName, Type Type, PropertyInfo Property, bool Optional, object? Default,
-        JsonNode? DefaultJson, bool IsBranch, bool IsByLevel, bool IsArray)
+        JsonNode? DefaultJson, bool IsBranch, bool IsByLevel, bool IsArray, JsonSerializerOptions? Options)
     {
         public bool IsDefault(JsonNode? node)
             => node is null
@@ -193,8 +195,11 @@ public sealed class EffectJsonConverter : JsonConverter<EffectDef>
                     : nullable ? (true, null)
                     : (false, null);
                 var name = options.PropertyNamingPolicy?.ConvertName(p.Name!) ?? p.Name!;
-                var fallbackJson = optional ? JsonSerializer.SerializeToNode(fallback, t, options) : null;
-                parameters.Add(new Param(name, t, property, optional, fallback, fallbackJson, isBranch, isByLevel, isArray));
+                var own = property.GetCustomAttribute<JsonConverterAttribute>() is { ConverterType: { } converterType }
+                    ? WithConverter(options, (JsonConverter)Activator.CreateInstance(converterType)!)
+                    : null;
+                var fallbackJson = optional ? JsonSerializer.SerializeToNode(fallback, t, own ?? options) : null;
+                parameters.Add(new Param(name, t, property, optional, fallback, fallbackJson, isBranch, isByLevel, isArray, own));
             }
 
             var built = parameters.ToImmutable();
@@ -203,6 +208,13 @@ public sealed class EffectJsonConverter : JsonConverter<EffectDef>
                 shorthand = built.SingleOrDefault(p => p.Property.Name == attribute.Parameter)
                             ?? throw new InvalidOperationException($"{type.Name} has no shorthand parameter '{attribute.Parameter}'.");
             return new Shape(ctor, built, shorthand);
+        }
+
+        private static JsonSerializerOptions WithConverter(JsonSerializerOptions options, JsonConverter converter)
+        {
+            var own = new JsonSerializerOptions(options);
+            own.Converters.Insert(0, converter);
+            return own;
         }
 
         private static object EmptyArray(Type immutableArray)

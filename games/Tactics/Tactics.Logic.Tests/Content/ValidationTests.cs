@@ -65,6 +65,26 @@ public sealed class ValidationTests
             ErrorsOf("map_bytes_length_mismatch"));
 
     [Fact]
+    public void New_block_values_are_checked()
+        => Assert.Equal(
+        [
+            new ContentError(Abilities, "/abilities/0/effects/0/transform/hook",
+                "Unknown named hook 'wild_shpe' (expected \"animate_dead\", \"counterspell\", \"polymorph\" or \"wild_shape\")."),
+            new ContentError(Abilities, "/abilities/0/effects/1/transform/args", "'wild_shape' needs a \"monster\" id in its args."),
+            new ContentError(Abilities, "/abilities/0/effects/2/extraAction/kind",
+                "Unknown extra action 'reaction' (expected \"action\" or \"bonus\")."),
+            new ContentError(Abilities, "/abilities/0/effects/3/turnOrder/op",
+                "Unknown turn order op 'skip' (expected \"delay\", \"hasten\" or \"swap\")."),
+            new ContentError(Abilities, "/abilities/1/effects/0/random/table/1/effects/0/damage/bonus/0",
+                "Unknown addend 'mod.luck' (expected \"mod.<stat>\", \"mod.cast\", \"prof\" or \"level\")."),
+            new ContentError(Abilities, "/abilities/1/effects/0/random/table/0/weight", "A weight must be at least 1."),
+            new ContentError(Abilities, "/abilities/1/effects/1/zone/passives/0/hook", "Unknown hook 'onEnter'."),
+            new ContentError(Abilities, "/abilities/1/effects/2/summon/count", "'count' must be at least 1."),
+            new ContentError(Abilities, "/abilities/1/effects/3/chain/times", "'times' must be at least 1."),
+            new ContentError(Abilities, "/abilities/0/effects/4/summon/monster", "Unknown monster 'wolff'."),
+        ], ErrorsOf("bad_effect_values"));
+
+    [Fact]
     public void Collects_all_errors_not_just_first()
     {
         const string map = "chapter-01/maps/bad.json", monk = "chapter-01/classes/monk.json", encounter = "chapter-01/encounters/bad.json";

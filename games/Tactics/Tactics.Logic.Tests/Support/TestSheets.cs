@@ -48,6 +48,30 @@ public static class TestSheets
         Resist: Ordinal.Set(), Immune: Ordinal.Set(), Vulnerable: Ordinal.Set(), Tags: Ordinal.Set("goblinoid"),
         Sprite: "goblin", AiProfile: "brute", CastingStat: null, Xp: 50);
 
+    /// <summary>A wolf monster sheet (for summons and wild shape): DEX 15, 11 HP, AC 13, bite 2d4+2; initiative 12.</summary>
+    public static readonly UnitSheet Wolf = new(
+        Name: "Wolf", Side: Side.Enemy, Level: 1, Scores: Scores(12, 15, 12, 3, 12, 6),
+        MaxHp: 11, Ac: 13, Armor: ArmorKind.None, Move: 5, Jump: 2, InitiativeBonus: 0,
+        SaveProficiencies: [], Skills: Ordinal.Set("perception"),
+        Resources: Ordinal.Map<int>(), Abilities: [], Passives: [],
+        Weapon: Weapon("bite", "2d4+2", "piercing", Stat.Str), Attacks: 1,
+        Resist: Ordinal.Set(), Immune: Ordinal.Set(), Vulnerable: Ordinal.Set(), Tags: Ordinal.Set("beast"),
+        Sprite: "beasts.wolf", AiProfile: "brute", CastingStat: null, Xp: 50);
+
+    /// <summary>A sheep (polymorph's form): 4 HP, AC 10, WIS 8.</summary>
+    public static readonly UnitSheet Sheep = Wolf with
+    {
+        Name = "Sheep", Scores = Scores(6, 10, 10, 2, 8, 4), MaxHp = 4, Ac = 10, Move = 4, Tags = Ordinal.Set("beast"),
+        Weapon = Weapon("headbutt", "1d2", "bludgeoning", Stat.Str), Sprite = "beasts.sheep", Xp = 0,
+    };
+
+    /// <summary>A skeleton (animate dead's servant): 13 HP, AC 13, shortsword.</summary>
+    public static readonly UnitSheet Skeleton = Wolf with
+    {
+        Name = "Skeleton", Scores = Scores(10, 14, 15, 6, 8, 5), MaxHp = 13, Ac = 13, Move = 4, Tags = Ordinal.Set("undead"),
+        Weapon = Weapon("shortsword", "1d6", "piercing", Stat.Dex, finesse: true), Sprite = "undead.skeleton",
+    };
+
     /// <summary>The six scores in STR, DEX, CON, INT, WIS, CHA order.</summary>
     public static ImmutableSortedDictionary<Stat, int> Scores(int str, int dex, int con, int @int, int wis, int cha)
         => new Dictionary<Stat, int>

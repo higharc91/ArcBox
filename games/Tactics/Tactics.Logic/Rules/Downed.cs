@@ -1,9 +1,9 @@
 namespace Tactics.Logic;
 
 /// <summary>
-/// Dropping to 0 HP, the Downed countdown, revival, going Out with an injury, and death (spec §3.8). Every way a unit can
-/// reach 0 HP (damage, a deep tile) goes through <see cref="Drop"/>, and every unit that leaves the battle leaves the turn
-/// order through it.
+/// Dropping to 0 HP, the Downed countdown, revival, going Out with an injury, death and a summon's despawning (spec
+/// §3.8). Every way a unit can reach 0 HP (damage, a deep tile) goes through <see cref="Drop"/>, and every unit that leaves
+/// the battle leaves the turn order through <see cref="LeaveOrder"/>.
 /// </summary>
 public static class DownedRules
 {
@@ -21,7 +21,8 @@ public static class DownedRules
 
     /// <summary>
     /// <paramref name="unit"/> has reached 0 HP, <paramref name="by"/> whoever dropped it, if anyone. Nothing happens unless
-    /// it is Up. Its HP and temporary HP go to 0 and its concentration ends.
+    /// it is Up. A transformed unit first turns back (<see cref="Transforms.Revert"/>). Its HP and temporary HP go to 0 and
+    /// its concentration ends.
     /// <list type="bullet">
     /// <item>If it <see cref="GoesDown"/>: it is Downed with a countdown of <see cref="StartingCountdown"/> and knocked prone
     /// (<see cref="Downed"/>); its <see cref="HookKind.OnDowned"/> hooks fire (with <paramref name="by"/> as the other unit),
@@ -35,9 +36,10 @@ public static class DownedRules
     /// </summary>
     public static void Drop(BattleWriter w, UnitId unit, UnitId? by)
     {
-        var u = w.Unit(unit);
-        if (u.Life != LifeState.Up)
+        if (w.Unit(unit).Life != LifeState.Up)
             return;
+        Transforms.Revert(w, unit);
+        var u = w.Unit(unit);
 
         if (!GoesDown(u))
         {
@@ -124,6 +126,24 @@ public static class DownedRules
     }
 
     /// <summary>
+    /// A summon leaves the battle without dying: its time ran out or its summoner's concentration ended
+    /// (<see cref="Summons.Marker"/>). Nothing happens unless it is in the battle. It is Dead with 0 HP (no
+    /// <see cref="Died"/>, no <see cref="HookKind.OnKill"/>); emits <see cref="Despawned"/>, stops acting, ends its own
+    /// concentration and leaves the turn order (<see cref="LeaveOrder"/>).
+    /// </summary>
+    public static void Despawn(BattleWriter w, UnitId unit)
+    {
+        var u = w.Unit(unit);
+        if (!InBattle(u))
+            return;
+        w.Set(u with { Hp = 0, TempHp = 0, Life = LifeState.Dead, Countdown = 0 });
+        w.Emit(new Despawned(unit));
+        StopActing(w, unit);
+        Conditions.BreakConcentration(w, unit);
+        LeaveOrder(w, unit);
+    }
+
+    /// <summary>
     /// Drops what <paramref name="unit"/>, no longer Up, was still doing: its queued ability effects and attacks (steps at
     /// hook depth 0 with it as the source). Effects of hooks (its <see cref="HookKind.OnDowned"/> passives and the like)
     /// still run. Its walk halts by itself (<see cref="MoveStep"/>), which also takes it off any ally's tile it was passing.
@@ -164,12 +184,16 @@ public static class DownedRules
     }
 
     /// <summary>
-    /// Takes <paramref name="unit"/>, which has left the battle, out of the turn order. A unit before the current turn
-    /// shifts <see cref="BattleState.TurnIndex"/> down by one, so nobody's turn is repeated or skipped. A unit whose turn
-    /// is under way keeps its place until its turn has ended (<see cref="StartNextTurnStep"/> removes it then).
+    /// Takes <paramref name="unit"/>, which has left the battle, out of the turn order (and out of
+    /// <see cref="BattleState.Joining"/>). A unit before the current turn shifts <see cref="BattleState.TurnIndex"/> down by
+    /// one, so nobody's turn is repeated or skipped; one after it leaves the index as it is. A unit whose turn is under way
+    /// keeps its place until its turn has ended (<see cref="StartNextTurnStep"/> removes it then). Every removal from the
+    /// order goes through here.
     /// </summary>
-    private static void LeaveOrder(BattleWriter w, UnitId unit)
+    internal static void LeaveOrder(BattleWriter w, UnitId unit)
     {
+        if (w.State.Joining.Contains(unit))
+            w.State = w.State with { Joining = w.State.Joining.Remove(unit) };
         var s = w.State;
         var index = s.Order.IndexOf(unit);
         if (index < 0)

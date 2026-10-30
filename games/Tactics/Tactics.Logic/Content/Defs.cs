@@ -161,6 +161,7 @@ public sealed record StaticMods(
 /// <item><see cref="HeightAbove"/>: the owner stands at least this many levels above the target.</item>
 /// <item><see cref="IsSpell"/>: whether the ability is a spell (tier 1 or more) or the attack a spell attack.</item>
 /// <item><see cref="DamageType"/>: the damage taken was of this type.</item>
+/// <item><see cref="Success"/>: whether the roll the effect follows succeeded (an attack hit, a save was made).</item>
 /// </list>
 /// Every key present must hold.
 /// </summary>
@@ -176,7 +177,8 @@ public sealed record WhenDef(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? HeightAbove = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] bool? IsSpell = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? DamageType = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? TargetTag = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? TargetTag = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] bool? Success = null);
 
 /// <summary>Whom a passive's effects land on. JSON: <c>"other"</c> (the default) or <c>"self"</c>.</summary>
 public enum PassiveTarget
@@ -226,10 +228,14 @@ public sealed record TriggerDef(string Id, JsonElement When, bool Once, JsonElem
 
 /// <summary>
 /// A lasting area effect on the map (e.g. a wall of fire or a difficult-terrain spell), numbered by
-/// <see cref="BattleState.NextSerial"/>. Task 10 gives zones their behaviour.
+/// <see cref="BattleState.NextSerial"/> (see <see cref="ZoneRules"/>). <see cref="RoundsLeft"/> (null: the whole battle)
+/// counts its <see cref="Owner"/>'s turn ends like a condition's rounds, <see cref="AppliedThisTurn"/> marking one made
+/// during the owner's turn; a <see cref="Concentration"/> zone ends with its owner's concentration. A
+/// <see cref="Difficult"/> zone costs 2 Move per tile. Its <see cref="Passives"/> belong to every unit standing in it.
 /// </summary>
 public sealed record Zone(int Serial, UnitId? Owner, string Kind, ImmutableArray<Tile> Tiles, int? RoundsLeft,
-    bool Concentration, bool Difficult, ImmutableArray<PassiveDef> Passives);
+    bool Concentration, bool Difficult, ImmutableArray<PassiveDef> Passives,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool AppliedThisTurn = false);
 
 /// <summary>
 /// An injury a party member can gain when it goes Out (spec §3.8), picked from the rules pack's table by

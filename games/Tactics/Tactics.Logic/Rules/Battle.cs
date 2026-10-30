@@ -125,8 +125,10 @@ public static partial class Battle
 
     /// <summary>
     /// Validates <paramref name="use"/> in order (able to act, known ability, cost, target kind, range, line of sight) and,
-    /// if it passes, queues <see cref="PayCostStep"/> and one <see cref="RunEffectsStep"/> per affected unit in sorted
-    /// <see cref="UnitId"/> order. Returns the rejection otherwise, leaving the queue untouched.
+    /// if it passes, queues <see cref="PayCostStep"/>, then one run of the ability's tile blocks
+    /// (<see cref="EffectDef.OnTile"/>) at the aim with no target unit, even when the area holds no units, then one
+    /// <see cref="RunEffectsStep"/> of its other blocks per affected unit in sorted <see cref="UnitId"/> order. Returns the
+    /// rejection otherwise, leaving the queue untouched.
     /// </summary>
     private static Rejection? PlanUse(BattleWriter w, Use use, RulesPack rules)
     {
@@ -144,11 +146,14 @@ public static partial class Battle
         if (ability.IsWeaponAttack)
             effects = [.. Enumerable.Repeat(effects, Math.Max(1, user.Sheet.Attacks)).SelectMany(e => e)];
 
-        // Task 6/10: tile effects (teleport, zones) on a Tile/EmptyTile ability with no unit in the area.
-        w.PushFront([
-            new PayCostStep(user.Id, ability.Id, use.Target),
-            .. targets.Select(t => new RunEffectsStep(user.Id, t, aim, ability.Id, effects)),
-        ]);
+        var onTile = effects.Where(e => e.OnTile).ToImmutableArray();
+        var onUnits = effects.Where(e => !e.OnTile).ToImmutableArray();
+        var steps = new List<Step> { new PayCostStep(user.Id, ability.Id, use.Target) };
+        if (!onTile.IsEmpty)
+            steps.Add(new RunEffectsStep(user.Id, null, aim, ability.Id, onTile));
+        if (!onUnits.IsEmpty)
+            steps.AddRange(targets.Select(t => new RunEffectsStep(user.Id, t, aim, ability.Id, onUnits)));
+        w.PushFront([.. steps]);
         return null;
     }
 
@@ -346,9 +351,11 @@ public static partial class Battle
 
     /// <summary>
     /// Starts the turn at <see cref="BattleState.TurnIndex"/>. When the order has run out, first starts a new round: the
-    /// order is re-sorted, <see cref="BattleState.StartedThisRound"/>, <see cref="BattleState.DelayedThisRound"/> and every
-    /// unit's <see cref="UnitState.UsedThisRound"/> are cleared, <see cref="RoundStarted"/> is emitted and every Downed
-    /// unit's countdown ticks (<see cref="DownedRules.TickRound"/>; if that decides the battle, nothing else happens).
+    /// order is re-sorted (taking in the units <see cref="BattleState.Joining"/> it), <see cref="BattleState.Joining"/>,
+    /// <see cref="BattleState.StartedThisRound"/>, <see cref="BattleState.DelayedThisRound"/> and every unit's
+    /// <see cref="UnitState.UsedThisRound"/> are cleared, <see cref="RoundStarted"/> is emitted, zones whose owner has left
+    /// the battle tick (<see cref="ZoneRules.TickOrphans"/>) and every Downed unit's countdown ticks
+    /// (<see cref="DownedRules.TickRound"/>; if that decides the battle, nothing else happens).
     /// Every turn start clears every unit's <see cref="UnitState.UsedThisTurn"/>.
     /// <para>A unit that can't act (<see cref="SkipReason"/>) has its turn skipped: <see cref="TurnSkipped"/>, then a
     /// <see cref="SkipTurnStep"/> ends it (conditions still tick) and hands on to the next unit.</para>
@@ -368,10 +375,11 @@ public static partial class Battle
             var order = TurnOrder.Sort(w.State, rules);
             w.State = w.State with
             {
-                Round = round, Order = order, TurnIndex = 0, StartedThisRound = [], DelayedThisRound = [],
+                Round = round, Order = order, TurnIndex = 0, StartedThisRound = [], DelayedThisRound = [], Joining = [],
             };
             ClearUsed(w, round: true);
             w.Emit(new RoundStarted(round, order));
+            ZoneRules.TickOrphans(w);
             DownedRules.TickRound(w);
             if (Objectives.Check(w))
                 return;

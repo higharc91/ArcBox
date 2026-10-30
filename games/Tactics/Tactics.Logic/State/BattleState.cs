@@ -26,8 +26,9 @@ public sealed record ObjectiveState(ObjectivesDef Current,
 /// <param name="MapId">The base map; the rules pack resolves it (<see cref="RulesPack.MapFor"/>).</param>
 /// <param name="Units">Every unit, including Downed, Out and Dead ones.</param>
 /// <param name="Round">The current round, from 1.</param>
-/// <param name="Order">This round's turn order: every unit still in the battle (Up or Downed). A unit that leaves (Out or
-/// Dead) is taken out of it, at the end of its turn if it is the one acting.</param>
+/// <param name="Order">This round's turn order: every unit still in the battle (Up or Downed), except those
+/// <see cref="Joining"/> it next round. A unit that leaves (Out or Dead) is taken out of it, at the end of its turn if it is
+/// the one acting.</param>
 /// <param name="TurnIndex">The index in <paramref name="Order"/> of the unit whose turn it is.</param>
 /// <param name="Rng">The battle's random generator; every die comes from it.</param>
 /// <param name="Queue">Steps still to resolve, head at index 0.</param>
@@ -70,6 +71,12 @@ public sealed record BattleState(
 
     /// <summary>The Downed units whose countdown a resolution still under way has already hit (one tick per hit).</summary>
     public ImmutableSortedSet<HitMark> DownedHits { get; init; } = [];
+
+    /// <summary>
+    /// Units that arrived this round (summons): in the battle but not yet in <see cref="Order"/>, which they join when the
+    /// next round's order is sorted (see <see cref="TurnOrder.Sort"/>).
+    /// </summary>
+    public ImmutableSortedSet<UnitId> Joining { get; init; } = [];
 
     /// <summary>The unit whose turn it is: <c>Order[TurnIndex]</c> while the battle has no outcome, otherwise null.</summary>
     [JsonIgnore]

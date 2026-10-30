@@ -26,8 +26,10 @@ internal sealed partial class Validation
     }
 
     /// <summary>
-    /// One effect: exactly one known block key, its branches (checked first, with their own pointers), then the block's
-    /// values: attack kinds, named addends, by-level tables, condition ids, until-save under a save, and ranges.
+    /// One effect: exactly one known block key, its branches, a <c>random</c> table's effects and a <c>zone</c>'s passives
+    /// (checked first, with their own pointers), then the block's values: attack kinds, named addends, by-level tables,
+    /// condition, monster and art ids, until-save under a save, ranges, area sizes, counts, the named hook and its args, and
+    /// the extra-action kinds and turn-order ops.
     /// </summary>
     private bool Effect(JsonElement e, string file, string ptr, bool inSave)
     {
@@ -52,6 +54,22 @@ internal sealed partial class Validation
         foreach (var branch in Branches(BlockRegistry.For(key).DefType))
             if (Locate(e, key, branch, ptr) is { } found)
                 ok &= EffectList(found.Value, file, found.Pointer, inSave || key == "save");
+        if (key == "random" && Locate(e, key, "table", ptr) is { Value.ValueKind: JsonValueKind.Array } table)
+        {
+            var i = 0;
+            foreach (var entry in table.Value.EnumerateArray())
+            {
+                var at = Pointer.Append(table.Pointer, i++);
+                if (entry.ValueKind == JsonValueKind.Object && entry.TryGetProperty("effects", out var list))
+                    ok &= EffectList(list, file, Pointer.Append(at, "effects"), inSave);
+            }
+        }
+        if (key == "zone" && Locate(e, key, "passives", ptr) is { Value.ValueKind: JsonValueKind.Array } passives)
+        {
+            var i = 0;
+            foreach (var passive in passives.Value.EnumerateArray())
+                ok &= Passive(passive, file, Pointer.Append(passives.Pointer, i++)) is not null;
+        }
         if (!ok)
             return false;
 
@@ -87,9 +105,83 @@ internal sealed partial class Validation
             case JumpToEffect { Range: > MaxRange } jump:
                 Error(file, At("range"), $"Range {jump.Range} is over the limit of {MaxRange}.");
                 break;
+            case TempHpEffect tempHp:
+                Levels(tempHp.Dice, file, At("dice"));
+                Addends(tempHp.Bonus, file, At("bonus"));
+                break;
+            case ReviveEffect revive:
+                AtLeast(revive.Hp, 1, file, At("hp"));
+                break;
+            case ZoneEffect zone:
+                AreaSize(zone.Area, file, At("area"));
+                break;
+            case AlterTerrainEffect terrain:
+                AreaSize(terrain.Area, file, At("area"));
+                break;
+            case HazardEffect hazard:
+                AreaSize(hazard.Area, file, At("area"));
+                Ref(RefKind.Art, hazard.HazardArt, file, At("hazardArt"));
+                break;
+            case SummonEffect summon:
+                Ref(RefKind.Monster, summon.Monster, file, At("monster"));
+                AtLeast(summon.Count, 1, file, At("count"));
+                break;
+            case TransformEffect transform:
+                if (NamedHooks.TryFor(transform.Hook) is { } hook)
+                    hook.Validate(transform.Args, message => Error(file, At("args"), message));
+                else
+                    Error(file, At("hook"), $"Unknown named hook '{transform.Hook}' (expected {OneOf(NamedHooks.Names)}).");
+                break;
+            case ExtraActionEffect extra when !ExtraActionBlock.Kinds.Contains(extra.Kind):
+                Error(file, At("kind"), $"Unknown extra action '{extra.Kind}' (expected {OneOf(ExtraActionBlock.Kinds)}).");
+                break;
+            case RevealEffect reveal:
+                AreaSize(reveal.Area, file, At("area"));
+                break;
+            case TurnOrderEffect turnOrder:
+                if (!TurnOrderBlock.Ops.Contains(turnOrder.Op))
+                    Error(file, At("op"), $"Unknown turn order op '{turnOrder.Op}' (expected {OneOf(TurnOrderBlock.Ops)}).");
+                AtLeast(turnOrder.Slots, 1, file, At("slots"));
+                break;
+            case ChainEffect chain:
+                AtLeast(chain.Times, 1, file, At("times"));
+                if (chain.Range > MaxRange)
+                    Error(file, At("range"), $"Range {chain.Range} is over the limit of {MaxRange}.");
+                break;
+            case RepeatEffect repeat:
+                AtLeast(repeat.Times, 1, file, At("times"));
+                break;
+            case IfEffect branching:
+                When(branching.When, file, At("when"));
+                break;
+            case RandomEffect random:
+                if (random.Table.IsEmpty)
+                    Error(file, At("table"), "The table is empty.");
+                for (var i = 0; i < random.Table.Length; i++)
+                    if (random.Table[i].Weight < 1)
+                        Error(file, Pointer.Append(Pointer.Append(At("table"), i), "weight"), "A weight must be at least 1.");
+                break;
         }
         return true;
     }
+
+    /// <summary>Reports <c>'&lt;name&gt;' must be at least &lt;min&gt;.</c> at <paramref name="ptr"/> when <paramref name="value"/> is lower.</summary>
+    private void AtLeast(int value, int min, string file, string ptr)
+    {
+        if (value < min)
+            Error(file, ptr, $"'{ptr[(ptr.LastIndexOf('/') + 1)..]}' must be at least {min}.");
+    }
+
+    private void AreaSize(AreaDef area, string file, string ptr)
+    {
+        if (area.Size > MaxAreaSize)
+            Error(file, Pointer.Append(ptr, "size"), $"Area size {area.Size} is over the limit of {MaxAreaSize}.");
+    }
+
+    /// <summary>The choices quoted, as <c>"a", "b" or "c"</c>.</summary>
+    private static string OneOf(IReadOnlyList<string> choices)
+        => choices.Count == 1 ? $"\"{choices[0]}\""
+            : string.Join(", ", choices.Take(choices.Count - 1).Select(c => $"\"{c}\"")) + $" or \"{choices[^1]}\"";
 
     private static readonly ConcurrentDictionary<Type, ImmutableArray<string>> BranchCache = new();
 
