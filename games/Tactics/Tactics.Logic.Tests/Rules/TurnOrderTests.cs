@@ -116,45 +116,93 @@ public sealed class TurnOrderTests
         Assert.Equal(U("gob"), state.Active);
         Assert.Equal<BattleEvent>([new Delayed(U("rogue"), 1), new TurnStarted(U("gob"), 1)], events);
 
+        // The delayed turn resumes with TurnStarted again.
         (state, events) = battle.Apply(state, new EndTurn(U("gob")));
         Assert.Equal(U("rogue"), state.Active);
         Assert.Equal<BattleEvent>([new TurnEnded(U("gob")), new TurnStarted(U("rogue"), 1)], events);
 
-        // Delaying past the end of the order goes last.
-        (state, events) = battle.Apply(state, new Delay(U("rogue"), 5));
-        Assert.Equal(Ids("gob", "cleric", "rogue"), state.Order);
-        Assert.Equal<BattleEvent>([new Delayed(U("rogue"), 2), new TurnStarted(U("cleric"), 1)], events);
+        (state, _) = battle.Apply(state, new EndTurn(U("rogue")));
+        Assert.Equal(U("cleric"), state.Active);
 
-        (state, _) = battle.Apply(state, new EndTurn(U("cleric")));
-        Assert.Equal(U("rogue"), state.Active);
-
-        // Next round the delay is forgotten: initiative order again.
-        (state, events) = battle.Apply(state, new EndTurn(U("rogue")));
+        // Next round the delay is forgotten: initiative order again, and the rogue may delay again.
+        (state, events) = battle.Apply(state, new EndTurn(U("cleric")));
         Assert.Equal(2, state.Round);
         Assert.Equal(Ids("rogue", "gob", "cleric"), state.Order);
         Assert.Equal(U("rogue"), state.Active);
         Assert.Equal(new TurnStarted(U("rogue"), 2), events[^1]);
+        Assert.Equal([U("rogue")], state.StartedThisRound);
+        Assert.Empty(state.DelayedThisRound);
+
+        // Delaying past the end of the order goes last.
+        (state, events) = battle.Apply(state, new Delay(U("rogue"), 5));
+        Assert.Equal(Ids("gob", "cleric", "rogue"), state.Order);
+        Assert.Equal<BattleEvent>([new Delayed(U("rogue"), 2), new TurnStarted(U("gob"), 2)], events);
     }
 
     [Fact]
-    public void Delay_with_no_later_slot_is_rejected()
+    public void Delay_rejected_after_spending_twice_a_round_or_without_a_later_slot()
     {
         var battle = TestBattle.On(Field)
-            .Party("rogue", TestSheets.Rogue, new Tile(0, 0))
-            .Enemy("gob", TestSheets.Goblin, new Tile(4, 0));
-        var (state, _) = battle.Start();
+            .Party("rogue", TestSheets.Rogue, new Tile(0, 0))      // 13
+            .Enemy("gob", TestSheets.Goblin, new Tile(4, 0))       // 12
+            .Party("cleric", TestSheets.Cleric, new Tile(1, 0));   // 10
+        var (start, _) = battle.Start();
+        var rogue = start.Units[U("rogue")];
+        BattleState WithEconomy(TurnEconomy e) => start with { Units = start.Units.SetItem(rogue.Id, rogue with { Economy = e }) };
 
-        foreach (var slots in new[] { 0, -1 })
-        {
-            var result = Battle.Apply(state, new Delay(U("rogue"), slots), battle.Rules);
-            Assert.Equal(RejectCode.InvalidTarget, result.Rejected?.Code);
-            Assert.Same(state, result.State);
-        }
+        AssertCantDelay(start, new Delay(U("rogue"), 0));
+        AssertCantDelay(start, new Delay(U("rogue"), -1));
+        AssertCantDelay(WithEconomy(rogue.Economy with { MoveLeft = 3 }), new Delay(U("rogue"), 1));
+        AssertCantDelay(WithEconomy(rogue.Economy with { Action = false }), new Delay(U("rogue"), 1));
+        AssertCantDelay(WithEconomy(rogue.Economy with { Bonus = false }), new Delay(U("rogue"), 1));
+        // A spent reaction (e.g. last round's opportunity attack) doesn't stop a delay.
+        battle.Apply(WithEconomy(rogue.Economy with { Reaction = false }), new Delay(U("rogue"), 1));
 
+        // Once per round: the resumed turn can't delay again, even with a later slot.
+        var (state, _) = battle.Apply(start, new Delay(U("rogue"), 1));
+        (state, _) = battle.Apply(state, new EndTurn(U("gob")));
+        Assert.Equal(U("rogue"), state.Active);
+        AssertCantDelay(state, new Delay(U("rogue"), 1));
+
+        // No later slot: the last unit in the order.
         (state, _) = battle.Apply(state, new EndTurn(U("rogue")));
-        var last = Battle.Apply(state, new Delay(U("gob"), 1), battle.Rules);
-        Assert.Equal(RejectCode.InvalidTarget, last.Rejected?.Code);
-        Assert.Same(state, last.State);
+        Assert.Equal(U("cleric"), state.Active);
+        AssertCantDelay(state, new Delay(U("cleric"), 1));
+
+        void AssertCantDelay(BattleState s, Delay delay)
+        {
+            var result = Battle.Apply(s, delay, battle.Rules);
+            Assert.Same(s, result.State);
+            Assert.Empty(result.Events);
+            Assert.Equal(new Rejection(RejectCode.CantDelay, "You can only delay at the start of your turn, once per round."),
+                result.Rejected);
+        }
+    }
+
+    [Fact]
+    public void Resumed_turn_restores_move_action_bonus_but_keeps_a_spent_reaction()
+    {
+        var battle = TestBattle.On(Field)
+            .Party("rogue", TestSheets.Rogue, new Tile(0, 0))      // 13
+            .Enemy("gob", TestSheets.Goblin, new Tile(4, 0));      // 12
+        var (state, _) = battle.Start();
+        (state, _) = battle.Apply(state, new Delay(U("rogue"), 1));
+
+        // During the goblin's turn the rogue spends its reaction (an opportunity attack, say).
+        var rogue = state.Units[U("rogue")];
+        state = state with
+        {
+            Units = state.Units.SetItem(rogue.Id, rogue with { Economy = new TurnEconomy(0, false, false, false, 0) }),
+        };
+
+        (state, _) = battle.Apply(state, new EndTurn(U("gob")));
+        Assert.Equal(U("rogue"), state.Active);
+        Assert.Equal(new TurnEconomy(4, true, true, false, 0), state.Units[U("rogue")].Economy);
+
+        // At the next round's first start the reaction comes back.
+        (state, _) = battle.Apply(state, new EndTurn(U("rogue")));
+        Assert.Equal(2, state.Round);
+        Assert.Equal(new TurnEconomy(4, true, true, true, 0), state.Units[U("rogue")].Economy);
     }
 
     [Fact]

@@ -30,6 +30,13 @@ public sealed record ObjectiveState(ObjectivesDef Current,
 /// <param name="Injuries">Injuries gained by units that went Out.</param>
 /// <param name="ItemsUsed">Consumables used, in order.</param>
 /// <param name="NextSerial">The next serial for zones and spawned units.</param>
+/// <param name="StartedThisRound">Units whose turn has started this round; a later start for one of them is a resumed
+/// (delayed) turn, which skips turn-start effects and keeps the Reaction.</param>
+/// <param name="DelayedThisRound">Units that delayed this round (a unit may delay once per round).</param>
+/// <param name="Xp">The encounter's XP award, from the setup.</param>
+/// <param name="Loot">Loot tables to roll on a win, from the setup.</param>
+/// <param name="Difficulty">The encounter's difficulty, from the setup.</param>
+/// <param name="Triggers">The encounter's triggers, from the setup.</param>
 public sealed record BattleState(
     string ContentHash, string MapId, ImmutableSortedDictionary<UnitId, UnitState> Units, int Round,
     ImmutableArray<UnitId> Order, int TurnIndex, Rng Rng, ImmutableList<Step> Queue, Pending? Pending,
@@ -37,7 +44,9 @@ public sealed record BattleState(
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Flags,
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedDictionary<string, int> Counters,
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> FiredTriggers,
-    BattleOutcome? Outcome, ImmutableArray<RecordedInjury> Injuries, ImmutableArray<ItemUse> ItemsUsed, int NextSerial)
+    BattleOutcome? Outcome, ImmutableArray<RecordedInjury> Injuries, ImmutableArray<ItemUse> ItemsUsed, int NextSerial,
+    ImmutableSortedSet<UnitId> StartedThisRound, ImmutableSortedSet<UnitId> DelayedThisRound, int Xp,
+    ImmutableArray<LootTableId> Loot, Difficulty Difficulty, ImmutableArray<TriggerDef> Triggers)
 {
     /// <summary>The unit whose turn it is: <c>Order[TurnIndex]</c> while the battle has no outcome, otherwise null.</summary>
     [JsonIgnore]

@@ -60,8 +60,19 @@ public sealed class SerialisationTests
             Injuries = [new RecordedInjury(U("kara"), new InjuryId("cracked_rib"))],
             ItemsUsed = [new ItemUse(U("kara"), new ItemId("potion.healing"), false)],
             NextSerial = 4,
+            StartedThisRound = [U("gob"), U("Brin")],
+            DelayedThisRound = [U("Brin")],
+            Xp = 300,
+            Loot = [new LootTableId("goblin_cache"), new LootTableId("Coins")],
+            Difficulty = Difficulty.Hard,
+            Triggers =
+            [
+                new TriggerDef("reinforcements", Json("""{"round":3}"""), true, Json("""[{"spawn":{"monster":"goblin","at":[3,1]}}]""")),
+            ],
         };
     }
+
+    private static JsonElement Json(string text) => JsonDocument.Parse(text).RootElement.Clone();
 
     [Fact]
     public void State_round_trips_byte_identical()
@@ -79,12 +90,63 @@ public sealed class SerialisationTests
         Assert.Contains("\"1,1\":2", json);
         Assert.DoesNotContain("\"active\"", json);
 
+        Assert.Contains("\"triggers\":[{\"id\":\"reinforcements\",\"when\":{\"round\":3},\"once\":true,", json);
+        Assert.Contains("\"difficulty\":\"Hard\"", json);
+
         Assert.Equal(state.Active, back.Active);
+        Assert.Equal(300, back.Xp);
+        Assert.Equal(state.Loot, back.Loot);
+        Assert.Equal(state.StartedThisRound, back.StartedThisRound);
+        Assert.Equal(state.DelayedThisRound, back.DelayedThisRound);
         Assert.Equal(state.Rng, back.Rng);
         Assert.Equal(state.Queue, back.Queue);
         Assert.Equal(state.Units[U("kara")].Conditions, back.Units[U("kara")].Conditions);
         Assert.IsType<ReactionOffer>(back.Pending);
         Assert.Equal("leavesReach", ((ReactionOffer)back.Pending).Trigger);
+    }
+
+    [Fact]
+    public void Turn_handoff_is_carried_by_the_queue_and_survives_a_save()
+    {
+        var battle = TestBattle.On(Field)
+            .Party("kara", TestSheets.Rogue, new Tile(0, 0))
+            .Enemy("gob", TestSheets.Goblin, new Tile(3, 1));
+        var (state, _) = battle.Start(seed: 9);
+
+        // Resolve EndTurn's first step by hand: the turn has ended but not yet been handed on.
+        var w = new BattleWriter(state, battle.Rules);
+        w.PushFront(new EndTurnStep(U("kara")));
+        w.PopFront()!.Run(w, battle.Rules);
+        Assert.Equal<BattleEvent>([new TurnEnded(U("kara"))], w.Events);
+
+        // Pause there, as a turn-end reaction would, and save.
+        var paused = w.Freeze() with
+        {
+            Pending = new ReactionOffer(U("gob"), [new ReactionChoice("pass", null, null)], "turnEnd"),
+        };
+        Assert.Equal([new StartNextTurnStep()], paused.Queue);
+        Assert.Equal(U("kara"), paused.Active);
+
+        var json = JsonSerializer.Serialize(paused, ArcJson.Options);
+        var loaded = JsonSerializer.Deserialize<BattleState>(json, ArcJson.Options)!;
+        Assert.Equal(json, JsonSerializer.Serialize(loaded, ArcJson.Options));
+        Assert.Equal(U("kara"), loaded.Active);
+
+        // Answering the pause resumes the hand-off identically from the saved and the in-memory state.
+        var (original, originalEvents) = Resume(paused with { Pending = null });
+        var (resumed, resumedEvents) = Resume(loaded with { Pending = null });
+        Assert.Equal<BattleEvent>([new TurnStarted(U("gob"), 1)], originalEvents);
+        Assert.Equal(originalEvents, resumedEvents);
+        Assert.Equal(U("gob"), resumed.Active);
+        Assert.Equal(JsonSerializer.Serialize(original, ArcJson.Options), JsonSerializer.Serialize(resumed, ArcJson.Options));
+
+        (BattleState, ImmutableArray<BattleEvent>) Resume(BattleState s)
+        {
+            var writer = new BattleWriter(s, battle.Rules);
+            while (writer.PopFront() is { } step)
+                step.Run(writer, battle.Rules);
+            return (writer.Freeze(), writer.Events);
+        }
     }
 
     [Fact]

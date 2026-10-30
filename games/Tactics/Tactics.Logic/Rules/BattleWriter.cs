@@ -3,10 +3,11 @@ using System.Collections.Immutable;
 namespace Tactics.Logic;
 
 /// <summary>
-/// The mutable working copy used while one command resolves: it starts from a frozen state, collects changes and events,
-/// and <see cref="Freeze"/>s back into an immutable state. The original state is never touched.
+/// The engine's working copy while one command resolves: it starts from a frozen state, collects changes and events, and
+/// <see cref="Freeze"/>s back into an immutable state. The original state is never touched. Steps and effect blocks read
+/// and change the battle only through a writer.
 /// </summary>
-internal sealed class BattleWriter
+public sealed class BattleWriter
 {
     private readonly RulesPack _rules;
     private readonly ImmutableArray<BattleEvent>.Builder _events = ImmutableArray.CreateBuilder<BattleEvent>();
@@ -14,6 +15,7 @@ internal sealed class BattleWriter
     private ImmutableSortedDictionary<Tile, int>? _terrainHeights;
     private ImmutableArray<Zone> _terrainZones;
 
+    /// <summary>Starts a working copy of <paramref name="state"/> under <paramref name="rules"/>.</summary>
     public BattleWriter(BattleState state, RulesPack rules)
     {
         State = state;
@@ -22,9 +24,6 @@ internal sealed class BattleWriter
 
     /// <summary>The state as it is now.</summary>
     public BattleState State { get; set; }
-
-    /// <summary>Set by a step that hands the turn on; the apply loop then starts the next turn.</summary>
-    public bool TurnOver { get; set; }
 
     /// <summary>The events emitted so far, in order.</summary>
     public ImmutableArray<BattleEvent> Events => _events.ToImmutable();
