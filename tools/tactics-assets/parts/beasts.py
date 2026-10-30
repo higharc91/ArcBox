@@ -419,3 +419,14 @@ def build() -> None:
         sh = sheet(b, next(iter(b.variants)))
         rows.append(Tile(strip(sh.frames[:n], 1, gap=2), b.name, "idle · walk · attack · hurt · down"))
     save(contact_sheet("Beasts · animations", rows, columns=1, zoom=3), PREVIEWS / "18-beasts-anims.png")
+
+    from arcpix.anim import Actor, stage_gif
+    actors = [Actor(b.name, next(iter(b.variants)), sheet(b, next(iter(b.variants))).frames, ANCHOR)
+              for b in CATALOGUE]
+    k = len(actors)
+    atk = anims["attack"]["frames"]
+    beats = [("Idle", [anims["idle"]["frames"] * 3] * k, 330), ("Walk", [anims["walk"]["frames"] * 3] * k, 125),
+             ("Walk · away", [[f + n for f in anims["walk"]["frames"]] * 3] * k, 125),
+             ("Attack", [[0, 0] + [f for f in atk for _ in range(2)] + [atk[-1]] * 3] * k, 90),
+             ("Hurt", [anims["hurt"]["frames"] * 6 + [0, 0, 0]] * k, 90), ("Down", [anims["down"]["frames"] * 10] * k, 90)]
+    stage_gif(PREVIEWS / "anim-beasts.gif", "Beasts", actors, beats, zoom=3, columns=4, cell_w=56, cell_h=56)

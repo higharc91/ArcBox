@@ -1,0 +1,1831 @@
+{
+  "scale": "1x sources: draw at whole multiples (3x-4x on the TV, 2x-3x on phones) with nearest filtering",
+  "palette": {
+    "gold": [
+      "#743d20",
+      "#925d2f",
+      "#b78642",
+      "#e6bd5c",
+      "#f5da78",
+      "#ffe794"
+    ],
+    "glass": [
+      "#100d27",
+      "#11102c",
+      "#151633",
+      "#1a1e3a",
+      "#343662",
+      "#56558a"
+    ],
+    "ink": [
+      "#b19886",
+      "#c5b29d",
+      "#dbceb7",
+      "#f4ecd6",
+      "#fef8e4",
+      "#fffae9"
+    ],
+    "hp": [
+      "#2d8054",
+      "#3b975b",
+      "#4db364",
+      "#63d36f",
+      "#7de47d",
+      "#a4f59a"
+    ],
+    "enemy": [
+      "#891e3f",
+      "#a22a41",
+      "#bf3943",
+      "#e2534c",
+      "#f07e69",
+      "#ffa888"
+    ],
+    "magic": [
+      "#3b559b",
+      "#4c74b7",
+      "#639ad8",
+      "#7fc8ff",
+      "#92daff",
+      "#a5e9ff"
+    ],
+    "p1": [
+      "#9b1812",
+      "#b7351d",
+      "#d85b2b",
+      "#ff8a3d",
+      "#ffad5a",
+      "#ffca77"
+    ],
+    "p2": [
+      "#134b9b",
+      "#1e6cb7",
+      "#2c95d8",
+      "#3ec7ff",
+      "#5bdeff",
+      "#78f0ff"
+    ],
+    "p3": [
+      "#54429b",
+      "#6e56b7",
+      "#936ed8",
+      "#c08cff",
+      "#d29dff",
+      "#e1aeff"
+    ],
+    "p4": [
+      "#29886b",
+      "#37a174",
+      "#49be7e",
+      "#5fe08a",
+      "#7aef94",
+      "#97fea3"
+    ],
+    "p5": [
+      "#9b4e19",
+      "#b77124",
+      "#d89e33",
+      "#ffd447",
+      "#ffdd63",
+      "#ffe37e"
+    ],
+    "p6": [
+      "#9b3b81",
+      "#b74c90",
+      "#d863a1",
+      "#ff7fb6",
+      "#ff92b7",
+      "#ffa5bc"
+    ]
+  },
+  "text": {
+    "ink": "#f4ecd6",
+    "muted": "#bdb093",
+    "dim": "#8a826d",
+    "gold": "#e6bd5c",
+    "on_gold": "#2a1b04"
+  },
+  "nineSlice": "slice = [left, top, right, bottom] insets of the source rect. outset = how far the source reaches outside the element's box (studs, glows): draw the source at box.x - outset.left, box.y - outset.top, sized box + outset. padding = content inset inside the box. The centre and edges are flat, so tile or stretch both work; tile keeps pixels square.",
+  "panels": {
+    "file": "panels.png",
+    "pieces": {
+      "main": {
+        "rect": [
+          0,
+          0,
+          42,
+          34
+        ],
+        "slice": [
+          11,
+          10,
+          11,
+          5
+        ],
+        "outset": [
+          4,
+          4,
+          4,
+          0
+        ],
+        "padding": [
+          7,
+          6,
+          7,
+          6
+        ]
+      },
+      "card": {
+        "rect": [
+          43,
+          0,
+          18,
+          18
+        ],
+        "slice": [
+          5,
+          4,
+          5,
+          3
+        ],
+        "padding": [
+          5,
+          5,
+          5,
+          5
+        ]
+      },
+      "card_selected": {
+        "rect": [
+          62,
+          0,
+          18,
+          18
+        ],
+        "slice": [
+          5,
+          4,
+          5,
+          3
+        ],
+        "padding": [
+          5,
+          5,
+          5,
+          5
+        ]
+      },
+      "tooltip": {
+        "rect": [
+          81,
+          0,
+          20,
+          15
+        ],
+        "slice": [
+          8,
+          7,
+          8,
+          3
+        ],
+        "outset": [
+          3,
+          3,
+          3,
+          0
+        ],
+        "padding": [
+          5,
+          5,
+          5,
+          5
+        ]
+      },
+      "tooltip_tail": {
+        "rect": [
+          102,
+          0,
+          9,
+          6
+        ],
+        "attach": "centred under the tooltip, its top row on the tooltip's bottom rim; flip it vertically to point up"
+      },
+      "dialogue": {
+        "rect": [
+          112,
+          0,
+          48,
+          42
+        ],
+        "slice": [
+          13,
+          12,
+          13,
+          11
+        ],
+        "outset": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "padding": [
+          9,
+          8,
+          9,
+          8
+        ]
+      },
+      "dialogue_tab": {
+        "rect": [
+          161,
+          0,
+          16,
+          13
+        ],
+        "slice": [
+          6,
+          4,
+          6,
+          4
+        ],
+        "padding": [
+          6,
+          5,
+          6,
+          5
+        ],
+        "attach": "x = dialogue box left + 6, y = dialogue box top - 7 (it straddles the top edge)"
+      },
+      "banner": {
+        "rect": [
+          178,
+          0,
+          46,
+          25
+        ],
+        "slice": [
+          18,
+          8,
+          18,
+          8
+        ],
+        "padding": [
+          14,
+          6,
+          14,
+          6
+        ],
+        "stretch": "horizontal; keep the source height so the pointed ends stay sharp"
+      },
+      "banner_crest": {
+        "rect": [
+          225,
+          0,
+          13,
+          9
+        ],
+        "attach": "centred on the banner's top edge"
+      },
+      "turn_strip": {
+        "rect": [
+          0,
+          43,
+          48,
+          38
+        ],
+        "slice": [
+          12,
+          15,
+          12,
+          8
+        ],
+        "outset": [
+          4,
+          4,
+          4,
+          0
+        ],
+        "padding": [
+          9,
+          11,
+          9,
+          4
+        ],
+        "header": "the label sits in the top 8 px"
+      }
+    }
+  },
+  "buttons": {
+    "file": "buttons.png",
+    "pieces": {
+      "primary": {
+        "normal": {
+          "rect": [
+            0,
+            0,
+            22,
+            17
+          ],
+          "slice": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "outset": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "padding": [
+            5,
+            4,
+            5,
+            4
+          ],
+          "contentOffset": [
+            0,
+            0
+          ],
+          "text": "on_gold"
+        },
+        "hover": {
+          "rect": [
+            23,
+            0,
+            22,
+            17
+          ],
+          "slice": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "outset": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "padding": [
+            5,
+            4,
+            5,
+            4
+          ],
+          "contentOffset": [
+            0,
+            0
+          ],
+          "text": "on_gold"
+        },
+        "pressed": {
+          "rect": [
+            46,
+            0,
+            22,
+            17
+          ],
+          "slice": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "outset": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "padding": [
+            5,
+            4,
+            5,
+            4
+          ],
+          "contentOffset": [
+            0,
+            1
+          ],
+          "text": "on_gold"
+        },
+        "disabled": {
+          "rect": [
+            69,
+            0,
+            22,
+            17
+          ],
+          "slice": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "outset": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "padding": [
+            5,
+            4,
+            5,
+            4
+          ],
+          "contentOffset": [
+            0,
+            0
+          ],
+          "text": "dim"
+        }
+      },
+      "secondary": {
+        "normal": {
+          "rect": [
+            92,
+            0,
+            22,
+            17
+          ],
+          "slice": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "outset": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "padding": [
+            5,
+            4,
+            5,
+            4
+          ],
+          "contentOffset": [
+            0,
+            0
+          ],
+          "text": "ink"
+        },
+        "hover": {
+          "rect": [
+            115,
+            0,
+            22,
+            17
+          ],
+          "slice": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "outset": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "padding": [
+            5,
+            4,
+            5,
+            4
+          ],
+          "contentOffset": [
+            0,
+            0
+          ],
+          "text": "ink"
+        },
+        "pressed": {
+          "rect": [
+            138,
+            0,
+            22,
+            17
+          ],
+          "slice": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "outset": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "padding": [
+            5,
+            4,
+            5,
+            4
+          ],
+          "contentOffset": [
+            0,
+            1
+          ],
+          "text": "ink"
+        },
+        "disabled": {
+          "rect": [
+            161,
+            0,
+            22,
+            17
+          ],
+          "slice": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "outset": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "padding": [
+            5,
+            4,
+            5,
+            4
+          ],
+          "contentOffset": [
+            0,
+            0
+          ],
+          "text": "dim"
+        }
+      },
+      "danger": {
+        "normal": {
+          "rect": [
+            184,
+            0,
+            22,
+            17
+          ],
+          "slice": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "outset": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "padding": [
+            5,
+            4,
+            5,
+            4
+          ],
+          "contentOffset": [
+            0,
+            0
+          ],
+          "text": "ink"
+        },
+        "hover": {
+          "rect": [
+            207,
+            0,
+            22,
+            17
+          ],
+          "slice": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "outset": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "padding": [
+            5,
+            4,
+            5,
+            4
+          ],
+          "contentOffset": [
+            0,
+            0
+          ],
+          "text": "ink"
+        },
+        "pressed": {
+          "rect": [
+            230,
+            0,
+            22,
+            17
+          ],
+          "slice": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "outset": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "padding": [
+            5,
+            4,
+            5,
+            4
+          ],
+          "contentOffset": [
+            0,
+            1
+          ],
+          "text": "ink"
+        },
+        "disabled": {
+          "rect": [
+            0,
+            18,
+            22,
+            17
+          ],
+          "slice": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "outset": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "padding": [
+            5,
+            4,
+            5,
+            4
+          ],
+          "contentOffset": [
+            0,
+            0
+          ],
+          "text": "dim"
+        }
+      }
+    }
+  },
+  "bars": {
+    "file": "bars.png",
+    "frames": {
+      "standard": {
+        "rect": [
+          0,
+          0,
+          16,
+          9
+        ],
+        "slice": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "fill": [
+          2,
+          2,
+          5
+        ]
+      },
+      "slim": {
+        "rect": [
+          17,
+          0,
+          16,
+          7
+        ],
+        "slice": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "fill": [
+          2,
+          2,
+          3
+        ]
+      }
+    },
+    "kinds": {
+      "hp": {
+        "frame": "standard",
+        "left": [
+          34,
+          0,
+          1,
+          5
+        ],
+        "mid": [
+          36,
+          0,
+          4,
+          5
+        ],
+        "right": [
+          41,
+          0,
+          2,
+          5
+        ],
+        "ghost_mid": [
+          44,
+          0,
+          4,
+          5
+        ],
+        "ghost_right": [
+          49,
+          0,
+          1,
+          5
+        ]
+      },
+      "enemy_hp": {
+        "frame": "standard",
+        "left": [
+          51,
+          0,
+          1,
+          5
+        ],
+        "mid": [
+          53,
+          0,
+          4,
+          5
+        ],
+        "right": [
+          58,
+          0,
+          2,
+          5
+        ],
+        "ghost_mid": [
+          61,
+          0,
+          4,
+          5
+        ],
+        "ghost_right": [
+          66,
+          0,
+          1,
+          5
+        ]
+      },
+      "mp": {
+        "frame": "standard",
+        "left": [
+          68,
+          0,
+          1,
+          5
+        ],
+        "mid": [
+          70,
+          0,
+          4,
+          5
+        ],
+        "right": [
+          75,
+          0,
+          2,
+          5
+        ],
+        "ghost_mid": [
+          78,
+          0,
+          4,
+          5
+        ],
+        "ghost_right": [
+          83,
+          0,
+          1,
+          5
+        ]
+      },
+      "xp": {
+        "frame": "slim",
+        "left": [
+          85,
+          0,
+          1,
+          3
+        ],
+        "mid": [
+          87,
+          0,
+          4,
+          3
+        ],
+        "right": [
+          92,
+          0,
+          2,
+          3
+        ],
+        "ghost_mid": [
+          95,
+          0,
+          4,
+          3
+        ],
+        "ghost_right": [
+          100,
+          0,
+          1,
+          3
+        ]
+      },
+      "ct": {
+        "frame": "slim",
+        "left": [
+          102,
+          0,
+          1,
+          3
+        ],
+        "mid": [
+          104,
+          0,
+          4,
+          3
+        ],
+        "right": [
+          109,
+          0,
+          2,
+          3
+        ],
+        "ghost_mid": [
+          112,
+          0,
+          4,
+          3
+        ],
+        "ghost_right": [
+          117,
+          0,
+          1,
+          3
+        ]
+      }
+    },
+    "compose": [
+      "Draw the frame 9-slice at the bar's width (its height is fixed). frame.fill = [x, y, height]: the fill area starts at (x, y) and is (width - 2x) wide.",
+      "fillW = round(innerW * value / max), at least 3 when value > 0. Tile `mid` across fillW, then draw `left` at the start and `right` ending at fillW (the bright leading edge).",
+      "Damage ghost: when HP drops, keep the old width for ~0.4 s, then shrink it to the new one. Draw it first: tile `ghost_mid` across ghostW and end with `ghost_right`; the real fill goes on top.",
+      "ct tiles in 4 px segments, so snap its fillW to a multiple of 4 for whole notches."
+    ]
+  },
+  "markers": {
+    "file": "markers.png",
+    "frame": [
+      64,
+      32
+    ],
+    "frames": 4,
+    "fps": 6,
+    "loop": true,
+    "origin": [
+      32,
+      16
+    ],
+    "projection": "a 32 px tile projected 2:1 (x = U - V, y = (U + V) / 2). Put frame pixel (32, 16) on the tile top's centre. A pixel belongs to a tile when its centre falls inside it, so markers and path pieces on neighbouring tiles meet exactly.",
+    "rows": {
+      "move": 0,
+      "attack": 1,
+      "area": 2,
+      "ally": 3,
+      "selected": 4,
+      "path/straight_nw_se": 5,
+      "path/straight_ne_sw": 6,
+      "path/corner_nw_ne": 7,
+      "path/corner_ne_se": 8,
+      "path/corner_se_sw": 9,
+      "path/corner_sw_nw": 10,
+      "path/end_nw": 11,
+      "path/end_se": 12,
+      "path/end_ne": 13,
+      "path/end_sw": 14,
+      "path/start_nw": 15,
+      "path/start_se": 16,
+      "path/start_ne": 17,
+      "path/start_sw": 18
+    },
+    "kinds": {
+      "move": {
+        "row": 0,
+        "pattern": "plain"
+      },
+      "attack": {
+        "row": 1,
+        "pattern": "hatch"
+      },
+      "area": {
+        "row": 2,
+        "pattern": "ripple"
+      },
+      "ally": {
+        "row": 3,
+        "pattern": "core"
+      },
+      "selected": {
+        "row": 4,
+        "pattern": "select"
+      }
+    },
+    "path": {
+      "pieces": {
+        "straight_nw_se": 5,
+        "straight_ne_sw": 6,
+        "corner_nw_ne": 7,
+        "corner_ne_se": 8,
+        "corner_se_sw": 9,
+        "corner_sw_nw": 10,
+        "end_nw": 11,
+        "end_se": 12,
+        "end_ne": 13,
+        "end_sw": 14,
+        "start_nw": 15,
+        "start_se": 16,
+        "start_ne": 17,
+        "start_sw": 18
+      },
+      "edges": {
+        "nw": "-U (upper-left edge)",
+        "se": "+U (lower-right)",
+        "ne": "-V (upper-right)",
+        "sw": "+V (lower-left)"
+      },
+      "naming": "straight_<a>_<b> and corner_<a>_<b> join the two edges; start_<d> sits on the unit's tile and leaves through <d>; end_<d> is entered through <d> and points the other way."
+    }
+  },
+  "cursor": {
+    "brackets": {
+      "file": "cursor_brackets.png",
+      "frame": [
+        72,
+        36
+      ],
+      "origin": [
+        36,
+        18
+      ],
+      "frames": 4,
+      "fps": 6,
+      "loop": true
+    },
+    "arrow": {
+      "file": "cursor_arrow.png",
+      "frame": [
+        13,
+        16
+      ],
+      "anchor": [
+        6,
+        13
+      ],
+      "frames": 4,
+      "fps": 6,
+      "loop": true,
+      "place": "anchor ~6 px above the unit's head, or 20 px above an empty tile's centre"
+    }
+  },
+  "turnOrder": {
+    "file": "turn_order.png",
+    "portrait": 40,
+    "pieces": {
+      "frame_active": {
+        "rect": [
+          0,
+          0,
+          52,
+          52
+        ],
+        "slice": [
+          6,
+          6,
+          6,
+          6
+        ],
+        "outset": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "window": [
+          6,
+          6,
+          40,
+          40
+        ]
+      },
+      "frame_inactive": {
+        "rect": [
+          53,
+          0,
+          52,
+          52
+        ],
+        "slice": [
+          6,
+          6,
+          6,
+          6
+        ],
+        "outset": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "window": [
+          6,
+          6,
+          40,
+          40
+        ]
+      },
+      "frame_enemy": {
+        "rect": [
+          106,
+          0,
+          52,
+          52
+        ],
+        "slice": [
+          6,
+          6,
+          6,
+          6
+        ],
+        "outset": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "window": [
+          6,
+          6,
+          40,
+          40
+        ]
+      },
+      "now_tab": {
+        "rect": [
+          0,
+          53,
+          23,
+          11
+        ],
+        "attach": "x = frame box left + 2, y = frame box top - 7"
+      },
+      "ai_badge": {
+        "rect": [
+          24,
+          53,
+          15,
+          11
+        ],
+        "attach": "right edge 2 px past the frame box's right, y = box top - 6"
+      },
+      "stripe_p1": {
+        "rect": [
+          40,
+          53,
+          10,
+          5
+        ],
+        "slice": [
+          2,
+          0,
+          2,
+          0
+        ],
+        "attach": "x = frame box left + 2, y = box bottom + 1, width = box width - 4"
+      },
+      "stripe_p2": {
+        "rect": [
+          51,
+          53,
+          10,
+          5
+        ],
+        "slice": [
+          2,
+          0,
+          2,
+          0
+        ],
+        "attach": "x = frame box left + 2, y = box bottom + 1, width = box width - 4"
+      },
+      "stripe_p3": {
+        "rect": [
+          62,
+          53,
+          10,
+          5
+        ],
+        "slice": [
+          2,
+          0,
+          2,
+          0
+        ],
+        "attach": "x = frame box left + 2, y = box bottom + 1, width = box width - 4"
+      },
+      "stripe_p4": {
+        "rect": [
+          73,
+          53,
+          10,
+          5
+        ],
+        "slice": [
+          2,
+          0,
+          2,
+          0
+        ],
+        "attach": "x = frame box left + 2, y = box bottom + 1, width = box width - 4"
+      },
+      "stripe_p5": {
+        "rect": [
+          84,
+          53,
+          10,
+          5
+        ],
+        "slice": [
+          2,
+          0,
+          2,
+          0
+        ],
+        "attach": "x = frame box left + 2, y = box bottom + 1, width = box width - 4"
+      },
+      "stripe_p6": {
+        "rect": [
+          95,
+          53,
+          10,
+          5
+        ],
+        "slice": [
+          2,
+          0,
+          2,
+          0
+        ],
+        "attach": "x = frame box left + 2, y = box bottom + 1, width = box width - 4"
+      },
+      "stripe_enemy": {
+        "rect": [
+          106,
+          53,
+          10,
+          5
+        ],
+        "slice": [
+          2,
+          0,
+          2,
+          0
+        ],
+        "attach": "x = frame box left + 2, y = box bottom + 1, width = box width - 4"
+      },
+      "stripe_neutral": {
+        "rect": [
+          117,
+          53,
+          10,
+          5
+        ],
+        "slice": [
+          2,
+          0,
+          2,
+          0
+        ],
+        "attach": "x = frame box left + 2, y = box bottom + 1, width = box width - 4"
+      }
+    },
+    "players": [
+      "p1",
+      "p2",
+      "p3",
+      "p4",
+      "p5",
+      "p6"
+    ]
+  },
+  "numbers": {
+    "file": "numbers.png",
+    "lineHeight": 12,
+    "baseline": 10,
+    "note": "Each rect includes a 1 px rim and a 1 px drop shadow (right and below). Pen x advances by `advance`; neighbouring glyphs' rims touch but their fills keep 2 px apart.",
+    "styles": {
+      "damage": {
+        "0": {
+          "rect": [
+            0,
+            0,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "1": {
+          "rect": [
+            10,
+            0,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "2": {
+          "rect": [
+            20,
+            0,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "3": {
+          "rect": [
+            30,
+            0,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "4": {
+          "rect": [
+            40,
+            0,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "5": {
+          "rect": [
+            50,
+            0,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "6": {
+          "rect": [
+            60,
+            0,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "7": {
+          "rect": [
+            70,
+            0,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "8": {
+          "rect": [
+            80,
+            0,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "9": {
+          "rect": [
+            90,
+            0,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "+": {
+          "rect": [
+            100,
+            0,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "-": {
+          "rect": [
+            110,
+            0,
+            8,
+            12
+          ],
+          "advance": 7
+        },
+        "MISS": {
+          "rect": [
+            119,
+            0,
+            29,
+            12
+          ],
+          "advance": 28
+        },
+        "CRIT": {
+          "rect": [
+            149,
+            0,
+            28,
+            12
+          ],
+          "advance": 27
+        }
+      },
+      "heal": {
+        "0": {
+          "rect": [
+            0,
+            13,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "1": {
+          "rect": [
+            10,
+            13,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "2": {
+          "rect": [
+            20,
+            13,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "3": {
+          "rect": [
+            30,
+            13,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "4": {
+          "rect": [
+            40,
+            13,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "5": {
+          "rect": [
+            50,
+            13,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "6": {
+          "rect": [
+            60,
+            13,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "7": {
+          "rect": [
+            70,
+            13,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "8": {
+          "rect": [
+            80,
+            13,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "9": {
+          "rect": [
+            90,
+            13,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "+": {
+          "rect": [
+            100,
+            13,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "-": {
+          "rect": [
+            110,
+            13,
+            8,
+            12
+          ],
+          "advance": 7
+        },
+        "MISS": {
+          "rect": [
+            119,
+            13,
+            29,
+            12
+          ],
+          "advance": 28
+        },
+        "CRIT": {
+          "rect": [
+            149,
+            13,
+            28,
+            12
+          ],
+          "advance": 27
+        }
+      },
+      "crit": {
+        "0": {
+          "rect": [
+            0,
+            26,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "1": {
+          "rect": [
+            10,
+            26,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "2": {
+          "rect": [
+            20,
+            26,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "3": {
+          "rect": [
+            30,
+            26,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "4": {
+          "rect": [
+            40,
+            26,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "5": {
+          "rect": [
+            50,
+            26,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "6": {
+          "rect": [
+            60,
+            26,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "7": {
+          "rect": [
+            70,
+            26,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "8": {
+          "rect": [
+            80,
+            26,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "9": {
+          "rect": [
+            90,
+            26,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "+": {
+          "rect": [
+            100,
+            26,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "-": {
+          "rect": [
+            110,
+            26,
+            8,
+            12
+          ],
+          "advance": 7
+        },
+        "MISS": {
+          "rect": [
+            119,
+            26,
+            29,
+            12
+          ],
+          "advance": 28
+        },
+        "CRIT": {
+          "rect": [
+            149,
+            26,
+            28,
+            12
+          ],
+          "advance": 27
+        }
+      },
+      "mana": {
+        "0": {
+          "rect": [
+            0,
+            39,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "1": {
+          "rect": [
+            10,
+            39,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "2": {
+          "rect": [
+            20,
+            39,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "3": {
+          "rect": [
+            30,
+            39,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "4": {
+          "rect": [
+            40,
+            39,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "5": {
+          "rect": [
+            50,
+            39,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "6": {
+          "rect": [
+            60,
+            39,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "7": {
+          "rect": [
+            70,
+            39,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "8": {
+          "rect": [
+            80,
+            39,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "9": {
+          "rect": [
+            90,
+            39,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "+": {
+          "rect": [
+            100,
+            39,
+            9,
+            12
+          ],
+          "advance": 8
+        },
+        "-": {
+          "rect": [
+            110,
+            39,
+            8,
+            12
+          ],
+          "advance": 7
+        },
+        "MISS": {
+          "rect": [
+            119,
+            39,
+            29,
+            12
+          ],
+          "advance": 28
+        },
+        "CRIT": {
+          "rect": [
+            149,
+            39,
+            28,
+            12
+          ],
+          "advance": 27
+        }
+      }
+    }
+  },
+  "dice": {
+    "file": "dice.png",
+    "pieces": {
+      "d20_gold": {
+        "rect": [
+          0,
+          0,
+          32,
+          32
+        ],
+        "numberCentre": [
+          16,
+          17
+        ],
+        "numberBox": [
+          10,
+          12,
+          12,
+          9
+        ]
+      },
+      "d20_dark": {
+        "rect": [
+          33,
+          0,
+          32,
+          32
+        ],
+        "numberCentre": [
+          16,
+          17
+        ],
+        "numberBox": [
+          10,
+          12,
+          12,
+          9
+        ]
+      },
+      "crit_burst": {
+        "rect": [
+          66,
+          0,
+          24,
+          24
+        ]
+      }
+    }
+  }
+}

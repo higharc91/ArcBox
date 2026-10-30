@@ -200,6 +200,70 @@ pixel. Animated props (campfire, torch, banner) are horizontal strips. For each 
 manifest, drawn over a backdrop and scaled 2× to 40×40. Baked portraits ship for every preset; the game makes
 them for custom heroes the same way.
 
+## UI kit
+
+`content/tactics/base/ui/` holds the HUD from the mockups: navy glass and gold. The manifest gives every rect,
+9-slice inset, outset (studs and glows reach outside the box), padding and the text colour to use on each piece.
+
+| File | What |
+|---|---|
+| `panels.png` | Main panel, card, tooltip (with tail), dialogue (with name tab), ability banner (with crest) and the turn-order strip, all 9-slice |
+| `buttons.png` | Primary (gold), secondary (navy) and danger (red), each normal, hover, pressed (`contentOffset` [0, 1]) and disabled |
+| `bars.png` | Standard and slim frames. Fills for HP, enemy HP, MP, XP and CT, each with a left cap, a tiling middle and a bright leading edge, plus a pale "ghost" for damage just taken. `compose` in the manifest gives the recipe |
+| `markers.png` | 64×32 iso tile markers (move, attack, area, ally, selected) as 4-frame pulses, plus 14 path pieces. The origin is the tile top's centre |
+| `cursor_*.png` | Breathing corner brackets and a bobbing gem arrow |
+| `turn_order.png` | Portrait frames sized to the portraits set (active, inactive, enemy with spiked corners), a NOW tab, an AI badge and p1–p6 accent stripes |
+| `numbers.png` | Bitmap combat numbers (0–9, `+`, `-`, MISS, CRIT) in damage, heal, crit and mana styles, with advances. Draw them at 2× the UI scale |
+| `dice.png` | A gold and a dark d20 with the number box left blank (`numberCentre`), plus a crit starburst |
+
+`previews/15-ui-mock.png` is a whole battle screen composed from the kit, terrain, characters and portraits.
+
+## Beasts
+
+`content/tactics/base/beasts/` holds monsters that don't fit the humanoid rig:
+
+- A quadruped rig: wolf, boar, bear, drake.
+- Separate drawings: giant spider, slime, giant bat.
+
+They use 48×48 frames anchored at (24, 44), with the same animation names (idle, walk, attack, hurt, down) and
+the same two facings as characters, so the battle code treats every unit alike. Each beast ships in palette
+variants: frost wolf, polar bear, magma slime, three drake colours, and others.
+
+## Icons
+
+`content/tactics/base/icons/` holds four atlases with a 1 px gutter:
+
+| Atlas | Contents |
+|---|---|
+| Abilities | 32 icons at 24×24, coloured by class |
+| Items | 35 icons at 24×24 |
+| Status | 18 icons at 16×16 |
+| Frames | 26×26 frames: five rarities plus an ability frame |
+
+`manifest.json` maps each icon id to its atlas rect, category and tags. Palette-swapped icons (potions, gems)
+share a `shape`.
+
+## Effects
+
+`content/tactics/base/fx/` holds 23 effects in 50 colour variants. Each is a horizontal strip, and its manifest
+entry gives:
+
+- frame size, fps, `loop` and `loopStart`;
+- the anchor, and where it attaches: `feet`, `body`, `overhead` or `projectile` (projectile art faces +x and the
+  game rotates it);
+- blend mode: `add` for glows, `normal` for smoke and dust;
+- layer: `ground` (under units) or `over`.
+
+## Backgrounds
+
+`content/tactics/base/backgrounds/` holds parallax layers:
+
+- banded sky gradients (day, dusk, night, overcast, ashfall), which tile horizontally;
+- tileable far and near mountain ranges for hills, peaks, mesas and volcano (suggested parallax 0.1 and 0.25);
+- clouds and a star field.
+
+The manifest pairs each biome with a sky.
+
 ## Adding a set
 
 See `STYLE.md` for the art rules. A set is `parts/<name>.py` with a `build()` function. `build.py` finds it, and
