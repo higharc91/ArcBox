@@ -151,3 +151,42 @@ void fragment() {
 
 Custom palettes made in the character creator don't need a LUT row ahead of time. Write the character's row
 into an `Image` at runtime: 16 slots × 8 shades, filled from `palettes.json` ramps.
+
+## Terrain
+
+`content/tactics/base/terrain/` (see `manifest.json`) holds textures for the 3D tile map. A tile is 32 px and a
+height step is 16 px.
+
+| Kind | What | Sampling |
+|---|---|---|
+| `top/` | 128×128 seamless tops: grass (green, lush, dry, autumn), dirt, path, sand, flagstone, cobble, rock, snow, planks, ice, mud, water and lava (8-frame loops) | World-aligned: UV = world XZ / 4 tiles, so neighbouring tiles continue one another |
+| `side/` | 128×32 cliff faces: dirt, cliff, brick, ashlar, sandstone, planks | U = distance along the edge / 4 tiles, V = depth below the top / 1 tile |
+| `lip/` | 128×12 overhangs: grass, snow (with icicles), moss | Drawn over the top band of a side whose top has one |
+| `decal/` | 32×32 ground scatter: flowers, pebbles, leaves, bones, cracks, puddles, blood, scorch | Tile-local, alpha |
+
+Every texture is built from periodic fields (`arcpix/tex.py`: noise, Voronoi, emboss and dithered quantise, all
+wrapping), so tiling never shows a seam.
+
+The previews in `12-diorama-*.png` use `arcpix/iso.py`, a small isometric renderer. Maps are written as ASCII in
+`parts/dioramas.py`, and a diorama is the quickest way to judge new terrain or props together.
+
+## Props
+
+`content/tactics/base/props/` holds 37 billboard props in palette variants, anchored at their ground contact
+pixel. Animated props (campfire, torch, banner) are horizontal strips. For each prop the manifest also records:
+
+- `blocks`: whether it stops movement;
+- `cover`: `none`, `half` or `full`, for ranged attacks;
+- `height`: in height steps, for line of sight.
+
+## Portraits
+
+`content/tactics/base/portraits/` holds head-and-shoulders busts. They're made from the character's own layers
+(minus weapon and off-hand) in the front idle or hurt pose. The image is cropped to `crop[build]` from the
+manifest, drawn over a backdrop and scaled 2× to 40×40. Baked portraits ship for every preset; the game makes
+them for custom heroes the same way.
+
+## Adding a set
+
+See `STYLE.md` for the art rules. A set is `parts/<name>.py` with a `build()` function. `build.py` finds it, and
+it writes under `content/tactics/base/<name>/` plus `previews/NN-<name>*.png`.

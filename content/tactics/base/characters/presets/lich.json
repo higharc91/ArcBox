@@ -1,0 +1,36 @@
+{
+  "id": "lich",
+  "name": "Lich",
+  "race": null,
+  "class": null,
+  "build": "standard",
+  "layers": {
+    "body": "skeleton",
+    "torso": "robe",
+    "legs": "skirt",
+    "headgear": "crown",
+    "weapon": "staff",
+    "hands": "bare",
+    "cape": "cloak",
+    "offhand": "orb"
+  },
+  "palette": {
+    "eyes": "eyes/violet",
+    "leather": "leather/brown",
+    "wood": "wood/dark",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/shadow",
+    "horn": "horn/ivory",
+    "paint": "paint/woad",
+    "skin": "skin/bone",
+    "cloth1": "cloth/royal_purple",
+    "cloth2": "cloth/charcoal"
+  },
+  "tags": [
+    "enemy",
+    "undead",
+    "boss"
+  ],
+  "sheet": "presets/lich.png"
+}

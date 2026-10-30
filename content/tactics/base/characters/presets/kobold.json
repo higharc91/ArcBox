@@ -1,0 +1,33 @@
+{
+  "id": "kobold",
+  "name": "Kobold Skulker",
+  "race": null,
+  "class": null,
+  "build": "short",
+  "layers": {
+    "body": "dragon",
+    "tail": "dragon",
+    "horns": "small",
+    "torso": "rags",
+    "legs": "shorts",
+    "weapon": "spear",
+    "hands": "bare"
+  },
+  "palette": {
+    "eyes": "eyes/gold",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/iron",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "horn": "horn/bone",
+    "paint": "paint/woad",
+    "skin": "skin/dragon_copper",
+    "cloth1": "cloth/rust",
+    "cloth2": "cloth/charcoal"
+  },
+  "tags": [
+    "enemy"
+  ],
+  "sheet": "presets/kobold.png"
+}

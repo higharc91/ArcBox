@@ -69,8 +69,9 @@ class Canvas:
             self.slot[y, x] = 0
             self.flags[y, x] = 0
 
-    def rect(self, x0: int, y0: int, x1: int, y1: int, slot: str, shade: int = BASE) -> None:
-        """Filled rectangle, inclusive corners."""
+    def rect(self, x0: float, y0: float, x1: float, y1: float, slot: str, shade: int = BASE) -> None:
+        """Filled rectangle, inclusive corners (coordinates round to the nearest pixel)."""
+        x0, y0, x1, y1 = (int(round(v)) for v in (x0, y0, x1, y1))
         for y in range(min(y0, y1), max(y0, y1) + 1):
             for x in range(min(x0, x1), max(x0, x1) + 1):
                 self.px(x, y, slot, shade)

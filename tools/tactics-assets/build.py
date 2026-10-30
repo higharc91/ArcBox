@@ -366,7 +366,7 @@ SETS = {"palettes": build_palettes, "characters": build_characters, "anims": bui
 
 # Sets that live in their own module: parts/<name>.py with a build() function. Each writes under
 # content/tactics/base/<name>/ and previews/, using arcpix.out.
-for _name in ("props", "portraits", "ui", "icons", "fx"):
+for _name in ("props", "portraits", "beasts", "ui", "icons", "fx"):
     try:
         _mod = importlib.import_module(f"parts.{_name}")
     except ModuleNotFoundError as e:

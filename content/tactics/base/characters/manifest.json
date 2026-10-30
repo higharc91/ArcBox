@@ -329,6 +329,17 @@
     "skeleton",
     "bandit",
     "black_knight",
-    "cultist"
+    "cultist",
+    "kobold",
+    "kobold_slinger",
+    "hobgoblin",
+    "goblin_archer",
+    "zombie",
+    "skeleton_archer",
+    "lich",
+    "dark_elf",
+    "necromancer",
+    "bandit_captain",
+    "cult_leader"
   ]
 }

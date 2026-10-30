@@ -60,6 +60,18 @@ def unit(rid: str, i: float, j: float, facing: str = "front", mirror: bool = Fal
     return iso.Sprite(img, ANCHOR, i, j)
 
 
+def beast(bid: str, i: float, j: float, variant: str | None = None, facing: str = "front", mirror: bool = False,
+          k: int = 0) -> iso.Sprite:
+    from . import beasts as B
+    b = next(x for x in B.CATALOGUE if x.id == bid)
+    sh = B.sheet(b, variant or next(iter(b.variants)))
+    img = sh.frames[k + (len(B.frame_poses()) if facing == "back" else 0)]
+    if mirror:
+        img = img.transpose(Image.FLIP_LEFT_RIGHT)
+        return iso.Sprite(img, (img.width - 1 - B.ANCHOR[0], B.ANCHOR[1]), i, j)
+    return iso.Sprite(img, B.ANCHOR, i, j)
+
+
 @dataclass
 class Mat:
     """One map legend entry: which textures a tile uses."""
@@ -179,6 +191,8 @@ def frostpeak(frame: int = 0) -> iso.Scene:
         prop("tent", 10, 4, "red"), prop("campfire", 9, 5, frame=frame), prop("crate", 11, 5),
         unit("tamsin", 4, 5), unit("kara", 8, 6), unit("class_paladin", 6, 6), unit("ilyra", 3, 6),
         unit("skeleton", 8, 0, mirror=True), unit("skeleton", 9, 1),
+        beast("wolf", 1, 3, "frost", mirror=True), beast("wolf", 2, 4, "frost", mirror=True, k=1),
+        beast("bear", 10, 7, "polar", "back"),
     ]
     return s
 
@@ -216,6 +230,7 @@ def mirewood(frame: int = 0) -> iso.Scene:
         prop("torch", 6, 1, frame=frame), prop("torch", 10, 2, frame=frame), prop("gravestone", 1, 4, "dark"),
         unit("wren", 7, 2), unit("sefa", 6, 3), unit("cultist", 9, 6, mirror=True), unit("goblin_shaman", 7, 6),
         unit("goblin_cutthroat", 10, 5, mirror=True),
+        beast("spider", 4, 0, "black"), beast("slime", 8, 7, "green", mirror=True), beast("bat", 3, 5, k=1),
     ]
     return s
 
@@ -252,7 +267,8 @@ def sunscar(frame: int = 0) -> iso.Scene:
         prop("dead_tree", 0, 6, "grey"), prop("rock_medium", 11, 0, "warm"), prop("rock_small", 5, 7, "warm"),
         prop("altar", 4, 2, "holy"), prop("banner", 10, 2, "navy", frame=frame), prop("sack", 9, 7),
         unit("aldric", 5, 3), unit("class_cleric", 4, 4), unit("tamsin", 9, 5),
-        unit("bandit", 3, 6, "back", mirror=True), unit("bandit", 6, 7, "back"),
+        unit("bandit", 3, 6, "back", mirror=True), unit("bandit", 6, 7, "back"), unit("bandit_captain", 4, 7, "back"),
+        beast("boar", 1, 7, "brown"),
     ]
     return s
 
@@ -292,6 +308,7 @@ def ember_keep(frame: int = 0) -> iso.Scene:
         prop("chest", 8, 5), prop("banner", 3, 1, "crimson", frame=frame),
         unit("black_knight", 5, 2, mirror=True), unit("cultist", 3, 2), unit("cultist", 7, 2, mirror=True),
         unit("kara", 5, 5, "back"), unit("sefa", 3, 6, "back"), unit("class_wizard", 7, 6, "back", mirror=True),
+        beast("drake", 9, 5, "red", mirror=True), beast("slime", 1, 6, "magma"),
     ]
     return s
 

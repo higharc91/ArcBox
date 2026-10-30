@@ -154,6 +154,50 @@
     "cultist": {
       "idle": "cultist_idle.png",
       "hurt": "cultist_hurt.png"
+    },
+    "kobold": {
+      "idle": "kobold_idle.png",
+      "hurt": "kobold_hurt.png"
+    },
+    "kobold_slinger": {
+      "idle": "kobold_slinger_idle.png",
+      "hurt": "kobold_slinger_hurt.png"
+    },
+    "hobgoblin": {
+      "idle": "hobgoblin_idle.png",
+      "hurt": "hobgoblin_hurt.png"
+    },
+    "goblin_archer": {
+      "idle": "goblin_archer_idle.png",
+      "hurt": "goblin_archer_hurt.png"
+    },
+    "zombie": {
+      "idle": "zombie_idle.png",
+      "hurt": "zombie_hurt.png"
+    },
+    "skeleton_archer": {
+      "idle": "skeleton_archer_idle.png",
+      "hurt": "skeleton_archer_hurt.png"
+    },
+    "lich": {
+      "idle": "lich_idle.png",
+      "hurt": "lich_hurt.png"
+    },
+    "dark_elf": {
+      "idle": "dark_elf_idle.png",
+      "hurt": "dark_elf_hurt.png"
+    },
+    "necromancer": {
+      "idle": "necromancer_idle.png",
+      "hurt": "necromancer_hurt.png"
+    },
+    "bandit_captain": {
+      "idle": "bandit_captain_idle.png",
+      "hurt": "bandit_captain_hurt.png"
+    },
+    "cult_leader": {
+      "idle": "cult_leader_idle.png",
+      "hurt": "cult_leader_hurt.png"
     }
   },
   "howTo": "compose the character's layers (except skipLayers) for the front facing in the mood's pose, crop to crop[build], draw over a backdrop, then scale by `scale` (nearest)"

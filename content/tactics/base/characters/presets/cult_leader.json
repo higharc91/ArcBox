@@ -1,0 +1,39 @@
+{
+  "id": "cult_leader",
+  "name": "Ember Hierophant",
+  "race": null,
+  "class": null,
+  "build": "standard_f",
+  "layers": {
+    "body": "human",
+    "horns": "ram",
+    "hair": "long",
+    "torso": "vestments",
+    "legs": "skirt",
+    "feet": "sandals",
+    "weapon": "staff",
+    "hands": "bare",
+    "cape": "cloak",
+    "headgear": "circlet",
+    "marks": "warpaint"
+  },
+  "palette": {
+    "eyes": "eyes/gold",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/fire",
+    "horn": "horn/obsidian",
+    "paint": "paint/crimson",
+    "skin": "skin/porcelain",
+    "hair": "hair/crimson",
+    "cloth1": "cloth/wine",
+    "cloth2": "cloth/charcoal"
+  },
+  "tags": [
+    "enemy",
+    "boss"
+  ],
+  "sheet": "presets/cult_leader.png"
+}
