@@ -1,0 +1,483 @@
+{
+  "cell": [
+    24,
+    24
+  ],
+  "columns": 16,
+  "icons": {
+    "weapon/axe": [
+      0,
+      0,
+      24,
+      24
+    ],
+    "weapon/bow": [
+      24,
+      0,
+      24,
+      24
+    ],
+    "weapon/broom": [
+      48,
+      0,
+      24,
+      24
+    ],
+    "weapon/crossbow": [
+      72,
+      0,
+      24,
+      24
+    ],
+    "weapon/crystal_staff": [
+      96,
+      0,
+      24,
+      24
+    ],
+    "weapon/dagger": [
+      120,
+      0,
+      24,
+      24
+    ],
+    "weapon/flail": [
+      144,
+      0,
+      24,
+      24
+    ],
+    "weapon/greatsword": [
+      168,
+      0,
+      24,
+      24
+    ],
+    "weapon/halberd": [
+      192,
+      0,
+      24,
+      24
+    ],
+    "weapon/holy_staff": [
+      216,
+      0,
+      24,
+      24
+    ],
+    "weapon/hourglass_staff": [
+      240,
+      0,
+      24,
+      24
+    ],
+    "weapon/living_staff": [
+      264,
+      0,
+      24,
+      24
+    ],
+    "weapon/lute": [
+      288,
+      0,
+      24,
+      24
+    ],
+    "weapon/lyre": [
+      312,
+      0,
+      24,
+      24
+    ],
+    "weapon/mace": [
+      336,
+      0,
+      24,
+      24
+    ],
+    "weapon/pitchfork": [
+      360,
+      0,
+      24,
+      24
+    ],
+    "weapon/quarterstaff": [
+      0,
+      24,
+      24,
+      24
+    ],
+    "weapon/rapier": [
+      24,
+      24,
+      24,
+      24
+    ],
+    "weapon/scimitar": [
+      48,
+      24,
+      24,
+      24
+    ],
+    "weapon/scroll": [
+      72,
+      24,
+      24,
+      24
+    ],
+    "weapon/smith_hammer": [
+      96,
+      24,
+      24,
+      24
+    ],
+    "weapon/spear": [
+      120,
+      24,
+      24,
+      24
+    ],
+    "weapon/staff": [
+      144,
+      24,
+      24,
+      24
+    ],
+    "weapon/storm_staff": [
+      168,
+      24,
+      24,
+      24
+    ],
+    "weapon/sword": [
+      192,
+      24,
+      24,
+      24
+    ],
+    "weapon/tankard": [
+      216,
+      24,
+      24,
+      24
+    ],
+    "weapon/tome": [
+      240,
+      24,
+      24,
+      24
+    ],
+    "weapon/wand": [
+      264,
+      24,
+      24,
+      24
+    ],
+    "weapon/warhammer": [
+      288,
+      24,
+      24,
+      24
+    ],
+    "offhand/blade": [
+      312,
+      24,
+      24,
+      24
+    ],
+    "offhand/bomb": [
+      336,
+      24,
+      24,
+      24
+    ],
+    "offhand/buckler": [
+      360,
+      24,
+      24,
+      24
+    ],
+    "offhand/dagger": [
+      0,
+      48,
+      24,
+      24
+    ],
+    "offhand/kite_shield": [
+      24,
+      48,
+      24,
+      24
+    ],
+    "offhand/lantern": [
+      48,
+      48,
+      24,
+      24
+    ],
+    "offhand/main_gauche": [
+      72,
+      48,
+      24,
+      24
+    ],
+    "offhand/orb": [
+      96,
+      48,
+      24,
+      24
+    ],
+    "offhand/round_shield": [
+      120,
+      48,
+      24,
+      24
+    ],
+    "offhand/tower_shield": [
+      144,
+      48,
+      24,
+      24
+    ],
+    "offhand/war_horn": [
+      168,
+      48,
+      24,
+      24
+    ],
+    "headgear/antlers": [
+      192,
+      48,
+      24,
+      24
+    ],
+    "headgear/bandana": [
+      216,
+      48,
+      24,
+      24
+    ],
+    "headgear/beret": [
+      240,
+      48,
+      24,
+      24
+    ],
+    "headgear/cap": [
+      264,
+      48,
+      24,
+      24
+    ],
+    "headgear/circlet": [
+      288,
+      48,
+      24,
+      24
+    ],
+    "headgear/crown": [
+      312,
+      48,
+      24,
+      24
+    ],
+    "headgear/feathered_cap": [
+      336,
+      48,
+      24,
+      24
+    ],
+    "headgear/flower_crown": [
+      360,
+      48,
+      24,
+      24
+    ],
+    "headgear/great_helm": [
+      0,
+      72,
+      24,
+      24
+    ],
+    "headgear/halo": [
+      24,
+      72,
+      24,
+      24
+    ],
+    "headgear/headband": [
+      48,
+      72,
+      24,
+      24
+    ],
+    "headgear/hood": [
+      72,
+      72,
+      24,
+      24
+    ],
+    "headgear/horned_helm": [
+      96,
+      72,
+      24,
+      24
+    ],
+    "headgear/mask_hood": [
+      120,
+      72,
+      24,
+      24
+    ],
+    "headgear/mitre": [
+      144,
+      72,
+      24,
+      24
+    ],
+    "headgear/open_helm": [
+      168,
+      72,
+      24,
+      24
+    ],
+    "headgear/straw_hat": [
+      192,
+      72,
+      24,
+      24
+    ],
+    "headgear/winged_helm": [
+      216,
+      72,
+      24,
+      24
+    ],
+    "headgear/wizard_hat": [
+      240,
+      72,
+      24,
+      24
+    ],
+    "torso/apron": [
+      264,
+      72,
+      24,
+      24
+    ],
+    "torso/chain": [
+      288,
+      72,
+      24,
+      24
+    ],
+    "torso/coat": [
+      312,
+      72,
+      24,
+      24
+    ],
+    "torso/doublet": [
+      336,
+      72,
+      24,
+      24
+    ],
+    "torso/dress": [
+      360,
+      72,
+      24,
+      24
+    ],
+    "torso/gi": [
+      0,
+      96,
+      24,
+      24
+    ],
+    "torso/leather": [
+      24,
+      96,
+      24,
+      24
+    ],
+    "torso/plate": [
+      48,
+      96,
+      24,
+      24
+    ],
+    "torso/rags": [
+      72,
+      96,
+      24,
+      24
+    ],
+    "torso/robe": [
+      96,
+      96,
+      24,
+      24
+    ],
+    "torso/scale": [
+      120,
+      96,
+      24,
+      24
+    ],
+    "torso/tabard": [
+      144,
+      96,
+      24,
+      24
+    ],
+    "torso/tunic": [
+      168,
+      96,
+      24,
+      24
+    ],
+    "torso/vest": [
+      192,
+      96,
+      24,
+      24
+    ],
+    "torso/vestments": [
+      216,
+      96,
+      24,
+      24
+    ],
+    "cape/cloak": [
+      240,
+      96,
+      24,
+      24
+    ],
+    "cape/pelt": [
+      264,
+      96,
+      24,
+      24
+    ],
+    "cape/short_cape": [
+      288,
+      96,
+      24,
+      24
+    ]
+  },
+  "tiers": {
+    "iron": "gear_iron.png",
+    "steel": "gear_steel.png",
+    "silver": "gear_silver.png",
+    "gold": "gear_gold.png",
+    "mithril": "gear_mithril.png",
+    "adamantine": "gear_adamantine.png",
+    "obsidian": "gear_obsidian.png",
+    "elven": "gear_elven.png"
+  },
+  "default": "gear.png",
+  "note": "key = layer/variant (the same ids as the character layers); frame with icons/frames.png"
+}
