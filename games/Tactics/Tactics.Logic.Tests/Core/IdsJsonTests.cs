@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Text.Json;
 using ArcBox.Sdk;
 
@@ -38,7 +39,20 @@ public sealed class IdsJsonTests
     public void Ids_order_ordinally()
     {
         Assert.True(new UnitId("B").CompareTo(new UnitId("a")) < 0);
+        Assert.True(new InjuryId("B").CompareTo(new InjuryId("a")) < 0);
+        Assert.True(new ItemId("B").CompareTo(new ItemId("a")) < 0);
+        Assert.True(new LootTableId("B").CompareTo(new LootTableId("a")) < 0);
         Assert.True(new Tile(1, 5).CompareTo(new Tile(2, 0)) < 0);
         Assert.True(new Tile(1, 5).CompareTo(new Tile(1, 6)) < 0);
+    }
+
+    [Fact]
+    public void Tiles_work_as_dictionary_keys()
+    {
+        var map = ImmutableSortedDictionary<Tile, int>.Empty.Add(new Tile(-1, 12), 3);
+        var json = JsonSerializer.Serialize(map, ArcJson.Options);
+        Assert.Equal("{\"-1,12\":3}", json);
+        Assert.Equal(map, JsonSerializer.Deserialize<ImmutableSortedDictionary<Tile, int>>(json, ArcJson.Options));
+        Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<ImmutableSortedDictionary<Tile, int>>("{\"1;2\":3}", ArcJson.Options));
     }
 }

@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -38,24 +39,33 @@ public readonly record struct ConditionId(string Value) : IComparable<ConditionI
 
 /// <summary>Identifies an injury. Serialises as a plain JSON string.</summary>
 [JsonConverter(typeof(InjuryIdJsonConverter))]
-public readonly record struct InjuryId(string Value)
+public readonly record struct InjuryId(string Value) : IComparable<InjuryId>
 {
+    /// <summary>Ordinal ordering, so the order never depends on culture.</summary>
+    public int CompareTo(InjuryId other) => string.CompareOrdinal(Value, other.Value);
+
     /// <inheritdoc />
     public override string ToString() => Value;
 }
 
 /// <summary>Identifies an item. Serialises as a plain JSON string.</summary>
 [JsonConverter(typeof(ItemIdJsonConverter))]
-public readonly record struct ItemId(string Value)
+public readonly record struct ItemId(string Value) : IComparable<ItemId>
 {
+    /// <summary>Ordinal ordering, so the order never depends on culture.</summary>
+    public int CompareTo(ItemId other) => string.CompareOrdinal(Value, other.Value);
+
     /// <inheritdoc />
     public override string ToString() => Value;
 }
 
 /// <summary>Identifies a loot table. Serialises as a plain JSON string.</summary>
 [JsonConverter(typeof(LootTableIdJsonConverter))]
-public readonly record struct LootTableId(string Value)
+public readonly record struct LootTableId(string Value) : IComparable<LootTableId>
 {
+    /// <summary>Ordinal ordering, so the order never depends on culture.</summary>
+    public int CompareTo(LootTableId other) => string.CompareOrdinal(Value, other.Value);
+
     /// <inheritdoc />
     public override string ToString() => Value;
 }
@@ -161,7 +171,7 @@ public sealed class LootTableIdJsonConverter : StringIdJsonConverter<LootTableId
     protected override string Unwrap(LootTableId id) => id.Value;
 }
 
-/// <summary>Writes a <see cref="Tile"/> as <c>[x, y]</c> and reads one back.</summary>
+/// <summary>Writes a <see cref="Tile"/> as <c>[x, y]</c> and reads one back. As a dictionary key it is <c>"x,y"</c>.</summary>
 public sealed class TileJsonConverter : JsonConverter<Tile>
 {
     /// <inheritdoc />
@@ -187,4 +197,20 @@ public sealed class TileJsonConverter : JsonConverter<Tile>
         writer.WriteNumberValue(value.Y);
         writer.WriteEndArray();
     }
+
+    /// <inheritdoc />
+    public override Tile ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        var text = reader.GetString() ?? string.Empty;
+        var comma = text.IndexOf(',');
+        if (comma > 0
+            && int.TryParse(text.AsSpan(0, comma), NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out var x)
+            && int.TryParse(text.AsSpan(comma + 1), NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out var y))
+            return new Tile(x, y);
+        throw new JsonException($"'{text}' is not a tile key (expected \"x,y\").");
+    }
+
+    /// <inheritdoc />
+    public override void WriteAsPropertyName(Utf8JsonWriter writer, Tile value, JsonSerializerOptions options)
+        => writer.WritePropertyName(string.Create(CultureInfo.InvariantCulture, $"{value.X},{value.Y}"));
 }
