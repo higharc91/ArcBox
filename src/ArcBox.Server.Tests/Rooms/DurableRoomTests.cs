@@ -266,6 +266,44 @@ public sealed class DurableRoomTests
         Assert.Equal("buttons", (await phone.WaitForAsync(ClientMethods.ControllerView)).GetProperty("kind").GetString());
     }
 
+    // The room remembers, across a restart, which seats it made for members who never came (F5).
+    [Fact]
+    public async Task Seats_for_absent_members_are_still_known_after_a_restart()
+    {
+        using var db = new TempDb();
+        CreateRoomResult room;
+        JoinResult ann;
+        using (var a = new ArcServerFactory(db.File))
+        {
+            await using var host = await TestClient.ConnectAsync(a);
+            await using var p1 = await TestClient.ConnectAsync(a);
+            room = await host.InvokeAsync<CreateRoomResult>("CreateRoom");
+            ann = await p1.TakeSeatAsync(new TakeSeatRequest(room.Code, NewName: "Ann"));
+            await p1.InvokeAsync("SelectGame", "ledger");
+            await p1.InvokeAsync<ProfileKey>("CreateCampaign", "Embers");
+            var campaignId = (await host.WaitForAsync(ClientMethods.LobbyChanged,
+                l => l.TryGetProperty("campaign", out var c) && c.ValueKind == JsonValueKind.Object)).GetProperty("campaign").GetProperty("id").GetString()!;
+            a.Services.GetRequiredService<CampaignService>()
+                .AddMember(campaignId, a.Services.GetRequiredService<ProfileService>().Create("Cy"));
+            await p1.InvokeAsync("StartGame");
+            await host.WaitForAsync(ClientMethods.HostView);
+            await host.InvokeAsync("ReturnToLobby");
+            await host.WaitForAsync(ClientMethods.GameEnded);
+        }
+
+        using var b = new ArcServerFactory(db.File);
+        await using var tv = await TestClient.ConnectAsync(b);
+        await tv.InvokeAsync("ResumeHost", room.Code, room.HostToken);
+        Assert.Equal([("p1", "Ann", false), ("p2", "Cy", false)], Players(await tv.WaitForAsync(ClientMethods.LobbyChanged)));
+        await using var phone = await TestClient.ConnectAsync(b);
+        await phone.InvokeAsync("Rejoin", room.Code, ann.PlayerId.Value, ann.Secret);
+
+        await phone.InvokeAsync("SelectGame", "plain-ledger");
+
+        await tv.WaitForAsync(ClientMethods.LobbyChanged, l => l.GetProperty("selectedGameId").GetString() == "plain-ledger"
+            && Players(l).SequenceEqual([("p1", "Ann", true)]));
+    }
+
     // Review Focus 4
     [Fact]
     public async Task Rebuilt_room_does_not_resume_campaign_held_elsewhere()

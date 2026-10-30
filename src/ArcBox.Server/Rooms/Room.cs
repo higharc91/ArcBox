@@ -298,6 +298,11 @@ public sealed partial class Room
         bool wasConnected = slot.Connected;
         _members.Bind(slot, connectionId);
         slot.AbsentAtStart = false; // someone has it now, by Rejoin or by taking it
+        if (slot.ForAbsentMember)
+        {
+            slot.ForAbsentMember = false; // the member is here now: the seat is theirs whatever is selected next
+            Save();
+        }
 
         _knownConnections.TryAdd(connectionId, 0);
         _allAbsentSince = null;
@@ -356,7 +361,7 @@ public sealed partial class Room
         var id = _registry.Manifests.First(m => string.Equals(m.Id, gameId, StringComparison.OrdinalIgnoreCase)).Id;
         if (id != _selectedGameId)
         {
-            _campaignId = null;
+            SetCampaign(null);
         }
 
         _selectedGameId = id;

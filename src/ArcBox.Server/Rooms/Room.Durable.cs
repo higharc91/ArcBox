@@ -54,7 +54,7 @@ public sealed partial class Room
     public RoomRecord ToRecord() => new(
         Code,
         _hostTokenHash,
-        [.. _members.All.Select(s => new SlotRecord(s.Id, s.Name, s.SecretHash, s.JoinOrder, s.Profile))],
+        [.. _members.All.Select(s => new SlotRecord(s.Id, s.Name, s.SecretHash, s.JoinOrder, s.Profile, s.ForAbsentMember))],
         _members.NextSlotId,
         _selectedGameId,
         _campaignId,

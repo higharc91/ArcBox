@@ -18,7 +18,11 @@ public sealed class RoomMembers(RoomOptions options)
     {
         foreach (var s in slots)
         {
-            _slots.Add(new PlayerSlot { Id = s.Id, Name = s.Name, SecretHash = s.SecretHash, JoinOrder = s.JoinOrder, Profile = s.Profile });
+            _slots.Add(new PlayerSlot
+            {
+                Id = s.Id, Name = s.Name, SecretHash = s.SecretHash, JoinOrder = s.JoinOrder, Profile = s.Profile,
+                ForAbsentMember = s.ForAbsentMember
+            });
         }
 
         _nextId = Math.Max(nextSlotId, 1);

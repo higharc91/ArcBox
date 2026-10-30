@@ -11,5 +11,6 @@ public sealed class PlayerSlot
     public ProfileId? Profile { get; set; }             // the person behind the seat in a campaign room; null otherwise
     public string? ConnectionId { get; set; }
     public bool AbsentAtStart { get; set; }              // offline when its campaign game started; cleared once someone takes it
+    public bool ForAbsentMember { get; set; }            // made by the room at a campaign Start for a member who wasn't here; cleared once a phone binds to it
     public bool Connected => ConnectionId is not null;
 }

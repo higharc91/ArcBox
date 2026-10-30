@@ -349,6 +349,44 @@ public class CampaignRoomTests
         Assert.Equal(new RosterEntry(cy.Id, Card("Cy"), new PlayerId("p2"), Connected: false), roster[1]);
     }
 
+    // Seats made at Start for members who weren't here aren't players in a plain game picked afterwards.
+    [Theory]
+    [InlineData("plain-ledger")]
+    [InlineData("counter")]
+    public async Task Seats_for_absent_members_go_when_a_game_without_campaigns_is_selected(string game)
+    {
+        await using var f = new RoomFixture();
+        var (campaign, _) = await EmbersAsync(f);
+        AddMember(f, campaign, "Cy");
+        var dan = AddMember(f, campaign, "Dan");
+        await f.Room.StartGameAsync("host");
+
+        // Dan turns up mid-game and then drops: his seat had a connection here, so it stays. Cy never came.
+        await f.Room.TakeSeatAsync("c2", Seat(new SeatRef(Member: dan.Id)));
+        await f.Room.ConnectionLostAsync("c2");
+        await f.Room.ReturnToLobbyAsync("host");
+        Assert.Equal(["Ann", "Cy", "Dan"], Lobby(f).Players.Select(p => p.Name));
+
+        await f.Room.SelectGameAsync("c1", game);
+
+        Assert.Equal([("p1", "Ann"), ("p3", "Dan")], Lobby(f).Players.Select(p => (p.Id.Value, p.Name)));
+        Assert.Equal(["p3"], (await f.Room.PeekAsync([])).Offers.Select(o => o.Ref.Slot!.Value.Value));
+    }
+
+    [Fact]
+    public async Task Seats_for_absent_members_stay_while_the_campaign_game_stays_selected()
+    {
+        await using var f = new RoomFixture();
+        var (campaign, _) = await EmbersAsync(f);
+        AddMember(f, campaign, "Cy");
+        await f.Room.StartGameAsync("host");
+        await f.Room.ReturnToLobbyAsync("host");
+
+        await f.Room.SelectGameAsync("c1", "ledger"); // the same game again: the campaign stays selected
+
+        Assert.Equal(["Ann", "Cy"], Lobby(f).Players.Select(p => p.Name));
+    }
+
     [Fact]
     public async Task Late_arrival_takes_absent_seat()
     {

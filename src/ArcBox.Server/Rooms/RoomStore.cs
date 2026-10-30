@@ -18,8 +18,8 @@ namespace ArcBox.Server.Rooms;
 /// <see cref="DeleteOlderThan"/> forgets those entries with the rows, so they never outlive <c>RetainFor</c> by much.
 /// </para>
 /// <para>
-/// <c>slots_json</c> is the array of seats, <c>[{id, name, secretHash, joinOrder, profile}]</c>. A parked room's seats
-/// are wrapped as <c>{"slots": [...], "parked": true}</c>, which needs no new column.
+/// <c>slots_json</c> is the array of seats, <c>[{id, name, secretHash, joinOrder, profile, forAbsentMember?}]</c>. A
+/// parked room's seats are wrapped as <c>{"slots": [...], "parked": true}</c>, which needs no new column.
 /// </para>
 /// </remarks>
 public sealed class RoomStore

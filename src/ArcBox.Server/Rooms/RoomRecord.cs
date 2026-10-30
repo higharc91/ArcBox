@@ -1,9 +1,15 @@
+using System.Text.Json.Serialization;
 using ArcBox.Sdk;
 
 namespace ArcBox.Server.Rooms;
 
 /// <summary>A seat as stored: never its connection, and its secret only as <see cref="Secrets.Hash"/>.</summary>
-public sealed record SlotRecord(PlayerId Id, string Name, string SecretHash, int JoinOrder, ProfileId? Profile);
+/// <param name="ForAbsentMember">
+/// <see cref="PlayerSlot.ForAbsentMember"/>: the room made the seat for a campaign member who has never been here. Left
+/// out of the JSON when false, so older rows read as false.
+/// </param>
+public sealed record SlotRecord(PlayerId Id, string Name, string SecretHash, int JoinOrder, ProfileId? Profile,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool ForAbsentMember = false);
 
 /// <summary>
 /// A room's membership as stored in the <c>rooms</c> table (spec §3.5); never its game state. Built on the room's actor by
