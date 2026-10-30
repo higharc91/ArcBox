@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using System.Diagnostics.CodeAnalysis;
 using ArcBox.Sdk.Protocol;
 
 namespace ArcBox.Server.Rooms;
@@ -68,7 +69,7 @@ public sealed class RoomManager : IAsyncDisposable
     {
         if (string.IsNullOrWhiteSpace(rawCode)) return null;
         var code = RoomCodes.Normalize(rawCode);
-        if (_rooms.TryGetValue(code, out var live))
+        if (TryGetLive(code, out var live))
         {
             return live.Room;
         }
@@ -216,10 +217,31 @@ public sealed class RoomManager : IAsyncDisposable
         }
     }
 
+    /// <summary>
+    /// The room in memory under <paramref name="code"/>, if it is still open. A closed one (parked or force closed, and
+    /// not yet swept) is a miss: that exact entry is taken out, so a lookup rebuilds from storage instead of handing out
+    /// a room that can only answer "Room has closed.".
+    /// </summary>
+    private bool TryGetLive(string code, [NotNullWhen(true)] out RoomEntry? entry)
+    {
+        if (_rooms.TryGetValue(code, out entry))
+        {
+            if (!entry.Room.IsClosed)
+            {
+                return true;
+            }
+
+            RemoveRoom(entry);
+        }
+
+        entry = null;
+        return false;
+    }
+
     private RoomEntry? Rebuild(string code)
     {
         // Another lookup may have finished rebuilding it just before this one began.
-        if (_rooms.TryGetValue(code, out var live))
+        if (TryGetLive(code, out var live))
         {
             return live;
         }

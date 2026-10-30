@@ -508,6 +508,38 @@ public sealed class DurableRoomTests
         Assert.Contains(Secrets.Hash(room.HostToken), row);
     }
 
+    // Between a park and the sweep that takes the room out of memory, a lookup must not hand out the closed room: the
+    // caller would get "Room has closed." and the phone would drop a good seat.
+    [Fact]
+    public async Task Lookup_right_after_park_rebuilds_instead_of_returning_the_closed_room()
+    {
+        await using var h = new Harness();
+        await using var m = new RoomManager(h.Services);
+        var (room, created) = await m.CreateRoomAsync("h1");
+        var ann = await room.JoinAsync("c1", "Ann");
+        await room.ConnectionLostAsync("c1");
+        await room.ConnectionLostAsync("h1");
+        h.Time.Advance(new RoomOptions().IdleTimeout);
+
+        // Parked, but no sweep has removed it yet.
+        Assert.True(await room.TryParkAsync());
+        Assert.True(room.IsClosed);
+        Assert.Same(room, m.FindLoaded(created.Code));
+
+        var found = await m.FindAsync(created.Code);
+
+        Assert.NotNull(found);
+        Assert.NotSame(room, found);
+        Assert.False(found.IsClosed);
+        Assert.Same(found, m.FindLoaded(created.Code));
+        await found.RejoinAsync("c2", ann.PlayerId, ann.Secret);
+        Assert.Equal(RoomStatus.Lobby, await found.GetStatusAsync());
+
+        // The sweep that follows leaves the rebuilt room alone.
+        await m.SweepAsync();
+        Assert.Same(found, m.FindLoaded(created.Code));
+    }
+
     [Fact]
     public async Task Concurrent_rebuilds_make_one_room()
     {
