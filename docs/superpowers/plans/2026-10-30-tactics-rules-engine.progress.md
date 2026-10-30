@@ -29,8 +29,8 @@ When every task is done, one whole-branch review runs.
 | 5 | Rolls, the effect pipeline and the first blocks | done | `1f67040`, `59a3a71` | 1 |
 | 6 | Movement, pushes, falling, opportunity attacks and reactions | done | `92b6d76`, `966d570` | 1 |
 | 7 | Conditions, hooks, passives and modifiers | done | `bc7c8d6`, `7e2eb32` | 1 |
-| 8 | Downed, Out, injuries, battle end, invariants and replays | in review | `1c71e84` | – |
-| 9 | Pack loader, validation and the content hash | not started | | |
+| 8 | Downed, Out, injuries, battle end, invariants and replays | done | `1c71e84`, `43f1895` | 1 |
+| 9 | Pack loader, validation and the content hash | in progress | | |
 | 10 | Remaining effect blocks, zones, summons and named hooks | not started | | |
 | 11 | Tooltip generation | not started | | |
 | 12 | Sheet builder and encounter setup | not started | | |
@@ -100,7 +100,16 @@ These were decided during execution. Later tasks must follow them, alongside the
 - **Losing concentration.** Becoming Downed, Out, Dead or incapacitated ends that unit's concentration.
 
 **Downed, Out and XP**
-- **XP:** full on a win, half (rounded down) on a loss or a retreat.
+- **XP:** full on a win, half (rounded down) on a loss or a retreat. Absent members get it too.
+- **One function for 0 HP.** Every drop to 0 HP goes through `DownedRules.Drop` in `Rules/Downed.cs`:
+  - party members and protected NPCs go Downed;
+  - everyone else dies;
+  - summons die and get no XP.
+- **Downed countdown:** a Downed unit loses 1 countdown per hit (2 on a crit), never more from extra damage in the same hit. It takes no HP damage.
+- **A dropped unit stops acting.** A unit that drops while acting loses its remaining queued attacks and ability effects; its own hook effects still run.
+- **Who can be targeted.** Abilities aimed at allies, enemies or any unit can target Downed units: healing revives them, hits tick their countdown.
+- **Deep water.** A unit revived in deep water may stand there and swim out.
+- **Runaway safety.** One command is capped at 100,000 steps, then throws an invariant error.
 
 **Content loading (Task 9)**
 - **Prop cover** must be none, half or three-quarters; `total` is rejected.
@@ -124,4 +133,5 @@ These were decided during execution. Later tasks must follow them, alongside the
 | 4 | `Start` normalises only `Sheet.Resources`; records holding arrays compare by reference (golden tests compare JSON); rejection-text test checks only 3 of 16 strings; `CantAfford` with no resource gives "Not enough ."; `ObjectiveExpr` allows a leaf with a group; `UnitSheet.Score` defaults a missing stat to 10 |
 | 5 | A self line/cone with no aim tile pays its cost and hits nothing; the converter's key detection could collide with a parameter named like a block; `Battle.cs` is about 320 lines (targeting could move out) |
 | 6 | No HP event on deep-water drops (Task 8 addresses); prone applied after a lethal fall; Swap has no landing check; `Movement` depends on `Motion.OccupantAt` |
+| 8 | Fall/collision damage has no source (no `OnKill` for the pusher); `RoundStarted.Order` can list a unit that goes Out right after; golden fixture lacks `TurnSkipped`/`UnitOut`/`BattleEnded`; `Invariants.Enabled` is a public static; `.json` line endings not pinned |
 | 7 | Several `Hooks.Fire` calls in one step run in reverse order; passive and ability `UsesLeft` share keys; `AttackStep` doesn't check the attacker is alive at Resolve; several `WhenDef` leaves and limits untested; `Modifiers.For` recomputed often (performance) |
