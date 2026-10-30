@@ -4,7 +4,7 @@ namespace Tactics.Logic;
 /// <c>"apply"</c>: puts a condition on the target, replacing one with the same id. An until-save condition takes the
 /// stat and DC of the enclosing save; a condition from a concentration ability is tied to the source's concentration.
 /// Applied during the source's own turn, it is marked <see cref="ActiveCondition.AppliedThisTurn"/>.
-/// Emits <see cref="ConditionApplied"/>.
+/// Emits <see cref="ConditionApplied"/>. A target it leaves incapacitated loses its concentration.
 /// </summary>
 public sealed class ApplyBlock : EffectBlock<ApplyEffect>
 {
@@ -27,6 +27,8 @@ public sealed class ApplyBlock : EffectBlock<ApplyEffect>
             Concentration: ctx.Ability?.Cost.Concentration == true, AppliedThisTurn: ctx.W.State.Active == ctx.Source);
         ctx.W.Set(target with { Conditions = target.Conditions.RemoveAll(c => c.Id == def.Condition).Add(condition) });
         ctx.W.Emit(new ConditionApplied(target.Id, def.Condition));
+        if (target.Concentrating is not null && Modifiers.For(ctx.W, target.Id, ctx.Rules).Incapacitated)
+            Conditions.BreakConcentration(ctx.W, target.Id);
     }
 }
 

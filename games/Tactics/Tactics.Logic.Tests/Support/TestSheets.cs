@@ -59,6 +59,10 @@ public static class TestSheets
     public static UnitSheet WithScore(this UnitSheet sheet, Stat stat, int score)
         => sheet with { Scores = sheet.Scores.SetItem(stat, score) };
 
+    /// <summary>The sheet with these abilities added to the ones it knows.</summary>
+    public static UnitSheet Knowing(this UnitSheet sheet, params AbilityDef[] abilities)
+        => sheet with { Abilities = [.. sheet.Abilities, .. abilities.Select(a => a.Id)] };
+
     private static WeaponDef Weapon(string id, string damage, string type, Stat stat, bool finesse = false)
         => new(id, Dice.Parse(damage), type, stat, finesse, Ranged: false, Range: 1, Reach: false, Tags: Ordinal.Set());
 }

@@ -143,7 +143,8 @@ public sealed class ReactionTests
     [Fact]
     public void Mover_dropped_by_the_opportunity_attack_stops()
     {
-        // Two player reactors; kara's attack (seed 1: d20 13, a hit) drops the 1-HP goblin, so zed is never offered.
+        // Two player reactors; kara's attack (seed 1: d20 13, a hit) kills the 1-HP goblin, so zed is never offered. It was
+        // the last enemy, so the battle is won.
         var battle = TestBattle.On(Field)
             .Party("kara", Fighter, T(0, 1))
             .Party("zed", TestSheets.Rogue, T(1, 0))
@@ -154,7 +155,7 @@ public sealed class ReactionTests
 
         var (after, events) = battle.Apply(paused, new React(U("kara"), new ReactionChoice("opportunity", Attack, U("gob"))));
 
-        Assert.IsType<Damaged>(events[^1]);
+        Assert.Equal([new Died(U("gob")), new BattleEnded(BattleOutcome.Won)], events[^2..]);
         Assert.DoesNotContain(events, e => e is Moved or ReactionOffered);
         var gob = after.Units[U("gob")];
         Assert.Equal(0, gob.Hp);
@@ -168,12 +169,14 @@ public sealed class ReactionTests
     [Fact]
     public void Mover_dropped_on_an_allys_tile_returns_to_the_last_tile_it_held_alone()
     {
-        // The goblin walks through its ally pal at (2, 1); leaving pal's tile provokes kara, whose hit drops it there.
+        // The goblin walks through its ally pal at (2, 1); leaving pal's tile provokes kara, whose hit drops it there. The
+        // goblin is protected, so it goes Downed and still holds a tile; its turn then ends.
         var battle = TestBattle.On(Field)
             .Party("kara", Fighter, T(2, 0))
             .Enemy("gob", Goblin with { MaxHp = 1 }, T(1, 1))
             .Enemy("pal", Goblin, T(2, 1));
         var (state, _) = battle.Start(seed: 1);
+        state = state.Change("gob", u => u with { Protected = true });
         Assert.Equal(U("gob"), state.Active);
 
         var (paused, events) = battle.Apply(state, new Move(U("gob"), [T(1, 1), T(2, 1), T(3, 1), T(4, 1)]));
@@ -182,8 +185,10 @@ public sealed class ReactionTests
 
         var (after, reacted) = battle.Apply(paused, new React(U("kara"), new ReactionChoice("opportunity", Attack, U("gob"))));
 
-        Assert.Equal(0, after.Units[U("gob")].Hp);
-        Assert.Equal(Json<BattleEvent>(new Moved(U("gob"), [T(2, 1), T(1, 1)])), Json(reacted[^1]));
+        Assert.Equal((0, LifeState.Downed), (after.Units[U("gob")].Hp, after.Units[U("gob")].Life));
+        var back = reacted.Select(Json).ToList().IndexOf(Json<BattleEvent>(new Moved(U("gob"), [T(2, 1), T(1, 1)])));
+        Assert.True(back > reacted.IndexOf(new Downed(U("gob"))));
+        Assert.Equal(new TurnEnded(U("gob")), reacted[back + 1]);
         Assert.Equal(T(1, 1), after.Units[U("gob")].Pos);
         Assert.Equal(T(2, 1), after.Units[U("pal")].Pos);
         Assert.DoesNotContain(after.Queue, s => s is MoveStep);

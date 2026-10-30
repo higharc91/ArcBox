@@ -79,3 +79,9 @@ public sealed record DashEffect(int Tiles) : EffectDef;
 /// <see cref="Range"/> tiles; otherwise nothing happens.
 /// </summary>
 public sealed record JumpToEffect(int Range) : EffectDef;
+
+/// <summary>
+/// <c>"help"</c>: the Help action on the target ally. A Downed ally gets up at 1 HP; a standing one gets
+/// <see cref="RulesPack.Helped"/> (see <see cref="HelpBlock"/>).
+/// </summary>
+public sealed record HelpEffect : EffectDef;

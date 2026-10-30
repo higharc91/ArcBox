@@ -58,6 +58,9 @@ public sealed class BattleWriter
     /// <summary>Puts the steps at the head of the queue, in the order given (the first runs next).</summary>
     public void PushFront(params Step[] steps) => State = State with { Queue = State.Queue.InsertRange(0, steps) };
 
+    /// <summary>Puts <paramref name="step"/> at the end of the queue, to run after everything already queued.</summary>
+    public void PushBack(Step step) => State = State with { Queue = State.Queue.Add(step) };
+
     /// <summary>Removes and returns the head of the queue, or null when it is empty.</summary>
     public Step? PopFront()
     {

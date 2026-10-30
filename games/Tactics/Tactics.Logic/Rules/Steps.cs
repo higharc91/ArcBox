@@ -11,6 +11,7 @@ namespace Tactics.Logic;
 [JsonPolymorphic(TypeDiscriminatorPropertyName = "$type")]
 [JsonDerivedType(typeof(EndTurnStep), nameof(EndTurnStep))]
 [JsonDerivedType(typeof(StartNextTurnStep), nameof(StartNextTurnStep))]
+[JsonDerivedType(typeof(SkipTurnStep), nameof(SkipTurnStep))]
 [JsonDerivedType(typeof(DelayStep), nameof(DelayStep))]
 [JsonDerivedType(typeof(PayCostStep), nameof(PayCostStep))]
 [JsonDerivedType(typeof(RunEffectsStep), nameof(RunEffectsStep))]
@@ -52,15 +53,34 @@ public sealed record EndTurnStep(UnitId Unit,
 
 /// <summary>
 /// Hands the turn to the next unit in the order, starting a new round (re-sorted) when the order runs out.
-/// <see cref="BattleState.Active"/> stays on the old unit until this step runs.
+/// <see cref="BattleState.Active"/> stays on the old unit until this step runs. If the old unit left the battle during its
+/// turn (Out or Dead), it leaves the order now and the next unit takes its index.
 /// </summary>
 public sealed record StartNextTurnStep : Step
 {
     /// <inheritdoc />
     public override void Run(BattleWriter w, RulesPack rules)
     {
-        w.State = w.State with { TurnIndex = w.State.TurnIndex + 1 };
+        var s = w.State;
+        var left = s.TurnIndex < s.Order.Length && !DownedRules.InBattle(s.Units[s.Order[s.TurnIndex]]);
+        w.State = left ? s with { Order = s.Order.RemoveAt(s.TurnIndex) } : s with { TurnIndex = s.TurnIndex + 1 };
         Battle.BeginTurn(w, rules);
+    }
+}
+
+/// <summary>
+/// Ends the turn of <see cref="Unit"/>, which was skipped because it can't act (<see cref="TurnSkipped"/>): the hand-off to
+/// the next unit is queued, then its until-save conditions roll and the durations it ticks tick
+/// (<see cref="Conditions.EndTurn"/>), so a stun can wear off and the conditions it applied still expire. No turn-end hooks
+/// fire and no <see cref="TurnEnded"/> is emitted.
+/// </summary>
+public sealed record SkipTurnStep(UnitId Unit) : Step
+{
+    /// <inheritdoc />
+    public override void Run(BattleWriter w, RulesPack rules)
+    {
+        w.PushFront(new StartNextTurnStep());
+        Conditions.EndTurn(w, Unit, rules);
     }
 }
 

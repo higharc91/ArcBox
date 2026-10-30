@@ -16,6 +16,10 @@ public sealed class TestBattle
     private readonly List<AbilityDef> _abilities = [];
     private readonly List<PassiveDef> _passives = [];
     private readonly List<ConditionDef> _conditions = [];
+    private readonly List<InjuryDef> _injuries = [];
+
+    /// <summary>Tests check the engine's invariants after every command, in any build configuration.</summary>
+    static TestBattle() => Invariants.Enabled = true;
 
     private TestBattle(BattleMap map)
     {
@@ -25,7 +29,8 @@ public sealed class TestBattle
 
     /// <summary>
     /// The rules pack the battle runs under: the map, the built-in abilities and any added with <see cref="With"/>,
-    /// <see cref="WithPassives"/> and <see cref="WithConditions"/>.
+    /// <see cref="WithPassives"/>, <see cref="WithConditions"/> and <see cref="WithInjuries"/> (without any, the pack's
+    /// single test injury).
     /// </summary>
     public RulesPack Rules { get; private set; }
 
@@ -53,9 +58,17 @@ public sealed class TestBattle
         return Rebuild();
     }
 
+    /// <summary>Replaces the rules pack's injury table.</summary>
+    public TestBattle WithInjuries(params InjuryDef[] injuries)
+    {
+        _injuries.AddRange(injuries);
+        return Rebuild();
+    }
+
     private TestBattle Rebuild()
     {
-        Rules = RulesPack.InMemory("test", abilities: _abilities, passives: _passives, conditions: _conditions, maps: [_map]);
+        Rules = RulesPack.InMemory("test", abilities: _abilities, passives: _passives, conditions: _conditions, maps: [_map],
+            injuries: _injuries.Count > 0 ? _injuries : null);
         return this;
     }
 

@@ -23,11 +23,11 @@ public enum TargetKind
 {
     /// <summary>The user.</summary>
     [JsonStringEnumMemberName("self")] Self,
-    /// <summary>A standing unit on the user's side.</summary>
+    /// <summary>A unit on the user's side still in the battle (Up or Downed: healing and Help revive).</summary>
     [JsonStringEnumMemberName("ally")] Ally,
-    /// <summary>A standing unit on another side.</summary>
+    /// <summary>A unit on another side still in the battle (Up or Downed: a hit on a Downed unit costs it countdown).</summary>
     [JsonStringEnumMemberName("enemy")] Enemy,
-    /// <summary>Any standing unit.</summary>
+    /// <summary>Any unit still in the battle (Up or Downed).</summary>
     [JsonStringEnumMemberName("any_unit")] AnyUnit,
     /// <summary>A Downed unit on the user's side.</summary>
     [JsonStringEnumMemberName("downed_ally")] DownedAlly,
@@ -70,8 +70,8 @@ public sealed record AbilityDef(AbilityId Id, string Name, int Tier, CostDef Cos
 /// <summary>
 /// When a passive's effects run (spec §4.4). JSON: <c>"onBattleStart"</c>, <c>"onAttackHit"</c>, …. Each hook fires for one
 /// owner (<see cref="HookArgs.Owner"/>); the battle, round and turn hooks fire for every unit, in sorted
-/// <see cref="UnitId"/> order. (<see cref="OnDowned"/>, <see cref="OnKill"/> and <see cref="OnAllyDowned"/> are fired by the
-/// Downed rules, Task 8.)
+/// <see cref="UnitId"/> order. <see cref="OnDowned"/>, <see cref="OnKill"/> and <see cref="OnAllyDowned"/> are fired by
+/// <see cref="DownedRules.Drop"/>.
 /// </summary>
 public enum HookKind
 {
@@ -97,11 +97,11 @@ public enum HookKind
     [JsonStringEnumMemberName("onMove")] OnMove,
     /// <summary>The owner arrived on a tile by any means.</summary>
     [JsonStringEnumMemberName("onEnterTile")] OnEnterTile,
-    /// <summary>The owner was Downed.</summary>
+    /// <summary>The owner was Downed (by <see cref="HookArgs.Other"/>, if a unit did it).</summary>
     [JsonStringEnumMemberName("onDowned")] OnDowned,
-    /// <summary>The owner dropped <see cref="HookArgs.Other"/>.</summary>
+    /// <summary>The owner killed <see cref="HookArgs.Other"/> (one that dies at 0 HP rather than going Downed).</summary>
     [JsonStringEnumMemberName("onKill")] OnKill,
-    /// <summary>An ally of the owner was Downed.</summary>
+    /// <summary>An ally of the owner (<see cref="HookArgs.Other"/>) was Downed; fires for standing allies.</summary>
     [JsonStringEnumMemberName("onAllyDowned")] OnAllyDowned,
 }
 
@@ -225,3 +225,9 @@ public sealed record TriggerDef(string Id, JsonElement When, bool Once, JsonElem
 /// </summary>
 public sealed record Zone(int Serial, UnitId? Owner, string Kind, ImmutableArray<Tile> Tiles, int? RoundsLeft,
     bool Concentration, bool Difficult, ImmutableArray<PassiveDef> Passives);
+
+/// <summary>
+/// An injury a party member can gain when it goes Out (spec §3.8), picked from the rules pack's table by
+/// <see cref="Weight"/>. Its <see cref="Static"/> modifiers hold in later battles until healed in town.
+/// </summary>
+public sealed record InjuryDef(InjuryId Id, string Name, int Weight, StaticMods Static);

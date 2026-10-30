@@ -36,14 +36,16 @@ public static partial class Battle
 
         var w = new BattleWriter(state, rules);
         BeginTurn(w, rules);
-        Hooks.FireAll(w, HookKind.OnBattleStart, rules);
-        Settle(w, rules);
-        return new Resolution(w.Freeze(), w.Events, null);
+        if (w.State.Outcome is null)
+            Hooks.FireAll(w, HookKind.OnBattleStart, rules);
+        return Settled(w, rules);
     }
 
     /// <summary>
-    /// Validates <paramref name="command"/>, resolves it and, if the turn ended, starts the next one. A refused command
-    /// returns the same <paramref name="state"/> instance, no events and a <see cref="Rejection"/>.
+    /// Validates <paramref name="command"/>, resolves it and, if the turn ended, starts the next one (skipping units that
+    /// can't act). A refused command returns the same <paramref name="state"/> instance, no events and a
+    /// <see cref="Rejection"/>; once the battle is over every command is refused with <see cref="RejectCode.BattleOver"/>.
+    /// With <see cref="Invariants.Enabled"/>, the new state is checked (<see cref="Invariants.Check"/>).
     /// </summary>
     public static Resolution Apply(BattleState state, Command command, RulesPack rules)
     {
@@ -79,8 +81,7 @@ public static partial class Battle
                 throw new ArgumentException($"Unknown command {command.GetType().Name}.", nameof(command));
         }
 
-        Settle(w, rules);
-        return new Resolution(w.Freeze(), w.Events, null);
+        return Settled(w, rules);
     }
 
     private static Resolution Reject(BattleState state, RejectCode code) => new(state, [], Rejection.Of(code));
@@ -104,8 +105,7 @@ public static partial class Battle
         w.Emit(new Reacted(offer.Reactor, choice.Id));
         if (choice.Id != Reactions.Pass)
             w.PushFront(new ReactionStep(offer.Reactor, choice));
-        Settle(w, rules);
-        return new Resolution(w.Freeze(), w.Events, null);
+        return Settled(w, rules);
     }
 
     /// <summary>
@@ -163,11 +163,12 @@ public static partial class Battle
     /// <item>Range: Manhattan distance ≤ range (+ the high-ground bonus when the range is over 1 tile) and ≥ <see cref="TargetDef.MinRange"/>, within
     /// <see cref="TargetDef.HeightTolerance"/> when set. A weapon attack uses the sheet's weapon: melee reach
     /// (<see cref="Reach.Melee"/>) or its range, needing sight when ranged.</item>
-    /// <item>Affected units stand in the area (anywhere for <c>all_*</c>), Up (Downed for <c>downed_ally</c>), on the side
-    /// the kind picks: <c>ally</c>/<c>downed_ally</c> the user's side, <c>any_unit</c> any side, everything else (enemy,
-    /// tile, a self-centred area) the other sides, plus allies with <see cref="AreaDef.FriendlyFire"/>. The user counts only
-    /// with <see cref="AreaDef.IncludeSelf"/>, except a <c>self</c> ability on a single or self area, which affects just the
-    /// user. A single-target unit ability needs one fitting unit at the aim.</item>
+    /// <item>Affected units are in the area (anywhere for <c>all_*</c>), Up or Downed (only Downed for
+    /// <c>downed_ally</c>), on the side the kind picks: <c>ally</c>/<c>downed_ally</c> the user's side, <c>any_unit</c> any
+    /// side, everything else (enemy, tile, a self-centred area) the other sides, plus allies with
+    /// <see cref="AreaDef.FriendlyFire"/>. The user counts only with <see cref="AreaDef.IncludeSelf"/>, except a
+    /// <c>self</c> ability on a single or self area, which affects just the user. A single-target unit ability needs one
+    /// fitting unit at the aim.</item>
     /// </list>
     /// </summary>
     internal static Rejection? ResolveTarget(BattleWriter w, UnitState user, AbilityDef ability, Target target, out Tile aim,
@@ -221,9 +222,10 @@ public static partial class Battle
                 _ => def.Kind,
             };
             var tiles = everywhere ? [] : Areas.Tiles(area, user.Pos, aim, terrain).ToImmutableSortedSet();
-            var life = def.Kind == TargetKind.DownedAlly ? LifeState.Downed : LifeState.Up;
+            var downedOnly = def.Kind == TargetKind.DownedAlly;
             affected = [.. s.Units.Values
-                .Where(u => u.Life == life && (everywhere || tiles.Contains(u.Pos)) && Affects(side, user, u, area))
+                .Where(u => (downedOnly ? u.Life == LifeState.Downed : DownedRules.InBattle(u))
+                            && (everywhere || tiles.Contains(u.Pos)) && Affects(side, user, u, area))
                 .Select(u => u.Id)];
             var unitKind = def.Kind is TargetKind.Ally or TargetKind.Enemy or TargetKind.AnyUnit or TargetKind.DownedAlly;
             if (area.Shape == AreaShape.Single && unitKind && affected.IsEmpty)
@@ -306,13 +308,31 @@ public static partial class Battle
     }
 
     /// <summary>
-    /// Drains the queue until it is empty, a decision is pending or the battle is over. Each step starts at hook depth 0;
-    /// steps that carry a depth set it themselves.
+    /// More steps than this in one command means the battle can't settle (e.g. every unit is incapacitated for good);
+    /// <see cref="Settle"/> throws <see cref="RulesInvariantException"/> rather than loop forever.
+    /// </summary>
+    private const int MaxStepsPerCommand = 100_000;
+
+    /// <summary>Settles the queue, checks the invariants if <see cref="Invariants.Enabled"/>, and freezes the result.</summary>
+    private static Resolution Settled(BattleWriter w, RulesPack rules)
+    {
+        Settle(w, rules);
+        if (Invariants.Enabled)
+            Invariants.Check(w.State, rules, w.Terrain);
+        return new Resolution(w.Freeze(), w.Events, null);
+    }
+
+    /// <summary>
+    /// Drains the queue until it is empty, a decision is pending or the battle is over. The objectives are checked before
+    /// the first step and after every step (<see cref="Objectives.Check"/>), so a battle ends as soon as it is decided.
+    /// Each step starts at hook depth 0; steps that carry a depth set it themselves.
     /// </summary>
     private static void Settle(BattleWriter w, RulesPack rules)
     {
-        while (w.State.Pending is null && w.State.Outcome is null && w.PopFront() is { } step)
+        for (var steps = 0; !Objectives.Check(w) && w.State.Pending is null && w.PopFront() is { } step; steps++)
         {
+            if (steps >= MaxStepsPerCommand)
+                throw new RulesInvariantException($"The battle ran {MaxStepsPerCommand} steps without settling.");
             w.HookDepth = 0;
             step.Run(w, rules);
         }
@@ -321,12 +341,17 @@ public static partial class Battle
     /// <summary>
     /// Starts the turn at <see cref="BattleState.TurnIndex"/>. When the order has run out, first starts a new round: the
     /// order is re-sorted, <see cref="BattleState.StartedThisRound"/>, <see cref="BattleState.DelayedThisRound"/> and every
-    /// unit's <see cref="UnitState.UsedThisRound"/> are cleared and <see cref="RoundStarted"/> is emitted. Every turn start
-    /// clears every unit's <see cref="UnitState.UsedThisTurn"/>. A unit's first start this round gets a fresh economy
-    /// (<see cref="Economy.Fresh"/> with its modifiers); a resumed (delayed) turn gets Move, Action and Bonus back but keeps
-    /// its Reaction as it is. Then the effects of every unit's <see cref="HookKind.OnRoundStart"/> hooks (new round only)
-    /// and of the unit's <see cref="HookKind.OnTurnStart"/> hooks (first start only, not a resumed turn; burning and the
-    /// like are turn-start condition passives) are queued, in that order.
+    /// unit's <see cref="UnitState.UsedThisRound"/> are cleared, <see cref="RoundStarted"/> is emitted and every Downed
+    /// unit's countdown ticks (<see cref="DownedRules.TickRound"/>; if that decides the battle, nothing else happens).
+    /// Every turn start clears every unit's <see cref="UnitState.UsedThisTurn"/>.
+    /// <para>A unit that can't act (<see cref="SkipReason"/>) has its turn skipped: <see cref="TurnSkipped"/>, then a
+    /// <see cref="SkipTurnStep"/> ends it (conditions still tick) and hands on to the next unit.</para>
+    /// <para>Otherwise a unit's first start this round gets a fresh economy (<see cref="Economy.Fresh"/> with its
+    /// modifiers); a resumed (delayed) turn gets Move, Action and Bonus back but keeps its Reaction as it is.
+    /// <see cref="TurnStarted"/> is emitted.</para>
+    /// Then the effects of every unit's <see cref="HookKind.OnRoundStart"/> hooks (new round only) and of the unit's
+    /// <see cref="HookKind.OnTurnStart"/> hooks (first start only, not a resumed or skipped turn; burning and the like are
+    /// turn-start condition passives) are queued, in that order, ahead of a skipped turn's end.
     /// </summary>
     internal static void BeginTurn(BattleWriter w, RulesPack rules)
     {
@@ -341,27 +366,48 @@ public static partial class Battle
             };
             ClearUsed(w, round: true);
             w.Emit(new RoundStarted(round, order));
+            DownedRules.TickRound(w);
+            if (Objectives.Check(w))
+                return;
         }
 
-        // Task 8: skip (TurnSkipped) units that can't act and move on to the next.
         if (w.State.Active is not { } id)
             return;
         ClearUsed(w, round: false);
         var unit = w.Unit(id);
         var resumed = w.State.StartedThisRound.Contains(id);
-        var fresh = Economy.Fresh(unit.Sheet, Modifiers.For(w, id, rules));
-        w.Set(unit with { Economy = resumed ? fresh with { Reaction = unit.Economy.Reaction } : fresh });
         w.State = w.State with { StartedThisRound = w.State.StartedThisRound.Add(id) };
-        w.Emit(new TurnStarted(id, w.State.Round));
-
         var hooks = new List<Step>();
         if (newRound)
             Hooks.CollectAll(w, HookKind.OnRoundStart, rules, hooks);
+
+        if (SkipReason(w.State, unit, rules) is { } reason)
+        {
+            w.Emit(new TurnSkipped(id, reason));
+            w.PushFront([.. hooks, new SkipTurnStep(id)]);
+            return;
+        }
+
+        var fresh = Economy.Fresh(unit.Sheet, Modifiers.For(w, id, rules));
+        w.Set(unit with { Economy = resumed ? fresh with { Reaction = unit.Economy.Reaction } : fresh });
+        w.Emit(new TurnStarted(id, w.State.Round));
         if (!resumed)
             Hooks.Collect(w, HookKind.OnTurnStart, new HookArgs(id), rules, hooks);
         if (hooks.Count > 0)
             w.PushFront([.. hooks]);
     }
+
+    /// <summary>
+    /// Why <paramref name="unit"/>'s turn is skipped, or null when it can act: <c>"downed"</c>, <c>"out"</c> or
+    /// <c>"dead"</c> by its life state, <c>"incapacitated"</c> by its modifiers.
+    /// </summary>
+    public static string? SkipReason(BattleState state, UnitState unit, RulesPack rules) => unit.Life switch
+    {
+        LifeState.Downed => "downed",
+        LifeState.Out => "out",
+        LifeState.Dead => "dead",
+        _ => Modifiers.For(state, unit.Id, rules).Incapacitated ? "incapacitated" : null,
+    };
 
     /// <summary>Empties every unit's <see cref="UnitState.UsedThisRound"/> (<paramref name="round"/>) or
     /// <see cref="UnitState.UsedThisTurn"/>.</summary>

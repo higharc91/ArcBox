@@ -57,9 +57,8 @@ public static class Movement
         return null;
     }
 
-    /// <summary>True when a unit other than <paramref name="unit"/> that isn't Dead is on the tile.</summary>
-    internal static bool Shared(BattleWriter w, Tile tile, UnitId unit)
-        => w.State.Units.Values.Any(u => u.Id != unit && u.Pos == tile && u.Life != LifeState.Dead);
+    /// <summary>True when another unit occupies the tile (see <see cref="Motion.OccupantAt"/>: Up or Downed).</summary>
+    internal static bool Shared(BattleWriter w, Tile tile, UnitId unit) => Motion.OccupantAt(w, tile, unit) is not null;
 
     /// <summary>True when the two units fight on different sides.</summary>
     public static bool Hostile(UnitState a, UnitState b) => a.Sheet.Side != b.Sheet.Side;
@@ -122,7 +121,7 @@ public sealed record MoveStep(UnitId Unit, Tile From, Tile To, Tile LastFree, bo
         w.State = w.State with { Queue = w.State.Queue.RemoveAll(s => s is MoveStep step && step.Unit == Unit) };
 
         var unit = w.Unit(Unit);
-        if (unit.Life == LifeState.Dead || unit.Pos == LastFree || !Movement.Shared(w, unit.Pos, Unit))
+        if (!DownedRules.InBattle(unit) || unit.Pos == LastFree || !Movement.Shared(w, unit.Pos, Unit))
             return;
         w.Set(unit with { Pos = LastFree });
         w.Emit(new Moved(Unit, [unit.Pos, LastFree]));

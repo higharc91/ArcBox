@@ -35,9 +35,10 @@ public sealed class AttackBlock : EffectBlock<AttackEffect>
 /// <item>Without <see cref="Roll"/>: d20 + stat modifier (the weapon's, or the casting stat for <c>"spell"</c>; the
 /// effect's stat overrides either) + proficiency + the effect's bonus + static attack modifiers + high ground, against AC +
 /// static AC modifiers + cover (ranged and spell attacks, from <see cref="Sight.Trace"/>). The edge combines the attacker's
-/// own-attack edges, the target's attacked-in-melee or attacked-at-range edges, invisibility on either side and flanking
-/// (melee). Emits <see cref="Rolled"/>; on a hit, opens a <see cref="ReactionTriggerKind.BeforeHit"/> window whose
-/// <see cref="OfferReactionStep"/>s run before this step comes back with the roll.</item>
+/// own-attack edges, the target's attacked-in-melee or attacked-at-range edges, invisibility on either side, flanking
+/// (melee) and help (<see cref="HelpBlock.Consume"/>, used up by the roll). Emits <see cref="Rolled"/>; on a hit, opens a
+/// <see cref="ReactionTriggerKind.BeforeHit"/> window whose <see cref="OfferReactionStep"/>s run before this step comes back
+/// with the roll.</item>
 /// <item>With <see cref="Roll"/>: the hit is re-judged against the target's AC now (a reaction may have raised it), with
 /// the same <see cref="Cover"/>; a natural 20 still hits and a natural 1 still misses. A hit on a target with
 /// <see cref="StaticMods.CritWhenAdjacent"/> from an adjacent attacker is a critical hit. Emits
@@ -97,6 +98,8 @@ public sealed record AttackStep(UnitId Source, UnitId Target, Tile? Aim, Ability
             Count(mods.Invisible ? Edge.Disadvantage : Edge.None);
         }
         if (!ranged && Modifiers.Flanked(w.State, Source, Target, rules))
+            advantages++;
+        if (HelpBlock.Consume(w, Source))
             advantages++;
         var edge = Rolls.Combine(advantages, disadvantages);
 

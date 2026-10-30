@@ -14,7 +14,7 @@ public static class BlockRegistry
         [
             new AttackBlock(), new SaveBlock(),
             new DamageBlock(), new HealBlock(),
-            new ApplyBlock(), new RemoveBlock(),
+            new ApplyBlock(), new RemoveBlock(), new HelpBlock(),
             new PushBlock(), new PullBlock(), new TeleportBlock(), new SwapBlock(), new DashBlock(), new JumpToBlock(),
         ];
         ByKey = blocks.ToImmutableSortedDictionary(b => b.Key, b => b, StringComparer.Ordinal);

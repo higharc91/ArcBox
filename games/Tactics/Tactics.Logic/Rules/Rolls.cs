@@ -75,7 +75,8 @@ public static class Rolls
     /// <summary>
     /// A saving throw by <paramref name="unit"/>: d20 + the stat's modifier + proficiency (if proficient) + static save
     /// modifiers + <paramref name="cover"/> (only for DEX saves) against <paramref name="dc"/>. A stat in
-    /// <see cref="StaticMods.AutoFailSaves"/> fails whatever the roll (the d20 is still rolled and shown). Emits
+    /// <see cref="StaticMods.AutoFailSaves"/> fails whatever the roll (the d20 is still rolled and shown). A helped unit
+    /// rolls with advantage and uses the help up (<see cref="HelpBlock.Consume"/>). Emits
     /// <see cref="Rolled"/>, fires <see cref="HookKind.OnSave"/> for the unit (with <paramref name="source"/> as the other
     /// unit) and returns the roll.
     /// </summary>
@@ -89,7 +90,8 @@ public static class Rolls
                        + (mods.Saves?.GetValueOrDefault(stat) ?? 0)
                        + (stat == Stat.Dex ? cover : 0);
 
-        var roll = D20(w, modifier, dc, Edge.None, critOn20: false, autoMissOn1: false);
+        var edge = HelpBlock.Consume(w, unit) ? Edge.Advantage : Edge.None;
+        var roll = D20(w, modifier, dc, edge, critOn20: false, autoMissOn1: false);
         if (mods.AutoFailSaves?.Contains(stat) == true)
             roll = roll with { Success = false };
         w.Emit(new Rolled(unit, RollKind.Save, roll));

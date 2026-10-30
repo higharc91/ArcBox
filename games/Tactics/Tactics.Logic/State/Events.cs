@@ -26,6 +26,13 @@ namespace Tactics.Logic;
 [JsonDerivedType(typeof(ConcentrationBroken), nameof(ConcentrationBroken))]
 [JsonDerivedType(typeof(PassiveTriggered), nameof(PassiveTriggered))]
 [JsonDerivedType(typeof(AttackResolved), nameof(AttackResolved))]
+[JsonDerivedType(typeof(Downed), nameof(Downed))]
+[JsonDerivedType(typeof(CountdownTicked), nameof(CountdownTicked))]
+[JsonDerivedType(typeof(Revived), nameof(Revived))]
+[JsonDerivedType(typeof(UnitOut), nameof(UnitOut))]
+[JsonDerivedType(typeof(Died), nameof(Died))]
+[JsonDerivedType(typeof(TurnSkipped), nameof(TurnSkipped))]
+[JsonDerivedType(typeof(BattleEnded), nameof(BattleEnded))]
 public abstract record BattleEvent;
 
 /// <summary>A new round began with this turn order.</summary>
@@ -96,3 +103,25 @@ public sealed record PassiveTriggered(UnitId Owner, string Passive) : BattleEven
 /// helpless adjacent target a critical hit). The TV labels the attack from this.
 /// </summary>
 public sealed record AttackResolved(UnitId Source, UnitId Target, bool Hit, bool Crit) : BattleEvent;
+
+/// <summary>A unit dropped to 0 HP and is Downed: prone, unable to act, with a countdown of 3 (spec §3.8).</summary>
+public sealed record Downed(UnitId Unit) : BattleEvent;
+
+/// <summary>A Downed unit's countdown dropped (a new round, or a hit) to <see cref="Left"/>; at 0 the unit goes Out.</summary>
+public sealed record CountdownTicked(UnitId Unit, int Left) : BattleEvent;
+
+/// <summary>A Downed unit got back up with <see cref="Hp"/> HP (healing, or Help at 1 HP).</summary>
+public sealed record Revived(UnitId Unit, int Hp) : BattleEvent;
+
+/// <summary>A Downed unit's countdown ran out: it has left the battle with <see cref="Injury"/>.</summary>
+public sealed record UnitOut(UnitId Unit, InjuryId Injury) : BattleEvent;
+
+/// <summary>A unit that doesn't go Downed (an enemy, a summon) dropped to 0 HP and died.</summary>
+public sealed record Died(UnitId Unit) : BattleEvent;
+
+/// <summary>A unit's turn came up but it can't act (<see cref="Reason"/>, see <see cref="Battle.SkipReason"/>: usually
+/// <c>"downed"</c> or <c>"incapacitated"</c>), so the turn passed straight to the next unit.</summary>
+public sealed record TurnSkipped(UnitId Unit, string Reason) : BattleEvent;
+
+/// <summary>The battle is over: emitted once, as the last event of the battle.</summary>
+public sealed record BattleEnded(BattleOutcome Outcome) : BattleEvent;

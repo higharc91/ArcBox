@@ -15,7 +15,8 @@ public sealed record ObjectiveState(ObjectivesDef Current,
 /// <param name="MapId">The base map; the rules pack resolves it (<see cref="RulesPack.MapFor"/>).</param>
 /// <param name="Units">Every unit, including Downed, Out and Dead ones.</param>
 /// <param name="Round">The current round, from 1.</param>
-/// <param name="Order">This round's turn order.</param>
+/// <param name="Order">This round's turn order: every unit still in the battle (Up or Downed). A unit that leaves (Out or
+/// Dead) is taken out of it, at the end of its turn if it is the one acting.</param>
 /// <param name="TurnIndex">The index in <paramref name="Order"/> of the unit whose turn it is.</param>
 /// <param name="Rng">The battle's random generator; every die comes from it.</param>
 /// <param name="Queue">Steps still to resolve, head at index 0.</param>
@@ -26,12 +27,12 @@ public sealed record ObjectiveState(ObjectivesDef Current,
 /// <param name="Flags">Story flags set during the battle.</param>
 /// <param name="Counters">Named counters for objectives and triggers.</param>
 /// <param name="FiredTriggers">Ids of once-only triggers that have fired.</param>
-/// <param name="Outcome">Set once the battle has ended.</param>
+/// <param name="Outcome">Set once the battle has ended (see <see cref="Objectives"/>).</param>
 /// <param name="Injuries">Injuries gained by units that went Out.</param>
 /// <param name="ItemsUsed">Consumables used, in order.</param>
 /// <param name="NextSerial">The next serial for zones and spawned units.</param>
-/// <param name="StartedThisRound">Units whose turn has started this round; a later start for one of them is a resumed
-/// (delayed) turn, which skips turn-start effects and keeps the Reaction.</param>
+/// <param name="StartedThisRound">Units whose turn has started (or been skipped) this round; a later start for one of them
+/// is a resumed (delayed) turn, which skips turn-start effects and keeps the Reaction.</param>
 /// <param name="DelayedThisRound">Units that delayed this round (a unit may delay once per round).</param>
 /// <param name="Xp">The encounter's XP award, from the setup.</param>
 /// <param name="Loot">Loot tables to roll on a win, from the setup.</param>

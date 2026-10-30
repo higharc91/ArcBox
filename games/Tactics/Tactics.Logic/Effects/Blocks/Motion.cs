@@ -38,13 +38,15 @@ public static class Motion
     /// <list type="bullet">
     /// <item>before a blocked tile: off the map, impassable, a blocking prop, a climb of 2+ levels or a unit. The pushed
     /// unit takes 1d4 bludgeoning, and so does the unit it hit (<see cref="Collided"/> for each);</item>
-    /// <item>on a deep tile: a party member is Downed (countdown 3; one already Downed keeps its countdown) and anyone
-    /// else Dead (<see cref="Fell"/>, into deep);</item>
-    /// <item>after a drop of more than 3 levels: 1d6 bludgeoning per level beyond 3, then prone (<see cref="Fell"/>).</item>
+    /// <item>on a deep tile (<see cref="Fell"/>, into deep): the unit drops as at 0 HP (<see cref="DownedRules.Drop"/>, by
+    /// <paramref name="by"/>), so a party member is Downed and anyone else dies; one already Downed keeps its
+    /// countdown;</item>
+    /// <item>after a drop of more than 3 levels: 1d6 bludgeoning per level beyond 3, then prone if still standing
+    /// (<see cref="Fell"/>).</item>
     /// </list>
     /// Each tile entered fires the unit's <see cref="HookKind.OnEnterTile"/> hooks.
     /// </summary>
-    public static void Push(BattleWriter w, UnitId unit, (int Dx, int Dy) direction, int distance)
+    public static void Push(BattleWriter w, UnitId unit, (int Dx, int Dy) direction, int distance, UnitId? by = null)
     {
         if (direction == (0, 0))
             return;
@@ -75,12 +77,7 @@ public static class Motion
             if (terrain.Deep(next))
             {
                 w.Emit(new Fell(unit, Math.Max(0, drop), 0, IntoDeep: true));
-                var fallen = w.Unit(unit);
-                // Task 8 owns the rest of Downed (countdown ticks, revival, Out); here the unit only goes down or dies.
-                // An already-Downed party member keeps its countdown.
-                w.Set(fallen.Sheet.Side != Side.Party ? fallen with { Hp = 0, TempHp = 0, Life = LifeState.Dead }
-                    : fallen.Life == LifeState.Downed ? fallen with { Hp = 0, TempHp = 0 }
-                    : fallen with { Hp = 0, TempHp = 0, Life = LifeState.Downed, Countdown = 3 });
+                DownedRules.Drop(w, unit, by);   // an already-Downed party member keeps its countdown
                 return;
             }
 
@@ -89,7 +86,8 @@ public static class Motion
                 var damage = Rolls.Damage(w, new Dice(drop - 3, 6, 0), crit: false);
                 w.Emit(new Fell(unit, drop, damage, IntoDeep: false));
                 Hp.Damage(w, unit, damage, Bludgeoning);
-                KnockProne(w, unit);
+                if (w.Unit(unit).Life == LifeState.Up)
+                    KnockProne(w, unit);
                 return;
             }
         }
@@ -108,7 +106,8 @@ public static class Motion
         Hp.Damage(w, hit, otherDamage, Bludgeoning);
     }
 
-    private static void KnockProne(BattleWriter w, UnitId unit)
+    /// <summary>Puts <paramref name="unit"/> prone (<see cref="ConditionApplied"/>), replacing any prone it had.</summary>
+    internal static void KnockProne(BattleWriter w, UnitId unit)
     {
         var u = w.Unit(unit);
         var prone = new ActiveCondition(Prone, Source: null, RoundsLeft: null, UntilSave: false, SaveDc: 0, Stat.Con,
@@ -142,7 +141,7 @@ public sealed class PushBlock : EffectBlock<PushEffect>
     {
         var target = ctx.TargetUnit(Key);
         var origin = def.AwayFromSource ? ctx.SourceUnit.Pos : ctx.Aim ?? ctx.SourceUnit.Pos;
-        Motion.Push(ctx.W, target.Id, Motion.Toward(origin, target.Pos), def.Distance);
+        Motion.Push(ctx.W, target.Id, Motion.Toward(origin, target.Pos), def.Distance, ctx.Source);
     }
 }
 
@@ -165,7 +164,7 @@ public sealed class PullBlock : EffectBlock<PullEffect>
             ? (Math.Abs(source.X - target.Pos.X), Math.Abs(source.Y - target.Pos.Y))
             : (Math.Abs(source.Y - target.Pos.Y), Math.Abs(source.X - target.Pos.X));
         var room = across == 0 ? along - 1 : along;
-        Motion.Push(ctx.W, target.Id, direction, Math.Min(def.Distance, room));
+        Motion.Push(ctx.W, target.Id, direction, Math.Min(def.Distance, room), ctx.Source);
     }
 }
 

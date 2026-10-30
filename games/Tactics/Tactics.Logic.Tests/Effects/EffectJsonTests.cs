@@ -144,7 +144,7 @@ public sealed class EffectJsonTests
     [Fact]
     public void Registry_knows_every_block_so_far()
     {
-        Assert.Equal(["apply", "attack", "damage", "dash", "heal", "jumpTo", "pull", "push", "remove", "save", "swap", "teleport"], BlockRegistry.Keys);
+        Assert.Equal(["apply", "attack", "damage", "dash", "heal", "help", "jumpTo", "pull", "push", "remove", "save", "swap", "teleport"], BlockRegistry.Keys);
         Assert.Equal("damage", BlockRegistry.For(new DamageEffect(null, null, [], Weapon: true)).Key);
         Assert.Equal(typeof(SaveEffect), BlockRegistry.For("save").DefType);
         Assert.Throws<KeyNotFoundException>(() => BlockRegistry.For("explode"));

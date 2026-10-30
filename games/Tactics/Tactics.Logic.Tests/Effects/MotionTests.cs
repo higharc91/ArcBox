@@ -169,9 +169,10 @@ public sealed class MotionTests
             .Enemy("bob", Goblin, T(1, 1));
         var (state, _) = battle.Start();
 
-        // An enemy pushes a party member into the river: Downed, countdown 3. The push stops in the water.
+        // An enemy pushes a party member into the river: Downed, countdown 3, prone. The push stops in the water.
         var (after, events) = Run(battle, state, "gob", "kara", T(1, 0), new PushEffect(2));
-        Assert.Equal(Json([new Pushed(U("kara"), T(1, 0), T(2, 0)), new Fell(U("kara"), 0, 0, true)]), Json(events));
+        Assert.Equal(Json([new Pushed(U("kara"), T(1, 0), T(2, 0)), new Fell(U("kara"), 0, 0, true), new Downed(U("kara")),
+            new ConditionApplied(U("kara"), Motion.Prone)]), Json(events));
         var kara = after.Units[U("kara")];
         Assert.Equal(T(2, 0), kara.Pos);
         Assert.Equal(LifeState.Downed, kara.Life);
@@ -180,7 +181,9 @@ public sealed class MotionTests
 
         // A party member pushes an enemy off a 2-level bank into the river: Dead.
         (after, events) = Run(battle, after, "brin", "bob", T(1, 1), new PushEffect(1));
-        Assert.Equal(Json([new Pushed(U("bob"), T(1, 1), T(2, 1)), new Fell(U("bob"), 2, 0, true)]), Json(events));
+        // (bob, whose turn it is, dies: its turn then ends.)
+        Assert.Equal(Json([new Pushed(U("bob"), T(1, 1), T(2, 1)), new Fell(U("bob"), 2, 0, true), new Died(U("bob"))]), Json(events[..3]));
+        Assert.Equal(new TurnEnded(U("bob")), events[3]);
         var bob = after.Units[U("bob")];
         Assert.Equal(T(2, 1), bob.Pos);
         Assert.Equal(LifeState.Dead, bob.Life);
