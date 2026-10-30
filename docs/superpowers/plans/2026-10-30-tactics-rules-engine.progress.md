@@ -56,7 +56,7 @@ The user asked for every D&D class, so Barbarian (Defender) and Sorcerer (Strike
   - Barbarian: Berserker, Earthshaker, Spiritwarden.
   - Sorcerer: Draconic, Chaos, Runeborn.
 - **Role bands:** Defender is now fighter, paladin and barbarian; Striker is rogue, ranger, warlock, monk and sorcerer.
-- **Sprites and the character creator** (`tools/tactics-assets`) were updated separately.
+- **Sprites and the character creator** (`tools/tactics-assets`) were updated separately and merged in `9816277`: class kits, six subclass looks, rune/ward effects, and the 11×12 race/class picker.
 
 ## Binding additions to the plan
 
