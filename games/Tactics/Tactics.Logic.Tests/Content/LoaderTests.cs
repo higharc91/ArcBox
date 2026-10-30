@@ -144,7 +144,14 @@ public sealed class LoaderTests
             var monsters = Path.Combine(copy, "monsters", "beasts.json");
             File.WriteAllText(monsters, File.ReadAllText(monsters).Replace("\"Wolf\"", "\"Wolg\"", StringComparison.Ordinal),
                 new UTF8Encoding(false));
-            Assert.NotEqual(before, RulesPack.Load([copy]).Hash);
+            var afterByte = RulesPack.Load([copy]).Hash;
+            Assert.NotEqual(before, afterByte);
+
+            // The manifests are hashed too: reordering a manifest's file list is a change.
+            var manifest = Path.Combine(copy, "manifest.json");
+            File.WriteAllText(manifest, File.ReadAllText(manifest).Replace("\"races.json\",\n    \"backgrounds.json\"",
+                "\"backgrounds.json\",\n    \"races.json\"", StringComparison.Ordinal), new UTF8Encoding(false));
+            Assert.NotEqual(afterByte, RulesPack.Load([copy]).Hash);
         }
         finally
         {
@@ -167,6 +174,30 @@ public sealed class LoaderTests
         Assert.Contains("props.crate", art.Keys);
         Assert.DoesNotContain(art.Keys, k => k.StartsWith("rules.", StringComparison.Ordinal));
         Assert.Same(StringComparer.Ordinal, art.Keys.KeyComparer);
+    }
+
+    [Fact]
+    public void A_malformed_art_manifest_is_a_content_error()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "tactics-art-" + Guid.NewGuid().ToString("N"));
+        try
+        {
+            Directory.CreateDirectory(Path.Combine(root, "fx"));
+            Directory.CreateDirectory(Path.Combine(root, "props"));
+            Directory.CreateDirectory(Path.Combine(root, "status"));
+            File.WriteAllText(Path.Combine(root, "fx", "manifest.json"), "{ \"effects\": { \"slash\": {} }");
+            File.WriteAllText(Path.Combine(root, "props", "manifest.json"), "[1, 2]");
+            File.WriteAllText(Path.Combine(root, "status", "manifest.json"), "{ \"statuses\": { \"stunned\": {} } }");
+
+            var errors = Assert.Throws<ContentException>(() => ArtManifests.Load(root)).Errors;
+
+            Assert.Equal(["fx/manifest.json", "props/manifest.json"], errors.Select(e => e.File));
+            Assert.All(errors, e => Assert.Equal("", e.Pointer));
+        }
+        finally
+        {
+            Directory.Delete(root, recursive: true);
+        }
     }
 
     /// <summary>Copies a pack folder to a new temporary folder, returning the copy's path (its parent is the temp root).</summary>

@@ -97,6 +97,45 @@ public sealed class ValidationTests
     }
 
     [Fact]
+    public void Unknown_property()
+        => Assert.Equal([new ContentError(Abilities, "/abilities/0/efects", "Unknown property 'efects'.")],
+            ErrorsOf("unknown_property"));
+
+    [Fact]
+    public void Unknown_properties_are_errors_everywhere_in_content()
+    {
+        var errors = ErrorsOfChapter(
+            ("races.json", """[ { "id": "orc", "name": "Orc", "size": "medium", "move": 4, "resist": [], "passives": [], "speed": 5 } ]"""),
+            ("maps/m.json", """{ "id": "m", "size": [1, 1], "tiles": "AAAA", "materials": ["grass/lush"], "props": [ { "id": "crate", "at": [0, 0], "cver": "half" } ], "zones": {} }"""),
+            ("encounters/e.json", """
+                { "id": "e", "name": "E", "map": "field", "party": { "min": 1, "max": 4 }, "enemies": [ { "unit": "wolf", "at": [5, 4] } ],
+                  "triggers": [ { "id": "t", "when": { "round": 2 }, "do": [ { "setObjective": { "win": { "anyof": ["defeat_all"] } } } ] } ] }
+                """));
+
+        Assert.Equal(
+            [
+                new ContentError("chapter-01/encounters/e.json", "/triggers/0/do/0/setObjective/win",
+                    "Unknown objective key 'anyof' (expected \"any\" or \"all\")."),
+                new ContentError("chapter-01/maps/m.json", "/props/0/cver", "Unknown property 'cver'."),
+                new ContentError("chapter-01/races.json", "/0/speed", "Unknown property 'speed'."),
+            ],
+            Sorted(errors));
+    }
+
+    [Theory]
+    [InlineData("""{ "win": null }""", "/triggers/0/do/0/setObjective/win", "The value is null.")]
+    [InlineData("""{ "win": { "any": [null] } }""", "/triggers/0/do/0/setObjective/win/any/0", "A value is missing.")]
+    public void A_null_in_a_trigger_objective_is_a_content_error(string setObjective, string pointer, string message)
+    {
+        var errors = ErrorsOfChapter(("encounters/e.json", $$"""
+            { "id": "e", "name": "E", "map": "field", "party": { "min": 1, "max": 4 }, "enemies": [ { "unit": "wolf", "at": [5, 4] } ],
+              "triggers": [ { "id": "t", "when": { "round": 2 }, "do": [ { "setObjective": {{setObjective}} } ] } ] }
+            """));
+
+        Assert.Equal([new ContentError("chapter-01/encounters/e.json", pointer, message)], errors);
+    }
+
+    [Fact]
     public void A_value_that_does_not_deserialise_is_a_content_error()
     {
         var errors = ErrorsOfChapter(("abilities/chapter.json", """

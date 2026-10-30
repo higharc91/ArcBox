@@ -10,10 +10,16 @@ namespace Tactics.Logic;
 public static class ContentHash
 {
     /// <summary>
-    /// Hashes <paramref name="files"/>, each named <c>"&lt;pack&gt;/&lt;relative path&gt;"</c>. The files are sorted by name
-    /// (ordinal), so the order they are listed or read in doesn't matter. Each file is hashed on its own as its UTF-8 name,
-    /// a NUL byte and its bytes, and the result is SHA-256 over those digests in order, so renaming a file, changing any
-    /// byte or moving bytes from one file to the next all change the hash.
+    /// Hashes <paramref name="files"/>, each named <c>"&lt;pack&gt;/&lt;relative path&gt;"</c>, in two stages:
+    /// <list type="number">
+    /// <item>each file gets its own SHA-256 over its UTF-8 name, one NUL byte and its bytes;</item>
+    /// <item>the files are sorted by name (ordinal) and the result is SHA-256 over their digests in that order, as lowercase
+    /// hex.</item>
+    /// </list>
+    /// So the order the files are passed or read in doesn't matter, while renaming a file, changing any byte or moving bytes
+    /// from one file to the next all change the hash (hashing each file separately keeps the boundaries unambiguous).
+    /// <see cref="RulesPack.Load"/> passes every pack's <c>manifest.json</c> too, so editing a manifest (its requires, or
+    /// even just the order of its file list) changes the hash.
     /// </summary>
     public static string Of(IEnumerable<(string RelativePath, byte[] Bytes)> files)
     {

@@ -10,58 +10,6 @@ namespace Tactics.Logic;
 /// </summary>
 public sealed record PackManifest(string Id, int RulesVersion, ImmutableArray<string> Requires, ImmutableArray<string> Files);
 
-/// <summary>
-/// Every key the art sets define: <c>"&lt;set&gt;.&lt;asset&gt;"</c> (<c>"signature.radiant_bolt"</c>,
-/// <c>"characters.goblin_archer"</c>) and, for an asset with variants, <c>"&lt;set&gt;.&lt;asset&gt;.&lt;variant&gt;"</c>
-/// (<c>"beasts.wolf.grey"</c>). Content's presentation keys and sprites must be among them.
-/// </summary>
-public sealed record ArtManifest([property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Keys);
-
-/// <summary>Reads the art sets' manifests.</summary>
-public static class ArtManifests
-{
-    /// <summary>
-    /// Reads <c>&lt;set&gt;/manifest.json</c> for every set folder in <paramref name="contentBaseDir"/> (e.g.
-    /// <c>content/tactics/base</c>; the <c>rules</c> folder is a rules pack, not an art set). The manifests differ in shape,
-    /// so every entry of every top-level object is an asset (with its <c>"variants"</c>, when it has an object of them),
-    /// and every name in a top-level list of names is one too (the characters set lists its presets that way).
-    /// </summary>
-    public static ArtManifest Load(string contentBaseDir)
-    {
-        var keys = new List<string>();
-        foreach (var dir in Directory.GetDirectories(contentBaseDir).Order(StringComparer.Ordinal))
-        {
-            var set = Path.GetFileName(dir);
-            var path = Path.Combine(dir, "manifest.json");
-            if (set == "rules" || !File.Exists(path))
-                continue;
-            using var doc = JsonDocument.Parse(File.ReadAllBytes(path));
-            foreach (var group in doc.RootElement.EnumerateObject())
-            {
-                if (group.Value.ValueKind == JsonValueKind.Object)
-                {
-                    foreach (var asset in group.Value.EnumerateObject())
-                    {
-                        keys.Add($"{set}.{asset.Name}");
-                        if (asset.Value.ValueKind == JsonValueKind.Object && asset.Value.TryGetProperty("variants", out var variants)
-                            && variants.ValueKind == JsonValueKind.Object)
-                            keys.AddRange(variants.EnumerateObject().Select(v => $"{set}.{asset.Name}.{v.Name}"));
-                    }
-                }
-                else if (group.Value.ValueKind == JsonValueKind.Array)
-                {
-                    keys.AddRange(group.Value.EnumerateArray()
-                        .Where(item => item.ValueKind == JsonValueKind.String && IsName(item.GetString()!))
-                        .Select(item => $"{set}.{item.GetString()}"));
-                }
-            }
-        }
-        return new ArtManifest(Ordinal.Set(keys));
-    }
-
-    private static bool IsName(string text) => text.Length > 0 && text.All(c => char.IsAsciiLetterOrDigit(c) || c is '_' or '-');
-}
-
 /// <summary>A definition read from a pack file, with its id, the id it replaces and where it was written.</summary>
 internal sealed record Loaded<T>(T Def, string Id, string? Replaces, string File, string Pointer);
 
@@ -134,12 +82,19 @@ internal static class PackLoader
                     v.Error(pack.ManifestFile, at, $"The file '{file}' doesn't exist.");
                 else
                 {
-                    var bytes = File.ReadAllBytes(Path.Combine(pack.Dir, file));
                     var label = $"{pack.Id}/{file}";
-                    hashed.Add((label, bytes));
-                    if (Parse(bytes, label, v) is { } doc)
-                        using (doc)
-                            Read(kind, doc.RootElement, label, content, v);
+                    try
+                    {
+                        var bytes = File.ReadAllBytes(Path.Combine(pack.Dir, file));
+                        hashed.Add((label, bytes));
+                        if (Parse(bytes, label, v) is { } doc)
+                            using (doc)
+                                Read(kind, doc.RootElement, label, content, v);
+                    }
+                    catch (Exception ex) when (Validation.NonFatal(ex))
+                    {
+                        v.Error(label, "", $"This file couldn't be read: {ex.Message}");
+                    }
                 }
             }
         }
@@ -206,7 +161,16 @@ internal static class PackLoader
                 v.Error(label, "", "The pack has no manifest.json.");
                 continue;
             }
-            var bytes = File.ReadAllBytes(path);
+            byte[] bytes;
+            try
+            {
+                bytes = File.ReadAllBytes(path);
+            }
+            catch (Exception ex) when (Validation.NonFatal(ex))
+            {
+                v.Error(label, "", $"This file couldn't be read: {ex.Message}");
+                continue;
+            }
             using var doc = Parse(bytes, label, v);
             if (doc is null || v.Manifest(doc.RootElement, label) is not { } manifest)
                 continue;

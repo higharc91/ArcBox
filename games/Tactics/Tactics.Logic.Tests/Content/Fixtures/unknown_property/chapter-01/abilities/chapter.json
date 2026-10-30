@@ -1,0 +1,5 @@
+{ "abilities": [
+    { "id": "chapter.typo", "name": "Typo", "tier": 0, "cost": { "action": 1 },
+      "target": { "kind": "enemy", "range": 1, "los": false, "area": { "shape": "single" } },
+      "efects": [ { "attack": { "kind": "weapon" }, "onHit": [ { "damage": { "weapon": true } } ] } ] }
+] }
