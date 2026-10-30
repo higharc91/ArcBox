@@ -69,6 +69,26 @@ public partial class AudioDirector : Node
 
     public void SetNarrator(Narrator narrator) => _narrator = narrator;
 
+    /// <summary>
+    /// The race has left the air (<see cref="RedlineScene.Park"/>). A race that ran to its podium has nothing left to say
+    /// by then, but one cut off mid-phase (the server restarted, the host pressed Esc, the room closed) may still have the
+    /// commentator or a question going, or queued behind a line, and effects still ringing (the fanfare, the sting, a cork
+    /// pop, a champagne hiss). All of it stops here, before the lobby loop takes over (<see cref="Lobby"/>).
+    /// </summary>
+    public void OffAir()
+    {
+        _narrator?.StopAll();
+        foreach (var player in _players.Values)
+        {
+            player.Stop();
+        }
+        foreach (var hiss in _hiss)
+        {
+            hiss?.Stop();
+        }
+        Lobby();
+    }
+
     /// <summary>REDLINE is waiting behind the lobby (warming up, or parked after a race): the lobby loop, nothing else.</summary>
     public void Lobby()
     {

@@ -164,16 +164,27 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
     /// <summary>
     /// The race is over and the lobby still has REDLINE selected: stop drawing and wait for the next start. Keeping
     /// this instance (and so its materials and their compiled shaders) is what makes the next start quick.
+    /// <para>
+    /// The race may not have reached its podium: a server restart, the host's Esc or the room closing takes the scene
+    /// off the air in any phase. So everything a phase left running stops here, not at the end of the Champagne: the
+    /// narration and the effects (<see cref="AudioDirector.OffAir"/>), the podium, and any car still smoking from a spin.
+    /// </para>
     /// </summary>
     public void Park()
     {
         _warm = WarmState.Ready;
         _pendingShots.Clear();
+        // A race that ran to the end was last seen in the Champagne, or the Chequered flag when nobody took the podium.
+        var interrupted = _view is { Phase: not (RacePhase.Champagne or RacePhase.Chequered) };
         _view = null;
         _podium?.HideCeremony();
+        foreach (var car in _cars.Values)
+        {
+            car.Smoke(0);
+        }
         Hide3D();
-        _audio.Lobby();
-        GD.Print("REDLINE parked for the next race");
+        _audio.OffAir();
+        GD.Print(interrupted ? "REDLINE parked for the next race (interrupted)" : "REDLINE parked for the next race");
     }
 
     public void EndPreload()

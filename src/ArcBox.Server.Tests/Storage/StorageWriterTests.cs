@@ -103,6 +103,24 @@ public class StorageWriterTests
         Assert.Equal(1, db.Scalar<int>("SELECT COUNT(*) FROM scratch"));
     }
 
+    // Found by the REDLINE restart run (#24): with phones connected, Kestrel can spend the host's whole shutdown timeout
+    // closing their connections, so the writer is stopped with a token that is already cancelled. It must still write
+    // what is queued, and not throw (an exception there aborted the server process).
+    [Fact]
+    public async Task StopAsync_with_the_shutdown_timeout_spent_still_drains_and_does_not_throw()
+    {
+        var (db, writer, _) = Create();
+        using var _db = db;
+        using var _w = writer;
+        await writer.StartAsync(TestContext.Current.CancellationToken);
+        writer.Write("a", Insert("a", 1));
+        writer.Write("b", Insert("b", 2));
+
+        await writer.StopAsync(new CancellationToken(canceled: true));
+
+        Assert.Equal(2, db.Scalar<int>("SELECT COUNT(*) FROM scratch"));
+    }
+
     [Fact]
     public async Task StopAsync_flushes_a_write_queued_after_the_loop_has_exited()
     {

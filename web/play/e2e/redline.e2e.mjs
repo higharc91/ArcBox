@@ -22,6 +22,12 @@
 //   ARCBOX_PACE     multiplier for the bots' reading time before each tap (default 1: 0.25–2.2 s); in qualifying,
 //                   bot k answers after (1 + k) s times the pace, capped so the slowest bot still beats the 10 s window
 //   ARCBOX_NAME     with ARCBOX_ROOM: name prefix for the phones (default Bot: Bot1, Bot2…)
+//   ARCBOX_RESTART  1 = once the race is in round 2 (after phone 2's reload), log `RESTART now` and wait for whoever
+//                   runs the server to restart it (tools/tv-e2e.sh does, on the same database); the goal is then every
+//                   phone on the "Game interrupted: the server restarted." results, and back in the same room's lobby
+//   ARCBOX_SWAP     1 = phone 2 loses its phone on a question in round 2 or later: its storage is cleared and a fresh
+//                   page (no seat, no name) takes its seat back through the picker (Peek, then TakeSeat); the old seat
+//                   secret must no longer rejoin. Implies the full race: phone 2 finishes it in its own seat
 //
 // REDLINE qualifying (before the Grid): bot k answers every lap after (1 + k) s (see ARCBOX_PACE), always right
 // except bot 3 on lap 2, using the answer key in the fallback question pack (the Development server has OpenTDB off).
@@ -51,9 +57,17 @@ const HEADED = env.ARCBOX_HEADED === "1";
 const PACE = Math.min(10, Math.max(0.1, Number(env.ARCBOX_PACE) || 1));
 /** Room mode: phones join as `${NAME}1`, `${NAME}2`… (a second run in the same room needs new names). */
 const NAME = (env.ARCBOX_NAME ?? "Bot").replace(/[^A-Za-z]/g, "").slice(0, 8) || "Bot";
-/** Plays to the end (results and back to the lobby) rather than stopping at the first Reveal. */
-const TO_THE_END = FULL || GAME !== "redline";
-const DEADLINE_MS = (TO_THE_END ? 20 : 4) * 60_000;
+/** Restart the server mid-race (someone else does it, when this script logs `RESTART now`). */
+const RESTART = env.ARCBOX_RESTART === "1";
+/** Swap phone 2 for a fresh one mid-race (Peek, TakeSeat). */
+const SWAP = env.ARCBOX_SWAP === "1";
+/** The rebuilt room's note (spec §3.5). */
+const INTERRUPTED = "Game interrupted: the server restarted.";
+/** The stale phone's message when its rotated secret no longer rejoins. */
+const REJOIN_FAILED = "Couldn't rejoin. Please join again.";
+/** Plays to the end (results and back to the lobby) rather than stopping at the first Reveal; a restart cuts the race short. */
+const TO_THE_END = (FULL || SWAP || GAME !== "redline") && !RESTART;
+const DEADLINE_MS = (TO_THE_END ? 20 : RESTART ? 8 : 4) * 60_000;
 /** Longest a phone may show the same view before the run counts as stuck (phase timers are ≤ 20 s). */
 const STUCK_MS = 75_000;
 
@@ -100,23 +114,40 @@ const fail = (msg) => {
  * plus a way to reload it like a player pulling down to refresh.
  */
 function devPhone(page, slot) {
+  const iframe = page.locator(`iframe[title="Phone ${slot}"]`);
   const frame = page.frameLocator(`iframe[title="Phone ${slot}"]`);
   return {
     slot,
+    name: `P${slot}`,
+    storageSlot: String(slot),
     $: (sel) => frame.locator(sel),
     reload: () => page.getByRole("button", { name: `Reload phone ${slot}` }).click(),
-    shot: (name) => page.locator(`iframe[title="Phone ${slot}"]`).screenshot({ path: join(SHOTS, name) }),
+    open: async (url) => (await (await iframe.elementHandle()).contentFrame()).goto(url),
+    shot: (name) => iframe.screenshot({ path: join(SHOTS, name) }),
   };
 }
 
 function roomPhone(page, slot) {
   return {
     slot,
+    name: `${NAME}${slot}`,
+    storageSlot: `e2e${slot}`,
     $: (sel) => page.locator(sel),
     reload: () => page.reload(),
+    open: (url) => page.goto(url),
     shot: (name) => page.screenshot({ path: join(SHOTS, name) }),
   };
 }
+
+/** Where the phone app keeps this phone's seat in `code`, and its profile keys (web/play/src/session/storage.ts). */
+const seatKey = (phone, code) => `arcbox:${code}:${phone.storageSlot}`;
+const profilesKeyOf = (phone) => `arcbox:profiles:${phone.storageSlot}`;
+
+/** This phone's localStorage values for `keys` (null where missing). */
+const readStorage = (phone, keys) => phone.$("body").evaluate((_, ks) => ks.map((k) => localStorage.getItem(k)), keys);
+
+/** Removes `keys` from this phone's localStorage: the phone forgets its seat and who it is. */
+const clearStorage = (phone, keys) => phone.$("body").evaluate((_, ks) => ks.forEach((k) => localStorage.removeItem(k)), keys);
 
 /** What the phone shows right now, read in one round trip. */
 async function snapshot(phone) {
@@ -149,6 +180,10 @@ async function snapshot(phone) {
         // The champagne bottle (podium): "holding" while the anthem plays, "armed" once the cork can pop.
         shake: document.querySelector(".w-shake")?.classList.contains("armed") ? "armed" : document.querySelector(".w-shake") ? "holding" : null,
         mash: !!document.querySelector(".pbtns.single"),
+        // The results screen's title (a game's message, e.g. the restart note), the lobby's room code, the picker's seats.
+        resultsTitle: text(".results-title h1"),
+        roomCode: text(".room-code"),
+        pickRows: [...document.querySelectorAll(".pick-row b")].map((b) => b.textContent?.trim() ?? ""),
         vip: !!document.querySelector(".picker"),
         canStart: !!document.querySelector(".picker .start:not([disabled])"),
         picked: (document.querySelector(".game-card.picked .gname") ?? document.querySelector(".next-game b"))?.textContent ?? null,
@@ -186,6 +221,9 @@ function phaseOf(s) {
 }
 
 const roundOf = (s) => Number(/ROUND (\d+)/.exec(s.header ?? "")?.[1] ?? 0);
+const positionOf = (s) => Number(/\bP(\d+)\b/.exec(s.header ?? "")?.[1] ?? 0);
+/** A results row's player name without REDLINE's driver code: "Bot2 (PIA)" → "Bot2". */
+const playerOf = (row) => row.trim().replace(/ \([A-Z]{3}\)$/, "");
 const lapOf = (s) => Number(/LAP (\d+)/.exec(s.header ?? "")?.[1] ?? 0);
 
 /** Driver name → code from the Driver Select options, and phone slot → its driver's code once a view names it. */
@@ -435,10 +473,14 @@ async function run() {
   const phasesSeen = new Set();
   let reachedReveal = false;
   let lastRound = 0;
+  /** ARCBOX_SWAP: phone 2's phases once its new page has the seat back. */
+  let swappedBack = false;
+  const afterSwap = new Set();
 
   const onSnapshot = (phone, s) => {
     const phase = phaseOf(s);
     learnDriver(phone.slot, s);
+    if (swappedBack && phone.slot === 2) afterSwap.add(phase);
     const key = `${phase}|${s.header}|${s.message}|${s.prompt}`;
     const prev = seen.get(phone.slot);
     if (!prev || prev.key !== key) {
@@ -521,9 +563,119 @@ async function run() {
     if (!sameRound) fail(`P2 rejoined into round ${roundOf(after)}, was in ${roundOf(before)}`);
   })().catch((err) => fail(`rejoin: ${err.message}`));
 
+  // -------- swap (ARCBOX_SWAP): phone 2's phone dies on a question; a new one with nothing stored takes the seat back
+  const swap = (async () => {
+    if (!SWAP || PHONES < 2) return;
+    await rejoin; // one thing at a time on phone 2
+    const p2 = phones[1];
+    const before = await until("phone 2 on a question in round 2 or later", async () => {
+      if (done) throw new Error("the race ended before phone 2 could swap");
+      const s = await snapshot(p2);
+      return phaseOf(s) === "question" && roundOf(s) >= 2 ? s : null;
+    }, 8 * 60_000);
+    const [oldSeat] = await readStorage(p2, [seatKey(p2, code)]);
+    if (!oldSeat) throw new Error(`P2 has no stored seat under ${seatKey(p2, code)}`);
+    log(`swap: ${p2.name} loses its phone on the question [${before.header}]; a new phone with empty storage takes the seat back`);
+    await clearStorage(p2, [seatKey(p2, code), profilesKeyOf(p2)]);
+    // No devName: a phone with no seat and no name gets the picker (Peek), which offers the offline seats mid-race.
+    const fresh = `${BASE}/?room=${code}&slot=${p2.storageSlot}`;
+    await p2.open(fresh);
+    let pick;
+    for (let attempt = 1; ; attempt++) {
+      pick = await until("phone 2 on the picker", async () => {
+        const s = await snapshot(p2);
+        if (s.screen === "controller" || s.screen === "lobby") throw new Error(`P2 came back on ${s.screen} without picking: it still had a seat`);
+        return s.screen === "pick" || (s.screen === "join" && s.error) ? s : null;
+      }, 15_000);
+      if (pick.screen === "pick" && pick.pickRows.includes(p2.name)) break;
+      // The server may not have seen the old page go yet: its seat is still connected, so not on offer. Look again.
+      if (attempt >= 5) throw new Error(`${p2.name} never came up on the picker (${pick.screen}: ${pick.error || pick.pickRows.join(", ") || "no seats"})`);
+      log(`swap: ${p2.name} not on offer yet (${pick.screen}: ${pick.error || pick.pickRows.join(", ") || "no seats"}); looking again`);
+      await sleep(1000);
+      await p2.open(fresh);
+    }
+    log(`swap: picker offers ${pick.pickRows.join(", ")}; taking ${p2.name}`);
+    await p2.shot("swap-pick-P2.png");
+    await p2.$(`.pick-row:has(b:text-is("${p2.name}"))`).click({ timeout: 2000 });
+    await p2.$(".pick-foot button.primary").click({ timeout: 2000 });
+    const after = await until("phone 2 back in the race", async () => {
+      const s = await snapshot(p2);
+      if (s.screen === "pick" && s.error) throw new Error(`TakeSeat failed: ${s.error}`);
+      return s.screen === "controller" ? s : null;
+    }, 15_000);
+    swappedBack = true;
+    await p2.shot("swap-back-P2.png");
+    const [newSeat] = await readStorage(p2, [seatKey(p2, code)]);
+    const oldId = JSON.parse(oldSeat).playerId;
+    const newId = newSeat ? JSON.parse(newSeat).playerId : null;
+    if (newId !== oldId) fail(`swap: P2 took seat ${newId}, not its own ${oldId}`);
+    if (newSeat && JSON.parse(newSeat).secret === JSON.parse(oldSeat).secret) fail("swap: taking the seat did not rotate its secret");
+    // Same car, same place: still on this question (or past it, if the phase moved on while the page loaded).
+    const sameQuestion = roundOf(after) === roundOf(before) && ["question", "answered"].includes(phaseOf(after));
+    log(`swap: ${p2.name} (seat ${newId}) back on ${phaseOf(after)} [${after.header}], was [${before.header}]`);
+    if (roundOf(after) < roundOf(before)) fail(`swap: P2 came back in round ${roundOf(after)}, was in ${roundOf(before)}`);
+    if (sameQuestion && positionOf(after) !== positionOf(before)) fail(`swap: P2 came back in P${positionOf(after)}, was P${positionOf(before)}`);
+
+    // Review Focus 2, end to end: the old phone's stored secret no longer rejoins; it lands on the picker or the name box.
+    const stale = await context.newPage();
+    watchErrors(stale);
+    const staleSlot = `stale${p2.slot}`;
+    await stale.goto(`${BASE}/`);
+    await stale.evaluate(([k, v]) => localStorage.setItem(k, v), [`arcbox:${code}:${staleSlot}`, oldSeat]);
+    await stale.goto(`${BASE}/?room=${code}&slot=${staleSlot}`);
+    const old = await until("the old phone to be turned away", async () => {
+      const s = await snapshot(roomPhone(stale, p2.slot));
+      if (s.screen === "controller" || s.screen === "lobby") throw new Error(`the old phone rejoined as ${p2.name} with its old secret`);
+      return (s.screen === "join" || s.screen === "pick") && s.error ? s : null;
+    }, 15_000);
+    await stale.screenshot({ path: join(SHOTS, "swap-old-phone-P2.png") });
+    log(`swap: the old phone's secret is refused: ${old.screen} "${old.error}"`);
+    if (old.error !== REJOIN_FAILED) fail(`swap: the old phone says "${old.error}", want "${REJOIN_FAILED}"`);
+    if ((await readStorage(roomPhone(stale, p2.slot), [`arcbox:${code}:${staleSlot}`]))[0] !== null) fail("swap: the old phone kept its dead seat");
+    await stale.close();
+  })().catch((err) => fail(`swap: ${err.message}`));
+
+  // -------- restart (ARCBOX_RESTART): in round 2, ask for the server to be restarted under the race
+  const restart = (async () => {
+    if (!RESTART) return;
+    await rejoin; // not while phone 2 is reloading
+    const at = await until("the race in round 2", async () => {
+      if (done) throw new Error("the run ended before round 2");
+      const s = await snapshot(phones[0]);
+      return roundOf(s) >= 2 && ["throttle", "throttle-locked", "reading", "question", "answered"].includes(phaseOf(s)) ? s : null;
+    }, 8 * 60_000);
+    await phones[0].shot("before-restart.png");
+    // tools/tv-e2e.sh waits for this line, then stops the server and starts it again on the same database.
+    log(`RESTART now: P1 on ${phaseOf(at)} [${at.header}]`);
+  })();
+
   // -------- the goal
   try {
-    if (!TO_THE_END) {
+    if (RESTART) {
+      await restart;
+      // Every phone rejoins the rebuilt room on its own (the transport reconnects), and gets the note once.
+      let snaps = [];
+      try {
+        await until("every phone on the interrupted results", async () => {
+          snaps = await Promise.all(phones.map(snapshot));
+          return snaps.every((s) => s.screen === "results" && s.resultsTitle === INTERRUPTED);
+        }, 5 * 60_000);
+      } catch (err) {
+        throw new Error(`${err.message} (${snaps.map((s, i) => `P${i + 1} ${s.screen}${s.resultsTitle ? ` "${s.resultsTitle}"` : ""}`).join(", ")})`);
+      }
+      log(`restart: every phone shows "${INTERRUPTED}"`);
+      await phones[0].shot("restart-results.png");
+      for (const p of phones) {
+        await p.$("button:has-text(\"Back to lobby\")").click({ timeout: 5000 });
+        const lobby = await until(`phone ${p.slot} back in the lobby`, async () => {
+          const s = await snapshot(p);
+          return s.screen === "lobby" ? s : null;
+        }, 10_000);
+        if (lobby.roomCode !== code) fail(`restart: P${p.slot}'s lobby is room ${lobby.roomCode}, want ${code}`);
+      }
+      await phones[0].shot("restart-lobby.png");
+      log(`restart: every phone back in room ${code}'s lobby`);
+    } else if (!TO_THE_END) {
       await until("the first Reveal", async () => reachedReveal, DEADLINE_MS);
       await sleep(600);
       if (dev) await dev.screenshot({ path: join(SHOTS, "dev-reveal.png"), fullPage: true });
@@ -534,6 +686,15 @@ async function run() {
       if (dev) await dev.screenshot({ path: join(SHOTS, "dev-results.png"), fullPage: true });
       const results = await phones[0].$(".scores").innerText().catch(() => "");
       log(`results:\n${results}`);
+      if (SWAP && PHONES >= 2) {
+        // Phone 2 finished in its own seat: one row per phone (no second Bot2 from a new seat), and it saw the flag.
+        await swap;
+        const names = (await phones[0].$(".scores .sname").allInnerTexts().catch(() => [])).map(playerOf);
+        const p2 = phones[1].name;
+        if (names.length !== PHONES || names.filter((n) => n === p2).length !== 1) fail(`swap: results list ${names.join(", ")}; want ${PHONES} players with ${p2} once`);
+        if (!afterSwap.has("chequered")) fail(`swap: ${p2} never saw the Chequered flag on its new phone (saw ${[...afterSwap].join(", ")})`);
+        else log(`swap: ${p2} finished ${names.indexOf(p2) + 1} of ${names.length} players, in its own seat`);
+      }
       await phones[0].$("button:has-text(\"Back to lobby\")").click();
       const lobby = await until("phone 1 back in the lobby", async () => {
         const s = await snapshot(phones[0]);
@@ -553,7 +714,7 @@ async function run() {
     }
   } finally {
     done = true;
-    await Promise.all([...bots, shooter, watchdog, rejoin]);
+    await Promise.all([...bots, shooter, watchdog, rejoin, swap, restart.catch(() => {})]);
   }
   if (GAME === "redline") {
     for (const phase of ["driver-select", "quali-reading", "quali-question", "quali-result", "throttle", "reading", "question", "reveal"]) {

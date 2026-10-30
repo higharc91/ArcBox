@@ -136,8 +136,11 @@ public sealed class StorageWriter : BackgroundService
     public override async Task StopAsync(CancellationToken cancellationToken)
     {
         await base.StopAsync(cancellationToken).ConfigureAwait(false);
-        // The loop has ended; write what's left. The host's shutdown timeout bounds how long it may take.
-        await FlushAsync(cancellationToken).ConfigureAwait(false);
+        // The loop has ended; write what's left, whatever the token says. By the time the host stops this service,
+        // Kestrel may have spent the whole shutdown timeout closing the phones' connections, so the token is often
+        // already cancelled: honouring it would drop the last seat changes (and its exception aborted the process). The
+        // writes are a few small SQLite statements, so this cannot hold the shutdown up for long.
+        await FlushAsync(CancellationToken.None).ConfigureAwait(false);
     }
 
     private void Execute(Dictionary<string, Action<SqliteConnection>> ops, List<string> order)
