@@ -40,7 +40,8 @@ public sealed class AttackBlock : EffectBlock<AttackEffect>
 /// <see cref="OfferReactionStep"/>s run before this step comes back with the roll.</item>
 /// <item>With <see cref="Roll"/>: the hit is re-judged against the target's AC now (a reaction may have raised it), with
 /// the same <see cref="Cover"/>; a natural 20 still hits and a natural 1 still misses. A hit on a target with
-/// <see cref="StaticMods.CritWhenAdjacent"/> from an adjacent attacker is a critical hit. Fires
+/// <see cref="StaticMods.CritWhenAdjacent"/> from an adjacent attacker is a critical hit. Emits
+/// <see cref="AttackResolved"/>, fires
 /// <see cref="HookKind.OnAttackHit"/> or <see cref="HookKind.OnAttackMiss"/> for the attacker and queues the branch
 /// (hit, plus crit; or miss) ahead of the hook effects.</item>
 /// </list>
@@ -122,6 +123,7 @@ public sealed record AttackStep(UnitId Source, UnitId Target, Tile? Aim, Ability
         var crit = hit && (rolled.Crit
                            || Modifiers.For(w, Target, rules).CritWhenAdjacent && Reach.Distance(source.Pos, target.Pos) == 1);
         var roll = rolled with { Vs = ac, Success = hit, Crit = crit };
+        w.Emit(new AttackResolved(Source, Target, hit, crit));
 
         var hooks = new List<Step>();
         Hooks.Collect(w, hit ? HookKind.OnAttackHit : HookKind.OnAttackMiss,

@@ -3,6 +3,7 @@ namespace Tactics.Logic;
 /// <summary>
 /// <c>"apply"</c>: puts a condition on the target, replacing one with the same id. An until-save condition takes the
 /// stat and DC of the enclosing save; a condition from a concentration ability is tied to the source's concentration.
+/// Applied during the source's own turn, it is marked <see cref="ActiveCondition.AppliedThisTurn"/>.
 /// Emits <see cref="ConditionApplied"/>.
 /// </summary>
 public sealed class ApplyBlock : EffectBlock<ApplyEffect>
@@ -23,7 +24,7 @@ public sealed class ApplyBlock : EffectBlock<ApplyEffect>
         }
 
         var condition = new ActiveCondition(def.Condition, ctx.Source, def.Rounds, def.UntilSave, dc, stat,
-            Concentration: ctx.Ability?.Cost.Concentration == true);
+            Concentration: ctx.Ability?.Cost.Concentration == true, AppliedThisTurn: ctx.W.State.Active == ctx.Source);
         ctx.W.Set(target with { Conditions = target.Conditions.RemoveAll(c => c.Id == def.Condition).Add(condition) });
         ctx.W.Emit(new ConditionApplied(target.Id, def.Condition));
     }

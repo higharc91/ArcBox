@@ -30,7 +30,8 @@ public static class TestConditions
 
     /// <summary>1d6 fire at the start of each of its turns.</summary>
     public static readonly ConditionDef Burning = new(new ConditionId("burning"), "Burning", null,
-        [new PassiveDef("burning.tick", HookKind.OnTurnStart, null, [new DamageEffect(TestAbilities.Flat("1d6"), "fire", [])], null)],
+        [new PassiveDef("burning.tick", HookKind.OnTurnStart, null, [new DamageEffect(TestAbilities.Flat("1d6"), "fire", [])], null,
+            Target: PassiveTarget.Self)],
         Ordinal.Set("physical"));
 
     /// <summary>Every condition above.</summary>

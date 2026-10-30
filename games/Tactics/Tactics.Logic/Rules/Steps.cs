@@ -26,8 +26,10 @@ public abstract record Step
 
 /// <summary>
 /// Ends <see cref="Unit"/>'s turn. First its <see cref="HookKind.OnTurnEnd"/> hooks fire and their effects resolve (the
-/// step re-queues itself behind them with <see cref="HooksDone"/>); then its until-save conditions roll and durations tick
-/// (<see cref="Conditions.EndTurn"/>), <see cref="TurnEnded"/> is emitted and the hand-off to the next unit is queued.
+/// step re-queues itself behind them with <see cref="HooksDone"/>); then the hand-off to the next unit is queued, its
+/// until-save conditions roll and durations tick (<see cref="Conditions.EndTurn"/>) and <see cref="TurnEnded"/> is
+/// emitted. Effects of hooks those saves fire (<see cref="HookKind.OnSave"/>) go ahead of the hand-off, so they resolve
+/// while it is still this unit's turn.
 /// </summary>
 public sealed record EndTurnStep(UnitId Unit,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool HooksDone = false) : Step
@@ -42,9 +44,9 @@ public sealed record EndTurnStep(UnitId Unit,
             return;
         }
 
+        w.PushFront(new StartNextTurnStep());
         Conditions.EndTurn(w, Unit, rules);
         w.Emit(new TurnEnded(Unit));
-        w.PushFront(new StartNextTurnStep());
     }
 }
 
@@ -139,14 +141,15 @@ public sealed record PayCostStep(UnitId Unit, AbilityId Ability, Target Target) 
 /// <see cref="Aim"/>. Each run takes the first effect and queues the rest behind it, so whatever a block queues (a hit's
 /// effects, a reaction) resolves before the next effect, and a save mid-list resumes exactly there. <see cref="Last"/>,
 /// <see cref="HalfDamage"/> and <see cref="SaveStat"/> carry the roll a branch follows (see <see cref="EffectContext"/>).
-/// <see cref="HookDepth"/> is how deeply nested in hooks the effects are; a hook's effects name their
-/// <see cref="Passive"/>, emitted as <see cref="PassiveTriggered"/> before the first one runs. Nothing runs on a target
+/// <see cref="HookDepth"/> is how deeply nested in hooks the effects are. A hook's effects name their
+/// <see cref="Passive"/>: before the first one runs, its limits are spent (<see cref="Hooks"/>; nothing runs if the owner
+/// no longer has it or its limits are used up) and <see cref="PassiveTriggered"/> is emitted. Nothing runs on a target
 /// that is Dead or Out.
 /// </summary>
 public sealed record RunEffectsStep(UnitId Source, UnitId? Target, Tile? Aim, AbilityId? Ability,
     ImmutableArray<EffectDef> Effects, RollResult? Last = null, bool HalfDamage = false, Stat? SaveStat = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int HookDepth = 0,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Passive = null) : Step
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] PassiveRef? Passive = null) : Step
 {
     /// <inheritdoc />
     public override void Run(BattleWriter w, RulesPack rules)
@@ -157,7 +160,11 @@ public sealed record RunEffectsStep(UnitId Source, UnitId? Target, Tile? Aim, Ab
             return;
         w.HookDepth = HookDepth;
         if (Passive is { } passive)
-            w.Emit(new PassiveTriggered(Source, passive));
+        {
+            if (!Hooks.TrySpend(w, passive, rules))
+                return;
+            w.Emit(new PassiveTriggered(passive.Owner, passive.Id));
+        }
         if (Effects.Length > 1)
             w.PushFront(this with { Effects = Effects.RemoveAt(0), Passive = null });
 

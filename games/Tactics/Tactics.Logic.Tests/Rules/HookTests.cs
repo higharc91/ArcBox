@@ -172,7 +172,7 @@ public sealed class HookTests
     {
         // Each passive marks its owner with a condition named after the hook, so the events show what fired when.
         PassiveDef Marker(HookKind hook, string name)
-            => new("test." + name, hook, null, [new ApplyEffect(new ConditionId(name), null)], null);
+            => new("test." + name, hook, null, [new ApplyEffect(new ConditionId(name), null)], null, Target: PassiveTarget.Self);
         var passives = new[]
         {
             Marker(HookKind.OnBattleStart, "battle"), Marker(HookKind.OnRoundStart, "round"),
@@ -203,5 +203,72 @@ public sealed class HookTests
         Assert.DoesNotContain(events, e => e is PassiveTriggered);
         (_, events) = battle.Apply(state, new EndTurn(U("kara")));
         Assert.Equal<BattleEvent>([Fired("ending"), Marked("ending"), new TurnEnded(U("kara"))], events[..3]);
+    }
+
+    [Fact]
+    public void Retaliation_needs_another_unit_and_condition_passives_come_from_their_source()
+    {
+        // Thorns (once per battle) hits back whoever damaged its owner; it never turns on the owner.
+        var thorns = new PassiveDef("test.thorns", HookKind.OnDamaged, null, [new DamageEffect(null, "piercing", ["level"])], null,
+            UsesPerBattle: 1);
+        var shove = new AbilityDef(new AbilityId("test.shove"), "Shove", 0, new CostDef(),
+            new TargetDef(TargetKind.Enemy, Range: 1, Los: false, new AreaDef(AreaShape.Single)), [new PushEffect(1)]);
+        const string wall = """
+            0. 0. 0. 0. 0. 0.
+            0. 0. 0. 0. 0# 0.
+            0. 0. 0. 0. 0. 0.
+            """;
+        TestBattle Build() => TestBattle.On(wall)
+            .Party("kara", TestSheets.Fighter with { Abilities = [shove.Id], InitiativeBonus = 10 }, T(2, 1))
+            .Enemy("gob", Goblin with { Passives = [thorns.Id], MaxHp = 100 }, T(3, 1))
+            .With(shove).WithPassives(thorns).WithConditions([.. TestConditions.All]);
+
+        // A collision (no source) and burning nobody applied (it comes from the goblin itself): no thorns, nothing spent.
+        var battle = Build();
+        var (state, _) = battle.Start();
+        state = state.Give("gob", TestConditions.Lasting(TestConditions.Burning));
+        var (after, events) = battle.Apply(state, new Use(U("kara"), shove.Id, new Target(Unit: U("gob"))));
+        Assert.Contains(events, e => e is Collided);
+        (after, var burnt) = battle.Apply(after, new EndTurn(U("kara")));
+        Assert.Contains(new PassiveTriggered(U("gob"), "burning.tick"), burnt);
+        Assert.DoesNotContain(events.AddRange(burnt), e => e is PassiveTriggered { Passive: "test.thorns" });
+        Assert.Equal(12, after.Units[U("kara")].Hp);
+        Assert.False(after.Units[U("gob")].UsesLeft.ContainsKey("test.thorns"));
+
+        // Burning the fighter applied comes from the fighter: thorns answers it, once.
+        (state, _) = battle.Start();
+        state = state.Give("gob", TestConditions.Lasting(TestConditions.Burning, source: U("kara")));
+        (after, events) = battle.Apply(state, new EndTurn(U("kara")));
+        Assert.Equal<BattleEvent>(
+            [new PassiveTriggered(U("gob"), "test.thorns"), new Damaged(U("kara"), 1, "piercing", 11)],
+            events.SkipWhile(e => e is not PassiveTriggered { Passive: "test.thorns" }));
+        Assert.Equal(0, after.Units[U("gob")].UsesLeft["test.thorns"]);
+    }
+
+    [Fact]
+    public void Turn_end_save_hooks_resolve_before_the_next_turn_starts()
+    {
+        var frightened = new ConditionId("frightened");
+        var steadied = new ConditionId("steadied");
+        var steady = new PassiveDef("test.steady", HookKind.OnSave, null, [new ApplyEffect(steadied, null)], null,
+            Target: PassiveTarget.Self);
+        var battle = TestBattle.On(Field)
+            .Party("kara", TestSheets.Fighter, T(0, 1))                                        // 9
+            .Enemy("gob", Goblin with { Passives = [steady.Id] }, T(5, 1))                    // 12
+            .WithPassives(steady);
+        var (state, _) = battle.Start();
+        Assert.Equal(U("gob"), state.Active);
+        state = state.Give("gob", new ActiveCondition(frightened, U("kara"), null, true, 30, Stat.Wis, false));
+
+        var (_, events) = battle.Apply(state, new EndTurn(U("gob")));
+
+        Assert.Equal(RollKind.Save, Assert.IsType<Rolled>(events[0]).Kind);
+        Assert.Equal<BattleEvent>(
+        [
+            new TurnEnded(U("gob")),
+            new PassiveTriggered(U("gob"), "test.steady"),
+            new ConditionApplied(U("gob"), steadied),
+            new TurnStarted(U("kara"), 1),
+        ], events[1..]);
     }
 }

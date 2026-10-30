@@ -107,6 +107,7 @@ public sealed class ReactionTests
                 Assert.Equal(U("kara"), rolled.Roller);
                 Assert.Equal(18, rolled.Result.Total);
             },
+            e => Assert.Equal(new AttackResolved(U("kara"), U("gob"), Hit: true, Crit: false), e),
             e => Assert.Equal(new Damaged(U("gob"), damage, "slashing", 30 - damage), e),
             e => Assert.Equal(Json<BattleEvent>(new Moved(U("gob"), [T(1, 1), T(2, 1)])), Json(e)),
             e => Assert.Equal(Json<BattleEvent>(new Moved(U("gob"), [T(2, 1), T(3, 1)])), Json(e)));
@@ -446,6 +447,7 @@ public sealed class ReactionTests
             new Reacted(U("kara"), "test.shield"),
             new AbilityUsed(U("kara"), ShieldSpell.Id, new Target(Unit: U("kara")), null),
             new ConditionApplied(U("kara"), Shielded.Id),
+            new AttackResolved(U("gob"), U("kara"), Hit: false, Crit: false),
         ], reacted);
         Assert.Equal(12, after.Units[U("kara")].Hp);
         Assert.False(after.Units[U("kara")].Economy.Reaction);
@@ -463,6 +465,7 @@ public sealed class ReactionTests
 
         // Passing lets the hit land.
         var (_, passed) = battle.Apply(paused, new React(U("kara"), Pass));
+        Assert.Equal(new AttackResolved(U("gob"), U("kara"), Hit: true, Crit: false), passed[1]);
         Assert.IsType<Damaged>(passed[^1]);
 
         // An AI target with the same reaction isn't offered it (Task 15 decides): the attack resolves at once.

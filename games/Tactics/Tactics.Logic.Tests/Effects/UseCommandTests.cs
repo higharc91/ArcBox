@@ -62,6 +62,7 @@ public sealed class UseCommandTests
                 Assert.True(rolled.Result.Success);
                 Assert.False(rolled.Result.Crit);
             },
+            e => Assert.Equal(new AttackResolved(U("cleric"), U("gob"), Hit: true, Crit: false), e),
             e => Assert.Equal(new Damaged(U("gob"), damage, "radiant", 30 - damage), e),
             e => Assert.Equal(new ConditionApplied(U("gob"), new ConditionId("lit")), e));
 

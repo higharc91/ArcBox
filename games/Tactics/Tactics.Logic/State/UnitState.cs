@@ -10,12 +10,15 @@ public enum LifeState { Up, Downed, Out, Dead }
 public sealed record TurnEconomy(int MoveLeft, bool Action, bool Bonus, bool Reaction, int ExtraActions);
 
 /// <summary>
-/// A condition on a unit. <see cref="RoundsLeft"/> null means it lasts until removed; <see cref="UntilSave"/> rolls
-/// <see cref="SaveStat"/> against <see cref="SaveDc"/> at the end of the unit's turn; <see cref="Concentration"/> ties it to
-/// the source's concentration.
+/// A condition on a unit. <see cref="RoundsLeft"/> null means it lasts until removed; otherwise it counts the ends of its
+/// source's turns (see <see cref="Conditions.EndTurn"/>). <see cref="UntilSave"/> rolls <see cref="SaveStat"/> against
+/// <see cref="SaveDc"/> at the end of the unit's turn; <see cref="Concentration"/> ties it to the source's concentration.
+/// <see cref="AppliedThisTurn"/> marks a condition applied during the turn of the unit whose turn ends tick it: that
+/// turn's end doesn't count, so 1 round lasts until the end of the source's next turn.
 /// </summary>
 public sealed record ActiveCondition(ConditionId Id, UnitId? Source, int? RoundsLeft, bool UntilSave, int SaveDc,
-    Stat SaveStat, bool Concentration);
+    Stat SaveStat, bool Concentration,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool AppliedThisTurn = false);
 
 /// <summary>A stack of one item in a unit's bag.</summary>
 public sealed record ItemStack(ItemId Item, int Count);

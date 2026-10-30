@@ -178,11 +178,21 @@ public sealed record WhenDef(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? DamageType = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? TargetTag = null);
 
+/// <summary>Whom a passive's effects land on. JSON: <c>"other"</c> (the default) or <c>"self"</c>.</summary>
+public enum PassiveTarget
+{
+    /// <summary>The hook's other unit (<see cref="HookArgs.Other"/>): the attack's target, whoever dealt the damage, ….
+    /// The passive doesn't fire when there is none, or when it is the owner.</summary>
+    [JsonStringEnumMemberName("other")] Other,
+    /// <summary>The owner.</summary>
+    [JsonStringEnumMemberName("self")] Self,
+}
+
 /// <summary>
 /// A passive feature (spec §4.4): <see cref="Static"/> modifiers that always hold, and <see cref="Effects"/> that run on
-/// <see cref="Hook"/> when <see cref="When"/> holds, from the owner on the hook's other unit (or the owner), at most once
-/// per turn (anyone's), once per round or <see cref="UsesPerBattle"/> times. <see cref="Replaces"/> lets a later pack
-/// override an id.
+/// <see cref="Hook"/> when <see cref="When"/> holds, on <see cref="Target"/>, at most once per turn (anyone's), once per
+/// round or <see cref="UsesPerBattle"/> times. The effects come from the owner, or, for a condition's passive, from the
+/// unit that applied the condition. <see cref="Replaces"/> lets a later pack override an id.
 /// </summary>
 public sealed record PassiveDef(string Id,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] HookKind? Hook,
@@ -192,7 +202,8 @@ public sealed record PassiveDef(string Id,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool OncePerTurn = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool OncePerRound = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? UsesPerBattle = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] PassiveTarget Target = PassiveTarget.Other);
 
 /// <summary>
 /// A condition (spec §3.7): its <see cref="Static"/> modifiers and <see cref="Passives"/> hold while a unit has it.

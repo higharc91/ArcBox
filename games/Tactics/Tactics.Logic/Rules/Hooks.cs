@@ -8,10 +8,14 @@ namespace Tactics.Logic;
 public sealed record HookArgs(UnitId Owner, UnitId? Other = null, RollResult? Roll = null, int Amount = 0, Tile? Tile = null,
     AbilityId? Ability = null, string? AttackKind = null, Edge Edge = Edge.None, string? DamageType = null);
 
+/// <summary>The passive a hook's effects belong to: whose it is and its id.</summary>
+public sealed record PassiveRef(UnitId Owner, string Id);
+
 /// <summary>
 /// Fires passives on hooks (spec §4.4). A passive fires when its <see cref="PassiveDef.Hook"/> matches, its limits allow
-/// it and its <see cref="PassiveDef.When"/> holds; its effects then run from the owner on <see cref="HookArgs.Other"/> (or
-/// the owner), right away: they go to the front of the queue, ahead of whatever was already waiting.
+/// it, it has a target (<see cref="PassiveDef.Target"/>) and its <see cref="PassiveDef.When"/> holds; its effects then run
+/// right away: they go to the front of the queue, ahead of whatever was already waiting. Its limits are spent when the
+/// effects start to run, not when it fires.
 /// </summary>
 public static class Hooks
 {
@@ -23,8 +27,8 @@ public static class Hooks
 
     /// <summary>
     /// Fires <paramref name="hook"/> for <see cref="HookArgs.Owner"/> (Up or Downed): its sheet passives in sheet order,
-    /// then its conditions' passives in the order the conditions were applied. Each passive that fires is spent (once per
-    /// turn, once per round, per-battle uses) and queues a <see cref="RunEffectsStep"/> that emits
+    /// then its conditions' passives in the order the conditions were applied. Each passive that fires queues a
+    /// <see cref="RunEffectsStep"/> that spends its limits (once per turn, once per round, per-battle uses), emits
     /// <see cref="PassiveTriggered"/> and runs its effects, following <see cref="HookArgs.Roll"/>.
     /// </summary>
     public static void Fire(BattleWriter w, HookKind hook, HookArgs args, RulesPack rules)
@@ -57,25 +61,58 @@ public static class Hooks
         if (!w.State.Units.TryGetValue(args.Owner, out var owner) || owner.Life is LifeState.Dead or LifeState.Out)
             return;
 
-        var passives = Modifiers.Passives(owner, rules)
-            .Concat(Conditions.Defs(owner, rules).SelectMany(c => c.Passives.IsDefault ? [] : c.Passives))
-            .Where(p => p.Hook == hook && !p.Effects.IsDefaultOrEmpty)
-            .ToArray();
-        foreach (var passive in passives)
+        foreach (var (passive, source) in Candidates(w.State, owner, rules).Where(c => c.Passive.Hook == hook).ToArray())
         {
-            owner = w.Unit(args.Owner);
-            if (!Available(owner, passive) || passive.When is { } when && !Holds(when, w, args, rules))
+            if (passive.Effects.IsDefaultOrEmpty || !Available(w.Unit(owner.Id), passive))
+                continue;
+            UnitId target;
+            if (passive.Target == PassiveTarget.Self)
+                target = owner.Id;
+            else if (args.Other is { } other && other != owner.Id)
+                target = other;
+            else
+                continue;
+            if (passive.When is { } when && !Holds(when, w, args, rules))
                 continue;
 
             var depth = w.HookDepth + 1;
             if (depth > MaxDepth)
                 throw new RulesInvariantException(
                     $"Hooks nested deeper than {MaxDepth}: '{passive.Id}' of {owner.Id} on {hook}.");
+            into.Add(new RunEffectsStep(source, target, args.Tile ?? w.Unit(target).Pos, null, passive.Effects, args.Roll,
+                HookDepth: depth, Passive: new PassiveRef(owner.Id, passive.Id)));
+        }
+    }
 
-            w.Set(Spend(owner, passive));
-            var target = args.Other ?? owner.Id;
-            into.Add(new RunEffectsStep(owner.Id, target, args.Tile ?? w.Unit(target).Pos, null, passive.Effects, args.Roll,
-                HookDepth: depth, Passive: passive.Id));
+    /// <summary>
+    /// Spends the limits of the passive <paramref name="passive"/> names as its effects start to run: false (nothing
+    /// spent) when its owner no longer has it or its limits are used up.
+    /// </summary>
+    internal static bool TrySpend(BattleWriter w, PassiveRef passive, RulesPack rules)
+    {
+        if (!w.State.Units.TryGetValue(passive.Owner, out var owner))
+            return false;
+        var def = Candidates(w.State, owner, rules).Select(c => c.Passive).FirstOrDefault(p => p.Id == passive.Id);
+        if (def is null || !Available(owner, def))
+            return false;
+        w.Set(Spend(owner, def));
+        return true;
+    }
+
+    /// <summary>
+    /// The owner's passives with the unit their effects come from: sheet passives in sheet order (from the owner), then its
+    /// conditions' passives in the order the conditions were applied (from the condition's source while that unit is in
+    /// the battle's roster, else the owner).
+    /// </summary>
+    private static IEnumerable<(PassiveDef Passive, UnitId Source)> Candidates(BattleState state, UnitState owner, RulesPack rules)
+    {
+        foreach (var passive in Modifiers.Passives(owner, rules))
+            yield return (passive, owner.Id);
+        foreach (var (def, from) in Conditions.Active(owner, rules))
+        {
+            var source = from.Source is { } s && state.Units.ContainsKey(s) ? s : owner.Id;
+            foreach (var passive in def.Passives.IsDefault ? [] : def.Passives)
+                yield return (passive, source);
         }
     }
 

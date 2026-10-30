@@ -25,6 +25,7 @@ namespace Tactics.Logic;
 [JsonDerivedType(typeof(ConditionSaved), nameof(ConditionSaved))]
 [JsonDerivedType(typeof(ConcentrationBroken), nameof(ConcentrationBroken))]
 [JsonDerivedType(typeof(PassiveTriggered), nameof(PassiveTriggered))]
+[JsonDerivedType(typeof(AttackResolved), nameof(AttackResolved))]
 public abstract record BattleEvent;
 
 /// <summary>A new round began with this turn order.</summary>
@@ -89,3 +90,9 @@ public sealed record ConcentrationBroken(UnitId Caster, AbilityId Ability) : Bat
 
 /// <summary>A passive's hook fired and its effects are about to run.</summary>
 public sealed record PassiveTriggered(UnitId Owner, string Passive) : BattleEvent;
+
+/// <summary>
+/// An attack's final outcome, after any reaction to its roll (a <see cref="Rolled"/> hit can become a miss, a hit on a
+/// helpless adjacent target a critical hit). The TV labels the attack from this.
+/// </summary>
+public sealed record AttackResolved(UnitId Source, UnitId Target, bool Hit, bool Crit) : BattleEvent;

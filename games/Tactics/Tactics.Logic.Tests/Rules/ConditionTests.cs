@@ -145,15 +145,18 @@ public sealed class ConditionTests
     public void Rounds_tick_on_source_turn_end()
     {
         var blessed = new ConditionId("blessed");
+        var guarded = new ConditionId("guarded");
+        var hexed = new ConditionId("hexed");
         var dazed = new ConditionId("dazed");
-        var bless = new AbilityDef(new AbilityId("test.bless"), "Bless", 1, new CostDef(Action: 1),
-            new TargetDef(TargetKind.Ally, Range: 4, Los: false, new AreaDef(AreaShape.Single)),
-            [new ApplyEffect(blessed, Rounds: 2)]);
+        AbilityDef Grant(string id, ConditionId condition, int rounds, CostDef cost) => new(new AbilityId(id), id, 1, cost,
+            new TargetDef(TargetKind.Ally, Range: 4, Los: false, new AreaDef(AreaShape.Single)), [new ApplyEffect(condition, rounds)]);
+        var bless = Grant("test.bless", blessed, 1, new CostDef(Action: 1));       // until the end of the cleric's next turn
+        var guard = Grant("test.guard", guarded, 0, new CostDef(Bonus: 1));        // until the end of this turn
         var battle = TestBattle.On(Field)
-            .Party("cleric", TestSheets.Cleric with { Abilities = [bless.Id], InitiativeBonus = 5 }, T(0, 1))   // 15
-            .Party("kara", TestSheets.Fighter, T(1, 1))                                                       // 9
-            .Enemy("gob", Goblin, T(6, 1))                                                                    // 12
-            .With(bless);
+            .Party("cleric", TestSheets.Cleric with { Abilities = [bless.Id, guard.Id], InitiativeBonus = 5 }, T(0, 1))   // 15
+            .Party("kara", TestSheets.Fighter, T(1, 1))                                                                  // 9
+            .Enemy("gob", Goblin, T(6, 1))                                                                               // 12
+            .With(bless, guard);
         var (state, _) = battle.Start();
         Assert.Equal([U("cleric"), U("gob"), U("kara")], state.Order);
         state = state.Give("gob",
@@ -163,15 +166,20 @@ public sealed class ConditionTests
         int? Left(BattleState s, string unit, ConditionId id) => s.Units[U(unit)].Conditions.Single(c => c.Id == id).RoundsLeft;
 
         (state, _) = battle.Apply(state, new Use(U("cleric"), bless.Id, new Target(Unit: U("kara"))));
-        Assert.Equal(2, Left(state, "kara", blessed));
+        (state, _) = battle.Apply(state, new Use(U("cleric"), guard.Id, new Target(Unit: U("kara"))));
+        Assert.True(state.Units[U("kara")].Conditions.All(c => c.AppliedThisTurn));
 
+        // The turn they were applied in: rounds 0 ends; rounds 1 doesn't tick.
         (state, var events) = battle.Apply(state, new EndTurn(U("cleric")));
-        Assert.Equal(1, Left(state, "kara", blessed));                 // the source's turn ended
-        Assert.DoesNotContain(events, e => e is ConditionRemoved);
+        Assert.Equal<BattleEvent>([new ConditionRemoved(U("kara"), guarded), new TurnEnded(U("cleric"))], events[..2]);
+        Assert.Equal(1, Left(state, "kara", blessed));
+        Assert.False(state.Units[U("kara")].Conditions.Single().AppliedThisTurn);
 
+        // During the goblin's turn the cleric hexes it for 1 round (as a reaction would): off the cleric's turn, so it
+        // ends with blessed, at the end of the cleric's next turn.
+        state = state.Give("gob", new ActiveCondition(hexed, U("cleric"), 1, false, 0, Stat.Con, false));
         (state, events) = battle.Apply(state, new EndTurn(U("gob")));
-        Assert.Equal(new ConditionRemoved(U("gob"), dazed), events[0]);
-        Assert.Equal(new TurnEnded(U("gob")), events[1]);
+        Assert.Equal<BattleEvent>([new ConditionRemoved(U("gob"), dazed), new TurnEnded(U("gob"))], events[..2]);
         Assert.Equal(1, Left(state, "kara", blessed));                 // not the source's turn
         Assert.Contains(state.Units[U("gob")].Conditions, c => c.Id == TestConditions.Prone.Id);
 
@@ -179,8 +187,9 @@ public sealed class ConditionTests
         Assert.Equal(1, Left(state, "kara", blessed));
 
         (state, events) = battle.Apply(state, new EndTurn(U("cleric")));
-        Assert.Equal(new ConditionRemoved(U("kara"), blessed), events[0]);
-        Assert.Equal(new TurnEnded(U("cleric")), events[1]);
+        Assert.Equal<BattleEvent>(
+            [new ConditionRemoved(U("gob"), hexed), new ConditionRemoved(U("kara"), blessed), new TurnEnded(U("cleric"))],
+            events[..3]);
         Assert.Empty(state.Units[U("kara")].Conditions);
     }
 
@@ -303,5 +312,32 @@ public sealed class ConditionTests
         Assert.DoesNotContain("\"ac\"", written);                       // defaults are left out
         Assert.Equal(written, System.Text.Json.JsonSerializer.Serialize(
             System.Text.Json.JsonSerializer.Deserialize<ConditionDef>(written, ArcBox.Sdk.ArcJson.Options), ArcBox.Sdk.ArcJson.Options));
+    }
+
+    [Fact]
+    public void Crit_when_adjacent_turns_an_adjacent_hit_into_a_crit()
+    {
+        var helpless = new ConditionDef(new ConditionId("helpless"), "Helpless", new StaticMods(CritWhenAdjacent: true), [], Ordinal.Set());
+        // A seed whose first d20 hits AC 15 (+5) without being a natural 20.
+        var seed = Enumerable.Range(1, 200).Select(s => (ulong)s).First(s => TestAbilities.Next(Rng.Seeded(s), 20)[0] is >= 10 and < 20);
+
+        (ImmutableArray<BattleEvent> Events, int[] Dice) Attack(UnitSheet attacker, Tile at)
+        {
+            var battle = TestBattle.On(Field).Party("kara", attacker, at).Enemy("gob", Goblin, T(3, 1)).WithConditions(helpless);
+            var (state, _) = battle.Start(seed);
+            state = state.Give("gob", TestConditions.Lasting(helpless));
+            var dice = TestAbilities.Next(state.Rng, 20, 8, 8);
+            return (battle.Apply(state, new Use(U("kara"), new AbilityId("common.attack"), new Target(Unit: U("gob")))).Events, dice);
+        }
+
+        // Adjacent: the hit is a crit (the d20 itself wasn't), so the weapon dice roll twice.
+        var (adjacent, dice) = Attack(Fighter, T(2, 1));
+        Assert.False(TestConditions.FirstAttack(adjacent).Crit);
+        Assert.Contains(new AttackResolved(U("kara"), U("gob"), Hit: true, Crit: true), adjacent);
+        Assert.Equal(dice[1] + dice[2] + 3, adjacent.OfType<Damaged>().Single().Amount);
+
+        // From range: an ordinary hit (a DEX 16 archer's +5 also reaches AC 15 on this d20).
+        var (ranged, _) = Attack(Archer with { Scores = Archer.Scores.SetItem(Stat.Dex, 16) }, T(0, 1));
+        Assert.Contains(new AttackResolved(U("kara"), U("gob"), Hit: true, Crit: false), ranged);
     }
 }

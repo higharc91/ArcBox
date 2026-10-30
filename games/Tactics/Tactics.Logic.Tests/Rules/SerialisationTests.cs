@@ -54,7 +54,7 @@ public sealed class SerialisationTests
                 new PayCostStep(U("kara"), new AbilityId("common.attack"), new Target(Unit: U("gob"))), new EndTurnStep(U("kara")),
                 new DelayStep(U("kara"), 1), new EndTurnStep(U("gob"), HooksDone: true),
                 new RunEffectsStep(U("kara"), U("gob"), new Tile(3, 1), null,
-                    [new DamageEffect(TestAbilities.Flat("1d6"), null, [])], HookDepth: 2, Passive: "rogue.sneak_attack"),
+                    [new DamageEffect(TestAbilities.Flat("1d6"), null, [])], HookDepth: 2, Passive: new PassiveRef(U("kara"), "rogue.sneak_attack")),
                 new AttackStep(U("kara"), U("gob"), new Tile(3, 1), new AbilityId("common.attack"), RulesPack.CommonAttack.Effects[0],
                     new RollResult([4, 17], 17, 5, 22, 15, true, false, false), Cover: 2, Edge: Edge.Advantage, HookDepth: 1),
             ],
@@ -118,7 +118,7 @@ public sealed class SerialisationTests
         Assert.Equal(JsonSerializer.Serialize(state.Queue, ArcJson.Options), JsonSerializer.Serialize(back.Queue, ArcJson.Options));
         Assert.Equal(state.Queue.Select(s => s.GetType()), back.Queue.Select(s => s.GetType()));
         Assert.Contains("\"$type\":\"AttackStep\"", json);
-        Assert.Contains("\"hookDepth\":2,\"passive\":\"rogue.sneak_attack\"", json);
+        Assert.Contains("\"hookDepth\":2,\"passive\":{\"owner\":\"kara\",\"id\":\"rogue.sneak_attack\"}", json);
         Assert.Contains("\"edge\":\"advantage\"", json);
         Assert.Equal(state.Units[U("kara")].Conditions, back.Units[U("kara")].Conditions);
         Assert.IsType<ReactionOffer>(back.Pending);
@@ -274,6 +274,7 @@ public sealed class SerialisationTests
             new ConditionSaved(U("gob"), new ConditionId("frightened"), new RollResult([15], 15, -1, 14, 13, true, false, false)),
             new ConcentrationBroken(U("Brin"), new AbilityId("bless")),
             new PassiveTriggered(U("kara"), "rogue.sneak_attack"),
+            new AttackResolved(U("kara"), U("gob"), true, false),
         ];
 
         var commandJson = JsonSerializer.Serialize(commands, ArcJson.Options);

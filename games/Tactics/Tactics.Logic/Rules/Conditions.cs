@@ -12,7 +12,11 @@ public static class Conditions
     /// The definitions of <paramref name="unit"/>'s conditions in the order they were applied, each followed by the chain of
     /// conditions it implies, each id once. Ids the rules pack doesn't define are skipped.
     /// </summary>
-    public static IEnumerable<ConditionDef> Defs(UnitState unit, RulesPack rules)
+    public static IEnumerable<ConditionDef> Defs(UnitState unit, RulesPack rules) => Active(unit, rules).Select(a => a.Def);
+
+    /// <summary>Like <see cref="Defs"/>, with the condition on the unit that each definition comes from (an implied
+    /// condition comes from the one implying it).</summary>
+    internal static IEnumerable<(ConditionDef Def, ActiveCondition From)> Active(UnitState unit, RulesPack rules)
     {
         var seen = new List<ConditionId>();
         foreach (var active in unit.Conditions.IsDefault ? [] : unit.Conditions)
@@ -21,7 +25,7 @@ public static class Conditions
             while (next is { } id && !seen.Contains(id) && rules.Conditions.TryGetValue(id, out var def))
             {
                 seen.Add(id);
-                yield return def;
+                yield return (def, active);
                 next = def.Implies;
             }
         }
@@ -83,8 +87,10 @@ public static class Conditions
     /// <list type="number">
     /// <item>each of its until-save conditions rolls its save; a success emits <see cref="ConditionSaved"/> and ends it;</item>
     /// <item>every condition whose source is <paramref name="unit"/>, and every condition on <paramref name="unit"/> with no
-    /// source (or a source that has left the battle), loses a round; at 0 it ends. Units go in sorted
-    /// <see cref="UnitId"/> order, conditions in the order applied.</item>
+    /// source (or a source that has left the battle), ticks: one at 0 rounds ends; one applied this turn
+    /// (<see cref="ActiveCondition.AppliedThisTurn"/>) only loses that mark; any other loses a round and ends at 0. So
+    /// <c>rounds: 0</c> lasts until the end of the source's current turn, and <c>rounds: 1</c> until the end of its next
+    /// one. Units go in sorted <see cref="UnitId"/> order, conditions in the order applied.</item>
     /// </list>
     /// </summary>
     internal static void EndTurn(BattleWriter w, UnitId unit, RulesPack rules)
@@ -103,12 +109,23 @@ public static class Conditions
             var u = w.Unit(id);
             if (!u.Conditions.Any(c => c.RoundsLeft is not null && TickedBy(w.State, id, c) == unit))
                 continue;
-            var ticked = u.Conditions
-                .Select(c => c.RoundsLeft is { } left && TickedBy(w.State, id, c) == unit ? c with { RoundsLeft = left - 1 } : c)
-                .ToImmutableArray();
-            w.Set(u with { Conditions = ticked });
-            foreach (var expired in ticked.Where(c => c.RoundsLeft <= 0).Select(c => c.Id).ToArray())
-                Remove(w, id, expired);
+            var ticked = ImmutableArray.CreateBuilder<ActiveCondition>();
+            var expired = new List<ConditionId>();
+            foreach (var c in u.Conditions)
+            {
+                if (c.RoundsLeft is not { } left || TickedBy(w.State, id, c) != unit)
+                    ticked.Add(c);
+                else if (left <= 0 || !c.AppliedThisTurn && left == 1)
+                {
+                    ticked.Add(c with { RoundsLeft = 0, AppliedThisTurn = false });
+                    expired.Add(c.Id);
+                }
+                else
+                    ticked.Add(c.AppliedThisTurn ? c with { AppliedThisTurn = false } : c with { RoundsLeft = left - 1 });
+            }
+            w.Set(u with { Conditions = ticked.ToImmutable() });
+            foreach (var condition in expired)
+                Remove(w, id, condition);
         }
     }
 
