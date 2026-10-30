@@ -68,4 +68,52 @@ internal sealed partial class Scorer
             _threat[side] = map = ThreatMap.Build(this, side, Victim(side));
         return map;
     }
+
+    /// <summary>
+    /// A tile block's worth at the aim to <paramref name="p"/> (for the planner's actions and for a spell being countered): a
+    /// zone's turn-start and enter effects on the units in it now (enter effects at half, as units already there don't
+    /// enter it), a difficult zone slowing foes in it, a hazard's enter effects at half, and a summon's damage per round for
+    /// two rounds per unit summoned.
+    /// </summary>
+    public double TileWorth(EffectDef effect, Strike st, Tile aim, AiProfile p)
+    {
+        switch (effect)
+        {
+            case ZoneEffect zone:
+                {
+                    var tiles = Areas.Tiles(zone.Area, st.From, aim, Terrain).ToImmutableSortedSet();
+                    var rounds = Math.Min(3, zone.Rounds ?? 3);
+                    var value = 0.0;
+                    foreach (var unit in st.W.State.Units.Values.Where(u => DownedRules.InBattle(u) && tiles.Contains(u.Pos)))
+                    {
+                        foreach (var passive in zone.Passives.IsDefault ? [] : zone.Passives)
+                        {
+                            var weight = passive.Hook switch
+                            {
+                                HookKind.OnTurnStart => rounds,
+                                HookKind.OnEnterTile => 0.5,
+                                _ => 0,
+                            };
+                            if (weight > 0 && passive.Target == PassiveTarget.Self && !passive.Effects.IsDefaultOrEmpty)
+                                value += weight * Worth(st.User, unit, Walk(passive.Effects, st, unit), p);
+                        }
+                        if (zone.Difficult && Hostile(st.User, unit) && unit.Life == LifeState.Up)
+                            value += 0.3 * p.Control;
+                    }
+                    return value;
+                }
+            case HazardEffect hazard:
+                {
+                    var tiles = Areas.Tiles(hazard.Area, st.From, aim, Terrain).ToImmutableSortedSet();
+                    return st.W.State.Units.Values.Where(u => DownedRules.InBattle(u) && tiles.Contains(u.Pos))
+                        .Sum(u => 0.5 * Worth(st.User, u, Walk(hazard.OnEnter, st, u), p));
+                }
+            case SummonEffect summon:
+                return Rules.MonsterSheet(summon.Monster) is { } sheet
+                    ? summon.Count * 2 * (1 + sheet.Attacks * Math.Max(0, sheet.Weapon.Damage.Average)) * 0.5 * p.Damage
+                    : 0;
+            default:
+                return 0;
+        }
+    }
 }

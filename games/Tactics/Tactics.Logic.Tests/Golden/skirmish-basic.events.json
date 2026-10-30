@@ -42,7 +42,7 @@
 {"$type":"TurnStarted","unit":"vex","round":2},
 {"$type":"TurnEnded","unit":"vex"},
 {"$type":"TurnStarted","unit":"g1","round":2},
-{"$type":"ReactionOffered","offer":{"reactor":"vex","options":[{"id":"pass","ability":null,"target":null},{"id":"opportunity","ability":"common.attack","target":"g1"}],"trigger":"leavesReach"}},
+{"$type":"ReactionOffered","offer":{"reactor":"vex","options":[{"id":"pass","ability":null,"target":null},{"id":"opportunity","ability":"common.attack","target":"g1"}],"trigger":"leavesReach","cause":{"kind":"leavesReach","actor":"g1","target":null,"ability":null,"roll":null,"to":[3,1]}}},
 {"$type":"Reacted","reactor":"vex","choice":"opportunity"},
 {"$type":"AbilityUsed","source":"vex","ability":"common.attack","target":{"unit":"g1","tile":null},"presentation":{"anim":"characters.attack"}},
 {"$type":"Rolled","roller":"vex","kind":"Attack","result":{"d20s":[11,14],"kept":11,"modifier":5,"total":16,"vs":15,"success":true,"crit":false,"fumble":false}},

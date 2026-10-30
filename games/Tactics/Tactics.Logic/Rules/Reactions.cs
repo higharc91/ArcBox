@@ -48,7 +48,8 @@ public static class Reactions
     /// <item><c>beforeHit</c>: the reactor is <see cref="ReactionTrigger.Target"/>.</item>
     /// <item><c>spellCast</c>: the actor is hostile and within the ability's range.</item>
     /// </list>
-    /// Units with only <c>"pass"</c> get no offer.
+    /// Units with only <c>"pass"</c> get no offer. Each offer carries <paramref name="trigger"/> as its
+    /// <see cref="ReactionOffer.Cause"/>.
     /// </summary>
     public static ImmutableArray<ReactionOffer> OffersFor(BattleWriter w, ReactionTrigger trigger, RulesPack rules)
     {
@@ -109,7 +110,7 @@ public static class Reactions
             options.Add(new ReactionChoice(id.Value, id, ability.Target.Kind == TargetKind.Self ? reactor.Id : actor.Id));
         }
 
-        return options.Count > 1 ? new ReactionOffer(reactor.Id, options.ToImmutable(), NameOf(trigger.Kind)) : null;
+        return options.Count > 1 ? new ReactionOffer(reactor.Id, options.ToImmutable(), NameOf(trigger.Kind), trigger) : null;
     }
 
     /// <summary>True when the reactor's melee weapon reaches <paramref name="from"/> but not <paramref name="to"/>.</summary>
@@ -140,7 +141,7 @@ public sealed record OfferReactionStep(UnitId Reactor, ReactionTrigger Trigger) 
 
         if (w.Unit(Reactor).Controller is AiControlled)
         {
-            var choice = Ai.React(w.State, offer, Trigger, rules);
+            var choice = Ai.React(w.State, offer, rules);
             if (choice.Id == Reactions.Pass)
                 return;
             w.Emit(new Reacted(Reactor, choice.Id));

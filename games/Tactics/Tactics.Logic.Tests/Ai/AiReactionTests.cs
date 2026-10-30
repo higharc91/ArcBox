@@ -1,4 +1,5 @@
-using System.Collections.Immutable;
+using System.Text.Json;
+using ArcBox.Sdk;
 
 namespace Tactics.Logic.Tests;
 
@@ -48,7 +49,7 @@ public sealed class AiReactionTests
         var battle = Battle(TestSheets.Fighter);
         var (state, _) = battle.Start();
         var offer = OfferTo("gob", state, leaving, battle.Rules);
-        Assert.Equal(Reactions.Opportunity, Ai.React(state, offer, leaving, battle.Rules).Id);
+        Assert.Equal(Reactions.Opportunity, Ai.React(state, offer, battle.Rules).Id);
         var (after, events) = battle.Apply(state, new Move(U("kara"), [T(0, 1), T(0, 0)]));
         Assert.Equal(new Reacted(U("gob"), Reactions.Opportunity), events[0]);
         Assert.False(after.Units[U("gob")].Economy.Reaction);
@@ -57,7 +58,7 @@ public sealed class AiReactionTests
         var immune = Battle(TestSheets.Fighter with { Immune = Ordinal.Set("slashing") });
         (state, _) = immune.Start();
         offer = OfferTo("gob", state, leaving, immune.Rules);
-        Assert.Equal(Reactions.Pass, Ai.React(state, offer, leaving, immune.Rules).Id);
+        Assert.Equal(Reactions.Pass, Ai.React(state, offer, immune.Rules).Id);
         (after, events) = immune.Apply(state, new Move(U("kara"), [T(0, 1), T(0, 0)]));
         Assert.DoesNotContain(events, e => e is Reacted or ReactionOffered or Rolled);
         Assert.True(after.Units[U("gob")].Economy.Reaction);
@@ -92,7 +93,7 @@ public sealed class AiReactionTests
         // A 15 against AC 12 hits by 3: +5 AC turns it into a miss.
         var (battle, state) = MageAttacked();
         var trigger = new ReactionTrigger(ReactionTriggerKind.BeforeHit, U("kara"), U("mage"), Attack, Hit(10, 5, 12));
-        var choice = Ai.React(state, OfferTo("mage", state, trigger, battle.Rules), trigger, battle.Rules);
+        var choice = Ai.React(state, OfferTo("mage", state, trigger, battle.Rules), battle.Rules);
         Assert.Equal("wizard.shield", choice.Id);
 
         // In play: Kara rolls 8-11 (13-16 against AC 12), the mage casts Shield without being asked and the hit misses.
@@ -113,7 +114,7 @@ public sealed class AiReactionTests
         ReactionChoice React(RollResult roll)
         {
             var trigger = new ReactionTrigger(ReactionTriggerKind.BeforeHit, U("kara"), U("mage"), Attack, roll);
-            return Ai.React(state, OfferTo("mage", state, trigger, battle.Rules), trigger, battle.Rules);
+            return Ai.React(state, OfferTo("mage", state, trigger, battle.Rules), battle.Rules);
         }
 
         // Hit by 5 or more (+5 AC still hits), or a natural 20: Shield would change nothing, and a longsword (about 7.5,
@@ -130,6 +131,37 @@ public sealed class AiReactionTests
         Assert.Equal(1, after.Units[U("mage")].Resources["mana"]);
         Assert.True(after.Units[U("mage")].Economy.Reaction);
         Assert.True(after.Units[U("mage")].Hp < 40);
+    }
+
+    [Fact]
+    public void A_saved_offer_is_answered_the_same_after_reloading()
+    {
+        // A player's mage (Shield, 1 Mana) is hit by a goblin roll of 8-12 (12-16 against AC 12): the battle pauses on the
+        // offer. Saved and reloaded, the offer still carries its trigger, so the adapter's fallback (Ai.React on the pending
+        // offer) answers it as before: Shield, and the hit misses.
+        var shield = A("wizard.shield");
+        var mage = TestSheets.Cleric with
+        {
+            Ac = 12, MaxHp = 40, CastingStat = "Int", Resources = Ordinal.Map(("mana", 1)), Abilities = [shield.Id],
+        };
+        var battle = On().With(shield)
+            .Party("mage", mage, T(0, 1))
+            .Enemy("gob", TestSheets.Goblin, T(1, 1), new AiControlled("brute"));
+        var (state, _) = battle.Start(SeedRolling(d20 => d20 is >= 8 and <= 12));
+        var (paused, _) = battle.Apply(state, new Use(U("gob"), Attack, new Target(Unit: U("mage"))));
+        var offer = Assert.IsType<ReactionOffer>(paused.Pending);
+        Assert.Equal(ReactionTriggerKind.BeforeHit, offer.Cause?.Kind);
+
+        var json = JsonSerializer.Serialize(paused, ArcJson.Options);
+        var loaded = JsonSerializer.Deserialize<BattleState>(json, ArcJson.Options)!;
+        Assert.Equal(json, JsonSerializer.Serialize(loaded, ArcJson.Options));
+        var before = Ai.React(paused, offer, battle.Rules);
+        var after = Ai.React(loaded, Assert.IsType<ReactionOffer>(loaded.Pending), battle.Rules);
+
+        Assert.Equal("wizard.shield", before.Id);
+        Assert.Equal(before, after);
+        var (_, events) = battle.Apply(loaded, new React(U("mage"), after));
+        Assert.Contains(new AttackResolved(U("gob"), U("mage"), Hit: false, Crit: false), events);
     }
 
     // ---- Damage-reducing reactions ----------------------------------------------------------------------------------
@@ -151,7 +183,7 @@ public sealed class AiReactionTests
             var battle = Battle(weapon);
             var state = battle.Start().State;
             var trigger = new ReactionTrigger(ReactionTriggerKind.BeforeHit, U("kara"), U("vex"), Attack, Hit(16, 5, 14));
-            return Ai.React(state, OfferTo("vex", state, trigger, battle.Rules), trigger, battle.Rules);
+            return Ai.React(state, OfferTo("vex", state, trigger, battle.Rules), battle.Rules);
         }
 
         // A longsword hit (1d8 + 3, 7.5) is less than 8 HP saved: pass. A greataxe-sized blow (2d12 + 3, 16) loses 8.5 of

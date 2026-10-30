@@ -19,7 +19,8 @@ public static class Ai
 
     /// <summary>
     /// The answer to <paramref name="offer"/> (one of its options) for an AI-controlled reactor, or for a player who didn't
-    /// answer in time (spec §5.5). Of the options, in this order:
+    /// answer in time (spec §5.5: the adapter answers the pending offer with it), judged on the offer's
+    /// <see cref="ReactionOffer.Cause"/> (an offer without one is passed). Of the options, in this order:
     /// <list type="number">
     /// <item>A defensive reaction (an ability aimed at the reactor itself) to a <see cref="ReactionTriggerKind.BeforeHit"/>
     /// on the reactor, when it turns the pending hit into a miss against the known roll (the AC it adds, from
@@ -28,16 +29,18 @@ public static class Ai
     /// the reactor has, up to that damage). The one that turns the hit into a miss first, then the one preventing most.</item>
     /// <item>The opportunity attack, or another reaction aimed at the actor (a rebuke, a counterspell), when its expected
     /// value is above 0: what it is worth to the reactor's profile (<see cref="AiProfile.For"/>) less what its resources
-    /// cost (<see cref="AiProfile.Spend"/>). A counterspell is worth what the spell being cast is worth to its caster, times
-    /// the chance of countering it (a check above <see cref="Counterspell.SureTier"/>). The best one.</item>
+    /// cost (<see cref="AiProfile.Spend"/>). A counterspell is worth what the spell being cast (the cause's ability) is worth
+    /// to its caster, its queued effects on units and on tiles alike, times the chance of countering it (a check above
+    /// <see cref="Counterspell.SureTier"/>). The best one.</item>
     /// <item>Otherwise <see cref="Reactions.Pass"/>.</item>
     /// </list>
     /// Ties go to the earlier option. Rolls nothing.
     /// </summary>
-    public static ReactionChoice React(BattleState s, ReactionOffer offer, ReactionTrigger trigger, RulesPack rules)
+    public static ReactionChoice React(BattleState s, ReactionOffer offer, RulesPack rules)
     {
         var pass = offer.Options.FirstOrDefault(o => o.Id == Reactions.Pass) ?? new ReactionChoice(Reactions.Pass, null, null);
-        if (!s.Units.TryGetValue(offer.Reactor, out var reactor) || !s.Units.TryGetValue(trigger.Actor, out var actor))
+        if (offer.Cause is not { } trigger || !s.Units.TryGetValue(offer.Reactor, out var reactor)
+            || !s.Units.TryGetValue(trigger.Actor, out var actor))
             return pass;
         var scorer = new Scorer(s, rules);
         var profile = AiProfile.For(s, reactor.Id, rules);
@@ -128,34 +131,38 @@ public static class Ai
     {
         var cost = opportunity ? 0 : profile.Spend(reactor, ability.Cost, item: false);
         if (Scorer.All(ability.Effects).Any(e => e is TransformEffect { Hook: "counterspell" }))
-            return trigger.Kind == ReactionTriggerKind.SpellCast ? Countering(scorer, profile, reactor, target) - cost : 0;
+            return trigger is { Kind: ReactionTriggerKind.SpellCast, Ability: { } spell }
+                ? Countering(scorer, profile, reactor, target, spell) - cost
+                : 0;
         var effects = ability.Effects.IsDefault ? [] : ability.Effects;
         var outcome = scorer.Walk(effects, new Strike(scorer.W, reactor, ability, target.Pos, neutral: false), target);
         return scorer.Worth(reactor, target, outcome, profile) - cost;
     }
 
     /// <summary>
-    /// What countering <paramref name="caster"/>'s spell is worth: the spell's queued effects on each unit, as their worth
-    /// to the caster, times the chance <paramref name="reactor"/> counters it.
+    /// What countering <paramref name="caster"/>'s <paramref name="spellId"/> is worth: its effects still queued (its unit
+    /// runs as their worth to the caster on each unit, its tile runs as <see cref="Scorer.TileWorth"/> at their aim), times
+    /// the chance <paramref name="reactor"/> counters it.
     /// </summary>
-    private static double Countering(Scorer scorer, AiProfile profile, UnitState reactor, UnitState caster)
+    private static double Countering(Scorer scorer, AiProfile profile, UnitState reactor, UnitState caster, AbilityId spellId)
     {
-        var rules = scorer.Rules;
+        if (!scorer.Rules.Abilities.TryGetValue(spellId, out var spell) || spell.Tier < 1)
+            return 0;
         var units = scorer.State.Units;
-        AbilityDef? spell = null;
         var worth = 0.0;
         foreach (var step in scorer.State.Queue.OfType<RunEffectsStep>())
         {
-            if (step is not { HookDepth: 0, Ability: { } id } || step.Source != caster.Id
-                || !rules.Abilities.TryGetValue(id, out var ability) || ability.Tier < 1 || spell is not null && ability != spell)
+            if (step is not { HookDepth: 0 } || step.Source != caster.Id || step.Ability != spellId)
                 continue;
-            spell = ability;
-            if (step.Target is { } t && units.TryGetValue(t, out var target))
-                worth += scorer.Worth(caster, target,
-                    scorer.Walk(step.Effects, new Strike(scorer.W, caster, ability, step.Aim, neutral: false), target), profile);
+            var st = new Strike(scorer.W, caster, spell, step.Aim, neutral: false);
+            if (step.Target is { } t)
+            {
+                if (units.TryGetValue(t, out var target))
+                    worth += scorer.Worth(caster, target, scorer.Walk(step.Effects, st, target), profile);
+            }
+            else if (step.Aim is { } aim)
+                worth += step.Effects.Sum(e => scorer.TileWorth(e, st, aim, profile));
         }
-        if (spell is null)
-            return 0;
         var chance = spell.Tier <= Counterspell.SureTier
             ? 1
             : Math.Clamp((21 - (10 + spell.Tier - EffectContext.CastingModifierOf(reactor.Sheet))) / 20.0, 0, 1);

@@ -37,8 +37,10 @@ public sealed class ReactionTests
         return Assert.IsType<Rejection>(resolution.Rejected);
     }
 
-    private static ReactionOffer OpportunityOffer(string reactor, string mover)
-        => new(U(reactor), [Pass, new ReactionChoice("opportunity", Attack, U(mover))], "leavesReach");
+    /// <summary>The offer of an opportunity attack on <paramref name="mover"/> stepping out of reach onto <paramref name="to"/>.</summary>
+    private static ReactionOffer OpportunityOffer(string reactor, string mover, Tile to)
+        => new(U(reactor), [Pass, new ReactionChoice("opportunity", Attack, U(mover))], "leavesReach",
+            new ReactionTrigger(ReactionTriggerKind.LeavesReach, U(mover), null, null, null, to));
 
     /// <summary>The goblin (active) is next to the player fighter at (0, 1) and walks away east, two tiles.</summary>
     private static (TestBattle Battle, BattleState Paused, ImmutableArray<BattleEvent> Events) GoblinWalksAway(
@@ -59,7 +61,7 @@ public sealed class ReactionTests
         var (battle, paused, events) = GoblinWalksAway();
 
         var offer = Assert.IsType<ReactionOffer>(paused.Pending);
-        Assert.Equal(Json<Pending>(OpportunityOffer("kara", "gob")), Json<Pending>(offer));
+        Assert.Equal(Json<Pending>(OpportunityOffer("kara", "gob", T(2, 1))), Json<Pending>(offer));
         Assert.Equal(Json([new ReactionOffered(offer)]), Json(events));
 
         // Nothing has moved or been spent yet; the rest of the move waits on the queue.
@@ -287,7 +289,7 @@ public sealed class ReactionTests
         Assert.Equal(U("gob"), state.Active);
 
         var (first, firstEvents) = battle.Apply(state, new Move(U("gob"), [T(1, 1), T(2, 1), T(3, 1)]));
-        Assert.Equal(Json<Pending>(OpportunityOffer("ari", "gob")), Json(first.Pending));
+        Assert.Equal(Json<Pending>(OpportunityOffer("ari", "gob", T(2, 1))), Json(first.Pending));
         Assert.Single(firstEvents);
 
         // Only the offered unit may answer, and only with an offered choice.
@@ -296,7 +298,7 @@ public sealed class ReactionTests
             Rejected(battle, first, new React(U("ari"), new ReactionChoice("fireball", null, null))).Code);
 
         var (second, secondEvents) = battle.Apply(first, new React(U("ari"), Pass));
-        var offer = OpportunityOffer("kara", "gob");
+        var offer = OpportunityOffer("kara", "gob", T(2, 1));
         Assert.Equal(Json([new Reacted(U("ari"), "pass"), new ReactionOffered(offer)]), Json(secondEvents));
         Assert.Equal(T(1, 1), second.Units[U("gob")].Pos);
 
@@ -374,7 +376,7 @@ public sealed class ReactionTests
             new Fell(U("gob"), 4, 3, false),
             new Collided(U("gob"), null, 2),
             new Teleported(U("kara"), T(0, 1), T(4, 1)),
-            new ReactionOffered(OpportunityOffer("kara", "gob")),
+            new ReactionOffered(OpportunityOffer("kara", "gob", T(2, 1))),
             new Reacted(U("kara"), "pass"),
         ];
 
@@ -403,12 +405,13 @@ public sealed class ReactionTests
         var offers = Reactions.OffersFor(w, new ReactionTrigger(ReactionTriggerKind.BeforeHit, U("gob"), U("kara"), Attack, null), battle.Rules);
 
         var offer = Assert.Single(offers);
-        Assert.Equal(Json<Pending>(new ReactionOffer(U("kara"), [Pass, new ReactionChoice("test.shield", shield.Id, U("kara"))], "beforeHit")),
+        Assert.Equal(Json<Pending>(new ReactionOffer(U("kara"), [Pass, new ReactionChoice("test.shield", shield.Id, U("kara"))], "beforeHit",
+                new ReactionTrigger(ReactionTriggerKind.BeforeHit, U("gob"), U("kara"), Attack, null))),
             Json<Pending>(offer));
 
         // A leavesReach trigger doesn't match the tag, and only the opportunity attack is offered.
         var leaving = Reactions.OffersFor(w, new ReactionTrigger(ReactionTriggerKind.LeavesReach, U("gob"), null, null, null, T(2, 1)), battle.Rules);
-        Assert.Equal(Json<Pending>(OpportunityOffer("kara", "gob")), Json<Pending>(Assert.Single(leaving)));
+        Assert.Equal(Json<Pending>(OpportunityOffer("kara", "gob", T(2, 1))), Json<Pending>(Assert.Single(leaving)));
 
         // No reaction left: nothing.
         var kara = w.Unit(U("kara"));
@@ -438,9 +441,11 @@ public sealed class ReactionTests
 
         var (paused, events) = battle.Apply(state, new Use(U("gob"), Attack, new Target(Unit: U("kara"))));
 
-        Assert.True(Assert.IsType<Rolled>(events[1]).Result.Success);
+        var roll = Assert.IsType<Rolled>(events[1]).Result;
+        Assert.True(roll.Success);
         var shield = new ReactionChoice("test.shield", ShieldSpell.Id, U("kara"));
-        var offer = new ReactionOffer(U("kara"), [Pass, shield], "beforeHit");
+        var offer = new ReactionOffer(U("kara"), [Pass, shield], "beforeHit",
+            new ReactionTrigger(ReactionTriggerKind.BeforeHit, U("gob"), U("kara"), Attack, roll));   // the offer carries its trigger
         Assert.Equal(Json<BattleEvent>(new ReactionOffered(offer)), Json(events[2]));
         Assert.Equal(Json<Pending>(offer), Json<Pending>(paused.Pending!));
         Assert.DoesNotContain(events, e => e is Damaged);
@@ -504,7 +509,8 @@ public sealed class ReactionTests
         var (state, _) = battle.Start();
 
         var (paused, events) = battle.Apply(state, new Use(U("gob"), hex.Id, new Target(Unit: U("kara"))));
-        var offer = new ReactionOffer(U("kara"), [Pass, new ReactionChoice("test.counter", counter.Id, U("gob"))], "spellCast");
+        var offer = new ReactionOffer(U("kara"), [Pass, new ReactionChoice("test.counter", counter.Id, U("gob"))], "spellCast",
+            new ReactionTrigger(ReactionTriggerKind.SpellCast, U("gob"), U("kara"), hex.Id, null));
         Assert.Equal(Json(
         [
             new AbilityUsed(U("gob"), hex.Id, new Target(Unit: U("kara")), null),

@@ -178,7 +178,7 @@ internal sealed partial class Planner
                 value += _scorer.Worth(me, target, _scorer.Walk(unitEffects, st, target), _p);
             }
         foreach (var effect in tileEffects)
-            value += TileValue(effect, st, aim);
+            value += _scorer.TileWorth(effect, st, aim, _p);
         if (ability.Cost.Concentration && me.Concentrating is not null)
             value -= 2;
         return value;
@@ -204,52 +204,5 @@ internal sealed partial class Planner
         var outcome = _scorer.Walk(UnitEffects(c.Usable!.Ability, me), new Strike(w, me, c.Usable.Ability, c.Action!.Aim, neutral: false),
             target);
         return outcome.Damage.AtLeast(Math.Max(1, target.Hp + target.TempHp)) > 0;
-    }
-
-    /// <summary>
-    /// A tile block's worth at the aim: a zone's turn-start and enter effects on the units in it now (enter effects at half,
-    /// as units already there don't enter it), a difficult zone slowing foes in it, a hazard's enter effects at half, and
-    /// a summon's damage per round for two rounds per unit summoned.
-    /// </summary>
-    private double TileValue(EffectDef effect, Strike st, Tile aim)
-    {
-        switch (effect)
-        {
-            case ZoneEffect zone:
-                {
-                    var tiles = Areas.Tiles(zone.Area, st.From, aim, _scorer.Terrain).ToImmutableSortedSet();
-                    var rounds = Math.Min(3, zone.Rounds ?? 3);
-                    var value = 0.0;
-                    foreach (var unit in st.W.State.Units.Values.Where(u => DownedRules.InBattle(u) && tiles.Contains(u.Pos)))
-                    {
-                        foreach (var passive in zone.Passives.IsDefault ? [] : zone.Passives)
-                        {
-                            var weight = passive.Hook switch
-                            {
-                                HookKind.OnTurnStart => rounds,
-                                HookKind.OnEnterTile => 0.5,
-                                _ => 0,
-                            };
-                            if (weight > 0 && passive.Target == PassiveTarget.Self && !passive.Effects.IsDefaultOrEmpty)
-                                value += weight * _scorer.Worth(st.User, unit, _scorer.Walk(passive.Effects, st, unit), _p);
-                        }
-                        if (zone.Difficult && Scorer.Hostile(st.User, unit) && unit.Life == LifeState.Up)
-                            value += 0.3 * _p.Control;
-                    }
-                    return value;
-                }
-            case HazardEffect hazard:
-                {
-                    var tiles = Areas.Tiles(hazard.Area, st.From, aim, _scorer.Terrain).ToImmutableSortedSet();
-                    return st.W.State.Units.Values.Where(u => DownedRules.InBattle(u) && tiles.Contains(u.Pos))
-                        .Sum(u => 0.5 * _scorer.Worth(st.User, u, _scorer.Walk(hazard.OnEnter, st, u), _p));
-                }
-            case SummonEffect summon:
-                return _rules.MonsterSheet(summon.Monster) is { } sheet
-                    ? summon.Count * 2 * (1 + sheet.Attacks * Math.Max(0, sheet.Weapon.Damage.Average)) * 0.5 * _p.Damage
-                    : 0;
-            default:
-                return 0;
-        }
     }
 }
