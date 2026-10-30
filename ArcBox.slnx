@@ -11,6 +11,10 @@
     <Project Path="games/Redline/Redline.Presentation/Redline.Presentation.csproj" />
     <Project Path="games/Redline/tools/Redline.Sim/Redline.Sim.csproj" />
   </Folder>
+  <Folder Name="/games/Tactics/">
+    <Project Path="games/Tactics/Tactics.Logic.Tests/Tactics.Logic.Tests.csproj" />
+    <Project Path="games/Tactics/Tactics.Logic/Tactics.Logic.csproj" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/ArcBox.Host.Core.Tests/ArcBox.Host.Core.Tests.csproj" />
     <Project Path="src/ArcBox.Host.Core/ArcBox.Host.Core.csproj" />
