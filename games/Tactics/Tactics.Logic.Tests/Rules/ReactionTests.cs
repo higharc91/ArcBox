@@ -473,7 +473,8 @@ public sealed class ReactionTests
         Assert.Equal(new AttackResolved(U("gob"), U("kara"), Hit: true, Crit: false), passed[1]);
         Assert.IsType<Damaged>(passed[^1]);
 
-        // An AI target with the same reaction isn't offered it (Task 15 decides): the attack resolves at once.
+        // An AI target with the same reaction isn't offered it (Ai.React decides, see AiReactionTests): the attack resolves
+        // at once.
         var reversed = TestBattle.On(Field)
             .Party("kara", Fighter with { InitiativeBonus = 10 }, T(0, 1))
             .Enemy("gob", Goblin with { Abilities = [ShieldSpell.Id] }, T(1, 1))
@@ -481,7 +482,8 @@ public sealed class ReactionTests
         (state, _) = reversed.Start(seed);
         (after, events) = reversed.Apply(state, new Use(U("kara"), Attack, new Target(Unit: U("gob"))));
         Assert.Null(after.Pending);
-        Assert.DoesNotContain(events, e => e is ReactionOffered or Reacted);
+        Assert.DoesNotContain(events, e => e is ReactionOffered);
+        Assert.Contains(events, e => e is AttackResolved);
     }
 
     [Fact]

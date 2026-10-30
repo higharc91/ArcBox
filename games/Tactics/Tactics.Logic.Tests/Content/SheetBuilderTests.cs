@@ -238,6 +238,7 @@ public sealed class SheetBuilderTests
         Assert.Equal(["acrobatics", "arcana", "history", "stealth"], sheet.Skills);   // the background's two, then the first two on the class list
         Assert.Equal(0, sheet.Xp);
         Assert.Contains("humanoid", sheet.Tags);
+        Assert.Contains("class:rogue", sheet.Tags);   // the AI reads the class's aiTags by it
     }
 
     // ---- Picks ------------------------------------------------------------------------------------------------------

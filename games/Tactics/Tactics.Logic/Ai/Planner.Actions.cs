@@ -16,7 +16,8 @@ internal sealed partial class Planner
 
     /// <summary>
     /// What the unit can use: its sheet's abilities and the built-in <c>common.*</c> actions it can pay for (in id order),
-    /// and with <see cref="AiOptions.AllowItems"/> the items in its bag. Reactions are left out.
+    /// and with <see cref="AiOptions.AllowItems"/> the items in its bag (for a companion, only the ones
+    /// <see cref="Companion.MayUse"/> allows). Reactions are left out.
     /// </summary>
     private ImmutableArray<Usable> Usables()
     {
@@ -29,8 +30,8 @@ internal sealed partial class Planner
                 usables.Add(u);
         if (_options.AllowItems)
             foreach (var stack in _me.Bag.Where(b => b.Count > 0).DistinctBy(b => b.Item).OrderBy(b => b.Item))
-                if (_rules.Items.TryGetValue(stack.Item, out var item) && _rules.Abilities.TryGetValue(item.Use, out var ability)
-                    && UsableOf(ability, Battle.UseItem, item.Id) is { } u)
+                if (_rules.Items.TryGetValue(stack.Item, out var item) && (!_companion || Companion.MayUse(item, _me))
+                    && _rules.Abilities.TryGetValue(item.Use, out var ability) && UsableOf(ability, Battle.UseItem, item.Id) is { } u)
                     usables.Add(u);
         return usables.ToImmutable();
     }
@@ -66,21 +67,15 @@ internal sealed partial class Planner
     private static bool Affordable(UnitState me, Usable usable) => Battle.CostRefusal(me, usable.Ability) is null;
 
     /// <summary>
-    /// What spending <paramref name="usable"/>'s resources costs: hoard × 10 × the share of each pool it takes (a per-battle
-    /// use is a share of its uses); an item is worth half a pool.
+    /// False for a companion's item used anywhere but on itself, or on a tile where the threat map doesn't say it would be
+    /// Downed next round (<see cref="Companion.WouldDrop"/>); true for anything else.
     /// </summary>
-    private double Hoard(Usable usable)
-    {
-        var cost = usable.Ability.Cost;
-        var share = 0.0;
-        foreach (var (name, amount) in cost.Resource ?? Ordinal.Map<int>())
-            share += (double)amount / Math.Max(1, Math.Max(_me.Sheet.Resources.GetValueOrDefault(name), _me.Resources.GetValueOrDefault(name)));
-        if (cost.Uses is { } uses)
-            share += 1.0 / Math.Max(1, uses);
-        if (usable.Item is not null)
-            share += 0.5;
-        return _p.Hoard * 10 * share;
-    }
+    private bool ItemOk(Usable usable, Tile at, Action action)
+        => usable.Item is null || !_companion
+           || (action.Target.Unit is not { } unit || unit == _me.Id) && Companion.WouldDrop(_threat, _me, at);
+
+    /// <summary>What spending <paramref name="usable"/>'s resources costs (<see cref="AiProfile.Spend"/>).</summary>
+    private double Hoard(Usable usable) => _p.Spend(_me, usable.Ability.Cost, usable.Item is not null);
 
     /// <summary>The unit as it would be on <paramref name="t"/>, having walked there.</summary>
     private UnitState Moved(Tile t) => Hypo(t).State.Units[_me.Id];

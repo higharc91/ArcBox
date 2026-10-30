@@ -14,7 +14,7 @@ public sealed class BasePackTests
 
     private static readonly string[] Classes = ["cleric", "fighter", "rogue", "wizard"];
 
-    private static readonly string[] AiProfiles = ["archer", "boss", "boss_cruel", "brute", "caster", "coward", "healer", "skirmisher"];
+    private static readonly string[] AiProfiles = ["archer", "boss", "boss_cruel", "brute", "caster", "companion", "coward", "healer", "skirmisher"];
 
     private static UnitId U(string id) => new(id);
 

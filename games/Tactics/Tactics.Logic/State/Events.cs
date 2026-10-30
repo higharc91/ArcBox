@@ -43,7 +43,15 @@ namespace Tactics.Logic;
 [JsonDerivedType(typeof(Marked), nameof(Marked))]
 [JsonDerivedType(typeof(TempHpGained), nameof(TempHpGained))]
 [JsonDerivedType(typeof(Countered), nameof(Countered))]
-public abstract record BattleEvent;
+public abstract record BattleEvent
+{
+    /// <summary>
+    /// True on the events of a turn the AI finished for a player whose time ran out (spec §5.5), so the TV can show the
+    /// badge: <see cref="Battle.Apply"/> with <c>aiFinished</c> sets it. Left out of the JSON when false.
+    /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public bool AiFinished { get; init; }
+}
 
 /// <summary>A new round began with this turn order.</summary>
 public sealed record RoundStarted(int Round, ImmutableArray<UnitId> Order) : BattleEvent;

@@ -22,6 +22,9 @@ public sealed record CharacterRecord(string Name, string Race, string Class, str
 /// </summary>
 public static class SheetBuilder
 {
+    /// <summary>The prefix of the sheet tag that names a character's class: <c>"class:cleric"</c>.</summary>
+    public const string ClassTag = "class:";
+
     private const int MaxLevel = 10;
     private const int MaxScore = 20;
     private static readonly int[] StandardArray = [15, 14, 13, 12, 10, 8];
@@ -43,7 +46,8 @@ public static class SheetBuilder
     /// A <c>resourceRegen</c> feature isn't part of the sheet.</item>
     /// <item>Resources are the class's tables at the level, with its primary resource. Saves are the class's. Skills are the
     /// background's two and the first few of the class's list (its skill choice count, plus the race's extra skills).</item>
-    /// <item>Tags are <c>humanoid</c> and the race id. There is no sprite: the portal draws a character from its creator look.</item>
+    /// <item>Tags are <c>humanoid</c>, the race id and the class (<see cref="ClassTag"/> + its id, which the AI reads the
+    /// class's <c>aiTags</c> by). There is no sprite: the portal draws a character from its creator look.</item>
     /// </list>
     /// Throws <see cref="ContentException"/> with every bad id: race, class, subclass, background, weapon, armour, injuries,
     /// bag items and picks, and a level outside 1–10. A pick must be offered by a <c>choose</c> feature of the class or
@@ -141,7 +145,7 @@ public static class SheetBuilder
             Skills: Ordinal.Set(skills),
             Resources: Ordinal.Map(cls.Resources.Select(r => (r.Key, r.Value.At(c.Level)))),
             Abilities: [.. abilities.Distinct()], Passives: [.. passives.Distinct()], Weapon: weapon, Attacks: attacks,
-            Resist: race.Resist, Immune: Ordinal.Set(), Vulnerable: Ordinal.Set(), Tags: Ordinal.Set("humanoid", race.Id),
+            Resist: race.Resist, Immune: Ordinal.Set(), Vulnerable: Ordinal.Set(), Tags: Ordinal.Set("humanoid", race.Id, ClassTag + cls.Id),
             Sprite: null, AiProfile: null, CastingStat: cls.CastingStat?.ToString(), PrimaryResource: cls.PrimaryResource);
     }
 

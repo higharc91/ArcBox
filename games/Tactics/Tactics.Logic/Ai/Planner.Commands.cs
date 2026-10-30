@@ -94,7 +94,7 @@ internal sealed partial class Planner
             var hoard = Hoard(usable);
             foreach (var action in Actions(usable, me.Pos, state))
             {
-                if (action.Target.Unit is { } unit && leaving.Contains(unit))
+                if (action.Target.Unit is { } unit && leaving.Contains(unit) || !ItemOk(usable, me.Pos, action))
                     continue;
                 if (Round(action.Value - hoard) > Round(bestScore))
                     (best, bestScore) = (new Use(_me.Id, usable.Command, action.Target, usable.Item), action.Value - hoard);

@@ -126,9 +126,8 @@ public static class Reactions
 /// Opens one reactor's reaction window for <see cref="Trigger"/>, re-checking that it may still react (an earlier
 /// reaction may have changed things). A player-controlled reactor gets the <see cref="ReactionOffer"/> as
 /// <see cref="BattleState.Pending"/> (<see cref="ReactionOffered"/>) and the queue pauses until its <see cref="React"/>.
-/// An AI-controlled reactor is never offered: it takes an opportunity attack whenever it has one and otherwise passes
-/// silently, including every <see cref="ReactionTriggerKind.BeforeHit"/> and <see cref="ReactionTriggerKind.SpellCast"/>
-/// window (Task 15 replaces this with the AI's reaction policy).
+/// An AI-controlled reactor is never offered: <see cref="Ai.React"/> decides at once, and a taken reaction emits
+/// <see cref="Reacted"/> and resolves; a pass is silent.
 /// </summary>
 public sealed record OfferReactionStep(UnitId Reactor, ReactionTrigger Trigger) : Step
 {
@@ -141,10 +140,11 @@ public sealed record OfferReactionStep(UnitId Reactor, ReactionTrigger Trigger) 
 
         if (w.Unit(Reactor).Controller is AiControlled)
         {
-            if (offer.Options.FirstOrDefault(o => o.Id == Reactions.Opportunity) is not { } attack)
+            var choice = Ai.React(w.State, offer, Trigger, rules);
+            if (choice.Id == Reactions.Pass)
                 return;
-            w.Emit(new Reacted(Reactor, attack.Id));
-            w.PushFront(new ReactionStep(Reactor, attack));
+            w.Emit(new Reacted(Reactor, choice.Id));
+            w.PushFront(new ReactionStep(Reactor, choice));
             return;
         }
 

@@ -46,11 +46,34 @@ public static partial class Battle
     /// can't act). A refused command returns the same <paramref name="state"/> instance, no events and a
     /// <see cref="Rejection"/>; once the battle is over every command is refused with <see cref="RejectCode.BattleOver"/>.
     /// With <see cref="Invariants.Enabled"/>, the new state is checked (<see cref="Invariants.Check"/>).
+    /// <para>With <paramref name="aiFinished"/> (a command of the plan the AI made for a player whose time ran out, spec
+    /// §5.5), the command's events, up to and including the actor's <see cref="TurnEnded"/>, carry
+    /// <see cref="BattleEvent.AiFinished"/>; the next turn's events don't. An item it uses counts as the AI's
+    /// (<see cref="PayCostStep.ByAi"/>), as it does whenever an AI-controlled unit acts.</para>
     /// </summary>
-    public static Resolution Apply(BattleState state, Command command, RulesPack rules)
+    public static Resolution Apply(BattleState state, Command command, RulesPack rules, bool aiFinished = false)
     {
         var w = new BattleWriter(state, rules);
-        return Prepare(w, command, rules) is { } refused ? new Resolution(state, [], refused) : Settled(w, rules);
+        if (Prepare(w, command, rules, aiFinished) is { } refused)
+            return new Resolution(state, [], refused);
+        var resolution = Settled(w, rules);
+        return aiFinished ? resolution with { Events = Stamped(resolution.Events, command.Actor) } : resolution;
+    }
+
+    /// <summary>
+    /// <paramref name="events"/> with those up to and including <paramref name="actor"/>'s <see cref="TurnEnded"/> (all of
+    /// them, without one) flagged <see cref="BattleEvent.AiFinished"/>.
+    /// </summary>
+    private static ImmutableArray<BattleEvent> Stamped(ImmutableArray<BattleEvent> events, UnitId actor)
+    {
+        var stamped = events.ToBuilder();
+        for (var i = 0; i < stamped.Count; i++)
+        {
+            stamped[i] = stamped[i] with { AiFinished = true };
+            if (stamped[i] is TurnEnded ended && ended.Unit == actor)
+                break;
+        }
+        return stamped.ToImmutable();
     }
 
     /// <summary>
@@ -59,13 +82,14 @@ public static partial class Battle
     /// command against a state it only imagines.
     /// </summary>
     public static Rejection? Check(BattleState state, Command command, RulesPack rules)
-        => Prepare(new BattleWriter(state, rules), command, rules);
+        => Prepare(new BattleWriter(state, rules), command, rules, aiFinished: false);
 
     /// <summary>
     /// Validates <paramref name="command"/> and, if it is accepted, queues its steps on <paramref name="w"/> (rolling
     /// nothing); returns the rejection otherwise. A <see cref="React"/> goes to <see cref="PrepareReact"/>.
+    /// <paramref name="aiFinished"/> marks a command the AI chose for a timed-out player (see <see cref="Apply"/>).
     /// </summary>
-    private static Rejection? Prepare(BattleWriter w, Command command, RulesPack rules)
+    private static Rejection? Prepare(BattleWriter w, Command command, RulesPack rules, bool aiFinished)
     {
         var state = w.State;
         if (state.Outcome is not null)
@@ -88,7 +112,7 @@ public static partial class Battle
                 w.PushFront(new DelayStep(delay.Actor, to));
                 return null;
             case Use use:
-                return PlanUse(w, use, rules);
+                return PlanUse(w, use, rules, aiFinished);
             case Move move:
                 return Movement.Plan(w, move);
             default:
@@ -139,9 +163,10 @@ public static partial class Battle
     /// runs of consecutive blocks: a run of tile blocks (<see cref="EffectDef.OnTile"/>) runs once at the aim with no target
     /// unit, even when the area holds no units; a run of other blocks runs once per affected unit in sorted
     /// <see cref="UnitId"/> order (one <see cref="RunEffectsStep"/> each). So <c>[attack, teleport]</c> attacks every target,
-    /// then teleports. Returns the rejection otherwise, leaving the queue untouched.
+    /// then teleports. Returns the rejection otherwise, leaving the queue untouched. An item use is the AI's
+    /// (<see cref="PayCostStep.ByAi"/>) when the user is AI-controlled or <paramref name="aiFinished"/> is set.
     /// </summary>
-    private static Rejection? PlanUse(BattleWriter w, Use use, RulesPack rules)
+    private static Rejection? PlanUse(BattleWriter w, Use use, RulesPack rules, bool aiFinished)
     {
         var user = w.Unit(use.Actor);
         if (!Modifiers.CanAct(w.State, user.Id, rules))
@@ -166,7 +191,8 @@ public static partial class Battle
         if (ability.IsWeaponAttack)
             effects = [.. Enumerable.Repeat(effects, Math.Max(1, user.Sheet.Attacks)).SelectMany(e => e)];
 
-        var steps = new List<Step> { new PayCostStep(user.Id, ability.Id, use.Target, use.Item) };
+        var byAi = use.Item is not null && (aiFinished || user.Controller is AiControlled);
+        var steps = new List<Step> { new PayCostStep(user.Id, ability.Id, use.Target, use.Item, byAi) };
         for (var start = 0; start < effects.Length;)
         {
             var onTile = effects[start].OnTile;

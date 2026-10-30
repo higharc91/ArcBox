@@ -39,7 +39,8 @@ public sealed record AiProfile(string Id, double Damage, double Kill, double Con
     /// <summary>
     /// The profile <paramref name="unit"/> plays with: <paramref name="overrideId"/> if given, else its controller's
     /// (<see cref="AiControlled.Profile"/>), else its sheet's (<see cref="UnitSheet.AiProfile"/>), looked up in
-    /// <paramref name="rules"/>; <see cref="Default"/> (under the requested id) when the pack doesn't have it. Scaled for the
+    /// <paramref name="rules"/>; <see cref="Default"/> (under the requested id) when the pack doesn't have it. The
+    /// <c>companion</c> profile is weighted by the unit's class roles (spec §5.5: its class's <c>aiTags</c>). Scaled for the
     /// battle's difficulty.
     /// </summary>
     public static AiProfile For(BattleState state, UnitId unit, RulesPack rules, string? overrideId = null)
@@ -48,16 +49,38 @@ public sealed record AiProfile(string Id, double Damage, double Kill, double Con
         var id = overrideId ?? (u.Controller as AiControlled)?.Profile ?? u.Sheet.AiProfile;
         var profile = id is not null && rules.AiProfiles.TryGetValue(id, out var def) ? From(def)
             : Default with { Id = id ?? Default.Id };
+        if (Companion.Is(profile))
+            profile = Companion.Weigh(profile, u, rules);
         return profile.ForDifficulty(state.Difficulty);
+    }
+
+    /// <summary>
+    /// What spending <paramref name="cost"/> (and with <paramref name="item"/>, an item) costs <paramref name="unit"/> on
+    /// this profile: hoard × 10 × the share of each pool it takes (a per-battle use is a share of its uses); an item is worth
+    /// half a pool.
+    /// </summary>
+    internal double Spend(UnitState unit, CostDef cost, bool item)
+    {
+        var share = 0.0;
+        foreach (var (name, amount) in cost.Resource ?? Ordinal.Map<int>())
+            share += (double)amount / Math.Max(1, Math.Max(unit.Sheet.Resources.GetValueOrDefault(name), unit.Resources.GetValueOrDefault(name)));
+        if (cost.Uses is { } uses)
+            share += 1.0 / Math.Max(1, uses);
+        if (item)
+            share += 0.5;
+        return Hoard * 10 * share;
     }
 }
 
 /// <summary>
 /// How <see cref="Ai.Plan"/> may play a turn. <see cref="AllowItems"/> lets it use consumables from the unit's bag (off by
-/// default; companions are given their own item rules in Task 15). <see cref="AllowDelay"/> and
-/// <see cref="RemainingOnly"/> are for timed-out turns: the planner always works from what is left of the unit's turn
-/// (Move, Action, Bonus) and never delays, so a plan always ends with <see cref="EndTurn"/>. <see cref="ProfileOverride"/>
-/// names the profile to use instead of the unit's own.
+/// default; the adapter turns it on for absent players' characters, whose <c>companion</c> profile then allows only one
+/// healing item per battle, on itself, when it would otherwise be Downed: see <see cref="Companion"/>).
+/// <see cref="AllowDelay"/> and <see cref="RemainingOnly"/> describe a timed-out turn, and need nothing from the planner:
+/// it always works from what is left of the unit's turn (Move, Action, Bonus) and never delays, so a plan always ends with
+/// <see cref="EndTurn"/>. <see cref="ProfileOverride"/> names the profile to use instead of the unit's own. A timed-out turn
+/// is <c>new AiOptions(AllowItems: false, AllowDelay: false, RemainingOnly: true, ProfileOverride: "companion")</c>, and
+/// its commands are applied with <see cref="Battle.Apply"/>'s <c>aiFinished</c>.
 /// </summary>
 public sealed record AiOptions(bool AllowItems = false, bool AllowDelay = true, bool RemainingOnly = false,
     string? ProfileOverride = null);

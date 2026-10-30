@@ -16,6 +16,8 @@ namespace Tactics.Logic;
 /// "just move"; and Dash then move.</item>
 /// <item>The best bonus action, added greedily where the turn ends.</item>
 /// </list>
+/// With the Action already spent (a timed-out turn finishing what the player left), the bonus actions take the action's
+/// place in steps 3 and 4, so the move goes where the bonus action is worth most.
 /// Ties break on the ordinal (ability id, tile, target). Every command of the chosen plan is checked with
 /// <see cref="Battle.Check"/> against the state the plan expects at that point; a plan that fails is passed over.
 /// </summary>
@@ -29,6 +31,8 @@ internal sealed partial class Planner
     private readonly UnitState _me;
     private readonly AiProfile _p;
     private readonly AiOptions _options;
+    private readonly bool _companion;
+    private readonly bool _actionSpent;
     private readonly Scorer _scorer;
     private readonly bool _flee;
     private readonly ThreatMap _threat;
@@ -55,6 +59,8 @@ internal sealed partial class Planner
         _rules = rules;
         _me = me;
         _options = options;
+        _companion = Companion.Is(profile);
+        _actionSpent = !me.Economy.Action && me.Economy.ExtraActions <= 0;
         _scorer = new Scorer(s, rules, me.Id);
         _flee = profile.FleeBelowHp > 0 && me.Hp < profile.FleeBelowHp * me.Sheet.MaxHp;
         _p = _flee ? profile with { Damage = 0, Kill = 0, Control = 0, Caution = Math.Max(1, profile.Caution) * 2 } : profile;
@@ -110,12 +116,12 @@ internal sealed partial class Planner
         {
             var spot = _spots[t];
             var me = Moved(t);
-            foreach (var usable in _usables.Where(u => u.Phase == Phase.Main && !u.Dash && Affordable(me, u)))
+            foreach (var usable in _usables.Where(u => Leads(u) && Affordable(me, u)))
             {
                 var hoard = Hoard(usable);
                 var (arrive, escape) = Arrive(spot, usable.Ability.Cost.Bonus > 0 ? null : bonusEscape);
                 foreach (var action in Actions(usable, t))
-                    if (action.Value > Epsilon)
+                    if (action.Value > Epsilon && ItemOk(usable, t, action))
                         candidates.Add(new Candidate(Kind.MoveAct, arrive + action.Value - hoard, usable, action, t, t, escape,
                             action.Value - hoard, spot.Position));
             }
@@ -123,7 +129,7 @@ internal sealed partial class Planner
 
         // Act here, then move with what is left (only when the action leaves the map as it is).
         var byScore = _spots.Values.OrderByDescending(s => Round(s.Score)).ThenBy(s => s.Tile).ToArray();
-        foreach (var usable in _usables.Where(u => u.Phase == Phase.Main && !u.Dash && u.Stable && Affordable(_me, u)))
+        foreach (var usable in _usables.Where(u => Leads(u) && u.Stable && Affordable(_me, u)))
         {
             var hoard = Hoard(usable);
             var budget = _me.Economy.MoveLeft - usable.Ability.Cost.Move;
@@ -139,7 +145,7 @@ internal sealed partial class Planner
             if (best is null)
                 continue;
             foreach (var action in Actions(usable, here))
-                if (action.Value > Epsilon)
+                if (action.Value > Epsilon && ItemOk(usable, here, action))
                     candidates.Add(new Candidate(Kind.ActMove, bestArrive + action.Value - hoard, usable, action, here, best.Tile,
                         bestEscape, action.Value - hoard, best.Position));
         }
@@ -166,6 +172,12 @@ internal sealed partial class Planner
     }
 
     private enum Kind { MoveAct, ActMove, Move, DashMove }
+
+    /// <summary>
+    /// True for the abilities a turn is planned around: the action's (but not Dash, planned on its own), or with the Action
+    /// spent, the bonus action's (but not an escape, which only helps a move).
+    /// </summary>
+    private bool Leads(Usable u) => !u.Dash && (u.Phase == Phase.Main || _actionSpent && !u.Escape);
 
     /// <summary>
     /// A whole-turn plan before it is checked: its shape, total score, the ability and target, the tile it acts from, the

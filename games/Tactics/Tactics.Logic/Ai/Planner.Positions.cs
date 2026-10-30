@@ -28,7 +28,8 @@ internal sealed partial class Planner
     /// for a scratch, up to double when it could drop it) and by <see cref="_wariness"/>, high
     /// ground, setting up a flank for an ally, staying near an ally who heals while hurt, closing in (a little for each tile
     /// short of striking range, and half its damage per round for a tile it can strike a foe from next turn) or, fleeing,
-    /// getting away, and staying near a protected ally (the objective).
+    /// getting away, and staying near a protected ally (the objective). A companion also guards: standing next to a healer or
+    /// protected ally adds half the objective weight × the damage the foes threaten it with next round (capped at its HP).
     /// </summary>
     private double Position(Tile t)
     {
@@ -81,8 +82,23 @@ internal sealed partial class Planner
                                                          && DownedRules.InBattle(u)).ToArray();
         if (protectedAllies.Length > 0)
             score -= 0.1 * _p.Objective * Math.Max(0, protectedAllies.Min(u => Reach.Distance(u.Pos, t)) - 3);
+        foreach (var (pos, danger) in Guarded())
+            if (Reach.Distance(pos, t) <= 1)
+                score += 0.5 * _p.Objective * danger;
         return score;
     }
+
+    private ImmutableArray<(Tile Pos, double Danger)>? _guarded;
+
+    /// <summary>
+    /// For a companion, the allies it guards (spec §5.5: the healer and protected NPCs: <see cref="Companion.HealerRole"/>
+    /// in their class's roles, or protected) that the foes threaten, with that threat (capped at their HP); none otherwise.
+    /// </summary>
+    private ImmutableArray<(Tile Pos, double Danger)> Guarded() => _guarded ??= !_companion ? [] : [.. _s.Units.Values
+        .Where(u => u.Id != _me.Id && u.Life == LifeState.Up && !Scorer.Hostile(_me, u)
+                    && (u.Protected || Companion.RoleTags(u, _rules).Contains(Companion.HealerRole)))
+        .Select(u => (u.Pos, Danger: Math.Min(_scorer.ThreatAgainst(u.Sheet.Side).At(u.Pos), u.Hp + u.TempHp)))
+        .Where(g => g.Danger > 0)];
 
     private ImmutableArray<(UnitState Unit, int Reach)>? _healers;
 
