@@ -13,6 +13,8 @@ When every task is done, one whole-branch review runs.
 
 **Branch:** `ccr-472d8660-sxpjlj`. Every task is committed and pushed there.
 
+**Handing off:** read [`2026-10-30-tactics-rules-engine.handoff.md`](2026-10-30-tactics-rules-engine.handoff.md) first. It has the workflow, the notes for each remaining task, every ruling, and the exact agent instructions.
+
 **How to resume:**
 1. Find the first task below that isn't `done`.
 2. Read its section in the plan, plus the **Rulings** and **Binding additions** below. They change or extend the plan text.
