@@ -379,7 +379,7 @@ public sealed partial class Room
             return null;
         }
 
-        return new CampaignView(info, _campaigns.DocumentOf(info.Id), rules);
+        return new CampaignView(info, _campaigns.DocumentOf(info.Id), rules, _logger);
     }
 
     private void EnsureCampaignLobby()
@@ -428,12 +428,27 @@ public sealed partial class Room
     private sealed record Offer(SeatOffer Seat, ProfileId? Profile);
 
     /// <summary>A campaign as the room sees it for one message: its info, current document and the game's rules.</summary>
-    private sealed record CampaignView(CampaignInfo Info, JsonElement Document, ICampaignRules Rules)
+    private sealed record CampaignView(CampaignInfo Info, JsonElement Document, ICampaignRules Rules, ILogger Logger)
     {
         public bool Has(ProfileId? profile) => profile is { } id && Info.Members.Any(m => m.Profile == id);
 
         public CampaignMember Member(ProfileId profile) => Info.Members.First(m => m.Profile == profile);
 
-        public SeatCard Card(ProfileId member) => Rules.CardFor(Info, Document, member);
+        /// <summary>
+        /// The game's card for <paramref name="member"/>. The game's code runs on the room's actor, so a CardFor that
+        /// throws is logged and the member's name stands in, rather than breaking every lobby broadcast.
+        /// </summary>
+        public SeatCard Card(ProfileId member)
+        {
+            try
+            {
+                return Rules.CardFor(Info, Document, member);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWarning(ex, "CardFor of game {GameId} threw for member {Member}; showing their name", Info.GameId, member);
+                return new SeatCard(Info.Members.FirstOrDefault(m => m.Profile == member)?.DisplayName ?? member.Value);
+            }
+        }
     }
 }

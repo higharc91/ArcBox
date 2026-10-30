@@ -1,4 +1,5 @@
 using ArcBox.Sdk;
+using ArcBox.Sdk.Campaigns;
 using ArcBox.Sdk.Protocol;
 using ArcBox.Server.Campaigns;
 using ArcBox.Server.Content;
@@ -9,6 +10,7 @@ using ArcBox.Server.Storage;
 using ArcBox.Server.Tests.Storage;
 using ArcBox.Server.Tests.TestGames;
 using Counter.Logic;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Time.Testing;
 
@@ -23,7 +25,10 @@ public sealed class RoomFixture : IAsyncDisposable
 
     /// <param name="ledger">The manifest <c>ledger</c> is registered with (it uses campaigns); the default is <see cref="LedgerGame.Campaign"/>.</param>
     /// <param name="seed">Runs against the empty database before the profile and campaign services load it.</param>
-    public RoomFixture(GameManifest? ledger = null, Action<ArcDb>? seed = null)
+    /// <param name="rules">The campaign rules for <c>ledger</c>; the default is <see cref="LedgerRules"/>.</param>
+    /// <param name="loggers">The rooms' loggers; the default logs nothing.</param>
+    public RoomFixture(GameManifest? ledger = null, Action<ArcDb>? seed = null, ICampaignRules? rules = null,
+        ILoggerFactory? loggers = null)
     {
         Time = new FakeTimeProvider(new DateTimeOffset(2026, 1, 1, 0, 0, 0, TimeSpan.Zero));
         Sender = new RecordingSender();
@@ -36,11 +41,11 @@ public sealed class RoomFixture : IAsyncDisposable
         _db = StorageTestSupport.NewMemoryDb();
         seed?.Invoke(_db);
         _writer = new StorageWriter(_db, Time, NullLogger<StorageWriter>.Instance);
-        var rules = new CampaignRulesRegistry([new LedgerRules()]);
+        var registered = new CampaignRulesRegistry([rules ?? new LedgerRules()]);
         Profiles = new ProfileService(_db, _writer, Time);
-        Campaigns = new CampaignService(_db, _writer, rules, Time, NullLogger<CampaignService>.Instance);
-        _services = new RoomServices(registry, Sender, Time, new RoomOptions(), Profiles, NullLoggerFactory.Instance,
-            Campaigns, rules, new RoomStore(_db, _writer, Time), ContentPackRegistry.Empty);
+        Campaigns = new CampaignService(_db, _writer, registered, Time, NullLogger<CampaignService>.Instance);
+        _services = new RoomServices(registry, Sender, Time, new RoomOptions(), Profiles, loggers ?? NullLoggerFactory.Instance,
+            Campaigns, registered, new RoomStore(_db, _writer, Time), ContentPackRegistry.Empty);
         Room = Run("TEST");
     }
 

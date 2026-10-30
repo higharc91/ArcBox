@@ -8,6 +8,7 @@ using ArcBox.Server.Storage;
 using ArcBox.Server.Tests.Storage;
 using ArcBox.Server.Tests.Support;
 using ArcBox.Server.Tests.TestGames;
+using Microsoft.Extensions.Logging;
 
 namespace ArcBox.Server.Tests.Rooms;
 
@@ -385,6 +386,59 @@ public class CampaignRoomTests
         await f.Room.SelectGameAsync("c1", "ledger"); // the same game again: the campaign stays selected
 
         Assert.Equal(["Ann", "Cy"], Lobby(f).Players.Select(p => p.Name));
+    }
+
+    // A game's rules code runs on the room's actor; a CardFor that throws mustn't break the lobby (F7).
+    [Fact]
+    public async Task Throwing_CardFor_falls_back_to_the_members_name()
+    {
+        var log = new WarningLog();
+        await using var f = new RoomFixture(rules: new CardlessRules(), loggers: log);
+        await f.HostAsync();
+        await f.JoinAsync("Ann", "c1");
+        await f.Room.SelectGameAsync("host", "ledger");
+
+        var key = await f.Room.CreateCampaignAsync("c1", "Embers");
+
+        var lobby = Lobby(f);
+        Assert.Equal("Embers", lobby.Campaign!.Name);
+        Assert.Equal(new RosterEntry(key.Id, new SeatCard("Ann"), new PlayerId("p1"), Connected: true), Assert.Single(lobby.Campaign.Roster));
+        Assert.Contains(log.Warnings, w => w.Contains("ledger") && w.Contains(key.Id.Value));
+
+        // The picker's offers use the same fallback.
+        await f.Room.ConnectionLostAsync("c1");
+        Assert.Equal(new SeatCard("Ann"), Assert.Single((await f.Room.PeekAsync([])).Offers).Card);
+    }
+
+    /// <summary><see cref="LedgerRules"/>, except that <see cref="CardFor"/> always throws.</summary>
+    private sealed class CardlessRules : ICampaignRules
+    {
+        private readonly LedgerRules _inner = new();
+        public string GameId => _inner.GameId;
+        public JsonElement NewDocument(CampaignInfo info) => _inner.NewDocument(info);
+        public SeatCard CardFor(CampaignInfo info, JsonElement document, ProfileId member) => throw new InvalidOperationException("no cards");
+        public JsonElement PortalView(CampaignInfo info, JsonElement document, ProfileId member) => _inner.PortalView(info, document, member);
+        public CommandResult Handle(CampaignInfo info, JsonElement document, ProfileId member, string type, JsonElement data) =>
+            _inner.Handle(info, document, member, type, data);
+    }
+
+    /// <summary>Every logger's Warning messages.</summary>
+    private sealed class WarningLog : ILoggerFactory, ILogger
+    {
+        private readonly List<string> _warnings = [];
+
+        public IReadOnlyList<string> Warnings { get { lock (_warnings) return [.. _warnings]; } }
+
+        public ILogger CreateLogger(string categoryName) => this;
+        public void AddProvider(ILoggerProvider provider) { }
+        public void Dispose() { }
+        public IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
+        public bool IsEnabled(LogLevel logLevel) => true;
+
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+        {
+            if (logLevel == LogLevel.Warning) lock (_warnings) _warnings.Add(formatter(state, exception));
+        }
     }
 
     [Fact]
