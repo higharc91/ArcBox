@@ -32,8 +32,8 @@ When every task is done, one whole-branch review runs.
 | 8 | Downed, Out, injuries, battle end, invariants and replays | done | `1c71e84`, `43f1895` | 1 |
 | 9 | Pack loader, validation and the content hash | done | `c810425`, `6b1462c` | 1 |
 | 10 | Remaining effect blocks, zones, summons and named hooks | done | `876902a`, `2c13938` | 1 |
-| 11 | Tooltip generation | in progress |  |  |
-| 12 | Sheet builder and encounter setup | not started | | |
+| 11 | Tooltip generation | done | `6cc5a7f` | 0 |
+| 12 | Sheet builder and encounter setup | in progress |  |  |
 | 13 | Content wave 0: core files and fighter, cleric, rogue, wizard | not started | | |
 | 14 | AI planner, odds and threat map | not started | | |
 | 15 | Companion AI, timed-out turns, reactions, performance | not started | | |
@@ -146,6 +146,7 @@ These were decided during execution. Later tasks must follow them, alongside the
 | 4 | `Start` normalises only `Sheet.Resources`; records holding arrays compare by reference (golden tests compare JSON); rejection-text test checks only 3 of 16 strings; `CantAfford` with no resource gives "Not enough ."; `ObjectiveExpr` allows a leaf with a group; `UnitSheet.Score` defaults a missing stat to 10 |
 | 5 | A self line/cone with no aim tile pays its cost and hits nothing; the converter's key detection could collide with a parameter named like a block; `Battle.cs` is about 320 lines (targeting could move out) |
 | 6 | No HP event on deep-water drops (Task 8 addresses); prone applied after a lethal fall; Swap has no landing check; `Movement` depends on `Motion.OccupantAt` |
+| 11 | statMod tooltips read awkwardly ("target gets can't act"; Task 13 fixes it); hook phrases not tested for every `HookKind`; "half damage on a save" missed for nested damage |
 | 10 | A second unit's mark replaces the first's; counterspell picks the first queued tier ≥ 1 step; `TerrainAltered.Delta` reports the requested change; negative rounds and unbounded repeat/chain counts aren't validated; zone passives with the default `other` target never fire on enter/turn start; `Battle.cs` is 444 lines |
 | 9 | Trigger `do` effect blocks are only checked for known keys (Task 22 must fully check them); a second `xp.json` reports its duplicate at a nonexistent `/id`; the pack label comes from the manifest id, not the folder name |
 | 8 | Fall/collision damage has no source (no `OnKill` for the pusher); `RoundStarted.Order` can list a unit that goes Out right after; golden fixture lacks `TurnSkipped`/`UnitOut`/`BattleEnded`; `Invariants.Enabled` is a public static; `.json` line endings not pinned |
