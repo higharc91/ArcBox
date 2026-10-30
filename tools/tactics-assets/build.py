@@ -506,7 +506,7 @@ SETS = {"palettes": build_palettes, "characters": build_characters, "anims": bui
 # content/tactics/base/<name>/ and previews/, using arcpix.out.
 PLUGIN_SETS = ("props", "portraits", "beasts", "backgrounds", "ui", "icons", "fx",
                "ambient", "bosses", "emotes", "town", "status", "pickups", "worldmap",
-               "signature", "title", "crests", "dungeon", "projectiles", "gear_icons", "showcase")   # showcase reads the others: keep it last
+               "signature", "title", "crests", "dungeon", "projectiles", "gear_icons", "grades", "showcase")   # showcase reads the others: keep it last
 for _name in PLUGIN_SETS:
     try:
         _mod = importlib.import_module(f"parts.{_name}")
