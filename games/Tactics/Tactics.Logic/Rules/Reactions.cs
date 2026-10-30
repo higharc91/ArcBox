@@ -43,7 +43,7 @@ public static class Reactions
     /// for it and carries the tag <c>"reactsTo:&lt;trigger&gt;"</c>; it aims at the reactor for a <c>self</c> ability and at
     /// the actor otherwise. Per trigger:</para>
     /// <list type="bullet">
-    /// <item><c>leavesReach</c>: the actor is Up and hostile, and the reactor's melee weapon reaches the actor's tile but not
+    /// <item><c>leavesReach</c>: the actor is Up with HP left and hostile, and the reactor's melee weapon reaches the actor's tile but not
     /// <see cref="ReactionTrigger.To"/>. Offers the opportunity attack and matching abilities.</item>
     /// <item><c>beforeHit</c>: the reactor is <see cref="ReactionTrigger.Target"/>.</item>
     /// <item><c>spellCast</c>: the actor is hostile and within the ability's range.</item>
@@ -81,7 +81,7 @@ public static class Reactions
         switch (trigger.Kind)
         {
             case ReactionTriggerKind.LeavesReach:
-                eligible = actor.Life == LifeState.Up && Movement.Hostile(reactor, actor) && LeavesReach(w.Terrain, reactor, actor.Pos, trigger.To);
+                eligible = actor.Life == LifeState.Up && actor.Hp > 0 && Movement.Hostile(reactor, actor) && LeavesReach(w.Terrain, reactor, actor.Pos, trigger.To);
                 if (eligible)
                     options.Add(new ReactionChoice(Opportunity, RulesPack.CommonAttack.Id, actor.Id));
                 break;

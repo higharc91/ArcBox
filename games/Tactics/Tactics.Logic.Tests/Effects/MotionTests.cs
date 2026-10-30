@@ -186,6 +186,13 @@ public sealed class MotionTests
         Assert.Equal(LifeState.Dead, bob.Life);
         Assert.Equal(0, bob.Hp);
         Assert.Equal(state.Rng, after.Rng);
+
+        // A party member already Downed keeps its countdown.
+        var downed = state.Units[U("kara")] with { Hp = 0, Life = LifeState.Downed, Countdown = 1 };
+        (after, _) = Run(battle, state with { Units = state.Units.SetItem(downed.Id, downed) }, "gob", "kara", T(1, 0), new PushEffect(1));
+        Assert.Equal(T(2, 0), after.Units[U("kara")].Pos);
+        Assert.Equal(LifeState.Downed, after.Units[U("kara")].Life);
+        Assert.Equal(1, after.Units[U("kara")].Countdown);
     }
 
     [Fact]

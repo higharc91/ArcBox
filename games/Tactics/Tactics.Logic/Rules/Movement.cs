@@ -41,9 +41,22 @@ public static class Movement
         if (total > unit.Economy.MoveLeft)
             return Rejection.Of(RejectCode.NoMove);
 
-        w.PushFront([.. Enumerable.Range(1, path.Length - 1).Select(i => new MoveStep(unit.Id, path[i - 1], path[i]))]);
+        // Each step remembers the last tile before it that the mover would hold alone, to fall back to if the move halts.
+        var steps = new Step[path.Length - 1];
+        var lastFree = path[0];
+        for (var i = 1; i < path.Length; i++)
+        {
+            steps[i - 1] = new MoveStep(unit.Id, path[i - 1], path[i], lastFree);
+            if (!Shared(w, path[i], unit.Id))
+                lastFree = path[i];
+        }
+        w.PushFront(steps);
         return null;
     }
+
+    /// <summary>True when a unit other than <paramref name="unit"/> that isn't Dead is on the tile.</summary>
+    internal static bool Shared(BattleWriter w, Tile tile, UnitId unit)
+        => w.State.Units.Values.Any(u => u.Id != unit && u.Pos == tile && u.Life != LifeState.Dead);
 
     /// <summary>True when the two units fight on different sides.</summary>
     public static bool Hostile(UnitState a, UnitState b) => a.Sheet.Side != b.Sheet.Side;
@@ -54,17 +67,22 @@ public static class Movement
 /// first opens a <see cref="ReactionTriggerKind.LeavesReach"/> window (<see cref="Reactions.OffersFor"/>): one
 /// <see cref="OfferReactionStep"/> per eligible reactor runs ahead of this step, which is re-queued as
 /// <see cref="Checked"/>. Then the step spends its Move, moves the unit and emits <see cref="Moved"/>.
-/// <para>The step (and so the rest of the move) is dropped when the mover is no longer Up, has no HP left, isn't on
-/// <see cref="From"/> any more, or can no longer make the step (illegal, a hostile on <see cref="To"/>, or too little Move).</para>
+/// <para>The move halts when the mover is no longer Up, has no HP left, isn't on <see cref="From"/> any more, or can no
+/// longer make the step (illegal, a hostile on <see cref="To"/>, or too little Move). A halt removes the mover's remaining
+/// <see cref="MoveStep"/>s from the queue and, if the mover is left sharing a tile (e.g. passing through an ally), puts it
+/// back on <see cref="LastFree"/>, the last tile of its path it held alone, with a <see cref="Moved"/>.</para>
 /// </summary>
-public sealed record MoveStep(UnitId Unit, Tile From, Tile To, bool Checked = false) : Step
+public sealed record MoveStep(UnitId Unit, Tile From, Tile To, Tile LastFree, bool Checked = false) : Step
 {
     /// <inheritdoc />
     public override void Run(BattleWriter w, RulesPack rules)
     {
         var unit = w.Unit(Unit);
         if (unit.Life != LifeState.Up || unit.Hp <= 0 || unit.Pos != From)
+        {
+            Halt(w);
             return;
+        }
 
         if (!Checked && unit.Conditions.All(c => c.Id != Movement.Disengaged))
         {
@@ -80,9 +98,23 @@ public sealed record MoveStep(UnitId Unit, Tile From, Tile To, bool Checked = fa
         var cost = Paths.StepCost(w.Terrain, From, To, unit.Sheet.Jump);
         if (cost == int.MaxValue || cost > unit.Economy.MoveLeft
             || Motion.OccupantAt(w, To, Unit) is { } other && Movement.Hostile(unit, other))
+        {
+            Halt(w);
             return;
+        }
 
         w.Set(unit with { Pos = To, Economy = unit.Economy with { MoveLeft = unit.Economy.MoveLeft - cost } });
         w.Emit(new Moved(Unit, [From, To]));
+    }
+
+    private void Halt(BattleWriter w)
+    {
+        w.State = w.State with { Queue = w.State.Queue.RemoveAll(s => s is MoveStep step && step.Unit == Unit) };
+
+        var unit = w.Unit(Unit);
+        if (unit.Life == LifeState.Dead || unit.Pos == LastFree || !Movement.Shared(w, unit.Pos, Unit))
+            return;
+        w.Set(unit with { Pos = LastFree });
+        w.Emit(new Moved(Unit, [unit.Pos, LastFree]));
     }
 }

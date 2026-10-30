@@ -142,18 +142,71 @@ public sealed class ReactionTests
     [Fact]
     public void Mover_dropped_by_the_opportunity_attack_stops()
     {
-        var (battle, paused, _) = GoblinWalksAway(Goblin with { MaxHp = 1 });
+        // Two player reactors; kara's attack (seed 1: d20 13, a hit) drops the 1-HP goblin, so zed is never offered.
+        var battle = TestBattle.On(Field)
+            .Party("kara", Fighter, T(0, 1))
+            .Party("zed", TestSheets.Rogue, T(1, 0))
+            .Enemy("gob", Goblin with { MaxHp = 1, InitiativeBonus = 10 }, T(1, 1));
+        var (state, _) = battle.Start(seed: 1);
+        var (paused, _) = battle.Apply(state, new Move(U("gob"), [T(1, 1), T(2, 1), T(3, 1)]));
+        Assert.Equal(U("kara"), Assert.IsType<ReactionOffer>(paused.Pending).Reactor);
 
         var (after, events) = battle.Apply(paused, new React(U("kara"), new ReactionChoice("opportunity", Attack, U("gob"))));
 
         Assert.IsType<Damaged>(events[^1]);
-        Assert.DoesNotContain(events, e => e is Moved);
+        Assert.DoesNotContain(events, e => e is Moved or ReactionOffered);
         var gob = after.Units[U("gob")];
         Assert.Equal(0, gob.Hp);
         Assert.Equal(T(1, 1), gob.Pos);
         Assert.Equal(4, gob.Economy.MoveLeft);
         Assert.Empty(after.Queue);
         Assert.Null(after.Pending);
+        Assert.True(after.Units[U("zed")].Economy.Reaction);
+    }
+
+    [Fact]
+    public void Mover_dropped_on_an_allys_tile_returns_to_the_last_tile_it_held_alone()
+    {
+        // The goblin walks through its ally pal at (2, 1); leaving pal's tile provokes kara, whose hit drops it there.
+        var battle = TestBattle.On(Field)
+            .Party("kara", Fighter, T(2, 0))
+            .Enemy("gob", Goblin with { MaxHp = 1 }, T(1, 1))
+            .Enemy("pal", Goblin, T(2, 1));
+        var (state, _) = battle.Start(seed: 1);
+        Assert.Equal(U("gob"), state.Active);
+
+        var (paused, events) = battle.Apply(state, new Move(U("gob"), [T(1, 1), T(2, 1), T(3, 1), T(4, 1)]));
+        Assert.Equal(Json<BattleEvent>(new Moved(U("gob"), [T(1, 1), T(2, 1)])), Json(events[0]));
+        Assert.Equal(U("kara"), Assert.IsType<ReactionOffer>(paused.Pending).Reactor);
+
+        var (after, reacted) = battle.Apply(paused, new React(U("kara"), new ReactionChoice("opportunity", Attack, U("gob"))));
+
+        Assert.Equal(0, after.Units[U("gob")].Hp);
+        Assert.Equal(Json<BattleEvent>(new Moved(U("gob"), [T(2, 1), T(1, 1)])), Json(reacted[^1]));
+        Assert.Equal(T(1, 1), after.Units[U("gob")].Pos);
+        Assert.Equal(T(2, 1), after.Units[U("pal")].Pos);
+        Assert.DoesNotContain(after.Queue, s => s is MoveStep);
+    }
+
+    [Fact]
+    public void Halted_move_leaves_no_move_steps_for_the_unit()
+    {
+        var battle = TestBattle.On(Field)
+            .Party("kara", Fighter, T(0, 1))
+            .Enemy("gob", Goblin, T(1, 1));
+        var (state, _) = battle.Start();
+        state = state with { Units = state.Units.SetItem(U("gob"), state.Units[U("gob")] with { Hp = 0 }) };
+
+        var w = new BattleWriter(state, battle.Rules);
+        w.PushFront(
+            new MoveStep(U("gob"), T(1, 1), T(2, 1), T(1, 1)),
+            new MoveStep(U("gob"), T(2, 1), T(3, 1), T(2, 1)),
+            new EndTurnStep(U("gob")),
+            new MoveStep(U("gob"), T(3, 1), T(4, 1), T(3, 1)));
+        w.PopFront()!.Run(w, battle.Rules);
+
+        Assert.Equal([new EndTurnStep(U("gob"))], w.State.Queue);
+        Assert.Empty(w.Events);
     }
 
     [Fact]
@@ -303,8 +356,8 @@ public sealed class ReactionTests
         var trigger = new ReactionTrigger(ReactionTriggerKind.LeavesReach, U("gob"), null, null, null, T(2, 1));
         ImmutableList<Step> queue =
         [
-            new MoveStep(U("gob"), T(1, 1), T(2, 1)),
-            new MoveStep(U("gob"), T(1, 1), T(2, 1), Checked: true),
+            new MoveStep(U("gob"), T(1, 1), T(2, 1), T(1, 1)),
+            new MoveStep(U("gob"), T(1, 1), T(2, 1), T(1, 1), Checked: true),
             new OfferReactionStep(U("kara"), trigger),
             new ReactionStep(U("kara"), new ReactionChoice("opportunity", Attack, U("gob"))),
         ];

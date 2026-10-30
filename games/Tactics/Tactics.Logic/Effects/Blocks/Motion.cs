@@ -38,7 +38,8 @@ public static class Motion
     /// <list type="bullet">
     /// <item>before a blocked tile: off the map, impassable, a blocking prop, a climb of 2+ levels or a unit. The pushed
     /// unit takes 1d4 bludgeoning, and so does the unit it hit (<see cref="Collided"/> for each);</item>
-    /// <item>on a deep tile: a party member is Downed (countdown 3) and anyone else Dead (<see cref="Fell"/>, into deep);</item>
+    /// <item>on a deep tile: a party member is Downed (countdown 3; one already Downed keeps its countdown) and anyone
+    /// else Dead (<see cref="Fell"/>, into deep);</item>
     /// <item>after a drop of more than 3 levels: 1d6 bludgeoning per level beyond 3, then prone (<see cref="Fell"/>).</item>
     /// </list>
     /// </summary>
@@ -74,9 +75,10 @@ public static class Motion
                 w.Emit(new Fell(unit, Math.Max(0, drop), 0, IntoDeep: true));
                 var fallen = w.Unit(unit);
                 // Task 8 owns the rest of Downed (countdown ticks, revival, Out); here the unit only goes down or dies.
-                w.Set(fallen.Sheet.Side == Side.Party
-                    ? fallen with { Hp = 0, TempHp = 0, Life = LifeState.Downed, Countdown = 3 }
-                    : fallen with { Hp = 0, TempHp = 0, Life = LifeState.Dead });
+                // An already-Downed party member keeps its countdown.
+                w.Set(fallen.Sheet.Side != Side.Party ? fallen with { Hp = 0, TempHp = 0, Life = LifeState.Dead }
+                    : fallen.Life == LifeState.Downed ? fallen with { Hp = 0, TempHp = 0 }
+                    : fallen with { Hp = 0, TempHp = 0, Life = LifeState.Downed, Countdown = 3 });
                 return;
             }
 
