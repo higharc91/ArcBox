@@ -4,7 +4,7 @@ Slots used (shared table, so every layer's ramp map agrees):
   skin, eyes, hair, cloth1 (primary), cloth2 (secondary), trim, metal, leather, wood, magic
 
 Conventions: draw the far side first, then the body of the part, then the near side, so the near limb overlaps.
-Shading is applied per layer afterwards (shade_volume), then the layer gets its own selective outline.
+Shading is applied per layer afterwards (shade_form). Outlines are applied once, to the composed character.
 """
 from __future__ import annotations
 
@@ -83,9 +83,12 @@ def _leg(c: Canvas, p: Points, near: bool, slot: str, *, width: int = 3, shade: 
 
 # ------------------------------------------------------------------------------------------------------- body
 
-def body(ears: str) -> Part:
-    """Skin: legs, torso, both arms, head, ears and (front only) the face. ears="skeleton" draws bones instead."""
-    if ears == "skeleton":
+def body(kind: str) -> Part:
+    """Skin: legs, torso, both arms, head, ears and (front only) the face.
+
+    kind is the race's body: human, elf, half_elf, gnome, goblin, orc (tusks, heavy brow), dragon (a scaled head
+    with a snout) or skeleton (bones instead of skin)."""
+    if kind == "skeleton":
         return _skeleton
 
     def draw(c: Canvas, p: Points) -> None:
@@ -94,14 +97,71 @@ def body(ears: str) -> Part:
         _arm(c, p, False, "skin")
         c.polygon(_torso_poly(p), "skin")
         _arm(c, p, True, "skin")
-        # neck
         nx = p.head_cx
-        c.rect(nx - 1, p.head_y0 + p.build.head_h - 1, nx + 1, p.torso_top, "skin", 2)
+        neck = 2 if kind in ("dragon", "orc") else 1
+        c.rect(nx - neck, p.head_y0 + p.build.head_h - 1, nx + neck, p.torso_top, "skin", 2)
+        if kind == "dragon":
+            _dragon_head(c, p)
+            return
         _head_shape(c, p, "skin")
-        _ears(c, p, ears)
+        _ears(c, p, {"orc": "human", "gnome": "half_elf"}.get(kind, kind))
         if p.direction == "front":
             _face(c, p)
+            x0, y0 = p.head_x0 + _face_dx(p), p.head_y0
+            if kind == "orc":
+                c.rect(x0 + 3, y0 + 4, x0 + 9, y0 + 4, "skin", 2)          # heavy brow
+                for tx in (x0 + 5, x0 + 7):                                # tusks over the upper lip
+                    c.px(tx, y0 + 8, "horn", 4)
+                    c.px(tx, y0 + 7, "horn", 5)
+            elif kind == "gnome":
+                c.px(x0 + 9, y0 + 6, "skin", 4)                            # a proud nose
+                c.px(x0 + 10, y0 + 7, "skin", 3)
+                c.px(x0 + 9, y0 + 7, "skin", 3)
+                c.px(x0 + 3, y0 + 7, "skin", 4)                            # rosy cheeks
     return draw
+
+
+def _face_dx(p: Points) -> int:
+    """Faces are laid out for an 11 px head; wider heads (the large build) shift the features to stay centred."""
+    return (p.build.head_w - 11) // 2
+
+
+def _dragon_head(c: Canvas, p: Points) -> None:
+    """Dragonborn: a rounded skull with a snout jutting forward (screen-right in the front view), a brow ridge over
+    the eyes, scale flecks on the crown and a row of spines down the back of the head."""
+    x0, y0, w, h = p.head_x0, p.head_y0, p.build.head_w, p.build.head_h
+    x1 = x0 + w - 1
+    _head_shape(c, p, "skin")
+    if p.direction == "front":
+        # (row, from, to, shade) relative to the near edge of the head: a long, flat muzzle and a lower jaw
+        for dy, x_a, x_b, sh in ((4, -2, 1, 4), (5, -2, 4, 4), (6, -2, 4, 3), (7, -2, 4, 3), (8, -3, 3, 2),
+                                 (9, -4, 1, 2)):
+            c.rect(x1 + x_a, y0 + dy, x1 + x_b, y0 + dy, "skin", sh)
+        c.px(x1 + 4, y0 + 5, "skin", 1)                                        # nostril
+        c.rect(x1 - 2, y0 + 8, x1 + 3, y0 + 8, "skin", 1)                      # mouth line
+        c.px(x1 + 2, y0 + 9, "horn", 5)                                        # a fang
+        c.rect(x0 + 3, y0 + 3, x1 - 1, y0 + 3, "skin", 4)                      # brow ridge
+        hurt = p.pose.lean < 0 and p.pose.bob > 0
+        for ex in (x0 + 4, x0 + 8):
+            if p.pose.kneel or hurt:
+                c.px(ex, y0 + 5, "eyes", 0)
+            else:
+                c.px(ex, y0 + 4, "eyes", 4)                                    # bright reptile eyes
+                c.px(ex, y0 + 5, "eyes", 1)
+        for sx in range(x0 + 2, x1 - 1, 3):                                    # scale flecks on the crown
+            c.px(sx, y0 + 1, "skin", 2)
+        c.px(x0 + 1, y0 + 6, "skin", 2)                                        # cheek scales
+        c.px(x0 + 2, y0 + 7, "skin", 2)
+        for i, (dx, dy) in enumerate(((-1, 3), (-2, 4), (-1, 5), (-2, 6))):    # frill at the back of the jaw
+            c.px(x0 + dx, y0 + dy, "horn", 3 if i % 2 else 4)
+    else:
+        c.rect(x0 - 2, y0 + 6, x0, y0 + 7, "skin", 2)                          # the snout, just visible
+        for dy in (1, 3, 5, 7, 9):                                             # spines down the back of the skull
+            if dy < h:
+                c.px(p.head_cx, y0 + dy, "horn", 4)
+                c.px(p.head_cx, y0 + dy + 1, "horn", 2)
+        for sx in range(x0 + 2, x1 - 1, 3):
+            c.px(sx, y0 + 2, "skin", 2)
 
 
 def _skeleton(c: Canvas, p: Points) -> None:
@@ -167,6 +227,14 @@ def _ears(c: Canvas, p: Points, kind: str) -> None:
             for i in range(3):
                 c.px(near_x - s * i, ey + 1 - (i // 2), "skin", 3)
                 c.px(near_x - s * i, ey + 2 - (i // 2), "skin", 2)
+    elif kind == "half_elf":
+        c.px(far_x, ey, "skin", 3)
+        c.px(far_x + s, ey - 1, "skin", 4)
+        c.px(far_x, ey + 1, "skin", 2)
+        if p.direction == "back":
+            c.px(near_x, ey, "skin", 3)
+            c.px(near_x - s, ey - 1, "skin", 4)
+            c.px(near_x, ey + 1, "skin", 2)
     elif kind == "goblin":
         for i in range(5):
             c.px(far_x + s * i, ey - 1 + (i // 2), "skin", 3)
@@ -183,7 +251,7 @@ def _ears(c: Canvas, p: Points, kind: str) -> None:
 
 
 def _face(c: Canvas, p: Points) -> None:
-    x0, y0 = p.head_x0, p.head_y0
+    x0, y0 = p.head_x0 + _face_dx(p), p.head_y0
     hurt = p.pose.lean < 0 and p.pose.bob > 0
     down = p.pose.kneel
     ey = y0 + 5
@@ -543,13 +611,53 @@ def beard(style: str) -> Part:
 def horns(style: str) -> Part:
     def draw(c: Canvas, p: Points) -> None:
         x0, y0, w = p.head_x0, p.head_y0, p.build.head_w
+        if style == "swept":
+            # both horns lie back along the skull (towards screen-left when facing front)
+            front = p.direction == "front"
+            for start, path in ((3, [(0, 0), (-1, -1), (-2, -1), (-3, -2), (-4, -2), (-5, -3)]),
+                                (6, [(0, 0), (-1, -1), (-1, -2), (-2, -3), (-3, -3), (-4, -4)])):
+                for i, (dx, dy) in enumerate(path):
+                    x = x0 + start + dx if front else x0 + (w - 1 - start) - dx
+                    c.px(x, y0 + 1 + dy, "horn", 2 if i < 2 else (3 if i < len(path) - 1 else 5))
+            return
         for hx, s in ((x0 + 2, -1), (x0 + w - 3, 1)):
             if style == "curled":
                 pts = [(0, 0), (s * 1, -1), (s * 2, -2), (s * 3, -2), (s * 4, -1), (s * 4, 0)]
+            elif style == "ram":   # thick spirals over the ears
+                pts = [(0, 0), (s * 1, -1), (s * 2, -1), (s * 3, 0), (s * 3, 1), (s * 3, 2), (s * 2, 2),
+                       (s * 1, 1), (s * 2, 0), (s * 2, 1)]
+            elif style == "small":
+                pts = [(0, 0), (0, -1), (s * 1, -2)]
             else:  # "straight": swept back
                 pts = [(0, 0), (s * 0, -1), (s * 1, -2), (s * 1, -3), (s * 2, -4)]
             for i, (dx, dy) in enumerate(pts):
-                c.px(hx + dx, y0 + dy, "trim", 2 if i < 2 else 3)
+                c.px(hx + dx, y0 + dy, "horn", 2 if i < 2 else (3 if i < len(pts) - 1 else 5))
+    return draw
+
+
+# -------------------------------------------------------------------------------------------------------- tails
+
+def tail(kind: str) -> Part:
+    """Tiefling ("devil": thin, with a spade tip) and dragonborn ("dragon": thick, tapering) tails. They leave the
+    lower back and swing out to the far side; in the back view (mirrored) that puts them over the legs."""
+    def draw(c: Canvas, p: Points) -> None:
+        bx, by = p.mx(16), p.torso_bot - 1
+        sway = p.pose.bob + (1 if p.pose.lean > 0 else 0)
+        if kind == "devil":
+            path = [(0, 0), (-2, 2), (-4, 4), (-6, 5), (-8, 5), (-9, 4), (-10, 2 + sway)]
+            for (ax, ay), (bx2, by2) in zip(path, path[1:]):
+                c.line(p.mx(16 + ax), by + ay, p.mx(16 + bx2), by + by2, "skin", 2)
+            tx, ty = p.mx(16 - 10), by + 2 + sway
+            c.polygon([(tx - 1.5, ty - 1), (tx + 1.5, ty - 1), (tx, ty - 4)], "skin", 3)   # spade
+            c.px(tx, ty - 2, "skin", 4)
+        else:
+            path = [(0, 0, 3), (-3, 2, 3), (-6, 4, 3), (-9, 5, 2), (-11, 4 - sway, 2), (-12, 2 - sway, 1),
+                    (-12, 0 - sway, 1)]
+            for (ax, ay, wa), (bx2, by2, _wb) in zip(path, path[1:]):
+                c.thick_line(p.mx(16 + ax), by + ay, p.mx(16 + bx2), by + by2, wa, "skin", 3)
+            for ax, ay, _w in path[1:4]:                          # lighter belly scales along the underside
+                c.px(p.mx(16 + ax), by + ay + 1, "skin", 4)
+        _ = bx
     return draw
 
 
@@ -712,6 +820,25 @@ def weapon(kind: str) -> Part:
         elif kind == "wand":
             c.line(*_along(p, 0), *_along(p, 5), "wood")
             c.px(*_along(p, 6), "magic", 5)
+        elif kind == "rapier":
+            c.line(*_along(p, -2), *_along(p, 0), "leather")
+            gx, gy = _along(p, 0)
+            s_ = p.near_sign
+            for dx, dy in ((-1, 0), (-1, 1), (0, 2), (1, 1), (1, 0)):              # swept hilt
+                c.px(gx + dx * s_, gy + dy - 1, "trim", 4 if dy == 0 else 3)
+            c.line(*_along(p, 1), *_along(p, 12), "metal", 4)
+            c.px(*_along(p, 12), "metal", 5)
+        elif kind == "lute":
+            # held across the body: the bowl at the near hand, the neck rising towards the far shoulder
+            s_ = p.near_sign
+            bx_, by_ = hx - s_ * 3, hy - 2
+            c.ellipse(bx_ + 0.5, by_ + 0.5, 3.8, 3.2, "wood", 3)
+            c.ellipse(bx_ + 0.5 - s_, by_ - 0.5, 1.8, 1.4, "wood", 4)              # the lit face of the bowl
+            c.px(bx_, by_, "wood", 0)                                               # sound hole
+            c.px(bx_ + s_ * 2, by_ + 1, "trim", 4)                                  # bridge
+            c.thick_line(bx_ - s_ * 3, by_ - 2, bx_ - s_ * 7, by_ - 8, 2, "wood", 2)  # neck
+            c.rect(min(bx_ - s_ * 7, bx_ - s_ * 9), by_ - 10, max(bx_ - s_ * 7, bx_ - s_ * 9), by_ - 9, "wood", 1)
+            c.px(bx_ - s_ * 8, by_ - 11, "trim", 4)                                 # tuning peg
     return draw
 
 

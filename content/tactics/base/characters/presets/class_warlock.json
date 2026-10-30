@@ -1,0 +1,36 @@
+{
+  "id": "class_warlock",
+  "name": "Warlock",
+  "race": "human",
+  "class": "warlock",
+  "build": "standard",
+  "layers": {
+    "body": "human",
+    "torso": "coat",
+    "legs": "pants",
+    "feet": "boots",
+    "hands": "gloves",
+    "weapon": "tome",
+    "cape": "cloak",
+    "hair": "long"
+  },
+  "palette": {
+    "eyes": "eyes/red",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/dark",
+    "magic": "magic/shadow",
+    "horn": "horn/ivory",
+    "hair": "hair/crimson",
+    "cloth1": "cloth/plum",
+    "cloth2": "cloth/charcoal",
+    "skin": "skin/porcelain"
+  },
+  "tags": [
+    "human",
+    "warlock",
+    "class"
+  ],
+  "sheet": "presets/class_warlock.png"
+}

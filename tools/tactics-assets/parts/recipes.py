@@ -3,96 +3,62 @@ These double as tests that the parts compose, and as presets the character creat
 from __future__ import annotations
 
 from .characters import Recipe
+from .creator import Look, make_character
 
 _BASE = {"eyes": "eyes/dark", "leather": "leather/brown", "wood": "wood/oak", "metal": "metal/steel",
-         "trim": "metal/gold", "magic": "magic/arcane"}
+         "trim": "metal/gold", "magic": "magic/arcane", "horn": "horn/ivory"}
+# Enemies are authored directly as recipes: they aren't player races, so they skip the creator's rules.
 
 
 def _r(id: str, name: str, build: str, layers: dict[str, str], palette: dict[str, str], *tags: str) -> Recipe:
     return Recipe(id, name, build, layers, {**_BASE, **palette}, list(tags))
 
 
+# The sample party: each is just a name, a race, a class and the player's look, exactly what the creator stores.
 PARTY = [
-    _r("kara", "Kara · Human Vanguard", "standard",
-       {"body": "human", "legs": "greaves", "feet": "sabatons", "torso": "plate", "hair": "cropped",
-        "headgear": "open_helm", "weapon": "sword", "hands": "gauntlets", "offhand": "kite_shield", "cape": "short_cape"},
-       {"skin": "skin/fair", "hair": "hair/auburn", "cloth1": "cloth/crimson", "cloth2": "cloth/slate", "eyes": "eyes/blue"},
-       "party"),
-    _r("aldric", "Aldric · Dwarf Cleric", "short",
-       {"body": "human", "beard": "full", "hair": "short", "torso": "vestments", "legs": "pants", "feet": "boots",
-        "weapon": "mace", "hands": "bare", "offhand": "round_shield"},
-       {"skin": "skin/tan", "hair": "hair/copper", "cloth1": "cloth/ivory", "cloth2": "cloth/wine", "magic": "magic/holy"},
-       "party"),
-    _r("wren", "Wren · Halfling Shadow", "short",
-       {"body": "human", "hair": "messy", "headgear": "hood", "torso": "vest", "legs": "pants", "feet": "boots",
-        "weapon": "dagger", "hands": "gloves", "cape": "short_cape"},
-       {"skin": "skin/olive", "hair": "hair/brown", "cloth1": "cloth/forest", "cloth2": "cloth/charcoal",
-        "leather": "leather/dark", "eyes": "eyes/green"},
-       "party"),
-    _r("ilyra", "Ilyra · Elf Chronomancer", "standard",
-       {"body": "elf", "hair": "long", "headgear": "wizard_hat", "torso": "robe", "legs": "skirt", "feet": "sandals",
-        "weapon": "staff", "hands": "bare"},
-       {"skin": "skin/porcelain", "hair": "hair/platinum", "cloth1": "cloth/royal_purple", "cloth2": "cloth/navy",
-        "eyes": "eyes/violet", "magic": "magic/frost"},
-       "party"),
-    _r("tamsin", "Tamsin · Half-Elf Sharpshooter", "standard",
-       {"body": "elf", "hair": "ponytail", "torso": "coat", "legs": "pants", "feet": "boots", "weapon": "bow",
-        "hands": "gloves", "cape": "cloak"},
-       {"skin": "skin/fair", "hair": "hair/auburn", "cloth1": "cloth/moss", "cloth2": "cloth/sand", "eyes": "eyes/green"},
-       "party"),
-    _r("sefa", "Sefa · Tiefling Warlock", "standard",
-       {"body": "human", "horns": "curled", "hair": "long", "torso": "coat", "legs": "skirt", "feet": "boots",
-        "weapon": "tome", "hands": "bare"},
-       {"skin": "skin/tiefling", "hair": "hair/black", "cloth1": "cloth/plum", "cloth2": "cloth/charcoal",
-        "trim": "metal/dark", "eyes": "eyes/gold", "magic": "magic/shadow"},
-       "party"),
+    make_character("Kara", "human", "fighter", Look(
+        skin="fair", hair="cropped", hair_colour="auburn", eyes="blue",
+        colours={"cloth1": "cloth/crimson", "cloth2": "cloth/slate"},
+        gear={"torso": "plate", "legs": "greaves", "feet": "sabatons", "hands": "gauntlets",
+              "offhand": "kite_shield", "cape": "short_cape", "headgear": "open_helm"}), tags=("party",)),
+    make_character("Aldric", "dwarf", "cleric", Look(
+        skin="tan", hair="short", hair_colour="copper", beard="full",
+        colours={"cloth1": "cloth/ivory", "cloth2": "cloth/wine"}), tags=("party",)),
+    make_character("Wren", "halfling", "rogue", Look(
+        skin="olive", hair="messy", hair_colour="brown", eyes="green",
+        colours={"cloth1": "cloth/forest", "cloth2": "cloth/charcoal"}), tags=("party",)),
+    make_character("Ilyra", "elf", "wizard", Look(
+        skin="porcelain", hair="long", hair_colour="platinum", eyes="violet",
+        colours={"cloth1": "cloth/royal_purple", "cloth2": "cloth/navy", "magic": "magic/frost"}), tags=("party",)),
+    make_character("Tamsin", "half_elf", "ranger", Look(
+        skin="fair", hair="ponytail", hair_colour="auburn", eyes="green",
+        colours={"cloth1": "cloth/moss", "cloth2": "cloth/sand"}), tags=("party",)),
+    make_character("Sefa", "tiefling", "warlock", Look(
+        skin="tiefling", hair="long", hair_colour="black", horns="curled", horn="ram", eyes="gold",
+        gear={"legs": "skirt", "hands": "bare"}), tags=("party",)),
 ]
 
+# One starter per class, each on a different race to show the combinations.
 CLASSES = [
-    _r("fighter", "Fighter", "standard",
-       {"body": "human", "hair": "short", "torso": "chain", "legs": "pants", "feet": "boots", "weapon": "sword",
-        "hands": "gloves", "offhand": "round_shield"},
-       {"skin": "skin/tan", "hair": "hair/brown", "cloth1": "cloth/steel_blue", "cloth2": "cloth/slate"}, "class"),
-    _r("rogue", "Rogue", "standard",
-       {"body": "human", "hair": "short", "headgear": "hood", "torso": "vest", "legs": "pants", "feet": "boots",
-        "weapon": "dagger", "hands": "gloves", "cape": "short_cape"},
-       {"skin": "skin/fair", "hair": "hair/black", "cloth1": "cloth/charcoal", "cloth2": "cloth/slate",
-        "leather": "leather/dark"}, "class"),
-    _r("wizard", "Wizard", "standard",
-       {"body": "human", "hair": "long", "beard": "full", "headgear": "wizard_hat", "torso": "robe", "legs": "skirt",
-        "feet": "sandals", "weapon": "staff", "hands": "bare"},
-       {"skin": "skin/fair", "hair": "hair/silver", "cloth1": "cloth/navy", "cloth2": "cloth/sky"}, "class"),
-    _r("cleric", "Cleric", "standard",
-       {"body": "human", "hair": "bun", "torso": "vestments", "legs": "skirt", "feet": "sandals", "weapon": "mace",
-        "hands": "bare", "offhand": "round_shield"},
-       {"skin": "skin/brown", "hair": "hair/black", "cloth1": "cloth/ivory", "cloth2": "cloth/ochre",
-        "magic": "magic/holy"}, "class"),
-    _r("ranger", "Ranger", "standard",
-       {"body": "elf", "hair": "braids", "torso": "coat", "legs": "pants", "feet": "boots", "weapon": "bow",
-        "hands": "gloves", "cape": "cloak"},
-       {"skin": "skin/olive", "hair": "hair/chestnut", "cloth1": "cloth/forest", "cloth2": "cloth/sand"}, "class"),
-    _r("paladin", "Paladin", "standard",
-       {"body": "human", "hair": "cropped", "headgear": "great_helm", "torso": "plate", "legs": "greaves",
-        "feet": "sabatons", "weapon": "greatsword", "hands": "gauntlets", "cape": "cloak"},
-       {"skin": "skin/fair", "hair": "hair/blonde", "cloth1": "cloth/ivory", "cloth2": "cloth/sky",
-        "metal": "metal/silver"}, "class"),
-    _r("bard", "Bard", "standard",
-       {"body": "human", "hair": "ponytail", "torso": "tunic", "legs": "pants", "feet": "boots", "weapon": "wand",
-        "hands": "bare", "cape": "short_cape", "headgear": "bandana"},
-       {"skin": "skin/tan", "hair": "hair/copper", "cloth1": "cloth/teal", "cloth2": "cloth/ochre"}, "class"),
-    _r("druid", "Druid", "standard",
-       {"body": "elf", "hair": "braids", "headgear": "circlet", "torso": "robe", "legs": "skirt", "feet": "sandals",
-        "weapon": "staff", "hands": "bare"},
-       {"skin": "skin/deep", "hair": "hair/white", "cloth1": "cloth/moss", "cloth2": "cloth/forest",
-        "magic": "magic/nature", "wood": "wood/dark"}, "class"),
-    _r("warlock", "Warlock", "standard",
-       {"body": "human", "horns": "straight", "hair": "long", "torso": "coat", "legs": "pants", "feet": "boots",
-        "weapon": "tome", "hands": "gloves", "cape": "cloak"},
-       {"skin": "skin/ash", "hair": "hair/crimson", "cloth1": "cloth/wine", "cloth2": "cloth/charcoal",
-        "trim": "metal/dark", "magic": "magic/shadow", "eyes": "eyes/red"}, "class"),
-    _r("monk", "Monk", "standard",
-       {"body": "human", "hair": "mohawk", "torso": "tunic", "legs": "pants", "feet": "sandals", "hands": "bare"},
-       {"skin": "skin/olive", "hair": "hair/black", "cloth1": "cloth/ochre", "cloth2": "cloth/rust"}, "class"),
+    make_character("Fighter", "half_orc", "fighter", id="class_fighter", tags=("class",)),
+    make_character("Rogue", "tiefling", "rogue", Look(horns="small", hair_colour="violet"), id="class_rogue",
+                   tags=("class",)),
+    make_character("Wizard", "gnome", "wizard", Look(beard="full", hair_colour="white"), id="class_wizard",
+                   tags=("class",)),
+    make_character("Cleric", "human", "cleric", Look(skin="brown", hair="bun", hair_colour="black"),
+                   id="class_cleric", tags=("class",)),
+    make_character("Ranger", "elf", "ranger", Look(skin="olive", hair="braids", hair_colour="chestnut"),
+                   id="class_ranger", tags=("class",)),
+    make_character("Paladin", "dragonborn", "paladin", Look(skin="dragon_silver"), id="class_paladin",
+                   tags=("class",)),
+    make_character("Bard", "half_elf", "bard", Look(hair="ponytail", hair_colour="copper"), id="class_bard",
+                   tags=("class",)),
+    make_character("Druid", "halfling", "druid", Look(skin="deep", hair="braids", hair_colour="white"),
+                   id="class_druid", tags=("class",)),
+    make_character("Warlock", "human", "warlock", Look(skin="porcelain", hair="long", hair_colour="crimson",
+                                                        eyes="red"), id="class_warlock", tags=("class",)),
+    make_character("Monk", "human", "monk", Look(skin="olive", hair="mohawk", hair_colour="black"), id="class_monk",
+                   tags=("class",)),
 ]
 
 ENEMIES = [

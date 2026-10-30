@@ -81,6 +81,29 @@ SKIN: dict[str, list[str]] = {
     "tiefling": ramp("#b4546a", shift=0.08),
     "ash": ramp("#8f93a3", shift=0.06),          # undead / ghoul
     "bone": ramp("#d8cfb6", shift=0.05, spread=0.8),
+    "orc_grey": ramp("#8a9483", shift=0.07),
+    "orc_olive": ramp("#7f8f4e", shift=0.08),
+    "infernal": ramp("#c2463e", shift=0.08),
+    "lilac": ramp("#a88bc4", shift=0.07),
+    # Dragonborn scales (the metallic and chromatic dragons)
+    "dragon_red": ramp("#b8483c", shift=0.08),
+    "dragon_blue": ramp("#4f78b8", shift=0.07),
+    "dragon_green": ramp("#4f8f5a", shift=0.08),
+    "dragon_black": ramp("#45434f", shift=0.05, spread=1.2),
+    "dragon_white": ramp("#d9dfe8", shift=0.05, spread=0.75),
+    "dragon_gold": ramp("#d1a245", shift=0.07),
+    "dragon_bronze": ramp("#a8743e", shift=0.07),
+    "dragon_silver": ramp("#b9c0cc", shift=0.05, spread=0.9),
+    "dragon_copper": ramp("#b8673c", shift=0.07),
+    "dragon_brass": ramp("#c49a52", shift=0.07),
+}
+
+HORN: dict[str, list[str]] = {
+    "ivory": ramp("#e3d8bd", shift=0.05, spread=0.85),
+    "bone": ramp("#c9bba0", shift=0.05),
+    "obsidian": ramp("#3b3542", shift=0.05, spread=1.3),
+    "ram": ramp("#8a6a4e", shift=0.06),
+    "crimson": ramp("#8e2f36", shift=0.07),
 }
 
 HAIR: dict[str, list[str]] = {
@@ -159,12 +182,54 @@ EYES: dict[str, list[str]] = {
     "gold": ramp("#ffd84a"),
 }
 
+TERRAIN: dict[str, list[str]] = {
+    "grass": ramp("#62a03f", shift=0.07),
+    "grass_lush": ramp("#3f8f4a", shift=0.07),
+    "grass_dry": ramp("#a9a548", shift=0.07),
+    "grass_autumn": ramp("#c47d36", shift=0.07),
+    "moss": ramp("#5d7f3c", shift=0.07),
+    "dirt": ramp("#8c5c3a", shift=0.06),
+    "dirt_dark": ramp("#5f4232", shift=0.06),
+    "path": ramp("#b38a5c", shift=0.06, spread=0.9),
+    "sand": ramp("#dcc28a", shift=0.05, spread=0.8),
+    "mud": ramp("#5b4b35", shift=0.06),
+    "stone": ramp("#8e8c98", shift=0.04, spread=1.1),
+    "stone_warm": ramp("#a08f7c", shift=0.05),
+    "stone_dark": ramp("#5d5b69", shift=0.04, spread=1.2),
+    "mortar": ramp("#4b4552", shift=0.04),
+    "brick": ramp("#a85b44", shift=0.06),
+    "planks": ramp("#9c6c42", shift=0.06),
+    "snow": ramp("#e6eef8", shift=0.05, spread=0.55),
+    "ice": ramp("#a6d9ec", shift=0.04, spread=0.8),
+    "water": ramp("#3f88bb", shift=0.04),
+    "water_swamp": ramp("#4e7a5c", shift=0.05),
+    "lava": ramp("#ff7b2b", shift=0.08, spread=0.8),
+    "crust": ramp("#3d2c30", shift=0.05, spread=1.3),
+    "flower_red": ramp("#e0514f", shift=0.06),
+    "flower_yellow": ramp("#f2cf4a", shift=0.06),
+    "flower_white": ramp("#eeeaf4", shift=0.05, spread=0.6),
+    "flower_blue": ramp("#6c8de0", shift=0.06),
+}
+
+FOLIAGE: dict[str, list[str]] = {
+    "leaf": ramp("#4f9a45", shift=0.08),
+    "leaf_light": ramp("#8cbf55", shift=0.08),
+    "leaf_autumn": ramp("#d9822f", shift=0.08),
+    "leaf_red": ramp("#b8423a", shift=0.08),
+    "pine": ramp("#2f6b4f", shift=0.07, spread=1.1),
+    "blossom": ramp("#f0a6c0", shift=0.06, spread=0.8),
+    "dead": ramp("#7b6a55", shift=0.05),
+    "bark": ramp("#6b4a32", shift=0.06),
+    "bark_pale": ramp("#a8998a", shift=0.05),
+}
+
 OUTLINE = "#140f1a"
 """The darkest outline colour; outlines are blended towards this from the neighbouring shade-0."""
 
 FAMILIES: dict[str, dict[str, list[str]]] = {
     "skin": SKIN, "hair": HAIR, "cloth": CLOTH, "metal": METAL,
     "leather": LEATHER, "wood": WOOD, "magic": MAGIC, "eyes": EYES,
+    "horn": HORN, "terrain": TERRAIN, "foliage": FOLIAGE,
 }
 
 

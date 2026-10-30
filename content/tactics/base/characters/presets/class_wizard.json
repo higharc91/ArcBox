@@ -1,0 +1,37 @@
+{
+  "id": "class_wizard",
+  "name": "Wizard",
+  "race": "gnome",
+  "class": "wizard",
+  "build": "short",
+  "layers": {
+    "body": "gnome",
+    "torso": "robe",
+    "legs": "skirt",
+    "feet": "sandals",
+    "hands": "bare",
+    "weapon": "staff",
+    "headgear": "wizard_hat",
+    "hair": "messy",
+    "beard": "full"
+  },
+  "palette": {
+    "eyes": "eyes/blue",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "horn": "horn/ivory",
+    "hair": "hair/white",
+    "cloth1": "cloth/navy",
+    "cloth2": "cloth/sky",
+    "skin": "skin/fair"
+  },
+  "tags": [
+    "gnome",
+    "wizard",
+    "class"
+  ],
+  "sheet": "presets/class_wizard.png"
+}

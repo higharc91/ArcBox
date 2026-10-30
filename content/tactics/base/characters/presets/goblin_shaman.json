@@ -1,6 +1,8 @@
 {
   "id": "goblin_shaman",
   "name": "Goblin Shaman",
+  "race": null,
+  "class": null,
   "build": "short",
   "layers": {
     "body": "goblin",
@@ -18,6 +20,7 @@
     "metal": "metal/steel",
     "trim": "metal/gold",
     "magic": "magic/fire",
+    "horn": "horn/ivory",
     "skin": "skin/goblin",
     "hair": "hair/white",
     "cloth1": "cloth/wine",

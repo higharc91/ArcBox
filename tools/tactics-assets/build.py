@@ -8,6 +8,7 @@ Everything is deterministic: the same code produces byte-identical PNGs, so the 
 from __future__ import annotations
 
 import json
+import shutil
 import sys
 from pathlib import Path
 
@@ -21,9 +22,12 @@ from arcpix.preview import contact_sheet, Tile, strip  # noqa: E402
 from arcpix.sheet import Sheet  # noqa: E402
 from parts import characters as C  # noqa: E402
 from parts.recipes import ALL, PARTY, CLASSES, ENEMIES  # noqa: E402
+from parts import creator  # noqa: E402
+from arcpix.preview import matrix  # noqa: E402
 from parts.rig import BUILDS, DIRECTIONS, FRAME_W, FRAME_H, ANCHOR, ANIM_ORDER, ANIMS  # noqa: E402
 
 PACK = HERE.parents[1] / "content" / "tactics" / "base"
+MOCKUPS = HERE.parents[1] / "docs" / "superpowers" / "mockups" / "tactics" / "assets"
 PREVIEWS = HERE / "previews"
 
 
@@ -41,11 +45,12 @@ def write_json(obj, path: Path) -> None:
 # A neutral palette for previewing bare layers: every slot gets a readable, distinct ramp.
 NEUTRAL = {"skin": "skin/tan", "eyes": "eyes/dark", "hair": "hair/brown", "cloth1": "cloth/steel_blue",
            "cloth2": "cloth/slate", "trim": "metal/gold", "metal": "metal/steel", "leather": "leather/brown",
-           "wood": "wood/oak", "magic": "magic/arcane"}
+           "wood": "wood/oak", "magic": "magic/arcane", "horn": "horn/bone"}
 
 
 def build_characters() -> None:
     out = PACK / "characters"
+    shutil.rmtree(out, ignore_errors=True)       # renamed or removed parts must not linger in the pack
     n = C.frames_per_direction()
 
     # 1. Every layer variant, for every build, as a ramp-map sheet (front row, back row).
@@ -70,8 +75,12 @@ def build_characters() -> None:
     for r in ALL:
         sheet = C.recipe_sheet(r)
         save(sheet.image(), out / "presets" / f"{r.id}.png")
-        write_json({"id": r.id, "name": r.name, "build": r.build, "layers": r.layers, "palette": r.palette,
-                    "tags": r.tags, "sheet": f"presets/{r.id}.png"}, out / "presets" / f"{r.id}.json")
+        write_json({"id": r.id, "name": r.name, "race": r.race, "class": r.cls, "build": r.build, "layers": r.layers,
+                    "palette": r.palette, "tags": r.tags, "sheet": f"presets/{r.id}.png"},
+                   out / "presets" / f"{r.id}.json")
+
+    # 3b. The creator's options: every race and class kit, and what each race may pick.
+    write_json(creator.options(), out / "creator.json")
 
     # 4. The manifest: everything the game needs to cut sheets up and compose a character.
     anims = {a.name: {"frames": a.frames, "fps": a.fps, "loop": a.loop} for a in C.anim_table()}
@@ -97,15 +106,18 @@ def build_characters() -> None:
         tiles = []
         for r in recipes:
             sh = C.recipe_sheet(r)
-            tiles.append(Tile(strip([sh.frames[0], sh.frames[n]], 1, gap=6), r.name.split(" · ")[0],
-                              r.name.split(" · ")[1] if " · " in r.name else r.build))
+            if r.race:
+                caption = f"{creator.RACES[r.race].name} {creator.CLASSES[r.cls].name}"
+            else:
+                caption = f"{r.build} build"
+            tiles.append(Tile(strip([sh.frames[0], sh.frames[n]], 1, gap=6), r.name, caption))
         return contact_sheet(title, tiles, columns=min(6, len(tiles)), zoom=5, subtitle=sub)
 
     save(roster("Characters · the party", PARTY,
-                "Six sample heroes composed from shared layers — front and back facing; the game mirrors for the other two."),
+                "Six sample heroes: each is a name + race + class + look. Front and back; the game mirrors the other two."),
          PREVIEWS / "01-party.png")
     save(roster("Characters · class starters", CLASSES,
-                "One preset per class. Every piece is swappable in the character creator and recolourable per slot."),
+                "One preset per class, each on a different race. Every piece is swappable and recolourable."),
          PREVIEWS / "02-classes.png")
     save(roster("Characters · enemies", ENEMIES,
                 "Same rig, same layers: goblins and orcs reuse the 'short' and 'large' builds."),
@@ -113,7 +125,7 @@ def build_characters() -> None:
 
     # Animation strips for a handful of characters.
     tiles = []
-    for rid in ("kara", "goblin_spear", "tamsin", "ilyra", "orc_brute"):
+    for rid in ("kara", "class_paladin", "tamsin", "ilyra", "class_bard", "orc_brute"):
         r = next(x for x in ALL if x.id == rid)
         sh = C.recipe_sheet(r)
         tiles.append(Tile(strip(sh.frames[:n], 1, gap=3), r.name, "  ".join(
@@ -121,6 +133,33 @@ def build_characters() -> None:
     save(contact_sheet("Characters · animation set", tiles, columns=1, zoom=4,
                        subtitle="idle · walk · swing · thrust · shoot · cast · hurt · down (20 frames per facing)"),
          PREVIEWS / "04-animations.png")
+
+    # Any race x any class: the creator's two axes, with the race's default look and the class's kit.
+    races, classes = list(creator.RACES), list(creator.CLASSES)
+    pose_idle = ANIMS["idle"][2][0]
+    grid_front, grid_back = [], []
+    for race in races:
+        rf, rb = [], []
+        for cls in classes:
+            rec = creator.make_character("Preview", race, cls)
+            rf.append(C.compose(rec, "front", pose_idle).render(rec.ramps()))
+            rb.append(C.compose(rec, "back", pose_idle).render(rec.ramps()))
+        grid_front.append(rf)
+        grid_back.append(rb)
+    rnames = [creator.RACES[r].name for r in races]
+    cnames = [creator.CLASSES[c].name for c in classes]
+    save(matrix("Characters · any race, any class", rnames, cnames, grid_front, zoom=3,
+                subtitle="Players name their hero and pick a race and a class. All 90 combinations compose from the "
+                         "same layers (race defaults shown; hair, skin, horns and colours are the player's)."),
+         PREVIEWS / "06-race-class.png")
+    save(matrix("Characters · any race, any class (back)", rnames, cnames, grid_back, zoom=3),
+         PREVIEWS / "07-race-class-back.png")
+    # The same matrix as a plain 32x40 atlas for the creator mockup (row = race, column = class).
+    atlas = Image.new("RGBA", (FRAME_W * len(classes), FRAME_H * len(races)))
+    for i, row in enumerate(grid_front):
+        for j, im in enumerate(row):
+            atlas.paste(im, (j * FRAME_W, i * FRAME_H))
+    save(atlas, MOCKUPS / "race-class.png")
 
     # The layer library on the neutral palette.
     ramps_neutral = {s: FAMILIES[ref.split("/")[0]][ref.split("/")[1]] for s, ref in NEUTRAL.items()}
@@ -133,7 +172,7 @@ def build_characters() -> None:
             if layer not in ("body",):
                 ghost = base_body.copy()
                 cv.blit(ghost)
-            if layer in ("cape",):
+            if layer in ("cape", "tail"):
                 cv = C.Canvas(FRAME_W, FRAME_H, C.SLOTS)
                 cv.blit(C.render_layer(layer, variant, "standard", "back", pose))
                 cv.blit(C.render_layer("body", "human", "standard", "back", pose))

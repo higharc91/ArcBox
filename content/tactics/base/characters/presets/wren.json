@@ -1,17 +1,19 @@
 {
   "id": "wren",
-  "name": "Wren \u00b7 Halfling Shadow",
+  "name": "Wren",
+  "race": "halfling",
+  "class": "rogue",
   "build": "short",
   "layers": {
     "body": "human",
-    "hair": "messy",
-    "headgear": "hood",
     "torso": "vest",
     "legs": "pants",
     "feet": "boots",
-    "weapon": "dagger",
     "hands": "gloves",
-    "cape": "short_cape"
+    "weapon": "dagger",
+    "cape": "short_cape",
+    "headgear": "hood",
+    "hair": "messy"
   },
   "palette": {
     "eyes": "eyes/green",
@@ -20,12 +22,15 @@
     "metal": "metal/steel",
     "trim": "metal/gold",
     "magic": "magic/arcane",
-    "skin": "skin/olive",
+    "horn": "horn/ivory",
     "hair": "hair/brown",
     "cloth1": "cloth/forest",
-    "cloth2": "cloth/charcoal"
+    "cloth2": "cloth/charcoal",
+    "skin": "skin/olive"
   },
   "tags": [
+    "halfling",
+    "rogue",
     "party"
   ],
   "sheet": "presets/wren.png"

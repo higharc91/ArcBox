@@ -88,6 +88,118 @@
         "#d8cfb6",
         "#e7e1c9",
         "#f7f1dc"
+      ],
+      "orc_grey": [
+        "#415541",
+        "#556652",
+        "#6d7b68",
+        "#8a9483",
+        "#abb3a2",
+        "#cdd3c2"
+      ],
+      "orc_olive": [
+        "#305223",
+        "#45632e",
+        "#5f773c",
+        "#7f8f4e",
+        "#a9af6c",
+        "#d0cd8e"
+      ],
+      "infernal": [
+        "#6f163b",
+        "#86203a",
+        "#a12d39",
+        "#c2463e",
+        "#d8745b",
+        "#eda47c"
+      ],
+      "lilac": [
+        "#4b4270",
+        "#605587",
+        "#816da3",
+        "#a88bc4",
+        "#c6a4d9",
+        "#e3beef"
+      ],
+      "dragon_red": [
+        "#691636",
+        "#7f1f35",
+        "#992c33",
+        "#b8483c",
+        "#d07559",
+        "#e8a47a"
+      ],
+      "dragon_blue": [
+        "#232169",
+        "#2c357f",
+        "#3b5399",
+        "#4f78b8",
+        "#6b9fd0",
+        "#8bc7e8"
+      ],
+      "dragon_green": [
+        "#235242",
+        "#2f6348",
+        "#3d7750",
+        "#4f8f5a",
+        "#6daf6f",
+        "#96d08f"
+      ],
+      "dragon_black": [
+        "#1f1d28",
+        "#292632",
+        "#35333f",
+        "#45434f",
+        "#787384",
+        "#ada6ba"
+      ],
+      "dragon_white": [
+        "#7e809a",
+        "#979cb1",
+        "#b5bcca",
+        "#d9dfe8",
+        "#e7eef5",
+        "#f3faff"
+      ],
+      "dragon_gold": [
+        "#783019",
+        "#904e24",
+        "#ad7332",
+        "#d1a245",
+        "#e4c762",
+        "#f6dd83"
+      ],
+      "dragon_bronze": [
+        "#601e18",
+        "#743421",
+        "#8b502e",
+        "#a8743e",
+        "#c39d5b",
+        "#dec77c"
+      ],
+      "dragon_silver": [
+        "#62637c",
+        "#797d92",
+        "#969cad",
+        "#b9c0cc",
+        "#cdd5df",
+        "#e1eaf1"
+      ],
+      "dragon_copper": [
+        "#69161c",
+        "#7f261f",
+        "#99422c",
+        "#b8673c",
+        "#d09159",
+        "#e8bc7a"
+      ],
+      "dragon_brass": [
+        "#703221",
+        "#874d2e",
+        "#a36f3e",
+        "#c49a52",
+        "#d9bf6e",
+        "#efd98d"
       ]
     },
     "hair": {
@@ -543,6 +655,332 @@
         "#ffdd65",
         "#ffe380"
       ]
+    },
+    "horn": {
+      "ivory": [
+        "#8e7665",
+        "#a6927d",
+        "#c2b39a",
+        "#e3d8bd",
+        "#f1e9cf",
+        "#fff8e1"
+      ],
+      "bone": [
+        "#735b4e",
+        "#8a7563",
+        "#a7957e",
+        "#c9bba0",
+        "#ddd4b7",
+        "#f2eacf"
+      ],
+      "obsidian": [
+        "#17151f",
+        "#201d28",
+        "#2c2733",
+        "#3b3542",
+        "#75697f",
+        "#b2a1bb"
+      ],
+      "ram": [
+        "#4f2823",
+        "#5f392e",
+        "#734f3c",
+        "#8a6a4e",
+        "#ab916c",
+        "#cdb98f"
+      ],
+      "crimson": [
+        "#511131",
+        "#621932",
+        "#762234",
+        "#8e2f36",
+        "#af514b",
+        "#cf806e"
+      ]
+    },
+    "terrain": {
+      "grass": [
+        "#195b1d",
+        "#296e23",
+        "#42852f",
+        "#62a03f",
+        "#8bbd5c",
+        "#b6da7d"
+      ],
+      "grass_lush": [
+        "#1a5239",
+        "#24633e",
+        "#307743",
+        "#3f8f4a",
+        "#5caf5d",
+        "#88d07e"
+      ],
+      "grass_dry": [
+        "#61421e",
+        "#745c28",
+        "#8c7d36",
+        "#a9a548",
+        "#c4b464",
+        "#dfcb85"
+      ],
+      "grass_autumn": [
+        "#701911",
+        "#87321a",
+        "#a35326",
+        "#c47d36",
+        "#d9a753",
+        "#efd176"
+      ],
+      "moss": [
+        "#1d491a",
+        "#2e5722",
+        "#43692e",
+        "#5d7f3c",
+        "#87a35a",
+        "#b4c77d"
+      ],
+      "dirt": [
+        "#501b18",
+        "#602b20",
+        "#74412b",
+        "#8c5c3a",
+        "#ad8457",
+        "#ceaf7a"
+      ],
+      "dirt_dark": [
+        "#361616",
+        "#41211d",
+        "#4f3026",
+        "#5f4232",
+        "#8a6c52",
+        "#b49a78"
+      ],
+      "path": [
+        "#6d362b",
+        "#804d38",
+        "#986848",
+        "#b38a5c",
+        "#caac77",
+        "#e2ce95"
+      ],
+      "sand": [
+        "#8e6348",
+        "#a47e5a",
+        "#be9d70",
+        "#dcc28a",
+        "#ebdaa0",
+        "#faebb8"
+      ],
+      "mud": [
+        "#341e18",
+        "#3f2a1f",
+        "#4c3929",
+        "#5b4b35",
+        "#867757",
+        "#b2a67e"
+      ],
+      "stone": [
+        "#454152",
+        "#585464",
+        "#706d7c",
+        "#8e8c98",
+        "#afacb9",
+        "#d1cdd9"
+      ],
+      "stone_warm": [
+        "#5b433c",
+        "#6e584d",
+        "#857162",
+        "#a08f7c",
+        "#bdaf99",
+        "#dad0b7"
+      ],
+      "stone_dark": [
+        "#2a2835",
+        "#373443",
+        "#484554",
+        "#5d5b69",
+        "#8a8798",
+        "#b9b4c6"
+      ],
+      "mortar": [
+        "#25222f",
+        "#2f2b38",
+        "#3c3744",
+        "#4b4552",
+        "#776e7f",
+        "#a599ad"
+      ],
+      "brick": [
+        "#601b24",
+        "#742626",
+        "#8b3d33",
+        "#a85b44",
+        "#c38260",
+        "#deab82"
+      ],
+      "planks": [
+        "#59221b",
+        "#6b3525",
+        "#814d32",
+        "#9c6c42",
+        "#ba935f",
+        "#d7bc80"
+      ],
+      "snow": [
+        "#959ab9",
+        "#adb4cc",
+        "#c8d0e1",
+        "#e6eef8",
+        "#eff8ff",
+        "#f2faff"
+      ],
+      "ice": [
+        "#597898",
+        "#6e94b0",
+        "#87b4cc",
+        "#a6d9ec",
+        "#baecf8",
+        "#caf8ff"
+      ],
+      "water": [
+        "#17346b",
+        "#214a81",
+        "#2e669b",
+        "#3f88bb",
+        "#5caad2",
+        "#7dcce9"
+      ],
+      "water_swamp": [
+        "#244639",
+        "#2f5442",
+        "#3d654e",
+        "#4e7a5c",
+        "#6e9f79",
+        "#92c499"
+      ],
+      "lava": [
+        "#a40818",
+        "#be1b11",
+        "#dc461c",
+        "#ff7b2b",
+        "#ffa94b",
+        "#ffcd6b"
+      ],
+      "crust": [
+        "#1d1117",
+        "#25181e",
+        "#302025",
+        "#3d2c30",
+        "#7b5e62",
+        "#b99597"
+      ],
+      "flower_red": [
+        "#801e40",
+        "#9a2a43",
+        "#ba3a48",
+        "#e0514f",
+        "#ef7c6c",
+        "#ffa68b"
+      ],
+      "flower_yellow": [
+        "#8a4a1a",
+        "#a76d26",
+        "#c99835",
+        "#f2cf4a",
+        "#fedd68",
+        "#ffe483"
+      ],
+      "flower_white": [
+        "#9a94b1",
+        "#b2adc5",
+        "#cfc9db",
+        "#eeeaf4",
+        "#faf5fe",
+        "#fcf8ff"
+      ],
+      "flower_blue": [
+        "#352e80",
+        "#3e429a",
+        "#5263ba",
+        "#6c8de0",
+        "#86afef",
+        "#a2d1ff"
+      ]
+    },
+    "foliage": {
+      "leaf": [
+        "#1d5832",
+        "#276a35",
+        "#348037",
+        "#4f9a45",
+        "#78b862",
+        "#a5d683"
+      ],
+      "leaf_light": [
+        "#266d23",
+        "#418430",
+        "#629f40",
+        "#8cbf55",
+        "#b3d571",
+        "#daec90"
+      ],
+      "leaf_autumn": [
+        "#7c0d0c",
+        "#952a14",
+        "#b45020",
+        "#d9822f",
+        "#eab14e",
+        "#fbdc71"
+      ],
+      "leaf_red": [
+        "#691538",
+        "#7f1e37",
+        "#992a35",
+        "#b8423a",
+        "#d07057",
+        "#e8a079"
+      ],
+      "pine": [
+        "#123938",
+        "#19473e",
+        "#235746",
+        "#2f6b4f",
+        "#4f966c",
+        "#75c18b"
+      ],
+      "blossom": [
+        "#9b5888",
+        "#b36e97",
+        "#cf87a9",
+        "#f0a6c0",
+        "#fbbaca",
+        "#ffc8cf"
+      ],
+      "dead": [
+        "#463028",
+        "#553f34",
+        "#665342",
+        "#7b6a55",
+        "#a09176",
+        "#c4b99a"
+      ],
+      "bark": [
+        "#3d1815",
+        "#4a251d",
+        "#593526",
+        "#6b4a32",
+        "#937450",
+        "#bba275"
+      ],
+      "bark_pale": [
+        "#604943",
+        "#745f56",
+        "#8b796d",
+        "#a8998a",
+        "#c3b7a6",
+        "#ded5c3"
+      ]
     }
   },
   "palettes": {
@@ -556,7 +994,8 @@
       "metal": "metal/steel",
       "leather": "leather/brown",
       "wood": "wood/oak",
-      "magic": "magic/arcane"
+      "magic": "magic/arcane",
+      "horn": "horn/bone"
     },
     "kara": {
       "eyes": "eyes/blue",
@@ -565,10 +1004,11 @@
       "metal": "metal/steel",
       "trim": "metal/gold",
       "magic": "magic/arcane",
-      "skin": "skin/fair",
+      "horn": "horn/ivory",
       "hair": "hair/auburn",
       "cloth1": "cloth/crimson",
-      "cloth2": "cloth/slate"
+      "cloth2": "cloth/slate",
+      "skin": "skin/fair"
     },
     "aldric": {
       "eyes": "eyes/dark",
@@ -577,10 +1017,11 @@
       "metal": "metal/steel",
       "trim": "metal/gold",
       "magic": "magic/holy",
-      "skin": "skin/tan",
+      "horn": "horn/ivory",
       "hair": "hair/copper",
       "cloth1": "cloth/ivory",
-      "cloth2": "cloth/wine"
+      "cloth2": "cloth/wine",
+      "skin": "skin/tan"
     },
     "wren": {
       "eyes": "eyes/green",
@@ -589,10 +1030,11 @@
       "metal": "metal/steel",
       "trim": "metal/gold",
       "magic": "magic/arcane",
-      "skin": "skin/olive",
+      "horn": "horn/ivory",
       "hair": "hair/brown",
       "cloth1": "cloth/forest",
-      "cloth2": "cloth/charcoal"
+      "cloth2": "cloth/charcoal",
+      "skin": "skin/olive"
     },
     "ilyra": {
       "eyes": "eyes/violet",
@@ -601,10 +1043,11 @@
       "metal": "metal/steel",
       "trim": "metal/gold",
       "magic": "magic/frost",
-      "skin": "skin/porcelain",
+      "horn": "horn/ivory",
       "hair": "hair/platinum",
       "cloth1": "cloth/royal_purple",
-      "cloth2": "cloth/navy"
+      "cloth2": "cloth/navy",
+      "skin": "skin/porcelain"
     },
     "tamsin": {
       "eyes": "eyes/green",
@@ -613,10 +1056,11 @@
       "metal": "metal/steel",
       "trim": "metal/gold",
       "magic": "magic/arcane",
-      "skin": "skin/fair",
+      "horn": "horn/ivory",
       "hair": "hair/auburn",
       "cloth1": "cloth/moss",
-      "cloth2": "cloth/sand"
+      "cloth2": "cloth/sand",
+      "skin": "skin/fair"
     },
     "sefa": {
       "eyes": "eyes/gold",
@@ -625,130 +1069,141 @@
       "metal": "metal/steel",
       "trim": "metal/dark",
       "magic": "magic/shadow",
-      "skin": "skin/tiefling",
+      "horn": "horn/ram",
       "hair": "hair/black",
       "cloth1": "cloth/plum",
-      "cloth2": "cloth/charcoal"
+      "cloth2": "cloth/charcoal",
+      "skin": "skin/tiefling"
     },
-    "fighter": {
-      "eyes": "eyes/dark",
+    "class_fighter": {
+      "eyes": "eyes/amber",
       "leather": "leather/brown",
       "wood": "wood/oak",
       "metal": "metal/steel",
       "trim": "metal/gold",
       "magic": "magic/arcane",
-      "skin": "skin/tan",
-      "hair": "hair/brown",
+      "horn": "horn/ivory",
+      "hair": "hair/black",
       "cloth1": "cloth/steel_blue",
-      "cloth2": "cloth/slate"
+      "cloth2": "cloth/slate",
+      "skin": "skin/orc"
     },
-    "rogue": {
-      "eyes": "eyes/dark",
+    "class_rogue": {
+      "eyes": "eyes/gold",
       "leather": "leather/dark",
       "wood": "wood/oak",
       "metal": "metal/steel",
       "trim": "metal/gold",
       "magic": "magic/arcane",
-      "skin": "skin/fair",
-      "hair": "hair/black",
+      "horn": "horn/ram",
+      "hair": "hair/violet",
       "cloth1": "cloth/charcoal",
-      "cloth2": "cloth/slate"
+      "cloth2": "cloth/slate",
+      "skin": "skin/tiefling"
     },
-    "wizard": {
-      "eyes": "eyes/dark",
+    "class_wizard": {
+      "eyes": "eyes/blue",
       "leather": "leather/brown",
       "wood": "wood/oak",
       "metal": "metal/steel",
       "trim": "metal/gold",
       "magic": "magic/arcane",
-      "skin": "skin/fair",
-      "hair": "hair/silver",
+      "horn": "horn/ivory",
+      "hair": "hair/white",
       "cloth1": "cloth/navy",
-      "cloth2": "cloth/sky"
+      "cloth2": "cloth/sky",
+      "skin": "skin/fair"
     },
-    "cleric": {
+    "class_cleric": {
       "eyes": "eyes/dark",
       "leather": "leather/brown",
       "wood": "wood/oak",
       "metal": "metal/steel",
       "trim": "metal/gold",
       "magic": "magic/holy",
-      "skin": "skin/brown",
+      "horn": "horn/ivory",
       "hair": "hair/black",
       "cloth1": "cloth/ivory",
-      "cloth2": "cloth/ochre"
+      "cloth2": "cloth/ochre",
+      "skin": "skin/brown"
     },
-    "ranger": {
-      "eyes": "eyes/dark",
+    "class_ranger": {
+      "eyes": "eyes/green",
       "leather": "leather/brown",
       "wood": "wood/oak",
       "metal": "metal/steel",
       "trim": "metal/gold",
       "magic": "magic/arcane",
-      "skin": "skin/olive",
+      "horn": "horn/ivory",
       "hair": "hair/chestnut",
       "cloth1": "cloth/forest",
-      "cloth2": "cloth/sand"
+      "cloth2": "cloth/sand",
+      "skin": "skin/olive"
     },
-    "paladin": {
-      "eyes": "eyes/dark",
+    "class_paladin": {
+      "eyes": "eyes/gold",
       "leather": "leather/brown",
       "wood": "wood/oak",
       "metal": "metal/silver",
       "trim": "metal/gold",
       "magic": "magic/arcane",
-      "skin": "skin/fair",
-      "hair": "hair/blonde",
+      "horn": "horn/bone",
+      "hair": "hair/brown",
       "cloth1": "cloth/ivory",
-      "cloth2": "cloth/sky"
+      "cloth2": "cloth/sky",
+      "skin": "skin/dragon_silver"
     },
-    "bard": {
-      "eyes": "eyes/dark",
+    "class_bard": {
+      "eyes": "eyes/green",
       "leather": "leather/brown",
-      "wood": "wood/oak",
+      "wood": "wood/pale",
       "metal": "metal/steel",
       "trim": "metal/gold",
       "magic": "magic/arcane",
-      "skin": "skin/tan",
+      "horn": "horn/ivory",
       "hair": "hair/copper",
       "cloth1": "cloth/teal",
-      "cloth2": "cloth/ochre"
+      "cloth2": "cloth/ochre",
+      "skin": "skin/fair"
     },
-    "druid": {
-      "eyes": "eyes/dark",
+    "class_druid": {
+      "eyes": "eyes/green",
       "leather": "leather/brown",
       "wood": "wood/dark",
       "metal": "metal/steel",
       "trim": "metal/gold",
       "magic": "magic/nature",
-      "skin": "skin/deep",
+      "horn": "horn/ivory",
       "hair": "hair/white",
       "cloth1": "cloth/moss",
-      "cloth2": "cloth/forest"
+      "cloth2": "cloth/forest",
+      "skin": "skin/deep"
     },
-    "warlock": {
+    "class_warlock": {
       "eyes": "eyes/red",
       "leather": "leather/brown",
       "wood": "wood/oak",
       "metal": "metal/steel",
       "trim": "metal/dark",
       "magic": "magic/shadow",
-      "skin": "skin/ash",
+      "horn": "horn/ivory",
       "hair": "hair/crimson",
-      "cloth1": "cloth/wine",
-      "cloth2": "cloth/charcoal"
+      "cloth1": "cloth/plum",
+      "cloth2": "cloth/charcoal",
+      "skin": "skin/porcelain"
     },
-    "monk": {
+    "class_monk": {
       "eyes": "eyes/dark",
       "leather": "leather/brown",
       "wood": "wood/oak",
       "metal": "metal/steel",
       "trim": "metal/gold",
       "magic": "magic/arcane",
-      "skin": "skin/olive",
+      "horn": "horn/ivory",
       "hair": "hair/black",
       "cloth1": "cloth/ochre",
-      "cloth2": "cloth/rust"
+      "cloth2": "cloth/rust",
+      "skin": "skin/olive"
     },
     "goblin_cutthroat": {
       "eyes": "eyes/gold",
@@ -757,6 +1212,7 @@
       "metal": "metal/steel",
       "trim": "metal/gold",
       "magic": "magic/arcane",
+      "horn": "horn/ivory",
       "skin": "skin/goblin",
       "hair": "hair/black",
       "cloth1": "cloth/rust",
@@ -769,6 +1225,7 @@
       "metal": "metal/iron",
       "trim": "metal/gold",
       "magic": "magic/arcane",
+      "horn": "horn/ivory",
       "skin": "skin/goblin",
       "hair": "hair/brown",
       "cloth1": "cloth/moss",
@@ -781,6 +1238,7 @@
       "metal": "metal/steel",
       "trim": "metal/gold",
       "magic": "magic/fire",
+      "horn": "horn/ivory",
       "skin": "skin/goblin",
       "hair": "hair/white",
       "cloth1": "cloth/wine",
@@ -793,6 +1251,7 @@
       "metal": "metal/iron",
       "trim": "metal/gold",
       "magic": "magic/arcane",
+      "horn": "horn/ivory",
       "skin": "skin/orc",
       "hair": "hair/black",
       "cloth1": "cloth/rust",
@@ -805,6 +1264,7 @@
       "metal": "metal/iron",
       "trim": "metal/gold",
       "magic": "magic/arcane",
+      "horn": "horn/ivory",
       "skin": "skin/bone",
       "hair": "hair/black",
       "cloth1": "cloth/charcoal",
@@ -817,6 +1277,7 @@
       "metal": "metal/steel",
       "trim": "metal/gold",
       "magic": "magic/arcane",
+      "horn": "horn/ivory",
       "skin": "skin/tan",
       "hair": "hair/black",
       "cloth1": "cloth/crimson",
@@ -829,6 +1290,7 @@
       "metal": "metal/dark",
       "trim": "metal/bronze",
       "magic": "magic/arcane",
+      "horn": "horn/ivory",
       "skin": "skin/fair",
       "hair": "hair/black",
       "cloth1": "cloth/wine",
@@ -841,6 +1303,7 @@
       "metal": "metal/steel",
       "trim": "metal/gold",
       "magic": "magic/blood",
+      "horn": "horn/ivory",
       "skin": "skin/ash",
       "hair": "hair/black",
       "cloth1": "cloth/charcoal",
@@ -855,16 +1318,16 @@
     "ilyra",
     "tamsin",
     "sefa",
-    "fighter",
-    "rogue",
-    "wizard",
-    "cleric",
-    "ranger",
-    "paladin",
-    "bard",
-    "druid",
-    "warlock",
-    "monk",
+    "class_fighter",
+    "class_rogue",
+    "class_wizard",
+    "class_cleric",
+    "class_ranger",
+    "class_paladin",
+    "class_bard",
+    "class_druid",
+    "class_warlock",
+    "class_monk",
     "goblin_cutthroat",
     "goblin_spear",
     "goblin_shaman",

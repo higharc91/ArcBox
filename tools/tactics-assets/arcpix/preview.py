@@ -73,3 +73,34 @@ def strip(images: Sequence[Image.Image], zoom: int, gap: int = 2, bg=(0, 0, 0, 0
     for i, im in enumerate(images):
         out.alpha_composite(im, (i * (w + gap), 0))
     return out if zoom == 1 else scale(out, zoom)
+
+
+def matrix(title: str, rows: Sequence[str], cols: Sequence[str], cells: Sequence[Sequence[Image.Image]], *,
+           zoom: int = 3, subtitle: str = "", row_w: int = 150, cell_pad: int = 8) -> Image.Image:
+    """A labelled grid: one row per `rows` entry, one column per `cols` entry (e.g. race x class)."""
+    iw = max(im.width for r in cells for im in r) * zoom
+    ih = max(im.height for r in cells for im in r) * zoom
+    cw, ch = iw + cell_pad * 2, ih + cell_pad * 2
+    head = 86 if subtitle else 62
+    col_h = 30
+    W = 20 + row_w + len(cols) * (cw + 4) + 16
+    H = head + col_h + len(rows) * (ch + 4) + 20
+    out = Image.new("RGBA", (W, H), BG)
+    d = ImageDraw.Draw(out)
+    d.text((22, 18), title, font=font(26, True), fill=INK)
+    if subtitle:
+        d.text((22, 54), subtitle, font=font(15), fill=MUTED)
+    f = font(14, True)
+    for j, name in enumerate(cols):
+        x = 20 + row_w + j * (cw + 4)
+        tw = d.textlength(name, font=f)
+        d.text((x + (cw - tw) / 2, head + 4), name, font=f, fill=EDGE)
+    for i, name in enumerate(rows):
+        y = head + col_h + i * (ch + 4)
+        d.text((22, y + ch / 2 - 9), name, font=f, fill=INK)
+        for j, im in enumerate(cells[i]):
+            x = 20 + row_w + j * (cw + 4)
+            d.rounded_rectangle((x, y, x + cw, y + ch), 6, fill=PANEL)
+            big = scale(im, zoom)
+            out.alpha_composite(big, (x + (cw - big.width) // 2, y + (ch - big.height) // 2))
+    return out

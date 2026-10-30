@@ -1,6 +1,8 @@
 {
   "id": "goblin_spear",
   "name": "Goblin Spear",
+  "race": null,
+  "class": null,
   "build": "short",
   "layers": {
     "body": "goblin",
@@ -19,6 +21,7 @@
     "metal": "metal/iron",
     "trim": "metal/gold",
     "magic": "magic/arcane",
+    "horn": "horn/ivory",
     "skin": "skin/goblin",
     "hair": "hair/brown",
     "cloth1": "cloth/moss",

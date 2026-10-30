@@ -115,7 +115,8 @@
     "metal",
     "leather",
     "wood",
-    "magic"
+    "magic",
+    "horn"
   ],
   "slotIds": {
     "skin": 1,
@@ -127,7 +128,8 @@
     "metal": 7,
     "leather": 8,
     "wood": 9,
-    "magic": 10
+    "magic": 10,
+    "horn": 11
   },
   "layers": {
     "cape": [
@@ -135,10 +137,18 @@
       "short_cape"
     ],
     "body": [
+      "dragon",
       "elf",
+      "gnome",
       "goblin",
+      "half_elf",
       "human",
+      "orc",
       "skeleton"
+    ],
+    "tail": [
+      "devil",
+      "dragon"
     ],
     "legs": [
       "greaves",
@@ -178,7 +188,10 @@
     ],
     "horns": [
       "curled",
-      "straight"
+      "ram",
+      "small",
+      "straight",
+      "swept"
     ],
     "headgear": [
       "bandana",
@@ -194,7 +207,9 @@
       "bow",
       "dagger",
       "greatsword",
+      "lute",
       "mace",
+      "rapier",
       "spear",
       "staff",
       "sword",
@@ -216,6 +231,7 @@
   },
   "order": {
     "front": [
+      "tail",
       "cape",
       "body",
       "legs",
@@ -223,8 +239,8 @@
       "torso",
       "beard",
       "hair",
-      "horns",
       "headgear",
+      "horns",
       "weapon",
       "hands",
       "offhand"
@@ -235,13 +251,14 @@
       "legs",
       "feet",
       "torso",
+      "tail",
       "weapon",
       "hands",
       "cape",
       "beard",
       "hair",
-      "horns",
-      "headgear"
+      "headgear",
+      "horns"
     ]
   },
   "path": "characters/{build}/{layer}/{variant}.png",
@@ -262,16 +279,16 @@
     "ilyra",
     "tamsin",
     "sefa",
-    "fighter",
-    "rogue",
-    "wizard",
-    "cleric",
-    "ranger",
-    "paladin",
-    "bard",
-    "druid",
-    "warlock",
-    "monk",
+    "class_fighter",
+    "class_rogue",
+    "class_wizard",
+    "class_cleric",
+    "class_ranger",
+    "class_paladin",
+    "class_bard",
+    "class_druid",
+    "class_warlock",
+    "class_monk",
     "goblin_cutthroat",
     "goblin_spear",
     "goblin_shaman",

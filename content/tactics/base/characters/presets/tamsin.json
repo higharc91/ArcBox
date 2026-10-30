@@ -1,16 +1,18 @@
 {
   "id": "tamsin",
-  "name": "Tamsin \u00b7 Half-Elf Sharpshooter",
+  "name": "Tamsin",
+  "race": "half_elf",
+  "class": "ranger",
   "build": "standard",
   "layers": {
-    "body": "elf",
-    "hair": "ponytail",
+    "body": "half_elf",
     "torso": "coat",
     "legs": "pants",
     "feet": "boots",
-    "weapon": "bow",
     "hands": "gloves",
-    "cape": "cloak"
+    "weapon": "bow",
+    "cape": "cloak",
+    "hair": "ponytail"
   },
   "palette": {
     "eyes": "eyes/green",
@@ -19,12 +21,15 @@
     "metal": "metal/steel",
     "trim": "metal/gold",
     "magic": "magic/arcane",
-    "skin": "skin/fair",
+    "horn": "horn/ivory",
     "hair": "hair/auburn",
     "cloth1": "cloth/moss",
-    "cloth2": "cloth/sand"
+    "cloth2": "cloth/sand",
+    "skin": "skin/fair"
   },
   "tags": [
+    "half_elf",
+    "ranger",
     "party"
   ],
   "sheet": "presets/tamsin.png"

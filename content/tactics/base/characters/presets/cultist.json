@@ -1,6 +1,8 @@
 {
   "id": "cultist",
   "name": "Cultist",
+  "race": null,
+  "class": null,
   "build": "standard",
   "layers": {
     "body": "human",
@@ -20,6 +22,7 @@
     "metal": "metal/steel",
     "trim": "metal/gold",
     "magic": "magic/blood",
+    "horn": "horn/ivory",
     "skin": "skin/ash",
     "hair": "hair/black",
     "cloth1": "cloth/charcoal",

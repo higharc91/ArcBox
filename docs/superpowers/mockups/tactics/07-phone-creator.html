@@ -1,0 +1,142 @@
+<!doctype html>
+<html data-shot="1360x1080@2">
+<head>
+<meta charset="utf-8">
+<title>Phone · Character creator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800&family=Cinzel:wght@600;700;800&family=Pixelify+Sans:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tactics.css">
+<link rel="stylesheet" href="phone.css">
+<style>
+  /* Real sprites from the asset pipeline: assets/race-class.png is the race x class matrix (row = race, column =
+     class, 32x40 per cell), written by tools/tactics-assets/build.py. */
+  .spr { --z: 2; width: calc(32px * var(--z)); height: calc(40px * var(--z)); flex: none;
+    background: url(assets/race-class.png) no-repeat; image-rendering: pixelated;
+    background-size: calc(320px * var(--z)) calc(360px * var(--z));
+    background-position: calc(-32px * var(--z) * var(--c)) calc(-40px * var(--z) * var(--r)); }
+  .steps { grid-template-columns: repeat(5, 1fr); }
+  .field label { font: 700 12px 'Cinzel'; letter-spacing: 0.2em; color: var(--gold); display: block; margin-bottom: 6px; }
+  .input { display: flex; align-items: center; height: 54px; padding: 0 14px; border-radius: 10px; font: 800 24px 'Cinzel';
+    letter-spacing: 0.06em; background: rgba(255,255,255,.06); border: 2px solid var(--gold); box-shadow: 0 0 18px rgba(230,189,92,.22); }
+  .input .caret { width: 2px; height: 28px; background: #ffe7a8; margin-left: 2px; }
+  .input small { margin-left: auto; font: 600 13px 'Alegreya Sans'; color: var(--muted); letter-spacing: 0; }
+  .hint { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .pick { display: grid; gap: 8px; }
+  .pick.r3 { grid-template-columns: repeat(3, 1fr); }
+  .pick.r5 { grid-template-columns: repeat(5, 1fr); }
+  .opt2 { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 2px 7px; border-radius: 10px;
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.13); }
+  .opt2 b { font: 800 13px 'Alegreya Sans'; letter-spacing: .02em; }
+  .opt2 small { font-size: 11px; color: var(--muted); }
+  .opt2.sel { border: 2px solid var(--gold); background: rgba(230,189,92,.13); box-shadow: 0 0 14px rgba(230,189,92,.25); }
+  .opt2.sel b { color: #ffe7a8; }
+  .race-note { padding: 10px 12px; border-radius: 10px; background: rgba(181,140,255,.08); border: 1px solid rgba(181,140,255,.4); font-size: 14px; line-height: 1.35; }
+  .race-note b { color: #d9c4ff; }
+  .big { display: flex; gap: 14px; align-items: center; padding: 12px; border-radius: 12px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.14); }
+  .big .stage { border-radius: 10px; padding: 6px 10px; background: radial-gradient(circle at 50% 70%, rgba(181,140,255,.35), transparent 70%); }
+  .big b { font: 800 24px 'Cinzel'; letter-spacing: .05em; display: block; }
+  .big span { color: var(--muted); font-size: 15px; }
+  .look { display: grid; grid-template-columns: 74px 1fr; gap: 8px 10px; align-items: center; }
+  .look .k { font: 700 11px 'Cinzel'; letter-spacing: .16em; color: var(--gold); }
+  .sw { display: flex; gap: 7px; flex-wrap: wrap; }
+  .sw i { width: 28px; height: 28px; border-radius: 7px; border: 2px solid rgba(255,255,255,.18); }
+  .sw i.on { border-color: #fff0c0; box-shadow: 0 0 0 2px var(--gold); }
+  .sw .chip.on { color: #2a1b04; background: var(--gold); border-color: #fff0c0; }
+</style>
+</head>
+<body class="page" style="width:1360px">
+<h1>PHONE · CHARACTER CREATOR</h1>
+<p>In the campaign portal, a player names their hero and picks any race with any class. Race sets the body and what the Look step offers. Class sets the starting kit. The sprites below are the real layered art from <code>tools/tactics-assets</code>, composed the same way the TV composes them.</p>
+
+<div class="phones">
+  <!-- 1. Name and race -->
+  <div class="device">
+    <div class="phone"><div class="screen">
+      <div class="status"><span>9:41</span><span class="notch"></span><span>●●● ▮</span></div>
+      <div class="url">🔒 arcbox.app/c/EMBR · Embers of the Vale</div>
+      <div class="body" style="padding-top:12px">
+        <div class="steps"><span class="on">HERO</span><span>CLASS</span><span>SCORES</span><span>STORY</span><span>LOOK</span></div>
+        <div class="field"><label>YOUR HERO'S NAME</label>
+          <div class="input">Sefa<span class="caret"></span><small>4 / 16</small></div>
+          <div class="hint">Shown on the TV's turn order, nameplates and your seat card.</div></div>
+        <span class="sect">RACE</span>
+        <div class="pick r3">
+          <div class="opt2"><div class="spr" style="--r:0;--c:9"></div><b>Human</b><small>Versatile</small></div>
+          <div class="opt2"><div class="spr" style="--r:1;--c:9"></div><b>Elf</b><small>Keen senses</small></div>
+          <div class="opt2"><div class="spr" style="--r:2;--c:9"></div><b>Half-Elf</b><small>Two extra skills</small></div>
+          <div class="opt2"><div class="spr" style="--r:3;--c:9"></div><b>Dwarf</b><small>Stout</small></div>
+          <div class="opt2"><div class="spr" style="--r:4;--c:9"></div><b>Halfling</b><small>Lucky</small></div>
+          <div class="opt2"><div class="spr" style="--r:5;--c:9"></div><b>Gnome</b><small>Cunning</small></div>
+          <div class="opt2"><div class="spr" style="--r:6;--c:9"></div><b>Half-Orc</b><small>Relentless</small></div>
+          <div class="opt2 sel"><div class="spr" style="--r:7;--c:9"></div><b>Tiefling</b><small>Infernal legacy</small></div>
+          <div class="opt2"><div class="spr" style="--r:8;--c:9"></div><b>Dragonborn</b><small>Breath weapon</small></div>
+        </div>
+        <div class="race-note"><b>Tiefling.</b> Darkvision, resistance to fire, and the thaumaturgy cantrip. CHA +2, INT +1. Horns and a tail are part of the look.</div>
+        <div class="btn gold" style="margin-top:auto">NEXT: CLASS →</div>
+      </div>
+    </div></div>
+    <div class="caption"><b>1 · Name and race</b><span>The hero's name comes first, then one of nine races. Race sets the body (size, ears, horns, tail) and what the Look step will offer.</span></div>
+  </div>
+
+  <!-- 2. Class -->
+  <div class="device">
+    <div class="phone"><div class="screen">
+      <div class="status"><span>9:41</span><span class="notch"></span><span>●●● ▮</span></div>
+      <div class="url">🔒 arcbox.app/c/EMBR · Embers of the Vale</div>
+      <div class="body" style="padding-top:12px">
+        <div class="steps"><span class="done">HERO</span><span class="on">CLASS</span><span>SCORES</span><span>STORY</span><span>LOOK</span></div>
+        <div class="big"><div class="stage"><div class="spr" style="--z:3;--r:7;--c:8"></div></div>
+          <div><b>SEFA</b><span>Tiefling Warlock · Lv 1</span>
+            <div class="chips" style="margin-top:8px"><span class="chip" style="color:var(--p6)">Alex</span><span class="chip">Blaster</span><span class="chip">CHA casting</span></div></div></div>
+        <span class="sect">CLASS · SHOWN AS A TIEFLING</span>
+        <div class="pick r5">
+          <div class="opt2"><div class="spr" style="--z:1.5;--r:7;--c:0"></div><b>Fighter</b></div>
+          <div class="opt2"><div class="spr" style="--z:1.5;--r:7;--c:1"></div><b>Rogue</b></div>
+          <div class="opt2"><div class="spr" style="--z:1.5;--r:7;--c:2"></div><b>Wizard</b></div>
+          <div class="opt2"><div class="spr" style="--z:1.5;--r:7;--c:3"></div><b>Cleric</b></div>
+          <div class="opt2"><div class="spr" style="--z:1.5;--r:7;--c:4"></div><b>Ranger</b></div>
+          <div class="opt2"><div class="spr" style="--z:1.5;--r:7;--c:5"></div><b>Paladin</b></div>
+          <div class="opt2"><div class="spr" style="--z:1.5;--r:7;--c:6"></div><b>Bard</b></div>
+          <div class="opt2"><div class="spr" style="--z:1.5;--r:7;--c:7"></div><b>Druid</b></div>
+          <div class="opt2 sel"><div class="spr" style="--z:1.5;--r:7;--c:8"></div><b>Warlock</b></div>
+          <div class="opt2"><div class="spr" style="--z:1.5;--r:7;--c:9"></div><b>Monk</b></div>
+        </div>
+        <div class="race-note" style="background:rgba(230,189,92,.07);border-color:rgba(230,189,92,.45)"><b style="color:#ffe7a8">Warlock.</b> A pact with a patron for eldritch power. Starts with a tome, a coat and a cloak. Subclass (patron) at level 3.</div>
+        <div class="btn gold" style="margin-top:auto">NEXT: SCORES →</div>
+      </div>
+    </div></div>
+    <div class="caption"><b>2 · Class</b><span>Any race can take any class. That's 90 combinations, all drawn from the same layered sprites. Each tile previews your race in that class's starting kit.</span></div>
+  </div>
+
+  <!-- 3. Look -->
+  <div class="device">
+    <div class="phone"><div class="screen">
+      <div class="status"><span>9:41</span><span class="notch"></span><span>●●● ▮</span></div>
+      <div class="url">🔒 arcbox.app/c/EMBR · Embers of the Vale</div>
+      <div class="body" style="padding-top:12px">
+        <div class="steps"><span class="done">HERO</span><span class="done">CLASS</span><span class="done">SCORES</span><span class="done">STORY</span><span class="on">LOOK</span></div>
+        <div class="big" style="justify-content:center"><div class="stage" style="padding:8px 30px"><div class="spr" style="--z:4;--r:7;--c:8"></div></div></div>
+        <div style="text-align:center;margin-top:-4px"><b style="font:800 22px Cinzel;letter-spacing:.05em">SEFA</b> <span style="color:var(--muted)">· Tiefling Warlock</span></div>
+        <div class="look">
+          <span class="k">SKIN</span><div class="sw"><i class="on" style="background:#b4546a"></i><i style="background:#c2463e"></i><i style="background:#a88bc4"></i><i style="background:#8f93a3"></i></div>
+          <span class="k">HAIR</span><div class="sw chips"><span class="chip on">Long</span><span class="chip">Ponytail</span><span class="chip">Bun</span><span class="chip">Braids</span><span class="chip">+4</span></div>
+          <span class="k">COLOUR</span><div class="sw"><i class="on" style="background:#2a2230"></i><i style="background:#a8432a"></i><i style="background:#e9e3d0"></i><i style="background:#7a52b5"></i><i style="background:#b03045"></i><i style="background:#3f9c9a"></i></div>
+          <span class="k">HORNS</span><div class="sw chips"><span class="chip on">Curled</span><span class="chip">Swept</span><span class="chip">Ram</span><span class="chip">Small</span></div>
+          <span class="k">CLOTHES</span><div class="sw"><i class="on" style="background:#7a3f6e"></i><i style="background:#a8333a"></i><i style="background:#2f3f72"></i><i style="background:#3f6b3a"></i><i style="background:#33343c"></i><i style="background:#b8892e"></i></div>
+        </div>
+        <div style="font-size:13px;color:var(--muted)">Gear comes from your class and changes as you find loot. Your look stays. A dragonborn picks scales and horns instead of hair.</div>
+        <div class="btn gold" style="margin-top:auto">CREATE SEFA</div>
+      </div>
+    </div></div>
+    <div class="caption"><b>3 · Look</b><span>Hair, skin, horns and colours belong to the player. The race decides what's on offer, and every swatch is a palette ramp, so the TV recolours the sprite for free.</span></div>
+  </div>
+</div>
+
+<script type="module">
+  // No canvases on this page: wait for the sprite atlas, then signal shoot.js.
+  const img = new Image();
+  img.onload = img.onerror = () => { window.__ready = true; };
+  img.src = 'assets/race-class.png';
+</script>
+</body>
+</html>

@@ -1,16 +1,20 @@
 {
   "id": "sefa",
-  "name": "Sefa \u00b7 Tiefling Warlock",
+  "name": "Sefa",
+  "race": "tiefling",
+  "class": "warlock",
   "build": "standard",
   "layers": {
     "body": "human",
-    "horns": "curled",
-    "hair": "long",
     "torso": "coat",
     "legs": "skirt",
     "feet": "boots",
+    "hands": "bare",
     "weapon": "tome",
-    "hands": "bare"
+    "cape": "cloak",
+    "hair": "long",
+    "horns": "curled",
+    "tail": "devil"
   },
   "palette": {
     "eyes": "eyes/gold",
@@ -19,12 +23,15 @@
     "metal": "metal/steel",
     "trim": "metal/dark",
     "magic": "magic/shadow",
-    "skin": "skin/tiefling",
+    "horn": "horn/ram",
     "hair": "hair/black",
     "cloth1": "cloth/plum",
-    "cloth2": "cloth/charcoal"
+    "cloth2": "cloth/charcoal",
+    "skin": "skin/tiefling"
   },
   "tags": [
+    "tiefling",
+    "warlock",
     "party"
   ],
   "sheet": "presets/sefa.png"

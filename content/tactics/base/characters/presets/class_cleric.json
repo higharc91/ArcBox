@@ -1,0 +1,36 @@
+{
+  "id": "class_cleric",
+  "name": "Cleric",
+  "race": "human",
+  "class": "cleric",
+  "build": "standard",
+  "layers": {
+    "body": "human",
+    "torso": "vestments",
+    "legs": "pants",
+    "feet": "boots",
+    "hands": "bare",
+    "weapon": "mace",
+    "offhand": "round_shield",
+    "hair": "bun"
+  },
+  "palette": {
+    "eyes": "eyes/dark",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/holy",
+    "horn": "horn/ivory",
+    "hair": "hair/black",
+    "cloth1": "cloth/ivory",
+    "cloth2": "cloth/ochre",
+    "skin": "skin/brown"
+  },
+  "tags": [
+    "human",
+    "cleric",
+    "class"
+  ],
+  "sheet": "presets/class_cleric.png"
+}

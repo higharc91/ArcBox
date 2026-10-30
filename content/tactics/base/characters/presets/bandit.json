@@ -1,6 +1,8 @@
 {
   "id": "bandit",
   "name": "Bandit",
+  "race": null,
+  "class": null,
   "build": "standard",
   "layers": {
     "body": "human",
@@ -20,6 +22,7 @@
     "metal": "metal/steel",
     "trim": "metal/gold",
     "magic": "magic/arcane",
+    "horn": "horn/ivory",
     "skin": "skin/tan",
     "hair": "hair/black",
     "cloth1": "cloth/crimson",

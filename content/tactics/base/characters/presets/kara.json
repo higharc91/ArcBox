@@ -1,18 +1,20 @@
 {
   "id": "kara",
-  "name": "Kara \u00b7 Human Vanguard",
+  "name": "Kara",
+  "race": "human",
+  "class": "fighter",
   "build": "standard",
   "layers": {
     "body": "human",
+    "torso": "plate",
     "legs": "greaves",
     "feet": "sabatons",
-    "torso": "plate",
-    "hair": "cropped",
-    "headgear": "open_helm",
-    "weapon": "sword",
     "hands": "gauntlets",
+    "weapon": "sword",
     "offhand": "kite_shield",
-    "cape": "short_cape"
+    "cape": "short_cape",
+    "headgear": "open_helm",
+    "hair": "cropped"
   },
   "palette": {
     "eyes": "eyes/blue",
@@ -21,12 +23,15 @@
     "metal": "metal/steel",
     "trim": "metal/gold",
     "magic": "magic/arcane",
-    "skin": "skin/fair",
+    "horn": "horn/ivory",
     "hair": "hair/auburn",
     "cloth1": "cloth/crimson",
-    "cloth2": "cloth/slate"
+    "cloth2": "cloth/slate",
+    "skin": "skin/fair"
   },
   "tags": [
+    "human",
+    "fighter",
     "party"
   ],
   "sheet": "presets/kara.png"

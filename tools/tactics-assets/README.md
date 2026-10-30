@@ -44,6 +44,27 @@ drawing.
 
 ## Characters
 
+### Name, race and class
+
+A player's character is **a name, a race, a class and a look** (`parts/creator.py`):
+
+| Axis | Decides |
+|---|---|
+| Race (9) | Build, body (ears, tusks, snout), tail, and which skins, hair, beards and horns are on offer |
+| Class (10) | The starting kit: torso, legs, feet, hands, weapon, off-hand, cape, headgear, plus starting colours |
+| Look | The player's picks, limited to what the race offers, plus any colour changes to the kit |
+
+The races are Human, Elf, Half-Elf, Dwarf, Halfling, Gnome, Half-Orc, Tiefling and Dragonborn.
+
+`make_character(name, race, class, look)` merges these into a recipe, and rejects picks the race doesn't offer
+(for example, hair on a dragonborn). Any race can take any class, so there are 90 combinations, and
+`previews/06-race-class.png` renders every one. `characters/creator.json` exports the races and kits, so the
+phone creator offers exactly these options. The TV draws the name on nameplates and the turn order; the sprite
+doesn't carry it. The creator mockup is `docs/superpowers/mockups/tactics/07-phone-creator.png`.
+
+Store a character as its creator inputs: `{name, race, class, look}`. Gear then changes as loot is equipped, by
+swapping that layer's variant.
+
 `content/tactics/base/characters/`:
 
 | File | What |
@@ -51,7 +72,8 @@ drawing.
 | `manifest.json` | Frame size, anchor, animations, slots, layers and variants, draw order. **Start here.** |
 | `{build}/{layer}/{variant}.png` | One layer as a ramp-map sheet: 20 columns × 2 rows (front, then back facing) |
 | `palettes.json` / `palettes.png` | Every named ramp, every preset's palette, and the LUT (one row per palette) |
-| `presets/{id}.json` + `.png` | Ready-made characters: the recipe, plus a baked full-colour sheet |
+| `presets/{id}.json` + `.png` | Ready-made characters: name, race, class, recipe, plus a baked full-colour sheet |
+| `creator.json` | The creator's options: each race's build, body, tail and offered skins, hair, beards and horns, plus each class kit |
 
 ### Facings
 
