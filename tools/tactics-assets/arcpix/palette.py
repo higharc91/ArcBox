@@ -186,6 +186,9 @@ MAGIC: dict[str, list[str]] = {
     "storm": ramp("#9fd0ff", shift=0.04, spread=0.75),
     "void": ramp("#6a4ad0", shift=0.08, spread=1.1),
     "fel": ramp("#8fe04a", shift=0.07, spread=0.9),
+    "spirit": ramp("#7fe8d0", shift=0.05, spread=0.8),     # ancestral ghosts: pale blue-green
+    "rune": ramp("#35c9b4", shift=0.06, spread=0.9),       # carved runes: a deeper, saturated teal
+    "wild": ramp("#e65ad2", shift=0.07, spread=0.9),       # raw sorcery: hot magenta
 }
 
 EYES: dict[str, list[str]] = {
