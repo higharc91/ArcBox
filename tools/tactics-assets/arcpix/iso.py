@@ -39,6 +39,7 @@ class Sprite:
     j: float
     scale: int = 2
     shadow: bool = True
+    z: float | None = None                   # fixed height in texels (projectiles in flight); default: the tile top
 
 
 @dataclass
@@ -83,7 +84,7 @@ def render(scene: Scene, *, margin: int = 24, sky=((150, 178, 214), (226, 214, 1
     for (i, j), c in scene.cells.items():
         order.append((i + j, 0, ("cell", i, j, c)))
     for s in scene.sprites:
-        order.append((int(s.i) + int(s.j), 1, ("sprite", s)))
+        order.append((int(round(s.i)) + int(round(s.j)), 1, ("sprite", s)))
     order.sort(key=lambda o: (o[0], o[1]))
 
     for _k, _p, item in order:
@@ -152,10 +153,10 @@ def render(scene: Scene, *, margin: int = 24, sky=((150, 178, 214), (226, 214, 1
 
 
 def _draw_sprite(canvas: np.ndarray, scene: Scene, s: Sprite, ox: int, oy: int) -> None:
-    i, j = int(s.i), int(s.j)
-    U = s.i * TILE + TILE / 2 if s.i == int(s.i) else s.i * TILE
-    V = s.j * TILE + TILE / 2 if s.j == int(s.j) else s.j * TILE
-    Z = scene.top_z(i, j)
+    i, j = int(round(s.i)), int(round(s.j))
+    U = (s.i + 0.5) * TILE                   # i and j may be fractional: things in flight between tiles
+    V = (s.j + 0.5) * TILE
+    Z = s.z if s.z is not None else scene.top_z(i, j)
     gx = U - V + ox
     gy = (U + V) / 2 - Z + oy
     img = s.image.resize((s.image.width * s.scale, s.image.height * s.scale), Image.NEAREST)

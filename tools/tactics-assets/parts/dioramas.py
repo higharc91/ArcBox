@@ -110,7 +110,7 @@ def build_scene(mats: dict[str, Mat], terrain: list[str], heights: list[str], *,
 FLOWERS = [(f"flowers_{k}", v) for k in range(3) for v in ("red", "yellow", "white", "blue")]
 
 
-def ashen_ford(frame: int = 0) -> iso.Scene:
+def ashen_ford(frame: int = 0, units: bool = True) -> iso.Scene:
     """Grassland with a rocky bluff, a river with a plank bridge, a dirt road, wildflowers and a camp."""
     mats = {
         "g": Mat(("grass", "green"), ("dirt_side", "brown"), ("grass_lip", "green")),
@@ -151,6 +151,10 @@ def ashen_ford(frame: int = 0) -> iso.Scene:
         prop("tent", 0, 4), prop("crate", 6, 5), prop("barrel", 3, 5), prop("signpost", 6, 4),
         prop("fence", 2, 9), prop("banner", 10, 9, "goblin", frame=frame), prop("rock_small", 11, 8),
         prop("bush", 0, 9, "autumn"), prop("reeds", 2, 5),
+    ]
+    if not units:
+        return s
+    s.sprites += [
         unit("kara", 5, 4, k=ik), unit("aldric", 3, 3, k=1 - ik), unit("ilyra", 8, 2, k=ik),
         unit("tamsin", 10, 2, k=1 - ik), unit("wren", 6, 3, k=ik), unit("sefa", 1, 3, k=1 - ik),
         unit("goblin_cutthroat", 4, 9, "back", mirror=True, k=ik), unit("goblin_spear", 7, 9, "back", k=1 - ik),
