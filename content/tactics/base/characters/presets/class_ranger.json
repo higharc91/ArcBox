@@ -1,0 +1,38 @@
+{
+  "id": "class_ranger",
+  "name": "Ranger",
+  "race": "elf",
+  "class": "ranger",
+  "build": "standard_f",
+  "layers": {
+    "body": "elf",
+    "torso": "coat",
+    "legs": "pants",
+    "feet": "boots",
+    "hands": "gloves",
+    "weapon": "bow",
+    "cape": "cloak",
+    "hair": "braids"
+  },
+  "palette": {
+    "eyes": "eyes/green",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "horn": "horn/ivory",
+    "hair": "hair/chestnut",
+    "cloth1": "cloth/forest",
+    "cloth2": "cloth/sand",
+    "skin": "skin/olive",
+    "paint": "paint/woad",
+    "blade": "metal/steel"
+  },
+  "tags": [
+    "elf",
+    "ranger",
+    "class"
+  ],
+  "sheet": "presets/class_ranger.png"
+}

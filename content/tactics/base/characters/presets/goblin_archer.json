@@ -1,0 +1,36 @@
+{
+  "id": "goblin_archer",
+  "name": "Goblin Archer",
+  "race": null,
+  "class": null,
+  "build": "short",
+  "layers": {
+    "body": "goblin",
+    "hair": "messy",
+    "headgear": "hood",
+    "torso": "vest",
+    "legs": "shorts",
+    "feet": "sandals",
+    "weapon": "bow",
+    "hands": "gloves"
+  },
+  "palette": {
+    "eyes": "eyes/red",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "horn": "horn/ivory",
+    "paint": "paint/woad",
+    "skin": "skin/goblin",
+    "hair": "hair/black",
+    "cloth1": "cloth/forest",
+    "cloth2": "cloth/sand",
+    "blade": "metal/steel"
+  },
+  "tags": [
+    "enemy"
+  ],
+  "sheet": "presets/goblin_archer.png"
+}

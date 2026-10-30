@@ -1,0 +1,147 @@
+{
+  "frame": {
+    "width": 48,
+    "height": 48,
+    "anchor": [
+      24,
+      44
+    ]
+  },
+  "framesPerDirection": 11,
+  "directions": {
+    "front": {
+      "row": 0
+    },
+    "back": {
+      "row": 1
+    }
+  },
+  "anims": {
+    "idle": {
+      "frames": [
+        0,
+        1
+      ],
+      "fps": 3.0,
+      "loop": true
+    },
+    "walk": {
+      "frames": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "fps": 8.0,
+      "loop": true
+    },
+    "attack": {
+      "frames": [
+        6,
+        7,
+        8
+      ],
+      "fps": 10.0,
+      "loop": false
+    },
+    "hurt": {
+      "frames": [
+        9
+      ],
+      "fps": 6.0,
+      "loop": false
+    },
+    "down": {
+      "frames": [
+        10
+      ],
+      "fps": 1.0,
+      "loop": false
+    }
+  },
+  "beasts": {
+    "wolf": {
+      "name": "Wolf",
+      "variants": {
+        "grey": "wolf_grey.png",
+        "timber": "wolf_timber.png",
+        "dire": "wolf_dire.png",
+        "frost": "wolf_frost.png"
+      },
+      "tags": [
+        "beast"
+      ],
+      "flying": false
+    },
+    "boar": {
+      "name": "Boar",
+      "variants": {
+        "brown": "boar_brown.png",
+        "dark": "boar_dark.png"
+      },
+      "tags": [
+        "beast"
+      ],
+      "flying": false
+    },
+    "bear": {
+      "name": "Bear",
+      "variants": {
+        "brown": "bear_brown.png",
+        "black": "bear_black.png",
+        "polar": "bear_polar.png"
+      },
+      "tags": [
+        "beast",
+        "large"
+      ],
+      "flying": false
+    },
+    "spider": {
+      "name": "Giant Spider",
+      "variants": {
+        "black": "spider_black.png",
+        "red": "spider_red.png"
+      },
+      "tags": [
+        "beast"
+      ],
+      "flying": false
+    },
+    "slime": {
+      "name": "Slime",
+      "variants": {
+        "green": "slime_green.png",
+        "blue": "slime_blue.png",
+        "magma": "slime_magma.png"
+      },
+      "tags": [
+        "ooze"
+      ],
+      "flying": false
+    },
+    "bat": {
+      "name": "Giant Bat",
+      "variants": {
+        "dusk": "bat_dusk.png"
+      },
+      "tags": [
+        "beast"
+      ],
+      "flying": true
+    },
+    "drake": {
+      "name": "Drake",
+      "variants": {
+        "red": "drake_red.png",
+        "green": "drake_green.png",
+        "blue": "drake_blue.png"
+      },
+      "tags": [
+        "dragon",
+        "boss"
+      ],
+      "flying": false
+    }
+  }
+}

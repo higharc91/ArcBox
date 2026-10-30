@@ -1,0 +1,1764 @@
+{
+  "sizes": {
+    "ability": 24,
+    "item": 24,
+    "status": 16,
+    "frame": 26
+  },
+  "atlases": {
+    "ability": {
+      "file": "abilities.png",
+      "cell": [
+        24,
+        24
+      ],
+      "columns": 8,
+      "gutter": 1
+    },
+    "status": {
+      "file": "status.png",
+      "cell": [
+        16,
+        16
+      ],
+      "columns": 6,
+      "gutter": 1
+    },
+    "item": {
+      "file": "items.png",
+      "cell": [
+        24,
+        24
+      ],
+      "columns": 8,
+      "gutter": 1
+    },
+    "frame": {
+      "file": "frames.png",
+      "cell": [
+        26,
+        26
+      ],
+      "columns": 6,
+      "gutter": 1
+    }
+  },
+  "icons": {
+    "slash": {
+      "atlas": "abilities.png",
+      "rect": [
+        1,
+        1,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "fighter",
+        "paladin",
+        "melee",
+        "weapon"
+      ]
+    },
+    "heavy_strike": {
+      "atlas": "abilities.png",
+      "rect": [
+        27,
+        1,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "fighter",
+        "melee",
+        "weapon"
+      ]
+    },
+    "cleave": {
+      "atlas": "abilities.png",
+      "rect": [
+        53,
+        1,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "fighter",
+        "melee",
+        "weapon",
+        "area"
+      ]
+    },
+    "shield_bash": {
+      "atlas": "abilities.png",
+      "rect": [
+        79,
+        1,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "fighter",
+        "paladin",
+        "melee",
+        "shield"
+      ]
+    },
+    "shield_wall": {
+      "atlas": "abilities.png",
+      "rect": [
+        105,
+        1,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "fighter",
+        "paladin",
+        "defence",
+        "stance"
+      ]
+    },
+    "thrust": {
+      "atlas": "abilities.png",
+      "rect": [
+        131,
+        1,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "fighter",
+        "melee",
+        "weapon"
+      ]
+    },
+    "sneak_attack": {
+      "atlas": "abilities.png",
+      "rect": [
+        157,
+        1,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "rogue",
+        "melee",
+        "shadow"
+      ]
+    },
+    "dash": {
+      "atlas": "abilities.png",
+      "rect": [
+        183,
+        1,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "rogue",
+        "monk",
+        "movement"
+      ]
+    },
+    "hide": {
+      "atlas": "abilities.png",
+      "rect": [
+        1,
+        27,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "rogue",
+        "ranger",
+        "stealth",
+        "shadow"
+      ]
+    },
+    "poisoned_blade": {
+      "atlas": "abilities.png",
+      "rect": [
+        27,
+        27,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "rogue",
+        "melee",
+        "poison"
+      ]
+    },
+    "arrow_shot": {
+      "atlas": "abilities.png",
+      "rect": [
+        53,
+        27,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "ranger",
+        "ranged",
+        "weapon"
+      ]
+    },
+    "volley": {
+      "atlas": "abilities.png",
+      "rect": [
+        79,
+        27,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "ranger",
+        "ranged",
+        "area"
+      ]
+    },
+    "aimed_shot": {
+      "atlas": "abilities.png",
+      "rect": [
+        105,
+        27,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "ranger",
+        "ranged",
+        "weapon"
+      ]
+    },
+    "fireball": {
+      "atlas": "abilities.png",
+      "rect": [
+        131,
+        27,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "wizard",
+        "spell",
+        "fire",
+        "area"
+      ]
+    },
+    "ice_shard": {
+      "atlas": "abilities.png",
+      "rect": [
+        157,
+        27,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "wizard",
+        "spell",
+        "cold"
+      ]
+    },
+    "lightning_bolt": {
+      "atlas": "abilities.png",
+      "rect": [
+        183,
+        27,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "wizard",
+        "spell",
+        "lightning",
+        "line"
+      ]
+    },
+    "magic_missile": {
+      "atlas": "abilities.png",
+      "rect": [
+        1,
+        53,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "wizard",
+        "spell",
+        "arcane"
+      ]
+    },
+    "heal": {
+      "atlas": "abilities.png",
+      "rect": [
+        27,
+        53,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "cleric",
+        "druid",
+        "spell",
+        "healing"
+      ]
+    },
+    "bless": {
+      "atlas": "abilities.png",
+      "rect": [
+        53,
+        53,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "cleric",
+        "paladin",
+        "spell",
+        "holy",
+        "buff"
+      ]
+    },
+    "revive": {
+      "atlas": "abilities.png",
+      "rect": [
+        79,
+        53,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "cleric",
+        "paladin",
+        "spell",
+        "holy",
+        "healing"
+      ]
+    },
+    "smite": {
+      "atlas": "abilities.png",
+      "rect": [
+        105,
+        53,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "paladin",
+        "melee",
+        "holy"
+      ]
+    },
+    "turn_undead": {
+      "atlas": "abilities.png",
+      "rect": [
+        131,
+        53,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "cleric",
+        "paladin",
+        "holy",
+        "area"
+      ]
+    },
+    "eldritch_blast": {
+      "atlas": "abilities.png",
+      "rect": [
+        157,
+        53,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "warlock",
+        "spell",
+        "ranged"
+      ]
+    },
+    "hex": {
+      "atlas": "abilities.png",
+      "rect": [
+        183,
+        53,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "warlock",
+        "spell",
+        "curse"
+      ]
+    },
+    "inspire": {
+      "atlas": "abilities.png",
+      "rect": [
+        1,
+        79,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "bard",
+        "song",
+        "buff"
+      ]
+    },
+    "wild_shape": {
+      "atlas": "abilities.png",
+      "rect": [
+        27,
+        79,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "druid",
+        "transform",
+        "nature"
+      ]
+    },
+    "entangle": {
+      "atlas": "abilities.png",
+      "rect": [
+        53,
+        79,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "druid",
+        "ranger",
+        "spell",
+        "nature",
+        "area"
+      ]
+    },
+    "flurry_of_blows": {
+      "atlas": "abilities.png",
+      "rect": [
+        79,
+        79,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "monk",
+        "melee",
+        "unarmed"
+      ]
+    },
+    "stunning_strike": {
+      "atlas": "abilities.png",
+      "rect": [
+        105,
+        79,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "monk",
+        "melee",
+        "unarmed"
+      ]
+    },
+    "ki": {
+      "atlas": "abilities.png",
+      "rect": [
+        131,
+        79,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "monk",
+        "meditate",
+        "buff"
+      ]
+    },
+    "misty_step": {
+      "atlas": "abilities.png",
+      "rect": [
+        157,
+        79,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "wizard",
+        "warlock",
+        "spell",
+        "teleport"
+      ]
+    },
+    "second_wind": {
+      "atlas": "abilities.png",
+      "rect": [
+        183,
+        79,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "fighter",
+        "healing",
+        "bonus"
+      ]
+    },
+    "poisoned": {
+      "atlas": "status.png",
+      "rect": [
+        1,
+        1,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "debuff",
+        "poison"
+      ]
+    },
+    "burning": {
+      "atlas": "status.png",
+      "rect": [
+        19,
+        1,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "debuff",
+        "fire"
+      ]
+    },
+    "chilled": {
+      "atlas": "status.png",
+      "rect": [
+        37,
+        1,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "debuff",
+        "cold"
+      ]
+    },
+    "stunned": {
+      "atlas": "status.png",
+      "rect": [
+        55,
+        1,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "debuff",
+        "control"
+      ]
+    },
+    "prone": {
+      "atlas": "status.png",
+      "rect": [
+        73,
+        1,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "debuff",
+        "control"
+      ]
+    },
+    "bleeding": {
+      "atlas": "status.png",
+      "rect": [
+        91,
+        1,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "debuff",
+        "damage"
+      ]
+    },
+    "blessed": {
+      "atlas": "status.png",
+      "rect": [
+        1,
+        19,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "buff",
+        "holy"
+      ]
+    },
+    "hasted": {
+      "atlas": "status.png",
+      "rect": [
+        19,
+        19,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "buff",
+        "speed"
+      ]
+    },
+    "slowed": {
+      "atlas": "status.png",
+      "rect": [
+        37,
+        19,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "debuff",
+        "speed"
+      ]
+    },
+    "shielded": {
+      "atlas": "status.png",
+      "rect": [
+        55,
+        19,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "buff",
+        "defence"
+      ]
+    },
+    "hidden": {
+      "atlas": "status.png",
+      "rect": [
+        73,
+        19,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "buff",
+        "stealth"
+      ]
+    },
+    "marked": {
+      "atlas": "status.png",
+      "rect": [
+        91,
+        19,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "debuff",
+        "curse",
+        "hex",
+        "hunters_mark"
+      ]
+    },
+    "inspired": {
+      "atlas": "status.png",
+      "rect": [
+        1,
+        37,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "buff",
+        "song"
+      ]
+    },
+    "regenerating": {
+      "atlas": "status.png",
+      "rect": [
+        19,
+        37,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "buff",
+        "healing"
+      ]
+    },
+    "concentrating": {
+      "atlas": "status.png",
+      "rect": [
+        37,
+        37,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "spell",
+        "concentration"
+      ]
+    },
+    "frightened": {
+      "atlas": "status.png",
+      "rect": [
+        55,
+        37,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "debuff",
+        "control",
+        "fear"
+      ]
+    },
+    "charmed": {
+      "atlas": "status.png",
+      "rect": [
+        73,
+        37,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "debuff",
+        "control",
+        "charm"
+      ]
+    },
+    "injured": {
+      "atlas": "status.png",
+      "rect": [
+        91,
+        37,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "debuff",
+        "downed"
+      ]
+    },
+    "potion_healing": {
+      "atlas": "items.png",
+      "rect": [
+        1,
+        1,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "potion",
+        "consumable"
+      ],
+      "shape": "potion"
+    },
+    "potion_mana": {
+      "atlas": "items.png",
+      "rect": [
+        27,
+        1,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "potion",
+        "consumable"
+      ],
+      "shape": "potion"
+    },
+    "potion_antidote": {
+      "atlas": "items.png",
+      "rect": [
+        53,
+        1,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "potion",
+        "consumable"
+      ],
+      "shape": "potion"
+    },
+    "potion_fire_resistance": {
+      "atlas": "items.png",
+      "rect": [
+        79,
+        1,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "potion",
+        "consumable"
+      ],
+      "shape": "potion"
+    },
+    "potion_greater_healing": {
+      "atlas": "items.png",
+      "rect": [
+        105,
+        1,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "potion",
+        "consumable"
+      ],
+      "shape": "potion_big"
+    },
+    "scroll": {
+      "atlas": "items.png",
+      "rect": [
+        131,
+        1,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "consumable",
+        "spell"
+      ]
+    },
+    "gold": {
+      "atlas": "items.png",
+      "rect": [
+        157,
+        1,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "currency",
+        "valuable"
+      ]
+    },
+    "gem_ruby": {
+      "atlas": "items.png",
+      "rect": [
+        183,
+        1,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "gem",
+        "valuable"
+      ],
+      "shape": "gem"
+    },
+    "gem_sapphire": {
+      "atlas": "items.png",
+      "rect": [
+        1,
+        27,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "gem",
+        "valuable"
+      ],
+      "shape": "gem"
+    },
+    "gem_emerald": {
+      "atlas": "items.png",
+      "rect": [
+        27,
+        27,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "gem",
+        "valuable"
+      ],
+      "shape": "gem"
+    },
+    "gem_amethyst": {
+      "atlas": "items.png",
+      "rect": [
+        53,
+        27,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "gem",
+        "valuable"
+      ],
+      "shape": "gem"
+    },
+    "key": {
+      "atlas": "items.png",
+      "rect": [
+        79,
+        27,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "quest",
+        "key"
+      ]
+    },
+    "ring": {
+      "atlas": "items.png",
+      "rect": [
+        105,
+        27,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "jewellery",
+        "equip:ring"
+      ]
+    },
+    "amulet": {
+      "atlas": "items.png",
+      "rect": [
+        131,
+        27,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "jewellery",
+        "equip:neck"
+      ]
+    },
+    "sword": {
+      "atlas": "items.png",
+      "rect": [
+        157,
+        27,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "weapon",
+        "melee",
+        "equip:weapon"
+      ]
+    },
+    "axe": {
+      "atlas": "items.png",
+      "rect": [
+        183,
+        27,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "weapon",
+        "melee",
+        "equip:weapon"
+      ]
+    },
+    "bow": {
+      "atlas": "items.png",
+      "rect": [
+        1,
+        53,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "weapon",
+        "ranged",
+        "equip:weapon"
+      ]
+    },
+    "staff": {
+      "atlas": "items.png",
+      "rect": [
+        27,
+        53,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "weapon",
+        "focus",
+        "equip:weapon"
+      ]
+    },
+    "dagger": {
+      "atlas": "items.png",
+      "rect": [
+        53,
+        53,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "weapon",
+        "melee",
+        "equip:weapon"
+      ]
+    },
+    "mace": {
+      "atlas": "items.png",
+      "rect": [
+        79,
+        53,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "weapon",
+        "melee",
+        "equip:weapon"
+      ]
+    },
+    "spear": {
+      "atlas": "items.png",
+      "rect": [
+        105,
+        53,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "weapon",
+        "melee",
+        "equip:weapon"
+      ]
+    },
+    "wand": {
+      "atlas": "items.png",
+      "rect": [
+        131,
+        53,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "weapon",
+        "focus",
+        "equip:weapon"
+      ]
+    },
+    "helmet": {
+      "atlas": "items.png",
+      "rect": [
+        157,
+        53,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "armour",
+        "equip:head"
+      ]
+    },
+    "chest_armour": {
+      "atlas": "items.png",
+      "rect": [
+        183,
+        53,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "armour",
+        "equip:torso"
+      ]
+    },
+    "boots": {
+      "atlas": "items.png",
+      "rect": [
+        1,
+        79,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "armour",
+        "equip:feet"
+      ]
+    },
+    "gloves": {
+      "atlas": "items.png",
+      "rect": [
+        27,
+        79,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "armour",
+        "equip:hands"
+      ]
+    },
+    "shield": {
+      "atlas": "items.png",
+      "rect": [
+        53,
+        79,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "armour",
+        "equip:offhand"
+      ]
+    },
+    "cloak": {
+      "atlas": "items.png",
+      "rect": [
+        79,
+        79,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "armour",
+        "equip:cape"
+      ]
+    },
+    "food": {
+      "atlas": "items.png",
+      "rect": [
+        105,
+        79,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "consumable",
+        "food"
+      ]
+    },
+    "tome": {
+      "atlas": "items.png",
+      "rect": [
+        131,
+        79,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "focus",
+        "book",
+        "equip:weapon"
+      ]
+    },
+    "map": {
+      "atlas": "items.png",
+      "rect": [
+        157,
+        79,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "quest",
+        "map"
+      ]
+    },
+    "torch": {
+      "atlas": "items.png",
+      "rect": [
+        183,
+        79,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "tool",
+        "light"
+      ]
+    },
+    "rope": {
+      "atlas": "items.png",
+      "rect": [
+        1,
+        105,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "tool"
+      ]
+    },
+    "lockpick": {
+      "atlas": "items.png",
+      "rect": [
+        27,
+        105,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "tool",
+        "rogue"
+      ]
+    },
+    "trophy_goblin_fangs": {
+      "atlas": "items.png",
+      "rect": [
+        53,
+        105,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "item",
+      "tags": [
+        "trophy",
+        "quest",
+        "goblin"
+      ]
+    }
+  },
+  "frames": {
+    "common": {
+      "atlas": "frames.png",
+      "rect": [
+        1,
+        1,
+        26,
+        26
+      ],
+      "size": [
+        26,
+        26
+      ],
+      "iconOffset": [
+        1,
+        1
+      ]
+    },
+    "uncommon": {
+      "atlas": "frames.png",
+      "rect": [
+        29,
+        1,
+        26,
+        26
+      ],
+      "size": [
+        26,
+        26
+      ],
+      "iconOffset": [
+        1,
+        1
+      ]
+    },
+    "rare": {
+      "atlas": "frames.png",
+      "rect": [
+        57,
+        1,
+        26,
+        26
+      ],
+      "size": [
+        26,
+        26
+      ],
+      "iconOffset": [
+        1,
+        1
+      ]
+    },
+    "epic": {
+      "atlas": "frames.png",
+      "rect": [
+        85,
+        1,
+        26,
+        26
+      ],
+      "size": [
+        26,
+        26
+      ],
+      "iconOffset": [
+        1,
+        1
+      ]
+    },
+    "legendary": {
+      "atlas": "frames.png",
+      "rect": [
+        113,
+        1,
+        26,
+        26
+      ],
+      "size": [
+        26,
+        26
+      ],
+      "iconOffset": [
+        1,
+        1
+      ]
+    },
+    "ability": {
+      "atlas": "frames.png",
+      "rect": [
+        141,
+        1,
+        26,
+        26
+      ],
+      "size": [
+        26,
+        26
+      ],
+      "iconOffset": [
+        1,
+        1
+      ]
+    }
+  },
+  "rarities": [
+    "common",
+    "uncommon",
+    "rare",
+    "epic",
+    "legendary"
+  ],
+  "notes": {
+    "background": "icons are transparent; draw them over a frame or panel",
+    "frame": "draw the 26x26 frame, then the 24x24 icon at iconOffset; items take their rarity's frame, abilities the 'ability' frame",
+    "scaling": "nearest-neighbour at whole multiples only (2x-3x on phones, 3x-4x on the TV)"
+  }
+}

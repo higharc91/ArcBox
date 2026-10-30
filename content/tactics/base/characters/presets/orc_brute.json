@@ -1,0 +1,35 @@
+{
+  "id": "orc_brute",
+  "name": "Orc Brute",
+  "race": null,
+  "class": null,
+  "build": "large",
+  "layers": {
+    "body": "goblin",
+    "hair": "mohawk",
+    "torso": "rags",
+    "legs": "pants",
+    "feet": "boots",
+    "weapon": "axe",
+    "hands": "gloves"
+  },
+  "palette": {
+    "eyes": "eyes/red",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/iron",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "horn": "horn/ivory",
+    "paint": "paint/woad",
+    "skin": "skin/orc",
+    "hair": "hair/black",
+    "cloth1": "cloth/rust",
+    "cloth2": "cloth/charcoal",
+    "blade": "metal/iron"
+  },
+  "tags": [
+    "enemy"
+  ],
+  "sheet": "presets/orc_brute.png"
+}

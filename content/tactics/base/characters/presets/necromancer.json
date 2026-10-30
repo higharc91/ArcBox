@@ -1,0 +1,39 @@
+{
+  "id": "necromancer",
+  "name": "Necromancer",
+  "race": null,
+  "class": null,
+  "build": "standard",
+  "layers": {
+    "body": "human",
+    "hair": "long",
+    "beard": "goatee",
+    "headgear": "hood",
+    "torso": "robe",
+    "legs": "skirt",
+    "feet": "sandals",
+    "weapon": "tome",
+    "hands": "bare",
+    "cape": "cloak",
+    "marks": "tattoo"
+  },
+  "palette": {
+    "eyes": "eyes/violet",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/shadow",
+    "horn": "horn/ivory",
+    "paint": "paint/jade",
+    "skin": "skin/ash",
+    "hair": "hair/black",
+    "cloth1": "cloth/charcoal",
+    "cloth2": "cloth/plum",
+    "blade": "metal/steel"
+  },
+  "tags": [
+    "enemy"
+  ],
+  "sheet": "presets/necromancer.png"
+}

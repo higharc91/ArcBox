@@ -1,0 +1,41 @@
+{
+  "id": "class_rogue",
+  "name": "Rogue",
+  "race": "tiefling",
+  "class": "rogue",
+  "build": "standard",
+  "layers": {
+    "body": "human",
+    "torso": "vest",
+    "legs": "pants",
+    "feet": "boots",
+    "hands": "gloves",
+    "weapon": "dagger",
+    "cape": "short_cape",
+    "headgear": "hood",
+    "hair": "long",
+    "horns": "small",
+    "tail": "devil"
+  },
+  "palette": {
+    "eyes": "eyes/gold",
+    "leather": "leather/dark",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "horn": "horn/ram",
+    "hair": "hair/violet",
+    "cloth1": "cloth/charcoal",
+    "cloth2": "cloth/slate",
+    "skin": "skin/tiefling",
+    "paint": "paint/woad",
+    "blade": "metal/steel"
+  },
+  "tags": [
+    "tiefling",
+    "rogue",
+    "class"
+  ],
+  "sheet": "presets/class_rogue.png"
+}

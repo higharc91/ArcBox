@@ -1,0 +1,811 @@
+{
+  "bodyTypes": [
+    "masculine",
+    "feminine"
+  ],
+  "marks": [
+    "freckles",
+    "scar",
+    "warpaint",
+    "tattoo",
+    "stripes"
+  ],
+  "paints": [
+    "woad",
+    "ochre",
+    "ash",
+    "kohl",
+    "gold",
+    "crimson",
+    "jade"
+  ],
+  "races": {
+    "human": {
+      "name": "Human",
+      "build": "standard",
+      "body": "human",
+      "skins": [
+        "porcelain",
+        "fair",
+        "tan",
+        "olive",
+        "brown",
+        "deep"
+      ],
+      "hair": [
+        "short",
+        "messy",
+        "long",
+        "ponytail",
+        "bun",
+        "mohawk",
+        "braids",
+        "cropped",
+        "curly",
+        "pixie",
+        "topknot",
+        "twintails"
+      ],
+      "hairColours": [
+        "black",
+        "brown",
+        "chestnut",
+        "auburn",
+        "copper",
+        "blonde",
+        "platinum",
+        "silver",
+        "white",
+        "teal",
+        "violet",
+        "crimson"
+      ],
+      "beards": [
+        "short",
+        "full",
+        "braided",
+        "goatee",
+        "moustache",
+        "stubble"
+      ],
+      "horns": [],
+      "hornsRequired": false,
+      "hornColours": [],
+      "tail": null,
+      "eyes": [
+        "dark",
+        "blue",
+        "green",
+        "amber",
+        "violet",
+        "red",
+        "gold"
+      ],
+      "default": {
+        "skin": "tan",
+        "hair": "short",
+        "hair_colour": "brown",
+        "eyes": "dark"
+      },
+      "traits": [
+        "Versatile",
+        "+1 to every score"
+      ]
+    },
+    "elf": {
+      "name": "Elf",
+      "build": "standard",
+      "body": "elf",
+      "skins": [
+        "porcelain",
+        "fair",
+        "tan",
+        "olive",
+        "brown",
+        "deep"
+      ],
+      "hair": [
+        "short",
+        "messy",
+        "long",
+        "ponytail",
+        "bun",
+        "mohawk",
+        "braids",
+        "cropped",
+        "curly",
+        "pixie",
+        "topknot",
+        "twintails"
+      ],
+      "hairColours": [
+        "black",
+        "brown",
+        "chestnut",
+        "auburn",
+        "copper",
+        "blonde",
+        "platinum",
+        "silver",
+        "white",
+        "teal",
+        "violet",
+        "crimson"
+      ],
+      "beards": [],
+      "horns": [],
+      "hornsRequired": false,
+      "hornColours": [],
+      "tail": null,
+      "eyes": [
+        "dark",
+        "blue",
+        "green",
+        "amber",
+        "violet",
+        "red",
+        "gold"
+      ],
+      "default": {
+        "skin": "porcelain",
+        "hair": "long",
+        "hair_colour": "platinum",
+        "eyes": "green"
+      },
+      "traits": [
+        "Darkvision",
+        "Fey ancestry",
+        "Keen senses"
+      ]
+    },
+    "half_elf": {
+      "name": "Half-Elf",
+      "build": "standard",
+      "body": "half_elf",
+      "skins": [
+        "porcelain",
+        "fair",
+        "tan",
+        "olive",
+        "brown",
+        "deep"
+      ],
+      "hair": [
+        "short",
+        "messy",
+        "long",
+        "ponytail",
+        "bun",
+        "mohawk",
+        "braids",
+        "cropped",
+        "curly",
+        "pixie",
+        "topknot",
+        "twintails"
+      ],
+      "hairColours": [
+        "black",
+        "brown",
+        "chestnut",
+        "auburn",
+        "copper",
+        "blonde",
+        "platinum",
+        "silver",
+        "white",
+        "teal",
+        "violet",
+        "crimson"
+      ],
+      "beards": [
+        "short",
+        "goatee",
+        "stubble"
+      ],
+      "horns": [],
+      "hornsRequired": false,
+      "hornColours": [],
+      "tail": null,
+      "eyes": [
+        "dark",
+        "blue",
+        "green",
+        "amber",
+        "violet",
+        "red",
+        "gold"
+      ],
+      "default": {
+        "skin": "fair",
+        "hair": "ponytail",
+        "hair_colour": "auburn",
+        "eyes": "green"
+      },
+      "traits": [
+        "Darkvision",
+        "Fey ancestry",
+        "Two extra skills"
+      ]
+    },
+    "dwarf": {
+      "name": "Dwarf",
+      "build": "short",
+      "body": "human",
+      "skins": [
+        "fair",
+        "tan",
+        "olive",
+        "brown",
+        "deep"
+      ],
+      "hair": [
+        "short",
+        "messy",
+        "long",
+        "ponytail",
+        "bun",
+        "mohawk",
+        "braids",
+        "cropped",
+        "curly",
+        "pixie",
+        "topknot",
+        "twintails"
+      ],
+      "hairColours": [
+        "black",
+        "brown",
+        "chestnut",
+        "auburn",
+        "copper",
+        "blonde",
+        "platinum",
+        "silver",
+        "white",
+        "teal",
+        "violet",
+        "crimson"
+      ],
+      "beards": [
+        "full",
+        "braided",
+        "short",
+        "goatee",
+        "moustache",
+        "stubble"
+      ],
+      "horns": [],
+      "hornsRequired": false,
+      "hornColours": [],
+      "tail": null,
+      "eyes": [
+        "dark",
+        "blue",
+        "green",
+        "amber",
+        "violet",
+        "red",
+        "gold"
+      ],
+      "default": {
+        "skin": "tan",
+        "hair": "short",
+        "hair_colour": "copper",
+        "beard": "full",
+        "eyes": "dark"
+      },
+      "traits": [
+        "Darkvision",
+        "Poison resilience",
+        "Stone sense"
+      ]
+    },
+    "halfling": {
+      "name": "Halfling",
+      "build": "short",
+      "body": "human",
+      "skins": [
+        "porcelain",
+        "fair",
+        "tan",
+        "olive",
+        "brown",
+        "deep"
+      ],
+      "hair": [
+        "short",
+        "messy",
+        "long",
+        "ponytail",
+        "bun",
+        "mohawk",
+        "braids",
+        "cropped",
+        "curly",
+        "pixie",
+        "topknot",
+        "twintails"
+      ],
+      "hairColours": [
+        "black",
+        "brown",
+        "chestnut",
+        "auburn",
+        "copper",
+        "blonde",
+        "platinum",
+        "silver",
+        "white",
+        "teal",
+        "violet",
+        "crimson"
+      ],
+      "beards": [],
+      "horns": [],
+      "hornsRequired": false,
+      "hornColours": [],
+      "tail": null,
+      "eyes": [
+        "dark",
+        "blue",
+        "green",
+        "amber",
+        "violet",
+        "red",
+        "gold"
+      ],
+      "default": {
+        "skin": "olive",
+        "hair": "messy",
+        "hair_colour": "brown",
+        "eyes": "green"
+      },
+      "traits": [
+        "Lucky",
+        "Brave",
+        "Nimble"
+      ]
+    },
+    "gnome": {
+      "name": "Gnome",
+      "build": "short",
+      "body": "gnome",
+      "skins": [
+        "porcelain",
+        "fair",
+        "tan",
+        "olive",
+        "brown",
+        "deep"
+      ],
+      "hair": [
+        "short",
+        "messy",
+        "long",
+        "ponytail",
+        "bun",
+        "mohawk",
+        "braids",
+        "cropped",
+        "curly",
+        "pixie",
+        "topknot",
+        "twintails"
+      ],
+      "hairColours": [
+        "black",
+        "brown",
+        "chestnut",
+        "auburn",
+        "copper",
+        "blonde",
+        "platinum",
+        "silver",
+        "white",
+        "teal",
+        "violet",
+        "crimson"
+      ],
+      "beards": [
+        "short",
+        "full",
+        "moustache",
+        "goatee"
+      ],
+      "horns": [],
+      "hornsRequired": false,
+      "hornColours": [],
+      "tail": null,
+      "eyes": [
+        "dark",
+        "blue",
+        "green",
+        "amber",
+        "violet",
+        "red",
+        "gold"
+      ],
+      "default": {
+        "skin": "fair",
+        "hair": "messy",
+        "hair_colour": "teal",
+        "eyes": "blue"
+      },
+      "traits": [
+        "Darkvision",
+        "Gnome cunning"
+      ]
+    },
+    "half_orc": {
+      "name": "Half-Orc",
+      "build": "large",
+      "body": "orc",
+      "skins": [
+        "orc",
+        "orc_grey",
+        "orc_olive",
+        "goblin"
+      ],
+      "hair": [
+        "short",
+        "messy",
+        "long",
+        "ponytail",
+        "bun",
+        "mohawk",
+        "braids",
+        "cropped",
+        "curly",
+        "pixie",
+        "topknot",
+        "twintails"
+      ],
+      "hairColours": [
+        "black",
+        "brown",
+        "chestnut",
+        "auburn",
+        "copper",
+        "blonde",
+        "platinum",
+        "silver",
+        "white",
+        "teal",
+        "violet",
+        "crimson"
+      ],
+      "beards": [
+        "short",
+        "goatee",
+        "moustache",
+        "stubble"
+      ],
+      "horns": [],
+      "hornsRequired": false,
+      "hornColours": [],
+      "tail": null,
+      "eyes": [
+        "dark",
+        "blue",
+        "green",
+        "amber",
+        "violet",
+        "red",
+        "gold"
+      ],
+      "default": {
+        "skin": "orc",
+        "hair": "mohawk",
+        "hair_colour": "black",
+        "eyes": "amber",
+        "horn": "ivory"
+      },
+      "traits": [
+        "Darkvision",
+        "Relentless endurance",
+        "Savage attacks"
+      ]
+    },
+    "tiefling": {
+      "name": "Tiefling",
+      "build": "standard",
+      "body": "human",
+      "skins": [
+        "tiefling",
+        "infernal",
+        "lilac",
+        "ash"
+      ],
+      "hair": [
+        "short",
+        "messy",
+        "long",
+        "ponytail",
+        "bun",
+        "mohawk",
+        "braids",
+        "cropped",
+        "curly",
+        "pixie",
+        "topknot",
+        "twintails"
+      ],
+      "hairColours": [
+        "black",
+        "brown",
+        "chestnut",
+        "auburn",
+        "copper",
+        "blonde",
+        "platinum",
+        "silver",
+        "white",
+        "teal",
+        "violet",
+        "crimson"
+      ],
+      "beards": [],
+      "horns": [
+        "curled",
+        "straight",
+        "ram",
+        "small"
+      ],
+      "hornsRequired": true,
+      "hornColours": [
+        "ivory",
+        "bone",
+        "obsidian",
+        "ram",
+        "crimson"
+      ],
+      "tail": "devil",
+      "eyes": [
+        "dark",
+        "blue",
+        "green",
+        "amber",
+        "violet",
+        "red",
+        "gold"
+      ],
+      "default": {
+        "skin": "tiefling",
+        "hair": "long",
+        "hair_colour": "black",
+        "horns": "curled",
+        "horn": "ram",
+        "eyes": "gold"
+      },
+      "traits": [
+        "Darkvision",
+        "Hellish resistance",
+        "Infernal legacy"
+      ]
+    },
+    "dragonborn": {
+      "name": "Dragonborn",
+      "build": "standard",
+      "body": "dragon",
+      "skins": [
+        "dragon_red",
+        "dragon_blue",
+        "dragon_green",
+        "dragon_black",
+        "dragon_white",
+        "dragon_gold",
+        "dragon_bronze",
+        "dragon_silver",
+        "dragon_copper",
+        "dragon_brass"
+      ],
+      "hair": [],
+      "hairColours": [],
+      "beards": [],
+      "horns": [
+        "swept",
+        "straight",
+        "small"
+      ],
+      "hornsRequired": false,
+      "hornColours": [
+        "ivory",
+        "bone",
+        "obsidian",
+        "ram",
+        "crimson"
+      ],
+      "tail": "dragon",
+      "eyes": [
+        "dark",
+        "blue",
+        "green",
+        "amber",
+        "violet",
+        "red",
+        "gold"
+      ],
+      "default": {
+        "skin": "dragon_bronze",
+        "horns": "swept",
+        "horn": "bone",
+        "eyes": "gold"
+      },
+      "traits": [
+        "Breath weapon",
+        "Damage resistance"
+      ]
+    }
+  },
+  "classes": {
+    "fighter": {
+      "name": "Fighter",
+      "role": "Front line",
+      "gear": {
+        "torso": "chain",
+        "legs": "pants",
+        "feet": "boots",
+        "hands": "gloves",
+        "weapon": "sword",
+        "offhand": "round_shield"
+      },
+      "colours": {
+        "cloth1": "cloth/steel_blue",
+        "cloth2": "cloth/slate"
+      }
+    },
+    "rogue": {
+      "name": "Rogue",
+      "role": "Striker",
+      "gear": {
+        "torso": "vest",
+        "legs": "pants",
+        "feet": "boots",
+        "hands": "gloves",
+        "weapon": "dagger",
+        "cape": "short_cape",
+        "headgear": "hood"
+      },
+      "colours": {
+        "cloth1": "cloth/charcoal",
+        "cloth2": "cloth/slate",
+        "leather": "leather/dark"
+      }
+    },
+    "wizard": {
+      "name": "Wizard",
+      "role": "Control",
+      "gear": {
+        "torso": "robe",
+        "legs": "skirt",
+        "feet": "sandals",
+        "hands": "bare",
+        "weapon": "staff",
+        "headgear": "wizard_hat"
+      },
+      "colours": {
+        "cloth1": "cloth/navy",
+        "cloth2": "cloth/sky",
+        "magic": "magic/arcane"
+      }
+    },
+    "cleric": {
+      "name": "Cleric",
+      "role": "Healer",
+      "gear": {
+        "torso": "vestments",
+        "legs": "pants",
+        "feet": "boots",
+        "hands": "bare",
+        "weapon": "mace",
+        "offhand": "round_shield"
+      },
+      "colours": {
+        "cloth1": "cloth/ivory",
+        "cloth2": "cloth/ochre",
+        "magic": "magic/holy"
+      }
+    },
+    "ranger": {
+      "name": "Ranger",
+      "role": "Ranged",
+      "gear": {
+        "torso": "coat",
+        "legs": "pants",
+        "feet": "boots",
+        "hands": "gloves",
+        "weapon": "bow",
+        "cape": "cloak"
+      },
+      "colours": {
+        "cloth1": "cloth/forest",
+        "cloth2": "cloth/sand"
+      }
+    },
+    "paladin": {
+      "name": "Paladin",
+      "role": "Defender",
+      "gear": {
+        "torso": "plate",
+        "legs": "greaves",
+        "feet": "sabatons",
+        "hands": "gauntlets",
+        "weapon": "greatsword",
+        "cape": "cloak"
+      },
+      "colours": {
+        "cloth1": "cloth/ivory",
+        "cloth2": "cloth/sky",
+        "metal": "metal/silver"
+      }
+    },
+    "bard": {
+      "name": "Bard",
+      "role": "Support",
+      "gear": {
+        "torso": "tunic",
+        "legs": "pants",
+        "feet": "boots",
+        "hands": "bare",
+        "weapon": "lute",
+        "cape": "short_cape"
+      },
+      "colours": {
+        "cloth1": "cloth/teal",
+        "cloth2": "cloth/ochre",
+        "wood": "wood/pale"
+      }
+    },
+    "druid": {
+      "name": "Druid",
+      "role": "Shapeshifter",
+      "gear": {
+        "torso": "robe",
+        "legs": "skirt",
+        "feet": "sandals",
+        "hands": "bare",
+        "weapon": "staff",
+        "headgear": "circlet"
+      },
+      "colours": {
+        "cloth1": "cloth/moss",
+        "cloth2": "cloth/forest",
+        "magic": "magic/nature",
+        "wood": "wood/dark"
+      }
+    },
+    "warlock": {
+      "name": "Warlock",
+      "role": "Blaster",
+      "gear": {
+        "torso": "coat",
+        "legs": "pants",
+        "feet": "boots",
+        "hands": "gloves",
+        "weapon": "tome",
+        "cape": "cloak"
+      },
+      "colours": {
+        "cloth1": "cloth/plum",
+        "cloth2": "cloth/charcoal",
+        "trim": "metal/dark",
+        "magic": "magic/shadow"
+      }
+    },
+    "monk": {
+      "name": "Monk",
+      "role": "Skirmisher",
+      "gear": {
+        "torso": "tunic",
+        "legs": "pants",
+        "feet": "sandals",
+        "hands": "bare"
+      },
+      "colours": {
+        "cloth1": "cloth/ochre",
+        "cloth2": "cloth/rust"
+      }
+    }
+  }
+}

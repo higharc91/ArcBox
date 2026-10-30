@@ -1,0 +1,38 @@
+{
+  "id": "class_bard",
+  "name": "Bard",
+  "race": "half_elf",
+  "class": "bard",
+  "build": "standard_f",
+  "layers": {
+    "body": "half_elf",
+    "torso": "tunic",
+    "legs": "pants",
+    "feet": "boots",
+    "hands": "bare",
+    "weapon": "lute",
+    "cape": "short_cape",
+    "hair": "twintails"
+  },
+  "palette": {
+    "eyes": "eyes/green",
+    "leather": "leather/brown",
+    "wood": "wood/pale",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "horn": "horn/ivory",
+    "hair": "hair/copper",
+    "cloth1": "cloth/teal",
+    "cloth2": "cloth/ochre",
+    "skin": "skin/fair",
+    "paint": "paint/woad",
+    "blade": "metal/steel"
+  },
+  "tags": [
+    "half_elf",
+    "bard",
+    "class"
+  ],
+  "sheet": "presets/class_bard.png"
+}

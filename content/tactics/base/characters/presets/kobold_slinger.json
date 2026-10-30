@@ -1,0 +1,36 @@
+{
+  "id": "kobold_slinger",
+  "name": "Kobold Trapper",
+  "race": null,
+  "class": null,
+  "build": "short",
+  "layers": {
+    "body": "dragon",
+    "tail": "dragon",
+    "horns": "small",
+    "torso": "vest",
+    "legs": "shorts",
+    "weapon": "dagger",
+    "hands": "bare",
+    "headgear": "bandana",
+    "offhand": "lantern"
+  },
+  "palette": {
+    "eyes": "eyes/amber",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/fire",
+    "horn": "horn/bone",
+    "paint": "paint/woad",
+    "skin": "skin/dragon_blue",
+    "cloth1": "cloth/moss",
+    "cloth2": "cloth/rust",
+    "blade": "metal/steel"
+  },
+  "tags": [
+    "enemy"
+  ],
+  "sheet": "presets/kobold_slinger.png"
+}

@@ -1,0 +1,37 @@
+{
+  "id": "black_knight",
+  "name": "Black Knight",
+  "race": null,
+  "class": null,
+  "build": "large",
+  "layers": {
+    "body": "human",
+    "hair": "cropped",
+    "headgear": "great_helm",
+    "torso": "plate",
+    "legs": "greaves",
+    "feet": "sabatons",
+    "weapon": "greatsword",
+    "hands": "gauntlets",
+    "cape": "cloak"
+  },
+  "palette": {
+    "eyes": "eyes/dark",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/dark",
+    "trim": "metal/bronze",
+    "magic": "magic/arcane",
+    "horn": "horn/ivory",
+    "paint": "paint/woad",
+    "skin": "skin/fair",
+    "hair": "hair/black",
+    "cloth1": "cloth/wine",
+    "cloth2": "cloth/charcoal",
+    "blade": "metal/dark"
+  },
+  "tags": [
+    "enemy"
+  ],
+  "sheet": "presets/black_knight.png"
+}

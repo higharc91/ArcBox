@@ -1,0 +1,39 @@
+{
+  "id": "class_paladin",
+  "name": "Paladin",
+  "race": "dragonborn",
+  "class": "paladin",
+  "build": "standard",
+  "layers": {
+    "body": "dragon",
+    "torso": "plate",
+    "legs": "greaves",
+    "feet": "sabatons",
+    "hands": "gauntlets",
+    "weapon": "greatsword",
+    "cape": "cloak",
+    "horns": "swept",
+    "tail": "dragon"
+  },
+  "palette": {
+    "eyes": "eyes/gold",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/silver",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "horn": "horn/bone",
+    "hair": "hair/brown",
+    "cloth1": "cloth/ivory",
+    "cloth2": "cloth/sky",
+    "skin": "skin/dragon_silver",
+    "paint": "paint/woad",
+    "blade": "metal/silver"
+  },
+  "tags": [
+    "dragonborn",
+    "paladin",
+    "class"
+  ],
+  "sheet": "presets/class_paladin.png"
+}

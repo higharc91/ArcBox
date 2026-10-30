@@ -1,0 +1,38 @@
+{
+  "id": "class_druid",
+  "name": "Druid",
+  "race": "halfling",
+  "class": "druid",
+  "build": "short",
+  "layers": {
+    "body": "human",
+    "torso": "robe",
+    "legs": "skirt",
+    "feet": "sandals",
+    "hands": "bare",
+    "weapon": "staff",
+    "headgear": "circlet",
+    "hair": "braids"
+  },
+  "palette": {
+    "eyes": "eyes/green",
+    "leather": "leather/brown",
+    "wood": "wood/dark",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/nature",
+    "horn": "horn/ivory",
+    "hair": "hair/white",
+    "cloth1": "cloth/moss",
+    "cloth2": "cloth/forest",
+    "skin": "skin/deep",
+    "paint": "paint/woad",
+    "blade": "metal/steel"
+  },
+  "tags": [
+    "halfling",
+    "druid",
+    "class"
+  ],
+  "sheet": "presets/class_druid.png"
+}

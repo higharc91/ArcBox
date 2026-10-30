@@ -1,0 +1,39 @@
+{
+  "id": "tamsin",
+  "name": "Tamsin",
+  "race": "half_elf",
+  "class": "ranger",
+  "build": "standard_f",
+  "layers": {
+    "body": "half_elf",
+    "torso": "coat",
+    "legs": "pants",
+    "feet": "boots",
+    "hands": "gloves",
+    "weapon": "bow",
+    "cape": "cloak",
+    "hair": "ponytail",
+    "marks": "freckles"
+  },
+  "palette": {
+    "eyes": "eyes/green",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "horn": "horn/ivory",
+    "hair": "hair/auburn",
+    "cloth1": "cloth/moss",
+    "cloth2": "cloth/sand",
+    "skin": "skin/fair",
+    "paint": "paint/woad",
+    "blade": "metal/steel"
+  },
+  "tags": [
+    "half_elf",
+    "ranger",
+    "party"
+  ],
+  "sheet": "presets/tamsin.png"
+}

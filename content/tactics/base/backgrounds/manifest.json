@@ -1,0 +1,72 @@
+{
+  "sky": {
+    "files": {
+      "day": "sky/day.png",
+      "dusk": "sky/dusk.png",
+      "night": "sky/night.png",
+      "overcast": "sky/overcast.png",
+      "ashfall": "sky/ashfall.png"
+    },
+    "note": "64 x 256 banded gradient: tile horizontally, stretch vertically by whole multiples"
+  },
+  "ranges": {
+    "size": [
+      512,
+      160
+    ],
+    "tileX": true,
+    "files": {
+      "hills_far": "ranges/hills_far.png",
+      "hills_near": "ranges/hills_near.png",
+      "peaks_far": "ranges/peaks_far.png",
+      "peaks_near": "ranges/peaks_near.png",
+      "mesas_far": "ranges/mesas_far.png",
+      "mesas_near": "ranges/mesas_near.png",
+      "volcano_far": "ranges/volcano_far.png",
+      "volcano_near": "ranges/volcano_near.png"
+    },
+    "parallax": {
+      "far": 0.1,
+      "near": 0.25
+    }
+  },
+  "clouds": [
+    "clouds/cloud_0.png",
+    "clouds/cloud_1.png",
+    "clouds/cloud_2.png",
+    "clouds/cloud_3.png",
+    "clouds/cloud_4.png",
+    "clouds/cloud_5.png"
+  ],
+  "stars": {
+    "file": "stars.png",
+    "tileX": true,
+    "tileY": true
+  },
+  "pairings": {
+    "ashen-ford": [
+      "day",
+      "hills"
+    ],
+    "frostpeak": [
+      "overcast",
+      "peaks"
+    ],
+    "mirewood": [
+      "dusk",
+      "hills"
+    ],
+    "sunscar": [
+      "day",
+      "mesas"
+    ],
+    "ember-keep": [
+      "ashfall",
+      "volcano"
+    ],
+    "night": [
+      "night",
+      "peaks"
+    ]
+  }
+}
