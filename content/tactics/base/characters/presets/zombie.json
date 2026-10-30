@@ -23,7 +23,8 @@
     "skin": "skin/orc_grey",
     "hair": "hair/black",
     "cloth1": "cloth/slate",
-    "cloth2": "cloth/charcoal"
+    "cloth2": "cloth/charcoal",
+    "blade": "metal/steel"
   },
   "tags": [
     "enemy",

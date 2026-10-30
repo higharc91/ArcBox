@@ -29,7 +29,8 @@
     "cloth1": "cloth/charcoal",
     "cloth2": "cloth/slate",
     "skin": "skin/tiefling",
-    "paint": "paint/woad"
+    "paint": "paint/woad",
+    "blade": "metal/steel"
   },
   "tags": [
     "tiefling",

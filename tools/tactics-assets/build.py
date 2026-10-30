@@ -33,7 +33,8 @@ from arcpix.out import PACK, PREVIEWS, MOCKUPS, save, write_json  # noqa: E402
 # A neutral palette for previewing bare layers: every slot gets a readable, distinct ramp.
 NEUTRAL = {"skin": "skin/tan", "eyes": "eyes/dark", "hair": "hair/brown", "cloth1": "cloth/steel_blue",
            "cloth2": "cloth/slate", "trim": "metal/gold", "metal": "metal/steel", "leather": "leather/brown",
-           "wood": "wood/oak", "magic": "magic/arcane", "horn": "horn/bone", "paint": "paint/woad"}
+           "wood": "wood/oak", "magic": "magic/arcane", "horn": "horn/bone", "paint": "paint/woad",
+           "blade": "metal/steel"}
 
 
 def build_characters() -> None:
@@ -154,6 +155,7 @@ def build_characters() -> None:
     save(party, MOCKUPS / "party.png")
 
     build_customisation()
+    build_equipment()
 
     # The layer library on the neutral palette.
     ramps_neutral = {s: FAMILIES[ref.split("/")[0]][ref.split("/")[1]] for s, ref in NEUTRAL.items()}
@@ -251,6 +253,43 @@ def build_palettes() -> None:
          PREVIEWS / "00-palettes.png")
 
 
+def build_equipment() -> None:
+    """19-equipment.png: what loot looks like. Every weapon, armour and helm on one hero, then metal tiers."""
+    from arcpix.preview import stack
+    pose = ANIMS["idle"][2][0]
+    swing = ANIMS["attack"][2][1]
+    mk, L = creator.make_character, creator.Look
+
+    def img(rec, ps=pose):
+        return C.compose(rec, "front", ps).render(rec.ramps())
+
+    sections = []
+    tiles = []
+    for w in sorted(C.PARTS["weapon"]):
+        rec = mk("x", "human", "fighter", L(gear={"weapon": w, "offhand": None}))
+        tiles.append(Tile(strip([img(rec), img(rec, ANIMS[ATTACK_FOR.get(w, "cast")][2][1])], 1, gap=3), w,
+                          f"idle · {ATTACK_FOR.get(w, 'cast')}"))
+    sections.append(contact_sheet("Weapons", tiles, columns=8, zoom=3))
+    tiles = []
+    for t in sorted(C.PARTS["torso"]):
+        tiles.append(Tile(img(mk("x", "human", "fighter", L(gear={"torso": t, "offhand": None, "weapon": None}))),
+                          t, "torso"))
+    for h in sorted(C.PARTS["headgear"]):
+        tiles.append(Tile(img(mk("x", "dwarf", "fighter", L(gear={"headgear": h, "offhand": None}))), h,
+                          "headgear"))
+    sections.append(contact_sheet("Armour and headgear", tiles, columns=10, zoom=3))
+    tiles = []
+    for tier in ("iron", "steel", "silver", "gold", "bronze", "mithril", "adamantine", "obsidian", "elven", "dark"):
+        rec = mk("x", "human", "paladin", L(colours={"metal": f"metal/{tier}", "blade": f"metal/{tier}"},
+                                            gear={"headgear": "open_helm"}))
+        tiles.append(Tile(img(rec, swing), tier, "metal tier"))
+    sections.append(contact_sheet("Loot tiers · one plate set, ten metals", tiles, columns=10, zoom=3,
+                                  subtitle="Armour (metal) and weapon (blade) metals are separate slots, so each "
+                                           "item upgrades on its own."))
+    save(stack("Equipment", sections, "Loot swaps a layer's variant; better loot swaps its metal ramp too."),
+         PREVIEWS / "19-equipment.png")
+
+
 def build_customisation() -> None:
     """08-customisation.png: everything a player can change about their hero, section by section."""
     from arcpix.preview import stack
@@ -312,7 +351,8 @@ def build_customisation() -> None:
 
 # Which attack animation a weapon plays; anything not listed (staff, wand, tome, lute, unarmed) casts.
 ATTACK_FOR = {"sword": "attack", "greatsword": "attack", "axe": "attack", "mace": "attack", "dagger": "thrust",
-              "spear": "thrust", "rapier": "thrust", "bow": "shoot"}
+              "spear": "thrust", "rapier": "thrust", "bow": "shoot", "warhammer": "attack", "flail": "attack",
+              "scimitar": "attack", "quarterstaff": "attack", "halberd": "thrust", "crossbow": "shoot"}
 
 
 def build_anim_previews() -> None:

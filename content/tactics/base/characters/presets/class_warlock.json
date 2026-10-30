@@ -27,7 +27,8 @@
     "cloth1": "cloth/plum",
     "cloth2": "cloth/charcoal",
     "skin": "skin/porcelain",
-    "paint": "paint/crimson"
+    "paint": "paint/crimson",
+    "blade": "metal/steel"
   },
   "tags": [
     "human",

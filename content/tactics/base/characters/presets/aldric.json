@@ -27,7 +27,8 @@
     "cloth1": "cloth/ivory",
     "cloth2": "cloth/wine",
     "skin": "skin/tan",
-    "paint": "paint/woad"
+    "paint": "paint/woad",
+    "blade": "metal/steel"
   },
   "tags": [
     "dwarf",

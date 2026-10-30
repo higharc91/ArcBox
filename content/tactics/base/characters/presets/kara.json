@@ -28,7 +28,8 @@
     "cloth1": "cloth/crimson",
     "cloth2": "cloth/slate",
     "skin": "skin/fair",
-    "paint": "paint/woad"
+    "paint": "paint/woad",
+    "blade": "metal/steel"
   },
   "tags": [
     "human",

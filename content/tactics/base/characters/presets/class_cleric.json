@@ -26,7 +26,8 @@
     "cloth1": "cloth/ivory",
     "cloth2": "cloth/ochre",
     "skin": "skin/brown",
-    "paint": "paint/woad"
+    "paint": "paint/woad",
+    "blade": "metal/steel"
   },
   "tags": [
     "human",

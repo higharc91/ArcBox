@@ -147,6 +147,11 @@ METAL: dict[str, list[str]] = {
     "bronze": ramp("#b37a3e", shift=0.06, spread=1.2),
     "silver": ramp("#d6dbe6", shift=0.04, spread=1.4),
     "dark": ramp("#4b4c58", shift=0.05, spread=1.4),
+    # loot tiers beyond steel
+    "mithril": ramp("#cfe6f2", shift=0.04, spread=1.3),
+    "adamantine": ramp("#5f7090", shift=0.05, spread=1.4),
+    "obsidian": ramp("#3a3044", shift=0.06, spread=1.5),
+    "elven": ramp("#b8d6a0", shift=0.05, spread=1.2),
 }
 
 LEATHER: dict[str, list[str]] = {

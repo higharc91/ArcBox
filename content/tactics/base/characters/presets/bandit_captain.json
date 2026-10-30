@@ -29,7 +29,8 @@
     "skin": "skin/tan",
     "hair": "hair/auburn",
     "cloth1": "cloth/crimson",
-    "cloth2": "cloth/charcoal"
+    "cloth2": "cloth/charcoal",
+    "blade": "metal/steel"
   },
   "tags": [
     "enemy",

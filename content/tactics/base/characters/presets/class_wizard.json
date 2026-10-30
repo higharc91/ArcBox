@@ -27,7 +27,8 @@
     "cloth1": "cloth/navy",
     "cloth2": "cloth/sky",
     "skin": "skin/fair",
-    "paint": "paint/woad"
+    "paint": "paint/woad",
+    "blade": "metal/steel"
   },
   "tags": [
     "gnome",

@@ -77,6 +77,20 @@ See `previews/08-customisation.png`.
 phone creator offers exactly these options. The TV draws the name on nameplates and the turn order; the sprite
 doesn't carry it. The creator mockup is `docs/superpowers/mockups/tactics/07-phone-creator.png`.
 
+### Equipment
+
+`previews/19-equipment.png` shows the equipment layers:
+
+- **Weapons (18):** sword, greatsword, axe, mace, warhammer, flail, scimitar, dagger, rapier, spear, halberd,
+  staff, quarterstaff, wand, tome, lute, bow, crossbow. Each plays the attack animation that suits it (swing,
+  thrust, shoot or cast).
+- **Torso armour (10).**
+- **Headgear (9).**
+
+Armour metal (`metal`) and weapon metal (`blade`) are separate slots. A loot tier is a ramp: iron, steel, silver,
+gold, bronze, mithril, adamantine, obsidian, elven or dark. Each item upgrades on its own: a mithril sword doesn't
+turn the armour mithril.
+
 Store a character as its creator inputs: `{name, race, class, look}`. Gear then changes as loot is equipped, by
 swapping that layer's variant.
 

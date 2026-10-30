@@ -132,7 +132,8 @@
     "wood",
     "magic",
     "horn",
-    "paint"
+    "paint",
+    "blade"
   ],
   "slotIds": {
     "skin": 1,
@@ -146,7 +147,8 @@
     "wood": 9,
     "magic": 10,
     "horn": 11,
-    "paint": 12
+    "paint": 12,
+    "blade": 13
   },
   "layers": {
     "cape": [
@@ -181,9 +183,11 @@
     "torso": [
       "chain",
       "coat",
+      "leather",
       "plate",
       "rags",
       "robe",
+      "scale",
       "tunic",
       "vest",
       "vestments"
@@ -228,24 +232,32 @@
       "bandana",
       "circlet",
       "crown",
+      "feathered_cap",
       "great_helm",
       "hood",
+      "horned_helm",
       "open_helm",
       "wizard_hat"
     ],
     "weapon": [
       "axe",
       "bow",
+      "crossbow",
       "dagger",
+      "flail",
       "greatsword",
+      "halberd",
       "lute",
       "mace",
+      "quarterstaff",
       "rapier",
+      "scimitar",
       "spear",
       "staff",
       "sword",
       "tome",
-      "wand"
+      "wand",
+      "warhammer"
     ],
     "hands": [
       "bare",

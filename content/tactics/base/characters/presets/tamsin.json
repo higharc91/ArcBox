@@ -27,7 +27,8 @@
     "cloth1": "cloth/moss",
     "cloth2": "cloth/sand",
     "skin": "skin/fair",
-    "paint": "paint/woad"
+    "paint": "paint/woad",
+    "blade": "metal/steel"
   },
   "tags": [
     "half_elf",

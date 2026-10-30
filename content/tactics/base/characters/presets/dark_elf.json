@@ -27,7 +27,8 @@
     "skin": "skin/lilac",
     "hair": "hair/white",
     "cloth1": "cloth/charcoal",
-    "cloth2": "cloth/plum"
+    "cloth2": "cloth/plum",
+    "blade": "metal/steel"
   },
   "tags": [
     "enemy"

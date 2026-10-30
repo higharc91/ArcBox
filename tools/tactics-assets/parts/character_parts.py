@@ -1,7 +1,8 @@
 """Character layer parts. Each part draws one layer for one frame from the rig's keypoints.
 
 Slots used (shared table, so every layer's ramp map agrees):
-  skin, eyes, hair, cloth1 (primary), cloth2 (secondary), trim, metal, leather, wood, magic
+  skin, eyes, hair, cloth1 (primary), cloth2 (secondary), trim, metal (armour), leather, wood, magic, horn, paint,
+  blade (weapon metal, separate so loot can upgrade a weapon without recolouring the armour)
 
 Conventions: draw the far side first, then the body of the part, then the near side, so the near limb overlaps.
 Shading is applied per layer afterwards (shade_form). Outlines are applied once, to the composed character.
@@ -390,6 +391,30 @@ def torso(kind: str) -> Part:
                     if c.slot[y, x] == c.slots.id("metal") and (x + y) % 2 == 0:
                         c.shade[y, x] = 2
             c.polygon(_torso_poly(p, top_pad=-1, bottom=p.torso_bot - 1), "cloth1")  # surcoat panel
+            _belt(c, p)
+        elif kind == "leather":            # studded leather: a fitted jerkin with pauldrons and a row of studs
+            _arm(c, p, False, "leather", width=3, to_wrist=False)
+            c.polygon(_torso_poly(p, bottom=p.torso_bot + 1), "leather")
+            _arm(c, p, True, "leather", width=3, to_wrist=False)
+            for y in range(p.torso_top + 2, p.torso_bot, 3):
+                for x in range(int(p.torso_cx) - 3, int(p.torso_cx) + 4, 3):
+                    if c.slot[y, x] == c.slots.id("leather"):
+                        c.px(x, y, "metal", 4)
+            c.line(p.torso_cx, p.torso_top + 1, p.torso_cx, p.torso_bot, "leather", 2)   # lacing seam
+            _belt(c, p)
+        elif kind == "scale":              # scale mail: overlapping rows of scales, each lit on its upper edge
+            _arm(c, p, False, "metal", width=3, to_wrist=False)
+            c.polygon(_torso_poly(p, bottom=p.torso_bot + 3, flare=1), "metal")
+            _arm(c, p, True, "metal", width=3, to_wrist=False)
+            for y in range(p.torso_top, p.torso_bot + 4):
+                for x in range(FRAME_W):
+                    if c.slot[y, x] == c.slots.id("metal"):
+                        lx = (x + ((y - p.torso_top) // 2) % 2 * 2) % 4    # 4-wide scales, alternate rows offset
+                        ly = (y - p.torso_top) % 2
+                        if ly == 0:
+                            c.shade[y, x] = 4 if lx in (1, 2) else 3       # the scale's lit crown
+                        else:
+                            c.shade[y, x] = 1 if lx == 0 else (2 if lx == 3 else 3)   # gaps between scales
             _belt(c, p)
         elif kind == "plate":
             _arm(c, p, False, "metal", width=3)
@@ -817,6 +842,26 @@ def headgear(kind: str) -> Part:
             c.px(x0 + 7, y0 - 9, "cloth1")
             c.px(x0 + 8, y0 - 9, "cloth1", 4)
             c.rect(x0 + 1, y0, x0 + 9, y0, "trim")                     # band
+        elif kind == "horned_helm":
+            for y in range(5):
+                inset = 2 if y == 0 else (1 if y == 1 else 0)
+                c.rect(x0 + inset - 1, y0 - 1 + y, x1 - inset + 1, y0 - 1 + y, "metal")
+            c.rect(x0 - 1, y0 + 3, x1 + 1, y0 + 3, "trim")
+            if front:
+                c.rect(p.head_cx, y0 + 3, p.head_cx, y0 + 6, "metal", 4)   # nasal guard
+            for hx, s_ in ((x0 - 1, -1), (x1 + 1, 1)):                      # curving horns
+                for i, (dx, dy) in enumerate(((0, 1), (s_, 0), (2 * s_, -1), (2 * s_, -2), (2 * s_, -3), (s_, -4))):
+                    c.px(hx + dx, y0 + dy, "horn", 3 if i < 3 else (4 if i < 5 else 5))
+        elif kind == "feathered_cap":
+            c.rect(x0, y0 + 1, x1 + 1, y0 + 2, "cloth1", 2)               # brim, tilted
+            for i, (l, r) in enumerate([(1, 9), (1, 9), (2, 8), (3, 7)]):
+                c.rect(x0 + l, y0 - i, x0 + r, y0 - i, "cloth1")
+            c.rect(x0 + 2, y0, x0 + 8, y0, "trim")                        # band
+            fx = x0 + 1 if front else x1 - 1
+            sgn = -1 if front else 1
+            for i in range(6):                                           # a long plume sweeping back
+                c.px(fx + sgn * (i // 2), y0 - 1 - i, "cloth2", 4 if i % 2 else 3)
+                c.px(fx + sgn * (i // 2) + sgn, y0 - i, "cloth2", 2)
         elif kind == "circlet":
             c.rect(x0, y0 + 2, x1, y0 + 2, "metal")
             if front:
@@ -853,9 +898,9 @@ def weapon(kind: str) -> Part:
             a = math.radians(p.weapon)
             px_, py_ = math.cos(a), math.sin(a)                                # guard perpendicular
             c.line(gx - px_ * 2, gy - py_ * 2, gx + px_ * 2, gy + py_ * 2, "trim")
-            c.thick_line(*_along(p, 1), *_along(p, 10), 2 if abs(math.sin(a)) < 0.5 else 1, "metal", 4)
-            c.line(*_along(p, 1), *_along(p, 10), "metal", 3)
-            c.px(*_along(p, 11), "metal", 5)
+            c.thick_line(*_along(p, 1), *_along(p, 10), 2 if abs(math.sin(a)) < 0.5 else 1, "blade", 4)
+            c.line(*_along(p, 1), *_along(p, 10), "blade", 3)
+            c.px(*_along(p, 11), "blade", 5)
             c.px(*pommel, "trim")
         elif kind == "greatsword":
             c.line(*_along(p, -4), *_along(p, 0), "leather")
@@ -863,8 +908,8 @@ def weapon(kind: str) -> Part:
             a = math.radians(p.weapon)
             px_, py_ = math.cos(a), math.sin(a)
             c.line(gx - px_ * 3, gy - py_ * 3, gx + px_ * 3, gy + py_ * 3, "trim")
-            c.thick_line(*_along(p, 2), *_along(p, 15), 2, "metal", 4)
-            c.line(*_along(p, 2), *_along(p, 15), "metal", 3)
+            c.thick_line(*_along(p, 2), *_along(p, 15), 2, "blade", 4)
+            c.line(*_along(p, 2), *_along(p, 15), "blade", 3)
         elif kind == "axe":
             c.thick_line(*_along(p, -3), *_along(p, 10), 1, "wood")
             a = math.radians(p.weapon)
@@ -872,22 +917,22 @@ def weapon(kind: str) -> Part:
             for d in range(6, 11):
                 ex, ey = _along(p, d)
                 span = 3 if d in (7, 8, 9) else 2
-                c.line(ex, ey, ex + px_ * span, ey + py_ * span, "metal", 4 if d == 8 else 3)
+                c.line(ex, ey, ex + px_ * span, ey + py_ * span, "blade", 4 if d == 8 else 3)
         elif kind == "mace":
             c.thick_line(*_along(p, -2), *_along(p, 7), 1, "wood")
             mx, my = _along(p, 9)
-            c.ellipse(mx + 0.5, my + 0.5, 2.2, 2.2, "metal")
-            c.px(mx, my - 2, "metal", 5)
+            c.ellipse(mx + 0.5, my + 0.5, 2.2, 2.2, "blade")
+            c.px(mx, my - 2, "blade", 5)
         elif kind == "dagger":
             c.line(*_along(p, -2), *_along(p, 0), "leather")
-            c.line(*_along(p, 1), *_along(p, 5), "metal", 4)
+            c.line(*_along(p, 1), *_along(p, 5), "blade", 4)
             gx, gy = _along(p, 0)
             c.px(gx - 1, gy, "trim")
             c.px(gx + 1, gy, "trim")
         elif kind == "spear":
             c.line(*_along(p, -9), *_along(p, 12), "wood")
-            c.thick_line(*_along(p, 12), *_along(p, 15), 2, "metal", 4)
-            c.px(*_along(p, 16), "metal", 5)
+            c.thick_line(*_along(p, 12), *_along(p, 15), 2, "blade", 4)
+            c.px(*_along(p, 16), "blade", 5)
         elif kind == "staff":
             # carried upright: drawn straight up from the hand, a little tilted by the pose
             ang = p.weapon * 0.35
@@ -911,7 +956,7 @@ def weapon(kind: str) -> Part:
                 c.line(*top, fx, fy, "cloth2", 4)
                 c.line(fx, fy, *bot, "cloth2", 4)
                 c.line(fx, fy, hx + s * 5, fy, "wood", 4)        # the arrow
-                c.px(hx + s * 6, fy, "metal", 5)
+                c.px(hx + s * 6, fy, "blade", 5)
             else:
                 c.line(*top, *bot, "cloth2", 4)
         elif kind == "tome":
@@ -923,14 +968,68 @@ def weapon(kind: str) -> Part:
         elif kind == "wand":
             c.line(*_along(p, 0), *_along(p, 5), "wood")
             c.px(*_along(p, 6), "magic", 5)
+        elif kind == "warhammer":
+            c.thick_line(*_along(p, -3), *_along(p, 10), 1, "wood")
+            a = math.radians(p.weapon)
+            px_, py_ = math.cos(a), math.sin(a)
+            hx_, hy_ = _along(p, 10)
+            c.thick_line(hx_ - px_ * 3, hy_ - py_ * 3, hx_ + px_ * 3, hy_ + py_ * 3, 3, "blade", 3)   # head
+            c.px(hx_ - px_ * 3, hy_ - py_ * 3 - 1, "blade", 5)
+        elif kind == "halberd":
+            c.line(*_along(p, -9), *_along(p, 14), "wood")
+            a = math.radians(p.weapon)
+            px_, py_ = math.cos(a) * p.near_sign, math.sin(a) * p.near_sign
+            for d in range(9, 14):                                          # axe blade
+                ex, ey = _along(p, d)
+                span = 3 if d in (10, 11, 12) else 2
+                c.line(ex, ey, ex + px_ * span, ey + py_ * span, "blade", 4 if d == 11 else 3)
+            c.thick_line(*_along(p, 14), *_along(p, 17), 1, "blade", 4)  # spike
+            c.px(*_along(p, 18), "blade", 5)
+        elif kind == "flail":
+            c.thick_line(*_along(p, -2), *_along(p, 4), 1, "wood")
+            ex, ey = _along(p, 4)
+            sway = 2 * p.near_sign
+            c.line(ex, ey, ex + sway, ey + 4, "blade", 2)                   # chain
+            c.ellipse(ex + sway + 0.5, ey + 5.5, 2.2, 2.2, "blade", 3)       # spiked ball
+            for dx, dy in ((-2, 0), (2, 0), (0, -2), (0, 2)):
+                c.px(ex + sway + dx * 1.5, ey + 5.5 + dy * 1.5, "blade", 4)
+        elif kind == "scimitar":
+            c.line(*_along(p, -2), *_along(p, 0), "leather")
+            gx, gy = _along(p, 0)
+            c.px(gx - 1, gy, "trim", 4)
+            c.px(gx + 1, gy, "trim", 4)
+            a = math.radians(p.weapon)
+            px_, py_ = math.cos(a) * p.near_sign, math.sin(a) * p.near_sign
+            for d in range(1, 10):                                          # a blade that curves outward
+                bx_, by_ = _along(p, d)
+                curve = (d / 9) ** 2 * 2.5
+                c.px(bx_ + px_ * curve, by_ + py_ * curve, "blade", 4)
+                c.px(bx_ + px_ * (curve - 1), by_ + py_ * (curve - 1), "blade", 3)
+        elif kind == "quarterstaff":
+            ang = p.weapon * 0.35
+            a = math.radians(ang)
+            top = (hx + math.sin(a) * 13, hy - math.cos(a) * 13)
+            bot = (hx - math.sin(a) * 9, hy + math.cos(a) * 9)
+            c.line(*bot, *top, "wood")
+            for t in (0.15, 0.85):                                           # iron-shod ends
+                c.px(bot[0] + (top[0] - bot[0]) * t, bot[1] + (top[1] - bot[1]) * t, "blade", 3)
+        elif kind == "crossbow":
+            # held level at the hip, stock along the weapon angle, a bow across the front
+            s_ = p.near_sign
+            c.thick_line(hx - s_ * 3, hy, hx + s_ * 4, hy - 1, 2, "wood", 3)
+            c.line(hx + s_ * 4, hy - 4, hx + s_ * 4, hy + 3, "blade", 3)   # prod
+            c.line(hx + s_ * 4, hy - 4, hx + s_ * 1, hy - 1, "cloth2", 4)  # string
+            c.line(hx + s_ * 4, hy + 3, hx + s_ * 1, hy - 1, "cloth2", 4)
+            if p.pose.aim:
+                c.px(hx + s_ * 6, hy - 1, "blade", 5)                      # the bolt
         elif kind == "rapier":
             c.line(*_along(p, -2), *_along(p, 0), "leather")
             gx, gy = _along(p, 0)
             s_ = p.near_sign
             for dx, dy in ((-1, 0), (-1, 1), (0, 2), (1, 1), (1, 0)):              # swept hilt
                 c.px(gx + dx * s_, gy + dy - 1, "trim", 4 if dy == 0 else 3)
-            c.line(*_along(p, 1), *_along(p, 12), "metal", 4)
-            c.px(*_along(p, 12), "metal", 5)
+            c.line(*_along(p, 1), *_along(p, 12), "blade", 4)
+            c.px(*_along(p, 12), "blade", 5)
         elif kind == "lute":
             # held across the body: the bowl at the near hand, the neck rising towards the far shoulder
             s_ = p.near_sign

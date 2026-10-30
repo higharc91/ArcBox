@@ -25,7 +25,8 @@
     "skin": "skin/goblin",
     "hair": "hair/white",
     "cloth1": "cloth/wine",
-    "cloth2": "cloth/ochre"
+    "cloth2": "cloth/ochre",
+    "blade": "metal/steel"
   },
   "tags": [
     "enemy"

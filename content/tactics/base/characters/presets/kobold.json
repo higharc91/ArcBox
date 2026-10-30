@@ -24,7 +24,8 @@
     "paint": "paint/woad",
     "skin": "skin/dragon_copper",
     "cloth1": "cloth/rust",
-    "cloth2": "cloth/charcoal"
+    "cloth2": "cloth/charcoal",
+    "blade": "metal/iron"
   },
   "tags": [
     "enemy"

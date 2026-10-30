@@ -14,7 +14,7 @@ from . import character_parts as P
 from .rig import BUILDS, DIRECTIONS, FRAME_W, FRAME_H, ANCHOR, ANIMS, ANIM_ORDER, frame_list, points
 
 SLOTS = SlotTable()
-for _s in ("skin", "eyes", "hair", "cloth1", "cloth2", "trim", "metal", "leather", "wood", "magic", "horn", "paint"):
+for _s in ("skin", "eyes", "hair", "cloth1", "cloth2", "trim", "metal", "leather", "wood", "magic", "horn", "paint", "blade"):
     SLOTS.id(_s)
 
 # layer -> variant -> part factory
@@ -24,14 +24,17 @@ PARTS: dict[str, dict[str, P.Part]] = {
     "tail": {k: P.tail(k) for k in ("devil", "dragon")},
     "legs": {k: P.legs(k) for k in ("pants", "greaves", "shorts", "skirt")},
     "feet": {k: P.feet(k) for k in ("boots", "sabatons", "sandals")},
-    "torso": {k: P.torso(k) for k in ("tunic", "vest", "chain", "plate", "robe", "vestments", "coat", "rags")},
+    "torso": {k: P.torso(k) for k in ("tunic", "vest", "chain", "plate", "robe", "vestments", "coat", "rags",
+                                         "leather", "scale")},
     "beard": {k: P.beard(k) for k in ("short", "full", "braided", "goatee", "moustache", "stubble")},
     "hair": {k: P.hair(k) for k in ("short", "messy", "long", "ponytail", "bun", "mohawk", "braids", "cropped",
                                     "curly", "pixie", "topknot", "twintails")},
     "marks": {k: P.marks(k) for k in ("freckles", "scar", "warpaint", "tattoo", "stripes")},
     "horns": {k: P.horns(k) for k in ("curled", "straight", "ram", "small", "swept")},
-    "headgear": {k: P.headgear(k) for k in ("open_helm", "great_helm", "hood", "wizard_hat", "circlet", "bandana", "crown")},
-    "weapon": {k: P.weapon(k) for k in ("sword", "greatsword", "axe", "mace", "dagger", "spear", "staff", "bow", "tome", "wand", "rapier", "lute")},
+    "headgear": {k: P.headgear(k) for k in ("open_helm", "great_helm", "hood", "wizard_hat", "circlet", "bandana", "crown",
+                                               "horned_helm", "feathered_cap")},
+    "weapon": {k: P.weapon(k) for k in ("sword", "greatsword", "axe", "mace", "dagger", "spear", "staff", "bow", "tome", "wand", "rapier", "lute", "warhammer",
+                                           "halberd", "flail", "scimitar", "quarterstaff", "crossbow")},
     "hands": {k: P.hands(k) for k in ("bare", "gloves", "gauntlets")},
     "offhand": {k: P.offhand(k) for k in ("round_shield", "kite_shield", "buckler", "lantern", "orb")},
 }
@@ -46,7 +49,7 @@ ORDER: dict[str, list[str]] = {
 }
 
 # Slots that get automatic volume shading per layer (others are drawn with explicit shades).
-VOLUME_SLOTS = ("skin", "hair", "cloth1", "cloth2", "metal", "leather", "wood", "trim")
+VOLUME_SLOTS = ("skin", "hair", "cloth1", "cloth2", "metal", "leather", "wood", "trim", "blade")
 # Horns are excluded on purpose: they're small, and drawn with explicit shades.
 
 
@@ -95,6 +98,10 @@ class Recipe:
     tags: list[str] = field(default_factory=list)
     race: str | None = None                        # creator picks (None for enemies authored directly)
     cls: str | None = None
+
+    def __post_init__(self) -> None:
+        # Weapons have their own metal; unless a palette says otherwise it matches the armour.
+        self.palette.setdefault("blade", self.palette.get("metal", "metal/steel"))
 
     def ramps(self) -> dict[str, list[str]]:
         out = {}

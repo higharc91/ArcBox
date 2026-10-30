@@ -478,6 +478,38 @@
         "#4b4c58",
         "#808092",
         "#b9b7cc"
+      ],
+      "mithril": [
+        "#546172",
+        "#728293",
+        "#9aaebd",
+        "#cfe6f2",
+        "#dff6fe",
+        "#e5faff"
+      ],
+      "adamantine": [
+        "#222440",
+        "#303654",
+        "#444e6e",
+        "#5f7090",
+        "#849bba",
+        "#adcae3"
+      ],
+      "obsidian": [
+        "#13101c",
+        "#1b1826",
+        "#282233",
+        "#3a3044",
+        "#7b6688",
+        "#c0a2cc"
+      ],
+      "elven": [
+        "#4a6c44",
+        "#66885b",
+        "#8aaa79",
+        "#b8d6a0",
+        "#d2e9b7",
+        "#ecfdd0"
       ]
     },
     "leather": {
@@ -1054,7 +1086,8 @@
       "wood": "wood/oak",
       "magic": "magic/arcane",
       "horn": "horn/bone",
-      "paint": "paint/woad"
+      "paint": "paint/woad",
+      "blade": "metal/steel"
     },
     "kara": {
       "eyes": "eyes/blue",
@@ -1068,7 +1101,8 @@
       "cloth1": "cloth/crimson",
       "cloth2": "cloth/slate",
       "skin": "skin/fair",
-      "paint": "paint/woad"
+      "paint": "paint/woad",
+      "blade": "metal/steel"
     },
     "aldric": {
       "eyes": "eyes/dark",
@@ -1082,7 +1116,8 @@
       "cloth1": "cloth/ivory",
       "cloth2": "cloth/wine",
       "skin": "skin/tan",
-      "paint": "paint/woad"
+      "paint": "paint/woad",
+      "blade": "metal/steel"
     },
     "wren": {
       "eyes": "eyes/green",
@@ -1096,7 +1131,8 @@
       "cloth1": "cloth/forest",
       "cloth2": "cloth/charcoal",
       "skin": "skin/olive",
-      "paint": "paint/woad"
+      "paint": "paint/woad",
+      "blade": "metal/steel"
     },
     "ilyra": {
       "eyes": "eyes/violet",
@@ -1110,7 +1146,8 @@
       "cloth1": "cloth/royal_purple",
       "cloth2": "cloth/navy",
       "skin": "skin/porcelain",
-      "paint": "paint/woad"
+      "paint": "paint/woad",
+      "blade": "metal/steel"
     },
     "tamsin": {
       "eyes": "eyes/green",
@@ -1124,7 +1161,8 @@
       "cloth1": "cloth/moss",
       "cloth2": "cloth/sand",
       "skin": "skin/fair",
-      "paint": "paint/woad"
+      "paint": "paint/woad",
+      "blade": "metal/steel"
     },
     "sefa": {
       "eyes": "eyes/gold",
@@ -1138,7 +1176,8 @@
       "cloth1": "cloth/plum",
       "cloth2": "cloth/charcoal",
       "skin": "skin/tiefling",
-      "paint": "paint/kohl"
+      "paint": "paint/kohl",
+      "blade": "metal/steel"
     },
     "class_fighter": {
       "eyes": "eyes/amber",
@@ -1152,7 +1191,8 @@
       "cloth1": "cloth/steel_blue",
       "cloth2": "cloth/slate",
       "skin": "skin/orc",
-      "paint": "paint/woad"
+      "paint": "paint/woad",
+      "blade": "metal/steel"
     },
     "class_rogue": {
       "eyes": "eyes/gold",
@@ -1166,7 +1206,8 @@
       "cloth1": "cloth/charcoal",
       "cloth2": "cloth/slate",
       "skin": "skin/tiefling",
-      "paint": "paint/woad"
+      "paint": "paint/woad",
+      "blade": "metal/steel"
     },
     "class_wizard": {
       "eyes": "eyes/blue",
@@ -1180,7 +1221,8 @@
       "cloth1": "cloth/navy",
       "cloth2": "cloth/sky",
       "skin": "skin/fair",
-      "paint": "paint/woad"
+      "paint": "paint/woad",
+      "blade": "metal/steel"
     },
     "class_cleric": {
       "eyes": "eyes/dark",
@@ -1194,7 +1236,8 @@
       "cloth1": "cloth/ivory",
       "cloth2": "cloth/ochre",
       "skin": "skin/brown",
-      "paint": "paint/woad"
+      "paint": "paint/woad",
+      "blade": "metal/steel"
     },
     "class_ranger": {
       "eyes": "eyes/green",
@@ -1208,7 +1251,8 @@
       "cloth1": "cloth/forest",
       "cloth2": "cloth/sand",
       "skin": "skin/olive",
-      "paint": "paint/woad"
+      "paint": "paint/woad",
+      "blade": "metal/steel"
     },
     "class_paladin": {
       "eyes": "eyes/gold",
@@ -1222,7 +1266,8 @@
       "cloth1": "cloth/ivory",
       "cloth2": "cloth/sky",
       "skin": "skin/dragon_silver",
-      "paint": "paint/woad"
+      "paint": "paint/woad",
+      "blade": "metal/silver"
     },
     "class_bard": {
       "eyes": "eyes/green",
@@ -1236,7 +1281,8 @@
       "cloth1": "cloth/teal",
       "cloth2": "cloth/ochre",
       "skin": "skin/fair",
-      "paint": "paint/woad"
+      "paint": "paint/woad",
+      "blade": "metal/steel"
     },
     "class_druid": {
       "eyes": "eyes/green",
@@ -1250,7 +1296,8 @@
       "cloth1": "cloth/moss",
       "cloth2": "cloth/forest",
       "skin": "skin/deep",
-      "paint": "paint/woad"
+      "paint": "paint/woad",
+      "blade": "metal/steel"
     },
     "class_warlock": {
       "eyes": "eyes/red",
@@ -1264,7 +1311,8 @@
       "cloth1": "cloth/plum",
       "cloth2": "cloth/charcoal",
       "skin": "skin/porcelain",
-      "paint": "paint/crimson"
+      "paint": "paint/crimson",
+      "blade": "metal/steel"
     },
     "class_monk": {
       "eyes": "eyes/dark",
@@ -1278,7 +1326,8 @@
       "cloth1": "cloth/ochre",
       "cloth2": "cloth/rust",
       "skin": "skin/olive",
-      "paint": "paint/woad"
+      "paint": "paint/woad",
+      "blade": "metal/steel"
     },
     "goblin_cutthroat": {
       "eyes": "eyes/gold",
@@ -1292,7 +1341,8 @@
       "skin": "skin/goblin",
       "hair": "hair/black",
       "cloth1": "cloth/rust",
-      "cloth2": "cloth/charcoal"
+      "cloth2": "cloth/charcoal",
+      "blade": "metal/steel"
     },
     "goblin_spear": {
       "eyes": "eyes/gold",
@@ -1306,7 +1356,8 @@
       "skin": "skin/goblin",
       "hair": "hair/brown",
       "cloth1": "cloth/moss",
-      "cloth2": "cloth/charcoal"
+      "cloth2": "cloth/charcoal",
+      "blade": "metal/iron"
     },
     "goblin_shaman": {
       "eyes": "eyes/red",
@@ -1320,7 +1371,8 @@
       "skin": "skin/goblin",
       "hair": "hair/white",
       "cloth1": "cloth/wine",
-      "cloth2": "cloth/ochre"
+      "cloth2": "cloth/ochre",
+      "blade": "metal/steel"
     },
     "orc_brute": {
       "eyes": "eyes/red",
@@ -1334,7 +1386,8 @@
       "skin": "skin/orc",
       "hair": "hair/black",
       "cloth1": "cloth/rust",
-      "cloth2": "cloth/charcoal"
+      "cloth2": "cloth/charcoal",
+      "blade": "metal/iron"
     },
     "skeleton": {
       "eyes": "eyes/red",
@@ -1348,7 +1401,8 @@
       "skin": "skin/bone",
       "hair": "hair/black",
       "cloth1": "cloth/charcoal",
-      "cloth2": "cloth/slate"
+      "cloth2": "cloth/slate",
+      "blade": "metal/iron"
     },
     "bandit": {
       "eyes": "eyes/dark",
@@ -1362,7 +1416,8 @@
       "skin": "skin/tan",
       "hair": "hair/black",
       "cloth1": "cloth/crimson",
-      "cloth2": "cloth/charcoal"
+      "cloth2": "cloth/charcoal",
+      "blade": "metal/steel"
     },
     "black_knight": {
       "eyes": "eyes/dark",
@@ -1376,7 +1431,8 @@
       "skin": "skin/fair",
       "hair": "hair/black",
       "cloth1": "cloth/wine",
-      "cloth2": "cloth/charcoal"
+      "cloth2": "cloth/charcoal",
+      "blade": "metal/dark"
     },
     "cultist": {
       "eyes": "eyes/red",
@@ -1390,7 +1446,8 @@
       "skin": "skin/ash",
       "hair": "hair/black",
       "cloth1": "cloth/charcoal",
-      "cloth2": "cloth/wine"
+      "cloth2": "cloth/wine",
+      "blade": "metal/steel"
     },
     "kobold": {
       "eyes": "eyes/gold",
@@ -1403,7 +1460,8 @@
       "paint": "paint/woad",
       "skin": "skin/dragon_copper",
       "cloth1": "cloth/rust",
-      "cloth2": "cloth/charcoal"
+      "cloth2": "cloth/charcoal",
+      "blade": "metal/iron"
     },
     "kobold_slinger": {
       "eyes": "eyes/amber",
@@ -1416,7 +1474,8 @@
       "paint": "paint/woad",
       "skin": "skin/dragon_blue",
       "cloth1": "cloth/moss",
-      "cloth2": "cloth/rust"
+      "cloth2": "cloth/rust",
+      "blade": "metal/steel"
     },
     "hobgoblin": {
       "eyes": "eyes/gold",
@@ -1430,7 +1489,8 @@
       "skin": "skin/infernal",
       "hair": "hair/black",
       "cloth1": "cloth/rust",
-      "cloth2": "cloth/charcoal"
+      "cloth2": "cloth/charcoal",
+      "blade": "metal/bronze"
     },
     "goblin_archer": {
       "eyes": "eyes/red",
@@ -1444,7 +1504,8 @@
       "skin": "skin/goblin",
       "hair": "hair/black",
       "cloth1": "cloth/forest",
-      "cloth2": "cloth/sand"
+      "cloth2": "cloth/sand",
+      "blade": "metal/steel"
     },
     "zombie": {
       "eyes": "eyes/red",
@@ -1458,7 +1519,8 @@
       "skin": "skin/orc_grey",
       "hair": "hair/black",
       "cloth1": "cloth/slate",
-      "cloth2": "cloth/charcoal"
+      "cloth2": "cloth/charcoal",
+      "blade": "metal/steel"
     },
     "skeleton_archer": {
       "eyes": "eyes/red",
@@ -1471,7 +1533,8 @@
       "paint": "paint/woad",
       "skin": "skin/bone",
       "cloth1": "cloth/wine",
-      "cloth2": "cloth/charcoal"
+      "cloth2": "cloth/charcoal",
+      "blade": "metal/steel"
     },
     "lich": {
       "eyes": "eyes/violet",
@@ -1484,7 +1547,8 @@
       "paint": "paint/woad",
       "skin": "skin/bone",
       "cloth1": "cloth/royal_purple",
-      "cloth2": "cloth/charcoal"
+      "cloth2": "cloth/charcoal",
+      "blade": "metal/steel"
     },
     "dark_elf": {
       "eyes": "eyes/red",
@@ -1498,7 +1562,8 @@
       "skin": "skin/lilac",
       "hair": "hair/white",
       "cloth1": "cloth/charcoal",
-      "cloth2": "cloth/plum"
+      "cloth2": "cloth/plum",
+      "blade": "metal/steel"
     },
     "necromancer": {
       "eyes": "eyes/violet",
@@ -1512,7 +1577,8 @@
       "skin": "skin/ash",
       "hair": "hair/black",
       "cloth1": "cloth/charcoal",
-      "cloth2": "cloth/plum"
+      "cloth2": "cloth/plum",
+      "blade": "metal/steel"
     },
     "bandit_captain": {
       "eyes": "eyes/dark",
@@ -1526,7 +1592,8 @@
       "skin": "skin/tan",
       "hair": "hair/auburn",
       "cloth1": "cloth/crimson",
-      "cloth2": "cloth/charcoal"
+      "cloth2": "cloth/charcoal",
+      "blade": "metal/steel"
     },
     "cult_leader": {
       "eyes": "eyes/gold",
@@ -1540,7 +1607,8 @@
       "skin": "skin/porcelain",
       "hair": "hair/crimson",
       "cloth1": "cloth/wine",
-      "cloth2": "cloth/charcoal"
+      "cloth2": "cloth/charcoal",
+      "blade": "metal/steel"
     }
   },
   "lutRows": [

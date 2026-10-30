@@ -26,7 +26,8 @@
     "cloth1": "cloth/royal_purple",
     "cloth2": "cloth/navy",
     "skin": "skin/porcelain",
-    "paint": "paint/woad"
+    "paint": "paint/woad",
+    "blade": "metal/steel"
   },
   "tags": [
     "elf",

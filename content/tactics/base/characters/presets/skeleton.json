@@ -25,7 +25,8 @@
     "skin": "skin/bone",
     "hair": "hair/black",
     "cloth1": "cloth/charcoal",
-    "cloth2": "cloth/slate"
+    "cloth2": "cloth/slate",
+    "blade": "metal/iron"
   },
   "tags": [
     "enemy"
