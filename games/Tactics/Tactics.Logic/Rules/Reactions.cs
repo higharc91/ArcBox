@@ -39,9 +39,9 @@ public static class Reactions
     /// <summary>
     /// Reactions any unit may take for this trigger, in sorted UnitId order (opportunity attack, or abilities with
     /// cost.reaction and a matching "reactsTo" in AbilityDef.Ai tags: "beforeHit", "leavesReach", "spellCast").
-    /// <para>A reactor is Up, not the actor, and has its Reaction. An ability is offered when the reactor knows it, can pay
-    /// for it and carries the tag <c>"reactsTo:&lt;trigger&gt;"</c>; it aims at the reactor for a <c>self</c> ability and at
-    /// the actor otherwise. Per trigger:</para>
+    /// <para>A reactor can act (Up, not incapacitated), is not the actor, and has its Reaction. An ability is offered when
+    /// the reactor knows it, can pay for it and carries the tag <c>"reactsTo:&lt;trigger&gt;"</c>; it aims at the reactor
+    /// for a <c>self</c> ability and at the actor otherwise. Per trigger:</para>
     /// <list type="bullet">
     /// <item><c>leavesReach</c>: the actor is Up with HP left and hostile, and the reactor's melee weapon reaches the actor's tile but not
     /// <see cref="ReactionTrigger.To"/>. Offers the opportunity attack and matching abilities.</item>
@@ -70,7 +70,7 @@ public static class Reactions
 
     private static ReactionOffer? OfferFor(BattleWriter w, UnitState reactor, ReactionTrigger trigger, RulesPack rules)
     {
-        if (reactor.Id == trigger.Actor || reactor.Life != LifeState.Up || !reactor.Economy.Reaction)
+        if (reactor.Id == trigger.Actor || !reactor.Economy.Reaction || !Modifiers.CanAct(w.State, reactor.Id, rules))
             return null;
 
         var actor = w.Unit(trigger.Actor);
@@ -127,7 +127,8 @@ public static class Reactions
 /// reaction may have changed things). A player-controlled reactor gets the <see cref="ReactionOffer"/> as
 /// <see cref="BattleState.Pending"/> (<see cref="ReactionOffered"/>) and the queue pauses until its <see cref="React"/>.
 /// An AI-controlled reactor is never offered: it takes an opportunity attack whenever it has one and otherwise passes
-/// silently (Task 15 replaces this with the AI's reaction policy).
+/// silently, including every <see cref="ReactionTriggerKind.BeforeHit"/> and <see cref="ReactionTriggerKind.SpellCast"/>
+/// window (Task 15 replaces this with the AI's reaction policy).
 /// </summary>
 public sealed record OfferReactionStep(UnitId Reactor, ReactionTrigger Trigger) : Step
 {

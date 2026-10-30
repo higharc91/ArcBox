@@ -17,18 +17,32 @@ namespace Tactics.Logic;
 [JsonDerivedType(typeof(MoveStep), nameof(MoveStep))]
 [JsonDerivedType(typeof(OfferReactionStep), nameof(OfferReactionStep))]
 [JsonDerivedType(typeof(ReactionStep), nameof(ReactionStep))]
+[JsonDerivedType(typeof(AttackStep), nameof(AttackStep))]
 public abstract record Step
 {
     /// <summary>Resolves the step against the writer.</summary>
     public abstract void Run(BattleWriter w, RulesPack rules);
 }
 
-/// <summary>Ends <see cref="Unit"/>'s turn (<see cref="TurnEnded"/>) and queues the hand-off to the next unit.</summary>
-public sealed record EndTurnStep(UnitId Unit) : Step
+/// <summary>
+/// Ends <see cref="Unit"/>'s turn. First its <see cref="HookKind.OnTurnEnd"/> hooks fire and their effects resolve (the
+/// step re-queues itself behind them with <see cref="HooksDone"/>); then its until-save conditions roll and durations tick
+/// (<see cref="Conditions.EndTurn"/>), <see cref="TurnEnded"/> is emitted and the hand-off to the next unit is queued.
+/// </summary>
+public sealed record EndTurnStep(UnitId Unit,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool HooksDone = false) : Step
 {
     /// <inheritdoc />
     public override void Run(BattleWriter w, RulesPack rules)
     {
+        if (!HooksDone)
+        {
+            w.PushFront(this with { HooksDone = true });
+            Hooks.Fire(w, HookKind.OnTurnEnd, new HookArgs(Unit), rules);
+            return;
+        }
+
+        Conditions.EndTurn(w, Unit, rules);
         w.Emit(new TurnEnded(Unit));
         w.PushFront(new StartNextTurnStep());
     }
@@ -70,8 +84,10 @@ public sealed record DelayStep(UnitId Unit, int ToIndex) : Step
 
 /// <summary>
 /// Spends what <see cref="Ability"/> costs <see cref="Unit"/> (Action, or an extra action once the Action is spent; Bonus;
-/// Reaction; Move; resources; a per-battle use), starts its concentration, and emits <see cref="AbilityUsed"/>. The
-/// command was validated, so the cost is affordable.
+/// Reaction; Move; resources; a per-battle use), and emits <see cref="AbilityUsed"/>. A concentration ability first ends
+/// the unit's current concentration (<see cref="Conditions.BreakConcentration"/>), then becomes it. A spell (tier 1 or
+/// more) opens a <see cref="ReactionTriggerKind.SpellCast"/> window: its <see cref="OfferReactionStep"/>s run before the
+/// ability's effects. The command was validated, so the cost is affordable.
 /// </summary>
 public sealed record PayCostStep(UnitId Unit, AbilityId Ability, Target Target) : Step
 {
@@ -99,13 +115,22 @@ public sealed record PayCostStep(UnitId Unit, AbilityId Ability, Target Target) 
         if (cost.Uses is { } uses)
             usesLeft = usesLeft.SetItem(Ability.Value, usesLeft.GetValueOrDefault(Ability.Value, uses) - 1);
 
-        // Task 7 ends the previous concentration effect when a new one starts.
+        if (cost.Concentration)
+        {
+            Conditions.BreakConcentration(w, Unit);
+            unit = w.Unit(Unit);
+        }
         w.Set(unit with
         {
             Economy = economy, Resources = resources, UsesLeft = usesLeft,
             Concentrating = cost.Concentration ? Ability : unit.Concentrating,
         });
         w.Emit(new AbilityUsed(Unit, Ability, Target, ability.Presentation));
+
+        if (ability.Tier < 1)
+            return;
+        var trigger = new ReactionTrigger(ReactionTriggerKind.SpellCast, Unit, Target.Unit, Ability, null);
+        w.PushFront([.. Reactions.OffersFor(w, trigger, rules).Select(o => new OfferReactionStep(o.Reactor, trigger))]);
     }
 }
 
@@ -114,10 +139,14 @@ public sealed record PayCostStep(UnitId Unit, AbilityId Ability, Target Target) 
 /// <see cref="Aim"/>. Each run takes the first effect and queues the rest behind it, so whatever a block queues (a hit's
 /// effects, a reaction) resolves before the next effect, and a save mid-list resumes exactly there. <see cref="Last"/>,
 /// <see cref="HalfDamage"/> and <see cref="SaveStat"/> carry the roll a branch follows (see <see cref="EffectContext"/>).
-/// Nothing runs on a target that is Dead or Out.
+/// <see cref="HookDepth"/> is how deeply nested in hooks the effects are; a hook's effects name their
+/// <see cref="Passive"/>, emitted as <see cref="PassiveTriggered"/> before the first one runs. Nothing runs on a target
+/// that is Dead or Out.
 /// </summary>
 public sealed record RunEffectsStep(UnitId Source, UnitId? Target, Tile? Aim, AbilityId? Ability,
-    ImmutableArray<EffectDef> Effects, RollResult? Last = null, bool HalfDamage = false, Stat? SaveStat = null) : Step
+    ImmutableArray<EffectDef> Effects, RollResult? Last = null, bool HalfDamage = false, Stat? SaveStat = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int HookDepth = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Passive = null) : Step
 {
     /// <inheritdoc />
     public override void Run(BattleWriter w, RulesPack rules)
@@ -126,8 +155,11 @@ public sealed record RunEffectsStep(UnitId Source, UnitId? Target, Tile? Aim, Ab
             return;
         if (Target is { } target && w.Unit(target).Life is LifeState.Dead or LifeState.Out)
             return;
+        w.HookDepth = HookDepth;
+        if (Passive is { } passive)
+            w.Emit(new PassiveTriggered(Source, passive));
         if (Effects.Length > 1)
-            w.PushFront(this with { Effects = Effects.RemoveAt(0) });
+            w.PushFront(this with { Effects = Effects.RemoveAt(0), Passive = null });
 
         var ability = Ability is { } id ? rules.Abilities.GetValueOrDefault(id) : null;
         var ctx = new EffectContext(w, rules, Source, Target, Aim, ability, Last, HalfDamage, SaveStat);

@@ -11,13 +11,16 @@ public static class Movement
     /// mover's tile and has at least one step; each step goes to a 4-adjacent tile that <see cref="Paths.StepCost"/> allows
     /// and no hostile unit holds; allies may be walked through but not ended on (<see cref="RejectCode.PathBlocked"/>). The
     /// steps together cost at most <see cref="TurnEconomy.MoveLeft"/> (<see cref="RejectCode.NoMove"/>). A unit that isn't
-    /// Up can't move (<see cref="RejectCode.Incapacitated"/>). Returns the rejection, leaving the queue untouched.
+    /// Up or is incapacitated can't move (<see cref="RejectCode.Incapacitated"/>), nor can one that
+    /// <see cref="StaticMods.CantMove"/> (<see cref="RejectCode.NoMove"/>). Returns the rejection, leaving the queue untouched.
     /// </summary>
     internal static Rejection? Plan(BattleWriter w, Move move)
     {
         var unit = w.Unit(move.Actor);
-        if (unit.Life != LifeState.Up)
+        if (!Modifiers.CanAct(w.State, unit.Id, w.Rules))
             return Rejection.Of(RejectCode.Incapacitated);
+        if (Modifiers.For(w, unit.Id, w.Rules).CantMove)
+            return Rejection.Of(RejectCode.NoMove);
 
         var path = move.Path.IsDefault ? [] : move.Path;
         var blocked = Rejection.Of(RejectCode.PathBlocked);
@@ -66,9 +69,11 @@ public static class Movement
 /// One step of a walk from <see cref="From"/> to the adjacent <see cref="To"/>. Unless the mover is disengaged, the step
 /// first opens a <see cref="ReactionTriggerKind.LeavesReach"/> window (<see cref="Reactions.OffersFor"/>): one
 /// <see cref="OfferReactionStep"/> per eligible reactor runs ahead of this step, which is re-queued as
-/// <see cref="Checked"/>. Then the step spends its Move, moves the unit and emits <see cref="Moved"/>.
-/// <para>The move halts when the mover is no longer Up, has no HP left, isn't on <see cref="From"/> any more, or can no
-/// longer make the step (illegal, a hostile on <see cref="To"/>, or too little Move). A halt removes the mover's remaining
+/// <see cref="Checked"/>. Then the step spends its Move, moves the unit, emits <see cref="Moved"/> and fires the mover's
+/// <see cref="HookKind.OnMove"/> and <see cref="HookKind.OnEnterTile"/> hooks.
+/// <para>The move halts when the mover is no longer Up, has no HP left, isn't on <see cref="From"/> any more, can't move
+/// (<see cref="StaticMods.CantMove"/>) or can no longer make the step (illegal, a hostile on <see cref="To"/>, or too little
+/// Move). A halt removes the mover's remaining
 /// <see cref="MoveStep"/>s from the queue and, if the mover is left sharing a tile (e.g. passing through an ally), puts it
 /// back on <see cref="LastFree"/>, the last tile of its path it held alone, with a <see cref="Moved"/>.</para>
 /// </summary>
@@ -96,7 +101,7 @@ public sealed record MoveStep(UnitId Unit, Tile From, Tile To, Tile LastFree, bo
         }
 
         var cost = Paths.StepCost(w.Terrain, From, To, unit.Sheet.Jump);
-        if (cost == int.MaxValue || cost > unit.Economy.MoveLeft
+        if (cost == int.MaxValue || cost > unit.Economy.MoveLeft || Modifiers.For(w, Unit, rules).CantMove
             || Motion.OccupantAt(w, To, Unit) is { } other && Movement.Hostile(unit, other))
         {
             Halt(w);
@@ -105,6 +110,11 @@ public sealed record MoveStep(UnitId Unit, Tile From, Tile To, Tile LastFree, bo
 
         w.Set(unit with { Pos = To, Economy = unit.Economy with { MoveLeft = unit.Economy.MoveLeft - cost } });
         w.Emit(new Moved(Unit, [From, To]));
+        var hooks = new List<Step>();
+        Hooks.Collect(w, HookKind.OnMove, new HookArgs(Unit, Tile: To), rules, hooks);
+        Hooks.Collect(w, HookKind.OnEnterTile, new HookArgs(Unit, Tile: To), rules, hooks);
+        if (hooks.Count > 0)
+            w.PushFront([.. hooks]);
     }
 
     private void Halt(BattleWriter w)

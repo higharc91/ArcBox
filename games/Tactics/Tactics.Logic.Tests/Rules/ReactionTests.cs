@@ -409,4 +409,103 @@ public sealed class ReactionTests
         w.Set(kara with { Economy = kara.Economy with { Reaction = false } });
         Assert.Empty(Reactions.OffersFor(w, new ReactionTrigger(ReactionTriggerKind.BeforeHit, U("gob"), U("kara"), Attack, null), battle.Rules));
     }
+
+    /// <summary>Shield: a tier-1 reaction spell that gives the caster +5 AC (the "shielded" condition) for a round.</summary>
+    private static readonly ConditionDef Shielded = new(new ConditionId("shielded"), "Shielded", new StaticMods(Ac: 5), [],
+        Ordinal.Set("magical"));
+
+    private static readonly AbilityDef ShieldSpell = new(new AbilityId("test.shield"), "Shield", Tier: 1, new CostDef(Reaction: 1),
+        new TargetDef(TargetKind.Self, Range: 0, Los: false, new AreaDef(AreaShape.Self)), [new ApplyEffect(Shielded.Id, 1)],
+        Ai: new AiHints(["defense", "reactsTo:beforeHit"]));
+
+    [Fact]
+    public void Shield_before_hit_turns_a_hit_into_a_miss()
+    {
+        // The goblin (DEX +2, +2 proficiency) hits the fighter's AC 18 on 14-18, which AC 23 turns into a miss.
+        var seed = Enumerable.Range(1, 200).Select(s => (ulong)s).First(s => TestAbilities.Next(Rng.Seeded(s), 20)[0] is >= 14 and <= 18);
+        var battle = TestBattle.On(Field)
+            .Party("kara", Fighter with { Abilities = [ShieldSpell.Id] }, T(0, 1))
+            .Enemy("gob", Goblin, T(1, 1))
+            .With(ShieldSpell).WithConditions(Shielded);
+        var (state, _) = battle.Start(seed);
+        Assert.Equal(U("gob"), state.Active);
+
+        var (paused, events) = battle.Apply(state, new Use(U("gob"), Attack, new Target(Unit: U("kara"))));
+
+        Assert.True(Assert.IsType<Rolled>(events[1]).Result.Success);
+        var shield = new ReactionChoice("test.shield", ShieldSpell.Id, U("kara"));
+        var offer = new ReactionOffer(U("kara"), [Pass, shield], "beforeHit");
+        Assert.Equal(Json<BattleEvent>(new ReactionOffered(offer)), Json(events[2]));
+        Assert.Equal(Json<Pending>(offer), Json<Pending>(paused.Pending!));
+        Assert.DoesNotContain(events, e => e is Damaged);
+
+        // Taking the reaction raises AC before the hit lands: now a miss, and no damage.
+        var (after, reacted) = battle.Apply(paused, new React(U("kara"), shield));
+        Assert.Equal<BattleEvent>(
+        [
+            new Reacted(U("kara"), "test.shield"),
+            new AbilityUsed(U("kara"), ShieldSpell.Id, new Target(Unit: U("kara")), null),
+            new ConditionApplied(U("kara"), Shielded.Id),
+        ], reacted);
+        Assert.Equal(12, after.Units[U("kara")].Hp);
+        Assert.False(after.Units[U("kara")].Economy.Reaction);
+        Assert.Null(after.Pending);
+        Assert.Empty(after.Queue);
+
+        // The pause (the rolled attack waiting behind the offer) survives a save and resumes identically.
+        var json = Json(paused);
+        Assert.Contains("\"$type\":\"AttackStep\"", json);
+        var loaded = JsonSerializer.Deserialize<BattleState>(json, ArcJson.Options)!;
+        Assert.Equal(json, Json(loaded));
+        var fromSave = Battle.Apply(loaded, new React(U("kara"), shield), battle.Rules);
+        Assert.Equal(Json(after), Json(fromSave.State));
+        Assert.Equal(Json(reacted), Json(fromSave.Events));
+
+        // Passing lets the hit land.
+        var (_, passed) = battle.Apply(paused, new React(U("kara"), Pass));
+        Assert.IsType<Damaged>(passed[^1]);
+
+        // An AI target with the same reaction isn't offered it (Task 15 decides): the attack resolves at once.
+        var reversed = TestBattle.On(Field)
+            .Party("kara", Fighter with { InitiativeBonus = 10 }, T(0, 1))
+            .Enemy("gob", Goblin with { Abilities = [ShieldSpell.Id] }, T(1, 1))
+            .With(ShieldSpell).WithConditions(Shielded);
+        (state, _) = reversed.Start(seed);
+        (after, events) = reversed.Apply(state, new Use(U("kara"), Attack, new Target(Unit: U("gob"))));
+        Assert.Null(after.Pending);
+        Assert.DoesNotContain(events, e => e is ReactionOffered or Reacted);
+    }
+
+    [Fact]
+    public void Spell_cast_offers_reaction_before_its_effects()
+    {
+        AbilityDef Hex(string id, int tier) => new(new AbilityId(id), id, tier, new CostDef(Action: 1),
+            new TargetDef(TargetKind.Enemy, Range: 6, Los: false, new AreaDef(AreaShape.Single)),
+            [new DamageEffect(TestAbilities.Flat("3"), "force", [])]);
+        var hex = Hex("test.hex", 1);
+        var jinx = Hex("test.jinx", 0);                                  // a cantrip: no spellCast window
+        var counter = new AbilityDef(new AbilityId("test.counter"), "Counter", 3, new CostDef(Reaction: 1),
+            new TargetDef(TargetKind.Enemy, Range: 6, Los: false, new AreaDef(AreaShape.Single)), [],
+            Ai: new AiHints(["reactsTo:spellCast"]));
+        var battle = TestBattle.On(Field)
+            .Party("kara", Fighter with { Abilities = [counter.Id] }, T(0, 1))
+            .Enemy("gob", Goblin with { Abilities = [hex.Id, jinx.Id] }, T(4, 1))
+            .With(hex, jinx, counter);
+        var (state, _) = battle.Start();
+
+        var (paused, events) = battle.Apply(state, new Use(U("gob"), hex.Id, new Target(Unit: U("kara"))));
+        var offer = new ReactionOffer(U("kara"), [Pass, new ReactionChoice("test.counter", counter.Id, U("gob"))], "spellCast");
+        Assert.Equal(Json(
+        [
+            new AbilityUsed(U("gob"), hex.Id, new Target(Unit: U("kara")), null),
+            new ReactionOffered(offer),
+        ]), Json(events));
+        Assert.False(paused.Units[U("gob")].Economy.Action);              // the cost is paid; the effects wait
+
+        var (_, passed) = battle.Apply(paused, new React(U("kara"), Pass));
+        Assert.Equal(new Damaged(U("kara"), 3, "force", 9), passed[^1]);
+
+        (_, events) = battle.Apply(state, new Use(U("gob"), jinx.Id, new Target(Unit: U("kara"))));
+        Assert.DoesNotContain(events, e => e is ReactionOffered);
+    }
 }

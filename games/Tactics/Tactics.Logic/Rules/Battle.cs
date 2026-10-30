@@ -10,7 +10,8 @@ public static partial class Battle
 {
     /// <summary>
     /// Creates the battle (resources full, HP at max) and starts round 1 with the first unit's turn.
-    /// Emits <see cref="RoundStarted"/> and <see cref="TurnStarted"/>. The map must be in <paramref name="rules"/>.
+    /// Emits <see cref="RoundStarted"/> and <see cref="TurnStarted"/>; then every unit's <see cref="HookKind.OnBattleStart"/>
+    /// effects resolve, ahead of the round-start and turn-start ones. The map must be in <paramref name="rules"/>.
     /// </summary>
     public static Resolution Start(BattleSetup setup, RulesPack rules, ulong seed)
     {
@@ -35,6 +36,7 @@ public static partial class Battle
 
         var w = new BattleWriter(state, rules);
         BeginTurn(w, rules);
+        Hooks.FireAll(w, HookKind.OnBattleStart, rules);
         Settle(w, rules);
         return new Resolution(w.Freeze(), w.Events, null);
     }
@@ -61,7 +63,7 @@ public static partial class Battle
                 w.PushFront(new EndTurnStep(end.Actor));
                 break;
             case Delay delay:
-                if (!CanDelay(state, delay, out var to))
+                if (!CanDelay(w, delay, rules, out var to))
                     return Reject(state, RejectCode.CantDelay);
                 w.PushFront(new DelayStep(delay.Actor, to));
                 break;
@@ -107,25 +109,30 @@ public static partial class Battle
     }
 
     /// <summary>
-    /// Delay is allowed at the start of the unit's turn (nothing spent), once per round, by at least one slot, and only
-    /// when a later slot exists; <paramref name="to"/> is the target index, clamped to the end of the order.
+    /// Delay is allowed at the start of the unit's turn (nothing spent: its effective Move, as <see cref="Economy.Fresh"/>
+    /// gives it, still all there), once per round, by at least one slot, and only when a later slot exists;
+    /// <paramref name="to"/> is the target index, clamped to the end of the order.
     /// </summary>
-    private static bool CanDelay(BattleState state, Delay delay, out int to)
+    private static bool CanDelay(BattleWriter w, Delay delay, RulesPack rules, out int to)
     {
+        var state = w.State;
         to = (int)Math.Min((long)state.TurnIndex + delay.Slots, state.Order.Length - 1);
         var unit = state.Units[delay.Actor];
-        var untouched = unit.Economy.MoveLeft >= unit.Sheet.Move && unit.Economy.Action && unit.Economy.Bonus;
+        var move = Modifiers.Move(unit.Sheet, Modifiers.For(w, unit.Id, rules));
+        var untouched = unit.Economy.MoveLeft >= move && unit.Economy.Action && unit.Economy.Bonus;
         return delay.Slots >= 1 && to > state.TurnIndex && untouched && !state.DelayedThisRound.Contains(delay.Actor);
     }
 
     /// <summary>
-    /// Validates <paramref name="use"/> in order (known ability, cost, target kind, range, line of sight) and,
+    /// Validates <paramref name="use"/> in order (able to act, known ability, cost, target kind, range, line of sight) and,
     /// if it passes, queues <see cref="PayCostStep"/> and one <see cref="RunEffectsStep"/> per affected unit in sorted
     /// <see cref="UnitId"/> order. Returns the rejection otherwise, leaving the queue untouched.
     /// </summary>
     private static Rejection? PlanUse(BattleWriter w, Use use, RulesPack rules)
     {
         var user = w.Unit(use.Actor);
+        if (!Modifiers.CanAct(w.State, user.Id, rules))
+            return Rejection.Of(RejectCode.Incapacitated);
         if (!rules.Abilities.TryGetValue(use.Ability, out var ability) || !Knows(user.Sheet, ability.Id))
             return Rejection.Of(RejectCode.UnknownAbility);
         if (CostRefusal(user, ability) is { } cost)
@@ -298,22 +305,33 @@ public static partial class Battle
         return null;
     }
 
-    /// <summary>Drains the queue until it is empty, a decision is pending or the battle is over.</summary>
+    /// <summary>
+    /// Drains the queue until it is empty, a decision is pending or the battle is over. Each step starts at hook depth 0;
+    /// steps that carry a depth set it themselves.
+    /// </summary>
     private static void Settle(BattleWriter w, RulesPack rules)
     {
         while (w.State.Pending is null && w.State.Outcome is null && w.PopFront() is { } step)
+        {
+            w.HookDepth = 0;
             step.Run(w, rules);
+        }
     }
 
     /// <summary>
     /// Starts the turn at <see cref="BattleState.TurnIndex"/>. When the order has run out, first starts a new round: the
-    /// order is re-sorted, <see cref="BattleState.StartedThisRound"/> and <see cref="BattleState.DelayedThisRound"/> are
-    /// cleared and <see cref="RoundStarted"/> is emitted. A unit's first start this round gets a fresh economy; a resumed
-    /// (delayed) turn gets Move, Action and Bonus back but keeps its Reaction as it is, and skips turn-start effects.
+    /// order is re-sorted, <see cref="BattleState.StartedThisRound"/>, <see cref="BattleState.DelayedThisRound"/> and every
+    /// unit's <see cref="UnitState.UsedThisRound"/> are cleared and <see cref="RoundStarted"/> is emitted. Every turn start
+    /// clears every unit's <see cref="UnitState.UsedThisTurn"/>. A unit's first start this round gets a fresh economy
+    /// (<see cref="Economy.Fresh"/> with its modifiers); a resumed (delayed) turn gets Move, Action and Bonus back but keeps
+    /// its Reaction as it is. Then the effects of every unit's <see cref="HookKind.OnRoundStart"/> hooks (new round only)
+    /// and of the unit's <see cref="HookKind.OnTurnStart"/> hooks (first start only, not a resumed turn; burning and the
+    /// like are turn-start condition passives) are queued, in that order.
     /// </summary>
     internal static void BeginTurn(BattleWriter w, RulesPack rules)
     {
-        if (w.State.TurnIndex >= w.State.Order.Length)
+        var newRound = w.State.TurnIndex >= w.State.Order.Length;
+        if (newRound)
         {
             var round = w.State.Round + 1;
             var order = TurnOrder.Sort(w.State, rules);
@@ -321,22 +339,40 @@ public static partial class Battle
             {
                 Round = round, Order = order, TurnIndex = 0, StartedThisRound = [], DelayedThisRound = [],
             };
+            ClearUsed(w, round: true);
             w.Emit(new RoundStarted(round, order));
         }
 
         // Task 8: skip (TurnSkipped) units that can't act and move on to the next.
         if (w.State.Active is not { } id)
             return;
+        ClearUsed(w, round: false);
         var unit = w.Unit(id);
         var resumed = w.State.StartedThisRound.Contains(id);
-        var fresh = Economy.Fresh(unit.Sheet);
+        var fresh = Economy.Fresh(unit.Sheet, Modifiers.For(w, id, rules));
         w.Set(unit with { Economy = resumed ? fresh with { Reaction = unit.Economy.Reaction } : fresh });
         w.State = w.State with { StartedThisRound = w.State.StartedThisRound.Add(id) };
         w.Emit(new TurnStarted(id, w.State.Round));
 
+        var hooks = new List<Step>();
+        if (newRound)
+            Hooks.CollectAll(w, HookKind.OnRoundStart, rules, hooks);
         if (!resumed)
+            Hooks.Collect(w, HookKind.OnTurnStart, new HookArgs(id), rules, hooks);
+        if (hooks.Count > 0)
+            w.PushFront([.. hooks]);
+    }
+
+    /// <summary>Empties every unit's <see cref="UnitState.UsedThisRound"/> (<paramref name="round"/>) or
+    /// <see cref="UnitState.UsedThisTurn"/>.</summary>
+    private static void ClearUsed(BattleWriter w, bool round)
+    {
+        foreach (var unit in w.State.Units.Values)
         {
-            // Task 7: turn-start hooks and condition ticks go here, so they run only on a unit's first start this round.
+            if (round && !unit.UsedThisRound.IsEmpty)
+                w.Set(unit with { UsedThisRound = Ordinal.Set() });
+            else if (!round && !unit.UsedThisTurn.IsEmpty)
+                w.Set(unit with { UsedThisTurn = Ordinal.Set() });
         }
     }
 
@@ -344,5 +380,5 @@ public static partial class Battle
         Id: p.Id, Sheet: p.Sheet, Controller: p.Controller, Pos: p.At, Hp: p.Sheet.MaxHp, TempHp: 0,
         Resources: p.Sheet.Resources.WithComparers(StringComparer.Ordinal), Conditions: [], Economy: Economy.Fresh(p.Sheet),
         Life: LifeState.Up, Countdown: 0, UsesLeft: Ordinal.Map<int>(), Concentrating: null, Bag: p.Bag.IsDefault ? [] : p.Bag,
-        ItemsUsedByAi: 0, SummonedBy: null, Protected: p.Protected);
+        ItemsUsedByAi: 0, SummonedBy: null, Protected: p.Protected, UsedThisTurn: Ordinal.Set(), UsedThisRound: Ordinal.Set());
 }

@@ -22,6 +22,9 @@ namespace Tactics.Logic;
 [JsonDerivedType(typeof(Teleported), nameof(Teleported))]
 [JsonDerivedType(typeof(ReactionOffered), nameof(ReactionOffered))]
 [JsonDerivedType(typeof(Reacted), nameof(Reacted))]
+[JsonDerivedType(typeof(ConditionSaved), nameof(ConditionSaved))]
+[JsonDerivedType(typeof(ConcentrationBroken), nameof(ConcentrationBroken))]
+[JsonDerivedType(typeof(PassiveTriggered), nameof(PassiveTriggered))]
 public abstract record BattleEvent;
 
 /// <summary>A new round began with this turn order.</summary>
@@ -77,3 +80,12 @@ public sealed record ReactionOffered(ReactionOffer Offer) : BattleEvent;
 
 /// <summary>A unit answered a reaction offer (or the AI took one) with the choice of this id.</summary>
 public sealed record Reacted(UnitId Reactor, string Choice) : BattleEvent;
+
+/// <summary>A unit saved against an until-save condition at the end of its turn (<see cref="Roll"/>); the condition ends.</summary>
+public sealed record ConditionSaved(UnitId Unit, ConditionId Condition, RollResult Roll) : BattleEvent;
+
+/// <summary>A caster's concentration on <see cref="Ability"/> ended; what it sustained ends with it.</summary>
+public sealed record ConcentrationBroken(UnitId Caster, AbilityId Ability) : BattleEvent;
+
+/// <summary>A passive's hook fired and its effects are about to run.</summary>
+public sealed record PassiveTriggered(UnitId Owner, string Passive) : BattleEvent;

@@ -42,6 +42,7 @@ public static class Motion
     /// else Dead (<see cref="Fell"/>, into deep);</item>
     /// <item>after a drop of more than 3 levels: 1d6 bludgeoning per level beyond 3, then prone (<see cref="Fell"/>).</item>
     /// </list>
+    /// Each tile entered fires the unit's <see cref="HookKind.OnEnterTile"/> hooks.
     /// </summary>
     public static void Push(BattleWriter w, UnitId unit, (int Dx, int Dy) direction, int distance)
     {
@@ -69,6 +70,7 @@ public static class Motion
             var drop = terrain.HeightAt(from) - terrain.HeightAt(next);
             w.Set(u with { Pos = next });
             w.Emit(new Pushed(unit, from, next));
+            Entered(w, unit, next);
 
             if (terrain.Deep(next))
             {
@@ -115,13 +117,18 @@ public static class Motion
         w.Emit(new ConditionApplied(unit, Prone));
     }
 
-    /// <summary>Puts <paramref name="unit"/> on <paramref name="to"/> and emits <see cref="Teleported"/>.</summary>
+    /// <summary>Puts <paramref name="unit"/> on <paramref name="to"/>, emits <see cref="Teleported"/> and fires <see cref="HookKind.OnEnterTile"/>.</summary>
     internal static void Teleport(BattleWriter w, UnitId unit, Tile to)
     {
         var u = w.Unit(unit);
         w.Set(u with { Pos = to });
         w.Emit(new Teleported(unit, u.Pos, to));
+        Entered(w, unit, to);
     }
+
+    /// <summary>Fires <paramref name="unit"/>'s <see cref="HookKind.OnEnterTile"/> hooks for <paramref name="tile"/>.</summary>
+    internal static void Entered(BattleWriter w, UnitId unit, Tile tile)
+        => Hooks.Fire(w, HookKind.OnEnterTile, new HookArgs(unit, Tile: tile), w.Rules);
 }
 
 /// <summary><c>"push"</c>: pushes the target away from the source (or the aimed tile); see <see cref="Motion.Push"/>.</summary>
@@ -198,7 +205,9 @@ public sealed class SwapBlock : EffectBlock<SwapEffect>
 
 /// <summary>
 /// <c>"dash"</c>: the source walks toward the aimed tile, one legal step at a time (<see cref="Paths.StepCost"/>) along the
-/// dominant axis, up to the tile count, stopping before any unit. One <see cref="Moved"/> for the whole run.
+/// dominant axis, up to the tile count, stopping before any unit. One <see cref="Moved"/> for the whole run, then the
+/// source's <see cref="HookKind.OnMove"/> and <see cref="HookKind.OnEnterTile"/> hooks. A unit that can't move
+/// (<see cref="StaticMods.CantMove"/>) stays put.
 /// </summary>
 public sealed class DashBlock : EffectBlock<DashEffect>
 {
@@ -209,7 +218,7 @@ public sealed class DashBlock : EffectBlock<DashEffect>
     protected override void Run(DashEffect def, EffectContext ctx)
     {
         var source = ctx.SourceUnit;
-        if (ctx.Aim is not { } aim)
+        if (ctx.Aim is not { } aim || Modifiers.For(ctx.W, source.Id, ctx.Rules).CantMove)
             return;
 
         var terrain = ctx.W.Terrain;
@@ -229,10 +238,18 @@ public sealed class DashBlock : EffectBlock<DashEffect>
 
         ctx.W.Set(source with { Pos = at });
         ctx.W.Emit(new Moved(source.Id, [.. path]));
+        var hooks = new List<Step>();
+        Hooks.Collect(ctx.W, HookKind.OnMove, new HookArgs(source.Id, Tile: at), ctx.Rules, hooks);
+        Hooks.Collect(ctx.W, HookKind.OnEnterTile, new HookArgs(source.Id, Tile: at), ctx.Rules, hooks);
+        if (hooks.Count > 0)
+            ctx.W.PushFront([.. hooks]);
     }
 }
 
-/// <summary><c>"jumpTo"</c>: the source leaps to the aimed tile, ignoring Jump, when it is walkable, empty and in range.</summary>
+/// <summary>
+/// <c>"jumpTo"</c>: the source leaps to the aimed tile, ignoring Jump, when it is walkable, empty and in range and the
+/// source can move; then its <see cref="HookKind.OnEnterTile"/> hooks fire.
+/// </summary>
 public sealed class JumpToBlock : EffectBlock<JumpToEffect>
 {
     /// <inheritdoc />
@@ -242,10 +259,12 @@ public sealed class JumpToBlock : EffectBlock<JumpToEffect>
     protected override void Run(JumpToEffect def, EffectContext ctx)
     {
         var source = ctx.SourceUnit;
-        if (ctx.Aim is not { } aim || aim == source.Pos || Reach.Distance(source.Pos, aim) > def.Range || !Motion.CanLand(ctx.W, aim, source.Id))
+        if (ctx.Aim is not { } aim || aim == source.Pos || Reach.Distance(source.Pos, aim) > def.Range || !Motion.CanLand(ctx.W, aim, source.Id)
+            || Modifiers.For(ctx.W, source.Id, ctx.Rules).CantMove)
             return;
 
         ctx.W.Set(source with { Pos = aim });
         ctx.W.Emit(new Moved(source.Id, [source.Pos, aim]));
+        Motion.Entered(ctx.W, source.Id, aim);
     }
 }

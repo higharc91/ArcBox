@@ -1,12 +1,24 @@
 using System.Collections.Immutable;
+using System.Text.Json.Serialization;
 
 namespace Tactics.Logic;
 
 /// <summary>What a roll was for. Carried by <see cref="Rolled"/> so the TV and phone can label it.</summary>
 public enum RollKind { Attack, Save, Contest, Check, Damage, Countdown }
 
-/// <summary>Advantage (roll two d20s, keep the higher), disadvantage (keep the lower) or neither.</summary>
-public enum Edge { None, Advantage, Disadvantage }
+/// <summary>
+/// Advantage (roll two d20s, keep the higher), disadvantage (keep the lower) or neither. JSON: <c>"none"</c>,
+/// <c>"advantage"</c>, <c>"disadvantage"</c>.
+/// </summary>
+public enum Edge
+{
+    /// <summary>One d20.</summary>
+    [JsonStringEnumMemberName("none")] None,
+    /// <summary>Two d20s, keep the higher.</summary>
+    [JsonStringEnumMemberName("advantage")] Advantage,
+    /// <summary>Two d20s, keep the lower.</summary>
+    [JsonStringEnumMemberName("disadvantage")] Disadvantage,
+}
 
 /// <summary>
 /// A d20 roll: every die rolled (two with an edge, in roll order, so the TV can strike one out), the die kept, the
@@ -58,6 +70,31 @@ public static class Rolls
         return (
             new RollResult(attackerDice, attackerKept, attackerModifier, attackerTotal, defenderTotal, attackerWins, false, false),
             new RollResult(defenderDice, defenderKept, defenderModifier, defenderTotal, attackerTotal, !attackerWins, false, false));
+    }
+
+    /// <summary>
+    /// A saving throw by <paramref name="unit"/>: d20 + the stat's modifier + proficiency (if proficient) + static save
+    /// modifiers + <paramref name="cover"/> (only for DEX saves) against <paramref name="dc"/>. A stat in
+    /// <see cref="StaticMods.AutoFailSaves"/> fails whatever the roll (the d20 is still rolled and shown). Emits
+    /// <see cref="Rolled"/>, fires <see cref="HookKind.OnSave"/> for the unit (with <paramref name="source"/> as the other
+    /// unit) and returns the roll.
+    /// </summary>
+    public static RollResult Save(BattleWriter w, UnitId unit, Stat stat, int dc, RulesPack rules, int cover = 0,
+        UnitId? source = null)
+    {
+        var sheet = w.Unit(unit).Sheet;
+        var mods = Modifiers.For(w, unit, rules);
+        var modifier = Stats.Mod(sheet.Score(stat))
+                       + (sheet.SaveProficiencies.Contains(stat) ? Stats.Proficiency(sheet.Level) : 0)
+                       + (mods.Saves?.GetValueOrDefault(stat) ?? 0)
+                       + (stat == Stat.Dex ? cover : 0);
+
+        var roll = D20(w, modifier, dc, Edge.None, critOn20: false, autoMissOn1: false);
+        if (mods.AutoFailSaves?.Contains(stat) == true)
+            roll = roll with { Success = false };
+        w.Emit(new Rolled(unit, RollKind.Save, roll));
+        Hooks.Fire(w, HookKind.OnSave, new HookArgs(unit, source, roll), rules);
+        return roll;
     }
 
     /// <summary>Rolls <paramref name="dice"/>; a <paramref name="crit"/> rolls the dice twice but adds the bonus once. Never below 0.</summary>

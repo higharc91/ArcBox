@@ -25,6 +25,15 @@ public sealed class BattleWriter
     /// <summary>The state as it is now.</summary>
     public BattleState State { get; set; }
 
+    /// <summary>
+    /// How deeply nested in hook effects the running step is: 0 for a command's own steps, n + 1 for the effects of a hook
+    /// fired at depth n (see <see cref="Hooks.MaxDepth"/>). Set from the step before it runs.
+    /// </summary>
+    public int HookDepth { get; internal set; }
+
+    /// <summary>The rules pack the battle runs under.</summary>
+    internal RulesPack Rules => _rules;
+
     /// <summary>The events emitted so far, in order.</summary>
     public ImmutableArray<BattleEvent> Events => _events.ToImmutable();
 

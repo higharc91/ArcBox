@@ -99,11 +99,14 @@ public sealed class EffectContext
             $"Unknown addend '{name}' (expected \"mod.<stat>\", \"mod.cast\", \"prof\" or \"level\").");
     }
 
-    /// <summary>Queues <paramref name="effects"/> on the same source, target and aim to run next, following <paramref name="last"/>.</summary>
+    /// <summary>
+    /// Queues <paramref name="effects"/> on the same source, target and aim to run next, following <paramref name="last"/>,
+    /// at the running step's <see cref="BattleWriter.HookDepth"/>.
+    /// </summary>
     public void Queue(ImmutableArray<EffectDef> effects, RollResult? last, bool halfDamage = false, Stat? saveStat = null)
     {
         if (!effects.IsDefaultOrEmpty)
-            W.PushFront(new RunEffectsStep(Source, Target, Aim, Ability?.Id, effects, last, halfDamage, saveStat));
+            W.PushFront(new RunEffectsStep(Source, Target, Aim, Ability?.Id, effects, last, halfDamage, saveStat, W.HookDepth));
     }
 
     /// <summary>The modifier of <paramref name="sheet"/>'s casting stat, or 0 without one.</summary>

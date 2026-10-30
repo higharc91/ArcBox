@@ -14,6 +14,8 @@ public sealed class TestBattle
     private readonly BattleMap _map;
     private readonly ImmutableArray<UnitPlacement>.Builder _units = ImmutableArray.CreateBuilder<UnitPlacement>();
     private readonly List<AbilityDef> _abilities = [];
+    private readonly List<PassiveDef> _passives = [];
+    private readonly List<ConditionDef> _conditions = [];
 
     private TestBattle(BattleMap map)
     {
@@ -21,7 +23,10 @@ public sealed class TestBattle
         Rules = RulesPack.InMemory("test", maps: [map]);
     }
 
-    /// <summary>The rules pack the battle runs under: the map, the built-in abilities and any added with <see cref="With"/>.</summary>
+    /// <summary>
+    /// The rules pack the battle runs under: the map, the built-in abilities and any added with <see cref="With"/>,
+    /// <see cref="WithPassives"/> and <see cref="WithConditions"/>.
+    /// </summary>
     public RulesPack Rules { get; private set; }
 
     /// <summary>Starts a builder on the given ASCII map (see <see cref="AsciiMap"/>).</summary>
@@ -31,7 +36,26 @@ public sealed class TestBattle
     public TestBattle With(params AbilityDef[] abilities)
     {
         _abilities.AddRange(abilities);
-        Rules = RulesPack.InMemory("test", abilities: _abilities, maps: [_map]);
+        return Rebuild();
+    }
+
+    /// <summary>Adds passives to the rules pack.</summary>
+    public TestBattle WithPassives(params PassiveDef[] passives)
+    {
+        _passives.AddRange(passives);
+        return Rebuild();
+    }
+
+    /// <summary>Adds conditions to the rules pack.</summary>
+    public TestBattle WithConditions(params ConditionDef[] conditions)
+    {
+        _conditions.AddRange(conditions);
+        return Rebuild();
+    }
+
+    private TestBattle Rebuild()
+    {
+        Rules = RulesPack.InMemory("test", abilities: _abilities, passives: _passives, conditions: _conditions, maps: [_map]);
         return this;
     }
 

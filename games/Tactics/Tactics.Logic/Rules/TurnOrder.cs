@@ -6,14 +6,14 @@ namespace Tactics.Logic;
 public static class TurnOrder
 {
     /// <summary>
-    /// 10 + DEX modifier + the sheet's initiative bonus, −2 in heavy armour. (Hasted/slowed and other features arrive as
-    /// static modifiers in Task 7.)
+    /// 10 + DEX modifier + the sheet's initiative bonus + static initiative modifiers (hasted +5, slowed −5, features),
+    /// −2 in heavy armour.
     /// </summary>
     public static int Initiative(BattleState s, UnitId unit, RulesPack rules)
     {
         var sheet = s.Units[unit].Sheet;
         var heavy = sheet.Armor == ArmorKind.Heavy ? -2 : 0;
-        return 10 + Stats.Mod(sheet.Score(Stat.Dex)) + sheet.InitiativeBonus + heavy;
+        return 10 + Stats.Mod(sheet.Score(Stat.Dex)) + sheet.InitiativeBonus + Modifiers.For(s, unit, rules).Initiative + heavy;
     }
 
     /// <summary>

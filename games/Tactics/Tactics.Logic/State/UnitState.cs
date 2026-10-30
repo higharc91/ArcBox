@@ -22,10 +22,14 @@ public sealed record ItemStack(ItemId Item, int Count);
 
 /// <summary>
 /// A unit as it is now. <see cref="Resources"/> holds what is left this battle; <see cref="UsesLeft"/> counts per-battle
-/// uses by feature id; <see cref="Countdown"/> matters while Downed.
+/// uses by feature id; <see cref="Countdown"/> matters while Downed. <see cref="Conditions"/> are in the order they were
+/// applied. <see cref="UsedThisTurn"/> and <see cref="UsedThisRound"/> hold the ids of once-per-turn and once-per-round
+/// passives that have fired (cleared at every turn start and every round start).
 /// </summary>
 public sealed record UnitState(UnitId Id, UnitSheet Sheet, Controller Controller, Tile Pos, int Hp, int TempHp,
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedDictionary<string, int> Resources,
     ImmutableArray<ActiveCondition> Conditions, TurnEconomy Economy, LifeState Life, int Countdown,
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedDictionary<string, int> UsesLeft,
-    AbilityId? Concentrating, ImmutableArray<ItemStack> Bag, int ItemsUsedByAi, UnitId? SummonedBy, bool Protected);
+    AbilityId? Concentrating, ImmutableArray<ItemStack> Bag, int ItemsUsedByAi, UnitId? SummonedBy, bool Protected,
+    [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> UsedThisTurn,
+    [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> UsedThisRound);

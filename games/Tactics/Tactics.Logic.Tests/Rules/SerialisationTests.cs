@@ -34,6 +34,8 @@ public sealed class SerialisationTests
                 new ActiveCondition(new ConditionId("frightened"), U("gob"), null, true, 13, Stat.Wis, false),
             ],
             Economy = new TurnEconomy(2, false, true, true, 1),
+            UsedThisTurn = Ordinal.Set("rogue.sneak_attack", "Zeal"),
+            UsedThisRound = Ordinal.Set("b", "A"),
             UsesLeft = Ordinal.Map(("second_wind", 0), ("Action_surge", 1)),
             Bag = [new ItemStack(new ItemId("potion.healing"), 2)],
         };
@@ -47,12 +49,24 @@ public sealed class SerialisationTests
         return state with
         {
             Units = state.Units.SetItem(kara.Id, kara).SetItem(brin.Id, brin).SetItem(gob.Id, gob),
-            Queue = [new PayCostStep(U("kara"), new AbilityId("common.attack"), new Target(Unit: U("gob"))), new EndTurnStep(U("kara")), new DelayStep(U("kara"), 1)],
+            Queue =
+            [
+                new PayCostStep(U("kara"), new AbilityId("common.attack"), new Target(Unit: U("gob"))), new EndTurnStep(U("kara")),
+                new DelayStep(U("kara"), 1), new EndTurnStep(U("gob"), HooksDone: true),
+                new RunEffectsStep(U("kara"), U("gob"), new Tile(3, 1), null,
+                    [new DamageEffect(TestAbilities.Flat("1d6"), null, [])], HookDepth: 2, Passive: "rogue.sneak_attack"),
+                new AttackStep(U("kara"), U("gob"), new Tile(3, 1), new AbilityId("common.attack"), RulesPack.CommonAttack.Effects[0],
+                    new RollResult([4, 17], 17, 5, 22, 15, true, false, false), Cover: 2, Edge: Edge.Advantage, HookDepth: 1),
+            ],
             Pending = new ReactionOffer(U("gob"),
                 [new ReactionChoice("pass", null, null), new ReactionChoice("opportunity", new AbilityId("common.attack"), U("kara"))],
                 "leavesReach"),
             HeightDelta = ImmutableSortedDictionary<Tile, int>.Empty.Add(new Tile(1, 1), 2).Add(new Tile(0, 1), -1),
-            Zones = [new Zone(3, U("Brin"), "spirit_guardians", [new Tile(0, 0), new Tile(1, 0)], 10, true, true, [new PassiveDef("zone.damage")])],
+            Zones =
+            [
+                new Zone(3, U("Brin"), "spirit_guardians", [new Tile(0, 0), new Tile(1, 0)], 10, true, true,
+                    [new PassiveDef("zone.damage", HookKind.OnTurnStart, null, [new DamageEffect(TestAbilities.Flat("1d6"), "fire", [])], null)]),
+            ],
             Objectives = new ObjectiveState(objectives, Ordinal.Map(("survive", 2))),
             Flags = Ordinal.Set("bridge_down", "B", "a"),
             Counters = Ordinal.Map(("kills", 3), ("Waves", 1)),
@@ -100,7 +114,12 @@ public sealed class SerialisationTests
         Assert.Equal(state.StartedThisRound, back.StartedThisRound);
         Assert.Equal(state.DelayedThisRound, back.DelayedThisRound);
         Assert.Equal(state.Rng, back.Rng);
-        Assert.Equal(state.Queue, back.Queue);
+        // Steps holding effect lists compare by reference, so compare the queue's JSON.
+        Assert.Equal(JsonSerializer.Serialize(state.Queue, ArcJson.Options), JsonSerializer.Serialize(back.Queue, ArcJson.Options));
+        Assert.Equal(state.Queue.Select(s => s.GetType()), back.Queue.Select(s => s.GetType()));
+        Assert.Contains("\"$type\":\"AttackStep\"", json);
+        Assert.Contains("\"hookDepth\":2,\"passive\":\"rogue.sneak_attack\"", json);
+        Assert.Contains("\"edge\":\"advantage\"", json);
         Assert.Equal(state.Units[U("kara")].Conditions, back.Units[U("kara")].Conditions);
         Assert.IsType<ReactionOffer>(back.Pending);
         Assert.Equal("leavesReach", ((ReactionOffer)back.Pending).Trigger);
@@ -114,9 +133,12 @@ public sealed class SerialisationTests
             .Enemy("gob", TestSheets.Goblin, new Tile(3, 1));
         var (state, _) = battle.Start(seed: 9);
 
-        // Resolve EndTurn's first step by hand: the turn has ended but not yet been handed on.
+        // Resolve EndTurn's step by hand (its turn-end hooks, none here, then the end itself): the turn has ended but not
+        // yet been handed on.
         var w = new BattleWriter(state, battle.Rules);
         w.PushFront(new EndTurnStep(U("kara")));
+        w.PopFront()!.Run(w, battle.Rules);
+        Assert.Equal([new EndTurnStep(U("kara"), HooksDone: true)], w.State.Queue);
         w.PopFront()!.Run(w, battle.Rules);
         Assert.Equal<BattleEvent>([new TurnEnded(U("kara"))], w.Events);
 
@@ -160,12 +182,17 @@ public sealed class SerialisationTests
             .With(bolt);
         var (state, _) = battle.Start(seed: 1);                         // the attack hits (d20 13)
 
-        // Resolve Use(Guiding Bolt) by hand up to the attack roll: the hit's effects are still queued.
+        // Resolve Use(Guiding Bolt) by hand past the attack (the cost; the attack block; the roll; the hit judged): the hit's
+        // effects are still queued.
         var target = new Target(Unit: U("gob"));
         var w = new BattleWriter(state, battle.Rules);
         w.PushFront(new PayCostStep(U("cleric"), bolt.Id, target),
             new RunEffectsStep(U("cleric"), U("gob"), new Tile(3, 1), bolt.Id, bolt.Effects));
         w.PopFront()!.Run(w, battle.Rules);
+        w.PopFront()!.Run(w, battle.Rules);
+        Assert.IsType<AttackStep>(Assert.Single(w.State.Queue));
+        w.PopFront()!.Run(w, battle.Rules);
+        Assert.Equal(18, Assert.IsType<AttackStep>(Assert.Single(w.State.Queue)).Roll!.Total);
         w.PopFront()!.Run(w, battle.Rules);
         var mid = w.Freeze();
 
@@ -215,6 +242,9 @@ public sealed class SerialisationTests
         Assert.Same(StringComparer.Ordinal, kara.Sheet.Resist.KeyComparer);
         Assert.Same(StringComparer.Ordinal, kara.Sheet.Weapon.Tags.KeyComparer);
         Assert.Equal(["Action_surge", "second_wind"], kara.UsesLeft.Keys);
+        Assert.Same(StringComparer.Ordinal, kara.UsedThisTurn.KeyComparer);
+        Assert.Equal(["Zeal", "rogue.sneak_attack"], kara.UsedThisTurn);
+        Assert.Same(StringComparer.Ordinal, kara.UsedThisRound.KeyComparer);
     }
 
     [Fact]
@@ -241,6 +271,9 @@ public sealed class SerialisationTests
             new Healed(U("kara"), 3, 12),
             new ConditionApplied(U("gob"), new ConditionId("lit")),
             new ConditionRemoved(U("gob"), new ConditionId("lit")),
+            new ConditionSaved(U("gob"), new ConditionId("frightened"), new RollResult([15], 15, -1, 14, 13, true, false, false)),
+            new ConcentrationBroken(U("Brin"), new AbilityId("bless")),
+            new PassiveTriggered(U("kara"), "rogue.sneak_attack"),
         ];
 
         var commandJson = JsonSerializer.Serialize(commands, ArcJson.Options);
