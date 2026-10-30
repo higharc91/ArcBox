@@ -132,6 +132,9 @@ public sealed class RoomManager : IAsyncDisposable
             if (busySince.HasValue && (now - busySince.Value) > _services.Options.GameCallTimeout)
             {
                 _logger.LogWarning("Room {Code} hung; force closing.", room.Code);
+                // The row goes before the room closes: a lookup treats a closed room as a miss and rebuilds from the row,
+                // so it must already be gone. And again after, in case the actor came unstuck and saved in between.
+                _services.Store.Delete(room.Code);
                 room.ForceClose("game stopped responding");
                 _services.Store.Delete(room.Code);
                 RemoveRoom(entry);
