@@ -1,0 +1,1790 @@
+{
+  "tile": 32,
+  "span": 4,
+  "heightStep": 16,
+  "storey": 64,
+  "projection": "2:1 isometric at the terrain's texel density: screen x = U - V, screen y = (U + V) / 2 - Z, in texels (U = world X, V = world Z, Z = height); a 32 px tile is a 64x32 diamond, a 16 px height step 16 px of screen. Light from the top-left: tops 1.0, +Z faces 0.80, +X faces 0.62",
+  "sampling": {
+    "wall": "128x64, one storey per period. U = world distance along the face / (span * tile), measured left to right as the face is seen (along +X on +Z faces, along -Z on +X faces); V = height above the storey's floor / storey (repeats). Posts of timber_frame fall on tile edges",
+    "roof": "128x128. On a slope: U = distance along the ridge / (span * tile), V = distance down the slope from the ridge / (span * tile): courses run along U, lower edges down V. As a flat top: UV = world XZ / (span * tile)",
+    "floor": "128x128 tops: UV = world XZ / (span * tile), as terrain tops",
+    "decal/wall": "alpha, authored face-on: 32 px (one tile) wide, bottom row = the storey's floor (doors and windows land at the right height on any storey); rose_window, crack and notices are 32x32 and go anywhere on a face. Placed in face space, never mirrored",
+    "decal/floor": "alpha, tile-local on tops: rug is 64x64 across 2x2 tiles (from its back corner tile), doormat 32x32"
+  },
+  "textures": {
+    "timber_frame": {
+      "kind": "wall",
+      "variants": {
+        "white": "wall/timber_frame_white.png",
+        "ochre": "wall/timber_frame_ochre.png",
+        "rose": "wall/timber_frame_rose.png"
+      },
+      "size": [
+        128,
+        64
+      ]
+    },
+    "whitewash": {
+      "kind": "wall",
+      "variants": {
+        "white": "wall/whitewash_white.png",
+        "ochre": "wall/whitewash_ochre.png",
+        "rose": "wall/whitewash_rose.png"
+      },
+      "size": [
+        128,
+        64
+      ]
+    },
+    "fieldstone": {
+      "kind": "wall",
+      "variants": {
+        "grey": "wall/fieldstone_grey.png",
+        "warm": "wall/fieldstone_warm.png"
+      },
+      "size": [
+        128,
+        64
+      ]
+    },
+    "dressed_stone": {
+      "kind": "wall",
+      "variants": {
+        "grey": "wall/dressed_stone_grey.png",
+        "warm": "wall/dressed_stone_warm.png"
+      },
+      "size": [
+        128,
+        64
+      ]
+    },
+    "log_wall": {
+      "kind": "wall",
+      "variants": {
+        "pine": "wall/log_wall_pine.png",
+        "dark": "wall/log_wall_dark.png"
+      },
+      "size": [
+        128,
+        64
+      ]
+    },
+    "plank_shed": {
+      "kind": "wall",
+      "variants": {
+        "oak": "wall/plank_shed_oak.png",
+        "weathered": "wall/plank_shed_weathered.png"
+      },
+      "size": [
+        128,
+        64
+      ]
+    },
+    "slate": {
+      "kind": "roof",
+      "variants": {
+        "blue": "roof/slate_blue.png",
+        "green": "roof/slate_green.png"
+      },
+      "size": [
+        128,
+        128
+      ]
+    },
+    "clay_tiles": {
+      "kind": "roof",
+      "variants": {
+        "red": "roof/clay_tiles_red.png",
+        "ochre": "roof/clay_tiles_ochre.png"
+      },
+      "size": [
+        128,
+        128
+      ]
+    },
+    "thatch": {
+      "kind": "roof",
+      "variants": {
+        "fresh": "roof/thatch_fresh.png",
+        "old": "roof/thatch_old.png"
+      },
+      "size": [
+        128,
+        128
+      ]
+    },
+    "shakes": {
+      "kind": "roof",
+      "variants": {
+        "cedar": "roof/shakes_cedar.png",
+        "grey": "roof/shakes_grey.png"
+      },
+      "size": [
+        128,
+        128
+      ]
+    },
+    "floorboards": {
+      "kind": "floor",
+      "variants": {
+        "oak": "floor/floorboards_oak.png",
+        "honey": "floor/floorboards_honey.png",
+        "dark": "floor/floorboards_dark.png"
+      },
+      "size": [
+        128,
+        128
+      ]
+    },
+    "tavern_flags": {
+      "kind": "floor",
+      "variants": {
+        "warm": "floor/tavern_flags_warm.png",
+        "grey": "floor/tavern_flags_grey.png"
+      },
+      "size": [
+        128,
+        128
+      ]
+    },
+    "rug": {
+      "kind": "floor_decal",
+      "variants": {
+        "crimson": "decal/floor/rug_crimson.png",
+        "navy": "decal/floor/rug_navy.png",
+        "forest": "decal/floor/rug_forest.png"
+      },
+      "size": [
+        64,
+        64
+      ]
+    },
+    "doormat": {
+      "kind": "floor_decal",
+      "variants": {
+        "straw": "decal/floor/doormat_straw.png"
+      },
+      "size": [
+        32,
+        32
+      ]
+    },
+    "door": {
+      "kind": "wall_decal",
+      "variants": {
+        "red": "decal/wall/door_red.png",
+        "blue": "decal/wall/door_blue.png",
+        "green": "decal/wall/door_green.png",
+        "oak": "decal/wall/door_oak.png"
+      },
+      "size": [
+        32,
+        64
+      ]
+    },
+    "door_open": {
+      "kind": "wall_decal",
+      "variants": {
+        "red": "decal/wall/door_open_red.png",
+        "blue": "decal/wall/door_open_blue.png",
+        "green": "decal/wall/door_open_green.png",
+        "oak": "decal/wall/door_open_oak.png"
+      },
+      "size": [
+        32,
+        64
+      ]
+    },
+    "window": {
+      "kind": "wall_decal",
+      "variants": {
+        "red": "decal/wall/window_red.png",
+        "blue": "decal/wall/window_blue.png",
+        "green": "decal/wall/window_green.png",
+        "oak": "decal/wall/window_oak.png"
+      },
+      "size": [
+        32,
+        64
+      ]
+    },
+    "window_shuttered": {
+      "kind": "wall_decal",
+      "variants": {
+        "red": "decal/wall/window_shuttered_red.png",
+        "blue": "decal/wall/window_shuttered_blue.png",
+        "green": "decal/wall/window_shuttered_green.png",
+        "oak": "decal/wall/window_shuttered_oak.png"
+      },
+      "size": [
+        32,
+        64
+      ]
+    },
+    "window_lit": {
+      "kind": "wall_decal",
+      "variants": {
+        "red": "decal/wall/window_lit_red.png",
+        "blue": "decal/wall/window_lit_blue.png",
+        "green": "decal/wall/window_lit_green.png",
+        "oak": "decal/wall/window_lit_oak.png"
+      },
+      "size": [
+        32,
+        64
+      ]
+    },
+    "lancet": {
+      "kind": "wall_decal",
+      "variants": {
+        "stained": "decal/wall/lancet_stained.png"
+      },
+      "size": [
+        32,
+        64
+      ]
+    },
+    "lancet_lit": {
+      "kind": "wall_decal",
+      "variants": {
+        "stained": "decal/wall/lancet_lit_stained.png"
+      },
+      "size": [
+        32,
+        64
+      ]
+    },
+    "rose_window": {
+      "kind": "wall_decal",
+      "variants": {
+        "stained": "decal/wall/rose_window_stained.png"
+      },
+      "size": [
+        32,
+        32
+      ]
+    },
+    "rose_window_lit": {
+      "kind": "wall_decal",
+      "variants": {
+        "stained": "decal/wall/rose_window_lit_stained.png"
+      },
+      "size": [
+        32,
+        32
+      ]
+    },
+    "sign_bracket": {
+      "kind": "wall_decal",
+      "variants": {
+        "red": "decal/wall/sign_bracket_red.png",
+        "blue": "decal/wall/sign_bracket_blue.png",
+        "green": "decal/wall/sign_bracket_green.png",
+        "oak": "decal/wall/sign_bracket_oak.png"
+      },
+      "size": [
+        32,
+        64
+      ]
+    },
+    "sign_mug": {
+      "kind": "wall_decal",
+      "variants": {
+        "red": "decal/wall/sign_mug_red.png",
+        "blue": "decal/wall/sign_mug_blue.png",
+        "green": "decal/wall/sign_mug_green.png",
+        "oak": "decal/wall/sign_mug_oak.png"
+      },
+      "size": [
+        32,
+        64
+      ]
+    },
+    "sign_anvil": {
+      "kind": "wall_decal",
+      "variants": {
+        "red": "decal/wall/sign_anvil_red.png",
+        "blue": "decal/wall/sign_anvil_blue.png",
+        "green": "decal/wall/sign_anvil_green.png",
+        "oak": "decal/wall/sign_anvil_oak.png"
+      },
+      "size": [
+        32,
+        64
+      ]
+    },
+    "sign_bag": {
+      "kind": "wall_decal",
+      "variants": {
+        "red": "decal/wall/sign_bag_red.png",
+        "blue": "decal/wall/sign_bag_blue.png",
+        "green": "decal/wall/sign_bag_green.png",
+        "oak": "decal/wall/sign_bag_oak.png"
+      },
+      "size": [
+        32,
+        64
+      ]
+    },
+    "ivy": {
+      "kind": "wall_decal",
+      "variants": {
+        "green": "decal/wall/ivy_green.png",
+        "autumn": "decal/wall/ivy_autumn.png"
+      },
+      "size": [
+        32,
+        64
+      ]
+    },
+    "crack": {
+      "kind": "wall_decal",
+      "variants": {
+        "plaster": "decal/wall/crack_plaster.png",
+        "stone": "decal/wall/crack_stone.png"
+      },
+      "size": [
+        32,
+        32
+      ]
+    },
+    "wall_lantern": {
+      "kind": "wall_decal",
+      "variants": {
+        "iron": "decal/wall/wall_lantern_iron.png"
+      },
+      "size": [
+        32,
+        64
+      ]
+    },
+    "arrow_slit": {
+      "kind": "wall_decal",
+      "variants": {
+        "grey": "decal/wall/arrow_slit_grey.png",
+        "warm": "decal/wall/arrow_slit_warm.png"
+      },
+      "size": [
+        32,
+        64
+      ]
+    },
+    "belfry": {
+      "kind": "wall_decal",
+      "variants": {
+        "bronze": "decal/wall/belfry_bronze.png"
+      },
+      "size": [
+        32,
+        64
+      ]
+    },
+    "hearth": {
+      "kind": "wall_decal",
+      "variants": {
+        "stone": "decal/wall/hearth_stone.png"
+      },
+      "size": [
+        32,
+        64
+      ]
+    },
+    "notices": {
+      "kind": "wall_decal",
+      "variants": {
+        "paper": "decal/wall/notices_paper.png"
+      },
+      "size": [
+        32,
+        32
+      ]
+    }
+  },
+  "buildings": {
+    "cottage": {
+      "variants": {
+        "thatch_red": {
+          "image": "buildings/cottage_thatch_red.png",
+          "shadow": "buildings/cottage_thatch_red_shadow.png",
+          "lights": "buildings/cottage_thatch_red_lights.png"
+        },
+        "thatch_green": {
+          "image": "buildings/cottage_thatch_green.png",
+          "shadow": "buildings/cottage_thatch_green_shadow.png",
+          "lights": "buildings/cottage_thatch_green_lights.png"
+        },
+        "slate_blue": {
+          "image": "buildings/cottage_slate_blue.png",
+          "shadow": "buildings/cottage_slate_blue_shadow.png",
+          "lights": "buildings/cottage_slate_blue_lights.png"
+        },
+        "shakes_oak": {
+          "image": "buildings/cottage_shakes_oak.png",
+          "shadow": "buildings/cottage_shakes_oak_shadow.png",
+          "lights": "buildings/cottage_shakes_oak_lights.png"
+        }
+      },
+      "size": [
+        188,
+        155
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        2,
+        2
+      ],
+      "origin": [
+        70,
+        81
+      ],
+      "anchor": [
+        70,
+        113
+      ],
+      "height": 7,
+      "blocks": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "full",
+      "tags": [
+        "home"
+      ],
+      "attach": {
+        "smoke": [
+          [
+            110,
+            18
+          ]
+        ],
+        "door": [
+          [
+            30,
+            120
+          ]
+        ]
+      }
+    },
+    "house": {
+      "variants": {
+        "red": {
+          "image": "buildings/house_red.png",
+          "shadow": "buildings/house_red_shadow.png",
+          "lights": "buildings/house_red_lights.png"
+        },
+        "blue": {
+          "image": "buildings/house_blue.png",
+          "shadow": "buildings/house_blue_shadow.png",
+          "lights": "buildings/house_blue_lights.png"
+        },
+        "green": {
+          "image": "buildings/house_green.png",
+          "shadow": "buildings/house_green_shadow.png",
+          "lights": "buildings/house_green_lights.png"
+        }
+      },
+      "size": [
+        215,
+        221
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        2,
+        2
+      ],
+      "origin": [
+        69,
+        140
+      ],
+      "anchor": [
+        69,
+        172
+      ],
+      "height": 11,
+      "blocks": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "full",
+      "tags": [
+        "home"
+      ],
+      "attach": {
+        "smoke": [
+          [
+            100,
+            12
+          ]
+        ],
+        "door": [
+          [
+            31,
+            179
+          ]
+        ]
+      }
+    },
+    "tavern": {
+      "variants": {
+        "red": {
+          "image": "buildings/tavern_red.png",
+          "shadow": "buildings/tavern_red_shadow.png",
+          "lights": "buildings/tavern_red_lights.png"
+        },
+        "green": {
+          "image": "buildings/tavern_green.png",
+          "shadow": "buildings/tavern_green_shadow.png",
+          "lights": "buildings/tavern_green_lights.png"
+        }
+      },
+      "size": [
+        253,
+        260
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        3,
+        2
+      ],
+      "origin": [
+        73,
+        160
+      ],
+      "anchor": [
+        89,
+        200
+      ],
+      "height": 11,
+      "blocks": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "full",
+      "tags": [
+        "shop",
+        "inn"
+      ],
+      "attach": {
+        "smoke": [
+          [
+            58,
+            11
+          ],
+          [
+            131,
+            48
+          ]
+        ],
+        "door": [
+          [
+            61,
+            214
+          ]
+        ],
+        "sign": [
+          [
+            24,
+            88
+          ]
+        ]
+      },
+      "sign": "sign_mug"
+    },
+    "smithy": {
+      "variants": {
+        "oak": {
+          "image": "buildings/smithy_oak.png",
+          "shadow": "buildings/smithy_oak_shadow.png",
+          "lights": "buildings/smithy_oak_lights.png"
+        },
+        "slate": {
+          "image": "buildings/smithy_slate.png",
+          "shadow": "buildings/smithy_slate_shadow.png",
+          "lights": "buildings/smithy_slate_lights.png"
+        }
+      },
+      "size": [
+        176,
+        163
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        2,
+        2
+      ],
+      "origin": [
+        68,
+        93
+      ],
+      "anchor": [
+        68,
+        125
+      ],
+      "height": 8,
+      "blocks": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "full",
+      "tags": [
+        "shop",
+        "light"
+      ],
+      "attach": {
+        "smoke": [
+          [
+            86,
+            10
+          ]
+        ],
+        "door": [
+          [
+            28,
+            133
+          ]
+        ],
+        "light": [
+          [
+            77,
+            126
+          ]
+        ],
+        "sign": [
+          [
+            14,
+            72
+          ]
+        ]
+      },
+      "sign": "sign_anvil"
+    },
+    "store": {
+      "variants": {
+        "red": {
+          "image": "buildings/store_red.png",
+          "shadow": "buildings/store_red_shadow.png",
+          "lights": "buildings/store_red_lights.png"
+        },
+        "blue": {
+          "image": "buildings/store_blue.png",
+          "shadow": "buildings/store_blue_shadow.png",
+          "lights": "buildings/store_blue_lights.png"
+        },
+        "green": {
+          "image": "buildings/store_green.png",
+          "shadow": "buildings/store_green_shadow.png",
+          "lights": "buildings/store_green_lights.png"
+        }
+      },
+      "size": [
+        179,
+        162
+      ],
+      "frames": 4,
+      "fps": 6,
+      "footprint": [
+        2,
+        2
+      ],
+      "origin": [
+        64,
+        91
+      ],
+      "anchor": [
+        64,
+        123
+      ],
+      "height": 7,
+      "blocks": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "full",
+      "tags": [
+        "shop"
+      ],
+      "attach": {
+        "door": [
+          [
+            49,
+            134
+          ]
+        ]
+      }
+    },
+    "stall": {
+      "variants": {
+        "red": {
+          "image": "buildings/stall_red.png",
+          "shadow": "buildings/stall_red_shadow.png"
+        },
+        "blue": {
+          "image": "buildings/stall_blue.png",
+          "shadow": "buildings/stall_blue_shadow.png"
+        },
+        "green": {
+          "image": "buildings/stall_green.png",
+          "shadow": "buildings/stall_green_shadow.png"
+        },
+        "yellow": {
+          "image": "buildings/stall_yellow.png",
+          "shadow": "buildings/stall_yellow_shadow.png"
+        },
+        "purple": {
+          "image": "buildings/stall_purple.png",
+          "shadow": "buildings/stall_purple_shadow.png"
+        }
+      },
+      "size": [
+        110,
+        111
+      ],
+      "frames": 4,
+      "fps": 6,
+      "footprint": [
+        1,
+        1
+      ],
+      "origin": [
+        38,
+        68
+      ],
+      "anchor": [
+        38,
+        84
+      ],
+      "height": 5,
+      "blocks": [
+        [
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "half",
+      "tags": [
+        "market"
+      ],
+      "attach": {}
+    },
+    "chapel": {
+      "variants": {
+        "grey": {
+          "image": "buildings/chapel_grey.png",
+          "shadow": "buildings/chapel_grey_shadow.png",
+          "lights": "buildings/chapel_grey_lights.png"
+        },
+        "warm": {
+          "image": "buildings/chapel_warm.png",
+          "shadow": "buildings/chapel_warm_shadow.png",
+          "lights": "buildings/chapel_warm_lights.png"
+        }
+      },
+      "size": [
+        264,
+        313
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        2,
+        3
+      ],
+      "origin": [
+        97,
+        222
+      ],
+      "anchor": [
+        81,
+        262
+      ],
+      "height": 16,
+      "blocks": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "full",
+      "tags": [
+        "temple"
+      ],
+      "attach": {
+        "door": [
+          [
+            37,
+            284
+          ]
+        ]
+      }
+    },
+    "watchtower": {
+      "variants": {
+        "grey": {
+          "image": "buildings/watchtower_grey.png",
+          "shadow": "buildings/watchtower_grey_shadow.png"
+        },
+        "warm": {
+          "image": "buildings/watchtower_warm.png",
+          "shadow": "buildings/watchtower_warm_shadow.png"
+        }
+      },
+      "size": [
+        166,
+        242
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        1,
+        1
+      ],
+      "origin": [
+        32,
+        193
+      ],
+      "anchor": [
+        32,
+        209
+      ],
+      "height": 13,
+      "blocks": [
+        [
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "full",
+      "tags": [
+        "defence"
+      ],
+      "attach": {
+        "door": [
+          [
+            16,
+            213
+          ]
+        ],
+        "flag": [
+          [
+            32,
+            5
+          ]
+        ]
+      }
+    },
+    "windmill": {
+      "variants": {
+        "white": {
+          "image": "buildings/windmill_white.png",
+          "shadow": "buildings/windmill_white_shadow.png",
+          "lights": "buildings/windmill_white_lights.png"
+        },
+        "stone": {
+          "image": "buildings/windmill_stone.png",
+          "shadow": "buildings/windmill_stone_shadow.png",
+          "lights": "buildings/windmill_stone_lights.png"
+        }
+      },
+      "size": [
+        260,
+        281
+      ],
+      "frames": 8,
+      "fps": 8,
+      "footprint": [
+        2,
+        2
+      ],
+      "origin": [
+        112,
+        178
+      ],
+      "anchor": [
+        112,
+        210
+      ],
+      "height": 13,
+      "blocks": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "full",
+      "tags": [
+        "farm"
+      ],
+      "attach": {
+        "door": [
+          [
+            89,
+            222
+          ]
+        ]
+      }
+    },
+    "wall_u": {
+      "variants": {
+        "grey": {
+          "image": "buildings/wall_u_grey.png",
+          "shadow": "buildings/wall_u_grey_shadow.png"
+        },
+        "warm": {
+          "image": "buildings/wall_u_warm.png",
+          "shadow": "buildings/wall_u_warm_shadow.png"
+        }
+      },
+      "size": [
+        101,
+        127
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        1,
+        1
+      ],
+      "origin": [
+        26,
+        88
+      ],
+      "anchor": [
+        26,
+        104
+      ],
+      "height": 6,
+      "blocks": [
+        [
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "full",
+      "tags": [
+        "defence",
+        "modular"
+      ],
+      "attach": {},
+      "pair": "wall_v",
+      "run": "u"
+    },
+    "wall_v": {
+      "variants": {
+        "grey": {
+          "image": "buildings/wall_v_grey.png",
+          "shadow": "buildings/wall_v_grey_shadow.png"
+        },
+        "warm": {
+          "image": "buildings/wall_v_warm.png",
+          "shadow": "buildings/wall_v_warm_shadow.png"
+        }
+      },
+      "size": [
+        101,
+        125
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        1,
+        1
+      ],
+      "origin": [
+        26,
+        86
+      ],
+      "anchor": [
+        26,
+        102
+      ],
+      "height": 6,
+      "blocks": [
+        [
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "full",
+      "tags": [
+        "defence",
+        "modular"
+      ],
+      "attach": {},
+      "pair": "wall_u",
+      "run": "v"
+    },
+    "wall_tower": {
+      "variants": {
+        "grey": {
+          "image": "buildings/wall_tower_grey.png",
+          "shadow": "buildings/wall_tower_grey_shadow.png"
+        },
+        "warm": {
+          "image": "buildings/wall_tower_warm.png",
+          "shadow": "buildings/wall_tower_warm_shadow.png"
+        }
+      },
+      "size": [
+        142,
+        170
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        1,
+        1
+      ],
+      "origin": [
+        34,
+        124
+      ],
+      "anchor": [
+        34,
+        140
+      ],
+      "height": 8,
+      "blocks": [
+        [
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "full",
+      "tags": [
+        "defence",
+        "modular"
+      ],
+      "attach": {
+        "flag": [
+          [
+            34,
+            28
+          ]
+        ]
+      }
+    },
+    "gate_u": {
+      "variants": {
+        "grey": {
+          "image": "buildings/gate_u_grey.png",
+          "shadow": "buildings/gate_u_grey_shadow.png"
+        },
+        "warm": {
+          "image": "buildings/gate_u_warm.png",
+          "shadow": "buildings/gate_u_warm_shadow.png"
+        }
+      },
+      "size": [
+        199,
+        200
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        3,
+        1
+      ],
+      "origin": [
+        32,
+        123
+      ],
+      "anchor": [
+        64,
+        155
+      ],
+      "height": 8,
+      "blocks": [
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "full",
+      "tags": [
+        "defence",
+        "modular"
+      ],
+      "attach": {},
+      "pair": "gate_v",
+      "run": "u"
+    },
+    "gate_v": {
+      "variants": {
+        "grey": {
+          "image": "buildings/gate_v_grey.png",
+          "shadow": "buildings/gate_v_grey_shadow.png"
+        },
+        "warm": {
+          "image": "buildings/gate_v_warm.png",
+          "shadow": "buildings/gate_v_warm_shadow.png"
+        }
+      },
+      "size": [
+        199,
+        200
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        1,
+        3
+      ],
+      "origin": [
+        96,
+        123
+      ],
+      "anchor": [
+        64,
+        155
+      ],
+      "height": 8,
+      "blocks": [
+        [
+          1
+        ],
+        [
+          0
+        ],
+        [
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "full",
+      "tags": [
+        "defence",
+        "modular"
+      ],
+      "attach": {},
+      "pair": "gate_u",
+      "run": "v"
+    },
+    "steps_u": {
+      "variants": {
+        "stone": {
+          "image": "buildings/steps_u_stone.png",
+          "shadow": "buildings/steps_u_stone_shadow.png"
+        },
+        "wood": {
+          "image": "buildings/steps_u_wood.png",
+          "shadow": "buildings/steps_u_wood_shadow.png"
+        }
+      },
+      "size": [
+        81,
+        57
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        1,
+        1
+      ],
+      "origin": [
+        35,
+        20
+      ],
+      "anchor": [
+        35,
+        36
+      ],
+      "height": 1,
+      "blocks": [
+        [
+          0
+        ]
+      ],
+      "walkable": true,
+      "cover": "none",
+      "tags": [
+        "modular"
+      ],
+      "attach": {},
+      "pair": "steps_v",
+      "run": "u",
+      "rise": 1,
+      "climbs": "-V"
+    },
+    "steps_v": {
+      "variants": {
+        "stone": {
+          "image": "buildings/steps_v_stone.png",
+          "shadow": "buildings/steps_v_stone_shadow.png"
+        },
+        "wood": {
+          "image": "buildings/steps_v_wood.png",
+          "shadow": "buildings/steps_v_wood_shadow.png"
+        }
+      },
+      "size": [
+        74,
+        57
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        1,
+        1
+      ],
+      "origin": [
+        35,
+        20
+      ],
+      "anchor": [
+        35,
+        36
+      ],
+      "height": 1,
+      "blocks": [
+        [
+          0
+        ]
+      ],
+      "walkable": true,
+      "cover": "none",
+      "tags": [
+        "modular"
+      ],
+      "attach": {},
+      "pair": "steps_u",
+      "run": "v",
+      "rise": 1,
+      "climbs": "-U"
+    },
+    "stairs_u": {
+      "variants": {
+        "stone": {
+          "image": "buildings/stairs_u_stone.png",
+          "shadow": "buildings/stairs_u_stone_shadow.png"
+        },
+        "wood": {
+          "image": "buildings/stairs_u_wood.png",
+          "shadow": "buildings/stairs_u_wood_shadow.png"
+        }
+      },
+      "size": [
+        91,
+        73
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        1,
+        1
+      ],
+      "origin": [
+        35,
+        36
+      ],
+      "anchor": [
+        35,
+        52
+      ],
+      "height": 2,
+      "blocks": [
+        [
+          0
+        ]
+      ],
+      "walkable": true,
+      "cover": "none",
+      "tags": [
+        "modular"
+      ],
+      "attach": {},
+      "pair": "stairs_v",
+      "run": "u",
+      "rise": 2,
+      "climbs": "-V"
+    },
+    "stairs_v": {
+      "variants": {
+        "stone": {
+          "image": "buildings/stairs_v_stone.png",
+          "shadow": "buildings/stairs_v_stone_shadow.png"
+        },
+        "wood": {
+          "image": "buildings/stairs_v_wood.png",
+          "shadow": "buildings/stairs_v_wood_shadow.png"
+        }
+      },
+      "size": [
+        74,
+        73
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        1,
+        1
+      ],
+      "origin": [
+        35,
+        36
+      ],
+      "anchor": [
+        35,
+        52
+      ],
+      "height": 2,
+      "blocks": [
+        [
+          0
+        ]
+      ],
+      "walkable": true,
+      "cover": "none",
+      "tags": [
+        "modular"
+      ],
+      "attach": {},
+      "pair": "stairs_u",
+      "run": "v",
+      "rise": 2,
+      "climbs": "-U"
+    },
+    "bridge_u": {
+      "variants": {
+        "grey": {
+          "image": "buildings/bridge_u_grey.png"
+        },
+        "warm": {
+          "image": "buildings/bridge_u_warm.png"
+        }
+      },
+      "size": [
+        71,
+        82
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        1,
+        1
+      ],
+      "origin": [
+        32,
+        11
+      ],
+      "anchor": [
+        32,
+        27
+      ],
+      "height": 1,
+      "blocks": [
+        [
+          0
+        ]
+      ],
+      "walkable": true,
+      "cover": "none",
+      "tags": [
+        "modular"
+      ],
+      "attach": {},
+      "pair": "bridge_v",
+      "run": "u",
+      "drop": 36
+    },
+    "bridge_v": {
+      "variants": {
+        "grey": {
+          "image": "buildings/bridge_v_grey.png"
+        },
+        "warm": {
+          "image": "buildings/bridge_v_warm.png"
+        }
+      },
+      "size": [
+        71,
+        82
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        1,
+        1
+      ],
+      "origin": [
+        32,
+        11
+      ],
+      "anchor": [
+        32,
+        27
+      ],
+      "height": 1,
+      "blocks": [
+        [
+          0
+        ]
+      ],
+      "walkable": true,
+      "cover": "none",
+      "tags": [
+        "modular"
+      ],
+      "attach": {},
+      "pair": "bridge_u",
+      "run": "v",
+      "drop": 36
+    },
+    "notice_board_u": {
+      "variants": {
+        "oak": {
+          "image": "buildings/notice_board_u_oak.png",
+          "shadow": "buildings/notice_board_u_oak_shadow.png"
+        }
+      },
+      "size": [
+        90,
+        99
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        1,
+        1
+      ],
+      "origin": [
+        29,
+        60
+      ],
+      "anchor": [
+        29,
+        76
+      ],
+      "height": 5,
+      "blocks": [
+        [
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "half",
+      "tags": [
+        "market"
+      ],
+      "attach": {},
+      "pair": "notice_board_v",
+      "run": "u"
+    },
+    "notice_board_v": {
+      "variants": {
+        "oak": {
+          "image": "buildings/notice_board_v_oak.png",
+          "shadow": "buildings/notice_board_v_oak_shadow.png"
+        }
+      },
+      "size": [
+        90,
+        99
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        1,
+        1
+      ],
+      "origin": [
+        25,
+        60
+      ],
+      "anchor": [
+        25,
+        76
+      ],
+      "height": 5,
+      "blocks": [
+        [
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "half",
+      "tags": [
+        "market"
+      ],
+      "attach": {},
+      "pair": "notice_board_u",
+      "run": "v"
+    },
+    "clutter_crates": {
+      "variants": {
+        "oak": {
+          "image": "buildings/clutter_crates_oak.png",
+          "shadow": "buildings/clutter_crates_oak_shadow.png"
+        }
+      },
+      "size": [
+        60,
+        59
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        1,
+        1
+      ],
+      "origin": [
+        30,
+        24
+      ],
+      "anchor": [
+        30,
+        40
+      ],
+      "height": 2,
+      "blocks": [
+        [
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "half",
+      "tags": [
+        "market"
+      ],
+      "attach": {}
+    },
+    "clutter_barrels": {
+      "variants": {
+        "oak": {
+          "image": "buildings/clutter_barrels_oak.png",
+          "shadow": "buildings/clutter_barrels_oak_shadow.png"
+        }
+      },
+      "size": [
+        64,
+        54
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        1,
+        1
+      ],
+      "origin": [
+        26,
+        20
+      ],
+      "anchor": [
+        26,
+        36
+      ],
+      "height": 2,
+      "blocks": [
+        [
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "half",
+      "tags": [
+        "market"
+      ],
+      "attach": {}
+    },
+    "clutter_produce": {
+      "variants": {
+        "mixed": {
+          "image": "buildings/clutter_produce_mixed.png"
+        }
+      },
+      "size": [
+        60,
+        43
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        1,
+        1
+      ],
+      "origin": [
+        26,
+        11
+      ],
+      "anchor": [
+        26,
+        27
+      ],
+      "height": 1,
+      "blocks": [
+        [
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "half",
+      "tags": [
+        "market"
+      ],
+      "attach": {}
+    },
+    "tavern_table": {
+      "variants": {
+        "oak": {
+          "image": "buildings/tavern_table_oak.png",
+          "shadow": "buildings/tavern_table_oak_shadow.png"
+        }
+      },
+      "size": [
+        70,
+        56
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "footprint": [
+        1,
+        1
+      ],
+      "origin": [
+        31,
+        20
+      ],
+      "anchor": [
+        31,
+        36
+      ],
+      "height": 2,
+      "blocks": [
+        [
+          1
+        ]
+      ],
+      "walkable": false,
+      "cover": "half",
+      "tags": [
+        "interior"
+      ],
+      "attach": {}
+    }
+  },
+  "overlays": {
+    "smoke": {
+      "image": "overlays/smoke.png",
+      "size": [
+        32,
+        64
+      ],
+      "frames": 8,
+      "fps": 8,
+      "anchor": [
+        12,
+        62
+      ]
+    },
+    "sign_mug": {
+      "image": "overlays/sign_mug.png",
+      "size": [
+        31,
+        34
+      ],
+      "frames": 8,
+      "fps": 8,
+      "anchor": [
+        26,
+        4
+      ]
+    },
+    "sign_anvil": {
+      "image": "overlays/sign_anvil.png",
+      "size": [
+        31,
+        34
+      ],
+      "frames": 8,
+      "fps": 8,
+      "anchor": [
+        26,
+        4
+      ]
+    },
+    "sign_bag": {
+      "image": "overlays/sign_bag.png",
+      "size": [
+        31,
+        34
+      ],
+      "frames": 8,
+      "fps": 8,
+      "anchor": [
+        26,
+        4
+      ]
+    }
+  },
+  "notes": {
+    "image": "frames left to right, each `size`; loop at fps. Pre-lit, outlined, drawn at 1 px = 1 texel",
+    "origin": "pixel of the footprint's back corner (min X, min Z) at ground level; put it on that corner's projection. A footprint [w, d] covers tiles i..i+w-1 (X) and j..j+d-1 (Z)",
+    "anchor": "pixel of the footprint's ground centre (origin + ((w - d) * 16, (w + d) * 8))",
+    "sorting": "draw a building in 32 px screen columns from the origin, each sorted at the frontmost footprint tile in that column, so units can pass behind and in front of it",
+    "shadow": "ground shadow in the same frame, alpha; draw on the ground before units, outside the footprint",
+    "lights": "night overlay in the same frame: lit windows, open doors, forge glow. Fade in at dusk over the darkened building, ideally with bloom",
+    "attach": "pixels in frame 0: smoke = chimney mouths (overlays/smoke), sign = the projecting sign's root (overlays named by the building's `sign`), door = door threshold, light/flag = points for a light source or a banner",
+    "blocks": "per footprint tile, rows = Z, columns = X: 1 blocks movement",
+    "height": "in height steps, for line of sight",
+    "run": "modular pieces come in pairs: _u runs along X, _v along Z (a quarter turn, lit correctly)",
+    "rise": "stairs and steps climb `rise` height steps across their tile, towards `climbs`",
+    "drop": "bridge spans: origin is at deck level; the arch drops this many texels below it",
+    "overlays": "anchor = the pixel to pin on the attach point; smoke and signs loop at fps"
+  }
+}
