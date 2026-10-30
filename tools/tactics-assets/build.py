@@ -150,7 +150,7 @@ def build_characters() -> None:
     rnames = [creator.RACES[r].name for r in races]
     cnames = [creator.CLASSES[c].name for c in classes]
     save(matrix("Characters · any race, any class", rnames, cnames, grid_front, zoom=3,
-                subtitle="Players name their hero and pick a race and a class. All 90 combinations compose from the "
+                subtitle="Players name their hero and pick a race and a class. All 110 combinations compose from the "
                          "same layers (race defaults shown; hair, skin, horns and colours are the player's)."),
          PREVIEWS / "06-race-class.png")
     save(matrix("Characters · any race, any class (back)", rnames, cnames, grid_back, zoom=3),
@@ -506,7 +506,7 @@ SETS = {"palettes": build_palettes, "characters": build_characters, "anims": bui
 # content/tactics/base/<name>/ and previews/, using arcpix.out.
 PLUGIN_SETS = ("props", "portraits", "beasts", "backgrounds", "ui", "icons", "fx",
                "ambient", "bosses", "emotes", "town", "status", "pickups", "worldmap",
-               "signature", "title", "crests", "dungeon", "projectiles", "gear_icons", "grades", "creator_thumbs", "showcase")   # showcase reads the others: keep it last
+               "signature", "title", "crests", "dungeon", "projectiles", "gear_icons", "grades", "creator_thumbs", "hazards", "transitions", "showcase")   # showcase reads the others: keep it last
 for _name in PLUGIN_SETS:
     try:
         _mod = importlib.import_module(f"parts.{_name}")
@@ -514,7 +514,8 @@ for _name in PLUGIN_SETS:
         if e.name != f"parts.{_name}":
             raise
         continue
-    SETS[_name] = _mod.build
+    if hasattr(_mod, "build"):          # a set still being written has no build() yet
+        SETS[_name] = _mod.build
 
 if __name__ == "__main__":
     for name in sys.argv[1:] or list(SETS):
