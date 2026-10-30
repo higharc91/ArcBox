@@ -54,7 +54,7 @@ public sealed partial class Room
     public RoomRecord ToRecord() => new(
         Code,
         _hostTokenHash,
-        [.. _members.All.Select(s => new SlotRecord(s.Id, s.Name, s.SecretHash, s.JoinOrder, s.Profile))],
+        [.. _members.All.Select(s => new SlotRecord(s.Id, s.Name, s.SecretHash, s.JoinOrder, s.Profile, s.ForAbsentMember))],
         _members.NextSlotId,
         _selectedGameId,
         _campaignId,
@@ -66,9 +66,9 @@ public sealed partial class Room
     public Task SaveAsync() => EnqueueAsync(Save);
 
     /// <summary>
-    /// Parks the room if it has been idle for <see cref="RoomOptions.IdleTimeout"/>, in one step on the actor: its row
-    /// is saved as parked (a running game stays marked as running), anyone still connected is told the room closed, and
-    /// the room closes, which gives back its campaign. Returns whether it parked.
+    /// Parks the room if it has been idle for <see cref="RoomOptions.IdleTimeout"/> with no connection bound (no host
+    /// and no seated phone), in one step on the actor: its row is saved as parked (a running game stays marked as
+    /// running), and the room closes, which gives back its campaign. Returns whether it parked.
     /// </summary>
     public Task<bool> TryParkAsync() => EnqueueAsync(() =>
     {

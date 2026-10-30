@@ -8,6 +8,7 @@ using ArcBox.Server.Storage;
 using ArcBox.Server.Tests.Storage;
 using ArcBox.Server.Tests.Support;
 using ArcBox.Server.Tests.TestGames;
+using Microsoft.Extensions.Logging;
 
 namespace ArcBox.Server.Tests.Rooms;
 
@@ -347,6 +348,97 @@ public class CampaignRoomTests
 
         var roster = Lobby(f).Campaign!.Roster;
         Assert.Equal(new RosterEntry(cy.Id, Card("Cy"), new PlayerId("p2"), Connected: false), roster[1]);
+    }
+
+    // Seats made at Start for members who weren't here aren't players in a plain game picked afterwards.
+    [Theory]
+    [InlineData("plain-ledger")]
+    [InlineData("counter")]
+    public async Task Seats_for_absent_members_go_when_a_game_without_campaigns_is_selected(string game)
+    {
+        await using var f = new RoomFixture();
+        var (campaign, _) = await EmbersAsync(f);
+        AddMember(f, campaign, "Cy");
+        var dan = AddMember(f, campaign, "Dan");
+        await f.Room.StartGameAsync("host");
+
+        // Dan turns up mid-game and then drops: his seat had a connection here, so it stays. Cy never came.
+        await f.Room.TakeSeatAsync("c2", Seat(new SeatRef(Member: dan.Id)));
+        await f.Room.ConnectionLostAsync("c2");
+        await f.Room.ReturnToLobbyAsync("host");
+        Assert.Equal(["Ann", "Cy", "Dan"], Lobby(f).Players.Select(p => p.Name));
+
+        await f.Room.SelectGameAsync("c1", game);
+
+        Assert.Equal([("p1", "Ann"), ("p3", "Dan")], Lobby(f).Players.Select(p => (p.Id.Value, p.Name)));
+        Assert.Equal(["p3"], (await f.Room.PeekAsync([])).Offers.Select(o => o.Ref.Slot!.Value.Value));
+    }
+
+    [Fact]
+    public async Task Seats_for_absent_members_stay_while_the_campaign_game_stays_selected()
+    {
+        await using var f = new RoomFixture();
+        var (campaign, _) = await EmbersAsync(f);
+        AddMember(f, campaign, "Cy");
+        await f.Room.StartGameAsync("host");
+        await f.Room.ReturnToLobbyAsync("host");
+
+        await f.Room.SelectGameAsync("c1", "ledger"); // the same game again: the campaign stays selected
+
+        Assert.Equal(["Ann", "Cy"], Lobby(f).Players.Select(p => p.Name));
+    }
+
+    // A game's rules code runs on the room's actor; a CardFor that throws mustn't break the lobby (F7).
+    [Fact]
+    public async Task Throwing_CardFor_falls_back_to_the_members_name()
+    {
+        var log = new WarningLog();
+        await using var f = new RoomFixture(rules: new CardlessRules(), loggers: log);
+        await f.HostAsync();
+        await f.JoinAsync("Ann", "c1");
+        await f.Room.SelectGameAsync("host", "ledger");
+
+        var key = await f.Room.CreateCampaignAsync("c1", "Embers");
+
+        var lobby = Lobby(f);
+        Assert.Equal("Embers", lobby.Campaign!.Name);
+        Assert.Equal(new RosterEntry(key.Id, new SeatCard("Ann"), new PlayerId("p1"), Connected: true), Assert.Single(lobby.Campaign.Roster));
+        Assert.Contains(log.Warnings, w => w.Contains("ledger") && w.Contains(key.Id.Value));
+
+        // The picker's offers use the same fallback.
+        await f.Room.ConnectionLostAsync("c1");
+        Assert.Equal(new SeatCard("Ann"), Assert.Single((await f.Room.PeekAsync([])).Offers).Card);
+    }
+
+    /// <summary><see cref="LedgerRules"/>, except that <see cref="CardFor"/> always throws.</summary>
+    private sealed class CardlessRules : ICampaignRules
+    {
+        private readonly LedgerRules _inner = new();
+        public string GameId => _inner.GameId;
+        public JsonElement NewDocument(CampaignInfo info) => _inner.NewDocument(info);
+        public SeatCard CardFor(CampaignInfo info, JsonElement document, ProfileId member) => throw new InvalidOperationException("no cards");
+        public JsonElement PortalView(CampaignInfo info, JsonElement document, ProfileId member) => _inner.PortalView(info, document, member);
+        public CommandResult Handle(CampaignInfo info, JsonElement document, ProfileId member, string type, JsonElement data) =>
+            _inner.Handle(info, document, member, type, data);
+    }
+
+    /// <summary>Every logger's Warning messages.</summary>
+    private sealed class WarningLog : ILoggerFactory, ILogger
+    {
+        private readonly List<string> _warnings = [];
+
+        public IReadOnlyList<string> Warnings { get { lock (_warnings) return [.. _warnings]; } }
+
+        public ILogger CreateLogger(string categoryName) => this;
+        public void AddProvider(ILoggerProvider provider) { }
+        public void Dispose() { }
+        public IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
+        public bool IsEnabled(LogLevel logLevel) => true;
+
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+        {
+            if (logLevel == LogLevel.Warning) lock (_warnings) _warnings.Add(formatter(state, exception));
+        }
     }
 
     [Fact]

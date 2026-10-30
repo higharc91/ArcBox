@@ -298,6 +298,11 @@ public sealed partial class Room
         bool wasConnected = slot.Connected;
         _members.Bind(slot, connectionId);
         slot.AbsentAtStart = false; // someone has it now, by Rejoin or by taking it
+        if (slot.ForAbsentMember)
+        {
+            slot.ForAbsentMember = false; // the member is here now: the seat is theirs whatever is selected next
+            Save();
+        }
 
         _knownConnections.TryAdd(connectionId, 0);
         _allAbsentSince = null;
@@ -356,7 +361,7 @@ public sealed partial class Room
         var id = _registry.Manifests.First(m => string.Equals(m.Id, gameId, StringComparison.OrdinalIgnoreCase)).Id;
         if (id != _selectedGameId)
         {
-            _campaignId = null;
+            SetCampaign(null);
         }
 
         _selectedGameId = id;
@@ -524,8 +529,17 @@ public sealed partial class Room
 
     public Task<bool> IsExpiredAsync() => EnqueueAsync(IsExpired);
 
+    /// <summary>
+    /// Whether the room has been idle for <see cref="RoomOptions.IdleTimeout"/>. Only a room with no connection bound at
+    /// all is idle: phones still in it keep it live however long the TV is away (spec §3.5, a long break is harmless).
+    /// </summary>
     private bool IsExpired()
     {
+        if (_hostConnectionId is not null || _members.AnyConnected)
+        {
+            return false;
+        }
+
         var now = _time.GetUtcNow();
         bool hostExpired = _hostAbsentSince.HasValue && (now - _hostAbsentSince.Value) >= _options.IdleTimeout;
         bool allExpired = _allAbsentSince.HasValue && (now - _allAbsentSince.Value) >= _options.IdleTimeout;

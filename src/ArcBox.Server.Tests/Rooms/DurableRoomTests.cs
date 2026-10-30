@@ -266,6 +266,44 @@ public sealed class DurableRoomTests
         Assert.Equal("buttons", (await phone.WaitForAsync(ClientMethods.ControllerView)).GetProperty("kind").GetString());
     }
 
+    // The room remembers, across a restart, which seats it made for members who never came (F5).
+    [Fact]
+    public async Task Seats_for_absent_members_are_still_known_after_a_restart()
+    {
+        using var db = new TempDb();
+        CreateRoomResult room;
+        JoinResult ann;
+        using (var a = new ArcServerFactory(db.File))
+        {
+            await using var host = await TestClient.ConnectAsync(a);
+            await using var p1 = await TestClient.ConnectAsync(a);
+            room = await host.InvokeAsync<CreateRoomResult>("CreateRoom");
+            ann = await p1.TakeSeatAsync(new TakeSeatRequest(room.Code, NewName: "Ann"));
+            await p1.InvokeAsync("SelectGame", "ledger");
+            await p1.InvokeAsync<ProfileKey>("CreateCampaign", "Embers");
+            var campaignId = (await host.WaitForAsync(ClientMethods.LobbyChanged,
+                l => l.TryGetProperty("campaign", out var c) && c.ValueKind == JsonValueKind.Object)).GetProperty("campaign").GetProperty("id").GetString()!;
+            a.Services.GetRequiredService<CampaignService>()
+                .AddMember(campaignId, a.Services.GetRequiredService<ProfileService>().Create("Cy"));
+            await p1.InvokeAsync("StartGame");
+            await host.WaitForAsync(ClientMethods.HostView);
+            await host.InvokeAsync("ReturnToLobby");
+            await host.WaitForAsync(ClientMethods.GameEnded);
+        }
+
+        using var b = new ArcServerFactory(db.File);
+        await using var tv = await TestClient.ConnectAsync(b);
+        await tv.InvokeAsync("ResumeHost", room.Code, room.HostToken);
+        Assert.Equal([("p1", "Ann", false), ("p2", "Cy", false)], Players(await tv.WaitForAsync(ClientMethods.LobbyChanged)));
+        await using var phone = await TestClient.ConnectAsync(b);
+        await phone.InvokeAsync("Rejoin", room.Code, ann.PlayerId.Value, ann.Secret);
+
+        await phone.InvokeAsync("SelectGame", "plain-ledger");
+
+        await tv.WaitForAsync(ClientMethods.LobbyChanged, l => l.GetProperty("selectedGameId").GetString() == "plain-ledger"
+            && Players(l).SequenceEqual([("p1", "Ann", true)]));
+    }
+
     // Review Focus 4
     [Fact]
     public async Task Rebuilt_room_does_not_resume_campaign_held_elsewhere()
@@ -361,6 +399,31 @@ public sealed class DurableRoomTests
         Assert.Equal([("p1", "Ann", true)], Players(lobby));
         Assert.Equal(1, rooms.Count);
         Assert.Equal(0, phone.Unclaimed(ClientMethods.GameEnded));
+    }
+
+    // A TV that sleeps through a long break doesn't end the room for the phones still in it (spec §3.5).
+    [Fact]
+    public async Task Room_with_a_connected_phone_is_not_parked_when_the_host_is_gone()
+    {
+        using var f = new ArcServerFactory();
+        var rooms = f.Services.GetRequiredService<RoomManager>();
+        var host = await TestClient.ConnectAsync(f);
+        await using var p1 = await TestClient.ConnectAsync(f);
+        var room = await host.InvokeAsync<CreateRoomResult>("CreateRoom");
+        await p1.TakeSeatAsync(new TakeSeatRequest(room.Code, NewName: "Ann"));
+        await LeaveAsync(f, host);
+
+        f.Time.Advance(new RoomOptions().IdleTimeout + TimeSpan.FromMinutes(1));
+        await rooms.SweepAsync();
+
+        Assert.NotNull(rooms.FindLoaded(room.Code));
+        Assert.Equal(0, p1.Unclaimed(ClientMethods.RoomClosed));
+
+        await using var tv = await TestClient.ConnectAsync(f);
+        await tv.InvokeAsync("ResumeHost", room.Code, room.HostToken);
+        var lobby = await tv.WaitForAsync(ClientMethods.LobbyChanged);
+        Assert.Equal([("p1", "Ann", true)], Players(lobby));
+        Assert.Equal(0, p1.Unclaimed(ClientMethods.RoomClosed));
     }
 
     [Fact]
@@ -481,6 +544,38 @@ public sealed class DurableRoomTests
         Assert.DoesNotContain(room.HostToken, row);
         Assert.Contains(Secrets.Hash(ann.Secret), row);
         Assert.Contains(Secrets.Hash(room.HostToken), row);
+    }
+
+    // Between a park and the sweep that takes the room out of memory, a lookup must not hand out the closed room: the
+    // caller would get "Room has closed." and the phone would drop a good seat.
+    [Fact]
+    public async Task Lookup_right_after_park_rebuilds_instead_of_returning_the_closed_room()
+    {
+        await using var h = new Harness();
+        await using var m = new RoomManager(h.Services);
+        var (room, created) = await m.CreateRoomAsync("h1");
+        var ann = await room.JoinAsync("c1", "Ann");
+        await room.ConnectionLostAsync("c1");
+        await room.ConnectionLostAsync("h1");
+        h.Time.Advance(new RoomOptions().IdleTimeout);
+
+        // Parked, but no sweep has removed it yet.
+        Assert.True(await room.TryParkAsync());
+        Assert.True(room.IsClosed);
+        Assert.Same(room, m.FindLoaded(created.Code));
+
+        var found = await m.FindAsync(created.Code);
+
+        Assert.NotNull(found);
+        Assert.NotSame(room, found);
+        Assert.False(found.IsClosed);
+        Assert.Same(found, m.FindLoaded(created.Code));
+        await found.RejoinAsync("c2", ann.PlayerId, ann.Secret);
+        Assert.Equal(RoomStatus.Lobby, await found.GetStatusAsync());
+
+        // The sweep that follows leaves the rebuilt room alone.
+        await m.SweepAsync();
+        Assert.Same(found, m.FindLoaded(created.Code));
     }
 
     [Fact]

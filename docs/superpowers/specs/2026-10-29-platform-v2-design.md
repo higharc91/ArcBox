@@ -136,7 +136,7 @@ public sealed record RosterEntry(ProfileId Profile, SeatCard Card, PlayerId? Sea
 // LobbyPlayer gains: ProfileId? Profile
 ```
 
-- **Phones already in the room** whose seat has no profile in this campaign (say they joined before it was picked) see **"Who are you in Embers of the Vale?"**, and answer with `ClaimMember(SeatRef)` or "I'm new here". The VIP's Start button stays disabled until every *connected* seat is matched to a member.
+- **Phones already in the room** whose seat has no profile in this campaign (say they joined before it was picked) see **"Who are you in Embers of the Vale?"**, and answer with `ClaimMember(ClaimMemberRequest{Member, ProfileKeys, NewName})`: a member, or "I'm new here" (a null `Member`, under `NewName` if given). The VIP's Start button stays disabled until every *connected* seat is matched to a member.
 - **Starting.**
   - The room checks out the campaign (§3.4) and creates a **disconnected seat for every member not present**, so every member is a `Player` from the start.
   - It passes the lease to the game, then reports each absent seat through the existing `OnPlayerConnectionChanged(id, false)`.
@@ -269,7 +269,7 @@ Campaigns are **created and joined in the room** (§3.2), never through invite l
 
 **Design.** Persist the room's **membership**, but never its game state. Rebuild the room on demand.
 
-- The `rooms` table stores: `code` (primary key), `host_token_hash`, `slots_json` (`[{id, name, secretHash, joinOrder, profile}]`), `next_slot_id`, `selected_game`, `campaign_id`, `game_running`, `created_utc` and `updated_utc`.
+- The `rooms` table stores: `code` (primary key), `host_token_hash`, `slots_json` (`[{id, name, secretHash, joinOrder, profile, forAbsentMember?}]`; `forAbsentMember` marks a seat the room made at a campaign Start for a member who has never been in the room, and such seats go when the selected campaign changes), `next_slot_id`, `selected_game`, `campaign_id`, `game_running`, `created_utc` and `updated_utc`.
 - **Secrets and host tokens are stored only as SHA-256 hashes**, and are compared hash-to-hash with `CryptographicOperations.FixedTimeEquals`. In memory, `PlayerSlot.Secret` becomes `SecretHash`, and `Secrets.Matches(string expectedHash, string provided)` hashes `provided` before comparing. `Secrets.Hash(string)` is new. A leaked database then gives an attacker no working credentials.
 - **When rows are written:** on create, take-seat, kick, game or campaign selection, game start and game end. These are small writes through the background writer (§4).
 - **Rebuilding:** when `RoomManager.Find(code)` misses memory, it loads the row (if `updated_utc` is within `RoomOptions.RetainFor`, default 24 h), recreates the `Room` with every slot disconnected, and starts its actor. Two simultaneous misses for the same code produce one room (`GetOrAdd` over a lazy entry).
@@ -291,6 +291,9 @@ public interface IResumableGame
   - If `ResumesAfterRestart` is set, the rebuilt room calls `Resume` and goes back to `InGame`.
   - Otherwise (REDLINE) the room comes back in the **lobby**. `LastResults = new GameResults([], "Game interrupted: the server restarted.")` is sent as a `GameEnded` to each connection the first time it binds after the rebuild, so the TV and phones show the existing results screen with that note, then the lobby. No client changes are needed.
 - **Parking idle rooms:** reaching `IdleTimeout` now **removes the room from memory without deleting its row**. The next `ResumeHost`, `Rejoin`, `Peek` or `TakeSeat` rebuilds it, so a long break is harmless. Rows older than `RetainFor` are deleted by `RoomSweeper`.
+  - A room parks **only when no connection is bound**: no host connection and no connected seat. While any phone is connected the room stays live in memory however long the TV is away, so a TV that sleeps through a break never sends the phones `RoomClosed`.
+  - A parked room's row says so in a `slots_json` envelope, `{"slots": [...], "parked": true}`, rather than a new column (no migration). The rebuilt room uses the flag to say "Game interrupted: the room was idle." instead of "…the server restarted.", and saves the plain array again.
+  - A lookup that finds a room already closed (parked, but not yet swept out of memory) treats it as a miss and rebuilds from the row.
 - A **watchdog close** (hung game) still deletes the row, because a room whose game hung shouldn't come back. A campaign survives because its last save is already stored.
 - `RoomCodes.Generate` also skips codes that exist in storage.
 - **Clients:** no protocol change. `HostClient.ResumeAfterReconnectAsync` and the phone's `Rejoin` already retry against the same code; now the server answers instead of saying "Room not found."
@@ -346,7 +349,7 @@ public interface IHostAware
 | `campaigns` | `id`, `code` (unique), `game_id`, `name`, `owner`, `members_json`, `document`, `version`, `updated_utc` |
 | `campaign_snapshots` | `id`, `campaign_id`, `version`, `label`, `document`, `created_utc` |
 
-- **Background writer:** `StorageWriter : BackgroundService` owns a single `Channel<WriteOp>` and one connection. Pending writes are **combined per key**: ten campaign saves queued during one slow disk write become a single write of the newest document. It flushes every 250 ms or when 64 operations are pending, and on `StopAsync` it drains the channel within the shutdown timeout. Its health check (in `/healthz`) reports `degraded` if the queue is older than 10 s.
+- **Background writer:** `StorageWriter : BackgroundService` owns a single `Channel<WriteOp>` and one connection. Pending writes are **combined per key**: ten campaign saves queued during one slow disk write become a single write of the newest document. It flushes every 250 ms or when 64 operations are pending, and on `StopAsync` it drains what is queued, even when the token it is given is already cancelled (Kestrel can spend the whole shutdown timeout closing connections first), for at most 4 s, inside the 5 s shutdown timeout. If the cap is reached it logs how many writes may be lost. Its health check (in `/healthz`) reports `degraded` if the queue is older than 10 s.
 - **Reads:** campaigns and profiles load into memory at startup; rooms load lazily (§3.5).
 - **Backups:** a daily `VACUUM INTO '/data/backups/arcbox-<date>.db'`, keeping 14 days. Off-site backup is out of scope.
 
@@ -356,7 +359,7 @@ public interface IHostAware
 
 | Direction | Added | Kept for one release |
 |---|---|---|
-| Phone → server | `Peek(PeekRequest)`, `TakeSeat(TakeSeatRequest)`, `ClaimMember(SeatRef)` | `Join(code, name)` |
+| Phone → server | `Peek(PeekRequest)`, `TakeSeat(TakeSeatRequest)`, `ClaimMember(ClaimMemberRequest{Member, ProfileKeys, NewName})` | `Join(code, name)` |
 | Host or VIP → server | `SelectCampaign(campaignId)`, `CreateCampaign(name)` | |
 | Host → server | `HostSignal(kind, payload)` | |
 | Server → host | `ContentRequired(gameId, packs)` | |
@@ -389,7 +392,7 @@ public interface IHostAware
 Tracked as GitHub issues labelled `redline` and `platform-v2`:
 
 1. **#23: Move the phone skin into the `games/redline` module** (required, part of §3.3). No visible change; every skin test passes from the new path.
-2. **#24: Handle a race interrupted by a server restart, and a phone swapped mid-race** (required, verifies §3.5 and §3.2). TV and phones show "Game interrupted: the server restarted." then the lobby with the same code; a phone that lost its seat mid-race takes it back from "Pick your seat". Covered by `tv-e2e.sh` with `ARCBOX_RESTART=1` and `ARCBOX_SWAP=1`.
+2. **#24: Handle a race interrupted by a server restart, and a phone swapped mid-race** (required, verifies §3.5 and §3.2). TV and phones show "Game interrupted: the server restarted." then the lobby with the same code; a phone that lost its seat mid-race takes it back from "Pick your seat". Covered by `tv-e2e.sh` with `ARCBOX_RESTART=1` and `ARCBOX_SWAP=1`. **Pending:** the end-to-end runs (`tv-e2e.sh` plain, `ARCBOX_RESTART=1` and `ARCBOX_SWAP=1`) still have to be run on a machine with Godot.
 3. **#25: Pace narration and race animations with host signals** (optional, uses §3.7). The TV sends `NarrationDone` and `AnimationDone`, with the current timers kept as fallbacks.
 
 ---
@@ -412,3 +415,4 @@ Tracked as GitHub issues labelled `redline` and `platform-v2`:
 | A slow volume write stalls the game | Nothing writes on the actor: the background writer combines writes, and the health check reports a backlog |
 | A stale phone or TV build after a deploy | Legacy `Join` is kept for one release; unknown `CustomView` screens show a Reload card |
 | A rebuilt room resumes with everyone disconnected and the AI takes every seat | `IResumableGame.Resume` documents that games must wait for reconnects. The tactics spec will define a "Resuming…" phase |
+| Any room can list and select every campaign of a game, so anyone who reaches the server can take any member's seat, including the owner's, and get that profile's key | MUST be resolved before any game with UsesCampaigns is registered in production: scope campaign listing and selection to profiles proven in the room (e.g. keys presented on Peek/TakeSeat), or tie campaigns to the TV's credential. Tracked in a GitHub issue. |

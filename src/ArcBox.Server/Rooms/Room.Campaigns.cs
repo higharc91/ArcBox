@@ -39,7 +39,7 @@ public sealed partial class Room
             throw new RoomException($"This campaign has {info.Members.Count} members; rooms hold {_options.MaxPlayers}.");
         }
 
-        _campaignId = info.Id;
+        SetCampaign(info.Id);
         BroadcastLobby();
         Save();
     });
@@ -69,7 +69,7 @@ public sealed partial class Room
         var info = _campaigns.Create(_selectedGameId!, trimmed, owner);
 
         vip.Profile = owner.Id;
-        _campaignId = info.Id;
+        SetCampaign(info.Id);
         BroadcastLobby();
         Save();
         return _profiles.IssueKey(owner.Id);
@@ -262,7 +262,7 @@ public sealed partial class Room
 
         foreach (var member in campaign.Info.Members.Where(m => _members.FindByProfile(m.Profile) is null))
         {
-            _members.Add(member.DisplayName, connectionId: null, member.Profile, out _);
+            _members.Add(member.DisplayName, connectionId: null, member.Profile, out _).ForAbsentMember = true;
         }
 
         foreach (var slot in _members.All)
@@ -271,6 +271,25 @@ public sealed partial class Room
         }
 
         return lease;
+    }
+
+    /// <summary>
+    /// Selects <paramref name="campaignId"/>, or no campaign. The seats Start made for members who have never been here
+    /// belong to the campaign that was selected, so when it changes they go: a plain game picked afterwards doesn't
+    /// count them as players.
+    /// </summary>
+    private void SetCampaign(string? campaignId)
+    {
+        if (campaignId == _campaignId)
+        {
+            return;
+        }
+
+        _campaignId = campaignId;
+        foreach (var seat in _members.All.Where(s => s.ForAbsentMember && !s.Connected).ToList())
+        {
+            _members.Remove(seat.Id);
+        }
     }
 
     /// <summary>Gives the campaign back if a game had it. Safe from any thread, and only the first call releases.</summary>
@@ -360,7 +379,7 @@ public sealed partial class Room
             return null;
         }
 
-        return new CampaignView(info, _campaigns.DocumentOf(info.Id), rules);
+        return new CampaignView(info, _campaigns.DocumentOf(info.Id), rules, _logger);
     }
 
     private void EnsureCampaignLobby()
@@ -409,12 +428,27 @@ public sealed partial class Room
     private sealed record Offer(SeatOffer Seat, ProfileId? Profile);
 
     /// <summary>A campaign as the room sees it for one message: its info, current document and the game's rules.</summary>
-    private sealed record CampaignView(CampaignInfo Info, JsonElement Document, ICampaignRules Rules)
+    private sealed record CampaignView(CampaignInfo Info, JsonElement Document, ICampaignRules Rules, ILogger Logger)
     {
         public bool Has(ProfileId? profile) => profile is { } id && Info.Members.Any(m => m.Profile == id);
 
         public CampaignMember Member(ProfileId profile) => Info.Members.First(m => m.Profile == profile);
 
-        public SeatCard Card(ProfileId member) => Rules.CardFor(Info, Document, member);
+        /// <summary>
+        /// The game's card for <paramref name="member"/>. The game's code runs on the room's actor, so a CardFor that
+        /// throws is logged and the member's name stands in, rather than breaking every lobby broadcast.
+        /// </summary>
+        public SeatCard Card(ProfileId member)
+        {
+            try
+            {
+                return Rules.CardFor(Info, Document, member);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWarning(ex, "CardFor of game {GameId} threw for member {Member}; showing their name", Info.GameId, member);
+                return new SeatCard(Info.Members.FirstOrDefault(m => m.Profile == member)?.DisplayName ?? member.Value);
+            }
+        }
     }
 }

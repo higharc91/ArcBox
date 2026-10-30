@@ -340,6 +340,21 @@ describe("App", () => {
     expect(screen.getByText("You were removed from the room.")).toBeTruthy();
   });
 
+  it("pre-fills the name with the most recently used stored profile's", () => {
+    const store = new MapStore();
+    store.setItem("arcbox:profiles", JSON.stringify([
+      { profileId: "pr_a", key: "k-a", name: "Old", lastUsed: 1 },
+      { profileId: "pr_b", key: "k-b", name: "Dave", lastUsed: 5 },
+    ]));
+    render(<App session={new Session(new FakeTransport(), store)} />);
+    expect(input(/Your name/).value).toBe("Dave");
+    cleanup();
+
+    // Nothing stored: the box starts empty.
+    render(<App session={new Session(new FakeTransport(), new MapStore())} />);
+    expect(input(/Your name/).value).toBe("");
+  });
+
   it("shows the server's join error under the form", async () => {
     const t = new FakeTransport();
     const session = new Session(t, new MapStore());
@@ -527,6 +542,53 @@ describe("Lobby: campaigns", () => {
     fireEvent.input(input(/Your name/), { target: { value: " Dan " } });
     fireEvent.click(button(/^I'm new here$/));
     expect(props.onClaim).toHaveBeenLastCalledWith(null, "Dan");
+  });
+
+  it("Claim_suggests_continue_as_a_stored_profile_first", () => {
+    const roster = [
+      entry("pr_kara", "Kara"),
+      entry("pr_wren", "Wren", { seatedAs: "p9" }), // an offline seat
+      entry("pr_ilyra", "Ilyra", { seatedAs: "p8", connected: true }), // someone else is playing them
+    ];
+    const l = campaignLobby({ campaign: { id: "c1", code: "EMBR", name: "Embers of the Vale", roster } });
+    // Most recently used first: Ilyra is taken, so the next stored profile on the roster is suggested.
+    const profiles = [
+      { profileId: "pr_ilyra", key: "k-i", name: "Ivy", lastUsed: 9 },
+      { profileId: "pr_wren", key: "k-w", name: "Wendy", lastUsed: 5 },
+      { profileId: "pr_kara", key: "k-k", name: "Karen", lastUsed: 1 },
+    ];
+    const onClaim = vi.fn();
+    const { container } = render(<Lobby lobby={l} me="p2" {...props} onClaim={onClaim} profiles={profiles} />);
+    expect(screen.queryByRole("button", { name: /Continue as Ivy/ })).toBeNull();
+    const cont = button(/Continue as Wendy/);
+    // Shown first, ahead of the full list, which stays.
+    expect(container.querySelector(".claim button")).toBe(cont);
+    expect(button(/Kara/)).toBeTruthy();
+    expect(button(/Wren/)).toBeTruthy();
+    fireEvent.click(cont);
+    expect(onClaim).toHaveBeenLastCalledWith({ slot: "p9" });
+    cleanup();
+
+    // No stored profile on the roster: just the list.
+    render(<Lobby lobby={l} me="p2" {...props} profiles={[{ profileId: "pr_other", key: "k", name: "Zed", lastUsed: 1 }]} />);
+    expect(screen.queryByRole("button", { name: /Continue as/ })).toBeNull();
+  });
+
+  it("App: a remembered phone in a campaign lobby claims its member with one tap", async () => {
+    const t = new FakeTransport();
+    const store = new MapStore();
+    store.setItem("arcbox:profiles", JSON.stringify([{ profileId: "pr_kara", key: "k-dave", name: "Dave", lastUsed: 5 }]));
+    saveSeat(store, "BCDF", undefined, { playerId: "p2", secret: "s", name: "MO" });
+    const roster = [entry("pr_wren", "Wren"), entry("pr_kara", "Kara")];
+    t.responders.Rejoin = () => t.fire("LobbyChanged", campaignLobby({ campaign: { id: "c1", code: "EMBR", name: "Embers of the Vale", roster } }));
+    t.responders.ClaimMember = () => null;
+    const session = new Session(t, store);
+    render(<App session={session} />);
+    await boot(session, store, "?room=BCDF");
+    await flush();
+    fireEvent.click(button(/Continue as Dave/));
+    await flush();
+    expect(t.invokes.at(-1)).toEqual({ method: "ClaimMember", args: [{ member: { member: "pr_kara" }, profileKeys: ["k-dave"] }] });
   });
 
   it("a phone already matched to a member isn't asked, and nobody is asked mid-game", () => {
