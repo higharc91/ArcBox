@@ -48,10 +48,12 @@
             "type": "integer"
           },
           "level": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Overrides the monster's level (only the sheet's Level changes; the stat block isn't rescaled)."
           },
           "variant": {
-            "type": "string"
+            "type": "string",
+            "description": "A sprite recolour: the monster's sprite key with this as its third part (beasts.wolf.dire)."
           },
           "tag": {
             "type": "string",
@@ -59,6 +61,10 @@
           },
           "aiProfile": {
             "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "description": "Names this one unit in the battle (count must be 1). Without it units are numbered \"<monster>.<n>\" in placement order."
           }
         },
         "required": [
@@ -86,10 +92,12 @@
             "type": "integer"
           },
           "level": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Overrides the monster's level (only the sheet's Level changes; the stat block isn't rescaled)."
           },
           "variant": {
-            "type": "string"
+            "type": "string",
+            "description": "A sprite recolour: the monster's sprite key with this as its third part (beasts.wolf.dire)."
           },
           "tag": {
             "type": "string",
@@ -97,6 +105,10 @@
           },
           "aiProfile": {
             "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "description": "Names this one unit in the battle (count must be 1). Without it units are numbered \"<monster>.<n>\" in placement order."
           }
         },
         "required": [

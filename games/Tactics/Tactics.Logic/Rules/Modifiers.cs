@@ -39,11 +39,14 @@ public static class Modifiers
                 yield return zoneMods;
     }
 
-    /// <summary>The passives on <paramref name="unit"/>'s sheet that the rules pack defines, in sheet order.</summary>
+    /// <summary>
+    /// The passives on <paramref name="unit"/>'s sheet that the rules pack defines (<see cref="RulesPack.PassiveFor"/>: its
+    /// own and those made from injuries), in sheet order.
+    /// </summary>
     internal static IEnumerable<PassiveDef> Passives(UnitState unit, RulesPack rules)
     {
         foreach (var id in unit.Sheet.Passives.IsDefault ? [] : unit.Sheet.Passives)
-            if (rules.Passives.TryGetValue(id, out var passive))
+            if (rules.PassiveFor(id) is { } passive)
                 yield return passive;
     }
 
@@ -53,7 +56,7 @@ public static class Modifiers
     /// </summary>
     public static StaticMods Sum(IEnumerable<StaticMods> sources)
     {
-        var (ac, attack, damage, move, initiative, extra) = (0, 0, 0, 0, 0, 0);
+        var (ac, attack, damage, move, initiative, extra, maxHp) = (0, 0, 0, 0, 0, 0, 0);
         var (incapacitated, cantMove, critWhenAdjacent, invisible) = (false, false, false, false);
         var saves = ImmutableSortedDictionary.CreateBuilder<Stat, int>();
         var autoFail = ImmutableSortedSet.CreateBuilder<Stat>();
@@ -71,6 +74,7 @@ public static class Modifiers
             move += m.Move;
             initiative += m.Initiative;
             extra += m.ExtraActions;
+            maxHp += m.MaxHp;
             incapacitated |= m.Incapacitated;
             cantMove |= m.CantMove;
             critWhenAdjacent |= m.CritWhenAdjacent;
@@ -87,7 +91,7 @@ public static class Modifiers
 
         return new StaticMods(ac, attack, damage, move, initiative, saves.ToImmutable(), incapacitated, cantMove,
             own.Edge, melee.Edge, ranged.Edge, autoFail.ToImmutable(), critWhenAdjacent, invisible, resist.ToImmutable(),
-            immune.ToImmutable(), extra);
+            immune.ToImmutable(), extra, maxHp);
     }
 
     /// <summary>True when <paramref name="unit"/> is Up and not incapacitated, so it can act, react and flank.</summary>

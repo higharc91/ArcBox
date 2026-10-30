@@ -246,6 +246,10 @@
         },
         "extraActions": {
           "type": "integer"
+        },
+        "maxHp": {
+          "type": "integer",
+          "description": "Added to the maximum HP of a character's sheet when it is built (Cracked ribs: -5). Only passives and injuries may carry it; a condition can't (the loader rejects it)."
         }
       },
       "description": "Modifiers that hold while their passive or condition does.",

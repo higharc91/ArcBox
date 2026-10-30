@@ -1,0 +1,5 @@
+[
+  { "id": "cracked_ribs", "name": "Cracked ribs", "weight": 3, "static": { "maxHp": -5 } },
+  { "id": "concussion", "name": "Concussion", "weight": 2, "static": { "saves": { "int": -1, "wis": -1 } } },
+  { "id": "wrenched_shoulder", "name": "Wrenched shoulder", "weight": 2, "static": { "attack": -1 } }
+]

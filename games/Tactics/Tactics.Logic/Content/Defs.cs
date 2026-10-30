@@ -120,6 +120,9 @@ public enum HookKind
 /// from an adjacent attacker is a critical hit.</item>
 /// <item><see cref="Resist"/> and <see cref="Immune"/> add damage types to the sheet's; <see cref="ExtraActions"/> adds
 /// actions to each turn's economy.</item>
+/// <item><see cref="MaxHp"/> adds to the sheet's maximum HP. It is applied once, by <see cref="SheetBuilder"/>, from the
+/// passives and injuries a character's sheet is built with (Cracked ribs: −5); a battle never re-reads it, so a condition
+/// can't carry it (the loader rejects that).</item>
 /// </list>
 /// </summary>
 public sealed record StaticMods(
@@ -141,7 +144,8 @@ public sealed record StaticMods(
     ImmutableSortedSet<string>? Resist = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(OrdinalJsonConverter))]
     ImmutableSortedSet<string>? Immune = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int ExtraActions = 0)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int ExtraActions = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int MaxHp = 0)
 {
     /// <summary>No modifiers.</summary>
     public static StaticMods None { get; } = new();
@@ -279,9 +283,10 @@ public sealed record SubclassDef(string Id, string Name, ImmutableSortedDictiona
 
 /// <summary>
 /// A class (spec §4.5, <c>classes/&lt;id&gt;.json</c>): hit die, save and gear proficiencies, skill choices, starting kit,
-/// per-level resource pools, the features gained at each level 1–10, its subclasses, the simulator's default picks per
-/// level, AI hints, the casting stat and the Jump score. <see cref="SubclassesPending"/> lets a class be loaded before its
-/// subclasses are written (a stop-gap until every class has them). <see cref="Replaces"/> lets a later pack override an id.
+/// per-level resource pools, the features gained at each level 1–10, its subclasses, the default picks (the whole loadout
+/// of the highest listed level at or below a character's level, used when it has chosen none), AI hints, the casting stat
+/// and the Jump score. <see cref="SubclassesPending"/> lets a class be loaded before its subclasses are written (a stop-gap
+/// until every class has them). <see cref="Replaces"/> lets a later pack override an id.
 /// </summary>
 public sealed record ClassDef(string Id, string Name, string Role, int HitDie, ImmutableArray<Stat> Saves,
     ImmutableArray<string> ArmorProf, ImmutableArray<string> WeaponProf, SkillChoicesDef SkillChoices, StartingKitDef StartingKit,
@@ -320,7 +325,9 @@ public sealed record PhaseDef(int HpBelow, ImmutableArray<AbilityId> Abilities, 
 /// <summary>
 /// A monster's stat block (spec §4.7, <c>monsters/&lt;family&gt;.json</c>): the unit sheet's numbers plus its challenge
 /// rating (<c>"1/4"</c>, <c>"3"</c>), the XP it is worth, its AI profile, its sprite (an art key such as
-/// <c>"beasts.wolf.grey"</c>) and, for bosses, phases. <see cref="Replaces"/> lets a later pack override an id.
+/// <c>"beasts.wolf.grey"</c>) and, for bosses, phases. Its <see cref="Weapon"/> is written inline in the stat block (a monster's
+/// natural weapons are its own; <c>weapons.json</c> holds the gear characters carry). <see cref="Hp"/> is its maximum HP.
+/// <see cref="Replaces"/> lets a later pack override an id.
 /// </summary>
 public sealed record MonsterDef(string Id, string Name, string Cr, int Xp, ImmutableSortedDictionary<Stat, int> Scores, int Hp, int Ac,
     WeaponDef Weapon, string AiProfile, string Sprite, ImmutableArray<AbilityId> Abilities, ImmutableArray<string> Passives,
@@ -343,6 +350,14 @@ public sealed record MonsterDef(string Id, string Name, string Cr, int Xp, Immut
 public sealed record ItemDef(ItemId Id, string Name, AbilityId Use,
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Tags,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ItemId? Replaces = null);
+
+/// <summary>
+/// A suit of armour (<c>armor.json</c>): its <see cref="Kind"/> caps the DEX bonus (light: none, medium: +2, heavy: DEX
+/// doesn't count and initiative −2) and <see cref="BaseAc"/> is the AC it gives before DEX. A shield is not armour: a
+/// character's <see cref="CharacterRecord.Shield"/> adds +2. <see cref="Replaces"/> lets a later pack override an id.
+/// </summary>
+public sealed record ArmorDef(string Id, string Name, ArmorKind Kind, int BaseAc,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null);
 
 /// <summary>
 /// A prop as written in a map file. <see cref="Cover"/> is <c>"none"</c>, <c>"half"</c> or <c>"three_quarters"</c>
@@ -385,7 +400,9 @@ public sealed record PartySizeDef(int Min, int Max);
 /// <summary>
 /// A unit an encounter places: a monster id, either on a tile (<see cref="At"/>) or on the first free tiles of a map zone
 /// (<see cref="Zone"/>), <see cref="Count"/> times, with an optional level, variant and AI profile override.
-/// <see cref="Tag"/> (the monster id when left out) is what objectives and triggers refer to.
+/// <see cref="Tag"/> (the monster id when left out) is what objectives and triggers refer to. <see cref="Id"/> names the
+/// unit in the battle (a single unit only); without it units are numbered <c>"&lt;monster&gt;.&lt;n&gt;"</c> in placement
+/// order (see <see cref="Encounters.Setup"/>).
 /// </summary>
 public sealed record EncounterUnitDef(string Unit,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] Tile? At = null,
@@ -394,7 +411,8 @@ public sealed record EncounterUnitDef(string Unit,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Level = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Variant = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Tag = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? AiProfile = null)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? AiProfile = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Id = null)
 {
     /// <summary>The tag objectives and triggers use: <see cref="Tag"/>, or the monster id.</summary>
     [JsonIgnore]

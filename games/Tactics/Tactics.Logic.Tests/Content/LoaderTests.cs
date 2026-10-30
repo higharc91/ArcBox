@@ -22,6 +22,8 @@ public sealed class LoaderTests
         Assert.Equal(["soldier"], pack.Backgrounds.Keys);
         Assert.Equal(["wolf"], pack.Monsters.Keys);
         Assert.Equal(["potion"], pack.Items.Keys.Select(k => k.Value));
+        Assert.Equal(["longbow", "longsword", "quarterstaff", "rapier", "shortsword"], pack.Weapons.Keys);
+        Assert.Equal(["chain_mail", "leather", "none", "scale_mail"], pack.Armors.Keys);
         Assert.Equal(["field"], pack.Maps.Keys);
         Assert.Equal(["field_skirmish"], pack.Encounters.Keys);
         Assert.Equal(["brute"], pack.AiProfiles.Keys);
@@ -47,6 +49,10 @@ public sealed class LoaderTests
         Assert.Equal("wolf", Assert.Single(fighter.Subclasses).Companion);
         Assert.Equal([Stat.Str, Stat.Con, Stat.Dex, Stat.Wis, Stat.Cha, Stat.Int], fighter.AiTags.Priority);
         Assert.Null(fighter.CastingStat);
+        var longsword = pack.Weapons["longsword"];
+        Assert.Equal((Dice.Parse("1d8"), "slashing", Stat.Str, 1), (longsword.Damage, longsword.DamageType, longsword.Stat, longsword.Range));
+        Assert.Equal(["martial"], longsword.Tags);
+        Assert.Equal(new ArmorDef("chain_mail", "Chain mail", ArmorKind.Heavy, 16), pack.Armors["chain_mail"]);
 
         var map = pack.MapFor("field")!;
         Assert.Equal((6, 5), (map.Width, map.Height));

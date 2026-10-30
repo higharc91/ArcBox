@@ -2,7 +2,7 @@ using System.Text.Json;
 
 namespace Tactics.Logic;
 
-/// <summary>The per-element checks: abilities, passives, conditions, races, backgrounds, monsters, items, injuries, AI profiles, the XP table, maps and pack manifests.</summary>
+/// <summary>The per-element checks: abilities, passives, conditions, races, backgrounds, monsters, items, weapons, armour, injuries, AI profiles, the XP table, maps and pack manifests.</summary>
 internal sealed partial class Validation
 {
     // ---- Elements -------------------------------------------------------------------------------------------------
@@ -55,7 +55,10 @@ internal sealed partial class Validation
             return def;
         });
 
-    /// <summary>A condition: its passives, then the whole; the condition it implies.</summary>
+    /// <summary>
+    /// A condition: its passives, then the whole; the condition it implies. It can't carry <see cref="StaticMods.MaxHp"/>
+    /// (only the sheet builder applies it, so a condition's would do nothing).
+    /// </summary>
     public ConditionDef? Condition(JsonElement e, string file, string ptr)
         => Guarded(file, ptr, () =>
         {
@@ -72,8 +75,15 @@ internal sealed partial class Validation
             var def = Deserialize<ConditionDef>(e, file, ptr);
             if (def?.Implies is { } implies)
                 Ref(RefKind.Condition, implies.Value, file, Pointer.Append(ptr, "implies"));
+            if (def?.Static is { MaxHp: not 0 })
+                Error(file, Pointer.Append(Pointer.Append(ptr, "static"), "maxHp"), NoMaxHp);
+            for (var i = 0; def is not null && i < def.Passives.Length; i++)
+                if (def.Passives[i].Static is { MaxHp: not 0 })
+                    Error(file, Pointer.Append(Pointer.Append(Pointer.Append(Pointer.Append(ptr, "passives"), i), "static"), "maxHp"), NoMaxHp);
             return def;
         });
+
+    private const string NoMaxHp = "A condition can't change max HP (only passives and injuries do, when a character's sheet is built).";
 
     /// <summary>A race: its racial ability and trait passives.</summary>
     public RaceDef? Race(JsonElement e, string file, string ptr)
@@ -121,6 +131,19 @@ internal sealed partial class Validation
                 Ref(RefKind.Ability, def.Use.Value, file, Pointer.Append(ptr, "use"));
             return def;
         });
+
+    /// <summary>A weapon characters can carry: a range of at least 1.</summary>
+    public WeaponDef? Weapon(JsonElement e, string file, string ptr)
+        => Guarded(file, ptr, () =>
+        {
+            var def = Deserialize<WeaponDef>(e, file, ptr);
+            if (def is { Range: < 1 })
+                Error(file, Pointer.Append(ptr, "range"), "The range must be at least 1.");
+            return def;
+        });
+
+    /// <summary>A suit of armour.</summary>
+    public ArmorDef? Armor(JsonElement e, string file, string ptr) => Guarded(file, ptr, () => Deserialize<ArmorDef>(e, file, ptr));
 
     /// <summary>An injury: a weight of at least 1.</summary>
     public InjuryDef? Injury(JsonElement e, string file, string ptr)

@@ -259,6 +259,73 @@ public sealed class ValidationTests
     }
 
     [Fact]
+    public void Weapons_and_armor_are_checked_and_may_be_replaced()
+    {
+        var errors = ErrorsOfChapter(
+            ("weapons.json", """
+                [ { "id": "sling", "damage": "1d4", "damageType": "bludgeoning", "stat": "dex", "finesse": false, "ranged": true, "range": 0, "reach": false, "tags": [] },
+                  { "id": "longsword", "damage": "1d10", "damageType": "slashing", "stat": "str", "finesse": false, "ranged": false, "range": 1, "reach": false, "tags": [] } ]
+                """),
+            ("armor.json", """[ { "id": "plate", "name": "Plate", "kind": "Armoured", "baseAc": 18 }, { "id": "none", "name": "Nothing", "kind": "None", "baseAc": 10 } ]"""),
+            ("classes/druid.json", ClassJson("druid", subclasses: "\"subclassesPending\": true").Replace("\"quarterstaff\"", "\"club\"", StringComparison.Ordinal)
+                .Replace("\"armor\": \"none\"", "\"armor\": \"hide\"", StringComparison.Ordinal)));
+
+        Assert.Equal(
+            [
+                new ContentError("chapter-01/armor.json", "/0/kind", "The value has the wrong type, or isn't one of the allowed values."),
+                new ContentError("chapter-01/armor.json", "/1/id", "Duplicate armor 'none': it is already defined at base/armor.json#/0. A later pack can change it only with \"replaces\": \"none\"."),
+                new ContentError("chapter-01/classes/druid.json", "/startingKit/armor", "Unknown armor 'hide'."),
+                new ContentError("chapter-01/classes/druid.json", "/startingKit/weapon", "Unknown weapon 'club'."),
+                new ContentError("chapter-01/weapons.json", "/0/range", "The range must be at least 1."),
+                new ContentError("chapter-01/weapons.json", "/1/id", "Duplicate weapon 'longsword': it is already defined at base/weapons.json#/0. A later pack can change it only with \"replaces\": \"longsword\"."),
+            ],
+            Sorted(errors));
+
+        var pack = LoadChapter(("weapons.json", """
+            [ { "id": "longsword", "replaces": "longsword", "damage": "1d10", "damageType": "slashing", "stat": "str", "finesse": false,
+                "ranged": false, "range": 1, "reach": false, "tags": [] } ]
+            """));
+        Assert.Equal(Dice.Parse("1d10"), pack.Weapons["longsword"].Damage);
+        Assert.Null(pack.Weapons["longsword"].Replaces);
+    }
+
+    [Fact]
+    public void A_condition_cannot_change_max_hp()
+    {
+        var errors = ErrorsOfChapter(("conditions.json", """
+            [ { "id": "bloated", "name": "Bloated", "static": { "maxHp": 5 }, "tags": [] },
+              { "id": "swollen", "name": "Swollen", "passives": [ { "id": "swollen.up", "static": { "maxHp": 2 } } ], "tags": [] },
+              { "id": "fine", "name": "Fine", "static": { "ac": 1 }, "tags": [] } ]
+            """));
+
+        Assert.Equal(
+            [
+                new ContentError("chapter-01/conditions.json", "/0/static/maxHp",
+                    "A condition can't change max HP (only passives and injuries do, when a character's sheet is built)."),
+                new ContentError("chapter-01/conditions.json", "/1/passives/0/static/maxHp",
+                    "A condition can't change max HP (only passives and injuries do, when a character's sheet is built)."),
+            ], errors);
+    }
+
+    [Fact]
+    public void Encounter_unit_ids_must_be_unique_single_units()
+    {
+        var errors = ErrorsOfChapter(("encounters/e.json", """
+            { "id": "e", "name": "E", "map": "field", "party": { "min": 1, "max": 4 },
+              "enemies": [ { "unit": "wolf", "at": [5, 4], "id": "alpha" },
+                           { "unit": "wolf", "zone": "enemy_spawn", "count": 2, "id": "alpha" },
+                           { "unit": "wolf", "at": [4, 4], "id": " " } ] }
+            """));
+
+        Assert.Equal(
+            [
+                new ContentError("chapter-01/encounters/e.json", "/enemies/1/id", "Two units in this encounter are named 'alpha'."),
+                new ContentError("chapter-01/encounters/e.json", "/enemies/1/id", "A unit with an \"id\" is a single unit (\"count\" 1)."),
+                new ContentError("chapter-01/encounters/e.json", "/enemies/2/id", "The id is empty."),
+            ], errors);
+    }
+
+    [Fact]
     public void Content_error_to_string_is_file_hash_pointer_colon_message()
         => Assert.Equal("base/x.json#/a/0: Bad.", new ContentError("base/x.json", "/a/0", "Bad.").ToString());
 
@@ -267,7 +334,7 @@ public sealed class ValidationTests
 
     private static string ClassJson(string id, string subclasses) => $$"""
         { "id": "{{id}}", "name": "X", "role": "control", "hitDie": 8, "saves": ["int", "wis"], "armorProf": [], "weaponProf": [],
-          "skillChoices": { "count": 2, "from": ["arcana"] }, "startingKit": { "weapon": "staff", "armor": "none" },
+          "skillChoices": { "count": 2, "from": ["arcana"] }, "startingKit": { "weapon": "quarterstaff", "armor": "none" },
           "resources": {},
           "features": { "1": [ { "ability": "test.mend" } ], "2": [ { "attacks": 1 } ], "3": [ { "attacks": 1 } ],
                         "4": [ { "attacks": 1 } ], "5": [ { "attacks": 1 } ], "6": [ { "attacks": 1 } ], "7": [ { "attacks": 1 } ],

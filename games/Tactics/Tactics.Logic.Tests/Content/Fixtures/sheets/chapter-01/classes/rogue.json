@@ -1,0 +1,27 @@
+{
+  "id": "rogue", "name": "Rogue", "role": "striker", "hitDie": 8, "saves": ["dex", "int"],
+  "armorProf": ["light"], "weaponProf": ["simple", "martial"],
+  "skillChoices": { "count": 2, "from": ["acrobatics", "stealth", "perception", "arcana"] },
+  "startingKit": { "weapon": "rapier", "armor": "leather", "shield": false, "bag": [ { "item": "potion", "count": 2 } ] },
+  "resources": { "edge": { "1": 2, "5": 3, "9": 4 } },
+  "features": {
+    "1": [ { "ability": "rogue.hide" }, { "passive": "test.sneak" } ],
+    "2": [ { "choose": 1, "from": ["test.bolt", "test.mend"] } ],
+    "3": [ { "ability": "rogue.step" } ],
+    "4": [ { "passive": "rogue.evasion" } ],
+    "5": [ { "attacks": 2 } ],
+    "6": [ { "ability": "rogue.dash" } ],
+    "7": [ { "ability": "rogue.blind" }, { "choose": 1, "from": ["test.hold", "rogue.hardy"] } ],
+    "8": [ { "passive": "test.tough" } ],
+    "9": [ { "passive": "rogue.evasion" } ],
+    "10": [ { "attacks": 3 } ]
+  },
+  "subclasses": [
+    { "id": "rogue.shadow", "name": "Shadow",
+      "features": { "3": [ { "ability": "rogue.shadowstep" } ], "6": [ { "passive": "rogue.shadow_sense" } ], "10": [ { "ability": "rogue.umbra" } ] } }
+  ],
+  "defaultPicks": { "2": ["test.bolt"], "7": ["test.mend", "rogue.hardy"] },
+  "aiTags": { "tags": ["melee", "sneak"], "priority": ["dex", "int", "con", "wis", "cha", "str"] },
+  "castingStat": null,
+  "jump": 3
+}

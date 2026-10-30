@@ -9,7 +9,8 @@ internal sealed partial class Validation
 {
     /// <summary>
     /// A class: hit die, resource tables, a feature at every level 1–10, subclasses with features at exactly 3, 6 and 10
-    /// (unless <see cref="ClassDef.SubclassesPending"/>), the stat priority, and every id its features and kit name.
+    /// (unless <see cref="ClassDef.SubclassesPending"/>), the stat priority, and every id its features and kit name (an empty
+    /// kit armour is none).
     /// </summary>
     public ClassDef? Class(JsonElement e, string file, string ptr)
         => Guarded(file, ptr, () =>
@@ -52,8 +53,12 @@ internal sealed partial class Validation
 
             foreach (var (level, picks) in def.DefaultPicks)
                 for (var i = 0; i < picks.Length; i++)
-                    Ref(RefKind.Ability, picks[i].Value, file,
+                    Ref(RefKind.AbilityOrPassive, picks[i].Value, file,
                         Pointer.Append(Pointer.Append(Pointer.Append(ptr, "defaultPicks"), level), i));
+            var kit = Pointer.Append(ptr, "startingKit");
+            Ref(RefKind.Weapon, def.StartingKit.Weapon, file, Pointer.Append(kit, "weapon"));
+            if (def.StartingKit.Armor.Length > 0)
+                Ref(RefKind.Armor, def.StartingKit.Armor, file, Pointer.Append(kit, "armor"));
             for (var i = 0; i < def.StartingKit.Bag.Length; i++)
                 Ref(RefKind.Item, def.StartingKit.Bag[i].Item.Value, file,
                     Pointer.Append(Pointer.Append(Pointer.Append(Pointer.Append(ptr, "startingKit"), "bag"), i), "item"));

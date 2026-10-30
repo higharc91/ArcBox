@@ -37,7 +37,7 @@ internal static class PackLoader
     }
 
     /// <summary>The kinds of content file, by where they sit in a pack.</summary>
-    private enum FileKind { Conditions, Races, Backgrounds, Injuries, Xp, AiProfiles, Items, Abilities, Class, Monsters, Map, Encounter }
+    private enum FileKind { Conditions, Races, Backgrounds, Injuries, Xp, AiProfiles, Items, Weapons, Armor, Abilities, Class, Monsters, Map, Encounter }
 
     /// <summary>Everything read from the packs, in load order, before ids are merged.</summary>
     private sealed class Content
@@ -50,6 +50,8 @@ internal static class PackLoader
         public List<Loaded<BackgroundDef>> Backgrounds { get; } = [];
         public List<Loaded<MonsterDef>> Monsters { get; } = [];
         public List<Loaded<ItemDef>> Items { get; } = [];
+        public List<Loaded<WeaponDef>> Weapons { get; } = [];
+        public List<Loaded<ArmorDef>> Armors { get; } = [];
         public List<Loaded<MapContent>> Maps { get; } = [];
         public List<Loaded<EncounterDef>> Encounters { get; } = [];
         public List<Loaded<AiProfileDef>> AiProfiles { get; } = [];
@@ -107,6 +109,8 @@ internal static class PackLoader
         var backgrounds = Merge(content.Backgrounds, "background", v);
         var monsters = Merge(content.Monsters, "monster", v);
         var items = Merge(content.Items, "item", v);
+        var weapons = Merge(content.Weapons, "weapon", v);
+        var armors = Merge(content.Armors, "armor", v);
         var maps = Merge(content.Maps, "map", v);
         var encounters = Merge(content.Encounters, "encounter", v);
         var aiProfiles = Merge(content.AiProfiles, "AI profile", v);
@@ -120,6 +124,8 @@ internal static class PackLoader
             RefKind.Condition => conditions.ContainsKey(id),
             RefKind.Monster => monsters.ContainsKey(id),
             RefKind.Item => items.ContainsKey(id),
+            RefKind.Weapon => weapons.ContainsKey(id),
+            RefKind.Armor => armors.ContainsKey(id),
             RefKind.Map => maps.ContainsKey(id),
             RefKind.AiProfile => aiProfiles.ContainsKey(id),
             _ => false,
@@ -142,6 +148,8 @@ internal static class PackLoader
                 Index(backgrounds.Values, b => b.Id, b => b.Def, StringComparer.Ordinal),
                 Index(monsters.Values, m => m.Id, m => m.Def, StringComparer.Ordinal),
                 Index(items.Values, i => i.Def.Id, i => i.Def, Comparer<ItemId>.Default),
+                Index(weapons.Values, w => w.Id, w => w.Def with { Replaces = null }, StringComparer.Ordinal),
+                Index(armors.Values, a => a.Id, a => a.Def, StringComparer.Ordinal),
                 Index(encounters.Values, e => e.Id, e => e.Def, StringComparer.Ordinal),
                 Index(aiProfiles.Values, a => a.Id, a => a.Def, StringComparer.Ordinal),
                 xp.Values.SingleOrDefault()?.Def ?? XpTable.Default));
@@ -239,6 +247,8 @@ internal static class PackLoader
         ["xp.json"] => FileKind.Xp,
         ["ai-profiles.json"] => FileKind.AiProfiles,
         ["items.json"] => FileKind.Items,
+        ["weapons.json"] => FileKind.Weapons,
+        ["armor.json"] => FileKind.Armor,
         ["abilities", var name] when name.EndsWith(".json", StringComparison.Ordinal) => FileKind.Abilities,
         ["classes", var name] when name.EndsWith(".json", StringComparison.Ordinal) => FileKind.Class,
         ["monsters", var name] when name.EndsWith(".json", StringComparison.Ordinal) => FileKind.Monsters,
@@ -291,6 +301,14 @@ internal static class PackLoader
             case FileKind.Items:
                 List(root, file, "items", v, (e, p) => Add(c.Items, v.Item(e, file, p), d => d.Id.Value, d => d.Replaces?.Value,
                     file, p, v, e, RefKind.Item));
+                break;
+            case FileKind.Weapons:
+                List(root, file, "weapons", v, (e, p) => Add(c.Weapons, v.Weapon(e, file, p), d => d.Id, d => d.Replaces,
+                    file, p, v, e, RefKind.Weapon));
+                break;
+            case FileKind.Armor:
+                List(root, file, "armor", v, (e, p) => Add(c.Armors, v.Armor(e, file, p), d => d.Id, d => d.Replaces,
+                    file, p, v, e, RefKind.Armor));
                 break;
             case FileKind.Monsters:
                 List(root, file, "monsters", v, (e, p) => Add(c.Monsters, v.Monster(e, file, p), d => d.Id, d => d.Replaces,

@@ -121,6 +121,8 @@ internal static class TooltipText
             clauses.Add($"immune to {string.Join(", ", immune)}");
         if (mods.ExtraActions != 0)
             clauses.Add($"{Signed(mods.ExtraActions)} {(Math.Abs(mods.ExtraActions) == 1 ? "action" : "actions")} each turn");
+        if (mods.MaxHp != 0)
+            clauses.Add($"{Signed(mods.MaxHp)} max HP");
         return clauses;
     }
 

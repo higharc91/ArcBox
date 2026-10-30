@@ -24,7 +24,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "pattern": "^(conditions|races|backgrounds|injuries|xp|ai-profiles|items)\\.json$|^(abilities|classes|monsters|maps|encounters)/[^/]+\\.json$"
+        "pattern": "^(conditions|races|backgrounds|injuries|weapons|armor|xp|ai-profiles|items)\\.json$|^(abilities|classes|monsters|maps|encounters)/[^/]+\\.json$"
       },
       "description": "Content files, relative to the pack folder."
     }

@@ -26,12 +26,17 @@ public sealed partial class RulesPack
         Backgrounds = catalog.Backgrounds;
         Monsters = catalog.Monsters;
         Items = catalog.Items;
+        Weapons = catalog.Weapons;
+        Armors = catalog.Armors;
         Encounters = catalog.Encounters;
         AiProfiles = catalog.AiProfiles;
         Xp = catalog.Xp;
+        _injuryPassives = injuries.Values.ToImmutableSortedDictionary(i => InjuryPassiveId(i.Id),
+            i => new PassiveDef(InjuryPassiveId(i.Id), null, null, [], i.Static with { MaxHp = 0 }), StringComparer.Ordinal);
     }
 
     private readonly ImmutableSortedDictionary<string, UnitSheet> _monsterSheets;
+    private readonly ImmutableSortedDictionary<string, PassiveDef> _injuryPassives;
 
     /// <summary>The content hash; a battle records it in <see cref="BattleState.ContentHash"/>.</summary>
     public string Hash { get; }
@@ -66,6 +71,12 @@ public sealed partial class RulesPack
     /// <summary>Consumable items by id.</summary>
     public ImmutableSortedDictionary<ItemId, ItemDef> Items { get; }
 
+    /// <summary>Weapons characters can carry (<c>weapons.json</c>) by id, ordinal.</summary>
+    public ImmutableSortedDictionary<string, WeaponDef> Weapons { get; }
+
+    /// <summary>Armour characters can wear (<c>armor.json</c>) by id, ordinal.</summary>
+    public ImmutableSortedDictionary<string, ArmorDef> Armors { get; }
+
     /// <summary>Encounters by id, ordinal.</summary>
     public ImmutableSortedDictionary<string, EncounterDef> Encounters { get; }
 
@@ -79,19 +90,31 @@ public sealed partial class RulesPack
     public BattleMap? MapFor(string id) => Maps.GetValueOrDefault(id);
 
     /// <summary>
+    /// The id of the passive that carries an injury's static modifiers (<c>"injury:&lt;id&gt;"</c>). <see cref="SheetBuilder"/>
+    /// puts it on the sheets of injured characters, and <see cref="PassiveFor"/> finds it, so <see cref="Modifiers"/> honours
+    /// an injury like any other passive.
+    /// </summary>
+    public static string InjuryPassiveId(InjuryId injury) => "injury:" + injury.Value;
+
+    /// <summary>
+    /// The passive a sheet's passive id names: one the pack defines, or the one an injury makes
+    /// (<see cref="InjuryPassiveId"/>, without its <see cref="StaticMods.MaxHp"/>, which the sheet builder applies). Null
+    /// when there is none.
+    /// </summary>
+    public PassiveDef? PassiveFor(string id)
+        => Passives.TryGetValue(id, out var passive) ? passive : _injuryPassives.GetValueOrDefault(id);
+
+    /// <summary>
     /// The unit sheet of the monster <paramref name="id"/> (for summons and transformations), or null when there is none:
-    /// a sheet given to <see cref="InMemory"/>, else one built from <see cref="Monsters"/> at the stat block's own level.
-    /// The sheet is on the enemy side; a summoner puts it on its own. (Task 12's sheet builder replaces the conversion.)
+    /// a sheet given to <see cref="InMemory"/>, else <see cref="SheetBuilder.ForMonster"/> at the stat block's own level.
+    /// The sheet is on the enemy side; a summoner puts it on its own. This is the one place summons and named hooks get
+    /// their monsters from.
     /// </summary>
     public UnitSheet? MonsterSheet(string id)
     {
         if (_monsterSheets.TryGetValue(id, out var sheet))
             return sheet;
-        if (!Monsters.TryGetValue(id, out var m))
-            return null;
-        return new UnitSheet(m.Name, Side.Enemy, m.Level, m.Scores, m.Hp, m.Ac, m.Armor, m.Move, m.Jump, m.InitiativeBonus,
-            m.Saves, m.Skills, m.Resources, m.Abilities, m.Passives, m.Weapon, m.Attacks, m.Resist, m.Immune, m.Vulnerable,
-            m.Tags, m.Sprite, m.AiProfile, m.CastingStat?.ToString(), m.Xp);
+        return Monsters.ContainsKey(id) ? SheetBuilder.ForMonster(id, this) : null;
     }
 
     /// <summary>
@@ -111,12 +134,13 @@ public sealed partial class RulesPack
     internal sealed record Catalog(ImmutableSortedDictionary<string, ClassDef> Classes,
         ImmutableSortedDictionary<string, RaceDef> Races, ImmutableSortedDictionary<string, BackgroundDef> Backgrounds,
         ImmutableSortedDictionary<string, MonsterDef> Monsters, ImmutableSortedDictionary<ItemId, ItemDef> Items,
+        ImmutableSortedDictionary<string, WeaponDef> Weapons, ImmutableSortedDictionary<string, ArmorDef> Armors,
         ImmutableSortedDictionary<string, EncounterDef> Encounters, ImmutableSortedDictionary<string, AiProfileDef> AiProfiles,
         XpTable Xp)
     {
         public static Catalog Empty { get; } = new(Ordinal.Map<ClassDef>(), Ordinal.Map<RaceDef>(), Ordinal.Map<BackgroundDef>(),
-            Ordinal.Map<MonsterDef>(), ImmutableSortedDictionary<ItemId, ItemDef>.Empty, Ordinal.Map<EncounterDef>(),
-            Ordinal.Map<AiProfileDef>(), XpTable.Default);
+            Ordinal.Map<MonsterDef>(), ImmutableSortedDictionary<ItemId, ItemDef>.Empty, Ordinal.Map<WeaponDef>(),
+            Ordinal.Map<ArmorDef>(), Ordinal.Map<EncounterDef>(), Ordinal.Map<AiProfileDef>(), XpTable.Default);
     }
 
     /// <summary>

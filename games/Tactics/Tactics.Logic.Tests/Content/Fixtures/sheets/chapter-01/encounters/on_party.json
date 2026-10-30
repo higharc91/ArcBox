@@ -1,0 +1,2 @@
+{ "id": "on_party", "name": "Enemy on the party", "map": "field", "party": { "min": 1, "max": 4 },
+  "enemies": [ { "unit": "wolf", "at": [0, 3] } ] }

@@ -8,8 +8,8 @@ namespace Tactics.Logic;
 internal sealed partial class Validation
 {
     /// <summary>
-    /// An encounter: party size, how each unit is placed and the monsters, AI profiles and map it names. Its zones and unit
-    /// tags are checked against its map by <see cref="CheckEncounters"/>. Triggers without <c>"once"</c> get
+    /// An encounter: party size, how each unit is placed (and named) and the monsters, AI profiles and map it names. Its
+    /// zones and unit tags are checked against its map by <see cref="CheckEncounters"/>. Triggers without <c>"once"</c> get
     /// <c>once: true</c>, and objectives without <c>"lose"</c> get <c>party_out</c>.
     /// </summary>
     public EncounterDef? Encounter(JsonElement e, string file, string ptr)
@@ -29,11 +29,21 @@ internal sealed partial class Validation
             Ref(RefKind.Map, def.Map, file, Pointer.Append(ptr, "map"));
             if (def.Party.Min < 1 || def.Party.Max < def.Party.Min)
                 Error(file, Pointer.Append(ptr, "party"), "The party size needs 1 ≤ min ≤ max.");
+            var ids = new HashSet<string>(StringComparer.Ordinal);
             foreach (var (units, name) in new[] { (def.Enemies, "enemies"), (def.Npcs, "npcs") })
                 for (var i = 0; i < units.Length; i++)
                 {
                     var at = Pointer.Append(Pointer.Append(ptr, name), i);
                     Ref(RefKind.Monster, units[i].Unit, file, Pointer.Append(at, "unit"));
+                    if (units[i].Id is { } id)
+                    {
+                        if (string.IsNullOrWhiteSpace(id))
+                            Error(file, Pointer.Append(at, "id"), "The id is empty.");
+                        else if (!ids.Add(id))
+                            Error(file, Pointer.Append(at, "id"), $"Two units in this encounter are named '{id}'.");
+                        if (units[i].Count != 1)
+                            Error(file, Pointer.Append(at, "id"), "A unit with an \"id\" is a single unit (\"count\" 1).");
+                    }
                     Ref(RefKind.AiProfile, units[i].AiProfile, file, Pointer.Append(at, "aiProfile"));
                     if ((units[i].At is null) == (units[i].Zone is null))
                         Error(file, at, "A unit is placed with either \"at\" or \"zone\".");

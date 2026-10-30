@@ -221,6 +221,10 @@ public sealed class TooltipTests
     }
 
     [Fact]
+    public void Max_hp_is_listed_with_its_sign()
+        => Assert.Equal("+1 AC; -5 max HP", Tooltips.For(new PassiveDef("injury", null, null, [], new StaticMods(Ac: 1, MaxHp: -5)), 1, Rules));
+
+    [Fact]
     public void Passive_limits_and_self_target_are_shown()
     {
         var second = new PassiveDef("fighter.second_wind", HookKind.OnTurnStart, null,

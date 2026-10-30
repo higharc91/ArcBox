@@ -21,3 +21,19 @@ public sealed class ContentException(ImmutableArray<ContentError> errors)
     /// <summary>Every error found, in the order the packs and files were read.</summary>
     public ImmutableArray<ContentError> Errors { get; } = errors;
 }
+
+/// <summary>Collects the <see cref="ContentError"/>s of one record (a character, a monster, an encounter) under one file label, to throw together.</summary>
+internal sealed class ContentProblems(string file)
+{
+    private readonly List<ContentError> _errors = [];
+
+    /// <summary>Notes a problem at a JSON pointer inside the record.</summary>
+    public void Add(string pointer, string message) => _errors.Add(new ContentError(file, pointer, message));
+
+    /// <summary>Throws a <see cref="ContentException"/> with every problem noted, if there are any.</summary>
+    public void ThrowIfAny()
+    {
+        if (_errors.Count > 0)
+            throw new ContentException([.. _errors]);
+    }
+}

@@ -1,0 +1,2 @@
+{ "id": "zone_too_small", "name": "Too many for the zone", "map": "field", "party": { "min": 1, "max": 4 },
+  "enemies": [ { "unit": "wolf", "zone": "enemy_spawn", "count": 4 } ] }

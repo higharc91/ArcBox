@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/weapons.schema.json",
+  "title": "Weapons",
+  "description": "weapons.json: the weapons characters carry (a class's starting kit and a character record name one by id). Monsters write their weapon inline instead. Documentation only: the C# loader (Tactics.Logic PackLoader and Validation) is the authority and also checks meaning (spec §4.10).",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "$ref": "common.schema.json#/$defs/id"
+      },
+      "damage": {
+        "$ref": "common.schema.json#/$defs/dice"
+      },
+      "damageType": {
+        "type": "string"
+      },
+      "stat": {
+        "enum": [
+          "str",
+          "dex",
+          "con",
+          "int",
+          "wis",
+          "cha"
+        ]
+      },
+      "finesse": {
+        "type": "boolean"
+      },
+      "ranged": {
+        "type": "boolean"
+      },
+      "range": {
+        "type": "integer",
+        "minimum": 1,
+        "description": "Tiles: 1 for melee, 4 thrown, 6 shortbow and light crossbow, 8 longbow and heavy crossbow."
+      },
+      "reach": {
+        "type": "boolean"
+      },
+      "tags": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "replaces": {
+        "$ref": "common.schema.json#/$defs/replaces"
+      }
+    },
+    "required": [
+      "id",
+      "damage",
+      "damageType",
+      "stat"
+    ]
+  }
+}
