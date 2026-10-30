@@ -12,7 +12,7 @@
      class, 32x40 per cell), written by tools/tactics-assets/build.py. */
   .spr { --z: 2; width: calc(32px * var(--z)); height: calc(40px * var(--z)); flex: none;
     background: url(assets/race-class.png) no-repeat; image-rendering: pixelated;
-    background-size: calc(320px * var(--z)) calc(440px * var(--z));
+    background-size: calc(384px * var(--z)) calc(440px * var(--z));
     background-position: calc(-32px * var(--z) * var(--c)) calc(-40px * var(--z) * var(--r)); }
   .spr.party { background-image: url(assets/party.png); background-size: calc(192px * var(--z)) calc(40px * var(--z)); }
   .steps { grid-template-columns: repeat(5, 1fr); }
@@ -94,7 +94,7 @@
           <div><b>SEFA</b><span>Tiefling Warlock · Lv 1</span>
             <div class="chips" style="margin-top:8px"><span class="chip" style="color:var(--p6)">Alex</span><span class="chip">Blaster</span><span class="chip">CHA casting</span></div></div></div>
         <span class="sect">CLASS · SHOWN AS A TIEFLING</span>
-        <div class="pick r5">
+        <div class="pick r4">
           <div class="opt2"><div class="spr" style="--z:1.5;--r:7;--c:0"></div><b>Fighter</b></div>
           <div class="opt2"><div class="spr" style="--z:1.5;--r:7;--c:1"></div><b>Rogue</b></div>
           <div class="opt2"><div class="spr" style="--z:1.5;--r:7;--c:2"></div><b>Wizard</b></div>
@@ -105,12 +105,14 @@
           <div class="opt2"><div class="spr" style="--z:1.5;--r:7;--c:7"></div><b>Druid</b></div>
           <div class="opt2 sel"><div class="spr" style="--z:1.5;--r:7;--c:8"></div><b>Warlock</b></div>
           <div class="opt2"><div class="spr" style="--z:1.5;--r:7;--c:9"></div><b>Monk</b></div>
+          <div class="opt2"><div class="spr" style="--z:1.5;--r:7;--c:10"></div><b>Barbarian</b></div>
+          <div class="opt2"><div class="spr" style="--z:1.5;--r:7;--c:11"></div><b>Sorcerer</b></div>
         </div>
         <div class="race-note" style="background:rgba(230,189,92,.07);border-color:rgba(230,189,92,.45)"><b style="color:#ffe7a8">Warlock.</b> A pact with a patron for eldritch power. Starts with a tome, a coat and a cloak. Subclass (patron) at level 3.</div>
         <div class="btn gold" style="margin-top:auto">NEXT: SCORES →</div>
       </div>
     </div></div>
-    <div class="caption"><b>2 · Class</b><span>Any race can take any class. That's 110 combinations, all drawn from the same layered sprites. Each tile previews your race in that class's starting kit.</span></div>
+    <div class="caption"><b>2 · Class</b><span>Twelve classes, and any race can take any class. That's 132 combinations, all drawn from the same layered sprites. Each tile previews your race in that class's starting kit.</span></div>
   </div>
 
   <!-- 3. Look -->

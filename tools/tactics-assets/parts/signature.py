@@ -1,4 +1,4 @@
-"""Signature ability effects: the one defining move of each of the 30 subclasses, so every subclass reads as itself
+"""Signature ability effects: the one defining move of each subclass (36 of them), so every subclass reads as itself
 on the TV.
 
 parts/fx.py is the shared vocabulary (slashes, fireballs, heals, circles). These are the moves a player picks a
@@ -2103,6 +2103,288 @@ def iron_skin() -> list[Canvas]:
     return out
 
 
+# =============================================================================================================
+# Barbarian
+# =============================================================================================================
+def frenzy() -> list[Canvas]:
+    """Path of the Berserker: rage flares up round the unit as ragged red flame, then two reckless cuts land in a
+    blink, a downstroke and a backhand crossing it into an X, spattering blood that arcs off and falls as the
+    flame gutters out."""
+    W, H, cx, cy = 48, 52, 23.5, 27.5
+    r = tex.rng(3701)
+    n = tex.fbm(48, 52, 4, r, octaves=3, aspect=0.5).repeat(2, 0).repeat(2, 1)      # at the Field's 2x sampling
+    drops = [(a, r.uniform(0.7, 1.3), r.uniform(-1.2, 0.2)) for a in r.uniform(-70, 70, 9)]
+    aura = [0.6, 1.0, 1.0, 0.9, 0.8, 0.7, 0.5, 0.3, 0.15, 0.0]
+    # per frame: (cut, tail, head, dim); cut 0 runs top-right to bottom-left, cut 1 the other way, lower down
+    cuts = [(36, 8, 14, 40, -3), (12, 14, 40, 38, 3)]
+    keys = [[], [], [(0, 0.0, 0.6, 0)], [(0, 0.3, 1.0, 0), (1, 0.0, 0.4, 1)], [(0, 0.6, 1.0, 1), (1, 0.1, 1.0, 0)],
+            [(1, 0.5, 1.0, 1)], [(1, 0.7, 1.0, 2)], [], [], []]
+    out = []
+    for i in range(10):
+        f = Field(W, H)
+        if aura[i]:
+            up = np.clip((cy + 14 - f.Y) / 30, 0, 1)                     # flame licks higher towards the top
+            body = 1 - np.hypot((f.X - cx) / (10 * aura[i] + 2), (f.Y - cy - 4) / (15 * aura[i] + 3))
+            v = body + (np.roll(n, -10 * i, 0) - 0.5) * (0.9 + up) - (1 - aura[i]) * 0.3
+            ring = (v > 0) & (v < 0.32)                                    # a hollow, flickering mantle
+            f.add("main", np.where(ring & (v < 0.12), 2, EMPTY))
+            f.add("main", np.where(ring & (v >= 0.12), 3 + (i in (1, 2)), EMPTY))
+            f.add("core", np.where(ring & (v > 0.24) & (up > 0.5) & (i in (1, 2, 3)), 5, EMPTY))
+        for k, t0, t1, dim in keys[i]:
+            x0, y0, x1, y1, b = cuts[k]
+            _cut(f, x0, y0, x1, y1, 3.8 if dim == 0 else 2.6, b, t0, t1, dim, slot="accent")
+        c = f.canvas()
+        if i == 4:
+            _twinkle(c, 24, 25, "core", 3)                                 # where the two cuts cross
+        if i >= 4:
+            t = i - 3
+            for a, sp, vy in drops:
+                rad = (3 + 3.2 * t) * sp
+                x = 24 + rad * math.cos(math.radians(a))
+                y = 25 + rad * math.sin(math.radians(a)) + (vy + 0.55 * t) * t
+                if t > 4 and sp < 1.0:
+                    continue
+                _mote(c, x, y, "main", 5 - t // 2, big=t <= 2 and sp > 1.0)
+        out.append(c)
+    return out
+
+
+def quake_slam() -> list[Canvas]:
+    """Earthshaker: the maul lands on the tile in front and the ground answers: a flash at the point of impact,
+    cracks of earth-light racing out across the tile, a shock ring rolling outward, chunks of rock thrown up and
+    falling back, and dust welling out of the cracks. Ground layer; pick the variant of the tile's top."""
+    W, H, cx, gy = 64, 56, 31.5, 40.0
+    r = tex.rng(3801)
+    n = tex.fbm(64, 56, 6, r, octaves=2)
+    chunks = [(r.uniform(0, 360), r.uniform(0.8, 1.6), r.uniform(2.4, 4.0), r.random() < 0.5) for _ in range(10)]
+    glow = [5, 5, 4, 4, 3, 0, 0, 0, 0, 0, 0]
+    out = []
+    for i in range(11):
+        c = _canvas(W, H)
+        _cracks(c, cx, gy, 2, 6 + min(i, 3) * 6, glow[i], 3802, n=9)
+        if i <= 1:                                                     # the dent the maul punches in the turf
+            for x in range(int(cx - 5), int(cx + 6)):
+                for y in range(int(gy - 3), int(gy + 4)):
+                    if abs(x + 0.5 - cx) / 5.5 + abs(y + 0.5 - gy) / 2.8 <= 1:
+                        _pmax(c, x, y, "core" if i == 0 else "main", 5 if i == 0 else 4)
+        f = Field(W, H, ss=1)
+        if 1 <= i <= 6:                                                 # the shock ring, rolling outward
+            t = i - 1
+            rad = [7, 13, 18, 22, 25, 27][t]
+            ok = _ring(f, cx, gy, rad, 0.6)
+            if t >= 3:
+                ok &= (_iso_ang(f, cx, gy) // 14) % 2 == 0
+            f.add("main", np.where(ok, [5, 5, 4, 3, 3, 2][t], EMPTY))
+            f.add("main", np.where(_ring(f, cx, gy, rad - 2, 0.5) & _checker_s(f), [3, 3, 2, 2, 1, 1][t], EMPTY))
+        f.canvas(c)
+        b = _canvas(W, H)
+        if 2 <= i <= 9:
+            g = (i - 2) / 7
+            blobs = [(cx - 11 - 6 * g, gy - 1 - 2 * g, 3.5 + 3.5 * g), (cx + 12 + 6 * g, gy - 2 * g, 3.5 + 3.5 * g),
+                     (cx - 4, gy + 5, 3 + 3 * g), (cx + 5, gy - 5 - 3 * g, 3 + 3 * g)]
+            _puffs(b, blobs, "smoke", noise=np.roll(n, -i, 0), erode=max(0, g - 0.25), rough=0.5, sy=1.5)
+        for a, vx, vy, big in chunks:
+            t = i - 1
+            if t < 0:
+                continue
+            x0, y0 = _iso(cx, gy, 4, a)
+            x = x0 + math.cos(math.radians(a)) * vx * t * 2.2
+            y = y0 - (vy * t - 0.55 * t * t) * 2.0
+            if y > y0 + 1 or t > 8:
+                continue
+            b.px(x, y, "stone", 4)
+            b.px(x + 1, y, "stone", 3)
+            b.px(x, y + 1, "stone", 2)
+            if big:
+                b.px(x + 1, y + 1, "stone", 1)
+                b.px(x - 1, y, "stone", 3)
+                b.px(x, y - 1, "turf", 3)
+        b.outline(skip={"smoke"})
+        c.blit(b)
+        out.append(c)
+    return out
+
+
+def ancestral_ward() -> list[Canvas]:
+    """Spiritwarden: pale wisps rise off the ground and spiral up round an ally, then close into a ghostly dome
+    crowned with a spirit stag's antlers. It holds (frames 5-9 loop): the dome's rim shimmers round once a loop and
+    wisps keep drifting up through it, a whole period per loop so the seam never shows."""
+    W, H, cx, gy = 44, 60, 21.5, 52.0
+    RX, top = 15.0, 14.0
+    r = tex.rng(3901)
+    wisps = [(r.uniform(0, 360), r.uniform(0.5, 1.0), r.uniform(0, 1)) for _ in range(9)]
+    antler = ["#.#..", ".##.#", "..###", "...#."]
+    out = []
+    for i in range(10):
+        k = i - 5
+        f = Field(W, H, ss=1)
+        if i <= 4:                                                      # wisps spiral up and close the dome
+            grow = [0.15, 0.35, 0.6, 0.85, 1.0][i]
+            ok = _ring(f, cx, gy, RX * min(1, 0.6 + grow * 0.4), 0.6)
+            f.add("main", np.where(ok, 2 + (i >= 3), EMPTY))
+        if i >= 3:
+            phase = (k % 5) / 5 if k >= 0 else 0
+            u = (f.X - cx) / RX
+            sd = _ring_d(f, cx, gy, RX, gy - top)                       # signed distance to the dome's outline
+            inside = (sd < 0) & (f.Y <= gy + 0.5)
+            shell = (sd > -1.2) & (sd <= 0) & (f.Y <= gy + 0.5)
+            d = -sd
+            ang = np.degrees(np.arctan2(np.clip(u, -1, 1), 1)) + 45
+            glint = (np.abs(((ang - 90 * phase * 4) % 90) - 45) < 6) & (k >= 0)
+            f.add("main", np.where(shell, np.where(f.X < cx, 4, 3) + (i == 3), EMPTY))
+            f.add("core", np.where(shell & glint, 5, EMPTY))
+            band = inside & (d >= 1.2) & ((np.floor(f.Y) + 2 * max(k, 0)) % 10 == 0)
+            f.add("main", np.where(band, 2, EMPTY))
+            f.add("main", np.where(inside & (d >= 1.2) & (d < 3.2) & _checker_s(f), 1, EMPTY))   # a soft inner glow
+            f.add("main", np.where(_ring(f, cx, gy, RX, 0.6), 4, EMPTY))
+        c = f.canvas()
+        if i >= 3:                                                      # the spirit stag's antlers crown the dome
+            sh = 5 if i == 4 else 4
+            _glyph(c, cx + 1, top - 4, antler, "core", sh - 1)
+            _glyph(c, cx - 5, top - 4, [row[::-1] for row in antler], "core", sh - 1)
+        for a, sp, ph in wisps:
+            if i < 5:
+                t = (i + ph) / 5
+                rad = RX * (1 - 0.5 * t)
+                x, y = _iso(cx, gy - (gy - top) * 0.9 * t, rad, a + 220 * t)
+            else:
+                t = (ph + k / 5) % 1.0
+                x, y = _iso(cx, gy - (gy - top) * 0.85 * t, RX * 0.6 * sp, a + 360 * t)
+            _mote(c, x, y, "core" if t > 0.6 else "main", 4 + (t > 0.6), big=sp > 0.8)
+            _pmax(c, x, y + 1.5, "main", 2)
+        if i == 4:
+            _twinkle(c, cx, top, "core", 3)
+        out.append(c)
+    return out
+
+
+# =============================================================================================================
+# Sorcerer
+# =============================================================================================================
+def dragon_breath() -> list[Canvas]:
+    """Draconic Bloodline: the sorcerer draws a breath and lets go a cone of their dragon's element: a tight jet at
+    the mouth that blooms into a rolling cone two tiles long, scales of light shedding off its edges, then
+    breaks into tongues and embers. Breathes to the right; mirror for a left-facing caster."""
+    W, H, ox, oy = 72, 44, 6.0, 21.5
+    r = tex.rng(4001)
+    n = tex.fbm(72, 44, 6, r, octaves=3).repeat(2, 0).repeat(2, 1)
+    reach = [6, 22, 44, 62, 64, 64, 60, 52, 40, 0]
+    fade = [0, 0, 0, 0, 0, 0.1, 0.25, 0.45, 0.65, 1]
+    embers = [(r.uniform(14, 62), r.uniform(-1, 1), r.uniform(0, 3)) for _ in range(16)]
+    out = []
+    for i in range(10):
+        f = Field(W, H)
+        if reach[i]:
+            dx = f.X - ox
+            half = 2.0 + dx * 0.32                                      # the cone's half-height at this distance
+            u = dx / reach[i]
+            roll = np.roll(n, -12 * i, 1)
+            shape = (1 - np.abs(f.Y - oy) / half) * np.clip((1 - u) * 4, 0, 1)
+            v = np.where((dx > 0) & (shape > 0.02), shape + (roll - 0.5) * 0.7 - fade[i], -1)
+            hot = np.clip(1 - dx / 30, 0, 1)
+            f.add("main", _q(v, [(0.0, 2), (0.18, 3), (0.42, 4)]))
+            f.add("core", _q(v + hot * 0.45 - 0.5, [(0.0, 4), (0.25, 5)]))
+        c = f.canvas()
+        if i == 0:
+            _twinkle(c, ox + 2, oy, "core", 2)
+        if 2 <= i <= 8:
+            for x0, s, ph in embers:
+                if x0 > reach[i] * 0.95 or (i + ph) % 3 > 1.6:
+                    continue
+                y = oy + s * (2 + (x0 - ox) * 0.32) + (i - 2) * 0.8
+                _mote(c, x0 + i, y, "accent", 5 - (i >= 7), big=s > 0.6 and i < 6)
+        out.append(c)
+    return out
+
+
+def wild_surge() -> list[Canvas]:
+    """Chaos Bloodline: magic slips its leash. A knot of light swells over the sorcerer, then bursts in shards
+    whose colours will not hold still: every frame the three ramps trade places, rings spin out the wrong way and
+    stray motes scatter, before it all pops like a soap bubble."""
+    W, H, cx, cy = 48, 48, 23.5, 23.5
+    r = tex.rng(4101)
+    motes = [(r.uniform(0, 360), r.uniform(0.6, 1.4), int(r.integers(0, 3))) for _ in range(14)]
+    slots = ["main", "core", "accent"]
+    out = []
+    for i in range(10):
+        f = Field(W, H)
+        rot = [0, 10, 25, 45, 70, 100, 135, 175, 220, 270][i]
+        s0, s1, s2 = (slots[(i + k) % 3] for k in range(3))           # the colours shift every frame
+        if i <= 2:
+            rad = [2.5, 4.5, 6][i]
+            f.add(s0, _q(1 - f.dist(cx, cy) / rad, [(0, 3), (0.4, 4), (0.75, 5)]))
+        else:
+            t = (i - 3) / 6
+            for k in range(6):                                          # six shards flung out, spinning
+                ang = rot + k * 60
+                u = f.spike(cx, cy, ang, 4 + 10 * t, 14 + 12 * t, 4 - 2 * t)
+                f.add(s0 if k % 2 else s1, _on(u, np.where(u < 0.5, 4, 3) + (i < 6)))
+            for rad, sl, w in ((6 + 14 * t, s2, 0.6), (3 + 9 * t, s1, 0.5)):
+                ok = np.abs(f.dist(cx, cy) - rad) < w
+                ok &= ((f.ang(cx, cy) - rot * (1 if sl == s2 else -1)) // 30 % 2 == 0)
+                f.add(sl, np.where(ok, 4 if i < 7 else 3, EMPTY))
+            if i < 6:
+                f.add(s2, _q(1 - f.dist(cx, cy) / (5 - (i - 3) * 1.4), [(0, 4), (0.5, 5)]))
+        c = f.canvas()
+        if i == 3:
+            _twinkle(c, cx, cy, s1, 4)
+        if i >= 2:
+            t = i - 1
+            for a, sp, sl in motes:
+                rad = (3 + 3.0 * t) * sp
+                a2 = math.radians(a + 25 * t * (1 if sl else -1))
+                if i == 9 and sp < 1.0:
+                    continue
+                _mote(c, cx + rad * math.cos(a2), cy + rad * math.sin(a2), slots[(sl + i) % 3], 5 - t // 3,
+                      big=sp > 1.15 and t < 5)
+        out.append(c)
+    return out
+
+
+_RUNES = [["###", "#..", "##.", "#..", "#.."], ["#.#", "###", ".#.", ".#.", ".#."], ["#..", "##.", "#.#", "##.", "#.."],
+          [".#.", "#.#", ".#.", "#.#", ".#."], ["#.#", "#.#", ".#.", "#.#", "#.#"], ["##.", "#.#", "##.", "#.#", "#.#"]]
+
+
+def rune_circle() -> list[Canvas]:
+    """Runeborn: a circle is laid on the tile: a ring draws itself round, six runes burn into the ground one after
+    another, an inner ring closes, then the circle holds (frames 7-12 loop): each rune in turn flares and throws a
+    thin column of light up, once a loop, while the rings pulse."""
+    W, H, cx, gy = 56, 44, 27.5, 32.0
+    RX = 22.0
+    out = []
+    for i in range(13):
+        k = i - 7
+        f = Field(W, H, ss=1)
+        th = _iso_ang(f, cx, gy)
+        span = min(360, 120 * (i + 1))
+        f.add("main", np.where(_ring(f, cx, gy, RX, 0.6) & (((th + 90) % 360) < span), 4 if i < 7 else 3, EMPTY))
+        if i >= 5:
+            pulse = 4 if k in (0, 3) else 3
+            ok = _ring(f, cx, gy, RX - 7, 0.55)
+            if i == 5:
+                ok &= ((th + 90) % 360) < 200
+            f.add("main", np.where(ok, pulse, EMPTY))
+            f.add("accent", np.where(_ring(f, cx, gy, RX - 3.5, 0.5) & ((th // 10) % 3 == 0), 3, EMPTY))
+        c = f.canvas()
+        for j in range(6):
+            born = 1 + j
+            if i < born:
+                continue
+            x, y = _iso(cx, gy, RX - 3.5, -90 + j * 60)
+            flare = k == j
+            sh = 5 if i == born or flare else 4
+            _glyph(c, x - 1, y - 4, _RUNES[j], "core" if sh == 5 else "main", sh, lit=False)
+            if i == born:
+                _twinkle(c, x, y - 2, "core", 1)
+            if flare:                                                   # a thin column of light off the rune
+                for dy in range(5, 22):
+                    _pmax(c, x, y - dy, "core" if dy < 9 else "main", 5 if dy < 9 else (4 if dy < 15 else 3))
+        if i == 6:
+            _twinkle(c, cx, gy, "core", 3)
+        out.append(c)
+    return out
+
+
 # ------------------------------------------------------------------------------------------------------ catalogue
 @dataclass
 class Stage:
@@ -2144,6 +2426,7 @@ _SHIELD = {"gold": _v(main="gold", core="magic/holy"), "azure": _v(main="magic/a
 _TURF = {"grass": _v(stone="terrain/stone", turf="terrain/grass", main="magic/earth", smoke="dust"),
          "sand": _v(stone="terrain/stone_warm", turf="terrain/sand", main="magic/earth", smoke="terrain/sand"),
          "snow": _v(stone="terrain/stone_dark", turf="terrain/snow", main="magic/frost", smoke="terrain/snow")}
+_QUAKE = {k: {**v, **_v(core="magic/holy")} for k, v in _TURF.items()}
 
 CATALOGUE: list[Sig] = [
     # Fighter
@@ -2270,6 +2553,36 @@ CATALOGUE: list[Sig] = [
         "steel": _v(main="steel", core="magic/holy", accent="magic/fire")}, 12, (20, 24), "body",
         note="the counter flash is on the front-right; mirror for the other facings",
         stage=Stage(pose="block", other="foe", other_at="FR", hit=4)),
+    # Barbarian
+    Sig("berserker_frenzy", "berserker", "Frenzy", frenzy, {
+        "rage": _v(main="magic/blood", core="magic/fire", accent="steel")}, 14, (20, 28), "body",
+        note="the rage flares round the unit and the cuts land to its right; mirror for a left-facing attacker",
+        stage=Stage(pose="attack", other="foe", other_at="FR", hit=4)),
+    Sig("earthshaker_quake_slam", "earthshaker", "Quake Slam", quake_slam, _QUAKE, 12, (32, 40), "feet",
+        blend="normal", layer="ground",
+        note="on the tile struck (in front of the unit); pick the variant of the tile's top; units on it are "
+        "knocked prone and the tile becomes difficult terrain",
+        stage=Stage(pose="slam", other="foe", other_at="FR", at="FR", hit=1)),
+    Sig("spiritwarden_ancestral_ward", "spiritwarden", "Ancestral Ward", ancestral_ward, {
+        "spirit": _v(main="magic/spirit", core="wind")}, 10, (22, 52), "feet", loop=True, loop_start=5,
+        note="on the shielded ally; holds while the ward lasts",
+        stage=Stage(hero="L", other="ally", other_at="C", at="other")),
+    # Sorcerer
+    Sig("draconic_dragon_breath", "draconic", "Dragon's Breath", dragon_breath, {
+        "fire": _v(main="magic/fire", core="magic/holy", accent="spark"),
+        "frost": _v(main="ice", core="magic/frost", accent="magic/frost"),
+        "lightning": _v(main="storm", core="magic/holy", accent="magic/storm"),
+        "acid": _v(main="poison", core="bile", accent="fel")}, 14, (6, 22), "body",
+        note="a cone two tiles long to the right; mirror for a left-facing caster; pick the bloodline's element",
+        stage=Stage(hero="L", other="foe", other_at="C", hit=4)),
+    Sig("chaos_wild_surge", "chaos", "Wild Surge", wild_surge, {
+        "wild": _v(main="magic/wild", core="fel", accent="magic/arcane")}, 12, (24, 30), "body",
+        note="the colours trade places every frame on purpose", stage=Stage()),
+    Sig("runeborn_rune_circle", "runeborn", "Rune Circle", rune_circle, {
+        "teal": _v(main="magic/rune", core="magic/holy", accent="gold"),
+        "ember": _v(main="magic/fire", core="magic/holy", accent="gold")}, 10, (28, 32), "feet", loop=True,
+        loop_start=7, layer="ground", note="laid on a tile; it holds until an enemy steps in and sets it off",
+        stage=Stage(hero="L", at="C")),
 ]
 
 ATTACH = {
@@ -2337,7 +2650,8 @@ def build() -> None:
     _preview_gif(rendered)
 
 
-CLASS_ORDER = ["fighter", "rogue", "wizard", "cleric", "ranger", "paladin", "bard", "druid", "warlock", "monk"]
+CLASS_ORDER = ["fighter", "rogue", "wizard", "cleric", "ranger", "paladin", "bard", "druid", "warlock", "monk",
+               "barbarian", "sorcerer"]
 
 
 def _preview_sheet(rendered: dict[str, dict[str, list[Image.Image]]]) -> None:
@@ -2375,14 +2689,15 @@ TILES = {"C": (0, 0), "L": (-1, 1), "R": (1, -1), "FR": (1, 0), "FL": (0, 1), "B
 LIFT = {"feet": 0, "body": 15, "overhead": 36, "link": 15}
 SUBCLASS_RACE = {"fighter": "human", "rogue": "halfling", "wizard": "elf", "cleric": "dwarf", "ranger": "half_elf",
                  "paladin": "dragonborn", "bard": "tiefling", "druid": "gnome", "warlock": "human",
-                 "monk": "half_orc"}            # as in build.py's subclass sheet, so the heroes match 06b
+                 "monk": "half_orc", "barbarian": "human",
+                 "sorcerer": "aasimar"}         # as in build.py's subclass sheet, so the heroes match 06b
 
 
 def _short(name: str) -> str:
     """Subclass names short enough for a GIF cell label."""
-    for pre in ("Way of the ", "Way of ", "College of the ", "College of "):
+    for pre in ("Way of the ", "Way of ", "College of the ", "College of ", "Path of the "):
         name = name.removeprefix(pre)
-    return name.removesuffix(" Domain")
+    return name.removesuffix(" Domain").removesuffix(" Bloodline")
 
 
 def _tile_px(key: str) -> tuple[int, int]:

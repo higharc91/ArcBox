@@ -1,0 +1,37 @@
+{
+  "id": "class_sorcerer",
+  "name": "Sorcerer",
+  "race": "aasimar",
+  "class": "sorcerer",
+  "build": "standard_f",
+  "layers": {
+    "body": "human",
+    "torso": "silk_robe",
+    "legs": "skirt",
+    "feet": "sandals",
+    "hands": "bare",
+    "weapon": "spellfire",
+    "hair": "long"
+  },
+  "palette": {
+    "eyes": "eyes/radiant",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/wild",
+    "horn": "horn/ivory",
+    "hair": "hair/violet",
+    "cloth1": "cloth/royal_purple",
+    "cloth2": "cloth/ochre",
+    "skin": "skin/celestial_silver",
+    "paint": "paint/woad",
+    "blade": "metal/steel"
+  },
+  "tags": [
+    "aasimar",
+    "sorcerer",
+    "class"
+  ],
+  "sheet": "presets/class_sorcerer.png"
+}

@@ -183,6 +183,42 @@
       360,
       32,
       40
+    ],
+    "berserker": [
+      0,
+      400,
+      32,
+      40
+    ],
+    "earthshaker": [
+      32,
+      400,
+      32,
+      40
+    ],
+    "spiritwarden": [
+      64,
+      400,
+      32,
+      40
+    ],
+    "draconic": [
+      0,
+      440,
+      32,
+      40
+    ],
+    "chaos": [
+      32,
+      440,
+      32,
+      40
+    ],
+    "runeborn": [
+      64,
+      440,
+      32,
+      40
     ]
   },
   "note": "front idle of each subclass on a sample race, for the subclass picker"
