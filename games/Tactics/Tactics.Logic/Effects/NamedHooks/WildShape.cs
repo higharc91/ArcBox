@@ -13,6 +13,12 @@ public sealed class WildShape : INamedHook
     public string Name => "wild_shape";
 
     /// <inheritdoc />
+    public string? Describe(JsonElement args, RulesPack rules)
+        => NamedHooks.String(args, "monster") is { } monster
+            ? $"transforms into {TooltipText.Article(TooltipText.Humanize(monster))} {TooltipText.Humanize(monster)}"
+            : null;
+
+    /// <inheritdoc />
     public void Run(JsonElement args, EffectContext ctx)
     {
         var unit = ctx.Target is { } target ? ctx.W.Unit(target) : ctx.SourceUnit;

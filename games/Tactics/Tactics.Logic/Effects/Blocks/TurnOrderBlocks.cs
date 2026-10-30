@@ -18,6 +18,19 @@ public sealed class TurnOrderBlock : EffectBlock<TurnOrderEffect>
     public override string Key => "turnOrder";
 
     /// <inheritdoc />
+    protected override string? Describe(TurnOrderEffect def, int level, RulesPack rules)
+    {
+        var places = $"{def.Slots} {(def.Slots == 1 ? "place" : "places")}";
+        return def.Op switch
+        {
+            "delay" => $"delays target by {places} in the turn order",
+            "hasten" => $"moves target {places} earlier in the turn order",
+            "swap" => $"swaps target's place with the unit {places} after it in the turn order",
+            _ => null,
+        };
+    }
+
+    /// <inheritdoc />
     protected override void Run(TurnOrderEffect def, EffectContext ctx)
     {
         if (!Ops.Contains(def.Op))

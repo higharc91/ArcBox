@@ -18,6 +18,10 @@ public sealed class Counterspell : INamedHook
     public string Name => "counterspell";
 
     /// <inheritdoc />
+    public string? Describe(JsonElement args, RulesPack rules)
+        => $"counters the spell being cast (spells above tier {SureTier} need a check)";
+
+    /// <inheritdoc />
     public void Run(JsonElement args, EffectContext ctx)
     {
         if (ctx.Target is not { } caster)

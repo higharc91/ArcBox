@@ -12,6 +12,11 @@ public sealed class ApplyBlock : EffectBlock<ApplyEffect>
     public override string Key => "apply";
 
     /// <inheritdoc />
+    protected override string? Describe(ApplyEffect def, int level, RulesPack rules)
+        => $"target is {TooltipText.Condition(def.Condition, rules)}"
+           + (def.UntilSave ? " until saved" : def.Rounds is { } rounds ? $" {TooltipText.ForRounds(rounds)}" : "");
+
+    /// <inheritdoc />
     protected override void Run(ApplyEffect def, EffectContext ctx)
     {
         var target = ctx.TargetUnit(Key);
@@ -41,6 +46,10 @@ public sealed class RemoveBlock : EffectBlock<RemoveEffect>
     public override string Key => "remove";
 
     /// <inheritdoc />
+    protected override string? Describe(RemoveEffect def, int level, RulesPack rules)
+        => $"ends {TooltipText.Condition(def.Condition, rules)} on target";
+
+    /// <inheritdoc />
     protected override void Run(RemoveEffect def, EffectContext ctx) => Conditions.Remove(ctx.W, ctx.TargetUnit(Key).Id, def.Condition);
 }
 
@@ -52,6 +61,10 @@ public sealed class CleanseBlock : EffectBlock<CleanseEffect>
 {
     /// <inheritdoc />
     public override string Key => "cleanse";
+
+    /// <inheritdoc />
+    protected override string? Describe(CleanseEffect def, int level, RulesPack rules)
+        => $"ends {string.Join(", ", def.Tags)} conditions on target";
 
     /// <inheritdoc />
     protected override void Run(CleanseEffect def, EffectContext ctx)
@@ -75,6 +88,17 @@ public sealed class DispelBlock : EffectBlock<DispelEffect>
 {
     /// <inheritdoc />
     public override string Key => "dispel";
+
+    /// <inheritdoc />
+    protected override string? Describe(DispelEffect def, int level, RulesPack rules)
+    {
+        List<string> parts = [];
+        if (def.Concentration)
+            parts.Add("ends concentration");
+        if (def.Zones)
+            parts.Add("ends zones on the aimed tile");
+        return parts.Count == 0 ? "dispels nothing" : string.Join(" and ", parts);
+    }
 
     /// <inheritdoc />
     protected override void Run(DispelEffect def, EffectContext ctx)

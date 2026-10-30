@@ -19,6 +19,10 @@ public sealed class AnimateDead : INamedHook
     public string Name => "animate_dead";
 
     /// <inheritdoc />
+    public string? Describe(JsonElement args, RulesPack rules)
+        => $"raises {TooltipText.Article(Skeleton)} {Skeleton} from the corpse on the aimed tile";
+
+    /// <inheritdoc />
     public bool OnTile => true;
 
     /// <inheritdoc />

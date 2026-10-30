@@ -29,6 +29,12 @@ public interface INamedHook
     /// checks that each one exists.
     /// </summary>
     IEnumerable<string> Monsters(JsonElement args);
+
+    /// <summary>
+    /// The tooltip phrase for the hook with these <paramref name="args"/> (the <c>transform</c> block's phrase), e.g.
+    /// <c>"transforms into a bear"</c>, or null when the args give it nothing to say.
+    /// </summary>
+    string? Describe(JsonElement args, RulesPack rules);
 }
 
 /// <summary>Every named hook, by name. Adding one takes a deploy.</summary>

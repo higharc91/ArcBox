@@ -20,6 +20,10 @@ public sealed class Polymorph : INamedHook
     public string Name => "polymorph";
 
     /// <inheritdoc />
+    public string? Describe(JsonElement args, RulesPack rules)
+        => $"turns target into {TooltipText.Article(Sheep)} {Sheep} until it saves or loses concentration";
+
+    /// <inheritdoc />
     public void Run(JsonElement args, EffectContext ctx)
     {
         var target = ctx.TargetUnit(Name).Id;

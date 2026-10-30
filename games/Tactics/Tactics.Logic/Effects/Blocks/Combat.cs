@@ -12,6 +12,12 @@ public sealed class GrantResourceBlock : EffectBlock<GrantResourceEffect>
     public override string Key => "grantResource";
 
     /// <inheritdoc />
+    protected override string? Describe(GrantResourceEffect def, int level, RulesPack rules)
+        => def.Amount >= 0
+            ? $"target gains {def.Amount} {TooltipText.Humanize(def.Resource)}"
+            : $"target loses {-def.Amount} {TooltipText.Humanize(def.Resource)}";
+
+    /// <inheritdoc />
     protected override void Run(GrantResourceEffect def, EffectContext ctx)
     {
         var target = ctx.TargetUnit(Key);
@@ -35,6 +41,10 @@ public sealed class ExtraActionBlock : EffectBlock<ExtraActionEffect>
     public override string Key => "extraAction";
 
     /// <inheritdoc />
+    protected override string? Describe(ExtraActionEffect def, int level, RulesPack rules)
+        => def.Kind == "bonus" ? "target gets its bonus action back" : "target gains an extra action this turn";
+
+    /// <inheritdoc />
     protected override void Run(ExtraActionEffect def, EffectContext ctx)
     {
         var target = ctx.TargetUnit(Key);
@@ -55,6 +65,9 @@ public sealed class RefreshReactionBlock : EffectBlock<RefreshReactionEffect>
     public override string Key => "refreshReaction";
 
     /// <inheritdoc />
+    protected override string? Describe(RefreshReactionEffect def, int level, RulesPack rules) => "target gets its reaction back";
+
+    /// <inheritdoc />
     protected override void Run(RefreshReactionEffect def, EffectContext ctx)
     {
         var target = ctx.TargetUnit(Key);
@@ -72,6 +85,10 @@ public sealed class StatModBlock : EffectBlock<StatModEffect>
 {
     /// <inheritdoc />
     public override string Key => "statMod";
+
+    /// <inheritdoc />
+    protected override string? Describe(StatModEffect def, int level, RulesPack rules)
+        => $"target gets {TooltipText.Mods(def.Mods, rules)} {TooltipText.ForRounds(def.Rounds)}";
 
     /// <inheritdoc />
     protected override void Run(StatModEffect def, EffectContext ctx)
@@ -94,6 +111,10 @@ public sealed class MarkBlock : EffectBlock<MarkEffect>
 
     /// <inheritdoc />
     public override string Key => "mark";
+
+    /// <inheritdoc />
+    protected override string? Describe(MarkEffect def, int level, RulesPack rules)
+        => $"marks target {TooltipText.ForRounds(def.Rounds)}";
 
     /// <inheritdoc />
     protected override void Run(MarkEffect def, EffectContext ctx)
@@ -122,6 +143,10 @@ public sealed class TauntBlock : EffectBlock<TauntEffect>
     public override string Key => "taunt";
 
     /// <inheritdoc />
+    protected override string? Describe(TauntEffect def, int level, RulesPack rules)
+        => $"taunts target {TooltipText.ForRounds(def.Rounds)}";
+
+    /// <inheritdoc />
     protected override void Run(TauntEffect def, EffectContext ctx)
         => Sourced.Put(ctx, ctx.TargetUnit(Key).Id, Condition, def.Rounds, concentration: false, mods: null);
 
@@ -140,6 +165,10 @@ public sealed class RevealBlock : EffectBlock<RevealEffect>
 {
     /// <inheritdoc />
     public override string Key => "reveal";
+
+    /// <inheritdoc />
+    protected override string? Describe(RevealEffect def, int level, RulesPack rules)
+        => $"reveals hidden enemies ({TooltipText.Area(def.Area)})";
 
     /// <inheritdoc />
     protected override void Run(RevealEffect def, EffectContext ctx)

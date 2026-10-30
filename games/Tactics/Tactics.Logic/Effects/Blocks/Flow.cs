@@ -12,6 +12,13 @@ public sealed class ChainBlock : EffectBlock<ChainEffect>
     public override string Key => "chain";
 
     /// <inheritdoc />
+    protected override string? Describe(ChainEffect def, int level, RulesPack rules)
+    {
+        var bounce = $"chains to up to {def.Times} more {(def.Times == 1 ? "target" : "targets")} within {TooltipText.Tiles(def.Range)}";
+        return def.Effects.IsDefaultOrEmpty ? bounce : $"{Tooltips.List(def.Effects, level, rules)}; {bounce}";
+    }
+
+    /// <inheritdoc />
     protected override void Run(ChainEffect def, EffectContext ctx)
     {
         var first = ctx.TargetUnit(Key);
@@ -49,6 +56,10 @@ public sealed class RepeatBlock : EffectBlock<RepeatEffect>
     public override string Key => "repeat";
 
     /// <inheritdoc />
+    protected override string? Describe(RepeatEffect def, int level, RulesPack rules)
+        => $"{def.Times} times: {Tooltips.Group(def.Effects, level, rules)}";
+
+    /// <inheritdoc />
     protected override void Run(RepeatEffect def, EffectContext ctx)
     {
         if (def.Effects.IsDefaultOrEmpty || def.Times < 1)
@@ -68,6 +79,13 @@ public sealed class IfBlock : EffectBlock<IfEffect>
     public override string Key => "if";
 
     /// <inheritdoc />
+    protected override string? Describe(IfEffect def, int level, RulesPack rules)
+    {
+        var text = $"if {TooltipText.When(def.When, rules)}, {Tooltips.Group(def.Then, level, rules)}";
+        return def.Else.IsDefaultOrEmpty ? text : $"{text}; otherwise {Tooltips.Group(def.Else, level, rules)}";
+    }
+
+    /// <inheritdoc />
     protected override void Run(IfEffect def, EffectContext ctx)
     {
         var args = new HookArgs(ctx.Source, ctx.Target, ctx.Last, Tile: ctx.Aim, Ability: ctx.Ability?.Id);
@@ -84,6 +102,16 @@ public sealed class RandomBlock : EffectBlock<RandomEffect>
 {
     /// <inheritdoc />
     public override string Key => "random";
+
+    /// <inheritdoc />
+    protected override string? Describe(RandomEffect def, int level, RulesPack rules)
+    {
+        var table = def.Table.IsDefault ? [] : def.Table.Where(e => e.Weight > 0).ToArray();
+        var total = table.Sum(e => e.Weight);
+        return table.Length == 0
+            ? "nothing happens"
+            : "one of, at random: " + string.Join(", ", table.Select(e => $"{Tooltips.Group(e.Effects, level, rules)} ({e.Weight} in {total})"));
+    }
 
     /// <inheritdoc />
     protected override void Run(RandomEffect def, EffectContext ctx)

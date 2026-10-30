@@ -112,6 +112,16 @@ public sealed class SummonBlock : EffectBlock<SummonEffect>
     public override string Key => "summon";
 
     /// <inheritdoc />
+    protected override string? Describe(SummonEffect def, int level, RulesPack rules)
+    {
+        var name = TooltipText.Humanize(def.Monster);
+        var text = def.Count == 1 ? $"summons {TooltipText.Article(name)} {name}" : $"summons {def.Count} × {name}";
+        return def.Concentration ? $"{text} while you concentrate"
+            : def.Rounds is { } rounds ? $"{text} for {rounds} {(rounds == 1 ? "round" : "rounds")}"
+            : $"{text} for the battle";
+    }
+
+    /// <inheritdoc />
     protected override void Run(SummonEffect def, EffectContext ctx)
     {
         var aim = ctx.Aim ?? ctx.SourceUnit.Pos;
@@ -132,6 +142,10 @@ public sealed class TransformBlock : EffectBlock<TransformEffect>
 {
     /// <inheritdoc />
     public override string Key => "transform";
+
+    /// <inheritdoc />
+    protected override string? Describe(TransformEffect def, int level, RulesPack rules)
+        => NamedHooks.TryFor(def.Hook)?.Describe(def.Args, rules);
 
     /// <inheritdoc />
     protected override void Run(TransformEffect def, EffectContext ctx)

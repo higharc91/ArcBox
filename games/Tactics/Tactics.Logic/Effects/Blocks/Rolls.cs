@@ -13,6 +13,26 @@ public sealed class AttackBlock : EffectBlock<AttackEffect>
     public override string Key => "attack";
 
     /// <inheritdoc />
+    protected override string? Describe(AttackEffect def, int level, RulesPack rules)
+        => $"{Label(def)} ({Body(def, level, rules)})";
+
+    /// <summary>The roll's name in a tooltip: <c>"spell attack"</c> or <c>"weapon attack"</c>.</summary>
+    internal static string Label(AttackEffect def) => $"{def.Kind} attack";
+
+    /// <summary>What the attack does: the hit effects, then "on a crit, …" and "on a miss, …".</summary>
+    internal static string Body(AttackEffect def, int level, RulesPack rules)
+    {
+        List<string> parts = [];
+        if (!def.OnHit.IsDefaultOrEmpty)
+            parts.Add(Tooltips.List(def.OnHit, level, rules));
+        if (!def.OnCrit.IsDefaultOrEmpty)
+            parts.Add($"on a crit, {Tooltips.Group(def.OnCrit, level, rules)}");
+        if (!def.OnMiss.IsDefaultOrEmpty)
+            parts.Add($"on a miss, {Tooltips.Group(def.OnMiss, level, rules)}");
+        return parts.Count == 0 ? "no effect" : string.Join("; ", parts);
+    }
+
+    /// <inheritdoc />
     protected override void Run(AttackEffect def, EffectContext ctx)
     {
         var target = ctx.TargetUnit(Key);
@@ -166,6 +186,26 @@ public sealed class SaveBlock : EffectBlock<SaveEffect>
 {
     /// <inheritdoc />
     public override string Key => "save";
+
+    /// <inheritdoc />
+    protected override string? Describe(SaveEffect def, int level, RulesPack rules)
+        => $"{Label(def)} ({Body(def, level, rules)})";
+
+    /// <summary>The roll's name in a tooltip: <c>"Dex save"</c>.</summary>
+    internal static string Label(SaveEffect def) => $"{def.Stat} save";
+
+    /// <summary>What the save does: the failure effects, the half damage and what a success does.</summary>
+    internal static string Body(SaveEffect def, int level, RulesPack rules)
+    {
+        List<string> parts = [];
+        if (!def.OnFail.IsDefaultOrEmpty)
+            parts.Add(Tooltips.List(def.OnFail, level, rules));
+        if (def.HalfOnSuccess && !def.OnFail.IsDefaultOrEmpty && def.OnFail.OfType<DamageEffect>().Any())
+            parts.Add("half damage on a save");
+        if (!def.OnSuccess.IsDefaultOrEmpty)
+            parts.Add($"on a save, {Tooltips.Group(def.OnSuccess, level, rules)}");
+        return parts.Count == 0 ? "no effect" : string.Join("; ", parts);
+    }
 
     /// <inheritdoc />
     protected override void Run(SaveEffect def, EffectContext ctx)

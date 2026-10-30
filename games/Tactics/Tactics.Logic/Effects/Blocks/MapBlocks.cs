@@ -92,6 +92,20 @@ public sealed class ZoneBlock : EffectBlock<ZoneEffect>
     public override string Key => "zone";
 
     /// <inheritdoc />
+    protected override string? Describe(ZoneEffect def, int level, RulesPack rules)
+    {
+        var text = $"creates a {TooltipText.Humanize(def.Kind)} zone ({TooltipText.Area(def.Area)}) "
+                   + (def.Rounds is { } rounds ? TooltipText.ForRounds(rounds) : "for the battle");
+        if (def.Difficult)
+            text += ", difficult terrain";
+        if (def.Concentration)
+            text += ", ends if you lose concentration";
+        if (!def.Passives.IsDefaultOrEmpty)
+            text += "; units inside: " + string.Join(" / ", def.Passives.Select(p => Tooltips.For(p, level, rules)));
+        return text;
+    }
+
+    /// <inheritdoc />
     protected override void Run(ZoneEffect def, EffectContext ctx)
     {
         var source = ctx.SourceUnit;
@@ -109,6 +123,13 @@ public sealed class HazardBlock : EffectBlock<HazardEffect>
 {
     /// <inheritdoc />
     public override string Key => "hazard";
+
+    /// <inheritdoc />
+    protected override string? Describe(HazardEffect def, int level, RulesPack rules)
+    {
+        var text = $"creates a {TooltipText.Humanize(def.HazardArt)} hazard ({TooltipText.Area(def.Area)}) {TooltipText.ForRounds(def.Rounds)}";
+        return def.OnEnter.IsDefaultOrEmpty ? text : $"{text}; entering it: {Tooltips.Group(def.OnEnter, level, rules)}";
+    }
 
     /// <inheritdoc />
     protected override void Run(HazardEffect def, EffectContext ctx)
@@ -135,6 +156,12 @@ public sealed class AlterTerrainBlock : EffectBlock<AlterTerrainEffect>
 
     /// <inheritdoc />
     public override string Key => "alterTerrain";
+
+    /// <inheritdoc />
+    protected override string? Describe(AlterTerrainEffect def, int level, RulesPack rules)
+        => def.Delta == 0
+            ? $"leaves the terrain ({TooltipText.Area(def.Area)}) as it is"
+            : $"{(def.Delta > 0 ? "raises" : "sinks")} the terrain ({TooltipText.Area(def.Area)}) by {Math.Abs(def.Delta)}";
 
     /// <inheritdoc />
     protected override void Run(AlterTerrainEffect def, EffectContext ctx)

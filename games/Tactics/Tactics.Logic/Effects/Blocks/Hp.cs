@@ -91,6 +91,19 @@ public sealed class DamageBlock : EffectBlock<DamageEffect>
     public override string Key => "damage";
 
     /// <inheritdoc />
+    protected override string? Describe(DamageEffect def, int level, RulesPack rules)
+    {
+        List<string> parts = [];
+        if (def.Weapon)
+            parts.Add(def.Type is null ? "weapon damage" : $"weapon {def.Type} damage");
+        var amount = TooltipText.Amount(def.Dice, def.Bonus, level);
+        if (amount.Length > 0)
+            parts.Add(amount);
+        var text = string.Join(" + ", parts);
+        return def.Weapon ? text : def.Type is null ? $"{text} damage" : $"{text} {def.Type}";
+    }
+
+    /// <inheritdoc />
     protected override void Run(DamageEffect def, EffectContext ctx)
     {
         var target = ctx.TargetUnit(Key);
@@ -119,6 +132,10 @@ public sealed class HealBlock : EffectBlock<HealEffect>
     public override string Key => "heal";
 
     /// <inheritdoc />
+    protected override string? Describe(HealEffect def, int level, RulesPack rules)
+        => $"heals {TooltipText.Amount(def.Dice, def.Bonus, level)}";
+
+    /// <inheritdoc />
     protected override void Run(HealEffect def, EffectContext ctx)
     {
         var target = ctx.TargetUnit(Key);
@@ -135,6 +152,10 @@ public sealed class HelpBlock : EffectBlock<HelpEffect>
 {
     /// <inheritdoc />
     public override string Key => "help";
+
+    /// <inheritdoc />
+    protected override string? Describe(HelpEffect def, int level, RulesPack rules)
+        => "gets a downed target up at 1 HP; otherwise gives it advantage on its next d20";
 
     /// <inheritdoc />
     protected override void Run(HelpEffect def, EffectContext ctx)
@@ -175,6 +196,10 @@ public sealed class TempHpBlock : EffectBlock<TempHpEffect>
     public override string Key => "tempHp";
 
     /// <inheritdoc />
+    protected override string? Describe(TempHpEffect def, int level, RulesPack rules)
+        => $"target gains {TooltipText.Amount(def.Dice, def.Bonus, level)} temporary HP";
+
+    /// <inheritdoc />
     protected override void Run(TempHpEffect def, EffectContext ctx)
     {
         var target = ctx.TargetUnit(Key);
@@ -191,6 +216,10 @@ public sealed class ReviveBlock : EffectBlock<ReviveEffect>
 {
     /// <inheritdoc />
     public override string Key => "revive";
+
+    /// <inheritdoc />
+    protected override string? Describe(ReviveEffect def, int level, RulesPack rules)
+        => $"revives a downed target with {def.Hp} HP";
 
     /// <inheritdoc />
     protected override void Run(ReviveEffect def, EffectContext ctx) => DownedRules.Revive(ctx.W, ctx.TargetUnit(Key).Id, def.Hp);

@@ -143,6 +143,10 @@ public sealed class PushBlock : EffectBlock<PushEffect>
     public override string Key => "push";
 
     /// <inheritdoc />
+    protected override string? Describe(PushEffect def, int level, RulesPack rules)
+        => $"pushes target {TooltipText.Tiles(def.Distance)} away" + (def.AwayFromSource ? "" : " from the aimed tile");
+
+    /// <inheritdoc />
     protected override void Run(PushEffect def, EffectContext ctx)
     {
         var target = ctx.TargetUnit(Key);
@@ -159,6 +163,10 @@ public sealed class PullBlock : EffectBlock<PullEffect>
 {
     /// <inheritdoc />
     public override string Key => "pull";
+
+    /// <inheritdoc />
+    protected override string? Describe(PullEffect def, int level, RulesPack rules)
+        => $"pulls target up to {TooltipText.Tiles(def.Distance)} toward you";
 
     /// <inheritdoc />
     protected override void Run(PullEffect def, EffectContext ctx)
@@ -181,6 +189,10 @@ public sealed class TeleportBlock : EffectBlock<TeleportEffect>
     public override string Key => "teleport";
 
     /// <inheritdoc />
+    protected override string? Describe(TeleportEffect def, int level, RulesPack rules)
+        => $"teleports {(def.Self ? "you" : "target")} to the aimed tile, up to {TooltipText.Tiles(def.Range)} away";
+
+    /// <inheritdoc />
     protected override void Run(TeleportEffect def, EffectContext ctx)
     {
         var unit = def.Self ? ctx.SourceUnit : ctx.TargetUnit(Key);
@@ -195,6 +207,9 @@ public sealed class SwapBlock : EffectBlock<SwapEffect>
 {
     /// <inheritdoc />
     public override string Key => "swap";
+
+    /// <inheritdoc />
+    protected override string? Describe(SwapEffect def, int level, RulesPack rules) => "swaps places with target";
 
     /// <inheritdoc />
     protected override void Run(SwapEffect def, EffectContext ctx)
@@ -218,6 +233,10 @@ public sealed class DashBlock : EffectBlock<DashEffect>
 {
     /// <inheritdoc />
     public override string Key => "dash";
+
+    /// <inheritdoc />
+    protected override string? Describe(DashEffect def, int level, RulesPack rules)
+        => $"dashes up to {TooltipText.Tiles(def.Tiles)} toward the aimed tile";
 
     /// <inheritdoc />
     protected override void Run(DashEffect def, EffectContext ctx)
@@ -260,6 +279,10 @@ public sealed class JumpToBlock : EffectBlock<JumpToEffect>
 {
     /// <inheritdoc />
     public override string Key => "jumpTo";
+
+    /// <inheritdoc />
+    protected override string? Describe(JumpToEffect def, int level, RulesPack rules)
+        => $"leaps to the aimed tile, up to {TooltipText.Tiles(def.Range)} away";
 
     /// <inheritdoc />
     protected override void Run(JumpToEffect def, EffectContext ctx)
