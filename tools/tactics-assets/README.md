@@ -112,8 +112,8 @@ directions. In the front facing the weapon hand is on screen-right.
 
 ### Animations
 
-There are 19 animations and 65 frames per facing. The manifest gives each animation's frame indices, fps and
-whether it loops (indices are per row; the back row is the same indices plus 65). `previews/04-animations.png` shows
+There are 23 animations and 79 frames per facing. The manifest gives each animation's frame indices, fps and
+whether it loops (indices are per row; the back row is the same indices plus 79). `previews/04-animations.png` shows
 every one.
 
 | Anim | Frames | Use |
@@ -137,6 +137,10 @@ every one.
 | hurt | 2 | |
 | down | 1 | The "downed" state |
 | rise | 2 | Getting up after a revive |
+| sit | 4, loop | Seated on a bench, log or chair. The game draws the seat |
+| doze | 2, loop | Seated, eyes shut, head nodding (camp at night) |
+| talk | 4, loop | Gesturing in dialogue |
+| wave | 4, loop | Greeting |
 
 Swing frames carry a motion smear, drawn by the weapon layer from the pose's `smear` angle. `build.py`'s
 `ATTACK_FOR` maps each weapon to its basic attack animation.

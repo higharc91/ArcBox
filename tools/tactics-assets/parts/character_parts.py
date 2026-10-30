@@ -82,6 +82,10 @@ def _foot(c: Canvas, p: Points, near: bool, slot: str, shade: int = 3, *, toe: i
 def _leg(c: Canvas, p: Points, near: bool, slot: str, *, width: int = 3, shade: int = 3) -> None:
     hx, hy = p.hip_n if near else p.hip_f
     fx, fy = p.foot_n if near else p.foot_f
+    if p.pose.sit:                      # seated: the thigh runs forward level, the shin drops to the foot
+        c.thick_line(hx, hy, fx, hy, width, slot, shade)
+        c.thick_line(fx, hy, fx, fy, width, slot, shade)
+        return
     if p.pose.kneel:
         s = p.near_sign
         if near:  # front knee up: thigh forward, shin down to the foot
@@ -354,13 +358,15 @@ def legs(kind: str) -> Part:
             for near in (False, True):  # plate on the shins and a knee cop
                 fx, fy = p.foot_n if near else p.foot_f
                 hx, hy = p.hip_n if near else p.hip_f
-                kx, ky = (hx + fx) / 2, (hy + fy) / 2
+                kx, ky = ((fx, hy) if p.pose.sit else ((hx + fx) / 2, (hy + fy) / 2))
                 c.thick_line(kx, ky, fx, fy - 1, 3, "metal")
                 c.rect(int(kx) - 1, int(ky) - 1, int(kx) + 1, int(ky), "metal", 4)
         elif kind == "shorts":
             for near in (False, True):
                 hx, hy = p.hip_n if near else p.hip_f
                 fx, fy = p.foot_n if near else p.foot_f
+                if p.pose.sit:
+                    fy = hy
                 c.thick_line(hx, hy, (hx * 2 + fx) / 3, (hy * 2 + fy) / 3, 3, "cloth2")
             c.polygon(_hips(p), "cloth2")
         elif kind == "skirt":  # robe skirt: a trapezoid to the ankles that follows the feet
@@ -425,7 +431,7 @@ def torso(kind: str) -> Part:
             _arm(c, p, False, "metal", width=3, to_wrist=False)
             c.polygon(_torso_poly(p, bottom=p.torso_bot + 2, flare=1), "metal")
             _arm(c, p, True, "metal", width=3, to_wrist=False)
-            for y in range(p.torso_top, p.torso_bot + 3):
+            for y in range(p.torso_top, min(c.h, p.torso_bot + 3)):
                 for x in range(FRAME_W):
                     if c.slot[y, x] == c.slots.id("metal") and (x + y) % 2 == 0:
                         c.shade[y, x] = 2
@@ -445,7 +451,7 @@ def torso(kind: str) -> Part:
             _arm(c, p, False, "metal", width=3, to_wrist=False)
             c.polygon(_torso_poly(p, bottom=p.torso_bot + 3, flare=1), "metal")
             _arm(c, p, True, "metal", width=3, to_wrist=False)
-            for y in range(p.torso_top, p.torso_bot + 4):
+            for y in range(p.torso_top, min(c.h, p.torso_bot + 4)):
                 for x in range(FRAME_W):
                     if c.slot[y, x] == c.slots.id("metal"):
                         lx = (x + ((y - p.torso_top) // 2) % 2 * 2) % 4    # 4-wide scales, alternate rows offset

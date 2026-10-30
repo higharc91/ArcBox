@@ -120,11 +120,12 @@ def build_characters() -> None:
     showcase = {"idle": "kara", "ready": "kara", "walk": "tamsin", "attack": "kara", "thrust": "wren",
                 "shoot": "tamsin", "cast": "ilyra", "slam": "class_paladin", "spin": "black_knight",
                 "flurry": "class_monk", "bash": "kara", "block": "aldric", "dodge": "wren", "jump": "class_monk",
-                "item": "sefa", "victory": "kara", "hurt": "aldric", "down": "aldric", "rise": "aldric"}
+                "item": "sefa", "victory": "kara", "hurt": "aldric", "down": "aldric", "rise": "aldric",
+                "sit": "mayor", "doze": "aldric", "talk": "barmaid", "wave": "child"}
     sheets = {}
     tiles = []
     for a in C.anim_table():
-        rid = showcase[a.name]
+        rid = showcase.get(a.name, "kara")
         if rid not in sheets:
             sheets[rid] = C.recipe_sheet(next(x for x in ALL if x.id == rid))
         sh = sheets[rid]

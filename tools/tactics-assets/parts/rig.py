@@ -65,11 +65,13 @@ class Pose:
     smear: float | None = None        # a swing's previous weapon angle: the weapon draws a motion arc from it
     rise: int = 0                     # lifts the whole body (jumps, leaps); the ground anchor doesn't move
     expression: str | None = None     # dialogue faces: happy, angry, sad, surprised (None = neutral)
+    sit: bool = False                 # seated on a bench or log (the game draws the seat): thighs forward
 
 
 # Animations: name -> (fps, loop, poses). Built for readability at 32x40 and 3x-4x zoom on a TV. Attacks follow
 # anticipation -> strike (with a smear frame) -> impact -> recovery, so hits land with weight.
 F0, F2 = (2, 0), (-2, 0)              # a planted stance
+SIT_DROP = 5                          # how far the hips drop when seated
 ANIMS: dict[str, tuple[float, bool, list[Pose]]] = {
     # Exploration idle: breathe in, out, hold, and blink on the way back up.
     "idle": (4.0, True, [
@@ -185,6 +187,29 @@ ANIMS: dict[str, tuple[float, bool, list[Pose]]] = {
     "down": (1.0, False, [
         Pose(bob=5, head=(1, 2), hand_n=(2, 3), hand_f=(-1, 3), foot_n=(3, 0), foot_f=(-2, 0), weapon=105, kneel=True),
     ]),
+    # Downtime: seated at camp or in a tavern, chatting, waving, dozing by the fire.
+    "sit": (3.0, True, [
+        Pose(sit=True, hand_n=(3, -3), hand_f=(3, -3), weapon=70),
+        Pose(sit=True, bob=1, hand_n=(3, -3), hand_f=(3, -3), weapon=70),
+        Pose(sit=True, bob=1, hand_n=(3, -3), hand_f=(3, -3), weapon=70),
+        Pose(sit=True, hand_n=(3, -3), hand_f=(3, -3), weapon=70, blink=True),
+    ]),
+    "doze": (2.0, True, [
+        Pose(sit=True, head=(1, 1), hand_n=(2, -2), hand_f=(2, -2), weapon=80, blink=True),
+        Pose(sit=True, bob=1, head=(1, 2), hand_n=(2, -2), hand_f=(2, -2), weapon=80, blink=True),
+    ]),
+    "talk": (5.0, True, [
+        Pose(hand_n=(2, -5), hand_f=(-1, 0), weapon=50),
+        Pose(head=(1, 0), hand_n=(4, -7), hand_f=(-1, 0), weapon=40),
+        Pose(hand_n=(1, -4), hand_f=(1, -4), weapon=55),
+        Pose(head=(0, 1), hand_n=(3, -6), hand_f=(-2, -1), weapon=45, blink=True),
+    ]),
+    "wave": (6.0, True, [
+        Pose(hand_n=(0, -15), hand_f=(-1, 0), weapon=0),
+        Pose(hand_n=(3, -14), hand_f=(-1, 0), weapon=15),
+        Pose(hand_n=(0, -15), hand_f=(-1, 0), weapon=0),
+        Pose(hand_n=(-2, -14), hand_f=(-1, 0), weapon=-15),
+    ]),
     # Getting back up after a revive.
     "rise": (6.0, False, [
         Pose(bob=5, head=(1, 1), hand_n=(2, 2), hand_f=(-1, 2), foot_n=(3, 0), foot_f=(-2, 0), weapon=90, kneel=True),
@@ -193,7 +218,7 @@ ANIMS: dict[str, tuple[float, bool, list[Pose]]] = {
 }
 
 ANIM_ORDER = ["idle", "ready", "walk", "attack", "thrust", "shoot", "cast", "slam", "spin", "flurry", "bash",
-              "block", "dodge", "jump", "item", "victory", "hurt", "down", "rise"]
+              "block", "dodge", "jump", "item", "victory", "hurt", "down", "rise", "sit", "doze", "talk", "wave"]
 
 
 def frame_list() -> list[tuple[str, int, Pose]]:
@@ -238,10 +263,10 @@ class Points:
 
 def points(build: Build, pose: Pose, direction: str) -> Points:
     b = build
-    bob = pose.bob
+    bob = pose.bob + (SIT_DROP if pose.sit else 0)
     lean = pose.lean
     sy = b.shoulder_y + bob
-    hip = b.hip_y + (bob if pose.kneel else 0)
+    hip = b.hip_y + (bob if pose.kneel or pose.sit else 0)
     if pose.kneel:
         hip = b.hip_y + 3
         sy = b.shoulder_y + 3
@@ -254,6 +279,9 @@ def points(build: Build, pose: Pose, direction: str) -> Points:
     hip_f = (CX - b.hip_half + 1, hip)
     fn = (hip_n[0] + pose.foot_n[0], b.foot_y - pose.foot_n[1])
     ff = (hip_f[0] + pose.foot_f[0], b.foot_y - pose.foot_f[1])
+    if pose.sit:                       # feet forward under the knees
+        fn = (hip_n[0] + 5 + pose.foot_n[0], b.foot_y - pose.foot_n[1])
+        ff = (hip_f[0] + 5 + pose.foot_f[0], b.foot_y - pose.foot_f[1])
     head_x0 = CX - b.head_w // 2 + lean + pose.head[0]
     head_y0 = b.head_top + (3 if pose.kneel else bob) + pose.head[1]
     if pose.rise:                      # lift everything, feet included
