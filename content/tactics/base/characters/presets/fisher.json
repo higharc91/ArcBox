@@ -1,0 +1,36 @@
+{
+  "id": "fisher",
+  "name": "Fisher",
+  "race": null,
+  "class": null,
+  "build": "short",
+  "layers": {
+    "body": "human",
+    "beard": "full",
+    "headgear": "cap",
+    "torso": "vest",
+    "legs": "pants",
+    "feet": "boots",
+    "weapon": "spear",
+    "hands": "bare"
+  },
+  "palette": {
+    "eyes": "eyes/dark",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "horn": "horn/ivory",
+    "paint": "paint/woad",
+    "skin": "skin/tan",
+    "hair": "hair/copper",
+    "cloth1": "cloth/steel_blue",
+    "cloth2": "cloth/sand",
+    "blade": "metal/steel"
+  },
+  "tags": [
+    "npc"
+  ],
+  "sheet": "presets/fisher.png"
+}

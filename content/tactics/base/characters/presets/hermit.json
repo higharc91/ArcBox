@@ -1,0 +1,36 @@
+{
+  "id": "hermit",
+  "name": "Hermit",
+  "race": null,
+  "class": null,
+  "build": "standard",
+  "layers": {
+    "body": "human",
+    "beard": "full",
+    "headgear": "hood",
+    "torso": "robe",
+    "legs": "skirt",
+    "feet": "sandals",
+    "weapon": "quarterstaff",
+    "hands": "wraps"
+  },
+  "palette": {
+    "eyes": "eyes/dark",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "horn": "horn/ivory",
+    "paint": "paint/woad",
+    "skin": "skin/olive",
+    "hair": "hair/silver",
+    "cloth1": "cloth/moss",
+    "cloth2": "cloth/sand",
+    "blade": "metal/steel"
+  },
+  "tags": [
+    "npc"
+  ],
+  "sheet": "presets/hermit.png"
+}

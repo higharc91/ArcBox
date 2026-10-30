@@ -21,7 +21,7 @@ from arcpix.palette import FAMILIES, RAMP_LEN  # noqa: E402
 from arcpix.preview import contact_sheet, Tile, strip  # noqa: E402
 from arcpix.sheet import Sheet  # noqa: E402
 from parts import characters as C  # noqa: E402
-from parts.recipes import ALL, PARTY, CLASSES, ENEMIES  # noqa: E402
+from parts.recipes import ALL, PARTY, CLASSES, ENEMIES, NPCS  # noqa: E402
 from parts import creator  # noqa: E402
 from arcpix.preview import matrix  # noqa: E402
 from parts.rig import BUILDS, DIRECTIONS, FRAME_W, FRAME_H, ANCHOR, ANIM_ORDER, ANIMS  # noqa: E402
@@ -103,7 +103,8 @@ def build_characters() -> None:
         return contact_sheet(title, tiles, columns=min(6, len(tiles)), zoom=5, subtitle=sub)
 
     save(roster("Characters · the party", PARTY,
-                "Six sample heroes: each is a name + race + class + look. Front and back; the game mirrors the other two."),
+                "Six sample heroes: each is a name + race + class + look. Front and back; the game mirrors the "
+                "other two."),
          PREVIEWS / "01-party.png")
     save(roster("Characters · class starters", CLASSES,
                 "One preset per class, each on a different race. Every piece is swappable and recolourable."),
@@ -111,16 +112,28 @@ def build_characters() -> None:
     save(roster("Characters · enemies", ENEMIES,
                 "Same rig, same layers: goblins and orcs reuse the 'short' and 'large' builds."),
          PREVIEWS / "03-enemies.png")
+    save(roster("Characters · townsfolk", NPCS,
+                "Exploration and dialogue NPCs from the same layers; tools ride in the weapon slot."),
+         PREVIEWS / "03b-townsfolk.png")
 
-    # Animation strips for a handful of characters.
+    # Every animation, one row each, on a character that would use it.
+    showcase = {"idle": "kara", "ready": "kara", "walk": "tamsin", "attack": "kara", "thrust": "wren",
+                "shoot": "tamsin", "cast": "ilyra", "slam": "class_paladin", "spin": "black_knight",
+                "flurry": "class_monk", "bash": "kara", "block": "aldric", "dodge": "wren", "jump": "class_monk",
+                "item": "sefa", "victory": "kara", "hurt": "aldric", "down": "aldric", "rise": "aldric",
+                "sit": "mayor", "doze": "aldric", "talk": "barmaid", "wave": "child"}
+    sheets = {}
     tiles = []
-    for rid in ("kara", "class_paladin", "tamsin", "ilyra", "class_bard", "orc_brute"):
-        r = next(x for x in ALL if x.id == rid)
-        sh = C.recipe_sheet(r)
-        tiles.append(Tile(strip(sh.frames[:n], 1, gap=3), r.name, "  ".join(
-            f"{a}×{len(ANIMS[a][2])}" for a in ANIM_ORDER)))
-    save(contact_sheet("Characters · animation set", tiles, columns=1, zoom=4,
-                       subtitle="idle · walk · swing · thrust · shoot · cast · hurt · down (20 frames per facing)"),
+    for a in C.anim_table():
+        rid = showcase.get(a.name, "kara")
+        if rid not in sheets:
+            sheets[rid] = C.recipe_sheet(next(x for x in ALL if x.id == rid))
+        sh = sheets[rid]
+        tiles.append(Tile(strip([sh.frames[k] for k in a.frames], 1, gap=4), a.name,
+                          f"{len(a.frames)} frames · {a.fps:g} fps{' · loop' if a.loop else ''} · {rid}"))
+    save(contact_sheet("Characters · animation set", tiles, columns=2, zoom=3,
+                       subtitle=f"{len(C.anim_table())} animations, {n} frames per facing. Attacks go anticipation, "
+                                f"strike (with a motion smear), impact, recovery; idles breathe and blink."),
          PREVIEWS / "04-animations.png")
 
     # Any race x any class: the creator's two axes, with the race's default look and the class's kit.
@@ -138,7 +151,7 @@ def build_characters() -> None:
     rnames = [creator.RACES[r].name for r in races]
     cnames = [creator.CLASSES[c].name for c in classes]
     save(matrix("Characters · any race, any class", rnames, cnames, grid_front, zoom=3,
-                subtitle="Players name their hero and pick a race and a class. All 90 combinations compose from the "
+                subtitle="Players name their hero and pick a race and a class. All 110 combinations compose from the "
                          "same layers (race defaults shown; hair, skin, horns and colours are the player's)."),
          PREVIEWS / "06-race-class.png")
     save(matrix("Characters · any race, any class (back)", rnames, cnames, grid_back, zoom=3),
@@ -156,6 +169,7 @@ def build_characters() -> None:
 
     build_customisation()
     build_equipment()
+    build_subclasses(out)
 
     # The layer library on the neutral palette.
     ramps_neutral = {s: FAMILIES[ref.split("/")[0]][ref.split("/")[1]] for s, ref in NEUTRAL.items()}
@@ -262,11 +276,55 @@ def build_palettes() -> None:
          PREVIEWS / "00-palettes.png")
 
 
+SUBCLASS_RACE = {"fighter": "human", "rogue": "halfling", "wizard": "elf", "cleric": "dwarf", "ranger": "half_elf",
+                 "paladin": "dragonborn", "bard": "tiefling", "druid": "gnome", "warlock": "human", "monk": "half_orc"}
+
+
+def build_subclasses(out: Path) -> None:
+    """06b-subclasses.png (every subclass: front, back and mid-swing) and a pack atlas of front idles that the phone's
+    subclass picker shows. In the game a hero's own race and look carry through; these use one race per class."""
+    pose, swing = ANIMS["idle"][2][0], ANIMS["attack"][2][2]
+    cells, names, atlas_index = [], [], {}
+    atlas = Image.new("RGBA", (FRAME_W * 3, FRAME_H * len(creator.CLASSES)))
+    for row, cls in enumerate(creator.CLASSES):
+        subs = [x for x in creator.SUBCLASSES.values() if x.cls == cls]
+        r_cells = []
+        for col, sub in enumerate(subs):
+            rec = creator.make_character(sub.name, SUBCLASS_RACE[cls], cls,
+                                         creator.Look(body_type="feminine" if col == 1 else "masculine"),
+                                         subclass=sub.id)
+            frames = [C.compose(rec, "front", pose), C.compose(rec, "back", pose), C.compose(rec, "front", swing)]
+            imgs = [f.render(rec.ramps()) for f in frames]
+            r_cells.append(strip(imgs, 1, gap=2))
+            atlas.paste(imgs[0], (col * FRAME_W, row * FRAME_H))
+            atlas_index[sub.id] = [col * FRAME_W, row * FRAME_H, FRAME_W, FRAME_H]
+        cells.append(r_cells)
+        names.append(creator.CLASSES[cls].name)
+    save(atlas, out / "subclasses.png")
+    write_json({"frame": [FRAME_W, FRAME_H], "rects": atlas_index,
+                "note": "front idle of each subclass on a sample race, for the subclass picker"},
+               out / "subclasses.json")
+    cols = ["I", "II", "III"]
+    img = matrix("Subclasses · 30, picked at level 3", names, cols, cells, zoom=3,
+                 subtitle="Each subclass reshapes its class kit (gear, colours, companions). Front · back · swing.")
+    # label each cell with its subclass name under the matrix's cells
+    from PIL import ImageDraw
+    from arcpix.preview import font, MUTED
+    d = ImageDraw.Draw(img)
+    cw = (img.width - 20 - 150 - 16) // 3
+    for row, cls in enumerate(creator.CLASSES):
+        subs = [x for x in creator.SUBCLASSES.values() if x.cls == cls]
+        ch = (img.height - 86 - 30 - 20) // len(creator.CLASSES)
+        for col, sub in enumerate(subs):
+            d.text((20 + 150 + col * cw + 8, 86 + 30 + row * ch + 4), sub.name, font=font(12, True), fill=MUTED)
+    save(img, PREVIEWS / "06b-subclasses.png")
+
+
 def build_equipment() -> None:
     """19-equipment.png: what loot looks like. Every weapon, armour and helm on one hero, then metal tiers."""
     from arcpix.preview import stack
     pose = ANIMS["idle"][2][0]
-    swing = ANIMS["attack"][2][1]
+    swing = ANIMS["attack"][2][2]
     mk, L = creator.make_character, creator.Look
 
     def img(rec, ps=pose):
@@ -365,7 +423,8 @@ ATTACK_FOR = {"sword": "attack", "greatsword": "attack", "axe": "attack", "mace"
 
 
 def build_anim_previews() -> None:
-    """Animated GIFs of the character set: every actor plays the same beat (idle, walk, attack, hurt, down)."""
+    """Animated GIFs of the character set: every actor plays the same beats (idle, ready, walk, their weapon's
+    attack, a class special, guard, hurt, downed, revived, victory), plus an idle close-up and the four facings."""
     from arcpix.anim import Actor, stage_gif
     n = C.frames_per_direction()
     table = {a.name: a.frames for a in C.anim_table()}
@@ -381,17 +440,41 @@ def build_anim_previews() -> None:
                              C.recipe_sheet(r).frames, ANCHOR))
         return out
 
+    def special(r) -> str:
+        w, off = r.layers.get("weapon", ""), r.layers.get("offhand", "")
+        if off in ("round_shield", "kite_shield", "tower_shield", "buckler"):
+            return "bash"
+        if not w:
+            return "flurry"
+        if w in ("greatsword", "warhammer", "axe"):
+            return "slam"
+        if w in ("halberd", "flail", "scimitar"):
+            return "spin"
+        if w in ("bow", "crossbow"):
+            return "jump"
+        if ATTACK_FOR.get(w) == "thrust":
+            return "flurry" if off in ("dagger", "blade", "main_gauche") else "dodge"
+        return "item"
+
     def script(recipes) -> list:
         k = len(recipes)
         atk = [table[ATTACK_FOR.get(r.layers.get("weapon", ""), "cast")] for r in recipes]
+        spc = [table[special(r)] for r in recipes]
+        guard = [table["block" if r.layers.get("offhand", "") in ("round_shield", "kite_shield", "tower_shield",
+                                                                     "buckler") else "dodge"] for r in recipes]
+        idle0 = table["idle"][0]
         return [
-            ("Idle", [table["idle"] * 3] * k, 330),
+            ("Idle", [table["idle"] * 3] * k, 250),
+            ("Battle ready", [table["ready"] * 3] * k, 200),
             ("Walk", [table["walk"] * 3] * k, 125),
             ("Walk · away", [[f + n for f in table["walk"]] * 3] * k, 125),
-            ("Attack", [[table["idle"][0]] * 2 + hold(a, 2) + [a[-1]] * 3 for a in atk], 90),
-            ("Attack", [[table["idle"][0]] * 2 + hold(a, 2) + [a[-1]] * 3 for a in atk], 90),
-            ("Hurt", [hold(table["hurt"], 6) + [table["idle"][0]] * 3] * k, 90),
-            ("Downed", [hold(table["down"], 10)] * k, 90),
+            ("Attack", [[table["ready"][0]] * 2 + hold(a, 2) + [a[-1]] * 3 for a in atk], 80),
+            ("Special", [[table["ready"][0]] * 2 + hold(a, 2) + [a[-1]] * 3 for a in spc], 80),
+            ("Guard", [hold(g, 4) + [table["ready"][0]] * 2 for g in guard], 90),
+            ("Hurt", [hold(table["hurt"], 3) + [idle0] * 3] * k, 90),
+            ("Downed", [hold(table["down"], 8)] * k, 90),
+            ("Revived", [hold(table["rise"], 4) + [idle0] * 2] * k, 90),
+            ("Victory", [table["victory"] * 4] * k, 160),
         ]
 
     for name, title, recipes, cols in (
@@ -399,6 +482,13 @@ def build_anim_previews() -> None:
             ("anim-classes", "Class starters", CLASSES, 5),
             ("anim-enemies", "Enemies", ENEMIES, 4)):
         stage_gif(PREVIEWS / f"{name}.gif", title, actors_for(recipes), script(recipes), zoom=4, columns=cols)
+
+    # Idles up close: the exploration loop and the battle stance, everyone breathing and blinking.
+    roster = PARTY + CLASSES
+    stage_gif(PREVIEWS / "anim-idle.gif", "Idle and battle-ready loops", actors_for(roster),
+              [("Idle", [table["idle"] * 4] * len(roster), 250),
+               ("Battle ready", [table["ready"] * 4] * len(roster), 200)],
+              zoom=4, columns=8)
 
     # One character walking in all four isometric directions: two drawn facings, two mirrored.
     kara = next(r for r in PARTY if r.id == "kara")
@@ -415,14 +505,18 @@ SETS = {"palettes": build_palettes, "characters": build_characters, "anims": bui
 
 # Sets that live in their own module: parts/<name>.py with a build() function. Each writes under
 # content/tactics/base/<name>/ and previews/, using arcpix.out.
-for _name in ("props", "portraits", "beasts", "backgrounds", "ui", "icons", "fx"):
+PLUGIN_SETS = ("props", "portraits", "beasts", "backgrounds", "ui", "icons", "fx",
+               "ambient", "bosses", "emotes", "town", "status", "pickups", "worldmap",
+               "signature", "title", "crests", "dungeon", "projectiles", "gear_icons", "grades", "creator_thumbs", "hazards", "transitions", "sheet_icons", "chapters", "camp", "showcase", "gallery")   # these read the others: keep them last
+for _name in PLUGIN_SETS:
     try:
         _mod = importlib.import_module(f"parts.{_name}")
     except ModuleNotFoundError as e:
         if e.name != f"parts.{_name}":
             raise
         continue
-    SETS[_name] = _mod.build
+    if hasattr(_mod, "build"):          # a set still being written has no build() yet
+        SETS[_name] = _mod.build
 
 if __name__ == "__main__":
     for name in sys.argv[1:] or list(SETS):

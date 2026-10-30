@@ -1,0 +1,2010 @@
+{
+  "tile": 32,
+  "span": 4,
+  "heightStep": 16,
+  "sampling": {
+    "top": "UV = world XZ / (span * tile): one texture covers span x span tiles",
+    "side": "U = distance along the edge / (span * tile); V = depth below the top / tile (repeats); chasm_side is two tiles deep and clamps",
+    "lip": "drawn over the top band of a side under a top that has one; transparent below its edge",
+    "decal": "32x32 alpha on a tile's top in tile-local UV; 'rug' is 64x64 over 2x2 tiles",
+    "wall": "32x48 alpha on a side face, one tile wide, hung 'fromTop' texels below the wall's top (the texture entry suggests a value); drawn for a +V face, mirror for +U",
+    "animated": "frames are laid out left to right; play at fps, looping",
+    "sameLayout": "dungeon_floor, _mossy, _cracked and _bloody share one slab layout: mix them per tile"
+  },
+  "textures": {
+    "dungeon_floor": {
+      "kind": "top",
+      "variants": {
+        "grey": "textures/top/dungeon_floor_grey.png",
+        "dark": "textures/top/dungeon_floor_dark.png",
+        "warm": "textures/top/dungeon_floor_warm.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ],
+      "tags": [
+        "stone"
+      ],
+      "note": "same slab layout as dungeon_floor: swap per tile freely"
+    },
+    "dungeon_floor_mossy": {
+      "kind": "top",
+      "variants": {
+        "grey": "textures/top/dungeon_floor_mossy_grey.png",
+        "dark": "textures/top/dungeon_floor_mossy_dark.png",
+        "warm": "textures/top/dungeon_floor_mossy_warm.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ],
+      "tags": [
+        "stone"
+      ],
+      "note": "same slab layout as dungeon_floor: swap per tile freely"
+    },
+    "dungeon_floor_cracked": {
+      "kind": "top",
+      "variants": {
+        "grey": "textures/top/dungeon_floor_cracked_grey.png",
+        "dark": "textures/top/dungeon_floor_cracked_dark.png",
+        "warm": "textures/top/dungeon_floor_cracked_warm.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ],
+      "tags": [
+        "stone"
+      ],
+      "note": "same slab layout as dungeon_floor: swap per tile freely"
+    },
+    "dungeon_floor_bloody": {
+      "kind": "top",
+      "variants": {
+        "grey": "textures/top/dungeon_floor_bloody_grey.png",
+        "dark": "textures/top/dungeon_floor_bloody_dark.png",
+        "warm": "textures/top/dungeon_floor_bloody_warm.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ],
+      "tags": [
+        "stone"
+      ],
+      "note": "same slab layout as dungeon_floor: swap per tile freely"
+    },
+    "crypt_tiles": {
+      "kind": "top",
+      "variants": {
+        "dormant": "textures/top/crypt_tiles_dormant.png",
+        "arcane": "textures/top/crypt_tiles_arcane.png",
+        "fel": "textures/top/crypt_tiles_fel.png",
+        "marble": "textures/top/crypt_tiles_marble.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ],
+      "tags": [
+        "stone",
+        "runes"
+      ]
+    },
+    "cave_floor": {
+      "kind": "top",
+      "variants": {
+        "brown": "textures/top/cave_floor_brown.png",
+        "cool": "textures/top/cave_floor_cool.png",
+        "deep": "textures/top/cave_floor_deep.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ],
+      "tags": [
+        "rock"
+      ]
+    },
+    "wet_stone": {
+      "kind": "top",
+      "variants": {
+        "cave": "textures/top/wet_stone_cave.png",
+        "glow": "textures/top/wet_stone_glow.png"
+      },
+      "frames": 8,
+      "fps": 8,
+      "size": [
+        128,
+        128
+      ],
+      "tags": [
+        "stone",
+        "water"
+      ]
+    },
+    "mine_gravel": {
+      "kind": "top",
+      "variants": {
+        "mine": "textures/top/mine_gravel_mine.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ],
+      "tags": [
+        "mine"
+      ]
+    },
+    "mine_boards": {
+      "kind": "top",
+      "variants": {
+        "mine": "textures/top/mine_boards_mine.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ],
+      "tags": [
+        "mine",
+        "wood"
+      ]
+    },
+    "floorboards": {
+      "kind": "top",
+      "variants": {
+        "oak": "textures/top/floorboards_oak.png",
+        "walnut": "textures/top/floorboards_walnut.png",
+        "pale": "textures/top/floorboards_pale.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ],
+      "tags": [
+        "interior",
+        "wood"
+      ]
+    },
+    "parquet": {
+      "kind": "top",
+      "variants": {
+        "oak": "textures/top/parquet_oak.png",
+        "walnut": "textures/top/parquet_walnut.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ],
+      "tags": [
+        "interior",
+        "wood"
+      ]
+    },
+    "void": {
+      "kind": "top",
+      "variants": {
+        "abyss": "textures/top/void_abyss.png"
+      },
+      "frames": 8,
+      "fps": 5,
+      "size": [
+        128,
+        128
+      ],
+      "tags": [
+        "chasm"
+      ],
+      "note": "impassable; sink it well below the floor so chasm sides show"
+    },
+    "dungeon_wall": {
+      "kind": "side",
+      "variants": {
+        "grey": "textures/side/dungeon_wall_grey.png",
+        "dark": "textures/side/dungeon_wall_dark.png",
+        "warm": "textures/side/dungeon_wall_warm.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        32
+      ],
+      "tags": [
+        "stone"
+      ]
+    },
+    "cave_wall": {
+      "kind": "side",
+      "variants": {
+        "brown": "textures/side/cave_wall_brown.png",
+        "cool": "textures/side/cave_wall_cool.png",
+        "deep": "textures/side/cave_wall_deep.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        32
+      ],
+      "tags": [
+        "rock"
+      ]
+    },
+    "mine_wall": {
+      "kind": "side",
+      "variants": {
+        "mine": "textures/side/mine_wall_mine.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        32
+      ],
+      "tags": [
+        "mine"
+      ]
+    },
+    "chasm_side": {
+      "kind": "side",
+      "variants": {
+        "brown": "textures/side/chasm_side_brown.png",
+        "cool": "textures/side/chasm_side_cool.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        64
+      ],
+      "tags": [
+        "chasm"
+      ],
+      "note": "128x64: V = depth below the top / 2 tiles, clamped; deeper than that is void"
+    },
+    "stalactite_lip": {
+      "kind": "lip",
+      "variants": {
+        "brown": "textures/lip/stalactite_lip_brown.png",
+        "cool": "textures/lip/stalactite_lip_cool.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        22
+      ],
+      "tags": [
+        "rock"
+      ]
+    },
+    "beam_lip": {
+      "kind": "lip",
+      "variants": {
+        "mine": "textures/lip/beam_lip_mine.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        9
+      ],
+      "tags": [
+        "mine"
+      ]
+    },
+    "rails": {
+      "kind": "decal",
+      "variants": {
+        "iron": "textures/decal/rails_iron.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        32
+      ],
+      "tags": [
+        "mine"
+      ],
+      "note": "runs along U; transpose for V"
+    },
+    "rails_curve": {
+      "kind": "decal",
+      "variants": {
+        "iron": "textures/decal/rails_curve_iron.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        32
+      ],
+      "tags": [
+        "mine"
+      ],
+      "note": "enters at -U, leaves at +V; mirror or rotate for the other turns"
+    },
+    "rails_end": {
+      "kind": "decal",
+      "variants": {
+        "iron": "textures/decal/rails_end_iron.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        32
+      ],
+      "tags": [
+        "mine"
+      ]
+    },
+    "carpet": {
+      "kind": "decal",
+      "variants": {
+        "crimson": "textures/decal/carpet_crimson.png",
+        "navy": "textures/decal/carpet_navy.png",
+        "forest": "textures/decal/carpet_forest.png",
+        "violet": "textures/decal/carpet_violet.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        32
+      ],
+      "tags": [
+        "interior"
+      ],
+      "note": "runner along U, continues tile to tile; transpose for V"
+    },
+    "carpet_end": {
+      "kind": "decal",
+      "variants": {
+        "crimson": "textures/decal/carpet_end_crimson.png",
+        "navy": "textures/decal/carpet_end_navy.png",
+        "forest": "textures/decal/carpet_end_forest.png",
+        "violet": "textures/decal/carpet_end_violet.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        32
+      ],
+      "tags": [
+        "interior"
+      ],
+      "note": "the runner's +U end, fringed"
+    },
+    "rug": {
+      "kind": "decal",
+      "variants": {
+        "crimson": "textures/decal/rug_crimson.png",
+        "teal": "textures/decal/rug_teal.png",
+        "ochre": "textures/decal/rug_ochre.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        64,
+        64
+      ],
+      "tags": [
+        "interior"
+      ],
+      "note": "64x64 over 2x2 tiles: each tile takes its quarter"
+    },
+    "rune_circle": {
+      "kind": "decal",
+      "variants": {
+        "fel": "textures/decal/rune_circle_fel.png",
+        "blood": "textures/decal/rune_circle_blood.png",
+        "arcane": "textures/decal/rune_circle_arcane.png"
+      },
+      "frames": 8,
+      "fps": 8,
+      "size": [
+        32,
+        32
+      ],
+      "tags": [
+        "runes",
+        "light"
+      ],
+      "light": {
+        "colour": {
+          "fel": "#91f59a",
+          "blood": "#ff8473",
+          "arcane": "#85dbff"
+        },
+        "radius": 1.6,
+        "flicker": "pulse",
+        "at": [
+          16,
+          20
+        ]
+      }
+    },
+    "bone_scatter": {
+      "kind": "decal",
+      "variants": {
+        "bone": "textures/decal/bone_scatter_bone.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        32
+      ],
+      "tags": [
+        "crypt"
+      ]
+    },
+    "blood_trail": {
+      "kind": "decal",
+      "variants": {
+        "red": "textures/decal/blood_trail_red.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        32
+      ],
+      "tags": [
+        "crypt"
+      ]
+    },
+    "sconce": {
+      "kind": "wall",
+      "variants": {
+        "iron": "textures/wall/sconce_iron.png"
+      },
+      "frames": 8,
+      "fps": 10,
+      "size": [
+        32,
+        48
+      ],
+      "tags": [
+        "light"
+      ],
+      "fromTop": 6,
+      "light": {
+        "colour": {
+          "iron": "#ffd263"
+        },
+        "radius": 3.0,
+        "flicker": "torch",
+        "at": [
+          15,
+          8
+        ]
+      }
+    },
+    "shackles": {
+      "kind": "wall",
+      "variants": {
+        "iron": "textures/wall/shackles_iron.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        48
+      ],
+      "tags": [],
+      "fromTop": 6
+    },
+    "wall_banner": {
+      "kind": "wall",
+      "variants": {
+        "crimson": "textures/wall/wall_banner_crimson.png",
+        "violet": "textures/wall/wall_banner_violet.png",
+        "black": "textures/wall/wall_banner_black.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        48
+      ],
+      "tags": [],
+      "fromTop": 2
+    },
+    "wall_crest": {
+      "kind": "wall",
+      "variants": {
+        "navy": "textures/wall/wall_crest_navy.png",
+        "crimson": "textures/wall/wall_crest_crimson.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        48
+      ],
+      "tags": [],
+      "fromTop": 2
+    },
+    "cobweb": {
+      "kind": "wall",
+      "variants": {
+        "web": "textures/wall/cobweb_web.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        32
+      ],
+      "tags": [],
+      "note": "top-left corner of a face; mirror for the right",
+      "fromTop": 0
+    },
+    "wall_crack": {
+      "kind": "wall",
+      "variants": {
+        "grey": "textures/wall/wall_crack_grey.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        48
+      ],
+      "tags": [],
+      "fromTop": 6
+    },
+    "moss_drip": {
+      "kind": "wall",
+      "variants": {
+        "moss": "textures/wall/moss_drip_moss.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        48
+      ],
+      "tags": [],
+      "fromTop": 0
+    },
+    "wall_runes": {
+      "kind": "wall",
+      "variants": {
+        "fel": "textures/wall/wall_runes_fel.png",
+        "arcane": "textures/wall/wall_runes_arcane.png",
+        "blood": "textures/wall/wall_runes_blood.png"
+      },
+      "frames": 8,
+      "fps": 6,
+      "size": [
+        32,
+        48
+      ],
+      "tags": [
+        "runes",
+        "light"
+      ],
+      "fromTop": 8,
+      "light": {
+        "colour": {
+          "fel": "#91f59a",
+          "arcane": "#85dbff",
+          "blood": "#ff8473"
+        },
+        "radius": 1.6,
+        "flicker": "pulse",
+        "at": [
+          16,
+          20
+        ]
+      }
+    }
+  },
+  "props": {
+    "sarcophagus": {
+      "variants": {
+        "grey": "props/sarcophagus_grey.png",
+        "dark": "props/sarcophagus_dark.png",
+        "marble": "props/sarcophagus_marble.png"
+      },
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        23
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 2,
+      "tags": [
+        "crypt"
+      ],
+      "facing": "U"
+    },
+    "sarcophagus_open": {
+      "variants": {
+        "grey": "props/sarcophagus_open_grey.png",
+        "dark": "props/sarcophagus_open_dark.png",
+        "marble": "props/sarcophagus_open_marble.png"
+      },
+      "size": [
+        48,
+        32
+      ],
+      "anchor": [
+        24,
+        22
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 2,
+      "tags": [
+        "crypt"
+      ],
+      "facing": "U"
+    },
+    "coffin": {
+      "variants": {
+        "oak": "props/coffin_oak.png",
+        "dark": "props/coffin_dark.png"
+      },
+      "size": [
+        32,
+        24
+      ],
+      "anchor": [
+        16,
+        15
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "crypt"
+      ],
+      "facing": "U"
+    },
+    "bone_pile": {
+      "variants": {
+        "bone": "props/bone_pile_bone.png"
+      },
+      "size": [
+        32,
+        24
+      ],
+      "anchor": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "crypt"
+      ]
+    },
+    "chains": {
+      "variants": {
+        "iron": "props/chains_iron.png",
+        "rusty": "props/chains_rusty.png"
+      },
+      "size": [
+        16,
+        64
+      ],
+      "anchor": [
+        8,
+        63
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "crypt",
+        "ceiling"
+      ]
+    },
+    "altar_runes": {
+      "variants": {
+        "fel": "props/altar_runes_fel.png",
+        "blood": "props/altar_runes_blood.png",
+        "arcane": "props/altar_runes_arcane.png"
+      },
+      "size": [
+        32,
+        40
+      ],
+      "anchor": [
+        16,
+        31
+      ],
+      "frames": 8,
+      "fps": 8,
+      "blocks": true,
+      "cover": "half",
+      "height": 2,
+      "tags": [
+        "crypt",
+        "light"
+      ],
+      "light": {
+        "at": [
+          [
+            16,
+            13
+          ]
+        ],
+        "radius": 2.5,
+        "flicker": "pulse",
+        "colour": {
+          "fel": "#91f59a",
+          "blood": "#ff8473",
+          "arcane": "#85dbff"
+        }
+      }
+    },
+    "statue_knight": {
+      "variants": {
+        "grey": "props/statue_knight_grey.png",
+        "dark": "props/statue_knight_dark.png",
+        "marble": "props/statue_knight_marble.png",
+        "clean": "props/statue_knight_clean.png"
+      },
+      "size": [
+        32,
+        64
+      ],
+      "anchor": [
+        16,
+        55
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 4,
+      "tags": [
+        "crypt",
+        "hall"
+      ]
+    },
+    "statue_gargoyle": {
+      "variants": {
+        "grey": "props/statue_gargoyle_grey.png",
+        "watcher": "props/statue_gargoyle_watcher.png",
+        "marble": "props/statue_gargoyle_marble.png"
+      },
+      "size": [
+        32,
+        64
+      ],
+      "anchor": [
+        16,
+        55
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 4,
+      "tags": [
+        "crypt",
+        "hall"
+      ]
+    },
+    "brazier": {
+      "variants": {
+        "fire": "props/brazier_fire.png",
+        "ghost": "props/brazier_ghost.png",
+        "arcane": "props/brazier_arcane.png"
+      },
+      "size": [
+        32,
+        48
+      ],
+      "anchor": [
+        16,
+        41
+      ],
+      "frames": 8,
+      "fps": 10,
+      "blocks": true,
+      "cover": "half",
+      "height": 2,
+      "tags": [
+        "light"
+      ],
+      "light": {
+        "at": [
+          [
+            16,
+            19
+          ]
+        ],
+        "radius": 3.5,
+        "flicker": "fire",
+        "colour": {
+          "fire": "#ffd263",
+          "ghost": "#96eec9",
+          "arcane": "#85dbff"
+        }
+      }
+    },
+    "candelabra": {
+      "variants": {
+        "gold": "props/candelabra_gold.png",
+        "iron": "props/candelabra_iron.png"
+      },
+      "size": [
+        32,
+        48
+      ],
+      "anchor": [
+        16,
+        43
+      ],
+      "frames": 8,
+      "fps": 8,
+      "blocks": true,
+      "cover": "none",
+      "height": 3,
+      "tags": [
+        "light"
+      ],
+      "light": {
+        "at": [
+          [
+            16,
+            11
+          ]
+        ],
+        "radius": 2.5,
+        "flicker": "candle",
+        "colour": {
+          "gold": "#ffd263",
+          "iron": "#ffd263"
+        }
+      }
+    },
+    "cauldron": {
+      "variants": {
+        "green": "props/cauldron_green.png",
+        "violet": "props/cauldron_violet.png",
+        "red": "props/cauldron_red.png"
+      },
+      "size": [
+        32,
+        40
+      ],
+      "anchor": [
+        16,
+        32
+      ],
+      "frames": 8,
+      "fps": 8,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "light",
+        "witch"
+      ],
+      "light": {
+        "at": [
+          [
+            16,
+            19
+          ]
+        ],
+        "radius": 2.0,
+        "flicker": "pulse",
+        "colour": {
+          "green": "#a4ee75",
+          "violet": "#c88fff",
+          "red": "#ff7473"
+        }
+      }
+    },
+    "alchemy_table": {
+      "variants": {
+        "green": "props/alchemy_table_green.png",
+        "violet": "props/alchemy_table_violet.png",
+        "red": "props/alchemy_table_red.png"
+      },
+      "size": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        37
+      ],
+      "frames": 8,
+      "fps": 8,
+      "blocks": true,
+      "cover": "half",
+      "height": 2,
+      "tags": [
+        "light",
+        "study"
+      ],
+      "facing": "U",
+      "light": {
+        "at": [
+          [
+            20,
+            13
+          ]
+        ],
+        "radius": 2.0,
+        "flicker": "pulse",
+        "colour": {
+          "green": "#a4ee75",
+          "violet": "#c88fff",
+          "red": "#ff7473"
+        }
+      }
+    },
+    "desk": {
+      "variants": {
+        "oak": "props/desk_oak.png",
+        "walnut": "props/desk_walnut.png"
+      },
+      "size": [
+        48,
+        40
+      ],
+      "anchor": [
+        24,
+        30
+      ],
+      "frames": 4,
+      "fps": 6,
+      "blocks": true,
+      "cover": "half",
+      "height": 2,
+      "tags": [
+        "light",
+        "study"
+      ],
+      "facing": "U",
+      "light": {
+        "at": [
+          [
+            19,
+            2
+          ],
+          [
+            36,
+            14
+          ]
+        ],
+        "radius": 2.0,
+        "flicker": "candle",
+        "colour": {
+          "oak": "#ffd263",
+          "walnut": "#ffd263"
+        }
+      }
+    },
+    "fireplace": {
+      "variants": {
+        "grey": "props/fireplace_grey.png",
+        "warm": "props/fireplace_warm.png"
+      },
+      "size": [
+        48,
+        64
+      ],
+      "anchor": [
+        24,
+        53
+      ],
+      "frames": 8,
+      "fps": 10,
+      "blocks": true,
+      "cover": "full",
+      "height": 5,
+      "tags": [
+        "light",
+        "tavern"
+      ],
+      "facing": "+V",
+      "light": {
+        "at": [
+          [
+            22,
+            47
+          ]
+        ],
+        "radius": 4.0,
+        "flicker": "fire",
+        "colour": {
+          "grey": "#ffd263",
+          "warm": "#ffd263"
+        }
+      }
+    },
+    "bookshelf": {
+      "variants": {
+        "oak": "props/bookshelf_oak.png",
+        "walnut": "props/bookshelf_walnut.png"
+      },
+      "size": [
+        32,
+        64
+      ],
+      "anchor": [
+        16,
+        53
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 5,
+      "tags": [
+        "study"
+      ],
+      "facing": "+V"
+    },
+    "bookshelf_empty": {
+      "variants": {
+        "oak": "props/bookshelf_empty_oak.png",
+        "walnut": "props/bookshelf_empty_walnut.png"
+      },
+      "size": [
+        32,
+        64
+      ],
+      "anchor": [
+        16,
+        53
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 5,
+      "tags": [
+        "study",
+        "crypt"
+      ],
+      "facing": "+V"
+    },
+    "weapon_rack": {
+      "variants": {
+        "oak": "props/weapon_rack_oak.png"
+      },
+      "size": [
+        32,
+        56
+      ],
+      "anchor": [
+        16,
+        44
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 3,
+      "tags": [
+        "armory"
+      ],
+      "facing": "U"
+    },
+    "armor_stand": {
+      "variants": {
+        "steel": "props/armor_stand_steel.png",
+        "dark": "props/armor_stand_dark.png",
+        "gold": "props/armor_stand_gold.png"
+      },
+      "size": [
+        32,
+        56
+      ],
+      "anchor": [
+        16,
+        46
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 4,
+      "tags": [
+        "armory",
+        "hall"
+      ]
+    },
+    "throne": {
+      "variants": {
+        "gold": "props/throne_gold.png",
+        "dark": "props/throne_dark.png",
+        "bone": "props/throne_bone.png"
+      },
+      "size": [
+        32,
+        64
+      ],
+      "anchor": [
+        16,
+        52
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 4,
+      "tags": [
+        "hall"
+      ],
+      "facing": "+V"
+    },
+    "tavern_table": {
+      "variants": {
+        "oak": "props/tavern_table_oak.png"
+      },
+      "size": [
+        48,
+        32
+      ],
+      "anchor": [
+        24,
+        22
+      ],
+      "frames": 4,
+      "fps": 6,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "tavern",
+        "light"
+      ],
+      "facing": "U",
+      "light": {
+        "at": [
+          [
+            26,
+            8
+          ]
+        ],
+        "radius": 1.5,
+        "flicker": "candle",
+        "colour": {
+          "oak": "#ffd263"
+        }
+      }
+    },
+    "chair": {
+      "variants": {
+        "oak": "props/chair_oak.png",
+        "walnut": "props/chair_walnut.png"
+      },
+      "size": [
+        16,
+        32
+      ],
+      "anchor": [
+        8,
+        23
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "tavern"
+      ],
+      "facing": "+V"
+    },
+    "stool": {
+      "variants": {
+        "oak": "props/stool_oak.png",
+        "walnut": "props/stool_walnut.png"
+      },
+      "size": [
+        16,
+        24
+      ],
+      "anchor": [
+        8,
+        17
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "tavern"
+      ]
+    },
+    "bench": {
+      "variants": {
+        "oak": "props/bench_oak.png",
+        "walnut": "props/bench_walnut.png"
+      },
+      "size": [
+        32,
+        24
+      ],
+      "anchor": [
+        16,
+        15
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "tavern"
+      ],
+      "facing": "U"
+    },
+    "barrel_tap": {
+      "variants": {
+        "oak": "props/barrel_tap_oak.png"
+      },
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        24
+      ],
+      "frames": 4,
+      "fps": 6,
+      "blocks": true,
+      "cover": "half",
+      "height": 2,
+      "tags": [
+        "tavern"
+      ],
+      "facing": "U"
+    },
+    "cell_bars": {
+      "variants": {
+        "iron": "props/cell_bars_iron.png",
+        "rusty": "props/cell_bars_rusty.png"
+      },
+      "size": [
+        48,
+        64
+      ],
+      "anchor": [
+        24,
+        46
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 4,
+      "tags": [
+        "prison"
+      ],
+      "facing": "U"
+    },
+    "cell_bars_open": {
+      "variants": {
+        "iron": "props/cell_bars_open_iron.png",
+        "rusty": "props/cell_bars_open_rusty.png"
+      },
+      "size": [
+        48,
+        64
+      ],
+      "anchor": [
+        24,
+        46
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 4,
+      "tags": [
+        "prison"
+      ],
+      "facing": "U"
+    },
+    "door_arch": {
+      "variants": {
+        "oak": "props/door_arch_oak.png",
+        "dark": "props/door_arch_dark.png"
+      },
+      "size": [
+        48,
+        64
+      ],
+      "anchor": [
+        24,
+        47
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 4,
+      "tags": [
+        "door"
+      ],
+      "facing": "U"
+    },
+    "door_arch_open": {
+      "variants": {
+        "oak": "props/door_arch_open_oak.png",
+        "dark": "props/door_arch_open_dark.png"
+      },
+      "size": [
+        48,
+        64
+      ],
+      "anchor": [
+        24,
+        47
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 4,
+      "tags": [
+        "door"
+      ],
+      "facing": "U"
+    },
+    "portal": {
+      "variants": {
+        "void": "props/portal_void.png",
+        "fel": "props/portal_fel.png",
+        "arcane": "props/portal_arcane.png"
+      },
+      "size": [
+        48,
+        64
+      ],
+      "anchor": [
+        24,
+        48
+      ],
+      "frames": 8,
+      "fps": 10,
+      "blocks": false,
+      "cover": "none",
+      "height": 4,
+      "tags": [
+        "light",
+        "interactive"
+      ],
+      "facing": "U",
+      "light": {
+        "at": [
+          [
+            23,
+            32
+          ]
+        ],
+        "radius": 3.5,
+        "flicker": "pulse",
+        "colour": {
+          "void": "#bd80ff",
+          "fel": "#91f59a",
+          "arcane": "#85dbff"
+        }
+      }
+    },
+    "stalagmite_small": {
+      "variants": {
+        "brown": "props/stalagmite_small_brown.png",
+        "cool": "props/stalagmite_small_cool.png",
+        "deep": "props/stalagmite_small_deep.png"
+      },
+      "size": [
+        16,
+        24
+      ],
+      "anchor": [
+        8,
+        18
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "cave"
+      ]
+    },
+    "stalagmite": {
+      "variants": {
+        "brown": "props/stalagmite_brown.png",
+        "cool": "props/stalagmite_cool.png",
+        "deep": "props/stalagmite_deep.png"
+      },
+      "size": [
+        32,
+        40
+      ],
+      "anchor": [
+        16,
+        33
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 2,
+      "tags": [
+        "cave"
+      ]
+    },
+    "stalagmite_large": {
+      "variants": {
+        "brown": "props/stalagmite_large_brown.png",
+        "cool": "props/stalagmite_large_cool.png",
+        "deep": "props/stalagmite_large_deep.png"
+      },
+      "size": [
+        32,
+        64
+      ],
+      "anchor": [
+        16,
+        57
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 4,
+      "tags": [
+        "cave"
+      ]
+    },
+    "glow_mushrooms": {
+      "variants": {
+        "teal": "props/glow_mushrooms_teal.png",
+        "violet": "props/glow_mushrooms_violet.png",
+        "amber": "props/glow_mushrooms_amber.png"
+      },
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        26
+      ],
+      "frames": 4,
+      "fps": 4,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "cave",
+        "light"
+      ],
+      "light": {
+        "at": [
+          [
+            15,
+            16
+          ]
+        ],
+        "radius": 1.5,
+        "flicker": "pulse",
+        "colour": {
+          "teal": "#5cc3c8",
+          "violet": "#c88fff",
+          "amber": "#ffe58e"
+        }
+      }
+    },
+    "crystal_big": {
+      "variants": {
+        "blue": "props/crystal_big_blue.png",
+        "violet": "props/crystal_big_violet.png",
+        "green": "props/crystal_big_green.png",
+        "amber": "props/crystal_big_amber.png"
+      },
+      "size": [
+        32,
+        48
+      ],
+      "anchor": [
+        16,
+        41
+      ],
+      "frames": 8,
+      "fps": 8,
+      "blocks": true,
+      "cover": "full",
+      "height": 4,
+      "tags": [
+        "cave",
+        "light"
+      ],
+      "light": {
+        "at": [
+          [
+            16,
+            27
+          ]
+        ],
+        "radius": 3.6,
+        "flicker": "pulse",
+        "colour": {
+          "blue": "#85d7ff",
+          "violet": "#c08fff",
+          "green": "#85efa9",
+          "amber": "#ffe58e"
+        }
+      }
+    },
+    "minecart": {
+      "variants": {
+        "iron": "props/minecart_iron.png"
+      },
+      "size": [
+        32,
+        40
+      ],
+      "anchor": [
+        16,
+        30
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "mine"
+      ],
+      "facing": "U"
+    },
+    "minecart_gold": {
+      "variants": {
+        "iron": "props/minecart_gold_iron.png"
+      },
+      "size": [
+        32,
+        40
+      ],
+      "anchor": [
+        16,
+        30
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "mine",
+        "loot"
+      ],
+      "facing": "U"
+    },
+    "minecart_empty": {
+      "variants": {
+        "iron": "props/minecart_empty_iron.png"
+      },
+      "size": [
+        32,
+        40
+      ],
+      "anchor": [
+        16,
+        30
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "mine"
+      ],
+      "facing": "U"
+    },
+    "treasure_hoard": {
+      "variants": {
+        "gold": "props/treasure_hoard_gold.png"
+      },
+      "size": [
+        48,
+        40
+      ],
+      "anchor": [
+        24,
+        31
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "loot"
+      ]
+    },
+    "drip": {
+      "variants": {
+        "water": "props/drip_water.png"
+      },
+      "size": [
+        16,
+        64
+      ],
+      "anchor": [
+        8,
+        60
+      ],
+      "frames": 12,
+      "fps": 10,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "cave",
+        "ceiling",
+        "fx"
+      ]
+    }
+  },
+  "propNotes": {
+    "anchor": "the ground contact pixel (the tile centre under the prop); stand it on the tile centre",
+    "frames": "animated props are horizontal strips; loop at fps",
+    "cover": "none | half | full, for ranged attacks",
+    "height": "in height steps (16 px), for line of sight",
+    "facing": "'+V': drawn against a wall, facing +V (screen lower-left); mirror for a +U wall. 'U': spans the tile along U; mirror to run along V",
+    "light": "'at' is the light's source pixel in the frame; colour per variant, radius in tiles, flicker names a curve in lighting.flicker"
+  },
+  "light": {
+    "pools": {
+      "torch": {
+        "file": "light/pool_torch.png",
+        "size": [
+          64,
+          32
+        ],
+        "anchor": [
+          32,
+          16
+        ],
+        "colour": "#ffb35c"
+      },
+      "candle": {
+        "file": "light/pool_candle.png",
+        "size": [
+          64,
+          32
+        ],
+        "anchor": [
+          32,
+          16
+        ],
+        "colour": "#ffd890"
+      },
+      "fel": {
+        "file": "light/pool_fel.png",
+        "size": [
+          64,
+          32
+        ],
+        "anchor": [
+          32,
+          16
+        ],
+        "colour": "#79e88f"
+      },
+      "arcane": {
+        "file": "light/pool_arcane.png",
+        "size": [
+          64,
+          32
+        ],
+        "anchor": [
+          32,
+          16
+        ],
+        "colour": "#7fc8ff"
+      },
+      "blood": {
+        "file": "light/pool_blood.png",
+        "size": [
+          64,
+          32
+        ],
+        "anchor": [
+          32,
+          16
+        ],
+        "colour": "#ff5a5a"
+      },
+      "crystal": {
+        "file": "light/pool_crystal.png",
+        "size": [
+          64,
+          32
+        ],
+        "anchor": [
+          32,
+          16
+        ],
+        "colour": "#6fc3ff"
+      },
+      "void": {
+        "file": "light/pool_void.png",
+        "size": [
+          64,
+          32
+        ],
+        "anchor": [
+          32,
+          16
+        ],
+        "colour": "#a77bff"
+      },
+      "ember": {
+        "file": "light/pool_ember.png",
+        "size": [
+          64,
+          32
+        ],
+        "anchor": [
+          32,
+          16
+        ],
+        "colour": "#ff7b2b"
+      }
+    },
+    "halos": {
+      "torch": {
+        "file": "light/halo_torch.png",
+        "size": [
+          32,
+          32
+        ],
+        "anchor": [
+          16,
+          16
+        ],
+        "colour": "#ffb35c"
+      },
+      "candle": {
+        "file": "light/halo_candle.png",
+        "size": [
+          32,
+          32
+        ],
+        "anchor": [
+          16,
+          16
+        ],
+        "colour": "#ffd890"
+      },
+      "fel": {
+        "file": "light/halo_fel.png",
+        "size": [
+          32,
+          32
+        ],
+        "anchor": [
+          16,
+          16
+        ],
+        "colour": "#79e88f"
+      },
+      "arcane": {
+        "file": "light/halo_arcane.png",
+        "size": [
+          32,
+          32
+        ],
+        "anchor": [
+          16,
+          16
+        ],
+        "colour": "#7fc8ff"
+      },
+      "blood": {
+        "file": "light/halo_blood.png",
+        "size": [
+          32,
+          32
+        ],
+        "anchor": [
+          16,
+          16
+        ],
+        "colour": "#ff5a5a"
+      },
+      "crystal": {
+        "file": "light/halo_crystal.png",
+        "size": [
+          32,
+          32
+        ],
+        "anchor": [
+          16,
+          16
+        ],
+        "colour": "#6fc3ff"
+      },
+      "void": {
+        "file": "light/halo_void.png",
+        "size": [
+          32,
+          32
+        ],
+        "anchor": [
+          16,
+          16
+        ],
+        "colour": "#a77bff"
+      },
+      "ember": {
+        "file": "light/halo_ember.png",
+        "size": [
+          32,
+          32
+        ],
+        "anchor": [
+          16,
+          16
+        ],
+        "colour": "#ff7b2b"
+      }
+    },
+    "vignette": {
+      "file": "light/vignette.png",
+      "size": [
+        256,
+        144
+      ],
+      "blend": "alpha",
+      "note": "stretch over the battle view, above the map and below the UI"
+    }
+  },
+  "lighting": {
+    "recipe": [
+      "Render the map and sprites as usual (albedo).",
+      "Light = ambient (per room kind, below) + the sum of every light: colour x power x flicker[frame] x falloff.",
+      "Falloff = max(ground pool, source sphere): the pool is a 2:1 ellipse on the floor under the source, the sphere is round around the source itself, both (1 - d)^1.6 out to the light's radius in tiles.",
+      "Band the light into steps of 1/7 with a 4x4 ordered dither, so pools step like pixel art.",
+      "Lit = albedo x min(light, 1.3). Emissive pixels (prop slots glow / flame / liquid, texture slot glow) skip this: they keep their own colour, then the usual bloom picks them up.",
+      "Optionally lay light/vignette.png over the view for the room's edges."
+    ],
+    "godot": "Equivalent with real lights: a CanvasModulate / WorldEnvironment ambient of the room colour, an OmniLight3D (or PointLight2D) per manifest light at its 'at' point, colour and radius, energy driven by the flicker curve, and an unshaded material (or emission) on the emissive slots.",
+    "ambient": {
+      "crypt": [
+        0.25,
+        0.27,
+        0.4
+      ],
+      "cave": [
+        0.26,
+        0.33,
+        0.46
+      ],
+      "hall": [
+        0.3,
+        0.25,
+        0.26
+      ]
+    },
+    "flicker": {
+      "torch": [
+        1.0,
+        0.9,
+        1.06,
+        0.94,
+        0.84,
+        1.02,
+        0.92,
+        1.08
+      ],
+      "fire": [
+        1.0,
+        0.93,
+        1.08,
+        0.97,
+        0.88,
+        1.05,
+        0.95,
+        1.1
+      ],
+      "candle": [
+        1.0,
+        0.97,
+        1.02,
+        0.95,
+        1.0,
+        1.03,
+        0.97,
+        0.99
+      ],
+      "pulse": [
+        1.0,
+        0.947,
+        0.82,
+        0.693,
+        0.64,
+        0.693,
+        0.82,
+        0.947
+      ],
+      "steady": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "emissiveSlots": {
+      "props": [
+        "flame",
+        "glow",
+        "liquid"
+      ],
+      "textures": [
+        "glow"
+      ]
+    },
+    "decalPools": "light/pool_*.png are the same falloff baked as additive decals, for a cheap path without dynamic lights: add one under each light source, scaled to its radius."
+  }
+}

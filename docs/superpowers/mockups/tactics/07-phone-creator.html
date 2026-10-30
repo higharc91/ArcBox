@@ -12,7 +12,7 @@
      class, 32x40 per cell), written by tools/tactics-assets/build.py. */
   .spr { --z: 2; width: calc(32px * var(--z)); height: calc(40px * var(--z)); flex: none;
     background: url(assets/race-class.png) no-repeat; image-rendering: pixelated;
-    background-size: calc(320px * var(--z)) calc(360px * var(--z));
+    background-size: calc(320px * var(--z)) calc(440px * var(--z));
     background-position: calc(-32px * var(--z) * var(--c)) calc(-40px * var(--z) * var(--r)); }
   .spr.party { background-image: url(assets/party.png); background-size: calc(192px * var(--z)) calc(40px * var(--z)); }
   .steps { grid-template-columns: repeat(5, 1fr); }
@@ -24,6 +24,8 @@
   .hint { font-size: 13px; color: var(--muted); margin-top: 6px; }
   .pick { display: grid; gap: 8px; }
   .pick.r3 { grid-template-columns: repeat(3, 1fr); }
+  .pick.r4 { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .pick.r4 .opt2 small { display: none; }
   .pick.r5 { grid-template-columns: repeat(5, 1fr); }
   .opt2 { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 2px 7px; border-radius: 10px;
     background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.13); }
@@ -61,7 +63,7 @@
           <div class="input">Sefa<span class="caret"></span><small>4 / 16</small></div>
           <div class="hint">Shown on the TV's turn order, nameplates and your seat card.</div></div>
         <span class="sect">RACE</span>
-        <div class="pick r3">
+        <div class="pick r4">
           <div class="opt2"><div class="spr" style="--r:0;--c:9"></div><b>Human</b><small>Versatile</small></div>
           <div class="opt2"><div class="spr" style="--r:1;--c:9"></div><b>Elf</b><small>Keen senses</small></div>
           <div class="opt2"><div class="spr" style="--r:2;--c:9"></div><b>Half-Elf</b><small>Two extra skills</small></div>
@@ -70,13 +72,15 @@
           <div class="opt2"><div class="spr" style="--r:5;--c:9"></div><b>Gnome</b><small>Cunning</small></div>
           <div class="opt2"><div class="spr" style="--r:6;--c:9"></div><b>Half-Orc</b><small>Relentless</small></div>
           <div class="opt2 sel"><div class="spr" style="--r:7;--c:9"></div><b>Tiefling</b><small>Infernal legacy</small></div>
-          <div class="opt2"><div class="spr" style="--r:8;--c:9"></div><b>Dragonborn</b><small>Breath weapon</small></div>
+          <div class="opt2"><div class="spr" style="--r:8;--c:9"></div><b>Aasimar</b><small>Radiant soul</small></div>
+          <div class="opt2"><div class="spr" style="--r:9;--c:9"></div><b>Goliath</b><small>Mountain born</small></div>
+          <div class="opt2"><div class="spr" style="--r:10;--c:9"></div><b>Dragonborn</b><small>Breath weapon</small></div>
         </div>
         <div class="race-note"><b>Tiefling.</b> Darkvision, resistance to fire, and the thaumaturgy cantrip. CHA +2, INT +1. Horns and a tail are part of the look.</div>
         <div class="btn gold" style="margin-top:auto">NEXT: CLASS →</div>
       </div>
     </div></div>
-    <div class="caption"><b>1 · Name and race</b><span>The hero's name comes first, then one of nine races. Race sets the body (size, ears, horns, tail) and what the Look step will offer.</span></div>
+    <div class="caption"><b>1 · Name and race</b><span>The hero's name comes first, then one of eleven races. Race sets the body (size, ears, horns, tail) and what the Look step will offer.</span></div>
   </div>
 
   <!-- 2. Class -->
@@ -106,7 +110,7 @@
         <div class="btn gold" style="margin-top:auto">NEXT: SCORES →</div>
       </div>
     </div></div>
-    <div class="caption"><b>2 · Class</b><span>Any race can take any class. That's 90 combinations, all drawn from the same layered sprites. Each tile previews your race in that class's starting kit.</span></div>
+    <div class="caption"><b>2 · Class</b><span>Any race can take any class. That's 110 combinations, all drawn from the same layered sprites. Each tile previews your race in that class's starting kit.</span></div>
   </div>
 
   <!-- 3. Look -->

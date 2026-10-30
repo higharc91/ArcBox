@@ -7,7 +7,7 @@
       37
     ]
   },
-  "framesPerDirection": 20,
+  "framesPerDirection": 79,
   "directions": {
     "front": {
       "row": 0,
@@ -22,70 +22,219 @@
     "idle": {
       "frames": [
         0,
-        1
+        1,
+        2,
+        3
       ],
-      "fps": 3.0,
+      "fps": 4.0,
+      "loop": true
+    },
+    "ready": {
+      "frames": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "fps": 5.0,
       "loop": true
     },
     "walk": {
       "frames": [
-        2,
-        3,
-        4,
-        5
+        8,
+        9,
+        10,
+        11
       ],
       "fps": 8.0,
       "loop": true
     },
     "attack": {
       "frames": [
-        6,
-        7,
-        8
+        12,
+        13,
+        14,
+        15,
+        16
       ],
-      "fps": 10.0,
+      "fps": 12.0,
       "loop": false
     },
     "thrust": {
       "frames": [
-        9,
-        10,
-        11
+        17,
+        18,
+        19,
+        20
       ],
-      "fps": 10.0,
+      "fps": 12.0,
       "loop": false
     },
     "shoot": {
       "frames": [
-        12,
-        13,
-        14
+        21,
+        22,
+        23,
+        24
       ],
       "fps": 8.0,
       "loop": false
     },
     "cast": {
       "frames": [
-        15,
-        16,
-        17
+        25,
+        26,
+        27,
+        28
+      ],
+      "fps": 8.0,
+      "loop": false
+    },
+    "slam": {
+      "frames": [
+        29,
+        30,
+        31,
+        32,
+        33
+      ],
+      "fps": 12.0,
+      "loop": false
+    },
+    "spin": {
+      "frames": [
+        34,
+        35,
+        36,
+        37
+      ],
+      "fps": 14.0,
+      "loop": false
+    },
+    "flurry": {
+      "frames": [
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "fps": 14.0,
+      "loop": false
+    },
+    "bash": {
+      "frames": [
+        44,
+        45,
+        46
+      ],
+      "fps": 12.0,
+      "loop": false
+    },
+    "block": {
+      "frames": [
+        47,
+        48
       ],
       "fps": 6.0,
       "loop": false
     },
-    "hurt": {
+    "dodge": {
       "frames": [
-        18
+        49,
+        50
+      ],
+      "fps": 10.0,
+      "loop": false
+    },
+    "jump": {
+      "frames": [
+        51,
+        52,
+        53
+      ],
+      "fps": 10.0,
+      "loop": false
+    },
+    "item": {
+      "frames": [
+        54,
+        55,
+        56
       ],
       "fps": 6.0,
+      "loop": false
+    },
+    "victory": {
+      "frames": [
+        57,
+        58,
+        59
+      ],
+      "fps": 6.0,
+      "loop": true
+    },
+    "hurt": {
+      "frames": [
+        60,
+        61
+      ],
+      "fps": 8.0,
       "loop": false
     },
     "down": {
       "frames": [
-        19
+        62
       ],
       "fps": 1.0,
       "loop": false
+    },
+    "rise": {
+      "frames": [
+        63,
+        64
+      ],
+      "fps": 6.0,
+      "loop": false
+    },
+    "sit": {
+      "frames": [
+        65,
+        66,
+        67,
+        68
+      ],
+      "fps": 3.0,
+      "loop": true
+    },
+    "doze": {
+      "frames": [
+        69,
+        70
+      ],
+      "fps": 2.0,
+      "loop": true
+    },
+    "talk": {
+      "frames": [
+        71,
+        72,
+        73,
+        74
+      ],
+      "fps": 5.0,
+      "loop": true
+    },
+    "wave": {
+      "frames": [
+        75,
+        76,
+        77,
+        78
+      ],
+      "fps": 6.0,
+      "loop": true
     }
   },
   "builds": {
@@ -152,7 +301,10 @@
   },
   "layers": {
     "cape": [
+      "banner_back",
       "cloak",
+      "pelt",
+      "quiver",
       "short_cape"
     ],
     "body": [
@@ -181,13 +333,18 @@
       "sandals"
     ],
     "torso": [
+      "apron",
       "chain",
       "coat",
+      "doublet",
+      "dress",
+      "gi",
       "leather",
       "plate",
       "rags",
       "robe",
       "scale",
+      "tabard",
       "tunic",
       "vest",
       "vestments"
@@ -229,32 +386,53 @@
       "swept"
     ],
     "headgear": [
+      "antlers",
       "bandana",
+      "beret",
+      "cap",
       "circlet",
       "crown",
       "feathered_cap",
+      "flower_crown",
       "great_helm",
+      "halo",
+      "headband",
       "hood",
       "horned_helm",
+      "mask_hood",
+      "mitre",
       "open_helm",
+      "straw_hat",
+      "winged_helm",
       "wizard_hat"
     ],
     "weapon": [
       "axe",
       "bow",
+      "broom",
       "crossbow",
+      "crystal_staff",
       "dagger",
       "flail",
       "greatsword",
       "halberd",
+      "holy_staff",
+      "hourglass_staff",
+      "living_staff",
       "lute",
+      "lyre",
       "mace",
+      "pitchfork",
       "quarterstaff",
       "rapier",
       "scimitar",
+      "scroll",
+      "smith_hammer",
       "spear",
       "staff",
+      "storm_staff",
       "sword",
+      "tankard",
       "tome",
       "wand",
       "warhammer"
@@ -262,14 +440,21 @@
     "hands": [
       "bare",
       "gauntlets",
-      "gloves"
+      "gloves",
+      "wraps"
     ],
     "offhand": [
+      "blade",
+      "bomb",
       "buckler",
+      "dagger",
       "kite_shield",
       "lantern",
+      "main_gauche",
       "orb",
-      "round_shield"
+      "round_shield",
+      "tower_shield",
+      "war_horn"
     ]
   },
   "order": {
@@ -352,6 +537,23 @@
     "dark_elf",
     "necromancer",
     "bandit_captain",
-    "cult_leader"
+    "cult_leader",
+    "mayor",
+    "innkeeper",
+    "barmaid",
+    "blacksmith",
+    "farmer",
+    "farmhand",
+    "merchant",
+    "priest",
+    "guard",
+    "guard_captain",
+    "noble",
+    "sage",
+    "child",
+    "hermit",
+    "stranger",
+    "minstrel",
+    "fisher"
   ]
 }

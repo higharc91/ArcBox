@@ -1,0 +1,119 @@
+{
+  "frame": [
+    64,
+    32
+  ],
+  "origin": [
+    32,
+    16
+  ],
+  "overFrame": [
+    64,
+    40
+  ],
+  "overOrigin": [
+    32,
+    32
+  ],
+  "hazards": {
+    "burning": {
+      "ground": "burning.png",
+      "frames": 8,
+      "fps": 8,
+      "blocks": false,
+      "difficult": false,
+      "damage": "fire",
+      "note": "damage on entering and at turn start",
+      "over": "burning_over.png"
+    },
+    "poison": {
+      "ground": "poison.png",
+      "frames": 8,
+      "fps": 8,
+      "blocks": false,
+      "difficult": false,
+      "damage": "poison",
+      "note": "poisons those who end a turn inside",
+      "over": "poison_over.png"
+    },
+    "ice": {
+      "ground": "ice.png",
+      "frames": 8,
+      "fps": 8,
+      "blocks": false,
+      "difficult": true,
+      "damage": null,
+      "note": "slippery: movement may slide one extra tile"
+    },
+    "web": {
+      "ground": "web.png",
+      "frames": 8,
+      "fps": 8,
+      "blocks": false,
+      "difficult": true,
+      "damage": null,
+      "note": "restrains; burns away under fire"
+    },
+    "thorns": {
+      "ground": "thorns.png",
+      "frames": 8,
+      "fps": 8,
+      "blocks": false,
+      "difficult": true,
+      "damage": "piercing",
+      "note": "Warden snare ground",
+      "over": "thorns_over.png"
+    },
+    "consecrated": {
+      "ground": "consecrated.png",
+      "frames": 8,
+      "fps": 8,
+      "blocks": false,
+      "difficult": false,
+      "damage": "radiant",
+      "note": "allies heal, undead burn"
+    },
+    "oil": {
+      "ground": "oil.png",
+      "frames": 8,
+      "fps": 8,
+      "blocks": false,
+      "difficult": true,
+      "damage": null,
+      "note": "ignites into burning ground"
+    },
+    "caltrops": {
+      "ground": "caltrops.png",
+      "frames": 8,
+      "fps": 8,
+      "blocks": false,
+      "difficult": true,
+      "damage": "piercing",
+      "note": "damage on entering"
+    },
+    "darkness": {
+      "ground": "darkness.png",
+      "frames": 8,
+      "fps": 8,
+      "blocks": false,
+      "difficult": false,
+      "damage": null,
+      "note": "heavily obscured: blocks line of sight",
+      "over": "darkness_over.png"
+    },
+    "flooded": {
+      "ground": "flooded.png",
+      "frames": 8,
+      "fps": 8,
+      "blocks": false,
+      "difficult": true,
+      "damage": null,
+      "note": "conducts lightning"
+    }
+  },
+  "notes": {
+    "ground": "draw on the tile top after the terrain, before units (like the UI markers)",
+    "over": "draw after units on that tile, origin on the tile centre",
+    "tiling": "same projection as ui markers: neighbouring hazard tiles join"
+  }
+}

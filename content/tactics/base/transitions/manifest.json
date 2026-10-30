@@ -1,0 +1,17 @@
+{
+  "size": [
+    160,
+    90
+  ],
+  "transitions": {
+    "diamonds": "diamonds.png",
+    "iris": "iris.png",
+    "swirl": "swirl.png",
+    "slash": "slash.png",
+    "curtain": "curtain.png",
+    "dissolve": "dissolve.png",
+    "blinds": "blinds.png"
+  },
+  "godotShader": "shader_type canvas_item;   // a full-screen rect drawn over everything\nuniform sampler2D map : filter_nearest;  // transitions/<name>.png\nuniform float progress;                  // 0 = clear, 1 = covered\nuniform vec4 colour : source_color = vec4(0.05, 0.06, 0.1, 1.0);\nvoid fragment() { COLOR = texture(map, UV).r < progress ? colour : vec4(0.0); }",
+  "notes": "sample with nearest filtering; animate progress 0->1 to cover, 1->0 to reveal"
+}

@@ -1,0 +1,36 @@
+{
+  "id": "blacksmith",
+  "name": "Blacksmith",
+  "race": null,
+  "class": null,
+  "build": "large",
+  "layers": {
+    "body": "human",
+    "hair": "cropped",
+    "beard": "short",
+    "torso": "apron",
+    "legs": "pants",
+    "feet": "boots",
+    "weapon": "smith_hammer",
+    "hands": "gloves"
+  },
+  "palette": {
+    "eyes": "eyes/dark",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "horn": "horn/ivory",
+    "paint": "paint/woad",
+    "skin": "skin/brown",
+    "hair": "hair/black",
+    "cloth1": "cloth/charcoal",
+    "cloth2": "leather/dark",
+    "blade": "metal/iron"
+  },
+  "tags": [
+    "npc"
+  ],
+  "sheet": "presets/blacksmith.png"
+}

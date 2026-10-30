@@ -96,6 +96,13 @@ SKIN: dict[str, list[str]] = {
     "dragon_silver": ramp("#b9c0cc", shift=0.05, spread=0.9),
     "dragon_copper": ramp("#b8673c", shift=0.07),
     "dragon_brass": ramp("#c49a52", shift=0.07),
+    # Aasimar (celestial) and Goliath (mountain-born)
+    "celestial_gold": ramp("#e8c98f", shift=0.05, spread=0.8),
+    "celestial_silver": ramp("#d9dce6", shift=0.04, spread=0.75),
+    "celestial_bronze": ramp("#c08a5a", shift=0.05),
+    "stone_grey": ramp("#9a9ca6", shift=0.04),
+    "stone_blue": ramp("#8a98a8", shift=0.04),
+    "stone_umber": ramp("#9a8270", shift=0.05),
 }
 
 HORN: dict[str, list[str]] = {
@@ -175,9 +182,14 @@ MAGIC: dict[str, list[str]] = {
     "holy": ramp("#ffe27a", shift=0.05, spread=0.8),
     "shadow": ramp("#7a52b5", shift=0.07, spread=1.1),
     "blood": ramp("#d8394a", shift=0.07),
+    "earth": ramp("#d9a23a", shift=0.07, spread=0.9),
+    "storm": ramp("#9fd0ff", shift=0.04, spread=0.75),
+    "void": ramp("#6a4ad0", shift=0.08, spread=1.1),
+    "fel": ramp("#8fe04a", shift=0.07, spread=0.9),
 }
 
 EYES: dict[str, list[str]] = {
+    "radiant": ramp("#fff2b0", shift=0.04, spread=0.6),
     "dark": ramp("#2a2230", spread=1.2),
     "blue": ramp("#3e7ad6"),
     "green": ramp("#3fa05a"),

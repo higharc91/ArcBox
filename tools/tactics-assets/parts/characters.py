@@ -19,24 +19,32 @@ for _s in ("skin", "eyes", "hair", "cloth1", "cloth2", "trim", "metal", "leather
 
 # layer -> variant -> part factory
 PARTS: dict[str, dict[str, P.Part]] = {
-    "cape": {k: P.cape(k) for k in ("short_cape", "cloak")},
+    "cape": {k: P.cape(k) for k in ("short_cape", "cloak", "pelt", "quiver", "banner_back")},
     "body": {k: P.body(k) for k in ("human", "elf", "half_elf", "gnome", "orc", "dragon", "goblin", "skeleton")},
     "tail": {k: P.tail(k) for k in ("devil", "dragon")},
     "legs": {k: P.legs(k) for k in ("pants", "greaves", "shorts", "skirt")},
     "feet": {k: P.feet(k) for k in ("boots", "sabatons", "sandals")},
     "torso": {k: P.torso(k) for k in ("tunic", "vest", "chain", "plate", "robe", "vestments", "coat", "rags",
-                                         "leather", "scale")},
+                                         "leather", "scale", "tabard", "gi",
+                                         "apron", "dress", "doublet")},
     "beard": {k: P.beard(k) for k in ("short", "full", "braided", "goatee", "moustache", "stubble")},
     "hair": {k: P.hair(k) for k in ("short", "messy", "long", "ponytail", "bun", "mohawk", "braids", "cropped",
                                     "curly", "pixie", "topknot", "twintails")},
     "marks": {k: P.marks(k) for k in ("freckles", "scar", "warpaint", "tattoo", "stripes")},
     "horns": {k: P.horns(k) for k in ("curled", "straight", "ram", "small", "swept")},
     "headgear": {k: P.headgear(k) for k in ("open_helm", "great_helm", "hood", "wizard_hat", "circlet", "bandana", "crown",
-                                               "horned_helm", "feathered_cap")},
+                                               "horned_helm", "feathered_cap", "mask_hood", "winged_helm", "halo",
+                                               "beret", "antlers", "flower_crown", "headband", "straw_hat",
+                                               "cap", "mitre")},
     "weapon": {k: P.weapon(k) for k in ("sword", "greatsword", "axe", "mace", "dagger", "spear", "staff", "bow", "tome", "wand", "rapier", "lute", "warhammer",
-                                           "halberd", "flail", "scimitar", "quarterstaff", "crossbow")},
-    "hands": {k: P.hands(k) for k in ("bare", "gloves", "gauntlets")},
-    "offhand": {k: P.offhand(k) for k in ("round_shield", "kite_shield", "buckler", "lantern", "orb")},
+                                           "halberd", "flail", "scimitar", "quarterstaff", "crossbow",
+                                           "hourglass_staff", "crystal_staff", "holy_staff", "storm_staff",
+                                           "living_staff", "lyre", "pitchfork", "smith_hammer", "broom",
+                                           "tankard", "scroll")},
+    "hands": {k: P.hands(k) for k in ("bare", "gloves", "gauntlets", "wraps")},
+    "offhand": {k: P.offhand(k) for k in ("round_shield", "kite_shield", "buckler", "lantern", "orb",
+                                              "tower_shield", "blade", "dagger", "main_gauche", "bomb",
+                                              "war_horn")},
 }
 
 # Draw order per facing (first = bottom). In the front view the cloak hangs behind the body and the off-hand

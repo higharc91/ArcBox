@@ -1,0 +1,459 @@
+{
+  "font": {
+    "file": "font5x7.png",
+    "glyph": [
+      5,
+      7
+    ],
+    "lineHeight": 9,
+    "glyphs": {
+      "A": {
+        "rect": [
+          0,
+          0,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "B": {
+        "rect": [
+          6,
+          0,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "C": {
+        "rect": [
+          12,
+          0,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "D": {
+        "rect": [
+          18,
+          0,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "E": {
+        "rect": [
+          24,
+          0,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "F": {
+        "rect": [
+          30,
+          0,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "G": {
+        "rect": [
+          36,
+          0,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "H": {
+        "rect": [
+          42,
+          0,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "I": {
+        "rect": [
+          48,
+          0,
+          5,
+          7
+        ],
+        "advance": 4
+      },
+      "J": {
+        "rect": [
+          54,
+          0,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "K": {
+        "rect": [
+          60,
+          0,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "L": {
+        "rect": [
+          66,
+          0,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "M": {
+        "rect": [
+          72,
+          0,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "N": {
+        "rect": [
+          78,
+          0,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "O": {
+        "rect": [
+          84,
+          0,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "P": {
+        "rect": [
+          90,
+          0,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "Q": {
+        "rect": [
+          0,
+          8,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "R": {
+        "rect": [
+          6,
+          8,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "S": {
+        "rect": [
+          12,
+          8,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "T": {
+        "rect": [
+          18,
+          8,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "U": {
+        "rect": [
+          24,
+          8,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "V": {
+        "rect": [
+          30,
+          8,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "W": {
+        "rect": [
+          36,
+          8,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "X": {
+        "rect": [
+          42,
+          8,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "Y": {
+        "rect": [
+          48,
+          8,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "Z": {
+        "rect": [
+          54,
+          8,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "0": {
+        "rect": [
+          60,
+          8,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "1": {
+        "rect": [
+          66,
+          8,
+          5,
+          7
+        ],
+        "advance": 4
+      },
+      "2": {
+        "rect": [
+          72,
+          8,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "3": {
+        "rect": [
+          78,
+          8,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "4": {
+        "rect": [
+          84,
+          8,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "5": {
+        "rect": [
+          90,
+          8,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "6": {
+        "rect": [
+          0,
+          16,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "7": {
+        "rect": [
+          6,
+          16,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "8": {
+        "rect": [
+          12,
+          16,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "9": {
+        "rect": [
+          18,
+          16,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "!": {
+        "rect": [
+          24,
+          16,
+          5,
+          7
+        ],
+        "advance": 2
+      },
+      "?": {
+        "rect": [
+          30,
+          16,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      ".": {
+        "rect": [
+          36,
+          16,
+          5,
+          7
+        ],
+        "advance": 2
+      },
+      ",": {
+        "rect": [
+          42,
+          16,
+          5,
+          7
+        ],
+        "advance": 3
+      },
+      ":": {
+        "rect": [
+          48,
+          16,
+          5,
+          7
+        ],
+        "advance": 2
+      },
+      "-": {
+        "rect": [
+          54,
+          16,
+          5,
+          7
+        ],
+        "advance": 5
+      },
+      "'": {
+        "rect": [
+          60,
+          16,
+          5,
+          7
+        ],
+        "advance": 2
+      },
+      "+": {
+        "rect": [
+          66,
+          16,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "/": {
+        "rect": [
+          72,
+          16,
+          5,
+          7
+        ],
+        "advance": 6
+      },
+      "\u00b7": {
+        "rect": [
+          78,
+          16,
+          5,
+          7
+        ],
+        "advance": 2
+      },
+      " ": {
+        "rect": [
+          84,
+          16,
+          5,
+          7
+        ],
+        "advance": 4
+      }
+    },
+    "note": "white glyphs: tint, or use title styles via the logo pipeline"
+  },
+  "logo": "logo.png",
+  "emblem": "emblem.png",
+  "ribbon": {
+    "file": "ribbon.png",
+    "slice": [
+      14,
+      4,
+      14,
+      4
+    ]
+  },
+  "banners": {
+    "victory": "victory.png",
+    "defeat": "defeat.png",
+    "level_up": "level_up.png",
+    "your_turn": "your_turn.png",
+    "enemy_turn": "enemy_turn.png",
+    "boss": "boss.png",
+    "round": "round.png",
+    "chapter": "chapter.png",
+    "critical": "critical.png",
+    "party_wiped": "party_wiped.png"
+  }
+}

@@ -50,11 +50,12 @@ A player's character is **a name, a race, a class and a look** (`parts/creator.p
 
 | Axis | Decides |
 |---|---|
-| Race (9) | Build, body (ears, tusks, snout), tail, and which skins, hair, beards and horns are on offer |
+| Race (11) | Build, body (ears, tusks, snout), tail, and which skins, hair, beards and horns are on offer |
 | Class (10) | The starting kit: torso, legs, feet, hands, weapon, off-hand, cape, headgear, plus starting colours |
 | Look | The player's picks, limited to what the race offers: body type, skin, eyes, hair style and colour, facial hair, horns, face markings and paint, plus colour changes to the kit |
 
-The races are Human, Elf, Half-Elf, Dwarf, Halfling, Gnome, Half-Orc, Tiefling and Dragonborn.
+The races are Human, Elf, Half-Elf, Dwarf, Halfling, Gnome, Half-Orc, Tiefling, Aasimar, Goliath and
+Dragonborn.
 
 The options are:
 
@@ -72,7 +73,7 @@ The options are:
 See `previews/08-customisation.png`.
 
 `make_character(name, race, class, look)` merges these into a recipe, and rejects picks the race doesn't offer
-(for example, hair on a dragonborn). Any race can take any class, so there are 90 combinations, and
+(for example, hair on a dragonborn). Any race can take any class, so there are 110 combinations, and
 `previews/06-race-class.png` renders every one. `characters/creator.json` exports the races and kits, so the
 phone creator offers exactly these options. The TV draws the name on nameplates and the turn order; the sprite
 doesn't carry it. The creator mockup is `docs/superpowers/mockups/tactics/07-phone-creator.png`.
@@ -111,18 +112,52 @@ directions. In the front facing the weapon hand is on screen-right.
 
 ### Animations
 
-Frame indices are per row. All animations play at the fps given in the manifest.
+There are 23 animations and 79 frames per facing. The manifest gives each animation's frame indices, fps and
+whether it loops (indices are per row; the back row is the same indices plus 79). `previews/04-animations.png` shows
+every one.
 
-| Anim | Frames | Notes |
+| Anim | Frames | Use |
 |---|---|---|
-| idle | 0–1 | loops |
-| walk | 2–5 | loops |
-| attack | 6–8 | overhead swing: swords, axes, maces |
-| thrust | 9–11 | spears, daggers |
-| shoot | 12–14 | bows |
-| cast | 15–17 | staffs, wands, tomes, unarmed |
-| hurt | 18 | |
-| down | 19 | kneeling: the "downed" state |
+| idle | 4, loop | Exploration: breathes, then blinks |
+| ready | 4, loop | Battle stance: weapon up, knees bent |
+| walk | 4, loop | |
+| attack | 5 | Overhead swing (swords, axes, maces, hammers, flails, scimitars): anticipation, wind-up, smear, impact, recover |
+| thrust | 4 | Spears, daggers, rapiers, halberds |
+| shoot | 4 | Bows and crossbows: raise, draw, hold, release |
+| cast | 4 | Staffs, wands, tomes and instruments: gather, raise, channel, release |
+| slam | 5 | Heavy leap attack for two-handers |
+| spin | 4 | Whirlwind cleave |
+| flurry | 6 | Unarmed or dual-wield combo: jab, cross, jab, kick |
+| bash | 3 | Shield bash |
+| block | 2 | |
+| dodge | 2 | |
+| jump | 3 | Ledges, and the monk's leap |
+| item | 3 | Drink a potion, read a scroll |
+| victory | 3, loop | |
+| hurt | 2 | |
+| down | 1 | The "downed" state |
+| rise | 2 | Getting up after a revive |
+| sit | 4, loop | Seated on a bench, log or chair. The game draws the seat |
+| doze | 2, loop | Seated, eyes shut, head nodding (camp at night) |
+| talk | 4, loop | Gesturing in dialogue |
+| wave | 4, loop | Greeting |
+
+Swing frames carry a motion smear, drawn by the weapon layer from the pose's `smear` angle. `build.py`'s
+`ATTACK_FOR` maps each weapon to its basic attack animation.
+
+### Subclasses
+
+There are 30 subclasses (`creator.SUBCLASSES`, three per class), picked at level 3. Each overrides parts of the
+class kit's gear and colours. Beastmaster, Grovekeeper and Fiendbound also name a companion, which the bosses set
+draws. Pass `make_character(..., subclass=id)`.
+
+The previews are `previews/06b-subclasses.png` (front, back and swing for each). The phone's subclass picker reads
+`characters/subclasses.png` and `subclasses.json`.
+
+### Townsfolk
+
+17 NPC presets (`recipes.NPCS`) cover exploration and dialogue. Tools such as a pitchfork, smithing hammer, broom,
+tankard or scroll ride in the weapon slot, so NPCs animate like anyone else.
 
 ### Composing a character (do this once per character or gear change, then cache it)
 
@@ -263,6 +298,37 @@ entry gives:
 - clouds and a star field.
 
 The manifest pairs each biome with a sky.
+
+## Emotes, status overlays and pickups
+
+| Set | What |
+|---|---|
+| `emotes/` | 15 speech and thought bubbles (`!`, `?`, `...`, heart, vote check, leader crown, skill-check die ...). Each pops in, then bobs: play 0–3 once, then loop 2–3. The tail tip is the anchor |
+| `status/` | 18 looping on-unit effects (stunned, sleeping, poisoned, burning, frozen, marked ...). They use the character frame and anchor, so they draw exactly over the unit. `headOffset` adjusts the overhead ones for short and large builds |
+| `pickups/` | Rarity loot beams (additive), a glint, a coin pile and a loot sack. A drop is beam + the item's icon bobbing by `iconBob` + glint |
+
+## World map, titles and the showcase
+
+- **`worldmap/`:** a tileable parchment, 12 location icons, an animated party pin and quest marker, and a generated
+  sample campaign map.
+- **`title/`:** the logo and emblem, moment banners (VICTORY, DEFEAT, LEVEL UP, YOUR TURN, BOSS ...), a chapter
+  ribbon, a 5×7 pixel font with advances, and a title-screen key art.
+- **`parts/showcase.py`:** renders `previews/anim-battle.gif`, a short battle built only from the pack's files. It's
+  the quickest end-to-end check that sets agree on scale, anchors and timing.
+
+## Battle and presentation extras
+
+| Set | What |
+|---|---|
+| `bosses/` | 2×2 dragon, trolls and ogres, golems, four elementals, wraiths, the mimic, and the subclass companions (imp, hound, sapling) with player-colour accents. Same animation contract as beasts, plus `special` |
+| `ambient/` | Environment animation: swaying flora (drop-in replacements for the static props), water, fire and light, interactive objects with named states, particles and weather overlays |
+| `projectiles/` | Arrows, bolts, daggers, rocks and spell projectiles drawn natively in 16 headings (row = heading), so nothing is rotated at runtime |
+| `hazards/` | Persistent tile effects in the UI markers' diamond, with optional `over` layers and gameplay flags (difficult terrain, damage type) |
+| `crests/` | A heraldic shield per class and a medallion per subclass |
+| `gear_icons/` | 24×24 bag icons generated from the gear layers, one atlas per metal tier, keyed `layer/variant` |
+| `creator/` | Picture chips for the phone's Look step, plus each race's skin range |
+| `grades/` | Ten 16-cube colour LUTs (dawn to night, storm, cave, infernal, fey, memory). The manifest includes the post-process shader |
+| `transitions/` | Low-res threshold maps for screen wipes. The manifest includes the shader |
 
 ## Adding a set
 

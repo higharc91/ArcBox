@@ -1,0 +1,896 @@
+{
+  "layout": "each file is one horizontal strip of frames, left to right, all the same size",
+  "blend": {
+    "add": "additive (glows, light): src.rgb * src.a added to the scene",
+    "normal": "ordinary alpha blending (smoke, solid objects, dark magic)"
+  },
+  "layer": {
+    "over": "drawn above units (sort with the target, just in front of it)",
+    "ground": "drawn on the floor under units, like a decal"
+  },
+  "loop": "loop: true repeats frames loopStart..end (loopStart defaults to 0); false plays once and is removed",
+  "attach": {
+    "feet": "anchor goes on the target's ground point (the character's own anchor, 16,37 in its frame)",
+    "body": "anchor goes on the target's chest: 15 px above its ground point",
+    "overhead": "anchor goes just above the target's head: 36 px above its ground point",
+    "projectile": "anchor moves along the flight path; the art faces +x (right), rotate it to the direction",
+    "link": "anchor goes on the source unit's chest (15 px above its ground point); the art runs `span` px along +x to the other unit's chest: rotate it to face that unit and stretch x to the real distance"
+  },
+  "hideUnitFrom": "the unit is not drawn from this frame until it reappears (vanish, teleport)",
+  "unitLift": "per frame, px to raise the unit's sprite (negative lowers it); the last value holds",
+  "scale": "drawn at the characters' pixel scale: show at the same multiple as the sprites",
+  "subclasses": {
+    "vanguard": [
+      "vanguard_shield_wall"
+    ],
+    "weaponmaster": [
+      "weaponmaster_blade_dance"
+    ],
+    "warlord": [
+      "warlord_rally"
+    ],
+    "shadow": [
+      "shadow_shadowstep"
+    ],
+    "trickster": [
+      "trickster_snap_trap"
+    ],
+    "duelist": [
+      "duelist_riposte"
+    ],
+    "evoker": [
+      "evoker_sculpted_nova"
+    ],
+    "chronomancer": [
+      "chronomancer_time_dial"
+    ],
+    "geomancer": [
+      "geomancer_raise",
+      "geomancer_lower"
+    ],
+    "life": [
+      "life_revive"
+    ],
+    "war": [
+      "war_divine_strike"
+    ],
+    "light": [
+      "light_radiant_burst"
+    ],
+    "sharpshooter": [
+      "sharpshooter_deadeye"
+    ],
+    "beastmaster": [
+      "beastmaster_hunt_mark"
+    ],
+    "warden": [
+      "warden_vine_snare"
+    ],
+    "guardian": [
+      "guardian_bulwark"
+    ],
+    "crusader": [
+      "crusader_smite"
+    ],
+    "avenger": [
+      "avenger_vengeance_brand"
+    ],
+    "valor": [
+      "valor_war_horn"
+    ],
+    "lore": [
+      "lore_glyph_echo"
+    ],
+    "siren": [
+      "siren_charm_song"
+    ],
+    "shapeshifter": [
+      "shapeshifter_wild_shape"
+    ],
+    "stormcaller": [
+      "stormcaller_storm"
+    ],
+    "grovekeeper": [
+      "grovekeeper_bloom"
+    ],
+    "hexblade": [
+      "hexblade_cursed_edge"
+    ],
+    "fiendbound": [
+      "fiendbound_infernal_gate"
+    ],
+    "void": [
+      "void_rift_step"
+    ],
+    "open_hand": [
+      "open_hand_palm_strike"
+    ],
+    "windstep": [
+      "windstep_gale_leap"
+    ],
+    "iron_body": [
+      "iron_body_iron_skin"
+    ]
+  },
+  "effects": {
+    "vanguard_shield_wall": {
+      "name": "Shield Wall",
+      "subclass": "vanguard",
+      "class": "fighter",
+      "frame": [
+        48,
+        56
+      ],
+      "frames": 10,
+      "fps": 10,
+      "loop": true,
+      "anchor": [
+        24,
+        42
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "vanguard_shield_wall_gold.png",
+        "azure": "vanguard_shield_wall_azure.png"
+      },
+      "default": "gold",
+      "loopStart": 4,
+      "note": "raised in front of the unit; mirror for the other facings"
+    },
+    "weaponmaster_blade_dance": {
+      "name": "Blade Dance",
+      "subclass": "weaponmaster",
+      "class": "fighter",
+      "frame": [
+        48,
+        48
+      ],
+      "frames": 10,
+      "fps": 16,
+      "loop": false,
+      "anchor": [
+        24,
+        24
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "steel": "weaponmaster_blade_dance_steel.png"
+      },
+      "default": "steel"
+    },
+    "warlord_rally": {
+      "name": "Rally Banner",
+      "subclass": "warlord",
+      "class": "fighter",
+      "frame": [
+        64,
+        76
+      ],
+      "frames": 11,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        32,
+        58
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "royal": "warlord_rally_royal.png"
+      },
+      "default": "royal",
+      "note": "the banner plants behind-left of the unit; mirror for the other facings"
+    },
+    "shadow_shadowstep": {
+      "name": "Shadowstep",
+      "subclass": "shadow",
+      "class": "rogue",
+      "frame": [
+        48,
+        48
+      ],
+      "frames": 9,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        24,
+        43
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "night": "shadow_shadowstep_night.png"
+      },
+      "default": "night",
+      "hideUnitFrom": 2,
+      "note": "play at the start tile (unit hidden from frame 2), then reversed where it reappears behind the target"
+    },
+    "trickster_snap_trap": {
+      "name": "Snap Trap",
+      "subclass": "trickster",
+      "class": "rogue",
+      "frame": [
+        44,
+        40
+      ],
+      "frames": 9,
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        22,
+        31
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "trickster_snap_trap_steel.png"
+      },
+      "default": "steel",
+      "note": "frames 0-1 can hold on a hidden-but-armed trap until something steps on it"
+    },
+    "duelist_riposte": {
+      "name": "Riposte",
+      "subclass": "duelist",
+      "class": "rogue",
+      "frame": [
+        40,
+        32
+      ],
+      "frames": 9,
+      "fps": 18,
+      "loop": false,
+      "anchor": [
+        14,
+        16
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "silver": "duelist_riposte_silver.png"
+      },
+      "default": "silver",
+      "note": "parry in front of the unit, counter-thrust to the right; mirror for a left-facing duelist"
+    },
+    "evoker_sculpted_nova": {
+      "name": "Sculpted Nova",
+      "subclass": "evoker",
+      "class": "wizard",
+      "frame": [
+        64,
+        48
+      ],
+      "frames": 10,
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        32,
+        33
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "evoker_sculpted_nova_fire.png"
+      },
+      "default": "fire",
+      "note": "the cold wedges face front-right and back-left; the game rotates the gaps to where allies stand"
+    },
+    "chronomancer_time_dial": {
+      "name": "Time Dial",
+      "subclass": "chronomancer",
+      "class": "wizard",
+      "frame": [
+        56,
+        32
+      ],
+      "frames": 14,
+      "fps": 12,
+      "loop": true,
+      "anchor": [
+        28,
+        16
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "ground",
+      "variants": {
+        "haste": "chronomancer_time_dial_haste.png",
+        "slow": "chronomancer_time_dial_slow.png"
+      },
+      "default": "haste",
+      "loopStart": 2,
+      "note": "haste plays forward; slow plays the loop frames in reverse"
+    },
+    "geomancer_raise": {
+      "name": "Raise Earth",
+      "subclass": "geomancer",
+      "class": "wizard",
+      "frame": [
+        48,
+        64
+      ],
+      "frames": 10,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        24,
+        54
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "ground",
+      "variants": {
+        "grass": "geomancer_raise_grass.png",
+        "sand": "geomancer_raise_sand.png",
+        "snow": "geomancer_raise_snow.png"
+      },
+      "default": "grass",
+      "unitLift": [
+        0,
+        6,
+        14,
+        19,
+        17,
+        16,
+        16,
+        16,
+        16,
+        16
+      ],
+      "note": "pick the variant of the tile's top; the unit rides up by unitLift and the tile ends two steps higher"
+    },
+    "geomancer_lower": {
+      "name": "Sink Earth",
+      "subclass": "geomancer",
+      "class": "wizard",
+      "frame": [
+        48,
+        48
+      ],
+      "frames": 10,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        24,
+        30
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "ground",
+      "variants": {
+        "grass": "geomancer_lower_grass.png",
+        "sand": "geomancer_lower_sand.png",
+        "snow": "geomancer_lower_snow.png"
+      },
+      "default": "grass",
+      "unitLift": [
+        0,
+        0,
+        -3,
+        -7,
+        -10,
+        -9,
+        -8,
+        -8,
+        -8,
+        -8
+      ],
+      "note": "pick the variant of the tile's top; the unit sinks by unitLift and the tile ends one step lower"
+    },
+    "life_revive": {
+      "name": "Revivify",
+      "subclass": "life",
+      "class": "cleric",
+      "frame": [
+        32,
+        72
+      ],
+      "frames": 12,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        16,
+        66
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "life_revive_holy.png"
+      },
+      "default": "holy",
+      "note": "on a downed ally: they get up as the feather touches (frame 6)"
+    },
+    "war_divine_strike": {
+      "name": "Divine Strike",
+      "subclass": "war",
+      "class": "cleric",
+      "frame": [
+        48,
+        48
+      ],
+      "frames": 9,
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        20,
+        24
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "war_divine_strike_gold.png"
+      },
+      "default": "gold"
+    },
+    "light_radiant_burst": {
+      "name": "Radiant Burst",
+      "subclass": "light",
+      "class": "cleric",
+      "frame": [
+        64,
+        56
+      ],
+      "frames": 10,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        32,
+        44
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "dawn": "light_radiant_burst_dawn.png"
+      },
+      "default": "dawn",
+      "note": "the ring of light reaches about two tiles; hidden units in it are revealed"
+    },
+    "sharpshooter_deadeye": {
+      "name": "Deadeye",
+      "subclass": "sharpshooter",
+      "class": "ranger",
+      "frame": [
+        80,
+        40
+      ],
+      "frames": 11,
+      "fps": 16,
+      "loop": false,
+      "anchor": [
+        64,
+        20
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "scope": "sharpshooter_deadeye_scope.png"
+      },
+      "default": "scope",
+      "note": "on the target; the streak arrives from 64 px to the left (two tiles); mirror or rotate to the shooter"
+    },
+    "beastmaster_hunt_mark": {
+      "name": "Hunt Mark",
+      "subclass": "beastmaster",
+      "class": "ranger",
+      "frame": [
+        32,
+        34
+      ],
+      "frames": 10,
+      "fps": 10,
+      "loop": true,
+      "anchor": [
+        16,
+        30
+      ],
+      "attach": "overhead",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "amber": "beastmaster_hunt_mark_amber.png"
+      },
+      "default": "amber",
+      "loopStart": 4,
+      "note": "marks the companion's target until it strikes"
+    },
+    "warden_vine_snare": {
+      "name": "Vine Snare",
+      "subclass": "warden",
+      "class": "ranger",
+      "frame": [
+        48,
+        44
+      ],
+      "frames": 10,
+      "fps": 12,
+      "loop": true,
+      "anchor": [
+        24,
+        34
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "root": "warden_vine_snare_root.png"
+      },
+      "default": "root",
+      "loopStart": 6
+    },
+    "guardian_bulwark": {
+      "name": "Bulwark",
+      "subclass": "guardian",
+      "class": "paladin",
+      "frame": [
+        80,
+        48
+      ],
+      "frames": 10,
+      "fps": 12,
+      "loop": true,
+      "anchor": [
+        8,
+        30
+      ],
+      "attach": "link",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "azure": "guardian_bulwark_azure.png",
+        "holy": "guardian_bulwark_holy.png"
+      },
+      "default": "azure",
+      "loopStart": 4,
+      "span": 64,
+      "note": "from the guardian's chest to the covered ally's; rotate to the ally and stretch x to the distance"
+    },
+    "crusader_smite": {
+      "name": "Smite",
+      "subclass": "crusader",
+      "class": "paladin",
+      "frame": [
+        48,
+        88
+      ],
+      "frames": 11,
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        24,
+        82
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "radiant": "crusader_smite_radiant.png"
+      },
+      "default": "radiant"
+    },
+    "avenger_vengeance_brand": {
+      "name": "Vengeance Brand",
+      "subclass": "avenger",
+      "class": "paladin",
+      "frame": [
+        32,
+        36
+      ],
+      "frames": 11,
+      "fps": 10,
+      "loop": true,
+      "anchor": [
+        16,
+        32
+      ],
+      "attach": "overhead",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "ember": "avenger_vengeance_brand_ember.png"
+      },
+      "default": "ember",
+      "loopStart": 5,
+      "note": "hangs over whoever hit an ally until the avenger collects"
+    },
+    "valor_war_horn": {
+      "name": "War Horn",
+      "subclass": "valor",
+      "class": "bard",
+      "frame": [
+        64,
+        60
+      ],
+      "frames": 10,
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        32,
+        35
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "brass": "valor_war_horn_brass.png"
+      },
+      "default": "brass"
+    },
+    "lore_glyph_echo": {
+      "name": "Cutting Echo",
+      "subclass": "lore",
+      "class": "bard",
+      "frame": [
+        48,
+        48
+      ],
+      "frames": 12,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        24,
+        26
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "lore_glyph_echo_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "siren_charm_song": {
+      "name": "Siren Song",
+      "subclass": "siren",
+      "class": "bard",
+      "frame": [
+        56,
+        48
+      ],
+      "frames": 12,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        16,
+        26
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "charm": "siren_charm_song_charm.png"
+      },
+      "default": "charm",
+      "note": "sings to the right; mirror for a left-facing bard"
+    },
+    "shapeshifter_wild_shape": {
+      "name": "Wild Shape",
+      "subclass": "shapeshifter",
+      "class": "druid",
+      "frame": [
+        48,
+        52
+      ],
+      "frames": 11,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        24,
+        44
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "spring": "shapeshifter_wild_shape_spring.png"
+      },
+      "default": "spring",
+      "note": "swap the unit for its beast form at frame 5, inside the puff"
+    },
+    "stormcaller_storm": {
+      "name": "Call Storm",
+      "subclass": "stormcaller",
+      "class": "druid",
+      "frame": [
+        64,
+        84
+      ],
+      "frames": 11,
+      "fps": 10,
+      "loop": true,
+      "anchor": [
+        32,
+        72
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "storm": "stormcaller_storm_storm.png"
+      },
+      "default": "storm",
+      "loopStart": 3,
+      "note": "a zone over about one tile around its centre; lightning strikes once a loop"
+    },
+    "grovekeeper_bloom": {
+      "name": "Grove Bloom",
+      "subclass": "grovekeeper",
+      "class": "druid",
+      "frame": [
+        48,
+        48
+      ],
+      "frames": 12,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        24,
+        36
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "blossom": "grovekeeper_bloom_blossom.png"
+      },
+      "default": "blossom",
+      "note": "on the summon's tile; swap the sapling companion in on the last frame"
+    },
+    "hexblade_cursed_edge": {
+      "name": "Cursed Edge",
+      "subclass": "hexblade",
+      "class": "warlock",
+      "frame": [
+        52,
+        52
+      ],
+      "frames": 9,
+      "fps": 16,
+      "loop": false,
+      "anchor": [
+        20,
+        26
+      ],
+      "attach": "body",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "hex": "hexblade_cursed_edge_hex.png",
+        "fel": "hexblade_cursed_edge_fel.png"
+      },
+      "default": "hex",
+      "note": "mirror for a left-facing attacker"
+    },
+    "fiendbound_infernal_gate": {
+      "name": "Infernal Gate",
+      "subclass": "fiendbound",
+      "class": "warlock",
+      "frame": [
+        48,
+        64
+      ],
+      "frames": 12,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        24,
+        52
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "hellfire": "fiendbound_infernal_gate_hellfire.png"
+      },
+      "default": "hellfire",
+      "note": "on the summon's tile; swap the imp in at frame 7 as the column falls"
+    },
+    "void_rift_step": {
+      "name": "Rift Step",
+      "subclass": "void",
+      "class": "warlock",
+      "frame": [
+        48,
+        52
+      ],
+      "frames": 10,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        24,
+        44
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "void": "void_rift_step_void.png"
+      },
+      "default": "void",
+      "hideUnitFrom": 4,
+      "note": "play at the start tile (unit gone from frame 4), then reversed at the destination; on an enemy it is the pull"
+    },
+    "open_hand_palm_strike": {
+      "name": "Quivering Palm",
+      "subclass": "open_hand",
+      "class": "monk",
+      "frame": [
+        56,
+        40
+      ],
+      "frames": 9,
+      "fps": 18,
+      "loop": false,
+      "anchor": [
+        14,
+        20
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "ki": "open_hand_palm_strike_ki.png"
+      },
+      "default": "ki",
+      "note": "strikes to the right; mirror for a left-facing monk"
+    },
+    "windstep_gale_leap": {
+      "name": "Gale Leap",
+      "subclass": "windstep",
+      "class": "monk",
+      "frame": [
+        56,
+        60
+      ],
+      "frames": 10,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        28,
+        50
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gale": "windstep_gale_leap_gale.png"
+      },
+      "default": "gale"
+    },
+    "iron_body_iron_skin": {
+      "name": "Iron Skin",
+      "subclass": "iron_body",
+      "class": "monk",
+      "frame": [
+        40,
+        48
+      ],
+      "frames": 10,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        20,
+        24
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "steel": "iron_body_iron_skin_steel.png"
+      },
+      "default": "steel",
+      "note": "the counter flash is on the front-right; mirror for the other facings"
+    }
+  }
+}

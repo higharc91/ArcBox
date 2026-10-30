@@ -1,0 +1,34 @@
+{
+  "id": "child",
+  "name": "Village Child",
+  "race": null,
+  "class": null,
+  "build": "short",
+  "layers": {
+    "body": "human",
+    "hair": "messy",
+    "torso": "tunic",
+    "legs": "shorts",
+    "feet": "sandals",
+    "hands": "bare"
+  },
+  "palette": {
+    "eyes": "eyes/dark",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "horn": "horn/ivory",
+    "paint": "paint/woad",
+    "skin": "skin/fair",
+    "hair": "hair/auburn",
+    "cloth1": "cloth/sky",
+    "cloth2": "cloth/ivory",
+    "blade": "metal/steel"
+  },
+  "tags": [
+    "npc"
+  ],
+  "sheet": "presets/child.png"
+}

@@ -1,6 +1,6 @@
 """Beasts: monsters that don't fit the humanoid rig. Wolves, boars and bears share a quadruped rig; spiders, slimes,
-bats and the drake have their own small drawings. All use 48x48 frames anchored at (24, 44), the same animation
-names as characters (idle, walk, attack, hurt, down) and the same two facings (front, back; the game mirrors them),
+bats and the drake have their own small drawings. All use 48x48 frames anchored at (24, 44), animation names shared
+with characters where they overlap (idle, walk, attack, hurt, down) plus a beast "special" (pounce, charge, dive) and the same two facings (front, back; the game mirrors them),
 so the battle code treats every unit alike.
 
 Bodies are lit blobs (props.blob) with fur flecks, legs are posed per frame, and every species ships in palette
@@ -29,10 +29,10 @@ for _s in ("fur", "fur2", "eyes", "horn", "mouth", "wing", "glow"):
     SLOTS.id(_s)
 
 ANIMS: dict[str, tuple[float, bool, int]] = {   # name -> (fps, loop, frames)
-    "idle": (3.0, True, 2), "walk": (8.0, True, 4), "attack": (10.0, False, 3), "hurt": (6.0, False, 1),
-    "down": (1.0, False, 1),
+    "idle": (4.0, True, 4), "walk": (8.0, True, 4), "attack": (11.0, False, 4), "special": (10.0, False, 4),
+    "hurt": (8.0, False, 2), "down": (1.0, False, 1),
 }
-ORDER = ["idle", "walk", "attack", "hurt", "down"]
+ORDER = ["idle", "walk", "attack", "special", "hurt", "down"]
 
 BEAST_RAMPS = {
     "wolf_grey": ramp("#8a8f9c", shift=0.05), "wolf_timber": ramp("#8a6a4a", shift=0.06),
@@ -46,6 +46,9 @@ BEAST_RAMPS = {
     "slime_magma": ramp("#ff7b2b", shift=0.08, spread=0.8),
     "bat": ramp("#4a3a52", shift=0.06, spread=1.1), "bat_wing": ramp("#6a4a62", shift=0.06),
     "ivory": ramp("#e3d8bd", shift=0.05, spread=0.85), "mouth": ramp("#8a2a36", shift=0.06),
+    # Druid wild shapes: the beast in leaf-and-bark spirit colours, so allies read as allies
+    "wild_fur": ramp("#6f9a52", shift=0.08), "wild_belly": ramp("#c9d98a", shift=0.06, spread=0.8),
+    "wild_bark": ramp("#7a5a3a", shift=0.06),
 }
 
 
@@ -64,16 +67,25 @@ class Pose:
     jaw: bool = False                   # mouth open (attack)
     down: bool = False
     hurt: bool = False
+    blink: bool = False
 
 
 POSES: dict[str, list[Pose]] = {
-    "idle": [Pose(), Pose(bob=1, head=(0, 1))],
+    # breathe in, out, hold, blink: beasts idle as much as heroes do
+    "idle": [Pose(), Pose(bob=1, head=(0, 1)), Pose(bob=1, head=(0, 1)), Pose(blink=True)],
     "walk": [Pose(legs=(3, -3, -3, 3), lift=(0, 2, 2, 0)), Pose(bob=1, legs=(1, -1, -1, 1)),
              Pose(legs=(-3, 3, 3, -3), lift=(2, 0, 0, 2)), Pose(bob=1, legs=(-1, 1, 1, -1))],
+    # anticipation (coil back), lunge, bite at full reach, recover
     "attack": [Pose(lunge=-2, bob=1, head=(-1, 1), legs=(-2, -2, -2, -2)),
-               Pose(lunge=4, bob=-1, head=(3, -1), jaw=True, legs=(4, 1, 3, 0), lift=(2, 0, 2, 0)),
-               Pose(lunge=2, head=(1, 0), jaw=True, legs=(2, 0, 1, 0))],
-    "hurt": [Pose(lunge=-3, bob=1, head=(-2, -1), hurt=True)],
+               Pose(lunge=3, bob=-1, head=(2, -1), jaw=True, legs=(4, 1, 3, 0), lift=(2, 0, 2, 0)),
+               Pose(lunge=5, head=(4, 0), jaw=True, legs=(4, 2, 3, 1)),
+               Pose(lunge=2, head=(1, 0), legs=(2, 0, 1, 0))],
+    # special: crouch, leap clear of the ground, land on the target, recover (pounce, charge, dive, breath)
+    "special": [Pose(lunge=-3, bob=2, head=(-1, 2), legs=(-2, -2, -2, -2)),
+                Pose(lunge=4, bob=-5, head=(2, -2), jaw=True, legs=(5, -3, 4, -3), lift=(4, 3, 4, 3)),
+                Pose(lunge=6, bob=1, head=(3, 1), jaw=True, legs=(5, 2, 4, 1)),
+                Pose(lunge=2, head=(1, 0), legs=(1, 0, 1, 0))],
+    "hurt": [Pose(lunge=-3, bob=1, head=(-2, -1), hurt=True), Pose(lunge=-1, head=(-1, 0), hurt=True)],
     "down": [Pose(bob=6, head=(1, 4), down=True)],
 }
 
@@ -179,7 +191,7 @@ def quad(species: str) -> Callable[[str, Pose], Canvas]:
         if q.tusks:
             c.px(sx + q.snout - 1, hy + 2, "horn", 5)
             c.px(sx + q.snout - 1, hy + 1, "horn", 4)
-        if p.down or p.hurt:
+        if p.down or p.hurt or p.blink:
             c.line(hx, hy - 1, hx + 2, hy - 1, "eyes", 0)
         else:
             c.px(hx + 1, hy - 1, "eyes", 4)
@@ -222,7 +234,7 @@ def spider(direction: str, p: Pose) -> Canvas:
         c.px(cx - 8 + k * 2, by - 6 + k, "fur2", 3)
     blob(c, "fur", cx + 4, by + 1, 6, 4.5, k=2.0)            # cephalothorax
     for ex, ey in ((cx + 7, by), (cx + 8, by + 1), (cx + 6, by - 1), (cx + 9, by), (cx + 7, by - 2)):
-        c.px(ex, ey, "glow", 4 if not p.hurt else 2)
+        c.px(ex, ey, "glow", 2 if (p.hurt or p.blink) else 4)
     c.line(cx + 9, by + 3, cx + 11, by + (6 if p.jaw else 4), "horn", 4)          # fangs
     c.line(cx + 7, by + 4, cx + 8, by + (7 if p.jaw else 5), "horn", 4)
     return _back(c) if direction == "back" else c
@@ -244,7 +256,7 @@ def slime(direction: str, p: Pose) -> Canvas:
     c.rect(cx - rx * 0.5, cy - ry * 0.55, cx - rx * 0.5 + 2, cy - ry * 0.55, "fur", 5)   # gloss
     c.px(cx - rx * 0.5, cy - ry * 0.55 + 1, "fur", 5)
     ex = cx + 2
-    if p.down or p.hurt:
+    if p.down or p.hurt or p.blink:
         c.line(ex - 3, cy, ex - 1, cy, "eyes", 0)
         c.line(ex + 2, cy, ex + 4, cy, "eyes", 0)
     else:
@@ -337,7 +349,9 @@ CATALOGUE: list[Beast] = [
         "dire": _v(fur="beast/wolf_dire", fur2="beast/belly_grey", eyes="eyes/red", horn="beast/ivory",
                    mouth="beast/mouth"),
         "frost": _v(fur="beast/wolf_frost", fur2="beast/belly_grey", eyes="eyes/blue", horn="beast/ivory",
-                    mouth="beast/mouth")}, ["beast"]),
+                    mouth="beast/mouth"),
+        "wildshape": _v(fur="beast/wild_fur", fur2="beast/wild_belly", eyes="magic/nature", horn="beast/ivory",
+                        mouth="beast/mouth")}, ["beast", "wildshape"]),
     Beast("boar", "Boar", quad("boar"), {
         "brown": _v(fur="beast/boar", fur2="beast/belly_light", eyes="eyes/red", horn="beast/ivory",
                     mouth="beast/mouth"),
@@ -349,7 +363,9 @@ CATALOGUE: list[Beast] = [
         "black": _v(fur="beast/bear_black", fur2="beast/bear_brown", eyes="eyes/amber", horn="beast/ivory",
                     mouth="beast/mouth"),
         "polar": _v(fur="beast/bear_polar", fur2="beast/belly_grey", eyes="eyes/dark", horn="beast/ivory",
-                    mouth="beast/mouth")}, ["beast", "large"]),
+                    mouth="beast/mouth"),
+        "wildshape": _v(fur="beast/wild_bark", fur2="beast/wild_fur", eyes="magic/nature", horn="beast/ivory",
+                        mouth="beast/mouth")}, ["beast", "large", "wildshape"]),
     Beast("spider", "Giant Spider", spider, {
         "black": _v(fur="beast/spider", fur2="beast/spider_red", glow="magic/blood", horn="beast/ivory"),
         "red": _v(fur="beast/spider_red", fur2="beast/ivory", glow="magic/fire", horn="beast/ivory")}, ["beast"]),
@@ -417,7 +433,7 @@ def build() -> None:
     rows = []
     for b in CATALOGUE:
         sh = sheet(b, next(iter(b.variants)))
-        rows.append(Tile(strip(sh.frames[:n], 1, gap=2), b.name, "idle · walk · attack · hurt · down"))
+        rows.append(Tile(strip(sh.frames[:n], 1, gap=2), b.name, " · ".join(ORDER)))
     save(contact_sheet("Beasts · animations", rows, columns=1, zoom=3), PREVIEWS / "18-beasts-anims.png")
 
     from arcpix.anim import Actor, stage_gif
@@ -428,5 +444,7 @@ def build() -> None:
     beats = [("Idle", [anims["idle"]["frames"] * 3] * k, 330), ("Walk", [anims["walk"]["frames"] * 3] * k, 125),
              ("Walk · away", [[f + n for f in anims["walk"]["frames"]] * 3] * k, 125),
              ("Attack", [[0, 0] + [f for f in atk for _ in range(2)] + [atk[-1]] * 3] * k, 90),
-             ("Hurt", [anims["hurt"]["frames"] * 6 + [0, 0, 0]] * k, 90), ("Down", [anims["down"]["frames"] * 10] * k, 90)]
+             ("Special", [[0, 0] + [f for f in anims["special"]["frames"] for _ in range(2)] + [0, 0]] * k, 90),
+             ("Hurt", [[f for f in anims["hurt"]["frames"] for _ in range(3)] + [0, 0, 0]] * k, 90),
+             ("Down", [anims["down"]["frames"] * 10] * k, 90)]
     stage_gif(PREVIEWS / "anim-beasts.gif", "Beasts", actors, beats, zoom=3, columns=4, cell_w=56, cell_h=56)

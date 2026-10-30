@@ -1,0 +1,37 @@
+{
+  "id": "farmer",
+  "name": "Farmer",
+  "race": null,
+  "class": null,
+  "build": "standard",
+  "layers": {
+    "body": "human",
+    "hair": "messy",
+    "beard": "stubble",
+    "headgear": "straw_hat",
+    "torso": "tunic",
+    "legs": "pants",
+    "feet": "boots",
+    "weapon": "pitchfork",
+    "hands": "bare"
+  },
+  "palette": {
+    "eyes": "eyes/dark",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "horn": "horn/ivory",
+    "paint": "paint/woad",
+    "skin": "skin/tan",
+    "hair": "hair/blonde",
+    "cloth1": "cloth/sand",
+    "cloth2": "terrain/sand",
+    "blade": "metal/iron"
+  },
+  "tags": [
+    "npc"
+  ],
+  "sheet": "presets/farmer.png"
+}

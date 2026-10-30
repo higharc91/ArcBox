@@ -1,0 +1,406 @@
+{
+  "thumb": [
+    24,
+    24
+  ],
+  "file": "thumbs.png",
+  "groups": {
+    "race": {
+      "human": [
+        0,
+        0,
+        24,
+        24
+      ],
+      "elf": [
+        24,
+        0,
+        24,
+        24
+      ],
+      "half_elf": [
+        48,
+        0,
+        24,
+        24
+      ],
+      "dwarf": [
+        72,
+        0,
+        24,
+        24
+      ],
+      "halfling": [
+        96,
+        0,
+        24,
+        24
+      ],
+      "gnome": [
+        120,
+        0,
+        24,
+        24
+      ],
+      "half_orc": [
+        144,
+        0,
+        24,
+        24
+      ],
+      "tiefling": [
+        168,
+        0,
+        24,
+        24
+      ],
+      "aasimar": [
+        192,
+        0,
+        24,
+        24
+      ],
+      "goliath": [
+        216,
+        0,
+        24,
+        24
+      ],
+      "dragonborn": [
+        240,
+        0,
+        24,
+        24
+      ]
+    },
+    "body_type": {
+      "masculine": [
+        264,
+        0,
+        24,
+        24
+      ],
+      "feminine": [
+        0,
+        24,
+        24,
+        24
+      ]
+    },
+    "hair": {
+      "short": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "messy": [
+        48,
+        24,
+        24,
+        24
+      ],
+      "long": [
+        72,
+        24,
+        24,
+        24
+      ],
+      "ponytail": [
+        96,
+        24,
+        24,
+        24
+      ],
+      "bun": [
+        120,
+        24,
+        24,
+        24
+      ],
+      "mohawk": [
+        144,
+        24,
+        24,
+        24
+      ],
+      "braids": [
+        168,
+        24,
+        24,
+        24
+      ],
+      "cropped": [
+        192,
+        24,
+        24,
+        24
+      ],
+      "curly": [
+        216,
+        24,
+        24,
+        24
+      ],
+      "pixie": [
+        240,
+        24,
+        24,
+        24
+      ],
+      "topknot": [
+        264,
+        24,
+        24,
+        24
+      ],
+      "twintails": [
+        0,
+        48,
+        24,
+        24
+      ],
+      "none": [
+        24,
+        48,
+        24,
+        24
+      ]
+    },
+    "beard": {
+      "short": [
+        48,
+        48,
+        24,
+        24
+      ],
+      "full": [
+        72,
+        48,
+        24,
+        24
+      ],
+      "braided": [
+        96,
+        48,
+        24,
+        24
+      ],
+      "goatee": [
+        120,
+        48,
+        24,
+        24
+      ],
+      "moustache": [
+        144,
+        48,
+        24,
+        24
+      ],
+      "stubble": [
+        168,
+        48,
+        24,
+        24
+      ]
+    },
+    "horns": {
+      "curled": [
+        192,
+        48,
+        24,
+        24
+      ],
+      "straight": [
+        216,
+        48,
+        24,
+        24
+      ],
+      "ram": [
+        240,
+        48,
+        24,
+        24
+      ],
+      "small": [
+        264,
+        48,
+        24,
+        24
+      ]
+    },
+    "dragon_horns": {
+      "swept": [
+        0,
+        72,
+        24,
+        24
+      ],
+      "straight": [
+        24,
+        72,
+        24,
+        24
+      ],
+      "small": [
+        48,
+        72,
+        24,
+        24
+      ]
+    },
+    "marks": {
+      "freckles": [
+        72,
+        72,
+        24,
+        24
+      ],
+      "scar": [
+        96,
+        72,
+        24,
+        24
+      ],
+      "warpaint": [
+        120,
+        72,
+        24,
+        24
+      ],
+      "tattoo": [
+        144,
+        72,
+        24,
+        24
+      ],
+      "stripes": [
+        168,
+        72,
+        24,
+        24
+      ]
+    }
+  },
+  "skins": {
+    "human": {
+      "file": "skins/human.png",
+      "order": [
+        "porcelain",
+        "fair",
+        "tan",
+        "olive",
+        "brown",
+        "deep"
+      ]
+    },
+    "elf": {
+      "file": "skins/elf.png",
+      "order": [
+        "porcelain",
+        "fair",
+        "tan",
+        "olive",
+        "brown",
+        "deep"
+      ]
+    },
+    "half_elf": {
+      "file": "skins/half_elf.png",
+      "order": [
+        "porcelain",
+        "fair",
+        "tan",
+        "olive",
+        "brown",
+        "deep"
+      ]
+    },
+    "dwarf": {
+      "file": "skins/dwarf.png",
+      "order": [
+        "fair",
+        "tan",
+        "olive",
+        "brown",
+        "deep"
+      ]
+    },
+    "halfling": {
+      "file": "skins/halfling.png",
+      "order": [
+        "porcelain",
+        "fair",
+        "tan",
+        "olive",
+        "brown",
+        "deep"
+      ]
+    },
+    "gnome": {
+      "file": "skins/gnome.png",
+      "order": [
+        "porcelain",
+        "fair",
+        "tan",
+        "olive",
+        "brown",
+        "deep"
+      ]
+    },
+    "half_orc": {
+      "file": "skins/half_orc.png",
+      "order": [
+        "orc",
+        "orc_grey",
+        "orc_olive",
+        "goblin"
+      ]
+    },
+    "tiefling": {
+      "file": "skins/tiefling.png",
+      "order": [
+        "tiefling",
+        "infernal",
+        "lilac",
+        "ash"
+      ]
+    },
+    "aasimar": {
+      "file": "skins/aasimar.png",
+      "order": [
+        "celestial_gold",
+        "celestial_silver",
+        "celestial_bronze",
+        "porcelain",
+        "brown"
+      ]
+    },
+    "goliath": {
+      "file": "skins/goliath.png",
+      "order": [
+        "stone_grey",
+        "stone_blue",
+        "stone_umber"
+      ]
+    },
+    "dragonborn": {
+      "file": "skins/dragonborn.png",
+      "order": [
+        "dragon_red",
+        "dragon_blue",
+        "dragon_green",
+        "dragon_black",
+        "dragon_white",
+        "dragon_gold",
+        "dragon_bronze",
+        "dragon_silver",
+        "dragon_copper",
+        "dragon_brass"
+      ]
+    }
+  },
+  "note": "draw at 2x on the phone; each thumbnail is the option drawn by the real layers"
+}

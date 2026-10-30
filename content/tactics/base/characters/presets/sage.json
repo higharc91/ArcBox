@@ -1,0 +1,37 @@
+{
+  "id": "sage",
+  "name": "Old Sage",
+  "race": null,
+  "class": null,
+  "build": "standard",
+  "layers": {
+    "body": "human",
+    "beard": "braided",
+    "hair": "long",
+    "headgear": "beret",
+    "torso": "robe",
+    "legs": "skirt",
+    "feet": "sandals",
+    "weapon": "tome",
+    "hands": "bare"
+  },
+  "palette": {
+    "eyes": "eyes/dark",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "horn": "horn/ivory",
+    "paint": "paint/woad",
+    "skin": "skin/tan",
+    "hair": "hair/white",
+    "cloth1": "cloth/navy",
+    "cloth2": "cloth/ochre",
+    "blade": "metal/steel"
+  },
+  "tags": [
+    "npc"
+  ],
+  "sheet": "presets/sage.png"
+}

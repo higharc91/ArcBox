@@ -79,7 +79,8 @@
         "amber",
         "violet",
         "red",
-        "gold"
+        "gold",
+        "radiant"
       ],
       "default": {
         "skin": "tan",
@@ -144,7 +145,8 @@
         "amber",
         "violet",
         "red",
-        "gold"
+        "gold",
+        "radiant"
       ],
       "default": {
         "skin": "porcelain",
@@ -214,7 +216,8 @@
         "amber",
         "violet",
         "red",
-        "gold"
+        "gold",
+        "radiant"
       ],
       "default": {
         "skin": "fair",
@@ -286,7 +289,8 @@
         "amber",
         "violet",
         "red",
-        "gold"
+        "gold",
+        "radiant"
       ],
       "default": {
         "skin": "tan",
@@ -353,7 +357,8 @@
         "amber",
         "violet",
         "red",
-        "gold"
+        "gold",
+        "radiant"
       ],
       "default": {
         "skin": "olive",
@@ -424,7 +429,8 @@
         "amber",
         "violet",
         "red",
-        "gold"
+        "gold",
+        "radiant"
       ],
       "default": {
         "skin": "fair",
@@ -492,7 +498,8 @@
         "amber",
         "violet",
         "red",
-        "gold"
+        "gold",
+        "radiant"
       ],
       "default": {
         "skin": "orc",
@@ -568,7 +575,8 @@
         "amber",
         "violet",
         "red",
-        "gold"
+        "gold",
+        "radiant"
       ],
       "default": {
         "skin": "tiefling",
@@ -582,6 +590,143 @@
         "Darkvision",
         "Hellish resistance",
         "Infernal legacy"
+      ]
+    },
+    "aasimar": {
+      "name": "Aasimar",
+      "build": "standard",
+      "body": "human",
+      "skins": [
+        "celestial_gold",
+        "celestial_silver",
+        "celestial_bronze",
+        "porcelain",
+        "brown"
+      ],
+      "hair": [
+        "short",
+        "messy",
+        "long",
+        "ponytail",
+        "bun",
+        "mohawk",
+        "braids",
+        "cropped",
+        "curly",
+        "pixie",
+        "topknot",
+        "twintails"
+      ],
+      "hairColours": [
+        "black",
+        "brown",
+        "chestnut",
+        "auburn",
+        "copper",
+        "blonde",
+        "platinum",
+        "silver",
+        "white",
+        "teal",
+        "violet",
+        "crimson"
+      ],
+      "beards": [
+        "short",
+        "full"
+      ],
+      "horns": [],
+      "hornsRequired": false,
+      "hornColours": [],
+      "tail": null,
+      "eyes": [
+        "dark",
+        "blue",
+        "green",
+        "amber",
+        "violet",
+        "red",
+        "gold",
+        "radiant"
+      ],
+      "default": {
+        "skin": "celestial_gold",
+        "hair": "long",
+        "hair_colour": "chestnut",
+        "eyes": "radiant"
+      },
+      "traits": [
+        "Darkvision",
+        "Healing hands",
+        "Radiant soul"
+      ]
+    },
+    "goliath": {
+      "name": "Goliath",
+      "build": "large",
+      "body": "human",
+      "skins": [
+        "stone_grey",
+        "stone_blue",
+        "stone_umber"
+      ],
+      "hair": [
+        "short",
+        "messy",
+        "long",
+        "ponytail",
+        "bun",
+        "mohawk",
+        "braids",
+        "cropped",
+        "curly",
+        "pixie",
+        "topknot",
+        "twintails"
+      ],
+      "hairColours": [
+        "black",
+        "brown",
+        "chestnut",
+        "auburn",
+        "copper",
+        "blonde",
+        "platinum",
+        "silver",
+        "white",
+        "teal",
+        "violet",
+        "crimson"
+      ],
+      "beards": [
+        "short",
+        "braided"
+      ],
+      "horns": [],
+      "hornsRequired": false,
+      "hornColours": [],
+      "tail": null,
+      "eyes": [
+        "dark",
+        "blue",
+        "green",
+        "amber",
+        "violet",
+        "red",
+        "gold",
+        "radiant"
+      ],
+      "default": {
+        "skin": "stone_grey",
+        "hair": "none",
+        "eyes": "blue",
+        "marks": "tattoo",
+        "paint": "kohl"
+      },
+      "traits": [
+        "Stone's endurance",
+        "Powerful build",
+        "Mountain born"
       ]
     },
     "dragonborn": {
@@ -624,7 +769,8 @@
         "amber",
         "violet",
         "red",
-        "gold"
+        "gold",
+        "radiant"
       ],
       "default": {
         "skin": "dragon_bronze",
@@ -653,7 +799,12 @@
       "colours": {
         "cloth1": "cloth/steel_blue",
         "cloth2": "cloth/slate"
-      }
+      },
+      "subclasses": [
+        "vanguard",
+        "weaponmaster",
+        "warlord"
+      ]
     },
     "rogue": {
       "name": "Rogue",
@@ -671,7 +822,12 @@
         "cloth1": "cloth/charcoal",
         "cloth2": "cloth/slate",
         "leather": "leather/dark"
-      }
+      },
+      "subclasses": [
+        "shadow",
+        "trickster",
+        "duelist"
+      ]
     },
     "wizard": {
       "name": "Wizard",
@@ -688,7 +844,12 @@
         "cloth1": "cloth/navy",
         "cloth2": "cloth/sky",
         "magic": "magic/arcane"
-      }
+      },
+      "subclasses": [
+        "evoker",
+        "chronomancer",
+        "geomancer"
+      ]
     },
     "cleric": {
       "name": "Cleric",
@@ -705,7 +866,12 @@
         "cloth1": "cloth/ivory",
         "cloth2": "cloth/ochre",
         "magic": "magic/holy"
-      }
+      },
+      "subclasses": [
+        "life",
+        "war",
+        "light"
+      ]
     },
     "ranger": {
       "name": "Ranger",
@@ -721,7 +887,12 @@
       "colours": {
         "cloth1": "cloth/forest",
         "cloth2": "cloth/sand"
-      }
+      },
+      "subclasses": [
+        "sharpshooter",
+        "beastmaster",
+        "warden"
+      ]
     },
     "paladin": {
       "name": "Paladin",
@@ -738,7 +909,12 @@
         "cloth1": "cloth/ivory",
         "cloth2": "cloth/sky",
         "metal": "metal/silver"
-      }
+      },
+      "subclasses": [
+        "guardian",
+        "crusader",
+        "avenger"
+      ]
     },
     "bard": {
       "name": "Bard",
@@ -755,7 +931,12 @@
         "cloth1": "cloth/teal",
         "cloth2": "cloth/ochre",
         "wood": "wood/pale"
-      }
+      },
+      "subclasses": [
+        "valor",
+        "lore",
+        "siren"
+      ]
     },
     "druid": {
       "name": "Druid",
@@ -773,7 +954,12 @@
         "cloth2": "cloth/forest",
         "magic": "magic/nature",
         "wood": "wood/dark"
-      }
+      },
+      "subclasses": [
+        "shapeshifter",
+        "stormcaller",
+        "grovekeeper"
+      ]
     },
     "warlock": {
       "name": "Warlock",
@@ -791,7 +977,12 @@
         "cloth2": "cloth/charcoal",
         "trim": "metal/dark",
         "magic": "magic/shadow"
-      }
+      },
+      "subclasses": [
+        "hexblade",
+        "fiendbound",
+        "void"
+      ]
     },
     "monk": {
       "name": "Monk",
@@ -805,7 +996,518 @@
       "colours": {
         "cloth1": "cloth/ochre",
         "cloth2": "cloth/rust"
-      }
+      },
+      "subclasses": [
+        "open_hand",
+        "windstep",
+        "iron_body"
+      ]
+    }
+  },
+  "subclasses": {
+    "vanguard": {
+      "name": "Vanguard",
+      "class": "fighter",
+      "role": "Shield wall, taunt, zone control",
+      "gear": {
+        "torso": "plate",
+        "legs": "greaves",
+        "feet": "sabatons",
+        "hands": "gauntlets",
+        "offhand": "tower_shield",
+        "headgear": "open_helm"
+      },
+      "colours": {
+        "cloth1": "cloth/crimson",
+        "cloth2": "metal/gold"
+      },
+      "companion": null
+    },
+    "weaponmaster": {
+      "name": "Weaponmaster",
+      "class": "fighter",
+      "role": "Stances, multi-hit",
+      "gear": {
+        "torso": "scale",
+        "weapon": "halberd",
+        "offhand": null,
+        "cape": "short_cape",
+        "headgear": "headband"
+      },
+      "colours": {
+        "cloth1": "cloth/charcoal",
+        "cloth2": "cloth/crimson",
+        "blade": "metal/steel"
+      },
+      "companion": null
+    },
+    "warlord": {
+      "name": "Warlord",
+      "class": "fighter",
+      "role": "Orders that give allies extra moves",
+      "gear": {
+        "torso": "plate",
+        "legs": "greaves",
+        "feet": "sabatons",
+        "hands": "gauntlets",
+        "cape": "banner_back",
+        "headgear": "feathered_cap",
+        "offhand": "war_horn"
+      },
+      "colours": {
+        "cloth1": "cloth/navy",
+        "cloth2": "metal/gold",
+        "metal": "metal/bronze"
+      },
+      "companion": null
+    },
+    "shadow": {
+      "name": "Shadow",
+      "class": "rogue",
+      "role": "Stealth, backstabs from behind",
+      "gear": {
+        "headgear": "mask_hood",
+        "offhand": "dagger",
+        "torso": "leather",
+        "cape": "cloak"
+      },
+      "colours": {
+        "cloth1": "cloth/charcoal",
+        "cloth2": "cloth/charcoal",
+        "leather": "leather/dark",
+        "blade": "metal/dark"
+      },
+      "companion": null
+    },
+    "trickster": {
+      "name": "Trickster",
+      "class": "rogue",
+      "role": "Traps, swaps positions",
+      "gear": {
+        "headgear": "bandana",
+        "offhand": "bomb",
+        "torso": "vest",
+        "cape": null
+      },
+      "colours": {
+        "cloth1": "cloth/plum",
+        "cloth2": "cloth/ochre",
+        "magic": "magic/fire"
+      },
+      "companion": null
+    },
+    "duelist": {
+      "name": "Duelist",
+      "class": "rogue",
+      "role": "Riposte, counters",
+      "gear": {
+        "headgear": "feathered_cap",
+        "weapon": "rapier",
+        "offhand": "main_gauche",
+        "torso": "coat",
+        "cape": "short_cape"
+      },
+      "colours": {
+        "cloth1": "cloth/wine",
+        "cloth2": "cloth/ivory",
+        "trim": "metal/silver"
+      },
+      "companion": null
+    },
+    "evoker": {
+      "name": "Evoker",
+      "class": "wizard",
+      "role": "Large area spells shaped to miss allies",
+      "gear": {
+        "weapon": "staff",
+        "headgear": "wizard_hat"
+      },
+      "colours": {
+        "cloth1": "cloth/crimson",
+        "cloth2": "cloth/ochre",
+        "magic": "magic/fire"
+      },
+      "companion": null
+    },
+    "chronomancer": {
+      "name": "Chronomancer",
+      "class": "wizard",
+      "role": "Haste and slow, changes turn order",
+      "gear": {
+        "weapon": "hourglass_staff",
+        "headgear": "wizard_hat",
+        "offhand": "orb"
+      },
+      "colours": {
+        "cloth1": "cloth/royal_purple",
+        "cloth2": "cloth/navy",
+        "trim": "metal/gold",
+        "magic": "magic/frost"
+      },
+      "companion": null
+    },
+    "geomancer": {
+      "name": "Geomancer",
+      "class": "wizard",
+      "role": "Raises and lowers tile height",
+      "gear": {
+        "weapon": "crystal_staff",
+        "headgear": "hood",
+        "hands": "wraps"
+      },
+      "colours": {
+        "cloth1": "cloth/rust",
+        "cloth2": "cloth/sand",
+        "magic": "magic/earth"
+      },
+      "companion": null
+    },
+    "life": {
+      "name": "Life Domain",
+      "class": "cleric",
+      "role": "Big heals, revives",
+      "gear": {
+        "weapon": "holy_staff",
+        "offhand": null,
+        "headgear": "circlet",
+        "legs": "skirt",
+        "feet": "sandals"
+      },
+      "colours": {
+        "cloth1": "cloth/ivory",
+        "cloth2": "metal/gold",
+        "magic": "magic/holy"
+      },
+      "companion": null
+    },
+    "war": {
+      "name": "War Domain",
+      "class": "cleric",
+      "role": "Melee buffer",
+      "gear": {
+        "torso": "chain",
+        "weapon": "warhammer",
+        "offhand": "kite_shield",
+        "headgear": "winged_helm",
+        "hands": "gauntlets"
+      },
+      "colours": {
+        "cloth1": "cloth/crimson",
+        "cloth2": "cloth/ivory",
+        "magic": "magic/holy"
+      },
+      "companion": null
+    },
+    "light": {
+      "name": "Light Domain",
+      "class": "cleric",
+      "role": "Radiant area damage, reveals stealth",
+      "gear": {
+        "headgear": "halo",
+        "offhand": "lantern",
+        "cape": "cloak"
+      },
+      "colours": {
+        "cloth1": "cloth/ivory",
+        "cloth2": "cloth/sky",
+        "magic": "magic/holy",
+        "trim": "metal/gold"
+      },
+      "companion": null
+    },
+    "sharpshooter": {
+      "name": "Sharpshooter",
+      "class": "ranger",
+      "role": "Gains range from height",
+      "gear": {
+        "cape": "quiver",
+        "headgear": "feathered_cap",
+        "torso": "coat"
+      },
+      "colours": {
+        "cloth1": "cloth/forest",
+        "cloth2": "cloth/ivory"
+      },
+      "companion": null
+    },
+    "beastmaster": {
+      "name": "Beastmaster",
+      "class": "ranger",
+      "role": "Has a companion unit",
+      "gear": {
+        "cape": "pelt",
+        "weapon": "spear",
+        "headgear": null
+      },
+      "colours": {
+        "cloth1": "leather/brown",
+        "cloth2": "cloth/sand"
+      },
+      "companion": "hound"
+    },
+    "warden": {
+      "name": "Warden",
+      "class": "ranger",
+      "role": "Snares, difficult terrain",
+      "gear": {
+        "weapon": "crossbow",
+        "headgear": "hood",
+        "torso": "leather",
+        "cape": "cloak"
+      },
+      "colours": {
+        "cloth1": "cloth/moss",
+        "cloth2": "cloth/forest",
+        "leather": "leather/dark"
+      },
+      "companion": null
+    },
+    "guardian": {
+      "name": "Guardian",
+      "class": "paladin",
+      "role": "Takes hits meant for allies",
+      "gear": {
+        "weapon": "mace",
+        "offhand": "tower_shield",
+        "headgear": "great_helm"
+      },
+      "colours": {
+        "cloth1": "cloth/sky",
+        "cloth2": "cloth/ivory",
+        "metal": "metal/silver"
+      },
+      "companion": null
+    },
+    "crusader": {
+      "name": "Crusader",
+      "class": "paladin",
+      "role": "Burst smites",
+      "gear": {
+        "torso": "tabard",
+        "headgear": "winged_helm",
+        "weapon": "greatsword"
+      },
+      "colours": {
+        "cloth1": "cloth/ivory",
+        "cloth2": "cloth/crimson",
+        "metal": "metal/silver",
+        "magic": "magic/holy"
+      },
+      "companion": null
+    },
+    "avenger": {
+      "name": "Avenger",
+      "class": "paladin",
+      "role": "Punishes whoever hit an ally",
+      "gear": {
+        "headgear": "horned_helm",
+        "weapon": "flail",
+        "offhand": "buckler"
+      },
+      "colours": {
+        "cloth1": "cloth/charcoal",
+        "cloth2": "cloth/crimson",
+        "metal": "metal/dark",
+        "blade": "metal/obsidian"
+      },
+      "companion": null
+    },
+    "valor": {
+      "name": "College of Valor",
+      "class": "bard",
+      "role": "Buffs, grants extra actions",
+      "gear": {
+        "torso": "chain",
+        "weapon": "sword",
+        "offhand": "war_horn",
+        "headgear": "feathered_cap"
+      },
+      "colours": {
+        "cloth1": "cloth/crimson",
+        "cloth2": "metal/gold"
+      },
+      "companion": null
+    },
+    "lore": {
+      "name": "College of Lore",
+      "class": "bard",
+      "role": "Debuffs, copies an enemy ability",
+      "gear": {
+        "torso": "coat",
+        "weapon": "tome",
+        "headgear": "beret",
+        "cape": "cloak"
+      },
+      "colours": {
+        "cloth1": "cloth/navy",
+        "cloth2": "cloth/ivory",
+        "magic": "magic/arcane"
+      },
+      "companion": null
+    },
+    "siren": {
+      "name": "College of the Siren",
+      "class": "bard",
+      "role": "Charm, moves enemies",
+      "gear": {
+        "weapon": "lyre",
+        "headgear": "circlet",
+        "torso": "robe",
+        "legs": "skirt",
+        "feet": "sandals"
+      },
+      "colours": {
+        "cloth1": "cloth/teal",
+        "cloth2": "cloth/sky",
+        "magic": "magic/frost"
+      },
+      "companion": null
+    },
+    "shapeshifter": {
+      "name": "Shapeshifter",
+      "class": "druid",
+      "role": "Beast forms",
+      "gear": {
+        "headgear": "antlers",
+        "cape": "pelt",
+        "weapon": "quarterstaff"
+      },
+      "colours": {
+        "cloth1": "leather/tan",
+        "cloth2": "cloth/moss",
+        "horn": "horn/bone"
+      },
+      "companion": null
+    },
+    "stormcaller": {
+      "name": "Stormcaller",
+      "class": "druid",
+      "role": "Weather zones",
+      "gear": {
+        "weapon": "storm_staff",
+        "headgear": "hood",
+        "cape": "cloak"
+      },
+      "colours": {
+        "cloth1": "cloth/navy",
+        "cloth2": "cloth/slate",
+        "magic": "magic/storm"
+      },
+      "companion": null
+    },
+    "grovekeeper": {
+      "name": "Grovekeeper",
+      "class": "druid",
+      "role": "Summons, healing over time",
+      "gear": {
+        "weapon": "living_staff",
+        "headgear": "flower_crown"
+      },
+      "colours": {
+        "cloth1": "cloth/moss",
+        "cloth2": "foliage/blossom",
+        "magic": "magic/nature"
+      },
+      "companion": "sapling"
+    },
+    "hexblade": {
+      "name": "Hexblade",
+      "class": "warlock",
+      "role": "Cursed melee",
+      "gear": {
+        "weapon": "sword",
+        "offhand": null,
+        "torso": "leather",
+        "headgear": "hood"
+      },
+      "colours": {
+        "cloth1": "cloth/charcoal",
+        "cloth2": "cloth/plum",
+        "blade": "metal/obsidian",
+        "magic": "magic/shadow"
+      },
+      "companion": null
+    },
+    "fiendbound": {
+      "name": "Fiendbound",
+      "class": "warlock",
+      "role": "Summons an imp, burning damage",
+      "gear": {
+        "weapon": "tome",
+        "offhand": "orb"
+      },
+      "colours": {
+        "cloth1": "cloth/crimson",
+        "cloth2": "cloth/charcoal",
+        "magic": "magic/fire",
+        "trim": "metal/gold"
+      },
+      "companion": "imp"
+    },
+    "void": {
+      "name": "Void",
+      "class": "warlock",
+      "role": "Teleport, pull",
+      "gear": {
+        "weapon": "wand",
+        "offhand": "orb",
+        "torso": "robe",
+        "legs": "skirt",
+        "headgear": "hood"
+      },
+      "colours": {
+        "cloth1": "cloth/navy",
+        "cloth2": "cloth/charcoal",
+        "magic": "magic/void"
+      },
+      "companion": null
+    },
+    "open_hand": {
+      "name": "Way of the Open Hand",
+      "class": "monk",
+      "role": "Knockback combos, push enemies off ledges",
+      "gear": {
+        "torso": "gi",
+        "hands": "wraps",
+        "headgear": "headband"
+      },
+      "colours": {
+        "cloth1": "cloth/ivory",
+        "cloth2": "cloth/crimson"
+      },
+      "companion": null
+    },
+    "windstep": {
+      "name": "Way of the Windstep",
+      "class": "monk",
+      "role": "Mobility, jump height",
+      "gear": {
+        "torso": "gi",
+        "hands": "wraps",
+        "headgear": "headband",
+        "cape": "short_cape"
+      },
+      "colours": {
+        "cloth1": "cloth/sky",
+        "cloth2": "cloth/ivory"
+      },
+      "companion": null
+    },
+    "iron_body": {
+      "name": "Way of Iron Body",
+      "class": "monk",
+      "role": "Counters, self-healing",
+      "gear": {
+        "torso": "gi",
+        "hands": "gauntlets",
+        "legs": "greaves"
+      },
+      "colours": {
+        "cloth1": "cloth/charcoal",
+        "cloth2": "cloth/rust",
+        "metal": "metal/iron"
+      },
+      "companion": null
     }
   }
 }

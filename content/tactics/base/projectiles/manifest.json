@@ -1,0 +1,62 @@
+{
+  "frame": [
+    24,
+    24
+  ],
+  "anchor": [
+    12,
+    12
+  ],
+  "headings": 16,
+  "layout": "row = heading (0 = screen-right, counter-clockwise, 22.5\u00b0 steps), column = frame",
+  "projectiles": {
+    "arrow": {
+      "file": "arrow.png",
+      "frames": 1,
+      "fps": 12,
+      "blend": "normal"
+    },
+    "bolt": {
+      "file": "bolt.png",
+      "frames": 1,
+      "fps": 12,
+      "blend": "normal"
+    },
+    "dagger": {
+      "file": "dagger.png",
+      "frames": 4,
+      "fps": 12,
+      "blend": "normal"
+    },
+    "rock": {
+      "file": "rock.png",
+      "frames": 2,
+      "fps": 12,
+      "blend": "normal"
+    },
+    "fireball": {
+      "file": "fireball.png",
+      "frames": 4,
+      "fps": 12,
+      "blend": "add"
+    },
+    "eldritch": {
+      "file": "eldritch.png",
+      "frames": 4,
+      "fps": 12,
+      "blend": "add"
+    },
+    "missile": {
+      "file": "missile.png",
+      "frames": 4,
+      "fps": 12,
+      "blend": "add"
+    },
+    "ice": {
+      "file": "ice.png",
+      "frames": 1,
+      "fps": 12,
+      "blend": "add"
+    }
+  }
+}

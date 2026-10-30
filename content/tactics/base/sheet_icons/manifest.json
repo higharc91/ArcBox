@@ -1,0 +1,258 @@
+{
+  "size": [
+    18,
+    18
+  ],
+  "file": "sheet_icons.png",
+  "icons": {
+    "ability": {
+      "str": [
+        0,
+        0,
+        18,
+        18
+      ],
+      "dex": [
+        18,
+        0,
+        18,
+        18
+      ],
+      "con": [
+        36,
+        0,
+        18,
+        18
+      ],
+      "int": [
+        54,
+        0,
+        18,
+        18
+      ],
+      "wis": [
+        72,
+        0,
+        18,
+        18
+      ],
+      "cha": [
+        90,
+        0,
+        18,
+        18
+      ]
+    },
+    "skill": {
+      "acrobatics": [
+        108,
+        0,
+        18,
+        18
+      ],
+      "animal_handling": [
+        126,
+        0,
+        18,
+        18
+      ],
+      "arcana": [
+        144,
+        0,
+        18,
+        18
+      ],
+      "athletics": [
+        162,
+        0,
+        18,
+        18
+      ],
+      "deception": [
+        180,
+        0,
+        18,
+        18
+      ],
+      "history": [
+        198,
+        0,
+        18,
+        18
+      ],
+      "insight": [
+        0,
+        18,
+        18,
+        18
+      ],
+      "intimidation": [
+        18,
+        18,
+        18,
+        18
+      ],
+      "investigation": [
+        36,
+        18,
+        18,
+        18
+      ],
+      "medicine": [
+        54,
+        18,
+        18,
+        18
+      ],
+      "nature": [
+        72,
+        18,
+        18,
+        18
+      ],
+      "perception": [
+        90,
+        18,
+        18,
+        18
+      ],
+      "performance": [
+        108,
+        18,
+        18,
+        18
+      ],
+      "persuasion": [
+        126,
+        18,
+        18,
+        18
+      ],
+      "religion": [
+        144,
+        18,
+        18,
+        18
+      ],
+      "sleight_of_hand": [
+        162,
+        18,
+        18,
+        18
+      ],
+      "stealth": [
+        180,
+        18,
+        18,
+        18
+      ],
+      "survival": [
+        198,
+        18,
+        18,
+        18
+      ]
+    },
+    "damage": {
+      "slashing": [
+        0,
+        36,
+        18,
+        18
+      ],
+      "piercing": [
+        18,
+        36,
+        18,
+        18
+      ],
+      "bludgeoning": [
+        36,
+        36,
+        18,
+        18
+      ],
+      "fire": [
+        54,
+        36,
+        18,
+        18
+      ],
+      "cold": [
+        72,
+        36,
+        18,
+        18
+      ],
+      "lightning": [
+        90,
+        36,
+        18,
+        18
+      ],
+      "thunder": [
+        108,
+        36,
+        18,
+        18
+      ],
+      "poison": [
+        126,
+        36,
+        18,
+        18
+      ],
+      "acid": [
+        144,
+        36,
+        18,
+        18
+      ],
+      "necrotic": [
+        162,
+        36,
+        18,
+        18
+      ],
+      "radiant": [
+        180,
+        36,
+        18,
+        18
+      ],
+      "force": [
+        198,
+        36,
+        18,
+        18
+      ],
+      "psychic": [
+        0,
+        54,
+        18,
+        18
+      ]
+    }
+  },
+  "skillAbility": {
+    "acrobatics": "dex",
+    "animal_handling": "wis",
+    "arcana": "int",
+    "athletics": "str",
+    "deception": "cha",
+    "history": "int",
+    "insight": "wis",
+    "intimidation": "cha",
+    "investigation": "int",
+    "medicine": "wis",
+    "nature": "int",
+    "perception": "wis",
+    "performance": "cha",
+    "persuasion": "cha",
+    "religion": "int",
+    "sleight_of_hand": "dex",
+    "stealth": "dex",
+    "survival": "wis"
+  },
+  "note": "skill plates take their ability's colour, so the sheet groups by colour at a glance"
+}
