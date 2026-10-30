@@ -5,7 +5,9 @@ namespace ArcBox.Sdk.Campaigns;
 /// <summary>A room's hold on a campaign while its game runs. Every member is synchronous and does no I/O.</summary>
 public interface ICampaignLease
 {
+    /// <summary>The campaign's members and version, as they are now.</summary>
     CampaignInfo Info { get; }
+    /// <summary>The game's document, as last saved.</summary>
     JsonElement Document { get; }
     /// <summary>Replaces the document (Version + 1) and queues a background write.</summary>
     void Save(JsonElement document);

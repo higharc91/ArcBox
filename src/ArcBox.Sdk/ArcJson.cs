@@ -36,6 +36,7 @@ public sealed class PlayerIdJsonConverter : JsonConverter<PlayerId>
     }
 }
 
+/// <summary>Writes a <see cref="ProfileId"/> as a plain JSON string, and reads one back.</summary>
 public sealed class ProfileIdJsonConverter : JsonConverter<ProfileId>
 {
     public override ProfileId Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
