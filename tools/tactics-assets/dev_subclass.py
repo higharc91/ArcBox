@@ -14,7 +14,7 @@ for cls in CLASSES:
         r = make_character("x", RACE[cls], cls, Look(body_type="feminine" if len(row) == 1 else "masculine"),
                            subclass=s.id)
         frames = [compose(r, "front", ANIMS["idle"][2][0]), compose(r, "back", ANIMS["idle"][2][0]),
-                  compose(r, "front", ANIMS["attack"][2][1])]
+                  compose(r, "front", ANIMS["attack"][2][2])]
         row.append(strip([f.render(r.ramps()) for f in frames], 1, gap=2))
     cells.append(row)
     rows.append(CLASSES[cls].name)

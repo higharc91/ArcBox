@@ -156,7 +156,7 @@ def _dragon_head(c: Canvas, p: Points) -> None:
         c.rect(x0 + 3, y0 + 3, x1 - 1, y0 + 3, "skin", 4)                      # brow ridge
         hurt = p.pose.lean < 0 and p.pose.bob > 0
         for ex in (x0 + 4, x0 + 8):
-            if p.pose.kneel or hurt:
+            if p.pose.kneel or hurt or p.pose.blink:
                 c.px(ex, y0 + 5, "eyes", 0)
             else:
                 c.px(ex, y0 + 4, "eyes", 4)                                    # bright reptile eyes
@@ -266,7 +266,7 @@ def _ears(c: Canvas, p: Points, kind: str) -> None:
 def _face(c: Canvas, p: Points) -> None:
     x0, y0 = p.head_x0 + _face_dx(p), p.head_y0
     hurt = p.pose.lean < 0 and p.pose.bob > 0
-    down = p.pose.kneel
+    down = p.pose.kneel or p.pose.blink
     ey = y0 + 5
     for ex in (x0 + 4, x0 + 8):  # 3/4 view: the face sits a little screen-right
         if down:
@@ -1018,9 +1018,35 @@ def _along(p: Points, dist: float) -> tuple[float, float]:
     return p.hand_n[0] + math.sin(a) * dist, p.hand_n[1] - math.cos(a) * dist
 
 
+SMEAR_REACH = {"sword": 10, "greatsword": 15, "axe": 10, "mace": 9, "warhammer": 10, "flail": 8, "scimitar": 9,
+               "halberd": 14, "quarterstaff": 12, "staff": 12, "spear": 14}
+
+
+def _smear(c: Canvas, p: Points, reach: float) -> None:
+    """The motion arc of a fast swing: the blade's tip path from the previous angle to this one, bright at the
+    leading edge and fading behind it. One frame of this sells the speed better than any number of in-betweens."""
+    a0 = -p.pose.smear if p.direction == "back" else p.pose.smear
+    a1 = p.weapon
+    reach *= 0.8
+    steps = max(8, int(abs(a1 - a0) / 3))
+    for i in range(steps + 1):
+        t = i / steps
+        a = math.radians(a0 + (a1 - a0) * t)
+        shade = 5 if t > 0.7 else (4 if t > 0.35 else 3)
+        width = 1 + int(t * 2.5)                       # the crescent thickens towards the blade
+        for k in range(width):
+            r_ = reach - k
+            x = p.hand_n[0] + math.sin(a) * r_
+            y = p.hand_n[1] - math.cos(a) * r_
+            if 0 <= x < c.w and 0 <= y < c.h and c.slot[int(y), int(x)] == 0:
+                c.px(x, y, "blade", shade if k == 0 else max(2, shade - k))
+
+
 def weapon(kind: str) -> Part:
     def draw(c: Canvas, p: Points) -> None:
         hx, hy = p.hand_n
+        if p.pose.smear is not None and kind in SMEAR_REACH:
+            _smear(c, p, SMEAR_REACH[kind])
         if kind == "sword":
             pommel = _along(p, -3)
             c.line(*pommel, *_along(p, -1), "leather")                       # grip

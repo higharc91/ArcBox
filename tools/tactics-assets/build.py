@@ -103,7 +103,8 @@ def build_characters() -> None:
         return contact_sheet(title, tiles, columns=min(6, len(tiles)), zoom=5, subtitle=sub)
 
     save(roster("Characters · the party", PARTY,
-                "Six sample heroes: each is a name + race + class + look. Front and back; the game mirrors the other two."),
+                "Six sample heroes: each is a name + race + class + look. Front and back; the game mirrors the "
+                "other two."),
          PREVIEWS / "01-party.png")
     save(roster("Characters · class starters", CLASSES,
                 "One preset per class, each on a different race. Every piece is swappable and recolourable."),
@@ -112,15 +113,23 @@ def build_characters() -> None:
                 "Same rig, same layers: goblins and orcs reuse the 'short' and 'large' builds."),
          PREVIEWS / "03-enemies.png")
 
-    # Animation strips for a handful of characters.
+    # Every animation, one row each, on a character that would use it.
+    showcase = {"idle": "kara", "ready": "kara", "walk": "tamsin", "attack": "kara", "thrust": "wren",
+                "shoot": "tamsin", "cast": "ilyra", "slam": "class_paladin", "spin": "black_knight",
+                "flurry": "class_monk", "bash": "kara", "block": "aldric", "dodge": "wren", "jump": "class_monk",
+                "item": "sefa", "victory": "kara", "hurt": "aldric", "down": "aldric", "rise": "aldric"}
+    sheets = {}
     tiles = []
-    for rid in ("kara", "class_paladin", "tamsin", "ilyra", "class_bard", "orc_brute"):
-        r = next(x for x in ALL if x.id == rid)
-        sh = C.recipe_sheet(r)
-        tiles.append(Tile(strip(sh.frames[:n], 1, gap=3), r.name, "  ".join(
-            f"{a}×{len(ANIMS[a][2])}" for a in ANIM_ORDER)))
-    save(contact_sheet("Characters · animation set", tiles, columns=1, zoom=4,
-                       subtitle="idle · walk · swing · thrust · shoot · cast · hurt · down (20 frames per facing)"),
+    for a in C.anim_table():
+        rid = showcase[a.name]
+        if rid not in sheets:
+            sheets[rid] = C.recipe_sheet(next(x for x in ALL if x.id == rid))
+        sh = sheets[rid]
+        tiles.append(Tile(strip([sh.frames[k] for k in a.frames], 1, gap=4), a.name,
+                          f"{len(a.frames)} frames · {a.fps:g} fps{' · loop' if a.loop else ''} · {rid}"))
+    save(contact_sheet("Characters · animation set", tiles, columns=2, zoom=3,
+                       subtitle=f"{len(C.anim_table())} animations, {n} frames per facing. Attacks go anticipation, "
+                                f"strike (with a motion smear), impact, recovery; idles breathe and blink."),
          PREVIEWS / "04-animations.png")
 
     # Any race x any class: the creator's two axes, with the race's default look and the class's kit.
@@ -270,7 +279,7 @@ SUBCLASS_RACE = {"fighter": "human", "rogue": "halfling", "wizard": "elf", "cler
 def build_subclasses(out: Path) -> None:
     """06b-subclasses.png (every subclass: front, back and mid-swing) and a pack atlas of front idles that the phone's
     subclass picker shows. In the game a hero's own race and look carry through; these use one race per class."""
-    pose, swing = ANIMS["idle"][2][0], ANIMS["attack"][2][1]
+    pose, swing = ANIMS["idle"][2][0], ANIMS["attack"][2][2]
     cells, names, atlas_index = [], [], {}
     atlas = Image.new("RGBA", (FRAME_W * 3, FRAME_H * len(creator.CLASSES)))
     for row, cls in enumerate(creator.CLASSES):
@@ -311,7 +320,7 @@ def build_equipment() -> None:
     """19-equipment.png: what loot looks like. Every weapon, armour and helm on one hero, then metal tiers."""
     from arcpix.preview import stack
     pose = ANIMS["idle"][2][0]
-    swing = ANIMS["attack"][2][1]
+    swing = ANIMS["attack"][2][2]
     mk, L = creator.make_character, creator.Look
 
     def img(rec, ps=pose):
@@ -410,7 +419,8 @@ ATTACK_FOR = {"sword": "attack", "greatsword": "attack", "axe": "attack", "mace"
 
 
 def build_anim_previews() -> None:
-    """Animated GIFs of the character set: every actor plays the same beat (idle, walk, attack, hurt, down)."""
+    """Animated GIFs of the character set: every actor plays the same beats (idle, ready, walk, their weapon's
+    attack, a class special, guard, hurt, downed, revived, victory), plus an idle close-up and the four facings."""
     from arcpix.anim import Actor, stage_gif
     n = C.frames_per_direction()
     table = {a.name: a.frames for a in C.anim_table()}
@@ -426,17 +436,41 @@ def build_anim_previews() -> None:
                              C.recipe_sheet(r).frames, ANCHOR))
         return out
 
+    def special(r) -> str:
+        w, off = r.layers.get("weapon", ""), r.layers.get("offhand", "")
+        if off in ("round_shield", "kite_shield", "tower_shield", "buckler"):
+            return "bash"
+        if not w:
+            return "flurry"
+        if w in ("greatsword", "warhammer", "axe"):
+            return "slam"
+        if w in ("halberd", "flail", "scimitar"):
+            return "spin"
+        if w in ("bow", "crossbow"):
+            return "jump"
+        if ATTACK_FOR.get(w) == "thrust":
+            return "flurry" if off in ("dagger", "blade", "main_gauche") else "dodge"
+        return "item"
+
     def script(recipes) -> list:
         k = len(recipes)
         atk = [table[ATTACK_FOR.get(r.layers.get("weapon", ""), "cast")] for r in recipes]
+        spc = [table[special(r)] for r in recipes]
+        guard = [table["block" if r.layers.get("offhand", "") in ("round_shield", "kite_shield", "tower_shield",
+                                                                     "buckler") else "dodge"] for r in recipes]
+        idle0 = table["idle"][0]
         return [
-            ("Idle", [table["idle"] * 3] * k, 330),
+            ("Idle", [table["idle"] * 3] * k, 250),
+            ("Battle ready", [table["ready"] * 3] * k, 200),
             ("Walk", [table["walk"] * 3] * k, 125),
             ("Walk · away", [[f + n for f in table["walk"]] * 3] * k, 125),
-            ("Attack", [[table["idle"][0]] * 2 + hold(a, 2) + [a[-1]] * 3 for a in atk], 90),
-            ("Attack", [[table["idle"][0]] * 2 + hold(a, 2) + [a[-1]] * 3 for a in atk], 90),
-            ("Hurt", [hold(table["hurt"], 6) + [table["idle"][0]] * 3] * k, 90),
-            ("Downed", [hold(table["down"], 10)] * k, 90),
+            ("Attack", [[table["ready"][0]] * 2 + hold(a, 2) + [a[-1]] * 3 for a in atk], 80),
+            ("Special", [[table["ready"][0]] * 2 + hold(a, 2) + [a[-1]] * 3 for a in spc], 80),
+            ("Guard", [hold(g, 4) + [table["ready"][0]] * 2 for g in guard], 90),
+            ("Hurt", [hold(table["hurt"], 3) + [idle0] * 3] * k, 90),
+            ("Downed", [hold(table["down"], 8)] * k, 90),
+            ("Revived", [hold(table["rise"], 4) + [idle0] * 2] * k, 90),
+            ("Victory", [table["victory"] * 4] * k, 160),
         ]
 
     for name, title, recipes, cols in (
@@ -444,6 +478,13 @@ def build_anim_previews() -> None:
             ("anim-classes", "Class starters", CLASSES, 5),
             ("anim-enemies", "Enemies", ENEMIES, 4)):
         stage_gif(PREVIEWS / f"{name}.gif", title, actors_for(recipes), script(recipes), zoom=4, columns=cols)
+
+    # Idles up close: the exploration loop and the battle stance, everyone breathing and blinking.
+    roster = PARTY + CLASSES
+    stage_gif(PREVIEWS / "anim-idle.gif", "Idle and battle-ready loops", actors_for(roster),
+              [("Idle", [table["idle"] * 4] * len(roster), 250),
+               ("Battle ready", [table["ready"] * 4] * len(roster), 200)],
+              zoom=4, columns=8)
 
     # One character walking in all four isometric directions: two drawn facings, two mirrored.
     kara = next(r for r in PARTY if r.id == "kara")

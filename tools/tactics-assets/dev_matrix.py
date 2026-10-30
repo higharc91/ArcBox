@@ -5,8 +5,8 @@ from parts.creator import RACES, CLASSES, make_character
 from parts.characters import compose, frame_list
 from parts.rig import ANIMS
 k = int(sys.argv[1]) if len(sys.argv) > 1 else 0
-d = "back" if k >= 20 else "front"
-pose = frame_list()[k % 20][2]
+d = "back" if k >= len(frame_list()) else "front"
+pose = frame_list()[k % len(frame_list())][2]
 cells = []
 for r in RACES:
     row = []
