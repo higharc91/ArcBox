@@ -58,11 +58,10 @@ internal sealed partial class Validation(ArtManifest? art)
     // ---- After loading ----------------------------------------------------------------------------------------------
 
     /// <summary>
-    /// Checks every reference kept while loading. <paramref name="exists"/> answers for the merged content. AI profiles are
-    /// checked only once some pack defines one, and art keys only when an art manifest was given; an art key must be
-    /// <c>"&lt;set&gt;.&lt;asset&gt;"</c>.
+    /// Checks every reference kept while loading. <paramref name="exists"/> answers for the merged content. Art keys are
+    /// checked only when an art manifest was given; an art key must be <c>"&lt;set&gt;.&lt;asset&gt;"</c>.
     /// </summary>
-    public void Resolve(Func<RefKind, string, bool> exists, bool anyAiProfiles)
+    public void Resolve(Func<RefKind, string, bool> exists)
     {
         foreach (var r in _refs)
         {
@@ -74,7 +73,6 @@ internal sealed partial class Validation(ArtManifest? art)
                 RefKind.Art when art is null => null,
                 RefKind.Art when !r.Id.Contains('.', StringComparison.Ordinal) => $"Art key '{r.Id}' names no set (expected \"<set>.<asset>\").",
                 RefKind.Art => art!.Keys.Contains(r.Id) ? null : $"Unknown art key '{r.Id}'.",
-                RefKind.AiProfile when !anyAiProfiles => null,
                 RefKind.AbilityOrPassive => exists(RefKind.Ability, r.Id) || exists(RefKind.Passive, r.Id)
                     ? null : $"Unknown ability or passive '{r.Id}'.",
                 _ => exists(r.Kind, r.Id) ? null : $"Unknown {KindName(r.Kind)} '{r.Id}'.",

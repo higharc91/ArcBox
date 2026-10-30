@@ -339,6 +339,36 @@ public sealed class ValidationTests
     }
 
     [Fact]
+    public void Ai_profiles_are_checked_even_when_no_pack_defines_any()
+    {
+        // The minimal base pack without its ai-profiles.json: the wolf's "brute" no longer resolves.
+        var root = Path.Combine(Path.GetTempPath(), "tactics-validation-" + Guid.NewGuid().ToString("N"));
+        var dir = Path.Combine(root, "base");
+        try
+        {
+            foreach (var file in Directory.GetFiles(Base, "*", SearchOption.AllDirectories))
+            {
+                var target = Path.Combine(dir, Path.GetRelativePath(Base, file));
+                Directory.CreateDirectory(Path.GetDirectoryName(target)!);
+                File.Copy(file, target);
+            }
+            var manifest = Path.Combine(dir, "manifest.json");
+            File.WriteAllText(manifest, File.ReadAllText(manifest).Replace("\"ai-profiles.json\",", "", StringComparison.Ordinal),
+                new UTF8Encoding(false));
+            File.Delete(Path.Combine(dir, "ai-profiles.json"));
+
+            var errors = Assert.Throws<ContentException>(() => RulesPack.Load([dir])).Errors;
+
+            Assert.Contains(new ContentError("base/monsters/beasts.json", "/0/aiProfile", "Unknown AI profile 'brute'."), errors);
+            Assert.All(errors, e => Assert.EndsWith("Unknown AI profile 'brute'.", e.Message, StringComparison.Ordinal));
+        }
+        finally
+        {
+            Directory.Delete(root, recursive: true);
+        }
+    }
+
+    [Fact]
     public void Content_error_to_string_is_file_hash_pointer_colon_message()
         => Assert.Equal("base/x.json#/a/0: Bad.", new ContentError("base/x.json", "/a/0", "Bad.").ToString());
 

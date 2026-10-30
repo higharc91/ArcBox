@@ -156,6 +156,14 @@ public sealed class PathsTests
     }
 
     [Fact]
+    public void Reachable_on_a_non_square_map_is_the_tiles_it_can_end_on()
+    {
+        var map = Paths.From(TerrainOf(OpenMap(6, 3)), new Tile(4, 1), MoverOf(1));
+        Assert.Equal([new Tile(3, 1), new Tile(4, 0), new Tile(4, 1), new Tile(4, 2), new Tile(5, 1)], map.Reachable);
+        Assert.All(map.Reachable, t => Assert.NotEqual(int.MaxValue, map.CostTo(t)));
+    }
+
+    [Fact]
     public void Reachable_is_listed_in_ordinal_tile_order()
     {
         var map = Paths.From(TerrainOf(OpenMap(5, 5)), new Tile(2, 2), MoverOf(3));

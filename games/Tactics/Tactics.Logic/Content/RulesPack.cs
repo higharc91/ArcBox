@@ -178,21 +178,26 @@ public sealed partial class RulesPack
     /// <summary>
     /// A pack built from the given definitions, plus the built-ins (<see cref="CommonAttack"/>, <see cref="CommonHelp"/>
     /// and <see cref="Helped"/>) unless it defines their ids itself, and <see cref="TestInjury"/> when no injuries are
-    /// given. It has the given <paramref name="items"/> but no classes, races, monster stat blocks or other catalogue content,
-    /// and <see cref="XpTable.Default"/>;
+    /// given. It has the given <paramref name="items"/> and <paramref name="aiProfiles"/> but no classes, races, monster stat
+    /// blocks or other catalogue content, and <see cref="XpTable.Default"/>;
     /// <paramref name="monsters"/> are ready-made sheets for <see cref="MonsterSheet"/>. Nothing is validated. Throws
     /// <see cref="ArgumentException"/> on a duplicate id.
     /// </summary>
     public static RulesPack InMemory(string hash, IEnumerable<AbilityDef>? abilities = null, IEnumerable<PassiveDef>? passives = null,
         IEnumerable<ConditionDef>? conditions = null, IEnumerable<BattleMap>? maps = null, IEnumerable<InjuryDef>? injuries = null,
-        IEnumerable<(string Id, UnitSheet Sheet)>? monsters = null, IEnumerable<ItemDef>? items = null)
+        IEnumerable<(string Id, UnitSheet Sheet)>? monsters = null, IEnumerable<ItemDef>? items = null,
+        IEnumerable<AiProfileDef>? aiProfiles = null)
         => new(hash,
             WithBuiltIn(Index(abilities, a => a.Id, Comparer<AbilityId>.Default, "ability"), a => a.Id, CommonAttack, CommonHelp),
             Index(passives, p => p.Id, StringComparer.Ordinal, "passive"),
             WithBuiltIn(Index(conditions, c => c.Id, Comparer<ConditionId>.Default, "condition"), c => c.Id, Helped),
             Index(injuries ?? [TestInjury], i => i.Id, Comparer<InjuryId>.Default, "injury"),
             Index(maps, m => m.Id, StringComparer.Ordinal, "map"),
-            Catalog.Empty with { Items = Index(items, i => i.Id, Comparer<ItemId>.Default, "item") },
+            Catalog.Empty with
+            {
+                Items = Index(items, i => i.Id, Comparer<ItemId>.Default, "item"),
+                AiProfiles = Index(aiProfiles, p => p.Id, StringComparer.Ordinal, "AI profile"),
+            },
             Index(monsters, m => m.Id, StringComparer.Ordinal, "monster").ToImmutableSortedDictionary(
                 kv => kv.Key, kv => kv.Value.Sheet, StringComparer.Ordinal));
 

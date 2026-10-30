@@ -14,7 +14,7 @@ public sealed class BasePackTests
 
     private static readonly string[] Classes = ["cleric", "fighter", "rogue", "wizard"];
 
-    private static readonly string[] AiProfiles = ["archer", "boss", "brute", "caster", "coward", "healer", "skirmisher"];
+    private static readonly string[] AiProfiles = ["archer", "boss", "boss_cruel", "brute", "caster", "coward", "healer", "skirmisher"];
 
     private static UnitId U(string id) => new(id);
 
@@ -44,6 +44,9 @@ public sealed class BasePackTests
         Assert.Equal(XpTable.Default.Thresholds, pack.Xp.Thresholds);
         Assert.Equal(["river_crossing"], pack.Maps.Keys);
         Assert.Equal(["river_crossing"], pack.Encounters.Keys);
+        Assert.Equal(AiProfiles, pack.AiProfiles.Keys);
+        Assert.Equal(0.3, pack.AiProfiles["coward"].FleeBelowHp);
+        Assert.Equal(["boss_cruel"], pack.AiProfiles.Values.Where(p => p.Cruel).Select(p => p.Id));
 
         string[] conditions =
         [

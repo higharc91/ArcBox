@@ -129,7 +129,7 @@ internal static class PackLoader
             RefKind.Map => maps.ContainsKey(id),
             RefKind.AiProfile => aiProfiles.ContainsKey(id),
             _ => false,
-        }, anyAiProfiles: aiProfiles.Count > 0);
+        });
         var battleMaps = Index(maps.Values, m => m.Id, m => m.Def.Map, StringComparer.Ordinal);
         v.CheckEncounters(encounters.Values, battleMaps);
 

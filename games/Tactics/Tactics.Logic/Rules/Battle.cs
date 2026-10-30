@@ -49,63 +49,73 @@ public static partial class Battle
     /// </summary>
     public static Resolution Apply(BattleState state, Command command, RulesPack rules)
     {
-        if (state.Outcome is not null)
-            return Reject(state, RejectCode.BattleOver);
-        if (command is React react)
-            return ApplyReact(state, react, rules);
-        if (state.Pending is not null)
-            return Reject(state, RejectCode.ReactionPending);
-        if (state.Active != command.Actor)
-            return Reject(state, RejectCode.NotYourTurn);
-
         var w = new BattleWriter(state, rules);
+        return Prepare(w, command, rules) is { } refused ? new Resolution(state, [], refused) : Settled(w, rules);
+    }
+
+    /// <summary>
+    /// Whether <see cref="Apply"/> would accept <paramref name="command"/> in <paramref name="state"/>: null when it would,
+    /// otherwise the <see cref="Rejection"/> it would give. Nothing is resolved and no die is rolled, so the AI can test a
+    /// command against a state it only imagines.
+    /// </summary>
+    public static Rejection? Check(BattleState state, Command command, RulesPack rules)
+        => Prepare(new BattleWriter(state, rules), command, rules);
+
+    /// <summary>
+    /// Validates <paramref name="command"/> and, if it is accepted, queues its steps on <paramref name="w"/> (rolling
+    /// nothing); returns the rejection otherwise. A <see cref="React"/> goes to <see cref="PrepareReact"/>.
+    /// </summary>
+    private static Rejection? Prepare(BattleWriter w, Command command, RulesPack rules)
+    {
+        var state = w.State;
+        if (state.Outcome is not null)
+            return Rejection.Of(RejectCode.BattleOver);
+        if (command is React react)
+            return PrepareReact(w, react);
+        if (state.Pending is not null)
+            return Rejection.Of(RejectCode.ReactionPending);
+        if (state.Active != command.Actor)
+            return Rejection.Of(RejectCode.NotYourTurn);
+
         switch (command)
         {
             case EndTurn end:
                 w.PushFront(new EndTurnStep(end.Actor));
-                break;
+                return null;
             case Delay delay:
                 if (!CanDelay(w, delay, rules, out var to))
-                    return Reject(state, RejectCode.CantDelay);
+                    return Rejection.Of(RejectCode.CantDelay);
                 w.PushFront(new DelayStep(delay.Actor, to));
-                break;
+                return null;
             case Use use:
-                if (PlanUse(w, use, rules) is { } refused)
-                    return new Resolution(state, [], refused);
-                break;
+                return PlanUse(w, use, rules);
             case Move move:
-                if (Movement.Plan(w, move) is { } blocked)
-                    return new Resolution(state, [], blocked);
-                break;
+                return Movement.Plan(w, move);
             default:
                 throw new ArgumentException($"Unknown command {command.GetType().Name}.", nameof(command));
         }
-
-        return Settled(w, rules);
     }
-
-    private static Resolution Reject(BattleState state, RejectCode code) => new(state, [], Rejection.Of(code));
 
     /// <summary>
     /// Answers the pending <see cref="ReactionOffer"/> (<see cref="RejectCode.NothingToReact"/> without one) as its reactor
     /// (<see cref="RejectCode.NotYourTurn"/> otherwise) with one of its options, matched by id
-    /// (<see cref="RejectCode.InvalidTarget"/> otherwise). Clears the offer, emits <see cref="Reacted"/>, resolves the
-    /// reaction unless it is <c>"pass"</c>, and resumes the queue where it paused.
+    /// (<see cref="RejectCode.InvalidTarget"/> otherwise). Clears the offer, emits <see cref="Reacted"/>, queues the
+    /// reaction unless it is <c>"pass"</c>; settling then resumes the queue where it paused.
     /// </summary>
-    private static Resolution ApplyReact(BattleState state, React react, RulesPack rules)
+    private static Rejection? PrepareReact(BattleWriter w, React react)
     {
-        if (state.Pending is not ReactionOffer offer)
-            return Reject(state, RejectCode.NothingToReact);
+        if (w.State.Pending is not ReactionOffer offer)
+            return Rejection.Of(RejectCode.NothingToReact);
         if (react.Actor != offer.Reactor)
-            return Reject(state, RejectCode.NotYourTurn);
+            return Rejection.Of(RejectCode.NotYourTurn);
         if (offer.Options.FirstOrDefault(o => o.Id == react.Choice.Id) is not { } choice)
-            return Reject(state, RejectCode.InvalidTarget);
+            return Rejection.Of(RejectCode.InvalidTarget);
 
-        var w = new BattleWriter(state with { Pending = null }, rules);
+        w.State = w.State with { Pending = null };
         w.Emit(new Reacted(offer.Reactor, choice.Id));
         if (choice.Id != Reactions.Pass)
             w.PushFront(new ReactionStep(offer.Reactor, choice));
-        return Settled(w, rules);
+        return null;
     }
 
     /// <summary>

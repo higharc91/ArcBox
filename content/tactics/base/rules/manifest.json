@@ -10,6 +10,7 @@
     "weapons.json",
     "armor.json",
     "xp.json",
+    "ai-profiles.json",
     "items.json",
     "abilities/common.json",
     "abilities/races.json",

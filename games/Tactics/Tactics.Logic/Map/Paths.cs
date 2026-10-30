@@ -26,7 +26,7 @@ public sealed class PathMap
         var reachable = ImmutableArray.CreateBuilder<Tile>();
         for (var x = 0; x < width; x++)
         for (var y = 0; y < height; y++)
-            if (canEnd[y * width + x])
+            if (canEnd[x * height + y])
                 reachable.Add(new Tile(x, y));
         Reachable = reachable.ToImmutable();
     }

@@ -19,6 +19,7 @@ public sealed class TestBattle
     private readonly List<InjuryDef> _injuries = [];
     private readonly List<(string Id, UnitSheet Sheet)> _monsters = [];
     private readonly List<ItemDef> _items = [];
+    private readonly List<AiProfileDef> _aiProfiles = [];
 
     /// <summary>Tests check the engine's invariants after every command, in any build configuration.</summary>
     static TestBattle() => Invariants.Enabled = true;
@@ -84,10 +85,17 @@ public sealed class TestBattle
         return Rebuild();
     }
 
+    /// <summary>Adds AI profiles (weight sets for <see cref="Ai.Plan"/>) to the rules pack.</summary>
+    public TestBattle WithAiProfiles(IEnumerable<AiProfileDef> profiles)
+    {
+        _aiProfiles.AddRange(profiles);
+        return Rebuild();
+    }
+
     private TestBattle Rebuild()
     {
         Rules = RulesPack.InMemory("test", abilities: _abilities, passives: _passives, conditions: _conditions, maps: [_map],
-            injuries: _injuries.Count > 0 ? _injuries : null, monsters: _monsters, items: _items);
+            injuries: _injuries.Count > 0 ? _injuries : null, monsters: _monsters, items: _items, aiProfiles: _aiProfiles);
         return this;
     }
 
