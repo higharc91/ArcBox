@@ -7,7 +7,7 @@
     "side": "U = distance along the edge / (span * tile); V = depth below the top / tile (repeats); chasm_side is two tiles deep and clamps",
     "lip": "drawn over the top band of a side under a top that has one; transparent below its edge",
     "decal": "32x32 alpha on a tile's top in tile-local UV; 'rug' is 64x64 over 2x2 tiles",
-    "wall": "32x48 alpha on a side face, one tile wide, hung 'fromTop' texels below the wall's top; drawn for a +V face, mirror for +U",
+    "wall": "32x48 alpha on a side face, one tile wide, hung 'fromTop' texels below the wall's top (the texture entry suggests a value); drawn for a +V face, mirror for +U",
     "animated": "frames are laid out left to right; play at fps, looping",
     "sameLayout": "dungeon_floor, _mossy, _cracked and _bloody share one slab layout: mix them per tile"
   },
@@ -446,7 +446,7 @@
         "flicker": "pulse",
         "at": [
           16,
-          16
+          20
         ]
       }
     },
@@ -494,10 +494,7 @@
       "tags": [
         "light"
       ],
-      "hang": {
-        "face": "+V as drawn; mirror for a +U face",
-        "fromTop": "texels below the wall's top edge"
-      },
+      "fromTop": 6,
       "light": {
         "colour": {
           "iron": "#ffd263"
@@ -506,7 +503,7 @@
         "flicker": "torch",
         "at": [
           15,
-          4
+          8
         ]
       }
     },
@@ -522,10 +519,7 @@
         48
       ],
       "tags": [],
-      "hang": {
-        "face": "+V as drawn; mirror for a +U face",
-        "fromTop": "texels below the wall's top edge"
-      }
+      "fromTop": 6
     },
     "wall_banner": {
       "kind": "wall",
@@ -541,10 +535,7 @@
         48
       ],
       "tags": [],
-      "hang": {
-        "face": "+V as drawn; mirror for a +U face",
-        "fromTop": "texels below the wall's top edge"
-      }
+      "fromTop": 2
     },
     "wall_crest": {
       "kind": "wall",
@@ -559,10 +550,7 @@
         48
       ],
       "tags": [],
-      "hang": {
-        "face": "+V as drawn; mirror for a +U face",
-        "fromTop": "texels below the wall's top edge"
-      }
+      "fromTop": 2
     },
     "cobweb": {
       "kind": "wall",
@@ -577,10 +565,7 @@
       ],
       "tags": [],
       "note": "top-left corner of a face; mirror for the right",
-      "hang": {
-        "face": "+V as drawn; mirror for a +U face",
-        "fromTop": "texels below the wall's top edge"
-      }
+      "fromTop": 0
     },
     "wall_crack": {
       "kind": "wall",
@@ -594,10 +579,7 @@
         48
       ],
       "tags": [],
-      "hang": {
-        "face": "+V as drawn; mirror for a +U face",
-        "fromTop": "texels below the wall's top edge"
-      }
+      "fromTop": 6
     },
     "moss_drip": {
       "kind": "wall",
@@ -611,10 +593,7 @@
         48
       ],
       "tags": [],
-      "hang": {
-        "face": "+V as drawn; mirror for a +U face",
-        "fromTop": "texels below the wall's top edge"
-      }
+      "fromTop": 0
     },
     "wall_runes": {
       "kind": "wall",
@@ -633,10 +612,7 @@
         "runes",
         "light"
       ],
-      "hang": {
-        "face": "+V as drawn; mirror for a +U face",
-        "fromTop": "texels below the wall's top edge"
-      },
+      "fromTop": 8,
       "light": {
         "colour": {
           "fel": "#91f59a",
@@ -647,7 +623,7 @@
         "flicker": "pulse",
         "at": [
           16,
-          16
+          20
         ]
       }
     }

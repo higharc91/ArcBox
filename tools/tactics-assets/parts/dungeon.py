@@ -25,7 +25,7 @@ from functools import lru_cache
 from typing import Callable
 
 import numpy as np
-from PIL import Image, ImageFilter
+from PIL import Image
 
 from arcpix import iso, tex
 from arcpix.canvas import Canvas, SlotTable
@@ -239,9 +239,9 @@ def dungeon_floor(state: str = "plain", seed: int = 701) -> Canvas:
         sp = r.random((T, T))
         shade = np.where(moss & (sp < 0.05), 5, shade)
     if state == "bloody":
-        bl = tex.fbm(T, T, 4, r, octaves=3)
-        pool = bl > 0.8
-        flow = joint & (bl > 0.6)                            # blood runs along the joints
+        bl = tex.fbm(T, T, 8, r, octaves=3)
+        pool = bl > 0.84
+        flow = joint & (bl > 0.66)                            # blood runs along the joints
         drops = (r.random((T, T)) < 0.004) & (bl > 0.7)
         wet = pool | flow | drops
         slot[wet] = _sid("accent")
@@ -687,10 +687,9 @@ def _decal(w: int = DECAL, h: int = DECAL) -> Canvas:
     return Canvas(w, h, TS)
 
 
-def rails(seed: int = 861, *, kind: str = "straight") -> Canvas:
+def rails(*, kind: str = "straight") -> Canvas:
     """Mine rails in tile-local UV, running along U (transpose for V): sleepers every 8 texels so neighbouring
     tiles continue the track, two rails with a lit top. `curve` turns from -U to +V; `end` adds a buffer stop."""
-    r = tex.rng(seed)
     c = _decal()
     if kind == "curve":
         # a quarter turn about the tile's (-U, +V) corner; the track's centre line has radius 16
@@ -706,7 +705,8 @@ def rails(seed: int = 861, *, kind: str = "straight") -> Canvas:
                 for rr in (10.5, 21.5):
                     if abs(d - rr) < 0.8:
                         c.px(x, y, "metal", 4 if d < rr else 3)
-        _ = r
+                    elif 0.8 <= d - rr < 1.7:
+                        c.px(x, y, "grout", 0)
         return c
     for x0 in range(2, DECAL, 8):                                              # sleepers
         for y in range(6, 27):
@@ -732,7 +732,7 @@ def rails(seed: int = 861, *, kind: str = "straight") -> Canvas:
     return c
 
 
-def carpet(seed: int = 871, *, end: bool = False) -> Canvas:
+def carpet(*, end: bool = False) -> Canvas:
     """A carpet runner in tile-local UV along U: a border, a field with a lozenge every half tile (so it runs on
     without a seam from tile to tile) and, for the end piece, a fringe. Transpose it for a runner along V."""
     c = _decal()
@@ -775,7 +775,7 @@ def carpet(seed: int = 871, *, end: bool = False) -> Canvas:
     return c
 
 
-def rug(seed: int = 881) -> Canvas:
+def rug() -> Canvas:
     """A 2x2-tile rug (64x64, tile-local to its four tiles: split it into quarters): a medallion, a border of
     stepped lozenges and a fringe on two ends."""
     c = _decal(64, 64)
@@ -811,7 +811,7 @@ def rug(seed: int = 881) -> Canvas:
     return c
 
 
-def rune_circle_frames(seed: int = 891, frames: int = 8) -> list[Canvas]:
+def rune_circle_frames(frames: int = 8) -> list[Canvas]:
     """A summoning circle burned into the floor: two rings, a star and rune ticks. It pulses, and a bright arc
     runs round the outer ring once per loop."""
     out = []
@@ -819,9 +819,8 @@ def rune_circle_frames(seed: int = 891, frames: int = 8) -> list[Canvas]:
     dx, dy = xs + 0.5 - 16, ys + 0.5 - 16
     d = np.hypot(dx, dy)
     ang = (np.arctan2(dy, dx) + 2 * np.pi) % (2 * np.pi)
-    star = np.zeros((DECAL, DECAL), bool)
-    pts = [(16 + 11 * math.cos(-math.pi / 2 + k * 4 * math.pi / 5), 16 + 11 * math.sin(-math.pi / 2 + k * 4 * math.pi / 5))
-           for k in range(6)]
+    angs = [-math.pi / 2 + k * 4 * math.pi / 5 for k in range(6)]
+    pts = [(16 + 11 * math.cos(a), 16 + 11 * math.sin(a)) for a in angs]
     tmp = _decal()
     for (ax, ay), (bx, by) in zip(pts, pts[1:]):
         tmp.line(ax, ay, bx, by, "glow", 3)
@@ -1559,7 +1558,7 @@ def bone_pile(seed: int = 951) -> Canvas:
     return _done(c)
 
 
-def chains_hanging(seed: int = 952) -> Canvas:
+def chains_hanging() -> Canvas:
     """Chains hanging from the ceiling, ending in a hook a little above head height. The top runs off the frame:
     hang it from the dark."""
     c = _pcanvas(16, 64)
@@ -2061,9 +2060,7 @@ def barrel_tap_frames(frames: int = 4) -> list[Canvas]:
         c, S = _new(32, 32, 16, 24)
         for u in (-4, 4):
             S.box(u - 1, -4.5, 0, u + 1, 4.5, 2.6, "wood", base=-0.4)
-        stave = lambda Z: 0.0                                        # noqa: E731
         S.hcyl("u", (0, 0, 6.6), 6, 5, "wood", cap_slot="wood")
-        _ = stave
         th = np.linspace(0, 2 * math.pi, 120)
         for u in (-4.2, 4.2):
             P = np.c_[np.full_like(th, u), 5.2 * np.cos(th), 6.6 + 5.2 * np.sin(th)]
@@ -3032,8 +3029,8 @@ def cave(frame: int = 0) -> Room:
                "944444444444",
                "900000400000",
                "900000400000",
-               "955333433335",
-               "955333433336",
+               "955333333335",
+               "955333333336",
                "953333333336"]
     R = Room(mats, terrain, heights, frame=frame, ambient=AMBIENT["cave"], seed=8,
              decals={"c": (0.08, [("pebbles_0", None), ("pebbles_1", None)]),
@@ -3114,7 +3111,7 @@ def hall(frame: int = 0) -> Room:
                             (8, "sconce", None, {})):
         R.wall(0, j, "u", tid, var, **kw)
     R.prop("door_arch", 3, 0.25, "oak")
-    R.prop("fireplace", 0.72, 2, "warm", mirror=True, light=0.75)
+    R.prop("fireplace", 0.72, 2, "grey", mirror=True, light=0.75)
     R.prop("barrel_tap", 1, 5, phase=1)
     R.prop("barrel_tap", 1, 6, phase=3)
     R.prop("tavern_table", 2, 3, phase=0)
@@ -3171,6 +3168,10 @@ def _sheet(imgs: list[Image.Image]) -> Image.Image:
     return out
 
 
+WALL_DROP = {"sconce": 6, "wall_banner": 2, "wall_crest": 2, "cobweb": 0, "moss_drip": 0, "wall_runes": 8}
+"""Suggested hanging height of each wall decal: texels below the wall's top edge (others: 6)."""
+
+
 def _build_textures(out) -> tuple[dict, dict[str, list[Tile]]]:
     entries: dict = {}
     tiles: dict[str, list[Tile]] = {"top": [], "side": [], "lip": [], "decal": [], "wall": []}
@@ -3189,12 +3190,12 @@ def _build_textures(out) -> tuple[dict, dict[str, list[Tile]]]:
         if t.note:
             e["note"] = t.note
         if t.kind == "wall":
-            e["hang"] = {"face": "+V as drawn; mirror for a +U face", "fromTop": "texels below the wall's top edge"}
+            e["fromTop"] = WALL_DROP.get(t.id, 6)
         if "light" in t.tags:
             e["light"] = {"colour": {vn: ramps(v)["glow"][4] for vn, v in t.variants.items()},
                           "radius": 3.0 if t.id == "sconce" else 1.6,
                           "flicker": "torch" if t.id == "sconce" else "pulse",
-                          "at": [15, 4] if t.id == "sconce" else [16, 16]}
+                          "at": [15, 8] if t.id == "sconce" else [16, 20]}
         entries[t.id] = e
     return entries, tiles
 
@@ -3211,7 +3212,8 @@ def _build_props(out) -> tuple[dict, list[Tile]]:
             rel = f"props/{p.id}_{vname}.png"
             save(_sheet(imgs), out / rel)
             files[vname] = rel
-            tiles.append(Tile(imgs[0], p.id, vname + (f" · {len(imgs)}f" if len(imgs) > 1 else "")))
+            shown = imgs[len(imgs) // 2] if "fx" in p.tags else imgs[0]
+            tiles.append(Tile(shown, p.id, vname + (f" · {len(imgs)}f" if len(imgs) > 1 else "")))
         e = {"variants": files, "size": [w, h], "anchor": list(frames[0].anchor), "frames": len(frames),
              "fps": p.fps, "blocks": p.blocks, "cover": p.cover, "height": p.height, "tags": p.tags}
         if p.facing:
@@ -3277,7 +3279,7 @@ def _scene_preview(name: str, frame: int = 0) -> Image.Image:
 def _lighting_preview(lt_tiles: list[Tile]) -> Image.Image:
     """The darkness recipe, step by step, on the crypt: albedo, light map, emissive mask, result."""
     base, lmap, em, lit = crypt(0).render(parts=True)
-    box = (330, 150, 690, 420)
+    box = (250, 150, 610, 420)
     steps = [Tile(im.crop(box).convert("RGBA"), lab, sub) for im, lab, sub in (
         (base, "1 · albedo", "the map as drawn"), (lmap, "2 · light", "ambient + pools, banded"),
         (em, "3 · emissive", "glow, flame and liquid slots"), (lit, "4 · lit", "albedo x light, emissive kept"))]
@@ -3321,8 +3323,8 @@ def build() -> None:
                     "chasm_side is two tiles deep and clamps",
             "lip": "drawn over the top band of a side under a top that has one; transparent below its edge",
             "decal": "32x32 alpha on a tile's top in tile-local UV; 'rug' is 64x64 over 2x2 tiles",
-            "wall": "32x48 alpha on a side face, one tile wide, hung 'fromTop' texels below the wall's top; "
-                    "drawn for a +V face, mirror for +U",
+            "wall": "32x48 alpha on a side face, one tile wide, hung 'fromTop' texels below the wall's top "
+                    "(the texture entry suggests a value); drawn for a +V face, mirror for +U",
             "animated": "frames are laid out left to right; play at fps, looping",
             "sameLayout": "dungeon_floor, _mossy, _cracked and _bloody share one slab layout: mix them per tile",
         },
