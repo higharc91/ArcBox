@@ -454,7 +454,15 @@
       "bare",
       "gauntlets",
       "gloves",
+      "rune_marked",
       "wraps"
+    ],
+    "shoulders": [
+      "drake_pauldrons",
+      "rune_stones"
+    ],
+    "float": [
+      "chaos_orb"
     ],
     "offhand": [
       "blade",
@@ -474,6 +482,7 @@
   },
   "order": {
     "front": [
+      "float",
       "tail",
       "cape",
       "body",
@@ -483,6 +492,7 @@
       "torso",
       "beard",
       "hair",
+      "shoulders",
       "headgear",
       "horns",
       "weapon",
@@ -490,6 +500,7 @@
       "offhand"
     ],
     "back": [
+      "float",
       "offhand",
       "body",
       "marks",
@@ -502,6 +513,7 @@
       "cape",
       "beard",
       "hair",
+      "shoulders",
       "headgear",
       "horns"
     ]

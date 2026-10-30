@@ -43,7 +43,9 @@ PARTS: dict[str, dict[str, P.Part]] = {
                                            "living_staff", "lyre", "pitchfork", "smith_hammer", "broom",
                                            "tankard", "scroll", "greataxe", "maul", "spellfire", "wild_motes",
                                            "rune_staff")},
-    "hands": {k: P.hands(k) for k in ("bare", "gloves", "gauntlets", "wraps")},
+    "hands": {k: P.hands(k) for k in ("bare", "gloves", "gauntlets", "wraps", "rune_marked")},
+    "shoulders": {k: P.shoulders(k) for k in ("drake_pauldrons", "rune_stones")},
+    "float": {k: P.float_(k) for k in ("chaos_orb",)},
     "offhand": {k: P.offhand(k) for k in ("round_shield", "kite_shield", "buckler", "lantern", "orb",
                                               "tower_shield", "blade", "dagger", "main_gauche", "bomb",
                                               "war_horn", "hand_axe", "spirit_totem")},
@@ -52,10 +54,10 @@ PARTS: dict[str, dict[str, P.Part]] = {
 # Draw order per facing (first = bottom). In the front view the cloak hangs behind the body and the off-hand
 # (shield) is held in front; from behind it is the other way round.
 ORDER: dict[str, list[str]] = {
-    "front": ["tail", "cape", "body", "marks", "legs", "feet", "torso", "beard", "hair", "headgear", "horns", "weapon", "hands",
-              "offhand"],
-    "back": ["offhand", "body", "marks", "legs", "feet", "torso", "tail", "weapon", "hands", "cape", "beard", "hair", "headgear",
-             "horns"],
+    "front": ["float", "tail", "cape", "body", "marks", "legs", "feet", "torso", "beard", "hair", "shoulders", "headgear",
+              "horns", "weapon", "hands", "offhand"],
+    "back": ["float", "offhand", "body", "marks", "legs", "feet", "torso", "tail", "weapon", "hands", "cape", "beard", "hair",
+             "shoulders", "headgear", "horns"],
 }
 
 # Slots that get automatic volume shading per layer (others are drawn with explicit shades).
