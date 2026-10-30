@@ -9,19 +9,23 @@ internal sealed partial class Validation
 {
     // ---- Effects ----------------------------------------------------------------------------------------------------
 
-    /// <summary>Checks the effect list at <c>e[name]</c>, if there is one. False when an effect couldn't be read.</summary>
-    private bool EffectsIn(JsonElement e, string name, string file, string ptr, bool inSave)
+    /// <summary>
+    /// Checks the effect list at <c>e[name]</c>, if there is one. False when an effect couldn't be read.
+    /// <paramref name="concentration"/> is whether the ability the effects belong to costs concentration (null outside an
+    /// ability): a block that ties itself to concentration needs it.
+    /// </summary>
+    private bool EffectsIn(JsonElement e, string name, string file, string ptr, bool inSave, bool? concentration = null)
         => e.ValueKind != JsonValueKind.Object || !e.TryGetProperty(name, out var list)
-           || EffectList(list, file, Pointer.Append(ptr, name), inSave);
+           || EffectList(list, file, Pointer.Append(ptr, name), inSave, concentration);
 
-    private bool EffectList(JsonElement list, string file, string ptr, bool inSave)
+    private bool EffectList(JsonElement list, string file, string ptr, bool inSave, bool? concentration)
     {
         if (list.ValueKind != JsonValueKind.Array)
             return true;   // the element's own deserialisation reports it
         var ok = true;
         var i = 0;
         foreach (var effect in list.EnumerateArray())
-            ok &= Effect(effect, file, Pointer.Append(ptr, i++), inSave);
+            ok &= Effect(effect, file, Pointer.Append(ptr, i++), inSave, concentration);
         return ok;
     }
 
@@ -29,9 +33,10 @@ internal sealed partial class Validation
     /// One effect: exactly one known block key, its branches, a <c>random</c> table's effects and a <c>zone</c>'s passives
     /// (checked first, with their own pointers), then the block's values: attack kinds, named addends, by-level tables,
     /// condition, monster and art ids, until-save under a save, ranges, area sizes, counts, the named hook and its args, and
-    /// the extra-action kinds and turn-order ops.
+    /// the extra-action kinds and turn-order ops, the monsters a named hook needs, and <c>concentration: true</c> on a zone,
+    /// summon or statMod only in an ability that costs concentration (otherwise it would never end).
     /// </summary>
-    private bool Effect(JsonElement e, string file, string ptr, bool inSave)
+    private bool Effect(JsonElement e, string file, string ptr, bool inSave, bool? concentration)
     {
         if (e.ValueKind != JsonValueKind.Object)
         {
@@ -53,7 +58,7 @@ internal sealed partial class Validation
         var ok = true;
         foreach (var branch in Branches(BlockRegistry.For(key).DefType))
             if (Locate(e, key, branch, ptr) is { } found)
-                ok &= EffectList(found.Value, file, found.Pointer, inSave || key == "save");
+                ok &= EffectList(found.Value, file, found.Pointer, inSave || key == "save", concentration);
         if (key == "random" && Locate(e, key, "table", ptr) is { Value.ValueKind: JsonValueKind.Array } table)
         {
             var i = 0;
@@ -61,7 +66,7 @@ internal sealed partial class Validation
             {
                 var at = Pointer.Append(table.Pointer, i++);
                 if (entry.ValueKind == JsonValueKind.Object && entry.TryGetProperty("effects", out var list))
-                    ok &= EffectList(list, file, Pointer.Append(at, "effects"), inSave);
+                    ok &= EffectList(list, file, Pointer.Append(at, "effects"), inSave, concentration);
             }
         }
         if (key == "zone" && Locate(e, key, "passives", ptr) is { Value.ValueKind: JsonValueKind.Array } passives)
@@ -114,6 +119,7 @@ internal sealed partial class Validation
                 break;
             case ZoneEffect zone:
                 AreaSize(zone.Area, file, At("area"));
+                NeedsConcentration(zone.Concentration, concentration, file, At("concentration"));
                 break;
             case AlterTerrainEffect terrain:
                 AreaSize(terrain.Area, file, At("area"));
@@ -125,10 +131,20 @@ internal sealed partial class Validation
             case SummonEffect summon:
                 Ref(RefKind.Monster, summon.Monster, file, At("monster"));
                 AtLeast(summon.Count, 1, file, At("count"));
+                NeedsConcentration(summon.Concentration, concentration, file, At("concentration"));
+                break;
+            case StatModEffect statMod:
+                NeedsConcentration(statMod.Concentration, concentration, file, At("concentration"));
                 break;
             case TransformEffect transform:
                 if (NamedHooks.TryFor(transform.Hook) is { } hook)
+                {
                     hook.Validate(transform.Args, message => Error(file, At("args"), message));
+                    foreach (var monster in hook.Monsters(transform.Args))
+                        Ref(RefKind.Monster, monster, file, ArgPointer(transform.Args, monster) is { } arg
+                            ? Pointer.Append(At("args"), arg)
+                            : At("hook"));
+                }
                 else
                     Error(file, At("hook"), $"Unknown named hook '{transform.Hook}' (expected {OneOf(NamedHooks.Names)}).");
                 break;
@@ -170,6 +186,25 @@ internal sealed partial class Validation
     {
         if (value < min)
             Error(file, ptr, $"'{ptr[(ptr.LastIndexOf('/') + 1)..]}' must be at least {min}.");
+    }
+
+    /// <summary>The name of the string arg holding <paramref name="value"/>, or null when the hook fixed it itself.</summary>
+    private static string? ArgPointer(JsonElement args, string value)
+    {
+        if (args.ValueKind != JsonValueKind.Object)
+            return null;
+        foreach (var arg in args.EnumerateObject())
+            if (arg.Value.ValueKind == JsonValueKind.String && arg.Value.GetString() == value)
+                return arg.Name;
+        return null;
+    }
+
+    /// <summary>A block tied to concentration (<paramref name="tied"/>) inside an ability that doesn't cost it would never end.</summary>
+    private void NeedsConcentration(bool tied, bool? abilityConcentrates, string file, string ptr)
+    {
+        if (tied && abilityConcentrates == false)
+            Error(file, ptr, "'concentration' needs an ability that costs concentration (\"cost\": {\"concentration\": true}); "
+                             + "otherwise it would never end.");
     }
 
     private void AreaSize(AreaDef area, string file, string ptr)

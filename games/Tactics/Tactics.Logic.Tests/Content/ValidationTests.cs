@@ -75,6 +75,9 @@ public sealed class ValidationTests
                 "Unknown extra action 'reaction' (expected \"action\" or \"bonus\")."),
             new ContentError(Abilities, "/abilities/0/effects/3/turnOrder/op",
                 "Unknown turn order op 'skip' (expected \"delay\", \"hasten\" or \"swap\")."),
+            new ContentError(Abilities, "/abilities/0/effects/8/zone/concentration", Endless),
+            new ContentError(Abilities, "/abilities/0/effects/9/statMod/concentration", Endless),
+            new ContentError(Abilities, "/abilities/0/effects/10/summon/concentration", Endless),
             new ContentError(Abilities, "/abilities/1/effects/0/random/table/1/effects/0/damage/bonus/0",
                 "Unknown addend 'mod.luck' (expected \"mod.<stat>\", \"mod.cast\", \"prof\" or \"level\")."),
             new ContentError(Abilities, "/abilities/1/effects/0/random/table/0/weight", "A weight must be at least 1."),
@@ -82,7 +85,13 @@ public sealed class ValidationTests
             new ContentError(Abilities, "/abilities/1/effects/2/summon/count", "'count' must be at least 1."),
             new ContentError(Abilities, "/abilities/1/effects/3/chain/times", "'times' must be at least 1."),
             new ContentError(Abilities, "/abilities/0/effects/4/summon/monster", "Unknown monster 'wolff'."),
+            new ContentError(Abilities, "/abilities/0/effects/5/transform/args/monster", "Unknown monster 'bear'."),
+            new ContentError(Abilities, "/abilities/0/effects/6/transform/hook", "Unknown monster 'sheep'."),
+            new ContentError(Abilities, "/abilities/0/effects/7/transform/hook", "Unknown monster 'skeleton'."),
         ], ErrorsOf("bad_effect_values"));
+
+    private const string Endless =
+        "'concentration' needs an ability that costs concentration (\"cost\": {\"concentration\": true}); otherwise it would never end.";
 
     [Fact]
     public void Collects_all_errors_not_just_first()

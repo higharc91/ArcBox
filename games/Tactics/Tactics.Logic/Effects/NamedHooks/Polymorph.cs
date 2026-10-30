@@ -32,5 +32,8 @@ public sealed class Polymorph : INamedHook
     }
 
     /// <inheritdoc />
+    public IEnumerable<string> Monsters(JsonElement args) => [Sheep];
+
+    /// <inheritdoc />
     public void Validate(JsonElement args, Action<string> error) => NamedHooks.RequireObject(Name, args, error);
 }

@@ -26,6 +26,10 @@ public sealed class WildShape : INamedHook
     }
 
     /// <inheritdoc />
+    public IEnumerable<string> Monsters(JsonElement args)
+        => NamedHooks.String(args, "monster") is { } monster ? [monster] : [];
+
+    /// <inheritdoc />
     public void Validate(JsonElement args, Action<string> error)
     {
         if (NamedHooks.String(args, "monster") is null)

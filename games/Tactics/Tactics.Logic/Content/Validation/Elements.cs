@@ -11,7 +11,10 @@ internal sealed partial class Validation
     public AbilityDef? Ability(JsonElement e, string file, string ptr)
         => Guarded(file, ptr, () =>
         {
-            if (!EffectsIn(e, "effects", file, ptr, inSave: false))
+            var concentrates = e.ValueKind == JsonValueKind.Object && e.TryGetProperty("cost", out var cost)
+                               && cost.ValueKind == JsonValueKind.Object && cost.TryGetProperty("concentration", out var flag)
+                               && flag.ValueKind == JsonValueKind.True;
+            if (!EffectsIn(e, "effects", file, ptr, inSave: false, concentrates))
                 return null;
             var def = Deserialize<AbilityDef>(e, file, ptr);
             if (def is null)

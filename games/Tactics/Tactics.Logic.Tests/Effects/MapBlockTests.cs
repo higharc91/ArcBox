@@ -265,7 +265,7 @@ public sealed class MapBlockTests
     }
 
     [Fact]
-    public void Tile_blocks_run_once_at_the_aim_and_unit_blocks_per_unit()
+    public void Tile_blocks_run_once_at_the_aim_and_unit_blocks_per_unit_in_authored_order()
     {
         var misty = OnTile("test.misty_step", TargetKind.EmptyTile, new AreaDef(AreaShape.Single), new TeleportEffect(6));
         var burning = OnTile("test.burning_ground", TargetKind.Tile, new AreaDef(AreaShape.Burst, 1),
@@ -282,11 +282,33 @@ public sealed class MapBlockTests
         var (after, events) = battle.Apply(state, new Use(U("mage"), misty.Id, new Target(Tile: T(2, 2))));
         Assert.Equal(new Teleported(U("mage"), T(0, 0), T(2, 2)), events[^1]);
 
-        // One zone for the whole ability (run first), damage once for each goblin.
+        // Damage once for each goblin (authored first), then one zone for the whole ability.
         after = after.Change("mage", u => u with { Economy = Economy.Fresh(u.Sheet) });
         (after, events) = battle.Apply(after, new Use(U("mage"), burning.Id, new Target(Tile: T(3, 1))));
         Assert.Single(events.OfType<ZoneCreated>());
         Assert.Equal([U("gob"), U("hob")], events.OfType<Damaged>().Select(d => d.Unit));
-        Assert.IsType<ZoneCreated>(events[1]);
+        Assert.IsType<ZoneCreated>(events[^1]);
+    }
+
+    [Fact]
+    public void Attack_then_teleport_attacks_before_teleporting()
+    {
+        var strikeAndBlink = OnTile("test.strike_and_blink", TargetKind.Tile, new AreaDef(AreaShape.Burst, 1),
+            new AttackEffect("spell", Stat.Wis, [new DamageEffect(TestAbilities.Flat("1d4"), "force", [])], [], []),
+            new TeleportEffect(6),
+            new DamageEffect(TestAbilities.Flat("1"), "force", []));
+        var battle = TestBattle.On(Field)
+            .Party("mage", Mage(strikeAndBlink), T(0, 0))
+            .Enemy("gob", Goblin, T(3, 1))
+            .With(strikeAndBlink);
+        var (state, _) = battle.Start();
+
+        var (after, events) = battle.Apply(state, new Use(U("mage"), strikeAndBlink.Id, new Target(Tile: T(3, 2))));
+        var attacked = events.IndexOf(events.OfType<AttackResolved>().Single());
+        var teleported = events.IndexOf(new Teleported(U("mage"), T(0, 0), T(3, 2)));
+        var lastDamage = events.IndexOf(new Damaged(U("gob"), 1, "force", after.Units[U("gob")].Hp));
+        Assert.True(attacked > 0 && attacked < teleported && teleported < lastDamage,
+            $"attack at {attacked}, teleport at {teleported}, final damage at {lastDamage}");
+        Assert.Equal(T(3, 2), after.Units[U("mage")].Pos);
     }
 }

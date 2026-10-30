@@ -125,10 +125,11 @@ public static partial class Battle
 
     /// <summary>
     /// Validates <paramref name="use"/> in order (able to act, known ability, cost, target kind, range, line of sight) and,
-    /// if it passes, queues <see cref="PayCostStep"/>, then one run of the ability's tile blocks
-    /// (<see cref="EffectDef.OnTile"/>) at the aim with no target unit, even when the area holds no units, then one
-    /// <see cref="RunEffectsStep"/> of its other blocks per affected unit in sorted <see cref="UnitId"/> order. Returns the
-    /// rejection otherwise, leaving the queue untouched.
+    /// if it passes, queues <see cref="PayCostStep"/>, then the ability's effects in their authored order, split into
+    /// runs of consecutive blocks: a run of tile blocks (<see cref="EffectDef.OnTile"/>) runs once at the aim with no target
+    /// unit, even when the area holds no units; a run of other blocks runs once per affected unit in sorted
+    /// <see cref="UnitId"/> order (one <see cref="RunEffectsStep"/> each). So <c>[attack, teleport]</c> attacks every target,
+    /// then teleports. Returns the rejection otherwise, leaving the queue untouched.
     /// </summary>
     private static Rejection? PlanUse(BattleWriter w, Use use, RulesPack rules)
     {
@@ -146,13 +147,20 @@ public static partial class Battle
         if (ability.IsWeaponAttack)
             effects = [.. Enumerable.Repeat(effects, Math.Max(1, user.Sheet.Attacks)).SelectMany(e => e)];
 
-        var onTile = effects.Where(e => e.OnTile).ToImmutableArray();
-        var onUnits = effects.Where(e => !e.OnTile).ToImmutableArray();
         var steps = new List<Step> { new PayCostStep(user.Id, ability.Id, use.Target) };
-        if (!onTile.IsEmpty)
-            steps.Add(new RunEffectsStep(user.Id, null, aim, ability.Id, onTile));
-        if (!onUnits.IsEmpty)
-            steps.AddRange(targets.Select(t => new RunEffectsStep(user.Id, t, aim, ability.Id, onUnits)));
+        for (var start = 0; start < effects.Length;)
+        {
+            var onTile = effects[start].OnTile;
+            var end = start;
+            while (end < effects.Length && effects[end].OnTile == onTile)
+                end++;
+            var run = effects[start..end];
+            if (onTile)
+                steps.Add(new RunEffectsStep(user.Id, null, aim, ability.Id, run));
+            else
+                steps.AddRange(targets.Select(t => new RunEffectsStep(user.Id, t, aim, ability.Id, run)));
+            start = end;
+        }
         w.PushFront([.. steps]);
         return null;
     }

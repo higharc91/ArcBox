@@ -59,5 +59,8 @@ public sealed class Counterspell : INamedHook
     }
 
     /// <inheritdoc />
+    public IEnumerable<string> Monsters(JsonElement args) => [];
+
+    /// <inheritdoc />
     public void Validate(JsonElement args, Action<string> error) => NamedHooks.RequireObject(Name, args, error);
 }

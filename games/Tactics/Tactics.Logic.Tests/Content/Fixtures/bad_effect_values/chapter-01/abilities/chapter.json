@@ -6,7 +6,13 @@
         { "transform": { "hook": "wild_shape", "args": {} } },
         { "extraAction": { "kind": "reaction" } },
         { "turnOrder": { "op": "skip" } },
-        { "summon": { "monster": "wolff" } }
+        { "summon": { "monster": "wolff" } },
+        { "transform": { "hook": "wild_shape", "args": { "monster": "bear" } } },
+        { "transform": { "hook": "polymorph", "args": {} } },
+        { "transform": { "hook": "animate_dead", "args": {} } },
+        { "zone": { "kind": "guard", "area": { "shape": "self" }, "rounds": 10, "concentration": true } },
+        { "statMod": { "mods": { "ac": 1 }, "rounds": 10, "concentration": true } },
+        { "summon": { "monster": "wolf", "concentration": true } }
       ] },
     { "id": "chapter.storm", "name": "Storm", "tier": 0, "cost": { "action": 1 },
       "target": { "kind": "tile", "range": 6, "los": false, "area": { "shape": "single" } },

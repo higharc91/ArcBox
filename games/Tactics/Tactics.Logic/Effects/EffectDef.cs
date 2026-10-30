@@ -13,8 +13,10 @@ public abstract record EffectDef
 {
     /// <summary>
     /// True for a block that acts on the aimed tile rather than on a unit (a zone, terrain, a summon, the user's own
-    /// movement): an ability runs these once, at its aim, with no target unit, even when its area holds no units
-    /// (<see cref="Battle"/>); its other blocks run once for each unit it affects.
+    /// movement): at the top level of an ability's effects, a run of consecutive tile blocks runs once, at the aim, with no
+    /// target unit, even when the area holds no units, and a run of other blocks once for each unit the ability affects,
+    /// the runs in authored order (<see cref="Battle"/>). A tile block nested in another block (a branch of <c>attack</c>,
+    /// <c>save</c>, <c>if</c>, <c>random</c>, <c>repeat</c>, …) runs wherever that block runs: once per affected unit.
     /// </summary>
     public virtual bool OnTile => false;
 }

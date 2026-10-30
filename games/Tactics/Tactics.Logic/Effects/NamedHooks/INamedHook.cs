@@ -23,6 +23,12 @@ public interface INamedHook
 
     /// <summary>Checks <paramref name="args"/> at load, reporting each problem through <paramref name="error"/>.</summary>
     void Validate(JsonElement args, Action<string> error);
+
+    /// <summary>
+    /// The monster ids the hook needs with these <paramref name="args"/> (from its args, or fixed by the hook); the loader
+    /// checks that each one exists.
+    /// </summary>
+    IEnumerable<string> Monsters(JsonElement args);
 }
 
 /// <summary>Every named hook, by name. Adding one takes a deploy.</summary>
