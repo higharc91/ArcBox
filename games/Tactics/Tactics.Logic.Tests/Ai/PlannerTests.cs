@@ -197,6 +197,39 @@ public sealed class PlannerTests
     }
 
     [Fact]
+    public void Marks_its_quarry_when_its_own_hits_then_deal_more()
+    {
+        // The mark does nothing to the goblin by itself: its worth is the 1d6 the archer's own passive adds to every hit on a
+        // marked foe (Hunter's Mark). The archer shoots, then marks the goblin with its bonus action.
+        var quarry = new ConditionDef(new ConditionId("quarry"), "Quarry", null, [], Ordinal.Set("magical"));
+        var mark = new AbilityDef(new AbilityId("test.mark"), "Mark", Tier: 1,
+            new CostDef(Bonus: 1, Resource: Ordinal.Map(("focus", 1)), Concentration: true),
+            new TargetDef(TargetKind.Enemy, Range: 6, Los: true, new AreaDef(AreaShape.Single)),
+            [new ApplyEffect(quarry.Id, Rounds: null)]);
+        var bonus = new PassiveDef("test.mark_bonus", HookKind.OnAttackHit, new WhenDef(TargetHasCondition: quarry.Id),
+            [new DamageEffect(TestAbilities.Flat("1d6"), "force", [])], null);
+        var archer = First(TestSheets.Fighter with { Weapon = TestConditions.Longbow, Side = Side.Enemy, Resources = Ordinal.Map(("focus", 2)) })
+            .Knowing(mark) with { Passives = [bonus.Id] };
+        var battle = On("""
+            0. 0. 0. 0. 0. 0.
+            0. 0. 0. 0. 0. 0.
+            """).With(mark).WithPassives(bonus).WithConditions(quarry)
+            .Enemy("archer", archer, T(0, 0), new AiControlled("archer"))
+            .Party("vex", TestSheets.Rogue with { MaxHp = 40 }, T(5, 1));
+        var state = battle.Start().State;
+
+        var plan = Ai.Plan(state, U("archer"), battle.Rules);
+
+        Assert.True(U("vex") == UseOf(plan, "test.mark")?.Target.Unit, plan.Explain);
+        var after = ApplyAll(state, plan, battle.Rules);
+        Assert.Contains(after.Units[U("vex")].Conditions, c => c.Id == quarry.Id);
+
+        // Once marked, marking it again is worth nothing.
+        var marked = state.Give("vex", TestConditions.Lasting(quarry, U("archer")));
+        Assert.Null(UseOf(Ai.Plan(marked, U("archer"), battle.Rules), "test.mark"));
+    }
+
+    [Fact]
     public void Plan_scores_do_not_depend_on_the_order_tiles_are_scored_in()
     {
         // Mirror images, so the planner scores the tiles near the goblin first in one and last in the other. Bless (a burst

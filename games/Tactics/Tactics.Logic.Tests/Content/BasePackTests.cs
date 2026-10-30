@@ -12,7 +12,10 @@ public sealed class BasePackTests
     /// <summary>The base pack, loaded once with the art manifests.</summary>
     internal static RulesPack Rules => Pack.Value;
 
-    private static readonly string[] Classes = ["cleric", "fighter", "rogue", "wizard"];
+    private static readonly string[] Classes = ["cleric", "fighter", "monk", "paladin", "ranger", "rogue", "wizard"];
+
+    /// <summary>The classes whose subclasses are still to be written (Task 19); every other class has exactly one so far.</summary>
+    private static readonly string[] SubclassesPending = ["monk", "paladin", "ranger"];
 
     private static readonly string[] AiProfiles = ["archer", "boss", "boss_cruel", "brute", "caster", "companion", "coward", "healer", "skirmisher"];
 
@@ -52,6 +55,8 @@ public sealed class BasePackTests
         [
             "blinded", "charmed", "frightened", "grappled", "incapacitated", "invisible", "paralysed", "poisoned", "prone", "restrained",
             "stunned", "unconscious", "burning", "bleeding", "slowed", "hasted", "marked", "lit", "taunted", "helped", "dodging", "disengaged",
+            "hunters_mark", "ensnared", "barkskin", "divine_smite", "divine_smite_2", "divine_smite_3", "aura_of_protection",
+            "elemental_weapon",
         ];
         Assert.All(conditions, c => Assert.True(pack.Conditions.ContainsKey(new ConditionId(c)), $"No condition '{c}'."));
         string[] common = ["attack", "dash", "disengage", "dodge", "help", "shove", "use_item"];
@@ -59,8 +64,11 @@ public sealed class BasePackTests
 
         foreach (var cls in pack.Classes.Values)
         {
-            Assert.False(cls.SubclassesPending, cls.Id);
-            Assert.Single(cls.Subclasses);
+            Assert.Equal(SubclassesPending.Contains(cls.Id), cls.SubclassesPending);
+            if (cls.SubclassesPending)
+                Assert.Empty(cls.Subclasses);
+            else
+                Assert.Single(cls.Subclasses);
             Assert.All(Enumerable.Range(1, 10), level => Assert.True(cls.DefaultPicks.ContainsKey(level), $"{cls.Id} has no default picks at {level}."));
             Assert.Contains(cls.PrimaryResource!, cls.Resources.Keys);
         }
@@ -176,8 +184,9 @@ public sealed class BasePackTests
             base_.Injuries.Values, items: base_.Items.Values);
         Invariants.Enabled = true;
         var owners = base_.Classes.Values
-            .SelectMany(c => c.Subclasses.Select(s => SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter(c.Id, "human", c.Id, s.Id, 10, base_), base_)
-                is var sheet ? sheet with { Abilities = [.. sheet.Abilities.Union(AllPicks(c, s).Where(base_.Abilities.ContainsKey))] } : null!))
+            .SelectMany(c => c.Subclasses.Select(s => (SubclassDef?)s).DefaultIfEmpty(null)
+                .Select(s => SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter(c.Id, "human", c.Id, s?.Id, 10, base_), base_)
+                    is var sheet ? sheet with { Abilities = [.. sheet.Abilities.Union(AllPicks(c, s).Where(base_.Abilities.ContainsKey))] } : null!))
             .ToArray();
         var ogre = SheetBuilder.ForMonster("hobgoblin", base_) with { MaxHp = 300, Tags = Ordinal.Set("humanoid", "undead") };
         var problems = new List<string>();
@@ -275,9 +284,9 @@ public sealed class BasePackTests
         Assert.Contains(new PassiveTriggered(U("vex"), "rogue.sneak_attack"), used.Events);
     }
 
-    /// <summary>Every ability or passive a class and its subclass offer a choice of, up to level 10.</summary>
-    private static ImmutableArray<AbilityId> AllPicks(ClassDef cls, SubclassDef subclass)
-        => [.. cls.Features.Values.Concat(subclass.Features.Values).SelectMany(f => f).SelectMany(f => f.From.IsDefault ? [] : f.From)
+    /// <summary>Every ability or passive a class and its subclass (if any) offer a choice of, up to level 10.</summary>
+    private static ImmutableArray<AbilityId> AllPicks(ClassDef cls, SubclassDef? subclass)
+        => [.. cls.Features.Values.Concat(subclass?.Features.Values ?? []).SelectMany(f => f).SelectMany(f => f.From.IsDefault ? [] : f.From)
             .Distinct().Select(id => new AbilityId(id))];
 
     [Fact]

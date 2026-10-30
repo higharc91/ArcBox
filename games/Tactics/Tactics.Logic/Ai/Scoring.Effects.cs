@@ -50,7 +50,8 @@ internal sealed partial class Scorer
                     var benefit = ConditionBenefit(apply.Condition);
                     var turns = Turns(apply.Rounds, apply.UntilSave);
                     return new Outcome(DamageDist.Zero, Offense: benefit.Offense * Math.Min(turns, benefit.OffenseTurns),
-                        Defense: benefit.Defense * Math.Min(turns, benefit.DefenseTurns));
+                        Defense: benefit.Defense * Math.Min(turns, benefit.DefenseTurns),
+                        Splash: Hostile(st.User, target) ? QuarryDamage(apply.Condition, st, target, turns) : 0);
                 }
             case StatModEffect statMod:
                 {
@@ -174,6 +175,36 @@ internal sealed partial class Scorer
             effects.AddRange(passive.Effects);
         }
         return effects.ToImmutable();
+    }
+
+    /// <summary>The share of a unit's attacks the quarry estimate expects to hit.</summary>
+    private const double QuarryHitShare = 0.6;
+
+    /// <summary>
+    /// What marking <paramref name="target"/> with <paramref name="condition"/> for <paramref name="turns"/> of the user's
+    /// turns adds to the user's own hits on it (Hunter's Mark, Divine Smite): the damage of each of its on-hit passives that
+    /// need the target to have the condition (a <c>targetHasCondition</c> leaf, alone or in an <c>all</c>), times the hits
+    /// expected (<see cref="QuarryHitShare"/> of its attacks each turn, one a turn for a once-per-turn passive), at most one
+    /// when the passive ends the condition itself. The passive's other tests aren't checked.
+    /// </summary>
+    private double QuarryDamage(ConditionId condition, Strike st, UnitState target, double turns)
+    {
+        var total = 0.0;
+        foreach (var passive in Modifiers.Passives(st.User, Rules))
+        {
+            if (passive.Hook != HookKind.OnAttackHit || passive.Target != PassiveTarget.Other || passive.Effects.IsDefaultOrEmpty
+                || passive.When is not { } when || !Needs(when, condition))
+                continue;
+            var perTurn = passive.OncePerTurn ? QuarryHitShare : QuarryHitShare * Math.Max(1, st.User.Sheet.Attacks);
+            var hits = perTurn * turns;
+            if (All(passive.Effects).Any(e => e is RemoveEffect r && r.Condition == condition))
+                hits = Math.Min(1, hits);
+            total += hits * Walk(passive.Effects, st, target).Damage.Mean;
+        }
+        return total;
+
+        static bool Needs(WhenDef when, ConditionId id)
+            => when.TargetHasCondition == id || !when.All.IsDefaultOrEmpty && when.All.Any(w => Needs(w, id));
     }
 
     /// <summary>A saving throw (see <see cref="SaveBlock"/>): fail and success branches, half damage, evasion.</summary>

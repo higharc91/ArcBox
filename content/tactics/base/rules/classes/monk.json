@@ -1,0 +1,29 @@
+{
+  "id": "monk", "name": "Monk", "role": "striker", "hitDie": 8, "saves": ["str", "dex"],
+  "armorProf": [], "weaponProf": ["simple", "martial_light"],
+  "skillChoices": { "count": 2, "from": ["acrobatics", "stealth", "athletics", "history", "insight", "religion"] },
+  "startingKit": { "weapon": "spear", "armor": "", "shield": false,
+                   "bag": [ { "item": "potion_of_healing", "count": 1 } ] },
+  "resources": { "ki": { "1": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10 } },
+  "primaryResource": "ki",
+  "features": {
+    "1": [ { "ability": "monk.unarmed_strike" }, { "ability": "monk.martial_arts" }, { "passive": "monk.unarmored_defense" } ],
+    "2": [ { "ability": "monk.flurry_of_blows" }, { "ability": "monk.step_of_the_wind" }, { "passive": "monk.unarmored_movement" } ],
+    "3": [ { "ability": "monk.deflect_attacks" } ],
+    "4": [ { "ability": "monk.patient_defense" } ],
+    "5": [ { "attacks": 2 }, { "ability": "monk.stunning_strike" } ],
+    "6": [ { "passive": "monk.unarmored_movement_2" } ],
+    "7": [ { "passive": "monk.evasion" } ],
+    "8": [ { "passive": "monk.self_restoration" } ],
+    "9": [ { "passive": "monk.acrobatic_movement" } ],
+    "10": [ { "ability": "monk.heightened_flurry" } ]
+  },
+  "subclasses": [],
+  "subclassesPending": true,
+  "defaultPicks": {
+    "1": [], "2": [], "3": [], "4": [], "5": [], "6": [], "7": [], "8": [], "9": [], "10": []
+  },
+  "aiTags": { "tags": ["striker", "melee", "mobile"], "priority": ["dex", "wis", "con", "str", "int", "cha"] },
+  "castingStat": "wis",
+  "jump": 3
+}
