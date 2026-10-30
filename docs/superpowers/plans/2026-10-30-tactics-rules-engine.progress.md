@@ -37,8 +37,8 @@ When every task is done, one whole-branch review runs.
 | 13 | Content wave 0: core files and fighter, cleric, rogue, wizard | done | `595c258`, `816acf7` | 1 |
 | 14 | AI planner, odds and threat map | done | `ac23394`, `23d88d1` | 1 |
 | 15 | Companion AI, timed-out turns, reactions, performance | done | `1feca9c`, `74cb44f` | 1 |
-| 16 | `Tactics.Sim` and the first balance report | in progress |  |  |
-| 17 | Ranger, paladin and monk | not started | | |
+| 16 | `Tactics.Sim` and the first balance report | done | `8f81baa`, `d017b9c` | 1 |
+| 17 | Ranger, paladin and monk | in progress |  |  |
 | 18 | Bard, druid and warlock | not started | | |
 | 18A | Barbarian and sorcerer (added 2026-10-30) | not started | | |
 | 19 | Martial subclasses (16, incl. barbarian's) and the hound | not started | | |
@@ -156,6 +156,13 @@ These were decided during execution. Later tasks must follow them, alongside the
 - **Fair play.** The bonus action never targets a foe the main action may have downed, unless the profile is cruel.
 - **Pathfinding fix.** `PathMap.Reachable` was indexed wrongly on non-square maps; it is fixed and has a regression test.
 
+**Simulator (Task 16)**
+- **Running it.** `dotnet run -c Release --project games/Tactics/Tactics.Sim -- --levels 1,3,5,7,10 --sizes 4,5,6 --parties 6 --seeds 20 --difficulty Normal --out <report>`. A full sweep of 1,800 battles takes about 2 minutes.
+- **Damage is HP actually lost.** Overkill and temporary HP soaked don't count as damage dealt; soaked temporary HP counts as the target's mitigation.
+- **Reactions** are left out of the ability-usage table.
+- **First report:** `docs/superpowers/reports/2026-10-30-tactics-balance-v0.md`.
+- **Intended levels.** Task 21 adds an optional intended `level` to encounters for the win-rate flag.
+
 **Companion AI and reactions (Task 15)**
 - **Reactions.** `Ai.React(state, offer, rules)` decides every AI reaction from the offer's serialisable `Cause` (a `ReactionTrigger`):
   - opportunity attacks are taken when expected value > 0;
@@ -205,6 +212,7 @@ These were decided during execution. Later tasks must follow them, alongside the
 | 4 | `Start` normalises only `Sheet.Resources`; records holding arrays compare by reference (golden tests compare JSON); rejection-text test checks only 3 of 16 strings; `CantAfford` with no resource gives "Not enough ."; `ObjectiveExpr` allows a leaf with a group; `UnitSheet.Score` defaults a missing stat to 10 |
 | 5 | A self line/cone with no aim tile pays its cost and hits nothing; the converter's key detection could collide with a parameter named like a block; `Battle.cs` is about 320 lines (targeting could move out) |
 | 6 | No HP event on deep-water drops (Task 8 addresses); prone applied after a lethal fall; Swap has no landing check; `Movement` depends on `Motion.OccupantAt` |
+| 16 | One unnamed test failure seen once, probably the AI speed test competing for CPU (simulator tests now run on their own); the temporary-HP soak path is untested |
 | 14 | Self-area threat gets a high-ground range bonus; a bonus-action Dash is never planned; the bonus pass only excludes the direct target, not downed foes caught in an area |
 | 13 | SRD approximations parked for the balance pass: manoeuvres apply to each attack with Extra Attack, Feint, Spiritual Weapon, Empowered Evocation, marked, Uncanny Dodge/Stone's Endurance as temporary HP, Lucky, Indomitable, instant Spirit Guardians, bleeding not ended by healing, untyped Sneak Attack damage |
 | 12 | Repeated error when the party spawn zone overflows; a placement level below 1 is reported against the monster file; `MaxHp` on monster or zone passives is ignored; inline monster weapons accept `replaces` |
