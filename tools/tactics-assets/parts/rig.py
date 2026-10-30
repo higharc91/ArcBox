@@ -30,6 +30,7 @@ class Build:
     half_w: int         # torso half width at the shoulders
     hip_half: int       # torso half width at the hips
     arm_len: int        # shoulder to wrist, straight down
+    feminine: bool = False   # body type: narrower shoulders, a waist, lashes and lips
 
 
 BUILDS: dict[str, Build] = {
@@ -40,6 +41,11 @@ BUILDS: dict[str, Build] = {
     "large": Build("large", head_top=4, head_w=13, head_h=11, shoulder_y=16, hip_y=27, foot_y=35,
                    half_w=7, hip_half=5, arm_len=9),
 }
+# Body types. Each race has a size (standard / short / large); the player picks the body type, and the "_f" build
+# is that size with a narrower chest and a waist. Every layer draws from the build's keypoints, so all gear fits both.
+for _k in list(BUILDS):
+    _b = BUILDS[_k]
+    BUILDS[f"{_k}_f"] = replace(_b, name=f"{_k}_f", half_w=_b.half_w - 1, hip_half=_b.hip_half + 1, feminine=True)
 
 
 @dataclass(frozen=True)

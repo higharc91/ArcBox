@@ -28,7 +28,8 @@
     "hair": "hair/violet",
     "cloth1": "cloth/charcoal",
     "cloth2": "cloth/slate",
-    "skin": "skin/tiefling"
+    "skin": "skin/tiefling",
+    "paint": "paint/woad"
   },
   "tags": [
     "tiefling",

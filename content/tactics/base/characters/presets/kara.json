@@ -3,7 +3,7 @@
   "name": "Kara",
   "race": "human",
   "class": "fighter",
-  "build": "standard",
+  "build": "standard_f",
   "layers": {
     "body": "human",
     "torso": "plate",
@@ -27,7 +27,8 @@
     "hair": "hair/auburn",
     "cloth1": "cloth/crimson",
     "cloth2": "cloth/slate",
-    "skin": "skin/fair"
+    "skin": "skin/fair",
+    "paint": "paint/woad"
   },
   "tags": [
     "human",

@@ -3,7 +3,7 @@
   "name": "Ilyra",
   "race": "elf",
   "class": "wizard",
-  "build": "standard",
+  "build": "standard_f",
   "layers": {
     "body": "elf",
     "torso": "robe",
@@ -25,7 +25,8 @@
     "hair": "hair/platinum",
     "cloth1": "cloth/royal_purple",
     "cloth2": "cloth/navy",
-    "skin": "skin/porcelain"
+    "skin": "skin/porcelain",
+    "paint": "paint/woad"
   },
   "tags": [
     "elf",

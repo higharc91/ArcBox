@@ -3,7 +3,7 @@
   "name": "Ranger",
   "race": "elf",
   "class": "ranger",
-  "build": "standard",
+  "build": "standard_f",
   "layers": {
     "body": "elf",
     "torso": "coat",
@@ -25,7 +25,8 @@
     "hair": "hair/chestnut",
     "cloth1": "cloth/forest",
     "cloth2": "cloth/sand",
-    "skin": "skin/olive"
+    "skin": "skin/olive",
+    "paint": "paint/woad"
   },
   "tags": [
     "elf",

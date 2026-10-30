@@ -18,7 +18,12 @@ from dataclasses import dataclass, field
 
 from .characters import Recipe
 
-HAIR_STYLES = ["short", "messy", "long", "ponytail", "bun", "mohawk", "braids", "cropped"]
+HAIR_STYLES = ["short", "messy", "long", "ponytail", "bun", "mohawk", "braids", "cropped", "curly", "pixie", "topknot",
+               "twintails"]
+ALL_BEARDS = ["short", "full", "braided", "goatee", "moustache", "stubble"]
+MARKS = ["freckles", "scar", "warpaint", "tattoo", "stripes"]
+PAINTS = ["woad", "ochre", "ash", "kohl", "gold", "crimson", "jade"]
+BODY_TYPES = ["masculine", "feminine"]
 HAIR_COLOURS = ["black", "brown", "chestnut", "auburn", "copper", "blonde", "platinum", "silver", "white", "teal",
                 "violet", "crimson"]
 HUMAN_SKINS = ["porcelain", "fair", "tan", "olive", "brown", "deep"]
@@ -52,27 +57,27 @@ class ClassKit:
 
 
 RACES: dict[str, Race] = {r.id: r for r in [
-    Race("human", "Human", "standard", "human", HUMAN_SKINS, HAIR_STYLES, ["short", "full", "braided"],
+    Race("human", "Human", "standard", "human", HUMAN_SKINS, HAIR_STYLES, ALL_BEARDS,
          default={"skin": "tan", "hair": "short", "hair_colour": "brown", "eyes": "dark"},
          traits=["Versatile", "+1 to every score"]),
     Race("elf", "Elf", "standard", "elf", HUMAN_SKINS, HAIR_STYLES, [],
          default={"skin": "porcelain", "hair": "long", "hair_colour": "platinum", "eyes": "green"},
          traits=["Darkvision", "Fey ancestry", "Keen senses"]),
-    Race("half_elf", "Half-Elf", "standard", "half_elf", HUMAN_SKINS, HAIR_STYLES, ["short"],
+    Race("half_elf", "Half-Elf", "standard", "half_elf", HUMAN_SKINS, HAIR_STYLES, ["short", "goatee", "stubble"],
          default={"skin": "fair", "hair": "ponytail", "hair_colour": "auburn", "eyes": "green"},
          traits=["Darkvision", "Fey ancestry", "Two extra skills"]),
     Race("dwarf", "Dwarf", "short", "human", ["fair", "tan", "olive", "brown", "deep"], HAIR_STYLES,
-         ["full", "braided", "short"],
+         ["full", "braided", "short", "goatee", "moustache", "stubble"],
          default={"skin": "tan", "hair": "short", "hair_colour": "copper", "beard": "full", "eyes": "dark"},
          traits=["Darkvision", "Poison resilience", "Stone sense"]),
     Race("halfling", "Halfling", "short", "human", HUMAN_SKINS, HAIR_STYLES, [],
          default={"skin": "olive", "hair": "messy", "hair_colour": "brown", "eyes": "green"},
          traits=["Lucky", "Brave", "Nimble"]),
-    Race("gnome", "Gnome", "short", "gnome", HUMAN_SKINS, HAIR_STYLES, ["short", "full"],
+    Race("gnome", "Gnome", "short", "gnome", HUMAN_SKINS, HAIR_STYLES, ["short", "full", "moustache", "goatee"],
          default={"skin": "fair", "hair": "messy", "hair_colour": "teal", "eyes": "blue"},
          traits=["Darkvision", "Gnome cunning"]),
     Race("half_orc", "Half-Orc", "large", "orc", ["orc", "orc_grey", "orc_olive", "goblin"], HAIR_STYLES,
-         ["short"],
+         ["short", "goatee", "moustache", "stubble"],
          default={"skin": "orc", "hair": "mohawk", "hair_colour": "black", "eyes": "amber", "horn": "ivory"},
          traits=["Darkvision", "Relentless endurance", "Savage attacks"]),
     Race("tiefling", "Tiefling", "standard", "human", ["tiefling", "infernal", "lilac", "ash"], HAIR_STYLES,
@@ -130,6 +135,7 @@ _BASE_COLOURS = {"eyes": "eyes/dark", "leather": "leather/brown", "wood": "wood/
 class Look:
     """The player's picks. Anything left as None falls back to the race default; `colours` recolours any slot
     (e.g. {"cloth1": "cloth/crimson"}), `gear` swaps or removes kit pieces (None removes, e.g. a helmet)."""
+    body_type: str = "masculine"           # masculine | feminine: the silhouette, lashes and lips
     skin: str | None = None
     hair: str | None = None
     hair_colour: str | None = None
@@ -137,6 +143,8 @@ class Look:
     horns: str | None = None
     horn: str | None = None
     eyes: str | None = None
+    marks: str | None = None               # freckles | scar | warpaint | tattoo | stripes
+    paint: str | None = None               # colour for painted marks
     colours: dict[str, str] = field(default_factory=dict)
     gear: dict[str, str | None] = field(default_factory=dict)
 
@@ -170,6 +178,13 @@ def make_character(name: str, race: str, cls: str, look: Look | None = None, *, 
     hair = pick("hair", r.hair)
     beard = pick("beard", r.beards)
     horns = pick("horns", r.horns, required=r.horns_required)
+    if lk.body_type not in BODY_TYPES:
+        raise CreatorError(f"body type must be one of {BODY_TYPES}")
+    if lk.marks is not None and lk.marks not in MARKS:
+        raise CreatorError(f"marks must be one of {MARKS}")
+    if lk.paint is not None and lk.paint not in PAINTS:
+        raise CreatorError(f"paint must be one of {PAINTS}")
+    build = r.build + ("_f" if lk.body_type == "feminine" else "")
 
     layers: dict[str, str] = {"body": r.body, **k.gear}
     for layer, variant in lk.gear.items():
@@ -177,7 +192,8 @@ def make_character(name: str, race: str, cls: str, look: Look | None = None, *, 
             layers.pop(layer, None)
         else:
             layers[layer] = variant
-    for layer, variant in (("hair", hair), ("beard", beard), ("horns", horns), ("tail", r.tail)):
+    for layer, variant in (("hair", hair), ("beard", beard), ("horns", horns), ("tail", r.tail),
+                           ("marks", lk.marks)):
         if variant:
             layers[layer] = variant
 
@@ -187,15 +203,19 @@ def make_character(name: str, race: str, cls: str, look: Look | None = None, *, 
     palette["hair"] = f"hair/{lk.hair_colour or r.default.get('hair_colour', 'brown')}"
     palette["eyes"] = f"eyes/{lk.eyes or r.default.get('eyes', 'dark')}"
     palette["horn"] = f"horn/{lk.horn or r.default.get('horn', 'ivory')}"
+    palette["paint"] = f"paint/{lk.paint or 'woad'}"
     palette.update(lk.colours)
 
     rid = id or "".join(ch for ch in name.lower().replace(" ", "_") if ch.isalnum() or ch == "_")
-    return Recipe(rid, name, r.build, layers, palette, [race, cls, *tags], race=race, cls=cls)
+    return Recipe(rid, name, build, layers, palette, [race, cls, *tags], race=race, cls=cls)
 
 
 def options() -> dict:
     """Everything the phone creator needs to offer choices (exported as races.json / classes.json)."""
     return {
+        "bodyTypes": BODY_TYPES,
+        "marks": MARKS,
+        "paints": PAINTS,
         "races": {r.id: {"name": r.name, "build": r.build, "body": r.body, "skins": r.skins, "hair": r.hair,
                          "hairColours": HAIR_COLOURS if r.hair else [], "beards": r.beards, "horns": r.horns,
                          "hornsRequired": r.horns_required, "hornColours": r.horn_colours if r.horns else [],

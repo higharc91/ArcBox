@@ -26,7 +26,8 @@
     "hair": "hair/copper",
     "cloth1": "cloth/ivory",
     "cloth2": "cloth/wine",
-    "skin": "skin/tan"
+    "skin": "skin/tan",
+    "paint": "paint/woad"
   },
   "tags": [
     "dwarf",

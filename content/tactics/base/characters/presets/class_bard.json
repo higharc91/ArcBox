@@ -3,7 +3,7 @@
   "name": "Bard",
   "race": "half_elf",
   "class": "bard",
-  "build": "standard",
+  "build": "standard_f",
   "layers": {
     "body": "half_elf",
     "torso": "tunic",
@@ -12,7 +12,7 @@
     "hands": "bare",
     "weapon": "lute",
     "cape": "short_cape",
-    "hair": "ponytail"
+    "hair": "twintails"
   },
   "palette": {
     "eyes": "eyes/green",
@@ -25,7 +25,8 @@
     "hair": "hair/copper",
     "cloth1": "cloth/teal",
     "cloth2": "cloth/ochre",
-    "skin": "skin/fair"
+    "skin": "skin/fair",
+    "paint": "paint/woad"
   },
   "tags": [
     "half_elf",

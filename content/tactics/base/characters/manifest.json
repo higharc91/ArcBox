@@ -103,6 +103,21 @@
       "headTop": 4,
       "shoulderY": 16,
       "hipY": 27
+    },
+    "standard_f": {
+      "headTop": 8,
+      "shoulderY": 19,
+      "hipY": 28
+    },
+    "short_f": {
+      "headTop": 13,
+      "shoulderY": 24,
+      "hipY": 31
+    },
+    "large_f": {
+      "headTop": 4,
+      "shoulderY": 16,
+      "hipY": 27
     }
   },
   "slots": [
@@ -116,7 +131,8 @@
     "leather",
     "wood",
     "magic",
-    "horn"
+    "horn",
+    "paint"
   ],
   "slotIds": {
     "skin": 1,
@@ -129,7 +145,8 @@
     "leather": 8,
     "wood": 9,
     "magic": 10,
-    "horn": 11
+    "horn": 11,
+    "paint": 12
   },
   "layers": {
     "cape": [
@@ -174,17 +191,31 @@
     "beard": [
       "braided",
       "full",
-      "short"
+      "goatee",
+      "moustache",
+      "short",
+      "stubble"
     ],
     "hair": [
       "braids",
       "bun",
       "cropped",
+      "curly",
       "long",
       "messy",
       "mohawk",
+      "pixie",
       "ponytail",
-      "short"
+      "short",
+      "topknot",
+      "twintails"
+    ],
+    "marks": [
+      "freckles",
+      "scar",
+      "stripes",
+      "tattoo",
+      "warpaint"
     ],
     "horns": [
       "curled",
@@ -234,6 +265,7 @@
       "tail",
       "cape",
       "body",
+      "marks",
       "legs",
       "feet",
       "torso",
@@ -248,6 +280,7 @@
     "back": [
       "offhand",
       "body",
+      "marks",
       "legs",
       "feet",
       "torso",

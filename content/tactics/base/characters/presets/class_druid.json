@@ -25,7 +25,8 @@
     "hair": "hair/white",
     "cloth1": "cloth/moss",
     "cloth2": "cloth/forest",
-    "skin": "skin/deep"
+    "skin": "skin/deep",
+    "paint": "paint/woad"
   },
   "tags": [
     "halfling",

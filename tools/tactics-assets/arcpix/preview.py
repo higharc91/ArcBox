@@ -104,3 +104,20 @@ def matrix(title: str, rows: Sequence[str], cols: Sequence[str], cells: Sequence
             big = scale(im, zoom)
             out.alpha_composite(big, (x + (cw - big.width) // 2, y + (ch - big.height) // 2))
     return out
+
+
+def stack(title: str, sections: Sequence[Image.Image], subtitle: str = "") -> Image.Image:
+    """Stacks contact sheets vertically under one title (each section keeps its own heading)."""
+    head = 86 if subtitle else 62
+    W = max(im.width for im in sections)
+    H = head + sum(im.height for im in sections)
+    out = Image.new("RGBA", (W, H), BG)
+    d = ImageDraw.Draw(out)
+    d.text((22, 18), title, font=font(30, True), fill=EDGE)
+    if subtitle:
+        d.text((22, 58), subtitle, font=font(16), fill=MUTED)
+    y = head
+    for im in sections:
+        out.alpha_composite(im, (0, y))
+        y += im.height
+    return out

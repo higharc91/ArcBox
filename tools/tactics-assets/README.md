@@ -52,9 +52,24 @@ A player's character is **a name, a race, a class and a look** (`parts/creator.p
 |---|---|
 | Race (9) | Build, body (ears, tusks, snout), tail, and which skins, hair, beards and horns are on offer |
 | Class (10) | The starting kit: torso, legs, feet, hands, weapon, off-hand, cape, headgear, plus starting colours |
-| Look | The player's picks, limited to what the race offers, plus any colour changes to the kit |
+| Look | The player's picks, limited to what the race offers: body type, skin, eyes, hair style and colour, facial hair, horns, face markings and paint, plus colour changes to the kit |
 
 The races are Human, Elf, Half-Elf, Dwarf, Halfling, Gnome, Half-Orc, Tiefling and Dragonborn.
+
+The options are:
+
+| Option | Choices |
+|---|---|
+| Body type | Masculine or feminine. The feminine build of each size has a narrower chest, a waist, wider hips, a softer chin, lashes and fuller lips, and all gear follows it |
+| Skin | Race-specific: 4–10 ramps |
+| Eyes | 7 colours |
+| Hair | 12 styles plus bald, in 12 colours |
+| Facial hair | Up to 6 styles, depending on race |
+| Horns | Tieflings and dragonborn: 4 shapes in 5 colours |
+| Markings | Freckles, scar, war paint, tattoo or stripes. Painted markings take 7 paint colours |
+| Clothes | The kit's colours, recoloured |
+
+See `previews/08-customisation.png`.
 
 `make_character(name, race, class, look)` merges these into a recipe, and rejects picks the race doesn't offer
 (for example, hair on a dragonborn). Any race can take any class, so there are 90 combinations, and

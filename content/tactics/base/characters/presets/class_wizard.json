@@ -26,7 +26,8 @@
     "hair": "hair/white",
     "cloth1": "cloth/navy",
     "cloth2": "cloth/sky",
-    "skin": "skin/fair"
+    "skin": "skin/fair",
+    "paint": "paint/woad"
   },
   "tags": [
     "gnome",

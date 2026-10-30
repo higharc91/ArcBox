@@ -3,7 +3,7 @@
   "name": "Cleric",
   "race": "human",
   "class": "cleric",
-  "build": "standard",
+  "build": "standard_f",
   "layers": {
     "body": "human",
     "torso": "vestments",
@@ -12,7 +12,7 @@
     "hands": "bare",
     "weapon": "mace",
     "offhand": "round_shield",
-    "hair": "bun"
+    "hair": "curly"
   },
   "palette": {
     "eyes": "eyes/dark",
@@ -25,7 +25,8 @@
     "hair": "hair/black",
     "cloth1": "cloth/ivory",
     "cloth2": "cloth/ochre",
-    "skin": "skin/brown"
+    "skin": "skin/brown",
+    "paint": "paint/woad"
   },
   "tags": [
     "human",

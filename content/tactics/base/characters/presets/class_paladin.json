@@ -26,7 +26,8 @@
     "hair": "hair/brown",
     "cloth1": "cloth/ivory",
     "cloth2": "cloth/sky",
-    "skin": "skin/dragon_silver"
+    "skin": "skin/dragon_silver",
+    "paint": "paint/woad"
   },
   "tags": [
     "dragonborn",

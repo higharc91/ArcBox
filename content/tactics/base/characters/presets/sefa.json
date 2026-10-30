@@ -3,7 +3,7 @@
   "name": "Sefa",
   "race": "tiefling",
   "class": "warlock",
-  "build": "standard",
+  "build": "standard_f",
   "layers": {
     "body": "human",
     "torso": "coat",
@@ -14,7 +14,8 @@
     "cape": "cloak",
     "hair": "long",
     "horns": "curled",
-    "tail": "devil"
+    "tail": "devil",
+    "marks": "stripes"
   },
   "palette": {
     "eyes": "eyes/gold",
@@ -27,7 +28,8 @@
     "hair": "hair/black",
     "cloth1": "cloth/plum",
     "cloth2": "cloth/charcoal",
-    "skin": "skin/tiefling"
+    "skin": "skin/tiefling",
+    "paint": "paint/kohl"
   },
   "tags": [
     "tiefling",

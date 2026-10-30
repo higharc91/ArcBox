@@ -3,7 +3,7 @@
   "name": "Warlock",
   "race": "human",
   "class": "warlock",
-  "build": "standard",
+  "build": "standard_f",
   "layers": {
     "body": "human",
     "torso": "coat",
@@ -12,7 +12,8 @@
     "hands": "gloves",
     "weapon": "tome",
     "cape": "cloak",
-    "hair": "long"
+    "hair": "long",
+    "marks": "tattoo"
   },
   "palette": {
     "eyes": "eyes/red",
@@ -25,7 +26,8 @@
     "hair": "hair/crimson",
     "cloth1": "cloth/plum",
     "cloth2": "cloth/charcoal",
-    "skin": "skin/porcelain"
+    "skin": "skin/porcelain",
+    "paint": "paint/crimson"
   },
   "tags": [
     "human",

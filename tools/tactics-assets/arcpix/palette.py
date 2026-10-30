@@ -182,6 +182,16 @@ EYES: dict[str, list[str]] = {
     "gold": ramp("#ffd84a"),
 }
 
+PAINT: dict[str, list[str]] = {
+    "woad": ramp("#3f63b0", shift=0.06),
+    "ochre": ramp("#b8562e", shift=0.07),
+    "ash": ramp("#d9d6d0", shift=0.04, spread=0.7),
+    "kohl": ramp("#2a2530", shift=0.04, spread=1.3),
+    "gold": ramp("#d9a93a", shift=0.06),
+    "crimson": ramp("#a8333a", shift=0.07),
+    "jade": ramp("#3f9c6a", shift=0.07),
+}
+
 TERRAIN: dict[str, list[str]] = {
     "grass": ramp("#62a03f", shift=0.07),
     "grass_lush": ramp("#3f8f4a", shift=0.07),
@@ -229,7 +239,7 @@ OUTLINE = "#140f1a"
 FAMILIES: dict[str, dict[str, list[str]]] = {
     "skin": SKIN, "hair": HAIR, "cloth": CLOTH, "metal": METAL,
     "leather": LEATHER, "wood": WOOD, "magic": MAGIC, "eyes": EYES,
-    "horn": HORN, "terrain": TERRAIN, "foliage": FOLIAGE,
+    "horn": HORN, "paint": PAINT, "terrain": TERRAIN, "foliage": FOLIAGE,
 }
 
 

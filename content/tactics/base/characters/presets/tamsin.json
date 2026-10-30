@@ -3,7 +3,7 @@
   "name": "Tamsin",
   "race": "half_elf",
   "class": "ranger",
-  "build": "standard",
+  "build": "standard_f",
   "layers": {
     "body": "half_elf",
     "torso": "coat",
@@ -12,7 +12,8 @@
     "hands": "gloves",
     "weapon": "bow",
     "cape": "cloak",
-    "hair": "ponytail"
+    "hair": "ponytail",
+    "marks": "freckles"
   },
   "palette": {
     "eyes": "eyes/green",
@@ -25,7 +26,8 @@
     "hair": "hair/auburn",
     "cloth1": "cloth/moss",
     "cloth2": "cloth/sand",
-    "skin": "skin/fair"
+    "skin": "skin/fair",
+    "paint": "paint/woad"
   },
   "tags": [
     "half_elf",

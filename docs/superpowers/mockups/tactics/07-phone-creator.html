@@ -14,6 +14,7 @@
     background: url(assets/race-class.png) no-repeat; image-rendering: pixelated;
     background-size: calc(320px * var(--z)) calc(360px * var(--z));
     background-position: calc(-32px * var(--z) * var(--c)) calc(-40px * var(--z) * var(--r)); }
+  .spr.party { background-image: url(assets/party.png); background-size: calc(192px * var(--z)) calc(40px * var(--z)); }
   .steps { grid-template-columns: repeat(5, 1fr); }
   .field label { font: 700 12px 'Cinzel'; letter-spacing: 0.2em; color: var(--gold); display: block; margin-bottom: 6px; }
   .input { display: flex; align-items: center; height: 54px; padding: 0 14px; border-radius: 10px; font: 800 24px 'Cinzel';
@@ -115,20 +116,23 @@
       <div class="url">🔒 arcbox.app/c/EMBR · Embers of the Vale</div>
       <div class="body" style="padding-top:12px">
         <div class="steps"><span class="done">HERO</span><span class="done">CLASS</span><span class="done">SCORES</span><span class="done">STORY</span><span class="on">LOOK</span></div>
-        <div class="big" style="justify-content:center"><div class="stage" style="padding:8px 30px"><div class="spr" style="--z:4;--r:7;--c:8"></div></div></div>
-        <div style="text-align:center;margin-top:-4px"><b style="font:800 22px Cinzel;letter-spacing:.05em">SEFA</b> <span style="color:var(--muted)">· Tiefling Warlock</span></div>
+        <div class="big" style="justify-content:center;gap:18px;padding:8px"><div class="stage" style="padding:4px 18px"><div class="spr party" style="--z:3;--r:0;--c:5"></div></div>
+          <div><b>SEFA</b><span>Tiefling Warlock</span></div></div>
         <div class="look">
+          <span class="k">BODY</span><div class="sw chips"><span class="chip">Masculine</span><span class="chip on">Feminine</span></div>
           <span class="k">SKIN</span><div class="sw"><i class="on" style="background:#b4546a"></i><i style="background:#c2463e"></i><i style="background:#a88bc4"></i><i style="background:#8f93a3"></i></div>
-          <span class="k">HAIR</span><div class="sw chips"><span class="chip on">Long</span><span class="chip">Ponytail</span><span class="chip">Bun</span><span class="chip">Braids</span><span class="chip">+4</span></div>
+          <span class="k">EYES</span><div class="sw"><i style="background:#2a2230"></i><i style="background:#3e7ad6"></i><i style="background:#3fa05a"></i><i style="background:#e3a83a"></i><i style="background:#9a62d6"></i><i style="background:#e04a3a"></i><i class="on" style="background:#ffd84a"></i></div>
+          <span class="k">HAIR</span><div class="sw chips"><span class="chip on">Long</span><span class="chip">Curly</span><span class="chip">Pixie</span><span class="chip">Twintails</span><span class="chip">+9</span></div>
           <span class="k">COLOUR</span><div class="sw"><i class="on" style="background:#2a2230"></i><i style="background:#a8432a"></i><i style="background:#e9e3d0"></i><i style="background:#7a52b5"></i><i style="background:#b03045"></i><i style="background:#3f9c9a"></i></div>
           <span class="k">HORNS</span><div class="sw chips"><span class="chip on">Curled</span><span class="chip">Swept</span><span class="chip">Ram</span><span class="chip">Small</span></div>
+          <span class="k">MARKS</span><div class="sw chips"><span class="chip">None</span><span class="chip">Freckles</span><span class="chip">Scar</span><span class="chip">Paint</span><span class="chip on">Stripes</span></div>
+          <span class="k">PAINT</span><div class="sw"><i style="background:#3f63b0"></i><i style="background:#b8562e"></i><i style="background:#d9d6d0"></i><i class="on" style="background:#2a2530"></i><i style="background:#d9a93a"></i><i style="background:#3f9c6a"></i></div>
           <span class="k">CLOTHES</span><div class="sw"><i class="on" style="background:#7a3f6e"></i><i style="background:#a8333a"></i><i style="background:#2f3f72"></i><i style="background:#3f6b3a"></i><i style="background:#33343c"></i><i style="background:#b8892e"></i></div>
         </div>
-        <div style="font-size:13px;color:var(--muted)">Gear comes from your class and changes as you find loot. Your look stays. A dragonborn picks scales and horns instead of hair.</div>
         <div class="btn gold" style="margin-top:auto">CREATE SEFA</div>
       </div>
     </div></div>
-    <div class="caption"><b>3 · Look</b><span>Hair, skin, horns and colours belong to the player. The race decides what's on offer, and every swatch is a palette ramp, so the TV recolours the sprite for free.</span></div>
+    <div class="caption"><b>3 · Look</b><span>Body type, skin, eyes, hair, horns, markings and colours belong to the player. The race decides what's on offer, and every swatch is a palette ramp, so the TV recolours the sprite for free.</span></div>
   </div>
 </div>
 
@@ -137,6 +141,7 @@
   const img = new Image();
   img.onload = img.onerror = () => { window.__ready = true; };
   img.src = 'assets/race-class.png';
+  new Image().src = 'assets/party.png';
 </script>
 </body>
 </html>

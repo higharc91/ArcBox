@@ -14,7 +14,7 @@ from . import character_parts as P
 from .rig import BUILDS, DIRECTIONS, FRAME_W, FRAME_H, ANCHOR, ANIMS, ANIM_ORDER, frame_list, points
 
 SLOTS = SlotTable()
-for _s in ("skin", "eyes", "hair", "cloth1", "cloth2", "trim", "metal", "leather", "wood", "magic", "horn"):
+for _s in ("skin", "eyes", "hair", "cloth1", "cloth2", "trim", "metal", "leather", "wood", "magic", "horn", "paint"):
     SLOTS.id(_s)
 
 # layer -> variant -> part factory
@@ -25,8 +25,10 @@ PARTS: dict[str, dict[str, P.Part]] = {
     "legs": {k: P.legs(k) for k in ("pants", "greaves", "shorts", "skirt")},
     "feet": {k: P.feet(k) for k in ("boots", "sabatons", "sandals")},
     "torso": {k: P.torso(k) for k in ("tunic", "vest", "chain", "plate", "robe", "vestments", "coat", "rags")},
-    "beard": {k: P.beard(k) for k in ("short", "full", "braided")},
-    "hair": {k: P.hair(k) for k in ("short", "messy", "long", "ponytail", "bun", "mohawk", "braids", "cropped")},
+    "beard": {k: P.beard(k) for k in ("short", "full", "braided", "goatee", "moustache", "stubble")},
+    "hair": {k: P.hair(k) for k in ("short", "messy", "long", "ponytail", "bun", "mohawk", "braids", "cropped",
+                                    "curly", "pixie", "topknot", "twintails")},
+    "marks": {k: P.marks(k) for k in ("freckles", "scar", "warpaint", "tattoo", "stripes")},
     "horns": {k: P.horns(k) for k in ("curled", "straight", "ram", "small", "swept")},
     "headgear": {k: P.headgear(k) for k in ("open_helm", "great_helm", "hood", "wizard_hat", "circlet", "bandana", "crown")},
     "weapon": {k: P.weapon(k) for k in ("sword", "greatsword", "axe", "mace", "dagger", "spear", "staff", "bow", "tome", "wand", "rapier", "lute")},
@@ -37,9 +39,9 @@ PARTS: dict[str, dict[str, P.Part]] = {
 # Draw order per facing (first = bottom). In the front view the cloak hangs behind the body and the off-hand
 # (shield) is held in front; from behind it is the other way round.
 ORDER: dict[str, list[str]] = {
-    "front": ["tail", "cape", "body", "legs", "feet", "torso", "beard", "hair", "headgear", "horns", "weapon", "hands",
+    "front": ["tail", "cape", "body", "marks", "legs", "feet", "torso", "beard", "hair", "headgear", "horns", "weapon", "hands",
               "offhand"],
-    "back": ["offhand", "body", "legs", "feet", "torso", "tail", "weapon", "hands", "cape", "beard", "hair", "headgear",
+    "back": ["offhand", "body", "marks", "legs", "feet", "torso", "tail", "weapon", "hands", "cape", "beard", "hair", "headgear",
              "horns"],
 }
 

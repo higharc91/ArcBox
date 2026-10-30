@@ -12,7 +12,9 @@
     "hands": "gloves",
     "weapon": "sword",
     "offhand": "round_shield",
-    "hair": "mohawk"
+    "hair": "mohawk",
+    "beard": "goatee",
+    "marks": "warpaint"
   },
   "palette": {
     "eyes": "eyes/amber",
@@ -25,7 +27,8 @@
     "hair": "hair/black",
     "cloth1": "cloth/steel_blue",
     "cloth2": "cloth/slate",
-    "skin": "skin/orc"
+    "skin": "skin/orc",
+    "paint": "paint/woad"
   },
   "tags": [
     "half_orc",

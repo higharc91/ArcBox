@@ -10,7 +10,8 @@
     "legs": "pants",
     "feet": "sandals",
     "hands": "bare",
-    "hair": "mohawk"
+    "hair": "topknot",
+    "beard": "moustache"
   },
   "palette": {
     "eyes": "eyes/dark",
@@ -23,7 +24,8 @@
     "hair": "hair/black",
     "cloth1": "cloth/ochre",
     "cloth2": "cloth/rust",
-    "skin": "skin/olive"
+    "skin": "skin/olive",
+    "paint": "paint/woad"
   },
   "tags": [
     "human",

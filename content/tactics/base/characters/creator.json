@@ -1,4 +1,24 @@
 {
+  "bodyTypes": [
+    "masculine",
+    "feminine"
+  ],
+  "marks": [
+    "freckles",
+    "scar",
+    "warpaint",
+    "tattoo",
+    "stripes"
+  ],
+  "paints": [
+    "woad",
+    "ochre",
+    "ash",
+    "kohl",
+    "gold",
+    "crimson",
+    "jade"
+  ],
   "races": {
     "human": {
       "name": "Human",
@@ -20,7 +40,11 @@
         "bun",
         "mohawk",
         "braids",
-        "cropped"
+        "cropped",
+        "curly",
+        "pixie",
+        "topknot",
+        "twintails"
       ],
       "hairColours": [
         "black",
@@ -39,7 +63,10 @@
       "beards": [
         "short",
         "full",
-        "braided"
+        "braided",
+        "goatee",
+        "moustache",
+        "stubble"
       ],
       "horns": [],
       "hornsRequired": false,
@@ -85,7 +112,11 @@
         "bun",
         "mohawk",
         "braids",
-        "cropped"
+        "cropped",
+        "curly",
+        "pixie",
+        "topknot",
+        "twintails"
       ],
       "hairColours": [
         "black",
@@ -147,7 +178,11 @@
         "bun",
         "mohawk",
         "braids",
-        "cropped"
+        "cropped",
+        "curly",
+        "pixie",
+        "topknot",
+        "twintails"
       ],
       "hairColours": [
         "black",
@@ -164,7 +199,9 @@
         "crimson"
       ],
       "beards": [
-        "short"
+        "short",
+        "goatee",
+        "stubble"
       ],
       "horns": [],
       "hornsRequired": false,
@@ -210,7 +247,11 @@
         "bun",
         "mohawk",
         "braids",
-        "cropped"
+        "cropped",
+        "curly",
+        "pixie",
+        "topknot",
+        "twintails"
       ],
       "hairColours": [
         "black",
@@ -229,7 +270,10 @@
       "beards": [
         "full",
         "braided",
-        "short"
+        "short",
+        "goatee",
+        "moustache",
+        "stubble"
       ],
       "horns": [],
       "hornsRequired": false,
@@ -277,7 +321,11 @@
         "bun",
         "mohawk",
         "braids",
-        "cropped"
+        "cropped",
+        "curly",
+        "pixie",
+        "topknot",
+        "twintails"
       ],
       "hairColours": [
         "black",
@@ -339,7 +387,11 @@
         "bun",
         "mohawk",
         "braids",
-        "cropped"
+        "cropped",
+        "curly",
+        "pixie",
+        "topknot",
+        "twintails"
       ],
       "hairColours": [
         "black",
@@ -357,7 +409,9 @@
       ],
       "beards": [
         "short",
-        "full"
+        "full",
+        "moustache",
+        "goatee"
       ],
       "horns": [],
       "hornsRequired": false,
@@ -401,7 +455,11 @@
         "bun",
         "mohawk",
         "braids",
-        "cropped"
+        "cropped",
+        "curly",
+        "pixie",
+        "topknot",
+        "twintails"
       ],
       "hairColours": [
         "black",
@@ -418,7 +476,10 @@
         "crimson"
       ],
       "beards": [
-        "short"
+        "short",
+        "goatee",
+        "moustache",
+        "stubble"
       ],
       "horns": [],
       "hornsRequired": false,
@@ -464,7 +525,11 @@
         "bun",
         "mohawk",
         "braids",
-        "cropped"
+        "cropped",
+        "curly",
+        "pixie",
+        "topknot",
+        "twintails"
       ],
       "hairColours": [
         "black",

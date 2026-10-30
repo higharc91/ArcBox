@@ -40,6 +40,15 @@ def _torso_poly(p: Points, *, top_pad: int = 0, bottom: int | None = None, flare
     cx_top = p.torso_cx
     cx_bot = p.mx(16)
     _ = lean
+    if b.feminine and not flare:
+        # a waist two thirds of the way down, then out to the hips
+        wy = top + (bot - top) * 0.62
+        wx = (cx_top + cx_bot) / 2
+        ww = min(b.half_w, b.hip_half) - 0.5
+        return [
+            (cx_top - b.half_w + 0.5, top), (cx_top + b.half_w - 0.5, top), (wx + ww - 0.5, wy),
+            (cx_bot + b.hip_half + 0.5, bot), (cx_bot - b.hip_half - 0.5, bot), (wx - ww + 0.5, wy),
+        ]
     return [
         (cx_top - b.half_w + 0.5, top), (cx_top + b.half_w - 0.5, top),
         (cx_bot + b.hip_half + flare - 0.5, bot), (cx_bot - b.hip_half - flare + 0.5, bot),
@@ -50,10 +59,13 @@ def _head_shape(c: Canvas, p: Points, slot: str, shade: int = 3) -> None:
     """Rounded head block (chin narrower than the cranium)."""
     x0, y0 = p.head_x0, p.head_y0
     w, h = p.build.head_w, p.build.head_h
+    soft = p.build.feminine            # a softer, narrower chin
     for y in range(h):
         inset = 2 if y in (0, h - 1) else (1 if y in (1, h - 2) else 0)
         if y == h - 1:
-            inset = 3
+            inset = 4 if soft else 3
+        elif y == h - 2 and soft:
+            inset = 2
         c.rect(x0 + inset, y0 + y, x0 + w - 1 - inset, y0 + y, slot, shade)
 
 
@@ -264,7 +276,14 @@ def _face(c: Canvas, p: Points) -> None:
         else:
             c.px(ex, ey, "eyes", 0)
             c.px(ex, ey + 1, "eyes", 3)
-    c.px(x0 + 6, y0 + 8, "skin", 1)               # mouth
+    if p.build.feminine:
+        if not down:
+            c.px(x0 + 3, ey - 1, "eyes", 0)        # lashes flick up and out at each outer corner
+            c.px(x0 + 9, ey - 1, "eyes", 0)
+        c.px(x0 + 6, y0 + 8, "skin", 1)
+        c.px(x0 + 7, y0 + 8, "skin", 2)           # fuller lips
+    else:
+        c.px(x0 + 6, y0 + 8, "skin", 1)           # mouth
     c.px(x0 + 9, y0 + 7, "skin", 4)               # cheek light
 
 
@@ -539,6 +558,41 @@ def hair(style: str) -> Part:
                 for i in range(7):
                     c.px(bx, y0 + 4 + i, "hair", 3 if i % 2 else 2)
                 c.px(bx, y0 + 11, "cloth2")
+        elif style == "curly":
+            # big rounded curls: the cap swells a pixel past the head and runs down the sides
+            cx = p.head_cx
+            c.ellipse(cx + 0.5, y0 + (2.5 if front else 3.5), w / 2 + 1.2, 4.6 if front else 6.2, "hair")
+            if front:
+                c.rect(x0 - 1, y0 + 3, x0, y0 + 8, "hair")
+                c.rect(x1, y0 + 3, x1 + 1, y0 + 6, "hair")
+                for x in range(x0 + 1, x1):                        # keep the forehead and eyes clear
+                    for y in range(y0 + 4, y0 + 7):
+                        if c.slot[y, x] == c.slots.id("hair"):
+                            c.clear(x, y)
+            for x in range(x0 - 2, x1 + 3):                        # curl texture: a lit curl every other pixel
+                for y in range(y0 - 3, y0 + 10):
+                    if 0 <= y < c.h and 0 <= x < c.w and c.slot[y, x] == c.slots.id("hair") and (x + 2 * y) % 4 == 0:
+                        c.shade[y, x] = 4
+        elif style == "pixie":
+            if front:   # a long fringe swept down to the far temple
+                for i, x in enumerate(range(x0 + 1, x1)):
+                    c.rect(x, y0 + 3, x, y0 + 3 + max(0, 3 - i // 3), "hair")
+                c.rect(x1 - 1, y0 + 3, x1, y0 + 3, "hair", 4)
+            else:
+                c.rect(x0 + 1, y0 + 8, x1 - 1, y0 + 8, "hair", 2)
+        elif style == "topknot":
+            for y in range(y0 - 1, y0 + cap_rows + 1):            # shaved sides, a short crown
+                for x in range(x0, x1 + 1):
+                    if c.slot[y, x] == c.slots.id("hair") and abs(x - p.head_cx) > 3:
+                        c.clear(x, y)
+            c.ellipse(p.head_cx + 0.5, y0 - 2.5, 2.2, 2.0, "hair")
+            c.rect(p.head_cx - 1, y0 - 1, p.head_cx + 1, y0 - 1, "cloth2")   # tie
+        elif style == "twintails":
+            for bx in (x0 - 2, x1 + 2):
+                for i in range(8):
+                    c.rect(bx - (1 if bx < x0 else 0), y0 + 3 + i, bx + (0 if bx < x0 else 1), y0 + 3 + i, "hair",
+                           3 if i % 3 else 2)
+                c.px(bx, y0 + 3, "cloth2")
         elif style == "short":
             pass
         elif style == "cropped":  # very short, for under helmets and hoods
@@ -576,6 +630,8 @@ def _hair_texture(c: Canvas, p: Points) -> None:
 
 def beard(style: str) -> Part:
     def draw(c: Canvas, p: Points) -> None:
+        if p.direction != "front" and style in ("moustache", "stubble", "goatee"):
+            return
         if p.direction != "front":
             # only the edges show from behind
             x0, y0, w = p.head_x0, p.head_y0, p.build.head_w
@@ -602,6 +658,19 @@ def beard(style: str) -> Part:
             for i in range(5):
                 c.px(p.head_cx + 1, y0 + 10 + i, "hair", 3 if i % 2 else 2)
             c.px(p.head_cx + 1, y0 + 15, "metal", 4)
+        elif style == "goatee":
+            c.rect(x0 + 4, y0 + 7, x0 + 8, y0 + 7, "hair", 2)
+            c.rect(x0 + 5, y0 + 9, x0 + 7, y0 + 10, "hair")
+            c.px(x0 + 6, y0 + 11, "hair", 2)
+        elif style == "moustache":
+            c.rect(x0 + 4, y0 + 7, x0 + 8, y0 + 7, "hair")
+            c.px(x0 + 3, y0 + 8, "hair", 2)
+            c.px(x0 + 9, y0 + 8, "hair", 2)
+        elif style == "stubble":
+            for x in range(x0 + 2, x1 - 1):
+                for y in (y0 + 8, y0 + 9):
+                    if (x + y) % 2 == 0:
+                        c.px(x, y, "hair", 2)
         # keep the mouth readable
         if style != "full":
             c.px(x0 + 6, y0 + 8, "skin", 1)
@@ -632,6 +701,40 @@ def horns(style: str) -> Part:
                 pts = [(0, 0), (s * 0, -1), (s * 1, -2), (s * 1, -3), (s * 2, -4)]
             for i, (dx, dy) in enumerate(pts):
                 c.px(hx + dx, y0 + dy, "horn", 2 if i < 2 else (3 if i < len(pts) - 1 else 5))
+    return draw
+
+
+# -------------------------------------------------------------------------------------------------------- marks
+
+def marks(kind: str) -> Part:
+    """Face markings, front view only: freckles, a scar, war paint, tattoos. Painted kinds use the "paint" slot so
+    the player picks their colour."""
+    def draw(c: Canvas, p: Points) -> None:
+        if p.direction != "front":
+            return
+        x0, y0 = p.head_x0 + _face_dx(p), p.head_y0
+        eyes = {(x0 + 4, y0 + 5), (x0 + 4, y0 + 6), (x0 + 5, y0 + 5), (x0 + 8, y0 + 5), (x0 + 8, y0 + 6),
+                (x0 + 9, y0 + 5)}
+        if kind == "freckles":
+            for dx, dy in ((3, 7), (5, 7), (7, 7), (9, 6), (2, 6), (8, 8)):
+                c.px(x0 + dx, y0 + dy, "skin", 2)
+        elif kind == "scar":
+            for i in range(5):                                   # down across the near brow and cheek
+                x, y = x0 + 9 + (i // 3), y0 + 3 + i
+                if (x, y) not in eyes:
+                    c.px(x, y, "skin", 5)
+                    c.px(x + 1, y, "skin", 1)
+        elif kind == "warpaint":
+            for x in range(x0 + 2, x0 + 11):                     # a band across the eyes
+                for y in (y0 + 4, y0 + 5, y0 + 6):
+                    if (x, y) not in eyes:
+                        c.px(x, y, "paint", 3 if y < y0 + 6 else 2)
+        elif kind == "tattoo":
+            for dx, dy in ((3, 7), (3, 8), (2, 9), (9, 7), (9, 8), (10, 9), (6, 10), (5, 10), (7, 10)):
+                c.px(x0 + dx, y0 + dy, "paint", 2)
+        elif kind == "stripes":
+            for ex in (x0 + 4, x0 + 8):                          # two lines falling from each eye
+                c.rect(ex, y0 + 7, ex, y0 + 9, "paint", 3)
     return draw
 
 

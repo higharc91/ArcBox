@@ -45,7 +45,7 @@ def write_json(obj, path: Path) -> None:
 # A neutral palette for previewing bare layers: every slot gets a readable, distinct ramp.
 NEUTRAL = {"skin": "skin/tan", "eyes": "eyes/dark", "hair": "hair/brown", "cloth1": "cloth/steel_blue",
            "cloth2": "cloth/slate", "trim": "metal/gold", "metal": "metal/steel", "leather": "leather/brown",
-           "wood": "wood/oak", "magic": "magic/arcane", "horn": "horn/bone"}
+           "wood": "wood/oak", "magic": "magic/arcane", "horn": "horn/bone", "paint": "paint/woad"}
 
 
 def build_characters() -> None:
@@ -160,6 +160,12 @@ def build_characters() -> None:
         for j, im in enumerate(row):
             atlas.paste(im, (j * FRAME_W, i * FRAME_H))
     save(atlas, MOCKUPS / "race-class.png")
+    party = Image.new("RGBA", (FRAME_W * len(PARTY), FRAME_H))     # the party's real looks, for the mockups
+    for j, r in enumerate(PARTY):
+        party.paste(C.compose(r, "front", pose_idle).render(r.ramps()), (j * FRAME_W, 0))
+    save(party, MOCKUPS / "party.png")
+
+    build_customisation()
 
     # The layer library on the neutral palette.
     ramps_neutral = {s: FAMILIES[ref.split("/")[0]][ref.split("/")[1]] for s, ref in NEUTRAL.items()}
@@ -197,6 +203,65 @@ def build_palettes() -> None:
     save(contact_sheet("Palette ramps", tiles, columns=10, zoom=4,
                        subtitle="6-step hue-shifted ramps (cool shadows, warm highlights). Any slot takes any ramp."),
          PREVIEWS / "00-palettes.png")
+
+
+def build_customisation() -> None:
+    """08-customisation.png: everything a player can change about their hero, section by section."""
+    from arcpix.preview import stack
+    pose = ANIMS["idle"][2][0]
+
+    def front(rec, d="front"):
+        return C.compose(rec, d, pose).render(rec.ramps())
+
+    def head(rec):
+        top = BUILDS[rec.build].head_top                     # crop around the head, wherever the build puts it
+        return front(rec).crop((4, max(0, top - 5), 28, top + 15))
+
+    mk = creator.make_character
+    L = creator.Look
+    sections = []
+
+    tiles = []
+    for race in creator.RACES:
+        a, b = mk("x", race, "monk"), mk("x", race, "monk", L(body_type="feminine"))
+        tiles.append(Tile(strip([front(a), front(b)], 1, gap=4), creator.RACES[race].name, "masculine · feminine"))
+    sections.append(contact_sheet("Body type", tiles, columns=9, zoom=3,
+                                  subtitle="Every race in both body types. All gear follows the silhouette."))
+
+    tiles = []
+    for i, h in enumerate(creator.HAIR_STYLES + ["none"]):
+        bt = "feminine" if i % 2 else "masculine"
+        rec = mk("x", "human", "bard", L(body_type=bt, hair=h, hair_colour=creator.HAIR_COLOURS[(i * 5) % 12]))
+        tiles.append(Tile(strip([front(rec), front(rec, "back")], 1, gap=3), h if h != "none" else "bald",
+                          "front · back"))
+    sections.append(contact_sheet("Hair · 12 styles and bald", tiles, columns=7, zoom=3))
+
+    tiles = []
+    for b in creator.ALL_BEARDS:
+        tiles.append(Tile(head(mk("x", "human", "fighter", L(beard=b, hair_colour="chestnut"))), b, "facial hair"))
+    for m, race, paint in zip(creator.MARKS, ["half_elf", "human", "half_orc", "elf", "tiefling"],
+                              ["woad", "woad", "woad", "kohl", "kohl"]):
+        tiles.append(Tile(head(mk("x", race, "monk", L(marks=m, paint=paint, body_type="feminine"))), m, "markings"))
+    sections.append(contact_sheet("Face · facial hair and markings", tiles, columns=11, zoom=6,
+                                  subtitle="Painted markings take any paint colour: woad, ochre, ash, kohl, gold, "
+                                           "crimson, jade."))
+
+    tiles = []
+    for race, r in creator.RACES.items():
+        heads = [head(mk("x", race, "monk", L(skin=sk))) for sk in r.skins]
+        tiles.append(Tile(strip(heads, 1, gap=2), r.name, f"{len(r.skins)} skins"))
+    sections.append(contact_sheet("Skin · each race's range", tiles, columns=3, zoom=5))
+
+    eyes = [head(mk("x", "human", "monk", L(eyes=e, body_type="feminine", hair="pixie"))) for e in creator.EYES]
+    hairs = [head(mk("x", "human", "monk", L(hair="short", hair_colour=hc))) for hc in creator.HAIR_COLOURS]
+    horns = [head(mk("x", "tiefling", "monk", L(horns=h, horn=hc)))
+             for h, hc in zip(creator.RACES["tiefling"].horns, ["obsidian", "ram", "ivory", "crimson"])]
+    sections.append(contact_sheet("Colours and horns", [
+        Tile(strip(eyes, 1, gap=2), "Eyes", "7 colours"), Tile(strip(hairs, 1, gap=2), "Hair colour", "12 colours"),
+        Tile(strip(horns, 1, gap=2), "Horns", "4 shapes x 5 colours (tiefling, dragonborn)")], columns=1, zoom=6))
+    save(stack("Character customisation", sections,
+               "Name, race and class come first; then the hero's look. Every option is a layer or a palette ramp."),
+         PREVIEWS / "08-customisation.png")
 
 
 # Which attack animation a weapon plays; anything not listed (staff, wand, tome, lute, unarmed) casts.
