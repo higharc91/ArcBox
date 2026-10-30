@@ -33,8 +33,8 @@ When every task is done, one whole-branch review runs.
 | 9 | Pack loader, validation and the content hash | done | `c810425`, `6b1462c` | 1 |
 | 10 | Remaining effect blocks, zones, summons and named hooks | done | `876902a`, `2c13938` | 1 |
 | 11 | Tooltip generation | done | `6cc5a7f` | 0 |
-| 12 | Sheet builder and encounter setup | in progress |  |  |
-| 13 | Content wave 0: core files and fighter, cleric, rogue, wizard | not started | | |
+| 12 | Sheet builder and encounter setup | done | `77f51dc` | 0 |
+| 13 | Content wave 0: core files and fighter, cleric, rogue, wizard | in progress |  |  |
 | 14 | AI planner, odds and threat map | not started | | |
 | 15 | Companion AI, timed-out turns, reactions, performance | not started | | |
 | 16 | `Tactics.Sim` and the first balance report | not started | | |
@@ -125,6 +125,18 @@ These were decided during execution. Later tasks must follow them, alongside the
   - unknown attack kinds.
 - **Map content checks:** props and zones are in bounds, and tile flags are valid.
 
+**Characters and encounters (Task 12)**
+- **Weapons and armour are content:** `weapons.json` and `armor.json`, with `ArmorDef(Id, Name, Kind, BaseAc)`. A shield is the `CharacterRecord.Shield` flag (+2 AC).
+- **Injuries** surface as `injury:<id>` passives through `RulesPack.PassiveFor`. `StaticMods.MaxHp` is applied only when a sheet is built, and conditions may not use it.
+- **Heavy armour's −2 initiative** is applied in `TurnOrder`, not added to the sheet.
+- **`defaultPicks`:** the loadout at the highest listed level at or below the character's level.
+- **The engine trusts a character's ability scores.** The portal validates point-buy (sub-project 4).
+- **Warlock Pact regain** uses a passive (`onRoundStart` + `if` even round + `grantResource`), not the `resourceRegen` feature.
+- **For Task 13:**
+  - pick counts are enforced per `choose` feature;
+  - class `defaultPicks` are validated at load;
+  - encounters place fixed-tile units before filling zones.
+
 **Effect blocks (Task 10)**
 - **Effect order follows the content.** An ability's effect list runs in the order it's written, split into runs of consecutive blocks:
   - a run of tile blocks (zone, alterTerrain, hazard, summon, teleport, dash, jumpTo, reveal, dispel) runs once at the aim tile;
@@ -146,6 +158,7 @@ These were decided during execution. Later tasks must follow them, alongside the
 | 4 | `Start` normalises only `Sheet.Resources`; records holding arrays compare by reference (golden tests compare JSON); rejection-text test checks only 3 of 16 strings; `CantAfford` with no resource gives "Not enough ."; `ObjectiveExpr` allows a leaf with a group; `UnitSheet.Score` defaults a missing stat to 10 |
 | 5 | A self line/cone with no aim tile pays its cost and hits nothing; the converter's key detection could collide with a parameter named like a block; `Battle.cs` is about 320 lines (targeting could move out) |
 | 6 | No HP event on deep-water drops (Task 8 addresses); prone applied after a lethal fall; Swap has no landing check; `Movement` depends on `Motion.OccupantAt` |
+| 12 | Repeated error when the party spawn zone overflows; a placement level below 1 is reported against the monster file; `MaxHp` on monster or zone passives is ignored; inline monster weapons accept `replaces` |
 | 11 | statMod tooltips read awkwardly ("target gets can't act"; Task 13 fixes it); hook phrases not tested for every `HookKind`; "half damage on a save" missed for nested damage |
 | 10 | A second unit's mark replaces the first's; counterspell picks the first queued tier ≥ 1 step; `TerrainAltered.Delta` reports the requested change; negative rounds and unbounded repeat/chain counts aren't validated; zone passives with the default `other` target never fire on enter/turn start; `Battle.cs` is 444 lines |
 | 9 | Trigger `do` effect blocks are only checked for known keys (Task 22 must fully check them); a second `xp.json` reports its duplicate at a nonexistent `/id`; the pack label comes from the manifest id, not the folder name |
