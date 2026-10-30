@@ -1,0 +1,80 @@
+{
+  "frame": [
+    20,
+    20
+  ],
+  "anchor": [
+    8,
+    19
+  ],
+  "frames": 4,
+  "fps": 8,
+  "loopStart": 2,
+  "emotes": {
+    "alert": {
+      "row": 0,
+      "thought": false
+    },
+    "question": {
+      "row": 1,
+      "thought": true
+    },
+    "heart": {
+      "row": 2,
+      "thought": false
+    },
+    "anger": {
+      "row": 3,
+      "thought": false
+    },
+    "sweat": {
+      "row": 4,
+      "thought": false
+    },
+    "note": {
+      "row": 5,
+      "thought": false
+    },
+    "sleep": {
+      "row": 6,
+      "thought": true
+    },
+    "idea": {
+      "row": 7,
+      "thought": true
+    },
+    "skull": {
+      "row": 8,
+      "thought": false
+    },
+    "coin": {
+      "row": 9,
+      "thought": false
+    },
+    "vote": {
+      "row": 10,
+      "thought": false
+    },
+    "crown": {
+      "row": 11,
+      "thought": false
+    },
+    "dice": {
+      "row": 12,
+      "thought": false
+    },
+    "sword": {
+      "row": 13,
+      "thought": false
+    },
+    "ellipsis": {
+      "row": 14,
+      "thought": false
+    }
+  },
+  "notes": {
+    "anchor": "the tail tip; place it a pixel above the unit's head",
+    "loop": "play 0-3 once, then loop 2-3 while the emote is shown",
+    "ellipsis": "'...': a player is choosing on their phone"
+  }
+}

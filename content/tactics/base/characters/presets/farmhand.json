@@ -1,0 +1,36 @@
+{
+  "id": "farmhand",
+  "name": "Farmhand",
+  "race": null,
+  "class": null,
+  "build": "standard_f",
+  "layers": {
+    "body": "human",
+    "hair": "braids",
+    "headgear": "straw_hat",
+    "torso": "dress",
+    "legs": "skirt",
+    "feet": "boots",
+    "weapon": "broom",
+    "hands": "bare"
+  },
+  "palette": {
+    "eyes": "eyes/dark",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "cloth/ivory",
+    "magic": "magic/arcane",
+    "horn": "horn/ivory",
+    "paint": "paint/woad",
+    "skin": "skin/fair",
+    "hair": "hair/copper",
+    "cloth1": "cloth/steel_blue",
+    "cloth2": "terrain/sand",
+    "blade": "metal/steel"
+  },
+  "tags": [
+    "npc"
+  ],
+  "sheet": "presets/farmhand.png"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "stranger",
+  "name": "Hooded Stranger",
+  "race": null,
+  "class": null,
+  "build": "standard",
+  "layers": {
+    "body": "human",
+    "headgear": "mask_hood",
+    "torso": "coat",
+    "legs": "pants",
+    "feet": "boots",
+    "hands": "gloves",
+    "cape": "cloak"
+  },
+  "palette": {
+    "eyes": "eyes/gold",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "horn": "horn/ivory",
+    "paint": "paint/woad",
+    "skin": "skin/ash",
+    "cloth1": "cloth/charcoal",
+    "cloth2": "cloth/charcoal",
+    "blade": "metal/steel"
+  },
+  "tags": [
+    "npc"
+  ],
+  "sheet": "presets/stranger.png"
+}

@@ -1,0 +1,150 @@
+{
+  "frame": [
+    32,
+    40
+  ],
+  "anchor": [
+    16,
+    37
+  ],
+  "headOffset": {
+    "standard": 0,
+    "short": 5,
+    "large": -4,
+    "standard_f": 0,
+    "short_f": 5,
+    "large_f": -4
+  },
+  "statuses": {
+    "stunned": {
+      "file": "stunned.png",
+      "frames": 8,
+      "fps": 8,
+      "loop": true,
+      "layer": "over"
+    },
+    "charmed": {
+      "file": "charmed.png",
+      "frames": 8,
+      "fps": 8,
+      "loop": true,
+      "layer": "over"
+    },
+    "sleeping": {
+      "file": "sleeping.png",
+      "frames": 8,
+      "fps": 8,
+      "loop": true,
+      "layer": "over"
+    },
+    "poisoned": {
+      "file": "poisoned.png",
+      "frames": 8,
+      "fps": 8,
+      "loop": true,
+      "layer": "over"
+    },
+    "burning": {
+      "file": "burning.png",
+      "frames": 6,
+      "fps": 6,
+      "loop": true,
+      "layer": "over"
+    },
+    "chilled": {
+      "file": "chilled.png",
+      "frames": 6,
+      "fps": 6,
+      "loop": true,
+      "layer": "over"
+    },
+    "frozen": {
+      "file": "frozen.png",
+      "frames": 8,
+      "fps": 8,
+      "loop": true,
+      "layer": "over"
+    },
+    "bleeding": {
+      "file": "bleeding.png",
+      "frames": 6,
+      "fps": 6,
+      "loop": true,
+      "layer": "over"
+    },
+    "blessed": {
+      "file": "blessed.png",
+      "frames": 8,
+      "fps": 8,
+      "loop": true,
+      "layer": "over"
+    },
+    "hasted": {
+      "file": "hasted.png",
+      "frames": 4,
+      "fps": 6,
+      "loop": true,
+      "layer": "under"
+    },
+    "slowed": {
+      "file": "slowed.png",
+      "frames": 4,
+      "fps": 6,
+      "loop": true,
+      "layer": "over"
+    },
+    "shielded": {
+      "file": "shielded.png",
+      "frames": 8,
+      "fps": 8,
+      "loop": true,
+      "layer": "over"
+    },
+    "marked": {
+      "file": "marked.png",
+      "frames": 8,
+      "fps": 8,
+      "loop": true,
+      "layer": "over"
+    },
+    "inspired": {
+      "file": "inspired.png",
+      "frames": 9,
+      "fps": 8,
+      "loop": true,
+      "layer": "over"
+    },
+    "regenerating": {
+      "file": "regenerating.png",
+      "frames": 9,
+      "fps": 8,
+      "loop": true,
+      "layer": "over"
+    },
+    "concentrating": {
+      "file": "concentrating.png",
+      "frames": 8,
+      "fps": 8,
+      "loop": true,
+      "layer": "over"
+    },
+    "frightened": {
+      "file": "frightened.png",
+      "frames": 6,
+      "fps": 6,
+      "loop": true,
+      "layer": "over"
+    },
+    "hidden": {
+      "file": "hidden.png",
+      "frames": 6,
+      "fps": 6,
+      "loop": true,
+      "layer": "under"
+    }
+  },
+  "notes": {
+    "placement": "draw at the unit's anchor; shift overhead effects by headOffset[build]",
+    "layer": "over: after the unit; under: before it"
+  }
+}

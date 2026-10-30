@@ -21,7 +21,7 @@ from arcpix.palette import FAMILIES, RAMP_LEN  # noqa: E402
 from arcpix.preview import contact_sheet, Tile, strip  # noqa: E402
 from arcpix.sheet import Sheet  # noqa: E402
 from parts import characters as C  # noqa: E402
-from parts.recipes import ALL, PARTY, CLASSES, ENEMIES  # noqa: E402
+from parts.recipes import ALL, PARTY, CLASSES, ENEMIES, NPCS  # noqa: E402
 from parts import creator  # noqa: E402
 from arcpix.preview import matrix  # noqa: E402
 from parts.rig import BUILDS, DIRECTIONS, FRAME_W, FRAME_H, ANCHOR, ANIM_ORDER, ANIMS  # noqa: E402
@@ -112,6 +112,9 @@ def build_characters() -> None:
     save(roster("Characters · enemies", ENEMIES,
                 "Same rig, same layers: goblins and orcs reuse the 'short' and 'large' builds."),
          PREVIEWS / "03-enemies.png")
+    save(roster("Characters · townsfolk", NPCS,
+                "Exploration and dialogue NPCs from the same layers; tools ride in the weapon slot."),
+         PREVIEWS / "03b-townsfolk.png")
 
     # Every animation, one row each, on a character that would use it.
     showcase = {"idle": "kara", "ready": "kara", "walk": "tamsin", "attack": "kara", "thrust": "wren",
@@ -501,7 +504,9 @@ SETS = {"palettes": build_palettes, "characters": build_characters, "anims": bui
 
 # Sets that live in their own module: parts/<name>.py with a build() function. Each writes under
 # content/tactics/base/<name>/ and previews/, using arcpix.out.
-for _name in ("props", "portraits", "beasts", "backgrounds", "ui", "icons", "fx", "ambient", "bosses"):
+PLUGIN_SETS = ("props", "portraits", "beasts", "backgrounds", "ui", "icons", "fx",
+               "ambient", "bosses", "emotes", "town", "status", "pickups")
+for _name in PLUGIN_SETS:
     try:
         _mod = importlib.import_module(f"parts.{_name}")
     except ModuleNotFoundError as e:

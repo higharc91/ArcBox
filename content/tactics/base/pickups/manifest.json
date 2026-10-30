@@ -1,0 +1,74 @@
+{
+  "beam": {
+    "frame": [
+      24,
+      56
+    ],
+    "frames": 8,
+    "fps": 8,
+    "anchor": [
+      12,
+      52
+    ],
+    "blend": "add",
+    "files": {
+      "common": "beam_common.png",
+      "uncommon": "beam_uncommon.png",
+      "rare": "beam_rare.png",
+      "epic": "beam_epic.png",
+      "legendary": "beam_legendary.png"
+    }
+  },
+  "iconBob": [
+    0,
+    -1,
+    -2,
+    -2,
+    -1,
+    0,
+    0,
+    0
+  ],
+  "extras": {
+    "glint": {
+      "file": "glint.png",
+      "frame": [
+        16,
+        16
+      ],
+      "frames": 8,
+      "fps": 8,
+      "anchor": [
+        8,
+        15
+      ]
+    },
+    "coin_pile": {
+      "file": "coin_pile.png",
+      "frame": [
+        24,
+        16
+      ],
+      "frames": 6,
+      "fps": 8,
+      "anchor": [
+        12,
+        15
+      ]
+    },
+    "loot_sack": {
+      "file": "loot_sack.png",
+      "frame": [
+        24,
+        24
+      ],
+      "frames": 6,
+      "fps": 8,
+      "anchor": [
+        12,
+        23
+      ]
+    }
+  },
+  "compose": "beam (under, additive) + the item's icon (icons set) drawn 10 px above the anchor, offset by iconBob[frame] + glint (over, every few seconds)"
+}

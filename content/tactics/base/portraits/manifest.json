@@ -198,6 +198,74 @@
     "cult_leader": {
       "idle": "cult_leader_idle.png",
       "hurt": "cult_leader_hurt.png"
+    },
+    "mayor": {
+      "idle": "mayor_idle.png",
+      "hurt": "mayor_hurt.png"
+    },
+    "innkeeper": {
+      "idle": "innkeeper_idle.png",
+      "hurt": "innkeeper_hurt.png"
+    },
+    "barmaid": {
+      "idle": "barmaid_idle.png",
+      "hurt": "barmaid_hurt.png"
+    },
+    "blacksmith": {
+      "idle": "blacksmith_idle.png",
+      "hurt": "blacksmith_hurt.png"
+    },
+    "farmer": {
+      "idle": "farmer_idle.png",
+      "hurt": "farmer_hurt.png"
+    },
+    "farmhand": {
+      "idle": "farmhand_idle.png",
+      "hurt": "farmhand_hurt.png"
+    },
+    "merchant": {
+      "idle": "merchant_idle.png",
+      "hurt": "merchant_hurt.png"
+    },
+    "priest": {
+      "idle": "priest_idle.png",
+      "hurt": "priest_hurt.png"
+    },
+    "guard": {
+      "idle": "guard_idle.png",
+      "hurt": "guard_hurt.png"
+    },
+    "guard_captain": {
+      "idle": "guard_captain_idle.png",
+      "hurt": "guard_captain_hurt.png"
+    },
+    "noble": {
+      "idle": "noble_idle.png",
+      "hurt": "noble_hurt.png"
+    },
+    "sage": {
+      "idle": "sage_idle.png",
+      "hurt": "sage_hurt.png"
+    },
+    "child": {
+      "idle": "child_idle.png",
+      "hurt": "child_hurt.png"
+    },
+    "hermit": {
+      "idle": "hermit_idle.png",
+      "hurt": "hermit_hurt.png"
+    },
+    "stranger": {
+      "idle": "stranger_idle.png",
+      "hurt": "stranger_hurt.png"
+    },
+    "minstrel": {
+      "idle": "minstrel_idle.png",
+      "hurt": "minstrel_hurt.png"
+    },
+    "fisher": {
+      "idle": "fisher_idle.png",
+      "hurt": "fisher_hurt.png"
     }
   },
   "howTo": "compose the character's layers (except skipLayers) for the front facing in the mood's pose, crop to crop[build], draw over a backdrop, then scale by `scale` (nearest)"
