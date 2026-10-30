@@ -17,17 +17,21 @@ public sealed record SimConfig(ImmutableArray<string> Encounters, ImmutableArray
 /// the outcome and how many rounds it took; party members Downed (each time) and Out; the per-class measures
 /// (<see cref="ClassStats"/>, averaged over the members of each class); for each ability party members could use, the
 /// turns it was used in and the turns it was legal in; and the items the AI used. <see cref="Capped"/> marks a battle
-/// stopped at the round cap (counted as <see cref="BattleOutcome.Lost"/>, <see cref="Rounds"/> = the cap).
+/// stopped at the round cap (counted as <see cref="BattleOutcome.Lost"/>, <see cref="Rounds"/> = the cap). How the AI's
+/// plans fared, on both sides: <see cref="Rejected"/> commands <see cref="Battle.Apply"/> refused, <see cref="Replans"/>
+/// (a turn planned again after a refusal or a move cut short) and <see cref="ForcedEnds"/> (turns the simulator ended
+/// because the plans didn't).
 /// </summary>
 public sealed record SimBattle(string Encounter, int Level, ImmutableArray<string> Classes, ulong Seed, BattleOutcome Outcome,
     int Rounds, int Downs, int Outs, ImmutableSortedDictionary<string, ClassStats> PerClass,
-    ImmutableSortedDictionary<AbilityId, (int Used, int Legal)> Abilities, int AiItemUses, bool Capped = false);
+    ImmutableSortedDictionary<AbilityId, (int Used, int Legal)> Abilities, int AiItemUses, bool Capped = false,
+    int Rejected = 0, int Replans = 0, int ForcedEnds = 0);
 
 /// <summary>
 /// A class's measures in one battle, per member of that class (see <see cref="Tally"/> for how each is read from the
-/// events): damage dealt to hostile units per round; healing done (HP restored, and the HP of a revive that wasn't a
-/// heal) per round; damage mitigated per round (taken, plus attacks against it that missed times the battle's mean damage
-/// of a hostile hit on the party); and enemy turns denied (skipped while incapacitated by a condition it applied) in the
+/// events): HP taken off hostile units per round (no overkill, nor temporary HP); healing done (HP restored, and the HP of a revive that wasn't a
+/// heal) per round; damage mitigated per round (soaked: HP and temporary HP lost, no overkill; plus attacks against it
+/// that missed times the battle's mean soaked damage of a hostile hit on the party); and enemy turns denied (skipped while incapacitated by a condition it applied) in the
 /// battle.
 /// </summary>
 public sealed record ClassStats(double DamagePerRound, double HealingPerRound, double MitigatedPerRound, double TurnsDenied);
@@ -176,6 +180,7 @@ public static class SimRunner
         var setup = Encounters.Setup(encounter, party, config.Difficulty, rules);
 
         var tally = new Tally(rules);
+        var ai = new AiCounts();
         var start = Battle.Start(setup, rules, seed);
         var state = start.State;
         tally.Read(start.Events, state);
@@ -189,19 +194,28 @@ public static class SimRunner
             }
             if (state.Pending is not null || state.Active is not { } unit)
                 throw new InvalidOperationException($"The battle is waiting on something the AI can't answer ({state.Pending}).");
-            state = PlayTurn(state, unit, rules, tally);
+            state = PlayTurn(state, unit, rules, tally, ai);
         }
 
         var rounds = capped ? config.RoundCap : Math.Max(1, state.Round);
         return new SimBattle(encounter, level, classes, seed, capped ? BattleOutcome.Lost : state.Outcome!.Value, rounds,
-            tally.Downs, tally.Outs, tally.PerClass(rounds), tally.Abilities(), state.ItemsUsed.Count(u => u.ByAi), capped);
+            tally.Downs, tally.Outs, tally.PerClass(rounds), tally.Abilities(), state.ItemsUsed.Count(u => u.ByAi), capped,
+            ai.Rejected, ai.Replans, ai.ForcedEnds);
+    }
+
+    /// <summary>How a battle's AI plans fared (see <see cref="SimBattle"/>).</summary>
+    private sealed class AiCounts
+    {
+        public int Rejected { get; set; }
+        public int Replans { get; set; }
+        public int ForcedEnds { get; set; }
     }
 
     /// <summary>
     /// <paramref name="unit"/>'s whole turn: the AI's plan, applied command by command, planned again when a command is
     /// refused or a move is cut short (at most <see cref="MaxPlansPerTurn"/> plans), then ended if it hasn't ended.
     /// </summary>
-    private static BattleState PlayTurn(BattleState state, UnitId unit, RulesPack rules, Tally tally)
+    private static BattleState PlayTurn(BattleState state, UnitId unit, RulesPack rules, Tally tally, AiCounts ai)
     {
         var party = tally.IsMember(state, unit);
         if (party)
@@ -210,11 +224,16 @@ public static class SimRunner
         var ended = false;
         for (var plan = 0; plan < MaxPlansPerTurn && !ended && state.Outcome is null; plan++)
         {
+            if (plan > 0)
+                ai.Replans++;
             foreach (var command in Ai.Plan(state, unit, rules, options).Commands)
             {
                 var resolution = Battle.Apply(state, command, rules);
                 if (resolution.Rejected is not null)
+                {
+                    ai.Rejected++;
                     break;
+                }
                 state = resolution.State;
                 tally.Read(resolution.Events, state);
                 ended = resolution.Events.Any(e => e is TurnEnded t && t.Unit == unit);
@@ -224,6 +243,7 @@ public static class SimRunner
         }
         if (!ended && state.Outcome is null)
         {
+            ai.ForcedEnds++;
             var resolution = Battle.Apply(state, new EndTurn(unit), rules);
             state = resolution.State;
             tally.Read(resolution.Events, state);

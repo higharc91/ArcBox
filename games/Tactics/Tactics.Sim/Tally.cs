@@ -9,16 +9,20 @@ namespace Tactics.Sim;
 /// source (the unit whose turn started, at a turn start), a summon counting as its summoner. Party members are the
 /// party's own characters (class from their sheet's <c>class:</c> tag), not summons or NPCs.
 /// <list type="bullet">
-/// <item><b>Damage:</b> <see cref="Damaged"/> amounts (temporary HP included) a member caused to a unit on another side.</item>
+/// <item><b>Damage:</b> the HP a member took off units on other sides: each <see cref="Damaged"/> credits the HP the unit
+/// actually lost (its HP before, tracked from the events, less <see cref="Damaged.HpAfter"/>), so overkill doesn't count and
+/// damage soaked by temporary HP doesn't either (that is mitigation, the target's).</item>
 /// <item><b>Healing:</b> <see cref="Healed"/> amounts a member caused on its own side, plus the HP of a
 /// <see cref="Revived"/> that no heal caused (Help).</item>
-/// <item><b>Mitigated:</b> the <see cref="Damaged"/> amounts a member took, plus the hostile attacks on it that missed
-/// (<see cref="AttackResolved"/>) times the battle's mean damage of a hostile hit on a party member.</item>
+/// <item><b>Mitigated:</b> the damage a member soaked (HP lost plus temporary HP spent, no overkill), plus the hostile attacks
+/// on it that missed (<see cref="AttackResolved"/>) times the battle's mean soaked damage of a hostile hit on a party
+/// member.</item>
 /// <item><b>Turns denied:</b> an enemy's <see cref="TurnSkipped"/> for <c>"incapacitated"</c>, credited to the member that
 /// last applied an incapacitating condition to it (<see cref="ConditionApplied"/>).</item>
 /// <item><b>Abilities:</b> for each member turn (from <see cref="BeginTurn"/> to its <see cref="TurnEnded"/>), every legal
 /// ability counts one legal turn and every one it used (<see cref="AbilityUsed"/> as the turn's unit) one used turn; a used
-/// ability is counted legal too.</item>
+/// ability is counted legal too. Reactions (the ability after a <see cref="Reacted"/>, or any with a Reaction cost) aren't
+/// counted: they answer someone else's action, so "legal turns" means nothing for them.</item>
 /// <item><b>Downs and Outs:</b> members' <see cref="Downed"/> and <see cref="UnitOut"/> events.</item>
 /// </list>
 /// </summary>
@@ -40,10 +44,13 @@ internal sealed class Tally(RulesPack rules)
     private readonly Dictionary<UnitId, UnitId> _disabledBy = [];
     private readonly Dictionary<ConditionId, bool> _incapacitates = [];
     private readonly SortedDictionary<AbilityId, (int Used, int Legal)> _abilities = [];
+    private readonly Dictionary<UnitId, int> _hp = [];
+    private readonly Dictionary<UnitId, int> _temp = [];
 
     private UnitId? _source;
     private UnitId? _hitTarget;
     private BattleEvent? _previous;
+    private bool _reacting;
     private double _hostileHitDamage;
     private int _hostileHits;
 
@@ -81,6 +88,8 @@ internal sealed class Tally(RulesPack rules)
             ReadOne(e);
             _previous = e;
         }
+        foreach (var (id, unit) in state.Units)     // the state is the truth after each command
+            (_hp[id], _temp[id]) = (unit.Hp, unit.TempHp);
     }
 
     private void ReadOne(BattleEvent e)
@@ -104,10 +113,14 @@ internal sealed class Tally(RulesPack rules)
                     EndTurn();
                 (_source, _hitTarget) = (null, null);
                 break;
+            case Reacted reacted:
+                _reacting = reacted.Choice != Reactions.Pass;
+                break;
             case AbilityUsed used:
                 (_source, _hitTarget) = (used.Source, null);
-                if (used.Source == _turn)
+                if (used.Source == _turn && !_reacting && rules.Abilities.GetValueOrDefault(used.Ability)?.Cost.Reaction is null or 0)
                     _used.Add(used.Ability);
+                _reacting = false;
                 break;
             case PassiveTriggered passive:
                 _source = passive.Owner;     // a hook on a hit (sneak attack) still belongs to that hit
@@ -126,11 +139,16 @@ internal sealed class Tally(RulesPack rules)
             case Damaged damaged:
                 OnDamaged(damaged);
                 break;
+            case TempHpGained gained:
+                _temp[gained.Unit] = gained.TempHp;
+                break;
             case Healed healed:
+                _hp[healed.Unit] = healed.HpAfter;
                 if (Owner(_source) is { } healer && _members.TryGetValue(healer, out var h) && !Hostile(healer, healed.Unit))
                     h.Healing += healed.Amount;
                 break;
             case Revived revived:
+                _hp[revived.Unit] = revived.Hp;
                 if (_previous is not Healed { } heal || heal.Unit != revived.Unit)
                     if (Owner(_source) is { } helper && _members.TryGetValue(helper, out var m) && !Hostile(helper, revived.Unit))
                         m.Healing += revived.Hp;
@@ -153,15 +171,21 @@ internal sealed class Tally(RulesPack rules)
 
     private void OnDamaged(Damaged damaged)
     {
+        var unit = damaged.Unit;
+        var lost = Math.Max(0, _hp.GetValueOrDefault(unit, damaged.HpAfter) - damaged.HpAfter);
+        var temp = _temp.GetValueOrDefault(unit);
+        var absorbed = Math.Min(temp, Math.Max(0, damaged.Amount - lost));
+        (_hp[unit], _temp[unit]) = (damaged.HpAfter, temp - absorbed);
+
         var by = Owner(_source);
-        if (_members.TryGetValue(damaged.Unit, out var victim))
+        if (_members.TryGetValue(unit, out var victim))
         {
-            victim.Taken += damaged.Amount;
-            if (_hitTarget == damaged.Unit && by is { } attacker && Hostile(attacker, damaged.Unit))
-                _hostileHitDamage += damaged.Amount;
+            victim.Taken += lost + absorbed;
+            if (_hitTarget == unit && by is { } attacker && Hostile(attacker, unit))
+                _hostileHitDamage += lost + absorbed;
         }
-        if (by is { } dealer && _members.TryGetValue(dealer, out var member) && Hostile(dealer, damaged.Unit))
-            member.Damage += damaged.Amount;
+        if (by is { } dealer && _members.TryGetValue(dealer, out var member) && Hostile(dealer, unit))
+            member.Damage += lost;
     }
 
     private void EndTurn()
@@ -201,6 +225,7 @@ internal sealed class Tally(RulesPack rules)
         {
             if (!_sides.TryAdd(id, unit.Sheet.Side))
                 continue;
+            (_hp[id], _temp[id]) = (unit.Hp, unit.TempHp);
             if (unit.SummonedBy is { } owner)
                 _summoners[id] = owner;
             else if (unit.Sheet.Side == Side.Party && !unit.Protected && ClassOf(unit) is { } cls)

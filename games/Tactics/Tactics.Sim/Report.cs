@@ -117,8 +117,9 @@ public static class Report
         Line(md);
         Line(md, "Each class's band measure at each level (the mean over the battles it fought, per member), against the mean of "
                  + $"its band's classes at that level; **FLAG** beyond ±{Pct(BandTolerance)}. Measures: Defender, damage mitigated per "
-                 + "round (taken, plus misses against it × the mean hostile hit); Striker, damage per round; Healer, healing and "
-                 + "revives per round; Control, enemy turns denied per battle. A band with one class present sits on its own mean.");
+                 + "round (HP and temporary HP it lost, plus misses against it × the mean hostile hit); Striker, damage per round "
+                 + "(HP taken off foes: no overkill, and temporary HP soaked doesn't count); Healer, healing and revives per round; "
+                 + "Control, enemy turns denied per battle. A band with one class present sits on its own mean.");
         Line(md);
         Line(md, "| Level | Band | Measure | Class | Value | Band mean | Deviation | Flag |");
         Line(md, "|---:|---|---|---|---:|---:|---:|---|");
@@ -150,7 +151,8 @@ public static class Report
         Line(md, $"Abilities party members used in fewer than {Pct(RareUse)} of their turns where the ability was legal, over every "
                  + "battle (the built-in `common.*` actions are listed below but not flagged). Legal is judged at the start of each "
                  + "turn: an ability `Battle.Check` accepts on some unit or nearby tile, or refuses only for range or line of sight "
-                 + "within the unit's Move plus the ability's range; reactions aren't counted.");
+                 + "within the unit's Move plus the ability's range. Reactions (opportunity attacks, Shield, Uncanny Dodge and the like) "
+                 + "aren't counted, used or legal.");
         Line(md);
         if (rare.Length == 0)
             Line(md, "None flagged.");
@@ -174,13 +176,16 @@ public static class Report
         Line(md, Headings[5]);
         Line(md);
         Line(md, "Party members Downed (each time) and Out, per battle; items the AI used (party members play with items off, so "
-                 + "only enemies could use any).");
+                 + "only enemies could use any). The last three columns are totals over both sides' turns: AI commands "
+                 + "`Battle.Apply` refused, turns planned again (after a refusal or a move cut short) and turns the simulator "
+                 + "ended because the plans didn't.");
         Line(md);
-        Line(md, "| Encounter | Level | Battles | Downs / battle | Outs / battle | Battles with an Out | AI item uses |");
-        Line(md, "|---|---:|---:|---:|---:|---:|---:|");
+        Line(md, "| Encounter | Level | Battles | Downs / battle | Outs / battle | Battles with an Out | AI item uses | Rejected commands | Re-plans | Forced ends |");
+        Line(md, "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|");
         foreach (var c in winCells)
             Line(md, $"| {c.Encounter} | {c.Level} | {c.Battles.Length} | {Num(c.Battles.Average(b => b.Downs))} | "
-                     + $"{Num(c.Battles.Average(b => b.Outs))} | {c.Battles.Count(b => b.Outs > 0)} | {c.Battles.Sum(b => b.AiItemUses)} |");
+                     + $"{Num(c.Battles.Average(b => b.Outs))} | {c.Battles.Count(b => b.Outs > 0)} | {c.Battles.Sum(b => b.AiItemUses)} | "
+                     + $"{c.Battles.Sum(b => b.Rejected)} | {c.Battles.Sum(b => b.Replans)} | {c.Battles.Sum(b => b.ForcedEnds)} |");
         Line(md);
 
         // 7. Configuration

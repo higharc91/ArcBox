@@ -60,28 +60,28 @@ Target: 8–12 rounds. Flags: **SHORT** / **LONG** when the mean is outside it, 
 
 ## 4. Role bands
 
-Each class's band measure at each level (the mean over the battles it fought, per member), against the mean of its band's classes at that level; **FLAG** beyond ±15%. Measures: Defender, damage mitigated per round (taken, plus misses against it × the mean hostile hit); Striker, damage per round; Healer, healing and revives per round; Control, enemy turns denied per battle. A band with one class present sits on its own mean.
+Each class's band measure at each level (the mean over the battles it fought, per member), against the mean of its band's classes at that level; **FLAG** beyond ±15%. Measures: Defender, damage mitigated per round (HP and temporary HP it lost, plus misses against it × the mean hostile hit); Striker, damage per round (HP taken off foes: no overkill, and temporary HP soaked doesn't count); Healer, healing and revives per round; Control, enemy turns denied per battle. A band with one class present sits on its own mean.
 
 | Level | Band | Measure | Class | Value | Band mean | Deviation | Flag |
 |---:|---|---|---|---:|---:|---:|---|
-| 1 | Defender | mitigated / round | fighter | 2.5 | 2.5 | +0.0% |  |
-| 1 | Striker | damage / round | rogue | 0.7 | 0.7 | +0.0% |  |
+| 1 | Defender | mitigated / round | fighter | 2.2 | 2.2 | +0.0% |  |
+| 1 | Striker | damage / round | rogue | 0.5 | 0.5 | +0.0% |  |
 | 1 | Healer | healing / round | cleric | 0.4 | 0.4 | +0.0% |  |
 | 1 | Control | turns denied / battle | wizard | 1.9 | 1.9 | +0.0% |  |
 | 3 | Defender | mitigated / round | fighter | 2.4 | 2.4 | +0.0% |  |
-| 3 | Striker | damage / round | rogue | 1.4 | 1.4 | +0.0% |  |
+| 3 | Striker | damage / round | rogue | 0.9 | 0.9 | +0.0% |  |
 | 3 | Healer | healing / round | cleric | 0.6 | 0.6 | +0.0% |  |
 | 3 | Control | turns denied / battle | wizard | 2.0 | 2.0 | +0.0% |  |
 | 5 | Defender | mitigated / round | fighter | 0.1 | 0.1 | +0.0% |  |
-| 5 | Striker | damage / round | rogue | 0.3 | 0.3 | +0.0% |  |
+| 5 | Striker | damage / round | rogue | 0.2 | 0.2 | +0.0% |  |
 | 5 | Healer | healing / round | cleric | 0.3 | 0.3 | +0.0% |  |
 | 5 | Control | turns denied / battle | wizard | 0.1 | 0.1 | +0.0% |  |
 | 7 | Defender | mitigated / round | fighter | 0.1 | 0.1 | +0.0% |  |
-| 7 | Striker | damage / round | rogue | 0.6 | 0.6 | +0.0% |  |
+| 7 | Striker | damage / round | rogue | 0.3 | 0.3 | +0.0% |  |
 | 7 | Healer | healing / round | cleric | 0.1 | 0.1 | +0.0% |  |
 | 7 | Control | turns denied / battle | wizard | 0.1 | 0.1 | +0.0% |  |
 | 10 | Defender | mitigated / round | fighter | 0.3 | 0.3 | +0.0% |  |
-| 10 | Striker | damage / round | rogue | 2.0 | 2.0 | +0.0% |  |
+| 10 | Striker | damage / round | rogue | 1.0 | 1.0 | +0.0% |  |
 | 10 | Healer | healing / round | cleric | 0.1 | 0.1 | +0.0% |  |
 | 10 | Control | turns denied / battle | wizard | 0.8 | 0.8 | +0.0% |  |
 
@@ -91,30 +91,30 @@ Every measure, by class and level:
 
 | Class | Band | Level | Battles | Damage / round | Healing / round | Mitigated / round | Turns denied |
 |---|---|---:|---:|---:|---:|---:|---:|
-| cleric | Healer | 1 | 260 | 0.9 | 0.4 | 0.2 | 0.0 |
-| cleric | Healer | 3 | 260 | 1.0 | 0.6 | 0.0 | 0.0 |
+| cleric | Healer | 1 | 260 | 0.5 | 0.4 | 0.1 | 0.0 |
+| cleric | Healer | 3 | 260 | 0.6 | 0.6 | 0.0 | 0.0 |
 | cleric | Healer | 5 | 260 | 0.1 | 0.3 | 0.0 | 0.0 |
-| cleric | Healer | 7 | 260 | 0.3 | 0.1 | 0.0 | 0.0 |
-| cleric | Healer | 10 | 260 | 3.3 | 0.1 | 0.0 | 0.5 |
-| fighter | Defender | 1 | 320 | 2.8 | 0.3 | 2.5 | 0.0 |
-| fighter | Defender | 3 | 320 | 3.8 | 0.5 | 2.4 | 0.0 |
-| fighter | Defender | 5 | 320 | 1.0 | 0.0 | 0.1 | 0.0 |
-| fighter | Defender | 7 | 320 | 0.8 | 0.0 | 0.1 | 0.0 |
-| fighter | Defender | 10 | 320 | 3.3 | 0.1 | 0.3 | 0.0 |
-| rogue | Striker | 1 | 260 | 0.7 | 0.0 | 1.6 | 0.0 |
-| rogue | Striker | 3 | 260 | 1.4 | 0.0 | 1.9 | 0.0 |
-| rogue | Striker | 5 | 260 | 0.3 | 0.0 | 0.8 | 0.0 |
-| rogue | Striker | 7 | 260 | 0.6 | 0.0 | 0.4 | 0.0 |
-| rogue | Striker | 10 | 260 | 2.0 | 0.0 | 0.5 | 0.0 |
-| wizard | Control | 1 | 320 | 0.6 | 0.0 | 0.4 | 1.9 |
-| wizard | Control | 3 | 320 | 0.5 | 0.0 | 0.1 | 2.0 |
-| wizard | Control | 5 | 320 | 27.8 | 0.0 | 0.0 | 0.1 |
-| wizard | Control | 7 | 320 | 26.0 | 0.0 | 0.0 | 0.1 |
-| wizard | Control | 10 | 320 | 19.7 | 0.0 | 0.0 | 0.8 |
+| cleric | Healer | 7 | 260 | 0.1 | 0.1 | 0.0 | 0.0 |
+| cleric | Healer | 10 | 260 | 1.9 | 0.1 | 0.0 | 0.5 |
+| fighter | Defender | 1 | 320 | 1.9 | 0.3 | 2.2 | 0.0 |
+| fighter | Defender | 3 | 320 | 2.6 | 0.5 | 2.4 | 0.0 |
+| fighter | Defender | 5 | 320 | 0.7 | 0.0 | 0.1 | 0.0 |
+| fighter | Defender | 7 | 320 | 0.5 | 0.0 | 0.1 | 0.0 |
+| fighter | Defender | 10 | 320 | 2.2 | 0.1 | 0.3 | 0.0 |
+| rogue | Striker | 1 | 260 | 0.5 | 0.0 | 1.3 | 0.0 |
+| rogue | Striker | 3 | 260 | 0.9 | 0.0 | 1.8 | 0.0 |
+| rogue | Striker | 5 | 260 | 0.2 | 0.0 | 0.8 | 0.0 |
+| rogue | Striker | 7 | 260 | 0.3 | 0.0 | 0.4 | 0.0 |
+| rogue | Striker | 10 | 260 | 1.0 | 0.0 | 0.5 | 0.0 |
+| wizard | Control | 1 | 320 | 0.5 | 0.0 | 0.3 | 1.9 |
+| wizard | Control | 3 | 320 | 0.4 | 0.0 | 0.1 | 2.0 |
+| wizard | Control | 5 | 320 | 14.0 | 0.0 | 0.0 | 0.1 |
+| wizard | Control | 7 | 320 | 13.2 | 0.0 | 0.0 | 0.1 |
+| wizard | Control | 10 | 320 | 7.0 | 0.0 | 0.0 | 0.8 |
 
 ## 5. Rarely used abilities
 
-Abilities party members used in fewer than 2% of their turns where the ability was legal, over every battle (the built-in `common.*` actions are listed below but not flagged). Legal is judged at the start of each turn: an ability `Battle.Check` accepts on some unit or nearby tile, or refuses only for range or line of sight within the unit's Move plus the ability's range; reactions aren't counted.
+Abilities party members used in fewer than 2% of their turns where the ability was legal, over every battle (the built-in `common.*` actions are listed below but not flagged). Legal is judged at the start of each turn: an ability `Battle.Check` accepts on some unit or nearby tile, or refuses only for range or line of sight within the unit's Move plus the ability's range. Reactions (opportunity attacks, Shield, Uncanny Dodge and the like) aren't counted, used or legal.
 
 | Ability | Used turns | Legal turns | Use rate |
 |---|---:|---:|---:|
@@ -214,7 +214,6 @@ Every ability party members could use:
 | wizard.misty_step | 0 | 5092 | 0.0% | **RARE** |
 | wizard.ray_of_frost | 43 | 9833 | 0.4% | **RARE** |
 | wizard.scorching_ray | 11 | 5392 | 0.2% | **RARE** |
-| wizard.shield | 1 | 1 | 100.0% |  |
 | wizard.shocking_grasp | 6 | 716 | 0.8% | **RARE** |
 | wizard.sleep | 4438 | 16367 | 27.1% |  |
 | wizard.thunderwave | 0 | 267 | 0.0% | **RARE** |
@@ -222,15 +221,15 @@ Every ability party members could use:
 
 ## 6. Downs, Outs and AI item use
 
-Party members Downed (each time) and Out, per battle; items the AI used (party members play with items off, so only enemies could use any).
+Party members Downed (each time) and Out, per battle; items the AI used (party members play with items off, so only enemies could use any). The last three columns are totals over both sides' turns: AI commands `Battle.Apply` refused, turns planned again (after a refusal or a move cut short) and turns the simulator ended because the plans didn't.
 
-| Encounter | Level | Battles | Downs / battle | Outs / battle | Battles with an Out | AI item uses |
-|---|---:|---:|---:|---:|---:|---:|
-| river_crossing | 1 | 360 | 1.8 | 0.7 | 132 | 0 |
-| river_crossing | 3 | 360 | 0.2 | 0.1 | 19 | 0 |
-| river_crossing | 5 | 360 | 0.0 | 0.0 | 0 | 0 |
-| river_crossing | 7 | 360 | 0.0 | 0.0 | 0 | 0 |
-| river_crossing | 10 | 360 | 0.0 | 0.0 | 0 | 0 |
+| Encounter | Level | Battles | Downs / battle | Outs / battle | Battles with an Out | AI item uses | Rejected commands | Re-plans | Forced ends |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| river_crossing | 1 | 360 | 1.8 | 0.7 | 132 | 0 | 0 | 0 | 0 |
+| river_crossing | 3 | 360 | 0.2 | 0.1 | 19 | 0 | 0 | 0 | 0 |
+| river_crossing | 5 | 360 | 0.0 | 0.0 | 0 | 0 | 0 | 0 | 0 |
+| river_crossing | 7 | 360 | 0.0 | 0.0 | 0 | 0 | 0 | 0 | 0 |
+| river_crossing | 10 | 360 | 0.0 | 0.0 | 0 | 0 | 0 | 9 | 0 |
 
 ## 7. Configuration and seeds
 
@@ -268,10 +267,15 @@ dotnet run -c Release --project games/Tactics/Tactics.Sim -- \
 
 Sections 1–7 above are the simulator's output, unedited. The command in section 7 regenerates them byte for byte (checked by running it twice). These notes are the reading of them that Task 23 starts from.
 
-- **Role bands can't flag yet.** Only fighter, cleric, rogue and wizard exist, one per band, so each band's mean is its only class. Within-band comparisons start once Tasks 17–20 add the other eight classes. Across bands the gap is large: from level 5 the wizard deals 20–28 damage a round (Fireball, 25.5% of its legal turns), while the fighter deals at most 3.8 and the rogue at most 2.0.
+- **How damage is counted.** Damage is the HP a member actually took off foes. Overkill doesn't count, and neither does damage soaked by temporary HP, which counts as the target's mitigation instead. A Fireball on goblins that are already hurt is credited only the HP they had left.
+- **Role bands can't flag yet.** Only fighter, cleric, rogue and wizard exist, one per band, so each band's mean is its only class. Within-band comparisons start once Tasks 17–20 add the other eight classes. Across bands the gap is still large:
+  - From level 5 the wizard takes 7–14 HP off foes a round. Fireball is used in 25.5% of its legal turns.
+  - The fighter takes at most 2.6 a round, and the rogue at most 1.0.
+  - Six level-1 goblins have only 60 HP between them, so a party of 4–6 can't score high per round at any level. These numbers compare classes; they say nothing yet about absolute damage targets.
 - **The encounter doesn't scale.** `river_crossing` places six level-1 goblins at every party level, and encounters declare no intended level, so every level is judged. That gives 88.6% wins at level 1 and 99–100% from level 3. Battles at levels 5–10 are short (3.9–6.0 rounds). Encounter levels and the full roster come in Task 21.
 - **Battles at levels 1 and 3 run long, and strikers deal little.** This comes from the AI's play, not the content. Across all turns, party members Dash in 23.5%, Dodge in 19.6% and Help in 20.2%, but attack in only 35.9% of the turns an attack is legal. In a traced level-3 battle the rogue (`skirmisher`) spent its early turns dashing, hiding and dodging, and left sleeping goblins alone. Fifteen level-1 battles and three level-3 battles hit the 30-round cap.
-- **Abilities flagged as rarely used.** Each traces to the planner or to this encounter, not to a wrong cost, range or target in the content:
+- **The AI's plans hold up.** No AI command was refused in 1800 battles, and no turn had to be ended by the simulator. Nine turns, all at level 10, were planned again after an opportunity attack cut a move short.
+- **Abilities flagged as rarely used.** Reactions are no longer counted. Each flagged ability traces to the planner or to this encounter, not to a wrong cost, range or target in the content:
   - **The planner never plans it:**
     - `rogue.cunning_dash`: a bonus-action Dash is never planned (Task 14's deferred finding).
     - `fighter.action_surge`: the extra Action it grants is never followed by a second action.

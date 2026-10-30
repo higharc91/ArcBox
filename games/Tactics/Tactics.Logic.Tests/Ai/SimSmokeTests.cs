@@ -4,9 +4,17 @@ using Tactics.Sim;
 namespace Tactics.Logic.Tests;
 
 /// <summary>
+/// The simulator plays battles on every core, so its tests run alone, after the parallel ones, and never take CPU from
+/// <see cref="AiPerformanceTests"/>' time budget.
+/// </summary>
+[CollectionDefinition(DisableParallelization = true)]
+public sealed class SimCollection;
+
+/// <summary>
 /// The balance simulator end to end (spec §5.6): every encounter in the base pack, played by AI on both sides, finishes
 /// with an outcome, and the report renders every section.
 /// </summary>
+[Collection(typeof(SimCollection))]
 public sealed class SimSmokeTests
 {
     [Fact]
@@ -32,14 +40,20 @@ public sealed class SimSmokeTests
         Assert.Equal(new ulong[] { 1, 2, 3 }, battles.Select(b => b.Seed).Distinct().Order());
         Assert.Contains(battles, b => b.Abilities.Values.Any(a => a.Used > 0));
 
-        // Damage is credited from the events: a won battle's party damage covers (nearly all of) the enemies' HP, which
-        // only an unsourced kill (a fall, deep water) would leave uncredited.
+        // Damage is credited from the events as HP actually lost. Enemies here don't heal, so no battle credits more than
+        // the enemies' HP (overkill doesn't count), and a won battle credits nearly all of it: only an unsourced kill (a
+        // fall, deep water) is left out.
+        double Dealt(SimBattle b) => b.PerClass.Sum(p => p.Value.DamagePerRound * b.Classes.Count(c => c == p.Key) * b.Rounds);
+        double EnemyHp(SimBattle b) => rules.Encounters[b.Encounter].Enemies
+            .Sum(e => e.Count * SheetBuilder.ForMonster(e.Unit, rules, e.Level).MaxHp);
+        Assert.All(battles, b => Assert.True(Dealt(b) <= EnemyHp(b) + 0.01,
+            $"Seed {b.Seed} credits {Dealt(b):0.00} damage against {EnemyHp(b)} enemy HP."));
         var won = battles.Where(b => b.Outcome == BattleOutcome.Won).ToArray();
         Assert.NotEmpty(won);
-        var dealt = won.Sum(b => b.PerClass.Sum(p => p.Value.DamagePerRound * b.Classes.Count(c => c == p.Key) * b.Rounds));
-        var enemyHp = won.Sum(b => rules.Encounters[b.Encounter].Enemies
-            .Sum(e => e.Count * SheetBuilder.ForMonster(e.Unit, rules, e.Level).MaxHp));
-        Assert.True(dealt >= 0.9 * enemyHp, $"The party is credited {dealt:0} damage against {enemyHp} enemy HP.");
+        Assert.True(won.Sum(Dealt) >= 0.9 * won.Sum(EnemyHp), $"The party is credited {won.Sum(Dealt):0} damage against {won.Sum(EnemyHp)} enemy HP.");
+
+        // Reactions answer someone else's action: they have no legal turns, so they aren't counted.
+        Assert.All(battles.SelectMany(b => b.Abilities.Keys), id => Assert.Equal(0, rules.Abilities[id].Cost.Reaction));
 
         var report = Report.Markdown(battles, config);
         string[] headings =
