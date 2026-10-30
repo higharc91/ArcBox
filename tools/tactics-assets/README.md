@@ -50,11 +50,12 @@ A player's character is **a name, a race, a class and a look** (`parts/creator.p
 
 | Axis | Decides |
 |---|---|
-| Race (9) | Build, body (ears, tusks, snout), tail, and which skins, hair, beards and horns are on offer |
+| Race (11) | Build, body (ears, tusks, snout), tail, and which skins, hair, beards and horns are on offer |
 | Class (10) | The starting kit: torso, legs, feet, hands, weapon, off-hand, cape, headgear, plus starting colours |
 | Look | The player's picks, limited to what the race offers: body type, skin, eyes, hair style and colour, facial hair, horns, face markings and paint, plus colour changes to the kit |
 
-The races are Human, Elf, Half-Elf, Dwarf, Halfling, Gnome, Half-Orc, Tiefling and Dragonborn.
+The races are Human, Elf, Half-Elf, Dwarf, Halfling, Gnome, Half-Orc, Tiefling, Aasimar, Goliath and
+Dragonborn.
 
 The options are:
 
@@ -72,7 +73,7 @@ The options are:
 See `previews/08-customisation.png`.
 
 `make_character(name, race, class, look)` merges these into a recipe, and rejects picks the race doesn't offer
-(for example, hair on a dragonborn). Any race can take any class, so there are 90 combinations, and
+(for example, hair on a dragonborn). Any race can take any class, so there are 110 combinations, and
 `previews/06-race-class.png` renders every one. `characters/creator.json` exports the races and kits, so the
 phone creator offers exactly these options. The TV draws the name on nameplates and the turn order; the sprite
 doesn't carry it. The creator mockup is `docs/superpowers/mockups/tactics/07-phone-creator.png`.
@@ -310,6 +311,20 @@ The manifest pairs each biome with a sky.
   ribbon, a 5×7 pixel font with advances, and a title-screen key art.
 - **`parts/showcase.py`:** renders `previews/anim-battle.gif`, a short battle built only from the pack's files. It's
   the quickest end-to-end check that sets agree on scale, anchors and timing.
+
+## Battle and presentation extras
+
+| Set | What |
+|---|---|
+| `bosses/` | 2×2 dragon, trolls and ogres, golems, four elementals, wraiths, the mimic, and the subclass companions (imp, hound, sapling) with player-colour accents. Same animation contract as beasts, plus `special` |
+| `ambient/` | Environment animation: swaying flora (drop-in replacements for the static props), water, fire and light, interactive objects with named states, particles and weather overlays |
+| `projectiles/` | Arrows, bolts, daggers, rocks and spell projectiles drawn natively in 16 headings (row = heading), so nothing is rotated at runtime |
+| `hazards/` | Persistent tile effects in the UI markers' diamond, with optional `over` layers and gameplay flags (difficult terrain, damage type) |
+| `crests/` | A heraldic shield per class and a medallion per subclass |
+| `gear_icons/` | 24×24 bag icons generated from the gear layers, one atlas per metal tier, keyed `layer/variant` |
+| `creator/` | Picture chips for the phone's Look step, plus each race's skin range |
+| `grades/` | Ten 16-cube colour LUTs (dawn to night, storm, cave, infernal, fey, memory). The manifest includes the post-process shader |
+| `transitions/` | Low-res threshold maps for screen wipes. The manifest includes the shader |
 
 ## Adding a set
 
