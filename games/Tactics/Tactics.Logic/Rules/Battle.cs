@@ -47,10 +47,10 @@ public static partial class Battle
     {
         if (state.Outcome is not null)
             return Reject(state, RejectCode.BattleOver);
-        if (state.Pending is not null && command is not React)
+        if (command is React react)
+            return ApplyReact(state, react, rules);
+        if (state.Pending is not null)
             return Reject(state, RejectCode.ReactionPending);
-        if (command is React)
-            throw new NotSupportedException($"{nameof(React)} arrives in Task 6");
         if (state.Active != command.Actor)
             return Reject(state, RejectCode.NotYourTurn);
 
@@ -69,8 +69,10 @@ public static partial class Battle
                 if (PlanUse(w, use, rules) is { } refused)
                     return new Resolution(state, [], refused);
                 break;
-            case Move:
-                throw new NotSupportedException($"{command.GetType().Name} arrives in Task 6");
+            case Move move:
+                if (Movement.Plan(w, move) is { } blocked)
+                    return new Resolution(state, [], blocked);
+                break;
             default:
                 throw new ArgumentException($"Unknown command {command.GetType().Name}.", nameof(command));
         }
@@ -80,6 +82,29 @@ public static partial class Battle
     }
 
     private static Resolution Reject(BattleState state, RejectCode code) => new(state, [], Rejection.Of(code));
+
+    /// <summary>
+    /// Answers the pending <see cref="ReactionOffer"/> (<see cref="RejectCode.NothingToReact"/> without one) as its reactor
+    /// (<see cref="RejectCode.NotYourTurn"/> otherwise) with one of its options, matched by id
+    /// (<see cref="RejectCode.InvalidTarget"/> otherwise). Clears the offer, emits <see cref="Reacted"/>, resolves the
+    /// reaction unless it is <c>"pass"</c>, and resumes the queue where it paused.
+    /// </summary>
+    private static Resolution ApplyReact(BattleState state, React react, RulesPack rules)
+    {
+        if (state.Pending is not ReactionOffer offer)
+            return Reject(state, RejectCode.NothingToReact);
+        if (react.Actor != offer.Reactor)
+            return Reject(state, RejectCode.NotYourTurn);
+        if (offer.Options.FirstOrDefault(o => o.Id == react.Choice.Id) is not { } choice)
+            return Reject(state, RejectCode.InvalidTarget);
+
+        var w = new BattleWriter(state with { Pending = null }, rules);
+        w.Emit(new Reacted(offer.Reactor, choice.Id));
+        if (choice.Id != Reactions.Pass)
+            w.PushFront(new ReactionStep(offer.Reactor, choice));
+        Settle(w, rules);
+        return new Resolution(w.Freeze(), w.Events, null);
+    }
 
     /// <summary>
     /// Delay is allowed at the start of the unit's turn (nothing spent), once per round, by at least one slot, and only
@@ -253,7 +278,7 @@ public static partial class Battle
         => ability.Value.StartsWith("common.", StringComparison.Ordinal) || sheet.Abilities.Contains(ability);
 
     /// <summary>Why <paramref name="unit"/> can't pay for <paramref name="ability"/>, or null when it can.</summary>
-    private static Rejection? CostRefusal(UnitState unit, AbilityDef ability)
+    internal static Rejection? CostRefusal(UnitState unit, AbilityDef ability)
     {
         var cost = ability.Cost;
         var economy = unit.Economy;

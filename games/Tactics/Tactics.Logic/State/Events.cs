@@ -15,6 +15,13 @@ namespace Tactics.Logic;
 [JsonDerivedType(typeof(Healed), nameof(Healed))]
 [JsonDerivedType(typeof(ConditionApplied), nameof(ConditionApplied))]
 [JsonDerivedType(typeof(ConditionRemoved), nameof(ConditionRemoved))]
+[JsonDerivedType(typeof(Moved), nameof(Moved))]
+[JsonDerivedType(typeof(Pushed), nameof(Pushed))]
+[JsonDerivedType(typeof(Fell), nameof(Fell))]
+[JsonDerivedType(typeof(Collided), nameof(Collided))]
+[JsonDerivedType(typeof(Teleported), nameof(Teleported))]
+[JsonDerivedType(typeof(ReactionOffered), nameof(ReactionOffered))]
+[JsonDerivedType(typeof(Reacted), nameof(Reacted))]
 public abstract record BattleEvent;
 
 /// <summary>A new round began with this turn order.</summary>
@@ -46,3 +53,27 @@ public sealed record ConditionApplied(UnitId Unit, ConditionId Condition) : Batt
 
 /// <summary>A unit lost a condition.</summary>
 public sealed record ConditionRemoved(UnitId Unit, ConditionId Condition) : BattleEvent;
+
+/// <summary>A unit walked one step of a move, or dashed or jumped: <see cref="Path"/> starts at the tile it left.</summary>
+public sealed record Moved(UnitId Unit, ImmutableArray<Tile> Path) : BattleEvent;
+
+/// <summary>A unit was pushed or pulled one tile.</summary>
+public sealed record Pushed(UnitId Unit, Tile From, Tile To) : BattleEvent;
+
+/// <summary>
+/// A pushed unit fell <see cref="Levels"/> levels and took <see cref="Damage"/> (rolled, before resistances), or fell into a
+/// deep tile (<see cref="IntoDeep"/>). Emitted for falls of more than 3 levels and for every fall into deep water.
+/// </summary>
+public sealed record Fell(UnitId Unit, int Levels, int Damage, bool IntoDeep) : BattleEvent;
+
+/// <summary>A pushed unit hit a wall, the map edge or another unit (<see cref="With"/>) and took <see cref="Damage"/> (rolled).</summary>
+public sealed record Collided(UnitId Unit, UnitId? With, int Damage) : BattleEvent;
+
+/// <summary>A unit was moved without walking (a teleport or a swap).</summary>
+public sealed record Teleported(UnitId Unit, Tile From, Tile To) : BattleEvent;
+
+/// <summary>A player-controlled unit was offered a reaction; the battle waits for its <see cref="React"/>.</summary>
+public sealed record ReactionOffered(ReactionOffer Offer) : BattleEvent;
+
+/// <summary>A unit answered a reaction offer (or the AI took one) with the choice of this id.</summary>
+public sealed record Reacted(UnitId Reactor, string Choice) : BattleEvent;
