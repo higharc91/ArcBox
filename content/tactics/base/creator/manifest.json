@@ -54,8 +54,20 @@
         24,
         24
       ],
-      "dragonborn": [
+      "aasimar": [
         192,
+        0,
+        24,
+        24
+      ],
+      "goliath": [
+        216,
+        0,
+        24,
+        24
+      ],
+      "dragonborn": [
+        240,
         0,
         24,
         24
@@ -63,131 +75,131 @@
     },
     "body_type": {
       "masculine": [
-        216,
+        264,
         0,
         24,
         24
       ],
       "feminine": [
-        240,
         0,
+        24,
         24,
         24
       ]
     },
     "hair": {
       "short": [
-        264,
-        0,
+        24,
+        24,
         24,
         24
       ],
       "messy": [
-        0,
-        24,
-        24,
-        24
-      ],
-      "long": [
-        24,
-        24,
-        24,
-        24
-      ],
-      "ponytail": [
         48,
         24,
         24,
         24
       ],
-      "bun": [
+      "long": [
         72,
         24,
         24,
         24
       ],
-      "mohawk": [
+      "ponytail": [
         96,
         24,
         24,
         24
       ],
-      "braids": [
+      "bun": [
         120,
         24,
         24,
         24
       ],
-      "cropped": [
+      "mohawk": [
         144,
         24,
         24,
         24
       ],
-      "curly": [
+      "braids": [
         168,
         24,
         24,
         24
       ],
-      "pixie": [
+      "cropped": [
         192,
         24,
         24,
         24
       ],
-      "topknot": [
+      "curly": [
         216,
         24,
         24,
         24
       ],
-      "twintails": [
+      "pixie": [
         240,
         24,
         24,
         24
       ],
-      "none": [
+      "topknot": [
         264,
         24,
+        24,
+        24
+      ],
+      "twintails": [
+        0,
+        48,
+        24,
+        24
+      ],
+      "none": [
+        24,
+        48,
         24,
         24
       ]
     },
     "beard": {
       "short": [
-        0,
+        48,
         48,
         24,
         24
       ],
       "full": [
-        24,
-        48,
-        24,
-        24
-      ],
-      "braided": [
-        48,
-        48,
-        24,
-        24
-      ],
-      "goatee": [
         72,
         48,
         24,
         24
       ],
-      "moustache": [
+      "braided": [
         96,
         48,
         24,
         24
       ],
-      "stubble": [
+      "goatee": [
         120,
+        48,
+        24,
+        24
+      ],
+      "moustache": [
+        144,
+        48,
+        24,
+        24
+      ],
+      "stubble": [
+        168,
         48,
         24,
         24
@@ -195,25 +207,25 @@
     },
     "horns": {
       "curled": [
-        144,
-        48,
-        24,
-        24
-      ],
-      "straight": [
-        168,
-        48,
-        24,
-        24
-      ],
-      "ram": [
         192,
         48,
         24,
         24
       ],
-      "small": [
+      "straight": [
         216,
+        48,
+        24,
+        24
+      ],
+      "ram": [
+        240,
+        48,
+        24,
+        24
+      ],
+      "small": [
+        264,
         48,
         24,
         24
@@ -221,19 +233,19 @@
     },
     "dragon_horns": {
       "swept": [
-        240,
-        48,
+        0,
+        72,
         24,
         24
       ],
       "straight": [
-        264,
-        48,
+        24,
+        72,
         24,
         24
       ],
       "small": [
-        0,
+        48,
         72,
         24,
         24
@@ -241,31 +253,31 @@
     },
     "marks": {
       "freckles": [
-        24,
+        72,
         72,
         24,
         24
       ],
       "scar": [
-        48,
-        72,
-        24,
-        24
-      ],
-      "warpaint": [
-        72,
-        72,
-        24,
-        24
-      ],
-      "tattoo": [
         96,
         72,
         24,
         24
       ],
-      "stripes": [
+      "warpaint": [
         120,
+        72,
+        24,
+        24
+      ],
+      "tattoo": [
+        144,
+        72,
+        24,
+        24
+      ],
+      "stripes": [
+        168,
         72,
         24,
         24
@@ -354,6 +366,24 @@
         "infernal",
         "lilac",
         "ash"
+      ]
+    },
+    "aasimar": {
+      "file": "skins/aasimar.png",
+      "order": [
+        "celestial_gold",
+        "celestial_silver",
+        "celestial_bronze",
+        "porcelain",
+        "brown"
+      ]
+    },
+    "goliath": {
+      "file": "skins/goliath.png",
+      "order": [
+        "stone_grey",
+        "stone_blue",
+        "stone_umber"
       ]
     },
     "dragonborn": {

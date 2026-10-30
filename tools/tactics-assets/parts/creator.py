@@ -27,7 +27,7 @@ BODY_TYPES = ["masculine", "feminine"]
 HAIR_COLOURS = ["black", "brown", "chestnut", "auburn", "copper", "blonde", "platinum", "silver", "white", "teal",
                 "violet", "crimson"]
 HUMAN_SKINS = ["porcelain", "fair", "tan", "olive", "brown", "deep"]
-EYES = ["dark", "blue", "green", "amber", "violet", "red", "gold"]
+EYES = ["dark", "blue", "green", "amber", "violet", "red", "gold", "radiant"]
 
 
 @dataclass(frozen=True)
@@ -85,6 +85,14 @@ RACES: dict[str, Race] = {r.id: r for r in [
          default={"skin": "tiefling", "hair": "long", "hair_colour": "black", "horns": "curled",
                   "horn": "ram", "eyes": "gold"},
          traits=["Darkvision", "Hellish resistance", "Infernal legacy"]),
+    Race("aasimar", "Aasimar", "standard", "human", ["celestial_gold", "celestial_silver", "celestial_bronze",
+                                                     "porcelain", "brown"], HAIR_STYLES, ["short", "full"],
+         default={"skin": "celestial_gold", "hair": "long", "hair_colour": "chestnut", "eyes": "radiant"},
+         traits=["Darkvision", "Healing hands", "Radiant soul"]),
+    Race("goliath", "Goliath", "large", "human", ["stone_grey", "stone_blue", "stone_umber"], HAIR_STYLES,
+         ["short", "braided"],
+         default={"skin": "stone_grey", "hair": "none", "eyes": "blue", "marks": "tattoo", "paint": "kohl"},
+         traits=["Stone's endurance", "Powerful build", "Mountain born"]),
     Race("dragonborn", "Dragonborn", "standard", "dragon",
          ["dragon_red", "dragon_blue", "dragon_green", "dragon_black", "dragon_white", "dragon_gold",
           "dragon_bronze", "dragon_silver", "dragon_copper", "dragon_brass"], [], [],
@@ -323,8 +331,9 @@ def make_character(name: str, race: str, cls: str, look: Look | None = None, *, 
             layers.pop(layer, None)
         else:
             layers[layer] = variant
+    marks = lk.marks if lk.marks is not None else r.default.get("marks")
     for layer, variant in (("hair", hair), ("beard", beard), ("horns", horns), ("tail", r.tail),
-                           ("marks", lk.marks)):
+                           ("marks", marks)):
         if variant:
             layers[layer] = variant
 
@@ -336,7 +345,7 @@ def make_character(name: str, race: str, cls: str, look: Look | None = None, *, 
     palette["hair"] = f"hair/{lk.hair_colour or r.default.get('hair_colour', 'brown')}"
     palette["eyes"] = f"eyes/{lk.eyes or r.default.get('eyes', 'dark')}"
     palette["horn"] = f"horn/{lk.horn or r.default.get('horn', 'ivory')}"
-    palette["paint"] = f"paint/{lk.paint or 'woad'}"
+    palette["paint"] = f"paint/{lk.paint or r.default.get('paint', 'woad')}"
     palette.update(lk.colours)
 
     rid = id or "".join(ch for ch in name.lower().replace(" ", "_") if ch.isalnum() or ch == "_")

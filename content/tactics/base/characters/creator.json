@@ -79,7 +79,8 @@
         "amber",
         "violet",
         "red",
-        "gold"
+        "gold",
+        "radiant"
       ],
       "default": {
         "skin": "tan",
@@ -144,7 +145,8 @@
         "amber",
         "violet",
         "red",
-        "gold"
+        "gold",
+        "radiant"
       ],
       "default": {
         "skin": "porcelain",
@@ -214,7 +216,8 @@
         "amber",
         "violet",
         "red",
-        "gold"
+        "gold",
+        "radiant"
       ],
       "default": {
         "skin": "fair",
@@ -286,7 +289,8 @@
         "amber",
         "violet",
         "red",
-        "gold"
+        "gold",
+        "radiant"
       ],
       "default": {
         "skin": "tan",
@@ -353,7 +357,8 @@
         "amber",
         "violet",
         "red",
-        "gold"
+        "gold",
+        "radiant"
       ],
       "default": {
         "skin": "olive",
@@ -424,7 +429,8 @@
         "amber",
         "violet",
         "red",
-        "gold"
+        "gold",
+        "radiant"
       ],
       "default": {
         "skin": "fair",
@@ -492,7 +498,8 @@
         "amber",
         "violet",
         "red",
-        "gold"
+        "gold",
+        "radiant"
       ],
       "default": {
         "skin": "orc",
@@ -568,7 +575,8 @@
         "amber",
         "violet",
         "red",
-        "gold"
+        "gold",
+        "radiant"
       ],
       "default": {
         "skin": "tiefling",
@@ -582,6 +590,143 @@
         "Darkvision",
         "Hellish resistance",
         "Infernal legacy"
+      ]
+    },
+    "aasimar": {
+      "name": "Aasimar",
+      "build": "standard",
+      "body": "human",
+      "skins": [
+        "celestial_gold",
+        "celestial_silver",
+        "celestial_bronze",
+        "porcelain",
+        "brown"
+      ],
+      "hair": [
+        "short",
+        "messy",
+        "long",
+        "ponytail",
+        "bun",
+        "mohawk",
+        "braids",
+        "cropped",
+        "curly",
+        "pixie",
+        "topknot",
+        "twintails"
+      ],
+      "hairColours": [
+        "black",
+        "brown",
+        "chestnut",
+        "auburn",
+        "copper",
+        "blonde",
+        "platinum",
+        "silver",
+        "white",
+        "teal",
+        "violet",
+        "crimson"
+      ],
+      "beards": [
+        "short",
+        "full"
+      ],
+      "horns": [],
+      "hornsRequired": false,
+      "hornColours": [],
+      "tail": null,
+      "eyes": [
+        "dark",
+        "blue",
+        "green",
+        "amber",
+        "violet",
+        "red",
+        "gold",
+        "radiant"
+      ],
+      "default": {
+        "skin": "celestial_gold",
+        "hair": "long",
+        "hair_colour": "chestnut",
+        "eyes": "radiant"
+      },
+      "traits": [
+        "Darkvision",
+        "Healing hands",
+        "Radiant soul"
+      ]
+    },
+    "goliath": {
+      "name": "Goliath",
+      "build": "large",
+      "body": "human",
+      "skins": [
+        "stone_grey",
+        "stone_blue",
+        "stone_umber"
+      ],
+      "hair": [
+        "short",
+        "messy",
+        "long",
+        "ponytail",
+        "bun",
+        "mohawk",
+        "braids",
+        "cropped",
+        "curly",
+        "pixie",
+        "topknot",
+        "twintails"
+      ],
+      "hairColours": [
+        "black",
+        "brown",
+        "chestnut",
+        "auburn",
+        "copper",
+        "blonde",
+        "platinum",
+        "silver",
+        "white",
+        "teal",
+        "violet",
+        "crimson"
+      ],
+      "beards": [
+        "short",
+        "braided"
+      ],
+      "horns": [],
+      "hornsRequired": false,
+      "hornColours": [],
+      "tail": null,
+      "eyes": [
+        "dark",
+        "blue",
+        "green",
+        "amber",
+        "violet",
+        "red",
+        "gold",
+        "radiant"
+      ],
+      "default": {
+        "skin": "stone_grey",
+        "hair": "none",
+        "eyes": "blue",
+        "marks": "tattoo",
+        "paint": "kohl"
+      },
+      "traits": [
+        "Stone's endurance",
+        "Powerful build",
+        "Mountain born"
       ]
     },
     "dragonborn": {
@@ -624,7 +769,8 @@
         "amber",
         "violet",
         "red",
-        "gold"
+        "gold",
+        "radiant"
       ],
       "default": {
         "skin": "dragon_bronze",
