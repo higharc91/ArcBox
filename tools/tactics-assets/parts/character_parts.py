@@ -13,7 +13,7 @@ import math
 from typing import Callable
 
 from arcpix.canvas import Canvas
-from .rig import Points, FRAME_W
+from .rig import Points, FRAME_W, ANIMS, ANIM_ORDER
 
 Part = Callable[[Canvas, Points], None]
 
@@ -329,7 +329,7 @@ def _face(c: Canvas, p: Points) -> None:
 
 def hands(kind: str) -> Part:
     slot, shade = {"bare": ("skin", 3), "gloves": ("leather", 3), "gauntlets": ("metal", 3),
-                   "wraps": ("skin", 3)}[kind]
+                   "wraps": ("skin", 3), "rune_marked": ("skin", 3)}[kind]
 
     def draw(c: Canvas, p: Points) -> None:
         for near in (False, True):
@@ -340,6 +340,9 @@ def hands(kind: str) -> Part:
             elif kind == "wraps":                      # cloth bandages over the knuckles and wrist
                 c.rect(hx - 1, hy - 1, hx, hy - 1, "cloth2", 4)
                 c.px(hx - 1, hy + 1 if hy + 1 < c.h else hy, "cloth2", 3)
+            elif kind == "rune_marked":                # bare hands with a rune glowing on the back of each
+                c.px(hx - 1, hy - 1, "magic", 5)
+                c.px(hx, hy, "magic", 4)
     return draw
 
 
@@ -817,6 +820,139 @@ def _back_item(kind: str) -> Part:
     return draw
 
 
+# ------------------------------------------------------------------------------------------ shoulders, floats
+
+_POSE_INDEX: dict = {}
+
+
+def _frame_phase(p: Points) -> int:
+    """Which frame of its animation this pose is (the first animation that uses it). Floating pieces use it to
+    drift and orbit from frame to frame, since a part only sees the pose, not the clock."""
+    if not _POSE_INDEX:
+        for name in ANIM_ORDER:
+            for i, pose in enumerate(ANIMS[name][2]):
+                _POSE_INDEX.setdefault(pose, i)
+    return _POSE_INDEX.get(p.pose, 0)
+
+
+def _hover(p: Points) -> int:
+    """A floating piece rises as the body sinks on a breath or a step, so it bobs against the wearer. Only the
+    small idle/walk/ready bobs count; crouches, slams and the downed slump don't fling it upward."""
+    return 1 if 0 < p.pose.bob <= 2 and not p.pose.kneel else 0
+
+
+def shoulders(kind: str) -> Part:
+    """Signature pieces at the shoulders, drawn over the torso and hair (the hands and weapon still pass in front).
+
+    drake_pauldrons: three overlapping crescents of dragon scale down each upper arm (cloth2, the dragon's colour),
+    each with a lit crown and a dark under-lip, and a horn spine rising off the top plate.
+    rune_stones: a carved slab hovering off each shoulder with a gap of air between, glowing runes cut into its
+    face (magic), drifting against the body's bob."""
+    def draw(c: Canvas, p: Points) -> None:
+        if kind == "drake_pauldrons":
+            _drake_pauldrons(c, p)
+        elif kind == "rune_stones":
+            _rune_stones(c, p)
+    return draw
+
+
+def _drake_pauldrons(c: Canvas, p: Points) -> None:
+    big = p.build.half_w >= 6
+    sid = c.slots.id("cloth2")
+    for near in (False, True):
+        qx, qy = p.shoulder_n if near else p.shoulder_f
+        o = p.near_sign if near else -p.near_sign         # outward, away from the body
+        plates = [(o * 2.0, 2.6, 2.4), (o * 1.0, 0.2, 3.0)]   # the lower plate first: the upper one laps over it
+        for k, (dx, dy, rx) in enumerate(plates):
+            ex, ey = qx + 0.5 + dx, qy + dy
+            rx += 0.5 if big else 0
+            c.ellipse(ex, ey, rx, 1.7, "cloth2", 1)                 # the under-lip, in shadow
+            c.ellipse(ex, ey - 0.7, rx, 1.4, "cloth2", 3)
+            y = int(ey - 1.9)
+            for x in range(int(ex - rx) - 1, int(ex + rx) + 2):     # the crown of each plate catches the light
+                if 0 <= x < c.w and 0 <= y < c.h and c.slot[y, x] == sid:
+                    c.shade[y, x] = 5 if x < ex - 0.5 else 4
+            for x in range(int(ex - rx), int(ex + rx) + 1):         # scale edges: a row of notches across it
+                yy = y + 2
+                if 0 <= x < c.w and 0 <= yy < c.h and c.slot[yy, x] == sid and (x + k) % 2 == 0:
+                    c.shade[yy, x] = 2
+        tx, ty = qx + o * 2, qy - 2                                  # a horn spine off the top plate
+        for i, (sx, sy) in enumerate(((0, 0), (o * 1, -1), (o * 2, -2))):
+            c.px(tx + sx, ty + sy, "horn", 3 if i < 2 else 5)
+
+
+def _rune_stones(c: Canvas, p: Points) -> None:
+    up = _hover(p)
+    ph = _frame_phase(p)
+    for near in (False, True):
+        qx, qy = p.shoulder_n if near else p.shoulder_f
+        o = p.near_sign if near else -p.near_sign
+        drift = up + (1 if (ph + (0 if near else 1)) % 4 == 2 else 0)    # the two stones drift out of step
+        cx = qx + o * 5
+        top = qy - 5 - drift - (0 if near else 1)
+        w, h = 4, 7
+        x0 = cx - w // 2 if o > 0 else cx - w // 2 + 1
+        tilt = o                                                    # the top leans out, a slab caught mid-turn
+        c.polygon([(x0 + tilt, top), (x0 + w + tilt, top), (x0 + w, top + h), (x0, top + h)], "metal", 3)
+        for y in range(int(top), int(top) + h + 1):                  # chipped edges: lit top, dark foot
+            for x in range(int(x0) - 1, int(x0) + w + 2):
+                if 0 <= x < c.w and 0 <= y < c.h and c.slot[y, x] == c.slots.id("metal"):
+                    if y == int(top):
+                        c.shade[y, x] = 5 if x <= cx else 4
+                    elif y >= int(top) + h - 1:
+                        c.shade[y, x] = 1
+        gx = int(x0) + 1 + (1 if tilt > 0 else 0)                   # the glyph cut down the face, glowing
+        glyph = [(0, 2), (0, 3), (0, 4), (1, 3), (1, 1), (1, 5)] if near else \
+                [(1, 2), (1, 3), (1, 4), (0, 2), (0, 5), (1, 1)]
+        for k, (dx, dy) in enumerate(glyph):
+            c.px(gx + dx, int(top) + dy, "magic", 5 if k in (1, 3) else 4)
+
+
+def float_(kind: str) -> Part:
+    """Things that hover beside the wearer without being held. Drawn first in both facings: they float off the far
+    shoulder, so where they cross the body they pass behind it.
+
+    chaos_orb: a ball of unstable magic beside the head, its core cycling through the wrong colours (cloth2, trim,
+    cloth1) while two motes orbit it. It follows the head (sitting, dozing, downed) and bobs against the breath."""
+    def draw(c: Canvas, p: Points) -> None:
+        if kind == "chaos_orb":
+            _chaos_orb(c, p)
+    return draw
+
+
+def _chaos_orb(c: Canvas, p: Points) -> None:
+    b = p.build
+    s = -p.near_sign                                                # the far side
+    ph = _frame_phase(p)
+    ox = p.head_cx + s * (b.head_w // 2 + 5)
+    ox = max(5, min(FRAME_W - 6, ox))
+    oy = p.head_y0 + 3 - 2 * _hover(p) + (3 if p.pose.kneel else 0)
+    motes = []
+    for k, (sl, sh) in enumerate((("trim", 5), ("cloth1", 5))):     # two motes on a tilted orbit
+        a = math.radians(ph * 90 + k * 180 + 20)
+        mx_, my_ = ox + 0.5 + math.cos(a) * 5.2, oy + math.sin(a) * 2.4 - math.cos(a) * 1.4
+        motes.append((math.sin(a) < 0, mx_, my_, -math.sin(a), sl, sh))
+    for behind, mx_, my_, _t, sl, sh in motes:
+        if behind:
+            c.px(mx_, my_, sl, sh - 1)
+    c.ellipse(ox + 0.5, oy + 0.5, 3.0, 3.0, "magic", 2)              # the shell, in shadow below
+    c.ellipse(ox + 0.5, oy, 2.6, 2.6, "magic", 3)
+    c.px(ox - 1, oy - 2, "magic", 5)                                # the glint, top-left
+    c.px(ox - 2, oy - 1, "magic", 4)
+    swirl = [("cloth1", 4), ("cloth2", 4), ("trim", 4), ("cloth1", 5)]
+    sl, sh = swirl[ph % 4]
+    for i in range(3):                                              # a streak of the wrong colour churning inside
+        a = math.radians(ph * 90 + 200 + i * 40)
+        c.px(ox + 0.5 + math.cos(a) * 1.8, oy + 0.5 + math.sin(a) * 1.8, sl, sh)
+    core = [("trim", 5), ("magic", 5), ("cloth2", 5), ("trim", 5)]
+    c.rect(ox, oy, ox + 1, oy, *core[ph % 4])                       # the core flickers between colours
+    c.px(ox, oy + 1, *core[(ph + 1) % 4])
+    for behind, mx_, my_, t, sl, sh in motes:
+        if not behind:
+            c.px(mx_, my_, sl, sh)
+            c.px(mx_ + (1 if t > 0 else -1), my_, sl, sh - 2)       # a short trail along its path
+
+
 # ------------------------------------------------------------------------------------------------------ hair
 
 def hair(style: str) -> Part:
@@ -1048,12 +1184,16 @@ def marks(kind: str) -> Part:
             for ex in (x0 + 4, x0 + 8):                          # two lines falling from each eye
                 c.rect(ex, y0 + 7, ex, y0 + 9, "paint", 3)
         elif kind == "scales":                                   # a dragon bloodline surfacing: scales on the
-            for dx, dy, sh in ((1, 4, 2), (1, 6, 2), (2, 5, 4), (2, 7, 4), (3, 8, 2),     # temples and cheekbones,
-                               (10, 5, 4), (10, 7, 2), (9, 8, 4), (11, 6, 2)):          # in the skin's own ramp
-                if (x0 + dx, y0 + dy) not in eyes:
-                    c.px(x0 + dx, y0 + dy, "skin", sh)
+            for dx, dy, sh in ((1, 5, 4), (1, 6, 2), (2, 7, 4), (2, 8, 2),               # temples, cheekbones and
+                               (10, 5, 4), (10, 6, 2), (9, 8, 4), (10, 7, 2)):          # down the neck, in the
+                if (x0 + dx, y0 + dy) not in eyes:                                       # dragon's colour (cloth2)
+                    c.px(x0 + dx, y0 + dy, "cloth2", sh)
+            nx, ny = p.head_cx, y0 + p.build.head_h
+            c.px(nx - 1, ny - 1, "cloth2", 4)
+            c.px(nx + 1, ny, "cloth2", 2)
+            c.px(nx, ny, "cloth2", 4)
         elif kind == "runes":                                    # glowing rune marks, in magic so they shine
-            for dx, dy, sh in ((3, 7, 4), (3, 8, 5), (2, 9, 4), (9, 7, 4), (9, 8, 5), (10, 9, 4), (6, 10, 4)):
+            for dx, dy, sh in ((2, 7, 4), (3, 8, 5), (2, 9, 4), (10, 7, 4), (9, 8, 5), (10, 9, 4), (6, 10, 4)):
                 c.px(x0 + dx, y0 + dy, "magic", sh)
     return draw
 

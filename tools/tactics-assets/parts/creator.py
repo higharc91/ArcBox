@@ -279,14 +279,16 @@ SUBCLASSES: dict[str, Subclass] = {s.id: s for s in [
          {"cloth1": "hair/silver", "cloth2": "cloth/teal", "magic": "magic/spirit", "paint": "paint/jade"}),
     # Sorcerer
     _sub("sorcerer", "draconic", "Draconic Bloodline", "Dragon scales, elemental damage",
-         {"torso": "drake_robe", "headgear": "circlet", "marks": "scales"},
-         {"cloth1": "cloth/crimson", "cloth2": "metal/bronze", "metal": "metal/gold", "magic": "magic/fire"}),
+         {"torso": "drake_robe", "headgear": "circlet", "marks": "scales", "shoulders": "drake_pauldrons",
+          "horns": "small"},
+         {"cloth1": "cloth/charcoal", "cloth2": "skin/dragon_red", "metal": "metal/gold", "magic": "magic/fire"}),
     _sub("sorcerer", "chaos", "Chaos Bloodline", "Wild magic surges",
-         {"torso": "motley_robe", "weapon": "wild_motes"},
+         {"torso": "motley_robe", "weapon": "wild_motes", "float": "chaos_orb"},
          {"cloth1": "cloth/teal", "cloth2": "cloth/crimson", "trim": "metal/gold", "magic": "magic/wild"}),
     _sub("sorcerer", "runeborn", "Runeborn", "Lays glowing runes on the ground",
-         {"weapon": "rune_staff", "marks": "runes"},
-         {"cloth1": "cloth/slate", "cloth2": "metal/gold", "wood": "wood/dark", "magic": "magic/rune"}),
+         {"weapon": "rune_staff", "marks": "runes", "shoulders": "rune_stones", "hands": "rune_marked"},
+         {"cloth1": "cloth/slate", "cloth2": "metal/gold", "wood": "wood/dark", "magic": "magic/rune",
+          "metal": "terrain/stone"}),
 ]}
 
 _BASE_COLOURS = {"eyes": "eyes/dark", "leather": "leather/brown", "wood": "wood/oak", "metal": "metal/steel",

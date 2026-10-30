@@ -157,8 +157,17 @@ draws. Pass `make_character(..., subclass=id)`.
 
 The barbarian's paths are the Berserker (a wolf-head pelt, an axe in each hand, crimson war paint), the
 Earthshaker (a stone maul and a horned helm) and the Spiritwarden (antlers and a bone totem with an ancestor's
-wisp). The sorcerer's bloodlines are Draconic (scaled pauldrons and scales on the face), Chaos (a robe split in two
-clashing colours, wild motes in the hand) and Runeborn (a carved rune staff and glowing rune marks).
+wisp). Each sorcerer bloodline has a signature piece that changes the silhouette, so the three read apart at TV
+distance:
+
+| Bloodline | Signature | Also |
+|---|---|---|
+| Draconic | Layered scale pauldrons with horn spines, in the dragon's colour (`shoulders/drake_pauldrons`) | Small horns, scales on the cheeks and neck, a charcoal robe |
+| Chaos | An orb of unstable magic hovering off the far shoulder, its core cycling colours as two motes orbit it (`float/chaos_orb`) | A robe split in two clashing colours, wild motes in the hand |
+| Runeborn | A carved stone slab floating off each shoulder, glowing runes cut in its face (`shoulders/rune_stones`) | A carved rune staff, rune marks on the face and the backs of the hands |
+
+`shoulders` is drawn over the torso and hair; `float` is drawn first in both facings, so a floating piece passes
+behind the body. Floating pieces bob against the body's breath and step.
 
 The previews are `previews/06b-subclasses.png` (front, back and swing for each). The phone's subclass picker reads
 `characters/subclasses.png` and `subclasses.json`.
