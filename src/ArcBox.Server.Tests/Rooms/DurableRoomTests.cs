@@ -363,6 +363,31 @@ public sealed class DurableRoomTests
         Assert.Equal(0, phone.Unclaimed(ClientMethods.GameEnded));
     }
 
+    // A TV that sleeps through a long break doesn't end the room for the phones still in it (spec §3.5).
+    [Fact]
+    public async Task Room_with_a_connected_phone_is_not_parked_when_the_host_is_gone()
+    {
+        using var f = new ArcServerFactory();
+        var rooms = f.Services.GetRequiredService<RoomManager>();
+        var host = await TestClient.ConnectAsync(f);
+        await using var p1 = await TestClient.ConnectAsync(f);
+        var room = await host.InvokeAsync<CreateRoomResult>("CreateRoom");
+        await p1.TakeSeatAsync(new TakeSeatRequest(room.Code, NewName: "Ann"));
+        await LeaveAsync(f, host);
+
+        f.Time.Advance(new RoomOptions().IdleTimeout + TimeSpan.FromMinutes(1));
+        await rooms.SweepAsync();
+
+        Assert.NotNull(rooms.FindLoaded(room.Code));
+        Assert.Equal(0, p1.Unclaimed(ClientMethods.RoomClosed));
+
+        await using var tv = await TestClient.ConnectAsync(f);
+        await tv.InvokeAsync("ResumeHost", room.Code, room.HostToken);
+        var lobby = await tv.WaitForAsync(ClientMethods.LobbyChanged);
+        Assert.Equal([("p1", "Ann", true)], Players(lobby));
+        Assert.Equal(0, p1.Unclaimed(ClientMethods.RoomClosed));
+    }
+
     [Fact]
     public async Task Parked_non_resumable_game_says_room_was_idle()
     {
