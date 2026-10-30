@@ -34,8 +34,8 @@ When every task is done, one whole-branch review runs.
 | 10 | Remaining effect blocks, zones, summons and named hooks | done | `876902a`, `2c13938` | 1 |
 | 11 | Tooltip generation | done | `6cc5a7f` | 0 |
 | 12 | Sheet builder and encounter setup | done | `77f51dc` | 0 |
-| 13 | Content wave 0: core files and fighter, cleric, rogue, wizard | in progress |  |  |
-| 14 | AI planner, odds and threat map | not started | | |
+| 13 | Content wave 0: core files and fighter, cleric, rogue, wizard | done | `595c258`, `816acf7` | 1 |
+| 14 | AI planner, odds and threat map | in progress |  |  |
 | 15 | Companion AI, timed-out turns, reactions, performance | not started | | |
 | 16 | `Tactics.Sim` and the first balance report | not started | | |
 | 17 | Ranger, paladin and monk | not started | | |
@@ -148,6 +148,24 @@ These were decided during execution. Later tasks must follow them, alongside the
   - class `defaultPicks` are validated at load;
   - encounters place fixed-tile units before filling zones.
 
+**Content wave 0 (Task 13)**
+- **Items are used through `Use` with `Item` set and ability `common.use_item`.** The item's own ability supplies the cost and effects (a potion is a bonus action). One item leaves the bag and an `ItemUse` is recorded.
+  - Refused with `NoItem`: "You don't have that item."
+- **New `StaticMods` fields:**
+  - `SaveEdges` (advantage or disadvantage per stat)
+  - `SaveProficiencies`
+  - `Evasion`
+- **New zone flag `blocksSight`.** Lines of sight that touch an obscured tile are blocked. The smoke bomb uses it.
+- **Resource grants:**
+  - `grantResource` supports `overMax`, and a normal grant never removes an over-max gain.
+  - Classes declare a `primaryResource`, which `grantResource "primary"` uses.
+- **Effect options added to the engine:**
+  - `save.dcStat` lets a save DC use STR, DEX or CON.
+  - `extraAction "move"` exists.
+  - Injuries can carry hooks.
+- **Area size limit is now 10.**
+- **Bug fix:** empty `when` lists in loaded content count as absent. They were failing silently, which disabled Sneak Attack.
+
 **Effect blocks (Task 10)**
 - **Effect order follows the content.** An ability's effect list runs in the order it's written, split into runs of consecutive blocks:
   - a run of tile blocks (zone, alterTerrain, hazard, summon, teleport, dash, jumpTo, reveal, dispel) runs once at the aim tile;
@@ -169,6 +187,7 @@ These were decided during execution. Later tasks must follow them, alongside the
 | 4 | `Start` normalises only `Sheet.Resources`; records holding arrays compare by reference (golden tests compare JSON); rejection-text test checks only 3 of 16 strings; `CantAfford` with no resource gives "Not enough ."; `ObjectiveExpr` allows a leaf with a group; `UnitSheet.Score` defaults a missing stat to 10 |
 | 5 | A self line/cone with no aim tile pays its cost and hits nothing; the converter's key detection could collide with a parameter named like a block; `Battle.cs` is about 320 lines (targeting could move out) |
 | 6 | No HP event on deep-water drops (Task 8 addresses); prone applied after a lethal fall; Swap has no landing check; `Movement` depends on `Motion.OccupantAt` |
+| 13 | SRD approximations parked for the balance pass: manoeuvres apply to each attack with Extra Attack, Feint, Spiritual Weapon, Empowered Evocation, marked, Uncanny Dodge/Stone's Endurance as temporary HP, Lucky, Indomitable, instant Spirit Guardians, bleeding not ended by healing, untyped Sneak Attack damage |
 | 12 | Repeated error when the party spawn zone overflows; a placement level below 1 is reported against the monster file; `MaxHp` on monster or zone passives is ignored; inline monster weapons accept `replaces` |
 | 11 | statMod tooltips read awkwardly ("target gets can't act"; Task 13 fixes it); hook phrases not tested for every `HookKind`; "half damage on a save" missed for nested damage |
 | 10 | A second unit's mark replaces the first's; counterspell picks the first queued tier ≥ 1 step; `TerrainAltered.Delta` reports the requested change; negative rounds and unbounded repeat/chain counts aren't validated; zone passives with the default `other` target never fire on enter/turn start; `Battle.cs` is 444 lines |
