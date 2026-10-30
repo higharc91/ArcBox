@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/encounter.schema.json",
+  "title": "Encounter",
+  "description": "encounters/<id>.json (spec §4.8). Documentation only: the C# loader (Tactics.Logic PackLoader and Validation) is the authority and also checks meaning (spec §4.10).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "name": {
+      "type": "string"
+    },
+    "map": {
+      "type": "string"
+    },
+    "party": {
+      "type": "object",
+      "properties": {
+        "min": {
+          "type": "integer"
+        },
+        "max": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "min",
+        "max"
+      ]
+    },
+    "enemies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "unit": {
+            "type": "string",
+            "description": "A monster id."
+          },
+          "at": {
+            "$ref": "common.schema.json#/$defs/tile"
+          },
+          "zone": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer"
+          },
+          "level": {
+            "type": "integer"
+          },
+          "variant": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string",
+            "description": "What objectives and triggers call it; defaults to the monster id."
+          },
+          "aiProfile": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "unit"
+        ],
+        "description": "Placed with either at or zone."
+      }
+    },
+    "npcs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "unit": {
+            "type": "string",
+            "description": "A monster id."
+          },
+          "at": {
+            "$ref": "common.schema.json#/$defs/tile"
+          },
+          "zone": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer"
+          },
+          "level": {
+            "type": "integer"
+          },
+          "variant": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string",
+            "description": "What objectives and triggers call it; defaults to the monster id."
+          },
+          "aiProfile": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "unit"
+        ],
+        "description": "Placed with either at or zone."
+      },
+      "description": "Protected NPCs."
+    },
+    "xp": {
+      "type": "integer"
+    },
+    "loot": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "objectives": {
+      "type": "object",
+      "properties": {
+        "win": {
+          "$ref": "common.schema.json#/$defs/objective"
+        },
+        "lose": {
+          "$ref": "common.schema.json#/$defs/objective"
+        }
+      },
+      "required": [
+        "win"
+      ],
+      "description": "lose defaults to party_out."
+    },
+    "triggers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "once": {
+            "type": "boolean",
+            "default": true
+          },
+          "when": {
+            "type": "object",
+            "description": "round, unitEntersZone{tag, zone}, hpBelow{tag, percent}, unitDies{tag}, flag, counter{name, atLeast}, objective{name, state}, combined with all/any."
+          },
+          "do": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "say, spawn{unit, at, count, tag}, setFlag, addCounter, setObjective{win, lose}, cameraHint{at}, endBattle, or an effect block."
+            }
+          }
+        },
+        "required": [
+          "id",
+          "when",
+          "do"
+        ]
+      }
+    },
+    "replaces": {
+      "$ref": "common.schema.json#/$defs/replaces"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "map",
+    "party",
+    "enemies"
+  ]
+}

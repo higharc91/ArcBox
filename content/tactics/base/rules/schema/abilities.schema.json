@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/abilities.schema.json",
+  "title": "Abilities and passives",
+  "description": "abilities/<owner>.json: abilities and passives grouped by class, race or monster family (spec §4.2, §4.4). Documentation only: the C# loader (Tactics.Logic PackLoader and Validation) is the authority and also checks meaning (spec §4.10).",
+  "type": "object",
+  "properties": {
+    "abilities": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/ability"
+      }
+    },
+    "passives": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/passive"
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,3 @@
+[
+  { "id": "human", "name": "Human", "size": "medium", "move": 4, "resist": [], "passives": ["test.tough"], "ability": "test.mend" }
+]

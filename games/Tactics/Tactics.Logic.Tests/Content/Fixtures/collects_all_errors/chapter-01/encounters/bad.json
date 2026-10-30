@@ -1,0 +1,7 @@
+{ "id": "bad_encounter", "name": "Bad", "map": "field", "party": { "min": 1, "max": 4 },
+  "enemies": [ { "unit": "goblin", "zone": "nowhere" } ],
+  "objectives": { "win": "protect:mayor", "lose": "party_out" },
+  "triggers": [
+    { "id": "ghosts", "when": { "unitEntersZone": { "tag": "ghosts", "zone": "exit" } },
+      "do": [ { "spawn": { "unit": "wolf", "at": "cellar" } } ] }
+  ] }

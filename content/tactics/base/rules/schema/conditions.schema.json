@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/conditions.schema.json",
+  "title": "Conditions",
+  "description": "conditions.json: the conditions (spec §3.7). Documentation only: the C# loader (Tactics.Logic PackLoader and Validation) is the authority and also checks meaning (spec §4.10).",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "$ref": "common.schema.json#/$defs/id"
+      },
+      "name": {
+        "type": "string"
+      },
+      "static": {
+        "$ref": "common.schema.json#/$defs/staticMods"
+      },
+      "passives": {
+        "type": "array",
+        "items": {
+          "$ref": "common.schema.json#/$defs/passive"
+        }
+      },
+      "tags": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "implies": {
+        "type": "string"
+      },
+      "replaces": {
+        "$ref": "common.schema.json#/$defs/replaces"
+      }
+    },
+    "required": [
+      "id",
+      "name"
+    ]
+  }
+}

@@ -209,14 +209,19 @@ public sealed record PassiveDef(string Id,
 /// A condition (spec §3.7): its <see cref="Static"/> modifiers and <see cref="Passives"/> hold while a unit has it.
 /// <see cref="Tags"/> (<c>"magical"</c>, <c>"physical"</c>, <c>"fear"</c>, …) are what <c>cleanse</c> matches;
 /// <see cref="Implies"/> names a condition that comes with this one (stunned implies incapacitated).
+/// <see cref="Replaces"/> lets a later pack override an id.
 /// </summary>
 public sealed record ConditionDef(ConditionId Id, string Name,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] StaticMods? Static,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<PassiveDef> Passives,
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Tags,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ConditionId? Implies = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ConditionId? Implies = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ConditionId? Replaces = null);
 
-/// <summary>An encounter trigger. Kept raw until Task 22 gives it typed When/Do records; Task 4–21 battles carry none.</summary>
+/// <summary>
+/// An encounter trigger (spec §4.8). Kept raw until Task 22 gives it typed When/Do records; Task 4–21 battles carry none.
+/// The loader checks the zones and unit tags it refers to, and sets <see cref="Once"/> when the content leaves it out.
+/// </summary>
 public sealed record TriggerDef(string Id, JsonElement When, bool Once, JsonElement Do);
 
 /// <summary>
@@ -229,5 +234,196 @@ public sealed record Zone(int Serial, UnitId? Owner, string Kind, ImmutableArray
 /// <summary>
 /// An injury a party member can gain when it goes Out (spec §3.8), picked from the rules pack's table by
 /// <see cref="Weight"/>. Its <see cref="Static"/> modifiers hold in later battles until healed in town.
+/// <see cref="Replaces"/> lets a later pack override an id.
 /// </summary>
-public sealed record InjuryDef(InjuryId Id, string Name, int Weight, StaticMods Static);
+public sealed record InjuryDef(InjuryId Id, string Name, int Weight, StaticMods Static,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] InjuryId? Replaces = null);
+
+/// <summary>A resource that refills during the battle: <see cref="Amount"/> every <see cref="EveryRounds"/> rounds.</summary>
+public sealed record ResourceRegenDef(string Resource, int Amount, int EveryRounds);
+
+/// <summary>
+/// One entry in a class's or subclass's feature list. Exactly one key is set: <c>{"ability": id}</c>,
+/// <c>{"passive": id}</c>, <c>{"choose": n, "from": [ids]}</c> (pick n of these abilities or passives, e.g. spells known),
+/// <c>{"resourceRegen": {...}}</c> or <c>{"attacks": n}</c> (attacks per Attack action from this level).
+/// </summary>
+public sealed record FeatureRef(
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] AbilityId? Ability = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Passive = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Choose = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> From = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ResourceRegenDef? ResourceRegen = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Attacks = null);
+
+/// <summary>How many skills a new character of the class picks, and from which.</summary>
+public sealed record SkillChoicesDef(int Count, ImmutableArray<string> From);
+
+/// <summary>What a new character of the class starts with: weapon and armour ids, a shield, and items in the bag.</summary>
+public sealed record StartingKitDef(string Weapon, string Armor, ImmutableArray<ItemStack> Bag, bool Shield = false);
+
+/// <summary>
+/// The class's hints for the simulator's role bands and the companion AI: free-form <see cref="Tags"/> and the order in
+/// which a default character assigns the standard array to its stats (<see cref="Priority"/>).
+/// </summary>
+public sealed record ClassAiTags(ImmutableArray<string> Tags, ImmutableArray<Stat> Priority);
+
+/// <summary>A subclass (spec §4.5), picked at level 3, with features at levels 3, 6 and 10 and an optional companion monster.</summary>
+public sealed record SubclassDef(string Id, string Name, ImmutableSortedDictionary<int, ImmutableArray<FeatureRef>> Features,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Companion = null);
+
+/// <summary>
+/// A class (spec §4.5, <c>classes/&lt;id&gt;.json</c>): hit die, save and gear proficiencies, skill choices, starting kit,
+/// per-level resource pools, the features gained at each level 1–10, its subclasses, the simulator's default picks per
+/// level, AI hints, the casting stat and the Jump score. <see cref="SubclassesPending"/> lets a class be loaded before its
+/// subclasses are written (a stop-gap until every class has them). <see cref="Replaces"/> lets a later pack override an id.
+/// </summary>
+public sealed record ClassDef(string Id, string Name, string Role, int HitDie, ImmutableArray<Stat> Saves,
+    ImmutableArray<string> ArmorProf, ImmutableArray<string> WeaponProf, SkillChoicesDef SkillChoices, StartingKitDef StartingKit,
+    [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedDictionary<string, ByLevel<int>> Resources,
+    ImmutableSortedDictionary<int, ImmutableArray<FeatureRef>> Features, ImmutableArray<SubclassDef> Subclasses,
+    ImmutableSortedDictionary<int, ImmutableArray<AbilityId>> DefaultPicks, ClassAiTags AiTags,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] Stat? CastingStat = null,
+    int Jump = 2,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool SubclassesPending = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null);
+
+/// <summary>
+/// A race (spec §4.6): size, Move, darkvision in tiles, an optional Jump override, resistances, trait passives, the racial
+/// ability and any extra skill picks. <see cref="Replaces"/> lets a later pack override an id.
+/// </summary>
+public sealed record RaceDef(string Id, string Name, string Size, int Move,
+    [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Resist, ImmutableArray<string> Passives,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] AbilityId? Ability = null,
+    int Darkvision = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Jump = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int ExtraSkills = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null);
+
+/// <summary>
+/// A background (spec §4.6): its +2/+1 ability boosts, two skills and a starting trinket. <see cref="Replaces"/> lets a
+/// later pack override an id.
+/// </summary>
+public sealed record BackgroundDef(string Id, string Name, ImmutableSortedDictionary<Stat, int> Boosts, ImmutableArray<string> Skills,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Trinket = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null);
+
+/// <summary>A boss phase: below <see cref="HpBelow"/> percent of max HP the monster gains these abilities and passives.</summary>
+public sealed record PhaseDef(int HpBelow, ImmutableArray<AbilityId> Abilities, ImmutableArray<string> Passives,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? AiProfile = null);
+
+/// <summary>
+/// A monster's stat block (spec §4.7, <c>monsters/&lt;family&gt;.json</c>): the unit sheet's numbers plus its challenge
+/// rating (<c>"1/4"</c>, <c>"3"</c>), the XP it is worth, its AI profile, its sprite (an art key such as
+/// <c>"beasts.wolf.grey"</c>) and, for bosses, phases. <see cref="Replaces"/> lets a later pack override an id.
+/// </summary>
+public sealed record MonsterDef(string Id, string Name, string Cr, int Xp, ImmutableSortedDictionary<Stat, int> Scores, int Hp, int Ac,
+    WeaponDef Weapon, string AiProfile, string Sprite, ImmutableArray<AbilityId> Abilities, ImmutableArray<string> Passives,
+    ImmutableSortedSet<Stat> Saves,
+    [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Skills,
+    [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedDictionary<string, int> Resources,
+    [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Resist,
+    [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Immune,
+    [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Vulnerable,
+    [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Tags,
+    ImmutableArray<PhaseDef> Phases,
+    int Level = 1, ArmorKind Armor = ArmorKind.None, int Move = 4, int Jump = 2, int InitiativeBonus = 0, int Attacks = 1,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] Stat? CastingStat = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null);
+
+/// <summary>
+/// A consumable item (<c>items.json</c>): using it runs the ability <see cref="Use"/>. <see cref="Tags"/> such as
+/// <c>"healing"</c> guide the AI. <see cref="Replaces"/> lets a later pack override an id.
+/// </summary>
+public sealed record ItemDef(ItemId Id, string Name, AbilityId Use,
+    [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Tags,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ItemId? Replaces = null);
+
+/// <summary>
+/// A prop as written in a map file. <see cref="Cover"/> is <c>"none"</c>, <c>"half"</c> or <c>"three_quarters"</c>
+/// (total cover comes only from line of sight, never from content).
+/// </summary>
+public sealed record PropDef(string Id, Tile At, bool Blocks = false, string Cover = "none");
+
+/// <summary>
+/// A battle map as written in <c>maps/&lt;id&gt;.json</c> (spec §4.8): <see cref="Size"/> is <c>[w, h]</c> and
+/// <see cref="Tiles"/> is base64 of three bytes per tile, row-major (height, material index, flags); see
+/// <see cref="BattleMap.FromBytes"/>. <see cref="Replaces"/> lets a later pack override an id.
+/// </summary>
+public sealed record MapDef(string Id, ImmutableArray<int> Size, string Tiles, ImmutableArray<string> Materials,
+    ImmutableArray<PropDef> Props,
+    [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedDictionary<string, ImmutableArray<Tile>> Zones,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null)
+{
+    /// <summary>The cover names content may use, by name.</summary>
+    public static ImmutableSortedDictionary<string, Cover> CoverNames { get; } =
+        Ordinal.Map(("none", Cover.None), ("half", Cover.Half), ("three_quarters", Cover.ThreeQuarters));
+
+    /// <summary>
+    /// The engine's map. Throws <see cref="FormatException"/> or <see cref="ArgumentException"/> on bad tiles, size or
+    /// cover; the loader reports those as content errors first.
+    /// </summary>
+    public BattleMap ToBattleMap()
+    {
+        if (Size.Length != 2)
+            throw new ArgumentException($"Map '{Id}' needs a size of [w, h].");
+        var props = Props.Select(p => new PropPlacement(p.Id, p.At, p.Blocks,
+                CoverNames.TryGetValue(p.Cover, out var cover) ? cover : throw new ArgumentException($"Unknown cover '{p.Cover}'.")))
+            .ToImmutableArray();
+        return BattleMap.FromBytes(Id, Size[0], Size[1], Convert.FromBase64String(Tiles), Materials, props, Zones);
+    }
+}
+
+/// <summary>How many party members an encounter takes.</summary>
+public sealed record PartySizeDef(int Min, int Max);
+
+/// <summary>
+/// A unit an encounter places: a monster id, either on a tile (<see cref="At"/>) or on the first free tiles of a map zone
+/// (<see cref="Zone"/>), <see cref="Count"/> times, with an optional level, variant and AI profile override.
+/// <see cref="Tag"/> (the monster id when left out) is what objectives and triggers refer to.
+/// </summary>
+public sealed record EncounterUnitDef(string Unit,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] Tile? At = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Zone = null,
+    int Count = 1,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Level = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Variant = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Tag = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? AiProfile = null)
+{
+    /// <summary>The tag objectives and triggers use: <see cref="Tag"/>, or the monster id.</summary>
+    [JsonIgnore]
+    public string UnitTag => Tag ?? Unit;
+}
+
+/// <summary>
+/// An encounter (spec §4.8, <c>encounters/&lt;id&gt;.json</c>): its map, party size, enemies and protected NPCs
+/// (<see cref="Npcs"/>), XP and loot tables, objectives (the default lose is <c>party_out</c>) and triggers.
+/// <see cref="Replaces"/> lets a later pack override an id.
+/// </summary>
+public sealed record EncounterDef(string Id, string Name, string Map, PartySizeDef Party, ImmutableArray<EncounterUnitDef> Enemies,
+    ImmutableArray<EncounterUnitDef> Npcs, ImmutableArray<LootTableId> Loot, ObjectivesDef Objectives,
+    ImmutableArray<TriggerDef> Triggers, int Xp = 250,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null);
+
+/// <summary>
+/// An AI weight set (spec §5.3, <c>ai-profiles.json</c>); Task 14's planner reads it. <see cref="Cruel"/> lets it value
+/// Downed targets; <see cref="FleeBelowHp"/> is a fraction of max HP. <see cref="Replaces"/> lets a later pack override an id.
+/// </summary>
+public sealed record AiProfileDef(string Id, double Damage = 0, double Kill = 0, double Control = 0, double Heal = 0,
+    double Revive = 0, double Caution = 0, double FocusFire = 0, double Objective = 0, double Hoard = 0, bool Cruel = false,
+    double FleeBelowHp = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null);
+
+/// <summary>
+/// The XP needed to reach each level (<c>xp.json</c>): <see cref="Thresholds"/>[n] is the cumulative XP for level n + 1,
+/// starting at 0. A later pack overrides it with <c>"replaces": "xp"</c>.
+/// </summary>
+public sealed record XpTable(ImmutableArray<int> Thresholds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null)
+{
+    /// <summary>The id a later pack's <c>"replaces"</c> uses for the XP table.</summary>
+    public const string Id = "xp";
+
+    /// <summary>1000 XP per level: 0, 1000, …, 9000 for levels 1–10.</summary>
+    public static XpTable Default { get; } = new([.. Enumerable.Range(0, 10).Select(i => i * 1000)]);
+}

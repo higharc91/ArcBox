@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/injuries.schema.json",
+  "title": "Injuries",
+  "description": "injuries.json (spec §3.8): picked by weight when a party member goes Out. Documentation only: the C# loader (Tactics.Logic PackLoader and Validation) is the authority and also checks meaning (spec §4.10).",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "$ref": "common.schema.json#/$defs/id"
+      },
+      "name": {
+        "type": "string"
+      },
+      "weight": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "static": {
+        "$ref": "common.schema.json#/$defs/staticMods"
+      },
+      "replaces": {
+        "$ref": "common.schema.json#/$defs/replaces"
+      }
+    },
+    "required": [
+      "id",
+      "name",
+      "weight",
+      "static"
+    ]
+  }
+}

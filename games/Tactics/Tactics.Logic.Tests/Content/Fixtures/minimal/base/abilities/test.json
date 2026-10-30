@@ -1,0 +1,29 @@
+{
+  "abilities": [
+    { "id": "test.strike", "name": "Strike", "tier": 0, "cost": { "action": 1 },
+      "target": { "kind": "enemy", "range": 1, "los": false, "area": { "shape": "single" } },
+      "effects": [ { "attack": { "kind": "weapon" }, "onHit": [ { "damage": { "weapon": true } } ] } ],
+      "presentation": { "anim": "characters.attack", "fx": "fx.slash" } },
+    { "id": "test.bolt", "name": "Radiant Bolt", "tier": 1, "cost": { "action": 1, "resource": { "grit": 1 } },
+      "target": { "kind": "enemy", "range": 6, "los": true, "area": { "shape": "single" } },
+      "effects": [ { "attack": { "kind": "spell", "stat": "wis" },
+                     "onHit": [ { "damage": { "dice": { "byLevel": { "1": "2d6", "5": "3d6" } }, "type": "radiant" } },
+                                { "apply": "lit", "rounds": 1 } ] } ],
+      "presentation": { "anim": "characters.cast", "fx": "signature.light_radiant_burst", "projectile": "projectiles.missile" } },
+    { "id": "test.hold", "name": "Hold", "tier": 2, "cost": { "action": 1, "concentration": true },
+      "target": { "kind": "enemy", "range": 6, "los": true, "area": { "shape": "burst", "size": 1 } },
+      "effects": [ { "save": { "stat": "wis" }, "onFail": [ { "apply": "stunned", "untilSave": true } ] } ] },
+    { "id": "test.mend", "name": "Mend", "tier": 0, "cost": { "bonus": 1 },
+      "target": { "kind": "ally", "range": 1, "los": false, "area": { "shape": "single" } },
+      "effects": [ { "heal": { "dice": "1d8", "bonus": ["mod.wis", "prof"] } } ] },
+    { "id": "test.potion", "name": "Drink a potion", "tier": 0, "cost": { "action": 1 },
+      "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "self" } },
+      "effects": [ { "heal": { "dice": "2d4+2" } } ] }
+  ],
+  "passives": [
+    { "id": "test.tough", "static": { "ac": 1 } },
+    { "id": "test.sneak", "hook": "onAttackHit", "oncePerTurn": true,
+      "when": { "all": [ { "weapon": ["finesse"] }, { "not": { "targetHasCondition": "prone" } } ] },
+      "effects": [ { "damage": { "dice": { "1": "1d6", "5": "2d6" } } } ] }
+  ]
+}
