@@ -207,6 +207,22 @@
       "sad": "class_monk_sad.png",
       "surprised": "class_monk_surprised.png"
     },
+    "class_barbarian": {
+      "idle": "class_barbarian_idle.png",
+      "hurt": "class_barbarian_hurt.png",
+      "happy": "class_barbarian_happy.png",
+      "angry": "class_barbarian_angry.png",
+      "sad": "class_barbarian_sad.png",
+      "surprised": "class_barbarian_surprised.png"
+    },
+    "class_sorcerer": {
+      "idle": "class_sorcerer_idle.png",
+      "hurt": "class_sorcerer_hurt.png",
+      "happy": "class_sorcerer_happy.png",
+      "angry": "class_sorcerer_angry.png",
+      "sad": "class_sorcerer_sad.png",
+      "surprised": "class_sorcerer_surprised.png"
+    },
     "goblin_cutthroat": {
       "idle": "goblin_cutthroat_idle.png",
       "hurt": "goblin_cutthroat_hurt.png",
