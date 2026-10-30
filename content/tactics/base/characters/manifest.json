@@ -152,7 +152,10 @@
   },
   "layers": {
     "cape": [
+      "banner_back",
       "cloak",
+      "pelt",
+      "quiver",
       "short_cape"
     ],
     "body": [
@@ -183,11 +186,13 @@
     "torso": [
       "chain",
       "coat",
+      "gi",
       "leather",
       "plate",
       "rags",
       "robe",
       "scale",
+      "tabard",
       "tunic",
       "vest",
       "vestments"
@@ -229,31 +234,44 @@
       "swept"
     ],
     "headgear": [
+      "antlers",
       "bandana",
+      "beret",
       "circlet",
       "crown",
       "feathered_cap",
+      "flower_crown",
       "great_helm",
+      "halo",
+      "headband",
       "hood",
       "horned_helm",
+      "mask_hood",
       "open_helm",
+      "winged_helm",
       "wizard_hat"
     ],
     "weapon": [
       "axe",
       "bow",
       "crossbow",
+      "crystal_staff",
       "dagger",
       "flail",
       "greatsword",
       "halberd",
+      "holy_staff",
+      "hourglass_staff",
+      "living_staff",
       "lute",
+      "lyre",
       "mace",
       "quarterstaff",
       "rapier",
       "scimitar",
       "spear",
       "staff",
+      "storm_staff",
       "sword",
       "tome",
       "wand",
@@ -262,14 +280,21 @@
     "hands": [
       "bare",
       "gauntlets",
-      "gloves"
+      "gloves",
+      "wraps"
     ],
     "offhand": [
+      "blade",
+      "bomb",
       "buckler",
+      "dagger",
       "kite_shield",
       "lantern",
+      "main_gauche",
       "orb",
-      "round_shield"
+      "round_shield",
+      "tower_shield",
+      "war_horn"
     ]
   },
   "order": {

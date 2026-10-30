@@ -156,6 +156,7 @@ def build_characters() -> None:
 
     build_customisation()
     build_equipment()
+    build_subclasses(out)
 
     # The layer library on the neutral palette.
     ramps_neutral = {s: FAMILIES[ref.split("/")[0]][ref.split("/")[1]] for s, ref in NEUTRAL.items()}
@@ -260,6 +261,50 @@ def build_palettes() -> None:
     save(contact_sheet("Palette ramps", tiles, columns=10, zoom=4,
                        subtitle="6-step hue-shifted ramps (cool shadows, warm highlights). Any slot takes any ramp."),
          PREVIEWS / "00-palettes.png")
+
+
+SUBCLASS_RACE = {"fighter": "human", "rogue": "halfling", "wizard": "elf", "cleric": "dwarf", "ranger": "half_elf",
+                 "paladin": "dragonborn", "bard": "tiefling", "druid": "gnome", "warlock": "human", "monk": "half_orc"}
+
+
+def build_subclasses(out: Path) -> None:
+    """06b-subclasses.png (every subclass: front, back and mid-swing) and a pack atlas of front idles that the phone's
+    subclass picker shows. In the game a hero's own race and look carry through; these use one race per class."""
+    pose, swing = ANIMS["idle"][2][0], ANIMS["attack"][2][1]
+    cells, names, atlas_index = [], [], {}
+    atlas = Image.new("RGBA", (FRAME_W * 3, FRAME_H * len(creator.CLASSES)))
+    for row, cls in enumerate(creator.CLASSES):
+        subs = [x for x in creator.SUBCLASSES.values() if x.cls == cls]
+        r_cells = []
+        for col, sub in enumerate(subs):
+            rec = creator.make_character(sub.name, SUBCLASS_RACE[cls], cls,
+                                         creator.Look(body_type="feminine" if col == 1 else "masculine"),
+                                         subclass=sub.id)
+            frames = [C.compose(rec, "front", pose), C.compose(rec, "back", pose), C.compose(rec, "front", swing)]
+            imgs = [f.render(rec.ramps()) for f in frames]
+            r_cells.append(strip(imgs, 1, gap=2))
+            atlas.paste(imgs[0], (col * FRAME_W, row * FRAME_H))
+            atlas_index[sub.id] = [col * FRAME_W, row * FRAME_H, FRAME_W, FRAME_H]
+        cells.append(r_cells)
+        names.append(creator.CLASSES[cls].name)
+    save(atlas, out / "subclasses.png")
+    write_json({"frame": [FRAME_W, FRAME_H], "rects": atlas_index,
+                "note": "front idle of each subclass on a sample race, for the subclass picker"},
+               out / "subclasses.json")
+    cols = ["I", "II", "III"]
+    img = matrix("Subclasses · 30, picked at level 3", names, cols, cells, zoom=3,
+                 subtitle="Each subclass reshapes its class kit (gear, colours, companions). Front · back · swing.")
+    # label each cell with its subclass name under the matrix's cells
+    from PIL import ImageDraw
+    from arcpix.preview import font, MUTED
+    d = ImageDraw.Draw(img)
+    cw = (img.width - 20 - 150 - 16) // 3
+    for row, cls in enumerate(creator.CLASSES):
+        subs = [x for x in creator.SUBCLASSES.values() if x.cls == cls]
+        ch = (img.height - 86 - 30 - 20) // len(creator.CLASSES)
+        for col, sub in enumerate(subs):
+            d.text((20 + 150 + col * cw + 8, 86 + 30 + row * ch + 4), sub.name, font=font(12, True), fill=MUTED)
+    save(img, PREVIEWS / "06b-subclasses.png")
 
 
 def build_equipment() -> None:
@@ -415,7 +460,7 @@ SETS = {"palettes": build_palettes, "characters": build_characters, "anims": bui
 
 # Sets that live in their own module: parts/<name>.py with a build() function. Each writes under
 # content/tactics/base/<name>/ and previews/, using arcpix.out.
-for _name in ("props", "portraits", "beasts", "backgrounds", "ui", "icons", "fx"):
+for _name in ("props", "portraits", "beasts", "backgrounds", "ui", "icons", "fx", "ambient", "bosses"):
     try:
         _mod = importlib.import_module(f"parts.{_name}")
     except ModuleNotFoundError as e:

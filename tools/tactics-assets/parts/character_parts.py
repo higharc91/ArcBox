@@ -289,7 +289,8 @@ def _face(c: Canvas, p: Points) -> None:
 
 
 def hands(kind: str) -> Part:
-    slot, shade = {"bare": ("skin", 3), "gloves": ("leather", 3), "gauntlets": ("metal", 3)}[kind]
+    slot, shade = {"bare": ("skin", 3), "gloves": ("leather", 3), "gauntlets": ("metal", 3),
+                   "wraps": ("skin", 3)}[kind]
 
     def draw(c: Canvas, p: Points) -> None:
         for near in (False, True):
@@ -297,6 +298,9 @@ def hands(kind: str) -> Part:
             c.rect(hx - 1, hy - 1, hx, hy, slot, shade)
             if kind == "gauntlets":
                 c.px(hx - 1, hy - 1, slot, 4)
+            elif kind == "wraps":                      # cloth bandages over the knuckles and wrist
+                c.rect(hx - 1, hy - 1, hx, hy - 1, "cloth2", 4)
+                c.px(hx - 1, hy + 1 if hy + 1 < c.h else hy, "cloth2", 3)
     return draw
 
 
@@ -430,6 +434,33 @@ def torso(kind: str) -> Part:
             c.rect(cx, p.torso_top + 3, cx, p.torso_bot - 2, "metal", 4)      # ridge
             c.polygon(_torso_poly(p, top_pad=-(p.torso_bot - p.torso_top - 2), bottom=p.torso_bot + 3, flare=1), "cloth1")  # tabard skirt
             _belt(c, p, slot="trim")
+        elif kind == "tabard":            # plate under a long surcoat bearing the order's emblem
+            _arm(c, p, False, "metal", width=3)
+            c.polygon(poly, "metal")
+            _arm(c, p, True, "metal", width=3)
+            for near in (False, True):
+                sx, sy = p.shoulder_n if near else p.shoulder_f
+                c.ellipse(sx + 0.5, sy, 2.6, 2.0, "metal", 4)
+            cx = p.torso_cx
+            hw = max(2, b.half_w - 2)
+            c.polygon([(cx - hw + 0.5, p.torso_top + 1), (cx + hw - 0.5, p.torso_top + 1),
+                       (p.mx(16) + hw + 0.5, p.torso_bot + 4), (p.mx(16) - hw - 0.5, p.torso_bot + 4)], "cloth1")
+            if p.direction == "front":        # the emblem: a cross
+                ey = p.torso_top + 4
+                c.rect(cx, ey - 1, cx, ey + 4, "cloth2", 4)
+                c.rect(cx - 1, ey, cx + 1, ey, "cloth2", 4)
+            _belt(c, p, slot="trim")
+        elif kind == "gi":                # an open-fronted wrap jacket with a sash: the monk's chest shows
+            _arm(c, p, False, "cloth1", to_wrist=False, width=3)
+            c.polygon(_torso_poly(p, bottom=p.torso_bot + 2, flare=1), "cloth1")
+            _arm(c, p, True, "cloth1", to_wrist=False, width=3)
+            if p.direction == "front":
+                cx = p.torso_cx
+                for k in range(5):            # the crossed lapels leave a V of skin
+                    c.rect(cx - 2 + k // 2, p.torso_top + k, cx + 1 - k // 2, p.torso_top + k, "skin", 3)
+                c.line(cx - 3, p.torso_top, cx + 1, p.torso_top + 5, "cloth2", 4)   # lapel edge
+            c.rect(p.mx(16) - b.hip_half, p.torso_bot - 1, p.mx(16) + b.hip_half - 1, p.torso_bot, "cloth2", 3)
+            c.px(p.mx(16) + p.near_sign * (b.hip_half - 1), p.torso_bot + 1, "cloth2", 2)   # sash knot tail
         elif kind == "robe":
             _arm(c, p, False, "cloth1", width=3)
             c.polygon(_torso_poly(p, bottom=p.torso_bot + 1, flare=1), "cloth1")
@@ -507,11 +538,17 @@ def _belt(c: Canvas, p: Points, slot: str = "leather") -> None:
 # ----------------------------------------------------------------------------------------------------- capes
 
 def cape(kind: str) -> Part:
-    """Front view: the cloak hangs behind the body (draw this layer *before* the body). Back view: over the body."""
+    """Front view: the cloak hangs behind the body (draw this layer *before* the body). Back view: over the body.
+    The back slot also carries things worn on the back: a quiver, a war banner, a fur pelt."""
+    if kind in ("quiver", "banner_back"):
+        return _back_item(kind)
+
     def draw(c: Canvas, p: Points) -> None:
         b = p.build
         top = p.torso_top
         length = (p.build.foot_y - 1) if kind == "cloak" else (p.torso_bot + 2)
+        if kind == "pelt":
+            length = p.torso_bot + 4
         cx = p.torso_cx
         sway = (p.foot_f[0] - p.mx(16 - 1)) * 0 + (1 if p.pose.bob else 0)
         w_top = b.half_w + 1
@@ -527,6 +564,47 @@ def cape(kind: str) -> Part:
                 c.line(cx + k, top + 3, cx + k + sway, length - 1, "cloth1", 2)
                 c.line(cx + k - 1, top + 4, cx + k - 1 + sway, length - 2, "cloth1", 4)
             c.rect(cx - 2, top, cx + 2, top, "trim")  # clasp line
+        if kind == "pelt":                 # fur: a ragged hem, flecked texture and a thick ruff at the collar
+            lid = c.slots.id("cloth1")
+            for x in range(int(cx - w_bot - 1), int(cx + w_bot + 2)):
+                if 0 <= x < c.w and (x % 2 == 0):
+                    for y in range(length - 1, length + 1):
+                        if 0 <= y < c.h and c.slot[y, x] == lid:
+                            c.clear(x, y)
+            _speckle(c, "cloth1", 0.12, 4, salt=7)
+            c.ellipse(cx + 0.5, top + 0.5, w_top + 0.5, 2.0, "cloth2", 3)
+            c.px(cx - 2, top - 1, "cloth2", 4)
+    return draw
+
+
+def _back_item(kind: str) -> Part:
+    """Gear strapped to the back. In the front view it peeks out above the far shoulder; from behind, all of it."""
+    def draw(c: Canvas, p: Points) -> None:
+        top = p.torso_top
+        cx = p.torso_cx
+        s = -p.near_sign                       # towards the far side
+        if kind == "quiver":
+            bx, by = cx + s * 2, top + 7       # bottom of the quiver, the mouth up by the far shoulder
+            tx, ty = cx + s * 4, top - 3
+            c.thick_line(bx, by, tx, ty, 3, "leather", 3)
+            c.line(bx - s, by, tx - s, ty, "leather", 2)
+            for k, dx in enumerate((-1, 0, 1)):  # fletchings
+                c.px(tx + dx, ty - 1 - (k % 2), "cloth2", 4)
+                c.px(tx + dx, ty - 2 - (k % 2), "cloth2", 3)
+            c.rect(min(bx, tx) , (by + ty) // 2, max(bx, tx), (by + ty) // 2, "trim", 3)
+        else:                                  # a war banner on a pole beside the head, like a sashimono
+            px_ = cx + s * 6
+            ty = max(1, p.head_y0 - 7)
+            c.line(px_, top + 6, px_, ty, "wood", 2)
+            for y in range(ty + 1, ty + 9):    # the flag flies outward from the pole
+                for x in range(1, 7):
+                    if y == ty + 8 and x in (3, 4):
+                        continue               # swallowtail notch
+                    c.px(px_ + s * x, y, "cloth1", 4 if y == ty + 1 else (3 if x < 5 else 2))
+            for y in range(ty + 3, ty + 7):    # the charge
+                c.px(px_ + s * 3, y, "cloth2", 4)
+                c.px(px_ + s * 4, y, "cloth2", 4)
+            c.px(px_, ty - 1, "trim", 5)
     return draw
 
 
@@ -862,6 +940,58 @@ def headgear(kind: str) -> Part:
             for i in range(6):                                           # a long plume sweeping back
                 c.px(fx + sgn * (i // 2), y0 - 1 - i, "cloth2", 4 if i % 2 else 3)
                 c.px(fx + sgn * (i // 2) + sgn, y0 - i, "cloth2", 2)
+        elif kind == "mask_hood":
+            for y in range(p.build.head_h + 1):
+                inset = 2 if y == 0 else (1 if y == 1 else 0)
+                c.rect(x0 + inset - 1, y0 - 1 + y, x1 - inset + 1, y0 - 1 + y, "cloth1")
+            c.rect(x0 + 2, y0 - 2, x1 - 2, y0 - 2, "cloth1")
+            if front:                                       # eyes only: the mask covers nose and mouth
+                for y in range(y0 + 3, y0 + 7):
+                    for x in range(x0 + 2, x1):
+                        c.clear(x, y)
+                c.rect(x0 + 2, y0 + 2, x1 - 1, y0 + 2, "cloth1", 2)
+                c.rect(x0 + 1, y0 + 7, x1 - 1, y0 + 9, "cloth2", 3)
+                c.rect(x0 + 2, y0 + 7, x1 - 2, y0 + 7, "cloth2", 4)
+        elif kind == "winged_helm":
+            for y in range(5):
+                inset = 2 if y == 0 else (1 if y == 1 else 0)
+                c.rect(x0 + inset - 1, y0 - 1 + y, x1 - inset + 1, y0 - 1 + y, "metal")
+            c.rect(x0 - 1, y0 + 3, x1 + 1, y0 + 3, "trim")
+            for wx, s_ in ((x0 - 1, -1), (x1 + 1, 1)):      # feathered wings sweep up and back
+                for i in range(5):
+                    c.px(wx + s_ * (i // 2), y0 + 2 - i, "cloth2", 5 if i > 2 else 4)
+                    c.px(wx + s_ * (i // 2) + s_, y0 + 3 - i, "cloth2", 3)
+        elif kind == "halo":
+            for k in range(16):                               # a thin ring floating above the head
+                a = 2 * math.pi * k / 16
+                c.px(p.head_cx + math.cos(a) * (w / 2 - 0.5), y0 - 3 + math.sin(a) * 1.2, "magic",
+                     5 if math.sin(a) < 0 else 4)
+        elif kind == "beret":
+            c.ellipse(p.head_cx + (1 if front else -1) + 0.5, y0 + 0.5, w / 2 + 1, 2.4, "cloth1")
+            c.rect(x0 + 1, y0 + 2, x1 - 1, y0 + 2, "cloth1", 2)
+            c.px(p.head_cx + (1 if front else -1), y0 - 2, "cloth1", 4)
+            c.px(x1 if front else x0, y0 + 1, "cloth2", 4)    # a feather pin
+        elif kind == "antlers":
+            c.rect(x0, y0 + 2, x1, y0 + 2, "leather")         # the band that holds them
+            for hx, s_ in ((x0 + 2, -1), (x1 - 2, 1)):
+                pts = [(0, 1), (0, 0), (s_, -1), (s_, -2), (2 * s_, -3), (2 * s_, -4), (3 * s_, -5),
+                       (s_ * 3, -2), (s_ * 4, -3), (0, -2), (-s_, -3), (-s_, -4)]
+                for i, (dx, dy) in enumerate(pts):
+                    c.px(hx + dx, y0 + dy, "horn", 3 if i < 4 else 4)
+        elif kind == "flower_crown":
+            for i, x in enumerate(range(x0, x1 + 1, 2)):
+                c.px(x, y0 + 1, "magic", 2)                   # vine
+                c.px(x + 1, y0 + 1, "magic", 3)
+                if i % 2 == 0:                                # blossoms
+                    c.px(x, y0, "cloth2", 4)
+                    c.px(x + 1, y0 + 1, "cloth2", 4)
+                    c.px(x, y0 + 1, "trim", 5)
+        elif kind == "headband":
+            c.rect(x0, y0 + 2, x1, y0 + 3, "cloth2", 3)
+            c.rect(x0, y0 + 2, x1, y0 + 2, "cloth2", 4)
+            tx = x0 - 1 if front else x1 + 1                  # the knot's tails flutter behind
+            c.line(tx, y0 + 3, tx - (2 if front else -2), y0 + 6, "cloth2", 3)
+            c.line(tx, y0 + 3, tx - (1 if front else -1), y0 + 7, "cloth2", 2)
         elif kind == "circlet":
             c.rect(x0, y0 + 2, x1, y0 + 2, "metal")
             if front:
@@ -968,6 +1098,54 @@ def weapon(kind: str) -> Part:
         elif kind == "wand":
             c.line(*_along(p, 0), *_along(p, 5), "wood")
             c.px(*_along(p, 6), "magic", 5)
+        elif kind in ("hourglass_staff", "crystal_staff", "holy_staff", "storm_staff", "living_staff"):
+            ang = p.weapon * 0.35
+            a = math.radians(ang)
+            top = (hx + math.sin(a) * 13, hy - math.cos(a) * 13)
+            bot = (hx - math.sin(a) * 9, hy + math.cos(a) * 9)
+            tx, ty = top
+            if kind == "living_staff":                       # twisted wood that sprouts leaves
+                c.line(*bot, *top, "wood")
+                for i in range(0, 20, 4):
+                    t = i / 20
+                    c.px(bot[0] + (tx - bot[0]) * t + 1, bot[1] + (ty - bot[1]) * t, "wood", 2)
+                for dx, dy in ((-2, -1), (1, -2), (2, 0), (-1, -3), (0, 1)):
+                    c.px(tx + dx, ty + dy, "magic", 3 if dy < 0 else 2)
+                c.px(tx - 2, ty - 2, "magic", 5)
+            else:
+                c.line(*bot, *top, "wood")
+            if kind == "hourglass_staff":
+                c.rect(tx - 2, ty - 6, tx + 2, ty - 6, "trim", 4)   # frame top and bottom
+                c.rect(tx - 2, ty, tx + 2, ty, "trim", 3)
+                c.polygon([(tx - 1.5, ty - 5), (tx + 2.5, ty - 5), (tx + 0.5, ty - 3)], "magic", 3)
+                c.polygon([(tx + 0.5, ty - 3), (tx + 2.5, ty - 1), (tx - 1.5, ty - 1)], "magic", 4)
+                c.px(tx, ty - 3, "magic", 5)
+            elif kind == "crystal_staff":
+                c.line(tx - 2, ty, tx - 1, ty - 3, "wood", 2)        # claw
+                c.line(tx + 2, ty, tx + 1, ty - 3, "wood", 2)
+                c.polygon([(tx - 1.5, ty - 2), (tx + 1.5, ty - 2), (tx + 0.5, ty - 9), (tx - 0.5, ty - 9)], "magic", 3)
+                c.line(tx - 1, ty - 3, tx, ty - 8, "magic", 5)
+            elif kind == "holy_staff":
+                c.ellipse(tx + 0.5, ty - 2.5, 2.6, 2.6, "trim", 4)    # a sun disc with rays
+                c.px(tx, ty - 3, "magic", 5)
+                for dx, dy in ((0, -6), (-4, -3), (4, -3), (-3, -5), (3, -5)):
+                    c.px(tx + dx, ty + dy, "trim", 5)
+            elif kind == "storm_staff":
+                c.line(tx, ty, tx - 2, ty - 3, "blade", 3)            # a forked iron head around a storm orb
+                c.line(tx, ty, tx + 2, ty - 3, "blade", 3)
+                c.ellipse(tx + 0.5, ty - 4.5, 1.8, 1.8, "magic", 4)
+                for dx, dy in ((-3, -7), (2, -8), (3, -5)):
+                    c.px(tx + dx, ty + dy, "magic", 5)
+        elif kind == "lyre":
+            s_ = p.near_sign
+            bx_, by_ = hx - s_ * 2, hy - 3
+            for side in (-1, 1):                              # the two curved arms
+                c.line(bx_ + side * 2, by_ + 3, bx_ + side * 3, by_ - 2, "wood", 3)
+                c.px(bx_ + side * 2, by_ - 3, "wood", 4)
+            c.rect(bx_ - 2, by_ + 3, bx_ + 2, by_ + 4, "wood", 2)   # sound box
+            c.rect(bx_ - 2, by_ - 2, bx_ + 2, by_ - 2, "trim", 4)   # crossbar
+            for x in (-1, 0, 1):
+                c.line(bx_ + x, by_ - 1, bx_ + x, by_ + 2, "trim", 3)
         elif kind == "warhammer":
             c.thick_line(*_along(p, -3), *_along(p, 10), 1, "wood")
             a = math.radians(p.weapon)
@@ -1068,4 +1246,34 @@ def offhand(kind: str) -> Part:
         elif kind == "orb":
             c.ellipse(fx + 0.5, fy - 1.5, 2.2, 2.2, "magic")
             c.px(fx - 1, fy - 3, "magic", 5)
+        elif kind == "tower_shield":                          # a tall rectangular shield: the wall a guardian is
+            c.polygon([(fx - 5, fy - 8), (fx + 6, fy - 8), (fx + 6, fy + 6), (fx + 0.5, fy + 8), (fx - 5, fy + 6)],
+                      "metal", 3)
+            c.polygon([(fx - 4, fy - 7), (fx + 5, fy - 7), (fx + 5, fy + 5), (fx + 0.5, fy + 7), (fx - 4, fy + 5)],
+                      "cloth1", 3)
+            c.rect(fx, fy - 6, fx + 1, fy + 5, "cloth2", 4)
+            c.rect(fx - 3, fy - 3, fx + 4, fy - 2, "cloth2", 4)
+            c.rect(fx - 5, fy - 8, fx + 6, fy - 8, "metal", 5)
+        elif kind in ("blade", "dagger", "main_gauche"):      # a second weapon for dual wielding
+            n = {"blade": 9, "dagger": 5, "main_gauche": 6}[kind]
+            s_ = -p.near_sign
+            c.line(fx, fy + 1, fx, fy, "leather", 3)
+            c.line(fx + s_ * 0, fy - 1, fx + s_ * (n // 3), fy - n, "blade", 4)
+            c.px(fx + s_ * (n // 3), fy - n - 1, "blade", 5)
+            if kind == "main_gauche":                         # the wide parrying guard
+                c.rect(fx - 2, fy, fx + 2, fy, "trim", 4)
+                c.px(fx - 2, fy - 1, "trim", 3)
+                c.px(fx + 2, fy - 1, "trim", 3)
+            else:
+                c.rect(fx - 1, fy, fx + 1, fy, "trim", 3)
+        elif kind == "bomb":
+            c.ellipse(fx + 0.5, fy - 1.5, 2.4, 2.4, "blade", 1)
+            c.px(fx - 1, fy - 3, "blade", 3)
+            c.line(fx + 1, fy - 4, fx + 2, fy - 6, "leather", 3)  # fuse
+            c.px(fx + 2, fy - 7, "magic", 5)
+        elif kind == "war_horn":
+            c.polygon([(fx - 4, fy - 5), (fx - 1, fy - 6), (fx + 2, fy - 2), (fx + 1, fy)], "horn", 3)
+            c.line(fx - 4, fy - 5, fx - 1, fy - 6, "horn", 5)
+            c.rect(fx - 1, fy - 4, fx, fy - 4, "trim", 4)
+            c.ellipse(fx - 3.5, fy - 5.5, 1.5, 1.5, "horn", 1)    # the bell's mouth
     return draw

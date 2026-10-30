@@ -127,6 +127,129 @@ CLASSES: dict[str, ClassKit] = {k.id: k for k in [
              {"cloth1": "cloth/ochre", "cloth2": "cloth/rust"}, "Skirmisher"),
 ]}
 
+@dataclass(frozen=True)
+class Subclass:
+    """Picked at level 3 and locked. It reshapes the class kit so the choice shows on the battlefield: different
+    gear (a tower shield, dual blades, antlers), an accent colour scheme, and for some, a companion unit."""
+    id: str
+    name: str
+    cls: str
+    role: str
+    gear: dict[str, str | None]            # layer -> variant (None removes the kit's piece)
+    colours: dict[str, str]
+    companion: str | None = None           # a bosses-set summon id the game spawns beside the hero
+
+
+def _sub(cls: str, id: str, name: str, role: str, gear: dict, colours: dict, companion: str | None = None
+         ) -> Subclass:
+    return Subclass(id, name, cls, role, gear, colours, companion)
+
+
+SUBCLASSES: dict[str, Subclass] = {s.id: s for s in [
+    # Fighter
+    _sub("fighter", "vanguard", "Vanguard", "Shield wall, taunt, zone control",
+         {"torso": "plate", "legs": "greaves", "feet": "sabatons", "hands": "gauntlets", "offhand": "tower_shield",
+          "headgear": "open_helm"}, {"cloth1": "cloth/crimson", "cloth2": "metal/gold"}),
+    _sub("fighter", "weaponmaster", "Weaponmaster", "Stances, multi-hit",
+         {"torso": "scale", "weapon": "halberd", "offhand": None, "cape": "short_cape", "headgear": "headband"},
+         {"cloth1": "cloth/charcoal", "cloth2": "cloth/crimson", "blade": "metal/steel"}),
+    _sub("fighter", "warlord", "Warlord", "Orders that give allies extra moves",
+         {"torso": "plate", "legs": "greaves", "feet": "sabatons", "hands": "gauntlets", "cape": "banner_back",
+          "headgear": "feathered_cap", "offhand": "war_horn"},
+         {"cloth1": "cloth/navy", "cloth2": "metal/gold", "metal": "metal/bronze"}),
+    # Rogue
+    _sub("rogue", "shadow", "Shadow", "Stealth, backstabs from behind",
+         {"headgear": "mask_hood", "offhand": "dagger", "torso": "leather", "cape": "cloak"},
+         {"cloth1": "cloth/charcoal", "cloth2": "cloth/charcoal", "leather": "leather/dark", "blade": "metal/dark"}),
+    _sub("rogue", "trickster", "Trickster", "Traps, swaps positions",
+         {"headgear": "bandana", "offhand": "bomb", "torso": "vest", "cape": None},
+         {"cloth1": "cloth/plum", "cloth2": "cloth/ochre", "magic": "magic/fire"}),
+    _sub("rogue", "duelist", "Duelist", "Riposte, counters",
+         {"headgear": "feathered_cap", "weapon": "rapier", "offhand": "main_gauche", "torso": "coat",
+          "cape": "short_cape"}, {"cloth1": "cloth/wine", "cloth2": "cloth/ivory", "trim": "metal/silver"}),
+    # Wizard
+    _sub("wizard", "evoker", "Evoker", "Large area spells shaped to miss allies",
+         {"weapon": "staff", "headgear": "wizard_hat"},
+         {"cloth1": "cloth/crimson", "cloth2": "cloth/ochre", "magic": "magic/fire"}),
+    _sub("wizard", "chronomancer", "Chronomancer", "Haste and slow, changes turn order",
+         {"weapon": "hourglass_staff", "headgear": "wizard_hat", "offhand": "orb"},
+         {"cloth1": "cloth/royal_purple", "cloth2": "cloth/navy", "trim": "metal/gold", "magic": "magic/frost"}),
+    _sub("wizard", "geomancer", "Geomancer", "Raises and lowers tile height",
+         {"weapon": "crystal_staff", "headgear": "hood", "hands": "wraps"},
+         {"cloth1": "cloth/rust", "cloth2": "cloth/sand", "magic": "magic/earth"}),
+    # Cleric
+    _sub("cleric", "life", "Life Domain", "Big heals, revives",
+         {"weapon": "holy_staff", "offhand": None, "headgear": "circlet", "legs": "skirt", "feet": "sandals"},
+         {"cloth1": "cloth/ivory", "cloth2": "metal/gold", "magic": "magic/holy"}),
+    _sub("cleric", "war", "War Domain", "Melee buffer",
+         {"torso": "chain", "weapon": "warhammer", "offhand": "kite_shield", "headgear": "winged_helm",
+          "hands": "gauntlets"}, {"cloth1": "cloth/crimson", "cloth2": "cloth/ivory", "magic": "magic/holy"}),
+    _sub("cleric", "light", "Light Domain", "Radiant area damage, reveals stealth",
+         {"headgear": "halo", "offhand": "lantern", "cape": "cloak"},
+         {"cloth1": "cloth/ivory", "cloth2": "cloth/sky", "magic": "magic/holy", "trim": "metal/gold"}),
+    # Ranger
+    _sub("ranger", "sharpshooter", "Sharpshooter", "Gains range from height",
+         {"cape": "quiver", "headgear": "feathered_cap", "torso": "coat"},
+         {"cloth1": "cloth/forest", "cloth2": "cloth/ivory"}),
+    _sub("ranger", "beastmaster", "Beastmaster", "Has a companion unit",
+         {"cape": "pelt", "weapon": "spear", "headgear": None},
+         {"cloth1": "leather/brown", "cloth2": "cloth/sand"}, companion="hound"),
+    _sub("ranger", "warden", "Warden", "Snares, difficult terrain",
+         {"weapon": "crossbow", "headgear": "hood", "torso": "leather", "cape": "cloak"},
+         {"cloth1": "cloth/moss", "cloth2": "cloth/forest", "leather": "leather/dark"}),
+    # Paladin
+    _sub("paladin", "guardian", "Guardian", "Takes hits meant for allies",
+         {"weapon": "mace", "offhand": "tower_shield", "headgear": "great_helm"},
+         {"cloth1": "cloth/sky", "cloth2": "cloth/ivory", "metal": "metal/silver"}),
+    _sub("paladin", "crusader", "Crusader", "Burst smites",
+         {"torso": "tabard", "headgear": "winged_helm", "weapon": "greatsword"},
+         {"cloth1": "cloth/ivory", "cloth2": "cloth/crimson", "metal": "metal/silver", "magic": "magic/holy"}),
+    _sub("paladin", "avenger", "Avenger", "Punishes whoever hit an ally",
+         {"headgear": "horned_helm", "weapon": "flail", "offhand": "buckler"},
+         {"cloth1": "cloth/charcoal", "cloth2": "cloth/crimson", "metal": "metal/dark", "blade": "metal/obsidian"}),
+    # Bard
+    _sub("bard", "valor", "College of Valor", "Buffs, grants extra actions",
+         {"torso": "chain", "weapon": "sword", "offhand": "war_horn", "headgear": "feathered_cap"},
+         {"cloth1": "cloth/crimson", "cloth2": "metal/gold"}),
+    _sub("bard", "lore", "College of Lore", "Debuffs, copies an enemy ability",
+         {"torso": "coat", "weapon": "tome", "headgear": "beret", "cape": "cloak"},
+         {"cloth1": "cloth/navy", "cloth2": "cloth/ivory", "magic": "magic/arcane"}),
+    _sub("bard", "siren", "College of the Siren", "Charm, moves enemies",
+         {"weapon": "lyre", "headgear": "circlet", "torso": "robe", "legs": "skirt", "feet": "sandals"},
+         {"cloth1": "cloth/teal", "cloth2": "cloth/sky", "magic": "magic/frost"}),
+    # Druid
+    _sub("druid", "shapeshifter", "Shapeshifter", "Beast forms",
+         {"headgear": "antlers", "cape": "pelt", "weapon": "quarterstaff"},
+         {"cloth1": "leather/tan", "cloth2": "cloth/moss", "horn": "horn/bone"}),
+    _sub("druid", "stormcaller", "Stormcaller", "Weather zones",
+         {"weapon": "storm_staff", "headgear": "hood", "cape": "cloak"},
+         {"cloth1": "cloth/navy", "cloth2": "cloth/slate", "magic": "magic/storm"}),
+    _sub("druid", "grovekeeper", "Grovekeeper", "Summons, healing over time",
+         {"weapon": "living_staff", "headgear": "flower_crown"},
+         {"cloth1": "cloth/moss", "cloth2": "foliage/blossom", "magic": "magic/nature"}, companion="sapling"),
+    # Warlock
+    _sub("warlock", "hexblade", "Hexblade", "Cursed melee",
+         {"weapon": "sword", "offhand": None, "torso": "leather", "headgear": "hood"},
+         {"cloth1": "cloth/charcoal", "cloth2": "cloth/plum", "blade": "metal/obsidian", "magic": "magic/shadow"}),
+    _sub("warlock", "fiendbound", "Fiendbound", "Summons an imp, burning damage",
+         {"weapon": "tome", "offhand": "orb"},
+         {"cloth1": "cloth/crimson", "cloth2": "cloth/charcoal", "magic": "magic/fire", "trim": "metal/gold"},
+         companion="imp"),
+    _sub("warlock", "void", "Void", "Teleport, pull",
+         {"weapon": "wand", "offhand": "orb", "torso": "robe", "legs": "skirt", "headgear": "hood"},
+         {"cloth1": "cloth/navy", "cloth2": "cloth/charcoal", "magic": "magic/void"}),
+    # Monk
+    _sub("monk", "open_hand", "Way of the Open Hand", "Knockback combos, push enemies off ledges",
+         {"torso": "gi", "hands": "wraps", "headgear": "headband"},
+         {"cloth1": "cloth/ivory", "cloth2": "cloth/crimson"}),
+    _sub("monk", "windstep", "Way of the Windstep", "Mobility, jump height",
+         {"torso": "gi", "hands": "wraps", "headgear": "headband", "cape": "short_cape"},
+         {"cloth1": "cloth/sky", "cloth2": "cloth/ivory"}),
+    _sub("monk", "iron_body", "Way of Iron Body", "Counters, self-healing",
+         {"torso": "gi", "hands": "gauntlets", "legs": "greaves"},
+         {"cloth1": "cloth/charcoal", "cloth2": "cloth/rust", "metal": "metal/iron"}),
+]}
+
 _BASE_COLOURS = {"eyes": "eyes/dark", "leather": "leather/brown", "wood": "wood/oak", "metal": "metal/steel",
                  "trim": "metal/gold", "magic": "magic/arcane", "horn": "horn/ivory", "hair": "hair/brown"}
 
@@ -154,7 +277,7 @@ class CreatorError(ValueError):
 
 
 def make_character(name: str, race: str, cls: str, look: Look | None = None, *, id: str | None = None,
-                   tags: tuple[str, ...] = ()) -> Recipe:
+                   tags: tuple[str, ...] = (), subclass: str | None = None) -> Recipe:
     """Name + race + class (+ look) -> a Recipe. Rejects picks the race doesn't offer, so the phone creator and the
     server can share this validation."""
     if not name.strip():
@@ -186,7 +309,15 @@ def make_character(name: str, race: str, cls: str, look: Look | None = None, *, 
         raise CreatorError(f"paint must be one of {PAINTS}")
     build = r.build + ("_f" if lk.body_type == "feminine" else "")
 
+    sub = SUBCLASSES.get(subclass) if subclass else None
+    if subclass and (sub is None or sub.cls != cls):
+        raise CreatorError(f"{subclass!r} is not a {k.name} subclass")
     layers: dict[str, str] = {"body": r.body, **k.gear}
+    for layer, variant in (sub.gear.items() if sub else ()):
+        if variant is None:
+            layers.pop(layer, None)
+        else:
+            layers[layer] = variant
     for layer, variant in lk.gear.items():
         if variant is None:
             layers.pop(layer, None)
@@ -199,6 +330,8 @@ def make_character(name: str, race: str, cls: str, look: Look | None = None, *, 
 
     palette = dict(_BASE_COLOURS)
     palette.update(k.colours)
+    if sub:
+        palette.update(sub.colours)
     palette["skin"] = f"skin/{skin}"
     palette["hair"] = f"hair/{lk.hair_colour or r.default.get('hair_colour', 'brown')}"
     palette["eyes"] = f"eyes/{lk.eyes or r.default.get('eyes', 'dark')}"
@@ -207,7 +340,8 @@ def make_character(name: str, race: str, cls: str, look: Look | None = None, *, 
     palette.update(lk.colours)
 
     rid = id or "".join(ch for ch in name.lower().replace(" ", "_") if ch.isalnum() or ch == "_")
-    return Recipe(rid, name, build, layers, palette, [race, cls, *tags], race=race, cls=cls)
+    tag_list = [race, cls, *([subclass] if subclass else []), *tags]
+    return Recipe(rid, name, build, layers, palette, tag_list, race=race, cls=cls)
 
 
 def options() -> dict:
@@ -221,6 +355,9 @@ def options() -> dict:
                          "hornsRequired": r.horns_required, "hornColours": r.horn_colours if r.horns else [],
                          "tail": r.tail, "eyes": EYES, "default": r.default, "traits": r.traits}
                   for r in RACES.values()},
-        "classes": {k.id: {"name": k.name, "role": k.role, "gear": k.gear, "colours": k.colours}
+        "classes": {k.id: {"name": k.name, "role": k.role, "gear": k.gear, "colours": k.colours,
+                           "subclasses": [s.id for s in SUBCLASSES.values() if s.cls == k.id]}
                     for k in CLASSES.values()},
+        "subclasses": {s.id: {"name": s.name, "class": s.cls, "role": s.role, "gear": s.gear, "colours": s.colours,
+                              "companion": s.companion} for s in SUBCLASSES.values()},
     }

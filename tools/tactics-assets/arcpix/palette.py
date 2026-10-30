@@ -175,6 +175,10 @@ MAGIC: dict[str, list[str]] = {
     "holy": ramp("#ffe27a", shift=0.05, spread=0.8),
     "shadow": ramp("#7a52b5", shift=0.07, spread=1.1),
     "blood": ramp("#d8394a", shift=0.07),
+    "earth": ramp("#d9a23a", shift=0.07, spread=0.9),
+    "storm": ramp("#9fd0ff", shift=0.04, spread=0.75),
+    "void": ramp("#6a4ad0", shift=0.08, spread=1.1),
+    "fel": ramp("#8fe04a", shift=0.07, spread=0.9),
 }
 
 EYES: dict[str, list[str]] = {
