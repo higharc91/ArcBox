@@ -13,6 +13,7 @@ public sealed class TestBattle
 {
     private readonly BattleMap _map;
     private readonly ImmutableArray<UnitPlacement>.Builder _units = ImmutableArray.CreateBuilder<UnitPlacement>();
+    private readonly List<AbilityDef> _abilities = [];
 
     private TestBattle(BattleMap map)
     {
@@ -20,11 +21,19 @@ public sealed class TestBattle
         Rules = RulesPack.InMemory("test", maps: [map]);
     }
 
-    /// <summary>The rules pack the battle runs under: no content, just the map.</summary>
-    public RulesPack Rules { get; }
+    /// <summary>The rules pack the battle runs under: the map, the built-in abilities and any added with <see cref="With"/>.</summary>
+    public RulesPack Rules { get; private set; }
 
     /// <summary>Starts a builder on the given ASCII map (see <see cref="AsciiMap"/>).</summary>
     public static TestBattle On(string ascii) => new(AsciiMap.Parse(ascii));
+
+    /// <summary>Adds abilities to the rules pack.</summary>
+    public TestBattle With(params AbilityDef[] abilities)
+    {
+        _abilities.AddRange(abilities);
+        Rules = RulesPack.InMemory("test", abilities: _abilities, maps: [_map]);
+        return this;
+    }
 
     /// <summary>Adds a party member.</summary>
     public TestBattle Party(string id, UnitSheet sheet, Tile at, Controller? controller = null)

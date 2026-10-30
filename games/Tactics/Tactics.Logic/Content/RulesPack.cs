@@ -36,14 +36,30 @@ public sealed class RulesPack
     /// <summary>The base map with this id, or null.</summary>
     public BattleMap? MapFor(string id) => _maps.GetValueOrDefault(id);
 
-    /// <summary>A pack built from the given definitions. Throws <see cref="ArgumentException"/> on a duplicate id.</summary>
+    /// <summary>
+    /// The basic Attack action, known to every unit: one weapon attack whose hit deals weapon damage, repeated
+    /// <see cref="UnitSheet.Attacks"/> times in one Action. (Task 13 moves it to <c>abilities/common.json</c>.)
+    /// </summary>
+    public static AbilityDef CommonAttack { get; } = new(
+        new AbilityId("common.attack"), "Attack", Tier: 0, new CostDef(Action: 1),
+        new TargetDef(TargetKind.Enemy, Range: 1, Los: false, new AreaDef(AreaShape.Single)),
+        [new AttackEffect("weapon", null, OnHit: [new DamageEffect(null, null, [], Weapon: true)], OnMiss: [], OnCrit: [])],
+        new PresentationDef("attack", null, null), new AiHints(["damage", "single"]), IsWeaponAttack: true);
+
+    /// <summary>
+    /// A pack built from the given definitions, plus <see cref="CommonAttack"/> unless <paramref name="abilities"/> defines
+    /// <c>common.attack</c> itself. Throws <see cref="ArgumentException"/> on a duplicate id.
+    /// </summary>
     public static RulesPack InMemory(string hash, IEnumerable<AbilityDef>? abilities = null, IEnumerable<PassiveDef>? passives = null,
         IEnumerable<ConditionDef>? conditions = null, IEnumerable<BattleMap>? maps = null)
         => new(hash,
-            Index(abilities, a => a.Id, Comparer<AbilityId>.Default, "ability"),
+            WithCommonAttack(Index(abilities, a => a.Id, Comparer<AbilityId>.Default, "ability")),
             Index(passives, p => p.Id, StringComparer.Ordinal, "passive"),
             Index(conditions, c => c.Id, Comparer<ConditionId>.Default, "condition"),
             Index(maps, m => m.Id, StringComparer.Ordinal, "map"));
+
+    private static ImmutableSortedDictionary<AbilityId, AbilityDef> WithCommonAttack(ImmutableSortedDictionary<AbilityId, AbilityDef> abilities)
+        => abilities.ContainsKey(CommonAttack.Id) ? abilities : abilities.Add(CommonAttack.Id, CommonAttack);
 
     private static ImmutableSortedDictionary<TKey, TValue> Index<TKey, TValue>(IEnumerable<TValue>? items, Func<TValue, TKey> key,
         IComparer<TKey> comparer, string kind) where TKey : notnull

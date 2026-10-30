@@ -1,32 +1,36 @@
 using System.Collections.Immutable;
+using System.Text.Json.Serialization;
 
 namespace Tactics.Logic;
 
-/// <summary>The footprint of an ability's area.</summary>
+/// <summary>The footprint of an ability's area. JSON: <c>"single"</c>, <c>"burst"</c>, …, <c>"all_enemies"</c>.</summary>
 public enum AreaShape
 {
     /// <summary>The aimed tile.</summary>
-    Single,
+    [JsonStringEnumMemberName("single")] Single,
     /// <summary>The caster's own tile.</summary>
-    Self,
+    [JsonStringEnumMemberName("self")] Self,
     /// <summary>Every tile within a Manhattan radius of the aimed tile.</summary>
-    Burst,
+    [JsonStringEnumMemberName("burst")] Burst,
     /// <summary>A straight run from the caster toward the aim.</summary>
-    Line,
+    [JsonStringEnumMemberName("line")] Line,
     /// <summary>A widening wedge from the caster toward the aim.</summary>
-    Cone,
+    [JsonStringEnumMemberName("cone")] Cone,
     /// <summary>The aimed tile and arms of the given length in the four directions.</summary>
-    Cross,
+    [JsonStringEnumMemberName("cross")] Cross,
     /// <summary>Tiles exactly a Manhattan radius from the aimed tile.</summary>
-    Ring,
+    [JsonStringEnumMemberName("ring")] Ring,
     /// <summary>Every ally of the caster; not a tile footprint.</summary>
-    AllAllies,
+    [JsonStringEnumMemberName("all_allies")] AllAllies,
     /// <summary>Every enemy of the caster; not a tile footprint.</summary>
-    AllEnemies,
+    [JsonStringEnumMemberName("all_enemies")] AllEnemies,
 }
 
 /// <summary>An area: its shape, size (radius, length or step count) and who it affects.</summary>
-public sealed record AreaDef(AreaShape Shape, int Size = 0, bool IncludeSelf = false, bool FriendlyFire = false);
+public sealed record AreaDef(AreaShape Shape,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Size = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool IncludeSelf = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool FriendlyFire = false);
 
 /// <summary>Computes which tiles an area covers.</summary>
 public static class Areas

@@ -1,7 +1,23 @@
+using System.Text.Json.Serialization;
+
 namespace Tactics.Logic;
 
-/// <summary>The six ability scores.</summary>
-public enum Stat { Str, Dex, Con, Int, Wis, Cha }
+/// <summary>The six ability scores. JSON: <c>"str"</c>, <c>"dex"</c>, <c>"con"</c>, <c>"int"</c>, <c>"wis"</c>, <c>"cha"</c>.</summary>
+public enum Stat
+{
+    /// <summary>Strength.</summary>
+    [JsonStringEnumMemberName("str")] Str,
+    /// <summary>Dexterity.</summary>
+    [JsonStringEnumMemberName("dex")] Dex,
+    /// <summary>Constitution.</summary>
+    [JsonStringEnumMemberName("con")] Con,
+    /// <summary>Intelligence.</summary>
+    [JsonStringEnumMemberName("int")] Int,
+    /// <summary>Wisdom.</summary>
+    [JsonStringEnumMemberName("wis")] Wis,
+    /// <summary>Charisma.</summary>
+    [JsonStringEnumMemberName("cha")] Cha,
+}
 
 /// <summary>Ability-score arithmetic shared by the rules.</summary>
 public static class Stats

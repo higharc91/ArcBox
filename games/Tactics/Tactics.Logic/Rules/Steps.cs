@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Text.Json.Serialization;
 
 namespace Tactics.Logic;
@@ -11,6 +12,8 @@ namespace Tactics.Logic;
 [JsonDerivedType(typeof(EndTurnStep), nameof(EndTurnStep))]
 [JsonDerivedType(typeof(StartNextTurnStep), nameof(StartNextTurnStep))]
 [JsonDerivedType(typeof(DelayStep), nameof(DelayStep))]
+[JsonDerivedType(typeof(PayCostStep), nameof(PayCostStep))]
+[JsonDerivedType(typeof(RunEffectsStep), nameof(RunEffectsStep))]
 public abstract record Step
 {
     /// <summary>Resolves the step against the writer.</summary>
@@ -59,5 +62,72 @@ public sealed record DelayStep(UnitId Unit, int ToIndex) : Step
         };
         w.Emit(new Delayed(Unit, ToIndex));
         Battle.BeginTurn(w, rules);
+    }
+}
+
+/// <summary>
+/// Spends what <see cref="Ability"/> costs <see cref="Unit"/> (Action, or an extra action once the Action is spent; Bonus;
+/// Reaction; Move; resources; a per-battle use), starts its concentration, and emits <see cref="AbilityUsed"/>. The
+/// command was validated, so the cost is affordable.
+/// </summary>
+public sealed record PayCostStep(UnitId Unit, AbilityId Ability, Target Target) : Step
+{
+    /// <inheritdoc />
+    public override void Run(BattleWriter w, RulesPack rules)
+    {
+        var ability = rules.Abilities[Ability];
+        var cost = ability.Cost;
+        var unit = w.Unit(Unit);
+
+        var economy = unit.Economy;
+        if (cost.Action > 0)
+            economy = economy.Action ? economy with { Action = false } : economy with { ExtraActions = economy.ExtraActions - 1 };
+        if (cost.Bonus > 0)
+            economy = economy with { Bonus = false };
+        if (cost.Reaction > 0)
+            economy = economy with { Reaction = false };
+        economy = economy with { MoveLeft = economy.MoveLeft - cost.Move };
+
+        var resources = unit.Resources;
+        foreach (var (name, amount) in cost.Resource ?? Ordinal.Map<int>())
+            resources = resources.SetItem(name, resources.GetValueOrDefault(name) - amount);
+
+        var usesLeft = unit.UsesLeft;
+        if (cost.Uses is { } uses)
+            usesLeft = usesLeft.SetItem(Ability.Value, usesLeft.GetValueOrDefault(Ability.Value, uses) - 1);
+
+        // Task 7 ends the previous concentration effect when a new one starts.
+        w.Set(unit with
+        {
+            Economy = economy, Resources = resources, UsesLeft = usesLeft,
+            Concentrating = cost.Concentration ? Ability : unit.Concentrating,
+        });
+        w.Emit(new AbilityUsed(Unit, Ability, Target, ability.Presentation));
+    }
+}
+
+/// <summary>
+/// Runs <see cref="Effects"/> in order from <see cref="Source"/> on <see cref="Target"/> (null for a tile) aimed at
+/// <see cref="Aim"/>. Each run takes the first effect and queues the rest behind it, so whatever a block queues (a hit's
+/// effects, a reaction) resolves before the next effect, and a save mid-list resumes exactly there. <see cref="Last"/>,
+/// <see cref="HalfDamage"/> and <see cref="SaveStat"/> carry the roll a branch follows (see <see cref="EffectContext"/>).
+/// Nothing runs on a target that is Dead or Out.
+/// </summary>
+public sealed record RunEffectsStep(UnitId Source, UnitId? Target, Tile? Aim, AbilityId? Ability,
+    ImmutableArray<EffectDef> Effects, RollResult? Last = null, bool HalfDamage = false, Stat? SaveStat = null) : Step
+{
+    /// <inheritdoc />
+    public override void Run(BattleWriter w, RulesPack rules)
+    {
+        if (Effects.IsDefaultOrEmpty)
+            return;
+        if (Target is { } target && w.Unit(target).Life is LifeState.Dead or LifeState.Out)
+            return;
+        if (Effects.Length > 1)
+            w.PushFront(this with { Effects = Effects.RemoveAt(0) });
+
+        var ability = Ability is { } id ? rules.Abilities.GetValueOrDefault(id) : null;
+        var ctx = new EffectContext(w, rules, Source, Target, Aim, ability, Last, HalfDamage, SaveStat);
+        BlockRegistry.For(Effects[0]).Run(Effects[0], ctx);
     }
 }

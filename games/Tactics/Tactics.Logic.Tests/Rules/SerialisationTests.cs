@@ -47,7 +47,7 @@ public sealed class SerialisationTests
         return state with
         {
             Units = state.Units.SetItem(kara.Id, kara).SetItem(brin.Id, brin).SetItem(gob.Id, gob),
-            Queue = [new EndTurnStep(U("kara")), new DelayStep(U("kara"), 1)],
+            Queue = [new PayCostStep(U("kara"), new AbilityId("common.attack"), new Target(Unit: U("gob"))), new EndTurnStep(U("kara")), new DelayStep(U("kara"), 1)],
             Pending = new ReactionOffer(U("gob"),
                 [new ReactionChoice("pass", null, null), new ReactionChoice("opportunity", new AbilityId("common.attack"), U("kara"))],
                 "leavesReach"),
@@ -85,6 +85,7 @@ public sealed class SerialisationTests
 
         Assert.Equal(json, again);
         Assert.Contains("\"$type\":\"EndTurnStep\"", json);
+        Assert.Contains("\"$type\":\"PayCostStep\"", json);
         Assert.Contains("\"$type\":\"ReactionOffer\"", json);
         Assert.Contains("\"$type\":\"PlayerControlled\"", json);
         Assert.Contains("\"1,1\":2", json);
@@ -150,6 +151,51 @@ public sealed class SerialisationTests
     }
 
     [Fact]
+    public void Mid_queue_state_round_trips_and_resumes_identically()
+    {
+        var bolt = TestAbilities.GuidingBolt;
+        var battle = TestBattle.On(Field)
+            .Party("cleric", TestSheets.Cleric with { Abilities = [bolt.Id], InitiativeBonus = 5 }, new Tile(0, 0))
+            .Enemy("gob", TestSheets.Goblin with { MaxHp = 30 }, new Tile(3, 1))
+            .With(bolt);
+        var (state, _) = battle.Start(seed: 1);                         // the attack hits (d20 13)
+
+        // Resolve Use(Guiding Bolt) by hand up to the attack roll: the hit's effects are still queued.
+        var target = new Target(Unit: U("gob"));
+        var w = new BattleWriter(state, battle.Rules);
+        w.PushFront(new PayCostStep(U("cleric"), bolt.Id, target),
+            new RunEffectsStep(U("cleric"), U("gob"), new Tile(3, 1), bolt.Id, bolt.Effects));
+        w.PopFront()!.Run(w, battle.Rules);
+        w.PopFront()!.Run(w, battle.Rules);
+        var mid = w.Freeze();
+
+        var queued = Assert.IsType<RunEffectsStep>(Assert.Single(mid.Queue));
+        Assert.Equal(2, queued.Effects.Length);
+        Assert.Equal(18, queued.Last!.Total);
+
+        var json = JsonSerializer.Serialize(mid, ArcJson.Options);
+        var loaded = JsonSerializer.Deserialize<BattleState>(json, ArcJson.Options)!;
+        Assert.Equal(json, JsonSerializer.Serialize(loaded, ArcJson.Options));
+        Assert.Contains("\"$type\":\"RunEffectsStep\"", json);
+        Assert.Contains("\"effects\":[{\"damage\":{\"dice\":{\"byLevel\":{\"1\":\"4d6\"", json);
+        Assert.Contains("{\"apply\":\"lit\",\"rounds\":1}", json);
+
+        var (original, originalEvents) = Resume(mid);
+        var (resumed, resumedEvents) = Resume(loaded);
+        Assert.Equal([typeof(Damaged), typeof(ConditionApplied)], originalEvents.Select(e => e.GetType()));
+        Assert.Equal(JsonSerializer.Serialize(originalEvents, ArcJson.Options), JsonSerializer.Serialize(resumedEvents, ArcJson.Options));
+        Assert.Equal(JsonSerializer.Serialize(original, ArcJson.Options), JsonSerializer.Serialize(resumed, ArcJson.Options));
+
+        (BattleState, ImmutableArray<BattleEvent>) Resume(BattleState s)
+        {
+            var writer = new BattleWriter(s, battle.Rules);
+            while (writer.PopFront() is { } step)
+                step.Run(writer, battle.Rules);
+            return (writer.Freeze(), writer.Events);
+        }
+    }
+
+    [Fact]
     public void String_keyed_collections_stay_ordinal_after_deserialising()
     {
         var json = JsonSerializer.Serialize(RichState(), ArcJson.Options);
@@ -189,6 +235,12 @@ public sealed class SerialisationTests
             new TurnStarted(U("kara"), 1),
             new Delayed(U("kara"), 1),
             new TurnEnded(U("gob")),
+            new AbilityUsed(U("kara"), new AbilityId("common.attack"), new Target(Unit: U("gob")), new PresentationDef("slash", null, null)),
+            new Rolled(U("kara"), RollKind.Attack, new RollResult([4, 17], 17, 5, 22, 15, true, false, false)),
+            new Damaged(U("gob"), 6, "slashing", 1),
+            new Healed(U("kara"), 3, 12),
+            new ConditionApplied(U("gob"), new ConditionId("lit")),
+            new ConditionRemoved(U("gob"), new ConditionId("lit")),
         ];
 
         var commandJson = JsonSerializer.Serialize(commands, ArcJson.Options);

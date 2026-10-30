@@ -9,6 +9,12 @@ namespace Tactics.Logic;
 [JsonDerivedType(typeof(TurnStarted), nameof(TurnStarted))]
 [JsonDerivedType(typeof(TurnEnded), nameof(TurnEnded))]
 [JsonDerivedType(typeof(Delayed), nameof(Delayed))]
+[JsonDerivedType(typeof(AbilityUsed), nameof(AbilityUsed))]
+[JsonDerivedType(typeof(Rolled), nameof(Rolled))]
+[JsonDerivedType(typeof(Damaged), nameof(Damaged))]
+[JsonDerivedType(typeof(Healed), nameof(Healed))]
+[JsonDerivedType(typeof(ConditionApplied), nameof(ConditionApplied))]
+[JsonDerivedType(typeof(ConditionRemoved), nameof(ConditionRemoved))]
 public abstract record BattleEvent;
 
 /// <summary>A new round began with this turn order.</summary>
@@ -22,3 +28,21 @@ public sealed record TurnEnded(UnitId Unit) : BattleEvent;
 
 /// <summary>A unit delayed its turn to index <see cref="ToIndex"/> of this round's order.</summary>
 public sealed record Delayed(UnitId Unit, int ToIndex) : BattleEvent;
+
+/// <summary>A unit used an ability; <see cref="Presentation"/> carries the ability's animation, effect and projectile keys.</summary>
+public sealed record AbilityUsed(UnitId Source, AbilityId Ability, Target Target, PresentationDef? Presentation) : BattleEvent;
+
+/// <summary>A unit rolled a d20 (both dice when it had an edge).</summary>
+public sealed record Rolled(UnitId Roller, RollKind Kind, RollResult Result) : BattleEvent;
+
+/// <summary>A unit took <see cref="Amount"/> damage (after resistances, temporary HP included) and has <see cref="HpAfter"/> left.</summary>
+public sealed record Damaged(UnitId Unit, int Amount, string? Type, int HpAfter) : BattleEvent;
+
+/// <summary>A unit regained <see cref="Amount"/> HP and has <see cref="HpAfter"/>.</summary>
+public sealed record Healed(UnitId Unit, int Amount, int HpAfter) : BattleEvent;
+
+/// <summary>A unit gained a condition.</summary>
+public sealed record ConditionApplied(UnitId Unit, ConditionId Condition) : BattleEvent;
+
+/// <summary>A unit lost a condition.</summary>
+public sealed record ConditionRemoved(UnitId Unit, ConditionId Condition) : BattleEvent;
