@@ -29,7 +29,9 @@ public static class DownedRules
     /// <item>Otherwise it is Dead (<see cref="Died"/>), leaves the turn order and <paramref name="by"/>'s
     /// <see cref="HookKind.OnKill"/> hooks fire with it as the other unit.</item>
     /// </list>
-    /// A unit dropped during its own turn has its turn ended once what is already queued has resolved.
+    /// Either way it stops acting: the rest of its own abilities' effects and attacks still queued are dropped
+    /// (<see cref="StopActing"/>), and a unit dropped during its own turn has its turn ended once what is still queued has
+    /// resolved.
     /// </summary>
     public static void Drop(BattleWriter w, UnitId unit, UnitId? by)
     {
@@ -41,6 +43,7 @@ public static class DownedRules
         {
             w.Set(u with { Hp = 0, TempHp = 0, Life = LifeState.Dead });
             w.Emit(new Died(unit));
+            StopActing(w, unit);
             Conditions.BreakConcentration(w, unit);
             LeaveOrder(w, unit);
             if (by is { } killer)
@@ -50,6 +53,7 @@ public static class DownedRules
 
         w.Set(u with { Hp = 0, TempHp = 0, Life = LifeState.Downed, Countdown = StartingCountdown });
         w.Emit(new Downed(unit));
+        StopActing(w, unit);
         Motion.KnockProne(w, unit);
         Conditions.BreakConcentration(w, unit);
 
@@ -64,9 +68,23 @@ public static class DownedRules
 
     /// <summary>
     /// A Downed <paramref name="unit"/> took a hit: its countdown drops by 1, or 2 for a <paramref name="crit"/>
-    /// (<see cref="CountdownTicked"/>), and at 0 it goes Out. It takes no damage.
+    /// (<see cref="CountdownTicked"/>), and at 0 it goes Out. It takes no damage. A hit counts once however many damage
+    /// effects it has: further damage in the same <paramref name="resolution"/> (see <see cref="BattleState.DownedHits"/>)
+    /// costs nothing more. Damage outside any resolution (a fall, a collision) is a hit of its own.
     /// </summary>
-    public static void Hit(BattleWriter w, UnitId unit, bool crit) => Tick(w, unit, crit ? 2 : 1);
+    public static void Hit(BattleWriter w, UnitId unit, bool crit, int? resolution = null)
+    {
+        if (w.Unit(unit).Life != LifeState.Downed)
+            return;
+        if (resolution is { } id)
+        {
+            var mark = new HitMark(id, unit);
+            if (w.State.DownedHits.Contains(mark))
+                return;
+            w.State = w.State with { DownedHits = w.State.DownedHits.Add(mark) };
+        }
+        Tick(w, unit, crit ? 2 : 1);
+    }
 
     /// <summary>The start of a new round: every Downed unit's countdown drops by 1, in <see cref="UnitId"/> order.</summary>
     public static void TickRound(BattleWriter w)
@@ -104,6 +122,18 @@ public static class DownedRules
         Conditions.BreakConcentration(w, unit);
         LeaveOrder(w, unit);
     }
+
+    /// <summary>
+    /// Drops what <paramref name="unit"/>, no longer Up, was still doing: its queued ability effects and attacks (steps at
+    /// hook depth 0 with it as the source). Effects of hooks (its <see cref="HookKind.OnDowned"/> passives and the like)
+    /// still run. Its walk halts by itself (<see cref="MoveStep"/>), which also takes it off any ally's tile it was passing.
+    /// </summary>
+    private static void StopActing(BattleWriter w, UnitId unit)
+        => w.State = w.State with
+        {
+            Queue = w.State.Queue.RemoveAll(step => (step is RunEffectsStep { HookDepth: 0 } run && run.Source == unit)
+                                                    || (step is AttackStep { HookDepth: 0 } attack && attack.Source == unit)),
+        };
 
     private static void Tick(BattleWriter w, UnitId unit, int by)
     {

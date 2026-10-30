@@ -11,12 +11,13 @@ public static class Hp
     /// <item>An Up unit: temporary HP absorbs it first; emits <see cref="Damaged"/>. Damage over 0 that leaves it at 0 HP
     /// drops it (<see cref="DownedRules.Drop"/>); otherwise a concentrating unit saves to keep its concentration
     /// (<see cref="Conditions.ConcentrationDc"/>) and the unit's <see cref="HookKind.OnDamaged"/> hooks fire.</item>
-    /// <item>A Downed unit takes no damage: damage over 0 is a hit on its countdown, 2 for a <paramref name="crit"/>
-    /// (<see cref="DownedRules.Hit"/>).</item>
+    /// <item>A Downed unit takes no damage (0 is returned): damage over 0 is a hit on its countdown, 2 for a
+    /// <paramref name="crit"/>, once per hit <paramref name="resolution"/> (<see cref="DownedRules.Hit"/>).</item>
     /// <item>An Out or Dead unit takes nothing.</item>
     /// </list>
     /// </summary>
-    public static int Damage(BattleWriter w, UnitId unit, int amount, string? type, UnitId? source = null, bool crit = false)
+    public static int Damage(BattleWriter w, UnitId unit, int amount, string? type, UnitId? source = null, bool crit = false,
+        int? resolution = null)
     {
         var u = w.Unit(unit);
         if (!DownedRules.InBattle(u))
@@ -36,8 +37,8 @@ public static class Hp
         if (u.Life == LifeState.Downed)
         {
             if (amount > 0)
-                DownedRules.Hit(w, unit, crit);
-            return amount;
+                DownedRules.Hit(w, unit, crit, resolution);
+            return 0;
         }
 
         var absorbed = Math.Min(u.TempHp, amount);
@@ -103,7 +104,8 @@ public sealed class DamageBlock : EffectBlock<DamageEffect>
         if (ctx.HalfDamage)
             total /= 2;
 
-        Hp.Damage(ctx.W, target.Id, total, def.Type ?? (def.Weapon ? sheet.Weapon.DamageType : null), ctx.Source, crit);
+        Hp.Damage(ctx.W, target.Id, total, def.Type ?? (def.Weapon ? sheet.Weapon.DamageType : null), ctx.Source, crit,
+            ctx.Resolution);
     }
 }
 

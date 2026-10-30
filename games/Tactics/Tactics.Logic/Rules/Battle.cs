@@ -313,10 +313,16 @@ public static partial class Battle
     /// </summary>
     private const int MaxStepsPerCommand = 100_000;
 
-    /// <summary>Settles the queue, checks the invariants if <see cref="Invariants.Enabled"/>, and freezes the result.</summary>
+    /// <summary>
+    /// Settles the queue; once it is empty, the hit numbering (<see cref="BattleState.NextResolution"/>,
+    /// <see cref="BattleState.DownedHits"/>) starts over. Then checks the invariants if <see cref="Invariants.Enabled"/>,
+    /// and freezes the result.
+    /// </summary>
     private static Resolution Settled(BattleWriter w, RulesPack rules)
     {
         Settle(w, rules);
+        if (w.State.Queue.IsEmpty && (w.State.NextResolution != 0 || !w.State.DownedHits.IsEmpty))
+            w.State = w.State with { NextResolution = 0, DownedHits = [] };
         if (Invariants.Enabled)
             Invariants.Check(w.State, rules, w.Terrain);
         return new Resolution(w.Freeze(), w.Events, null);

@@ -323,4 +323,68 @@ public sealed class DownedTests
         (after, _) = battle.Apply(after, new Move(U("kara"), [T(3, 0), T(2, 0)]));
         Assert.Equal(T(2, 0), after.Units[U("kara")].Pos);
     }
+
+    [Fact]
+    public void One_hit_with_extra_damage_costs_one_tick_and_a_crit_two()
+    {
+        var flameStrike = new AbilityDef(new AbilityId("test.flame_strike"), "Flame strike", Tier: 0, new CostDef(Action: 1),
+            new TargetDef(TargetKind.Enemy, Range: 1, Los: false, new AreaDef(AreaShape.Single)),
+            [new AttackEffect("weapon", null, OnHit:
+                [new DamageEffect(null, null, [], Weapon: true), new DamageEffect(TestAbilities.Flat("1d6"), "fire", [])],
+                OnMiss: [], OnCrit: [], Bonus: 30)]);
+        var battle = Build(flameStrike);
+        var (start, _) = battle.Start(seed: 3);
+        start = Down(start, "kara").Change("gob", u => u with { Sheet = u.Sheet.Knowing(flameStrike) });
+        var use = new Use(U("gob"), flameStrike.Id, new Target(Unit: U("kara")));
+
+        var (hit, hitEvents) = battle.Apply(NextD20(start, d => d is > 1 and < 20), use);
+        Assert.Equal([new CountdownTicked(U("kara"), 2)], hitEvents.OfType<CountdownTicked>());
+        Assert.Equal(2, hit.Units[U("kara")].Countdown);
+
+        var (crit, critEvents) = battle.Apply(NextD20(start, d => d == 20), use);
+        Assert.Equal([new CountdownTicked(U("kara"), 1)], critEvents.OfType<CountdownTicked>());
+        Assert.Equal(1, crit.Units[U("kara")].Countdown);
+        Assert.Empty(crit.DownedHits);
+    }
+
+    [Fact]
+    public void On_attack_hit_extra_damage_is_part_of_the_same_hit()
+    {
+        var sneak = new PassiveDef("test.sneak", HookKind.OnAttackHit, null,
+            [new DamageEffect(TestAbilities.Flat("2d6"), "piercing", [])], null);
+        var battle = Build().WithPassives(sneak);
+        var (state, _) = battle.Start(seed: 3);
+        state = Down(state, "kara").Change("gob", u => u with { Sheet = u.Sheet with { Passives = ["test.sneak"] } });
+
+        var (after, events) = battle.Apply(NextD20(state, d => d is > 1 and < 20),
+            new Use(U("gob"), Strike.Id, new Target(Unit: U("kara"))));
+
+        Assert.Contains(new PassiveTriggered(U("gob"), "test.sneak"), events);
+        Assert.Equal([new CountdownTicked(U("kara"), 2)], events.OfType<CountdownTicked>());
+        Assert.Equal(2, after.Units[U("kara")].Countdown);
+    }
+
+    [Fact]
+    public void Attacker_dropped_mid_multiattack_makes_no_further_attacks()
+    {
+        // kara attacks twice per Attack action; gob's first wound makes it lash back and drop kara (1 HP).
+        var lashBack = new PassiveDef("test.lash_back", HookKind.OnDamaged, null,
+            [new DamageEffect(TestAbilities.Flat("1d4"), "necrotic", [])], null);
+        var battle = TestBattle.On(Field)
+            .Party("kara", TestSheets.Fighter with { InitiativeBonus = 10, Attacks = 2 }, T(2, 1))
+            .Party("brin", TestSheets.Cleric, T(0, 0))
+            .Enemy("gob", TestSheets.Goblin with { MaxHp = 30, Passives = ["test.lash_back"] }, T(3, 1))
+            .WithPassives(lashBack);
+        var (state, _) = battle.Start(seed: 3);
+        state = NextD20(state.Change("kara", u => u with { Hp = 1 }), d => d >= 15);   // the first attack hits
+
+        var (after, events) = battle.Apply(state, new Use(U("kara"), new AbilityId("common.attack"), new Target(Unit: U("gob"))));
+
+        Assert.Single(events.OfType<Rolled>(), r => r.Kind == RollKind.Attack);
+        Assert.Contains(new PassiveTriggered(U("gob"), "test.lash_back"), events);
+        Assert.Equal(LifeState.Downed, after.Units[U("kara")].Life);
+        Assert.Contains(new TurnEnded(U("kara")), events);
+        Assert.Equal(U("gob"), after.Active);
+        Assert.Empty(after.Queue);
+    }
 }

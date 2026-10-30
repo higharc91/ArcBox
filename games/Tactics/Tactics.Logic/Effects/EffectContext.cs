@@ -11,8 +11,9 @@ public sealed class EffectContext
 {
     /// <summary>A context for running effects of <paramref name="ability"/> from <paramref name="source"/>.</summary>
     public EffectContext(BattleWriter w, RulesPack rules, UnitId source, UnitId? target, Tile? aim, AbilityDef? ability,
-        RollResult? last = null, bool halfDamage = false, Stat? saveStat = null)
+        RollResult? last = null, bool halfDamage = false, Stat? saveStat = null, int? resolution = null)
     {
+        Resolution = resolution;
         W = w;
         Rules = rules;
         Source = source;
@@ -54,6 +55,9 @@ public sealed class EffectContext
 
     /// <summary>The stat of the save whose branch is running, if any; an until-save condition rolls it each turn end.</summary>
     public Stat? SaveStat { get; }
+
+    /// <summary>The hit these effects belong to (see <see cref="RunEffectsStep.Resolution"/>), if numbered.</summary>
+    public int? Resolution { get; }
 
     /// <summary>The source as it is now.</summary>
     public UnitState SourceUnit => W.Unit(Source);
@@ -101,12 +105,13 @@ public sealed class EffectContext
 
     /// <summary>
     /// Queues <paramref name="effects"/> on the same source, target and aim to run next, following <paramref name="last"/>,
-    /// at the running step's <see cref="BattleWriter.HookDepth"/>.
+    /// at the running step's <see cref="BattleWriter.HookDepth"/>, as part of the same hit (<see cref="Resolution"/>).
     /// </summary>
     public void Queue(ImmutableArray<EffectDef> effects, RollResult? last, bool halfDamage = false, Stat? saveStat = null)
     {
         if (!effects.IsDefaultOrEmpty)
-            W.PushFront(new RunEffectsStep(Source, Target, Aim, Ability?.Id, effects, last, halfDamage, saveStat, W.HookDepth));
+            W.PushFront(new RunEffectsStep(Source, Target, Aim, Ability?.Id, effects, last, halfDamage, saveStat, W.HookDepth,
+                Resolution: Resolution));
     }
 
     /// <summary>The modifier of <paramref name="sheet"/>'s casting stat, or 0 without one.</summary>

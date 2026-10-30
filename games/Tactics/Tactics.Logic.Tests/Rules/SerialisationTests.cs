@@ -74,6 +74,8 @@ public sealed class SerialisationTests
             Injuries = [new RecordedInjury(U("kara"), new InjuryId("cracked_rib"))],
             ItemsUsed = [new ItemUse(U("kara"), new ItemId("potion.healing"), false)],
             NextSerial = 4,
+            NextResolution = 3,
+            DownedHits = [new HitMark(2, U("gob")), new HitMark(0, U("gob"))],
             StartedThisRound = [U("gob"), U("Brin")],
             DelayedThisRound = [U("Brin")],
             Xp = 300,
@@ -110,6 +112,8 @@ public sealed class SerialisationTests
 
         Assert.Equal(state.Active, back.Active);
         Assert.Equal(300, back.Xp);
+        Assert.Equal(3, back.NextResolution);
+        Assert.Equal([new HitMark(0, U("gob")), new HitMark(2, U("gob"))], back.DownedHits);
         Assert.Equal(state.Loot, back.Loot);
         Assert.Equal(state.StartedThisRound, back.StartedThisRound);
         Assert.Equal(state.DelayedThisRound, back.DelayedThisRound);

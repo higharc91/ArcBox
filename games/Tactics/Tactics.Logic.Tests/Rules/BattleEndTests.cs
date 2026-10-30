@@ -123,4 +123,29 @@ public sealed class BattleEndTests
         Assert.Equal([new LootTableId("goblin_cache")], result.Loot);
         Assert.Equal(["bridge_down"], result.FlagsSet);
     }
+
+    [Fact]
+    public void Result_on_a_loss_or_flight_gives_half_xp_rounded_down()
+    {
+        var battle = TestBattle.On(Field)
+            .Enemy("gob", (TestSheets.Goblin with { InitiativeBonus = 10 }).Knowing(DownedTests.Smite), T(3, 1))
+            .Party("kara", TestSheets.Fighter, T(2, 1))
+            .Party("comp", TestSheets.Cleric, T(0, 0), new AiControlled("companion"))
+            .With(DownedTests.Smite);
+        var (state, _) = battle.Start(seed: 4);
+        state = state.Change("kara", u => u with { Hp = 1 })
+            .Change("comp", u => u with { Hp = 0, Life = LifeState.Downed, Countdown = 2 }) with { Xp = 251 };
+
+        var (lost, events) = battle.Apply(state, new Use(U("gob"), DownedTests.Smite.Id, new Target(Unit: U("kara"))));
+
+        Assert.Equal(new BattleEnded(BattleOutcome.Lost), events[^1]);
+        var result = Battle.Result(lost, battle.Rules)!;
+        Assert.Equal(BattleOutcome.Lost, result.Outcome);
+        Assert.Equal([(U("comp"), 125), (U("kara"), 125)], result.Xp.Select(p => (p.Key, p.Value)));
+        Assert.Empty(result.Loot);
+
+        var fled = Battle.Result(state with { Outcome = BattleOutcome.Fled }, battle.Rules)!;
+        Assert.Equal([125, 125], fled.Xp.Values);
+        Assert.Equal([251, 251], Battle.Result(state with { Outcome = BattleOutcome.Won }, battle.Rules)!.Xp.Values);
+    }
 }

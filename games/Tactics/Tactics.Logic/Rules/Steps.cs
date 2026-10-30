@@ -164,12 +164,16 @@ public sealed record PayCostStep(UnitId Unit, AbilityId Ability, Target Target) 
 /// <see cref="HookDepth"/> is how deeply nested in hooks the effects are. A hook's effects name their
 /// <see cref="Passive"/>: before the first one runs, its limits are spent (<see cref="Hooks"/>; nothing runs if the owner
 /// no longer has it or its limits are used up) and <see cref="PassiveTriggered"/> is emitted. Nothing runs on a target
-/// that is Dead or Out.
+/// that is Dead or Out, and an ability's effects (<see cref="HookDepth"/> 0) stop once their source is no longer Up.
+/// <see cref="Resolution"/> numbers the hit the effects belong to: the first run of a list without one takes a new number
+/// (<see cref="BattleWriter.NewResolution"/>), which the rest of the list and its branches keep, so damage to a Downed
+/// target costs it countdown once per hit (<see cref="DownedRules.Hit"/>).
 /// </summary>
 public sealed record RunEffectsStep(UnitId Source, UnitId? Target, Tile? Aim, AbilityId? Ability,
     ImmutableArray<EffectDef> Effects, RollResult? Last = null, bool HalfDamage = false, Stat? SaveStat = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int HookDepth = 0,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] PassiveRef? Passive = null) : Step
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] PassiveRef? Passive = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Resolution = null) : Step
 {
     /// <inheritdoc />
     public override void Run(BattleWriter w, RulesPack rules)
@@ -178,6 +182,8 @@ public sealed record RunEffectsStep(UnitId Source, UnitId? Target, Tile? Aim, Ab
             return;
         if (Target is { } target && w.Unit(target).Life is LifeState.Dead or LifeState.Out)
             return;
+        if (HookDepth == 0 && w.Unit(Source).Life != LifeState.Up)
+            return;
         w.HookDepth = HookDepth;
         if (Passive is { } passive)
         {
@@ -185,11 +191,12 @@ public sealed record RunEffectsStep(UnitId Source, UnitId? Target, Tile? Aim, Ab
                 return;
             w.Emit(new PassiveTriggered(passive.Owner, passive.Id));
         }
+        var resolution = Resolution ?? w.NewResolution();
         if (Effects.Length > 1)
-            w.PushFront(this with { Effects = Effects.RemoveAt(0), Passive = null });
+            w.PushFront(this with { Effects = Effects.RemoveAt(0), Passive = null, Resolution = resolution });
 
         var ability = Ability is { } id ? rules.Abilities.GetValueOrDefault(id) : null;
-        var ctx = new EffectContext(w, rules, Source, Target, Aim, ability, Last, HalfDamage, SaveStat);
+        var ctx = new EffectContext(w, rules, Source, Target, Aim, ability, Last, HalfDamage, SaveStat, resolution);
         BlockRegistry.For(Effects[0]).Run(Effects[0], ctx);
     }
 }

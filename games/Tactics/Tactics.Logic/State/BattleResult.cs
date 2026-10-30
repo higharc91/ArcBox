@@ -13,7 +13,7 @@ public sealed record ItemUse(UnitId Unit, ItemId Item, bool ByAi);
 
 /// <summary>
 /// What an ended battle hands the campaign (spec §2.5, §3.9; see <see cref="Battle.Result"/>): the outcome, XP for every
-/// party member, injuries gained and items used by unit, the loot tables to roll (sub-project 6) and the story flags set.
+/// party member (full on a win, half on a loss or flight), injuries gained and items used by unit, the loot tables to roll (sub-project 6) and the story flags set.
 /// </summary>
 public sealed record BattleResult(BattleOutcome Outcome, ImmutableSortedDictionary<UnitId, int> Xp,
     ImmutableSortedDictionary<UnitId, ImmutableArray<InjuryId>> Injuries,

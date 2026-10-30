@@ -52,6 +52,14 @@ public sealed class BattleWriter
         return value;
     }
 
+    /// <summary>Numbers a new resolution (one hit: see <see cref="BattleState.NextResolution"/>).</summary>
+    public int NewResolution()
+    {
+        var id = State.NextResolution;
+        State = State with { NextResolution = id + 1 };
+        return id;
+    }
+
     /// <summary>Appends an event.</summary>
     public void Emit(BattleEvent e) => _events.Add(e);
 

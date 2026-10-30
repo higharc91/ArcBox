@@ -66,8 +66,8 @@ public static partial class Battle
     /// <summary>
     /// What the campaign takes from an ended battle (spec §2.5, §3.9), or null while it goes on:
     /// <list type="bullet">
-    /// <item>the encounter's full XP (<see cref="BattleState.Xp"/>) for every party member, AI-played or not, whatever the
-    /// outcome (summons and protected NPCs aren't party members);</item>
+    /// <item>XP for every party member, AI-played or not (summons and protected NPCs aren't party members): the
+    /// encounter's full <see cref="BattleState.Xp"/> on a win, half of it (rounded down) on a loss or a flight;</item>
     /// <item>the injuries and items used, grouped by unit in the order they happened;</item>
     /// <item>the loot tables to roll, on a win only, and the story flags set.</item>
     /// </list>
@@ -77,9 +77,10 @@ public static partial class Battle
         if (state.Outcome is not { } outcome)
             return null;
 
+        var award = outcome == BattleOutcome.Won ? state.Xp : state.Xp / 2;
         var xp = state.Units.Values
             .Where(u => u.Sheet.Side == Side.Party && u.SummonedBy is null && !u.Protected)
-            .ToImmutableSortedDictionary(u => u.Id, _ => state.Xp);
+            .ToImmutableSortedDictionary(u => u.Id, _ => award);
         var injuries = state.Injuries.GroupBy(i => i.Unit)
             .ToImmutableSortedDictionary(g => g.Key, g => g.Select(i => i.Injury).ToImmutableArray());
         var items = state.ItemsUsed.GroupBy(i => i.Unit)

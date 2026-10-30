@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Text.Json.Serialization;
 
 namespace Tactics.Logic;
 
@@ -30,7 +31,10 @@ public sealed class AttackBlock : EffectBlock<AttackEffect>
 }
 
 /// <summary>
-/// An attack roll in two runs (spec §3.4, §3.6). Nothing happens if the target is Dead or Out.
+/// An attack roll in two runs (spec §3.4, §3.6). Nothing happens if the target is Dead or Out, or if it is an ability's
+/// attack (<see cref="HookDepth"/> 0) and its source is no longer Up. Each attack is its own hit: the first run numbers it
+/// (<see cref="Resolution"/>), and its branch and the <see cref="HookKind.OnAttackHit"/>/<see cref="HookKind.OnAttackMiss"/>
+/// hook effects keep the number, so a Downed target loses countdown once for it.
 /// <list type="number">
 /// <item>Without <see cref="Roll"/>: d20 + stat modifier (the weapon's, or the casting stat for <c>"spell"</c>; the
 /// effect's stat overrides either) + proficiency + the effect's bonus + static attack modifiers + high ground, against AC +
@@ -48,13 +52,14 @@ public sealed class AttackBlock : EffectBlock<AttackEffect>
 /// </list>
 /// </summary>
 public sealed record AttackStep(UnitId Source, UnitId Target, Tile? Aim, AbilityId? Ability, EffectDef Attack,
-    RollResult? Roll = null, int Cover = 0, Edge Edge = Edge.None, int HookDepth = 0) : Step
+    RollResult? Roll = null, int Cover = 0, Edge Edge = Edge.None, int HookDepth = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Resolution = null) : Step
 {
     /// <inheritdoc />
     public override void Run(BattleWriter w, RulesPack rules)
     {
         var target = w.Unit(Target);
-        if (target.Life is LifeState.Dead or LifeState.Out)
+        if (target.Life is LifeState.Dead or LifeState.Out || (HookDepth == 0 && w.Unit(Source).Life != LifeState.Up))
             return;
         w.HookDepth = HookDepth;
         if (Roll is null)
@@ -107,7 +112,7 @@ public sealed record AttackStep(UnitId Source, UnitId Target, Tile? Aim, Ability
         var roll = Rolls.D20(w, modifier, Ac(w, rules, target, cover), edge, critOn20: true, autoMissOn1: true);
         w.Emit(new Rolled(Source, RollKind.Attack, roll));
 
-        var next = this with { Roll = roll, Cover = cover, Edge = edge };
+        var next = this with { Roll = roll, Cover = cover, Edge = edge, Resolution = Resolution ?? w.NewResolution() };
         if (!roll.Success)
         {
             w.PushFront(next);
@@ -135,8 +140,12 @@ public sealed record AttackStep(UnitId Source, UnitId Target, Tile? Aim, Ability
         var branch = !hit ? def.OnMiss
             : crit && !def.OnCrit.IsDefaultOrEmpty ? (def.OnHit.IsDefault ? def.OnCrit : def.OnHit.AddRange(def.OnCrit))
             : def.OnHit;
+        for (var i = 0; i < hooks.Count; i++)
+            if (hooks[i] is RunEffectsStep { Target: { } hookTarget } hook && hookTarget == Target)
+                hooks[i] = hook with { Resolution = Resolution };   // the hit's own extra damage (sneak attack) is the same hit
         if (!branch.IsDefaultOrEmpty)
-            hooks.Insert(0, new RunEffectsStep(Source, Target, Aim, Ability, branch, roll, HookDepth: HookDepth));
+            hooks.Insert(0, new RunEffectsStep(Source, Target, Aim, Ability, branch, roll, HookDepth: HookDepth,
+                Resolution: Resolution));
         if (hooks.Count > 0)
             w.PushFront([.. hooks]);
     }
