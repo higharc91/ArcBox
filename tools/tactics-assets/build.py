@@ -7,7 +7,7 @@ Everything is deterministic: the same code produces byte-identical PNGs, so the 
 """
 from __future__ import annotations
 
-import json
+import importlib
 import shutil
 import sys
 from pathlib import Path
@@ -26,19 +26,7 @@ from parts import creator  # noqa: E402
 from arcpix.preview import matrix  # noqa: E402
 from parts.rig import BUILDS, DIRECTIONS, FRAME_W, FRAME_H, ANCHOR, ANIM_ORDER, ANIMS  # noqa: E402
 
-PACK = HERE.parents[1] / "content" / "tactics" / "base"
-MOCKUPS = HERE.parents[1] / "docs" / "superpowers" / "mockups" / "tactics" / "assets"
-PREVIEWS = HERE / "previews"
-
-
-def save(img: Image.Image, path: Path) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    img.save(path, optimize=True)
-
-
-def write_json(obj, path: Path) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(obj, indent=2) + "\n")
+from arcpix.out import PACK, PREVIEWS, MOCKUPS, save, write_json  # noqa: E402
 
 
 # --------------------------------------------------------------------------------------------------- characters
@@ -374,6 +362,17 @@ def build_anim_previews() -> None:
 
 SETS = {"palettes": build_palettes, "characters": build_characters, "anims": build_anim_previews,
         "terrain": build_terrain}
+
+# Sets that live in their own module: parts/<name>.py with a build() function. Each writes under
+# content/tactics/base/<name>/ and previews/, using arcpix.out.
+for _name in ("props", "portraits", "ui", "icons", "fx"):
+    try:
+        _mod = importlib.import_module(f"parts.{_name}")
+    except ModuleNotFoundError as e:
+        if e.name != f"parts.{_name}":
+            raise
+        continue
+    SETS[_name] = _mod.build
 
 if __name__ == "__main__":
     for name in sys.argv[1:] or list(SETS):
