@@ -212,7 +212,7 @@ public sealed class SaveBlock : EffectBlock<SaveEffect>
     {
         var target = ctx.TargetUnit(Key);
         var cover = def.Stat == Stat.Dex ? Modifiers.CoverAgainst(ctx.W, Origin(ctx), target.Pos, ranged: false) : 0;
-        var roll = Rolls.Save(ctx.W, target.Id, def.Stat, def.Dc ?? ctx.SaveDc, ctx.Rules, cover, ctx.Source);
+        var roll = Rolls.Save(ctx.W, target.Id, def.Stat, def.Dc ?? (def.DcStat is { } dcStat ? ctx.DcFor(dcStat) : ctx.SaveDc), ctx.Rules, cover, ctx.Source);
         ctx.Last = roll;
 
         if (!roll.Success)

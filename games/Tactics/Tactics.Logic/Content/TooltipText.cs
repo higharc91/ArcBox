@@ -126,6 +126,69 @@ internal static class TooltipText
         return clauses;
     }
 
+    /// <summary>
+    /// A modifier set as what the unit that has them does or gets, for a sentence that starts with it: <c>"gets +2 AC and
+    /// +1 Move"</c>, <c>"can't act"</c>, <c>"is invisible"</c>, <c>"resists fire"</c>, joined as a list (<c>"a, b and c"</c>).
+    /// <c>"gets no modifiers"</c> when there are none.
+    /// </summary>
+    public static string Predicate(StaticMods mods)
+    {
+        List<string> numbers = [];
+        if (mods.Ac != 0)
+            numbers.Add($"{Signed(mods.Ac)} AC");
+        if (mods.Attack != 0)
+            numbers.Add($"{Signed(mods.Attack)} to attack rolls");
+        if (mods.Damage != 0)
+            numbers.Add($"{Signed(mods.Damage)} weapon damage");
+        if (mods.Move != 0)
+            numbers.Add($"{Signed(mods.Move)} Move");
+        if (mods.Initiative != 0)
+            numbers.Add($"{Signed(mods.Initiative)} Initiative");
+        foreach (var (stat, bonus) in mods.Saves ?? ImmutableSortedDictionary<Stat, int>.Empty)
+            if (bonus != 0)
+                numbers.Add($"{Signed(bonus)} {stat} saves");
+        if (mods.ExtraActions != 0)
+            numbers.Add($"{Signed(mods.ExtraActions)} {(Math.Abs(mods.ExtraActions) == 1 ? "action" : "actions")} each turn");
+        if (mods.MaxHp != 0)
+            numbers.Add($"{Signed(mods.MaxHp)} max HP");
+
+        List<string> parts = [];
+        if (numbers.Count > 0)
+            parts.Add("gets " + string.Join(" and ", numbers));
+        if (mods.Incapacitated)
+            parts.Add("can't act");
+        if (mods.CantMove)
+            parts.Add("can't move");
+        if (mods.OwnAttacks != Edge.None)
+            parts.Add($"has {EdgeWord(mods.OwnAttacks)} on its attack rolls");
+        if (mods.AttackedMelee != Edge.None && mods.AttackedMelee == mods.AttackedRanged)
+            parts.Add($"is attacked with {EdgeWord(mods.AttackedMelee)}");
+        else
+        {
+            if (mods.AttackedMelee != Edge.None)
+                parts.Add($"is attacked with {EdgeWord(mods.AttackedMelee)} in melee");
+            if (mods.AttackedRanged != Edge.None)
+                parts.Add($"is attacked with {EdgeWord(mods.AttackedRanged)} at range");
+        }
+        if (mods.AutoFailSaves is { Count: > 0 } fails)
+            parts.Add($"automatically fails {string.Join(" and ", fails)} saves");
+        if (mods.CritWhenAdjacent)
+            parts.Add("takes critical hits from adjacent attackers");
+        if (mods.Invisible)
+            parts.Add("is invisible");
+        if (mods.Resist is { Count: > 0 } resist)
+            parts.Add($"resists {string.Join(", ", resist)}");
+        if (mods.Immune is { Count: > 0 } immune)
+            parts.Add($"is immune to {string.Join(", ", immune)}");
+
+        return parts.Count switch
+        {
+            0 => "gets no modifiers",
+            1 => parts[0],
+            _ => $"{string.Join(", ", parts.Take(parts.Count - 1))} and {parts[^1]}",
+        };
+    }
+
     private static string Signed(int n) => n > 0 ? $"+{n}" : $"-{-n}";
 
     private static string EdgeWord(Edge edge) => edge == Edge.Advantage ? "advantage" : "disadvantage";

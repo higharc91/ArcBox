@@ -132,6 +132,42 @@ public sealed class CombatBlockTests
     }
 
     [Fact]
+    public void ExtraAction_move_gives_the_units_move_again()
+    {
+        var battle = Build();
+        var (state, _) = battle.Start();
+        state = state.Change("cleric", u => u with { Economy = u.Economy with { MoveLeft = 1 } });
+
+        var (after, events) = battle.Run(state, "cleric", "cleric", null, new ExtraActionEffect("move"));
+        Assert.Empty(events);
+        Assert.Equal(1 + TestSheets.Cleric.Move, after.Units[U("cleric")].Economy.MoveLeft);
+
+        // A unit that can't move gains nothing.
+        state = state.Change("kara", u => u with { Economy = u.Economy with { MoveLeft = 0 } });
+        (after, _) = battle.Run(state, "cleric", "kara", null, new StatModEffect(new StaticMods(CantMove: true), 1),
+            new ExtraActionEffect("move"));
+        Assert.Equal(0, after.Units[U("kara")].Economy.MoveLeft);
+    }
+
+    [Fact]
+    public void GrantResource_primary_names_the_first_resource_and_overMax_passes_the_pool()
+    {
+        var battle = Build();
+        var (state, _) = battle.Start();
+        Assert.Equal(1, state.Units[U("cleric")].Resources["devotion"]);   // devotion sorts before mana
+
+        // Capped at the sheet's pool unless overMax.
+        var (after, _) = battle.Run(state, "cleric", "cleric", null, new GrantResourceEffect(GrantResourceEffect.Primary, 1));
+        Assert.Equal((1, 4), (after.Units[U("cleric")].Resources["devotion"], after.Units[U("cleric")].Resources["mana"]));
+        (after, _) = battle.Run(state, "cleric", "cleric", null, new GrantResourceEffect(GrantResourceEffect.Primary, 1, OverMax: true));
+        Assert.Equal((2, 4), (after.Units[U("cleric")].Resources["devotion"], after.Units[U("cleric")].Resources["mana"]));
+
+        // A unit with no resources gains nothing.
+        (after, _) = battle.Run(state, "cleric", "gob", null, new GrantResourceEffect(GrantResourceEffect.Primary, 1, OverMax: true));
+        Assert.Empty(after.Units[U("gob")].Resources);
+    }
+
+    [Fact]
     public void StatMod_adds_timed_modifiers()
     {
         var battle = Build();

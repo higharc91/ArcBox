@@ -1,0 +1,29 @@
+{
+  "abilities": [
+    { "id": "goblin.nimble_escape", "name": "Nimble Escape", "tier": 0, "cost": { "bonus": 1 },
+      "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "self" } },
+      "effects": [ { "apply": "disengaged", "rounds": 0 } ],
+      "presentation": { "anim": "characters.dodge" },
+      "ai": { "tags": ["escape"] } },
+    { "id": "goblin_boss.rally", "name": "Rally the Gang", "tier": 0, "cost": { "bonus": 1, "uses": 1 },
+      "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "burst", "size": 3, "includeSelf": true } },
+      "effects": [ { "statMod": { "mods": { "attack": 1 }, "rounds": 1 } } ],
+      "presentation": { "anim": "characters.wave", "fx": "fx.aura.fire" },
+      "ai": { "tags": ["buff", "area"] } },
+    { "id": "spider.web", "name": "Web", "tier": 0, "cost": { "action": 1, "uses": 2 },
+      "target": { "kind": "enemy", "range": 6, "los": true, "area": { "shape": "single" } },
+      "effects": [ { "save": { "stat": "dex", "dc": 13 }, "onFail": [ { "apply": "restrained", "untilSave": true } ] } ],
+      "presentation": { "anim": "beasts.special", "fx": "fx.poof.white" },
+      "ai": { "tags": ["control", "single"] } }
+  ],
+  "passives": [
+    { "id": "hobgoblin.martial_advantage", "hook": "onAttackHit", "oncePerTurn": true, "when": { "flanked": true },
+      "effects": [ { "damage": { "dice": "2d6" } } ] },
+    { "id": "wolf.knockdown", "hook": "onAttackHit", "oncePerTurn": true, "when": { "weapon": ["melee"] },
+      "effects": [ { "save": { "stat": "str", "dc": 11 }, "onFail": [ { "apply": "prone" } ] } ] },
+    { "id": "dire_wolf.knockdown", "hook": "onAttackHit", "oncePerTurn": true, "when": { "weapon": ["melee"] },
+      "effects": [ { "save": { "stat": "str", "dc": 13 }, "onFail": [ { "apply": "prone" } ] } ] },
+    { "id": "spider.venom", "hook": "onAttackHit", "when": { "weapon": ["melee"] },
+      "effects": [ { "damage": { "dice": "2d8", "type": "poison" } } ] }
+  ]
+}

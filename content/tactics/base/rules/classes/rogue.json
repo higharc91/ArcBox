@@ -1,0 +1,42 @@
+{
+  "id": "rogue", "name": "Rogue", "role": "striker", "hitDie": 8, "saves": ["dex", "int"],
+  "armorProf": ["light"], "weaponProf": ["simple", "martial"],
+  "skillChoices": { "count": 4, "from": ["stealth", "acrobatics", "perception", "sleight_of_hand", "athletics", "deception", "insight",
+                                         "intimidation", "investigation", "persuasion"] },
+  "startingKit": { "weapon": "shortsword", "armor": "leather", "shield": false,
+                   "bag": [ { "item": "potion_of_healing", "count": 1 } ] },
+  "resources": { "edge": { "1": 2, "6": 3, "10": 4 } },
+  "features": {
+    "1": [ { "passive": "rogue.sneak_attack" } ],
+    "2": [ { "ability": "rogue.cunning_dash" }, { "ability": "rogue.cunning_disengage" }, { "ability": "rogue.cunning_hide" } ],
+    "3": [ { "ability": "rogue.steady_aim" } ],
+    "4": [ { "choose": 1, "from": ["rogue.trip", "rogue.poison_strike", "rogue.withdraw"] } ],
+    "5": [ { "ability": "rogue.uncanny_dodge" } ],
+    "6": [ { "choose": 1, "from": ["rogue.trip", "rogue.poison_strike", "rogue.withdraw"] } ],
+    "7": [ { "passive": "rogue.evasion" } ],
+    "8": [ { "choose": 1, "from": ["rogue.daze", "rogue.knock_out", "rogue.obscure"] } ],
+    "9": [ { "passive": "rogue.slippery_mind" } ],
+    "10": [ { "choose": 1, "from": ["rogue.trip", "rogue.poison_strike", "rogue.withdraw", "rogue.daze", "rogue.knock_out", "rogue.obscure"] } ]
+  },
+  "subclasses": [
+    { "id": "rogue.shadow", "name": "Shadow",
+      "features": {
+        "3": [ { "ability": "shadow.shadowstep" } ],
+        "6": [ { "ability": "shadow.cloak_of_shadows" } ],
+        "10": [ { "passive": "shadow.death_from_the_shadows" } ]
+      } }
+  ],
+  "defaultPicks": {
+    "1": [], "2": [], "3": [],
+    "4": ["rogue.trip"],
+    "5": ["rogue.trip"],
+    "6": ["rogue.trip", "rogue.poison_strike"],
+    "7": ["rogue.trip", "rogue.poison_strike"],
+    "8": ["rogue.trip", "rogue.poison_strike", "rogue.obscure"],
+    "9": ["rogue.trip", "rogue.poison_strike", "rogue.obscure"],
+    "10": ["rogue.trip", "rogue.poison_strike", "rogue.obscure", "rogue.withdraw"]
+  },
+  "aiTags": { "tags": ["striker", "melee", "sneak"], "priority": ["dex", "con", "wis", "int", "cha", "str"] },
+  "castingStat": null,
+  "jump": 3
+}

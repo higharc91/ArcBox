@@ -49,6 +49,21 @@ public sealed class HookTests
     }
 
     [Fact]
+    public void Empty_lists_in_a_when_count_as_absent()
+    {
+        // Content is read with absent lists filled in as empty ones: an empty "all", "any" or "weapon" tests nothing.
+        var battle = TestBattle.On(Field)
+            .Party("kara", TestSheets.Fighter, T(2, 1))
+            .Enemy("gob", Goblin, T(3, 1));
+        var (state, _) = battle.Start();
+        var when = new WhenDef(All: [], Any: [], Weapon: [], TargetTag: "goblinoid");
+
+        var (_, events) = battle.Run(state, "kara", "gob", null, new IfEffect(when, [new DamageEffect(TestAbilities.Flat("3"), "fire", [])], []));
+
+        Assert.Equal<BattleEvent>([new Damaged(U("gob"), 3, "fire", 27)], events);
+    }
+
+    [Fact]
     public void Sneak_attack_once_per_turn_with_advantage_or_flank()
     {
         // A rogue with two attacks a turn (shortsword, finesse: DEX +3, +2 proficiency) acts first (initiative 13); the

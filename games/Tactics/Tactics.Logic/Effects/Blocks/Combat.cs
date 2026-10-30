@@ -4,7 +4,8 @@ namespace Tactics.Logic;
 
 /// <summary>
 /// <c>"grantResource"</c>: adds the amount to the target's resource (a negative amount drains it), never below 0 and, when
-/// its sheet has a maximum for it, never above that.
+/// its sheet has a maximum for it, never above that unless the effect is <c>overMax</c>. <c>"primary"</c> names the first
+/// resource on the target's sheet (see <see cref="GrantResourceEffect.Primary"/>).
 /// </summary>
 public sealed class GrantResourceBlock : EffectBlock<GrantResourceEffect>
 {
@@ -13,36 +14,51 @@ public sealed class GrantResourceBlock : EffectBlock<GrantResourceEffect>
 
     /// <inheritdoc />
     protected override string? Describe(GrantResourceEffect def, int level, RulesPack rules)
-        => def.Amount >= 0
-            ? $"target gains {def.Amount} {TooltipText.Humanize(def.Resource)}"
-            : $"target loses {-def.Amount} {TooltipText.Humanize(def.Resource)}";
+    {
+        var resource = def.Resource == GrantResourceEffect.Primary ? "of its first resource" : TooltipText.Humanize(def.Resource);
+        var text = def.Amount >= 0 ? $"target gains {def.Amount} {resource}" : $"target loses {-def.Amount} {resource}";
+        return def.OverMax && def.Amount > 0 ? text + ", even above its maximum" : text;
+    }
 
     /// <inheritdoc />
     protected override void Run(GrantResourceEffect def, EffectContext ctx)
     {
         var target = ctx.TargetUnit(Key);
-        var amount = Math.Max(0, target.Resources.GetValueOrDefault(def.Resource) + def.Amount);
-        if (target.Sheet.Resources.TryGetValue(def.Resource, out var max))
+        var resource = def.Resource;
+        if (resource == GrantResourceEffect.Primary)
+        {
+            if (target.Sheet.Resources.IsEmpty)
+                return;
+            resource = target.Sheet.Resources.Keys.Min(StringComparer.Ordinal)!;
+        }
+        var amount = Math.Max(0, target.Resources.GetValueOrDefault(resource) + def.Amount);
+        if (!def.OverMax && target.Sheet.Resources.TryGetValue(resource, out var max))
             amount = Math.Min(amount, max);
-        ctx.W.Set(target with { Resources = target.Resources.SetItem(def.Resource, amount) });
+        ctx.W.Set(target with { Resources = target.Resources.SetItem(resource, amount) });
     }
 }
 
 /// <summary>
 /// <c>"extraAction"</c>: <c>"action"</c> gives the target one more action this turn (<see cref="TurnEconomy.ExtraActions"/>);
-/// <c>"bonus"</c> gives its bonus action back. Throws on any other kind.
+/// <c>"bonus"</c> gives its bonus action back; <c>"move"</c> adds the target's Move (with its modifiers) to what it has left,
+/// as the Dash action does. Throws on any other kind.
 /// </summary>
 public sealed class ExtraActionBlock : EffectBlock<ExtraActionEffect>
 {
     /// <summary>The kinds content may use.</summary>
-    public static readonly ImmutableArray<string> Kinds = ["action", "bonus"];
+    public static readonly ImmutableArray<string> Kinds = ["action", "bonus", "move"];
 
     /// <inheritdoc />
     public override string Key => "extraAction";
 
     /// <inheritdoc />
     protected override string? Describe(ExtraActionEffect def, int level, RulesPack rules)
-        => def.Kind == "bonus" ? "target gets its bonus action back" : "target gains an extra action this turn";
+        => def.Kind switch
+        {
+            "bonus" => "target gets its bonus action back",
+            "move" => "target gains its Move again",
+            _ => "target gains an extra action this turn",
+        };
 
     /// <inheritdoc />
     protected override void Run(ExtraActionEffect def, EffectContext ctx)
@@ -52,7 +68,11 @@ public sealed class ExtraActionBlock : EffectBlock<ExtraActionEffect>
         {
             "action" => target.Economy with { ExtraActions = target.Economy.ExtraActions + 1 },
             "bonus" => target.Economy with { Bonus = true },
-            _ => throw new InvalidOperationException($"'extraAction' kind must be \"action\" or \"bonus\", not '{def.Kind}'."),
+            "move" => target.Economy with
+            {
+                MoveLeft = target.Economy.MoveLeft + Modifiers.Move(target.Sheet, Modifiers.For(ctx.W, target.Id, ctx.Rules)),
+            },
+            _ => throw new InvalidOperationException($"'extraAction' kind must be \"action\", \"bonus\" or \"move\", not '{def.Kind}'."),
         };
         ctx.W.Set(target with { Economy = economy });
     }
@@ -88,7 +108,7 @@ public sealed class StatModBlock : EffectBlock<StatModEffect>
 
     /// <inheritdoc />
     protected override string? Describe(StatModEffect def, int level, RulesPack rules)
-        => $"target gets {TooltipText.Mods(def.Mods, rules)} {TooltipText.ForRounds(def.Rounds)}";
+        => $"target {TooltipText.Predicate(def.Mods)} {TooltipText.ForRounds(def.Rounds)}";
 
     /// <inheritdoc />
     protected override void Run(StatModEffect def, EffectContext ctx)

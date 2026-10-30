@@ -21,42 +21,61 @@ public static class Replay
         0. 0. 0. 0. 0. 0. 0.
         """;
 
+    /// <summary>A replay's starting point: the rules it runs under and how it starts from a seed.</summary>
+    public sealed record Start(RulesPack Rules, Func<ulong, Resolution> Begin);
+
     /// <summary>
     /// The battle a replay's <see cref="ReplayFile.Setup"/> names:
     /// <list type="bullet">
     /// <item><c>skirmish-basic</c>: a test fighter (kara) and rogue (vex), both player-controlled, against three goblins
     /// (g1, g2, g3) on a flat 7 × 4 field, with the test conditions (<see cref="TestConditions.All"/>). Turn order: vex,
     /// g1, g2, g3, kara.</item>
+    /// <item><c>river-crossing</c>: the base pack's <c>river_crossing</c> encounter (Normal) with a level-1 party of default
+    /// human characters, all player-controlled: fighter, cleric, rogue and wizard (<see cref="BasePackTests.Party"/>).</item>
     /// </list>
     /// </summary>
-    public static TestBattle Preset(string name) => name switch
+    public static Start Preset(string name)
     {
-        "skirmish-basic" => TestBattle.On(SkirmishMap)
-            .Party("kara", TestSheets.Fighter, new Tile(1, 1))
-            .Party("vex", TestSheets.Rogue, new Tile(1, 2))
-            .Enemy("g1", TestSheets.Goblin, new Tile(5, 1))
-            .Enemy("g2", TestSheets.Goblin, new Tile(5, 2))
-            .Enemy("g3", TestSheets.Goblin, new Tile(6, 3))
-            .WithConditions([.. TestConditions.All]),
-        _ => throw new ArgumentException($"There is no replay preset '{name}'.", nameof(name)),
-    };
+        switch (name)
+        {
+            case "skirmish-basic":
+                var battle = TestBattle.On(SkirmishMap)
+                    .Party("kara", TestSheets.Fighter, new Tile(1, 1))
+                    .Party("vex", TestSheets.Rogue, new Tile(1, 2))
+                    .Enemy("g1", TestSheets.Goblin, new Tile(5, 1))
+                    .Enemy("g2", TestSheets.Goblin, new Tile(5, 2))
+                    .Enemy("g3", TestSheets.Goblin, new Tile(6, 3))
+                    .WithConditions([.. TestConditions.All]);
+                return new Start(battle.Rules, seed =>
+                {
+                    var (state, events) = battle.Start(seed);
+                    return new Resolution(state, events, null);
+                });
+            case "river-crossing":
+                var rules = BasePackTests.Rules;
+                var setup = Encounters.Setup("river_crossing", BasePackTests.Party(4, rules), Difficulty.Normal, rules);
+                return new Start(rules, seed => Battle.Start(setup, rules, seed));
+            default:
+                throw new ArgumentException($"There is no replay preset '{name}'.", nameof(name));
+        }
+    }
 
     /// <summary>
-    /// Starts the replay's battle and applies its commands in order, returning the final state and every event (the
-    /// start's included). With <paramref name="roundTripEachStep"/> the state goes through its JSON before each command,
-    /// as a saved and resumed battle would, and must come back byte-identical. Throws when a command is refused.
+    /// Runs <paramref name="file"/> from its preset and seed, applying each command (each must be accepted), with every
+    /// state sent through JSON first when <paramref name="roundTripEachStep"/>. Returns the final state and every event.
     /// </summary>
     public static (BattleState Final, ImmutableArray<BattleEvent> Events) Run(ReplayFile file, bool roundTripEachStep)
     {
-        var battle = Preset(file.Setup);
-        var (state, started) = battle.Start(file.Seed);
-        var events = started.ToBuilder();
+        var preset = Preset(file.Setup);
+        var start = preset.Begin(file.Seed);
+        var state = start.State;
+        var events = start.Events.ToBuilder();
         for (var i = 0; i < file.Commands.Length; i++)
         {
             if (roundTripEachStep)
                 state = RoundTrip(state);
             var command = file.Commands[i];
-            var resolution = Battle.Apply(state, command, battle.Rules);
+            var resolution = Battle.Apply(state, command, preset.Rules);
             if (resolution.Rejected is { } refused)
                 throw new InvalidOperationException(
                     $"Replay '{file.Name}' command {i} {JsonSerializer.Serialize(command, ArcJson.Options)} was refused: {refused.Reason}");

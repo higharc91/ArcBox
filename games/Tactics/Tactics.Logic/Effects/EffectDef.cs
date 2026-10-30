@@ -31,12 +31,12 @@ public sealed record AttackEffect(string Kind, Stat? Stat, ImmutableArray<Effect
     ImmutableArray<EffectDef> OnMiss, ImmutableArray<EffectDef> OnCrit, int Bonus = 0) : EffectDef;
 
 /// <summary>
-/// <c>"save"</c>: the target rolls a saving throw against <see cref="Dc"/>, or 8 + proficiency + the caster's casting
-/// modifier. A failure runs <see cref="OnFail"/>; a success runs <see cref="OnSuccess"/>, after the damage blocks of
+/// <c>"save"</c>: the target rolls a saving throw against <see cref="Dc"/>, or 8 + proficiency + the modifier of
+/// <see cref="DcStat"/> (a shove's STR, a dragonborn's breath's CON), or of the caster's casting stat. A failure runs <see cref="OnFail"/>; a success runs <see cref="OnSuccess"/>, after the damage blocks of
 /// <see cref="OnFail"/> at half (rounded down) when <see cref="HalfOnSuccess"/> is set.
 /// </summary>
 public sealed record SaveEffect(Stat Stat, int? Dc, ImmutableArray<EffectDef> OnFail,
-    ImmutableArray<EffectDef> OnSuccess, bool HalfOnSuccess = false) : EffectDef;
+    ImmutableArray<EffectDef> OnSuccess, bool HalfOnSuccess = false, Stat? DcStat = null) : EffectDef;
 
 /// <summary>
 /// <c>"damage"</c>: <see cref="Dice"/> at the user's level plus the named <see cref="Bonus"/> addends, of
@@ -196,11 +196,20 @@ public sealed record TransformEffect(string Hook, JsonElement Args) : EffectDef
 
 /// <summary>
 /// <c>"grantResource"</c>: the target gains <see cref="Amount"/> of <see cref="Resource"/> (a negative amount drains it),
-/// never below 0 nor above its sheet's maximum when the sheet has one.
+/// never below 0 nor, unless <see cref="OverMax"/>, above its sheet's maximum when the sheet has one. The resource
+/// <see cref="Primary"/> is the first (ordinal) resource on the target's sheet, for content that can't know the class (a
+/// race's passive); a target with no resources gains nothing.
 /// </summary>
-public sealed record GrantResourceEffect(string Resource, int Amount) : EffectDef;
+public sealed record GrantResourceEffect(string Resource, int Amount, bool OverMax = false) : EffectDef
+{
+    /// <summary>The resource name that means the first resource on the target's sheet.</summary>
+    public const string Primary = "primary";
+}
 
-/// <summary><c>"extraAction"</c>: the target gains an extra action this turn (<see cref="Kind"/> <c>"action"</c>) or gets its bonus action back (<c>"bonus"</c>).</summary>
+/// <summary>
+/// <c>"extraAction"</c>: the target gains an extra action this turn (<see cref="Kind"/> <c>"action"</c>), gets its bonus
+/// action back (<c>"bonus"</c>) or gains its Move again (<c>"move"</c>, the Dash action).
+/// </summary>
 public sealed record ExtraActionEffect(string Kind) : EffectDef;
 
 /// <summary><c>"refreshReaction"</c>: the target gets its Reaction back.</summary>

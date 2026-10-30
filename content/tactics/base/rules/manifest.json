@@ -2,5 +2,30 @@
   "id": "base",
   "rulesVersion": 1,
   "requires": [],
-  "files": []
+  "files": [
+    "conditions.json",
+    "races.json",
+    "backgrounds.json",
+    "injuries.json",
+    "weapons.json",
+    "armor.json",
+    "xp.json",
+    "items.json",
+    "abilities/common.json",
+    "abilities/races.json",
+    "abilities/monsters.json",
+    "abilities/fighter.json",
+    "abilities/cleric.json",
+    "abilities/rogue.json",
+    "abilities/wizard.json",
+    "classes/fighter.json",
+    "classes/cleric.json",
+    "classes/rogue.json",
+    "classes/wizard.json",
+    "monsters/goblinoids.json",
+    "monsters/undead.json",
+    "monsters/beasts-1.json",
+    "maps/river_crossing.json",
+    "encounters/river_crossing.json"
+  ]
 }

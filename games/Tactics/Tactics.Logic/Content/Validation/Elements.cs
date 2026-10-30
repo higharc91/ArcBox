@@ -145,13 +145,23 @@ internal sealed partial class Validation
     /// <summary>A suit of armour.</summary>
     public ArmorDef? Armor(JsonElement e, string file, string ptr) => Guarded(file, ptr, () => Deserialize<ArmorDef>(e, file, ptr));
 
-    /// <summary>An injury: a weight of at least 1.</summary>
+    /// <summary>An injury: a weight of at least 1, its hook name and its effects, which need a hook to run on.</summary>
     public InjuryDef? Injury(JsonElement e, string file, string ptr)
         => Guarded(file, ptr, () =>
         {
+            if (e.ValueKind == JsonValueKind.Object && e.TryGetProperty("hook", out var hook)
+                && hook.ValueKind == JsonValueKind.String && !HookNames.Contains(hook.GetString()!))
+            {
+                Error(file, Pointer.Append(ptr, "hook"), $"Unknown hook '{hook.GetString()}'.");
+                return null;
+            }
+            if (!EffectsIn(e, "effects", file, ptr, inSave: false))
+                return null;
             var def = Deserialize<InjuryDef>(e, file, ptr);
             if (def is { Weight: < 1 })
                 Error(file, Pointer.Append(ptr, "weight"), "The weight must be at least 1.");
+            if (def is { Hook: null, Effects.IsEmpty: false })
+                Error(file, Pointer.Append(ptr, "effects"), "An injury's effects need a \"hook\" to run on.");
             return def;
         });
 

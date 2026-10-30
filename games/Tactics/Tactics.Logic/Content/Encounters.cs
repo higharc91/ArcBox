@@ -16,9 +16,10 @@ public static class Encounters
     /// <item>The party takes the map's <c>party_spawn</c> tiles in order, each under its <see cref="PartyMember.Id"/>, with the
     /// sheet <see cref="SheetBuilder.ForCharacter"/> builds and the bag of its record.</item>
     /// <item>Enemies follow in the encounter's order, then its NPCs (allies on the party's side, protected). A unit on a tile
-    /// takes that tile; one on a zone takes the zone's first free tiles in zone order. Its id is <c>"&lt;monster&gt;.&lt;n&gt;"</c>,
-    /// numbering each monster from 1 in placement order across enemies and NPCs, unless the placement names an
-    /// <see cref="EncounterUnitDef.Id"/>. Its sheet is <see cref="SheetBuilder.ForMonster"/> at the placement's level, with
+    /// takes that tile; one on a zone takes the zone's first free tiles in zone order, never a tile a fixed (<c>at</c>) unit
+    /// of the encounter claims, wherever that unit is listed, so fixed units are placed before zones fill. Its id is
+    /// <c>"&lt;monster&gt;.&lt;n&gt;"</c>, numbering each monster from 1 in placement order across enemies and NPCs, unless the
+    /// placement names an <see cref="EncounterUnitDef.Id"/>. Its sheet is <see cref="SheetBuilder.ForMonster"/> at the placement's level, with
     /// the placement's AI profile (else the monster's), the sprite's variant if it names one (the third part of the key,
     /// <c>"beasts.wolf.dire"</c>) and its tag added to the sheet's tags, where objectives and triggers look for it. Enemies
     /// and NPCs are AI-controlled by that profile.</item>
@@ -47,7 +48,7 @@ public static class Encounters
             problems.Add("/map", $"The map '{map.Id}' has no \"{PartySpawn}\" zone.");
         problems.ThrowIfAny();
 
-        var placer = new Placer(map!, problems);
+        var placer = new Placer(map!, problems, [.. def.Enemies.Concat(def.Npcs).Select(u => u.At).OfType<Tile>()]);
         var spawn = map!.Zones[PartySpawn];
         for (var i = 0; i < party.Length; i++)
         {
@@ -107,8 +108,11 @@ public static class Encounters
     private static string WithVariant(string sprite, string variant)
         => string.Join('.', sprite.Split('.').Take(2).Append(variant));
 
-    /// <summary>Where units go: the walkable tiles of the map that nobody holds yet, and the ids already in use.</summary>
-    private sealed class Placer(BattleMap map, ContentProblems problems)
+    /// <summary>
+    /// Where units go: the walkable tiles of the map that nobody holds yet, the ids already in use, and the tiles the
+    /// encounter's fixed units claim (kept out of zone fills).
+    /// </summary>
+    private sealed class Placer(BattleMap map, ContentProblems problems, ImmutableArray<Tile> fixedTiles)
     {
         private readonly Terrain _terrain = new(map, ImmutableSortedDictionary<Tile, int>.Empty, ImmutableSortedSet<Tile>.Empty);
         private readonly Dictionary<Tile, UnitId> _taken = [];
@@ -138,7 +142,8 @@ public static class Encounters
 
         /// <summary>
         /// The tiles for the units <paramref name="unit"/> places: its <c>at</c> tile once per unit (a second unit finds it
-        /// taken), or the first free tiles of its zone; <c>default</c> (and a problem) when the zone has too few.
+        /// taken), or the first free tiles of its zone that no fixed unit claims; <c>default</c> (and a problem) when the zone
+        /// has too few.
         /// </summary>
         public ImmutableArray<Tile> TilesFor(EncounterUnitDef unit, string at)
         {
@@ -149,7 +154,8 @@ public static class Encounters
                 problems.Add(Pointer.Append(at, "zone"), $"The map '{map.Id}' has no zone '{unit.Zone}'.");
                 return default;
             }
-            var free = zone.Where(t => _terrain.Walkable(t) && !_taken.ContainsKey(t)).Take(unit.Count).ToImmutableArray();
+            var free = zone.Where(t => _terrain.Walkable(t) && !_taken.ContainsKey(t) && !fixedTiles.Contains(t))
+                .Take(unit.Count).ToImmutableArray();
             if (free.Length >= unit.Count)
                 return free;
             problems.Add(Pointer.Append(at, "zone"), $"The zone '{unit.Zone}' has {free.Length} free tiles for {unit.Count} units.");

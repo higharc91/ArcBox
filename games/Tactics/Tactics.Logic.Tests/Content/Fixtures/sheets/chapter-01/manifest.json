@@ -11,6 +11,7 @@
     "encounters/named_units.json",
     "encounters/on_crate.json",
     "encounters/on_party.json",
-    "encounters/zone_too_small.json"
+    "encounters/zone_too_small.json",
+    "encounters/fixed_in_zone.json"
   ]
 }

@@ -201,6 +201,33 @@ public sealed class TooltipTests
     }
 
     [Fact]
+    public void StatMod_reads_as_a_sentence_for_every_kind_of_modifier()
+    {
+        string Phrase(StaticMods mods, int rounds = 1) => Tooltips.For(Enemy(4, new StatModEffect(mods, rounds)), 1, Rules)[9..];
+
+        Assert.Equal("target can't act for 1 round", Phrase(new StaticMods(Incapacitated: true)));
+        Assert.Equal("target resists fire for 10 rounds", Phrase(new StaticMods(Resist: Ordinal.Set("fire")), 10));
+        Assert.Equal("target is invisible for 10 rounds", Phrase(new StaticMods(Invisible: true), 10));
+        Assert.Equal("target gets +2 AC and -1 Move and can't move until the end of your turn",
+            Phrase(new StaticMods(Ac: 2, Move: -1, CantMove: true), 0));
+        Assert.Equal("target has advantage on its attack rolls and is attacked with disadvantage for 1 round",
+            Phrase(new StaticMods(OwnAttacks: Edge.Advantage, AttackedMelee: Edge.Disadvantage, AttackedRanged: Edge.Disadvantage)));
+        Assert.Equal("target is attacked with advantage in melee, automatically fails Str saves and is immune to poison for 1 round",
+            Phrase(new StaticMods(AttackedMelee: Edge.Advantage, Immune: Ordinal.Set("poison"), AutoFailSaves: [Stat.Str])));
+        Assert.Equal("target takes critical hits from adjacent attackers for 1 round", Phrase(new StaticMods(CritWhenAdjacent: true)));
+        Assert.Equal("target gets no modifiers for 1 round", Phrase(StaticMods.None));
+    }
+
+    [Fact]
+    public void New_block_options_have_phrases()
+    {
+        Assert.Equal("Self: target gains its Move again", Tooltips.For(Ability(TargetKind.Self, 0, new AreaDef(AreaShape.Self), null,
+            new ExtraActionEffect("move")), 1, Rules));
+        Assert.Equal("Self: target gains 1 of its first resource, even above its maximum", Tooltips.For(Ability(TargetKind.Self, 0,
+            new AreaDef(AreaShape.Self), null, new GrantResourceEffect(GrantResourceEffect.Primary, 1, OverMax: true)), 1, Rules));
+    }
+
+    [Fact]
     public void Zone_describes_its_area_duration_and_passives()
     {
         var burn = new PassiveDef("zone.burn", HookKind.OnTurnStart, null, [Dmg("1d6", "fire")], null, Target: PassiveTarget.Self);

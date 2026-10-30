@@ -76,6 +76,21 @@ public sealed class GoldenTests
         Assert.Contains(events, e => e is Revived);
     }
 
+    [Fact]
+    public void River_crossing_plays_the_base_pack_content()
+    {
+        var replay = Replay.Load(Path.Combine(Folder(), "river-crossing" + Suffix));
+        var (final, events) = Replay.Run(replay, roundTripEachStep: false);
+
+        Assert.Equal(3, final.Round);   // two full rounds, as written
+        Assert.Contains(events, e => e is ConditionApplied { Condition.Value: "unconscious" });   // Sleep
+        Assert.Contains(events, e => e is TurnSkipped);
+        Assert.Contains(events, e => e is ConditionApplied { Condition.Value: "statMod.cleric.bless" });
+        Assert.Contains(events, e => e is Died);
+        Assert.Contains(events, e => e is Downed);
+        Assert.Contains(events, e => e is PassiveTriggered { Passive: "human.resourceful" });
+    }
+
     private static string FirstDifference(string expected, string actual)
     {
         var e = expected.Split('\n');

@@ -149,7 +149,7 @@ public static class Hooks
 
     /// <summary>
     /// Whether <paramref name="when"/> holds for <paramref name="args"/> (see <see cref="WhenDef"/>): every key present must
-    /// hold; <c>all</c> needs every entry, <c>any</c> at least one, <c>not</c> its entry to fail.
+    /// hold; <c>all</c> needs every entry, <c>any</c> at least one, <c>not</c> its entry to fail. An empty list tests nothing.
     /// </summary>
     public static bool Holds(WhenDef when, BattleWriter w, HookArgs args, RulesPack rules)
     {
@@ -157,13 +157,14 @@ public static class Hooks
         var owner = state.Units[args.Owner];
         var subject = state.Units[args.Other ?? args.Owner];
 
-        if (!when.All.IsDefault && !when.All.All(x => Holds(x, w, args, rules)))
+        // An empty list is absent (content is read with absent lists filled in as empty ones).
+        if (!when.All.IsDefaultOrEmpty && !when.All.All(x => Holds(x, w, args, rules)))
             return false;
-        if (!when.Any.IsDefault && !when.Any.Any(x => Holds(x, w, args, rules)))
+        if (!when.Any.IsDefaultOrEmpty && !when.Any.Any(x => Holds(x, w, args, rules)))
             return false;
         if (when.Not is { } not && Holds(not, w, args, rules))
             return false;
-        if (!when.Weapon.IsDefault && !(args.AttackKind == "weapon" && when.Weapon.Any(p => WeaponIs(owner.Sheet.Weapon, p))))
+        if (!when.Weapon.IsDefaultOrEmpty && !(args.AttackKind == "weapon" && when.Weapon.Any(p => WeaponIs(owner.Sheet.Weapon, p))))
             return false;
         if (when.Advantage is { } advantage && (args.Edge == Edge.Advantage) != advantage)
             return false;

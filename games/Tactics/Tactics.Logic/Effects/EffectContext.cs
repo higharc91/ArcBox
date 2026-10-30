@@ -72,6 +72,9 @@ public sealed class EffectContext
     /// <summary>The source's save DC: 8 + proficiency + casting modifier.</summary>
     public int SaveDc => 8 + Stats.Proficiency(Level) + CastingModifier;
 
+    /// <summary>A save DC on another stat than the casting one: 8 + proficiency + that stat's modifier.</summary>
+    public int DcFor(Stat stat) => 8 + Stats.Proficiency(Level) + Stats.Mod(SourceUnit.Sheet.Score(stat));
+
     /// <summary>
     /// The sum of named addends: <c>"mod.&lt;stat&gt;"</c> (e.g. <c>"mod.wis"</c>), <c>"mod.cast"</c>, <c>"prof"</c> and
     /// <c>"level"</c>, all of the source. Throws <see cref="InvalidOperationException"/> naming an unknown addend.

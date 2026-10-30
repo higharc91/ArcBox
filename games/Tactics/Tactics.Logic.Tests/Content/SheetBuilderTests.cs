@@ -280,6 +280,19 @@ public sealed class SheetBuilderTests
         Assert.Single(ErrorsOf(notYet));
     }
 
+    [Fact]
+    public void Picks_are_counted_per_choose_feature()
+    {
+        // Level 7 offers "1 of bolt, mend" (level 2) and "1 of hold, hardy" (level 7): two picks in all, but not two from one.
+        var both = Rogue(7) with { Picks = [new AbilityId("test.bolt"), new AbilityId("test.mend")] };
+        var spread = Rogue(7) with { Picks = [new AbilityId("test.mend"), new AbilityId("test.hold")] };
+
+        Assert.Equal([new ContentError("character 'Vex'", "/picks/1",
+                "'test.mend' is one pick too many: the level 2 choice takes 1 of test.bolt, test.mend.")],
+            ErrorsOf(both));
+        Assert.Contains(new AbilityId("test.hold"), SheetBuilder.ForCharacter(spread, Rules).Abilities);
+    }
+
     // ---- Injuries ---------------------------------------------------------------------------------------------------
 
     [Fact]

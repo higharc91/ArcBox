@@ -388,6 +388,21 @@ public sealed class UseCommandTests
     }
 
     [Fact]
+    public void Save_dc_stat_replaces_the_casting_modifier()
+    {
+        // The fighter has no casting stat (a casting modifier of 0); a shove's DC uses STR (+3) instead.
+        var battle = TestBattle.On(Field)
+            .Party("kara", Fighter, new Tile(0, 1))
+            .Enemy("gob", Goblin, new Tile(1, 1));
+        var (state, _) = battle.Start();
+
+        var (_, events) = battle.Run(state, "kara", "gob", null, new SaveEffect(Stat.Str, null, [], [], DcStat: Stat.Str));
+        Assert.Equal(13, Assert.IsType<Rolled>(events[0]).Result.Vs);   // 8 + 2 + 3 STR
+        (_, events) = battle.Run(state, "kara", "gob", null, new SaveEffect(Stat.Str, null, [], []));
+        Assert.Equal(10, Assert.IsType<Rolled>(events[0]).Result.Vs);   // 8 + 2 + 0
+    }
+
+    [Fact]
     public void Heal_adds_named_bonuses_and_remove_clears_condition()
     {
         var mend = new AbilityDef(new AbilityId("test.mend"), "Mend", 1, new CostDef(Bonus: 1, Resource: Ordinal.Map(("mana", 1))),

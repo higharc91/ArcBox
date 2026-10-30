@@ -1,0 +1,14 @@
+[
+  { "id": "skeleton", "name": "Skeleton", "cr": "1/4", "xp": 50,
+    "scores": { "str": 10, "dex": 16, "con": 15, "int": 6, "wis": 8, "cha": 5 }, "hp": 13, "ac": 14, "armor": "Light",
+    "weapon": { "id": "shortsword", "damage": "1d6", "damageType": "piercing", "stat": "dex", "finesse": true, "ranged": false,
+                "range": 1, "reach": false, "tags": ["martial", "light"] },
+    "abilities": [], "passives": [], "immune": ["poison"], "vulnerable": ["bludgeoning"], "tags": ["undead"],
+    "aiProfile": "brute", "sprite": "characters.skeleton" },
+  { "id": "zombie", "name": "Zombie", "cr": "1/4", "xp": 50, "move": 3,
+    "scores": { "str": 13, "dex": 6, "con": 16, "int": 3, "wis": 6, "cha": 5 }, "hp": 15, "ac": 8,
+    "weapon": { "id": "slam", "damage": "1d8", "damageType": "bludgeoning", "stat": "str", "finesse": false, "ranged": false,
+                "range": 1, "reach": false, "tags": ["natural"] },
+    "saves": ["wis"], "abilities": [], "passives": [], "immune": ["poison"], "tags": ["undead"],
+    "aiProfile": "brute", "sprite": "characters.zombie" }
+]

@@ -22,6 +22,14 @@
       },
       "replaces": {
         "$ref": "common.schema.json#/$defs/replaces"
+      },
+      "hook": {
+        "$ref": "common.schema.json#/$defs/passive/properties/hook",
+        "description": "When the injury's effects run on its owner, e.g. onBattleStart."
+      },
+      "effects": {
+        "$ref": "common.schema.json#/$defs/effects",
+        "description": "Effects run on the owner on the hook (Deep cut: bleeding at the start of each battle)."
       }
     },
     "required": [

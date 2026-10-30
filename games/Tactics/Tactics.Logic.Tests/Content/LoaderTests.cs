@@ -73,15 +73,6 @@ public sealed class LoaderTests
     }
 
     [Fact]
-    public void Base_rules_manifest_loads_with_no_content_yet()
-    {
-        var pack = RulesPack.Load([ContentPaths.BaseRules], ArtManifests.Load(ContentPaths.ContentBase));
-
-        Assert.Empty(pack.Abilities);
-        Assert.Empty(pack.Classes);
-    }
-
-    [Fact]
     public void Chapter_adds_ability()
     {
         var pack = RulesPack.Load([Base, Chapter("chapter_adds")]);

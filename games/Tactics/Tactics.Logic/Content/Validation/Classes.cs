@@ -10,7 +10,9 @@ internal sealed partial class Validation
     /// <summary>
     /// A class: hit die, resource tables, a feature at every level 1–10, subclasses with features at exactly 3, 6 and 10
     /// (unless <see cref="ClassDef.SubclassesPending"/>), the stat priority, and every id its features and kit name (an empty
-    /// kit armour is none).
+    /// kit armour is none). Each level's <c>defaultPicks</c> must be a loadout a character of that level could pick from the
+    /// class's own <c>choose</c> features (<see cref="PickRules"/>; subclass choices aren't counted, since the default
+    /// loadout serves every subclass).
     /// </summary>
     public ClassDef? Class(JsonElement e, string file, string ptr)
         => Guarded(file, ptr, () =>
@@ -52,9 +54,16 @@ internal sealed partial class Validation
             }
 
             foreach (var (level, picks) in def.DefaultPicks)
+            {
+                var at = Pointer.Append(Pointer.Append(ptr, "defaultPicks"), level);
                 for (var i = 0; i < picks.Length; i++)
-                    Ref(RefKind.AbilityOrPassive, picks[i].Value, file,
-                        Pointer.Append(Pointer.Append(Pointer.Append(ptr, "defaultPicks"), level), i));
+                    Ref(RefKind.AbilityOrPassive, picks[i].Value, file, Pointer.Append(at, i));
+                if (level is < 1 or > 10)
+                    Error(file, at, $"Level {level} is outside levels 1–10.");
+                else
+                    foreach (var (pointer, message) in PickRules.Check(picks, PickRules.Choices(def, null, level), def.Id, level, _ => true))
+                        Error(file, at + pointer, message);
+            }
             var kit = Pointer.Append(ptr, "startingKit");
             Ref(RefKind.Weapon, def.StartingKit.Weapon, file, Pointer.Append(kit, "weapon"));
             if (def.StartingKit.Armor.Length > 0)

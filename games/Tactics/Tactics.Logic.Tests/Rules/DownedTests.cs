@@ -219,6 +219,29 @@ public sealed class DownedTests
     }
 
     [Fact]
+    public void An_injury_can_carry_a_hook_on_its_owner()
+    {
+        // Shaken: frightened at the start of every battle, until the end of the owner's first turn.
+        var shaken = new InjuryDef(new InjuryId("shaken"), "Shaken", Weight: 1, StaticMods.None, Hook: HookKind.OnBattleStart,
+            Effects: [new ApplyEffect(new ConditionId("frightened"), 0)]);
+        var frightened = new ConditionDef(new ConditionId("frightened"), "Frightened", new StaticMods(OwnAttacks: Edge.Disadvantage),
+            [], Ordinal.Set("fear"));
+        var battle = TestBattle.On(Field)
+            .Party("kara", TestSheets.Fighter with { Passives = [RulesPack.InjuryPassiveId(shaken.Id)] }, T(2, 1))
+            .Enemy("gob", TestSheets.Goblin with { InitiativeBonus = 10 }, T(6, 1))
+            .WithInjuries(shaken).WithConditions(frightened);
+
+        var (state, events) = battle.Start();
+
+        Assert.Contains(new ConditionApplied(U("kara"), frightened.Id), events);
+        Assert.Equal(U("kara"), Assert.Single(state.Units[U("kara")].Conditions).Source);
+        Assert.Equal(Edge.Disadvantage, Modifiers.For(state, U("kara"), battle.Rules).OwnAttacks);
+        (state, _) = battle.Apply(state, new EndTurn(U("gob")));
+        (state, events) = battle.Apply(state, new EndTurn(U("kara")));
+        Assert.Contains(new ConditionRemoved(U("kara"), frightened.Id), events);
+    }
+
+    [Fact]
     public void Enemy_at_zero_dies()
     {
         var bloodlust = new PassiveDef("test.bloodlust", HookKind.OnKill, null,

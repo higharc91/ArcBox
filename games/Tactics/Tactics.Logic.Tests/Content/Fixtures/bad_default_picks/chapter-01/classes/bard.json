@@ -1,0 +1,26 @@
+{
+  "id": "bard", "name": "Bard", "role": "support", "hitDie": 8, "saves": ["dex", "cha"],
+  "armorProf": ["light"], "weaponProf": ["simple"],
+  "skillChoices": { "count": 1, "from": ["performance"] },
+  "startingKit": { "weapon": "rapier", "armor": "leather" },
+  "resources": { "mana": { "1": 3, "5": 6 } },
+  "features": {
+    "1": [ { "ability": "test.strike" } ],
+    "2": [ { "choose": 1, "from": ["test.bolt", "test.mend"] } ],
+    "3": [ { "passive": "test.tough" } ],
+    "4": [ { "passive": "test.tough" } ],
+    "5": [ { "attacks": 2 } ],
+    "6": [ { "passive": "test.tough" } ],
+    "7": [ { "choose": 1, "from": ["test.hold", "test.sneak"] } ],
+    "8": [ { "passive": "test.tough" } ],
+    "9": [ { "passive": "test.tough" } ],
+    "10": [ { "passive": "test.tough" } ]
+  },
+  "subclasses": [
+    { "id": "bard.lore", "name": "Lore",
+      "features": { "3": [ { "ability": "test.mend" } ], "6": [ { "passive": "test.tough" } ], "10": [ { "ability": "test.hold" } ] } }
+  ],
+  "defaultPicks": { "2": ["test.bolt", "test.mend"], "3": ["test.strike"], "7": ["test.bolt", "test.mend"], "8": ["test.bolt", "test.sneak"] },
+  "aiTags": { "tags": ["support"], "priority": ["cha", "dex", "con", "wis", "int", "str"] },
+  "castingStat": "cha"
+}

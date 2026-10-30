@@ -133,6 +133,16 @@ public sealed class EncounterSetupTests
             "The zone 'enemy_spawn' has 3 free tiles for 4 units.")], ErrorsOf("zone_too_small", "kara"));
 
     [Fact]
+    public void Fixed_tile_units_are_placed_before_zones_fill()
+    {
+        // The zone's first tile (5, 0) belongs to the wolf placed there, though it is listed after the zone's two wolves.
+        var setup = Encounters.Setup("fixed_in_zone", Party("kara"), Difficulty.Normal, Rules);
+
+        Assert.Equal([("wolf.1", new Tile(5, 1)), ("wolf.2", new Tile(5, 2)), ("wolf.3", new Tile(5, 0))],
+            setup.Units.Where(u => u.Sheet.Side == Side.Enemy).Select(u => (u.Id.Value, u.At)));
+    }
+
+    [Fact]
     public void A_unit_id_that_collides_is_a_content_error()
     {
         // The party member's id is the one the encounter's enemy names.

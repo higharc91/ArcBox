@@ -77,7 +77,7 @@
     },
     "effect": {
       "type": "object",
-      "description": "One effect block: exactly one block key (attack, save, damage, heal, apply, remove, help, push, pull, teleport, swap, dash, jumpTo; Task 10 adds the rest) holding its parameters, with branches (onHit, onMiss, onCrit, onFail, onSuccess) and, for a shorthand block, its other parameters beside the key: {\"apply\": \"lit\", \"rounds\": 1}. attack.kind is \"weapon\" or \"spell\"; apply.untilSave needs an enclosing save.",
+      "description": "One effect block: exactly one block key (attack, save, damage, heal, tempHp, revive, apply, remove, cleanse, dispel, help, push, pull, teleport, swap, dash, jumpTo, zone, alterTerrain, hazard, summon, transform, grantResource, extraAction, refreshReaction, statMod, mark, taunt, reveal, turnOrder, chain, repeat, if, random) holding its parameters, with branches (onHit, onMiss, onCrit, onFail, onSuccess, then, else, effects) and, for a shorthand block, its other parameters beside the key: {\"apply\": \"lit\", \"rounds\": 1}. attack.kind is \"weapon\" or \"spell\"; apply.untilSave needs an enclosing save. save.dcStat sets the DC to 8 + proficiency + that stat's modifier instead of the casting stat's (a shove's STR). grantResource.resource \"primary\" is the first resource on the target's sheet, and overMax lets the grant pass the sheet's pool. extraAction.kind is \"action\", \"bonus\" or \"move\" (the target gains its Move again: Dash).",
       "anyOf": [
         {
           "required": [
@@ -101,12 +101,32 @@
         },
         {
           "required": [
+            "tempHp"
+          ]
+        },
+        {
+          "required": [
+            "revive"
+          ]
+        },
+        {
+          "required": [
             "apply"
           ]
         },
         {
           "required": [
             "remove"
+          ]
+        },
+        {
+          "required": [
+            "cleanse"
+          ]
+        },
+        {
+          "required": [
+            "dispel"
           ]
         },
         {
@@ -142,6 +162,91 @@
         {
           "required": [
             "jumpTo"
+          ]
+        },
+        {
+          "required": [
+            "zone"
+          ]
+        },
+        {
+          "required": [
+            "alterTerrain"
+          ]
+        },
+        {
+          "required": [
+            "hazard"
+          ]
+        },
+        {
+          "required": [
+            "summon"
+          ]
+        },
+        {
+          "required": [
+            "transform"
+          ]
+        },
+        {
+          "required": [
+            "grantResource"
+          ]
+        },
+        {
+          "required": [
+            "extraAction"
+          ]
+        },
+        {
+          "required": [
+            "refreshReaction"
+          ]
+        },
+        {
+          "required": [
+            "statMod"
+          ]
+        },
+        {
+          "required": [
+            "mark"
+          ]
+        },
+        {
+          "required": [
+            "taunt"
+          ]
+        },
+        {
+          "required": [
+            "reveal"
+          ]
+        },
+        {
+          "required": [
+            "turnOrder"
+          ]
+        },
+        {
+          "required": [
+            "chain"
+          ]
+        },
+        {
+          "required": [
+            "repeat"
+          ]
+        },
+        {
+          "required": [
+            "if"
+          ]
+        },
+        {
+          "required": [
+            "random"
           ]
         }
       ]
@@ -302,6 +407,9 @@
         },
         "targetTag": {
           "type": "string"
+        },
+        "success": {
+          "type": "boolean"
         }
       },
       "description": "A test on a hook's situation; every key present must hold.",

@@ -1,0 +1,46 @@
+{
+  "id": "wizard", "name": "Wizard", "role": "control", "hitDie": 6, "saves": ["int", "wis"],
+  "armorProf": [], "weaponProf": ["simple"],
+  "skillChoices": { "count": 2, "from": ["arcana", "history", "investigation", "insight", "medicine", "religion"] },
+  "startingKit": { "weapon": "quarterstaff", "armor": "", "shield": false,
+                   "bag": [ { "item": "potion_of_healing", "count": 1 } ] },
+  "resources": { "mana": { "1": 4, "2": 6, "3": 8, "4": 10, "5": 11, "6": 12, "7": 13, "8": 14, "9": 15, "10": 16 } },
+  "features": {
+    "1": [ { "choose": 3, "from": ["wizard.fire_bolt", "wizard.ray_of_frost", "wizard.shocking_grasp", "wizard.acid_splash", "wizard.chill_touch", "wizard.poison_spray"] },
+           { "choose": 4, "from": ["wizard.magic_missile", "wizard.burning_hands", "wizard.shield", "wizard.sleep", "wizard.thunderwave", "wizard.chromatic_orb", "wizard.mage_armor", "wizard.ray_of_sickness", "wizard.grease"] },
+           { "ability": "wizard.arcane_recovery" } ],
+    "2": [ { "choose": 1, "from": ["wizard.magic_missile", "wizard.burning_hands", "wizard.shield", "wizard.sleep", "wizard.thunderwave", "wizard.chromatic_orb", "wizard.mage_armor", "wizard.ray_of_sickness", "wizard.grease"] } ],
+    "3": [ { "choose": 2, "from": ["wizard.scorching_ray", "wizard.hold_person", "wizard.misty_step", "wizard.shatter", "wizard.web", "wizard.blur", "wizard.invisibility"] } ],
+    "4": [ { "choose": 1, "from": ["wizard.fire_bolt", "wizard.ray_of_frost", "wizard.shocking_grasp", "wizard.acid_splash", "wizard.chill_touch", "wizard.poison_spray"] },
+           { "choose": 1, "from": ["wizard.scorching_ray", "wizard.hold_person", "wizard.misty_step", "wizard.shatter", "wizard.web", "wizard.blur", "wizard.invisibility"] } ],
+    "5": [ { "choose": 2, "from": ["wizard.fireball", "wizard.lightning_bolt", "wizard.counterspell", "wizard.haste", "wizard.slow", "wizard.hypnotic_pattern", "wizard.dispel_magic"] } ],
+    "6": [ { "choose": 1, "from": ["wizard.fireball", "wizard.lightning_bolt", "wizard.counterspell", "wizard.haste", "wizard.slow", "wizard.hypnotic_pattern", "wizard.dispel_magic"] } ],
+    "7": [ { "choose": 1, "from": ["wizard.ice_storm", "wizard.greater_invisibility", "wizard.blight", "wizard.wall_of_fire", "wizard.banishment"] } ],
+    "8": [ { "choose": 1, "from": ["wizard.ice_storm", "wizard.greater_invisibility", "wizard.blight", "wizard.wall_of_fire", "wizard.banishment"] } ],
+    "9": [ { "choose": 2, "from": ["wizard.cone_of_cold", "wizard.cloudkill", "wizard.hold_monster"] } ],
+    "10": [ { "choose": 1, "from": ["wizard.fire_bolt", "wizard.ray_of_frost", "wizard.shocking_grasp", "wizard.acid_splash", "wizard.chill_touch", "wizard.poison_spray"] },
+            { "choose": 1, "from": ["wizard.cone_of_cold", "wizard.cloudkill", "wizard.hold_monster"] } ]
+  },
+  "subclasses": [
+    { "id": "wizard.evoker", "name": "Evoker",
+      "features": {
+        "3": [ { "ability": "evoker.sculpted_nova" } ],
+        "6": [ { "passive": "evoker.empowered_evocation" } ],
+        "10": [ { "ability": "evoker.sculpted_inferno" } ]
+      } }
+  ],
+  "defaultPicks": {
+    "1": ["wizard.fire_bolt", "wizard.ray_of_frost", "wizard.shocking_grasp", "wizard.magic_missile", "wizard.burning_hands", "wizard.shield", "wizard.sleep"],
+    "2": ["wizard.fire_bolt", "wizard.ray_of_frost", "wizard.shocking_grasp", "wizard.magic_missile", "wizard.burning_hands", "wizard.shield", "wizard.sleep", "wizard.thunderwave"],
+    "3": ["wizard.fire_bolt", "wizard.ray_of_frost", "wizard.shocking_grasp", "wizard.magic_missile", "wizard.burning_hands", "wizard.shield", "wizard.sleep", "wizard.thunderwave", "wizard.scorching_ray", "wizard.misty_step"],
+    "4": ["wizard.fire_bolt", "wizard.ray_of_frost", "wizard.shocking_grasp", "wizard.magic_missile", "wizard.burning_hands", "wizard.shield", "wizard.sleep", "wizard.thunderwave", "wizard.scorching_ray", "wizard.misty_step", "wizard.acid_splash", "wizard.web"],
+    "5": ["wizard.fire_bolt", "wizard.ray_of_frost", "wizard.shocking_grasp", "wizard.magic_missile", "wizard.burning_hands", "wizard.shield", "wizard.sleep", "wizard.thunderwave", "wizard.scorching_ray", "wizard.misty_step", "wizard.acid_splash", "wizard.web", "wizard.fireball", "wizard.counterspell"],
+    "6": ["wizard.fire_bolt", "wizard.ray_of_frost", "wizard.shocking_grasp", "wizard.magic_missile", "wizard.burning_hands", "wizard.shield", "wizard.sleep", "wizard.thunderwave", "wizard.scorching_ray", "wizard.misty_step", "wizard.acid_splash", "wizard.web", "wizard.fireball", "wizard.counterspell", "wizard.haste"],
+    "7": ["wizard.fire_bolt", "wizard.ray_of_frost", "wizard.shocking_grasp", "wizard.magic_missile", "wizard.burning_hands", "wizard.shield", "wizard.sleep", "wizard.thunderwave", "wizard.scorching_ray", "wizard.misty_step", "wizard.acid_splash", "wizard.web", "wizard.fireball", "wizard.counterspell", "wizard.haste", "wizard.ice_storm"],
+    "8": ["wizard.fire_bolt", "wizard.ray_of_frost", "wizard.shocking_grasp", "wizard.magic_missile", "wizard.burning_hands", "wizard.shield", "wizard.sleep", "wizard.thunderwave", "wizard.scorching_ray", "wizard.misty_step", "wizard.acid_splash", "wizard.web", "wizard.fireball", "wizard.counterspell", "wizard.haste", "wizard.ice_storm", "wizard.greater_invisibility"],
+    "9": ["wizard.fire_bolt", "wizard.ray_of_frost", "wizard.shocking_grasp", "wizard.magic_missile", "wizard.burning_hands", "wizard.shield", "wizard.sleep", "wizard.thunderwave", "wizard.scorching_ray", "wizard.misty_step", "wizard.acid_splash", "wizard.web", "wizard.fireball", "wizard.counterspell", "wizard.haste", "wizard.ice_storm", "wizard.greater_invisibility", "wizard.cone_of_cold", "wizard.hold_monster"],
+    "10": ["wizard.fire_bolt", "wizard.ray_of_frost", "wizard.shocking_grasp", "wizard.magic_missile", "wizard.burning_hands", "wizard.shield", "wizard.sleep", "wizard.thunderwave", "wizard.scorching_ray", "wizard.misty_step", "wizard.acid_splash", "wizard.web", "wizard.fireball", "wizard.counterspell", "wizard.haste", "wizard.ice_storm", "wizard.greater_invisibility", "wizard.cone_of_cold", "wizard.hold_monster", "wizard.chill_touch", "wizard.cloudkill"]
+  },
+  "aiTags": { "tags": ["control", "caster", "ranged"], "priority": ["int", "con", "dex", "wis", "cha", "str"] },
+  "castingStat": "int"
+}

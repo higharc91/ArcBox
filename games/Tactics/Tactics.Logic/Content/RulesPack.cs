@@ -32,7 +32,8 @@ public sealed partial class RulesPack
         AiProfiles = catalog.AiProfiles;
         Xp = catalog.Xp;
         _injuryPassives = injuries.Values.ToImmutableSortedDictionary(i => InjuryPassiveId(i.Id),
-            i => new PassiveDef(InjuryPassiveId(i.Id), null, null, [], i.Static with { MaxHp = 0 }), StringComparer.Ordinal);
+            i => new PassiveDef(InjuryPassiveId(i.Id), i.Hook, null, i.Effects.IsDefault ? [] : i.Effects, i.Static with { MaxHp = 0 },
+                Target: PassiveTarget.Self), StringComparer.Ordinal);
     }
 
     private readonly ImmutableSortedDictionary<string, UnitSheet> _monsterSheets;
@@ -98,8 +99,8 @@ public sealed partial class RulesPack
 
     /// <summary>
     /// The passive a sheet's passive id names: one the pack defines, or the one an injury makes
-    /// (<see cref="InjuryPassiveId"/>, without its <see cref="StaticMods.MaxHp"/>, which the sheet builder applies). Null
-    /// when there is none.
+    /// (<see cref="InjuryPassiveId"/>: its static modifiers without <see cref="StaticMods.MaxHp"/>, which the sheet builder
+    /// applies, and its hook effects on the owner). Null when there is none.
     /// </summary>
     public PassiveDef? PassiveFor(string id)
         => Passives.TryGetValue(id, out var passive) ? passive : _injuryPassives.GetValueOrDefault(id);
@@ -145,31 +146,33 @@ public sealed partial class RulesPack
 
     /// <summary>
     /// The basic Attack action, known to every unit: one weapon attack whose hit deals weapon damage, repeated
-    /// <see cref="UnitSheet.Attacks"/> times in one Action. (Task 13 moves it to <c>abilities/common.json</c>.)
+    /// <see cref="UnitSheet.Attacks"/> times in one Action. A loaded pack takes it from <c>abilities/common.json</c>; this copy is
+    /// for <see cref="InMemory"/> packs, and the base pack's tests check that the two agree.
     /// </summary>
     public static AbilityDef CommonAttack { get; } = new(
         new AbilityId("common.attack"), "Attack", Tier: 0, new CostDef(Action: 1),
         new TargetDef(TargetKind.Enemy, Range: 1, Los: false, new AreaDef(AreaShape.Single)),
         [new AttackEffect("weapon", null, OnHit: [new DamageEffect(null, null, [], Weapon: true)], OnMiss: [], OnCrit: [])],
-        new PresentationDef("attack", null, null), new AiHints(["damage", "single"]), IsWeaponAttack: true);
+        new PresentationDef("characters.attack", null, null), new AiHints(["damage", "single"]), IsWeaponAttack: true);
 
     /// <summary>
     /// The Help action, known to every unit: an adjacent Downed ally gets up at 1 HP; a standing one gets
-    /// <see cref="Helped"/> (see <see cref="HelpBlock"/>). (Task 13 moves it to <c>abilities/common.json</c>.)
+    /// <see cref="Helped"/> (see <see cref="HelpBlock"/>). A loaded pack takes it from <c>abilities/common.json</c>; this copy
+    /// is for <see cref="InMemory"/> packs.
     /// </summary>
     public static AbilityDef CommonHelp { get; } = new(
         new AbilityId("common.help"), "Help", Tier: 0, new CostDef(Action: 1),
         new TargetDef(TargetKind.Ally, Range: 1, Los: false, new AreaDef(AreaShape.Single)),
-        [new HelpEffect()], new PresentationDef("help", null, null), new AiHints(["revive", "buff", "single"]));
+        [new HelpEffect()], new PresentationDef("characters.item", null, null), new AiHints(["revive", "buff", "single"]));
 
     /// <summary>
     /// The condition <see cref="CommonHelp"/> gives a standing ally: advantage on its next d20 (an attack roll or a save),
-    /// after which it ends. It also ends at the end of the helper's next turn. (Task 13 moves it to
-    /// <c>conditions.json</c>.)
+    /// after which it ends. It also ends at the end of the helper's next turn. A loaded pack takes it from
+    /// <c>conditions.json</c>; this copy is for <see cref="InMemory"/> packs.
     /// </summary>
     public static ConditionDef Helped { get; } = new(new ConditionId("helped"), "Helped", null, [], Ordinal.Set("help"));
 
-    /// <summary>The one injury an in-memory pack carries unless given a table (Task 13 adds <c>injuries.json</c>).</summary>
+    /// <summary>The one injury an in-memory pack carries unless given a table (a loaded pack has <c>injuries.json</c>).</summary>
     public static InjuryDef TestInjury { get; } = new(new InjuryId("test.injury"), "Test injury", Weight: 1, StaticMods.None);
 
     /// <summary>

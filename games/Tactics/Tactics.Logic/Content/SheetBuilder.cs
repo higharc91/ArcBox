@@ -47,7 +47,7 @@ public static class SheetBuilder
     /// </list>
     /// Throws <see cref="ContentException"/> with every bad id: race, class, subclass, background, weapon, armour, injuries,
     /// bag items and picks, and a level outside 1–10. A pick must be offered by a <c>choose</c> feature of the class or
-    /// subclass at or below the level, and there can be no more picks than those features allow.
+    /// subclass at or below the level, and each of those features takes no more than its own count (<see cref="PickRules"/>).
     /// </summary>
     public static UnitSheet ForCharacter(CharacterRecord c, RulesPack rules)
     {
@@ -180,25 +180,12 @@ public static class SheetBuilder
     {
         if (picks.IsDefaultOrEmpty)
             return;
-        var choices = Enumerable.Range(1, level)
-            .SelectMany(l => Features(cls, l).Concat(subclass is null ? [] : Features(subclass, l)))
-            .Where(f => f.Choose is not null)
-            .ToList();
-        var offered = choices.SelectMany(f => f.From).ToHashSet(StringComparer.Ordinal);
-        var allowed = choices.Sum(f => f.Choose!.Value);
-
-        var seen = new HashSet<AbilityId>();
         for (var i = 0; i < picks.Length; i++)
-        {
             if (!rules.Abilities.ContainsKey(picks[i]) && !rules.Passives.ContainsKey(picks[i].Value))
                 problems.Add($"/picks/{i}", $"Unknown ability '{picks[i]}'.");
-            else if (!offered.Contains(picks[i].Value))
-                problems.Add($"/picks/{i}", $"'{picks[i]}' isn't one of the abilities this class offers a choice of at level {level}.");
-            else
-                seen.Add(picks[i]);
-        }
-        if (seen.Count > allowed)
-            problems.Add("/picks", $"A level {level} {cls.Id} chooses {allowed} abilit{(allowed == 1 ? "y" : "ies")}, not {seen.Count}.");
+        foreach (var (pointer, message) in PickRules.Check(picks, PickRules.Choices(cls, subclass, level), cls.Id, level,
+                     pick => rules.Abilities.ContainsKey(pick) || rules.Passives.ContainsKey(pick.Value)))
+            problems.Add("/picks" + pointer, message);
     }
 
     // ---- Default characters -----------------------------------------------------------------------------------------

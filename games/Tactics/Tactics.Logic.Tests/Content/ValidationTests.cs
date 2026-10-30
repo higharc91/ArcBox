@@ -48,6 +48,18 @@ public sealed class ValidationTests
             ErrorsOf("subclass_missing_level_6"));
 
     [Fact]
+    public void Default_picks_are_checked_like_a_characters_picks()
+    {
+        const string bard = "chapter-01/classes/bard.json";
+        Assert.Equal(
+        [
+            new ContentError(bard, "/defaultPicks/2", "A level 2 bard chooses 1 ability, not 2."),
+            new ContentError(bard, "/defaultPicks/3/0", "'test.strike' isn't one of the abilities this class offers a choice of at level 3."),
+            new ContentError(bard, "/defaultPicks/7/1", "'test.mend' is one pick too many: the level 2 choice takes 1 of test.bolt, test.mend."),
+        ], ErrorsOf("bad_default_picks"));
+    }
+
+    [Fact]
     public void Missing_art_key()
     {
         var art = ArtManifests.Load(ContentPaths.ContentBase);
@@ -72,7 +84,7 @@ public sealed class ValidationTests
                 "Unknown named hook 'wild_shpe' (expected \"animate_dead\", \"counterspell\", \"polymorph\" or \"wild_shape\")."),
             new ContentError(Abilities, "/abilities/0/effects/1/transform/args", "'wild_shape' needs a \"monster\" id in its args."),
             new ContentError(Abilities, "/abilities/0/effects/2/extraAction/kind",
-                "Unknown extra action 'reaction' (expected \"action\" or \"bonus\")."),
+                "Unknown extra action 'reaction' (expected \"action\", \"bonus\" or \"move\")."),
             new ContentError(Abilities, "/abilities/0/effects/3/turnOrder/op",
                 "Unknown turn order op 'skip' (expected \"delay\", \"hasten\" or \"swap\")."),
             new ContentError(Abilities, "/abilities/0/effects/8/zone/concentration", Endless),
