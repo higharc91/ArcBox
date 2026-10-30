@@ -1,0 +1,35 @@
+{
+  "cards": {
+    "ashen_ford": {
+      "file": "ashen_ford.png",
+      "chapter": "I",
+      "title": "THE ASHEN FORD",
+      "grade": "golden_hour"
+    },
+    "mirewood": {
+      "file": "mirewood.png",
+      "chapter": "II",
+      "title": "MIREWOOD",
+      "grade": "fey"
+    },
+    "sunscar": {
+      "file": "sunscar.png",
+      "chapter": "III",
+      "title": "THE SUNSCAR",
+      "grade": "day"
+    },
+    "frostpeak": {
+      "file": "frostpeak.png",
+      "chapter": "IV",
+      "title": "FROSTPEAK PASS",
+      "grade": "dawn"
+    },
+    "ember_keep": {
+      "file": "ember_keep.png",
+      "chapter": "V",
+      "title": "THE EMBER KEEP",
+      "grade": "infernal"
+    }
+  },
+  "note": "loading screens between scenes; each is a biome diorama, graded"
+}
