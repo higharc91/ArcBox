@@ -199,7 +199,58 @@ def build_palettes() -> None:
          PREVIEWS / "00-palettes.png")
 
 
-SETS = {"palettes": build_palettes, "characters": build_characters}
+# Which attack animation a weapon plays; anything not listed (staff, wand, tome, lute, unarmed) casts.
+ATTACK_FOR = {"sword": "attack", "greatsword": "attack", "axe": "attack", "mace": "attack", "dagger": "thrust",
+              "spear": "thrust", "rapier": "thrust", "bow": "shoot"}
+
+
+def build_anim_previews() -> None:
+    """Animated GIFs of the character set: every actor plays the same beat (idle, walk, attack, hurt, down)."""
+    from arcpix.anim import Actor, stage_gif
+    n = C.frames_per_direction()
+    table = {a.name: a.frames for a in C.anim_table()}
+
+    def hold(frames: list[int], ticks: int) -> list[int]:
+        return [f for f in frames for _ in range(ticks)]
+
+    def actors_for(recipes) -> list[Actor]:
+        out = []
+        for r in recipes:
+            sub = (f"{creator.RACES[r.race].name} {creator.CLASSES[r.cls].name}" if r.race else r.name)
+            out.append(Actor(r.name if r.race else r.name, sub if r.race else f"{r.build} build",
+                             C.recipe_sheet(r).frames, ANCHOR))
+        return out
+
+    def script(recipes) -> list:
+        k = len(recipes)
+        atk = [table[ATTACK_FOR.get(r.layers.get("weapon", ""), "cast")] for r in recipes]
+        return [
+            ("Idle", [table["idle"] * 3] * k, 330),
+            ("Walk", [table["walk"] * 3] * k, 125),
+            ("Walk · away", [[f + n for f in table["walk"]] * 3] * k, 125),
+            ("Attack", [[table["idle"][0]] * 2 + hold(a, 2) + [a[-1]] * 3 for a in atk], 90),
+            ("Attack", [[table["idle"][0]] * 2 + hold(a, 2) + [a[-1]] * 3 for a in atk], 90),
+            ("Hurt", [hold(table["hurt"], 6) + [table["idle"][0]] * 3] * k, 90),
+            ("Downed", [hold(table["down"], 10)] * k, 90),
+        ]
+
+    for name, title, recipes, cols in (
+            ("anim-party", "The party", PARTY, 6),
+            ("anim-classes", "Class starters", CLASSES, 5),
+            ("anim-enemies", "Enemies", ENEMIES, 4)):
+        stage_gif(PREVIEWS / f"{name}.gif", title, actors_for(recipes), script(recipes), zoom=4, columns=cols)
+
+    # One character walking in all four isometric directions: two drawn facings, two mirrored.
+    kara = next(r for r in PARTY if r.id == "kara")
+    fr = C.recipe_sheet(kara).frames
+    dirs = [Actor("South-east", "front", fr, ANCHOR), Actor("South-west", "front, mirrored", fr, ANCHOR, mirror=True),
+            Actor("North-west", "back", fr, ANCHOR), Actor("North-east", "back, mirrored", fr, ANCHOR, mirror=True)]
+    walk = table["walk"]
+    stage_gif(PREVIEWS / "anim-directions.gif", "Four facings from two drawn ones", dirs,
+              [("Walk", [walk * 4, walk * 4, [f + n for f in walk] * 4, [f + n for f in walk] * 4], 125)], zoom=5)
+
+
+SETS = {"palettes": build_palettes, "characters": build_characters, "anims": build_anim_previews}
 
 if __name__ == "__main__":
     for name in sys.argv[1:] or list(SETS):
