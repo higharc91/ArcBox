@@ -36,8 +36,8 @@ When every task is done, one whole-branch review runs.
 | 12 | Sheet builder and encounter setup | done | `77f51dc` | 0 |
 | 13 | Content wave 0: core files and fighter, cleric, rogue, wizard | done | `595c258`, `816acf7` | 1 |
 | 14 | AI planner, odds and threat map | done | `ac23394`, `23d88d1` | 1 |
-| 15 | Companion AI, timed-out turns, reactions, performance | in progress |  |  |
-| 16 | `Tactics.Sim` and the first balance report | not started | | |
+| 15 | Companion AI, timed-out turns, reactions, performance | done | `1feca9c`, `74cb44f` | 1 |
+| 16 | `Tactics.Sim` and the first balance report | in progress |  |  |
 | 17 | Ranger, paladin and monk | not started | | |
 | 18 | Bard, druid and warlock | not started | | |
 | 18A | Barbarian and sorcerer (added 2026-10-30) | not started | | |
@@ -155,6 +155,16 @@ These were decided during execution. Later tasks must follow them, alongside the
 - **No Delay.** The planner never Delays, so `AllowDelay` and `RemainingOnly` currently do nothing; Task 15 must not rely on them. Objective scoring covers only protected units until Task 22.
 - **Fair play.** The bonus action never targets a foe the main action may have downed, unless the profile is cruel.
 - **Pathfinding fix.** `PathMap.Reachable` was indexed wrongly on non-square maps; it is fixed and has a regression test.
+
+**Companion AI and reactions (Task 15)**
+- **Reactions.** `Ai.React(state, offer, rules)` decides every AI reaction from the offer's serialisable `Cause` (a `ReactionTrigger`):
+  - opportunity attacks are taken when expected value > 0;
+  - self-targeted defensive reactions are used when they turn a hit into a miss, or give temporary HP of at least 25% of max HP;
+  - counterspell is valued from the triggering spell.
+- **Absent members.** The adapter must pass `AllowItems: true` for absent members. The companion gate then allows one healing item per battle, used on itself, only when the threat map predicts it would go down.
+  - AI item use records `ItemUse(ByAi: true)` and increments `ItemsUsedByAi`.
+- **Timeouts.** `Battle.Apply(..., aiFinished: true)` stamps `AiFinished` on the events up to the actor's `TurnEnded`. The flag is left out of the JSON when false.
+- **Class tag.** Sheets carry a `class:<id>` tag, so class `aiTags` drive the companion's role weights. Once the Action is spent, the planner lets the bonus action decide where to move.
 
 **Content wave 0 (Task 13)**
 - **Items are used through `Use` with `Item` set and ability `common.use_item`.** The item's own ability supplies the cost and effects (a potion is a bonus action). One item leaves the bag and an `ItemUse` is recorded.
