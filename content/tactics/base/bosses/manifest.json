@@ -1,0 +1,468 @@
+{
+  "framesPerDirection": 23,
+  "directions": {
+    "front": {
+      "row": 0
+    },
+    "back": {
+      "row": 1
+    }
+  },
+  "anims": {
+    "idle": {
+      "frames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "fps": 6.0,
+      "loop": true
+    },
+    "walk": {
+      "frames": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "fps": 8.0,
+      "loop": true
+    },
+    "attack": {
+      "frames": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "fps": 10.0,
+      "loop": false
+    },
+    "special": {
+      "frames": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "fps": 9.0,
+      "loop": false
+    },
+    "hurt": {
+      "frames": [
+        19,
+        20
+      ],
+      "fps": 8.0,
+      "loop": false
+    },
+    "down": {
+      "frames": [
+        21,
+        22
+      ],
+      "fps": 4.0,
+      "loop": false
+    }
+  },
+  "monsters": {
+    "dragon": {
+      "name": "Dragon",
+      "role": "boss",
+      "frame": {
+        "width": 96,
+        "height": 96,
+        "anchor": [
+          48,
+          90
+        ]
+      },
+      "footprint": [
+        2,
+        2
+      ],
+      "flying": false,
+      "tags": [
+        "dragon",
+        "boss",
+        "huge"
+      ],
+      "variants": {
+        "red": "dragon_red.png",
+        "green": "dragon_green.png",
+        "blue": "dragon_blue.png",
+        "black": "dragon_black.png",
+        "gold": "dragon_gold.png"
+      }
+    },
+    "troll": {
+      "name": "Troll",
+      "role": "elite",
+      "frame": {
+        "width": 64,
+        "height": 64,
+        "anchor": [
+          32,
+          60
+        ]
+      },
+      "footprint": [
+        1,
+        1
+      ],
+      "flying": false,
+      "tags": [
+        "giant",
+        "large"
+      ],
+      "variants": {
+        "troll": "troll_troll.png",
+        "ogre": "troll_ogre.png",
+        "frost": "troll_frost.png"
+      }
+    },
+    "golem": {
+      "name": "Stone Golem",
+      "role": "elite",
+      "frame": {
+        "width": 64,
+        "height": 64,
+        "anchor": [
+          32,
+          60
+        ]
+      },
+      "footprint": [
+        1,
+        1
+      ],
+      "flying": false,
+      "tags": [
+        "construct",
+        "large"
+      ],
+      "variants": {
+        "granite": "golem_granite.png",
+        "basalt": "golem_basalt.png",
+        "temple": "golem_temple.png"
+      }
+    },
+    "fire_elemental": {
+      "name": "Fire Elemental",
+      "role": "elite",
+      "frame": {
+        "width": 64,
+        "height": 64,
+        "anchor": [
+          32,
+          60
+        ]
+      },
+      "footprint": [
+        1,
+        1
+      ],
+      "flying": false,
+      "tags": [
+        "elemental",
+        "fire",
+        "large"
+      ],
+      "variants": {
+        "ember": "fire_elemental_ember.png",
+        "azure": "fire_elemental_azure.png"
+      }
+    },
+    "water_elemental": {
+      "name": "Water Elemental",
+      "role": "elite",
+      "frame": {
+        "width": 64,
+        "height": 64,
+        "anchor": [
+          32,
+          60
+        ]
+      },
+      "footprint": [
+        1,
+        1
+      ],
+      "flying": false,
+      "tags": [
+        "elemental",
+        "water",
+        "large"
+      ],
+      "variants": {
+        "sea": "water_elemental_sea.png",
+        "swamp": "water_elemental_swamp.png"
+      }
+    },
+    "earth_elemental": {
+      "name": "Earth Elemental",
+      "role": "elite",
+      "frame": {
+        "width": 64,
+        "height": 64,
+        "anchor": [
+          32,
+          60
+        ]
+      },
+      "footprint": [
+        1,
+        1
+      ],
+      "flying": false,
+      "tags": [
+        "elemental",
+        "earth",
+        "large"
+      ],
+      "variants": {
+        "stone": "earth_elemental_stone.png",
+        "magma": "earth_elemental_magma.png"
+      }
+    },
+    "air_elemental": {
+      "name": "Air Elemental",
+      "role": "elite",
+      "frame": {
+        "width": 64,
+        "height": 64,
+        "anchor": [
+          32,
+          60
+        ]
+      },
+      "footprint": [
+        1,
+        1
+      ],
+      "flying": true,
+      "tags": [
+        "elemental",
+        "air",
+        "large"
+      ],
+      "variants": {
+        "gale": "air_elemental_gale.png",
+        "storm": "air_elemental_storm.png"
+      }
+    },
+    "wraith": {
+      "name": "Wraith",
+      "role": "monster",
+      "frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "footprint": [
+        1,
+        1
+      ],
+      "flying": true,
+      "tags": [
+        "undead",
+        "incorporeal"
+      ],
+      "variants": {
+        "wraith": "wraith_wraith.png",
+        "spectre": "wraith_spectre.png",
+        "shade": "wraith_shade.png"
+      }
+    },
+    "mimic": {
+      "name": "Mimic",
+      "role": "monster",
+      "frame": {
+        "width": 40,
+        "height": 40,
+        "anchor": [
+          20,
+          37
+        ]
+      },
+      "footprint": [
+        1,
+        1
+      ],
+      "flying": false,
+      "tags": [
+        "aberration",
+        "ambush",
+        "small"
+      ],
+      "variants": {
+        "oak": "mimic_oak.png",
+        "ironbound": "mimic_ironbound.png"
+      }
+    },
+    "imp": {
+      "name": "Imp",
+      "role": "companion",
+      "frame": {
+        "width": 32,
+        "height": 32,
+        "anchor": [
+          16,
+          30
+        ]
+      },
+      "footprint": [
+        1,
+        1
+      ],
+      "flying": true,
+      "tags": [
+        "fiend",
+        "summon",
+        "small"
+      ],
+      "variants": {
+        "crimson": "imp_crimson.png",
+        "violet": "imp_violet.png"
+      },
+      "summoner": "warlock/fiendbound",
+      "playerAccents": {
+        "crimson": {
+          "p1": "imp_crimson_p1.png",
+          "p2": "imp_crimson_p2.png",
+          "p3": "imp_crimson_p3.png",
+          "p4": "imp_crimson_p4.png",
+          "p5": "imp_crimson_p5.png",
+          "p6": "imp_crimson_p6.png"
+        },
+        "violet": {
+          "p1": "imp_violet_p1.png",
+          "p2": "imp_violet_p2.png",
+          "p3": "imp_violet_p3.png",
+          "p4": "imp_violet_p4.png",
+          "p5": "imp_violet_p5.png",
+          "p6": "imp_violet_p6.png"
+        }
+      }
+    },
+    "hound": {
+      "name": "Hound",
+      "role": "companion",
+      "frame": {
+        "width": 40,
+        "height": 40,
+        "anchor": [
+          20,
+          37
+        ]
+      },
+      "footprint": [
+        1,
+        1
+      ],
+      "flying": false,
+      "tags": [
+        "beast",
+        "companion"
+      ],
+      "variants": {
+        "tan": "hound_tan.png",
+        "grey": "hound_grey.png",
+        "black": "hound_black.png"
+      },
+      "summoner": "ranger/beastmaster",
+      "playerAccents": {
+        "tan": {
+          "p1": "hound_tan_p1.png",
+          "p2": "hound_tan_p2.png",
+          "p3": "hound_tan_p3.png",
+          "p4": "hound_tan_p4.png",
+          "p5": "hound_tan_p5.png",
+          "p6": "hound_tan_p6.png"
+        },
+        "grey": {
+          "p1": "hound_grey_p1.png",
+          "p2": "hound_grey_p2.png",
+          "p3": "hound_grey_p3.png",
+          "p4": "hound_grey_p4.png",
+          "p5": "hound_grey_p5.png",
+          "p6": "hound_grey_p6.png"
+        },
+        "black": {
+          "p1": "hound_black_p1.png",
+          "p2": "hound_black_p2.png",
+          "p3": "hound_black_p3.png",
+          "p4": "hound_black_p4.png",
+          "p5": "hound_black_p5.png",
+          "p6": "hound_black_p6.png"
+        }
+      }
+    },
+    "sapling": {
+      "name": "Treant Sapling",
+      "role": "companion",
+      "frame": {
+        "width": 40,
+        "height": 40,
+        "anchor": [
+          20,
+          37
+        ]
+      },
+      "footprint": [
+        1,
+        1
+      ],
+      "flying": false,
+      "tags": [
+        "plant",
+        "summon"
+      ],
+      "variants": {
+        "spring": "sapling_spring.png",
+        "autumn": "sapling_autumn.png",
+        "blossom": "sapling_blossom.png"
+      },
+      "summoner": "druid/grovekeeper",
+      "playerAccents": {
+        "spring": {
+          "p1": "sapling_spring_p1.png",
+          "p2": "sapling_spring_p2.png",
+          "p3": "sapling_spring_p3.png",
+          "p4": "sapling_spring_p4.png",
+          "p5": "sapling_spring_p5.png",
+          "p6": "sapling_spring_p6.png"
+        },
+        "autumn": {
+          "p1": "sapling_autumn_p1.png",
+          "p2": "sapling_autumn_p2.png",
+          "p3": "sapling_autumn_p3.png",
+          "p4": "sapling_autumn_p4.png",
+          "p5": "sapling_autumn_p5.png",
+          "p6": "sapling_autumn_p6.png"
+        },
+        "blossom": {
+          "p1": "sapling_blossom_p1.png",
+          "p2": "sapling_blossom_p2.png",
+          "p3": "sapling_blossom_p3.png",
+          "p4": "sapling_blossom_p4.png",
+          "p5": "sapling_blossom_p5.png",
+          "p6": "sapling_blossom_p6.png"
+        }
+      }
+    }
+  },
+  "notes": {
+    "sheet": "one sheet per monster and variant: row 0 front, row 1 back; frame size per monster",
+    "anchor": "the ground contact pixel; for a 2x2 footprint, the centre of the 2x2 block",
+    "flying": "drawn hovering above the anchor; the game should not snap it to the floor",
+    "playerAccents": "companions: the same sheet with the owner's player colour (p1-p6) on the collar / bandana / ribbon"
+  }
+}

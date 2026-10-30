@@ -111,18 +111,48 @@ directions. In the front facing the weapon hand is on screen-right.
 
 ### Animations
 
-Frame indices are per row. All animations play at the fps given in the manifest.
+There are 19 animations and 65 frames per facing. The manifest gives each animation's frame indices, fps and
+whether it loops (indices are per row; the back row is the same indices plus 65). `previews/04-animations.png` shows
+every one.
 
-| Anim | Frames | Notes |
+| Anim | Frames | Use |
 |---|---|---|
-| idle | 0–1 | loops |
-| walk | 2–5 | loops |
-| attack | 6–8 | overhead swing: swords, axes, maces |
-| thrust | 9–11 | spears, daggers |
-| shoot | 12–14 | bows |
-| cast | 15–17 | staffs, wands, tomes, unarmed |
-| hurt | 18 | |
-| down | 19 | kneeling: the "downed" state |
+| idle | 4, loop | Exploration: breathes, then blinks |
+| ready | 4, loop | Battle stance: weapon up, knees bent |
+| walk | 4, loop | |
+| attack | 5 | Overhead swing (swords, axes, maces, hammers, flails, scimitars): anticipation, wind-up, smear, impact, recover |
+| thrust | 4 | Spears, daggers, rapiers, halberds |
+| shoot | 4 | Bows and crossbows: raise, draw, hold, release |
+| cast | 4 | Staffs, wands, tomes and instruments: gather, raise, channel, release |
+| slam | 5 | Heavy leap attack for two-handers |
+| spin | 4 | Whirlwind cleave |
+| flurry | 6 | Unarmed or dual-wield combo: jab, cross, jab, kick |
+| bash | 3 | Shield bash |
+| block | 2 | |
+| dodge | 2 | |
+| jump | 3 | Ledges, and the monk's leap |
+| item | 3 | Drink a potion, read a scroll |
+| victory | 3, loop | |
+| hurt | 2 | |
+| down | 1 | The "downed" state |
+| rise | 2 | Getting up after a revive |
+
+Swing frames carry a motion smear, drawn by the weapon layer from the pose's `smear` angle. `build.py`'s
+`ATTACK_FOR` maps each weapon to its basic attack animation.
+
+### Subclasses
+
+There are 30 subclasses (`creator.SUBCLASSES`, three per class), picked at level 3. Each overrides parts of the
+class kit's gear and colours. Beastmaster, Grovekeeper and Fiendbound also name a companion, which the bosses set
+draws. Pass `make_character(..., subclass=id)`.
+
+The previews are `previews/06b-subclasses.png` (front, back and swing for each). The phone's subclass picker reads
+`characters/subclasses.png` and `subclasses.json`.
+
+### Townsfolk
+
+17 NPC presets (`recipes.NPCS`) cover exploration and dialogue. Tools such as a pitchfork, smithing hammer, broom,
+tankard or scroll ride in the weapon slot, so NPCs animate like anyone else.
 
 ### Composing a character (do this once per character or gear change, then cache it)
 
@@ -263,6 +293,23 @@ entry gives:
 - clouds and a star field.
 
 The manifest pairs each biome with a sky.
+
+## Emotes, status overlays and pickups
+
+| Set | What |
+|---|---|
+| `emotes/` | 15 speech and thought bubbles (`!`, `?`, `...`, heart, vote check, leader crown, skill-check die ...). Each pops in, then bobs: play 0–3 once, then loop 2–3. The tail tip is the anchor |
+| `status/` | 18 looping on-unit effects (stunned, sleeping, poisoned, burning, frozen, marked ...). They use the character frame and anchor, so they draw exactly over the unit. `headOffset` adjusts the overhead ones for short and large builds |
+| `pickups/` | Rarity loot beams (additive), a glint, a coin pile and a loot sack. A drop is beam + the item's icon bobbing by `iconBob` + glint |
+
+## World map, titles and the showcase
+
+- **`worldmap/`:** a tileable parchment, 12 location icons, an animated party pin and quest marker, and a generated
+  sample campaign map.
+- **`title/`:** the logo and emblem, moment banners (VICTORY, DEFEAT, LEVEL UP, YOUR TURN, BOSS ...), a chapter
+  ribbon, a 5×7 pixel font with advances, and a title-screen key art.
+- **`parts/showcase.py`:** renders `previews/anim-battle.gif`, a short battle built only from the pack's files. It's
+  the quickest end-to-end check that sets agree on scale, anchors and timing.
 
 ## Adding a set
 
