@@ -46,6 +46,9 @@ BEAST_RAMPS = {
     "slime_magma": ramp("#ff7b2b", shift=0.08, spread=0.8),
     "bat": ramp("#4a3a52", shift=0.06, spread=1.1), "bat_wing": ramp("#6a4a62", shift=0.06),
     "ivory": ramp("#e3d8bd", shift=0.05, spread=0.85), "mouth": ramp("#8a2a36", shift=0.06),
+    # Druid wild shapes: the beast in leaf-and-bark spirit colours, so allies read as allies
+    "wild_fur": ramp("#6f9a52", shift=0.08), "wild_belly": ramp("#c9d98a", shift=0.06, spread=0.8),
+    "wild_bark": ramp("#7a5a3a", shift=0.06),
 }
 
 
@@ -346,7 +349,9 @@ CATALOGUE: list[Beast] = [
         "dire": _v(fur="beast/wolf_dire", fur2="beast/belly_grey", eyes="eyes/red", horn="beast/ivory",
                    mouth="beast/mouth"),
         "frost": _v(fur="beast/wolf_frost", fur2="beast/belly_grey", eyes="eyes/blue", horn="beast/ivory",
-                    mouth="beast/mouth")}, ["beast"]),
+                    mouth="beast/mouth"),
+        "wildshape": _v(fur="beast/wild_fur", fur2="beast/wild_belly", eyes="magic/nature", horn="beast/ivory",
+                        mouth="beast/mouth")}, ["beast", "wildshape"]),
     Beast("boar", "Boar", quad("boar"), {
         "brown": _v(fur="beast/boar", fur2="beast/belly_light", eyes="eyes/red", horn="beast/ivory",
                     mouth="beast/mouth"),
@@ -358,7 +363,9 @@ CATALOGUE: list[Beast] = [
         "black": _v(fur="beast/bear_black", fur2="beast/bear_brown", eyes="eyes/amber", horn="beast/ivory",
                     mouth="beast/mouth"),
         "polar": _v(fur="beast/bear_polar", fur2="beast/belly_grey", eyes="eyes/dark", horn="beast/ivory",
-                    mouth="beast/mouth")}, ["beast", "large"]),
+                    mouth="beast/mouth"),
+        "wildshape": _v(fur="beast/wild_bark", fur2="beast/wild_fur", eyes="magic/nature", horn="beast/ivory",
+                        mouth="beast/mouth")}, ["beast", "large", "wildshape"]),
     Beast("spider", "Giant Spider", spider, {
         "black": _v(fur="beast/spider", fur2="beast/spider_red", glow="magic/blood", horn="beast/ivory"),
         "red": _v(fur="beast/spider_red", fur2="beast/ivory", glow="magic/fire", horn="beast/ivory")}, ["beast"]),

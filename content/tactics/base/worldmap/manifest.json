@@ -1,0 +1,44 @@
+{
+  "parchment": {
+    "file": "parchment.png",
+    "tile": true
+  },
+  "icon": {
+    "size": [
+      24,
+      24
+    ],
+    "anchor": [
+      12,
+      21
+    ],
+    "files": {
+      "town": "icons/town.png",
+      "village": "icons/village.png",
+      "castle": "icons/castle.png",
+      "dungeon": "icons/dungeon.png",
+      "ruins": "icons/ruins.png",
+      "tower": "icons/tower.png",
+      "camp": "icons/camp.png",
+      "port": "icons/port.png",
+      "shrine": "icons/shrine.png",
+      "lair": "icons/lair.png",
+      "forest": "icons/forest.png",
+      "mountain": "icons/mountain.png",
+      "party": "icons/party.png",
+      "quest": "icons/quest.png"
+    },
+    "animated": {
+      "party": {
+        "frames": 4,
+        "fps": 6
+      },
+      "quest": {
+        "frames": 4,
+        "fps": 6
+      }
+    }
+  },
+  "sample": "sample_map.png",
+  "notes": "Compose a campaign map from parchment + region washes + icons; the sample shows the style"
+}

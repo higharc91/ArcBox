@@ -80,10 +80,12 @@
         "grey": "wolf_grey.png",
         "timber": "wolf_timber.png",
         "dire": "wolf_dire.png",
-        "frost": "wolf_frost.png"
+        "frost": "wolf_frost.png",
+        "wildshape": "wolf_wildshape.png"
       },
       "tags": [
-        "beast"
+        "beast",
+        "wildshape"
       ],
       "flying": false
     },
@@ -103,11 +105,13 @@
       "variants": {
         "brown": "bear_brown.png",
         "black": "bear_black.png",
-        "polar": "bear_polar.png"
+        "polar": "bear_polar.png",
+        "wildshape": "bear_wildshape.png"
       },
       "tags": [
         "beast",
-        "large"
+        "large",
+        "wildshape"
       ],
       "flying": false
     },

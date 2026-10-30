@@ -505,7 +505,7 @@ SETS = {"palettes": build_palettes, "characters": build_characters, "anims": bui
 # Sets that live in their own module: parts/<name>.py with a build() function. Each writes under
 # content/tactics/base/<name>/ and previews/, using arcpix.out.
 PLUGIN_SETS = ("props", "portraits", "beasts", "backgrounds", "ui", "icons", "fx",
-               "ambient", "bosses", "emotes", "town", "status", "pickups")
+               "ambient", "bosses", "emotes", "town", "status", "pickups", "worldmap")
 for _name in PLUGIN_SETS:
     try:
         _mod = importlib.import_module(f"parts.{_name}")
