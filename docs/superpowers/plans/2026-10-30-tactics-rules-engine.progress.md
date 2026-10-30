@@ -30,8 +30,8 @@ When every task is done, one whole-branch review runs.
 | 6 | Movement, pushes, falling, opportunity attacks and reactions | done | `92b6d76`, `966d570` | 1 |
 | 7 | Conditions, hooks, passives and modifiers | done | `bc7c8d6`, `7e2eb32` | 1 |
 | 8 | Downed, Out, injuries, battle end, invariants and replays | done | `1c71e84`, `43f1895` | 1 |
-| 9 | Pack loader, validation and the content hash | in progress | | |
-| 10 | Remaining effect blocks, zones, summons and named hooks | not started | | |
+| 9 | Pack loader, validation and the content hash | done | `c810425`, `6b1462c` | 1 |
+| 10 | Remaining effect blocks, zones, summons and named hooks | in progress |  |  |
 | 11 | Tooltip generation | not started | | |
 | 12 | Sheet builder and encounter setup | not started | | |
 | 13 | Content wave 0: core files and fighter, cleric, rogue, wizard | not started | | |
@@ -112,6 +112,11 @@ These were decided during execution. Later tasks must follow them, alongside the
 - **Runaway safety.** One command is capped at 100,000 steps, then throws an invariant error.
 
 **Content loading (Task 9)**
+- **Unknown JSON properties are errors.** Content is read with a copy of `ArcJson.Options` that sets `UnmappedMemberHandling.Disallow`.
+- **No exception escapes the loader.** Every failure while loading becomes a `ContentError` that names the file and JSON pointer.
+- **The content hash is a hash of hashes.** Each file is hashed over its path, a NUL byte and its bytes; the sorted per-file hashes are then hashed together. Manifests are included, so reordering a manifest's file list changes the hash.
+- **Temporary flag.** `"subclassesPending": true` on a class is accepted until Task 20 removes it.
+- **Monster `aiProfile` checks** only switch on once some pack defines AI profiles; Task 14 makes them strict.
 - **Prop cover** must be none, half or three-quarters; `total` is rejected.
 - **Bad values the loader must reject:**
   - empty ids;
@@ -133,5 +138,6 @@ These were decided during execution. Later tasks must follow them, alongside the
 | 4 | `Start` normalises only `Sheet.Resources`; records holding arrays compare by reference (golden tests compare JSON); rejection-text test checks only 3 of 16 strings; `CantAfford` with no resource gives "Not enough ."; `ObjectiveExpr` allows a leaf with a group; `UnitSheet.Score` defaults a missing stat to 10 |
 | 5 | A self line/cone with no aim tile pays its cost and hits nothing; the converter's key detection could collide with a parameter named like a block; `Battle.cs` is about 320 lines (targeting could move out) |
 | 6 | No HP event on deep-water drops (Task 8 addresses); prone applied after a lethal fall; Swap has no landing check; `Movement` depends on `Motion.OccupantAt` |
+| 9 | Trigger `do` effect blocks are only checked for known keys (Task 22 must fully check them); a second `xp.json` reports its duplicate at a nonexistent `/id`; the pack label comes from the manifest id, not the folder name |
 | 8 | Fall/collision damage has no source (no `OnKill` for the pusher); `RoundStarted.Order` can list a unit that goes Out right after; golden fixture lacks `TurnSkipped`/`UnitOut`/`BattleEnded`; `Invariants.Enabled` is a public static; `.json` line endings not pinned |
 | 7 | Several `Hooks.Fire` calls in one step run in reverse order; passive and ability `UsesLeft` share keys; `AttackStep` doesn't check the attacker is alive at Resolve; several `WhenDef` leaves and limits untested; `Modifiers.For` recomputed often (performance) |
