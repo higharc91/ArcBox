@@ -22,6 +22,9 @@
     "abilities/ranger.json",
     "abilities/paladin.json",
     "abilities/monk.json",
+    "abilities/bard.json",
+    "abilities/druid.json",
+    "abilities/warlock.json",
     "classes/fighter.json",
     "classes/cleric.json",
     "classes/rogue.json",
@@ -29,9 +32,13 @@
     "classes/ranger.json",
     "classes/paladin.json",
     "classes/monk.json",
+    "classes/bard.json",
+    "classes/druid.json",
+    "classes/warlock.json",
     "monsters/goblinoids.json",
     "monsters/undead.json",
     "monsters/beasts-1.json",
+    "monsters/wildshape.json",
     "maps/river_crossing.json",
     "encounters/river_crossing.json"
   ]

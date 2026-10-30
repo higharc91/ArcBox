@@ -182,6 +182,10 @@ public static class Hooks
             return false;
         if (when.Success is { } success && (args.Roll?.Success == true) != success)
             return false;
+        if (when.RoundEven is { } even && (state.Round % 2 == 0) != even)
+            return false;
+        if (when.RoundAtLeast is { } minRound && state.Round < minRound)
+            return false;
         return when.TargetTag is not { } tag || subject.Sheet.Tags.Contains(tag);
     }
 

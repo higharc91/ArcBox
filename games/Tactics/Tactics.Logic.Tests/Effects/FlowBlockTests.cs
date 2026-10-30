@@ -73,6 +73,18 @@ public sealed class FlowBlockTests
         var onFail = new SaveEffect(Stat.Dex, 30, [new IfEffect(new WhenDef(Success: true), [Zap], [new ApplyEffect(Prone, null)])], []);
         (after, events) = battle.Run(state, "mage", "gob", T(2, 0), onFail);
         Assert.Equal(new ConditionApplied(U("gob"), Prone), events[^1]);
+
+        // Round parity and minimum round tests.
+        var evenRound = new IfEffect(new WhenDef(RoundEven: true), [Zap], [new ApplyEffect(Prone, null)]);
+        var atLeastRound3 = new IfEffect(new WhenDef(RoundAtLeast: 3), [Zap], [new ApplyEffect(Prone, null)]);
+        (_, events) = battle.Run(state with { Round = 1 }, "mage", "gob", T(2, 0), evenRound);
+        Assert.Equal<BattleEvent>([new ConditionApplied(U("gob"), Prone)], events);
+        (_, events) = battle.Run(state with { Round = 2 }, "mage", "gob", T(2, 0), evenRound);
+        Assert.IsType<Damaged>(Assert.Single(events));
+        (_, events) = battle.Run(state with { Round = 2 }, "mage", "gob", T(2, 0), atLeastRound3);
+        Assert.Equal<BattleEvent>([new ConditionApplied(U("gob"), Prone)], events);
+        (_, events) = battle.Run(state with { Round = 3 }, "mage", "gob", T(2, 0), atLeastRound3);
+        Assert.IsType<Damaged>(Assert.Single(events));
     }
 
     [Fact]

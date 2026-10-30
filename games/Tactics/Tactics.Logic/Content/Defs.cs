@@ -173,6 +173,8 @@ public sealed record StaticMods(
 /// <item><see cref="IsSpell"/>: whether the ability is a spell (tier 1 or more) or the attack a spell attack.</item>
 /// <item><see cref="DamageType"/>: the damage taken was of this type.</item>
 /// <item><see cref="Success"/>: whether the roll the effect follows succeeded (an attack hit, a save was made).</item>
+/// <item><see cref="RoundEven"/>: whether the current round number is even. <see cref="RoundAtLeast"/>: the current round is at
+/// least this number.</item>
 /// </list>
 /// Every key present must hold.
 /// </summary>
@@ -189,7 +191,9 @@ public sealed record WhenDef(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] bool? IsSpell = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? DamageType = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? TargetTag = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] bool? Success = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] bool? Success = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] bool? RoundEven = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? RoundAtLeast = null);
 
 /// <summary>Whom a passive's effects land on. JSON: <c>"other"</c> (the default) or <c>"self"</c>.</summary>
 public enum PassiveTarget

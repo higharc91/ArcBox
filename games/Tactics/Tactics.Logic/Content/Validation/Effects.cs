@@ -168,7 +168,9 @@ internal sealed partial class Validation
                     Error(file, At("range"), $"Range {chain.Range} is over the limit of {MaxRange}.");
                 break;
             case RepeatEffect repeat:
-                AtLeast(repeat.Times, 1, file, At("times"));
+                Levels(repeat.Times, file, At("times"));
+                foreach (var n in repeat.Times.Steps.Values)
+                    AtLeast(n, 1, file, At("times"));
                 break;
             case IfEffect branching:
                 When(branching.When, file, At("when"));

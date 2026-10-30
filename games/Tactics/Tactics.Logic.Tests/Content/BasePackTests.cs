@@ -12,10 +12,10 @@ public sealed class BasePackTests
     /// <summary>The base pack, loaded once with the art manifests.</summary>
     internal static RulesPack Rules => Pack.Value;
 
-    private static readonly string[] Classes = ["cleric", "fighter", "monk", "paladin", "ranger", "rogue", "wizard"];
+    private static readonly string[] Classes = ["bard", "cleric", "druid", "fighter", "monk", "paladin", "ranger", "rogue", "warlock", "wizard"];
 
-    /// <summary>The classes whose subclasses are still to be written (Task 19); every other class has exactly one so far.</summary>
-    private static readonly string[] SubclassesPending = ["monk", "paladin", "ranger"];
+    /// <summary>The classes whose subclasses are still to be written (Tasks 19–20); every other class has exactly one so far.</summary>
+    private static readonly string[] SubclassesPending = ["bard", "druid", "monk", "paladin", "ranger", "warlock"];
 
     private static readonly string[] AiProfiles = ["archer", "boss", "boss_cruel", "brute", "caster", "companion", "coward", "healer", "skirmisher"];
 
@@ -42,7 +42,7 @@ public sealed class BasePackTests
         Assert.Equal(["black_eye", "bruised_pride", "concussion", "cracked_ribs", "deep_cut", "shaken", "sprained_ankle", "wrenched_shoulder"],
             pack.Injuries.Keys.Select(i => i.Value));
         Assert.Equal(["alchemists_fire", "greater_healing", "potion_of_healing", "smoke_bomb"], pack.Items.Keys.Select(i => i.Value));
-        Assert.Equal(["dire_wolf", "giant_spider", "goblin", "goblin_archer", "goblin_boss", "hobgoblin", "kobold", "skeleton", "wolf", "zombie"],
+        Assert.Equal(["bear", "dire_wolf", "giant_spider", "goblin", "goblin_archer", "goblin_boss", "hobgoblin", "kobold", "skeleton", "wolf", "zombie"],
             pack.Monsters.Keys);
         Assert.Equal(XpTable.Default.Thresholds, pack.Xp.Thresholds);
         Assert.Equal(["river_crossing"], pack.Maps.Keys);
@@ -56,7 +56,7 @@ public sealed class BasePackTests
             "blinded", "charmed", "frightened", "grappled", "incapacitated", "invisible", "paralysed", "poisoned", "prone", "restrained",
             "stunned", "unconscious", "burning", "bleeding", "slowed", "hasted", "marked", "lit", "taunted", "helped", "dodging", "disengaged",
             "hunters_mark", "ensnared", "barkskin", "divine_smite", "divine_smite_2", "divine_smite_3", "aura_of_protection",
-            "elemental_weapon",
+            "elemental_weapon", "hex", "inspired", "countercharm",
         ];
         Assert.All(conditions, c => Assert.True(pack.Conditions.ContainsKey(new ConditionId(c)), $"No condition '{c}'."));
         string[] common = ["attack", "dash", "disengage", "dodge", "help", "shove", "use_item"];
@@ -181,7 +181,8 @@ public sealed class BasePackTests
         var base_ = Rules;
         var map = AsciiMap.Parse(field);
         var rules = RulesPack.InMemory("smoke", base_.Abilities.Values, base_.Passives.Values, base_.Conditions.Values, [map],
-            base_.Injuries.Values, items: base_.Items.Values);
+            base_.Injuries.Values, items: base_.Items.Values,
+            monsters: base_.Monsters.Keys.Select(m => (m, SheetBuilder.ForMonster(m, base_))));
         Invariants.Enabled = true;
         var owners = base_.Classes.Values
             .SelectMany(c => c.Subclasses.Select(s => (SubclassDef?)s).DefaultIfEmpty(null)

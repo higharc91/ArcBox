@@ -57,14 +57,15 @@ public sealed class RepeatBlock : EffectBlock<RepeatEffect>
 
     /// <inheritdoc />
     protected override string? Describe(RepeatEffect def, int level, RulesPack rules)
-        => $"{def.Times} times: {Tooltips.Group(def.Effects, level, rules)}";
+        => $"{def.Times.At(level)} times: {Tooltips.Group(def.Effects, level, rules)}";
 
     /// <inheritdoc />
     protected override void Run(RepeatEffect def, EffectContext ctx)
     {
-        if (def.Effects.IsDefaultOrEmpty || def.Times < 1)
+        var times = def.Times.At(ctx.Level);
+        if (def.Effects.IsDefaultOrEmpty || times < 1)
             return;
-        ctx.W.PushFront([.. Enumerable.Range(0, def.Times).Select(_ => new RunEffectsStep(ctx.Source, ctx.Target, ctx.Aim,
+        ctx.W.PushFront([.. Enumerable.Range(0, times).Select(_ => new RunEffectsStep(ctx.Source, ctx.Target, ctx.Aim,
             ctx.Ability?.Id, def.Effects, ctx.Last, ctx.HalfDamage, ctx.SaveStat, ctx.W.HookDepth))]);
     }
 }

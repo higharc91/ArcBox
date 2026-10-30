@@ -75,7 +75,8 @@ internal sealed partial class Scorer
                 {
                     var once = Walk(repeat.Effects, st, target, crit, half, last);
                     var total = Outcome.None;
-                    for (var i = 0; i < repeat.Times; i++)
+                    var times = repeat.Times.At(st.Context.Level);
+                    for (var i = 0; i < times; i++)
                         total = total.Then(once);
                     return total;
                 }
@@ -95,9 +96,23 @@ internal sealed partial class Scorer
                     return total <= 0 ? Outcome.None : Outcome.Mix([.. random.Table.Select(e =>
                         ((double)Math.Max(0, e.Weight) / total, Walk(e.Effects, st, target, crit, half, last)))]);
                 }
+            case TransformEffect transform:
+                return Transform(transform, st, target);
             default:
                 return Outcome.None;   // movement, terrain, resources, turn order: no value of their own to the target
         }
+    }
+
+    private Outcome Transform(TransformEffect def, Strike st, UnitState target)
+    {
+        if (def.Hook == "wild_shape" && target.TrueSheet is null
+            && (target.Hp * 2 < target.Sheet.MaxHp || target.Resources.GetValueOrDefault("mana", 2) <= 1)
+            && def.Args.ValueKind == System.Text.Json.JsonValueKind.Object && def.Args.TryGetProperty("monster", out var m)
+            && m.GetString() is { } monsterId && Rules.MonsterSheet(monsterId) is { } beast)
+            return new Outcome(DamageDist.Zero, TempHp: beast.MaxHp, Offense: 0.2 * beast.Attacks);
+        if (def.Hook == "polymorph" && Hostile(st.User, target))
+            return new Outcome(DamageDist.Zero, Offense: -1.5);
+        return Outcome.None;
     }
 
     /// <summary>An attack roll (see <see cref="AttackStep"/>): hit, crit and miss branches, with the user's on-hit passives.</summary>
@@ -189,19 +204,28 @@ internal sealed partial class Scorer
     /// </summary>
     private double QuarryDamage(ConditionId condition, Strike st, UnitState target, double turns)
     {
-        var total = 0.0;
-        foreach (var passive in Modifiers.Passives(st.User, Rules))
+        if (!st.Quarrying.Add(condition))
+            return 0;
+        try
         {
-            if (passive.Hook != HookKind.OnAttackHit || passive.Target != PassiveTarget.Other || passive.Effects.IsDefaultOrEmpty
-                || passive.When is not { } when || !Needs(when, condition))
-                continue;
-            var perTurn = passive.OncePerTurn ? QuarryHitShare : QuarryHitShare * Math.Max(1, st.User.Sheet.Attacks);
-            var hits = perTurn * turns;
-            if (All(passive.Effects).Any(e => e is RemoveEffect r && r.Condition == condition))
-                hits = Math.Min(1, hits);
-            total += hits * Walk(passive.Effects, st, target).Damage.Mean;
+            var total = 0.0;
+            foreach (var passive in Modifiers.Passives(st.User, Rules))
+            {
+                if (passive.Hook != HookKind.OnAttackHit || passive.Target != PassiveTarget.Other || passive.Effects.IsDefaultOrEmpty
+                    || passive.When is not { } when || !Needs(when, condition))
+                    continue;
+                var perTurn = passive.OncePerTurn ? QuarryHitShare : QuarryHitShare * Math.Max(1, st.User.Sheet.Attacks);
+                var hits = perTurn * turns;
+                if (All(passive.Effects).Any(e => e is RemoveEffect r && r.Condition == condition))
+                    hits = Math.Min(1, hits);
+                total += hits * Walk(passive.Effects, st, target).Damage.Mean;
+            }
+            return total;
         }
-        return total;
+        finally
+        {
+            st.Quarrying.Remove(condition);
+        }
 
         static bool Needs(WhenDef when, ConditionId id)
             => when.TargetHasCondition == id || !when.All.IsDefaultOrEmpty && when.All.Any(w => Needs(w, id));

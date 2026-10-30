@@ -227,6 +227,15 @@ public sealed class PlannerTests
         // Once marked, marking it again is worth nothing.
         var marked = state.Give("vex", TestConditions.Lasting(quarry, U("archer")));
         Assert.Null(UseOf(Ai.Plan(marked, U("archer"), battle.Rules), "test.mark"));
+
+        // A passive that re-applies the quarry condition on hit must not recurse forever when scoring QuarryDamage.
+        var reapply = bonus with { Effects = [new DamageEffect(TestAbilities.Flat("1d6"), "force", []), new ApplyEffect(quarry.Id, Rounds: 2)] };
+        var reapplyingBattle = On("0. 0. 0. 0. 0. 0.")
+            .With(mark).WithPassives(reapply).WithConditions(quarry)
+            .Enemy("archer", archer with { Passives = [reapply.Id] }, T(0, 0), new AiControlled("archer"))
+            .Party("vex", TestSheets.Rogue with { MaxHp = 40 }, T(5, 0));
+        var reapplyingPlan = Ai.Plan(reapplyingBattle.Start().State, U("archer"), reapplyingBattle.Rules);
+        Assert.Equal(U("vex"), UseOf(reapplyingPlan, "test.mark")?.Target.Unit);
     }
 
     [Fact]

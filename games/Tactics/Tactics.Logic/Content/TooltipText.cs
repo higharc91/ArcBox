@@ -245,6 +245,10 @@ internal static class TooltipText
             parts.Add(($"the target is {tag}", false));
         if (when.Success is { } success)
             parts.Add((success ? "the roll succeeds" : "the roll fails", false));
+        if (when.RoundEven is { } roundEven)
+            parts.Add((roundEven ? "the round is even" : "the round is odd", false));
+        if (when.RoundAtLeast is { } roundAtLeast)
+            parts.Add(($"the round is at least {roundAtLeast}", false));
 
         if (parts.Count == 0)
             return "always";

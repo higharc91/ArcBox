@@ -1,0 +1,20 @@
+[
+  { "id": "wolf", "name": "Wolf", "level": 2, "cr": "1/4", "xp": 50, "move": 5,
+    "scores": { "str": 12, "dex": 15, "con": 12, "int": 3, "wis": 12, "cha": 6 }, "hp": 14, "ac": 13,
+    "weapon": { "id": "bite", "damage": "1d6", "damageType": "piercing", "stat": "dex", "finesse": true, "ranged": false,
+                "range": 1, "reach": false, "tags": ["natural"] },
+    "abilities": [], "passives": ["wolf.knockdown"], "skills": ["perception", "stealth"], "tags": ["beast"],
+    "aiProfile": "skirmisher", "sprite": "beasts.wolf.wildshape" },
+  { "id": "bear", "name": "Bear", "level": 4, "cr": "1", "xp": 200, "move": 4, "attacks": 2,
+    "scores": { "str": 17, "dex": 12, "con": 16, "int": 2, "wis": 12, "cha": 7 }, "hp": 26, "ac": 13,
+    "weapon": { "id": "claws", "damage": "1d8", "damageType": "slashing", "stat": "str", "finesse": false, "ranged": false,
+                "range": 1, "reach": false, "tags": ["natural"] },
+    "abilities": [], "passives": [], "skills": ["perception"], "tags": ["beast"],
+    "aiProfile": "brute", "sprite": "beasts.bear.wildshape" },
+  { "id": "dire_wolf", "name": "Dire Wolf", "level": 6, "cr": "1", "xp": 200, "move": 5, "attacks": 2,
+    "scores": { "str": 17, "dex": 15, "con": 15, "int": 3, "wis": 12, "cha": 7 }, "hp": 32, "ac": 14,
+    "weapon": { "id": "bite", "damage": "1d10", "damageType": "piercing", "stat": "str", "finesse": false, "ranged": false,
+                "range": 1, "reach": false, "tags": ["natural"] },
+    "abilities": [], "passives": ["dire_wolf.knockdown"], "skills": ["perception", "stealth"], "tags": ["beast"],
+    "aiProfile": "brute", "sprite": "beasts.wolf.wildshape" }
+]

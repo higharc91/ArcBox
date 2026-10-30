@@ -262,8 +262,8 @@ public sealed record TurnOrderEffect(string Op, int Slots = 1) : EffectDef;
 /// </summary>
 public sealed record ChainEffect(int Times, int Range, ImmutableArray<EffectDef> Effects) : EffectDef;
 
-/// <summary><c>"repeat"</c>: runs <see cref="Effects"/> on the target <see cref="Times"/> times, each run a hit of its own.</summary>
-public sealed record RepeatEffect(int Times, ImmutableArray<EffectDef> Effects) : EffectDef;
+/// <summary><c>"repeat"</c>: runs <see cref="Effects"/> on the target <see cref="Times"/> times (at the user's level), each run a hit of its own.</summary>
+public sealed record RepeatEffect(ByLevel<int> Times, ImmutableArray<EffectDef> Effects) : EffectDef;
 
 /// <summary>
 /// <c>"if"</c>: runs <see cref="Then"/> when <see cref="When"/> holds (with the user as owner, the target as the other

@@ -68,5 +68,10 @@
   { "id": "elemental_weapon", "name": "Wielding an Elemental Weapon", "tags": ["magical"], "static": { "attack": 1, "damage": 2 } },
   { "id": "death_ward", "name": "Death Ward", "tags": ["magical"],
     "passives": [ { "id": "death_ward.save", "hook": "onDowned", "target": "self", "usesPerBattle": 1,
-                    "effects": [ { "revive": { "hp": 1 } }, { "remove": "death_ward" } ] } ] }
+                    "effects": [ { "revive": { "hp": 1 } }, { "remove": "death_ward" } ] } ] },
+  { "id": "hex", "name": "Hexed", "tags": ["magical", "curse"] },
+  { "id": "inspired", "name": "Inspired", "tags": ["magical"],
+    "static": { "attack": 2, "saves": { "str": 2, "dex": 2, "con": 2, "int": 2, "wis": 2, "cha": 2 } } },
+  { "id": "countercharm", "name": "Under a Countercharm", "tags": ["aura"],
+    "static": { "saveEdges": { "wis": "advantage", "cha": "advantage" } } }
 ]
