@@ -438,14 +438,10 @@ public partial class Main : Control
         _lobby = lobby;
         _roomReady = true;
         GameSceneMap.Prewarm(lobby.SelectedGameId);
-        if (!lobby.InGame)
-        {
-            WarmUp(lobby.SelectedGameId);
-        }
-        AutoStartStep(lobby);
 
         if (lobby.InGame && lobby.SelectedGameId is { } gameId)
         {
+            AutoStartStep(lobby);
             if (_kind != ScreenKind.Game || _sceneGameId != gameId)
             {
                 ShowGame(gameId);
@@ -453,6 +449,9 @@ public partial class Main : Control
             return;
         }
 
+        // Off the game screen before warming up: a lobby that arrives while the game is still on air (a rebuilt room
+        // after a server restart sends the lobby before its "interrupted" GameEnded) parks that scene as the warm one,
+        // so WarmUp keeps it rather than loading a second copy behind it.
         switch (_kind)
         {
             case ScreenKind.Results:
@@ -466,6 +465,8 @@ public partial class Main : Control
                 ShowLobby();
                 break;
         }
+        WarmUp(lobby.SelectedGameId);
+        AutoStartStep(lobby);
     }
 
     /// <summary><c>--autostart</c>: select the game, then start it once enough players are in (first game only).</summary>
@@ -760,6 +761,8 @@ public partial class Main : Control
         }
         _lobbyShotKey = LobbyKey(_lobby);
         SetScreen(screen, ScreenKind.Lobby, "lobby");
+        // Tools read it (the e2e restart run checks the lobby after the results is the same room's).
+        GD.Print($"LOBBY {_lobby?.Code}");
     }
 
     /// <summary>Shots of lobby changes (players joining, game picked) while the lobby stays up.</summary>
@@ -904,6 +907,10 @@ public partial class Main : Control
             }
         };
         SetScreen(screen, ScreenKind.Results, "results");
+        // Tools read it: `RESULTS <message> | <name> <score>, …`, either part left out when empty (the e2e restart run
+        // checks for the "interrupted" note, the swap run that the swapped phone's player is listed once).
+        string[] parts = [results.Message ?? "", string.Join(", ", results.Scores.Select(s => $"{s.Name} {s.Score}"))];
+        GD.Print($"RESULTS {string.Join(" | ", parts.Where(p => p.Length > 0))}");
     }
 
     // ---- Reconnecting banner -------------------------------------------------------------------------------

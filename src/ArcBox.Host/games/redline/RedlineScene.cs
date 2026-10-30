@@ -12,6 +12,7 @@ using ArcBox.Sdk;
 using Godot;
 using Redline.Logic;
 using Redline.Presentation;
+using Redline.Presentation.Audio;
 using Redline.Presentation.Ceremony;
 using Redline.Presentation.Hud;
 
@@ -164,14 +165,31 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
     /// <summary>
     /// The race is over and the lobby still has REDLINE selected: stop drawing and wait for the next start. Keeping
     /// this instance (and so its materials and their compiled shaders) is what makes the next start quick.
+    /// <para>
+    /// The race may not have reached its podium: a server restart, the host's Esc or the room closing takes the scene
+    /// off the air in any phase (<see cref="RaceInterruption.WasInterrupted"/>). Only then does everything a phase left
+    /// running stop here: the narration and the effects (<see cref="AudioDirector.OffAir"/>) and any car still smoking
+    /// from a spin. A race that ran to its end parks as it always has, its last line or cork pop ringing out.
+    /// </para>
     /// </summary>
     public void Park()
     {
         _warm = WarmState.Ready;
         _pendingShots.Clear();
+        var interrupted = RaceInterruption.WasInterrupted(_view?.Phase);
         _view = null;
         _podium?.HideCeremony();
         Hide3D();
+        if (interrupted)
+        {
+            foreach (var car in _cars.Values)
+            {
+                car.Smoke(0);
+            }
+            _audio.OffAir();
+            GD.Print("REDLINE parked for the next race (interrupted)");
+            return;
+        }
         _audio.Lobby();
         GD.Print("REDLINE parked for the next race");
     }
