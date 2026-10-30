@@ -232,9 +232,10 @@ def build_dioramas() -> None:
     for name, make in D.SCENES.items():
         save(iso.finish(iso.render(make())), PREVIEWS / f"12-diorama-{name}.png")
     # the ford again, animated: the river flows
+    # 24 frames: the least common multiple of the water (8), campfire (6) and banner (4) loops
     frames = [iso.finish(iso.render(D.ashen_ford(k)), zoom=1).convert("P", palette=Image.Palette.ADAPTIVE)
-              for k in range(8)]
-    frames[0].save(PREVIEWS / "anim-river.gif", save_all=True, append_images=frames[1:], duration=160, loop=0)
+              for k in range(24)]
+    frames[0].save(PREVIEWS / "anim-river.gif", save_all=True, append_images=frames[1:], duration=140, loop=0)
 
 
 def build_palettes() -> None:

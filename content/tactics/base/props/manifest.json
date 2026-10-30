@@ -1,0 +1,758 @@
+{
+  "props": {
+    "tree": {
+      "variants": {
+        "green": "tree_green.png",
+        "light": "tree_light.png",
+        "autumn": "tree_autumn.png",
+        "red": "tree_red.png",
+        "blossom": "tree_blossom.png"
+      },
+      "size": [
+        48,
+        64
+      ],
+      "anchor": [
+        24,
+        63
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 4,
+      "tags": [
+        "nature"
+      ]
+    },
+    "tree_fruit": {
+      "variants": {
+        "apple": "tree_fruit_apple.png"
+      },
+      "size": [
+        48,
+        64
+      ],
+      "anchor": [
+        24,
+        63
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 4,
+      "tags": []
+    },
+    "pine": {
+      "variants": {
+        "green": "pine_green.png"
+      },
+      "size": [
+        40,
+        64
+      ],
+      "anchor": [
+        20,
+        63
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 4,
+      "tags": [
+        "nature"
+      ]
+    },
+    "pine_snowy": {
+      "variants": {
+        "snow": "pine_snowy_snow.png"
+      },
+      "size": [
+        40,
+        64
+      ],
+      "anchor": [
+        20,
+        63
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 4,
+      "tags": []
+    },
+    "dead_tree": {
+      "variants": {
+        "grey": "dead_tree_grey.png",
+        "dark": "dead_tree_dark.png"
+      },
+      "size": [
+        44,
+        60
+      ],
+      "anchor": [
+        22,
+        59
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 3,
+      "tags": []
+    },
+    "bush": {
+      "variants": {
+        "green": "bush_green.png",
+        "light": "bush_light.png",
+        "autumn": "bush_autumn.png",
+        "red": "bush_red.png"
+      },
+      "size": [
+        28,
+        22
+      ],
+      "anchor": [
+        14,
+        21
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "half",
+      "height": 1,
+      "tags": []
+    },
+    "bush_berry": {
+      "variants": {
+        "green": "bush_berry_green.png"
+      },
+      "size": [
+        28,
+        22
+      ],
+      "anchor": [
+        14,
+        21
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "half",
+      "height": 1,
+      "tags": []
+    },
+    "rock_small": {
+      "variants": {
+        "grey": "rock_small_grey.png",
+        "warm": "rock_small_warm.png",
+        "dark": "rock_small_dark.png"
+      },
+      "size": [
+        16,
+        12
+      ],
+      "anchor": [
+        8,
+        11
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": []
+    },
+    "rock_medium": {
+      "variants": {
+        "grey": "rock_medium_grey.png",
+        "warm": "rock_medium_warm.png",
+        "dark": "rock_medium_dark.png"
+      },
+      "size": [
+        24,
+        18
+      ],
+      "anchor": [
+        12,
+        17
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": []
+    },
+    "rock_large": {
+      "variants": {
+        "grey": "rock_large_grey.png",
+        "warm": "rock_large_warm.png",
+        "dark": "rock_large_dark.png"
+      },
+      "size": [
+        36,
+        30
+      ],
+      "anchor": [
+        18,
+        29
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 2,
+      "tags": []
+    },
+    "rock_mossy": {
+      "variants": {
+        "grey": "rock_mossy_grey.png",
+        "warm": "rock_mossy_warm.png",
+        "dark": "rock_mossy_dark.png"
+      },
+      "size": [
+        36,
+        30
+      ],
+      "anchor": [
+        18,
+        29
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 2,
+      "tags": []
+    },
+    "stump": {
+      "variants": {
+        "oak": "stump_oak.png"
+      },
+      "size": [
+        24,
+        18
+      ],
+      "anchor": [
+        12,
+        17
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": []
+    },
+    "log": {
+      "variants": {
+        "oak": "log_oak.png"
+      },
+      "size": [
+        34,
+        16
+      ],
+      "anchor": [
+        17,
+        15
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": []
+    },
+    "tall_grass": {
+      "variants": {
+        "green": "tall_grass_green.png",
+        "dry": "tall_grass_dry.png"
+      },
+      "size": [
+        18,
+        18
+      ],
+      "anchor": [
+        9,
+        17
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": []
+    },
+    "reeds": {
+      "variants": {
+        "swamp": "reeds_swamp.png"
+      },
+      "size": [
+        18,
+        26
+      ],
+      "anchor": [
+        9,
+        25
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": []
+    },
+    "mushrooms": {
+      "variants": {
+        "red": "mushrooms_red.png",
+        "violet": "mushrooms_violet.png"
+      },
+      "size": [
+        18,
+        16
+      ],
+      "anchor": [
+        9,
+        15
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": []
+    },
+    "crystals": {
+      "variants": {
+        "blue": "crystals_blue.png",
+        "violet": "crystals_violet.png",
+        "green": "crystals_green.png"
+      },
+      "size": [
+        24,
+        28
+      ],
+      "anchor": [
+        12,
+        27
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 2,
+      "tags": []
+    },
+    "crate": {
+      "variants": {
+        "oak": "crate_oak.png"
+      },
+      "size": [
+        26,
+        28
+      ],
+      "anchor": [
+        13,
+        27
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": []
+    },
+    "barrel": {
+      "variants": {
+        "oak": "barrel_oak.png"
+      },
+      "size": [
+        18,
+        26
+      ],
+      "anchor": [
+        9,
+        25
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": []
+    },
+    "sack": {
+      "variants": {
+        "burlap": "sack_burlap.png"
+      },
+      "size": [
+        16,
+        16
+      ],
+      "anchor": [
+        8,
+        15
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": []
+    },
+    "chest": {
+      "variants": {
+        "oak": "chest_oak.png"
+      },
+      "size": [
+        26,
+        26
+      ],
+      "anchor": [
+        13,
+        25
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": []
+    },
+    "chest_open": {
+      "variants": {
+        "oak": "chest_open_oak.png"
+      },
+      "size": [
+        26,
+        26
+      ],
+      "anchor": [
+        13,
+        25
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": []
+    },
+    "fence": {
+      "variants": {
+        "oak": "fence_oak.png"
+      },
+      "size": [
+        36,
+        30
+      ],
+      "anchor": [
+        18,
+        29
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": []
+    },
+    "campfire": {
+      "variants": {
+        "fire": "campfire_fire.png"
+      },
+      "size": [
+        28,
+        30
+      ],
+      "anchor": [
+        14,
+        29
+      ],
+      "frames": 6,
+      "fps": 10,
+      "blocks": true,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "light"
+      ]
+    },
+    "torch": {
+      "variants": {
+        "fire": "torch_fire.png"
+      },
+      "size": [
+        12,
+        34
+      ],
+      "anchor": [
+        6,
+        33
+      ],
+      "frames": 4,
+      "fps": 8,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "light"
+      ]
+    },
+    "lamp_post": {
+      "variants": {
+        "iron": "lamp_post_iron.png"
+      },
+      "size": [
+        16,
+        44
+      ],
+      "anchor": [
+        8,
+        43
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "none",
+      "height": 3,
+      "tags": [
+        "light"
+      ]
+    },
+    "banner": {
+      "variants": {
+        "crimson": "banner_crimson.png",
+        "navy": "banner_navy.png",
+        "forest": "banner_forest.png",
+        "goblin": "banner_goblin.png"
+      },
+      "size": [
+        24,
+        48
+      ],
+      "anchor": [
+        12,
+        47
+      ],
+      "frames": 4,
+      "fps": 6,
+      "blocks": false,
+      "cover": "none",
+      "height": 3,
+      "tags": []
+    },
+    "signpost": {
+      "variants": {
+        "oak": "signpost_oak.png"
+      },
+      "size": [
+        24,
+        34
+      ],
+      "anchor": [
+        12,
+        33
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": []
+    },
+    "well": {
+      "variants": {
+        "stone": "well_stone.png"
+      },
+      "size": [
+        34,
+        40
+      ],
+      "anchor": [
+        17,
+        39
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 2,
+      "tags": []
+    },
+    "tent": {
+      "variants": {
+        "canvas": "tent_canvas.png",
+        "red": "tent_red.png"
+      },
+      "size": [
+        44,
+        34
+      ],
+      "anchor": [
+        22,
+        33
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 3,
+      "tags": []
+    },
+    "haystack": {
+      "variants": {
+        "hay": "haystack_hay.png"
+      },
+      "size": [
+        30,
+        24
+      ],
+      "anchor": [
+        15,
+        23
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 2,
+      "tags": []
+    },
+    "gravestone": {
+      "variants": {
+        "grey": "gravestone_grey.png",
+        "warm": "gravestone_warm.png",
+        "dark": "gravestone_dark.png"
+      },
+      "size": [
+        18,
+        24
+      ],
+      "anchor": [
+        9,
+        23
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": []
+    },
+    "grave_cross": {
+      "variants": {
+        "grey": "grave_cross_grey.png",
+        "warm": "grave_cross_warm.png",
+        "dark": "grave_cross_dark.png"
+      },
+      "size": [
+        18,
+        24
+      ],
+      "anchor": [
+        9,
+        23
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": []
+    },
+    "pillar": {
+      "variants": {
+        "grey": "pillar_grey.png",
+        "warm": "pillar_warm.png",
+        "dark": "pillar_dark.png"
+      },
+      "size": [
+        22,
+        56
+      ],
+      "anchor": [
+        11,
+        55
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 4,
+      "tags": []
+    },
+    "pillar_broken": {
+      "variants": {
+        "grey": "pillar_broken_grey.png",
+        "warm": "pillar_broken_warm.png",
+        "dark": "pillar_broken_dark.png"
+      },
+      "size": [
+        22,
+        56
+      ],
+      "anchor": [
+        11,
+        55
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 3,
+      "tags": []
+    },
+    "altar": {
+      "variants": {
+        "holy": "altar_holy.png",
+        "dark": "altar_dark.png"
+      },
+      "size": [
+        32,
+        28
+      ],
+      "anchor": [
+        16,
+        27
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": []
+    },
+    "rubble": {
+      "variants": {
+        "grey": "rubble_grey.png",
+        "warm": "rubble_warm.png",
+        "dark": "rubble_dark.png"
+      },
+      "size": [
+        28,
+        16
+      ],
+      "anchor": [
+        14,
+        15
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": []
+    }
+  },
+  "notes": {
+    "anchor": "the ground contact pixel; stand it on the tile centre",
+    "frames": "animated props are horizontal strips; loop at fps",
+    "cover": "none | half | full, for ranged attacks",
+    "height": "in height steps (16 px), for line of sight"
+  }
+}

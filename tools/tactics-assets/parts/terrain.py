@@ -193,9 +193,9 @@ def rock(seed: int = 61) -> Canvas:
 def snow(seed: int = 71) -> Canvas:
     r = tex.rng(seed)
     n = tex.fbm(T, T, 4, r, octaves=3)
-    shade = tex.quantize(n, [(0.36, 3), (0.14, 2)], 4, dither=0.04)
+    shade = tex.quantize(n, [(0.42, 2), (0.16, 1), (0.72, 4)], 3, dither=0.04)
     drift = tex.fbm(T, T, 8, r, octaves=2, aspect=3.0)
-    shade = np.where((drift > 0.74) & (shade == 4), 5, shade)
+    shade = np.where((drift > 0.78) & (shade == 4), 5, shade)
     # Wind-carved ripples: a lit crest with a soft shadow under it.
     ys, xs = np.mgrid[0:T, 0:T]
     rip = np.sin(2 * np.pi * (1 * xs + 6 * ys) / T + n * 6.0) > 0.93

@@ -133,8 +133,10 @@ def render(scene: Scene, *, margin: int = 24, sky=((150, 178, 214), (226, 214, 1
         if inside.any():
             uu, vv = U[inside].astype(int), V[inside].astype(int)
             rgba = c.top[vv % TEX, uu % TEX]
-            # rim light on the front edges of the top (sells the block's thickness)
-            rim = ((vv - V0) >= TILE - 1) | ((uu - U0) >= TILE - 1)
+            # rim light on front edges that are real ledges (sells the block's thickness without gridding flat ground)
+            ledge_v = scene.top_z(i, j + 1) < Z if (i, j + 1) in scene.cells else True
+            ledge_u = scene.top_z(i + 1, j) < Z if (i + 1, j) in scene.cells else True
+            rim = (((vv - V0) >= TILE - 1) & ledge_v) | (((uu - U0) >= TILE - 1) & ledge_u)
             mul = np.where(rim, 1.14, 1.0)[:, None]
             col = np.clip(rgba[:, :3] * mul, 0, 255)
             canvas[YY[inside], XX[inside], :3] = col
@@ -171,7 +173,7 @@ def finish(img: Image.Image, *, zoom: int = 2, bloom: float = 0.18, vignette: fl
     """HD-2D-ish post: soft bloom on bright areas and a vignette, then a nearest-neighbour upscale."""
     base = img.convert("RGB")
     if bloom:
-        bright = base.point(lambda v: max(0, v - 170) * 3)
+        bright = base.point(lambda v: max(0, v - 205) * 4)
         glow = bright.filter(ImageFilter.GaussianBlur(6))
         arr = np.asarray(base).astype(np.float32) + np.asarray(glow).astype(np.float32) * bloom
         base = Image.fromarray(arr.clip(0, 255).astype(np.uint8))
