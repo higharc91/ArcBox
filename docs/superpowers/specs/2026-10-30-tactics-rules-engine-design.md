@@ -18,7 +18,7 @@ ArcBox Tactics is a persistent co-op tactics RPG. A group of 4–6 plays for abo
 - the AI that plays enemies and absent players' characters;
 - a simulator that balances it all.
 
-It also defines the **rules content**: all 10 classes at levels 1–10, all 30 subclasses, 11 races, the backgrounds, a monster roster matching the art, and sample encounters.
+It also defines the **rules content**: all 12 classes at levels 1–10, all 36 subclasses, 11 races, the backgrounds, a monster roster matching the art, and sample encounters.
 
 ### Decisions already made (from the brainstorming sessions)
 
@@ -31,7 +31,7 @@ It also defines the **rules content**: all 10 classes at levels 1–10, all 30 s
 | Going down | **A visible 3-round countdown.** Revived by any healing or a Help action. At 0 the character is Out for the battle and gains an **Injury**. No permadeath |
 | Turn timer | **60 s.** When it runs out, **the AI finishes the rest of that turn** |
 | Absent players | The AI plays their character with class resources. It may use **one healing item per battle, only in an emergency**. It never spends points, picks a subclass or trades |
-| Content scope | **All 10 classes, levels 1–10, all 30 subclasses**, in this sub-project |
+| Content scope | **All 12 classes, levels 1–10, all 36 subclasses**, in this sub-project. Barbarian and Sorcerer were added on 2026-10-30 to cover all 12 SRD 5.2 classes |
 | Objectives | The **core five** (defeat all, defeat a target, survive N rounds, reach an exit, protect an NPC) plus **scripted triggers** |
 | Authoring | Abilities and features are **JSON lists of effect blocks**. Only the blocks are code |
 
@@ -347,6 +347,8 @@ The class roster comes from the asset pack's `creator.json`. The numbers in the 
 | Druid | Shapeshifter | **Wild** charges (2→3) and **Mana** (3→12) | Wild Shape (`wild_shape` hook, beast forms from the beasts art), nature spells, Thorn Whip |
 | Warlock | Blaster | **Pact** points (2→4), **refill 1 every 2 rounds** | Eldritch Blast (scales by level), Invocations, Hex |
 | Monk | Skirmisher | **Ki** (2→10) | Martial Arts (bonus unarmed), Flurry, Step of the Wind, Stunning Strike (5), Evasion (7) |
+| Barbarian | Defender | **Rage** (2→4 uses per battle) | Rage (bonus action: resistance to bludgeoning/piercing/slashing, +2→+3 melee damage, 3 rounds), Reckless Attack, Danger Sense, Extra Attack (5), Brutal Strike (9). d12 hit die, unarmoured defence (10 + DEX + CON) |
+| Sorcerer | Blaster | **Sorcery** points (2→10) and **Mana** (full caster) | Innate Sorcery (bonus action: +1 spell DC and advantage on spell attacks, 3 rounds), Metamagic (spend Sorcery points: Twinned, Extended, Careful, Quickened, Distant), Font of Magic (convert Sorcery ↔ Mana) |
 
 | Class | Subclasses (identity) |
 |---|---|
@@ -360,6 +362,8 @@ The class roster comes from the asset pack's `creator.json`. The numbers in the 
 | Druid | **Shapeshifter:** stronger and earlier wild shapes · **Stormcaller:** lightning, wind pushes, storms · **Grovekeeper:** a sapling companion, healing groves, roots |
 | Warlock | **Hexblade:** CHA melee, curse-boosted crits · **Fiendbound:** an imp companion, fire, temp HP on kill · **Void:** teleport, gravity pulls, fear |
 | Monk | **Way of the Open Hand:** push, knock prone, deny reactions · **Way of the Windstep:** high Jump and Move, dash attacks · **Way of Iron Body:** high AC, deflect missiles, stand firm |
+| Barbarian | **Path of the Berserker** (SRD): frenzy for an extra attack while raging, reckless strikes · **Earthshaker:** ground slams that knock prone and push, cracking tiles into difficult terrain · **Spiritwarden:** ancestral spirits shield adjacent allies (damage reduction) and punish attackers |
+| Sorcerer | **Draconic Bloodline** (SRD Draconic Sorcery): a chosen dragon element adds bonus damage of that type, scaly AC, wings at 10 · **Chaos Bloodline:** wild surges from a weighted `random` table, mostly helpful · **Runeborn:** lays glowing runes on tiles as `zone`s that trigger or detonate when enemies enter |
 
 **Companion units** (hound, sapling, imp) are summoned at battle start by a `summon` passive. They take their turn right after their owner's, and their owner's phone controls them. Their stat blocks are in `monsters/companions.json`.
 
@@ -618,9 +622,9 @@ Each phase ends green and demoable through the simulator or golden replays.
 
 | Risk | Mitigation |
 |---|---|
-| **Content volume:** about 300 abilities across 10 classes, 30 subclasses, races and monsters | Data only, with generated tooltips and strict validation. Phase 2 proves the format on 4 classes before the bulk is written. Waves are reviewed with simulator numbers, not by eye |
+| **Content volume:** about 360 abilities across 12 classes, 36 subclasses, races and monsters | Data only, with generated tooltips and strict validation. Phase 2 proves the format on 4 classes before the bulk is written. Waves are reviewed with simulator numbers, not by eye |
 | **The blocks don't cover a feature** | Named C# hooks (§4.3) as an escape hatch, kept to a short list. Adding a block is cheap because it's one class plus its schema |
-| **Balance across 10 classes and 10 levels** | Role bands, simulator sweeps, flags for unused abilities and lopsided encounters. `replaces` lets a chapter retune without editing base |
+| **Balance across 12 classes and 10 levels** | Role bands, simulator sweeps, flags for unused abilities and lopsided encounters. `replaces` lets a chapter retune without editing base |
 | **AI cost with 16 units and area spells** | Tile pruning, analytic expected value, one-ply planning and a performance test in CI. The prune width (12) can be tuned |
 | **Speed-ordered rounds make DEX dominant** | Initiative only changes order, not the number of turns. The simulator tracks win rate against party DEX, and armour and race modifiers can be tuned |
 | **Fixed-point LOS edge cases** (rays grazing corners) | Rays are tested against hand-built ASCII maps. Ties count as *not blocked*, the rule that favours the player |

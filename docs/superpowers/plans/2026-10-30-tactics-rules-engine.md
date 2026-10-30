@@ -10,7 +10,7 @@
 - a utility AI;
 - triggers.
 
-Alongside it come its rules content (10 classes at levels 1–10, 30 subclasses, 11 races, the monsters and encounters) and `Tactics.Sim`, a balance simulator.
+Alongside it come its rules content (12 classes at levels 1–10, 36 subclasses, 11 races, the monsters and encounters) and `Tactics.Sim`, a balance simulator.
 
 **Architecture:**
 - **State and transitions.** The battle state is an immutable record graph. `Battle.Apply(state, command, rules)` returns a new state plus an ordered list of events.
@@ -67,8 +67,8 @@ Alongside it come its rules content (10 classes at levels 1–10, 30 subclasses,
 | XP | `xp.json` thresholds: 1000 XP per level (cumulative 0, 1000, …, 9000). Default encounter XP: 250, so 2 encounters a session gives about one level every 2 sessions |
 
 - **Role bands** (for the simulator):
-  - Defender: fighter, paladin.
-  - Striker: rogue, ranger, warlock, monk.
+  - Defender: fighter, paladin, barbarian.
+  - Striker: rogue, ranger, warlock, monk, sorcerer.
   - Healer: cleric, bard.
   - Control: wizard, druid.
 - **Rejection strings** (exact, shown on the phone). `{…}` is substituted.
@@ -191,8 +191,9 @@ Phase 4 content:  T16 ─► T17 ─┬─► T19 ─┐
 | 15 | 14 |
 | 16 | 15 |
 | 17, 18, 21 | 16 (can run in parallel: separate content files) |
-| 19 | 17 (and 13 for fighter, rogue, ranger, paladin and monk base classes) |
-| 20 | 18 |
+| 18A | 16 |
+| 19 | 17, 18A (and 13 for fighter, rogue, ranger, paladin and monk base classes) |
+| 20 | 18, 18A |
 | 22 | 19, 20, 21 |
 | 23 | 22 |
 
@@ -1255,20 +1256,47 @@ Every content task follows the **content conventions** in Global Constraints. It
 - [ ] **Step 3:** Run `dotnet test ArcBox.slnx` and the Sim. Fix the flags.
 - [ ] **Step 4: Commit** `feat(tactics-content): bard, druid and warlock`.
 
-### Task 19: Martial subclasses (13) and the hound companion
+### Task 18A: Barbarian and sorcerer
 
-**Files:** the `subclasses` sections of `classes/{fighter,rogue,ranger,paladin,monk}.json`, the matching `abilities/*.json`, `monsters/companions.json` (hound)
-- **Subclasses:** Weaponmaster, Warlord, Trickster, Duelist, Sharpshooter, Beastmaster, Warden, Guardian, Crusader, Avenger, Open Hand, Windstep and Iron Body. Each has features at 3, 6 and 10 that deliver the identity in spec §4.5.
+Added after the plan was approved, to cover all 12 SRD 5.2 classes (spec §4.5).
+
+**Files:** `content/tactics/base/rules/{classes,abilities}/{barbarian,sorcerer}.json`, `manifest.json`
+- **Barbarian** (Defender band).
+  - Rage 2→4 uses per battle. Rage is a bonus action and lasts 3 rounds. While raging, the barbarian resists bludgeoning, piercing and slashing damage and deals +2 melee damage (+3 at level 9). Use a `statMod` with `Resist` and `Damage`.
+  - Reckless Attack: the barbarian's melee attacks have advantage, and attacks against it have advantage until its next turn.
+  - Danger Sense: advantage on DEX saves.
+  - Extra Attack at 5; Brutal Strike at 9 (give up advantage for +1d10 and a push of 1).
+  - d12 hit die. Unarmoured Defence: AC = 10 + DEX + CON with no armour. This needs an `unarmoredDefense` stat field on the class; add it to `ClassDef` and `SheetBuilder` with a test.
+- **Sorcerer** (Striker band).
+  - Full-caster Mana table, plus Sorcery points 2→10.
+  - Innate Sorcery: a bonus action that gives +1 spell DC and advantage on spell attacks for 3 rounds.
+  - Metamagic as `choose` groups at levels 2, 5 and 9. Each option is a passive or reaction-free ability that costs Sorcery points:
+    - Twinned: re-target a single-target spell at a second target;
+    - Extended: double a concentration duration;
+    - Careful: allies in your area auto-succeed the save;
+    - Quickened: cast an Action spell as a Bonus action;
+    - Distant: +2 range.
+  - Font of Magic: a bonus action that converts 2 Sorcery into 1 Mana, or the reverse.
+  - Metamagic that changes how a spell is cast needs one new named hook, `metamagic`; add it in this task with tests.
+- Like Tasks 17 and 18, set `"subclassesPending": true` until Tasks 19 and 20 add the subclasses.
+- [ ] **Step 1:** Write the content, plus the `unarmoredDefense` field and the `metamagic` hook with their tests.
+- [ ] **Step 2:** Run `dotnet test ArcBox.slnx` and the Sim for both classes at levels 1, 5 and 10. Fix whatever it flags.
+- [ ] **Step 3: Commit** `feat(tactics-content): barbarian and sorcerer`.
+
+### Task 19: Martial subclasses (16) and the hound companion
+
+**Files:** the `subclasses` sections of `classes/{fighter,rogue,ranger,paladin,monk,barbarian}.json`, the matching `abilities/*.json`, `monsters/companions.json` (hound)
+- **Subclasses:** Weaponmaster, Warlord, Trickster, Duelist, Sharpshooter, Beastmaster, Warden, Guardian, Crusader, Avenger, Open Hand, Windstep and Iron Body, plus the barbarian's Berserker, Earthshaker and Spiritwarden (spec §4.5). Each has features at 3, 6 and 10 that deliver the identity in spec §4.5.
 - **The Beastmaster's hound** is summoned at battle start by `onBattleStart → summon{monster: "hound"}`, with no `Rounds` and no concentration. It's controlled by the owner and acts right after them (Task 10 rule). It scales with the owner's level via `byLevel` in its stat block.
 - [ ] **Step 1:** Write the subclass content and remove `subclassesPending` from these classes.
 - [ ] **Step 2:** Add `CompanionTests.Hound_spawns_at_battle_start_and_acts_after_owner`.
 - [ ] **Step 3:** Run `dotnet test ArcBox.slnx` and the Sim. Fix the flags.
 - [ ] **Step 4: Commit** `feat(tactics-content): martial subclasses and the hound`.
 
-### Task 20: Caster subclasses (13), the sapling and imp companions
+### Task 20: Caster subclasses (16), the sapling and imp companions
 
-**Files:** the `subclasses` sections of `classes/{wizard,cleric,bard,druid,warlock}.json`, the matching `abilities/*.json`, `monsters/companions.json` (sapling, imp)
-- **Subclasses:** Chronomancer, Geomancer, War Domain, Light Domain, Valor, Lore, Siren, Shapeshifter, Stormcaller, Grovekeeper, Hexblade, Fiendbound and Void.
+**Files:** the `subclasses` sections of `classes/{wizard,cleric,bard,druid,warlock,sorcerer}.json`, the matching `abilities/*.json`, `monsters/companions.json` (sapling, imp)
+- **Subclasses:** Chronomancer, Geomancer, War Domain, Light Domain, Valor, Lore, Siren, Shapeshifter, Stormcaller, Grovekeeper, Hexblade, Fiendbound and Void, plus the sorcerer's Draconic, Chaos and Runeborn bloodlines (spec §4.5). Chaos uses the `random` block for its surge table; Runeborn uses `zone` runes with `OnEnterTile` passives.
   - **Chronomancer** uses `turnOrder` and the hasted/slowed conditions.
   - **Geomancer** uses `alterTerrain`.
   - **Lore** gets `counterspell` (named hook) at 6.

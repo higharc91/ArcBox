@@ -40,12 +40,23 @@ When every task is done, one whole-branch review runs.
 | 16 | `Tactics.Sim` and the first balance report | not started | | |
 | 17 | Ranger, paladin and monk | not started | | |
 | 18 | Bard, druid and warlock | not started | | |
-| 19 | Martial subclasses and the hound | not started | | |
-| 20 | Caster subclasses, sapling and imp | not started | | |
+| 18A | Barbarian and sorcerer (added 2026-10-30) | not started | | |
+| 19 | Martial subclasses (16, incl. barbarian's) and the hound | not started | | |
+| 20 | Caster subclasses (16, incl. sorcerer's), sapling and imp | not started | | |
 | 21 | Monster roster, maps and sample encounters | not started | | |
 | 22 | Objectives, triggers and the showcase encounter | not started | | |
 | 23 | Balance pass and final report | not started | | |
 | – | Whole-branch final review | not started | | |
+
+## Scope change (2026-10-30)
+
+The user asked for every D&D class, so Barbarian (Defender) and Sorcerer (Striker) were added, bringing the game to 12 classes and 36 subclasses. Spec §4.5 and the plan were amended:
+- **New Task 18A** covers both classes.
+- **Tasks 19 and 20** take their subclasses:
+  - Barbarian: Berserker, Earthshaker, Spiritwarden.
+  - Sorcerer: Draconic, Chaos, Runeborn.
+- **Role bands:** Defender is now fighter, paladin and barbarian; Striker is rogue, ranger, warlock, monk and sorcerer.
+- **Sprites and the character creator** (`tools/tactics-assets`) were updated separately.
 
 ## Binding additions to the plan
 
