@@ -49,7 +49,7 @@ function Screen({ state, session }: { state: SessionState; session: Session }) {
         <Join
           key={`${state.code ?? ""}|${state.name ?? ""}`}
           code={state.code}
-          name={state.name}
+          name={state.name ?? session.profiles()[0]?.name}
           error={state.error}
           busy={state.busy}
           onJoin={(code, name) => void session.joinRoom(code, name)}
@@ -86,6 +86,7 @@ function Screen({ state, session }: { state: SessionState; session: Session }) {
           onSelectCampaign={(id) => void session.selectCampaign(id)}
           onCreateCampaign={(name) => void session.createCampaign(name)}
           onClaim={(member, name) => void session.claimMember(member, name)}
+          profiles={session.profiles()}
         />
       );
     case "game":

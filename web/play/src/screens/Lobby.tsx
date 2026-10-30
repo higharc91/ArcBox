@@ -1,6 +1,7 @@
 import { useState } from "preact/hooks";
 import { MuteToggle } from "../feedback/MuteToggle";
 import type { LobbyState, PlayerId, PlayerScore, RosterEntry, SeatRef } from "../protocol";
+import type { StoredProfile } from "../session/storage";
 import { NAME_MAX, isValidName } from "./Join";
 import { cardStyle } from "./Pick";
 
@@ -16,6 +17,8 @@ interface Props {
   onCreateCampaign: (name: string) => void;
   /** Say which campaign member this phone is; a null member is "I'm new here", under `newName` when one was typed. */
   onClaim: (member: SeatRef | null, newName?: string) => void;
+  /** The profile keys this phone holds, most recently used first: "Who are you?" offers the first one on the roster. */
+  profiles?: StoredProfile[];
 }
 
 const range = (min: number, max: number) => (min === max ? `${min}` : `${min}–${max}`);
@@ -28,7 +31,7 @@ function winnerLine(scores: PlayerScore[]): string {
   return `${names.slice(0, -1).join(", ")} and ${names.at(-1)} tied with ${top}`;
 }
 
-export function Lobby({ lobby, me, error, onSelectGame, onStart, onSelectCampaign, onCreateCampaign, onClaim }: Props) {
+export function Lobby({ lobby, me, error, onSelectGame, onStart, onSelectCampaign, onCreateCampaign, onClaim, profiles = [] }: Props) {
   const vip = lobby.players.find((p) => p.isVip);
   const iAmVip = vip?.id === me;
   const count = lobby.players.length;
@@ -74,6 +77,7 @@ export function Lobby({ lobby, me, error, onSelectGame, onStart, onSelectCampaig
           campaignName={campaign.name}
           entries={campaign.roster.filter((r) => !r.connected)}
           placeholder={mine?.name ?? ""}
+          profiles={profiles}
           onClaim={onClaim}
         />
       ) : null}
@@ -178,21 +182,36 @@ function Campaigns({ lobby, onSelect, onCreate }: { lobby: LobbyState; onSelect:
   );
 }
 
-/** "Who are you in {campaign}?": the members nobody is playing, and "I'm new here" (with an optional name, so two Dans can differ). */
-function Claim({ campaignName, entries, placeholder, onClaim }: {
+/** The member a roster entry stands for, as ClaimMember takes it: their offline seat if they have one. */
+const claimRef = (r: RosterEntry): SeatRef => (r.seatedAs ? { slot: r.seatedAs } : { member: r.profile });
+
+/**
+ * "Who are you in {campaign}?": the members nobody is playing, and "I'm new here" (with an optional name, so two Dans
+ * can differ). A phone that holds a key for one of those members, most recently used first, gets "Continue as" on top.
+ */
+function Claim({ campaignName, entries, placeholder, profiles, onClaim }: {
   campaignName: string;
   entries: RosterEntry[];
   placeholder: string;
+  profiles: StoredProfile[];
   onClaim: (member: SeatRef | null, newName?: string) => void;
 }) {
   const [adding, setAdding] = useState(false);
   const [name, setName] = useState("");
   const typed = name.trim();
   const valid = typed === "" || isValidName(typed);
+  const suggested = profiles
+    .map((p) => ({ p, r: entries.find((r) => r.profile === p.profileId && !r.connected) }))
+    .find((s) => s.r !== undefined);
 
   return (
     <section class="claim">
       <h2>Who are you in {campaignName}?</h2>
+      {suggested?.r ? (
+        <button type="button" class="primary big claim-continue" onClick={() => onClaim(claimRef(suggested.r!))}>
+          Continue as {suggested.p.name}
+        </button>
+      ) : null}
       <ul class="claim-list">
         {entries.map((r) => (
           <li key={r.profile}>
@@ -200,7 +219,7 @@ function Claim({ campaignName, entries, placeholder, onClaim }: {
               type="button"
               class="claim-row"
               style={cardStyle(r.card)}
-              onClick={() => onClaim(r.seatedAs ? { slot: r.seatedAs } : { member: r.profile })}
+              onClick={() => onClaim(claimRef(r))}
             >
               <b>{r.card.title}</b>
               {r.card.subtitle ? <span>{r.card.subtitle}</span> : null}
