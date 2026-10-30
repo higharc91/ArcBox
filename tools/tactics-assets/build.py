@@ -231,11 +231,20 @@ def build_terrain() -> None:
 def build_dioramas() -> None:
     from arcpix import iso
     from parts import dioramas as D
+    from parts import backgrounds as BG
+    pairs = {"ashen-ford": ("day", "hills"), "frostpeak": ("overcast", "peaks"), "mirewood": ("dusk", "hills"),
+             "sunscar": ("day", "mesas"), "ember-keep": ("ashfall", "volcano")}
+
+    def backdrop(name):
+        sk, biome = pairs[name]
+        return lambda w, h: BG.compose(sk, biome, w, h, horizon=int(h * 0.48))
+
     for name, make in D.SCENES.items():
-        save(iso.finish(iso.render(make())), PREVIEWS / f"12-diorama-{name}.png")
+        save(iso.finish(iso.render(make(), backdrop=backdrop(name))), PREVIEWS / f"12-diorama-{name}.png")
     # the ford again, animated: the river flows
     # 24 frames: the least common multiple of the water (8), campfire (6) and banner (4) loops
-    frames = [iso.finish(iso.render(D.ashen_ford(k)), zoom=1).convert("P", palette=Image.Palette.ADAPTIVE)
+    bd = backdrop("ashen-ford")
+    frames = [iso.finish(iso.render(D.ashen_ford(k), backdrop=bd), zoom=1).convert("P", palette=Image.Palette.ADAPTIVE)
               for k in range(24)]
     frames[0].save(PREVIEWS / "anim-river.gif", save_all=True, append_images=frames[1:], duration=140, loop=0)
 
@@ -406,7 +415,7 @@ SETS = {"palettes": build_palettes, "characters": build_characters, "anims": bui
 
 # Sets that live in their own module: parts/<name>.py with a build() function. Each writes under
 # content/tactics/base/<name>/ and previews/, using arcpix.out.
-for _name in ("props", "portraits", "beasts", "ui", "icons", "fx"):
+for _name in ("props", "portraits", "beasts", "backgrounds", "ui", "icons", "fx"):
     try:
         _mod = importlib.import_module(f"parts.{_name}")
     except ModuleNotFoundError as e:

@@ -57,7 +57,9 @@ def _arr(img: Image.Image) -> np.ndarray:
     return np.asarray(img.convert("RGBA")).astype(np.float32)
 
 
-def render(scene: Scene, *, margin: int = 24, sky=((150, 178, 214), (226, 214, 196))) -> Image.Image:
+def render(scene: Scene, *, margin: int = 24, sky=((150, 178, 214), (226, 214, 196)),
+           backdrop=None) -> Image.Image:
+    """Renders the scene. `backdrop(w, h)` may return an image to use instead of the plain sky gradient."""
     max_h = max(c.h for c in scene.cells.values()) * STEP
     W = (scene.w + scene.d) * TILE + margin * 2
     H = (scene.w + scene.d) * TILE // 2 + max_h + margin * 2 + 60
@@ -69,6 +71,8 @@ def render(scene: Scene, *, margin: int = 24, sky=((150, 178, 214), (226, 214, 1
     canvas = np.zeros((H, W, 4), np.float32)
     canvas[..., :3] = top_c * (1 - t) + bot_c * t
     canvas[..., 3] = 255
+    if backdrop is not None:
+        canvas[...] = np.asarray(backdrop(W, H).convert("RGBA")).astype(np.float32)
 
     def blend(ys, xs, rgba, mul=1.0, tint=(1.0, 1.0, 1.0)):
         a = rgba[:, 3:4] / 255.0
