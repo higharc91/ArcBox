@@ -19,11 +19,11 @@ public sealed class StorageWriter : BackgroundService
     public const int FlushAtPending = 64;
 
     /// <summary>
-    /// How long <see cref="StopAsync"/> waits for the last writes, whether or not the host's token is already cancelled
-    /// (spec §4: the drain happens within the shutdown timeout). Wall-clock time, not the injected clock: it bounds the real
-    /// shutdown. Settable so tests can use a short one.
+    /// How long <see cref="StopAsync"/> waits for the last writes, whether or not the host's token is already cancelled.
+    /// 4 s, inside the host's 5 s <c>HostOptions.ShutdownTimeout</c> (spec §4: the drain happens within the shutdown
+    /// timeout). Wall-clock time, not the injected clock: it bounds the real shutdown. Settable so tests can use a short one.
     /// </summary>
-    public TimeSpan StopDrainLimit { get; init; } = TimeSpan.FromSeconds(10);
+    public TimeSpan StopDrainLimit { get; init; } = TimeSpan.FromSeconds(4);
 
     private readonly ArcDb _db;
     private readonly TimeProvider _time;
