@@ -173,6 +173,56 @@ public sealed class PlannerTests
     }
 
     [Fact]
+    public void Bonus_action_never_strikes_a_player_the_main_action_may_have_downed()
+    {
+        // The priest's mace can down Kara (1 HP); its spiritual weapon (a bonus action) must then go to Vex (sturdy, so no
+        // kill is on offer there), not to her: she may be Downed by then.
+        var weapon = A("cleric.spiritual_weapon");
+        var priest = First(TestSheets.Cleric.Knowing(weapon)) with { Resources = Ordinal.Map(("devotion", 2)) };
+        TestBattle Battle(string profile) => On("""
+            0. 0. 0. 0. 0. 0.
+            0. 0. 0. 0. 0. 0.
+            """).With(weapon)
+            .Enemy("priest", priest, T(1, 0), new AiControlled(profile))
+            .Party("kara", TestSheets.Fighter, T(0, 0))
+            .Party("vex", TestSheets.Rogue with { MaxHp = 30 }, T(5, 1));
+
+        var battle = Battle("brute");
+        var state = battle.Start().State.Change("kara", u => u with { Hp = 1 });
+        var plan = Ai.Plan(state, U("priest"), battle.Rules);
+
+        Assert.True(U("kara") == UseOf(plan, "common.attack")?.Target.Unit, plan.Explain);
+        Assert.True(U("vex") == UseOf(plan, "cleric.spiritual_weapon")?.Target.Unit, plan.Explain);
+        ApplyAll(state, plan, battle.Rules);
+    }
+
+    [Fact]
+    public void Plan_scores_do_not_depend_on_the_order_tiles_are_scored_in()
+    {
+        // Mirror images, so the planner scores the tiles near the goblin first in one and last in the other. Bless (a burst
+        // that includes its caster) on the goblin alone isn't worth its Devotion, but with the priest inside its area it is:
+        // the same aim must be worth more from a tile inside the area than from one outside, whichever is scored first.
+        var bless = A("cleric.bless");
+        var priest = First(TestSheets.Cleric.Knowing(bless)) with { Move = 2, Resources = Ordinal.Map(("devotion", 10)) };
+        TurnPlan PlanOn(bool mirrored)
+        {
+            Tile At(int x, int y) => mirrored ? T(14 - x, y) : T(x, y);
+            var battle = On("""
+                0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+                0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+                """).With(bless)
+                .Enemy("priest", priest, At(3, 0), new AiControlled("healer"))
+                .Enemy("gob", TestSheets.Goblin, At(0, 0))
+                .Party("kara", TestSheets.Fighter, At(14, 1));
+            return Ai.Plan(battle.Start().State, U("priest"), battle.Rules);
+        }
+
+        var (plain, mirror) = (PlanOn(mirrored: false), PlanOn(mirrored: true));
+
+        Assert.True(Math.Abs(plain.Score - mirror.Score) < 1e-6, $"{plain.Explain}\n{mirror.Explain}");
+    }
+
+    [Fact]
     public void Fireball_aim_avoids_allies()
     {
         var fireball = A("wizard.fireball");
@@ -283,12 +333,15 @@ public sealed class PlannerTests
             var size = 4 + (int)(seed % 3);
             var setup = Encounters.Setup("river_crossing", AiParty(size, level, rules), difficulties[seed % 3], rules);
             var state = Battle.Start(setup, rules, seed).State;
+            var options = new AiOptions(AllowItems: seed % 5 == 0);   // the party's starting kits carry potions
 
             for (var turn = 0; turn < 40 && state.Outcome is null; turn++)
             {
                 var unit = state.Active!.Value;
-                var plan = Ai.Plan(state, unit, rules);
+                var plan = Ai.Plan(state, unit, rules, options);
                 Assert.IsType<EndTurn>(plan.Commands[^1]);
+                Assert.True(options.AllowItems || !plan.Commands.OfType<Use>().Any(u => u.Item is not null || u.Ability == Battle.UseItem),
+                    plan.Explain);
                 foreach (var command in plan.Commands)
                 {
                     var resolution = Battle.Apply(state, command, rules);

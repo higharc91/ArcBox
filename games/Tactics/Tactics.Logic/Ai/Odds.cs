@@ -32,11 +32,15 @@ public static class Odds
 
     /// <summary>
     /// The expected damage of <paramref name="dice"/> from an attack that hits with chance <paramref name="pHit"/> (crits
-    /// included) and crits with chance <paramref name="pCrit"/>: the average roll (never below 0) on a hit, and the dice
-    /// once more on a crit.
+    /// included) and crits with chance <paramref name="pCrit"/>, where a crit rolls the dice twice and adds the bonus once.
+    /// A roll below 0 deals 0, so this is the exact mean of the damage dealt, not of the roll.
     /// </summary>
     public static double ExpectedDamage(Dice dice, double pHit, double pCrit)
-        => pHit * Math.Max(0, dice.Average) + pCrit * dice.Count * (dice.Sides + 1) / 2.0;
+    {
+        static double MeanDealt(Dice dice, int count)
+            => DamageDist.Dice(count, dice.Sides).Shift(dice.Bonus).MeanCapped(int.MaxValue, floor: 0);
+        return (pHit - pCrit) * MeanDealt(dice, dice.Count) + pCrit * MeanDealt(dice, dice.Count * 2);
+    }
 
     /// <summary>The chance that at least one of two tries succeeds (advantage) or both do (disadvantage).</summary>
     private static double WithEdge(double single, Edge edge) => edge switch
@@ -163,12 +167,12 @@ internal sealed class DamageDist
         return total;
     }
 
-    /// <summary>The mean of the amount capped at <paramref name="cap"/>.</summary>
-    public double MeanCapped(int cap)
+    /// <summary>The mean of the amount capped at <paramref name="cap"/> (and raised to <paramref name="floor"/>, if given).</summary>
+    public double MeanCapped(int cap, int floor = int.MinValue)
     {
         var mean = 0.0;
         for (var i = 0; i < _p.Length; i++)
-            mean += _p[i] * Math.Min(cap, Min + i);
+            mean += _p[i] * Math.Clamp(Min + i, floor, cap);
         return mean;
     }
 

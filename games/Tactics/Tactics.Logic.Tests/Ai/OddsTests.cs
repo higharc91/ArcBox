@@ -54,5 +54,7 @@ public sealed class OddsTests
         // 1d8+3 hits for 7.5 on average; a crit adds another 4.5 of dice.
         Assert.Equal(0.55 * 7.5 + 0.05 * 4.5, Odds.ExpectedDamage(Dice.Parse("1d8+3"), 0.55, 0.05), Tolerance);
         Assert.Equal(0, Odds.ExpectedDamage(Dice.Parse("1d4-5"), 1, 0), Tolerance);   // damage is never negative
+        Assert.Equal(0.6 * 0.75, Odds.ExpectedDamage(Dice.Parse("1d4-2"), 0.6, 0), Tolerance);   // 0, 0, 1, 2: rolls below 0 count as 0
+        Assert.Equal(0.5 * 0.75 + 0.1 * 3, Odds.ExpectedDamage(Dice.Parse("1d4-2"), 0.6, 0.1), Tolerance);   // a crit rolls 2d4-2
     }
 }
