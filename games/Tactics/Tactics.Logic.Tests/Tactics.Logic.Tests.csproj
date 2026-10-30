@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tactics.Logic\Tactics.Logic.csproj" />
+    <ProjectReference Include="..\Tactics.Sim\Tactics.Sim.csproj" />
     <ProjectReference Include="..\..\..\src\ArcBox.Sdk.Testing\ArcBox.Sdk.Testing.csproj" />
   </ItemGroup>
 </Project>
