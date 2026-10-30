@@ -1,0 +1,32 @@
+{
+  "id": "bard",
+  "name": "Bard",
+  "build": "standard",
+  "layers": {
+    "body": "human",
+    "hair": "ponytail",
+    "torso": "tunic",
+    "legs": "pants",
+    "feet": "boots",
+    "weapon": "wand",
+    "hands": "bare",
+    "cape": "short_cape",
+    "headgear": "bandana"
+  },
+  "palette": {
+    "eyes": "eyes/dark",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "skin": "skin/tan",
+    "hair": "hair/copper",
+    "cloth1": "cloth/teal",
+    "cloth2": "cloth/ochre"
+  },
+  "tags": [
+    "class"
+  ],
+  "sheet": "presets/bard.png"
+}

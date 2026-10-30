@@ -1,0 +1,32 @@
+{
+  "id": "wren",
+  "name": "Wren \u00b7 Halfling Shadow",
+  "build": "short",
+  "layers": {
+    "body": "human",
+    "hair": "messy",
+    "headgear": "hood",
+    "torso": "vest",
+    "legs": "pants",
+    "feet": "boots",
+    "weapon": "dagger",
+    "hands": "gloves",
+    "cape": "short_cape"
+  },
+  "palette": {
+    "eyes": "eyes/green",
+    "leather": "leather/dark",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "skin": "skin/olive",
+    "hair": "hair/brown",
+    "cloth1": "cloth/forest",
+    "cloth2": "cloth/charcoal"
+  },
+  "tags": [
+    "party"
+  ],
+  "sheet": "presets/wren.png"
+}

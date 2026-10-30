@@ -1,0 +1,31 @@
+{
+  "id": "ilyra",
+  "name": "Ilyra \u00b7 Elf Chronomancer",
+  "build": "standard",
+  "layers": {
+    "body": "elf",
+    "hair": "long",
+    "headgear": "wizard_hat",
+    "torso": "robe",
+    "legs": "skirt",
+    "feet": "sandals",
+    "weapon": "staff",
+    "hands": "bare"
+  },
+  "palette": {
+    "eyes": "eyes/violet",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/frost",
+    "skin": "skin/porcelain",
+    "hair": "hair/platinum",
+    "cloth1": "cloth/royal_purple",
+    "cloth2": "cloth/navy"
+  },
+  "tags": [
+    "party"
+  ],
+  "sheet": "presets/ilyra.png"
+}

@@ -1,0 +1,168 @@
+"""Builds the tactics base content pack and its review sheets.
+
+    python3 tools/tactics-assets/build.py [set ...]     # sets: characters (default: all)
+
+Writes content/tactics/base/... (what the game loads) and tools/tactics-assets/previews/*.png (what people review).
+Everything is deterministic: the same code produces byte-identical PNGs, so the pack hash only moves when art does.
+"""
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+
+from PIL import Image  # noqa: E402
+
+from arcpix.palette import FAMILIES, RAMP_LEN  # noqa: E402
+from arcpix.preview import contact_sheet, Tile, strip  # noqa: E402
+from arcpix.sheet import Sheet  # noqa: E402
+from parts import characters as C  # noqa: E402
+from parts.recipes import ALL, PARTY, CLASSES, ENEMIES  # noqa: E402
+from parts.rig import BUILDS, DIRECTIONS, FRAME_W, FRAME_H, ANCHOR, ANIM_ORDER, ANIMS  # noqa: E402
+
+PACK = HERE.parents[1] / "content" / "tactics" / "base"
+PREVIEWS = HERE / "previews"
+
+
+def save(img: Image.Image, path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    img.save(path, optimize=True)
+
+
+def write_json(obj, path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(obj, indent=2) + "\n")
+
+
+# --------------------------------------------------------------------------------------------------- characters
+# A neutral palette for previewing bare layers: every slot gets a readable, distinct ramp.
+NEUTRAL = {"skin": "skin/tan", "eyes": "eyes/dark", "hair": "hair/brown", "cloth1": "cloth/steel_blue",
+           "cloth2": "cloth/slate", "trim": "metal/gold", "metal": "metal/steel", "leather": "leather/brown",
+           "wood": "wood/oak", "magic": "magic/arcane"}
+
+
+def build_characters() -> None:
+    out = PACK / "characters"
+    n = C.frames_per_direction()
+
+    # 1. Every layer variant, for every build, as a ramp-map sheet (front row, back row).
+    variants: dict[str, list[str]] = {}
+    for layer, parts in C.PARTS.items():
+        variants[layer] = sorted(parts)
+        for variant in parts:
+            for build in BUILDS:
+                s = Sheet(FRAME_W, FRAME_H, n, ANCHOR)
+                s.frames = [cv.ramp_map() for cv in C.layer_frames(layer, variant, build)]
+                save(s.image(), out / build / layer / f"{variant}.png")
+
+    # 2. Palettes: every named ramp, plus one palette per recipe, and the LUT texture the shader samples.
+    ramps = {fam: {name: ramp for name, ramp in rs.items()} for fam, rs in FAMILIES.items()}
+    palettes = {r.id: r.palette for r in ALL}
+    palettes = {"neutral": NEUTRAL, **palettes}
+    lut, rows = C.lut(palettes)
+    save(lut, out / "palettes.png")
+    write_json({"ramps": ramps, "palettes": palettes, "lutRows": rows, "rampLength": RAMP_LEN}, out / "palettes.json")
+
+    # 3. Presets: recipe JSON plus a baked, ready-to-draw sheet (use these when recolouring isn't needed).
+    for r in ALL:
+        sheet = C.recipe_sheet(r)
+        save(sheet.image(), out / "presets" / f"{r.id}.png")
+        write_json({"id": r.id, "name": r.name, "build": r.build, "layers": r.layers, "palette": r.palette,
+                    "tags": r.tags, "sheet": f"presets/{r.id}.png"}, out / "presets" / f"{r.id}.json")
+
+    # 4. The manifest: everything the game needs to cut sheets up and compose a character.
+    anims = {a.name: {"frames": a.frames, "fps": a.fps, "loop": a.loop} for a in C.anim_table()}
+    write_json({
+        "frame": {"width": FRAME_W, "height": FRAME_H, "anchor": list(ANCHOR)},
+        "framesPerDirection": n,
+        "directions": {d: {"row": i, "mirrorFor": "front_left" if d == "front" else "back_right"}
+                       for i, d in enumerate(DIRECTIONS)},
+        "anims": anims,
+        "builds": {k: {"headTop": b.head_top, "shoulderY": b.shoulder_y, "hipY": b.hip_y} for k, b in BUILDS.items()},
+        "slots": C.SLOTS.names[1:],
+        "slotIds": {name: i for i, name in enumerate(C.SLOTS.names) if i},
+        "layers": variants,
+        "order": C.ORDER,
+        "path": "characters/{build}/{layer}/{variant}.png",
+        "rampMap": {"r": "slot * 16", "g": "shade * 32", "b": "1 = outline pixel", "a": "coverage"},
+        "outline": {"colour": "#140f1a", "mix": 0.6},
+        "presets": [r.id for r in ALL],
+    }, out / "manifest.json")
+
+    # ----- previews
+    def roster(title: str, recipes, sub: str) -> Image.Image:
+        tiles = []
+        for r in recipes:
+            sh = C.recipe_sheet(r)
+            tiles.append(Tile(strip([sh.frames[0], sh.frames[n]], 1, gap=6), r.name.split(" · ")[0],
+                              r.name.split(" · ")[1] if " · " in r.name else r.build))
+        return contact_sheet(title, tiles, columns=min(6, len(tiles)), zoom=5, subtitle=sub)
+
+    save(roster("Characters · the party", PARTY,
+                "Six sample heroes composed from shared layers — front and back facing; the game mirrors for the other two."),
+         PREVIEWS / "01-party.png")
+    save(roster("Characters · class starters", CLASSES,
+                "One preset per class. Every piece is swappable in the character creator and recolourable per slot."),
+         PREVIEWS / "02-classes.png")
+    save(roster("Characters · enemies", ENEMIES,
+                "Same rig, same layers: goblins and orcs reuse the 'short' and 'large' builds."),
+         PREVIEWS / "03-enemies.png")
+
+    # Animation strips for a handful of characters.
+    tiles = []
+    for rid in ("kara", "goblin_spear", "tamsin", "ilyra", "orc_brute"):
+        r = next(x for x in ALL if x.id == rid)
+        sh = C.recipe_sheet(r)
+        tiles.append(Tile(strip(sh.frames[:n], 1, gap=3), r.name, "  ".join(
+            f"{a}×{len(ANIMS[a][2])}" for a in ANIM_ORDER)))
+    save(contact_sheet("Characters · animation set", tiles, columns=1, zoom=4,
+                       subtitle="idle · walk · swing · thrust · shoot · cast · hurt · down (20 frames per facing)"),
+         PREVIEWS / "04-animations.png")
+
+    # The layer library on the neutral palette.
+    ramps_neutral = {s: FAMILIES[ref.split("/")[0]][ref.split("/")[1]] for s, ref in NEUTRAL.items()}
+    pose = ANIMS["idle"][2][0]
+    base_body = C.render_layer("body", "human", "standard", "front", pose)
+    tiles = []
+    for layer in C.ORDER["front"]:
+        for variant in sorted(C.PARTS[layer]):
+            cv = C.Canvas(FRAME_W, FRAME_H, C.SLOTS)
+            if layer not in ("body",):
+                ghost = base_body.copy()
+                cv.blit(ghost)
+            if layer in ("cape",):
+                cv = C.Canvas(FRAME_W, FRAME_H, C.SLOTS)
+                cv.blit(C.render_layer(layer, variant, "standard", "back", pose))
+                cv.blit(C.render_layer("body", "human", "standard", "back", pose))
+                cv.blit(C.render_layer(layer, variant, "standard", "back", pose))
+            else:
+                cv.blit(C.render_layer(layer, variant, "standard", "front", pose))
+            cv.outline()
+            tiles.append(Tile(cv.render(ramps_neutral), variant, layer))
+    save(contact_sheet("Characters · layer library", tiles, columns=12, zoom=3,
+                       subtitle="Every layer variant on a bare body (neutral palette). Mix any set per character."),
+         PREVIEWS / "05-layers.png")
+
+
+def build_palettes() -> None:
+    tiles = []
+    for fam, ramps in FAMILIES.items():
+        for name, ramp in ramps.items():
+            img = Image.new("RGBA", (6 * len(ramp), 10))
+            for i, hexc in enumerate(ramp):
+                img.paste(Image.new("RGBA", (6, 10), hexc), (i * 6, 0))
+            tiles.append(Tile(img, name, fam))
+    save(contact_sheet("Palette ramps", tiles, columns=10, zoom=4,
+                       subtitle="6-step hue-shifted ramps (cool shadows, warm highlights). Any slot takes any ramp."),
+         PREVIEWS / "00-palettes.png")
+
+
+SETS = {"palettes": build_palettes, "characters": build_characters}
+
+if __name__ == "__main__":
+    for name in sys.argv[1:] or list(SETS):
+        print("building", name)
+        SETS[name]()

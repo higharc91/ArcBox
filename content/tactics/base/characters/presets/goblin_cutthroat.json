@@ -1,0 +1,30 @@
+{
+  "id": "goblin_cutthroat",
+  "name": "Goblin Cutthroat",
+  "build": "short",
+  "layers": {
+    "body": "goblin",
+    "headgear": "bandana",
+    "torso": "rags",
+    "legs": "shorts",
+    "feet": "sandals",
+    "weapon": "dagger",
+    "hands": "bare"
+  },
+  "palette": {
+    "eyes": "eyes/gold",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "skin": "skin/goblin",
+    "hair": "hair/black",
+    "cloth1": "cloth/rust",
+    "cloth2": "cloth/charcoal"
+  },
+  "tags": [
+    "enemy"
+  ],
+  "sheet": "presets/goblin_cutthroat.png"
+}

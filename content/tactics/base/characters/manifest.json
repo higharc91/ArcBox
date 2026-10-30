@@ -1,0 +1,284 @@
+{
+  "frame": {
+    "width": 32,
+    "height": 40,
+    "anchor": [
+      16,
+      37
+    ]
+  },
+  "framesPerDirection": 20,
+  "directions": {
+    "front": {
+      "row": 0,
+      "mirrorFor": "front_left"
+    },
+    "back": {
+      "row": 1,
+      "mirrorFor": "back_right"
+    }
+  },
+  "anims": {
+    "idle": {
+      "frames": [
+        0,
+        1
+      ],
+      "fps": 3.0,
+      "loop": true
+    },
+    "walk": {
+      "frames": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "fps": 8.0,
+      "loop": true
+    },
+    "attack": {
+      "frames": [
+        6,
+        7,
+        8
+      ],
+      "fps": 10.0,
+      "loop": false
+    },
+    "thrust": {
+      "frames": [
+        9,
+        10,
+        11
+      ],
+      "fps": 10.0,
+      "loop": false
+    },
+    "shoot": {
+      "frames": [
+        12,
+        13,
+        14
+      ],
+      "fps": 8.0,
+      "loop": false
+    },
+    "cast": {
+      "frames": [
+        15,
+        16,
+        17
+      ],
+      "fps": 6.0,
+      "loop": false
+    },
+    "hurt": {
+      "frames": [
+        18
+      ],
+      "fps": 6.0,
+      "loop": false
+    },
+    "down": {
+      "frames": [
+        19
+      ],
+      "fps": 1.0,
+      "loop": false
+    }
+  },
+  "builds": {
+    "standard": {
+      "headTop": 8,
+      "shoulderY": 19,
+      "hipY": 28
+    },
+    "short": {
+      "headTop": 13,
+      "shoulderY": 24,
+      "hipY": 31
+    },
+    "large": {
+      "headTop": 4,
+      "shoulderY": 16,
+      "hipY": 27
+    }
+  },
+  "slots": [
+    "skin",
+    "eyes",
+    "hair",
+    "cloth1",
+    "cloth2",
+    "trim",
+    "metal",
+    "leather",
+    "wood",
+    "magic"
+  ],
+  "slotIds": {
+    "skin": 1,
+    "eyes": 2,
+    "hair": 3,
+    "cloth1": 4,
+    "cloth2": 5,
+    "trim": 6,
+    "metal": 7,
+    "leather": 8,
+    "wood": 9,
+    "magic": 10
+  },
+  "layers": {
+    "cape": [
+      "cloak",
+      "short_cape"
+    ],
+    "body": [
+      "elf",
+      "goblin",
+      "human",
+      "skeleton"
+    ],
+    "legs": [
+      "greaves",
+      "pants",
+      "shorts",
+      "skirt"
+    ],
+    "feet": [
+      "boots",
+      "sabatons",
+      "sandals"
+    ],
+    "torso": [
+      "chain",
+      "coat",
+      "plate",
+      "rags",
+      "robe",
+      "tunic",
+      "vest",
+      "vestments"
+    ],
+    "beard": [
+      "braided",
+      "full",
+      "short"
+    ],
+    "hair": [
+      "braids",
+      "bun",
+      "cropped",
+      "long",
+      "messy",
+      "mohawk",
+      "ponytail",
+      "short"
+    ],
+    "horns": [
+      "curled",
+      "straight"
+    ],
+    "headgear": [
+      "bandana",
+      "circlet",
+      "crown",
+      "great_helm",
+      "hood",
+      "open_helm",
+      "wizard_hat"
+    ],
+    "weapon": [
+      "axe",
+      "bow",
+      "dagger",
+      "greatsword",
+      "mace",
+      "spear",
+      "staff",
+      "sword",
+      "tome",
+      "wand"
+    ],
+    "hands": [
+      "bare",
+      "gauntlets",
+      "gloves"
+    ],
+    "offhand": [
+      "buckler",
+      "kite_shield",
+      "lantern",
+      "orb",
+      "round_shield"
+    ]
+  },
+  "order": {
+    "front": [
+      "cape",
+      "body",
+      "legs",
+      "feet",
+      "torso",
+      "beard",
+      "hair",
+      "horns",
+      "headgear",
+      "weapon",
+      "hands",
+      "offhand"
+    ],
+    "back": [
+      "offhand",
+      "body",
+      "legs",
+      "feet",
+      "torso",
+      "weapon",
+      "hands",
+      "cape",
+      "beard",
+      "hair",
+      "horns",
+      "headgear"
+    ]
+  },
+  "path": "characters/{build}/{layer}/{variant}.png",
+  "rampMap": {
+    "r": "slot * 16",
+    "g": "shade * 32",
+    "b": "1 = outline pixel",
+    "a": "coverage"
+  },
+  "outline": {
+    "colour": "#140f1a",
+    "mix": 0.6
+  },
+  "presets": [
+    "kara",
+    "aldric",
+    "wren",
+    "ilyra",
+    "tamsin",
+    "sefa",
+    "fighter",
+    "rogue",
+    "wizard",
+    "cleric",
+    "ranger",
+    "paladin",
+    "bard",
+    "druid",
+    "warlock",
+    "monk",
+    "goblin_cutthroat",
+    "goblin_spear",
+    "goblin_shaman",
+    "orc_brute",
+    "skeleton",
+    "bandit",
+    "black_knight",
+    "cultist"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "tamsin",
+  "name": "Tamsin \u00b7 Half-Elf Sharpshooter",
+  "build": "standard",
+  "layers": {
+    "body": "elf",
+    "hair": "ponytail",
+    "torso": "coat",
+    "legs": "pants",
+    "feet": "boots",
+    "weapon": "bow",
+    "hands": "gloves",
+    "cape": "cloak"
+  },
+  "palette": {
+    "eyes": "eyes/green",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "skin": "skin/fair",
+    "hair": "hair/auburn",
+    "cloth1": "cloth/moss",
+    "cloth2": "cloth/sand"
+  },
+  "tags": [
+    "party"
+  ],
+  "sheet": "presets/tamsin.png"
+}

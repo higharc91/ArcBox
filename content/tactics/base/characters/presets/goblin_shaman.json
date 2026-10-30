@@ -1,0 +1,30 @@
+{
+  "id": "goblin_shaman",
+  "name": "Goblin Shaman",
+  "build": "short",
+  "layers": {
+    "body": "goblin",
+    "hair": "long",
+    "torso": "robe",
+    "legs": "skirt",
+    "feet": "sandals",
+    "weapon": "staff",
+    "hands": "bare"
+  },
+  "palette": {
+    "eyes": "eyes/red",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/fire",
+    "skin": "skin/goblin",
+    "hair": "hair/white",
+    "cloth1": "cloth/wine",
+    "cloth2": "cloth/ochre"
+  },
+  "tags": [
+    "enemy"
+  ],
+  "sheet": "presets/goblin_shaman.png"
+}

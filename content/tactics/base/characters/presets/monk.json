@@ -1,0 +1,29 @@
+{
+  "id": "monk",
+  "name": "Monk",
+  "build": "standard",
+  "layers": {
+    "body": "human",
+    "hair": "mohawk",
+    "torso": "tunic",
+    "legs": "pants",
+    "feet": "sandals",
+    "hands": "bare"
+  },
+  "palette": {
+    "eyes": "eyes/dark",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "skin": "skin/olive",
+    "hair": "hair/black",
+    "cloth1": "cloth/ochre",
+    "cloth2": "cloth/rust"
+  },
+  "tags": [
+    "class"
+  ],
+  "sheet": "presets/monk.png"
+}

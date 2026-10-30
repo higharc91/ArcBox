@@ -1,0 +1,31 @@
+{
+  "id": "ranger",
+  "name": "Ranger",
+  "build": "standard",
+  "layers": {
+    "body": "elf",
+    "hair": "braids",
+    "torso": "coat",
+    "legs": "pants",
+    "feet": "boots",
+    "weapon": "bow",
+    "hands": "gloves",
+    "cape": "cloak"
+  },
+  "palette": {
+    "eyes": "eyes/dark",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "skin": "skin/olive",
+    "hair": "hair/chestnut",
+    "cloth1": "cloth/forest",
+    "cloth2": "cloth/sand"
+  },
+  "tags": [
+    "class"
+  ],
+  "sheet": "presets/ranger.png"
+}

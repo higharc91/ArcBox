@@ -1,0 +1,30 @@
+{
+  "id": "skeleton",
+  "name": "Skeleton Soldier",
+  "build": "standard",
+  "layers": {
+    "body": "skeleton",
+    "torso": "rags",
+    "legs": "shorts",
+    "weapon": "sword",
+    "hands": "bare",
+    "offhand": "buckler",
+    "headgear": "open_helm"
+  },
+  "palette": {
+    "eyes": "eyes/red",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/iron",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "skin": "skin/bone",
+    "hair": "hair/black",
+    "cloth1": "cloth/charcoal",
+    "cloth2": "cloth/slate"
+  },
+  "tags": [
+    "enemy"
+  ],
+  "sheet": "presets/skeleton.png"
+}

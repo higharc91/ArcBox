@@ -1,0 +1,32 @@
+{
+  "id": "aldric",
+  "name": "Aldric \u00b7 Dwarf Cleric",
+  "build": "short",
+  "layers": {
+    "body": "human",
+    "beard": "full",
+    "hair": "short",
+    "torso": "vestments",
+    "legs": "pants",
+    "feet": "boots",
+    "weapon": "mace",
+    "hands": "bare",
+    "offhand": "round_shield"
+  },
+  "palette": {
+    "eyes": "eyes/dark",
+    "leather": "leather/brown",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/holy",
+    "skin": "skin/tan",
+    "hair": "hair/copper",
+    "cloth1": "cloth/ivory",
+    "cloth2": "cloth/wine"
+  },
+  "tags": [
+    "party"
+  ],
+  "sheet": "presets/aldric.png"
+}
