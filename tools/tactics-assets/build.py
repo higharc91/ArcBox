@@ -192,6 +192,63 @@ def build_characters() -> None:
          PREVIEWS / "05-layers.png")
 
 
+def build_terrain() -> None:
+    """content/tactics/base/terrain: world-aligned tops, sides and lips, ground decals, and a manifest."""
+    from parts import terrain as TR
+    out = PACK / "terrain"
+    shutil.rmtree(out, ignore_errors=True)
+    entries = {}
+    by_kind: dict[str, list[Tile]] = {"top": [], "side": [], "lip": [], "decal": []}
+    for t in TR.CATALOGUE:
+        frames = t.frames()
+        files = {}
+        for vname, v in t.variants.items():
+            ramps = TR.ramps(v)
+            imgs = [f.render(ramps) for f in frames]
+            sheet = Image.new("RGBA", (imgs[0].width * len(imgs), imgs[0].height))
+            for k, im in enumerate(imgs):
+                sheet.paste(im, (k * im.width, 0))
+            rel = f"{t.kind}/{t.id}_{vname}.png"
+            save(sheet, out / rel)
+            files[vname] = rel
+            img = imgs[0]
+            by_kind[t.kind].append(Tile(img, t.id, vname + (f" · {len(frames)} frames" if len(frames) > 1 else "")))
+        entries[t.id] = {"kind": t.kind, "variants": files, "frames": len(frames), "fps": t.fps,
+                         "size": [frames[0].w, frames[0].h]}
+    write_json({
+        "tile": TR.TILE, "span": TR.T // TR.TILE, "heightStep": TR.TILE // 2,
+        "sampling": {
+            "top": "UV = world XZ / (span * tile): one texture covers span x span tiles",
+            "side": "U = distance along the edge / (span * tile); V = depth below the top / tile (repeats)",
+            "lip": "drawn over the top band of a side under a top that has one; transparent below its edge",
+            "decal": "32x32, alpha; placed on a tile's top in tile-local UV",
+            "animated": "frames are laid out left to right; play at fps, looping",
+        },
+        "textures": entries,
+    }, out / "manifest.json")
+    save(contact_sheet("Terrain · tops", by_kind["top"], columns=6, zoom=2,
+                       subtitle="Seamless, world-aligned: each 128 px texture spans 4x4 tiles. Water and lava are "
+                                "8-frame loops."), PREVIEWS / "09-terrain-tops.png")
+    save(contact_sheet("Terrain · sides and lips", by_kind["side"] + by_kind["lip"], columns=4, zoom=3,
+                       subtitle="Cliff faces repeat every tile of depth; lips hang over the top band where a top "
+                                "meets its side."), PREVIEWS / "10-terrain-sides.png")
+    save(contact_sheet("Terrain · ground decals", by_kind["decal"], columns=10, zoom=4, checker=True,
+                       subtitle="Scattered on tile tops for variety: flowers, stones, leaves, bones, cracks, "
+                                "puddles, blood and scorch marks."), PREVIEWS / "11-decals.png")
+    build_dioramas()
+
+
+def build_dioramas() -> None:
+    from arcpix import iso
+    from parts import dioramas as D
+    for name, make in D.SCENES.items():
+        save(iso.finish(iso.render(make())), PREVIEWS / f"12-diorama-{name}.png")
+    # the ford again, animated: the river flows
+    frames = [iso.finish(iso.render(D.ashen_ford(k)), zoom=1).convert("P", palette=Image.Palette.ADAPTIVE)
+              for k in range(8)]
+    frames[0].save(PREVIEWS / "anim-river.gif", save_all=True, append_images=frames[1:], duration=160, loop=0)
+
+
 def build_palettes() -> None:
     tiles = []
     for fam, ramps in FAMILIES.items():
@@ -315,7 +372,8 @@ def build_anim_previews() -> None:
               [("Walk", [walk * 4, walk * 4, [f + n for f in walk] * 4, [f + n for f in walk] * 4], 125)], zoom=5)
 
 
-SETS = {"palettes": build_palettes, "characters": build_characters, "anims": build_anim_previews}
+SETS = {"palettes": build_palettes, "characters": build_characters, "anims": build_anim_previews,
+        "terrain": build_terrain}
 
 if __name__ == "__main__":
     for name in sys.argv[1:] or list(SETS):

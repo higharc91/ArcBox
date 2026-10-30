@@ -1,0 +1,453 @@
+{
+  "tile": 32,
+  "span": 4,
+  "heightStep": 16,
+  "sampling": {
+    "top": "UV = world XZ / (span * tile): one texture covers span x span tiles",
+    "side": "U = distance along the edge / (span * tile); V = depth below the top / tile (repeats)",
+    "lip": "drawn over the top band of a side under a top that has one; transparent below its edge",
+    "decal": "32x32, alpha; placed on a tile's top in tile-local UV",
+    "animated": "frames are laid out left to right; play at fps, looping"
+  },
+  "textures": {
+    "grass": {
+      "kind": "top",
+      "variants": {
+        "green": "top/grass_green.png",
+        "lush": "top/grass_lush.png",
+        "dry": "top/grass_dry.png",
+        "autumn": "top/grass_autumn.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ]
+    },
+    "dirt": {
+      "kind": "top",
+      "variants": {
+        "brown": "top/dirt_brown.png",
+        "dark": "top/dirt_dark.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ]
+    },
+    "path": {
+      "kind": "top",
+      "variants": {
+        "packed": "top/path_packed.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ]
+    },
+    "sand": {
+      "kind": "top",
+      "variants": {
+        "desert": "top/sand_desert.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ]
+    },
+    "flagstone": {
+      "kind": "top",
+      "variants": {
+        "grey": "top/flagstone_grey.png",
+        "warm": "top/flagstone_warm.png",
+        "dark": "top/flagstone_dark.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ]
+    },
+    "cobble": {
+      "kind": "top",
+      "variants": {
+        "grey": "top/cobble_grey.png",
+        "warm": "top/cobble_warm.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ]
+    },
+    "rock": {
+      "kind": "top",
+      "variants": {
+        "grey": "top/rock_grey.png",
+        "dark": "top/rock_dark.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ]
+    },
+    "snow": {
+      "kind": "top",
+      "variants": {
+        "fresh": "top/snow_fresh.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ]
+    },
+    "planks": {
+      "kind": "top",
+      "variants": {
+        "oak": "top/planks_oak.png",
+        "dark": "top/planks_dark.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ]
+    },
+    "ice": {
+      "kind": "top",
+      "variants": {
+        "clear": "top/ice_clear.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ]
+    },
+    "mud": {
+      "kind": "top",
+      "variants": {
+        "swamp": "top/mud_swamp.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ]
+    },
+    "water": {
+      "kind": "top",
+      "variants": {
+        "clear": "top/water_clear.png",
+        "swamp": "top/water_swamp.png"
+      },
+      "frames": 8,
+      "fps": 6,
+      "size": [
+        128,
+        128
+      ]
+    },
+    "lava": {
+      "kind": "top",
+      "variants": {
+        "molten": "top/lava_molten.png"
+      },
+      "frames": 8,
+      "fps": 6,
+      "size": [
+        128,
+        128
+      ]
+    },
+    "dirt_side": {
+      "kind": "side",
+      "variants": {
+        "brown": "side/dirt_side_brown.png",
+        "dark": "side/dirt_side_dark.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        32
+      ]
+    },
+    "cliff_side": {
+      "kind": "side",
+      "variants": {
+        "grey": "side/cliff_side_grey.png",
+        "warm": "side/cliff_side_warm.png",
+        "dark": "side/cliff_side_dark.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        32
+      ]
+    },
+    "brick_side": {
+      "kind": "side",
+      "variants": {
+        "red": "side/brick_side_red.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        32
+      ]
+    },
+    "ashlar_side": {
+      "kind": "side",
+      "variants": {
+        "grey": "side/ashlar_side_grey.png",
+        "warm": "side/ashlar_side_warm.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        32
+      ]
+    },
+    "sandstone_side": {
+      "kind": "side",
+      "variants": {
+        "desert": "side/sandstone_side_desert.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        32
+      ]
+    },
+    "plank_side": {
+      "kind": "side",
+      "variants": {
+        "oak": "side/plank_side_oak.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        32
+      ]
+    },
+    "grass_lip": {
+      "kind": "lip",
+      "variants": {
+        "green": "lip/grass_lip_green.png",
+        "lush": "lip/grass_lip_lush.png",
+        "dry": "lip/grass_lip_dry.png",
+        "autumn": "lip/grass_lip_autumn.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        12
+      ]
+    },
+    "snow_lip": {
+      "kind": "lip",
+      "variants": {
+        "fresh": "lip/snow_lip_fresh.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        12
+      ]
+    },
+    "moss_lip": {
+      "kind": "lip",
+      "variants": {
+        "green": "lip/moss_lip_green.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        12
+      ]
+    },
+    "flowers_0": {
+      "kind": "decal",
+      "variants": {
+        "red": "decal/flowers_0_red.png",
+        "yellow": "decal/flowers_0_yellow.png",
+        "white": "decal/flowers_0_white.png",
+        "blue": "decal/flowers_0_blue.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        32
+      ]
+    },
+    "flowers_1": {
+      "kind": "decal",
+      "variants": {
+        "red": "decal/flowers_1_red.png",
+        "yellow": "decal/flowers_1_yellow.png",
+        "white": "decal/flowers_1_white.png",
+        "blue": "decal/flowers_1_blue.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        32
+      ]
+    },
+    "flowers_2": {
+      "kind": "decal",
+      "variants": {
+        "red": "decal/flowers_2_red.png",
+        "yellow": "decal/flowers_2_yellow.png",
+        "white": "decal/flowers_2_white.png",
+        "blue": "decal/flowers_2_blue.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        32
+      ]
+    },
+    "pebbles_0": {
+      "kind": "decal",
+      "variants": {
+        "grey": "decal/pebbles_0_grey.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        32
+      ]
+    },
+    "pebbles_1": {
+      "kind": "decal",
+      "variants": {
+        "grey": "decal/pebbles_1_grey.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        32
+      ]
+    },
+    "leaves_0": {
+      "kind": "decal",
+      "variants": {
+        "autumn": "decal/leaves_0_autumn.png",
+        "red": "decal/leaves_0_red.png",
+        "green": "decal/leaves_0_green.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        32
+      ]
+    },
+    "leaves_1": {
+      "kind": "decal",
+      "variants": {
+        "autumn": "decal/leaves_1_autumn.png",
+        "red": "decal/leaves_1_red.png",
+        "green": "decal/leaves_1_green.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        32
+      ]
+    },
+    "bones": {
+      "kind": "decal",
+      "variants": {
+        "bone": "decal/bones_bone.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        32
+      ]
+    },
+    "cracks": {
+      "kind": "decal",
+      "variants": {
+        "dark": "decal/cracks_dark.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        32
+      ]
+    },
+    "puddle": {
+      "kind": "decal",
+      "variants": {
+        "water": "decal/puddle_water.png",
+        "swamp": "decal/puddle_swamp.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        32
+      ]
+    },
+    "blood": {
+      "kind": "decal",
+      "variants": {
+        "red": "decal/blood_red.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        32
+      ]
+    },
+    "scorch": {
+      "kind": "decal",
+      "variants": {
+        "burnt": "decal/scorch_burnt.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        32,
+        32
+      ]
+    }
+  }
+}
