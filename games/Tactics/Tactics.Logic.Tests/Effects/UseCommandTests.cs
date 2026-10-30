@@ -115,6 +115,34 @@ public sealed class UseCommandTests
     }
 
     [Fact]
+    public void High_ground_range_bonus_is_for_ranged_abilities_only()
+    {
+        const string hill = """
+            4. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+            """;
+        var touch = new AbilityDef(new AbilityId("test.touch"), "Touch", 1, new CostDef(Action: 1),
+            new TargetDef(TargetKind.Enemy, Range: 1, Los: false, new AreaDef(AreaShape.Single)),
+            [new DamageEffect(TestAbilities.Flat("1"), "radiant", [])]);
+        var bolt = TestAbilities.GuidingBolt;
+
+        Rejection? Try(AbilityDef ability, int x)
+        {
+            var battle = TestBattle.On(hill)
+                .Party("cleric", Cleric with { Abilities = [ability.Id] }, new Tile(0, 0))   // 4 levels up
+                .Enemy("gob", Goblin, new Tile(x, 0))
+                .With(ability);
+            var (state, _) = battle.Start();
+            return Battle.Apply(state, new Use(U("cleric"), ability.Id, new Target(Unit: U("gob"))), battle.Rules).Rejected;
+        }
+
+        Assert.Null(Try(touch, 1));                                     // adjacent: fine
+        Assert.Equal(RejectCode.OutOfRange, Try(touch, 2)?.Code);       // no +2 tiles for touch
+        Assert.Equal(RejectCode.OutOfRange, Try(touch, 3)?.Code);
+        Assert.Null(Try(bolt, 8));                                      // range 6 + ⌊4 / 2⌋ = 8
+        Assert.Equal(RejectCode.OutOfRange, Try(bolt, 9)?.Code);
+    }
+
+    [Fact]
     public void No_los_rejected()
     {
         const string wall = """

@@ -128,7 +128,7 @@ public static partial class Battle
     /// <item>The aim is <see cref="Target.Tile"/>, else the target unit's tile. A <c>self</c> ability aims at the user's own
     /// tile (a line or cone at <see cref="Target.Tile"/>, which only sets its direction), and an <c>all_allies</c> or
     /// <c>all_enemies</c> area needs no aim; both skip the range and sight checks.</item>
-    /// <item>Range: Manhattan distance ≤ range + the high-ground bonus and ≥ <see cref="TargetDef.MinRange"/>, within
+    /// <item>Range: Manhattan distance ≤ range (+ the high-ground bonus when the range is over 1 tile) and ≥ <see cref="TargetDef.MinRange"/>, within
     /// <see cref="TargetDef.HeightTolerance"/> when set. A weapon attack uses the sheet's weapon: melee reach
     /// (<see cref="Reach.Melee"/>) or its range, needing sight when ranged.</item>
     /// <item>Affected units stand in the area (anywhere for <c>all_*</c>), Up (Downed for <c>downed_ally</c>), on the side
@@ -217,11 +217,12 @@ public static partial class Battle
         }
         else
         {
+            ranged = def.Range > 1;   // melee and touch (range 1) get no high-ground range
             var heightOk = def.HeightTolerance is not { } tolerance
                            || Math.Abs(terrain.HeightAt(user.Pos) - terrain.HeightAt(aim)) <= tolerance;
-            if (distance > def.Range + rangeBonus || distance < def.MinRange || !heightOk)
+            if (distance > def.Range + (ranged ? rangeBonus : 0) || distance < def.MinRange || !heightOk)
                 return Rejection.Of(RejectCode.OutOfRange);
-            (los, ranged) = (def.Los, def.Range > 1);
+            los = def.Los;
         }
 
         if (los)
