@@ -15,6 +15,8 @@ When every task is done, one whole-branch review runs.
 
 **Handing off:** read [`2026-10-30-tactics-rules-engine.handoff.md`](2026-10-30-tactics-rules-engine.handoff.md) first. It has the workflow, the notes for each remaining task, every ruling, and the exact agent instructions.
 
+**Status:** stopped at the user's request after Task 17, on 2026-10-30. The next task is **18** (bard, druid, warlock).
+
 **How to resume:**
 1. Find the first task below that isn't `done`.
 2. Read its section in the plan, plus the **Rulings** and **Binding additions** below. They change or extend the plan text.
@@ -40,7 +42,7 @@ When every task is done, one whole-branch review runs.
 | 14 | AI planner, odds and threat map | done | `ac23394`, `23d88d1` | 1 |
 | 15 | Companion AI, timed-out turns, reactions, performance | done | `1feca9c`, `74cb44f` | 1 |
 | 16 | `Tactics.Sim` and the first balance report | done | `8f81baa`, `d017b9c` | 1 |
-| 17 | Ranger, paladin and monk | in progress |  |  |
+| 17 | Ranger, paladin and monk | done | `25b6dcc` | 0 |
 | 18 | Bard, druid and warlock | not started | | |
 | 18A | Barbarian and sorcerer (added 2026-10-30) | not started | | |
 | 19 | Martial subclasses (16, incl. barbarian's) and the hound | not started | | |
@@ -158,6 +160,13 @@ These were decided during execution. Later tasks must follow them, alongside the
 - **Fair play.** The bonus action never targets a foe the main action may have downed, unless the profile is cruel.
 - **Pathfinding fix.** `PathMap.Reachable` was indexed wrongly on non-square maps; it is fixed and has a regression test.
 
+**Ranger, paladin and monk (Task 17)**
+- **Divine Smite** is a bonus-action mark costing 1, 2 or 3 Oath. The paladin's next melee hit on that foe, before the end of its next turn, adds 2d8, 3d8 or 4d8 radiant (+1d8 against undead and fiends).
+- **Lay on Hands** is a `lay_on_hands` resource equal to the paladin's level, spent at 5 HP per point.
+- **Hunter's Mark** is an on-hit passive against a target carrying the `hunters_mark` condition.
+- **Aura of Protection** is approximated: a fixed +2 to saves, re-applied at the end of each paladin turn.
+- **AI valuation.** The AI values putting a condition on a foe by the damage the user's own on-hit passives would add against it, assuming 0.6 of attacks hit. **Tasks 18 and 19 must add a recursion guard** to `QuarryDamage` before content adds a passive that re-applies its own required condition (Hex, Avenger).
+
 **Simulator (Task 16)**
 - **Running it.** `dotnet run -c Release --project games/Tactics/Tactics.Sim -- --levels 1,3,5,7,10 --sizes 4,5,6 --parties 6 --seeds 20 --difficulty Normal --out <report>`. A full sweep of 1,800 battles takes about 2 minutes.
 - **Damage is HP actually lost.** Overkill and temporary HP soaked don't count as damage dealt; soaked temporary HP counts as the target's mitigation.
@@ -214,6 +223,7 @@ These were decided during execution. Later tasks must follow them, alongside the
 | 4 | `Start` normalises only `Sheet.Resources`; records holding arrays compare by reference (golden tests compare JSON); rejection-text test checks only 3 of 16 strings; `CantAfford` with no resource gives "Not enough ."; `ObjectiveExpr` allows a leaf with a group; `UnitSheet.Score` defaults a missing stat to 10 |
 | 5 | A self line/cone with no aim tile pays its cost and hits nothing; the converter's key detection could collide with a parameter named like a block; `Battle.cs` is about 320 lines (targeting could move out) |
 | 6 | No HP event on deep-water drops (Task 8 addresses); prone applied after a lethal fall; Swap has no landing check; `Movement` depends on `Motion.OccupantAt` |
+| 17 | Weapon-rider abilities use the ability's range, not the equipped weapon's (matters once players pick weapons); `QuarryDamage` recursion guard; Stunning Strike's rider is missing; Step of the Wind's Jump +2 needs a `StaticMods.Jump` field; thin tests for Lay on Hands, Hail of Thorns and Deflect Attacks |
 | 16 | One unnamed test failure seen once, probably the AI speed test competing for CPU (simulator tests now run on their own); the temporary-HP soak path is untested |
 | 14 | Self-area threat gets a high-ground range bonus; a bonus-action Dash is never planned; the bonus pass only excludes the direct target, not downed foes caught in an area |
 | 13 | SRD approximations parked for the balance pass: manoeuvres apply to each attack with Extra Attack, Feint, Spiritual Weapon, Empowered Evocation, marked, Uncanny Dodge/Stone's Endurance as temporary HP, Lucky, Indomitable, instant Spirit Guardians, bleeding not ended by healing, untyped Sneak Attack damage |

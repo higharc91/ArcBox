@@ -49,15 +49,15 @@ Claude-Session: https://claude.ai/code/session_01UZNTTVCBKLVWRDHcmTGbSi
 
 ## What's next
 
-The tracker's status table is authoritative; check it first. At the time of writing, Tasks 1–16 were done and Task 17 was in progress.
+The tracker's status table is authoritative; check it first. Tasks 1–17 are done and reviewed. Work stopped at the user's request after Task 17; **the next task is 18**.
 
 **Remaining tasks, with notes earlier work left for them:**
 
 | Task | Notes for whoever picks it up |
 |---|---|
-| 18: Bard, druid, warlock | Warlock Pact regain uses the passive route (`onRoundStart` + `if` even round + `grantResource`), not the `resourceRegen` feature. Set `primaryResource` and `"subclassesPending": true`. Wild Shape uses the `transform` hook with beasts in `monsters/wildshape.json`. |
+| 18: Bard, druid, warlock | Before writing Hex, add a recursion guard to the AI's `QuarryDamage` (`Ai/Scoring.Effects.cs`): a passive that re-applies its own required condition would recurse until the stack overflows. Warlock Pact regain uses the passive route (`onRoundStart` + `if` even round + `grantResource`), not the `resourceRegen` feature. Set `primaryResource` and `"subclassesPending": true`. Wild Shape uses the `transform` hook with beasts in `monsters/wildshape.json`. |
 | 18A: Barbarian, sorcerer (added mid-plan) | Add an `unarmoredDefense` stat to `ClassDef` and `SheetBuilder`, with a test. Add a `metamagic` named hook for Twinned, Extended, Careful, Quickened and Distant. Rage is a `statMod` with resistance and bonus damage. Spec §4.5 has the class tables. |
-| 19: Martial subclasses (16) and the hound | Includes Berserker, Earthshaker and Spiritwarden. Avenger needs source-specific `marked` advantage (an engine addition). Duelist and Uncanny-Dodge-style effects need damage-halving reactions (an engine addition). Remove `subclassesPending` from these classes. The hound is summoned `onBattleStart`. |
+| 19: Martial subclasses (16) and the hound | Avenger needs the same `QuarryDamage` guard (see Task 18). Includes Berserker, Earthshaker and Spiritwarden. Avenger needs source-specific `marked` advantage (an engine addition). Duelist and Uncanny-Dodge-style effects need damage-halving reactions (an engine addition). Remove `subclassesPending` from these classes. The hound is summoned `onBattleStart`. |
 | 20: Caster subclasses (16), sapling and imp | Includes Draconic, Chaos (the `random` block) and Runeborn (rune zones with `onEnterTile` passives). Remove the `subclassesPending` support from validation. Chronomancer uses `turnOrder`; Geomancer uses `alterTerrain`. |
 | 21: Monster roster, maps, encounters | Every enemy, beast and boss in the art manifests needs a stat block. Add an optional intended `level` to encounters and make the simulator's win-rate flag use it. The simulator's damage upper-bound test assumes enemies don't heal, so revisit it if healers are added. |
 | 22: Objectives, triggers, showcase | Trigger `do` effect blocks are only key-checked today; fully deserialise and resolve them. Objective scoring in the AI covers only protected units, so extend it for exits and the like. |
