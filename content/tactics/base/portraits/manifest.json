@@ -51,6 +51,26 @@
     "hurt": {
       "anim": "hurt",
       "frame": 0
+    },
+    "happy": {
+      "anim": "idle",
+      "frame": 0,
+      "expression": "happy"
+    },
+    "angry": {
+      "anim": "idle",
+      "frame": 0,
+      "expression": "angry"
+    },
+    "sad": {
+      "anim": "idle",
+      "frame": 0,
+      "expression": "sad"
+    },
+    "surprised": {
+      "anim": "idle",
+      "frame": 0,
+      "expression": "surprised"
     }
   },
   "backdrops": {
@@ -61,211 +81,419 @@
   "presets": {
     "kara": {
       "idle": "kara_idle.png",
-      "hurt": "kara_hurt.png"
+      "hurt": "kara_hurt.png",
+      "happy": "kara_happy.png",
+      "angry": "kara_angry.png",
+      "sad": "kara_sad.png",
+      "surprised": "kara_surprised.png"
     },
     "aldric": {
       "idle": "aldric_idle.png",
-      "hurt": "aldric_hurt.png"
+      "hurt": "aldric_hurt.png",
+      "happy": "aldric_happy.png",
+      "angry": "aldric_angry.png",
+      "sad": "aldric_sad.png",
+      "surprised": "aldric_surprised.png"
     },
     "wren": {
       "idle": "wren_idle.png",
-      "hurt": "wren_hurt.png"
+      "hurt": "wren_hurt.png",
+      "happy": "wren_happy.png",
+      "angry": "wren_angry.png",
+      "sad": "wren_sad.png",
+      "surprised": "wren_surprised.png"
     },
     "ilyra": {
       "idle": "ilyra_idle.png",
-      "hurt": "ilyra_hurt.png"
+      "hurt": "ilyra_hurt.png",
+      "happy": "ilyra_happy.png",
+      "angry": "ilyra_angry.png",
+      "sad": "ilyra_sad.png",
+      "surprised": "ilyra_surprised.png"
     },
     "tamsin": {
       "idle": "tamsin_idle.png",
-      "hurt": "tamsin_hurt.png"
+      "hurt": "tamsin_hurt.png",
+      "happy": "tamsin_happy.png",
+      "angry": "tamsin_angry.png",
+      "sad": "tamsin_sad.png",
+      "surprised": "tamsin_surprised.png"
     },
     "sefa": {
       "idle": "sefa_idle.png",
-      "hurt": "sefa_hurt.png"
+      "hurt": "sefa_hurt.png",
+      "happy": "sefa_happy.png",
+      "angry": "sefa_angry.png",
+      "sad": "sefa_sad.png",
+      "surprised": "sefa_surprised.png"
     },
     "class_fighter": {
       "idle": "class_fighter_idle.png",
-      "hurt": "class_fighter_hurt.png"
+      "hurt": "class_fighter_hurt.png",
+      "happy": "class_fighter_happy.png",
+      "angry": "class_fighter_angry.png",
+      "sad": "class_fighter_sad.png",
+      "surprised": "class_fighter_surprised.png"
     },
     "class_rogue": {
       "idle": "class_rogue_idle.png",
-      "hurt": "class_rogue_hurt.png"
+      "hurt": "class_rogue_hurt.png",
+      "happy": "class_rogue_happy.png",
+      "angry": "class_rogue_angry.png",
+      "sad": "class_rogue_sad.png",
+      "surprised": "class_rogue_surprised.png"
     },
     "class_wizard": {
       "idle": "class_wizard_idle.png",
-      "hurt": "class_wizard_hurt.png"
+      "hurt": "class_wizard_hurt.png",
+      "happy": "class_wizard_happy.png",
+      "angry": "class_wizard_angry.png",
+      "sad": "class_wizard_sad.png",
+      "surprised": "class_wizard_surprised.png"
     },
     "class_cleric": {
       "idle": "class_cleric_idle.png",
-      "hurt": "class_cleric_hurt.png"
+      "hurt": "class_cleric_hurt.png",
+      "happy": "class_cleric_happy.png",
+      "angry": "class_cleric_angry.png",
+      "sad": "class_cleric_sad.png",
+      "surprised": "class_cleric_surprised.png"
     },
     "class_ranger": {
       "idle": "class_ranger_idle.png",
-      "hurt": "class_ranger_hurt.png"
+      "hurt": "class_ranger_hurt.png",
+      "happy": "class_ranger_happy.png",
+      "angry": "class_ranger_angry.png",
+      "sad": "class_ranger_sad.png",
+      "surprised": "class_ranger_surprised.png"
     },
     "class_paladin": {
       "idle": "class_paladin_idle.png",
-      "hurt": "class_paladin_hurt.png"
+      "hurt": "class_paladin_hurt.png",
+      "happy": "class_paladin_happy.png",
+      "angry": "class_paladin_angry.png",
+      "sad": "class_paladin_sad.png",
+      "surprised": "class_paladin_surprised.png"
     },
     "class_bard": {
       "idle": "class_bard_idle.png",
-      "hurt": "class_bard_hurt.png"
+      "hurt": "class_bard_hurt.png",
+      "happy": "class_bard_happy.png",
+      "angry": "class_bard_angry.png",
+      "sad": "class_bard_sad.png",
+      "surprised": "class_bard_surprised.png"
     },
     "class_druid": {
       "idle": "class_druid_idle.png",
-      "hurt": "class_druid_hurt.png"
+      "hurt": "class_druid_hurt.png",
+      "happy": "class_druid_happy.png",
+      "angry": "class_druid_angry.png",
+      "sad": "class_druid_sad.png",
+      "surprised": "class_druid_surprised.png"
     },
     "class_warlock": {
       "idle": "class_warlock_idle.png",
-      "hurt": "class_warlock_hurt.png"
+      "hurt": "class_warlock_hurt.png",
+      "happy": "class_warlock_happy.png",
+      "angry": "class_warlock_angry.png",
+      "sad": "class_warlock_sad.png",
+      "surprised": "class_warlock_surprised.png"
     },
     "class_monk": {
       "idle": "class_monk_idle.png",
-      "hurt": "class_monk_hurt.png"
+      "hurt": "class_monk_hurt.png",
+      "happy": "class_monk_happy.png",
+      "angry": "class_monk_angry.png",
+      "sad": "class_monk_sad.png",
+      "surprised": "class_monk_surprised.png"
     },
     "goblin_cutthroat": {
       "idle": "goblin_cutthroat_idle.png",
-      "hurt": "goblin_cutthroat_hurt.png"
+      "hurt": "goblin_cutthroat_hurt.png",
+      "happy": "goblin_cutthroat_happy.png",
+      "angry": "goblin_cutthroat_angry.png",
+      "sad": "goblin_cutthroat_sad.png",
+      "surprised": "goblin_cutthroat_surprised.png"
     },
     "goblin_spear": {
       "idle": "goblin_spear_idle.png",
-      "hurt": "goblin_spear_hurt.png"
+      "hurt": "goblin_spear_hurt.png",
+      "happy": "goblin_spear_happy.png",
+      "angry": "goblin_spear_angry.png",
+      "sad": "goblin_spear_sad.png",
+      "surprised": "goblin_spear_surprised.png"
     },
     "goblin_shaman": {
       "idle": "goblin_shaman_idle.png",
-      "hurt": "goblin_shaman_hurt.png"
+      "hurt": "goblin_shaman_hurt.png",
+      "happy": "goblin_shaman_happy.png",
+      "angry": "goblin_shaman_angry.png",
+      "sad": "goblin_shaman_sad.png",
+      "surprised": "goblin_shaman_surprised.png"
     },
     "orc_brute": {
       "idle": "orc_brute_idle.png",
-      "hurt": "orc_brute_hurt.png"
+      "hurt": "orc_brute_hurt.png",
+      "happy": "orc_brute_happy.png",
+      "angry": "orc_brute_angry.png",
+      "sad": "orc_brute_sad.png",
+      "surprised": "orc_brute_surprised.png"
     },
     "skeleton": {
       "idle": "skeleton_idle.png",
-      "hurt": "skeleton_hurt.png"
+      "hurt": "skeleton_hurt.png",
+      "happy": "skeleton_happy.png",
+      "angry": "skeleton_angry.png",
+      "sad": "skeleton_sad.png",
+      "surprised": "skeleton_surprised.png"
     },
     "bandit": {
       "idle": "bandit_idle.png",
-      "hurt": "bandit_hurt.png"
+      "hurt": "bandit_hurt.png",
+      "happy": "bandit_happy.png",
+      "angry": "bandit_angry.png",
+      "sad": "bandit_sad.png",
+      "surprised": "bandit_surprised.png"
     },
     "black_knight": {
       "idle": "black_knight_idle.png",
-      "hurt": "black_knight_hurt.png"
+      "hurt": "black_knight_hurt.png",
+      "happy": "black_knight_happy.png",
+      "angry": "black_knight_angry.png",
+      "sad": "black_knight_sad.png",
+      "surprised": "black_knight_surprised.png"
     },
     "cultist": {
       "idle": "cultist_idle.png",
-      "hurt": "cultist_hurt.png"
+      "hurt": "cultist_hurt.png",
+      "happy": "cultist_happy.png",
+      "angry": "cultist_angry.png",
+      "sad": "cultist_sad.png",
+      "surprised": "cultist_surprised.png"
     },
     "kobold": {
       "idle": "kobold_idle.png",
-      "hurt": "kobold_hurt.png"
+      "hurt": "kobold_hurt.png",
+      "happy": "kobold_happy.png",
+      "angry": "kobold_angry.png",
+      "sad": "kobold_sad.png",
+      "surprised": "kobold_surprised.png"
     },
     "kobold_slinger": {
       "idle": "kobold_slinger_idle.png",
-      "hurt": "kobold_slinger_hurt.png"
+      "hurt": "kobold_slinger_hurt.png",
+      "happy": "kobold_slinger_happy.png",
+      "angry": "kobold_slinger_angry.png",
+      "sad": "kobold_slinger_sad.png",
+      "surprised": "kobold_slinger_surprised.png"
     },
     "hobgoblin": {
       "idle": "hobgoblin_idle.png",
-      "hurt": "hobgoblin_hurt.png"
+      "hurt": "hobgoblin_hurt.png",
+      "happy": "hobgoblin_happy.png",
+      "angry": "hobgoblin_angry.png",
+      "sad": "hobgoblin_sad.png",
+      "surprised": "hobgoblin_surprised.png"
     },
     "goblin_archer": {
       "idle": "goblin_archer_idle.png",
-      "hurt": "goblin_archer_hurt.png"
+      "hurt": "goblin_archer_hurt.png",
+      "happy": "goblin_archer_happy.png",
+      "angry": "goblin_archer_angry.png",
+      "sad": "goblin_archer_sad.png",
+      "surprised": "goblin_archer_surprised.png"
     },
     "zombie": {
       "idle": "zombie_idle.png",
-      "hurt": "zombie_hurt.png"
+      "hurt": "zombie_hurt.png",
+      "happy": "zombie_happy.png",
+      "angry": "zombie_angry.png",
+      "sad": "zombie_sad.png",
+      "surprised": "zombie_surprised.png"
     },
     "skeleton_archer": {
       "idle": "skeleton_archer_idle.png",
-      "hurt": "skeleton_archer_hurt.png"
+      "hurt": "skeleton_archer_hurt.png",
+      "happy": "skeleton_archer_happy.png",
+      "angry": "skeleton_archer_angry.png",
+      "sad": "skeleton_archer_sad.png",
+      "surprised": "skeleton_archer_surprised.png"
     },
     "lich": {
       "idle": "lich_idle.png",
-      "hurt": "lich_hurt.png"
+      "hurt": "lich_hurt.png",
+      "happy": "lich_happy.png",
+      "angry": "lich_angry.png",
+      "sad": "lich_sad.png",
+      "surprised": "lich_surprised.png"
     },
     "dark_elf": {
       "idle": "dark_elf_idle.png",
-      "hurt": "dark_elf_hurt.png"
+      "hurt": "dark_elf_hurt.png",
+      "happy": "dark_elf_happy.png",
+      "angry": "dark_elf_angry.png",
+      "sad": "dark_elf_sad.png",
+      "surprised": "dark_elf_surprised.png"
     },
     "necromancer": {
       "idle": "necromancer_idle.png",
-      "hurt": "necromancer_hurt.png"
+      "hurt": "necromancer_hurt.png",
+      "happy": "necromancer_happy.png",
+      "angry": "necromancer_angry.png",
+      "sad": "necromancer_sad.png",
+      "surprised": "necromancer_surprised.png"
     },
     "bandit_captain": {
       "idle": "bandit_captain_idle.png",
-      "hurt": "bandit_captain_hurt.png"
+      "hurt": "bandit_captain_hurt.png",
+      "happy": "bandit_captain_happy.png",
+      "angry": "bandit_captain_angry.png",
+      "sad": "bandit_captain_sad.png",
+      "surprised": "bandit_captain_surprised.png"
     },
     "cult_leader": {
       "idle": "cult_leader_idle.png",
-      "hurt": "cult_leader_hurt.png"
+      "hurt": "cult_leader_hurt.png",
+      "happy": "cult_leader_happy.png",
+      "angry": "cult_leader_angry.png",
+      "sad": "cult_leader_sad.png",
+      "surprised": "cult_leader_surprised.png"
     },
     "mayor": {
       "idle": "mayor_idle.png",
-      "hurt": "mayor_hurt.png"
+      "hurt": "mayor_hurt.png",
+      "happy": "mayor_happy.png",
+      "angry": "mayor_angry.png",
+      "sad": "mayor_sad.png",
+      "surprised": "mayor_surprised.png"
     },
     "innkeeper": {
       "idle": "innkeeper_idle.png",
-      "hurt": "innkeeper_hurt.png"
+      "hurt": "innkeeper_hurt.png",
+      "happy": "innkeeper_happy.png",
+      "angry": "innkeeper_angry.png",
+      "sad": "innkeeper_sad.png",
+      "surprised": "innkeeper_surprised.png"
     },
     "barmaid": {
       "idle": "barmaid_idle.png",
-      "hurt": "barmaid_hurt.png"
+      "hurt": "barmaid_hurt.png",
+      "happy": "barmaid_happy.png",
+      "angry": "barmaid_angry.png",
+      "sad": "barmaid_sad.png",
+      "surprised": "barmaid_surprised.png"
     },
     "blacksmith": {
       "idle": "blacksmith_idle.png",
-      "hurt": "blacksmith_hurt.png"
+      "hurt": "blacksmith_hurt.png",
+      "happy": "blacksmith_happy.png",
+      "angry": "blacksmith_angry.png",
+      "sad": "blacksmith_sad.png",
+      "surprised": "blacksmith_surprised.png"
     },
     "farmer": {
       "idle": "farmer_idle.png",
-      "hurt": "farmer_hurt.png"
+      "hurt": "farmer_hurt.png",
+      "happy": "farmer_happy.png",
+      "angry": "farmer_angry.png",
+      "sad": "farmer_sad.png",
+      "surprised": "farmer_surprised.png"
     },
     "farmhand": {
       "idle": "farmhand_idle.png",
-      "hurt": "farmhand_hurt.png"
+      "hurt": "farmhand_hurt.png",
+      "happy": "farmhand_happy.png",
+      "angry": "farmhand_angry.png",
+      "sad": "farmhand_sad.png",
+      "surprised": "farmhand_surprised.png"
     },
     "merchant": {
       "idle": "merchant_idle.png",
-      "hurt": "merchant_hurt.png"
+      "hurt": "merchant_hurt.png",
+      "happy": "merchant_happy.png",
+      "angry": "merchant_angry.png",
+      "sad": "merchant_sad.png",
+      "surprised": "merchant_surprised.png"
     },
     "priest": {
       "idle": "priest_idle.png",
-      "hurt": "priest_hurt.png"
+      "hurt": "priest_hurt.png",
+      "happy": "priest_happy.png",
+      "angry": "priest_angry.png",
+      "sad": "priest_sad.png",
+      "surprised": "priest_surprised.png"
     },
     "guard": {
       "idle": "guard_idle.png",
-      "hurt": "guard_hurt.png"
+      "hurt": "guard_hurt.png",
+      "happy": "guard_happy.png",
+      "angry": "guard_angry.png",
+      "sad": "guard_sad.png",
+      "surprised": "guard_surprised.png"
     },
     "guard_captain": {
       "idle": "guard_captain_idle.png",
-      "hurt": "guard_captain_hurt.png"
+      "hurt": "guard_captain_hurt.png",
+      "happy": "guard_captain_happy.png",
+      "angry": "guard_captain_angry.png",
+      "sad": "guard_captain_sad.png",
+      "surprised": "guard_captain_surprised.png"
     },
     "noble": {
       "idle": "noble_idle.png",
-      "hurt": "noble_hurt.png"
+      "hurt": "noble_hurt.png",
+      "happy": "noble_happy.png",
+      "angry": "noble_angry.png",
+      "sad": "noble_sad.png",
+      "surprised": "noble_surprised.png"
     },
     "sage": {
       "idle": "sage_idle.png",
-      "hurt": "sage_hurt.png"
+      "hurt": "sage_hurt.png",
+      "happy": "sage_happy.png",
+      "angry": "sage_angry.png",
+      "sad": "sage_sad.png",
+      "surprised": "sage_surprised.png"
     },
     "child": {
       "idle": "child_idle.png",
-      "hurt": "child_hurt.png"
+      "hurt": "child_hurt.png",
+      "happy": "child_happy.png",
+      "angry": "child_angry.png",
+      "sad": "child_sad.png",
+      "surprised": "child_surprised.png"
     },
     "hermit": {
       "idle": "hermit_idle.png",
-      "hurt": "hermit_hurt.png"
+      "hurt": "hermit_hurt.png",
+      "happy": "hermit_happy.png",
+      "angry": "hermit_angry.png",
+      "sad": "hermit_sad.png",
+      "surprised": "hermit_surprised.png"
     },
     "stranger": {
       "idle": "stranger_idle.png",
-      "hurt": "stranger_hurt.png"
+      "hurt": "stranger_hurt.png",
+      "happy": "stranger_happy.png",
+      "angry": "stranger_angry.png",
+      "sad": "stranger_sad.png",
+      "surprised": "stranger_surprised.png"
     },
     "minstrel": {
       "idle": "minstrel_idle.png",
-      "hurt": "minstrel_hurt.png"
+      "hurt": "minstrel_hurt.png",
+      "happy": "minstrel_happy.png",
+      "angry": "minstrel_angry.png",
+      "sad": "minstrel_sad.png",
+      "surprised": "minstrel_surprised.png"
     },
     "fisher": {
       "idle": "fisher_idle.png",
-      "hurt": "fisher_hurt.png"
+      "hurt": "fisher_hurt.png",
+      "happy": "fisher_happy.png",
+      "angry": "fisher_angry.png",
+      "sad": "fisher_sad.png",
+      "surprised": "fisher_surprised.png"
     }
   },
   "howTo": "compose the character's layers (except skipLayers) for the front facing in the mood's pose, crop to crop[build], draw over a backdrop, then scale by `scale` (nearest)"

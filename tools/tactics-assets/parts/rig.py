@@ -64,6 +64,7 @@ class Pose:
     blink: bool = False               # eyes shut for a frame (idles blink, so characters look alive)
     smear: float | None = None        # a swing's previous weapon angle: the weapon draws a motion arc from it
     rise: int = 0                     # lifts the whole body (jumps, leaps); the ground anchor doesn't move
+    expression: str | None = None     # dialogue faces: happy, angry, sad, surprised (None = neutral)
 
 
 # Animations: name -> (fps, loop, poses). Built for readability at 32x40 and 3x-4x zoom on a TV. Attacks follow

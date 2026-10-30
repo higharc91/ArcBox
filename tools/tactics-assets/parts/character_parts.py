@@ -264,28 +264,63 @@ def _ears(c: Canvas, p: Points, kind: str) -> None:
 
 
 def _face(c: Canvas, p: Points) -> None:
+    """Eyes, mouth and a cheek light, laid out in 3/4 view (the face sits a little screen-right). Expressions only
+    move eyes and mouth: brows would sit under most fringes, so the eyes carry the mood."""
     x0, y0 = p.head_x0 + _face_dx(p), p.head_y0
     hurt = p.pose.lean < 0 and p.pose.bob > 0
     down = p.pose.kneel or p.pose.blink
+    mood = p.pose.expression
     ey = y0 + 5
-    for ex in (x0 + 4, x0 + 8):  # 3/4 view: the face sits a little screen-right
+    for ex in (x0 + 4, x0 + 8):
         if down:
             c.px(ex, ey + 1, "eyes", 0)            # closed
+        elif mood == "happy":                      # closed in a smile: little arches
+            c.px(ex, ey, "eyes", 0)
+            c.px(ex - 1, ey + 1, "skin", 1)
+            c.px(ex + 1, ey + 1, "skin", 1)
+        elif mood == "angry":                      # narrowed, with a hard lid line slanting in
+            c.px(ex, ey + 1, "eyes", 0)
+            c.px(ex, ey, "skin", 1)
+            c.px(ex + (1 if ex < x0 + 6 else -1), ey, "skin", 0)
+        elif mood == "sad":                        # looking down, a heavy lid
+            c.px(ex, ey, "skin", 2)
+            c.px(ex, ey + 1, "eyes", 0)
+            c.px(ex, ey + 2, "eyes", 3)
+        elif mood == "surprised":                  # wide open with a catchlight
+            c.px(ex, ey - 1, "eyes", 0)
+            c.px(ex, ey, "eyes", 0)
+            c.px(ex, ey + 1, "eyes", 3)
+            c.px(ex + 1, ey - 1, "eyes", 5)
         elif hurt:
             c.px(ex, ey, "eyes", 0)
             c.px(ex, ey + 1, "eyes", 1)
         else:
             c.px(ex, ey, "eyes", 0)
             c.px(ex, ey + 1, "eyes", 3)
-    if p.build.feminine:
-        if not down:
-            c.px(x0 + 3, ey - 1, "eyes", 0)        # lashes flick up and out at each outer corner
-            c.px(x0 + 9, ey - 1, "eyes", 0)
-        c.px(x0 + 6, y0 + 8, "skin", 1)
-        c.px(x0 + 7, y0 + 8, "skin", 2)           # fuller lips
+    if p.build.feminine and not down and mood not in ("happy", "angry"):
+        c.px(x0 + 3, ey - 1, "eyes", 0)            # lashes flick up and out at each outer corner
+        c.px(x0 + 9, ey - 1, "eyes", 0)
+    my = y0 + 8
+    if mood == "happy":                            # a smile, and a little blush
+        c.px(x0 + 5, my, "skin", 1)
+        c.px(x0 + 6, my + 1, "skin", 1)
+        c.px(x0 + 7, my, "skin", 1)
+        c.px(x0 + 3, y0 + 7, "skin", 4)
+    elif mood == "angry":                          # a hard, wide line
+        c.rect(x0 + 5, my, x0 + 7, my, "skin", 0)
+    elif mood == "sad":                            # turned down at the corners
+        c.px(x0 + 6, my, "skin", 1)
+        c.px(x0 + 5, my + 1, "skin", 1)
+        c.px(x0 + 7, my + 1, "skin", 1)
+    elif mood == "surprised":                      # an O
+        c.px(x0 + 6, my, "skin", 0)
+        c.px(x0 + 6, my + 1, "skin", 0)
+    elif p.build.feminine:
+        c.px(x0 + 6, my, "skin", 1)
+        c.px(x0 + 7, my, "skin", 2)                # fuller lips
     else:
-        c.px(x0 + 6, y0 + 8, "skin", 1)           # mouth
-    c.px(x0 + 9, y0 + 7, "skin", 4)               # cheek light
+        c.px(x0 + 6, my, "skin", 1)                # mouth
+    c.px(x0 + 9, y0 + 7, "skin", 4)                # cheek light
 
 
 def hands(kind: str) -> Part:

@@ -10,6 +10,7 @@ Two moods: "idle" and "hurt" (the hurt pose's face), which the UI swaps in at lo
 from __future__ import annotations
 
 import shutil
+from dataclasses import replace
 
 import numpy as np
 from PIL import Image
@@ -18,14 +19,15 @@ from arcpix.out import PACK, PREVIEWS, save, write_json
 from arcpix.palette import ramp
 from arcpix.preview import Tile, contact_sheet, strip
 from . import characters as C
-from .recipes import ALL, PARTY, CLASSES, ENEMIES
+from .recipes import ALL, PARTY, CLASSES, ENEMIES, NPCS
 from .rig import ANIMS, BUILDS
 
 CROP = 20                                # source window around the head
 SCALE = 2                                # drawn at 2x: a portrait is a close-up
 SIZE = CROP * SCALE
 SKIP = ("weapon", "offhand")             # held items crowd the frame
-MOODS = {"idle": ANIMS["idle"][2][0], "hurt": ANIMS["hurt"][2][0]}
+MOODS = {"idle": ANIMS["idle"][2][0], "hurt": ANIMS["hurt"][2][0],
+         **{m: replace(ANIMS["idle"][2][0], expression=m) for m in ("happy", "angry", "sad", "surprised")}}
 
 BACKDROPS = {                              # backdrop ramps: allies warm-neutral, enemies red, neutral navy
     "ally": ramp("#3a4a7a", shift=0.05),
@@ -94,7 +96,9 @@ def build() -> None:
         "scale": SCALE,
         "crop": {b: list(crop_box(b)) for b in BUILDS},
         "skipLayers": list(SKIP),
-        "moods": {"idle": {"anim": "idle", "frame": 0}, "hurt": {"anim": "hurt", "frame": 0}},
+        "moods": {"idle": {"anim": "idle", "frame": 0}, "hurt": {"anim": "hurt", "frame": 0},
+                  **{m: {"anim": "idle", "frame": 0, "expression": m}
+                     for m in ("happy", "angry", "sad", "surprised")}},
         "backdrops": {k: f"backdrops/{k}.png" for k in BACKDROPS},
         "presets": entries,
         "howTo": "compose the character's layers (except skipLayers) for the front facing in the mood's pose, "
@@ -106,6 +110,12 @@ def build() -> None:
         for r in group:
             tiles.append(Tile(strip([portrait(r, "idle"), portrait(r, "hurt")], 1, gap=3), r.name,
                               "idle · hurt"))
+    moods = list(MOODS)
+    expr = [Tile(strip([portrait(r, m) for m in moods], 1, gap=3), r.name, " · ".join(moods))
+            for r in PARTY + NPCS[:6]]
+    save(contact_sheet("Portraits · dialogue expressions", expr, columns=2, zoom=3,
+                       subtitle="Drawn by the face itself, so every custom hero and NPC gets them."),
+         PREVIEWS / "14b-expressions.png")
     save(contact_sheet("Portraits", tiles, columns=8, zoom=2,
                        subtitle="Made from each character's own layers, so custom heroes get matching portraits. "
                                 "Idle and hurt moods; ally and enemy backdrops."),
