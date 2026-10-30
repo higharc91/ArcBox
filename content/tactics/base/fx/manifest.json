@@ -1,0 +1,571 @@
+{
+  "layout": "each file is one horizontal strip of frames, left to right, all the same size",
+  "blend": {
+    "add": "additive (glows, light): src.rgb * src.a added to the scene",
+    "normal": "ordinary alpha blending (smoke, dust, solid objects, dark magic)"
+  },
+  "layer": {
+    "over": "drawn above units (sort with the target, just in front of it)",
+    "ground": "drawn on the floor under units, like a decal"
+  },
+  "loop": "loop: true repeats frames loopStart..end (loopStart defaults to 0); false plays once and is removed",
+  "attach": {
+    "feet": "anchor goes on the target's ground point (the character's own anchor, 16,37 in its frame)",
+    "body": "anchor goes on the target's chest: 15 px above its ground point",
+    "overhead": "anchor goes just above the target's head: 36 px above its ground point",
+    "projectile": "anchor moves along the flight path; the art faces +x (right), rotate it to the direction"
+  },
+  "scale": "drawn at the characters' pixel scale: show at the same multiple as the sprites",
+  "effects": {
+    "slash": {
+      "name": "Slash",
+      "group": "Weapon strikes",
+      "frame": [
+        32,
+        32
+      ],
+      "frames": 7,
+      "fps": 18,
+      "loop": false,
+      "anchor": [
+        16,
+        16
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "steel": "slash_steel.png",
+        "fire": "slash_fire.png",
+        "frost": "slash_frost.png",
+        "holy": "slash_holy.png",
+        "shadow": "slash_shadow.png"
+      },
+      "default": "steel",
+      "note": "sword, axe and mace swings; mirror for a left-facing attacker"
+    },
+    "thrust": {
+      "name": "Thrust",
+      "group": "Weapon strikes",
+      "frame": [
+        32,
+        32
+      ],
+      "frames": 6,
+      "fps": 18,
+      "loop": false,
+      "anchor": [
+        16,
+        16
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "steel": "thrust_steel.png",
+        "fire": "thrust_fire.png",
+        "frost": "thrust_frost.png",
+        "holy": "thrust_holy.png",
+        "shadow": "thrust_shadow.png"
+      },
+      "default": "steel",
+      "note": "spear, dagger and rapier stabs; points right, mirror or rotate to face the target"
+    },
+    "hit": {
+      "name": "Hit spark",
+      "group": "Weapon strikes",
+      "frame": [
+        32,
+        32
+      ],
+      "frames": 6,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        16,
+        16
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "spark": "hit_spark.png",
+        "magic": "hit_magic.png",
+        "blood": "hit_blood.png"
+      },
+      "default": "spark"
+    },
+    "crit": {
+      "name": "Critical burst",
+      "group": "Weapon strikes",
+      "frame": [
+        48,
+        48
+      ],
+      "frames": 8,
+      "fps": 16,
+      "loop": false,
+      "anchor": [
+        24,
+        24
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "crit_gold.png"
+      },
+      "default": "gold"
+    },
+    "arrow": {
+      "name": "Arrow",
+      "group": "Projectiles",
+      "frame": [
+        32,
+        32
+      ],
+      "frames": 1,
+      "fps": 1,
+      "loop": false,
+      "anchor": [
+        27,
+        15
+      ],
+      "attach": "projectile",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "oak": "arrow_oak.png"
+      },
+      "default": "oak",
+      "note": "points right; rotate to the flight direction"
+    },
+    "arrow_trail": {
+      "name": "Arrow in flight",
+      "group": "Projectiles",
+      "frame": [
+        32,
+        32
+      ],
+      "frames": 4,
+      "fps": 16,
+      "loop": true,
+      "anchor": [
+        27,
+        15
+      ],
+      "attach": "projectile",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "oak": "arrow_trail_oak.png"
+      },
+      "default": "oak",
+      "note": "points right; rotate to the flight direction"
+    },
+    "fireball": {
+      "name": "Fireball",
+      "group": "Projectiles",
+      "frame": [
+        32,
+        32
+      ],
+      "frames": 4,
+      "fps": 12,
+      "loop": true,
+      "anchor": [
+        22,
+        16
+      ],
+      "attach": "projectile",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "fireball_fire.png"
+      },
+      "default": "fire",
+      "note": "points right; rotate to the flight direction"
+    },
+    "eldritch": {
+      "name": "Eldritch blast",
+      "group": "Projectiles",
+      "frame": [
+        32,
+        32
+      ],
+      "frames": 6,
+      "fps": 12,
+      "loop": true,
+      "anchor": [
+        22,
+        16
+      ],
+      "attach": "projectile",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "violet": "eldritch_violet.png",
+        "fel": "eldritch_fel.png"
+      },
+      "default": "violet",
+      "note": "points right; rotate to the flight direction"
+    },
+    "explosion": {
+      "name": "Fireball blast",
+      "group": "Spell bursts",
+      "frame": [
+        48,
+        48
+      ],
+      "frames": 9,
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        24,
+        42
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "explosion_fire.png"
+      },
+      "default": "fire"
+    },
+    "ice": {
+      "name": "Ice shards",
+      "group": "Spell bursts",
+      "frame": [
+        48,
+        48
+      ],
+      "frames": 8,
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        24,
+        39
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "frost": "ice_frost.png"
+      },
+      "default": "frost"
+    },
+    "lightning": {
+      "name": "Lightning strike",
+      "group": "Spell bursts",
+      "frame": [
+        48,
+        80
+      ],
+      "frames": 8,
+      "fps": 16,
+      "loop": false,
+      "anchor": [
+        24,
+        75
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "storm": "lightning_storm.png",
+        "holy": "lightning_holy.png"
+      },
+      "default": "storm"
+    },
+    "heal": {
+      "name": "Healing",
+      "group": "Spell bursts",
+      "frame": [
+        48,
+        48
+      ],
+      "frames": 8,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        24,
+        44
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "nature": "heal_nature.png",
+        "holy": "heal_holy.png",
+        "arcane": "heal_arcane.png"
+      },
+      "default": "nature"
+    },
+    "pillar": {
+      "name": "Pillar of light",
+      "group": "Spell bursts",
+      "frame": [
+        32,
+        64
+      ],
+      "frames": 8,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        16,
+        60
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "pillar_holy.png",
+        "arcane": "pillar_arcane.png",
+        "shadow": "pillar_shadow.png"
+      },
+      "default": "holy",
+      "note": "bless (holy, on an ally) or smite (on a foe)"
+    },
+    "levelup": {
+      "name": "Level up",
+      "group": "Spell bursts",
+      "frame": [
+        32,
+        64
+      ],
+      "frames": 9,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        16,
+        60
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "levelup_gold.png"
+      },
+      "default": "gold"
+    },
+    "misty": {
+      "name": "Misty step",
+      "group": "Spell bursts",
+      "frame": [
+        48,
+        48
+      ],
+      "frames": 8,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        24,
+        44
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "mist": "misty_mist.png",
+        "fey": "misty_fey.png",
+        "shadow": "misty_shadow.png"
+      },
+      "default": "mist",
+      "note": "play at the start tile (unit hidden from frame 4), then reversed at the destination"
+    },
+    "hex": {
+      "name": "Hex mark",
+      "group": "Spell bursts",
+      "frame": [
+        32,
+        32
+      ],
+      "frames": 8,
+      "fps": 10,
+      "loop": true,
+      "anchor": [
+        16,
+        27
+      ],
+      "attach": "overhead",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "shadow": "hex_shadow.png",
+        "blood": "hex_blood.png"
+      },
+      "default": "shadow",
+      "loopStart": 4
+    },
+    "smoke": {
+      "name": "Smoke puff",
+      "group": "Clouds",
+      "frame": [
+        32,
+        32
+      ],
+      "frames": 7,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        16,
+        28
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "grey": "smoke_grey.png"
+      },
+      "default": "grey"
+    },
+    "dust": {
+      "name": "Dust puff",
+      "group": "Clouds",
+      "frame": [
+        32,
+        32
+      ],
+      "frames": 6,
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        16,
+        27
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "earth": "dust_earth.png",
+        "sand": "dust_sand.png",
+        "snow": "dust_snow.png"
+      },
+      "default": "earth",
+      "note": "landings and footsteps"
+    },
+    "poison": {
+      "name": "Poison cloud",
+      "group": "Clouds",
+      "frame": [
+        48,
+        48
+      ],
+      "frames": 8,
+      "fps": 8,
+      "loop": true,
+      "anchor": [
+        24,
+        40
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "poison": "poison_poison.png",
+        "miasma": "poison_miasma.png"
+      },
+      "default": "poison"
+    },
+    "poof": {
+      "name": "Defeat poof",
+      "group": "Clouds",
+      "frame": [
+        32,
+        32
+      ],
+      "frames": 7,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        16,
+        31
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "white": "poof_white.png"
+      },
+      "default": "white"
+    },
+    "circle": {
+      "name": "Magic circle",
+      "group": "Ground and auras",
+      "frame": [
+        48,
+        48
+      ],
+      "frames": 8,
+      "fps": 10,
+      "loop": true,
+      "anchor": [
+        24,
+        36
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "ground",
+      "variants": {
+        "arcane": "circle_arcane.png",
+        "holy": "circle_holy.png",
+        "fire": "circle_fire.png",
+        "shadow": "circle_shadow.png",
+        "nature": "circle_nature.png"
+      },
+      "default": "arcane",
+      "note": "casting circle under the caster, or a spell's area marker"
+    },
+    "aura": {
+      "name": "Buff aura",
+      "group": "Ground and auras",
+      "frame": [
+        48,
+        48
+      ],
+      "frames": 8,
+      "fps": 10,
+      "loop": true,
+      "anchor": [
+        24,
+        38
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "ground",
+      "variants": {
+        "arcane": "aura_arcane.png",
+        "holy": "aura_holy.png",
+        "fire": "aura_fire.png",
+        "shadow": "aura_shadow.png",
+        "nature": "aura_nature.png"
+      },
+      "default": "arcane"
+    },
+    "shield": {
+      "name": "Shield bubble",
+      "group": "Ground and auras",
+      "frame": [
+        48,
+        48
+      ],
+      "frames": 9,
+      "fps": 10,
+      "loop": true,
+      "anchor": [
+        24,
+        45
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "shield_arcane.png",
+        "holy": "shield_holy.png",
+        "nature": "shield_nature.png"
+      },
+      "default": "arcane",
+      "loopStart": 3
+    }
+  }
+}
