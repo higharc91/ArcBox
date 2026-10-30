@@ -12,6 +12,7 @@ using ArcBox.Sdk;
 using Godot;
 using Redline.Logic;
 using Redline.Presentation;
+using Redline.Presentation.Audio;
 using Redline.Presentation.Ceremony;
 using Redline.Presentation.Hud;
 
@@ -166,25 +167,31 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
     /// this instance (and so its materials and their compiled shaders) is what makes the next start quick.
     /// <para>
     /// The race may not have reached its podium: a server restart, the host's Esc or the room closing takes the scene
-    /// off the air in any phase. So everything a phase left running stops here, not at the end of the Champagne: the
-    /// narration and the effects (<see cref="AudioDirector.OffAir"/>), the podium, and any car still smoking from a spin.
+    /// off the air in any phase (<see cref="RaceInterruption.WasInterrupted"/>). Only then does everything a phase left
+    /// running stop here: the narration and the effects (<see cref="AudioDirector.OffAir"/>) and any car still smoking
+    /// from a spin. A race that ran to its end parks as it always has, its last line or cork pop ringing out.
     /// </para>
     /// </summary>
     public void Park()
     {
         _warm = WarmState.Ready;
         _pendingShots.Clear();
-        // A race that ran to the end was last seen in the Champagne, or the Chequered flag when nobody took the podium.
-        var interrupted = _view is { Phase: not (RacePhase.Champagne or RacePhase.Chequered) };
+        var interrupted = RaceInterruption.WasInterrupted(_view?.Phase);
         _view = null;
         _podium?.HideCeremony();
-        foreach (var car in _cars.Values)
-        {
-            car.Smoke(0);
-        }
         Hide3D();
-        _audio.OffAir();
-        GD.Print(interrupted ? "REDLINE parked for the next race (interrupted)" : "REDLINE parked for the next race");
+        if (interrupted)
+        {
+            foreach (var car in _cars.Values)
+            {
+                car.Smoke(0);
+            }
+            _audio.OffAir();
+            GD.Print("REDLINE parked for the next race (interrupted)");
+            return;
+        }
+        _audio.Lobby();
+        GD.Print("REDLINE parked for the next race");
     }
 
     public void EndPreload()

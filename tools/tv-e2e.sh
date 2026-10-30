@@ -31,7 +31,7 @@
 #      show "Game interrupted: the server restarted." and then room <CODE>'s lobby (the phone script checks), and the TV
 #      must log `ROOM <CODE>` again (never another code), park the race (`REDLINE parked for the next race
 #      (interrupted)`), log `RESULTS Game interrupted: the server restarted.` and then `LOBBY <CODE>`, and start no
-#      sound after the results but the lobby loop: no narration, anthem, effects or engines from the cut-off race.
+#      sound after the park but the lobby loop: no narration, anthem, effects or engines from the cut-off race.
 #   9. ARCBOX_SWAP=1 (a full race): on a question in round 2 or later, bot 2's storage is cleared and a fresh page takes
 #      its seat back through the picker (Peek, then TakeSeat); its old secret must fail to rejoin, and it must finish the
 #      race in its own seat (the phone script checks; the TV's `RESULTS` line must list it once).
@@ -374,23 +374,27 @@ if [[ "$RESTART" == "1" ]]; then
     [[ -z "$OTHER" ]] || restart_fail "the same room: the TV also opened $OTHER"
     n=$(after "$RESTART_AT" '$0 == "ROOM " code')
     [[ -n "$n" ]] && log "restart: TV back in room $CODE · line $n" || restart_fail "ROOM $CODE from the TV after the restart"
-    n=$(after "$RESTART_AT" '$0 == "REDLINE parked for the next race (interrupted)"')
-    [[ -n "$n" ]] && log "restart: the race left the air mid-phase · line $n" || restart_fail "REDLINE parked for the next race (interrupted)"
+    PARKED=$(after "$RESTART_AT" '$0 == "REDLINE parked for the next race (interrupted)"')
+    if [[ -n "$PARKED" ]]; then
+      log "restart: the race left the air mid-phase · line $PARKED"
+      # Nothing of the cut-off race may start once it is off the air (narration, anthem, effects): only the lobby loop.
+      LEFT=$(awk -v from="$PARKED" 'NR > from && /^AUDIO / && $0 != "AUDIO Music lobby-loop"' "$OUT/tv.log")
+      if [[ -n "$LEFT" ]]; then
+        log "restart: sound from the race after it was parked:"
+        echo "$LEFT"
+        RESTART_FAIL=1
+      else
+        log "restart: no sound after the park but the lobby loop"
+      fi
+    else
+      restart_fail "REDLINE parked for the next race (interrupted)"
+    fi
     NOTE=$(after "$RESTART_AT" '$0 == "RESULTS Game interrupted: the server restarted."')
     if [[ -z "$NOTE" ]]; then
       restart_fail "RESULTS Game interrupted: the server restarted."
     else
       n=$(after "$NOTE" '$0 == "LOBBY " code')
       [[ -n "$n" ]] && log "restart: results with the note · line $NOTE, then the lobby of $CODE · line $n" || restart_fail "LOBBY $CODE after the results"
-      # Nothing of the cut-off race may start once it is off the air (narration, anthem, effects): only the lobby loop.
-      LEFT=$(awk -v from="$NOTE" 'NR > from && /^AUDIO / && $0 != "AUDIO Music lobby-loop"' "$OUT/tv.log")
-      if [[ -n "$LEFT" ]]; then
-        log "restart: sound from the race after its results:"
-        echo "$LEFT"
-        RESTART_FAIL=1
-      else
-        log "restart: no sound after the results but the lobby loop"
-      fi
     fi
   fi
 fi
@@ -399,14 +403,14 @@ fi
 # The line is `RESULTS <message> | <name> <score>, …`; REDLINE names carry the driver code ("Bot2 (PIA) 12").
 SWAP_FAIL=0
 if [[ "$SWAP" == "1" ]]; then
-  RES=$(grep -E '^RESULTS ' "$OUT/tv.log" | head -1 | sed 's/^RESULTS //')
-  SCORES=$(sed 's/.* | //' <<< "$RES")
+  RESULTS_LINE=$(grep -E '^RESULTS ' "$OUT/tv.log" | head -1 | sed 's/^RESULTS //')
+  SCORES=$(sed 's/.* | //' <<< "$RESULTS_LINE")
   ROWS=$(sed 's/, /\n/g' <<< "$SCORES" | grep -c . || true)
   BOT2=$(sed 's/, /\n/g' <<< "$SCORES" | grep -cE '^Bot2( \([A-Z]{3}\))? -?[0-9]+$' || true)
   if [[ "$ROWS" == "$PHONES" && "$BOT2" == "1" ]]; then
-    log "swap: TV results $RES"
+    log "swap: TV results $RESULTS_LINE"
   else
-    log "swap: TV results '$RES': want $PHONES rows with Bot2 once"
+    log "swap: TV results '$RESULTS_LINE': want $PHONES rows with Bot2 once"
     SWAP_FAIL=1
   fi
 fi

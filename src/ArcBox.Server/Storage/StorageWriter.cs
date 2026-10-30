@@ -18,6 +18,13 @@ public sealed class StorageWriter : BackgroundService
     public static readonly TimeSpan FlushInterval = TimeSpan.FromMilliseconds(250);
     public const int FlushAtPending = 64;
 
+    /// <summary>
+    /// How long <see cref="StopAsync"/> waits for the last writes, whether or not the host's token is already cancelled
+    /// (spec §4: the drain happens within the shutdown timeout). Wall-clock time, not the injected clock: it bounds the real
+    /// shutdown. Settable so tests can use a short one.
+    /// </summary>
+    public TimeSpan StopDrainLimit { get; init; } = TimeSpan.FromSeconds(10);
+
     private readonly ArcDb _db;
     private readonly TimeProvider _time;
     private readonly ILogger<StorageWriter> _log;
@@ -27,6 +34,7 @@ public sealed class StorageWriter : BackgroundService
     private List<string> _order = [];
     private DateTimeOffset _pendingSince;
     private DateTimeOffset? _inFlightSince;
+    private int _inFlightCount;
     private TaskCompletionSource _wake = NewWake();
 
     private readonly SemaphoreSlim _flushing = new(1, 1); // one flush at a time, so a flush never overlaps another
@@ -68,6 +76,7 @@ public sealed class StorageWriter : BackgroundService
                 _pending = new Dictionary<string, Action<SqliteConnection>>(StringComparer.Ordinal);
                 _order = [];
                 _inFlightSince = _pendingSince;
+                _inFlightCount = order.Count;
             }
 
             try
@@ -77,7 +86,7 @@ public sealed class StorageWriter : BackgroundService
             }
             finally
             {
-                lock (_lock) _inFlightSince = null;
+                lock (_lock) (_inFlightSince, _inFlightCount) = (null, 0);
             }
         }
         finally
@@ -136,11 +145,25 @@ public sealed class StorageWriter : BackgroundService
     public override async Task StopAsync(CancellationToken cancellationToken)
     {
         await base.StopAsync(cancellationToken).ConfigureAwait(false);
-        // The loop has ended; write what's left, whatever the token says. By the time the host stops this service,
-        // Kestrel may have spent the whole shutdown timeout closing the phones' connections, so the token is often
-        // already cancelled: honouring it would drop the last seat changes (and its exception aborted the process). The
-        // writes are a few small SQLite statements, so this cannot hold the shutdown up for long.
-        await FlushAsync(CancellationToken.None).ConfigureAwait(false);
+        // The loop has ended; write what's left, for up to StopDrainLimit whatever the token says. By the time the host
+        // stops this service, Kestrel may have spent the whole shutdown timeout closing the phones' connections, so the
+        // token is often already cancelled: honouring it would drop the last seat changes without trying (and its
+        // exception aborted the process). The cap keeps a stalled disk from holding the shutdown up for good.
+        var drain = FlushAsync(CancellationToken.None);
+        try
+        {
+            await drain.WaitAsync(StopDrainLimit).ConfigureAwait(false);
+        }
+        catch (TimeoutException)
+        {
+            // The drain carries on in the background until the process exits; observe a late failure so it isn't unobserved.
+            _ = drain.ContinueWith(t => _log.LogError(t.Exception, "Storage drain failed after the writer stopped"),
+                CancellationToken.None, TaskContinuationOptions.OnlyOnFaulted, TaskScheduler.Default);
+            int unwritten;
+            lock (_lock) unwritten = _inFlightCount + _pending.Count;
+            _log.LogError("Storage writer stopped after waiting {Limit} for its last writes: {Unwritten} queued writes may be lost",
+                StopDrainLimit, unwritten);
+        }
     }
 
     private void Execute(Dictionary<string, Action<SqliteConnection>> ops, List<string> order)

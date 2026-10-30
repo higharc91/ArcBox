@@ -1,4 +1,5 @@
 using ArcBox.Server.Storage;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Time.Testing;
 
@@ -119,6 +120,50 @@ public class StorageWriterTests
         await writer.StopAsync(new CancellationToken(canceled: true));
 
         Assert.Equal(2, db.Scalar<int>("SELECT COUNT(*) FROM scratch"));
+    }
+
+    // Spec §4: the drain happens within the shutdown timeout. A stalled disk must not hold the shutdown up past the cap; the
+    // writes it gives up on are reported as an Error.
+    [Fact]
+    public async Task StopAsync_gives_up_on_a_stalled_drain_at_the_cap_and_logs_what_may_be_lost()
+    {
+        var db = StorageTestSupport.NewMemoryDb();
+        using var _db = db;
+        db.Execute("CREATE TABLE scratch (k TEXT NOT NULL, v INTEGER NOT NULL)");
+        var log = new RecordingLogger();
+        using var gate = new ManualResetEventSlim(false);
+        var writer = new StorageWriter(db, new FakeTimeProvider(), log) { StopDrainLimit = TimeSpan.FromMilliseconds(200) };
+        writer.Write("stuck", _ => gate.Wait(Patience));   // the disk stalls on the first write of the batch
+        writer.Write("a", Insert("a", 1));
+        writer.Write("b", Insert("b", 2));
+        try
+        {
+            var stop = writer.StopAsync(new CancellationToken(canceled: true));
+
+            Assert.Same(stop, await Task.WhenAny(stop, Task.Delay(Patience, TestContext.Current.CancellationToken)));
+            await stop;
+            var error = Assert.Single(log.Entries, e => e.Level == LogLevel.Error);
+            Assert.Contains("3 queued writes may be lost", error.Message);
+        }
+        finally
+        {
+            gate.Set();   // let the stalled batch finish before the database goes
+            writer.Dispose();
+        }
+    }
+
+    private sealed class RecordingLogger : ILogger<StorageWriter>
+    {
+        public List<(LogLevel Level, string Message)> Entries { get; } = [];
+
+        public IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
+
+        public bool IsEnabled(LogLevel logLevel) => true;
+
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+        {
+            lock (Entries) Entries.Add((logLevel, formatter(state, exception)));
+        }
     }
 
     [Fact]
