@@ -1075,7 +1075,26 @@
               "speaker": "narrator",
               "text": "He fights like a doctor, which is to say he knows exactly where it hurts, and he hates every moment of it.",
               "mood": "angry"
-            },
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch4_rime_tower_after",
+      "beat": "ch4_rime_tower",
+      "title": "The doctor, stopped",
+      "cast": [
+        "narrator",
+        "ivo_rime",
+        "pip_ashdown"
+      ],
+      "start": "after",
+      "nodes": [
+        {
+          "id": "after",
+          "lines": [
             {
               "id": "ch4_ivos_choice_stop_3",
               "speaker": "narrator",

@@ -69,6 +69,35 @@ def lines() -> list[tuple[str, str, str]]:
         elif kind == "scenes":
             out += [(f"char:{ln['speaker']}", ln["id"], ln["text"])
                     for s in doc["scenes"] for n in s["nodes"] for ln in n["lines"]]
+    return out + say_lines()
+
+
+def say_lines() -> list[tuple[str, str, str]]:
+    """Battle lines from the rules encounters' `say` actions. They have no lore line id yet (lore spec follow-up 1),
+    so each gets `say_<encounter>_<n>` in file order, and its encounter speaker (a unit id or tag) is mapped to a
+    character through the casting's `aliases`, falling back to the id itself."""
+    aliases = casting().get("aliases", {})
+    rules = ROOT / "content" / "tactics" / "base" / "rules"
+    out = []
+    for file in json.loads((rules / "manifest.json").read_text(encoding="utf-8"))["files"]:
+        if not file.startswith("encounters/"):
+            continue
+        enc = json.loads((rules / file).read_text(encoding="utf-8"))
+        n = 0
+
+        def walk(node):
+            nonlocal n
+            if isinstance(node, dict):
+                if isinstance(node.get("say"), dict):
+                    n += 1
+                    who = node["say"]["speaker"]
+                    out.append((f"char:{aliases.get(who, who)}", f"say_{enc['id']}_{n}", node["say"]["line"]))
+                for v in node.values():
+                    walk(v)
+            elif isinstance(node, list):
+                for v in node:
+                    walk(v)
+        walk(enc)
     return out
 
 

@@ -914,7 +914,7 @@
     },
     {
       "id": "ch1_dawn",
-      "beat": "ch1_river_crossing",
+      "beat": "ch1_ford_assault",
       "title": "Dawn at the Ford",
       "unless": [
         "ch1_skarrow_spared"
@@ -961,7 +961,7 @@
     },
     {
       "id": "ch1_bridge_cost",
-      "beat": "ch1_river_crossing",
+      "beat": "ch1_ford_assault",
       "title": "What the Bridge Cost",
       "unless": [
         "ch1_skarrow_spared"

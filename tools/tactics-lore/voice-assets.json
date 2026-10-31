@@ -440,6 +440,11 @@
       "preset": "Algieba",
       "text": "It's done. Quick, at least."
     },
+    "Algieba.3fdc53cd": {
+      "asset": "asset_dc1794k49iFivZKqz1k7bPUk",
+      "preset": "Algieba",
+      "text": "At the town's end of the ford bridge, the old Warden stones are slick with steam. Goblin fires burn on the far bank."
+    },
     "Algieba.43ce6db5": {
       "asset": "asset_36r8LVq72emGgnvaCwhjuKMD",
       "preset": "Algieba",
@@ -475,10 +480,20 @@
       "preset": "Algieba",
       "text": "Quiet comes back to the field slowly, like birds."
     },
+    "Algieba.5c8c0b7c": {
+      "asset": "asset_upaW8bP1uAhvR5qZfTAFWwMy",
+      "preset": "Algieba",
+      "text": "Across the square, someone in a deep hood leans in the doorway of the Last Coal. They have not touched the cup in their hand."
+    },
     "Algieba.61c72bc1": {
       "asset": "asset_CT6EyJSEqYVX1E8FydczSi74",
       "preset": "Algieba",
       "text": "Every fight in the Vale is about bread, in the end. This one too."
+    },
+    "Algieba.7618efbd": {
+      "asset": "asset_thry6c7MUv95PZGgcgkksWKN",
+      "preset": "Algieba",
+      "text": "You remember that morning. You remember it differently than she does."
     },
     "Algieba.7dc0cb36": {
       "asset": "asset_5TPj1MoEFf6hZMZ9pjZVee11",
@@ -499,6 +514,11 @@
       "asset": "asset_5dDztpBTo8zaWckehqB1xrCb",
       "preset": "Algieba",
       "text": "The moment turns, and waits."
+    },
+    "Algieba.8e6ecd47": {
+      "asset": "asset_YUeGtcNfXRRhJbBh7D31mQid",
+      "preset": "Algieba",
+      "text": "Small figures move between them. Fewer than you expected. Thinner."
     },
     "Algieba.9042acb0": {
       "asset": "asset_S27cAgsMXuFFDdftECnrGwHo",
@@ -840,6 +860,11 @@
       "preset": "Callirrhoe",
       "text": "One less."
     },
+    "Callirrhoe.a0184cfe": {
+      "asset": "asset_QsmWz9egoSGumaakuCscm9rv",
+      "preset": "Callirrhoe",
+      "text": "Aye. You were. Not many of us walked off it."
+    },
     "Callirrhoe.ad72e558": {
       "asset": "asset_ie4moZJaEwG6E2cXuz11Aree",
       "preset": "Callirrhoe",
@@ -880,6 +905,11 @@
       "preset": "Callirrhoe",
       "text": "Damn it."
     },
+    "Callirrhoe.f03aec63": {
+      "asset": "asset_Ltg4MME66FeKUxL65qGpER6Y",
+      "preset": "Callirrhoe",
+      "text": "You saw what they did. When the time comes, you tell them."
+    },
     "Callirrhoe.f211df98": {
       "asset": "asset_Yw1tnfbWmzmYMFCQHaxAyoU9",
       "preset": "Callirrhoe",
@@ -900,6 +930,11 @@
       "preset": "Charon",
       "text": "Good to see you back. Truly. The square's been quieter than I'd like."
     },
+    "Charon.3606d709": {
+      "asset": "asset_SaMSNnWjxZivCCWFEXFxanXk",
+      "preset": "Charon",
+      "text": "Come down to the bridge end with me. You should see what we're up against before you tell me anything."
+    },
     "Charon.370da648": {
       "asset": "asset_F7Nti3fhXpAfNMS54p5u82on",
       "preset": "Charon",
@@ -914,6 +949,11 @@
       "asset": "asset_8FGxo8kHCiYyVhuYtuVug2b2",
       "preset": "Charon",
       "text": "A hill clan. Their chief is an old woman they call Mother Skarrow. I've never met her, and I don't need to."
+    },
+    "Charon.6bb6e964": {
+      "asset": "asset_5gmbw7RP6WAMk29mzey8W11a",
+      "preset": "Charon",
+      "text": "Did she. Of course she did. Tell her the town is handling it. And tell her kindly, would you?"
     },
     "Charon.82a7b551": {
       "asset": "asset_UCy22QhYFazA9HtHyQeiRo5B",
@@ -934,6 +974,11 @@
       "asset": "asset_pr8RqnHMzyu3rea7TRdJZxfB",
       "preset": "Charon",
       "text": "Friends. Thank you for coming. I'd shake every hand, but the light's going, and so is our grain."
+    },
+    "Charon.ad4cccb1": {
+      "asset": "asset_94CLD2oUhtZeuNKZfMopurnm",
+      "preset": "Charon",
+      "text": "The Marrowbys have been very generous to Emberwick. Very generous. We are all very grateful."
     },
     "Charon.d16e8c0c": {
       "asset": "asset_ufSQtX5UmaB8d7dP6gpXD19T",
@@ -1645,6 +1690,11 @@
       "preset": "Leda",
       "text": "The stars are wrong tonight. No. They're right. I just remember them different."
     },
+    "Leda.3f4f92ba": {
+      "asset": "asset_RH6uuqjwhPhMo5usyVefTm8K",
+      "preset": "Leda",
+      "text": "Course I have. Mostly."
+    },
     "Leda.489a529a": {
       "asset": "asset_WZK6WbiGuoTz3ByEhyBxbfnZ",
       "preset": "Leda",
@@ -1659,6 +1709,16 @@
       "asset": "asset_PoFhnkKkW6XcTT4Rrgh3iEeX",
       "preset": "Leda",
       "text": "There's a song in my head again. I never learned it. Want to hear?"
+    },
+    "Leda.7838ac77": {
+      "asset": "asset_xsSvSnbZUTZFFyn7PbggmbNS",
+      "preset": "Leda",
+      "text": "That one came the same week as the goblins. Never eats. Never sleeps that I've seen. Bree says it's rude to stare."
+    },
+    "Leda.8fa7ec9c": {
+      "asset": "asset_dWt2W9jwLrYCUmLANzBKrv9a",
+      "preset": "Leda",
+      "text": "I dreamed the river was boiling again. Again's the wrong word, isn't it? I wasn't there."
     },
     "Leda.9b9a9bb5": {
       "asset": "asset_bY4291s6JxaYmXawygdfESGi",
@@ -1909,6 +1969,11 @@
       "asset": "asset_RcpWgikH2H1DZXHrWhRmkbz6",
       "preset": "Sadaltager",
       "text": "Don't thank me. You may not want to, later."
+    },
+    "Sadaltager.2255da8e": {
+      "asset": "asset_wEovccP9JXzKKnXUFgN714BZ",
+      "preset": "Sadaltager",
+      "text": "Go and look at your bridge. It's older than your town, and it has seen this before."
     },
     "Sadaltager.32092c5e": {
       "asset": "asset_qEh7UwD7QjBEF4qKNAp5iVPf",
@@ -2324,6 +2389,11 @@
       "asset": "asset_5pkqbMj95w5E79DKNnBBv5XX",
       "preset": "Zephyr",
       "text": "Good. Now everyone's coming back for supper, and no arguments."
+    },
+    "Zephyr.ef329ccf": {
+      "asset": "asset_XEHxvroxxkobqjtFvyyXpp3Y",
+      "preset": "Zephyr",
+      "text": "Bad dreams and too much cheese, that's all. In you come, Pip. Bed."
     },
     "Zephyr.f2a2cb51": {
       "asset": "asset_8vPBr8L1yCMnaAEvB6dKkuMi",

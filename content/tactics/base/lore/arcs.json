@@ -25,11 +25,20 @@
           ]
         },
         {
+          "id": "ch1_ford_assault",
+          "kind": "battle",
+          "place": "ford_bridge",
+          "encounter": "ford_assault",
+          "requires": ["ch1_skarrow_slain"],
+          "summary": "By force: the party storms the ford at dawn. Mother Skarrow leads her clan's warriors herself, and dies on the bridge."
+        },
+        {
           "id": "ch1_river_crossing",
           "kind": "battle",
           "place": "ford_bridge",
           "encounter": "river_crossing",
-          "summary": "The fight at the crossing. By force, it's the clan's warriors; after a parley, it's the clan's young hotheads who answer to Vorga and refuse the truce."
+          "requires": ["ch1_skarrow_spared"],
+          "summary": "After the parley, the clan's young hotheads, who answer to Vorga, refuse the truce and hold the crossing."
         },
         {
           "id": "ch1_old_maud",
@@ -208,6 +217,14 @@
           ]
         },
         {
+          "id": "ch4_rime_tower",
+          "kind": "battle",
+          "place": "rime_tower",
+          "encounter": "rime_tower",
+          "requires": ["ch4_ivo_stopped"],
+          "summary": "The party stops Ivo Rime in his tower, against his risen dead and his diggers. He fights like a doctor, and hates every moment of it."
+        },
+        {
           "id": "ch4_pip_remembers",
           "kind": "camp",
           "summary": "At camp in the snow, Pip wakes screaming with a memory that isn't hers: she was Oswin Hale, on the night of the Fall, putting out the Hearthflame, until a hooded figure stopped his hand and the flame shattered. Afterwards she insists on coming to Ember Keep: she knows the way in, because Oswin did.",
@@ -234,6 +251,14 @@
           ]
         },
         {
+          "id": "ch5_gate_duel",
+          "kind": "battle",
+          "place": "keep_gate",
+          "encounter": "keep_gate",
+          "requires": ["ch5_halvard_slain"],
+          "summary": "The duel at the broken gate. Ser Halvard falls, still courteous, and asks the party to tell the Keeper he held."
+        },
+        {
           "id": "ch5_the_archive",
           "kind": "story",
           "place": "warden_archive",
@@ -252,7 +277,8 @@
           "id": "ch5_the_ritual",
           "kind": "battle",
           "place": "flame_hall",
-          "summary": "Maren Sorrel begins feeding the heart of the flame, and the red dragon wakes. The final battle in the Hall of the Flame. (Encounter still to be written.)",
+          "encounter": "hall_of_the_flame",
+          "summary": "Maren Sorrel begins feeding the heart of the flame, and the red dragon wakes. The final battle in the Hall of the Flame: break the ritual before it completes.",
           "sets": ["ch5_ritual_broken"]
         },
         {

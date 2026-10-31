@@ -175,25 +175,6 @@
               "speaker": "narrator",
               "text": "He fights like a man who has practised every morning for a hundred years, because he has. The ash whirls around the blades.",
               "mood": "angry"
-            },
-            {
-              "id": "ch5_the_gate_fight_3",
-              "speaker": "narrator",
-              "text": "When at last he falls, he goes to one knee first, and sets his sword down carefully, the way a guest sets down a cup.",
-              "mood": "sad"
-            },
-            {
-              "id": "ch5_the_gate_fight_4",
-              "speaker": "halvard",
-              "text": "Well struck. Tell the Keeper I held. Tell him I held it as long as I could.",
-              "mood": "hurt",
-              "direction": "faint, still perfectly polite"
-            },
-            {
-              "id": "ch5_the_gate_fight_5",
-              "speaker": "narrator",
-              "text": "When you kneel beside him, the black armour is empty. The gate of Ember Keep stands open.",
-              "mood": "sad"
             }
           ],
           "end": true
@@ -287,6 +268,43 @@
               "text": "Come up. Bring the child. I would like to hear about the hand.",
               "mood": "idle",
               "direction": "a scholar's warmth breaking through, then smothered"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_gate_duel_after",
+      "beat": "ch5_gate_duel",
+      "title": "He held",
+      "cast": [
+        "narrator",
+        "halvard"
+      ],
+      "start": "after",
+      "nodes": [
+        {
+          "id": "after",
+          "lines": [
+            {
+              "id": "ch5_the_gate_fight_3",
+              "speaker": "narrator",
+              "text": "When at last he falls, he goes to one knee first, and sets his sword down carefully, the way a guest sets down a cup.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_the_gate_fight_4",
+              "speaker": "halvard",
+              "text": "Well struck. Tell the Keeper I held. Tell him I held it as long as I could.",
+              "mood": "hurt",
+              "direction": "faint, still perfectly polite"
+            },
+            {
+              "id": "ch5_the_gate_fight_5",
+              "speaker": "narrator",
+              "text": "When you kneel beside him, the black armour is empty. The gate of Ember Keep stands open.",
+              "mood": "sad"
             }
           ],
           "end": true
