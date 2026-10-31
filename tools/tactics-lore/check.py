@@ -25,7 +25,7 @@ CONTENT = ROOT / "content" / "tactics" / "base"
 SCHEMAS = CONTENT / "lore" / "schema"
 FILE_SCHEMA = {"world": "world", "timeline": "timeline", "factions": "factions", "regions": "regions",
                "characters": "characters", "codex": "codex", "barks": "barks", "voices": "voices",
-               "backgrounds": "backgrounds", "arcs": "arcs"}
+               "backgrounds": "backgrounds", "arcs": "arcs", "scenes": "scenes"}
 NARRATOR = "narrator"
 
 
@@ -72,6 +72,8 @@ def validate(value, schema: dict, base: str, schemas: dict, where: str, ptr: str
             errors.add(where, ptr, f"'{value}' doesn't match {schema['pattern']}")
     if isinstance(value, int) and not isinstance(value, bool) and value < schema.get("minimum", value):
         errors.add(where, ptr, f"must be at least {schema['minimum']}")
+    if isinstance(value, int) and not isinstance(value, bool) and value > schema.get("maximum", value):
+        errors.add(where, ptr, f"must be at most {schema['maximum']}")
     if isinstance(value, list):
         if len(value) < schema.get("minItems", 0):
             errors.add(where, ptr, f"needs at least {schema['minItems']} item(s)")
@@ -126,7 +128,8 @@ def rules_ids(content: Path) -> dict[str, set[str]] | None:
     manifest = content / "rules" / "manifest.json"
     if not manifest.is_file():
         return None
-    ids: dict[str, set[str]] = {"monsters": set(), "encounters": set(), "backgrounds": set(), "flags": set()}
+    ids: dict[str, set[str]] = {"monsters": set(), "encounters": set(), "backgrounds": set(), "races": set(),
+                                "classes": set(), "flags": set()}
     for file in json.loads(manifest.read_text(encoding="utf-8"))["files"]:
         kind = file.split("/")[0].removesuffix(".json")
         if kind in ids:
@@ -163,8 +166,9 @@ def check(lore_dirs: list[Path], content: Path = CONTENT) -> Errors:
 
     defs: dict[str, dict[str, tuple[dict, str]]] = {k: {} for k in
                                                     ("character", "faction", "region", "place", "codex", "era", "event",
-                                                     "voice", "background", "arc", "beat", "ending")}
+                                                     "voice", "background", "arc", "beat", "ending", "scene")}
     barks: list[tuple[dict, str]] = []
+    scenes: list[tuple[dict, str]] = []
     docs: list[tuple[dict, str]] = []
     world_seen: str | None = None
     line_ids: dict[str, str] = {}
@@ -237,6 +241,18 @@ def check(lore_dirs: list[Path], content: Path = CONTENT) -> Errors:
                         _define(defs["beat"], beat, where, f"/arcs/{n}/beats/{b}", "beat", errors)
                 for n, ending in enumerate(doc["endings"]):
                     _define(defs["ending"], ending, where, f"/endings/{n}", "ending", errors)
+            elif kind == "scenes":
+                for n, scene in enumerate(doc["scenes"]):
+                    _define(defs["scene"], scene, where, f"/scenes/{n}", "scene", errors)
+                    scenes.append((scene, f"{where}#/scenes/{n}"))
+                    for k, node in enumerate(scene["nodes"]):
+                        for i, line in enumerate(node["lines"]):
+                            at = f"/scenes/{n}/nodes/{k}/lines/{i}"
+                            if line["id"] in line_ids:
+                                errors.add(where, f"{at}/id", f"line id '{line['id']}' is already used in {line_ids[line['id']]}")
+                            line_ids[line["id"]] = where
+                            if "mood" in line and line["mood"] not in moods:
+                                errors.add(where, f"{at}/id", f"mood '{line['mood']}' has no portrait")
             if kind == "voices":
                 _define(defs["voice"], doc, where, "", "voice set", errors)
             if kind in ("barks", "voices"):
@@ -253,6 +269,7 @@ def check(lore_dirs: list[Path], content: Path = CONTENT) -> Errors:
 
     rules = rules_ids(content)
     _references(defs, barks, art, rules, errors)
+    _scenes(defs, scenes, rules, errors)
     if defs["arc"]:
         _flags(defs, docs, rules, errors)
     return errors
@@ -269,7 +286,8 @@ def _flags(defs: dict, docs: list, rules: dict | None, errors: Errors) -> None:
                 set_by.update(choice["sets"])
     for doc, where in docs:
         for key, value, ptr in _walk(doc):
-            waits = [value["flag"]] if key == "unlock" and "flag" in value else value if key == "requires" else []
+            waits = ([value["flag"]] if key == "unlock" and "flag" in value
+                     else value if key in ("requires", "unless") and isinstance(value, list) else [])
             for i, flag in enumerate(waits):
                 if flag not in set_by:
                     at = f"{ptr}/flag" if key == "unlock" else f"{ptr}/{i}"
@@ -356,6 +374,99 @@ def _references(defs: dict, barks: list, art: set[str], rules: dict | None, erro
     for doc, where in barks:
         if doc["speaker"] != NARRATOR and doc["speaker"] not in defs["character"]:
             errors.add(where, "/speaker", f"no character has the id '{doc['speaker']}' (or use '{NARRATOR}')")
+
+
+def _scenes(defs: dict, scenes: list, rules: dict | None, errors: Errors) -> None:
+    """What a schema can't say about scenes: the graph holds together, the scene belongs to a real beat, its votes are
+    that beat's choices, speakers and tags exist, and every flag it sets is one arcs.json (or an encounter) already
+    sets, so dialogue can't invent a flag nothing else knows about."""
+    arc_flags = set(rules["flags"]) if rules else set()
+    for table in ("beat", "ending"):
+        for entry, _ in defs[table].values():
+            arc_flags.update(entry.get("sets", []))
+            for choice in entry.get("choices", []):
+                arc_flags.update(choice["sets"])
+    tagged = {"background": set(defs["background"]) | (rules["backgrounds"] if rules else set()),
+              "race": rules["races"] if rules else None, "class": rules["classes"] if rules else None}
+    covered: dict[str, set[str]] = {}
+
+    for scene, loc in scenes:
+        where, _, ptr = loc.partition("#")
+        beat = defs["beat"].get(scene["beat"])
+        if beat is None:
+            errors.add(where, f"{ptr}/beat", f"no beat has the id '{scene['beat']}'")
+        if "place" in scene and scene["place"] not in defs["place"]:
+            errors.add(where, f"{ptr}/place", f"no place has the id '{scene['place']}'")
+        for i, who in enumerate(scene["cast"]):
+            if who != NARRATOR and who not in defs["character"]:
+                errors.add(where, f"{ptr}/cast/{i}", f"no character has the id '{who}' (or use '{NARRATOR}')")
+        choices = {c["id"] for c in beat[0].get("choices", [])} if beat else set()
+        nodes: dict[str, int] = {}
+        for k, node in enumerate(scene["nodes"]):
+            if node["id"] in nodes:
+                errors.add(where, f"{ptr}/nodes/{k}/id", f"the node '{node['id']}' is already in this scene")
+            nodes[node["id"]] = k
+        if scene["start"] not in nodes:
+            errors.add(where, f"{ptr}/start", f"the scene has no node '{scene['start']}'")
+        edges: dict[str, set[str]] = {}
+        for k, node in enumerate(scene["nodes"]):
+            at = f"{ptr}/nodes/{k}"
+            ways = sum(key in node for key in ("options", "next", "end"))
+            if ways != 1:
+                errors.add(where, at, "a node needs exactly one of 'options', 'next' or 'end'")
+            for i, line in enumerate(node["lines"]):
+                if line["speaker"] not in scene["cast"]:
+                    errors.add(where, f"{at}/lines/{i}/speaker", f"'{line['speaker']}' isn't in the scene's cast")
+            for i, flag in enumerate(node.get("sets", [])):
+                if flag not in arc_flags:
+                    errors.add(where, f"{at}/sets/{i}", f"no beat, choice, ending or encounter sets '{flag}'")
+            out = edges.setdefault(node["id"], set())
+            if "next" in node:
+                out.add(node["next"])
+            for o, option in enumerate(node.get("options", [])):
+                oat = f"{at}/options/{o}"
+                if "to" not in option and "check" not in option:
+                    errors.add(where, oat, "an option needs 'to' or a 'check'")
+                targets = [option[x] for x in ("to",) if x in option]
+                if "check" in option:
+                    targets += [option["check"]["pass"], option["check"]["fail"]]
+                out.update(targets)
+                if "choice" in option:
+                    if not node.get("vote"):
+                        errors.add(where, f"{oat}/choice", "only a vote's options can be an arcs.json choice")
+                    if option["choice"] not in choices:
+                        errors.add(where, f"{oat}/choice", f"the beat '{scene['beat']}' has no choice '{option['choice']}'")
+                    covered.setdefault(scene["beat"], set()).add(option["choice"])
+                for i, flag in enumerate(option.get("sets", [])):
+                    if flag not in arc_flags:
+                        errors.add(where, f"{oat}/sets/{i}", f"no beat, choice, ending or encounter sets '{flag}'")
+                for kind, ids in option.get("tags", {}).items():
+                    known = tagged[kind]
+                    for i, id_ in enumerate(ids):
+                        if known is not None and id_ not in known:
+                            errors.add(where, f"{oat}/tags/{kind}/{i}", f"no {kind} has the id '{id_}'")
+            for target in out:
+                if target not in nodes:
+                    errors.add(where, at, f"leads to '{target}', which isn't a node in this scene")
+        # Every node must be reachable from the start, and at least one path must end.
+        seen, todo = set(), [scene["start"]] if scene["start"] in nodes else []
+        while todo:
+            n = todo.pop()
+            if n not in seen:
+                seen.add(n)
+                todo.extend(t for t in edges.get(n, ()) if t in nodes)
+        for node_id, k in nodes.items():
+            if node_id not in seen:
+                errors.add(where, f"{ptr}/nodes/{k}", f"the node '{node_id}' can't be reached from the start")
+        if not any("end" in scene["nodes"][nodes[n]] for n in seen):
+            errors.add(where, ptr, "no path through the scene ends")
+    # A choice beat played as a scene must offer every one of its choices, or a branch of the story is unreachable.
+    for beat_id, got in covered.items():
+        want = {c["id"] for c in defs["beat"][beat_id][0].get("choices", [])} if beat_id in defs["beat"] else set()
+        missing = sorted(want - got)
+        if missing:
+            where, _, ptr = defs["beat"][beat_id][1].partition("#")
+            errors.add(where, ptr, f"its scenes never offer the choice(s) {', '.join(missing)}")
 
 
 def main(argv: list[str]) -> int:

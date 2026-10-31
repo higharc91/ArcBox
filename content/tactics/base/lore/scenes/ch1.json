@@ -1,0 +1,25 @@
+{
+  "scenes": [
+    {
+      "id": "ch1_stub",
+      "beat": "ch1_mayors_request",
+      "cast": [
+        "narrator"
+      ],
+      "start": "n",
+      "nodes": [
+        {
+          "id": "n",
+          "lines": [
+            {
+              "id": "ch1_stub_line",
+              "speaker": "narrator",
+              "text": "(to be written)"
+            }
+          ],
+          "end": true
+        }
+      ]
+    }
+  ]
+}

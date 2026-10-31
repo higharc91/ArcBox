@@ -1,0 +1,11 @@
+{
+  "speaker": "halvard",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_halvard_stub",
+        "text": "(to be written)"
+      }
+    ]
+  }
+}

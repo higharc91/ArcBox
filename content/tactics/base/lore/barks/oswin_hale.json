@@ -1,0 +1,11 @@
+{
+  "speaker": "oswin_hale",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_oswin_hale_stub",
+        "text": "(to be written)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "speaker": "pip_ashdown",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_pip_ashdown_stub",
+        "text": "(to be written)"
+      }
+    ]
+  }
+}

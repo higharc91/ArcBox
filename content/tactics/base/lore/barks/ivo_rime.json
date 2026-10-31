@@ -1,0 +1,11 @@
+{
+  "speaker": "ivo_rime",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_ivo_rime_stub",
+        "text": "(to be written)"
+      }
+    ]
+  }
+}

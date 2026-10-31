@@ -1,0 +1,11 @@
+{
+  "speaker": "corvin_ashby",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_corvin_ashby_stub",
+        "text": "(to be written)"
+      }
+    ]
+  }
+}

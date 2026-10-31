@@ -1,0 +1,25 @@
+{
+  "scenes": [
+    {
+      "id": "ch2_stub",
+      "beat": "ch2_drowned_waystation",
+      "cast": [
+        "narrator"
+      ],
+      "start": "n",
+      "nodes": [
+        {
+          "id": "n",
+          "lines": [
+            {
+              "id": "ch2_stub_line",
+              "speaker": "narrator",
+              "text": "(to be written)"
+            }
+          ],
+          "end": true
+        }
+      ]
+    }
+  ]
+}

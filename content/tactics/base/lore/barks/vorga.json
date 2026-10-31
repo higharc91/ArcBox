@@ -1,0 +1,11 @@
+{
+  "speaker": "vorga",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_vorga_stub",
+        "text": "(to be written)"
+      }
+    ]
+  }
+}

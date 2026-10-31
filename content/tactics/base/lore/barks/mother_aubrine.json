@@ -1,0 +1,11 @@
+{
+  "speaker": "mother_aubrine",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_mother_aubrine_stub",
+        "text": "(to be written)"
+      }
+    ]
+  }
+}

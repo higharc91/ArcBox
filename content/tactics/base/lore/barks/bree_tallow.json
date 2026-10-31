@@ -1,0 +1,11 @@
+{
+  "speaker": "bree_tallow",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_bree_tallow_stub",
+        "text": "(to be written)"
+      }
+    ]
+  }
+}

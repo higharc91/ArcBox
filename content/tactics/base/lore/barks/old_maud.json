@@ -1,0 +1,11 @@
+{
+  "speaker": "old_maud",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_old_maud_stub",
+        "text": "(to be written)"
+      }
+    ]
+  }
+}

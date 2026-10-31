@@ -1,0 +1,25 @@
+{
+  "scenes": [
+    {
+      "id": "ch3_stub",
+      "beat": "ch3_guest_right",
+      "cast": [
+        "narrator"
+      ],
+      "start": "n",
+      "nodes": [
+        {
+          "id": "n",
+          "lines": [
+            {
+              "id": "ch3_stub_line",
+              "speaker": "narrator",
+              "text": "(to be written)"
+            }
+          ],
+          "end": true
+        }
+      ]
+    }
+  ]
+}

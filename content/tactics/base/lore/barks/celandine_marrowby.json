@@ -1,0 +1,11 @@
+{
+  "speaker": "celandine_marrowby",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_celandine_marrowby_stub",
+        "text": "(to be written)"
+      }
+    ]
+  }
+}

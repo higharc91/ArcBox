@@ -1,0 +1,11 @@
+{
+  "speaker": "hooded_stranger",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_hooded_stranger_stub",
+        "text": "(to be written)"
+      }
+    ]
+  }
+}

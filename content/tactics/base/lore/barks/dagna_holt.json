@@ -1,0 +1,11 @@
+{
+  "speaker": "dagna_holt",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_dagna_holt_stub",
+        "text": "(to be written)"
+      }
+    ]
+  }
+}

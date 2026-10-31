@@ -1,0 +1,11 @@
+{
+  "speaker": "narrator",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_narrator_stub",
+        "text": "(to be written)"
+      }
+    ]
+  }
+}

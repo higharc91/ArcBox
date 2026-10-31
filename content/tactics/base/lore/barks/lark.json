@@ -1,0 +1,11 @@
+{
+  "speaker": "lark",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_lark_stub",
+        "text": "(to be written)"
+      }
+    ]
+  }
+}

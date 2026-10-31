@@ -41,6 +41,7 @@ rules-engine branch whichever lands first.
 | `arcs.json` | the campaign's spine: one arc per chapter as **beats** (story, choice, battle, discovery, camp) with places, rules encounters, the flags they need and set, and **choices** the party votes on; plus the **endings** and the sequel each leads to | base, or a chapter pack's own arc |
 | `voices/<id>.json` | a **player voice set** chosen in the creator, with its casting brief and barks per event | one per voice |
 | `barks/<speaker>.json` | barks for a named NPC or the narrator, same line format as voice sets | one per speaker |
+| `scenes/<file>.json` | the dialogue that plays arc beats out, as small node graphs (§7, Scenes) | one per chapter |
 
 Schemas: `content/tactics/base/lore/schema/*.schema.json` (draft 2020-12).
 
@@ -185,6 +186,31 @@ only; nothing here needs an engine change to merge, and the engine can adopt it 
   play a pre-rendered file keyed by line id (§4).
 - Rate-limit barks in the UI (at most one every few seconds, never over a `say` line) so battles don't get chatty.
 
+**Scenes** (`scenes/*.json`, schema `scenes.schema.json`). The dialogue for the arcs, written ahead of the runtime
+that plays it (sub-project 5), so voice, translation and review can start now.
+- A scene plays one `beat`. A beat can have several scenes, for example the version after a parley and the version after a
+  fight. `requires` and `unless` choose between them by flags.
+- A scene is a graph of `nodes`. Each node shows its `lines`, sets its `sets` flags, then does exactly one of these:
+  - `next`: moves to another node;
+  - `options`: the party picks;
+  - `end`: the scene is over.
+- Every line has a `speaker` (a character id or `narrator`) and a stable `id`, which voice files and translations key
+  on.
+- **Options are not voiced.** Player characters speak through their voice set's barks, so the party's words in a scene
+  are option text.
+- **`vote: true`** turns a node's options into a party vote: everyone picks, and the leader breaks ties. An option's
+  `choice` names the `arcs.json` choice it stands for, and that choice's flags are set when it wins.
+- **Options can be tagged.** `tags.background`, `tags.race` and `tags.class` offer an option only when someone in the
+  party has one of them. This is how background threads and class flavour surface in conversation.
+- **Checks.** `check: {skill, dc, pass, fail}` is a skill check: the party picks who rolls. Pass and fail each lead
+  to a node.
+- **The checker enforces the graph:**
+  - every target exists, every node is reachable, and some path ends;
+  - speakers are in the scene's `cast`;
+  - a vote offers every choice of its beat;
+  - every flag a scene sets is one that `arcs.json` or an encounter already sets, so dialogue can't invent story
+    state.
+
 **Text.** Line ids are stable; translation and pre-rendered audio key on them (§4). Everything else is shown as written.
 
 ## 8. Follow-ups
@@ -193,10 +219,8 @@ only; nothing here needs an engine change to merge, and the engine can adopt it 
    gets ids, translations and pre-rendered voice. The literal `line` stays as the fallback. An engine change.
 2. **Faction crest art.** `crests/` is one atlas sheet per class and subclass, with no per-crest keys. Faction crests
    need their own art set before `factions[].crest` can point at real art.
-3. **Sub-project 5's dialogue format.** Branching conversations (nodes, tagged options for background, race and
-   class, skill checks where the party picks who rolls), the quest journal, and the "Previously on…" recap are scene
-   scripts built on `arcs.json`. They belong to sub-project 5, which owns the runtime; they get their own lore file
-   kinds then.
+3. **Sub-project 5's runtime for dialogue.** The scene format exists (§7, Scenes). What's left is the runtime that
+   plays scenes, the quest journal, and the "Previously on…" recap. They belong to sub-project 5.
 4. **Port the checker into `Tactics.Logic` validation** once the game loads lore.
 5. **A Chapter V encounter** for `ch5_the_ritual` (the Hall of the Flame with the red dragon), and encounters for the
    remaining story battles as chapters are built.

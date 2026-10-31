@@ -1,0 +1,11 @@
+{
+  "speaker": "halden_varrow",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_halden_varrow_stub",
+        "text": "(to be written)"
+      }
+    ]
+  }
+}

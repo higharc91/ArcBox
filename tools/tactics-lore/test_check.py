@@ -79,6 +79,23 @@ class CheckTests(unittest.TestCase):
         self.assertFalse([e for e in errors if "story flag" in e], errors)
         self.assertIn("story/arcs.json#/arcs/0/chapter: the region 'mirewood' is chapter 2", errors)
 
+    def test_scenes_are_checked_as_graphs_tied_to_their_beats(self):
+        errors = check.check([FIXTURES / "valid" / "base", FIXTURES / "story", FIXTURES / "scenes"])
+        mine = sorted(e.split("#")[1] for e in errors if "scenes/mill.json" in e.split("#")[0] or "beats/1:" in e)
+        self.assertEqual(mine, [
+            "/arcs/0/beats/1: its scenes never offer the choice(s) b",
+            "/scenes/1/nodes/0/lines/0/id: line id 'mill_open' is already used in scenes/scenes/mill.json",
+            "/scenes/1/nodes/0/lines/0/speaker: 'stranger' isn't in the scene's cast",
+            "/scenes/1/nodes/0/options/1/choice: the beat 'gated' has no choice 'z'",
+            "/scenes/1/nodes/0/options/1/tags/background/0: no background has the id 'pirate'",
+            "/scenes/1/nodes/0/sets/0: no beat, choice, ending or encounter sets 'made_up_flag'",
+            "/scenes/1/nodes/0: leads to 'gone', which isn't a node in this scene",
+            "/scenes/1/nodes/1: a node needs exactly one of 'options', 'next' or 'end'",
+            "/scenes/1/nodes/2: the node 'orphan' can't be reached from the start",
+        ])
+        # The well-formed scene (a check, a tagged option, a flag the beat sets) raises nothing.
+        self.assertFalse([e for e in errors if "/scenes/0/" in e], errors)
+
     def test_art_keys_follow_the_rules_engine_harvest(self):
         keys = check.art_keys(check.CONTENT)
         self.assertIn("chapters.mirewood", keys)

@@ -1,0 +1,11 @@
+{
+  "speaker": "tobin_fell",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_tobin_fell_stub",
+        "text": "(to be written)"
+      }
+    ]
+  }
+}

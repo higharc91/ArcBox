@@ -1,0 +1,11 @@
+{
+  "speaker": "mother_skarrow",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_mother_skarrow_stub",
+        "text": "(to be written)"
+      }
+    ]
+  }
+}
