@@ -52,6 +52,16 @@ These are decided, and go on the list for the user to overrule.
 7. **The leader's Jump.** Rogue, monk and barbarian have Jump 3, so a per-leader Jump would change the map with whoever leads. Use `ClassDef.DefaultJump` (2), as the region check does.
 8. **"Exploration waits" (§4.6) needs no phase.** With no input, nothing runs.
 
+## Needed by 5c and 5d
+
+Those plans found these, and it's cheaper to build them in now:
+
+- `ExploreView` is present in every phase once a region exists, so a TV reconnecting mid-fight can learn the region (Task 3).
+- `Timers.Lead` stops when the pad leaves the screen. No pad means no idle ping, so the 8 s rule would take the lead away during any battle (Task 4).
+- A `walk` input outside Exploration is ignored before `BattleInput`, with no toast (Task 4).
+- `WalkTrack.Seed(places)`: with empty `Legs` every follower would stack on the leader's tile after any `Epoch` (Task 9).
+- `WorldCanvas` sits in its own `CanvasLayer` under the UI, so positive-Z blocks can't paint over the HUD, and `BoardCanvas` can join it above the blocks (Task 8).
+
 ## Design
 
 ### 1. Input
