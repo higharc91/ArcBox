@@ -495,6 +495,11 @@
       "preset": "Algieba",
       "text": "Above you, three courtiers flicker and go out. Not one of the others will meet your eyes."
     },
+    "Algieba.0a15918d": {
+      "asset": "asset_gHF684Pf2hhqDHtXd1z3PS9V",
+      "preset": "Algieba",
+      "text": "When you go, he is sitting by the bed, holding her hand. Maren Sorrel has lost her scholar, and Ivo Rime has nothing left to try."
+    },
     "Algieba.0b688032": {
       "asset": "asset_b1iXEy4VKsdbnWJpzCNoLyCZ",
       "preset": "Algieba",
@@ -620,6 +625,11 @@
       "preset": "Algieba",
       "text": "Ahead, figures climb the road through the snow: pilgrims in Warden grey, a dwarf with a mason's hammer, a goliath carrying nothing."
     },
+    "Algieba.1f1bd0e9": {
+      "asset": "asset_BQFZEKrbRdGYASRCbnVs4rub",
+      "preset": "Algieba",
+      "text": "You make camp in the lee of a frozen shrine below the pass. The fire is small, and it is wood. Nobody reaches for ember-light any more."
+    },
     "Algieba.1f66b9a8": {
       "asset": "asset_8oS2xeom2Bk5pk4XDL3FYu42",
       "preset": "Algieba",
@@ -684,6 +694,11 @@
       "asset": "asset_Q9wCDBXxF1YWBFo8SbjTMRT5",
       "preset": "Algieba",
       "text": "Noon in the Sunscar. The sand has turned to glass in places, and the light comes up off it as hard as it comes down."
+    },
+    "Algieba.2f5fb512": {
+      "asset": "asset_yYY3xa6V6HrBAn6tvr6GRhSh",
+      "preset": "Algieba",
+      "text": "The others wait at the edge of the firelight while she whispers it into your shoulder. Then she lets you bring them close."
     },
     "Algieba.305ccff9": {
       "asset": "asset_eQNn72LCXLbjQqeL3C1FuUf9",
@@ -840,6 +855,11 @@
       "preset": "Algieba",
       "text": "And above the caves, a single window in an old watchtower burns with a cold blue light."
     },
+    "Algieba.5807d851": {
+      "asset": "asset_bYdPa54wK8ZhxhTzmngzt5PN",
+      "preset": "Algieba",
+      "text": "In the middle of the night, Pip wakes up screaming."
+    },
     "Algieba.58f6dcd5": {
       "asset": "asset_4EmJaJ6qQ6jbWFfR2oAiEHT9",
       "preset": "Algieba",
@@ -899,6 +919,11 @@
       "asset": "asset_Df2CcrXZXvDQdNVezVAChinH",
       "preset": "Algieba",
       "text": "The old tune rises over the tents and heads turn. Somewhere behind the elder's veil, someone starts to hum along."
+    },
+    "Algieba.6f48bfb2": {
+      "asset": "asset_P1qzJBt7AfTCC7fLuhPoqkVS",
+      "preset": "Algieba",
+      "text": "She fights you for a moment, then holds on as hard as she can. Her hands are burning hot, in the coldest place in the Vale."
     },
     "Algieba.6fa9ce57": {
       "asset": "asset_Csoe98NvmTFNvkrJVPebkaz1",
@@ -1049,6 +1074,11 @@
       "asset": "asset_QCkkFdeJwZLAKjUJ9MrYUsV4",
       "preset": "Algieba",
       "text": "It used to be warmer. Nobody in town will say so."
+    },
+    "Algieba.9a37642c": {
+      "asset": "asset_33dLseEE4aSeAVjvrWtc3ABo",
+      "preset": "Algieba",
+      "text": "Your prayer is quiet and old. Her breathing slows to the rhythm of it. Your gift asks nothing of her except to listen."
     },
     "Algieba.9b942c9d": {
       "asset": "asset_zRG9q57AkJA1JS1puTeXcU6K",
@@ -3815,6 +3845,11 @@
       "preset": "Leda",
       "text": "Mister Rime. If you can put memories back into people, can you take them out?"
     },
+    "Leda.186640b5": {
+      "asset": "asset_UELUSfnBZ3D4T99ofPMrbgfd",
+      "preset": "Leda",
+      "text": "I am Oswin Hale, Warden-Keeper. I have read the oldest books. The fire is not ours, and it is eating us."
+    },
     "Leda.197b4e87": {
       "asset": "asset_xqzRtdGoKQqbodvYmssNxJvN",
       "preset": "Leda",
@@ -3849,6 +3884,16 @@
       "asset": "asset_BjFZtYVpYy5caEySoZHsouwQ",
       "preset": "Leda",
       "text": "This is where they drew the Keep, before they built it. I know which shelf."
+    },
+    "Leda.3eb1ed8d": {
+      "asset": "asset_bdjeSDbNH1kebmQDVY5cijbQ",
+      "preset": "Leda",
+      "text": "And then someone grabbed his hand. My hand. Someone in a hood, with a cold hand, and they pulled it back."
+    },
+    "Leda.3ee4a962": {
+      "asset": "asset_27oBgp7XvZMKvojzAFQqUcYQ",
+      "preset": "Leda",
+      "text": "And the fire went everywhere. It broke and flew out of the windows like birds. And he was screaming. I was screaming."
     },
     "Leda.3f4f92ba": {
       "asset": "asset_RH6uuqjwhPhMo5usyVefTm8K",
@@ -3900,6 +3945,16 @@
       "preset": "Leda",
       "text": "No. I don't. Somebody does."
     },
+    "Leda.84d6c067": {
+      "asset": "asset_HLipqsTdUnWS62Bdwm3sGb5V",
+      "preset": "Leda",
+      "text": "I am putting it out. Slowly, like a lamp. It is going down, and going quiet, and it is nearly done."
+    },
+    "Leda.8e5ca052": {
+      "asset": "asset_GUvoqW2tZZ2tDKk2oQGv9AcX",
+      "preset": "Leda",
+      "text": "No face. Just the hood, and the hand. And a voice that said, not like this. Like it was sorry."
+    },
     "Leda.8fa7ec9c": {
       "asset": "asset_dWt2W9jwLrYCUmLANzBKrv9a",
       "preset": "Leda",
@@ -3925,10 +3980,20 @@
       "preset": "Leda",
       "text": "I never used to think anything. I've never been there. Stop looking at me like that."
     },
+    "Leda.a73438bb": {
+      "asset": "asset_6PUrfdpb29Jdd6f9dF8SCq76",
+      "preset": "Leda",
+      "text": "I didn't see a face. Only a hood. Lots of people have hoods."
+    },
     "Leda.afc3a87a": {
       "asset": "asset_qSdTFpQ95XscYgMz3V34YiBW",
       "preset": "Leda",
       "text": "Tell me a story. A true one. I'll know if it isn't."
+    },
+    "Leda.b11c13c6": {
+      "asset": "asset_Hrc3vEBQ186P7dCyBVB4hYrz",
+      "preset": "Leda",
+      "text": "I was a man. I was old, and I was in the Keep, in the big hall, and the fire was in front of me, and it was singing."
     },
     "Leda.b1e9a8b7": {
       "asset": "asset_LUTQbj5XvqDBwUYy5yApxotR",
@@ -3949,6 +4014,11 @@
       "asset": "asset_NifhPcyhT96r67epg9E35Vgn",
       "preset": "Leda",
       "text": "He's looking for his house. He walks up, and it isn't there, so he walks down and tries again."
+    },
+    "Leda.d22f8cd8": {
+      "asset": "asset_EULAyLnyZ5yEzkLy6zBt7DqP",
+      "preset": "Leda",
+      "text": "You came. You always come. Don't let them all hear yet. Just you, first."
     },
     "Leda.da1f2739": {
       "asset": "asset_79fJ5gGQz1JTnXCA21yqStZY",
