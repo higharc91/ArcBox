@@ -202,7 +202,8 @@ Estimates, measured by Task 7:
 - `WorldBlock : Node2D` runs `_Draw` once. Moving the camera changes only a transform.
 - Blocks use `ZIndex = bx + by`. A prop more than about 2 tiles wide could mis-sort across a block border, so check by eye.
 - **Units:** each frame, an overlay draws the units merged with only the items that sort later and overlap a unit's rect, using `BoardOrder.Merge`. Painting those twice gives the same picture, except that semi-transparent pixels blend twice, so check lips by eye.
-- **Water and lava:** `FrameTextures` holds one single-frame `ImageTexture` per animated image and calls `Update` with the current frame. A separate water layer would break painter's order.
+- **Water and lava:** `FrameTextures` holds one single-frame `ImageTexture` per animated image and calls `Update` with the current frame. A separate water layer would break painter's order. Lit lava needs a second `FrameTextures` for its glow.
+- **Lights:** one lighting object for the whole region, built off-thread with its probe grid, so a pool doesn't stop at a block edge. Blocks bake each light at its mean, and flicker stays on halos and units. Floors don't breathe in the world, which costs little in a daylit region and needs no shader. The overlay reads the same frozen colours, or painting twice wouldn't match. If floors must flicker later, a world-space light-map texture with one canvas shader is the upgrade; `BoardLight` and the falloff carry over.
 
 **Loading:**
 
