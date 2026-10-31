@@ -8,6 +8,9 @@ namespace Tactics.Presentation.Audio;
 /// </summary>
 public static class SoundChoice
 {
+    private const string ArrowKey = "projectiles.arrow";
+    private const string RockKey = "projectiles.rock";
+
     /// <summary>The footstep for ground nothing here names.</summary>
     public const string DefaultStep = "step_dirt";
 
@@ -80,6 +83,25 @@ public static class SoundChoice
     /// <summary>The sound of something leaving <paramref name="weapon"/> for a target at range. With nothing better to go on, a bow: the TV draws an arrow.</summary>
     public static string Shot(string? weapon)
         => Release(weapon) ?? (weapon is not null && Thrown.Contains(weapon) ? "throw" : "bow_release");
+
+    /// <summary>The sound of the projectile <paramref name="key"/> leaving a unit with <paramref name="weapon"/>: an arrow its bow's, a rock a throw, and anything else is magic.</summary>
+    public static string Launch(string key, string? weapon) => key switch
+    {
+        ArrowKey => Shot(weapon),
+        RockKey => "throw",
+        _ => "spell_cast",
+    };
+
+    /// <summary>True if the projectile <paramref name="key"/> lands with an arrow's impact.</summary>
+    public static bool IsArrow(string key) => key == ArrowKey;
+
+    /// <summary>How far under full a sound of this manifest group plays, in dB, so that what's frequent doesn't crowd out what matters.</summary>
+    public static double LevelDb(string group) => group switch
+    {
+        "footstep" => -10,
+        "ui" => -4,
+        _ => 0,
+    };
 
     /// <summary>True for an effect that's magic gathering, not dust from a dash or a puff of smoke.</summary>
     public static bool IsSpell(string? effect)

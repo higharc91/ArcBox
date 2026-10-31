@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using ArcBox.Host.Audio;
 using Godot;
 using Tactics.Presentation.Audio;
@@ -34,7 +33,8 @@ public partial class TacticsAudio : Node
     private MusicCue? _cue;
     private string? _bedId;
     private int _front;
-    private int _nextEffect;
+    private readonly Dictionary<AudioStreamPlayer, long> _startedAt = [];
+    private long _started;
     private string? _then;
 
     public override void _Ready()
@@ -96,17 +96,18 @@ public partial class TacticsAudio : Node
         AudioLog.Play(AudioBuses.Sfx, $"ambience {id}");
     }
 
-    /// <summary>Plays the sound <paramref name="id"/>, next of its files, on a free voice, or over the oldest if all twelve are busy.</summary>
+    /// <summary>Plays the sound <paramref name="id"/>, next of its files, at its group's level, on a free voice, or over the oldest if all twelve are busy.</summary>
     public void Play(string id)
     {
         if (_picker?.Next(id) is not { } file || Stream(file, loop: false) is not { } stream)
         {
             return;
         }
-        var free = _effects.FirstOrDefault(p => !p.Playing) ?? _effects[_nextEffect];
-        _nextEffect = (_effects.IndexOf(free) + 1) % _effects.Count;
-        free.Stream = stream;
-        free.Play();
+        var voice = _effects.FirstOrDefault(p => !p.Playing) ?? _effects.MinBy(p => _startedAt.GetValueOrDefault(p))!;
+        _startedAt[voice] = ++_started;
+        voice.Stream = stream;
+        voice.VolumeDb = (float)SoundChoice.LevelDb(_bank?.Sound(id)?.Group ?? "");
+        voice.Play();
         AudioLog.Play(AudioBuses.Sfx, id);
     }
 
@@ -114,6 +115,10 @@ public partial class TacticsAudio : Node
     {
         if (_bank?.Track(id) is not { } track || Stream(track.File, track.Loop) is not { } stream)
         {
+            if (then is not null)
+            {
+                Start(then, FadeSeconds, null);     // no sting: straight on to what follows it, not on with the fight's track
+            }
             return;
         }
         var (old, next) = (_music[_front], _music[1 - _front]);
@@ -158,7 +163,6 @@ public partial class TacticsAudio : Node
             return known;
         }
         var path = System.IO.Path.Combine(_root, file);
-        var clock = Stopwatch.StartNew();
         var stream = System.IO.File.Exists(path) ? AudioStreamOggVorbis.LoadFromFile(path) : null;
         if (stream is null)
         {
@@ -166,10 +170,6 @@ public partial class TacticsAudio : Node
             return _streams[file] = null;
         }
         stream.Loop = loop;
-        if (clock.Elapsed.TotalMilliseconds > 5)
-        {
-            GD.Print($"TACTICS read {file} in {clock.Elapsed.TotalMilliseconds:0} ms");
-        }
         return _streams[file] = stream;
     }
 }

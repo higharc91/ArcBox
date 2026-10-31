@@ -473,6 +473,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             }
         }
 
+        // Armour clanks on every other tile: under each step it would be a rattle. By the tile, as a walk is one event a tile, and
+        // steps are square to the grid, so X + Y is odd and even by turns however it turns.
         private void Footstep(UnitId unit, Tile tile)
         {
             var gear = GearOf(unit);
@@ -487,7 +489,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             else
             {
                 Sound(sounds?.Step(_view.Map, tile));
-                Sound(gear.Armoured ? "step_armor" : null);
+                Sound(gear.Armoured && (tile.X + tile.Y) % 2 == 0 ? "step_armor" : null);
             }
         }
 
@@ -541,12 +543,10 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 _cues.Add(new PoseCue(_t, BeatTiming.Windup + flight, used.Source, anim, source, target));
                 _cues.Add(new FlightCue(_t + BeatTiming.Windup, flight, shot, source, target));
                 Cry(used.Source, "attack");
-                if (plain)
-                    Sound(SoundChoice.Shot(GearOf(used.Source).Weapon), _t + BeatTiming.Windup);
-                else
-                    Sound("spell_cast");
+                var leaving = SoundChoice.Launch(key, GearOf(used.Source).Weapon);
+                Sound(leaving, leaving == "spell_cast" ? _t : _t + BeatTiming.Windup);     // a spell gathers; a shot goes when it's loosed
                 EffectSound(flies ? used.Presentation?.Fx : null, _t + BeatTiming.Windup);
-                _shot = plain;
+                _shot = SoundChoice.IsArrow(key);
                 _t += BeatTiming.Windup + flight;
             }
             else if (reach <= 1 && Blows.Contains(anim[(anim.LastIndexOf('.') + 1)..]))

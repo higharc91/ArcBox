@@ -7,7 +7,6 @@ namespace ArcBox.Host.Games.Tactics;
 /// <summary>The title art's VICTORY or DEFEAT strip over the results: it plays once and holds its last frame, as the manifest asks.</summary>
 public partial class ResultBanner : TextureRect
 {
-    private const int ArtScale = 3;
     private const int Room = 171;       // the taller of the strips at that scale
 
     private readonly AtlasTexture _frame = new();

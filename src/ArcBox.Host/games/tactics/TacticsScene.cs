@@ -67,7 +67,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private SoundBank? _sound;
     private VoiceClips? _voices;
     private TitleArt? _titleArt;
-    private bool _soundUnreadable;
+    private bool _soundRead;
     private ResultBanner _resultBanner = null!;
     private PanelContainer _caption = null!;
     private Label _captionText = null!;
@@ -136,6 +136,16 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
 
         _audio = new TacticsAudio();
         AddChild(_audio);
+    }
+
+    /// <summary>The narrator is the whole TV's, and a recorded line never goes stale, so whatever's left of this game's stops with it.</summary>
+    public override void _ExitTree()
+    {
+        if (_narrator is { } narrator && IsInstanceValid(narrator))
+        {
+            narrator.StopAll();
+            GD.Print("TACTICS left: narrator cleared");
+        }
     }
 
     public override void _Process(double delta)
@@ -264,27 +274,42 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         }
     }
 
-    /// <summary>The pack's sound and title art. If they can't be read the game plays on without them: a TV with no sound must not stop anything.</summary>
+    /// <summary>
+    /// The pack's sound, voices and title art, each on its own, so one bad manifest costs only what it holds. What can't be read is
+    /// done without: a TV with no sound must not stop anything.
+    /// </summary>
     private void LoadSound()
     {
-        if (_sound is not null || _soundUnreadable || !_content.TryGetValue(BasePack, out var root))
+        if (_soundRead || !_content.TryGetValue(BasePack, out var root))
         {
             return;
         }
+        _soundRead = true;
+        _sound = Read(() => SoundBank.Load(root));
+        _voices = Read(() => VoiceClips.Load(root));
+        _titleArt = Read(() => TitleArt.Load(root));
+        if (_sound is not null)
+        {
+            _audio.Use(root, _sound);
+        }
+        if (_titleArt is not null)
+        {
+            ShowLogo(Path.Combine(root, _titleArt.Logo));
+        }
+        _resultBanner.Shots = _shots;
+    }
+
+    private static T? Read<T>(Func<T> load) where T : class
+    {
         try
         {
-            _sound = SoundBank.Load(root);
-            _voices = VoiceClips.Load(root);
-            _titleArt = TitleArt.Load(root);
-            _audio.Use(root, _sound);
-            ShowLogo(Path.Combine(root, _titleArt.Logo));
-            _resultBanner.Shots = _shots;
+            return load();
         }
-        catch (Exception ex) when (ex is IOException or JsonException or FormatException or ArgumentException
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException or FormatException or ArgumentException
             or InvalidOperationException or KeyNotFoundException)
         {
-            _soundUnreadable = true;
-            GD.PushWarning($"Tactics sound: can't read the pack's manifests: {ex.Message}");
+            GD.PushWarning($"Tactics sound: can't read {typeof(T).Name}: {ex.Message}");
+            return null;
         }
     }
 

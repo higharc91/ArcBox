@@ -16,6 +16,7 @@ public sealed class BeatSoundsTests
     private static readonly Lazy<FxArt> Fx = new(() => FxArt.Load(Pack.Root));
     private static readonly Lazy<UnitArt> Art = new(() => UnitArt.Load(Pack.Root));
     private static readonly Lazy<SoundBank> Bank = new(() => SoundBank.Load(Pack.Root));
+    private static readonly Lazy<RulesPack> Rules = new(() => RulesPack.Load([Path.Combine(Pack.Root, "rules")]));
     private static readonly UnitId Hero = new("hero1");
     private static readonly UnitId Foe = new("goblin.1");
     private static readonly AbilityId Attack = new("common.attack");
@@ -82,6 +83,65 @@ public sealed class BeatSoundsTests
         var flight = script.Cues.OfType<FlightCue>().Single();
         Assert.Equal(flight.At, Sounds(script).Single(s => s.Id == "bow_release").At);
         Assert.Contains("arrow_armor", Ids(script));
+    }
+
+    private static BattleView Facing(string by, string at)
+        => View() with { Units = [Unit(Hero, "Party", 2, 3, by), Unit(Foe, "Enemy", 7, 3, at)] };
+
+    private static AbilityUsed Real(string ability, UnitId by, UnitId at)
+    {
+        var id = new AbilityId(ability);
+        return new AbilityUsed(by, id, new Target(Unit: at), Rules.Value.Abilities[id].Presentation);
+    }
+
+    [Theory]
+    [InlineData("ranger.ensnaring_strike")]
+    [InlineData("ranger.hail_of_thorns")]
+    [InlineData("ranger.lightning_arrow")]
+    [InlineData("sharpshooter.deadeye")]
+    [InlineData("sharpshooter.piercing_shot")]
+    [InlineData("sharpshooter.volley")]
+    public void A_real_arrow_ability_looses_an_arrow_not_a_spell(string ability)
+    {
+        var script = Script(Facing("characters.class_ranger", "characters.goblin_cutthroat"), Real(ability, Hero, Foe),
+            new AttackResolved(Hero, Foe, true, false), new Damaged(Foe, 5, "piercing", 5));
+
+        var flight = script.Cues.OfType<FlightCue>().Single();
+        Assert.Equal(flight.At, Sounds(script).Single(s => s.Id == "bow_release").At);
+        Assert.DoesNotContain("spell_cast", Ids(script));
+        Assert.Contains("arrow_flesh", Ids(script));
+        Assert.DoesNotContain("pierce_flesh", Ids(script));
+    }
+
+    [Theory]
+    [InlineData("troll.boulder_toss", "bosses.troll.troll")]
+    [InlineData("item.smoke_bomb", "characters.class_rogue")]
+    public void A_real_rock_is_thrown_and_lands_as_what_it_is(string ability, string sprite)
+    {
+        var script = Script(Facing(sprite, "characters.goblin_cutthroat"), Real(ability, Hero, Foe), new Damaged(Foe, 5, "bludgeoning", 5));
+
+        Assert.Equal(script.Cues.OfType<FlightCue>().Single().At, Sounds(script).Single(s => s.Id == "throw").At);
+        Assert.DoesNotContain("spell_cast", Ids(script));
+        Assert.Contains("blunt_flesh", Ids(script));
+    }
+
+    [Theory]
+    [InlineData("sorcerer.fire_bolt")]
+    [InlineData("warlock.eldritch_blast")]
+    [InlineData("cleric.guiding_bolt")]
+    public void A_real_bolt_of_magic_is_still_a_spell(string ability)
+    {
+        var script = Script(Facing("characters.class_wizard", "characters.goblin_cutthroat"), Real(ability, Hero, Foe));
+
+        Assert.Contains("spell_cast", Ids(script));
+        Assert.DoesNotContain("bow_release", Ids(script));
+    }
+
+    [Fact]
+    public void Every_projectile_in_the_rules_leaves_with_a_sound_the_pack_has()
+    {
+        foreach (var ability in Rules.Value.Abilities.Values.Where(a => a.Presentation?.Projectile is not null))
+            Assert.True(Bank.Value.Has(SoundChoice.Launch(ability.Presentation!.Projectile!, "bow")), ability.Id.Value);
     }
 
     [Fact]
@@ -152,8 +212,33 @@ public sealed class BeatSoundsTests
     [Fact]
     public void Armour_clanks_over_its_footsteps_and_a_troll_shakes_the_ground()
     {
-        Assert.Contains("step_armor", Ids(Script(View(3), new Moved(Hero, [new Tile(3, 3), new Tile(4, 3)]))));
+        Assert.Contains("step_armor", Ids(Script(View(4), new Moved(Hero, [new Tile(4, 3), new Tile(5, 3)]))));
         Assert.Equal(["step_heavy"], Ids(Script(View(foe: "bosses.troll.troll"), new Moved(Foe, [new Tile(5, 3), new Tile(6, 3)]))));
+    }
+
+    // A real walk is one Moved a tile (Movement.cs), each often its own beat, so a count inside one event never gets past 1.
+    [Fact]
+    public void Armour_clanks_on_every_other_tile_of_a_walk_of_one_tile_events()
+    {
+        var clanks = Enumerable.Range(3, 6).Count(x => Ids(Script(View(x), new Moved(Hero, [new Tile(x, 3), new Tile(x + 1, 3)]))).Contains("step_armor"));
+
+        Assert.Equal(3, clanks);
+    }
+
+    [Fact]
+    public void Armour_clanks_on_every_other_tile_of_a_dash_along_one_path_too()
+    {
+        Tile[] path = [.. Enumerable.Range(3, 5).Select(x => new Tile(x, 3))];     // four tiles
+
+        Assert.Equal(2, Ids(Script(View(3), new Moved(Hero, [.. path]))).Count(s => s == "step_armor"));
+    }
+
+    [Fact]
+    public void Armour_clanks_every_other_tile_round_a_corner()
+    {
+        Tile[] path = [new(3, 3), new(4, 3), new(4, 4), new(4, 5), new(5, 5)];
+
+        Assert.Equal(2, Ids(Script(View(3), new Moved(Hero, [.. path]))).Count(s => s == "step_armor"));
     }
 
     [Fact]

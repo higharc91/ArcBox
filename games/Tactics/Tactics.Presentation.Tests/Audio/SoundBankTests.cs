@@ -226,6 +226,33 @@ public sealed class SoundBankTests
     public void A_condition_sounds_as_good_or_bad_news_or_not_at_all(string condition, string? sound)
         => Assert.Equal(sound, SoundChoice.Condition(condition));
 
+    [Theory]
+    [InlineData("projectiles.arrow", "shortbow", "bow_release")]
+    [InlineData("projectiles.arrow", "light_crossbow", "crossbow_release")]
+    [InlineData("projectiles.arrow", null, "bow_release")]
+    [InlineData("projectiles.rock", "claws", "throw")]
+    [InlineData("projectiles.rock", null, "throw")]
+    [InlineData("projectiles.fireball", "staff", "spell_cast")]
+    [InlineData("fx.arrow.oak", "bow", "spell_cast")]
+    public void What_leaves_by_air_sounds_as_what_it_is(string key, string? weapon, string sound)
+        => Assert.Equal(sound, SoundChoice.Launch(key, weapon));
+
+    [Theory]
+    [InlineData("projectiles.arrow", true)]
+    [InlineData("projectiles.rock", false)]
+    [InlineData("projectiles.fireball", false)]
+    public void Only_an_arrow_lands_as_an_arrow(string key, bool arrow) => Assert.Equal(arrow, SoundChoice.IsArrow(key));
+
+    [Fact]
+    public void Footsteps_sit_well_under_blows_and_nothing_goes_over_full()
+    {
+        var groups = Bank.Value.Ids.Select(id => Bank.Value.Sound(id)!.Group).Distinct().ToArray();
+
+        Assert.All(groups, g => Assert.InRange(SoundChoice.LevelDb(g), -24, 0));
+        Assert.True(SoundChoice.LevelDb("weapon") - SoundChoice.LevelDb("footstep") >= 8);
+        Assert.True(SoundChoice.LevelDb("impact") - SoundChoice.LevelDb("footstep") >= 8);
+    }
+
     [Fact]
     public void Every_condition_named_for_a_sound_is_a_real_one()
     {

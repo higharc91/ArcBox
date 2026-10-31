@@ -182,6 +182,21 @@ public class NarrationQueueTests
     }
 
     [Fact]
+    public void Clearing_takes_recorded_lines_too_as_they_never_go_stale_by_themselves()
+    {
+        var q = new NarrationQueue();
+        q.Enqueue(new Narration("playing", "tactics.narrator", NarrationPriority.Commentary, 0, Clip: "a.ogg"));
+        q.Enqueue(new Narration("waiting", "tactics.narrator", NarrationPriority.Commentary, 0, Clip: "b.ogg"));
+        q.Next(0);
+
+        q.Clear();
+
+        Assert.Null(q.Current);
+        Assert.Empty(q.Pending);
+        Assert.Null(q.Next(100));
+    }
+
+    [Fact]
     public void A_line_with_no_clip_has_none_and_waits_as_it_always_did()
         => Assert.Null(Line("plain", 0).Clip);
 }
