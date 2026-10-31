@@ -88,7 +88,7 @@ Every applied command adds its events to the battle log as one **beat** with a s
 The engine records a `Controller` on every unit, and `Reactions` uses it to decide whether a reactor is asked or answers by AI. So when a party member's seat changes, the adapter hands the unit over:
 
 - **Seat disconnects** (`OnPlayerConnectionChanged(id, false)`): `Battle.Hand(state, unit, new AiControlled("companion"))`. If that unit's turn is under way, the AI finishes it from what's left, exactly as a timeout would.
-- **Seat reconnects:** `Battle.Hand(state, unit, new PlayerControlled(profile))`. It takes effect from that unit's next turn or reaction; a turn the AI has started finishes on the AI.
+- **Seat reconnects:** `Battle.Hand(state, unit, new PlayerControlled(profile))`. It takes effect at once: if that unit's turn is still going, the player takes over what's left of it, on whatever remains of the turn timer (a fresh one if it ran out). The phone playtest found that making a returning player watch the AI finish felt like a lockout.
 
 Absent members are disconnected from the start (platform v2 §3.2), so they begin as `companion`.
 

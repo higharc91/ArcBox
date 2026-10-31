@@ -58,6 +58,14 @@ The five UI fixes are client-only, so the server contract and fixtures are uncha
 
 **Not bugs:** the d-pad cursor on a goblin 7 tiles away showed "Pick a target" because Sleep's range is 6. The earlier suspicion that the Shield prompt vanished early was a stale screenshot, and the timing above is from a recorder on the page.
 
+## A real phone, afterwards
+
+The user then joined on a Samsung S23. **The LAN address didn't connect.** The server and Windows firewall looked right and no request reached the server, so a router blocking Wi-Fi devices from wired ones is the likely cause, though that's unconfirmed. **Tailscale worked:** `http://<pc-tailscale-ip>:5080/?room=<CODE>`.
+
+The user's verdict:
+- **Tile tapping is fine.** Visual polish can come later.
+- **Locking the phone mid-turn rejoined the game, but control came back a turn late.** The AI kept the rest of that turn, with the player sitting on the status screen. A player who dropped before their turn got control back at once, so the two paths disagreed. A player who returns now takes over what's left of the turn at once, on the remaining timer. The spec's §4.4 was updated to match.
+
 ## Still needs a person
 
 - Is the d-pad comfortable, and can a thumb hit a map tile?

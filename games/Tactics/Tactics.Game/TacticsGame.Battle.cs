@@ -87,6 +87,8 @@ public sealed partial class TacticsGame
     {
         if (UnitOf(profile) is not { } unit || !State.Units.ContainsKey(unit))
             return;
+        if (connected && _aiFinishing == unit)
+            (_aiFinishing, _plan) = (null, null);     // back in time: what's left of the turn is theirs again
         SetState(Battle.Hand(State, unit, connected ? new PlayerControlled(profile) : new AiControlled(Companion)));
         if (!connected && State.Active == unit && State.Pending is null)
             _aiFinishing = unit;     // the AI finishes what's left of the turn

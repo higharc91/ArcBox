@@ -221,6 +221,32 @@ public sealed class TacticsGameTests
     }
 
     [Fact]
+    public void A_seat_back_during_its_turn_plays_the_rest_of_it()
+    {
+        var s = new Session();
+        s.ToBattle();
+        var (player, _) = WaitForTurn(s);
+        var unit = s.Game.Document.Battle!.State.Active!.Value;
+
+        // A locked phone drops, and the AI starts on the turn; unlocked, it's back before the AI is done.
+        s.Harness.SetConnected(player, false);
+        Assert.Equal(unit, s.Game.Document.Battle!.State.Active);
+        s.Harness.SetConnected(player, true);
+
+        var screen = s.Screen(player);
+        Assert.Equal(TacticsGame.Screens.Turn, screen?.Screen);
+        Assert.NotNull(screen?.DeadlineUtc);
+
+        // The AI stays out of it, and the clock still runs, so the turn can't hang.
+        s.Harness.Advance(TimeSpan.FromSeconds(10));
+        Assert.Equal(unit, s.Game.Document.Battle!.State.Active);
+        Assert.Equal(TacticsGame.Screens.Turn, s.Screen(player)?.Screen);
+        for (var i = 0; i < 20 && s.Game.Document.Battle!.State.Active == unit; i++)
+            s.Harness.Advance(TimeSpan.FromSeconds(7));
+        Assert.NotEqual(unit, s.Game.Document.Battle!.State.Active);
+    }
+
+    [Fact]
     public void A_reaction_left_unanswered_is_decided_by_the_ai_rule()
     {
         var s = new Session(seed: 3);
