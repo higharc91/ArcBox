@@ -12,6 +12,7 @@ namespace ArcBox.Host.Shell;
 /// car, e.g. one whose country plays the theme only) and <c>--autostart=&lt;gameId&gt;[:&lt;players&gt;]</c>
 /// (select that game and start it once enough players are in; for scripted runs), and <c>--perf</c> (F3 overlay on
 /// from the start, logged every 5 s), and <c>--audio-log</c> (print <c>AUDIO &lt;bus&gt; &lt;name&gt;</c> for every sound played),
+/// the dev-only <c>--tactics-demo[=&lt;map&gt;[:changed]]</c> (show a battle's board, without a server)
 /// and the dev-only <c>--demo=campaign-lobby</c> (show the lobby with a built-in campaign and roster, without a server).
 /// </summary>
 public sealed record AppArgs
@@ -34,6 +35,9 @@ public sealed record AppArgs
 
     /// <summary>Dev only: the demo race winner's driver code (a player's car), or null for the script's own.</summary>
     public string? RedlineDemoWinner { get; init; }
+
+    /// <summary>Dev only: the board to show instead of connecting (<c>Tactics.Presentation.Board.DemoBattle</c>), or null.</summary>
+    public string? TacticsDemo { get; init; }
 
     /// <summary>Dev only: a built-in screen to show instead of connecting (<see cref="DemoCampaignLobby"/>), or null.</summary>
     public string? Demo { get; init; }
@@ -80,6 +84,9 @@ public sealed record AppArgs
                     break;
                 case "--redline-demo-winner" when !string.IsNullOrWhiteSpace(value):
                     args = args with { RedlineDemoWinner = value.Trim().ToUpperInvariant() };
+                    break;
+                case "--tactics-demo":
+                    args = args with { TacticsDemo = string.IsNullOrWhiteSpace(value) ? "river_crossing" : value };
                     break;
                 case "--demo" when value == DemoCampaignLobby:
                     args = args with { Demo = value };

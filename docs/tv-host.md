@@ -52,6 +52,7 @@ Everything after `--` on the Godot command line; all optional.
 | `--autostart=<game>[:<players>]` | Dev only: select that game, and start it once that many players (default 1) are connected and the scene is ready. First game only. Used by `tools/tv-e2e.sh`. |
 | `--res=<w>x<h>` | Window size. The UI is laid out at 1920×1080 and scales (`canvas_items`, `expand`). |
 | `--redline-demo[=<step>]` | Dev only: play a scripted REDLINE race into the TV without a server (see below). |
+| `--tactics-demo[=<map>[:changed]]` | Dev only: show a Tactics board without a server, with the art from the repository's `content/` (default `river_crossing`). `:changed` adds zones, a raised tile and the bridge's tiles sunk. With `--shots` it saves `…-tactics-battle-<map>.png`. |
 | `--demo=campaign-lobby` | Dev only: show the lobby with a built-in campaign game selected, its campaign list and a roster with seated and away members (`Shell/CampaignLobbyDemo.cs`), without a server. With `--shots` it saves `001-lobby.png`. |
 
 Unknown arguments are reported as warnings and ignored.
@@ -164,8 +165,18 @@ with Mesa's CPU rasteriser (llvmpipe), where a 1080p frame takes several seconds
 ## Tactics scene
 
 `games/tactics/TacticsScene.tscn` shows the game's banner and each phase's table: the Muster roster, the encounter list and
-the results (the battle itself is a placeholder for now). All of it is worded by `PhaseScreen` in
-`games/Tactics/Tactics.Presentation`, with tests; the Godot class only draws. To run the TV against a real game without
+the results, and in battle the board. All of it is worded by `PhaseScreen` in `games/Tactics/Tactics.Presentation`, with
+tests; the Godot class only draws.
+
+**The board** uses the pack's art the way its manifests describe it: tiles are 32 px, projected 2:1 with height steps of
+16 px, tops sampled in world space (one texture over 4 x 4 tiles) with sides and lips below them, all drawn as textured
+quads, at twice the art's size on the 1080p layout. `Tactics.Presentation/Board` works everything out: `BoardProjection` is
+the only code that knows the projection, `BoardTerrain` is the map plus what the battle changed (a tile's `Centre` is where
+anything stands on it), `BoardPlan` is every face and sprite in painter's order (`BoardOrder.Key` is how later things sort
+in), `BoardFit` puts it on the screen and `MaterialLook` picks the sides that go with a map's materials. `BoardCanvas` only
+draws the plan. Zones, height changes and sunk tiles come from the host view's `battle.board`, which phones don't get.
+
+To run the TV against a real game without
 phones or a browser, `tools/tactics-playtest/bots.cjs` joins a room as N players and plays a whole session over the real
 hub; its header has the commands.
 

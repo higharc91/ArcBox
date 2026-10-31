@@ -55,6 +55,7 @@ public sealed class HostViewContractTests
         Assert.NotNull(fight.Battle);
         Assert.NotEmpty(fight.Battle.Beats.SelectMany(b => b.Events));   // the polymorphic events survive the trip
         Assert.StartsWith("Battle · River Crossing · Round ", PhaseScreen.Of(fight).Meta);
+        Assert.NotNull(fight.Battle.Board);                              // and so do the board's changes
 
         for (var step = 0; step < 20_000 && game.Phase == TacticsPhase.Battle; step++)
             h.Advance(TimeSpan.FromSeconds(7));

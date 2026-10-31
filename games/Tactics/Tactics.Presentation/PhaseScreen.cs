@@ -27,8 +27,9 @@ public sealed record ScreenRow(string Title, string Detail, string? Chip, string
 /// <param name="Rows">The table.</param>
 /// <param name="Empty">The big text to show instead of the table when it has no rows, or null.</param>
 /// <param name="Shot">The label for <c>--shots</c>: a new label is a new screenshot.</param>
+/// <param name="Board">The battle to draw on the board, or null. If it can't be drawn, the screen still reads without it.</param>
 public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? Notice, int PartyLevel,
-    ImmutableArray<ScreenRow> Rows, string? Empty, string Shot)
+    ImmutableArray<ScreenRow> Rows, string? Empty, string Shot, BattleView? Board = null)
 {
     /// <summary>The screen for <paramref name="view"/>. A phase this build doesn't know still shows the banner.</summary>
     public static PhaseScreen Of(TacticsHostView view)
@@ -43,7 +44,8 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
             TacticsPhase.EncounterPick => EncounterPick(screen, view),
             TacticsPhase.Results => Results(screen, view),
             TacticsPhase.Resuming => Resuming(screen, view),
-            _ => Battle(screen, view),
+            TacticsPhase.Battle => Battle(screen, view),
+            _ => screen,
         };
     }
 
@@ -92,7 +94,7 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
         Empty = "Waiting for the players to come back",
     };
 
-    // A placeholder until the board is drawn: the banner, and which fight this is.
+    // The board, with the banner and which fight this is. The encounter's name is for a TV that can't draw the map.
     private static PhaseScreen Battle(PhaseScreen screen, TacticsHostView view)
     {
         if (view.Battle is not { } battle)
@@ -104,6 +106,8 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
             Meta = $"Battle · {name} · {round}",
             Title = view.Banner.Length > 0 ? view.Banner : round,
             Empty = name,
+            Shot = $"{screen.Shot}-{battle.Map}",
+            Board = battle,
         };
     }
 

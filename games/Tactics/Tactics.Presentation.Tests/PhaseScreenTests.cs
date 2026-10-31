@@ -16,6 +16,27 @@ public sealed class PhaseScreenTests
         => new(encounter, encounter, round, [], null, [], [], null);
 
     [Fact]
+    public void Only_the_battle_phase_gets_the_board()
+    {
+        var fight = Fight();
+
+        Assert.NotNull(PhaseScreen.Of(View("Battle", battle: fight)).Board);
+        Assert.Null(PhaseScreen.Of(View("Muster", battle: fight)).Board);
+        Assert.Null(PhaseScreen.Of(View("Resuming", battle: fight)).Board);
+        Assert.Null(PhaseScreen.Of(View("Results", battle: fight)).Board);
+    }
+
+    [Fact]
+    public void A_phase_number_this_build_does_not_define_only_shows_the_banner()
+    {
+        var screen = PhaseScreen.Of(View("99", "Hello", battle: Fight()));
+
+        Assert.Equal("Hello", screen.Title);
+        Assert.Null(screen.Board);
+        Assert.Null(screen.Empty);
+    }
+
+    [Fact]
     public void Muster_lists_who_is_ready()
     {
         var screen = PhaseScreen.Of(View("Muster", "Choose your classes on your phones", mustered: ["Ana", "Bo"], level: 3));
@@ -133,7 +154,8 @@ public sealed class PhaseScreenTests
         Assert.Equal("Battle · River Crossing · Round 2", screen.Meta);
         Assert.Equal("Ana's turn", screen.Title);
         Assert.Equal("River Crossing", screen.Empty);
-        Assert.Equal("tactics-battle", screen.Shot);
+        Assert.Equal("tactics-battle-river_crossing", screen.Shot);
+        Assert.Equal("river_crossing", screen.Board!.Map);
         Assert.Empty(screen.Rows);
     }
 

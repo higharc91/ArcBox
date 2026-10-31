@@ -48,9 +48,31 @@ public sealed record PhoneChoices(UnitId Unit, TurnEconomy Economy, ImmutableArr
     };
 }
 
+/// <summary>A lasting area effect on the map, as the TV draws it.</summary>
+public sealed record ZoneView(int Serial, string Kind, ImmutableArray<Tile> Tiles);
+
+/// <summary>A tile's height, changed from the map's by <paramref name="Delta"/> steps.</summary>
+public sealed record HeightChange(Tile At, int Delta);
+
+/// <summary>What the battle has done to the map so far. The TV's alone: phones don't get it.</summary>
+/// <param name="Zones">The zones on the map (<see cref="BattleState.Zones"/>).</param>
+/// <param name="Heights">The changed heights (<see cref="BattleState.HeightDelta"/>).</param>
+/// <param name="Sunk">The tiles that became deep (<see cref="BattleState.Sunk"/>).</param>
+public sealed record BoardChanges(ImmutableArray<ZoneView> Zones, ImmutableArray<HeightChange> Heights, ImmutableArray<Tile> Sunk)
+{
+    /// <summary>An untouched map.</summary>
+    public static BoardChanges None { get; } = new([], [], []);
+
+    /// <summary>The changes in <paramref name="state"/>.</summary>
+    public static BoardChanges Of(BattleState state) => new(
+        [.. state.Zones.Select(z => new ZoneView(z.Serial, z.Kind, z.Tiles))],
+        [.. state.HeightDelta.Select(h => new HeightChange(h.Key, h.Value))],
+        state.Sunk is { } sunk ? [.. sunk] : []);
+}
+
 /// <summary>The battle as the TV draws it (adapter spec §8).</summary>
 public sealed record BattleView(string Encounter, string Map, int Round, ImmutableArray<UnitId> Order, UnitId? Active,
-    ImmutableArray<UnitView> Units, ImmutableArray<Beat> Beats, string? Outcome);
+    ImmutableArray<UnitView> Units, ImmutableArray<Beat> Beats, string? Outcome, BoardChanges? Board = null);
 
 /// <summary>An encounter the VIP can pick, with how many AI companions would fill the party up to its minimum.</summary>
 public sealed record EncounterOption(string Id, string Name, int? Level, int Min, int Max, bool Fits, int Companions = 0);
@@ -187,7 +209,7 @@ public sealed partial class TacticsGame
         var save = Save_;
         var state = save.State;
         return new BattleView(save.Encounter, state.MapId, state.Round, state.Order, state.Active,
-            [.. state.Units.Values.Select(UnitViewOf)], save.Log.IsDefault ? [] : save.Log, state.Outcome?.ToString());
+            [.. state.Units.Values.Select(UnitViewOf)], save.Log.IsDefault ? [] : save.Log, state.Outcome?.ToString(), BoardChanges.Of(state));
     }
 
     private UnitView UnitViewOf(UnitState u)

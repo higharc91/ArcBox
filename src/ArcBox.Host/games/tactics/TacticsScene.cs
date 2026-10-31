@@ -3,19 +3,23 @@ using ArcBox.Host.Shell;
 using ArcBox.Sdk;
 using Godot;
 using Tactics.Game;
+using Tactics.Logic;
 using Tactics.Presentation;
+using Tactics.Presentation.Board;
 
 namespace ArcBox.Host.Games.Tactics;
 
 /// <summary>
 /// ArcBox Tactics on the TV: the banner, and for each phase its table from <see cref="PhaseScreen"/> (the Muster roster,
-/// the encounter list, the results). The battle itself is a placeholder until the board is drawn. Everything worded
+/// the encounter list, the results), and in battle the board (<see cref="BoardCanvas"/>). Everything worded or worked out
 /// here comes from <c>Tactics.Presentation</c>; this class only draws it.
 /// </summary>
 public partial class TacticsScene : Control, IGameScene, IContentScene, ISignalingScene
 {
     /// <summary>A table this short leaves its rows at this share of the height, not stretched into slabs.</summary>
     private const int RowSlots = 6;
+
+    private const string BasePack = "base";
 
     private Label _meta = null!;
     private Label _title = null!;
@@ -24,6 +28,15 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private Label _noticeText = null!;
     private VBoxContainer _rows = null!;
     private Label _empty = null!;
+    private Control _header = null!;
+    private Control _table = null!;
+    private BoardCanvas _board = null!;
+    private Control _battleHead = null!;
+    private Label _battleMeta = null!;
+    private Label _battleTitle = null!;
+    private ArtIndex? _art;
+    private BattleMap? _map;
+    private string? _unreadableMap;
     private Screenshotter? _shots;
     private IReadOnlyDictionary<string, string> _content = new Dictionary<string, string>();
     private Action<string, object> _signal = (_, _) => { };
@@ -46,7 +59,19 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _meta = ArcTheme.Meta("Tactics");
         _title = ArcTheme.Label("", ArcTheme.Bold, 42);
         _level = ArcTheme.Label("1", ArcTheme.Display("Black", 0, 18, 14), 60);
-        column.AddChild(ShellLayout.Header("TACTICS", _meta, _title, ShellLayout.StatBox(ArcTheme.Meta("Party level", 16), _level, null, 220)));
+        _header = ShellLayout.Header("TACTICS", _meta, _title, ShellLayout.StatBox(ArcTheme.Meta("Party level", 16), _level, null, 220));
+        column.AddChild(_header);
+
+        _board = new BoardCanvas { Visible = false };
+        AddChild(_board);
+        MoveChild(_board, 1);   // over the background, under the column
+
+        _battleMeta = ArcTheme.Meta("Battle", 16);
+        _battleTitle = ArcTheme.Label("", ArcTheme.Bold, 30);
+        _battleHead = ArcTheme.Panel(ArcTheme.GlassBox(ArcTheme.Red, 20, 8), ArcTheme.VBox(0, _battleMeta, _battleTitle));
+        _battleHead.SizeFlagsHorizontal = SizeFlags.ShrinkBegin;
+        _battleHead.Visible = false;
+        column.AddChild(_battleHead);
 
         _noticeText = ArcTheme.Label("", ArcTheme.SemiBold, 28, ArcTheme.Gold);
         _notice = ArcTheme.Panel(ArcTheme.GlassBox(ArcTheme.Gold, 28, 10), _noticeText);
@@ -61,9 +86,9 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _empty.SizeFlagsVertical = SizeFlags.ExpandFill;
         _empty.Visible = false;
 
-        var table = ArcTheme.Panel(ArcTheme.GlassBox(null, 0, 0), ArcTheme.VBox(0, _rows, _empty));
-        table.SizeFlagsVertical = SizeFlags.ExpandFill;
-        column.AddChild(table);
+        _table = ArcTheme.Panel(ArcTheme.GlassBox(null, 0, 0), ArcTheme.VBox(0, _rows, _empty));
+        _table.SizeFlagsVertical = SizeFlags.ExpandFill;
+        column.AddChild(_table);
     }
 
     public void Render(JsonElement view, JsonElement? previous)
@@ -84,11 +109,53 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _empty.Text = screen.Empty ?? "";
         _rows.Visible = screen.Empty is null;
         ShowRows(screen);
+        ShowBoard(screen);
 
         if (screen.Shot != _lastShot)
         {
             _lastShot = screen.Shot;
             _shots?.Capture(screen.Shot);
+        }
+    }
+
+    /// <summary>The board replaces the header and table in battle. If it can't be drawn, they stay, with the encounter's name.</summary>
+    private void ShowBoard(PhaseScreen screen)
+    {
+        var drawn = screen.Board is { } battle && DrawBoard(battle);
+        _board.Visible = drawn;
+        _battleHead.Visible = drawn;
+        _header.Visible = !drawn;
+        _table.Visible = !drawn;
+        _battleMeta.Text = screen.Meta.ToUpperInvariant();
+        _battleTitle.Text = screen.Title;
+    }
+
+    private bool DrawBoard(BattleView battle)
+    {
+        if (!_content.TryGetValue(BasePack, out var root))
+        {
+            return false;
+        }
+        try
+        {
+            _art ??= ArtIndex.Load(root);
+            if (_map?.Id != battle.Map)
+            {
+                _map = BoardMap.Parse(File.ReadAllText(Path.Combine(root, "rules", "maps", $"{battle.Map}.json")));
+            }
+            var plan = BoardPlan.Build(new BoardTerrain(_map, battle.Board), _art);
+            _board.SetPlan(plan, BoardFit.Of(plan.Min, plan.Max), root);
+            return true;
+        }
+        catch (Exception ex) when (ex is IOException or JsonException or FormatException or ArgumentException
+            or InvalidOperationException or KeyNotFoundException)
+        {
+            if (_unreadableMap != battle.Map)
+            {
+                _unreadableMap = battle.Map;
+                GD.PushError($"Tactics board: can't draw map '{battle.Map}': {ex.Message}");
+            }
+            return false;
         }
     }
 

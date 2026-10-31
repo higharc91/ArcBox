@@ -135,6 +135,16 @@ public partial class Main : Control
             AddChild(new Games.Redline.Demo.RedlineDemoFeeder(view => OnHostView(new HostViewEvent("redline", view)), _args.RedlineDemoFrom, _args.RedlineDemoWinner));
             return;
         }
+        if (_args.TacticsDemo is { } board)
+        {
+            // Dev only: a battle's board through the normal host-view path, no server; the art comes from the repository.
+            GD.Print("Tactics demo: no server connection");
+            ShowGame("tactics");
+            var pack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "tactics", "base"));
+            (_scene as IContentScene)?.SetContentRoots(new Dictionary<string, string> { ["base"] = pack });
+            OnHostView(new HostViewEvent("tactics", JsonSerializer.SerializeToElement(global::Tactics.Presentation.Board.DemoBattle.View(board), ArcJson.Options)));
+            return;
+        }
         if (_args.Demo == AppArgs.DemoCampaignLobby)
         {
             // Dev only: the lobby of a campaign game with a built-in campaign list and roster, no server.
