@@ -1,20 +1,2819 @@
 {
   "scenes": [
     {
-      "id": "ch5_stub",
+      "id": "ch5_the_gate",
       "beat": "ch5_the_gate",
+      "title": "The Broken Gate",
+      "cast": [
+        "narrator",
+        "halvard",
+        "pip_ashdown",
+        "oswin_hale"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_the_gate_open_1",
+              "speaker": "narrator",
+              "text": "Ember Keep rises out of the ash, black against a sky the colour of a forge. Ash falls like snow, and the whole fortress glows red from within.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_the_gate_open_2",
+              "speaker": "narrator",
+              "text": "At the broken gate stands a knight in black armour, alone, as he has stood for a hundred years. His sword is planted point down before him.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_the_gate_open_3",
+              "speaker": "halvard",
+              "text": "Good evening. I am Halvard, captain of the Warden guard. I hold this gate for the Keeper.",
+              "mood": "idle",
+              "direction": "deep and hollow inside the helm; old-fashioned courtesy"
+            },
+            {
+              "id": "ch5_the_gate_open_4",
+              "speaker": "halvard",
+              "text": "You carry embers. I can feel them from here, like summer. I regret that I cannot let them pass.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_the_gate_open_5",
+              "speaker": "pip_ashdown",
+              "text": "Halvard. You used to let me win at draughts. No. You used to let him win.",
+              "mood": "surprised",
+              "direction": "suddenly old and slow, Oswin's cadence, not a child's, then a child, confused"
+            },
+            {
+              "id": "ch5_the_gate_open_6",
+              "speaker": "halvard",
+              "text": "Child. Where did you learn to say my name like that?",
+              "mood": "surprised"
+            }
+          ],
+          "options": [
+            {
+              "id": "why",
+              "label": "Why do you still hold the gate?",
+              "to": "why"
+            },
+            {
+              "id": "oath",
+              "label": "You swore an oath. So did I. Let's talk about what an oath is for.",
+              "to": "oath",
+              "tags": {
+                "class": [
+                  "paladin"
+                ]
+              }
+            },
+            {
+              "id": "red",
+              "label": "The fire behind you made my family what we are. I want to see it.",
+              "to": "red",
+              "tags": {
+                "race": [
+                  "tiefling"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "why",
+          "lines": [
+            {
+              "id": "ch5_the_gate_why_1",
+              "speaker": "halvard",
+              "text": "Because the Keeper bade me hold it until he released me, and he has not. He does not leave the archive. He speaks to no one but me.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_the_gate_why_2",
+              "speaker": "halvard",
+              "text": "I love him. I have not forgiven him. Both are still true after a century, which surprises me.",
+              "mood": "sad",
+              "direction": "the courtesy slipping, just for a moment"
+            }
+          ],
+          "next": "choose"
+        },
+        {
+          "id": "oath",
+          "lines": [
+            {
+              "id": "ch5_the_gate_oath_1",
+              "speaker": "halvard",
+              "text": "An oath is for keeping. I have kept mine longer than any oath was meant to be kept. That is not the same as it being right.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_the_gate_oath_2",
+              "speaker": "halvard",
+              "text": "You understand, then. I cannot step aside. I can only be relieved.",
+              "mood": "idle"
+            }
+          ],
+          "next": "choose"
+        },
+        {
+          "id": "red",
+          "lines": [
+            {
+              "id": "ch5_the_gate_red_1",
+              "speaker": "halvard",
+              "text": "So it reached that far. I am sorry for it. The red came after the Fall. Before, it burned gold, and it was very beautiful, and it was a lie.",
+              "mood": "sad"
+            }
+          ],
+          "next": "choose"
+        },
+        {
+          "id": "choose",
+          "lines": [
+            {
+              "id": "ch5_the_gate_choose_1",
+              "speaker": "halvard",
+              "text": "Choose, then. I would rather you turned back. If you will not, I shall try, very politely, to kill you.",
+              "mood": "idle"
+            }
+          ],
+          "vote": true,
+          "options": [
+            {
+              "id": "fight",
+              "label": "Fight our way past.",
+              "to": "fight",
+              "choice": "ch5_fight_halvard"
+            },
+            {
+              "id": "release",
+              "label": "Ask the Keeper to release him.",
+              "to": "release",
+              "choice": "ch5_release_halvard",
+              "requires": [
+                "truth_fall"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fight",
+          "lines": [
+            {
+              "id": "ch5_the_gate_fight_1",
+              "speaker": "halvard",
+              "text": "Then you honour me. On guard.",
+              "mood": "happy",
+              "direction": "something like relief"
+            },
+            {
+              "id": "ch5_the_gate_fight_2",
+              "speaker": "narrator",
+              "text": "He fights like a man who has practised every morning for a hundred years, because he has. The ash whirls around the blades.",
+              "mood": "angry"
+            },
+            {
+              "id": "ch5_the_gate_fight_3",
+              "speaker": "narrator",
+              "text": "When at last he falls, he goes to one knee first, and sets his sword down carefully, the way a guest sets down a cup.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_the_gate_fight_4",
+              "speaker": "halvard",
+              "text": "Well struck. Tell the Keeper I held. Tell him I held it as long as I could.",
+              "mood": "hurt",
+              "direction": "faint, still perfectly polite"
+            },
+            {
+              "id": "ch5_the_gate_fight_5",
+              "speaker": "narrator",
+              "text": "When you kneel beside him, the black armour is empty. The gate of Ember Keep stands open.",
+              "mood": "sad"
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "release",
+          "lines": [
+            {
+              "id": "ch5_the_gate_release_1",
+              "speaker": "halvard",
+              "text": "A message? I may carry a message. That is within my oath. What shall I tell him?",
+              "mood": "surprised"
+            }
+          ],
+          "options": [
+            {
+              "id": "know",
+              "label": "Tell him we know he tried to put it out.",
+              "to": "know"
+            },
+            {
+              "id": "hand",
+              "label": "Tell him the child remembers the hand that stopped him.",
+              "to": "hand"
+            }
+          ]
+        },
+        {
+          "id": "know",
+          "lines": [
+            {
+              "id": "ch5_the_gate_know_1",
+              "speaker": "halvard",
+              "text": "You know that. Nobody knows that. Wait here, if you would be so kind.",
+              "mood": "surprised",
+              "direction": "very quiet"
+            }
+          ],
+          "next": "wait"
+        },
+        {
+          "id": "hand",
+          "lines": [
+            {
+              "id": "ch5_the_gate_hand_1",
+              "speaker": "halvard",
+              "text": "The hand. He has asked himself whose hand for a hundred years. Wait here, if you would be so kind.",
+              "mood": "surprised"
+            }
+          ],
+          "next": "wait"
+        },
+        {
+          "id": "wait",
+          "lines": [
+            {
+              "id": "ch5_the_gate_wait_1",
+              "speaker": "narrator",
+              "text": "He goes in. For a long while there is only the falling ash and the red glow. Then a voice speaks from a high window, dry and very old.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_the_gate_wait_2",
+              "speaker": "oswin_hale",
+              "text": "Halvard. You have held long enough. Longer than I had any right to ask. I release you.",
+              "mood": "sad",
+              "direction": "dry and cold; a long silence before he speaks"
+            },
+            {
+              "id": "ch5_the_gate_wait_3",
+              "speaker": "narrator",
+              "text": "Halvard comes back through the gate slowly, like a man walking out of a long winter. He stops before you and bows.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_the_gate_wait_4",
+              "speaker": "halvard",
+              "text": "Thank you. I had forgotten what it is to want to go somewhere. Be gentle with him. He has been alone a long time.",
+              "mood": "happy",
+              "direction": "warm for the first time; the hollowness going"
+            },
+            {
+              "id": "ch5_the_gate_wait_5",
+              "speaker": "narrator",
+              "text": "Then the black armour goes grey, and then to ash, and the ash falls with all the rest. The gate of Ember Keep stands open.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_the_gate_wait_6",
+              "speaker": "oswin_hale",
+              "text": "Come up. Bring the child. I would like to hear about the hand.",
+              "mood": "idle",
+              "direction": "a scholar's warmth breaking through, then smothered"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_the_archive",
+      "beat": "ch5_the_archive",
+      "title": "The Warden Archive",
+      "cast": [
+        "narrator",
+        "oswin_hale",
+        "pip_ashdown"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_the_archive_open_1",
+              "speaker": "narrator",
+              "text": "The Warden Archive climbs the inside of a tower, shelf over shelf: three hundred years of the Vale, written where no fire was ever allowed.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_the_archive_open_2",
+              "speaker": "narrator",
+              "text": "At a desk beneath the only window sits a figure in a Keeper's robes, all bone and parchment, writing. He does not look up.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_the_archive_open_3",
+              "speaker": "oswin_hale",
+              "text": "I am Oswin Hale. I remember every year of the Vale's history. You have no idea how heavy that is.",
+              "mood": "idle",
+              "direction": "dry, precise, very old"
+            }
+          ],
+          "options": [
+            {
+              "id": "fell",
+              "label": "Halvard fell at the gate. He asked us to tell you he held.",
+              "to": "fell",
+              "requires": [
+                "ch5_halvard_slain"
+              ]
+            },
+            {
+              "id": "gladly",
+              "label": "Halvard went gladly. He asked us to be gentle with you.",
+              "to": "gladly",
+              "requires": [
+                "ch5_halvard_released"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fell",
+          "lines": [
+            {
+              "id": "ch5_the_archive_fell_1",
+              "speaker": "oswin_hale",
+              "text": "He would. He would say exactly that. I should have released him eighty years ago. I wanted someone to talk to.",
+              "mood": "hurt",
+              "direction": "a long silence; the pen stops"
+            },
+            {
+              "id": "ch5_the_archive_fell_2",
+              "speaker": "oswin_hale",
+              "text": "Sit down. You have killed my only friend and come to ask me questions. I will answer them. That is what I am for.",
+              "mood": "angry",
+              "direction": "cold"
+            }
+          ],
+          "next": "history"
+        },
+        {
+          "id": "gladly",
+          "lines": [
+            {
+              "id": "ch5_the_archive_gladly_1",
+              "speaker": "oswin_hale",
+              "text": "Gentle. He was always telling me to be gentle. I was never any good at it. He was the gentle one, under all that iron.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_the_archive_gladly_2",
+              "speaker": "oswin_hale",
+              "text": "Sit. You gave him back to himself. I owe you the truth, and I have kept it a very long time.",
+              "mood": "idle"
+            }
+          ],
+          "next": "history"
+        },
+        {
+          "id": "history",
+          "lines": [
+            {
+              "id": "ch5_the_archive_history_1",
+              "speaker": "oswin_hale",
+              "text": "Four hundred years ago the Vale was cold and starving. Seven people climbed the Greywall looking for anything that would keep their children alive.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_the_archive_history_2",
+              "speaker": "oswin_hale",
+              "text": "They found a fire on the other side. It was not offered to them. They took it, and they ran home, and they called it a gift.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_the_archive_history_3",
+              "speaker": "oswin_hale",
+              "text": "The Vale was warm for three hundred years. And every hearth, every forge, every lamp burned a little of the people who used it.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_the_archive_history_4",
+              "speaker": "oswin_hale",
+              "text": "Two centuries ago a Keeper learned the price, and decided the Vale could not afford to know it. So we kept it secret, and sold shards anyway.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_the_archive_history_5",
+              "speaker": "oswin_hale",
+              "text": "I read those books when I was made Keeper. I swore I would never touch the fire, and I never have. It is why I remember.",
+              "mood": "angry",
+              "direction": "the warmth breaking through as anger"
+            },
+            {
+              "id": "ch5_the_archive_history_6",
+              "speaker": "oswin_hale",
+              "text": "On the last night, I tried to end it. I was nearly done. And someone stopped my hand.",
+              "mood": "sad",
+              "direction": "very long pause before the last words"
+            }
+          ],
+          "sets": [
+            "truth_crossing"
+          ],
+          "next": "ask"
+        },
+        {
+          "id": "ask",
+          "lines": [
+            {
+              "id": "ch5_the_archive_ask_1",
+              "speaker": "oswin_hale",
+              "text": "Ask what you came to ask. I have had a hundred years to prepare the answers.",
+              "mood": "idle"
+            }
+          ],
+          "options": [
+            {
+              "id": "song",
+              "label": "Mother Skarrow's song says the same. The seven came back running.",
+              "to": "song",
+              "requires": [
+                "ch1_skarrow_spared"
+              ]
+            },
+            {
+              "id": "scripture",
+              "label": "The church's oldest scripture says it too. The fire we carried out of the burning country.",
+              "to": "scripture",
+              "tags": {
+                "background": [
+                  "acolyte"
+                ]
+              }
+            },
+            {
+              "id": "maud",
+              "label": "Old Maud saw that night. Let me check your story against hers.",
+              "to": "maud",
+              "tags": {
+                "background": [
+                  "hermit"
+                ]
+              }
+            },
+            {
+              "id": "marrowby",
+              "label": "The crypt named Celandine Marrowby. She fled with a chest of shards.",
+              "to": "marrowby",
+              "tags": {
+                "background": [
+                  "noble"
+                ]
+              }
+            },
+            {
+              "id": "verse",
+              "label": "Do you know the last verse of the Song of the Seven?",
+              "to": "verse",
+              "tags": {
+                "background": [
+                  "entertainer"
+                ]
+              }
+            },
+            {
+              "id": "corvin",
+              "label": "Corvin Ashby has read your letters all his life.",
+              "to": "corvin",
+              "tags": {
+                "background": [
+                  "sage"
+                ]
+              }
+            },
+            {
+              "id": "pip",
+              "label": "Pip, tell him about the hand.",
+              "to": "pip"
+            }
+          ]
+        },
+        {
+          "id": "song",
+          "lines": [
+            {
+              "id": "ch5_the_archive_song_1",
+              "speaker": "oswin_hale",
+              "text": "The goblins kept it. Of course they did. They never used the fire, so it never ate their songs. We should have listened to them.",
+              "mood": "surprised"
+            }
+          ],
+          "next": "ask"
+        },
+        {
+          "id": "scripture",
+          "lines": [
+            {
+              "id": "ch5_the_archive_scripture_1",
+              "speaker": "narrator",
+              "text": "You read the old words aloud. Oswin mouths them with you, word for word, from a memory no fire has ever touched.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_the_archive_scripture_2",
+              "speaker": "oswin_hale",
+              "text": "Carried, not given. Your church has known for two hundred years. Tell your Mother Aubrine, or don't. That one is yours to choose.",
+              "mood": "idle"
+            }
+          ],
+          "next": "ask"
+        },
+        {
+          "id": "maud",
+          "lines": [
+            {
+              "id": "ch5_the_archive_maud_1",
+              "speaker": "narrator",
+              "text": "You set his account against Maud's, line by line. The ember thrown from the high window. The red sky. A hooded figure on the wall.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_the_archive_maud_2",
+              "speaker": "narrator",
+              "text": "It matches. Maud never touched the fire either. Two people in the Vale who truly remember that night, and they agree.",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch5_the_archive_maud_3",
+              "speaker": "oswin_hale",
+              "text": "Maud is alive? She would have been a child, on the riverbank. Tell her I am sorry she had to see it.",
+              "mood": "sad"
+            }
+          ],
+          "next": "ask"
+        },
+        {
+          "id": "marrowby",
+          "lines": [
+            {
+              "id": "ch5_the_archive_marrowby_1",
+              "speaker": "oswin_hale",
+              "text": "Celandine. Nineteen, and frightened, and fast. I saw her run with the chest. I let her go. I thought someone should get out with something.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_the_archive_marrowby_2",
+              "speaker": "oswin_hale",
+              "text": "She doesn't remember? No. She wouldn't. She will have lit a great many lamps since then.",
+              "mood": "idle"
+            }
+          ],
+          "next": "ask"
+        },
+        {
+          "id": "verse",
+          "lines": [
+            {
+              "id": "ch5_the_archive_verse_1",
+              "speaker": "oswin_hale",
+              "text": "The last verse. Yes. They stopped singing it on purpose.",
+              "mood": "idle",
+              "direction": "a long silence, then like a man reading from very far away"
+            },
+            {
+              "id": "ch5_the_archive_verse_2",
+              "speaker": "oswin_hale",
+              "text": "Seven went over, and seven came home, with a fire on their backs that was never their own. Pay it back, children, or pay what you've known.",
+              "mood": "sad",
+              "direction": "spoken, not sung, but you can hear the tune under it"
+            },
+            {
+              "id": "ch5_the_archive_verse_3",
+              "speaker": "narrator",
+              "text": "Two centuries lost, and now it's yours to sing. Lark would weep to hear it.",
+              "mood": "idle"
+            }
+          ],
+          "next": "ask"
+        },
+        {
+          "id": "corvin",
+          "lines": [
+            {
+              "id": "ch5_the_archive_corvin_1",
+              "speaker": "oswin_hale",
+              "text": "Ashby? There was an Ashby who copied for us when I was young. Clever hands. Couldn't spell.",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch5_the_archive_corvin_2",
+              "speaker": "oswin_hale",
+              "text": "Bring him, after. Whatever happens. Someone should have all of this who isn't dead.",
+              "mood": "happy",
+              "direction": "the warmth getting through before he can stop it"
+            }
+          ],
+          "next": "ask"
+        },
+        {
+          "id": "pip",
+          "lines": [
+            {
+              "id": "ch5_the_archive_pip_1",
+              "speaker": "narrator",
+              "text": "Pip stands in front of the desk. Oswin looks at her for the first time, and his pen stops.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_the_archive_pip_2",
+              "speaker": "pip_ashdown",
+              "text": "You were nearly done. It was quiet. And then a hand came over your shoulder, cold, and pulled yours back.",
+              "mood": "idle",
+              "direction": "suddenly old and slow, Oswin's cadence, not a child's"
+            },
+            {
+              "id": "ch5_the_archive_pip_3",
+              "speaker": "oswin_hale",
+              "text": "Yes. That is exactly how it was. Child, how do you have that?",
+              "mood": "surprised",
+              "direction": "barely audible"
+            },
+            {
+              "id": "ch5_the_archive_pip_4",
+              "speaker": "pip_ashdown",
+              "text": "The fire gave it to me. I think it gave me lots of you. I'm sorry. I didn't ask for it.",
+              "mood": "sad",
+              "direction": "a child again"
+            },
+            {
+              "id": "ch5_the_archive_pip_5",
+              "speaker": "oswin_hale",
+              "text": "No. Nobody asked. That has always been the trouble with it.",
+              "mood": "sad",
+              "direction": "a long silence, then softer than he has been in a century"
+            },
+            {
+              "id": "ch5_the_archive_pip_6",
+              "speaker": "oswin_hale",
+              "text": "Whose hand. Did you see?",
+              "mood": "angry",
+              "direction": "cold again, very quiet"
+            },
+            {
+              "id": "ch5_the_archive_pip_7",
+              "speaker": "pip_ashdown",
+              "text": "A hood. That's all. A hood, and a voice that said, not like this.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_the_archive_pip_8",
+              "speaker": "narrator",
+              "text": "Somewhere among the shelves, in a shadow the red light doesn't reach, someone sighs.",
+              "mood": "surprised"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_the_stranger",
+      "beat": "ch5_the_stranger",
+      "title": "The Stranger's Errand",
+      "cast": [
+        "narrator",
+        "hooded_stranger",
+        "oswin_hale"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_the_stranger_open_1",
+              "speaker": "narrator",
+              "text": "The Hooded Stranger steps out from between the shelves, as if they had always been there. Perhaps they had.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_the_stranger_open_2",
+              "speaker": "hooded_stranger",
+              "text": "Not like this. Yes, I did say that. I'm surprised anyone kept it.",
+              "mood": "sad",
+              "direction": "quiet, faintly amused, faintly sad"
+            },
+            {
+              "id": "ch5_the_stranger_open_3",
+              "speaker": "oswin_hale",
+              "text": "You.",
+              "mood": "angry",
+              "direction": "almost nothing, a breath"
+            },
+            {
+              "id": "ch5_the_stranger_open_4",
+              "speaker": "hooded_stranger",
+              "text": "Me. A hundred years ago I stopped your hand. You were about to put it out, and a fire that has gone out can never go home.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_the_stranger_open_5",
+              "speaker": "hooded_stranger",
+              "text": "I want it carried back over the Greywall, to where it was taken from. That's all I have ever wanted. Everything else was waiting.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_the_stranger_open_6",
+              "speaker": "oswin_hale",
+              "text": "The Keep fell. The Vale burned in five places. Children died in the Sunscar. You did that, so a fire could go home?",
+              "mood": "angry",
+              "direction": "cold fury, very quiet"
+            },
+            {
+              "id": "ch5_the_stranger_open_7",
+              "speaker": "hooded_stranger",
+              "text": "I did that. I didn't know it would shatter. I'm not asking you to forgive it. I'm asking what happens next.",
+              "mood": "sad"
+            }
+          ],
+          "sets": [
+            "ch5_stranger_goal"
+          ],
+          "next": "more"
+        },
+        {
+          "id": "more",
+          "lines": [
+            {
+              "id": "ch5_the_stranger_more_1",
+              "speaker": "hooded_stranger",
+              "text": "Ask what you like. I'll answer what I can.",
+              "mood": "idle"
+            }
+          ],
+          "options": [
+            {
+              "id": "who",
+              "label": "Who are you?",
+              "to": "who"
+            },
+            {
+              "id": "market",
+              "label": "Your people supply the Ash Market. The shards that burn the wrong colour.",
+              "to": "market",
+              "tags": {
+                "background": [
+                  "criminal"
+                ]
+              }
+            },
+            {
+              "id": "home",
+              "label": "You knew me the moment you saw me. You know where I'm from.",
+              "to": "home",
+              "tags": {
+                "background": [
+                  "outlander"
+                ]
+              }
+            },
+            {
+              "id": "kin",
+              "label": "My people came into the Vale looking for this fire. Is it theirs?",
+              "to": "kin",
+              "tags": {
+                "race": [
+                  "dragonborn"
+                ]
+              }
+            },
+            {
+              "id": "pip",
+              "label": "You visit Pip at night and ask her what she remembers. Why?",
+              "to": "pip",
+              "tags": {
+                "background": [
+                  "urchin"
+                ]
+              }
+            },
+            {
+              "id": "done",
+              "label": "Enough. We have embers to carry.",
+              "to": "close"
+            }
+          ]
+        },
+        {
+          "id": "who",
+          "lines": [
+            {
+              "id": "ch5_the_stranger_who_1",
+              "speaker": "hooded_stranger",
+              "text": "Someone who was here before, and will be here after. That isn't an answer. I know. It's the one I'm allowed to give.",
+              "mood": "happy",
+              "direction": "amused"
+            },
+            {
+              "id": "ch5_the_stranger_who_2",
+              "speaker": "hooded_stranger",
+              "text": "You're asking the right questions. You're only asking them a little early.",
+              "mood": "sad"
+            }
+          ],
+          "next": "more"
+        },
+        {
+          "id": "market",
+          "lines": [
+            {
+              "id": "ch5_the_stranger_market_1",
+              "speaker": "hooded_stranger",
+              "text": "You noticed the colour. Good. Those shards came a long way, and they don't eat. Sell that to whoever you like. Most won't believe you.",
+              "mood": "idle"
+            }
+          ],
+          "next": "more"
+        },
+        {
+          "id": "home",
+          "lines": [
+            {
+              "id": "ch5_the_stranger_home_1",
+              "speaker": "hooded_stranger",
+              "text": "I knew you. You stand in a doorway the way your people do. If the fire goes home, so can you.",
+              "mood": "sad"
+            }
+          ],
+          "next": "more"
+        },
+        {
+          "id": "kin",
+          "lines": [
+            {
+              "id": "ch5_the_stranger_kin_1",
+              "speaker": "hooded_stranger",
+              "text": "That is nearly the right question. Not quite. Ask me again one day, on the other side of the wall.",
+              "mood": "happy",
+              "direction": "a long pause, almost pleased"
+            }
+          ],
+          "next": "more"
+        },
+        {
+          "id": "pip",
+          "lines": [
+            {
+              "id": "ch5_the_stranger_pip_1",
+              "speaker": "hooded_stranger",
+              "text": "Because she carries the night I'm most ashamed of, and I wanted to know if it hurt her. It does. I'm sorry for that, too.",
+              "mood": "sad"
+            }
+          ],
+          "next": "more"
+        },
+        {
+          "id": "close",
+          "lines": [
+            {
+              "id": "ch5_the_stranger_close_1",
+              "speaker": "narrator",
+              "text": "Far below, the whole tower shudders. The red light in the window flares, and somewhere beneath the Keep something enormous breathes in.",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch5_the_stranger_close_2",
+              "speaker": "oswin_hale",
+              "text": "The Kindled. Sorrel is in the flame hall. She is feeding it.",
+              "mood": "angry"
+            },
+            {
+              "id": "ch5_the_stranger_close_3",
+              "speaker": "hooded_stranger",
+              "text": "Then we can finish arguing afterwards. I'll stand with you for this part, at least.",
+              "mood": "idle"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_ritual_lead",
+      "beat": "ch5_the_ritual",
+      "title": "The Hall of the Flame",
+      "cast": [
+        "narrator",
+        "maren_sorrel"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_ritual_lead_open_1",
+              "speaker": "narrator",
+              "text": "The Hall of the Flame is vast and round, its walls leaning inward like hands cupped around a candle. At its heart the flame burns red.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_ritual_lead_open_2",
+              "speaker": "narrator",
+              "text": "Coiled around it, scales like banked coals, sleeps a red dragon. Every breath it takes stirs the ash across the floor.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_ritual_lead_open_3",
+              "speaker": "narrator",
+              "text": "Before the flame stands Maren Sorrel. Behind her a line of the Kindled faithful wait in their best clothes, holding hands.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_ritual_lead_open_4",
+              "speaker": "maren_sorrel",
+              "text": "You came. I hoped you would. You've carried the embers further than I ever could. Now help me finish it.",
+              "mood": "idle",
+              "direction": "warm, quiet, a preacher's rhythm"
+            }
+          ],
+          "options": [
+            {
+              "id": "ivo_h",
+              "label": "Ivo isn't coming. He's done with you.",
+              "to": "ivo_h",
+              "requires": [
+                "ch4_ivo_helped"
+              ]
+            },
+            {
+              "id": "ivo_s",
+              "label": "We have Ivo's notes. He isn't coming.",
+              "to": "ivo_s",
+              "requires": [
+                "ch4_ivo_stopped"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ivo_h",
+          "lines": [
+            {
+              "id": "ch5_ritual_lead_ivo_h_1",
+              "speaker": "maren_sorrel",
+              "text": "I know. He wrote to me. He said he'd had his minute, and it was enough. I'm glad for him, truly. Not everyone gets a minute.",
+              "mood": "sad"
+            }
+          ],
+          "next": "plea"
+        },
+        {
+          "id": "ivo_s",
+          "lines": [
+            {
+              "id": "ch5_ritual_lead_ivo_s_1",
+              "speaker": "maren_sorrel",
+              "text": "I know. You left him sitting with a dead woman in the cold. I'm not the only one here who weighs lives, am I?",
+              "mood": "hurt"
+            }
+          ],
+          "next": "plea"
+        },
+        {
+          "id": "plea",
+          "lines": [
+            {
+              "id": "ch5_ritual_lead_plea_1",
+              "speaker": "maren_sorrel",
+              "text": "Every one of these people chose this. Eleven lives, and the flame burns again, and ten thousand children are warm this winter.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_ritual_lead_plea_2",
+              "speaker": "maren_sorrel",
+              "text": "I remember the Hearth Age. Hundreds of lives of it. Warm kitchens, full granaries. I owe it to every one of them to bring it back.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_ritual_lead_plea_3",
+              "speaker": "maren_sorrel",
+              "text": "My mother's kitchen had blue tiles. Or that was someone else's mother. It doesn't matter. Someone's mother had blue tiles.",
+              "mood": "surprised",
+              "direction": "losing the thread for a moment, then finding it"
+            }
+          ],
+          "options": [
+            {
+              "id": "faithful",
+              "label": "Talk to the faithful, not to her. Get them out of the line.",
+              "check": {
+                "skill": "persuasion",
+                "dc": 18,
+                "pass": "pass",
+                "fail": "fail"
+              }
+            },
+            {
+              "id": "cage",
+              "label": "This hall isn't a hearth, Maren. It's a cage. I've seen the plans.",
+              "to": "cage",
+              "tags": {
+                "background": [
+                  "guild_artisan"
+                ]
+              }
+            },
+            {
+              "id": "no",
+              "label": "We won't let you feed it, Maren.",
+              "to": "no"
+            }
+          ]
+        },
+        {
+          "id": "pass",
+          "lines": [
+            {
+              "id": "ch5_ritual_lead_pass_1",
+              "speaker": "narrator",
+              "text": "You speak to the woman at the end of the line, who is shaking, and to the boy beside her. One by one, hands let go.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_ritual_lead_pass_2",
+              "speaker": "maren_sorrel",
+              "text": "No. Please. Don't listen to them. You'll be cold. Your children will be cold.",
+              "mood": "hurt"
+            },
+            {
+              "id": "ch5_ritual_lead_pass_3",
+              "speaker": "narrator",
+              "text": "So Maren goes herself. She plunges both hands into the heart of the flame, and the red light roars up the walls.",
+              "mood": "surprised"
+            }
+          ],
+          "next": "wake"
+        },
+        {
+          "id": "fail",
+          "lines": [
+            {
+              "id": "ch5_ritual_lead_fail_1",
+              "speaker": "narrator",
+              "text": "They don't hear you. They hear Maren, and the cold, and their children. The first of them steps forward into the light, and is gone.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_ritual_lead_fail_2",
+              "speaker": "narrator",
+              "text": "The flame roars up the walls, red as a wound.",
+              "mood": "angry"
+            }
+          ],
+          "next": "wake"
+        },
+        {
+          "id": "cage",
+          "lines": [
+            {
+              "id": "ch5_ritual_lead_cage_1",
+              "speaker": "narrator",
+              "text": "Maren hesitates for a breath. You can see the joints in the walls now, all leaning in. The lock is in the floor, under the dragon.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_ritual_lead_cage_2",
+              "speaker": "maren_sorrel",
+              "text": "A cage keeps things in. That's all I want. Warmth, kept in, for us.",
+              "mood": "sad"
+            }
+          ],
+          "next": "no"
+        },
+        {
+          "id": "no",
+          "lines": [
+            {
+              "id": "ch5_ritual_lead_no_1",
+              "speaker": "maren_sorrel",
+              "text": "Then I'm sorry. I'll remember you. I remember everyone.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_ritual_lead_no_2",
+              "speaker": "narrator",
+              "text": "She lifts her hand. The first of the faithful steps forward into the light, and is gone, and the flame roars up the walls.",
+              "mood": "sad"
+            }
+          ],
+          "next": "wake"
+        },
+        {
+          "id": "wake",
+          "lines": [
+            {
+              "id": "ch5_ritual_lead_wake_1",
+              "speaker": "narrator",
+              "text": "Around the flame, the dragon opens one eye. It is the colour of the fire, and it has waited a century to be warm enough to wake.",
+              "mood": "surprised"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_ritual_after",
+      "beat": "ch5_the_ritual",
+      "title": "The Heart of the Flame",
+      "cast": [
+        "narrator",
+        "maren_sorrel"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_ritual_after_open_1",
+              "speaker": "narrator",
+              "text": "The dragon lies still at last, a hill of cooling coal across the floor. The circle is broken. The faithful who are left weep in the ash.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_ritual_after_open_2",
+              "speaker": "narrator",
+              "text": "The heart of the flame burns low and gold, like a hearth at the end of an evening. The red is going out of it.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_ritual_after_open_3",
+              "speaker": "narrator",
+              "text": "Maren Sorrel sits on the steps before it, her hands blackened, looking at them as if they belonged to someone else.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_ritual_after_open_4",
+              "speaker": "maren_sorrel",
+              "text": "I can't find my name. I know hundreds of names. Which one was mine?",
+              "mood": "sad",
+              "direction": "lost, not pleading"
+            }
+          ],
+          "sets": [
+            "ch5_ritual_broken"
+          ],
+          "options": [
+            {
+              "id": "name",
+              "label": "You're Maren Sorrel. You preached in the hungry towns.",
+              "to": "name"
+            },
+            {
+              "id": "tend",
+              "label": "Let me see to her hands.",
+              "check": {
+                "skill": "medicine",
+                "dc": 13,
+                "pass": "tend_pass",
+                "fail": "tend_fail"
+              }
+            },
+            {
+              "id": "leave",
+              "label": "Leave her. The embers are waiting.",
+              "to": "leave"
+            }
+          ]
+        },
+        {
+          "id": "name",
+          "lines": [
+            {
+              "id": "ch5_ritual_after_name_1",
+              "speaker": "maren_sorrel",
+              "text": "Maren. That's a good name. I think I would have liked her. Did she do much harm?",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_ritual_after_name_2",
+              "speaker": "narrator",
+              "text": "Nobody answers. She nods, as if someone had.",
+              "mood": "sad"
+            }
+          ],
+          "next": "embers"
+        },
+        {
+          "id": "tend_pass",
+          "lines": [
+            {
+              "id": "ch5_ritual_after_tend_pass_1",
+              "speaker": "narrator",
+              "text": "You clean and bind her hands. She watches, curious, like a child being shown something. The burns will heal. The rest will not.",
+              "mood": "idle"
+            }
+          ],
+          "next": "embers"
+        },
+        {
+          "id": "tend_fail",
+          "lines": [
+            {
+              "id": "ch5_ritual_after_tend_fail_1",
+              "speaker": "narrator",
+              "text": "Her hands are past what you can do. Without a word, Oswin tears a strip from his own robe and binds them for her.",
+              "mood": "sad"
+            }
+          ],
+          "next": "embers"
+        },
+        {
+          "id": "leave",
+          "lines": [
+            {
+              "id": "ch5_ritual_after_leave_1",
+              "speaker": "narrator",
+              "text": "You leave her on the steps. One of the faithful sits down beside her and holds her shoulder, and she lets him.",
+              "mood": "sad"
+            }
+          ],
+          "next": "embers"
+        },
+        {
+          "id": "embers",
+          "lines": [
+            {
+              "id": "ch5_ritual_after_embers_1",
+              "speaker": "narrator",
+              "text": "You set down the embers you have carried across the Vale. One by one they flare and lean towards the heart, like people finding each other in a crowd.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_ritual_after_embers_2",
+              "speaker": "narrator",
+              "text": "For the first time in a hundred years the Hearthflame is nearly whole. Now someone has to decide what it is for.",
+              "mood": "idle"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_court_favour",
+      "beat": "ch5_the_last_vote",
+      "title": "The Court Pays Its Debts",
+      "requires": [
+        "ch2_ember_left"
+      ],
+      "cast": [
+        "narrator",
+        "ysolde"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_court_favour_open_1",
+              "speaker": "narrator",
+              "text": "Before anyone can speak, the air in the hall turns green and gold and smells of marsh water. Someone has come a very long way.",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch5_court_favour_open_2",
+              "speaker": "ysolde",
+              "text": "Little flames. The Court owes you a favour, and the Court pays its debts.",
+              "mood": "idle",
+              "direction": "soft and unhurried; a pause before 'little flames', as if tasting it"
+            },
+            {
+              "id": "ch5_court_favour_open_3",
+              "speaker": "narrator",
+              "text": "In her cupped hands she carries the Mirewood ember. Already the edges of her are thinning, like mist in the morning.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_court_favour_open_4",
+              "speaker": "ysolde",
+              "text": "Without it, I will stop. I find I would like to see how this ends first. That is a very mortal wish. You taught it to me.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_court_favour_open_5",
+              "speaker": "narrator",
+              "text": "She sets it down with the others, and stays, faint and bright, to watch.",
+              "mood": "sad"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_last_vote",
+      "beat": "ch5_the_last_vote",
+      "title": "The Last Vote",
+      "cast": [
+        "narrator",
+        "oswin_hale",
+        "hooded_stranger",
+        "maren_sorrel",
+        "pip_ashdown"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_last_vote_open_1",
+              "speaker": "narrator",
+              "text": "The embers burn together in the Hall of the Flame. The heat of them is like a summer you only half remember.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_last_vote_open_2",
+              "speaker": "oswin_hale",
+              "text": "I made this choice once, for everyone, alone. I was wrong to make it alone. So. This time it is yours.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_last_vote_open_3",
+              "speaker": "oswin_hale",
+              "text": "Put it out, and the Vale is cold, and it remembers. I will finish what I began, and go with it. I find I would like that.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_last_vote_open_4",
+              "speaker": "hooded_stranger",
+              "text": "Or carry it home, over the Greywall, where it was taken from. I'll walk with you. The Vale will be cold, and it will remember too.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_last_vote_open_5",
+              "speaker": "maren_sorrel",
+              "text": "Or light it. Let them be warm. Let them forget a little. Is a memory worth more than a child who isn't hungry?",
+              "mood": "sad",
+              "direction": "half lost, but the conviction still there"
+            },
+            {
+              "id": "ch5_last_vote_open_6",
+              "speaker": "pip_ashdown",
+              "text": "Whatever you pick, I'll still have him in here, and all the others. So you don't have to pick for me.",
+              "mood": "idle"
+            }
+          ],
+          "next": "weigh"
+        },
+        {
+          "id": "weigh",
+          "lines": [
+            {
+              "id": "ch5_last_vote_weigh_1",
+              "speaker": "narrator",
+              "text": "The flame waits. It has waited four hundred years to be asked.",
+              "mood": "idle"
+            }
+          ],
+          "options": [
+            {
+              "id": "pip",
+              "label": "Pip, what do you want?",
+              "to": "pip_want"
+            },
+            {
+              "id": "town",
+              "label": "I'll speak for Emberwick. They would want to be warm, and to know the price.",
+              "to": "town",
+              "tags": {
+                "background": [
+                  "folk_hero"
+                ]
+              }
+            },
+            {
+              "id": "lock",
+              "label": "If we carry it, I can open the cage without breaking what's inside.",
+              "to": "lock",
+              "tags": {
+                "background": [
+                  "guild_artisan"
+                ]
+              }
+            },
+            {
+              "id": "home",
+              "label": "If we take it home, I'm going home too.",
+              "to": "home",
+              "tags": {
+                "background": [
+                  "outlander"
+                ]
+              }
+            },
+            {
+              "id": "ready",
+              "label": "We're ready to vote.",
+              "to": "vote"
+            }
+          ]
+        },
+        {
+          "id": "pip_want",
+          "lines": [
+            {
+              "id": "ch5_last_vote_pip_want_1",
+              "speaker": "pip_ashdown",
+              "text": "I want Bree to remember her husband. I want the goblin children to eat. I want it to stop eating people. I don't know which one that is.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_last_vote_pip_want_2",
+              "speaker": "pip_ashdown",
+              "text": "I don't think grown-ups know either. You just have to pick, and be sorry properly.",
+              "mood": "idle"
+            }
+          ],
+          "next": "weigh"
+        },
+        {
+          "id": "town",
+          "lines": [
+            {
+              "id": "ch5_last_vote_town_1",
+              "speaker": "narrator",
+              "text": "You speak for the town that sent you: Bree's hearth, Tobin's forge, the cooling fields. The hall listens as if Emberwick itself were here.",
+              "mood": "idle"
+            }
+          ],
+          "next": "weigh"
+        },
+        {
+          "id": "lock",
+          "lines": [
+            {
+              "id": "ch5_last_vote_lock_1",
+              "speaker": "narrator",
+              "text": "You trace the lock in the floor with your hands. Built to hold, never to open. But the masons who built it left their key in the stone.",
+              "mood": "idle"
+            }
+          ],
+          "next": "weigh"
+        },
+        {
+          "id": "home",
+          "lines": [
+            {
+              "id": "ch5_last_vote_home_1",
+              "speaker": "hooded_stranger",
+              "text": "Yes. I won't pretend it's a warm welcome waiting for you. But it is home.",
+              "mood": "sad"
+            }
+          ],
+          "next": "weigh"
+        },
+        {
+          "id": "vote",
+          "lines": [
+            {
+              "id": "ch5_last_vote_vote_1",
+              "speaker": "narrator",
+              "text": "Every hand in the party moves at once. Whatever you choose, the Vale will live with it.",
+              "mood": "idle"
+            }
+          ],
+          "vote": true,
+          "options": [
+            {
+              "id": "rekindle",
+              "label": "Rekindle it.",
+              "to": "rekindle",
+              "choice": "ch5_choose_rekindle"
+            },
+            {
+              "id": "return",
+              "label": "Return it over the Greywall.",
+              "to": "return",
+              "choice": "ch5_choose_return"
+            },
+            {
+              "id": "extinguish",
+              "label": "Let it die.",
+              "to": "extinguish",
+              "choice": "ch5_choose_extinguish"
+            }
+          ]
+        },
+        {
+          "id": "rekindle",
+          "lines": [
+            {
+              "id": "ch5_last_vote_rekindle_1",
+              "speaker": "narrator",
+              "text": "You push the embers together. The Hearthflame catches, roars, and settles into a gold so bright it hurts to look at.",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch5_last_vote_rekindle_2",
+              "speaker": "oswin_hale",
+              "text": "Then I will keep it. I have never touched it. Someone in the Vale ought to remember what it costs.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_last_vote_rekindle_3",
+              "speaker": "hooded_stranger",
+              "text": "So it burns again. Someone will notice. I'll be waiting when they do.",
+              "mood": "idle"
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "return",
+          "lines": [
+            {
+              "id": "ch5_last_vote_return_1",
+              "speaker": "narrator",
+              "text": "You lift the Hearthflame from its cage. It is lighter than you feared, and it leans towards the mountains, like a dog that knows the way home.",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch5_last_vote_return_2",
+              "speaker": "hooded_stranger",
+              "text": "Thank you. I have waited a long time to say that to someone.",
+              "mood": "happy",
+              "direction": "for once, plainly glad"
+            },
+            {
+              "id": "ch5_last_vote_return_3",
+              "speaker": "oswin_hale",
+              "text": "Go, then. I will open the Archive. If the Vale is going to remember, it will want something to read.",
+              "mood": "idle"
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "extinguish",
+          "lines": [
+            {
+              "id": "ch5_last_vote_extinguish_1",
+              "speaker": "oswin_hale",
+              "text": "Thank you. Stand back. I know how this goes now. I have had a century to practise it in my head.",
+              "mood": "happy",
+              "direction": "the warmth breaks through, and this time he lets it"
+            },
+            {
+              "id": "ch5_last_vote_extinguish_2",
+              "speaker": "narrator",
+              "text": "He lays his hands on the flame, the hands that never touched it, and it goes down like a lamp. Nobody stops him.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_last_vote_extinguish_3",
+              "speaker": "hooded_stranger",
+              "text": "Then it can never go home. I hope you were right. I do hope you were.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_last_vote_extinguish_4",
+              "speaker": "narrator",
+              "text": "The last ember gutters and goes out. Oswin Hale, Warden-Keeper, goes out with it, and the hall is dark, and cold, and very quiet.",
+              "mood": "sad"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epilogue_rekindled",
+      "beat": "ch5_the_last_vote",
+      "title": "The Hearth Rekindled",
+      "requires": [
+        "ending_rekindled"
+      ],
+      "cast": [
+        "narrator",
+        "bree_tallow"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epilogue_rekindled_open_1",
+              "speaker": "narrator",
+              "text": "That winter the fields of the Vale grow warm again. The frost lifts from the Ashen Ford, and Emberwick's granaries are full by midwinter.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_epilogue_rekindled_open_2",
+              "speaker": "narrator",
+              "text": "Hearths are lit from the Keep's new fire. Lamps glow in every window. And slowly, so slowly that nobody notices, the Vale begins to forget.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_epilogue_rekindled_open_3",
+              "speaker": "bree_tallow",
+              "text": "Sit. Eat. Warmest winter of my life, and I've the soup to prove it.",
+              "mood": "happy",
+              "direction": "brisk, cheerful, working as she talks"
+            },
+            {
+              "id": "ch5_epilogue_rekindled_open_4",
+              "speaker": "bree_tallow",
+              "text": "I'm still writing him down, every night. Some nights I read it back and I don't know who it's about.",
+              "mood": "sad",
+              "direction": "softening without slowing down"
+            }
+          ],
+          "options": [
+            {
+              "id": "tell",
+              "label": "We'll tell the Vale what the fire costs.",
+              "to": "tell"
+            },
+            {
+              "id": "keep",
+              "label": "We'll keep the secret. Let them be warm.",
+              "to": "keep"
+            },
+            {
+              "id": "write",
+              "label": "I'll write it all down, where the fire can't reach it.",
+              "to": "write",
+              "tags": {
+                "background": [
+                  "sage"
+                ]
+              }
+            },
+            {
+              "id": "aubrine",
+              "label": "I'll tell Mother Aubrine what her oldest scripture says.",
+              "to": "aubrine",
+              "tags": {
+                "background": [
+                  "acolyte"
+                ]
+              }
+            },
+            {
+              "id": "marrowby",
+              "label": "I'll tell Emberwick where the Marrowby fortune came from.",
+              "to": "marrowby",
+              "tags": {
+                "background": [
+                  "noble"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "tell",
+          "lines": [
+            {
+              "id": "ch5_epilogue_rekindled_tell_1",
+              "speaker": "narrator",
+              "text": "You tell them. Some believe you. Some light their lamps anyway, and say a warm child is worth a forgotten song. Perhaps they're right.",
+              "mood": "idle"
+            }
+          ],
+          "next": "keeper"
+        },
+        {
+          "id": "keep",
+          "lines": [
+            {
+              "id": "ch5_epilogue_rekindled_keep_1",
+              "speaker": "narrator",
+              "text": "You keep the secret, as the Wardens did. It sits in you like a coal. Every time someone lights a lamp, you know what it is eating.",
+              "mood": "sad"
+            }
+          ],
+          "next": "keeper"
+        },
+        {
+          "id": "write",
+          "lines": [
+            {
+              "id": "ch5_epilogue_rekindled_write_1",
+              "speaker": "narrator",
+              "text": "You write it in ink, by candle, never by ember-light. Corvin reads every page and copies it twice. It will outlast you both.",
+              "mood": "idle"
+            }
+          ],
+          "next": "keeper"
+        },
+        {
+          "id": "aubrine",
+          "lines": [
+            {
+              "id": "ch5_epilogue_rekindled_aubrine_1",
+              "speaker": "narrator",
+              "text": "Mother Aubrine listens without a word. Next morning she preaches a sermon about debts, and the chapel has never been so quiet.",
+              "mood": "idle"
+            }
+          ],
+          "next": "keeper"
+        },
+        {
+          "id": "marrowby",
+          "lines": [
+            {
+              "id": "ch5_epilogue_rekindled_marrowby_1",
+              "speaker": "narrator",
+              "text": "Lady Celandine hears it out with a smile, under a hundred ember-lamps. By the end of the week she no longer remembers you told her.",
+              "mood": "idle"
+            }
+          ],
+          "next": "keeper"
+        },
+        {
+          "id": "keeper",
+          "lines": [
+            {
+              "id": "ch5_epilogue_rekindled_keeper_1",
+              "speaker": "narrator",
+              "text": "Up in Ember Keep, a dead Keeper tends a living fire, and writes down everything the Vale forgets.",
+              "mood": "idle"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epilogue_returned",
+      "beat": "ch5_the_last_vote",
+      "title": "The Long Road Home",
+      "requires": [
+        "ending_returned"
+      ],
+      "cast": [
+        "narrator",
+        "bree_tallow",
+        "hooded_stranger"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epilogue_returned_open_1",
+              "speaker": "narrator",
+              "text": "You leave Ember Keep at dawn with the Hearthflame in a Warden's iron lantern, and the Hooded Stranger walking ahead towards the Greywall.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_epilogue_returned_open_2",
+              "speaker": "narrator",
+              "text": "Behind you the Vale goes cold. Frost on the Ashen Ford. The warm fields turn to ordinary mud. The hearth shards dim, one by one.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_epilogue_returned_open_3",
+              "speaker": "bree_tallow",
+              "text": "He sang flat. He burned the bread. He laughed like a goose. I remember. I remember all of it.",
+              "mood": "surprised",
+              "direction": "stopping mid-task, for once"
+            },
+            {
+              "id": "ch5_epilogue_returned_open_4",
+              "speaker": "bree_tallow",
+              "text": "Go on, then. Go and give it back. I'll burn wood. We managed before the fire, and we'll manage after it.",
+              "mood": "happy"
+            }
+          ],
+          "options": [
+            {
+              "id": "carry",
+              "label": "I'll carry the lantern. Nobody sees what a river hand doesn't want seen.",
+              "to": "carry",
+              "tags": {
+                "background": [
+                  "sailor"
+                ]
+              }
+            },
+            {
+              "id": "going",
+              "label": "I'm going home. I don't know yet what that means.",
+              "to": "going",
+              "tags": {
+                "background": [
+                  "outlander"
+                ]
+              }
+            },
+            {
+              "id": "marrowby",
+              "label": "Before we go, I'll tell Emberwick where the Marrowby fortune came from.",
+              "to": "marrowby",
+              "tags": {
+                "background": [
+                  "noble"
+                ]
+              }
+            },
+            {
+              "id": "back",
+              "label": "We'll come back, if we can.",
+              "to": "back"
+            }
+          ]
+        },
+        {
+          "id": "carry",
+          "lines": [
+            {
+              "id": "ch5_epilogue_returned_carry_1",
+              "speaker": "narrator",
+              "text": "You wrap the lantern in oilcloth and carry it the way you carried cargo past the Ash Market's lanterns. No one on the road ever knows what passed them.",
+              "mood": "idle"
+            }
+          ],
+          "next": "wall"
+        },
+        {
+          "id": "going",
+          "lines": [
+            {
+              "id": "ch5_epilogue_returned_going_1",
+              "speaker": "narrator",
+              "text": "The fire in the lantern leans towards the mountains, and so, you realise, do you. You have always been walking this way.",
+              "mood": "idle"
+            }
+          ],
+          "next": "wall"
+        },
+        {
+          "id": "marrowby",
+          "lines": [
+            {
+              "id": "ch5_epilogue_returned_marrowby_1",
+              "speaker": "narrator",
+              "text": "You tell them. In her cold hall Lady Celandine hears it, and for the first time in a hundred years she remembers the night she ran.",
+              "mood": "surprised"
+            }
+          ],
+          "next": "wall"
+        },
+        {
+          "id": "back",
+          "lines": [
+            {
+              "id": "ch5_epilogue_returned_back_1",
+              "speaker": "narrator",
+              "text": "Nobody has crossed the Greywall and come back. Then again, nobody has ever carried the fire home before.",
+              "mood": "idle"
+            }
+          ],
+          "next": "wall"
+        },
+        {
+          "id": "wall",
+          "lines": [
+            {
+              "id": "ch5_epilogue_returned_wall_1",
+              "speaker": "narrator",
+              "text": "At the foot of the Greywall the Stranger stops, and looks back at the Vale, and for a moment seems almost young.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_epilogue_returned_wall_2",
+              "speaker": "hooded_stranger",
+              "text": "Last chance to turn back. No? Good. I would have missed the company.",
+              "mood": "happy"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epilogue_extinguished",
+      "beat": "ch5_the_last_vote",
+      "title": "The Last Ember",
+      "requires": [
+        "ending_extinguished"
+      ],
+      "cast": [
+        "narrator",
+        "bree_tallow",
+        "pip_ashdown"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epilogue_extinguished_open_1",
+              "speaker": "narrator",
+              "text": "The first true winter in four hundred years comes down on the Vale. The warm fields freeze. The ford stops steaming.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_epilogue_extinguished_open_2",
+              "speaker": "narrator",
+              "text": "And all across the Vale, people wake in the night with things they had lost: a song, a face, the way home.",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch5_epilogue_extinguished_open_3",
+              "speaker": "bree_tallow",
+              "text": "He sang flat. Did I ever tell you? Flat as a griddle, and he burned the bread, and I loved him. I remember now.",
+              "mood": "surprised",
+              "direction": "stopping mid-task, for once"
+            },
+            {
+              "id": "ch5_epilogue_extinguished_open_4",
+              "speaker": "bree_tallow",
+              "text": "Sit. Eat. It's going to be a long winter, and we'll need everyone's hands for it.",
+              "mood": "idle"
+            }
+          ],
+          "options": [
+            {
+              "id": "corvin",
+              "label": "I'll go up to the Archive with Corvin. Someone has to write it down.",
+              "to": "corvin",
+              "tags": {
+                "background": [
+                  "sage"
+                ]
+              }
+            },
+            {
+              "id": "aubrine",
+              "label": "I'll tell Mother Aubrine. Her flock needs her more than ever.",
+              "to": "aubrine",
+              "tags": {
+                "background": [
+                  "acolyte"
+                ]
+              }
+            },
+            {
+              "id": "watch",
+              "label": "I'll stand the ford watch with Dagna again.",
+              "to": "watch",
+              "tags": {
+                "background": [
+                  "soldier"
+                ]
+              }
+            },
+            {
+              "id": "help",
+              "label": "We'll help Emberwick through the winter.",
+              "to": "help"
+            }
+          ]
+        },
+        {
+          "id": "corvin",
+          "lines": [
+            {
+              "id": "ch5_epilogue_extinguished_corvin_1",
+              "speaker": "narrator",
+              "text": "You and Corvin read for weeks by candle. Halfway along the third shelf he laughs out loud. Forty-one missing years, and here they all are.",
+              "mood": "happy"
+            }
+          ],
+          "next": "pip"
+        },
+        {
+          "id": "aubrine",
+          "lines": [
+            {
+              "id": "ch5_epilogue_extinguished_aubrine_1",
+              "speaker": "narrator",
+              "text": "Mother Aubrine reads the old scripture once, closes it, and opens her chapel to everyone who is cold. Her faith was in the people, then.",
+              "mood": "idle"
+            }
+          ],
+          "next": "pip"
+        },
+        {
+          "id": "watch",
+          "lines": [
+            {
+              "id": "ch5_epilogue_extinguished_watch_1",
+              "speaker": "narrator",
+              "text": "You and Dagna walk the frozen bridge at night, two lanterns and no fire. For the first time since the goblins came, she sleeps through till morning.",
+              "mood": "idle"
+            }
+          ],
+          "next": "pip"
+        },
+        {
+          "id": "help",
+          "lines": [
+            {
+              "id": "ch5_epilogue_extinguished_help_1",
+              "speaker": "narrator",
+              "text": "You chop wood, mend roofs and carry grain. It isn't heroic. It is the work that keeps people alive once the fire is gone.",
+              "mood": "idle"
+            }
+          ],
+          "next": "pip"
+        },
+        {
+          "id": "pip",
+          "lines": [
+            {
+              "id": "ch5_epilogue_extinguished_pip_1",
+              "speaker": "pip_ashdown",
+              "text": "He's still in here. Oswin. He isn't tired any more. I think I'll keep him. Somebody should.",
+              "mood": "idle",
+              "direction": "suddenly old and slow, Oswin's cadence, not a child's, then her own voice again"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_clan_spared_rekindled",
+      "beat": "ch5_the_last_vote",
+      "title": "The Hills",
+      "requires": [
+        "ending_rekindled",
+        "ch1_skarrow_spared"
+      ],
+      "cast": [
+        "narrator",
+        "mother_skarrow"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epi_clan_spared_rekindled_open_1",
+              "speaker": "narrator",
+              "text": "In the Skarrow hills the clan eats well that winter, on Emberwick's grain and the warm valley's harvest.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_epi_clan_spared_rekindled_open_2",
+              "speaker": "mother_skarrow",
+              "text": "Warm again. Good for the children. But watch. In ten winters you valley folk will forget you owe us grain.",
+              "mood": "happy",
+              "direction": "cracked and dry, slow valley tongue"
+            },
+            {
+              "id": "ch5_epi_clan_spared_rekindled_open_3",
+              "speaker": "mother_skarrow",
+              "text": "We never used your fire, so we will remember for you. Somebody has to sing it.",
+              "mood": "idle"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_clan_slain_rekindled",
+      "beat": "ch5_the_last_vote",
+      "title": "The Hills",
+      "requires": [
+        "ending_rekindled",
+        "ch1_skarrow_slain"
+      ],
+      "cast": [
+        "narrator",
+        "dagna_holt"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epi_clan_slain_rekindled_open_1",
+              "speaker": "narrator",
+              "text": "The Skarrow clan never came back to the ford after their chief died on the bridge. The warm years didn't bring them down from the hills.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_epi_clan_slain_rekindled_open_2",
+              "speaker": "narrator",
+              "text": "Emberwick forgets them, slowly, the way it forgets everything now. The clan does not forget Emberwick.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_epi_clan_slain_rekindled_open_3",
+              "speaker": "dagna_holt",
+              "text": "The bridge is open. Nobody tolls it. I'd like to say it was worth it. Some days I can.",
+              "mood": "sad",
+              "direction": "low and flat"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_clan_spared_returned",
+      "beat": "ch5_the_last_vote",
+      "title": "The Hills",
+      "requires": [
+        "ending_returned",
+        "ch1_skarrow_spared"
+      ],
+      "cast": [
+        "narrator",
+        "mother_skarrow"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epi_clan_spared_returned_open_1",
+              "speaker": "narrator",
+              "text": "The cold comes down hard. Mother Skarrow brings her clan down to the ford, and Emberwick opens its granaries, because a deal is a deal.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_epi_clan_spared_returned_open_2",
+              "speaker": "mother_skarrow",
+              "text": "Cold again, like the old songs. Now you valley folk learn what we know. Sit. We will teach you how to winter.",
+              "mood": "happy"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_clan_slain_returned",
+      "beat": "ch5_the_last_vote",
+      "title": "The Hills",
+      "requires": [
+        "ending_returned",
+        "ch1_skarrow_slain"
+      ],
+      "cast": [
+        "narrator",
+        "dagna_holt"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epi_clan_slain_returned_open_1",
+              "speaker": "narrator",
+              "text": "With the cold, the hill clans come down hungry. The Skarrow come to the ford again, and this time nobody goes up the hill to talk.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_epi_clan_slain_returned_open_2",
+              "speaker": "dagna_holt",
+              "text": "They remember the bridge. So do I. That's the trouble with remembering. It works on both sides.",
+              "mood": "sad",
+              "direction": "low and flat"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_clan_spared_extinguished",
+      "beat": "ch5_the_last_vote",
+      "title": "The Hills",
+      "requires": [
+        "ending_extinguished",
+        "ch1_skarrow_spared"
+      ],
+      "cast": [
+        "narrator",
+        "mother_skarrow"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epi_clan_spared_extinguished_open_1",
+              "speaker": "narrator",
+              "text": "That first hard winter, the Skarrow clan and Emberwick share one granary, and argue over it, loudly, every single week.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_epi_clan_spared_extinguished_open_2",
+              "speaker": "mother_skarrow",
+              "text": "Neighbours. That is your word for people you shout at and still feed. Good. We will be neighbours.",
+              "mood": "happy"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_clan_slain_extinguished",
+      "beat": "ch5_the_last_vote",
+      "title": "The Hills",
+      "requires": [
+        "ending_extinguished",
+        "ch1_skarrow_slain"
+      ],
+      "cast": [
+        "narrator",
+        "halden_varrow"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epi_clan_slain_extinguished_open_1",
+              "speaker": "narrator",
+              "text": "The goblin clans come down out of the frozen hills with spears, and the Skarrow come first. They remember who killed their chief.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_epi_clan_slain_extinguished_open_2",
+              "speaker": "halden_varrow",
+              "text": "I'll go up and talk to them myself. I should have done it on the first day. I have to try, at least once.",
+              "mood": "sad",
+              "direction": "a man who has given too many speeches, giving none"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_vorga_spared_gran_spared",
+      "beat": "ch5_the_last_vote",
+      "title": "The Grandson",
+      "requires": [
+        "ch1_skarrow_spared",
+        "ch3_vorga_spared"
+      ],
+      "cast": [
+        "narrator",
+        "vorga"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epi_vorga_spared_gran_spared_open_1",
+              "speaker": "narrator",
+              "text": "Vorga goes home to his grandmother's fire. His Host breaks up into families again.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_epi_vorga_spared_gran_spared_open_2",
+              "speaker": "vorga",
+              "text": "She made me carry water for a month. A month! A warlord! Tell nobody you spared me. No. Tell everybody.",
+              "mood": "happy",
+              "direction": "loud, then oddly shy"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_vorga_spared_gran_slain",
+      "beat": "ch5_the_last_vote",
+      "title": "The Grandson",
+      "requires": [
+        "ch1_skarrow_slain",
+        "ch3_vorga_spared"
+      ],
+      "cast": [
+        "narrator",
+        "vorga"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epi_vorga_spared_gran_slain_open_1",
+              "speaker": "narrator",
+              "text": "Vorga goes home to a clan with no grandmother left in it. He leads them now. He remembers who spared him, and who did not.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_epi_vorga_spared_gran_slain_open_2",
+              "speaker": "vorga",
+              "text": "She would have bargained with you. So I will try. It tastes wrong in my mouth. I will try anyway.",
+              "mood": "idle",
+              "direction": "no swagger left, only the anger, held carefully"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_vorga_slain_gran_spared",
+      "beat": "ch5_the_last_vote",
+      "title": "The Grandson",
+      "requires": [
+        "ch1_skarrow_spared",
+        "ch3_vorga_slain"
+      ],
       "cast": [
         "narrator"
       ],
-      "start": "n",
+      "start": "open",
       "nodes": [
         {
-          "id": "n",
+          "id": "open",
           "lines": [
             {
-              "id": "ch5_stub_line",
+              "id": "ch5_epi_vorga_slain_gran_spared_open_1",
               "speaker": "narrator",
-              "text": "(to be written)"
+              "text": "On the night she heard about her grandson, Mother Skarrow sat at her fire and sang nothing at all.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_epi_vorga_slain_gran_spared_open_2",
+              "speaker": "narrator",
+              "text": "The truce with Emberwick holds, thin as ice on a pond. Everyone walks carefully.",
+              "mood": "sad"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_vorga_slain_gran_slain",
+      "beat": "ch5_the_last_vote",
+      "title": "The Grandson",
+      "requires": [
+        "ch1_skarrow_slain",
+        "ch3_vorga_slain"
+      ],
+      "cast": [
+        "narrator"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epi_vorga_slain_gran_slain_open_1",
+              "speaker": "narrator",
+              "text": "Of Mother Skarrow's line, nobody is left. The Host scattered into the canyons, and the hills have no one to speak for them.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_epi_vorga_slain_gran_slain_open_2",
+              "speaker": "narrator",
+              "text": "Somewhere in the Sunscar, goblins still sing a song about a bridge, and what the valley folk did there.",
+              "mood": "sad"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_ivo_helped",
+      "beat": "ch5_the_last_vote",
+      "title": "The Doctor",
+      "requires": [
+        "ch4_ivo_helped"
+      ],
+      "cast": [
+        "narrator",
+        "ivo_rime"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epi_ivo_helped_open_1",
+              "speaker": "narrator",
+              "text": "In the spring Ivo Rime opens a surgery in Emberwick, above the bakery. He charges nothing, and he never uses fire.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_epi_ivo_helped_open_2",
+              "speaker": "ivo_rime",
+              "text": "Sit down. No, there. You've walked a long way to see me. I can tell from your boots.",
+              "mood": "idle",
+              "direction": "soft, tired, a little less tired than he was"
+            },
+            {
+              "id": "ch5_epi_ivo_helped_open_3",
+              "speaker": "ivo_rime",
+              "text": "I had a minute. Most people never get one. I'd like to give a few of them a little longer.",
+              "mood": "happy"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_ivo_stopped",
+      "beat": "ch5_the_last_vote",
+      "title": "The Tower",
+      "requires": [
+        "ch4_ivo_stopped"
+      ],
+      "cast": [
+        "narrator"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epi_ivo_stopped_open_1",
+              "speaker": "narrator",
+              "text": "Nobody sees Ivo Rime below the snowline again. Pilgrims say a cold light still burns in the tower above the pass.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_epi_ivo_stopped_open_2",
+              "speaker": "narrator",
+              "text": "They say there are two figures at the window, side by side, very still. Nobody climbs up to ask.",
+              "mood": "sad"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_halvard_slain",
+      "beat": "ch5_the_last_vote",
+      "title": "The Gate",
+      "requires": [
+        "ch5_halvard_slain"
+      ],
+      "cast": [
+        "narrator"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epi_halvard_slain_open_1",
+              "speaker": "narrator",
+              "text": "At the broken gate of Ember Keep stands an empty suit of black armour, set upright by someone who knew how. Its sword is planted point down.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_epi_halvard_slain_open_2",
+              "speaker": "narrator",
+              "text": "Travellers bow to it as they pass. Nobody quite knows why. It only seems polite.",
+              "mood": "idle"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_halvard_released",
+      "beat": "ch5_the_last_vote",
+      "title": "The Gate",
+      "requires": [
+        "ch5_halvard_released"
+      ],
+      "cast": [
+        "narrator",
+        "pip_ashdown"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epi_halvard_released_open_1",
+              "speaker": "narrator",
+              "text": "At the broken gate there is nothing now but ash, and, every spring, flowers. Pip planted them. She says he liked the yellow ones.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_epi_halvard_released_open_2",
+              "speaker": "pip_ashdown",
+              "text": "He let me win at draughts. Well. He let Oswin win. It's the same thing, sort of.",
+              "mood": "happy"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_memory_rekindled",
+      "beat": "ch5_the_last_vote",
+      "title": "The Price Paid",
+      "requires": [
+        "ending_rekindled",
+        "ch2_paid_memory"
+      ],
+      "cast": [
+        "narrator"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epi_memory_rekindled_open_1",
+              "speaker": "narrator",
+              "text": "The one who paid the Court still has a gap where a memory used to be. In the warm years, the rest of the Vale slowly grows gaps to match.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_epi_memory_rekindled_open_2",
+              "speaker": "narrator",
+              "text": "It's lonely, being the first. It gets less lonely every year. That is the worst part.",
+              "mood": "sad"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_memory_returned",
+      "beat": "ch5_the_last_vote",
+      "title": "The Price Paid",
+      "requires": [
+        "ending_returned",
+        "ch2_paid_memory"
+      ],
+      "cast": [
+        "narrator"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epi_memory_returned_open_1",
+              "speaker": "narrator",
+              "text": "When the fire leaves, the Vale remembers what it lost. All but one memory: the one you gave the Court. That was paid, not burned.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_epi_memory_returned_open_2",
+              "speaker": "narrator",
+              "text": "You still can't remember it. But you remember giving it, and why. It was yours to give, and it bought the road home.",
+              "mood": "idle"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_memory_extinguished",
+      "beat": "ch5_the_last_vote",
+      "title": "The Price Paid",
+      "requires": [
+        "ending_extinguished",
+        "ch2_paid_memory"
+      ],
+      "cast": [
+        "narrator"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epi_memory_extinguished_open_1",
+              "speaker": "narrator",
+              "text": "All over the Vale, people wake remembering. The one who paid the Court wakes too, reaches for the old memory, and finds the gap still there.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_epi_memory_extinguished_open_2",
+              "speaker": "narrator",
+              "text": "Not burned. Paid. You chose to give it, to carry the fire here, and here is where the fire ended. It bought something after all.",
+              "mood": "idle"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_memory_tricked",
+      "beat": "ch5_the_last_vote",
+      "title": "The Court Remembers",
+      "requires": [
+        "ch2_court_tricked"
+      ],
+      "cast": [
+        "narrator",
+        "ysolde"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epi_memory_tricked_open_1",
+              "speaker": "narrator",
+              "text": "Mirewood never forgets the trick you played. Every year on the same night, a small light comes to the edge of the marsh and says your names.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_epi_memory_tricked_open_2",
+              "speaker": "ysolde",
+              "text": "Clever little flames. The Court is still deciding whether to admire you. It may take a few hundred years.",
+              "mood": "happy",
+              "direction": "amused, and not entirely safe"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_memory_left",
+      "beat": "ch5_the_last_vote",
+      "title": "The Quiet Marsh",
+      "requires": [
+        "ch2_ember_left"
+      ],
+      "cast": [
+        "narrator"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epi_memory_left_open_1",
+              "speaker": "narrator",
+              "text": "Mirewood is quieter now. There are fewer lights in the water. On still nights the reeds whisper about a fey who chose to see an ending.",
+              "mood": "sad"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_close_rekindled",
+      "beat": "ch5_the_last_vote",
+      "title": "What We Owe",
+      "requires": [
+        "ending_rekindled"
+      ],
+      "cast": [
+        "narrator",
+        "pip_ashdown"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epi_close_rekindled_open_1",
+              "speaker": "pip_ashdown",
+              "text": "Bree says when I'm big I'll forget things too, like everybody. That's all right. I've got spares. I'll keep them for whoever needs them.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_epi_close_rekindled_open_2",
+              "speaker": "narrator",
+              "text": "The Vale is warm, and fed, and forgetting. What it owes the people who come after is written down somewhere. Whether they read it is up to them.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_epi_close_rekindled_open_3",
+              "speaker": "narrator",
+              "text": "And far beyond the Greywall, something that lost a fire four hundred years ago lifts its head, and sees the light.",
+              "mood": "surprised"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_close_returned",
+      "beat": "ch5_the_last_vote",
+      "title": "What We Owe",
+      "requires": [
+        "ending_returned"
+      ],
+      "cast": [
+        "narrator"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epi_close_returned_open_1",
+              "speaker": "narrator",
+              "text": "In Emberwick, a girl in three scarves stands on the cold bank of the ford and waves until there is nothing left to wave at.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_epi_close_returned_open_2",
+              "speaker": "narrator",
+              "text": "The Vale gave back what it took. Whatever it owes now, it will pay in firewood and honest work, and it will remember every bit of it.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_epi_close_returned_open_3",
+              "speaker": "narrator",
+              "text": "On the far side of the Greywall the wind smells of smoke, and the road goes on. The rest of it is another story.",
+              "mood": "idle"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_epi_close_extinguished",
+      "beat": "ch5_the_last_vote",
+      "title": "What We Owe",
+      "requires": [
+        "ending_extinguished"
+      ],
+      "cast": [
+        "narrator"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_epi_close_extinguished_open_1",
+              "speaker": "narrator",
+              "text": "It is a hard winter. Not everyone sees the spring. The dead of Frostpeak walk further down the valley than ever, and that will need answering too.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch5_epi_close_extinguished_open_2",
+              "speaker": "narrator",
+              "text": "But in spring the children of Emberwick plant cold ground, and their grandparents tell them stories that are finally true.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_epi_close_extinguished_open_3",
+              "speaker": "narrator",
+              "text": "The Vale let the fire go. What it owes the people after it now is the truth, and a good spring. It is enough to be going on with.",
+              "mood": "idle"
             }
           ],
           "end": true

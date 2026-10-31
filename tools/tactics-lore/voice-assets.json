@@ -265,10 +265,20 @@
       "preset": "Alnilam",
       "text": "That'll do. Back to it."
     },
+    "Alnilam.2548f4c6": {
+      "asset": "asset_4uRZY69A2avb7HyStmBYHfyB",
+      "preset": "Alnilam",
+      "text": "Cold tonight. Colder every night."
+    },
     "Alnilam.2a632fef": {
       "asset": "asset_VCrFjtFvrdkLCtCSMMcwCRMU",
       "preset": "Alnilam",
       "text": "Rest now."
+    },
+    "Alnilam.2a8dce32": {
+      "asset": "asset_fGLCcxUt3MiJRKy35pZZr9L9",
+      "preset": "Alnilam",
+      "text": "It's over. Everyone breathing?"
     },
     "Alnilam.3f58ed86": {
       "asset": "asset_oWo6kn9B3MtLJajVegqoPrmj",
@@ -285,6 +295,16 @@
       "preset": "Alnilam",
       "text": "Hold together. We do this properly."
     },
+    "Alnilam.72b49a2e": {
+      "asset": "asset_gmcgn8fGFWoKd82kcHM9vUyh",
+      "preset": "Alnilam",
+      "text": "Good work. All of you."
+    },
+    "Alnilam.7e9a6b9c": {
+      "asset": "asset_kCcs491DcrVTH8ceeYuwsTzm",
+      "preset": "Alnilam",
+      "text": "Fall back. We'll come again."
+    },
     "Alnilam.8c6da161": {
       "asset": "asset_4fXjpJvVspDr2aq7kdgxWqtH",
       "preset": "Alnilam",
@@ -294,6 +314,11 @@
       "asset": "asset_VeHGvBCLdt8jDD6SZrcw3Xuj",
       "preset": "Alnilam",
       "text": "That's how it's done."
+    },
+    "Alnilam.a4f33580": {
+      "asset": "asset_ctahNFqL6ouJN9JPNYejuR8T",
+      "preset": "Alnilam",
+      "text": "Get some sleep. I'll take first watch."
     },
     "Alnilam.a91ccc97": {
       "asset": "asset_fpgi3zunhKfiDzR2T3giGbnk",
@@ -314,6 +339,31 @@
       "asset": "asset_5yYJFQR4jGxYz3Lxojgd5LyK",
       "preset": "Alnilam",
       "text": "Not done yet."
+    },
+    "Fenrir.01f45387": {
+      "asset": "asset_9nEhSdrB99TGeZZfJLofvwJK",
+      "preset": "Fenrir",
+      "text": "Better! Let me at them!"
+    },
+    "Fenrir.0302ddd3": {
+      "asset": "asset_fxXQppQwtvhpde33qYP2AEMQ",
+      "preset": "Fenrir",
+      "text": "Good as new. Nearly."
+    },
+    "Fenrir.81c57220": {
+      "asset": "asset_KipiYeSNTzQJEwkeY9KDtjJj",
+      "preset": "Fenrir",
+      "text": "Who's buying at the Last Coal?"
+    },
+    "Fenrir.8a98b2e2": {
+      "asset": "asset_fNhRAqBBxAfijAzWEBWhgAkf",
+      "preset": "Fenrir",
+      "text": "Is that all you've got?"
+    },
+    "Fenrir.b7962ce4": {
+      "asset": "asset_cX9aMNHP5fXTeAVug6QFPz1e",
+      "preset": "Fenrir",
+      "text": "Just a scratch. A big one."
     },
     "Kore.07eee67a": {
       "asset": "asset_RRw6nTcaWLicSfg5BLbf6QjK",
@@ -345,6 +395,11 @@
       "preset": "Kore",
       "text": "No! Get to them, now!"
     },
+    "Kore.774ed401": {
+      "asset": "asset_9mQBo3DP8CGvR34Xe78gRHRn",
+      "preset": "Kore",
+      "text": "It's over. Everyone breathing?"
+    },
     "Kore.78321334": {
       "asset": "asset_dXRkDk6iUk79KmrjFPuMtGfX",
       "preset": "Kore",
@@ -354,6 +409,11 @@
       "asset": "asset_iRVL2z2FqqXvCwYVkpwtXFCP",
       "preset": "Kore",
       "text": "That'll do. Back to it."
+    },
+    "Kore.8af975ec": {
+      "asset": "asset_a6s2SoxdsByNmdTZ3fzi4ogm",
+      "preset": "Kore",
+      "text": "Good work. All of you."
     },
     "Kore.950a1433": {
       "asset": "asset_zrCANnKrhrFTLX2GCdwP3s3V",
@@ -370,10 +430,55 @@
       "preset": "Kore",
       "text": "Not done yet."
     },
+    "Kore.b138799b": {
+      "asset": "asset_FALTdcb5T9hkXyjt2AQoZF4r",
+      "preset": "Kore",
+      "text": "Fall back. We'll come again."
+    },
+    "Kore.c839f086": {
+      "asset": "asset_fUk5XaiEsDkfjbmG8oz9stur",
+      "preset": "Kore",
+      "text": "Cold tonight. Colder every night."
+    },
+    "Kore.d2b5e30f": {
+      "asset": "asset_DayQW9WntszSGgCJXvvH8gJg",
+      "preset": "Kore",
+      "text": "Get some sleep. I'll take first watch."
+    },
     "Kore.e1db609c": {
       "asset": "asset_75iARHZG5aGCR9BZfLF29RJK",
       "preset": "Kore",
       "text": "Hold together. We do this properly."
+    },
+    "Pulcherrima.26bfc3bf": {
+      "asset": "asset_YiM3GhZMiVzP7VestZJ98qJx",
+      "preset": "Pulcherrima",
+      "text": "Who's buying at the Last Coal?"
+    },
+    "Pulcherrima.3f3253f3": {
+      "asset": "asset_yDAf3a8d3L2ZnfNX8ayh1Pys",
+      "preset": "Pulcherrima",
+      "text": "Is that all you've got?"
+    },
+    "Pulcherrima.622f438e": {
+      "asset": "asset_Nn3AeobjGD2zzkiES1JTeiU5",
+      "preset": "Pulcherrima",
+      "text": "Ha! Told you we'd win!"
+    },
+    "Pulcherrima.6a11f293": {
+      "asset": "asset_zDdPEjEjaXes1wTTrz1r9g7s",
+      "preset": "Pulcherrima",
+      "text": "Just a scratch. A big one."
+    },
+    "Pulcherrima.704ad317": {
+      "asset": "asset_AAFzEzJKqVBiNKR17nVxBtre",
+      "preset": "Pulcherrima",
+      "text": "Good as new. Nearly."
+    },
+    "Pulcherrima.feb0ebbf": {
+      "asset": "asset_fU1vq1sNsohHfeaJ9JfMrAgq",
+      "preset": "Pulcherrima",
+      "text": "Better! Let me at them!"
     }
   }
 }

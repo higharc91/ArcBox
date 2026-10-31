@@ -1,20 +1,1444 @@
 {
   "scenes": [
     {
-      "id": "ch4_stub",
+      "id": "ch4_pilgrim_road",
       "beat": "ch4_pilgrim_road",
+      "title": "The Pilgrim Road",
       "cast": [
-        "narrator"
+        "narrator",
+        "pip_ashdown"
       ],
-      "start": "n",
+      "start": "open",
       "nodes": [
         {
-          "id": "n",
+          "id": "open",
           "lines": [
             {
-              "id": "ch4_stub_line",
+              "id": "ch4_pilgrim_road_open_1",
               "speaker": "narrator",
-              "text": "(to be written)"
+              "text": "Snow, and silence, and the old Warden road climbing into the pass. Every mile there is a frozen shrine, and a candle nobody has lit in seventy years.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_pilgrim_road_open_2",
+              "speaker": "narrator",
+              "text": "Pip walks at the front. Nobody agreed that she could come. Nobody managed to stop her, either.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_pilgrim_road_open_3",
+              "speaker": "pip_ashdown",
+              "text": "Bree said I could come if I wore two scarves. I'm wearing three. So that's more than allowed.",
+              "mood": "happy",
+              "direction": "quick, very pleased with her own logic"
+            },
+            {
+              "id": "ch4_pilgrim_road_open_4",
+              "speaker": "narrator",
+              "text": "Ahead, figures climb the road through the snow: pilgrims in Warden grey, a dwarf with a mason's hammer, a goliath carrying nothing.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch4_pilgrim_road_open_5",
+              "speaker": "narrator",
+              "text": "They are dead. They walk the road they walked in life, and they do not look at you.",
+              "mood": "sad"
+            }
+          ],
+          "options": [
+            {
+              "id": "aside",
+              "label": "We step off the road and let them pass.",
+              "to": "pass"
+            },
+            {
+              "id": "rite",
+              "label": "I'll say the pilgrims' rite at the shrine.",
+              "to": "rite",
+              "tags": {
+                "class": [
+                  "cleric",
+                  "paladin"
+                ]
+              }
+            },
+            {
+              "id": "goliath",
+              "label": "That one has my people's clan marks.",
+              "to": "goliath",
+              "tags": {
+                "race": [
+                  "goliath"
+                ]
+              }
+            },
+            {
+              "id": "song",
+              "label": "Lark taught me a road song for the pass. I'll sing it.",
+              "to": "song",
+              "tags": {
+                "background": [
+                  "entertainer"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "pass",
+          "lines": [
+            {
+              "id": "ch4_pilgrim_road_pass_1",
+              "speaker": "narrator",
+              "text": "The dead walk by close enough to touch. A pilgrim's lips move without a sound, shaping the same word over and over.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch4_pilgrim_road_pass_2",
+              "speaker": "pip_ashdown",
+              "text": "She's saying the name of the next shrine. She's been saying it for seventy years. She doesn't know she already got there.",
+              "mood": "sad",
+              "direction": "whispering"
+            }
+          ],
+          "next": "sings"
+        },
+        {
+          "id": "rite",
+          "lines": [
+            {
+              "id": "ch4_pilgrim_road_rite_1",
+              "speaker": "narrator",
+              "text": "You brush the frost from the shrine and speak the old rite. The words come slowly here, as if the cold were listening.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_pilgrim_road_rite_2",
+              "speaker": "narrator",
+              "text": "The pilgrim at the front stops, and bows, and walks on. For a moment she looked as if she remembered why.",
+              "mood": "sad"
+            }
+          ],
+          "next": "sings"
+        },
+        {
+          "id": "goliath",
+          "lines": [
+            {
+              "id": "ch4_pilgrim_road_goliath_1",
+              "speaker": "narrator",
+              "text": "His arms carry the clan lines of a hold that froze before you were born. You know the pattern. He doesn't.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch4_pilgrim_road_goliath_2",
+              "speaker": "pip_ashdown",
+              "text": "He's looking for his house. He walks up, and it isn't there, so he walks down and tries again.",
+              "mood": "sad",
+              "direction": "matter-of-fact, the way children say terrible things"
+            }
+          ],
+          "next": "sings"
+        },
+        {
+          "id": "song",
+          "lines": [
+            {
+              "id": "ch4_pilgrim_road_song_1",
+              "speaker": "narrator",
+              "text": "You sing the road song Lark taught you. The dead don't turn. But at the second verse a small voice joins in, and it knows a third verse you never learned.",
+              "mood": "surprised"
+            }
+          ],
+          "next": "sings"
+        },
+        {
+          "id": "sings",
+          "lines": [
+            {
+              "id": "ch4_pilgrim_road_sings_1",
+              "speaker": "narrator",
+              "text": "Pip is singing under her breath: a slow Warden marching song, in words nobody has used for a hundred years.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_pilgrim_road_sings_2",
+              "speaker": "pip_ashdown",
+              "text": "Up the grey road, keeper, carry the coal. Mind the cold, for the cold minds you.",
+              "mood": "idle",
+              "direction": "suddenly old and slow, not a child's cadence at all; half sung"
+            },
+            {
+              "id": "ch4_pilgrim_road_sings_3",
+              "speaker": "pip_ashdown",
+              "text": "I don't know that one. I've never heard that one. Why do I keep knowing ones I've never heard?",
+              "mood": "surprised",
+              "direction": "snapping back, bright and frightened"
+            }
+          ],
+          "options": [
+            {
+              "id": "hand",
+              "label": "It's me, Pip. Hold my hand and tell me what else you know.",
+              "to": "hand",
+              "tags": {
+                "background": [
+                  "urchin"
+                ]
+              }
+            },
+            {
+              "id": "where",
+              "label": "Where do you think the songs come from?",
+              "to": "where"
+            },
+            {
+              "id": "keep",
+              "label": "Keep singing. The dead seem to like it.",
+              "to": "keep"
+            }
+          ]
+        },
+        {
+          "id": "hand",
+          "lines": [
+            {
+              "id": "ch4_pilgrim_road_hand_1",
+              "speaker": "pip_ashdown",
+              "text": "There's a door at the top of a long stair, with a crack down the middle. I know exactly where the crack is.",
+              "mood": "sad",
+              "direction": "quietly, gripping tight"
+            },
+            {
+              "id": "ch4_pilgrim_road_hand_2",
+              "speaker": "pip_ashdown",
+              "text": "And I'm scared that when we get there, I'll know what's behind it.",
+              "mood": "hurt"
+            }
+          ],
+          "next": "dusk"
+        },
+        {
+          "id": "where",
+          "lines": [
+            {
+              "id": "ch4_pilgrim_road_where_1",
+              "speaker": "pip_ashdown",
+              "text": "Bree says the shard in her hearth eats things. Maybe it ate a song, and got lonely, and gave it to me.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_pilgrim_road_where_2",
+              "speaker": "pip_ashdown",
+              "text": "That's a joke. Mostly.",
+              "mood": "happy",
+              "direction": "trying to grin"
+            }
+          ],
+          "next": "dusk"
+        },
+        {
+          "id": "keep",
+          "lines": [
+            {
+              "id": "ch4_pilgrim_road_keep_1",
+              "speaker": "narrator",
+              "text": "So she sings. The dead walk on ahead of you, slower now, as if they were keeping time.",
+              "mood": "idle"
+            }
+          ],
+          "next": "dusk"
+        },
+        {
+          "id": "dusk",
+          "lines": [
+            {
+              "id": "ch4_pilgrim_road_dusk_1",
+              "speaker": "narrator",
+              "text": "Near dusk the road turns, and through the snow you see the dark doors of Greyhold, cut into the mountain.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_pilgrim_road_dusk_2",
+              "speaker": "pip_ashdown",
+              "text": "Greyhold. The masons kept their books there. How do I know that?",
+              "mood": "surprised",
+              "direction": "suddenly old and slow, not a child's cadence at all, then catching herself"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch4_greyhold",
+      "beat": "ch4_greyhold",
+      "title": "Greyhold",
+      "cast": [
+        "narrator",
+        "pip_ashdown"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch4_greyhold_open_1",
+              "speaker": "narrator",
+              "text": "Greyhold is a dwarven road-hold, carved into the mountain and frozen solid. Its doors stand open. Its halls are full of books and ice.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_greyhold_open_2",
+              "speaker": "narrator",
+              "text": "In the record hall, ledgers climb the walls to the ceiling, each in the careful hand of a mason who wanted to be remembered.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_greyhold_open_3",
+              "speaker": "pip_ashdown",
+              "text": "This is where they drew the Keep, before they built it. I know which shelf.",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch4_greyhold_open_4",
+              "speaker": "narrator",
+              "text": "She is right. On the third shelf from the floor lies a roll of plans, bound in iron and stamped with the Warden seal.",
+              "mood": "surprised"
+            }
+          ],
+          "options": [
+            {
+              "id": "dwarf",
+              "label": "These are my people's marks. Let me read them.",
+              "to": "dwarf",
+              "tags": {
+                "race": [
+                  "dwarf"
+                ]
+              }
+            },
+            {
+              "id": "artisan",
+              "label": "Those are building plans. I know how to read a plan.",
+              "to": "artisan",
+              "tags": {
+                "background": [
+                  "guild_artisan"
+                ]
+              }
+            },
+            {
+              "id": "ledgers",
+              "label": "We'll work it out from the ledgers.",
+              "check": {
+                "skill": "history",
+                "dc": 14,
+                "pass": "hist_pass",
+                "fail": "hist_fail"
+              }
+            }
+          ]
+        },
+        {
+          "id": "dwarf",
+          "lines": [
+            {
+              "id": "ch4_greyhold_dwarf_1",
+              "speaker": "narrator",
+              "text": "The masons wrote in the old dwarven hand, the one you learned from your grandmother's tombstones. You know the word for every kind of stone.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_greyhold_dwarf_2",
+              "speaker": "narrator",
+              "text": "The flame hall is drawn with walls nine feet thick, and runes of binding over every lintel. A mason does not bind a hearth.",
+              "mood": "surprised"
+            }
+          ],
+          "next": "cage"
+        },
+        {
+          "id": "artisan",
+          "lines": [
+            {
+              "id": "ch4_greyhold_artisan_1",
+              "speaker": "narrator",
+              "text": "The joints are a smith's joints, the kind Tobin Fell taught you. This hall was built like a lock, not a fireplace.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_greyhold_artisan_2",
+              "speaker": "narrator",
+              "text": "Every wall leans inward. Every door opens out. Whatever burned in there, the hall was built so it could never leave.",
+              "mood": "surprised"
+            }
+          ],
+          "next": "cage"
+        },
+        {
+          "id": "hist_pass",
+          "lines": [
+            {
+              "id": "ch4_greyhold_hist_pass_1",
+              "speaker": "narrator",
+              "text": "The ledgers are orders for stone and iron. One is a mason's complaint: the Wardens wanted the flame hall built stronger than the gate.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_greyhold_hist_pass_2",
+              "speaker": "narrator",
+              "text": "Stronger than the gate. They feared what was inside more than anything that might come from outside.",
+              "mood": "surprised"
+            }
+          ],
+          "next": "cage"
+        },
+        {
+          "id": "hist_fail",
+          "lines": [
+            {
+              "id": "ch4_greyhold_hist_fail_1",
+              "speaker": "narrator",
+              "text": "The ledgers blur into orders for stone and lime. Then Pip pulls one free and opens it at a drawing without looking, as if someone had shown her the page.",
+              "mood": "idle"
+            }
+          ],
+          "next": "cage"
+        },
+        {
+          "id": "cage",
+          "lines": [
+            {
+              "id": "ch4_greyhold_cage_1",
+              "speaker": "narrator",
+              "text": "On the last page of the plans, in the margin, a mason has written a note in a shaking hand.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch4_greyhold_cage_2",
+              "speaker": "narrator",
+              "text": "We were told to build a hearth. We have built a cage. Gods forgive us if the thing inside ever wakes and wants to go home.",
+              "mood": "sad",
+              "direction": "read as the mason's words, quiet and ashamed"
+            },
+            {
+              "id": "ch4_greyhold_cage_3",
+              "speaker": "pip_ashdown",
+              "text": "It hums, in there. It always hummed. I used to think that meant it was happy.",
+              "mood": "sad",
+              "direction": "suddenly old and slow, not a child's cadence at all"
+            },
+            {
+              "id": "ch4_greyhold_cage_4",
+              "speaker": "pip_ashdown",
+              "text": "I never used to think anything. I've never been there. Stop looking at me like that.",
+              "mood": "hurt",
+              "direction": "quick and defensive, a child again"
+            }
+          ],
+          "options": [
+            {
+              "id": "stolen",
+              "label": "The Skarrow song said the seven came back running. A cage for something stolen.",
+              "to": "stolen",
+              "requires": [
+                "truth_crossing"
+              ]
+            },
+            {
+              "id": "why",
+              "label": "What would a fire need a cage for?",
+              "to": "why"
+            },
+            {
+              "id": "copy",
+              "label": "Corvin needs to see this. I'll copy every page.",
+              "to": "copy",
+              "tags": {
+                "background": [
+                  "sage"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "stolen",
+          "lines": [
+            {
+              "id": "ch4_greyhold_stolen_1",
+              "speaker": "narrator",
+              "text": "The pieces sit together like stones in a wall: something taken from beyond the Greywall, and a hall built so that it could never leave.",
+              "mood": "idle"
+            }
+          ],
+          "next": "leave"
+        },
+        {
+          "id": "why",
+          "lines": [
+            {
+              "id": "ch4_greyhold_why_1",
+              "speaker": "narrator",
+              "text": "Nobody has an answer. Somewhere far below, in the dark of the hold, the ice cracks like a door.",
+              "mood": "idle"
+            }
+          ],
+          "next": "leave"
+        },
+        {
+          "id": "copy",
+          "lines": [
+            {
+              "id": "ch4_greyhold_copy_1",
+              "speaker": "narrator",
+              "text": "You copy the plans by candle, fingers numb, and never once by ember-light. Some things should not be read by a fire that eats.",
+              "mood": "idle"
+            }
+          ],
+          "next": "leave"
+        },
+        {
+          "id": "leave",
+          "lines": [
+            {
+              "id": "ch4_greyhold_leave_1",
+              "speaker": "narrator",
+              "text": "When you leave, the dead are waiting at the gate of the hold, all facing the caves above the pass. Something up there is pulling at them.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_greyhold_leave_2",
+              "speaker": "narrator",
+              "text": "And above the caves, a single window in an old watchtower burns with a cold blue light.",
+              "mood": "surprised"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch4_caves_lead",
+      "beat": "ch4_crystal_caves",
+      "title": "The Crystal Caves",
+      "cast": [
+        "narrator",
+        "pip_ashdown"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch4_caves_lead_open_1",
+              "speaker": "narrator",
+              "text": "The caves of the cold ember are crystal and blue ice, lit from somewhere deep inside. It is the coldest place you have ever stood.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_caves_lead_open_2",
+              "speaker": "narrator",
+              "text": "Kobolds work the walls with picks under lamps of pale fire. Each wears the same stitched badge: a tower, and a closed eye.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_caves_lead_open_3",
+              "speaker": "narrator",
+              "text": "Something large shifts in the webs above them. The kobolds see you, drop their picks, and take up their slings.",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch4_caves_lead_open_4",
+              "speaker": "pip_ashdown",
+              "text": "They're not dead ones. They're alive ones. That's worse, isn't it?",
+              "mood": "surprised"
+            }
+          ],
+          "options": [
+            {
+              "id": "druid",
+              "label": "The cold here is wrong. It isn't winter. Something has stopped.",
+              "to": "druid",
+              "tags": {
+                "class": [
+                  "druid",
+                  "ranger"
+                ]
+              }
+            },
+            {
+              "id": "wizard",
+              "label": "Those wards on the walls are necromancy, and fresh.",
+              "to": "wizard",
+              "tags": {
+                "class": [
+                  "wizard",
+                  "warlock",
+                  "sorcerer"
+                ]
+              }
+            },
+            {
+              "id": "hide",
+              "label": "Pip, get behind the rocks and stay there.",
+              "to": "fight"
+            }
+          ]
+        },
+        {
+          "id": "druid",
+          "lines": [
+            {
+              "id": "ch4_caves_lead_druid_1",
+              "speaker": "narrator",
+              "text": "You listen to the mountain and hear nothing at all. No water, no roots. The land is holding its breath, and has been for seventy years.",
+              "mood": "idle"
+            }
+          ],
+          "next": "fight"
+        },
+        {
+          "id": "wizard",
+          "lines": [
+            {
+              "id": "ch4_caves_lead_wizard_1",
+              "speaker": "narrator",
+              "text": "The wards are careful, elegant work, written to keep the dead out of the caves, not in. Whoever wrote them is protecting something.",
+              "mood": "surprised"
+            }
+          ],
+          "next": "fight"
+        },
+        {
+          "id": "fight",
+          "lines": [
+            {
+              "id": "ch4_caves_lead_fight_1",
+              "speaker": "pip_ashdown",
+              "text": "I'm behind the rocks. I'm staying. I'm only looking a little bit.",
+              "mood": "idle",
+              "direction": "loud whisper"
+            },
+            {
+              "id": "ch4_caves_lead_fight_2",
+              "speaker": "narrator",
+              "text": "The first sling-stone cracks against the ice beside you.",
+              "mood": "angry"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch4_caves_after",
+      "beat": "ch4_crystal_caves",
+      "title": "The Tower Door",
+      "cast": [
+        "narrator",
+        "ivo_rime"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch4_caves_after_open_1",
+              "speaker": "narrator",
+              "text": "The caves fall quiet. The kobolds who are left flee up a stair cut into the ice, and at the top of it a door is opening.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_caves_after_open_2",
+              "speaker": "ivo_rime",
+              "text": "That will do. They're paid to dig, not to die. Come up, all of you, before your fingers go black.",
+              "mood": "idle",
+              "direction": "soft and tired, a doctor's calm"
+            },
+            {
+              "id": "ch4_caves_after_open_3",
+              "speaker": "narrator",
+              "text": "The man in the doorway is thin and grey, in a physician's coat stiff with frost. He holds the door like someone used to patients arriving hurt.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_caves_after_open_4",
+              "speaker": "ivo_rime",
+              "text": "My name is Ivo Rime. You've come for the cold ember, I expect.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_caves_after_open_5",
+              "speaker": "ivo_rime",
+              "text": "Come in and get warm first. Then we can argue.",
+              "mood": "idle",
+              "direction": "as if prescribing it"
+            }
+          ],
+          "sets": [
+            "ch4_rime_found"
+          ],
+          "options": [
+            {
+              "id": "in",
+              "label": "We'll come in. Slowly.",
+              "to": "in"
+            },
+            {
+              "id": "read",
+              "label": "Is this a trap? I'll watch him.",
+              "check": {
+                "skill": "insight",
+                "dc": 12,
+                "pass": "read_pass",
+                "fail": "read_fail"
+              }
+            }
+          ]
+        },
+        {
+          "id": "read_pass",
+          "lines": [
+            {
+              "id": "ch4_caves_after_read_pass_1",
+              "speaker": "narrator",
+              "text": "There is no trap in him. Only a man who hasn't slept properly in a very long time, and has stopped expecting anyone to be kind.",
+              "mood": "sad"
+            }
+          ],
+          "next": "in"
+        },
+        {
+          "id": "read_fail",
+          "lines": [
+            {
+              "id": "ch4_caves_after_read_fail_1",
+              "speaker": "narrator",
+              "text": "You can't read him. His face gives you nothing but tiredness, and the patience of a man used to delivering bad news.",
+              "mood": "idle"
+            }
+          ],
+          "next": "in"
+        },
+        {
+          "id": "in",
+          "lines": [
+            {
+              "id": "ch4_caves_after_in_1",
+              "speaker": "ivo_rime",
+              "text": "Mind the third step. It's ice all the way down. Everything here is.",
+              "mood": "sad"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch4_ivos_choice",
+      "beat": "ch4_ivos_choice",
+      "title": "Rime's Tower",
+      "cast": [
+        "narrator",
+        "ivo_rime",
+        "pip_ashdown"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch4_ivos_choice_open_1",
+              "speaker": "narrator",
+              "text": "Only one room in the tower is warm. A brazier burns beside a narrow bed, and on the bed lies a woman, still and pale, in a grey dress.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_ivos_choice_open_2",
+              "speaker": "ivo_rime",
+              "text": "Sit. No, there, by the fire. You've been breathing cold air for days. I can hear it in your chests.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_ivos_choice_open_3",
+              "speaker": "ivo_rime",
+              "text": "This is Nell, my wife. She died in the hungry years, of a fever I could have treated, if we'd had anything to treat it with.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch4_ivos_choice_open_4",
+              "speaker": "ivo_rime",
+              "text": "I brought her up here because the cold ember raises the dead. It does. She walked, for a while. She didn't know my name.",
+              "mood": "sad",
+              "direction": "even, clinical, holding something down"
+            }
+          ],
+          "next": "explain"
+        },
+        {
+          "id": "explain",
+          "lines": [
+            {
+              "id": "ch4_ivos_choice_explain_1",
+              "speaker": "ivo_rime",
+              "text": "They walk, but they don't remember. I wanted to know where the remembering went. I think I know now.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_ivos_choice_explain_2",
+              "speaker": "ivo_rime",
+              "text": "Fire keeps what it burns. A cold ember still holds every memory it ever took. They're only frozen, like everything else up here.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_ivos_choice_explain_3",
+              "speaker": "ivo_rime",
+              "text": "Warm it, just a little, with a living ember, and I believe I can give a person back what the fire took from them.",
+              "mood": "happy",
+              "direction": "a flicker of excitement he can't quite hide"
+            }
+          ],
+          "options": [
+            {
+              "id": "need",
+              "label": "What do you need from us?",
+              "to": "need"
+            },
+            {
+              "id": "judge",
+              "label": "Will this actually work? Let me see her.",
+              "check": {
+                "skill": "medicine",
+                "dc": 15,
+                "pass": "med_pass",
+                "fail": "med_fail"
+              }
+            },
+            {
+              "id": "court",
+              "label": "Could you put back the memory we paid the Glimmer Court?",
+              "to": "court",
+              "requires": [
+                "ch2_paid_memory"
+              ]
+            },
+            {
+              "id": "notes",
+              "label": "Show me your notes.",
+              "to": "notes",
+              "tags": {
+                "class": [
+                  "wizard",
+                  "cleric",
+                  "druid"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "need",
+          "lines": [
+            {
+              "id": "ch4_ivos_choice_need_1",
+              "speaker": "ivo_rime",
+              "text": "One of the embers you carry, set against the cold one, for the length of a breath. I'll pay what the fire takes. It's my use, not yours.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_ivos_choice_need_2",
+              "speaker": "ivo_rime",
+              "text": "And then I'll know whether I've spent eleven years on a cure or on a cruelty.",
+              "mood": "sad"
+            }
+          ],
+          "next": "pip"
+        },
+        {
+          "id": "med_pass",
+          "lines": [
+            {
+              "id": "ch4_ivos_choice_med_pass_1",
+              "speaker": "narrator",
+              "text": "His method is sound. But she has been dead for years. He might give her memories back. He can't give them anywhere to stay.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch4_ivos_choice_med_pass_2",
+              "speaker": "ivo_rime",
+              "text": "Yes. I know. A minute, perhaps. I would take a minute.",
+              "mood": "hurt",
+              "direction": "quietly; he already knew"
+            }
+          ],
+          "next": "pip"
+        },
+        {
+          "id": "med_fail",
+          "lines": [
+            {
+              "id": "ch4_ivos_choice_med_fail_1",
+              "speaker": "narrator",
+              "text": "His notes are dense and careful and far beyond you. You only understand that he believes it, and that he stopped sleeping to keep believing it.",
+              "mood": "idle"
+            }
+          ],
+          "next": "pip"
+        },
+        {
+          "id": "court",
+          "lines": [
+            {
+              "id": "ch4_ivos_choice_court_1",
+              "speaker": "ivo_rime",
+              "text": "No. I'm sorry. The fire keeps what it burns. The Court doesn't burn, it eats. There's nothing of yours left to put back.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch4_ivos_choice_court_2",
+              "speaker": "ivo_rime",
+              "text": "Whoever paid: write down everything you remember around the gap. It helps. It's what I'd tell any patient.",
+              "mood": "idle"
+            }
+          ],
+          "next": "pip"
+        },
+        {
+          "id": "notes",
+          "lines": [
+            {
+              "id": "ch4_ivos_choice_notes_1",
+              "speaker": "narrator",
+              "text": "The notes are a doctor's case files. Nell's pulse, Nell's colour, how far Nell walked each day she walked. Eleven years of a single patient.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch4_ivos_choice_notes_2",
+              "speaker": "narrator",
+              "text": "The last page says only: if this fails, stop. Underlined twice.",
+              "mood": "sad"
+            }
+          ],
+          "next": "pip"
+        },
+        {
+          "id": "pip",
+          "lines": [
+            {
+              "id": "ch4_ivos_choice_pip_1",
+              "speaker": "pip_ashdown",
+              "text": "Mister Rime. If you can put memories back into people, can you take them out?",
+              "mood": "idle",
+              "direction": "small and careful"
+            },
+            {
+              "id": "ch4_ivos_choice_pip_2",
+              "speaker": "ivo_rime",
+              "text": "Out of whom, child?",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch4_ivos_choice_pip_3",
+              "speaker": "pip_ashdown",
+              "text": "Me. I've got ones that aren't mine. Songs, and roads, and a man who's very tired. I don't want to carry him around any more.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch4_ivos_choice_pip_4",
+              "speaker": "narrator",
+              "text": "Ivo kneels in front of her, the way a doctor does, so that his eyes are level with hers.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_ivos_choice_pip_5",
+              "speaker": "ivo_rime",
+              "text": "I could try. I won't. Whoever they were, the fire burned them away, and you're the only place they're still kept.",
+              "mood": "idle",
+              "direction": "gentle; the best of him"
+            },
+            {
+              "id": "ch4_ivos_choice_pip_6",
+              "speaker": "ivo_rime",
+              "text": "That's heavy. But it isn't a sickness. It's a debt the dead ran up, and it isn't yours to pay alone.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch4_ivos_choice_pip_7",
+              "speaker": "pip_ashdown",
+              "text": "All right.",
+              "mood": "idle",
+              "direction": "very small"
+            }
+          ],
+          "next": "ask"
+        },
+        {
+          "id": "ask",
+          "lines": [
+            {
+              "id": "ch4_ivos_choice_ask_1",
+              "speaker": "ivo_rime",
+              "text": "So. Will you let me try? If you say no, I'll fight you for it. I'm sorry. I'm too tired to pretend I wouldn't.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_ivos_choice_ask_2",
+              "speaker": "narrator",
+              "text": "Nell lies still on the narrow bed. The brazier ticks. Below the tower, the dead of the pass have gathered in the snow, waiting for nothing.",
+              "mood": "sad"
+            }
+          ],
+          "vote": true,
+          "options": [
+            {
+              "id": "help",
+              "label": "Let him try.",
+              "to": "help",
+              "choice": "ch4_help_ivo"
+            },
+            {
+              "id": "stop",
+              "label": "Stop him.",
+              "to": "stop",
+              "choice": "ch4_stop_ivo"
+            }
+          ]
+        },
+        {
+          "id": "help",
+          "lines": [
+            {
+              "id": "ch4_ivos_choice_help_1",
+              "speaker": "narrator",
+              "text": "You set the ember against the cold one. For one breath the caves glow gold, and every dead thing on the mountain turns its head.",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch4_ivos_choice_help_2",
+              "speaker": "narrator",
+              "text": "Nell opens her eyes.",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch4_ivos_choice_help_3",
+              "speaker": "ivo_rime",
+              "text": "Nell?",
+              "mood": "surprised",
+              "direction": "barely a whisper"
+            },
+            {
+              "id": "ch4_ivos_choice_help_4",
+              "speaker": "narrator",
+              "text": "She looks at him for a long time. Then she smiles, the way people smile at someone who is late, and forgiven.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch4_ivos_choice_help_5",
+              "speaker": "narrator",
+              "text": "She lifts a hand to his face and says his name, once. Then the light goes out of her, gently, and this time she does not walk again.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch4_ivos_choice_help_6",
+              "speaker": "ivo_rime",
+              "text": "Thank you. That was a minute. I said I would take a minute.",
+              "mood": "sad",
+              "direction": "a long pause first, then very steady"
+            },
+            {
+              "id": "ch4_ivos_choice_help_7",
+              "speaker": "ivo_rime",
+              "text": "I'm done with the Kindled. Maren wanted the cold ember lit. It's yours. And whatever else I have, if you ever need a doctor.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_ivos_choice_help_8",
+              "speaker": "ivo_rime",
+              "text": "I can't remember her mother's name. The fire took it. Nell would laugh. She never liked her mother.",
+              "mood": "hurt",
+              "direction": "trying for a joke, and nearly managing"
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "stop",
+          "lines": [
+            {
+              "id": "ch4_ivos_choice_stop_1",
+              "speaker": "ivo_rime",
+              "text": "Ah. Yes. I thought you might. You have honest faces.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch4_ivos_choice_stop_2",
+              "speaker": "narrator",
+              "text": "He fights like a doctor, which is to say he knows exactly where it hurts, and he hates every moment of it.",
+              "mood": "angry"
+            },
+            {
+              "id": "ch4_ivos_choice_stop_3",
+              "speaker": "narrator",
+              "text": "It is over quickly. His notes go into your packs. The cold ember, dull and blue in its cave, is yours to carry.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_ivos_choice_stop_4",
+              "speaker": "ivo_rime",
+              "text": "Leave her the brazier. Please. She never liked the cold.",
+              "mood": "hurt",
+              "direction": "on the floor, not trying to get up"
+            },
+            {
+              "id": "ch4_ivos_choice_stop_5",
+              "speaker": "pip_ashdown",
+              "text": "We'll leave it. I'll leave a scarf as well. One of them.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch4_ivos_choice_stop_6",
+              "speaker": "narrator",
+              "text": "When you go, he is sitting by the bed, holding her hand. Maren Sorrel has lost her scholar, and Ivo Rime has nothing left to try.",
+              "mood": "sad"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch4_pip_remembers",
+      "beat": "ch4_pip_remembers",
+      "title": "What Pip Remembers",
+      "cast": [
+        "narrator",
+        "pip_ashdown"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch4_pip_remembers_open_1",
+              "speaker": "narrator",
+              "text": "You make camp in the lee of a frozen shrine below the pass. The fire is small, and it is wood. Nobody reaches for ember-light any more.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_pip_remembers_open_2",
+              "speaker": "narrator",
+              "text": "In the middle of the night, Pip wakes up screaming.",
+              "mood": "surprised"
+            }
+          ],
+          "options": [
+            {
+              "id": "first",
+              "label": "I'm here, Pip. It's me. Tell me first.",
+              "to": "first",
+              "tags": {
+                "background": [
+                  "urchin"
+                ]
+              }
+            },
+            {
+              "id": "hold",
+              "label": "Hold her until she stops shaking.",
+              "to": "hold"
+            },
+            {
+              "id": "pray",
+              "label": "I'll pray over her, quietly, until she's calm.",
+              "to": "pray",
+              "tags": {
+                "class": [
+                  "cleric",
+                  "paladin"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "first",
+          "lines": [
+            {
+              "id": "ch4_pip_remembers_first_1",
+              "speaker": "pip_ashdown",
+              "text": "You came. You always come. Don't let them all hear yet. Just you, first.",
+              "mood": "hurt",
+              "direction": "gulping, a child again"
+            },
+            {
+              "id": "ch4_pip_remembers_first_2",
+              "speaker": "narrator",
+              "text": "The others wait at the edge of the firelight while she whispers it into your shoulder. Then she lets you bring them close.",
+              "mood": "idle"
+            }
+          ],
+          "next": "memory"
+        },
+        {
+          "id": "hold",
+          "lines": [
+            {
+              "id": "ch4_pip_remembers_hold_1",
+              "speaker": "narrator",
+              "text": "She fights you for a moment, then holds on as hard as she can. Her hands are burning hot, in the coldest place in the Vale.",
+              "mood": "surprised"
+            }
+          ],
+          "next": "memory"
+        },
+        {
+          "id": "pray",
+          "lines": [
+            {
+              "id": "ch4_pip_remembers_pray_1",
+              "speaker": "narrator",
+              "text": "Your prayer is quiet and old. Her breathing slows to the rhythm of it. Your gift asks nothing of her except to listen.",
+              "mood": "idle"
+            }
+          ],
+          "next": "memory"
+        },
+        {
+          "id": "memory",
+          "lines": [
+            {
+              "id": "ch4_pip_remembers_memory_1",
+              "speaker": "pip_ashdown",
+              "text": "I was a man. I was old, and I was in the Keep, in the big hall, and the fire was in front of me, and it was singing.",
+              "mood": "sad",
+              "direction": "a frightened child"
+            },
+            {
+              "id": "ch4_pip_remembers_memory_2",
+              "speaker": "pip_ashdown",
+              "text": "I am Oswin Hale, Warden-Keeper. I have read the oldest books. The fire is not ours, and it is eating us.",
+              "mood": "idle",
+              "direction": "suddenly old and slow, not a child's cadence at all; another voice entirely"
+            },
+            {
+              "id": "ch4_pip_remembers_memory_3",
+              "speaker": "pip_ashdown",
+              "text": "I am putting it out. Slowly, like a lamp. It is going down, and going quiet, and it is nearly done.",
+              "mood": "idle",
+              "direction": "suddenly old and slow, not a child's cadence at all"
+            },
+            {
+              "id": "ch4_pip_remembers_memory_4",
+              "speaker": "pip_ashdown",
+              "text": "And then someone grabbed his hand. My hand. Someone in a hood, with a cold hand, and they pulled it back.",
+              "mood": "surprised",
+              "direction": "a child again, rushing"
+            },
+            {
+              "id": "ch4_pip_remembers_memory_5",
+              "speaker": "pip_ashdown",
+              "text": "And the fire went everywhere. It broke and flew out of the windows like birds. And he was screaming. I was screaming.",
+              "mood": "hurt"
+            },
+            {
+              "id": "ch4_pip_remembers_memory_6",
+              "speaker": "narrator",
+              "text": "The Keep did not fall because the Hearthflame was attacked. It fell because a Warden-Keeper tried to put it out, and someone stopped him halfway.",
+              "mood": "sad"
+            }
+          ],
+          "sets": [
+            "ch4_pip_remembers",
+            "truth_fall"
+          ],
+          "options": [
+            {
+              "id": "hood",
+              "label": "Did you see the face under the hood?",
+              "to": "hood"
+            },
+            {
+              "id": "maud",
+              "label": "Old Maud said she saw the Stranger's face that night.",
+              "to": "maud",
+              "tags": {
+                "background": [
+                  "hermit"
+                ]
+              }
+            },
+            {
+              "id": "oswin",
+              "label": "Oswin Hale. Corvin reads his letters. He was the last Keeper.",
+              "to": "oswin",
+              "tags": {
+                "background": [
+                  "sage"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "hood",
+          "lines": [
+            {
+              "id": "ch4_pip_remembers_hood_1",
+              "speaker": "pip_ashdown",
+              "text": "No face. Just the hood, and the hand. And a voice that said, not like this. Like it was sorry.",
+              "mood": "sad"
+            }
+          ],
+          "next": "close"
+        },
+        {
+          "id": "maud",
+          "lines": [
+            {
+              "id": "ch4_pip_remembers_maud_1",
+              "speaker": "pip_ashdown",
+              "text": "I didn't see a face. Only a hood. Lots of people have hoods.",
+              "mood": "hurt",
+              "direction": "too quickly; a lie, or a hope"
+            }
+          ],
+          "next": "close"
+        },
+        {
+          "id": "oswin",
+          "lines": [
+            {
+              "id": "ch4_pip_remembers_oswin_1",
+              "speaker": "narrator",
+              "text": "Oswin Hale: the name at the foot of half the letters in Corvin's archive, the Keeper who swore never to touch the fire. A century gone.",
+              "mood": "idle"
+            }
+          ],
+          "next": "close"
+        },
+        {
+          "id": "close",
+          "lines": [
+            {
+              "id": "ch4_pip_remembers_close_1",
+              "speaker": "pip_ashdown",
+              "text": "He was so tired. He's still tired. I can feel it, like a cold in the next room.",
+              "mood": "sad",
+              "direction": "suddenly old and slow, not a child's cadence at all, fading back"
+            },
+            {
+              "id": "ch4_pip_remembers_close_2",
+              "speaker": "pip_ashdown",
+              "text": "Can I sleep next to someone? Not because I'm scared. Because it's cold.",
+              "mood": "sad",
+              "direction": "a child, nine years old"
+            },
+            {
+              "id": "ch4_pip_remembers_close_3",
+              "speaker": "narrator",
+              "text": "High on the dark ridge above the camp, a hooded figure stands and watches the fire, and does not come down.",
+              "mood": "idle"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch4_pip_doctor",
+      "beat": "ch4_pip_remembers",
+      "title": "The Doctor Comes Down",
+      "requires": [
+        "ch4_ivo_helped"
+      ],
+      "cast": [
+        "narrator",
+        "ivo_rime",
+        "pip_ashdown"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch4_pip_doctor_open_1",
+              "speaker": "narrator",
+              "text": "Ivo Rime comes down from his tower at first light, a doctor's bag over his shoulder and nothing else.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_pip_doctor_open_2",
+              "speaker": "ivo_rime",
+              "text": "I heard her from the tower. Sound carries up here. Let me look at her. No, I'm not asking.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_pip_doctor_open_3",
+              "speaker": "ivo_rime",
+              "text": "Pulse fast. Temperature high, for this cold. Nothing wrong with her that sleep and soup won't mend.",
+              "mood": "idle",
+              "direction": "murmured, half to himself"
+            },
+            {
+              "id": "ch4_pip_doctor_open_4",
+              "speaker": "ivo_rime",
+              "text": "The memory, though. That isn't going anywhere. Somebody very old put it in very deep.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch4_pip_doctor_open_5",
+              "speaker": "pip_ashdown",
+              "text": "You can stay, if you want. You're less sad than yesterday.",
+              "mood": "happy",
+              "direction": "sleepy"
+            },
+            {
+              "id": "ch4_pip_doctor_open_6",
+              "speaker": "ivo_rime",
+              "text": "Am I? Well. Doctor's orders, then. I'll walk you all down the mountain.",
+              "mood": "happy",
+              "direction": "surprised into a laugh"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch4_pip_tower",
+      "beat": "ch4_pip_remembers",
+      "title": "The Light in the Tower",
+      "requires": [
+        "ch4_ivo_stopped"
+      ],
+      "cast": [
+        "narrator",
+        "pip_ashdown"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch4_pip_tower_open_1",
+              "speaker": "narrator",
+              "text": "In the morning you look back up the pass. The window in Rime's tower is still lit: a single cold blue light.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch4_pip_tower_open_2",
+              "speaker": "pip_ashdown",
+              "text": "He's still sitting with her. I know it. Not the fire way. Just the ordinary knowing way.",
+              "mood": "sad"
             }
           ],
           "end": true
