@@ -15,6 +15,11 @@ suite("tactics dev board log", () => {
     expect(line({ $type: "Reacted", reactor: "hero1", choice: "wizard.shield" })).toBe("Ann reacts: shield");
   });
 
+  it("names conditions in words", () => {
+    expect(line({ $type: "ConditionApplied", unit: "hero1", condition: "prone" })).toBe("Ann is prone");
+    expect(line({ $type: "ConditionApplied", unit: "hero1", condition: "statMod.wizard.shield" })).toBe("Ann gains shield");
+  });
+
   it("leaves bookkeeping events out", () => {
     expect(line({ $type: "PassiveTriggered", owner: "hero1", passive: "human.resourceful" })).toBeNull();
     expect(line({ $type: "Moved", unit: "hero1", path: [[0, 0], [1, 0]] })).toBeNull();

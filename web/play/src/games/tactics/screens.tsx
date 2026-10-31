@@ -1,11 +1,15 @@
 import { useEffect, useMemo, useState } from "preact/hooks";
 import type { CustomScreenProps } from "../module";
+import { conditionName } from "./conditions";
 import { tileStyle, useMap, type MapData } from "./map";
 import type {
   AbilityChoice, ClassOption, Cost, EncounterOption, ReactData, ResultsData, StatusData, Tile, TargetChoice, TurnData, UnitView,
 } from "./types";
 
 const same = (a: Tile, b: Tile) => a[0] === b[0] && a[1] === b[1];
+
+/** Where an ability sorts on the turn screen: Attack, the class's own, the common actions, then items. */
+const rank = (a: AbilityChoice) => (a.item ? 3 : a.ability === "common.attack" ? 0 : a.ability.startsWith("common.") ? 2 : 1);
 
 function Hp({ unit }: { unit: UnitView }) {
   const pct = unit.maxHp > 0 ? Math.round((100 * unit.hp) / unit.maxHp) : 0;
@@ -97,7 +101,7 @@ export function Status({ data }: CustomScreenProps) {
       {s.upIn ? <p class="tx-dim">You're up in {s.upIn}</p> : null}
       {s.aiPlaying ? <p class="tx-dim">The AI is playing your character</p> : null}
       <div class="tx-me"><b>{s.me.name}</b><Hp unit={s.me} /></div>
-      {s.me.conditions.length > 0 ? <p class="tx-dim">{s.me.conditions.join(", ")}</p> : null}
+      {s.me.conditions.length > 0 ? <p class="tx-dim">{s.me.conditions.map(conditionName).join(", ")}</p> : null}
     </div>
   );
 }
@@ -183,7 +187,8 @@ export function Turn({ data, send }: CustomScreenProps) {
           <button type="button" class="big" disabled={!move} onClick={() => move && send("move", { path: move.path })}>
             {move ? `Move here · ${move.cost}` : "Pick a tile to move"}
           </button>
-          {choices.canDelay ? <button type="button" onClick={() => send("delay", { slots: 1 })}>Delay</button> : null}
+          {/* Delay stays when it's spent, so End turn doesn't jump into its place under a thumb. */}
+          <button type="button" disabled={!choices.canDelay} onClick={() => send("delay", { slots: 1 })}>Delay</button>
           <button type="button" onClick={() => send("endTurn")}>End turn</button>
         </div>
       )}
@@ -201,7 +206,9 @@ export function Turn({ data, send }: CustomScreenProps) {
               {ability.targets.map((t, i) => (
                 <li key={i}>
                   <button type="button" class={target === t ? "on" : ""} onClick={() => setCursor(t.aim)}>
-                    {t.target.unit ? names.get(t.target.unit) ?? t.target.unit : `(${t.aim[0]}, ${t.aim[1]})`}
+                    {t.target.unit ? names.get(t.target.unit) ?? t.target.unit
+                      : t.affected.length > 0 ? `${t.affected.length} target${t.affected.length === 1 ? "" : "s"}`
+                      : `(${t.aim[0]}, ${t.aim[1]})`}
                     <small>{preview(t)}</small>
                   </button>
                 </li>
@@ -211,9 +218,9 @@ export function Turn({ data, send }: CustomScreenProps) {
         </div>
       ) : (
         <ul class="tx-abilities">
-          {choices.abilities.map((a, i) => (
+          {choices.abilities.map((a, i) => ({ a, i })).sort((x, y) => rank(x.a) - rank(y.a)).map(({ a, i }) => (
             <li key={`${a.ability}/${a.item ?? ""}`}>
-              <button type="button" onClick={() => setAbilityIx(i)}>
+              <button type="button" onClick={() => { setAbilityIx(i); window.scrollTo(0, 0); }}>
                 <b>{a.name}</b> <small class="tx-dim">{costText(a.cost)}</small>
                 <small class="tx-tip">{a.tooltip}</small>
               </button>

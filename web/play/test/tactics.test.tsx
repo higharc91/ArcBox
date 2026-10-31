@@ -3,7 +3,7 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/preact";
 import type { CustomView } from "../src/protocol";
 import { loadModule } from "../src/games/registry";
 import { costText } from "../src/games/tactics/screens";
-import type { TurnData } from "../src/games/tactics/types";
+import type { StatusData, TurnData } from "../src/games/tactics/types";
 import { ControllerScreen } from "../src/widgets/ControllerScreen";
 
 // Real views from a real session, written by games/Tactics/Tactics.Game.Tests/PhoneFixtureTests.cs.
@@ -87,6 +87,59 @@ describe("tactics phone module", () => {
     expect(document.querySelectorAll(".tx-cell.aim")).toHaveLength(1);
     fireEvent.click(screen.getByRole("button", { name: "Use" }));
     expect(send).toHaveBeenLastCalledWith({ action: "use", data: { ability: "wizard.fireball", tile: [x + 1, y] } });
+  });
+
+  it("turn: picking an ability goes back to the top, where Use and Back are", () => {
+    const scrollTo = vi.spyOn(window, "scrollTo").mockImplementation(() => {});
+    show("turn");
+    fireEvent.click(screen.getByRole("button", { name: /^Dash/ }));
+    expect(scrollTo).toHaveBeenCalledWith(0, 0);
+    scrollTo.mockRestore();
+  });
+
+  it("turn: Delay keeps its place once it's gone, so End turn doesn't move under your thumb", () => {
+    const v = view("turn");
+    (v.data as unknown as TurnData).choices.canDelay = false;
+    render(<ControllerScreen view={v} send={vi.fn()} me="ALEX" game="tactics" />);
+    expect((screen.getByRole("button", { name: "Delay" }) as HTMLButtonElement).disabled).toBe(true);
+  });
+
+  it("turn: Attack comes first, then the class's own abilities, the common actions and items", () => {
+    const v = view("turn");
+    const data = v.data as unknown as TurnData;
+    const ability = (id: string, name: string, item: string | null = null) =>
+      ({ ability: id, item, name, tooltip: "", cost: {}, targets: [], tiles: [] });
+    data.choices.abilities = [
+      ability("common.dash", "Dash"), ability("common.use_item", "Potion", "potion"), ability("common.attack", "Attack"),
+      ability("wizard.sleep", "Sleep"),
+    ];
+    render(<ControllerScreen view={v} send={vi.fn()} me="ALEX" game="tactics" />);
+    expect([...document.querySelectorAll(".tx-abilities b")].map((b) => b.textContent)).toEqual(["Attack", "Sleep", "Dash", "Potion"]);
+  });
+
+  it("turn: an area target says how many it hits, not its coordinates", () => {
+    const v = view("turn");
+    const data = v.data as unknown as TurnData;
+    const hit = (unit: string) => ({ unit, damage: 0, heal: 0 });
+    data.choices.abilities = [{
+      ability: "wizard.sleep", item: null, name: "Sleep", tooltip: "", cost: { action: 1 }, tiles: [],
+      targets: [
+        { target: { unit: null, tile: [8, 6] }, aim: [8, 6], affected: [hit(data.units[0]!.id), hit(data.units[1]!.id)] },
+        { target: { unit: null, tile: [7, 5] }, aim: [7, 5], affected: [hit(data.units[0]!.id)] },
+      ],
+    }];
+    render(<ControllerScreen view={v} send={vi.fn()} me="ALEX" game="tactics" />);
+    fireEvent.click(screen.getByRole("button", { name: /^Sleep/ }));
+    expect(screen.getByRole("button", { name: /^2 targets/ })).toBeTruthy();
+    expect(screen.getByRole("button", { name: /^1 target/ })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: /^\(8, 6\)/ })).toBeNull();
+  });
+
+  it("status: conditions read as words, not internal ids", () => {
+    const v = view("status");
+    (v.data as unknown as StatusData).me.conditions = ["statMod.wizard.shield", "prone", "hunters_mark"];
+    render(<ControllerScreen view={v} send={vi.fn()} me="ALEX" game="tactics" />);
+    expect(screen.getByText("shield, prone, hunters mark")).toBeTruthy();
   });
 
   it("turn: the d-pad moves the cursor off your own tile", () => {

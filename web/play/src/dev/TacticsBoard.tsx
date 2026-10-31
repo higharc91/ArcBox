@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "preact/hooks";
+import { conditionName } from "../games/tactics/conditions";
 import { tileStyle, useMap, type MapData } from "../games/tactics/map";
 
 /**
@@ -50,7 +51,10 @@ export function describe(e: BattleEvent, name: (id: unknown) => string): string 
     case "Died": return `${n("unit")} dies`;
     case "UnitOut": return `${n("unit")} is out of the fight`;
     case "Revived": return `${n("unit")} is back up`;
-    case "ConditionApplied": return `${n("unit")} is ${String(e.condition).replaceAll("_", " ")}`;
+    case "ConditionApplied": {
+      const condition = String(e.condition);
+      return `${n("unit")} ${condition.startsWith("statMod.") ? "gains" : "is"} ${conditionName(condition)}`;
+    }
     case "Reacted": return e.choice === "pass"
       ? `${n("reactor")} lets it go`
       : `${n("reactor")} reacts: ${String(e.choice).split(".").pop()!.replaceAll("_", " ")}`;
