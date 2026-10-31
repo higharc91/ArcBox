@@ -255,6 +255,41 @@
     }
   },
   "renders": {
+    "Achernar.30a4a703": {
+      "asset": "asset_q6L1Y216teyScGsQqszsSJ8x",
+      "preset": "Achernar",
+      "text": "Warm hands and empty heads. Ask yourself why, dearie."
+    },
+    "Achernar.31bc5d39": {
+      "asset": "asset_sP1Qfj3zVUs3Uy4pt2tHDNU2",
+      "preset": "Achernar",
+      "text": "Mind the bank. It's softer than it was. Everything's softer than it was."
+    },
+    "Achernar.5fb25aeb": {
+      "asset": "asset_81HzC4zU1gtZscQJf3mzHKLi",
+      "preset": "Achernar",
+      "text": "Oh, never get old, dearie. It's dreadful. Wouldn't miss it, mind."
+    },
+    "Achernar.967f18ce": {
+      "asset": "asset_GKi3ewzFZKczCGvwqzHNc7As",
+      "preset": "Achernar",
+      "text": "Never touched a shard. Not once. That's why there's still all of me."
+    },
+    "Achernar.a7c16010": {
+      "asset": "asset_yJCr3JhaaNNsJrYa3dqbY41J",
+      "preset": "Achernar",
+      "text": "The river remembers. Ask it nicely and it might tell you."
+    },
+    "Achernar.ba6d175d": {
+      "asset": "asset_jf836dbLFKRziFbrXjQypSR4",
+      "preset": "Achernar",
+      "text": "Sit down, dearie. I've waited a hundred years, I can wait while you sit."
+    },
+    "Achernar.c8d3ec0d": {
+      "asset": "asset_kTQKUR6zJWEKcC8zGn4XxP1i",
+      "preset": "Achernar",
+      "text": "You've the right sort of face for questions. Ask me a better one."
+    },
     "Algenib.0b2ba3dc": {
       "asset": "asset_bgvA6cKPwHpRDv8SWgegm6dY",
       "preset": "Algenib",
@@ -424,6 +459,186 @@
       "asset": "asset_5yYJFQR4jGxYz3Lxojgd5LyK",
       "preset": "Alnilam",
       "text": "Not done yet."
+    },
+    "Aoede.38b5f375": {
+      "asset": "asset_cAuxfQpuibAmVBXEn7o4hkUL",
+      "preset": "Aoede",
+      "text": "Songs don't burn. That's why I keep them."
+    },
+    "Aoede.51c3473b": {
+      "asset": "asset_JiMLSdjBBZ7khXUjtZcxMDYi",
+      "preset": "Aoede",
+      "text": "Bless you. You'll get a chorus all your own."
+    },
+    "Aoede.63498399": {
+      "asset": "asset_jbq9udrLPZSur7N7oB92WXqZ",
+      "preset": "Aoede",
+      "text": "Ah, a battle! Do try to do something worth a verse."
+    },
+    "Aoede.69564b37": {
+      "asset": "asset_AHkzovLthTZQZA5LgCQA6sr4",
+      "preset": "Aoede",
+      "text": "And here the singer pauses, out of respect."
+    },
+    "Aoede.6b819c62": {
+      "asset": "asset_vEQ7ZY4MuKcpvhvukVET3UEE",
+      "preset": "Aoede",
+      "text": "And they lived, and the song went on. For now."
+    },
+    "Aoede.864bf850": {
+      "asset": "asset_enyaojXRV4vQLcdK3TwP41fD",
+      "preset": "Aoede",
+      "text": "Oh, this is the sad part, isn't it. I hate the sad part."
+    },
+    "Aoede.88506840": {
+      "asset": "asset_bMhrExbKMjYM85y6hfeAzyV2",
+      "preset": "Aoede",
+      "text": "No, no, no. That's not how this one goes!"
+    },
+    "Aoede.98cd4a21": {
+      "asset": "asset_QZc46gszon223YXjNu1SzDzJ",
+      "preset": "Aoede",
+      "text": "Gather round, gather round, and mind the pointy end."
+    },
+    "Aoede.a3e7003d": {
+      "asset": "asset_pS4egCw3jkmzAF6F87H33oor",
+      "preset": "Aoede",
+      "text": "Oh, that's the second verse, right there!"
+    },
+    "Aoede.c525a56e": {
+      "asset": "asset_1rU2nH4WXRxP5mqDupwEgb4P",
+      "preset": "Aoede",
+      "text": "Every good song has a fight in the middle. Here's ours."
+    },
+    "Aoede.c64456ff": {
+      "asset": "asset_hZFsbCA9e5qpY1hqeXs3gLmS",
+      "preset": "Aoede",
+      "text": "Hm. We'll leave that out of the ballad."
+    },
+    "Aoede.c8abaee6": {
+      "asset": "asset_xSLmgt1zh6crjgLzXoMZ9bDR",
+      "preset": "Aoede",
+      "text": "Ha! That'll rhyme with something."
+    },
+    "Aoede.d864ac19": {
+      "asset": "asset_9CsKanceyk9UdBMnuBUtrnyc",
+      "preset": "Aoede",
+      "text": "Someone's growing into their legend."
+    },
+    "Aoede.dcc7cd6b": {
+      "asset": "asset_AjGD8Mze5UsqpQ6RfCJUTVQs",
+      "preset": "Aoede",
+      "text": "Sleep now, sleep now, the river is wide, and the fire keeps watch on the other side."
+    },
+    "Aoede.f11686a2": {
+      "asset": "asset_pnWRogXDQMprDHWmLb9xgVSc",
+      "preset": "Aoede",
+      "text": "There's a last verse to the Song of the Seven. Nobody's sung it in two hundred years. I'll find it."
+    },
+    "Callirrhoe.07ad6e45": {
+      "asset": "asset_WsvZEjFmNtxSpun1DdPDWdw5",
+      "preset": "Callirrhoe",
+      "text": "Stay there."
+    },
+    "Callirrhoe.161dd720": {
+      "asset": "asset_ZzDG3xSdQScUsnKQQHgXSEZA",
+      "preset": "Callirrhoe",
+      "text": "Sleep. I'll take the watch. Habit."
+    },
+    "Callirrhoe.2a8e1a33": {
+      "asset": "asset_Sdm99AytkEz9LEvdjvjNzUEQ",
+      "preset": "Callirrhoe",
+      "text": "Fall back! Back, now!"
+    },
+    "Callirrhoe.2aecd0f6": {
+      "asset": "asset_KtT6Mq54NDo2sEnSAdP8VoXP",
+      "preset": "Callirrhoe",
+      "text": "Ta. Back in."
+    },
+    "Callirrhoe.3b66b755": {
+      "asset": "asset_wvYHiC9stu4jUaV4Yz1twwSh",
+      "preset": "Callirrhoe",
+      "text": "Count heads. Everyone? Good."
+    },
+    "Callirrhoe.3c4e55f2": {
+      "asset": "asset_11pDVgLVmMQEQ8Cm2TNfC4Jc",
+      "preset": "Callirrhoe",
+      "text": "Don't tell me it'll be all right. Tell me what we're doing."
+    },
+    "Callirrhoe.4db22098": {
+      "asset": "asset_DHikC8oH64DyUmN8WFHv5xhR",
+      "preset": "Callirrhoe",
+      "text": "Form up. Nobody dies stupid."
+    },
+    "Callirrhoe.4f222ab0": {
+      "asset": "asset_NxgmpDQwVv9vcjTDecJk6yG2",
+      "preset": "Callirrhoe",
+      "text": "Right. Let's earn our bread."
+    },
+    "Callirrhoe.579a7817": {
+      "asset": "asset_5PcAoej5PdGxX9bVd5q8QRLd",
+      "preset": "Callirrhoe",
+      "text": "Moving."
+    },
+    "Callirrhoe.6d27150e": {
+      "asset": "asset_jZ5PHounmtrSRwfTsECVYxUL",
+      "preset": "Callirrhoe",
+      "text": "That's for the bridge."
+    },
+    "Callirrhoe.7573d56f": {
+      "asset": "asset_7vk7WQp1zqTLpKS7MwcaayjZ",
+      "preset": "Callirrhoe",
+      "text": "Still here. Don't fuss."
+    },
+    "Callirrhoe.7be89119": {
+      "asset": "asset_hJGcXRn7gMPPDVHB7qNEH1jb",
+      "preset": "Callirrhoe",
+      "text": "Mine."
+    },
+    "Callirrhoe.80a835e8": {
+      "asset": "asset_JNpemHM6VhRLcv96aaSA6K2N",
+      "preset": "Callirrhoe",
+      "text": "One less."
+    },
+    "Callirrhoe.ad72e558": {
+      "asset": "asset_ie4moZJaEwG6E2cXuz11Aree",
+      "preset": "Callirrhoe",
+      "text": "Had worse. Not much worse."
+    },
+    "Callirrhoe.addeda3e": {
+      "asset": "asset_CHG6pSVqhGVbDHmrbcVKyrcK",
+      "preset": "Callirrhoe",
+      "text": "Done."
+    },
+    "Callirrhoe.b1ddbd18": {
+      "asset": "asset_yK5NbxuV1bzAJtJk3h1KAhKY",
+      "preset": "Callirrhoe",
+      "text": "Eyes front. Shields up."
+    },
+    "Callirrhoe.b790cede": {
+      "asset": "asset_Z8KkHPXKnLL3npR6LZ45dHC9",
+      "preset": "Callirrhoe",
+      "text": "Not again. Not on my watch."
+    },
+    "Callirrhoe.ba280720": {
+      "asset": "asset_H11wMMDnoSSfaL5W36thxpsa",
+      "preset": "Callirrhoe",
+      "text": "Someone's down! Cover them!"
+    },
+    "Callirrhoe.c3def4b5": {
+      "asset": "asset_Gqw7HTSi2H1CdpuQ75itRDBu",
+      "preset": "Callirrhoe",
+      "text": "That'll do."
+    },
+    "Callirrhoe.eab8bc3a": {
+      "asset": "asset_f9PV7SsUJa6Sb8ZuacgVAk2Z",
+      "preset": "Callirrhoe",
+      "text": "Damn it."
+    },
+    "Callirrhoe.ffb52268": {
+      "asset": "asset_J29oQitszoNdnbH1Eyc3gbQM",
+      "preset": "Callirrhoe",
+      "text": "Down."
     },
     "Charon.00885eb3": {
       "asset": "asset_2XWjSXzysnzAfPTSZKSXc2Ki",
@@ -845,6 +1060,86 @@
       "preset": "Kore",
       "text": "Hold together. We do this properly."
     },
+    "Leda.2622a84e": {
+      "asset": "asset_rNxxrh722FkQagiVXpvrcH8a",
+      "preset": "Leda",
+      "text": "The stars are wrong tonight. No. They're right. I just remember them different."
+    },
+    "Leda.489a529a": {
+      "asset": "asset_WZK6WbiGuoTz3ByEhyBxbfnZ",
+      "preset": "Leda",
+      "text": "I can run that for you! Two coppers. One if you're nice. Three if you're not."
+    },
+    "Leda.4dafb332": {
+      "asset": "asset_msHGftr6gTXWBSr1v7WjXVVW",
+      "preset": "Leda",
+      "text": "I didn't take it. I was holding it. For you. Here."
+    },
+    "Leda.74591c3b": {
+      "asset": "asset_PoFhnkKkW6XcTT4Rrgh3iEeX",
+      "preset": "Leda",
+      "text": "There's a song in my head again. I never learned it. Want to hear?"
+    },
+    "Leda.9b9a9bb5": {
+      "asset": "asset_bY4291s6JxaYmXawygdfESGi",
+      "preset": "Leda",
+      "text": "Can I sit with you? Just till I'm sleepy. I'm not scared. I'm cold."
+    },
+    "Leda.afc3a87a": {
+      "asset": "asset_qSdTFpQ95XscYgMz3V34YiBW",
+      "preset": "Leda",
+      "text": "Tell me a story. A true one. I'll know if it isn't."
+    },
+    "Leda.da1f2739": {
+      "asset": "asset_79fJ5gGQz1JTnXCA21yqStZY",
+      "preset": "Leda",
+      "text": "Bree says I'm not to bother you. I'm not bothering. I'm standing."
+    },
+    "Leda.df10fd65": {
+      "asset": "asset_2FxQeqKM88F1zH6X6fGEQ5Vi",
+      "preset": "Leda",
+      "text": "I dreamed of a big stone hall with a fire in the middle. I've never been in a hall."
+    },
+    "Leda.f0e96f71": {
+      "asset": "asset_EM5YrXjJiETNA5Mtw6uem1zt",
+      "preset": "Leda",
+      "text": "I know a quicker way round the docks. Don't ask how. I just do."
+    },
+    "Orus.100f98aa": {
+      "asset": "asset_fBsZjEXMWYNdRHTjeXZywZZ8",
+      "preset": "Orus",
+      "text": "Hm. That edge has seen work. Leave it with me."
+    },
+    "Orus.3d6bcd97": {
+      "asset": "asset_JB95ZxAomstSJEVZyvU24ns7",
+      "preset": "Orus",
+      "text": "Forge is cold this morning. Colder than yesterday."
+    },
+    "Orus.40691a56": {
+      "asset": "asset_5TWZWUekULEbs3jE3R3TrYE3",
+      "preset": "Orus",
+      "text": "Shut the door. You're letting the heat out. What's left of it."
+    },
+    "Orus.5f9a0165": {
+      "asset": "asset_mZ9jbp1krHHSBQt2vjoLhCpY",
+      "preset": "Orus",
+      "text": "Don't ask where the last shard came from. I didn't."
+    },
+    "Orus.c4266628": {
+      "asset": "asset_wqnGaC83HqR94sWSZWCHUkqp",
+      "preset": "Orus",
+      "text": "Mm. Good steel remembers the hammer. Better than I do, some days."
+    },
+    "Orus.c52a0b96": {
+      "asset": "asset_6nRQiVF3pxzriVZHB5hCgkhD",
+      "preset": "Orus",
+      "text": "Four Fells at this anvil before me. I'll not be the one lets it go out."
+    },
+    "Orus.e61475c4": {
+      "asset": "asset_wm4npDMm22armdyAwSrr6GAQ",
+      "preset": "Orus",
+      "text": "Mm. Bring me the steel. I'll see what's left in the fire."
+    },
     "Pulcherrima.1c30b36e": {
       "asset": "asset_cHvqsGgPoEDHVoerW76X35Fs",
       "preset": "Pulcherrima",
@@ -889,6 +1184,46 @@
       "asset": "asset_fU1vq1sNsohHfeaJ9JfMrAgq",
       "preset": "Pulcherrima",
       "text": "Better! Let me at them!"
+    },
+    "Sadachbia.38f15175": {
+      "asset": "asset_NYasec4C1fyWMGBG2c7Q2UvK",
+      "preset": "Sadachbia",
+      "text": "Old Maud says I ask the wrong questions. She's usually right, which is infuriating."
+    },
+    "Sadachbia.4f27bcd3": {
+      "asset": "asset_DRYvoRrkKmcbVKVzxagaFZh4",
+      "preset": "Sadachbia",
+      "text": "If you find anything written down out there, anything at all, bring it to me. Please."
+    },
+    "Sadachbia.5a127754": {
+      "asset": "asset_Fg2wAtgqdQAgGXsR2XrTRtyQ",
+      "preset": "Sadachbia",
+      "text": "Ink. Ink doesn't forget. That's the whole... yes. That's the whole point of ink."
+    },
+    "Sadachbia.690be48d": {
+      "asset": "asset_8GSCctBTzqHb1HMVqpQKVGuG",
+      "preset": "Sadachbia",
+      "text": "Don't touch that pile, it's in order. It doesn't look in order. It is."
+    },
+    "Sadachbia.b303661d": {
+      "asset": "asset_aqmW6hZ88M9tn8v26zcrJoSt",
+      "preset": "Sadachbia",
+      "text": "Mother Aubrine calls history a matter of faith. I call it a matter of paper."
+    },
+    "Sadachbia.c888f978": {
+      "asset": "asset_rKgMcLm5fTtuBq8s4TYzEvav",
+      "preset": "Sadachbia",
+      "text": "Thirty years reading by ember-lamp, and I can't remember half of what I read. Odd, isn't it?"
+    },
+    "Sadachbia.d9170494": {
+      "asset": "asset_W1kP32igVSaY64XLk8FnsaMq",
+      "preset": "Sadachbia",
+      "text": "Forty-one years, simply missing. Who loses forty-one years? Unless..."
+    },
+    "Sadachbia.e01ff429": {
+      "asset": "asset_ATABnyrsEjUtP3ZxDk4fvEbh",
+      "preset": "Sadachbia",
+      "text": "Ah, you're back! Good. I've found another gap. Well, not found. More... not found."
     },
     "Sadaltager.09436a1d": {
       "asset": "asset_yhxWCLAbWPLWsvthAiUpX1od",
@@ -975,20 +1310,105 @@
       "preset": "Sadaltager",
       "text": "I'll be writing this up."
     },
+    "Vindemiatrix.0643e496": {
+      "asset": "asset_Dok3tageJraXpX3VD9yRAr7J",
+      "preset": "Vindemiatrix",
+      "text": "I buried two this week, old ones, cold in their beds. Pray it stays only the old."
+    },
+    "Vindemiatrix.152fd558": {
+      "asset": "asset_Kn58JzdrvqEq4ofJC3CfXWXz",
+      "preset": "Vindemiatrix",
+      "text": "Come in out of the wind. There's soup at the back, and nobody counts the bowls."
+    },
+    "Vindemiatrix.4cc57b2f": {
+      "asset": "asset_wXJA7i8P4jdh43wQ17smAXHM",
+      "preset": "Vindemiatrix",
+      "text": "Mind how you speak in the square. Fear spreads faster than fever."
+    },
+    "Vindemiatrix.8e16f7e4": {
+      "asset": "asset_9FGtzakJqBzyVAgo8hTVA5zW",
+      "preset": "Vindemiatrix",
+      "text": "Pray if you like. If you'd rather not, sit anyway. The chapel doesn't mind."
+    },
+    "Vindemiatrix.a29eef99": {
+      "asset": "asset_Rzno2uDNExx1EhKikzKSjT4D",
+      "preset": "Vindemiatrix",
+      "text": "Doubt is a draught under the door. Shut it, and keep the hearth."
+    },
+    "Vindemiatrix.a649f7ee": {
+      "asset": "asset_2oN97Zp1MgShrbiaAMu5VfL3",
+      "preset": "Vindemiatrix",
+      "text": "Corvin says the records have holes in them. Corvin says a great many things."
+    },
+    "Vindemiatrix.ecdca431": {
+      "asset": "asset_U2WPkfuyD2NB3rwSCi7FKf1o",
+      "preset": "Vindemiatrix",
+      "text": "The flame was given to us. We will be worthy of it, cold or warm."
+    },
     "Zephyr.11f3a189": {
       "asset": "asset_A8umT1AjUkmLTDzrMnWxJ4eh",
       "preset": "Zephyr",
       "text": "Stew's hot, bread's yesterday's. Don't complain, my love, nobody else is feeding you."
+    },
+    "Zephyr.2b0fe173": {
+      "asset": "asset_bFf9Sc6T952Tj3RFZLbPojoy",
+      "preset": "Zephyr",
+      "text": "Heard a thing at the bar you'll want to hear. Eat first."
+    },
+    "Zephyr.50ffb190": {
+      "asset": "asset_wDg2qR6WLKcUXd9njv9xDtmj",
+      "preset": "Zephyr",
+      "text": "Pip! Where's that girl got to? Never mind. She'll turn up when she's hungry."
+    },
+    "Zephyr.57211e76": {
+      "asset": "asset_mhcphjhpzrsgnDZrUfQyRjn2",
+      "preset": "Zephyr",
+      "text": "Oh, no you don't. Up you get, my love. Up!"
+    },
+    "Zephyr.6390da08": {
+      "asset": "asset_zFz3nzE4UspdJnYnQV9NgNrZ",
+      "preset": "Zephyr",
+      "text": "Come in closer. The fire doesn't bite, and neither do I. Much."
     },
     "Zephyr.6c380dd7": {
       "asset": "asset_1i2S6qpp3aGyCVRaDMmQF3mx",
       "preset": "Zephyr",
       "text": "Boots off the benches. I'll not tell you twice. Well, I will, but I'll not like it."
     },
+    "Zephyr.76af17da": {
+      "asset": "asset_g7vGG4iB5jiK2zfgrFjtiHHG",
+      "preset": "Zephyr",
+      "text": "I'm all right. I'm all right. Keep going."
+    },
+    "Zephyr.aeacefe3": {
+      "asset": "asset_Nszi4o67fGSFeVvXX1r4vCB4",
+      "preset": "Zephyr",
+      "text": "Brought you a pie. Don't look at me like that, you're thin as rakes, the lot of you."
+    },
+    "Zephyr.c3f9e45f": {
+      "asset": "asset_CDbs95FSbr6aWKfktfpnjn83",
+      "preset": "Zephyr",
+      "text": "Right then. I've thrown worse than you out of my inn."
+    },
+    "Zephyr.cbbbc671": {
+      "asset": "asset_frQGSfFHVNVoNp9xwodBzHF8",
+      "preset": "Zephyr",
+      "text": "There. Mind your manners."
+    },
     "Zephyr.cd4b734f": {
       "asset": "asset_d8ZtZwxS4t34Bi432Xhuugjg",
       "preset": "Zephyr",
       "text": "Sit. Eat. Then you can tell me how bad it is."
+    },
+    "Zephyr.cf40c03a": {
+      "asset": "asset_5pkqbMj95w5E79DKNnBBv5XX",
+      "preset": "Zephyr",
+      "text": "Good. Now everyone's coming back for supper, and no arguments."
+    },
+    "Zephyr.f2a2cb51": {
+      "asset": "asset_8vPBr8L1yCMnaAEvB6dKkuMi",
+      "preset": "Zephyr",
+      "text": "Thank you, my love. Your supper is on the house."
     },
     "Zubenelgenubi.00dde345": {
       "asset": "asset_MpXhcoxgs7qBvFYQp7byYDU3",
