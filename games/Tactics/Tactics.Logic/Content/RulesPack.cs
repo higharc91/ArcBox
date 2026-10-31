@@ -111,11 +111,11 @@ public sealed partial class RulesPack
     /// The sheet is on the enemy side; a summoner puts it on its own. This is the one place summons and named hooks get
     /// their monsters from.
     /// </summary>
-    public UnitSheet? MonsterSheet(string id)
+    public UnitSheet? MonsterSheet(string id, int? level = null)
     {
         if (_monsterSheets.TryGetValue(id, out var sheet))
             return sheet;
-        return Monsters.ContainsKey(id) ? SheetBuilder.ForMonster(id, this) : null;
+        return Monsters.ContainsKey(id) ? SheetBuilder.ForMonster(id, this, level) : null;
     }
 
     /// <summary>

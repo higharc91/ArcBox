@@ -134,6 +134,10 @@ public sealed class MarkBlock : EffectBlock<MarkEffect>
     /// <summary>The condition a mark is.</summary>
     public static readonly ConditionId Condition = new("marked");
 
+    /// <summary>True when <paramref name="target"/> is marked by <paramref name="attacker"/>.</summary>
+    public static bool MarkedBy(UnitState target, UnitId attacker)
+        => target.Conditions.Any(c => c.Id == Condition && c.Source == attacker);
+
     /// <inheritdoc />
     public override string Key => "mark";
 

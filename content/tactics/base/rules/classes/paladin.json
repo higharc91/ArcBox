@@ -29,8 +29,26 @@
     "10": [ { "choose": 1, "from": ["paladin.bless", "paladin.command", "paladin.compelled_duel", "paladin.cure_wounds", "paladin.shield_of_faith",
                                     "paladin.aid", "paladin.lesser_restoration", "paladin.dispel_magic", "paladin.elemental_weapon"] } ]
   },
-  "subclasses": [],
-  "subclassesPending": true,
+  "subclasses": [
+    { "id": "paladin.guardian", "name": "Guardian",
+      "features": {
+        "3": [ { "ability": "guardian.sanctuary_aegis" }, { "ability": "guardian.righteous_challenge" } ],
+        "6": [ { "ability": "guardian.divine_intervention" }, { "passive": "guardian.steadfast" } ],
+        "10": [ { "ability": "guardian.aegis_of_faith" } ]
+      } },
+    { "id": "paladin.crusader", "name": "Crusader",
+      "features": {
+        "3": [ { "ability": "crusader.searing_smite" }, { "passive": "crusader.radiant_blades" } ],
+        "6": [ { "ability": "crusader.consecrated_ground" } ],
+        "10": [ { "ability": "crusader.dawnbreaker" } ]
+      } },
+    { "id": "paladin.avenger", "name": "Avenger",
+      "features": {
+        "3": [ { "ability": "avenger.vow_of_enmity" }, { "ability": "avenger.abjure_enemy" } ],
+        "6": [ { "ability": "avenger.relentless_step" }, { "passive": "avenger.vengeful_strikes" } ],
+        "10": [ { "ability": "avenger.soul_of_vengeance" } ]
+      } }
+  ],
   "defaultPicks": {
     "1": ["paladin.bless", "paladin.cure_wounds"],
     "2": ["paladin.bless", "paladin.cure_wounds", "fighter.style_defense"],

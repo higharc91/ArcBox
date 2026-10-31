@@ -33,6 +33,18 @@
         "3": [ { "ability": "vanguard.charge" }, { "ability": "vanguard.challenge" } ],
         "6": [ { "ability": "vanguard.shield_wall" }, { "passive": "vanguard.hold_the_line" } ],
         "10": [ { "ability": "vanguard.mass_challenge" }, { "passive": "vanguard.unbreakable" } ]
+      } },
+    { "id": "fighter.weaponmaster", "name": "Weaponmaster",
+      "features": {
+        "3": [ { "ability": "weaponmaster.cleave" }, { "passive": "weaponmaster.keen_edge" } ],
+        "6": [ { "ability": "weaponmaster.blade_dance" }, { "passive": "weaponmaster.relentless" } ],
+        "10": [ { "ability": "weaponmaster.execution_strike" }, { "passive": "weaponmaster.master_of_arms" } ]
+      } },
+    { "id": "fighter.warlord", "name": "Warlord",
+      "features": {
+        "3": [ { "ability": "warlord.commanders_strike" }, { "ability": "warlord.maneuvering_order" } ],
+        "6": [ { "ability": "warlord.rallying_cry" }, { "passive": "warlord.inspiring_presence" } ],
+        "10": [ { "ability": "warlord.to_arms" }, { "passive": "warlord.tactical_genius" } ]
       } }
   ],
   "defaultPicks": {

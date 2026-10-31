@@ -19,8 +19,26 @@
     "9": [ { "ability": "barbarian.brutal_strike" }, { "ability": "barbarian.relentless_rage" } ],
     "10": [ { "passive": "barbarian.indomitable_might" } ]
   },
-  "subclasses": [],
-  "subclassesPending": true,
+  "subclasses": [
+    { "id": "barbarian.berserker", "name": "Path of the Berserker",
+      "features": {
+        "3": [ { "ability": "berserker.frenzy_strike" }, { "passive": "berserker.mindless_rage" } ],
+        "6": [ { "ability": "berserker.retaliation" } ],
+        "10": [ { "ability": "berserker.bloodlust_roar" } ]
+      } },
+    { "id": "barbarian.earthshaker", "name": "Earthshaker",
+      "features": {
+        "3": [ { "ability": "earthshaker.quake_slam" }, { "passive": "earthshaker.stone_hide" } ],
+        "6": [ { "ability": "earthshaker.tectonic_rift" } ],
+        "10": [ { "ability": "earthshaker.cataclysm" } ]
+      } },
+    { "id": "barbarian.spiritwarden", "name": "Spiritwarden",
+      "features": {
+        "3": [ { "ability": "spiritwarden.ancestral_ward" }, { "passive": "spiritwarden.ancestral_protectors" } ],
+        "6": [ { "ability": "spiritwarden.spirit_shield" } ],
+        "10": [ { "ability": "spiritwarden.vengeful_ancestors" } ]
+      } }
+  ],
   "defaultPicks": {
     "1": [], "2": [], "3": [], "4": [], "5": [], "6": [], "7": [], "8": [], "9": [], "10": []
   },

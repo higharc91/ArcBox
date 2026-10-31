@@ -350,7 +350,7 @@ public sealed record PhaseDef(int HpBelow, ImmutableArray<AbilityId> Abilities, 
 /// natural weapons are its own; <c>weapons.json</c> holds the gear characters carry). <see cref="Hp"/> is its maximum HP.
 /// <see cref="Replaces"/> lets a later pack override an id.
 /// </summary>
-public sealed record MonsterDef(string Id, string Name, string Cr, int Xp, ImmutableSortedDictionary<Stat, int> Scores, int Hp, int Ac,
+public sealed record MonsterDef(string Id, string Name, string Cr, int Xp, ImmutableSortedDictionary<Stat, int> Scores, ByLevel<int> Hp, int Ac,
     WeaponDef Weapon, string AiProfile, string Sprite, ImmutableArray<AbilityId> Abilities, ImmutableArray<string> Passives,
     ImmutableSortedSet<Stat> Saves,
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Skills,

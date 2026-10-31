@@ -108,6 +108,7 @@ internal sealed partial class Validation
             var def = Deserialize<MonsterDef>(e, file, ptr);
             if (def is null)
                 return null;
+            Levels(def.Hp, file, Pointer.Append(ptr, "hp"));
             Refs(RefKind.Ability, def.Abilities.Select(a => a.Value), file, Pointer.Append(ptr, "abilities"));
             Refs(RefKind.Passive, def.Passives, file, Pointer.Append(ptr, "passives"));
             Ref(RefKind.AiProfile, def.AiProfile, file, Pointer.Append(ptr, "aiProfile"));

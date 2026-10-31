@@ -40,7 +40,7 @@
         }
       },
       "hp": {
-        "type": "integer"
+        "$ref": "common.schema.json#/$defs/byLevel"
       },
       "ac": {
         "type": "integer"

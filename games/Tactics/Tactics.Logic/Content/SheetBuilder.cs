@@ -245,7 +245,8 @@ public static class SheetBuilder
             problems.Add("/level", $"Level {level} isn't at least 1.");
         problems.ThrowIfAny();
 
-        return new UnitSheet(m!.Name, Side.Enemy, level ?? m.Level, m.Scores, m.Hp, m.Ac, m.Armor, m.Move, m.Jump,
+        var effectiveLevel = level ?? m!.Level;
+        return new UnitSheet(m!.Name, Side.Enemy, effectiveLevel, m.Scores, m.Hp.At(effectiveLevel), m.Ac, m.Armor, m.Move, m.Jump,
             m.InitiativeBonus, m.Saves, m.Skills, m.Resources, m.Abilities, m.Passives, m.Weapon, m.Attacks, m.Resist, m.Immune,
             m.Vulnerable, m.Tags, m.Sprite, m.AiProfile, m.CastingStat?.ToString(), m.Xp);
     }

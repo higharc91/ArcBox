@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using ArcBox.Sdk;
 
 namespace Tactics.Logic.Tests;
 
@@ -263,5 +264,29 @@ public sealed class CompanionTests
         var bruteState = brute.Start().State;
         var charge = Ai.Plan(bruteState, U("kara"), brute.Rules);
         Assert.True(Reach.Distance(End(bruteState, charge), T(2, 0)) > 1, charge.Explain);
+    }
+
+    [Fact]
+    public void Hound_spawns_at_battle_start_and_acts_after_owner()
+    {
+        var rec = SheetBuilder.DefaultCharacter("Vex", "elf", "ranger", "ranger.beastmaster", 5, Base);
+        var sheet = SheetBuilder.ForCharacter(rec, Base);
+        var map = AsciiMap.Parse("0. 0. 0. 0. 0.\n0. 0. 0. 0. 0.");
+        var rules = RulesPack.InMemory("hound_test", Base.Abilities.Values, Base.Passives.Values, Base.Conditions.Values,
+            [map], Base.Injuries.Values, monsters: [("hound", Base.MonsterSheet("hound", 5)!)]);
+        var setup = new BattleSetup(map,
+            [
+                new UnitPlacement(U("ranger"), sheet, new PlayerControlled(new ProfileId("pr_ranger")), T(0, 0), []),
+                new UnitPlacement(U("goblin"), TestSheets.Goblin, new AiControlled("brute"), T(4, 1), []),
+            ],
+            ObjectivesDef.Default, [], Difficulty.Normal, 0, []);
+
+        var b = Battle.Start(setup, rules, 1).State;
+
+        Assert.Contains(U("ranger.hound.0"), b.Units.Keys);
+        var idx = b.Order.IndexOf(U("ranger"));
+        Assert.Equal(U("ranger.hound.0"), b.Order[idx + 1]);
+        Assert.Equal(26, Base.MonsterSheet("hound", 6)!.MaxHp);
+        Assert.Equal(38, Base.MonsterSheet("hound", 10)!.MaxHp);
     }
 }

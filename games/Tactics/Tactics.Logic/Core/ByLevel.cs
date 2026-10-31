@@ -54,15 +54,21 @@ public sealed class ByLevelJsonConverter<T> : JsonConverter<ByLevel<T>>
     public override ByLevel<T>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType != JsonTokenType.StartObject)
-            throw new JsonException("A by-level table must be an object keyed by level.");
-        var steps = ImmutableSortedDictionary.CreateBuilder<int, T>();
-        while (reader.Read() && reader.TokenType == JsonTokenType.PropertyName)
         {
-            var name = reader.GetString()!;
-            if (!int.TryParse(name, NumberStyles.None, CultureInfo.InvariantCulture, out var level))
-                throw new JsonException($"'{name}' is not a level.");
-            reader.Read();
-            var value = JsonSerializer.Deserialize<T>(ref reader, options)!;
+            var single = JsonSerializer.Deserialize<T>(ref reader, options)
+                ?? throw new JsonException("A by-level step value cannot be null.");
+            return ByLevel<T>.Constant(single);
+        }
+        using var doc = JsonDocument.ParseValue(ref reader);
+        var root = doc.RootElement;
+        if (root.EnumerateObject().Count() == 1 && root.TryGetProperty("byLevel", out var nested) && nested.ValueKind == JsonValueKind.Object)
+            root = nested;
+        var steps = ImmutableSortedDictionary.CreateBuilder<int, T>();
+        foreach (var prop in root.EnumerateObject())
+        {
+            if (!int.TryParse(prop.Name, NumberStyles.None, CultureInfo.InvariantCulture, out var level))
+                throw new JsonException($"'{prop.Name}' is not a level.");
+            var value = prop.Value.Deserialize<T>(options)!;
             if (!steps.TryAdd(level, value))
                 throw new JsonException($"Level {level} appears twice.");
         }

@@ -125,6 +125,8 @@ public sealed record AttackStep(UnitId Source, UnitId Target, Tile? Aim, Ability
         }
         if (!ranged && Modifiers.Flanked(w.State, Source, Target, rules))
             advantages++;
+        if (MarkBlock.MarkedBy(target, Source))
+            advantages++;
         if (TauntBlock.TauntedAway(w.State, Source, Target))
             disadvantages++;
         if (HelpBlock.Consume(w, Source))

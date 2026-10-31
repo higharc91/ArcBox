@@ -1,0 +1,40 @@
+[
+  {
+    "id": "hound",
+    "name": "Hunting Hound",
+    "cr": "1/2",
+    "xp": 0,
+    "level": 1,
+    "scores": { "str": 14, "dex": 14, "con": 12, "int": 4, "wis": 14, "cha": 8 },
+    "hp": { "1": 16, "6": 26, "10": 38 },
+    "ac": 14,
+    "armor": "None",
+    "move": 5,
+    "jump": 2,
+    "initiativeBonus": 0,
+    "saves": ["str", "dex"],
+    "skills": ["perception", "stealth"],
+    "resources": {},
+    "abilities": [],
+    "passives": ["wolf.knockdown"],
+    "weapon": {
+      "id": "bite",
+      "damage": "1d8",
+      "damageType": "piercing",
+      "stat": "str",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": ["natural"]
+    },
+    "attacks": 1,
+    "resist": [],
+    "immune": [],
+    "vulnerable": [],
+    "tags": ["beast", "companion"],
+    "sprite": "bosses.hound.tan",
+    "aiProfile": "companion",
+    "phases": []
+  }
+]

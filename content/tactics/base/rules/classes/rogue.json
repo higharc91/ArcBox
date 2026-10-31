@@ -25,6 +25,18 @@
         "3": [ { "ability": "shadow.shadowstep" } ],
         "6": [ { "ability": "shadow.cloak_of_shadows" } ],
         "10": [ { "passive": "shadow.death_from_the_shadows" } ]
+      } },
+    { "id": "rogue.trickster", "name": "Trickster",
+      "features": {
+        "3": [ { "ability": "trickster.caltrops" }, { "ability": "trickster.smoke_bomb" } ],
+        "6": [ { "ability": "trickster.snap_trap" } ],
+        "10": [ { "ability": "trickster.flashbang" }, { "passive": "trickster.cunning_artisan" } ]
+      } },
+    { "id": "rogue.duelist", "name": "Duelist",
+      "features": {
+        "3": [ { "ability": "duelist.riposte" }, { "passive": "duelist.fancy_footwork" } ],
+        "6": [ { "ability": "duelist.parry_stance" }, { "passive": "duelist.rakish_audacity" } ],
+        "10": [ { "ability": "duelist.master_flourish" }, { "passive": "duelist.blade_mastery" } ]
       } }
   ],
   "defaultPicks": {

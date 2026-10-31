@@ -106,7 +106,9 @@ public static class Ai
         if (miss)
             return (true, hit);
         var temp = scorer.Walk(ability.Effects, new Strike(scorer.W, reactor, ability, reactor.Pos, neutral: false), reactor).TempHp;
-        return (false, Math.Min(hit, Math.Max(0, temp - reactor.TempHp)));
+        var resists = Scorer.All(ability.Effects).Any(e => e is StatModEffect { Mods.Resist.IsEmpty: false });
+        var prevented = Math.Min(hit, Math.Max(0, temp - reactor.TempHp) + (resists ? 0.5 * hit : 0.0));
+        return (false, prevented);
     }
 
     /// <summary>The AC a condition (and the ones it implies) adds.</summary>

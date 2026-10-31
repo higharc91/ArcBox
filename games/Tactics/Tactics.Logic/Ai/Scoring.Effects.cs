@@ -71,6 +71,14 @@ internal sealed partial class Scorer
                 return new Outcome(DamageDist.Zero, Push: pull.Distance);
             case TauntEffect taunt:
                 return new Outcome(DamageDist.Zero, Offense: -0.3 * Turns(taunt.Rounds, untilSave: false));
+            case MarkEffect mark:
+                {
+                    if (!Hostile(st.User, target) || MarkBlock.MarkedBy(target, st.User.Id))
+                        return Outcome.None;
+                    var turns = Turns(mark.Rounds, untilSave: false);
+                    return new Outcome(DamageDist.Zero, Defense: -0.25 * turns,
+                        Splash: QuarryDamage(MarkBlock.Condition, st, target, turns));
+                }
             case RepeatEffect repeat:
                 {
                     var once = Walk(repeat.Effects, st, target, crit, half, last);
@@ -164,6 +172,8 @@ internal sealed partial class Scorer
             disadvantages += (against == Edge.Disadvantage ? 1 : 0) + (mods.Invisible ? 1 : 0);
         }
         if (!st.Neutral && !ranged && Modifiers.Flanked(st.W.State, user.Id, target.Id, Rules))
+            advantages++;
+        if (!st.Neutral && MarkBlock.MarkedBy(target, user.Id))
             advantages++;
         if (!st.Neutral && TauntBlock.TauntedAway(st.W.State, user.Id, target.Id))
             disadvantages++;

@@ -24,7 +24,11 @@ public static class Summons
     public static UnitId Spawn(BattleWriter w, UnitId owner, string monster, Tile at, int? rounds, bool concentration)
     {
         var summoner = w.Unit(owner);
-        var sheet = (w.Rules.MonsterSheet(monster)
+        var scaleLevel = (rounds is null && !concentration)
+            || (w.Rules.Monsters.TryGetValue(monster, out var mDef) && mDef.Hp.Steps.Count > 1)
+                ? summoner.Sheet.Level
+                : (int?)null;
+        var sheet = (w.Rules.MonsterSheet(monster, scaleLevel)
                      ?? throw new InvalidOperationException($"There is no monster '{monster}' to summon.")) with { Side = summoner.Sheet.Side };
         var id = new UnitId($"{owner.Value}.{monster}.{w.State.NextSerial}");
         ImmutableArray<ActiveCondition> marker = rounds is null && !concentration

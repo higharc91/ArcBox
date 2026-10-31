@@ -19,8 +19,26 @@
     "9": [ { "passive": "monk.acrobatic_movement" } ],
     "10": [ { "ability": "monk.heightened_flurry" } ]
   },
-  "subclasses": [],
-  "subclassesPending": true,
+  "subclasses": [
+    { "id": "monk.open_hand", "name": "Way of the Open Hand",
+      "features": {
+        "3": [ { "ability": "open_hand.palm_strike" }, { "ability": "open_hand.sweeping_kick" } ],
+        "6": [ { "ability": "open_hand.wholeness_of_body" } ],
+        "10": [ { "ability": "open_hand.quivering_palm" } ]
+      } },
+    { "id": "monk.windstep", "name": "Way of the Windstep",
+      "features": {
+        "3": [ { "ability": "windstep.gale_leap" }, { "passive": "windstep.fleet_of_foot" } ],
+        "6": [ { "ability": "windstep.cyclone_kick" } ],
+        "10": [ { "ability": "windstep.tempest_dash" } ]
+      } },
+    { "id": "monk.iron_body", "name": "Way of Iron Body",
+      "features": {
+        "3": [ { "ability": "iron_body.iron_skin" }, { "passive": "iron_body.mountain_stance" } ],
+        "6": [ { "ability": "iron_body.counter_palm" } ],
+        "10": [ { "ability": "iron_body.adamantine_form" } ]
+      } }
+  ],
   "defaultPicks": {
     "1": [], "2": [], "3": [], "4": [], "5": [], "6": [], "7": [], "8": [], "9": [], "10": []
   },

@@ -38,6 +38,9 @@ public static partial class Battle
         BeginTurn(w, rules);
         if (w.State.Outcome is null)
             Hooks.FireAll(w, HookKind.OnBattleStart, rules);
+        Settle(w, rules);
+        if (!w.State.Joining.IsEmpty)
+            w.State = w.State with { Order = TurnOrder.Sort(w.State, rules), Joining = [] };
         return Settled(w, rules);
     }
 

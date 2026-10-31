@@ -29,8 +29,26 @@
                                     "ranger.spike_growth", "ranger.barkskin", "ranger.lesser_restoration", "ranger.lightning_arrow",
                                     "ranger.conjure_barrage"] } ]
   },
-  "subclasses": [],
-  "subclassesPending": true,
+  "subclasses": [
+    { "id": "ranger.sharpshooter", "name": "Sharpshooter",
+      "features": {
+        "3": [ { "ability": "sharpshooter.deadeye" }, { "passive": "sharpshooter.high_ground_mastery" } ],
+        "6": [ { "ability": "sharpshooter.piercing_shot" } ],
+        "10": [ { "ability": "sharpshooter.volley" } ]
+      } },
+    { "id": "ranger.beastmaster", "name": "Beastmaster", "companion": "hound",
+      "features": {
+        "3": [ { "passive": "beastmaster.companion" }, { "ability": "beastmaster.sic" } ],
+        "6": [ { "ability": "beastmaster.pack_bond" } ],
+        "10": [ { "ability": "beastmaster.alpha_howl" }, { "passive": "beastmaster.ferocious_bond" } ]
+      } },
+    { "id": "ranger.warden", "name": "Warden",
+      "features": {
+        "3": [ { "ability": "warden.vine_snare" }, { "passive": "warden.tough_bark" } ],
+        "6": [ { "ability": "warden.natures_veil" } ],
+        "10": [ { "ability": "warden.guardian_tree" } ]
+      } }
+  ],
   "defaultPicks": {
     "1": ["ranger.hail_of_thorns", "ranger.ensnaring_strike"],
     "2": ["ranger.hail_of_thorns", "ranger.ensnaring_strike"],

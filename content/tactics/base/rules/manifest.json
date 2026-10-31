@@ -43,6 +43,7 @@
     "monsters/undead.json",
     "monsters/beasts-1.json",
     "monsters/wildshape.json",
+    "monsters/companions.json",
     "maps/river_crossing.json",
     "encounters/river_crossing.json"
   ]

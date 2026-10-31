@@ -23,8 +23,8 @@ public sealed class MartialClassTests
         BasePackTests.Rules.Passives.Values, BasePackTests.Rules.Conditions.Values, [Field], BasePackTests.Rules.Injuries.Values);
 
     /// <summary>A default human of <paramref name="cls"/> at <paramref name="level"/>, built from the base pack.</summary>
-    private static UnitSheet Character(string cls, int level)
-        => SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter(cls, "human", cls, null, level, BasePackTests.Rules), BasePackTests.Rules);
+    private static UnitSheet Character(string cls, int level, string? subclass = null)
+        => SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter(cls, "human", cls, subclass, level, BasePackTests.Rules), BasePackTests.Rules);
 
     /// <summary>A goblin that can't be missed except on a natural 1, with HP to spare.</summary>
     private static UnitSheet Dummy => SheetBuilder.ForMonster("goblin", BasePackTests.Rules) with { MaxHp = 300, Ac = 0 };
@@ -148,5 +148,21 @@ public sealed class MartialClassTests
         var brutal = Use(Start(1, ("barb", barb, T(1, 1)), ("gob", Dummy, T(2, 1))), "barb", "barbarian.brutal_strike", "gob");
         Assert.Contains(brutal.Events.OfType<AttackResolved>(), a => a.Hit);
         Assert.True(brutal.State.Units[U("gob")].Pos.X > 2);
+    }
+
+    [Fact]
+    public void Avenger_vow_of_enmity_marks_target_and_grants_advantage_and_bonus_damage()
+    {
+        var avenger = Character("paladin", 6, "paladin.avenger") with { InitiativeBonus = 50 };
+        var state = Start(3, ("pal", avenger, T(1, 1)), ("gob", Dummy, T(2, 1)));
+
+        var vowed = Use(state, "pal", "avenger.vow_of_enmity", "gob");
+        Assert.True(Has(vowed.State, "gob", "marked"));
+        Assert.True(MarkBlock.MarkedBy(vowed.State.Units[U("gob")], U("pal")));
+
+        var struck = Use(vowed.State, "pal", RulesPack.CommonAttack.Id.Value, "gob");
+        var roll = struck.Events.OfType<Rolled>().First(r => r.Kind == RollKind.Attack);
+        Assert.Equal(2, roll.Result.D20s.Length); // advantage rolls 2d20
+        Assert.Contains(struck.Events, e => e == new PassiveTriggered(U("pal"), "avenger.vengeful_strikes"));
     }
 }
