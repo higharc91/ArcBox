@@ -24,7 +24,7 @@ A Tactics battle now plays on the Godot TV: map, units, animated turns, HUD and 
 
 **The showcase:** a real Warlord's Bridge collapse played on the TV, after the walk and the narrator's line that lead to it, as in these [before](2026-10-31-tactics-tv-scene/task-4-collapse-1-before.png), [during](2026-10-31-tactics-tv-scene/task-4-collapse-2-during.png) and [after](2026-10-31-tactics-tv-scene/task-4-collapse-3-after.png) shots. The ridge archers spawned on cue.
 
-**Tests:** 2,436 .NET tests pass with 0 warnings, up from 1,913. `tools/tv-e2e.sh` now runs Tactics on Windows, and its plain and reconnect modes pass.
+**Tests:** 2,506 .NET tests and 253 web tests pass with 0 warnings, up from 1,913 and 253. `tools/tv-e2e.sh` now runs Tactics on Windows, and its plain and reconnect modes pass.
 
 **Phone checks, from the user during a real battle:** the d-pad, 60 s a turn, 10 s a reaction and the reaction prompt's countdown are all fine for now. The user wants sound effects on reactions later.
 
@@ -42,12 +42,20 @@ Reviews caught these before they reached the user:
 
 The host view gained additive fields for the TV: board changes, the character sprite, `LastBattle`, `Reacting`, objectives and the encounter's name. Phone views are unchanged.
 
+## Fitting the new art
+
+A cloud session pushed the Wardenflame art, sound and story to this branch during this work. Merging it failed 16 tests that had pinned old frame numbers. Checking each one found 10 real bugs, all fixed: spell poses that lunged, effects cut at 0.6 s, an arrow stuck in its target, lines and cones drawn from the wrong end, walk frames, paralysed using stunned's art, misworded villains, a hidden finale clock, and missing art for the new maps' sides and spikes.
+
+The TV then ran plain and reconnect battles on the new art. After the last fixes it ran one short Warlord's Bridge battle, 115 of 115 beats. The Warlord now speaks in Vorga's voice.
+
 ## What's left, ranked
 
-1. **Unseen on a real TV:** a damaging area spell, zones, pushes, teleports, transformations and the boss's phase. All are tested in code, but only a level 1 Sleep has played on screen, and the boss's phase was never reached. A level 5 party on the Warlord's Bridge is the next thing to play.
-2. **Connecting at home:** phones couldn't reach the PC over plain Wi-Fi, only through Tailscale, and other players would hit the same block. Check the router's AP isolation.
-3. **Every character of a class looks the same** on the TV, because it uses a generic class sprite rather than the character's look.
-4. **Sound effects** for reactions and the battle generally.
+**A crash to look at first:** the TV segfaulted about 1 s after launch, before the room appeared, in 2 runs on a fresh empty user-data folder. An identical retry worked, and so did another fresh launch, so the cause is unknown.
+
+1. **The TV doesn't use the new sound or light yet:** music, sound effects, recorded voice clips, the Victory and Defeat strips, the lighting data and most of the HUD kit. The narrator uses live speech for now. This is the next pass.
+2. **Unseen on a real TV:** a damaging area spell, zones, pushes, teleports, transformations and the boss's phase. All are tested in code, but only a level 1 Sleep has played on screen, and the boss's phase was never reached. A level 5 party on the Warlord's Bridge is the next thing to play.
+3. **Connecting at home:** phones couldn't reach the PC over plain Wi-Fi, only through Tailscale, and other players would hit the same block. Check the router's AP isolation.
+4. **Every character of a class looks the same** on the TV, because it uses a generic class sprite rather than the character's look.
 5. **The sofa checks** in `docs/playtest-checklist.md`: readability on a real TV, whether the room notices prompts, and the HUD at 2560×1440. The Tailscale session didn't cover these.
 6. **`tools/tv-e2e.sh` on Linux:** the Tactics modes have never run there, and the REDLINE modes changed only in ways a line-by-line read found harmless. Run them once on Linux. `ARCBOX_RESTART=1` wasn't rerun after the last fix either.
 7. **A slow TV:** a TV falling over 8 s behind drops to the newest beat. That's tested, but the 8 s margin is unmeasured and it hasn't been seen on a slow machine.
@@ -55,6 +63,8 @@ The host view gained additive fields for the TV: board changes, the character sp
 9. **The dice panel from mockup 01 isn't built.** The TV shows save rolls as badges, but not the attack roll panel with advantage.
 
 ## Decisions for the user
+
+- **The finale's size:** `hall_of_the_flame` draws at half size, because it's just too tall for 2x. It plays fine, but units are small. It could use the top strip or be trimmed.
 
 - **Overworld plan:** [milestone 5a's plan](../plans/2026-10-31-tactics-overworld.md) is ready and can start now that this milestone is done. It's waiting on how to run it.
 - **Balance:** the decisions listed under "Decisions for the user" in the rules-engine tracker are still open.
