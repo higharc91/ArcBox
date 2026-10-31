@@ -254,6 +254,109 @@ public sealed class BeatScriptTests
     }
 
     [Fact]
+    public void Two_attacks_on_one_foe_with_thorns_biting_the_attacker_after_each_hit_are_still_two_swings()
+    {
+        BattleEvent[] thorns = [new PassiveTriggered(Foe, "thorns"), new Damaged(Hero, 2, "piercing", 8)];
+
+        var script = Script(Near, [.. Hit(3, 7), .. thorns, new Rolled(Hero, RollKind.Attack, Roll(14, true)), new AttackResolved(Hero, Foe, true, false),
+            new Damaged(Foe, 3, "slashing", 4), .. thorns]);
+
+        Assert.Equal(2, script.Cues.OfType<LungeCue>().Count());
+    }
+
+    [Fact]
+    public void A_drain_is_single_target_timing()
+        => Assert.Equal(BeatTiming.Windup + BeatTiming.Impact + BeatTiming.Stagger, Script(Near, [.. Hit(6, 4), new Healed(Hero, 3, 10)]).Length, 3);
+
+    [Fact]
+    public void A_condition_landing_on_the_caster_does_not_make_an_area()
+        => Assert.Equal(BeatTiming.Windup + BeatTiming.Impact + BeatTiming.Condition,
+            Script(Near, [.. Hit(6, 4), new ConditionApplied(Hero, new ConditionId("blessed"))]).Length, 3);
+
+    [Fact]
+    public void A_foe_shoved_into_another_is_not_an_area()
+    {
+        var other = new UnitId("goblin.2");
+        var view = View(Unit(Hero, "Party", 3, 3), Unit(Foe, "Enemy", 4, 3), Unit(other, "Enemy", 6, 3));
+
+        var script = Script(view, [.. Hit(3, 7), new Pushed(Foe, new Tile(4, 3), new Tile(5, 3)), new Collided(Foe, other, 2),
+            new Damaged(Foe, 2, null, 5), new Damaged(other, 2, null, 8)]);
+
+        Assert.True(script.Length >= BeatTiming.Windup + BeatTiming.Impact + BeatTiming.Slide * 2);
+        Assert.Equal(BeatTiming.Windup, script.Cues.OfType<PopCue>().First().At, 3);
+        Assert.True(script.Cues.OfType<ApplyCue>().Single(a => a.Event is Pushed).At >= BeatTiming.Windup + BeatTiming.Impact - 0.001);
+    }
+
+    [Fact]
+    public void A_real_three_target_area_is_still_an_area()
+    {
+        var script = Script(Crowd, [Fireball, .. Targets.Take(3).SelectMany(t => new BattleEvent[]
+        {
+            new Rolled(t, RollKind.Save, Roll(4, false)), new Damaged(t, 3, "fire", 7),
+        })]);
+
+        Assert.Equal(0.84, LastHit(script), 3);
+    }
+
+    // The next few are the engine's own event order, from real battles (see Real_battles below).
+
+    [Fact]
+    public void A_hobgoblins_martial_advantage_then_a_second_attack_is_two_swings()
+    {
+        var script = Script(Near, new AbilityUsed(Hero, Attack, new Target(Unit: Foe), new PresentationDef("characters.attack", null, null)),
+            new Rolled(Hero, RollKind.Attack, Roll(14, true)), new AttackResolved(Hero, Foe, true, false), new Damaged(Foe, 3, "slashing", 7),
+            new PassiveTriggered(Hero, "hobgoblin.martial_advantage"), new Damaged(Foe, 7, "slashing", 0),
+            new Rolled(Hero, RollKind.Attack, Roll(2, false)), new AttackResolved(Hero, Foe, false, false));
+
+        Assert.Equal(2, script.Cues.OfType<LungeCue>().Count());
+    }
+
+    [Fact]
+    public void A_wolfs_knockdown_save_on_the_same_target_is_not_an_area()
+    {
+        var script = Script(Near, [.. Hit(3, 7), new PassiveTriggered(Hero, "wolf.knockdown"), new Rolled(Foe, RollKind.Save, Roll(4, false)),
+            new ConditionApplied(Foe, new ConditionId("prone"))]);
+
+        Assert.Equal(BeatTiming.Windup + BeatTiming.Impact + BeatTiming.BadgeHold + BeatTiming.Condition, script.Length, 3);
+    }
+
+    [Fact]
+    public void A_repelling_blast_knocking_a_foe_into_another_is_not_an_area()
+    {
+        var other = new UnitId("goblin.2");
+        var view = View(Unit(Hero, "Party", 3, 3), Unit(Foe, "Enemy", 4, 3), Unit(other, "Enemy", 6, 3));
+
+        var script = Script(view, [.. Hit(3, 7), new PassiveTriggered(Hero, "warlock.repelling_blast"), new Damaged(Foe, 2, null, 5), new Damaged(other, 2, null, 8),
+            new Rolled(Hero, RollKind.Attack, Roll(14, true)), new AttackResolved(Hero, Foe, true, false), new Damaged(Foe, 2, "slashing", 3)]);
+
+        Assert.Equal(2, script.Cues.OfType<LungeCue>().Count());
+    }
+
+    [Fact]
+    public void A_passive_on_the_first_target_of_a_fireball_leaves_it_an_area()
+    {
+        var script = Script(Crowd, [Fireball, new Rolled(Targets[0], RollKind.Save, Roll(4, false)), new Damaged(Targets[0], 3, "fire", 7),
+            new PassiveTriggered(Targets[0], "fighter.indomitable"), .. Targets.Skip(1).SelectMany(t => new BattleEvent[]
+            {
+                new Rolled(t, RollKind.Save, Roll(4, false)), new Damaged(t, 3, "fire", 7),
+            })]);
+
+        Assert.InRange(LastHit(script), 0.3, 1.0);
+    }
+
+    [Fact]
+    public void A_mass_heal_aimed_at_one_ally_is_an_area()
+    {
+        var ally = new UnitId("hero2");
+        var view = View([Unit(Hero, "Party", 0, 3), Unit(ally, "Party", 1, 3), .. Targets.Select((t, i) => Unit(t, "Party", 2, 2 + i))]);
+        var heal = new AbilityUsed(Hero, Attack, new Target(Unit: ally), new PresentationDef("characters.cast", "fx.heal.holy", null));
+
+        var script = Script(view, [heal, .. Targets.Select(t => new Healed(t, 3, 10))]);
+
+        Assert.InRange(script.Cues.OfType<ApplyCue>().Where(a => a.Event is Healed).Max(a => a.At), 0.2, 1.0);
+    }
+
+    [Fact]
     public void A_double_attack_on_one_target_is_still_two_swings_after_all_this()
         => Assert.Equal(2, Script(Near, [.. Hit(3, 7), new Rolled(Hero, RollKind.Attack, Roll(14, true)), new AttackResolved(Hero, Foe, true, false),
             new Damaged(Foe, 3, "slashing", 4)]).Cues.OfType<LungeCue>().Count());

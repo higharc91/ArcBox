@@ -220,26 +220,35 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         private bool InArea => _at <= _areaEnd;
 
         /// <summary>
-        /// The index of the last event of the ability at <paramref name="start"/> if it's an area effect, one hitting more than
-        /// one unit, or -1. One ability's events run until the next ability or the turn's end.
+        /// The index of the last event of the ability at <paramref name="start"/> on one of its targets if it's an area effect, or
+        /// -1. The events don't say which of their units the ability was aimed at, as a passive's effects run inline with nothing
+        /// to mark their end, so only what can't be a side effect counts: the units other than the caster that a roll was made
+        /// against. A passive's save lands on the target it was triggered by, so it can't add one. An ability with no rolls at all
+        /// (a mass heal) is judged by whom it touched before anything else could join in: a passive, or a collision.
         /// </summary>
         private int AreaEnd(int start)
         {
-            var targets = new HashSet<UnitId>();
-            var last = -1;
-            for (var i = start + 1; i < beat.Events.Length && beat.Events[i] is not (AbilityUsed or TurnEnded); i++)
-                if (TargetOf(beat.Events[i]) is { } unit)
-                {
-                    targets.Add(unit);
-                    last = i;
-                }
-            return targets.Count > 1 ? last : -1;
+            var source = ((AbilityUsed)beat.Events[start]).Source;
+            var window = beat.Events.Skip(start + 1).TakeWhile(e => e is not (AbilityUsed or TurnEnded)).ToArray();
+            var rolled = window.Select(RolledAgainst).OfType<UnitId>().Where(u => u != source).ToHashSet();
+            var targets = rolled.Count > 0
+                ? rolled
+                : window.TakeWhile(e => e is not (PassiveTriggered or Collided)).Select(Touched).OfType<UnitId>().Where(u => u != source).ToHashSet();
+            if (targets.Count < 2)
+                return -1;
+            var last = Array.FindLastIndex(window, e => (RolledAgainst(e) ?? Touched(e)) is { } unit && targets.Contains(unit));
+            return start + 1 + last;
         }
 
-        private static UnitId? TargetOf(BattleEvent e) => e switch
+        private static UnitId? RolledAgainst(BattleEvent e) => e switch
         {
             Rolled { Kind: RollKind.Save } save => save.Roller,
             AttackResolved attack => attack.Target,
+            _ => null,
+        };
+
+        private static UnitId? Touched(BattleEvent e) => e switch
+        {
             Damaged hit => hit.Unit,
             Healed healed => healed.Unit,
             ConditionApplied gained => gained.Unit,
