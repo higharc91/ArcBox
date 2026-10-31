@@ -101,7 +101,7 @@ public sealed record MoveStep(UnitId Unit, Tile From, Tile To, Tile LastFree, bo
 
         var cost = Paths.StepCost(w.Terrain, From, To, unit.Sheet.Jump);
         if (cost == int.MaxValue || cost > unit.Economy.MoveLeft || Modifiers.For(w, Unit, rules).CantMove
-            || Motion.OccupantAt(w, To, Unit) is { } other && Movement.Hostile(unit, other))
+            || Motion.OccupantAt(w, To, Unit) is { } other && (Movement.Hostile(unit, other) || Final(w)))
         {
             Halt(w);
             return;
@@ -116,6 +116,12 @@ public sealed record MoveStep(UnitId Unit, Tile From, Tile To, Tile LastFree, bo
         if (hooks.Count > 0)
             w.PushFront([.. hooks]);
     }
+
+    /// <summary>
+    /// True for the walk's last step. It can pass through an ally but not stop on one; the plan checked the end tile was free,
+    /// but a unit can arrive there during the walk (a trigger's spawn, a summon).
+    /// </summary>
+    private bool Final(BattleWriter w) => !w.State.Queue.Any(s => s is MoveStep step && step.Unit == Unit);
 
     private void Halt(BattleWriter w)
     {

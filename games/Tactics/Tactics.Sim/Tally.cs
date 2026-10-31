@@ -123,7 +123,9 @@ internal sealed class Tally(RulesPack rules)
                 _reacting = false;
                 break;
             case PassiveTriggered passive:
-                _source = passive.Owner;     // a hook on a hit (sneak attack) still belongs to that hit
+                // A hook on a hit (sneak attack) still belongs to that hit; a zone's or condition's effects belong to
+                // whoever cast the zone or applied the condition, not the unit standing in it or carrying it.
+                _source = passive.Source ?? passive.Owner;
                 break;
             case AttackResolved attack:
                 _source = attack.Source;

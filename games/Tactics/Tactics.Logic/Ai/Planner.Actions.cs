@@ -114,7 +114,9 @@ internal sealed partial class Planner
         var forAllies = def.Kind is TargetKind.Ally or TargetKind.DownedAlly;
         var units = state.Units.Values.Where(DownedRules.InBattle).ToArray();
         var meant = units.Where(u => forAllies ? !Scorer.Hostile(me, u) : Scorer.Hostile(me, u)).ToArray();
-        var maxRange = def.Range + 5;
+        // A weapon attack reaches as far as the sheet's weapon, not the ability's nominal range of 1 (Battle.Check decides
+        // exactly; this only bounds the candidates, with room for the high-ground bonus).
+        var maxRange = (ability.IsWeaponAttack && me.Sheet.Weapon.Ranged ? Math.Max(def.Range, me.Sheet.Weapon.Range) : def.Range) + 5;
 
         IEnumerable<Target> targets;
         if (everywhere)

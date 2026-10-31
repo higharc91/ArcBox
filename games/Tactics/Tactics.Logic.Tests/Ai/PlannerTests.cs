@@ -76,6 +76,24 @@ public sealed class PlannerTests
     }
 
     [Fact]
+    public void Archer_shoots_at_its_weapons_full_range()
+    {
+        // The longbow reaches 8; common.attack's own range is 1. The archer can't move, so it must shoot from where it stands.
+        var battle = On("""
+            0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+            """)
+            .Enemy("archer", First(TestSheets.Fighter with { Weapon = TestConditions.Longbow, Move = 0 }), T(0, 0),
+                new AiControlled("archer"))
+            .Party("kara", TestSheets.Fighter, T(8, 0));
+        var (state, _) = battle.Start();
+
+        var plan = Ai.Plan(state, U("archer"), battle.Rules);
+
+        Assert.True(UseOf(plan, "common.attack")?.Target.Unit == U("kara"), plan.Explain);
+        ApplyAll(state, plan, battle.Rules);
+    }
+
+    [Fact]
     public void Brute_finishes_low_hp_enemy()
     {
         // The fighter (AC 18) has 2 HP left; the rogue (AC 14) is easier to hit but can't be killed with one blow.

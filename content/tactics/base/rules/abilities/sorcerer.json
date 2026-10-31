@@ -210,7 +210,7 @@
 
     { "id": "sorcerer.cone_of_cold", "name": "Cone of Cold", "tier": 5, "cost": { "action": 1, "resource": { "mana": 5 } },
       "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "cone", "size": 7, "friendlyFire": true } },
-      "effects": [ { "save": { "stat": "con" }, "halfOnSuccess": true, "onFail": [ { "damage": { "dice": "3d8", "type": "cold" } } ] } ],
+      "effects": [ { "save": { "stat": "con" }, "halfOnSuccess": true, "onFail": [ { "damage": { "dice": "3d6", "type": "cold" } } ] } ],
       "presentation": { "anim": "characters.cast", "fx": "fx.ice.frost" },
       "ai": { "tags": ["damage", "area"] } },
     { "id": "sorcerer.hold_monster", "name": "Hold Monster", "tier": 5,

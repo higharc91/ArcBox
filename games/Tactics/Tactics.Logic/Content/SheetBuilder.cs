@@ -230,7 +230,8 @@ public static class SheetBuilder
     // ---- Monsters ---------------------------------------------------------------------------------------------------
 
     /// <summary>
-    /// The sheet of a monster's stat block, on the enemy side: its scores, HP, AC, weapon and the rest as written, at its own
+    /// The sheet of a monster's stat block, on the enemy side: its scores, HP (plus the <see cref="StaticMods.MaxHp"/> of its
+    /// passives, never below 1, as for characters), AC, weapon and the rest as written, at its own
     /// level or <paramref name="level"/> (which changes only <see cref="UnitSheet.Level"/>, and with it what scales by
     /// level; the stat block isn't rescaled). Throws <see cref="ContentException"/> for an unknown monster or a level
     /// below 1. <see cref="RulesPack.MonsterSheet"/> is the lookup summons and named hooks use.
@@ -246,7 +247,8 @@ public static class SheetBuilder
         problems.ThrowIfAny();
 
         var effectiveLevel = level ?? m!.Level;
-        return new UnitSheet(m!.Name, Side.Enemy, effectiveLevel, m.Scores, m.Hp.At(effectiveLevel), m.Ac, m.Armor, m.Move, m.Jump,
+        var maxHp = Math.Max(1, m!.Hp.At(effectiveLevel) + m.Passives.Distinct().Sum(p => rules.Passives.GetValueOrDefault(p)?.Static?.MaxHp ?? 0));
+        return new UnitSheet(m.Name, Side.Enemy, effectiveLevel, m.Scores, maxHp, m.Ac, m.Armor, m.Move, m.Jump,
             m.InitiativeBonus, m.Saves, m.Skills, m.Resources, m.Abilities, m.Passives, m.Weapon, m.Attacks, m.Resist, m.Immune,
             m.Vulnerable, m.Tags, m.Sprite, m.AiProfile, m.CastingStat?.ToString(), m.Xp);
     }

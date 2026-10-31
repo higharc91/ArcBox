@@ -53,6 +53,8 @@ internal sealed partial class Validation
                         Error(file, at, "A unit is placed with either \"at\" or \"zone\".");
                     if (units[i].Count < 1)
                         Error(file, Pointer.Append(at, "count"), "The count must be at least 1.");
+                    if (units[i].Level is < 1 or > 10)
+                        Error(file, Pointer.Append(at, "level"), $"The level {units[i].Level} must be in 1..10.");
                 }
             var triggerIds = new HashSet<string>(StringComparer.Ordinal);
             for (var i = 0; i < def.Triggers.Length; i++)

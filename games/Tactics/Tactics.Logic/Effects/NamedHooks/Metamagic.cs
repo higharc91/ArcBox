@@ -88,6 +88,13 @@ public sealed class Metamagic : INamedHook
         => !ability.Effects.IsDefaultOrEmpty
            && ability.Effects.Any(e => e is TransformEffect { Hook: "metamagic" });
 
+    /// <summary>
+    /// True when metamagic can change <paramref name="ability"/>: a spell or class ability, not a weapon attack, a metamagic
+    /// ability itself, or one of the actions every unit has (<c>common.*</c>: Dash, Shove, Help, using an item, …).
+    /// </summary>
+    public static bool Shapes(AbilityDef ability)
+        => !ability.IsWeaponAttack && !IsMetamagicAbility(ability) && !ability.Id.Value.StartsWith("common.", StringComparison.Ordinal);
+
     /// <summary>True when <paramref name="ability"/> is a Quickened metamagic ability with <c>Cost.Bonus == 0</c>.</summary>
     public static bool IsFreeQuickened(AbilityDef ability)
         => ability.Cost.Bonus == 0 && !ability.Effects.IsDefaultOrEmpty
@@ -100,7 +107,7 @@ public sealed class Metamagic : INamedHook
 
     /// <summary>True when <paramref name="unit"/> can pay an Action spell's action cost via Quickened Spell.</summary>
     public static bool Quickens(UnitState unit, AbilityDef ability)
-        => ability.Cost.Action > 0 && !ability.IsWeaponAttack && !IsMetamagicAbility(ability) && Has(unit, Quickened);
+        => ability.Cost.Action > 0 && Shapes(ability) && Has(unit, Quickened);
 
     /// <summary>Doubles <paramref name="rounds"/> when <paramref name="ctx"/> is a concentration effect under Extended Spell.</summary>
     public static int? ExtendRounds(EffectContext ctx, int? rounds, bool concentration)

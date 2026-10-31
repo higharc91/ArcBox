@@ -1,0 +1,2 @@
+# Content packs are hashed (games/Tactics ContentHash); keep JSON line ends stable across platforms.
+*.json text eol=lf

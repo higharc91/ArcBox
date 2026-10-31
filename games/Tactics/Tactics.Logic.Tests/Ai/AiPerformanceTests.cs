@@ -7,6 +7,7 @@ namespace Tactics.Logic.Tests;
 /// The AI's time budget (spec §5.2): a turn plan in at most 250 ms at the 95th percentile on 6 vs 10 units, in a stress
 /// setup and in the largest shipped encounters.
 /// </summary>
+[Collection(typeof(SimCollection))]
 public sealed class AiPerformanceTests(ITestOutputHelper output)
 {
     private const int Warmup = 5;

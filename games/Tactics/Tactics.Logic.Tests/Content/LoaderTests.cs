@@ -115,6 +115,14 @@ public sealed class LoaderTests
     }
 
     [Fact]
+    public void Hash_is_the_same_for_crlf_and_lf_line_ends()
+    {
+        var lf = ContentHash.Of([("base/a.json", "{\n  \"id\": \"x\"\n}\n"u8.ToArray())]);
+        Assert.Equal(lf, ContentHash.Of([("base/a.json", "{\r\n  \"id\": \"x\"\r\n}\r\n"u8.ToArray())]));
+        Assert.NotEqual(lf, ContentHash.Of([("base/a.json", "{\r  \"id\": \"x\"\r}\r"u8.ToArray())]));
+    }
+
+    [Fact]
     public void Hash_changes_when_any_byte_changes()
     {
         (string Path, byte[] Bytes)[] files = [("base/a.json", "{\"id\":\"x\"}"u8.ToArray()), ("base/b.json", "[1,2]"u8.ToArray())];

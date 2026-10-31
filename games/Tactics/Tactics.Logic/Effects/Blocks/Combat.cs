@@ -118,6 +118,8 @@ public sealed class StatModBlock : EffectBlock<StatModEffect>
     protected override void Run(StatModEffect def, EffectContext ctx)
     {
         var target = ctx.TargetUnit(Key);
+        if (ctx.ConcentrationLapsed(def.Concentration))
+            return;
         var id = new ConditionId("statMod." + (ctx.Ability?.Id.Value ?? "effect"));
         var rounds = Metamagic.ExtendRounds(ctx, def.Rounds, def.Concentration) ?? def.Rounds;
         Sourced.Put(ctx, target.Id, id, rounds, def.Concentration, def.Mods);
