@@ -112,6 +112,7 @@ public sealed partial class TacticsGame
             return Custom(Screens.Turn, new
             {
                 me = UnitViewOf(me),
+                map = state.MapId,
                 units = state.Units.Values.Where(DownedRules.InBattle).Select(UnitViewOf),
                 choices = PhoneChoices.Of(Choices.For(state, unit, Rules)),
             })

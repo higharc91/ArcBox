@@ -83,6 +83,8 @@ export interface TurnChoices {
 
 export interface TurnData {
   me: UnitView;
+  /** The map id, for its terrain from the content pack. */
+  map?: string;
   units: UnitView[];
   choices: TurnChoices;
 }

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "preact/hooks";
 import type { CustomScreenProps } from "../module";
+import { tileStyle, useMap, type MapData } from "./map";
 import type {
   AbilityChoice, ClassOption, Cost, EncounterOption, ReactData, ResultsData, StatusData, Tile, TargetChoice, TurnData, UnitView,
 } from "./types";
@@ -131,7 +132,8 @@ export function ReactPrompt({ data, send }: CustomScreenProps) {
  * `Choices.For`, so anything you can pick, the game accepts.
  */
 export function Turn({ data, send }: CustomScreenProps) {
-  const { me, units, choices } = data as TurnData;
+  const { me, units, choices, map: mapId } = data as TurnData;
+  const map = useMap(mapId);
   const [abilityIx, setAbilityIx] = useState<number | null>(null);
   const [cursor, setCursor] = useState<Tile>(me.at);
   useEffect(() => {
@@ -186,7 +188,7 @@ export function Turn({ data, send }: CustomScreenProps) {
         </div>
       )}
 
-      <MiniMap me={me} units={units} cursor={cursor} onPick={setCursor}
+      <MiniMap me={me} units={units} cursor={cursor} onPick={setCursor} map={map}
         reach={ability ? [] : choices.moves.map((m) => m.to)} aims={all.map((t) => t.aim)} />
       <DPad cursor={cursor} onMove={setCursor} />
 
@@ -223,12 +225,16 @@ export function Turn({ data, send }: CustomScreenProps) {
   );
 }
 
-function MiniMap({ me, units, cursor, reach, aims, onPick }: {
-  me: UnitView; units: UnitView[]; cursor: Tile; reach: Tile[]; aims: Tile[]; onPick(t: Tile): void;
+/**
+ * The battlefield around you: the whole map with its terrain once it has loaded from the content pack, else (and in
+ * tests) just the box around the units, your moves and the aims. Tap a tile to put the cursor there.
+ */
+function MiniMap({ me, units, cursor, reach, aims, onPick, map }: {
+  me: UnitView; units: UnitView[]; cursor: Tile; reach: Tile[]; aims: Tile[]; onPick(t: Tile): void; map: MapData | null;
 }) {
   const tiles = [me.at, cursor, ...units.map((u) => u.at), ...reach, ...aims];
-  const [x0, x1] = [Math.max(0, Math.min(...tiles.map((t) => t[0])) - 1), Math.max(...tiles.map((t) => t[0])) + 1];
-  const [y0, y1] = [Math.max(0, Math.min(...tiles.map((t) => t[1])) - 1), Math.max(...tiles.map((t) => t[1])) + 1];
+  const [x0, x1] = map ? [0, map.w - 1] : [Math.max(0, Math.min(...tiles.map((t) => t[0])) - 1), Math.max(...tiles.map((t) => t[0])) + 1];
+  const [y0, y1] = map ? [0, map.h - 1] : [Math.max(0, Math.min(...tiles.map((t) => t[1])) - 1), Math.max(...tiles.map((t) => t[1])) + 1];
   const at = (t: Tile) => units.find((u) => same(u.at, t));
   const rows = [];
   for (let y = y0; y <= y1; y++) {
@@ -242,14 +248,15 @@ function MiniMap({ me, units, cursor, reach, aims, onPick }: {
         aims.some((a) => same(a, t)) ? "aim" : "",
         same(cursor, t) ? "cursor" : ""].filter(Boolean).join(" ");
       cells.push(
-        <button type="button" key={x} class={cls} aria-label={u ? u.name : `${x}, ${y}`} onClick={() => onPick(t)}>
+        <button type="button" key={x} class={cls} aria-label={u ? u.name : `${x}, ${y}`} onClick={() => onPick(t)}
+          style={map && !u ? tileStyle(map, y * map.w + x) : undefined}>
           {u ? u.name[0] : ""}
         </button>,
       );
     }
     rows.push(<div class="tx-maprow" key={y}>{cells}</div>);
   }
-  return <div class="tx-map" role="grid">{rows}</div>;
+  return <div class={`tx-map${map ? " terrain" : ""}`} role="grid">{rows}</div>;
 }
 
 function DPad({ cursor, onMove }: { cursor: Tile; onMove(t: Tile): void }) {

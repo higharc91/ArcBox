@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "preact/hooks";
+import { useEffect, useRef } from "preact/hooks";
+import { tileStyle, useMap, type MapData } from "../games/tactics/map";
 
 /**
  * A browser stand-in for the TV's ArcBox Tactics screens (the Godot scene is milestone 3b): the map from the content
@@ -30,44 +31,6 @@ export const isTacticsHostView = (v: unknown): v is TacticsHostView =>
 
 /** How long a beat stays on screen before the board says it's been shown. */
 const BEAT_MS = 700;
-
-interface MapData { w: number; h: number; heights: number[]; flags: number[]; materials: string[]; tileMaterial: number[] }
-
-/** Fetches and decodes a map file from the tactics content pack (3 bytes a tile: height, material, flags). */
-function useMap(id: string | undefined): MapData | null {
-  const [map, setMap] = useState<MapData | null>(null);
-  useEffect(() => {
-    if (!id) return;
-    let cancelled = false;
-    (async () => {
-      try {
-        const index = (await (await fetch("/content/tactics/index.json")).json()) as { packId: string; hash: string }[];
-        const base = index.find((p) => p.packId === "base");
-        if (!base) return;
-        const file = (await (await fetch(`/content/tactics/base/${base.hash}/rules/maps/${id}.json`)).json()) as {
-          size: Tile; tiles: string; materials: string[];
-        };
-        const bytes = Uint8Array.from(atob(file.tiles), (c) => c.charCodeAt(0));
-        const n = file.size[0] * file.size[1];
-        const pick = (k: number) => Array.from({ length: n }, (_, i) => bytes[i * 3 + k]!);
-        if (!cancelled) setMap({ w: file.size[0], h: file.size[1], heights: pick(0), tileMaterial: pick(1), flags: pick(2), materials: file.materials });
-      } catch (err) {
-        console.warn("Couldn't load the map", id, err);
-      }
-    })();
-    return () => { cancelled = true; };
-  }, [id]);
-  return map;
-}
-
-const MATERIAL_COLOURS: Record<string, string> = { grass: "#2f5d2f", dirt: "#5a4632", water: "#1f4f7a", rock: "#555b61", stone: "#4b4f55", sand: "#7a6a45", wood: "#5b3d22", snow: "#9aa4ad" };
-
-function tileColour(map: MapData, i: number): string {
-  const material = map.materials[map.tileMaterial[i]!] ?? "";
-  const base = MATERIAL_COLOURS[material.split("/")[0]!] ?? "#3a3a3a";
-  if (map.flags[i]! & 4) return "#111";                 // impassable
-  return base;
-}
 
 /** One line for an event, or null for the ones the log leaves out. */
 export function describe(e: BattleEvent, name: (id: unknown) => string): string | null {
@@ -151,10 +114,9 @@ function Battle({ battle, map }: { battle: BattleView; map: MapData | null }) {
         {Array.from({ length: w * h }, (_, i) => {
           const x = i % w, y = Math.floor(i / w);
           const u = battle.units.find((v) => v.at[0] === x && v.at[1] === y);
-          const height = map?.heights[i] ?? 0;
           return (
             <div key={i} class={`tx-board-tile${u && u.id === battle.active ? " active" : ""}`}
-              style={{ background: map ? tileColour(map, i) : "#2a2a2a", filter: `brightness(${1 + height * 0.12})` }}>
+              style={map ? tileStyle(map, i) : { background: "#2a2a2a" }}>
               {u ? (
                 <span class={`tx-board-unit ${u.side === "Party" ? "party" : u.side === "Enemy" ? "enemy" : "neutral"} ${u.life.toLowerCase()}`}
                   title={`${u.name} ${u.hp}/${u.maxHp}`}>

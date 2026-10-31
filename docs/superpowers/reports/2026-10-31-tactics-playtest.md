@@ -25,6 +25,7 @@ Both lose with level-1 default characters played this simply. The point was to s
 
    The same battle now finishes in about 2 minutes.
 2. **A player's pass on a reaction read "P4 reacts: pass"** in the log. It now reads "P4 lets it go".
+3. **The phone's map had no terrain:** dark squares where the TV showed a river. The map decoding is now shared (`web/play/src/games/tactics/map.ts`), and the turn data names its map. The phone draws the whole battlefield in its terrain colours, with reachable tiles and aims as rings (the turn screen above).
 
 ## A fight from the phones
 
@@ -37,5 +38,4 @@ In `--fight` mode the party crosses the river and fights. The phones' Attack →
 ## Still to look at, with real people
 
 - Picking targets for an area spell on the map with the d-pad: the code is tested, but nobody has tried it.
-- The phone map has no terrain yet. The board's map decoding could be shared, so water and rocks show on the phone too.
 - Real phones on the LAN, rather than iframes (docs/dev-playtest.md §3).

@@ -20,6 +20,7 @@
       "conditions": [],
       "player": "Player3"
     },
+    "map": "river_crossing",
     "units": [
       {
         "id": "goblin.1",

@@ -103,7 +103,7 @@ fs.mkdirSync(out, { recursive: true });
     for (const [i, f] of phones.entries()) {
       const t = await text(f).catch(() => '');
       if (t.includes('End turn')) {
-        if (!seen.has('turn')) { seen.add('turn'); await phoneShot(i, '04-turn'); }
+        if (!seen.has('turn')) { seen.add('turn'); await page.waitForTimeout(1500); await phoneShot(i, '04-turn'); }   // the map loads first
         // The view can change under the tap (a new beat); the next loop tries again.
         if (fight) await playTurn(f).catch(() => {});
         else await f.getByRole('button', { name: 'End turn' }).click({ timeout: 3000 }).catch(() => {});

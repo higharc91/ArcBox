@@ -23,6 +23,12 @@
 .tx-maprow { display: flex; gap: 2px; }
 .tx-cell { width: 22px; height: 22px; min-height: 22px; padding: 0; border-radius: 3px; font-size: 13px; font-weight: 700; background: rgba(255, 255, 255, 0.05); }
 .tx-cell.reach { background: rgba(76, 217, 100, 0.25); }
+/* On terrain the tile keeps its colour; reach and aims show as an inner ring instead. */
+.tx-map.terrain { align-self: stretch; }
+.tx-map.terrain .tx-maprow { display: grid; grid-auto-columns: 1fr; grid-auto-flow: column; }
+.tx-map.terrain .tx-cell { width: auto; aspect-ratio: 1; height: auto; min-height: 0; }
+.tx-map.terrain .tx-cell.reach { box-shadow: inset 0 0 0 2px rgba(76, 217, 100, 0.85); }
+.tx-map.terrain .tx-cell.aim { box-shadow: inset 0 0 0 2px #ff9f0a; }
 .tx-cell.aim { background: rgba(255, 159, 10, 0.35); }
 .tx-cell.me { background: #3a86ff; }
 .tx-cell.ally { background: #2a5db0; }
