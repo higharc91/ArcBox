@@ -200,6 +200,49 @@ public sealed class TacticsGameTests
         Assert.Equal(1, resumed.Game.Document.Battle.Log[0].Seq);
     }
 
+    [Fact]
+    public void A_seat_that_drops_mid_turn_is_finished_by_the_ai_and_gets_its_character_back()
+    {
+        var s = new Session();
+        s.ToBattle();
+        var (player, _) = WaitForTurn(s);
+        var unit = s.Game.Document.Battle!.State.Active!.Value;
+
+        s.Harness.SetConnected(player, false);
+        Assert.IsType<AiControlled>(s.Game.Document.Battle!.State.Units[unit].Controller);
+        for (var i = 0; i < 20 && s.Game.Document.Battle!.State.Active == unit; i++)
+            s.Harness.Advance(TimeSpan.FromSeconds(7));
+        Assert.NotEqual(unit, s.Game.Document.Battle!.State.Active);
+
+        s.Harness.SetConnected(player, true);
+        Assert.Equal(new PlayerControlled(s.Profiles[player]!.Value), s.Game.Document.Battle!.State.Units[unit].Controller);
+    }
+
+    [Fact]
+    public void A_reaction_left_unanswered_is_decided_by_the_ai_rule()
+    {
+        var s = new Session(seed: 3);
+        s.ToBattle();
+        for (var step = 0; step < 5_000; step++)
+        {
+            for (var p = 0; p < 4; p++)
+            {
+                if (s.Screen(p) is { Screen: TacticsGame.Screens.React } react)
+                {
+                    Assert.NotNull(react.DeadlineUtc);
+                    var pending = s.Game.Document.Battle!.State.Pending;
+                    s.Harness.Advance(TimeSpan.FromSeconds(11));
+                    Assert.NotSame(pending, s.Game.Document.Battle!.State.Pending);
+                    return;
+                }
+                if (s.Screen(p) is { Screen: TacticsGame.Screens.Turn })
+                    s.Send(p, "endTurn");
+            }
+            s.Harness.Advance(TimeSpan.FromSeconds(7));
+        }
+        Assert.Fail("No reaction was offered to a player.");
+    }
+
     /// <summary>Advances until some player's phone shows their turn; returns who, and the screen.</summary>
     private static (int Player, CustomView Screen) WaitForTurn(Session s)
     {

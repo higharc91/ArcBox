@@ -49,8 +49,8 @@ When every task is done, one whole-branch review runs.
 | 20 | Caster subclasses (16, incl. sorcerer's), sapling and imp | done | `49e3c9d` | |
 | 21 | Monster roster, maps and sample encounters | done | `7480329` | |
 | 22 | Objectives, triggers and the showcase encounter | done | (this commit) | |
-| 23 | Balance pass and final report | in review: needs fixes | `98b06c5` | 0 of 5 run |
-| – | Whole-branch final review | not started | | |
+| 23 | Balance pass and final report | done | `98b06c5`, `a1ca2bb`, `4464309`, fix round 1 retune (see below) | 1 |
+| – | Whole-branch final review | done; awaiting the user's decisions below | `f396bf4` | |
 
 ## Scope change (2026-10-30)
 
@@ -227,6 +227,91 @@ These were decided during execution. Later tasks must follow them, alongside the
 - **Validation.** Trigger effect blocks get the full ability effect walk. Flags read must be set by some `setFlag` (objectives included), counters read must be added to, watched objective leaves must appear in the encounter's objectives (as written or via `setObjective`). A phase's tag must name exactly one placed or spawned monster that has the phase, and a trigger watching `hpBelow` on that tag must use the phase's percentage (`PhaseDef.HpBelow` does nothing else: phases come from triggers).
 - **AI.** `Scorer.IsObjective` adds the objective weight for `defeat:<tag>` targets (party side) and `protect:<tag>` units (other sides), on top of protected units. Party units are drawn toward `reach` zones.
 - **Showcase.** (Task 23 changed the numbers below: the warlord starts at (13, 5) with 240 HP, the bridge collapses at 1 party member, the win is survive 11 rounds, and the golden seed is 15.) `warlord_bridge` (level 5): goblin boss `warlord` with a phase at 50% (`goblin_boss.warcry`, `boss_cruel`), archers spawning on the ridge at round 3, a bridge that collapses into the chasm once 2 party members are on it, and stepping stones to the south. Win: defeat the warlord or survive 8 rounds. `goblin_boss` has 70 HP from level 5 (21 before), so one Fireball can't skip its phase. Its golden replay (`warlord-bridge`, seed 11, level-5 party of 5) is recorded from `Ai.Plan` with `UPDATE_GOLDENS=1` (`Replay.RecordWithAi`); that seed plays every trigger, and the test requires it. A collapse drops every unit on a sunk tile, including two sharing one mid-walk.
+
+## Task 23 fix round 1 and the whole-branch review (2026-10-31)
+
+Done while the user was away, on `ccr-18ad4510-q68nad`, which is stacked on this branch.
+
+**Task 23's Important findings:**
+1. **The usage target** is now reported as partly met. 26 of the 55 rare abilities count against it.
+2. **The timing criterion** is now measured on crypt_hall and crystal_cave as shipped: p95 is 23.5 and 24.9 ms.
+3. **The dice that step down at levels 3 and 7** are explained in the report with each class's output per round. That output still rises at every level. Smoothing the dice is a decision for the user (below).
+4. **Sorcerer picks** are affordable on arrival:
+   - Sorcery is 2 at level 2;
+   - Quickened is offered from level 7.
+5. **The area-spell ladder** is fixed:
+   - Lightning Bolt 3d6;
+   - Shatter 2d8;
+   - Cone of Cold 3d6 for the sorcerer;
+   - the wizard's Wall of Fire matches the sorcerer's.
+
+   `ContentLadderTests` now enforces affordability and the ladder at every level.
+
+**The whole-branch review** used two reviewers, one for the rules and state, one for the AI, content and Sim.
+- **Fixed:**
+  - the planner tried weapon Attacks only up to range 6;
+  - Tally credited zone and condition ticks to their victims;
+  - push and fall damage had no source;
+  - metamagic shaped common actions (Quickened Dash was free);
+  - Careful's success was decided after the OnSave hooks;
+  - a walk could end on an ally that arrived mid-walk;
+  - concentration effects landed after a break;
+  - the content hash depended on CRLF;
+  - a placed unit's level wasn't validated;
+  - `MaxHp` on zone passives was accepted, and on monster passives ignored;
+  - the AI timing tests ran in the parallel pool.
+- **No determinism or save/restore breaks** were found.
+
+**The Tally fix moved the balance numbers.** Zone damage-over-time had never been counted, so Task 23 tuned without it. With it counted:
+- the warlock was +37% at level 5, from Hunger of Hadar's zone;
+- the sorcerer was +23% at level 10, from Wall of Fire's burn.
+
+Hunger of Hadar's ticks were halved to 1d6 + 1d6, and Wall of Fire's burn cut to 1d8 (cast damage unchanged, so the ladder holds). The report's tables come from the sweep after that.
+
+### Decisions for the user
+
+1. **Accept or reject Task 23's changes beyond numbers:**
+   - Hide moved to level 1;
+   - the rogue's rapier;
+   - monster `saves` lists;
+   - the rogue's and monk's attack counts;
+   - the warlord_bridge redesign (start tile, one collapse, `survive:11`);
+   - goblin_boss raised to 240 HP.
+2. **The dice that step down at levels 3 and 7** (monk, Eldritch Blast, bard heals): keep the level-1 floor, or smooth the dice and move another lever (attacks, beams, pools) with them.
+3. **Quickened from level 7.** It's affordable there, and the sampled loadouts are unchanged. The alternative is a cheaper Quickened from level 2, which the sweep would have to re-check.
+4. **Measuring the Striker band by damage per target** rather than total damage would let Fireball go back toward the SRD. That's a `Tactics.Sim` change.
+
+### Triage of the deferred table
+
+- **Fixed:** listed above.
+- **Already fixed in earlier tasks:**
+  - T7: `AttackStep` checks the attacker is alive;
+  - T6: prone after a lethal fall;
+  - T17: the `QuarryDamage` recursion guard and Stunning Strike's rider;
+  - T9: trigger `do` blocks are fully checked.
+- **WONTFIX, by design or negligible:**
+  - T7: the reverse `Hooks.Fire` order, which `SaveBlock` relies on;
+  - T8: the `RoundStarted.Order`/`UnitOut` ordering, and `Invariants.Enabled`;
+  - T10: counterspell's first-tier pick;
+  - T6: Swap's landing check;
+  - T4: "Not enough .", which can't happen, and `Score`'s default;
+  - T1: the Dice regex;
+  - T12: the spawn-overflow repeat, which is unreachable, and inline weapon `replaces`;
+  - T11: nested half damage, which matches the engine;
+  - T9: the `xp.json` pointer, and the pack label from the manifest, which is deliberate.
+- **DEFER, with where it goes:**
+  - T7: `UsesLeft` key sharing (a loader uniqueness check), and `Modifiers.For` caching (profile with the Sim);
+  - T10: per-source marks (balance/content); `TerrainAltered.Delta` (TV client); round and repeat bounds (loader); zone passives with `other` target (loader lint);
+  - T6: an HP event on deep-water drops (TV client);
+  - T5: a self line/cone with no aim (phone UI; the adapter only sends options from `Choices.For`);
+  - T14: the bonus-action Dash, the high-ground bonus on self-area threat, and the downed-in-area exclusion (AI tuning);
+  - T17: weapon-rider range (sub-project 4, when players pick weapons);
+  - T22: the narration flag and `ObjectiveState.Progress` (the TV HUD, 3b);
+  - T1: `default(Rng)` hangs, so the adapter's resume should check `Inc` is odd.
+- **New from the review, also deferred:**
+  - **N4:** an OnSave hook's condition lasts one extra turn. Latent: no shipped content does it.
+  - **F4:** the planner's aim cache ignores where the caster stands for zones. Minor.
+  - **F5:** some encounter placement errors only fail at setup. For chapter authoring (sub-project 7).
 
 ## Deferred minor findings (for the final review to triage)
 

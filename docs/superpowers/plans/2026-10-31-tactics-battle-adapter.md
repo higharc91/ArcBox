@@ -30,13 +30,19 @@ Milestone 3b (the Godot TV scene) gets its own plan once 3a is merged and has be
 
 | # | Status | Commits |
 |---|---|---|
-| 1 | not started | |
-| 2 | not started | |
-| 3 | not started | |
-| 4 | not started | |
-| 5 | not started | |
-| 6 | not started | |
-| 7 | not started | |
-| 8 | not started | |
-| 9 | not started | |
-| 10 | not started | |
+| 1 | done | `1135261` |
+| 2 | done | `1135261` |
+| 3 | done | `fc0c762` |
+| 4 | done | `fc0c762` |
+| 5 | done | `fc0c762` |
+| 6 | done | `fc0c762` |
+| 7 | done | `fc0c762` |
+| 8 | done | `fc0c762` |
+| 9 | done | `eaa55b4` |
+| 10 | done | `bb80664` |
+
+**Not covered yet:** a playtest on real phones.
+
+**Known limits:**
+- `turn` view data is about 17 KB at level 1 with 6 abilities. Casters at level 10, with many area spells, will be larger. Measure before the 64 KB warning matters.
+- The map on the phone shows only the bounding box of units and moves; there's no terrain yet (3b sends map tiles).
