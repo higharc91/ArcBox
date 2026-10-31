@@ -18,8 +18,10 @@ public sealed record StoryWalk(ImmutableArray<StoryLeg> Legs, ImmutableArray<Sto
 /// Replays a region's story in the order it's played, which a flood from the start can't see: a tile is only "reached" in that flood by
 /// walking through a battle's stamp, but while that battle is armed the first step in starts the fight. So this walks each branch of
 /// <c>lore/arcs.json</c>, beat by beat as milestone 5d offers them: the first beat not yet done whose <c>requires</c> hold. A battle
-/// beat's stamp is shut until it's won. A choice forks a branch per option, and a scene of its beat set in another place moves the party to
-/// the spot of the arc's first beat there. After each battle it also proves a beaten party can get from the recovery spawn back to the stamp.
+/// leg ends at the beat's spot or on the first step into its stamp, as 5c starts the fight there, so it never walks through. A battle in
+/// the place the last beat ended starts at once with no walk, as 5d chains them. A choice forks a branch per option, and a scene of its
+/// beat set in another place moves the party to the spot of the arc's first beat there. After each battle it also proves a beaten party
+/// can get from the recovery spawn back to the stamp. Separately, it finds tiles the party can walk into and never leave.
 /// It runs on a loaded region, so a painted one gets the same check as the draft. Each problem ends in what a painter should do, and the
 /// first tile it names is the one to go to.
 /// </summary>
@@ -32,19 +34,27 @@ public static class StoryOrder
     private sealed record Scene(string Beat, string? Place, ImmutableArray<string> Requires, ImmutableArray<string> Unless);
 
     /// <summary>Where a branch has got to.</summary>
-    private sealed record Progress(string Branch, Tile At, ImmutableHashSet<string> Flags, ImmutableHashSet<string> Done, ImmutableArray<StoryLeg> Legs, ImmutableArray<StoryLeg> Retries);
+    private sealed record Progress(string Branch, Tile At, string? Place, ImmutableHashSet<string> Flags, ImmutableHashSet<string> Done, ImmutableArray<StoryLeg> Legs, ImmutableArray<StoryLeg> Retries);
 
     /// <summary>Walks every arc of <paramref name="region"/> in <paramref name="contentBase"/>'s lore, on the maps and encounters of <paramref name="rules"/>.</summary>
     public static StoryWalk Check(WorldRegion region, RulesPack rules, string contentBase)
     {
         var (legs, retries, problems) = (new List<StoryLeg>(), new List<StoryLeg>(), new List<string>());
-        using var lore = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(contentBase, "lore", "arcs.json")));
         var walk = new RegionWalk(region, rules.Maps);
+        var trapped = walk.Trapped(region.Def.Spawns.Start);
+        if (trapped.Count > 0)
+            problems.Add($"{TileSpread.Say(trapped, "can be walked into but has no way back", "can be walked into but have no way back")}. Paint a way out, climbing no more than {ClassDef.DefaultJump} levels a step, or raise {TileSpread.It(trapped)}.");
+
+        var arcs = Path.Combine(contentBase, "lore", "arcs.json");
+        if (!File.Exists(arcs))
+            return new StoryWalk([], [], [.. problems]);
+
+        using var lore = JsonDocument.Parse(File.ReadAllBytes(arcs));
         foreach (var arc in lore.RootElement.GetProperty("arcs").EnumerateArray().Where(a => a.GetProperty("region").GetString() == region.Def.Id))
         {
             var beats = arc.GetProperty("beats").EnumerateArray().Select(ReadBeat).ToImmutableArray();
             var scenes = ReadScenes(contentBase, arc.GetProperty("chapter").GetInt32());
-            var start = new Progress("", region.Def.Spawns.Start, [], [], [], []);
+            var start = new Progress("", region.Def.Spawns.Start, null, [], [], [], []);
             foreach (var finished in new Replay(region, rules, walk, beats, scenes, problems).Run(start))
             {
                 legs.AddRange(finished.Legs);
@@ -109,15 +119,15 @@ public static class StoryOrder
         {
             while (beats.FirstOrDefault(b => !progress.Done.Contains(b.Id) && b.Requires.All(progress.Flags.Contains)) is { } beat)
             {
-                progress = progress with { Done = progress.Done.Add(beat.Id), Flags = progress.Flags.Union(beat.Sets) };
-                progress = Walk(progress, beat);
+                var chained = beat.Kind == "battle" && beat.Place == progress.Place;
+                progress = Walk(progress with { Done = progress.Done.Add(beat.Id), Flags = progress.Flags.Union(beat.Sets) }, beat, chained);
                 if (beat.Choices.Length > 0)
                     return beat.Choices.SelectMany(choice => Run(Chose(progress, beat, choice)));
             }
             return [progress];
         }
 
-        private Progress Walk(Progress progress, Beat beat)
+        private Progress Walk(Progress progress, Beat beat, bool chained)
         {
             if (SpotOf(beat.Id) is not { } spot)
             {
@@ -129,12 +139,11 @@ public static class StoryOrder
             if (beat.Kind == "battle" && on is null)
                 problems.Add($"The battle beat '{beat.Id}' has no stamp in the region. Add a StampMarker under Stamps for its encounter's map, then press Apply stamp.");
 
-            Func<Tile, bool>? shut = on is { } armed ? t => Inside(armed, t) : null;
-            var seconds = walk.Seconds(progress.At, t => t == spot, shut);
+            var seconds = chained && on is not null ? 0 : walk.Seconds(progress.At, t => t == spot || (on is { } armed && Inside(armed, t)));
             var leg = new StoryLeg(progress.Branch, beat.Id, progress.At, spot, seconds);
             if (seconds is null)
-                problems.Add($"{Named(progress)} party can't walk to '{beat.Id}' at {spot} from {progress.At}{(on is null ? ". Paint a way there, or move the marker." : $" with the armed stamp '{on.Value.Stamp.Map}' shut. Paint a way round the stamp, or move the marker.")}");
-            progress = progress with { At = spot, Legs = progress.Legs.Add(leg) };
+                problems.Add($"{Named(progress)} party can't walk to '{beat.Id}' at {spot} from {progress.At}{(on is null ? ". Paint a way there, or move the marker." : $", or to its stamp '{on.Value.Stamp.Map}'. Paint a way to the stamp, or move the marker.")}");
+            progress = progress with { At = spot, Place = beat.Place, Legs = progress.Legs.Add(leg) };
             if (on is not { } fight)
                 return progress;
 
@@ -164,7 +173,7 @@ public static class StoryOrder
 
             var first = beats.FirstOrDefault(b => b.Place == elsewhere.Place);
             if (first is not null && SpotOf(first.Id) is { } spot)
-                return chosen with { At = spot };
+                return chosen with { At = spot, Place = elsewhere.Place };
             problems.Add($"{Named(chosen)} scene set in '{elsewhere.Place}' has no beat spot to move the party to. Add a BeatMarker for the arc's first beat there.");
             return chosen;
         }

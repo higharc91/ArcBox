@@ -4,6 +4,10 @@ A small Godot 4.7.2 .NET project for painting overworld regions. You paint `regi
 writes `content/tactics/base/rules/world/<id>.json`, which the game loads. The logic and its tests are in
 [`games/Tactics/Tactics.WorldTools`](../../games/Tactics/Tactics.WorldTools); the C# here is only the part that needs Godot.
 
+**What's proven so far:** this workspace has been built and exported headless, but nobody has painted in it by hand. The editor steps, the
+panel names and how fast it paints at 17,408 cells come from memory of Godot, not from seeing them. If something here doesn't match what
+you see, say so and the guide gets fixed.
+
 Ashen Ford is ready to paint over. This is what's there now, drawn at a quarter of the TV's scale, not the workspace itself, which shows
 a flat grid:
 
@@ -22,9 +26,10 @@ dotnet build tools/tactics-world/Tactics.World.Editor.csproj
 
 Build first, because the plugin is C#. Then double-click `regions/ashen_ford.tscn` in the FileSystem dock.
 
-**If the PATH is wrong,** `dotnet build` says `No .NET SDKs were found`, and Godot's Output panel says
+**If the PATH is wrong,** `dotnet build` says `No .NET SDKs were found`, and Godot should say
 `.NET Sdk not found. The required version is '10.0.13'`, then `Could not load file or assembly 'Microsoft.Build'`. Close Godot and use
-the commands above.
+the commands above. Those Godot lines were seen on the console in a headless run, so where the editor shows them, and whether the dock still
+appears, is unproven.
 
 **If there's no Region dock** (it's a tab on the right, and may be behind another tab), open Project > Project Settings > Plugins and tick
 Enabled beside Region Tools. If that gives an error, close Godot, run the build and open it again.
@@ -63,8 +68,8 @@ invisible wall. Repaint the Flags layer as well. The same goes the other way: pa
 **To hide a layer,** click the eye beside it in the Scene dock. Hidden layers still export. Hiding `Height` and `Flags` shows you the
 ground on its own.
 
-**To find a tile,** multiply its coordinates by 32: tile (100, 52) is at (3200, 1664) on the 2D view's rulers. If the export names a tile,
-click the problem instead, which centres the view there and marks it in cyan.
+**To find a tile,** type its X and Y in the Region dock and press **Go to tile**, which centres the view there and marks it in cyan. Clicking
+a problem that names a tile does the same.
 
 **Sides aren't painted.** The game chooses them. Keep `Material`, `Height`, `Flags`, `Beats`, `Stamps` and `Spawns` at the origin. If one
 gets dragged, Ctrl+Z, or the export tells you to set its Position back to zero.
@@ -127,8 +132,9 @@ clicking a line that names a tile goes to it.
 | old stamp at (x, y) may still be in the world | A pending area | Repaint it, then Done repainting |
 | a beat has no spot | The story reaches a beat with no marker | Add a `BeatMarker` |
 | a battle beat has no stamp | Its encounter's map isn't stamped here | Add a `StampMarker`, press Apply stamp |
-| party can't walk to a beat | The story can't get there in order, often because the way runs through a battle not yet won | Paint a way round the stamp, or move the marker |
+| party can't walk to a beat | The story can't get there in order, or, for a battle, can't reach its spot or a step into its stamp | Paint a way there, or move the marker |
 | can't get back from the recovery spawn | A beaten party can't return to the fight | Paint a way, or move the `Recovery` marker |
+| can be walked into but has no way back | A one-way pit: a drop with no way out | Paint a way out, climbing 2 or less a step, or raise it |
 | a scene has no beat spot | A choice moves the party to a place with no marker | Add a `BeatMarker` for the arc's first beat there |
 
 ## Keeping the scene the source of truth
@@ -141,7 +147,7 @@ For a new region, make its scene with the command below, which refuses if the sc
 [Exporting from a command line](#exporting-from-a-command-line).
 
 ```powershell
-& $Godot --headless --path tools/tactics-world -- --new=greyfen --chapter=2 --size=160x120 --name="The Greyfen"
+& $Godot --headless --path tools/tactics-world -- --new=mirewood --chapter=2 --size=160x120 --name="The Mirewood"
 ```
 
 Each export changes the pack's hash: see the note at the end of [Exporting from a command line](#exporting-from-a-command-line).
@@ -183,7 +189,7 @@ Set `$Godot` to the console build, `...\Godot_v4.7.2-stable_mono_win64_console.e
 & $Godot --headless --path tools/tactics-world -- --export=ashen_ford
 ```
 
-It exits 0 on success and 1 if there are problems, and prints `PROBLEM:` and `WARNING:` lines. `--rules=<folder>` writes to a copy of the
+It exits 0 on success and 1 if there are problems, and prints `PROBLEM:` and `WARNING:` lines, as `--press-export` below does. `--rules=<folder>` writes to a copy of the
 pack instead. `--export` also takes a scene path. To press the plugin's real button with no one there:
 
 ```powershell
@@ -191,12 +197,14 @@ pack instead. `--export` also takes a scene path. To press the plugin's real but
 ```
 
 `--press-apply=<scene>` presses Apply stamp on the first stamp the same way, moving it first with `--move=x,y`, then undoes it.
-`--second-move=x,y` instead walks a second move, an export, Done repainting and its undo, and `--click-first-problem` clicks a problem
-after an export. These print `Parameter "t" is null` as they save: it's Godot failing to make the scene's thumbnail with no renderer, and
+`--second-move=x,y` instead walks a second move, an export, Done repainting and its undo. That saves the scene and exports it, so use a test
+scene: it refuses without `--rules=<a copy of the pack>`. `--click-first-problem` clicks a problem after an export, and `--go-to=x,y`
+presses Go to tile. These print `Parameter "t" is null` as they save: it's Godot failing to make the scene's thumbnail with no renderer, and
 it's harmless.
 
 **A region file is in the rules pack, so any change to it changes the pack's hash.** A battle saved under the old hash starts again, with a
 notice, the next time that campaign opens, and each TV downloads the whole pack again. So don't deploy every export: send them in batches.
+The restart lasts until milestone 5b, which takes `rules/world/` out of the hash a battle save compares. The TV's download stays.
 
 ## Rebuilding the palette
 
@@ -216,9 +224,10 @@ painted scene exists.
 ## Trying it on a test scene
 
 `--sample=<scene>` writes a new small region around River Crossing, or `--map=<id>`, and adding `--tamper` paints over a stamped tile, which
-the export must refuse. Export to a copy of the pack, so the real one isn't touched:
+the export must refuse. Export to a copy of the pack, so the real one isn't touched. `_sample.tscn` is git-ignored:
 
 ```powershell
+Copy-Item content/tactics/base/rules $env:TEMP\rules-copy -Recurse
 & $Godot --headless --path tools/tactics-world -- --sample=res://regions/_sample.tscn --tamper
 & $Godot --headless --path tools/tactics-world -- --export=res://regions/_sample.tscn --rules=$env:TEMP\rules-copy
 ```

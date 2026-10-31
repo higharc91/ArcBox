@@ -358,6 +358,96 @@ public sealed class AshenFordDraftTests
         Assert.Equal(2, story.Retries.Length);
     }
 
+    [Fact]
+    public void A_battle_in_the_place_the_last_beat_ended_starts_at_once()
+    {
+        var draft = Draft.Value;
+        var legs = StoryOrder.Check(draft.Region, draft.Pack, ContentPaths.ContentBase).Legs;
+
+        Assert.Equal(0, legs.Single(l => l.Branch == "ch1_force" && l.Beat == "ch1_ford_assault").Seconds);
+        Assert.True(legs.Single(l => l.Branch == "ch1_parley" && l.Beat == "ch1_river_crossing").Seconds > 0);
+    }
+
+    [Fact]
+    public void After_a_win_the_party_walks_on_from_the_battles_spawn_not_the_spot()
+    {
+        var draft = Draft.Value;
+        var legs = StoryOrder.Check(draft.Region, draft.Pack, ContentPaths.ContentBase).Legs;
+
+        Assert.All(legs.Where(l => l.Beat == "ch1_old_maud"), leg => Assert.Equal(draft.Zone("party_spawn")[0], leg.From));
+    }
+
+    private static WorldRegion WithSpot(string beat, Tile at) => Changed(source => source.Beats[source.Beats.FindIndex(b => b.Beat == beat)] = new BeatSpot(beat, at));
+
+    [Theory]
+    [InlineData("ch1_ford_assault", 102, 60)]
+    [InlineData("ch1_river_crossing", 110, 60)]
+    [InlineData("ch1_river_crossing", 96, 60)]
+    [InlineData("ch1_ford_assault", 120, 60)]
+    [InlineData("ch1_the_ford_choice", 102, 60)]
+    public void A_marker_moved_about_the_ford_is_still_a_story_that_plays(string beat, int x, int y)
+    {
+        var story = StoryOrder.Check(WithSpot(beat, new Tile(x, y)), Draft.Value.Pack, ContentPaths.ContentBase);
+        Assert.Empty(story.Problems);
+    }
+
+    [Fact]
+    public void A_battle_leg_starting_in_its_stamp_has_arrived()
+    {
+        var draft = Draft.Value;
+        var region = Changed(source =>
+        {
+            source.Beats[source.Beats.FindIndex(b => b.Beat == "ch1_skarrow_song")] = new BeatSpot("ch1_skarrow_song", new Tile(110, 60));
+        });
+
+        var legs = StoryOrder.Check(region, draft.Pack, ContentPaths.ContentBase).Legs;
+
+        Assert.Equal(0, legs.Single(l => l.Branch == "ch1_parley" && l.Beat == "ch1_river_crossing").Seconds);
+    }
+
+    private static void Pit(RegionSource source, params Tile[] tiles)
+    {
+        foreach (var tile in tiles)
+        {
+            var info = source.Get(tile)!;
+            source.Set(tile, 0, info.Material, info.Flags);
+        }
+    }
+
+    [Fact]
+    public void A_pit_in_walkable_ground_is_a_warning_at_export_that_goes_to_it()
+    {
+        var pit = new Tile(44, 57);
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        Pit(source, pit);
+        var rules = RegionExportTests.CopyRules();
+        try
+        {
+            var result = RegionExport.Export(Painted(source), rules, ContentPaths.ContentBase);
+
+            Assert.Empty(result.Problems);
+            var warning = Assert.Single(result.StoryWarnings);
+            Assert.Equal("The tile (44, 57) can be walked into but has no way back. Paint a way out, climbing no more than 2 levels a step, or raise it.", warning);
+            Assert.Equal(pit, RegionExport.TileIn(warning));
+        }
+        finally
+        {
+            Directory.Delete(rules, recursive: true);
+        }
+    }
+
+    [Fact]
+    public void A_wider_pit_gives_its_count_and_box()
+    {
+        var region = Changed(source => Pit(source, new Tile(44, 57), new Tile(44, 58)));
+
+        var warning = Assert.Single(StoryOrder.Check(region, Draft.Value.Pack, ContentPaths.ContentBase).Problems);
+
+        Assert.StartsWith("2 tiles, x 44 to 44, y 57 to 58, first (44, 57), can be walked into but have no way back.", warning, StringComparison.Ordinal);
+        Assert.Equal(new Tile(44, 57), RegionExport.TileIn(warning));
+    }
+
     private static WorldRegion Changed(Action<RegionSource> change)
     {
         var draft = Draft.Value;
@@ -374,12 +464,34 @@ public sealed class AshenFordDraftTests
     }
 
     [Fact]
-    public void A_cut_on_the_far_bank_stops_parley_though_every_tile_is_still_reached()
+    public void A_cut_the_party_can_end_at_the_stamps_north_edge_is_no_problem()
     {
+        // The only way south from the camp is into the armed stamp, and that step starts the fight, which is all the beat needs.
         var region = Changed(source =>
         {
             for (var x = 114; x < 160; x++)
                 Wall(source, new Tile(x, 51));
+        });
+
+        Assert.Empty(StoryOrder.Check(region, Draft.Value.Pack, ContentPaths.ContentBase).Problems);
+    }
+
+    [Fact]
+    public void A_cut_on_the_far_bank_stops_parley_though_every_tile_is_still_reached()
+    {
+        // As above, and the stamp's north edge now drops 3 to the camp's side, so the party can leave the stamp that way but not come back.
+        var region = Changed(source =>
+        {
+            for (var x = 114; x < 160; x++)
+                Wall(source, new Tile(x, 51));
+            Wall(source, new Tile(108, 51));
+            Wall(source, new Tile(109, 51));
+            for (var x = 110; x < 114; x++)
+            {
+                var (low, ramp) = (source.Get(new Tile(x, 51))!, source.Get(new Tile(x, 50))!);
+                source.Set(new Tile(x, 51), 1, low.Material, low.Flags);
+                source.Set(new Tile(x, 50), 3, ramp.Material, ramp.Flags);
+            }
         });
         var draft = Draft.Value;
 
@@ -388,11 +500,11 @@ public sealed class AshenFordDraftTests
         Assert.Contains(draft.Spot("ch1_river_crossing"), reached);
         Assert.Contains(draft.Spot("ch1_skarrow_song"), reached);
 
-        var problem = Assert.Single(StoryOrder.Check(region, draft.Pack, ContentPaths.ContentBase).Problems);
+        var problem = Assert.Single(StoryOrder.Check(region, draft.Pack, ContentPaths.ContentBase).Problems, p => p.Contains("can't walk to 'ch1_river_crossing", StringComparison.Ordinal));
         Assert.Contains("ch1_parley", problem, StringComparison.Ordinal);
         Assert.Contains("ch1_river_crossing", problem, StringComparison.Ordinal);
         Assert.Equal(draft.Spot("ch1_river_crossing"), RegionExport.TileIn(problem));
-        Assert.EndsWith("Paint a way round the stamp, or move the marker.", problem, StringComparison.Ordinal);
+        Assert.EndsWith("Paint a way to the stamp, or move the marker.", problem, StringComparison.Ordinal);
     }
 
     [Fact]

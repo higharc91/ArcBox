@@ -20,6 +20,9 @@ public partial class RegionToolsPlugin : EditorPlugin
     private VBoxContainer _problems = null!;
     private VBoxContainer _pending = null!;
     private VBoxContainer _story = null!;
+    private SpinBox _goX = null!;
+    private SpinBox _goY = null!;
+    private Button _go = null!;
 
     private static Region? EditedRegion => EditorInterface.Singleton.GetEditedSceneRoot() as Region;
 
@@ -46,9 +49,19 @@ public partial class RegionToolsPlugin : EditorPlugin
             HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled,
         };
         scroll.AddChild(rows);
+        _goX = TileBox("X");
+        _goY = TileBox("Y");
+        _go = new Button { Text = "Go to tile", TooltipText = "Centre the 2D view on this tile and mark it." };
+        _go.Pressed += GoToTyped;
+        var goTo = new HBoxContainer();
+        goTo.AddChild(_goX);
+        goTo.AddChild(_goY);
+        goTo.AddChild(_go);
+
         var column = new VBoxContainer();
         column.AddChild(_export);
         column.AddChild(_apply);
+        column.AddChild(goTo);
         column.AddChild(_status);
         column.AddChild(scroll);
         _dock = new EditorDock { Title = "Region", DefaultSlot = EditorDock.DockSlot.RightBl };
@@ -72,7 +85,24 @@ public partial class RegionToolsPlugin : EditorPlugin
         _dock.QueueFree();
     }
 
+    private static SpinBox TileBox(string axis) => new()
+    {
+        Prefix = axis,
+        MinValue = 0,
+        MaxValue = short.MaxValue,
+        Rounded = true,
+        SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
+    };
+
     private void OnSceneChanged(Node scene) => RefreshPending();
+
+    private void GoToTyped()
+    {
+        if (EditedRegion is null)
+            _status.Text = "Open a region scene first.";
+        else
+            GoTo(new Tile((int)_goX.Value, (int)_goY.Value));
+    }
 
     /// <summary>Refreshes once the action has finished, however its steps are ordered, and whichever way it ran.</summary>
     private void QueueRefresh() => CallDeferred(MethodName.RefreshPending);
@@ -289,6 +319,14 @@ public partial class RegionToolsPlugin : EditorPlugin
     /// <summary>The test hook: opens the scene, presses the button as a click does, prints what the dock shows, and quits.</summary>
     private async void PressWhenReady(string scene, Button button)
     {
+        // This walk saves the scene and exports it, which would write to the real pack.
+        if (Commands.Arg("second-move") is not null && Commands.Arg("rules") is null)
+        {
+            GD.PrintErr("--second-move saves the scene and exports it. Give it a test scene and --rules=<a copy of the pack>.");
+            GetTree().Quit(2);
+            return;
+        }
+
         var files = EditorInterface.Singleton.GetResourceFilesystem();
         do
             await ToSignal(GetTree().CreateTimer(0.5), SceneTreeTimer.SignalName.Timeout);
@@ -315,6 +353,8 @@ public partial class RegionToolsPlugin : EditorPlugin
         }
         if (OS.GetCmdlineUserArgs().Contains("--click-first-problem") && _problems.GetChildCount() > 0)
             await ClickFirstProblem();
+        if (Commands.Arg("go-to") is { } goTo && goTo.Split(',') is [var x, var y])
+            await PressGoTo(int.Parse(x), int.Parse(y));
         GetTree().Quit(_problems.GetChildCount() == 0 ? 0 : 1);
     }
 
@@ -324,9 +364,9 @@ public partial class RegionToolsPlugin : EditorPlugin
         foreach (var problem in _problems.GetChildren().OfType<Button>())
             GD.Print($"PROBLEM: {problem.Text}");
         foreach (var warning in _story.GetChildren().OfType<Button>())
-            GD.Print($"STORY: {warning.Text}");
+            GD.Print($"WARNING: {warning.Text}");
         foreach (var row in _pending.GetChildren())
-            GD.Print($"PENDING: {row.GetChild<Button>(0).Text}");
+            GD.Print($"WARNING: {row.GetChild<Button>(0).Text}");
     }
 
     /// <summary>The test hook's walk through a second move, an export, a stale height, Done repainting and its undo.</summary>
@@ -382,6 +422,17 @@ public partial class RegionToolsPlugin : EditorPlugin
         var read = RegionScene.Read(root);
         var marker = root.GetNode(RegionScene.Stamps).GetChild<StampMarker>(0);
         return $"materials {read.Materials.Count} (grass {read.Materials.Values.Count(m => m == "grass/lush")}), heights {read.Heights.Count}, flags {read.Flags.Count}, appliedAt {marker.AppliedAt}";
+    }
+
+    /// <summary>The test hook for the go-to box: types a tile, presses the button, and prints where the view went.</summary>
+    private async Task PressGoTo(int x, int y)
+    {
+        var before = EditorInterface.Singleton.GetEditorViewport2D().GlobalCanvasTransform.Origin;
+        (_goX.Value, _goY.Value) = (x, y);
+        _go.EmitSignal(BaseButton.SignalName.Pressed);
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        GD.Print($"WENT: highlight {EditedRegion?.Highlight}, view origin {before} to {EditorInterface.Singleton.GetEditorViewport2D().GlobalCanvasTransform.Origin}");
     }
 
     private async Task ClickFirstProblem()

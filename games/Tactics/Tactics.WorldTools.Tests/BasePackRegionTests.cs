@@ -1,3 +1,4 @@
+using System.Text.Json;
 using ArcBox.Sdk;
 using Tactics.Logic;
 using Tactics.Logic.Tests;
@@ -31,6 +32,22 @@ public sealed class BasePackRegionTests
         Assert.NotEmpty(story.Legs);
         Assert.All(story.Legs, leg => Assert.NotNull(leg.Seconds));
         Assert.All(story.Retries, leg => Assert.NotNull(leg.Seconds));
+
+        var branches = story.Legs.SelectMany(l => l.Branch.Split('/')).ToHashSet(StringComparer.Ordinal);
+        Assert.All(Choices(id), choice => Assert.Contains(choice, branches));
+    }
+
+    /// <summary>Every option of every choice in the arcs set in a region.</summary>
+    private static List<string> Choices(string id)
+    {
+        using var lore = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(ContentPaths.ContentBase, "lore", "arcs.json")));
+        var choices = lore.RootElement.GetProperty("arcs").EnumerateArray().Where(a => a.GetProperty("region").GetString() == id)
+            .SelectMany(a => a.GetProperty("beats").EnumerateArray())
+            .Where(b => b.TryGetProperty("choices", out _))
+            .SelectMany(b => b.GetProperty("choices").EnumerateArray())
+            .Select(c => c.GetProperty("id").GetString()!).ToList();
+        Assert.NotEmpty(choices);
+        return choices;
     }
 
     [Theory]

@@ -125,6 +125,9 @@ public static partial class RegionExport
 
     private static ExportResult Run(PaintedRegion painted, string rulesDirectory, string contentBase)
     {
+        if (!File.Exists(Path.Combine(rulesDirectory, "manifest.json")))
+            return new ExportResult(null, [$"{rulesDirectory} isn't a rules pack: it has no manifest.json. Copy content/tactics/base/rules there, or fix --rules."]);
+
         var problems = new List<string>();
         ImmutableArray<string> warnings = [.. PendingWarnings(painted, rulesDirectory)];
         if (!ValidId(painted.Id))
@@ -156,6 +159,8 @@ public static partial class RegionExport
         if (problems.Count > 0)
             return new ExportResult(null, [.. problems]) { Warnings = warnings };
 
+        // Before the file moves, so nothing thrown here can report "not written" for a file that was.
+        ImmutableArray<string> story = checks.Pack is { } pack ? StoryOrder.Check(pack.RegionFor(region.Id)!, pack, contentBase).Problems : [];
         var path = Path.Combine(rulesDirectory, "world", $"{region.Id}.json");
         if (Replace(path, bytes) is { } failure)
             return new ExportResult(null, [failure]) { Warnings = warnings };
@@ -165,13 +170,9 @@ public static partial class RegionExport
             Entry = entry,
             Listed = Listed(rulesDirectory, entry),
             Warnings = warnings,
-            StoryWarnings = checks.Pack is { } pack ? StoryWarnings(pack, region.Id, contentBase) : [],
+            StoryWarnings = story,
         };
     }
-
-    /// <summary>What <see cref="StoryOrder"/> finds on the region as the game will load it. A pack with no lore has no story to check.</summary>
-    private static ImmutableArray<string> StoryWarnings(RulesPack pack, string id, string contentBase)
-        => File.Exists(Path.Combine(contentBase, "lore", "arcs.json")) ? StoryOrder.Check(pack.RegionFor(id)!, pack, contentBase).Problems : [];
 
     /// <summary>What each stamped map says its tiles should be, in world tiles. A later stamp wins where two overlap, which is its own problem.</summary>
     private static Dictionary<Tile, TileInfoNamed> StampedTiles(RegionSource source, List<BattleMap> maps)

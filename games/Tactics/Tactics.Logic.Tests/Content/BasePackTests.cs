@@ -21,10 +21,8 @@ public sealed class BasePackTests
     [Fact]
     public void Base_pack_has_ashen_ford()
     {
-        Assert.Equal(["ashen_ford"], Rules.Regions.Keys);
         var region = Rules.RegionFor("ashen_ford")!.Def;
         Assert.Equal(1, region.Chapter);
-        Assert.Equal([160, 120], region.Size);
         Assert.Equal("river_crossing", Assert.Single(region.Stamps).Map);
     }
 

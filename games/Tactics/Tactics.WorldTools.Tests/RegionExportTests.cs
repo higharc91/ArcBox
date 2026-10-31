@@ -694,6 +694,46 @@ public sealed class RegionExportTests : IDisposable
     }
 
     [Fact]
+    public void A_story_that_cant_be_read_leaves_the_old_file_and_says_so()
+    {
+        var content = Directory.CreateTempSubdirectory("tactics-export-content-").FullName;
+        try
+        {
+            foreach (var file in Directory.EnumerateFiles(ContentPaths.ContentBase, "*.json", SearchOption.AllDirectories))
+            {
+                var to = Path.Combine(content, Path.GetRelativePath(ContentPaths.ContentBase, file));
+                Directory.CreateDirectory(Path.GetDirectoryName(to)!);
+                File.Copy(file, to);
+            }
+            File.WriteAllText(Path.Combine(content, "lore", "scenes", "ch1.json"), "{ not json");
+            var before = File.ReadAllBytes(RegionFile("ashen_ford"));
+            var field = Field("ashen_ford");
+
+            var result = RegionExport.Export(field with { Beats = [.. field.Beats, new BeatSpot("ch1_the_ford_choice", new Tile(4, 4))] }, _rules, content);
+
+            Assert.Null(result.Written);
+            Assert.Contains("couldn't be read", Assert.Single(result.Problems), StringComparison.Ordinal);
+            Assert.Equal(before, File.ReadAllBytes(RegionFile("ashen_ford")));
+        }
+        finally
+        {
+            Directory.Delete(content, recursive: true);
+        }
+    }
+
+    [Fact]
+    public void A_rules_folder_that_isnt_a_pack_is_a_clear_problem()
+    {
+        var missing = Path.Combine(_rules, "nowhere");
+
+        var result = RegionExport.Export(Field(), missing, ContentPaths.ContentBase);
+
+        Assert.Null(result.Written);
+        Assert.Contains("has no manifest.json. Copy content/tactics/base/rules there", Assert.Single(result.Problems), StringComparison.Ordinal);
+        Assert.False(Directory.Exists(missing));
+    }
+
+    [Fact]
     public void A_region_no_arc_names_has_no_story_to_check()
         => Assert.Empty(Export(Field()).StoryWarnings);
 
