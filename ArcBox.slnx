@@ -12,6 +12,8 @@
     <Project Path="games/Redline/tools/Redline.Sim/Redline.Sim.csproj" />
   </Folder>
   <Folder Name="/games/Tactics/">
+    <Project Path="games/Tactics/Tactics.Game.Tests/Tactics.Game.Tests.csproj" />
+    <Project Path="games/Tactics/Tactics.Game/Tactics.Game.csproj" />
     <Project Path="games/Tactics/Tactics.Logic.Tests/Tactics.Logic.Tests.csproj" />
     <Project Path="games/Tactics/Tactics.Logic/Tactics.Logic.csproj" />
     <Project Path="games/Tactics/Tactics.Sim/Tactics.Sim.csproj" />
