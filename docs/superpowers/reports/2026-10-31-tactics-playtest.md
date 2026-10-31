@@ -32,7 +32,7 @@ In `--fight` mode the party crosses the river and fights. The phones' Attack →
 
 ![](2026-10-31-tactics-playtest/board-melee.png)
 
-**Something for the AI tuning list:** against a party that hangs back, goblins with nobody in reach spend turn after turn on **Dodge** instead of closing in. In the simulator both sides advance, so this only shows against passive players. It's worth checking how `brute` and `skirmisher` value Dash and approach when no foe is reachable this turn.
+**Checked, not a bug:** against a party that hangs back, the log showed goblins choosing **Dodge** turn after turn. The log leaves out `Moved` events, which made that look like idling. An AI probe with the base pack shows that a goblin with no foe in reach **Dashes** and closes 8 tiles. The Dodge turns came from goblins already at the river's edge, holding the bank against a party that wouldn't cross.
 
 ## Still to look at, with real people
 
