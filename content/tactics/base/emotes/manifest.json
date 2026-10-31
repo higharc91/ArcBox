@@ -67,8 +67,16 @@
       "row": 13,
       "thought": false
     },
-    "ellipsis": {
+    "surprise": {
       "row": 14,
+      "thought": false
+    },
+    "star": {
+      "row": 15,
+      "thought": false
+    },
+    "ellipsis": {
+      "row": 16,
       "thought": false
     }
   },
