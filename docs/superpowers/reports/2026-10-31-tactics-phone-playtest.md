@@ -68,12 +68,10 @@ The user's verdict:
 
 ## Still needs a person
 
-- Is the d-pad comfortable? Tapping tiles is confirmed fine, but the d-pad has no verdict yet.
-- Do 60 s for a turn and 10 s for a reaction feel right? Claude's tool delays make its timings meaningless, and the user hasn't given a verdict.
+The user later played a battle on the TV from the S23 and said the d-pad, 60 s a turn, 10 s a reaction and the reaction prompt's countdown are all fine for now ([TV scene report](2026-10-31-tactics-tv-scene.md)). These are still open:
+
 - Phones on the Wi-Fi LAN: the S23 couldn't connect, so check the router's isolation settings, or keep using Tailscale.
 - **Wake Lock:** it needs HTTPS or `localhost`, so a phone on plain HTTP may still dim mid-battle.
-- "Resuming…" wasn't seen, because the restarted room was already back when the dev page reopened.
 - After one restart, a room came back on a new battle. That battle may have ended before the restart, but this wasn't confirmed.
-- Whether the reaction prompt shows its countdown: no screenshot caught the prompt on screen.
 
 Balance is unchanged. The decisions waiting on the user are listed in the rules-engine tracker.
