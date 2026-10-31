@@ -6,15 +6,13 @@ namespace Tactics.WorldTools;
 /// Claude's first pass of the Ashen Ford, for the user to paint over. It's laid out by hand, as lines and rectangles in tile
 /// coordinates, and noise only roughens their edges, from a fixed seed, so the same pack always gives the same region.
 /// <para>
-/// West to east: Emberwick behind its wall on warm green ground; the scarp, which turns the road north over the pass; the wooded
-/// valley, where it runs south beside the beck to the plank bridge; the meadows, the docks where the beck meets the river, and the
-/// last stretch north along the bank to the ford. The river cuts the region in two from edge to edge, and River Crossing is stamped
-/// at its only crossing. Past it, the far bank is burned and the terraced hills climb away to the north-east. The north-west and
-/// south-west corners are left as void, as the edge of the map.
+/// West to east: Emberwick behind its wall on warm green ground; the scarp, whose north end the road climbs round before running down
+/// through the autumn woods to the ford, with a side road south to the docks. The river cuts the region in two from edge to edge, and
+/// River Crossing is stamped at its only crossing. Past it, the far bank is burned and the terraced hills climb away to the north-east.
+/// The north-west and south-west corners are left as void, as the edge of the map.
 /// </para>
 /// <para>
-/// The scarp and the beck are what make the walk a minute long: 160 tiles is 48 s at most in a straight line. Every step between two
-/// walkable tiles is 2 or less, stamp aside, so nothing is one way: <see cref="Land.EaseSteps"/> sees to it.
+/// Every step between two walkable tiles is 2 or less, so nothing is one way: <see cref="Land.EaseSteps"/> sees to it.
 /// </para>
 /// </summary>
 public static class AshenFordDraft
@@ -38,7 +36,7 @@ public static class AshenFordDraft
     private const TileFlags DeepWater = TileFlags.Water | TileFlags.Deep, Shallows = TileFlags.Water | TileFlags.Difficult;
 
     private const string Autumn = "grass/autumn", Dry = "grass/dry", Green = "grass/green", Lush = "grass/lush";
-    private const string Earth = "dirt/brown", DarkEarth = "dirt/dark", Track = "path/packed", Mud = "mud/swamp", Sand = "sand/desert";
+    private const string Earth = "dirt/brown", DarkEarth = "dirt/dark", Track = "path/packed", Sand = "sand/desert";
     private const string Leaves = "forest_floor/leafy", Moss = "forest_floor/mossy", Needles = "forest_needles/pine";
     private const string Rock = "rock/grey", DarkRock = "rock/dark", Ash = "ash/grey", Basalt = "basalt/dark", Water = "water/clear";
     private const string Street = "cobble/warm", Wall = "cobble/grey", Square = "flagstone/warm", Quay = "flagstone/grey";
@@ -50,21 +48,17 @@ public static class AshenFordDraft
     /// <summary>The river, north to south. It runs straight for a while either side of the stamp, whose channel it must meet.</summary>
     private static readonly Line River = new((117, -3), (113, 14), (105, 30), (106.5, 42), (106.5, 52), (106.5, 64), (106.5, 72), (111, 86), (108, 102), (112, 112), (113, 123));
 
-    /// <summary>The beck, from the north edge to the river, which is what keeps the valley from the meadows.</summary>
-    private static readonly Line Beck = new((84, -3), (80, 18), (85, 42), (81, 64), (85, 84), (84, 103), (92, 111), (110, 113));
-
-    /// <summary>The scarp's crest, from the south edge to its tip, north of which the pass goes round.</summary>
-    private static readonly Line Scarp = new((57, 130), (54, 104), (59, 78), (55, 54), (59, 38), (58, 20));
+    /// <summary>The scarp's crest, from the south edge north-east to its tip, which the road climbs round.</summary>
+    private static readonly Line Scarp = new((57, 130), (56, 102), (60, 78), (58, 54), (62, 38), (68, 20));
 
     /// <summary>The spur that carries River Crossing's rock ridge up into the hills.</summary>
     private static readonly Line Spur = new((112, 50), (120, 42), (128, 34));
 
-    /// <summary>The road: x, y and its height there, Emberwick's east gate to the stamp, then the stamp's exit to the region's east edge.</summary>
+    /// <summary>The road: x, y and its height there. East gate to the stamp, the side road to the docks, then the stamp's exit to the region's east edge.</summary>
     private static readonly Road[] Roads =
     [
-        new(Track, Earth, 1.5, 2.5,
-            [(50, 62, 3), (52, 54, 3), (50, 40, 4), (51, 24, 5), (56, 11, 6), (68, 11, 5.5), (75, 24, 4), (71, 46, 3), (74, 70, 3), (76, 92, 3), (81, 101, 3),
-                (90, 99, 3), (96, 92, 2), (97, 76, 2), (96, 69, 2), (95, 65, 1.4), (99.5, 61.5, 1)]),
+        new(Track, Earth, 1.5, 2.5, [(50, 62, 3), (52, 52, 3), (55, 38, 4), (60, 22, 5), (68, 12, 6), (78, 17, 5), (86, 34, 4), (92, 48, 3), (95, 57, 1.4), (99.5, 61.5, 1)]),
+        new(Track, Earth, 1, 2, [(94, 54, 2), (91, 64, 2), (93, 76, 2), (96, 88, 2), (96, 94, 2)]),
         new(Track, DarkEarth, 1.5, 2.5, [(113.5, 57.5, 2), (122, 58, 2), (140, 62, 2), (160, 58, 2)]),
     ];
 
@@ -97,7 +91,7 @@ public static class AshenFordDraft
         (13, 81, 5, 3, 2), (20, 81, 6, 3, 2), (28, 81, 4, 3, 2), (34, 81, 6, 3, 2), (42, 81, 5, 3, 2),
 
         // The docks' warehouses, the fishers' sheds and the Ash Market's stalls.
-        (87, 90, 7, 4, 2), (89, 103, 6, 5, 2), (84, 95, 3, 3, 1), (90, 95, 2, 2, 1), (96, 104, 2, 2, 1),
+        (87, 90, 7, 4, 2), (89, 103, 6, 5, 2), (84, 95, 3, 3, 1), (90, 96, 3, 2, 1), (95, 104, 3, 2, 1),
     ];
 
     /// <summary>How many of <see cref="Buildings"/> are in the town, ahead of the docks'.</summary>
@@ -106,8 +100,8 @@ public static class AshenFordDraft
     /// <summary>The fields round the town: left, top, width, depth, and whether their furrows run along x.</summary>
     private static readonly (int X, int Y, int W, int D, bool Across)[] Fields =
     [
-        (34, 8, 12, 12, true), (34, 22, 12, 11, false), (12, 34, 14, 6, true), (28, 34, 14, 6, false),
-        (12, 87, 16, 7, false), (31, 87, 12, 9, true), (31, 98, 16, 11, false), (45, 87, 5, 9, true),
+        (34, 8, 12, 12, true), (34, 22, 12, 11, false), (34, 34, 8, 4, false),
+        (34, 87, 10, 9, true), (34, 98, 14, 11, false), (45, 87, 5, 9, true),
     ];
 
     /// <summary>The camp's low hide tents: left, top, width, depth.</summary>
@@ -155,6 +149,8 @@ public static class AshenFordDraft
             land.Lay(track);
         land.CloseEdges();
         land.Stamp(crossing);
+        land.ClearSpecks();
+        land.FillSealed(StartSpawn);
         land.EaseSteps();
         land.FaceTerraces();
 
@@ -325,7 +321,7 @@ public static class AshenFordDraft
             return (1.45 - Distance(x, y, 107, 60) / 105 + (Rough(x, y, 11, 4) - 0.5) * 0.8) * clearOfStamp * hillside;
         }
 
-        /// <summary>The rolling land under everything: warm green round the town, autumn beyond, the valley's woods and the far bank's ash.</summary>
+        /// <summary>The rolling land under everything: warm green round the town, autumn beyond, the woods past the scarp and the far bank's ash.</summary>
         public void Ground()
         {
             foreach (var (x, y) in Everywhere())
@@ -339,12 +335,12 @@ public static class AshenFordDraft
                 }
 
                 var warmth = 1 - Distance(x, y, 30, 62) / 44 + (patch - 0.5) * 0.5;
-                var inValley = x is > 64 and < 80;
+                var inWoods = x is > 66 and < 96;
                 var material = warmth switch
                 {
                     > 0.42 => fine > 0.52 ? Lush : Green,
                     > 0.3 => patch > 0.5 ? Green : Autumn,
-                    _ when inValley && patch > 0.46 => fine > 0.5 ? Leaves : Moss,
+                    _ when inWoods && patch > 0.5 => fine > 0.5 ? Leaves : Moss,
                     _ when patch > 0.6 => Dry,
                     _ when fine > 0.66 => Earth,
                     _ => Autumn,
@@ -353,12 +349,12 @@ public static class AshenFordDraft
             }
         }
 
-        /// <summary>The scarp: a wall of rock with stepped shoulders, and a saddle past its tip for the road to climb.</summary>
+        /// <summary>The scarp: a wall of rock with stepped shoulders, and a rise past its tip for the road to climb.</summary>
         public void RaiseScarp()
         {
             foreach (var (x, y) in Everywhere())
             {
-                var saddle = 1 - Distance(x, y, 60, 13) / 20;
+                var saddle = 1 - Distance(x, y, 70, 12) / 20;
                 if (saddle > 0)
                     _heights[x, y] += (int)Math.Round(saddle * 3);
 
@@ -424,15 +420,11 @@ public static class AshenFordDraft
             }
         }
 
-        /// <summary>The beck, then the river over it, each with deep water, shallows and banks that wander.</summary>
+        /// <summary>The river: deep water, shallows and banks that wander.</summary>
         public void CutWater()
         {
             foreach (var (x, y) in Everywhere())
             {
-                var distance = Beck.Nearest(x, y).Distance + (Rough(x, y, 8, 24) - 0.5) * 2.4;
-                if (distance < 5.5)
-                    Wet(x, y, distance, 1.7, 2.8, 5.5, Rough(x, y, 6, 26) > 0.5 ? Earth : Mud);
-
                 // Nothing wanders by the stamp, whose channel is two columns wide and hard against its banks.
                 var away = Math.Clamp((Math.Max(StampAt.Y - y, y - StampAt.Y - 11) - 1) / 12.0, 0, 1);
                 var harbour = Smooth((y - 90) / 8.0) * Smooth((116 - y) / 8.0);
@@ -547,8 +539,7 @@ public static class AshenFordDraft
                 var level = (int)Math.Round(height);
                 if (distance <= road.Half)
                 {
-                    var deck = IsWater(x, y) || _materials[x, y] is Sand or Mud;
-                    Paint(x, y, level, deck ? Deck : road.Surface);
+                    Paint(x, y, level, road.Surface);
                     _fixed[x, y] = true;
                 }
                 else if (distance <= road.Half + road.Shoulder)
@@ -684,6 +675,64 @@ public static class AshenFordDraft
                 else if (fade < 13 && _materials[x, y] is not (Earth or Rock))
                     _materials[x, y] = Dry;
             }
+        }
+
+        /// <summary>
+        /// Opens any impassable patch of four tiles or fewer, which would be a stray post with no reason to be there: nothing in the draft
+        /// that's meant to stop the party is so small.
+        /// </summary>
+        public void ClearSpecks()
+        {
+            var seen = new bool[Width, Height];
+            foreach (var (x, y) in Everywhere())
+            {
+                if (seen[x, y] || !_flags[x, y].HasFlag(TileFlags.Impassable))
+                    continue;
+                var patch = new List<(int X, int Y)>();
+                var open = new Stack<(int X, int Y)>([(x, y)]);
+                seen[x, y] = true;
+                while (open.TryPop(out var tile))
+                {
+                    patch.Add(tile);
+                    foreach (var (nextX, nextY) in (ReadOnlySpan<(int, int)>)[(tile.X + 1, tile.Y), (tile.X, tile.Y + 1), (tile.X - 1, tile.Y), (tile.X, tile.Y - 1)])
+                        if (nextX is >= 0 and < Width && nextY is >= 0 and < Height && !seen[nextX, nextY] && _flags[nextX, nextY].HasFlag(TileFlags.Impassable))
+                        {
+                            seen[nextX, nextY] = true;
+                            open.Push((nextX, nextY));
+                        }
+                }
+
+                if (patch.Count > 4)
+                    continue;
+                foreach (var (patchX, patchY) in patch)
+                {
+                    _flags[patchX, patchY] = TileFlags.None;
+                    _fixed[patchX, patchY] = false;
+                    _heights[patchX, patchY] = Math.Min(_heights[patchX, patchY], 3);
+                }
+            }
+        }
+
+        /// <summary>Turns any ground the party can't get to into rock, which is all the rim's noise leaves: a pocket behind it would only be a hole in the wall.</summary>
+        public void FillSealed(Tile start)
+        {
+            var reached = new bool[Width, Height];
+            reached[start.X, start.Y] = true;
+            var open = new Stack<(int X, int Y)>([(start.X, start.Y)]);
+            while (open.TryPop(out var tile))
+                foreach (var (x, y) in (ReadOnlySpan<(int, int)>)[(tile.X + 1, tile.Y), (tile.X, tile.Y + 1), (tile.X - 1, tile.Y), (tile.X, tile.Y - 1)])
+                    if (x is >= 0 and < Width && y is >= 0 and < Height && !reached[x, y] && Walkable(x, y) && !Void(x, y))
+                    {
+                        reached[x, y] = true;
+                        open.Push((x, y));
+                    }
+
+            foreach (var (x, y) in Everywhere())
+                if (Walkable(x, y) && !reached[x, y])
+                {
+                    Paint(x, y, 5, Rock, TileFlags.Impassable);
+                    _fixed[x, y] = true;
+                }
         }
 
         /// <summary>

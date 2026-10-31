@@ -120,7 +120,7 @@ painted scene exists.
 
 ## Trying it on a test scene
 
-`--sample=<scene>` writes a small region around River Crossing, or `--map=<id>`, and adding `--tamper` paints over a stamped tile, which
+`--sample=<scene>` writes a new small region around River Crossing, or `--map=<id>`, and adding `--tamper` paints over a stamped tile, which
 the export must refuse. Export to a copy of the pack, so the real one isn't touched:
 
 ```sh
@@ -136,4 +136,6 @@ the export must refuse. Export to a copy of the pack, so the real one isn't touc
 "$GODOT" --headless --path tools/tactics-world -- --draft=ashen_ford
 ```
 
-That writes the scene only if it isn't there. If it is, it says so, changes nothing and exits 2, so re-drafting means deleting the scene by hand.
+That writes the scene only if it isn't there. No command replaces a scene: `--draft`, `--new` and `--sample` all say so, change nothing and exit 2, so re-drafting means deleting the scene by hand.
+
+`StoryOrder.Check` in `Tactics.WorldTools` replays Chapter 1 on a loaded region, branch by branch, with an armed stamp shut. Task 6 runs it on the exported region, so a repaint gets the same check.

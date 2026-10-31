@@ -1,14 +1,14 @@
 using System.Collections.Immutable;
 using Tactics.Logic;
 
-namespace Tactics.WorldTools.Tests;
+namespace Tactics.WorldTools;
 
 /// <summary>
-/// The ground a region will be walked on, for proving a draft before milestone 5b's walking exists. Like 5b's <c>WorldGround</c>, it is
-/// the whole region as one <see cref="Terrain"/> with stamped props standing on it, and it steps through <see cref="Paths.StepCost"/>, so
-/// a climb over the default Jump is blocked and a drop of any height is free. Void is impassable.
+/// The ground a region will be walked on, for proving a region before milestone 5b's walking exists. Like 5b's <c>WorldGround</c>, it
+/// is the whole region as one <see cref="Terrain"/> with stamped props standing on it, and it steps through <see cref="Paths.StepCost"/>,
+/// so a climb over the default Jump is blocked and a drop of any height is free. Void is impassable.
 /// </summary>
-internal sealed class DraftWalk
+public sealed class RegionWalk
 {
     /// <summary>How long a straight step takes, in seconds. Milestone 5b's rate.</summary>
     public const double StepSeconds = 0.30;
@@ -19,7 +19,8 @@ internal sealed class DraftWalk
 
     private readonly Terrain _terrain;
 
-    public DraftWalk(WorldRegion region, IReadOnlyDictionary<string, BattleMap> maps)
+    /// <summary>The ground of <paramref name="region"/>. <paramref name="maps"/> must hold its stamped maps.</summary>
+    public RegionWalk(WorldRegion region, IReadOnlyDictionary<string, BattleMap> maps)
     {
         var (width, height) = (region.Def.Size[0], region.Def.Size[1]);
         var bytes = new byte[width * height * 3];
@@ -81,9 +82,25 @@ internal sealed class DraftWalk
     /// <summary>
     /// The quickest walked route, in seconds: 5b's 8-way steps at <see cref="StepSeconds"/> a tile, ×√2 on a diagonal, which is legal only
     /// if both corner tiles can be stood on and one of the two L-paths is legal leg by leg. Rough ground and long drops cost nothing
-    /// extra here, as the walk-time target counts tiles. Null if it can't be walked.
+    /// extra here, as walk-time targets count tiles. It never enters a tile <paramref name="shut"/> says is shut, unless that's where
+    /// it's going. Null if it can't be walked.
     /// </summary>
-    public double? Seconds(Tile start, Func<Tile, bool> arrived)
+    public double? Seconds(Tile start, Func<Tile, bool> arrived, Func<Tile, bool>? shut = null)
+    {
+        double? found = null;
+        Flow(start, arrived, shut, (_, _) => { }, seconds => found = seconds);
+        return found;
+    }
+
+    /// <summary>How long each tile that can be walked to takes from <paramref name="start"/>, as <see cref="Seconds"/> counts it.</summary>
+    public Dictionary<Tile, double> Times(Tile start)
+    {
+        var times = new Dictionary<Tile, double>();
+        Flow(start, _ => false, null, (tile, seconds) => times[tile] = seconds, _ => { });
+        return times;
+    }
+
+    private void Flow(Tile start, Func<Tile, bool> arrived, Func<Tile, bool>? shut, Action<Tile, double> settled, Action<double> found)
     {
         var best = new Dictionary<Tile, double> { [start] = 0 };
         var open = new PriorityQueue<Tile, double>();
@@ -92,8 +109,12 @@ internal sealed class DraftWalk
         {
             if (cost > best[tile])
                 continue;
+            settled(tile, cost * StepSeconds);
             if (arrived(tile))
-                return cost * StepSeconds;
+            {
+                found(cost * StepSeconds);
+                return;
+            }
 
             foreach (var next in Steps(tile))
                 Consider(next, cost + 1);
@@ -101,16 +122,17 @@ internal sealed class DraftWalk
             {
                 var next = new Tile(tile.X + x, tile.Y + y);
                 var (cornerX, cornerY) = (new Tile(next.X, tile.Y), new Tile(tile.X, next.Y));
-                if (Standable(next) && Standable(cornerX) && Standable(cornerY)
+                if (Standable(next) && Standable(cornerX) && Standable(cornerY) && !Shut(cornerX) && !Shut(cornerY)
                     && ((Legal(tile, cornerX) && Legal(cornerX, next)) || (Legal(tile, cornerY) && Legal(cornerY, next))))
                     Consider(next, cost + Math.Sqrt(2));
             }
         }
-        return null;
+
+        bool Shut(Tile t) => shut?.Invoke(t) == true && !arrived(t);
 
         void Consider(Tile to, double cost)
         {
-            if (cost >= best.GetValueOrDefault(to, double.MaxValue))
+            if (Shut(to) || cost >= best.GetValueOrDefault(to, double.MaxValue))
                 return;
             best[to] = cost;
             open.Enqueue(to, cost);

@@ -17,12 +17,12 @@ public sealed class AshenFordDraftTests
     /// <summary>The beats at the Ford Bridge.</summary>
     private static readonly string[] FordBeats = ["ch1_the_ford_choice", "ch1_ford_assault", "ch1_river_crossing"];
 
-    /// <summary>What the road is made of: the path, the town's cobbles and square, and the plank bridge.</summary>
-    private static readonly string[] RoadMaterials = ["cobble/warm", "flagstone/warm", "path/packed", "planks/oak"];
+    /// <summary>What the road is made of: the path, and the town's cobbles and square.</summary>
+    private static readonly string[] RoadMaterials = ["cobble/warm", "flagstone/warm", "path/packed"];
 
     private static readonly Lazy<Proved> Draft = new(Prove);
 
-    private sealed record Proved(RulesPack Pack, RegionSource Source, ExportResult Export, WorldRegion Region, DraftWalk Walk)
+    private sealed record Proved(RulesPack Pack, RegionSource Source, ExportResult Export, WorldRegion Region, RegionWalk Walk)
     {
         private readonly Lazy<HashSet<Tile>> _nearBank = new(() => Walk.From(Region.Def.Spawns.Start, ZoneOf(Pack.MapFor(Map)!, Region.Def.Stamps[0], "ford")));
 
@@ -87,7 +87,7 @@ public sealed class AshenFordDraftTests
             File.WriteAllText(path, manifest.ToJsonString());
 
             var region = RulesPack.Load([rules]).RegionFor(Id)!;
-            return new Proved(pack, source, export, region, new DraftWalk(region, new Dictionary<string, BattleMap> { [Map] = pack.MapFor(Map)! }));
+            return new Proved(pack, source, export, region, new RegionWalk(region, pack.Maps));
         }
         finally
         {
@@ -271,11 +271,144 @@ public sealed class AshenFordDraftTests
     }
 
     [Fact]
-    public void Emberwick_to_the_ford_is_a_minute_or_so_on_foot()
+    public void The_start_is_35_to_50_seconds_from_the_ford()
     {
         var draft = Draft.Value;
         var ford = draft.Zone("ford").ToHashSet();
-        Assert.InRange(draft.Walk.Seconds(draft.Start, ford.Contains)!.Value, 60, 75);
+        Assert.InRange(draft.Walk.Seconds(draft.Start, ford.Contains)!.Value, 35, 50);
+    }
+
+    [Fact]
+    public void The_far_ends_of_the_region_are_one_to_two_minutes_apart()
+    {
+        var draft = Draft.Value;
+
+        // Spec §3.1. The farthest tile from the start, then the farthest from that: on ground like this, its far ends.
+        var end = draft.Walk.Times(draft.Start).MaxBy(t => t.Value).Key;
+        Assert.InRange(draft.Walk.Times(end).Values.Max(), 60, 120);
+    }
+
+    [Fact]
+    public void The_river_is_the_only_deep_water()
+    {
+        var draft = Draft.Value;
+        var deep = draft.Tiles.Where(t => draft.Region.TileAt(t)?.Flags.HasFlag(TileFlags.Deep) == true).ToHashSet();
+
+        // Two reaches, above the ford and below it, and nothing else.
+        foreach (var from in new[] { draft.Zone("ford")[0] with { Y = draft.Stamp.At.Y }, draft.Zone("ford")[0] with { Y = draft.Stamp.At.Y + 11 } })
+        {
+            var open = new Stack<Tile>([from]);
+            while (open.TryPop(out var tile))
+                if (deep.Remove(tile))
+                    foreach (var (x, y) in new[] { (0, 1), (1, 0), (0, -1), (-1, 0) })
+                        open.Push(new Tile(tile.X + x, tile.Y + y));
+        }
+        Assert.Empty(deep);
+    }
+
+    [Fact]
+    public void No_walkable_tile_is_cut_off()
+    {
+        var draft = Draft.Value;
+        var reached = draft.Walk.From(draft.Start);
+        var sealedIn = draft.Tiles.Where(t => draft.Walk.Standable(t) && !reached.Contains(t)).ToList();
+        Assert.True(sealedIn.Count == 0, $"{sealedIn.Count} walkable tiles can't be reached, the first at {sealedIn.FirstOrDefault()}.");
+    }
+
+    [Fact]
+    public void Rock_closes_the_region_but_for_the_road_east()
+    {
+        var draft = Draft.Value;
+        var road = draft.Tiles.Where(t => t.X == 159 && draft.Material(t) == "path/packed").ToList();
+        foreach (var tile in draft.Walk.From(draft.Start))
+            foreach (var (x, y) in new[] { (0, 1), (1, 0), (0, -1), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1) })
+                if (draft.Region.TileAt(new Tile(tile.X + x, tile.Y + y)) is null)
+                    Assert.True(tile.X == 159 && road.Any(t => Math.Abs(t.Y - tile.Y) <= 5), $"{tile} touches the edge of the map.");
+    }
+
+    [Fact]
+    public void Nothing_impassable_is_a_stray_speck()
+    {
+        var draft = Draft.Value;
+        var solid = draft.Tiles.Where(t => draft.Region.TileAt(t)?.Flags.HasFlag(TileFlags.Impassable) == true).ToHashSet();
+        while (solid.Count > 0)
+        {
+            var first = solid.First();
+            var size = 0;
+            var open = new Stack<Tile>([first]);
+            while (open.TryPop(out var tile))
+                if (solid.Remove(tile))
+                {
+                    size++;
+                    foreach (var (x, y) in new[] { (0, 1), (1, 0), (0, -1), (-1, 0) })
+                        open.Push(new Tile(tile.X + x, tile.Y + y));
+                }
+            Assert.True(size > 4, $"The impassable patch at {first} is only {size} tiles.");
+        }
+    }
+
+    [Fact]
+    public void The_story_walks_in_order_on_both_branches()
+    {
+        var draft = Draft.Value;
+        var story = StoryOrder.Check(draft.Region, draft.Pack, ContentPaths.ContentBase);
+        Assert.Empty(story.Problems);
+        Assert.Equal(["ch1_force", "ch1_parley"], story.Legs.Select(l => l.Branch).Distinct().Order(StringComparer.Ordinal));
+        Assert.Equal(["ch1_mayors_request", "ch1_the_ford_choice", "ch1_ford_assault", "ch1_old_maud", "ch1_the_ember"], story.Legs.Where(l => l.Branch == "ch1_force").Select(l => l.Beat));
+        Assert.Equal(["ch1_mayors_request", "ch1_the_ford_choice", "ch1_river_crossing", "ch1_old_maud", "ch1_granary", "ch1_skarrow_song", "ch1_the_ember"], story.Legs.Where(l => l.Branch == "ch1_parley").Select(l => l.Beat));
+
+        // Parley's fade puts the party at the camp, and its fight comes next.
+        Assert.Equal(draft.Spot("ch1_skarrow_song"), story.Legs.Single(l => l.Branch == "ch1_parley" && l.Beat == "ch1_river_crossing").From);
+        Assert.Equal(2, story.Retries.Length);
+    }
+
+    private static WorldRegion Changed(Action<RegionSource> change)
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        change(source);
+        var known = source.Tiles.Values.Select(t => t.Material).ToHashSet(StringComparer.Ordinal);
+        return WorldRegion.From(RegionWriter.Write(source, known).Region!);
+    }
+
+    private static void Wall(RegionSource source, Tile t)
+    {
+        var tile = source.Get(t)!;
+        source.Set(t, tile.Height, tile.Material, TileFlags.Impassable);
+    }
+
+    [Fact]
+    public void A_cut_on_the_far_bank_stops_parley_though_every_tile_is_still_reached()
+    {
+        var region = Changed(source =>
+        {
+            for (var x = 114; x < 160; x++)
+                Wall(source, new Tile(x, 51));
+        });
+        var draft = Draft.Value;
+
+        // Through the unarmed stamp the camp is still in reach, which is why no reach check can see this.
+        var reached = new RegionWalk(region, draft.Pack.Maps).From(draft.Start);
+        Assert.Contains(draft.Spot("ch1_river_crossing"), reached);
+        Assert.Contains(draft.Spot("ch1_skarrow_song"), reached);
+
+        var problem = Assert.Single(StoryOrder.Check(region, draft.Pack, ContentPaths.ContentBase).Problems);
+        Assert.Contains("ch1_parley", problem, StringComparison.Ordinal);
+        Assert.Contains("ch1_river_crossing", problem, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void A_recovery_walled_off_from_the_stamp_is_reported_on_both_branches()
+    {
+        var region = Changed(source =>
+        {
+            foreach (var (x, y) in new[] { (-1, -1), (0, -1), (1, -1), (-1, 0), (1, 0), (-1, 1), (0, 1), (1, 1) })
+                Wall(source, new Tile(source.Recovery.X + x, source.Recovery.Y + y));
+        });
+        var problems = StoryOrder.Check(region, Draft.Value.Pack, ContentPaths.ContentBase).Problems;
+        Assert.Equal(2, problems.Length);
+        Assert.Contains(problems, p => p.Contains("ch1_ford_assault", StringComparison.Ordinal) && p.Contains("recovery", StringComparison.Ordinal));
+        Assert.Contains(problems, p => p.Contains("ch1_river_crossing", StringComparison.Ordinal) && p.Contains("recovery", StringComparison.Ordinal));
     }
 
     [Fact]
@@ -295,7 +428,9 @@ public sealed class AshenFordDraftTests
             return reached;
         }
 
-        Assert.Contains(Along(draft.Start), t => t.X == draft.Stamp.At.X - 1);
+        var west = Along(draft.Start);
+        Assert.Contains(west, t => t.X == draft.Stamp.At.X - 1);
+        Assert.Contains(west, t => Distance(t, draft.Spot("ch1_the_ember")) <= 8);
         var east = Along(draft.Tiles.First(t => t.X == draft.Stamp.At.X + draft.Crossing.Width && Road(t)));
         Assert.Contains(east, t => t.X == 159);
     }

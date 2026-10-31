@@ -128,15 +128,34 @@ public static class RegionScene
         return root;
     }
 
-    /// <summary>Saves a scene <see cref="Build"/> made. It overwrites <paramref name="path"/>, so a caller holding painted work checks first.</summary>
-    public static void Save(Region root, string path)
+    /// <summary>
+    /// Saves a scene <see cref="Build"/> made. Painted work is never overwritten, so this is the one place that checks: it throws
+    /// <see cref="SceneExistsException"/> if <paramref name="path"/> exists, unless <paramref name="overwrite"/> says the caller means to
+    /// replace it. The plugin's saves of the open scene go through the editor's own <c>SaveScene</c>, not here.
+    /// </summary>
+    public static void Save(Region root, string path, bool overwrite = false)
     {
+        SceneFile.Refuse(ProjectSettings.GlobalizePath(path), overwrite);
         var scene = new PackedScene();
         var error = scene.Pack(root);
         if (error == Error.Ok)
             error = ResourceSaver.Save(scene, path);
         if (error != Error.Ok)
             throw new IOException($"Couldn't save {path}: {error}.");
+    }
+
+    /// <summary>Builds a scene from a grid and saves it to a new file, as <see cref="Build"/> and <see cref="Save"/> do.</summary>
+    public static void Write(RegionSource source, string path)
+    {
+        var root = Build(source);
+        try
+        {
+            Save(root, path);
+        }
+        finally
+        {
+            root.Free();
+        }
     }
 
     /// <summary>Each material's source in the Material layer's tile set.</summary>

@@ -6,7 +6,7 @@ namespace Tactics.World.Editor;
 
 /// <summary>
 /// The workspace's main scene, which runs a command given after <c>--</c> and quits: see <see cref="Usage"/>. It exits 0 on success,
-/// 1 if the export found problems and 2 if the command couldn't run.
+/// 1 if the export found problems and 2 if the command couldn't run, which includes a scene that's already there.
 /// </summary>
 public partial class Commands : Node
 {
@@ -36,6 +36,11 @@ public partial class Commands : Node
         try
         {
             code = Run();
+        }
+        catch (SceneExistsException ex)
+        {
+            GD.PrintErr(ex.Message);
+            code = 2;
         }
         catch (Exception ex)
         {
@@ -91,17 +96,9 @@ public partial class Commands : Node
             GD.PrintErr($"The region id '{id}' must be lower-case letters, digits and underscores.");
             return 2;
         }
-        if (File.Exists(ProjectSettings.GlobalizePath(path)))
-        {
-            GD.PrintErr($"{path} already exists, and nothing has been changed.");
-            return 2;
-        }
-
         var size = (Arg("size") ?? "64x64").Split('x');
         var source = new RegionSource(id, Arg("name") ?? id, int.Parse(Arg("chapter") ?? "1"), int.Parse(size[0]), int.Parse(size[1]));
-        var root = RegionScene.Build(source);
-        RegionScene.Save(root, path);
-        root.Free();
+        RegionScene.Write(source, path);
         GD.Print($"Wrote {path}. Paint it, and move its Start and Recovery markers.");
         return 0;
     }
@@ -124,9 +121,7 @@ public partial class Commands : Node
         if (Flag("tamper"))
             source.Set(corner, 2, "ash/grey", TileFlags.None);
 
-        var root = RegionScene.Build(source);
-        RegionScene.Save(root, path);
-        root.Free();
+        RegionScene.Write(source, path);
         GD.Print($"Wrote {path}");
         return 0;
     }

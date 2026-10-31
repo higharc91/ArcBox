@@ -5,8 +5,8 @@ using Tactics.WorldTools;
 namespace Tactics.World.Editor;
 
 /// <summary>
-/// The <c>--draft</c> command: writes Claude's draft of a region into its scene. Painted work is never overwritten, so it does nothing if
-/// the scene exists.
+/// The <c>--draft</c> command: writes Claude's draft of a region into its scene. Painted work is never overwritten:
+/// <see cref="RegionScene.Save"/> refuses a scene that exists.
 /// </summary>
 public static class DraftScene
 {
@@ -16,7 +16,7 @@ public static class DraftScene
         ["ashen_ford"] = AshenFordDraft.Build,
     };
 
-    /// <summary>Writes the draft of region <paramref name="id"/>. Returns 0 if it did, and 2 if it changed nothing.</summary>
+    /// <summary>Writes the draft of region <paramref name="id"/>. Returns 0 if it did, 2 if there's no such draft, and throws <see cref="SceneExistsException"/> if the scene exists.</summary>
     public static int Run(string id)
     {
         if (!Drafts.TryGetValue(id, out var draft))
@@ -26,15 +26,7 @@ public static class DraftScene
         }
 
         var path = RegionPaths.Scene(id);
-        if (File.Exists(ProjectSettings.GlobalizePath(path)))
-        {
-            GD.PrintErr($"{path} already exists, and nothing has been changed.");
-            return 2;
-        }
-
-        var root = RegionScene.Build(draft(RulesPack.Load([RegionPaths.Rules])));
-        RegionScene.Save(root, path);
-        root.Free();
+        RegionScene.Write(draft(RulesPack.Load([RegionPaths.Rules])), path);
         GD.Print($"Wrote {path}.");
         return 0;
     }
