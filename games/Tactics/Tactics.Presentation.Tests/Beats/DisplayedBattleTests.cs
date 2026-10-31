@@ -132,6 +132,15 @@ public sealed class DisplayedBattleTests
     }
 
     [Fact]
+    public void A_zone_the_battle_already_has_is_not_laid_twice()
+    {
+        var zone = new Zone(7, null, "fire", [new Tile(2, 2)], 3, false, false, []);
+        var snapped = View(new BoardChanges([new ZoneView(7, "fire", [new Tile(2, 2)])], [], []));
+
+        Assert.Single(DisplayedBattle.Apply(snapped, new ZoneCreated(zone), snapped).Board!.Zones);
+    }
+
+    [Fact]
     public void A_battle_with_no_board_yet_can_still_take_a_zone()
     {
         var zone = new Zone(7, null, "fire", [new Tile(2, 2)], 3, false, false, []);

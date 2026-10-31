@@ -45,7 +45,8 @@ public static class DisplayedBattle
         TurnOrderChanged order => shown with { Order = order.Order },
         TurnStarted turn => shown with { Active = turn.Unit, Round = turn.Round },
         TurnEnded or BattleEnded => shown with { Active = null },
-        ZoneCreated zone => WithBoard(shown, b => b with { Zones = b.Zones.Add(new ZoneView(zone.Zone.Serial, zone.Zone.Kind, zone.Zone.Tiles)) }),
+        ZoneCreated zone => WithBoard(shown, b => b.Zones.Any(z => z.Serial == zone.Zone.Serial) ? b
+            : b with { Zones = b.Zones.Add(new ZoneView(zone.Zone.Serial, zone.Zone.Kind, zone.Zone.Tiles)) }),
         ZoneEnded zone => WithBoard(shown, b => b with { Zones = b.Zones.RemoveAll(z => z.Serial == zone.Serial) }),
         TerrainAltered altered => WithBoard(shown, b => Altered(b, altered.Tiles, live.Board ?? BoardChanges.None)),
         ObjectiveChanged changed => shown with { Objectives = changed.Objectives },

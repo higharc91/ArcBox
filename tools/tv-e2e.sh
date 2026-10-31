@@ -154,7 +154,11 @@ TV_PID=""
 PHONES_PID=""
 signal_pid() {   # signal_pid <TERM|KILL> <pid>: Windows has no TERM for a program that isn't Git Bash's own, so there it's taskkill, with its children
   if [[ -n "$WINDOWS" ]]; then
-    taskkill //F //T //PID "$(cat "/proc/$2/winpid" 2>/dev/null)" > /dev/null 2>&1 || true
+    local winpid
+    winpid=$(cat "/proc/$2/winpid" 2>/dev/null || true)
+    if [[ -z "$winpid" ]] || ! taskkill //F //T //PID "$winpid" > /dev/null 2>&1; then
+      log "taskkill failed for pid $2 (Windows pid ${winpid:-unknown}): it may still be running"
+    fi
   else
     kill "-$1" "$2" 2>/dev/null || true
   fi
@@ -273,6 +277,7 @@ if [[ "$GAME" == "tactics" ]]; then
   PHONES_PID=$!
   MARK=0        # the TV log's line count when it was interrupted: the checks in 5t. look after it
   LAST_BEAT=0   # and the last beat the TV had played by then
+  OLD_TV_UP=0   # the kill didn't take: two TVs on one room prove nothing
   if [[ "$RECONNECT" == "1" || "$RESTART" == "1" ]]; then
     while kill -0 "$PHONES_PID" 2>/dev/null && (( $(beats_played) < AT_BEAT )); do
       sleep 0.2
@@ -285,6 +290,10 @@ if [[ "$GAME" == "tactics" ]]; then
       log "reconnect: killing the TV at beat $LAST_BEAT (log line $MARK)"
       signal_pid KILL "$TV_PID"
       sleep 3
+      if kill -0 "$TV_PID" 2>/dev/null; then
+        log "reconnect: the old TV is still running beside the one about to start"
+        OLD_TV_UP=1
+      fi
       log "reconnect: relaunching it, to resume through session.json"
       start_tv "$OUT/tv-relaunched" --beat-log
     else
@@ -321,10 +330,11 @@ if [[ "$GAME" == "tactics" ]]; then
     echo "$ERRORS"
   fi
   log "the TV played $(grep -c '^BEAT ' "$OUT/tv.log" || true) beats, up to beat $(beats_played)"
-  grep -E '^TACTICS catch-up ' "$OUT/tv.log" | while read -r line; do log "$line"; done
+  { grep -E '^TACTICS catch-up ' "$OUT/tv.log" || true; } | while read -r line; do log "$line"; done   # a healthy plain run has none
 
   if (( MARK > 0 )); then
     (( LAST_BEAT >= AT_BEAT )) || tactics_fail "beat $AT_BEAT before the battle ended"
+    (( OLD_TV_UP == 0 )) || tactics_fail "the old TV gone: it was still running when the new one started"
     OTHER=$(grep -oE '^ROOM [A-Z]{4}' "$OUT/tv.log" | cut -d' ' -f2 | grep -vx "$CODE" | sort -u | paste -sd' ' || true)
     [[ -z "$OTHER" ]] || tactics_fail "the same room: the TV also opened $OTHER"
     BACK=$(after "$MARK" '$0 == "ROOM " code')
