@@ -5,7 +5,7 @@ namespace Tactics.World.Editor;
 /// <summary>A spawn, under <c>Spawns</c>. A region has exactly one of each kind.</summary>
 [Tool]
 [GlobalClass]
-public partial class SpawnMarker : Marker2D
+public partial class SpawnMarker : TileMarker
 {
     /// <summary>What a spawn is for.</summary>
     public enum SpawnKind
@@ -20,6 +20,9 @@ public partial class SpawnMarker : Marker2D
     private static readonly Color Ink = new(0.5f, 1f, 0.6f);
 
     private SpawnKind _kind;
+
+    /// <inheritdoc />
+    public override string Group => RegionScene.Spawns;
 
     /// <summary>Which spawn this is.</summary>
     [Export]
@@ -36,7 +39,9 @@ public partial class SpawnMarker : Marker2D
     /// <inheritdoc />
     public override void _Draw()
     {
-        if (Engine.IsEditorHint())
-            DrawString(ThemeDB.FallbackFont, new Vector2(10, -6), Kind.ToString(), modulate: Ink);
+        if (!Engine.IsEditorHint())
+            return;
+        DrawTile(Ink);
+        DrawString(ThemeDB.FallbackFont, new Vector2(18, -6), Kind.ToString(), modulate: Ink);
     }
 }

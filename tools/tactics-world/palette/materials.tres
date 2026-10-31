@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" format=3 uid="uid://4e7grduqt5w6"]
+[gd_resource type="TileSet" format=3 uid="uid://ci202gi2p1d3v"]
 
 [ext_resource type="Texture2D" uid="uid://bevq2acwvm65r" path="res://palette/materials/ash_grey.png" id="1_w3tq6"]
 [ext_resource type="Texture2D" uid="uid://dix5ey70w3yeq" path="res://palette/materials/basalt_dark.png" id="2_nn202"]
@@ -35,11 +35,25 @@
 [ext_resource type="Texture2D" uid="uid://boohewk543jtw" path="res://palette/materials/water_clear.png" id="33_vlr00"]
 [ext_resource type="Texture2D" uid="uid://plkawc3gool8" path="res://palette/materials/water_swamp.png" id="34_tsff1"]
 [ext_resource type="Texture2D" uid="uid://b522mguurd6tj" path="res://palette/materials/cobble_grey.png" id="35_j1yf7"]
+[ext_resource type="Texture2D" uid="uid://b8aqy0hy2drhx" path="res://palette/materials/cave_floor_cool.png" id="36_g6rh4"]
 [ext_resource type="Texture2D" uid="uid://ol1f1ophdml0" path="res://palette/materials/cobble_warm.png" id="36_hd6im"]
 [ext_resource type="Texture2D" uid="uid://dosfyesjjk1vp" path="res://palette/materials/dirt_brown.png" id="37_m3fug"]
+[ext_resource type="Texture2D" uid="uid://4lluirgmif2o" path="res://palette/materials/crypt_tile_dark.png" id="37_wk7xm"]
 [ext_resource type="Texture2D" uid="uid://csrkyfa8vrmyy" path="res://palette/materials/dirt_dark.png" id="38_ncsiy"]
+[ext_resource type="Texture2D" uid="uid://i8any834mm0s" path="res://palette/materials/crypt_tiles_fel.png" id="38_t4cys"]
+[ext_resource type="Texture2D" uid="uid://bg7ahdo8b05oy" path="res://palette/materials/dungeon_floor_dark.png" id="39_hn5ws"]
 [ext_resource type="Texture2D" uid="uid://df7qn2orqo3pa" path="res://palette/materials/dunes_gold.png" id="39_kfubj"]
 [ext_resource type="Texture2D" uid="uid://bgktc2d1q6dhj" path="res://palette/materials/dunes_pale.png" id="40_2r8ai"]
+[ext_resource type="Texture2D" uid="uid://bov2ko0v4bxsc" path="res://palette/materials/dungeon_floor_warm.png" id="40_xuq3w"]
+[ext_resource type="Texture2D" uid="uid://3brenj33cgdy" path="res://palette/materials/dungeon_floor_cracked_grey.png" id="41_wve4q"]
+[ext_resource type="Texture2D" uid="uid://38eathbxt6is" path="res://palette/materials/dungeon_floor_mossy_dark.png" id="42_24omw"]
+[ext_resource type="Texture2D" uid="uid://igxplewij4pk" path="res://palette/materials/dungeon_wall_dark.png" id="43_acfjv"]
+[ext_resource type="Texture2D" uid="uid://dbcnb42c6g2d4" path="res://palette/materials/dungeon_wall_grey.png" id="44_fx5pb"]
+[ext_resource type="Texture2D" uid="uid://bcupa32sg1ou4" path="res://palette/materials/flagstone_mossy.png" id="45_xnbp8"]
+[ext_resource type="Texture2D" uid="uid://br0vpkkxpqilx" path="res://palette/materials/mine_boards_oak.png" id="47_ikmad"]
+[ext_resource type="Texture2D" uid="uid://bemcd6mpy1o4t" path="res://palette/materials/mine_gravel_brown.png" id="48_fu31y"]
+[ext_resource type="Texture2D" uid="uid://bw4ikatsa4kah" path="res://palette/materials/void_deep.png" id="49_31ls7"]
+[ext_resource type="Texture2D" uid="uid://dn3kccwu2mt53" path="res://palette/materials/wet_stone_glow.png" id="50_aqfcl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k7yja"]
 resource_name = "ash/grey"
@@ -251,9 +265,93 @@ texture = ExtResource("35_j1yf7")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_52jmy"]
+resource_name = "cave_floor/cool"
+texture = ExtResource("36_g6rh4")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_seu6d"]
+resource_name = "crypt_tile/dark"
+texture = ExtResource("37_wk7xm")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7g6o2"]
+resource_name = "crypt_tiles/fel"
+texture = ExtResource("38_t4cys")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2rbut"]
+resource_name = "dungeon_floor/dark"
+texture = ExtResource("39_hn5ws")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vlr00"]
+resource_name = "dungeon_floor/warm"
+texture = ExtResource("40_xuq3w")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tsff1"]
+resource_name = "dungeon_floor_cracked/grey"
+texture = ExtResource("41_wve4q")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j1yf7"]
+resource_name = "dungeon_floor_mossy/dark"
+texture = ExtResource("42_24omw")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hd6im"]
+resource_name = "dungeon_wall/dark"
+texture = ExtResource("43_acfjv")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m3fug"]
+resource_name = "dungeon_wall/grey"
+texture = ExtResource("44_fx5pb")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ncsiy"]
+resource_name = "flagstone/mossy"
+texture = ExtResource("45_xnbp8")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xyd1u"]
 resource_name = "cobble/warm"
 texture = ExtResource("36_hd6im")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kfubj"]
+resource_name = "mine_boards/oak"
+texture = ExtResource("47_ikmad")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2r8ai"]
+resource_name = "mine_gravel/brown"
+texture = ExtResource("48_fu31y")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rrpte"]
+resource_name = "void/deep"
+texture = ExtResource("49_31ls7")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nkl3w"]
+resource_name = "wet_stone/glow"
+texture = ExtResource("50_aqfcl")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
@@ -323,3 +421,17 @@ sources/36 = SubResource("TileSetAtlasSource_yi8fa")
 sources/37 = SubResource("TileSetAtlasSource_37uif")
 sources/38 = SubResource("TileSetAtlasSource_0f83w")
 sources/39 = SubResource("TileSetAtlasSource_62pdu")
+sources/40 = SubResource("TileSetAtlasSource_52jmy")
+sources/41 = SubResource("TileSetAtlasSource_seu6d")
+sources/42 = SubResource("TileSetAtlasSource_7g6o2")
+sources/43 = SubResource("TileSetAtlasSource_2rbut")
+sources/44 = SubResource("TileSetAtlasSource_vlr00")
+sources/45 = SubResource("TileSetAtlasSource_tsff1")
+sources/46 = SubResource("TileSetAtlasSource_j1yf7")
+sources/47 = SubResource("TileSetAtlasSource_hd6im")
+sources/48 = SubResource("TileSetAtlasSource_m3fug")
+sources/49 = SubResource("TileSetAtlasSource_ncsiy")
+sources/50 = SubResource("TileSetAtlasSource_kfubj")
+sources/51 = SubResource("TileSetAtlasSource_2r8ai")
+sources/52 = SubResource("TileSetAtlasSource_rrpte")
+sources/53 = SubResource("TileSetAtlasSource_nkl3w")

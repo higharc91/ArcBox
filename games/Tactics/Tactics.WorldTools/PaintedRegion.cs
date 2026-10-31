@@ -3,6 +3,9 @@ using Tactics.Logic;
 
 namespace Tactics.WorldTools;
 
+/// <summary>A node that's in the wrong place in a region scene: <paramref name="Fix"/> is what to do about it, with no full stop.</summary>
+public sealed record StrayNode(string Node, string Parent, string Fix, Tile At);
+
 /// <summary>
 /// What a region scene holds, as plain data: its three layers and its markers, read without judging them. A cell is only in a
 /// layer if it's painted there, so a tile with no <see cref="Heights"/> cell is at height 0 and one with no <see cref="Flags"/>
@@ -34,13 +37,23 @@ public sealed record PaintedRegion(string Id, string Name, int Chapter, int Widt
     /// <summary>The tile of every recovery spawn marker.</summary>
     public IReadOnlyList<Tile> Recoveries { get; init; } = [];
 
+    /// <summary>The layers and marker groups that have been moved off the origin, which would shift what's drawn but not what's exported.</summary>
+    public IReadOnlyList<string> MovedNodes { get; init; } = [];
+
+    /// <summary>Nodes the export ignores because of where they are, or what they are.</summary>
+    public IReadOnlyList<StrayNode> Strays { get; init; } = [];
+
+    /// <summary>The scene's file name without its extension, or null if it has none yet.</summary>
+    public string? SceneFile { get; init; }
+
     /// <summary>The tile a scene position falls in. Positions left of or above the origin are negative tiles, not tile 0.</summary>
     public static Tile TileAt(double x, double y) => new((int)Math.Floor(x / TilePixels), (int)Math.Floor(y / TilePixels));
 
     /// <summary>
-    /// The grid to write, and what's wrong with the scene as a region: a height or flags on a tile with no material, which would
-    /// otherwise vanish on export, and spawns that aren't exactly one of each. Stamps are recorded over the painted tiles, not
-    /// copied, so <see cref="RegionExport"/>'s checks see a stamped tile that was changed.
+    /// The grid to write, and what's wrong with the scene as a region. Each kind of bad tile is one line with its count and place. A
+    /// tile with no material in a chunk that has some is a problem, since it would play as an invisible wall; a whole empty chunk is
+    /// void, which is allowed. Stamps are recorded over the painted tiles, not copied, so <see cref="RegionExport"/>'s checks see a
+    /// stamped tile that was changed.
     /// </summary>
     public (RegionSource Source, ImmutableArray<string> Problems) ToSource()
     {
@@ -56,24 +69,59 @@ public sealed record PaintedRegion(string Id, string Name, int Chapter, int Widt
             source.AddStamp(stamp);
 
         var problems = new List<string>();
-        AddBare(Heights.Keys, "a height");
-        AddBare(Flags.Keys, "flags");
-        AddSpawn(Starts, "start");
-        AddSpawn(Recoveries, "recovery");
+        if (SceneFile is { } file && file != Id)
+            problems.Add($"The scene is named '{file}' but its region Id is '{Id}', and two scenes with one Id would overwrite each other's file. Rename the scene or change Id.");
+        problems.AddRange(MovedNodes.Select(node => $"The {node} node has been moved, so its markers aren't on the tiles they show. Set its Position back to (0, 0)."));
+        problems.AddRange(Strays.Select(s => $"The {s.Node} at {s.At} is under {s.Parent}, so it isn't exported. {s.Fix}."));
+        AddBare(Heights.Keys, "a height", "Height");
+        AddBare(Flags.Keys, "flags", "Flags");
+        AddHoles();
+        AddSpawn(Starts, "start", "Start");
+        AddSpawn(Recoveries, "recovery", "Recovery");
+        AddBeats();
         return (source, [.. problems]);
 
-        void AddBare(IEnumerable<Tile> tiles, string what)
+        void AddBare(IEnumerable<Tile> tiles, string what, string layer)
         {
-            if (tiles.Where(t => !Materials.ContainsKey(t)).OrderBy(t => t.Y).ThenBy(t => t.X).Cast<Tile?>().FirstOrDefault() is { } bare)
-                problems.Add($"The tile {bare} has {what} but no material.");
+            var bare = tiles.Where(t => !Materials.ContainsKey(t)).ToList();
+            if (bare.Count > 0)
+                problems.Add($"{TileSpread.Say(bare, "has", "have")} {what} but no material. Paint the Material layer there, or erase the {layer}.");
         }
 
-        void AddSpawn(IReadOnlyList<Tile> spawns, string kind)
+        void AddHoles()
+        {
+            var holes = new List<Tile>();
+            var chunks = Materials.Keys.Where(t => t.X >= 0 && t.Y >= 0 && t.X < Width && t.Y < Height)
+                .Select(t => (X: t.X / WorldRegion.ChunkSize, Y: t.Y / WorldRegion.ChunkSize)).Distinct();
+            foreach (var (chunkX, chunkY) in chunks)
+                for (var y = chunkY * WorldRegion.ChunkSize; y < Math.Min(Height, (chunkY + 1) * WorldRegion.ChunkSize); y++)
+                    for (var x = chunkX * WorldRegion.ChunkSize; x < Math.Min(Width, (chunkX + 1) * WorldRegion.ChunkSize); x++)
+                        if (!Materials.ContainsKey(new Tile(x, y)))
+                            holes.Add(new Tile(x, y));
+            if (holes.Count > 0)
+                problems.Add($"{TileSpread.Say(holes, "has", "have")} no material in a painted chunk, which plays as an invisible wall. "
+                    + $"Paint {TileSpread.It(holes)}, and add the Impassable flag if a wall is what you want.");
+        }
+
+        void AddSpawn(IReadOnlyList<Tile> spawns, string kind, string value)
         {
             if (spawns.Count == 0)
-                problems.Add($"The scene has no {kind} spawn.");
+                problems.Add($"The scene has no {kind} spawn. Add a SpawnMarker under Spawns and set Kind to {value}.");
             else if (spawns.Count > 1)
-                problems.Add($"The scene has {spawns.Count} {kind} spawns, at {string.Join(", ", spawns.SkipLast(1))} and {spawns[^1]}, but needs one.");
+                problems.Add($"The scene has {spawns.Count} {kind} spawns, at {string.Join(", ", spawns.SkipLast(1))} and {spawns[^1]}, but needs one. "
+                    + $"Delete the {(spawns.Count == 2 ? "extra" : "extras")}.");
+        }
+
+        void AddBeats()
+        {
+            foreach (var unnamed in Beats.Where(b => b.Beat.Length == 0))
+                problems.Add($"The beat marker at {unnamed.At} has no Beat id. Set its Beat, or delete it.");
+            foreach (var repeat in Beats.Where(b => b.Beat.Length > 0).GroupBy(b => b.Beat, StringComparer.Ordinal).Where(g => g.Count() > 1))
+            {
+                var spots = repeat.Select(b => b.At.ToString()).ToList();
+                problems.Add($"The beat '{repeat.Key}' has {spots.Count} markers, at {string.Join(", ", spots.SkipLast(1))} and {spots[^1]}. "
+                    + $"Delete the {(spots.Count == 2 ? "extra" : "extras")}.");
+            }
         }
     }
 }

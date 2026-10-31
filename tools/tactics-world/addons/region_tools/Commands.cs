@@ -12,10 +12,11 @@ public partial class Commands : Node
 {
     private const string Usage = """
         Commands, after -- on Godot's command line:
+          --new=<id>               make an empty region scene in regions/; --chapter=<n> --size=<w>x<h> --name=<name> are optional
           --export=<id or scene>   export a region; --rules=<folder> writes to that pack instead of the base pack
           --swatches               write the palette's images (then run Godot's --import)
           --tilesets               write the palette's tile sets
-          --sample=<scene>         write a small test scene with a stamp; --tamper paints over a stamped tile
+          --sample=<scene>         write a small test scene with a stamp; --map=<id> picks the map, --tamper paints over a stamped tile
         """;
 
     /// <summary>The value of <c>--name=value</c> after <c>--</c>, or null.</summary>
@@ -47,6 +48,8 @@ public partial class Commands : Node
     {
         if (Arg("export") is { } export)
             return Export(export);
+        if (Arg("new") is { } id)
+            return New(id);
         if (Arg("sample") is { } sample)
             return Sample(sample);
         if (Flag("swatches"))
@@ -70,24 +73,51 @@ public partial class Commands : Node
         root.Free();
         foreach (var problem in result.Problems)
             GD.Print($"PROBLEM: {problem}");
-        if (result.Written is null)
-            return 1;
-        GD.Print($"Wrote {result.Written}");
+        GD.Print(result.Status);
+        return result.Written is null ? 1 : 0;
+    }
+
+    /// <summary>An empty scene for a new region, which refuses to replace one that exists, as painted work is never overwritten.</summary>
+    private static int New(string id)
+    {
+        var path = RegionPaths.Scene(id);
+        if (!RegionExport.ValidId(id))
+        {
+            GD.PrintErr($"The region id '{id}' must be lower-case letters, digits and underscores.");
+            return 2;
+        }
+        if (File.Exists(ProjectSettings.GlobalizePath(path)))
+        {
+            GD.PrintErr($"{path} already exists, and nothing has been changed.");
+            return 2;
+        }
+
+        var size = (Arg("size") ?? "64x64").Split('x');
+        var source = new RegionSource(id, Arg("name") ?? id, int.Parse(Arg("chapter") ?? "1"), int.Parse(size[0]), int.Parse(size[1]));
+        var root = RegionScene.Build(source);
+        RegionScene.Save(root, path);
+        root.Free();
+        GD.Print($"Wrote {path}. Paint it, and move its Start and Recovery markers.");
         return 0;
     }
 
-    /// <summary>A region of grass around River Crossing, with one beat. <c>--tamper</c> changes a stamped tile, which must be refused.</summary>
+    /// <summary>
+    /// A region of grass around a stamped map, River Crossing unless <c>--map</c> says otherwise, starting on the map's party spawn.
+    /// Its id is the scene's file name. <c>--tamper</c> changes a stamped tile, which must be refused.
+    /// </summary>
     private static int Sample(string path)
     {
-        var map = RulesPack.Load([RegionPaths.Rules]).MapFor("river_crossing")!;
-        var source = new RegionSource("sample", "Sample", 1, map.Width + 8, map.Height + 8) { Recovery = new Tile(1, 0) };
+        var map = RulesPack.Load([RegionPaths.Rules]).MapFor(Arg("map") ?? "river_crossing")!;
+        var corner = new Tile(4, 4);
+        var start = map.Zones.TryGetValue("party_spawn", out var zone) && zone.Length > 0 ? new Tile(zone[0].X + corner.X, zone[0].Y + corner.Y) : new Tile(0, 0);
+        var source = new RegionSource(Path.GetFileNameWithoutExtension(path), "Sample", 1, map.Width + 8, map.Height + 8) { Start = start, Recovery = start };
         for (var y = 0; y < source.Height; y++)
             for (var x = 0; x < source.Width; x++)
                 source.Set(new Tile(x, y), 0, "grass/lush", TileFlags.None);
-        source.Stamp(map, new Tile(4, 4), 0);
-        source.Beats.Add(new BeatSpot("ch1_sample", new Tile(2, 2)));
+        source.Stamp(map, corner, 0);
+        source.Beats.Add(new BeatSpot("ch1_mayors_request", start));
         if (Flag("tamper"))
-            source.Set(new Tile(4, 4), 2, "ash/grey", TileFlags.None);
+            source.Set(corner, 2, "ash/grey", TileFlags.None);
 
         var root = RegionScene.Build(source);
         RegionScene.Save(root, path);

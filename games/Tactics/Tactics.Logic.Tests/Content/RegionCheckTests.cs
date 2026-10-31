@@ -74,16 +74,16 @@ public sealed class RegionCheckTests
         };
 
         Assert.Equal(
-            [new ContentError(RegionFile, "/stamps/0", "The stamp 'ford' doesn't match its map at (32, 5): the region has void there.")],
+            [new ContentError(RegionFile, "/stamps/0", "The stamp 'ford' doesn't match its map at (32, 5): the region has void there. 1 more tile differs, x 32 to 32, y 5 to 6.")],
             ErrorsOf(def));
     }
 
     [Fact]
-    public void A_stamp_reports_only_its_first_bad_tile()
+    public void A_stamp_reports_its_first_bad_tile_and_how_many_more()
     {
         var error = Assert.Single(ErrorsOf(Stamped(FordStamp) with { Chunks = [new RegionChunk(0, 0, RegionTests.Tiles())] }));
 
-        Assert.Equal("The stamp 'ford' doesn't match its map at (4, 5): the region has height 0, the map has 2.", error.Message);
+        Assert.Equal("The stamp 'ford' doesn't match its map at (4, 5): the region has height 0, the map has 2. 3 more tiles differ, x 4 to 5, y 5 to 6.", error.Message);
     }
 
     [Fact]

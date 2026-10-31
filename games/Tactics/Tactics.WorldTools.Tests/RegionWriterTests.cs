@@ -207,7 +207,7 @@ public sealed class RegionWriterTests
         source.Stamp(Ford(), new Tile(4, 5), 8);
 
         Assert.Equal(10, source.Get(new Tile(4, 6))!.Height);
-        Assert.Equal(["The tile (4, 6) has height 10, but heights go from 0 to 9."], Problems(source));
+        Assert.Equal(["The tile (4, 6) has height 10, but heights go from 0 to 9. Repaint the Height layer, or change the stamp's HeightOffset."], Problems(source));
     }
 
     [Fact]
@@ -217,14 +217,14 @@ public sealed class RegionWriterTests
 
         source.Stamp(Ford(), new Tile(4, 5), -2);
 
-        Assert.Equal(["The tile (4, 5) has height -1, but heights go from 0 to 9."], Problems(source));
+        Assert.Equal(["3 tiles, x 4 to 5, y 5 to 6, first (4, 5), have heights outside 0 to 9, the first at -1. Repaint the Height layer, or change the stamp's HeightOffset."], Problems(source));
     }
 
     [Theory]
-    [InlineData(63, 5, "The tile (64, 5) is outside the 64x64 region.")]
-    [InlineData(5, 63, "The tile (5, 64) is outside the 64x64 region.")]
-    [InlineData(-1, 5, "The tile (-1, 5) is outside the 64x64 region.")]
-    [InlineData(5, -1, "The tile (5, -1) is outside the 64x64 region.")]
+    [InlineData(63, 5, "2 tiles, x 64 to 64, y 5 to 6, first (64, 5), are outside the 64x64 region. Erase what's painted there, or change Size on the Region node.")]
+    [InlineData(5, 63, "2 tiles, x 5 to 6, y 64 to 64, first (5, 64), are outside the 64x64 region. Erase what's painted there, or change Size on the Region node.")]
+    [InlineData(-1, 5, "2 tiles, x -1 to -1, y 5 to 6, first (-1, 5), are outside the 64x64 region. Erase what's painted there, or change Size on the Region node.")]
+    [InlineData(5, -1, "2 tiles, x 5 to 6, y -1 to -1, first (5, -1), are outside the 64x64 region. Erase what's painted there, or change Size on the Region node.")]
     public void A_tile_outside_the_region_is_a_problem(int x, int y, string problem)
     {
         var source = Source();
@@ -235,13 +235,61 @@ public sealed class RegionWriterTests
     }
 
     [Fact]
+    public void Columns_outside_the_region_are_one_line_with_a_count_and_box()
+    {
+        var source = Source(40, 32);
+        for (var y = 0; y < 120; y++)
+            for (var x = 40; x < 45; x++)
+                source.Set(new Tile(x, y), 0, Grass, TileFlags.None);
+
+        Assert.Equal(["600 tiles, x 40 to 44, y 0 to 119, first (40, 0), are outside the 40x32 region. Erase what's painted there, or change Size on the Region node."],
+            Problems(source));
+    }
+
+    [Fact]
+    public void Repair_drops_what_cant_be_written_and_keeps_the_rest()
+    {
+        var source = Source(8, 8);
+        source.Set(new Tile(1, 1), 3, Grass, TileFlags.Water);
+        source.Set(new Tile(2, 1), 2, "lava/hot", TileFlags.None);
+        source.Set(new Tile(3, 1), 12, Grass, (TileFlags)64 | TileFlags.Hazard);
+        source.Set(new Tile(9, 1), 0, Grass, TileFlags.None);
+        source.Beats.Add(new BeatSpot("b", new Tile(1, 1)));
+        source.AddStamp(new RegionStamp("m", new Tile(0, 0), 0));
+
+        var repaired = RegionWriter.Repair(source, Known, new Dictionary<Tile, TileInfoNamed>());
+
+        Assert.Empty(RegionWriter.Write(repaired, Known).Problems);
+        Assert.Equal(new TileInfoNamed(3, Grass, TileFlags.Water), repaired.Get(new Tile(1, 1)));
+        Assert.Equal(2, repaired.Get(new Tile(2, 1))!.Height);
+        Assert.Contains(repaired.Get(new Tile(2, 1))!.Material, Known);
+        Assert.Equal(new TileInfoNamed(9, Grass, TileFlags.Hazard), repaired.Get(new Tile(3, 1)));
+        Assert.Null(repaired.Get(new Tile(9, 1)));
+        Assert.Equal(source.Beats, repaired.Beats);
+        Assert.Equal(source.Stamps, repaired.Stamps);
+    }
+
+    [Fact]
+    public void Repair_takes_a_stamped_tiles_material_and_height_from_its_map()
+    {
+        var source = Source(8, 8);
+        source.Set(new Tile(1, 1), 3, "lava/hot", TileFlags.None);
+        source.Set(new Tile(2, 1), 12, Grass, TileFlags.None);
+
+        var repaired = RegionWriter.Repair(source, Known, new Dictionary<Tile, TileInfoNamed> { [new Tile(1, 1)] = new(1, River, TileFlags.Water), [new Tile(2, 1)] = new(1, River, TileFlags.Water) });
+
+        Assert.Equal(new TileInfoNamed(3, River, TileFlags.None), repaired.Get(new Tile(1, 1)));
+        Assert.Equal(new TileInfoNamed(1, Grass, TileFlags.None), repaired.Get(new Tile(2, 1)));
+    }
+
+    [Fact]
     public void An_unknown_material_is_a_problem_naming_the_tile()
     {
         var source = Source();
         source.Set(new Tile(4, 9), 0, Grass, TileFlags.None);
         source.Set(new Tile(7, 9), 0, "lava/hot", TileFlags.None);
 
-        Assert.Equal(["The tile (7, 9) uses the material 'lava/hot', which isn't in the terrain manifest."], Problems(source));
+        Assert.Equal(["The tile (7, 9) uses the material 'lava/hot', which isn't in the palette or a stamped map. Repaint it from the palette."], Problems(source));
     }
 
     [Fact]
@@ -253,8 +301,8 @@ public sealed class RegionWriterTests
 
         Assert.Equal(
             [
-                "The tile (5, 0) uses the material 'lava/hot', which isn't in the terrain manifest.",
-                "The tile (7, 0) uses the material 'ice/blue', which isn't in the terrain manifest.",
+                "2 tiles, x 5 to 6, y 0 to 0, first (5, 0), use the material 'lava/hot', which isn't in the palette or a stamped map. Repaint them from the palette.",
+                "The tile (7, 0) uses the material 'ice/blue', which isn't in the palette or a stamped map. Repaint it from the palette.",
             ],
             Problems(source));
     }
@@ -265,7 +313,7 @@ public sealed class RegionWriterTests
         var source = Source();
         source.Stamp(Ford(), new Tile(4, 5), 0);
 
-        Assert.Equal(["The tile (4, 5) uses the material 'grass/lush', which isn't in the terrain manifest."],
+        Assert.Equal(["3 tiles, x 4 to 5, y 5 to 6, first (4, 5), use the material 'grass/lush', which isn't in the palette or a stamped map. Repaint them from the palette."],
             Problems(source, new HashSet<string> { River }));
     }
 
@@ -275,7 +323,7 @@ public sealed class RegionWriterTests
         var source = Source();
         source.Set(new Tile(1, 2), 0, Grass, (TileFlags)64 | TileFlags.Water);
 
-        Assert.Equal(["The tile (1, 2) has undefined flag bits 0x40."], Problems(source));
+        Assert.Equal(["The tile (1, 2) has undefined flag bits 0x40. Repaint it on the Flags layer."], Problems(source));
     }
 
     [Fact]
@@ -286,7 +334,7 @@ public sealed class RegionWriterTests
         foreach (var (name, i) in names.Select((name, i) => (name, i)))
             source.Set(new Tile(i % 32, i / 32), 0, name, TileFlags.None);
 
-        Assert.Equal(["The region uses 257 materials, but a tile can only index 256."], Problems(source, names));
+        Assert.Equal(["The region uses 257 materials, but a tile can only index 256. Repaint some tiles so it uses fewer."], Problems(source, names));
     }
 
     [Fact]

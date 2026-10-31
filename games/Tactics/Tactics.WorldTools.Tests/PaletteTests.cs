@@ -95,20 +95,87 @@ public sealed class PaletteTests
     public void A_height_outside_the_range_has_no_tile(int height)
         => Assert.Throws<ArgumentOutOfRangeException>(() => PaletteBuilder.HeightTile(height));
 
-    [Fact]
-    public void A_higher_tile_is_a_lighter_shade()
-    {
-        // A corner pixel is the shade: the number sits in the middle.
-        var shades = Enumerable.Range(0, WorldRegion.MaxHeight + 1).Select(h => PaletteBuilder.HeightTile(h)[0]).ToList();
 
-        Assert.Equal(shades.Order(), shades);
-        Assert.Equal(shades.Count, shades.Distinct().Count());
+    [Fact]
+    public void Every_material_a_map_names_has_a_swatch_with_real_art()
+    {
+        var swatches = PaletteBuilder.AllSwatches(ContentPaths.ContentBase).ToDictionary(s => s.Material);
+
+        foreach (var material in Base.Value.Maps.Values.SelectMany(m => m.Materials))
+            Assert.True(File.Exists(Path.Combine(ContentPaths.ContentBase, swatches[material].Texture)), material);
     }
 
     [Fact]
-    public void A_height_tile_lets_the_material_show_through()
-        => Assert.InRange(PaletteBuilder.HeightTile(5)[3], (byte)1, (byte)200);
+    public void A_map_only_material_uses_the_art_the_game_draws_for_it()
+    {
+        var swatches = PaletteBuilder.AllSwatches(ContentPaths.ContentBase).ToDictionary(s => s.Material);
 
+        // dungeon_wall is only a side: the game draws a wall's top as dungeon floor.
+        Assert.Equal("dungeon/textures/top/dungeon_floor_dark.png", swatches["dungeon_wall/dark"].Texture);
+        Assert.Equal("dungeon_wall_dark.png", swatches["dungeon_wall/dark"].File);
+    }
+
+    [Fact]
+    public void All_swatches_hold_the_terrain_tops_too_with_their_own_files()
+    {
+        var all = PaletteBuilder.AllSwatches(ContentPaths.ContentBase);
+
+        Assert.Equal("terrain/top/grass_lush.png", all.Single(s => s.Material == "grass/lush").Texture);
+        Assert.Equal(all.Count, all.Select(s => s.File).Distinct(StringComparer.Ordinal).Count());
+        Assert.Equal(all.Select(s => s.Material).Order(StringComparer.Ordinal), all.Select(s => s.Material));
+    }
+
+    [Fact]
+    public void Height_0_is_clear_so_a_painted_0_looks_like_a_blank_one()
+    {
+        var tile = PaletteBuilder.HeightTile(0);
+
+        Assert.Equal(0, tile[3]);
+        Assert.Equal(0, tile[(5 * PaletteBuilder.TileSize + 5) * 4 + 3]);
+    }
+
+    [Fact]
+    public void Each_height_is_its_own_hue_far_from_its_neighbours()
+    {
+        byte[] Wash(int height) => PaletteBuilder.HeightTile(height);
+
+        for (var height = 1; height < WorldRegion.MaxHeight; height++)
+        {
+            var (a, b) = (Wash(height), Wash(height + 1));
+            var distance = Math.Abs(a[0] - b[0]) + Math.Abs(a[1] - b[1]) + Math.Abs(a[2] - b[2]);
+
+            Assert.True(distance >= 70, $"{height} and {height + 1} are only {distance} apart");
+            Assert.True(a[0] != a[1] || a[1] != a[2], $"{height} is grey");
+        }
+    }
+
+    [Theory]
+    [InlineData(1)]
+    [InlineData(5)]
+    [InlineData(9)]
+    public void A_height_tile_lets_the_material_show_through(int height)
+        => Assert.InRange(PaletteBuilder.HeightTile(height)[3], (byte)60, (byte)200);
+
+    [Fact]
+    public void No_flag_mark_sits_over_a_height_number()
+    {
+        const int Wide = PaletteBuilder.TileSize;
+        var number = new HashSet<int>();
+        foreach (var height in Enumerable.Range(0, WorldRegion.MaxHeight + 1))
+        {
+            var tile = PaletteBuilder.HeightTile(height);
+            for (var i = 0; i < Wide * Wide; i++)
+                if (tile[i * 4 + 3] == 255)
+                    number.Add(i);
+        }
+        Assert.NotEmpty(number);
+
+        for (var bits = 0; bits < PaletteBuilder.FlagCombinations; bits++)
+        {
+            var marks = PaletteBuilder.FlagsTile((TileFlags)bits);
+            Assert.DoesNotContain(number, i => marks[i * 4 + 3] != 0);
+        }
+    }
     [Fact]
     public void Every_combination_of_flags_looks_different()
     {

@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Tactics.Logic;
+using Tactics.Presentation.Board;
 
 namespace Tactics.WorldTools;
 
@@ -21,8 +22,21 @@ public static class PaletteBuilder
     /// <summary>Tiles along a row of the flags atlas.</summary>
     private const int FlagsAtlasColumns = 8;
 
-    /// <summary>A height tile's alpha: enough to read as a shade, little enough to see the material through it.</summary>
-    private const byte ShadeAlpha = 120;
+    /// <summary>A height tile's alpha: enough to read as a wash, little enough to see the material through it.</summary>
+    private const byte ShadeAlpha = 140;
+
+    /// <summary>How much of the wash's colour a height number keeps.</summary>
+    private const double InkShade = 0.3;
+
+    /// <summary>Where a height number sits: the middle of the tile, between the flag marks.</summary>
+    private const int NumberLeft = 13, NumberTop = 11;
+
+    /// <summary>Each height's hue, 0 to 9, cold to hot. Height 0's is only its number's ink, as its wash is clear.</summary>
+    private static readonly (byte R, byte G, byte B)[] HeightRamp =
+    [
+        (120, 120, 120), (40, 90, 255), (0, 190, 235), (30, 200, 80), (165, 225, 30),
+        (255, 225, 20), (255, 140, 10), (235, 40, 30), (225, 40, 180), (130, 50, 240),
+    ];
 
     /// <summary>Each glyph's 3x5 pixels, a row to a string.</summary>
     private static readonly Dictionary<char, string[]> Glyphs = new()
@@ -51,7 +65,7 @@ public static class PaletteBuilder
         (TileFlags.Difficult, 'R', (190, 150, 30), 20, 2),
         (TileFlags.Impassable, 'X', (200, 40, 40), 2, 18),
         (TileFlags.Hazard, 'H', (230, 110, 20), 20, 18),
-        (TileFlags.Deep, 'D', (20, 40, 130), 11, 10),
+        (TileFlags.Deep, 'D', (20, 40, 130), 12, 0),
     ];
 
     /// <summary>Every paintable material, <c>"grass/lush"</c>, by ordinal name.</summary>
@@ -71,31 +85,61 @@ public static class PaletteBuilder
         ];
     }
 
-    /// <summary>A height's tile: a see-through shade, lighter the higher it is, with its number in the middle.</summary>
+    /// <summary>
+    /// Every source a painted cell can use: the terrain tops, plus every material a battle map names that isn't a top, such as
+    /// <c>dungeon_wall/dark</c>, so any map can be stamped. Those show the art the game draws for them. Textures here are relative to
+    /// <paramref name="contentBase"/>. By ordinal name.
+    /// </summary>
+    public static IReadOnlyList<MaterialSwatch> AllSwatches(string contentBase)
+    {
+        var tops = Swatches(Path.Combine(contentBase, "terrain", "manifest.json")).Select(s => s with { Texture = $"terrain/{s.Texture}" }).ToList();
+        var known = tops.Select(s => s.Material).ToHashSet(StringComparer.Ordinal);
+        var art = ArtIndex.Load(contentBase);
+
+        var fromMaps = Directory.EnumerateFiles(Path.Combine(contentBase, "rules", "maps"), "*.json").SelectMany(MapMaterials)
+            .Where(known.Add)
+            .Select(material => (Material: material, Image: art.Texture(MaterialLook.Of(material).Top)))
+            .Where(m => m.Image is not null)
+            .Select(m => new MaterialSwatch(m.Material, m.Image!.Path, $"{m.Material.Replace('/', '_')}.png"));
+        return [.. tops.Concat(fromMaps).OrderBy(s => s.Material, StringComparer.Ordinal)];
+    }
+
+    private static List<string> MapMaterials(string mapFile)
+    {
+        using var map = JsonDocument.Parse(File.ReadAllBytes(mapFile));
+        return [.. map.RootElement.GetProperty("materials").EnumerateArray().Select(m => m.GetString()!)];
+    }
+
+    /// <summary>
+    /// A height's tile. 0 is clear, so a painted 0 and a blank cell look alike. Above that each height has its own hue, cold to hot, so
+    /// the land's shape reads at region zoom, where the number blurs into the wash. The number is the wash's hue darkened, so it reads
+    /// over snow and doesn't speckle over grass.
+    /// </summary>
     public static byte[] HeightTile(int height)
     {
         ArgumentOutOfRangeException.ThrowIfNegative(height);
         ArgumentOutOfRangeException.ThrowIfGreaterThan(height, WorldRegion.MaxHeight);
 
-        var shade = (byte)(20 + height * 235 / WorldRegion.MaxHeight);
         var tile = new byte[TileSize * TileSize * 4];
-        Fill(tile, 0, 0, TileSize, TileSize, (shade, shade, shade), ShadeAlpha);
-        var ink = height >= 5 ? (byte)0 : (byte)255;
-        Draw(tile, (char)('0' + height), 3, (TileSize - 9) / 2, (TileSize - 15) / 2, (ink, ink, ink));
+        var (r, g, b) = HeightRamp[height];
+        if (height > 0)
+            Fill(tile, 0, 0, TileSize, TileSize, (r, g, b), ShadeAlpha);
+        Draw(tile, (char)('0' + height), 2, NumberLeft, NumberTop, ((byte)(r * InkShade), (byte)(g * InkShade), (byte)(b * InkShade)));
         return tile;
     }
 
-    /// <summary>A flag combination's tile: clear, so the layers under it show, with a lettered mark per flag. No flags is a small dot.</summary>
+    /// <summary>A flag combination's tile: clear, so the layers under it show, with a lettered mark per flag clear of the height number. No flags is a small dot.</summary>
     public static byte[] FlagsTile(TileFlags flags)
     {
         var tile = new byte[TileSize * TileSize * 4];
         if (flags == TileFlags.None)
-            Fill(tile, 14, 14, 4, 4, (235, 235, 235), 255);
+            Fill(tile, 14, 3, 4, 4, (235, 235, 235), 255);
         foreach (var (flag, letter, colour, x, y) in FlagMarks)
             if (flags.HasFlag(flag))
             {
-                Fill(tile, x, y, 10, 12, colour, 255);
-                Draw(tile, letter, 2, x + 2, y + 1, (255, 255, 255));
+                var (wide, inset) = flag == TileFlags.Deep ? (8, 1) : (10, 2);
+                Fill(tile, x, y, wide, flag == TileFlags.Deep ? 11 : 12, colour, 255);
+                Draw(tile, letter, 2, x + inset, y + (flag == TileFlags.Deep ? 0 : 1), (255, 255, 255));
             }
         return tile;
     }

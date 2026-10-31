@@ -155,15 +155,24 @@ internal sealed partial class Validation
         private bool Fits(Tile at, BattleMap map)
             => at.X >= 0 && at.Y >= 0 && (long)at.X + map.Width <= _def.Size[0] && (long)at.Y + map.Height <= _def.Size[1];
 
-        /// <summary>Compares a stamp with its map, tile by tile. As with a chunk, the first bad tile is enough to find the problem.</summary>
+        /// <summary>
+        /// Compares a stamp with its map, tile by tile: one error, with the first bad tile in full and how many more there are and
+        /// where, so a painted-over patch is found in one read rather than a tile at a time.
+        /// </summary>
         private void Match(Placed stamp, string at)
         {
-            foreach (var (world, onMap) in stamp.Tiles())
-                if (Difference(region.TileAt(world), stamp.Map[onMap], stamp) is { } difference)
-                {
-                    v.Error(file, at, $"The stamp '{stamp.Stamp.Map}' doesn't match its map at {world}: the region has {difference}.");
-                    return;
-                }
+            var bad = stamp.Tiles()
+                .Select(t => (t.World, Difference: Difference(region.TileAt(t.World), stamp.Map[t.OnMap], stamp)))
+                .Where(t => t.Difference is not null)
+                .ToList();
+            if (bad.Count == 0)
+                return;
+
+            var message = $"The stamp '{stamp.Stamp.Map}' doesn't match its map at {bad[0].World}: the region has {bad[0].Difference}.";
+            if (bad.Count > 1)
+                message += $" {bad.Count - 1} more {(bad.Count == 2 ? "tile differs" : "tiles differ")}, x {bad.Min(t => t.World.X)} to {bad.Max(t => t.World.X)}, "
+                    + $"y {bad.Min(t => t.World.Y)} to {bad.Max(t => t.World.Y)}.";
+            v.Error(file, at, message);
         }
 
         /// <summary>How the tiles differ, or null if they don't. Materials go by name, since the two lists differ.</summary>

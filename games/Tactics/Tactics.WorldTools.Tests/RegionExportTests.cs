@@ -1,4 +1,4 @@
-using System.Text;
+using System.Collections.Immutable;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using ArcBox.Sdk;
@@ -9,9 +9,9 @@ namespace Tactics.WorldTools.Tests;
 
 public sealed class RegionExportTests : IDisposable
 {
-    private const string Grass = "grass/lush";
+    private const string Grass = "grass/lush", Beat = "ch1_mayors_request";
 
-    private static readonly string TerrainManifest = Path.Combine(ContentPaths.ContentBase, "terrain", "manifest.json");
+    private const string Unreachable = "Paint a walkable way to it, climbing no more than 2 levels a step, or move the marker.";
 
     private static readonly Lazy<RulesPack> Base = new(() => RulesPack.Load([ContentPaths.BaseRules]));
 
@@ -34,7 +34,7 @@ public sealed class RegionExportTests : IDisposable
 
     private string RegionFile(string id = "r") => Path.Combine(_rules, "world", $"{id}.json");
 
-    private ExportResult Export(PaintedRegion painted) => RegionExport.Export(painted, _rules, TerrainManifest);
+    private ExportResult Export(PaintedRegion painted) => RegionExport.Export(painted, _rules, ContentPaths.ContentBase);
 
     private void ListInManifest(string id = "r")
     {
@@ -44,34 +44,41 @@ public sealed class RegionExportTests : IDisposable
         File.WriteAllText(path, manifest.ToJsonString());
     }
 
+    private static Dictionary<Tile, string> Grid(int width, int height, string material = Grass)
+        => Enumerable.Range(0, width * height).ToDictionary(i => new Tile(i % width, i / width), _ => material);
+
     /// <summary>A 6x6 field of grass: a start and a recovery on its top row, and a beat in the far corner.</summary>
     private static PaintedRegion Field(string id = "r") => new(id, "Region", 1, 6, 6)
     {
-        Materials = Enumerable.Range(0, 36).ToDictionary(i => new Tile(i % 6, i / 6), _ => Grass),
+        Materials = Grid(6, 6),
         Starts = [new Tile(0, 0)],
         Recoveries = [new Tile(5, 0)],
-        Beats = [new BeatSpot("ch1_ember", new Tile(5, 5))],
+        Beats = [new BeatSpot(Beat, new Tile(5, 5))],
     };
 
-    /// <summary>A field with river_crossing painted in at (4, 4), as a scene holds it: tiles in the layers, plus a marker.</summary>
-    private static PaintedRegion Stamped()
+    /// <summary>A 12x12 field cut in two by an impassable wall down column 7, with the beat on the far side.</summary>
+    private static PaintedRegion Walled() => Field() with
     {
-        var map = Base.Value.MapFor("river_crossing")!;
+        Width = 12,
+        Height = 12,
+        Materials = Grid(12, 12),
+        Flags = Enumerable.Range(0, 12).ToDictionary(y => new Tile(7, y), _ => TileFlags.Impassable),
+        Beats = [new BeatSpot(Beat, new Tile(9, 9))],
+    };
+
+    /// <summary>A field with <paramref name="map"/> painted in at (4, 4), as a scene holds it: tiles in the layers, plus a marker.</summary>
+    private static PaintedRegion Stamped(BattleMap map)
+    {
         var (width, height) = (map.Width + 8, map.Height + 8);
-        var materials = new Dictionary<Tile, string>();
+        var materials = Grid(width, height);
         var heights = new Dictionary<Tile, int>();
         var flags = new Dictionary<Tile, TileFlags>();
-        for (var y = 0; y < height; y++)
-            for (var x = 0; x < width; x++)
-                materials[new Tile(x, y)] = Grass;
-        for (var y = 0; y < map.Height; y++)
-            for (var x = 0; x < map.Width; x++)
-            {
-                var (tile, at) = (map[new Tile(x, y)], new Tile(x + 4, y + 4));
-                materials[at] = map.Materials[tile.Material];
-                heights[at] = tile.Height;
-                flags[at] = tile.Flags;
-            }
+        foreach (var cell in StampBrush.Cells(map, new Tile(4, 4), 0))
+        {
+            materials[cell.At] = cell.Material;
+            heights[cell.At] = cell.Height;
+            flags[cell.At] = cell.Flags;
+        }
         return new PaintedRegion("r", "Region", 1, width, height)
         {
             Materials = materials,
@@ -79,9 +86,11 @@ public sealed class RegionExportTests : IDisposable
             Flags = flags,
             Starts = [new Tile(0, 0)],
             Recoveries = [new Tile(1, 0)],
-            Stamps = [new RegionStamp("river_crossing", new Tile(4, 4), 0)],
+            Stamps = [new RegionStamp(map.Id, new Tile(4, 4), 0)],
         };
     }
+
+    private static PaintedRegion Stamped() => Stamped(Base.Value.MapFor("river_crossing")!);
 
     [Fact]
     public void A_clean_region_is_written_where_the_pack_expects_it()
@@ -118,10 +127,10 @@ public sealed class RegionExportTests : IDisposable
     [Fact]
     public void A_beat_cut_off_from_the_start_is_refused_and_nothing_is_written()
     {
-        var result = Export(Field() with { Width = 12, Height = 12, Beats = [new BeatSpot("ch1_ember", new Tile(9, 9))] });
+        var result = Export(Walled());
 
         Assert.Null(result.Written);
-        Assert.Equal(["The beat 'ch1_ember' at (9, 9) can't be reached from the start."], result.Problems);
+        Assert.Equal([$"The beat '{Beat}' at (9, 9) can't be reached from the start. {Unreachable}"], result.Problems);
         Assert.False(File.Exists(RegionFile()));
     }
 
@@ -134,9 +143,23 @@ public sealed class RegionExportTests : IDisposable
         var result = Export(stamped with { Materials = materials });
 
         Assert.Null(result.Written);
-        Assert.Contains("river_crossing", Assert.Single(result.Problems), StringComparison.Ordinal);
-        Assert.Contains("(4, 4)", result.Problems[0], StringComparison.Ordinal);
+        Assert.Equal(
+            ["The stamp 'river_crossing' doesn't match its map at (4, 4): the region has material 'ash/grey', the map has 'grass/lush'. Select its marker and press Apply stamp to put the map back."],
+            result.Problems);
         Assert.False(File.Exists(RegionFile()));
+    }
+
+    [Fact]
+    public void Ten_painted_over_stamp_tiles_are_one_line_with_a_count()
+    {
+        var stamped = Stamped();
+        var materials = new Dictionary<Tile, string>(stamped.Materials);
+        for (var x = 4; x < 14; x++)
+            materials[new Tile(x, 4)] = "ash/grey";
+
+        var problem = Assert.Single(Export(stamped with { Materials = materials }).Problems);
+
+        Assert.Contains("9 more tiles differ, x 4 to 13, y 4 to 4.", problem, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -145,11 +168,11 @@ public sealed class RegionExportTests : IDisposable
         var result = Export(Field() with { Stamps = [new RegionStamp("nowhere", new Tile(0, 0), 0)] });
 
         Assert.Null(result.Written);
-        Assert.Contains("nowhere", Assert.Single(result.Problems), StringComparison.Ordinal);
+        Assert.Equal(["Unknown map 'nowhere'. Set the marker's Map to a file in rules/maps."], result.Problems);
     }
 
     [Fact]
-    public void A_material_outside_the_terrain_manifest_is_refused_naming_the_tile()
+    public void A_material_nobody_can_draw_is_refused_naming_the_tile()
     {
         var field = Field();
         var materials = new Dictionary<Tile, string>(field.Materials) { [new Tile(2, 3)] = "lava/hot" };
@@ -157,7 +180,43 @@ public sealed class RegionExportTests : IDisposable
         var result = Export(field with { Materials = materials });
 
         Assert.Null(result.Written);
-        Assert.Equal(["The tile (2, 3) uses the material 'lava/hot', which isn't in the terrain manifest."], result.Problems);
+        Assert.Equal(["The tile (2, 3) uses the material 'lava/hot', which isn't in the palette or a stamped map. Repaint it from the palette."], result.Problems);
+    }
+
+    [Fact]
+    public void A_stamped_maps_own_materials_are_known()
+    {
+        // crypt_tile/dark is no terrain top: only a map names it, and the game resolves it for drawing.
+        var map = Base.Value.Maps.Values.First(m => m.Materials.Contains("crypt_tile/dark"));
+
+        Assert.Empty(Export(Stamped(map) with { Starts = PartySpawn(map), Recoveries = PartySpawn(map) }).Problems);
+    }
+
+    private static ImmutableArray<Tile> PartySpawn(BattleMap map)
+        => [new Tile(map.Zones["party_spawn"][0].X + 4, map.Zones["party_spawn"][0].Y + 4)];
+
+    public static TheoryData<string> Maps() => [.. Base.Value.Maps.Keys];
+
+    [Theory]
+    [MemberData(nameof(Maps))]
+    public void Every_map_in_the_base_pack_can_be_stamped_and_exported(string id)
+    {
+        var map = Base.Value.MapFor(id)!;
+
+        var result = Export(Stamped(map) with { Starts = PartySpawn(map), Recoveries = PartySpawn(map) });
+
+        Assert.Empty(result.Problems);
+        Assert.NotNull(result.Written);
+    }
+
+    [Fact]
+    public void A_material_used_outside_any_stamp_is_refused_if_only_an_unstamped_map_has_it()
+    {
+        var field = Field();
+        var materials = new Dictionary<Tile, string>(field.Materials) { [new Tile(2, 3)] = "crypt_tile/dark" };
+
+        Assert.Equal(["The tile (2, 3) uses the material 'crypt_tile/dark', which isn't in the palette or a stamped map. Repaint it from the palette."],
+            Export(field with { Materials = materials }).Problems);
     }
 
     [Fact]
@@ -166,7 +225,7 @@ public sealed class RegionExportTests : IDisposable
         Assert.Empty(Export(Field()).Problems);
         var before = File.ReadAllBytes(RegionFile());
 
-        var result = Export(Field() with { Beats = [new BeatSpot("ch1_ember", new Tile(50, 50))] });
+        var result = Export(Field() with { Beats = [new BeatSpot(Beat, new Tile(50, 50))] });
 
         Assert.NotEmpty(result.Problems);
         Assert.Equal(before, File.ReadAllBytes(RegionFile()));
@@ -191,9 +250,9 @@ public sealed class RegionExportTests : IDisposable
         Assert.Empty(Export(Field()).Problems);
         ListInManifest();
 
-        var result = Export(Field() with { Beats = [new BeatSpot("ch1_ember", new Tile(50, 50))] });
+        var result = Export(Field() with { Beats = [new BeatSpot(Beat, new Tile(50, 50))] });
 
-        Assert.Equal(["The beat 'ch1_ember' at (50, 50) can't be reached from the start."], result.Problems);
+        Assert.Equal([$"The beat '{Beat}' at (50, 50) can't be reached from the start. {Unreachable}"], result.Problems);
     }
 
     [Fact]
@@ -209,13 +268,13 @@ public sealed class RegionExportTests : IDisposable
     [Fact]
     public void A_problem_found_reading_the_scene_is_listed_with_the_checks_and_stops_the_write()
     {
-        var result = Export(Field() with { Starts = [new Tile(0, 0), new Tile(1, 1)], Beats = [new BeatSpot("ch1_ember", new Tile(5, 50))] });
+        var result = Export(Field() with { Starts = [new Tile(0, 0), new Tile(1, 1)], Beats = [new BeatSpot(Beat, new Tile(5, 50))] });
 
         Assert.Null(result.Written);
         Assert.Equal(
             [
-                "The scene has 2 start spawns, at (0, 0) and (1, 1), but needs one.",
-                "The beat 'ch1_ember' at (5, 50) can't be reached from the start.",
+                "The scene has 2 start spawns, at (0, 0) and (1, 1), but needs one. Delete the extra.",
+                $"The beat '{Beat}' at (5, 50) can't be reached from the start. {Unreachable}",
             ],
             result.Problems);
         Assert.False(File.Exists(RegionFile()));
@@ -229,6 +288,7 @@ public sealed class RegionExportTests : IDisposable
         var problem = Assert.Single(Export(Field()).Problems);
 
         Assert.StartsWith("base/xp.json: ", problem, StringComparison.Ordinal);
+        Assert.EndsWith("Fix that file, then export again.", problem, StringComparison.Ordinal);
     }
 
     [Theory]
@@ -241,8 +301,174 @@ public sealed class RegionExportTests : IDisposable
         var result = Export(Field(id));
 
         Assert.Null(result.Written);
-        Assert.Equal([$"The region id '{id}' must be lower-case letters, digits and underscores."], result.Problems);
+        Assert.Equal([$"The region id '{id}' must be lower-case letters, digits and underscores. Change Id on the Region node."], result.Problems);
         Assert.False(File.Exists(Path.Combine(_rules, "escape.json")));
+    }
+
+    [Fact]
+    public void A_bad_id_doesnt_hide_a_missing_start()
+    {
+        var problems = Export(Field("Bad Id") with { Starts = [] }).Problems;
+
+        Assert.Equal(
+            [
+                "The region id 'Bad Id' must be lower-case letters, digits and underscores. Change Id on the Region node.",
+                "The scene has no start spawn. Add a SpawnMarker under Spawns and set Kind to Start.",
+            ],
+            problems);
+    }
+
+    [Fact]
+    public void A_bad_id_doesnt_hide_a_cut_off_beat()
+        => Assert.Contains($"The beat '{Beat}' at (9, 9) can't be reached from the start. {Unreachable}", Export(Walled() with { Id = "Bad Id" }).Problems);
+
+    [Fact]
+    public void Tiles_outside_the_region_dont_hide_a_cut_off_beat()
+    {
+        var walled = Walled();
+        var materials = new Dictionary<Tile, string>(walled.Materials);
+        for (var y = 0; y < 12; y++)
+            for (var x = 12; x < 17; x++)
+                materials[new Tile(x, y)] = Grass;
+
+        var problems = Export(walled with { Materials = materials }).Problems;
+
+        Assert.Equal(
+            [
+                "60 tiles, x 12 to 16, y 0 to 11, first (12, 0), are outside the 12x12 region. Erase what's painted there, or change Size on the Region node.",
+                $"The beat '{Beat}' at (9, 9) can't be reached from the start. {Unreachable}",
+            ],
+            problems);
+    }
+
+    [Fact]
+    public void An_unknown_material_doesnt_hide_a_cut_off_beat()
+    {
+        var walled = Walled();
+        var materials = new Dictionary<Tile, string>(walled.Materials) { [new Tile(1, 1)] = "lava/hot" };
+
+        var problems = Export(walled with { Materials = materials }).Problems;
+
+        Assert.Equal(2, problems.Length);
+        Assert.Contains("lava/hot", problems[0], StringComparison.Ordinal);
+        Assert.Contains("can't be reached", problems[1], StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void An_unknown_material_on_a_stamped_tile_isnt_also_reported_as_a_stamp_mismatch()
+    {
+        var stamped = Stamped();
+        var materials = new Dictionary<Tile, string>(stamped.Materials) { [new Tile(4, 4)] = "lava/hot" };
+
+        var problem = Assert.Single(Export(stamped with { Materials = materials }).Problems);
+
+        Assert.Contains("lava/hot", problem, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void An_unknown_material_on_a_stamped_tile_doesnt_hide_a_changed_height()
+    {
+        var stamped = Stamped();
+        var materials = new Dictionary<Tile, string>(stamped.Materials) { [new Tile(4, 4)] = "lava/hot" };
+        var heights = new Dictionary<Tile, int>(stamped.Heights) { [new Tile(4, 4)] = 7 };
+
+        var problems = Export(stamped with { Materials = materials, Heights = heights }).Problems;
+
+        Assert.Equal(2, problems.Length);
+        Assert.Contains("the region has height 7", problems[1], StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void A_hole_in_a_chunk_is_refused()
+    {
+        var field = Field();
+        var materials = new Dictionary<Tile, string>(field.Materials);
+        materials.Remove(new Tile(2, 2));
+
+        var result = Export(field with { Materials = materials });
+
+        Assert.Null(result.Written);
+        Assert.StartsWith("The tile (2, 2) has no material", Assert.Single(result.Problems), StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void No_start_means_no_phantom_lines_from_tile_0_0()
+    {
+        var field = Field();
+        var materials = new Dictionary<Tile, string>(field.Materials);
+
+        var flags = new Dictionary<Tile, TileFlags> { [new Tile(0, 0)] = TileFlags.Impassable };
+
+        Assert.Equal(["The scene has no start spawn. Add a SpawnMarker under Spawns and set Kind to Start."],
+            Export(field with { Materials = materials, Flags = flags, Starts = [] }).Problems);
+    }
+
+    [Fact]
+    public void No_recovery_means_no_phantom_line_for_tile_0_0()
+    {
+        var walled = Walled();
+
+        // The start is across the wall from (0, 0), so a recovery defaulting there would be reported as cut off.
+        var problems = Export(walled with { Starts = [new Tile(9, 9)], Recoveries = [] }).Problems;
+
+        Assert.Equal(["The scene has no recovery spawn. Add a SpawnMarker under Spawns and set Kind to Recovery."], problems);
+    }
+
+    [Fact]
+    public void A_beat_the_lore_doesnt_have_is_a_problem()
+    {
+        var result = Export(Field() with { Beats = [new BeatSpot("ch1_mayors_requst", new Tile(5, 5))] });
+
+        Assert.Null(result.Written);
+        Assert.Equal(["The beat 'ch1_mayors_requst' at (5, 5) isn't in lore/arcs.json for chapter 1. Check its spelling."], result.Problems);
+    }
+
+    [Fact]
+    public void A_beat_from_another_chapter_is_a_problem()
+        => Assert.Equal([$"The beat '{Beat}' at (5, 5) isn't in lore/arcs.json for chapter 2. Check its spelling."],
+            Export(Field() with { Chapter = 2 }).Problems);
+
+    [Fact]
+    public void A_good_export_says_if_the_manifest_doesnt_list_the_region_yet()
+    {
+        var result = Export(Field());
+
+        Assert.False(result.Listed);
+        Assert.Equal($"Wrote {RegionFile()}. Add \"world/r.json\" to rules/manifest.json, or the game won't load it.", result.Status);
+    }
+
+    [Fact]
+    public void A_good_export_of_a_listed_region_just_says_where()
+    {
+        ListInManifest();
+        Directory.CreateDirectory(Path.GetDirectoryName(RegionFile())!);
+        File.WriteAllText(RegionFile(), "{}");
+
+        var result = Export(Field());
+
+        Assert.True(result.Listed);
+        Assert.Equal($"Wrote {RegionFile()}.", result.Status);
+    }
+
+    [Fact]
+    public void A_refused_export_counts_its_problems()
+        => Assert.Equal("Not exported: 1 problem. Click it to go there.", Export(Walled()).Status);
+
+    [Fact]
+    public void A_refused_export_with_no_place_to_go_doesnt_offer_a_click()
+        => Assert.Equal("Not exported: 1 problem.", Export(Field() with { Starts = [] }).Status);
+
+    [Fact]
+    public void A_file_that_cant_be_written_is_a_problem_not_a_crash()
+    {
+        // A folder where the file should go stops the move on every platform, as a locked file does on Windows.
+        Directory.CreateDirectory(RegionFile());
+
+        var result = Export(Field());
+
+        Assert.Null(result.Written);
+        Assert.Contains("then export again.", Assert.Single(result.Problems), StringComparison.Ordinal);
+        Assert.Empty(Directory.GetFiles(Path.Combine(_rules, "world")));
     }
 
     [Fact]
@@ -257,11 +483,19 @@ public sealed class RegionExportTests : IDisposable
     }
 
     [Fact]
+    public void An_export_leaves_no_temporary_file_beside_the_region()
+    {
+        Assert.Empty(Export(Field()).Problems);
+
+        Assert.Equal([RegionFile()], Directory.GetFiles(Path.Combine(_rules, "world")));
+    }
+
+    [Fact]
     public void Each_chunk_is_on_its_own_line_so_a_small_paint_change_is_a_small_diff()
     {
         var field = new PaintedRegion("r", "Region", 1, 64, 32)
         {
-            Materials = Enumerable.Range(0, 64 * 32).ToDictionary(i => new Tile(i % 64, i / 64), _ => Grass),
+            Materials = Grid(64, 32),
             Starts = [new Tile(0, 0)],
             Recoveries = [new Tile(1, 0)],
         };
@@ -295,9 +529,38 @@ public sealed class RegionExportTests : IDisposable
         var temp = Path.GetTempPath();
         var before = Directory.GetDirectories(temp, "tactics-region-check-*").ToHashSet();
 
-        Export(Field() with { Beats = [new BeatSpot("ch1_ember", new Tile(50, 50))] });
+        Export(Field() with { Beats = [new BeatSpot(Beat, new Tile(50, 50))] });
         Export(Field());
 
         Assert.Subset(before, Directory.GetDirectories(temp, "tactics-region-check-*").ToHashSet());
+    }
+
+    [Theory]
+    [InlineData("The tile (2, 3) uses the material 'x'.", 2, 3)]
+    [InlineData("600 tiles, x 40 to 44, y 0 to 9, first (40, 0), are outside the 40x30 region.", 40, 0)]
+    [InlineData("The stamp 'x' doesn't match its map at (4, 5): the region has void there. 3 more tiles differ, x 4 to 5, y 5 to 6.", 4, 5)]
+    [InlineData("The beat 'x' at (-1, 7) can't be reached from the start.", -1, 7)]
+    public void A_problem_gives_the_tile_to_go_to(string problem, int x, int y)
+        => Assert.Equal(new Tile(x, y), RegionExport.TileIn(problem));
+
+    [Fact]
+    public void A_problem_with_no_tile_gives_none()
+        => Assert.Null(RegionExport.TileIn("The scene has no start spawn."));
+
+    [Fact]
+    public void Every_kind_of_problem_says_what_to_do()
+    {
+        var walled = Walled();
+        var problems = Export(walled with
+        {
+            Id = "Bad",
+            Chapter = 0,
+            Starts = [],
+            Recoveries = [],
+            Stamps = [new RegionStamp("nowhere", new Tile(0, 0), 0), new RegionStamp("river_crossing", new Tile(0, 0), 0), new RegionStamp("river_crossing", new Tile(100, 0), 0)],
+            Beats = [new BeatSpot("", new Tile(0, 0))],
+        }).Problems;
+
+        Assert.All(problems, p => Assert.True(p.Trim().Split(". ").Length >= 2, p));
     }
 }

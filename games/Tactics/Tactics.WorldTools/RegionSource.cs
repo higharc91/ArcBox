@@ -58,12 +58,8 @@ public sealed class RegionSource(string id, string name, int chapter, int width,
     /// </summary>
     public void Stamp(BattleMap map, Tile at, int heightOffset)
     {
-        for (var y = 0; y < map.Height; y++)
-            for (var x = 0; x < map.Width; x++)
-            {
-                var tile = map[new Tile(x, y)];
-                Set(new Tile(at.X + x, at.Y + y), tile.Height + heightOffset, map.Materials[tile.Material], tile.Flags);
-            }
+        foreach (var cell in StampBrush.Cells(map, at, heightOffset))
+            Set(cell.At, cell.Height, cell.Material, cell.Flags);
         _stamps.Add(new RegionStamp(map.Id, at, heightOffset));
     }
 

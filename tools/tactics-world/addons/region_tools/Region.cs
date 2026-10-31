@@ -11,9 +11,10 @@ namespace Tactics.World.Editor;
 [GlobalClass]
 public partial class Region : Node2D
 {
-    private static readonly Color Edge = new(1f, 0.85f, 0.2f);
+    private static readonly Color Edge = new(1f, 0.85f, 0.2f), Mark = new(0f, 1f, 1f);
 
     private Vector2I _size = new(32, 32);
+    private Vector2I? _highlight;
 
     /// <summary>The region's id, which names its file: <c>rules/world/&lt;id&gt;.json</c>.</summary>
     [Export]
@@ -39,10 +40,24 @@ public partial class Region : Node2D
         }
     }
 
+    /// <summary>The tile a clicked problem points at, drawn over the paint. It isn't saved.</summary>
+    public Vector2I? Highlight
+    {
+        get => _highlight;
+        set
+        {
+            _highlight = value;
+            QueueRedraw();
+        }
+    }
+
     /// <inheritdoc />
     public override void _Draw()
     {
-        if (Engine.IsEditorHint())
-            DrawRect(new Rect2(Vector2.Zero, Size * PaintedRegion.TilePixels), Edge, filled: false, width: 3);
+        if (!Engine.IsEditorHint())
+            return;
+        DrawRect(new Rect2(Vector2.Zero, Size * PaintedRegion.TilePixels), Edge, filled: false, width: 3);
+        if (Highlight is { } tile)
+            DrawRect(new Rect2(tile * PaintedRegion.TilePixels, Vector2.One * PaintedRegion.TilePixels), Mark, filled: false, width: 4);
     }
 }

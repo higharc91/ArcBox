@@ -30,9 +30,9 @@ public static class Palette
     public static void WriteImages()
     {
         DirAccess.MakeDirRecursiveAbsolute(ProjectSettings.GlobalizePath(SwatchFolder));
-        foreach (var swatch in PaletteBuilder.Swatches(RegionPaths.TerrainManifest))
+        foreach (var swatch in PaletteBuilder.AllSwatches(RegionPaths.Content))
         {
-            var texture = Image.LoadFromFile(Path.Combine(RegionPaths.Terrain, swatch.Texture));
+            var texture = Image.LoadFromFile(Path.Combine(RegionPaths.Content, swatch.Texture));
             Save(texture.GetRegion(new Rect2I(Vector2I.Zero, TileSize)), SwatchFolder + swatch.File);
         }
 
@@ -62,7 +62,7 @@ public static class Palette
         var known = Enumerable.Range(0, materials.GetSourceCount())
             .Select(i => materials.GetSource(materials.GetSourceId(i)).ResourceName).ToHashSet(StringComparer.Ordinal);
         var added = 0;
-        foreach (var swatch in PaletteBuilder.Swatches(RegionPaths.TerrainManifest).Where(s => !known.Contains(s.Material)))
+        foreach (var swatch in PaletteBuilder.AllSwatches(RegionPaths.Content).Where(s => !known.Contains(s.Material)))
         {
             var source = NewSource(swatch.Material, SwatchFolder + swatch.File);
             materials.AddSource(source);
