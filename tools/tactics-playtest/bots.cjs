@@ -16,6 +16,7 @@
 //   --sit-out=turn,react sit out what's named, so the game's timers run out as they do for a real player who's gone quiet: the
 //                        first bot to get a turn leaves it for the 60 s timer, and then the AI finishes it (the TV badges
 //                        that), and no reaction prompt is ever answered, so each one stays up for its 10 s
+//   --area               prefer an ability that catches two or more foes and no friend, for watching area spells on the TV
 //   --people=<n>         wait for n real phones to join and claim a seat before starting, so you can play alongside the bots:
 //                        tell the TV's room code to your phone, then choose a class on it (see "With your own phone" below)
 //   --then=end|next      after the results: end the session (default), or play the next battle, forever
@@ -50,7 +51,9 @@
 // the game and starts once CanStart is true, which needs the same campaign step, so both go to start at that moment. The
 // one that loses is refused, which is harmless: here it's a log line, on the TV an "Autostart failed" warning.
 //
-// It needs web/play/node_modules (`npm ci` in web/play). Prints each step, and exits non-zero on a timeout or a closed room.
+// The bots reconnect and rejoin their seats as a phone does, so a server restart mid-battle (Resuming) carries on without them
+// being told. It needs web/play/node_modules (`npm ci` in web/play). Prints each step, and exits non-zero on a timeout or a
+// closed room.
 const fs = require('fs');
 const path = require('path');
 const { HubConnectionBuilder, LogLevel } = require(path.join(__dirname, '../../web/play/node_modules/@microsoft/signalr'));
@@ -65,6 +68,7 @@ const players = Number(opt('players', 3));
 const encounter = String(opt('encounter', 'river_crossing'));
 const holdMs = Number(opt('hold', 3)) * 1000;
 const fight = opt('fight', false) === true;
+const area = opt('area', false) === true;
 const leave = opt('leave', false) === true;
 const then = String(opt('then', 'end'));
 const sitOut = String(opt('sit-out', '')).split(',');
@@ -78,6 +82,8 @@ const TICK_MS = 250;
 const STUCK_MS = 4000;
 /** Long enough for the game's 60 s turn timer to go off first. */
 const SIT_OUT_MS = 65000;
+/** Retries for a lost connection: a server restart takes some seconds, and a phone doesn't give up. */
+const RECONNECT_MS = Array.from({ length: 120 }, () => 1000);
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
@@ -114,19 +120,30 @@ class Bot {
     this.acted = null;       // the viewId last answered
     this.seenAt = 0;         // when that view arrived
     this.moved = false;      // walked this turn already
-    this.conn = new HubConnectionBuilder().withUrl(`${server}/hub`).configureLogging(LogLevel.Warning).build();
+    this.conn = new HubConnectionBuilder().withUrl(`${server}/hub`).withAutomaticReconnect(RECONNECT_MS).configureLogging(LogLevel.Critical).build();
     this.conn.on('LobbyChanged', (l) => { this.lobby = l; });
     this.conn.on('ControllerView', (v) => { this.view = v; this.seenAt = Date.now(); });
     this.conn.on('GameEnded', (r) => { this.ended = r; });
     this.conn.on('RoomClosed', (why) => { this.closed = why || 'closed'; });
     this.conn.on('Kicked', () => { this.closed = 'kicked'; });
+    this.conn.onreconnected(() => this.rejoin());
   }
 
   async join(code) {
     await this.conn.start();
-    await this.conn.invoke('TakeSeat', { code, newName: this.name, profileKeys: [] });
+    this.seat = await this.conn.invoke('TakeSeat', { code, newName: this.name, profileKeys: [] });
     await until(`${this.name}'s lobby`, () => this.lobby);
     log(`${this.name} joined ${code}`);
+  }
+
+  /** Back in this seat after a lost connection, as a phone does it. */
+  async rejoin() {
+    try {
+      await this.conn.invoke('Rejoin', this.seat.code, this.seat.playerId, this.seat.secret);
+      log(`${this.name} rejoined ${this.seat.code}`);
+    } catch (e) {
+      log(`${this.name}: rejoin failed: ${e.message}`);
+    }
   }
 
   input(action, data) {
@@ -141,6 +158,17 @@ class Bot {
     const foes = units.filter((u) => u.side === 'Enemy');
     const dist = (a, b) => Math.max(Math.abs(a[0] - b[0]), Math.abs(a[1] - b[1]));
     if (fight) {
+      if (area) {
+        const friends = units.filter((u) => u.side !== 'Enemy').map((u) => u.id);
+        const isFoe = (a) => foes.some((f) => f.id === a.unit);
+        for (const ability of choices.abilities.filter((a) => !a.item && a.cost?.action)) {
+          const target = ability.targets.find((t) => t.affected.filter(isFoe).length >= 2 && !t.affected.some((a) => friends.includes(a.unit)));
+          if (target) {
+            log(`${this.name} uses ${ability.name} on ${target.affected.length}`);
+            return this.input('use', { ability: ability.ability, unit: target.target.unit ?? undefined, tile: target.target.tile ?? undefined });
+          }
+        }
+      }
       for (const ability of choices.abilities.filter((a) => !a.item && a.cost?.action)) {
         const target = ability.targets.find((t) => foes.some((f) => f.id === t.target.unit));
         if (target) {

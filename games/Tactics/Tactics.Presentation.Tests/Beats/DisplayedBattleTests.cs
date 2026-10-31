@@ -219,4 +219,106 @@ public sealed class DisplayedBattleTests
 
         Assert.Equal(A, DisplayedBattle.Apply(offered, new Reacted(S, "pass"), View()).Reacting);
     }
+
+    private static UnitView Undone(UnitView unit, params BattleEvent[] events)
+        => DisplayedBattle.Before(View(null, unit), new Beat(1, null, [.. events])).Units.Single();
+
+    [Fact]
+    public void Undoing_a_walk_a_push_and_a_teleport_stands_a_unit_where_it_began()
+    {
+        Assert.Equal(new Tile(1, 1), Undone(Unit(A, 1, 3), new Moved(A, [new Tile(1, 1), new Tile(1, 2), new Tile(1, 3)])).At);
+        Assert.Equal(new Tile(1, 1), Undone(Unit(A, 2, 1), new Pushed(A, new Tile(1, 1), new Tile(2, 1))).At);
+        Assert.Equal(new Tile(1, 1), Undone(Unit(A, 7, 7), new Teleported(A, new Tile(1, 1), new Tile(7, 7))).At);
+    }
+
+    [Fact]
+    public void Undoing_runs_backwards_through_the_beat()
+    {
+        var walked = Undone(Unit(A, 3, 1), new Moved(A, [new Tile(1, 1), new Tile(2, 1)]), new Moved(A, [new Tile(2, 1), new Tile(3, 1)]));
+
+        Assert.Equal(new Tile(1, 1), walked.At);
+    }
+
+    [Fact]
+    public void Undoing_a_killing_blow_stands_the_unit_back_up_with_its_hp()
+    {
+        var back = Undone(Unit(A, hp: 0, life: "Dead"), new Damaged(A, 7, null, 0), new Died(A));
+
+        Assert.Equal("Up", back.Life);
+        Assert.Equal(7, back.Hp);
+    }
+
+    [Fact]
+    public void Undoing_a_downing_takes_the_countdown_too()
+    {
+        var back = Undone(Unit(A, hp: 0, life: "Downed", countdown: 3), new Damaged(A, 4, null, 0), new Downed(A));
+
+        Assert.Equal("Up", back.Life);
+        Assert.Equal(0, back.Countdown);
+        Assert.Equal(4, back.Hp);
+    }
+
+    [Fact]
+    public void Undoing_damage_never_passes_full_health()
+        => Assert.Equal(10, Undone(Unit(A, hp: 8), new Damaged(A, 30, null, 8)).Hp);
+
+    [Fact]
+    public void Undoing_a_heal_and_a_revival()
+    {
+        Assert.Equal(4, Undone(Unit(A, hp: 9), new Healed(A, 5, 9)).Hp);
+        var fallen = Undone(Unit(A, hp: 6), new Revived(A, 6));
+        Assert.Equal(("Downed", 0), (fallen.Life, fallen.Hp));
+    }
+
+    [Fact]
+    public void Undoing_going_out_leaves_the_unit_on_the_ground_as_only_a_downed_unit_goes_out()
+        => Assert.Equal("Downed", Undone(Unit(A, hp: 0, life: "Out"), new UnitOut(A, new InjuryId("scar"))).Life);
+
+    [Fact]
+    public void Conditions_stay_as_the_state_has_them()
+        => Assert.Equal(["prone"], Undone(Unit(A, conditions: "prone"), new ConditionApplied(A, new ConditionId("prone"))).Conditions);
+
+    [Fact]
+    public void Undoing_a_spawn_takes_the_unit_off_until_it_arrives()
+    {
+        var view = View(null, Unit(A), Unit(S));
+
+        var before = DisplayedBattle.Before(view, new Beat(1, null, [new Spawned(S, new Tile(1, 1), null)]));
+
+        Assert.Equal([A], before.Units.Select(u => u.Id));
+    }
+
+    [Fact]
+    public void Undoing_turns_puts_the_active_unit_back()
+    {
+        var view = View(null, Unit(A), Unit(S)) with { Active = S };
+
+        var before = DisplayedBattle.Before(view, new Beat(1, null, [new TurnEnded(A), new TurnStarted(S, 1)]));
+
+        Assert.Equal(A, before.Active);
+    }
+
+    [Fact]
+    public void Undoing_an_offer_takes_it_down_until_its_beat_raises_it()
+    {
+        var view = View() with { Reacting = A };
+
+        Assert.Null(DisplayedBattle.Before(view, new Beat(1, null, [new ReactionOffered(new ReactionOffer(A, [], "leavesReach"))])).Reacting);
+    }
+
+    [Fact]
+    public void Undoing_a_broken_beat_changes_nothing_and_does_not_throw()
+    {
+        var unit = Unit(A, 3, 3);
+
+        Assert.Equal(unit, Undone(unit, new Moved(A, [])));
+    }
+
+    [Fact]
+    public void Undoing_an_event_about_nobody_here_changes_nothing()
+    {
+        var unit = Unit(A);
+
+        Assert.Equal(unit, Undone(unit, new Moved(S, [new Tile(4, 4), new Tile(5, 5)]), new Died(S)));
+    }
 }

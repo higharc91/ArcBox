@@ -91,7 +91,10 @@ While running:
 
 - **Server unreachable at launch:** the Connect screen shows the error and retries every 5 s.
 - **Connection drops:** a "reconnecting" banner appears; SignalR reconnects with the platform backoff
-  (0, 1, 2, 5, 10, 10… s) and the host calls `ResumeHost` again. If the room is gone, the TV opens a new one.
+  (0, 1, 2, 5, 10, 10… s) and the host calls `ResumeHost` again. If the room is gone, the TV opens a new one. In a Tactics
+  battle the server restarting shows "Resuming the battle…" until the players are back, and the TV picks the fight up
+  from there ([Catching up](#tactics-scene)). `ARCBOX_GAME=tactics ARCBOX_RESTART=1 tools/tv-e2e.sh` runs that, and
+  `ARCBOX_RECONNECT=1` in place of `ARCBOX_RESTART=1` kills and relaunches the TV mid-battle.
 - **`RoomClosed`:** the session is cleared and a new room opens.
 
 ## REDLINE scene
@@ -174,6 +177,16 @@ game's fallback wait, so a slow or missing TV costs a lagging picture and no mor
 `LastBattle` carries the blow that ended the fight, and the TV plays out what's left before it shows the table. `say` lines
 go through the shell's narrator in the `tactics.narrator` and `tactics.character` themes (`TacticsVoices`), with a caption.
 
+**Catching up.** A TV that can't play its way back drops to the newest beat (`BeatQueue.Late`, `BeatPlayer`): it takes the view
+as it stands, conditions and board included, and plays that one beat from just before it (`DisplayedBattle.Before` stands the
+units back where the beat found them), so no old beat or old line comes back. Three things bring it on: a scene joining a fight, whose
+first view holds up to 20 beats it never saw (a battle's own start, its first two beats, isn't a join, and plays whole); a
+view whose oldest beat is past the last one seen, as after a reconnect; and being behind, which is a beat waiting more
+than `BeatQueue.MostLag` (8 s of real time) with others after it. Real play has bursts of 6 beats that drain in about 4 s, and those
+play whole. A beat on stage finishes first. Beats dropped are never reported, and the newest still sends `shown`, so the
+game hears only what it's waiting on. The TV logs `TACTICS catch-up to beat <n>, <m> skipped`, and each new screen as
+`TACTICS screen <label>`, which `tools/tv-e2e.sh` reads.
+
 `games/tactics/TacticsScene.tscn` shows the game's banner and each phase's table: the Muster roster, the encounter list and
 the results, and in battle the board. All of it is worded by `PhaseScreen` in `games/Tactics/Tactics.Presentation`, with
 tests; the Godot class only draws.
@@ -205,7 +218,7 @@ before its beat plays never shows. The words are the game's banner. `ObjectiveWo
 `ObjectiveChanged` changes it when that event plays. `HudArt` reads the panels, frames and portraits. An absent player's
 character has the AI badge on the strip, and a beat whose events are flagged `AiFinished` puts an "AI finished" badge over its
 actor for at least `BeatTiming.AiFinished`. A panel over a unit fades; a reaction prompt, which has to be read, moves down the
-left side instead. With `--shots`, a prompt reaching the screen is the moment `reaction`, and a beat the AI finished is the moment
+left side instead. With `--shots`, a prompt reaching the screen is the moment `reaction`, an area spell's last target is `area`, and a beat the AI finished is the moment
 `ai-finished`. `BeatLoop` runs the frame. If a beat throws, it logs it, drops it (`BeatPlayer.Skip`), still sends its `shown`, and
 carries on. If drawing fails, no beat is to blame: it logs that once and the beats play on unseen, so held Results still come up.
 

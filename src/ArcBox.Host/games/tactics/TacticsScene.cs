@@ -141,6 +141,10 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
 
     private void Present(BeatTick tick)
     {
+        if (tick.CaughtUp is { } caughtUp)
+        {
+            GD.Print($"TACTICS catch-up to beat {caughtUp.Seq}, {caughtUp.Skipped} skipped");
+        }
         if (tick.Started is { } started)
         {
             (_playing, _playingSince) = (started, _clock.Elapsed.TotalSeconds);
@@ -234,6 +238,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         if (screen.Shot != _lastShot)
         {
             _lastShot = screen.Shot;
+            GD.Print($"TACTICS screen {screen.Shot}");
             _shots?.Capture(screen.Shot);
         }
     }

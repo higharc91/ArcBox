@@ -118,7 +118,7 @@ the time, so it can be found in the logs.
 ## Tactics battle on the TV
 
 Ticked boxes were proved on real battles with the TV and bots
-(`docs/superpowers/reports/2026-10-31-tactics-tv-scene/task-5-*.png`). Boxes marked **(person)** only a person can judge,
+(`docs/superpowers/reports/2026-10-31-tactics-tv-scene/task-5-*.png` and `task-6-*.png`). Boxes marked **(person)** only a person can judge,
 so tick those on the night. To play alongside the bots, see "With your own phone" in `tools/tactics-playtest/bots.cjs`.
 
 - [x] **Turn order:** faces in order with the active unit first, bigger, with its NOW tab, and it moves on with each turn.
@@ -132,6 +132,14 @@ so tick those on the night. To play alongside the bots, see "With your own phone
 - [x] **AI finished:** a player sits out their turn; after 60 s the AI finishes it, with the "AI finished" badge over that unit.
 - [x] **Reaction prompt:** "<name> can react" comes up as the beat that raised it plays, and goes when it's answered or timed
       out. Seen timing out; an answered one wasn't seen on the TV.
+- [x] **TV killed mid-battle:** relaunch it and it's back in the same room, on the board as it stands, playing only the newest
+      beat, and it goes on to the Results (`ARCBOX_GAME=tactics ARCBOX_RECONNECT=1 tools/tv-e2e.sh`).
+- [x] **Server restarted mid-battle:** the TV shows "Resuming the battle…", the phones come back, and the battle carries on to
+      the Results (`ARCBOX_GAME=tactics ARCBOX_RESTART=1 tools/tv-e2e.sh`). Bots rejoined within a second, so the screen was only up briefly.
+- [x] **An area spell:** seen once on a real TV, a level 1 wizard's Sleep on two goblins (`bots.cjs --fight --area`). It's a
+      save spell: no fireball-sized hit was seen.
+- [ ] **(person)** A TV too slow to keep up (over 8 s behind) drops to the newest beat and stays near the game. Tested, not seen
+      on a real slow machine.
 - [ ] **(person)** The strip, round and objective can be read from the sofa on the real TV, names under the faces included.
 - [ ] **(person)** The "AI finished" badge stays up long enough to notice, and isn't mistaken for the strip's AI badge.
 - [ ] **(person)** A reaction prompt is noticed by the room in its 10 s, and "Choosing on their phone" tells the others to wait.

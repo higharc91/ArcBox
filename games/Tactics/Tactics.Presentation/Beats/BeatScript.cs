@@ -208,7 +208,10 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 Play(e);
                 _view = DisplayedBattle.Apply(_view, e, live);
                 if (_at == _areaEnd)
+                {
+                    Moment("area");
                     _t += BeatTiming.Impact;   // the stage holds once, after the last target, as it would for one
+                }
             }
             Flush();
             var cues = _cues.OrderBy(c => c.At).ToImmutableArray();

@@ -158,4 +158,35 @@ public sealed class BeatLoopTests
 
         Assert.Single(rig.Logged);
     }
+
+    [Fact]
+    public void Held_results_that_fail_to_show_are_logged_and_the_tv_goes_on()
+    {
+        var rig = new Rig();
+        rig.Player.Receive(View(3));
+        rig.Loop.Held = () => throw new InvalidOperationException("a bad results view");
+
+        rig.Loop.Step(Frame);
+        rig.Loop.Step(Frame);
+
+        Assert.Null(rig.Loop.Held);
+        Assert.Contains("a bad results view", Assert.Single(rig.Logged), StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Held_results_wait_out_a_catch_up_and_then_show()
+    {
+        var rig = new Rig();
+        rig.Player.Receive(View(1));
+        rig.Player.Receive(View(1, Walk(1, 1, 2)));
+        rig.Loop.Step(Frame);
+        rig.Player.Receive(View(31, Walk(29, 29, 30), Walk(30, 30, 31)));
+        var results = 0;
+        rig.Loop.Held = () => results++;
+
+        rig.Run(3);
+
+        Assert.Equal([1, 30], rig.Shown);
+        Assert.Equal(1, results);
+    }
 }

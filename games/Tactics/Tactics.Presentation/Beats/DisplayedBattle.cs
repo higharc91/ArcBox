@@ -54,6 +54,32 @@ public static class DisplayedBattle
         _ => shown,
     };
 
+    /// <summary>
+    /// <paramref name="view"/> with <paramref name="beat"/> taken back off, as far as it matters to seeing the beat: where units stood,
+    /// their health and life, who's arrived and whose turn it is. It's for playing a beat the view has already taken in.
+    /// The rest stays as the view has it: conditions (a condition applied twice can't be told from a new one), the board,
+    /// a form, a unit that left. Those were the state already, and only for the length of one beat.
+    /// </summary>
+    public static BattleView Before(BattleView view, Beat beat) => beat.Events.Reverse().Aggregate(view, Undo);
+
+    private static BattleView Undo(BattleView view, BattleEvent e) => e switch
+    {
+        Moved { Path.IsDefaultOrEmpty: false } moved => Change(view, moved.Unit, u => u with { At = moved.Path[0] }),
+        Pushed pushed => Change(view, pushed.Unit, u => u with { At = pushed.From }),
+        Teleported port => Change(view, port.Unit, u => u with { At = port.From }),
+        Damaged hit => Change(view, hit.Unit, u => u with { Hp = Math.Min(u.MaxHp, hit.HpAfter + hit.Amount) }),
+        Healed healed => Change(view, healed.Unit, u => u with { Hp = Math.Max(0, healed.HpAfter - healed.Amount) }),
+        Downed down => Change(view, down.Unit, u => u with { Life = Up, Countdown = 0 }),
+        Died dead => Change(view, dead.Unit, u => u with { Life = Up }),
+        UnitOut gone => Change(view, gone.Unit, u => u with { Life = nameof(LifeState.Downed) }),
+        Revived back => Change(view, back.Unit, u => u with { Life = nameof(LifeState.Downed), Hp = 0 }),
+        Spawned spawned => view with { Units = view.Units.RemoveAll(u => u.Id == spawned.Unit) },
+        TurnStarted => view with { Active = null },
+        TurnEnded ended => view with { Active = ended.Unit },
+        ReactionOffered => view with { Reacting = null },
+        _ => view,
+    };
+
     /// <summary>True when two boards show the same thing: a new view is a new object every time, and rebuilding the board's plan isn't free.</summary>
     public static bool SameBoard(BoardChanges? a, BoardChanges? b)
     {

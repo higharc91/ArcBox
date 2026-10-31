@@ -16,7 +16,7 @@ public sealed class BeatLoop(BeatPlayer player, Action<int> signal, Action<BeatT
 {
     private readonly HashSet<string> _logged = new(StringComparer.Ordinal);
 
-    /// <summary>What to do once nothing's left to play, as show the results; null for nothing.</summary>
+    /// <summary>What to do once nothing's left to play, as show the results; null for nothing. It's guarded like a draw, and goes once either way.</summary>
     public Action? Held { get; set; }
 
     /// <summary>One frame of <paramref name="delta"/> seconds.</summary>
@@ -31,7 +31,7 @@ public sealed class BeatLoop(BeatPlayer player, Action<int> signal, Action<BeatT
         if (Held is { } held && player.Idle)
         {
             Held = null;
-            held();
+            Guard(held);
         }
     }
 

@@ -9,7 +9,7 @@ namespace Tactics.Presentation.Hud;
 
 /// <summary>One unit on the turn order strip.</summary>
 /// <param name="Id">The unit.</param>
-/// <param name="Name">Its name, short (<see cref="Words.Short"/>).</param>
+/// <param name="Name">A character's whole name, which the strip cuts if it must, or a monster's short one (<see cref="Words.Short"/>).</param>
 /// <param name="Sprite">Its sprite key, for <see cref="HudArt.Portrait"/>.</param>
 /// <param name="Tone">Its side.</param>
 /// <param name="Active">It's this unit's turn.</param>
@@ -52,6 +52,7 @@ public sealed record BattleHud(string Title, string Round, string? Turn, string?
     public const float ScreenGutter = 16;
 
     private const string Hero = "hero";
+    private const string Ally = "ally";
     private const int Players = 6;       // ui/manifest.json has stripes p1 to p6
     private const string NeutralStripe = "stripe_neutral";
     private const string EnemyStripe = "stripe_enemy";
@@ -114,7 +115,7 @@ public sealed record BattleHud(string Title, string Round, string? Turn, string?
     }
 
     private static HudSlot Slot(UnitView unit, UnitId? active)
-        => new(unit.Id, Words.Short(unit.Name), unit.Sprite, UnitPlan.ToneOf(unit.Side), unit.Id == active, IsHero(unit, out _) && unit.Player is null, unit.Life == "Downed", Stripe(unit));
+        => new(unit.Id, IsCharacter(unit) ? unit.Name : Words.Short(unit.Name), unit.Sprite, UnitPlan.ToneOf(unit.Side), unit.Id == active, IsHero(unit, out _) && unit.Player is null, unit.Life == "Downed", Stripe(unit));
 
     private static string Stripe(UnitView unit)
     {
@@ -124,10 +125,15 @@ public sealed record BattleHud(string Title, string Round, string? Turn, string?
     }
 
     // The game seats members as hero1, hero2, … (a summon or a companion has its own kind of id).
-    private static bool IsHero(UnitView unit, out int seat)
+    private static bool IsHero(UnitView unit, out int seat) => Numbered(unit, Hero, out seat);
+
+    // Members and their companions have names of their own. Anything else is called what its kind is called.
+    private static bool IsCharacter(UnitView unit) => IsHero(unit, out _) || Numbered(unit, Ally, out _);
+
+    private static bool Numbered(UnitView unit, string prefix, out int number)
     {
-        seat = 0;
-        return unit.Id.Value.StartsWith(Hero, StringComparison.Ordinal) && int.TryParse(unit.Id.Value.AsSpan(Hero.Length), NumberStyles.None, CultureInfo.InvariantCulture, out seat);
+        number = 0;
+        return unit.Id.Value.StartsWith(prefix, StringComparison.Ordinal) && int.TryParse(unit.Id.Value.AsSpan(prefix.Length), NumberStyles.None, CultureInfo.InvariantCulture, out number);
     }
 
     private static float Top(BoardUnit unit)

@@ -26,20 +26,32 @@ public sealed record FxDraw(string Path, ArtRect Source, Vector2 TopLeft, Vector
 /// <param name="Shake">How far the board is off its place, in art pixels.</param>
 public sealed record BeatFrame(ImmutableDictionary<UnitId, UnitPlace> Places, ImmutableDictionary<UnitId, UnitPose> Poses, ImmutableArray<FxDraw> Draws, Vector2 Shake);
 
+/// <summary>The TV dropped back to the newest beat.</summary>
+/// <param name="Seq">The beat it went to.</param>
+/// <param name="Skipped">The beats since the last one this TV played, which it won't play. A fresh scene has played none.</param>
+public sealed record BeatCatchUp(int Seq, int Skipped);
+
 /// <summary>What one <see cref="BeatPlayer.Tick"/> did.</summary>
 /// <param name="Shown">Beats that finished, for the <c>shown</c> signal: at most one.</param>
 /// <param name="Lines">Lines to say now.</param>
 /// <param name="Moments">Moments worth a screenshot.</param>
-/// <param name="BoardChanged">The displayed board isn't what it was: its plan must be rebuilt.</param>
+/// <param name="BoardChanged">The displayed board may not be what it was: its plan must be checked.</param>
 /// <param name="Busy">Something on screen is moving, so the units need redrawing.</param>
 /// <param name="Started">A beat that began, with how long it's scripted to take.</param>
-public sealed record BeatTick(ImmutableArray<int> Shown, ImmutableArray<SpokenLine> Lines, ImmutableArray<string> Moments, bool BoardChanged, bool Busy, BeatScript? Started);
+/// <param name="CaughtUp">A catch-up since the last tick, if there was one.</param>
+public sealed record BeatTick(ImmutableArray<int> Shown, ImmutableArray<SpokenLine> Lines, ImmutableArray<string> Moments, bool BoardChanged, bool Busy, BeatScript? Started, BeatCatchUp? CaughtUp = null);
 
 /// <summary>
 /// Plays a battle's beats one at a time, from their own events, and keeps the battle as the player has seen it
 /// (<see cref="Shown"/>). The newest view is the truth only when nothing's left to play: then <see cref="Shown"/> takes it
 /// whole, so any error heals. The TV sends <c>shown</c> for what comes out of <see cref="Tick"/>, but nothing here waits for
 /// the game, and the game's fallback timer doesn't wait for this: a beat that runs long only makes the picture lag.
+/// <para>
+/// When that lag can't be played off, the TV catches up (<see cref="BeatQueue.Late"/>): it takes the view as it stands, drops every
+/// beat but the newest, and plays that one from just before it, so what's on the board still leads into the beat. That covers a
+/// scene joining a fight, a reconnect that missed beats, and a TV too slow to keep up. A beat on stage finishes first. A
+/// dropped beat is never reported, so the game only hears about the newest, which is what it's waiting on.
+/// </para>
 /// </summary>
 public sealed class BeatPlayer(FxArt fx, UnitArt art)
 {
@@ -66,9 +78,12 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
     private readonly List<(Cue Cue, double Start)> _fading = [];
     private BattleView? _live;
     private BeatScript? _script;
+    private BeatCatchUp? _caughtUp;
     private int _next;
+    private int _played;        // the last beat begun
     private double _clock;      // into the current beat
-    private double _now;        // since the start
+    private double _now;        // since the start, as beats see it: a hitch doesn't count past LongestFrame
+    private double _real;       // since the start, as the game sees it
     private double _rest;
     private double _captionUntil;
     private double _aiFinishedUntil;
@@ -94,23 +109,42 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
     /// <summary>The beats waiting behind the one playing.</summary>
     public int Waiting => _queue.Count;
 
-    /// <summary>A new view: its unseen beats are queued, and if nothing's playing it's simply what's on screen.</summary>
+    /// <summary>
+    /// A new view: its unseen beats are queued, and if nothing's playing it's simply what's on screen. The first view starts
+    /// from before what it holds, as it's already past those beats.
+    /// </summary>
     public void Receive(BattleView live)
     {
-        if (_queue.Offer(live.Beats))
+        if (_queue.Offer(live.Beats, _real))
             (_script, Shown) = (null, null);
         _live = live;
-        Shown ??= live;
+        if (_script is null && _queue.Late(_real))
+            CatchUp(live);
+        Shown ??= Unplayed(live);
         if (Idle)
             Shown = live;
     }
 
-    /// <summary>Forgets the battle, as when it's over.</summary>
+    private void CatchUp(BattleView live)
+    {
+        _queue.KeepNewest();
+        _fading.Clear();
+        (AiFinished, _aiBegan, _rest, _dirty, Shown) = (null, false, 0, true, Unplayed(live));
+        if (_queue.Waiting.LastOrDefault() is { } newest)
+            _caughtUp = new BeatCatchUp(newest.Seq, Math.Max(0, newest.Seq - _played - 1));
+    }
+
+    private BattleView Unplayed(BattleView live) => _queue.Waiting.Reverse().Aggregate(live, DisplayedBattle.Before);
+
+    /// <summary>
+    /// Forgets the battle, as when it's over, or for a spell without a board. The next view counts as a first one, so if the
+    /// battle's still on, it's a catch-up: this can't bring old beats back.
+    /// </summary>
     public void Reset()
     {
         _queue.Clear();
         _fading.Clear();
-        (_script, _live, Shown, Caption, _rest, AiFinished) = (null, null, null, null, 0, null);
+        (_script, _live, Shown, Caption, _rest, AiFinished, _caughtUp) = (null, null, null, null, 0, null, null);
     }
 
     /// <summary>Moves on by <paramref name="delta"/> seconds.</summary>
@@ -118,6 +152,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
     {
         var seconds = Math.Min(delta, LongestFrame);
         _now += seconds;
+        _real += delta;
         var faded = _fading.RemoveAll(f => _now >= f.Start + f.Cue.Length) > 0;
         if (Caption is not null && _now >= _captionUntil)
             Caption = null;
@@ -160,15 +195,21 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
             }
         }
 
-        return new BeatTick(shown, lines.ToImmutable(), moments.ToImmutable(), !DisplayedBattle.SameBoard(board, Shown?.Board),
-            _script is not null || _fading.Count > 0 || !shown.IsEmpty || redraw || AiFinished is not null, started);
+        var caughtUp = _caughtUp;
+        _caughtUp = null;
+        return new BeatTick(shown, lines.ToImmutable(), moments.ToImmutable(), caughtUp is not null || !DisplayedBattle.SameBoard(board, Shown?.Board),
+            _script is not null || _fading.Count > 0 || !shown.IsEmpty || redraw || _dirty || AiFinished is not null, started, caughtUp);
     }
 
     private BeatScript? Begin()
     {
-        if (_script is not null || Shown is null || _live is null || _queue.Next() is not { } beat)
+        if (_script is not null || Shown is null || _live is null)
             return null;
-        _opening = beat.Seq;     // if working out its script throws, it's already off the queue
+        if (_queue.Late(_real))
+            CatchUp(_live);
+        if (_queue.Next() is not { } beat)
+            return null;
+        (_opening, _played) = (beat.Seq, beat.Seq);     // if working out its script throws, it's already off the queue
         (_script, _next, _clock) = (BeatScript.Of(beat, Shown, _live, fx), 0, 0);
         _opening = null;
         if (beat.Actor is { } actor && beat.Events.Any(e => e.AiFinished))

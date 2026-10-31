@@ -214,6 +214,22 @@ public sealed class BattleHudTests
     }
 
     [Fact]
+    public void A_character_keeps_the_name_it_was_given()
+    {
+        UnitView[] units = [Unit("hero1", player: "Ana Smith", name: "Ana Smith"), Unit("hero2", name: "Mary Jo Bo"), Unit("ally1", name: "Fighter companion")];
+
+        Assert.Equal(["Ana Smith", "Mary Jo Bo", "Fighter companion"], Hud(Battle(null, 1, units)).Order.Select(s => s.Name));
+    }
+
+    [Fact]
+    public void A_summon_on_the_partys_side_is_named_as_a_monster_is()
+    {
+        UnitView[] units = [Unit("summon.1", name: "Spirit Wolf")];
+
+        Assert.Equal(["Wolf"], Hud(Battle(null, 1, units)).Order.Select(s => s.Name));
+    }
+
+    [Fact]
     public void The_badge_stands_over_the_units_marks()
     {
         var fit = new BoardFit(new Vector2(800, 300), 2);

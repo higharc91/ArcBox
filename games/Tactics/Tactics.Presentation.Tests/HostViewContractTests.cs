@@ -24,6 +24,8 @@ public sealed class HostViewContractTests
         throw new DirectoryNotFoundException("No ArcBox.slnx above the test binaries.");
     });
 
+    private static string ContentRoot => Tactics.Presentation.Tests.Board.Pack.Root;
+
     private static TacticsHostView OverTheWire(TacticsGame game)
         => JsonSerializer.SerializeToElement(game.HostView(), ArcJson.Options).Deserialize<TacticsHostView>(ArcJson.Options)!;
 
@@ -157,6 +159,59 @@ public sealed class HostViewContractTests
 
         Assert.Equal(TacticsPhase.Results, game.Phase);
         Assert.True(beats > 20, $"only {beats} beats");
+    }
+
+    /// <summary>What a catch-up relies on: taking a real beat back off a real view gives the view before it, for what's drawn of a unit.</summary>
+    [Theory]
+    [InlineData("river_crossing", 3)]
+    [InlineData("warlord_bridge", 5)]
+    [InlineData("crypt_hall", 7)]
+    public void Undoing_a_beat_gives_the_view_before_it(string encounter, int seed)
+    {
+        var (game, h) = AiBattle(encounter, seed);
+
+        var before = OverTheWire(game).Battle!;
+        var undone = 0;
+        for (var step = 0; step < 20_000 && game.Phase == TacticsPhase.Battle; step++)
+        {
+            h.Advance(TimeSpan.FromSeconds(7));
+            var view = OverTheWire(game);
+            var live = view.Battle ?? view.LastBattle!;
+            var fresh = live.Beats.Where(b => b.Seq > before.Beats[^1].Seq).ToArray();
+            if (fresh.Length > 0 && fresh[0].Seq == before.Beats[^1].Seq + 1)
+            {
+                var back = fresh.Reverse().Aggregate(live, DisplayedBattle.Before);
+                foreach (var unit in back.Units.Where(u => before.Units.Any(b => b.Id == u.Id)))
+                    Assert.Equal(Where(before.Units.Single(b => b.Id == unit.Id)), Where(unit));
+                Assert.Equal(before.Active, back.Active);
+                undone += fresh.Length;
+            }
+            before = live;
+        }
+
+        Assert.True(undone > 20, $"only {undone} beats");
+    }
+
+    private static string Where(UnitView u) => $"{u.Id} {u.At} {u.Life}";
+
+    /// <summary>A TV joining a real fight half way plays one beat, says so to the game, and ends on the battle as it stands.</summary>
+    [Fact]
+    public void A_tv_joining_a_real_battle_half_way_plays_one_beat_and_lands_on_the_state()
+    {
+        var (game, h) = AiBattle("river_crossing", 3);
+        for (var step = 0; step < 40; step++)
+            h.Advance(TimeSpan.FromSeconds(7));
+        var live = OverTheWire(game).Battle!;
+        Assert.True(live.Beats[^1].Seq > 20);
+        var player = new BeatPlayer(FxArt.Load(ContentRoot), UnitArt.Load(ContentRoot));
+
+        player.Receive(live);
+        var shown = new List<int>();
+        for (var t = 0.0; t < 6; t += 1 / 60.0)
+            shown.AddRange(player.Tick(1 / 60.0).Shown);
+
+        Assert.Equal([live.Beats[^1].Seq], shown);
+        AssertSame(live, player.Shown!);
     }
 
     [Fact]

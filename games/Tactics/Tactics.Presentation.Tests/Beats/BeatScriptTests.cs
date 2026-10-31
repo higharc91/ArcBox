@@ -298,6 +298,17 @@ public sealed class BeatScriptTests
         Assert.Equal(0.84, LastHit(script), 3);
     }
 
+    [Fact]
+    public void An_area_is_a_moment_worth_a_shot_once_its_last_target_is_hit()
+    {
+        var script = Script(Crowd, [Fireball, .. Targets.Take(3).SelectMany(t => new BattleEvent[]
+        {
+            new Rolled(t, RollKind.Save, Roll(4, false)), new Damaged(t, 3, "fire", 7),
+        })]);
+
+        Assert.Equal(LastHit(script), script.Cues.OfType<MomentCue>().Single(m => m.Label == "area").At, 3);
+    }
+
     // The next few are the engine's own event order, from real battles (see Real_battles below).
 
     [Fact]

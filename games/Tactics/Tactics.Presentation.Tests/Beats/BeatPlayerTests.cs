@@ -66,9 +66,10 @@ public sealed class BeatPlayerTests
         player.Receive(View(3, 10));
         player.Receive(View(6, 10, Walk(1, 3, 4), Walk(2, 4, 5), Walk(3, 5, 6)));
 
-        var first = player.Tick(30).Shown;
+        var first = player.Tick(1).Shown;
 
-        Assert.True(first.Length <= 1);
+        Assert.Empty(first);
+        Assert.Equal([1], Run(player, BeatTiming.Step));
     }
 
     [Fact]
@@ -462,5 +463,269 @@ public sealed class BeatPlayerTests
 
         Assert.Same(live, player.Live);
         Assert.NotSame(live, player.Shown);
+    }
+
+    // ---- Catching up (Task 6) ----------------------------------------------------------------------------------------
+
+    private static BattleView Filled(int heroX, params Beat[] beats) => View(heroX, 10, beats) with
+    {
+        Board = new BoardChanges([], [new HeightChange(new Tile(5, 5), -1)], [new Tile(5, 5)]),
+        Units = [Unit(Hero, "Party", heroX, 3) with { Conditions = ["prone"] }, Unit(Foe, "Enemy", 9, 3)],
+    };
+
+    private static Beat[] Walks(int from, int to) => [.. Enumerable.Range(from, to - from + 1).Select(i => Walk(i, i, i + 1))];
+
+    [Fact]
+    public void A_gap_snaps_to_the_view_and_plays_only_the_newest_beat()
+    {
+        var player = Player();
+        player.Receive(View(1, 10));
+        player.Receive(View(2, 10, Walk(1, 1, 2)));
+        Run(player, 1);
+
+        player.Receive(Filled(31, Walks(11, 30)));
+
+        Assert.Equal(new Tile(30, 3), player.Shown!.Units[0].At);   // where the newest beat's walk starts
+        Assert.Equal(["prone"], player.Shown!.Units[0].Conditions);
+        Assert.Equal([new Tile(5, 5)], player.Shown!.Board!.Sunk);
+        Assert.Equal([30], Run(player, 3));
+        Assert.Equal(new Tile(31, 3), player.Shown!.Units[0].At);
+        Assert.True(player.Idle);
+    }
+
+    [Fact]
+    public void A_fresh_scene_joining_a_fight_does_not_replay_old_beats()
+    {
+        var player = Player();
+
+        player.Receive(Filled(21, Walks(1, 20)));
+
+        Assert.Equal(new Tile(5, 5), Assert.Single(player.Shown!.Board!.Sunk));
+        Assert.Equal([20], Run(player, 5));
+    }
+
+    [Fact]
+    public void A_fresh_scene_joining_says_none_of_the_old_lines()
+    {
+        var player = Player();
+        Beat[] beats = [new Beat(7, null, [new Said("narrator", "Old news.")]), new Beat(8, null, [new Said("narrator", "Fresh.")])];
+
+        player.Receive(View(3, 10, beats));
+
+        var lines = new List<string>();
+        for (var t = 0.0; t < 2; t += Frame)
+            lines.AddRange(player.Tick(Frame).Lines.Select(l => l.Text));
+        Assert.Equal(["Fresh."], lines);
+    }
+
+    [Fact]
+    public void A_view_joined_with_no_beats_plays_nothing()
+    {
+        var player = Player();
+
+        player.Receive(View(3, 10));
+
+        Assert.Empty(Run(player, 1));
+        Assert.Equal(new Tile(3, 3), player.Shown!.Units[0].At);
+    }
+
+    [Fact]
+    public void The_unit_acting_in_the_first_view_starts_from_where_it_stood()
+    {
+        var player = Player();
+        var opening = new Beat(1, null, [new RoundStarted(1, [Foe, Hero]), new TurnStarted(Foe, 1)]);
+        var step = new Beat(2, Foe, [new Moved(Foe, [new Tile(9, 3), new Tile(8, 3)])]);
+        var live = View(3, 10, opening, step);
+        live = live with { Units = [live.Units[0], live.Units[1] with { At = new Tile(8, 3) }] };
+
+        player.Receive(live);
+
+        Assert.Equal(new Tile(9, 3), player.Shown!.Units[1].At);
+        var shown = Run(player, 0.05);
+        Assert.Equal(new Tile(9, 3), player.Shown!.Units[1].At);     // not at its destination during beat 1
+        shown.AddRange(Run(player, 3));
+        Assert.Equal([1, 2], shown);                                 // nobody's missed the opening
+        Assert.Equal(new Tile(8, 3), player.Shown!.Units[1].At);
+    }
+
+    [Fact]
+    public void A_late_blow_lands_on_a_unit_still_standing()
+    {
+        var player = Player();
+        var blow = new Beat(40, Hero, [new Damaged(Foe, 10, null, 0), new Died(Foe)]);
+        var live = View(3, 0, Walk(39, 2, 3), blow);
+        live = live with { Units = [live.Units[0], live.Units[1] with { Life = "Dead" }] };
+
+        player.Receive(live);
+
+        Assert.Equal("Up", player.Shown!.Units[1].Life);
+        Assert.Equal(10, player.Shown!.Units[1].Hp);
+        Run(player, 3);
+        Assert.Equal("Dead", player.Shown!.Units[1].Life);
+    }
+
+    [Fact]
+    public void The_beat_on_stage_finishes_before_a_gap_snaps()
+    {
+        var player = Player();
+        player.Receive(View(1, 10));
+        player.Receive(View(2, 10, Walk(1, 1, 2)));
+        player.Tick(Frame);
+
+        player.Receive(View(31, 10, Walks(11, 30)));
+
+        Assert.Equal([1, 30], Run(player, 3));
+        Assert.Equal(new Tile(31, 3), player.Shown!.Units[0].At);
+    }
+
+    [Fact]
+    public void A_snap_with_the_beat_on_stage_takes_whatever_is_newest_by_then()
+    {
+        var player = Player();
+        player.Receive(View(1, 10));
+        player.Receive(View(2, 10, Walk(1, 1, 2)));
+        player.Tick(Frame);
+
+        player.Receive(View(31, 10, Walks(11, 30)));
+        player.Receive(View(32, 10, Walks(12, 31)));
+
+        Assert.Equal([1, 31], Run(player, 3));
+    }
+
+    [Fact]
+    public void A_burst_of_a_few_seconds_is_played_whole()
+    {
+        var player = Player();
+        player.Receive(View(1, 10));
+
+        player.Receive(View(7, 10, Walks(1, 6)));
+
+        Assert.Equal([1, 2, 3, 4, 5, 6], Run(player, 6 * (BeatTiming.Step + BeatTiming.Rest) + 0.5));
+    }
+
+    [Fact]
+    public void A_tv_too_slow_to_keep_up_drops_back_to_the_newest_beat_and_stays_near_the_game()
+    {
+        const double SlowFrame = 0.5;   // 2 fps: a frame counts for 0.1 s of a beat, so a beat takes five times as long
+        var player = Player();
+        player.Receive(View(1, 10));
+
+        var shown = new List<int>();
+        var skipped = false;
+        var worst = 0;
+        for (var seq = 1; seq <= 300; seq++)
+        {
+            player.Receive(View(seq + 1, 10, Walk(seq, seq, seq + 1)));
+            var tick = player.Tick(SlowFrame);
+            shown.AddRange(tick.Shown);
+            skipped |= tick.CaughtUp is not null;
+            worst = Math.Max(worst, seq - (shown.Count == 0 ? 0 : shown[^1]));
+        }
+
+        Assert.True(skipped);
+        Assert.InRange(worst, 1, (int)(BeatQueue.MostLag / SlowFrame) + 6);      // a lag of seconds, not the whole battle
+        Assert.Equal(shown.Order(), shown);
+    }
+
+    [Fact]
+    public void A_catch_up_is_reported_once_with_how_much_it_skipped()
+    {
+        var player = Player();
+        player.Receive(View(1, 10));
+        player.Receive(View(2, 10, Walk(1, 1, 2)));
+        Run(player, 1);
+
+        player.Receive(View(31, 10, Walks(11, 30)));
+
+        Assert.Equal(new BeatCatchUp(30, 28), player.Tick(Frame).CaughtUp);
+        Assert.Null(player.Tick(Frame).CaughtUp);
+    }
+
+    [Fact]
+    public void A_catch_up_after_a_reset_counts_from_the_last_beat_this_tv_played()
+    {
+        var player = Player();
+        player.Receive(View(1, 10));
+        player.Receive(View(32, 10, Walks(31, 31)));
+        Run(player, 1);
+
+        player.Reset();                                     // as Resuming does: no board for a moment
+        player.Receive(View(33, 10, Walks(13, 32)));
+
+        Assert.Equal(new BeatCatchUp(32, 0), player.Tick(Frame).CaughtUp);
+    }
+
+    [Fact]
+    public void A_snap_redraws_the_board_on_the_next_tick()
+    {
+        var player = Player();
+        player.Receive(View(1, 10));
+        player.Receive(View(2, 10, Walk(1, 1, 2)));
+        Run(player, 1);
+
+        player.Receive(Filled(31, Walks(11, 30)));
+
+        Assert.True(player.Tick(Frame).BoardChanged);
+    }
+
+    [Fact]
+    public void A_reset_cannot_replay_old_beats()
+    {
+        var player = Player();
+        player.Receive(View(21, 10, Walks(1, 20)));
+        Run(player, 3);
+
+        player.Reset();                                   // as the board failing to draw does
+        player.Receive(View(21, 10, Walks(1, 20)));
+
+        Assert.Equal([20], Run(player, 3));
+    }
+
+    [Fact]
+    public void The_game_starting_again_under_the_tv_plays_the_new_opening()
+    {
+        var player = Player();
+        player.Receive(View(21, 10, Walks(1, 20)));
+        Run(player, 3);
+
+        player.Receive(View(2, 10, Walk(1, 1, 2)));
+
+        Assert.Equal([1], Run(player, 3));
+    }
+
+    [Fact]
+    public void A_broken_beat_at_a_snap_does_not_throw_out_of_the_view()
+    {
+        var player = Player();
+
+        player.Receive(View(3, 10, Walk(1, 1, 2), Walk(2, 2, 3), Broken(3)));
+
+        Assert.Equal(new Tile(3, 3), player.Shown!.Units[0].At);
+        Assert.ThrowsAny<Exception>(() => Run(player, 1));
+        Assert.Equal(3, player.Skip());
+        Assert.True(player.Idle);
+    }
+
+    [Fact]
+    public void A_snap_carries_a_reaction_prompt_that_is_waiting()
+    {
+        var player = Player();
+
+        player.Receive(View(21, 10, Walks(1, 20)) with { Reacting = Hero });
+
+        Assert.Equal(Hero, player.Shown!.Reacting);
+    }
+
+    [Fact]
+    public void A_snap_to_the_offer_itself_lets_the_offer_arrive_with_its_beat()
+    {
+        var player = Player();
+        Beat[] beats = [Walk(7, 2, 3), new Beat(8, Foe, [new Moved(Hero, [new Tile(3, 3), new Tile(4, 3)]), Offer(Hero)])];
+
+        player.Receive(View(4, 10, beats) with { Reacting = Hero });
+
+        Assert.Null(player.Shown!.Reacting);
+        Run(player, 1);
+        Assert.Equal(Hero, player.Shown!.Reacting);
     }
 }
