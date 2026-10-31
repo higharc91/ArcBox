@@ -34,7 +34,7 @@ Encounters don't scale with party size, so each win rate hides a spread: parties
 | 1 | Every class and subclass at levels 1–10 loads, validates and has generated tooltip text | **Met** | `BasePackTests.Every_class_builds_a_default_character_at_levels_1_to_10` and `Every_ability_passive_and_condition_has_a_tooltip_at_levels_1_to_10` pass on the tuned pack |
 | 2 | `Tactics.Sim` runs every sample encounter with mixed parties of 4–6, and every class's damage, healing and mitigation per round sits inside its role band | **Partly met** | The sweep plays all 9,000 battles, but 8 of the 60 band values are outside ±15%. Simulated parties have no subclass, so subclass balance isn't measured |
 | 3 | A battle saved after any command and restored finishes identically | **Met** | `GoldenTests.Every_replay_matches_events` and `Replay_is_deterministic` round-trip the state after every command of all three replays |
-| 4 | An AI turn takes ≤ 250 ms at p95 in the worst sample encounter (6 heroes vs 10 enemies) | **Met** | `AiPerformanceTests.P95_under_250ms_on_6_vs_10` passes. No encounter starts with more than 10 enemies: crypt_hall and crystal_cave have exactly 10 |
+| 4 | An AI turn takes ≤ 250 ms at p95 in the worst sample encounter (6 heroes vs 10 enemies) | **Met** | `AiPerformanceTests.P95_under_250ms_in_the_largest_sample_encounters` times crypt_hall (p95 23.5 ms) and crystal_cave (24.9 ms) as shipped, 6 heroes against their 10 enemies. The stress setup (`P95_under_250ms_on_6_vs_10`) is 42.9 ms |
 | 5 | The showcase encounter's triggers fire as scripted, checked by a golden replay | **Met** | `GoldenTests.Warlord_bridge_plays_the_showcase_triggers` passes on seed 15, with all five triggers and the boss's phase |
 | 6 | `dotnet test ArcBox.slnx` stays green | **Met** | 1,859 tests passed, 0 failed; `dotnet build ArcBox.slnx` gives 0 warnings |
 
@@ -219,7 +219,7 @@ So no class gets weaker by levelling. The cost is felt per hit: a player sees a 
 ### The usage target and the timing criterion (findings 1 and 2)
 
 - **Usage target:** the summary now says *partly met*. 29 of the 55 rare abilities are situational. The 10 planner limits and the 16 outranked abilities aren't, so they count against the target.
-- **Timing:** `AiPerformanceTests` now also times crypt_hall at level 5 and crystal_cave at level 7, as shipped, with 6 heroes against their 10 enemies. TIMING_RESULT
+- **Timing:** `AiPerformanceTests` now also times crypt_hall at level 5 and crystal_cave at level 7, as shipped, with 6 heroes against their 10 enemies. Measured on the 4-core CI container with nothing else running: p95 23.5 ms in crypt_hall and 24.9 ms in crystal_cave, against the 250 ms budget (42.9 ms for the stress setup). The timing tests now run outside the parallel test pool, so other tests no longer take their CPU.
 
 ## Rarely used abilities
 
