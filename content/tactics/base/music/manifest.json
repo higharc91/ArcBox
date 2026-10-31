@@ -90,6 +90,14 @@
       "group": "music",
       "use": "Emberwick and the Ashen Ford between battles (Chapters I-II)"
     },
+    "town_emberwick_festival": {
+      "files": [
+        "town_emberwick_festival.ogg"
+      ],
+      "loop": true,
+      "group": "music",
+      "use": "Emberwick in good times: festivals, and the epilogue after the flame is rekindled"
+    },
     "town_greyhold": {
       "files": [
         "town_greyhold.ogg"

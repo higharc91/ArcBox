@@ -82,14 +82,6 @@
    "seed": 4210,
    "vocals": true
   },
-  "town_emberwick": {
-   "asset": "asset_4G2rwUYZTbHwZthqyybsS6qh",
-   "job": "job_sfmPBPz9eVmx8va4FwJYU31b",
-   "model": "model_elevenlabs-music-v2-5",
-   "seed": 4220,
-   "vocals": false,
-   "cu": 60
-  },
   "court_mirewood": {
    "asset": "asset_pdhDK1ozz8jiYT5Z4e8VQ51z",
    "job": "job_QRmc3XgXnkFXvzWB4JcozfPY",
@@ -112,6 +104,22 @@
    "model": "model_elevenlabs-music-v2-5",
    "seed": 4223,
    "vocals": true,
+   "cu": 60
+  },
+  "town_emberwick_festival": {
+   "asset": "asset_4G2rwUYZTbHwZthqyybsS6qh",
+   "job": "job_sfmPBPz9eVmx8va4FwJYU31b",
+   "model": "model_elevenlabs-music-v2-5",
+   "seed": 4220,
+   "vocals": false,
+   "cu": 60
+  },
+  "town_emberwick": {
+   "asset": "asset_3Mw7KBFyhBZuNZGDQ2pCYVzJ",
+   "job": "job_PxAbxrdzPGd6NuUP65uQmGGM",
+   "model": "model_elevenlabs-music-v2-5",
+   "seed": 4224,
+   "vocals": false,
    "cu": 60
   }
  },

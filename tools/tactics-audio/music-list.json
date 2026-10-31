@@ -82,13 +82,13 @@
   "vocals": true
  },
  "town_emberwick": {
-  "prompt": "Fantasy market-town music for a river town at a ford: a lively but gentle fiddle and tin whistle melody, bouncing acoustic guitar, hand drum and tambourine, accordion-like drone, cozy and busy like market day, with a quiet undercurrent of worry in a minor-key bridge, as if the warm ground beneath the town is slowly cooling. 100 BPM, D mixolydian, celtic folk. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "prompt": "Bittersweet music for a struggling river town in a hungry winter: a slow, wistful solo fiddle melody in a minor key, warm cello and viola underneath, soft fingerpicked guitar, a distant church bell, sparse and quiet, the warmth of home fading as the fire beneath the town goes cold, tender but clearly worried and melancholy throughout, not cheerful, not a festival. 76 BPM, A minor (dorian), intimate celtic folk chamber. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
   "duration": 120,
   "variants": 1,
   "group": "music",
   "loop": true,
   "use": "Emberwick and the Ashen Ford between battles (Chapters I-II)",
-  "seed": 4220,
+  "seed": 4224,
   "vocals": false
  },
  "court_mirewood": {
@@ -120,5 +120,15 @@
   "use": "Greyhold and the pilgrim road (Chapter IV)",
   "seed": 4223,
   "vocals": true
+ },
+ "town_emberwick_festival": {
+  "prompt": "Fantasy market-town music for a river town at a ford: a lively but gentle fiddle and tin whistle melody, bouncing acoustic guitar, hand drum and tambourine, accordion-like drone, cozy and busy like market day, with a quiet undercurrent of worry in a minor-key bridge, as if the warm ground beneath the town is slowly cooling. 100 BPM, D mixolydian, celtic folk. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 120,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "Emberwick in good times: festivals, and the epilogue after the flame is rekindled",
+  "seed": 4220,
+  "vocals": false
  }
 }
