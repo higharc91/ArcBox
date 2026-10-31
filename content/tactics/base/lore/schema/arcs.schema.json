@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/lore/schema/arcs.schema.json",
+  "title": "Story arcs",
+  "description": "arcs.json: the campaign's spine, one arc per chapter in beats, and its endings. This is the story outline the exploration and dialogue work (sub-project 5) builds scenes from; every story flag the lore unlocks on must be set by a beat or choice here, or by a rules encounter trigger.",
+  "$defs": {
+    "choice": {
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/id" },
+        "label": { "$ref": "common.schema.json#/$defs/text", "description": "The option as the party votes on it." },
+        "summary": { "$ref": "common.schema.json#/$defs/text", "description": "What follows, for writers." },
+        "sets": { "$ref": "common.schema.json#/$defs/flags" }
+      },
+      "required": ["id", "label", "summary", "sets"],
+      "additionalProperties": false
+    }
+  },
+  "type": "object",
+  "properties": {
+    "arcs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "$ref": "common.schema.json#/$defs/id" },
+          "replaces": { "$ref": "common.schema.json#/$defs/replaces" },
+          "chapter": { "type": "integer", "minimum": 1 },
+          "region": { "$ref": "common.schema.json#/$defs/id" },
+          "title": { "$ref": "common.schema.json#/$defs/text" },
+          "levels": { "type": "array", "items": { "type": "integer", "minimum": 1 }, "minItems": 2, "description": "[first, last] character level." },
+          "summary": { "$ref": "common.schema.json#/$defs/text" },
+          "beats": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "$ref": "common.schema.json#/$defs/id" },
+                "kind": { "enum": ["story", "choice", "battle", "discovery", "camp"] },
+                "summary": { "$ref": "common.schema.json#/$defs/text" },
+                "place": { "$ref": "common.schema.json#/$defs/id" },
+                "encounter": { "$ref": "common.schema.json#/$defs/id", "description": "A rules encounter id." },
+                "requires": { "$ref": "common.schema.json#/$defs/flags", "description": "Flags that must all be set for this beat to happen." },
+                "sets": { "$ref": "common.schema.json#/$defs/flags" },
+                "choices": { "type": "array", "items": { "$ref": "#/$defs/choice" }, "minItems": 2 }
+              },
+              "required": ["id", "kind", "summary"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": ["id", "chapter", "region", "title", "levels", "summary", "beats"],
+        "additionalProperties": false
+      }
+    },
+    "endings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "$ref": "common.schema.json#/$defs/id" },
+          "title": { "$ref": "common.schema.json#/$defs/text" },
+          "summary": { "$ref": "common.schema.json#/$defs/text" },
+          "sets": { "$ref": "common.schema.json#/$defs/flags" },
+          "sequel": { "$ref": "common.schema.json#/$defs/text", "description": "Where a second campaign starts from this ending." }
+        },
+        "required": ["id", "title", "summary", "sets", "sequel"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["arcs", "endings"],
+  "additionalProperties": false
+}

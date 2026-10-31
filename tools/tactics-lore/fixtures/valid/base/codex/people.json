@@ -1,0 +1,4 @@
+{ "entries": [
+  { "id": "codex_aldric", "title": "Aldric", "category": "people", "body": "About Aldric.", "subject": "aldric", "related": ["codex_wolves"] },
+  { "id": "codex_wolves", "title": "Wolves", "category": "bestiary", "body": "About wolves.", "subject": "wolf", "unlock": { "chapter": 2 } }
+] }
