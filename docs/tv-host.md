@@ -226,6 +226,8 @@ went solid yellow), and flames were lit like anything else. Fixing that means sp
 canvas item, at 16 as far as I recall; that's from memory, unchecked, and no map has over 10 lights. Neither approach has been measured on
 a modest TV box.
 
+The base pack now holds a region, `rules/world/ashen_ford.json`, which the TV downloads with the rest of the pack but doesn't read until milestone 5b. Re-exporting a region changes the pack's hash, so a TV fetches the whole pack again.
+
 A region's blocks can share one `BoardLighting` (`Of` takes several plans), so a pool doesn't stop at a block's edge. Reads go through a
 grid of tile-sized buckets, and `MeanAt` reads each light at its mean for baked art, whatever `Step` has done. Only `Step` is unsafe
 beside another thread's reads of "now".

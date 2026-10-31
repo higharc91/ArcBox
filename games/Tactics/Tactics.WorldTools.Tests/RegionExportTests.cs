@@ -20,7 +20,7 @@ public sealed class RegionExportTests : IDisposable
 
     public void Dispose() => Directory.Delete(_rules, recursive: true);
 
-    private static string CopyRules()
+    internal static string CopyRules()
     {
         var root = Directory.CreateTempSubdirectory("tactics-export-test-").FullName;
         foreach (var file in Directory.EnumerateFiles(ContentPaths.BaseRules, "*", SearchOption.AllDirectories))
@@ -584,12 +584,13 @@ public sealed class RegionExportTests : IDisposable
     {
         // A folder where the file should go stops the move on every platform, as a locked file does on Windows.
         Directory.CreateDirectory(RegionFile());
+        var before = Directory.GetFiles(Path.Combine(_rules, "world"));
 
         var result = Export(Field());
 
         Assert.Null(result.Written);
         Assert.Contains("then export again.", Assert.Single(result.Problems), StringComparison.Ordinal);
-        Assert.Empty(Directory.GetFiles(Path.Combine(_rules, "world")));
+        Assert.Equal(before, Directory.GetFiles(Path.Combine(_rules, "world")));
     }
 
     [Fact]
@@ -606,9 +607,11 @@ public sealed class RegionExportTests : IDisposable
     [Fact]
     public void An_export_leaves_no_temporary_file_beside_the_region()
     {
+        var before = Directory.GetFiles(Path.Combine(_rules, "world"));
+
         Assert.Empty(Export(Field()).Problems);
 
-        Assert.Equal([RegionFile()], Directory.GetFiles(Path.Combine(_rules, "world")));
+        Assert.Equal([.. before, RegionFile()], Directory.GetFiles(Path.Combine(_rules, "world")).OrderBy(f => f, StringComparer.Ordinal));
     }
 
     [Fact]
@@ -667,6 +670,41 @@ public sealed class RegionExportTests : IDisposable
     [Fact]
     public void A_problem_with_no_tile_gives_none()
         => Assert.Null(RegionExport.TileIn("The scene has no start spawn."));
+
+    [Fact]
+    public void A_region_that_breaks_the_story_is_written_with_warnings_that_say_what_to_do()
+    {
+        var field = Field("ashen_ford");
+        var result = Export(field with { Beats = [.. field.Beats, new BeatSpot("ch1_ford_assault", new Tile(3, 3))] });
+
+        Assert.Empty(result.Problems);
+        Assert.Equal(RegionFile("ashen_ford"), result.Written);
+        Assert.Empty(result.Warnings);
+        Assert.Contains(result.StoryWarnings, w => w.Contains("ch1_the_ford_choice", StringComparison.Ordinal) && w.Contains("Add a BeatMarker", StringComparison.Ordinal));
+        Assert.Contains(result.StoryWarnings, w => w.Contains("ch1_ford_assault", StringComparison.Ordinal) && w.Contains("Add a StampMarker", StringComparison.Ordinal));
+        Assert.All(result.StoryWarnings, w => Assert.True(w.Trim().Split(". ").Length >= 2, w));
+        Assert.Contains($"{result.StoryWarnings.Length} story warnings", result.Status, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void One_story_warning_reads_as_one()
+    {
+        var result = new ExportResult("f", []) { Listed = true, StoryWarnings = ["The beat 'x' has no spot in the region. Add it."] };
+        Assert.Equal("Wrote f. 1 story warning.", result.Status);
+    }
+
+    [Fact]
+    public void A_region_no_arc_names_has_no_story_to_check()
+        => Assert.Empty(Export(Field()).StoryWarnings);
+
+    [Fact]
+    public void A_refused_export_doesnt_check_the_story()
+    {
+        var result = Export(Field("ashen_ford") with { Recoveries = [] });
+
+        Assert.NotEmpty(result.Problems);
+        Assert.Empty(result.StoryWarnings);
+    }
 
     [Fact]
     public void Every_kind_of_problem_says_what_to_do()

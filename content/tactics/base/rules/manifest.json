@@ -63,6 +63,7 @@
     "encounters/ford_assault.json",
     "encounters/rime_tower.json",
     "encounters/keep_gate.json",
-    "encounters/hall_of_the_flame.json"
+    "encounters/hall_of_the_flame.json",
+    "world/ashen_ford.json"
   ]
 }

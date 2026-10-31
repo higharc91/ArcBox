@@ -19,6 +19,16 @@ public sealed class BasePackTests
     private static UnitId U(string id) => new(id);
 
     [Fact]
+    public void Base_pack_has_ashen_ford()
+    {
+        Assert.Equal(["ashen_ford"], Rules.Regions.Keys);
+        var region = Rules.RegionFor("ashen_ford")!.Def;
+        Assert.Equal(1, region.Chapter);
+        Assert.Equal([160, 120], region.Size);
+        Assert.Equal("river_crossing", Assert.Single(region.Stamps).Map);
+    }
+
+    [Fact]
     public void Base_pack_loads_with_zero_errors_including_art_keys()
     {
         RulesPack pack;

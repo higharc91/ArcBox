@@ -79,7 +79,7 @@ public partial class Commands : Node
         }
         var result = RegionScene.Export(root, Arg("rules"));
         root.Free();
-        foreach (var warning in result.Warnings)
+        foreach (var warning in result.Warnings.Concat(result.StoryWarnings))
             GD.Print($"WARNING: {warning}");
         foreach (var problem in result.Problems)
             GD.Print($"PROBLEM: {problem}");

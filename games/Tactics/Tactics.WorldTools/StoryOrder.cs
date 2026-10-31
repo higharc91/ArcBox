@@ -20,7 +20,8 @@ public sealed record StoryWalk(ImmutableArray<StoryLeg> Legs, ImmutableArray<Sto
 /// <c>lore/arcs.json</c>, beat by beat as milestone 5d offers them: the first beat not yet done whose <c>requires</c> hold. A battle
 /// beat's stamp is shut until it's won. A choice forks a branch per option, and a scene of its beat set in another place moves the party to
 /// the spot of the arc's first beat there. After each battle it also proves a beaten party can get from the recovery spawn back to the stamp.
-/// It runs on a loaded region, so a painted one gets the same check as the draft.
+/// It runs on a loaded region, so a painted one gets the same check as the draft. Each problem ends in what a painter should do, and the
+/// first tile it names is the one to go to.
 /// </summary>
 public static class StoryOrder
 {
@@ -120,19 +121,19 @@ public static class StoryOrder
         {
             if (SpotOf(beat.Id) is not { } spot)
             {
-                problems.Add($"The beat '{beat.Id}' has no spot in the region.");
+                problems.Add($"The beat '{beat.Id}' has no spot in the region. Add a BeatMarker under Beats and set its Beat.");
                 return progress;
             }
 
             var on = beat.Kind == "battle" ? StampOf(beat) : null;
             if (beat.Kind == "battle" && on is null)
-                problems.Add($"The battle beat '{beat.Id}' has no stamp in the region.");
+                problems.Add($"The battle beat '{beat.Id}' has no stamp in the region. Add a StampMarker under Stamps for its encounter's map, then press Apply stamp.");
 
             Func<Tile, bool>? shut = on is { } armed ? t => Inside(armed, t) : null;
             var seconds = walk.Seconds(progress.At, t => t == spot, shut);
             var leg = new StoryLeg(progress.Branch, beat.Id, progress.At, spot, seconds);
             if (seconds is null)
-                problems.Add($"{Named(progress)} party can't walk from {progress.At} to '{beat.Id}' at {spot}{(on is null ? "" : $" with the armed stamp '{on.Value.Stamp.Map}' shut")}.");
+                problems.Add($"{Named(progress)} party can't walk to '{beat.Id}' at {spot} from {progress.At}{(on is null ? ". Paint a way there, or move the marker." : $" with the armed stamp '{on.Value.Stamp.Map}' shut. Paint a way round the stamp, or move the marker.")}");
             progress = progress with { At = spot, Legs = progress.Legs.Add(leg) };
             if (on is not { } fight)
                 return progress;
@@ -141,7 +142,7 @@ public static class StoryOrder
             var recovery = region.Def.Spawns.Recovery;
             var back = Inside(fight, recovery) ? null : walk.Seconds(recovery, t => Inside(fight, t));
             if (back is null)
-                problems.Add($"{Named(progress)} party can't get back from the recovery spawn at {recovery} to the stamp '{fight.Stamp.Map}' after losing '{beat.Id}'.");
+                problems.Add($"{Named(progress)} party can't get back from the recovery spawn at {recovery} to the stamp '{fight.Stamp.Map}' after losing '{beat.Id}'. Paint a way to the stamp, or move the Recovery marker.");
             return progress with { At = AfterTheFight(fight), Retries = progress.Retries.Add(new StoryLeg(progress.Branch, beat.Id, recovery, fight.Stamp.At, back)) };
         }
 
@@ -164,7 +165,7 @@ public static class StoryOrder
             var first = beats.FirstOrDefault(b => b.Place == elsewhere.Place);
             if (first is not null && SpotOf(first.Id) is { } spot)
                 return chosen with { At = spot };
-            problems.Add($"{Named(chosen)} scene set in '{elsewhere.Place}' has no beat spot to move the party to.");
+            problems.Add($"{Named(chosen)} scene set in '{elsewhere.Place}' has no beat spot to move the party to. Add a BeatMarker for the arc's first beat there.");
             return chosen;
         }
     }

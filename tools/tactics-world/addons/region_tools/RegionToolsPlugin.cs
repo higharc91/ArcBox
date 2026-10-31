@@ -6,7 +6,7 @@ using Tactics.WorldTools;
 namespace Tactics.World.Editor;
 
 /// <summary>
-/// Adds a dock with the "Export region" and "Apply stamp" buttons and a list of problems and old stamp areas, each a button that goes to its tile. Under
+/// Adds a dock with the "Export region" and "Apply stamp" buttons and a list of old stamp areas, story warnings and problems, each a button that goes to its tile. Under
 /// <c>--editor</c>, the <c>--press-export=&lt;scene&gt;</c> and <c>--press-apply=&lt;scene&gt;</c> commands open the scene and press
 /// the real buttons, so they can be tested with no one there.
 /// </summary>
@@ -19,6 +19,7 @@ public partial class RegionToolsPlugin : EditorPlugin
     private Label _status = null!;
     private VBoxContainer _problems = null!;
     private VBoxContainer _pending = null!;
+    private VBoxContainer _story = null!;
 
     private static Region? EditedRegion => EditorInterface.Singleton.GetEditedSceneRoot() as Region;
 
@@ -32,9 +33,11 @@ public partial class RegionToolsPlugin : EditorPlugin
         _status = new Label { Text = "Open a region scene, then export it.", AutowrapMode = TextServer.AutowrapMode.WordSmart };
         _problems = new VBoxContainer { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
         _pending = new VBoxContainer { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
+        _story = new VBoxContainer { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
 
         var rows = new VBoxContainer { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
         rows.AddChild(_pending);
+        rows.AddChild(_story);
         rows.AddChild(_problems);
         var scroll = new ScrollContainer
         {
@@ -104,6 +107,8 @@ public partial class RegionToolsPlugin : EditorPlugin
 
             var result = RegionScene.Export(root, Commands.Arg("rules"));
             Finish(result.Status, result.Problems);
+            foreach (var warning in result.StoryWarnings)
+                _story.AddChild(ProblemButton(warning));
         }
         catch (Exception ex)
         {
@@ -236,9 +241,9 @@ public partial class RegionToolsPlugin : EditorPlugin
     private void Begin(string status)
     {
         _status.Text = status;
-        foreach (var child in _problems.GetChildren())
+        foreach (var child in _problems.GetChildren().Concat(_story.GetChildren()))
         {
-            _problems.RemoveChild(child);
+            child.GetParent().RemoveChild(child);
             child.QueueFree();
         }
         if (EditedRegion is { } root)
@@ -318,6 +323,8 @@ public partial class RegionToolsPlugin : EditorPlugin
         GD.Print($"STATUS: {_status.Text}");
         foreach (var problem in _problems.GetChildren().OfType<Button>())
             GD.Print($"PROBLEM: {problem.Text}");
+        foreach (var warning in _story.GetChildren().OfType<Button>())
+            GD.Print($"STORY: {warning.Text}");
         foreach (var row in _pending.GetChildren())
             GD.Print($"PENDING: {row.GetChild<Button>(0).Text}");
     }

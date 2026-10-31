@@ -1,6 +1,5 @@
 using System.Collections.Immutable;
 using System.Text.Json;
-using System.Text.Json.Nodes;
 using Tactics.Logic;
 using Tactics.Logic.Tests;
 
@@ -64,7 +63,7 @@ public sealed class AshenFordDraftTests
         Recoveries = [source.Recovery],
     };
 
-    /// <summary>Exports the draft into a copy of the pack, lists it there, and loads the copy, which runs every check the game does.</summary>
+    /// <summary>Exports the draft into a copy of the pack, over the region the pack lists, and loads the copy, which runs every check the game does.</summary>
     private static Proved Prove()
     {
         var pack = RulesPack.Load([ContentPaths.BaseRules]);
@@ -81,10 +80,7 @@ public sealed class AshenFordDraftTests
 
             var export = RegionExport.Export(Painted(source), rules, ContentPaths.ContentBase);
             Assert.True(export.Written is not null, string.Join("\n", export.Problems));
-            var path = Path.Combine(rules, "manifest.json");
-            var manifest = JsonNode.Parse(File.ReadAllText(path))!;
-            manifest["files"]!.AsArray().Add($"world/{Id}.json");
-            File.WriteAllText(path, manifest.ToJsonString());
+            Assert.True(export.Listed);
 
             var region = RulesPack.Load([rules]).RegionFor(Id)!;
             return new Proved(pack, source, export, region, new RegionWalk(region, pack.Maps));
@@ -395,6 +391,8 @@ public sealed class AshenFordDraftTests
         var problem = Assert.Single(StoryOrder.Check(region, draft.Pack, ContentPaths.ContentBase).Problems);
         Assert.Contains("ch1_parley", problem, StringComparison.Ordinal);
         Assert.Contains("ch1_river_crossing", problem, StringComparison.Ordinal);
+        Assert.Equal(draft.Spot("ch1_river_crossing"), RegionExport.TileIn(problem));
+        Assert.EndsWith("Paint a way round the stamp, or move the marker.", problem, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -409,6 +407,7 @@ public sealed class AshenFordDraftTests
         Assert.Equal(2, problems.Length);
         Assert.Contains(problems, p => p.Contains("ch1_ford_assault", StringComparison.Ordinal) && p.Contains("recovery", StringComparison.Ordinal));
         Assert.Contains(problems, p => p.Contains("ch1_river_crossing", StringComparison.Ordinal) && p.Contains("recovery", StringComparison.Ordinal));
+        Assert.All(problems, p => Assert.EndsWith("Paint a way to the stamp, or move the Recovery marker.", p, StringComparison.Ordinal));
     }
 
     [Fact]

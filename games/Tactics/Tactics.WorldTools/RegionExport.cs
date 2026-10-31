@@ -21,13 +21,16 @@ public sealed record ExportResult(string? Written, ImmutableArray<string> Proble
     /// <summary>What's worth fixing but doesn't stop the file being written: old stamp areas still to repaint.</summary>
     public ImmutableArray<string> Warnings { get; init; } = [];
 
+    /// <summary>Where the region's story can't be played in order. The file is still written: the pack loads it, and a painter may be part way through.</summary>
+    public ImmutableArray<string> StoryWarnings { get; init; } = [];
+
     /// <summary>One line for the painter on how it went.</summary>
     public string Status => this switch
     {
         { Written: null } when Problems.Any(p => RegionExport.TileIn(p) is not null) => $"Not exported: {Problems.Length} {(Problems.Length == 1 ? "problem. Click it" : "problems. Click one")} to go there.",
         { Written: null } => $"Not exported: {Problems.Length} {(Problems.Length == 1 ? "problem" : "problems")}.",
-        { Listed: true } => $"Wrote {Written}.{Pending}",
-        _ => $"Wrote {Written}. Add \"{Entry}\" to rules/manifest.json, or the game won't load it.{Pending}",
+        { Listed: true } => $"Wrote {Written}.{Pending}{Story}",
+        _ => $"Wrote {Written}. Add \"{Entry}\" to rules/manifest.json, or the game won't load it.{Pending}{Story}",
     };
 
     private string Pending => Warnings.Length switch
@@ -35,6 +38,13 @@ public sealed record ExportResult(string? Written, ImmutableArray<string> Proble
         0 => "",
         1 => " 1 old stamp area still needs repainting.",
         var count => $" {count} old stamp areas still need repainting.",
+    };
+
+    private string Story => StoryWarnings.Length switch
+    {
+        0 => "",
+        1 => " 1 story warning.",
+        var count => $" {count} story warnings.",
     };
 }
 
@@ -89,8 +99,9 @@ public static partial class RegionExport
     /// loader would check, which is more than <see cref="RegionWriter"/> sees: a stamped tile that was changed, a marker that can't
     /// be reached. One export finds every problem: a region that can't be written is repaired as far as the checks need, on the side,
     /// so they still run, and the file is left as it was. It doesn't touch the pack's manifest, and art and lore come from
-    /// <paramref name="contentBase"/>. An old stamp area still to repaint is a warning, and doesn't stop the file. A file that can't be
-    /// read or replaced is a problem, not an exception. The file changes in one move, so a failure can't leave half of it.
+    /// <paramref name="contentBase"/>. An old stamp area still to repaint is a warning, and doesn't stop the file; nor does a region that
+    /// loads but can't be played in story order, which <see cref="StoryOrder"/> checks here since the loader can't read lore. A file that
+    /// can't be read or replaced is a problem, not an exception. The file changes in one move, so a failure can't leave half of it.
     /// </summary>
     public static ExportResult Export(PaintedRegion painted, string rulesDirectory, string contentBase)
     {
@@ -141,7 +152,7 @@ public static partial class RegionExport
 
         var bytes = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(region, FileOptions) + "\n");
         var checks = Check(rulesDirectory, region.Id, bytes);
-        problems.AddRange(painted.Starts.Count == 0 ? checks.Where(p => !NeedsTheStart(p)) : checks);
+        problems.AddRange(painted.Starts.Count == 0 ? checks.Problems.Where(p => !NeedsTheStart(p)) : checks.Problems);
         if (problems.Count > 0)
             return new ExportResult(null, [.. problems]) { Warnings = warnings };
 
@@ -149,8 +160,18 @@ public static partial class RegionExport
         if (Replace(path, bytes) is { } failure)
             return new ExportResult(null, [failure]) { Warnings = warnings };
         var entry = $"world/{region.Id}.json";
-        return new ExportResult(path, []) { Entry = entry, Listed = Listed(rulesDirectory, entry), Warnings = warnings };
+        return new ExportResult(path, [])
+        {
+            Entry = entry,
+            Listed = Listed(rulesDirectory, entry),
+            Warnings = warnings,
+            StoryWarnings = checks.Pack is { } pack ? StoryWarnings(pack, region.Id, contentBase) : [],
+        };
     }
+
+    /// <summary>What <see cref="StoryOrder"/> finds on the region as the game will load it. A pack with no lore has no story to check.</summary>
+    private static ImmutableArray<string> StoryWarnings(RulesPack pack, string id, string contentBase)
+        => File.Exists(Path.Combine(contentBase, "lore", "arcs.json")) ? StoryOrder.Check(pack.RegionFor(id)!, pack, contentBase).Problems : [];
 
     /// <summary>What each stamped map says its tiles should be, in world tiles. A later stamp wins where two overlap, which is its own problem.</summary>
     private static Dictionary<Tile, TileInfoNamed> StampedTiles(RegionSource source, List<BattleMap> maps)
@@ -185,9 +206,10 @@ public static partial class RegionExport
 
     /// <summary>
     /// Loads a copy of the pack with this region in it, as the game will. It's a copy of the same pack, not a pack on top, because a
-    /// region already listed would then have its id twice; the copy also means an old file there is replaced, not checked.
+    /// region already listed would then have its id twice; the copy also means an old file there is replaced, not checked. Gives what's
+    /// wrong, or the loaded pack if nothing is.
     /// </summary>
-    private static List<string> Check(string rulesDirectory, string id, byte[] region)
+    private static (List<string> Problems, RulesPack? Pack) Check(string rulesDirectory, string id, byte[] region)
     {
         var copy = Directory.CreateTempSubdirectory("tactics-region-check-").FullName;
         var entry = $"world/{id}.json";
@@ -221,16 +243,15 @@ public static partial class RegionExport
                 files.Add(entry);
             File.WriteAllText(manifestPath, manifest.ToJsonString());
 
-            RulesPack.Load([copy]);
-            return [];
+            return ([], RulesPack.Load([copy]));
         }
         catch (ContentException ex)
         {
-            return [.. ex.Errors.Select(e => e.File.EndsWith(entry, StringComparison.Ordinal) ? $"{e.Message} {Advice(e.Message)}" : $"{e.File}: {e.Message} Fix that file, then export again.")];
+            return ([.. ex.Errors.Select(e => e.File.EndsWith(entry, StringComparison.Ordinal) ? $"{e.Message} {Advice(e.Message)}" : $"{e.File}: {e.Message} Fix that file, then export again.")], null);
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException)
         {
-            return [FilesFailed(ex)];
+            return ([FilesFailed(ex)], null);
         }
         finally
         {
