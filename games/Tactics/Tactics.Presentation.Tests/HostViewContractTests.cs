@@ -121,6 +121,7 @@ public sealed class HostViewContractTests
         var battle = OverTheWire(game).Battle!;
 
         Assert.Equal("Defeat the warlord, or survive 11 rounds", BattleHud.Of(battle, battle, "", null, null).Objective);
+        Assert.Equal("The Warlord's Bridge", BattleHud.Of(battle, battle, "", null, null).Title);
     }
 
     /// <summary>

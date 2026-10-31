@@ -410,6 +410,10 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     Apply(e);
                     _t += BeatTiming.Finale;
                     break;
+                case ReactionOffered:
+                    Apply(e);
+                    _cues.Add(new MomentCue(_t, BeatPlayer.ReactionMoment));
+                    break;
                 default:
                     Apply(e);
                     break;

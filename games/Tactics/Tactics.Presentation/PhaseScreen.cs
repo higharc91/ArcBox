@@ -90,7 +90,7 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
 
     private static PhaseScreen Resuming(PhaseScreen screen, TacticsHostView view) => screen with
     {
-        Meta = view.Battle is { } battle ? $"Resuming · {Words.Title(battle.Encounter)}" : "Resuming",
+        Meta = view.Battle is { } battle ? $"Resuming · {Words.Encounter(battle)}" : "Resuming",
         Empty = "Waiting for the players to come back",
     };
 
@@ -99,7 +99,7 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
     {
         if (view.Battle is not { } battle)
             return screen with { Meta = "Battle" };
-        var name = Words.Title(battle.Encounter);
+        var name = Words.Encounter(battle);
         var round = $"Round {battle.Round.ToString(CultureInfo.InvariantCulture)}";
         return screen with
         {
@@ -114,8 +114,6 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
     // A first look at what a fight does to its units is worth a screenshot.
     private static string ShotMoment(BattleView battle)
     {
-        if (battle.Reacting is not null)
-            return "-reaction";
         if (battle.Units.Any(u => u.Life == "Downed"))
             return "-downed";
         return battle.Units.Any(u => u.Life == "Up" && !u.Conditions.IsEmpty) ? "-conditions" : "";

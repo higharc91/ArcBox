@@ -125,9 +125,13 @@ so tick those on the night. To play alongside the bots, see "With your own phone
 - [x] **Round:** the round and whose turn it is follow the beat on screen, not the game ahead of it.
 - [x] **Falling out:** a unit that's Out or Dead leaves the strip; a Downed one stays, dimmed; a long order shows "+n".
 - [x] **AI badge:** a character whose player has gone shows the blue AI badge on the strip; enemies don't.
-- [x] **Objectives:** `warlord_bridge` reads "Defeat the warlord, or survive 11 rounds"; the other four read "Defeat every enemy".
+- [x] **Objectives:** `warlord_bridge` reads "Defeat the warlord, or survive 11 rounds" and `river_crossing` reads "Defeat every
+      enemy". Those two were seen on the TV.
+- [ ] **(person)** `forest_ruins`, `crypt_hall` and `crystal_cave` read "Defeat every enemy" too. Same objective in their files,
+      not yet seen on a TV.
 - [x] **AI finished:** a player sits out their turn; after 60 s the AI finishes it, with the "AI finished" badge over that unit.
-- [x] **Reaction prompt:** "<name> can react" comes up for as long as the phone shows the choice, and goes when it's answered.
+- [x] **Reaction prompt:** "<name> can react" comes up as the beat that raised it plays, and goes when it's answered or timed
+      out. Seen timing out; an answered one wasn't seen on the TV.
 - [ ] **(person)** The strip, round and objective can be read from the sofa on the real TV, names under the faces included.
 - [ ] **(person)** The "AI finished" badge stays up long enough to notice, and isn't mistaken for the strip's AI badge.
 - [ ] **(person)** A reaction prompt is noticed by the room in its 10 s, and "Choosing on their phone" tells the others to wait.

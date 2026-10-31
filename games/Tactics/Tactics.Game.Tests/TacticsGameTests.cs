@@ -311,7 +311,7 @@ public sealed class TacticsGameTests
             {
                 if (s.Screen(p) is { Screen: TacticsGame.Screens.React })
                 {
-                    s.Harness.SetConnected(p, false);
+                    s.Harness.SetConnected(p, false);   // seed 3 lands inside the pace wait, so the offer is still pending here: that's what tests IsPlayed
                     Assert.Null(s.Host.Battle?.Reacting);
                     return;
                 }

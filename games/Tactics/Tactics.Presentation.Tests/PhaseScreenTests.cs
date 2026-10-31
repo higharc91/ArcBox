@@ -172,11 +172,13 @@ public sealed class PhaseScreenTests
     }
 
     [Fact]
-    public void A_waiting_reaction_gets_a_shot_of_its_own()
+    public void A_battle_says_the_encounters_own_name_when_it_has_one()
     {
-        var battle = Fight() with { Reacting = new UnitId("hero1") };
+        var battle = Fight("warlord_bridge") with { Name = "The Warlord's Bridge" };
 
-        Assert.Equal("tactics-battle-river_crossing-reaction", PhaseScreen.Of(View("Battle", battle: battle)).Shot);
+        Assert.StartsWith("Battle · The Warlord's Bridge · ", PhaseScreen.Of(View("Battle", battle: battle)).Meta);
+        Assert.Equal("The Warlord's Bridge", PhaseScreen.Of(View("Battle", battle: battle)).Empty);
+        Assert.Equal("Resuming · The Warlord's Bridge", PhaseScreen.Of(View("Resuming", battle: battle)).Meta);
     }
 
     [Fact]

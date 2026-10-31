@@ -319,12 +319,51 @@ public sealed class BeatPlayerTests
     }
 
     [Fact]
-    public void Dropping_with_nothing_playing_drops_nothing()
+    public void Dropping_with_nothing_playing_drops_nothing_and_changes_nothing()
     {
         var player = Player();
         player.Receive(View(3, 10));
+        player.Tick(Frame);
 
         Assert.Null(player.Skip());
+
+        Assert.False(player.Tick(Frame).Busy);      // no redraw asked for
+        player.Receive(View(4, 10, Walk(1, 3, 4)));
+        Assert.NotNull(player.Tick(Frame).Started); // and no rest before the next beat
+    }
+
+    private static ReactionOffered Offer(UnitId reactor) => new(new ReactionOffer(reactor, [], "leavesReach"));
+
+    [Fact]
+    public void An_offer_reaches_the_shown_battle_with_its_beat_not_before()
+    {
+        var player = Player();
+        player.Receive(View(3, 10));
+        var live = View(4, 10, new Beat(1, Foe, [new Moved(Hero, [new Tile(3, 3), new Tile(4, 3)]), Offer(Hero)])) with { Reacting = Hero };
+
+        player.Receive(live);
+        Assert.Null(player.Shown!.Reacting);
+
+        player.Tick(Frame);
+        Assert.Null(player.Shown!.Reacting);          // the walk that caused it is still playing
+
+        Run(player, BeatTiming.Step + Frame * 2);
+        Assert.Equal(Hero, player.Shown!.Reacting);
+    }
+
+    [Fact]
+    public void A_backlog_holds_the_offer_back_until_the_beats_before_it_have_played()
+    {
+        var player = Player();
+        player.Receive(View(3, 10));
+        var offer = new Beat(3, Foe, [Offer(Hero)]);
+
+        player.Receive(View(5, 10, Walk(1, 3, 4), Walk(2, 4, 5), offer) with { Reacting = Hero });
+
+        Run(player, BeatTiming.Step + Frame * 2);
+        Assert.Null(player.Shown!.Reacting);
+        Run(player, BeatTiming.Step * 2 + BeatTiming.Rest * 3);
+        Assert.Equal(Hero, player.Shown!.Reacting);
     }
 
     [Fact]

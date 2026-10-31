@@ -200,4 +200,23 @@ public sealed class DisplayedBattleTests
 
         Assert.Same(next, after.Objectives);
     }
+
+    [Fact]
+    public void An_offer_marks_who_can_react_and_an_answer_clears_it()
+    {
+        var offer = new ReactionOffer(A, [], "leavesReach");
+
+        var offered = DisplayedBattle.Apply(View(), new ReactionOffered(offer), View());
+        Assert.Equal(A, offered.Reacting);
+
+        Assert.Null(DisplayedBattle.Apply(offered, new Reacted(A, "pass"), View()).Reacting);
+    }
+
+    [Fact]
+    public void Someone_elses_answer_leaves_the_offer_up()
+    {
+        var offered = DisplayedBattle.Apply(View(), new ReactionOffered(new ReactionOffer(A, [], "leavesReach")), View());
+
+        Assert.Equal(A, DisplayedBattle.Apply(offered, new Reacted(S, "pass"), View()).Reacting);
+    }
 }

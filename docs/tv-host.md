@@ -199,13 +199,15 @@ or `-downed` when those first show, so a real fight leaves a shot of each.
 **The HUD** (`HudLayer`, `TurnStrip`) sits in the corners the diamond leaves free, in the pack's navy glass and gold: the
 encounter, round, whose turn it is and the objective at the top left, the turn order at the top right. `BattleHud` in
 `Tactics.Presentation/Hud` words and orders all of it from `BeatPlayer.Shown`, so it can't give away a beat that hasn't played.
-The one thing read from the live view is a reaction prompt (`battle.reacting`, only for a player, with the game's banner),
-since a prompt that's waiting isn't ahead of anything. `ObjectiveWords` turns the view's `battle.objectives` into a sentence, and
+A reaction prompt needs two things: its `ReactionOffered` has played (`DisplayedBattle` folds it, and `Reacted` clears it), and the
+live `battle.reacting`, set only for a player, says it's still waiting. So it can't lead the beat that caused it, and an offer answered
+before its beat plays never shows. The words are the game's banner. `ObjectiveWords` turns the view's `battle.objectives` into a sentence, and
 `ObjectiveChanged` changes it when that event plays. `HudArt` reads the panels, frames and portraits. An absent player's
 character has the AI badge on the strip, and a beat whose events are flagged `AiFinished` puts an "AI finished" badge over its
 actor for at least `BeatTiming.AiFinished`. A panel over a unit fades; a reaction prompt, which has to be read, moves down the
-left side instead. With `--shots`, a waiting prompt adds `-reaction` to the label, and a beat the AI finished is the moment
-`ai-finished`. If a beat throws, `TacticsScene` logs it, drops it (`BeatPlayer.Skip`), still sends its `shown`, and carries on.
+left side instead. With `--shots`, a prompt reaching the screen is the moment `reaction`, and a beat the AI finished is the moment
+`ai-finished`. `BeatLoop` runs the frame. If a beat throws, it logs it, drops it (`BeatPlayer.Skip`), still sends its `shown`, and
+carries on. If drawing fails, no beat is to blame: it logs that once and the beats play on unseen, so held Results still come up.
 
 To run the TV against a real game without
 phones or a browser, `tools/tactics-playtest/bots.cjs` joins a room as N players and plays a whole session over the real

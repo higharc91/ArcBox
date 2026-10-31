@@ -121,7 +121,7 @@ public partial class TurnStrip : Control
     private void DrawName(HudSlot slot, Rect2 box)
     {
         var font = global::ArcBox.Host.Shell.ArcTheme.Bold;
-        var room = (slot.Active ? ActiveStep : Step) - 6;
+        var room = (slot.Active ? ActiveStep : Step) - 2;
         var left = box.GetCenter().X - room / 2f;
         var baseline = box.End.Y + StripeHeight + NameHeight - 6;
         DrawString(font, new Vector2(left, baseline), Fit(slot.Name, font, room), HorizontalAlignment.Center, room, NameSize, slot.Active ? HudLayer.Gold : HudLayer.Ink);

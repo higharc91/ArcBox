@@ -59,6 +59,9 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
     /// <summary>The moment, for <c>--shots</c>, that a beat the AI finished starts.</summary>
     public const string AiFinishedMoment = "ai-finished";
 
+    /// <summary>The moment, for <c>--shots</c>, that a reaction offer reaches the screen.</summary>
+    public const string ReactionMoment = "reaction";
+
     private readonly BeatQueue _queue = new();
     private readonly List<(Cue Cue, double Start)> _fading = [];
     private BattleView? _live;
@@ -334,7 +337,8 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
     /// <summary>Drops the beat that's playing, for one that can't be played: returns its number, so it can still be reported, or null if none was.</summary>
     public int? Skip()
     {
-        var seq = _script?.Seq ?? _opening;
+        if ((_script?.Seq ?? _opening) is not { } seq)
+            return null;     // nothing to drop, so nothing to put right
         (_script, _opening) = (null, null);
         _fading.Clear();
         _rest = BeatTiming.Rest;

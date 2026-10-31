@@ -49,6 +49,8 @@ public static class DisplayedBattle
         ZoneEnded zone => WithBoard(shown, b => b with { Zones = b.Zones.RemoveAll(z => z.Serial == zone.Serial) }),
         TerrainAltered altered => WithBoard(shown, b => Altered(b, altered.Tiles, live.Board ?? BoardChanges.None)),
         ObjectiveChanged changed => shown with { Objectives = changed.Objectives },
+        ReactionOffered offered => shown with { Reacting = offered.Offer.Reactor },
+        Reacted answered when answered.Reactor == shown.Reacting => shown with { Reacting = null },
         _ => shown,
     };
 

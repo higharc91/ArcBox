@@ -14,12 +14,12 @@ public sealed class BattleHudTests
 
     private static UnitId Id(string id) => new(id);
 
-    private static UnitView Unit(string id, string side = "Party", string life = "Up", string? player = null, string? sprite = "characters.class_fighter")
-        => new(Id(id), id, side, sprite, new Tile(5, 5), 10, 10, 0, life, 0, [], player);
+    private static UnitView Unit(string id, string side = "Party", string life = "Up", string? player = null, string? sprite = "characters.class_fighter", string? name = null)
+        => new(Id(id), name ?? id, side, sprite, new Tile(5, 5), 10, 10, 0, life, 0, [], player);
 
-    private static BattleView Battle(UnitId? active, int round, UnitView[] units, string[]? order = null, UnitId? reacting = null, ObjectivesDef? objectives = null)
+    private static BattleView Battle(UnitId? active, int round, UnitView[] units, string[]? order = null, UnitId? reacting = null, ObjectivesDef? objectives = null, string? name = null)
         => new("warlord_bridge", "warlord_bridge", round, [.. (order ?? units.Select(u => u.Id.Value).ToArray()).Select(Id)], active, [.. units], [], null, BoardChanges.None,
-            objectives, reacting);
+            objectives, reacting, name);
 
     private static readonly UnitView[] Four =
     [
@@ -162,25 +162,55 @@ public sealed class BattleHudTests
     }
 
     [Fact]
-    public void The_title_is_the_encounter()
+    public void The_title_is_the_encounters_own_name()
+        => Assert.Equal("The Warlord's Bridge", Hud(Battle(null, 1, Four, name: "The Warlord's Bridge")).Title);
+
+    [Fact]
+    public void A_view_with_no_name_falls_back_to_the_id()
         => Assert.Equal("Warlord Bridge", Hud(Battle(null, 1, Four)).Title);
 
     [Fact]
-    public void A_waiting_reaction_comes_straight_from_the_live_view()
+    public void A_waiting_reaction_shows_once_its_beat_has_reached_the_screen()
     {
-        var shown = Battle(Id("goblin.1"), 1, Four);
+        var shown = Battle(Id("goblin.1"), 1, Four, reacting: Id("hero2"));
         var live = Battle(Id("goblin.1"), 1, Four, reacting: Id("hero2"));
 
         Assert.Equal("Bo can react", Hud(shown, live, "Bo can react").Prompt);
     }
 
     [Fact]
-    public void A_shown_view_left_over_from_a_prompt_does_not_bring_it_back()
+    public void A_waiting_reaction_does_not_get_ahead_of_its_beat()
+    {
+        var shown = Battle(Id("goblin.1"), 1, Four);
+        var live = Battle(Id("goblin.1"), 1, Four, reacting: Id("hero2"));
+
+        Assert.Null(Hud(shown, live, "Bo can react").Prompt);
+    }
+
+    [Fact]
+    public void An_offer_answered_before_or_after_its_beat_played_is_no_prompt()
     {
         var shown = Battle(Id("goblin.1"), 1, Four, reacting: Id("hero2"));
         var live = Battle(Id("goblin.1"), 1, Four);
 
         Assert.Null(Hud(shown, live, "goblin.1 is acting").Prompt);
+    }
+
+    [Fact]
+    public void An_old_offer_on_screen_is_not_taken_for_someone_elses_new_one()
+    {
+        var shown = Battle(Id("goblin.1"), 1, Four, reacting: Id("hero1"));
+        var live = Battle(Id("goblin.1"), 1, Four, reacting: Id("hero2"));
+
+        Assert.Null(Hud(shown, live, "Bo can react").Prompt);
+    }
+
+    [Fact]
+    public void The_strip_names_a_unit_by_its_last_word()
+    {
+        UnitView[] units = [Unit("warlord", "Enemy", name: "Goblin Boss"), Unit("goblin_archer.1", "Enemy", name: "Goblin Archer"), Unit("goblin.1", "Enemy", name: "Goblin")];
+
+        Assert.Equal(["Boss", "Archer", "Goblin"], Hud(Battle(null, 1, units)).Order.Select(s => s.Name));
     }
 
     [Fact]

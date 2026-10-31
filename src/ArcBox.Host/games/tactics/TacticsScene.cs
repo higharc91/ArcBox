@@ -20,7 +20,7 @@ namespace ArcBox.Host.Games.Tactics;
 /// here comes from <c>Tactics.Presentation</c>; this class only draws it.
 /// <para>
 /// In battle, what's drawn is <see cref="BeatPlayer.Shown"/>, never the view: the view is already past the beat on screen.
-/// That goes for the HUD too (<see cref="HudLayer"/>), but for a reaction prompt that's waiting.
+/// That goes for the HUD too (<see cref="HudLayer"/>).
 /// Each beat that finishes sends <c>shown</c>. That only ever shortens the game's wait, so nothing here can hold the game up.
 /// </para>
 /// </summary>
@@ -58,9 +58,9 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private string? _lastShot;
     private FxArt? _fx;
     private BeatPlayer? _player;
+    private BeatLoop? _loop;
     private BoardTerrain? _terrain;
     private BoardChanges? _planned;
-    private PhaseScreen? _held;
     private Narrator? _narrator;
     private PanelContainer _caption = null!;
     private Label _captionText = null!;
@@ -127,46 +127,23 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
 
     public override void _Process(double delta)
     {
-        if (_player is null || !_board.Visible)
+        if (_loop is not null && _board.Visible)
         {
-            return;
-        }
-
-        try
-        {
-            Step(delta);
-        }
-        catch (Exception ex)    // whatever a beat threw: one bad beat must not stick the TV on it, with Results held behind it
-        {
-            var seq = _player.Skip();
-            GD.PushError($"Tactics board: dropped beat {seq?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "?"}: {ex.Message}");
-            if (seq is { } dropped)
-            {
-                _signal("shown", new { seq = dropped });
-            }
-        }
-        if (_held is { } held && _player.Idle)
-        {
-            _held = null;
-            Show(held);
+            _loop.Step(delta);
         }
     }
 
-    private void Step(double delta)
+    private void Finished(int seq)
     {
-        if (_player is null)
-        {
-            return;
-        }
-        var tick = _player.Tick(delta);
+        LogBeat(seq);
+        _signal("shown", new { seq });
+    }
+
+    private void Present(BeatTick tick)
+    {
         if (tick.Started is { } started)
         {
             (_playing, _playingSince) = (started, _clock.Elapsed.TotalSeconds);
-        }
-        foreach (var seq in tick.Shown)
-        {
-            LogBeat(seq);
-            _signal("shown", new { seq });
         }
         foreach (var line in tick.Lines)
         {
@@ -176,7 +153,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             Shoot(moment);
         }
-        ShowCaption(_player.Caption);
+        ShowCaption(_player?.Caption);
         if (tick.BoardChanged || tick.Busy)
         {
             Redraw();
@@ -223,16 +200,19 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         var screen = PhaseScreen.Of(v);
 
         // The battle ended with beats still to play: they finish first, and then this screen. They were the game's last, so nothing waits on them.
-        if (screen.Board is null && v.LastBattle is { } last && _player?.Shown is not null)
+        if (screen.Board is null && v.LastBattle is { } last && _player?.Shown is not null && _loop is not null)
         {
             _player.Receive(last);
             if (!_player.Idle)
             {
-                _held = screen;
+                _loop.Held = () => Show(screen);
                 return;
             }
         }
-        _held = null;
+        if (_loop is not null)
+        {
+            _loop.Held = null;
+        }
         Show(screen);
     }
 
@@ -289,6 +269,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _unitArt ??= UnitArt.Load(root);
             _fx ??= FxArt.Load(root);
             _player ??= new BeatPlayer(_fx, _unitArt);
+            _loop ??= new BeatLoop(_player, Finished, Present, message => GD.PushError($"Tactics board: {message}"));
             if (_hud is null)
             {
                 _hud = new HudLayer(root, HudArt.Load(root, _unitArt));
@@ -303,7 +284,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
                 _player.Reset();
             }
             _player.Receive(battle);
-            Redraw();
+            _loop.Guard(Redraw);     // not caught below: a redraw that fails isn't a board that can't be drawn
             return true;
         }
         catch (Exception ex) when (ex is IOException or JsonException or FormatException or ArgumentException

@@ -9,7 +9,7 @@ namespace Tactics.Presentation.Hud;
 
 /// <summary>One unit on the turn order strip.</summary>
 /// <param name="Id">The unit.</param>
-/// <param name="Name">Its name.</param>
+/// <param name="Name">Its name, short (<see cref="Words.Short"/>).</param>
 /// <param name="Sprite">Its sprite key, for <see cref="HudArt.Portrait"/>.</param>
 /// <param name="Tone">Its side.</param>
 /// <param name="Active">It's this unit's turn.</param>
@@ -20,8 +20,8 @@ public sealed record HudSlot(UnitId Id, string Name, string? Sprite, UnitTone To
 
 /// <summary>
 /// What the battle HUD says, worded and ready to draw. Everything comes from the battle as the player has seen it, so the HUD
-/// can't give away a beat that hasn't played. The one exception is <see cref="Prompt"/>: a reaction waiting on a phone
-/// comes from the live view, because a prompt that's waiting isn't ahead of anything.
+/// can't give away a beat that hasn't played. <see cref="Prompt"/> takes both: it needs the offer on screen, as the beat that
+/// raises it plays, and still waiting in the live view, so one answered before its beat played never shows.
 /// </summary>
 /// <param name="Title">The encounter.</param>
 /// <param name="Round">"Round 2".</param>
@@ -29,7 +29,7 @@ public sealed record HudSlot(UnitId Id, string Name, string? Sprite, UnitTone To
 /// <param name="Objective">What wins the battle, or null if it doesn't say.</param>
 /// <param name="Order">The next units to act, the current one first.</param>
 /// <param name="More">How many more there are than <see cref="Slots"/> shows.</param>
-/// <param name="Prompt">The game's banner while a reaction waits on a player's phone, else null.</param>
+/// <param name="Prompt">The game's banner while a reaction shown on screen waits on a player's phone, else null.</param>
 /// <param name="Lead">The unit the strip starts from, which outlasts the gap between two turns.</param>
 public sealed record BattleHud(string Title, string Round, string? Turn, string? Objective, ImmutableArray<HudSlot> Order, int More, string? Prompt, UnitId? Lead)
 {
@@ -62,7 +62,7 @@ public sealed record BattleHud(string Title, string Round, string? Turn, string?
 
     /// <summary>The HUD for this moment.</summary>
     /// <param name="shown">The battle as the player has seen it.</param>
-    /// <param name="live">The newest view, for a reaction that's waiting.</param>
+    /// <param name="live">The newest view, which says whether a reaction is still waiting.</param>
     /// <param name="banner">The game's banner in that view.</param>
     /// <param name="previous">The HUD before this one, which says where the strip was.</param>
     /// <param name="aiFinished">The unit whose turn the AI is finishing on screen, if any.</param>
@@ -77,9 +77,9 @@ public sealed record BattleHud(string Title, string Round, string? Turn, string?
             .Where(u => u.Life is "Up" or "Downed")
             .ToArray();
 
-        return new BattleHud(Words.Title(shown.Encounter), $"Round {shown.Round.ToString(CultureInfo.InvariantCulture)}", TurnOf(shown, aiFinished),
+        return new BattleHud(Words.Encounter(shown), $"Round {shown.Round.ToString(CultureInfo.InvariantCulture)}", TurnOf(shown, aiFinished),
             ObjectiveWords.Of(shown.Objectives), [.. slots.Take(Slots).Select(u => Slot(u, shown.Active))], Math.Max(0, slots.Length - Slots),
-            live.Reacting is null ? null : banner, lead);
+            live.Reacting is { } reacting && reacting == shown.Reacting ? banner : null, lead);
     }
 
     /// <summary>
@@ -114,7 +114,7 @@ public sealed record BattleHud(string Title, string Round, string? Turn, string?
     }
 
     private static HudSlot Slot(UnitView unit, UnitId? active)
-        => new(unit.Id, unit.Name, unit.Sprite, UnitPlan.ToneOf(unit.Side), unit.Id == active, IsHero(unit, out _) && unit.Player is null, unit.Life == "Downed", Stripe(unit));
+        => new(unit.Id, Words.Short(unit.Name), unit.Sprite, UnitPlan.ToneOf(unit.Side), unit.Id == active, IsHero(unit, out _) && unit.Player is null, unit.Life == "Downed", Stripe(unit));
 
     private static string Stripe(UnitView unit)
     {

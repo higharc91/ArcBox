@@ -556,4 +556,16 @@ public sealed class BeatScriptTests
 
         Assert.Contains(Script(Near, new ZoneCreated(zone)).Cues.OfType<MomentCue>(), m => m.Label == "zone");
     }
+
+    [Fact]
+    public void An_offer_is_a_moment_worth_a_shot_once_it_has_been_applied()
+    {
+        var offer = new ReactionOffered(new ReactionOffer(new UnitId("hero1"), [], "leavesReach"));
+
+        var cues = BeatScript.Of(new Beat(1, null, [offer]), new BattleView("e", "m", 1, [], null, [], [], null), new BattleView("e", "m", 1, [], null, [], [], null), FxArt.Load(Tactics.Presentation.Tests.Board.Pack.Root)).Cues;
+
+        var applied = cues.Select((c, i) => (c, i)).Single(x => x.c is ApplyCue { Event: ReactionOffered }).i;
+        var moment = cues.Select((c, i) => (c, i)).Single(x => x.c is MomentCue { Label: BeatPlayer.ReactionMoment }).i;
+        Assert.True(applied < moment);
+    }
 }
