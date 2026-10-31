@@ -465,6 +465,11 @@
       "preset": "Aoede",
       "text": "Songs don't burn. That's why I keep them."
     },
+    "Aoede.4237c0cf": {
+      "asset": "asset_syJ1fQaNDp7WfqZk5fCLMLnW",
+      "preset": "Aoede",
+      "text": "You'll want to tell this one well, when you're old. I'd start practising."
+    },
     "Aoede.51c3473b": {
       "asset": "asset_JiMLSdjBBZ7khXUjtZcxMDYi",
       "preset": "Aoede",
@@ -534,6 +539,46 @@
       "asset": "asset_pnWRogXDQMprDHWmLb9xgVSc",
       "preset": "Aoede",
       "text": "There's a last verse to the Song of the Seven. Nobody's sung it in two hundred years. I'll find it."
+    },
+    "Aoede.f4330e9c": {
+      "asset": "asset_SmX2Dq5RPHBCUYuWFKoAj6V3",
+      "preset": "Aoede",
+      "text": "Hum along if you know it. Nobody ever knows it."
+    },
+    "Autonoe.45164d72": {
+      "asset": "asset_qoVniYD5MayLu2up8hZUnFsc",
+      "preset": "Autonoe",
+      "text": "Do come up to the house. The lamps are lovely this time of year. Every time of year, really."
+    },
+    "Autonoe.5e77bc09": {
+      "asset": "asset_hwZ1CmptJK186C1Kbvqcqzw4",
+      "preset": "Autonoe",
+      "text": "Of course you may. Everything has a price. Shall we discuss yours?"
+    },
+    "Autonoe.6133e62e": {
+      "asset": "asset_Kdi87nGXSnKoxwGHwR76mxnk",
+      "preset": "Autonoe",
+      "text": "The old days? Don't ask me, darling. I find them dreadfully dull."
+    },
+    "Autonoe.a1b4cfe3": {
+      "asset": "asset_9RjyQqe95uz6Yhnk5HShYJVJ",
+      "preset": "Autonoe",
+      "text": "Emberwick is so charming in the cold. Everyone becomes so reasonable."
+    },
+    "Autonoe.afb2eb81": {
+      "asset": "asset_d5jubDAoszeboLJjSXDiRW22",
+      "preset": "Autonoe",
+      "text": "Grain, coin and patience. I have a great deal of all three. Most people have none."
+    },
+    "Autonoe.c9ab870b": {
+      "asset": "asset_LC5j32TnJsRxGao42n5h77av",
+      "preset": "Autonoe",
+      "text": "My family has been generous to this town for a century. The town does keep forgetting."
+    },
+    "Autonoe.db032e95": {
+      "asset": "asset_oag142ZzseX5TLcMBV9k4HvA",
+      "preset": "Autonoe",
+      "text": "The mayor owes me rather a lot. He's sweet about it. Debtors usually are."
     },
     "Callirrhoe.07ad6e45": {
       "asset": "asset_WsvZEjFmNtxSpun1DdPDWdw5",
@@ -675,10 +720,20 @@
       "preset": "Charon",
       "text": "Emberwick has seen hard winters before. We'll see this one through, too."
     },
+    "Despina.0ea4ecdf": {
+      "asset": "asset_AcTDWA5gC9aBQtLZpZpUdERX",
+      "preset": "Despina",
+      "text": "Tell me something you would hate to forget. Only tell me. I won't take it. Not yet."
+    },
     "Despina.191cb376": {
       "asset": "asset_gaR1xFYbHBhALqLpQbayiA6P",
       "preset": "Despina",
       "text": "Ow. Noted."
+    },
+    "Despina.194de6ab": {
+      "asset": "asset_E1LUQPoiMuXm1QpXuMK2v5BL",
+      "preset": "Despina",
+      "text": "Welcome, little flame. Mind where you step. Some of the moss is listening."
     },
     "Despina.2109f726": {
       "asset": "asset_vyzn5eoUJT5XViRQBkUdFo1f",
@@ -710,6 +765,11 @@
       "preset": "Despina",
       "text": "I owe you a drink."
     },
+    "Despina.68a2b90c": {
+      "asset": "asset_LyXMp1TE1bWyCBi5ndnzfjT3",
+      "preset": "Despina",
+      "text": "You keep your memories in such fragile cups. How do you bear it?"
+    },
     "Despina.6e2ee3f3": {
       "asset": "asset_G4azEqDPqj5wX5bufWNAEcoR",
       "preset": "Despina",
@@ -725,6 +785,11 @@
       "preset": "Despina",
       "text": "One day I'll sleep in a real bed. With a pillow. Two pillows."
     },
+    "Despina.7fd30dd0": {
+      "asset": "asset_5JTjnu3By48FBzZVj48XBjgQ",
+      "preset": "Despina",
+      "text": "The Court is patient. The Court has nothing but patience."
+    },
     "Despina.85ba4b60": {
       "asset": "asset_6avZ51pvgQZLHTmrq9Gk3zYF",
       "preset": "Despina",
@@ -734,6 +799,11 @@
       "asset": "asset_x7nq4Y5cVKVvouByCPZ68Dpm",
       "preset": "Despina",
       "text": "Does anyone else remember what we had for breakfast? No? Just me, then. Hopefully."
+    },
+    "Despina.996b4dba": {
+      "asset": "asset_dd4LcLmYjHjgR2NE2dWvw2BQ",
+      "preset": "Despina",
+      "text": "Names are such sweet things. Yours tastes of smoke, and of something older."
     },
     "Despina.99c22034": {
       "asset": "asset_TD5vpo84Vw8z9kXsXfqr3yjT",
@@ -749,6 +819,11 @@
       "asset": "asset_Dfx52uFeJoJSvdQdNjcZ3QR3",
       "preset": "Despina",
       "text": "And nobody even lost a memory. Probably."
+    },
+    "Despina.ae1b9bc7": {
+      "asset": "asset_CGdu1sZoruSLo2LBjMnPHaFX",
+      "preset": "Despina",
+      "text": "Forgetting is a door, not a wall. You simply never look back through it."
     },
     "Despina.da6dc41d": {
       "asset": "asset_MerBKreykeX8vXYJbKbNvA28",
@@ -975,6 +1050,91 @@
       "preset": "Gacrux",
       "text": "Get them out. I'll hold."
     },
+    "Iapetus.03902685": {
+      "asset": "asset_mBfmrgkUmVW4bcwCyyj5PWJv",
+      "preset": "Iapetus",
+      "text": "Ha! Feel that? That's three winters of hunger!"
+    },
+    "Iapetus.03911840": {
+      "asset": "asset_mpNHNo7pkYqa3WJe514jNReH",
+      "preset": "Iapetus",
+      "text": "Go home and tell them! The bridge is Vorga's!"
+    },
+    "Iapetus.1eacfa68": {
+      "asset": "asset_Y44j4N8tbWH4BWVbRVYZh71s",
+      "preset": "Iapetus",
+      "text": "Ha. Ha. Fine. You win the bridge. You don't win the winter."
+    },
+    "Iapetus.242ece5f": {
+      "asset": "asset_3K9z92k6EeNcUgzYyPy6D9aM",
+      "preset": "Iapetus",
+      "text": "Get up! Nobody lies down on my bridge!"
+    },
+    "Iapetus.2f4d8457": {
+      "asset": "asset_yVhMqMk6qhUUR237cti16SHc",
+      "preset": "Iapetus",
+      "text": "Run back to your mayor. Tell him to open his granaries, or we come for them."
+    },
+    "Iapetus.397060be": {
+      "asset": "asset_gCpgEieCALyRKfhLPdTSbfPf",
+      "preset": "Iapetus",
+      "text": "Not like this. Not to them."
+    },
+    "Iapetus.3fb795e3": {
+      "asset": "asset_RdGW6WXom9hi5gCtk1cjRBhr",
+      "preset": "Iapetus",
+      "text": "That's for the little ones! Every single one!"
+    },
+    "Iapetus.4d1b81e7": {
+      "asset": "asset_FTVKGkWjbpV9qCf5QQ6aKrxY",
+      "preset": "Iapetus",
+      "text": "Down you go! Down where we've been all along!"
+    },
+    "Iapetus.4ed060ed": {
+      "asset": "asset_WpcgtZoxMnxQFQubhQ2pvYpi",
+      "preset": "Iapetus",
+      "text": "Again! Do it again, I dare you to stand up!"
+    },
+    "Iapetus.5c643fce": {
+      "asset": "asset_UK4B9HPnNMHVQD9crjB1AJ94",
+      "preset": "Iapetus",
+      "text": "You think blood scares me? I was born hungry!"
+    },
+    "Iapetus.5de06e90": {
+      "asset": "asset_vDqkfnBxeSnsVQEHuKjMpiw7",
+      "preset": "Iapetus",
+      "text": "Host! Up, up! The valley's come visiting!"
+    },
+    "Iapetus.8b1feef5": {
+      "asset": "asset_UPusTcA6cjug5C18voCydfQ9",
+      "preset": "Iapetus",
+      "text": "Lucky! Stay lucky, valley folk. It won't last!"
+    },
+    "Iapetus.986ece2f": {
+      "asset": "asset_ZMkaXLignrCVUzPWUXaXKcpV",
+      "preset": "Iapetus",
+      "text": "Look at them! Fat valley folk, all this way just to bleed!"
+    },
+    "Iapetus.c998e359": {
+      "asset": "asset_xXHHAZ2DUVJN1SvwKjZfrLtE",
+      "preset": "Iapetus",
+      "text": "See? Taking works. Asking never fed anybody."
+    },
+    "Iapetus.ec52b01f": {
+      "asset": "asset_q9YL4CoSwxdiG8j1SjW4s7go",
+      "preset": "Iapetus",
+      "text": "You want my bridge? Come and take it! Come on, I'll wait!"
+    },
+    "Iapetus.f163a172": {
+      "asset": "asset_NbWpnetmHXCpyMycppY2AhuY",
+      "preset": "Iapetus",
+      "text": "Every child who starved in the hills is watching you. Make it a good show!"
+    },
+    "Iapetus.fcb8bf7b": {
+      "asset": "asset_gp9HnS6p2mk1Na8NqMzxmNyb",
+      "preset": "Iapetus",
+      "text": "Ha! Ha ha! Is that all? My grandmother hits harder!"
+    },
     "Kore.07eee67a": {
       "asset": "asset_RRw6nTcaWLicSfg5BLbf6QjK",
       "preset": "Kore",
@@ -1059,6 +1219,66 @@
       "asset": "asset_75iARHZG5aGCR9BZfLF29RJK",
       "preset": "Kore",
       "text": "Hold together. We do this properly."
+    },
+    "Laomedeia.1646935a": {
+      "asset": "asset_FzZRCNA6t556MaJPjktuD344",
+      "preset": "Laomedeia",
+      "text": "Whatever you think of me, feed the little ones. Feed them."
+    },
+    "Laomedeia.28789e3a": {
+      "asset": "asset_8gNjFDt6d2cFzxRtom8Ncmdn",
+      "preset": "Laomedeia",
+      "text": "Forty winters I have bled for this clan. Your turn."
+    },
+    "Laomedeia.34d15c4e": {
+      "asset": "asset_XXnP16kY4tzMuZZkzM2qDpoM",
+      "preset": "Laomedeia",
+      "text": "Go down to the river. Tell it Skarrow sent you."
+    },
+    "Laomedeia.45705850": {
+      "asset": "asset_fDZJna7b9pPbf1QwikFJRjC1",
+      "preset": "Laomedeia",
+      "text": "Old, yes. Soft, no."
+    },
+    "Laomedeia.47bc4643": {
+      "asset": "asset_WXuVufznLf2GSn4xvvKVsKNC",
+      "preset": "Laomedeia",
+      "text": "Not yet. The little ones have not eaten."
+    },
+    "Laomedeia.4b78081b": {
+      "asset": "asset_xa8JuPzFRpc66pKxShYa16mZ",
+      "preset": "Laomedeia",
+      "text": "Come, then. My grandchildren are watching, and they are hungry."
+    },
+    "Laomedeia.539be9fc": {
+      "asset": "asset_ximJPQqUgEE5KjtqXAEaWLRb",
+      "preset": "Laomedeia",
+      "text": "You lock your grain and call us thieves. Now you come to finish it."
+    },
+    "Laomedeia.875961c4": {
+      "asset": "asset_ixMMErnU1JSVnV3QGhxooAdT",
+      "preset": "Laomedeia",
+      "text": "Hah. The hill is crooked. Like your mayor."
+    },
+    "Laomedeia.89ea0bf0": {
+      "asset": "asset_Wkg3fVQ8RcvHtChrK9N7iyow",
+      "preset": "Laomedeia",
+      "text": "Up, little one. Up. Ah. No."
+    },
+    "Laomedeia.9688cc6d": {
+      "asset": "asset_pjLbMkopgMCH5XAESynGfY9P",
+      "preset": "Laomedeia",
+      "text": "So. The valley sends swords instead of grain. I expected it."
+    },
+    "Laomedeia.bec70ec0": {
+      "asset": "asset_buppRvq6dMGgRfkswWB6d6Tv",
+      "preset": "Laomedeia",
+      "text": "I have buried better than you. I will not be buried by you."
+    },
+    "Laomedeia.d274de5b": {
+      "asset": "asset_FR8QHcjH2qhmBuWRtqNCRC9u",
+      "preset": "Laomedeia",
+      "text": "Go home. Tell them the bridge stays ours until the grain comes."
     },
     "Leda.2622a84e": {
       "asset": "asset_rNxxrh722FkQagiVXpvrcH8a",
@@ -1309,6 +1529,66 @@
       "asset": "asset_j9D7cJfPordpZYFbJEDMimDL",
       "preset": "Sadaltager",
       "text": "I'll be writing this up."
+    },
+    "Umbriel.00d2ed56": {
+      "asset": "asset_UdzCbtXLwLHH3QNs4JNHXzQ6",
+      "preset": "Umbriel",
+      "text": "Pleasure doing business."
+    },
+    "Umbriel.1e0fe471": {
+      "asset": "asset_zXMQ319oc76vsMS6BkHkxYF2",
+      "preset": "Umbriel",
+      "text": "Mind the docks after dark. Not everyone down here is as friendly as me."
+    },
+    "Umbriel.44e9d184": {
+      "asset": "asset_rYmmeFc8B3v1o7RgV2nCcasf",
+      "preset": "Umbriel",
+      "text": "Fine. Put it on my tab."
+    },
+    "Umbriel.6c66359e": {
+      "asset": "asset_HEAqjyD5iPxU3srtdDctPYRZ",
+      "preset": "Umbriel",
+      "text": "You didn't see me. That one's free."
+    },
+    "Umbriel.75fa04b6": {
+      "asset": "asset_gVnNxGRFfNsUFX2ZQKBMfEC4",
+      "preset": "Umbriel",
+      "text": "That one's on the house."
+    },
+    "Umbriel.7705fd5a": {
+      "asset": "asset_A2PFquCjTYPbN1sdUmQ9grFr",
+      "preset": "Umbriel",
+      "text": "Everybody wants the same thing in the end. I just get there first."
+    },
+    "Umbriel.805db8d9": {
+      "asset": "asset_t6LTeTg6hht4kZeyK1SpggvB",
+      "preset": "Umbriel",
+      "text": "Last offer. Walk away and I forget your faces."
+    },
+    "Umbriel.81685659": {
+      "asset": "asset_jwPhUpUSfJqADpvXEATqxi8q",
+      "preset": "Umbriel",
+      "text": "Shards, word, a boat at midnight. All for sale. Which do you need?"
+    },
+    "Umbriel.b53f5a4f": {
+      "asset": "asset_qhSNMrDGh52DddjkSWtNKD88",
+      "preset": "Umbriel",
+      "text": "Funny thing. I'm selling more shards than the Vale ought to have. Don't spread that about."
+    },
+    "Umbriel.caf09b79": {
+      "asset": "asset_wfZjQD9XbS25UDKeHhKNWqAe",
+      "preset": "Umbriel",
+      "text": "All right. All right. Let's talk terms."
+    },
+    "Umbriel.caf2184d": {
+      "asset": "asset_QjPLnUzuRvEnrbyBPdAS6uuL",
+      "preset": "Umbriel",
+      "text": "Prices went up. Everything's colder, and cold costs."
+    },
+    "Umbriel.df3f4281": {
+      "asset": "asset_TeCrNo2u8pmyfWcgy6iyBzrg",
+      "preset": "Umbriel",
+      "text": "Nothing personal. Somebody paid more."
     },
     "Vindemiatrix.0643e496": {
       "asset": "asset_Dok3tageJraXpX3VD9yRAr7J",
