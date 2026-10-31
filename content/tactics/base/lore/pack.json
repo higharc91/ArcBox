@@ -2,5 +2,13 @@
   "id": "base",
   "loreVersion": 1,
   "requires": [],
-  "files": []
+  "files": [
+    "world.json",
+    "timeline.json",
+    "factions.json",
+    "regions.json",
+    "characters.json",
+    "codex/vale.json",
+    "codex/bestiary.json"
+  ]
 }

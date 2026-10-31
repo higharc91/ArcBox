@@ -1,0 +1,90 @@
+{
+  "factions": [
+    {
+      "id": "emberwick",
+      "name": "Emberwick",
+      "summary": "The town at the Ashen Ford and the party's home. Built on ground still warm from the ember in the river; frightened, stubborn, and about to have a very hard winter.",
+      "goals": ["Survive the winter.", "Keep the road east open.", "Keep the warm ground warm."],
+      "methods": "A town council led by the mayor, a small guard, and a lot of arguing in the inn. Will pay adventurers in grain, coin and favours.",
+      "leader": "halden_varrow",
+      "stance": { "church_of_the_hearth": "friendly", "skarrow_clan": "hostile", "the_ash_market": "neutral", "the_kindled": "neutral" },
+      "secret": "The council has known for years that the ember under the ford is fading, and has said nothing so that people would not leave."
+    },
+    {
+      "id": "church_of_the_hearth",
+      "name": "The Church of the Hearth",
+      "summary": "The Vale's church, which teaches that the Hearthflame was a gift of the gods to a deserving people and that its loss is a judgement.",
+      "goals": ["Keep the faithful through the cold.", "Recover the embers for the church.", "Keep the oldest scriptures closed."],
+      "methods": "Charity, sermons and the moral authority of three centuries. Its priests are mostly good people who have never read the oldest texts.",
+      "stance": { "emberwick": "friendly", "the_kindled": "hostile", "the_last_watch": "rival" },
+      "secret": "The church's founding scriptures describe the Crossing honestly: the fire was taken, not given. The high clergy have known for two centuries."
+    },
+    {
+      "id": "the_kindled",
+      "name": "The Kindled",
+      "summary": "A cult gathering the embers to relight the Hearthflame by feeding it lives. Its followers are mostly the hungry and the desperate, and many are genuinely kind.",
+      "goals": ["Gather all five embers in Ember Keep.", "Relight the Hearthflame, whatever it costs.", "Save the Vale."],
+      "methods": "Preaching in the hungry towns, buying shards through the Ash Market, and in the end sacrifice. Each life fed to the flame relights it brighter and redder.",
+      "leader": "maren_sorrel",
+      "stance": { "church_of_the_hearth": "hostile", "the_ash_market": "friendly", "the_last_watch": "war", "emberwick": "neutral" },
+      "secret": "Maren Sorrel is ember-touched and remembers the Hearth Age as if she lived it, because she carries hundreds of other people's burned memories. She believes she owes it to them."
+    },
+    {
+      "id": "the_last_watch",
+      "name": "The Last Watch",
+      "summary": "All that is left of the Wardens: the undead Warden-Keeper and his oath-bound champion, holding a ruined keep against everyone for a hundred years.",
+      "goals": ["Keep the embers out of anyone's hands.", "Finish what Oswin started on the night of the Fall."],
+      "methods": "The dead of the Keep, old Warden wards, and Ser Halvard's sword. Oswin speaks to no one; Halvard speaks for him.",
+      "leader": "oswin_hale",
+      "stance": { "the_kindled": "war", "church_of_the_hearth": "rival" },
+      "secret": "Oswin wants the embers put out for good. He will help the party if they want the same, and destroy them if they do not."
+    },
+    {
+      "id": "skarrow_clan",
+      "name": "The Skarrow Clan",
+      "summary": "A goblin clan from the hills above the ford, driven down by the cold and the hunger. They hold the bridge because Emberwick locked its granaries.",
+      "goals": ["Feed the clan through the winter.", "Take back the hunting grounds the Vale's farms swallowed in the Hearth Age."],
+      "methods": "Raids, tolls on the bridge, and hard bargaining. Mother Skarrow will talk; her warriors would rather not.",
+      "leader": "mother_skarrow",
+      "stance": { "emberwick": "hostile", "vorgas_host": "rival" },
+      "secret": "The clan's oldest songs remember the Vale before the Hearthflame, and the seven who crossed the Greywall. The goblins never forgot, because they never used the fire."
+    },
+    {
+      "id": "vorgas_host",
+      "name": "Vorga's Host",
+      "summary": "A war band of goblins and hobgoblins who broke from the clans and took the Sunscar canyon bridge. They believe the Vale's towns will never share, so they mean to take.",
+      "goals": ["Hold the canyon road.", "Raid the river towns before winter.", "Prove the clans' old ways are dead."],
+      "methods": "Force, fortified bridges and ambushes from the canyon ridges.",
+      "leader": "vorga",
+      "stance": { "skarrow_clan": "rival", "the_kindled": "neutral", "emberwick": "war" }
+    },
+    {
+      "id": "the_ash_market",
+      "name": "The Ash Market",
+      "summary": "The black market in ember shards, run from Emberwick's river docks. Everyone uses it; nobody admits to it.",
+      "goals": ["Buy shards cheap and sell them dear.", "Stay useful to whoever wins."],
+      "methods": "Smuggling, bribery, and a very good memory for who owes what.",
+      "leader": "rook",
+      "stance": { "the_kindled": "friendly", "emberwick": "neutral", "church_of_the_hearth": "neutral" },
+      "secret": "The Ash Market is selling the Kindled more shards than exist in the Vale. Someone is supplying them from beyond the Greywall."
+    },
+    {
+      "id": "glimmer_court",
+      "name": "The Glimmer Court",
+      "summary": "The fey of Mirewood, who grew bright and strange around the ember that sank into the marsh. They think the ember is theirs now, and in a sense they are right.",
+      "goals": ["Keep the Mirewood ember.", "Collect debts, favours and names.", "Learn what mortals are willing to forget."],
+      "methods": "Bargains, riddles and glamours. A promise made in Mirewood is kept, one way or another.",
+      "leader": "ysolde",
+      "stance": { "the_kindled": "hostile", "church_of_the_hearth": "neutral" },
+      "secret": "The Court is made partly of burned memories. Take the ember and some of the fey will simply stop."
+    },
+    {
+      "id": "scarwalkers",
+      "name": "The Scarwalkers",
+      "summary": "Nomads of the Sunscar, descended from the farmers whose fields the ember burned. They worship the crater where it fell and guard it from outsiders.",
+      "goals": ["Guard the Sunscar ember.", "Never be driven out again."],
+      "methods": "Desert-craft, hospitality laws that bind both guest and host, and a long memory for those who broke them.",
+      "stance": { "vorgas_host": "hostile", "the_kindled": "hostile", "emberwick": "neutral" }
+    }
+  ]
+}

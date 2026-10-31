@@ -1,0 +1,89 @@
+{
+  "regions": [
+    {
+      "id": "ashen_ford",
+      "name": "The Ashen Ford",
+      "chapter": 1,
+      "card": "chapters.ashen_ford",
+      "summary": "The river still steams where the ember fell. Emberwick grew up on the warm ground, and this winter the warm ground may not be enough.",
+      "history": "On the night of the Fall an ember plunged into the river at the only ford on the road east. The water boiled for a year and the ground for a mile around burned grey. When the fires died the soil stayed warm, and settlers built Emberwick on it. For a century the town has grown its winter food in warm fields the rest of the Vale envies. The ember under the ford is fading now, the fields are cooling, and the Skarrow goblins have taken the bridge.",
+      "mood": "Golden-hour autumn turning cold. Woodsmoke, wet ash, a town that is pretending to be fine. Music: warm folk instruments with something uneasy underneath.",
+      "factions": ["emberwick", "church_of_the_hearth", "skarrow_clan", "the_ash_market"],
+      "encounters": ["river_crossing"],
+      "places": [
+        { "id": "emberwick_town", "name": "Emberwick", "kind": "town", "summary": "The party's home: a market square with a chapel, an inn and a general store, on ground that is warm underfoot." },
+        { "id": "the_last_coal", "name": "The Last Coal", "kind": "town", "summary": "Emberwick's inn, where the council argues and adventurers are hired. The hearth is the warmest in town and Bree Tallow intends to keep it that way." },
+        { "id": "ford_bridge", "name": "The Ford Bridge", "kind": "ruins", "summary": "The old Warden bridge across the steaming river. The Skarrow clan holds it and charges a toll nobody can pay." },
+        { "id": "river_docks", "name": "The River Docks", "kind": "port", "summary": "Fishing boats by day, the Ash Market by night." },
+        { "id": "skarrow_hills", "name": "The Skarrow Hills", "kind": "camp", "summary": "The goblin clan's winter camp in the hills above the ford. Smaller and hungrier than anyone in town imagines." },
+        { "id": "maud_hut", "name": "Old Maud's Hut", "kind": "shrine", "summary": "A hermit's hut on the burned bank, hung with charms. Maud saw the ember fall and has been waiting a hundred years for someone to ask her about it.", "unlock": { "flag": "ch1_met_maud" } }
+      ]
+    },
+    {
+      "id": "mirewood",
+      "name": "Mirewood",
+      "chapter": 2,
+      "card": "chapters.mirewood",
+      "summary": "An ember sank into the marsh, and the marsh began to dream. The fey of the Glimmer Court would like a word with you.",
+      "history": "Mirewood was an ordinary marsh forest until an ember sank into its black water. Over a century the wild magic of the ember woke the fey there, and what grew was the Glimmer Court: bright, beautiful, and made partly of the memories the ember had burned. The Court considers the ember its heart. The Kindled want it, and so, by the end of this chapter, will the party.",
+      "mood": "Lantern-lit and dreamlike, beautiful and wrong. Lights in the water, voices in the reeds. Music: harps and glass, slightly out of tune.",
+      "factions": ["glimmer_court", "the_kindled"],
+      "encounters": ["forest_ruins"],
+      "places": [
+        { "id": "warden_waystation", "name": "The Drowned Waystation", "kind": "ruins", "summary": "A Warden waystation half sunk in the marsh, where a cell of the Kindled has made camp." },
+        { "id": "glimmer_court_hall", "name": "The Glimmer Court", "kind": "forest", "summary": "A hall of living willow over the drowned ember, where the fey hold court and keep their bargains." },
+        { "id": "the_heartpool", "name": "The Heartpool", "kind": "lair", "summary": "The black pool where the Mirewood ember lies. Its light shows things you have forgotten.", "unlock": { "flag": "ch2_court_audience" } }
+      ]
+    },
+    {
+      "id": "sunscar",
+      "name": "The Sunscar",
+      "chapter": 3,
+      "card": "chapters.sunscar",
+      "summary": "Once the richest farmland in the Vale, burned to desert in a season. The Scarwalkers guard the crater, and Vorga's Host holds the canyon road.",
+      "history": "The third ember struck the dry uplands and burned the Vale's best farms to glass and sand. The families who farmed them stayed, became the Scarwalkers, and made the crater holy. Under the sand lie Warden crypts and the roads the Keep used to bring grain in; across the canyon that splits the Sunscar runs the only bridge, which Vorga's war band has fortified. This is where the party learns that the Wardens hid the ember's cost.",
+      "mood": "Hard white light and heat shimmer, glass in the sand, long shadows at noon. Music: drums, low strings and wind.",
+      "factions": ["scarwalkers", "vorgas_host", "the_kindled"],
+      "encounters": ["warlord_bridge", "crypt_hall"],
+      "places": [
+        { "id": "scarwalker_camp", "name": "The Tent of Cool Water", "kind": "camp", "summary": "The Scarwalkers' gathering camp. Guest-right here is sacred, and so is breaking it." },
+        { "id": "canyon_bridge", "name": "Vorga's Bridge", "kind": "castle", "summary": "A rope-and-timber bridge over the canyon river, fortified by Vorga's Host. The only way to the crater." },
+        { "id": "buried_crypt", "name": "The Buried Crypt", "kind": "dungeon", "summary": "A Warden crypt under the sand, sealed since before the Fall. Its records were never burned." },
+        { "id": "the_crater", "name": "The Sunscar Crater", "kind": "shrine", "summary": "Where the third ember fell: a bowl of black glass, too hot to walk at noon.", "unlock": { "flag": "ch3_bridge_taken" } }
+      ]
+    },
+    {
+      "id": "frostpeak",
+      "name": "Frostpeak Pass",
+      "chapter": 4,
+      "card": "chapters.frostpeak",
+      "summary": "This ember went out. The mountain froze around it, and the dead of the pass do not stay down.",
+      "history": "The fourth ember fell high in Frostpeak Pass among the goliath holds and the dwarven roads, and thirty years later it went cold. The cold ember froze the pass solid and began to raise the dead: Warden pilgrims, dwarven road-builders and goliaths of the lost holds, walking without their memories. A necromancer named Ivo Rime has come to study it. In the frozen caves the party meets someone who remembers the night of the Fall.",
+      "mood": "Pale dawn on snow, total silence, breath in the air. Grief more than horror. Music: solo voice, bowed metal, long reverbs.",
+      "factions": ["the_last_watch", "the_kindled"],
+      "encounters": ["crystal_cave"],
+      "places": [
+        { "id": "pilgrim_road", "name": "The Pilgrim Road", "kind": "mountain", "summary": "The old Warden road up through the pass, lined with frozen shrines." },
+        { "id": "greyhold", "name": "Greyhold", "kind": "ruins", "summary": "A dwarven road-hold, frozen and empty, where the dwarves' records of the Hearth Age are kept." },
+        { "id": "cold_ember_caves", "name": "The Crystal Caves", "kind": "dungeon", "summary": "Caves of ice and crystal around the cold ember, where Ivo Rime works." },
+        { "id": "rime_tower", "name": "Rime's Tower", "kind": "tower", "summary": "The necromancer's borrowed watchtower above the pass.", "unlock": { "flag": "ch4_rime_found" } }
+      ]
+    },
+    {
+      "id": "ember_keep",
+      "name": "The Ember Keep",
+      "chapter": 5,
+      "card": "chapters.ember_keep",
+      "summary": "The heart of the Hearthflame never left. Something has been feeding it, and it burns red.",
+      "history": "Ember Keep was the Wardens' fortress and the hall of the Hearthflame for three hundred years. Since the Fall it has been held by the Last Watch, Oswin Hale and Ser Halvard, against all comers. The heart of the flame still burns in the great hall, and the red dragon that came for its heat sleeps coiled around it. The Kindled have been feeding the heart in secret, and it has turned infernal. Here the party learns the whole truth and makes the final choice.",
+      "mood": "Infernal red light in a ruined fortress, ash falling like snow, the heat of a sleeping dragon. Music: full and grave, the folk theme of the Ashen Ford returning in a minor key.",
+      "factions": ["the_last_watch", "the_kindled"],
+      "encounters": [],
+      "places": [
+        { "id": "keep_gate", "name": "The Broken Gate", "kind": "castle", "summary": "Ember Keep's outer gate, held by Ser Halvard alone." },
+        { "id": "warden_archive", "name": "The Warden Archive", "kind": "tower", "summary": "Oswin Hale's library: three centuries of records, the only complete history of the Vale." },
+        { "id": "flame_hall", "name": "The Hall of the Flame", "kind": "lair", "summary": "The great hall where the heart of the Hearthflame burns red, and the dragon sleeps.", "unlock": { "flag": "ch5_gate_passed" } }
+      ]
+    }
+  ]
+}

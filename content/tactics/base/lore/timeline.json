@@ -1,0 +1,134 @@
+{
+  "eras": [
+    {
+      "id": "before_the_flame",
+      "name": "Before the Flame",
+      "summary": "The Vale before the Hearthflame: a cold, hard country of hill clans, river folk and dwarven holds in the Greywall. Almost nothing of it is remembered, which is itself a clue.",
+      "events": [
+        {
+          "id": "the_long_winters",
+          "when": "before 0 HR",
+          "title": "The Long Winters",
+          "summary": "Generations of failing harvests and hungry winters. The hill clans and the river folk fought over what little grew. Dwarven records from this time survive only in fragments."
+        },
+        {
+          "id": "the_crossing",
+          "when": "c. 0 HR",
+          "title": "The Crossing",
+          "summary": "A company of seven crossed the Greywall into the lands beyond and came back with fire. The Vale's songs say they were given it.",
+          "unlock": { "flag": "truth_crossing" }
+        }
+      ]
+    },
+    {
+      "id": "the_hearth_age",
+      "name": "The Hearth Age",
+      "summary": "Three centuries of warmth. The Wardens tended the Hearthflame in Ember Keep, the harvests never failed, and the Vale grew rich, settled and forgetful.",
+      "events": [
+        {
+          "id": "the_lighting",
+          "when": "0 HR",
+          "title": "The Lighting of the Hearthflame",
+          "summary": "The seven founders lit the Hearthflame in the hall that became Ember Keep, and swore the first Warden oath. The Hearth Reckoning begins."
+        },
+        {
+          "id": "the_keep_raised",
+          "when": "12–60 HR",
+          "title": "Ember Keep Raised",
+          "summary": "Dwarven masons built Ember Keep around the flame, and the Frostpeak roads to bring stone down from the heights."
+        },
+        {
+          "id": "church_founded",
+          "when": "38 HR",
+          "title": "The Church of the Hearth Founded",
+          "summary": "The Church of the Hearth was founded to teach that the flame was a gift of the gods to a deserving people. Its oldest scriptures contradict its newest ones; nobody reads the oldest."
+        },
+        {
+          "id": "shards_traded",
+          "when": "c. 110 HR",
+          "title": "Ember Shards Sold",
+          "summary": "The Wardens began selling small shards of the flame to lords and guilds to pay for the Keep. Ember-lamps and ember-forges spread across the Vale. So, quietly, did the forgetting."
+        },
+        {
+          "id": "the_cost_hidden",
+          "when": "c. 180 HR",
+          "title": "The Cost Hidden",
+          "summary": "The Warden-Keeper of the day learned what ember-fire takes and ordered it kept secret: the Vale could not live without the flame, so it must not know the price.",
+          "unlock": { "flag": "truth_cost" }
+        },
+        {
+          "id": "oswin_sworn",
+          "when": "251 HR",
+          "title": "Oswin Hale Becomes Warden-Keeper",
+          "summary": "Oswin Hale, a scholar who refused ever to touch ember-fire, became the last Warden-Keeper. He began reading the oldest records and did not like what he found."
+        }
+      ]
+    },
+    {
+      "id": "the_fall",
+      "name": "The Fall",
+      "summary": "The single night that ended the Hearth Age.",
+      "events": [
+        {
+          "id": "night_of_the_fall",
+          "when": "300 HR",
+          "title": "The Night the Keep Fell",
+          "summary": "Ember Keep fell in a single night. The Hearthflame shattered and five embers fell across the Vale like stars. Every survivor's account of that night is different and every one has gaps.",
+          "unlock": { "chapter": 1 }
+        },
+        {
+          "id": "fall_truth",
+          "when": "300 HR",
+          "title": "What Really Happened",
+          "summary": "Oswin Hale tried to put the flame out. He had learned it was stolen and that it was feeding on the Vale's memory, and he chose to end it. Someone stopped him halfway, and the flame shattered instead of dying. Oswin has never learned who. The Hooded Stranger was there.",
+          "unlock": { "flag": "truth_fall" }
+        }
+      ]
+    },
+    {
+      "id": "the_fading",
+      "name": "The Fading",
+      "summary": "The century since the Fall. The embers warmed the Vale for a time, but each year they burn lower and the cold creeps in.",
+      "events": [
+        {
+          "id": "ashen_ford_burns",
+          "when": "300–301 HR",
+          "title": "The Ford Burns",
+          "summary": "One ember fell into the river at the ford, which boiled and burned for a year. The ground stayed warm, and Emberwick grew up around it.",
+          "unlock": { "chapter": 1 }
+        },
+        {
+          "id": "sunscar_made",
+          "when": "300 HR",
+          "title": "The Sunscar Made",
+          "summary": "One ember struck the dry uplands and burned the best farmland in the Vale into desert in a season."
+        },
+        {
+          "id": "frostpeak_freezes",
+          "when": "c. 330 HR",
+          "title": "The Pass Freezes",
+          "summary": "The ember in Frostpeak Pass went out. The mountain froze around it, the goliath holds were lost, and the dead of the pass began to walk."
+        },
+        {
+          "id": "kindled_rise",
+          "when": "c. 370 HR",
+          "title": "The Kindled Rise",
+          "summary": "A preacher named Maren Sorrel began teaching that the flame could be relit if the Vale was brave enough to feed it. The Kindled grew in the hungry years."
+        },
+        {
+          "id": "the_hungry_years",
+          "when": "390–400 HR",
+          "title": "The Hungry Years",
+          "summary": "Ten bad harvests in a row. The hill clans came down from the heights, the river towns locked their granaries, and the Ash Market's prices for ember shards tripled."
+        },
+        {
+          "id": "campaign_begins",
+          "when": "401 HR, autumn",
+          "title": "Goblins at the Ford",
+          "summary": "Goblins of the Skarrow clan seize the bridge at the Ashen Ford, Emberwick's only road east. If they hold it past the new moon, the town goes hungry this winter. The campaign begins.",
+          "unlock": { "chapter": 1 }
+        }
+      ]
+    }
+  ]
+}

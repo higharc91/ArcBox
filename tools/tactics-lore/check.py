@@ -4,7 +4,8 @@ The schemas in content/tactics/base/lore/schema are the authority for shape; thi
 validator (the subset of draft 2020-12 they use) so the tool needs nothing beyond the standard library. It then checks
 what a schema can't: ids unique per kind across packs (a later pack changes one only with "replaces", as the rules packs
 do), references that resolve, presets and art keys that exist, and line ids unique everywhere so translations and
-pre-rendered voice files can key on them.
+pre-rendered voice files can key on them. When a rules pack sits beside the lore (content/tactics/base/rules), bestiary
+subjects and region encounters are checked against its monster and encounter ids too.
 
     python3 tools/tactics-lore/check.py                      # the base lore pack
     python3 tools/tactics-lore/check.py <lore-dir> [...]     # packs in load order (base first)
@@ -118,6 +119,20 @@ def art_keys(content: Path) -> set[str]:
     return keys
 
 
+def rules_ids(content: Path) -> dict[str, set[str]] | None:
+    """Monster and encounter ids from the rules pack, or None when there is no rules pack beside the lore."""
+    manifest = content / "rules" / "manifest.json"
+    if not manifest.is_file():
+        return None
+    ids: dict[str, set[str]] = {"monsters": set(), "encounters": set()}
+    for file in json.loads(manifest.read_text(encoding="utf-8"))["files"]:
+        kind = file.split("/")[0]
+        if kind in ids:
+            doc = json.loads((content / "rules" / file).read_text(encoding="utf-8"))
+            ids[kind].update(d["id"] for d in (doc if isinstance(doc, list) else [doc]))
+    return ids
+
+
 def portrait_moods(content: Path) -> set[str]:
     return set(json.loads((content / "portraits" / "manifest.json").read_text(encoding="utf-8"))["moods"])
 
@@ -208,7 +223,7 @@ def check(lore_dirs: list[Path], content: Path = CONTENT) -> Errors:
                         if "mood" in line and line["mood"] not in moods:
                             errors.add(where, at, f"mood '{line['mood']}' has no portrait")
 
-    _references(defs, barks, art, errors)
+    _references(defs, barks, art, rules_ids(content), errors)
     return errors
 
 
@@ -226,7 +241,7 @@ def _define(table: dict, entry: dict, where: str, ptr: str, kind: str, errors: E
         table[id_] = (entry, f"{where}#{ptr}")
 
 
-def _references(defs: dict, barks: list, art: set[str], errors: Errors) -> None:
+def _references(defs: dict, barks: list, art: set[str], rules: dict | None, errors: Errors) -> None:
     def at(location: str) -> tuple[str, str]:
         where, _, ptr = location.partition("#")
         return where, ptr
@@ -259,13 +274,19 @@ def _references(defs: dict, barks: list, art: set[str], errors: Errors) -> None:
             need_art(r["card"], loc, "/card")
         for i, f in enumerate(r.get("factions", [])):
             need("faction", f, loc, f"/factions/{i}", "faction")
+        for i, e in enumerate(r.get("encounters", [])):
+            if rules is not None and e not in rules["encounters"]:
+                errors.add(*at(loc + f"/encounters/{i}"), f"the rules pack has no encounter '{e}'")
     for id_, (e, loc) in defs["codex"].items():
         if "icon" in e:
             need_art(e["icon"], loc, "/icon")
         for i, rel in enumerate(e.get("related", [])):
             need("codex", rel, loc, f"/related/{i}", "codex entry")
-        # Bestiary subjects are rules monster ids, which live in the rules pack; only lore subjects are checked here.
-        if "subject" in e and e["category"] != "bestiary" and e["subject"] not in subjects:
+        # Bestiary subjects are rules monster ids, checked only when a rules pack sits beside the lore.
+        if "subject" in e and e["category"] == "bestiary":
+            if rules is not None and e["subject"] not in rules["monsters"]:
+                errors.add(*at(loc + "/subject"), f"the rules pack has no monster '{e['subject']}'")
+        elif "subject" in e and e["subject"] not in subjects:
             errors.add(*at(loc + "/subject"), f"no character, faction, region or place has the id '{e['subject']}'")
     for doc, where in barks:
         if doc["speaker"] != NARRATOR and doc["speaker"] not in defs["character"]:

@@ -1,7 +1,7 @@
 # Tactics Lore — Design Spec
 
 - **Date:** 2026-10-31
-- **Status:** Schema approved for drafting; the setting is still to be chosen (§6)
+- **Status:** Approved. Setting chosen: *Embers of the Vale* (§6); the base bible is written
 - **Builds on:** [Tactics rules engine](2026-10-30-tactics-rules-engine-design.md) (on branch `ccr-472d8660-sxpjlj`, not yet merged),
   [Platform v2](2026-10-29-platform-v2-design.md) §3.6 (content delivery), [REDLINE audio](2026-10-26-redline-audio-design.md) (voice themes)
 
@@ -68,22 +68,59 @@ Schemas: `content/tactics/base/lore/schema/*.schema.json` (draft 2020-12).
 3. Resolves references: characters, factions, codex `related`, bark speakers.
 4. Checks art keys (presets, chapter cards, crests, icons) using the same harvest rule as `ArtManifests.Load`.
 5. Checks moods and global line-id uniqueness.
+6. When a rules pack sits beside the lore, checks bestiary subjects and region encounters against its monster and
+   encounter ids.
 
 ```bash
 python3 tools/tactics-lore/check.py
 python3 -m unittest discover -s tools/tactics-lore
 ```
 
-## 6. Open: the setting
+## 6. The setting: Embers of the Vale
 
-The bible's content waits on choosing a setting. Constraints any choice must meet:
+Chosen 2026-10-31. The campaign's working title was already *Embers of the Vale* in the Platform v2 spec and the
+mockups, and the bible builds on it. It's written in `content/tactics/base/lore/`; `world.json` is the place to start.
 
-- the five chapter cards in order: I Ashen Ford, II Mirewood, III Sunscar, IV Frostpeak Pass, V Ember Keep (infernal);
-- the six companion presets: Aldric (dwarf cleric), Ilyra (elf wizard), Kara (human fighter), Sefa (tiefling warlock),
-  Tamsin (half-elf ranger), Wren (halfling rogue), plus the Hooded Stranger;
-- existing enemies: goblinoids, cultists and a cult leader, necromancer, lich, Black Knight, undead, elementals, a red
-  dragon;
-- the `warlord_bridge` lines already written in the rules pack.
+**In one paragraph.** For three centuries the Hearthflame in Ember Keep kept the Vale warm. A century ago the Keep fell
+and the flame shattered into five embers, which changed the land where they fell: the Ashen Ford (I), Mirewood (II),
+the Sunscar (III), Frostpeak Pass (IV) and the heart in the Ember Keep (V). The embers are fading. Out of Emberwick, the
+party finds them before the Kindled cult does, and learns that the flame was stolen from beyond the Greywall and that
+every use of ember-fire burns away a memory. The campaign ends with a party vote: rekindle the flame, return it, or let
+it die.
+
+**Why it extends** (pillars in `world.json`):
+- each ending sets different flags, so a second campaign starts from a different world;
+- the first campaign caps at level 10, so the same characters can carry on into a second;
+- the Vale's mysteries are answered by Chapter V, but the Greywall and the Hooded Stranger's identity are not;
+- every faction wants something beyond the Vale;
+- a prequel, *The Night the Keep Fell*, is built into the timeline.
+
+**What it fits.** All five chapter cards and their grades, and every NPC and enemy preset in the art. The mayor is
+Halden, as in the mockups. Mockups 01 and 02 now label Emberwick and the Ashen Ford Chapter I, matching the chapter
+cards. Sample player characters (Kara, Aldric, Wren, Ilyra, Tamsin, Sefa) are players' characters, so they are not in
+`characters.json`.
+
+**Story flags the bible uses.** These are the names encounter triggers (`setFlag`) and the exploration and dialogue
+work (sub-project 5) should set:
+
+| Flag | Set when |
+|---|---|
+| `ch1_skarrow_spared` | The party makes peace with Mother Skarrow instead of killing her |
+| `ch1_met_maud` | The party talks to Old Maud |
+| `ch1_halden_confessed` | Mayor Halden admits he knew the ford's ember was fading |
+| `ch2_court_audience` | The Glimmer Court grants the party an audience |
+| `ch2_bree_journal` | Bree shows the party her journal |
+| `ch2_corvin_page` | Corvin finds the page he doesn't remember writing |
+| `ch3_bridge_taken` | Vorga's bridge is taken (`warlord_bridge`) |
+| `ch3_maren_parley` | The party parleys with Maren Sorrel |
+| `ch3_marrowby_truth` | The Buried Crypt's records name Celandine Marrowby |
+| `ch4_rime_found` | The party finds Ivo Rime's tower |
+| `ch4_pip_remembers` | Pip remembers the night of the Fall |
+| `ch5_gate_passed` | The party gets past Ser Halvard |
+| `ch5_stranger_goal` | The Hooded Stranger reveals their goal |
+| `truth_cost` | The party learns what ember-fire takes (Chapter III, the Buried Crypt) |
+| `truth_crossing` | The party learns the flame was stolen (Skarrow song, or the Warden Archive) |
+| `truth_fall` | The party learns what Oswin did on the night of the Fall |
 
 ## 7. Follow-ups (after the rules engine merges)
 
@@ -92,5 +129,11 @@ The bible's content waits on choosing a setting. Constraints any choice must mee
    so it waits for the branch.
 2. **Faction crest art.** `crests/` is one atlas sheet per class and subclass, with no per-crest keys. Faction crests
    need their own art set before `factions[].crest` can point at real art.
-3. **Port the checker into `Tactics.Logic` validation** once lore is loaded by the game, so a bad pack fails the
+3. **Voice sets for player characters.** Players make their own characters, so battle barks need to be keyed by a
+   voice set chosen in the creator, not by named speaker: a `voices/*.json` kind and a Voice step in the creator.
+   `barks/<speaker>.json` stays for NPCs and the narrator.
+4. **Dialogue, quests, background hooks and recaps.** The narrative layer (branching conversations with tagged
+   options and skill checks, the quest journal, a personal thread per rules background, "Previously on…") is designed
+   with sub-project 5, which owns the runtime.
+5. **Port the checker into `Tactics.Logic` validation** once lore is loaded by the game, so a bad pack fails the
    same way a bad rules pack does (TV shows the reason, campaign won't start).

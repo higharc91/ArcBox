@@ -1,5 +1,7 @@
 """Tests for check.py against the fixture packs: python3 -m unittest discover tools/tactics-lore"""
 
+import json
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -36,6 +38,22 @@ class CheckTests(unittest.TestCase):
         for fragment in expected:
             self.assertEqual(sum(fragment in e for e in errors), 1, f"{fragment!r} in {errors}")
         self.assertEqual(len(errors), len(expected), errors)
+
+    def test_bestiary_and_encounters_are_checked_against_a_rules_pack(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            content = Path(tmp)
+            for art_set in ("chapters", "characters", "icons", "portraits"):
+                (content / art_set).symlink_to(check.CONTENT / art_set)
+            rules = content / "rules"
+            (rules / "monsters").mkdir(parents=True)
+            (rules / "manifest.json").write_text(json.dumps({"files": ["monsters/m.json", "encounters/e.json"]}))
+            (rules / "monsters" / "m.json").write_text(json.dumps([{"id": "goblin"}]))
+            (rules / "encounters").mkdir()
+            (rules / "encounters" / "e.json").write_text(json.dumps({"id": "river_crossing"}))
+            errors = check.check([FIXTURES / "valid" / "base"], content)
+        self.assertEqual(sorted(e.split("#")[1] for e in errors),
+                         ["/entries/1/subject: the rules pack has no monster 'wolf'",
+                          "/regions/0/encounters/0: the rules pack has no encounter 'forest_ruins'"])
 
     def test_art_keys_follow_the_rules_engine_harvest(self):
         keys = check.art_keys(check.CONTENT)
