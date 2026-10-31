@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Reflection;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Tactics.Logic;
@@ -10,6 +11,83 @@ namespace Tactics.Logic;
 /// <summary>The missing-value normaliser.</summary>
 internal sealed partial class Validation
 {
+    /// <summary>
+    /// A region (<c>world/&lt;id&gt;.json</c>): its size and the shape of its chunks, so <see cref="WorldRegion.From"/> can't
+    /// fail on it. What it says about the rest of the pack is checked once everything is loaded.
+    /// </summary>
+    public RegionDef? Region(JsonElement e, string file, string ptr)
+        => Guarded(file, ptr, () =>
+        {
+            var def = Deserialize<RegionDef>(e, file, ptr);
+            if (def is null)
+                return null;
+            if (def.Size is not [var w and > 0, var h and > 0])
+            {
+                Error(file, Pointer.Append(ptr, "size"), "The size must be [w, h], both at least 1.");
+                return null;
+            }
+
+            var errors = Errors.Count;
+            var seen = new HashSet<(int, int)>();
+            for (var i = 0; i < def.Chunks.Length; i++)
+            {
+                var chunk = def.Chunks[i];
+                var at = Pointer.Append(Pointer.Append(ptr, "chunks"), i);
+                if (chunk.X < 0 || chunk.Y < 0 || (long)chunk.X * WorldRegion.ChunkSize >= w || (long)chunk.Y * WorldRegion.ChunkSize >= h)
+                {
+                    Error(file, at, $"Chunk ({chunk.X}, {chunk.Y}) is outside the {w}x{h} region.");
+                    continue;
+                }
+                if (!seen.Add((chunk.X, chunk.Y)))
+                    Error(file, at, $"Chunk ({chunk.X}, {chunk.Y}) is listed twice.");
+                ChunkTiles(chunk, def.Materials.Length, file, Pointer.Append(at, "tiles"));
+            }
+            return Errors.Count == errors ? def : null;
+        });
+
+    /// <summary>
+    /// Checks one chunk's bytes. The first bad tile of each kind is enough to find the problem, as on a battle map: one
+    /// error per tile could be thousands.
+    /// </summary>
+    private void ChunkTiles(RegionChunk chunk, int materials, string file, string ptr)
+    {
+        byte[] bytes;
+        try
+        {
+            bytes = Convert.FromBase64String(chunk.Tiles);
+        }
+        catch (FormatException)
+        {
+            Error(file, ptr, "The tiles aren't valid base64.");
+            return;
+        }
+        if (bytes.Length != WorldRegion.ChunkBytes)
+        {
+            Error(file, ptr, $"Expected {WorldRegion.ChunkBytes} tile bytes for a chunk ({WorldRegion.ChunkSize}x{WorldRegion.ChunkSize}, 3 per tile), got {bytes.Length}.");
+            return;
+        }
+
+        const int size = WorldRegion.ChunkSize;
+        const int knownFlags = (int)(TileFlags.Water | TileFlags.Difficult | TileFlags.Impassable | TileFlags.Hazard | TileFlags.Deep);
+        Tile WorldTile(int i) => new(chunk.X * size + i % size, chunk.Y * size + i / size);
+        string? height = null, material = null, flags = null;
+        for (var i = 0; i < size * size; i++)
+        {
+            height ??= bytes[i * 3] > WorldRegion.MaxHeight
+                ? $"Tile {WorldTile(i)} has height {bytes[i * 3]}, above the limit of {WorldRegion.MaxHeight}."
+                : null;
+            material ??= bytes[i * 3 + 1] >= materials
+                ? $"Tile {WorldTile(i)} uses material {bytes[i * 3 + 1]}, but the region has {materials} materials."
+                : null;
+            flags ??= (bytes[i * 3 + 2] & ~knownFlags) != 0
+                ? $"Tile {WorldTile(i)} has undefined flag bits 0x{bytes[i * 3 + 2] & ~knownFlags:x2}."
+                : null;
+        }
+        foreach (var problem in new[] { height, material, flags })
+            if (problem is not null)
+                Error(file, ptr, problem);
+    }
+
     /// <summary>
     /// Makes a freshly deserialised definition safe to use: System.Text.Json leaves an absent list as a default
     /// <see cref="ImmutableArray{T}"/> and an absent map, set or object as null. Lists, sets and maps become empty (string

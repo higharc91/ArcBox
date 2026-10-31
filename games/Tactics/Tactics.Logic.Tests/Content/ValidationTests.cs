@@ -415,7 +415,7 @@ public sealed class ValidationTests
           "aiTags": { "tags": [], "priority": ["int", "wis", "con", "dex", "str", "cha"] } }
         """;
 
-    private static RulesPack LoadChapter(params (string Path, string Json)[] files)
+    internal static RulesPack LoadChapter(params (string Path, string Json)[] files)
         => WithChapter(files, null, [], dir => RulesPack.Load([Base, dir]));
 
     internal static ImmutableArray<ContentError> ErrorsOfChapter(params (string Path, string Json)[] files)
