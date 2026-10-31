@@ -196,7 +196,7 @@
       "effects": [ { "zone": { "kind": "fire", "area": { "shape": "ring", "size": 2 }, "rounds": 10, "concentration": true,
                                "passives": [ { "id": "wall_of_fire.burn", "hook": "onTurnStart", "target": "self",
                                                "effects": [ { "save": { "stat": "dex" }, "halfOnSuccess": true,
-                                                              "onFail": [ { "damage": { "dice": "2d8", "type": "fire" } } ] } ] } ] } },
+                                                              "onFail": [ { "damage": { "dice": "1d8", "type": "fire" } } ] } ] } ] } },
                    { "save": { "stat": "dex" }, "halfOnSuccess": true, "onFail": [ { "damage": { "dice": "2d8", "type": "fire" } } ] } ],
       "presentation": { "anim": "characters.cast", "fx": "fx.circle.fire" },
       "ai": { "tags": ["damage", "area", "zone"] } },
