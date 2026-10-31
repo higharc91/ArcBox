@@ -22,7 +22,7 @@ interface BattleView {
 }
 export interface TacticsHostView {
   phase: string; banner: string; notice: string | null; partyLevel: number; mustered: string[];
-  encounters: { id: string; name: string; level: number | null; min: number; max: number; fits: boolean }[] | null;
+  encounters: { id: string; name: string; level: number | null; min: number; max: number; fits: boolean; companions?: number }[] | null;
   battle: BattleView | null; outcome: string | null; results: { name: string; xp: number; injuries: string[] }[] | null;
 }
 type BattleEvent = { $type: string } & Record<string, unknown>;
@@ -91,7 +91,7 @@ export function TacticsBoard({ view, signal }: { view: TacticsHostView; signal(k
       {view.phase === "Muster" ? <p class="tx-board-note">Ready: {view.mustered.join(", ") || "nobody yet"}</p> : null}
       {view.encounters ? (
         <ul class="tx-board-list">
-          {view.encounters.map((e) => <li key={e.id} class={e.fits ? "" : "dim"}>{e.name} <small>Lv {e.level ?? "?"} · {e.min}–{e.max}</small></li>)}
+          {view.encounters.map((e) => <li key={e.id} class={e.fits ? "" : "dim"}>{e.name} <small>Lv {e.level ?? "?"} · {e.min}–{e.max}{e.companions ? ` · +${e.companions} AI` : ""}</small></li>)}
         </ul>
       ) : null}
       {view.results ? (

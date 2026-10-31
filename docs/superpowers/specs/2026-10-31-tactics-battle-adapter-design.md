@@ -40,7 +40,13 @@ Resume ─► Resuming ───────────────────
 ```
 
 1. **Muster.** Every connected member without a character picks a class on their phone, from the 12 (`ChoiceView`). An absent member without one is given the class that best fills the party's missing role (healer, then defender, then striker, then control), so the party is always complete. The members' characters are built at the campaign's party level (§6).
-2. **Encounter pick.** The VIP's phone lists the pack's encounters whose party size fits, each with its intended level and a short label: "River Crossing · Lv 1 · 4–6". The others see "Waiting for <VIP> to choose a battle". The TV shows the list.
+2. **Encounter pick.** The VIP's phone lists the pack's encounters, each with its intended level and a short label: "River Crossing · Lv 1 · 4–6".
+   - **AI companions fill a small party** (the user's decision, 2026-10-31). If fewer members are seated than an encounter's minimum, the label adds "+2 AI companions", and that many companions join the battle.
+     - Each companion takes the role the party lacks most (healer, defender, striker, then control) and plays at the party's level, always on the companion AI.
+     - Companions are saved with the battle (`BattleSave.Companions`), so a resume or a rules-change restart brings back the same ones.
+     - They earn no XP and never join the campaign.
+   - Only an encounter whose maximum is below the number of seats is greyed out.
+   - The others see "Waiting for <VIP> to choose a battle". The TV shows the list.
 3. **Battle** (§4).
 4. **Results.** The TV and phones show the outcome, the XP earned and any injuries. The result is applied to the campaign document and checkpointed (§6). The VIP chooses **Next battle** or **End session**; the other phones wait.
 5. **Resuming** (§7). After a restart, wait until a battle's present players are back, or the VIP taps **Continue without them**.

@@ -52,7 +52,7 @@ The five UI fixes are client-only, so the server contract and fixtures are uncha
 4. **Finding the portal is hard.** The campaign code came from `GET /api/me`, and nothing in the phone UI links to `/c/<code>`.
 5. **A character from Muster can't be remade in the portal.** The creator only shows for someone with no character, so to choose race or point-buy you have to go to the portal before Muster.
 6. **Tooltips read like the rules engine:** "SELF: TARGET GAINS ITS MOVE AGAIN" and "Weapon attack, weapon range: weapon damage". Bless's tooltip is also very long.
-7. **The Tactics lobby card says "1–6 players"**, but every encounter needs at least 4.
+7. **The Tactics lobby card says "1–6 players"**, but every encounter needs at least 4. *Resolved after the report:* AI companions fill the party (user's decision).
 8. **The A, B and 4 chips are unexplained**, and a cone gives no "pick a direction" hint: the button only says "Pick a target".
 9. **Seen once, not reproduced:** a spell selection dropped back to the move screen right after a page reload at the start of a turn. The screen clears your selection whenever a new view arrives, so a re-sent view is a possible cause, but that's unconfirmed. Three later tries held for 1.8 s each.
 

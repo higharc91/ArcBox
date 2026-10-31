@@ -66,7 +66,10 @@ export function PickEncounter({ data, send }: CustomScreenProps) {
       {encounters.map((e) => (
         <button type="button" key={e.id} class="tx-row" disabled={!e.fits} onClick={() => send("pickEncounter", { encounter: e.id })}>
           <b>{e.name}</b>
-          <small>{e.level ? `Lv ${e.level} · ` : ""}{e.min}–{e.max} heroes</small>
+          <small>
+            {e.level ? `Lv ${e.level} · ` : ""}{e.min}–{e.max} heroes
+            {e.companions ? ` · +${e.companions} AI companion${e.companions === 1 ? "" : "s"}` : ""}
+          </small>
         </button>
       ))}
     </div>

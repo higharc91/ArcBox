@@ -133,6 +133,8 @@ export interface EncounterOption {
   min: number;
   max: number;
   fits: boolean;
+  /** AI companions who'd join to bring the party up to the minimum. */
+  companions?: number;
 }
 
 export interface ResultsData {

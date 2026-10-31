@@ -33,8 +33,13 @@ public sealed record Beat(int Seq, UnitId? Actor, ImmutableArray<BattleEvent> Ev
 /// <param name="Members">The members in the battle, by profile, in party order.</param>
 /// <param name="State">The battle as it stands.</param>
 /// <param name="Log">The most recent beats, oldest first (at most <see cref="TacticsDocument.LogBeats"/>).</param>
+/// <param name="Companions">
+/// The AI companions who filled the party up to the encounter's minimum, after the members in party order. They belong to
+/// this battle only: no XP, no place in the campaign.
+/// </param>
 public sealed record BattleSave(string Encounter, ulong Seed, ImmutableArray<ProfileId> Members, BattleState State,
-    ImmutableArray<Beat> Log);
+    ImmutableArray<Beat> Log,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<CharacterRecord> Companions = default);
 
 /// <summary>
 /// The campaign document, version 0 (adapter spec §6): the party's level, each member's character and XP, the encounters

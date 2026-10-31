@@ -43,27 +43,35 @@ public sealed partial class TacticsGame
 
     // ---- Starting and continuing --------------------------------------------------------------------------------------
 
-    private void StartBattle(string encounter, ulong seed, ImmutableArray<ProfileId> members)
+    private void StartBattle(string encounter, ulong seed, ImmutableArray<ProfileId> members, ImmutableArray<CharacterRecord> companions)
     {
-        var resolution = Begin(encounter, seed, members);
-        _doc = _doc with { Battle = new BattleSave(encounter, seed, members, resolution.State, []) };
+        var resolution = Begin(encounter, seed, members, companions);
+        _doc = _doc with { Battle = new BattleSave(encounter, seed, members, resolution.State, [], companions.IsEmpty ? default : companions) };
         _seq = 0;
         AddBeat(null, resolution.Events);
         _phase = TacticsPhase.Battle;
         Drive();
     }
 
-    private Resolution Begin(string encounter, ulong seed, ImmutableArray<ProfileId> members)
+    /// <summary>
+    /// Starts the encounter: the members as <c>hero1</c>, <c>hero2</c>, … and any companions as <c>ally1</c>, <c>ally2</c>, …,
+    /// always played by the companion AI.
+    /// </summary>
+    private Resolution Begin(string encounter, ulong seed, ImmutableArray<ProfileId> members, ImmutableArray<CharacterRecord> companions)
     {
-        ImmutableArray<PartyMember> party = [.. members.Select((p, i) =>
-            new PartyMember(UnitFor(i), _doc.For(p)!.Character, ControllerFor(p)))];
+        ImmutableArray<PartyMember> party =
+        [
+            .. members.Select((p, i) => new PartyMember(UnitFor(i), _doc.For(p)!.Character, ControllerFor(p))),
+            .. (companions.IsDefault ? [] : companions).Select((c, i) =>
+                new PartyMember(new UnitId($"ally{i + 1}"), c, new AiControlled(Companion))),
+        ];
         return Battle.Start(Encounters.Setup(encounter, party, Difficulty.Normal, Rules), Rules, seed);
     }
 
     /// <summary>Starts a saved battle over from its encounter and seed (the rules pack changed under it, spec §7).</summary>
     private void RestartBattle(BattleSave save)
     {
-        var resolution = Begin(save.Encounter, save.Seed, save.Members);
+        var resolution = Begin(save.Encounter, save.Seed, save.Members, save.Companions);
         _doc = _doc with { Battle = save with { State = resolution.State, Log = [] } };
         _seq = 0;
         AddBeat(null, resolution.Events);

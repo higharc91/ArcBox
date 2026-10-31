@@ -43,7 +43,7 @@ Find the PC's LAN address (`ipconfig` on Windows) and tell the user both URLs:
 - **On the PC:** `http://localhost:5080/dev.html?phones=3` (the dev page stands in for the TV, with 3 phone iframes).
 - **On the phone:** `http://<pc-ip>:5080/?room=<CODE>`, where `<CODE>` is the room code the dev page shows.
 
-**Four players are needed.** Every sample encounter needs a party of 4 to 6. The dev page's 3 iframe phones plus the real phone make 4.
+**Any number of players from 1 works.** AI companions now fill a party up to the encounter's minimum of 4. For the turn screen, though, more human players means more turns to try.
 
 ## 4. What the user should try (in this order)
 

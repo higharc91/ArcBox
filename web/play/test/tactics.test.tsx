@@ -42,6 +42,14 @@ describe("tactics phone module", () => {
     expect(send).toHaveBeenLastCalledWith({ action: "pickClass", data: { class: "fighter" } });
   });
 
+  it("encounter pick: a battle that needs more heroes says how many AI companions join", () => {
+    const v = view("pickEncounter");
+    const data = v.data as unknown as { encounters: { name: string; companions?: number }[] };
+    data.encounters[0]!.companions = 2;
+    render(<ControllerScreen view={v} send={() => {}} me="ALEX" game="tactics" />);
+    expect(screen.getByText(/\+2 AI companions/)).toBeTruthy();
+  });
+
   it("encounter pick: the VIP taps a battle that fits the party", () => {
     const send = show("pickEncounter");
     fireEvent.click(screen.getByRole("button", { name: /River Crossing/ }));

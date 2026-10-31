@@ -52,8 +52,8 @@ public sealed record PhoneChoices(UnitId Unit, TurnEconomy Economy, ImmutableArr
 public sealed record BattleView(string Encounter, string Map, int Round, ImmutableArray<UnitId> Order, UnitId? Active,
     ImmutableArray<UnitView> Units, ImmutableArray<Beat> Beats, string? Outcome);
 
-/// <summary>An encounter the VIP can pick.</summary>
-public sealed record EncounterOption(string Id, string Name, int? Level, int Min, int Max, bool Fits);
+/// <summary>An encounter the VIP can pick, with how many AI companions would fill the party up to its minimum.</summary>
+public sealed record EncounterOption(string Id, string Name, int? Level, int Min, int Max, bool Fits, int Companions = 0);
 
 /// <summary>A class a member can pick at Muster.</summary>
 public sealed record ClassOption(string Id, string Name, string Role);
@@ -167,7 +167,7 @@ public sealed partial class TacticsGame
     private ImmutableArray<EncounterOption> EncounterOptions()
         => [.. Rules.Encounters.Values.OrderBy(e => e.Level ?? 0).ThenBy(e => e.Id, StringComparer.Ordinal)
             .Select(e => new EncounterOption(e.Id, e.Name, e.Level, e.Party.Min, e.Party.Max,
-                _players.Count >= e.Party.Min && _players.Count <= e.Party.Max))];
+                _players.Count <= e.Party.Max, Math.Max(0, e.Party.Min - _players.Count)))];
 
     private ImmutableArray<ResultLine> ResultLines()
     {

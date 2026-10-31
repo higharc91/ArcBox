@@ -289,15 +289,41 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     /// </summary>
     private void FillAbsentCharacters()
     {
-        string[] roles = ["healer", "defender", "striker", "control"];
         foreach (var player in _players.Where(p => _doc.For(p.Profile!.Value) is null))
         {
-            var have = _doc.Members.Values.Select(m => Rules.Classes.GetValueOrDefault(m.Character.Class)?.Role).ToArray();
-            var role = roles.FirstOrDefault(r => !have.Contains(r)) ?? roles[have.Length % roles.Length];
-            var cls = Rules.Classes.Values.Where(c => c.Role == role).Select(c => c.Id).Order(StringComparer.Ordinal)
-                .FirstOrDefault() ?? Rules.Classes.Keys.First();
+            var cls = ClassForMissingRole(_doc.Members.Values.Select(m => m.Character.Class));
             SetMember(player.Profile!.Value, new MemberRecord(NewCharacter(player.Name, cls, _doc.PartyLevel), Xp: 0));
         }
+    }
+
+    /// <summary>
+    /// The class that best fills a party of <paramref name="classes"/>: the first missing role of healer, defender, striker
+    /// and control (then round again), and the first class of that role in id order.
+    /// </summary>
+    private string ClassForMissingRole(IEnumerable<string> classes)
+    {
+        string[] roles = ["healer", "defender", "striker", "control"];
+        var have = classes.Select(c => Rules.Classes.GetValueOrDefault(c)?.Role).ToArray();
+        var role = roles.FirstOrDefault(r => !have.Contains(r)) ?? roles[have.Length % roles.Length];
+        return Rules.Classes.Values.Where(c => c.Role == role).Select(c => c.Id).Order(StringComparer.Ordinal)
+            .FirstOrDefault() ?? Rules.Classes.Keys.First();
+    }
+
+    /// <summary>
+    /// AI companions to bring a party of the session's players up to <paramref name="min"/> (the encounter's smallest
+    /// party), each of the class the party lacks most, at the party's level. Named for their class ("Rogue companion").
+    /// </summary>
+    private ImmutableArray<CharacterRecord> Companions(int min)
+    {
+        var classes = _players.Select(p => _doc.For(p.Profile!.Value)!.Character.Class).ToList();
+        var companions = ImmutableArray.CreateBuilder<CharacterRecord>();
+        while (classes.Count < min)
+        {
+            var cls = ClassForMissingRole(classes);
+            classes.Add(cls);
+            companions.Add(NewCharacter($"{Rules.Classes[cls].Name} companion", cls, _doc.PartyLevel));
+        }
+        return companions.ToImmutable();
     }
 
     private void PickEncounter(Player vip, JsonElement? data)
@@ -308,13 +334,14 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             Toast(vip.Id, "Pick one of the battles.");
             return;
         }
-        if (_players.Count < encounter.Party.Min || _players.Count > encounter.Party.Max)
+        if (_players.Count > encounter.Party.Max)
         {
-            Toast(vip.Id, $"{encounter.Name} needs a party of {encounter.Party.Min}–{encounter.Party.Max}.");
+            Toast(vip.Id, $"{encounter.Name} takes at most {encounter.Party.Max} heroes.");
             return;
         }
         FillAbsentCharacters();
-        StartBattle(id, (ulong)_ctx.Random.NextInt64(), [.. _players.Select(p => p.Profile!.Value)]);
+        // A party smaller than the encounter needs is filled with AI companions.
+        StartBattle(id, (ulong)_ctx.Random.NextInt64(), [.. _players.Select(p => p.Profile!.Value)], Companions(encounter.Party.Min));
     }
 
     // ---- Results ------------------------------------------------------------------------------------------------------

@@ -10,7 +10,8 @@
         "level": 1,
         "min": 4,
         "max": 6,
-        "fits": true
+        "fits": true,
+        "companions": 0
       },
       {
         "id": "forest_ruins",
@@ -18,7 +19,8 @@
         "level": 3,
         "min": 4,
         "max": 6,
-        "fits": true
+        "fits": true,
+        "companions": 0
       },
       {
         "id": "crypt_hall",
@@ -26,7 +28,8 @@
         "level": 5,
         "min": 4,
         "max": 6,
-        "fits": true
+        "fits": true,
+        "companions": 0
       },
       {
         "id": "warlord_bridge",
@@ -34,7 +37,8 @@
         "level": 5,
         "min": 4,
         "max": 6,
-        "fits": true
+        "fits": true,
+        "companions": 0
       },
       {
         "id": "crystal_cave",
@@ -42,7 +46,8 @@
         "level": 7,
         "min": 4,
         "max": 6,
-        "fits": true
+        "fits": true,
+        "companions": 0
       }
     ]
   },
