@@ -220,6 +220,9 @@ def build_terrain() -> None:
             by_kind[t.kind].append(Tile(img, t.id, vname + (f" · {len(frames)} frames" if len(frames) > 1 else "")))
         entries[t.id] = {"kind": t.kind, "variants": files, "frames": len(frames), "fps": t.fps,
                          "size": [frames[0].w, frames[0].h]}
+        if "emissive" in t.tags:                                       # glowing textures light the map
+            entries[t.id]["emissive"] = {"slot": "glow", "light": TR.LIGHTS[t.id],
+                                         "colour": {vn: TR.ramps(v)["glow"][4] for vn, v in t.variants.items()}}
     write_json({
         "tile": TR.TILE, "span": TR.T // TR.TILE, "heightStep": TR.TILE // 2,
         "sampling": {
@@ -228,15 +231,17 @@ def build_terrain() -> None:
             "lip": "drawn over the top band of a side under a top that has one; transparent below its edge",
             "decal": "32x32, alpha; placed on a tile's top in tile-local UV",
             "animated": "frames are laid out left to right; play at fps, looping",
+            "emissive": "textures with an `emissive` entry glow by themselves: render their glow pixels (the "
+                        "brightest shades of `colour`) unlit, and place point lights over them as `light` says",
         },
         "textures": entries,
     }, out / "manifest.json")
     save(contact_sheet("Terrain · tops", by_kind["top"], columns=6, zoom=2,
-                       subtitle="Seamless, world-aligned: each 128 px texture spans 4x4 tiles. Water and lava are "
-                                "8-frame loops."), PREVIEWS / "09-terrain-tops.png")
+                       subtitle="Seamless, world-aligned: each 128 px texture spans 4x4 tiles. Water, bog and lava "
+                                "are 16-frame loops."), PREVIEWS / "09-terrain-tops.png")
     save(contact_sheet("Terrain · sides and lips", by_kind["side"] + by_kind["lip"], columns=4, zoom=3,
                        subtitle="Cliff faces repeat every tile of depth; lips hang over the top band where a top "
-                                "meets its side."), PREVIEWS / "10-terrain-sides.png")
+                                "meets its side. The lava side is a 16-frame loop."), PREVIEWS / "10-terrain-sides.png")
     save(contact_sheet("Terrain · ground decals", by_kind["decal"], columns=10, zoom=4, checker=True,
                        subtitle="Scattered on tile tops for variety: flowers, stones, leaves, bones, cracks, "
                                 "puddles, blood and scorch marks."), PREVIEWS / "11-decals.png")
@@ -244,24 +249,22 @@ def build_terrain() -> None:
 
 
 def build_dioramas() -> None:
+    """One preview per biome kit (parts/dioramas.py), plus two loops: the ford's river and the lit ember keep."""
     from arcpix import iso
     from parts import dioramas as D
-    from parts import backgrounds as BG
-    pairs = {"ashen-ford": ("day", "hills"), "frostpeak": ("overcast", "peaks"), "mirewood": ("dusk", "hills"),
-             "sunscar": ("day", "mesas"), "ember-keep": ("ashfall", "volcano")}
 
-    def backdrop(name):
-        sk, biome = pairs[name]
-        return lambda w, h: BG.compose(sk, biome, w, h, horizon=int(h * 0.48))
-
-    for name, make in D.SCENES.items():
-        save(iso.finish(iso.render(make(), backdrop=backdrop(name))), PREVIEWS / f"12-diorama-{name}.png")
-    # the ford again, animated: the river flows
-    # 24 frames: the least common multiple of the water (8), campfire (6) and banner (4) loops
-    bd = backdrop("ashen-ford")
-    frames = [iso.finish(iso.render(D.ashen_ford(k), backdrop=bd), zoom=1).convert("P", palette=Image.Palette.ADAPTIVE)
-              for k in range(24)]
-    frames[0].save(PREVIEWS / "anim-river.gif", save_all=True, append_images=frames[1:], duration=140, loop=0)
+    for name in D.SCENES:
+        save(D.render_scene(name), PREVIEWS / f"12-diorama-{name}.png")
+    # the ford again, animated: the river flows and foams at its banks
+    # 48 frames: the least common multiple of the water (16), campfire (6) and banner (4) loops
+    bd = D.backdrop("ashen-ford")
+    frames = [iso.finish(iso.render(D.ashen_ford(k), backdrop=bd, margin=40), zoom=1)
+              .convert("P", palette=Image.Palette.ADAPTIVE) for k in range(48)]
+    frames[0].save(PREVIEWS / "anim-river.gif", save_all=True, append_images=frames[1:], duration=120, loop=0)
+    # the keep by its own light: lava seams, fumaroles, torches and the fire crystal flicker (16 frames: lava)
+    frames = [D.render_scene("ember-keep", k, zoom=1).convert("P", palette=Image.Palette.ADAPTIVE)
+              for k in range(16)]
+    frames[0].save(PREVIEWS / "anim-ember.gif", save_all=True, append_images=frames[1:], duration=120, loop=0)
 
 
 def build_palettes() -> None:
@@ -524,7 +527,7 @@ SETS = {"palettes": build_palettes, "characters": build_characters, "anims": bui
 # Sets that live in their own module: parts/<name>.py with a build() function. Each writes under
 # content/tactics/base/<name>/ and previews/, using arcpix.out.
 PLUGIN_SETS = ("props", "portraits", "beasts", "backgrounds", "ui", "icons", "fx",
-               "ambient", "bosses", "emotes", "town", "status", "pickups", "worldmap",
+               "ambient", "bosses", "bestiary", "emotes", "town", "status", "pickups", "worldmap",
                "signature", "title", "crests", "dungeon", "projectiles", "gear_icons", "grades", "creator_thumbs", "hazards", "transitions", "sheet_icons", "chapters", "camp", "showcase", "gallery")   # these read the others: keep them last
 for _name in PLUGIN_SETS:
     try:

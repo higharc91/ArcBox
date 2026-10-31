@@ -98,6 +98,8 @@ def _ref(ref: str) -> list[str]:
         return RAMPS[name]
     if fam == "prop":
         return PR.PROP_RAMPS[name]
+    if fam == "tr":
+        return TR.TR_RAMPS[name]
     return FAMILIES[fam][name]
 
 
@@ -2829,6 +2831,32 @@ class Room:
             for lx, ly in cv.lights:
                 if mirror:
                     lx = img.width - 1 - lx
+                self.lights.append(_Light(((i + 0.5) * 32, (j + 0.5) * 32, Z), ((lx - ax) * 2, (ly - ay) * 2),
+                                          _hexrgb(pal[slot][4]), radius, fl, phase=phase + int(i * 5 + j * 3),
+                                          power=light))
+
+    def kit(self, pid: str, i: float, j: float, variant: str | None = None, *, mirror: bool = False,
+            phase: int = 0, light: float = 1.0) -> None:
+        """An outdoor prop from `props.py`, lit by the same recipe: its emissive mask and its manifest light."""
+        p = next(x for x in PR.CATALOGUE if x.id == pid)
+        v = variant or next(iter(p.variants))
+        frs = p.frames()
+        cv = frs[(self.frame + phase) % len(frs)]
+        pal = PR.ramps(p.variants[v])
+        img = cv.render(pal)
+        emask = PR.emissive_mask(p, cv) if p.light else None
+        ax, ay = p.anchor_of(cv)
+        pts = PR.light_points(p, cv) if p.light else []
+        if mirror:
+            img = img.transpose(Image.FLIP_LEFT_RIGHT)
+            emask = emask[:, ::-1] if emask is not None else None
+            ax = img.width - 1 - ax
+            pts = [[img.width - 1 - x, y] for x, y in pts]
+        self._add(img, emask, (ax, ay), i, j)
+        if p.light and light > 0:
+            slot, radius, fl = p.light
+            Z = self.scene.top_z(int(round(i)), int(round(j)))
+            for lx, ly in pts:
                 self.lights.append(_Light(((i + 0.5) * 32, (j + 0.5) * 32, Z), ((lx - ax) * 2, (ly - ay) * 2),
                                           _hexrgb(pal[slot][4]), radius, fl, phase=phase + int(i * 5 + j * 3),
                                           power=light))

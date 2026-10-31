@@ -222,6 +222,81 @@
       "replaces": "tall_grass",
       "note": "start each instance on a random frame so neighbours don't move in step"
     },
+    "swamp_tree_anim": {
+      "name": "Cypress sway",
+      "group": "props",
+      "kind": "sprite",
+      "frame": [
+        52,
+        72
+      ],
+      "frames": 8,
+      "fps": 5,
+      "loop": true,
+      "anchor": [
+        26,
+        71
+      ],
+      "layer": "over",
+      "blend": "normal",
+      "variants": {
+        "cypress": "props/swamp_tree_anim_cypress.png"
+      },
+      "default": "cypress",
+      "replaces": "swamp_tree",
+      "note": "start each instance on a random frame so neighbours don't move in step"
+    },
+    "fern_anim": {
+      "name": "Fern bob",
+      "group": "props",
+      "kind": "sprite",
+      "frame": [
+        32,
+        24
+      ],
+      "frames": 8,
+      "fps": 6,
+      "loop": true,
+      "anchor": [
+        16,
+        23
+      ],
+      "layer": "over",
+      "blend": "normal",
+      "variants": {
+        "green": "props/fern_anim_green.png",
+        "autumn": "props/fern_anim_autumn.png"
+      },
+      "default": "green",
+      "replaces": "fern",
+      "note": "start each instance on a random frame so neighbours don't move in step"
+    },
+    "mushroom_cluster_anim": {
+      "name": "Toadstool breathing",
+      "group": "props",
+      "kind": "sprite",
+      "frame": [
+        32,
+        36
+      ],
+      "frames": 8,
+      "fps": 6,
+      "loop": true,
+      "anchor": [
+        16,
+        26
+      ],
+      "layer": "over",
+      "blend": "normal",
+      "variants": {
+        "red": "props/mushroom_cluster_anim_red.png",
+        "brown": "props/mushroom_cluster_anim_brown.png",
+        "glow": "props/mushroom_cluster_anim_glow.png"
+      },
+      "default": "red",
+      "replaces": "mushroom_cluster",
+      "note": "the glow variant's light pulses with it"
+    },
     "reeds_anim": {
       "name": "Reeds wave",
       "group": "props",
