@@ -209,14 +209,135 @@ public sealed class RegionExportTests : IDisposable
         Assert.NotNull(result.Written);
     }
 
-    [Fact]
-    public void A_material_used_outside_any_stamp_is_refused_if_only_an_unstamped_map_has_it()
+    public static TheoryData<string> Palette() => [.. PaletteBuilder.AllSwatches(ContentPaths.ContentBase).Select(s => s.Material)];
+
+    [Theory]
+    [MemberData(nameof(Palette))]
+    public void Every_palette_swatch_exports_with_no_stamp(string material)
     {
         var field = Field();
-        var materials = new Dictionary<Tile, string>(field.Materials) { [new Tile(2, 3)] = "crypt_tile/dark" };
+        var materials = new Dictionary<Tile, string>(field.Materials) { [new Tile(2, 3)] = material };
 
-        Assert.Equal(["The tile (2, 3) uses the material 'crypt_tile/dark', which isn't in the palette or a stamped map. Repaint it from the palette."],
-            Export(field with { Materials = materials }).Problems);
+        Assert.Empty(Export(field with { Materials = materials }).Problems);
+    }
+
+    [Fact]
+    public void A_pending_old_stamp_warns_but_the_file_is_written()
+    {
+        var map = Base.Value.MapFor("river_crossing")!;
+        var old = new RegionStamp("river_crossing", new Tile(4, 4), 0);
+        var moved = new RegionStamp("river_crossing", new Tile(6, 4), 0);
+
+        var result = Export(Stamped(map) with { Width = map.Width + 8, Stamps = [], OldStamps = [old], Heights = new Dictionary<Tile, int>(), Flags = new Dictionary<Tile, TileFlags>() });
+        var covered = Export(Stamped(map) with { Stamps = [moved], OldStamps = [old], Heights = new Dictionary<Tile, int>(), Flags = new Dictionary<Tile, TileFlags>() });
+
+        Assert.NotNull(result.Written);
+        Assert.Equal(["168 tiles, x 4 to 17, y 4 to 15, first (4, 4), still hold the old stamp 'river_crossing'. Repaint them, then press Done repainting."], result.Warnings);
+        Assert.Equal($"Wrote {RegionFile()}. Add \"world/r.json\" to rules/manifest.json, or the game won't load it. 1 old stamp area still needs repainting.", result.Status);
+        Assert.Contains("24 tiles, x 4 to 5, y 4 to 15, first (4, 4)", Assert.Single(covered.Warnings), StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void An_old_stamp_the_current_stamps_cover_doesnt_warn()
+    {
+        var old = new RegionStamp("river_crossing", new Tile(4, 4), 0);
+
+        Assert.Empty(Export(Stamped() with { OldStamps = [old] }).Warnings);
+    }
+
+    [Fact]
+    public void A_refused_export_still_shows_its_warnings()
+    {
+        var result = Export(Field() with { Starts = [], OldStamps = [new RegionStamp("gone", new Tile(1, 1), 0)] });
+
+        Assert.Null(result.Written);
+        Assert.Single(result.Warnings);
+    }
+
+    [Fact]
+    public void A_moved_node_row_has_no_tile_to_go_to()
+    {
+        var problem = Assert.Single(Export(Field() with { MovedNodes = ["Beats"] }).Problems);
+
+        Assert.Null(RegionExport.TileIn(problem));
+    }
+
+    [Theory]
+    [InlineData(0, 0, false)]        // A moment ago, on a clock too coarse to show the save: give it the benefit of the doubt.
+    [InlineData(-3600, -3600, true)] // The file is an hour old and didn't change.
+    [InlineData(3600, 3600, true)]   // Ahead of the clock and didn't change, so nothing wrote it.
+    [InlineData(3600, 0, false)]     // Ahead of the clock, and a real save moved it back: the original bug.
+    [InlineData(-3600, 0, false)]    // Moved forward.
+    public void A_save_is_judged_by_whether_the_file_changed(int beforeSeconds, int afterSeconds, bool failed)
+    {
+        var now = new DateTime(2026, 10, 31, 12, 0, 0, DateTimeKind.Utc);
+
+        Assert.Equal(failed, RegionExport.SaveFailed(now.AddSeconds(beforeSeconds), now.AddSeconds(afterSeconds), now));
+    }
+
+    [Fact]
+    public void A_read_only_file_elsewhere_in_the_pack_leaves_no_temporary_pack_behind()
+    {
+        var file = Path.Combine(_rules, "xp.json");
+        File.SetAttributes(file, FileAttributes.ReadOnly);
+        var temp = Path.GetTempPath();
+        var before = Directory.GetDirectories(temp, "tactics-region-check-*").ToHashSet();
+
+        var result = Export(Field());
+        File.SetAttributes(file, FileAttributes.Normal);
+
+        Assert.Empty(result.Problems);
+        Assert.Subset(before, Directory.GetDirectories(temp, "tactics-region-check-*").ToHashSet());
+    }
+
+    [Fact]
+    public void A_read_only_region_file_is_a_problem_not_a_crash()
+    {
+        Assert.Empty(Export(Field()).Problems);
+        File.SetAttributes(RegionFile(), FileAttributes.ReadOnly);
+
+        var result = Export(Field());
+        File.SetAttributes(RegionFile(), FileAttributes.Normal);
+
+        if (OperatingSystem.IsWindows())
+            Assert.Contains("then export again.", Assert.Single(result.Problems), StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void A_locked_region_file_is_a_problem_not_a_crash()
+    {
+        if (!OperatingSystem.IsWindows())
+            return;
+        Assert.Empty(Export(Field()).Problems);
+        using var hold = File.Open(RegionFile(), FileMode.Open, FileAccess.Read, FileShare.None);
+
+        var result = Export(Field());
+
+        Assert.Contains("then export again.", Assert.Single(result.Problems), StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void A_locked_file_elsewhere_in_the_pack_is_a_problem_not_a_crash()
+    {
+        if (!OperatingSystem.IsWindows())
+            return;
+        using var hold = File.Open(Path.Combine(_rules, "xp.json"), FileMode.Open, FileAccess.Read, FileShare.None);
+
+        var result = Export(Field());
+
+        Assert.Null(result.Written);
+        Assert.Contains("xp.json", Assert.Single(result.Problems), StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void A_broken_manifest_is_a_problem_not_a_crash()
+    {
+        File.WriteAllText(Path.Combine(_rules, "manifest.json"), "not json");
+
+        var result = Export(Field());
+
+        Assert.Null(result.Written);
+        Assert.Contains("then export again.", Assert.Single(result.Problems), StringComparison.Ordinal);
     }
 
     [Fact]

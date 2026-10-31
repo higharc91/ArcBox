@@ -18,13 +18,23 @@ public sealed record ExportResult(string? Written, ImmutableArray<string> Proble
     /// <summary>Whether the pack's manifest lists the region, so the game will load it.</summary>
     public bool Listed { get; init; }
 
+    /// <summary>What's worth fixing but doesn't stop the file being written: old stamp areas still to repaint.</summary>
+    public ImmutableArray<string> Warnings { get; init; } = [];
+
     /// <summary>One line for the painter on how it went.</summary>
     public string Status => this switch
     {
         { Written: null } when Problems.Any(p => RegionExport.TileIn(p) is not null) => $"Not exported: {Problems.Length} {(Problems.Length == 1 ? "problem. Click it" : "problems. Click one")} to go there.",
         { Written: null } => $"Not exported: {Problems.Length} {(Problems.Length == 1 ? "problem" : "problems")}.",
-        { Listed: true } => $"Wrote {Written}.",
-        _ => $"Wrote {Written}. Add \"{Entry}\" to rules/manifest.json, or the game won't load it.",
+        { Listed: true } => $"Wrote {Written}.{Pending}",
+        _ => $"Wrote {Written}. Add \"{Entry}\" to rules/manifest.json, or the game won't load it.{Pending}",
+    };
+
+    private string Pending => Warnings.Length switch
+    {
+        0 => "",
+        1 => " 1 old stamp area still needs repainting.",
+        var count => $" {count} old stamp areas still need repainting.",
     };
 }
 
@@ -36,6 +46,9 @@ public static partial class RegionExport
 {
     /// <summary>What a region is called while it's checked, if its own id can't name a file.</summary>
     private const string StandInId = "region_being_checked";
+
+    /// <summary>How close to now a file's time must be for an unchanged time to prove nothing about a save.</summary>
+    private const int SaveClockSeconds = 5;
 
     /// <summary>Written indented, so each chunk is one line and a small paint change is a small diff. LF on every platform: packs are hashed.</summary>
     private static readonly JsonSerializerOptions FileOptions = new(ArcJson.Options)
@@ -64,16 +77,45 @@ public static partial class RegionExport
     }
 
     /// <summary>
+    /// Whether a save failed, given the scene file's modified time before and after it. A changed time means it was written, whichever
+    /// way the time moved, since a file can be dated ahead of the clock. An unchanged time means it wasn't, unless the file was written
+    /// moments ago, where the file system's clock may be too coarse to show a second write.
+    /// </summary>
+    public static bool SaveFailed(DateTime before, DateTime after, DateTime now)
+        => after == before && (now - before).Duration() > TimeSpan.FromSeconds(SaveClockSeconds);
+
+    /// <summary>
     /// Writes <c>world/&lt;id&gt;.json</c> under <paramref name="rulesDirectory"/>, only if the region passes everything the pack
     /// loader would check, which is more than <see cref="RegionWriter"/> sees: a stamped tile that was changed, a marker that can't
     /// be reached. One export finds every problem: a region that can't be written is repaired as far as the checks need, on the side,
     /// so they still run, and the file is left as it was. It doesn't touch the pack's manifest, and art and lore come from
-    /// <paramref name="contentBase"/>. A file that can't be replaced is a problem, not an exception. The file changes in one move, so
-    /// a failure can't leave half of it.
+    /// <paramref name="contentBase"/>. An old stamp area still to repaint is a warning, and doesn't stop the file. A file that can't be
+    /// read or replaced is a problem, not an exception. The file changes in one move, so a failure can't leave half of it.
     /// </summary>
     public static ExportResult Export(PaintedRegion painted, string rulesDirectory, string contentBase)
     {
+        try
+        {
+            return Run(painted, rulesDirectory, contentBase);
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException)
+        {
+            return new ExportResult(null, [FilesFailed(ex)]);
+        }
+    }
+
+    private static string FilesFailed(Exception ex) => $"The pack's files couldn't be read: {ex.Message} Close anything holding them, or fix them, then export again.";
+
+    private static List<string> PendingWarnings(PaintedRegion painted, string rulesDirectory)
+    {
+        var covered = StampBrush.Covered(painted.Stamps, id => StampMaps.Read(rulesDirectory, id));
+        return [.. painted.OldStamps.Select(old => StampBrush.PendingWarning(old, StampMaps.Read(rulesDirectory, old.Map), covered)).OfType<string>()];
+    }
+
+    private static ExportResult Run(PaintedRegion painted, string rulesDirectory, string contentBase)
+    {
         var problems = new List<string>();
+        ImmutableArray<string> warnings = [.. PendingWarnings(painted, rulesDirectory)];
         if (!ValidId(painted.Id))
             problems.Add($"The region id '{painted.Id}' must be lower-case letters, digits and underscores. Change Id on the Region node.");
 
@@ -88,26 +130,26 @@ public static partial class RegionExport
 
         var maps = source.Stamps.Select(s => s.Map).Distinct(StringComparer.Ordinal)
             .Select(id => StampMaps.Read(rulesDirectory, id)).OfType<BattleMap>().ToList();
-        var known = PaletteBuilder.Materials(Path.Combine(contentBase, "terrain", "manifest.json"))
+        var known = PaletteBuilder.AllSwatches(contentBase).Select(s => s.Material)
             .Concat(maps.SelectMany(m => m.Materials)).ToHashSet(StringComparer.Ordinal);
 
         var written = RegionWriter.Write(source, known);
         problems.AddRange(written.Problems);
         var region = written.Region ?? RegionWriter.Write(RegionWriter.Repair(source, known, StampedTiles(source, maps)), known).Region;
         if (region is null)
-            return new ExportResult(null, [.. problems]);
+            return new ExportResult(null, [.. problems]) { Warnings = warnings };
 
         var bytes = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(region, FileOptions) + "\n");
         var checks = Check(rulesDirectory, region.Id, bytes);
         problems.AddRange(painted.Starts.Count == 0 ? checks.Where(p => !NeedsTheStart(p)) : checks);
         if (problems.Count > 0)
-            return new ExportResult(null, [.. problems]);
+            return new ExportResult(null, [.. problems]) { Warnings = warnings };
 
         var path = Path.Combine(rulesDirectory, "world", $"{region.Id}.json");
         if (Replace(path, bytes) is { } failure)
-            return new ExportResult(null, [failure]);
+            return new ExportResult(null, [failure]) { Warnings = warnings };
         var entry = $"world/{region.Id}.json";
-        return new ExportResult(path, []) { Entry = entry, Listed = Listed(rulesDirectory, entry) };
+        return new ExportResult(path, []) { Entry = entry, Listed = Listed(rulesDirectory, entry), Warnings = warnings };
     }
 
     /// <summary>What each stamped map says its tiles should be, in world tiles. A later stamp wins where two overlap, which is its own problem.</summary>
@@ -151,11 +193,18 @@ public static partial class RegionExport
         var entry = $"world/{id}.json";
         try
         {
+            // The old file is about to be replaced, so a lock on it matters to Replace, not to the check.
+            var own = Path.GetFullPath(Path.Combine(rulesDirectory, "world", $"{id}.json"));
             foreach (var file in Directory.EnumerateFiles(rulesDirectory, "*", SearchOption.AllDirectories))
             {
                 var to = Path.Combine(copy, Path.GetRelativePath(rulesDirectory, file));
                 Directory.CreateDirectory(Path.GetDirectoryName(to)!);
+                if (Path.GetFullPath(file) == own)
+                    continue;
                 File.Copy(file, to);
+
+                // A read-only original makes a read-only copy, which could not be overwritten or deleted.
+                File.SetAttributes(to, FileAttributes.Normal);
             }
 
             // A folder in the way is Replace's problem to report; here it would only stop the check.
@@ -179,9 +228,13 @@ public static partial class RegionExport
         {
             return [.. ex.Errors.Select(e => e.File.EndsWith(entry, StringComparison.Ordinal) ? $"{e.Message} {Advice(e.Message)}" : $"{e.File}: {e.Message} Fix that file, then export again.")];
         }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException)
+        {
+            return [FilesFailed(ex)];
+        }
         finally
         {
-            Directory.Delete(copy, recursive: true);
+            Discard(copy);
         }
     }
 
@@ -222,8 +275,24 @@ public static partial class RegionExport
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
-            File.Delete(temporary);
+            Discard(temporary);
             return $"The file {path} couldn't be written: {ex.Message} Close anything holding it, then export again.";
+        }
+    }
+
+    /// <summary>Removes a temporary file or folder. Failing to tidy up never fails an export.</summary>
+    private static void Discard(string path)
+    {
+        try
+        {
+            if (Directory.Exists(path))
+                Directory.Delete(path, recursive: true);
+            else
+                File.Delete(path);
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            // It's in a temporary place, or beside the file, and nothing reads it.
         }
     }
 

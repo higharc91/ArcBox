@@ -43,6 +43,9 @@ public sealed record PaintedRegion(string Id, string Name, int Chapter, int Widt
     /// <summary>Nodes the export ignores because of where they are, or what they are.</summary>
     public IReadOnlyList<StrayNode> Strays { get; init; } = [];
 
+    /// <summary>Where stamps used to be: areas that may still hold a map's tiles, until the painter says they're repainted.</summary>
+    public IReadOnlyList<RegionStamp> OldStamps { get; init; } = [];
+
     /// <summary>The scene's file name without its extension, or null if it has none yet.</summary>
     public string? SceneFile { get; init; }
 
@@ -71,7 +74,7 @@ public sealed record PaintedRegion(string Id, string Name, int Chapter, int Widt
         var problems = new List<string>();
         if (SceneFile is { } file && file != Id)
             problems.Add($"The scene is named '{file}' but its region Id is '{Id}', and two scenes with one Id would overwrite each other's file. Rename the scene or change Id.");
-        problems.AddRange(MovedNodes.Select(node => $"The {node} node has been moved, so its markers aren't on the tiles they show. Set its Position back to (0, 0)."));
+        problems.AddRange(MovedNodes.Select(node => $"The {node} node has been moved, so its markers aren't on the tiles they show. Set its Position back to zero."));
         problems.AddRange(Strays.Select(s => $"The {s.Node} at {s.At} is under {s.Parent}, so it isn't exported. {s.Fix}."));
         AddBare(Heights.Keys, "a height", "Height");
         AddBare(Flags.Keys, "flags", "Flags");

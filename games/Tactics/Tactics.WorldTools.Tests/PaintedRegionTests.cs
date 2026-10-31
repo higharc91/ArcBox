@@ -162,7 +162,7 @@ public sealed class PaintedRegionTests
 
     [Fact]
     public void A_moved_node_is_a_problem()
-        => Assert.Equal(["The Beats node has been moved, so its markers aren't on the tiles they show. Set its Position back to (0, 0)."],
+        => Assert.Equal(["The Beats node has been moved, so its markers aren't on the tiles they show. Set its Position back to zero."],
             (Painted() with { MovedNodes = ["Beats"] }).ToSource().Problems);
 
     [Fact]

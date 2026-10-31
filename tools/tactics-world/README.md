@@ -41,8 +41,8 @@ game's view. You paint here and see the isometric result in the game.
 | `Stamps` | `Node2D` | `StampMarker`s, placed at the battle map's corner, drawn as an outline |
 | `Spawns` | `Node2D` | One `SpawnMarker` of each `Kind`: `Start` and `Recovery` |
 
-Select a layer and paint it. These six nodes are locked at the origin, because moving one would shift what's drawn but not what's
-exported, and the export refuses if one has moved. Markers snap to tiles as you drag them and outline the tile they stand on. A
+Select a layer and paint it. Keep these six nodes at the origin: moving one would shift what's drawn but not what's
+exported, so the export refuses if one has moved. Markers snap to tiles as you drag them and outline the tile they stand on. A
 marker under the wrong parent isn't exported, and the export says so.
 
 A chunk (32x32 tiles) with nothing painted is void, which is fine. A chunk with some paint must have every tile painted: a missed
@@ -65,12 +65,13 @@ The small dot is the combination with no flags, which is the same as a blank cel
 
 **Stamps.** A stamped area is a tuned battle, so its tiles must match the map exactly. To place one, add a `StampMarker` under
 `Stamps`, set its `Map` and `HeightOffset`, drag it to the map's corner, keep it selected and press **Apply stamp**, which writes the
-map to the three layers as one undoable action. To move one, drag the marker, whose outline turns orange, and press Apply stamp
-again. Nothing records what was under a stamp, so the dock lists the old tiles it left, for you to repaint. Don't paint inside the
+map to the three layers as one undoable action. The outline is orange while the marker differs from what was applied: moved, or with a
+new `Map` or `HeightOffset`. Pressing Apply stamp again moves it. Nothing records what was under a stamp, so its old area stays on the
+marker, drawn in thin orange, as a row in the dock that goes to its tiles. The export warns about it but still writes. Repaint it and
+press **Done repainting** on its row. Moving the stamp back over the area clears it too. Don't paint inside the
 outline: the export refuses a stamp that doesn't match, and Apply stamp puts it back.
 
-The palette has a swatch for every material a battle map uses, such as `dungeon_wall/dark`, which shows the art the game draws for
-it. Outside the terrain tops, you can only use one if a map stamped in this region uses it.
+The palette has a swatch for every material a battle map uses, such as `dungeon_wall/dark`, which shows the art the game draws for it.
 
 **Sides aren't painted.** The game chooses them.
 
@@ -87,14 +88,16 @@ From a command line, the same code runs headless:
 "$GODOT" --headless --path tools/tactics-world -- --export=ashen_ford
 ```
 
-It exits 0 on success and 1 if the export found problems. `--rules=<folder>` writes to another copy of the pack instead.
+It exits 0 on success and 1 if the export found problems, which it prints, with any warnings. `--rules=<folder>` writes to another copy
+of the pack instead.
 `--export` also takes a scene path. To press the plugin's real button with no one there, run the editor:
 
 ```sh
 "$GODOT" --headless --editor --path tools/tactics-world -- --press-export=ashen_ford
 ```
 
-`--press-apply=<scene>` presses Apply stamp on the first stamp the same way, moving it first with `--move=x,y`, then undoes it, and
+`--press-apply=<scene>` presses Apply stamp on the first stamp the same way, moving it first with `--move=x,y`, then undoes it.
+`--second-move=x,y` instead walks a second move, an export, Done repainting and its undo, and
 `--click-first-problem` clicks a problem after an export.
 
 These print `Parameter "t" is null` as they save. It's Godot failing to make the scene's thumbnail with no renderer, and it's

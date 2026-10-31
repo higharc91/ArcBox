@@ -6,7 +6,7 @@ using Tactics.WorldTools;
 namespace Tactics.World.Editor;
 
 /// <summary>
-/// Adds a dock with the "Export region" and "Apply stamp" buttons and a list of problems, each a button that goes to its tile. Under
+/// Adds a dock with the "Export region" and "Apply stamp" buttons and a list of problems and old stamp areas, each a button that goes to its tile. Under
 /// <c>--editor</c>, the <c>--press-export=&lt;scene&gt;</c> and <c>--press-apply=&lt;scene&gt;</c> commands open the scene and press
 /// the real buttons, so they can be tested with no one there.
 /// </summary>
@@ -18,6 +18,7 @@ public partial class RegionToolsPlugin : EditorPlugin
     private Button _apply = null!;
     private Label _status = null!;
     private VBoxContainer _problems = null!;
+    private VBoxContainer _pending = null!;
 
     private static Region? EditedRegion => EditorInterface.Singleton.GetEditedSceneRoot() as Region;
 
@@ -30,14 +31,18 @@ public partial class RegionToolsPlugin : EditorPlugin
         _apply.Pressed += ApplySelectedStamp;
         _status = new Label { Text = "Open a region scene, then export it.", AutowrapMode = TextServer.AutowrapMode.WordSmart };
         _problems = new VBoxContainer { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
+        _pending = new VBoxContainer { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
 
+        var rows = new VBoxContainer { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
+        rows.AddChild(_pending);
+        rows.AddChild(_problems);
         var scroll = new ScrollContainer
         {
             SizeFlagsVertical = Control.SizeFlags.ExpandFill,
             CustomMinimumSize = new Vector2(0, 200),
             HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled,
         };
-        scroll.AddChild(_problems);
+        scroll.AddChild(rows);
         var column = new VBoxContainer();
         column.AddChild(_export);
         column.AddChild(_apply);
@@ -46,6 +51,9 @@ public partial class RegionToolsPlugin : EditorPlugin
         _dock = new EditorDock { Title = "Region", DefaultSlot = EditorDock.DockSlot.RightBl };
         _dock.AddChild(column);
         AddDock(_dock);
+
+        // Each undoable action refreshes the rows itself; this covers opening or switching scenes.
+        SceneChanged += OnSceneChanged;
 
         if (Commands.Arg("press-export") is { } export)
             PressWhenReady(export, _export);
@@ -56,9 +64,15 @@ public partial class RegionToolsPlugin : EditorPlugin
     /// <inheritdoc />
     public override void _ExitTree()
     {
+        SceneChanged -= OnSceneChanged;
         RemoveDock(_dock);
         _dock.QueueFree();
     }
+
+    private void OnSceneChanged(Node scene) => RefreshPending();
+
+    /// <summary>Refreshes once the action has finished, however its steps are ordered, and whichever way it ran.</summary>
+    private void QueueRefresh() => CallDeferred(MethodName.RefreshPending);
 
     private void ExportEditedScene()
     {
@@ -82,7 +96,7 @@ public partial class RegionToolsPlugin : EditorPlugin
             var scene = ProjectSettings.GlobalizePath(root.SceneFilePath);
             var before = File.GetLastWriteTimeUtc(scene);
             var saved = EditorInterface.Singleton.SaveScene();
-            if (saved != Error.Ok || File.GetLastWriteTimeUtc(scene) <= before)
+            if (saved != Error.Ok || RegionExport.SaveFailed(before, File.GetLastWriteTimeUtc(scene), DateTime.UtcNow))
             {
                 Finish("Not exported.", ["Save the scene first: it couldn't be saved. Use Scene > Save Scene As, or check the file isn't read-only, then export again."]);
                 return;
@@ -118,7 +132,7 @@ public partial class RegionToolsPlugin : EditorPlugin
                 return;
             }
 
-            var stroke = StampBrush.Apply(map, marker.Tile, marker.HeightOffset, marker.AppliedTile, root.Size.X, root.Size.Y);
+            var stroke = StampBrush.Apply(map, marker.Tile, marker.HeightOffset, marker.Applied, marker.Pending, ReadMap, root.Size.X, root.Size.Y);
             if (stroke.Problems.Length > 0)
             {
                 Finish("Not stamped.", stroke.Problems);
@@ -157,6 +171,8 @@ public partial class RegionToolsPlugin : EditorPlugin
         }
 
         undo.CreateAction($"Apply stamp {stroke.Map}", UndoRedo.MergeMode.Disable, root);
+
+        undo.AddUndoMethod(this, MethodName.QueueRefresh);
         foreach (var cell in stroke.Cells)
         {
             var at = new Vector2I(cell.At.X, cell.At.Y);
@@ -168,6 +184,52 @@ public partial class RegionToolsPlugin : EditorPlugin
         }
         undo.AddDoProperty(marker, StampMarker.PropertyName.AppliedAt, new Vector2I(stroke.At.X, stroke.At.Y));
         undo.AddUndoProperty(marker, StampMarker.PropertyName.AppliedAt, marker.AppliedAt);
+        undo.AddDoProperty(marker, StampMarker.PropertyName.AppliedMap, stroke.Map);
+        undo.AddUndoProperty(marker, StampMarker.PropertyName.AppliedMap, marker.AppliedMap);
+        undo.AddDoProperty(marker, StampMarker.PropertyName.AppliedHeightOffset, marker.HeightOffset);
+        undo.AddUndoProperty(marker, StampMarker.PropertyName.AppliedHeightOffset, marker.AppliedHeightOffset);
+        undo.AddDoProperty(marker, StampMarker.PropertyName.PendingAreas, stroke.Pending.Select(StampBrush.Encode).ToArray());
+        undo.AddUndoProperty(marker, StampMarker.PropertyName.PendingAreas, marker.PendingAreas);
+        undo.AddDoMethod(this, MethodName.QueueRefresh);
+        undo.CommitAction();
+    }
+
+    private static BattleMap? ReadMap(string id) => StampMaps.Read(Commands.Arg("rules") ?? RegionPaths.Rules, id);
+
+    /// <summary>Rebuilds the rows for old stamp areas: each goes to its tiles, and has a button to say it's repainted.</summary>
+    private void RefreshPending()
+    {
+        foreach (var child in _pending.GetChildren())
+        {
+            _pending.RemoveChild(child);
+            child.QueueFree();
+        }
+        var markers = EditedRegion?.GetNodeOrNull(RegionScene.Stamps)?.GetChildren().OfType<StampMarker>().ToList() ?? [];
+        var covered = StampBrush.Covered(markers.Select(m => m.Current), ReadMap);
+        foreach (var marker in markers)
+            foreach (var area in marker.Pending)
+                if (StampBrush.PendingWarning(area, ReadMap(area.Map), covered) is { } warning)
+                    AddPendingRow(marker, area, warning);
+    }
+
+    private void AddPendingRow(StampMarker marker, RegionStamp area, string warning)
+    {
+        var row = new VBoxContainer { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
+        row.AddChild(ProblemButton(warning));
+        var done = new Button { Text = "Done repainting", TooltipText = "Stop tracking this old area. Undo brings it back." };
+        done.Pressed += () => DoneRepainting(marker, area);
+        row.AddChild(done);
+        _pending.AddChild(row);
+    }
+
+    private void DoneRepainting(StampMarker marker, RegionStamp area)
+    {
+        var undo = GetUndoRedo();
+        undo.CreateAction($"Done repainting {area.Map}", UndoRedo.MergeMode.Disable, marker);
+        undo.AddUndoMethod(this, MethodName.QueueRefresh);
+        undo.AddDoProperty(marker, StampMarker.PropertyName.PendingAreas, marker.Pending.Where(a => a != area).Select(StampBrush.Encode).ToArray());
+        undo.AddUndoProperty(marker, StampMarker.PropertyName.PendingAreas, marker.PendingAreas);
+        undo.AddDoMethod(this, MethodName.QueueRefresh);
         undo.CommitAction();
     }
 
@@ -187,20 +249,25 @@ public partial class RegionToolsPlugin : EditorPlugin
     {
         _status.Text = status;
         foreach (var problem in problems)
+            _problems.AddChild(ProblemButton(problem));
+        RefreshPending();
+    }
+
+    /// <summary>A line of the list, which goes to its tile if it names one.</summary>
+    private Button ProblemButton(string problem)
+    {
+        var button = new Button
         {
-            var button = new Button
-            {
-                Text = problem,
-                TooltipText = problem,
-                AutowrapMode = TextServer.AutowrapMode.WordSmart,
-                Alignment = HorizontalAlignment.Left,
-                SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
-                Flat = RegionExport.TileIn(problem) is null,
-            };
-            if (RegionExport.TileIn(problem) is { } tile)
-                button.Pressed += () => GoTo(tile);
-            _problems.AddChild(button);
-        }
+            Text = problem,
+            TooltipText = problem,
+            AutowrapMode = TextServer.AutowrapMode.WordSmart,
+            Alignment = HorizontalAlignment.Left,
+            SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
+            Flat = RegionExport.TileIn(problem) is null,
+        };
+        if (RegionExport.TileIn(problem) is { } tile)
+            button.Pressed += () => GoTo(tile);
+        return button;
     }
 
     /// <summary>Centres the 2D view on a tile and marks it.</summary>
@@ -235,7 +302,12 @@ public partial class RegionToolsPlugin : EditorPlugin
         Print();
 
         if (button == _apply && EditedRegion is { } root)
-            ProveUndo(root);
+        {
+            if (Commands.Arg("second-move") is { } second)
+                await ProvePending(root, second);
+            else
+                ProveUndo(root);
+        }
         if (OS.GetCmdlineUserArgs().Contains("--click-first-problem") && _problems.GetChildCount() > 0)
             await ClickFirstProblem();
         GetTree().Quit(_problems.GetChildCount() == 0 ? 0 : 1);
@@ -246,6 +318,38 @@ public partial class RegionToolsPlugin : EditorPlugin
         GD.Print($"STATUS: {_status.Text}");
         foreach (var problem in _problems.GetChildren().OfType<Button>())
             GD.Print($"PROBLEM: {problem.Text}");
+        foreach (var row in _pending.GetChildren())
+            GD.Print($"PENDING: {row.GetChild<Button>(0).Text}");
+    }
+
+    /// <summary>The test hook's walk through a second move, an export, a stale height, Done repainting and its undo.</summary>
+    private async Task ProvePending(Region root, string second)
+    {
+        var marker = root.GetNode(RegionScene.Stamps).GetChild<StampMarker>(0);
+        if (second.Split(',') is [var x, var y])
+            marker.Position = marker.PlaceOn(new Tile(int.Parse(x), int.Parse(y)));
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        _apply.EmitSignal(BaseButton.SignalName.Pressed);
+        Print();
+
+        marker.HeightOffset = 1;
+        GD.Print($"STALE AFTER HEIGHT CHANGE: {marker.Applied != marker.Current}");
+        marker.HeightOffset = 0;
+        GD.Print($"STALE AFTER PUTTING IT BACK: {marker.Applied != marker.Current}");
+
+        _export.EmitSignal(BaseButton.SignalName.Pressed);
+        Print();
+
+        var done = _pending.GetChild(0).GetChild<Button>(1);
+        done.EmitSignal(BaseButton.SignalName.Pressed);
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        GD.Print($"AFTER DONE: {marker.PendingAreas.Length} stored, {_pending.GetChildCount()} rows");
+        var undo = GetUndoRedo();
+        undo.GetHistoryUndoRedo(undo.GetObjectHistoryId(marker)).Undo();
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        GD.Print($"AFTER UNDO: {marker.PendingAreas.Length} stored, {_pending.GetChildCount()} rows");
+        EditorInterface.Singleton.SaveScene();
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
     }
 
     /// <summary>Selects the first stamp, dropping it part way into the tile <c>--move=x,y</c> names, as a drag does.</summary>

@@ -6,7 +6,7 @@ namespace Tactics.World.Editor;
 
 /// <summary>
 /// The scene convention. A region scene has a <see cref="Region"/> root, three <see cref="TileMapLayer"/>s on one flat grid and
-/// three nodes of markers, all six locked at the origin. On the layers, a Material cell's source is named after the material, a Height
+/// three nodes of markers, all six at the origin. On the layers, a Material cell's source is named after the material, a Height
 /// cell's atlas column is the height, and a Flags cell's atlas position is <see cref="PaletteBuilder.FlagsAtlas"/>. A tile can be left
 /// blank on Height, meaning 0, and on Flags, meaning none.
 /// </summary>
@@ -29,8 +29,6 @@ public static class RegionScene
 
     /// <summary>The node holding <see cref="SpawnMarker"/>s.</summary>
     public const string Spawns = "Spawns";
-
-    private const string EditLock = "_edit_lock_";
 
     private static readonly string[] Layers = [MaterialLayer, HeightLayer, FlagsLayer];
 
@@ -68,6 +66,7 @@ public static class RegionScene
             Stamps = [.. root.GetNode(Stamps).GetChildren().OfType<StampMarker>().Select(s => new RegionStamp(s.Map, s.Tile, s.HeightOffset))],
             Starts = [.. spawns.Where(s => s.Kind == SpawnMarker.SpawnKind.Start).Select(s => s.Tile)],
             Recoveries = [.. spawns.Where(s => s.Kind == SpawnMarker.SpawnKind.Recovery).Select(s => s.Tile)],
+            OldStamps = [.. root.GetNode(Stamps).GetChildren().OfType<StampMarker>().SelectMany(s => s.Pending)],
             MovedNodes = [.. Layers.Concat(Groups).Where(name => root.GetNode<Node2D>(name).Transform != Transform2D.Identity)],
             Strays = Strays(root),
             SceneFile = scene.Length > 0 ? Path.GetFileNameWithoutExtension(scene) : null,
@@ -122,7 +121,7 @@ public static class RegionScene
             AddMarker(root, beats, new BeatMarker { Beat = beat.Beat }, beat.Beat, beat.At);
         var stamps = AddGroup(root, Stamps);
         foreach (var stamp in source.Stamps)
-            AddMarker(root, stamps, new StampMarker { Map = stamp.Map, HeightOffset = stamp.Height, AppliedAt = new Vector2I(stamp.At.X, stamp.At.Y) }, stamp.Map, stamp.At);
+            AddMarker(root, stamps, new StampMarker { Map = stamp.Map, HeightOffset = stamp.Height, AppliedAt = new Vector2I(stamp.At.X, stamp.At.Y), AppliedMap = stamp.Map, AppliedHeightOffset = stamp.Height }, stamp.Map, stamp.At);
         var spawns = AddGroup(root, Spawns);
         AddMarker(root, spawns, new SpawnMarker { Kind = SpawnMarker.SpawnKind.Start }, "Start", source.Start);
         AddMarker(root, spawns, new SpawnMarker { Kind = SpawnMarker.SpawnKind.Recovery }, "Recovery", source.Recovery);
@@ -186,7 +185,6 @@ public static class RegionScene
         // Behind the root, so its outline of the region's size stays on top of the paint.
         var layer = new TileMapLayer { TileSet = tiles, ShowBehindParent = true };
         Add(root, root, layer, name);
-        layer.SetMeta(EditLock, true);
         return layer;
     }
 
@@ -194,7 +192,6 @@ public static class RegionScene
     {
         var group = new Node2D();
         Add(root, root, group, name);
-        group.SetMeta(EditLock, true);
         return group;
     }
 
