@@ -66,7 +66,7 @@ Ashen Ford starts at about 160×120 tiles, about one to two minutes to walk end 
 
 ### 3.2 The painting workspace
 
-An editor scene in Godot holds each region as tile layers built from the pack's terrain, town and prop art. Markers on top are draggable: beat spots, battle stamps, shown as locked outlines, and spawns.
+An editor scene in Godot holds each region as three tile layers on a **flat grid**: material, height and flags. The pack's terrain art is sampled across several tiles for the isometric mesh, so Godot's tile tools can't paint that view directly: the painter works on the flat grid and sees the isometric result in the game. Markers on top are draggable: beat spots, battle stamps, shown as locked outlines, and spawns.
 
 An editor button exports the scene to the region file. **After the draft is handed over, the scene is the source of truth, and the region file is always generated from it.**
 
@@ -79,9 +79,10 @@ A script writes the first pass of Ashen Ford into the editor scene: terrain, the
 The pack loader validates each region, and a failure is a content error:
 
 - a stamp's tiles match its battle map exactly, so tuned battles can't drift;
-- every beat in `arcs.json` for the region's chapter has a spot;
 - every spot, stamp and spawn can be reached on foot from the start spawn;
 - a region's edges line up with its neighbours where both exist.
+
+Every beat in `arcs.json` for the region's chapter must also have a spot. Lore isn't part of the rules pack, so a base pack test checks this rather than the loader.
 
 ## 4. How the game runs it
 
