@@ -47,6 +47,13 @@ export interface FlyoverOptions {
   transition?: string;
   /** Called after every rendered frame. */
   onFrame?(info: FrameInfo): void;
+  /**
+   * "title" (default) sits the island low in the frame, under a logo; "backdrop" centres it, for UI laid over the
+   * whole screen.
+   */
+  framing?: "title" | "backdrop";
+  /** Dissolve the first area in from the page's night blue (default true); false shows it at once. */
+  introFade?: boolean;
 }
 
 interface MapFileWithProps extends MapFile { props?: MapProp[] }
@@ -75,6 +82,8 @@ export class Flyover {
   private areas: Area[];
   private touring: boolean;
   private onFrame: FlyoverOptions["onFrame"];
+  private framing: "title" | "backdrop";
+  private introFade: boolean;
   private resizeObserver: ResizeObserver | null = null;
   private disposed = false;
   /** Resolves once the first area is on screen. */
@@ -87,6 +96,7 @@ export class Flyover {
     this.areas = opts.areas?.length ? opts.areas : AREAS;
     this.touring = opts.tour ?? this.areas.length > 1;
     this.onFrame = opts.onFrame;
+    this.framing = opts.framing ?? "title";
     this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: false, alpha: false, powerPreference: "low-power" });
     this.renderer.setPixelRatio(1);
     this.renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
@@ -104,6 +114,7 @@ export class Flyover {
       this.resizeObserver = new ResizeObserver(() => this.resize());
       this.resizeObserver.observe(this.canvas.parentElement);
     }
+    this.introFade = opts.introFade ?? true;
     this.ready = this.begin(opts.transition ?? "dissolve");
   }
 
@@ -127,7 +138,8 @@ export class Flyover {
       // Live: the first area dissolves in from the night-blue of the page.
       this.clearStill();
       const ok = await this.show(0);
-      this.fadeFrom = this.areaStart = this.time;
+      this.areaStart = this.time;
+      this.fadeFrom = this.introFade ? this.areaStart : -Infinity;
       this.renderFrame();
       return ok;
     }
@@ -143,10 +155,10 @@ export class Flyover {
         this.fadeFrom = -Infinity;
         this.renderFrame();
         this.snapshot();
-      } else {
+      } else if (this.introFade) {
         this.clearStill();
       }
-      this.fadeFrom = t - local;
+      this.fadeFrom = cycle > 0 || this.introFade ? t - local : -Infinity;
     }
     const ok = await this.show(index);
     this.areaStart = t - local;
@@ -338,12 +350,14 @@ export class Flyover {
     const flip = this.index % 2 ? -1 : 1;   // alternate the side each area swings in from
     const yaw = Math.PI / 4 + flip * (0.22 * Math.sin(local * 0.05) - 0.75 * away) + 0.05 * Math.sin(local * 0.11 + 1.3);
     const pitch = 0.42 + 0.04 * Math.sin(local * 0.07 + 0.7) + 0.38 * away;
-    // Framed for 16:9; a narrower screen (a phone held upright) pulls back so the island still fits across.
-    const narrow = Math.max(1, (16 / 9) / this.camera.aspect) ** 0.75;
+    // Framed for 16:9; a narrower screen (a phone held upright) pulls back, though less than the full width would
+    // need: on a phone the island's corners may leave the frame, but it fills the screen rather than floating small.
+    const narrow = Math.max(1, (16 / 9) / this.camera.aspect) ** (this.framing === "backdrop" ? 0.45 : 0.55);
     const push = 1 - 0.07 * Math.min(1, local / AREA_SECONDS);
     const dist = span * 3.05 * narrow * push * (1 + 1.1 * away);
-    // Aim above the map's middle so the island sits in the lower part of the frame, under the logo.
-    const target = new THREE.Vector3(0.5 * Math.sin(local * 0.05), a.size.top * 0.4 + span * 0.32, 0.5 * Math.cos(local * 0.07));
+    // For the title, aim above the map's middle so the island sits in the lower part of the frame, under the logo.
+    const lift = this.framing === "backdrop" ? span * 0.08 : span * 0.32;
+    const target = new THREE.Vector3(0.5 * Math.sin(local * 0.05), a.size.top * 0.4 + lift, 0.5 * Math.cos(local * 0.07));
     this.camera.position.set(
       target.x + Math.sin(yaw) * Math.cos(pitch) * dist,
       target.y + Math.sin(pitch) * dist,

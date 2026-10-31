@@ -1,0 +1,203 @@
+/* Wardenflame's lobby theme (lobby.tsx): the shell's lobby and "Who are you?" screens in navy glass and gold, from
+   docs/superpowers/mockups/tactics/06-phone-join.png and the UI palette in tools/tactics-assets/STYLE.md. Everything is
+   scoped to .wf-lobby, the class the theme adds to those screens, so every other game keeps its look. */
+
+.screen.wf-lobby {
+  --wf-ink: #f4ecd6;
+  --wf-muted: #bdb093;
+  --wf-dim: #8a826d;
+  --wf-gold: #e6bd5c;
+  --wf-gold-2: #a07c33;
+  --wf-gold-hi: #ffe7a8;
+  --wf-on-gold: #2a1b04;
+  --wf-edge: rgba(230, 189, 92, 0.6);
+  --wf-glass-top: rgba(26, 30, 58, 0.86);
+  --wf-glass-bot: rgba(10, 11, 26, 0.9);
+  --wf-line: rgba(255, 255, 255, 0.13);
+  --wf-fill: rgba(255, 255, 255, 0.045);
+  --wf-serif: "Cinzel", Georgia, serif;
+  --wf-sans: "Alegreya Sans", system-ui, sans-serif;
+  --wf-radius: 10px;
+  /* The shell's own variables, so anything not restyled below still reads as Wardenflame. */
+  --ink: var(--wf-ink);
+  --dim: var(--wf-muted);
+  --edge: var(--wf-line);
+  --panel: var(--wf-fill);
+  --panel-hi: rgba(230, 189, 92, 0.16);
+  --red: var(--wf-gold);
+  --bad: #ff6a5e;
+  position: relative;
+  isolation: isolate;
+  font-family: var(--wf-sans);
+  color: var(--wf-ink);
+}
+body:has(.screen.wf-lobby) { background: #07080f; }
+.screen.wf-lobby > :not(.wf-backdrop) { position: relative; z-index: 1; }
+
+/* ---------------------------------------------------------------- the world behind */
+.wf-backdrop { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background: #0a0b1a; }
+.wf-backdrop-host { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; transition: opacity 0.8s ease; }
+.wf-backdrop-host.ready { opacity: 1; }
+.wf-backdrop-host canvas { display: block; image-rendering: pixelated; image-rendering: crisp-edges; }
+/* Navy at the top and bottom so the logo, the lists and the buttons read over any area of the Vale. */
+.wf-backdrop::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10, 11, 26, 0.55) 0%, rgba(10, 11, 26, 0.15) 30%, rgba(10, 11, 26, 0.35) 60%, rgba(7, 8, 15, 0.92) 100%),
+    radial-gradient(120% 60% at 50% 45%, transparent 40%, rgba(7, 8, 15, 0.5) 100%);
+}
+@media (prefers-reduced-motion: reduce) { .wf-backdrop-host { transition: none; } }
+
+/* ---------------------------------------------------------------- shared pieces */
+.wf-lobby :is(button, input) { font-family: var(--wf-sans); }
+.wf-lobby small { font: 700 12px var(--wf-serif); letter-spacing: 0.22em; text-transform: uppercase; color: var(--wf-muted); }
+.wf-lobby button:not(.primary) {
+  border-radius: var(--wf-radius);
+  border-color: var(--wf-line);
+  background: linear-gradient(180deg, var(--wf-glass-top), var(--wf-glass-bot));
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+.wf-lobby button:focus-visible, .wf-lobby input:focus-visible { outline-color: var(--wf-gold-hi); }
+.wf-lobby .primary {
+  border-radius: var(--wf-radius);
+  color: var(--wf-on-gold);
+  background: linear-gradient(180deg, #ffe39a, #e6bd5c 50%, #b88a2c);
+  border-color: #fff0c0;
+  box-shadow: 0 0 18px rgba(230, 189, 92, 0.4);
+  font: 800 18px var(--wf-serif);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.wf-lobby .primary.big { font-size: 19px; }
+.wf-lobby .primary:disabled {
+  color: var(--wf-muted); background: #15172e; border-color: rgba(230, 189, 92, 0.35); box-shadow: none;
+}
+.wf-lobby .link { color: var(--wf-gold-hi); font-weight: 700; border: none; background: none; backdrop-filter: none; }
+.wf-lobby .text-input {
+  border-radius: var(--wf-radius); background: rgba(10, 11, 26, 0.85); border-color: rgba(230, 189, 92, 0.35); color: var(--wf-ink);
+}
+.wf-lobby .text-input::placeholder { color: var(--wf-dim); }
+.wf-lobby .field > span { font: 700 12px var(--wf-serif); letter-spacing: 0.2em; color: var(--wf-gold); }
+.wf-lobby .hint { color: var(--wf-muted); font-weight: 500; text-shadow: 0 1px 4px rgba(7, 8, 15, 0.9); }
+.wf-lobby .form-error { border-radius: 6px; }
+.wf-lobby .picked { background: rgba(230, 189, 92, 0.12); border-color: var(--wf-gold); box-shadow: 0 0 16px rgba(230, 189, 92, 0.25); }
+
+/* The logo, at its own pixels (278 px wide: three device pixels per art pixel on a 3× phone). */
+.wf-banner { padding: 18px var(--gutter) 0; }
+.wf-banner .tx-logo img { filter: drop-shadow(0 4px 10px rgba(7, 8, 15, 0.7)); }
+.wf-banner.pick { padding-top: 14px; margin-bottom: -10px; }
+.wf-banner.pick .tx-logo img { width: 139px; height: 54px; }
+
+/* Crests and portraits on cards. */
+.wf-badge { flex: none; display: inline-grid; place-items: center; }
+.wf-badge.chip { width: 36px; height: 36px; }
+.wf-badge.chip b { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 6px; font: 800 16px var(--wf-serif); color: var(--wf-gold); border: 1px solid rgba(230, 189, 92, 0.45); }
+.wf-badge .tx-portrait { border-radius: 8px; }
+
+/* ---------------------------------------------------------------- the lobby */
+.wf-lobby.lobby { gap: 14px; }
+.wf-lobby .lobby-head { padding: 6px 20px 0; align-items: center; }
+.wf-lobby .lobby-head small { font-size: 11px; }
+.wf-lobby .room-code { font: 800 40px/1 var(--wf-serif); letter-spacing: 0.16em; color: var(--wf-gold-hi); text-shadow: 0 0 14px rgba(230, 189, 92, 0.35); }
+.wf-lobby .lobby-head .count b { font: 800 30px var(--wf-serif); color: var(--wf-ink); }
+.wf-lobby .mute-toggle { border-radius: var(--wf-radius); color: var(--wf-gold-hi); }
+
+.wf-lobby .last-results { margin: 0 var(--gutter); padding: 10px 14px; border-radius: var(--wf-radius); background: linear-gradient(180deg, var(--wf-glass-top), var(--wf-glass-bot)); border: 1px solid var(--wf-line); }
+
+/* Player chips: two columns of glass, each with its crest and a player colour (p1–p6) along the left. */
+.wf-lobby .players { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.wf-lobby .player {
+  --p: #ff8a3d;
+  min-height: 52px; padding: 6px 10px 6px 8px; gap: 8px;
+  border-radius: var(--wf-radius); border: 1px solid var(--wf-line); border-left: 3px solid var(--p);
+  background: linear-gradient(180deg, var(--wf-glass-top), var(--wf-glass-bot));
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+.wf-lobby .player:nth-child(6n + 2) { --p: #3ec7ff; }
+.wf-lobby .player:nth-child(6n + 3) { --p: #c08cff; }
+.wf-lobby .player:nth-child(6n + 4) { --p: #5fe08a; }
+.wf-lobby .player:nth-child(6n + 5) { --p: #ffd447; }
+.wf-lobby .player:nth-child(6n + 6) { --p: #ff7fb6; }
+.wf-lobby .player.me { border-color: rgba(230, 189, 92, 0.6); border-left-color: var(--p); box-shadow: 0 0 12px rgba(230, 189, 92, 0.2); }
+.wf-lobby .player .pname { font: 700 17px var(--wf-serif); letter-spacing: 0.04em; color: var(--wf-ink); }
+.wf-lobby .player .vip { font: 800 10px var(--wf-sans); letter-spacing: 0.12em; background: var(--wf-gold); color: var(--wf-on-gold); border-radius: 4px; }
+.wf-lobby .player .away { font: 700 10px var(--wf-sans); color: var(--wf-dim); }
+.wf-lobby .player.offline { opacity: 0.55; }
+
+.wf-lobby .picker > small, .wf-lobby .campaigns > small {
+  display: flex; align-items: center; gap: 10px; color: var(--wf-gold); margin-top: 4px;
+}
+.wf-lobby .picker > small::after, .wf-lobby .campaigns > small::after {
+  content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(230, 189, 92, 0.6), rgba(230, 189, 92, 0));
+}
+.wf-lobby .game-card { border-radius: var(--wf-radius); }
+.wf-lobby .game-card .gname { font: 800 20px var(--wf-serif); letter-spacing: 0.04em; color: var(--wf-ink); }
+.wf-lobby .game-card .gdesc { color: var(--wf-muted); font-weight: 500; font-size: 15px; }
+.wf-lobby .game-card .gplayers { color: var(--wf-gold); font-family: var(--wf-serif); letter-spacing: 0.14em; }
+.wf-lobby .game-card.picked { border-left: 1px solid var(--wf-gold); }
+
+/* The campaign step, told as the party's chronicle: each campaign a bound volume with a gold ribbon. */
+.wf-lobby .campaigns {
+  padding: 14px 14px 16px; margin: 4px 0 2px;
+  border-radius: 12px; border: 1px solid rgba(230, 189, 92, 0.45);
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(230, 189, 92, 0.1), transparent 60%),
+    linear-gradient(180deg, rgba(26, 30, 58, 0.92), rgba(10, 11, 26, 0.95));
+  box-shadow: inset 0 0 0 3px rgba(7, 8, 15, 0.6), inset 0 0 0 4px rgba(230, 189, 92, 0.18);
+}
+.wf-lobby .campaigns > small { font-size: 13px; color: var(--wf-gold-hi); }
+.wf-lobby .campaign-card {
+  position: relative; padding: 12px 14px 12px 22px; align-items: flex-start; flex-direction: column; gap: 3px;
+  border-radius: 4px 10px 10px 4px; background: linear-gradient(90deg, rgba(10, 11, 26, 0.95), rgba(26, 30, 58, 0.85));
+}
+.wf-lobby .campaign-card::before {
+  content: ""; position: absolute; left: 7px; top: -1px; width: 7px; height: 26px;
+  background: linear-gradient(180deg, #e6bd5c, #a07c33); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);
+}
+.wf-lobby .campaign-card .cname { font: 800 19px var(--wf-serif); letter-spacing: 0.04em; color: var(--wf-ink); }
+.wf-lobby .campaign-card .cmeta { font: italic 500 14px var(--wf-sans); letter-spacing: 0; text-transform: none; color: var(--wf-muted); }
+.wf-lobby .campaign-card.picked { border-color: var(--wf-gold); }
+.wf-lobby .campaign-card.picked .cname { color: var(--wf-gold-hi); }
+.wf-lobby .campaigns > button { border-style: dashed; border-color: rgba(230, 189, 92, 0.55); color: var(--wf-gold-hi); font-weight: 700; }
+.wf-lobby .campaign-form { padding-top: 2px; }
+
+.wf-lobby .waiting p { color: var(--wf-muted); text-align: center; text-shadow: 0 1px 4px rgba(7, 8, 15, 0.9); }
+.wf-lobby .waiting .next-game { font-size: 17px; }
+.wf-lobby .waiting .next-game b { font-family: var(--wf-serif); color: var(--wf-gold-hi); letter-spacing: 0.04em; }
+
+/* "Who are you in …?" inside the lobby. */
+.wf-lobby .claim h2 { font: 800 21px/1.2 var(--wf-serif); letter-spacing: 0.04em; text-align: center; }
+.wf-lobby .claim .claim-row {
+  flex-direction: row; align-items: center; gap: 12px; flex-wrap: wrap; border-left: 1px solid var(--wf-line);
+}
+.wf-lobby .claim .claim-row b { font: 800 19px var(--wf-serif); }
+.wf-lobby .claim .claim-row span:not(.wf-badge):not(.tx-portrait) { flex-basis: 100%; margin: -6px 0 0 52px; }
+.wf-lobby .claim .claim-new { border-style: dashed; border-color: rgba(230, 189, 92, 0.55); color: var(--wf-gold-hi); }
+
+/* ---------------------------------------------------------------- "Who are you?" */
+.wf-lobby .pick-head small { font-size: 12px; letter-spacing: 0.3em; }
+.wf-lobby .pick-head h1 { font: 800 30px/1.15 var(--wf-serif); letter-spacing: 0.06em; color: var(--wf-ink); text-shadow: 0 2px 10px rgba(7, 8, 15, 0.8); }
+.wf-lobby .pick-head p { color: var(--wf-muted); font-weight: 500; font-size: 17px; }
+.wf-lobby .pick-grid { gap: 12px; }
+.wf-lobby .pick-tile {
+  min-height: 168px; gap: 4px; border-top: 1px solid var(--wf-line); border-radius: 12px;
+}
+.wf-lobby .pick-tile .wf-badge { margin-bottom: 6px; }
+.wf-lobby .pick-tile b { font: 800 20px var(--wf-serif); letter-spacing: 0.04em; color: var(--wf-ink); }
+.wf-lobby .pick-tile span:not(.wf-badge):not(.tx-portrait) { color: var(--wf-muted); font-weight: 500; font-size: 14px; }
+.wf-lobby .pick-tile.pick-new { border: 1px dashed rgba(230, 189, 92, 0.5); color: var(--wf-gold-hi); font-weight: 800; }
+.wf-lobby .pick-tile:disabled { opacity: 0.45; }
+.wf-lobby .pick-hero {
+  border-radius: 14px; border: 2px solid var(--wf-magic, #3ec7ff); border-left-width: 2px;
+  background: radial-gradient(90% 70% at 50% 30%, rgba(62, 199, 255, 0.16), transparent 70%), linear-gradient(180deg, var(--wf-glass-top), var(--wf-glass-bot));
+  align-items: center;
+}
+.wf-lobby .pick-hero .hero-name { font: 800 40px var(--wf-serif); letter-spacing: 0.06em; }
+.wf-lobby .pick-hero .hero-sub { color: var(--wf-muted); font-weight: 500; }
+.wf-lobby .pick-row { border-left: 1px solid var(--wf-line); justify-content: flex-start; }
+.wf-lobby .pick-row .row-text { flex: 1; }
+.wf-lobby .pick-row b { font: 800 20px var(--wf-serif); }
+.wf-lobby .pick-row[aria-pressed="true"] { border-color: var(--wf-gold); background: rgba(230, 189, 92, 0.12); }
+.wf-lobby .pick-row .tag { border-radius: 4px; }

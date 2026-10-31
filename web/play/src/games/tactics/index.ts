@@ -1,5 +1,6 @@
 import type { GameModule } from "../module";
 import "./fonts";
+import { lobbyTheme } from "./lobby";
 import { TacticsPortal } from "./portal";
 import { PickClass, PickEncounter, ReactPrompt, Results, Status, Turn } from "./screens";
 import "./tactics.css";
@@ -9,4 +10,5 @@ export const module: GameModule = {
   id: "tactics",
   screens: { pickClass: PickClass, pickEncounter: PickEncounter, turn: Turn, react: ReactPrompt, status: Status, results: Results },
   portal: TacticsPortal,
+  lobbyTheme,
 };
