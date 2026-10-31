@@ -26,6 +26,22 @@
       "group": "music",
       "use": "Camp and party screen"
     },
+    "camp_scarwalker": {
+      "files": [
+        "camp_scarwalker.ogg"
+      ],
+      "loop": true,
+      "group": "music",
+      "use": "The Sunscar and the Scarwalker camp (Chapter III)"
+    },
+    "court_mirewood": {
+      "files": [
+        "court_mirewood.ogg"
+      ],
+      "loop": true,
+      "group": "music",
+      "use": "Mirewood and the Glimmer Court (Chapter II)"
+    },
     "defeat": {
       "files": [
         "defeat.ogg"
@@ -65,6 +81,22 @@
       "loop": true,
       "group": "music",
       "use": "Title screen"
+    },
+    "town_emberwick": {
+      "files": [
+        "town_emberwick.ogg"
+      ],
+      "loop": true,
+      "group": "music",
+      "use": "Emberwick and the Ashen Ford between battles (Chapters I-II)"
+    },
+    "town_greyhold": {
+      "files": [
+        "town_greyhold.ogg"
+      ],
+      "loop": true,
+      "group": "music",
+      "use": "Greyhold and the pilgrim road (Chapter IV)"
     },
     "victory": {
       "files": [

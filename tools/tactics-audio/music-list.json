@@ -80,5 +80,45 @@
   "use": "The campaign's final battle (hall_of_the_flame): Maren's ritual and the red dragon",
   "seed": 4210,
   "vocals": true
+ },
+ "town_emberwick": {
+  "prompt": "Fantasy market-town music for a river town at a ford: a lively but gentle fiddle and tin whistle melody, bouncing acoustic guitar, hand drum and tambourine, accordion-like drone, cozy and busy like market day, with a quiet undercurrent of worry in a minor-key bridge, as if the warm ground beneath the town is slowly cooling. 100 BPM, D mixolydian, celtic folk. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 120,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "Emberwick and the Ashen Ford between battles (Chapters I-II)",
+  "seed": 4220,
+  "vocals": false
+ },
+ "court_mirewood": {
+  "prompt": "Fey court music for an enchanted drowned forest ruled by a glimmering faerie queen: glass harp and celesta, a slow music-box melody, shimmering bowed glass, soft breathy wordless whispers and airy female voices humming, pizzicato strings, beautiful but subtly wrong and dangerous, dreamlike. 72 BPM, E-flat lydian, ethereal chamber. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 120,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "Mirewood and the Glimmer Court (Chapter II)",
+  "seed": 4221,
+  "vocals": true
+ },
+ "camp_scarwalker": {
+  "prompt": "Desert nomad camp music for goblin clans in a sun-scorched crater: deep frame drums and darbuka in a rolling 6/8 groove, a breathy reed flute melody, plucked oud, low throat-singing drones without words, hot wind and wide open space, proud and weathered. 96 BPM, D phrygian dominant, tribal world-fusion. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 120,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "The Sunscar and the Scarwalker camp (Chapter III)",
+  "seed": 4222,
+  "vocals": false
+ },
+ "town_greyhold": {
+  "prompt": "Music for a cold mountain pilgrim town built by masons beneath a frozen pass: sparse, hymn-like and austere, low sustained strings and viola, a lone solemn horn, a single tolling bell, gentle male choir humming a chant-like hymn without words, snow and stone and faith, quietly sorrowful but steadfast. 66 BPM, B-flat minor, sacred chamber. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 120,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "Greyhold and the pilgrim road (Chapter IV)",
+  "seed": 4223,
+  "vocals": true
  }
 }

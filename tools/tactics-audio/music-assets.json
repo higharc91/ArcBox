@@ -81,6 +81,38 @@
    "model": "model_elevenlabs-music-v2-5",
    "seed": 4210,
    "vocals": true
+  },
+  "town_emberwick": {
+   "asset": "asset_4G2rwUYZTbHwZthqyybsS6qh",
+   "job": "job_sfmPBPz9eVmx8va4FwJYU31b",
+   "model": "model_elevenlabs-music-v2-5",
+   "seed": 4220,
+   "vocals": false,
+   "cu": 60
+  },
+  "court_mirewood": {
+   "asset": "asset_pdhDK1ozz8jiYT5Z4e8VQ51z",
+   "job": "job_QRmc3XgXnkFXvzWB4JcozfPY",
+   "model": "model_elevenlabs-music-v2-5",
+   "seed": 4221,
+   "vocals": true,
+   "cu": 60
+  },
+  "camp_scarwalker": {
+   "asset": "asset_TfgPfAWkPKJJwusw7CHTyq2Z",
+   "job": "job_mMGNYSwkuGPzJDHgXm4m5Tw6",
+   "model": "model_elevenlabs-music-v2-5",
+   "seed": 4222,
+   "vocals": true,
+   "cu": 60
+  },
+  "town_greyhold": {
+   "asset": "asset_oMcKbJaey2zrKkq4AJDTgPMm",
+   "job": "job_iLNPNLzjK4A2keJYNKeqiFyU",
+   "model": "model_elevenlabs-music-v2-5",
+   "seed": 4223,
+   "vocals": true,
+   "cu": 60
   }
  },
  "failures": [
