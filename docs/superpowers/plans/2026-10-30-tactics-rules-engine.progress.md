@@ -15,7 +15,7 @@ When every task is done, one whole-branch review runs.
 
 **Handing off:** read [`2026-10-30-tactics-rules-engine.handoff.md`](2026-10-30-tactics-rules-engine.handoff.md) first. It has the workflow, the notes for each remaining task, every ruling, and the exact agent instructions.
 
-**Status:** All 23 tasks are done. Tasks 18–21 were done in a local session and Task 22 from a cloud session writing into the local checkout. Task 23 (balance pass) was done on 2026-10-30: three of its four targets are met, and the role-band target is not (52 of 60 values in band; see the [final report](../reports/2026-10-30-tactics-balance.md)). The whole-branch final review is next.
+**Status:** Tasks 1–22 are done. Tasks 18–21 were done in a local session and Task 22 from a cloud session writing into the local checkout. Task 23 (balance pass) is implemented in `98b06c5`, and its review came back **Needs fixes**. **Fix round 1 is next:** start from [the Task 23 review](2026-10-30-tactics-rules-engine.task-23-review.md). So far the win-rate and battle-length targets are met, the 2% target is partly met, and the role-band target is not (52 of 60 values in band; see the [final report](../reports/2026-10-30-tactics-balance.md)). The whole-branch final review follows.
 
 **How to resume:**
 1. Find the first task below that isn't `done`.
@@ -49,7 +49,7 @@ When every task is done, one whole-branch review runs.
 | 20 | Caster subclasses (16, incl. sorcerer's), sapling and imp | done | `49e3c9d` | |
 | 21 | Monster roster, maps and sample encounters | done | `7480329` | |
 | 22 | Objectives, triggers and the showcase encounter | done | (this commit) | |
-| 23 | Balance pass and final report | done | (this commit) | |
+| 23 | Balance pass and final report | in review: needs fixes | `98b06c5` | 0 of 5 run |
 | – | Whole-branch final review | not started | | |
 
 ## Scope change (2026-10-30)

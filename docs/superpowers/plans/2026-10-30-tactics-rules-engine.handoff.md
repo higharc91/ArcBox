@@ -49,7 +49,7 @@ Claude-Session: https://claude.ai/code/session_01UZNTTVCBKLVWRDHcmTGbSi
 
 ## What's next
 
-The tracker's status table is authoritative; check it first. Tasks 1–22 are done; **the next task is 23** (balance pass), then the whole-branch review.
+The tracker's status table is authoritative; check it first. Tasks 1–22 are done, and Task 23 (balance pass) is implemented but needs fixes. **Start from [the Task 23 review](2026-10-30-tactics-rules-engine.task-23-review.md)**, which has the findings and the steps to resume; the [implementer's report](2026-10-30-tactics-rules-engine.task-23-report.md) is beside it. Then run the whole-branch review.
 
 **Remaining tasks, with notes earlier work left for them:**
 
