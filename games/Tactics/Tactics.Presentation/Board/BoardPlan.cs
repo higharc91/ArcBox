@@ -61,7 +61,15 @@ public enum FaceKind { Under, Side, Lip, Top, Tint }
 public enum Facing { Up, U, V }
 
 /// <summary>A flat colour, for what the pack has no art for.</summary>
-public readonly record struct Rgb(float R, float G, float B);
+public readonly record struct Rgb(float R, float G, float B)
+{
+    /// <summary>A colour as the manifests write it: <c>#rrggbb</c>.</summary>
+    public static Rgb Hex(string hex)
+    {
+        var value = Convert.ToInt32(hex[1..], 16);
+        return new Rgb((value >> 16 & 255) / 255f, (value >> 8 & 255) / 255f, (value & 255) / 255f);
+    }
+}
 
 /// <summary>Something to draw, at <see cref="Order"/> (<see cref="BoardOrder.Key"/>).</summary>
 public abstract record BoardItem(long Order, Tile Tile);
@@ -78,8 +86,27 @@ public abstract record BoardItem(long Order, Tile Tile);
 /// <param name="Shade">Brightness: 1 is the art as it is.</param>
 /// <param name="Alpha">Opacity.</param>
 /// <param name="Grid">Outlined, as a tile the battle can use.</param>
+/// <param name="Lit">Takes the board's light. What the rules mean is left out, so it stays clear.</param>
 public sealed record Face(long Order, Tile Tile, FaceKind Kind, Facing Facing, ImmutableArray<Vector2> Points, ImmutableArray<Vector2> Uvs,
-    ArtImage? Image, Rgb? Fill, float Shade = 1, float Alpha = 1, bool Grid = false) : BoardItem(Order, Tile);
+    ArtImage? Image, Rgb? Fill, float Shade = 1, float Alpha = 1, bool Grid = false, bool Lit = true) : BoardItem(Order, Tile)
+{
+    /// <summary>The face as four cells that cover it, so light can peak inside a tile and not only on its corners. None is outlined.</summary>
+    public ImmutableArray<Face> Cells()
+    {
+        static ImmutableArray<Vector2> Split(ImmutableArray<Vector2> q, int cell)
+        {
+            var (back, right, front, left, middle) = ((q[0] + q[1]) / 2, (q[1] + q[2]) / 2, (q[2] + q[3]) / 2, (q[3] + q[0]) / 2, (q[0] + q[2]) / 2);
+            return cell switch
+            {
+                0 => [q[0], back, middle, left],
+                1 => [back, q[1], right, middle],
+                2 => [middle, right, q[2], front],
+                _ => [left, middle, front, q[3]],
+            };
+        }
+        return [.. Enumerable.Range(0, 4).Select(cell => this with { Points = Split(Points, cell), Uvs = Split(Uvs, cell), Grid = false })];
+    }
+}
 
 /// <summary>An upright or flat sprite, one frame of <see cref="Image"/> at a time.</summary>
 /// <param name="Order">Its place in the painter's order.</param>
@@ -87,7 +114,9 @@ public sealed record Face(long Order, Tile Tile, FaceKind Kind, Facing Facing, I
 /// <param name="Image">The strip.</param>
 /// <param name="TopLeft">Where its top left lands, in art pixels.</param>
 /// <param name="Size">One frame's size.</param>
-public sealed record Sprite(long Order, Tile Tile, ArtImage Image, Vector2 TopLeft, Vector2 Size) : BoardItem(Order, Tile);
+/// <param name="Light">The light it gives, or null.</param>
+/// <param name="Lit">Takes the board's light. What the rules mean is left out, so it stays clear.</param>
+public sealed record Sprite(long Order, Tile Tile, ArtImage Image, Vector2 TopLeft, Vector2 Size, PropLight? Light = null, bool Lit = true) : BoardItem(Order, Tile);
 
 /// <summary>
 /// The board, ready to draw: every face and sprite in painter's order, and the area they cover. Pure: built from a
@@ -220,7 +249,8 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
             if (art.Prop(prop.Id, mapVariants.Prepend(terrain.Look(prop.At).Variant)) is not { } sprite)
                 continue;
             var topLeft = terrain.Centre(prop.At) - new Vector2(sprite.AnchorX, sprite.AnchorY);
-            items.Add(new Sprite(BoardOrder.Key(prop.At, BoardLayer.Prop), prop.At, sprite.Image, topLeft, new Vector2(sprite.Width, sprite.Height)));
+            items.Add(new Sprite(BoardOrder.Key(prop.At, BoardLayer.Prop), prop.At, sprite.Image, topLeft, new Vector2(sprite.Width, sprite.Height),
+                terrain.Look(prop.At).Void ? null : sprite.Light));    // what went down with its tile has gone out
         }
     }
 
@@ -234,13 +264,13 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
                 var ground = BoardOrder.Key(tile, BoardLayer.Ground);
                 if (hazard is null)
                 {
-                    items.Add(Flat(FaceKind.Tint, ground, tile, terrain.Top(tile), null, 1) with { Fill = ZoneTint, Alpha = TintAlpha });
+                    items.Add(Flat(FaceKind.Tint, ground, tile, terrain.Top(tile), null, 1) with { Fill = ZoneTint, Alpha = TintAlpha, Lit = false });
                     continue;
                 }
                 var centre = terrain.Centre(tile);
-                items.Add(new Sprite(ground, tile, hazard.Ground, centre - hazard.Origin, hazard.Frame));
+                items.Add(new Sprite(ground, tile, hazard.Ground, centre - hazard.Origin, hazard.Frame, Lit: false));
                 if (hazard.Over is { } over)
-                    items.Add(new Sprite(BoardOrder.Key(tile, BoardLayer.Over), tile, over, centre - hazard.OverOrigin, hazard.OverFrame));
+                    items.Add(new Sprite(BoardOrder.Key(tile, BoardLayer.Over), tile, over, centre - hazard.OverOrigin, hazard.OverFrame, Lit: false));
             }
         }
     }

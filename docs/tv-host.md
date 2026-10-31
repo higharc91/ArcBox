@@ -209,6 +209,20 @@ strip. The view has no facing, so a unit looks at its nearest foe. Characters ha
 gives them their class's preset (`HostSprite`); phones still get null. With `--shots`, a battle's label gains `-conditions`
 or `-downed` when those first show, so a real fight leaves a shot of each.
 
+**The light** follows the pack's recipe (`dungeon/manifest.json`'s `lighting`): what's drawn is its art x (ambient + each light's colour x
+power x flicker x falloff), at most 1.3. `BoardLighting`, in `Tactics.Presentation/Board`, builds the lights from the `BoardPlan`: a
+prop's `light` and a texture's `emissive` scatter rule, so a tile that sinks takes its light with it, and they're rebuilt with the plan.
+Flicker is a function of time and each light's phase, so tests can pin it. A room's ambient comes from a word in its map's id naming
+one of the recipe's rooms (`crypt_hall`, `crystal_cave`, `hall_of_the_flame`), lifted by `AmbientLift` on every map alike, as the
+recipe's dioramas have far more lights than the maps. The rest are open air: with no lights there, `Active` is false and the board
+draws as if none of this existed. `BoardCanvas` puts the light in its vertex colours, with a top in reach split into four cells so a
+pool can peak inside a tile, and redraws at its usual 20 Hz. That's no extra pass and no new shader. PointLight2D doesn't suit this board: it's one canvas item
+holding marks and art alike, CanvasModulate also darkens the HUD on the same canvas, colours blow out with no ceiling, and each item takes a limited number of
+lights. What glows by itself (`GlowMask`, from the pack's masks or, where the pack has none, the brightest shades of the light's colour) is
+baked once and drawn again unlit, in its place in the painter's order, so a unit in front still hides it. Sources get the pack's
+additive halos, in place of the recipe's bloom. The recipe's banding and dither aren't done: they need a shader. Figures take the light
+near them, never under `FigureFloor`. Rings, status effects, zones, marks (`UnitMarks`, over the light) and the HUD stay unlit.
+
 **The HUD** (`HudLayer`, `TurnStrip`) sits in the corners the diamond leaves free, in the pack's navy glass and gold: the
 encounter, round, whose turn it is and the objective at the top left, the turn order at the top right. `BattleHud` in
 `Tactics.Presentation/Hud` words and orders all of it from `BeatPlayer.Shown`, so it can't give away a beat that hasn't played.

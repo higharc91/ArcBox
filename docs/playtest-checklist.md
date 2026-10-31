@@ -154,6 +154,10 @@ so tick those on the night. To play alongside the bots, see "With your own phone
 - [ ] **(person)** Recorded lines on `warlord_bridge`: each voice suits its speaker, lines never overlap, and captions keep up with the voice when two lines share a beat.
 - [ ] **(person)** The VICTORY and DEFEAT strips read well on the Results and the logo reads well in the header at 2560×1440, and the Results rows are still comfortable with the banner above them.
 - [ ] **(person)** Player colours on the turn-order frames read as each player's, next to the stripes.
+- [ ] **(person)** Light: `crypt_hall`, `crystal_cave` and `hall_of_the_flame` feel lit and not just dim from the sofa, the far end of the crypt isn't too dark to follow a fight, and dark figures (skeletons, the wraith) still stand out there. `AmbientLift` and `FigureFloor` are the two numbers to change, both in `BoardLighting`.
+- [ ] **(person)** Flicker: fire, crystals and lava breathe gently and out of step, never as a strobe. Stills can't show this.
+- [ ] **(person)** Zones (ice, webs, poison) stay unlit on purpose, so they're clear; check they don't look pasted on in a dark room.
+- [ ] **(person)** Halos and tile-sized pools look right on the real TV beside the mockups, without the recipe's banded, dithered steps.
 - [ ] **(person)** Join on a real phone over the LAN (`--people=1`): the QR opens the join page and the turn screen matches
       the TV. Checked here only in a browser on the PC, not on a phone.
 
