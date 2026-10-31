@@ -168,6 +168,24 @@ export function Turn({ data, send }: CustomScreenProps) {
         </span>
       </div>
 
+      {/* The commit buttons come first, so they're on screen without scrolling past the map. */}
+      {ability ? (
+        <div class="tx-actions tx-commit">
+          <button type="button" class="big" disabled={!target} onClick={() => target && use(ability, target)}>
+            {target ? `Use${target.target.unit && target.target.unit !== me.id ? ` on ${names.get(target.target.unit) ?? ""}` : ""}` : "Pick a target"}
+          </button>
+          <button type="button" onClick={() => setAbilityIx(null)}>Back</button>
+        </div>
+      ) : (
+        <div class="tx-actions tx-commit">
+          <button type="button" class="big" disabled={!move} onClick={() => move && send("move", { path: move.path })}>
+            {move ? `Move here · ${move.cost}` : "Pick a tile to move"}
+          </button>
+          {choices.canDelay ? <button type="button" onClick={() => send("delay", { slots: 1 })}>Delay</button> : null}
+          <button type="button" onClick={() => send("endTurn")}>End turn</button>
+        </div>
+      )}
+
       <MiniMap me={me} units={units} cursor={cursor} onPick={setCursor}
         reach={ability ? [] : choices.moves.map((m) => m.to)} aims={all.map((t) => t.aim)} />
       <DPad cursor={cursor} onMove={setCursor} />
@@ -188,35 +206,18 @@ export function Turn({ data, send }: CustomScreenProps) {
               ))}
             </ul>
           ) : null}
-          <div class="tx-actions">
-            <button type="button" class="big" disabled={!target} onClick={() => target && use(ability, target)}>
-              {target ? `Use${target.target.unit && target.target.unit !== me.id ? ` on ${names.get(target.target.unit) ?? ""}` : ""}` : "Pick a target"}
-            </button>
-            <button type="button" onClick={() => setAbilityIx(null)}>Back</button>
-          </div>
         </div>
       ) : (
-        <div class="tx-panel">
-          <div class="tx-actions">
-            <button type="button" class="big" disabled={!move} onClick={() => move && send("move", { path: move.path })}>
-              {move ? `Move here · ${move.cost}` : "Pick a tile to move"}
-            </button>
-          </div>
-          <ul class="tx-abilities">
-            {choices.abilities.map((a, i) => (
-              <li key={`${a.ability}/${a.item ?? ""}`}>
-                <button type="button" onClick={() => setAbilityIx(i)}>
-                  <b>{a.name}</b> <small class="tx-dim">{costText(a.cost)}</small>
-                  <small class="tx-tip">{a.tooltip}</small>
-                </button>
-              </li>
-            ))}
-          </ul>
-          <div class="tx-actions">
-            {choices.canDelay ? <button type="button" onClick={() => send("delay", { slots: 1 })}>Delay</button> : null}
-            <button type="button" onClick={() => send("endTurn")}>End turn</button>
-          </div>
-        </div>
+        <ul class="tx-abilities">
+          {choices.abilities.map((a, i) => (
+            <li key={`${a.ability}/${a.item ?? ""}`}>
+              <button type="button" onClick={() => setAbilityIx(i)}>
+                <b>{a.name}</b> <small class="tx-dim">{costText(a.cost)}</small>
+                <small class="tx-tip">{a.tooltip}</small>
+              </button>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );
@@ -255,10 +256,10 @@ function DPad({ cursor, onMove }: { cursor: Tile; onMove(t: Tile): void }) {
   const go = (dx: number, dy: number) => onMove([Math.max(0, cursor[0] + dx), Math.max(0, cursor[1] + dy)]);
   return (
     <div class="tx-dpad">
-      <button type="button" aria-label="Up" onClick={() => go(0, -1)}>▲</button>
       <button type="button" aria-label="Left" onClick={() => go(-1, 0)}>◀</button>
-      <button type="button" aria-label="Right" onClick={() => go(1, 0)}>▶</button>
+      <button type="button" aria-label="Up" onClick={() => go(0, -1)}>▲</button>
       <button type="button" aria-label="Down" onClick={() => go(0, 1)}>▼</button>
+      <button type="button" aria-label="Right" onClick={() => go(1, 0)}>▶</button>
     </div>
   );
 }

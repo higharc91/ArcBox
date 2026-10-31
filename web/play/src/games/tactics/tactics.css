@@ -8,6 +8,9 @@
 .tx-class small, .tx-row small { color: var(--dim); text-transform: capitalize; }
 .tx-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .tx-actions .big { flex: 1 1 100%; }
+.tx-commit .big { flex: 1 1 auto; }
+/* Room for the sticky countdown, so it never covers the last ability. */
+.tx-turn { padding-bottom: 80px; }
 .tx-me { display: flex; align-items: center; gap: 10px; }
 .tx-hp { display: flex; align-items: center; gap: 6px; flex: 1; }
 .tx-hp-bar { flex: 1; height: 8px; background: rgba(255, 255, 255, 0.12); border-radius: 4px; overflow: hidden; }
@@ -18,19 +21,16 @@
 .tx-pips i.on { background: #fff; color: #111; }
 .tx-map { display: flex; flex-direction: column; gap: 2px; align-self: center; max-width: 100%; overflow-x: auto; }
 .tx-maprow { display: flex; gap: 2px; }
-.tx-cell { width: 26px; height: 26px; min-height: 26px; padding: 0; border-radius: 3px; font-size: 13px; font-weight: 700; background: rgba(255, 255, 255, 0.05); }
+.tx-cell { width: 22px; height: 22px; min-height: 22px; padding: 0; border-radius: 3px; font-size: 13px; font-weight: 700; background: rgba(255, 255, 255, 0.05); }
 .tx-cell.reach { background: rgba(76, 217, 100, 0.25); }
 .tx-cell.aim { background: rgba(255, 159, 10, 0.35); }
 .tx-cell.me { background: #3a86ff; }
 .tx-cell.ally { background: #2a5db0; }
 .tx-cell.foe { background: #c0392b; }
 .tx-cell.cursor { outline: 2px solid #fff; outline-offset: -2px; }
-.tx-dpad { display: grid; grid-template-columns: repeat(3, 44px); grid-template-rows: repeat(3, 44px); gap: 4px; align-self: center; }
-.tx-dpad button { padding: 0; min-height: 44px; }
-.tx-dpad button:nth-child(1) { grid-column: 2; grid-row: 1; }
-.tx-dpad button:nth-child(2) { grid-column: 1; grid-row: 2; }
-.tx-dpad button:nth-child(3) { grid-column: 3; grid-row: 2; }
-.tx-dpad button:nth-child(4) { grid-column: 2; grid-row: 3; }
+/* The d-pad is one compact row under the map, so the screen's buttons stay in reach. */
+.tx-dpad { display: flex; gap: 6px; justify-content: center; }
+.tx-dpad button { width: 52px; padding: 0; min-height: 40px; }
 .tx-panel { display: flex; flex-direction: column; gap: 8px; }
 .tx-panel p { margin: 0; }
 .tx-tip { display: block; color: var(--dim); font-size: 13px; }
