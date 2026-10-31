@@ -1,4 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
+import { packJson } from "./pack";
 
 /**
  * A battle map from the tactics content pack (`rules/maps/<id>.json`), decoded for drawing: per tile, row by row, its
@@ -19,22 +20,14 @@ export function decodeMap(file: MapFile): MapData {
 
 const cache = new Map<string, Promise<MapData | null>>();
 
-/** Fetches a map through the content endpoint (the pack's current hash from its index); null if it can't. Cached. */
+/** Fetches a map from the content pack (pack.ts); null if it can't. Cached. */
 export function loadMap(id: string): Promise<MapData | null> {
   let pending = cache.get(id);
   if (!pending) {
-    pending = (async () => {
-      try {
-        const index = (await (await fetch("/content/tactics/index.json")).json()) as { packId: string; hash: string }[];
-        const base = index.find((p) => p.packId === "base");
-        if (!base) return null;
-        return decodeMap((await (await fetch(`/content/tactics/base/${base.hash}/rules/maps/${id}.json`)).json()) as MapFile);
-      } catch (err) {
-        console.warn("Couldn't load the map", id, err);
-        cache.delete(id);   // try again next time
-        return null;
-      }
-    })();
+    pending = packJson<MapFile>(`rules/maps/${id}.json`).then((file) => {
+      if (!file) cache.delete(id);   // try again next time
+      return file ? decodeMap(file) : null;
+    });
     cache.set(id, pending);
   }
   return pending;

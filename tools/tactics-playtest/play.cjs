@@ -69,7 +69,7 @@ fs.mkdirSync(out, { recursive: true });
   const phoneShot = async (i, name) => (await phones[i].frameElement()).screenshot({ path: `${out}/${name}.png` });
 
   // The lobby's campaign step, through the phones' own UI.
-  await page.getByRole('button', { name: 'Tactics', exact: true }).click();
+  await page.getByRole('button', { name: 'Wardenflame', exact: true }).click();
   await page.waitForTimeout(800);
   await phones[0].getByRole('button', { name: 'New campaign' }).click();
   await phones[0].locator('input').first().fill('Embers');
@@ -110,7 +110,7 @@ fs.mkdirSync(out, { recursive: true });
       } else if (t.includes("Don't react")) {
         if (!seen.has('react')) { seen.add('react'); await phoneShot(i, '05-react'); }
         await f.getByRole('button', { name: "Don't react" }).click({ timeout: 3000 }).catch(() => {});
-      } else if (t.includes('is acting') && !seen.has('status')) { seen.add('status'); await phoneShot(i, '06-status'); }
+      } else if (t.includes('Now acting') && !seen.has('status')) { seen.add('status'); await phoneShot(i, '06-status'); }
     }
     if (++loops % 20 === 0) await shot(`07-board-${String(loops / 20).padStart(2, '0')}`);
     await page.waitForTimeout(500);

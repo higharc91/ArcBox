@@ -220,7 +220,8 @@ describe("tactics phone module", () => {
 
   it("status: says who is acting and when you're up", () => {
     show("status");
-    expect(screen.getByText("Player3 is acting")).toBeTruthy();
+    // The "Now acting" card: its label, then the acting unit's name.
+    expect(screen.getByText("Now acting").nextElementSibling!.textContent).toBe("Player3");
     expect(screen.getByText("You're up in 9")).toBeTruthy();
   });
 
