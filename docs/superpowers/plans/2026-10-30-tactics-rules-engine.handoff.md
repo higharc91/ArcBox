@@ -10,7 +10,7 @@ This guide is for an agent or person picking up the rules-engine plan partway th
 **Branch:** `ccr-472d8660-sxpjlj`. Everything is committed and pushed there.
 
 **Before starting work:**
-- **Toolchain:** run `export PATH=$HOME/.dotnet:$PATH`.
+- **Toolchain:** run `export PATH=$HOME/.dotnet:$PATH`. On the Windows checkout the SDK is at `%LOCALAPPDATA%\Microsoft\dotnet\dotnet.exe`; the `dotnet` first on PATH there has no SDKs.
 - **Tests:** `dotnet test ArcBox.slnx` must pass with no warnings, because warnings are treated as errors.
 
 ## How the work has been run
@@ -49,7 +49,7 @@ Claude-Session: https://claude.ai/code/session_01UZNTTVCBKLVWRDHcmTGbSi
 
 ## What's next
 
-The tracker's status table is authoritative; check it first. Tasks 1–17 are done and reviewed. Work stopped at the user's request after Task 17; **the next task is 18**.
+The tracker's status table is authoritative; check it first. Tasks 1–22 are done; **the next task is 23** (balance pass), then the whole-branch review.
 
 **Remaining tasks, with notes earlier work left for them:**
 

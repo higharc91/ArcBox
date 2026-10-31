@@ -20,6 +20,8 @@ public sealed class TestBattle
     private readonly List<(string Id, UnitSheet Sheet)> _monsters = [];
     private readonly List<ItemDef> _items = [];
     private readonly List<AiProfileDef> _aiProfiles = [];
+    private ObjectivesDef _objectives = ObjectivesDef.Default;
+    private ImmutableArray<TriggerDef> _triggers = [];
 
     /// <summary>Tests check the engine's invariants after every command, in any build configuration.</summary>
     static TestBattle() => Invariants.Enabled = true;
@@ -99,6 +101,28 @@ public sealed class TestBattle
         return this;
     }
 
+    /// <summary>Sets the battle's objectives (the default: defeat every enemy; lose when the party is out).</summary>
+    public TestBattle WithObjectives(ObjectivesDef objectives)
+    {
+        _objectives = objectives;
+        return this;
+    }
+
+    /// <summary>Sets the battle's triggers.</summary>
+    public TestBattle WithTriggers(params TriggerDef[] triggers)
+    {
+        _triggers = [.. triggers];
+        return this;
+    }
+
+    /// <summary>Adds a protected NPC on the party's side, AI-controlled.</summary>
+    public TestBattle Npc(string id, UnitSheet sheet, Tile at)
+    {
+        _units.Add(new UnitPlacement(new UnitId(id), sheet with { Side = Side.Party }, new AiControlled(sheet.AiProfile ?? "brute"), at,
+            [], Protected: true));
+        return this;
+    }
+
     /// <summary>Adds a party member.</summary>
     public TestBattle Party(string id, UnitSheet sheet, Tile at, Controller? controller = null, ImmutableArray<ItemStack> bag = default)
         => Add(id, sheet with { Side = Side.Party }, controller ?? new PlayerControlled(new ProfileId("pr_" + id)), at, bag);
@@ -110,7 +134,7 @@ public sealed class TestBattle
     /// <summary>Starts the battle and returns its first state and events.</summary>
     public (BattleState State, ImmutableArray<BattleEvent> Events) Start(ulong seed = 1)
     {
-        var setup = new BattleSetup(_map, _units.ToImmutable(), ObjectivesDef.Default, [], Difficulty.Normal, Xp: 250, Loot: []);
+        var setup = new BattleSetup(_map, _units.ToImmutable(), _objectives, _triggers, Difficulty.Normal, Xp: 250, Loot: []);
         var resolution = Battle.Start(setup, Rules, seed);
         return (resolution.State, resolution.Events);
     }

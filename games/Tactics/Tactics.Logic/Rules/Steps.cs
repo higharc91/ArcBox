@@ -19,6 +19,7 @@ namespace Tactics.Logic;
 [JsonDerivedType(typeof(OfferReactionStep), nameof(OfferReactionStep))]
 [JsonDerivedType(typeof(ReactionStep), nameof(ReactionStep))]
 [JsonDerivedType(typeof(AttackStep), nameof(AttackStep))]
+[JsonDerivedType(typeof(TriggerActionStep), nameof(TriggerActionStep))]
 public abstract record Step
 {
     /// <summary>Resolves the step against the writer.</summary>

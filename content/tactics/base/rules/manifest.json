@@ -50,9 +50,11 @@
     "maps/forest_ruins.json",
     "maps/crypt_hall.json",
     "maps/crystal_cave.json",
+    "maps/warlord_bridge.json",
     "encounters/river_crossing.json",
     "encounters/forest_ruins.json",
     "encounters/crypt_hall.json",
-    "encounters/crystal_cave.json"
+    "encounters/crystal_cave.json",
+    "encounters/warlord_bridge.json"
   ]
 }

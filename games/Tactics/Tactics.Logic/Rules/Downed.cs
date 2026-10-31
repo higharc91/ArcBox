@@ -12,9 +12,10 @@ public static class DownedRules
 
     /// <summary>
     /// True when <paramref name="unit"/> follows the player rules at 0 HP and goes Downed instead of dying: a party member
-    /// that isn't a summon, or an NPC marked <see cref="UnitState.Protected"/>.
+    /// that isn't a summon or a <see cref="UnitState.Helper"/>, or an NPC marked <see cref="UnitState.Protected"/>.
     /// </summary>
-    public static bool GoesDown(UnitState unit) => unit.Protected || (unit.Sheet.Side == Side.Party && unit.SummonedBy is null);
+    public static bool GoesDown(UnitState unit)
+        => unit.Protected || (unit.Sheet.Side == Side.Party && unit.SummonedBy is null && !unit.Helper);
 
     /// <summary>True while <paramref name="unit"/> is in the battle (Up or Downed): it holds its tile and its place in the order.</summary>
     public static bool InBattle(UnitState unit) => unit.Life is LifeState.Up or LifeState.Downed;

@@ -43,4 +43,11 @@ public sealed record UnitState(UnitId Id, UnitSheet Sheet, Controller Controller
     /// <summary>The unit's own sheet while <see cref="Sheet"/> is a form it took; null when it isn't transformed.</summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public UnitSheet? TrueSheet { get; init; }
+
+    /// <summary>
+    /// True for an ally a trigger brought in (<see cref="SpawnAction.Ally"/>): it fights on the party's side but isn't a party
+    /// member, so it dies at 0 HP and counts for no objective, party tag or XP. Left out of the JSON when false.
+    /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public bool Helper { get; init; }
 }

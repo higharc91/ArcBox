@@ -32,6 +32,9 @@ public static class Replay
     /// g1, g2, g3, kara.</item>
     /// <item><c>river-crossing</c>: the base pack's <c>river_crossing</c> encounter (Normal) with a level-1 party of default
     /// human characters, all player-controlled: fighter, cleric, rogue and wizard (<see cref="BasePackTests.Party"/>).</item>
+    /// <item><c>warlord-bridge</c>: the base pack's <c>warlord_bridge</c> showcase (Normal) with a level-5 party of default
+    /// human characters, all AI-controlled companions: fighter, cleric, rogue, wizard and ranger. Its commands are recorded
+    /// from <see cref="Ai.Plan"/> for both sides (<see cref="RecordWithAi"/>).</item>
     /// </list>
     /// </summary>
     public static Start Preset(string name)
@@ -55,6 +58,13 @@ public static class Replay
                 var rules = BasePackTests.Rules;
                 var setup = Encounters.Setup("river_crossing", BasePackTests.Party(4, rules), Difficulty.Normal, rules);
                 return new Start(rules, seed => Battle.Start(setup, rules, seed));
+            case "warlord-bridge":
+                var baseRules = BasePackTests.Rules;
+                string[] classes = ["fighter", "cleric", "rogue", "wizard", "ranger"];
+                ImmutableArray<PartyMember> party = [.. classes.Select(cls => new PartyMember(new UnitId(cls),
+                    SheetBuilder.DefaultCharacter(cls, "human", cls, null, 5, baseRules), new AiControlled("companion")))];
+                var bridge = Encounters.Setup("warlord_bridge", party, Difficulty.Normal, baseRules);
+                return new Start(baseRules, seed => Battle.Start(bridge, baseRules, seed));
             default:
                 throw new ArgumentException($"There is no replay preset '{name}'.", nameof(name));
         }
@@ -83,6 +93,52 @@ public static class Replay
             events.AddRange(resolution.Events);
         }
         return (state, events.ToImmutable());
+    }
+
+    /// <summary>
+    /// The commands of <paramref name="file"/>'s battle played by the AI for every unit (<see cref="Ai.Plan"/>), from its
+    /// preset and seed, until it ends or <paramref name="roundCap"/> rounds have passed: each turn's plan is applied command
+    /// by command, planned again when a command is refused or a move is cut short (up to 4 plans), and the turn is ended if
+    /// the plans don't end it. Only accepted commands are recorded. Reactions are the AI's own (every unit is AI-controlled).
+    /// </summary>
+    public static ImmutableArray<Command> RecordWithAi(ReplayFile file, int roundCap = 20)
+    {
+        var preset = Preset(file.Setup);
+        var state = preset.Begin(file.Seed).State;
+        var commands = ImmutableArray.CreateBuilder<Command>();
+        while (state.Outcome is null && state.Round <= roundCap && state.Pending is null && state.Active is { } unit)
+        {
+            var ended = false;
+            for (var plan = 0; plan < 4 && !ended && state.Outcome is null; plan++)
+            {
+                foreach (var command in Ai.Plan(state, unit, preset.Rules).Commands)
+                {
+                    var resolution = Battle.Apply(state, command, preset.Rules);
+                    if (resolution.Rejected is not null)
+                        break;
+                    state = resolution.State;
+                    commands.Add(command);
+                    ended = resolution.Events.Any(e => e is TurnEnded t && t.Unit == unit) || state.Active != unit;
+                    if (ended || state.Outcome is not null || command is Move move && state.Units[unit].Pos != move.Path[^1])
+                        break;
+                }
+            }
+            if (!ended && state.Outcome is null && state.Active == unit)
+            {
+                var end = new EndTurn(unit);
+                state = Battle.Apply(state, end, preset.Rules).State;
+                commands.Add(end);
+            }
+        }
+        return commands.ToImmutable();
+    }
+
+    /// <summary>A replay file's text: its header on the first line, then one command per line, as the golden files hold it.</summary>
+    public static string ReplayJson(ReplayFile file)
+    {
+        var header = JsonSerializer.Serialize(file with { Commands = [] }, ArcJson.Options);
+        var open = header[..^"[]}".Length];
+        return open + "[\n" + string.Join(",\n", file.Commands.Select(c => JsonSerializer.Serialize(c, ArcJson.Options))) + "\n]}\n";
     }
 
     /// <summary>Reads a replay file.</summary>

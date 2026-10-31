@@ -49,8 +49,8 @@ public sealed class BasePackTests
         ];
         Assert.Equal(monsters, pack.Monsters.Keys);
         Assert.Equal(XpTable.Default.Thresholds, pack.Xp.Thresholds);
-        Assert.Equal(["crypt_hall", "crystal_cave", "forest_ruins", "river_crossing"], pack.Maps.Keys);
-        Assert.Equal(["crypt_hall", "crystal_cave", "forest_ruins", "river_crossing"], pack.Encounters.Keys);
+        Assert.Equal(["crypt_hall", "crystal_cave", "forest_ruins", "river_crossing", "warlord_bridge"], pack.Maps.Keys);
+        Assert.Equal(["crypt_hall", "crystal_cave", "forest_ruins", "river_crossing", "warlord_bridge"], pack.Encounters.Keys);
         Assert.Equal(AiProfiles, pack.AiProfiles.Keys);
         Assert.Equal(0.3, pack.AiProfiles["coward"].FleeBelowHp);
         Assert.Equal(["boss_cruel"], pack.AiProfiles.Values.Where(p => p.Cruel).Select(p => p.Id));

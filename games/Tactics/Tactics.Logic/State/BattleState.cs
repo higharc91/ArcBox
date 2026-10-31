@@ -78,6 +78,13 @@ public sealed record BattleState(
     /// </summary>
     public ImmutableSortedSet<UnitId> Joining { get; init; } = [];
 
+    /// <summary>
+    /// Tiles that became deep during the battle (a collapsed bridge: <c>alterTerrain</c> with <c>deep</c>), on top of the
+    /// base map's deep tiles; null when none have. Left out of the JSON when null.
+    /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public ImmutableSortedSet<Tile>? Sunk { get; init; }
+
     /// <summary>The unit whose turn it is: <c>Order[TurnIndex]</c> while the battle has no outcome, otherwise null.</summary>
     [JsonIgnore]
     public UnitId? Active => Outcome is null && TurnIndex >= 0 && TurnIndex < Order.Length ? Order[TurnIndex] : null;

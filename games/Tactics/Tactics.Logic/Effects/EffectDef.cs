@@ -152,9 +152,10 @@ public sealed record ZoneEffect(string Kind, AreaDef Area, int? Rounds, Immutabl
 
 /// <summary>
 /// <c>"alterTerrain"</c>: raises (or, with a negative <see cref="Delta"/>, sinks) the tiles of <see cref="Area"/> around
-/// the aim by that many levels, each kept within heights 0–9. Units on them stay on top.
+/// the aim by that many levels, each kept within heights 0–9. Units on them stay on top. With <see cref="Deep"/> the tiles
+/// also become deep (a bridge collapsing into a chasm): units standing on them fall in (<see cref="Motion.FallIn"/>).
 /// </summary>
-public sealed record AlterTerrainEffect(AreaDef Area, int Delta) : EffectDef
+public sealed record AlterTerrainEffect(AreaDef Area, int Delta, bool Deep = false) : EffectDef
 {
     /// <inheritdoc />
     public override bool OnTile => true;

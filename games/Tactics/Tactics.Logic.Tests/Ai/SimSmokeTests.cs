@@ -41,14 +41,18 @@ public sealed class SimSmokeTests
         Assert.Contains(battles, b => b.Abilities.Values.Any(a => a.Used > 0));
 
         // Damage is credited from the events as HP actually lost. Enemies here don't heal, so no battle credits more than
-        // the enemies' HP (overkill doesn't count), and a won battle credits nearly all of it: only an unsourced kill (a
-        // fall, deep water) is left out.
+        // the enemies' HP, those placed and those a trigger may spawn (overkill doesn't count), and a battle won by
+        // defeating every enemy credits nearly all of the placed enemies' HP: only an unsourced kill (a fall, deep water) is
+        // left out. (A battle won another way, by surviving, say, needn't have defeated anyone.)
         double Dealt(SimBattle b) => b.PerClass.Sum(p => p.Value.DamagePerRound * b.Classes.Count(c => c == p.Key) * b.Rounds);
         double EnemyHp(SimBattle b) => rules.Encounters[b.Encounter].Enemies
             .Sum(e => e.Count * SheetBuilder.ForMonster(e.Unit, rules, e.Level).MaxHp);
-        Assert.All(battles, b => Assert.True(Dealt(b) <= EnemyHp(b) + 0.01,
-            $"Seed {b.Seed} credits {Dealt(b):0.00} damage against {EnemyHp(b)} enemy HP."));
-        var won = battles.Where(b => b.Outcome == BattleOutcome.Won).ToArray();
+        double SpawnHp(SimBattle b) => rules.Encounters[b.Encounter].Triggers.SelectMany(t => t.Do).Select(a => a.Spawn)
+            .OfType<SpawnAction>().Sum(s => s.Count * SheetBuilder.ForMonster(s.Unit, rules, s.Level).MaxHp);
+        Assert.All(battles, b => Assert.True(Dealt(b) <= EnemyHp(b) + SpawnHp(b) + 0.01,
+            $"Seed {b.Seed} credits {Dealt(b):0.00} damage against {EnemyHp(b) + SpawnHp(b)} enemy HP."));
+        var won = battles.Where(b => b.Outcome == BattleOutcome.Won
+                                     && rules.Encounters[b.Encounter].Objectives.Win.Leaf == Objectives.DefeatAll).ToArray();
         Assert.NotEmpty(won);
         Assert.True(won.Sum(Dealt) >= 0.9 * won.Sum(EnemyHp), $"The party is credited {won.Sum(Dealt):0} damage against {won.Sum(EnemyHp)} enemy HP.");
 

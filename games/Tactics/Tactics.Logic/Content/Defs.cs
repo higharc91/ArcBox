@@ -237,12 +237,6 @@ public sealed record ConditionDef(ConditionId Id, string Name,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ConditionId? Replaces = null);
 
 /// <summary>
-/// An encounter trigger (spec §4.8). Kept raw until Task 22 gives it typed When/Do records; Task 4–21 battles carry none.
-/// The loader checks the zones and unit tags it refers to, and sets <see cref="Once"/> when the content leaves it out.
-/// </summary>
-public sealed record TriggerDef(string Id, JsonElement When, bool Once, JsonElement Do);
-
-/// <summary>
 /// A lasting area effect on the map (e.g. a wall of fire or a difficult-terrain spell), numbered by
 /// <see cref="BattleState.NextSerial"/> (see <see cref="ZoneRules"/>). <see cref="RoundsLeft"/> (null: the whole battle)
 /// counts its <see cref="Owner"/>'s turn ends like a condition's rounds, <see cref="AppliedThisTurn"/> marking one made
@@ -337,7 +331,11 @@ public sealed record BackgroundDef(string Id, string Name, ImmutableSortedDictio
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Trinket = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null);
 
-/// <summary>A boss phase: below <see cref="HpBelow"/> percent of max HP the monster gains these abilities and passives.</summary>
+/// <summary>
+/// A boss phase: the abilities and passives the monster gains when an encounter trigger's <c>phase</c> action says so (spec
+/// §3.8: phases come from triggers). <see cref="HpBelow"/> is the percentage of max HP it is meant for; a trigger that
+/// watches <c>hpBelow</c> on the same tag must use that number (the loader checks it).
+/// </summary>
 public sealed record PhaseDef(int HpBelow, ImmutableArray<AbilityId> Abilities, ImmutableArray<string> Passives,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? AiProfile = null);
 

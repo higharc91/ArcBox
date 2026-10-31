@@ -93,6 +93,17 @@ public static class Motion
         }
     }
 
+    /// <summary>
+    /// The ground gave way under <paramref name="unit"/> (a collapse into deep water or a chasm): <see cref="Fell"/> into
+    /// deep, by <paramref name="levels"/>, then it drops as at 0 HP (<see cref="DownedRules.Drop"/>, by no one), so a party
+    /// member is Downed and anyone else dies; one already Downed keeps its countdown.
+    /// </summary>
+    public static void FallIn(BattleWriter w, UnitId unit, int levels)
+    {
+        w.Emit(new Fell(unit, Math.Max(0, levels), 0, IntoDeep: true));
+        DownedRules.Drop(w, unit, null);
+    }
+
     private static void Collide(BattleWriter w, UnitId unit, UnitId? other)
     {
         var damage = w.Roll(4);

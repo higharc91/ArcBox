@@ -40,7 +40,11 @@ public static partial class Battle
             Hooks.FireAll(w, HookKind.OnBattleStart, rules);
         Settle(w, rules);
         if (!w.State.Joining.IsEmpty)
-            w.State = w.State with { Order = TurnOrder.Sort(w.State, rules), Joining = [] };
+        {
+            // Summons from battle-start hooks act this round; a trigger's spawns wait for the next, like any others.
+            var waiting = w.State.Joining.Where(id => w.State.Units[id].SummonedBy is null).ToImmutableSortedSet();
+            w.State = w.State with { Order = [.. TurnOrder.Sort(w.State, rules).Where(id => !waiting.Contains(id))], Joining = waiting };
+        }
         return Settled(w, rules);
     }
 
@@ -424,13 +428,17 @@ public static partial class Battle
 
     /// <summary>
     /// Drains the queue until it is empty, a decision is pending or the battle is over. The objectives are checked before
-    /// the first step and after every step (<see cref="Objectives.Check"/>), so a battle ends as soon as it is decided.
+    /// the first step and after every step (<see cref="Objectives.Check"/>), so a battle ends as soon as it is decided; then
+    /// the encounter's triggers (<see cref="Triggers.Check"/>), whose actions go to the front of the queue.
     /// Each step starts at hook depth 0; steps that carry a depth set it themselves.
     /// </summary>
     private static void Settle(BattleWriter w, RulesPack rules)
     {
-        for (var steps = 0; !Objectives.Check(w) && w.State.Pending is null && w.PopFront() is { } step; steps++)
+        for (var steps = 0; !Objectives.Check(w) && w.State.Pending is null; steps++)
         {
+            Triggers.Check(w, rules);
+            if (w.PopFront() is not { } step)
+                break;
             if (steps >= MaxStepsPerCommand)
                 throw new RulesInvariantException($"The battle ran {MaxStepsPerCommand} steps without settling.");
             w.HookDepth = 0;

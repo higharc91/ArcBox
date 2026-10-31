@@ -131,7 +131,7 @@ internal static class PackLoader
             _ => false,
         });
         var battleMaps = Index(maps.Values, m => m.Id, m => m.Def.Map, StringComparer.Ordinal);
-        v.CheckEncounters(encounters.Values, battleMaps);
+        v.CheckEncounters(encounters.Values, battleMaps, Index(monsters.Values, m => m.Id, m => m.Def, StringComparer.Ordinal));
 
         if (v.Errors.Count > 0)
             throw new ContentException([.. v.Errors]);

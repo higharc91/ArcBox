@@ -156,7 +156,9 @@ public sealed class HazardBlock : EffectBlock<HazardEffect>
 /// <summary>
 /// <c>"alterTerrain"</c>: changes the height of the area's tiles around the aim by the delta, each kept within 0–9
 /// (<see cref="BattleState.HeightDelta"/>, which drops a tile back at its base height). Units stand on top of their tile
-/// wherever it goes. Emits <see cref="TerrainAltered"/> with the tiles that changed, if any did.
+/// wherever it goes. Emits <see cref="TerrainAltered"/> with the tiles that changed, if any did. With <c>deep</c>, the
+/// tiles that weren't deep become so (<see cref="BattleState.Sunk"/>), and whoever stands or lies on one falls in
+/// (<see cref="Motion.FallIn"/>), in tile order.
 /// </summary>
 public sealed class AlterTerrainBlock : EffectBlock<AlterTerrainEffect>
 {
@@ -168,9 +170,12 @@ public sealed class AlterTerrainBlock : EffectBlock<AlterTerrainEffect>
 
     /// <inheritdoc />
     protected override string? Describe(AlterTerrainEffect def, int level, RulesPack rules)
-        => def.Delta == 0
+    {
+        var text = def.Delta == 0
             ? $"leaves the terrain ({TooltipText.Area(def.Area)}) as it is"
             : $"{(def.Delta > 0 ? "raises" : "sinks")} the terrain ({TooltipText.Area(def.Area)}) by {Math.Abs(def.Delta)}";
+        return def.Deep ? text + " and turns it into a chasm" : text;
+    }
 
     /// <inheritdoc />
     protected override void Run(AlterTerrainEffect def, EffectContext ctx)
@@ -179,19 +184,31 @@ public sealed class AlterTerrainBlock : EffectBlock<AlterTerrainEffect>
         var terrain = ctx.W.Terrain;
         var deltas = ctx.W.State.HeightDelta;
         var changed = ImmutableArray.CreateBuilder<Tile>();
+        var sinking = ImmutableArray.CreateBuilder<(Tile Tile, int Drop)>();
         foreach (var tile in Areas.Tiles(def.Area, source.Pos, ctx.Aim ?? source.Pos, terrain))
         {
             var now = terrain.HeightAt(tile);
             var height = Math.Clamp(now + def.Delta, 0, MaxHeight);
+            if (def.Deep && !terrain.Deep(tile))
+                sinking.Add((tile, Math.Max(0, now - height)));
             if (height == now)
                 continue;
             var delta = height - terrain.Map[tile].Height;
             deltas = delta == 0 ? deltas.Remove(tile) : deltas.SetItem(tile, delta);
             changed.Add(tile);
         }
-        if (changed.Count == 0)
+        if (changed.Count > 0)
+        {
+            ctx.W.State = ctx.W.State with { HeightDelta = deltas };
+            ctx.W.Emit(new TerrainAltered(changed.ToImmutable(), def.Delta));
+        }
+        if (sinking.Count == 0)
             return;
-        ctx.W.State = ctx.W.State with { HeightDelta = deltas };
-        ctx.W.Emit(new TerrainAltered(changed.ToImmutable(), def.Delta));
+
+        var sunk = ctx.W.State.Sunk ?? [];
+        ctx.W.State = ctx.W.State with { Sunk = sunk.Union(sinking.Select(s => s.Tile)) };
+        foreach (var (tile, drop) in sinking)
+            foreach (var unit in ctx.W.State.Units.Values.Where(u => u.Pos == tile && DownedRules.InBattle(u)).Select(u => u.Id).ToArray())
+                Motion.FallIn(ctx.W, unit, drop);   // more than one mid-walk: a mover shares an ally's tile as it passes
     }
 }

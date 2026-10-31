@@ -83,12 +83,11 @@ public sealed class SerialisationTests
             Difficulty = Difficulty.Hard,
             Triggers =
             [
-                new TriggerDef("reinforcements", Json("""{"round":3}"""), true, Json("""[{"spawn":{"monster":"goblin","at":[3,1]}}]""")),
+                new TriggerDef("reinforcements", new TriggerWhen(Round: 3), true,
+                    [new TriggerAction(Spawn: new SpawnAction("goblin", new PlaceRef(null, new Tile(3, 1)))), new TriggerAction(SetFlag: "b")]),
             ],
         };
     }
-
-    private static JsonElement Json(string text) => JsonDocument.Parse(text).RootElement.Clone();
 
     [Fact]
     public void State_round_trips_byte_identical()

@@ -165,7 +165,7 @@ public sealed class ValidationTests
     }
 
     [Theory]
-    [InlineData("""{ "win": null }""", "/triggers/0/do/0/setObjective/win", "The value is null.")]
+    [InlineData("""{ "win": null }""", "/triggers/0/do/0/setObjective", "setObjective needs \"win\" or \"lose\".")]
     [InlineData("""{ "win": { "any": [null] } }""", "/triggers/0/do/0/setObjective/win/any/0", "A value is missing.")]
     public void A_null_in_a_trigger_objective_is_a_content_error(string setObjective, string pointer, string message)
     {
@@ -388,7 +388,7 @@ public sealed class ValidationTests
     private static RulesPack LoadChapter(params (string Path, string Json)[] files)
         => WithChapter(files, null, [], dir => RulesPack.Load([Base, dir]));
 
-    private static ImmutableArray<ContentError> ErrorsOfChapter(params (string Path, string Json)[] files)
+    internal static ImmutableArray<ContentError> ErrorsOfChapter(params (string Path, string Json)[] files)
         => ErrorsOfChapter(files, requires: null);
 
     private static ImmutableArray<ContentError> ErrorsOfChapter((string Path, string Json)[] files, string? requires = null,

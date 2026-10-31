@@ -15,6 +15,8 @@ internal sealed partial class Validation
     public EncounterDef? Encounter(JsonElement e, string file, string ptr)
         => Guarded(file, ptr, () =>
         {
+            if (!TriggerEffects(e, file, ptr))
+                return null;
             var def = Deserialize<EncounterDef>(e, file, ptr, raw =>
             {
                 var objectives = raw.Objectives is null ? ObjectivesDef.Default
@@ -52,11 +54,122 @@ internal sealed partial class Validation
                     if (units[i].Count < 1)
                         Error(file, Pointer.Append(at, "count"), "The count must be at least 1.");
                 }
+            var triggerIds = new HashSet<string>(StringComparer.Ordinal);
             for (var i = 0; i < def.Triggers.Length; i++)
-                if (string.IsNullOrWhiteSpace(def.Triggers[i].Id))
-                    Error(file, Pointer.Append(Pointer.Append(Pointer.Append(ptr, "triggers"), i), "id"), "The id is empty.");
+            {
+                var at = Pointer.Append(Pointer.Append(ptr, "triggers"), i);
+                var trigger = def.Triggers[i];
+                if (string.IsNullOrWhiteSpace(trigger.Id))
+                    Error(file, Pointer.Append(at, "id"), "The id is empty.");
+                else if (!triggerIds.Add(trigger.Id))
+                    Error(file, Pointer.Append(at, "id"), $"Two triggers in this encounter are named '{trigger.Id}'.");
+                TriggerShape(trigger.When, file, Pointer.Append(at, "when"));
+                for (var j = 0; j < trigger.Do.Length; j++)
+                    ActionShape(trigger.Do[j], file, Pointer.Append(Pointer.Append(at, "do"), j));
+            }
             return def;
         });
+
+    /// <summary>
+    /// Walks the effect blocks of every trigger action (<c>triggers/i/do/j/effects</c>) as an ability's are walked, so they
+    /// get the same checks and pointers. False when one couldn't be read.
+    /// </summary>
+    private bool TriggerEffects(JsonElement e, string file, string ptr)
+    {
+        if (e.ValueKind != JsonValueKind.Object || !e.TryGetProperty("triggers", out var triggers)
+            || triggers.ValueKind != JsonValueKind.Array)
+            return true;
+        var ok = true;
+        var i = 0;
+        foreach (var trigger in triggers.EnumerateArray())
+        {
+            var at = Pointer.Append(Pointer.Append(ptr, "triggers"), i++);
+            if (trigger.ValueKind != JsonValueKind.Object || !trigger.TryGetProperty("do", out var actions)
+                || actions.ValueKind != JsonValueKind.Array)
+                continue;
+            var j = 0;
+            foreach (var action in actions.EnumerateArray())
+                ok &= EffectsIn(action, "effects", file, Pointer.Append(Pointer.Append(at, "do"), j++), inSave: false);
+        }
+        return ok;
+    }
+
+    /// <summary>A trigger condition's own values: at least one key, a round from 1, a count from 1, a percentage in 1..100.</summary>
+    private void TriggerShape(TriggerWhen when, string file, string ptr)
+    {
+        var keys = 0;
+        for (var i = 0; i < when.All.Length; i++)
+            TriggerShape(when.All[i], file, Pointer.Append(Pointer.Append(ptr, "all"), i));
+        for (var i = 0; i < when.Any.Length; i++)
+            TriggerShape(when.Any[i], file, Pointer.Append(Pointer.Append(ptr, "any"), i));
+        keys += when.All.IsEmpty ? 0 : 1;
+        keys += when.Any.IsEmpty ? 0 : 1;
+        if (when.Round is { } round)
+        {
+            keys++;
+            AtLeast(round, 1, file, Pointer.Append(ptr, "round"));
+        }
+        if (when.UnitEntersZone is { } enters)
+        {
+            keys++;
+            AtLeast(enters.Count, 1, file, Pointer.Append(Pointer.Append(ptr, "unitEntersZone"), "count"));
+        }
+        if (when.HpBelow is { } hp)
+        {
+            keys++;
+            if (hp.Percent is < 1 or > 100)
+                Error(file, Pointer.Append(Pointer.Append(ptr, "hpBelow"), "percent"), $"The percentage {hp.Percent} must be in 1..100.");
+        }
+        keys += when.UnitDies is null ? 0 : 1;
+        keys += when.Flag is null ? 0 : 1;
+        keys += when.Counter is null ? 0 : 1;
+        keys += when.Objective is null ? 0 : 1;
+        if (keys == 0)
+            Error(file, ptr, "A trigger condition needs at least one key.");
+    }
+
+    /// <summary>
+    /// A trigger action's own values: exactly one action key; effect blocks with exactly one of <c>tag</c>, <c>zone</c> or
+    /// <c>at</c> (and those only with effects); a <c>setObjective</c> that sets something; spawn counts from 1; a phase
+    /// number from 1 with no <c>def</c> written (it comes from the monster).
+    /// </summary>
+    private void ActionShape(TriggerAction action, string file, string ptr)
+    {
+        var keys = action.Keys;
+        if (keys.Length != 1)
+        {
+            Error(file, ptr, keys.Length == 0
+                ? "A trigger action needs one of say, spawn, setFlag, addCounter, setObjective, cameraHint, endBattle, phase or effects."
+                : $"A trigger action does one thing, but this one has {string.Join(" and ", keys.Select(k => $"'{k}'"))}.");
+            return;
+        }
+        var selectors = (action.Tag is null ? 0 : 1) + (action.Zone is null ? 0 : 1) + (action.At is null ? 0 : 1);
+        if (keys[0] == "effects")
+        {
+            if (selectors != 1)
+                Error(file, ptr, "Trigger effects need exactly one of \"tag\", \"zone\" or \"at\".");
+        }
+        else if (selectors > 0 || action.Source is not null)
+            Error(file, ptr, "\"tag\", \"zone\", \"at\" and \"source\" go only with \"effects\".");
+
+        if (action.SetObjective is { Win: null, Lose: null })
+            Error(file, Pointer.Append(ptr, "setObjective"), "setObjective needs \"win\" or \"lose\".");
+        if (action.Spawn is { } spawn)
+        {
+            AtLeast(spawn.Count, 1, file, Pointer.Append(Pointer.Append(ptr, "spawn"), "count"));
+            if (spawn.Level is < 1 or > 10)
+                Error(file, Pointer.Append(Pointer.Append(ptr, "spawn"), "level"), $"The level {spawn.Level} must be in 1..10.");
+        }
+        if (action.SetFlag is { } flag && string.IsNullOrWhiteSpace(flag))
+            Error(file, Pointer.Append(ptr, "setFlag"), "The flag name is empty.");
+        if (action.Phase is { } phase)
+        {
+            AtLeast(phase.Number, 1, file, Pointer.Append(Pointer.Append(ptr, "phase"), "number"));
+            if (phase.Def is not null)
+                Error(file, Pointer.Append(Pointer.Append(ptr, "phase"), "def"),
+                    "A phase comes from the monster's \"phases\"; write only its \"tag\" and \"number\".");
+        }
+    }
 
     private static bool HasOnce(JsonElement encounter, int trigger)
         => encounter.TryGetProperty("triggers", out var triggers) && triggers.ValueKind == JsonValueKind.Array
@@ -66,15 +179,19 @@ internal sealed partial class Validation
     /// <summary>
     /// Checks each encounter against its map: the zones and tiles its units, objectives and triggers use, its
     /// <c>party_spawn</c> zone, and that every unit tag its objectives and triggers name belongs to one of its units
-    /// (placed or spawned). An encounter whose map is missing or broken skips the map checks.
+    /// (placed or spawned) or is <c>party</c> or <c>enemy</c>. Its triggers' references must resolve too: every flag
+    /// read is set by some trigger, every counter read is added to by one, every objective leaf watched appears in the
+    /// encounter's objectives (as written, or as a trigger sets them), every spawned monster and AI profile exists, and
+    /// every phase is one the tagged monsters have. An encounter whose map is missing or broken skips the map checks.
     /// </summary>
-    public void CheckEncounters(IEnumerable<Loaded<EncounterDef>> encounters, IReadOnlyDictionary<string, BattleMap> maps)
+    public void CheckEncounters(IEnumerable<Loaded<EncounterDef>> encounters, IReadOnlyDictionary<string, BattleMap> maps,
+        IReadOnlyDictionary<string, MonsterDef> monsters)
     {
         foreach (var (def, _, _, file, ptr) in encounters)
         {
             try
             {
-                new EncounterCheck(this, def, maps.GetValueOrDefault(def.Map), file, ptr).Run();
+                new EncounterCheck(this, def, maps.GetValueOrDefault(def.Map), monsters, file, ptr).Run();
             }
             catch (Exception ex) when (NonFatal(ex))
             {
@@ -86,18 +203,36 @@ internal sealed partial class Validation
     // ---- Encounters -------------------------------------------------------------------------------------------------
 
     /// <summary>The map-dependent checks of one encounter; see <see cref="CheckEncounters"/>.</summary>
-    private sealed class EncounterCheck(Validation v, EncounterDef def, BattleMap? map, string file, string ptr)
+    private sealed class EncounterCheck(Validation v, EncounterDef def, BattleMap? map,
+        IReadOnlyDictionary<string, MonsterDef> monsters, string file, string ptr)
     {
-        private readonly HashSet<string> _tags = new(StringComparer.Ordinal);
+        private readonly HashSet<string> _tags = new(StringComparer.Ordinal) { Objectives.PartyTag, Objectives.EnemyTag };
+        private readonly Dictionary<string, HashSet<string>> _monstersByTag = new(StringComparer.Ordinal);
+        private readonly HashSet<string> _flagsSet = new(StringComparer.Ordinal);
+        private readonly HashSet<string> _countersAdded = new(StringComparer.Ordinal);
+        private readonly HashSet<string> _leaves = new(StringComparer.Ordinal);
 
         public void Run()
         {
             foreach (var unit in def.Enemies.Concat(def.Npcs))
-                _tags.Add(unit.UnitTag);
+                Tagged(unit.UnitTag, unit.Unit);
             foreach (var trigger in def.Triggers)
-                foreach (var spawn in Actions(trigger.Do, "spawn"))
-                    if (spawn.ValueKind == JsonValueKind.Object && Text(spawn, "unit") is { } unit)
-                        _tags.Add(Text(spawn, "tag") ?? unit);
+                foreach (var action in trigger.Do)
+                {
+                    if (action.Spawn is { } spawn)
+                        Tagged(spawn.UnitTag, spawn.Unit);
+                    if (action.SetFlag is { } flag)
+                        _flagsSet.Add(flag);
+                    if (action.AddCounter is { } counter)
+                        _countersAdded.Add(counter.Name);
+                    if (action.SetObjective is { } patch)
+                    {
+                        Leaves(patch.Win);
+                        Leaves(patch.Lose);
+                    }
+                }
+            Leaves(def.Objectives.Win);
+            Leaves(def.Objectives.Lose);
 
             foreach (var (units, name) in new[] { (def.Enemies, "enemies"), (def.Npcs, "npcs") })
                 for (var i = 0; i < units.Length; i++)
@@ -125,8 +260,29 @@ internal sealed partial class Validation
             {
                 var at = Pointer.Append(Pointer.Append(ptr, "triggers"), i);
                 Condition(def.Triggers[i].When, Pointer.Append(at, "when"));
-                Do(def.Triggers[i].Do, Pointer.Append(at, "do"));
+                for (var j = 0; j < def.Triggers[i].Do.Length; j++)
+                    Action(def.Triggers[i].Do[j], Pointer.Append(Pointer.Append(at, "do"), j), def.Triggers[i].When, Pointer.Append(at, "when"));
             }
+        }
+
+        private void Tagged(string tag, string monster)
+        {
+            _tags.Add(tag);
+            if (!_monstersByTag.TryGetValue(tag, out var set))
+                _monstersByTag[tag] = set = new HashSet<string>(StringComparer.Ordinal);
+            set.Add(monster);
+        }
+
+        private void Leaves(ObjectiveExpr? expr)
+        {
+            if (expr is null)
+                return;
+            if (expr.Leaf is { } leaf)
+                _leaves.Add(leaf);
+            foreach (var e in expr.Any.IsDefault ? [] : expr.Any)
+                Leaves(e);
+            foreach (var e in expr.All.IsDefault ? [] : expr.All)
+                Leaves(e);
         }
 
         private void Objective(ObjectiveExpr expr, string at)
@@ -135,14 +291,21 @@ internal sealed partial class Validation
                 Objective(expr.Any[i], Pointer.Append(Pointer.Append(at, "any"), i));
             for (var i = 0; i < expr.All.Length; i++)
                 Objective(expr.All[i], Pointer.Append(Pointer.Append(at, "all"), i));
-            if (expr.Leaf is not { } leaf)
-                return;
+            if (expr.Leaf is { } leaf)
+                ObjectiveLeaf(leaf, at);
+        }
+
+        private void ObjectiveLeaf(string leaf, string at)
+        {
             var parts = leaf.Split(':');
             switch (parts)
             {
                 case [Objectives.DefeatAll] or [Objectives.PartyOut]:
                 case ["survive", var rounds] when int.TryParse(rounds, NumberStyles.None, CultureInfo.InvariantCulture, out var r) && r >= 1:
-                case ["flag", { Length: > 0 }]:
+                    break;
+                case ["flag", { Length: > 0 } flag]:
+                    if (!_flagsSet.Contains(flag))
+                        v.Error(file, at, $"No trigger in this encounter sets the flag '{flag}'.");
                     break;
                 case ["defeat" or "protect", { Length: > 0 } tag]:
                     UnitTag(tag, at);
@@ -158,112 +321,107 @@ internal sealed partial class Validation
         }
 
         /// <summary>A trigger's <c>when</c> (spec §4.8 conditions, combined with <c>all</c>/<c>any</c>).</summary>
-        private void Condition(JsonElement when, string at)
+        private void Condition(TriggerWhen when, string at)
         {
-            if (when.ValueKind != JsonValueKind.Object)
+            for (var i = 0; i < when.All.Length; i++)
+                Condition(when.All[i], Pointer.Append(Pointer.Append(at, "all"), i));
+            for (var i = 0; i < when.Any.Length; i++)
+                Condition(when.Any[i], Pointer.Append(Pointer.Append(at, "any"), i));
+            if (when.UnitEntersZone is { } enters)
             {
-                v.Error(file, at, "A trigger condition must be an object.");
-                return;
+                var here = Pointer.Append(at, "unitEntersZone");
+                UnitTag(enters.Tag, Pointer.Append(here, "tag"));
+                Zone(enters.Zone, Pointer.Append(here, "zone"));
             }
-            foreach (var p in when.EnumerateObject())
+            if (when.HpBelow is { } hp)
+                UnitTag(hp.Tag, Pointer.Append(Pointer.Append(at, "hpBelow"), "tag"));
+            if (when.UnitDies is { } dies)
+                UnitTag(dies.Tag, Pointer.Append(Pointer.Append(at, "unitDies"), "tag"));
+            if (when.Flag is { } flag && !_flagsSet.Contains(flag))
+                v.Error(file, Pointer.Append(at, "flag"), $"No trigger in this encounter sets the flag '{flag}'.");
+            if (when.Counter is { } counter && !_countersAdded.Contains(counter.Name))
+                v.Error(file, Pointer.Append(Pointer.Append(at, "counter"), "name"),
+                    $"No trigger in this encounter adds to the counter '{counter.Name}'.");
+            if (when.Objective is { } objective)
             {
-                var here = Pointer.Append(at, p.Name);
-                switch (p.Name)
-                {
-                    case "all" or "any" when p.Value.ValueKind == JsonValueKind.Array:
-                        var i = 0;
-                        foreach (var item in p.Value.EnumerateArray())
-                            Condition(item, Pointer.Append(here, i++));
-                        break;
-                    case "unitEntersZone":
-                        TagIn(p.Value, here);
-                        if (Text(p.Value, "zone") is { } zone)
-                            Zone(zone, Pointer.Append(here, "zone"));
-                        break;
-                    case "hpBelow" or "unitDies":
-                        TagIn(p.Value, here);
-                        break;
-                    case "round" or "flag" or "counter" or "objective":
-                        break;
-                    default:
-                        v.Error(file, here, $"Unknown trigger condition '{p.Name}'.");
-                        break;
-                }
+                var here = Pointer.Append(Pointer.Append(at, "objective"), "name");
+                if (!_leaves.Contains(objective.Name))
+                    v.Error(file, here, $"The objective '{objective.Name}' isn't one of this encounter's objectives.");
+                else
+                    ObjectiveLeaf(objective.Name, here);
             }
         }
 
-        /// <summary>A trigger's <c>do</c> list (spec §4.8 actions, or any effect block).</summary>
-        private void Do(JsonElement list, string at)
+        /// <summary>A trigger action's references (spec §4.8).</summary>
+        private void Action(TriggerAction action, string at, TriggerWhen when, string whenAt)
         {
-            if (list.ValueKind != JsonValueKind.Array)
+            if (action.Spawn is { } spawn)
             {
-                v.Error(file, at, "A trigger's \"do\" must be a list of actions.");
-                return;
+                var here = Pointer.Append(at, "spawn");
+                v.Ref(RefKind.Monster, spawn.Unit, file, Pointer.Append(here, "unit"));
+                v.Ref(RefKind.AiProfile, spawn.AiProfile, file, Pointer.Append(here, "aiProfile"));
+                Place(spawn.At, Pointer.Append(here, "at"));
             }
-            var i = 0;
-            foreach (var action in list.EnumerateArray())
+            if (action.CameraHint is { } hint)
+                Place(hint, Pointer.Append(at, "cameraHint"));
+            if (action.SetObjective is { } patch)
             {
-                var here = Pointer.Append(at, i++);
-                if (action.ValueKind != JsonValueKind.Object)
-                {
-                    v.Error(file, here, "A trigger action must be an object.");
-                    continue;
-                }
-                foreach (var p in action.EnumerateObject())
-                {
-                    var inner = Pointer.Append(here, p.Name);
-                    switch (p.Name)
-                    {
-                        case "spawn":
-                            if (Text(p.Value, "unit") is { } unit)
-                                v.Ref(RefKind.Monster, unit, file, Pointer.Append(inner, "unit"));
-                            if (p.Value.ValueKind == JsonValueKind.Object && p.Value.TryGetProperty("at", out var spawnAt))
-                                Place(spawnAt, Pointer.Append(inner, "at"));
-                            break;
-                        case "cameraHint":
-                            if (p.Value.ValueKind == JsonValueKind.Object && p.Value.TryGetProperty("at", out var hintAt))
-                                Place(hintAt, Pointer.Append(inner, "at"));
-                            break;
-                        case "setObjective":
-                            foreach (var side in new[] { "win", "lose" })
-                                if (p.Value.ValueKind == JsonValueKind.Object && p.Value.TryGetProperty(side, out var expr))
-                                    RawObjective(expr, Pointer.Append(inner, side));
-                            break;
-                        case "say" or "setFlag" or "addCounter" or "endBattle":
-                            break;
-                        default:
-                            if (BlockRegistry.TryFor(p.Name) is null)
-                                v.Error(file, inner, $"Unknown trigger action '{p.Name}'.");
-                            break;
-                    }
-                }
+                var here = Pointer.Append(at, "setObjective");
+                if (patch.Win is { } win)
+                    Objective(win, Pointer.Append(here, "win"));
+                if (patch.Lose is { } lose)
+                    Objective(lose, Pointer.Append(here, "lose"));
             }
-        }
-
-        private void RawObjective(JsonElement expr, string at)
-        {
-            if (v.Deserialize<ObjectiveExpr>(expr, file, at) is { } objective)
-                Objective(objective, at);
-        }
-
-        /// <summary>A place given as a zone name or an <c>[x, y]</c> tile.</summary>
-        private void Place(JsonElement place, string at)
-        {
-            if (place.ValueKind == JsonValueKind.String)
-                Zone(place.GetString()!, at);
-            else if (place is { ValueKind: JsonValueKind.Array } && place.GetArrayLength() == 2
-                     && place[0].TryGetInt32(out var x) && place[1].TryGetInt32(out var y))
-                Tile(new Tile(x, y), at);
-            else
-                v.Error(file, at, "A place is a zone name or an [x, y] tile.");
-        }
-
-        private void TagIn(JsonElement e, string at)
-        {
-            if (Text(e, "tag") is { } tag)
+            if (action.Phase is { } phase)
+                Phase(phase, Pointer.Append(at, "phase"), when, whenAt);
+            if (action.Tag is { } tag)
                 UnitTag(tag, Pointer.Append(at, "tag"));
-            else
-                v.Error(file, at, "This needs a unit \"tag\".");
+            if (action.Source is { } source)
+                UnitTag(source, Pointer.Append(at, "source"));
+            if (action.Zone is { } zone)
+                Zone(zone, Pointer.Append(at, "zone"));
+            if (action.At is { } tile)
+                Tile(tile, Pointer.Append(at, "at"));
+        }
+
+        /// <summary>
+        /// The phase's tag names one monster, placed or spawned, that has a phase of that number; a trigger watching
+        /// <c>hpBelow</c> on the same tag uses that phase's percentage.
+        /// </summary>
+        private void Phase(PhaseAction phase, string at, TriggerWhen when, string whenAt)
+        {
+            var tagAt = Pointer.Append(at, "tag");
+            if (!_monstersByTag.TryGetValue(phase.Tag, out var tagged))
+            {
+                if (_tags.Contains(phase.Tag))
+                    v.Error(file, tagAt, $"A phase needs the tag of a placed or spawned monster, not '{phase.Tag}'.");
+                else
+                    UnitTag(phase.Tag, tagAt);
+                return;
+            }
+            if (tagged.Count > 1)
+            {
+                var names = string.Join(" and ", tagged.Order(StringComparer.Ordinal).Select(m => $"'{m}'"));
+                v.Error(file, tagAt, $"The tag '{phase.Tag}' covers the monsters {names}, but a phase comes from one monster.");
+                return;
+            }
+            var monster = tagged.Single();
+            if (!monsters.TryGetValue(monster, out var def))
+                return;
+            if (def.Phases.Length < phase.Number)
+                v.Error(file, Pointer.Append(at, "number"),
+                    $"The monster '{monster}' has {def.Phases.Length} phases, so it has no phase {phase.Number}.");
+            else if (phase.Number >= 1 && when.HpBelow is { } hp && hp.Tag == phase.Tag && hp.Percent != def.Phases[phase.Number - 1].HpBelow)
+                v.Error(file, Pointer.Append(Pointer.Append(whenAt, "hpBelow"), "percent"),
+                    $"This trigger watches {hp.Percent}%, but phase {phase.Number} of '{monster}' is at {def.Phases[phase.Number - 1].HpBelow}%.");
+        }
+
+        private void Place(PlaceRef place, string at)
+        {
+            if (place.Zone is { } zone)
+                Zone(zone, at);
+            else if (place.Tile is { } tile)
+                Tile(tile, at);
         }
 
         private void UnitTag(string tag, string at)
@@ -283,15 +441,5 @@ internal sealed partial class Validation
             if (map is not null && !map.InBounds(tile))
                 v.Error(file, at, $"Tile {tile} is outside the {map.Width}x{map.Height} map.");
         }
-
-        private static IEnumerable<JsonElement> Actions(JsonElement list, string name)
-            => list.ValueKind != JsonValueKind.Array ? []
-                : list.EnumerateArray().Where(a => a.ValueKind == JsonValueKind.Object && a.TryGetProperty(name, out _))
-                    .Select(a => a.GetProperty(name));
-
-        private static string? Text(JsonElement e, string name)
-            => e.ValueKind == JsonValueKind.Object && e.TryGetProperty(name, out var value) && value.ValueKind == JsonValueKind.String
-                ? value.GetString()
-                : null;
     }
 }

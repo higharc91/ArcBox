@@ -160,13 +160,13 @@
           },
           "when": {
             "type": "object",
-            "description": "round, unitEntersZone{tag, zone}, hpBelow{tag, percent}, unitDies{tag}, flag, counter{name, atLeast}, objective{name, state}, combined with all/any."
+            "description": "Every key present must hold: round, unitEntersZone{tag, zone, count = 1}, hpBelow{tag, percent}, unitDies{tag}, flag, counter{name, atLeast}, objective{name: an objective leaf, state: met | unmet}, all[...], any[...]. Tags are unit tags, or \"party\" / \"enemy\"."
           },
           "do": {
             "type": "array",
             "items": {
               "type": "object",
-              "description": "say, spawn{unit, at, count, tag}, setFlag, addCounter, setObjective{win, lose}, cameraHint{at}, endBattle, or an effect block."
+              "description": "Exactly one of: say{speaker, line}, spawn{unit, at (zone or [x, y]), count, tag, level, aiProfile, ally}, setFlag: name, addCounter{name, amount = 1}, setObjective{win?, lose?}, cameraHint: zone or [x, y], endBattle: Won | Lost | Fled, phase{tag, number} (the phases of the one monster with that tag; a trigger watching hpBelow on it uses the phase's percentage), or effects[...] with exactly one of tag, zone or at (and an optional source tag)."
             }
           }
         },

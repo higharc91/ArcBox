@@ -13,7 +13,8 @@ internal sealed partial class Scorer
     /// worth nothing unless the profile is cruel.</item>
     /// <item>An ally (or the user): healing (double below half HP), getting up from Downed, buffs; hurting it costs one and a
     /// half times what hurting a hostile is worth.</item>
-    /// <item>A neutral: hurting it costs a little. A protected unit counts the objective weight on top.</item>
+    /// <item>A neutral: hurting it costs a little. A unit the objectives are about (<see cref="IsObjective"/>: a protected
+    /// unit, a hostile the party must defeat, a party unit it must protect) counts the objective weight on top.</item>
     /// </list>
     /// </summary>
     public double Worth(UnitState user, UnitState target, Outcome outcome, AiProfile p)
@@ -49,7 +50,7 @@ internal sealed partial class Scorer
                     + p.Control * (outcome.Offense * Math.Max(2, Dpr(target)) + outcome.Defense * Incoming(target) - 0.3 * outcome.Push)
                     - 1.5 * (p.Damage * (outcome.Damage.MeanCapped(hp) + outcome.Splash) + p.Kill * pKill * KillWorth(target));
         }
-        return target.Protected ? value * (1 + p.Objective) : value;
+        return IsObjective(user, target) ? value * (1 + p.Objective) : value;
     }
 
     /// <summary>What taking a unit out of the fight is worth: two rounds of its damage, plus a little for any unit.</summary>

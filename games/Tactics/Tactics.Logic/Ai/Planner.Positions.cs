@@ -28,7 +28,8 @@ internal sealed partial class Planner
     /// for a scratch, up to double when it could drop it) and by <see cref="_wariness"/>, high
     /// ground, setting up a flank for an ally, staying near an ally who heals while hurt, closing in (a little for each tile
     /// short of striking range, and half its damage per round for a tile it can strike a foe from next turn) or, fleeing,
-    /// getting away, and staying near a protected ally (the objective). A companion also guards: standing next to a healer or
+    /// getting away, staying near a protected ally and, for the party when the win asks it to reach a zone, closing on the
+    /// zone (the objectives). A companion also guards: standing next to a healer or
     /// protected ally adds half the objective weight × the damage the foes threaten it with next round (capped at its HP).
     /// </summary>
     private double Position(Tile t)
@@ -85,6 +86,9 @@ internal sealed partial class Planner
         foreach (var (pos, danger) in Guarded())
             if (Reach.Distance(pos, t) <= 1)
                 score += 0.5 * _p.Objective * danger;
+        var goal = _scorer.ReachTiles(_me);
+        if (!goal.IsEmpty)
+            score -= 0.3 * Math.Max(0.5, _p.Objective) * goal.Min(g => Reach.Distance(g, t));
         return score;
     }
 

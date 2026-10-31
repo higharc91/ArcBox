@@ -32,7 +32,15 @@ public sealed class GoldenTests
 
         foreach (var path in replays)
         {
-            var (_, events) = Replay.Run(Replay.Load(path), roundTripEachStep: true);
+            var replay = Replay.Load(path);
+            if (replay.Commands.IsDefaultOrEmpty)
+            {
+                // A replay recorded from the AI (warlord-bridge) is written with no commands until it is first recorded.
+                Assert.True(update, $"{Path.GetFileName(path)} has no commands; record it with UPDATE_GOLDENS=1.");
+                replay = replay with { Commands = Replay.RecordWithAi(replay) };
+                File.WriteAllText(path, Replay.ReplayJson(replay));
+            }
+            var (_, events) = Replay.Run(replay, roundTripEachStep: true);
             var actual = Replay.EventsJson(events);
             var golden = path[..^Suffix.Length] + ".events.json";
             if (update)
@@ -89,6 +97,32 @@ public sealed class GoldenTests
         Assert.Contains(events, e => e is Died);
         Assert.Contains(events, e => e is Downed);
         Assert.Contains(events, e => e is PassiveTriggered { Passive: "human.resourceful" });
+    }
+
+    [Fact]
+    public void Warlord_bridge_plays_the_showcase_triggers()
+    {
+        var replay = Replay.Load(Path.Combine(Folder(), "warlord-bridge" + Suffix));
+        Assert.False(replay.Commands.IsDefaultOrEmpty, "warlord-bridge has no commands; record it with UPDATE_GOLDENS=1.");
+        var (final, events) = Replay.Run(replay, roundTripEachStep: false);
+
+        Assert.Equal(5, final.Units.Values.Count(u => u.Sheet.Side == Side.Party && u.SummonedBy is null && !u.Protected));
+        Assert.All(final.Units.Values.Where(u => u.Sheet.Side == Side.Party && u.SummonedBy is null), u => Assert.Equal(5, u.Sheet.Level));
+        Assert.Contains(new TriggerFired("warlord_taunt"), events);
+        Assert.Contains(events, e => e is Said { Speaker: "warlord" });
+        Assert.Contains(events, e => e is CameraHint);
+
+        // The seed is picked so the whole showcase plays out: the archers, the collapse and the boss's phase.
+        Assert.Contains(new TriggerFired("ridge_archers"), events);
+        Assert.Equal(2, events.OfType<Spawned>().Count(s => s.Unit.Value.StartsWith("goblin_archer.", StringComparison.Ordinal)));
+        Assert.Contains(new TriggerFired("bridge_collapse"), events);
+        Assert.Contains(events, e => e is Fell { IntoDeep: true });
+        Assert.NotNull(final.Sunk);
+        Assert.Contains("bridge_down", final.Flags);
+        Assert.Contains(new TriggerFired("warlord_enraged"), events);
+        Assert.Contains(new PhaseEntered(new UnitId("warlord"), 1), events);
+        Assert.NotNull(final.Outcome);   // defeat the warlord, survive 8 rounds, or fall
+        Assert.Single(events.OfType<BattleEnded>());
     }
 
     private static string FirstDifference(string expected, string actual)

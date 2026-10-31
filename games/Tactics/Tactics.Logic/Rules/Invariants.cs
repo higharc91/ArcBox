@@ -38,7 +38,7 @@ public static class Invariants
     public static void Check(BattleState s, RulesPack rules)
     {
         var map = rules.MapFor(s.MapId) ?? throw new RulesInvariantException($"The rules pack has no map '{s.MapId}'.");
-        Check(s, rules, new Terrain(map, s.HeightDelta, []));
+        Check(s, rules, new Terrain(map, s.HeightDelta, [], s.Sunk));
     }
 
     /// <summary><see cref="Check(BattleState, RulesPack)"/> with the map as it is now already built.</summary>

@@ -23,7 +23,8 @@ public static class Encounters
     /// the placement's AI profile (else the monster's), the sprite's variant if it names one (the third part of the key,
     /// <c>"beasts.wolf.dire"</c>) and its tag added to the sheet's tags, where objectives and triggers look for it. Enemies
     /// and NPCs are AI-controlled by that profile.</item>
-    /// <item>The encounter's objectives, triggers, XP and loot, and <paramref name="d"/>, go into the setup unchanged.</item>
+    /// <item>The encounter's objectives, triggers, XP and loot, and <paramref name="d"/>, go into the setup unchanged, except
+    /// that each trigger <c>phase</c> action gets its phase from the tagged monster's <c>phases</c>.</item>
     /// </list>
     /// Throws <see cref="ContentException"/> for an unknown encounter or map, a placement onto an unwalkable or taken tile, a
     /// zone with too few free tiles, or a unit id in use twice; and <see cref="ArgumentException"/> for a party the encounter
@@ -65,7 +66,32 @@ public static class Encounters
                 PlaceUnits(units[i], $"/{name}/{i}", isNpc, rules, placer, numbers);
         problems.ThrowIfAny();
 
-        return new BattleSetup(map, placer.Units.ToImmutable(), def.Objectives ?? ObjectivesDef.Default, def.Triggers, d, def.Xp, def.Loot);
+        return new BattleSetup(map, placer.Units.ToImmutable(), def.Objectives ?? ObjectivesDef.Default, WithPhases(def, rules), d,
+            def.Xp, def.Loot);
+    }
+
+    /// <summary>
+    /// The encounter's triggers with every <c>phase</c> action's <see cref="PhaseAction.Def"/> filled in from the monster that
+    /// carries its tag (the first placed with it, else the first spawned with it), when that monster has the phase.
+    /// </summary>
+    private static ImmutableArray<TriggerDef> WithPhases(EncounterDef def, RulesPack rules)
+    {
+        if (def.Triggers.IsDefaultOrEmpty || !def.Triggers.Any(t => t.Do.Any(a => a.Phase is { Def: null })))
+            return def.Triggers.IsDefault ? [] : def.Triggers;
+        var monsterByTag = new Dictionary<string, string>(StringComparer.Ordinal);
+        foreach (var unit in def.Enemies.Concat(def.Npcs))
+            monsterByTag.TryAdd(unit.UnitTag, unit.Unit);
+        foreach (var spawn in def.Triggers.SelectMany(t => t.Do).Select(a => a.Spawn).OfType<SpawnAction>())
+            monsterByTag.TryAdd(spawn.UnitTag, spawn.Unit);
+
+        TriggerAction Resolve(TriggerAction action)
+        {
+            if (action.Phase is not { Def: null } phase || !monsterByTag.TryGetValue(phase.Tag, out var monster)
+                || !rules.Monsters.TryGetValue(monster, out var m) || phase.Number < 1 || phase.Number > m.Phases.Length)
+                return action;
+            return action with { Phase = phase with { Def = m.Phases[phase.Number - 1] } };
+        }
+        return [.. def.Triggers.Select(t => t with { Do = [.. t.Do.Select(Resolve)] })];
     }
 
     private static void PlaceUnits(EncounterUnitDef unit, string at, bool isNpc, RulesPack rules, Placer placer,

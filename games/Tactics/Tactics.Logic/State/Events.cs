@@ -43,6 +43,11 @@ namespace Tactics.Logic;
 [JsonDerivedType(typeof(Marked), nameof(Marked))]
 [JsonDerivedType(typeof(TempHpGained), nameof(TempHpGained))]
 [JsonDerivedType(typeof(Countered), nameof(Countered))]
+[JsonDerivedType(typeof(TriggerFired), nameof(TriggerFired))]
+[JsonDerivedType(typeof(Said), nameof(Said))]
+[JsonDerivedType(typeof(ObjectiveChanged), nameof(ObjectiveChanged))]
+[JsonDerivedType(typeof(CameraHint), nameof(CameraHint))]
+[JsonDerivedType(typeof(PhaseEntered), nameof(PhaseEntered))]
 public abstract record BattleEvent
 {
     /// <summary>
@@ -174,3 +179,18 @@ public sealed record TempHpGained(UnitId Unit, int TempHp) : BattleEvent;
 
 /// <summary><see cref="By"/> countered <see cref="Caster"/>'s <see cref="Ability"/>: its effects don't happen.</summary>
 public sealed record Countered(UnitId Caster, AbilityId Ability, UnitId By) : BattleEvent;
+
+/// <summary>The encounter trigger <see cref="Id"/> fired; its actions follow.</summary>
+public sealed record TriggerFired(string Id) : BattleEvent;
+
+/// <summary>A dialogue line for the TV: <see cref="Speaker"/> (a unit tag, a name, or <c>"narrator"</c>) says <see cref="Line"/>.</summary>
+public sealed record Said(string Speaker, string Line) : BattleEvent;
+
+/// <summary>The objectives in force changed (a trigger's <c>setObjective</c>).</summary>
+public sealed record ObjectiveChanged(ObjectivesDef Objectives) : BattleEvent;
+
+/// <summary>The TV should focus on <see cref="Tile"/> (a trigger's <c>cameraHint</c>).</summary>
+public sealed record CameraHint(Tile Tile) : BattleEvent;
+
+/// <summary>A boss entered phase <see cref="Number"/>: it gained the phase's abilities and passives.</summary>
+public sealed record PhaseEntered(UnitId Unit, int Number) : BattleEvent;

@@ -7,14 +7,20 @@ public sealed class Terrain
 {
     private readonly ImmutableSortedDictionary<Tile, int> _heightDelta;
     private readonly ImmutableSortedSet<Tile> _difficultZones;
+    private readonly ImmutableSortedSet<Tile> _sunk;
     private readonly PropPlacement?[] _propAt;
 
-    /// <summary>Creates a view of <paramref name="map"/> with the given changes applied.</summary>
-    public Terrain(BattleMap map, ImmutableSortedDictionary<Tile, int> heightDelta, ImmutableSortedSet<Tile> difficultZones)
+    /// <summary>
+    /// Creates a view of <paramref name="map"/> with the given changes applied; <paramref name="sunk"/> are tiles that became
+    /// deep during the battle (<see cref="BattleState.Sunk"/>).
+    /// </summary>
+    public Terrain(BattleMap map, ImmutableSortedDictionary<Tile, int> heightDelta, ImmutableSortedSet<Tile> difficultZones,
+        ImmutableSortedSet<Tile>? sunk = null)
     {
         Map = map;
         _heightDelta = heightDelta;
         _difficultZones = difficultZones;
+        _sunk = sunk ?? [];
         _propAt = new PropPlacement?[map.Width * map.Height];
         foreach (var prop in map.Props)
         {
@@ -39,7 +45,7 @@ public sealed class Terrain
     {
         if (!Map.InBounds(t))
             return false;
-        if ((Map[t].Flags & (TileFlags.Impassable | TileFlags.Deep)) != 0)
+        if ((Map[t].Flags & (TileFlags.Impassable | TileFlags.Deep)) != 0 || _sunk.Contains(t))
             return false;
         return PropAt(t) is not { Blocks: true };
     }
@@ -48,8 +54,8 @@ public sealed class Terrain
     public bool Difficult(Tile t)
         => Map.InBounds(t) && ((Map[t].Flags & TileFlags.Difficult) != 0 || _difficultZones.Contains(t));
 
-    /// <summary>True when the tile is deep. False outside the map.</summary>
-    public bool Deep(Tile t) => Map.InBounds(t) && (Map[t].Flags & TileFlags.Deep) != 0;
+    /// <summary>True when the tile is deep (on the base map, or sunk during the battle). False outside the map.</summary>
+    public bool Deep(Tile t) => Map.InBounds(t) && ((Map[t].Flags & TileFlags.Deep) != 0 || _sunk.Contains(t));
 
     /// <summary>The prop standing on the tile, if any.</summary>
     public PropPlacement? PropAt(Tile t) => Map.InBounds(t) ? _propAt[t.Y * Map.Width + t.X] : null;

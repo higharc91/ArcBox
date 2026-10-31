@@ -14,6 +14,7 @@ public sealed class BattleWriter
     private Terrain? _terrain;
     private ImmutableSortedDictionary<Tile, int>? _terrainHeights;
     private ImmutableArray<Zone> _terrainZones;
+    private ImmutableSortedSet<Tile>? _terrainSunk;
 
     /// <summary>Starts a working copy of <paramref name="state"/> under <paramref name="rules"/>.</summary>
     public BattleWriter(BattleState state, RulesPack rules)
@@ -79,19 +80,21 @@ public sealed class BattleWriter
         return head;
     }
 
-    /// <summary>The map as it is now: the base map plus height changes and difficult zones. Rebuilt when those change.</summary>
+    /// <summary>The map as it is now: the base map plus height changes, sunk tiles and difficult zones. Rebuilt when those change.</summary>
     public Terrain Terrain
     {
         get
         {
-            if (_terrain is null || !ReferenceEquals(_terrainHeights, State.HeightDelta) || _terrainZones != State.Zones)
+            if (_terrain is null || !ReferenceEquals(_terrainHeights, State.HeightDelta) || _terrainZones != State.Zones
+                || !ReferenceEquals(_terrainSunk, State.Sunk))
             {
                 var map = _rules.MapFor(State.MapId)
                           ?? throw new InvalidOperationException($"The rules pack has no map '{State.MapId}'.");
                 var difficult = State.Zones.Where(z => z.Difficult).SelectMany(z => z.Tiles).ToImmutableSortedSet();
-                _terrain = new Terrain(map, State.HeightDelta, difficult);
+                _terrain = new Terrain(map, State.HeightDelta, difficult, State.Sunk);
                 _terrainHeights = State.HeightDelta;
                 _terrainZones = State.Zones;
+                _terrainSunk = State.Sunk;
             }
             return _terrain;
         }
