@@ -43,6 +43,26 @@
       "preset": "Achird",
       "file": "voice_earnest_battle_start_2.f72b1a0d.ogg"
     },
+    "voice_earnest_camp_1.high": {
+      "asset": "asset_rVpZGcy6JdV95VAdLCYzdfmM",
+      "preset": "Leda",
+      "file": "voice_earnest_camp_1.d1397c5c.ogg"
+    },
+    "voice_earnest_camp_1.low": {
+      "asset": "asset_sXtwU2p3UcB1n9L6UXXG7zdk",
+      "preset": "Achird",
+      "file": "voice_earnest_camp_1.1c779139.ogg"
+    },
+    "voice_earnest_camp_2.high": {
+      "asset": "asset_JBQpsWdGQ1daMvXXygwFZKSS",
+      "preset": "Leda",
+      "file": "voice_earnest_camp_2.0e80f4a3.ogg"
+    },
+    "voice_earnest_camp_2.low": {
+      "asset": "asset_YFETvSqwyCpBqNKfBvAbNhHd",
+      "preset": "Achird",
+      "file": "voice_earnest_camp_2.31d53ff9.ogg"
+    },
     "voice_earnest_crit_1.high": {
       "asset": "asset_mkieQ4rRfNFZYAQ4Fk7oaA8R",
       "preset": "Leda",
@@ -62,6 +82,36 @@
       "asset": "asset_RdQFtb8uZDeBvjgJmjgVGyVm",
       "preset": "Achird",
       "file": "voice_earnest_crit_2.e03f122e.ogg"
+    },
+    "voice_earnest_defeat_1.high": {
+      "asset": "asset_kUQM6i9KPhjsVPh76bbwBJ2C",
+      "preset": "Leda",
+      "file": "voice_earnest_defeat_1.cc010a9c.ogg"
+    },
+    "voice_earnest_defeat_1.low": {
+      "asset": "asset_ktZMNb6RRaqYmj73W3BMbNLS",
+      "preset": "Achird",
+      "file": "voice_earnest_defeat_1.7298b71b.ogg"
+    },
+    "voice_earnest_healed_1.high": {
+      "asset": "asset_PCPPSPhUJpoLNEuaKBDPhQyz",
+      "preset": "Leda",
+      "file": "voice_earnest_healed_1.52312745.ogg"
+    },
+    "voice_earnest_healed_1.low": {
+      "asset": "asset_RQ1A275Hh1WEZQoHfw5diSMW",
+      "preset": "Achird",
+      "file": "voice_earnest_healed_1.e112022d.ogg"
+    },
+    "voice_earnest_healed_2.high": {
+      "asset": "asset_BWusMQUSxtbysD5VDymgMYP5",
+      "preset": "Leda",
+      "file": "voice_earnest_healed_2.d5a402ea.ogg"
+    },
+    "voice_earnest_healed_2.low": {
+      "asset": "asset_ujJFD7ngyWMVfNcF2fU7hFdD",
+      "preset": "Achird",
+      "file": "voice_earnest_healed_2.bc86e078.ogg"
     },
     "voice_earnest_kill_1.high": {
       "asset": "asset_41rYPbx67QJGPP6KRNSCUmPb",
@@ -92,6 +142,116 @@
       "asset": "asset_hizFoDfgRjZEdk5Z3ucZw8Jf",
       "preset": "Achird",
       "file": "voice_earnest_low_hp_1.d872214a.ogg"
+    },
+    "voice_earnest_low_hp_2.high": {
+      "asset": "asset_PemNrmneEtAArTVadFQT8rke",
+      "preset": "Leda",
+      "file": "voice_earnest_low_hp_2.fcdcc0ad.ogg"
+    },
+    "voice_earnest_low_hp_2.low": {
+      "asset": "asset_ZcwXjRw7f7fYfdoDuUtg94Eu",
+      "preset": "Achird",
+      "file": "voice_earnest_low_hp_2.466dc477.ogg"
+    },
+    "voice_earnest_victory_1.high": {
+      "asset": "asset_DzBwVYEmDxyKNYJ1PHbET9sB",
+      "preset": "Leda",
+      "file": "voice_earnest_victory_1.2add423d.ogg"
+    },
+    "voice_earnest_victory_1.low": {
+      "asset": "asset_czAutV3haX3zZzgYxQaqRedj",
+      "preset": "Achird",
+      "file": "voice_earnest_victory_1.94a980bd.ogg"
+    },
+    "voice_earnest_victory_2.high": {
+      "asset": "asset_JjmcQ1tr9iWPtDMinzVBR9Hv",
+      "preset": "Leda",
+      "file": "voice_earnest_victory_2.97532931.ogg"
+    },
+    "voice_earnest_victory_2.low": {
+      "asset": "asset_2LBiCnSaqk1PLz5pUpwiuZcn",
+      "preset": "Achird",
+      "file": "voice_earnest_victory_2.9a0162ff.ogg"
+    },
+    "voice_fierce_ally_down_1.high": {
+      "asset": "asset_nr8Rx68dkr4pwr6aJjCE5ban",
+      "preset": "Pulcherrima",
+      "file": "voice_fierce_ally_down_1.2a96c8b8.ogg"
+    },
+    "voice_fierce_ally_down_1.low": {
+      "asset": "asset_uitUCVYZ1zPXyKU6znUdJ3DS",
+      "preset": "Fenrir",
+      "file": "voice_fierce_ally_down_1.5357c576.ogg"
+    },
+    "voice_fierce_ally_down_2.high": {
+      "asset": "asset_qDScWPfNj1aQfU8qrWzQ7nGz",
+      "preset": "Pulcherrima",
+      "file": "voice_fierce_ally_down_2.9ea895ed.ogg"
+    },
+    "voice_fierce_ally_down_2.low": {
+      "asset": "asset_qiMEvY4FY7woFtHnyGBzEXmu",
+      "preset": "Fenrir",
+      "file": "voice_fierce_ally_down_2.67874e08.ogg"
+    },
+    "voice_fierce_battle_start_1.high": {
+      "asset": "asset_bdr7cM3yaEJBLbYthoCTxaoN",
+      "preset": "Pulcherrima",
+      "file": "voice_fierce_battle_start_1.08bf5361.ogg"
+    },
+    "voice_fierce_battle_start_1.low": {
+      "asset": "asset_Fd1FsrETd3FciidoUUtaGW6f",
+      "preset": "Fenrir",
+      "file": "voice_fierce_battle_start_1.04284321.ogg"
+    },
+    "voice_fierce_battle_start_2.high": {
+      "asset": "asset_nYa76r399SimLFQ5daPZso4L",
+      "preset": "Pulcherrima",
+      "file": "voice_fierce_battle_start_2.d5ef3080.ogg"
+    },
+    "voice_fierce_battle_start_2.low": {
+      "asset": "asset_tPEB4zwpLDPda87gYAEo9PRi",
+      "preset": "Fenrir",
+      "file": "voice_fierce_battle_start_2.9dd18224.ogg"
+    },
+    "voice_fierce_crit_1.high": {
+      "asset": "asset_ih4Aa3RhZZdhbuan1iH6WfL3",
+      "preset": "Pulcherrima",
+      "file": "voice_fierce_crit_1.eab825c7.ogg"
+    },
+    "voice_fierce_crit_1.low": {
+      "asset": "asset_kbhogoHmJ4Bf2SSMMdTp7HES",
+      "preset": "Fenrir",
+      "file": "voice_fierce_crit_1.fddfbc85.ogg"
+    },
+    "voice_fierce_crit_2.high": {
+      "asset": "asset_X8jyBdNeC6BZ9j4f1VZMGCUa",
+      "preset": "Pulcherrima",
+      "file": "voice_fierce_crit_2.a6c18daf.ogg"
+    },
+    "voice_fierce_crit_2.low": {
+      "asset": "asset_WpngBnkLu6GaN7RaDPPkfY7N",
+      "preset": "Fenrir",
+      "file": "voice_fierce_crit_2.a7fc359c.ogg"
+    },
+    "voice_fierce_kill_1.high": {
+      "asset": "asset_kbQkXGV6hQFk6xNZAuq1FuxC",
+      "preset": "Pulcherrima",
+      "file": "voice_fierce_kill_1.dad55f3b.ogg"
+    },
+    "voice_fierce_kill_1.low": {
+      "asset": "asset_d7jADRfgPHWJBdpGKg33YHrX",
+      "preset": "Fenrir",
+      "file": "voice_fierce_kill_1.3766e488.ogg"
+    },
+    "voice_fierce_kill_2.high": {
+      "asset": "asset_dnHNaeANCLSurFCaQMFNo4cE",
+      "preset": "Pulcherrima",
+      "file": "voice_fierce_kill_2.79952487.ogg"
+    },
+    "voice_fierce_kill_2.low": {
+      "asset": "asset_5GkgmtQFPRL64fAgZs2raG4z",
+      "preset": "Fenrir",
+      "file": "voice_fierce_kill_2.ba84c6d9.ogg"
     }
   }
 }
