@@ -26,7 +26,8 @@ afterEach(cleanup);
 
 describe("tactics phone module", () => {
   it("renders every screen the game sends", () => {
-    const names = Object.keys(fixtures).map((k) => k.replace("./fixtures/tactics/", "").replace(".json", "")).sort();
+    const names = Object.keys(fixtures).map((k) => k.replace("./fixtures/tactics/", "").replace(".json", ""))
+      .filter((n) => !n.startsWith("portal-")).sort();
     expect(names).toEqual(["pickClass", "pickEncounter", "react", "results", "status", "turn"]);
     for (const name of names) {
       render(<ControllerScreen view={view(name)} send={() => {}} me="ALEX" game="tactics" />);

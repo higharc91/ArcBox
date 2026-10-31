@@ -36,6 +36,44 @@ public sealed class PhoneFixtureTests
         var screens = Capture();
         Assert.Equal([.. new[] { "pickClass", "pickEncounter", "react", "results", "status", "turn" }], screens.Keys.Order(StringComparer.Ordinal));
 
+        Check(screens);
+    }
+
+    [Fact]
+    public void Portal_views_match_their_fixtures()
+    {
+        var rules = Pack.Value;
+        var portal = new TacticsCampaignRules(rules);
+        var ana = new ProfileId("pr_ana");
+        var bo = new ProfileId("pr_bo");
+        var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", ana,
+            [new CampaignMember(ana, "Ana", CampaignRole.Owner, DateTimeOffset.UnixEpoch),
+             new CampaignMember(bo, "Bo", CampaignRole.Player, DateTimeOffset.UnixEpoch)], 1);
+        var empty = portal.NewDocument(info);
+
+        // Ana has a level-4 dwarf cleric with an increase to spend and a subclass to choose; Bo has nothing yet.
+        var made = portal.Handle(info, empty, ana, "createCharacter", JsonSerializer.SerializeToElement(new
+        {
+            race = "dwarf", @class = "cleric", background = "acolyte", scores = new { str = 8, dex = 8, con = 15, @int = 8, wis = 15, cha = 15 },
+        }, ArcJson.Options)).Document!.Value;
+        var doc = TacticsDocument.Read(made);
+        var cleric = doc.Members[ana.Value];
+        doc = doc with
+        {
+            PartyLevel = 4,
+            Members = doc.Members.SetItem(ana.Value, cleric with { Xp = 3200, Character = CharacterRules.LevelUp(cleric.Character, 4, rules) }),
+        };
+
+        var views = new SortedDictionary<string, JsonNode>(StringComparer.Ordinal)
+        {
+            ["portal-new"] = JsonNode.Parse(portal.PortalView(info, doc.ToJson(), bo).GetRawText())!,
+            ["portal-character"] = JsonNode.Parse(portal.PortalView(info, doc.ToJson(), ana).GetRawText())!,
+        };
+        Check(views);
+    }
+
+    private static void Check(SortedDictionary<string, JsonNode> screens)
+    {
         var dir = FixtureDir();
         var update = Environment.GetEnvironmentVariable("UPDATE_FIXTURES") == "1";
         foreach (var (name, json) in screens)

@@ -47,3 +47,16 @@
 .tx-won { color: #4cd964; }
 .tx-lost { color: #ff6b6b; }
 .tx-injury { display: block; color: #ff9f0a; }
+
+/* The portal (portal.tsx) */
+.tx-portal label { display: flex; flex-direction: column; gap: 4px; }
+.tx-portal select { font: inherit; padding: 8px; background: rgba(255, 255, 255, 0.06); color: inherit; border: 1px solid rgba(255, 255, 255, 0.15); }
+.tx-scores { border-collapse: collapse; }
+.tx-scores th, .tx-scores td { padding: 4px 6px; text-align: center; }
+.tx-score { font-weight: 700; min-width: 40px; }
+.tx-choice { border: 1px solid rgba(255, 255, 255, 0.12); padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+/* A pick: checkbox, then the name with its description under it in plain text (the app's <small> is shouty caps). */
+.tx-portal .tx-pick { display: grid; grid-template-columns: auto 1fr; column-gap: 8px; align-items: baseline; }
+.tx-pick input { grid-row: span 2; }
+.tx-pick-tip { color: var(--dim); font-size: 13px; line-height: 1.3; }
+.tx-actions button.on { outline: 2px solid #ffd60a; }
