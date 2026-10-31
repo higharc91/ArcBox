@@ -131,10 +131,24 @@ def encode(wav: Path, ogg: Path, pitch: float = 0, filt: str = "") -> None:
     if filt:
         chain.append(FILTERS[filt])
     trim = "silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.05"
-    chain += [trim, "areverse", trim, "areverse", "loudnorm=I=-16:TP=-1.5:LRA=11", f"aresample={RATE}"]
-    subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(wav), "-af", ",".join(chain),
-                    "-ac", "1", "-c:a", "libvorbis", "-q:a", "5", "-map_metadata", "-1", "-fflags", "+bitexact",
-                    "-flags:a", "+bitexact", str(ogg)], check=True)
+    level = ["loudnorm=I=-16:TP=-1.5:LRA=11", f"aresample={RATE}"]
+    out = ["-ac", "1", "-c:a", "libvorbis", "-q:a", "5", "-map_metadata", "-1", "-fflags", "+bitexact",
+           "-flags:a", "+bitexact", str(ogg)]
+    ff = ["ffmpeg", "-nostdin", "-hide_banner", "-loglevel", "error", "-y"]
+    try:
+        subprocess.run(ff + ["-i", str(wav), "-af", ",".join(chain + [trim, "areverse", trim, "areverse"] + level)]
+                       + out, check=True, timeout=60)
+    except subprocess.TimeoutExpired:
+        # On rare clips ffmpeg's graph deadlocks when the reverse-trim feeds loudnorm (idle CPU, no output). Split it:
+        # shape and trim to a lossless float WAV, then level and encode. Still deterministic: a clip that hangs always
+        # hangs, so it always takes this path.
+        mid = ogg.with_suffix(".trim.wav")
+        try:
+            subprocess.run(ff + ["-i", str(wav), "-af", ",".join(chain + [trim, "areverse", trim, "areverse"]),
+                                 "-c:a", "pcm_f32le", str(mid)], check=True, timeout=60)
+            subprocess.run(ff + ["-i", str(mid), "-af", ",".join(level)] + out, check=True, timeout=60)
+        finally:
+            mid.unlink(missing_ok=True)
 
 
 def write_manifest() -> dict:
