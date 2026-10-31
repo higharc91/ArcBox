@@ -33,14 +33,15 @@ export const pointsSpent = (scores: Record<StatKey, number>) => STATS.reduce((n,
 export function TacticsPortal({ campaign, readOnly, send }: PortalProps) {
   const view = campaign.view as TacticsPortalView;
   const [making, setMaking] = useState(view.me === null);
-  useEffect(() => setMaking(view.me === null), [view.me === null]);
+  // A new view (after a create, or any change) shows the sheet again, unless there's still no character.
+  useEffect(() => setMaking(view.me === null), [JSON.stringify(view.me)]);
   return (
     <div class="tx tx-portal">
       <h1 class="portal-title">{campaign.info.name}</h1>
       <p class="tx-dim">Party level {view.level} · {view.completed.length} battles won</p>
       <ul class="tx-lines">
-        {view.party.map((p) => (
-          <li key={p.name}><b>{p.name}</b>{p.you ? " (you)" : ""} <span class="tx-dim">{p.character}</span></li>
+        {view.party.map((p, i) => (
+          <li key={`${i}-${p.name}`}><b>{p.name}</b>{p.you ? " (you)" : ""} <span class="tx-dim">{p.character}</span></li>
         ))}
       </ul>
       {making && view.options ? (

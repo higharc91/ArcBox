@@ -139,6 +139,55 @@ public sealed class CharacterTests
     }
 
     [Fact]
+    public void A_damaged_character_never_breaks_the_portal_or_its_commands()
+    {
+        var rules = new TacticsCampaignRules(Rules);
+        // A stored character missing most of its fields (hand-edited, or from an older build).
+        var doc = JsonDocument.Parse("""
+            { "version": 0, "partyLevel": 4, "members": { "pr_ana": { "character": { "name": "Ana", "race": "dwarf", "class": "cleric",
+              "background": "acolyte", "level": 4 }, "xp": 0 } }, "completed": [] }
+            """).RootElement;
+
+        var me = rules.PortalView(Info, doc, Ana).GetProperty("me");
+        Assert.Equal("Dwarf Cleric", me.GetProperty("describe").GetString());
+        foreach (var (type, data) in new (string, object)[]
+                 {
+                     ("spendIncrease", new { stats = new[] { "wis" } }), ("setPicks", new { picks = new[] { "cleric.sacred_flame" } }),
+                     ("chooseSubclass", new { subclass = "cleric.life" }), ("createCharacter", new { race = 1 }),
+                 })
+            rules.Handle(Info, doc, Ana, type, Json(data));   // must not throw
+
+        // And a document that isn't one at all.
+        var junk = JsonDocument.Parse("""{ "version": 0, "members": 5 }""").RootElement;
+        Assert.NotNull(rules.Handle(Info, junk, Ana, "setPicks", Json(new { picks = new[] { "x" } })).Error);
+        Assert.Equal("This campaign's saved data couldn't be read.", rules.PortalView(Info, junk, Ana).GetProperty("problem").GetString());
+    }
+
+    [Fact]
+    public void Stats_are_named_picks_are_never_empty_and_a_lost_battle_still_counts_as_fought()
+    {
+        var rules = new TacticsCampaignRules(Rules);
+        var made = rules.Handle(Info, rules.NewDocument(Info), Ana, "createCharacter", Json(new { race = "dwarf", @class = "cleric",
+            background = Background, scores = new { str = 8, dex = 8, con = 15, @int = 8, wis = 15, cha = 15 } })).Document!.Value;
+
+        var four = TacticsDocument.Read(made);
+        four = four with { Members = four.Members.SetItem(Ana.Value, four.Members[Ana.Value] with
+        {
+            Character = four.Members[Ana.Value].Character with { Level = 4 },
+        }) };
+        Assert.Equal("Pick abilities to raise.", rules.Handle(Info, four.ToJson(), Ana, "spendIncrease", Json(new { stats = new[] { "7" } })).Error);
+        Assert.Equal("Pick abilities to raise.", rules.Handle(Info, four.ToJson(), Ana, "spendIncrease", Json(new { stats = new[] { "str,dex" } })).Error);
+        Assert.Equal("Choose at least one.", rules.Handle(Info, made, Ana, "setPicks", Json(new { picks = Array.Empty<string>() })).Error);
+
+        // A battle lost for 0 XP: the character has still fought, so it keeps its injuries and can't be remade.
+        var lost = TacticsDocument.Read(made);
+        lost = lost with { Members = lost.Members.SetItem(Ana.Value, lost.Members[Ana.Value] with { Fought = true }) };
+        Assert.Equal("Your character has fought already; it can't be remade.",
+            rules.Handle(Info, lost.ToJson(), Ana, "createCharacter", Json(new { race = "dwarf", @class = "cleric", background = Background,
+                scores = new { str = 8, dex = 8, con = 15, @int = 8, wis = 15, cha = 15 } })).Error);
+    }
+
+    [Fact]
     public void A_member_who_made_a_character_skips_the_class_pick()
     {
         var rules = new TacticsCampaignRules(Rules);

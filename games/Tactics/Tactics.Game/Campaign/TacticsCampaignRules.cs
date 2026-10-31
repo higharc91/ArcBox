@@ -41,13 +41,31 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
     /// </remarks>
     public JsonElement PortalView(CampaignInfo info, JsonElement document, ProfileId member)
     {
+        try
+        {
+            return View(info, document, member);
+        }
+        catch (Exception e) when (e is not OutOfMemoryException)
+        {
+            // Never fail the portal (the platform builds this view for every command reply too): show the party's names.
+            return JsonSerializer.SerializeToElement(new
+            {
+                level = 1, completed = Array.Empty<string>(),
+                party = info.Members.Select(m => new { name = m.DisplayName, character = "", xp = 0, you = m.Profile == member }),
+                me = (object?)null, options = (object?)null, problem = "This campaign's saved data couldn't be read.",
+            }, ArcJson.Options);
+        }
+    }
+
+    private JsonElement View(CampaignInfo info, JsonElement document, ProfileId member)
+    {
         var rules = pack.Value;
         var doc = TacticsDocument.Read(document);
         var party = info.Members.Select(m => doc.For(m.Profile) is { } r
             ? new { name = m.DisplayName, character = Describe(r.Character), xp = r.Xp, you = m.Profile == member }
             : new { name = m.DisplayName, character = "No character yet", xp = 0, you = m.Profile == member });
         var mine = doc.For(member);
-        object? options = mine is null || mine.Xp == 0
+        object? options = mine is null || !mine.HasFought
             ? new
             {
                 races = rules.Races.Values.Select(r => new { id = r.Id, name = r.Name }),
@@ -103,16 +121,16 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
     /// </remarks>
     public CommandResult Handle(CampaignInfo info, JsonElement document, ProfileId member, string type, JsonElement data)
     {
-        var rules = pack.Value;
-        var doc = TacticsDocument.Read(document);
-        var mine = doc.For(member);
         try
         {
+            var rules = pack.Value;
+            var doc = TacticsDocument.Read(document);
+            var mine = doc.For(member);
             (CharacterRecord? Character, string? Problem) result;
             switch (type)
             {
                 case "createCharacter":
-                    if (mine is { Xp: > 0 })
+                    if (mine is { HasFought: true })
                         return new(null, "Your character has fought already; it can't be remade.");
                     var name = info.Members.FirstOrDefault(m => m.Profile == member)?.DisplayName ?? "Adventurer";
                     var scores = new Dictionary<Stat, int>();
@@ -149,9 +167,14 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
             var updated = doc with { Members = doc.Members.SetItem(member.Value, record) };
             return new(updated.ToJson(), null);
         }
-        catch (InvalidOperationException)
+        catch (Exception e) when (e is InvalidOperationException or FormatException or JsonException)
         {
             return new(null, "That didn't make sense to the game.");
+        }
+        catch (Exception e) when (e is not OutOfMemoryException)
+        {
+            // Handle never throws (the platform turns an exception into a 500): an odd document is refused, not fatal.
+            return new(null, "Your character couldn't be changed: the saved campaign looks damaged.");
         }
     }
 
@@ -161,7 +184,9 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
     /// <summary>"sneak_attack" → "Sneak attack".</summary>
     private static string Humanize(string id) => id.Length == 0 ? id : char.ToUpperInvariant(id[0]) + id[1..].Replace('_', ' ');
 
-    private static Stat? ParseStat(string s) => Enum.TryParse<Stat>(s, ignoreCase: true, out var stat) ? stat : null;
+    /// <summary>"str" (or "Str"): one of the six names, never a number or a list ("7", "str,dex").</summary>
+    private static Stat? ParseStat(string s)
+        => Enum.GetValues<Stat>().Cast<Stat?>().FirstOrDefault(st => string.Equals(st.ToString(), s, StringComparison.OrdinalIgnoreCase));
 
     /// <summary>"Human Fighter", from the pack's race and class names.</summary>
     public string Describe(CharacterRecord character)

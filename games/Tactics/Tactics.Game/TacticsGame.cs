@@ -334,6 +334,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             members = members.SetItem(save.Members[i].Value, record with
             {
                 Xp = record.Xp + result.Xp.GetValueOrDefault(unit),
+                Fought = true,
                 Character = record.Character with { Injuries = record.Character.Injuries.AddRange(injuries), Bag = u.Bag },
             });
         }

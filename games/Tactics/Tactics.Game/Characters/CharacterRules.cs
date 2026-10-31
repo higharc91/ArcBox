@@ -73,9 +73,12 @@ public static class CharacterRules
         return Built(character, rules);
     }
 
-    /// <summary>Sets the character's picks (spells and options known): any set the class's "choose" features allow.</summary>
+    /// <summary>
+    /// Sets the character's picks (spells and options known): any set the class's "choose" features allow. An empty set is
+    /// refused: a stored empty list means "the class's default loadout", which isn't what the player chose.
+    /// </summary>
     public static (CharacterRecord? Character, string? Problem) SetPicks(CharacterRecord c, IReadOnlyList<AbilityId> picks, RulesPack rules)
-        => Built(c with { Picks = [.. picks.Distinct()] }, rules);
+        => picks.Count == 0 ? (null, "Choose at least one.") : Built(c with { Picks = [.. picks.Distinct()] }, rules);
 
     /// <summary>Chooses the subclass, once, from level 3.</summary>
     public static (CharacterRecord? Character, string? Problem) ChooseSubclass(CharacterRecord c, string subclass, RulesPack rules)
@@ -124,9 +127,11 @@ public static class CharacterRules
         var up = c with { Level = level };
         if (c.Picks.IsDefaultOrEmpty)
             return up;   // no picks of its own: the default loadout follows the level
-        var added = SheetBuilder.DefaultLoadout(cls, level).Except(SheetBuilder.DefaultLoadout(cls, c.Level)).Except(c.Picks);
-        var grown = up with { Picks = [.. c.Picks, .. added] };
-        return Built(grown, rules).Character ?? up;   // if a default doesn't fit the player's choices, the slot stays open
+        // Each new default joins if it still fits; one that doesn't (the player's choices took its slot) leaves the slot open.
+        foreach (var pick in SheetBuilder.DefaultLoadout(cls, level).Except(SheetBuilder.DefaultLoadout(cls, c.Level)).Except(c.Picks))
+            if (Built(up with { Picks = up.Picks.Add(pick) }, rules).Character is { } grown)
+                up = grown;
+        return up;
     }
 
     /// <summary>The character if its sheet builds, else the first problem, as the player sees it.</summary>

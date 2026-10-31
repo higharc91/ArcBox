@@ -6,8 +6,17 @@ using Tactics.Logic;
 
 namespace Tactics.Game;
 
-/// <summary>A campaign member's character and the XP it has earned (adapter spec §6).</summary>
-public sealed record MemberRecord(CharacterRecord Character, int Xp);
+/// <summary>
+/// A campaign member's character, the XP it has earned and whether it has been in a battle (adapter spec §6). A character
+/// that has fought can't be remade (<see cref="HasFought"/>; a lost battle can be worth 0 XP).
+/// </summary>
+public sealed record MemberRecord(CharacterRecord Character, int Xp,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Fought = false)
+{
+    /// <summary>True once the character has been in a battle (or earned XP, for documents from before the flag).</summary>
+    [JsonIgnore]
+    public bool HasFought => Fought || Xp > 0;
+}
 
 /// <summary>
 /// One beat of the battle log: the events one applied command produced, numbered so the TV can say which it has shown
@@ -56,8 +65,26 @@ public sealed record TacticsDocument(int Version, string? RulesHash, int PartyLe
                   ?? throw new JsonException("The campaign document is null.");
         if (doc.Version != CurrentVersion)
             throw new JsonException($"Campaign document version {doc.Version} isn't supported (this build reads {CurrentVersion}).");
-        return doc with { Completed = doc.Completed.IsDefault ? [] : doc.Completed };
+        return doc with
+        {
+            Completed = doc.Completed.IsDefault ? [] : doc.Completed,
+            Members = Ordinal.Map((doc.Members ?? Ordinal.Map<MemberRecord>()).Where(m => m.Value?.Character is not null)
+                .Select(m => (m.Key, m.Value with { Character = Whole(m.Value.Character) }))),
+        };
     }
+
+    /// <summary>
+    /// A stored character with every collection present (a document written by hand, or by an older build, may leave
+    /// fields out, which would read as null), so rules and views never meet a null.
+    /// </summary>
+    private static CharacterRecord Whole(CharacterRecord c) => c with
+    {
+        Name = c.Name ?? "Adventurer", Race = c.Race ?? "", Class = c.Class ?? "", Background = c.Background ?? "",
+        BaseScores = c.BaseScores ?? ImmutableSortedDictionary<Stat, int>.Empty,
+        Increases = c.Increases ?? ImmutableSortedDictionary<Stat, int>.Empty,
+        Picks = c.Picks.IsDefault ? [] : c.Picks, Injuries = c.Injuries.IsDefault ? [] : c.Injuries, Bag = c.Bag.IsDefault ? [] : c.Bag,
+        Weapon = c.Weapon ?? "", Armor = c.Armor ?? "",
+    };
 
     /// <summary>The document as JSON, for <see cref="ArcBox.Sdk.Campaigns.ICampaignLease.Save"/>.</summary>
     public JsonElement ToJson() => JsonSerializer.SerializeToElement(this, ArcJson.Options);
