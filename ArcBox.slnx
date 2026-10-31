@@ -19,6 +19,8 @@
     <Project Path="games/Tactics/Tactics.Presentation.Tests/Tactics.Presentation.Tests.csproj" />
     <Project Path="games/Tactics/Tactics.Presentation/Tactics.Presentation.csproj" />
     <Project Path="games/Tactics/Tactics.Sim/Tactics.Sim.csproj" />
+    <Project Path="games/Tactics/Tactics.WorldTools.Tests/Tactics.WorldTools.Tests.csproj" />
+    <Project Path="games/Tactics/Tactics.WorldTools/Tactics.WorldTools.csproj" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/ArcBox.Host.Core.Tests/ArcBox.Host.Core.Tests.csproj" />
