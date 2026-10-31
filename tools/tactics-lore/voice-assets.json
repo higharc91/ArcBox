@@ -2,7 +2,7 @@
   "model": "model_google-gemini-3-8-flash-tts",
   "team": "team_5nToMAwZ2bBo1gqSuy5933dS",
   "project": "proj_DXXKthLZvfZMp4svC2fRJksp",
-  "clips": {
+  "legacy": {
     "voice_earnest_ally_down_1.high": {
       "asset": "asset_XfKQomVr3RSWf87vAuxuxthh",
       "preset": "Leda",
@@ -252,6 +252,23 @@
       "asset": "asset_5GkgmtQFPRL64fAgZs2raG4z",
       "preset": "Fenrir",
       "file": "voice_fierce_kill_2.ba84c6d9.ogg"
+    }
+  },
+  "renders": {
+    "Alnilam.6e8bf441": {
+      "asset": "asset_VQA3Di57EHyS6SbVxfHSZHr2",
+      "preset": "Alnilam",
+      "text": "Hold together. We do this properly."
+    },
+    "Kore.07eee67a": {
+      "asset": "asset_RRw6nTcaWLicSfg5BLbf6QjK",
+      "preset": "Kore",
+      "text": "Steady now. Watch each other."
+    },
+    "Kore.e1db609c": {
+      "asset": "asset_75iARHZG5aGCR9BZfLF29RJK",
+      "preset": "Kore",
+      "text": "Hold together. We do this properly."
     }
   }
 }
