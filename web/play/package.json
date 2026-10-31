@@ -15,11 +15,13 @@
     "@fontsource/pixelify-sans": "5.3.0",
     "@fontsource/titillium-web": "5.3.0",
     "@microsoft/signalr": "10.0.11",
-    "preact": "10.29.8"
+    "preact": "10.29.8",
+    "three": "0.185.1"
   },
   "devDependencies": {
     "@preact/preset-vite": "2.10.6",
     "@testing-library/preact": "3.2.4",
+    "@types/three": "0.185.0",
     "happy-dom": "21.0.4",
     "typescript": "5.9.3",
     "vite": "6.4.4",

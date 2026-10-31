@@ -1,0 +1,244 @@
+/* Wardenflame's title screen, in the tactics UI palette (tools/tactics-assets/STYLE.md). Sized in vh so it reads the
+   same from a sofa on any TV. */
+:root {
+  --wf-ink: #f4ecd6;
+  --wf-muted: #bdb093;
+  --wf-gold: #e6bd5c;
+  --wf-gold-2: #a07c33;
+  --wf-gold-hi: #ffe7a8;
+  --wf-glass-top: rgba(26, 30, 58, 0.92);
+  --wf-glass-bot: rgba(10, 11, 26, 0.94);
+  --wf-serif: "Cinzel", Georgia, serif;
+  --wf-sans: "Alegreya Sans", system-ui, sans-serif;
+  --wf-night: #0a0b1a;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--wf-night);
+  color: var(--wf-ink);
+  overflow: hidden;
+}
+
+.wf-title {
+  position: fixed;
+  inset: 0;
+  font-family: var(--wf-sans);
+}
+
+.wf-title__world {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.wf-title__world canvas {
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.wf-title__fallback {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 30%, #1a1e3a, var(--wf-night) 70%);
+}
+
+.wf-title__logo {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 5vh;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  filter: drop-shadow(0 0.4vh 1.2vh rgba(10, 11, 26, 0.55));
+}
+
+.wf-title__logo canvas {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* The region caption: a chapter card in the sky at the top left, clear of the logo and the island. */
+.wf-title__caption {
+  position: absolute;
+  left: 3.5vw;
+  top: 5vh;
+  max-width: min(24vw, 46vh);
+  pointer-events: none;
+  text-shadow: 0 0.2vh 1vh rgba(10, 11, 26, 0.75), 0 0 0.3vh rgba(10, 11, 26, 0.85);
+}
+
+.wf-title__chapter {
+  margin: 0;
+  font-family: var(--wf-serif);
+  font-weight: 700;
+  font-size: clamp(12px, 2vh, 28px);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--wf-gold);
+}
+
+.wf-title__region {
+  margin: 0.4vh 0 0;
+  font-family: var(--wf-serif);
+  font-weight: 800;
+  font-size: clamp(22px, 4.6vh, 64px);
+  line-height: 1.08;
+  letter-spacing: 0.04em;
+  color: var(--wf-ink);
+}
+
+.wf-title__region::after {
+  content: "";
+  display: block;
+  width: 22vh;
+  height: 2px;
+  margin-top: 1.2vh;
+  background: linear-gradient(90deg, var(--wf-gold), rgba(230, 189, 92, 0));
+}
+
+.wf-title__place {
+  margin: 1vh 0 0;
+  font-size: clamp(14px, 2.6vh, 36px);
+  font-style: italic;
+  color: var(--wf-muted);
+}
+
+.wf-title__place:empty {
+  display: none;
+}
+
+/* The prompt band: navy glass fading up into the scene, a gold hairline on top. */
+.wf-title__band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-height: 15vh;
+  padding: 3.4vh 4vw 3.6vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.4vh;
+  background: linear-gradient(to top, var(--wf-glass-bot) 0%, rgba(10, 11, 26, 0.82) 55%, rgba(10, 11, 26, 0) 100%);
+  text-align: center;
+}
+
+.wf-title__band::before {
+  content: "";
+  position: absolute;
+  left: 18vw;
+  right: 18vw;
+  top: 2.2vh;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(230, 189, 92, 0), rgba(230, 189, 92, 0.65), rgba(230, 189, 92, 0));
+}
+
+.wf-title__band--room {
+  min-height: 23vh;
+}
+
+.wf-title__start {
+  margin: 0;
+  font-family: var(--wf-serif);
+  font-weight: 800;
+  font-size: clamp(18px, 3.6vh, 50px);
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--wf-gold-hi);
+  text-shadow: 0 0 1.2vh rgba(230, 189, 92, 0.55), 0 0.2vh 0.4vh rgba(10, 11, 26, 0.9);
+  animation: wf-pulse 2.4s ease-in-out infinite;
+}
+
+.wf-title__join {
+  margin: 0;
+  font-size: clamp(18px, 4vh, 56px);
+  font-weight: 500;
+  color: var(--wf-ink);
+  text-shadow: 0 0.2vh 0.6vh rgba(10, 11, 26, 0.9);
+}
+
+.wf-title__host {
+  font-weight: 800;
+  color: var(--wf-ink);
+  border-bottom: 2px solid rgba(230, 189, 92, 0.6);
+}
+
+.wf-title__code {
+  display: inline-block;
+  margin-left: 0.3em;
+  padding: 0.05em 0.45em;
+  font-family: var(--wf-serif);
+  font-weight: 800;
+  font-size: 1.5em;
+  letter-spacing: 0.22em;
+  color: var(--wf-gold-hi);
+  border: 2px solid var(--wf-gold);
+  border-radius: 0.3em;
+  background: linear-gradient(var(--wf-glass-top), var(--wf-glass-bot));
+  box-shadow: 0 0 1.6vh rgba(230, 189, 92, 0.35);
+  vertical-align: middle;
+}
+
+/* The sound prompt: a small navy-glass pill in the top right. */
+.wf-title__sound {
+  position: absolute;
+  top: 3vh;
+  right: 2.5vw;
+  padding: 0.8vh 1.4vh;
+  font-family: var(--wf-sans);
+  font-weight: 700;
+  font-size: clamp(12px, 1.9vh, 26px);
+  color: var(--wf-ink);
+  background: linear-gradient(var(--wf-glass-top), var(--wf-glass-bot));
+  border: 1px solid rgba(230, 189, 92, 0.6);
+  border-radius: 999px;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.wf-title__sound.is-on {
+  opacity: 0.55;
+}
+
+@keyframes wf-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.62; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-title__start { animation: none; }
+}
+
+/* Upright screens (a phone): the caption goes under the logo, centred, rather than beside it. */
+@media (max-aspect-ratio: 1/1) {
+  .wf-title__caption {
+    left: 0;
+    right: 0;
+    top: 21vh;
+    max-width: none;
+    text-align: center;
+  }
+
+  .wf-title__region::after {
+    margin-left: auto;
+    margin-right: auto;
+    background: linear-gradient(90deg, rgba(230, 189, 92, 0), var(--wf-gold), rgba(230, 189, 92, 0));
+  }
+
+  .wf-title__chapter {
+    font-size: clamp(11px, 1.6vh, 20px);
+  }
+
+  .wf-title__region {
+    font-size: clamp(20px, 3.4vh, 40px);
+  }
+}
