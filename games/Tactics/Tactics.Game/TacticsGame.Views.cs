@@ -86,7 +86,12 @@ public sealed partial class TacticsGame
                 }),
             }) with { DeadlineUtc = _ctx.TimerDeadline(Timers.React) };
         if (state.Active == unit && state.Pending is null && IsPlayed(unit) && _aiFinishing != unit)
-            return Custom(Screens.Turn, new { me = UnitViewOf(me), choices = Choices.For(state, unit, Rules) })
+            return Custom(Screens.Turn, new
+            {
+                me = UnitViewOf(me),
+                units = state.Units.Values.Where(DownedRules.InBattle).Select(UnitViewOf),
+                choices = Choices.For(state, unit, Rules),
+            })
                 with { DeadlineUtc = _ctx.TimerDeadline(Timers.Turn) };
         return Custom(Screens.Status, new
         {

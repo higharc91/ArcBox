@@ -1,0 +1,72 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "pickClass",
+  "data": {
+    "classes": [
+      {
+        "id": "barbarian",
+        "name": "Barbarian",
+        "role": "defender"
+      },
+      {
+        "id": "bard",
+        "name": "Bard",
+        "role": "healer"
+      },
+      {
+        "id": "cleric",
+        "name": "Cleric",
+        "role": "healer"
+      },
+      {
+        "id": "druid",
+        "name": "Druid",
+        "role": "control"
+      },
+      {
+        "id": "fighter",
+        "name": "Fighter",
+        "role": "defender"
+      },
+      {
+        "id": "monk",
+        "name": "Monk",
+        "role": "striker"
+      },
+      {
+        "id": "paladin",
+        "name": "Paladin",
+        "role": "defender"
+      },
+      {
+        "id": "ranger",
+        "name": "Ranger",
+        "role": "striker"
+      },
+      {
+        "id": "rogue",
+        "name": "Rogue",
+        "role": "striker"
+      },
+      {
+        "id": "sorcerer",
+        "name": "Sorcerer",
+        "role": "striker"
+      },
+      {
+        "id": "warlock",
+        "name": "Warlock",
+        "role": "striker"
+      },
+      {
+        "id": "wizard",
+        "name": "Wizard",
+        "role": "control"
+      }
+    ]
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}

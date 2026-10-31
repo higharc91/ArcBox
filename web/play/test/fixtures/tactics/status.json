@@ -1,0 +1,30 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "status",
+  "data": {
+    "me": {
+      "id": "hero1",
+      "name": "Player1",
+      "side": "Party",
+      "sprite": null,
+      "at": [
+        1,
+        9
+      ],
+      "hp": 12,
+      "maxHp": 12,
+      "tempHp": 0,
+      "life": "Up",
+      "countdown": 0,
+      "conditions": [],
+      "player": "Player1"
+    },
+    "active": "Player3",
+    "upIn": 9,
+    "aiPlaying": false
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}

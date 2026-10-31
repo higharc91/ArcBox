@@ -1,0 +1,43 @@
+/* ArcBox Tactics phone screens (src/games/tactics). */
+.tx { flex: 1; display: flex; flex-direction: column; gap: 10px; padding: 8px var(--gutter) 16px; }
+.tx h2 { margin: 4px 0; font-size: 22px; }
+.tx-dim { color: var(--dim); }
+.tx-big { font-size: 22px; font-weight: 700; margin: 8px 0; }
+.tx-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.tx-class, .tx-row { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; }
+.tx-class small, .tx-row small { color: var(--dim); text-transform: capitalize; }
+.tx-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.tx-actions .big { flex: 1 1 100%; }
+.tx-me { display: flex; align-items: center; gap: 10px; }
+.tx-hp { display: flex; align-items: center; gap: 6px; flex: 1; }
+.tx-hp-bar { flex: 1; height: 8px; background: rgba(255, 255, 255, 0.12); border-radius: 4px; overflow: hidden; }
+.tx-hp-bar i { display: block; height: 100%; background: #4cd964; }
+.tx-downed { color: #ff6b6b; font-size: 12px; }
+.tx-pips { display: flex; gap: 4px; }
+.tx-pips i { font-style: normal; min-width: 22px; text-align: center; padding: 2px 4px; border-radius: 3px; background: rgba(255, 255, 255, 0.08); color: var(--dim); font-size: 12px; }
+.tx-pips i.on { background: #fff; color: #111; }
+.tx-map { display: flex; flex-direction: column; gap: 2px; align-self: center; max-width: 100%; overflow-x: auto; }
+.tx-maprow { display: flex; gap: 2px; }
+.tx-cell { width: 26px; height: 26px; min-height: 26px; padding: 0; border-radius: 3px; font-size: 13px; font-weight: 700; background: rgba(255, 255, 255, 0.05); }
+.tx-cell.reach { background: rgba(76, 217, 100, 0.25); }
+.tx-cell.aim { background: rgba(255, 159, 10, 0.35); }
+.tx-cell.me { background: #3a86ff; }
+.tx-cell.ally { background: #2a5db0; }
+.tx-cell.foe { background: #c0392b; }
+.tx-cell.cursor { outline: 2px solid #fff; outline-offset: -2px; }
+.tx-dpad { display: grid; grid-template-columns: repeat(3, 44px); grid-template-rows: repeat(3, 44px); gap: 4px; align-self: center; }
+.tx-dpad button { padding: 0; min-height: 44px; }
+.tx-dpad button:nth-child(1) { grid-column: 2; grid-row: 1; }
+.tx-dpad button:nth-child(2) { grid-column: 1; grid-row: 2; }
+.tx-dpad button:nth-child(3) { grid-column: 3; grid-row: 2; }
+.tx-dpad button:nth-child(4) { grid-column: 2; grid-row: 3; }
+.tx-panel { display: flex; flex-direction: column; gap: 8px; }
+.tx-panel p { margin: 0; }
+.tx-tip { display: block; color: var(--dim); font-size: 13px; }
+.tx-abilities, .tx-targets, .tx-lines { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.tx-abilities button, .tx-targets button { width: 100%; text-align: left; }
+.tx-targets button.on { outline: 2px solid #ff9f0a; }
+.tx-targets small { display: block; color: var(--dim); }
+.tx-won { color: #4cd964; }
+.tx-lost { color: #ff6b6b; }
+.tx-injury { display: block; color: #ff9f0a; }

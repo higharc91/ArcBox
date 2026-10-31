@@ -9,6 +9,7 @@ type Loader = () => Promise<{ module: GameModule }>;
  */
 const loaders: Record<string, Loader> = {
   redline: () => import("./redline"),
+  tactics: () => import("./tactics"),
 };
 
 let loaded = new Map<string, GameModule>();

@@ -1,0 +1,9 @@
+import type { GameModule } from "../module";
+import { PickClass, PickEncounter, ReactPrompt, Results, Status, Turn } from "./screens";
+import "./tactics.css";
+
+/** ArcBox Tactics' phone module: its CustomView screens (adapter spec §8), named as the game sends them. */
+export const module: GameModule = {
+  id: "tactics",
+  screens: { pickClass: PickClass, pickEncounter: PickEncounter, turn: Turn, react: ReactPrompt, status: Status, results: Results },
+};

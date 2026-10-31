@@ -1,0 +1,38 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "results",
+  "data": {
+    "outcome": "Won",
+    "encounter": "River Crossing",
+    "lines": [
+      {
+        "name": "Player1",
+        "xp": 250,
+        "injuries": []
+      },
+      {
+        "name": "Player2",
+        "xp": 250,
+        "injuries": []
+      },
+      {
+        "name": "Player3",
+        "xp": 250,
+        "injuries": [
+          "Bruised pride"
+        ]
+      },
+      {
+        "name": "Player4",
+        "xp": 250,
+        "injuries": []
+      }
+    ],
+    "vip": true,
+    "level": 1
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}

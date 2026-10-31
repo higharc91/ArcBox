@@ -1,0 +1,43 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "react",
+  "data": {
+    "unit": "hero4",
+    "trigger": "beforeHit",
+    "cause": {
+      "kind": "beforeHit",
+      "actor": "goblin.1",
+      "target": "hero4",
+      "ability": "common.attack",
+      "roll": {
+        "d20s": [
+          12
+        ],
+        "kept": 12,
+        "modifier": 4,
+        "total": 16,
+        "vs": 11,
+        "success": true,
+        "crit": false,
+        "fumble": false
+      },
+      "to": null
+    },
+    "options": [
+      {
+        "id": "pass",
+        "label": "Don\u0027t react",
+        "target": null
+      },
+      {
+        "id": "wizard.shield",
+        "label": "Shield",
+        "target": "hero4"
+      }
+    ]
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:01:59.1\u002B00:00",
+  "header": null
+}
