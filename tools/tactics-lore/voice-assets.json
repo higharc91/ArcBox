@@ -1,0 +1,17 @@
+{
+  "model": "model_google-gemini-3-8-flash-tts",
+  "team": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "clips": {
+    "voice_earnest_battle_start_1.high": {
+      "asset": "asset_B5ktLhbJCu6Lt6kyPqcpXK7r",
+      "preset": "Leda",
+      "file": "voice_earnest_battle_start_1.7226cead.ogg"
+    },
+    "voice_earnest_battle_start_1.low": {
+      "asset": "asset_5ifLw8SXa57LUkCj9tXnwLif",
+      "preset": "Achird",
+      "file": "voice_earnest_battle_start_1.328a06ac.ogg"
+    }
+  }
+}
