@@ -70,5 +70,15 @@
   "loop": true,
   "use": "Dungeons, caves and tense story maps",
   "seed": 4207
+ },
+ "finale": {
+  "prompt": "Final boss battle music for a dark fantasy campaign. A massive choir chanting ominous, evil incantations in an invented Latin-like ritual language: deep male voices intoning in unison, answered by high soprano cries, chant phrases repeating like a summoning. Cathedral pipe organ, thundering timpani and war drums, menacing low brass, frantic tremolo strings, tolling bells. 120 BPM, D minor, relentless and apocalyptic, a cult feeding a dying sacred flame while a dragon wakes. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 150,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "The campaign's final battle (hall_of_the_flame): Maren's ritual and the red dragon",
+  "seed": 4210,
+  "vocals": true
  }
 }

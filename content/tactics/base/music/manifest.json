@@ -50,6 +50,14 @@
       "group": "music",
       "use": "World map and peaceful field maps"
     },
+    "finale": {
+      "files": [
+        "finale.ogg"
+      ],
+      "loop": true,
+      "group": "music",
+      "use": "The campaign's final battle (hall_of_the_flame): Maren's ritual and the red dragon"
+    },
     "title": {
       "files": [
         "title.ogg"
