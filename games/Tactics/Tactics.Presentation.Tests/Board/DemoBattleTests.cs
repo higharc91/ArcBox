@@ -1,3 +1,4 @@
+using Tactics.Logic;
 using Tactics.Presentation.Board;
 
 namespace Tactics.Presentation.Tests.Board;
@@ -25,6 +26,24 @@ public sealed class DemoBattleTests
         Assert.NotEmpty(battle.Board!.Zones);
         Assert.Contains(battle.Board.Heights, h => h.Delta > 0);
         Assert.Equal(8, battle.Board.Sunk.Length);
+    }
+
+    [Fact]
+    public void The_fight_demo_has_every_kind_of_unit_and_they_all_go_on_the_board()
+    {
+        var battle = DemoBattle.View("river_crossing:fight").Battle!;
+        var terrain = new BoardTerrain(Pack.Map("river_crossing"), battle.Board);
+
+        var units = UnitPlan.Build(battle, terrain, UnitArt.Load(Pack.Root), BoardFit.For(terrain, Pack.Art));
+
+        Assert.Equal(battle.Units.Count(u => u.Life is "Up" or "Downed"), units.Length);
+        Assert.Contains(battle.Units, u => u.Life == "Downed" && u.Countdown > 0);
+        Assert.Contains(battle.Units, u => u.Life == "Out");
+        Assert.Contains(battle.Units, u => u.Life == "Dead");
+        Assert.Contains(units, u => u.Active);
+        Assert.Contains(units, u => !u.Icons.IsEmpty);
+        Assert.Contains(units, u => u.Sprite.Width > 64);
+        Assert.Empty(battle.Units.Where(u => terrain.Map[u.At].Flags.HasFlag(TileFlags.Impassable)));
     }
 
     [Fact]

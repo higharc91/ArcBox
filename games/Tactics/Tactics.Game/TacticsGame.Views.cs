@@ -70,6 +70,21 @@ public sealed record BoardChanges(ImmutableArray<ZoneView> Zones, ImmutableArray
         state.Sunk is { } sunk ? [.. sunk] : []);
 }
 
+/// <summary>
+/// The sprite key the TV gets for a unit. A character's sheet has no sprite, since a record says nothing about looks yet, so
+/// it's drawn as its class's preset; a monster or a wild shape has its own. Phones don't get this: their views are unchanged.
+/// </summary>
+public static class HostSprite
+{
+    /// <summary>The key for a sheet with this sprite and these tags, or null if it has neither a sprite nor a class.</summary>
+    public static string? Of(string? sprite, IEnumerable<string> tags)
+        => sprite ?? tags.FirstOrDefault(t => t.StartsWith(SheetBuilder.ClassTag, StringComparison.Ordinal)) switch
+        {
+            { } tag => $"characters.class_{tag[SheetBuilder.ClassTag.Length..]}",
+            null => null,
+        };
+}
+
 /// <summary>The battle as the TV draws it (adapter spec §8).</summary>
 public sealed record BattleView(string Encounter, string Map, int Round, ImmutableArray<UnitId> Order, UnitId? Active,
     ImmutableArray<UnitView> Units, ImmutableArray<Beat> Beats, string? Outcome, BoardChanges? Board = null);
@@ -209,7 +224,8 @@ public sealed partial class TacticsGame
         var save = Save_;
         var state = save.State;
         return new BattleView(save.Encounter, state.MapId, state.Round, state.Order, state.Active,
-            [.. state.Units.Values.Select(UnitViewOf)], save.Log.IsDefault ? [] : save.Log, state.Outcome?.ToString(), BoardChanges.Of(state));
+            [.. state.Units.Values.Select(u => UnitViewOf(u) with { Sprite = HostSprite.Of(u.Sheet.Sprite, u.Sheet.Tags) })],
+            save.Log.IsDefault ? [] : save.Log, state.Outcome?.ToString(), BoardChanges.Of(state));
     }
 
     private UnitView UnitViewOf(UnitState u)

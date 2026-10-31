@@ -52,7 +52,7 @@ Everything after `--` on the Godot command line; all optional.
 | `--autostart=<game>[:<players>]` | Dev only: select that game, and start it once that many players (default 1) are connected and the scene is ready. First game only. Used by `tools/tv-e2e.sh`. |
 | `--res=<w>x<h>` | Window size. The UI is laid out at 1920×1080 and scales (`canvas_items`, `expand`). |
 | `--redline-demo[=<step>]` | Dev only: play a scripted REDLINE race into the TV without a server (see below). |
-| `--tactics-demo[=<map>[:changed]]` | Dev only: show a Tactics board without a server, with the art from the repository's `content/` (default `river_crossing`). `:changed` adds zones, raised tiles and the bridge's tiles sunk. With `--shots` it saves `…-tactics-battle-<map>.png`. |
+| `--tactics-demo[=<map>[:changed\|:fight]]` | Dev only: show a Tactics board without a server, with the art from the repository's `content/` (default `river_crossing`). `:changed` adds zones, raised tiles and the bridge's tiles sunk; `:fight` adds one of every kind of unit. With `--shots` it saves `…-tactics-battle-<map>.png`. |
 | `--demo=campaign-lobby` | Dev only: show the lobby with a built-in campaign game selected, its campaign list and a roster with seated and away members (`Shell/CampaignLobbyDemo.cs`), without a server. With `--shots` it saves `001-lobby.png`. |
 
 Unknown arguments are reported as warnings and ignored.
@@ -175,6 +175,16 @@ the only code that knows the projection, `BoardTerrain` is the map plus what the
 anything stands on it), `BoardPlan` is every face and sprite in painter's order (`BoardOrder.Key` is how later things sort
 in), `BoardFit` puts it on the screen, fixed from the map file for the whole battle, and `MaterialLook` picks the sides that go with a map's materials. `BoardCanvas` only
 draws the plan. Zones, height changes and sunk tiles come from the host view's `battle.board`, which phones don't get.
+
+**The units** are a second plan over the board's. `UnitPlan` turns the view's units into `BoardUnit`s with what `UnitArt` reads
+from the manifests: `characters`, `beasts` or `bosses` by sprite key, the idle strip or the Downed frame, the HP bar and
+digits from `ui`, `status` effects and `icons`. Each sorts into the board by `BoardOrder.Key` (`Merge`), so a tall tile in
+front hides it; a sprite wider than a tile goes after its whole diagonal, and a unit between tiles (`UnitPlace`) sorts with
+the nearer one. `BoardCanvas.SetUnits` swaps them without touching the board's plan. Bars, countdowns, icons and the turn arrow
+go on top of everything, so a hidden unit still has its bar, and they stack down onto the unit rather than into the top
+strip. The view has no facing, so a unit looks at its nearest foe. Characters have no sprite in the engine, so the host view
+gives them their class's preset (`HostSprite`); phones still get null. With `--shots`, a battle's label gains `-conditions`
+or `-downed` when those first show, so a real fight leaves a shot of each.
 
 To run the TV against a real game without
 phones or a browser, `tools/tactics-playtest/bots.cjs` joins a room as N players and plays a whole session over the real

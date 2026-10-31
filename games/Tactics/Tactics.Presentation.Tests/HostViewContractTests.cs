@@ -4,6 +4,7 @@ using ArcBox.Sdk.Campaigns;
 using ArcBox.Sdk.Testing;
 using Tactics.Game;
 using Tactics.Logic;
+using Tactics.Presentation.Board;
 
 namespace Tactics.Presentation.Tests;
 
@@ -23,6 +24,39 @@ public sealed class HostViewContractTests
 
     private static TacticsHostView OverTheWire(TacticsGame game)
         => JsonSerializer.SerializeToElement(game.HostView(), ArcJson.Options).Deserialize<TacticsHostView>(ArcJson.Options)!;
+
+    /// <summary>The Done-when check as a test: a real session's first view against the encounter and map files.</summary>
+    [Fact]
+    public void The_river_crossing_start_matches_the_encounter_and_the_map()
+    {
+        var rules = Pack.Value;
+        ProfileId?[] profiles = [new ProfileId("pr_ana"), new ProfileId("pr_bo"), new ProfileId("pr_cy"), new ProfileId("pr_di")];
+        string[] classes = ["fighter", "cleric", "wizard", "rogue"];
+        var game = new TacticsGame(rules);
+        var h = new GameHarness<TacticsGame>(game, playerCount: 4, seed: 3, profiles: profiles);
+        var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", profiles[0]!.Value,
+            [.. profiles.Select((p, i) => new CampaignMember(p!.Value, $"Player{i + 1}", CampaignRole.Player, DateTimeOffset.UnixEpoch))], 1);
+        h.StartCampaign(new FakeCampaignLease(info, new TacticsCampaignRules(rules).NewDocument(info)));
+        for (var i = 0; i < classes.Length; i++)
+            h.Input(i, new { action = "pickClass", data = new { @class = classes[i] } });
+        h.Input(0, new { action = "pickEncounter", data = new { encounter = "river_crossing" } });
+
+        var battle = OverTheWire(game).Battle!;
+        var map = rules.MapFor("river_crossing")!;
+        var units = UnitPlan.Build(battle, new BoardTerrain(Board.Pack.Map("river_crossing"), battle.Board), UnitArt.Load(Board.Pack.Root),
+            BoardFit.For(new BoardTerrain(Board.Pack.Map("river_crossing"), null), Board.Pack.Art));
+
+        Assert.Equal(10, units.Length);
+        var party = battle.Units.Where(u => u.Side == "Party").ToArray();
+        Assert.Equal([.. map.Zones["party_spawn"].Take(4)], party.Select(u => u.At));
+        Assert.Equal(classes.Select(c => $"characters.class_{c}"), party.Select(u => u.Sprite));
+        Assert.Equal(["goblin.1", "goblin.2", "goblin.3", "goblin.4", "goblin_archer.1", "goblin_archer.2"],
+            battle.Units.Where(u => u.Side == "Enemy").Select(u => u.Id.Value));
+        Assert.Equal([new Tile(9, 5), new Tile(10, 5), new Tile(9, 6), new Tile(10, 6)],
+            battle.Units.Where(u => u.Sprite == "characters.goblin_cutthroat").Select(u => u.At));
+        Assert.Equal([new Tile(11, 2), new Tile(12, 2)], battle.Units.Where(u => u.Sprite == "characters.goblin_archer").Select(u => u.At));
+        Assert.All(units, u => Assert.DoesNotContain("presets/bandit", u.Sprite.Path));   // nobody needed a stand-in
+    }
 
     [Fact]
     public void Every_phase_of_a_real_session_reaches_the_tv()

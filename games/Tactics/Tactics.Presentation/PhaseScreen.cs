@@ -106,9 +106,17 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
             Meta = $"Battle · {name} · {round}",
             Title = view.Banner.Length > 0 ? view.Banner : round,
             Empty = name,
-            Shot = $"{screen.Shot}-{battle.Map}",
+            Shot = $"{screen.Shot}-{battle.Map}{ShotMoment(battle)}",
             Board = battle,
         };
+    }
+
+    // A first look at what a fight does to its units is worth a screenshot.
+    private static string ShotMoment(BattleView battle)
+    {
+        if (battle.Units.Any(u => u.Life == "Downed"))
+            return "-downed";
+        return battle.Units.Any(u => u.Life == "Up" && !u.Conditions.IsEmpty) ? "-conditions" : "";
     }
 
     private static string PartyLine(EncounterOption e)

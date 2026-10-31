@@ -30,9 +30,28 @@ public enum BoardLayer
 /// </summary>
 public static class BoardOrder
 {
-    /// <summary>The sort key of a layer of a tile. Anything added to the board sorts in by this, so it's hidden by what's in front.</summary>
+    private const long Above = 1L << 31;
+
+    /// <summary>
+    /// The sort key of a layer of a tile. Anything added to the board sorts in by this, so it's hidden by what's in front.
+    /// What rises above units goes after its whole diagonal, as anything that tall reaches over the tiles beside it.
+    /// </summary>
     public static long Key(Tile tile, BoardLayer layer)
-        => ((long)(tile.X + tile.Y) << 32) | ((long)tile.X << 8) | (long)layer;
+        => ((long)(tile.X + tile.Y) << 32) | (layer == BoardLayer.Over ? Above : 0) | ((long)tile.X << 8) | (long)layer;
+
+    /// <summary>
+    /// Two lists in painter's order as one: each entry is an index into <paramref name="board"/> or, as its complement
+    /// (<c>~i</c>), into <paramref name="units"/>. The board's items stay where they are, so units can move without
+    /// rebuilding its plan.
+    /// </summary>
+    public static int[] Merge(IReadOnlyList<long> board, IReadOnlyList<long> units)
+    {
+        var merged = new int[board.Count + units.Count];
+        var (b, u) = (0, 0);
+        for (var i = 0; i < merged.Length; i++)
+            merged[i] = u == units.Count || (b < board.Count && board[b] <= units[u]) ? b++ : ~u++;
+        return merged;
+    }
 }
 
 /// <summary>What a <see cref="Face"/> is.</summary>

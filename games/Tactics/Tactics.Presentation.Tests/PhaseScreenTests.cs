@@ -160,6 +160,18 @@ public sealed class PhaseScreenTests
     }
 
     [Fact]
+    public void A_battle_gets_a_new_shot_when_someone_goes_down_or_a_condition_first_shows()
+    {
+        UnitView Unit(string life, ImmutableArray<string> conditions) => new(new UnitId("a"), "A", "Party", null, new Tile(1, 1), 5, 10, 0, life, 0, conditions, null);
+        string Shot(params UnitView[] units) => PhaseScreen.Of(View("Battle", battle: Fight() with { Units = [.. units] })).Shot;
+
+        Assert.Equal("tactics-battle-river_crossing", Shot(Unit("Up", [])));
+        Assert.Equal("tactics-battle-river_crossing-conditions", Shot(Unit("Up", ["poisoned"])));
+        Assert.Equal("tactics-battle-river_crossing-downed", Shot(Unit("Downed", ["prone"])));
+        Assert.Equal("tactics-battle-river_crossing", Shot(Unit("Dead", ["poisoned"])));
+    }
+
+    [Fact]
     public void A_battle_with_no_banner_falls_back_to_the_round()
     {
         Assert.Equal("Round 2", PhaseScreen.Of(View("Battle", "", battle: Fight())).Title);

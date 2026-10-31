@@ -11,7 +11,7 @@ namespace ArcBox.Host.Games.Tactics;
 
 /// <summary>
 /// ArcBox Tactics on the TV: the banner, and for each phase its table from <see cref="PhaseScreen"/> (the Muster roster,
-/// the encounter list, the results), and in battle the board (<see cref="BoardCanvas"/>). Everything worded or worked out
+/// the encounter list, the results), and in battle the board and its units (<see cref="BoardCanvas"/>). Everything worded or worked out
 /// here comes from <c>Tactics.Presentation</c>; this class only draws it.
 /// </summary>
 public partial class TacticsScene : Control, IGameScene, IContentScene, ISignalingScene
@@ -35,6 +35,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private Label _battleMeta = null!;
     private Label _battleTitle = null!;
     private ArtIndex? _art;
+    private UnitArt? _unitArt;
     private BattleMap? _map;
     private BoardFit? _fit;
     private string? _unreadableMap;
@@ -140,13 +141,16 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         try
         {
             _art ??= ArtIndex.Load(root);
+            _unitArt ??= UnitArt.Load(root);
             if (_map?.Id != battle.Map)
             {
                 _map = BoardMap.Parse(File.ReadAllText(Path.Combine(root, "rules", "maps", $"{battle.Map}.json")));
                 _fit = BoardFit.For(new BoardTerrain(_map, null), _art);   // once per map: a fight never moves the board
             }
             var terrain = new BoardTerrain(_map, battle.Board);
-            _board.SetPlan(BoardPlan.Build(terrain, _art), _fit ?? throw new InvalidOperationException("A map with no fit."), root);
+            var fit = _fit ?? throw new InvalidOperationException("A map with no fit.");
+            _board.SetPlan(BoardPlan.Build(terrain, _art), fit, root);
+            _board.SetUnits(UnitPlan.Build(battle, terrain, _unitArt, fit), _unitArt);
             return true;
         }
         catch (Exception ex) when (ex is IOException or JsonException or FormatException or ArgumentException
