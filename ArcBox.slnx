@@ -16,6 +16,8 @@
     <Project Path="games/Tactics/Tactics.Game/Tactics.Game.csproj" />
     <Project Path="games/Tactics/Tactics.Logic.Tests/Tactics.Logic.Tests.csproj" />
     <Project Path="games/Tactics/Tactics.Logic/Tactics.Logic.csproj" />
+    <Project Path="games/Tactics/Tactics.Presentation.Tests/Tactics.Presentation.Tests.csproj" />
+    <Project Path="games/Tactics/Tactics.Presentation/Tactics.Presentation.csproj" />
     <Project Path="games/Tactics/Tactics.Sim/Tactics.Sim.csproj" />
   </Folder>
   <Folder Name="/src/">

@@ -161,6 +161,14 @@ over the whole frame. AgX runs with white 8 and contrast 1.45 (Godot's defaults,
 **Performance** must be measured on the target machine (RTX 5080, 2560×1440) with F3: this repository's sandbox renders
 with Mesa's CPU rasteriser (llvmpipe), where a 1080p frame takes several seconds, so frame rates from it mean nothing.
 
+## Tactics scene
+
+`games/tactics/TacticsScene.tscn` shows the game's banner and each phase's table: the Muster roster, the encounter list and
+the results (the battle itself is a placeholder for now). All of it is worded by `PhaseScreen` in
+`games/Tactics/Tactics.Presentation`, with tests; the Godot class only draws. To run the TV against a real game without
+phones or a browser, `tools/tactics-playtest/bots.cjs` joins a room as N players and plays a whole session over the real
+hub; its header has the commands.
+
 ## Adding a game scene
 
 1. Create `res://games/<id>/<Name>Scene.tscn` whose root script implements `IGameScene`:

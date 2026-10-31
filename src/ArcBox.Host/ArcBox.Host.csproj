@@ -14,5 +14,6 @@
     <ProjectReference Include="..\..\games\Counter\Counter.Logic\Counter.Logic.csproj" />
     <ProjectReference Include="..\..\games\Redline\Redline.Logic\Redline.Logic.csproj" />
     <ProjectReference Include="..\..\games\Redline\Redline.Presentation\Redline.Presentation.csproj" />
+    <ProjectReference Include="..\..\games\Tactics\Tactics.Presentation\Tactics.Presentation.csproj" />
   </ItemGroup>
 </Project>
