@@ -111,7 +111,9 @@ That's about 4 a second, against 20 tokens a second per connection in `RoomOptio
 
 **Rate:** 0.30 s per orthogonal tile, ×√2 on a diagonal. Duration uses the rules:
 
-`Ms = Step × Paths.StepCost × (diagonal ? √2 : 1) + DropMs × max(0, drop − 2)`
+`Ms = Step × Cost × (diagonal ? √2 : 1) + DropMs × max(0, drop − 2)`
+
+`Cost` is `Paths.StepCost` for a straight step. A diagonal can climb 3 or 4 through two legal legs, where `Paths.StepCost` returns `int.MaxValue`, so a diagonal's `Cost` is its cheaper legal L-path's total ÷ 2, rounded up.
 
 **Timers:** schedule against an absolute time so one-shot timers don't drift: `_stepDue` advances by each leg, then `SetTimer(Step, max(_stepDue − Now, 1 ms))`. If a stall has passed a whole step, restart from Now. Never burst.
 

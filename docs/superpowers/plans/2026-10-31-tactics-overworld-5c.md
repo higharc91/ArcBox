@@ -33,7 +33,7 @@
 
 1. **A stamp triggers on entry, not on one marked tile.** A step from outside into the stamp of the armed battle beat starts the fight, and the party stops one tile short. Beat spots only place the "!" (5d).
 2. **A stamp only arms for the available battle beat.** Before that, and after the fight is won, it's ordinary ground.
-3. **Far from the stamp, the party fades in rather than running.** Over 14 steps from its slot, which also covers the battle list, the TV cuts through a fade.
+3. **Far from the stamp, the party fades in rather than running.** Over 14 steps from its slot, which also covers the battle list, the TV cuts through a fade. It fades too if a path to a slot passes within 2 tiles of an enemy's start. In Ashen Ford `party_spawn` is on the west bank, so a party arriving from the hills on the Parley branch would otherwise run through the goblins.
 4. **After a win, walking resumes on the leader's battle tile.** If the leader isn't Up, it's the first Up hero in member order. If that tile can't be stood on, it's the nearest legal tile, then `party_spawn[0]`.
 5. **A fled battle doesn't wake the party.** The party stays at the stamp on the same rule as a win, and the beat stays open. Only a trigger's `endBattle` can flee today.
 6. **Battle flags go into `WorldSave.Flags` only on a win.** A lost attempt leaves no story state.
