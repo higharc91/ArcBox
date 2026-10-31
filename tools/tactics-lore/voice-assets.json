@@ -255,15 +255,120 @@
     }
   },
   "renders": {
+    "Alnilam.0cdab3ae": {
+      "asset": "asset_34fR1rq5ztg3VFNwgkdxt9Ka",
+      "preset": "Alnilam",
+      "text": "Steady now. Watch each other."
+    },
+    "Alnilam.202324c7": {
+      "asset": "asset_1duSeY4PG9deHPRre7F2akaw",
+      "preset": "Alnilam",
+      "text": "That'll do. Back to it."
+    },
+    "Alnilam.2a632fef": {
+      "asset": "asset_VCrFjtFvrdkLCtCSMMcwCRMU",
+      "preset": "Alnilam",
+      "text": "Rest now."
+    },
+    "Alnilam.3f58ed86": {
+      "asset": "asset_oWo6kn9B3MtLJajVegqoPrmj",
+      "preset": "Alnilam",
+      "text": "One fewer."
+    },
+    "Alnilam.4018d888": {
+      "asset": "asset_thNXEDNdKUW45hEjLE6gEoWh",
+      "preset": "Alnilam",
+      "text": "Clean."
+    },
     "Alnilam.6e8bf441": {
       "asset": "asset_VQA3Di57EHyS6SbVxfHSZHr2",
       "preset": "Alnilam",
       "text": "Hold together. We do this properly."
     },
+    "Alnilam.8c6da161": {
+      "asset": "asset_4fXjpJvVspDr2aq7kdgxWqtH",
+      "preset": "Alnilam",
+      "text": "Still standing."
+    },
+    "Alnilam.915f88ce": {
+      "asset": "asset_VeHGvBCLdt8jDD6SZrcw3Xuj",
+      "preset": "Alnilam",
+      "text": "That's how it's done."
+    },
+    "Alnilam.a91ccc97": {
+      "asset": "asset_fpgi3zunhKfiDzR2T3giGbnk",
+      "preset": "Alnilam",
+      "text": "Hold the line. I've got them."
+    },
+    "Alnilam.b8599c71": {
+      "asset": "asset_Ujcan3L2rFwg9QXprhaPMEyo",
+      "preset": "Alnilam",
+      "text": "My thanks."
+    },
+    "Alnilam.cc2be772": {
+      "asset": "asset_Qhki4zyFPHUcTXe22GieT4HS",
+      "preset": "Alnilam",
+      "text": "No! Get to them, now!"
+    },
+    "Alnilam.dd28ea90": {
+      "asset": "asset_5yYJFQR4jGxYz3Lxojgd5LyK",
+      "preset": "Alnilam",
+      "text": "Not done yet."
+    },
     "Kore.07eee67a": {
       "asset": "asset_RRw6nTcaWLicSfg5BLbf6QjK",
       "preset": "Kore",
       "text": "Steady now. Watch each other."
+    },
+    "Kore.1dfe00d7": {
+      "asset": "asset_Uv29YFu1rwrKsnGArVK4tL9G",
+      "preset": "Kore",
+      "text": "That's how it's done."
+    },
+    "Kore.2af19c6b": {
+      "asset": "asset_egyZfoHDKtdU47wHgoj4yd9D",
+      "preset": "Kore",
+      "text": "Rest now."
+    },
+    "Kore.3a4e9c8f": {
+      "asset": "asset_foWNtihSHvbTXro35bZEpGTA",
+      "preset": "Kore",
+      "text": "My thanks."
+    },
+    "Kore.422f0e3e": {
+      "asset": "asset_skRiYFaUjbm7q1gQfFe4BMaK",
+      "preset": "Kore",
+      "text": "Hold the line. I've got them."
+    },
+    "Kore.4b68b24f": {
+      "asset": "asset_ihYo9F8eTzUGLR61Ah9KemZg",
+      "preset": "Kore",
+      "text": "No! Get to them, now!"
+    },
+    "Kore.78321334": {
+      "asset": "asset_dXRkDk6iUk79KmrjFPuMtGfX",
+      "preset": "Kore",
+      "text": "One fewer."
+    },
+    "Kore.84a226ac": {
+      "asset": "asset_iRVL2z2FqqXvCwYVkpwtXFCP",
+      "preset": "Kore",
+      "text": "That'll do. Back to it."
+    },
+    "Kore.950a1433": {
+      "asset": "asset_zrCANnKrhrFTLX2GCdwP3s3V",
+      "preset": "Kore",
+      "text": "Clean."
+    },
+    "Kore.9eb86ec0": {
+      "asset": "asset_G8GzAznbVaGNntpqvf3Luh8R",
+      "preset": "Kore",
+      "text": "Still standing."
+    },
+    "Kore.a6e2e0f5": {
+      "asset": "asset_b8GqHmtQDW29xtJzauHr7wCe",
+      "preset": "Kore",
+      "text": "Not done yet."
     },
     "Kore.e1db609c": {
       "asset": "asset_75iARHZG5aGCR9BZfLF29RJK",
