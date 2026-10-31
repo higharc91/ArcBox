@@ -255,6 +255,26 @@
     }
   },
   "renders": {
+    "Algenib.6a76d037": {
+      "asset": "asset_ZfbgJy2gYFPa7sVzVZTdWPe4",
+      "preset": "Algenib",
+      "text": "Make it quick."
+    },
+    "Algenib.786367c4": {
+      "asset": "asset_9GJTiv9zCrGxktCc4TMD3hrk",
+      "preset": "Algenib",
+      "text": "Down to the bone."
+    },
+    "Algenib.8e569381": {
+      "asset": "asset_k6iCdpNJSvkhNDcHHAo5eY4z",
+      "preset": "Algenib",
+      "text": "Good."
+    },
+    "Algenib.ea5cc009": {
+      "asset": "asset_h5KJKKjtJvyc2fwdrZvAKu5u",
+      "preset": "Algenib",
+      "text": "Here it comes."
+    },
     "Alnilam.0cdab3ae": {
       "asset": "asset_34fR1rq5ztg3VFNwgkdxt9Ka",
       "preset": "Alnilam",
@@ -435,6 +455,26 @@
       "preset": "Erinome",
       "text": "That wasn't in my projections!"
     },
+    "Erinome.14bcfc9a": {
+      "asset": "asset_uWXF9zWDVUvN7AWKGuy23pfS",
+      "preset": "Erinome",
+      "text": "Retreat is a perfectly valid strategy!"
+    },
+    "Erinome.16719f56": {
+      "asset": "asset_TmbS3JkDhii1taHGV5MhBnge",
+      "preset": "Erinome",
+      "text": "I'll be writing this up."
+    },
+    "Erinome.441a3787": {
+      "asset": "asset_JPqv8m8pKdx9a7oBgyaBdB7z",
+      "preset": "Erinome",
+      "text": "I've been counting the stars. There are fewer than in the old charts."
+    },
+    "Erinome.62316667": {
+      "asset": "asset_qhTWYts1SFDn5BGaxrZtA65t",
+      "preset": "Erinome",
+      "text": "Has anyone noticed the gaps in their memories? I'm keeping notes. In ink."
+    },
     "Erinome.75006168": {
       "asset": "asset_tvq6AWFP1bcf1MVGv14NV4bo",
       "preset": "Erinome",
@@ -450,6 +490,11 @@
       "preset": "Erinome",
       "text": "Textbook. Literally; I've read the textbook."
     },
+    "Erinome.ac34768a": {
+      "asset": "asset_DTBqgM2ddKjKQ3qFW5194nkn",
+      "preset": "Erinome",
+      "text": "Restored. Shall we continue?"
+    },
     "Erinome.b2c50804": {
       "asset": "asset_R73aQviJxpSke7FAgtZUyuhH",
       "preset": "Erinome",
@@ -464,6 +509,11 @@
       "asset": "asset_iCCsAv18682Q2rWNPQiwovzm",
       "preset": "Erinome",
       "text": "I appear to be... losing."
+    },
+    "Erinome.d74e85cb": {
+      "asset": "asset_KQrwbkSn5pLkc7ZabMhtj1x9",
+      "preset": "Erinome",
+      "text": "A satisfactory result."
     },
     "Erinome.dd127d71": {
       "asset": "asset_rNU8mcycS7yZLqPD6g1xczCC",
@@ -524,6 +574,31 @@
       "asset": "asset_ZRx2HKXoeHTt94TCJfQsWoSU",
       "preset": "Fenrir",
       "text": "Sing something, someone. Loud."
+    },
+    "Gacrux.28650f41": {
+      "asset": "asset_6soUUi6k3mAciTifZMJ4EfY1",
+      "preset": "Gacrux",
+      "text": "Here it comes."
+    },
+    "Gacrux.31b98c0d": {
+      "asset": "asset_9Pu6pWj1QpEZ19dyMPPhtVJt",
+      "preset": "Gacrux",
+      "text": "Good."
+    },
+    "Gacrux.b972e0c4": {
+      "asset": "asset_T8VeXtGcqBWzcZyoQhkcmGeS",
+      "preset": "Gacrux",
+      "text": "Down to the bone."
+    },
+    "Gacrux.c7997ac9": {
+      "asset": "asset_PjwFJ9uspFqC9zZ8i17MNqqv",
+      "preset": "Gacrux",
+      "text": "Another one for the cold."
+    },
+    "Gacrux.eeb96e27": {
+      "asset": "asset_Sm3m6jPWfyqMinTN9PBM99C6",
+      "preset": "Gacrux",
+      "text": "Make it quick."
     },
     "Kore.07eee67a": {
       "asset": "asset_RRw6nTcaWLicSfg5BLbf6QjK",
@@ -655,6 +730,11 @@
       "preset": "Pulcherrima",
       "text": "Better! Let me at them!"
     },
+    "Sadaltager.09436a1d": {
+      "asset": "asset_yhxWCLAbWPLWsvthAiUpX1od",
+      "preset": "Sadaltager",
+      "text": "I've been counting the stars. There are fewer than in the old charts."
+    },
     "Sadaltager.0bd85432": {
       "asset": "asset_CEe7XePUtU5KWNVQCZQKezrQ",
       "preset": "Sadaltager",
@@ -675,6 +755,11 @@
       "preset": "Sadaltager",
       "text": "Textbook. Literally; I've read the textbook."
     },
+    "Sadaltager.48afc5f1": {
+      "asset": "asset_cJG7emXTQUFz9iTEneDxHPsh",
+      "preset": "Sadaltager",
+      "text": "Retreat is a perfectly valid strategy!"
+    },
     "Sadaltager.5e6e1a8d": {
       "asset": "asset_u2wpH1JAecWmjQN2uY5vNauk",
       "preset": "Sadaltager",
@@ -684,6 +769,11 @@
       "asset": "asset_PWReFpbRjCS3TAHuqJ4aTN1z",
       "preset": "Sadaltager",
       "text": "I'll want to examine that later."
+    },
+    "Sadaltager.7867142d": {
+      "asset": "asset_udh4ykSZoqNqjnZSQq8CuTRz",
+      "preset": "Sadaltager",
+      "text": "Has anyone noticed the gaps in their memories? I'm keeping notes. In ink."
     },
     "Sadaltager.88a0e30b": {
       "asset": "asset_PwwTEf6n1RZWpA773BY5f5Eq",
@@ -700,6 +790,11 @@
       "preset": "Sadaltager",
       "text": "Remarkable. Thank you."
     },
+    "Sadaltager.b4c7881b": {
+      "asset": "asset_rftAU56DwqoM97JvMeCyFrES",
+      "preset": "Sadaltager",
+      "text": "A satisfactory result."
+    },
     "Sadaltager.e07c3d21": {
       "asset": "asset_UMEHdWSu9JWGjEUMwRPSiqrN",
       "preset": "Sadaltager",
@@ -709,6 +804,16 @@
       "asset": "asset_yhzoAVsvcAMPLG6ZutnU4cpH",
       "preset": "Sadaltager",
       "text": "Specimen... retired."
+    },
+    "Sadaltager.f0f23e41": {
+      "asset": "asset_LPu716gF9m61LwDKfaE4mFZE",
+      "preset": "Sadaltager",
+      "text": "Restored. Shall we continue?"
+    },
+    "Sadaltager.f9b0982f": {
+      "asset": "asset_j9D7cJfPordpZYFbJEDMimDL",
+      "preset": "Sadaltager",
+      "text": "I'll be writing this up."
     },
     "Zubenelgenubi.00dde345": {
       "asset": "asset_MpXhcoxgs7qBvFYQp7byYDU3",
