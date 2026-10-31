@@ -655,6 +655,11 @@
       "preset": "Algieba",
       "text": "Half a day past the canyon, the sand gives way to a stair cut into old stone. At the bottom, a door marked with the Wardens' flame."
     },
+    "Algieba.28ff04f6": {
+      "asset": "asset_zh8Z4YsCCpfr6ZCeVQBuSi8G",
+      "preset": "Algieba",
+      "text": "It matches. Maud never touched the fire either. Two people in the Vale who truly remember that night, and they agree."
+    },
     "Algieba.298cfd18": {
       "asset": "asset_zBCiKzUKFyNCJDHmWdV3idbR",
       "preset": "Algieba",
@@ -695,6 +700,11 @@
       "preset": "Algieba",
       "text": "Noon in the Sunscar. The sand has turned to glass in places, and the light comes up off it as hard as it comes down."
     },
+    "Algieba.2eb59af3": {
+      "asset": "asset_Mb2kewoa9CiJo53fmQpDwFtF",
+      "preset": "Algieba",
+      "text": "You set his account against Maud's, line by line. The red sky. The ember coming down like a thrown stone. A hooded figure on the hill."
+    },
     "Algieba.2f5fb512": {
       "asset": "asset_yYY3xa6V6HrBAn6tvr6GRhSh",
       "preset": "Algieba",
@@ -710,6 +720,11 @@
       "preset": "Algieba",
       "text": "For a heartbeat, the whole field goes still."
     },
+    "Algieba.3157bab4": {
+      "asset": "asset_Zmkt3jpCh45TeTX3Lh6C5S2R",
+      "preset": "Algieba",
+      "text": "The Hooded Stranger steps out from between the shelves, as if they had always been there. Perhaps they had."
+    },
     "Algieba.32e9cc01": {
       "asset": "asset_u675eQL68aj3jVLNSBXzjEY5",
       "preset": "Algieba",
@@ -719,6 +734,11 @@
       "asset": "asset_uy24pyYwiLnDNxuo2dtsKUYg",
       "preset": "Algieba",
       "text": "Over flatbread and bitter tea, the elder tells the party what the desert knows, and Lark puts it into the valley tongue."
+    },
+    "Algieba.3466a555": {
+      "asset": "asset_7M8jEXLubHZsrjzicrqu5nYw",
+      "preset": "Algieba",
+      "text": "She lifts her hand. The first of the faithful steps forward into the light, and is gone, and the flame roars up the walls."
     },
     "Algieba.3478f000": {
       "asset": "asset_QhSPNE8XCCXum9m5FQAKddyA",
@@ -865,6 +885,11 @@
       "preset": "Algieba",
       "text": "And above the caves, a single window in an old watchtower burns with a cold blue light."
     },
+    "Algieba.53b54c72": {
+      "asset": "asset_S6jKyYvAs2kKTU4WmuBj6kz9",
+      "preset": "Algieba",
+      "text": "You set down the embers you have carried across the Vale. One by one they flare and lean towards the heart, like people finding each other in a crowd."
+    },
     "Algieba.5807d851": {
       "asset": "asset_bYdPa54wK8ZhxhTzmngzt5PN",
       "preset": "Algieba",
@@ -899,6 +924,11 @@
       "asset": "asset_YMYripFUiwJvMeJDHGJBD9M6",
       "preset": "Algieba",
       "text": "Across the fire, a hobgoblin in a sun-painted sash sips from the same clay bowl, and pretends not to listen."
+    },
+    "Algieba.5cee87ec": {
+      "asset": "asset_SGLhCsFVQCHs6pjdsoAVnDT6",
+      "preset": "Algieba",
+      "text": "You speak to the woman at the end of the line, who is shaking, and to the boy beside her. One by one, hands let go."
     },
     "Algieba.5cf8de30": {
       "asset": "asset_68CdDWByRCpCQYBind1B7N5R",
@@ -975,10 +1005,20 @@
       "preset": "Algieba",
       "text": "She lifts a hand to his face and says his name, once. Then the light goes out of her, gently, and this time she does not walk again."
     },
+    "Algieba.76c339b1": {
+      "asset": "asset_GpHjqQf6tGTHNC3b7bHTt5ds",
+      "preset": "Algieba",
+      "text": "Far below, the whole tower shudders. The red light in the window flares, and somewhere beneath the Keep something enormous breathes in."
+    },
     "Algieba.77b2c064": {
       "asset": "asset_Ge83wCAM3huhkuyEnt1e2JgC",
       "preset": "Algieba",
       "text": "A goblin in a chieftain's coat three sizes too big walks out to the end of the bridge, and stops, and stares."
+    },
+    "Algieba.77f0384b": {
+      "asset": "asset_ioHA2fnSp929qnusJjkULkHs",
+      "preset": "Algieba",
+      "text": "The Hall of the Flame is vast and round, its walls leaning inward like hands cupped around a candle. At its heart the flame burns red."
     },
     "Algieba.783b96f6": {
       "asset": "asset_ENCkL4i6m3ioTbAwMZUW9KbS",
@@ -994,6 +1034,11 @@
       "asset": "asset_33qxDB24mxnsAUtgASCEKP4h",
       "preset": "Algieba",
       "text": "Snow, and silence, and the old Warden road climbing into the pass. Every mile there is a frozen shrine, and a candle nobody has lit in seventy years."
+    },
+    "Algieba.7d54935b": {
+      "asset": "asset_iVpNsCVNLDtMN6VkJZknKra7",
+      "preset": "Algieba",
+      "text": "Two centuries lost, and now it's yours to sing. Lark would weep to hear it."
     },
     "Algieba.7d9e54e0": {
       "asset": "asset_kp18Hj6afth1JWhs2xKP43s4",
@@ -1050,6 +1095,11 @@
       "preset": "Algieba",
       "text": "Dwarven-cut, three centuries old, and the marsh has eaten the mortar on the east side. One good push and it will give."
     },
+    "Algieba.8469c082": {
+      "asset": "asset_bGtdZN4MQQvwGTctC47inLvB",
+      "preset": "Algieba",
+      "text": "You clean and bind her hands. She watches, curious, like a child being shown something. The burns will heal. The rest will not."
+    },
     "Algieba.84bd011a": {
       "asset": "asset_1sN36JaFALREaRXWquA5b27Q",
       "preset": "Algieba",
@@ -1059,6 +1109,11 @@
       "asset": "asset_rxjMQbkRoTADzZ98Md3ATmMz",
       "preset": "Algieba",
       "text": "At the broken gate stands a knight in black armour, alone, as he has stood for a hundred years. His sword is planted point down before him."
+    },
+    "Algieba.886d1888": {
+      "asset": "asset_vcvNg2wisRWUtwsPRfjq4qLR",
+      "preset": "Algieba",
+      "text": "Somewhere among the shelves, in a shadow the red light doesn't reach, someone sighs."
     },
     "Algieba.89ca2b61": {
       "asset": "asset_en8YkkqvqyJzh2o8YXiR8f3A",
@@ -1085,6 +1140,11 @@
       "preset": "Algieba",
       "text": "One of you kneels at the water's edge. The memory goes out of you like breath on a cold morning."
     },
+    "Algieba.9001ebc7": {
+      "asset": "asset_enA5DdjreUeMmkvCrQBNH6Ss",
+      "preset": "Algieba",
+      "text": "So Maren goes herself. She plunges both hands into the heart of the flame, and the red light roars up the walls."
+    },
     "Algieba.9042acb0": {
       "asset": "asset_S27cAgsMXuFFDdftECnrGwHo",
       "preset": "Algieba",
@@ -1099,6 +1159,11 @@
       "asset": "asset_5TvT6wmCbiiQa5ExUTtdjyv1",
       "preset": "Algieba",
       "text": "Steel comes out, and the Vale holds its breath."
+    },
+    "Algieba.94a5473f": {
+      "asset": "asset_XNtd832xWzGbyqoggdBtc25c",
+      "preset": "Algieba",
+      "text": "Her hands are past what you can do. Without a word, Oswin tears a strip from his own robe and binds them for her."
     },
     "Algieba.96fd6930": {
       "asset": "asset_xvnB8qUnauUrds9c9nofiG3T",
@@ -1225,6 +1290,11 @@
       "preset": "Algieba",
       "text": "One fewer. It never feels like enough."
     },
+    "Algieba.b505ad4d": {
+      "asset": "asset_tP184gJPCxLP37MwQcpFS8p7",
+      "preset": "Algieba",
+      "text": "They don't hear you. They hear Maren, and the cold, and their children. The first of them steps forward into the light, and is gone."
+    },
     "Algieba.b57894ea": {
       "asset": "asset_nnfQ3yEGJ1FEiaRPza6GhzvX",
       "preset": "Algieba",
@@ -1300,6 +1370,11 @@
       "preset": "Algieba",
       "text": "It is hung with charms of bone and river glass that click in the steam. Someone inside is laughing at you."
     },
+    "Algieba.c5bcbef9": {
+      "asset": "asset_9y1RQXXiTn8TUm8fZiJMtc6S",
+      "preset": "Algieba",
+      "text": "You leave her on the steps. One of the faithful sits down beside her and holds her shoulder, and she lets him."
+    },
     "Algieba.c5d47eba": {
       "asset": "asset_NoV9HYs6ZXGK4XNo4jHZ3eGx",
       "preset": "Algieba",
@@ -1309,6 +1384,16 @@
       "asset": "asset_4dXUczQtxamzXgPsuGPuenxF",
       "preset": "Algieba",
       "text": "They've won the day. The winter is another matter."
+    },
+    "Algieba.c66be6a2": {
+      "asset": "asset_PwdmEKuiMzA3nNnQkMZGMhou",
+      "preset": "Algieba",
+      "text": "Around the flame, the dragon opens one eye. It is the colour of the fire, and it has waited a century to be warm enough to wake."
+    },
+    "Algieba.c6c90f31": {
+      "asset": "asset_Yrhf8skWQ4vH4BVJCgj3BejE",
+      "preset": "Algieba",
+      "text": "The flame roars up the walls, red as a wound."
     },
     "Algieba.c6ef7666": {
       "asset": "asset_C2EwHe2PUJYspyywiqVDJSMe",
@@ -1365,6 +1450,11 @@
       "preset": "Algieba",
       "text": "On the oldest shelf lies a Keeper's ledger in a careful, tired hand. It is dated a hundred and eighty years after the Lighting."
     },
+    "Algieba.ce89f197": {
+      "asset": "asset_8oPrASqLf42zSqgeHgyUywk8",
+      "preset": "Algieba",
+      "text": "Pip stands in front of the desk. Oswin looks at her for the first time, and his pen stops."
+    },
     "Algieba.cf55a3e5": {
       "asset": "asset_KNc5RS6E7sf6VhqBd5SfdRZa",
       "preset": "Algieba",
@@ -1390,15 +1480,30 @@
       "preset": "Algieba",
       "text": "The hobgoblin hears the party out, sets down his bowl, and answers in a low, careful voice."
     },
+    "Algieba.d18df48d": {
+      "asset": "asset_dohEEMYSA1aEyErgUb8gzhBQ",
+      "preset": "Algieba",
+      "text": "Maren Sorrel sits on the steps before it, her hands blackened, looking at them as if they belonged to someone else."
+    },
     "Algieba.d2f0993d": {
       "asset": "asset_hvrx24TuRA3i71e6oFYiz3gA",
       "preset": "Algieba",
       "text": "Vorga raises his spear, and up on the ridge the Host's drums begin."
     },
+    "Algieba.d475e7a9": {
+      "asset": "asset_Bqr9DtSicKwrXAfhpgMyKdX6",
+      "preset": "Algieba",
+      "text": "The heart of the flame burns low and gold, like a hearth at the end of an evening. The red is going out of it."
+    },
     "Algieba.d48825d5": {
       "asset": "asset_k4UAwjvvELex37FfCzdyg8Sx",
       "preset": "Algieba",
       "text": "The path into the Skarrow Hills is frozen mud. The camp at the top is smaller than anyone in town imagined."
+    },
+    "Algieba.d4bd408d": {
+      "asset": "asset_NfPCLMt687wLcdpvHTw1qo3u",
+      "preset": "Algieba",
+      "text": "You read the old words aloud. Oswin mouths them with you, word for word, from a memory no fire has ever touched."
     },
     "Algieba.d5eed908": {
       "asset": "asset_ZY1wsaDFLx88KVGgWyhs3kRy",
@@ -1409,6 +1514,11 @@
       "asset": "asset_CHzakfr1RnNhqF6vncCxNxaB",
       "preset": "Algieba",
       "text": "One of them is humming a lullaby you are sure your mother sang. You never told anyone that lullaby."
+    },
+    "Algieba.d6ff555a": {
+      "asset": "asset_9JY3Cqd6Jd7Kbkf7TLxUs8kv",
+      "preset": "Algieba",
+      "text": "Before the flame stands Maren Sorrel. Behind her a line of the Kindled faithful wait in their best clothes, holding hands."
     },
     "Algieba.d7a472e8": {
       "asset": "asset_hBCYAe4HxRTD6ay3HRKeNJiD",
@@ -1495,6 +1605,11 @@
       "preset": "Algieba",
       "text": "The shard in the hearth pops. Bree turns a page, and writes."
     },
+    "Algieba.e75d712f": {
+      "asset": "asset_Fgy8xdJfHjGsYkh9G8P8debg",
+      "preset": "Algieba",
+      "text": "The dragon lies still at last, a hill of cooling coal across the floor. The circle is broken. The faithful who are left weep in the ash."
+    },
     "Algieba.e8ec93fc": {
       "asset": "asset_Bmg9tNSm6tmdVyn3jiMmHuXz",
       "preset": "Algieba",
@@ -1514,6 +1629,16 @@
       "asset": "asset_944aEsym9g5dCM97TwmAUwpw",
       "preset": "Algieba",
       "text": "In the record hall, ledgers climb the walls to the ceiling, each in the careful hand of a mason who wanted to be remembered."
+    },
+    "Algieba.ec8f6d0c": {
+      "asset": "asset_pUjXbV3q8hpe6nrY7cFw2VnZ",
+      "preset": "Algieba",
+      "text": "Coiled around it, scales like banked coals, sleeps a red dragon. Every breath it takes stirs the ash across the floor."
+    },
+    "Algieba.edb1e14c": {
+      "asset": "asset_t2tRB6J8mosYq1wFmHUvbmya",
+      "preset": "Algieba",
+      "text": "Nobody answers. She nods, as if someone had."
     },
     "Algieba.edfc1e02": {
       "asset": "asset_euvetfbb2CX9k52domvU9Jvv",
@@ -1554,6 +1679,11 @@
       "asset": "asset_yN1McBGAGetFuSy6AJt6XVQ2",
       "preset": "Algieba",
       "text": "By night the river docks belong to the Ash Market. Lanterns float on the water, and nobody uses their real name."
+    },
+    "Algieba.f928b794": {
+      "asset": "asset_9BavDNJzTkpPPNRp8CDzAH81",
+      "preset": "Algieba",
+      "text": "Maren hesitates for a breath. You can see the joints in the walls now, all leaning in. The lock is in the floor, under the dragon."
     },
     "Algieba.f9391aec": {
       "asset": "asset_yk26iHekxnqjmra9TP5Kmp2p",
@@ -3920,6 +4050,11 @@
       "preset": "Laomedeia",
       "text": "The song says the fire had a home on the far side of the mountains. The seven took it. It was not theirs to take."
     },
+    "Leda.044b9e57": {
+      "asset": "asset_sdAbXd69BToYyvp6GdiuDXeY",
+      "preset": "Leda",
+      "text": "A hood. That's all. A hood, and a voice that said, not like this."
+    },
     "Leda.0c8fd9c8": {
       "asset": "asset_zmMT5c8ehs7ehophtUUBwoEA",
       "preset": "Leda",
@@ -4014,6 +4149,11 @@
       "asset": "asset_msHGftr6gTXWBSr1v7WjXVVW",
       "preset": "Leda",
       "text": "I didn't take it. I was holding it. For you. Here."
+    },
+    "Leda.5948a481": {
+      "asset": "asset_LFSocTkDVEZHjzxSTicgnkyv",
+      "preset": "Leda",
+      "text": "The fire gave it to me. I think it gave me lots of you. I'm sorry. I didn't ask for it."
     },
     "Leda.6244e4f6": {
       "asset": "asset_7cUzzPxagRB3tnZ3sFudQgbY",
@@ -4139,6 +4279,11 @@
       "asset": "asset_79fJ5gGQz1JTnXCA21yqStZY",
       "preset": "Leda",
       "text": "Bree says I'm not to bother you. I'm not bothering. I'm standing."
+    },
+    "Leda.dd26df78": {
+      "asset": "asset_YvjmZwL35UBBbX5oZMYjH3Qo",
+      "preset": "Leda",
+      "text": "You were nearly done. It was quiet. And then a hand came over your shoulder, cold, and pulled yours back."
     },
     "Leda.df10fd65": {
       "asset": "asset_2FxQeqKM88F1zH6X6fGEQ5Vi",
@@ -4270,10 +4415,40 @@
       "preset": "Rasalgethi",
       "text": "I am Oswin Hale. I remember every year of the Vale's history. You have no idea how heavy that is."
     },
+    "Rasalgethi.1061370b": {
+      "asset": "asset_uX1E3q2bA1qjX9yqg8HkUoRt",
+      "preset": "Rasalgethi",
+      "text": "She doesn't remember? No. She wouldn't. She will have lit a great many lamps since then."
+    },
+    "Rasalgethi.178603be": {
+      "asset": "asset_vyp8yC1hyAr5ecxDyXVoQqv4",
+      "preset": "Rasalgethi",
+      "text": "Seven went over, and seven came home, with a fire on their backs that was never their own. Pay it back, children, or pay what you've known."
+    },
+    "Rasalgethi.1a783077": {
+      "asset": "asset_zDrNKWnokFUCb22avkcmPBHy",
+      "preset": "Rasalgethi",
+      "text": "Ashby? There was an Ashby who copied for us when I was young. Clever hands. Couldn't spell."
+    },
     "Rasalgethi.1aa6b5a9": {
       "asset": "asset_a63TSkW5PENTKSWxgrv32zu2",
       "preset": "Rasalgethi",
       "text": "Let us continue."
+    },
+    "Rasalgethi.20213501": {
+      "asset": "asset_fkX9JGcARBy3o3xJZ7W7Gyag",
+      "preset": "Rasalgethi",
+      "text": "Carried, not given. Your church has known for two hundred years. Tell your Mother Aubrine, or don't. That one is yours to choose."
+    },
+    "Rasalgethi.23e43572": {
+      "asset": "asset_oS6eqJXAqYz3qDetkB6UKyR9",
+      "preset": "Rasalgethi",
+      "text": "Sit. You gave him back to himself. I owe you the truth, and I have kept it a very long time."
+    },
+    "Rasalgethi.3252c0f6": {
+      "asset": "asset_Drc4UCbHLLUh5n9CFtgVcuhF",
+      "preset": "Rasalgethi",
+      "text": "Ask what you came to ask. I have had a hundred years to prepare the answers."
     },
     "Rasalgethi.33a6af41": {
       "asset": "asset_7jFihpeNTpeTksvnNwZNkWWr",
@@ -4284,6 +4459,16 @@
       "asset": "asset_g2rMj1GALqHvNgPjsLBAa8tM",
       "preset": "Rasalgethi",
       "text": "Every wound has a history. I will remember yours."
+    },
+    "Rasalgethi.421c5309": {
+      "asset": "asset_FhEXHGCW1zKrsB7W6WTo9J3V",
+      "preset": "Rasalgethi",
+      "text": "Celandine. Nineteen, and frightened, and fast. I saw her run with the chest. I let her go. I thought someone should get out with something."
+    },
+    "Rasalgethi.46ff9baf": {
+      "asset": "asset_QbFARz2pWZtmPmFKnPM2DDf9",
+      "preset": "Rasalgethi",
+      "text": "No. Nobody asked. That has always been the trouble with it."
     },
     "Rasalgethi.57fabfe7": {
       "asset": "asset_czuu2pQ5zKHHnCtJY2eVzaqN",
@@ -4300,10 +4485,40 @@
       "preset": "Rasalgethi",
       "text": "Sit down. Ah. No one ever sits."
     },
+    "Rasalgethi.71eede65": {
+      "asset": "asset_kcXiNLknBfu4jbpRwy1iVjMB",
+      "preset": "Rasalgethi",
+      "text": "Yes. That is exactly how it was. Child, how do you have that?"
+    },
     "Rasalgethi.73baf726": {
       "asset": "asset_s6J7MvyyiTsQUxhdx4batjTp",
       "preset": "Rasalgethi",
       "text": "I will remember your name. Someone ought to."
+    },
+    "Rasalgethi.75ea117b": {
+      "asset": "asset_DyJgE7UWcUsp3NcZxNthTmQ3",
+      "preset": "Rasalgethi",
+      "text": "The goblins kept it. Of course they did. They never used the fire, so it never ate their songs. We should have listened to them."
+    },
+    "Rasalgethi.862de52a": {
+      "asset": "asset_mF6xpskbJURK1v7E8ARV3aSK",
+      "preset": "Rasalgethi",
+      "text": "The Vale was warm for three hundred years, and paid for every hearth in memory. You know that part. You have read it."
+    },
+    "Rasalgethi.897593ed": {
+      "asset": "asset_HBUxvXCXBWJKnMKpcu724oiu",
+      "preset": "Rasalgethi",
+      "text": "He would. He would say exactly that. I should have released him eighty years ago. I wanted someone to talk to."
+    },
+    "Rasalgethi.9796fd80": {
+      "asset": "asset_pzBjy8YKTpV4qbgs3CWHPVVu",
+      "preset": "Rasalgethi",
+      "text": "The Kindled. Sorrel is in the flame hall. She is feeding it."
+    },
+    "Rasalgethi.992e50a1": {
+      "asset": "asset_yJMZ2FwUd3hzR6hkbWiTSehs",
+      "preset": "Rasalgethi",
+      "text": "You."
     },
     "Rasalgethi.9b3d4459": {
       "asset": "asset_ZT82guNFMEyiX9UyGpz4NJi4",
@@ -4315,6 +4530,16 @@
       "preset": "Rasalgethi",
       "text": "Come up. Bring the child. I would like to hear about the hand."
     },
+    "Rasalgethi.9cbc6d1c": {
+      "asset": "asset_W8E4XpCEGvAbvvyC4nk61Hnz",
+      "preset": "Rasalgethi",
+      "text": "Bring him, after. Whatever happens. Someone should have all of this who isn't dead."
+    },
+    "Rasalgethi.9d1e264b": {
+      "asset": "asset_MAXqShEcka4iC2V42qv38DKN",
+      "preset": "Rasalgethi",
+      "text": "When I was made Keeper I read it too. I swore I would never touch the fire, and I never have. It is why I remember."
+    },
     "Rasalgethi.a0322e5e": {
       "asset": "asset_9JghYC42wjweyaRYjjB5n4ce",
       "preset": "Rasalgethi",
@@ -4324,6 +4549,16 @@
       "asset": "asset_BsLhm7ECrKKshLmeC1PQt5xr",
       "preset": "Rasalgethi",
       "text": "Precisely there."
+    },
+    "Rasalgethi.a67b81aa": {
+      "asset": "asset_xdVEmBPa3mvt6925rbNDWVcV",
+      "preset": "Rasalgethi",
+      "text": "Sit down. You have killed my only friend and come to ask me questions. I will answer them. That is what I am for."
+    },
+    "Rasalgethi.b4584158": {
+      "asset": "asset_KrPTsWLUuXDkY5h9PZeLz8PA",
+      "preset": "Rasalgethi",
+      "text": "A Keeper learned the price two centuries ago, and buried it in the Sunscar. You found his ledger. We went on selling shards anyway."
     },
     "Rasalgethi.ba8c16ea": {
       "asset": "asset_4sfuaXqhfQJRmYjZzANpqdKq",
@@ -4335,10 +4570,50 @@
       "preset": "Rasalgethi",
       "text": "Pain. How very vivid. I had forgotten nothing but that."
     },
+    "Rasalgethi.cd548412": {
+      "asset": "asset_eUhDLeZD5AG7NVmCkmhGyXJ3",
+      "preset": "Rasalgethi",
+      "text": "Maud is alive? She would have been a child, on the riverbank. Tell her I am sorry she had to see it."
+    },
+    "Rasalgethi.dadae810": {
+      "asset": "asset_rpVcqcLLT7amVyhKn45wkLva",
+      "preset": "Rasalgethi",
+      "text": "They found a fire on the other side. It was not offered to them. They took it, and they ran home, and they called it a gift."
+    },
     "Rasalgethi.df29d698": {
       "asset": "asset_RQ8TaKyc4Rdg6cSrHtrGhezR",
       "preset": "Rasalgethi",
       "text": "Not yet. There is still a thing I meant to finish."
+    },
+    "Rasalgethi.e25cf88d": {
+      "asset": "asset_SB67ntF9zzafUEpfDAxWC8Z1",
+      "preset": "Rasalgethi",
+      "text": "The last verse. Yes. They stopped singing it on purpose."
+    },
+    "Rasalgethi.e268f45b": {
+      "asset": "asset_ajga3vXqaMBxp9hAcgsfdjFb",
+      "preset": "Rasalgethi",
+      "text": "The Keep fell. The Vale burned in five places. Children died in the Sunscar. You did that, so a fire could go home?"
+    },
+    "Rasalgethi.ea7bc0db": {
+      "asset": "asset_v1ywhcut4xtvPnowim3orU24",
+      "preset": "Rasalgethi",
+      "text": "On the last night, I tried to end it. I was nearly done. And someone stopped my hand."
+    },
+    "Rasalgethi.ea9ea554": {
+      "asset": "asset_UfcGYmqsWdBktnNd8SRJQ8C1",
+      "preset": "Rasalgethi",
+      "text": "Gentle. He was always telling me to be gentle. I was never any good at it. He was the gentle one, under all that iron."
+    },
+    "Rasalgethi.ed8f401c": {
+      "asset": "asset_WpSkGtmMCmF4G5vYqB1GY3k5",
+      "preset": "Rasalgethi",
+      "text": "Four hundred years ago the Vale was cold and starving. Seven people climbed the Greywall looking for anything that would keep their children alive."
+    },
+    "Rasalgethi.f64ab92e": {
+      "asset": "asset_KShpMYjgVifaW9Pf8AJvFFws",
+      "preset": "Rasalgethi",
+      "text": "Whose hand. Did you see?"
     },
     "Rasalgethi.fd9a2eb6": {
       "asset": "asset_u4p67LxMR76BGNd48vQwSnVk",
@@ -4450,6 +4725,11 @@
       "preset": "Sadachbia",
       "text": "I think I did. I have a copy of the letter. I don't remember the reply."
     },
+    "Sadaltager.018b1c92": {
+      "asset": "asset_oK8nGJWAubtjpzzUL6axT1LC",
+      "preset": "Sadaltager",
+      "text": "Ask what you like. I'll answer what I can."
+    },
     "Sadaltager.01e1bcba": {
       "asset": "asset_vwVcW4KfLcJJkGEhhTLfYeTG",
       "preset": "Sadaltager",
@@ -4495,6 +4775,11 @@
       "preset": "Sadaltager",
       "text": "Don't thank me. You may not want to, later."
     },
+    "Sadaltager.20e13d54": {
+      "asset": "asset_3qNgiVfduPAugEf74FJzbwz3",
+      "preset": "Sadaltager",
+      "text": "You noticed the colour. Good. Those shards came a long way, and they don't eat. Sell that to whoever you like. Most won't believe you."
+    },
     "Sadaltager.2255da8e": {
       "asset": "asset_wEovccP9JXzKKnXUFgN714BZ",
       "preset": "Sadaltager",
@@ -4520,10 +4805,20 @@
       "preset": "Sadaltager",
       "text": "That wasn't in my projections!"
     },
+    "Sadaltager.3ec2778c": {
+      "asset": "asset_9WEnkfLQPJcEta1Po3Y7fYjM",
+      "preset": "Sadaltager",
+      "text": "Not like this. Yes, I did say that. I'm surprised anyone kept it."
+    },
     "Sadaltager.4262204f": {
       "asset": "asset_pJJzyrA8Q4KZTUh8g4YyCjwJ",
       "preset": "Sadaltager",
       "text": "Textbook. Literally; I've read the textbook."
+    },
+    "Sadaltager.470d5195": {
+      "asset": "asset_MqWZh2pgiSAoFCrg8gwq9FCt",
+      "preset": "Sadaltager",
+      "text": "I want it carried back over the Greywall, to where it was taken from. That's all I have ever wanted. Everything else was waiting."
     },
     "Sadaltager.48afc5f1": {
       "asset": "asset_cJG7emXTQUFz9iTEneDxHPsh",
@@ -4575,6 +4870,16 @@
       "preset": "Sadaltager",
       "text": "I'll want to examine that later."
     },
+    "Sadaltager.7075822f": {
+      "asset": "asset_TeV36xDbLmuCbtAjWZKwYSB7",
+      "preset": "Sadaltager",
+      "text": "I knew you. You stand in a doorway the way your people do. If the fire goes home, so can you."
+    },
+    "Sadaltager.77a1c79c": {
+      "asset": "asset_KJcZRV7joDRk4fK1F2i74wnZ",
+      "preset": "Sadaltager",
+      "text": "Me. A hundred years ago I stopped your hand. You were about to put it out, and a fire that has gone out can never go home."
+    },
     "Sadaltager.7867142d": {
       "asset": "asset_udh4ykSZoqNqjnZSQq8CuTRz",
       "preset": "Sadaltager",
@@ -4600,6 +4905,16 @@
       "preset": "Sadaltager",
       "text": "Lovely evening. It won't last. They never do."
     },
+    "Sadaltager.90677fc5": {
+      "asset": "asset_okXPMtShK9ehYLkjb7SnqiZn",
+      "preset": "Sadaltager",
+      "text": "I did that. I didn't know it would shatter. I'm not asking you to forgive it. I'm asking what happens next."
+    },
+    "Sadaltager.9130e1d2": {
+      "asset": "asset_ZizscWjMBKoqAwHze3PaATPH",
+      "preset": "Sadaltager",
+      "text": "You're asking the right questions. You're only asking them a little early."
+    },
     "Sadaltager.932886ec": {
       "asset": "asset_oChZBeUvccPgbU1zqrCu4y5p",
       "preset": "Sadaltager",
@@ -4615,15 +4930,30 @@
       "preset": "Sadaltager",
       "text": "The child sings well. Has anyone asked her where she learned?"
     },
+    "Sadaltager.a960d3a0": {
+      "asset": "asset_9e4SZ1syPFZJyTyybWtiKPwt",
+      "preset": "Sadaltager",
+      "text": "Then we can finish arguing afterwards. I'll stand with you for this part, at least."
+    },
     "Sadaltager.aee6bf7f": {
       "asset": "asset_HAb1XBYncToKJk8PGu4Nfrxq",
       "preset": "Sadaltager",
       "text": "Remarkable. Thank you."
     },
+    "Sadaltager.b2effea5": {
+      "asset": "asset_UV6LShBQ1RQcZotma85AJvBH",
+      "preset": "Sadaltager",
+      "text": "Because she carries the night I'm most ashamed of, and I wanted to know if it hurt her. It does. I'm sorry for that, too."
+    },
     "Sadaltager.b4c7881b": {
       "asset": "asset_rftAU56DwqoM97JvMeCyFrES",
       "preset": "Sadaltager",
       "text": "A satisfactory result."
+    },
+    "Sadaltager.b50f7b87": {
+      "asset": "asset_HeUy3TvqBRr3EREeXUh8qu2N",
+      "preset": "Sadaltager",
+      "text": "Someone who was here before, and will be here after. That isn't an answer. I know. It's the one I'm allowed to give."
     },
     "Sadaltager.d7f741c4": {
       "asset": "asset_L7tfJDdQaTLeZymrgU8S1cJs",
@@ -4649,6 +4979,11 @@
       "asset": "asset_LPu716gF9m61LwDKfaE4mFZE",
       "preset": "Sadaltager",
       "text": "Restored. Shall we continue?"
+    },
+    "Sadaltager.f58e8747": {
+      "asset": "asset_Rao8vLSUcPXpmWbnnsRHcF7c",
+      "preset": "Sadaltager",
+      "text": "That is nearly the right question. Not quite. Ask me again one day, on the other side of the wall."
     },
     "Sadaltager.f9b0982f": {
       "asset": "asset_j9D7cJfPordpZYFbJEDMimDL",
@@ -4815,6 +5150,16 @@
       "preset": "Sulafat",
       "text": "I don't want to hurt you. I want you warm. Both can be true today."
     },
+    "Sulafat.0f77ce02": {
+      "asset": "asset_vnNZGG8Togw1QFGNtkimS5qP",
+      "preset": "Sulafat",
+      "text": "You came. I hoped you would. You've carried the embers further than I ever could. Now help me finish it."
+    },
+    "Sulafat.10e4d52e": {
+      "asset": "asset_deuewxbfKomBQdrgx5r2hzJN",
+      "preset": "Sulafat",
+      "text": "No. Please. Don't listen to them. You'll be cold. Your children will be cold."
+    },
     "Sulafat.1450c618": {
       "asset": "asset_c8YSB7pccmWtRmEeH5sCoAhH",
       "preset": "Sulafat",
@@ -4880,6 +5225,11 @@
       "preset": "Sulafat",
       "text": "One hurt now, ten thousand spared. I've done the sums."
     },
+    "Sulafat.686b1fd8": {
+      "asset": "asset_1nFwCbJt8S2xEzR18DWxctrg",
+      "preset": "Sulafat",
+      "text": "Every one of these people chose this. Eleven lives, and the flame burns again, and ten thousand children are warm this winter."
+    },
     "Sulafat.6a877ccd": {
       "asset": "asset_CppbR8kAM4vjkTGdRgNQtSqr",
       "preset": "Sulafat",
@@ -4889,6 +5239,11 @@
       "asset": "asset_mBBkdu72BE36MShsDM1jymi6",
       "preset": "Sulafat",
       "text": "Every fire costs something. The cold costs more. I've buried children who forgot nothing, because they never lived long enough to."
+    },
+    "Sulafat.6ed54474": {
+      "asset": "asset_t4RainJKaKonJJscRRrkVHBn",
+      "preset": "Sulafat",
+      "text": "My mother's kitchen had blue tiles. Or that was someone else's mother. It doesn't matter. Someone's mother had blue tiles."
     },
     "Sulafat.707a7698": {
       "asset": "asset_wjig7rqFSuDASZxFqzrD2ajg",
@@ -4924,6 +5279,11 @@
       "asset": "asset_R1VqcUQVE4VqDyRK4LqgTMze",
       "preset": "Sulafat",
       "text": "I had a plan. I was the only one with a plan."
+    },
+    "Sulafat.89395da9": {
+      "asset": "asset_yawiv5c8ibhxqDxqBrTe8R8b",
+      "preset": "Sulafat",
+      "text": "Maren. That's a good name. I think I would have liked her. Did she do much harm?"
     },
     "Sulafat.91e47426": {
       "asset": "asset_J7FMk8pv4P8r5PZ35sF2R7Qk",
@@ -4975,10 +5335,20 @@
       "preset": "Sulafat",
       "text": "Then I'll see you at the Keep. I hope we're standing on the same side of the flame."
     },
+    "Sulafat.a95264b6": {
+      "asset": "asset_wB8hcc7A6M8UDKoRRheUAaEP",
+      "preset": "Sulafat",
+      "text": "I know. He wrote to me. He said he'd had his minute, and it was enough. I'm glad for him, truly. Not everyone gets a minute."
+    },
     "Sulafat.aaa19d46": {
       "asset": "asset_Kb2jNu6zLgEF6B9hoHmxbdJ7",
       "preset": "Sulafat",
       "text": "I'm sorry. He was angry for all the right reasons, and nobody ever fed him long enough to find out what else he was."
+    },
+    "Sulafat.b292770f": {
+      "asset": "asset_kuMHvheznzCHZGfNfiABRxSu",
+      "preset": "Sulafat",
+      "text": "I know. You left him sitting with a dead woman in the cold. I'm not the only one here who weighs lives, am I?"
     },
     "Sulafat.b493921a": {
       "asset": "asset_LwsGRVsc3ovSwyuMmmr2sMjV",
@@ -5030,6 +5400,16 @@
       "preset": "Sulafat",
       "text": "Every winter we argue, more children freeze. Let's not argue."
     },
+    "Sulafat.ee1914e1": {
+      "asset": "asset_o2VmAnBPEkpmx5fkNWUbzp6N",
+      "preset": "Sulafat",
+      "text": "Then I'm sorry. I'll remember you. I remember everyone."
+    },
+    "Sulafat.f0a8cc85": {
+      "asset": "asset_JzV77ijQ1VqTU27EQRnJy11P",
+      "preset": "Sulafat",
+      "text": "A cage keeps things in. That's all I want. Warmth, kept in, for us."
+    },
     "Sulafat.f1bea43d": {
       "asset": "asset_uYHmgtiamLMFASJawoxx5aNA",
       "preset": "Sulafat",
@@ -5049,6 +5429,11 @@
       "asset": "asset_M2Ck6UpSjJnUhyPjyTwQJ78n",
       "preset": "Sulafat",
       "text": "I've felt worse. I remember being worse."
+    },
+    "Sulafat.ffe703c8": {
+      "asset": "asset_eMDBc7UjWBdhyHJA5pVizN64",
+      "preset": "Sulafat",
+      "text": "I can't find my name. I know hundreds of names. Which one was mine?"
     },
     "Umbriel.00d2ed56": {
       "asset": "asset_UdzCbtXLwLHH3QNs4JNHXzQ6",
