@@ -1,20 +1,1329 @@
 {
   "scenes": [
     {
-      "id": "ch2_stub",
+      "id": "ch2_reeds",
       "beat": "ch2_drowned_waystation",
+      "title": "Into Mirewood",
       "cast": [
-        "narrator"
+        "narrator",
+        "ysolde"
       ],
-      "start": "n",
+      "start": "open",
       "nodes": [
         {
-          "id": "n",
+          "id": "open",
           "lines": [
             {
-              "id": "ch2_stub_line",
+              "id": "ch2_reeds_open_1",
               "speaker": "narrator",
-              "text": "(to be written)"
+              "mood": "idle",
+              "text": "Mirewood. The road east sinks into black water, and the trees lean close, as if to listen."
+            },
+            {
+              "id": "ch2_reeds_open_2",
+              "speaker": "narrator",
+              "mood": "surprised",
+              "text": "Lights drift under the skin of the marsh. Look straight at one and it is a lantern. Look away, and it is an eye."
+            },
+            {
+              "id": "ch2_reeds_open_3",
+              "speaker": "ysolde",
+              "mood": "idle",
+              "text": "More of you. The last ones came with knives and shouting. I do hope you will be better company.",
+              "direction": "from nowhere; soft, musical, amused"
+            },
+            {
+              "id": "ch2_reeds_open_4",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Ahead, a Warden waystation stands half drowned, its roof thick with moss. Smoke rises from it. Someone has made camp."
+            },
+            {
+              "id": "ch2_reeds_open_5",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Kindled faithful in grey keep watch at the door, beside blades hired off the river docks. Wolves pace in the reeds."
+            }
+          ],
+          "options": [
+            {
+              "id": "dwarf",
+              "label": "That's Warden stonework. I'll find the weak wall.",
+              "to": "dwarf",
+              "tags": {
+                "race": [
+                  "dwarf"
+                ]
+              }
+            },
+            {
+              "id": "wild",
+              "label": "Those wolves aren't theirs. Something's frightened them in.",
+              "to": "wild",
+              "tags": {
+                "class": [
+                  "ranger",
+                  "druid"
+                ]
+              }
+            },
+            {
+              "id": "go",
+              "label": "We go in.",
+              "to": "go"
+            }
+          ]
+        },
+        {
+          "id": "dwarf",
+          "lines": [
+            {
+              "id": "ch2_reeds_dwarf_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Dwarven-cut, three centuries old, and the marsh has eaten the mortar on the east side. One good push and it will give."
+            }
+          ],
+          "next": "go"
+        },
+        {
+          "id": "wild",
+          "lines": [
+            {
+              "id": "ch2_reeds_wild_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "The wolves flinch at every light in the water. They are not guarding the camp. They are hiding in it."
+            }
+          ],
+          "next": "go"
+        },
+        {
+          "id": "go",
+          "lines": [
+            {
+              "id": "ch2_reeds_go_1",
+              "speaker": "ysolde",
+              "mood": "happy",
+              "text": "Go on, little flames. The Court is watching. We so rarely get a show.",
+              "direction": "a whisper, very close"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch2_journal",
+      "beat": "ch2_drowned_waystation",
+      "title": "The Captured Journal",
+      "cast": [
+        "narrator",
+        "ysolde"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch2_journal_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "The waystation is quiet. Among the Kindled packs lies a journal, its pages swollen with marsh water."
+            },
+            {
+              "id": "ch2_journal_open_2",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Day nine. We went to the willow hall at dusk with torches and steel, to take the heart of Mirewood for the High Kindler.",
+              "direction": "reading a stranger's hand"
+            },
+            {
+              "id": "ch2_journal_open_3",
+              "speaker": "narrator",
+              "mood": "sad",
+              "text": "Day ten. I do not know what happened. Brother Teague walked into the water, singing. We cannot find our way out of the reeds.",
+              "direction": "reading"
+            },
+            {
+              "id": "ch2_journal_open_4",
+              "speaker": "narrator",
+              "mood": "sad",
+              "text": "Day eleven. The Court sent word. We may leave when we have forgotten why we came. Some of us already have.",
+              "direction": "reading"
+            },
+            {
+              "id": "ch2_journal_open_5",
+              "speaker": "narrator",
+              "mood": "sad",
+              "text": "The last page is a single name, written over and over, as if someone was trying very hard not to lose it."
+            }
+          ],
+          "sets": [
+            "ch2_kindled_cell_broken"
+          ],
+          "next": "lady"
+        },
+        {
+          "id": "lady",
+          "lines": [
+            {
+              "id": "ch2_journal_lady_1",
+              "speaker": "narrator",
+              "mood": "surprised",
+              "text": "The light changes. In the doorway stands a woman who was not there a moment ago, pale as birch, dressed in moth wings and dew."
+            },
+            {
+              "id": "ch2_journal_lady_2",
+              "speaker": "ysolde",
+              "mood": "happy",
+              "text": "You have cleared our doorstep. That was a kindness. The Court remembers kindnesses. It also remembers the other thing."
+            },
+            {
+              "id": "ch2_journal_lady_3",
+              "speaker": "ysolde",
+              "mood": "idle",
+              "text": "I am Ysolde. I speak for the Glimmer Court. Come to the willow, little flames, and let us see what you have brought to trade.",
+              "direction": "a pause before her own name, as if tasting it"
+            }
+          ],
+          "options": [
+            {
+              "id": "nosteal",
+              "label": "We're not here to steal from you.",
+              "to": "nosteal"
+            },
+            {
+              "id": "come",
+              "label": "We'll come.",
+              "to": "path"
+            }
+          ]
+        },
+        {
+          "id": "nosteal",
+          "lines": [
+            {
+              "id": "ch2_journal_nosteal_1",
+              "speaker": "ysolde",
+              "mood": "happy",
+              "text": "No one ever is. Come anyway.",
+              "direction": "delighted"
+            }
+          ],
+          "next": "path"
+        },
+        {
+          "id": "path",
+          "lines": [
+            {
+              "id": "ch2_journal_path_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "She turns, and the marsh lights turn with her, and a path opens through the reeds where there was none."
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch2_willow",
+      "beat": "ch2_court_audience",
+      "title": "Under the Living Willow",
+      "cast": [
+        "narrator",
+        "ysolde"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch2_willow_open_1",
+              "speaker": "narrator",
+              "mood": "surprised",
+              "text": "The Glimmer Court meets in a hall that is a single willow, grown into vaults and galleries, its branches lit from within."
+            },
+            {
+              "id": "ch2_willow_open_2",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Courtiers line the galleries. Some are tall and bright. Some are only a voice, or a smell of summer, or a song that stops when you turn."
+            },
+            {
+              "id": "ch2_willow_open_3",
+              "speaker": "narrator",
+              "mood": "sad",
+              "text": "One of them is humming a lullaby you are sure your mother sang. You never told anyone that lullaby."
+            },
+            {
+              "id": "ch2_willow_open_4",
+              "speaker": "ysolde",
+              "mood": "idle",
+              "text": "Welcome to the Court. You may sit. You may not eat. You may ask me questions, and I may answer them."
+            }
+          ],
+          "sets": [
+            "ch2_court_audience"
+          ],
+          "options": [
+            {
+              "id": "origin",
+              "label": "Where did the Court come from?",
+              "to": "origin"
+            },
+            {
+              "id": "kindled",
+              "label": "What happened to the Kindled who came here?",
+              "to": "kindled"
+            },
+            {
+              "id": "elf",
+              "label": "You know what I am. Does the Court remember the Keep?",
+              "to": "elf",
+              "tags": {
+                "race": [
+                  "elf"
+                ]
+              }
+            },
+            {
+              "id": "outl",
+              "label": "Why are your courtiers staring at me?",
+              "to": "outl",
+              "tags": {
+                "background": [
+                  "outlander"
+                ]
+              }
+            },
+            {
+              "id": "sing",
+              "label": "Let me pay for our questions with a song.",
+              "tags": {
+                "background": [
+                  "entertainer"
+                ]
+              },
+              "check": {
+                "skill": "performance",
+                "dc": 13,
+                "pass": "sing_pass",
+                "fail": "sing_fail"
+              }
+            }
+          ]
+        },
+        {
+          "id": "origin",
+          "lines": [
+            {
+              "id": "ch2_willow_origin_1",
+              "speaker": "ysolde",
+              "mood": "idle",
+              "text": "We were the marsh, once. Frogs and reeds and rot. Then a star came down into the water, and the marsh began to dream."
+            },
+            {
+              "id": "ch2_willow_origin_2",
+              "speaker": "ysolde",
+              "mood": "happy",
+              "text": "We are what it dreamed. Partly. The rest of us is borrowed: things your people set down by their fires and never came back for."
+            }
+          ],
+          "next": "more"
+        },
+        {
+          "id": "kindled",
+          "lines": [
+            {
+              "id": "ch2_willow_kindled_1",
+              "speaker": "ysolde",
+              "mood": "angry",
+              "text": "They came with fire and iron to take our heart. So we took a little of theirs. Fair is fair, in Mirewood.",
+              "direction": "never louder, only colder"
+            },
+            {
+              "id": "ch2_willow_kindled_2",
+              "speaker": "ysolde",
+              "mood": "idle",
+              "text": "Their leader will send more of them. Maren. The name tastes of smoke.",
+              "direction": "a pause before the name"
+            }
+          ],
+          "next": "more"
+        },
+        {
+          "id": "elf",
+          "lines": [
+            {
+              "id": "ch2_willow_elf_1",
+              "speaker": "ysolde",
+              "mood": "surprised",
+              "text": "An elf. How lovely. You have lived so long, and forgotten so much of it. Does it frighten you, the blur where the Keep should be?"
+            },
+            {
+              "id": "ch2_willow_elf_2",
+              "speaker": "ysolde",
+              "mood": "idle",
+              "text": "It should. Something has been eating your past, long-lived one. It was not us. Not first."
+            }
+          ],
+          "next": "more"
+        },
+        {
+          "id": "outl",
+          "lines": [
+            {
+              "id": "ch2_willow_outl_1",
+              "speaker": "ysolde",
+              "mood": "idle",
+              "text": "Because you smell of the far side of the mountains. So does the star in our pool. The Court wonders what you are to each other.",
+              "direction": "tasting the words"
+            }
+          ],
+          "next": "more"
+        },
+        {
+          "id": "sing_pass",
+          "lines": [
+            {
+              "id": "ch2_willow_sing_pass_1",
+              "speaker": "ysolde",
+              "mood": "happy",
+              "text": "Oh. That was a Warden tune, sung the way they meant it. The galleries are weeping. That is a compliment, here."
+            },
+            {
+              "id": "ch2_willow_sing_pass_2",
+              "speaker": "ysolde",
+              "mood": "idle",
+              "text": "You have bought the Court's good mood. It is worth more than you know, and it will not last."
+            }
+          ],
+          "next": "more"
+        },
+        {
+          "id": "sing_fail",
+          "lines": [
+            {
+              "id": "ch2_willow_sing_fail_1",
+              "speaker": "ysolde",
+              "mood": "happy",
+              "text": "A pretty attempt. One of the courtiers has stolen your third verse, I'm afraid. You won't miss it until you try to sing it again.",
+              "direction": "amused, almost kind"
+            }
+          ],
+          "next": "more"
+        },
+        {
+          "id": "more",
+          "lines": [
+            {
+              "id": "ch2_willow_more_1",
+              "speaker": "ysolde",
+              "mood": "idle",
+              "text": "Another question, little flame? Or shall we speak of what you came for?"
+            }
+          ],
+          "options": [
+            {
+              "id": "origin",
+              "label": "Where did the Court come from?",
+              "to": "origin"
+            },
+            {
+              "id": "kindled",
+              "label": "What happened to the Kindled who came here?",
+              "to": "kindled"
+            },
+            {
+              "id": "elf",
+              "label": "Does the Court remember the Keep?",
+              "to": "elf",
+              "tags": {
+                "race": [
+                  "elf"
+                ]
+              }
+            },
+            {
+              "id": "outl",
+              "label": "Why are your courtiers staring at me?",
+              "to": "outl",
+              "tags": {
+                "background": [
+                  "outlander"
+                ]
+              }
+            },
+            {
+              "id": "ember",
+              "label": "Let's speak of the ember.",
+              "to": "price"
+            }
+          ]
+        },
+        {
+          "id": "price",
+          "lines": [
+            {
+              "id": "ch2_willow_price_1",
+              "speaker": "ysolde",
+              "mood": "idle",
+              "text": "Our heart lies in the Heartpool, below the roots. You want it. The woman in grey wants it. Everyone wants it."
+            },
+            {
+              "id": "ch2_willow_price_2",
+              "speaker": "ysolde",
+              "mood": "idle",
+              "text": "And the Court parts with nothing for free. Come down to the water. I will name my price there, where you can see what it means."
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch2_heartpool",
+      "beat": "ch2_the_bargain",
+      "title": "The Heartpool",
+      "cast": [
+        "narrator",
+        "ysolde"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch2_heartpool_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Under the willow's roots lies a black pool, perfectly still. Deep inside it an ember glows, gold and green, like sun through leaves."
+            },
+            {
+              "id": "ch2_heartpool_open_2",
+              "speaker": "narrator",
+              "mood": "surprised",
+              "text": "Its light touches the water, and the water shows you things. A face you had forgotten. A street you used to know. A dog you loved, once."
+            },
+            {
+              "id": "ch2_heartpool_open_3",
+              "speaker": "ysolde",
+              "mood": "idle",
+              "text": "This is the price. Something you would hate to forget. Give it to the pool, and the heart is yours to carry."
+            },
+            {
+              "id": "ch2_heartpool_open_4",
+              "speaker": "ysolde",
+              "mood": "idle",
+              "text": "Only one of you need pay. Each of you, decide in your own heart whether you would. I will not ask who. Not yet."
+            },
+            {
+              "id": "ch2_heartpool_open_5",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Each of you thinks of something you would hate to lose. Keep it to yourself, for now."
+            }
+          ],
+          "options": [
+            {
+              "id": "what",
+              "label": "What happens to the memory?",
+              "to": "what"
+            },
+            {
+              "id": "court",
+              "label": "What happens to the Court if we take it?",
+              "check": {
+                "skill": "insight",
+                "dc": 14,
+                "pass": "court_pass",
+                "fail": "court_fail"
+              }
+            },
+            {
+              "id": "outl",
+              "label": "I'll look into the pool.",
+              "to": "outl",
+              "tags": {
+                "background": [
+                  "outlander"
+                ]
+              }
+            },
+            {
+              "id": "ready",
+              "label": "We're ready to decide.",
+              "to": "vote"
+            }
+          ]
+        },
+        {
+          "id": "what",
+          "lines": [
+            {
+              "id": "ch2_heartpool_what_1",
+              "speaker": "ysolde",
+              "mood": "idle",
+              "text": "It becomes us. A courtier, a lantern, a scent of rain. It will be loved here, very much. You will simply not have it any more."
+            },
+            {
+              "id": "ch2_heartpool_what_2",
+              "speaker": "ysolde",
+              "mood": "sad",
+              "text": "You will not even miss it. That is the cruel part, and the merciful one.",
+              "direction": "very soft"
+            }
+          ],
+          "next": "hub"
+        },
+        {
+          "id": "court_pass",
+          "lines": [
+            {
+              "id": "ch2_heartpool_court_pass_1",
+              "speaker": "narrator",
+              "mood": "sad",
+              "text": "Look closely and you see it. The nearest courtiers are thin as breath, and they lean toward the pool like flowers toward a window."
+            },
+            {
+              "id": "ch2_heartpool_court_pass_2",
+              "speaker": "ysolde",
+              "mood": "sad",
+              "text": "You are perceptive. Yes. Some of us are made of its light. If it leaves, some of us will stop. Perhaps I will.",
+              "direction": "perfectly calm"
+            },
+            {
+              "id": "ch2_heartpool_court_pass_3",
+              "speaker": "ysolde",
+              "mood": "idle",
+              "text": "A bargain is a bargain. I will not lie to make it cheaper, nor to make it dearer."
+            }
+          ],
+          "next": "hub"
+        },
+        {
+          "id": "court_fail",
+          "lines": [
+            {
+              "id": "ch2_heartpool_court_fail_1",
+              "speaker": "ysolde",
+              "mood": "happy",
+              "text": "Do not trouble your small hearts about the Court. We are not your concern tonight.",
+              "direction": "smiling; it is not an answer"
+            }
+          ],
+          "next": "hub"
+        },
+        {
+          "id": "outl",
+          "lines": [
+            {
+              "id": "ch2_heartpool_outl_1",
+              "speaker": "narrator",
+              "mood": "surprised",
+              "text": "The pool shows you a country on fire under a strange sky, and a great hall built around an empty space where a fire used to be."
+            },
+            {
+              "id": "ch2_heartpool_outl_2",
+              "speaker": "narrator",
+              "mood": "sad",
+              "text": "Someone in that hall is waiting. They have been waiting a very long time."
+            },
+            {
+              "id": "ch2_heartpool_outl_3",
+              "speaker": "ysolde",
+              "mood": "surprised",
+              "text": "Ah. It knows you. It has never shown anyone that before."
+            }
+          ],
+          "next": "hub"
+        },
+        {
+          "id": "hub",
+          "lines": [
+            {
+              "id": "ch2_heartpool_hub_1",
+              "speaker": "ysolde",
+              "mood": "idle",
+              "text": "What else would you know, before you choose?"
+            }
+          ],
+          "options": [
+            {
+              "id": "what",
+              "label": "What happens to the memory?",
+              "to": "what"
+            },
+            {
+              "id": "outl",
+              "label": "I'll look into the pool.",
+              "to": "outl",
+              "tags": {
+                "background": [
+                  "outlander"
+                ]
+              }
+            },
+            {
+              "id": "ready",
+              "label": "We're ready to decide.",
+              "to": "vote"
+            }
+          ]
+        },
+        {
+          "id": "vote",
+          "lines": [
+            {
+              "id": "ch2_heartpool_vote_1",
+              "speaker": "ysolde",
+              "mood": "idle",
+              "text": "Then choose. Pay what the Court asks, find a cleverer way, or leave our heart where it lies."
+            },
+            {
+              "id": "ch2_heartpool_vote_2",
+              "speaker": "ysolde",
+              "mood": "happy",
+              "text": "Choose carefully. Every way is remembered here.",
+              "direction": "pleasant, and a little dangerous"
+            }
+          ],
+          "vote": true,
+          "options": [
+            {
+              "id": "pay",
+              "label": "We'll pay what the Court asks.",
+              "to": "pay",
+              "choice": "ch2_pay"
+            },
+            {
+              "id": "trick",
+              "label": "We'll find a loophole in the bargain.",
+              "to": "trick",
+              "choice": "ch2_trick"
+            },
+            {
+              "id": "leave",
+              "label": "We'll leave the ember with the Court.",
+              "to": "leave",
+              "choice": "ch2_leave"
+            }
+          ]
+        },
+        {
+          "id": "pay",
+          "lines": [
+            {
+              "id": "ch2_heartpool_pay_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "One of you kneels at the water's edge. The memory goes out of you like breath on a cold morning."
+            },
+            {
+              "id": "ch2_heartpool_pay_2",
+              "speaker": "narrator",
+              "mood": "sad",
+              "text": "Afterwards, you cannot say what it was. Only that there is a quiet place now, where something used to sing."
+            },
+            {
+              "id": "ch2_heartpool_pay_3",
+              "speaker": "narrator",
+              "mood": "surprised",
+              "text": "In the pool, the memory blooms into a small new light. In the galleries above, three courtiers flicker and go out."
+            },
+            {
+              "id": "ch2_heartpool_pay_4",
+              "speaker": "ysolde",
+              "mood": "sad",
+              "text": "There. It is done, and the heart is yours. Lift it, little flame. It is lighter than you think, and heavier."
+            },
+            {
+              "id": "ch2_heartpool_pay_5",
+              "speaker": "ysolde",
+              "mood": "idle",
+              "text": "Thank you. I mean it. You gave away something you loved, for strangers. I still do not understand it.",
+              "direction": "gently, sincerely"
+            },
+            {
+              "id": "ch2_heartpool_pay_6",
+              "speaker": "ysolde",
+              "mood": "sad",
+              "text": "I think I would like to. Go now, before I ask you what it was."
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "trick",
+          "lines": [
+            {
+              "id": "ch2_heartpool_trick_1",
+              "speaker": "ysolde",
+              "mood": "happy",
+              "text": "A loophole. How mortal. Go on, then. Show the Court something it has never seen.",
+              "direction": "delighted"
+            }
+          ],
+          "options": [
+            {
+              "id": "arcana",
+              "label": "We'll bind the name from the Kindled journal into an offering.",
+              "check": {
+                "skill": "arcana",
+                "dc": 15,
+                "pass": "trick_pass",
+                "fail": "trick_fail"
+              }
+            },
+            {
+              "id": "deceive",
+              "label": "I'll offer a stranger's memory as if it were mine.",
+              "check": {
+                "skill": "deception",
+                "dc": 15,
+                "pass": "trick_pass",
+                "fail": "trick_fail"
+              }
+            }
+          ]
+        },
+        {
+          "id": "trick_pass",
+          "lines": [
+            {
+              "id": "ch2_heartpool_trick_pass_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "The offering slides into the water. The pool hesitates, tastes it, and accepts. A new light blooms, wearing someone else's face."
+            },
+            {
+              "id": "ch2_heartpool_trick_pass_2",
+              "speaker": "ysolde",
+              "mood": "surprised",
+              "text": "Not yours. It isn't yours at all. And yet the bargain said a memory, and a memory it was.",
+              "direction": "a long pause first"
+            },
+            {
+              "id": "ch2_heartpool_trick_pass_3",
+              "speaker": "ysolde",
+              "mood": "idle",
+              "text": "Take the heart. The bargain holds. I cannot break it, even now."
+            },
+            {
+              "id": "ch2_heartpool_trick_pass_4",
+              "speaker": "ysolde",
+              "mood": "angry",
+              "text": "But the Court will never forget this. Not in a hundred years. Not in a thousand. Go.",
+              "direction": "as soft as ever, which is worse"
+            },
+            {
+              "id": "ch2_heartpool_trick_pass_5",
+              "speaker": "narrator",
+              "mood": "sad",
+              "text": "Above you, three courtiers flicker and go out. Not one of the others will meet your eyes."
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "trick_fail",
+          "lines": [
+            {
+              "id": "ch2_heartpool_trick_fail_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "The offering is clumsy, and every courtier in the galleries sees it. Laughter ripples through the willow, high and cold."
+            },
+            {
+              "id": "ch2_heartpool_trick_fail_2",
+              "speaker": "ysolde",
+              "mood": "idle",
+              "text": "Oh, little flame. I saw the seams in that before you began. But you said the words, and the pool has taken them."
+            },
+            {
+              "id": "ch2_heartpool_trick_fail_3",
+              "speaker": "ysolde",
+              "mood": "idle",
+              "text": "The heart is yours. I cannot break a bargain, not even a bad one, not even a cheat. That is what I am."
+            },
+            {
+              "id": "ch2_heartpool_trick_fail_4",
+              "speaker": "ysolde",
+              "mood": "angry",
+              "text": "The Court will remember this for as long as there is a Court. You had better hope that is not very long.",
+              "direction": "never louder"
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "leave",
+          "lines": [
+            {
+              "id": "ch2_heartpool_leave_1",
+              "speaker": "ysolde",
+              "mood": "surprised",
+              "text": "You are leaving it? After all those reeds?",
+              "direction": "genuinely thrown"
+            },
+            {
+              "id": "ch2_heartpool_leave_2",
+              "speaker": "ysolde",
+              "mood": "happy",
+              "text": "How strange you are. I think I like it. Very well. The Court owes you a favour, and the Court always pays."
+            },
+            {
+              "id": "ch2_heartpool_leave_3",
+              "speaker": "ysolde",
+              "mood": "sad",
+              "text": "But the woman in grey will come again, with more knives. When she does, I wonder whether you will wish you had paid."
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch2_bree",
+      "beat": "ch2_bree_journal",
+      "title": "What Bree Writes Down",
+      "cast": [
+        "narrator",
+        "bree_tallow",
+        "pip_ashdown"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch2_bree_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "The Last Coal, late. The common room is empty, and the hearth burns low on its old shard, red at the edges."
+            },
+            {
+              "id": "ch2_bree_open_2",
+              "speaker": "bree_tallow",
+              "mood": "idle",
+              "text": "Sit. Eat. Then you can tell me how bad it is. Mirewood, of all places. Were the stories true?",
+              "direction": "brisk and kind, wiping down a table"
+            }
+          ],
+          "options": [
+            {
+              "id": "paid",
+              "label": "One of us paid with a memory.",
+              "to": "paid",
+              "requires": [
+                "ch2_paid_memory"
+              ]
+            },
+            {
+              "id": "tricked",
+              "label": "We tricked the Court.",
+              "to": "tricked",
+              "requires": [
+                "ch2_court_tricked"
+              ]
+            },
+            {
+              "id": "left",
+              "label": "We left the ember with them.",
+              "to": "left",
+              "requires": [
+                "ch2_ember_left"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "paid",
+          "lines": [
+            {
+              "id": "ch2_bree_paid_1",
+              "speaker": "bree_tallow",
+              "mood": "surprised",
+              "text": "Gave it away? On purpose? And now you don't know what it was?",
+              "direction": "she stops working"
+            },
+            {
+              "id": "ch2_bree_paid_2",
+              "speaker": "bree_tallow",
+              "mood": "sad",
+              "text": "Oh, my love. Come here. I know what that's like, I think. Better than I'd want to."
+            }
+          ],
+          "next": "book"
+        },
+        {
+          "id": "tricked",
+          "lines": [
+            {
+              "id": "ch2_bree_tricked_1",
+              "speaker": "bree_tallow",
+              "mood": "angry",
+              "text": "You cheated the fey. Course you did. My gran would've hung a horseshoe on you and bolted the door.",
+              "direction": "half laughing"
+            },
+            {
+              "id": "ch2_bree_tricked_2",
+              "speaker": "bree_tallow",
+              "mood": "sad",
+              "text": "Whose memory was it, then? Somebody's. Somebody had it once, and wanted it."
+            }
+          ],
+          "next": "book"
+        },
+        {
+          "id": "left",
+          "lines": [
+            {
+              "id": "ch2_bree_left_1",
+              "speaker": "bree_tallow",
+              "mood": "happy",
+              "text": "Left it? Good. Whatever it was, it wasn't yours, and it sounds like they need it more than we do."
+            },
+            {
+              "id": "ch2_bree_left_2",
+              "speaker": "bree_tallow",
+              "mood": "sad",
+              "text": "Folk will say you came home empty-handed. Let them. Sometimes that's the hard thing, and the right one."
+            }
+          ],
+          "next": "book"
+        },
+        {
+          "id": "book",
+          "lines": [
+            {
+              "id": "ch2_bree_book_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Bree sits down across from you. She doesn't sit down often. From her apron she takes a small book, soft with handling."
+            },
+            {
+              "id": "ch2_bree_book_2",
+              "speaker": "bree_tallow",
+              "mood": "idle",
+              "text": "I've something to show you. Not Pip. She's asleep, and she's enough on her plate."
+            },
+            {
+              "id": "ch2_bree_book_3",
+              "speaker": "bree_tallow",
+              "mood": "sad",
+              "text": "My husband. Ned. He drowned at the ford, eleven years back. And I've been losing him. Not the grief. Him."
+            },
+            {
+              "id": "ch2_bree_book_4",
+              "speaker": "bree_tallow",
+              "mood": "sad",
+              "text": "His face went first. Then his voice. I'd sit by this hearth trying to remember, and every night there was less of him."
+            },
+            {
+              "id": "ch2_bree_book_5",
+              "speaker": "bree_tallow",
+              "mood": "hurt",
+              "text": "So I write him down. Everything I've still got. Look. Ned whistled through his teeth when he was nervous. Ned hated eels."
+            },
+            {
+              "id": "ch2_bree_book_6",
+              "speaker": "bree_tallow",
+              "mood": "surprised",
+              "text": "I don't remember writing that one. About the eels. It's my hand. I must have known it, once.",
+              "direction": "very quiet"
+            },
+            {
+              "id": "ch2_bree_book_7",
+              "speaker": "bree_tallow",
+              "mood": "angry",
+              "text": "It's the fire. I know it is. The nights I sit closest are the nights I lose most. Gran's shard. Gran's lovely Warden shard.",
+              "direction": "at the hearth, not at them"
+            }
+          ],
+          "sets": [
+            "ch2_bree_journal"
+          ],
+          "options": [
+            {
+              "id": "putout",
+              "label": "Put it out, Bree.",
+              "to": "putout"
+            },
+            {
+              "id": "help",
+              "label": "Let me help you write him down.",
+              "to": "help"
+            },
+            {
+              "id": "pip",
+              "label": "Does Pip know?",
+              "to": "pip",
+              "tags": {
+                "background": [
+                  "urchin"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "putout",
+          "lines": [
+            {
+              "id": "ch2_bree_putout_1",
+              "speaker": "bree_tallow",
+              "mood": "angry",
+              "text": "And do what? Half this street sleeps by my hearth when the snow comes. I'll not freeze them to keep a man I've already lost."
+            },
+            {
+              "id": "ch2_bree_putout_2",
+              "speaker": "bree_tallow",
+              "mood": "sad",
+              "text": "No. I'll keep it lit, and I'll keep writing. That's the bargain. I made it without knowing, but it's mine now."
+            }
+          ],
+          "next": "close"
+        },
+        {
+          "id": "help",
+          "lines": [
+            {
+              "id": "ch2_bree_help_1",
+              "speaker": "bree_tallow",
+              "mood": "happy",
+              "text": "Would you? Ask me things, then. Anything. If I still know it, it goes in the book.",
+              "direction": "softening without slowing"
+            },
+            {
+              "id": "ch2_bree_help_2",
+              "speaker": "bree_tallow",
+              "mood": "happy",
+              "text": "He sang terribly. Properly terribly. Write that down. Write it twice.",
+              "direction": "laughing through it"
+            }
+          ],
+          "next": "close"
+        },
+        {
+          "id": "pip",
+          "lines": [
+            {
+              "id": "ch2_bree_pip_1",
+              "speaker": "pip_ashdown",
+              "mood": "idle",
+              "text": "I know lots of things. I know about the book. And I know Ned's whistle. I can do it.",
+              "direction": "from the stairs, caught out"
+            },
+            {
+              "id": "ch2_bree_pip_2",
+              "speaker": "bree_tallow",
+              "mood": "surprised",
+              "text": "Pip Ashdown, you're meant to be asleep. You never met him, love. How would you know his whistle?"
+            },
+            {
+              "id": "ch2_bree_pip_3",
+              "speaker": "pip_ashdown",
+              "mood": "sad",
+              "text": "I don't know, Bree. I just do.",
+              "direction": "slow and old for a moment"
+            }
+          ],
+          "next": "close"
+        },
+        {
+          "id": "close",
+          "lines": [
+            {
+              "id": "ch2_bree_close_1",
+              "speaker": "bree_tallow",
+              "mood": "idle",
+              "text": "Not a word to the town. They've enough to be frightened of this winter. Promise me."
+            },
+            {
+              "id": "ch2_bree_close_2",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "The shard in the hearth pops. Bree turns a page, and writes."
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch2_corvin",
+      "beat": "ch2_corvin_page",
+      "title": "The Page in Corvin's Hand",
+      "cast": [
+        "narrator",
+        "corvin_ashby"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch2_corvin_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Emberwick's archive is two rooms above the chandler's, stacked to the rafters. Corvin Ashby meets you at the door, very pale."
+            },
+            {
+              "id": "ch2_corvin_open_2",
+              "speaker": "corvin_ashby",
+              "mood": "surprised",
+              "text": "You're back. Good. Thank goodness. I need someone to read something and tell me I'm not, ah. Not...",
+              "direction": "light, quick, anxious; trailing off"
+            },
+            {
+              "id": "ch2_corvin_open_3",
+              "speaker": "corvin_ashby",
+              "mood": "idle",
+              "text": "Here. My notebook. My hand, see? The way I cross my sevens. I'd know it anywhere. Read it. Please."
+            },
+            {
+              "id": "ch2_corvin_open_4",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "If you are reading this, Corvin, you have forgotten again. Stop reading by the ember-lamp. It takes something every time.",
+              "direction": "reading another's hand"
+            },
+            {
+              "id": "ch2_corvin_open_5",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Small things first. A word, a date, a face. You have lost three years of notes this way. Write it somewhere the fire can't reach.",
+              "direction": "reading"
+            },
+            {
+              "id": "ch2_corvin_open_6",
+              "speaker": "corvin_ashby",
+              "mood": "hurt",
+              "text": "I don't remember writing that. Not a word. It's dated last spring. I've read by that lamp every night for thirty years."
+            }
+          ],
+          "sets": [
+            "ch2_corvin_page"
+          ],
+          "options": [
+            {
+              "id": "cost",
+              "label": "It's the ember-fire. It burns memories.",
+              "to": "cost"
+            },
+            {
+              "id": "sage",
+              "label": "I have a page like that, Corvin. In my own hand.",
+              "to": "sage",
+              "tags": {
+                "background": [
+                  "sage"
+                ]
+              }
+            },
+            {
+              "id": "dwarf",
+              "label": "Dwarven records have gaps too. My clan's begun to notice.",
+              "to": "dwarf",
+              "tags": {
+                "race": [
+                  "dwarf"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "cost",
+          "lines": [
+            {
+              "id": "ch2_corvin_cost_1",
+              "speaker": "corvin_ashby",
+              "mood": "idle",
+              "text": "If that's true, then every lamp, every forge, every hearth in the Vale, for three hundred years, we've been...",
+              "direction": "trailing off as the idea arrives"
+            },
+            {
+              "id": "ch2_corvin_cost_2",
+              "speaker": "corvin_ashby",
+              "mood": "surprised",
+              "text": "The missing years. Forty-one years with no records. Nobody lost them. We burned them. One evening at a time."
+            }
+          ],
+          "next": "beg"
+        },
+        {
+          "id": "sage",
+          "lines": [
+            {
+              "id": "ch2_corvin_sage_1",
+              "speaker": "corvin_ashby",
+              "mood": "surprised",
+              "text": "You too? The same? Then it isn't me going soft, it's real. It's a thing that happens. Oh, that's worse, isn't it."
+            },
+            {
+              "id": "ch2_corvin_sage_2",
+              "speaker": "corvin_ashby",
+              "mood": "happy",
+              "text": "Partners, then. Two scholars who can't trust their own notes. We'll check each other's. Every page.",
+              "direction": "a nervous laugh"
+            }
+          ],
+          "next": "beg"
+        },
+        {
+          "id": "dwarf",
+          "lines": [
+            {
+              "id": "ch2_corvin_dwarf_1",
+              "speaker": "corvin_ashby",
+              "mood": "happy",
+              "text": "Yes! The dwarves write everything down, and even their ledgers have holes. I wrote to Greyhold about it, years ago."
+            },
+            {
+              "id": "ch2_corvin_dwarf_2",
+              "speaker": "corvin_ashby",
+              "mood": "idle",
+              "text": "I think I did. I have a copy of the letter. I don't remember the reply."
+            }
+          ],
+          "next": "beg"
+        },
+        {
+          "id": "beg",
+          "lines": [
+            {
+              "id": "ch2_corvin_beg_1",
+              "speaker": "corvin_ashby",
+              "mood": "idle",
+              "text": "Old Maud never read by ember-light. She told me so, and I laughed. She's past a hundred, and she remembers everything."
+            },
+            {
+              "id": "ch2_corvin_beg_2",
+              "speaker": "corvin_ashby",
+              "mood": "hurt",
+              "text": "The Wardens must have known. They tended the flame three centuries. Somewhere there are records the fire never touched.",
+              "direction": "quiet and fast, begging"
+            },
+            {
+              "id": "ch2_corvin_beg_3",
+              "speaker": "corvin_ashby",
+              "mood": "sad",
+              "text": "Find them. Please. Before I forget I asked you."
+            },
+            {
+              "id": "ch2_corvin_beg_4",
+              "speaker": "narrator",
+              "mood": "sad",
+              "text": "On the desk behind him sits Corvin's ember-lamp, unlit for the first time in thirty years."
             }
           ],
           "end": true
