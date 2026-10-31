@@ -22,11 +22,36 @@ public static class TacticsVoices
     /// <summary>A player voice set's cast: <c>tactics.voice.&lt;set&gt;.&lt;low|high&gt;</c>.</summary>
     public static string PlayerVoice(string set, string cast) => $"tactics.voice.{set}.{cast}";
 
+    /// <summary>Whoever speaks in a battle without a cast voice.</summary>
+    public const string Character = "tactics.character";
+
+    /// <summary>The speaker of a storyteller's line.</summary>
+    public const string NarratorSpeaker = "narrator";
+
+    /// <summary>
+    /// An encounter's speakers that are a role or a tag rather than the character they are: the casting's <c>aliases</c>. The
+    /// casting isn't read at runtime, so they're held here, and a test keeps them in step with it.
+    /// </summary>
+    private static readonly IReadOnlyDictionary<string, string> Aliases = new Dictionary<string, string>
+    {
+        ["warlord"] = "vorga",
+    };
+
+    /// <summary>The theme for a line by <paramref name="speaker"/>: the narrator's, the speaker's own, or <see cref="Character"/>.</summary>
+    public static string ForSpeaker(string speaker)
+    {
+        if (speaker == NarratorSpeaker)
+            return Narrator;
+        var own = Npc(Aliases.GetValueOrDefault(speaker, speaker));
+        return All.Any(t => t.Id == own) ? own : Character;
+    }
+
     private static string Voice(string preset) => $"en-US-Chirp3-HD-{preset}";
 
     public static IReadOnlyList<VoiceTheme> All { get; } =
     [
         new(Narrator, "Wardenflame narrator: a warm storyteller", Voice("Algieba"), Fallback: new FallbackVoice()),
+        new(Character, "Battle characters with no cast voice", Voice("Fenrir"), Fallback: new FallbackVoice(Pitch: 0.85f)),
         new(Npc("bree_tallow"), "Bree Tallow: alto, brisk and kind", Voice("Zephyr"), Fallback: new FallbackVoice()),
         new(Npc("celandine_marrowby"), "Lady Celandine Marrowby: smooth, cultured alto", Voice("Autonoe"), Fallback: new FallbackVoice()),
         new(Npc("corvin_ashby"), "Corvin Ashby: light, quick, anxious", Voice("Sadachbia"), Fallback: new FallbackVoice()),

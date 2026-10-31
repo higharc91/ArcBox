@@ -175,7 +175,7 @@ at a time from their own events (`BeatScript` turns a beat into timed cues) and 
 the view become the picture, which also heals anything that drifted. Each finished beat sends `shown`, which only shortens the
 game's fallback wait, so a slow or missing TV costs a lagging picture and no more (`--drop-signals` proves it). At Results the view's
 `LastBattle` carries the blow that ended the fight, and the TV plays out what's left before it shows the table. `say` lines
-go through the shell's narrator in the `tactics.narrator` and `tactics.character` themes (`TacticsVoices`), with a caption.
+go through the shell's narrator in the `tactics.narrator` theme, a speaker's own or `tactics.character` (`TacticsVoices.ForSpeaker`), with a caption.
 
 **Catching up.** A TV that can't play its way back drops to the newest beat (`BeatQueue.Late`, `BeatPlayer`): it takes the view
 as it stands, conditions and board included, and plays that one beat from just before it (`DisplayedBattle.Before` stands the

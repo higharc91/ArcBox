@@ -27,6 +27,18 @@ public sealed class ArtIndexTests
             AssertExists(Pack.Art.Texture(lip), $"{material} lip");
     }
 
+    [Theory]
+    [InlineData("lava/molten", "lava_side")]
+    [InlineData("basalt/dark", "basalt_side")]
+    [InlineData("crypt_tiles/fel", "dungeon_wall")]
+    [InlineData("dungeon_floor_cracked/grey", "dungeon_wall")]
+    public void A_material_of_the_new_maps_has_the_side_that_goes_with_it(string material, string side)
+        => Assert.Equal(side, MaterialLook.Of(material).Side.Family);
+
+    [Fact]
+    public void Fel_crypt_tiles_stand_on_dark_walls_as_the_pack_has_no_fel_ones()
+        => Assert.Equal(new ArtRef("dungeon_wall", "dark"), MaterialLook.Of("crypt_tiles/fel").Side);
+
     public static TheoryData<string> Props()
         => new(Pack.Maps.SelectMany(id => Pack.Map(id).Props).Select(p => p.Id).Distinct());
 

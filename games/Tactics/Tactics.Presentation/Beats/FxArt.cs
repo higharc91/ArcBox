@@ -13,8 +13,18 @@ namespace Tactics.Presentation.Beats;
 /// <param name="AnchorY">The frame's anchor, down.</param>
 /// <param name="Lift">How far above a unit's ground point the anchor goes, from the manifest's <c>attach</c>.</param>
 /// <param name="Additive">Blended by adding light.</param>
-public sealed record FxClip(string Path, int Width, int Height, int Frames, double Fps, bool Loop, int AnchorX, int AnchorY, int Lift, bool Additive)
+/// <param name="Flies">The manifest attaches it as a projectile: it goes from the shooter to the target, and never just appears on one.</param>
+public sealed record FxClip(string Path, int Width, int Height, int Frames, double Fps, bool Loop, int AnchorX, int AnchorY, int Lift, bool Additive, bool Flies = false)
 {
+    private const int NearEndShare = 6;
+
+    /// <summary>
+    /// A line or a cone (lightning bolt, dragon's breath): the art runs to the right from an anchor at its near end, which goes
+    /// on the caster, and it's turned toward the target. The manifests say so only in their notes, but no other effect has its
+    /// anchor this close to an edge.
+    /// </summary>
+    public bool Aimed => AnchorX * NearEndShare <= Width;
+
     /// <summary>How long it runs once through.</summary>
     public double Seconds => Frames / Fps;
 
@@ -100,12 +110,12 @@ public sealed class FxArt
         foreach (var effect in doc.RootElement.GetProperty(Effects).EnumerateObject())
         {
             var e = effect.Value;
-            var (frame, anchor) = (e.GetProperty("frame"), e.GetProperty("anchor"));
+            var (frame, anchor, attach) = (e.GetProperty("frame"), e.GetProperty("anchor"), e.GetProperty("attach").GetString());
             var clips = new Dictionary<string, FxClip>(StringComparer.Ordinal);
             foreach (var variant in e.GetProperty("variants").EnumerateObject())
                 clips[variant.Name] = new FxClip($"{set}/{variant.Value.GetString()}", frame[0].GetInt32(), frame[1].GetInt32(), e.GetProperty("frames").GetInt32(),
                     e.GetProperty("fps").GetDouble(), e.GetProperty("loop").GetBoolean(), anchor[0].GetInt32(), anchor[1].GetInt32(),
-                    LiftOf(e.GetProperty("attach").GetString()), e.GetProperty("blend").GetString() == "add");
+                    LiftOf(attach), e.GetProperty("blend").GetString() == "add", attach == "projectile");
             var key = $"{set}.{effect.Name}";
             _sets[key] = clips;
             _defaults[key] = clips.GetValueOrDefault(e.TryGetProperty("default", out var first) ? first.GetString() ?? "" : "") ?? clips.Values.First();

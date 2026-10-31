@@ -45,6 +45,88 @@ public sealed class BeatScriptTests
         new Damaged(Foe, amount, "slashing", after),
     ];
 
+    [Theory]
+    [InlineData("characters.cast")]
+    [InlineData("characters.pray")]
+    [InlineData("characters.channel")]
+    [InlineData("characters.summon")]
+    [InlineData("characters.point")]
+    [InlineData("characters.buff")]
+    public void A_spell_at_arms_length_is_cast_from_where_the_caster_stands(string anim)
+    {
+        var cues = Script(Near, Used(anim, null, null, Foe)).Cues;
+
+        Assert.Empty(cues.OfType<LungeCue>());
+        Assert.Equal(anim, Assert.Single(cues.OfType<PoseCue>()).Anim);
+    }
+
+    [Theory]
+    [InlineData("characters.attack")]
+    [InlineData("characters.thrust")]
+    [InlineData("characters.slam")]
+    [InlineData("characters.bash")]
+    [InlineData("characters.flurry")]
+    [InlineData("characters.spin")]
+    [InlineData("beasts.special")]
+    public void A_blow_at_arms_length_still_lunges(string anim)
+        => Assert.Equal(anim, Assert.Single(Script(Near, Used(anim, null, null, Foe)).Cues.OfType<LungeCue>()).Anim);
+
+    [Fact]
+    public void A_one_shot_effect_plays_to_its_end_however_long_it_is()
+    {
+        var clip = Fx.Value.Clip("signature.spell_fireball.fire")!;
+
+        var burst = Assert.Single(Script(Near, Used("characters.attack", "signature.spell_fireball.fire", null, Foe)).Cues.OfType<BurstCue>());
+
+        Assert.True(clip.Seconds > BeatTiming.BurstMost);
+        Assert.Equal(clip.Seconds, burst.Length, 3);
+    }
+
+    [Fact]
+    public void A_looping_effect_has_no_end_of_its_own_so_it_stops_at_the_most()
+        => Assert.Equal(BeatTiming.BurstMost, Assert.Single(Script(Near, Used("characters.block", "fx.shield.arcane", null, Foe)).Cues.OfType<BurstCue>()).Length, 3);
+
+    [Fact]
+    public void A_long_effect_does_not_hold_the_beat_up()
+        => Assert.Equal(Script(Near, Used("characters.attack", "fx.slash.steel", null, Foe)).Length,
+            Script(Near, Used("characters.attack", "signature.spell_fireball.fire", null, Foe)).Length, 3);
+
+    [Fact]
+    public void An_arrow_named_as_an_effect_flies_and_is_not_left_in_the_target()
+    {
+        var cues = Script(Far, Used("characters.shoot", "fx.arrow.oak", null, Foe)).Cues;
+
+        Assert.Equal("fx/arrow_oak.png", Assert.Single(cues.OfType<FlightCue>()).Art.Path);
+        Assert.Empty(cues.OfType<BurstCue>());
+    }
+
+    [Fact]
+    public void An_arrow_named_twice_flies_once()
+    {
+        var cues = Script(Far, Used("characters.shoot", "fx.arrow.oak", "projectiles.arrow", Foe)).Cues;
+
+        Assert.Equal("projectiles/arrow.png", Assert.Single(cues.OfType<FlightCue>()).Art.Path);
+        Assert.Empty(cues.OfType<BurstCue>());
+    }
+
+    [Fact]
+    public void A_line_spell_leaves_the_caster_toward_the_target()
+    {
+        var burst = Assert.Single(Script(Far, Used("characters.summon", "signature.spell_lightning_bolt.storm", null, Foe)).Cues.OfType<BurstCue>());
+
+        Assert.Equal(new Tile(3, 3), burst.Tile);
+        Assert.Equal(new Tile(9, 3), burst.Toward);
+    }
+
+    [Fact]
+    public void A_burst_on_the_target_is_on_the_target()
+    {
+        var burst = Assert.Single(Script(Far, Used("characters.cast", "signature.spell_fireball.fire", null, Foe)).Cues.OfType<BurstCue>());
+
+        Assert.Equal(new Tile(9, 3), burst.Tile);
+        Assert.Null(burst.Toward);
+    }
+
     [Fact]
     public void A_walk_is_one_step_after_another()
     {

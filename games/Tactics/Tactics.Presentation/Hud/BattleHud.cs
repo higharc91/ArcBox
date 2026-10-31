@@ -79,7 +79,7 @@ public sealed record BattleHud(string Title, string Round, string? Turn, string?
             .ToArray();
 
         return new BattleHud(Words.Encounter(shown), $"Round {shown.Round.ToString(CultureInfo.InvariantCulture)}", TurnOf(shown, aiFinished),
-            ObjectiveWords.Of(shown.Objectives), [.. slots.Take(Slots).Select(u => Slot(u, shown.Active))], Math.Max(0, slots.Length - Slots),
+            ObjectiveWords.Of(shown.Objectives, shown.Units), [.. slots.Take(Slots).Select(u => Slot(u, shown.Active))], Math.Max(0, slots.Length - Slots),
             live.Reacting is { } reacting && reacting == shown.Reacting ? banner : null, lead);
     }
 

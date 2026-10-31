@@ -37,6 +37,44 @@ public sealed class BeatPlayerTests
     }
 
     [Fact]
+    public void A_walk_keeps_its_stride_from_one_tile_to_the_next()
+    {
+        var player = Player();
+        player.Receive(View(7, 10, new Beat(1, Hero, [new Moved(Hero, [.. Enumerable.Range(3, 5).Select(x => new Tile(x, 3))])])));
+
+        var seconds = new List<double>();
+        for (var t = 0.0; t < BeatTiming.Step * 4; t += Frame)
+        {
+            player.Tick(Frame);
+            if (player.Frame(River).Poses.TryGetValue(Hero, out var pose))
+                seconds.Add(pose.Seconds);
+        }
+
+        Assert.True(seconds[^1] > BeatTiming.Step * 3);         // the eight-frame walk needs longer than one tile takes
+        Assert.Equal(seconds.Order(), seconds);
+    }
+
+    [Fact]
+    public void A_line_spells_near_end_stays_on_the_caster_as_it_turns_to_the_target()
+    {
+        var clip = Fx.Value.Clip("signature.spell_lightning_bolt.storm")!;
+        var player = Player();
+        player.Receive(View(3, 10, new Beat(1, Hero,
+            [new AbilityUsed(Hero, new AbilityId("common.attack"), new Target(Unit: Foe), new PresentationDef("characters.summon", "signature.spell_lightning_bolt.storm", null))])));
+        Run(player, 0.3);
+
+        var draw = Assert.Single(player.Frame(River).Draws, d => d.Path == clip.Path);
+
+        var (from, to) = (River.Centre(new Tile(3, 3)), River.Centre(new Tile(9, 3)));
+        Assert.Equal(MathF.Atan2(to.Y - from.Y, to.X - from.X), draw.Rotation, 3);
+        var size = new Vector2(clip.Width, clip.Height);
+        var fromCentre = new Vector2(clip.AnchorX, clip.AnchorY) - size / 2;
+        var near = draw.TopLeft + size / 2 + Vector2.Transform(fromCentre, Matrix3x2.CreateRotation(draw.Rotation));
+        Assert.Equal(from.X, near.X, 2);
+        Assert.Equal(from.Y - clip.Lift, near.Y, 2);
+    }
+
+    [Fact]
     public void Each_beat_is_reported_once_after_it_has_played()
     {
         var player = Player();

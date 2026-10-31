@@ -19,8 +19,12 @@ public sealed class FxArtTests
         var clip = Fx.Value.Clip("fx.slash.fire")!;
 
         Assert.Equal("fx/slash_fire.png", clip.Path);
-        Assert.Equal((32, 32, 7, 18.0, false), (clip.Width, clip.Height, clip.Frames, clip.Fps, clip.Loop));
-        Assert.Equal((16, 16), (clip.AnchorX, clip.AnchorY));
+        using var manifest = Pack.Manifest("fx");
+        var slash = manifest.RootElement.GetProperty("effects").GetProperty("slash");
+        var (frame, anchor) = (slash.GetProperty("frame"), slash.GetProperty("anchor"));
+        Assert.Equal((frame[0].GetInt32(), frame[1].GetInt32(), slash.GetProperty("frames").GetInt32(), slash.GetProperty("fps").GetDouble(), false),
+            (clip.Width, clip.Height, clip.Frames, clip.Fps, clip.Loop));
+        Assert.Equal((anchor[0].GetInt32(), anchor[1].GetInt32()), (clip.AnchorX, clip.AnchorY));
         Assert.Equal(15, clip.Lift);      // "body"
         Assert.True(clip.Additive);
     }
@@ -52,8 +56,43 @@ public sealed class FxArtTests
         var arrow = Fx.Value.Shot("projectiles.arrow")!;
 
         Assert.Equal("projectiles/arrow.png", arrow.Path);
-        Assert.Equal((24, 24, 16), (arrow.Width, arrow.Height, arrow.Headings));
+        using var manifest = Pack.Manifest("projectiles");
+        var frame = manifest.RootElement.GetProperty("frame");
+        Assert.Equal((frame[0].GetInt32(), frame[1].GetInt32(), manifest.RootElement.GetProperty("headings").GetInt32()), (arrow.Width, arrow.Height, arrow.Headings));
     }
+
+    [Theory]
+    [InlineData("signature.spell_lightning_bolt.storm", true)]
+    [InlineData("signature.spell_cone_of_cold.frost", true)]
+    [InlineData("signature.draconic_dragon_breath.fire", true)]
+    [InlineData("signature.guardian_bulwark.azure", true)]
+    [InlineData("signature.spell_fireball.fire", false)]
+    [InlineData("fx.slash.steel", false)]
+    public void A_line_or_cone_is_anchored_at_its_near_end_and_is_aimed(string key, bool aimed)
+        => Assert.Equal(aimed, Fx.Value.Clip(key)!.Aimed);
+
+    [Fact]
+    public void Exactly_the_four_lines_and_cones_in_the_pack_are_aimed()
+    {
+        var aimed = new HashSet<string>();
+        foreach (var set in new[] { "fx", "signature" })
+        {
+            using var manifest = Pack.Manifest(set);
+            foreach (var effect in manifest.RootElement.GetProperty("effects").EnumerateObject())
+                foreach (var variant in effect.Value.GetProperty("variants").EnumerateObject())
+                    if (Fx.Value.Clip($"{set}.{effect.Name}.{variant.Name}")!.Aimed)
+                        aimed.Add($"{set}.{effect.Name}");
+        }
+
+        Assert.Equal(["signature.draconic_dragon_breath", "signature.guardian_bulwark", "signature.spell_cone_of_cold", "signature.spell_lightning_bolt"], aimed.Order());
+    }
+
+    [Theory]
+    [InlineData("fx.arrow.oak", true)]
+    [InlineData("fx.fireball.fire", true)]
+    [InlineData("fx.explosion.fire", false)]
+    public void An_effect_the_manifest_attaches_as_a_projectile_flies(string key, bool flies)
+        => Assert.Equal(flies, Fx.Value.Clip(key)!.Flies);
 
     [Fact]
     public void An_effect_used_as_a_projectile_is_a_turning_strip()

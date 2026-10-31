@@ -88,10 +88,10 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     {
         var column = ShellLayout.Frame(this, 24);
 
-        _meta = ArcTheme.Meta("Tactics");
+        _meta = ArcTheme.Meta(Brand.Name);
         _title = ArcTheme.Label("", ArcTheme.Bold, 42);
         _level = ArcTheme.Label("1", ArcTheme.Display("Black", 0, 18, 14), 60);
-        _header = ShellLayout.Header("TACTICS", _meta, _title, ShellLayout.StatBox(ArcTheme.Meta("Party level", 16), _level, null, 220));
+        _header = ShellLayout.Header(Brand.Name.ToUpperInvariant(), _meta, _title, ShellLayout.StatBox(ArcTheme.Meta("Party level", 16), _level, null, 220));
         column.AddChild(_header);
 
         _board = new BoardCanvas { Visible = false };

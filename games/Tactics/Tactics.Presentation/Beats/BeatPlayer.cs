@@ -240,7 +240,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
     {
         var narrator = line.Speaker == TacticsVoices.NarratorSpeaker;
         var said = new SpokenLine(narrator ? null : Shown?.Units.FirstOrDefault(u => u.Id.Value == line.Speaker)?.Name ?? Words.Title(line.Speaker), line.Line,
-            narrator ? TacticsVoices.Narrator : TacticsVoices.Character);
+            TacticsVoices.ForSpeaker(line.Speaker));
         Caption = said;
         _captionUntil = _now + CaptionExtra + line.Line.Split(' ').Length * SecondsPerWord;
         return said;
@@ -260,7 +260,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
                 {
                     case WalkCue walk:
                         places[walk.Unit] = Between(terrain, walk.From, walk.To, share, StepHop * MathF.Sin(share * MathF.PI));
-                        poses[walk.Unit] = new UnitPose(BeatScript.WalkAnim, into, BeatScript.Way(walk.From, walk.To));
+                        poses[walk.Unit] = new UnitPose(BeatScript.WalkAnim, _clock, BeatScript.Way(walk.From, walk.To));   // a stride outlasts a tile
                         break;
                     case SlideCue slide:
                         places[slide.Unit] = Between(terrain, slide.From, slide.To, share, 0);
@@ -303,10 +303,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
         switch (cue)
         {
             case BurstCue burst:
-                var clip = burst.Clip;
-                var at = terrain.Centre(burst.Tile) - new Vector2(clip.AnchorX, clip.AnchorY + clip.Lift);
-                draws.Add(new FxDraw(clip.Path, new ArtRect(clip.FrameAt(into) * clip.Width, 0, clip.Width, clip.Height), at,
-                    new Vector2(clip.Width, clip.Height), 0, clip.Additive, 1));
+                DrawBurst(burst, into, terrain, draws);
                 break;
             case FlightCue flight:
                 DrawFlight(flight, into, share, terrain, draws);
@@ -318,6 +315,20 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
                 DrawBadge(badge, share, terrain, draws);
                 break;
         }
+    }
+
+    private static void DrawBurst(BurstCue burst, double into, BoardTerrain terrain, ImmutableArray<FxDraw>.Builder draws)
+    {
+        var clip = burst.Clip;
+        var from = terrain.Centre(burst.Tile);
+        var way = burst.Toward is { } toward ? terrain.Centre(toward) - from : Vector2.UnitX;
+        var angle = MathF.Atan2(way.Y, way.X);
+
+        // Drawing turns around the frame's middle, so its anchor is put where it should land after the turn.
+        var size = new Vector2(clip.Width, clip.Height);
+        var anchor = Vector2.Transform(new Vector2(clip.AnchorX, clip.AnchorY) - size / 2, Matrix3x2.CreateRotation(angle));
+        var at = from - new Vector2(0, clip.Lift) - anchor - size / 2;
+        draws.Add(new FxDraw(clip.Path, new ArtRect(clip.FrameAt(into) * clip.Width, 0, clip.Width, clip.Height), at, size, angle, clip.Additive, 1));
     }
 
     private static void DrawFlight(FlightCue flight, double into, float share, BoardTerrain terrain, ImmutableArray<FxDraw>.Builder draws)

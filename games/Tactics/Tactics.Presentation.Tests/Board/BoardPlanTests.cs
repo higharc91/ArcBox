@@ -268,6 +268,7 @@ public sealed class BoardPlanTests
     [InlineData("holy", "consecrated")]
     [InlineData("smoke", "darkness")]
     [InlineData("entangle", "thorns")]
+    [InlineData("spikes", "spikes")]
     public void Zone_kinds_map_onto_the_hazard_set(string kind, string hazard)
         => Assert.Equal(hazard, ZoneArt.HazardFor(kind));
 

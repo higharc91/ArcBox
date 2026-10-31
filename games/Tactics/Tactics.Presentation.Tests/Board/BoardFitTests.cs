@@ -94,7 +94,7 @@ public sealed class BoardFitTests
         var fit = FitOf(map, Raise(BackCorner, MaxHeight - height));
 
         Assert.Equal(FitOf(map), fit);
-        Assert.Equal(2, fit.Scale);
+        Assert.Equal(map == "hall_of_the_flame" ? 1 : 2, fit.Scale);      // the finale's hall is too tall for 2x
     }
 
     [Theory]

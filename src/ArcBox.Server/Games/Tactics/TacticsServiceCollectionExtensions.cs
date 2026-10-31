@@ -24,7 +24,6 @@ public static class TacticsServiceCollectionExtensions
             var basePack = Path.Combine(root, TacticsGame.Id, "base");
             return RulesPack.Load([Path.Combine(basePack, "rules")], ArtManifests.Load(basePack));
         }));
-        services.AddVoiceThemes(TacticsVoices.All);
         services.AddArcGame(sp => new TacticsGame(sp.GetRequiredService<Lazy<RulesPack>>()));
         services.AddSingleton<ICampaignRules>(sp => new TacticsCampaignRules(sp.GetRequiredService<Lazy<RulesPack>>()));
         services.AddVoiceThemes(TacticsVoices.All);

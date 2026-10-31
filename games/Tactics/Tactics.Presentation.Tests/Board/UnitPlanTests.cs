@@ -227,7 +227,7 @@ public sealed class UnitPlanTests
     {
         var unit = One(null, Unit("a", "Party", 5, 5, hp: 0, life: "Downed", countdown: 2));
 
-        Assert.Equal(62, unit.Anim.Frames[0]);
+        Assert.Equal(Pack.Frames("characters", "down")[^1], unit.Anim.Frames[0]);
         Assert.Null(unit.Bar);
         Assert.Equal("2", unit.Countdown!.Text);
         Assert.Equal(unit.Feet.X, unit.Countdown.Centre.X);
@@ -244,7 +244,7 @@ public sealed class UnitPlanTests
 
     [Fact]
     public void A_downed_monster_holds_its_last_down_frame()
-        => Assert.Equal(22, One(null, Unit("a", "Enemy", 5, 5, "bosses.troll.troll", life: "Downed", countdown: 1)).Anim.FrameAt(0));
+        => Assert.Equal(Pack.Frames("bosses", "down")[^1], One(null, Unit("a", "Enemy", 5, 5, "bosses.troll.troll", life: "Downed", countdown: 1)).Anim.FrameAt(0));
 
     [Fact]
     public void A_standing_unit_idles_and_units_do_not_bob_in_step()
@@ -342,9 +342,9 @@ public sealed class UnitPlanTests
     [Fact]
     public void Conditions_show_their_art_and_those_without_any_show_nothing()
     {
-        var unit = One(null, Unit("a", "Party", 5, 5, conditions: ["poisoned", "hasted", "lit", "prone"]));
+        var unit = One(null, Unit("a", "Party", 5, 5, conditions: ["poisoned", "hasted", "disengaged", "prone"]));
 
-        Assert.Equal(3, unit.Icons.Length);                                  // poisoned, hasted, prone: lit has no art
+        Assert.Equal(3, unit.Icons.Length);                                  // poisoned, hasted, prone: disengaged has no art
         Assert.Equal("status/poisoned.png", Assert.Single(unit.Over).Path);
         Assert.Equal("status/hasted.png", Assert.Single(unit.Under).Path);   // prone has only an icon
     }
@@ -352,7 +352,7 @@ public sealed class UnitPlanTests
     [Fact]
     public void Two_conditions_sharing_art_show_it_once()
     {
-        var unit = One(null, Unit("a", "Party", 5, 5, conditions: ["paralysed", "incapacitated", "stunned"]));
+        var unit = One(null, Unit("a", "Party", 5, 5, conditions: ["incapacitated", "stunned"]));
 
         Assert.Single(unit.Icons);
         Assert.Single(unit.Over);

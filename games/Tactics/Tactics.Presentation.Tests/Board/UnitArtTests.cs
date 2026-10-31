@@ -15,18 +15,23 @@ public sealed class UnitArtTests
     {
         var fighter = Art.Value.Sprite("characters.class_fighter")!;
 
-        Assert.Equal(12, fighter.Anim("attack").Frames[0]);
-        Assert.Equal(25, fighter.Anim("characters.cast").Frames[0]);
-        Assert.Equal(8, fighter.Anim("walk").Frames[0]);
+        Assert.Equal(Pack.Frames("characters", "attack"), fighter.Anim("attack").Frames);
+        Assert.Equal(Pack.Frames("characters", "cast"), fighter.Anim("characters.cast").Frames);
+        Assert.Equal(Pack.Frames("characters", "walk"), fighter.Anim("walk").Frames);
     }
 
     [Theory]
-    [InlineData("characters.cast", 12)]     // a beast has no cast: it does its special
-    [InlineData("characters.shoot", 8)]     // or attacks
-    [InlineData("characters.bash", 8)]
-    [InlineData("nonsense", 8)]
-    public void An_animation_a_sheet_lacks_falls_back_to_one_it_has(string key, int column)
-        => Assert.Equal(column, Art.Value.Sprite("beasts.wolf.grey")!.Anim(key).Frames[0]);
+    [InlineData("characters.cast", "special")]     // a beast has no cast: it does its special
+    [InlineData("characters.pray", "special")]     // nor any of the spell poses
+    [InlineData("characters.channel", "special")]
+    [InlineData("characters.summon", "special")]
+    [InlineData("characters.point", "special")]
+    [InlineData("characters.buff", "special")]
+    [InlineData("characters.shoot", "attack")]     // or attacks
+    [InlineData("characters.bash", "attack")]
+    [InlineData("nonsense", "attack")]
+    public void An_animation_a_sheet_lacks_falls_back_to_one_it_has(string key, string anim)
+        => Assert.Equal(Pack.Frames("beasts", anim), Art.Value.Sprite("beasts.wolf.grey")!.Anim(key).Frames);
 
     [Fact]
     public void A_dodge_on_a_sheet_with_none_stands_still_rather_than_swinging()
@@ -64,23 +69,23 @@ public sealed class UnitArtTests
 
         Assert.Equal("characters/presets/goblin_archer.png", goblin.Path);
         Assert.Equal((32, 40, 16, 37), (goblin.Width, goblin.Height, goblin.AnchorX, goblin.AnchorY));
-        Assert.Equal(4, goblin.Idle.Frames.Length);
-        Assert.Equal(62, Assert.Single(goblin.Down.Frames));
+        Assert.Equal(Pack.Frames("characters", "idle"), goblin.Idle.Frames);
+        Assert.Equal(Pack.Frames("characters", "down"), goblin.Down.Frames);
         Assert.Equal(8, Art.Value.Sprite("characters.bandit")!.HeadTop);
         Assert.Equal(4, fighter.HeadTop);
     }
 
     [Theory]
-    [InlineData("beasts.wolf.dire", "beasts/wolf_dire.png", 48, 48, 24, 44, 18)]
-    [InlineData("bosses.troll.ogre", "bosses/troll_ogre.png", 64, 64, 32, 60, 22)]
-    [InlineData("bosses.dragon.red", "bosses/dragon_red.png", 96, 96, 48, 90, 22)]
-    [InlineData("bosses.imp.violet", "bosses/imp_violet.png", 32, 32, 16, 30, 22)]
-    public void A_monster_key_names_its_set_and_variant_with_that_sets_frames(string key, string path, int w, int h, int ax, int ay, int lastDown)
+    [InlineData("beasts.wolf.dire", "beasts/wolf_dire.png", 48, 48, 24, 44)]
+    [InlineData("bosses.troll.ogre", "bosses/troll_ogre.png", 64, 64, 32, 60)]
+    [InlineData("bosses.dragon.red", "bosses/dragon_red.png", 96, 96, 48, 90)]
+    [InlineData("bosses.imp.violet", "bosses/imp_violet.png", 32, 32, 16, 30)]
+    public void A_monster_key_names_its_set_and_variant_with_that_sets_frames(string key, string path, int w, int h, int ax, int ay)
     {
         var sprite = Art.Value.Sprite(key)!;
 
         Assert.Equal((path, w, h, ax, ay), (sprite.Path, sprite.Width, sprite.Height, sprite.AnchorX, sprite.AnchorY));
-        Assert.Equal(lastDown, sprite.Down.Frames[^1]);
+        Assert.Equal(Pack.Frames(key.Split('.')[0], "down"), sprite.Down.Frames);
     }
 
     [Fact]
@@ -143,7 +148,7 @@ public sealed class UnitArtTests
     [InlineData("poisoned", "poisoned", true)]
     [InlineData("burning", "burning", true)]
     [InlineData("hasted", "hasted", true)]
-    [InlineData("paralysed", "stunned", true)]
+    [InlineData("paralysed", "paralysed", true)]
     [InlineData("invisible", "hidden", true)]
     [InlineData("hunters_mark", "marked", true)]
     [InlineData("mage_armor", "shielded", true)]
@@ -167,11 +172,20 @@ public sealed class UnitArtTests
     }
 
     [Theory]
-    [InlineData("lit")]
+    [InlineData("grappled")]
     [InlineData("disengaged")]
     [InlineData("no_such_condition")]
     public void A_condition_with_no_art_is_null(string condition)
         => Assert.Null(Art.Value.Condition(condition));
+
+    [Fact]
+    public void A_condition_that_has_its_own_art_now_shows_it_and_keeps_what_it_borrowed()
+    {
+        var look = Art.Value.Condition("paralysed")!;
+
+        Assert.Equal("status/paralysed.png", look.Effect!.Path);
+        Assert.Equal(Art.Value.Condition("stunned")!.Icon, look.Icon);     // the pack draws no paralysed icon
+    }
 
     [Fact]
     public void An_effect_says_which_side_of_the_unit_it_goes()

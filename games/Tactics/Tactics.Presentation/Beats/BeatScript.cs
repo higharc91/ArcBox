@@ -97,7 +97,7 @@ public static class BeatTiming
     /// <summary>The shortest a beat can be.</summary>
     public const double Least = 0.12;
 
-    /// <summary>The longest an effect blocks nothing but still shows; loops have no end of their own.</summary>
+    /// <summary>How long a looping effect shows, as it has no end of its own. A one-shot plays out: neither holds the beat up.</summary>
     public const double BurstMost = 0.6;
 }
 
@@ -122,8 +122,8 @@ public sealed record PoseCue(double At, double Length, UnitId Unit, string Anim,
 /// <summary>A shot in the air.</summary>
 public sealed record FlightCue(double At, double Length, ShotArt Art, Tile From, Tile To) : Cue(At, Length);
 
-/// <summary>An effect on a tile.</summary>
-public sealed record BurstCue(double At, double Length, FxClip Clip, Tile Tile) : Cue(At, Length);
+/// <summary>An effect on a tile, turned toward another if it's <see cref="FxClip.Aimed"/>.</summary>
+public sealed record BurstCue(double At, double Length, FxClip Clip, Tile Tile, Tile? Toward = null) : Cue(At, Length);
 
 /// <summary>How a number pops.</summary>
 public enum PopStyle { Damage, Heal, Crit }
@@ -161,7 +161,6 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
     private const string Down = "down";
     private const string Walk = "walk";
     private const string Special = "special";
-    private const string CastKey = "characters.cast";
     private const string Shoot = "shoot";
     private const string Arrow = "projectiles.arrow";
     private const string Spark = "fx.hit.spark";
@@ -175,6 +174,9 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
     private const string CritWord = "CRIT";
 
     private static readonly ImmutableHashSet<string> Physical = ["slashing", "piercing", "bludgeoning"];
+
+    /// <summary>The animations that are a blow, which lunge at arm's length. The rest (a spell's poses, a block) stay where they are.</summary>
+    private static readonly ImmutableHashSet<string> Blows = [Attack, "thrust", "slam", "spin", "flurry", "bash", Special];
 
     /// <summary>The script for <paramref name="beat"/>. <paramref name="shown"/> is the battle as the player last saw it; <paramref name="live"/> is the newest view.</summary>
     public static BeatScript Of(Beat beat, BattleView shown, BattleView live, FxArt fx) => new Builder(beat, shown, live, fx).Build();
@@ -277,10 +279,10 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
 
         private void Apply(BattleEvent e) => _cues.Add(new ApplyCue(_t, e));
 
-        private void Burst(string? key, Tile? tile, double? at = null)
+        private void Burst(string? key, Tile? tile, double? at = null, Tile? toward = null)
         {
             if (key is not null && tile is { } place && fx.Clip(key) is { } clip)
-                _cues.Add(new BurstCue(at ?? _t, Math.Min(clip.Loop ? BeatTiming.BurstMost : clip.Seconds, BeatTiming.BurstMost), clip, place));
+                _cues.Add(new BurstCue(at ?? _t, clip.Loop ? BeatTiming.BurstMost : clip.Seconds, clip, place, toward));
         }
 
         private void Moment(string label, double after = 0) => _cues.Add(new MomentCue(_t + after, label));
@@ -438,7 +440,9 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             var from = TileOf(used.Source);
             var aim = used.Target.Unit is { } unit ? TileOf(unit) : used.Target.Tile;
             var anim = used.Presentation?.Anim ?? Attack;
-            var effect = used.Presentation?.Fx;
+            var clip = used.Presentation?.Fx is { } named ? fx.Clip(named) : null;
+            var flies = clip is { Flies: true };
+            var effect = flies ? null : used.Presentation?.Fx;
             if (from is not { } source)
             {
                 Burst(effect, aim);
@@ -454,8 +458,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
 
             var reach = Math.Max(Math.Abs(target.X - source.X), Math.Abs(target.Y - source.Y));
             // The basic Attack names no projectile, whatever the weapon, and only a bow reaches that far with it.
-            var plain = reach > 1 && used.Presentation?.Projectile is null && anim.EndsWith(Attack, StringComparison.Ordinal);
-            if ((plain ? Arrow : used.Presentation?.Projectile) is { } key && fx.Shot(key) is { } shot)
+            var plain = reach > 1 && used.Presentation?.Projectile is null && !flies && anim.EndsWith(Attack, StringComparison.Ordinal);
+            if ((plain ? Arrow : used.Presentation?.Projectile ?? (flies ? used.Presentation?.Fx : null)) is { } key && fx.Shot(key) is { } shot)
             {
                 anim = plain ? Shoot : anim;
                 var flight = Math.Min(BeatTiming.FlightBase + BeatTiming.FlightPerTile * reach, BeatTiming.FlightMost);
@@ -463,7 +467,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 _cues.Add(new FlightCue(_t + BeatTiming.Windup, flight, shot, source, target));
                 _t += BeatTiming.Windup + flight;
             }
-            else if (reach <= 1 && !anim.EndsWith(CastKey, StringComparison.Ordinal))
+            else if (reach <= 1 && Blows.Contains(anim[(anim.LastIndexOf('.') + 1)..]))
             {
                 _cues.Add(new LungeCue(_t, BeatTiming.Lunge, used.Source, source, target, anim));
                 _t += BeatTiming.Windup;
@@ -473,7 +477,10 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 _cues.Add(new PoseCue(_t, BeatTiming.Windup, used.Source, anim, source, target));
                 _t += BeatTiming.Windup;
             }
-            Burst(effect, target);
+            if (clip is { Aimed: true })
+                Burst(effect, source, toward: target);
+            else
+                Burst(effect, target);
             Moment("attack", -0.1);
         }
 

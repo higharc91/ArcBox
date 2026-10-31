@@ -36,17 +36,20 @@ public sealed record UnitSprite(string Path, int Width, int Height, int AnchorX,
     private const string Cast = "cast";
     private const string Dodge = "dodge";
 
+    /// <summary>The poses of a spell, which only the character sheets have.</summary>
+    private static readonly ImmutableHashSet<string> SpellPoses = [Cast, "pray", "channel", "summon", "point", "buff"];
+
     /// <summary>
     /// The animation for a manifest name or a presentation key (<c>walk</c>, <c>characters.cast</c>). The sets don't share
-    /// their lists, so what a sheet lacks falls back: a cast to its special and a special to its cast (a boss on a character
-    /// sheet has no special, and gathering itself reads better than a swing at nobody), a dodge to standing still, which is
-    /// what a miss looks like, anything else to its attack, and then to idle.
+    /// their lists, so what a sheet lacks falls back: a spell's pose to its special and a special to its cast (a boss on a
+    /// character sheet has no special, and gathering itself reads better than a swing at nobody), a dodge to standing still,
+    /// which is what a miss looks like, anything else to its attack, and then to idle.
     /// </summary>
     public UnitAnim Anim(string key)
     {
         var name = key[(key.LastIndexOf('.') + 1)..];
         return Anims.GetValueOrDefault(name)
-            ?? (name == Cast ? Anims.GetValueOrDefault(Special) : name == Special ? Anims.GetValueOrDefault(Cast) : null)
+            ?? (SpellPoses.Contains(name) ? Anims.GetValueOrDefault(Special) : name == Special ? Anims.GetValueOrDefault(Cast) : null)
             ?? (name == Dodge ? null : Anims.GetValueOrDefault(Attack))
             ?? Idle;
     }
@@ -108,8 +111,8 @@ public sealed class UnitArt
     private const string DigitStyle = "damage";
 
     /// <summary>
-    /// The rules' conditions that have no art of that name, and the art that says the same thing. The rest either share a
-    /// name with the art or have none. My judgment, since the art set predates the conditions.
+    /// The art that says the same thing as a rules condition, for whichever of its effect and icon the pack doesn't draw under
+    /// its own name. The rest either share a name with the art or have none. My judgment, since the art set predates the conditions.
     /// </summary>
     private static readonly ImmutableDictionary<string, string> Aliases = new Dictionary<string, string>
     {
@@ -211,9 +214,9 @@ public sealed class UnitArt
     /// <summary>A condition's art, or null if it has none.</summary>
     public ConditionLook? Condition(string id)
     {
-        var name = Aliases.GetValueOrDefault(id, id);
-        var effect = _effects.GetValueOrDefault(name);
-        ArtRect? icon = _icons.TryGetValue(name, out var rect) ? rect : null;
+        var alias = Aliases.GetValueOrDefault(id, id);
+        var effect = _effects.GetValueOrDefault(id) ?? _effects.GetValueOrDefault(alias);
+        ArtRect? icon = _icons.TryGetValue(id, out var rect) || _icons.TryGetValue(alias, out rect) ? rect : null;
         return effect is null && icon is null ? null : new ConditionLook(effect, icon);
     }
 

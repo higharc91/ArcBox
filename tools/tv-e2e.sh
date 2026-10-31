@@ -77,6 +77,7 @@
 #   TV_PRESET        render preset (default low; software rendering can't keep up with the phase timers otherwise)
 #   TV_LINGER        seconds the TV keeps running after the phones finish, for its last shots (default 12)
 #   TV_ARGS          extra TV app arguments, e.g. --perf (log fps every 5 s)
+#   TV_ENGINE_ARGS   extra Godot engine arguments, before the --, e.g. --position 160,100 to place the window; Godot counts from the left edge of the leftmost monitor, so x can't be negative
 #   TV_REMATCH       1 (with ARCBOX_FULL=1) = after the race, the VIP phone starts a second one in the same room
 #                    and plays it to its first Reveal (shots in <out>/phones-rematch)
 #
@@ -235,10 +236,10 @@ start_tv() {
   local shots=$1
   shift
   if [[ -n "$WINDOWS" ]]; then
-    "$GODOT" --path "$ROOT/src/ArcBox.Host" -- --shots="$shots" --preset="$PRESET" --res="$RES" --server="$URL" \
+    "$GODOT" ${TV_ENGINE_ARGS:-} --path "$ROOT/src/ArcBox.Host" -- --shots="$shots" --preset="$PRESET" --res="$RES" --server="$URL" \
       --quit-after="$QUIT_AFTER" --audio-log "$@" ${TV_ARGS:-} >> "$OUT/tv.log" 2>&1 &
   else
-    DISPLAY=":$DISPLAY_NUM" "$GODOT" --path "$ROOT/src/ArcBox.Host" --rendering-driver vulkan -- --shots="$shots" --preset="$PRESET" --res="$RES" \
+    DISPLAY=":$DISPLAY_NUM" "$GODOT" ${TV_ENGINE_ARGS:-} --path "$ROOT/src/ArcBox.Host" --rendering-driver vulkan -- --shots="$shots" --preset="$PRESET" --res="$RES" \
       --server="$URL" --quit-after="$QUIT_AFTER" --audio-log "$@" ${TV_ARGS:-} >> "$OUT/tv.log" 2>&1 &
   fi
   TV_PID=$!
