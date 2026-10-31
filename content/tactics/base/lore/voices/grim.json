@@ -100,12 +100,12 @@
     "camp": [
       {
         "id": "voice_grim_camp_1",
-        "text": "Don't touch the shards. Not if you want to keep your memories.",
+        "text": "Don't touch the shards. Nothing that glows like that comes free.",
         "mood": "idle"
       },
       {
         "id": "voice_grim_camp_2",
-        "text": "I forget my mother's face. Did you know that? The fire took it.",
+        "text": "I can't sleep near the fire anymore. Don't ask me why. I don't know why.",
         "mood": "idle"
       }
     ]

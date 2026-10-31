@@ -255,20 +255,85 @@
     }
   },
   "renders": {
+    "Algenib.0b2ba3dc": {
+      "asset": "asset_bgvA6cKPwHpRDv8SWgegm6dY",
+      "preset": "Algenib",
+      "text": "Get them out. I'll hold."
+    },
+    "Algenib.31a3f735": {
+      "asset": "asset_h8ygYf8JqzauP8UwjHkFk5yh",
+      "preset": "Algenib",
+      "text": "Hm. I'll live."
+    },
+    "Algenib.365d6185": {
+      "asset": "asset_dpBtEjQQNDJBAwEyiAguZZX9",
+      "preset": "Algenib",
+      "text": "Done."
+    },
+    "Algenib.676a2a7d": {
+      "asset": "asset_6oqvRAVhtZv9g9xnGixKAz1G",
+      "preset": "Algenib",
+      "text": "Run. Live. Fight later."
+    },
     "Algenib.6a76d037": {
       "asset": "asset_ZfbgJy2gYFPa7sVzVZTdWPe4",
       "preset": "Algenib",
       "text": "Make it quick."
+    },
+    "Algenib.701f1962": {
+      "asset": "asset_Uxa5uNEFHznqVNTiKToetmtE",
+      "preset": "Algenib",
+      "text": "Don't touch the shards. Not if you want to keep your memories."
     },
     "Algenib.786367c4": {
       "asset": "asset_9GJTiv9zCrGxktCc4TMD3hrk",
       "preset": "Algenib",
       "text": "Down to the bone."
     },
+    "Algenib.80227ee7": {
+      "asset": "asset_fvMX9iSXBCzQnozbXXUaJRtU",
+      "preset": "Algenib",
+      "text": "Not again. Not again."
+    },
+    "Algenib.89551b40": {
+      "asset": "asset_uD6cTWwdQjSjDyoCmRnUHrFa",
+      "preset": "Algenib",
+      "text": "Not yet."
+    },
     "Algenib.8e569381": {
       "asset": "asset_k6iCdpNJSvkhNDcHHAo5eY4z",
       "preset": "Algenib",
       "text": "Good."
+    },
+    "Algenib.971ef99d": {
+      "asset": "asset_gP2JBDvkBjejA1Pka28w5L2c",
+      "preset": "Algenib",
+      "text": "Pain. Means I'm alive."
+    },
+    "Algenib.be985898": {
+      "asset": "asset_EHQQ9vgBv45WvjXMkeKPYo8y",
+      "preset": "Algenib",
+      "text": "...Thanks."
+    },
+    "Algenib.beea1d64": {
+      "asset": "asset_oSMzwc5SiHpxD9wqmRLUE7g1",
+      "preset": "Algenib",
+      "text": "Bury them. Then we eat."
+    },
+    "Algenib.c3176859": {
+      "asset": "asset_WvSWKVVg4mxkJUkrE68eoygA",
+      "preset": "Algenib",
+      "text": "Another one for the cold."
+    },
+    "Algenib.cad71bf7": {
+      "asset": "asset_mDrkjYoCWam22Tw9PjEkAfj7",
+      "preset": "Algenib",
+      "text": "We live another day."
+    },
+    "Algenib.e5894bd8": {
+      "asset": "asset_xtD1GcE1b3GNvvDkLrXZPotD",
+      "preset": "Algenib",
+      "text": "I forget my mother's face. Did you know that? The fire took it."
     },
     "Algenib.ea5cc009": {
       "asset": "asset_h5KJKKjtJvyc2fwdrZvAKu5u",
@@ -359,6 +424,41 @@
       "asset": "asset_5yYJFQR4jGxYz3Lxojgd5LyK",
       "preset": "Alnilam",
       "text": "Not done yet."
+    },
+    "Charon.00885eb3": {
+      "asset": "asset_2XWjSXzysnzAfPTSZKSXc2Ki",
+      "preset": "Charon",
+      "text": "Speeches, speeches. I've given so many I dream in them."
+    },
+    "Charon.228c17a7": {
+      "asset": "asset_c6bPfKX85nxcyL1MqruAHpva",
+      "preset": "Charon",
+      "text": "Good to see you back. Truly. The square's been quieter than I'd like."
+    },
+    "Charon.370da648": {
+      "asset": "asset_F7Nti3fhXpAfNMS54p5u82on",
+      "preset": "Charon",
+      "text": "The council wants numbers and hope. I can only manage one at a time."
+    },
+    "Charon.8db36886": {
+      "asset": "asset_2nZEoqCeWh4UdJoxFA1vD2Dw",
+      "preset": "Charon",
+      "text": "Mind the frost by the well. That's new. That was never there before."
+    },
+    "Charon.e01e3d61": {
+      "asset": "asset_Cq2HoSardJVZK8nqtxdjLZSE",
+      "preset": "Charon",
+      "text": "If anyone asks, things are well in hand. Are they? No. Don't answer that."
+    },
+    "Charon.e05585ab": {
+      "asset": "asset_D1krGvV62hZuoLTJAxVxG7CR",
+      "preset": "Charon",
+      "text": "Not now. Please. Whatever it is, not here, not in the square."
+    },
+    "Charon.f089eeb7": {
+      "asset": "asset_7NbcHW7HrVjjunvPQcwhuSNi",
+      "preset": "Charon",
+      "text": "Emberwick has seen hard winters before. We'll see this one through, too."
     },
     "Despina.191cb376": {
       "asset": "asset_gaR1xFYbHBhALqLpQbayiA6P",
@@ -575,6 +675,16 @@
       "preset": "Fenrir",
       "text": "Sing something, someone. Loud."
     },
+    "Gacrux.14e65be0": {
+      "asset": "asset_f2iR6KSRqhbS8jnPzDoNCnsY",
+      "preset": "Gacrux",
+      "text": "Run. Live. Fight later."
+    },
+    "Gacrux.1806c553": {
+      "asset": "asset_zUv56rRLxBt95aJdXfQ5s5t5",
+      "preset": "Gacrux",
+      "text": "Not again. Not again."
+    },
     "Gacrux.28650f41": {
       "asset": "asset_6soUUi6k3mAciTifZMJ4EfY1",
       "preset": "Gacrux",
@@ -585,20 +695,70 @@
       "preset": "Gacrux",
       "text": "Good."
     },
+    "Gacrux.378c8374": {
+      "asset": "asset_eQbESgr7ou7Vi8bsoFqurep2",
+      "preset": "Gacrux",
+      "text": "We live another day."
+    },
+    "Gacrux.462fcfd2": {
+      "asset": "asset_cs7wsatXvZ7bC1WLZs374uqP",
+      "preset": "Gacrux",
+      "text": "Not yet."
+    },
+    "Gacrux.67534944": {
+      "asset": "asset_X2UWwajGcrY2TcXzHWxSMGpd",
+      "preset": "Gacrux",
+      "text": "Hm. I'll live."
+    },
+    "Gacrux.aa983b5b": {
+      "asset": "asset_49ybzU5R936zExWa3RL2hGEX",
+      "preset": "Gacrux",
+      "text": "Done."
+    },
     "Gacrux.b972e0c4": {
       "asset": "asset_T8VeXtGcqBWzcZyoQhkcmGeS",
       "preset": "Gacrux",
       "text": "Down to the bone."
+    },
+    "Gacrux.c631a814": {
+      "asset": "asset_gAPYmn6GDZ7vyPWbVivD3uCg",
+      "preset": "Gacrux",
+      "text": "Don't touch the shards. Not if you want to keep your memories."
     },
     "Gacrux.c7997ac9": {
       "asset": "asset_PjwFJ9uspFqC9zZ8i17MNqqv",
       "preset": "Gacrux",
       "text": "Another one for the cold."
     },
+    "Gacrux.cd9d3bd2": {
+      "asset": "asset_BajZZQJe5SqCoJZA2us18TPX",
+      "preset": "Gacrux",
+      "text": "...Thanks."
+    },
+    "Gacrux.ce850ce1": {
+      "asset": "asset_Fjp67sRserXoDbexRrxurJAR",
+      "preset": "Gacrux",
+      "text": "I forget my mother's face. Did you know that? The fire took it."
+    },
+    "Gacrux.d5842560": {
+      "asset": "asset_QiXF4SJCsh2d3StcXN237CCe",
+      "preset": "Gacrux",
+      "text": "Pain. Means I'm alive."
+    },
+    "Gacrux.e437c747": {
+      "asset": "asset_2jYAhPoTMeJ2BcJo1oRF7ko6",
+      "preset": "Gacrux",
+      "text": "Bury them. Then we eat."
+    },
     "Gacrux.eeb96e27": {
       "asset": "asset_Sm3m6jPWfyqMinTN9PBM99C6",
       "preset": "Gacrux",
       "text": "Make it quick."
+    },
+    "Gacrux.f7f845db": {
+      "asset": "asset_kTFdy8FmKTrDTdxnnxuiEKih",
+      "preset": "Gacrux",
+      "text": "Get them out. I'll hold."
     },
     "Kore.07eee67a": {
       "asset": "asset_RRw6nTcaWLicSfg5BLbf6QjK",
@@ -814,6 +974,21 @@
       "asset": "asset_j9D7cJfPordpZYFbJEDMimDL",
       "preset": "Sadaltager",
       "text": "I'll be writing this up."
+    },
+    "Zephyr.11f3a189": {
+      "asset": "asset_A8umT1AjUkmLTDzrMnWxJ4eh",
+      "preset": "Zephyr",
+      "text": "Stew's hot, bread's yesterday's. Don't complain, my love, nobody else is feeding you."
+    },
+    "Zephyr.6c380dd7": {
+      "asset": "asset_1i2S6qpp3aGyCVRaDMmQF3mx",
+      "preset": "Zephyr",
+      "text": "Boots off the benches. I'll not tell you twice. Well, I will, but I'll not like it."
+    },
+    "Zephyr.cd4b734f": {
+      "asset": "asset_d8ZtZwxS4t34Bi432Xhuugjg",
+      "preset": "Zephyr",
+      "text": "Sit. Eat. Then you can tell me how bad it is."
     },
     "Zubenelgenubi.00dde345": {
       "asset": "asset_MpXhcoxgs7qBvFYQp7byYDU3",

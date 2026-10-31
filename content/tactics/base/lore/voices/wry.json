@@ -57,7 +57,7 @@
     "low_hp": [
       {
         "id": "voice_wry_low_hp_1",
-        "text": "I'm fine. This is fine.",
+        "text": "I'm fine. Mostly fine. Ask me again in a minute.",
         "mood": "hurt"
       },
       {
@@ -81,7 +81,7 @@
     "victory": [
       {
         "id": "voice_wry_victory_1",
-        "text": "And nobody even lost a memory. Probably.",
+        "text": "And nobody even lost a boot. A small miracle.",
         "mood": "happy"
       },
       {
