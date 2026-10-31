@@ -3,6 +3,26 @@
   "team": "team_5nToMAwZ2bBo1gqSuy5933dS",
   "project": "proj_DXXKthLZvfZMp4svC2fRJksp",
   "clips": {
+    "voice_earnest_ally_down_1.high": {
+      "asset": "asset_XfKQomVr3RSWf87vAuxuxthh",
+      "preset": "Leda",
+      "file": "voice_earnest_ally_down_1.c9495b51.ogg"
+    },
+    "voice_earnest_ally_down_1.low": {
+      "asset": "asset_EhNxa454RJHTqx3whaRtH3qP",
+      "preset": "Achird",
+      "file": "voice_earnest_ally_down_1.058ee7a1.ogg"
+    },
+    "voice_earnest_ally_down_2.high": {
+      "asset": "asset_MidraygTeud7obkDFqBhd27x",
+      "preset": "Leda",
+      "file": "voice_earnest_ally_down_2.d84973dc.ogg"
+    },
+    "voice_earnest_ally_down_2.low": {
+      "asset": "asset_Ls1roJPi6x4Z42ScJTgdsCgi",
+      "preset": "Achird",
+      "file": "voice_earnest_ally_down_2.1cca0603.ogg"
+    },
     "voice_earnest_battle_start_1.high": {
       "asset": "asset_B5ktLhbJCu6Lt6kyPqcpXK7r",
       "preset": "Leda",
@@ -12,6 +32,66 @@
       "asset": "asset_5ifLw8SXa57LUkCj9tXnwLif",
       "preset": "Achird",
       "file": "voice_earnest_battle_start_1.328a06ac.ogg"
+    },
+    "voice_earnest_battle_start_2.high": {
+      "asset": "asset_2Hmuu8N93BDUGS1okpQHpDgr",
+      "preset": "Leda",
+      "file": "voice_earnest_battle_start_2.3e71faf8.ogg"
+    },
+    "voice_earnest_battle_start_2.low": {
+      "asset": "asset_3mX8DQrTHWT9FczJzvWEUoi1",
+      "preset": "Achird",
+      "file": "voice_earnest_battle_start_2.f72b1a0d.ogg"
+    },
+    "voice_earnest_crit_1.high": {
+      "asset": "asset_mkieQ4rRfNFZYAQ4Fk7oaA8R",
+      "preset": "Leda",
+      "file": "voice_earnest_crit_1.f2d287be.ogg"
+    },
+    "voice_earnest_crit_1.low": {
+      "asset": "asset_HGexko7gFoJkxEFTu3qwiA2B",
+      "preset": "Achird",
+      "file": "voice_earnest_crit_1.c8c10789.ogg"
+    },
+    "voice_earnest_crit_2.high": {
+      "asset": "asset_hT2NS6RRwPqk1GcyXUqzu2oD",
+      "preset": "Leda",
+      "file": "voice_earnest_crit_2.8128dd8a.ogg"
+    },
+    "voice_earnest_crit_2.low": {
+      "asset": "asset_RdQFtb8uZDeBvjgJmjgVGyVm",
+      "preset": "Achird",
+      "file": "voice_earnest_crit_2.e03f122e.ogg"
+    },
+    "voice_earnest_kill_1.high": {
+      "asset": "asset_41rYPbx67QJGPP6KRNSCUmPb",
+      "preset": "Leda",
+      "file": "voice_earnest_kill_1.e4360104.ogg"
+    },
+    "voice_earnest_kill_1.low": {
+      "asset": "asset_LS79SsER3oHzpTHkXt434k91",
+      "preset": "Achird",
+      "file": "voice_earnest_kill_1.47ad4a39.ogg"
+    },
+    "voice_earnest_kill_2.high": {
+      "asset": "asset_D9x1uRWixYRi4LVfYwd1ndAV",
+      "preset": "Leda",
+      "file": "voice_earnest_kill_2.c866fdf5.ogg"
+    },
+    "voice_earnest_kill_2.low": {
+      "asset": "asset_7XgnmfR2J57aUejDP2qVUyPy",
+      "preset": "Achird",
+      "file": "voice_earnest_kill_2.c18b2bc5.ogg"
+    },
+    "voice_earnest_low_hp_1.high": {
+      "asset": "asset_sE1ES7qishpugcfyTVfjNLCb",
+      "preset": "Leda",
+      "file": "voice_earnest_low_hp_1.74f221bb.ogg"
+    },
+    "voice_earnest_low_hp_1.low": {
+      "asset": "asset_hizFoDfgRjZEdk5Z3ucZw8Jf",
+      "preset": "Achird",
+      "file": "voice_earnest_low_hp_1.d872214a.ogg"
     }
   }
 }

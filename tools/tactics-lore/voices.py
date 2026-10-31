@@ -57,7 +57,7 @@ def jobs() -> list[dict]:
 
 def encode(wav: Path, ogg: Path) -> None:
     trim = "silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.05"
-    chain = f"{trim},areverse,{trim},areverse,loudnorm=I=-16:TP=-1.5:LRA=11,aresample=48000"
+    chain = f"{trim},areverse,{trim},areverse,loudnorm=I=-16:TP=-1.5:LRA=11,aresample=24000"
     subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(wav), "-af", chain, "-ac", "1",
                     "-c:a", "libvorbis", "-q:a", "5", "-map_metadata", "-1", "-fflags", "+bitexact",
                     "-flags:a", "+bitexact", str(ogg)], check=True)
