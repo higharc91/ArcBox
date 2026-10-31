@@ -17,6 +17,8 @@ interface Choice { level: number; choose: number | null; from: Option[] }
 interface Me {
   name: string; describe: string; race: string; class: string; subclass: string | null; background: string; level: number; xp: number;
   scores: Record<StatKey, number>; picks: string[]; injuries: string[]; increasesLeft: number;
+  /** Remaking now would use the one free remake after fighting. */
+  freeRemake?: boolean;
   subclasses: { id: string; name: string }[] | null; choices: Choice[];
 }
 interface Options {
@@ -45,7 +47,8 @@ export function TacticsPortal({ campaign, readOnly, send }: PortalProps) {
         ))}
       </ul>
       {making && view.options ? (
-        <Create options={view.options} readOnly={readOnly} send={send} onCancel={view.me ? () => setMaking(false) : undefined} />
+        <Create options={view.options} readOnly={readOnly} send={send} onCancel={view.me ? () => setMaking(false) : undefined}
+          freeRemake={view.me?.freeRemake ?? false} />
       ) : view.me ? (
         <Sheet me={view.me} readOnly={readOnly} send={send} onRemake={view.options ? () => setMaking(true) : undefined} />
       ) : null}
@@ -53,8 +56,8 @@ export function TacticsPortal({ campaign, readOnly, send }: PortalProps) {
   );
 }
 
-function Create({ options, readOnly, send, onCancel }: {
-  options: Options; readOnly: boolean; send: PortalProps["send"]; onCancel?: () => void;
+function Create({ options, readOnly, send, onCancel, freeRemake }: {
+  options: Options; readOnly: boolean; send: PortalProps["send"]; onCancel?: () => void; freeRemake: boolean;
 }) {
   const [race, setRace] = useState(options.races[0]?.id ?? "");
   const [cls, setCls] = useState(options.classes[0]?.id ?? "");
@@ -71,6 +74,11 @@ function Create({ options, readOnly, send, onCancel }: {
   return (
     <section class="tx-panel">
       <h2>Make your character</h2>
+      {freeRemake ? (
+        <p class="portal-banner" role="note">
+          This is your one free remake. Your XP, injuries and bag carry over, and after this the character is yours for good.
+        </p>
+      ) : null}
       <label>Race <select value={race} onChange={(e) => setRace(e.currentTarget.value)} disabled={readOnly}>
         {options.races.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}
       </select></label>

@@ -37,7 +37,7 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
     /// <remarks>
     /// Everyone sees the party. The member also sees their own character (scores, picks and what's waiting: a subclass to
     /// choose, increases to spend), the "choose" features their picks come from, and, while they have no character or it
-    /// hasn't earned XP yet, the options to create one.
+    /// can still be remade (freely before its first battle, then once more), the options to create one.
     /// </remarks>
     public JsonElement PortalView(CampaignInfo info, JsonElement document, ProfileId member)
     {
@@ -65,7 +65,7 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
             ? new { name = m.DisplayName, character = Describe(r.Character), xp = r.Xp, you = m.Profile == member }
             : new { name = m.DisplayName, character = "No character yet", xp = 0, you = m.Profile == member });
         var mine = doc.For(member);
-        object? options = mine is null || !mine.HasFought
+        object? options = mine is null || mine.CanRemake
             ? new
             {
                 races = rules.Races.Values.Select(r => new { id = r.Id, name = r.Name }),
@@ -94,7 +94,7 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
         return new
         {
             name = c.Name, describe = Describe(c), race = c.Race, @class = c.Class, subclass = c.Subclass, background = c.Background,
-            level = c.Level, xp = record.Xp, scores, picks,
+            level = c.Level, xp = record.Xp, scores, picks, freeRemake = record.RemakeIsTheFreeOne,
             injuries = c.Injuries.Select(i => rules.Injuries.GetValueOrDefault(i)?.Name ?? i.Value),
             increasesLeft = CharacterRules.IncreasesLeft(c),
             subclasses = CharacterRules.NeedsSubclass(c) && cls is not null ? cls.Subclasses.Select(s => new { id = s.Id, name = s.Name }) : null,
@@ -116,7 +116,7 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
 
     /// <inheritdoc />
     /// <remarks>
-    /// <c>createCharacter</c> {race, class, background, scores}, while the member has no character or it has no XP yet;
+    /// <c>createCharacter</c> {race, class, background, scores}, while the member has no character or may remake it;
     /// <c>setPicks</c> {picks}; <c>chooseSubclass</c> {subclass}; <c>spendIncrease</c> {stats: one or two}.
     /// </remarks>
     public CommandResult Handle(CampaignInfo info, JsonElement document, ProfileId member, string type, JsonElement data)
@@ -130,8 +130,8 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
             switch (type)
             {
                 case "createCharacter":
-                    if (mine is { HasFought: true })
-                        return new(null, "Your character has fought already; it can't be remade.");
+                    if (mine is { CanRemake: false })
+                        return new(null, "You've used your free remake; this character is yours now.");
                     var name = info.Members.FirstOrDefault(m => m.Profile == member)?.DisplayName ?? "Adventurer";
                     var scores = new Dictionary<Stat, int>();
                     if (data.TryGetProperty("scores", out var s) && s.ValueKind == JsonValueKind.Object)
@@ -163,7 +163,12 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
             }
             if (result.Character is not { } character)
                 return new(null, result.Problem);
-            var record = mine is null ? new MemberRecord(character, 0) : mine with { Character = character };
+            var record = mine is null ? new MemberRecord(character, 0)
+                : type == "createCharacter" && mine.HasFought
+                    // The free remake after fighting: the new character keeps what the old one went through (its XP,
+                    // injuries and bag), so remaking can't heal scars or refill potions.
+                    ? mine with { Character = character with { Injuries = mine.Character.Injuries, Bag = mine.Character.Bag }, Remade = true }
+                    : mine with { Character = character };
             var updated = doc with { Members = doc.Members.SetItem(member.Value, record) };
             return new(updated.ToJson(), null);
         }

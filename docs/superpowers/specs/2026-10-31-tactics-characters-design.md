@@ -14,7 +14,7 @@ The commands below go through `TacticsCampaignRules.Handle`. Each refusal comes 
 
 | Command | Data | Allowed |
 |---|---|---|
-| `createCharacter` | race, class, background, base scores | While you have no character, or yours hasn't earned XP yet **(decided for the user)**. Afterwards a character can't be remade |
+| `createCharacter` | race, class, background, base scores | Freely before your character's first battle. After it, **one free remake** (the user's decision): the new character keeps the old one's XP, injuries and bag. Then it's locked |
 | `setPicks` | the full set of picks | Any time between sessions, within the class's "choose N" features **(decided for the user**: a party game shouldn't punish a bad spell choice; the SRD only lets you swap at level-up) |
 | `chooseSubclass` | a subclass of your class | From level 3, once |
 | `spendIncrease` | one score (+2) or two (+1 each) | With increase points left: 2 at level 4, 2 more at 8. No score goes above 20 |

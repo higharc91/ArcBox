@@ -45,6 +45,7 @@
       "cleric.resistance",
       "cleric.hold_person"
     ],
+    "freeRemake": true,
     "injuries": [],
     "increasesLeft": 2,
     "subclasses": [
@@ -350,5 +351,213 @@
       }
     ]
   },
-  "options": null
+  "options": {
+    "races": [
+      {
+        "id": "aasimar",
+        "name": "Aasimar"
+      },
+      {
+        "id": "dragonborn",
+        "name": "Dragonborn"
+      },
+      {
+        "id": "dwarf",
+        "name": "Dwarf"
+      },
+      {
+        "id": "elf",
+        "name": "Elf"
+      },
+      {
+        "id": "gnome",
+        "name": "Gnome"
+      },
+      {
+        "id": "goliath",
+        "name": "Goliath"
+      },
+      {
+        "id": "half_elf",
+        "name": "Half-Elf"
+      },
+      {
+        "id": "half_orc",
+        "name": "Half-Orc"
+      },
+      {
+        "id": "halfling",
+        "name": "Halfling"
+      },
+      {
+        "id": "human",
+        "name": "Human"
+      },
+      {
+        "id": "tiefling",
+        "name": "Tiefling"
+      }
+    ],
+    "classes": [
+      {
+        "id": "barbarian",
+        "name": "Barbarian",
+        "role": "defender"
+      },
+      {
+        "id": "bard",
+        "name": "Bard",
+        "role": "healer"
+      },
+      {
+        "id": "cleric",
+        "name": "Cleric",
+        "role": "healer"
+      },
+      {
+        "id": "druid",
+        "name": "Druid",
+        "role": "control"
+      },
+      {
+        "id": "fighter",
+        "name": "Fighter",
+        "role": "defender"
+      },
+      {
+        "id": "monk",
+        "name": "Monk",
+        "role": "striker"
+      },
+      {
+        "id": "paladin",
+        "name": "Paladin",
+        "role": "defender"
+      },
+      {
+        "id": "ranger",
+        "name": "Ranger",
+        "role": "striker"
+      },
+      {
+        "id": "rogue",
+        "name": "Rogue",
+        "role": "striker"
+      },
+      {
+        "id": "sorcerer",
+        "name": "Sorcerer",
+        "role": "striker"
+      },
+      {
+        "id": "warlock",
+        "name": "Warlock",
+        "role": "striker"
+      },
+      {
+        "id": "wizard",
+        "name": "Wizard",
+        "role": "control"
+      }
+    ],
+    "backgrounds": [
+      {
+        "id": "acolyte",
+        "name": "Acolyte",
+        "boosts": {
+          "wis": 2,
+          "cha": 1
+        }
+      },
+      {
+        "id": "criminal",
+        "name": "Criminal",
+        "boosts": {
+          "dex": 2,
+          "con": 1
+        }
+      },
+      {
+        "id": "entertainer",
+        "name": "Entertainer",
+        "boosts": {
+          "dex": 1,
+          "cha": 2
+        }
+      },
+      {
+        "id": "folk_hero",
+        "name": "Folk Hero",
+        "boosts": {
+          "str": 2,
+          "wis": 1
+        }
+      },
+      {
+        "id": "guild_artisan",
+        "name": "Guild Artisan",
+        "boosts": {
+          "dex": 1,
+          "int": 2
+        }
+      },
+      {
+        "id": "hermit",
+        "name": "Hermit",
+        "boosts": {
+          "con": 1,
+          "wis": 2
+        }
+      },
+      {
+        "id": "noble",
+        "name": "Noble",
+        "boosts": {
+          "int": 1,
+          "cha": 2
+        }
+      },
+      {
+        "id": "outlander",
+        "name": "Outlander",
+        "boosts": {
+          "str": 1,
+          "con": 2
+        }
+      },
+      {
+        "id": "sage",
+        "name": "Sage",
+        "boosts": {
+          "con": 1,
+          "int": 2
+        }
+      },
+      {
+        "id": "sailor",
+        "name": "Sailor",
+        "boosts": {
+          "str": 2,
+          "dex": 1
+        }
+      },
+      {
+        "id": "soldier",
+        "name": "Soldier",
+        "boosts": {
+          "str": 2,
+          "con": 1
+        }
+      },
+      {
+        "id": "urchin",
+        "name": "Urchin",
+        "boosts": {
+          "dex": 2,
+          "wis": 1
+        }
+      }
+    ],
+    "pointBuy": 27
+  }
 }

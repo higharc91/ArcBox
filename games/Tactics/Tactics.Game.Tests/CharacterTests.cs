@@ -113,13 +113,31 @@ public sealed class CharacterTests
         Assert.Equal("cleric", me.GetProperty("class").GetString());
         Assert.True(me.GetProperty("choices").GetArrayLength() > 0);
 
-        // Before any XP it can be remade; after, it can't.
-        Assert.Null(rules.Handle(Info, made.Document!.Value, Ana, "createCharacter", create).Error);
+        // Before its first battle it can be remade freely, and that doesn't use up the free remake.
+        var again = rules.Handle(Info, made.Document!.Value, Ana, "createCharacter", create);
+        Assert.Null(again.Error);
+        Assert.False(TacticsDocument.Read(again.Document!.Value).Members[Ana.Value].Remade);
+
+        // After fighting: one free remake, which keeps the XP, injuries and bag; then the character is locked.
         var fought = TacticsDocument.Read(made.Document!.Value);
-        fought = fought with { Members = fought.Members.SetItem(Ana.Value, fought.Members[Ana.Value] with { Xp = 250 }) };
-        Assert.Equal("Your character has fought already; it can't be remade.",
-            rules.Handle(Info, fought.ToJson(), Ana, "createCharacter", create).Error);
-        Assert.Equal(JsonValueKind.Null, rules.PortalView(Info, fought.ToJson(), Ana).GetProperty("options").ValueKind);
+        var old = fought.Members[Ana.Value];
+        fought = fought with { Members = fought.Members.SetItem(Ana.Value, old with
+        {
+            Xp = 250, Character = old.Character with { Injuries = [new InjuryId("black_eye")], Bag = [] },
+        }) };
+        Assert.True(rules.PortalView(Info, fought.ToJson(), Ana).GetProperty("me").GetProperty("freeRemake").GetBoolean());
+        var elf = Json(new { race = "elf", @class = "wizard", background = Background,
+            scores = new { str = 8, dex = 15, con = 15, @int = 15, wis = 8, cha = 8 } });
+        var remade = rules.Handle(Info, fought.ToJson(), Ana, "createCharacter", elf);
+        Assert.Null(remade.Error);
+        var after = TacticsDocument.Read(remade.Document!.Value).Members[Ana.Value];
+        Assert.Equal(("elf", "wizard", 250, true), (after.Character.Race, after.Character.Class, after.Xp, after.Remade));
+        Assert.Equal([new InjuryId("black_eye")], after.Character.Injuries);
+        Assert.Empty(after.Character.Bag);
+
+        Assert.Equal("You've used your free remake; this character is yours now.",
+            rules.Handle(Info, remade.Document!.Value, Ana, "createCharacter", create).Error);
+        Assert.Equal(JsonValueKind.Null, rules.PortalView(Info, remade.Document!.Value, Ana).GetProperty("options").ValueKind);
     }
 
     [Fact]
@@ -179,10 +197,10 @@ public sealed class CharacterTests
         Assert.Equal("Pick abilities to raise.", rules.Handle(Info, four.ToJson(), Ana, "spendIncrease", Json(new { stats = new[] { "str,dex" } })).Error);
         Assert.Equal("Choose at least one.", rules.Handle(Info, made, Ana, "setPicks", Json(new { picks = Array.Empty<string>() })).Error);
 
-        // A battle lost for 0 XP: the character has still fought, so it keeps its injuries and can't be remade.
+        // A battle lost for 0 XP still counts as fought: once its free remake is used, the character is locked.
         var lost = TacticsDocument.Read(made);
-        lost = lost with { Members = lost.Members.SetItem(Ana.Value, lost.Members[Ana.Value] with { Fought = true }) };
-        Assert.Equal("Your character has fought already; it can't be remade.",
+        lost = lost with { Members = lost.Members.SetItem(Ana.Value, lost.Members[Ana.Value] with { Fought = true, Remade = true }) };
+        Assert.Equal("You've used your free remake; this character is yours now.",
             rules.Handle(Info, lost.ToJson(), Ana, "createCharacter", Json(new { race = "dwarf", @class = "cleric", background = Background,
                 scores = new { str = 8, dex = 8, con = 15, @int = 8, wis = 15, cha = 15 } })).Error);
     }

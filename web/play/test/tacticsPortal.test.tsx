@@ -63,6 +63,15 @@ describe("tactics portal", () => {
     expect(send).toHaveBeenLastCalledWith("setPicks", { picks: me.picks.filter((p) => p !== first) });
   });
 
+  it("warns that a remake after fighting is the one free one", () => {
+    const view = structuredClone(cleric) as unknown as TacticsPortalView;
+    view.me!.freeRemake = true;
+    view.options = (fresh as unknown as TacticsPortalView).options;
+    show(view);
+    fireEvent.click(screen.getByRole("button", { name: "Remake character" }));
+    expect(screen.getByText(/This is your one free remake/)).toBeTruthy();
+  });
+
   it("is read-only while a session has the campaign", () => {
     show(cleric, true);
     expect((screen.getByRole("button", { name: "Life Domain" }) as HTMLButtonElement).disabled).toBe(true);

@@ -7,15 +7,27 @@ using Tactics.Logic;
 namespace Tactics.Game;
 
 /// <summary>
-/// A campaign member's character, the XP it has earned and whether it has been in a battle (adapter spec §6). A character
-/// that has fought can't be remade (<see cref="HasFought"/>; a lost battle can be worth 0 XP).
+/// A campaign member's character, the XP it has earned, whether it has been in a battle (<see cref="HasFought"/>; a lost
+/// battle can be worth 0 XP) and whether its one free remake after fighting is used (<see cref="Remade"/>).
 /// </summary>
 public sealed record MemberRecord(CharacterRecord Character, int Xp,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Fought = false)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Fought = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Remade = false)
 {
     /// <summary>True once the character has been in a battle (or earned XP, for documents from before the flag).</summary>
     [JsonIgnore]
     public bool HasFought => Fought || Xp > 0;
+
+    /// <summary>
+    /// True while the character may be remade: freely before its first battle, then once more (the user's decision after
+    /// the phone playtest: a default character from Muster deserves a second go).
+    /// </summary>
+    [JsonIgnore]
+    public bool CanRemake => !HasFought || !Remade;
+
+    /// <summary>True when remaking now would spend the one free remake.</summary>
+    [JsonIgnore]
+    public bool RemakeIsTheFreeOne => HasFought && !Remade;
 }
 
 /// <summary>
