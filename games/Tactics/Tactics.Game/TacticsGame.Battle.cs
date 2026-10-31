@@ -57,7 +57,7 @@ public sealed partial class TacticsGame
     {
         ImmutableArray<PartyMember> party = [.. members.Select((p, i) =>
             new PartyMember(UnitFor(i), _doc.For(p)!.Character, ControllerFor(p)))];
-        return Battle.Start(Encounters.Setup(encounter, party, Difficulty.Normal, rules), rules, seed);
+        return Battle.Start(Encounters.Setup(encounter, party, Difficulty.Normal, Rules), Rules, seed);
     }
 
     /// <summary>Starts a saved battle over from its encounter and seed (the rules pack changed under it, spec §7).</summary>
@@ -131,7 +131,7 @@ public sealed partial class TacticsGame
                     }
                     return;
                 }
-                ApplyAi(new React(offer.Reactor, Ai.React(state, offer, rules)), aiFinished: false);
+                ApplyAi(new React(offer.Reactor, Ai.React(state, offer, Rules)), aiFinished: false);
                 continue;
             }
 
@@ -160,7 +160,7 @@ public sealed partial class TacticsGame
                 : state.Units[active].Controller is AiControlled { Profile: Companion }
                     ? new AiOptions(AllowItems: true)     // an absent member: the companion's one-potion rule applies
                     : new AiOptions();
-            var commands = Ai.Plan(state, active, rules, options).Commands;
+            var commands = Ai.Plan(state, active, Rules, options).Commands;
             plan = (active, new Queue<Command>(commands.IsDefaultOrEmpty ? [new EndTurn(active)] : commands));
             _plan = plan;
         }
@@ -170,7 +170,7 @@ public sealed partial class TacticsGame
     private void ApplyAi(Command command, bool aiFinished)
     {
         var before = State;
-        var resolution = Battle.Apply(before, command, rules, aiFinished);
+        var resolution = Battle.Apply(before, command, Rules, aiFinished);
         if (resolution.Rejected is not null)
         {
             // The plan went stale (a reaction moved things): end the turn rather than loop. A refused EndTurn can't happen
@@ -220,7 +220,7 @@ public sealed partial class TacticsGame
             }
         }
 
-        var resolution = Battle.Apply(state, command, rules);
+        var resolution = Battle.Apply(state, command, Rules);
         if (resolution.Rejected is { } rejected)
         {
             Toast(player.Id, rejected.Reason);
@@ -290,7 +290,7 @@ public sealed partial class TacticsGame
         if (State.Pending is ReactionOffer offer && IsPlayed(offer.Reactor))
         {
             // No answer: the same rule the AI uses (rules-engine spec §5.5).
-            var resolution = Battle.Apply(State, new React(offer.Reactor, Ai.React(State, offer, rules)), rules);
+            var resolution = Battle.Apply(State, new React(offer.Reactor, Ai.React(State, offer, Rules)), Rules);
             if (resolution.Rejected is null)
             {
                 SetState(resolution.State);

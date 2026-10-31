@@ -10,8 +10,13 @@ namespace Tactics.Game;
 /// The tactics campaign's rules outside a session (adapter spec §6): new documents, seat cards and a read-only portal view
 /// of the party. Sub-project 4 adds the portal's commands (character creation and level-up).
 /// </summary>
-public sealed class TacticsCampaignRules(RulesPack rules) : ICampaignRules
+public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
 {
+    /// <summary>Rules on a loaded pack.</summary>
+    public TacticsCampaignRules(RulesPack rules) : this(new Lazy<RulesPack>(rules))
+    {
+    }
+
     /// <inheritdoc />
     public string GameId => TacticsGame.Id;
 
@@ -44,5 +49,5 @@ public sealed class TacticsCampaignRules(RulesPack rules) : ICampaignRules
 
     /// <summary>"Human Fighter", from the pack's race and class names.</summary>
     public string Describe(CharacterRecord character)
-        => $"{rules.Races.GetValueOrDefault(character.Race)?.Name ?? character.Race} {rules.Classes.GetValueOrDefault(character.Class)?.Name ?? character.Class}";
+        => $"{pack.Value.Races.GetValueOrDefault(character.Race)?.Name ?? character.Race} {pack.Value.Classes.GetValueOrDefault(character.Class)?.Name ?? character.Class}";
 }

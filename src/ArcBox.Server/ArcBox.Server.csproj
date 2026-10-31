@@ -13,6 +13,7 @@
     <ProjectReference Include="..\ArcBox.Sdk\ArcBox.Sdk.csproj" />
     <ProjectReference Include="..\..\games\Counter\Counter.Logic\Counter.Logic.csproj" />
     <ProjectReference Include="..\..\games\Redline\Redline.Logic\Redline.Logic.csproj" />
+    <ProjectReference Include="..\..\games\Tactics\Tactics.Game\Tactics.Game.csproj" />
   </ItemGroup>
 
   <ItemGroup>

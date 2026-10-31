@@ -15,9 +15,20 @@ public enum TacticsPhase { Muster, EncounterPick, Battle, Results, Resuming }
 /// and never reads the clock: time is <see cref="IGameContext"/>'s, and the campaign document is saved through the lease
 /// after every command.
 /// </summary>
-public sealed partial class TacticsGame(RulesPack rules, TacticsTiming? timing = null)
+public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? timing = null)
     : IGame, ICampaignGame, IResumableGame, IHostAware
 {
+    /// <summary>A game on a loaded pack (tests, tools).</summary>
+    public TacticsGame(RulesPack rules, TacticsTiming? timing = null) : this(new Lazy<RulesPack>(rules), timing)
+    {
+    }
+
+    /// <summary>
+    /// The rules, loaded on first use: the server's registry makes a game just to read its manifest, which mustn't need
+    /// the content.
+    /// </summary>
+    private RulesPack Rules => pack.Value;
+
     /// <summary>The game id in the manifest and on the phone (<c>web/play/src/games/tactics</c>).</summary>
     public const string Id = "tactics";
 
@@ -75,11 +86,11 @@ public sealed partial class TacticsGame(RulesPack rules, TacticsTiming? timing =
         (_ctx, _players, _lease) = (ctx, players, campaign);
         foreach (var p in players)
             _online.Add(p.Id);
-        _doc = TacticsDocument.Read(campaign.Document) with { RulesHash = rules.Hash };
+        _doc = TacticsDocument.Read(campaign.Document) with { RulesHash = Rules.Hash };
         Save();
         if (_doc.Battle is { } unfinished)   // the last session stopped mid-battle: carry on with whoever is here
         {
-            if (unfinished.State.ContentHash != rules.Hash)
+            if (unfinished.State.ContentHash != Rules.Hash)
             {
                 _notice = "The rules changed since this battle began, so it starts again.";
                 RestartBattle(unfinished);
@@ -101,7 +112,7 @@ public sealed partial class TacticsGame(RulesPack rules, TacticsTiming? timing =
             return;
         }
 
-        if (save.State.ContentHash != rules.Hash)
+        if (save.State.ContentHash != Rules.Hash)
         {
             _notice = "The rules changed since this battle began, so it starts again.";
             RestartBattle(save);
@@ -239,7 +250,7 @@ public sealed partial class TacticsGame(RulesPack rules, TacticsTiming? timing =
         if (_doc.For(profile) is not null)
             return;
         var cls = data is { ValueKind: JsonValueKind.Object } d && d.TryGetProperty("class", out var c) ? c.GetString() : null;
-        if (cls is null || !rules.Classes.ContainsKey(cls))
+        if (cls is null || !Rules.Classes.ContainsKey(cls))
         {
             Toast(player.Id, "Pick one of the classes.");
             return;
@@ -250,7 +261,7 @@ public sealed partial class TacticsGame(RulesPack rules, TacticsTiming? timing =
     }
 
     private CharacterRecord NewCharacter(string name, string cls, int level)
-        => SheetBuilder.DefaultCharacter(name, "human", cls, null, level, rules);
+        => SheetBuilder.DefaultCharacter(name, "human", cls, null, level, Rules);
 
     private void SetMember(ProfileId profile, MemberRecord record)
         => _doc = _doc with { Members = _doc.Members.SetItem(profile.Value, record) };
@@ -264,10 +275,10 @@ public sealed partial class TacticsGame(RulesPack rules, TacticsTiming? timing =
         string[] roles = ["healer", "defender", "striker", "control"];
         foreach (var player in _players.Where(p => _doc.For(p.Profile!.Value) is null))
         {
-            var have = _doc.Members.Values.Select(m => rules.Classes.GetValueOrDefault(m.Character.Class)?.Role).ToArray();
+            var have = _doc.Members.Values.Select(m => Rules.Classes.GetValueOrDefault(m.Character.Class)?.Role).ToArray();
             var role = roles.FirstOrDefault(r => !have.Contains(r)) ?? roles[have.Length % roles.Length];
-            var cls = rules.Classes.Values.Where(c => c.Role == role).Select(c => c.Id).Order(StringComparer.Ordinal)
-                .FirstOrDefault() ?? rules.Classes.Keys.First();
+            var cls = Rules.Classes.Values.Where(c => c.Role == role).Select(c => c.Id).Order(StringComparer.Ordinal)
+                .FirstOrDefault() ?? Rules.Classes.Keys.First();
             SetMember(player.Profile!.Value, new MemberRecord(NewCharacter(player.Name, cls, _doc.PartyLevel), Xp: 0));
         }
     }
@@ -275,7 +286,7 @@ public sealed partial class TacticsGame(RulesPack rules, TacticsTiming? timing =
     private void PickEncounter(Player vip, JsonElement? data)
     {
         var id = data is { ValueKind: JsonValueKind.Object } d && d.TryGetProperty("encounter", out var e) ? e.GetString() : null;
-        if (id is null || !rules.Encounters.TryGetValue(id, out var encounter))
+        if (id is null || !Rules.Encounters.TryGetValue(id, out var encounter))
         {
             Toast(vip.Id, "Pick one of the battles.");
             return;
@@ -295,7 +306,7 @@ public sealed partial class TacticsGame(RulesPack rules, TacticsTiming? timing =
     {
         var save = _doc.Battle!;
         var state = save.State;
-        var result = Battle.Result(state, rules)!;
+        var result = Battle.Result(state, Rules)!;
         var members = _doc.Members;
         for (var i = 0; i < save.Members.Length; i++)
         {
@@ -310,10 +321,10 @@ public sealed partial class TacticsGame(RulesPack rules, TacticsTiming? timing =
             });
         }
 
-        var level = TacticsDocument.LevelFor(members.Values.Select(m => m.Xp), rules.Xp);
+        var level = TacticsDocument.LevelFor(members.Values.Select(m => m.Xp), Rules.Xp);
         if (level > _doc.PartyLevel)
             members = Ordinal.Map(members.Select(m => (m.Key, m.Value with { Character = LevelUp(m.Value.Character, level) })));
-        var name = rules.Encounters.GetValueOrDefault(save.Encounter)?.Name ?? save.Encounter;
+        var name = Rules.Encounters.GetValueOrDefault(save.Encounter)?.Name ?? save.Encounter;
         _doc = _doc with
         {
             Members = members, PartyLevel = Math.Max(level, _doc.PartyLevel), Battle = null,
@@ -326,7 +337,7 @@ public sealed partial class TacticsGame(RulesPack rules, TacticsTiming? timing =
 
     /// <summary>The character rebuilt at <paramref name="level"/> with its default picks, keeping its injuries and bag.</summary>
     private CharacterRecord LevelUp(CharacterRecord c, int level)
-        => SheetBuilder.DefaultCharacter(c.Name, c.Race, c.Class, c.Subclass, level, rules) with { Injuries = c.Injuries, Bag = c.Bag };
+        => SheetBuilder.DefaultCharacter(c.Name, c.Race, c.Class, c.Subclass, level, Rules) with { Injuries = c.Injuries, Bag = c.Bag };
 
     // ---- Helpers ------------------------------------------------------------------------------------------------------
 

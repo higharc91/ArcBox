@@ -46,7 +46,7 @@ public sealed partial class TacticsGame
         {
             TacticsPhase.Muster when _doc.For(profile) is null => Custom(Screens.PickClass, new
             {
-                classes = rules.Classes.Values.Select(c => new ClassOption(c.Id, c.Name, c.Role)),
+                classes = Rules.Classes.Values.Select(c => new ClassOption(c.Id, c.Name, c.Role)),
             }),
             TacticsPhase.Muster => new WaitView("Waiting for everyone to choose a class"),
             TacticsPhase.EncounterPick when player.IsVip => Custom(Screens.PickEncounter, new { encounters = EncounterOptions() }),
@@ -81,12 +81,12 @@ public sealed partial class TacticsGame
                 options = offer.Options.Select(o => new
                 {
                     id = o.Id,
-                    label = o.Ability is { } a ? rules.Abilities.GetValueOrDefault(a)?.Name ?? a.Value : "Don't react",
+                    label = o.Ability is { } a ? Rules.Abilities.GetValueOrDefault(a)?.Name ?? a.Value : "Don't react",
                     target = o.Target,
                 }),
             }) with { DeadlineUtc = _ctx.TimerDeadline(Timers.React) };
         if (state.Active == unit && state.Pending is null && IsPlayed(unit) && _aiFinishing != unit)
-            return Custom(Screens.Turn, new { me = UnitViewOf(me), choices = Choices.For(state, unit, rules) })
+            return Custom(Screens.Turn, new { me = UnitViewOf(me), choices = Choices.For(state, unit, Rules) })
                 with { DeadlineUtc = _ctx.TimerDeadline(Timers.Turn) };
         return Custom(Screens.Status, new
         {
@@ -111,7 +111,7 @@ public sealed partial class TacticsGame
         => _players.Where(p => p.Profile is { } pr && _awaited.Contains(pr)).Select(p => p.Name);
 
     private ImmutableArray<EncounterOption> EncounterOptions()
-        => [.. rules.Encounters.Values.OrderBy(e => e.Level ?? 0).ThenBy(e => e.Id, StringComparer.Ordinal)
+        => [.. Rules.Encounters.Values.OrderBy(e => e.Level ?? 0).ThenBy(e => e.Id, StringComparer.Ordinal)
             .Select(e => new EncounterOption(e.Id, e.Name, e.Level, e.Party.Min, e.Party.Max,
                 _players.Count >= e.Party.Min && _players.Count <= e.Party.Max))];
 
@@ -123,7 +123,7 @@ public sealed partial class TacticsGame
         {
             var unit = UnitFor(i);
             return new ResultLine(p.Name, _result.Xp.GetValueOrDefault(unit),
-                [.. _result.Injuries.GetValueOrDefault(unit, []).Select(inj => rules.Injuries.GetValueOrDefault(inj)?.Name ?? inj.Value)]);
+                [.. _result.Injuries.GetValueOrDefault(unit, []).Select(inj => Rules.Injuries.GetValueOrDefault(inj)?.Name ?? inj.Value)]);
         })];
     }
 
