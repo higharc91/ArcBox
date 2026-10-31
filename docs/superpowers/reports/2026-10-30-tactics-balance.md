@@ -4,7 +4,7 @@ Task 23 of the [rules engine plan](../plans/2026-10-30-tactics-rules-engine.md).
 
 ## Summary
 
-**Three of the four balance targets are met. The role-band target is not: 52 of 60 values are in band and 8 are not.** That leaves success criterion 2 only partly met. The other five criteria are met.
+**Two of the four balance targets are met, and two are partly met.** The role-band target has 52 of 60 values in band and 8 out. The usage target has 29 of its 55 rare abilities documented as situational, while the other 26 are rarely used because of AI planner limits or a better option in the same loadout. Success criterion 2 is only partly met, and criterion 4 is met for the stress setup and both 10-enemy sample encounters (see below). The other criteria are met.
 
 Final sweep: all 5 encounters at levels 1, 3, 5, 7 and 10, party sizes 4, 5 and 6, 6 parties per size, 20 seeds, Normal. That is 9,000 battles.
 
@@ -13,7 +13,7 @@ Final sweep: all 5 encounters at levels 1, 3, 5, 7 and 10, party sizes 4, 5 and 
 | Target | Result | Evidence |
 |---|---|---|
 | Every class within ±15% of its role band at every level | **Unmet:** 52 of 60 in band | The 8 misses are under [Unmet role bands](#unmet-role-bands). The baseline had 44 of 60 out of band |
-| No ability under 2% use, or documented as situational | **Met by documentation:** 55 are under 2%, each with its reason | See [Rarely used abilities](#rarely-used-abilities). 10 of them are AI planner limits rather than situational use, and are marked as such |
+| No ability under 2% use, or documented as situational | **Partly met:** 55 are under 2%; 29 are situational, 26 are not | See [Rarely used abilities](#rarely-used-abilities). 19 need conditions the sample encounters rarely provide and 10 need the user to close to melee range: those 29 meet the target. 10 are AI planner limits and 16 are outranked by a better option in the same default loadout: real players would use them, so those 26 don't meet it |
 | Every sample encounter won 60–95% on Normal at its level | **Met:** 5 of 5 | Table below |
 | Median battle length 8–12 rounds | **Met:** every encounter at its level, and 9.0 overall | Table below. Crystal Cave's *mean* is 12.3, so the simulator's mean-based flag still marks it LONG; its median is 12.0 |
 
@@ -162,6 +162,65 @@ Rounds 1–10 are the tuning rounds, plus one more round of small fixes (round 1
 
 Six seeds are noisy: the same content went from 11 to 15 values out of band at 20 seeds. Round 11's 5 of 60 was the best result; the test-pinned values restored after it cost 3 of those.
 
+## Fix round 1: review findings
+
+The Task 23 review ([findings](../plans/2026-10-30-tactics-rules-engine.task-23-review.md)) found five Important problems. This section records what fix round 1 changed and why.
+
+### Sorcerer picks are affordable when they arrive (finding 4)
+
+Tuning cut Sorcery to 1 at levels 1–2 and raised Quickened to 4, without moving the picks that need it. Font of Magic and Twinned (2 each) couldn't be paid at level 2, and Quickened couldn't be paid until level 7, though it was a default pick from level 2.
+
+| Change | Reason |
+|---|---|
+| Sorcery 2 at level 2 (was 1 until level 3) | Font of Magic and Twinned arrive at level 2 and cost 2. Level 2 isn't sampled, so no measured number moves |
+| The second metamagic choice moves from level 5 to level 7; Quickened leaves the level-2 list | Quickened's cost of 4 is a balance lever from the sweep. The pool first reaches 4 at level 7, so that is where it can be chosen |
+| Default picks: Careful at level 2 (was Quickened), Quickened at level 7 | Quickened was unaffordable before level 7 anyway. So every sampled level keeps the same usable loadout, and the AI uses neither Twinned nor Careful (see [Rarely used abilities](#rarely-used-abilities)) |
+
+### The area-spell ladder (finding 5)
+
+Tuning cut only the spells in `defaultPicks`. Lightning Bolt kept 8d6 at the same tier and cost as a 3d6 Fireball, and Shatter (tier 2) out-damaged Fireball per target over a smaller footprint. The sorcerer's tier 5 Cone of Cold (2d8) fell below tier 1 Burning Hands. The wizard's Wall of Fire kept 5d8 and outranked its own Cone of Cold.
+
+| Change | Reason |
+|---|---|
+| Lightning Bolt 8d6 → 3d6 (wizard, sorcerer) | Fireball's sibling: same tier and cost, and a similar footprint (10 tiles against 13). The SRD gives both 8d6 |
+| Shatter 3d8 → 2d8 (wizard, sorcerer) | A tier 2 burst of 5 tiles can't outdamage a tier 3 burst of 13 per target. 2d8 matches the bard's Shatter |
+| Sorcerer Cone of Cold 2d8 → 3d8 | Above every lower tier; it now matches the wizard's |
+| Wizard Wall of Fire 5d8 → 2d8 (both the cast and the burn) | Matches the sorcerer's, and no longer outranks Cone of Cold |
+
+Burning Hands (tier 1, 3d6 over a 9-tile cone) still equals Fireball per target. That's deliberate: Fireball covers 13 tiles at range 6, while Burning Hands is a cone from the caster, so Fireball is strictly the bigger spell. Lifting Fireball's dice would undo the Striker band fix (see [Concerns for review](#concerns-for-review)).
+
+Only the sorcerer's Cone of Cold is in a default loadout (from level 9), so it's the only change the simulator sees. SWEEP_RESULT
+
+**New conventions, enforced by tests.** `ContentLadderTests` checks both rules at every level 1–10, not only at the sampled levels and default picks:
+- every ability a class or subclass grants, offers or default-picks can be paid for at the level it arrives, and pools never shrink;
+- within a class's Mana spells, a higher-tier area spell with at least as large a footprint never deals less per target, and two area spells of one tier with similar footprints differ by at most 1.5×.
+
+Against the content before this round, the tests failed on exactly the problems above. `games/Tactics/README.md` lists them as conventions.
+
+### Dice that step down at levels 3 and 7 (finding 3)
+
+Three per-hit values fall as the level rises:
+
+| Ability | Levels 1–2 | Level 3 on | Later |
+|---|---|---|---|
+| Monk martial arts die | 2d8 (9) | d10 (5.5) | 3 attacks from level 5 |
+| Eldritch Blast | 2d8 (9), 1 beam | d10 (5.5), 1 beam | d12 with 2 beams at 5, 3 beams at 7 |
+| Bard Healing Word / Cure Wounds | 3d4 / 3d8 to level 6 | | 2d4 / 2d8 from level 7 |
+
+**They're a level-1 floor, not a mistake, but they were fitted to the sampled levels.** At level 1 these classes have almost nothing but this one ability: the monk has 2 ki, and the warlock 2 pact. The bigger die keeps them in band while melee walks in and pools are empty. From level 3 the die steps down as the pools grow: ki 3, then 1 per level; bard Mana 7 at level 3 and 10 at level 7.
+
+**The class's output per round still rises at every sampled level:**
+- monk damage: 3.5, 4.7, 5.7, 6.6, 8.5;
+- warlock damage: 3.8, 5.1, 5.4, 5.6, 8.0;
+- bard healing: 1.6 at level 5, 1.7 at 7, 2.1 at 10.
+
+So no class gets weaker by levelling. The cost is felt per hit: a player sees a smaller number on the same button. Smoothing the dice would move level 1 or level 3 out of its role band unless another lever, such as attacks, beams or pools, moves with it. That's a design call, listed under the decisions for the user in the [tracker](../plans/2026-10-30-tactics-rules-engine.progress.md).
+
+### The usage target and the timing criterion (findings 1 and 2)
+
+- **Usage target:** the summary now says *partly met*. 29 of the 55 rare abilities are situational. The 10 planner limits and the 16 outranked abilities aren't, so they count against the target.
+- **Timing:** `AiPerformanceTests` now also times crypt_hall at level 5 and crystal_cave at level 7, as shipped, with 6 heroes against their 10 enemies. TIMING_RESULT
+
 ## Rarely used abilities
 
 55 abilities are used in under 2% of the turns where they're legal. "Legal" means `Battle.Check` allows the ability, whether or not it would do anything useful, so these rates understate how often an ability is actually wanted. Parties here have no subclass and use each class's `defaultPicks`.
@@ -205,7 +264,7 @@ The first table comes from reading the planner. The reasons in the others come f
 | `wizard.burning_hands` | 0.7% | A short cone from the caster |
 | `sorcerer.shocking_grasp`, `wizard.shocking_grasp`, `wizard.chill_touch` | 0.7%, 0.2%, 0.6% | Touch cantrips |
 
-**Outranked by something better in the same loadout.**
+**Outranked by something better in the same loadout. Not situational either:** the AI picks the stronger option every time, and a player with a different loadout would use these. They count against the target.
 
 | Ability | Use | Reason |
 |---|---:|---|
@@ -223,7 +282,7 @@ The first table comes from reading the planner. The reasons in the others come f
 - **Fireball is now 3d6.** The Striker band compares classes by total damage per round, so spells that hit 3–4 foes had to fall far below the SRD to let single-target strikers fit. That meets the target as written, but players will notice. Measuring the band differently might be a better design than these dice.
 - **The rogue has 5 attacks at level 9.** It was the only numbers-only way to lift a class whose bonus needs advantage. A player who sets up every Sneak Attack will far outperform the AI at these numbers.
 - **The class numbers assume this AI's play.** Much of the baseline's gap was AI behaviour, so real players will shift the bands.
-- **Subclasses are unmeasured.** The simulator plays no subclass, so the 36 subclasses weren't tuned. Some of their abilities share the base dice and some don't. Separately, the same-named spell now differs by class: Cone of Cold is 2d8 for the sorcerer and 3d8 for the wizard.
+- **Subclasses are unmeasured.** The simulator plays no subclass, so the 36 subclasses weren't tuned. Some of their abilities share the base dice and some don't. Fix round 1 made the wizard's and sorcerer's Cone of Cold, Wall of Fire, Lightning Bolt and Shatter match.
 - **Off-level matchups run to extremes, unflagged.** crypt_hall at level 1 is won 0.8% of the time, and every encounter is won 99%+ at level 10.
 - **Some tables no longer follow the content conventions.** Bard, cleric, druid and sorcerer pools and the ranger's Focus no longer match the conventions' formulas, and warlock `pact` costs now vary. Mana cost = tier still holds for every Mana spell. `games/Tactics/README.md` notes this.
 - **The warlord's phase isn't guaranteed.** Only 13 of 60 seeds reach it with the golden party. In most of the rest, the party survives to round 12 with the boss above 50%.
