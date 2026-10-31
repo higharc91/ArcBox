@@ -23,6 +23,12 @@ public sealed class BeatScriptTests
     private static readonly BattleView Near = View(Unit(Hero, "Party", 3, 3), Unit(Foe, "Enemy", 4, 3));
     private static readonly BattleView Far = View(Unit(Hero, "Party", 3, 3), Unit(Foe, "Enemy", 9, 3));
 
+    private static readonly ImmutableArray<UnitId> Targets = [.. Enumerable.Range(1, 5).Select(i => new UnitId($"goblin.{i}"))];
+    private static readonly BattleView Crowd = View([Unit(Hero, "Party", 0, 3), .. Targets.Select((t, i) => Unit(t, "Enemy", 11 + i % 2, 2 + i))]);
+    private static readonly AbilityUsed Fireball = new(Hero, Attack, new Target(Tile: new Tile(11, 3)), new PresentationDef("characters.cast", "fx.explosion.fire", "projectiles.fireball"));
+
+    private static double LastHit(BeatScript script) => script.Cues.OfType<ApplyCue>().Where(a => a.Event is Damaged).Max(a => a.At);
+
     private static BeatScript Script(BattleView view, params BattleEvent[] events) => BeatScript.Of(new Beat(1, null, [.. events]), view, view, Fx.Value);
 
     private static AbilityUsed Used(string? anim, string? fx, string? projectile, UnitId target)
@@ -147,17 +153,110 @@ public sealed class BeatScriptTests
     [Fact]
     public void An_area_spell_lands_on_all_its_targets_within_a_second()
     {
-        var ability = new AbilityUsed(Hero, Attack, new Target(Tile: new Tile(9, 3)), new PresentationDef("characters.cast", "fx.explosion.fire", "projectiles.fireball"));
-        BattleEvent[] events =
-        [
-            ability, .. Enumerable.Range(1, 5).SelectMany(i => new BattleEvent[]
-            {
-                new Rolled(Foe, RollKind.Save, Roll(4, false)), new Damaged(Foe, 3, "fire", 10 - i),
-            }),
-        ];
+        var script = Script(Crowd, [Fireball, .. Targets.SelectMany(t => new BattleEvent[]
+        {
+            new Rolled(t, RollKind.Save, Roll(4, false)), new Damaged(t, 3, "fire", 7),
+        })]);
 
-        Assert.InRange(Script(Far, events).Length, 0.3, 2.2);
+        Assert.InRange(LastHit(script), 0.3, 1.0);
     }
+
+    [Theory]
+    [InlineData(2, 0.78, 1.02)]    // the longest flight's 0.52 to arrive, the first save's 0.2, and 0.06 for each target after
+    [InlineData(3, 0.84, 1.08)]
+    [InlineData(5, 0.96, 1.20)]    // with the impact's 0.24 held once, after the last hit
+    public void An_areas_timing_at_the_longest_range(int targets, double lastHit, double length)
+    {
+        var script = Script(Crowd, [Fireball, .. Targets.Take(targets).SelectMany(t => new BattleEvent[]
+        {
+            new Rolled(t, RollKind.Save, Roll(4, false)), new Damaged(t, 3, "fire", 7),
+        })]);
+
+        Assert.Equal((lastHit, length), (Math.Round(LastHit(script), 3), Math.Round(script.Length, 3)));
+    }
+
+    [Fact]
+    public void An_area_spell_that_also_lays_conditions_and_kills_lands_within_a_second_too()
+    {
+        var script = Script(Crowd, [Fireball, .. Targets.SelectMany(t => new BattleEvent[]
+        {
+            new Rolled(t, RollKind.Save, Roll(4, false)), new Damaged(t, 10, "fire", 0), new ConditionApplied(t, new ConditionId("burning")), new Died(t),
+        })]);
+
+        Assert.InRange(LastHit(script), 0.3, 1.0);
+    }
+
+    [Fact]
+    public void An_area_spell_with_no_saves_lands_within_a_second()
+    {
+        var script = Script(Crowd, [Fireball, .. Targets.Select(t => new Damaged(t, 3, "fire", 7))]);
+
+        Assert.InRange(LastHit(script), 0.3, 1.0);
+    }
+
+    [Fact]
+    public void A_sweep_that_rolls_to_hit_each_target_is_one_swing()
+    {
+        var sweep = new AbilityUsed(Hero, Attack, new Target(Tile: new Tile(5, 3)), new PresentationDef("characters.spin", "fx.slash.steel", null));
+        var script = Script(Crowd, [sweep, .. Targets.SelectMany(t => new BattleEvent[]
+        {
+            new Rolled(Hero, RollKind.Attack, Roll(14, true)), new AttackResolved(Hero, t, true, false), new Damaged(t, 3, "slashing", 7),
+        })]);
+
+        Assert.True(script.Cues.OfType<LungeCue>().Count() + script.Cues.OfType<PoseCue>().Count(p => p.Unit == Hero) <= 1);
+        Assert.InRange(LastHit(script), 0.2, 1.0);
+    }
+
+    [Fact]
+    public void An_area_still_shows_every_targets_roll_and_number()
+    {
+        var script = Script(Crowd, [Fireball, .. Targets.SelectMany(t => new BattleEvent[]
+        {
+            new Rolled(t, RollKind.Save, Roll(4, false)), new Damaged(t, 3, "fire", 7),
+        })]);
+
+        Assert.Equal(Targets, script.Cues.OfType<BadgeCue>().Select(b => b.Unit));
+        Assert.Equal(Targets, script.Cues.OfType<PopCue>().Select(p => p.Unit));
+    }
+
+    [Fact]
+    public void A_target_killed_in_an_area_stays_until_its_fall_has_played()
+    {
+        var script = Script(Crowd, [Fireball, .. Targets.SelectMany(t => new BattleEvent[] { new Damaged(t, 10, "fire", 0), new Died(t) })]);
+
+        foreach (var target in Targets)
+        {
+            var pose = script.Cues.OfType<PoseCue>().Single(p => p.Unit == target && p.Anim == "down");
+            var gone = script.Cues.OfType<ApplyCue>().Single(a => a.Event is Died d && d.Unit == target);
+            Assert.True(gone.At >= pose.At + pose.Length - 0.001);
+            Assert.True(gone.At <= script.Length);
+        }
+    }
+
+    [Fact]
+    public void The_stage_is_still_held_for_a_moment_after_an_areas_last_hit()
+        => Assert.True(Script(Crowd, [Fireball, .. Targets.Select(t => new Damaged(t, 3, "fire", 7))]) is var script
+            && script.Length >= LastHit(script) + BeatTiming.Impact - 0.001);
+
+    [Theory]
+    [InlineData(false, 0.46)]    // a swing's 0.22, then the impact's 0.24
+    [InlineData(true, 0.74)]     // the same, with 0.28 of flight over six tiles
+    public void A_single_target_attack_times_out_as_it_did(bool shot, double seconds)
+        => Assert.Equal(seconds, (shot ? Script(Far, Hit(6, 4, "characters.shoot", null, "projectiles.arrow")) : Script(Near, Hit(6, 4))).Length, 3);
+
+    [Fact]
+    public void A_single_target_spell_with_a_save_and_a_condition_times_out_as_it_did()
+    {
+        var script = Script(Far, Used("characters.cast", "fx.hex.shadow", "projectiles.eldritch", Foe), new Rolled(Foe, RollKind.Save, Roll(4, false)),
+            new Damaged(Foe, 3, "necrotic", 7), new ConditionApplied(Foe, new ConditionId("cursed")));
+
+        Assert.Equal(0.22 + 0.28 + BeatTiming.BadgeHold + BeatTiming.Impact + BeatTiming.Condition, script.Length, 3);
+    }
+
+    [Fact]
+    public void A_double_attack_on_one_target_is_still_two_swings_after_all_this()
+        => Assert.Equal(2, Script(Near, [.. Hit(3, 7), new Rolled(Hero, RollKind.Attack, Roll(14, true)), new AttackResolved(Hero, Foe, true, false),
+            new Damaged(Foe, 3, "slashing", 4)]).Cues.OfType<LungeCue>().Count());
 
     [Fact]
     public void A_miss_says_so()

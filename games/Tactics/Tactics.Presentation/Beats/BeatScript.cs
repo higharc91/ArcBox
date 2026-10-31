@@ -34,7 +34,7 @@ public static class BeatTiming
     /// <summary>How long a blow lands for before anything else happens.</summary>
     public const double Impact = 0.24;
 
-    /// <summary>Between the targets of one area effect.</summary>
+    /// <summary>Between the targets of one area effect, whose whole spread stays inside an attack's second.</summary>
     public const double Stagger = 0.06;
 
     /// <summary>A number rising off a unit. It overruns the beat, and fades over whatever comes next.</summary>
@@ -185,18 +185,27 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         private AbilityUsed? _ability;
         private int _swings;
         private int _hits;
+        private int _rolls;
+        private bool _rolled;          // the last thing to advance the clock was a roll, which already spaced this target from the last
+        private int _areaEnd = -1;     // the last event of the area effect being played: before it, its targets resolve together
+        private int _at;
         private bool _big;             // this beat alters more than a spell's tile or two: all of it is one collapse
         private bool _collapsing;
 
         public BeatScript Build()
         {
             _big = beat.Events.OfType<TerrainAltered>().Sum(a => a.Tiles.Length) > 2;
-            foreach (var e in beat.Events)
+            for (_at = 0; _at < beat.Events.Length; _at++)
             {
+                var e = beat.Events[_at];
+                if (e is AbilityUsed)
+                    _areaEnd = AreaEnd(_at);
                 if (!PartOfTheFall(e))
                     Flush();
                 Play(e);
                 _view = DisplayedBattle.Apply(_view, e, live);
+                if (_at == _areaEnd)
+                    _t += BeatTiming.Impact;   // the stage holds once, after the last target, as it would for one
             }
             Flush();
             var cues = _cues.OrderBy(c => c.At).ToImmutableArray();
@@ -207,6 +216,38 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         // What the ground going takes with it happens together with it, not after the dust has settled.
         private bool PartOfTheFall(BattleEvent e)
             => e is Fell || (_collapsing && e is TerrainAltered or Downed or Died or UnitOut or ConditionApplied or ConditionRemoved or PassiveTriggered);
+
+        private bool InArea => _at <= _areaEnd;
+
+        /// <summary>
+        /// The index of the last event of the ability at <paramref name="start"/> if it's an area effect, one hitting more than
+        /// one unit, or -1. One ability's events run until the next ability or the turn's end.
+        /// </summary>
+        private int AreaEnd(int start)
+        {
+            var targets = new HashSet<UnitId>();
+            var last = -1;
+            for (var i = start + 1; i < beat.Events.Length && beat.Events[i] is not (AbilityUsed or TurnEnded); i++)
+                if (TargetOf(beat.Events[i]) is { } unit)
+                {
+                    targets.Add(unit);
+                    last = i;
+                }
+            return targets.Count > 1 ? last : -1;
+        }
+
+        private static UnitId? TargetOf(BattleEvent e) => e switch
+        {
+            Rolled { Kind: RollKind.Save } save => save.Roller,
+            AttackResolved attack => attack.Target,
+            Damaged hit => hit.Unit,
+            Healed healed => healed.Unit,
+            ConditionApplied gained => gained.Unit,
+            Downed downed => downed.Unit,
+            Died died => died.Unit,
+            UnitOut gone => gone.Unit,
+            _ => null,
+        };
 
         private void Flush()
         {
@@ -256,14 +297,14 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     Apply(e);
                     break;
                 case AbilityUsed used:
-                    (_ability, _swings, _hits) = (used, 0, 0);
+                    (_ability, _swings, _hits, _rolls) = (used, 0, 0, 0);
                     Swing(used);
                     break;
                 case Rolled { Kind: RollKind.Attack } when _ability is { } again:
-                    if (_swings > 0)
+                    if (_swings > 0 && !InArea)
                     {
                         _hits = 0;
-                        Swing(again);   // the next of several attacks in one action
+                        Swing(again);   // the next of several attacks in one action; an area's rolls are all one swing
                     }
                     _swings++;
                     break;
@@ -289,7 +330,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 case ConditionApplied or ConditionRemoved:
                     Apply(e);
                     Moment(e is ConditionApplied ? "condition" : "condition-ends", BeatTiming.Condition * 0.8);
-                    _t += BeatTiming.Condition;
+                    _t += InArea ? 0 : BeatTiming.Condition;
                     break;
                 case ConcentrationBroken broken:
                     Burst(Puff, TileOf(broken.Caster));
@@ -302,7 +343,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     Burst(Dust, TileOf(downed.Unit));
                     Apply(e);
                     Moment("downed", BeatTiming.Down * 0.8);
-                    _t += BeatTiming.Down;
+                    _t += InArea ? 0 : BeatTiming.Down;
                     break;
                 case Died or UnitOut:
                     PlayLoss(e, e is Died d ? d.Unit : ((UnitOut)e).Unit);
@@ -423,7 +464,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 return;
             _cues.Add(new BadgeCue(_t, BeatTiming.Badge, unit, tile, roll.Kept, roll.Success));
             Moment("save", 0.1);
-            _t += BeatTiming.BadgeHold;
+            _t += _rolls++ == 0 ? BeatTiming.BadgeHold : BeatTiming.Stagger;   // a second roll is an area's: they resolve together
+            _rolled = true;
         }
 
         private void PlayResolved(AttackResolved resolved)
@@ -437,7 +479,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             {
                 Pop(resolved.Target, Miss, PopStyle.Damage);
                 _cues.Add(new PoseCue(_t, BeatTiming.Impact, resolved.Target, Dodge));
-                _t += BeatTiming.Impact;
+                _t += InArea ? BeatTiming.Stagger : BeatTiming.Impact;
             }
         }
 
@@ -453,7 +495,14 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         }
 
         // A blow takes its moment; the rest of an area effect's targets follow close behind it.
-        private void Land() => _t += _hits++ == 0 ? BeatTiming.Impact : BeatTiming.Stagger;
+        private void Land()
+        {
+            if (!InArea)
+                _t += _hits++ == 0 ? BeatTiming.Impact : BeatTiming.Stagger;
+            else if (!_rolled)
+                _t += BeatTiming.Stagger;
+            _rolled = false;
+        }
 
         private void Pop(UnitId unit, string text, PopStyle style, int row = 0)
         {
@@ -475,9 +524,10 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         private void PlayLoss(BattleEvent e, UnitId unit)
         {
             _cues.Add(new PoseCue(_t, BeatTiming.Down, unit, Down));
-            _t += BeatTiming.Down;
-            Burst(Puff, TileOf(unit));
-            Apply(e);
+            var fallen = _t + BeatTiming.Down;
+            Burst(Puff, TileOf(unit), fallen);
+            _cues.Add(new ApplyCue(fallen, e));
+            _t = InArea ? _t : fallen;     // in an area they all fall together, and the others carry on
         }
 
         private void PlayTerrain(TerrainAltered altered)
