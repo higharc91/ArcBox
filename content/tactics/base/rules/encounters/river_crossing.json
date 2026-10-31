@@ -1,4 +1,4 @@
-{ "id": "river_crossing", "name": "River Crossing", "map": "river_crossing", "party": { "min": 4, "max": 6 },
+{ "id": "river_crossing", "name": "River Crossing", "map": "river_crossing", "level": 1, "party": { "min": 4, "max": 6 },
   "enemies": [ { "unit": "goblin", "zone": "goblin_camp", "count": 4 },
                { "unit": "goblin_archer", "zone": "ridge_spawn", "count": 2 } ],
   "xp": 250, "loot": ["goblin_camp"],

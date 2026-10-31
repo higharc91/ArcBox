@@ -25,7 +25,7 @@ public sealed record SimConfig(ImmutableArray<string> Encounters, ImmutableArray
 public sealed record SimBattle(string Encounter, int Level, ImmutableArray<string> Classes, ulong Seed, BattleOutcome Outcome,
     int Rounds, int Downs, int Outs, ImmutableSortedDictionary<string, ClassStats> PerClass,
     ImmutableSortedDictionary<AbilityId, (int Used, int Legal)> Abilities, int AiItemUses, bool Capped = false,
-    int Rejected = 0, int Replans = 0, int ForcedEnds = 0);
+    int Rejected = 0, int Replans = 0, int ForcedEnds = 0, int? EncounterLevel = null);
 
 /// <summary>
 /// A class's measures in one battle, per member of that class (see <see cref="Tally"/> for how each is read from the
@@ -200,7 +200,7 @@ public static class SimRunner
         var rounds = capped ? config.RoundCap : Math.Max(1, state.Round);
         return new SimBattle(encounter, level, classes, seed, capped ? BattleOutcome.Lost : state.Outcome!.Value, rounds,
             tally.Downs, tally.Outs, tally.PerClass(rounds), tally.Abilities(), state.ItemsUsed.Count(u => u.ByAi), capped,
-            ai.Rejected, ai.Replans, ai.ForcedEnds);
+            ai.Rejected, ai.Replans, ai.ForcedEnds, rules.Encounters[encounter].Level);
     }
 
     /// <summary>How a battle's AI plans fared (see <see cref="SimBattle"/>).</summary>

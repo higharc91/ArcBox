@@ -17,10 +17,22 @@
                 "range": 1, "reach": false, "tags": ["martial", "light"] },
     "attacks": 2, "abilities": ["goblin.nimble_escape", "goblin_boss.rally"], "passives": [], "skills": ["stealth"],
     "tags": ["goblinoid", "humanoid", "leader"], "aiProfile": "boss", "sprite": "characters.goblin_spear" },
+  { "id": "goblin_shaman", "name": "Goblin Shaman", "cr": "1", "xp": 200, "level": 2, "castingStat": "wis",
+    "scores": { "str": 8, "dex": 14, "con": 12, "int": 11, "wis": 15, "cha": 10 }, "hp": 18, "ac": 13, "armor": "Light",
+    "weapon": { "id": "quarterstaff", "damage": "1d6", "damageType": "bludgeoning", "stat": "str", "finesse": false, "ranged": false,
+                "range": 1, "reach": false, "tags": ["simple", "versatile"] },
+    "abilities": ["goblin_shaman.cinder_bolt", "goblin_boss.rally"], "passives": [], "skills": ["arcana", "perception"],
+    "tags": ["goblinoid", "humanoid", "caster"], "aiProfile": "caster", "sprite": "characters.goblin_shaman" },
   { "id": "hobgoblin", "name": "Hobgoblin", "cr": "1/2", "xp": 100,
     "scores": { "str": 13, "dex": 12, "con": 12, "int": 10, "wis": 10, "cha": 9 }, "hp": 11, "ac": 18, "armor": "Heavy",
     "weapon": { "id": "longsword", "damage": "1d10", "damageType": "slashing", "stat": "str", "finesse": false, "ranged": false,
                 "range": 1, "reach": false, "tags": ["martial", "versatile"] },
     "abilities": [], "passives": ["hobgoblin.martial_advantage"], "tags": ["goblinoid", "humanoid"],
-    "aiProfile": "brute", "sprite": "characters.hobgoblin" }
+    "aiProfile": "brute", "sprite": "characters.hobgoblin" },
+  { "id": "orc_brute", "name": "Orc Brute", "cr": "1", "xp": 200, "level": 2,
+    "scores": { "str": 16, "dex": 12, "con": 16, "int": 7, "wis": 11, "cha": 10 }, "hp": 26, "ac": 14, "armor": "Medium",
+    "weapon": { "id": "greataxe", "damage": "1d12", "damageType": "slashing", "stat": "str", "finesse": false, "ranged": false,
+                "range": 1, "reach": false, "tags": ["martial", "two_handed"] },
+    "abilities": ["orc_brute.savage_cleave"], "passives": [], "skills": ["intimidation"], "tags": ["goblinoid", "humanoid", "orc"],
+    "aiProfile": "brute", "sprite": "characters.orc_brute" }
 ]

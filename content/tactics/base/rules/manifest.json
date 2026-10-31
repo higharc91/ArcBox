@@ -41,10 +41,18 @@
     "classes/sorcerer.json",
     "monsters/goblinoids.json",
     "monsters/undead.json",
+    "monsters/humanoids.json",
     "monsters/beasts-1.json",
+    "monsters/bosses.json",
     "monsters/wildshape.json",
     "monsters/companions.json",
     "maps/river_crossing.json",
-    "encounters/river_crossing.json"
+    "maps/forest_ruins.json",
+    "maps/crypt_hall.json",
+    "maps/crystal_cave.json",
+    "encounters/river_crossing.json",
+    "encounters/forest_ruins.json",
+    "encounters/crypt_hall.json",
+    "encounters/crystal_cave.json"
   ]
 }

@@ -78,8 +78,8 @@ public static class Report
         // 2. Win rate
         Line(md, Headings[1]);
         Line(md);
-        Line(md, $"Flags: **LOW** below {Pct(LowWinRate)}, **HIGH** above {Pct(HighWinRate)} (difficulty {config.Difficulty}). "
-                 + "Encounters don't declare an intended level yet, so every level is judged.");
+        Line(md, $"Flags: **LOW** below {Pct(LowWinRate)}, **HIGH** above {Pct(HighWinRate)} (difficulty {config.Difficulty}; "
+                 + "judged at the encounter's intended level when set).");
         Line(md);
         Line(md, "| Encounter | Level | Battles | Won | Win rate | Flag |");
         Line(md, "|---|---:|---:|---:|---:|---|");
@@ -222,13 +222,15 @@ public static class Report
             .Select(g =>
             {
                 var all = g.ToArray();
+                var intended = all[0].EncounterLevel;
+                var judged = intended is null || intended == g.Key.Level;
                 var won = all.Count(b => b.Outcome == BattleOutcome.Won);
                 var rate = (double)won / all.Length;
-                var flag = rate < LowWinRate ? "**LOW**" : rate > HighWinRate ? "**HIGH**" : "";
+                var flag = !judged ? "" : rate < LowWinRate ? "**LOW**" : rate > HighWinRate ? "**HIGH**" : "";
                 var mean = all.Average(b => b.Rounds);
                 var rounds = string.Join(" ", new[]
                 {
-                    mean < TargetRounds.Min ? "**SHORT**" : mean > TargetRounds.Max ? "**LONG**" : "",
+                    !judged ? "" : mean < TargetRounds.Min ? "**SHORT**" : mean > TargetRounds.Max ? "**LONG**" : "",
                     all.Any(b => b.Capped) ? "**CAPPED**" : "",
                 }.Where(s => s.Length > 0));
                 return new WinCell(g.Key.Encounter, g.Key.Level, all, won, flag, rounds);

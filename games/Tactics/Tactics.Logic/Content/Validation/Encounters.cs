@@ -27,6 +27,8 @@ internal sealed partial class Validation
             if (def is null)
                 return null;
             Ref(RefKind.Map, def.Map, file, Pointer.Append(ptr, "map"));
+            if (def.Level is < 1 or > 10)
+                Error(file, Pointer.Append(ptr, "level"), $"The level {def.Level} must be in 1..10.");
             if (def.Party.Min < 1 || def.Party.Max < def.Party.Min)
                 Error(file, Pointer.Append(ptr, "party"), "The party size needs 1 ≤ min ≤ max.");
             var ids = new HashSet<string>(StringComparer.Ordinal);

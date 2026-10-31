@@ -439,13 +439,14 @@ public sealed record EncounterUnitDef(string Unit,
 }
 
 /// <summary>
-/// An encounter (spec §4.8, <c>encounters/&lt;id&gt;.json</c>): its map, party size, enemies and protected NPCs
-/// (<see cref="Npcs"/>), XP and loot tables, objectives (the default lose is <c>party_out</c>) and triggers.
-/// <see cref="Replaces"/> lets a later pack override an id.
+/// An encounter (spec §4.8, <c>encounters/&lt;id&gt;.json</c>): its map, party size, optional intended party
+/// <see cref="Level"/>, enemies and protected NPCs (<see cref="Npcs"/>), XP and loot tables, objectives (the default lose is
+/// <c>party_out</c>) and triggers. <see cref="Replaces"/> lets a later pack override an id.
 /// </summary>
 public sealed record EncounterDef(string Id, string Name, string Map, PartySizeDef Party, ImmutableArray<EncounterUnitDef> Enemies,
     ImmutableArray<EncounterUnitDef> Npcs, ImmutableArray<LootTableId> Loot, ObjectivesDef Objectives,
     ImmutableArray<TriggerDef> Triggers, int Xp = 250,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Level = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null);
 
 /// <summary>

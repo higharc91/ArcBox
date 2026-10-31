@@ -39,11 +39,18 @@ public sealed class BasePackTests
         Assert.Equal(["black_eye", "bruised_pride", "concussion", "cracked_ribs", "deep_cut", "shaken", "sprained_ankle", "wrenched_shoulder"],
             pack.Injuries.Keys.Select(i => i.Value));
         Assert.Equal(["alchemists_fire", "greater_healing", "potion_of_healing", "smoke_bomb"], pack.Items.Keys.Select(i => i.Value));
-        Assert.Equal(["bear", "dire_wolf", "elder_bear", "giant_spider", "goblin", "goblin_archer", "goblin_boss", "hobgoblin", "hound", "imp", "kobold", "sapling", "skeleton", "wolf", "zombie"],
-            pack.Monsters.Keys);
+        string[] monsters =
+        [
+            "air_elemental", "bandit", "bandit_captain", "bear", "black_knight", "boar", "cult_leader", "cultist", "dark_elf",
+            "dire_wolf", "dragon", "drake", "earth_elemental", "elder_bear", "fire_elemental", "giant_bat", "giant_spider",
+            "goblin", "goblin_archer", "goblin_boss", "goblin_shaman", "golem", "hobgoblin", "hound", "imp", "kobold",
+            "kobold_slinger", "lich", "mimic", "necromancer", "orc_brute", "sapling", "skeleton", "skeleton_archer", "slime",
+            "troll", "water_elemental", "wolf", "wraith", "zombie",
+        ];
+        Assert.Equal(monsters, pack.Monsters.Keys);
         Assert.Equal(XpTable.Default.Thresholds, pack.Xp.Thresholds);
-        Assert.Equal(["river_crossing"], pack.Maps.Keys);
-        Assert.Equal(["river_crossing"], pack.Encounters.Keys);
+        Assert.Equal(["crypt_hall", "crystal_cave", "forest_ruins", "river_crossing"], pack.Maps.Keys);
+        Assert.Equal(["crypt_hall", "crystal_cave", "forest_ruins", "river_crossing"], pack.Encounters.Keys);
         Assert.Equal(AiProfiles, pack.AiProfiles.Keys);
         Assert.Equal(0.3, pack.AiProfiles["coward"].FleeBelowHp);
         Assert.Equal(["boss_cruel"], pack.AiProfiles.Values.Where(p => p.Cruel).Select(p => p.Id));
@@ -146,6 +153,51 @@ public sealed class BasePackTests
         }
         Assert.Throws<ArgumentException>(() => Encounters.Setup("river_crossing", Party(3, rules), Difficulty.Normal, rules));
         Assert.Throws<ArgumentException>(() => Encounters.Setup("river_crossing", Party(7, rules), Difficulty.Normal, rules));
+    }
+
+    [Fact]
+    public void Every_art_monster_has_a_stat_block()
+    {
+        var rules = Rules;
+        var sprites = rules.Monsters.Values.Select(m => m.Sprite).ToHashSet(StringComparer.Ordinal);
+
+        string[] enemies =
+        [
+            "goblin_cutthroat", "goblin_spear", "goblin_shaman", "orc_brute", "skeleton", "bandit", "black_knight", "cultist",
+            "kobold", "kobold_slinger", "hobgoblin", "goblin_archer", "zombie", "skeleton_archer", "lich", "dark_elf",
+            "necromancer", "bandit_captain", "cult_leader",
+        ];
+        using var charsDoc = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(ContentPaths.ContentBase, "characters", "manifest.json")));
+        var presets = charsDoc.RootElement.GetProperty("presets").EnumerateArray().Select(e => e.GetString()!).ToHashSet(StringComparer.Ordinal);
+        foreach (var enemy in enemies)
+        {
+            Assert.Contains(enemy, presets);
+            Assert.Contains($"characters.{enemy}", sprites);
+        }
+
+        using var beastsDoc = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(ContentPaths.ContentBase, "beasts", "manifest.json")));
+        foreach (var beast in beastsDoc.RootElement.GetProperty("beasts").EnumerateObject())
+            Assert.Contains(sprites, s => s.StartsWith($"beasts.{beast.Name}.", StringComparison.Ordinal));
+
+        using var bossesDoc = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(ContentPaths.ContentBase, "bosses", "manifest.json")));
+        foreach (var boss in bossesDoc.RootElement.GetProperty("monsters").EnumerateObject())
+            Assert.Contains(sprites, s => s.StartsWith($"bosses.{boss.Name}.", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void Every_encounter_sets_up_for_4_to_6()
+    {
+        var rules = Rules;
+        foreach (var encounter in rules.Encounters.Values)
+            for (var size = 4; size <= 6; size++)
+            {
+                var party = Party(size, rules);
+                var setup = Encounters.Setup(encounter.Id, party, Difficulty.Normal, rules);
+                Assert.Equal(size, setup.Units.Count(u => u.Sheet.Side == Side.Party && !u.Protected));
+                Assert.NotEmpty(setup.Units.Where(u => u.Sheet.Side == Side.Enemy));
+                var started = Battle.Start(setup, rules, seed: 7);
+                Assert.Equal(1, started.State.Round);
+            }
     }
 
     /// <summary>A level-1 party of default characters: fighter, cleric, rogue, wizard, then again.</summary>
