@@ -19,6 +19,17 @@ internal sealed partial class Scorer
         return outcome;
     }
 
+    /// <summary>
+    /// True when <paramref name="unit"/> could attack a foe on its next turn: one is within its Move plus its weapon's reach
+    /// (straight-line tiles, a cheap upper bound). Help's advantage is worth nothing to an ally with nobody to hit.
+    /// </summary>
+    private bool CanStrikeSoon(UnitState unit)
+    {
+        var reach = unit.Sheet.Move + Math.Max(1, unit.Sheet.Weapon.Ranged ? unit.Sheet.Weapon.Range : 1) + 1;
+        return State.Units.Values.Any(u => DownedRules.InBattle(u) && u.Life == LifeState.Up && Hostile(unit, u)
+                                           && u.Sheet.Side != Side.Neutral && Reach.Distance(unit.Pos, u.Pos) <= reach);
+    }
+
     private Outcome One(EffectDef effect, Strike st, UnitState target, bool crit, bool half, RollResult? last)
     {
         switch (effect)
@@ -41,7 +52,7 @@ internal sealed partial class Scorer
                 return target.Life == LifeState.Downed ? new Outcome(DamageDist.Zero, Revive: 1) : Outcome.None;
             case HelpEffect:
                 return target.Life == LifeState.Downed ? new Outcome(DamageDist.Zero, Revive: 1)
-                    : Has(target, RulesPack.Helped.Id) ? Outcome.None
+                    : Has(target, RulesPack.Helped.Id) || !CanStrikeSoon(target) ? Outcome.None
                     : new Outcome(DamageDist.Zero, Offense: 0.1);
             case ApplyEffect apply:
                 {

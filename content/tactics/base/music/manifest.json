@@ -1,0 +1,118 @@
+{
+  "about": "Generated music: id -> Ogg Vorbis files in this folder (pick one at random when there are several). See tools/tactics-audio/audio.py.",
+  "model": "model_elevenlabs-music-v2-5",
+  "tracks": {
+    "battle": {
+      "files": [
+        "battle.ogg"
+      ],
+      "loop": true,
+      "group": "music",
+      "use": "Normal battles"
+    },
+    "boss": {
+      "files": [
+        "boss.ogg"
+      ],
+      "loop": true,
+      "group": "music",
+      "use": "Boss battles (any unit with the boss tag)"
+    },
+    "camp": {
+      "files": [
+        "camp.ogg"
+      ],
+      "loop": true,
+      "group": "music",
+      "use": "Camp and party screen"
+    },
+    "camp_scarwalker": {
+      "files": [
+        "camp_scarwalker.ogg"
+      ],
+      "loop": true,
+      "group": "music",
+      "use": "The Sunscar and the Scarwalker camp (Chapter III)"
+    },
+    "court_mirewood": {
+      "files": [
+        "court_mirewood.ogg"
+      ],
+      "loop": true,
+      "group": "music",
+      "use": "Mirewood and the Glimmer Court (Chapter II)"
+    },
+    "defeat": {
+      "files": [
+        "defeat.ogg"
+      ],
+      "loop": false,
+      "group": "sting",
+      "use": "BattleEnded with defeat"
+    },
+    "dungeon": {
+      "files": [
+        "dungeon.ogg"
+      ],
+      "loop": true,
+      "group": "music",
+      "use": "Dungeons, caves and tense story maps"
+    },
+    "explore": {
+      "files": [
+        "explore.ogg"
+      ],
+      "loop": true,
+      "group": "music",
+      "use": "World map and peaceful field maps"
+    },
+    "finale": {
+      "files": [
+        "finale.ogg"
+      ],
+      "loop": true,
+      "group": "music",
+      "use": "The campaign's final battle (hall_of_the_flame): Maren's ritual and the red dragon"
+    },
+    "title": {
+      "files": [
+        "title.ogg"
+      ],
+      "loop": true,
+      "group": "music",
+      "use": "Title screen"
+    },
+    "town_emberwick": {
+      "files": [
+        "town_emberwick.ogg"
+      ],
+      "loop": true,
+      "group": "music",
+      "use": "Emberwick and the Ashen Ford between battles (Chapters I-II)"
+    },
+    "town_emberwick_festival": {
+      "files": [
+        "town_emberwick_festival.ogg"
+      ],
+      "loop": true,
+      "group": "music",
+      "use": "Emberwick in good times: festivals, and the epilogue after the flame is rekindled"
+    },
+    "town_greyhold": {
+      "files": [
+        "town_greyhold.ogg"
+      ],
+      "loop": true,
+      "group": "music",
+      "use": "Greyhold and the pilgrim road (Chapter IV)"
+    },
+    "victory": {
+      "files": [
+        "victory.ogg"
+      ],
+      "loop": false,
+      "group": "sting",
+      "use": "BattleEnded with victory"
+    }
+  }
+}

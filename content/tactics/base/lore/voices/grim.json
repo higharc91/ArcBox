@@ -1,0 +1,113 @@
+{
+  "id": "grim",
+  "name": "Grim",
+  "description": "Hard, quiet and haunted. Has lost things and expects to lose more. Loyal unto death.",
+  "voice": {
+    "direction": "Low, rough, sparing; long pauses; gentle only in private. Suits a hoarse or a cold voice."
+  },
+  "events": {
+    "battle_start": [
+      {
+        "id": "voice_grim_battle_start_1",
+        "text": "Here it comes.",
+        "mood": "angry"
+      },
+      {
+        "id": "voice_grim_battle_start_2",
+        "text": "Make it quick.",
+        "mood": "angry"
+      }
+    ],
+    "crit": [
+      {
+        "id": "voice_grim_crit_1",
+        "text": "Good.",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_grim_crit_2",
+        "text": "Down to the bone.",
+        "mood": "happy"
+      }
+    ],
+    "kill": [
+      {
+        "id": "voice_grim_kill_1",
+        "text": "Another one for the cold.",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_grim_kill_2",
+        "text": "Done.",
+        "mood": "happy"
+      }
+    ],
+    "ally_down": [
+      {
+        "id": "voice_grim_ally_down_1",
+        "text": "Not again. Not again.",
+        "mood": "surprised"
+      },
+      {
+        "id": "voice_grim_ally_down_2",
+        "text": "Get them out. I'll hold.",
+        "mood": "surprised"
+      }
+    ],
+    "low_hp": [
+      {
+        "id": "voice_grim_low_hp_1",
+        "text": "Pain. Means I'm alive.",
+        "mood": "hurt"
+      },
+      {
+        "id": "voice_grim_low_hp_2",
+        "text": "Not yet.",
+        "mood": "hurt"
+      }
+    ],
+    "healed": [
+      {
+        "id": "voice_grim_healed_1",
+        "text": "...Thanks.",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_grim_healed_2",
+        "text": "Hm. I'll live.",
+        "mood": "happy"
+      }
+    ],
+    "victory": [
+      {
+        "id": "voice_grim_victory_1",
+        "text": "We live another day.",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_grim_victory_2",
+        "text": "Bury them. Then we eat.",
+        "mood": "happy"
+      }
+    ],
+    "defeat": [
+      {
+        "id": "voice_grim_defeat_1",
+        "text": "Run. Live. Fight later.",
+        "mood": "sad"
+      }
+    ],
+    "camp": [
+      {
+        "id": "voice_grim_camp_1",
+        "text": "Don't touch the shards. Nothing that glows like that comes free.",
+        "mood": "idle"
+      },
+      {
+        "id": "voice_grim_camp_2",
+        "text": "I can't sleep near the fire anymore. Don't ask me why. I don't know why.",
+        "mood": "idle"
+      }
+    ]
+  }
+}

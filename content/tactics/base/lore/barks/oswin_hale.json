@@ -1,0 +1,104 @@
+{
+  "speaker": "oswin_hale",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_oswin_hale_battle_start_1",
+        "text": "You have come a very long way to be wrong.",
+        "mood": "idle",
+        "direction": "dry, cold, very old",
+        "weight": 3
+      },
+      {
+        "id": "bark_oswin_hale_battle_start_2",
+        "text": "Sit down. Ah. No one ever sits.",
+        "mood": "idle",
+        "direction": "a long pause before the second sentence"
+      },
+      {
+        "id": "bark_oswin_hale_battle_start_3",
+        "text": "I have kept this hall for a hundred years. I will keep it a little longer.",
+        "mood": "angry"
+      }
+    ],
+    "turn_start": [
+      {
+        "id": "bark_oswin_hale_turn_start_1",
+        "text": "Let us continue.",
+        "mood": "idle"
+      }
+    ],
+    "hit": [
+      {
+        "id": "bark_oswin_hale_hit_1",
+        "text": "I did warn you.",
+        "mood": "idle",
+        "weight": 2
+      },
+      {
+        "id": "bark_oswin_hale_hit_2",
+        "text": "Precisely there.",
+        "mood": "idle"
+      }
+    ],
+    "miss": [
+      {
+        "id": "bark_oswin_hale_miss_1",
+        "text": "Hm. Clumsy. I was better at this, once.",
+        "mood": "sad",
+        "direction": "a flicker of a scholar's self-mockery"
+      }
+    ],
+    "crit": [
+      {
+        "id": "bark_oswin_hale_crit_1",
+        "text": "Every wound has a history. I will remember yours.",
+        "mood": "idle",
+        "weight": 2
+      }
+    ],
+    "kill": [
+      {
+        "id": "bark_oswin_hale_kill_1",
+        "text": "I will remember your name. Someone ought to.",
+        "mood": "sad",
+        "direction": "the warmth breaks through, then is smothered",
+        "weight": 3
+      }
+    ],
+    "low_hp": [
+      {
+        "id": "bark_oswin_hale_low_hp_1",
+        "text": "Pain. How very vivid. I had forgotten nothing but that.",
+        "mood": "surprised"
+      },
+      {
+        "id": "bark_oswin_hale_low_hp_2",
+        "text": "I have been dying for a century. You will have to do better.",
+        "mood": "angry"
+      }
+    ],
+    "victory": [
+      {
+        "id": "bark_oswin_hale_victory_1",
+        "text": "Go home. Remember this. Remember all of it.",
+        "mood": "sad",
+        "weight": 2
+      }
+    ],
+    "defeat": [
+      {
+        "id": "bark_oswin_hale_defeat_1",
+        "text": "So. It ends with tired hands, like everything else.",
+        "mood": "sad",
+        "direction": "long silence first",
+        "weight": 2
+      },
+      {
+        "id": "bark_oswin_hale_defeat_2",
+        "text": "Not yet. There is still a thing I meant to finish.",
+        "mood": "hurt"
+      }
+    ]
+  }
+}

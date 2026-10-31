@@ -1,0 +1,7 @@
+{ "characters": [
+  { "id": "kara", "name": "Kara", "role": "companion", "summary": "s", "bio": "b", "wants": "w", "flaw": "f", "voice": { "description": "d", "sample": "s" } },
+  { "id": "nobody", "name": "Nobody", "role": "npc", "summary": "s", "bio": "b", "wants": "w", "flaw": "f", "voice": { "description": "d", "sample": "s" } },
+  { "id": "tamsin", "name": "Tamsin", "role": "npc", "summary": "s", "bio": "b", "wants": "w", "flaw": "f", "voice": { "description": "d", "sample": "s" },
+    "relationships": [{ "with": "missing_friend", "kind": "friend", "note": "n" }] },
+  { "id": "tamsin", "name": "Tamsin again", "role": "npc", "summary": "s", "bio": "b", "wants": "w", "flaw": "f", "voice": { "description": "d", "sample": "s" } }
+] }

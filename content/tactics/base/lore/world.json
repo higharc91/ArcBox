@@ -1,0 +1,226 @@
+{
+  "name": "Embers of the Vale",
+  "pitch": "The fire that kept the Vale alive is dying, and the people trying to save it are learning it was never theirs to keep.",
+  "premise": "For three centuries the Hearthflame burned in Ember Keep, tended by the Wardens, and the Vale was warm when the lands around it froze. A hundred years ago the Keep fell in a single night and the flame shattered into five embers that scattered across the Vale and changed the land where they fell. Now the embers are fading. Harvests fail, beasts come down from the hills, the goblin clans are starving, and in the town of Emberwick at the Ashen Ford people are deciding who goes hungry this winter. A cult called the Kindled is gathering the embers to relight the flame by feeding it lives. The party, out of Emberwick, will find the embers first, and with them the truth: the first Wardens stole the Hearthflame from beyond the mountains, and every use of its fire burns away a memory. In the end the party chooses: rekindle it and pay the price, return it to where it was taken from, or let it die and help the Vale learn to live without it.",
+  "tone": [
+    "Earnest and grounded: people are hungry and cold, and that matters more than prophecy.",
+    "Melancholy with warmth: loss everywhere, but kindness is never naive.",
+    "Morally grey, never nihilistic: every faction has a reason, and some reasons are better than others.",
+    "Wonder in the strange places: the fey of Mirewood, the crater of the Sunscar, the frozen dead of Frostpeak.",
+    "Humour comes from people, never from winking at the audience."
+  ],
+  "themes": [
+    "What we owe the people who come after us.",
+    "Memory and forgetting: the Vale's comfort was bought with its own past.",
+    "Stolen inheritance: comfort built on a theft is still a theft.",
+    "Hunger makes enemies of neighbours: the goblins at the ford are starving too.",
+    "Choosing to let go."
+  ],
+  "pillars": [
+    "Magic always costs something visible. Ember-fire burns a memory every time; wizards and clerics draw on other sources, and their magic is never free either.",
+    "The Vale's questions are answered by the end of the first campaign. Only the world beyond the Greywall stays a mystery.",
+    "No world-ending stakes in the first campaign. The survival of the Vale is enough.",
+    "Every faction wants something beyond the Vale, so any of them can return in a later campaign.",
+    "No villain is evil for its own sake. Each believes it is saving someone.",
+    "Choices stay chosen. A spared goblin chief, a betrayed ally or a spent ember is remembered for the rest of the campaign.",
+    "Every player background has a thread into the main story; nobody is only along for the ride.",
+    "Name places at the edge of the map without visiting them. They are the seeds of later campaigns.",
+    "The Hooded Stranger's identity is not revealed in the first campaign. Their goal is, in Chapter V."
+  ],
+  "magic": {
+    "source": "Three sources. Ember-fire: the shards of the Hearthflame, which warm, heal and burn far beyond their size. The old gifts: arcane study, divine devotion, druidic bonds, pacts and bloodlines, which work as they always have and owe nothing to the embers. Wild magic near an ember: where an ember sleeps, the land itself grows strange (the fey of Mirewood, the dead of Frostpeak).",
+    "cost": "Every use of ember-fire burns away a memory of the user's, usually small (a song, a face, the way home), sometimes not. The Vale has used ember-fire in hearths and forges for three hundred years, which is why it remembers so little of its own history. The old gifts cost what they always cost: study, faith, bargains and blood.",
+    "rules": [
+      "An ember shard gives off heat and light for decades but fades if carried far from the others; they want to be together.",
+      "Ember-fire can heal any wound but cannot raise the dead. A cold ember (one that has gone out) can, badly: the risen of Frostpeak are not the people they were.",
+      "Feeding a life to ember-fire relights it brighter and turns it infernal. This is how the Kindled work, and why Ember Keep burns red.",
+      "Ember-touched people (those born near an ember, or who used much ember-fire) sometimes remember things that happened to other people. The fire keeps what it takes.",
+      "Nobody in the Vale knows the memory cost at the start of the campaign except the Lich (who never touched the flame) and the Hooded Stranger.",
+      "Player characters' class magic never costs memories. Ember-fire is a choice the party makes, never a tax on their abilities."
+    ]
+  },
+  "peoples": [
+    {
+      "race": "human",
+      "summary": "Most of the Vale: farmers, river folk and townsfolk, and the Wardens' descendants who stayed when the Keep fell. Humans built Emberwick around the warm ground of the Ashen Ford.",
+      "naming": "Plain old names and trade surnames. Given names of one or two syllables; surnames from work, places and weather.",
+      "examples": [
+        "Halden Varrow",
+        "Bree Tallow",
+        "Dagna Holt",
+        "Tobin Fell",
+        "Maren Sorrel",
+        "Pip Ashdown"
+      ]
+    },
+    {
+      "race": "elf",
+      "summary": "Few, and old. Some elves remember the Keep before it fell, but the ember-cost has blurred even their long memories, and they find that more frightening than anyone.",
+      "naming": "Flowing names of three syllables with soft consonants; a house name taken from a tree or star.",
+      "examples": [
+        "Ilyra Vaensong",
+        "Celandine Marrowby",
+        "Thaelen of the Ash"
+      ]
+    },
+    {
+      "race": "half_elf",
+      "summary": "Common in the river towns, where elven and human families have mixed for generations. Often guides, traders and go-betweens.",
+      "naming": "Either tradition, or a human given name with an elven house name.",
+      "examples": [
+        "Tamsin Reedwell",
+        "Corin Vael",
+        "Lark"
+      ]
+    },
+    {
+      "race": "dwarf",
+      "summary": "The masons of the Wardens. Dwarven clans built Ember Keep and the Frostpeak roads, and their stonework is everywhere the Wardens went. They keep written records obsessively and are only now noticing the gaps in them.",
+      "naming": "Hard consonants, two syllables; clan names from stone and metal, often with 'of' and the hold.",
+      "examples": [
+        "Aldric Stonevow",
+        "Brunna of Greyhold",
+        "Torvik Ironsong"
+      ]
+    },
+    {
+      "race": "halfling",
+      "summary": "Farmers and millers of the low fields around the Ashen Ford, hit first and hardest by the failing harvests. Proud, practical and quietly furious about it.",
+      "naming": "Cheerful short given names, often from plants or birds; surnames from fields and food.",
+      "examples": [
+        "Wren Barleycote",
+        "Mabel Greenhollow",
+        "Odo Underhay"
+      ]
+    },
+    {
+      "race": "gnome",
+      "summary": "Tinkers and scholars drawn to the embers like moths. Gnomish ember-lamps lit half the Vale before anyone knew what they cost.",
+      "naming": "Long, playful given names often shortened; family names that are elaborate inventions.",
+      "examples": [
+        "Bimble Quickcog",
+        "Nissa Fennelwick",
+        "Orrin Tumblebright"
+      ]
+    },
+    {
+      "race": "half_orc",
+      "summary": "Most come from the hill clans, where orcs, goblins and humans have traded and fought for centuries. Often caught between Emberwick and the clans when the hunger comes.",
+      "naming": "Clan names in the hill tongue (gutturals, short vowels) or a human name chosen in the valley; often both.",
+      "examples": [
+        "Gorra",
+        "Ulvak Two-Fires",
+        "Hesk Marrow"
+      ]
+    },
+    {
+      "race": "tiefling",
+      "summary": "Rare and distrusted. Some families were touched by the infernal fire of Ember Keep in the century since it fell; others came from beyond the Greywall. People assume a tiefling knows something about the Keep. Sometimes they do.",
+      "naming": "Either a human name, or a 'virtue name' taken on coming of age.",
+      "examples": [
+        "Sefa",
+        "Mercy",
+        "Ashlit",
+        "Vesper Crane"
+      ]
+    },
+    {
+      "race": "aasimar",
+      "summary": "Born with a light inside them in a land that is going dark. The Church of the Hearth calls them blessed and wants them close. Aasimar are rarely sure why they exist, and the Vale has opinions.",
+      "naming": "Names given by the church (bright, formal) or their families (ordinary); many go by one and resent the other.",
+      "examples": [
+        "Aurelan",
+        "Lucet Varrow",
+        "Seraphine Holt"
+      ]
+    },
+    {
+      "race": "goliath",
+      "summary": "Mountain folk of the Frostpeak heights. The cold ember in the pass froze their old holds and they have been coming down into the Vale for a generation, unwelcome and unbowed.",
+      "naming": "A birth name, a deed name and a clan name; outsiders get the deed name.",
+      "examples": [
+        "Kavra Stormstep",
+        "Thane Longreach",
+        "Oru Cloudbreaker"
+      ]
+    },
+    {
+      "race": "dragonborn",
+      "summary": "A small people from beyond the Greywall who say their ancestors served the thing the Hearthflame was taken from. They came into the Vale looking for it. Nobody has asked them the right question yet.",
+      "naming": "A clan name first, then a personal name; both with rolling sounds.",
+      "examples": [
+        "Kethra Vaarun",
+        "Sorvash Ithe",
+        "Madrin Kaal"
+      ]
+    }
+  ],
+  "glossary": [
+    {
+      "term": "The Vale",
+      "definition": "The river valley between the Greywall Mountains, warmed for three centuries by the Hearthflame. The whole of the first campaign."
+    },
+    {
+      "term": "Hearthflame",
+      "definition": "The great fire that burned in Ember Keep and kept the Vale warm. Shattered a century ago into five embers."
+    },
+    {
+      "term": "Ember",
+      "definition": "One of the five great fragments of the Hearthflame. Also, loosely, any shard of ember-fire."
+    },
+    {
+      "term": "Ember shard",
+      "definition": "A small piece of ember-fire, used for three centuries in hearths, forges and lamps. Valuable, traded and smuggled."
+    },
+    {
+      "term": "Cold ember",
+      "definition": "An ember that has gone out. The one in Frostpeak Pass. It raises the dead."
+    },
+    {
+      "term": "Ember-touched",
+      "definition": "Someone marked by ember-fire, who sometimes remembers other people's memories."
+    },
+    {
+      "term": "The Wardens",
+      "definition": "The order that tended the Hearthflame in Ember Keep. All but gone since the Fall."
+    },
+    {
+      "term": "The Fall",
+      "definition": "The night a century ago when Ember Keep fell and the Hearthflame shattered."
+    },
+    {
+      "term": "HR",
+      "definition": "Hearth Reckoning: years since the Hearthflame was first lit in the Vale. The campaign begins in 401 HR; the Fall was 300 HR."
+    },
+    {
+      "term": "The Kindled",
+      "definition": "A cult that is gathering the embers to relight the Hearthflame by feeding it lives."
+    },
+    {
+      "term": "The Greywall",
+      "definition": "The mountains around the Vale. Nobody in living memory has crossed them and come back."
+    },
+    {
+      "term": "Beyond the Wall",
+      "definition": "Wherever the Hearthflame came from. Unvisited in the first campaign."
+    },
+    {
+      "term": "The Last Watch",
+      "definition": "The Lich and the Black Knight: all that remains of the Wardens in Ember Keep."
+    },
+    {
+      "term": "The Ash Market",
+      "definition": "The black market in ember shards, run out of Emberwick's river docks."
+    }
+  ],
+  "avoid": [
+    "Names, places, gods, organisations and creatures from published settings or other games: anything not original or in the SRD 5.2 (spec §4.10).",
+    "In particular nothing from the Forgotten Realms or Baldur's Gate: no Faerûn, Sword Coast, mind flayers, githyanki, beholders or the Absolute.",
+    "Terms that echo other 'dying fire' stories: no 'linking the fire', 'Age of Dark', 'Firekeeper' or 'unkindled'. Our story is a theft and a debt, not a cycle.",
+    "Chosen-one prophecies. The party matters because of what it chooses, not because it was foretold.",
+    "Evil races. Goblins, orcs and the dead of Frostpeak are people or were people; their factions have reasons.",
+    "Grimdark cruelty for its own sake, and sexual violence entirely.",
+    "Modern slang and pop-culture jokes in dialogue.",
+    "Revealing the Hooded Stranger's identity, or what lies beyond the Greywall, in the first campaign."
+  ]
+}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
-import type { GameModule } from "./module";
+import type { GameModule, LobbyText, LobbyTheme } from "./module";
 
 type Loader = () => Promise<{ module: GameModule }>;
 
@@ -9,6 +9,7 @@ type Loader = () => Promise<{ module: GameModule }>;
  */
 const loaders: Record<string, Loader> = {
   redline: () => import("./redline"),
+  tactics: () => import("./tactics"),
 };
 
 let loaded = new Map<string, GameModule>();
@@ -85,6 +86,37 @@ export function useGameModule(gameId?: string | null): { module: GameModule | un
     return off;
   }, [gameId]);
   return { module: moduleFor(gameId), state: moduleState(gameId) };
+}
+
+/**
+ * The selected game's lobby theme, re-rendering when its module arrives; undefined (the default look) for no game, a
+ * game without one, and while the module is still loading. `load` starts the module's download too (the "Who are
+ * you?" screen comes before the lobby, which is where the session starts it).
+ */
+export function useLobbyTheme(gameId?: string | null, load = false): LobbyTheme | undefined {
+  const [, setTick] = useState(0);
+  useEffect(() => {
+    const off = subscribeModules(() => setTick((n) => n + 1));
+    if (load) void loadModule(gameId);
+    setTick((n) => n + 1);   // it may have arrived between the render and this effect
+    return off;
+  }, [gameId, load]);
+  return moduleFor(gameId)?.lobbyTheme;
+}
+
+/** The shell's own lobby wording: what every game without a theme shows. */
+export const DEFAULT_LOBBY_TEXT: LobbyText = {
+  pickCampaign: "PICK A CAMPAIGN",
+  newCampaign: "New campaign",
+  campaignName: "Campaign name",
+  create: "Create",
+  campaignMeta: (c) => `${c.members} ${c.members === 1 ? "member" : "members"}`,
+  campaignLabel: "Campaign",
+};
+
+/** The wording to use: the theme's, falling back to the default per label. */
+export function lobbyText(theme?: LobbyTheme): LobbyText {
+  return theme?.text ? { ...DEFAULT_LOBBY_TEXT, ...theme.text } : DEFAULT_LOBBY_TEXT;
 }
 
 /** For tests only: makes `module` the loaded module for `gameId`. */

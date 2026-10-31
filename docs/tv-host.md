@@ -48,10 +48,13 @@ Everything after `--` on the Godot command line; all optional.
 | `--quit-after=<seconds>` | Quit after that many seconds. |
 | `--preset=ultra\|high\|low` | Render preset for 3D scenes. Default: the one saved with F2 in `user://settings.json`, else `ultra`. |
 | `--perf` | Start with the F3 performance overlay on, and log it every 5 s (`PERF …` lines). |
-| `--audio-log` | Print `AUDIO <bus> <name>` for every sound played (narration: `AUDIO Voice <theme>: <text>`), for runs without a sound card. See [`redline-tv.md`](redline-tv.md#audio-log). |
+| `--audio-log` | Print `AUDIO <bus> <name>` for every sound played (narration: `AUDIO Voice <theme>: <text>`; a recorded line: `AUDIO Voice clip <file> <theme>: <text>`), for runs without a sound card. See [`redline-tv.md`](redline-tv.md#audio-log). |
 | `--autostart=<game>[:<players>]` | Dev only: select that game, and start it once that many players (default 1) are connected and the scene is ready. First game only. Used by `tools/tv-e2e.sh`. |
 | `--res=<w>x<h>` | Window size. The UI is laid out at 1920×1080 and scales (`canvas_items`, `expand`). |
 | `--redline-demo[=<step>]` | Dev only: play a scripted REDLINE race into the TV without a server (see below). |
+| `--drop-signals` | Dev only: the TV never sends a host signal, so a game runs on its fallback timers. Proves a game doesn't need them. |
+| `--beat-log` | Dev only: print a `BEAT` line for each Tactics beat played: when it ran, how long it took and what was in it. |
+| `--tactics-demo[=<map>[:changed\|:fight]]` | Dev only: show a Tactics board without a server, with the art from the repository's `content/` (default `river_crossing`). `:changed` adds zones, raised tiles and the bridge's tiles sunk; `:fight` adds one of every kind of unit. With `--shots` it saves `…-tactics-battle-<map>.png`. |
 | `--demo=campaign-lobby` | Dev only: show the lobby with a built-in campaign game selected, its campaign list and a roster with seated and away members (`Shell/CampaignLobbyDemo.cs`), without a server. With `--shots` it saves `001-lobby.png`. |
 
 Unknown arguments are reported as warnings and ignored.
@@ -88,7 +91,10 @@ While running:
 
 - **Server unreachable at launch:** the Connect screen shows the error and retries every 5 s.
 - **Connection drops:** a "reconnecting" banner appears; SignalR reconnects with the platform backoff
-  (0, 1, 2, 5, 10, 10… s) and the host calls `ResumeHost` again. If the room is gone, the TV opens a new one.
+  (0, 1, 2, 5, 10, 10… s) and the host calls `ResumeHost` again. If the room is gone, the TV opens a new one. In a Tactics
+  battle the server restarting shows "Resuming the battle…" until the players are back, and the TV picks the fight up
+  from there ([Catching up](#tactics-scene)). `ARCBOX_GAME=tactics ARCBOX_RESTART=1 tools/tv-e2e.sh` runs that, and
+  `ARCBOX_RECONNECT=1` in place of `ARCBOX_RESTART=1` kills and relaunches the TV mid-battle.
 - **`RoomClosed`:** the session is cleared and a new room opens.
 
 ## REDLINE scene
@@ -160,6 +166,92 @@ over the whole frame. AgX runs with white 8 and contrast 1.45 (Godot's defaults,
 
 **Performance** must be measured on the target machine (RTX 5080, 2560×1440) with F3: this repository's sandbox renders
 with Mesa's CPU rasteriser (llvmpipe), where a 1080p frame takes several seconds, so frame rates from it mean nothing.
+
+## Tactics scene
+
+The battle plays from its beats. `BeatPlayer` in `Tactics.Presentation/Beats` takes each view's new beats (`BeatQueue`), plays them one
+at a time from their own events (`BeatScript` turns a beat into timed cues) and holds the battle as the player has seen it
+(`DisplayedBattle`), because the view's units and board are already past the beat on screen. Only with nothing left to play does
+the view become the picture, which also heals anything that drifted. Each finished beat sends `shown`, which only shortens the
+game's fallback wait, so a slow or missing TV costs a lagging picture and no more (`--drop-signals` proves it). At Results the view's
+`LastBattle` carries the blow that ended the fight, and the TV plays out what's left before it shows the table. `say` lines
+go through the shell's narrator in the `tactics.narrator` theme, a speaker's own or `tactics.character` (`TacticsVoices.ForSpeaker`), with a caption.
+
+**Catching up.** A TV that can't play its way back drops to the newest beat (`BeatQueue.Late`, `BeatPlayer`): it takes the view
+as it stands, conditions and board included, and plays that one beat from just before it (`DisplayedBattle.Before` stands the
+units back where the beat found them), so no old beat or old line comes back. Three things bring it on: a scene joining a fight, whose
+first view holds up to 20 beats it never saw (a battle's own start, its first two beats, isn't a join, and plays whole); a
+view whose oldest beat is past the last one seen, as after a reconnect; and being behind, which is a beat waiting more
+than `BeatQueue.MostLag` (8 s of real time) with others after it. Real play has bursts of 6 beats that drain in about 4 s, and those
+play whole. A beat on stage finishes first. Beats dropped are never reported, and the newest still sends `shown`, so the
+game hears only what it's waiting on. The TV logs `TACTICS catch-up to beat <n>, <m> skipped`, and each new screen as
+`TACTICS screen <label>`, which `tools/tv-e2e.sh` reads.
+
+`games/tactics/TacticsScene.tscn` shows the game's banner and each phase's table: the Muster roster, the encounter list and
+the results, and in battle the board. All of it is worded by `PhaseScreen` in `games/Tactics/Tactics.Presentation`, with
+tests; the Godot class only draws.
+
+**The board** uses the pack's art the way its manifests describe it: tiles are 32 px, projected 2:1 with height steps of
+16 px, tops sampled in world space (one texture over 4 x 4 tiles) with sides and lips below them, all drawn as textured
+quads, at twice the art's size on the 1080p layout. `Tactics.Presentation/Board` works everything out: `BoardProjection` is
+the only code that knows the projection, `BoardTerrain` is the map plus what the battle changed (a tile's `Centre` is where
+anything stands on it), `BoardPlan` is every face and sprite in painter's order (`BoardOrder.Key` is how later things sort
+in), `BoardFit` puts it on the screen, fixed from the map file for the whole battle, and `MaterialLook` picks the sides that go with a map's materials. `BoardCanvas` only
+draws the plan. Zones, height changes and sunk tiles come from the host view's `battle.board`, which phones don't get.
+
+**The units** are a second plan over the board's. `UnitPlan` turns the view's units into `BoardUnit`s with what `UnitArt` reads
+from the manifests: `characters`, `beasts` or `bosses` by sprite key, the idle strip or the Downed frame, the HP bar and
+digits from `ui`, `status` effects and `icons`. Each sorts into the board by `BoardOrder.Key` (`Merge`), so a tall tile in
+front hides it; a sprite wider than a tile goes after its whole diagonal, and a unit between tiles (`UnitPlace`) sorts with
+the nearer one. `BoardCanvas.SetUnits` swaps them without touching the board's plan. Bars, countdowns, icons and the turn arrow
+go on top of everything, so a hidden unit still has its bar, and they stack down onto the unit rather than into the top
+strip. The view has no facing, so a unit looks at its nearest foe. Characters have no sprite in the engine, so the host view
+gives them their class's preset (`HostSprite`); phones still get null. With `--shots`, a battle's label gains `-conditions`
+or `-downed` when those first show, so a real fight leaves a shot of each.
+
+**The light** follows the pack's recipe (`dungeon/manifest.json`'s `lighting`): what's drawn is its art x (ambient + each light's colour x
+power x flicker x falloff), at most 1.3. `BoardLighting`, in `Tactics.Presentation/Board`, builds the lights from the `BoardPlan`: a
+prop's `light` and a texture's `emissive` scatter rule, so a tile that sinks takes its light with it, and they're rebuilt with the plan.
+Flicker is a function of time and each light's phase, so tests can pin it. A room's ambient comes from a word in its map's id naming
+one of the recipe's rooms (`crypt_hall`, `crystal_cave`, `hall_of_the_flame`), lifted by `AmbientLift` on every map alike, as the
+recipe's dioramas have far more lights than the maps. The rest are open air: with no lights there, `Active` is false and the board
+draws as if none of this existed. `LitBoard` decides what light does to each item, pure and safe off the main thread: a top in reach
+becomes four cells so a pool can peak inside a tile, then the face once more for its glow and outline. `BoardCanvas` puts the light in
+its vertex colours and redraws at its usual 20 Hz. That's no extra pass and no new shader.
+
+Vertex colours were chosen for the picture, not for cost. A PointLight2D prototype on the finale drew about 100 fewer calls than the
+first vertex version (505 against 605; the glow fix since brought that to 521), with no worse a frame on an RTX 5080. But the board is one
+canvas item holding marks and art alike: CanvasModulate dimmed the HUD on the same canvas, colours blew out with no ceiling (the troll
+went solid yellow), and flames were lit like anything else. Fixing that means splitting the canvas. Godot may also cap the lights on one
+canvas item, at 16 as far as I recall; that's from memory, unchecked, and no map has over 10 lights. Neither approach has been measured on
+a modest TV box.
+
+A region's blocks can share one `BoardLighting` (`Of` takes several plans), so a pool doesn't stop at a block's edge. Reads go through a
+grid of tile-sized buckets, and `MeanAt` reads each light at its mean for baked art, whatever `Step` has done. Only `Step` is unsafe
+beside another thread's reads of "now".
+
+What glows by itself (`GlowMask`, from the pack's masks or, where the pack has none, the brightest shades of the light's colour) is
+baked once and drawn again unlit, in its place in the painter's order, so a unit in front still hides it. Sources get the pack's
+additive halos, in place of the recipe's bloom. The recipe's banding and dither aren't done: they need a shader. Figures take the light
+near them, never under `FigureFloor`. Rings, status effects, zones, marks (`UnitMarks`, over the light) and the HUD stay unlit. Halos
+are a separate additive layer, so they sit over units and rings: one canvas item has one blend mode, so they can't go in the depth order.
+
+**The HUD** (`HudLayer`, `TurnStrip`) sits in the corners the diamond leaves free, in the pack's navy glass and gold: the
+encounter, round, whose turn it is and the objective at the top left, the turn order at the top right. `BattleHud` in
+`Tactics.Presentation/Hud` words and orders all of it from `BeatPlayer.Shown`, so it can't give away a beat that hasn't played.
+A reaction prompt needs two things: its `ReactionOffered` has played (`DisplayedBattle` folds it, and `Reacted` clears it), and the
+live `battle.reacting`, set only for a player, says it's still waiting. So it can't lead the beat that caused it, and an offer answered
+before its beat plays never shows. The words are the game's banner. `ObjectiveWords` turns the view's `battle.objectives` into a sentence, and
+`ObjectiveChanged` changes it when that event plays. `HudArt` reads the panels, frames and portraits. An absent player's
+character has the AI badge on the strip, and a beat whose events are flagged `AiFinished` puts an "AI finished" badge over its
+actor for at least `BeatTiming.AiFinished`. A panel over a unit fades; a reaction prompt, which has to be read, moves down the
+left side instead. With `--shots`, a prompt reaching the screen is the moment `reaction`, an area spell's last target is `area`, and a beat the AI finished is the moment
+`ai-finished`. `BeatLoop` runs the frame. If a beat throws, it logs it, drops it (`BeatPlayer.Skip`), still sends its `shown`, and
+carries on. If drawing fails, no beat is to blame: it logs that once and the beats play on unseen, so held Results still come up.
+
+To run the TV against a real game without
+phones or a browser, `tools/tactics-playtest/bots.cjs` joins a room as N players and plays a whole session over the real
+hub; its header has the commands.
 
 ## Adding a game scene
 

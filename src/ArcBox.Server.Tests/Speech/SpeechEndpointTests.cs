@@ -221,7 +221,8 @@ public class SpeechEndpointTests : IAsyncDisposable
 
         using var doc = JsonDocument.Parse(raw);
         var voices = doc.RootElement.EnumerateArray().ToList();
-        Assert.Equal(["arcbox.host", "redline.announcer", "redline.questions"], voices.Select(v => v.GetProperty("id").GetString()));
+        Assert.Equal(["arcbox.host", "redline.announcer", "redline.questions", .. global::Tactics.Logic.TacticsVoices.All.Select(t => t.Id)],
+            voices.Select(v => v.GetProperty("id").GetString()));
         Assert.All(voices, v => Assert.Equal(["description", "fallback", "id"], v.EnumerateObject().Select(p => p.Name).Order()));
         var announcer = voices[1];
         Assert.Equal(RedlineVoices.All[0].Description, announcer.GetProperty("description").GetString());

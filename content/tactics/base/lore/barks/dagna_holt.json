@@ -1,0 +1,146 @@
+{
+  "speaker": "dagna_holt",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_dagna_holt_battle_start_1",
+        "text": "Form up. Nobody dies stupid.",
+        "mood": "angry",
+        "direction": "low, flat, Northern",
+        "weight": 3
+      },
+      {
+        "id": "bark_dagna_holt_battle_start_2",
+        "text": "Eyes front. Shields up.",
+        "mood": "idle",
+        "weight": 2
+      },
+      {
+        "id": "bark_dagna_holt_battle_start_3",
+        "text": "Right. Let's earn our bread.",
+        "mood": "idle"
+      }
+    ],
+    "turn_start": [
+      {
+        "id": "bark_dagna_holt_turn_start_1",
+        "text": "Mine.",
+        "mood": "idle"
+      },
+      {
+        "id": "bark_dagna_holt_turn_start_2",
+        "text": "Moving.",
+        "mood": "idle"
+      }
+    ],
+    "hit": [
+      {
+        "id": "bark_dagna_holt_hit_1",
+        "text": "Down.",
+        "mood": "angry"
+      },
+      {
+        "id": "bark_dagna_holt_hit_2",
+        "text": "Stay there.",
+        "mood": "angry"
+      }
+    ],
+    "miss": [
+      {
+        "id": "bark_dagna_holt_miss_1",
+        "text": "Damn it.",
+        "mood": "angry"
+      }
+    ],
+    "crit": [
+      {
+        "id": "bark_dagna_holt_crit_1",
+        "text": "That's for the bridge.",
+        "mood": "angry",
+        "direction": "the patience snaps",
+        "weight": 2
+      }
+    ],
+    "kill": [
+      {
+        "id": "bark_dagna_holt_kill_1",
+        "text": "Done.",
+        "mood": "idle",
+        "weight": 2
+      },
+      {
+        "id": "bark_dagna_holt_kill_2",
+        "text": "One less.",
+        "mood": "idle"
+      }
+    ],
+    "ally_down": [
+      {
+        "id": "bark_dagna_holt_ally_down_1",
+        "text": "Someone's down! Cover them!",
+        "mood": "surprised",
+        "weight": 2
+      },
+      {
+        "id": "bark_dagna_holt_ally_down_2",
+        "text": "Not again. Not on my watch.",
+        "mood": "angry",
+        "direction": "quiet, then loud"
+      }
+    ],
+    "low_hp": [
+      {
+        "id": "bark_dagna_holt_low_hp_1",
+        "text": "Had worse. Not much worse.",
+        "mood": "hurt"
+      }
+    ],
+    "healed": [
+      {
+        "id": "bark_dagna_holt_healed_1",
+        "text": "Ta. Back in.",
+        "mood": "happy"
+      }
+    ],
+    "revived": [
+      {
+        "id": "bark_dagna_holt_revived_1",
+        "text": "Still here. Don't fuss.",
+        "mood": "idle"
+      }
+    ],
+    "victory": [
+      {
+        "id": "bark_dagna_holt_victory_1",
+        "text": "Count heads. Everyone? Good.",
+        "mood": "idle",
+        "weight": 2
+      },
+      {
+        "id": "bark_dagna_holt_victory_2",
+        "text": "That'll do.",
+        "mood": "happy"
+      }
+    ],
+    "defeat": [
+      {
+        "id": "bark_dagna_holt_defeat_1",
+        "text": "Fall back! Back, now!",
+        "mood": "angry"
+      }
+    ],
+    "camp": [
+      {
+        "id": "bark_dagna_holt_camp_1",
+        "text": "Sleep. I'll take the watch. Habit.",
+        "mood": "idle",
+        "weight": 2
+      },
+      {
+        "id": "bark_dagna_holt_camp_2",
+        "text": "Don't tell me it'll be all right. Tell me what we're doing.",
+        "mood": "idle"
+      }
+    ]
+  }
+}

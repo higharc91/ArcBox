@@ -1,0 +1,1 @@
+{ "factions": [{ "id": "guild", "name": "Guild", "crest": "crests.no_such_crest", "summary": "s", "goals": ["g"], "methods": "m", "colour": "red" }] }

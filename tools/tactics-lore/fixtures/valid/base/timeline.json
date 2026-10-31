@@ -1,0 +1,2 @@
+{ "eras": [{ "id": "first_age", "name": "First Age", "summary": "Before.",
+  "events": [{ "id": "founding", "when": "1 FA", "title": "Founding", "summary": "It began.", "unlock": { "chapter": 2 } }] }] }

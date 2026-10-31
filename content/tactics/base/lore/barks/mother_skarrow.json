@@ -1,0 +1,94 @@
+{
+  "speaker": "mother_skarrow",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_mother_skarrow_battle_start_1",
+        "text": "So. The valley sends swords instead of grain. I expected it.",
+        "mood": "angry",
+        "direction": "slow, deliberate, rasping",
+        "weight": 3
+      },
+      {
+        "id": "bark_mother_skarrow_battle_start_2",
+        "text": "Come, then. My grandchildren are watching, and they are hungry.",
+        "mood": "angry",
+        "weight": 2
+      },
+      {
+        "id": "bark_mother_skarrow_battle_start_3",
+        "text": "You lock your grain and call us thieves. Now you come to finish it.",
+        "mood": "angry"
+      }
+    ],
+    "hit": [
+      {
+        "id": "bark_mother_skarrow_hit_1",
+        "text": "Old, yes. Soft, no.",
+        "mood": "angry",
+        "direction": "dry",
+        "weight": 2
+      }
+    ],
+    "miss": [
+      {
+        "id": "bark_mother_skarrow_miss_1",
+        "text": "Hah. The hill is crooked. Like your mayor.",
+        "mood": "happy",
+        "direction": "a cackle"
+      }
+    ],
+    "crit": [
+      {
+        "id": "bark_mother_skarrow_crit_1",
+        "text": "Forty winters I have bled for this clan. Your turn.",
+        "mood": "angry"
+      }
+    ],
+    "kill": [
+      {
+        "id": "bark_mother_skarrow_kill_1",
+        "text": "Go down to the river. Tell it Skarrow sent you.",
+        "mood": "angry"
+      }
+    ],
+    "ally_down": [
+      {
+        "id": "bark_mother_skarrow_ally_down_1",
+        "text": "Up, little one. Up. Ah. No.",
+        "mood": "sad",
+        "direction": "the courtesy of the slow valley tongue falls away",
+        "weight": 2
+      }
+    ],
+    "low_hp": [
+      {
+        "id": "bark_mother_skarrow_low_hp_1",
+        "text": "Not yet. The little ones have not eaten.",
+        "mood": "hurt",
+        "weight": 2
+      },
+      {
+        "id": "bark_mother_skarrow_low_hp_2",
+        "text": "I have buried better than you. I will not be buried by you.",
+        "mood": "angry"
+      }
+    ],
+    "victory": [
+      {
+        "id": "bark_mother_skarrow_victory_1",
+        "text": "Go home. Tell them the bridge stays ours until the grain comes.",
+        "mood": "idle"
+      }
+    ],
+    "defeat": [
+      {
+        "id": "bark_mother_skarrow_defeat_1",
+        "text": "Whatever you think of me, feed the little ones. Feed them.",
+        "mood": "sad",
+        "direction": "barely a rasp, very slow",
+        "weight": 3
+      }
+    ]
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "id": "wry",
+  "name": "Wry",
+  "description": "Dry humour as armour. Sees the absurd in everything, and cares more than they let on.",
+  "voice": {
+    "direction": "Light, quick, deadpan; a smile you can hear. Softens and slows when they mean it."
+  },
+  "events": {
+    "battle_start": [
+      {
+        "id": "voice_wry_battle_start_1",
+        "text": "Oh good. Violence.",
+        "mood": "angry"
+      },
+      {
+        "id": "voice_wry_battle_start_2",
+        "text": "Well. This'll be memorable.",
+        "mood": "angry"
+      }
+    ],
+    "crit": [
+      {
+        "id": "voice_wry_crit_1",
+        "text": "Meant to do that.",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_wry_crit_2",
+        "text": "Don't look so surprised.",
+        "mood": "happy"
+      }
+    ],
+    "kill": [
+      {
+        "id": "voice_wry_kill_1",
+        "text": "Rude of them to stand there.",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_wry_kill_2",
+        "text": "And stay down.",
+        "mood": "happy"
+      }
+    ],
+    "ally_down": [
+      {
+        "id": "voice_wry_ally_down_1",
+        "text": "No, no, no. Not you. Not today.",
+        "mood": "surprised"
+      },
+      {
+        "id": "voice_wry_ally_down_2",
+        "text": "Hey! Stay with me!",
+        "mood": "surprised"
+      }
+    ],
+    "low_hp": [
+      {
+        "id": "voice_wry_low_hp_1",
+        "text": "I'm fine. Mostly fine. Ask me again in a minute.",
+        "mood": "hurt"
+      },
+      {
+        "id": "voice_wry_low_hp_2",
+        "text": "Ow. Noted.",
+        "mood": "hurt"
+      }
+    ],
+    "healed": [
+      {
+        "id": "voice_wry_healed_1",
+        "text": "Oh, that's nice. Do the other side.",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_wry_healed_2",
+        "text": "I owe you a drink.",
+        "mood": "happy"
+      }
+    ],
+    "victory": [
+      {
+        "id": "voice_wry_victory_1",
+        "text": "And nobody even lost a boot. A small miracle.",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_wry_victory_2",
+        "text": "That went better than my last plan.",
+        "mood": "happy"
+      }
+    ],
+    "defeat": [
+      {
+        "id": "voice_wry_defeat_1",
+        "text": "Run now, joke later.",
+        "mood": "sad"
+      }
+    ],
+    "camp": [
+      {
+        "id": "voice_wry_camp_1",
+        "text": "Does anyone else remember what we had for breakfast? No? Just me, then. Hopefully.",
+        "mood": "idle"
+      },
+      {
+        "id": "voice_wry_camp_2",
+        "text": "One day I'll sleep in a real bed. With a pillow. Two pillows.",
+        "mood": "idle"
+      }
+    ]
+  }
+}

@@ -61,7 +61,7 @@ public sealed class MapBlockTests
         Assert.Equal<BattleEvent>(
         [
             new Moved(U("gob"), [T(4, 1), T(3, 1)]),
-            new PassiveTriggered(U("gob"), "zone.fire.enter"),
+            new PassiveTriggered(U("gob"), "zone.fire.enter", U("mage")),
             new Damaged(U("gob"), die, "fire", 30 - die),
         ], events, new JsonEquality<BattleEvent>());
 
@@ -74,7 +74,7 @@ public sealed class MapBlockTests
         [
             new TurnEnded(U("mage")),
             new TurnStarted(U("gob"), 2),
-            new PassiveTriggered(U("gob"), "zone.fire.start"),
+            new PassiveTriggered(U("gob"), "zone.fire.start", U("mage")),
             new Damaged(U("gob"), second, "fire", 30 - die - second),
         ], events);
         Assert.Equal(30 - die - second, after.Units[U("gob")].Hp);
@@ -93,7 +93,7 @@ public sealed class MapBlockTests
         var die = TestAbilities.Next(state.Rng, 6)[0];
         var (after, events) = battle.Run(state, "mage", "gob", T(1, 1), new PushEffect(2));
         Assert.Equal(T(3, 1), after.Units[U("gob")].Pos);
-        Assert.Contains(new PassiveTriggered(U("gob"), "zone.fire.enter"), events);
+        Assert.Contains(new PassiveTriggered(U("gob"), "zone.fire.enter", U("mage")), events);
         Assert.Equal(30 - die, after.Units[U("gob")].Hp);
     }
 
@@ -218,7 +218,7 @@ public sealed class MapBlockTests
         Assert.Equal<BattleEvent>(
         [
             new Moved(U("gob"), [T(4, 1), T(3, 1)]),
-            new PassiveTriggered(U("gob"), "hazard.hazards.spikes"),
+            new PassiveTriggered(U("gob"), "hazard.hazards.spikes", U("mage")),
             new Damaged(U("gob"), die, "piercing", 30 - die),
         ], events, new JsonEquality<BattleEvent>());
     }

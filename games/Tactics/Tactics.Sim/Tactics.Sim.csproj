@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <InternalsVisibleTo Include="Tactics.Logic.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Tactics.Logic\Tactics.Logic.csproj" />
   </ItemGroup>
 </Project>

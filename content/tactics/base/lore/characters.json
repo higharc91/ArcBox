@@ -1,0 +1,575 @@
+{
+  "characters": [
+    {
+      "id": "halden_varrow",
+      "preset": "mayor",
+      "name": "Halden Varrow",
+      "epithet": "Mayor of Emberwick",
+      "role": "ally",
+      "faction": "emberwick",
+      "summary": "Emberwick's tired, decent mayor, who has to decide who goes hungry this winter.",
+      "bio": "Halden inherited the mayoralty from his mother and has spent twenty years keeping Emberwick together with compromise, charm and borrowed grain. He is a good man who has made one terrible decision: years ago he learned the ember under the ford was fading and chose to say nothing, so that people would not leave. Now the goblins hold the bridge and he cannot hide it much longer.",
+      "wants": "To get Emberwick through the winter without anyone learning what he knew.",
+      "flaw": "He will always pick the lie that keeps the peace.",
+      "secret": {
+        "text": "He has known for six years that the warm ground is cooling, and he locked the granaries against the goblins rather than admit the town cannot feed itself and them.",
+        "unlock": {
+          "flag": "ch1_halden_confessed"
+        }
+      },
+      "voice": {
+        "theme": "tactics.npc.halden-varrow",
+        "description": "Warm baritone, a little hoarse, a man who has given too many speeches. Reassuring until he is cornered, then quiet and fast.",
+        "sample": "The ford is the only road east. If those goblins hold the bridge past the new moon, Emberwick goes hungry this winter."
+      },
+      "relationships": [
+        {
+          "with": "celandine_marrowby",
+          "kind": "debt",
+          "note": "The Marrowbys lend the town grain; Halden owes Celandine more than the town can repay."
+        },
+        {
+          "with": "dagna_holt",
+          "kind": "friend",
+          "note": "His oldest friend, who suspects what he is hiding."
+        },
+        {
+          "with": "mother_skarrow",
+          "kind": "enemy",
+          "note": "He has never met her and has already decided she cannot be reasoned with."
+        }
+      ]
+    },
+    {
+      "id": "bree_tallow",
+      "preset": "innkeeper",
+      "name": "Bree Tallow",
+      "epithet": "Keeper of the Last Coal",
+      "role": "ally",
+      "faction": "emberwick",
+      "summary": "The innkeeper who hears everything and feeds anyone who sits at her hearth.",
+      "bio": "Bree runs the Last Coal, Emberwick's inn, and has done since her husband, Ned, drowned at the ford eleven years ago. The inn's hearth burns on an ember shard her grandmother bought from a Warden. She feeds the party between chapters, passes on rumours, and is the closest thing the town has to a conscience.",
+      "wants": "For the people at her tables to be fed, warm and honest with each other.",
+      "flaw": "She protects people from the truth when she thinks they cannot bear it.",
+      "secret": {
+        "text": "Her hearth shard has burned away almost every memory of her husband. She has started writing him down so she won't lose the rest.",
+        "unlock": {
+          "flag": "ch2_bree_journal"
+        }
+      },
+      "voice": {
+        "theme": "tactics.npc.bree-tallow",
+        "description": "Alto, brisk and kind, a West-Country lilt. Talks while working; softens without slowing down.",
+        "sample": "Sit. Eat. Then you can tell me how bad it is."
+      },
+      "relationships": [
+        {
+          "with": "pip_ashdown",
+          "kind": "family",
+          "note": "Has taken in Pip and pretends she hasn't."
+        },
+        {
+          "with": "rook",
+          "kind": "unknown",
+          "note": "Buys her shards from the Ash Market and doesn't ask."
+        }
+      ]
+    },
+    {
+      "id": "mother_aubrine",
+      "preset": "priest",
+      "name": "Mother Aubrine",
+      "epithet": "Priest of the Hearth",
+      "role": "ally",
+      "faction": "church_of_the_hearth",
+      "summary": "Emberwick's priest: sincere, generous, and about to have her faith tested.",
+      "bio": "Mother Aubrine has run Emberwick's chapel for thirty years, feeding the poor and burying the dead. She believes the Hearthflame was a gift and its loss a test the Vale can pass. She is not a hypocrite; she has never been shown the church's oldest scriptures. When the party brings her the truth, she has to decide whether her faith was in the flame or in the people around it.",
+      "wants": "To keep her flock together and believing through the cold.",
+      "flaw": "She mistakes certainty for courage.",
+      "voice": {
+        "theme": "tactics.npc.mother-aubrine",
+        "description": "Clear mezzo, measured, used to filling a chapel. Gentle in private, unbending in public.",
+        "sample": "The flame was given to us. It is not ours to bargain with."
+      },
+      "relationships": [
+        {
+          "with": "corvin_ashby",
+          "kind": "rival",
+          "note": "They have argued theology and history over the same table for twenty years."
+        },
+        {
+          "with": "maren_sorrel",
+          "kind": "enemy",
+          "note": "Maren preached from Aubrine's own pulpit once. Aubrine threw her out."
+        }
+      ]
+    },
+    {
+      "id": "corvin_ashby",
+      "preset": "sage",
+      "name": "Corvin Ashby",
+      "epithet": "Archivist of Emberwick",
+      "role": "ally",
+      "faction": "emberwick",
+      "summary": "The town's scholar, who has noticed that whole years are missing from the records.",
+      "bio": "Corvin keeps Emberwick's small archive and has spent his life reconstructing the history of the Vale from fragments. He reads ember-lamps by night for thirty years, and he has gaps in his own memory he cannot explain. He is the first to suspect the ember-fire takes something, and he is the party's guide to the Vale's past.",
+      "wants": "The whole history of the Vale, written down where nothing can burn it.",
+      "flaw": "He will trade anyone's safety, including his own, for one more answer.",
+      "secret": {
+        "text": "Corvin's notebooks hold a page in his own handwriting about the cost of ember-fire. He doesn't remember writing it.",
+        "unlock": {
+          "flag": "ch2_corvin_page"
+        }
+      },
+      "voice": {
+        "theme": "tactics.npc.corvin-ashby",
+        "description": "Light, quick tenor, an anxious academic. Trails off mid-sentence when he has an idea.",
+        "sample": "There should be a record for every year. There isn't. Forty-one years are simply… not there."
+      },
+      "relationships": [
+        {
+          "with": "oswin_hale",
+          "kind": "unknown",
+          "note": "Has spent his life reading the man's letters without knowing he is still alive."
+        },
+        {
+          "with": "old_maud",
+          "kind": "student",
+          "note": "The only person he trusts about the night of the Fall."
+        }
+      ]
+    },
+    {
+      "id": "dagna_holt",
+      "preset": "guard_captain",
+      "name": "Dagna Holt",
+      "epithet": "Captain of the Ford Watch",
+      "role": "ally",
+      "faction": "emberwick",
+      "summary": "The captain of Emberwick's eight guards, who lost the bridge and wants it back.",
+      "bio": "Dagna has commanded Emberwick's guard for twelve years, most of them spent breaking up tavern fights. When the Skarrow clan took the bridge she lost two guards and her nerve, and has not forgiven herself for either. She wants the bridge back by force, and she will be furious if the party makes peace instead, until she isn't.",
+      "wants": "To make Emberwick safe, and to stop feeling like she failed it.",
+      "flaw": "She wants someone to blame, and goblins are easiest.",
+      "voice": {
+        "theme": "tactics.npc.dagna-holt",
+        "description": "Low, flat, Northern; few words. A soldier's patience that runs out suddenly.",
+        "sample": "Two of mine died on that bridge. I'd like a reason that's better than hunger."
+      },
+      "relationships": [
+        {
+          "with": "halden_varrow",
+          "kind": "friend",
+          "note": "Loyal, and beginning to doubt him."
+        },
+        {
+          "with": "mother_skarrow",
+          "kind": "enemy",
+          "note": "Wants her dead, at first."
+        }
+      ]
+    },
+    {
+      "id": "tobin_fell",
+      "preset": "blacksmith",
+      "name": "Tobin Fell",
+      "epithet": "Smith of Emberwick",
+      "role": "npc",
+      "faction": "emberwick",
+      "summary": "The town smith, whose ember-forge is going cold.",
+      "bio": "Tobin's forge has run on an ember shard for four generations, and it is fading. He makes and mends the party's gear between chapters. He is gruff, practical and frightened of what he'll be without his fire, more than he will ever say.",
+      "wants": "To keep his forge lit.",
+      "flaw": "Would buy a shard from anyone, no questions asked.",
+      "voice": {
+        "theme": "tactics.npc.tobin-fell",
+        "description": "Deep, rough bass, slow speech, answers questions with a grunt before the words.",
+        "sample": "Bring me the steel and I'll make it sing. Bring me a shard and I'll make it scream."
+      },
+      "relationships": [
+        {
+          "with": "rook",
+          "kind": "debt",
+          "note": "Owes the Ash Market for his last shard."
+        }
+      ]
+    },
+    {
+      "id": "pip_ashdown",
+      "preset": "child",
+      "name": "Pip Ashdown",
+      "epithet": "The Ember Child",
+      "role": "npc",
+      "faction": "emberwick",
+      "summary": "An orphan born on the warm ground who remembers things nobody ever taught her.",
+      "bio": "Pip is nine, a human orphan who lives in Bree's back room and runs errands for coin. She was born on the burned bank of the ford, close to the ember, and she is ember-touched: she knows old songs, a dead man's way home, the layout of a keep she has never seen. She attaches herself to the party early, and follows it all the way to Ember Keep. She is the first proof that the fire keeps what it takes.",
+      "wants": "To know whose memories she has.",
+      "flaw": "Lies easily and well, to protect herself.",
+      "secret": {
+        "text": "Some of Pip's memories are Oswin Hale's from the night of the Fall. She remembers who stopped him.",
+        "unlock": {
+          "flag": "ch4_pip_remembers"
+        }
+      },
+      "voice": {
+        "theme": "tactics.npc.pip-ashdown",
+        "description": "A child's voice, bright and quick, suddenly old and slow when she is remembering something that isn't hers.",
+        "sample": "I know this song. I don't know how I know it."
+      },
+      "relationships": [
+        {
+          "with": "bree_tallow",
+          "kind": "family",
+          "note": "Bree is the closest she has to a mother."
+        },
+        {
+          "with": "hooded_stranger",
+          "kind": "unknown",
+          "note": "The Stranger watches her more closely than anyone."
+        }
+      ]
+    },
+    {
+      "id": "old_maud",
+      "preset": "hermit",
+      "name": "Old Maud",
+      "epithet": "Who Saw the Ember Fall",
+      "role": "npc",
+      "summary": "A hermit on the burned bank who was there the night the ember fell, a hundred years ago.",
+      "bio": "Maud was a child of seven on the night of the Fall and watched the ember drop into the river. She is now more than a hundred years old and has never used ember-fire, and so she remembers that night better than anyone alive. The town thinks she is mad. She has been waiting for someone to ask her the right question.",
+      "wants": "For someone to listen, before she dies.",
+      "flaw": "Speaks in riddles out of a century of habit.",
+      "voice": {
+        "theme": "tactics.npc.old-maud",
+        "description": "Ancient, papery, unhurried; a cackle that turns into a cough. Perfectly lucid underneath.",
+        "sample": "It didn't fall, dearie. It was thrown."
+      },
+      "relationships": [
+        {
+          "with": "corvin_ashby",
+          "kind": "mentor",
+          "note": "Tells him the truth in pieces, to see if he's ready."
+        }
+      ]
+    },
+    {
+      "id": "lark",
+      "preset": "minstrel",
+      "name": "Lark",
+      "epithet": "The Last Songkeeper",
+      "role": "npc",
+      "summary": "A travelling minstrel who keeps the Wardens' songs, the only history the fire couldn't burn.",
+      "bio": "Lark travels the Vale singing the old Warden songs, which have survived because nobody needs ember-fire to remember a tune. The songs hold the Vale's real history, half-hidden in verses nobody listens to. Lark turns up wherever the party is going next, which is no coincidence: Lark is following the Hooded Stranger. In Lark's Warden version of the Song of the Seven, the seven 'came home'; the Skarrow clan sings that they 'came back running'. Same seven, seen from different doorsteps.",
+      "wants": "To find the last verse of the Song of the Seven, which no one has sung in two centuries.",
+      "flaw": "Treats everything as a story, including other people's pain.",
+      "voice": {
+        "theme": "tactics.npc.lark",
+        "description": "Androgynous, musical, warm; slips into song mid-sentence. Never quite serious.",
+        "sample": "Seven went over the Greywall and seven came home. The song doesn't say what they brought, but it does say it was heavy."
+      },
+      "relationships": [
+        {
+          "with": "hooded_stranger",
+          "kind": "unknown",
+          "note": "Following them through the Vale, for reasons of their own."
+        }
+      ]
+    },
+    {
+      "id": "celandine_marrowby",
+      "preset": "noble",
+      "name": "Lady Celandine Marrowby",
+      "epithet": "Lady of the Upper Fields",
+      "role": "rival",
+      "faction": "emberwick",
+      "summary": "The richest woman in Emberwick, an elf whose family has been rich since the night the Keep fell.",
+      "bio": "Celandine owns the granaries, the mill and half of Emberwick's debts. She is charming, generous in public, and entirely willing to let the goblins and the poor starve so long as the town owes her for the winter. The Marrowby fortune began on the night of the Fall, more than a century ago. Celandine is old enough to remember that night, and she does not. She has lit her halls with ember-lamps for a hundred years.",
+      "wants": "To own Emberwick outright by spring.",
+      "flaw": "Cannot imagine a problem money will not solve.",
+      "secret": {
+        "text": "Celandine was a young Warden on the night of the Fall and fled the Keep with a chest of ember shards. She has burned away every memory of it, and the Marrowby fortune is stolen fire she doesn't know she stole.",
+        "unlock": {
+          "flag": "ch3_marrowby_truth"
+        }
+      },
+      "voice": {
+        "theme": "tactics.npc.celandine-marrowby",
+        "description": "Smooth, cultured alto with an elven lilt; amused; never raises her voice, because she never needs to.",
+        "sample": "Of course the town can have grain. Everything has a price; I'm simply the one who remembers it."
+      },
+      "relationships": [
+        {
+          "with": "halden_varrow",
+          "kind": "debt",
+          "note": "Holds the mayor's debts, and his silence."
+        },
+        {
+          "with": "rook",
+          "kind": "unknown",
+          "note": "Rook's best customer and worst secret."
+        }
+      ]
+    },
+    {
+      "id": "rook",
+      "preset": "bandit_captain",
+      "name": "Rook",
+      "epithet": "Master of the Ash Market",
+      "role": "rival",
+      "faction": "the_ash_market",
+      "summary": "The smuggler who runs the trade in ember shards, and who sells to everyone.",
+      "bio": "Rook runs the Ash Market from Emberwick's docks with a crew of river smugglers. Practical and unsentimental, Rook will sell the party information, shards and favours, and the Kindled exactly the same. Rook knows the market is selling more shards than exist in the Vale, and is starting to be afraid of whoever is supplying them.",
+      "wants": "To be on the winning side when the embers run out.",
+      "flaw": "Loyal only to the deal.",
+      "voice": {
+        "theme": "tactics.npc.rook",
+        "description": "Dry, low, unhurried; a river accent; every sentence sounds like an offer.",
+        "sample": "I don't take sides. I take payment."
+      },
+      "relationships": [
+        {
+          "with": "maren_sorrel",
+          "kind": "unknown",
+          "note": "Supplies the Kindled; doesn't trust them."
+        },
+        {
+          "with": "hooded_stranger",
+          "kind": "unknown",
+          "note": "Has never seen the Stranger's face, and never once charged for what the Stranger asks."
+        }
+      ]
+    },
+    {
+      "id": "mother_skarrow",
+      "preset": "goblin_shaman",
+      "name": "Mother Skarrow",
+      "epithet": "Chief of the Skarrow Clan",
+      "role": "npc",
+      "faction": "skarrow_clan",
+      "summary": "The goblin chief who holds the bridge at the ford, because her clan is starving.",
+      "bio": "Mother Skarrow has led her clan for forty winters and is the oldest goblin in the hills. She took the bridge because Emberwick locked its granaries, and she will give it back for food, not coin. Her clan never used ember-fire, so its songs remember the Vale before the Hearthflame and the seven who crossed the Greywall. Whether the party talks to her or kills her is the first choice of the campaign, and it is remembered.",
+      "wants": "To feed her clan through the winter.",
+      "flaw": "Has buried too many grandchildren to trust anyone from the valley.",
+      "secret": {
+        "text": "The clan's oldest song names the seven who crossed the Greywall and says what they took.",
+        "unlock": {
+          "flag": "ch1_skarrow_spared"
+        }
+      },
+      "voice": {
+        "theme": "tactics.npc.mother-skarrow",
+        "description": "Cracked, rasping, dry humour; speaks the valley tongue slowly and deliberately, as a courtesy, and the hill tongue fast.",
+        "sample": "You lock your grain and call us thieves. Sit. We will talk about who stole what."
+      },
+      "relationships": [
+        {
+          "with": "vorga",
+          "kind": "family",
+          "note": "Her grandson, who left the clan to take by force what she will only bargain for."
+        },
+        {
+          "with": "halden_varrow",
+          "kind": "enemy",
+          "note": "The man who locked the granaries."
+        }
+      ]
+    },
+    {
+      "id": "vorga",
+      "preset": "goblin_spear",
+      "name": "Vorga",
+      "epithet": "The Bridge-Taker",
+      "role": "villain",
+      "faction": "vorgas_host",
+      "summary": "A goblin warlord holding the Sunscar canyon bridge, sure the valley will never share.",
+      "bio": "Vorga is Mother Skarrow's grandson. He watched three winters of children starve while his grandmother bargained, and he left to raise a war band of goblins and hobgoblins who would take instead. He holds the canyon bridge in the Sunscar, the only road to the crater. He is cruel because he has decided cruelty works, not because he enjoys it.",
+      "wants": "To take enough from the Vale that his people never go hungry again.",
+      "flaw": "Would rather drop the bridge into the chasm than lose it.",
+      "voice": {
+        "theme": "tactics.npc.vorga",
+        "description": "Young, loud, a showman's swagger over real anger; laughs when he's losing.",
+        "sample": "You want my bridge? Come and take it!"
+      },
+      "relationships": [
+        {
+          "with": "mother_skarrow",
+          "kind": "family",
+          "note": "Loves her; thinks she has failed the clan."
+        }
+      ]
+    },
+    {
+      "id": "ysolde",
+      "preset": "dark_elf",
+      "name": "Ysolde",
+      "epithet": "Voice of the Glimmer Court",
+      "role": "npc",
+      "faction": "glimmer_court",
+      "summary": "The fey envoy of Mirewood, who trades in favours, names and forgotten things.",
+      "bio": "Ysolde speaks for the Glimmer Court to mortals. She is courteous, curious and wholly alien; she finds mortal forgetting fascinating, and a little delicious. She will give the party the Mirewood ember for a price, and the price is always a memory. The Court eats what it is paid: a memory given to the Court is never restored. She is made partly of other people's memories, and if the ember leaves Mirewood, she may stop existing.",
+      "wants": "To keep the Court alive, and to understand why mortals give away the things they love.",
+      "flaw": "Cannot break a bargain, even one that destroys her.",
+      "voice": {
+        "theme": "tactics.npc.ysolde",
+        "description": "Soft, musical, unplaceable accent; never hurries and never raises her voice; pauses before names as if tasting them.",
+        "sample": "Everything in Mirewood has a price, little flame. Tell me something you would hate to forget."
+      },
+      "relationships": [
+        {
+          "with": "maren_sorrel",
+          "kind": "enemy",
+          "note": "Maren tried to take the ember by force. Ysolde has not forgotten."
+        }
+      ]
+    },
+    {
+      "id": "maren_sorrel",
+      "preset": "cult_leader",
+      "name": "Maren Sorrel",
+      "epithet": "High Kindler",
+      "role": "villain",
+      "faction": "the_kindled",
+      "summary": "The leader of the Kindled, who believes she must relight the Hearthflame to save the Vale, at any price.",
+      "bio": "Maren was a hedge-preacher in the hungry towns until an ember shard nearly killed her and filled her head with other people's memories of the Hearth Age: warm winters, full granaries, children who never went hungry. She carries hundreds of burned lives in her and believes she owes it to them to bring that world back. She is compassionate, brilliant and completely sincere, and she will feed a hundred lives to the flame to save ten thousand.",
+      "wants": "To relight the Hearthflame in Ember Keep and end the cold forever.",
+      "flaw": "Thinks of people as numbers once the numbers get large enough.",
+      "secret": {
+        "text": "Maren is ember-touched and remembers the Hearth Age from hundreds of other people's lives. She has started to forget which memories are her own.",
+        "unlock": {
+          "flag": "ch3_maren_parley"
+        }
+      },
+      "voice": {
+        "theme": "tactics.npc.maren-sorrel",
+        "description": "Warm, persuasive alto; a preacher's rhythm, but quiet. Never sounds like a villain.",
+        "sample": "You've felt how cold it's getting. I'm the only one in the Vale with a plan to stop it."
+      },
+      "relationships": [
+        {
+          "with": "ivo_rime",
+          "kind": "unknown",
+          "note": "An uneasy alliance: she wants the cold ember relit, he wants it cold."
+        },
+        {
+          "with": "oswin_hale",
+          "kind": "enemy",
+          "note": "The Keeper who tried to put the flame out."
+        }
+      ]
+    },
+    {
+      "id": "ivo_rime",
+      "preset": "necromancer",
+      "name": "Ivo Rime",
+      "epithet": "Scholar of the Cold Ember",
+      "role": "villain",
+      "faction": "the_kindled",
+      "summary": "A necromancer studying the cold ember in Frostpeak, and the dead it raises.",
+      "bio": "Ivo was a Warden-trained physician who lost his wife, Nell, to a fever in the hungry years and went up into Frostpeak to learn why the cold ember raises the dead. He has learned that the dead remember nothing, and he wants to know whether the memories the flame burned can be put back. He works with the Kindled because they fund him. He is not cruel, only past caring what it costs.",
+      "wants": "To bring his wife back as herself, not as one of the walking dead of the pass.",
+      "flaw": "Grief has made him willing to do anything to anyone.",
+      "voice": {
+        "theme": "tactics.npc.ivo-rime",
+        "description": "Soft-spoken, precise, exhausted; a doctor's bedside manner over something broken.",
+        "sample": "They walk, but they don't remember. I want to know where the remembering went."
+      },
+      "relationships": [
+        {
+          "with": "maren_sorrel",
+          "kind": "debt",
+          "note": "The Kindled pay for his work."
+        }
+      ]
+    },
+    {
+      "id": "oswin_hale",
+      "preset": "lich",
+      "name": "Oswin Hale",
+      "epithet": "The Last Warden-Keeper",
+      "role": "villain",
+      "faction": "the_last_watch",
+      "summary": "The last Warden-Keeper, undead for a century, who tried to put the flame out on the night of the Fall.",
+      "bio": "Oswin became Warden-Keeper in 251 HR and refused ever to touch ember-fire. He read the oldest records, learned the flame was stolen and that it was eating the Vale's memory, and on the night of the Fall he tried to put it out. Someone stopped him halfway and the flame shattered instead. He bound himself into undeath to finish the work and has held Ember Keep for a hundred years. He is the only person in the Vale who remembers everything, and he is very tired.",
+      "wants": "To put out the Hearthflame for good, and to learn who stopped him.",
+      "flaw": "Has decided he alone is fit to make the Vale's choice for it.",
+      "secret": {
+        "text": "Oswin tried to put the flame out on the night of the Fall, not to save it. The Keep fell because someone stopped him.",
+        "unlock": {
+          "flag": "truth_fall"
+        }
+      },
+      "voice": {
+        "theme": "tactics.npc.oswin-hale",
+        "description": "Dry, cold, precise, very old; long silences; occasionally a scholar's warmth breaks through before he smothers it.",
+        "sample": "I remember every year of the Vale's history. You have no idea how heavy that is."
+      },
+      "relationships": [
+        {
+          "with": "halvard",
+          "kind": "friend",
+          "note": "His champion, bound by the same oath."
+        },
+        {
+          "with": "hooded_stranger",
+          "kind": "enemy",
+          "note": "Suspects the Stranger stopped him on the night of the Fall."
+        }
+      ]
+    },
+    {
+      "id": "halvard",
+      "preset": "black_knight",
+      "name": "Ser Halvard",
+      "epithet": "The Black Knight",
+      "role": "villain",
+      "faction": "the_last_watch",
+      "summary": "Oswin's oath-bound champion, guarding a keep that no longer exists.",
+      "bio": "Halvard was captain of the Warden guard on the night of the Fall. He swore to hold the Keep until his Keeper released him, and Oswin never has. He has stood at the broken gate for a hundred years in armour blackened by the infernal fire. He is honourable, courteous and lethal, and he would very much like to be released.",
+      "wants": "To be released from his oath with honour.",
+      "flaw": "Cannot imagine breaking an oath, even one that should never have been sworn.",
+      "voice": {
+        "theme": "tactics.npc.halvard",
+        "description": "Deep and hollow inside the helm, formal old-fashioned courtesy, unfailingly polite while trying to kill you.",
+        "sample": "I hold this gate for the Keeper. Turn back, or I will hold it against you."
+      },
+      "relationships": [
+        {
+          "with": "oswin_hale",
+          "kind": "friend",
+          "note": "Loves him; has not forgiven him."
+        }
+      ]
+    },
+    {
+      "id": "hooded_stranger",
+      "preset": "stranger",
+      "name": "The Hooded Stranger",
+      "role": "npc",
+      "summary": "A masked traveller who knows far too much about the embers and keeps turning up where the party is going.",
+      "bio": "The Stranger appears in Emberwick in the first week of the campaign and is never far from the party after that, sometimes helping, sometimes not. They know things nobody in the Vale should know: where the embers lie, what the flame costs, what lies beyond the Greywall. They were present on the night of the Fall, a hundred years ago, and they do not look a day older. Their goal is revealed in Chapter V: they want the Hearthflame carried back over the Greywall. Who they are, and who they serve, the first campaign does not answer.",
+      "wants": "For the Hearthflame to be returned beyond the Greywall.",
+      "flaw": "Will let people suffer to keep their secret.",
+      "secret": {
+        "text": "The Stranger stopped Oswin Hale from putting out the flame on the night of the Fall, because a dead flame could never be returned.",
+        "unlock": {
+          "flag": "ch5_stranger_goal"
+        }
+      },
+      "voice": {
+        "theme": "tactics.npc.hooded-stranger",
+        "description": "Quiet, ageless, unplaceable accent; never states anything directly; sounds faintly amused and faintly sad.",
+        "sample": "You're asking the right questions. You're just asking the wrong people."
+      },
+      "relationships": [
+        {
+          "with": "oswin_hale",
+          "kind": "enemy",
+          "note": "Stopped him a century ago."
+        },
+        {
+          "with": "pip_ashdown",
+          "kind": "unknown",
+          "note": "Watches her closely; she remembers too much."
+        }
+      ]
+    }
+  ]
+}

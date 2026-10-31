@@ -1,0 +1,106 @@
+{
+  "speaker": "maren_sorrel",
+  "events": {
+    "battle_start": [
+      {
+        "id": "bark_maren_sorrel_battle_start_1",
+        "text": "I don't want to hurt you. I want you warm. Both can be true today.",
+        "mood": "sad",
+        "direction": "quiet, sincere, never villainous",
+        "weight": 3
+      },
+      {
+        "id": "bark_maren_sorrel_battle_start_2",
+        "text": "Every winter we argue, more children freeze. Let's not argue.",
+        "mood": "idle",
+        "weight": 2
+      },
+      {
+        "id": "bark_maren_sorrel_battle_start_3",
+        "text": "You've felt the cold. Stand with me, or stand aside.",
+        "mood": "idle"
+      }
+    ],
+    "hit": [
+      {
+        "id": "bark_maren_sorrel_hit_1",
+        "text": "I'm sorry. I'll carry that one too.",
+        "mood": "sad",
+        "weight": 2
+      }
+    ],
+    "miss": [
+      {
+        "id": "bark_maren_sorrel_miss_1",
+        "text": "Still standing. Good. There's still time to listen.",
+        "mood": "idle"
+      }
+    ],
+    "crit": [
+      {
+        "id": "bark_maren_sorrel_crit_1",
+        "text": "One hurt now, ten thousand spared. I've done the sums.",
+        "mood": "idle",
+        "direction": "calm, a preacher's cadence",
+        "weight": 2
+      }
+    ],
+    "kill": [
+      {
+        "id": "bark_maren_sorrel_kill_1",
+        "text": "Your warmth goes into the flame now. It won't be wasted.",
+        "mood": "sad",
+        "direction": "gently, as a blessing"
+      }
+    ],
+    "ally_down": [
+      {
+        "id": "bark_maren_sorrel_ally_down_1",
+        "text": "Kindled, rise. The cold doesn't care if you're tired.",
+        "mood": "angry"
+      }
+    ],
+    "low_hp": [
+      {
+        "id": "bark_maren_sorrel_low_hp_1",
+        "text": "I've felt worse. I remember being worse.",
+        "mood": "hurt",
+        "direction": "slightly puzzled, as if unsure whose memory it is"
+      },
+      {
+        "id": "bark_maren_sorrel_low_hp_2",
+        "text": "Not yet. They're all counting on me.",
+        "mood": "hurt",
+        "weight": 2
+      }
+    ],
+    "victory": [
+      {
+        "id": "bark_maren_sorrel_victory_1",
+        "text": "Rest now. When you wake, it will be warm.",
+        "mood": "happy",
+        "direction": "tender",
+        "weight": 2
+      },
+      {
+        "id": "bark_maren_sorrel_victory_2",
+        "text": "I'll remember you kindly. I remember everyone kindly.",
+        "mood": "sad"
+      }
+    ],
+    "defeat": [
+      {
+        "id": "bark_maren_sorrel_defeat_1",
+        "text": "Then who keeps them warm? Tell me that. Who?",
+        "mood": "angry",
+        "direction": "the quiet finally breaks",
+        "weight": 2
+      },
+      {
+        "id": "bark_maren_sorrel_defeat_2",
+        "text": "I had a plan. I was the only one with a plan.",
+        "mood": "sad"
+      }
+    ]
+  }
+}

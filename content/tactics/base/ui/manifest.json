@@ -443,12 +443,43 @@
             0
           ],
           "text": "dim"
+        },
+        "focused": {
+          "rect": [
+            92,
+            0,
+            24,
+            19
+          ],
+          "slice": [
+            7,
+            7,
+            7,
+            7
+          ],
+          "outset": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "padding": [
+            5,
+            4,
+            5,
+            4
+          ],
+          "contentOffset": [
+            0,
+            0
+          ],
+          "text": "on_gold"
         }
       },
       "secondary": {
         "normal": {
           "rect": [
-            92,
+            117,
             0,
             22,
             17
@@ -479,7 +510,7 @@
         },
         "hover": {
           "rect": [
-            115,
+            140,
             0,
             22,
             17
@@ -510,7 +541,7 @@
         },
         "pressed": {
           "rect": [
-            138,
+            163,
             0,
             22,
             17
@@ -541,7 +572,7 @@
         },
         "disabled": {
           "rect": [
-            161,
+            186,
             0,
             22,
             17
@@ -569,12 +600,43 @@
             0
           ],
           "text": "dim"
+        },
+        "focused": {
+          "rect": [
+            209,
+            0,
+            24,
+            19
+          ],
+          "slice": [
+            7,
+            7,
+            7,
+            7
+          ],
+          "outset": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "padding": [
+            5,
+            4,
+            5,
+            4
+          ],
+          "contentOffset": [
+            0,
+            0
+          ],
+          "text": "ink"
         }
       },
       "danger": {
         "normal": {
           "rect": [
-            184,
+            234,
             0,
             22,
             17
@@ -605,8 +667,8 @@
         },
         "hover": {
           "rect": [
-            207,
             0,
+            20,
             22,
             17
           ],
@@ -636,8 +698,8 @@
         },
         "pressed": {
           "rect": [
-            230,
-            0,
+            23,
+            20,
             22,
             17
           ],
@@ -667,8 +729,8 @@
         },
         "disabled": {
           "rect": [
-            0,
-            18,
+            46,
+            20,
             22,
             17
           ],
@@ -695,6 +757,37 @@
             0
           ],
           "text": "dim"
+        },
+        "focused": {
+          "rect": [
+            69,
+            20,
+            24,
+            19
+          ],
+          "slice": [
+            7,
+            7,
+            7,
+            7
+          ],
+          "outset": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "padding": [
+            5,
+            4,
+            5,
+            4
+          ],
+          "contentOffset": [
+            0,
+            0
+          ],
+          "text": "ink"
         }
       }
     }
@@ -912,7 +1005,9 @@
       "Draw the frame 9-slice at the bar's width (its height is fixed). frame.fill = [x, y, height]: the fill area starts at (x, y) and is (width - 2x) wide.",
       "fillW = round(innerW * value / max), at least 3 when value > 0. Tile `mid` across fillW, then draw `left` at the start and `right` ending at fillW (the bright leading edge).",
       "Damage ghost: when HP drops, keep the old width for ~0.4 s, then shrink it to the new one. Draw it first: tile `ghost_mid` across ghostW and end with `ghost_right`; the real fill goes on top.",
-      "ct tiles in 4 px segments, so snap its fillW to a multiple of 4 for whole notches."
+      "ct tiles in 4 px segments, so snap its fillW to a multiple of 4 for whole notches.",
+      "Damage ghost drain (anims.ghost_drain): after the hit, hold the ghost 0.3 s, then over the strip's 5 frames tile frame f as the ghost and ease its width to the new value.",
+      "Heal sweep (anims.heal_sweep): grow the fill to the new value over 0.3 s; meanwhile play the sweep additively across the healed span (scale its travel to that span, clip it to the fill)."
     ]
   },
   "markers": {
@@ -1111,10 +1206,334 @@
           40
         ]
       },
-      "now_tab": {
+      "frame_p1": {
         "rect": [
           0,
           53,
+          52,
+          52
+        ],
+        "slice": [
+          6,
+          6,
+          6,
+          6
+        ],
+        "outset": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "window": [
+          6,
+          6,
+          40,
+          40
+        ],
+        "player": "p1"
+      },
+      "frame_active_p1": {
+        "rect": [
+          53,
+          53,
+          52,
+          52
+        ],
+        "slice": [
+          6,
+          6,
+          6,
+          6
+        ],
+        "outset": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "window": [
+          6,
+          6,
+          40,
+          40
+        ],
+        "player": "p1"
+      },
+      "frame_p2": {
+        "rect": [
+          106,
+          53,
+          52,
+          52
+        ],
+        "slice": [
+          6,
+          6,
+          6,
+          6
+        ],
+        "outset": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "window": [
+          6,
+          6,
+          40,
+          40
+        ],
+        "player": "p2"
+      },
+      "frame_active_p2": {
+        "rect": [
+          0,
+          106,
+          52,
+          52
+        ],
+        "slice": [
+          6,
+          6,
+          6,
+          6
+        ],
+        "outset": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "window": [
+          6,
+          6,
+          40,
+          40
+        ],
+        "player": "p2"
+      },
+      "frame_p3": {
+        "rect": [
+          53,
+          106,
+          52,
+          52
+        ],
+        "slice": [
+          6,
+          6,
+          6,
+          6
+        ],
+        "outset": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "window": [
+          6,
+          6,
+          40,
+          40
+        ],
+        "player": "p3"
+      },
+      "frame_active_p3": {
+        "rect": [
+          106,
+          106,
+          52,
+          52
+        ],
+        "slice": [
+          6,
+          6,
+          6,
+          6
+        ],
+        "outset": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "window": [
+          6,
+          6,
+          40,
+          40
+        ],
+        "player": "p3"
+      },
+      "frame_p4": {
+        "rect": [
+          0,
+          159,
+          52,
+          52
+        ],
+        "slice": [
+          6,
+          6,
+          6,
+          6
+        ],
+        "outset": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "window": [
+          6,
+          6,
+          40,
+          40
+        ],
+        "player": "p4"
+      },
+      "frame_active_p4": {
+        "rect": [
+          53,
+          159,
+          52,
+          52
+        ],
+        "slice": [
+          6,
+          6,
+          6,
+          6
+        ],
+        "outset": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "window": [
+          6,
+          6,
+          40,
+          40
+        ],
+        "player": "p4"
+      },
+      "frame_p5": {
+        "rect": [
+          106,
+          159,
+          52,
+          52
+        ],
+        "slice": [
+          6,
+          6,
+          6,
+          6
+        ],
+        "outset": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "window": [
+          6,
+          6,
+          40,
+          40
+        ],
+        "player": "p5"
+      },
+      "frame_active_p5": {
+        "rect": [
+          0,
+          212,
+          52,
+          52
+        ],
+        "slice": [
+          6,
+          6,
+          6,
+          6
+        ],
+        "outset": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "window": [
+          6,
+          6,
+          40,
+          40
+        ],
+        "player": "p5"
+      },
+      "frame_p6": {
+        "rect": [
+          53,
+          212,
+          52,
+          52
+        ],
+        "slice": [
+          6,
+          6,
+          6,
+          6
+        ],
+        "outset": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "window": [
+          6,
+          6,
+          40,
+          40
+        ],
+        "player": "p6"
+      },
+      "frame_active_p6": {
+        "rect": [
+          106,
+          212,
+          52,
+          52
+        ],
+        "slice": [
+          6,
+          6,
+          6,
+          6
+        ],
+        "outset": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "window": [
+          6,
+          6,
+          40,
+          40
+        ],
+        "player": "p6"
+      },
+      "now_tab": {
+        "rect": [
+          0,
+          265,
           23,
           11
         ],
@@ -1123,7 +1542,7 @@
       "ai_badge": {
         "rect": [
           24,
-          53,
+          265,
           15,
           11
         ],
@@ -1132,7 +1551,7 @@
       "stripe_p1": {
         "rect": [
           40,
-          53,
+          265,
           10,
           5
         ],
@@ -1147,7 +1566,7 @@
       "stripe_p2": {
         "rect": [
           51,
-          53,
+          265,
           10,
           5
         ],
@@ -1162,7 +1581,7 @@
       "stripe_p3": {
         "rect": [
           62,
-          53,
+          265,
           10,
           5
         ],
@@ -1177,7 +1596,7 @@
       "stripe_p4": {
         "rect": [
           73,
-          53,
+          265,
           10,
           5
         ],
@@ -1192,7 +1611,7 @@
       "stripe_p5": {
         "rect": [
           84,
-          53,
+          265,
           10,
           5
         ],
@@ -1207,7 +1626,7 @@
       "stripe_p6": {
         "rect": [
           95,
-          53,
+          265,
           10,
           5
         ],
@@ -1222,7 +1641,7 @@
       "stripe_enemy": {
         "rect": [
           106,
-          53,
+          265,
           10,
           5
         ],
@@ -1237,7 +1656,7 @@
       "stripe_neutral": {
         "rect": [
           117,
-          53,
+          265,
           10,
           5
         ],
@@ -1827,5 +2246,929 @@
         ]
       }
     }
+  },
+  "hud": {
+    "file": "hud.png",
+    "pieces": {
+      "tooltip_header": {
+        "rect": [
+          0,
+          0,
+          36,
+          29
+        ],
+        "slice": [
+          8,
+          17,
+          8,
+          3
+        ],
+        "outset": [
+          3,
+          3,
+          3,
+          0
+        ],
+        "padding": [
+          5,
+          14,
+          5,
+          5
+        ],
+        "header": [
+          3,
+          8
+        ],
+        "headerNote": "the header text sits in rows header[0]..header[0]+header[1] of the box; body below"
+      },
+      "toast_info": {
+        "rect": [
+          37,
+          0,
+          30,
+          16
+        ],
+        "slice": [
+          13,
+          4,
+          4,
+          4
+        ],
+        "padding": [
+          14,
+          3,
+          4,
+          3
+        ],
+        "text": "ink",
+        "enter": "slide in from the right edge over 0.2 s, hold ~3 s, fade 0.3 s"
+      },
+      "toast_success": {
+        "rect": [
+          68,
+          0,
+          30,
+          16
+        ],
+        "slice": [
+          13,
+          4,
+          4,
+          4
+        ],
+        "padding": [
+          14,
+          3,
+          4,
+          3
+        ],
+        "text": "ink",
+        "enter": "slide in from the right edge over 0.2 s, hold ~3 s, fade 0.3 s"
+      },
+      "toast_warning": {
+        "rect": [
+          99,
+          0,
+          30,
+          16
+        ],
+        "slice": [
+          13,
+          4,
+          4,
+          4
+        ],
+        "padding": [
+          14,
+          3,
+          4,
+          3
+        ],
+        "text": "ink",
+        "enter": "slide in from the right edge over 0.2 s, hold ~3 s, fade 0.3 s"
+      },
+      "toast_danger": {
+        "rect": [
+          130,
+          0,
+          30,
+          16
+        ],
+        "slice": [
+          13,
+          4,
+          4,
+          4
+        ],
+        "padding": [
+          14,
+          3,
+          4,
+          3
+        ],
+        "text": "ink",
+        "enter": "slide in from the right edge over 0.2 s, hold ~3 s, fade 0.3 s"
+      },
+      "objective": {
+        "rect": [
+          161,
+          0,
+          26,
+          24
+        ],
+        "slice": [
+          7,
+          11,
+          4,
+          4
+        ],
+        "padding": [
+          7,
+          3,
+          4,
+          3
+        ],
+        "title": "the first 8 px of the box is the title row (OBJECTIVE / round counter)"
+      },
+      "check_open": {
+        "rect": [
+          188,
+          0,
+          11,
+          11
+        ]
+      },
+      "check_done": {
+        "rect": [
+          200,
+          0,
+          11,
+          11
+        ]
+      },
+      "check_failed": {
+        "rect": [
+          212,
+          0,
+          11,
+          11
+        ]
+      },
+      "reaction": {
+        "rect": [
+          0,
+          30,
+          48,
+          40
+        ],
+        "slice": [
+          13,
+          12,
+          13,
+          11
+        ],
+        "outset": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "padding": [
+          9,
+          8,
+          9,
+          8
+        ],
+        "ring": "the countdown ring sits in the left padding, vertically centred"
+      },
+      "minimap": {
+        "rect": [
+          49,
+          30,
+          48,
+          48
+        ],
+        "slice": [
+          9,
+          9,
+          9,
+          9
+        ],
+        "outset": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "window": "the box minus 3 px all round is transparent: draw the map first, then the frame",
+        "compass": "draw minimap_compass centred on the box's top edge, its tick pointing in"
+      },
+      "minimap_compass": {
+        "rect": [
+          98,
+          30,
+          13,
+          14
+        ],
+        "attach": "centre x on the minimap box, y = box top - 6"
+      },
+      "pip_you": {
+        "rect": [
+          112,
+          30,
+          7,
+          7
+        ]
+      },
+      "pip_ally": {
+        "rect": [
+          120,
+          30,
+          7,
+          7
+        ]
+      },
+      "pip_enemy": {
+        "rect": [
+          128,
+          30,
+          7,
+          7
+        ]
+      },
+      "pip_objective": {
+        "rect": [
+          136,
+          30,
+          7,
+          7
+        ]
+      },
+      "glint_h": {
+        "rect": [
+          144,
+          30,
+          13,
+          3
+        ],
+        "blend": "add",
+        "use": "slide along a gold edge, centre on the edge's middle row, every few seconds"
+      },
+      "glint_v": {
+        "rect": [
+          158,
+          30,
+          3,
+          13
+        ],
+        "blend": "add",
+        "use": "slide along a gold edge, centre on the edge's middle row, every few seconds"
+      }
+    }
+  },
+  "anims": {
+    "panel_shimmer": {
+      "file": "panel_shimmer.png",
+      "frame": [
+        42,
+        34
+      ],
+      "frames": 8,
+      "fps": 12,
+      "loop": false,
+      "every": "4-6 s",
+      "note": "frames of the 'main' panel source with the same slice: swap it in for the main panel while it plays",
+      "slice": [
+        11,
+        10,
+        11,
+        5
+      ],
+      "outset": [
+        4,
+        4,
+        4,
+        0
+      ]
+    },
+    "countdown_ring": {
+      "file": "countdown_ring.png",
+      "frame": [
+        25,
+        25
+      ],
+      "frames": 17,
+      "fps": 0,
+      "loop": false,
+      "note": "frame = round(16 * elapsed / limit); the last frame is the empty ring"
+    },
+    "heal_sweep": {
+      "file": "heal_sweep.png",
+      "frame": [
+        14,
+        5
+      ],
+      "frames": 6,
+      "fps": 15,
+      "loop": false,
+      "blend": "add"
+    },
+    "ghost_drain": {
+      "file": "ghost_drain.png",
+      "frame": [
+        4,
+        5
+      ],
+      "frames": 5,
+      "fps": 10,
+      "loop": false,
+      "note": "tile frame f as the ghost fill while its width eases to the new value"
+    }
+  },
+  "glyphs": {
+    "file": "glyphs.png",
+    "pieces": {
+      "pad_a": {
+        "rect": [
+          0,
+          0,
+          15,
+          15
+        ]
+      },
+      "pad_b": {
+        "rect": [
+          16,
+          0,
+          15,
+          15
+        ]
+      },
+      "pad_x": {
+        "rect": [
+          32,
+          0,
+          15,
+          15
+        ]
+      },
+      "pad_y": {
+        "rect": [
+          48,
+          0,
+          15,
+          15
+        ]
+      },
+      "ps_cross": {
+        "rect": [
+          64,
+          0,
+          15,
+          15
+        ]
+      },
+      "ps_circle": {
+        "rect": [
+          80,
+          0,
+          15,
+          15
+        ]
+      },
+      "ps_square": {
+        "rect": [
+          96,
+          0,
+          15,
+          15
+        ]
+      },
+      "ps_triangle": {
+        "rect": [
+          112,
+          0,
+          15,
+          15
+        ]
+      },
+      "pad_lb": {
+        "rect": [
+          128,
+          0,
+          19,
+          11
+        ]
+      },
+      "pad_rb": {
+        "rect": [
+          148,
+          0,
+          19,
+          11
+        ]
+      },
+      "pad_lt": {
+        "rect": [
+          168,
+          0,
+          17,
+          14
+        ]
+      },
+      "pad_rt": {
+        "rect": [
+          0,
+          16,
+          17,
+          14
+        ]
+      },
+      "pad_dpad": {
+        "rect": [
+          18,
+          16,
+          17,
+          17
+        ]
+      },
+      "pad_dpad_up": {
+        "rect": [
+          36,
+          16,
+          17,
+          17
+        ]
+      },
+      "pad_dpad_down": {
+        "rect": [
+          54,
+          16,
+          17,
+          17
+        ]
+      },
+      "pad_dpad_left": {
+        "rect": [
+          72,
+          16,
+          17,
+          17
+        ]
+      },
+      "pad_dpad_right": {
+        "rect": [
+          90,
+          16,
+          17,
+          17
+        ]
+      },
+      "pad_ls": {
+        "rect": [
+          108,
+          16,
+          15,
+          15
+        ]
+      },
+      "pad_rs": {
+        "rect": [
+          124,
+          16,
+          15,
+          15
+        ]
+      },
+      "pad_menu": {
+        "rect": [
+          140,
+          16,
+          13,
+          11
+        ]
+      },
+      "pad_view": {
+        "rect": [
+          154,
+          16,
+          13,
+          11
+        ]
+      },
+      "key_blank": {
+        "rect": [
+          168,
+          16,
+          13,
+          14
+        ],
+        "slice": [
+          4,
+          4,
+          4,
+          5
+        ],
+        "padding": [
+          3,
+          2,
+          3,
+          4
+        ]
+      },
+      "key_a": {
+        "rect": [
+          0,
+          34,
+          13,
+          14
+        ]
+      },
+      "key_b": {
+        "rect": [
+          14,
+          34,
+          13,
+          14
+        ]
+      },
+      "key_c": {
+        "rect": [
+          28,
+          34,
+          13,
+          14
+        ]
+      },
+      "key_d": {
+        "rect": [
+          42,
+          34,
+          13,
+          14
+        ]
+      },
+      "key_e": {
+        "rect": [
+          56,
+          34,
+          13,
+          14
+        ]
+      },
+      "key_f": {
+        "rect": [
+          70,
+          34,
+          13,
+          14
+        ]
+      },
+      "key_g": {
+        "rect": [
+          84,
+          34,
+          13,
+          14
+        ]
+      },
+      "key_h": {
+        "rect": [
+          98,
+          34,
+          13,
+          14
+        ]
+      },
+      "key_i": {
+        "rect": [
+          112,
+          34,
+          13,
+          14
+        ]
+      },
+      "key_j": {
+        "rect": [
+          126,
+          34,
+          13,
+          14
+        ]
+      },
+      "key_k": {
+        "rect": [
+          140,
+          34,
+          13,
+          14
+        ]
+      },
+      "key_l": {
+        "rect": [
+          154,
+          34,
+          13,
+          14
+        ]
+      },
+      "key_m": {
+        "rect": [
+          168,
+          34,
+          13,
+          14
+        ]
+      },
+      "key_n": {
+        "rect": [
+          0,
+          49,
+          13,
+          14
+        ]
+      },
+      "key_o": {
+        "rect": [
+          14,
+          49,
+          13,
+          14
+        ]
+      },
+      "key_p": {
+        "rect": [
+          28,
+          49,
+          13,
+          14
+        ]
+      },
+      "key_q": {
+        "rect": [
+          42,
+          49,
+          13,
+          14
+        ]
+      },
+      "key_r": {
+        "rect": [
+          56,
+          49,
+          13,
+          14
+        ]
+      },
+      "key_s": {
+        "rect": [
+          70,
+          49,
+          13,
+          14
+        ]
+      },
+      "key_t": {
+        "rect": [
+          84,
+          49,
+          13,
+          14
+        ]
+      },
+      "key_u": {
+        "rect": [
+          98,
+          49,
+          13,
+          14
+        ]
+      },
+      "key_v": {
+        "rect": [
+          112,
+          49,
+          13,
+          14
+        ]
+      },
+      "key_w": {
+        "rect": [
+          126,
+          49,
+          13,
+          14
+        ]
+      },
+      "key_x": {
+        "rect": [
+          140,
+          49,
+          13,
+          14
+        ]
+      },
+      "key_y": {
+        "rect": [
+          154,
+          49,
+          13,
+          14
+        ]
+      },
+      "key_z": {
+        "rect": [
+          168,
+          49,
+          13,
+          14
+        ]
+      },
+      "key_0": {
+        "rect": [
+          0,
+          64,
+          13,
+          14
+        ]
+      },
+      "key_1": {
+        "rect": [
+          14,
+          64,
+          13,
+          14
+        ]
+      },
+      "key_2": {
+        "rect": [
+          28,
+          64,
+          13,
+          14
+        ]
+      },
+      "key_3": {
+        "rect": [
+          42,
+          64,
+          13,
+          14
+        ]
+      },
+      "key_4": {
+        "rect": [
+          56,
+          64,
+          13,
+          14
+        ]
+      },
+      "key_5": {
+        "rect": [
+          70,
+          64,
+          13,
+          14
+        ]
+      },
+      "key_6": {
+        "rect": [
+          84,
+          64,
+          13,
+          14
+        ]
+      },
+      "key_7": {
+        "rect": [
+          98,
+          64,
+          13,
+          14
+        ]
+      },
+      "key_8": {
+        "rect": [
+          112,
+          64,
+          13,
+          14
+        ]
+      },
+      "key_9": {
+        "rect": [
+          126,
+          64,
+          13,
+          14
+        ]
+      },
+      "key_esc": {
+        "rect": [
+          140,
+          64,
+          19,
+          14
+        ]
+      },
+      "key_tab": {
+        "rect": [
+          160,
+          64,
+          19,
+          14
+        ]
+      },
+      "key_shift": {
+        "rect": [
+          0,
+          79,
+          27,
+          14
+        ]
+      },
+      "key_ctrl": {
+        "rect": [
+          28,
+          79,
+          23,
+          14
+        ]
+      },
+      "key_alt": {
+        "rect": [
+          52,
+          79,
+          19,
+          14
+        ]
+      },
+      "key_enter": {
+        "rect": [
+          72,
+          79,
+          28,
+          14
+        ]
+      },
+      "key_space": {
+        "rect": [
+          101,
+          79,
+          27,
+          14
+        ]
+      },
+      "key_up": {
+        "rect": [
+          129,
+          79,
+          13,
+          14
+        ]
+      },
+      "key_down": {
+        "rect": [
+          143,
+          79,
+          13,
+          14
+        ]
+      },
+      "key_left": {
+        "rect": [
+          157,
+          79,
+          13,
+          14
+        ]
+      },
+      "key_right": {
+        "rect": [
+          171,
+          79,
+          13,
+          14
+        ]
+      },
+      "mouse_left": {
+        "rect": [
+          0,
+          94,
+          13,
+          17
+        ]
+      },
+      "mouse_right": {
+        "rect": [
+          14,
+          94,
+          13,
+          17
+        ]
+      }
+    },
+    "note": "Gamepad (Xbox letters and colours, PlayStation shapes), keyboard and mouse prompts at 1x. key_blank is a 9-slice cap for any legend the game sets itself. Show glyphs at the UI scale beside the action's name, e.g. [A] Confirm  [B] Back  [LB][RB] Cycle."
   }
 }

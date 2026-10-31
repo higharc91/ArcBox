@@ -1,5 +1,5 @@
 {
-  "framesPerDirection": 23,
+  "framesPerDirection": 39,
   "directions": {
     "front": {
       "row": 0
@@ -14,13 +14,7 @@
         0,
         1,
         2,
-        3
-      ],
-      "fps": 6.0,
-      "loop": true
-    },
-    "walk": {
-      "frames": [
+        3,
         4,
         5,
         6,
@@ -29,41 +23,63 @@
       "fps": 8.0,
       "loop": true
     },
-    "attack": {
+    "walk": {
       "frames": [
         8,
         9,
         10,
         11,
-        12
+        12,
+        13,
+        14,
+        15
       ],
       "fps": 10.0,
+      "loop": true
+    },
+    "attack": {
+      "frames": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "fps": 12.0,
       "loop": false
     },
     "special": {
       "frames": [
-        13,
-        14,
-        15,
-        16,
-        17,
-        18
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33
       ],
-      "fps": 9.0,
+      "fps": 11.0,
       "loop": false
     },
     "hurt": {
       "frames": [
-        19,
-        20
+        34,
+        35,
+        36
       ],
-      "fps": 8.0,
+      "fps": 10.0,
       "loop": false
     },
     "down": {
       "frames": [
-        21,
-        22
+        37,
+        38
       ],
       "fps": 4.0,
       "loop": false
@@ -148,7 +164,8 @@
       "variants": {
         "granite": "golem_granite.png",
         "basalt": "golem_basalt.png",
-        "temple": "golem_temple.png"
+        "temple": "golem_temple.png",
+        "crystal": "golem_crystal.png"
       }
     },
     "fire_elemental": {
@@ -174,7 +191,9 @@
       ],
       "variants": {
         "ember": "fire_elemental_ember.png",
-        "azure": "fire_elemental_azure.png"
+        "azure": "fire_elemental_azure.png",
+        "radiant": "fire_elemental_radiant.png",
+        "shadow": "fire_elemental_shadow.png"
       }
     },
     "water_elemental": {
@@ -285,11 +304,11 @@
       "name": "Mimic",
       "role": "monster",
       "frame": {
-        "width": 40,
-        "height": 40,
+        "width": 48,
+        "height": 48,
         "anchor": [
-          20,
-          37
+          24,
+          44
         ]
       },
       "footprint": [

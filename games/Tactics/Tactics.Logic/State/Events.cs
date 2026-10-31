@@ -118,8 +118,12 @@ public sealed record ConditionSaved(UnitId Unit, ConditionId Condition, RollResu
 /// <summary>A caster's concentration on <see cref="Ability"/> ended; what it sustained ends with it.</summary>
 public sealed record ConcentrationBroken(UnitId Caster, AbilityId Ability) : BattleEvent;
 
-/// <summary>A passive's hook fired and its effects are about to run.</summary>
-public sealed record PassiveTriggered(UnitId Owner, string Passive) : BattleEvent;
+/// <summary>
+/// A passive's hook fired and its effects are about to run. <see cref="Source"/> is who the effects act as when that isn't
+/// the <see cref="Owner"/>: the unit that cast a zone the owner stands in, or applied the condition that carries the passive.
+/// </summary>
+public sealed record PassiveTriggered(UnitId Owner, string Passive,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] UnitId? Source = null) : BattleEvent;
 
 /// <summary>
 /// An attack's final outcome, after any reaction to its roll (a <see cref="Rolled"/> hit can become a miss, a hit on a

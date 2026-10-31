@@ -1,0 +1,113 @@
+{
+  "id": "earnest",
+  "name": "Earnest",
+  "description": "Hopeful, kind and determined to do the right thing, even when it's hard.",
+  "voice": {
+    "direction": "Open and warm; the voice cracks a little when it's emotional. Young or old, it believes in people."
+  },
+  "events": {
+    "battle_start": [
+      {
+        "id": "voice_earnest_battle_start_1",
+        "text": "We can still talk this through! No? All right.",
+        "mood": "angry"
+      },
+      {
+        "id": "voice_earnest_battle_start_2",
+        "text": "For the Vale!",
+        "mood": "angry"
+      }
+    ],
+    "crit": [
+      {
+        "id": "voice_earnest_crit_1",
+        "text": "Yes! It worked!",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_earnest_crit_2",
+        "text": "I did it!",
+        "mood": "happy"
+      }
+    ],
+    "kill": [
+      {
+        "id": "voice_earnest_kill_1",
+        "text": "I'm sorry. I'm sorry.",
+        "mood": "sad"
+      },
+      {
+        "id": "voice_earnest_kill_2",
+        "text": "It had to be done.",
+        "mood": "sad"
+      }
+    ],
+    "ally_down": [
+      {
+        "id": "voice_earnest_ally_down_1",
+        "text": "No! Please, hold on!",
+        "mood": "surprised"
+      },
+      {
+        "id": "voice_earnest_ally_down_2",
+        "text": "Help them! Someone help them!",
+        "mood": "surprised"
+      }
+    ],
+    "low_hp": [
+      {
+        "id": "voice_earnest_low_hp_1",
+        "text": "I won't give up. I won't.",
+        "mood": "hurt"
+      },
+      {
+        "id": "voice_earnest_low_hp_2",
+        "text": "Keep fighting... for them.",
+        "mood": "hurt"
+      }
+    ],
+    "healed": [
+      {
+        "id": "voice_earnest_healed_1",
+        "text": "Thank you! Truly.",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_earnest_healed_2",
+        "text": "I can keep going.",
+        "mood": "happy"
+      }
+    ],
+    "victory": [
+      {
+        "id": "voice_earnest_victory_1",
+        "text": "We did it. Together.",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_earnest_victory_2",
+        "text": "Is everyone all right?",
+        "mood": "happy"
+      }
+    ],
+    "defeat": [
+      {
+        "id": "voice_earnest_defeat_1",
+        "text": "We'll make it right. We have to.",
+        "mood": "sad"
+      }
+    ],
+    "camp": [
+      {
+        "id": "voice_earnest_camp_1",
+        "text": "Do you think Emberwick will be all right this winter?",
+        "mood": "idle"
+      },
+      {
+        "id": "voice_earnest_camp_2",
+        "text": "I like this. All of us, round a fire.",
+        "mood": "idle"
+      }
+    ]
+  }
+}

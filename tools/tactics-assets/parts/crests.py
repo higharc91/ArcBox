@@ -261,9 +261,61 @@ def class_crest(cls: str) -> Canvas:
     c.polygon([(6, 5), (25, 5), (25, 15), (15.5, 26.5), (6, 15)], "field", 3)
     c.polygon([(6, 5), (15, 5), (15, 26), (6, 15)], "field", 4)           # the lit half of the field
     c.rect(4, 3, 27, 3, "rim", 5)
+    _bevel(c)
     CLASS_SYMBOL[cls](c, 15, 14)
     c.outline()
     return c
+
+
+def _bevel(c: Canvas) -> None:
+    """Casts the gold rim: lit where it faces the top-left (outside edge) and where the field sinks below it on
+    the bottom-right (inner edge), dark on the opposite edges, so the rim reads as raised metal around a recessed
+    field rather than a flat yellow band."""
+    import numpy as np
+    rim = c.mask("rim")
+    field = c.mask("field")
+    sh = c.shade.astype(np.int16)
+
+    def nb(m, dx, dy):
+        out = np.zeros_like(m)
+        h, w = m.shape
+        out[max(0, -dy):h - max(0, dy), max(0, -dx):w - max(0, dx)] = m[max(0, dy):h - max(0, -dy) or None,
+                                                                        max(0, dx):w - max(0, -dx) or None]
+        return out
+    empty = ~(rim | field)
+    outer_lit = rim & (nb(empty, 0, -1) | nb(empty, -1, 0))
+    outer_dark = rim & (nb(empty, 0, 1) | nb(empty, 1, 0))
+    inner_tl = rim & (nb(field, 0, 1) | nb(field, 1, 0)) & ~outer_dark
+    inner_br = rim & (nb(field, 0, -1) | nb(field, -1, 0)) & ~outer_lit
+    sh[rim] = 4
+    sh[inner_tl] = 2
+    sh[inner_br] = 5
+    sh[outer_dark] = 2
+    sh[outer_lit] = 5
+    edge_field = field & (nb(rim, 0, -1) | nb(rim, -1, 0))                # the rim's shadow on the field
+    sh[edge_field] = np.maximum(sh[edge_field] - 1, 1)
+    c.shade = sh.astype(np.uint8)
+
+
+def gleam(shape: str, frames: int = 8) -> Image.Image:
+    """An additive glint that sweeps a crest when the TV calls out a signature ability: a bright diagonal band,
+    masked to the shield or medallion outline, as a strip. Draw it over any crest of that shape."""
+    import numpy as np
+    base = class_crest("fighter") if shape == "shield" else subclass_badge("vanguard")
+    m = (base.slot > 0)
+    h, w = m.shape
+    ys, xs = np.mgrid[0:h, 0:w]
+    strip = np.zeros((h, w * frames, 4), np.uint8)
+    for f in range(frames):
+        pos = -6 + f * (w + h + 6) / (frames - 1)
+        d = np.abs(xs + ys - pos)
+        a = np.where(d < 1.5, 210, np.where(d < 3.5, 110, 0))
+        a = np.where(m, a, 0).astype(np.uint8)
+        strip[:, f * w:(f + 1) * w, 0] = 255
+        strip[:, f * w:(f + 1) * w, 1] = 240
+        strip[:, f * w:(f + 1) * w, 2] = 200
+        strip[:, f * w:(f + 1) * w, 3] = a
+    return Image.fromarray(strip, "RGBA")
 
 
 def subclass_badge(sub: str) -> Canvas:
@@ -274,6 +326,14 @@ def subclass_badge(sub: str) -> Canvas:
         a = k / 20 * 2 * math.pi
         if math.cos(a) + math.sin(a) < -0.4:
             c.px(11 + math.cos(a) * 9.4, 11 + math.sin(a) * 9.4, "rim", 5)
+    for y in range(22):                                                    # rim shadow bottom-right; the field
+        for x in range(22):                                                # sinks under the rim top-left
+            dx, dy = x + 0.5 - 11, y + 0.5 - 11
+            d = math.hypot(dx, dy)
+            if 9.0 < d <= 10 and dx + dy > 4:
+                c.px(x, y, "rim", 2)
+            elif 7.3 < d <= 8.3 and dx + dy < -4:
+                c.px(x, y, "field", 2)
     SUB_SYMBOL[sub](c, 11, 11)
     c.outline()
     return c
@@ -314,9 +374,32 @@ def build() -> None:
         index[s.id] = [col * 22, row * 22, 22, 22]
         stiles.append(Tile(img, s.name, creator.CLASSES[s.cls].name))
     save(bsheet, out / "subclasses.png")
+    gl_s, gl_m = gleam("shield"), gleam("medallion")
+    save(gl_s, out / "gleam_shield.png")
+    save(gl_m, out / "gleam_medallion.png")
     write_json({"classes": {"file": "classes.png", "size": [32, 32], "order": classes},
-                "subclasses": {"file": "subclasses.png", "size": [22, 22], "rects": index}}, out / "manifest.json")
+                "subclasses": {"file": "subclasses.png", "size": [22, 22], "rects": index},
+                "anims": {"gleam_shield": {"file": "gleam_shield.png", "frame": [32, 32], "frames": 8, "fps": 16,
+                                           "blend": "add", "over": "any class crest"},
+                          "gleam_medallion": {"file": "gleam_medallion.png", "frame": [22, 22], "frames": 8,
+                                              "fps": 16, "blend": "add", "over": "any subclass medallion"}}},
+               out / "manifest.json")
+    def swept(img, strip, f, n):
+        out_ = img.copy()
+        fr = strip.crop((f * n, 0, (f + 1) * n, n))
+        a = np.asarray(out_).astype(np.int16)
+        g = np.asarray(fr).astype(np.int16)
+        k = g[..., 3:4] / 255.0
+        a[..., :3] = np.clip(a[..., :3] + g[..., :3] * k, 0, 255)
+        return Image.fromarray(a.astype(np.uint8), "RGBA")
+    import numpy as np
+    from arcpix.preview import strip as _strip
+    c0 = class_crest("paladin").render(_pal("paladin"))
+    m0 = subclass_badge("crusader").render(_pal("paladin"))
+    gtiles = [Tile(_strip([swept(c0, gl_s, f, 32) for f in range(8)], 1, 3), "gleam_shield", "additive, 8 frames"),
+              Tile(_strip([swept(m0, gl_m, f, 22) for f in range(8)], 1, 3), "gleam_medallion", "additive, 8 frames")]
     save(stack("Crests", [contact_sheet("Classes", ctiles, columns=12, zoom=4),
-                          contact_sheet("Subclasses", stiles, columns=6, zoom=4)],
+                          contact_sheet("Subclasses", stiles, columns=6, zoom=4),
+                          contact_sheet("Signature callout gleam", gtiles, columns=1, zoom=4)],
                "Heraldry for the creator, character cards and signature-ability callouts."),
          PREVIEWS / "31-crests.png")

@@ -41,6 +41,8 @@ GLYPHS: dict[str, list[str]] = {
     "crown": ["*..#..*", "#.###.#", "#######", "#+#+#+#", "#######"],
     "dice": ["#######", "#-...-#", "#.....#", "#..-..#", "#.....#", "#-...-#", "#######"],
     "sword": ["......+", ".....+#", "....+#.", "*..+#..", ".*+#...", "..*....", ".*.*..."],
+    "surprise": ["##..##.", "##.#..#", "##....#", "##...#.", "##..#..", ".......", "##..#..", "--..-.."],
+    "star": ["...#...", "...#...", "#######", ".#####.", "..###..", ".##.##.", "#.....#"],
 }
 COLOURS: dict[str, tuple[str, str]] = {      # icon ramp, accent ramp
     "alert": ("magic/blood", "metal/gold"), "question": ("cloth/steel_blue", "metal/gold"),
@@ -50,6 +52,7 @@ COLOURS: dict[str, tuple[str, str]] = {      # icon ramp, accent ramp
     "skull": ("metal/iron", "cloth/charcoal"), "coin": ("metal/gold", "metal/gold"),
     "vote": ("magic/nature", "metal/gold"), "crown": ("metal/gold", "magic/blood"),
     "dice": ("metal/gold", "cloth/charcoal"), "sword": ("metal/steel", "leather/brown"),
+    "surprise": ("magic/blood", "metal/gold"), "star": ("metal/gold", "magic/holy"),
 }
 THOUGHT = {"sleep", "idea", "question"}       # thought bubbles (puffs) instead of speech bubbles
 ELLIPSIS_DOTS = 3
@@ -92,8 +95,14 @@ def _glyph(c: Canvas, name: str, cx: int, cy: int) -> None:
                 c.px(x0 + dx, y0 + dy, "accent", 4)
 
 
+SHAKE = {"alert", "anger", "surprise"}         # glyphs that jolt on the bob frame
+PULSE = {"heart", "star", "idea", "coin"}       # glyphs that flash a highlight on the bob frame
+
+
 def frames(name: str) -> list[Canvas]:
-    """pop (small, empty), overshoot (up a pixel), settle, bob (up a pixel). Ellipsis types its dots instead."""
+    """pop (a small bubble with burst lines), overshoot (wide and squashed, up a pixel), settle, bob (up a pixel,
+    with the glyph's own accent: a jolt for alarms, a highlight flash for hearts and stars). Ellipsis types its
+    dots instead."""
     out = []
     thought = name in THOUGHT
     for f in range(FRAMES):
@@ -102,14 +111,23 @@ def frames(name: str) -> list[Canvas]:
             _bubble(c, W // 2, 9, 10, 7, thought)
         else:
             lift = 1 if f in (1, 3) else 0
-            _bubble(c, W // 2, 3 - lift, 16, 13, thought)
-            cy = 3 - lift + 6
+            wide = f == 1
+            _bubble(c, W // 2, 3 - lift + wide, 16 + 2 * wide, 13 - wide, thought)
+            cy = 3 - lift + 6 + (wide and 0)
             if name == "ellipsis":
                 for k in range(min(f, ELLIPSIS_DOTS)):
                     c.rect(W // 2 - 4 + k * 3, cy, W // 2 - 3 + k * 3, cy + 1, "icon", 2)
             else:
-                _glyph(c, name, W // 2, cy)
+                dx = (1 if f == 3 else 0) if name in SHAKE else 0
+                _glyph(c, name, W // 2 + dx, cy)
+                if f == 3 and name in PULSE:
+                    gw = len(GLYPHS[name][0])
+                    c.px(W // 2 - gw // 2 + 1, cy - len(GLYPHS[name]) // 2 + 1, "icon", 5)
         c.outline()
+        if f == 0:                                    # burst lines as it pops, unoutlined so they stay thin
+            for x, y, dx, dy in ((W // 2 - 7, 9, -1, -1), (W // 2 + 6, 9, 1, -1), (W // 2 - 1, 5, 0, -1)):
+                c.px(x, y, "bubble", 5)
+                c.px(x + dx, y + dy, "bubble", 3)
         out.append(c)
     return out
 

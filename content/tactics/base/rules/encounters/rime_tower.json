@@ -1,0 +1,18 @@
+{ "id": "rime_tower", "name": "Rime Tower", "map": "crystal_cave", "level": 7, "party": { "min": 4, "max": 6 },
+  "enemies": [ { "unit": "ivo_rime", "at": [12, 2], "id": "ivo_rime", "tag": "ivo_rime", "level": 7 },
+               { "unit": "skeleton_archer", "zone": "crystal_ridge", "count": 2, "level": 7, "tag": "risen" },
+               { "unit": "zombie", "zone": "spider_nest", "count": 3, "level": 7, "tag": "risen" },
+               { "unit": "skeleton", "zone": "chasm_ledge", "count": 2, "level": 7, "tag": "risen" },
+               { "unit": "kobold", "zone": "chasm_ledge", "count": 2, "level": 7, "aiProfile": "skirmisher", "tag": "diggers" } ],
+  "xp": 1300, "loot": ["crystal_hoard"],
+  "objectives": { "win": { "any": ["defeat:ivo_rime", "defeat_all"] } },
+  "triggers": [
+    { "id": "ivo_plea", "when": { "round": 1 },
+      "do": [ { "say": { "speaker": "ivo_rime", "line": "Please, go back down the pass. I am so close. I only need one more night with the ember." } },
+              { "cameraHint": "crystal_ridge" } ] },
+    { "id": "ivo_risen", "when": { "round": 3 },
+      "do": [ { "say": { "speaker": "ivo_rime", "line": "Hold them, all of you. You walked these caves in life. Walk them once more for me." } } ] },
+    { "id": "ivo_desperate", "when": { "hpBelow": { "tag": "ivo_rime", "percent": 50 } },
+      "do": [ { "say": { "speaker": "ivo_rime", "line": "You don't understand. She is still in there somewhere. I will not lose her twice!" } },
+              { "phase": { "tag": "ivo_rime", "number": 1 } } ] }
+  ] }

@@ -152,11 +152,11 @@
         "dark": "rock_small_dark.png"
       },
       "size": [
-        16,
-        12
+        20,
+        16
       ],
       "anchor": [
-        8,
+        10,
         11
       ],
       "frames": 1,
@@ -173,12 +173,12 @@
         "dark": "rock_medium_dark.png"
       },
       "size": [
-        24,
-        18
+        32,
+        26
       ],
       "anchor": [
-        12,
-        17
+        16,
+        18
       ],
       "frames": 1,
       "fps": 0.0,
@@ -194,11 +194,11 @@
         "dark": "rock_large_dark.png"
       },
       "size": [
-        36,
-        30
+        44,
+        40
       ],
       "anchor": [
-        18,
+        22,
         29
       ],
       "frames": 1,
@@ -215,11 +215,11 @@
         "dark": "rock_mossy_dark.png"
       },
       "size": [
-        36,
-        30
+        44,
+        40
       ],
       "anchor": [
-        18,
+        22,
         29
       ],
       "frames": 1,
@@ -345,7 +345,23 @@
       "blocks": true,
       "cover": "half",
       "height": 2,
-      "tags": []
+      "tags": [],
+      "light": {
+        "at": [
+          [
+            9,
+            16
+          ]
+        ],
+        "radius": 2.0,
+        "flicker": "pulse",
+        "colour": {
+          "blue": "#85d7ff",
+          "violet": "#c08fff",
+          "green": "#85efa9"
+        },
+        "emissive": "emissive/crystals.png"
+      }
     },
     "crate": {
       "variants": {
@@ -480,7 +496,53 @@
       "height": 1,
       "tags": [
         "light"
-      ]
+      ],
+      "light": {
+        "at": [
+          [
+            [
+              14,
+              18
+            ]
+          ],
+          [
+            [
+              14,
+              18
+            ]
+          ],
+          [
+            [
+              14,
+              18
+            ]
+          ],
+          [
+            [
+              14,
+              18
+            ]
+          ],
+          [
+            [
+              13,
+              18
+            ]
+          ],
+          [
+            [
+              14,
+              18
+            ]
+          ]
+        ],
+        "radius": 4.0,
+        "flicker": "fire",
+        "colour": {
+          "fire": "#ffda65"
+        },
+        "emissive": "emissive/campfire.png"
+      }
     },
     "torch": {
       "variants": {
@@ -501,7 +563,41 @@
       "height": 1,
       "tags": [
         "light"
-      ]
+      ],
+      "light": {
+        "at": [
+          [
+            [
+              5,
+              7
+            ]
+          ],
+          [
+            [
+              5,
+              8
+            ]
+          ],
+          [
+            [
+              5,
+              7
+            ]
+          ],
+          [
+            [
+              5,
+              8
+            ]
+          ]
+        ],
+        "radius": 3.0,
+        "flicker": "torch",
+        "colour": {
+          "fire": "#ffda65"
+        },
+        "emissive": "emissive/torch.png"
+      }
     },
     "lamp_post": {
       "variants": {
@@ -522,7 +618,21 @@
       "height": 3,
       "tags": [
         "light"
-      ]
+      ],
+      "light": {
+        "at": [
+          [
+            8,
+            8
+          ]
+        ],
+        "radius": 3.5,
+        "flicker": "candle",
+        "colour": {
+          "iron": "#ffda65"
+        },
+        "emissive": "emissive/lamp_post.png"
+      }
     },
     "banner": {
       "variants": {
@@ -725,7 +835,22 @@
       "blocks": true,
       "cover": "half",
       "height": 1,
-      "tags": []
+      "tags": [],
+      "light": {
+        "at": [
+          [
+            15,
+            1
+          ]
+        ],
+        "radius": 1.5,
+        "flicker": "candle",
+        "colour": {
+          "holy": "#ffe68e",
+          "dark": "#e95a57"
+        },
+        "emissive": "emissive/altar.png"
+      }
     },
     "rubble": {
       "variants": {
@@ -747,12 +872,1055 @@
       "cover": "none",
       "height": 1,
       "tags": []
+    },
+    "boulder": {
+      "variants": {
+        "grey": "boulder_grey.png",
+        "warm": "boulder_warm.png",
+        "dark": "boulder_dark.png",
+        "bare": "boulder_bare.png",
+        "snowy": "boulder_snowy.png",
+        "sandstone": "boulder_sandstone.png",
+        "basalt": "boulder_basalt.png",
+        "obsidian": "boulder_obsidian.png"
+      },
+      "size": [
+        56,
+        56
+      ],
+      "anchor": [
+        28,
+        42
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 2,
+      "tags": [
+        "nature",
+        "rock"
+      ]
+    },
+    "crag": {
+      "variants": {
+        "grey": "crag_grey.png",
+        "warm": "crag_warm.png",
+        "dark": "crag_dark.png",
+        "bare": "crag_bare.png",
+        "snowy": "crag_snowy.png",
+        "sandstone": "crag_sandstone.png",
+        "basalt": "crag_basalt.png",
+        "obsidian": "crag_obsidian.png"
+      },
+      "size": [
+        56,
+        84
+      ],
+      "anchor": [
+        28,
+        68
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 4,
+      "tags": [
+        "nature",
+        "rock"
+      ]
+    },
+    "rock_cluster": {
+      "variants": {
+        "grey": "rock_cluster_grey.png",
+        "warm": "rock_cluster_warm.png",
+        "dark": "rock_cluster_dark.png",
+        "bare": "rock_cluster_bare.png",
+        "snowy": "rock_cluster_snowy.png",
+        "sandstone": "rock_cluster_sandstone.png",
+        "basalt": "rock_cluster_basalt.png",
+        "obsidian": "rock_cluster_obsidian.png"
+      },
+      "size": [
+        48,
+        36
+      ],
+      "anchor": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "nature",
+        "rock"
+      ]
+    },
+    "ice_spikes": {
+      "variants": {
+        "frost": "ice_spikes_frost.png"
+      },
+      "size": [
+        36,
+        48
+      ],
+      "anchor": [
+        18,
+        38
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 2,
+      "tags": [
+        "snow"
+      ]
+    },
+    "crystal_large": {
+      "variants": {
+        "blue": "crystal_large_blue.png",
+        "violet": "crystal_large_violet.png",
+        "green": "crystal_large_green.png",
+        "fire": "crystal_large_fire.png"
+      },
+      "size": [
+        40,
+        56
+      ],
+      "anchor": [
+        20,
+        46
+      ],
+      "frames": 8,
+      "fps": 8,
+      "blocks": true,
+      "cover": "full",
+      "height": 3,
+      "tags": [
+        "light",
+        "cave"
+      ],
+      "light": {
+        "at": [
+          [
+            [
+              20,
+              30
+            ]
+          ],
+          [
+            [
+              20,
+              30
+            ]
+          ],
+          [
+            [
+              20,
+              30
+            ]
+          ],
+          [
+            [
+              20,
+              30
+            ]
+          ],
+          [
+            [
+              20,
+              30
+            ]
+          ],
+          [
+            [
+              20,
+              30
+            ]
+          ],
+          [
+            [
+              20,
+              30
+            ]
+          ],
+          [
+            [
+              20,
+              30
+            ]
+          ]
+        ],
+        "radius": 3.5,
+        "flicker": "pulse",
+        "colour": {
+          "blue": "#85d7ff",
+          "violet": "#c08fff",
+          "green": "#85efa9",
+          "fire": "#ffb64a"
+        },
+        "emissive": "emissive/crystal_large.png"
+      }
+    },
+    "fence_stone": {
+      "variants": {
+        "grey": "fence_stone_grey.png",
+        "warm": "fence_stone_warm.png",
+        "dark": "fence_stone_dark.png",
+        "bare": "fence_stone_bare.png",
+        "snowy": "fence_stone_snowy.png",
+        "sandstone": "fence_stone_sandstone.png",
+        "basalt": "fence_stone_basalt.png",
+        "obsidian": "fence_stone_obsidian.png"
+      },
+      "size": [
+        40,
+        34
+      ],
+      "anchor": [
+        20,
+        18
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "fence"
+      ]
+    },
+    "fence_picket": {
+      "variants": {
+        "white": "fence_picket_white.png",
+        "oak": "fence_picket_oak.png",
+        "red": "fence_picket_red.png"
+      },
+      "size": [
+        40,
+        34
+      ],
+      "anchor": [
+        20,
+        18
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "fence"
+      ]
+    },
+    "fence_iron": {
+      "variants": {
+        "iron": "fence_iron_iron.png",
+        "rust": "fence_iron_rust.png"
+      },
+      "size": [
+        40,
+        44
+      ],
+      "anchor": [
+        20,
+        26
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 2,
+      "tags": [
+        "fence",
+        "courtyard"
+      ]
+    },
+    "palisade": {
+      "variants": {
+        "log": "palisade_log.png"
+      },
+      "size": [
+        40,
+        56
+      ],
+      "anchor": [
+        20,
+        36
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 3,
+      "tags": [
+        "fence",
+        "siege"
+      ]
+    },
+    "ruin_wall": {
+      "variants": {
+        "grey": "ruin_wall_grey.png",
+        "warm": "ruin_wall_warm.png",
+        "dark": "ruin_wall_dark.png",
+        "sandstone": "ruin_wall_sandstone.png",
+        "snowy": "ruin_wall_snowy.png"
+      },
+      "size": [
+        44,
+        64
+      ],
+      "anchor": [
+        22,
+        42
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 3,
+      "tags": [
+        "ruin"
+      ]
+    },
+    "ruin_arch": {
+      "variants": {
+        "grey": "ruin_arch_grey.png",
+        "warm": "ruin_arch_warm.png",
+        "dark": "ruin_arch_dark.png",
+        "sandstone": "ruin_arch_sandstone.png",
+        "snowy": "ruin_arch_snowy.png"
+      },
+      "size": [
+        48,
+        80
+      ],
+      "anchor": [
+        24,
+        56
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 5,
+      "tags": [
+        "ruin"
+      ]
+    },
+    "cart": {
+      "variants": {
+        "oak": "cart_oak.png",
+        "hay": "cart_hay.png"
+      },
+      "size": [
+        48,
+        40
+      ],
+      "anchor": [
+        24,
+        26
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 2,
+      "tags": [
+        "town"
+      ]
+    },
+    "ladder": {
+      "variants": {
+        "oak": "ladder_oak.png"
+      },
+      "size": [
+        28,
+        52
+      ],
+      "anchor": [
+        14,
+        44
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 2,
+      "tags": [
+        "climb"
+      ]
+    },
+    "cage": {
+      "variants": {
+        "iron": "cage_iron.png",
+        "rust": "cage_rust.png"
+      },
+      "size": [
+        32,
+        52
+      ],
+      "anchor": [
+        16,
+        40
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 3,
+      "tags": [
+        "dungeon"
+      ]
+    },
+    "barricade": {
+      "variants": {
+        "oak": "barricade_oak.png"
+      },
+      "size": [
+        48,
+        36
+      ],
+      "anchor": [
+        24,
+        22
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "siege"
+      ]
+    },
+    "mantlet": {
+      "variants": {
+        "hide": "mantlet_hide.png",
+        "crimson": "mantlet_crimson.png"
+      },
+      "size": [
+        44,
+        60
+      ],
+      "anchor": [
+        22,
+        40
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 3,
+      "tags": [
+        "siege"
+      ]
+    },
+    "skull_pike": {
+      "variants": {
+        "bone": "skull_pike_bone.png"
+      },
+      "size": [
+        28,
+        52
+      ],
+      "anchor": [
+        14,
+        42
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 2,
+      "tags": [
+        "bones"
+      ]
+    },
+    "ribcage": {
+      "variants": {
+        "bleached": "ribcage_bleached.png"
+      },
+      "size": [
+        56,
+        40
+      ],
+      "anchor": [
+        28,
+        26
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "bones",
+        "desert"
+      ]
+    },
+    "mushroom_cluster": {
+      "variants": {
+        "red": "mushroom_cluster_red.png",
+        "brown": "mushroom_cluster_brown.png",
+        "glow": "mushroom_cluster_glow.png"
+      },
+      "size": [
+        32,
+        36
+      ],
+      "anchor": [
+        16,
+        26
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "forest",
+        "light:glow"
+      ],
+      "light": {
+        "at": [
+          [
+            15,
+            19
+          ]
+        ],
+        "radius": 1.5,
+        "flicker": "pulse",
+        "colour": {
+          "red": "#dc7457",
+          "brown": "#c39059",
+          "glow": "#79e6d0"
+        },
+        "emissive": "emissive/mushroom_cluster.png"
+      }
+    },
+    "fern": {
+      "variants": {
+        "green": "fern_green.png",
+        "autumn": "fern_autumn.png"
+      },
+      "size": [
+        32,
+        24
+      ],
+      "anchor": [
+        16,
+        23
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "forest"
+      ]
+    },
+    "lily_pads": {
+      "variants": {
+        "pink": "lily_pads_pink.png",
+        "white": "lily_pads_white.png"
+      },
+      "size": [
+        40,
+        24
+      ],
+      "anchor": [
+        20,
+        23
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "swamp",
+        "water"
+      ],
+      "layer": "ground"
+    },
+    "cactus": {
+      "variants": {
+        "green": "cactus_green.png"
+      },
+      "size": [
+        32,
+        60
+      ],
+      "anchor": [
+        16,
+        50
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 3,
+      "tags": [
+        "desert"
+      ]
+    },
+    "cactus_pear": {
+      "variants": {
+        "green": "cactus_pear_green.png"
+      },
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        31
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "desert"
+      ]
+    },
+    "swamp_tree": {
+      "variants": {
+        "cypress": "swamp_tree_cypress.png"
+      },
+      "size": [
+        52,
+        72
+      ],
+      "anchor": [
+        26,
+        71
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 4,
+      "tags": [
+        "swamp",
+        "nature"
+      ]
+    },
+    "will_o_wisp": {
+      "variants": {
+        "blue": "will_o_wisp_blue.png",
+        "green": "will_o_wisp_green.png"
+      },
+      "size": [
+        16,
+        40
+      ],
+      "anchor": [
+        8,
+        39
+      ],
+      "frames": 8,
+      "fps": 6,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "swamp",
+        "light"
+      ],
+      "light": {
+        "at": [
+          [
+            [
+              8,
+              14
+            ]
+          ],
+          [
+            [
+              9,
+              16
+            ]
+          ],
+          [
+            [
+              8,
+              16
+            ]
+          ],
+          [
+            [
+              7,
+              16
+            ]
+          ],
+          [
+            [
+              8,
+              14
+            ]
+          ],
+          [
+            [
+              9,
+              12
+            ]
+          ],
+          [
+            [
+              8,
+              12
+            ]
+          ],
+          [
+            [
+              7,
+              12
+            ]
+          ]
+        ],
+        "radius": 2.0,
+        "flicker": "pulse",
+        "colour": {
+          "blue": "#adf3ff",
+          "green": "#c5fba1"
+        },
+        "emissive": "emissive/will_o_wisp.png"
+      }
+    },
+    "shrine": {
+      "variants": {
+        "stone": "shrine_stone.png"
+      },
+      "size": [
+        36,
+        52
+      ],
+      "anchor": [
+        18,
+        40
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 2,
+      "tags": [
+        "light"
+      ],
+      "light": {
+        "at": [
+          [
+            16,
+            36
+          ]
+        ],
+        "radius": 1.5,
+        "flicker": "candle",
+        "colour": {
+          "stone": "#ffda65"
+        },
+        "emissive": "emissive/shrine.png"
+      }
+    },
+    "tomb": {
+      "variants": {
+        "grey": "tomb_grey.png",
+        "dark": "tomb_dark.png",
+        "sandstone": "tomb_sandstone.png"
+      },
+      "size": [
+        48,
+        40
+      ],
+      "anchor": [
+        24,
+        28
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 2,
+      "tags": [
+        "crypt"
+      ]
+    },
+    "lantern": {
+      "variants": {
+        "stone": "lantern_stone.png",
+        "moss": "lantern_moss.png"
+      },
+      "size": [
+        24,
+        48
+      ],
+      "anchor": [
+        12,
+        42
+      ],
+      "frames": 8,
+      "fps": 8,
+      "blocks": true,
+      "cover": "half",
+      "height": 2,
+      "tags": [
+        "light"
+      ],
+      "light": {
+        "at": [
+          [
+            [
+              12,
+              26
+            ]
+          ],
+          [
+            [
+              12,
+              26
+            ]
+          ],
+          [
+            [
+              12,
+              26
+            ]
+          ],
+          [
+            [
+              12,
+              26
+            ]
+          ],
+          [
+            [
+              12,
+              26
+            ]
+          ],
+          [
+            [
+              12,
+              26
+            ]
+          ],
+          [
+            [
+              12,
+              26
+            ]
+          ],
+          [
+            [
+              12,
+              26
+            ]
+          ]
+        ],
+        "radius": 3.0,
+        "flicker": "candle",
+        "colour": {
+          "stone": "#ffdf78",
+          "moss": "#ffdf78"
+        },
+        "emissive": "emissive/lantern.png"
+      }
+    },
+    "training_dummy": {
+      "variants": {
+        "straw": "training_dummy_straw.png"
+      },
+      "size": [
+        32,
+        52
+      ],
+      "anchor": [
+        16,
+        42
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 2,
+      "tags": [
+        "courtyard"
+      ]
+    },
+    "archery_target": {
+      "variants": {
+        "straw": "archery_target_straw.png"
+      },
+      "size": [
+        36,
+        48
+      ],
+      "anchor": [
+        18,
+        38
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 2,
+      "tags": [
+        "courtyard"
+      ]
+    },
+    "vent": {
+      "variants": {
+        "magma": "vent_magma.png"
+      },
+      "size": [
+        36,
+        30
+      ],
+      "anchor": [
+        18,
+        20
+      ],
+      "frames": 8,
+      "fps": 8,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "volcanic",
+        "light"
+      ],
+      "light": {
+        "at": [
+          [
+            [
+              18,
+              15
+            ]
+          ],
+          [
+            [
+              18,
+              15
+            ]
+          ],
+          [
+            [
+              18,
+              15
+            ]
+          ],
+          [
+            [
+              18,
+              15
+            ]
+          ],
+          [
+            [
+              18,
+              15
+            ]
+          ],
+          [
+            [
+              18,
+              15
+            ]
+          ],
+          [
+            [
+              18,
+              15
+            ]
+          ],
+          [
+            [
+              18,
+              15
+            ]
+          ]
+        ],
+        "radius": 2.0,
+        "flicker": "fire",
+        "colour": {
+          "magma": "#ffb64a"
+        },
+        "emissive": "emissive/vent.png"
+      }
     }
   },
   "notes": {
     "anchor": "the ground contact pixel; stand it on the tile centre",
     "frames": "animated props are horizontal strips; loop at fps",
     "cover": "none | half | full, for ranged attacks",
-    "height": "in height steps (16 px), for line of sight"
+    "height": "in height steps (16 px), for line of sight",
+    "layer": "absent = over (a billboard, sorted with units); ground = lies flat under units",
+    "light": "a point light: see lighting"
+  },
+  "lighting": {
+    "light": "at: image px of the light's source in frame 0 (or one list per frame for animated props, since flames sway); radius: in tiles; colour: per variant, hex; flicker: a curve name in lighting.flicker; emissive: an L8 mask strip (same frames as the sprite) of the pixels that glow by themselves",
+    "place": "world position = the prop's anchor on its tile + (at - anchor) in sprite px, one sprite px = 1/16 tile across and 1/8 height step up the screen (sprites draw at 2x)",
+    "godot": "an OmniLight3D per light at that point: light_color = colour, omni_range = radius tiles, light_energy = base energy x flicker[(frame + phase) % 8] where phase varies per instance; on the sprite material, emission = albedo x emissive mask, so the glowing pixels skip lighting and feed bloom",
+    "flicker": {
+      "fire": [
+        1.0,
+        0.93,
+        1.08,
+        0.97,
+        0.88,
+        1.05,
+        0.95,
+        1.1
+      ],
+      "torch": [
+        1.0,
+        0.9,
+        1.06,
+        0.94,
+        0.84,
+        1.02,
+        0.92,
+        1.08
+      ],
+      "candle": [
+        1.0,
+        0.97,
+        1.02,
+        0.95,
+        1.0,
+        1.03,
+        0.97,
+        0.99
+      ],
+      "pulse": [
+        1.0,
+        0.947,
+        0.82,
+        0.693,
+        0.64,
+        0.693,
+        0.82,
+        0.947
+      ],
+      "steady": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
   }
 }

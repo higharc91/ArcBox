@@ -1,0 +1,96 @@
+{
+  "backgrounds": [
+    {
+      "id": "acolyte",
+      "hook": "You were raised in the Church of the Hearth. You have recited the Gift of the Flame a thousand times. Mother Aubrine wrote to you herself, asking you to come home to Emberwick.",
+      "thread": "Aubrine trusts the acolyte with the church's key to the archive cellar. In Chapter III the crypt records contradict the scriptures; in Chapter V the acolyte can read the church's oldest text aloud to the Archive and confirm Oswin's history.",
+      "payoff": "The acolyte decides what to tell Aubrine, and the Vale, about the faith they were raised in.",
+      "ties": ["mother_aubrine", "church_of_the_hearth"],
+      "secret": { "text": "The church's oldest scripture, in the cellar under Aubrine's chapel, calls the Hearthflame 'the fire we carried out of the burning country'. Carried, not given.", "unlock": { "flag": "ch1_ember_found" } }
+    },
+    {
+      "id": "criminal",
+      "hook": "You ran with the river smugglers once. Rook remembers you, and remembers that you still owe the Ash Market for a job that went wrong.",
+      "thread": "Rook calls in the debt in Chapter I: find out who is selling the Kindled more shards than exist. The trail leads beyond the Greywall, and to the Stranger.",
+      "payoff": "The criminal learns the Ash Market's supplier is the Stranger's people, and can sell that to anyone.",
+      "ties": ["rook", "the_ash_market", "hooded_stranger"],
+      "secret": { "text": "Some of the shards the Ash Market sells the Kindled are not from the Vale. They burn a different colour, and they don't take memories.", "unlock": { "flag": "ch3_maren_parley" } }
+    },
+    {
+      "id": "folk_hero",
+      "hook": "You stood up for Emberwick once, and the town still tells the story. Now the town is going hungry, and they're looking at you again.",
+      "thread": "The town's hopes follow the folk hero: the Chapter I vote at the ford is theirs to argue, and Dagna Holt wants them on her side.",
+      "payoff": "In the last chapter, the folk hero speaks for Emberwick in the final vote.",
+      "ties": ["emberwick", "dagna_holt", "halden_varrow"]
+    },
+    {
+      "id": "noble",
+      "hook": "Your family is minor gentry that owes everything to the Marrowbys. Lady Celandine has asked you, personally, to make sure the adventurers don't upset the town's arrangements.",
+      "thread": "Celandine's favour opens doors in Chapters I and II. In Chapter III the crypt names her as the Warden who fled with the stolen shards.",
+      "payoff": "The noble decides whether to expose the Marrowby fortune, or to use what they know.",
+      "ties": ["celandine_marrowby"],
+      "secret": { "text": "Your own family's first fortune came from the Marrowbys' shards in the year after the Fall.", "unlock": { "flag": "ch3_marrowby_truth" } }
+    },
+    {
+      "id": "sage",
+      "hook": "You came to Emberwick to study the ember under the ford. You've noticed gaps in your own notes, in your own handwriting, about things you don't remember.",
+      "thread": "Corvin Ashby becomes the sage's partner in research; together they piece together the cost of ember-fire before anyone else does.",
+      "payoff": "The sage writes the true history of the Vale, if the party lets the world read it.",
+      "ties": ["corvin_ashby", "old_maud"],
+      "secret": { "text": "One of your forgotten pages describes the cost of ember-fire, in your handwriting, dated three years ago.", "unlock": { "flag": "ch2_corvin_page" } }
+    },
+    {
+      "id": "soldier",
+      "hook": "You served in the ford garrison under Dagna Holt. You were on the bridge the day the goblins took it, and you lived.",
+      "thread": "Dagna wants revenge for the guards who died; the soldier knows whether the goblins struck first. In Chapter I, the soldier's word can tip the vote at the ford.",
+      "payoff": "The soldier meets the goblin who killed their comrade, and decides what that means.",
+      "ties": ["dagna_holt", "skarrow_clan"],
+      "secret": { "text": "It was Dagna's guards who shot first on the bridge, at goblin children foraging on the bank. Dagna doesn't know; you do.", "unlock": { "chapter": 1 } }
+    },
+    {
+      "id": "outlander",
+      "hook": "You weren't born in the Vale. You came over the Greywall as a child with no memory of the crossing, and you have always dreamed of a fire.",
+      "thread": "The Stranger recognises the outlander at once. The Mirewood ember shows them the country they came from.",
+      "payoff": "If the party returns the flame, the outlander is going home.",
+      "ties": ["hooded_stranger", "ysolde"],
+      "secret": { "text": "The Heartpool shows you a burning country beyond the Greywall, and a hall built around an empty space where a fire used to be.", "unlock": { "flag": "ch2_court_audience" } }
+    },
+    {
+      "id": "entertainer",
+      "hook": "You learned your trade from Lark, the last songkeeper, who taught you the Warden songs and then vanished.",
+      "thread": "Lark turns up wherever the party goes next. The entertainer can sing the songs that open doors: to the Scarwalkers' hospitality, the Court's favour, the dead of Frostpeak.",
+      "payoff": "The entertainer finds the last verse of the Song of the Seven, which no one has sung in two centuries.",
+      "ties": ["lark", "hooded_stranger"]
+    },
+    {
+      "id": "guild_artisan",
+      "hook": "Tobin Fell taught you your craft at his ember-forge. His forge is going cold, and so is yours.",
+      "thread": "The artisan can repair Warden machinery the party finds, and read the Greyhold plans that show the Keep was built as a cage.",
+      "payoff": "In Ember Keep, the artisan understands what the flame hall was built to do, and how to undo it.",
+      "ties": ["tobin_fell", "greyhold"]
+    },
+    {
+      "id": "hermit",
+      "hook": "You lived alone for years on the burned bank near Old Maud, and never once used ember-fire. Your memory is the sharpest in the Vale.",
+      "thread": "Maud trusts the hermit before anyone. The hermit notices what everyone else has forgotten.",
+      "payoff": "In the Archive, the hermit is the only one who can check Oswin's history against what Maud saw.",
+      "ties": ["old_maud", "oswin_hale"],
+      "secret": { "text": "Maud once told you the name of the person who threw the ember into the ford. You wrote it down and have never been able to read your own handwriting.", "unlock": { "flag": "ch1_met_maud" } }
+    },
+    {
+      "id": "sailor",
+      "hook": "You worked the river boats from Emberwick's docks. You've seen what moves at night under the Ash Market's lanterns.",
+      "thread": "The sailor knows the river, the docks and the smugglers' routes; they find the ford's ember under the docks first.",
+      "payoff": "When the embers move, the sailor is the one who knows how to carry them unseen.",
+      "ties": ["river_docks", "rook"]
+    },
+    {
+      "id": "urchin",
+      "hook": "You grew up on Emberwick's streets with Pip, and you look out for her. Lately she's been remembering things that frighten you both.",
+      "thread": "Pip trusts the urchin above everyone. The urchin is the one who can calm her when the borrowed memories come.",
+      "payoff": "When Pip remembers the night of the Fall, the urchin is the one she tells first.",
+      "ties": ["pip_ashdown", "bree_tallow"],
+      "secret": { "text": "Pip told you a secret: the Stranger visits her at night and asks what she remembers.", "unlock": { "chapter": 2 } }
+    }
+  ]
+}

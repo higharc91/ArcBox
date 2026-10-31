@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/lore/schema/codex.schema.json",
+  "title": "Codex",
+  "description": "codex/<name>.json: entries the players unlock and read on their phones between battles.",
+  "type": "object",
+  "properties": {
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "$ref": "common.schema.json#/$defs/id" },
+          "replaces": { "$ref": "common.schema.json#/$defs/replaces" },
+          "title": { "$ref": "common.schema.json#/$defs/text" },
+          "category": { "enum": ["people", "places", "factions", "bestiary", "history", "magic", "items"] },
+          "body": { "$ref": "common.schema.json#/$defs/text" },
+          "icon": { "$ref": "common.schema.json#/$defs/artKey" },
+          "subject": {
+            "$ref": "common.schema.json#/$defs/id",
+            "description": "What the entry is about: a character, faction, region or rules monster id."
+          },
+          "unlock": { "$ref": "common.schema.json#/$defs/unlock" },
+          "related": { "$ref": "common.schema.json#/$defs/ids", "description": "Other codex entry ids." }
+        },
+        "required": ["id", "title", "category", "body"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["entries"],
+  "additionalProperties": false
+}

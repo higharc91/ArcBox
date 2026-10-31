@@ -1061,6 +1061,287 @@
       "default": "teal",
       "loopStart": 7,
       "note": "laid on a tile; it holds until an enemy steps in and sets it off"
+    },
+    "spell_fireball": {
+      "name": "Fireball",
+      "school": "fire",
+      "frame": [
+        128,
+        112
+      ],
+      "frames": 15,
+      "fps": 16,
+      "loop": false,
+      "anchor": [
+        64,
+        96
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "spell_fireball_fire.png"
+      },
+      "default": "fire",
+      "note": "centred on the target tile; the ball spans about two tiles"
+    },
+    "spell_flame_strike": {
+      "name": "Flame Strike",
+      "school": "fire",
+      "frame": [
+        48,
+        128
+      ],
+      "frames": 14,
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        24,
+        121
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "spell_flame_strike_holy.png",
+        "hellfire": "spell_flame_strike_hellfire.png"
+      },
+      "default": "holy"
+    },
+    "spell_lightning_bolt": {
+      "name": "Lightning Bolt",
+      "school": "lightning",
+      "frame": [
+        128,
+        48
+      ],
+      "frames": 12,
+      "fps": 18,
+      "loop": false,
+      "anchor": [
+        4,
+        24
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "storm": "spell_lightning_bolt_storm.png",
+        "violet": "spell_lightning_bolt_violet.png"
+      },
+      "default": "storm",
+      "note": "a line four tiles long to the right of the caster's chest; mirror or rotate to the line"
+    },
+    "spell_cone_of_cold": {
+      "name": "Cone of Cold",
+      "school": "frost",
+      "frame": [
+        112,
+        64
+      ],
+      "frames": 12,
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        6,
+        30
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "frost": "spell_cone_of_cold_frost.png"
+      },
+      "default": "frost",
+      "note": "a cone three tiles long to the right of the caster; mirror or rotate to face"
+    },
+    "spell_spirit_guardians": {
+      "name": "Spirit Guardians",
+      "school": "radiant",
+      "frame": [
+        112,
+        80
+      ],
+      "frames": 15,
+      "fps": 12,
+      "loop": true,
+      "anchor": [
+        56,
+        61
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "radiant": "spell_spirit_guardians_radiant.png",
+        "necrotic": "spell_spirit_guardians_necrotic.png"
+      },
+      "default": "radiant",
+      "loopStart": 3,
+      "note": "centred on the caster and moves with them; about two tiles across"
+    },
+    "spell_moonbeam": {
+      "name": "Moonbeam",
+      "school": "radiant",
+      "frame": [
+        48,
+        128
+      ],
+      "frames": 14,
+      "fps": 12,
+      "loop": true,
+      "anchor": [
+        24,
+        121
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "moon": "spell_moonbeam_moon.png"
+      },
+      "default": "moon",
+      "loopStart": 2,
+      "note": "on the beam's tile; moves when the caster moves it"
+    },
+    "spell_hunger_of_hadar": {
+      "name": "Hunger of Hadar",
+      "school": "acid",
+      "frame": [
+        112,
+        80
+      ],
+      "frames": 15,
+      "fps": 10,
+      "loop": true,
+      "anchor": [
+        56,
+        59
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "void": "spell_hunger_of_hadar_void.png"
+      },
+      "default": "void",
+      "loopStart": 3,
+      "note": "a sphere of dark about two tiles across; units inside are hidden in it"
+    },
+    "spell_shatter": {
+      "name": "Shatter",
+      "school": "thunder",
+      "frame": [
+        96,
+        80
+      ],
+      "frames": 12,
+      "fps": 16,
+      "loop": false,
+      "anchor": [
+        48,
+        64
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "thunder": "spell_shatter_thunder.png"
+      },
+      "default": "thunder"
+    },
+    "spell_synaptic_static": {
+      "name": "Synaptic Static",
+      "school": "psychic",
+      "frame": [
+        96,
+        72
+      ],
+      "frames": 12,
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        48,
+        56
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "mind": "spell_synaptic_static_mind.png"
+      },
+      "default": "mind"
+    },
+    "spell_cloudkill": {
+      "name": "Cloudkill",
+      "school": "poison",
+      "frame": [
+        112,
+        72
+      ],
+      "frames": 15,
+      "fps": 8,
+      "loop": true,
+      "anchor": [
+        56,
+        58
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "poison": "spell_cloudkill_poison.png",
+        "miasma": "spell_cloudkill_miasma.png"
+      },
+      "default": "poison",
+      "loopStart": 3,
+      "note": "about three tiles across; drifts a tile a turn"
+    },
+    "spell_blight": {
+      "name": "Blight",
+      "school": "necrotic",
+      "frame": [
+        64,
+        80
+      ],
+      "frames": 14,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        32,
+        73
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "rot": "spell_blight_rot.png"
+      },
+      "default": "rot"
+    },
+    "spell_spiritual_weapon": {
+      "name": "Spiritual Weapon",
+      "school": "force",
+      "frame": [
+        64,
+        80
+      ],
+      "frames": 13,
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        32,
+        73
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "force": "spell_spiritual_weapon_force.png",
+        "gold": "spell_spiritual_weapon_gold.png"
+      },
+      "default": "force",
+      "note": "the hammer strikes down to the right of the anchor"
     }
   }
 }

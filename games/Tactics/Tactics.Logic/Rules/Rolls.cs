@@ -77,13 +77,14 @@ public static class Rolls
     /// <see cref="StaticMods.SaveProficiencies"/> makes it proficient) + static save modifiers + <paramref name="cover"/>
     /// (only for DEX saves) against <paramref name="dc"/>. Each source's <see cref="StaticMods.SaveEdges"/> for the stat is
     /// one source of advantage or disadvantage. A stat in <see cref="StaticMods.AutoFailSaves"/> fails whatever the roll
-    /// (the d20 is still rolled and shown). A helped unit gains one advantage and uses the help up
+    /// (the d20 is still rolled and shown); <paramref name="autoSucceed"/> (Careful Spell) succeeds whatever the roll, and
+    /// wins over an automatic failure. A helped unit gains one advantage and uses the help up
     /// (<see cref="HelpBlock.Consume"/>). Emits
     /// <see cref="Rolled"/>, fires <see cref="HookKind.OnSave"/> for the unit (with <paramref name="source"/> as the other
     /// unit) and returns the roll.
     /// </summary>
     public static RollResult Save(BattleWriter w, UnitId unit, Stat stat, int dc, RulesPack rules, int cover = 0,
-        UnitId? source = null)
+        UnitId? source = null, bool autoSucceed = false)
     {
         var sheet = w.Unit(unit).Sheet;
         var sources = Modifiers.Sources(w.State, unit, rules).ToArray();
@@ -103,6 +104,8 @@ public static class Rolls
         var roll = D20(w, modifier, dc, edge, critOn20: false, autoMissOn1: false);
         if (mods.AutoFailSaves?.Contains(stat) == true)
             roll = roll with { Success = false };
+        if (autoSucceed)
+            roll = roll with { Success = true };
         w.Emit(new Rolled(unit, RollKind.Save, roll));
         Hooks.Fire(w, HookKind.OnSave, new HookArgs(unit, source, roll), rules);
         return roll;

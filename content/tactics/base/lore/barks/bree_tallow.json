@@ -1,0 +1,94 @@
+{
+  "speaker": "bree_tallow",
+  "events": {
+    "town": [
+      {
+        "id": "bark_bree_tallow_town_1",
+        "text": "Sit. Eat. Then you can tell me how bad it is.",
+        "mood": "idle",
+        "direction": "brisk and kind, West Country, working as she talks",
+        "weight": 3
+      },
+      {
+        "id": "bark_bree_tallow_town_2",
+        "text": "Stew's hot, bread's yesterday's. Don't complain, my love, nobody else is feeding you.",
+        "mood": "happy",
+        "weight": 2
+      },
+      {
+        "id": "bark_bree_tallow_town_3",
+        "text": "Boots off the benches. I'll not tell you twice. Well, I will, but I'll not like it.",
+        "mood": "angry"
+      },
+      {
+        "id": "bark_bree_tallow_town_4",
+        "text": "Pip! Where's that girl got to? Never mind. She'll turn up when she's hungry.",
+        "mood": "idle"
+      },
+      {
+        "id": "bark_bree_tallow_town_5",
+        "text": "Heard a thing at the bar you'll want to hear. Eat first.",
+        "mood": "idle"
+      }
+    ],
+    "camp": [
+      {
+        "id": "bark_bree_tallow_camp_1",
+        "text": "Brought you a pie. Don't look at me like that, you're thin as rakes, the lot of you.",
+        "mood": "happy",
+        "weight": 2
+      },
+      {
+        "id": "bark_bree_tallow_camp_2",
+        "text": "Come in closer. The fire doesn't bite, and neither do I. Much.",
+        "mood": "happy"
+      }
+    ],
+    "battle_start": [
+      {
+        "id": "bark_bree_tallow_battle_start_1",
+        "text": "Right then. I've thrown worse than you out of my inn.",
+        "mood": "angry",
+        "weight": 2
+      }
+    ],
+    "hit": [
+      {
+        "id": "bark_bree_tallow_hit_1",
+        "text": "There. Mind your manners.",
+        "mood": "angry"
+      }
+    ],
+    "ally_down": [
+      {
+        "id": "bark_bree_tallow_ally_down_1",
+        "text": "Oh, no you don't. Up you get, my love. Up!",
+        "mood": "surprised",
+        "direction": "softening without slowing down",
+        "weight": 2
+      }
+    ],
+    "low_hp": [
+      {
+        "id": "bark_bree_tallow_low_hp_1",
+        "text": "I'm all right. I'm all right. Keep going.",
+        "mood": "hurt"
+      }
+    ],
+    "healed": [
+      {
+        "id": "bark_bree_tallow_healed_1",
+        "text": "Thank you, my love. Your supper is on the house.",
+        "mood": "happy"
+      }
+    ],
+    "victory": [
+      {
+        "id": "bark_bree_tallow_victory_1",
+        "text": "Good. Now everyone's coming back for supper, and no arguments.",
+        "mood": "happy",
+        "weight": 2
+      }
+    ]
+  }
+}

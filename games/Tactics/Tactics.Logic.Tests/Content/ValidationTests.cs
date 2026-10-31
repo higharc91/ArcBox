@@ -164,6 +164,36 @@ public sealed class ValidationTests
             Sorted(errors));
     }
 
+    [Fact]
+    public void A_placed_units_level_must_be_in_1_to_10()
+    {
+        var errors = ErrorsOfChapter(("encounters/e.json", """
+            { "id": "e", "name": "E", "map": "field", "party": { "min": 1, "max": 4 },
+              "enemies": [ { "unit": "wolf", "at": [5, 4], "level": 0 } ], "npcs": [ { "unit": "wolf", "at": [5, 3], "level": 11 } ] }
+            """));
+
+        Assert.Equal(
+            [
+                new ContentError("chapter-01/encounters/e.json", "/enemies/0/level", "The level 0 must be in 1..10."),
+                new ContentError("chapter-01/encounters/e.json", "/npcs/0/level", "The level 11 must be in 1..10."),
+            ],
+            Sorted(errors));
+    }
+
+    [Fact]
+    public void A_zones_passive_cant_change_max_hp()
+    {
+        var errors = ErrorsOfChapter(("abilities/z.json", """
+            { "abilities": [ { "id": "ch.zone", "name": "Zone", "tier": 0, "cost": { "action": 1 },
+                "target": { "kind": "tile", "range": 4, "los": true, "area": { "shape": "burst", "size": 1 } },
+                "effects": [ { "zone": { "kind": "fire", "area": { "shape": "burst", "size": 1 }, "rounds": 2,
+                  "passives": [ { "id": "ch.zone.tough", "static": { "maxHp": 5 } } ] } } ] } ] }
+            """));
+
+        var error = Assert.Single(errors);
+        Assert.Equal("/abilities/0/effects/0/zone/passives/0/static/maxHp", error.Pointer);
+    }
+
     [Theory]
     [InlineData("""{ "win": null }""", "/triggers/0/do/0/setObjective", "setObjective needs \"win\" or \"lose\".")]
     [InlineData("""{ "win": { "any": [null] } }""", "/triggers/0/do/0/setObjective/win/any/0", "A value is missing.")]

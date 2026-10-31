@@ -1,5 +1,7 @@
 import { useState } from "preact/hooks";
 import { MuteToggle } from "../feedback/MuteToggle";
+import type { LobbyText, LobbyTheme } from "../games/module";
+import { lobbyText, useLobbyTheme } from "../games/registry";
 import type { LobbyState, PlayerId, PlayerScore, RosterEntry, SeatRef } from "../protocol";
 import type { StoredProfile } from "../session/storage";
 import { NAME_MAX, isValidName } from "./Join";
@@ -42,9 +44,16 @@ export function Lobby({ lobby, me, error, onSelectGame, onStart, onSelectCampaig
   // A seated phone that isn't one of the campaign's members yet is asked who it is (members with no connected seat).
   const mine = lobby.players.find((p) => p.id === me);
   const unmatched = campaign && !lobby.inGame && !(mine?.profile && campaign.roster.some((r) => r.profile === mine.profile));
+  // The selected game may restyle this screen (GameModule.lobbyTheme); without one it is the default look, unchanged.
+  const theme = useLobbyTheme(lobby.selectedGameId);
+  const text = lobbyText(theme);
+  const Badge = theme?.CardBadge;
+  const cardOf = (profile?: string | null) => (profile ? campaign?.roster.find((r) => r.profile === profile)?.card : undefined);
 
   return (
-    <div class="screen lobby">
+    <div class={theme ? `screen lobby ${theme.className}` : "screen lobby"}>
+      {theme?.Backdrop ? <theme.Backdrop screen="lobby" /> : null}
+      {theme?.Banner ? <theme.Banner screen="lobby" /> : null}
       <header class="lobby-head">
         <div>
           <small>ROOM</small>
@@ -63,13 +72,17 @@ export function Lobby({ lobby, me, error, onSelectGame, onStart, onSelectCampaig
       ) : null}
 
       <ul class="players">
-        {lobby.players.map((p) => (
+        {lobby.players.map((p) => {
+          const card = Badge ? cardOf(p.profile) : undefined;
+          return (
           <li key={p.id} class={["player", !p.connected && "offline", p.id === me && "me"].filter(Boolean).join(" ")}>
+            {Badge && card ? <Badge card={card} place="chip" /> : null}
             <span class="pname">{p.name}</span>
             {p.isVip ? <span class="vip" title="VIP: picks the game">VIP</span> : null}
             {!p.connected ? <span class="away">away</span> : null}
           </li>
-        ))}
+          );
+        })}
       </ul>
 
       {campaign && unmatched ? (
@@ -79,6 +92,7 @@ export function Lobby({ lobby, me, error, onSelectGame, onStart, onSelectCampaig
           placeholder={mine?.name ?? ""}
           profiles={profiles}
           onClaim={onClaim}
+          theme={theme}
         />
       ) : null}
 
@@ -104,7 +118,7 @@ export function Lobby({ lobby, me, error, onSelectGame, onStart, onSelectCampaig
             })}
           </div>
           {selected?.usesCampaigns ? (
-            <Campaigns lobby={lobby} onSelect={onSelectCampaign} onCreate={onCreateCampaign} />
+            <Campaigns lobby={lobby} text={text} onSelect={onSelectCampaign} onCreate={onCreateCampaign} />
           ) : null}
           <button type="button" class="primary big start" disabled={!lobby.canStart} onClick={onStart}>
             Everybody's in
@@ -116,7 +130,7 @@ export function Lobby({ lobby, me, error, onSelectGame, onStart, onSelectCampaig
       ) : (
         <section class="waiting">
           {selected ? <p class="next-game">Next up: <b>{selected.name}</b></p> : null}
-          {campaign ? <p class="next-game">Campaign: <b>{campaign.name}</b></p> : null}
+          {campaign ? <p class="next-game">{text.campaignLabel}: <b>{campaign.name}</b></p> : null}
           <p>{vip ? `Waiting for ${vip.name} to start` : "Waiting for the host to start"}</p>
         </section>
       )}
@@ -127,7 +141,12 @@ export function Lobby({ lobby, me, error, onSelectGame, onStart, onSelectCampaig
 }
 
 /** The VIP's campaign step for a game that uses campaigns: pick one of the game's campaigns, or start a new one. */
-function Campaigns({ lobby, onSelect, onCreate }: { lobby: LobbyState; onSelect: (id: string) => void; onCreate: (name: string) => void }) {
+function Campaigns({ lobby, text, onSelect, onCreate }: {
+  lobby: LobbyState;
+  text: LobbyText;
+  onSelect: (id: string) => void;
+  onCreate: (name: string) => void;
+}) {
   const [creating, setCreating] = useState(false);
   const [name, setName] = useState("");
   const valid = name.trim().length >= 1 && name.trim().length <= CAMPAIGN_NAME_MAX;
@@ -142,7 +161,7 @@ function Campaigns({ lobby, onSelect, onCreate }: { lobby: LobbyState; onSelect:
 
   return (
     <div class="campaigns">
-      <small>PICK A CAMPAIGN</small>
+      <small>{text.pickCampaign}</small>
       <div class="campaign-list">
         {(lobby.campaigns ?? []).map((c) => {
           const on = c.id === lobby.campaign?.id;
@@ -155,7 +174,7 @@ function Campaigns({ lobby, onSelect, onCreate }: { lobby: LobbyState; onSelect:
               onClick={() => onSelect(c.id)}
             >
               <span class="cname">{c.name}</span>
-              <span class="cmeta">{c.members} {c.members === 1 ? "member" : "members"}</span>
+              <span class="cmeta">{text.campaignMeta(c)}</span>
             </button>
           );
         })}
@@ -163,7 +182,7 @@ function Campaigns({ lobby, onSelect, onCreate }: { lobby: LobbyState; onSelect:
       {creating ? (
         <form class="campaign-form" onSubmit={submit}>
           <label class="field">
-            <span>Campaign name</span>
+            <span>{text.campaignName}</span>
             <input
               class="text-input"
               name="campaignName"
@@ -173,10 +192,10 @@ function Campaigns({ lobby, onSelect, onCreate }: { lobby: LobbyState; onSelect:
               onInput={(e) => setName((e.currentTarget as HTMLInputElement).value)}
             />
           </label>
-          <button type="submit" class="primary" disabled={!valid}>Create</button>
+          <button type="submit" class="primary" disabled={!valid}>{text.create}</button>
         </form>
       ) : (
-        <button type="button" onClick={() => setCreating(true)}>New campaign</button>
+        <button type="button" onClick={() => setCreating(true)}>{text.newCampaign}</button>
       )}
     </div>
   );
@@ -189,13 +208,15 @@ const claimRef = (r: RosterEntry): SeatRef => (r.seatedAs ? { slot: r.seatedAs }
  * "Who are you in {campaign}?": the members nobody is playing, and "I'm new here" (with an optional name, so two Dans
  * can differ). A phone that holds a key for one of those members, most recently used first, gets "Continue as" on top.
  */
-function Claim({ campaignName, entries, placeholder, profiles, onClaim }: {
+function Claim({ campaignName, entries, placeholder, profiles, onClaim, theme }: {
   campaignName: string;
   entries: RosterEntry[];
   placeholder: string;
   profiles: StoredProfile[];
   onClaim: (member: SeatRef | null, newName?: string) => void;
+  theme?: LobbyTheme;
 }) {
+  const Badge = theme?.CardBadge;
   const [adding, setAdding] = useState(false);
   const [name, setName] = useState("");
   const typed = name.trim();
@@ -221,6 +242,7 @@ function Claim({ campaignName, entries, placeholder, profiles, onClaim }: {
               style={cardStyle(r.card)}
               onClick={() => onClaim(claimRef(r))}
             >
+              {Badge ? <Badge card={r.card} place="row" /> : null}
               <b>{r.card.title}</b>
               {r.card.subtitle ? <span>{r.card.subtitle}</span> : null}
             </button>

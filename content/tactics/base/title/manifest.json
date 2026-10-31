@@ -455,5 +455,58 @@
     "chapter": "chapter.png",
     "critical": "critical.png",
     "party_wiped": "party_wiped.png"
+  },
+  "anims": {
+    "logo_gleam": {
+      "file": "logo_gleam.png",
+      "frame": [
+        278,
+        108
+      ],
+      "frames": 14,
+      "fps": 14,
+      "loop": false,
+      "every": "5-8 s on the title screen",
+      "note": "frames of logo.png with the gleam; rest on logo.png between plays"
+    },
+    "victory_anim": {
+      "file": "victory_anim.png",
+      "frame": [
+        205,
+        57
+      ],
+      "frames": 16,
+      "fps": 12,
+      "loop": false,
+      "hold": "the last frame until dismissed",
+      "note": "plays victory.png in: ribbon unroll, title drop, then its flourish"
+    },
+    "defeat_anim": {
+      "file": "defeat_anim.png",
+      "frame": [
+        147,
+        57
+      ],
+      "frames": 16,
+      "fps": 12,
+      "loop": false,
+      "hold": "the last frame until dismissed",
+      "note": "plays defeat.png in: ribbon unroll, title drop, then its flourish"
+    },
+    "level_up_anim": {
+      "file": "level_up_anim.png",
+      "frame": [
+        183,
+        57
+      ],
+      "frames": 16,
+      "fps": 12,
+      "loop": false,
+      "hold": "the last frame until dismissed",
+      "note": "plays level_up.png in: ribbon unroll, title drop, then its flourish"
+    }
+  },
+  "name": {
+    "display": "Wardenflame"
   }
 }

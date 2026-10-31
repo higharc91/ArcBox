@@ -21,15 +21,15 @@
       "name": "Slash",
       "group": "Weapon strikes",
       "frame": [
-        32,
-        32
+        48,
+        48
       ],
-      "frames": 7,
-      "fps": 18,
+      "frames": 8,
+      "fps": 20,
       "loop": false,
       "anchor": [
-        16,
-        16
+        24,
+        24
       ],
       "attach": "body",
       "blend": "add",
@@ -75,15 +75,15 @@
       "name": "Hit spark",
       "group": "Weapon strikes",
       "frame": [
-        32,
-        32
+        48,
+        48
       ],
-      "frames": 6,
-      "fps": 20,
+      "frames": 9,
+      "fps": 24,
       "loop": false,
       "anchor": [
-        16,
-        16
+        24,
+        24
       ],
       "attach": "body",
       "blend": "add",
@@ -99,15 +99,15 @@
       "name": "Critical burst",
       "group": "Weapon strikes",
       "frame": [
-        48,
-        48
+        64,
+        64
       ],
-      "frames": 8,
-      "fps": 16,
+      "frames": 12,
+      "fps": 20,
       "loop": false,
       "anchor": [
-        24,
-        24
+        32,
+        32
       ],
       "attach": "body",
       "blend": "add",
@@ -214,15 +214,15 @@
       "name": "Fireball blast",
       "group": "Spell bursts",
       "frame": [
-        48,
-        48
+        96,
+        96
       ],
-      "frames": 9,
-      "fps": 14,
+      "frames": 15,
+      "fps": 16,
       "loop": false,
       "anchor": [
-        24,
-        42
+        48,
+        80
       ],
       "attach": "feet",
       "blend": "add",
@@ -258,15 +258,15 @@
       "name": "Lightning strike",
       "group": "Spell bursts",
       "frame": [
-        48,
-        80
+        64,
+        128
       ],
-      "frames": 8,
-      "fps": 16,
+      "frames": 12,
+      "fps": 18,
       "loop": false,
       "anchor": [
-        24,
-        75
+        32,
+        122
       ],
       "attach": "feet",
       "blend": "add",
@@ -281,15 +281,15 @@
       "name": "Healing",
       "group": "Spell bursts",
       "frame": [
-        48,
-        48
+        64,
+        80
       ],
-      "frames": 8,
-      "fps": 12,
+      "frames": 14,
+      "fps": 14,
       "loop": false,
       "anchor": [
-        24,
-        44
+        32,
+        73
       ],
       "attach": "feet",
       "blend": "add",
@@ -305,15 +305,15 @@
       "name": "Pillar of light",
       "group": "Spell bursts",
       "frame": [
-        32,
-        64
+        48,
+        96
       ],
-      "frames": 8,
-      "fps": 12,
+      "frames": 12,
+      "fps": 14,
       "loop": false,
       "anchor": [
-        16,
-        60
+        24,
+        91
       ],
       "attach": "feet",
       "blend": "add",
@@ -493,15 +493,15 @@
       "name": "Magic circle",
       "group": "Ground and auras",
       "frame": [
-        48,
+        64,
         48
       ],
-      "frames": 8,
-      "fps": 10,
+      "frames": 12,
+      "fps": 12,
       "loop": true,
       "anchor": [
-        24,
-        36
+        32,
+        34
       ],
       "attach": "feet",
       "blend": "add",
@@ -520,15 +520,15 @@
       "name": "Buff aura",
       "group": "Ground and auras",
       "frame": [
-        48,
-        48
+        64,
+        64
       ],
-      "frames": 8,
-      "fps": 10,
+      "frames": 12,
+      "fps": 12,
       "loop": true,
       "anchor": [
-        24,
-        38
+        32,
+        53
       ],
       "attach": "feet",
       "blend": "add",
@@ -566,6 +566,438 @@
       },
       "default": "arcane",
       "loopStart": 3
+    },
+    "flames": {
+      "name": "Engulfing flames",
+      "group": "Elements",
+      "frame": [
+        48,
+        64
+      ],
+      "frames": 12,
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        24,
+        60
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "flames_fire.png",
+        "hellfire": "flames_hellfire.png",
+        "azure": "flames_azure.png"
+      },
+      "default": "fire",
+      "note": "fire damage on a unit: tongues climb the body; hellfire for warlock and fiend fire"
+    },
+    "frost": {
+      "name": "Frost burst",
+      "group": "Elements",
+      "frame": [
+        64,
+        64
+      ],
+      "frames": 12,
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        32,
+        32
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "frost": "frost_frost.png"
+      },
+      "default": "frost",
+      "note": "cold damage: faceted crystals grow out of the target and shatter"
+    },
+    "shock": {
+      "name": "Shock",
+      "group": "Elements",
+      "frame": [
+        48,
+        64
+      ],
+      "frames": 10,
+      "fps": 18,
+      "loop": false,
+      "anchor": [
+        24,
+        38
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "storm": "shock_storm.png",
+        "violet": "shock_violet.png"
+      },
+      "default": "storm",
+      "note": "lightning damage on a unit: forked arcs crackle round it"
+    },
+    "necrotic": {
+      "name": "Necrotic grasp",
+      "group": "Elements",
+      "frame": [
+        48,
+        64
+      ],
+      "frames": 12,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        24,
+        34
+      ],
+      "attach": "body",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "grave": "necrotic_grave.png",
+        "blood": "necrotic_blood.png"
+      },
+      "default": "grave",
+      "note": "necrotic damage: wisps coil in and a skull flares; blood for life drain"
+    },
+    "radiant": {
+      "name": "Radiant flare",
+      "group": "Elements",
+      "frame": [
+        64,
+        64
+      ],
+      "frames": 12,
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        32,
+        32
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "dawn": "radiant_dawn.png",
+        "moon": "radiant_moon.png"
+      },
+      "default": "dawn",
+      "note": "radiant damage: rays burst and light sifts down"
+    },
+    "psychic": {
+      "name": "Psychic ripple",
+      "group": "Elements",
+      "frame": [
+        64,
+        48
+      ],
+      "frames": 12,
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        32,
+        24
+      ],
+      "attach": "overhead",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "mind": "psychic_mind.png",
+        "dread": "psychic_dread.png"
+      },
+      "default": "mind",
+      "note": "psychic damage: wobbling rings spread from the head"
+    },
+    "thunder": {
+      "name": "Thunderclap",
+      "group": "Elements",
+      "frame": [
+        96,
+        64
+      ],
+      "frames": 12,
+      "fps": 16,
+      "loop": false,
+      "anchor": [
+        48,
+        48
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "thunder": "thunder_thunder.png"
+      },
+      "default": "thunder",
+      "note": "thunder damage: concentric shockwaves over the ground, about a tile and a half across"
+    },
+    "acid": {
+      "name": "Acid splash",
+      "group": "Elements",
+      "frame": [
+        48,
+        64
+      ],
+      "frames": 12,
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        24,
+        60
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "acid": "acid_acid.png"
+      },
+      "default": "acid",
+      "note": "acid damage: a splash on the chest that runs down and puddles"
+    },
+    "toxin": {
+      "name": "Poison spray",
+      "group": "Elements",
+      "frame": [
+        48,
+        48
+      ],
+      "frames": 10,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        24,
+        26
+      ],
+      "attach": "body",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "venom": "toxin_venom.png",
+        "sickness": "toxin_sickness.png"
+      },
+      "default": "venom",
+      "note": "poison damage on one target; the spray arrives from the left, mirror to face"
+    },
+    "force": {
+      "name": "Force shatter",
+      "group": "Elements",
+      "frame": [
+        48,
+        48
+      ],
+      "frames": 10,
+      "fps": 16,
+      "loop": false,
+      "anchor": [
+        24,
+        24
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "force": "force_force.png",
+        "eldritch": "force_eldritch.png"
+      },
+      "default": "force",
+      "note": "force damage: a honeycomb of force breaks into hexagon shards"
+    },
+    "restore": {
+      "name": "Restoration",
+      "group": "Boons and wards",
+      "frame": [
+        48,
+        80
+      ],
+      "frames": 12,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        24,
+        75
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "restore_holy.png",
+        "nature": "restore_nature.png"
+      },
+      "default": "holy",
+      "note": "cleansing: a ring sinks head to foot (heals rise instead)"
+    },
+    "ward": {
+      "name": "Ward",
+      "group": "Boons and wards",
+      "frame": [
+        48,
+        64
+      ],
+      "frames": 12,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        24,
+        38
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "holy": "ward_holy.png",
+        "arcane": "ward_arcane.png",
+        "nature": "ward_nature.png"
+      },
+      "default": "holy",
+      "note": "shield of faith, mage armor, barkskin: rune plates lock round the unit"
+    },
+    "bless": {
+      "name": "Blessing",
+      "group": "Boons and wards",
+      "frame": [
+        48,
+        80
+      ],
+      "frames": 12,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        24,
+        75
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "bless_gold.png",
+        "silver": "bless_silver.png"
+      },
+      "default": "gold",
+      "note": "bless, aid: a halo over the head and motes sifting down"
+    },
+    "inspire": {
+      "name": "Inspiration",
+      "group": "Boons and wards",
+      "frame": [
+        48,
+        64
+      ],
+      "frames": 12,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        24,
+        38
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "inspire_gold.png",
+        "charm": "inspire_charm.png"
+      },
+      "default": "gold",
+      "note": "bardic inspiration, heroism, rally: notes burst and float up"
+    },
+    "rage": {
+      "name": "Rage",
+      "group": "Boons and wards",
+      "frame": [
+        48,
+        64
+      ],
+      "frames": 12,
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        24,
+        60
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "rage": "rage_rage.png",
+        "valor": "rage_valor.png"
+      },
+      "default": "rage",
+      "note": "rage, action surge, war cries: a hollow shell of flame"
+    },
+    "hold": {
+      "name": "Hold",
+      "group": "Boons and wards",
+      "frame": [
+        48,
+        64
+      ],
+      "frames": 10,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        24,
+        38
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "hold_arcane.png",
+        "holy": "hold_holy.png",
+        "shadow": "hold_shadow.png",
+        "nature": "hold_nature.png"
+      },
+      "default": "arcane",
+      "note": "hold person or monster, command: rune rings close and lock"
+    },
+    "dispel": {
+      "name": "Dispel",
+      "group": "Boons and wards",
+      "frame": [
+        48,
+        48
+      ],
+      "frames": 10,
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        24,
+        24
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "dispel_arcane.png",
+        "shadow": "dispel_shadow.png"
+      },
+      "default": "arcane",
+      "note": "dispel magic, counterspell: a sigil cracks and shatters"
+    },
+    "web": {
+      "name": "Web",
+      "group": "Boons and wards",
+      "frame": [
+        64,
+        48
+      ],
+      "frames": 10,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        32,
+        34
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "ground",
+      "variants": {
+        "silk": "web_silk.png"
+      },
+      "default": "silk",
+      "note": "web thrown over a tile; the hazards set's web holds it afterwards"
     }
   }
 }

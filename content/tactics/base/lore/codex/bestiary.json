@@ -1,0 +1,71 @@
+{
+  "entries": [
+    {
+      "id": "bestiary_goblin",
+      "title": "Goblins of the Hills",
+      "category": "bestiary",
+      "subject": "goblin",
+      "body": "Small, quick and hungry. The hill clans fight with spears, short bows and ambushes, and they fight hardest for their children. A goblin who surrenders expects to be fed; a goblin who is not fed remembers.",
+      "related": ["codex_skarrow"]
+    },
+    {
+      "id": "bestiary_hobgoblin",
+      "title": "Hobgoblins",
+      "category": "bestiary",
+      "subject": "hobgoblin",
+      "body": "Larger, disciplined cousins of the hill goblins, who join the clans in war years. Vorga's Host is built around them: shield walls, drilled archers, and no patience for bargaining.",
+      "unlock": { "chapter": 3 }
+    },
+    {
+      "id": "bestiary_cultist",
+      "title": "The Kindled Faithful",
+      "category": "bestiary",
+      "subject": "cultist",
+      "body": "Farmers, millers and widows from the hungry towns, armed with knives and faith. Most have never fought before. They are not afraid to die, because they believe the flame will remember them.",
+      "unlock": { "chapter": 2 },
+      "related": ["codex_kindled"]
+    },
+    {
+      "id": "bestiary_risen",
+      "title": "The Risen of Frostpeak",
+      "category": "bestiary",
+      "subject": "zombie",
+      "body": "The dead of the pass, raised by the cold ember: Warden pilgrims, dwarven road-builders and goliaths of the lost holds. They walk the old roads they walked in life, without any memory of who they were. They are not cruel. They are empty.",
+      "unlock": { "chapter": 4 }
+    },
+    {
+      "id": "bestiary_skeleton",
+      "title": "Bone Wardens",
+      "category": "bestiary",
+      "subject": "skeleton",
+      "body": "The oldest dead of the Wardens' crypts, still in the remnants of their uniforms, still keeping watch. Something in the crypts' wards keeps them at their posts.",
+      "unlock": { "chapter": 3 }
+    },
+    {
+      "id": "bestiary_wraith",
+      "title": "Wraiths",
+      "category": "bestiary",
+      "subject": "wraith",
+      "body": "What is left when ember-fire burns away every memory a person had. A wraith is cold, hungry, and drawn to the living, because the living still remember.",
+      "unlock": { "chapter": 4 },
+      "related": ["codex_ember_cost"]
+    },
+    {
+      "id": "bestiary_elementals",
+      "title": "Ember-Born Elementals",
+      "category": "bestiary",
+      "subject": "fire_elemental",
+      "body": "Fragments of the Hearthflame that have woken. Near a burning ember they rise as fire; near water, earth and wind they take those shapes instead, though they always remember being fire. They are not hostile so much as homesick.",
+      "unlock": { "chapter": 2 }
+    },
+    {
+      "id": "bestiary_red_dragon",
+      "title": "The Dragon in the Keep",
+      "category": "bestiary",
+      "subject": "dragon",
+      "body": "A great red dragon came to Ember Keep in the decade after the Fall, drawn by the heat of the flame's heart, and has slept coiled around it ever since. The Last Watch has never tried to move it. The Kindled are counting on it waking.",
+      "unlock": { "chapter": 5 },
+      "related": ["codex_ember_keep"]
+    }
+  ]
+}

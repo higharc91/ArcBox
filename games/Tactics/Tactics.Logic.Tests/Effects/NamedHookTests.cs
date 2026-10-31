@@ -248,6 +248,30 @@ public sealed class NamedHookTests
     }
 
     [Fact]
+    public void Metamagic_leaves_the_common_actions_alone()
+    {
+        var quicken = Ability("test.quicken", 0, new CostDef(Bonus: 1, Resource: Ordinal.Map(("mana", 1))), Self, "metamagic", """{"kind":"quickened"}""");
+        var twin = Ability("test.twin", 0, new CostDef(Resource: Ordinal.Map(("mana", 1))), Self, "metamagic", """{"kind":"twinned"}""");
+        var dash = new AbilityDef(new AbilityId("common.dash"), "Dash", 0, new CostDef(Action: 1),
+            new TargetDef(TargetKind.Self, 0, false, new AreaDef(AreaShape.Self)), [new ExtraActionEffect("move")]);
+        var battle = TestBattle.On(Field)
+            .Party("sorc", Caster(quicken, twin, dash) with { Resources = Ordinal.Map(("mana", 20)) }, T(0, 1))
+            .Enemy("gob1", TestSheets.Goblin, T(5, 1))
+            .With(quicken, twin, dash);
+        var (state, _) = battle.Start();
+
+        // Quickened doesn't pay a Dash's Action, and neither metamagic is spent on it.
+        (state, _) = battle.Apply(state, new Use(U("sorc"), twin.Id, new Target()));
+        (state, _) = battle.Apply(state, new Use(U("sorc"), quicken.Id, new Target()));
+        (state, _) = battle.Apply(state, new Use(U("sorc"), dash.Id, new Target()));
+
+        var sorc = state.Units[U("sorc")];
+        Assert.False(sorc.Economy.Action);
+        Assert.True(Metamagic.Has(sorc, Metamagic.Quickened));
+        Assert.True(Metamagic.Has(sorc, Metamagic.Twinned));
+    }
+
+    [Fact]
     public void Metamagic_twinned_extended_careful_quickened_and_distant()
     {
         var twin = Ability("test.twin", 0, new CostDef(Resource: Ordinal.Map(("mana", 1))), Self, "metamagic", """{"kind":"twinned"}""");
@@ -302,8 +326,10 @@ public sealed class NamedHookTests
 
         // Careful: allies in the area automatically succeed their saving throws against DC 25, while enemies fail.
         var (afterCareful, _) = battle.Apply(state, new Use(U("sorc"), careful.Id, new Target()));
-        var (blasted, _) = battle.Apply(afterCareful, new Use(U("sorc"), blast.Id, new Target(Tile: T(2, 1))));
+        var (blasted, blastEvents) = battle.Apply(afterCareful, new Use(U("sorc"), blast.Id, new Target(Tile: T(2, 1))));
         Assert.Equal(TestSheets.Fighter.MaxHp, blasted.Units[U("ally")].Hp);
         Assert.Equal(24, blasted.Units[U("gob1")].Hp);
+        // The success is the roll itself, so the TV and the ally's OnSave hooks see a success, not a failure turned round.
+        Assert.True(blastEvents.OfType<Rolled>().Single(r => r.Roller == U("ally")).Result.Success);
     }
 }

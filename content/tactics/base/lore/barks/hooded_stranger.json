@@ -1,0 +1,52 @@
+{
+  "speaker": "hooded_stranger",
+  "events": {
+    "town": [
+      {
+        "id": "bark_hooded_stranger_town_1",
+        "text": "Good questions. Wrong ears.",
+        "mood": "idle",
+        "direction": "quiet, faintly amused, faintly sad",
+        "weight": 3
+      },
+      {
+        "id": "bark_hooded_stranger_town_2",
+        "text": "Lovely evening. It won't last. They never do.",
+        "mood": "sad"
+      },
+      {
+        "id": "bark_hooded_stranger_town_3",
+        "text": "We've met before. No? Then we will.",
+        "mood": "happy"
+      },
+      {
+        "id": "bark_hooded_stranger_town_4",
+        "text": "The child sings well. Has anyone asked her where she learned?",
+        "mood": "idle"
+      }
+    ],
+    "camp": [
+      {
+        "id": "bark_hooded_stranger_camp_1",
+        "text": "Sleep. The road keeps until morning. Most things do.",
+        "mood": "idle",
+        "weight": 2
+      },
+      {
+        "id": "bark_hooded_stranger_camp_2",
+        "text": "Some fires are kept. Some are only borrowed. Few people know the difference.",
+        "mood": "sad"
+      },
+      {
+        "id": "bark_hooded_stranger_camp_3",
+        "text": "Don't thank me. You may not want to, later.",
+        "mood": "sad"
+      },
+      {
+        "id": "bark_hooded_stranger_camp_4",
+        "text": "The mountains look close tonight. They never are.",
+        "mood": "idle"
+      }
+    ]
+  }
+}

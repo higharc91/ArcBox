@@ -1,5 +1,7 @@
 import { useState } from "preact/hooks";
 import { useFeedback } from "../feedback/feedback";
+import type { LobbyTheme } from "../games/module";
+import { useLobbyTheme } from "../games/registry";
 import type { RoomPeek, SeatCard, SeatOffer, SeatRef } from "../protocol";
 import type { StoredProfile } from "../session/storage";
 import { NAME_MAX, isValidName } from "./Join";
@@ -28,6 +30,9 @@ const detail = (o: SeatOffer) => [o.card.title, o.card.subtitle].filter(Boolean)
  */
 export function Pick({ peek, profiles = [], showAll, error, busy, onTake, onNew, onShowAll }: Props) {
   const feedback = useFeedback();
+  // The room's game may restyle this screen (GameModule.lobbyTheme); without one it is the default look, unchanged.
+  const theme = useLobbyTheme(peek.gameId, true);
+  const Badge = theme?.CardBadge;
   const take = (seat: SeatRef) => {
     feedback?.unlock(); // a tap is the user gesture iOS needs before any sound
     if (!busy) onTake(seat);
@@ -40,9 +45,11 @@ export function Pick({ peek, profiles = [], showAll, error, busy, onTake, onNew,
     const name = profiles.find((p) => p.profileId === offer.ref.member)?.name ?? offer.card.title;
     const sub = name === offer.card.title ? offer.card.subtitle : detail(offer);
     return (
-      <div class="screen pick">
+      <div class={screenClass(theme)}>
+        <Decor theme={theme} />
         <PickHead room={room} title={peek.campaignName ?? "Welcome back"} />
         <section class="pick-hero" style={cardStyle(offer.card)}>
+          {Badge ? <Badge card={offer.card} place="hero" /> : null}
           <small>Welcome back</small>
           <b class="hero-name">{name}</b>
           {sub ? <span class="hero-sub">{sub}</span> : null}
@@ -59,8 +66,21 @@ export function Pick({ peek, profiles = [], showAll, error, busy, onTake, onNew,
   }
 
   return peek.inGame
-    ? <SeatList peek={peek} room={room} alert={alert} busy={busy} onTake={take} />
-    : <Roster peek={peek} room={room} alert={alert} busy={busy} onTake={take} onNew={onNew} />;
+    ? <SeatList peek={peek} room={room} alert={alert} busy={busy} onTake={take} theme={theme} />
+    : <Roster peek={peek} room={room} alert={alert} busy={busy} onTake={take} onNew={onNew} theme={theme} />;
+}
+
+const screenClass = (theme?: LobbyTheme) => (theme ? `screen pick ${theme.className}` : "screen pick");
+
+/** A theme's backdrop and banner; nothing at all without a theme. */
+function Decor({ theme }: { theme?: LobbyTheme }) {
+  if (!theme) return null;
+  return (
+    <>
+      {theme.Backdrop ? <theme.Backdrop screen="pick" /> : null}
+      {theme.Banner ? <theme.Banner screen="pick" /> : null}
+    </>
+  );
 }
 
 function PickHead({ room, title, sub }: { room: string; title: string; sub?: string | null }) {
@@ -79,10 +99,12 @@ interface PartProps {
   alert: preact.ComponentChildren;
   busy?: boolean;
   onTake: (seat: SeatRef) => void;
+  theme?: LobbyTheme;
 }
 
 /** The lobby grid: tap who you are, or "I'm new here" for a name box. */
-function Roster({ peek, room, alert, busy, onTake, onNew }: PartProps & { onNew: (name: string) => void }) {
+function Roster({ peek, room, alert, busy, onTake, onNew, theme }: PartProps & { onNew: (name: string) => void }) {
+  const Badge = theme?.CardBadge;
   const [adding, setAdding] = useState(false);
   const [name, setName] = useState("");
   const feedback = useFeedback();
@@ -94,7 +116,8 @@ function Roster({ peek, room, alert, busy, onTake, onNew }: PartProps & { onNew:
       if (isValidName(name) && !busy) onNew(name.trim());
     };
     return (
-      <div class="screen pick">
+      <div class={screenClass(theme)}>
+        <Decor theme={theme} />
         <PickHead room={room} title="I'm new here" sub={peek.campaignName} />
         <form class="join-form" onSubmit={submit}>
           <label class="field">
@@ -120,7 +143,8 @@ function Roster({ peek, room, alert, busy, onTake, onNew }: PartProps & { onNew:
   }
 
   return (
-    <div class="screen pick">
+    <div class={screenClass(theme)}>
+      <Decor theme={theme} />
       <PickHead room={room} title="Who are you?" sub={peek.campaignName} />
       <div class="pick-grid">
         {peek.offers.map((o) => (
@@ -132,6 +156,7 @@ function Roster({ peek, room, alert, busy, onTake, onNew }: PartProps & { onNew:
             disabled={busy}
             onClick={() => onTake(o.ref)}
           >
+            {Badge ? <Badge card={o.card} place="tile" /> : null}
             <b>{o.card.title}</b>
             {o.card.subtitle ? <span>{o.card.subtitle}</span> : null}
           </button>
@@ -152,12 +177,14 @@ function Roster({ peek, room, alert, busy, onTake, onNew }: PartProps & { onNew:
 }
 
 /** Mid-game: the seats with no phone connected. Tap one, then confirm. */
-function SeatList({ peek, room, alert, busy, onTake }: PartProps) {
+function SeatList({ peek, room, alert, busy, onTake, theme }: PartProps) {
+  const Badge = theme?.CardBadge;
   const [picked, setPicked] = useState(() => (peek.offers[0] ? offerKey(peek.offers[0]) : ""));
   const chosen = peek.offers.find((o) => offerKey(o) === picked) ?? peek.offers[0];
 
   return (
-    <div class="screen pick">
+    <div class={screenClass(theme)}>
+      <Decor theme={theme} />
       <PickHead room={room} title="Pick your seat" sub="These characters have no phone connected" />
       <ul class="pick-rows">
         {peek.offers.map((o) => {
@@ -171,6 +198,7 @@ function SeatList({ peek, room, alert, busy, onTake }: PartProps) {
                 aria-pressed={on ? "true" : "false"}
                 onClick={() => setPicked(offerKey(o))}
               >
+                {Badge ? <Badge card={o.card} place="row" /> : null}
                 <span class="row-text">
                   <b>{o.card.title}</b>
                   {o.card.subtitle ? <span>{o.card.subtitle}</span> : null}

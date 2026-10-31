@@ -1,0 +1,1497 @@
+{
+ "voices": {
+  "goblin": {
+   "description": "small wiry goblin, nasal raspy high-pitched voice",
+   "seed": 7100,
+   "monsters": "goblin, goblin_archer, goblin_boss, goblin_shaman, hobgoblin, kobold, kobold_slinger"
+  },
+  "orc": {
+   "description": "hulking orc brute, deep gravelly guttural voice",
+   "seed": 7137,
+   "monsters": "orc_brute"
+  },
+  "undead": {
+   "description": "dry rattling skeleton or rotting zombie, hollow raspy undead moan with clattering bones",
+   "seed": 7174,
+   "monsters": "skeleton, skeleton_archer, zombie, necromancer, lich"
+  },
+  "wolf": {
+   "description": "large grey wolf, deep snarling canine growl",
+   "seed": 7211,
+   "monsters": "wolf, dire_wolf, hound"
+  },
+  "bear": {
+   "description": "huge brown bear, deep heavy chesty bellow",
+   "seed": 7248,
+   "monsters": "bear, elder_bear, boar"
+  },
+  "spider": {
+   "description": "giant spider, dry clicking mandibles and sharp hiss",
+   "seed": 7285,
+   "monsters": "giant_spider"
+  },
+  "slime": {
+   "description": "gelatinous slime ooze, wet squelching gloopy bubbling",
+   "seed": 7322,
+   "monsters": "slime"
+  },
+  "bat": {
+   "description": "giant cave bat, shrill squeaking screech with leathery wing flutter",
+   "seed": 7359,
+   "monsters": "giant_bat"
+  },
+  "dragon": {
+   "description": "enormous dragon, massive rumbling reptilian throat roar",
+   "seed": 7396,
+   "monsters": "drake, dragon"
+  },
+  "troll": {
+   "description": "towering cave troll, booming low guttural voice",
+   "seed": 7433,
+   "monsters": "troll"
+  },
+  "elemental": {
+   "description": "elemental spirit of fire, stone and storm, rushing roaring whoosh of raw elements",
+   "seed": 7470,
+   "monsters": "fire_elemental, water_elemental, earth_elemental, air_elemental, golem"
+  },
+  "wraith": {
+   "description": "ghostly wraith, hollow ethereal wailing whisper",
+   "seed": 7507,
+   "monsters": "wraith"
+  },
+  "mimic": {
+   "description": "treasure chest mimic, creaking wooden lid and wet slobbering tongue growl",
+   "seed": 7544,
+   "monsters": "mimic"
+  }
+ },
+ "attack_miss": {
+  "prompt": "Fast close whoosh of a weapon swinging through empty air and missing, single dry swipe",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.4,
+  "variants": 3,
+  "group": "battle",
+  "loop": false,
+  "use": "AttackResolved with Hit=false"
+ },
+ "attack_crit": {
+  "prompt": "Brutal critical hit: heavy meaty crunch with a sharp bright metallic ring layered on top, punchy and satisfying",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.7,
+  "variants": 2,
+  "group": "battle",
+  "loop": false,
+  "use": "AttackResolved with Crit=true, layered over the weapon impact"
+ },
+ "block_shield": {
+  "prompt": "Weapon striking a raised wooden and iron shield, solid deflecting thunk",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.4,
+  "variants": 2,
+  "group": "battle",
+  "loop": false,
+  "use": "Attack against a shield bearer that misses by armour"
+ },
+ "healed": {
+  "prompt": "Soft rising magical chime with a gentle warm shimmer, restorative",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 2,
+  "group": "battle",
+  "loop": false,
+  "use": "Healed (generic, when the ability has no spell fx sound)"
+ },
+ "buff_applied": {
+  "prompt": "Bright ascending magical sparkle, short positive power-up shimmer",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.8,
+  "variants": 2,
+  "group": "battle",
+  "loop": false,
+  "use": "ConditionApplied for a beneficial condition (blessed, hasted, raging)"
+ },
+ "debuff_applied": {
+  "prompt": "Dark descending warbling magical tone, short negative curse sting",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.8,
+  "variants": 2,
+  "group": "battle",
+  "loop": false,
+  "use": "ConditionApplied for a harmful condition (poisoned, frightened, slowed)"
+ },
+ "pushed": {
+  "prompt": "Heavy body shoved and sliding across ground, grunt-free cloth and armour scrape",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "battle",
+  "loop": false,
+  "use": "Pushed"
+ },
+ "fell": {
+  "prompt": "Body falling and landing hard on ground, heavy thud with armour rattle",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "battle",
+  "loop": false,
+  "use": "Fell onto a lower level"
+ },
+ "fell_deep": {
+  "prompt": "Heavy body plunging into deep water, big splash",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 1,
+  "group": "battle",
+  "loop": false,
+  "use": "Fell with IntoDeep=true"
+ },
+ "collided": {
+  "prompt": "Two armoured bodies slamming into each other, dull heavy impact with metal clank",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.5,
+  "variants": 2,
+  "group": "battle",
+  "loop": false,
+  "use": "Collided with a unit or wall"
+ },
+ "downed": {
+  "prompt": "Armoured adventurer collapsing to the ground, knees then body hitting dirt, metal rattle",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.0,
+  "variants": 2,
+  "group": "battle",
+  "loop": false,
+  "use": "Downed (hero at 0 HP, can still be revived)"
+ },
+ "revived": {
+  "prompt": "Gasping magical revival: a warm bright swell rising into a soft bell",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.4,
+  "variants": 1,
+  "group": "battle",
+  "loop": false,
+  "use": "Revived"
+ },
+ "died": {
+  "prompt": "Defeated monster body dissolving away, soft dusty dispersal whoosh fading out",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.2,
+  "variants": 2,
+  "group": "battle",
+  "loop": false,
+  "use": "Died (body fades out after the creature's death cry)"
+ },
+ "zone_created": {
+  "prompt": "Magical area forming on the ground: swirling energy whoosh settling into a low hum",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.4,
+  "variants": 1,
+  "group": "battle",
+  "loop": false,
+  "use": "ZoneCreated"
+ },
+ "spawned": {
+  "prompt": "Creature summoned into existence: magical pop with a puff of smoke and short shimmer",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 1,
+  "group": "battle",
+  "loop": false,
+  "use": "Spawned"
+ },
+ "countered": {
+  "prompt": "Spell being negated: magical energy abruptly cut off with a fizzle and a hollow thunk",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 1,
+  "group": "battle",
+  "loop": false,
+  "use": "Countered (counterspell)"
+ },
+ "concentration_broken": {
+  "prompt": "Magical glass-like energy shattering, sharp crystalline break with sparkling debris",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.8,
+  "variants": 1,
+  "group": "battle",
+  "loop": false,
+  "use": "ConcentrationBroken"
+ },
+ "round_start": {
+  "prompt": "Single deep war drum hit with a short taiko boom",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.2,
+  "variants": 1,
+  "group": "battle",
+  "loop": false,
+  "use": "RoundStarted"
+ },
+ "battle_start": {
+  "prompt": "Fantasy war horn blast, single short brassy call to arms",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 2.0,
+  "variants": 1,
+  "group": "battle",
+  "loop": false,
+  "use": "Battle begins, before the first RoundStarted"
+ },
+ "terrain_shift": {
+  "prompt": "Earth rumbling and rocks grinding as the ground rises, short rocky crunch",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.2,
+  "variants": 1,
+  "group": "battle",
+  "loop": false,
+  "use": "TerrainAltered"
+ },
+ "dmg_fire": {
+  "prompt": "Burst of fire hitting a target, crackling whoomph of flame, short game sound effect",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "impact",
+  "loop": false,
+  "use": "Damaged with Type=fire"
+ },
+ "dmg_cold": {
+  "prompt": "Icy impact, sharp crackle of freezing frost and splintering ice, short game sound effect",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "impact",
+  "loop": false,
+  "use": "Damaged with Type=cold"
+ },
+ "dmg_lightning": {
+  "prompt": "Electric shock zap hitting a target, crackling sharp spark discharge, short game sound effect",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "impact",
+  "loop": false,
+  "use": "Damaged with Type=lightning"
+ },
+ "dmg_thunder": {
+  "prompt": "Concussive thunder blast impact, deep booming shockwave thump, short game sound effect",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "impact",
+  "loop": false,
+  "use": "Damaged with Type=thunder"
+ },
+ "dmg_acid": {
+  "prompt": "Acid splash hitting a target, wet splatter with a sizzling hiss, short game sound effect",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "impact",
+  "loop": false,
+  "use": "Damaged with Type=acid"
+ },
+ "dmg_poison": {
+  "prompt": "Toxic venom splash, wet gurgling hiss of poison, short game sound effect",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "impact",
+  "loop": false,
+  "use": "Damaged with Type=poison"
+ },
+ "dmg_necrotic": {
+  "prompt": "Necrotic dark magic impact, hollow draining whoosh with a ghostly rasp, short game sound effect",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "impact",
+  "loop": false,
+  "use": "Damaged with Type=necrotic"
+ },
+ "dmg_radiant": {
+  "prompt": "Radiant holy light striking a target, bright shimmering blast with choir-like ring, short game sound effect",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "impact",
+  "loop": false,
+  "use": "Damaged with Type=radiant"
+ },
+ "dmg_force": {
+  "prompt": "Pure arcane force impact, deep punchy magical thump with a whoosh, short game sound effect",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "impact",
+  "loop": false,
+  "use": "Damaged with Type=force"
+ },
+ "dmg_psychic": {
+  "prompt": "Psychic mental attack, warped piercing ringing tone with a wobbling distortion, short game sound effect",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "impact",
+  "loop": false,
+  "use": "Damaged with Type=psychic"
+ },
+ "dmg_slashing": {
+  "prompt": "Blade slashing through flesh, quick wet cut, short game sound effect",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "impact",
+  "loop": false,
+  "use": "Damaged with Type=slashing"
+ },
+ "dmg_piercing": {
+  "prompt": "Sharp point piercing into flesh, quick stab thunk, short game sound effect",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "impact",
+  "loop": false,
+  "use": "Damaged with Type=piercing"
+ },
+ "dmg_bludgeoning": {
+  "prompt": "Heavy blunt blow landing on a body, meaty thud, short game sound effect",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "impact",
+  "loop": false,
+  "use": "Damaged with Type=bludgeoning"
+ },
+ "swing_sword": {
+  "prompt": "Steel sword swinging fast through the air, sharp metallic whoosh",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.4,
+  "variants": 3,
+  "group": "weapon",
+  "loop": false,
+  "use": "Swing for longsword, shortsword, scimitar, rapier, greatsword, glaive, sickle"
+ },
+ "swing_heavy": {
+  "prompt": "Huge two-handed weapon swung slowly and heavily, deep powerful whoosh",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "weapon",
+  "loop": false,
+  "use": "Swing for greatsword, greataxe, maul, halberd, glaive, pike (heavy tag)"
+ },
+ "swing_axe": {
+  "prompt": "Axe swing, chunky wooden-handled whoosh",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.4,
+  "variants": 2,
+  "group": "weapon",
+  "loop": false,
+  "use": "Swing for handaxe, battleaxe, greataxe, halberd"
+ },
+ "swing_blunt": {
+  "prompt": "Mace or club swing, low heavy blunt whoosh",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.4,
+  "variants": 2,
+  "group": "weapon",
+  "loop": false,
+  "use": "Swing for club, greatclub, mace, flail, morningstar, maul, warhammer, light hammer, quarterstaff, war pick"
+ },
+ "swing_dagger": {
+  "prompt": "Quick light dagger stab, tiny sharp whip of air",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.3,
+  "variants": 2,
+  "group": "weapon",
+  "loop": false,
+  "use": "Swing for dagger"
+ },
+ "thrust_spear": {
+  "prompt": "Spear thrust forward, fast airy jab with wooden shaft creak",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.4,
+  "variants": 2,
+  "group": "weapon",
+  "loop": false,
+  "use": "Thrust for spear, pike, lance, trident"
+ },
+ "whip_crack": {
+  "prompt": "Leather whip crack, loud sharp snap",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.4,
+  "variants": 2,
+  "group": "weapon",
+  "loop": false,
+  "use": "Swing for whip"
+ },
+ "bow_release": {
+  "prompt": "Bow string released, twang and arrow whooshing away",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.5,
+  "variants": 3,
+  "group": "weapon",
+  "loop": false,
+  "use": "Release for shortbow, longbow"
+ },
+ "crossbow_release": {
+  "prompt": "Crossbow firing, mechanical clack and thick string thwack, bolt whoosh",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.5,
+  "variants": 2,
+  "group": "weapon",
+  "loop": false,
+  "use": "Release for light, hand and heavy crossbow"
+ },
+ "crossbow_reload": {
+  "prompt": "Crossbow being cranked and cocked, ratcheting wooden mechanism clicks",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.8,
+  "variants": 1,
+  "group": "weapon",
+  "loop": false,
+  "use": "Reload for loading-tag weapons"
+ },
+ "sling_release": {
+  "prompt": "Sling whirling once and releasing a stone, rope whoosh",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.5,
+  "variants": 1,
+  "group": "weapon",
+  "loop": false,
+  "use": "Release for sling"
+ },
+ "throw": {
+  "prompt": "Weapon thrown, spinning whoosh through the air",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.5,
+  "variants": 2,
+  "group": "weapon",
+  "loop": false,
+  "use": "Thrown dagger, handaxe, javelin, dart, light hammer, spear, trident"
+ },
+ "blade_flesh": {
+  "prompt": "Sword blade cutting into flesh, wet slicing hit",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.4,
+  "variants": 3,
+  "group": "weapon",
+  "loop": false,
+  "use": "Slashing weapon hits an unarmoured or beast target"
+ },
+ "blade_armor": {
+  "prompt": "Sword striking plate armour, bright metallic clang with ring",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.5,
+  "variants": 3,
+  "group": "weapon",
+  "loop": false,
+  "use": "Slashing weapon hits an armoured target"
+ },
+ "blunt_flesh": {
+  "prompt": "Club smashing into a body, heavy meaty thud with bone crunch",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.4,
+  "variants": 3,
+  "group": "weapon",
+  "loop": false,
+  "use": "Bludgeoning weapon hits an unarmoured target"
+ },
+ "blunt_armor": {
+  "prompt": "Mace hammering into steel armour, dull heavy metal bonk",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.5,
+  "variants": 2,
+  "group": "weapon",
+  "loop": false,
+  "use": "Bludgeoning weapon hits an armoured target"
+ },
+ "pierce_flesh": {
+  "prompt": "Spear point stabbing into flesh, short wet thunk",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.4,
+  "variants": 2,
+  "group": "weapon",
+  "loop": false,
+  "use": "Piercing melee weapon hits an unarmoured target"
+ },
+ "pierce_armor": {
+  "prompt": "Spear tip glancing off chainmail, scraping metallic tick",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.4,
+  "variants": 2,
+  "group": "weapon",
+  "loop": false,
+  "use": "Piercing melee weapon hits an armoured target"
+ },
+ "arrow_flesh": {
+  "prompt": "Arrow thudding into a body, quick thwack",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.4,
+  "variants": 2,
+  "group": "weapon",
+  "loop": false,
+  "use": "Arrow, bolt, dart or javelin hits an unarmoured target"
+ },
+ "arrow_armor": {
+  "prompt": "Arrow bouncing off metal armour, sharp ping and clatter",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.4,
+  "variants": 2,
+  "group": "weapon",
+  "loop": false,
+  "use": "Arrow or bolt hits an armoured target"
+ },
+ "spell_cast": {
+  "prompt": "Mage charging a spell, rising magical energy swirl building up",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.2,
+  "variants": 2,
+  "group": "spell",
+  "loop": false,
+  "use": "Caster windup before any spell fx (AbilityUsed)"
+ },
+ "spell_fire_explosion": {
+  "prompt": "Big fireball explosion, roaring burst of flame with crackle",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.8,
+  "variants": 2,
+  "group": "spell",
+  "loop": false,
+  "use": "fx.explosion.fire, fx.explosion"
+ },
+ "spell_fireball": {
+  "prompt": "Fireball launched and flying, roaring whooshing flame projectile",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.2,
+  "variants": 1,
+  "group": "spell",
+  "loop": false,
+  "use": "fx.fireball.fire projectile flight"
+ },
+ "spell_fire_aura": {
+  "prompt": "Flames igniting around a body, whooshing fire flare with crackle",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.4,
+  "variants": 1,
+  "group": "spell",
+  "loop": false,
+  "use": "fx.aura.fire, fx.slash.fire, fx.thrust.fire"
+ },
+ "spell_lightning": {
+  "prompt": "Lightning bolt strike from the sky, sharp crackling electric crack and thunder clap",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.5,
+  "variants": 2,
+  "group": "spell",
+  "loop": false,
+  "use": "fx.lightning.storm, fx.shock.storm"
+ },
+ "spell_thunderwave": {
+  "prompt": "Booming thunderwave shockwave blast, deep rolling concussive boom",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.5,
+  "variants": 1,
+  "group": "spell",
+  "loop": false,
+  "use": "fx.thunder.thunder"
+ },
+ "spell_ice": {
+  "prompt": "Ice spell forming, crystalline freezing crackle and shards of ice snapping",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.5,
+  "variants": 2,
+  "group": "spell",
+  "loop": false,
+  "use": "fx.ice.frost, fx.frost.frost"
+ },
+ "spell_holy_heal": {
+  "prompt": "Holy healing spell, warm shimmering angelic choir swell with soft bells",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 2.0,
+  "variants": 2,
+  "group": "spell",
+  "loop": false,
+  "use": "fx.heal.holy, fx.restore.holy"
+ },
+ "spell_holy_pillar": {
+  "prompt": "Pillar of holy light descending, bright resonant shimmering beam with a sacred chime",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 2.0,
+  "variants": 1,
+  "group": "spell",
+  "loop": false,
+  "use": "fx.pillar.holy, fx.aura.holy, fx.radiant.*"
+ },
+ "spell_shield": {
+  "prompt": "Magical protective shield forming, glassy shimmering hum that snaps into place",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.2,
+  "variants": 1,
+  "group": "spell",
+  "loop": false,
+  "use": "fx.shield.*, fx.ward.*"
+ },
+ "spell_bless": {
+  "prompt": "Blessing spell, gentle golden sparkling chimes rising",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.5,
+  "variants": 1,
+  "group": "spell",
+  "loop": false,
+  "use": "fx.bless.*, fx.inspire.*"
+ },
+ "spell_arcane_circle": {
+  "prompt": "Arcane magic circle activating on the ground, mystical humming resonance with glittering sparkles",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 2.0,
+  "variants": 2,
+  "group": "spell",
+  "loop": false,
+  "use": "fx.circle.arcane, fx.aura.arcane, fx.pillar.arcane"
+ },
+ "spell_eldritch": {
+  "prompt": "Eldritch energy blast, otherworldly crackling violet beam with a warping whoosh",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.2,
+  "variants": 1,
+  "group": "spell",
+  "loop": false,
+  "use": "fx.eldritch, fx.force.*"
+ },
+ "spell_nature_heal": {
+  "prompt": "Nature healing magic, soft rustling leaves with gentle woody chimes and birdlike sparkle",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.8,
+  "variants": 1,
+  "group": "spell",
+  "loop": false,
+  "use": "fx.heal.nature, fx.restore.nature"
+ },
+ "spell_nature_circle": {
+  "prompt": "Roots and vines erupting from the ground, creaking wood and rustling growth",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.8,
+  "variants": 1,
+  "group": "spell",
+  "loop": false,
+  "use": "fx.circle.nature, fx.hold.nature, fx.web.silk"
+ },
+ "spell_shadow": {
+  "prompt": "Shadow curse spell, dark ominous whisper-like whoosh with a low droning pulse",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.8,
+  "variants": 2,
+  "group": "spell",
+  "loop": false,
+  "use": "fx.hex.shadow, fx.circle.shadow, fx.pillar.shadow, fx.necrotic.*"
+ },
+ "spell_poison_cloud": {
+  "prompt": "Poison gas cloud spreading, hissing bubbling toxic vapour",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 2.0,
+  "variants": 1,
+  "group": "spell",
+  "loop": false,
+  "use": "fx.poison.poison, fx.poison.miasma, fx.toxin.*"
+ },
+ "spell_misty_step": {
+  "prompt": "Teleport blink, quick magical swoosh with an airy shimmer as someone vanishes and reappears",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.0,
+  "variants": 2,
+  "group": "spell",
+  "loop": false,
+  "use": "fx.misty.mist, fx.misty.shadow, fx.misty.fey; Teleported"
+ },
+ "spell_psychic": {
+  "prompt": "Psychic spell, eerie warbling mind-bending tone sweeping upward",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 1.4,
+  "variants": 1,
+  "group": "spell",
+  "loop": false,
+  "use": "fx.psychic.*"
+ },
+ "smoke_poof": {
+  "prompt": "Small puff of smoke, soft airy poof",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "spell",
+  "loop": false,
+  "use": "fx.poof.white, fx.smoke.grey"
+ },
+ "dust_burst": {
+  "prompt": "Earth and dust kicked up, crumbly gravelly burst",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.8,
+  "variants": 1,
+  "group": "spell",
+  "loop": false,
+  "use": "fx.dust.earth, fx.dust"
+ },
+ "hit_magic": {
+  "prompt": "Small magical projectile impact, bright sparkly zap",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.5,
+  "variants": 2,
+  "group": "spell",
+  "loop": false,
+  "use": "fx.hit.magic, fx.hit.spark"
+ },
+ "goblin_attack": {
+  "prompt": "small wiry goblin, nasal raspy high-pitched voice, aggressive attack snarl, short battle cry",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Attack bark for goblin, goblin_archer, goblin_boss, goblin_shaman, hobgoblin, kobold, kobold_slinger",
+  "voice": "goblin",
+  "seed": 7100
+ },
+ "goblin_hurt": {
+  "prompt": "small wiry goblin, nasal raspy high-pitched voice, short pained yelp when struck",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "creature",
+  "loop": false,
+  "use": "Damaged for goblin, goblin_archer, goblin_boss, goblin_shaman, hobgoblin, kobold, kobold_slinger",
+  "voice": "goblin",
+  "seed": 7100
+ },
+ "goblin_death": {
+  "prompt": "small wiry goblin, nasal raspy high-pitched voice, final drawn-out death cry fading away",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 1.5,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Died for goblin, goblin_archer, goblin_boss, goblin_shaman, hobgoblin, kobold, kobold_slinger",
+  "voice": "goblin",
+  "seed": 7100
+ },
+ "orc_attack": {
+  "prompt": "hulking orc brute, deep gravelly guttural voice, aggressive attack snarl, short battle cry",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Attack bark for orc_brute",
+  "voice": "orc",
+  "seed": 7137
+ },
+ "orc_hurt": {
+  "prompt": "hulking orc brute, deep gravelly guttural voice, short pained yelp when struck",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "creature",
+  "loop": false,
+  "use": "Damaged for orc_brute",
+  "voice": "orc",
+  "seed": 7137
+ },
+ "orc_death": {
+  "prompt": "hulking orc brute, deep gravelly guttural voice, final drawn-out death cry fading away",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 1.5,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Died for orc_brute",
+  "voice": "orc",
+  "seed": 7137
+ },
+ "undead_attack": {
+  "prompt": "dry rattling skeleton or rotting zombie, hollow raspy undead moan with clattering bones, aggressive attack snarl, short battle cry",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Attack bark for skeleton, skeleton_archer, zombie, necromancer, lich",
+  "voice": "undead",
+  "seed": 7174
+ },
+ "undead_hurt": {
+  "prompt": "dry rattling skeleton or rotting zombie, hollow raspy undead moan with clattering bones, short pained yelp when struck",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "creature",
+  "loop": false,
+  "use": "Damaged for skeleton, skeleton_archer, zombie, necromancer, lich",
+  "voice": "undead",
+  "seed": 7174
+ },
+ "undead_death": {
+  "prompt": "dry rattling skeleton or rotting zombie, hollow raspy undead moan with clattering bones, final drawn-out death cry fading away",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 1.5,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Died for skeleton, skeleton_archer, zombie, necromancer, lich",
+  "voice": "undead",
+  "seed": 7174
+ },
+ "wolf_attack": {
+  "prompt": "large grey wolf, deep snarling canine growl, aggressive attack snarl, short battle cry",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Attack bark for wolf, dire_wolf, hound",
+  "voice": "wolf",
+  "seed": 7211
+ },
+ "wolf_hurt": {
+  "prompt": "large grey wolf, deep snarling canine growl, short pained yelp when struck",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "creature",
+  "loop": false,
+  "use": "Damaged for wolf, dire_wolf, hound",
+  "voice": "wolf",
+  "seed": 7211
+ },
+ "wolf_death": {
+  "prompt": "large grey wolf, deep snarling canine growl, final drawn-out death cry fading away",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 1.5,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Died for wolf, dire_wolf, hound",
+  "voice": "wolf",
+  "seed": 7211
+ },
+ "bear_attack": {
+  "prompt": "huge brown bear, deep heavy chesty bellow, aggressive attack snarl, short battle cry",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Attack bark for bear, elder_bear, boar",
+  "voice": "bear",
+  "seed": 7248
+ },
+ "bear_hurt": {
+  "prompt": "huge brown bear, deep heavy chesty bellow, short pained yelp when struck",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "creature",
+  "loop": false,
+  "use": "Damaged for bear, elder_bear, boar",
+  "voice": "bear",
+  "seed": 7248
+ },
+ "bear_death": {
+  "prompt": "huge brown bear, deep heavy chesty bellow, final drawn-out death cry fading away",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 1.5,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Died for bear, elder_bear, boar",
+  "voice": "bear",
+  "seed": 7248
+ },
+ "spider_attack": {
+  "prompt": "giant spider, dry clicking mandibles and sharp hiss, aggressive attack snarl, short battle cry",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Attack bark for giant_spider",
+  "voice": "spider",
+  "seed": 7285
+ },
+ "spider_hurt": {
+  "prompt": "giant spider, dry clicking mandibles and sharp hiss, short pained yelp when struck",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "creature",
+  "loop": false,
+  "use": "Damaged for giant_spider",
+  "voice": "spider",
+  "seed": 7285
+ },
+ "spider_death": {
+  "prompt": "giant spider, dry clicking mandibles and sharp hiss, final drawn-out death cry fading away",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 1.5,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Died for giant_spider",
+  "voice": "spider",
+  "seed": 7285
+ },
+ "slime_attack": {
+  "prompt": "gelatinous slime ooze, wet squelching gloopy bubbling, aggressive attack snarl, short battle cry",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Attack bark for slime",
+  "voice": "slime",
+  "seed": 7322
+ },
+ "slime_hurt": {
+  "prompt": "gelatinous slime ooze, wet squelching gloopy bubbling, short pained yelp when struck",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "creature",
+  "loop": false,
+  "use": "Damaged for slime",
+  "voice": "slime",
+  "seed": 7322
+ },
+ "slime_death": {
+  "prompt": "gelatinous slime ooze, wet squelching gloopy bubbling, final drawn-out death cry fading away",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 1.5,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Died for slime",
+  "voice": "slime",
+  "seed": 7322
+ },
+ "bat_attack": {
+  "prompt": "giant cave bat, shrill squeaking screech with leathery wing flutter, aggressive attack snarl, short battle cry",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Attack bark for giant_bat",
+  "voice": "bat",
+  "seed": 7359
+ },
+ "bat_hurt": {
+  "prompt": "giant cave bat, shrill squeaking screech with leathery wing flutter, short pained yelp when struck",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "creature",
+  "loop": false,
+  "use": "Damaged for giant_bat",
+  "voice": "bat",
+  "seed": 7359
+ },
+ "bat_death": {
+  "prompt": "giant cave bat, shrill squeaking screech with leathery wing flutter, final drawn-out death cry fading away",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 1.5,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Died for giant_bat",
+  "voice": "bat",
+  "seed": 7359
+ },
+ "dragon_attack": {
+  "prompt": "enormous dragon, massive rumbling reptilian throat roar, aggressive attack snarl, short battle cry",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Attack bark for drake, dragon",
+  "voice": "dragon",
+  "seed": 7396
+ },
+ "dragon_hurt": {
+  "prompt": "enormous dragon, massive rumbling reptilian throat roar, short pained yelp when struck",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "creature",
+  "loop": false,
+  "use": "Damaged for drake, dragon",
+  "voice": "dragon",
+  "seed": 7396
+ },
+ "dragon_death": {
+  "prompt": "enormous dragon, massive rumbling reptilian throat roar, final drawn-out death cry fading away",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 1.5,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Died for drake, dragon",
+  "voice": "dragon",
+  "seed": 7396
+ },
+ "troll_attack": {
+  "prompt": "towering cave troll, booming low guttural voice, aggressive attack snarl, short battle cry",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Attack bark for troll",
+  "voice": "troll",
+  "seed": 7433
+ },
+ "troll_hurt": {
+  "prompt": "towering cave troll, booming low guttural voice, short pained yelp when struck",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "creature",
+  "loop": false,
+  "use": "Damaged for troll",
+  "voice": "troll",
+  "seed": 7433
+ },
+ "troll_death": {
+  "prompt": "towering cave troll, booming low guttural voice, final drawn-out death cry fading away",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 1.5,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Died for troll",
+  "voice": "troll",
+  "seed": 7433
+ },
+ "elemental_attack": {
+  "prompt": "elemental spirit of fire, stone and storm, rushing roaring whoosh of raw elements, aggressive attack snarl, short battle cry",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Attack bark for fire_elemental, water_elemental, earth_elemental, air_elemental, golem",
+  "voice": "elemental",
+  "seed": 7470
+ },
+ "elemental_hurt": {
+  "prompt": "elemental spirit of fire, stone and storm, rushing roaring whoosh of raw elements, short pained yelp when struck",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "creature",
+  "loop": false,
+  "use": "Damaged for fire_elemental, water_elemental, earth_elemental, air_elemental, golem",
+  "voice": "elemental",
+  "seed": 7470
+ },
+ "elemental_death": {
+  "prompt": "elemental spirit of fire, stone and storm, rushing roaring whoosh of raw elements, final drawn-out death cry fading away",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 1.5,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Died for fire_elemental, water_elemental, earth_elemental, air_elemental, golem",
+  "voice": "elemental",
+  "seed": 7470
+ },
+ "wraith_attack": {
+  "prompt": "ghostly wraith, hollow ethereal wailing whisper, aggressive attack snarl, short battle cry",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Attack bark for wraith",
+  "voice": "wraith",
+  "seed": 7507
+ },
+ "wraith_hurt": {
+  "prompt": "ghostly wraith, hollow ethereal wailing whisper, short pained yelp when struck",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "creature",
+  "loop": false,
+  "use": "Damaged for wraith",
+  "voice": "wraith",
+  "seed": 7507
+ },
+ "wraith_death": {
+  "prompt": "ghostly wraith, hollow ethereal wailing whisper, final drawn-out death cry fading away",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 1.5,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Died for wraith",
+  "voice": "wraith",
+  "seed": 7507
+ },
+ "mimic_attack": {
+  "prompt": "treasure chest mimic, creaking wooden lid and wet slobbering tongue growl, aggressive attack snarl, short battle cry",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.9,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Attack bark for mimic",
+  "voice": "mimic",
+  "seed": 7544
+ },
+ "mimic_hurt": {
+  "prompt": "treasure chest mimic, creaking wooden lid and wet slobbering tongue growl, short pained yelp when struck",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "creature",
+  "loop": false,
+  "use": "Damaged for mimic",
+  "voice": "mimic",
+  "seed": 7544
+ },
+ "mimic_death": {
+  "prompt": "treasure chest mimic, creaking wooden lid and wet slobbering tongue growl, final drawn-out death cry fading away",
+  "negative": "music, speech, words, reverb tail, background noise",
+  "duration": 1.5,
+  "variants": 1,
+  "group": "creature",
+  "loop": false,
+  "use": "Died for mimic",
+  "voice": "mimic",
+  "seed": 7544
+ },
+ "step_grass": {
+  "prompt": "Two footsteps of a boot-wearing adventurer walking on grass, close-miked, no reverb",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.5,
+  "variants": 3,
+  "group": "footstep",
+  "loop": false,
+  "use": "Moved: one per tile entered on terrain grass_*"
+ },
+ "step_dirt": {
+  "prompt": "Two footsteps of a boot-wearing adventurer walking on packed dirt path, close-miked, no reverb",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.5,
+  "variants": 3,
+  "group": "footstep",
+  "loop": false,
+  "use": "Moved: one per tile entered on terrain dirt_*, path_packed"
+ },
+ "step_stone": {
+  "prompt": "Two footsteps of a boot-wearing adventurer walking on stone flagstones, close-miked, no reverb",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.5,
+  "variants": 3,
+  "group": "footstep",
+  "loop": false,
+  "use": "Moved: one per tile entered on terrain cobble_*, flagstone_*, rock_*"
+ },
+ "step_wood": {
+  "prompt": "Two footsteps of a boot-wearing adventurer walking on wooden planks, hollow creaky, close-miked, no reverb",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.5,
+  "variants": 3,
+  "group": "footstep",
+  "loop": false,
+  "use": "Moved: one per tile entered on terrain planks_*"
+ },
+ "step_sand": {
+  "prompt": "Two footsteps of a boot-wearing adventurer walking on dry sand, close-miked, no reverb",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.5,
+  "variants": 3,
+  "group": "footstep",
+  "loop": false,
+  "use": "Moved: one per tile entered on terrain sand_desert"
+ },
+ "step_snow": {
+  "prompt": "Two footsteps of a boot-wearing adventurer walking on fresh crunchy snow, close-miked, no reverb",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.5,
+  "variants": 3,
+  "group": "footstep",
+  "loop": false,
+  "use": "Moved: one per tile entered on terrain snow_fresh"
+ },
+ "step_water": {
+  "prompt": "Two footsteps of a boot-wearing adventurer walking on shallow water, splashing, close-miked, no reverb",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.5,
+  "variants": 3,
+  "group": "footstep",
+  "loop": false,
+  "use": "Moved: one per tile entered on terrain water_clear (shallow)"
+ },
+ "step_mud": {
+  "prompt": "Two footsteps of a boot-wearing adventurer walking on squelchy swamp mud, close-miked, no reverb",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.5,
+  "variants": 3,
+  "group": "footstep",
+  "loop": false,
+  "use": "Moved: one per tile entered on terrain mud_swamp, water_swamp"
+ },
+ "step_ice": {
+  "prompt": "Two footsteps of a boot-wearing adventurer walking on slippery ice, crisp scraping, close-miked, no reverb",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.5,
+  "variants": 3,
+  "group": "footstep",
+  "loop": false,
+  "use": "Moved: one per tile entered on terrain ice_clear"
+ },
+ "step_lava": {
+  "prompt": "Two footsteps of a boot-wearing adventurer walking on hot cracked volcanic rock with sizzle, close-miked, no reverb",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.5,
+  "variants": 3,
+  "group": "footstep",
+  "loop": false,
+  "use": "Moved: one per tile entered on terrain lava_molten edge tiles"
+ },
+ "step_armor": {
+  "prompt": "Armour jingle and chainmail rattle of a walking knight, two steps",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.5,
+  "variants": 2,
+  "group": "footstep",
+  "loop": false,
+  "use": "Layered over footsteps for heavy-armour units"
+ },
+ "step_heavy": {
+  "prompt": "Huge monster stomping step, deep ground-shaking thud",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.7,
+  "variants": 2,
+  "group": "footstep",
+  "loop": false,
+  "use": "Moved for large or huge creatures (troll, dragon, golem, bear)"
+ },
+ "flap_wings": {
+  "prompt": "Large leathery wings flapping twice",
+  "negative": "music, speech, voice, reverb tail, background noise",
+  "duration": 0.7,
+  "variants": 2,
+  "group": "footstep",
+  "loop": false,
+  "use": "Moved for flying units (bat, drake, dragon, imp)"
+ },
+ "ui_cursor": {
+  "prompt": "Tiny soft wooden click tick for a menu cursor, clean",
+  "negative": "music, speech, voice, reverb tail, realistic noise, ambience",
+  "duration": 0.15,
+  "variants": 3,
+  "group": "ui",
+  "loop": false,
+  "use": "Cursor moves to another tile or menu item"
+ },
+ "ui_select": {
+  "prompt": "Short soft pleasant pluck click for selecting an option, fantasy UI",
+  "negative": "music, speech, voice, reverb tail, realistic noise, ambience",
+  "duration": 0.25,
+  "variants": 2,
+  "group": "ui",
+  "loop": false,
+  "use": "Select a unit or menu entry"
+ },
+ "ui_confirm": {
+  "prompt": "Bright satisfying two-note confirmation chime, fantasy UI",
+  "negative": "music, speech, voice, reverb tail, realistic noise, ambience",
+  "duration": 0.5,
+  "variants": 2,
+  "group": "ui",
+  "loop": false,
+  "use": "Confirm an action or target"
+ },
+ "ui_cancel": {
+  "prompt": "Soft low descending click for cancel or back, fantasy UI",
+  "negative": "music, speech, voice, reverb tail, realistic noise, ambience",
+  "duration": 0.3,
+  "variants": 1,
+  "group": "ui",
+  "loop": false,
+  "use": "Cancel / back"
+ },
+ "ui_error": {
+  "prompt": "Dull low double buzz-thunk denial sound, fantasy UI",
+  "negative": "music, speech, voice, reverb tail, realistic noise, ambience",
+  "duration": 0.4,
+  "variants": 1,
+  "group": "ui",
+  "loop": false,
+  "use": "Invalid action or blocked tile"
+ },
+ "ui_turn_start": {
+  "prompt": "Short clear bell chime signalling a new turn",
+  "negative": "music, speech, voice, reverb tail, realistic noise, ambience",
+  "duration": 0.8,
+  "variants": 1,
+  "group": "ui",
+  "loop": false,
+  "use": "TurnStarted (any unit)"
+ },
+ "ui_your_turn": {
+  "prompt": "Heroic short rising harp and bell flourish alert, your turn",
+  "negative": "music, speech, voice, reverb tail, realistic noise, ambience",
+  "duration": 1.2,
+  "variants": 1,
+  "group": "ui",
+  "loop": false,
+  "use": "TurnStarted for a player-controlled hero"
+ },
+ "ui_reaction_prompt": {
+  "prompt": "Urgent alert ping: quick bright double chime with a tense edge",
+  "negative": "music, speech, voice, reverb tail, realistic noise, ambience",
+  "duration": 0.8,
+  "variants": 1,
+  "group": "ui",
+  "loop": false,
+  "use": "ReactionOffered (player must choose)"
+ },
+ "ui_countdown_tick": {
+  "prompt": "Clock tick, single crisp wooden tock",
+  "negative": "music, speech, voice, reverb tail, realistic noise, ambience",
+  "duration": 0.2,
+  "variants": 2,
+  "group": "ui",
+  "loop": false,
+  "use": "CountdownTicked"
+ },
+ "ui_dice_roll": {
+  "prompt": "Dice rolling and clattering on a wooden table, then settling",
+  "negative": "music, speech, voice, reverb tail, realistic noise, ambience",
+  "duration": 1.0,
+  "variants": 2,
+  "group": "ui",
+  "loop": false,
+  "use": "Rolled (shown dice roll)"
+ },
+ "ui_level_up": {
+  "prompt": "Triumphant level up jingle sound effect: rising sparkly arpeggio with shimmering chime",
+  "negative": "music, speech, voice, reverb tail, realistic noise, ambience",
+  "duration": 2.0,
+  "variants": 1,
+  "group": "ui",
+  "loop": false,
+  "use": "Level up after battle"
+ },
+ "ui_loot": {
+  "prompt": "Picking up treasure, coins jingling and a small sparkle",
+  "negative": "music, speech, voice, reverb tail, realistic noise, ambience",
+  "duration": 0.6,
+  "variants": 2,
+  "group": "ui",
+  "loop": false,
+  "use": "Loot or pickup collected"
+ },
+ "ui_menu_open": {
+  "prompt": "Parchment scroll unrolling with soft paper swish, short",
+  "negative": "music, speech, voice, reverb tail, realistic noise, ambience",
+  "duration": 0.4,
+  "variants": 1,
+  "group": "ui",
+  "loop": false,
+  "use": "Menu or panel opens"
+ },
+ "ui_menu_close": {
+  "prompt": "Parchment scroll rolling closed, soft paper swish, short",
+  "negative": "music, speech, voice, reverb tail, realistic noise, ambience",
+  "duration": 0.4,
+  "variants": 1,
+  "group": "ui",
+  "loop": false,
+  "use": "Menu or panel closes"
+ },
+ "amb_river": {
+  "prompt": "Gentle river flowing over rocks, continuous babbling water, steady and seamless",
+  "negative": "music, speech, voice, sudden impacts, stingers",
+  "duration": 16,
+  "variants": 1,
+  "group": "ambience",
+  "loop": true,
+  "use": "River and lakeside maps"
+ },
+ "amb_campfire": {
+  "prompt": "Crackling campfire at night, steady wood fire pops and soft crickets",
+  "negative": "music, speech, voice, sudden impacts, stingers",
+  "duration": 14,
+  "variants": 1,
+  "group": "ambience",
+  "loop": true,
+  "use": "Camp screen and night camps"
+ },
+ "amb_plains_wind": {
+  "prompt": "Soft wind blowing over open grassy plains, rustling grass, steady",
+  "negative": "music, speech, voice, sudden impacts, stingers",
+  "duration": 16,
+  "variants": 1,
+  "group": "ambience",
+  "loop": true,
+  "use": "Open field and plains maps"
+ },
+ "amb_dungeon": {
+  "prompt": "Damp stone dungeon, occasional water drips echoing, low cave hum",
+  "negative": "music, speech, voice, sudden impacts, stingers",
+  "duration": 16,
+  "variants": 1,
+  "group": "ambience",
+  "loop": true,
+  "use": "Dungeon and cave maps"
+ },
+ "amb_swamp": {
+  "prompt": "Swamp at dusk, frogs croaking, insects buzzing, slow bubbling water",
+  "negative": "music, speech, voice, sudden impacts, stingers",
+  "duration": 16,
+  "variants": 1,
+  "group": "ambience",
+  "loop": true,
+  "use": "Swamp and marsh maps"
+ },
+ "amb_rain": {
+  "prompt": "Steady rain falling on leaves and ground, constant soft downpour",
+  "negative": "music, speech, voice, sudden impacts, stingers",
+  "duration": 14,
+  "variants": 1,
+  "group": "ambience",
+  "loop": true,
+  "use": "Rain weather overlay"
+ },
+ "amb_town": {
+  "prompt": "Medieval town square, distant indistinct crowd murmur, footsteps and cart wheels, no clear words",
+  "negative": "music, speech, voice, sudden impacts, stingers",
+  "duration": 16,
+  "variants": 1,
+  "group": "ambience",
+  "loop": true,
+  "use": "Town and market maps"
+ },
+ "amb_lava": {
+  "prompt": "Volcanic cavern, bubbling molten lava, deep rumbling and hissing steam",
+  "negative": "music, speech, voice, sudden impacts, stingers",
+  "duration": 14,
+  "variants": 1,
+  "group": "ambience",
+  "loop": true,
+  "use": "Lava and volcano maps"
+ },
+ "amb_forest": {
+  "prompt": "Daytime forest, birdsong, light breeze in leaves, steady",
+  "negative": "music, speech, voice, sudden impacts, stingers",
+  "duration": 16,
+  "variants": 1,
+  "group": "ambience",
+  "loop": true,
+  "use": "Forest maps"
+ }
+}

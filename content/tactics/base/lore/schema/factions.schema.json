@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/lore/schema/factions.schema.json",
+  "title": "Factions",
+  "description": "factions.json: the powers in the world and where they stand with each other.",
+  "type": "object",
+  "properties": {
+    "factions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "$ref": "common.schema.json#/$defs/id" },
+          "replaces": { "$ref": "common.schema.json#/$defs/replaces" },
+          "name": { "$ref": "common.schema.json#/$defs/text" },
+          "crest": { "$ref": "common.schema.json#/$defs/artKey" },
+          "summary": { "$ref": "common.schema.json#/$defs/text" },
+          "goals": { "$ref": "common.schema.json#/$defs/texts" },
+          "methods": { "$ref": "common.schema.json#/$defs/text" },
+          "leader": { "$ref": "common.schema.json#/$defs/id", "description": "A character id." },
+          "stance": {
+            "type": "object",
+            "description": "Faction id → how this faction sees it.",
+            "additionalProperties": { "enum": ["ally", "friendly", "neutral", "rival", "hostile", "war"] }
+          },
+          "secret": { "$ref": "common.schema.json#/$defs/text", "description": "What the players learn late. Never shown until a codex entry reveals it." }
+        },
+        "required": ["id", "name", "summary", "goals", "methods"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["factions"],
+  "additionalProperties": false
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/lore/schema/characters.schema.json",
+  "title": "Characters",
+  "description": "characters.json: who the named people are. The look stays in characters/presets; this is the person.",
+  "type": "object",
+  "properties": {
+    "characters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "$ref": "common.schema.json#/$defs/id" },
+          "replaces": { "$ref": "common.schema.json#/$defs/replaces" },
+          "preset": { "$ref": "common.schema.json#/$defs/id", "description": "The characters/presets id for sprite and portraits. Defaults to the character id." },
+          "name": { "$ref": "common.schema.json#/$defs/text" },
+          "epithet": { "$ref": "common.schema.json#/$defs/text", "description": "e.g. 'the Unlit Lantern'." },
+          "role": { "enum": ["companion", "ally", "npc", "rival", "villain"] },
+          "faction": { "$ref": "common.schema.json#/$defs/id" },
+          "summary": { "$ref": "common.schema.json#/$defs/text", "description": "One line for the phone's character card." },
+          "bio": { "$ref": "common.schema.json#/$defs/text" },
+          "wants": { "$ref": "common.schema.json#/$defs/text" },
+          "flaw": { "$ref": "common.schema.json#/$defs/text" },
+          "secret": {
+            "type": "object",
+            "properties": {
+              "text": { "$ref": "common.schema.json#/$defs/text" },
+              "unlock": { "$ref": "common.schema.json#/$defs/unlock" }
+            },
+            "required": ["text", "unlock"],
+            "additionalProperties": false
+          },
+          "voice": {
+            "type": "object",
+            "description": "How they sound. 'theme' is a VoiceTheme id the game registers with AddVoiceThemes; 'description' briefs a voice actor or a voice-design tool.",
+            "properties": {
+              "theme": { "type": "string", "pattern": "^[a-z][a-z0-9_.-]*$" },
+              "description": { "$ref": "common.schema.json#/$defs/text" },
+              "sample": { "$ref": "common.schema.json#/$defs/text", "description": "A typical line, for auditions." }
+            },
+            "required": ["description", "sample"],
+            "additionalProperties": false
+          },
+          "relationships": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "with": { "$ref": "common.schema.json#/$defs/id" },
+                "kind": { "enum": ["family", "friend", "mentor", "student", "rival", "enemy", "debt", "romance", "unknown"] },
+                "note": { "$ref": "common.schema.json#/$defs/text" }
+              },
+              "required": ["with", "kind", "note"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": ["id", "name", "role", "summary", "bio", "wants", "flaw", "voice"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["characters"],
+  "additionalProperties": false
+}

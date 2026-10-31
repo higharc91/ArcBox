@@ -128,6 +128,8 @@ public sealed class SummonBlock : EffectBlock<SummonEffect>
     /// <inheritdoc />
     protected override void Run(SummonEffect def, EffectContext ctx)
     {
+        if (ctx.ConcentrationLapsed(def.Concentration))
+            return;
         var aim = ctx.Aim ?? ctx.SourceUnit.Pos;
         var rounds = Metamagic.ExtendRounds(ctx, def.Rounds, def.Concentration);
         for (var i = 0; i < def.Count; i++)

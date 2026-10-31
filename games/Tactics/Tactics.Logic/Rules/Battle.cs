@@ -316,7 +316,7 @@ public static partial class Battle
         }
         else
         {
-            var effectiveRange = def.Range >= 1 && !Metamagic.IsMetamagicAbility(ability) && Metamagic.Has(user, Metamagic.Distant)
+            var effectiveRange = def.Range >= 1 && Metamagic.Shapes(ability) && Metamagic.Has(user, Metamagic.Distant)
                 ? def.Range + 2
                 : def.Range;
             ranged = effectiveRange > 1;   // melee and touch (range 1) get no high-ground range
@@ -336,7 +336,7 @@ public static partial class Battle
                 return Rejection.Of(RejectCode.NoLineOfSight);
         }
 
-        if (!ability.IsWeaponAttack && !Metamagic.IsMetamagicAbility(ability) && Metamagic.Has(user, Metamagic.Twinned)
+        if (Metamagic.Shapes(ability) && Metamagic.Has(user, Metamagic.Twinned)
             && area.Shape == AreaShape.Single && def.Kind is TargetKind.Enemy or TargetKind.Ally or TargetKind.AnyUnit
             && affected.Length == 1)
         {

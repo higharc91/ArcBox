@@ -1,0 +1,321 @@
+{
+  "arcs": [
+    {
+      "id": "arc_ashen_ford",
+      "chapter": 1,
+      "region": "ashen_ford",
+      "title": "The Bridge at the Ford",
+      "levels": [1, 2],
+      "summary": "The Skarrow goblins hold the ford bridge and Emberwick will starve without the road east. The party decides whether the goblins are enemies or neighbours, and learns that the warm ground under the town is cooling.",
+      "beats": [
+        {
+          "id": "ch1_mayors_request",
+          "kind": "story",
+          "place": "emberwick_town",
+          "summary": "In Emberwick's square at dusk, Mayor Halden asks the party to reopen the ford before the new moon: \"Will you clear them out, or will you talk to their chief?\" The Hooded Stranger watches from the inn door."
+        },
+        {
+          "id": "ch1_the_ford_choice",
+          "kind": "choice",
+          "place": "ford_bridge",
+          "summary": "The party vote that opens the campaign, as in mockup 02. A Persuasion check can win more pay from the mayor first.",
+          "choices": [
+            { "id": "ch1_force", "label": "We'll clear the ford by force.", "summary": "The party storms the bridge. Mother Skarrow dies there, and the clan never forgives Emberwick.", "sets": ["ch1_skarrow_slain"] },
+            { "id": "ch1_parley", "label": "We'll go and parley with the chief.", "summary": "The party walks up the hill to Mother Skarrow's camp, finds starving children, and brokers a deal: the bridge for a share of the town's grain.", "sets": ["ch1_skarrow_spared"] }
+          ]
+        },
+        {
+          "id": "ch1_ford_assault",
+          "kind": "battle",
+          "place": "ford_bridge",
+          "encounter": "ford_assault",
+          "requires": ["ch1_skarrow_slain"],
+          "summary": "By force: the party storms the ford at dawn. Mother Skarrow leads her clan's warriors herself, and dies on the bridge."
+        },
+        {
+          "id": "ch1_river_crossing",
+          "kind": "battle",
+          "place": "ford_bridge",
+          "encounter": "river_crossing",
+          "requires": ["ch1_skarrow_spared"],
+          "summary": "After the parley, the clan's young hotheads, who answer to Vorga, refuse the truce and hold the crossing."
+        },
+        {
+          "id": "ch1_old_maud",
+          "kind": "discovery",
+          "place": "maud_hut",
+          "summary": "On the burned bank the party meets Old Maud, who watched the ember fall a hundred years ago. \"It didn't fall, dearie. It was thrown.\" She points at the Stranger and says she saw that face that night.",
+          "sets": ["ch1_met_maud"]
+        },
+        {
+          "id": "ch1_granary",
+          "kind": "story",
+          "place": "emberwick_town",
+          "requires": ["ch1_skarrow_spared"],
+          "summary": "Feeding the clan means opening the granaries, and the town council balks. Pressed, Halden admits he has known for six years that the ember under the ford is fading, and the warm fields with it.",
+          "sets": ["ch1_halden_confessed"]
+        },
+        {
+          "id": "ch1_skarrow_song",
+          "kind": "camp",
+          "place": "skarrow_hills",
+          "requires": ["ch1_skarrow_spared"],
+          "summary": "At the clan's fire, Mother Skarrow sings the first verses of the clan's oldest song, about seven people who went over the Greywall and came back running. She won't sing the rest to strangers. Yet."
+        },
+        {
+          "id": "ch1_the_ember",
+          "kind": "story",
+          "place": "river_docks",
+          "summary": "Under the docks, the party finds the ford's ember in the riverbed, dim as a coal. The Ash Market has been chipping shards off it. A Kindled preacher named Maren Sorrel arrives in town offering to save it. The Stranger tells the party there are four more, that the next lies in Mirewood, and that this one will keep better near its sisters. The party takes the ford's ember with them: from here on, the party carries every ember it takes.",
+          "sets": ["ch1_ember_found"]
+        }
+      ]
+    },
+    {
+      "id": "arc_mirewood",
+      "chapter": 2,
+      "region": "mirewood",
+      "title": "The Price of a Memory",
+      "levels": [3, 4],
+      "summary": "The Kindled have reached Mirewood first. The party must win the Glimmer Court's ember, and learns what the Court charges for it.",
+      "beats": [
+        {
+          "id": "ch2_drowned_waystation",
+          "kind": "battle",
+          "place": "warden_waystation",
+          "encounter": "forest_ruins",
+          "summary": "A Kindled cell has made camp in a drowned Warden waystation. Their captured journal says they tried to take the ember by force and were turned away by the Court.",
+          "sets": ["ch2_kindled_cell_broken"]
+        },
+        {
+          "id": "ch2_court_audience",
+          "kind": "story",
+          "place": "glimmer_court_hall",
+          "summary": "Ysolde grants the party an audience under the living willow. The Court will part with nothing for free.",
+          "sets": ["ch2_court_audience"]
+        },
+        {
+          "id": "ch2_the_bargain",
+          "kind": "choice",
+          "place": "the_heartpool",
+          "summary": "Ysolde's price for the ember is a memory: something the payer would hate to forget. Each player privately decides whether to offer one, and the party votes on the bargain.",
+          "choices": [
+            { "id": "ch2_pay", "label": "We'll pay what the Court asks.", "summary": "Someone gives up a memory and the party takes the ember. The Court eats the memory, so it is never restored, even if the fire goes out. Part of the Court fades with the ember, and Ysolde thanks them anyway.", "sets": ["ch2_paid_memory", "ch2_ember_taken"] },
+            { "id": "ch2_trick", "label": "Find a loophole in the bargain.", "summary": "An Arcana or Deception check: the party pays with a memory that isn't theirs, and takes the ember. It works, and the Court never forgets it.", "sets": ["ch2_court_tricked", "ch2_ember_taken"] },
+            { "id": "ch2_leave", "label": "Leave the ember with the Court.", "summary": "The party walks away and the ember stays with the Court. The Court owes them a favour, and pays it in Chapter V: Ysolde brings the ember to Ember Keep herself. The Kindled will try again.", "sets": ["ch2_ember_left"] }
+          ]
+        },
+        {
+          "id": "ch2_bree_journal",
+          "kind": "camp",
+          "place": "the_last_coal",
+          "summary": "Back at the Last Coal, Bree shows the party the journal where she writes down her husband, because her hearth shard is burning him away.",
+          "sets": ["ch2_bree_journal"]
+        },
+        {
+          "id": "ch2_corvin_page",
+          "kind": "discovery",
+          "place": "emberwick_town",
+          "summary": "Corvin finds a page in his own notebook, in his own handwriting, describing the cost of ember-fire. He doesn't remember writing it. He begs the party to find the Wardens' own records.",
+          "sets": ["ch2_corvin_page"]
+        }
+      ]
+    },
+    {
+      "id": "arc_sunscar",
+      "chapter": 3,
+      "region": "sunscar",
+      "title": "What the Wardens Buried",
+      "levels": [5, 6],
+      "summary": "To reach the Sunscar's ember the party must take Vorga's bridge and open a Warden crypt that was sealed before the Fall, and in it, the truth about what the fire costs.",
+      "beats": [
+        {
+          "id": "ch3_guest_right",
+          "kind": "story",
+          "place": "scarwalker_camp",
+          "summary": "The Scarwalkers take the party in under guest-right and tell them that Vorga's Host holds the only bridge to the crater. Breaking guest-right in this camp is never forgiven."
+        },
+        {
+          "id": "ch3_skarrow_messenger",
+          "kind": "story",
+          "place": "scarwalker_camp",
+          "requires": ["ch1_skarrow_spared"],
+          "summary": "A runner from Mother Skarrow finds the party with the rest of the clan's song: the seven took the fire from beyond the Greywall, and it was not theirs to take. She also asks them not to kill her grandson.",
+          "sets": ["truth_crossing"]
+        },
+        {
+          "id": "ch3_the_bridge",
+          "kind": "battle",
+          "place": "canyon_bridge",
+          "encounter": "warlord_bridge",
+          "summary": "The battle for Vorga's bridge. Mid-fight Vorga cuts the ropes and drops the bridge into the chasm (the encounter's bridge_down trigger), and the party fights on across the stepping stones.",
+          "sets": ["ch3_bridge_taken"]
+        },
+        {
+          "id": "ch3_vorgas_fate",
+          "kind": "choice",
+          "place": "canyon_bridge",
+          "summary": "Vorga is beaten and on his knees in the shallows.",
+          "choices": [
+            { "id": "ch3_spare_vorga", "label": "Send him home to his grandmother.", "summary": "Vorga goes back to the clan, and if Mother Skarrow lives, the Host breaks up. He'll remember who spared him.", "sets": ["ch3_vorga_spared"] },
+            { "id": "ch3_kill_vorga", "label": "End it here.", "summary": "The Host scatters into the canyons. If Mother Skarrow lives, the clan's truce with Emberwick is in danger.", "sets": ["ch3_vorga_slain"] }
+          ]
+        },
+        {
+          "id": "ch3_buried_crypt",
+          "kind": "battle",
+          "place": "buried_crypt",
+          "encounter": "crypt_hall",
+          "summary": "The Buried Crypt, guarded by bone Wardens still at their posts. Its records were sealed before the Fall and never touched by ember-fire. They say what the fire takes, and that the Wardens hid it. They also list a young Warden who fled the Keep on the night of the Fall with a chest of shards: Celandine Marrowby.",
+          "sets": ["truth_cost", "ch3_marrowby_truth"]
+        },
+        {
+          "id": "ch3_maren_parley",
+          "kind": "story",
+          "place": "the_crater",
+          "summary": "At the crater's edge Maren Sorrel meets the party under a flag of truce. She knows the cost and thinks it worth paying. She asks the party to bring the embers to Ember Keep with her, and lets slip that she can't always tell her own memories from the ones the fire gave her. She lets the party take the crater's ember, which the Scarwalkers would never let her touch.",
+          "sets": ["ch3_maren_parley"]
+        }
+      ]
+    },
+    {
+      "id": "arc_frostpeak",
+      "chapter": 4,
+      "region": "frostpeak",
+      "title": "The Cold Ember",
+      "levels": [7, 8],
+      "summary": "In the frozen pass the dead walk without their memories. The party finds the necromancer studying the cold ember, and Pip remembers the night of the Fall.",
+      "beats": [
+        {
+          "id": "ch4_pilgrim_road",
+          "kind": "story",
+          "place": "pilgrim_road",
+          "summary": "The Pilgrim Road up the pass, where the risen dead walk the routes they walked in life. Pip, who insisted on coming, starts singing songs she was never taught."
+        },
+        {
+          "id": "ch4_greyhold",
+          "kind": "discovery",
+          "place": "greyhold",
+          "summary": "In the frozen dwarven hold, records of the Keep's building show the Hearthflame hall was designed as a cage, not a hearth."
+        },
+        {
+          "id": "ch4_crystal_caves",
+          "kind": "battle",
+          "place": "cold_ember_caves",
+          "encounter": "crystal_cave",
+          "summary": "The caves of the cold ember, where the party fights through Ivo Rime's guardians to his tower.",
+          "sets": ["ch4_rime_found"]
+        },
+        {
+          "id": "ch4_ivos_choice",
+          "kind": "choice",
+          "place": "rime_tower",
+          "summary": "Ivo Rime has found a way to put burned memories back, and wants to try it on his dead wife.",
+          "choices": [
+            { "id": "ch4_help_ivo", "label": "Let him try.", "summary": "It half works. She remembers him for a minute, then is gone for good. Ivo leaves the Kindled, gives the party the cold ember, and owes them everything.", "sets": ["ch4_ivo_helped"] },
+            { "id": "ch4_stop_ivo", "label": "Stop him.", "summary": "The party fights Ivo and takes his research. The cold ember is theirs, and Maren loses her scholar.", "sets": ["ch4_ivo_stopped"] }
+          ]
+        },
+        {
+          "id": "ch4_rime_tower",
+          "kind": "battle",
+          "place": "rime_tower",
+          "encounter": "rime_tower",
+          "requires": ["ch4_ivo_stopped"],
+          "summary": "The party stops Ivo Rime in his tower, against his risen dead and his diggers. He fights like a doctor, and hates every moment of it."
+        },
+        {
+          "id": "ch4_pip_remembers",
+          "kind": "camp",
+          "summary": "At camp in the snow, Pip wakes screaming with a memory that isn't hers: she was Oswin Hale, on the night of the Fall, putting out the Hearthflame, until a hooded figure stopped his hand and the flame shattered. Afterwards she insists on coming to Ember Keep: she knows the way in, because Oswin did.",
+          "sets": ["ch4_pip_remembers", "truth_fall"]
+        }
+      ]
+    },
+    {
+      "id": "arc_ember_keep",
+      "chapter": 5,
+      "region": "ember_keep",
+      "title": "The Heart of the Flame",
+      "levels": [9, 10],
+      "summary": "The party carries the embers it has taken to Ember Keep, where the Last Watch, the Kindled, a sleeping dragon and the Hooded Stranger all wait for the Vale's choice.",
+      "beats": [
+        {
+          "id": "ch5_the_gate",
+          "kind": "choice",
+          "place": "keep_gate",
+          "summary": "Ser Halvard holds the broken gate as he has for a hundred years.",
+          "choices": [
+            { "id": "ch5_fight_halvard", "label": "Fight our way past.", "summary": "A duel at the gate. Halvard falls, still courteous.", "sets": ["ch5_gate_passed", "ch5_halvard_slain"] },
+            { "id": "ch5_release_halvard", "label": "Ask the Keeper to release him.", "summary": "Needs the party to know what Oswin did (truth_fall). Halvard carries their message in; Oswin releases him, and Halvard thanks them and turns to dust.", "sets": ["ch5_gate_passed", "ch5_halvard_released"] }
+          ]
+        },
+        {
+          "id": "ch5_gate_duel",
+          "kind": "battle",
+          "place": "keep_gate",
+          "encounter": "keep_gate",
+          "requires": ["ch5_halvard_slain"],
+          "summary": "The duel at the broken gate. Ser Halvard falls, still courteous, and asks the party to tell the Keeper he held."
+        },
+        {
+          "id": "ch5_the_archive",
+          "kind": "story",
+          "place": "warden_archive",
+          "requires": ["ch5_gate_passed"],
+          "summary": "In the Warden Archive, Oswin Hale tells the whole history: the seven who stole the flame, the cost, the Wardens' secret, and his own failed attempt to end it.",
+          "sets": ["truth_crossing"]
+        },
+        {
+          "id": "ch5_the_stranger",
+          "kind": "story",
+          "place": "warden_archive",
+          "summary": "The Hooded Stranger comes out of the shadows of the archive and admits it: they stopped Oswin a century ago, because a dead flame could never go home. They want it carried back over the Greywall. They won't say who they are.",
+          "sets": ["ch5_stranger_goal"]
+        },
+        {
+          "id": "ch5_the_ritual",
+          "kind": "battle",
+          "place": "flame_hall",
+          "encounter": "hall_of_the_flame",
+          "summary": "Maren Sorrel begins feeding the heart of the flame, and the red dragon wakes. The final battle in the Hall of the Flame: break the ritual before it completes.",
+          "sets": ["ch5_ritual_broken"]
+        },
+        {
+          "id": "ch5_the_last_vote",
+          "kind": "choice",
+          "place": "flame_hall",
+          "summary": "The embers are together in the hall for the first time in a century. The party votes on what becomes of the Hearthflame. These choices lead to the campaign's endings.",
+          "choices": [
+            { "id": "ch5_choose_rekindle", "label": "Rekindle it.", "summary": "The Vale stays warm and keeps paying in memory.", "sets": ["ending_rekindled"] },
+            { "id": "ch5_choose_return", "label": "Return it over the Greywall.", "summary": "The party carries the flame home with the Stranger.", "sets": ["ending_returned"] },
+            { "id": "ch5_choose_extinguish", "label": "Let it die.", "summary": "Oswin finishes his work at last, and the Vale faces the cold on its own.", "sets": ["ending_extinguished"] }
+          ]
+        }
+      ]
+    }
+  ],
+  "endings": [
+    {
+      "id": "end_rekindled",
+      "title": "The Hearth Rekindled",
+      "summary": "The Hearthflame burns again in Ember Keep. The fields warm, the clans are fed, and the Vale begins, very slowly, to forget. The party knows the price and keeps the secret, or tells it.",
+      "sets": ["ending_rekindled"],
+      "sequel": "Years later the Vale is prosperous and losing its past, and the thing the fire was stolen from has noticed it burning again."
+    },
+    {
+      "id": "end_returned",
+      "title": "The Long Road Home",
+      "summary": "The party carries the Hearthflame over the Greywall with the Hooded Stranger. Behind them the Vale grows cold, and remembers.",
+      "sets": ["ending_returned"],
+      "sequel": "The second campaign begins beyond the Greywall, in the land the fire came from, with the Stranger's masters and the cost of a returned theft."
+    },
+    {
+      "id": "end_extinguished",
+      "title": "The Last Ember",
+      "summary": "Oswin Hale puts out the Hearthflame and lets himself go with it. The Vale faces its first true winter in four centuries, and its people start to remember who they were.",
+      "sets": ["ending_extinguished"],
+      "sequel": "A hard winter and a Vale rebuilding: the goblin clans as neighbours or enemies, depending on Chapter I, and the cold dead of Frostpeak spreading down the valley."
+    }
+  ]
+}

@@ -19,7 +19,6 @@ from PIL import Image  # noqa: E402
 
 from arcpix.palette import FAMILIES, RAMP_LEN  # noqa: E402
 from arcpix.preview import contact_sheet, Tile, strip  # noqa: E402
-from arcpix.sheet import Sheet  # noqa: E402
 from parts import characters as C  # noqa: E402
 from parts.recipes import ALL, PARTY, CLASSES, ENEMIES, NPCS  # noqa: E402
 from parts import creator  # noqa: E402
@@ -43,14 +42,9 @@ def build_characters() -> None:
     n = C.frames_per_direction()
 
     # 1. Every layer variant, for every build, as a ramp-map sheet (front row, back row).
-    variants: dict[str, list[str]] = {}
-    for layer, parts in C.PARTS.items():
-        variants[layer] = sorted(parts)
-        for variant in parts:
-            for build in BUILDS:
-                s = Sheet(FRAME_W, FRAME_H, n, ANCHOR)
-                s.frames = [cv.ramp_map() for cv in C.layer_frames(layer, variant, build)]
-                save(s.image(), out / build / layer / f"{variant}.png")
+    variants: dict[str, list[str]] = {layer: sorted(parts) for layer, parts in C.PARTS.items()}
+    C.save_layer_sheets([(layer, variant, build, out / build / layer / f"{variant}.png")
+                         for layer, parts in C.PARTS.items() for variant in parts for build in BUILDS])
 
     # 2. Palettes: every named ramp, plus one palette per recipe, and the LUT texture the shader samples.
     ramps = {fam: {name: ramp for name, ramp in rs.items()} for fam, rs in FAMILIES.items()}
@@ -61,6 +55,7 @@ def build_characters() -> None:
     write_json({"ramps": ramps, "palettes": palettes, "lutRows": rows, "rampLength": RAMP_LEN}, out / "palettes.json")
 
     # 3. Presets: recipe JSON plus a baked, ready-to-draw sheet (use these when recolouring isn't needed).
+    C.warm_sheets(ALL)
     for r in ALL:
         sheet = C.recipe_sheet(r)
         save(sheet.image(), out / "presets" / f"{r.id}.png")
@@ -121,7 +116,11 @@ def build_characters() -> None:
                 "shoot": "tamsin", "cast": "class_sorcerer", "slam": "class_barbarian", "spin": "black_knight",
                 "flurry": "class_monk", "bash": "kara", "block": "aldric", "dodge": "wren", "jump": "class_monk",
                 "item": "sefa", "victory": "kara", "hurt": "aldric", "down": "aldric", "rise": "aldric",
-                "sit": "mayor", "doze": "aldric", "talk": "barmaid", "wave": "child"}
+                "sit": "mayor", "doze": "aldric", "talk": "barmaid", "wave": "child", "run": "tamsin",
+                "knockback": "aldric", "stagger": "class_barbarian", "death": "black_knight", "pray": "class_cleric",
+                "channel": "class_wizard", "summon": "class_sorcerer", "point": "class_warlock",
+                "buff": "class_paladin", "kneel": "class_paladin", "cheer": "wren", "crouch": "class_rogue",
+                "sneak": "class_rogue", "hop": "kara", "climb": "class_ranger"}
     sheets = {}
     tiles = []
     for a in C.anim_table():
@@ -133,7 +132,8 @@ def build_characters() -> None:
                           f"{len(a.frames)} frames · {a.fps:g} fps{' · loop' if a.loop else ''} · {rid}"))
     save(contact_sheet("Characters · animation set", tiles, columns=2, zoom=3,
                        subtitle=f"{len(C.anim_table())} animations, {n} frames per facing. Attacks go anticipation, "
-                                f"strike (with a motion smear), impact, recovery; idles breathe and blink."),
+                                f"action (a smear on swings), held impact, recovery; idles breathe and blink; hair, "
+                                f"capes and hems trail the body by a frame."),
          PREVIEWS / "04-animations.png")
 
     # Any race x any class: the creator's two axes, with the race's default look and the class's kit.
@@ -220,6 +220,9 @@ def build_terrain() -> None:
             by_kind[t.kind].append(Tile(img, t.id, vname + (f" · {len(frames)} frames" if len(frames) > 1 else "")))
         entries[t.id] = {"kind": t.kind, "variants": files, "frames": len(frames), "fps": t.fps,
                          "size": [frames[0].w, frames[0].h]}
+        if "emissive" in t.tags:                                       # glowing textures light the map
+            entries[t.id]["emissive"] = {"slot": "glow", "light": TR.LIGHTS[t.id],
+                                         "colour": {vn: TR.ramps(v)["glow"][4] for vn, v in t.variants.items()}}
     write_json({
         "tile": TR.TILE, "span": TR.T // TR.TILE, "heightStep": TR.TILE // 2,
         "sampling": {
@@ -228,15 +231,17 @@ def build_terrain() -> None:
             "lip": "drawn over the top band of a side under a top that has one; transparent below its edge",
             "decal": "32x32, alpha; placed on a tile's top in tile-local UV",
             "animated": "frames are laid out left to right; play at fps, looping",
+            "emissive": "textures with an `emissive` entry glow by themselves: render their glow pixels (the "
+                        "brightest shades of `colour`) unlit, and place point lights over them as `light` says",
         },
         "textures": entries,
     }, out / "manifest.json")
     save(contact_sheet("Terrain · tops", by_kind["top"], columns=6, zoom=2,
-                       subtitle="Seamless, world-aligned: each 128 px texture spans 4x4 tiles. Water and lava are "
-                                "8-frame loops."), PREVIEWS / "09-terrain-tops.png")
+                       subtitle="Seamless, world-aligned: each 128 px texture spans 4x4 tiles. Water, bog and lava "
+                                "are 16-frame loops."), PREVIEWS / "09-terrain-tops.png")
     save(contact_sheet("Terrain · sides and lips", by_kind["side"] + by_kind["lip"], columns=4, zoom=3,
                        subtitle="Cliff faces repeat every tile of depth; lips hang over the top band where a top "
-                                "meets its side."), PREVIEWS / "10-terrain-sides.png")
+                                "meets its side. The lava side is a 16-frame loop."), PREVIEWS / "10-terrain-sides.png")
     save(contact_sheet("Terrain · ground decals", by_kind["decal"], columns=10, zoom=4, checker=True,
                        subtitle="Scattered on tile tops for variety: flowers, stones, leaves, bones, cracks, "
                                 "puddles, blood and scorch marks."), PREVIEWS / "11-decals.png")
@@ -244,24 +249,22 @@ def build_terrain() -> None:
 
 
 def build_dioramas() -> None:
+    """One preview per biome kit (parts/dioramas.py), plus two loops: the ford's river and the lit ember keep."""
     from arcpix import iso
     from parts import dioramas as D
-    from parts import backgrounds as BG
-    pairs = {"ashen-ford": ("day", "hills"), "frostpeak": ("overcast", "peaks"), "mirewood": ("dusk", "hills"),
-             "sunscar": ("day", "mesas"), "ember-keep": ("ashfall", "volcano")}
 
-    def backdrop(name):
-        sk, biome = pairs[name]
-        return lambda w, h: BG.compose(sk, biome, w, h, horizon=int(h * 0.48))
-
-    for name, make in D.SCENES.items():
-        save(iso.finish(iso.render(make(), backdrop=backdrop(name))), PREVIEWS / f"12-diorama-{name}.png")
-    # the ford again, animated: the river flows
-    # 24 frames: the least common multiple of the water (8), campfire (6) and banner (4) loops
-    bd = backdrop("ashen-ford")
-    frames = [iso.finish(iso.render(D.ashen_ford(k), backdrop=bd), zoom=1).convert("P", palette=Image.Palette.ADAPTIVE)
-              for k in range(24)]
-    frames[0].save(PREVIEWS / "anim-river.gif", save_all=True, append_images=frames[1:], duration=140, loop=0)
+    for name in D.SCENES:
+        save(D.render_scene(name), PREVIEWS / f"12-diorama-{name}.png")
+    # the ford again, animated: the river flows and foams at its banks
+    # 48 frames: the least common multiple of the water (16), campfire (6) and banner (4) loops
+    bd = D.backdrop("ashen-ford")
+    frames = [iso.finish(iso.render(D.ashen_ford(k), backdrop=bd, margin=40), zoom=1)
+              .convert("P", palette=Image.Palette.ADAPTIVE) for k in range(48)]
+    frames[0].save(PREVIEWS / "anim-river.gif", save_all=True, append_images=frames[1:], duration=120, loop=0)
+    # the keep by its own light: lava seams, fumaroles, torches and the fire crystal flicker (16 frames: lava)
+    frames = [D.render_scene("ember-keep", k, zoom=1).convert("P", palette=Image.Palette.ADAPTIVE)
+              for k in range(16)]
+    frames[0].save(PREVIEWS / "anim-ember.gif", save_all=True, append_images=frames[1:], duration=120, loop=0)
 
 
 def build_palettes() -> None:
@@ -285,7 +288,7 @@ SUBCLASS_RACE = {"fighter": "human", "rogue": "halfling", "wizard": "elf", "cler
 def build_subclasses(out: Path) -> None:
     """06b-subclasses.png (every subclass: front, back and mid-swing) and a pack atlas of front idles that the phone's
     subclass picker shows. In the game a hero's own race and look carry through; these use one race per class."""
-    pose, swing = ANIMS["idle"][2][0], ANIMS["attack"][2][2]
+    pose, swing = ANIMS["idle"][2][0], next(p for p in ANIMS["attack"][2] if p.smear is not None)
     cells, names, atlas_index = [], [], {}
     atlas = Image.new("RGBA", (FRAME_W * 3, FRAME_H * len(creator.CLASSES)))
     for row, cls in enumerate(creator.CLASSES):
@@ -326,7 +329,7 @@ def build_equipment() -> None:
     """19-equipment.png: what loot looks like. Every weapon, armour and helm on one hero, then metal tiers."""
     from arcpix.preview import stack
     pose = ANIMS["idle"][2][0]
-    swing = ANIMS["attack"][2][2]
+    swing = next(p for p in ANIMS["attack"][2] if p.smear is not None)
     mk, L = creator.make_character, creator.Look
 
     def img(rec, ps=pose):
@@ -426,8 +429,9 @@ ATTACK_FOR = {"sword": "attack", "greatsword": "attack", "axe": "attack", "mace"
 
 
 def build_anim_previews() -> None:
-    """Animated GIFs of the character set: every actor plays the same beats (idle, ready, walk, their weapon's
-    attack, a class special, guard, hurt, downed, revived, victory), plus an idle close-up and the four facings."""
+    """Animated GIFs of the character set: every actor plays the same beats (idle, ready, walk, run, their weapon's
+    attack, a class special and skill, guard, hurt, knockback, stagger, downed, revived, death, victory), plus an
+    idle close-up and the four facings."""
     from arcpix.anim import Actor, stage_gif
     n = C.frames_per_direction()
     table = {a.name: a.frames for a in C.anim_table()}
@@ -459,27 +463,41 @@ def build_anim_previews() -> None:
             return "flurry" if off in ("dagger", "blade", "main_gauche") else "dodge"
         return "item"
 
+    def skill(r) -> str:
+        """A non-attack ability each class would show off: the new spell and support animations."""
+        return {"cleric": "pray", "paladin": "pray", "wizard": "summon", "sorcerer": "point", "warlock": "channel",
+                "druid": "channel", "bard": "buff", "fighter": "buff", "barbarian": "buff", "ranger": "point",
+                "rogue": "sneak", "monk": "channel"}.get(r.cls or "", "cast")
+
     def script(recipes) -> list:
         k = len(recipes)
         atk = [table[ATTACK_FOR.get(r.layers.get("weapon", ""), "cast")] for r in recipes]
         spc = [table[special(r)] for r in recipes]
+        skl = [table[skill(r)] for r in recipes]
         guard = [table["block" if r.layers.get("offhand", "") in ("round_shield", "kite_shield", "tower_shield",
                                                                      "buckler") else "dodge"] for r in recipes]
-        idle0 = table["idle"][0]
+        idle0, ready0 = table["idle"][0], table["ready"][0]
+        down, death = table["down"], table["death"]
         return [
-            ("Idle", [table["idle"] * 3] * k, 250),
-            ("Battle ready", [table["ready"] * 3] * k, 200),
-            ("Walk", [table["walk"] * 3] * k, 125),
-            ("Walk · away", [[f + n for f in table["walk"]] * 3] * k, 125),
-            ("Attack", [[table["ready"][0]] * 2 + hold(a, 2) + [a[-1]] * 3 for a in atk], 80),
-            ("Special", [[table["ready"][0]] * 2 + hold(a, 2) + [a[-1]] * 3 for a in spc], 80),
-            ("Guard", [hold(g, 4) + [table["ready"][0]] * 2 for g in guard], 90),
-            ("Hurt", [hold(table["hurt"], 3) + [idle0] * 3] * k, 90),
-            ("Downed", [hold(table["down"], 8)] * k, 90),
-            ("Revived", [hold(table["rise"], 4) + [idle0] * 2] * k, 90),
-            ("Victory", [table["victory"] * 4] * k, 160),
+            ("Idle", [table["idle"] * 3] * k, 200),
+            ("Battle ready", [table["ready"] * 3] * k, 167),
+            ("Walk", [table["walk"] * 3] * k, 83),
+            ("Walk · away", [[f + n for f in table["walk"]] * 3] * k, 83),
+            ("Run", [table["run"] * 4] * k, 71),
+            ("Attack", [[ready0] * 3 + a + [a[-1]] * 4 for a in atk], 71),
+            ("Special", [[ready0] * 3 + a + [a[-1]] * 4 for a in spc], 80),
+            ("Skill", [[ready0] * 2 + a + [a[-1]] * 4 for a in skl], 110),
+            ("Guard", [hold(g, 2) + [ready0] * 3 for g in guard], 100),
+            ("Hurt", [table["hurt"] + [ready0] * 4] * k, 100),
+            ("Knockback", [table["knockback"] + [ready0] * 3] * k, 83),
+            ("Stagger", [table["stagger"] + [ready0] * 3] * k, 125),
+            ("Downed", [down + [down[-1]] * 6] * k, 125),
+            ("Revived", [table["rise"] + [idle0] * 3] * k, 125),
+            ("Death", [death + [death[-1]] * 6] * k, 125),
+            ("Victory", [table["victory"] * 3] * k, 160),
         ]
 
+    C.warm_sheets(PARTY + CLASSES + ENEMIES)
     for name, title, recipes, cols in (
             ("anim-party", "The party", PARTY, 6),
             ("anim-classes", "Class starters", CLASSES, 6),
@@ -489,8 +507,8 @@ def build_anim_previews() -> None:
     # Idles up close: the exploration loop and the battle stance, everyone breathing and blinking.
     roster = PARTY + CLASSES
     stage_gif(PREVIEWS / "anim-idle.gif", "Idle and battle-ready loops", actors_for(roster),
-              [("Idle", [table["idle"] * 4] * len(roster), 250),
-               ("Battle ready", [table["ready"] * 4] * len(roster), 200)],
+              [("Idle", [table["idle"] * 4] * len(roster), 200),
+               ("Battle ready", [table["ready"] * 4] * len(roster), 167)],
               zoom=4, columns=8)
 
     # One character walking in all four isometric directions: two drawn facings, two mirrored.
@@ -500,7 +518,7 @@ def build_anim_previews() -> None:
             Actor("North-west", "back", fr, ANCHOR), Actor("North-east", "back, mirrored", fr, ANCHOR, mirror=True)]
     walk = table["walk"]
     stage_gif(PREVIEWS / "anim-directions.gif", "Four facings from two drawn ones", dirs,
-              [("Walk", [walk * 4, walk * 4, [f + n for f in walk] * 4, [f + n for f in walk] * 4], 125)], zoom=5)
+              [("Walk", [walk * 4, walk * 4, [f + n for f in walk] * 4, [f + n for f in walk] * 4], 83)], zoom=5)
 
 
 SETS = {"palettes": build_palettes, "characters": build_characters, "anims": build_anim_previews,
@@ -509,7 +527,7 @@ SETS = {"palettes": build_palettes, "characters": build_characters, "anims": bui
 # Sets that live in their own module: parts/<name>.py with a build() function. Each writes under
 # content/tactics/base/<name>/ and previews/, using arcpix.out.
 PLUGIN_SETS = ("props", "portraits", "beasts", "backgrounds", "ui", "icons", "fx",
-               "ambient", "bosses", "emotes", "town", "status", "pickups", "worldmap",
+               "ambient", "bosses", "bestiary", "emotes", "town", "status", "pickups", "worldmap",
                "signature", "title", "crests", "dungeon", "projectiles", "gear_icons", "grades", "creator_thumbs", "hazards", "transitions", "sheet_icons", "chapters", "camp", "showcase", "gallery")   # these read the others: keep them last
 for _name in PLUGIN_SETS:
     try:

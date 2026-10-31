@@ -18,43 +18,43 @@
   "statuses": {
     "stunned": {
       "file": "stunned.png",
-      "frames": 8,
-      "fps": 8,
+      "frames": 12,
+      "fps": 10,
       "loop": true,
       "layer": "over"
     },
     "charmed": {
       "file": "charmed.png",
-      "frames": 8,
-      "fps": 8,
+      "frames": 12,
+      "fps": 10,
       "loop": true,
       "layer": "over"
     },
     "sleeping": {
       "file": "sleeping.png",
-      "frames": 8,
-      "fps": 8,
+      "frames": 12,
+      "fps": 10,
       "loop": true,
       "layer": "over"
     },
     "poisoned": {
       "file": "poisoned.png",
-      "frames": 8,
-      "fps": 8,
+      "frames": 12,
+      "fps": 10,
       "loop": true,
       "layer": "over"
     },
     "burning": {
       "file": "burning.png",
-      "frames": 6,
-      "fps": 6,
+      "frames": 8,
+      "fps": 8,
       "loop": true,
       "layer": "over"
     },
     "chilled": {
       "file": "chilled.png",
-      "frames": 6,
-      "fps": 6,
+      "frames": 12,
+      "fps": 10,
       "loop": true,
       "layer": "over"
     },
@@ -67,36 +67,36 @@
     },
     "bleeding": {
       "file": "bleeding.png",
-      "frames": 6,
-      "fps": 6,
+      "frames": 8,
+      "fps": 8,
       "loop": true,
       "layer": "over"
     },
     "blessed": {
       "file": "blessed.png",
-      "frames": 8,
-      "fps": 8,
+      "frames": 12,
+      "fps": 10,
       "loop": true,
       "layer": "over"
     },
     "hasted": {
       "file": "hasted.png",
-      "frames": 4,
-      "fps": 6,
+      "frames": 6,
+      "fps": 8,
       "loop": true,
       "layer": "under"
     },
     "slowed": {
       "file": "slowed.png",
-      "frames": 4,
-      "fps": 6,
+      "frames": 12,
+      "fps": 10,
       "loop": true,
       "layer": "over"
     },
     "shielded": {
       "file": "shielded.png",
-      "frames": 8,
-      "fps": 8,
+      "frames": 12,
+      "fps": 10,
       "loop": true,
       "layer": "over"
     },
@@ -109,38 +109,73 @@
     },
     "inspired": {
       "file": "inspired.png",
-      "frames": 9,
-      "fps": 8,
+      "frames": 12,
+      "fps": 10,
       "loop": true,
       "layer": "over"
     },
     "regenerating": {
       "file": "regenerating.png",
-      "frames": 9,
-      "fps": 8,
+      "frames": 12,
+      "fps": 10,
       "loop": true,
       "layer": "over"
     },
     "concentrating": {
       "file": "concentrating.png",
-      "frames": 8,
-      "fps": 8,
+      "frames": 12,
+      "fps": 10,
       "loop": true,
       "layer": "over"
     },
     "frightened": {
       "file": "frightened.png",
-      "frames": 6,
-      "fps": 6,
+      "frames": 12,
+      "fps": 10,
       "loop": true,
       "layer": "over"
     },
     "hidden": {
       "file": "hidden.png",
-      "frames": 6,
-      "fps": 6,
+      "frames": 8,
+      "fps": 8,
       "loop": true,
       "layer": "under"
+    },
+    "raging": {
+      "file": "raging.png",
+      "frames": 8,
+      "fps": 8,
+      "loop": true,
+      "layer": "under"
+    },
+    "paralysed": {
+      "file": "paralysed.png",
+      "frames": 8,
+      "fps": 8,
+      "loop": true,
+      "layer": "over"
+    },
+    "restrained": {
+      "file": "restrained.png",
+      "frames": 8,
+      "fps": 8,
+      "loop": true,
+      "layer": "over"
+    },
+    "blinded": {
+      "file": "blinded.png",
+      "frames": 12,
+      "fps": 10,
+      "loop": true,
+      "layer": "over"
+    },
+    "lit": {
+      "file": "lit.png",
+      "frames": 12,
+      "fps": 10,
+      "loop": true,
+      "layer": "over"
     }
   },
   "notes": {

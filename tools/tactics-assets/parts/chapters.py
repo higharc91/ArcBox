@@ -26,12 +26,17 @@ CHAPTERS = [   # number, title, scene, sky, ranges, grade
 
 
 def card(num: str, name: str, scene: str, sky: str, ranges: str, grade: str) -> Image.Image:
-    img = iso.render(D.SCENES[scene](), backdrop=lambda w, h: BG.compose(sky, ranges, w, h, horizon=int(h * 0.48)))
-    base = iso.finish(img, zoom=1)
+    bd = lambda w, h: BG.compose(sky, ranges, w, h, horizon=int(h * 0.48))   # noqa: E731
+    sc = D.SCENES[scene]()
+    if isinstance(sc, iso.Scene):
+        base = iso.finish(iso.render(sc, backdrop=bd), zoom=1)
+    else:                                   # a lit dungeon Room (the dioramas set draws the keep as one)
+        base = iso.finish(sc.render(backdrop=bd, margin=24), zoom=1, bloom=0.32, vignette=0.45)
     g = next(x for x in G.GRADES if x.name == grade)
-    out = G.graded(base, g).convert("RGBA")
+    # a lit Room already carries its own mood lighting; grading it again crushed it to near-black
+    out = (G.graded(base, g) if isinstance(sc, iso.Scene) else base).convert("RGBA")
     label = TT.title_text(f"CHAPTER {num}", "silver", scale=2, spacing=1, rim=1)
-    head = TT.title_text(name, "gold", scale=3, spacing=1, rim=2)
+    head = TT.title_text(name, "gold", scale=3, spacing=1, rim=2, depth=1)
     rb = TT.ribbon(max(head.width, label.width) + 16, head.height + label.height + 6, "#1a1e3a")
     y = out.height - rb.height - 18
     out.alpha_composite(rb, ((out.width - rb.width) // 2, y))

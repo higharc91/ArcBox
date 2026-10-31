@@ -16,6 +16,7 @@ import numpy as np
 from PIL import Image
 
 from arcpix import tex
+from arcpix.canvas import Canvas, SlotTable
 from arcpix.out import PACK, PREVIEWS, save, write_json
 from arcpix.palette import FAMILIES, ramp
 from arcpix.preview import Tile, contact_sheet
@@ -63,27 +64,49 @@ def _edge_fade(alpha: np.ndarray) -> np.ndarray:
 
 
 # ------------------------------------------------------------------------------------------------- hazards
+def _over() -> tuple[Canvas, SlotTable]:
+    st = SlotTable()
+    for name in ("a", "b", "c"):
+        st.id(name)
+    return Canvas(W, OVER_H, st), st
+
+
+def _tile_pts(n: int, r) -> list[tuple[float, float]]:
+    """`n` points spread over the tile's diamond in the over sprite's coordinates (tile centre at (32, 32))."""
+    out = []
+    for _ in range(n):
+        u, v = r.uniform(-0.8, 0.8), r.uniform(-0.8, 0.8)
+        out.append((32 + (u - v) * 16, 32 + (u + v) * 8))
+    return sorted(out, key=lambda p: p[1])
+
+
 def burning(f: int, r) -> tuple[Image.Image, Image.Image | None]:
+    """Burning ground: black crust split by cracks that glow and pulse, and tongues of flame licking up all over the
+    tile with embers rising off them."""
     u, v = _uv()
     n = tex.fbm(T, T, 4, r, octaves=3)
     rp = FAMILIES["magic"]["fire"]
-    glow = (n + 0.25 * np.sin(2 * np.pi * (f / FRAMES + n * 2))) > 0.55
-    idx = np.where(glow, 4, 1)
-    base = _shade(FAMILIES["terrain"]["crust"], np.full((T, T), 1))
-    col = np.where(glow[..., None], _shade(rp, idx), base)
-    alpha = np.where(glow, 230, 140).astype(np.uint8)
+    ph = 2 * np.pi * f / FRAMES
+    crack = np.abs(np.sin(n * 13)) < 0.22
+    pulse = 0.5 + 0.5 * np.sin(ph + n * 6)
+    idx = np.where(crack, np.where(pulse > 0.5, 5, 4), np.where(n > 0.62, 2, 1))
+    crust = _shade(FAMILIES["terrain"]["crust"], np.where(n > 0.5, 2, 1))
+    col = np.where(crack[..., None] | (n > 0.62)[..., None], _shade(rp, idx), crust)
+    alpha = np.where(crack, 240, 200).astype(np.uint8)
     ground = project(col, _edge_fade(alpha))
-    over = Image.new("RGBA", (W, OVER_H))
-    from arcpix.canvas import Canvas, SlotTable
-    st = SlotTable()
-    st.id("fire")
-    c = Canvas(W, OVER_H, st)
-    ph = 2 * math.pi * f / FRAMES
-    for k, (x, y) in enumerate(((20, 33), (32, 37), (44, 33), (26, 29), (38, 29), (32, 25))):
-        h = 7 + 3 * math.sin(ph + k * 1.7)
-        c.polygon([(x - 2.5, y), (x + 2.5, y), (x + math.sin(ph * 2 + k), y - h)], "fire", 3)
-        c.polygon([(x - 1.2, y), (x + 1.2, y), (x, y - h * 0.55)], "fire", 5)
-    over = c.render({"fire": rp})
+    c, _ = _over()
+    pts = _tile_pts(9, tex.rng(77))
+    for k, (x, y) in enumerate(pts):
+        h = 6 + 3 * (k % 3) + 3 * math.sin(ph + k * 1.7)
+        sway = math.sin(ph * 2 + k) * 1.2
+        c.polygon([(x - 2.5, y), (x + 2.5, y), (x + sway, y - h)], "a", 2)
+        c.polygon([(x - 1.6, y), (x + 1.6, y), (x + sway, y - h * 0.8)], "a", 3)
+        c.polygon([(x - 0.8, y), (x + 0.8, y), (x + sway * 0.6, y - h * 0.5)], "a", 5)
+    for k in range(6):
+        t = (f / FRAMES + k / 6) % 1.0
+        x, y = pts[k * 3 % len(pts)]
+        c.px(x + math.sin(t * 6 + k) * 2, y - 6 - t * 22, "b", 5 if t < 0.5 else 3)
+    over = c.render({"a": rp, "b": FAMILIES["magic"]["holy"], "c": rp})
     return ground, over
 
 
@@ -94,7 +117,6 @@ def poison(f: int, r) -> tuple[Image.Image, Image.Image | None]:
     idx = np.where(n > 0.62, 4, np.where(n > 0.4, 3, 2))
     alpha = np.where(n > 0.4, 170, 90).astype(np.uint8)
     ground = project(_shade(rp, idx), _edge_fade(alpha))
-    from arcpix.canvas import Canvas, SlotTable
     st = SlotTable()
     st.id("gas")
     c = Canvas(W, OVER_H, st)
@@ -144,7 +166,6 @@ def thorns(f: int, r) -> tuple[Image.Image, Image.Image | None]:
     rp = FAMILIES["foliage"]["leaf"]
     alpha = np.where(vines, 230, 0).astype(np.uint8)
     ground = project(_shade(rp, np.where(vines, 2, 0)), alpha)
-    from arcpix.canvas import Canvas, SlotTable
     st = SlotTable()
     st.id("vine")
     st.id("thorn")
@@ -208,7 +229,6 @@ def darkness(f: int, r) -> tuple[Image.Image, Image.Image | None]:
     idx = np.where(n > 0.6, 1, 0)
     alpha = np.where(n > 0.25, 225, 180).astype(np.uint8)
     ground = project(_shade(rp, idx), alpha)
-    from arcpix.canvas import Canvas, SlotTable
     st = SlotTable()
     st.id("dark")
     c = Canvas(W, OVER_H, st)
@@ -231,6 +251,121 @@ def water_shallow(f: int, r) -> tuple[Image.Image, Image.Image | None]:
     return project(_shade(rp, idx), _edge_fade(alpha)), None
 
 
+def acid(f: int, r) -> tuple[Image.Image, Image.Image | None]:
+    """An acid pool: a glossy yellow-green film with a bright rim, its sheen sliding, and bubbles swelling and popping
+    with thin fumes."""
+    u, v = _uv()
+    n = tex.fbm(T, T, 4, r, octaves=3)
+    rp = ramp("#b4dc34", shift=0.09, spread=0.95)
+    sheen = tex.wrap_roll(tex.fbm(T, T, 4, r, octaves=2), f * T // FRAMES, 0)
+    inside = n > 0.2
+    rim = inside & (n < 0.26)
+    idx = np.where(rim, 4, np.where(sheen > 0.72, 5, np.where(n > 0.6, 3, 2)))
+    alpha = np.where(inside, 215, 0).astype(np.uint8)
+    ground = project(_shade(rp, idx), _edge_fade(alpha))
+    c, _ = _over()
+    for k, (x, y) in enumerate(_tile_pts(7, tex.rng(78))):
+        t = (f / FRAMES + k * 0.37) % 1.0
+        if t < 0.6:
+            rr = 0.6 + t * 2.2
+            c.ellipse(x + 0.5, y - rr, rr, rr, "a", 3)
+            c.px(x - rr * 0.5, y - rr * 1.5, "a", 5)
+        elif t < 0.75:
+            for dx, dy in ((-2, -2), (2, -2), (0, -4)):
+                c.px(x + dx, y + dy, "a", 4)
+        else:
+            c.px(x, y - 4 - (t - 0.75) * 24, "b", 2)
+    return ground, c.render({"a": rp, "b": FAMILIES["cloth"]["ivory"], "c": rp})
+
+
+def spikes(f: int, r) -> tuple[Image.Image, Image.Image | None]:
+    """Spike growth: a mat of brambles over the ground and hooked thorns standing up out of it, glinting in turn.
+    Reads as 'don't walk here' from its spikes, not its colour."""
+    u, v = _uv()
+    n = tex.fbm(T, T, 8, r, octaves=2)
+    vines = np.abs(np.sin(u * 0.7 + n * 7)) < 0.25
+    vines |= np.abs(np.sin(v * 0.6 - n * 5)) < 0.2
+    rp = FAMILIES["foliage"]["bark"]
+    idx = np.where(vines, np.where(n > 0.5, 3, 2), 1)
+    alpha = np.where(vines, 235, 70).astype(np.uint8)
+    ground = project(_shade(rp, idx), _edge_fade(alpha))
+    c, _ = _over()
+    for k, (x, y) in enumerate(_tile_pts(14, tex.rng(79))):
+        h = 4 + (k % 3) * 2
+        lean = (k % 5 - 2) * 0.6
+        c.polygon([(x - 1.5, y), (x + 1.5, y), (x + lean, y - h)], "a", 3)
+        c.px(x + lean, y - h, "b", 5 if (k + f) % FRAMES == 0 else 4)
+        c.px(x - 1, y - 1, "a", 2)
+    return ground, c.render({"a": FAMILIES["foliage"]["dead"], "b": FAMILIES["horn"]["bone"], "c": rp})
+
+
+def fog(f: int, r) -> tuple[Image.Image, Image.Image | None]:
+    """Fog cloud: a pale ground haze and banks of fog in the over layer, rolling sideways a whole noise period per
+    loop. Heavily obscured: it should hide the unit's feet and legs."""
+    rp = ramp("#c8d0dc", shift=0.04, spread=0.6)
+    n = tex.wrap_roll(tex.fbm(T, T, 4, r, octaves=3), f * T // FRAMES, 0)
+    ground = project(_shade(rp, np.where(n > 0.5, 3, 2)), _edge_fade(np.full((T, T), 150, np.uint8)))
+    big = tex.fbm(64, 40, 4, tex.rng(80), octaves=3)
+    big = np.roll(big, f * 64 // FRAMES, 1)
+    ys, xs = np.mgrid[0:OVER_H, 0:W]
+    e = ((xs - 32) / 30) ** 2 + ((ys - 29) / 10) ** 2
+    body = (big * 0.8 + (1 - e) * 0.7) > 0.8
+    out = np.zeros((OVER_H, W, 4), np.uint8)
+    sh = np.where(big > 0.6, 4, 3)
+    out[..., :3] = _shade(rp, sh)
+    out[..., 3] = np.where(body & (ys < 38), np.where((xs + ys) % 2 == 0, 200, 150), 0)
+    return ground, Image.fromarray(out, "RGBA")
+
+
+def sleet(f: int, r) -> tuple[Image.Image, Image.Image | None]:
+    """Sleet storm: slush and rime over the tile and sleet streaking down across it (difficult, puts out fire)."""
+    u, v = _uv()
+    n = tex.fbm(T, T, 4, r, octaves=3)
+    rp = FAMILIES["terrain"]["snow"]
+    idx = np.where(n > 0.65, 5, np.where(n > 0.45, 4, 3))
+    alpha = np.where(n > 0.3, 200, 110).astype(np.uint8)
+    ground = project(_shade(rp, idx), _edge_fade(alpha))
+    c, _ = _over()
+    for k in range(14):
+        t = (f / FRAMES + k * 0.29) % 1.0
+        x = 8 + (k * 13) % 48 + t * 6
+        y = -4 + t * 40
+        c.line(x, y, x + 1, y + 3, "a", 5 if k % 3 else 4)
+    return ground, c.render({"a": FAMILIES["magic"]["frost"], "b": rp, "c": rp})
+
+
+def electrified(f: int, r) -> tuple[Image.Image, Image.Image | None]:
+    """Electrified ground (call lightning, storm sphere, a flooded tile struck): scorched ground with arcs that
+    jump across it, a different set every frame."""
+    u, v = _uv()
+    n = tex.fbm(T, T, 4, r, octaves=3)
+    rp = FAMILIES["magic"]["storm"]
+    scorch = _shade(FAMILIES["terrain"]["crust"], np.where(n > 0.55, 2, 1))
+    col = scorch.copy()
+    alpha = np.full((T, T), 120, np.uint8)
+    rr = tex.rng(900 + f)
+    for _ in range(3):
+        x, y = rr.uniform(4, T - 4), rr.uniform(4, T - 4)
+        for _ in range(10):
+            x2, y2 = np.clip(x + rr.uniform(-4, 4), 1, T - 2), np.clip(y + rr.uniform(-4, 4), 1, T - 2)
+            for t in np.linspace(0, 1, 6):
+                xi, yi = int(x + (x2 - x) * t), int(y + (y2 - y) * t)
+                col[yi, xi] = _hex(rp[5])
+                alpha[yi, xi] = 255
+            x, y = x2, y2
+    ground = project(col, _edge_fade(alpha))
+    c, _ = _over()
+    for k in range(2):
+        x = rr.uniform(16, 48)
+        y = 32 + rr.uniform(-6, 6)
+        px_, py_ = x, y
+        for d in range(5):
+            nx, ny = px_ + rr.uniform(-3, 3), py_ - rr.uniform(2, 4)
+            c.line(px_, py_, nx, ny, "a", 5 if d < 3 else 4)
+            px_, py_ = nx, ny
+    return ground, c.render({"a": rp, "b": rp, "c": rp})
+
+
 HAZARDS = {   # id: (draw, blocks movement, difficult terrain, damage type, note)
     "burning": (burning, False, False, "fire", "damage on entering and at turn start"),
     "poison": (poison, False, False, "poison", "poisons those who end a turn inside"),
@@ -242,13 +377,18 @@ HAZARDS = {   # id: (draw, blocks movement, difficult terrain, damage type, note
     "caltrops": (caltrops, False, True, "piercing", "damage on entering"),
     "darkness": (darkness, False, False, None, "heavily obscured: blocks line of sight"),
     "flooded": (water_shallow, False, True, None, "conducts lightning"),
+    "acid": (acid, False, False, "acid", "acid pool: damage on entering and at turn start"),
+    "spikes": (spikes, False, True, "piercing", "spike growth: damage for every tile moved inside"),
+    "fog": (fog, False, False, None, "fog cloud: heavily obscured, blocks line of sight; wind disperses it"),
+    "sleet": (sleet, False, True, None, "sleet storm: difficult, may knock prone, puts out fire"),
+    "electrified": (electrified, False, False, "lightning", "lightning damage at turn start"),
 }
 
 
 def build() -> None:
     out = PACK / "hazards"
     shutil.rmtree(out, ignore_errors=True)
-    entries, tiles = {}, []
+    entries, tiles, anim = {}, [], {}
     for hid, (draw, blocks, difficult, dmg, note) in HAZARDS.items():
         r_ground, r_over = [], []
         for f in range(FRAMES):
@@ -278,6 +418,7 @@ def build() -> None:
                 x, y = 32 + (i - j) * 32, (i + j) * 16 + OVER_H - 8 + 16 - 32
                 patch.alpha_composite(r_over[0], (x, y))
         tiles.append(Tile(patch, hid, ("difficult · " if difficult else "") + (dmg or "no damage")))
+        anim[hid] = (r_ground, r_over)
     write_json({"frame": [W, H], "origin": [32, 16], "overFrame": [W, OVER_H], "overOrigin": [32, 32],
                 "hazards": entries,
                 "notes": {"ground": "draw on the tile top after the terrain, before units (like the UI markers)",
@@ -287,3 +428,39 @@ def build() -> None:
     save(contact_sheet("Ground hazards", tiles, columns=5, zoom=3, checker=True,
                        subtitle="Persistent tile effects: ground layer + an 'over' layer that wraps whoever stands "
                                 "there. Same diamond as the UI tile markers."), PREVIEWS / "37-hazards.png")
+    _gif(anim)
+
+
+def _patch(ground: Image.Image, over: Image.Image | None) -> Image.Image:
+    """A 2x2 patch of one hazard frame: grounds first, then overs back to front, as the game draws them."""
+    patch = Image.new("RGBA", (W * 2 + 32, H + 32 + OVER_H))
+    cells = ((0, 0), (1, 0), (0, 1), (1, 1))
+    for i, j in cells:
+        patch.alpha_composite(ground, (32 + (i - j) * 32, (i + j) * 16 + OVER_H - 8))
+    if over is not None:
+        for i, j in cells:
+            patch.alpha_composite(over, (32 + (i - j) * 32, (i + j) * 16 + OVER_H - 8 + 16 - 32))
+    return patch
+
+
+def _gif(anim: dict) -> None:
+    """Every hazard animating as a 2x2 patch at 3x, so the loops and the tiling can be judged."""
+    from arcpix.preview import BG, PANEL, INK, font
+    from PIL import ImageDraw
+    cols, z = 5, 3
+    pw, ph = (W * 2 + 32) * z, (H + 32 + OVER_H) * z
+    rows = -(-len(anim) // cols)
+    frames = []
+    for f in range(FRAMES * 2):
+        img = Image.new("RGBA", (cols * (pw + 8) + 8, rows * (ph + 24) + 40), BG)
+        d = ImageDraw.Draw(img)
+        d.text((10, 10), "Ground hazards (animated)", font=font(18, True), fill=INK)
+        for n, (hid, (g, o)) in enumerate(anim.items()):
+            x, y = 8 + (n % cols) * (pw + 8), 40 + (n // cols) * (ph + 24)
+            d.rounded_rectangle((x, y, x + pw, y + ph), 6, fill=PANEL)
+            p = _patch(g[f % FRAMES], o[f % FRAMES])
+            img.alpha_composite(p.resize((p.width * z, p.height * z), Image.NEAREST), (x, y))
+            d.text((x + 4, y + ph + 4), hid, font=font(12, True), fill=INK)
+        frames.append(img.convert("RGB").quantize(colors=255, method=Image.Quantize.MEDIANCUT))
+    frames[0].save(PREVIEWS / "anim-hazards.gif", save_all=True, append_images=frames[1:], duration=125, loop=0,
+                   optimize=True, disposal=1)

@@ -1,0 +1,563 @@
+{
+  "level": 4,
+  "completed": [],
+  "party": [
+    {
+      "name": "Ana",
+      "character": "Dwarf Cleric",
+      "xp": 3200,
+      "you": true
+    },
+    {
+      "name": "Bo",
+      "character": "No character yet",
+      "xp": 0,
+      "you": false
+    }
+  ],
+  "me": {
+    "name": "Ana",
+    "describe": "Dwarf Cleric",
+    "race": "dwarf",
+    "class": "cleric",
+    "subclass": null,
+    "background": "acolyte",
+    "level": 4,
+    "xp": 3200,
+    "scores": {
+      "str": 8,
+      "dex": 8,
+      "con": 15,
+      "int": 8,
+      "wis": 17,
+      "cha": 16
+    },
+    "picks": [
+      "cleric.sacred_flame",
+      "cleric.toll_the_dead",
+      "cleric.word_of_radiance",
+      "cleric.guiding_bolt",
+      "cleric.healing_word",
+      "cleric.bless",
+      "cleric.cure_wounds",
+      "cleric.shield_of_faith",
+      "cleric.spiritual_weapon",
+      "cleric.resistance",
+      "cleric.hold_person"
+    ],
+    "freeRemake": true,
+    "injuries": [],
+    "increasesLeft": 2,
+    "subclasses": [
+      {
+        "id": "cleric.life",
+        "name": "Life Domain"
+      },
+      {
+        "id": "cleric.war",
+        "name": "War Domain"
+      },
+      {
+        "id": "cleric.light",
+        "name": "Light Domain"
+      }
+    ],
+    "choices": [
+      {
+        "level": 1,
+        "choose": 3,
+        "from": [
+          {
+            "id": "cleric.sacred_flame",
+            "name": "Sacred Flame",
+            "tooltip": "Dex save, 6 tiles: 1d8 radiant"
+          },
+          {
+            "id": "cleric.toll_the_dead",
+            "name": "Toll the Dead",
+            "tooltip": "Wis save, 6 tiles: if the target is below 100% HP, 1d12 necrotic; otherwise 1d8 necrotic"
+          },
+          {
+            "id": "cleric.word_of_radiance",
+            "name": "Word of Radiance",
+            "tooltip": "Con save, self, burst 1: 1d6 radiant"
+          },
+          {
+            "id": "cleric.resistance",
+            "name": "Resistance",
+            "tooltip": "1 tile: target gets \u002B1 Str saves and \u002B1 Dex saves and \u002B1 Con saves and \u002B1 Int saves and \u002B1 Wis saves and \u002B1 Cha saves for 10 rounds"
+          }
+        ]
+      },
+      {
+        "level": 1,
+        "choose": 4,
+        "from": [
+          {
+            "id": "cleric.bless",
+            "name": "Bless",
+            "tooltip": "4 tiles, burst 1: target gets \u002B2 to attack rolls and \u002B2 Str saves and \u002B2 Dex saves and \u002B2 Con saves and \u002B2 Int saves and \u002B2 Wis saves and \u002B2 Cha saves for 10 rounds"
+          },
+          {
+            "id": "cleric.bane",
+            "name": "Bane",
+            "tooltip": "Cha save, 4 tiles, burst 1: target gets -2 to attack rolls and -2 Str saves and -2 Dex saves and -2 Con saves and -2 Int saves and -2 Wis saves and -2 Cha saves for 10 rounds"
+          },
+          {
+            "id": "cleric.cure_wounds",
+            "name": "Cure Wounds",
+            "tooltip": "1 tile: heals 2d8 \u002B casting modifier"
+          },
+          {
+            "id": "cleric.guiding_bolt",
+            "name": "Guiding Bolt",
+            "tooltip": "Spell attack, 6 tiles: 4d6 radiant; target is Lit for 1 round"
+          },
+          {
+            "id": "cleric.healing_word",
+            "name": "Healing Word",
+            "tooltip": "6 tiles: heals 2d4 \u002B casting modifier"
+          },
+          {
+            "id": "cleric.inflict_wounds",
+            "name": "Inflict Wounds",
+            "tooltip": "Con save, 1 tile: 2d10 necrotic; half damage on a save"
+          },
+          {
+            "id": "cleric.shield_of_faith",
+            "name": "Shield of Faith",
+            "tooltip": "6 tiles: target gets \u002B2 AC for 10 rounds"
+          },
+          {
+            "id": "cleric.command",
+            "name": "Command",
+            "tooltip": "Wis save, 6 tiles: target is Incapacitated for 1 round \u2014 \u0022Halt!\u0022 The target stands still and does nothing on its next turn."
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "choose": 1,
+        "from": [
+          {
+            "id": "cleric.bless",
+            "name": "Bless",
+            "tooltip": "4 tiles, burst 1: target gets \u002B2 to attack rolls and \u002B2 Str saves and \u002B2 Dex saves and \u002B2 Con saves and \u002B2 Int saves and \u002B2 Wis saves and \u002B2 Cha saves for 10 rounds"
+          },
+          {
+            "id": "cleric.bane",
+            "name": "Bane",
+            "tooltip": "Cha save, 4 tiles, burst 1: target gets -2 to attack rolls and -2 Str saves and -2 Dex saves and -2 Con saves and -2 Int saves and -2 Wis saves and -2 Cha saves for 10 rounds"
+          },
+          {
+            "id": "cleric.cure_wounds",
+            "name": "Cure Wounds",
+            "tooltip": "1 tile: heals 2d8 \u002B casting modifier"
+          },
+          {
+            "id": "cleric.guiding_bolt",
+            "name": "Guiding Bolt",
+            "tooltip": "Spell attack, 6 tiles: 4d6 radiant; target is Lit for 1 round"
+          },
+          {
+            "id": "cleric.healing_word",
+            "name": "Healing Word",
+            "tooltip": "6 tiles: heals 2d4 \u002B casting modifier"
+          },
+          {
+            "id": "cleric.inflict_wounds",
+            "name": "Inflict Wounds",
+            "tooltip": "Con save, 1 tile: 2d10 necrotic; half damage on a save"
+          },
+          {
+            "id": "cleric.shield_of_faith",
+            "name": "Shield of Faith",
+            "tooltip": "6 tiles: target gets \u002B2 AC for 10 rounds"
+          },
+          {
+            "id": "cleric.command",
+            "name": "Command",
+            "tooltip": "Wis save, 6 tiles: target is Incapacitated for 1 round \u2014 \u0022Halt!\u0022 The target stands still and does nothing on its next turn."
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "choose": 1,
+        "from": [
+          {
+            "id": "cleric.bless",
+            "name": "Bless",
+            "tooltip": "4 tiles, burst 1: target gets \u002B2 to attack rolls and \u002B2 Str saves and \u002B2 Dex saves and \u002B2 Con saves and \u002B2 Int saves and \u002B2 Wis saves and \u002B2 Cha saves for 10 rounds"
+          },
+          {
+            "id": "cleric.bane",
+            "name": "Bane",
+            "tooltip": "Cha save, 4 tiles, burst 1: target gets -2 to attack rolls and -2 Str saves and -2 Dex saves and -2 Con saves and -2 Int saves and -2 Wis saves and -2 Cha saves for 10 rounds"
+          },
+          {
+            "id": "cleric.cure_wounds",
+            "name": "Cure Wounds",
+            "tooltip": "1 tile: heals 2d8 \u002B casting modifier"
+          },
+          {
+            "id": "cleric.guiding_bolt",
+            "name": "Guiding Bolt",
+            "tooltip": "Spell attack, 6 tiles: 4d6 radiant; target is Lit for 1 round"
+          },
+          {
+            "id": "cleric.healing_word",
+            "name": "Healing Word",
+            "tooltip": "6 tiles: heals 2d4 \u002B casting modifier"
+          },
+          {
+            "id": "cleric.inflict_wounds",
+            "name": "Inflict Wounds",
+            "tooltip": "Con save, 1 tile: 2d10 necrotic; half damage on a save"
+          },
+          {
+            "id": "cleric.shield_of_faith",
+            "name": "Shield of Faith",
+            "tooltip": "6 tiles: target gets \u002B2 AC for 10 rounds"
+          },
+          {
+            "id": "cleric.command",
+            "name": "Command",
+            "tooltip": "Wis save, 6 tiles: target is Incapacitated for 1 round \u2014 \u0022Halt!\u0022 The target stands still and does nothing on its next turn."
+          },
+          {
+            "id": "cleric.aid",
+            "name": "Aid",
+            "tooltip": "4 tiles, burst 1: target gains 5 temporary HP"
+          },
+          {
+            "id": "cleric.hold_person",
+            "name": "Hold Person",
+            "tooltip": "6 tiles: if the target is humanoid, Wis save (target is Paralysed until saved)"
+          },
+          {
+            "id": "cleric.lesser_restoration",
+            "name": "Lesser Restoration",
+            "tooltip": "1 tile: ends poison conditions on target; ends Blinded on target; ends Paralysed on target"
+          },
+          {
+            "id": "cleric.spiritual_weapon",
+            "name": "Spiritual Weapon",
+            "tooltip": "Spell attack, 6 tiles: 1d8 \u002B casting modifier force"
+          },
+          {
+            "id": "cleric.blindness",
+            "name": "Blindness",
+            "tooltip": "Con save, 6 tiles: target is Blinded until saved"
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "choose": 1,
+        "from": [
+          {
+            "id": "cleric.sacred_flame",
+            "name": "Sacred Flame",
+            "tooltip": "Dex save, 6 tiles: 1d8 radiant"
+          },
+          {
+            "id": "cleric.toll_the_dead",
+            "name": "Toll the Dead",
+            "tooltip": "Wis save, 6 tiles: if the target is below 100% HP, 1d12 necrotic; otherwise 1d8 necrotic"
+          },
+          {
+            "id": "cleric.word_of_radiance",
+            "name": "Word of Radiance",
+            "tooltip": "Con save, self, burst 1: 1d6 radiant"
+          },
+          {
+            "id": "cleric.resistance",
+            "name": "Resistance",
+            "tooltip": "1 tile: target gets \u002B1 Str saves and \u002B1 Dex saves and \u002B1 Con saves and \u002B1 Int saves and \u002B1 Wis saves and \u002B1 Cha saves for 10 rounds"
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "choose": 1,
+        "from": [
+          {
+            "id": "cleric.bless",
+            "name": "Bless",
+            "tooltip": "4 tiles, burst 1: target gets \u002B2 to attack rolls and \u002B2 Str saves and \u002B2 Dex saves and \u002B2 Con saves and \u002B2 Int saves and \u002B2 Wis saves and \u002B2 Cha saves for 10 rounds"
+          },
+          {
+            "id": "cleric.bane",
+            "name": "Bane",
+            "tooltip": "Cha save, 4 tiles, burst 1: target gets -2 to attack rolls and -2 Str saves and -2 Dex saves and -2 Con saves and -2 Int saves and -2 Wis saves and -2 Cha saves for 10 rounds"
+          },
+          {
+            "id": "cleric.cure_wounds",
+            "name": "Cure Wounds",
+            "tooltip": "1 tile: heals 2d8 \u002B casting modifier"
+          },
+          {
+            "id": "cleric.guiding_bolt",
+            "name": "Guiding Bolt",
+            "tooltip": "Spell attack, 6 tiles: 4d6 radiant; target is Lit for 1 round"
+          },
+          {
+            "id": "cleric.healing_word",
+            "name": "Healing Word",
+            "tooltip": "6 tiles: heals 2d4 \u002B casting modifier"
+          },
+          {
+            "id": "cleric.inflict_wounds",
+            "name": "Inflict Wounds",
+            "tooltip": "Con save, 1 tile: 2d10 necrotic; half damage on a save"
+          },
+          {
+            "id": "cleric.shield_of_faith",
+            "name": "Shield of Faith",
+            "tooltip": "6 tiles: target gets \u002B2 AC for 10 rounds"
+          },
+          {
+            "id": "cleric.command",
+            "name": "Command",
+            "tooltip": "Wis save, 6 tiles: target is Incapacitated for 1 round \u2014 \u0022Halt!\u0022 The target stands still and does nothing on its next turn."
+          },
+          {
+            "id": "cleric.aid",
+            "name": "Aid",
+            "tooltip": "4 tiles, burst 1: target gains 5 temporary HP"
+          },
+          {
+            "id": "cleric.hold_person",
+            "name": "Hold Person",
+            "tooltip": "6 tiles: if the target is humanoid, Wis save (target is Paralysed until saved)"
+          },
+          {
+            "id": "cleric.lesser_restoration",
+            "name": "Lesser Restoration",
+            "tooltip": "1 tile: ends poison conditions on target; ends Blinded on target; ends Paralysed on target"
+          },
+          {
+            "id": "cleric.spiritual_weapon",
+            "name": "Spiritual Weapon",
+            "tooltip": "Spell attack, 6 tiles: 1d8 \u002B casting modifier force"
+          },
+          {
+            "id": "cleric.blindness",
+            "name": "Blindness",
+            "tooltip": "Con save, 6 tiles: target is Blinded until saved"
+          }
+        ]
+      }
+    ]
+  },
+  "options": {
+    "races": [
+      {
+        "id": "aasimar",
+        "name": "Aasimar"
+      },
+      {
+        "id": "dragonborn",
+        "name": "Dragonborn"
+      },
+      {
+        "id": "dwarf",
+        "name": "Dwarf"
+      },
+      {
+        "id": "elf",
+        "name": "Elf"
+      },
+      {
+        "id": "gnome",
+        "name": "Gnome"
+      },
+      {
+        "id": "goliath",
+        "name": "Goliath"
+      },
+      {
+        "id": "half_elf",
+        "name": "Half-Elf"
+      },
+      {
+        "id": "half_orc",
+        "name": "Half-Orc"
+      },
+      {
+        "id": "halfling",
+        "name": "Halfling"
+      },
+      {
+        "id": "human",
+        "name": "Human"
+      },
+      {
+        "id": "tiefling",
+        "name": "Tiefling"
+      }
+    ],
+    "classes": [
+      {
+        "id": "barbarian",
+        "name": "Barbarian",
+        "role": "defender"
+      },
+      {
+        "id": "bard",
+        "name": "Bard",
+        "role": "healer"
+      },
+      {
+        "id": "cleric",
+        "name": "Cleric",
+        "role": "healer"
+      },
+      {
+        "id": "druid",
+        "name": "Druid",
+        "role": "control"
+      },
+      {
+        "id": "fighter",
+        "name": "Fighter",
+        "role": "defender"
+      },
+      {
+        "id": "monk",
+        "name": "Monk",
+        "role": "striker"
+      },
+      {
+        "id": "paladin",
+        "name": "Paladin",
+        "role": "defender"
+      },
+      {
+        "id": "ranger",
+        "name": "Ranger",
+        "role": "striker"
+      },
+      {
+        "id": "rogue",
+        "name": "Rogue",
+        "role": "striker"
+      },
+      {
+        "id": "sorcerer",
+        "name": "Sorcerer",
+        "role": "striker"
+      },
+      {
+        "id": "warlock",
+        "name": "Warlock",
+        "role": "striker"
+      },
+      {
+        "id": "wizard",
+        "name": "Wizard",
+        "role": "control"
+      }
+    ],
+    "backgrounds": [
+      {
+        "id": "acolyte",
+        "name": "Acolyte",
+        "boosts": {
+          "wis": 2,
+          "cha": 1
+        }
+      },
+      {
+        "id": "criminal",
+        "name": "Criminal",
+        "boosts": {
+          "dex": 2,
+          "con": 1
+        }
+      },
+      {
+        "id": "entertainer",
+        "name": "Entertainer",
+        "boosts": {
+          "dex": 1,
+          "cha": 2
+        }
+      },
+      {
+        "id": "folk_hero",
+        "name": "Folk Hero",
+        "boosts": {
+          "str": 2,
+          "wis": 1
+        }
+      },
+      {
+        "id": "guild_artisan",
+        "name": "Guild Artisan",
+        "boosts": {
+          "dex": 1,
+          "int": 2
+        }
+      },
+      {
+        "id": "hermit",
+        "name": "Hermit",
+        "boosts": {
+          "con": 1,
+          "wis": 2
+        }
+      },
+      {
+        "id": "noble",
+        "name": "Noble",
+        "boosts": {
+          "int": 1,
+          "cha": 2
+        }
+      },
+      {
+        "id": "outlander",
+        "name": "Outlander",
+        "boosts": {
+          "str": 1,
+          "con": 2
+        }
+      },
+      {
+        "id": "sage",
+        "name": "Sage",
+        "boosts": {
+          "con": 1,
+          "int": 2
+        }
+      },
+      {
+        "id": "sailor",
+        "name": "Sailor",
+        "boosts": {
+          "str": 2,
+          "dex": 1
+        }
+      },
+      {
+        "id": "soldier",
+        "name": "Soldier",
+        "boosts": {
+          "str": 2,
+          "con": 1
+        }
+      },
+      {
+        "id": "urchin",
+        "name": "Urchin",
+        "boosts": {
+          "dex": 2,
+          "wis": 1
+        }
+      }
+    ],
+    "pointBuy": 27
+  }
+}

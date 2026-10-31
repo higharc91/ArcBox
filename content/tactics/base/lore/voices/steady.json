@@ -1,0 +1,113 @@
+{
+  "id": "steady",
+  "name": "Steady",
+  "description": "Calm, dependable, quietly brave. Speaks little and means all of it.",
+  "voice": {
+    "direction": "Low and even; never shouts. Warm under the calm. Works for a deeper or lighter register."
+  },
+  "events": {
+    "battle_start": [
+      {
+        "id": "voice_steady_battle_start_1",
+        "text": "Hold together. We do this properly.",
+        "mood": "angry"
+      },
+      {
+        "id": "voice_steady_battle_start_2",
+        "text": "Steady now. Watch each other.",
+        "mood": "angry"
+      }
+    ],
+    "crit": [
+      {
+        "id": "voice_steady_crit_1",
+        "text": "Clean.",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_steady_crit_2",
+        "text": "That's how it's done.",
+        "mood": "happy"
+      }
+    ],
+    "kill": [
+      {
+        "id": "voice_steady_kill_1",
+        "text": "One fewer.",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_steady_kill_2",
+        "text": "Rest now.",
+        "mood": "happy"
+      }
+    ],
+    "ally_down": [
+      {
+        "id": "voice_steady_ally_down_1",
+        "text": "No! Get to them, now!",
+        "mood": "surprised"
+      },
+      {
+        "id": "voice_steady_ally_down_2",
+        "text": "Hold the line. I've got them.",
+        "mood": "surprised"
+      }
+    ],
+    "low_hp": [
+      {
+        "id": "voice_steady_low_hp_1",
+        "text": "Still standing.",
+        "mood": "hurt"
+      },
+      {
+        "id": "voice_steady_low_hp_2",
+        "text": "Not done yet.",
+        "mood": "hurt"
+      }
+    ],
+    "healed": [
+      {
+        "id": "voice_steady_healed_1",
+        "text": "My thanks.",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_steady_healed_2",
+        "text": "That'll do. Back to it.",
+        "mood": "happy"
+      }
+    ],
+    "victory": [
+      {
+        "id": "voice_steady_victory_1",
+        "text": "It's over. Everyone breathing?",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_steady_victory_2",
+        "text": "Good work. All of you.",
+        "mood": "happy"
+      }
+    ],
+    "defeat": [
+      {
+        "id": "voice_steady_defeat_1",
+        "text": "Fall back. We'll come again.",
+        "mood": "sad"
+      }
+    ],
+    "camp": [
+      {
+        "id": "voice_steady_camp_1",
+        "text": "Get some sleep. I'll take first watch.",
+        "mood": "idle"
+      },
+      {
+        "id": "voice_steady_camp_2",
+        "text": "Cold tonight. Colder every night.",
+        "mood": "idle"
+      }
+    ]
+  }
+}

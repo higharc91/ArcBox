@@ -1,0 +1,134 @@
+{
+ "title": {
+  "prompt": "Majestic fantasy RPG title theme: sweeping orchestral strings, French horns carrying a hopeful heroic melody, harp arpeggios, light celtic flute counter-melody, timpani accents, 92 BPM, D major, warm and nostalgic like a classic 16-bit era tactics game reimagined with live orchestra. Instrumental only. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 110,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "Title screen",
+  "seed": 4200
+ },
+ "explore": {
+  "prompt": "Calm fantasy exploration music for a world map: gentle acoustic guitar and harp, wooden flute melody, soft string pads, light hand percussion, pastoral and curious, 84 BPM, G major, folk orchestral. Instrumental only. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 120,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "World map and peaceful field maps",
+  "seed": 4201
+ },
+ "battle": {
+  "prompt": "Driving fantasy tactics battle theme: urgent staccato strings ostinato, pounding taiko and snare, bold brass melody, rising tension and heroic resolve, 140 BPM, E minor, orchestral with a celtic fiddle lead. Instrumental only. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 120,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "Normal battles",
+  "seed": 4202
+ },
+ "boss": {
+  "prompt": "Epic boss battle music: full orchestra and dark choir-like synth pads (no words), heavy low brass and pounding war drums, relentless string runs, dramatic chord stabs, 150 BPM, C minor, menacing and grand, fighting a dragon or lich. Instrumental only. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 120,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "Boss battles (any unit with the boss tag)",
+  "seed": 4203
+ },
+ "camp": {
+  "prompt": "Warm acoustic campfire music: fingerpicked nylon guitar, soft lute, gentle fiddle melody, cello drone, cozy and reflective evening rest between battles, 76 BPM, A major, intimate medieval folk. Instrumental only. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 100,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "Camp and party screen",
+  "seed": 4204
+ },
+ "victory": {
+  "prompt": "Triumphant fantasy RPG victory fanfare: bright brass fanfare over rolling timpani and cymbal swell, quick ascending string run, resolves on a major chord, 120 BPM, B-flat major. Instrumental only. Short self-contained sting with a clear ending, no loop.",
+  "duration": 7,
+  "variants": 1,
+  "group": "sting",
+  "loop": false,
+  "use": "BattleEnded with victory",
+  "seed": 4205
+ },
+ "defeat": {
+  "prompt": "Somber fantasy RPG defeat sting: slow mournful solo cello and low strings, descending minor phrase, soft muffled timpani roll, ends on a hollow minor chord, D minor. Instrumental only. Short self-contained sting with a clear ending, no loop.",
+  "duration": 6,
+  "variants": 1,
+  "group": "sting",
+  "loop": false,
+  "use": "BattleEnded with defeat",
+  "seed": 4206
+ },
+ "dungeon": {
+  "prompt": "Tense dark dungeon music: low sustained strings, eerie celesta motif, distant deep drum pulses, dissonant woodwind swells, sparse and creeping, 70 BPM, F-sharp minor, ominous ambient orchestral. Instrumental only. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 120,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "Dungeons, caves and tense story maps",
+  "seed": 4207
+ },
+ "finale": {
+  "prompt": "Final boss battle music for a dark fantasy campaign. A massive choir chanting ominous, evil incantations in an invented Latin-like ritual language: deep male voices intoning in unison, answered by high soprano cries, chant phrases repeating like a summoning. Cathedral pipe organ, thundering timpani and war drums, menacing low brass, frantic tremolo strings, tolling bells. 120 BPM, D minor, relentless and apocalyptic, a cult feeding a dying sacred flame while a dragon wakes. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 150,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "The campaign's final battle (hall_of_the_flame): Maren's ritual and the red dragon",
+  "seed": 4210,
+  "vocals": true
+ },
+ "town_emberwick": {
+  "prompt": "Bittersweet music for a struggling river town in a hungry winter: a slow, wistful solo fiddle melody in a minor key, warm cello and viola underneath, soft fingerpicked guitar, a distant church bell, sparse and quiet, the warmth of home fading as the fire beneath the town goes cold, tender but clearly worried and melancholy throughout, not cheerful, not a festival. 76 BPM, A minor (dorian), intimate celtic folk chamber. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 120,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "Emberwick and the Ashen Ford between battles (Chapters I-II)",
+  "seed": 4224,
+  "vocals": false
+ },
+ "court_mirewood": {
+  "prompt": "Fey court music for an enchanted drowned forest ruled by a glimmering faerie queen: glass harp and celesta, a slow music-box melody, shimmering bowed glass, soft breathy wordless whispers and airy female voices humming, pizzicato strings, beautiful but subtly wrong and dangerous, dreamlike. 72 BPM, E-flat lydian, ethereal chamber. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 120,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "Mirewood and the Glimmer Court (Chapter II)",
+  "seed": 4221,
+  "vocals": true
+ },
+ "camp_scarwalker": {
+  "prompt": "Desert nomad camp music for goblin clans in a sun-scorched crater: deep frame drums and darbuka in a rolling 6/8 groove, a breathy reed flute melody, plucked oud, low throat-singing drones without words, hot wind and wide open space, proud and weathered. 96 BPM, D phrygian dominant, tribal world-fusion. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 120,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "The Sunscar and the Scarwalker camp (Chapter III)",
+  "seed": 4222,
+  "vocals": false
+ },
+ "town_greyhold": {
+  "prompt": "Music for a cold mountain pilgrim town built by masons beneath a frozen pass: sparse, hymn-like and austere, low sustained strings and viola, a lone solemn horn, a single tolling bell, gentle male choir humming a chant-like hymn without words, snow and stone and faith, quietly sorrowful but steadfast. 66 BPM, B-flat minor, sacred chamber. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 120,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "Greyhold and the pilgrim road (Chapter IV)",
+  "seed": 4223,
+  "vocals": true
+ },
+ "town_emberwick_festival": {
+  "prompt": "Fantasy market-town music for a river town at a ford: a lively but gentle fiddle and tin whistle melody, bouncing acoustic guitar, hand drum and tambourine, accordion-like drone, cozy and busy like market day, with a quiet undercurrent of worry in a minor-key bridge, as if the warm ground beneath the town is slowly cooling. 100 BPM, D mixolydian, celtic folk. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 120,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "Emberwick in good times: festivals, and the epilogue after the flame is rekindled",
+  "seed": 4220,
+  "vocals": false
+ }
+}
