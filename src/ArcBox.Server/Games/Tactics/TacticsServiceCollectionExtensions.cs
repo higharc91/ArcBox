@@ -27,6 +27,7 @@ public static class TacticsServiceCollectionExtensions
         services.AddVoiceThemes(TacticsVoices.All);
         services.AddArcGame(sp => new TacticsGame(sp.GetRequiredService<Lazy<RulesPack>>()));
         services.AddSingleton<ICampaignRules>(sp => new TacticsCampaignRules(sp.GetRequiredService<Lazy<RulesPack>>()));
+        services.AddVoiceThemes(TacticsVoices.All);
         return services;
     }
 }

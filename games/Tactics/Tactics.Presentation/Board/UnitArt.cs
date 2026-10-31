@@ -27,8 +27,27 @@ public sealed record UnitAnim(ImmutableArray<int> Frames, double Fps, bool Loop)
 /// <param name="Idle">The standing animation.</param>
 /// <param name="Down">The lying-down animation.</param>
 /// <param name="EffectShift">How far overhead status effects move down the screen from where a standard figure has them.</param>
-public sealed record UnitSprite(string Path, int Width, int Height, int AnchorX, int AnchorY, int HeadTop, UnitAnim Idle, UnitAnim Down, int EffectShift)
+/// <param name="Anims">The sheet's animations by name, from its manifest.</param>
+public sealed record UnitSprite(string Path, int Width, int Height, int AnchorX, int AnchorY, int HeadTop, UnitAnim Idle, UnitAnim Down, int EffectShift,
+    ImmutableDictionary<string, UnitAnim> Anims)
 {
+    private const string Special = "special";
+    private const string Attack = "attack";
+    private const string Cast = "cast";
+
+    /// <summary>
+    /// The animation for a manifest name or a presentation key (<c>walk</c>, <c>characters.cast</c>). The sets don't share
+    /// their lists, so what a sheet lacks falls back: a cast to its special, anything else to its attack, and then to idle.
+    /// </summary>
+    public UnitAnim Anim(string key)
+    {
+        var name = key[(key.LastIndexOf('.') + 1)..];
+        return Anims.GetValueOrDefault(name)
+            ?? (name == Cast ? Anims.GetValueOrDefault(Special) : null)
+            ?? Anims.GetValueOrDefault(Attack)
+            ?? Idle;
+    }
+
     /// <summary>A frame's place in the sheet.</summary>
     public ArtRect Source(int column, int row) => new(column * Width, row * Height, Width, Height);
 }
@@ -62,6 +81,9 @@ public sealed class UnitArt
 
     /// <summary>The digits' image.</summary>
     public const string NumbersPath = "ui/numbers.png";
+
+    /// <summary>The dice image.</summary>
+    public const string DicePath = "ui/dice.png";
 
     /// <summary>The status icons' image.</summary>
     public const string IconsPath = "icons/status.png";
@@ -104,7 +126,8 @@ public sealed class UnitArt
     private readonly Dictionary<string, UnitSprite> _sprites = new(StringComparer.Ordinal);
     private readonly Dictionary<string, StatusEffect> _effects = new(StringComparer.Ordinal);
     private readonly Dictionary<string, ArtRect> _icons = new(StringComparer.Ordinal);
-    private readonly Dictionary<string, (ArtRect Rect, int Advance)> _digits = new(StringComparer.Ordinal);
+    private readonly Dictionary<(string Style, string Text), (ArtRect Rect, int Advance)> _glyphs = [];
+    private readonly Dictionary<UnitTone, UnitSprite> _standIns = [];
     private readonly HashSet<string> _presets = new(StringComparer.Ordinal);
     private readonly Dictionary<string, int> _heads = new(StringComparer.Ordinal);
     private readonly Dictionary<string, int> _headOffsets = new(StringComparer.Ordinal);
@@ -118,6 +141,12 @@ public sealed class UnitArt
 
     /// <summary>The turn arrow's strip.</summary>
     public ArtImage Arrow { get; private set; } = null!;
+
+    /// <summary>The gold d20 in <see cref="DicePath"/>.</summary>
+    public ArtRect DieGold { get; private set; }
+
+    /// <summary>The dark d20 in <see cref="DicePath"/>.</summary>
+    public ArtRect DieDark { get; private set; }
 
     /// <summary>One arrow frame's width.</summary>
     public int ArrowWidth { get; private set; }
@@ -163,13 +192,18 @@ public sealed class UnitArt
         return _sprites.GetValueOrDefault($"{parts[0]}.{parts[1]}");   // the first variant
     }
 
-    /// <summary>A figure that exists for certain, for a unit whose sprite doesn't.</summary>
-    public UnitSprite StandIn(UnitTone tone) => Character(tone switch
+    /// <summary>A figure that exists for certain, for a unit whose sprite doesn't. Kept once read: this runs every frame while a beat plays.</summary>
+    public UnitSprite StandIn(UnitTone tone)
     {
-        UnitTone.Party => "class_fighter",
-        UnitTone.Enemy => "bandit",
-        _ => "farmer",
-    });
+        if (!_standIns.TryGetValue(tone, out var sprite))
+            _standIns[tone] = sprite = Character(tone switch
+            {
+                UnitTone.Party => "class_fighter",
+                UnitTone.Enemy => "bandit",
+                _ => "farmer",
+            });
+        return sprite;
+    }
 
     /// <summary>A condition's art, or null if it has none.</summary>
     public ConditionLook? Condition(string id)
@@ -184,7 +218,10 @@ public sealed class UnitArt
     public BarArt Bar(UnitTone tone) => tone == UnitTone.Enemy ? _enemyBar : _partyBar;
 
     /// <summary>A digit's rectangle in <see cref="NumbersPath"/>, and how far to move on after it.</summary>
-    public (ArtRect Rect, int Advance) Digit(char digit) => _digits[digit.ToString()];
+    public (ArtRect Rect, int Advance) Digit(char digit) => Glyph(DigitStyle, digit.ToString());
+
+    /// <summary>A glyph of <see cref="NumbersPath"/>: a digit, a sign, or a word such as <c>MISS</c>, in the style (<c>damage</c>, <c>heal</c>, <c>crit</c>).</summary>
+    public (ArtRect Rect, int Advance) Glyph(string style, string text) => _glyphs[(style, text)];
 
     private static JsonDocument Parse(string root, string set) => JsonDocument.Parse(File.ReadAllText(Path.Combine(root, set, "manifest.json")));
 
@@ -217,7 +254,7 @@ public sealed class UnitArt
             var first = true;
             foreach (var variant in e.GetProperty("variants").EnumerateObject())
             {
-                var sprite = new UnitSprite($"{set.Name}/{variant.Value.GetString()}", width, height, ax, ay, height / HeadroomShare, set.Idle, set.Down, EffectAnchorY - ay);
+                var sprite = new UnitSprite($"{set.Name}/{variant.Value.GetString()}", width, height, ax, ay, height / HeadroomShare, set.Idle, set.Down, EffectAnchorY - ay, set.Anims);
                 _sprites[$"{set.Name}.{monster.Name}.{variant.Name}"] = sprite;
                 if (first)
                     _sprites[$"{set.Name}.{monster.Name}"] = sprite;
@@ -255,8 +292,13 @@ public sealed class UnitArt
         _partyBar = Bar("hp");
         _enemyBar = Bar("enemy_hp");
 
-        foreach (var glyph in ui.GetProperty("numbers").GetProperty("styles").GetProperty(DigitStyle).EnumerateObject())
-            _digits[glyph.Name] = (Rect(glyph.Value.GetProperty("rect")), glyph.Value.GetProperty("advance").GetInt32());
+        foreach (var style in ui.GetProperty("numbers").GetProperty("styles").EnumerateObject())
+            foreach (var glyph in style.Value.EnumerateObject())
+                _glyphs[(style.Name, glyph.Name)] = (Rect(glyph.Value.GetProperty("rect")), glyph.Value.GetProperty("advance").GetInt32());
+
+        var pieces = ui.GetProperty("dice").GetProperty("pieces");
+        DieGold = Rect(pieces.GetProperty("d20_gold").GetProperty("rect"));
+        DieDark = Rect(pieces.GetProperty("d20_dark").GetProperty("rect"));
 
         var arrow = ui.GetProperty("cursor").GetProperty("arrow");
         var (size, anchor) = (arrow.GetProperty("frame"), arrow.GetProperty("anchor"));
@@ -269,7 +311,7 @@ public sealed class UnitArt
     {
         var build = BuildOf(preset);
         return new UnitSprite($"{CharacterSet}/presets/{preset}.png", _characters.Width, _characters.Height, _characters.AnchorX, _characters.AnchorY,
-            _heads.GetValueOrDefault(build), _characters.Idle, _characters.Down, _headOffsets.GetValueOrDefault(build));
+            _heads.GetValueOrDefault(build), _characters.Idle, _characters.Down, _headOffsets.GetValueOrDefault(build), _characters.Anims);
     }
 
     private string BuildOf(string preset)
@@ -296,6 +338,7 @@ public sealed class UnitArt
             var anims = root.GetProperty("anims");
             Idle = Anim(anims, "idle");
             Down = Anim(anims, "down");
+            Anims = anims.EnumerateObject().ToImmutableDictionary(a => a.Name, a => Anim(anims, a.Name), StringComparer.Ordinal);
             if (root.TryGetProperty("frame", out var frame))
             {
                 (Width, Height) = (frame.GetProperty("width").GetInt32(), frame.GetProperty("height").GetInt32());
@@ -319,5 +362,7 @@ public sealed class UnitArt
         public UnitAnim Idle { get; }
 
         public UnitAnim Down { get; }
+
+        public ImmutableDictionary<string, UnitAnim> Anims { get; }
     }
 }

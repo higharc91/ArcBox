@@ -45,6 +45,7 @@ public sealed partial class TacticsGame
 
     private void StartBattle(string encounter, ulong seed, ImmutableArray<ProfileId> members, ImmutableArray<CharacterRecord> companions)
     {
+        _lastBattle = null;
         var resolution = Begin(encounter, seed, members, companions);
         _doc = _doc with { Battle = new BattleSave(encounter, seed, members, resolution.State, [], companions.IsEmpty ? default : companions) };
         _seq = 0;

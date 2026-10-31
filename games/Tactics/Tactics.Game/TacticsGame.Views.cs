@@ -99,9 +99,22 @@ public sealed record ClassOption(string Id, string Name, string Role);
 public sealed record ResultLine(string Name, int Xp, ImmutableArray<string> Injuries);
 
 /// <summary>The TV's view of a tactics session (adapter spec §8).</summary>
+/// <param name="Phase">The phase.</param>
+/// <param name="Banner">The prompt banner.</param>
+/// <param name="Notice">A note for everyone, or null.</param>
+/// <param name="PartyLevel">The party's level.</param>
+/// <param name="Mustered">Who has a character.</param>
+/// <param name="Encounters">The list at Encounter pick.</param>
+/// <param name="Battle">The battle in progress.</param>
+/// <param name="Outcome">How the last battle ended.</param>
+/// <param name="Results">The results' lines.</param>
+/// <param name="LastBattle">
+/// At Results, the battle as it ended. The blow that ends a battle goes straight to Results, so no <paramref name="Battle"/>
+/// ever carries it: without this the TV could never play it.
+/// </param>
 public sealed record TacticsHostView(string Phase, string Banner, string? Notice, int PartyLevel,
     ImmutableArray<string> Mustered, ImmutableArray<EncounterOption>? Encounters, BattleView? Battle,
-    string? Outcome, ImmutableArray<ResultLine>? Results);
+    string? Outcome, ImmutableArray<ResultLine>? Results, BattleView? LastBattle = null);
 
 public sealed partial class TacticsGame
 {
@@ -110,7 +123,8 @@ public sealed partial class TacticsGame
         [.. _players.Where(p => _doc.For(p.Profile!.Value) is not null).Select(p => p.Name)],
         _phase == TacticsPhase.EncounterPick ? EncounterOptions() : null,
         _doc.Battle is not null && _phase is TacticsPhase.Battle or TacticsPhase.Resuming ? BattleViewOf() : null,
-        _result?.Outcome.ToString(), _phase == TacticsPhase.Results ? ResultLines() : null);
+        _result?.Outcome.ToString(), _phase == TacticsPhase.Results ? ResultLines() : null,
+        _phase == TacticsPhase.Results ? _lastBattle : null);
 
     /// <inheritdoc />
     public ControllerView PlayerView(PlayerId id)

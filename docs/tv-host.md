@@ -52,6 +52,8 @@ Everything after `--` on the Godot command line; all optional.
 | `--autostart=<game>[:<players>]` | Dev only: select that game, and start it once that many players (default 1) are connected and the scene is ready. First game only. Used by `tools/tv-e2e.sh`. |
 | `--res=<w>x<h>` | Window size. The UI is laid out at 1920×1080 and scales (`canvas_items`, `expand`). |
 | `--redline-demo[=<step>]` | Dev only: play a scripted REDLINE race into the TV without a server (see below). |
+| `--drop-signals` | Dev only: the TV never sends a host signal, so a game runs on its fallback timers. Proves a game doesn't need them. |
+| `--beat-log` | Dev only: print a `BEAT` line for each Tactics beat played: when it ran, how long it took and what was in it. |
 | `--tactics-demo[=<map>[:changed\|:fight]]` | Dev only: show a Tactics board without a server, with the art from the repository's `content/` (default `river_crossing`). `:changed` adds zones, raised tiles and the bridge's tiles sunk; `:fight` adds one of every kind of unit. With `--shots` it saves `…-tactics-battle-<map>.png`. |
 | `--demo=campaign-lobby` | Dev only: show the lobby with a built-in campaign game selected, its campaign list and a roster with seated and away members (`Shell/CampaignLobbyDemo.cs`), without a server. With `--shots` it saves `001-lobby.png`. |
 
@@ -163,6 +165,14 @@ over the whole frame. AgX runs with white 8 and contrast 1.45 (Godot's defaults,
 with Mesa's CPU rasteriser (llvmpipe), where a 1080p frame takes several seconds, so frame rates from it mean nothing.
 
 ## Tactics scene
+
+The battle plays from its beats. `BeatPlayer` in `Tactics.Presentation/Beats` takes each view's new beats (`BeatQueue`), plays them one
+at a time from their own events (`BeatScript` turns a beat into timed cues) and holds the battle as the player has seen it
+(`DisplayedBattle`), because the view's units and board are already past the beat on screen. Only with nothing left to play does
+the view become the picture, which also heals anything that drifted. Each finished beat sends `shown`, which only shortens the
+game's fallback wait, so a slow or missing TV costs a lagging picture and no more (`--drop-signals` proves it). At Results the view's
+`LastBattle` carries the blow that ended the fight, and the TV plays out what's left before it shows the table. `say` lines
+go through the shell's narrator in the `tactics.narrator` and `tactics.character` themes (`TacticsVoices`), with a caption.
 
 `games/tactics/TacticsScene.tscn` shows the game's banner and each phase's table: the Muster roster, the encounter list and
 the results, and in battle the board. All of it is worded by `PhaseScreen` in `games/Tactics/Tactics.Presentation`, with

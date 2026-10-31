@@ -58,6 +58,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
 
     // Results: who was in the battle, in party order, so lines match units whatever the seating is now.
     private BattleResult? _result;
+    private BattleView? _lastBattle;
     private string? _resultEncounter;
     private ImmutableArray<ProfileId> _resultMembers = [];
 
@@ -350,6 +351,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     {
         var save = _doc.Battle!;
         var state = save.State;
+        _lastBattle = BattleViewOf();
         var result = Battle.Result(state, Rules)!;
         var members = _doc.Members;
         for (var i = 0; i < save.Members.Length; i++)

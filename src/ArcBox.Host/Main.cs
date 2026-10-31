@@ -677,6 +677,9 @@ public partial class Main : Control
         _ = SignalAsync(client, kind, payload);
     }
 
+    /// <summary><c>--drop-signals</c>: the game hears nothing and falls back on its timers.</summary>
+    private static void DropSignal(string kind, object payload) => GD.Print($"Host signal '{kind}' dropped (--drop-signals)");
+
     private static async Task SignalAsync(HostClient client, string kind, object payload)
     {
         try
@@ -856,7 +859,11 @@ public partial class Main : Control
         (node as IAudioScene)?.SetNarrator(_narrator);
         if (node is ISignalingScene signaling)
         {
-            signaling.Signal = SendSignal;
+            signaling.Signal = _args.DropSignals ? DropSignal : SendSignal;
+        }
+        if (node is global::ArcBox.Host.Games.Tactics.TacticsScene tactics)
+        {
+            tactics.LogBeats = _args.BeatLog;
         }
     }
 

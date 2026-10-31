@@ -4,6 +4,7 @@ using ArcBox.Sdk.Campaigns;
 using ArcBox.Sdk.Testing;
 using Tactics.Game;
 using Tactics.Logic;
+using Tactics.Presentation.Beats;
 using Tactics.Presentation.Board;
 
 namespace Tactics.Presentation.Tests;
@@ -100,4 +101,83 @@ public sealed class HostViewContractTests
         Assert.Equal(2, over.Rows.Length);
         Assert.All(over.Rows, r => Assert.EndsWith(" XP", r.Value));
     }
+
+    /// <summary>
+    /// Why the TV may animate from events alone: in a whole real battle, every beat applied to the battle as it stood gives
+    /// exactly the next view, unit by unit and tile by tile.
+    /// </summary>
+    [Theory]
+    [InlineData("river_crossing", 3)]
+    [InlineData("warlord_bridge", 5)]
+    [InlineData("crypt_hall", 7)]
+    public void Beats_alone_rebuild_the_battle(string encounter, int seed)
+    {
+        var (game, h) = AiBattle(encounter, seed);
+
+        var shown = OverTheWire(game).Battle!;
+        var seen = shown.Beats[^1].Seq;
+        var beats = 0;
+        for (var step = 0; step < 20_000 && game.Phase == TacticsPhase.Battle; step++)
+        {
+            h.Advance(TimeSpan.FromSeconds(7));
+            var view = OverTheWire(game);
+            var live = view.Battle ?? view.LastBattle!;
+            foreach (var beat in live.Beats.Where(b => b.Seq > seen))
+            {
+                Assert.Equal(seen + 1, beat.Seq);    // none missed
+                seen = beat.Seq;
+                beats++;
+                foreach (var e in beat.Events)
+                    shown = DisplayedBattle.Apply(shown, e, live);
+            }
+            AssertSame(live, shown);
+        }
+
+        Assert.Equal(TacticsPhase.Results, game.Phase);
+        Assert.True(beats > 20, $"only {beats} beats");
+    }
+
+    [Fact]
+    public void The_results_view_still_has_the_blow_that_ended_the_battle()
+    {
+        var (game, h) = AiBattle("river_crossing", 3);
+
+        for (var step = 0; step < 20_000 && game.Phase == TacticsPhase.Battle; step++)
+            h.Advance(TimeSpan.FromSeconds(7));
+
+        var view = OverTheWire(game);
+        Assert.Null(view.Battle);
+        Assert.Contains(view.LastBattle!.Beats[^1].Events, e => e is BattleEnded);
+    }
+
+    private static (TacticsGame Game, GameHarness<TacticsGame> Harness) AiBattle(string encounter, int seed)
+    {
+        var rules = Pack.Value;
+        ProfileId?[] profiles = [new ProfileId("pr_ana"), new ProfileId("pr_bo"), new ProfileId("pr_cy"), new ProfileId("pr_di")];
+        string[] classes = ["fighter", "cleric", "wizard", "rogue"];
+        var game = new TacticsGame(rules);
+        var h = new GameHarness<TacticsGame>(game, playerCount: 4, seed: seed, profiles: profiles);
+        var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", profiles[0]!.Value,
+            [.. profiles.Select((p, i) => new CampaignMember(p!.Value, $"Player{i + 1}", CampaignRole.Player, DateTimeOffset.UnixEpoch))], 1);
+        h.StartCampaign(new FakeCampaignLease(info, new TacticsCampaignRules(rules).NewDocument(info)));
+        for (var i = 0; i < classes.Length; i++)
+            h.Input(i, new { action = "pickClass", data = new { @class = classes[i] } });
+        h.Input(0, new { action = "pickEncounter", data = new { encounter } });
+        for (var i = 0; i < classes.Length; i++)
+            h.SetConnected(i, false);
+        return (game, h);
+    }
+
+    private static void AssertSame(BattleView live, BattleView shown)
+    {
+        var drawn = live.Units.Where(u => u.Life is "Up" or "Downed").ToArray();
+        Assert.Equal(drawn.OrderBy(u => u.Id.Value, StringComparer.Ordinal).Select(Facts),
+            shown.Units.Where(u => u.Life is "Up" or "Downed").OrderBy(u => u.Id.Value, StringComparer.Ordinal).Select(Facts));
+        Assert.True(DisplayedBattle.SameBoard(live.Board, shown.Board), "the board drifted");
+        Assert.Equal(live.Active, shown.Active);
+        Assert.Equal(live.Round, shown.Round);
+    }
+
+    private static string Facts(UnitView u)
+        => $"{u.Id} {u.At} hp {u.Hp}+{u.TempHp} {u.Life} {u.Countdown} {string.Join(",", u.Conditions.Order(StringComparer.Ordinal))} {u.Sprite}";
 }

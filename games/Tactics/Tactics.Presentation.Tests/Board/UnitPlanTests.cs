@@ -268,13 +268,75 @@ public sealed class UnitPlanTests
     }
 
     [Fact]
-    public void A_wide_sprite_has_a_wider_ring()
+    public void A_wide_sprite_has_a_wider_ring_but_it_stays_inside_the_tile()
     {
         var goblin = One(null, Unit("a", "Enemy", 5, 5));
         var dragon = One(null, Unit("a", "Enemy", 5, 5, "bosses.dragon.red"));
 
         Assert.True(dragon.Ring > goblin.Ring);
-        Assert.True(goblin.Ring < BoardProjection.HalfWidth);
+        // An ellipse of radius r by r/2 fits in the diamond while r * sqrt(2) reaches no further than the corner: past that, front tiles cut it.
+        Assert.True(dragon.Ring * MathF.Sqrt(2) <= BoardProjection.HalfWidth + 0.01f);
+    }
+
+    [Fact]
+    public void A_units_bob_comes_from_its_id_so_a_unit_leaving_does_not_jump_the_others()
+    {
+        var (a, b) = (Unit("a", "Party", 5, 5), Unit("b", "Enemy", 7, 7));
+
+        var both = Plan(null, a, b).Single(u => u.Id.Value == "b");
+        var alone = Plan(null, b).Single();
+
+        Assert.Equal(both.Phase, alone.Phase);
+    }
+
+    [Theory]
+    [InlineData(4.9f, 5.5f, 5, 5)]    // -X: not yet past the middle of the way from (4, 5) to (5, 5)... nearer (5, 5)
+    [InlineData(4.1f, 5.5f, 4, 5)]    // -X: nearer (4, 5)
+    [InlineData(5.5f, 4.9f, 5, 5)]    // +Y or -Y: nearer (5, 5)
+    [InlineData(5.5f, 4.1f, 5, 4)]    // nearer (5, 4)
+    [InlineData(5.5f, 5.5f, 5, 5)]    // on the tile
+    [InlineData(5.9f, 5.5f, 6, 5)]    // +X past the middle: the front tile
+    [InlineData(5.5f, 5.9f, 5, 6)]    // +Y past the middle: the front tile
+    public void Between_tiles_a_unit_sorts_with_the_nearer_one_in_every_direction(float x, float y, int tileX, int tileY)
+        => Assert.Equal(new Tile(tileX, tileY), new UnitPlace(new Vector2(x, y), 0).Over);
+
+    [Fact]
+    public void A_pose_plays_a_frame_of_its_animation_and_faces_its_way()
+    {
+        var unit = Unit("a", "Party", 5, 5);
+        var sprite = Art.Value.Sprite(Goblin)!;
+
+        var walking = UnitPlan.Build(Battle(null, unit), River, Art.Value, Fit, null,
+            new Dictionary<UnitId, UnitPose> { [new UnitId("a")] = new UnitPose("walk", 0.3, new Vector2(1, 0)) })[0];
+
+        Assert.Equal(sprite.Anim("walk").FrameAt(0.3), Assert.Single(walking.Anim.Frames));
+        Assert.Equal(0, walking.Row);       // +X: lower right
+        Assert.False(walking.Mirror);
+    }
+
+    [Theory]
+    [InlineData(1, 0, 0, false)]     // +X, lower right
+    [InlineData(0, 1, 0, true)]      // +Y, lower left
+    [InlineData(-1, 0, 1, false)]    // -X, upper left
+    [InlineData(0, -1, 1, true)]     // -Y, upper right
+    public void A_poses_direction_picks_the_sheets_row_and_mirror(float x, float y, int row, bool mirror)
+    {
+        var posed = UnitPlan.Build(Battle(null, Unit("a", "Party", 5, 5)), River, Art.Value, Fit, null,
+            new Dictionary<UnitId, UnitPose> { [new UnitId("a")] = new UnitPose("walk", 0, new Vector2(x, y)) })[0];
+
+        Assert.Equal((row, mirror), (posed.Row, posed.Mirror));
+    }
+
+    [Fact]
+    public void A_pose_with_no_direction_keeps_the_units_usual_facing()
+    {
+        var units = new[] { Unit("a", "Party", 5, 5), Unit("b", "Enemy", 7, 5) };
+        var usual = Plan(null, units).Single(u => u.Id.Value == "a");
+
+        var posed = UnitPlan.Build(Battle(null, units), River, Art.Value, Fit, null,
+            new Dictionary<UnitId, UnitPose> { [new UnitId("a")] = new UnitPose("hurt", 0, null) }).Single(u => u.Id.Value == "a");
+
+        Assert.Equal((usual.Row, usual.Mirror), (posed.Row, posed.Mirror));
     }
 
     [Fact]

@@ -29,6 +29,12 @@ public readonly record struct UnitPlace(Vector2 Map, float Height)
     public Vector2 Feet => BoardProjection.Corner(Map.X, Map.Y, Height);
 }
 
+/// <summary>What a unit is doing for the moment, in place of idling.</summary>
+/// <param name="Anim">The animation, by manifest name or presentation key (<see cref="UnitSprite.Anim"/>).</param>
+/// <param name="Seconds">How far into it.</param>
+/// <param name="Facing">Which way it looks, as a direction on the map; null for its usual facing.</param>
+public sealed record UnitPose(string Anim, double Seconds, Vector2? Facing = null);
+
 /// <summary>An HP bar: <paramref name="Fill"/> of <paramref name="Width"/>'s inner width is lit, in art pixels.</summary>
 public sealed record UnitBar(Vector2 TopLeft, int Width, int Fill);
 
@@ -86,28 +92,31 @@ public static class UnitPlan
     private const float ArrowLift = 3;
     private const float RingShare = 0.42f;    // of the frame's width, kept inside a tile for anything up to a tile wide
     private const double PhaseStep = 0.37;
+    private const uint PhaseSteps = 11;
+    private const float MaxRing = 22.6f;      // half a tile's width over root 2: the widest ellipse inside the diamond, so front tiles can't cut it
 
     /// <summary>
     /// The drawn units of <paramref name="battle"/> (Up and Downed), back to front. A unit in <paramref name="places"/> is
-    /// drawn there and not on its tile.
+    /// drawn there and not on its tile, and a unit in <paramref name="poses"/> plays that instead of idling, if it's on its feet.
     /// </summary>
     public static ImmutableArray<BoardUnit> Build(BattleView battle, BoardTerrain terrain, UnitArt art, BoardFit fit,
-        IReadOnlyDictionary<UnitId, UnitPlace>? places = null)
+        IReadOnlyDictionary<UnitId, UnitPlace>? places = null, IReadOnlyDictionary<UnitId, UnitPose>? poses = null)
     {
         var drawn = battle.Units.Where(u => u.Life is "Up" or "Downed" && terrain.Map.InBounds(u.At)).ToArray();
         var top = (BoardFit.Area.Y - fit.Origin.Y) / fit.Scale;
         return [.. drawn
-            .Select((unit, i) => Unit(unit, i, drawn, battle.Active, art, top,
-                places is not null && places.TryGetValue(unit.Id, out var place) ? place : UnitPlace.On(terrain, unit.At)))
+            .Select(unit => Unit(unit, drawn, battle.Active, art, top,
+                places is not null && places.TryGetValue(unit.Id, out var place) ? place : UnitPlace.On(terrain, unit.At),
+                poses?.GetValueOrDefault(unit.Id)))
             .OrderBy(u => u.Order)];
     }
 
-    private static BoardUnit Unit(UnitView unit, int index, UnitView[] all, UnitId? active, UnitArt art, float top, UnitPlace place)
+    private static BoardUnit Unit(UnitView unit, UnitView[] all, UnitId? active, UnitArt art, float top, UnitPlace place, UnitPose? pose)
     {
         var tone = ToneOf(unit.Side);
         var sprite = art.Sprite(unit.Sprite) ?? art.StandIn(tone);
         var downed = unit.Life == "Downed";
-        var (row, mirror) = Facing(unit, tone, all);
+        var (row, mirror) = pose?.Facing is { } look ? Looking(look.X, look.Y) : Facing(unit, tone, all);
         var looks = unit.Conditions.Where(c => !(downed && c == Prone)).Select(art.Condition).OfType<ConditionLook>().ToArray();
         var effects = looks.Select(l => l.Effect).OfType<StatusEffect>().DistinctBy(e => e.Path).ToArray();
         ImmutableArray<ArtRect> icons = [.. looks.Select(l => l.Icon).OfType<ArtRect>().Distinct().Take(MaxIcons)];
@@ -129,13 +138,24 @@ public static class UnitPlan
         var shift = Math.Max(0, top - y);
 
         return new BoardUnit(OrderOf(place.Over, sprite), unit.Id, tone, feet, sprite,
-            downed ? new UnitAnim([sprite.Down.Frames[^1]], 1, false) : sprite.Idle, index * PhaseStep, row, mirror,
-            sprite.Width * RingShare, isActive,
+            downed ? new UnitAnim([sprite.Down.Frames[^1]], 1, false)
+                : pose is not null ? new UnitAnim([sprite.Anim(pose.Anim).FrameAt(pose.Seconds)], 1, false)
+                : sprite.Idle,
+            PhaseOf(unit.Id), row, mirror, Math.Min(sprite.Width * RingShare, MaxRing), isActive,
             [.. effects.Where(e => e.Under)], [.. effects.Where(e => !e.Under)],
             downed ? null : new UnitBar(new Vector2(feet.X - BarWidth / 2f, markTop + shift), BarWidth, Fill(unit.Hp, unit.MaxHp, art.Bar(tone))),
             downed ? new UnitCountdown(new Vector2(feet.X, (markTop + mark) / 2 + shift), unit.Countdown.ToString(CultureInfo.InvariantCulture)) : null,
             icons, new Vector2(feet.X - icons.Length * IconStep / 2f, iconsTop + shift),
             isActive ? new Vector2(feet.X, arrow + shift) : null);
+    }
+
+    /// <summary>A unit's place in the idle cycle, from its id: from its place in a list, a unit leaving would make the rest jump.</summary>
+    private static double PhaseOf(UnitId id)
+    {
+        var hash = 0u;
+        foreach (var c in id.Value)
+            hash = hash * 31 + c;
+        return hash % PhaseSteps * PhaseStep;
     }
 
     /// <summary>
@@ -177,7 +197,11 @@ public static class UnitPlan
             .FirstOrDefault() is not { } foe)
             return (0, false);
 
-        var (du, dv) = (foe.At.X - unit.At.X, foe.At.Y - unit.At.Y);
+        return Looking(foe.At.X - unit.At.X, foe.At.Y - unit.At.Y);
+    }
+
+    private static (int Row, bool Mirror) Looking(float du, float dv)
+    {
         var (across, down) = (du - dv, du + dv);
         return down >= 0 ? (0, across < 0) : (1, across > 0);
     }

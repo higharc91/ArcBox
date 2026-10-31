@@ -11,6 +11,8 @@
 //   --hold=<seconds>     how long each screen stays up: between class picks, before the encounter pick, on the results
 //                        (default 3; a run taking screenshots wants the phases on air for a moment)
 //   --fight              attack anything in reach and walk toward the foes; without it the bots only end their turns
+//   --leave              once the battle is on, every bot disconnects, so the AI plays each hero: a whole battle with nobody
+//                        at a phone. It exits at that point; the TV runs on to Results, so give --quit-after room
 //   --then=end|next      after the results: end the session (default), or play the next battle, forever
 //   --timeout=<seconds>  give up after this long (default 900)
 //
@@ -49,6 +51,7 @@ const players = Number(opt('players', 3));
 const encounter = String(opt('encounter', 'river_crossing'));
 const holdMs = Number(opt('hold', 3)) * 1000;
 const fight = opt('fight', false) === true;
+const leave = opt('leave', false) === true;
 const then = String(opt('then', 'end'));
 const timeoutMs = Number(opt('timeout', 900)) * 1000;
 
@@ -194,10 +197,12 @@ class Bot {
   const state = { nextPick: Date.now() + holdMs };
   await until('the session to end', () => {
     if (bots.some((b) => b.closed)) throw new Error(`Room closed: ${bots.find((b) => b.closed).closed}`);
+    if (leave && bots.some((b) => ['turn', 'status', 'react'].includes(b.view?.screen))) return 'left';
     for (const bot of bots) void bot.act(state);
     return vip.ended;
   });
-  log(`Session over: ${vip.ended.message ?? ''}`);
+  if (leave && !vip.ended) log('Battle on: leaving it to the AI');
+  else log(`Session over: ${vip.ended.message ?? ''}`);
   await Promise.all(bots.map((b) => b.conn.stop()));
   process.exit(0);
 })().catch((e) => {

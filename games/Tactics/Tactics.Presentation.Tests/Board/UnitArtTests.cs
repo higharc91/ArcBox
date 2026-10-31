@@ -11,6 +11,36 @@ public sealed class UnitArtTests
     private static bool OnDisk(string path) => File.Exists(Path.Combine(Pack.Root, path));
 
     [Fact]
+    public void A_sprite_has_its_sheets_animations_by_their_manifest_name_or_presentation_key()
+    {
+        var fighter = Art.Value.Sprite("characters.class_fighter")!;
+
+        Assert.Equal(12, fighter.Anim("attack").Frames[0]);
+        Assert.Equal(25, fighter.Anim("characters.cast").Frames[0]);
+        Assert.Equal(8, fighter.Anim("walk").Frames[0]);
+    }
+
+    [Theory]
+    [InlineData("characters.cast", 12)]     // a beast has no cast: it does its special
+    [InlineData("characters.shoot", 8)]     // or attacks
+    [InlineData("characters.bash", 8)]
+    [InlineData("nonsense", 8)]
+    public void An_animation_a_sheet_lacks_falls_back_to_one_it_has(string key, int column)
+        => Assert.Equal(column, Art.Value.Sprite("beasts.wolf.grey")!.Anim(key).Frames[0]);
+
+    [Fact]
+    public void The_stand_in_is_the_same_figure_each_time_without_reading_the_disk_again()
+        => Assert.Same(Art.Value.StandIn(UnitTone.Enemy), Art.Value.StandIn(UnitTone.Enemy));
+
+    [Fact]
+    public void Digits_come_in_styles_and_the_big_words_are_glyphs_too()
+    {
+        Assert.NotEqual(Art.Value.Glyph("damage", "5").Rect, Art.Value.Glyph("heal", "5").Rect);
+        Assert.Equal(29, Art.Value.Glyph("damage", "MISS").Rect.Width);
+        Assert.Equal(new ArtRect(0, 0, 32, 32), Art.Value.DieGold);
+    }
+
+    [Fact]
     public void A_character_key_is_a_preset_with_the_character_frames_and_its_builds_head()
     {
         var goblin = Art.Value.Sprite("characters.goblin_archer")!;

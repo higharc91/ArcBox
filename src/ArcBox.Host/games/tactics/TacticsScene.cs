@@ -1,10 +1,14 @@
+using System.Diagnostics;
 using System.Text.Json;
+using ArcBox.Host.Audio;
+using ArcBox.Host.Core.Audio;
 using ArcBox.Host.Shell;
 using ArcBox.Sdk;
 using Godot;
 using Tactics.Game;
 using Tactics.Logic;
 using Tactics.Presentation;
+using Tactics.Presentation.Beats;
 using Tactics.Presentation.Board;
 
 namespace ArcBox.Host.Games.Tactics;
@@ -13,13 +17,20 @@ namespace ArcBox.Host.Games.Tactics;
 /// ArcBox Tactics on the TV: the banner, and for each phase its table from <see cref="PhaseScreen"/> (the Muster roster,
 /// the encounter list, the results), and in battle the board and its units (<see cref="BoardCanvas"/>). Everything worded or worked out
 /// here comes from <c>Tactics.Presentation</c>; this class only draws it.
+/// <para>
+/// In battle, what's drawn is <see cref="BeatPlayer.Shown"/>, never the view: the view is already past the beat on screen.
+/// Each beat that finishes sends <c>shown</c>. That only ever shortens the game's wait, so nothing here can hold the game up.
+/// </para>
 /// </summary>
-public partial class TacticsScene : Control, IGameScene, IContentScene, ISignalingScene
+public partial class TacticsScene : Control, IGameScene, IContentScene, ISignalingScene, IAudioScene
 {
     /// <summary>A table this short leaves its rows at this share of the height, not stretched into slabs.</summary>
     private const int RowSlots = 6;
 
     private const string BasePack = "base";
+
+    /// <summary>How many screenshots <c>--shots</c> takes of each kind of moment.</summary>
+    private const int ShotsPerMoment = 6;
 
     private Label _meta = null!;
     private Label _title = null!;
@@ -43,6 +54,23 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private IReadOnlyDictionary<string, string> _content = new Dictionary<string, string>();
     private Action<string, object> _signal = (_, _) => { };
     private string? _lastShot;
+    private FxArt? _fx;
+    private BeatPlayer? _player;
+    private BoardTerrain? _terrain;
+    private BoardChanges? _planned;
+    private PhaseScreen? _held;
+    private Narrator? _narrator;
+    private PanelContainer _caption = null!;
+    private Label _captionText = null!;
+    private BeatScript? _playing;
+    private double _playingSince;
+    private readonly Dictionary<string, int> _moments = new(StringComparer.Ordinal);
+    private readonly Stopwatch _clock = Stopwatch.StartNew();
+
+    /// <summary><c>--beat-log</c>: print a <c>BEAT</c> line with each beat's timing.</summary>
+    public bool LogBeats { get; set; }
+
+    public void SetNarrator(Narrator narrator) => _narrator = narrator;
 
     public void SetShots(Screenshotter? shots) => _shots = shots;
 
@@ -91,6 +119,82 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _table = ArcTheme.Panel(ArcTheme.GlassBox(null, 0, 0), ArcTheme.VBox(0, _rows, _empty));
         _table.SizeFlagsVertical = SizeFlags.ExpandFill;
         column.AddChild(_table);
+
+        _captionText = ArcTheme.Label("", ArcTheme.SemiBold, 34);
+        _caption = ArcTheme.Panel(ArcTheme.GlassBox(ArcTheme.Gold, 28, 12), _captionText);
+        _caption.SetAnchorsPreset(LayoutPreset.CenterBottom);
+        _caption.GrowHorizontal = GrowDirection.Both;
+        _caption.GrowVertical = GrowDirection.Begin;
+        _caption.OffsetBottom = -40;
+        _caption.Visible = false;
+        AddChild(_caption);
+    }
+
+    public override void _Process(double delta)
+    {
+        if (_player is null || !_board.Visible)
+        {
+            return;
+        }
+
+        var tick = _player.Tick(delta);
+        if (tick.Started is { } started)
+        {
+            (_playing, _playingSince) = (started, _clock.Elapsed.TotalSeconds);
+        }
+        foreach (var seq in tick.Shown)
+        {
+            LogBeat(seq);
+            _signal("shown", new { seq });
+        }
+        foreach (var line in tick.Lines)
+        {
+            _narrator?.Say(line.Text, line.Theme, NarrationPriority.Commentary);
+        }
+        foreach (var moment in tick.Moments)
+        {
+            Shoot(moment);
+        }
+        ShowCaption(_player.Caption);
+        if (tick.BoardChanged || tick.Busy)
+        {
+            Redraw();
+        }
+        if (_held is { } held && _player.Idle)
+        {
+            _held = null;
+            Show(held);
+        }
+    }
+
+    private void LogBeat(int seq)
+    {
+        if (LogBeats && _playing is { } beat)
+        {
+            var now = _clock.Elapsed.TotalSeconds;
+            var kinds = string.Join(',', beat.Cues.OfType<ApplyCue>().Select(c => c.Event.GetType().Name).Distinct());
+            var swings = beat.Cues.Count(c => c is LungeCue or FlightCue);
+            GD.Print(FormattableString.Invariant($"BEAT {seq} from {_playingSince:0.000} to {now:0.000} took {now - _playingSince:0.000} scripted {beat.Length:0.000} swings {swings} waiting {_player?.Waiting} [{kinds}]"));
+        }
+    }
+
+    private void Shoot(string moment)
+    {
+        var taken = _moments.GetValueOrDefault(moment);
+        if (_shots is not null && taken < ShotsPerMoment)
+        {
+            _moments[moment] = taken + 1;
+            _shots.Capture($"tactics-beat-{moment}-{_playing?.Seq}");
+        }
+    }
+
+    private void ShowCaption(SpokenLine? line)
+    {
+        _caption.Visible = line is not null;
+        if (line is not null)
+        {
+            _captionText.Text = line.Speaker is { } speaker ? $"{speaker}: {line.Text}" : line.Text;
+        }
     }
 
     public void Render(JsonElement view, JsonElement? previous)
@@ -101,6 +205,23 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         }
 
         var screen = PhaseScreen.Of(v);
+
+        // The battle ended with beats still to play: they finish first, and then this screen. They were the game's last, so nothing waits on them.
+        if (screen.Board is null && v.LastBattle is { } last && _player?.Shown is not null)
+        {
+            _player.Receive(last);
+            if (!_player.Idle)
+            {
+                _held = screen;
+                return;
+            }
+        }
+        _held = null;
+        Show(screen);
+    }
+
+    private void Show(PhaseScreen screen)
+    {
         _meta.Text = screen.Meta.ToUpperInvariant();
         _title.Text = screen.Title;
         _title.AddThemeColorOverride("font_color", Accent(screen.Tone, Colors.White));
@@ -124,6 +245,11 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private void ShowBoard(PhaseScreen screen)
     {
         var drawn = screen.Board is { } battle && DrawBoard(battle);
+        if (!drawn)
+        {
+            _player?.Reset();
+            _caption.Visible = false;
+        }
         _board.Visible = drawn;
         _battleHead.Visible = drawn;
         _header.Visible = !drawn;
@@ -142,15 +268,17 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             _art ??= ArtIndex.Load(root);
             _unitArt ??= UnitArt.Load(root);
+            _fx ??= FxArt.Load(root);
+            _player ??= new BeatPlayer(_fx, _unitArt);
             if (_map?.Id != battle.Map)
             {
                 _map = BoardMap.Parse(File.ReadAllText(Path.Combine(root, "rules", "maps", $"{battle.Map}.json")));
                 _fit = BoardFit.For(new BoardTerrain(_map, null), _art);   // once per map: a fight never moves the board
+                _terrain = null;
+                _player.Reset();
             }
-            var terrain = new BoardTerrain(_map, battle.Board);
-            var fit = _fit ?? throw new InvalidOperationException("A map with no fit.");
-            _board.SetPlan(BoardPlan.Build(terrain, _art), fit, root);
-            _board.SetUnits(UnitPlan.Build(battle, terrain, _unitArt, fit), _unitArt);
+            _player.Receive(battle);
+            Redraw();
             return true;
         }
         catch (Exception ex) when (ex is IOException or JsonException or FormatException or ArgumentException
@@ -163,6 +291,24 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             }
             return false;
         }
+    }
+
+    /// <summary>Draws the battle as the player has seen it. The board's plan is only rebuilt when the board has changed.</summary>
+    private void Redraw()
+    {
+        if (_player?.Shown is not { } shown || _map is null || _fit is not { } fit || _art is null || _unitArt is null || !_content.TryGetValue(BasePack, out var root))
+        {
+            return;
+        }
+        if (_terrain is null || !DisplayedBattle.SameBoard(_planned, shown.Board))
+        {
+            _terrain = new BoardTerrain(_map, shown.Board);
+            _planned = shown.Board;
+            _board.SetPlan(BoardPlan.Build(_terrain, _art), fit, root);
+        }
+        var frame = _player.Frame(_terrain);
+        _board.SetUnits(UnitPlan.Build(shown, _terrain, _unitArt, fit, frame.Places, frame.Poses), _unitArt);
+        _board.SetEffects(frame.Draws, frame.Shake);
     }
 
     private void ShowRows(PhaseScreen screen)

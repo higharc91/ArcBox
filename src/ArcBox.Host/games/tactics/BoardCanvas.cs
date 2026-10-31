@@ -1,5 +1,6 @@
 using System.Collections.Immutable;
 using Godot;
+using Tactics.Presentation.Beats;
 using Tactics.Presentation.Board;
 
 namespace ArcBox.Host.Games.Tactics;
@@ -39,11 +40,18 @@ public partial class BoardCanvas : Node2D
     private bool _animated;
     private double _clock;
     private long _tick;
+    private readonly FxLayer _light;
+    private readonly FxLayer _over;
+    private Vector2 _origin;
 
     public BoardCanvas()
     {
         TextureFilter = TextureFilterEnum.Nearest;
         TextureRepeat = TextureRepeatEnum.Enabled;   // a side deeper than its texture repeats
+        _light = new FxLayer(Load, additive: true);
+        _over = new FxLayer(Load, additive: false);
+        AddChild(_light);
+        AddChild(_over);
     }
 
     /// <summary>Shows <paramref name="plan"/>, loading its art from <paramref name="packRoot"/>, placed by <paramref name="fit"/>.</summary>
@@ -63,7 +71,8 @@ public partial class BoardCanvas : Node2D
             _orders.Add(item.Order);
         }
         _animated = plan.Animated;
-        Position = new Vector2(fit.Origin.X, fit.Origin.Y);
+        _origin = new Vector2(fit.Origin.X, fit.Origin.Y);
+        Position = _origin;
         Scale = new Vector2(fit.Scale, fit.Scale);
         Merge();
     }
@@ -74,6 +83,14 @@ public partial class BoardCanvas : Node2D
         _units = units;
         _art = art;
         Merge();
+    }
+
+    /// <summary>Shows a beat's effects, numbers and badges over everything, with the board <paramref name="shake"/> art pixels off its place.</summary>
+    public void SetEffects(ImmutableArray<FxDraw> draws, System.Numerics.Vector2 shake)
+    {
+        _light.Show(draws);
+        _over.Show(draws);
+        Position = _origin + new Vector2(shake.X, shake.Y) * Scale;
     }
 
     private void Merge()
