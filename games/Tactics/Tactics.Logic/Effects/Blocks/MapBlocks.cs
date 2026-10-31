@@ -119,8 +119,8 @@ public sealed class ZoneBlock : EffectBlock<ZoneEffect>
         var source = ctx.SourceUnit;
         var tiles = Areas.Tiles(def.Area, source.Pos, ctx.Aim ?? source.Pos, ctx.W.Terrain);
         if (!tiles.IsEmpty)
-            ZoneRules.Create(ctx.W, source.Id, def.Kind, tiles, def.Rounds, def.Concentration, def.Difficult, def.Passives,
-                def.BlocksSight);
+            ZoneRules.Create(ctx.W, source.Id, def.Kind, tiles, Metamagic.ExtendRounds(ctx, def.Rounds, def.Concentration),
+                def.Concentration, def.Difficult, def.Passives, def.BlocksSight);
     }
 }
 

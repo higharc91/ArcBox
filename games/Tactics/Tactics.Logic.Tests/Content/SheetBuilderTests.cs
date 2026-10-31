@@ -121,6 +121,25 @@ public sealed class SheetBuilderTests
     }
 
     [Fact]
+    public void Unarmored_defense_adds_stat_modifier_only_when_unarmored()
+    {
+        var barb = SheetBuilder.DefaultCharacter("Korg", "human", "barbarian", null, 1, BasePackTests.Rules) with
+        {
+            BaseScores = Scores(15, 14, 15, 8, 10, 8),
+        };
+        var unarmored = SheetBuilder.ForCharacter(barb with { Armor = "", Shield = false }, BasePackTests.Rules);
+        var shielded = SheetBuilder.ForCharacter(barb with { Armor = "", Shield = true }, BasePackTests.Rules);
+        var armored = SheetBuilder.ForCharacter(barb with { Armor = "scale_mail", Shield = false }, BasePackTests.Rules);
+        var dexMod = Stats.Mod(unarmored.Score(Stat.Dex));
+        var conMod = Stats.Mod(unarmored.Score(Stat.Con));
+
+        Assert.True(conMod > 0);
+        Assert.Equal(10 + dexMod + conMod, unarmored.Ac);
+        Assert.Equal(10 + dexMod + conMod + 2, shielded.Ac);
+        Assert.Equal(14 + Math.Min(dexMod, 2), armored.Ac);
+    }
+
+    [Fact]
     public void Negative_dex_lowers_light_armor_but_not_heavy()
     {
         var weak = Scores(15, 8, 13, 8, 10, 8);     // DEX 8 (−1)

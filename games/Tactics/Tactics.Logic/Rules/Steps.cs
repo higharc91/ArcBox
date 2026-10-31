@@ -125,8 +125,14 @@ public sealed record PayCostStep(UnitId Unit, AbilityId Ability, Target Target,
         var unit = w.Unit(Unit);
 
         var economy = unit.Economy;
+        var quickened = false;
         if (cost.Action > 0)
-            economy = economy.Action ? economy with { Action = false } : economy with { ExtraActions = economy.ExtraActions - 1 };
+        {
+            if (Metamagic.Quickens(unit, ability))
+                quickened = true;
+            else
+                economy = economy.Action ? economy with { Action = false } : economy with { ExtraActions = economy.ExtraActions - 1 };
+        }
         if (cost.Bonus > 0)
             economy = economy with { Bonus = false };
         if (cost.Reaction > 0)
@@ -161,6 +167,13 @@ public sealed record PayCostStep(UnitId Unit, AbilityId Ability, Target Target,
             Economy = economy, Resources = resources, UsesLeft = usesLeft, Bag = bag, ItemsUsedByAi = usedByAi,
             Concentrating = cost.Concentration ? Ability : unit.Concentrating,
         });
+        if (quickened)
+            Conditions.Remove(w, Unit, Metamagic.Quickened);
+        if (!ability.IsWeaponAttack && !Metamagic.IsMetamagicAbility(ability))
+        {
+            Conditions.Remove(w, Unit, Metamagic.Distant);
+            Conditions.Remove(w, Unit, Metamagic.Twinned);
+        }
         w.Emit(new AbilityUsed(Unit, Ability, Target, ability.Presentation));
 
         if (ability.Tier < 1)
@@ -212,5 +225,8 @@ public sealed record RunEffectsStep(UnitId Source, UnitId? Target, Tile? Aim, Ab
         var ability = Ability is { } id ? rules.Abilities.GetValueOrDefault(id) : null;
         var ctx = new EffectContext(w, rules, Source, Target, Aim, ability, Last, HalfDamage, SaveStat, resolution);
         BlockRegistry.For(Effects[0]).Run(Effects[0], ctx);
+        if (HookDepth == 0 && ability is not null && !ability.IsWeaponAttack && !Metamagic.IsMetamagicAbility(ability)
+            && !w.State.Queue.Any(s => s is RunEffectsStep r && r.HookDepth == 0 && r.Source == Source && r.Ability == Ability))
+            Metamagic.ConsumeAll(w, Source);
     }
 }

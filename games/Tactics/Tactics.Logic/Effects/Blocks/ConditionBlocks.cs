@@ -28,8 +28,10 @@ public sealed class ApplyBlock : EffectBlock<ApplyEffect>
             (dc, stat) = (save.Vs, saveStat);
         }
 
-        var condition = new ActiveCondition(def.Condition, ctx.Source, def.Rounds, def.UntilSave, dc, stat,
-            Concentration: ctx.Ability?.Cost.Concentration == true, AppliedThisTurn: ctx.W.State.Active == ctx.Source);
+        var conc = ctx.Ability?.Cost.Concentration == true;
+        var rounds = Metamagic.ExtendRounds(ctx, def.Rounds, conc);
+        var condition = new ActiveCondition(def.Condition, ctx.Source, rounds, def.UntilSave, dc, stat,
+            Concentration: conc, AppliedThisTurn: ctx.W.State.Active == ctx.Source);
         ctx.W.Set(target with { Conditions = target.Conditions.RemoveAll(c => c.Id == def.Condition).Add(condition) });
         ctx.W.Emit(new ConditionApplied(target.Id, def.Condition));
         Conditions.BreakIfIncapacitated(ctx.W, target.Id);

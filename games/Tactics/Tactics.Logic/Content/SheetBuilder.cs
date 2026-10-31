@@ -138,9 +138,11 @@ public static class SheetBuilder
         var skills = new List<string>(background.Skills);
         skills.AddRange(cls.SkillChoices.From.Where(s => !skills.Contains(s)).Take(cls.SkillChoices.Count + race.ExtraSkills));
 
+        var unarmoredMod = cls.UnarmoredDefense is { } s ? Stats.Mod(finalScores[s]) : 0;
+
         return new UnitSheet(
             Name: c.Name, Side: Side.Party, Level: c.Level, Scores: finalScores, MaxHp: Math.Max(1, maxHp),
-            Ac: ArmorClass(armor, c.Shield, Stats.Mod(finalScores[Stat.Dex])), Armor: armor?.Kind ?? ArmorKind.None,
+            Ac: ArmorClass(armor, c.Shield, Stats.Mod(finalScores[Stat.Dex]), unarmoredMod), Armor: armor?.Kind ?? ArmorKind.None,
             Move: race.Move, Jump: race.Jump ?? cls.Jump, InitiativeBonus: 0, SaveProficiencies: [.. cls.Saves],
             Skills: Ordinal.Set(skills),
             Resources: Ordinal.Map(cls.Resources.Select(r => (r.Key, r.Value.At(c.Level)))),
@@ -158,11 +160,12 @@ public static class SheetBuilder
     /// <summary>The hit die plus CON at level 1, then ⌈die / 2⌉ + 1 + CON for each level after it.</summary>
     private static int MaxHp(int hitDie, int level, int con) => hitDie + con + (level - 1) * ((hitDie + 1) / 2 + 1 + con);
 
-    private static int ArmorClass(ArmorDef? armor, bool shield, int dexMod)
+    private static int ArmorClass(ArmorDef? armor, bool shield, int dexMod, int unarmoredMod)
     {
         var (baseAc, dex) = armor switch
         {
-            null => (10, dexMod),
+            null => (10 + unarmoredMod, dexMod),
+            { Kind: ArmorKind.None } => (armor.BaseAc + unarmoredMod, dexMod),
             { Kind: ArmorKind.Medium } => (armor.BaseAc, Math.Min(dexMod, 2)),
             { Kind: ArmorKind.Heavy } => (armor.BaseAc, 0),
             _ => (armor.BaseAc, dexMod),

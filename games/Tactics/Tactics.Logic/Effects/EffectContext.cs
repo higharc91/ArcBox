@@ -69,11 +69,11 @@ public sealed class EffectContext
     /// <summary>The source's casting modifier: the modifier of its <see cref="UnitSheet.CastingStat"/>, or 0 without one.</summary>
     public int CastingModifier => CastingModifierOf(SourceUnit.Sheet);
 
-    /// <summary>The source's save DC: 8 + proficiency + casting modifier.</summary>
-    public int SaveDc => 8 + Stats.Proficiency(Level) + CastingModifier;
+    /// <summary>The source's save DC: 8 + proficiency + casting modifier + spell DC modifier.</summary>
+    public int SaveDc => 8 + Stats.Proficiency(Level) + CastingModifier + Modifiers.For(W, Source, Rules).SpellDc;
 
-    /// <summary>A save DC on another stat than the casting one: 8 + proficiency + that stat's modifier.</summary>
-    public int DcFor(Stat stat) => 8 + Stats.Proficiency(Level) + Stats.Mod(SourceUnit.Sheet.Score(stat));
+    /// <summary>A save DC on another stat than the casting one: 8 + proficiency + that stat's modifier + spell DC modifier.</summary>
+    public int DcFor(Stat stat) => 8 + Stats.Proficiency(Level) + Stats.Mod(SourceUnit.Sheet.Score(stat)) + Modifiers.For(W, Source, Rules).SpellDc;
 
     /// <summary>
     /// The sum of named addends: <c>"mod.&lt;stat&gt;"</c> (e.g. <c>"mod.wis"</c>), <c>"mod.cast"</c>, <c>"prof"</c> and

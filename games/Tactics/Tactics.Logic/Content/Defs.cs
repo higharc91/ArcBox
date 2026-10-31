@@ -152,7 +152,8 @@ public sealed record StaticMods(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int MaxHp = 0,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableSortedDictionary<Stat, Edge>? SaveEdges = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableSortedSet<Stat>? SaveProficiencies = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Evasion = false)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Evasion = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int SpellDc = 0)
 {
     /// <summary>No modifiers.</summary>
     public static StaticMods None { get; } = new();
@@ -315,7 +316,8 @@ public sealed record ClassDef(string Id, string Name, string Role, int HitDie, I
     int Jump = 2,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool SubclassesPending = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? PrimaryResource = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? PrimaryResource = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] Stat? UnarmoredDefense = null);
 
 /// <summary>
 /// A race (spec §4.6): size, Move, darkvision in tiles, an optional Jump override, resistances, trait passives, the racial

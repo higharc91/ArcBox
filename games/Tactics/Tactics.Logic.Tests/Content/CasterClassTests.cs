@@ -108,4 +108,33 @@ public sealed class CasterClassTests
             Assert.Equal(warlock.Resources["pact"], round2.State.Units[U("warlock")].Resources["pact"]);
         }
     }
+
+    [Fact]
+    public void Sorcerer_innate_sorcery_font_of_magic_and_metamagic()
+    {
+        var sorc = Character("sorcerer", 5) with { InitiativeBonus = 40 };
+        var dummy1 = SheetBuilder.ForMonster("hobgoblin", Rules) with { MaxHp = 200, Ac = 2, InitiativeBonus = -20 };
+        var dummy2 = SheetBuilder.ForMonster("hobgoblin", Rules) with { MaxHp = 200, Ac = 2, InitiativeBonus = -20 };
+        var (state, rules) = Start(("sorc", sorc, T(1, 1)), ("gob1", dummy1, T(4, 1)), ("gob2", dummy2, T(4, 2)));
+
+        // Innate Sorcery adds +1 spell DC and advantage on attacks for 3 rounds.
+        var innate = Battle.Apply(state, new Use(U("sorc"), A("sorcerer.innate_sorcery"), new Target()), rules);
+        Assert.Null(innate.Rejected);
+        var mods = Modifiers.For(innate.State, U("sorc"), rules);
+        Assert.Equal(1, mods.SpellDc);
+        Assert.Equal(Edge.Advantage, mods.OwnAttacks);
+
+        // Font of Magic converts 1 Mana -> 2 Sorcery or 2 Sorcery -> 1 Mana.
+        var spentMana = state.Change("sorc", u => u with { Resources = u.Resources.SetItem("mana", 2).SetItem("sorcery", 3) });
+        var toMana = Battle.Apply(spentMana, new Use(U("sorc"), A("sorcerer.font_of_magic_mana"), new Target()), rules);
+        Assert.Null(toMana.Rejected);
+        Assert.Equal((3, 1), (toMana.State.Units[U("sorc")].Resources["mana"], toMana.State.Units[U("sorc")].Resources["sorcery"]));
+
+        // Twinned Spell + Chromatic Orb hits both goblins.
+        var twinned = Battle.Apply(state, new Use(U("sorc"), A("sorcerer.metamagic_twinned"), new Target()), rules);
+        Assert.Null(twinned.Rejected);
+        var orb = Battle.Apply(twinned.State, new Use(U("sorc"), A("sorcerer.chromatic_orb"), new Target(Unit: U("gob1"))), rules);
+        Assert.Null(orb.Rejected);
+        Assert.Equal(2, orb.Events.OfType<AttackResolved>().Count());
+    }
 }

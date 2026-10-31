@@ -87,6 +87,8 @@ internal static class TooltipText
             clauses.Add($"{Signed(mods.Attack)} to attack rolls");
         if (mods.Damage != 0)
             clauses.Add($"{Signed(mods.Damage)} weapon damage");
+        if (mods.SpellDc != 0)
+            clauses.Add($"{Signed(mods.SpellDc)} spell DC");
         if (mods.Move != 0)
             clauses.Add($"{Signed(mods.Move)} Move");
         if (mods.Initiative != 0)
@@ -141,6 +143,8 @@ internal static class TooltipText
             numbers.Add($"{Signed(mods.Attack)} to attack rolls");
         if (mods.Damage != 0)
             numbers.Add($"{Signed(mods.Damage)} weapon damage");
+        if (mods.SpellDc != 0)
+            numbers.Add($"{Signed(mods.SpellDc)} spell DC");
         if (mods.Move != 0)
             numbers.Add($"{Signed(mods.Move)} Move");
         if (mods.Initiative != 0)

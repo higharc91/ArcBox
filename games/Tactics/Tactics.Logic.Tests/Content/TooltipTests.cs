@@ -350,6 +350,6 @@ public sealed class TooltipTests
         Assert.Equal("4 tiles: turns target into a sheep until it saves or loses concentration", Hook("polymorph", "{}"));
         Assert.Equal("4 tiles: raises a skeleton from the corpse on the aimed tile", Hook("animate_dead", "{}"));
         foreach (var name in NamedHooks.Names)
-            Assert.NotNull(NamedHooks.TryFor(name)!.Describe(Args("""{"monster": "bear"}"""), Rules));
+            Assert.NotNull(NamedHooks.TryFor(name)!.Describe(Args("""{"monster": "bear", "kind": "twinned"}"""), Rules));
     }
 }

@@ -73,5 +73,14 @@
   { "id": "inspired", "name": "Inspired", "tags": ["magical"],
     "static": { "attack": 2, "saves": { "str": 2, "dex": 2, "con": 2, "int": 2, "wis": 2, "cha": 2 } } },
   { "id": "countercharm", "name": "Under a Countercharm", "tags": ["aura"],
-    "static": { "saveEdges": { "wis": "advantage", "cha": "advantage" } } }
+    "static": { "saveEdges": { "wis": "advantage", "cha": "advantage" } } },
+  { "id": "raging", "name": "Raging", "tags": [],
+    "static": { "damage": 2, "resist": ["bludgeoning", "piercing", "slashing"], "saveEdges": { "str": "advantage" } } },
+  { "id": "reckless", "name": "Reckless", "tags": [],
+    "static": { "ownAttacks": "advantage", "attackedMelee": "advantage", "attackedRanged": "advantage" } },
+  { "id": "metamagic.twinned", "name": "Twinned Spell", "tags": ["magical"] },
+  { "id": "metamagic.extended", "name": "Extended Spell", "tags": ["magical"] },
+  { "id": "metamagic.careful", "name": "Careful Spell", "tags": ["magical"] },
+  { "id": "metamagic.quickened", "name": "Quickened Spell", "tags": ["magical"] },
+  { "id": "metamagic.distant", "name": "Distant Spell", "tags": ["magical"] }
 ]

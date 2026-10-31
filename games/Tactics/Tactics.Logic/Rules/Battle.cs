@@ -309,19 +309,49 @@ public static partial class Battle
         }
         else
         {
-            ranged = def.Range > 1;   // melee and touch (range 1) get no high-ground range
+            var effectiveRange = def.Range >= 1 && !Metamagic.IsMetamagicAbility(ability) && Metamagic.Has(user, Metamagic.Distant)
+                ? def.Range + 2
+                : def.Range;
+            ranged = effectiveRange > 1;   // melee and touch (range 1) get no high-ground range
             var heightOk = def.HeightTolerance is not { } tolerance
                            || Math.Abs(terrain.HeightAt(user.Pos) - terrain.HeightAt(aim)) <= tolerance;
-            if (distance > def.Range + (ranged ? rangeBonus : 0) || distance < def.MinRange || !heightOk)
+            if (distance > effectiveRange + (ranged ? rangeBonus : 0) || distance < def.MinRange || !heightOk)
                 return Rejection.Of(RejectCode.OutOfRange);
             los = def.Los;
         }
 
+        var standing = los
+            ? s.Units.Values.Where(u => u.Life == LifeState.Up).Select(u => u.Pos).ToImmutableSortedSet()
+            : ImmutableSortedSet<Tile>.Empty;
         if (los)
         {
-            var standing = s.Units.Values.Where(u => u.Life == LifeState.Up).Select(u => u.Pos).ToImmutableSortedSet();
             if (!Sight.Trace(terrain, user.Pos, aim, standing, ranged, ZoneRules.Obscured(s)).HasLineOfSight)
                 return Rejection.Of(RejectCode.NoLineOfSight);
+        }
+
+        if (!ability.IsWeaponAttack && !Metamagic.IsMetamagicAbility(ability) && Metamagic.Has(user, Metamagic.Twinned)
+            && area.Shape == AreaShape.Single && def.Kind is TargetKind.Enemy or TargetKind.Ally or TargetKind.AnyUnit
+            && affected.Length == 1)
+        {
+            var first = s.Units[affected[0]];
+            var effectiveRange = def.Range >= 1 && Metamagic.Has(user, Metamagic.Distant) ? def.Range + 2 : def.Range;
+            var obscured = los ? ZoneRules.Obscured(s) : ImmutableSortedSet<Tile>.Empty;
+            var second = s.Units.Values
+                .Where(u => u.Id != first.Id && u.Id != user.Id && DownedRules.InBattle(u) && u.Sheet.Side == first.Sheet.Side)
+                .Where(u =>
+                {
+                    var d = Reach.Distance(user.Pos, u.Pos);
+                    var rb = effectiveRange > 1 ? Reach.RangeBonus(terrain, user.Pos, u.Pos) : 0;
+                    var hOk = def.HeightTolerance is not { } tol
+                              || Math.Abs(terrain.HeightAt(user.Pos) - terrain.HeightAt(u.Pos)) <= tol;
+                    return d <= effectiveRange + rb && d >= def.MinRange && hOk
+                           && (!los || Sight.Trace(terrain, user.Pos, u.Pos, standing, effectiveRange > 1, obscured).HasLineOfSight);
+                })
+                .OrderBy(u => Reach.Distance(first.Pos, u.Pos))
+                .ThenBy(u => u.Id)
+                .FirstOrDefault();
+            if (second is not null)
+                affected = affected.Add(second.Id);
         }
         return null;
     }
@@ -352,9 +382,9 @@ public static partial class Battle
     {
         var cost = ability.Cost;
         var economy = unit.Economy;
-        if (cost.Action > 0 && !economy.Action && economy.ExtraActions <= 0)
+        if (cost.Action > 0 && !economy.Action && economy.ExtraActions <= 0 && !Metamagic.Quickens(unit, ability))
             return Rejection.Of(RejectCode.NoAction);
-        if (cost.Bonus > 0 && !economy.Bonus)
+        if ((cost.Bonus > 0 || Metamagic.IsFreeQuickened(ability)) && !economy.Bonus)
             return Rejection.Of(RejectCode.NoBonus);
         if (cost.Reaction > 0 && !economy.Reaction)
             return Rejection.Of(RejectCode.NoReaction);

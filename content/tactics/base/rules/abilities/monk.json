@@ -56,7 +56,6 @@
       "flavor": "A strike at the body's flow of ki: on a hit, a CON save or the target is stunned until your next turn ends." }
   ],
   "passives": [
-    { "id": "monk.unarmored_defense", "static": { "ac": 2 } },
     { "id": "monk.unarmored_movement", "static": { "move": 1 } },
     { "id": "monk.unarmored_movement_2", "static": { "move": 1 } },
     { "id": "monk.acrobatic_movement", "static": { "move": 1 } },

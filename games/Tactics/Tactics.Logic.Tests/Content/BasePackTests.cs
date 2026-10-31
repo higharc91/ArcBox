@@ -12,10 +12,10 @@ public sealed class BasePackTests
     /// <summary>The base pack, loaded once with the art manifests.</summary>
     internal static RulesPack Rules => Pack.Value;
 
-    private static readonly string[] Classes = ["bard", "cleric", "druid", "fighter", "monk", "paladin", "ranger", "rogue", "warlock", "wizard"];
+    private static readonly string[] Classes = ["barbarian", "bard", "cleric", "druid", "fighter", "monk", "paladin", "ranger", "rogue", "sorcerer", "warlock", "wizard"];
 
     /// <summary>The classes whose subclasses are still to be written (Tasks 19–20); every other class has exactly one so far.</summary>
-    private static readonly string[] SubclassesPending = ["bard", "druid", "monk", "paladin", "ranger", "warlock"];
+    private static readonly string[] SubclassesPending = ["barbarian", "bard", "druid", "monk", "paladin", "ranger", "sorcerer", "warlock"];
 
     private static readonly string[] AiProfiles = ["archer", "boss", "boss_cruel", "brute", "caster", "companion", "coward", "healer", "skirmisher"];
 
@@ -56,7 +56,8 @@ public sealed class BasePackTests
             "blinded", "charmed", "frightened", "grappled", "incapacitated", "invisible", "paralysed", "poisoned", "prone", "restrained",
             "stunned", "unconscious", "burning", "bleeding", "slowed", "hasted", "marked", "lit", "taunted", "helped", "dodging", "disengaged",
             "hunters_mark", "ensnared", "barkskin", "divine_smite", "divine_smite_2", "divine_smite_3", "aura_of_protection",
-            "elemental_weapon", "hex", "inspired", "countercharm",
+            "elemental_weapon", "hex", "inspired", "countercharm", "raging", "reckless",
+            "metamagic.twinned", "metamagic.extended", "metamagic.careful", "metamagic.quickened", "metamagic.distant",
         ];
         Assert.All(conditions, c => Assert.True(pack.Conditions.ContainsKey(new ConditionId(c)), $"No condition '{c}'."));
         string[] common = ["attack", "dash", "disengage", "dodge", "help", "shove", "use_item"];

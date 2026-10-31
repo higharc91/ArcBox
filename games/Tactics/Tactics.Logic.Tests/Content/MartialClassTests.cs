@@ -127,4 +127,26 @@ public sealed class MartialClassTests
 
         Assert.True(Has(stunned.State, "gob", "stunned"));
     }
+
+    [Fact]
+    public void Barbarian_rage_reckless_attack_and_brutal_strike()
+    {
+        var barb = Character("barbarian", 9) with { InitiativeBonus = 50 };
+        var state = Start(1, ("barb", barb, T(1, 1)), ("gob", Dummy, T(2, 1)));
+
+        var raged = Use(state, "barb", "barbarian.rage", "barb");
+        Assert.True(Has(raged.State, "barb", "raging"));
+        var mods = Modifiers.For(raged.State, U("barb"), Rules);
+        Assert.Contains("slashing", mods.Resist!);
+        Assert.True(mods.Damage >= 2);
+
+        var reckless = Use(Start(1, ("barb", barb, T(1, 1)), ("gob", Dummy, T(2, 1))), "barb", "barbarian.reckless_attack", "barb");
+        Assert.True(Has(reckless.State, "barb", "reckless"));
+        var recklessHit = Use(reckless.State, "barb", RulesPack.CommonAttack.Id.Value, "gob");
+        Assert.Equal(2, recklessHit.Events.OfType<AttackResolved>().Count());
+
+        var brutal = Use(Start(1, ("barb", barb, T(1, 1)), ("gob", Dummy, T(2, 1))), "barb", "barbarian.brutal_strike", "gob");
+        Assert.Contains(brutal.Events.OfType<AttackResolved>(), a => a.Hit);
+        Assert.True(brutal.State.Units[U("gob")].Pos.X > 2);
+    }
 }

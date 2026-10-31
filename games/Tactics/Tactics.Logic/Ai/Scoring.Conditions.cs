@@ -55,7 +55,7 @@ internal sealed partial class Scorer
         };
 
         var offense = (m.Incapacitated ? -1.0 : 0) + (m.CantMove ? -0.3 : 0) + EdgeWorth(m.OwnAttacks, 0.3)
-                      + 0.05 * m.Attack + 0.04 * m.Damage + 0.8 * m.ExtraActions + 0.04 * m.Move + (m.Invisible ? 0.3 : 0);
+                      + 0.05 * m.Attack + 0.04 * m.Damage + 0.05 * m.SpellDc + 0.8 * m.ExtraActions + 0.04 * m.Move + (m.Invisible ? 0.3 : 0);
         var defense = 0.06 * m.Ac - EdgeWorth(m.AttackedMelee, 0.3) - EdgeWorth(m.AttackedRanged, 0.15) + (m.Invisible ? 0.3 : 0)
                       - 0.1 * (m.AutoFailSaves?.Count ?? 0) - (m.CritWhenAdjacent ? 0.4 : 0)
                       + 0.01 * (m.Saves?.Values.Sum() ?? 0)

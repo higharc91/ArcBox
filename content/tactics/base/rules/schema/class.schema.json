@@ -193,6 +193,17 @@
     "primaryResource": {
       "type": "string",
       "description": "One of resources: what grantResource \"primary\" means for this class."
+    },
+    "unarmoredDefense": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/stat"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Stat modifier added to AC when unarmored (e.g. \"con\" for Barbarian, \"wis\" for Monk)."
     }
   },
   "required": [

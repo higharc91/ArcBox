@@ -96,6 +96,20 @@ internal sealed partial class Scorer
                     return total <= 0 ? Outcome.None : Outcome.Mix([.. random.Table.Select(e =>
                         ((double)Math.Max(0, e.Weight) / total, Walk(e.Effects, st, target, crit, half, last)))]);
                 }
+            case GrantResourceEffect grant:
+                {
+                    var amount = grant.Amount.At(st.Context.Level);
+                    if (amount <= 0)
+                        return Outcome.None;
+                    var resource = grant.Resource == GrantResourceEffect.Primary
+                        ? target.Sheet.PrimaryResource ?? target.Sheet.Resources.Keys.Min(StringComparer.Ordinal) ?? ""
+                        : grant.Resource;
+                    var current = target.Resources.GetValueOrDefault(resource);
+                    var max = target.Sheet.Resources.GetValueOrDefault(resource, current + amount);
+                    if (!grant.OverMax && current >= max || current > 2)
+                        return Outcome.None;
+                    return new Outcome(DamageDist.Zero, Offense: 0.15 * Math.Min(amount, Math.Max(1, max - current)));
+                }
             case TransformEffect transform:
                 return Transform(transform, st, target);
             default:
@@ -112,6 +126,13 @@ internal sealed partial class Scorer
             return new Outcome(DamageDist.Zero, TempHp: beast.MaxHp, Offense: 0.2 * beast.Attacks);
         if (def.Hook == "polymorph" && Hostile(st.User, target))
             return new Outcome(DamageDist.Zero, Offense: -1.5);
+        if (def.Hook == "metamagic" && NamedHooks.String(def.Args, "kind") is { } kind)
+        {
+            if (kind == "extended" && target.Concentrating is not null)
+                return new Outcome(DamageDist.Zero, Offense: 0.25);
+            if (kind == "quickened" && !target.Economy.Action && target.Economy.Bonus)
+                return new Outcome(DamageDist.Zero, Offense: 0.4);
+        }
         return Outcome.None;
     }
 

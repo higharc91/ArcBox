@@ -244,6 +244,66 @@ public sealed class NamedHookTests
         var error = Assert.Throws<InvalidOperationException>(() =>
             battle.Run(state, "wiz", "gob", null, new TransformEffect("time_stop", Args("{}"))));
         Assert.Contains("time_stop", error.Message);
-        Assert.Equal(["animate_dead", "counterspell", "polymorph", "wild_shape"], NamedHooks.Names);
+        Assert.Equal(["animate_dead", "counterspell", "metamagic", "polymorph", "wild_shape"], NamedHooks.Names);
+    }
+
+    [Fact]
+    public void Metamagic_twinned_extended_careful_quickened_and_distant()
+    {
+        var twin = Ability("test.twin", 0, new CostDef(Resource: Ordinal.Map(("mana", 1))), Self, "metamagic", """{"kind":"twinned"}""");
+        var extend = Ability("test.extend", 0, new CostDef(Resource: Ordinal.Map(("mana", 1))), Self, "metamagic", """{"kind":"extended"}""");
+        var careful = Ability("test.careful", 0, new CostDef(Resource: Ordinal.Map(("mana", 1))), Self, "metamagic", """{"kind":"careful"}""");
+        var quicken = Ability("test.quicken", 0, new CostDef(Bonus: 1, Resource: Ordinal.Map(("mana", 1))), Self, "metamagic", """{"kind":"quickened"}""");
+        var distant = Ability("test.distant", 0, new CostDef(Resource: Ordinal.Map(("mana", 1))), Self, "metamagic", """{"kind":"distant"}""");
+
+        var bolt = new AbilityDef(new AbilityId("test.bolt"), "Bolt", 0, new CostDef(Action: 1),
+            new TargetDef(TargetKind.Enemy, 3, false, new AreaDef(AreaShape.Single)),
+            [new DamageEffect(TestAbilities.Flat("4"), "fire", [])]);
+        var hold = new AbilityDef(new AbilityId("test.hold"), "Hold", 1, new CostDef(Action: 1, Concentration: true),
+            new TargetDef(TargetKind.Enemy, 6, false, new AreaDef(AreaShape.Single)),
+            [new ApplyEffect(new ConditionId("stunned"), Rounds: 3)]);
+        var blast = new AbilityDef(new AbilityId("test.blast"), "Blast", 1, new CostDef(Action: 1),
+            new TargetDef(TargetKind.Tile, 6, false, new AreaDef(AreaShape.Burst, Size: 2, FriendlyFire: true)),
+            [new SaveEffect(Stat.Dex, Dc: 25, OnFail: [new DamageEffect(TestAbilities.Flat("6"), "fire", [])], OnSuccess: [], HalfOnSuccess: false)]);
+
+        var battle = TestBattle.On(Field)
+            .Party("sorc", (Caster(twin, extend, careful, quicken, distant, bolt, hold, blast) with
+            {
+                Resources = Ordinal.Map(("mana", 20)),
+            }), T(0, 1))
+            .Party("ally", TestSheets.Fighter, T(2, 1))
+            .Enemy("gob1", TestSheets.Goblin with { MaxHp = 30 }, T(2, 0))
+            .Enemy("gob2", TestSheets.Goblin with { MaxHp = 30 }, T(5, 1))
+            .With(twin, extend, careful, quicken, distant, bolt, hold, blast);
+        var (state, _) = battle.Start();
+
+        // Distant: bolt (range 3) reaches gob2 at distance 5 (+2 range).
+        Assert.Equal(RejectCode.OutOfRange, Battle.Check(state, new Use(U("sorc"), bolt.Id, new Target(Unit: U("gob2"))), battle.Rules)?.Code);
+        var (afterDistant, _) = battle.Apply(state, new Use(U("sorc"), distant.Id, new Target()));
+        var (shotFar, _) = battle.Apply(afterDistant, new Use(U("sorc"), bolt.Id, new Target(Unit: U("gob2"))));
+        Assert.Equal(26, shotFar.Units[U("gob2")].Hp);
+
+        // Quickened: after spending the Action on shotFar, quicken spends Bonus + mana and lets sorc cast another Action spell.
+        var (afterQuicken, _) = battle.Apply(shotFar, new Use(U("sorc"), quicken.Id, new Target()));
+        Assert.False(afterQuicken.Units[U("sorc")].Economy.Bonus);
+        var (quickShot, _) = battle.Apply(afterQuicken, new Use(U("sorc"), bolt.Id, new Target(Unit: U("gob1"))));
+        Assert.Equal(26, quickShot.Units[U("gob1")].Hp);
+
+        // Twinned: a single-target spell also hits a second valid target in range.
+        var fresh = state.Change("gob2", u => u with { Pos = T(2, 2) });
+        var (afterTwin, _) = battle.Apply(fresh, new Use(U("sorc"), twin.Id, new Target()));
+        var (twinnedBolt, _) = battle.Apply(afterTwin, new Use(U("sorc"), bolt.Id, new Target(Unit: U("gob1"))));
+        Assert.Equal((26, 26), (twinnedBolt.Units[U("gob1")].Hp, twinnedBolt.Units[U("gob2")].Hp));
+
+        // Extended: doubles concentration duration (3 -> 6 rounds).
+        var (afterExtend, _) = battle.Apply(state, new Use(U("sorc"), extend.Id, new Target()));
+        var (held, _) = battle.Apply(afterExtend, new Use(U("sorc"), hold.Id, new Target(Unit: U("gob1"))));
+        Assert.Equal(6, Assert.Single(held.Units[U("gob1")].Conditions, c => c.Id == new ConditionId("stunned")).RoundsLeft);
+
+        // Careful: allies in the area automatically succeed their saving throws against DC 25, while enemies fail.
+        var (afterCareful, _) = battle.Apply(state, new Use(U("sorc"), careful.Id, new Target()));
+        var (blasted, _) = battle.Apply(afterCareful, new Use(U("sorc"), blast.Id, new Target(Tile: T(2, 1))));
+        Assert.Equal(TestSheets.Fighter.MaxHp, blasted.Units[U("ally")].Hp);
+        Assert.Equal(24, blasted.Units[U("gob1")].Hp);
     }
 }

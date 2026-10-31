@@ -41,7 +41,7 @@ public interface INamedHook
 public static class NamedHooks
 {
     private static readonly ImmutableSortedDictionary<string, INamedHook> ByName =
-        new INamedHook[] { new WildShape(), new Counterspell(), new Polymorph(), new AnimateDead() }
+        new INamedHook[] { new WildShape(), new Counterspell(), new Polymorph(), new AnimateDead(), new Metamagic() }
             .ToImmutableSortedDictionary(h => h.Name, h => h, StringComparer.Ordinal);
 
     /// <summary>Every hook's name, in ordinal order.</summary>

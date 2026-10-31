@@ -119,7 +119,8 @@ public sealed class StatModBlock : EffectBlock<StatModEffect>
     {
         var target = ctx.TargetUnit(Key);
         var id = new ConditionId("statMod." + (ctx.Ability?.Id.Value ?? "effect"));
-        Sourced.Put(ctx, target.Id, id, def.Rounds, def.Concentration, def.Mods);
+        var rounds = Metamagic.ExtendRounds(ctx, def.Rounds, def.Concentration) ?? def.Rounds;
+        Sourced.Put(ctx, target.Id, id, rounds, def.Concentration, def.Mods);
         Conditions.BreakIfIncapacitated(ctx.W, target.Id);
     }
 }

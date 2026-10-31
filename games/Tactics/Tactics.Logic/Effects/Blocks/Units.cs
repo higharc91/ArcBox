@@ -125,11 +125,12 @@ public sealed class SummonBlock : EffectBlock<SummonEffect>
     protected override void Run(SummonEffect def, EffectContext ctx)
     {
         var aim = ctx.Aim ?? ctx.SourceUnit.Pos;
+        var rounds = Metamagic.ExtendRounds(ctx, def.Rounds, def.Concentration);
         for (var i = 0; i < def.Count; i++)
         {
             if (Summons.FreeTile(ctx.W, aim, def.Zone) is not { } at)
                 return;
-            Summons.Spawn(ctx.W, ctx.Source, def.Monster, at, def.Rounds, def.Concentration);
+            Summons.Spawn(ctx.W, ctx.Source, def.Monster, at, rounds, def.Concentration);
         }
     }
 }

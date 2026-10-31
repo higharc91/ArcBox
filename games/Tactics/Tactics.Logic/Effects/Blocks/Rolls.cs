@@ -214,6 +214,8 @@ public sealed class SaveBlock : EffectBlock<SaveEffect>
         var target = ctx.TargetUnit(Key);
         var cover = def.Stat == Stat.Dex ? Modifiers.CoverAgainst(ctx.W, Origin(ctx), target.Pos, ranged: false) : 0;
         var roll = Rolls.Save(ctx.W, target.Id, def.Stat, def.Dc ?? (def.DcStat is { } dcStat ? ctx.DcFor(dcStat) : ctx.SaveDc), ctx.Rules, cover, ctx.Source);
+        if (target.Id != ctx.Source && target.Sheet.Side == ctx.SourceUnit.Sheet.Side && Metamagic.Has(ctx.SourceUnit, Metamagic.Careful))
+            roll = roll with { Success = true };
         ctx.Last = roll;
         // Evasion: against a DEX save for half, none on a success and half on a failure.
         var evades = def.Stat == Stat.Dex && def.HalfOnSuccess && Modifiers.For(ctx.W, target.Id, ctx.Rules).Evasion;

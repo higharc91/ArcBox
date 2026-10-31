@@ -6,8 +6,9 @@
                    "bag": [ { "item": "potion_of_healing", "count": 1 } ] },
   "resources": { "ki": { "1": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10 } },
   "primaryResource": "ki",
+  "unarmoredDefense": "wis",
   "features": {
-    "1": [ { "ability": "monk.unarmed_strike" }, { "ability": "monk.martial_arts" }, { "passive": "monk.unarmored_defense" } ],
+    "1": [ { "ability": "monk.unarmed_strike" }, { "ability": "monk.martial_arts" } ],
     "2": [ { "ability": "monk.flurry_of_blows" }, { "ability": "monk.step_of_the_wind" }, { "passive": "monk.unarmored_movement" } ],
     "3": [ { "ability": "monk.deflect_attacks" } ],
     "4": [ { "ability": "monk.patient_defense" } ],

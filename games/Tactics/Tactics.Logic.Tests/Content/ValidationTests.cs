@@ -82,7 +82,7 @@ public sealed class ValidationTests
         => Assert.Equal(
         [
             new ContentError(Abilities, "/abilities/0/effects/0/transform/hook",
-                "Unknown named hook 'wild_shpe' (expected \"animate_dead\", \"counterspell\", \"polymorph\" or \"wild_shape\")."),
+                "Unknown named hook 'wild_shpe' (expected \"animate_dead\", \"counterspell\", \"metamagic\", \"polymorph\" or \"wild_shape\")."),
             new ContentError(Abilities, "/abilities/0/effects/1/transform/args", "'wild_shape' needs a \"monster\" id in its args."),
             new ContentError(Abilities, "/abilities/0/effects/2/extraAction/kind",
                 "Unknown extra action 'reaction' (expected \"action\", \"bonus\" or \"move\")."),

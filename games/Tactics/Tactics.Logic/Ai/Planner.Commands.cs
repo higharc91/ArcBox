@@ -122,10 +122,26 @@ internal sealed partial class Planner
                     var usable = _usables.First(u => u.Command == use.Ability && u.Item == use.Item);
                     var cost = usable.Ability.Cost;
                     var economy = me.Economy;
+                    var conditions = me.Conditions;
                     if (cost.Action > 0)
-                        economy = economy.Action ? economy with { Action = false } : economy with { ExtraActions = economy.ExtraActions - 1 };
-                    if (cost.Bonus > 0)
+                    {
+                        if (Metamagic.Quickens(me, usable.Ability))
+                            conditions = conditions.RemoveAll(c => c.Id == Metamagic.Quickened);
+                        else
+                            economy = economy.Action ? economy with { Action = false } : economy with { ExtraActions = economy.ExtraActions - 1 };
+                    }
+                    if (cost.Bonus > 0 || Metamagic.IsFreeQuickened(usable.Ability))
                         economy = economy with { Bonus = false };
+                    if (!usable.Ability.IsWeaponAttack && !Metamagic.IsMetamagicAbility(usable.Ability))
+                        conditions = conditions.RemoveAll(c => c.Id.Value.StartsWith("metamagic.", StringComparison.Ordinal));
+                    else if (Metamagic.IsMetamagicAbility(usable.Ability)
+                             && usable.Ability.Effects.OfType<TransformEffect>().FirstOrDefault(t => t.Hook == "metamagic") is { } mm
+                             && NamedHooks.String(mm.Args, "kind") is { } kind)
+                    {
+                        var id = new ConditionId("metamagic." + kind);
+                        conditions = conditions.RemoveAll(c => c.Id == id)
+                            .Add(new ActiveCondition(id, me.Id, RoundsLeft: 0, UntilSave: false, SaveDc: 0, Stat.Con, Concentration: false));
+                    }
                     economy = economy with { MoveLeft = economy.MoveLeft - cost.Move };
                     if (usable.Dash)
                         economy = economy with { MoveLeft = economy.MoveLeft + Modifiers.Move(me.Sheet, _scorer.Mods(me)) };
@@ -140,7 +156,7 @@ internal sealed partial class Planner
                         bag = stack.Count > 1 ? bag.Replace(stack, stack with { Count = stack.Count - 1 }) : bag.Remove(stack);
                     me = me with
                     {
-                        Economy = economy, Resources = resources, UsesLeft = uses, Bag = bag,
+                        Economy = economy, Resources = resources, UsesLeft = uses, Bag = bag, Conditions = conditions,
                         Concentrating = cost.Concentration ? usable.Ability.Id : me.Concentrating,
                     };
                     break;

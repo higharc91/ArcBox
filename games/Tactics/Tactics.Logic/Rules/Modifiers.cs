@@ -56,7 +56,7 @@ public static class Modifiers
     /// </summary>
     public static StaticMods Sum(IEnumerable<StaticMods> sources)
     {
-        var (ac, attack, damage, move, initiative, extra, maxHp) = (0, 0, 0, 0, 0, 0, 0);
+        var (ac, attack, damage, move, initiative, extra, maxHp, spellDc) = (0, 0, 0, 0, 0, 0, 0, 0);
         var (incapacitated, cantMove, critWhenAdjacent, invisible, evasion) = (false, false, false, false, false);
         var saveEdges = new SortedDictionary<Stat, EdgeCount>();
         var saveProficiencies = ImmutableSortedSet.CreateBuilder<Stat>();
@@ -77,6 +77,7 @@ public static class Modifiers
             initiative += m.Initiative;
             extra += m.ExtraActions;
             maxHp += m.MaxHp;
+            spellDc += m.SpellDc;
             incapacitated |= m.Incapacitated;
             cantMove |= m.CantMove;
             critWhenAdjacent |= m.CritWhenAdjacent;
@@ -103,7 +104,7 @@ public static class Modifiers
             own.Edge, melee.Edge, ranged.Edge, autoFail.ToImmutable(), critWhenAdjacent, invisible, resist.ToImmutable(),
             immune.ToImmutable(), extra, maxHp,
             saveEdges.Where(e => e.Value.Edge != Edge.None).ToImmutableSortedDictionary(e => e.Key, e => e.Value.Edge),
-            saveProficiencies.ToImmutable(), evasion);
+            saveProficiencies.ToImmutable(), evasion, spellDc);
     }
 
     /// <summary>True when <paramref name="unit"/> is Up and not incapacitated, so it can act, react and flank.</summary>
