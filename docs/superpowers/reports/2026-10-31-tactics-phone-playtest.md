@@ -1,8 +1,8 @@
 # ArcBox Tactics: phone-view playtest (2026-10-31)
 
-This run followed the [local playtest handoff](../plans/2026-10-31-tactics-local-playtest-handoff.md) on the user's Windows PC, but **not on a real phone and not by a person**. Claude played through the desktop app's in-app browser, with one tab emulating a phone at 375×812 with an Android Pixel 8 user agent, and three players on the dev page. Most taps on the phone tab were real clicks in that viewport; some, and all iframe players, were scripted.
+This run followed the [local playtest handoff](../plans/2026-10-31-tactics-local-playtest-handoff.md) on the user's Windows PC, in two parts. First, Claude played through the desktop app's in-app browser, with one tab emulating a phone at 375×812 with an Android Pixel 8 user agent, and three players on the dev page. Most taps on the phone tab were real clicks in that viewport; some, and all iframe players, were scripted. Most of this report comes from that part, so it wasn't a real phone or a person.
 
-The handoff's most important questions are about how the game feels in the hand, so they're still open. See [Still needs a person](#still-needs-a-person).
+Then the user played on a real Samsung S23: see [A real phone, afterwards](#a-real-phone-afterwards). Some of the handoff's questions about how the game feels in the hand are still open: see [Still needs a person](#still-needs-a-person).
 
 ## Setup
 
@@ -64,15 +64,16 @@ The user then joined on a Samsung S23. **The LAN address didn't connect.** The s
 
 The user's verdict:
 - **Tile tapping is fine.** Visual polish can come later.
-- **Locking the phone mid-turn rejoined the game, but control came back a turn late.** The AI kept the rest of that turn, with the player sitting on the status screen. A player who dropped before their turn got control back at once, so the two paths disagreed. A player who returns now takes over what's left of the turn at once, on the remaining timer. The spec's §4.4 was updated to match.
+- **Locking the phone mid-turn rejoined the game, but control came back a turn late.** The AI kept the rest of that turn, with the player sitting on the status screen. A player who dropped before their turn got control back at once, so the two paths disagreed. A player who returns now takes over what's left of the turn at once, on the remaining timer. The spec's §4.4 was updated to match, and **the user confirmed the fix on the phone**.
 
 ## Still needs a person
 
-- Is the d-pad comfortable, and can a thumb hit a map tile?
-- Do 60 s for a turn and 10 s for a reaction feel right? Claude's tool delays make its timings meaningless here: the Sleep turn used most of the 60 s for that reason alone.
-- Real phones over Wi-Fi at `http://<pc-ip>:5080/?room=<CODE>`, including the Windows firewall prompt. Nothing here used the LAN.
-- Real touch: taps here arrived as mouse clicks, so scrolling, accidental taps and the on-screen keyboard weren't tested.
-- **Wake Lock** and a real screen lock. The lock was stood in for by a page reload, so whether the AI finishes the turn while a phone sleeps is untested. "Resuming…" wasn't seen either, because the restarted room was already back when the dev page reopened.
+- Is the d-pad comfortable? Tapping tiles is confirmed fine, but the d-pad has no verdict yet.
+- Do 60 s for a turn and 10 s for a reaction feel right? Claude's tool delays make its timings meaningless, and the user hasn't given a verdict.
+- Phones on the Wi-Fi LAN: the S23 couldn't connect, so check the router's isolation settings, or keep using Tailscale.
+- **Wake Lock:** it needs HTTPS or `localhost`, so a phone on plain HTTP may still dim mid-battle.
+- "Resuming…" wasn't seen, because the restarted room was already back when the dev page reopened.
+- After one restart, a room came back on a new battle. That battle may have ended before the restart, but this wasn't confirmed.
 - Whether the reaction prompt shows its countdown: no screenshot caught the prompt on screen.
 
 Balance is unchanged. The decisions waiting on the user are listed in the rules-engine tracker.
