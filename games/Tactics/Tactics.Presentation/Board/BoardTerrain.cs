@@ -60,7 +60,7 @@ public sealed class BoardTerrain
             var i = tile.Y * width + tile.X;
             var height = terrain.HeightAt(tile);
             var deep = terrain.Deep(tile);
-            lowest = Math.Min(lowest, height);
+            lowest = Math.Min(lowest, map[tile].Height);
             _looks[i] = sunk.Contains(tile) ? chasm : looks[map[tile].Material];
             _deep[i] = deep;
             _tops[i] = height + (_looks[i].Void ? -VoidSink
@@ -77,7 +77,7 @@ public sealed class BoardTerrain
     /// <summary>What the battle changed.</summary>
     public BoardChanges Changes { get; }
 
-    /// <summary>The height the board's outer skirt goes down to, in steps.</summary>
+    /// <summary>The height the board's outer skirt goes down to, in steps: from the map file, so a fight doesn't change it.</summary>
     public float Base { get; }
 
     /// <summary>Every tile, row by row.</summary>

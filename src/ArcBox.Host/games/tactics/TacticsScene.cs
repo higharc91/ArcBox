@@ -36,6 +36,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private Label _battleTitle = null!;
     private ArtIndex? _art;
     private BattleMap? _map;
+    private BoardFit? _fit;
     private string? _unreadableMap;
     private Screenshotter? _shots;
     private IReadOnlyDictionary<string, string> _content = new Dictionary<string, string>();
@@ -142,9 +143,10 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             if (_map?.Id != battle.Map)
             {
                 _map = BoardMap.Parse(File.ReadAllText(Path.Combine(root, "rules", "maps", $"{battle.Map}.json")));
+                _fit = BoardFit.For(new BoardTerrain(_map, null), _art);   // once per map: a fight never moves the board
             }
-            var plan = BoardPlan.Build(new BoardTerrain(_map, battle.Board), _art);
-            _board.SetPlan(plan, BoardFit.Of(plan.Min, plan.Max), root);
+            var terrain = new BoardTerrain(_map, battle.Board);
+            _board.SetPlan(BoardPlan.Build(terrain, _art), _fit ?? throw new InvalidOperationException("A map with no fit."), root);
             return true;
         }
         catch (Exception ex) when (ex is IOException or JsonException or FormatException or ArgumentException

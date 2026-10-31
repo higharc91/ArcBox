@@ -100,6 +100,14 @@ public sealed class BoardPlanTests
     }
 
     [Fact]
+    public void A_lowered_tile_does_not_deepen_the_skirt_around_the_whole_board()
+    {
+        var map = Map(["rock/grey"], [], "1:0:0 1:0:0");
+
+        Assert.Equal(new BoardTerrain(map, null).Base, new BoardTerrain(map, new BoardChanges([], [new HeightChange(new Tile(0, 0), -1)], [])).Base);
+    }
+
+    [Fact]
     public void A_lip_lies_over_the_top_of_a_side_under_a_top_that_has_one()
     {
         var plan = Plan(Map(["grass/lush"], [], "2:0:0 0:0:0"));
@@ -300,7 +308,7 @@ public sealed class BoardPlanTests
         Assert.All(Faces(plan), f => Assert.NotNull(f.Image));
         Assert.Equal(map.Props.Length, plan.Items.OfType<Sprite>().Count());
         Assert.All(plan.Items.OfType<Sprite>(), s => Assert.True(File.Exists(Path.Combine(Pack.Root, s.Image.Path))));
-        Assert.Equal(2, BoardFit.Of(plan.Min, plan.Max).Scale);
+        Assert.Equal(2, BoardFit.For(new BoardTerrain(map, null), Pack.Art).Scale);
     }
 
     [Theory]

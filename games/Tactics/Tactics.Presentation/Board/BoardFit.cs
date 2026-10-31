@@ -22,6 +22,18 @@ public sealed record BoardFit(Vector2 Origin, float Scale)
     /// </summary>
     public static BoardArea Area { get; } = new(32, 72, 1856, 992);
 
+    /// <summary>
+    /// The fit for a battle on <paramref name="terrain"/>'s map, which stays the same for the whole battle: it comes from
+    /// the map as its file has it, whatever the battle has done to it, so nothing a fight does can move or shrink the board.
+    /// What grows past those bounds runs into the top strip and, past that, off the screen: a raised tile clips, it doesn't
+    /// rescale. The rules' maximum height (9) stays on screen from five tiles in from the back corner.
+    /// </summary>
+    public static BoardFit For(BoardTerrain terrain, ArtIndex art)
+    {
+        var plan = BoardPlan.Build(new BoardTerrain(terrain.Map, null), art);
+        return Of(plan.Min, plan.Max);
+    }
+
     /// <summary>The fit for a board covering <paramref name="min"/> to <paramref name="max"/> in art pixels.</summary>
     public static BoardFit Of(Vector2 min, Vector2 max)
     {

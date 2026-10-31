@@ -52,7 +52,7 @@ Everything after `--` on the Godot command line; all optional.
 | `--autostart=<game>[:<players>]` | Dev only: select that game, and start it once that many players (default 1) are connected and the scene is ready. First game only. Used by `tools/tv-e2e.sh`. |
 | `--res=<w>x<h>` | Window size. The UI is laid out at 1920×1080 and scales (`canvas_items`, `expand`). |
 | `--redline-demo[=<step>]` | Dev only: play a scripted REDLINE race into the TV without a server (see below). |
-| `--tactics-demo[=<map>[:changed]]` | Dev only: show a Tactics board without a server, with the art from the repository's `content/` (default `river_crossing`). `:changed` adds zones, a raised tile and the bridge's tiles sunk. With `--shots` it saves `…-tactics-battle-<map>.png`. |
+| `--tactics-demo[=<map>[:changed]]` | Dev only: show a Tactics board without a server, with the art from the repository's `content/` (default `river_crossing`). `:changed` adds zones, raised tiles and the bridge's tiles sunk. With `--shots` it saves `…-tactics-battle-<map>.png`. |
 | `--demo=campaign-lobby` | Dev only: show the lobby with a built-in campaign game selected, its campaign list and a roster with seated and away members (`Shell/CampaignLobbyDemo.cs`), without a server. With `--shots` it saves `001-lobby.png`. |
 
 Unknown arguments are reported as warnings and ignored.
@@ -173,7 +173,7 @@ tests; the Godot class only draws.
 quads, at twice the art's size on the 1080p layout. `Tactics.Presentation/Board` works everything out: `BoardProjection` is
 the only code that knows the projection, `BoardTerrain` is the map plus what the battle changed (a tile's `Centre` is where
 anything stands on it), `BoardPlan` is every face and sprite in painter's order (`BoardOrder.Key` is how later things sort
-in), `BoardFit` puts it on the screen and `MaterialLook` picks the sides that go with a map's materials. `BoardCanvas` only
+in), `BoardFit` puts it on the screen, fixed from the map file for the whole battle, and `MaterialLook` picks the sides that go with a map's materials. `BoardCanvas` only
 draws the plan. Zones, height changes and sunk tiles come from the host view's `battle.board`, which phones don't get.
 
 To run the TV against a real game without
