@@ -4,7 +4,7 @@
       "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "self" } },
       "effects": [ { "apply": "raging", "rounds": 3 },
                    { "if": { "when": { "roundAtLeast": 1 },
-                             "then": [ { "tempHp": { "dice": { "byLevel": { "1": "1d6", "5": "1d8", "9": "2d6" } }, "bonus": ["mod.con"] } } ] } } ],
+                             "then": [ { "tempHp": { "dice": { "byLevel": { "1": "1d6", "5": "2d8", "9": "4d8" } }, "bonus": ["mod.con"] } } ] } } ],
       "presentation": { "anim": "characters.ready", "fx": "fx.aura.fire" },
       "ai": { "tags": ["buff", "defend", "self"] },
       "flavor": "You enter a primal rage for 3 rounds: resistance to bludgeoning, piercing and slashing, +2 weapon damage (+3 from level 9) and advantage on STR saves." },

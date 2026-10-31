@@ -8,11 +8,11 @@
   "primaryResource": "ki",
   "unarmoredDefense": "wis",
   "features": {
-    "1": [ { "ability": "monk.unarmed_strike" }, { "ability": "monk.martial_arts" } ],
+    "1": [ { "attacks": 2 }, { "ability": "monk.unarmed_strike" }, { "ability": "monk.martial_arts" } ],
     "2": [ { "ability": "monk.flurry_of_blows" }, { "ability": "monk.step_of_the_wind" }, { "passive": "monk.unarmored_movement" } ],
     "3": [ { "ability": "monk.deflect_attacks" } ],
     "4": [ { "ability": "monk.patient_defense" } ],
-    "5": [ { "attacks": 2 }, { "ability": "monk.stunning_strike" } ],
+    "5": [ { "attacks": 3 }, { "ability": "monk.stunning_strike" } ],
     "6": [ { "passive": "monk.unarmored_movement_2" } ],
     "7": [ { "passive": "monk.evasion" } ],
     "8": [ { "passive": "monk.self_restoration" } ],

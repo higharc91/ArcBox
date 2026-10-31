@@ -5,7 +5,7 @@
                                          "nature"] },
   "startingKit": { "weapon": "longbow", "armor": "studded_leather", "shield": false,
                    "bag": [ { "item": "potion_of_healing", "count": 1 } ] },
-  "resources": { "focus": { "1": 2, "4": 3, "6": 4, "8": 5, "10": 6 } },
+  "resources": { "focus": { "1": 1, "3": 2, "4": 3, "6": 4, "8": 5 } },
   "primaryResource": "focus",
   "features": {
     "1": [ { "ability": "ranger.hunters_mark" }, { "passive": "ranger.hunters_mark_bonus" },

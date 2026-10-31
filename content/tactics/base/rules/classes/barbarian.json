@@ -4,7 +4,7 @@
   "skillChoices": { "count": 2, "from": ["athletics", "intimidation", "nature", "perception", "survival", "animal_handling"] },
   "startingKit": { "weapon": "greataxe", "armor": "", "shield": false,
                    "bag": [ { "item": "potion_of_healing", "count": 1 } ] },
-  "resources": { "rage": { "1": 2, "3": 3, "6": 4 } },
+  "resources": { "rage": { "1": 2, "3": 3, "5": 4, "6": 5 } },
   "primaryResource": "rage",
   "unarmoredDefense": "con",
   "features": {

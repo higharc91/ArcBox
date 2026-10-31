@@ -4,7 +4,7 @@
   "skillChoices": { "count": 2, "from": ["medicine", "religion", "insight", "history", "persuasion"] },
   "startingKit": { "weapon": "mace", "armor": "chain_shirt", "shield": true,
                    "bag": [ { "item": "potion_of_healing", "count": 1 } ] },
-  "resources": { "devotion": { "1": 4, "2": 6, "3": 8, "4": 10, "5": 11, "6": 12, "7": 13, "8": 14, "9": 15, "10": 16 } },
+  "resources": { "devotion": { "1": 4, "2": 5, "3": 5, "4": 7, "5": 8, "6": 11, "7": 13, "8": 14, "9": 15, "10": 16 } },
   "primaryResource": "devotion",
   "features": {
     "1": [ { "choose": 3, "from": ["cleric.sacred_flame", "cleric.toll_the_dead", "cleric.word_of_radiance", "cleric.resistance"] },

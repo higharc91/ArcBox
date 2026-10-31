@@ -1,6 +1,6 @@
 [
   { "id": "wolf", "name": "Wolf", "level": 2, "cr": "1/4", "xp": 50, "move": 5,
-    "scores": { "str": 12, "dex": 16, "con": 12, "int": 3, "wis": 12, "cha": 6 }, "hp": { "1": 14, "3": 18 }, "ac": 13,
+    "scores": { "str": 12, "dex": 16, "con": 12, "int": 3, "wis": 12, "cha": 6 }, "hp": { "1": 14, "3": 26 }, "ac": 13,
     "weapon": { "id": "bite", "damage": "1d8", "damageType": "piercing", "stat": "dex", "finesse": true, "ranged": false,
                 "range": 1, "reach": false, "tags": ["natural"] },
     "abilities": [], "passives": ["wolf.knockdown"], "skills": ["perception", "stealth"], "tags": ["beast"],

@@ -30,7 +30,7 @@
 {"$type":"EndTurn","actor":"goblin_archer.1"},
 {"$type":"Move","actor":"goblin_archer.2","path":[[12,2],[12,3],[12,4]]},
 {"$type":"EndTurn","actor":"goblin_archer.2"},
-{"$type":"Use","actor":"wizard","ability":"wizard.magic_missile","target":{"unit":"goblin.4"}},
+{"$type":"Use","actor":"wizard","ability":"wizard.magic_missile","target":{"unit":"goblin.3"}},
 {"$type":"EndTurn","actor":"wizard"},
 {"$type":"Use","actor":"cleric","ability":"cleric.bless","target":{"unit":"fighter"}},
 {"$type":"EndTurn","actor":"cleric"},

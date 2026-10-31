@@ -105,7 +105,7 @@
     { "id": "druid.moonbeam", "name": "Moonbeam", "tier": 2,
       "cost": { "action": 1, "resource": { "mana": 2 }, "concentration": true },
       "target": { "kind": "tile", "range": 6, "los": true, "area": { "shape": "burst", "size": 1 } },
-      "effects": [ { "zone": { "kind": "moonbeam", "area": { "shape": "burst", "size": 1 }, "rounds": 3,
+      "effects": [ { "zone": { "kind": "moonbeam", "area": { "shape": "burst", "size": 1 }, "rounds": 1,
                                "concentration": true,
                                "passives": [ { "id": "druid.moonbeam.enter", "hook": "onEnterTile", "target": "self",
                                                "effects": [ { "save": { "stat": "con", "halfOnSuccess": true },

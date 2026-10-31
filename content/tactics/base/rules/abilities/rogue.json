@@ -10,7 +10,7 @@
       "effects": [ { "apply": "disengaged", "rounds": 0 } ],
       "presentation": { "anim": "characters.dodge" },
       "ai": { "tags": ["escape"] } },
-    { "id": "rogue.cunning_hide", "name": "Cunning Action: Hide", "tier": 0, "cost": { "bonus": 1, "resource": { "edge": 1 } },
+    { "id": "rogue.cunning_hide", "name": "Cunning Action: Hide", "tier": 0, "cost": { "bonus": 1 },
       "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "self" } },
       "effects": [ { "apply": "hidden", "rounds": 1 } ],
       "presentation": { "anim": "characters.dodge", "fx": "fx.smoke.grey" },
@@ -141,7 +141,7 @@
   "passives": [
     { "id": "rogue.sneak_attack", "hook": "onAttackHit", "oncePerTurn": true,
       "when": { "all": [ { "weapon": ["finesse", "ranged"] }, { "any": [ { "advantage": true }, { "flanked": true } ] } ] },
-      "effects": [ { "damage": { "dice": { "byLevel": { "1": "1d6", "3": "2d6", "5": "3d6", "7": "4d6", "9": "5d6" } } } } ] },
+      "effects": [ { "damage": { "dice": { "byLevel": { "1": "3d6", "3": "6d6", "9": "9d6" } } } } ] },
     { "id": "rogue.evasion", "static": { "evasion": true } },
     { "id": "rogue.slippery_mind", "static": { "saveProficiencies": ["wis", "cha"] } },
     { "id": "shadow.death_from_the_shadows", "hook": "onAttackHit", "oncePerTurn": true, "when": { "advantage": true },

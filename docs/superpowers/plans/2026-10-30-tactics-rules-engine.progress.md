@@ -15,7 +15,7 @@ When every task is done, one whole-branch review runs.
 
 **Handing off:** read [`2026-10-30-tactics-rules-engine.handoff.md`](2026-10-30-tactics-rules-engine.handoff.md) first. It has the workflow, the notes for each remaining task, every ruling, and the exact agent instructions.
 
-**Status:** Tasks 18–21 were done in a local session (commits below; that session didn't update this tracker). Task 22 was done on 2026-10-30 from a cloud session that wrote into the user's local checkout and ran the tests there. The next task is **23** (balance pass).
+**Status:** All 23 tasks are done. Tasks 18–21 were done in a local session and Task 22 from a cloud session writing into the local checkout. Task 23 (balance pass) was done on 2026-10-30: three of its four targets are met, and the role-band target is not (52 of 60 values in band; see the [final report](../reports/2026-10-30-tactics-balance.md)). The whole-branch final review is next.
 
 **How to resume:**
 1. Find the first task below that isn't `done`.
@@ -49,7 +49,7 @@ When every task is done, one whole-branch review runs.
 | 20 | Caster subclasses (16, incl. sorcerer's), sapling and imp | done | `49e3c9d` | |
 | 21 | Monster roster, maps and sample encounters | done | `7480329` | |
 | 22 | Objectives, triggers and the showcase encounter | done | (this commit) | |
-| 23 | Balance pass and final report | not started | | |
+| 23 | Balance pass and final report | done | (this commit) | |
 | – | Whole-branch final review | not started | | |
 
 ## Scope change (2026-10-30)
@@ -171,7 +171,7 @@ These were decided during execution. Later tasks must follow them, alongside the
 - **Running it.** `dotnet run -c Release --project games/Tactics/Tactics.Sim -- --levels 1,3,5,7,10 --sizes 4,5,6 --parties 6 --seeds 20 --difficulty Normal --out <report>`. A full sweep of 1,800 battles takes about 2 minutes.
 - **Damage is HP actually lost.** Overkill and temporary HP soaked don't count as damage dealt; soaked temporary HP counts as the target's mitigation.
 - **Reactions** are left out of the ability-usage table.
-- **First report:** `docs/superpowers/reports/2026-10-30-tactics-balance-v0.md`.
+- **Reports:** first `docs/superpowers/reports/2026-10-30-tactics-balance-v0.md`, final `docs/superpowers/reports/2026-10-30-tactics-balance.md`.
 - **Intended levels.** Task 21 adds an optional intended `level` to encounters for the win-rate flag.
 
 **Companion AI and reactions (Task 15)**
@@ -226,7 +226,7 @@ These were decided during execution. Later tasks must follow them, alongside the
 - **Tags** are read from a unit's own sheet (`TrueSheet ?? Sheet`), so a transformed unit keeps them.
 - **Validation.** Trigger effect blocks get the full ability effect walk. Flags read must be set by some `setFlag` (objectives included), counters read must be added to, watched objective leaves must appear in the encounter's objectives (as written or via `setObjective`). A phase's tag must name exactly one placed or spawned monster that has the phase, and a trigger watching `hpBelow` on that tag must use the phase's percentage (`PhaseDef.HpBelow` does nothing else: phases come from triggers).
 - **AI.** `Scorer.IsObjective` adds the objective weight for `defeat:<tag>` targets (party side) and `protect:<tag>` units (other sides), on top of protected units. Party units are drawn toward `reach` zones.
-- **Showcase.** `warlord_bridge` (level 5): goblin boss `warlord` with a phase at 50% (`goblin_boss.warcry`, `boss_cruel`), archers spawning on the ridge at round 3, a bridge that collapses into the chasm once 2 party members are on it, and stepping stones to the south. Win: defeat the warlord or survive 8 rounds. `goblin_boss` has 70 HP from level 5 (21 before), so one Fireball can't skip its phase. Its golden replay (`warlord-bridge`, seed 11, level-5 party of 5) is recorded from `Ai.Plan` with `UPDATE_GOLDENS=1` (`Replay.RecordWithAi`); that seed plays every trigger, and the test requires it. A collapse drops every unit on a sunk tile, including two sharing one mid-walk.
+- **Showcase.** (Task 23 changed the numbers below: the warlord starts at (13, 5) with 240 HP, the bridge collapses at 1 party member, the win is survive 11 rounds, and the golden seed is 15.) `warlord_bridge` (level 5): goblin boss `warlord` with a phase at 50% (`goblin_boss.warcry`, `boss_cruel`), archers spawning on the ridge at round 3, a bridge that collapses into the chasm once 2 party members are on it, and stepping stones to the south. Win: defeat the warlord or survive 8 rounds. `goblin_boss` has 70 HP from level 5 (21 before), so one Fireball can't skip its phase. Its golden replay (`warlord-bridge`, seed 11, level-5 party of 5) is recorded from `Ai.Plan` with `UPDATE_GOLDENS=1` (`Replay.RecordWithAi`); that seed plays every trigger, and the test requires it. A collapse drops every unit on a sunk tile, including two sharing one mid-walk.
 
 ## Deferred minor findings (for the final review to triage)
 
@@ -249,3 +249,4 @@ These were decided during execution. Later tasks must follow them, alongside the
 | 8 | Fall/collision damage has no source (no `OnKill` for the pusher); `RoundStarted.Order` can list a unit that goes Out right after; golden fixture lacks `TurnSkipped`/`UnitOut`/`BattleEnded`; `Invariants.Enabled` is a public static; `.json` line endings not pinned |
 | 22 | `say` has no separate narration flag (narration is speaker `"narrator"`); the `warlord_bridge` collapse can drop two party members into the chasm at once, which Task 23 should check against the win-rate band (the AI party won all of seeds 1–60 with the 70 HP boss, in 3–9 rounds, so the encounter may be too easy); `ObjectiveState.Progress` is still unused |
 | 7 | Several `Hooks.Fire` calls in one step run in reverse order; passive and ability `UsesLeft` share keys; `AttackStep` doesn't check the attacker is alive at Resolve; several `WhenDef` leaves and limits untested; `Modifiers.For` recomputed often (performance) |
+| 23 | Unmet role bands (8 of 60: rogue 3, fighter 5, 7 and 10, paladin 7, barbarian 10, druid and wizard 10); mitigated counts attacks drawn and treats resistance as less mitigation; no encounter is built for level 10; 10 abilities are unused because of planner limits (empty-tile abilities, bonus-action Dash, extra actions, Twinned and Careful, Steady Aim, hook-only conditions); subclasses are not simulated; encounters do not scale with party size |

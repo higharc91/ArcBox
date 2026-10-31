@@ -136,7 +136,7 @@
 
     { "id": "wizard.fireball", "name": "Fireball", "tier": 3, "cost": { "action": 1, "resource": { "mana": 3 } },
       "target": { "kind": "tile", "range": 6, "los": true, "area": { "shape": "burst", "size": 2, "friendlyFire": true } },
-      "effects": [ { "save": { "stat": "dex" }, "halfOnSuccess": true, "onFail": [ { "damage": { "dice": "8d6", "type": "fire" } } ] } ],
+      "effects": [ { "save": { "stat": "dex" }, "halfOnSuccess": true, "onFail": [ { "damage": { "dice": "3d6", "type": "fire" } } ] } ],
       "presentation": { "anim": "characters.cast", "fx": "fx.explosion.fire", "projectile": "projectiles.fireball" },
       "ai": { "tags": ["damage", "area"] } },
     { "id": "wizard.lightning_bolt", "name": "Lightning Bolt", "tier": 3, "cost": { "action": 1, "resource": { "mana": 3 } },
@@ -176,7 +176,7 @@
       "target": { "kind": "tile", "range": 6, "los": true, "area": { "shape": "burst", "size": 2, "friendlyFire": true } },
       "effects": [ { "zone": { "kind": "ice", "area": { "shape": "burst", "size": 2 }, "rounds": 1, "difficult": true } },
                    { "save": { "stat": "dex" }, "halfOnSuccess": true,
-                     "onFail": [ { "damage": { "dice": "2d10", "type": "bludgeoning" } }, { "damage": { "dice": "4d6", "type": "cold" } } ] } ],
+                     "onFail": [ { "damage": { "dice": "1d6", "type": "bludgeoning" } }, { "damage": { "dice": "2d6", "type": "cold" } } ] } ],
       "presentation": { "anim": "characters.cast", "fx": "fx.ice.frost" },
       "ai": { "tags": ["damage", "area", "zone"] } },
     { "id": "wizard.greater_invisibility", "name": "Greater Invisibility", "tier": 4,
@@ -210,7 +210,7 @@
 
     { "id": "wizard.cone_of_cold", "name": "Cone of Cold", "tier": 5, "cost": { "action": 1, "resource": { "mana": 5 } },
       "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "cone", "size": 7, "friendlyFire": true } },
-      "effects": [ { "save": { "stat": "con" }, "halfOnSuccess": true, "onFail": [ { "damage": { "dice": "8d8", "type": "cold" } } ] } ],
+      "effects": [ { "save": { "stat": "con" }, "halfOnSuccess": true, "onFail": [ { "damage": { "dice": "3d8", "type": "cold" } } ] } ],
       "presentation": { "anim": "characters.cast", "fx": "fx.ice.frost" },
       "ai": { "tags": ["damage", "area"] } },
     { "id": "wizard.cloudkill", "name": "Cloudkill", "tier": 5, "cost": { "action": 1, "resource": { "mana": 5 }, "concentration": true },
