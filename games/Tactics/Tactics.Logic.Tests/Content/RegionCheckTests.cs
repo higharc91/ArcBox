@@ -187,6 +187,36 @@ public sealed class RegionCheckTests
         => Assert.Equal("The beat 'b' at (9, 9) can't be reached from the start.", Assert.Single(
             ErrorsOf(Region(Plain(8, 31, 3)) with { Beats = [new BeatSpot("b", new Tile(9, 9))] })).Message);
 
+    [Fact]
+    public void A_drop_of_3_levels_can_be_walked_down()
+        => Loads(Region(Plain(0, 7, 3)) with { Beats = [new BeatSpot("b", new Tile(9, 9))] });
+
+    [Fact]
+    public void A_drop_of_any_height_can_be_walked_down()
+        => Loads(Region(Plain(0, 7, 9)) with { Beats = [new BeatSpot("b", new Tile(9, 9))] });
+
+    [Fact]
+    public void The_climb_back_up_a_drop_cant_be_walked()
+        => Assert.Equal("The beat 'b' at (0, 0) can't be reached from the start.", Assert.Single(
+            ErrorsOf(Region(Plain(0, 7, 3)) with
+            {
+                Spawns = new RegionSpawns(new Tile(9, 9), new Tile(10, 9)),
+                Beats = [new BeatSpot("b", new Tile(0, 0))],
+            })).Message);
+
+    [Fact]
+    public void A_marker_reached_only_through_a_drop_can_be_reached()
+    {
+        // Columns 0 to 7 stand 3 levels up, and a wall down column 9 leaves column 8 as the foot of the drop and nothing else.
+        var def = Region([.. Plain(0, 7, 3), .. Enumerable.Range(0, 32).Select(y => (9, y, (byte)0, Grass, TileFlags.Impassable))]) with
+        {
+            Spawns = new RegionSpawns(new Tile(0, 0), new Tile(8, 0)),
+            Beats = [new BeatSpot("foot", new Tile(8, 31))],
+        };
+
+        Loads(def);
+    }
+
     /// <summary>Whole columns of plain ground at one height.</summary>
     private static (int X, int Y, byte Height, byte Material, TileFlags Flags)[] Plain(int firstColumn, int lastColumn, byte height)
         =>

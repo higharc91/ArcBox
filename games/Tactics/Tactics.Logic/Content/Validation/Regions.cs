@@ -6,9 +6,6 @@ namespace Tactics.Logic;
 /// <summary>The region checks.</summary>
 internal sealed partial class Validation
 {
-    /// <summary>The levels a step on foot can climb or drop: the rules' default Jump.</summary>
-    private const int StepLevels = 2;
-
     /// <summary>
     /// A region (<c>world/&lt;id&gt;.json</c>): its chapter, its size, the shape of its chunks and its edges' sides, so
     /// <see cref="WorldRegion.From"/> can't fail on it. What it says about the rest of the pack is checked by
@@ -224,7 +221,10 @@ internal sealed partial class Validation
             }
         }
 
-        /// <summary>Every tile that can be walked to from <paramref name="start"/>, stepping north, east, south or west.</summary>
+        /// <summary>
+        /// Every tile that can be walked to from <paramref name="start"/>, stepping north, east, south or west. As in
+        /// <see cref="Paths.StepCost"/>, a step climbs at most the rules' default Jump and can drop any height, so a cliff is one way.
+        /// </summary>
         private HashSet<Tile> Flood(Tile start)
         {
             var reached = new HashSet<Tile> { start };
@@ -233,7 +233,7 @@ internal sealed partial class Validation
             {
                 var height = region.TileAt(tile)!.Height;
                 foreach (var next in (ReadOnlySpan<Tile>)[new(tile.X, tile.Y - 1), new(tile.X + 1, tile.Y), new(tile.X, tile.Y + 1), new(tile.X - 1, tile.Y)])
-                    if (region.Walkable(next) && Math.Abs(region.TileAt(next)!.Height - height) <= StepLevels && reached.Add(next))
+                    if (region.Walkable(next) && region.TileAt(next)!.Height - height <= ClassDef.DefaultJump && reached.Add(next))
                         open.Push(next);
             }
             return reached;
