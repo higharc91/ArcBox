@@ -795,10 +795,20 @@
       "preset": "Algieba",
       "text": "She turns, and the marsh lights turn with her, and a path opens through the reeds where there was none."
     },
+    "Algieba.42bcce4d": {
+      "asset": "asset_yCCY7DqgyrcBxfzZkA1JTiyU",
+      "preset": "Algieba",
+      "text": "High on the dark ridge above the camp, a hooded figure stands and watches the fire, and does not come down."
+    },
     "Algieba.43ce6db5": {
       "asset": "asset_36r8LVq72emGgnvaCwhjuKMD",
       "preset": "Algieba",
       "text": "Nobody wanted it to come to this. It has anyway."
+    },
+    "Algieba.43d63920": {
+      "asset": "asset_qrBoKtbgokVQTwFCBDqo7DLJ",
+      "preset": "Algieba",
+      "text": "Oswin Hale: the name at the foot of half the letters in Corvin's archive, the Keeper who swore never to touch the fire. A century gone."
     },
     "Algieba.43ffd8c5": {
       "asset": "asset_HU5WD7RaD6ZJYyUjRD3AWzP8",
@@ -890,6 +900,11 @@
       "preset": "Algieba",
       "text": "Across the fire, a hobgoblin in a sun-painted sash sips from the same clay bowl, and pretends not to listen."
     },
+    "Algieba.5cf8de30": {
+      "asset": "asset_68CdDWByRCpCQYBind1B7N5R",
+      "preset": "Algieba",
+      "text": "The Warden Archive climbs the inside of a tower, shelf over shelf: three hundred years of the Vale, written where no fire was ever allowed."
+    },
     "Algieba.61c72bc1": {
       "asset": "asset_CT6EyJSEqYVX1E8FydczSi74",
       "preset": "Algieba",
@@ -965,6 +980,16 @@
       "preset": "Algieba",
       "text": "A goblin in a chieftain's coat three sizes too big walks out to the end of the bridge, and stops, and stares."
     },
+    "Algieba.783b96f6": {
+      "asset": "asset_ENCkL4i6m3ioTbAwMZUW9KbS",
+      "preset": "Algieba",
+      "text": "Then the black armour goes grey, and then to ash, and the ash falls with all the rest. The gate of Ember Keep stands open."
+    },
+    "Algieba.7a91a3c7": {
+      "asset": "asset_ZFoxJ6JpTtwouriS1taYGYd3",
+      "preset": "Algieba",
+      "text": "Ember Keep rises out of the ash, black against a sky the colour of a forge. Ash falls like snow, and the whole fortress glows red from within."
+    },
     "Algieba.7c9ec19a": {
       "asset": "asset_33qxDB24mxnsAUtgASCEKP4h",
       "preset": "Algieba",
@@ -1030,6 +1055,11 @@
       "preset": "Algieba",
       "text": "By nightfall the Host's fires on the ridge go out one by one, as the war band breaks up and drifts home to the hills."
     },
+    "Algieba.85e9d7ad": {
+      "asset": "asset_rxjMQbkRoTADzZ98Md3ATmMz",
+      "preset": "Algieba",
+      "text": "At the broken gate stands a knight in black armour, alone, as he has stood for a hundred years. His sword is planted point down before him."
+    },
     "Algieba.89ca2b61": {
       "asset": "asset_en8YkkqvqyJzh2o8YXiR8f3A",
       "preset": "Algieba",
@@ -1070,6 +1100,11 @@
       "preset": "Algieba",
       "text": "Steel comes out, and the Vale holds its breath."
     },
+    "Algieba.96fd6930": {
+      "asset": "asset_xvnB8qUnauUrds9c9nofiG3T",
+      "preset": "Algieba",
+      "text": "Halvard comes back through the gate slowly, like a man walking out of a long winter. He stops before you and bows."
+    },
     "Algieba.9761d678": {
       "asset": "asset_QCkkFdeJwZLAKjUJ9MrYUsV4",
       "preset": "Algieba",
@@ -1084,6 +1119,11 @@
       "asset": "asset_zRG9q57AkJA1JS1puTeXcU6K",
       "preset": "Algieba",
       "text": "Kobolds work the walls with picks under lamps of pale fire. Each wears the same stitched badge: a tower, and a closed eye."
+    },
+    "Algieba.9bf169d3": {
+      "asset": "asset_NgUF3YmFTPeGvvLmk9ip3wzY",
+      "preset": "Algieba",
+      "text": "When you kneel beside him, the black armour is empty. The gate of Ember Keep stands open."
     },
     "Algieba.9c1c2aa9": {
       "asset": "asset_KrNT1BXyPqusmyij9MEzmERB",
@@ -1235,6 +1275,11 @@
       "preset": "Algieba",
       "text": "The last bone Warden falls. Beyond the dais, an inner door bears a seal older than the Fall. It gives at last, onto a vault of shelves."
     },
+    "Algieba.bf45d08b": {
+      "asset": "asset_pzcBj4Eigu3LVt3UV9E1x5qQ",
+      "preset": "Algieba",
+      "text": "In the morning you look back up the pass. The window in Rime's tower is still lit: a single cold blue light."
+    },
     "Algieba.c0229661": {
       "asset": "asset_y669KCYA3SPjMXzzwy9CWvy2",
       "preset": "Algieba",
@@ -1270,6 +1315,11 @@
       "preset": "Algieba",
       "text": "He answers a heartbeat too fast, and he does not look at the granary roofs behind him."
     },
+    "Algieba.c828aa00": {
+      "asset": "asset_bKJpKawkyE3YkbtXDaSdSVb8",
+      "preset": "Algieba",
+      "text": "He goes in. For a long while there is only the falling ash and the red glow. Then a voice speaks from a high window, dry and very old."
+    },
     "Algieba.c8cffc03": {
       "asset": "asset_PRxfiMgpMh22QrWB6dkqSGeX",
       "preset": "Algieba",
@@ -1294,6 +1344,11 @@
       "asset": "asset_4dmSPqjV6vayZG8FcLMMswvN",
       "preset": "Algieba",
       "text": "The offering slides into the water. The pool hesitates, tastes it, and accepts. A new light blooms, wearing someone else's face."
+    },
+    "Algieba.cb61dce4": {
+      "asset": "asset_Jn8sSjoWaHW1HXR96zyHx5fH",
+      "preset": "Algieba",
+      "text": "He fights like a man who has practised every morning for a hundred years, because he has. The ash whirls around the blades."
     },
     "Algieba.cc5f4b43": {
       "asset": "asset_rsCUkCPvzpAoNk9FW7ZhUShp",
@@ -1360,6 +1415,11 @@
       "preset": "Algieba",
       "text": "Some days are lost. This is one of them."
     },
+    "Algieba.d7c85c3d": {
+      "asset": "asset_KEk8WCR7V6vPGL8j1Tmv5nVZ",
+      "preset": "Algieba",
+      "text": "At a desk beneath the only window sits a figure in a Keeper's robes, all bone and parchment, writing. He does not look up."
+    },
     "Algieba.d81f1e66": {
       "asset": "asset_cheDUmQtiLLyZCghwWBLZqer",
       "preset": "Algieba",
@@ -1384,6 +1444,11 @@
       "asset": "asset_XYLPg4GybBZbhQUYw2HUBfJ1",
       "preset": "Algieba",
       "text": "Someone in that hall is waiting. They have been waiting a very long time."
+    },
+    "Algieba.dc74fcf8": {
+      "asset": "asset_GCFKR2dKJH35yT1HXjwhHJeU",
+      "preset": "Algieba",
+      "text": "When at last he falls, he goes to one knee first, and sets his sword down carefully, the way a guest sets down a cup."
     },
     "Algieba.dd70fbe6": {
       "asset": "asset_5z1GdtN7GXCkx3cJBiLn8nFe",
@@ -1479,6 +1544,11 @@
       "asset": "asset_AfE3LGZ7GxHsbTMN2huggxBy",
       "preset": "Algieba",
       "text": "A friend falls, and the others hear it like a bell."
+    },
+    "Algieba.f62581b2": {
+      "asset": "asset_NmCEvEMU3cz6n6kBNRwE6FBv",
+      "preset": "Algieba",
+      "text": "Ivo Rime comes down from his tower at first light, a doctor's bag over his shoulder and nothing else."
     },
     "Algieba.f783e2fd": {
       "asset": "asset_yN1McBGAGetFuSy6AJt6XVQ2",
@@ -2870,6 +2940,11 @@
       "preset": "Enceladus",
       "text": "Hold still. It's worse if you move."
     },
+    "Enceladus.8e734340": {
+      "asset": "asset_LbE8tUjBLccrYTs2TUNFRqyF",
+      "preset": "Enceladus",
+      "text": "I heard her from the tower. Sound carries up here. Let me look at her. No, I'm not asking."
+    },
     "Enceladus.92ff92f0": {
       "asset": "asset_dM1x154szuoozBtodDKQTxxx",
       "preset": "Enceladus",
@@ -2930,6 +3005,16 @@
       "preset": "Enceladus",
       "text": "They walk, but they don't remember. I wanted to know where the remembering went. I think I know now."
     },
+    "Enceladus.d413d9c7": {
+      "asset": "asset_pW5DJDep9M9NtYKXbfH56jBe",
+      "preset": "Enceladus",
+      "text": "Am I? Well. Doctor's orders, then. I'll see you all down the mountain. After that, keep her warm."
+    },
+    "Enceladus.da900dc5": {
+      "asset": "asset_LNM7atpcAccaeYEqXjm7NZm7",
+      "preset": "Enceladus",
+      "text": "Pulse fast. Temperature high, for this cold. Nothing wrong with her that sleep and soup won't mend."
+    },
     "Enceladus.db2579af": {
       "asset": "asset_kabE2PnEBuGhCXDKQW5MGGF6",
       "preset": "Enceladus",
@@ -2939,6 +3024,11 @@
       "asset": "asset_ebLzhHQsWwazbQAyJHS6HJF4",
       "preset": "Enceladus",
       "text": "I could try. I won't. Whoever they were, the fire burned them away, and you're the only place they're still kept."
+    },
+    "Enceladus.e625767f": {
+      "asset": "asset_GNv8ajbjesJYjK7r3wRvu8ye",
+      "preset": "Enceladus",
+      "text": "The memory, though. That isn't going anywhere. Somebody very old put it in very deep."
     },
     "Enceladus.e6fe8b2b": {
       "asset": "asset_XEs4S6u2wDxe4W9w4AxqGTXt",
@@ -3835,6 +3925,11 @@
       "preset": "Leda",
       "text": "And I'm scared that when we get there, I'll know what's behind it."
     },
+    "Leda.0f9fe3c9": {
+      "asset": "asset_h48nRKXCpvohgRqGqdHwQYoq",
+      "preset": "Leda",
+      "text": "Can I sleep next to someone? Not because I'm scared. Because it's cold."
+    },
     "Leda.124b0049": {
       "asset": "asset_FFX1wErUg4PqSA3SUHshUNCH",
       "preset": "Leda",
@@ -3900,6 +3995,11 @@
       "preset": "Leda",
       "text": "Course I have. Mostly."
     },
+    "Leda.470824cb": {
+      "asset": "asset_AfE1F6yBFDGieDtE7RjcPVT8",
+      "preset": "Leda",
+      "text": "Halvard. You used to let me win at draughts. No. You used to let him win."
+    },
     "Leda.489a529a": {
       "asset": "asset_WZK6WbiGuoTz3ByEhyBxbfnZ",
       "preset": "Leda",
@@ -3924,6 +4024,21 @@
       "asset": "asset_6Yk5392g6srbRGajEaLQx9RW",
       "preset": "Leda",
       "text": "We'll leave it. I'll leave a scarf as well. One of them."
+    },
+    "Leda.66d19689": {
+      "asset": "asset_t6JPs7eeroE9CQs1mix53hNy",
+      "preset": "Leda",
+      "text": "He's still sitting with her. I know it. Not the fire way. Just the ordinary knowing way."
+    },
+    "Leda.6768acc1": {
+      "asset": "asset_2fsjtZQgUezWLbHPAz9tugvp",
+      "preset": "Leda",
+      "text": "He was so tired. He's still tired. I can feel it, like a cold in the next room."
+    },
+    "Leda.73a24aa2": {
+      "asset": "asset_cGGG5WF5iCRMGNjovVkFv8uZ",
+      "preset": "Leda",
+      "text": "You can stay, if you want. You're less sad than yesterday."
     },
     "Leda.74591c3b": {
       "asset": "asset_PoFhnkKkW6XcTT4Rrgh3iEeX",
@@ -4035,6 +4150,11 @@
       "preset": "Leda",
       "text": "They're not dead ones. They're alive ones. That's worse, isn't it?"
     },
+    "Leda.e428061e": {
+      "asset": "asset_7ncDeQWyyhGraHVJYCFW76TD",
+      "preset": "Leda",
+      "text": "When you go to the Keep, I'm coming. Don't say no. I know the way in. He does, so I do."
+    },
     "Leda.e92089e9": {
       "asset": "asset_v2z91UMoSxDLzrsSEgqwTbKg",
       "preset": "Leda",
@@ -4145,6 +4265,11 @@
       "preset": "Rasalgethi",
       "text": "So. It ends with tired hands, like everything else."
     },
+    "Rasalgethi.0a16df1d": {
+      "asset": "asset_hYTu75qvpBWHeQgBvfdbkPtP",
+      "preset": "Rasalgethi",
+      "text": "I am Oswin Hale. I remember every year of the Vale's history. You have no idea how heavy that is."
+    },
     "Rasalgethi.1aa6b5a9": {
       "asset": "asset_a63TSkW5PENTKSWxgrv32zu2",
       "preset": "Rasalgethi",
@@ -4159,6 +4284,11 @@
       "asset": "asset_g2rMj1GALqHvNgPjsLBAa8tM",
       "preset": "Rasalgethi",
       "text": "Every wound has a history. I will remember yours."
+    },
+    "Rasalgethi.57fabfe7": {
+      "asset": "asset_czuu2pQ5zKHHnCtJY2eVzaqN",
+      "preset": "Rasalgethi",
+      "text": "Halvard. You have held long enough. Longer than I had any right to ask. I release you."
     },
     "Rasalgethi.596fcb5d": {
       "asset": "asset_nUy5LQyB6AACZmMYterzGKoc",
@@ -4179,6 +4309,11 @@
       "asset": "asset_ZT82guNFMEyiX9UyGpz4NJi4",
       "preset": "Rasalgethi",
       "text": "I did warn you."
+    },
+    "Rasalgethi.9b7e5209": {
+      "asset": "asset_tJXrsBWMtyxiRKAy98dKwnnZ",
+      "preset": "Rasalgethi",
+      "text": "Come up. Bring the child. I would like to hear about the hand."
     },
     "Rasalgethi.a0322e5e": {
       "asset": "asset_9JghYC42wjweyaRYjjB5n4ce",
@@ -4525,10 +4660,30 @@
       "preset": "Schedar",
       "text": "The gate is yours. I held it as long as I was able."
     },
+    "Schedar.1b5ca7b8": {
+      "asset": "asset_QsxAxgP34SM4JBa1sW3rXWc3",
+      "preset": "Schedar",
+      "text": "You know that. Nobody knows that. Wait here, if you would be so kind."
+    },
+    "Schedar.1d56eca4": {
+      "asset": "asset_rYKSjDAgaNH7ZHCEtKLbXdFf",
+      "preset": "Schedar",
+      "text": "A message? I may carry a message. That is within my oath. What shall I tell him?"
+    },
+    "Schedar.1ea19067": {
+      "asset": "asset_myYKZjwjYGWAtr34DfbYUVgG",
+      "preset": "Schedar",
+      "text": "Well struck. Tell the Keeper I held. Tell him I held it as long as I could."
+    },
     "Schedar.2e1f36a5": {
       "asset": "asset_q6uiQwv3C3mVVh7joykxC5b7",
       "preset": "Schedar",
       "text": "Come, then. It has been a long while since anyone tried."
+    },
+    "Schedar.34e96e62": {
+      "asset": "asset_Bfmf9vy4aqYAYzRjBmM27i5J",
+      "preset": "Schedar",
+      "text": "You carry embers. I can feel them from here, like summer. I regret that I cannot let them pass."
     },
     "Schedar.42501191": {
       "asset": "asset_5m14m8FFwjTe8rbYSLPDsNJB",
@@ -4540,6 +4695,21 @@
       "preset": "Schedar",
       "text": "Forgive me."
     },
+    "Schedar.579bab14": {
+      "asset": "asset_VUiQ596PYCewqjwMoqpqcBb2",
+      "preset": "Schedar",
+      "text": "I love him. I have not forgiven him. Both are still true after a century, which surprises me."
+    },
+    "Schedar.57e05ba3": {
+      "asset": "asset_6543BATU3XaKjmvSq2UUQFYU",
+      "preset": "Schedar",
+      "text": "You understand, then. I cannot step aside. I can only be relieved."
+    },
+    "Schedar.5e89f992": {
+      "asset": "asset_WVSXABUiRpS7WBuc22sufcCo",
+      "preset": "Schedar",
+      "text": "Thank you. I had forgotten what it is to want to go somewhere. Be gentle with him. He has been alone a long time."
+    },
     "Schedar.5f3be127": {
       "asset": "asset_CdiseUnHFgf8YPXgViLbtU8Z",
       "preset": "Schedar",
@@ -4549,6 +4719,16 @@
       "asset": "asset_bzpXkU8uYGebi4im6trA2tjC",
       "preset": "Schedar",
       "text": "A fair stroke, I hope. I try to keep them clean."
+    },
+    "Schedar.69e7aead": {
+      "asset": "asset_FAszybhefCKT66VXvp7pP7Lz",
+      "preset": "Schedar",
+      "text": "Child. Where did you learn to say my name like that?"
+    },
+    "Schedar.6a7af5b8": {
+      "asset": "asset_tDdUQY2kWEomxET7SkLvNVeW",
+      "preset": "Schedar",
+      "text": "So it reached that far. I am sorry for it. The red came after the Fall. Before, it burned gold, and it was very beautiful, and it was a lie."
     },
     "Schedar.73a218ee": {
       "asset": "asset_jbKLBGbAiqQzuUrqo1pdYDoV",
@@ -4570,6 +4750,11 @@
       "preset": "Schedar",
       "text": "Well fought. I thank you. I thank you most sincerely."
     },
+    "Schedar.a80d9a35": {
+      "asset": "asset_URbmgFgMXXYjVXRwpwFpksEw",
+      "preset": "Schedar",
+      "text": "Choose, then. I would rather you turned back. If you will not, I shall try, very politely, to kill you."
+    },
     "Schedar.af0a3756": {
       "asset": "asset_rEbBa7gPwBfgkVCfxtHqSHon",
       "preset": "Schedar",
@@ -4580,15 +4765,40 @@
       "preset": "Schedar",
       "text": "Well moved. Truly well moved."
     },
+    "Schedar.c718f75b": {
+      "asset": "asset_PFTYT1x66ukDtqiphz2K9W4P",
+      "preset": "Schedar",
+      "text": "Then you honour me. On guard."
+    },
+    "Schedar.cdd08cbe": {
+      "asset": "asset_xvkxQrEQN4t5vcVfRZtXGi6w",
+      "preset": "Schedar",
+      "text": "Good evening. I am Halvard, captain of the Warden guard. I hold this gate for the Keeper."
+    },
     "Schedar.d1af1b76": {
       "asset": "asset_dcRgBdLLwcdUTfgJUxKogc9t",
       "preset": "Schedar",
       "text": "Go back down the mountain. Live long. Do not come again."
     },
+    "Schedar.d32bd05c": {
+      "asset": "asset_Eck4CrLNfYGDANnxRJA8Eva2",
+      "preset": "Schedar",
+      "text": "An oath is for keeping. I have kept mine longer than any oath was meant to be kept. That is not the same as it being right."
+    },
+    "Schedar.dc1c97b9": {
+      "asset": "asset_HbtvtAuwgmeJYT6FriEEgXNM",
+      "preset": "Schedar",
+      "text": "The hand. He has asked himself whose hand for a hundred years. Wait here, if you would be so kind."
+    },
     "Schedar.e9076bc4": {
       "asset": "asset_4o4NAxiw1zatY7gQahWYBdK1",
       "preset": "Schedar",
       "text": "Well met. I regret, sincerely, what comes next."
+    },
+    "Schedar.eb9fb73c": {
+      "asset": "asset_EZyw9T83swQpeGFQoLCGsyup",
+      "preset": "Schedar",
+      "text": "Because the Keeper bade me hold it until he released me, and he has not. He does not leave the archive. He speaks to no one but me."
     },
     "Sulafat.00fe2089": {
       "asset": "asset_fivr6zdJw6wy6tUrWMZjrNyj",
