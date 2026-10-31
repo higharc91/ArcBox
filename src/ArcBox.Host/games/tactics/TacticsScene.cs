@@ -407,7 +407,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _terrain = new BoardTerrain(_map, shown.Board);
             _planned = shown.Board;
             var plan = BoardPlan.Build(_terrain, _art);
-            _board.SetPlan(plan, BoardLighting.Of(plan, _map.Id, _art.Lighting), fit, root);
+            _board.SetPlan(plan, LitBoard.Build(plan, BoardLighting.Of(plan, _map.Id, _art.Lighting)), fit, root);
         }
         var frame = _player.Frame(_terrain);
         var units = UnitPlan.Build(shown, _terrain, _unitArt, fit, frame.Places, frame.Poses);

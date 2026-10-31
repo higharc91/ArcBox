@@ -79,6 +79,14 @@ public sealed record BoardLight(Tile Tile, Vector2 Ground, ImmutableArray<Vector
         return Math.Max(Curved(pool.Length()), Curved((point - Source).Length() / (reach * SphereReach)) * SphereShare);
     }
 
+    /// <summary>The box its light can't leave: round both the pool and the source.</summary>
+    public (Vector2 Min, Vector2 Max) Reach()
+    {
+        var size = Radius * PixelsPerTile;
+        var (pool, sphere) = (new Vector2(size, size / 2), new Vector2(size * SphereReach));
+        return (Vector2.Min(Ground - pool, Source - sphere), Vector2.Max(Ground + pool, Source + sphere));
+    }
+
     private static float Curved(float distance) => distance >= 1 ? 0 : MathF.Pow(1 - distance, FalloffPower);
 }
 
@@ -122,20 +130,29 @@ public sealed class BoardLighting
     /// </summary>
     public const float AmbientLift = 0.3f;
 
+    /// <summary>How far up a figure its light is read, as a share of its sprite: its middle, more or less.</summary>
+    public const float BodyHeight = 0.3f;
 
-    private const float Strength = 1.35f;   // the art tool's: a light's power at full is this much of its colour
+
+    /// <summary>The art tool's: a light's power at full is this much of its colour.</summary>
+    public const float Strength = 1.35f;
+
     private const float HaloAlpha = 0.55f;
     private const float HaloTilesToScale = 0.5f;
 
     private static readonly Rgb Daylight = new(1, 1, 1);
 
     private readonly float[] _energy;
+    private readonly float[] _mean;
+    private readonly LightGrid _grid;
 
     private BoardLighting(Rgb ambient, ImmutableArray<BoardLight> lights)
     {
         Ambient = ambient;
         Lights = lights;
         _energy = new float[lights.Length];
+        _mean = [.. lights.Select(l => l.Curve.Average() * l.Power * Strength)];
+        _grid = new LightGrid(lights);
         Step(0);
     }
 
@@ -149,18 +166,24 @@ public sealed class BoardLighting
     public bool Active => !Lights.IsEmpty || Ambient != Daylight;
 
     /// <summary>The lights of a plan, on the map <paramref name="mapId"/>.</summary>
-    public static BoardLighting Of(BoardPlan plan, string mapId, LightRecipe recipe)
+    public static BoardLighting Of(BoardPlan plan, string mapId, LightRecipe recipe) => Of([plan], mapId, recipe);
+
+    /// <summary>One lighting for several plans in the same art space, as a region's blocks are, so a pool doesn't stop at a block's edge.</summary>
+    public static BoardLighting Of(IEnumerable<BoardPlan> plans, string regionId, LightRecipe recipe)
     {
         var lights = new List<BoardLight>();
-        foreach (var item in plan.Items)
+        foreach (var item in plans.SelectMany(p => p.Items))
         {
             if (item is Sprite { Light: { } light } sprite)
                 AddProp(lights, sprite, light, recipe);
             else if (item is Face { Image.Glow: { } glow } face && Scatters(face, glow))
                 AddGlow(lights, face, glow, recipe);
         }
-        return new BoardLighting(AmbientOf(mapId, recipe), [.. lights]);
+        return new BoardLighting(AmbientOf(regionId, recipe), [.. lights]);
     }
+
+    /// <summary>Where a figure on <paramref name="feet"/>, in a sprite this tall, reads its light.</summary>
+    public static Vector2 BodyOf(Vector2 feet, float height) => new(feet.X, feet.Y - height * BodyHeight);
 
     /// <summary>A map has a room's light if a word of its id names one of the recipe's rooms: maps don't otherwise say what they are. The rest are open air.</summary>
     private static Rgb AmbientOf(string mapId, LightRecipe recipe)
@@ -185,7 +208,7 @@ public sealed class BoardLighting
         {
             ImmutableArray<Vector2> sources = [.. light.Frames.Select(frame => sprite.TopLeft + frame[i])];
             lights.Add(new BoardLight(sprite.Tile, ground, sources, sprite.Image.Fps, light.Radius, light.Colour, 1, Curve(light.Flicker, recipe),
-                PhaseOf(sprite.Tile, lights.Count), halo));
+                PhaseOf(sprite.Tile, i), halo));
         }
     }
 
@@ -201,13 +224,16 @@ public sealed class BoardLighting
     {
         var middle = face.Points.Aggregate(Vector2.Zero, Vector2.Add) / face.Points.Length;
         lights.Add(new BoardLight(face.Tile, middle, [middle - new Vector2(0, glow.Lift)], 0, glow.Radius, glow.Colour, glow.Power,
-            Curve(glow.Flicker, recipe), PhaseOf(face.Tile, lights.Count), null));
+            Curve(glow.Flicker, recipe), PhaseOf(face.Tile, (int)face.Facing), null));
     }
 
     private static ImmutableArray<float> Curve(string name, LightRecipe recipe) => recipe.Flicker.GetValueOrDefault(name, [1f]);
 
-    /// <summary>The art tool's stagger, by the tile, which the count of lights before it spreads further where tiles would agree.</summary>
-    private static int PhaseOf(Tile tile, int index) => tile.X * 5 + tile.Y * 3 + index * 7;
+    /// <summary>
+    /// The art tool's stagger, 5x + 3y, plus each eighth of the map, which it needs as a curve has only eight steps and lights that far apart
+    /// can land on the same one. By the tile alone, so a light that goes out doesn't shift the rest. <paramref name="own"/> parts lights on one tile.
+    /// </summary>
+    private static int PhaseOf(Tile tile, int own) => tile.X * 5 + tile.Y * 3 + (tile.X >> 3) + (tile.Y >> 3) * 3 + own;
 
     private static LightHalo? NearestHalo(Rgb colour, LightRecipe recipe)
     {
@@ -215,7 +241,7 @@ public sealed class BoardLighting
         return recipe.Halos.IsEmpty ? null : recipe.Halos.MinBy(h => Gap(h.Colour, colour));
     }
 
-    /// <summary>Moves every light's flicker on to a moment.</summary>
+    /// <summary>Moves every light's flicker on to a moment. The one thing here that isn't safe beside another thread's reads of "now".</summary>
     public void Step(double seconds)
     {
         for (var i = 0; i < _energy.Length; i++)
@@ -223,28 +249,42 @@ public sealed class BoardLighting
     }
 
     /// <summary>The light at a point, now.</summary>
-    public Rgb At(Vector2 point)
-    {
-        var (r, g, b) = (Ambient.R, Ambient.G, Ambient.B);
-        for (var i = 0; i < _energy.Length; i++)
-        {
-            var share = Lights[i].Falloff(point) * _energy[i];
-            r += share * Lights[i].Colour.R;
-            g += share * Lights[i].Colour.G;
-            b += share * Lights[i].Colour.B;
-        }
-        return Clamped(r, g, b);
-    }
+    public Rgb At(Vector2 point) => Sum(point, _energy);
 
     /// <summary>The light at a point kept with <see cref="Probe"/>, now.</summary>
-    public Rgb At(LightProbe probe)
+    public Rgb At(LightProbe probe) => Sum(probe, _energy);
+
+    /// <summary>The light at a point with every light at its mean, for art that's baked and doesn't flicker. <see cref="Step"/> doesn't touch it.</summary>
+    public Rgb MeanAt(Vector2 point) => Sum(point, _mean);
+
+    /// <summary>The light at a point kept with <see cref="Probe"/>, with every light at its mean.</summary>
+    public Rgb MeanAt(LightProbe probe) => Sum(probe, _mean);
+
+    /// <summary>The lights in reach of a point that won't move, for reading on every frame.</summary>
+    public LightProbe Probe(Vector2 point)
+    {
+        var near = _grid.Near(point);
+        var (lights, shares) = (new int[near.Length], new float[near.Length]);
+        var count = 0;
+        foreach (var light in near)
+        {
+            var share = Lights[light].Falloff(point);
+            if (share > 0)
+                (lights[count], shares[count++]) = (light, share);
+        }
+        return new LightProbe(lights[..count], shares[..count]);
+    }
+
+    /// <summary>How many lights a read of a point looks at: only those whose reach covers its part of the board.</summary>
+    public int NearAt(Vector2 point) => _grid.Near(point).Length;
+
+    private Rgb Sum(Vector2 point, float[] energy)
     {
         var (r, g, b) = (Ambient.R, Ambient.G, Ambient.B);
-        for (var i = 0; i < probe.Lights.Length; i++)
+        foreach (var i in _grid.Near(point))
         {
-            var light = probe.Lights[i];
-            var share = probe.Shares[i] * _energy[light];
-            var colour = Lights[light].Colour;
+            var share = Lights[i].Falloff(point) * energy[i];
+            var colour = Lights[i].Colour;
             r += share * colour.R;
             g += share * colour.G;
             b += share * colour.B;
@@ -252,11 +292,19 @@ public sealed class BoardLighting
         return Clamped(r, g, b);
     }
 
-    /// <summary>The lights in reach of a point that won't move, for reading on every frame.</summary>
-    public LightProbe Probe(Vector2 point)
+    private Rgb Sum(LightProbe probe, float[] energy)
     {
-        var reached = Enumerable.Range(0, Lights.Length).Select(i => (i, Share: Lights[i].Falloff(point))).Where(l => l.Share > 0).ToArray();
-        return new LightProbe([.. reached.Select(l => l.i)], [.. reached.Select(l => l.Share)]);
+        var (r, g, b) = (Ambient.R, Ambient.G, Ambient.B);
+        for (var i = 0; i < probe.Lights.Length; i++)
+        {
+            var light = probe.Lights[i];
+            var share = probe.Shares[i] * energy[light];
+            var colour = Lights[light].Colour;
+            r += share * colour.R;
+            g += share * colour.G;
+            b += share * colour.B;
+        }
+        return Clamped(r, g, b);
     }
 
     /// <summary>The light on a figure at a point, now: what's near it, and never less than <see cref="FigureFloor"/>.</summary>
@@ -285,6 +333,52 @@ public sealed class BoardLighting
     }
 
     private static Rgb Clamped(float r, float g, float b) => new(Math.Min(r, Ceiling), Math.Min(g, Ceiling), Math.Min(b, Ceiling));
+}
+
+/// <summary>
+/// Which lights can reach which part of the board: buckets a tile's width and height across art space, each holding the lights whose reach
+/// covers it, in the lights' order, so a read costs what's near it and not what the region has. Doesn't change once built.
+/// </summary>
+internal sealed class LightGrid
+{
+    private const float BucketWidth = BoardProjection.HalfWidth * 2;
+    private const float BucketHeight = BoardProjection.HalfHeight * 2;
+
+    private readonly int[]?[] _buckets = [];
+    private readonly Vector2 _origin;
+    private readonly int _columns;
+    private readonly int _rows;
+
+    public LightGrid(ImmutableArray<BoardLight> lights)
+    {
+        if (lights.IsEmpty)
+            return;
+        var reaches = lights.Select(l => l.Reach()).ToArray();
+        _origin = reaches.Select(r => r.Min).Aggregate(Vector2.Min);
+        var end = reaches.Select(r => r.Max).Aggregate(Vector2.Max);
+        _columns = Column(end.X) + 1;
+        _rows = Row(end.Y) + 1;
+
+        var lists = new List<int>?[_columns * _rows];
+        for (var i = 0; i < reaches.Length; i++)
+            for (var row = Row(reaches[i].Min.Y); row <= Row(reaches[i].Max.Y); row++)
+                for (var column = Column(reaches[i].Min.X); column <= Column(reaches[i].Max.X); column++)
+                    (lists[row * _columns + column] ??= []).Add(i);
+        _buckets = [.. lists.Select(l => l?.ToArray())];
+    }
+
+    /// <summary>The lights that might reach <paramref name="point"/>.</summary>
+    public ReadOnlySpan<int> Near(Vector2 point)
+    {
+        if (_columns == 0)
+            return [];
+        var (column, row) = (Column(point.X), Row(point.Y));
+        return column < 0 || row < 0 || column >= _columns || row >= _rows ? [] : _buckets[row * _columns + column];
+    }
+
+    private int Column(float x) => (int)MathF.Floor((x - _origin.X) / BucketWidth);
+
+    private int Row(float y) => (int)MathF.Floor((y - _origin.Y) / BucketHeight);
 }
 
 /// <summary>

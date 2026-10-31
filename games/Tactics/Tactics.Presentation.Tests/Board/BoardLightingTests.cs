@@ -45,6 +45,49 @@ public sealed class BoardLightingTests
 
     private static float Sum(Rgb c) => c.R + c.G + c.B;
 
+    /// <summary>Most of the finale's lights by their step: what the real data gives, and it's more than half of the curve's eight.</summary>
+    private const int LavaPhases = 5;
+
+    /// <summary>Each map's light, stated here by hand: a room of the recipe, or null for open air. A new map fails until it's looked at.</summary>
+    private static readonly Dictionary<string, string?> StatedLight = new()
+    {
+        ["crypt_hall"] = "crypt",
+        ["crystal_cave"] = "cave",
+        ["hall_of_the_flame"] = "hall",
+        ["forest_ruins"] = null,
+        ["keep_gate"] = null,
+        ["river_crossing"] = null,
+        ["warlord_bridge"] = null,
+    };
+
+    private static LitBoard LitOf(BattleMap map, BoardChanges? changes = null) => LitBoard.Build(Plan(map, changes), Lit(map, changes));
+
+    private static IEnumerable<LitFace> TopsOf(LitBoard lit, int x) => lit.Items.OfType<LitFace>().Where(f => f.Face.Kind == FaceKind.Top && f.Face.Tile.X == x);
+
+    private static BoardPlan Block(BoardPlan plan, int fromX, int toX)
+        => plan with { Items = [.. plan.Items.Where(i => i.Tile.X >= fromX && i.Tile.X < toX)] };
+
+    /// <summary>A world-sized map: 160 x 120, with 960 torches.</summary>
+    private static BattleMap Busy()
+    {
+        ImmutableArray<PropPlacement> props = [.. Enumerable.Range(0, 960).Select(i => Prop("torch", i % 40 * 4, i / 40 * 5))];
+        return Map("test", ["cobble/grey"], props, Flat(160, 120));
+    }
+
+    /// <summary>The recipe's sum, over every light, with no grid or probe.</summary>
+    private static Rgb ByHand(BoardLighting lighting, Vector2 point, Func<BoardLight, float> energy)
+    {
+        var (r, g, b) = (lighting.Ambient.R, lighting.Ambient.G, lighting.Ambient.B);
+        foreach (var light in lighting.Lights)
+        {
+            var share = light.Falloff(point) * energy(light);
+            r += share * light.Colour.R;
+            g += share * light.Colour.G;
+            b += share * light.Colour.B;
+        }
+        return new Rgb(Math.Min(r, BoardLighting.Ceiling), Math.Min(g, BoardLighting.Ceiling), Math.Min(b, BoardLighting.Ceiling));
+    }
+
     [Fact]
     public void A_brazier_lights_from_the_pixel_the_manifest_names_with_its_radius_colour_and_curve()
     {
@@ -256,8 +299,11 @@ public sealed class BoardLightingTests
     {
         var map = Map("test", ["cobble/grey"], [Prop("campfire", 0, 0)], Flat(1, 1));
         var light = Assert.Single(Lit(map).Lights);
+        var at = 1.3 * BoardLight.CurveStepsPerSecond + light.Phase;
+        var step = (int)Math.Floor(at);
+        var (from, to) = (light.Curve[step % light.Curve.Length], light.Curve[(step + 1) % light.Curve.Length]);
 
-        Assert.Equal(light.Flicker(1.3), light.Flicker(1.3));
+        Assert.Equal(from + (to - from) * (float)(at - step), Assert.Single(Lit(map).Lights).Flicker(1.3), 4);
         Assert.Equal(light.Flicker(0.25), light.Flicker(0.25 + light.Curve.Length / BoardLight.CurveStepsPerSecond), 3);
         var seen = Enumerable.Range(0, 800).Select(i => light.Flicker(i / 100.0)).ToArray();
         Assert.Equal(light.Curve.Max(), seen.Max(), 2);
@@ -278,12 +324,14 @@ public sealed class BoardLightingTests
     [Theory]
     [InlineData("crypt_hall")]
     [InlineData("crystal_cave")]
+    [InlineData("hall_of_the_flame")]
     public void Lights_of_a_room_dont_pulse_in_step(string id)
     {
-        var flames = Lit(Pack.Map(id)).Lights;
+        var flames = Lit(Pack.Map(id)).Lights.Where(l => l.Halo is not null).ToArray();
 
         Assert.True(flames.Length > 1);
-        Assert.True(flames.Select(l => l.Phase).Distinct().Count() == flames.Length, string.Join(",", flames.Select(l => l.Phase)));
+        var steps = flames.Select(l => l.Phase % l.Curve.Length).ToArray();
+        Assert.True(steps.Distinct().Count() == flames.Length, string.Join(",", steps));   // where each is in its curve: the phase itself wraps
     }
 
     [Fact]
@@ -291,7 +339,320 @@ public sealed class BoardLightingTests
     {
         var lava = Lit(Pack.Map("hall_of_the_flame")).Lights.Where(l => l.Halo is null).ToArray();
 
-        Assert.True(lava.Select(l => l.Phase).Distinct().Count() >= 4);
+        var steps = lava.Select(l => l.Phase % l.Curve.Length).ToArray();
+        Assert.True(steps.Distinct().Count() >= LavaPhases, string.Join(",", steps));
+    }
+
+    [Fact]
+    public void A_light_that_goes_out_doesnt_shift_the_phase_of_the_rest()
+    {
+        var map = Map("test", ["cobble/grey", "lava/molten"], [Prop("brazier", 3, 0)], "0:1:0 0:0:0 0:0:0 0:0:0");
+
+        var after = Lit(map, new BoardChanges([], [], [new Tile(0, 0)]));
+
+        Assert.Equal(Lit(map).Lights.Single(l => l.Halo is not null).Phase, after.Lights.Single(l => l.Halo is not null).Phase);
+    }
+
+    [Fact]
+    public void Two_lights_of_one_prop_dont_pulse_in_step()
+    {
+        var map = Map("test", ["cobble/grey"], [Prop("desk", 0, 0)], Flat(1, 1));
+
+        Assert.Equal(2, Lit(map).Lights.Select(l => l.Phase % l.Curve.Length).Distinct().Count());
+    }
+
+    [Fact]
+    public void Lights_are_out_of_step_in_time_and_not_only_on_paper()
+    {
+        var lights = Lit(Pack.Map("crypt_hall")).Lights;
+
+        var spread = Enumerable.Range(0, 80).Max(i => lights.Max(l => l.Flicker(i / 10.0)) - lights.Min(l => l.Flicker(i / 10.0)));
+
+        Assert.True(spread > 0.1f, $"{spread}");
+    }
+
+    [Fact]
+    public void Every_map_says_what_light_it_has_so_a_new_one_cant_slip_in_by_a_word_in_its_name()
+    {
+        var maps = Directory.GetFiles(Path.Combine(Pack.Root, "rules", "maps"), "*.json").Select(f => Path.GetFileNameWithoutExtension(f)!).ToArray();
+        var rooms = Pack.Manifest("dungeon").RootElement.GetProperty("lighting").GetProperty("ambient");
+
+        Assert.Equal(StatedLight.Keys.Order(), maps.Order());
+        foreach (var id in maps)
+        {
+            float Lifted(JsonElement a, int c) => a[c].GetSingle() + (1 - a[c].GetSingle()) * BoardLighting.AmbientLift;
+            var stated = StatedLight[id] is { } room
+                ? new Rgb(Lifted(rooms.GetProperty(room), 0), Lifted(rooms.GetProperty(room), 1), Lifted(rooms.GetProperty(room), 2))
+                : new Rgb(1, 1, 1);
+
+            Assert.Equal(stated, Lit(Pack.Map(id)).Ambient);
+        }
+    }
+
+    [Fact]
+    public void A_probe_through_the_grid_is_the_sum_of_every_light_by_hand()
+    {
+        var lighting = Lit(Busy());
+        lighting.Step(0.7);
+        var random = new Random(8);
+
+        for (var i = 0; i < 2000; i++)
+        {
+            var point = new Vector2(random.NextSingle() * 16000 - 8000, random.NextSingle() * 9000 - 800);
+            var byHand = ByHand(lighting, point, l => l.Flicker(0.7) * l.Power * BoardLighting.Strength);
+
+            Assert.Equal(byHand, lighting.At(lighting.Probe(point)));
+            Assert.Equal(byHand, lighting.At(point));
+        }
+    }
+
+    [Theory]
+    [InlineData("crypt_hall")]
+    [InlineData("crystal_cave")]
+    [InlineData("hall_of_the_flame")]
+    public void The_grid_misses_nothing_on_the_real_rooms_up_to_their_edges(string id)
+    {
+        var lighting = Lit(Pack.Map(id));
+        lighting.Step(0.2);
+        var points = lighting.Lights.SelectMany(l => new[]
+        {
+            l.Ground, l.Source, l.Ground + new Vector2(l.Radius * BoardLight.PixelsPerTile - 0.5f, 0), l.Ground - new Vector2(l.Radius * BoardLight.PixelsPerTile - 0.5f, 0),
+            l.Ground + new Vector2(0, l.Radius * BoardLight.PixelsPerTile / 2 - 0.5f), l.Source - new Vector2(0, l.Radius * BoardLight.PixelsPerTile * 0.8f - 0.5f),
+        });
+
+        foreach (var point in points)
+            Assert.Equal(ByHand(lighting, point, l => l.Flicker(0.2) * l.Power * BoardLighting.Strength), lighting.At(lighting.Probe(point)));
+    }
+
+    [Fact]
+    public void A_read_looks_only_at_the_lights_near_it_however_many_the_region_has()
+    {
+        var lighting = Lit(Busy());
+
+        Assert.Equal(960, lighting.Lights.Length);
+        Assert.True(lighting.NearAt(lighting.Lights[480].Ground) < 40, $"{lighting.NearAt(lighting.Lights[480].Ground)}");
+        Assert.Equal(0, lighting.NearAt(new Vector2(-90000, -90000)));
+    }
+
+    [Fact]
+    public void Baking_reads_each_light_at_its_mean_whatever_the_flicker_is_doing()
+    {
+        var lighting = Lit(Pack.Map("hall_of_the_flame"));
+        var point = lighting.Lights[3].Ground + new Vector2(12, 6);
+        var mean = ByHand(lighting, point, l => l.Curve.Average() * l.Power * BoardLighting.Strength);
+
+        foreach (var seconds in new[] { 0.0, 0.31, 1.7 })
+        {
+            lighting.Step(seconds);
+            Assert.Equal(mean, lighting.MeanAt(point));
+            Assert.Equal(mean, lighting.MeanAt(lighting.Probe(point)));
+        }
+        lighting.Step(0);
+        Assert.NotEqual(mean, lighting.At(point));
+    }
+
+    [Fact]
+    public void One_lighting_runs_across_blocks_so_a_pool_doesnt_stop_at_an_edge()
+    {
+        var map = Map("test", ["cobble/grey"], [Prop("campfire", 3, 0)], Flat(8, 1));
+        var plan = Plan(map);
+        var (left, right) = (Block(plan, 0, 4), Block(plan, 4, 8));
+        var lighting = BoardLighting.Of([left, right], map.Id, Pack.Art.Lighting);
+        var nearEdge = new BoardTerrain(map, null).Centre(new Tile(4, 0));
+
+        Assert.Single(lighting.Lights);
+        Assert.True(lighting.Probe(nearEdge).Count > 0);
+        Assert.Contains(LitBoard.Build(right, lighting).Items.OfType<LitFace>(), f => f.Face.Tile == new Tile(4, 0) && f.Art && f.Face.Grid == false && f.Probes.Length == 4);
+    }
+
+    [Fact]
+    public void Blocks_can_be_built_on_other_threads_at_once()
+    {
+        var map = Pack.Map("hall_of_the_flame");
+        var plan = Plan(map);
+        var lighting = BoardLighting.Of([plan], map.Id, Pack.Art.Lighting);
+        var one = LitBoard.Build(plan, lighting);
+
+        var many = Enumerable.Range(0, 8).AsParallel().Select(_ => LitBoard.Build(plan, lighting).Items.Length).ToArray();
+
+        Assert.All(many, count => Assert.Equal(one.Items.Length, count));
+    }
+
+    [Fact]
+    public void A_top_in_reach_is_cut_into_cells_and_one_out_of_reach_isnt()
+    {
+        var map = Map("test", ["cobble/grey"], [Prop("torch", 0, 0)], Flat(14, 1));
+        var lit = LitOf(map);
+
+        Assert.Equal(4, TopsOf(lit, 1).Count(f => f.Art));
+        Assert.Equal(1, TopsOf(lit, 13).Count(f => f.Art));
+    }
+
+    [Fact]
+    public void Only_a_tops_cells_are_cut_as_sides_have_one_value_at_each_corner()
+    {
+        var map = Map("test", ["cobble/grey"], [Prop("torch", 0, 0)], Flat(2, 1));
+
+        Assert.All(LitOf(map).Items.OfType<LitFace>().Where(f => f.Face.Kind == FaceKind.Side), f => Assert.Equal(4, f.Face.Points.Length));
+        Assert.Equal(Plan(map).Items.OfType<Face>().Count(f => f.Kind == FaceKind.Side), LitOf(map).Items.OfType<LitFace>().Count(f => f.Face.Kind == FaceKind.Side));
+    }
+
+    [Fact]
+    public void A_face_the_light_leaves_out_has_no_probes_even_in_reach()
+    {
+        var map = Map("test", ["cobble/grey"], [Prop("brazier", 0, 0)], Flat(2, 1));
+        var changes = new BoardChanges([new ZoneView(1, "grand_sigil", [new Tile(0, 0)])], [], []);
+
+        var tint = Assert.Single(LitOf(map, changes).Items.OfType<LitFace>(), f => f.Face.Kind == FaceKind.Tint);
+
+        Assert.Empty(tint.Probes);
+        Assert.Equal(tint.Face.Tint, tint.ColourAt(0, Lit(map, changes)));
+    }
+
+    [Fact]
+    public void A_zone_sprite_reads_no_light_and_a_prop_reads_it_at_its_middle()
+    {
+        var map = Map("test", ["cobble/grey"], [Prop("crate", 0, 0)], Flat(2, 1));
+        var changes = new BoardChanges([new ZoneView(1, "fire", [new Tile(1, 0)])], [], []);
+        var lit = LitOf(map, changes);
+
+        Assert.All(lit.Items.OfType<LitSprite>().Where(s => !s.Sprite.Lit), s => Assert.Null(s.Probe));
+
+        var torchMap = Map("test", ["cobble/grey"], [Prop("torch", 0, 0), Prop("crate", 1, 0)], Flat(2, 1));
+        var lighting = Lit(torchMap);
+        lighting.Step(0);
+        var crate = LitBoard.Build(Plan(torchMap), lighting).Items.OfType<LitSprite>().Single(s => s.Sprite.Tile == new Tile(1, 0));
+        Assert.Equal(lighting.At(crate.Sprite.TopLeft + crate.Sprite.Size / 2), crate.LightNow(lighting));
+    }
+
+    [Fact]
+    public void A_corner_is_the_faces_own_shade_times_the_light_there()
+    {
+        var map = Map("test", ["cobble/grey"], [Prop("torch", 0, 0)], Flat(2, 1));
+        var lighting = Lit(map);
+        lighting.Step(0);
+        var face = LitBoard.Build(Plan(map), lighting).Items.OfType<LitFace>().First(f => f.Art && f.Face.Kind == FaceKind.Top && f.Face.Tile == new Tile(0, 0));
+
+        for (var corner = 0; corner < 4; corner++)
+            Assert.Equal(face.Face.Tint.Times(lighting.At(face.Face.Points[corner])), face.ColourAt(corner, lighting));
+    }
+
+    [Fact]
+    public void A_faces_tint_is_its_fill_or_white_at_its_shade()
+    {
+        var map = Map("test", ["cobble/grey"], [], Flat(1, 1));
+        var top = Plan(map).Items.OfType<Face>().Single(f => f.Kind == FaceKind.Top);
+
+        Assert.Equal(new Rgb(0.5f, 0.5f, 0.5f), (top with { Fill = null, Shade = 0.5f }).Tint);
+        Assert.Equal(new Rgb(0.1f, 0.25f, 0.5f), (top with { Fill = new Rgb(0.2f, 0.5f, 1), Shade = 0.5f }).Tint);
+    }
+
+    [Fact]
+    public void Colours_multiply_channel_by_channel()
+    {
+        Assert.Equal(new Rgb(0.5f, 0.25f, 2), new Rgb(1, 0.5f, 4).Times(new Rgb(0.5f, 0.5f, 0.5f)));
+    }
+
+    [Fact]
+    public void A_figure_reads_the_light_a_share_of_the_way_up_its_sprite()
+    {
+        Assert.Equal(new Vector2(10, 100 - 40 * BoardLighting.BodyHeight), BoardLighting.BodyOf(new Vector2(10, 100), 40));
+    }
+
+    [Fact]
+    public void A_glowing_top_in_reach_draws_its_glow_once_after_its_cells()
+    {
+        var map = Map("test", ["lava/molten"], [], Flat(2, 2));
+        var faces = LitOf(map).Items.OfType<LitFace>().Where(f => f.Face.Kind == FaceKind.Top && f.Face.Tile == new Tile(0, 0)).ToArray();
+
+        Assert.Equal(5, faces.Length);
+        Assert.All(faces[..4], f => Assert.True(f.Art && !f.Glow && f.Probes.Length == 4));
+        Assert.False(faces[4].Art);
+        Assert.True(faces[4].Glow);
+        Assert.Empty(faces[4].Probes);
+        Assert.True(faces[4].Face.Grid);
+    }
+
+    [Fact]
+    public void A_plain_top_in_reach_keeps_its_outline_over_all_its_cells()
+    {
+        var map = Map("test", ["cobble/grey"], [Prop("torch", 0, 0)], Flat(1, 1));
+
+        var last = LitOf(map).Items.OfType<LitFace>().Last(f => f.Face.Kind == FaceKind.Top);
+
+        Assert.False(last.Art);
+        Assert.False(last.Glow);
+        Assert.True(last.Face.Grid);
+        Assert.Equal(Plan(map).Items.OfType<Face>().Single(f => f.Kind == FaceKind.Top).Points, last.Face.Points);
+    }
+
+    [Fact]
+    public void A_top_with_no_outline_or_glow_has_nothing_to_add_after_its_cells()
+    {
+        var map = Map("test", ["cobble/grey"], [Prop("torch", 0, 0)], Flat(1, 1, "0:0:4"));   // impassable: no grid
+
+        Assert.Equal(4, LitOf(map).Items.OfType<LitFace>().Count(f => f.Face.Kind == FaceKind.Top));
+    }
+
+    [Fact]
+    public void A_lit_board_keeps_the_plans_order()
+    {
+        var lit = LitOf(Pack.Map("hall_of_the_flame"));
+
+        Assert.Equal(lit.Items.Select(i => i.Order).Order(), lit.Items.Select(i => i.Order));
+    }
+
+    [Fact]
+    public void In_the_open_air_a_board_draws_as_it_is_with_nothing_to_read()
+    {
+        var map = Pack.Map("river_crossing");
+
+        var lit = LitOf(map);
+
+        Assert.Equal(Plan(map).Items.Length, lit.Items.Length);
+        Assert.All(lit.Items.OfType<LitFace>(), f => Assert.Empty(f.Probes));
+        Assert.All(lit.Items.OfType<LitSprite>(), s => Assert.Null(s.Probe));
+        Assert.All(lit.Items.OfType<LitSprite>(), s => Assert.Equal(new Rgb(1, 1, 1), s.LightNow(lit.Lighting)));
+    }
+
+    [Fact]
+    public void A_prop_with_a_light_glows_and_one_without_doesnt()
+    {
+        var map = Map("test", ["cobble/grey"], [Prop("brazier", 0, 0), Prop("crate", 1, 0)], Flat(2, 1));
+
+        var sprites = LitOf(map).Items.OfType<LitSprite>().ToArray();
+
+        Assert.True(sprites.Single(s => s.Sprite.Tile == new Tile(0, 0)).Glow);
+        Assert.False(sprites.Single(s => s.Sprite.Tile == new Tile(1, 0)).Glow);
+    }
+
+    [Fact]
+    public void A_prop_on_a_sunk_tile_goes_out_where_the_maps_chasm_is_lava()
+    {
+        var map = Map("test", ["cobble/grey", "lava/molten"], [Prop("brazier", 0, 0)], "0:0:0 0:1:16");   // the first deep tile is lava
+        var sunk = new BoardChanges([], [], [new Tile(0, 0)]);
+        Assert.False(new BoardTerrain(map, sunk).Look(new Tile(0, 0)).Void);
+
+        Assert.Null(Plan(map, sunk).Items.OfType<Sprite>().Single().Light);
+        Assert.DoesNotContain(Lit(map, sunk).Lights, l => l.Halo is not null);
+    }
+
+    [Fact]
+    public void On_the_finale_itself_a_prop_that_sinks_goes_out()
+    {
+        var map = Pack.Map("hall_of_the_flame");
+        var brazier = map.Props.First(p => p.Id == "brazier").At;
+        var sunk = new BoardChanges([], [], [brazier]);
+
+        Assert.Null(Plan(map, sunk).Items.OfType<Sprite>().Single(s => s.Tile == brazier && s.Image.Path.Contains("brazier")).Light);
+    }
+
+    [Fact]
+    public void A_prop_on_a_map_void_it_was_built_on_keeps_its_light()
+    {
+        var map = Map("test", ["void/deep"], [Prop("will_o_wisp", 0, 0)], Flat(1, 1, "0:0:16"));
+
+        Assert.NotNull(Plan(map).Items.OfType<Sprite>().Single().Light);
     }
 
     [Fact]

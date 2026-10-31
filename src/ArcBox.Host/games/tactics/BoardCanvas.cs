@@ -11,10 +11,10 @@ namespace ArcBox.Host.Games.Tactics;
 /// and the beat's effects. Everything it draws is worked out in <c>Tactics.Presentation.Board</c>. The textures live in the downloaded
 /// pack, outside <c>res://</c>, so they're loaded from files, once each.
 /// <para>
-/// Light is in the vertex colours, read from <see cref="BoardLighting"/>: art x light, as the pack's recipe has it. So it costs no extra
-/// pass and no shader, nothing is capped by how many lights reach one canvas item, and what's drawn unmodulated, like rings, is simply
-/// unlit. Why not Light2D is in docs/tv-host.md. What glows by itself is drawn again, unlit, in its
-/// place in the painter's order, so what stands in front of it still hides it.
+/// Light is in the vertex colours, read from <see cref="BoardLighting"/>: art x light, as the pack's recipe has it, and what light does to
+/// each item is worked out in <see cref="LitBoard"/>. So there's no extra pass and no shader, and what's drawn unmodulated, like rings, is
+/// simply unlit. Why not Light2D is in docs/tv-host.md. What glows by itself is drawn again, unlit, in its place in the painter's order,
+/// so what stands in front of it still hides it.
 /// </para>
 /// </summary>
 public partial class BoardCanvas : Node2D
@@ -22,13 +22,10 @@ public partial class BoardCanvas : Node2D
     /// <summary>How often animated art redraws: fast enough for its fastest strip (10 fps).</summary>
     private const double TicksPerSecond = 20;
 
-    private sealed record DrawnFace(Face Face, Vector2[] Points, Vector2[]? Outline, Vector2[] Uvs, Vector2[] FrameUvs, Color Colour, Color[] Colours,
-        Texture2D? Texture, Texture2D? Glow, LightProbe[]? Probes);
+    private sealed record DrawnFace(LitFace Lit, Vector2[] Points, Vector2[]? Outline, Vector2[] Uvs, Vector2[] FrameUvs, Color[] Colours,
+        Texture2D? Texture, Texture2D? Glow);
 
-    private sealed record DrawnSprite(Sprite Sprite, Rect2 Target, Vector2 Size, Texture2D? Texture, Texture2D? Glow, LightProbe? Probe);
-
-    /// <summary>How far up a figure its light is read, as a share of its sprite: its middle, more or less.</summary>
-    private const float BodyHeight = 0.3f;
+    private sealed record DrawnSprite(LitSprite Lit, Rect2 Target, Vector2 Size, Texture2D? Texture, Texture2D? Glow);
 
     private const int RingPoints = 28;
     private const float RingWidth = 1.5f;
@@ -72,26 +69,17 @@ public partial class BoardCanvas : Node2D
         AddChild(_over);
     }
 
-    /// <summary>Shows <paramref name="plan"/> in <paramref name="lighting"/>, loading its art from <paramref name="packRoot"/>, placed by <paramref name="fit"/>.</summary>
-    public void SetPlan(BoardPlan plan, BoardLighting lighting, BoardFit fit, string packRoot)
+    /// <summary>Shows <paramref name="plan"/> in its light <paramref name="lit"/>, loading its art from <paramref name="packRoot"/>, placed by <paramref name="fit"/>.</summary>
+    public void SetPlan(BoardPlan plan, LitBoard lit, BoardFit fit, string packRoot)
     {
         _root = packRoot;
-        _lighting = lighting.Active ? lighting : null;
+        _lighting = lit.Lighting.Active ? lit.Lighting : null;
         _items.Clear();
         _orders.Clear();
-        foreach (var item in plan.Items)
+        foreach (var item in lit.Items)
         {
-            switch (item)
-            {
-                case Face face:
-                    AddFace(face);
-                    break;
-                case Sprite sprite:
-                    Add(Prepare(sprite), sprite.Order);
-                    break;
-                default:
-                    throw new InvalidOperationException($"Unknown board item {item.GetType().Name}.");
-            }
+            _items.Add(item is LitFace face ? Prepare(face) : Prepare((LitSprite)item));
+            _orders.Add(item.Order);
         }
         _halos.Show(_lighting?.Halos(_clock) ?? []);
         _animated = plan.Animated;
@@ -100,31 +88,6 @@ public partial class BoardCanvas : Node2D
         Scale = new Vector2(fit.Scale, fit.Scale);
         Merge();
     }
-
-    private void Add(object drawn, long order)
-    {
-        _items.Add(drawn);
-        _orders.Add(order);
-    }
-
-    /// <summary>A top that light reaches is drawn as cells, so a pool can peak inside a tile; its outline goes last, over all of them.</summary>
-    private void AddFace(Face face)
-    {
-        if (_lighting is not { } lighting || face.Kind != FaceKind.Top || !face.Lit || !Reached(face, lighting))
-        {
-            Add(Prepare(face, face.Grid), face.Order);
-            return;
-        }
-        var cells = face.Cells();
-        for (var i = 0; i < cells.Length; i++)
-        {
-            var last = i == cells.Length - 1;
-            Add(Prepare(cells[i], face.Grid && last, last ? face.Points : null), face.Order);
-        }
-    }
-
-    private static bool Reached(Face face, BoardLighting lighting)
-        => face.Points.Append((face.Points[0] + face.Points[2]) / 2).Any(p => lighting.Probe(p).Count > 0);
 
     /// <summary>Shows <paramref name="units"/> over the current plan, which stays as it is, so this can run on every frame.</summary>
     public void SetUnits(ImmutableArray<BoardUnit> units, UnitArt art)
@@ -188,18 +151,21 @@ public partial class BoardCanvas : Node2D
     private void DrawFace(DrawnFace drawn)
     {
         LightUp(drawn);
-        if (drawn.Texture is null)
+        var uvs = FrameUvs(drawn);
+        if (drawn.Lit.Art)
         {
-            DrawColoredPolygon(drawn.Points, drawn.Colours[0]);
-        }
-        else
-        {
-            var uvs = FrameUvs(drawn);
-            DrawPrimitive(drawn.Points, drawn.Colours, uvs, drawn.Texture);
-            if (drawn.Glow is not null)
+            if (drawn.Texture is null)
             {
-                DrawPrimitive(drawn.Points, Unlit, uvs, drawn.Glow);
+                DrawColoredPolygon(drawn.Points, drawn.Colours[0]);
             }
+            else
+            {
+                DrawPrimitive(drawn.Points, drawn.Colours, uvs, drawn.Texture);
+            }
+        }
+        if (drawn.Glow is not null)
+        {
+            DrawPrimitive(drawn.Points, Unlit, uvs, drawn.Glow);
         }
         if (drawn.Outline is not null)
         {
@@ -209,22 +175,21 @@ public partial class BoardCanvas : Node2D
 
     private void LightUp(DrawnFace drawn)
     {
-        if (drawn.Probes is not { } probes || _lighting is not { } lighting)
+        if (drawn.Lit.Probes.IsEmpty || _lighting is not { } lighting)
         {
             return;
         }
-        var colour = drawn.Colour;
-        for (var i = 0; i < probes.Length; i++)
+        for (var i = 0; i < drawn.Colours.Length; i++)
         {
-            drawn.Colours[i] = Lit(colour, lighting.At(probes[i]));
+            drawn.Colours[i] = Colour(drawn.Lit.ColourAt(i, lighting), drawn.Lit.Face.Alpha);
         }
     }
 
-    private static Color Lit(Color colour, Rgb light) => new(colour.R * light.R, colour.G * light.G, colour.B * light.B, colour.A);
+    private static Color Colour(Rgb colour, float alpha = 1) => new(colour.R, colour.G, colour.B, alpha);
 
     private Vector2[] FrameUvs(DrawnFace drawn)
     {
-        if (drawn.Face.Image is not { Frames: > 1 } image)
+        if (drawn.Lit.Face.Image is not { Frames: > 1 } image)
         {
             return drawn.Uvs;
         }
@@ -240,8 +205,8 @@ public partial class BoardCanvas : Node2D
     {
         if (drawn.Texture is not null)
         {
-            var source = new Rect2(new Vector2(drawn.Sprite.Image.FrameAt(_clock) * drawn.Size.X, 0), drawn.Size);
-            var light = drawn.Probe is not null && _lighting is { } lighting ? Lit(Colors.White, lighting.At(drawn.Probe)) : Colors.White;
+            var source = new Rect2(new Vector2(drawn.Lit.Sprite.Image.FrameAt(_clock) * drawn.Size.X, 0), drawn.Size);
+            var light = _lighting is { } lighting ? Colour(drawn.Lit.LightNow(lighting)) : Colors.White;
             DrawTextureRectRegion(drawn.Texture, drawn.Target, source, light);
             if (drawn.Glow is not null)
             {
@@ -267,7 +232,7 @@ public partial class BoardCanvas : Node2D
         {
             var source = sprite.Source(unit.Anim.FrameAt(clock), unit.Row);
             var target = new Rect2(corner, unit.Mirror ? new Vector2(-size.X, size.Y) : size);   // a negative width flips, in the same place
-            var light = _lighting is { } lighting ? Lit(Colors.White, lighting.ForFigure(new(feet.X, feet.Y - sprite.Height * BodyHeight))) : Colors.White;
+            var light = _lighting is { } lighting ? Colour(lighting.ForFigure(BoardLighting.BodyOf(unit.Feet, sprite.Height))) : Colors.White;
             DrawTextureRectRegion(texture, target, new Rect2(source.X, source.Y, source.Width, source.Height), light);
         }
         else
@@ -320,25 +285,22 @@ public partial class BoardCanvas : Node2D
         DrawTextureRectRegion(texture, new Rect2(corner, size), new Rect2(new Vector2(frame * size.X, 0), size));
     }
 
-    private DrawnFace Prepare(Face face, bool outlined, ImmutableArray<System.Numerics.Vector2>? outline = null)
+    private DrawnFace Prepare(LitFace lit)
     {
-        var fill = face.Fill ?? new Rgb(1, 1, 1);
-        var colour = new Color(fill.R * face.Shade, fill.G * face.Shade, fill.B * face.Shade, face.Alpha);
+        var face = lit.Face;
         Vector2[] points = [.. face.Points.Select(p => new Vector2(p.X, p.Y))];
         Vector2[] uvs = [.. face.Uvs.Select(p => new Vector2(p.X, p.Y))];
-        Vector2[] ring = [.. (outline ?? face.Points).Select(p => new Vector2(p.X, p.Y))];
-        var probes = _lighting is { } lighting && face.Lit ? face.Points.Select(lighting.Probe).ToArray() : null;
-        var glow = _lighting is not null && face.Image is { Glow: { } rule } image ? Glow(image.Path, null, rule.Colour) : null;
-        return new DrawnFace(face, points, outlined ? [.. ring, ring[0]] : null, uvs, new Vector2[uvs.Length], colour,
-            [colour, colour, colour, colour], Load(face.Image?.Path), glow, probes);
+        var colour = Colour(face.Tint, face.Alpha);
+        return new DrawnFace(lit, points, face.Grid ? [.. points, points[0]] : null, uvs, new Vector2[uvs.Length], [colour, colour, colour, colour],
+            lit.Art ? Load(face.Image?.Path) : null, lit.Glow && face.Image is { Glow: { } rule } image ? Glow(image.Path, null, rule.Colour) : null);
     }
 
-    private DrawnSprite Prepare(Sprite sprite)
+    private DrawnSprite Prepare(LitSprite lit)
     {
+        var sprite = lit.Sprite;
         var size = new Vector2(sprite.Size.X, sprite.Size.Y);
-        var probe = _lighting is { } lighting && sprite.Lit ? lighting.Probe(sprite.TopLeft + sprite.Size / 2) : null;
-        var glow = sprite.Light is { } light ? Glow(sprite.Image.Path, light.Mask, light.Colour) : null;
-        return new DrawnSprite(sprite, new Rect2(new Vector2(sprite.TopLeft.X, sprite.TopLeft.Y), size), size, Load(sprite.Image.Path), glow, probe);
+        var glow = lit.Glow && sprite.Light is { } light ? Glow(sprite.Image.Path, light.Mask, light.Colour) : null;
+        return new DrawnSprite(lit, new Rect2(new Vector2(sprite.TopLeft.X, sprite.TopLeft.Y), size), size, Load(sprite.Image.Path), glow);
     }
 
     /// <summary>What of a strip of the pack glows by itself, as a texture of its own: once each, as it's work over every pixel.</summary>

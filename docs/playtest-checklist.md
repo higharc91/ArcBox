@@ -158,6 +158,9 @@ so tick those on the night. To play alongside the bots, see "With your own phone
 - [ ] **(person)** Flicker: fire, crystals and lava breathe gently and out of step, never as a strobe. Stills can't show this.
 - [ ] **(person)** Zones (ice, webs, poison) stay unlit on purpose, so they're clear; check they don't look pasted on in a dark room.
 - [ ] **(person)** Halos and tile-sized pools look right on the real TV beside the mockups, without the recipe's banded, dithered steps.
+- [ ] **(person)** A brazier's halo sits over a unit in front of it and over a big unit's ring. It's faint (it fades out about 21 art px from the flame, so a ring on the next tile is clear of it, and the dragon's wing in the demo showed only a slight tint). Check nobody's head looks washed out.
+- [ ] **(person)** 130 of `crypt_hall`'s 168 tiles sit at flat ambient. Does a light's reach x sqrt 2 read better than more `AmbientLift`?
+- [ ] **(person)** The wraith on a dark floor: can it be picked out from the sofa?
 - [ ] **(person)** Join on a real phone over the LAN (`--people=1`): the QR opens the join page and the turn screen matches
       the TV. Checked here only in a browser on the PC, not on a phone.
 

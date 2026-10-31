@@ -215,13 +215,26 @@ prop's `light` and a texture's `emissive` scatter rule, so a tile that sinks tak
 Flicker is a function of time and each light's phase, so tests can pin it. A room's ambient comes from a word in its map's id naming
 one of the recipe's rooms (`crypt_hall`, `crystal_cave`, `hall_of_the_flame`), lifted by `AmbientLift` on every map alike, as the
 recipe's dioramas have far more lights than the maps. The rest are open air: with no lights there, `Active` is false and the board
-draws as if none of this existed. `BoardCanvas` puts the light in its vertex colours, with a top in reach split into four cells so a
-pool can peak inside a tile, and redraws at its usual 20 Hz. That's no extra pass and no new shader. PointLight2D doesn't suit this board: it's one canvas item
-holding marks and art alike, CanvasModulate also darkens the HUD on the same canvas, colours blow out with no ceiling, and each item takes a limited number of
-lights. What glows by itself (`GlowMask`, from the pack's masks or, where the pack has none, the brightest shades of the light's colour) is
+draws as if none of this existed. `LitBoard` decides what light does to each item, pure and safe off the main thread: a top in reach
+becomes four cells so a pool can peak inside a tile, then the face once more for its glow and outline. `BoardCanvas` puts the light in
+its vertex colours and redraws at its usual 20 Hz. That's no extra pass and no new shader.
+
+Vertex colours were chosen for the picture, not for cost. A PointLight2D prototype on the finale drew about 100 fewer calls than the
+first vertex version (505 against 605; the glow fix since brought that to 521), with no worse a frame on an RTX 5080. But the board is one
+canvas item holding marks and art alike: CanvasModulate dimmed the HUD on the same canvas, colours blew out with no ceiling (the troll
+went solid yellow), and flames were lit like anything else. Fixing that means splitting the canvas. Godot may also cap the lights on one
+canvas item, at 16 as far as I recall; that's from memory, unchecked, and no map has over 10 lights. Neither approach has been measured on
+a modest TV box.
+
+A region's blocks can share one `BoardLighting` (`Of` takes several plans), so a pool doesn't stop at a block's edge. Reads go through a
+grid of tile-sized buckets, and `MeanAt` reads each light at its mean for baked art, whatever `Step` has done. Only `Step` is unsafe
+beside another thread's reads of "now".
+
+What glows by itself (`GlowMask`, from the pack's masks or, where the pack has none, the brightest shades of the light's colour) is
 baked once and drawn again unlit, in its place in the painter's order, so a unit in front still hides it. Sources get the pack's
 additive halos, in place of the recipe's bloom. The recipe's banding and dither aren't done: they need a shader. Figures take the light
-near them, never under `FigureFloor`. Rings, status effects, zones, marks (`UnitMarks`, over the light) and the HUD stay unlit.
+near them, never under `FigureFloor`. Rings, status effects, zones, marks (`UnitMarks`, over the light) and the HUD stay unlit. Halos
+are a separate additive layer, so they sit over units and rings: one canvas item has one blend mode, so they can't go in the depth order.
 
 **The HUD** (`HudLayer`, `TurnStrip`) sits in the corners the diamond leaves free, in the pack's navy glass and gold: the
 encounter, round, whose turn it is and the objective at the top left, the turn order at the top right. `BattleHud` in

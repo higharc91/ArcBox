@@ -63,6 +63,9 @@ public enum Facing { Up, U, V }
 /// <summary>A flat colour, for what the pack has no art for.</summary>
 public readonly record struct Rgb(float R, float G, float B)
 {
+    /// <summary>This colour lit by <paramref name="light"/>: channel by channel.</summary>
+    public Rgb Times(Rgb light) => new(R * light.R, G * light.G, B * light.B);
+
     /// <summary>A colour as the manifests write it: <c>#rrggbb</c>.</summary>
     public static Rgb Hex(string hex)
     {
@@ -90,6 +93,9 @@ public abstract record BoardItem(long Order, Tile Tile);
 public sealed record Face(long Order, Tile Tile, FaceKind Kind, Facing Facing, ImmutableArray<Vector2> Points, ImmutableArray<Vector2> Uvs,
     ArtImage? Image, Rgb? Fill, float Shade = 1, float Alpha = 1, bool Grid = false, bool Lit = true) : BoardItem(Order, Tile)
 {
+    /// <summary>Its colour before any light: its fill, or white for art, at its shade.</summary>
+    public Rgb Tint => (Fill ?? new Rgb(1, 1, 1)).Times(new Rgb(Shade, Shade, Shade));
+
     /// <summary>The face as four cells that cover it, so light can peak inside a tile and not only on its corners. None is outlined.</summary>
     public ImmutableArray<Face> Cells()
     {
@@ -250,7 +256,7 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
                 continue;
             var topLeft = terrain.Centre(prop.At) - new Vector2(sprite.AnchorX, sprite.AnchorY);
             items.Add(new Sprite(BoardOrder.Key(prop.At, BoardLayer.Prop), prop.At, sprite.Image, topLeft, new Vector2(sprite.Width, sprite.Height),
-                terrain.Look(prop.At).Void ? null : sprite.Light));    // what went down with its tile has gone out
+                terrain.Changes.Sunk.Contains(prop.At) ? null : sprite.Light));    // what went down with its tile has gone out, whatever the chasm is
         }
     }
 
