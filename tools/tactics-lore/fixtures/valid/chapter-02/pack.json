@@ -1,0 +1,1 @@
+{ "id": "chapter_02", "loreVersion": 1, "requires": ["base"], "files": ["regions.json"] }

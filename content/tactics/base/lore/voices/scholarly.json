@@ -1,0 +1,113 @@
+{
+  "id": "scholarly",
+  "name": "Scholarly",
+  "description": "Curious, precise, fascinated by everything, including the thing trying to kill them.",
+  "voice": {
+    "direction": "Clear and quick, a lecturer's cadence; distracted mid-sentence when interested. Works high or low."
+  },
+  "events": {
+    "battle_start": [
+      {
+        "id": "voice_scholarly_battle_start_1",
+        "text": "Fascinating. Hostile, but fascinating.",
+        "mood": "angry"
+      },
+      {
+        "id": "voice_scholarly_battle_start_2",
+        "text": "Mind the flanks. Statistically, that's where it goes wrong.",
+        "mood": "angry"
+      }
+    ],
+    "crit": [
+      {
+        "id": "voice_scholarly_crit_1",
+        "text": "Precisely as calculated.",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_scholarly_crit_2",
+        "text": "Textbook. Literally; I've read the textbook.",
+        "mood": "happy"
+      }
+    ],
+    "kill": [
+      {
+        "id": "voice_scholarly_kill_1",
+        "text": "Specimen... retired.",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_scholarly_kill_2",
+        "text": "I'll want to examine that later.",
+        "mood": "happy"
+      }
+    ],
+    "ally_down": [
+      {
+        "id": "voice_scholarly_ally_down_1",
+        "text": "That wasn't in my projections!",
+        "mood": "surprised"
+      },
+      {
+        "id": "voice_scholarly_ally_down_2",
+        "text": "Stay conscious! Talk to me!",
+        "mood": "surprised"
+      }
+    ],
+    "low_hp": [
+      {
+        "id": "voice_scholarly_low_hp_1",
+        "text": "I appear to be... losing.",
+        "mood": "hurt"
+      },
+      {
+        "id": "voice_scholarly_low_hp_2",
+        "text": "This is less theoretical than I'd like.",
+        "mood": "hurt"
+      }
+    ],
+    "healed": [
+      {
+        "id": "voice_scholarly_healed_1",
+        "text": "Remarkable. Thank you.",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_scholarly_healed_2",
+        "text": "Restored. Shall we continue?",
+        "mood": "happy"
+      }
+    ],
+    "victory": [
+      {
+        "id": "voice_scholarly_victory_1",
+        "text": "I'll be writing this up.",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_scholarly_victory_2",
+        "text": "A satisfactory result.",
+        "mood": "happy"
+      }
+    ],
+    "defeat": [
+      {
+        "id": "voice_scholarly_defeat_1",
+        "text": "Retreat is a perfectly valid strategy!",
+        "mood": "sad"
+      }
+    ],
+    "camp": [
+      {
+        "id": "voice_scholarly_camp_1",
+        "text": "I've been counting the stars. There are fewer than in the old charts.",
+        "mood": "idle"
+      },
+      {
+        "id": "voice_scholarly_camp_2",
+        "text": "Has anyone noticed the gaps in their memories? I'm keeping notes. In ink.",
+        "mood": "idle"
+      }
+    ]
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "id": "fierce",
+  "name": "Fierce",
+  "description": "Loud, proud and hungry for the fight. Protective to the bone.",
+  "voice": {
+    "direction": "Big, bright energy; laughs in a fight; a growl when it turns. Fits a gravelly or a clear voice."
+  },
+  "events": {
+    "battle_start": [
+      {
+        "id": "voice_fierce_battle_start_1",
+        "text": "Finally! Come on, then!",
+        "mood": "angry"
+      },
+      {
+        "id": "voice_fierce_battle_start_2",
+        "text": "Who wants to go first?",
+        "mood": "angry"
+      }
+    ],
+    "crit": [
+      {
+        "id": "voice_fierce_crit_1",
+        "text": "Ha! Did you see that?",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_fierce_crit_2",
+        "text": "Right between the plates!",
+        "mood": "happy"
+      }
+    ],
+    "kill": [
+      {
+        "id": "voice_fierce_kill_1",
+        "text": "Next!",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_fierce_kill_2",
+        "text": "That's for Emberwick!",
+        "mood": "happy"
+      }
+    ],
+    "ally_down": [
+      {
+        "id": "voice_fierce_ally_down_1",
+        "text": "You'll pay for that!",
+        "mood": "surprised"
+      },
+      {
+        "id": "voice_fierce_ally_down_2",
+        "text": "Get up! Get up, I've got you!",
+        "mood": "surprised"
+      }
+    ],
+    "low_hp": [
+      {
+        "id": "voice_fierce_low_hp_1",
+        "text": "Is that all you've got?",
+        "mood": "hurt"
+      },
+      {
+        "id": "voice_fierce_low_hp_2",
+        "text": "Just a scratch. A big one.",
+        "mood": "hurt"
+      }
+    ],
+    "healed": [
+      {
+        "id": "voice_fierce_healed_1",
+        "text": "Better! Let me at them!",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_fierce_healed_2",
+        "text": "Good as new. Nearly.",
+        "mood": "happy"
+      }
+    ],
+    "victory": [
+      {
+        "id": "voice_fierce_victory_1",
+        "text": "Who's buying at the Last Coal?",
+        "mood": "happy"
+      },
+      {
+        "id": "voice_fierce_victory_2",
+        "text": "Ha! Told you we'd win!",
+        "mood": "happy"
+      }
+    ],
+    "defeat": [
+      {
+        "id": "voice_fierce_defeat_1",
+        "text": "This isn't over!",
+        "mood": "sad"
+      }
+    ],
+    "camp": [
+      {
+        "id": "voice_fierce_camp_1",
+        "text": "Who's got the stew? I could eat a goblin. Not literally.",
+        "mood": "idle"
+      },
+      {
+        "id": "voice_fierce_camp_2",
+        "text": "Sing something, someone. Loud.",
+        "mood": "idle"
+      }
+    ]
+  }
+}

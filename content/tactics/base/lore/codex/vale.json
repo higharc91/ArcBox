@@ -1,0 +1,172 @@
+{
+  "entries": [
+    {
+      "id": "codex_the_vale",
+      "title": "The Vale",
+      "category": "places",
+      "body": "A long river valley ringed by the Greywall Mountains. For three hundred years it was the warmest country anyone knew of, kept so by the Hearthflame in Ember Keep. Since the Fall a century ago, it has been getting colder.",
+      "related": ["codex_hearthflame", "codex_greywall"]
+    },
+    {
+      "id": "codex_emberwick",
+      "title": "Emberwick",
+      "category": "places",
+      "subject": "emberwick_town",
+      "body": "A market town on the warm, grey ground of the Ashen Ford, built in the century since an ember fell into the river. Its fields grow through the winter, its inn is the Last Coal, and its only road east crosses the ford bridge. The ground is cooler than it used to be. Nobody says so.",
+      "related": ["codex_ashen_ford"]
+    },
+    {
+      "id": "codex_ashen_ford",
+      "title": "The Ashen Ford",
+      "category": "places",
+      "subject": "ashen_ford",
+      "body": "The only crossing of the river on the road east. On the night of the Fall an ember plunged into the water here; the river boiled for a year and the banks burned grey. The water still steams on cold mornings.",
+      "related": ["codex_emberwick", "codex_the_fall"]
+    },
+    {
+      "id": "codex_hearthflame",
+      "title": "The Hearthflame",
+      "category": "magic",
+      "body": "The great fire that burned in Ember Keep for three centuries and kept the Vale warm. The Church of the Hearth teaches it was a gift of the gods. On the night of the Fall it shattered into five embers, which fell across the Vale.",
+      "related": ["codex_embers", "codex_the_fall", "codex_church"]
+    },
+    {
+      "id": "codex_embers",
+      "title": "Embers and Shards",
+      "category": "items",
+      "body": "The five great embers of the Hearthflame lie where they fell: one under the Ashen Ford, one in Mirewood, one in the Sunscar, one in Frostpeak Pass, and the heart in Ember Keep. Smaller shards, sold by the Wardens for two centuries, still light hearths, forges and lamps across the Vale. A shard gives heat and light for decades, and can heal almost any wound.",
+      "related": ["codex_hearthflame", "codex_ash_market", "codex_ember_cost"]
+    },
+    {
+      "id": "codex_ember_cost",
+      "title": "What the Fire Takes",
+      "category": "magic",
+      "body": "Every use of ember-fire burns away a memory: a song, a face, the way home. Small uses take small things. The Vale has cooked, forged and healed with ember-fire for three hundred years, and that is why it remembers so little of its own past. The Wardens knew. They kept it secret, because the Vale could not live without the flame.",
+      "unlock": { "flag": "truth_cost" },
+      "related": ["codex_ember_touched", "codex_wardens"]
+    },
+    {
+      "id": "codex_ember_touched",
+      "title": "The Ember-Touched",
+      "category": "magic",
+      "body": "Some people born close to an ember, or who have used a great deal of ember-fire, remember things that happened to other people: songs they were never taught, roads they never walked, faces of the dead. The fire keeps what it takes, and sometimes it gives it back to the wrong person.",
+      "unlock": { "chapter": 2 },
+      "related": ["codex_ember_cost"]
+    },
+    {
+      "id": "codex_the_fall",
+      "title": "The Fall",
+      "category": "history",
+      "body": "In 300 HR Ember Keep fell in a single night. The Hearthflame shattered and five embers fell across the Vale like stars. Every survivor's account of that night is different, and every one of them has gaps.",
+      "related": ["codex_ember_keep", "codex_wardens"]
+    },
+    {
+      "id": "codex_the_fall_truth",
+      "title": "The Night the Keep Fell",
+      "category": "history",
+      "body": "Warden-Keeper Oswin Hale had learned the Hearthflame was stolen and that it was eating the Vale's memory, and on the night of the Fall he tried to put it out. Someone stopped him halfway. The flame did not die; it shattered. Oswin bound himself into undeath to finish what he started, and has never learned who stopped him.",
+      "unlock": { "flag": "truth_fall" },
+      "related": ["codex_the_fall", "codex_last_watch"]
+    },
+    {
+      "id": "codex_the_crossing",
+      "title": "The Seven Who Crossed",
+      "category": "history",
+      "body": "Before the Hearthflame, the Vale was a cold, hungry country. Seven people crossed the Greywall into the lands beyond and came back with fire. The songs say it was given to them. The Skarrow clan's oldest song says otherwise: it says the seven came back running.",
+      "unlock": { "flag": "truth_crossing" },
+      "related": ["codex_greywall", "codex_skarrow"]
+    },
+    {
+      "id": "codex_greywall",
+      "title": "The Greywall",
+      "category": "places",
+      "body": "The mountains that ring the Vale. Nobody in living memory has crossed them and come back. Whatever lies beyond them, the Hearthflame came from there.",
+      "related": ["codex_the_crossing"]
+    },
+    {
+      "id": "codex_ember_keep",
+      "title": "Ember Keep",
+      "category": "places",
+      "subject": "ember_keep",
+      "body": "The Wardens' fortress and the hall of the Hearthflame, built by dwarven masons in the first century of the Hearth Age. It has been a ruin since the Fall. Travellers say a red light still burns inside, and that its gate is held by a knight in black armour.",
+      "unlock": { "chapter": 1 },
+      "related": ["codex_last_watch"]
+    },
+    {
+      "id": "codex_wardens",
+      "title": "The Wardens",
+      "category": "factions",
+      "body": "The order that tended the Hearthflame in Ember Keep for three hundred years. They kept the flame, kept the roads, kept the peace, and sold shards of the fire to pay for it all. Almost none survived the Fall.",
+      "related": ["codex_the_fall", "codex_last_watch"]
+    },
+    {
+      "id": "codex_last_watch",
+      "title": "The Last Watch",
+      "category": "factions",
+      "subject": "the_last_watch",
+      "body": "All that is left of the Wardens: Oswin Hale, the last Warden-Keeper, undead for a century, and Ser Halvard, his oath-bound champion. They have held the ruins of Ember Keep against everyone since the Fall.",
+      "unlock": { "chapter": 4 },
+      "related": ["codex_wardens", "codex_ember_keep"]
+    },
+    {
+      "id": "codex_church",
+      "title": "The Church of the Hearth",
+      "category": "factions",
+      "subject": "church_of_the_hearth",
+      "body": "The Vale's church, which teaches that the Hearthflame was the gods' gift to a deserving people and that its loss is a test. Its priests feed the poor and bury the dead, and most of them have never read the church's oldest scriptures.",
+      "related": ["codex_hearthflame"]
+    },
+    {
+      "id": "codex_kindled",
+      "title": "The Kindled",
+      "category": "factions",
+      "subject": "the_kindled",
+      "body": "A movement that began in the hungry towns, led by the preacher Maren Sorrel. The Kindled say the Hearthflame can be relit if the embers are brought together in Ember Keep, and that the Vale must be brave enough to pay what it costs. They feed the hungry. They also feed the flame.",
+      "unlock": { "chapter": 1 },
+      "related": ["codex_hearthflame", "codex_ash_market"]
+    },
+    {
+      "id": "codex_ash_market",
+      "title": "The Ash Market",
+      "category": "factions",
+      "subject": "the_ash_market",
+      "body": "The black market in ember shards, run at night from Emberwick's river docks by a smuggler called Rook. Everyone in town has bought from it. Nobody admits to it.",
+      "unlock": { "chapter": 1 },
+      "related": ["codex_embers"]
+    },
+    {
+      "id": "codex_skarrow",
+      "title": "The Skarrow Clan",
+      "category": "factions",
+      "subject": "skarrow_clan",
+      "body": "A goblin clan of the hills above the ford, led by Mother Skarrow. The clans have hunted those hills since before the Hearthflame and never used its fire. This year the cold and hunger drove them down, and they took the bridge.",
+      "unlock": { "chapter": 1 },
+      "related": ["codex_the_crossing"]
+    },
+    {
+      "id": "codex_glimmer_court",
+      "title": "The Glimmer Court",
+      "category": "factions",
+      "subject": "glimmer_court",
+      "body": "The fey of Mirewood, who woke in the century since an ember sank into the marsh. Beautiful, courteous and strange. A bargain made with the Court is always kept, one way or another.",
+      "unlock": { "chapter": 2 },
+      "related": ["codex_ember_touched"]
+    },
+    {
+      "id": "codex_scarwalkers",
+      "title": "The Scarwalkers",
+      "category": "factions",
+      "subject": "scarwalkers",
+      "body": "Nomads of the Sunscar, descended from the farmers whose fields the ember burned. They worship the crater and live by laws of hospitality that bind guest and host alike.",
+      "unlock": { "chapter": 3 }
+    },
+    {
+      "id": "codex_hooded_stranger",
+      "title": "The Hooded Stranger",
+      "category": "people",
+      "subject": "hooded_stranger",
+      "body": "A masked traveller who arrived in Emberwick the week the goblins took the bridge. The Stranger knows where the embers lie and what they cost, and seems to be everywhere the party is going next. Old Maud says she saw them on the night of the Fall, a hundred years ago, looking exactly the same.",
+      "unlock": { "flag": "ch1_met_maud" }
+    }
+  ]
+}

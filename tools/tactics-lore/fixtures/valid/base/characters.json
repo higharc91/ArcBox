@@ -1,0 +1,8 @@
+{ "characters": [
+  { "id": "aldric", "name": "Aldric", "role": "companion", "faction": "wardens", "summary": "A cleric.", "bio": "Longer.",
+    "wants": "Peace.", "flaw": "Stubborn.", "secret": { "text": "Hidden.", "unlock": { "flag": "aldric_secret" } },
+    "voice": { "theme": "tactics.aldric", "description": "Low, warm.", "sample": "Steady now." },
+    "relationships": [{ "with": "raider_chief", "kind": "enemy", "note": "Old grudge." }] },
+  { "id": "raider_chief", "preset": "bandit_captain", "name": "Chief", "role": "villain", "faction": "raiders", "summary": "Mean.",
+    "bio": "Meaner.", "wants": "More.", "flaw": "Greed.", "voice": { "description": "Rough.", "sample": "Mine." } }
+] }

@@ -1,0 +1,1 @@
+{ "id": "base", "loreVersion": 1, "requires": [], "files": ["characters.json", "factions.json", "barks/ghost.json", "barks/kara.json", "barks/bad.json", "codex/missing.json"] }

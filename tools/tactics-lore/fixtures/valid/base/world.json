@@ -1,0 +1,12 @@
+{
+  "name": "Example World",
+  "pitch": "A fixture world that exercises every lore file kind.",
+  "premise": "Placeholder text for the checker's tests.",
+  "tone": ["plain"],
+  "themes": ["testing"],
+  "pillars": ["Every reference resolves."],
+  "magic": { "source": "Fixtures.", "cost": "Nothing.", "rules": ["None."] },
+  "peoples": [{ "race": "dwarf", "summary": "Test dwarves.", "naming": "Short names.", "examples": ["Aldric"] }],
+  "glossary": [{ "term": "Fixture", "definition": "A known input." }],
+  "avoid": ["Real setting names."]
+}

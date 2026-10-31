@@ -1,0 +1,5 @@
+{ "factions": [
+  { "id": "wardens", "name": "Wardens", "crest": "icons.bless", "summary": "Keepers.", "goals": ["Keep."], "methods": "Watching.",
+    "leader": "aldric", "stance": { "raiders": "war" } },
+  { "id": "raiders", "name": "Raiders", "summary": "Takers.", "goals": ["Take."], "methods": "Raiding.", "stance": { "wardens": "war" } }
+] }
