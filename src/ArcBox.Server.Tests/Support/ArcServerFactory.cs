@@ -100,7 +100,27 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
             var repo = new DirectoryInfo(AppContext.BaseDirectory);
             while (!File.Exists(Path.Combine(repo.FullName, "ArcBox.slnx")))
                 repo = repo.Parent ?? throw new DirectoryNotFoundException("No ArcBox.slnx above the test binaries.");
-            Directory.CreateSymbolicLink(Path.Combine(_contentRoot.FullName, "tactics"), Path.Combine(repo.FullName, "content", "tactics"));
+            var source = Path.Combine(repo.FullName, "content", "tactics");
+            var target = Path.Combine(_contentRoot.FullName, "tactics");
+            try
+            {
+                Directory.CreateSymbolicLink(target, source);
+            }
+            catch (IOException)
+            {
+                // Windows refuses symlinks without Developer Mode or admin rights.
+                CopyDirectory(source, target);
+            }
+        }
+    }
+
+    private static void CopyDirectory(string source, string target)
+    {
+        foreach (var file in Directory.EnumerateFiles(source, "*", SearchOption.AllDirectories))
+        {
+            var copy = Path.Combine(target, Path.GetRelativePath(source, file));
+            Directory.CreateDirectory(Path.GetDirectoryName(copy)!);
+            File.Copy(file, copy);
         }
     }
 }
