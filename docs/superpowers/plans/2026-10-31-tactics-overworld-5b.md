@@ -52,6 +52,10 @@ These are decided, and go on the list for the user to overrule.
 7. **The leader's Jump.** Rogue, monk and barbarian have Jump 3, so a per-leader Jump would change the map with whoever leads. Use `ClassDef.DefaultJump` (2), as the region check does.
 8. **"Exploration waits" (§4.6) needs no phase.** With no input, nothing runs.
 
+## Keeping a repaint from hurting a save
+
+A re-export changes the rules hash, so a campaign saved mid-battle restarts its fight (`A_battle_saved_under_other_rules_starts_again`). Battles never read `world/`, so Task 2 leaves `rules/world/` out of the hash a battle save compares, and adds `A_repainted_region_doesnt_restart_a_saved_battle`. No rule, balance number or phone view changes. A stamped map's tiles are still pinned by the map file, which stays in the hash.
+
 ## Needed by 5c and 5d
 
 Those plans found these, and it's cheaper to build them in now:
