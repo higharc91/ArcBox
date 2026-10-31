@@ -12,6 +12,7 @@ public partial class Commands : Node
 {
     private const string Usage = """
         Commands, after -- on Godot's command line:
+          --draft=<id>             write Claude's draft of a region into its scene; refuses if the scene exists
           --new=<id>               make an empty region scene in regions/; --chapter=<n> --size=<w>x<h> --name=<name> are optional
           --export=<id or scene>   export a region; --rules=<folder> writes to that pack instead of the base pack
           --swatches               write the palette's images (then run Godot's --import)
@@ -48,6 +49,8 @@ public partial class Commands : Node
     {
         if (Arg("export") is { } export)
             return Export(export);
+        if (Arg("draft") is { } draft)
+            return DraftScene.Run(draft);
         if (Arg("new") is { } id)
             return New(id);
         if (Arg("sample") is { } sample)

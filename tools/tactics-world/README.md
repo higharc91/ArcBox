@@ -127,3 +127,13 @@ the export must refuse. Export to a copy of the pack, so the real one isn't touc
 "$GODOT" --headless --path tools/tactics-world -- --sample=res://regions/_sample.tscn --tamper
 "$GODOT" --headless --path tools/tactics-world -- --export=res://regions/_sample.tscn --rules=/tmp/rules-copy
 ```
+
+## The Ashen Ford draft
+
+`regions/ashen_ford.tscn` began as Claude's scripted draft, `AshenFordDraft` in `Tactics.WorldTools`. It's now painted work like any other scene:
+
+```sh
+"$GODOT" --headless --path tools/tactics-world -- --draft=ashen_ford
+```
+
+That writes the scene only if it isn't there. If it is, it says so, changes nothing and exits 2, so re-drafting means deleting the scene by hand.
