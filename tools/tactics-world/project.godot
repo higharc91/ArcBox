@@ -1,0 +1,25 @@
+; Engine configuration file.
+; The painting workspace for the Tactics overworld: see README.md.
+
+config_version=5
+
+[application]
+
+config/name="Tactics World"
+run/main_scene="res://addons/region_tools/Commands.tscn"
+config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
+run/flush_stdout_on_print=true
+
+[dotnet]
+
+project/assembly_name="Tactics.World.Editor"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/region_tools/plugin.cfg")
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/canvas_textures/default_texture_filter=0

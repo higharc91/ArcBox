@@ -66,4 +66,10 @@ public sealed class RegionSource(string id, string name, int chapter, int width,
             }
         _stamps.Add(new RegionStamp(map.Id, at, heightOffset));
     }
+
+    /// <summary>
+    /// Records a stamp over tiles that are already in the grid, leaving them as they are. A scene uses this: its layers hold the
+    /// painted tiles, so copying the map back over them would hide a tile painted over from the checks.
+    /// </summary>
+    public void AddStamp(RegionStamp stamp) => _stamps.Add(stamp);
 }

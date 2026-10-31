@@ -143,16 +143,30 @@ public sealed class RegionWriterTests
     }
 
     [Fact]
-    public void Materials_are_listed_once_in_first_use_order()
+    public void Materials_are_listed_once_in_ordinal_name_order()
     {
         var source = Source();
-        source.Set(new Tile(40, 0), 0, Ash, TileFlags.None);
-        source.Set(new Tile(2, 1), 0, Grass, TileFlags.None);
-        source.Set(new Tile(0, 1), 0, River, TileFlags.None);
-        source.Set(new Tile(1, 1), 0, Grass, TileFlags.None);
+        source.Set(new Tile(40, 0), 0, River, TileFlags.None);
+        source.Set(new Tile(2, 1), 0, Ash, TileFlags.None);
+        source.Set(new Tile(0, 1), 0, Grass, TileFlags.None);
+        source.Set(new Tile(1, 1), 0, Ash, TileFlags.None);
 
-        // First use is the order the file's bytes read in, chunk by chunk, not the order they were painted.
-        Assert.Equal([River, Grass, Ash], Written(source).Materials);
+        // By name, not by first use: where a material first appears must not decide every tile's index, or a small paint
+        // change could renumber a whole chunk.
+        Assert.Equal([Ash, Grass, River], Written(source).Materials);
+    }
+
+    [Fact]
+    public void Tiles_index_the_sorted_material_list()
+    {
+        var source = Source();
+        source.Set(new Tile(0, 0), 0, River, TileFlags.None);
+        source.Set(new Tile(1, 0), 0, Ash, TileFlags.None);
+
+        var region = Region(source);
+
+        Assert.Equal(River, region.Def.Materials[region.TileAt(new Tile(0, 0))!.Material]);
+        Assert.Equal(Ash, region.Def.Materials[region.TileAt(new Tile(1, 0))!.Material]);
     }
 
     [Fact]

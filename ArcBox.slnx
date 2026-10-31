@@ -32,4 +32,7 @@
     <Project Path="src/ArcBox.Server.Tests/ArcBox.Server.Tests.csproj" />
     <Project Path="src/ArcBox.Server/ArcBox.Server.csproj" />
   </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/tactics-world/Tactics.World.Editor.csproj" />
+  </Folder>
 </Solution>

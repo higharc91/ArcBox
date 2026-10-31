@@ -18,7 +18,7 @@ public static class RegionWriter
     /// Writes the region, or says why it can't: a tile outside the region, a height outside 0 to 9, a material that isn't in
     /// <paramref name="knownMaterials"/>, undefined flag bits or too many materials. The first tile of each kind of problem is
     /// enough to find it, and each unknown material is named once. The same grid always gives the same region, however it was
-    /// painted: chunks go by row and materials by first use in the bytes as they're read, chunk by chunk. A chunk with nothing
+    /// painted: chunks go by row and materials by ordinal name, so a small paint change gives a small diff. A chunk with nothing
     /// painted is left out, and an unpainted tile in a listed chunk is written <see cref="TileFlags.Impassable"/>, since a blank
     /// tile would be walkable ground. Whether the region's markers can be reached, and whether its stamps still match their maps,
     /// are the pack loader's checks.
@@ -37,12 +37,12 @@ public static class RegionWriter
         if (source.Tiles.Keys.Where(t => !Inside(t)).OrderBy(t => t.Y).ThenBy(t => t.X).Cast<Tile?>().FirstOrDefault() is { } outside)
             problems.Add($"The tile {outside} is outside the {source.Width}x{source.Height} region.");
 
-        var materials = new Dictionary<string, int>(StringComparer.Ordinal);
+        var materials = tiles.Select(t => t.Value.Material).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal)
+            .Select((name, index) => (name, index)).ToDictionary(m => m.name, m => m.index, StringComparer.Ordinal);
         var unknown = new HashSet<string>(StringComparer.Ordinal);
         string? height = null, flags = null;
         foreach (var (tile, info) in tiles)
         {
-            materials.TryAdd(info.Material, materials.Count);
             if (!knownMaterials.Contains(info.Material) && unknown.Add(info.Material))
                 problems.Add($"The tile {tile} uses the material '{info.Material}', which isn't in the terrain manifest.");
             height ??= info.Height is < 0 or > WorldRegion.MaxHeight
