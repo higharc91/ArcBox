@@ -57,7 +57,7 @@ The "Choose a battle" list becomes a world the party travels through. Players wa
 A region file lives at `rules/world/<region>.json` in the content pack:
 
 - **Tiles** use the battle map format, one height byte, one material byte and one flags byte per tile, split into 32×32 chunks.
-- **Stamps** place battle maps: map id, encounter id and world tile of the map's corner.
+- **Stamps** place battle maps: map id, the world tile of the map's corner and a height offset. A stamp doesn't name an encounter: encounters can share a map, as `ford_assault` and `river_crossing` do, so the arc's battle beat says which one plays.
 - **Beat spots** tie each beat id in `lore/arcs.json` to a world tile.
 - **Spawns:** `start` and `recovery`.
 - **Edges** record where the region meets its neighbours.
@@ -94,14 +94,14 @@ Walking is a new input stream: the leader's phone sends a direction on press and
 
 ### 4.2 Story
 
-- **Dialogue** files live at `rules/dialogue/<beat>.json`: lines, speakers and choices. This is the format the lore spec left to sub-project 5.
+- **Dialogue** is already written: `lore/scenes/ch<n>.json` holds every chapter's scenes as node graphs, with voiced lines, and [the lore spec](2026-10-31-tactics-lore-design.md) defines the format. This slice adds the runtime that plays them.
 - **Beats** come from `lore/arcs.json`, with `needs` and `sets` flags. Lore never sets flags itself: choices and beats do.
 - **Votes** are collected by the server, with its timer and the leader's tie-break. A vote nobody answers takes the first option. If the timer ends with no leader, the first connected player decides.
 - **Skill checks** use the existing dice rules. This slice adds no new rule maths.
 
 ### 4.3 Battles on the spot
 
-A stamp names its map and encounter, so the game starts the battle through the existing encounter setup, with the same rules, balance and maps. The TV keeps the world on screen and draws the battle board in place, using the map and unit drawing from milestone 3b.
+The arc's battle beat names the encounter, and the stamp holding that encounter's map says where it is. The game starts the battle through the existing encounter setup, with the same rules, balance and maps. The TV keeps the world on screen and draws the battle board in place, using the map and unit drawing from milestone 3b.
 
 The stamp's offset converts between battle tiles and world tiles, and only the TV needs it. The engine still sees an ordinary battle map.
 
@@ -141,10 +141,10 @@ This starts after milestone 3b.
 | 5a | World format, painting workspace, export, checks and the Ashen Ford draft | The user can open the draft in Godot, paint it and export it |
 | 5b | Exploration phase, leader's d-pad, TV chunk loading and saved position | The user can walk the whole region on the TV from a phone |
 | 5c | Fights on the spot, and waking at the recovery spawn after a defeat | River Crossing starts in the world and returns to walking |
-| 5d | Dialogue files, beats, votes, skill checks and Chapter 1's scripts | All of Chapter 1 plays |
+| 5d | The scene runtime, beats, votes and skill checks | All of Chapter 1 plays |
 | 5e | Tuning, and a real session on phones | The user judges that it feels right |
 
-**The user's part:** painting after 5a, which doesn't block 5b; concept art at any time; reviewing Chapter 1's scripts at 5d; and the playtest at 5e.
+**The user's part:** painting after 5a, which doesn't block 5b; concept art at any time; and the playtest at 5e.
 
 ## 7. Risks
 

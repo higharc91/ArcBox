@@ -58,7 +58,7 @@
 - Produces:
   - `record RegionDef(string Id, string Name, int Chapter, ImmutableArray<int> Size, ImmutableArray<string> Materials, ImmutableArray<RegionChunk> Chunks, ImmutableArray<RegionStamp> Stamps, ImmutableArray<BeatSpot> Beats, RegionSpawns Spawns, ImmutableArray<RegionEdge> Edges)`
   - `record RegionChunk(int X, int Y, string Tiles)`: chunk coordinates, base64 of 3 bytes a tile for 32×32 tiles
-  - `record RegionStamp(string Map, string Encounter, Tile At, int Height)`: the map's tile (0, 0) is world tile `At`, and `Height` is added to its heights
+  - `record RegionStamp(string Map, Tile At, int Height)`: the map's tile (0, 0) is world tile `At`, and `Height` is added to its heights. It names no encounter, because encounters share maps: the arc's battle beat picks one
   - `record BeatSpot(string Beat, Tile At)`, `record RegionSpawns(Tile Start, Tile Recovery)`, `record RegionEdge(string Neighbour, string Side, int Offset)`
   - `sealed class WorldRegion`: `static WorldRegion From(RegionDef def)`, `TileInfo? TileAt(Tile t)` (null for void), `bool Walkable(Tile t)`, `RegionDef Def`
   - `RulesPack.Regions: ImmutableSortedDictionary<string, WorldRegion>`, and `RulesPack.RegionFor(string id)`
@@ -107,7 +107,8 @@ Expected: PASS. No base pack region exists yet, so `BasePackTests` is unchanged.
 ```csharp
 [Fact] public void A_stamp_that_differs_from_its_map_is_an_error()
 // a tile's height, material NAME or flags differ. Compare materials by name, since the two lists differ.
-[Fact] public void A_stamp_on_an_unknown_map_or_encounter_is_an_error()
+[Fact] public void A_stamp_on_an_unknown_map_is_an_error()
+[Fact] public void Two_stamps_of_one_map_are_an_error()   // an encounter must resolve to one place
 [Fact] public void A_stamp_outside_the_region_is_an_error()
 [Fact] public void A_spot_or_spawn_that_cant_be_reached_is_an_error()
 // message names the marker and its tile: "The beat 'ch1_old_maud' at (4, 9) can't be reached from the start."
@@ -142,7 +143,7 @@ Expected: PASS.
 **Interfaces:**
 - Consumes: `RegionDef`, `BattleMap`, `ArtManifest`.
 - Produces:
-  - `sealed class RegionSource(string id, string name, int chapter, int width, int height)`: `void Set(Tile t, int height, string material, TileFlags flags)`, `TileInfoNamed? Get(Tile t)`, `void Stamp(BattleMap map, string encounter, Tile at, int heightOffset)`, `List<BeatSpot> Beats`, `Tile Start`, `Tile Recovery`
+  - `sealed class RegionSource(string id, string name, int chapter, int width, int height)`: `void Set(Tile t, int height, string material, TileFlags flags)`, `TileInfoNamed? Get(Tile t)`, `void Stamp(BattleMap map, Tile at, int heightOffset)`, `List<BeatSpot> Beats`, `Tile Start`, `Tile Recovery`
   - `static class RegionWriter`: `WriteResult Write(RegionSource source, IReadOnlySet<string> knownMaterials)`, where `WriteResult(RegionDef? Region, ImmutableArray<string> Problems)`
 
 - [ ] **Step 1: Write the failing tests**
@@ -219,14 +220,14 @@ Expected: PASS, and Godot exits with no errors.
 - Consumes: `RegionSource`, the scene convention, `lore/regions.json`, `lore/arcs.json`.
 - Produces: `static RegionSource AshenFordDraft.Build(RulesPack rules)` at 160×120 tiles, and `tools/tactics-world/regions/ashen_ford.tscn`.
 
-Lay it out to fit the lore: Emberwick at the west, the road east to the Ford Bridge, the river running north to south through it, the River Docks on the river, the Skarrow Hills to the north-east and Old Maud's Hut on the burned far bank. River Crossing is stamped at the ford.
+Lay it out to fit the lore: Emberwick at the west, the road east to the Ford Bridge, the river running north to south through it, the River Docks on the river, the Skarrow Hills to the north-east and Old Maud's Hut on the burned far bank. River Crossing is stamped at the ford. Chapter 1 has two battles there, `ford_assault` and `river_crossing`, on that one map, and the party's vote picks which. Use the pack's new biome textures where they fit: `ash` and `basalt` suit the burned far bank.
 
 - [ ] **Step 1: Write the failing tests**
 
 ```csharp
 [Fact] public void The_draft_is_160_by_120()
 [Fact] public void River_crossing_is_stamped_exactly()
-[Fact] public void Every_beat_in_chapter_1_of_the_lore_has_a_spot()   // reads content/tactics/base/lore/arcs.json
+[Fact] public void Every_beat_in_chapter_1_of_the_lore_has_a_spot()   // reads content/tactics/base/lore/arcs.json: 8 beats today, across 5 places
 [Fact] public void The_draft_writes_with_no_problems()
 [Fact] public void Every_marker_is_reachable_from_the_start()
 [Fact] public void The_river_can_only_be_crossed_at_the_ford()
@@ -261,8 +262,9 @@ Expected: tests PASS, the first run writes the scene, and the second refuses and
 - [ ] **Step 1: Write the failing tests**
 
 ```csharp
-[Fact] public void Base_pack_has_ashen_ford()                         // chapter 1, 160×120, one stamp: river_crossing
+[Fact] public void Base_pack_has_ashen_ford()                         // chapter 1, 160×120, one stamp, map river_crossing
 [Fact] public void Every_beat_of_a_regions_chapter_has_a_spot()       // arcs.json against each region; lore isn't in the rules pack
+[Fact] public void Every_battle_beats_encounter_has_a_stamp()         // the encounter's map is stamped in that chapter's region
 ```
 
 - [ ] **Step 2: Run them to see them fail**
@@ -293,5 +295,5 @@ Each gets its own plan once the work before it is merged.
 
 - **5b, walking:** the Exploration phase, the direction input, the fixed-rate step on the game's timers, the phone's walk screen, saved position, chunk drawing on the TV, and the bots' walking mode. The drawing reuses milestone 3b's board.
 - **5c, fights on the spot:** starting an encounter from a stamp, the party forming up, the battle board drawn in the world, return to walking, and recovery after a defeat.
-- **5d, story:** the dialogue format, beats, votes, skill checks, their phone and TV screens, and Chapter 1's scripts.
+- **5d, story:** the runtime for `lore/scenes`, beats, votes, skill checks and their phone and TV screens. The scenes and their voice clips already exist.
 - **5e, polish and playtest:** tuning, then a real session on phones.
