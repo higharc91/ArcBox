@@ -1,3 +1,5 @@
+using System.Collections.Immutable;
+
 namespace Tactics.Logic;
 
 /// <summary>
@@ -32,8 +34,8 @@ public sealed class WorldRegion
     public RegionDef Def { get; }
 
     /// <summary>
-    /// Builds the region, decoding every chunk. Throws <see cref="FormatException"/> or <see cref="ArgumentException"/> on bad
-    /// tiles, size or a repeated chunk; the loader reports those as content errors first.
+    /// Builds the region, decoding every chunk. Throws <see cref="ArgumentException"/> on a bad size, a repeated chunk or bad
+    /// chunk bytes; the loader reports those as content errors first. Only the loader checks that chunks are inside the region.
     /// </summary>
     public static WorldRegion From(RegionDef def)
     {
@@ -42,8 +44,12 @@ public sealed class WorldRegion
 
         var chunks = new Dictionary<(int X, int Y), TileInfo[]>();
         foreach (var chunk in def.Chunks)
-            if (!chunks.TryAdd((chunk.X, chunk.Y), Decode(chunk, def)))
+        {
+            var tiles = Decode(chunk, def.Materials.Length, out var problems)
+                ?? throw new ArgumentException($"Region '{def.Id}', chunk ({chunk.X}, {chunk.Y}): {problems[0]}", nameof(def));
+            if (!chunks.TryAdd((chunk.X, chunk.Y), tiles))
                 throw new ArgumentException($"Region '{def.Id}' lists chunk ({chunk.X}, {chunk.Y}) twice.", nameof(def));
+        }
         return new WorldRegion(def, width, height, chunks);
     }
 
@@ -60,21 +66,42 @@ public sealed class WorldRegion
     /// <summary>True when the party may walk on the tile: not void, not impassable, not deep, as on a battle map.</summary>
     public bool Walkable(Tile t) => TileAt(t) is { } tile && (tile.Flags & (TileFlags.Impassable | TileFlags.Deep)) == 0;
 
-    private static TileInfo[] Decode(RegionChunk chunk, RegionDef def)
+    /// <summary>
+    /// Decodes one chunk for <paramref name="materials"/> listed materials, or returns null with what's wrong with it. The first
+    /// bad tile of each kind is enough to find the problem, as on a battle map: one problem per tile could be thousands.
+    /// </summary>
+    internal static TileInfo[]? Decode(RegionChunk chunk, int materials, out ImmutableArray<string> problems)
     {
-        var bytes = Convert.FromBase64String(chunk.Tiles);
+        byte[] bytes;
+        try
+        {
+            bytes = Convert.FromBase64String(chunk.Tiles);
+        }
+        catch (FormatException)
+        {
+            problems = ["The tiles aren't valid base64."];
+            return null;
+        }
         if (bytes.Length != ChunkBytes)
-            throw new ArgumentException($"Expected {ChunkBytes} bytes for chunk ({chunk.X}, {chunk.Y}), got {bytes.Length}.", nameof(chunk));
+        {
+            problems = [$"Expected {ChunkBytes} tile bytes for a chunk ({ChunkSize}x{ChunkSize}, 3 per tile), got {bytes.Length}."];
+            return null;
+        }
 
+        const int knownFlags = (int)(TileFlags.Water | TileFlags.Difficult | TileFlags.Impassable | TileFlags.Hazard | TileFlags.Deep);
+        Tile WorldTile(int i) => new(chunk.X * ChunkSize + i % ChunkSize, chunk.Y * ChunkSize + i / ChunkSize);
         var tiles = new TileInfo[ChunkSize * ChunkSize];
+        string? height = null, material = null, flags = null;
         for (var i = 0; i < tiles.Length; i++)
         {
-            var material = bytes[i * 3 + 1];
-            if (material >= def.Materials.Length)
-                throw new ArgumentException(
-                    $"Chunk ({chunk.X}, {chunk.Y}) uses material {material} but there are {def.Materials.Length} materials.", nameof(chunk));
-            tiles[i] = new TileInfo(bytes[i * 3], material, (TileFlags)bytes[i * 3 + 2]);
+            int tileHeight = bytes[i * 3], tileMaterial = bytes[i * 3 + 1], tileFlags = bytes[i * 3 + 2];
+            height ??= tileHeight > MaxHeight ? $"Tile {WorldTile(i)} has height {tileHeight}, above the limit of {MaxHeight}." : null;
+            material ??= tileMaterial >= materials ? $"Tile {WorldTile(i)} uses material {tileMaterial}, but the region has {materials} materials." : null;
+            flags ??= (tileFlags & ~knownFlags) != 0 ? $"Tile {WorldTile(i)} has undefined flag bits 0x{tileFlags & ~knownFlags:x2}." : null;
+            tiles[i] = new TileInfo(tileHeight, tileMaterial, (TileFlags)tileFlags);
         }
-        return tiles;
+
+        problems = [.. new[] { height, material, flags }.OfType<string>()];
+        return problems.IsEmpty ? tiles : null;
     }
 }

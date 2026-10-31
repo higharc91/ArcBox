@@ -12,7 +12,8 @@
       "type": "string"
     },
     "chapter": {
-      "type": "integer"
+      "type": "integer",
+      "minimum": 1
     },
     "size": {
       "type": "array",
@@ -57,7 +58,7 @@
         ],
         "additionalProperties": false
       },
-      "description": "32 × 32 tile chunks. x and y count chunks, not tiles, and each may appear once. A chunk that isn't listed is void: impassable."
+      "description": "32 × 32 tile chunks. x and y count chunks, not tiles, and each may appear once. A chunk that isn't listed is void: impassable. Unpainted tiles in a listed chunk must be written Impassable, because a tile of zero bytes is walkable ground at height 0."
     },
     "stamps": {
       "type": "array",
@@ -132,7 +133,13 @@
             "description": "The region this one meets."
           },
           "side": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "north",
+              "east",
+              "south",
+              "west"
+            ]
           },
           "offset": {
             "type": "integer"

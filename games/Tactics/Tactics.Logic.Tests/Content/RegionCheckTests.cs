@@ -1,0 +1,294 @@
+using System.Text.Json;
+using ArcBox.Sdk;
+
+namespace Tactics.Logic.Tests;
+
+public sealed class RegionCheckTests
+{
+    private const string RegionFile = "chapter-01/world/r.json";
+
+    // The region lists its materials in the other order, so the indexes differ where the names agree.
+    private const byte Grass = 0, River = 1;
+    private const string FordMaterials = """["water/river", "grass/lush"]""";
+
+    private static readonly string FordMap = MapJson("ford", 2, 2, FordMaterials, [1, 1, 0, 1, 1, 0, 2, 0, 1, 1, 1, 0]);
+
+    /// <summary>The map <c>ford</c> stamped at (4, 5) with its heights raised by 1.</summary>
+    private static readonly (int X, int Y, byte Height, byte Material, TileFlags Flags)[] FordTiles =
+    [
+        (4, 5, 2, Grass, TileFlags.None), (5, 5, 2, Grass, TileFlags.None),
+        (4, 6, 3, River, TileFlags.Water), (5, 6, 2, Grass, TileFlags.None),
+    ];
+
+    private static readonly RegionStamp FordStamp = new("ford", new Tile(4, 5), 1);
+
+    private static string MapJson(string id, int width, int height, string materials, byte[] tiles)
+        => $$"""{ "id": "{{id}}", "size": [{{width}}, {{height}}], "tiles": "{{Convert.ToBase64String(tiles)}}", "materials": {{materials}}, "props": [], "zones": {} }""";
+
+    private static RegionDef Region(string id, params (int X, int Y, byte Height, byte Material, TileFlags Flags)[] tiles)
+        => new(id, id, 1, [32, 32], ["grass/lush", "water/river"], [new RegionChunk(0, 0, RegionTests.Tiles(tiles))], [], [],
+            new RegionSpawns(new Tile(0, 0), new Tile(1, 0)), []);
+
+    private static RegionDef Region(params (int X, int Y, byte Height, byte Material, TileFlags Flags)[] tiles) => Region("r", tiles);
+
+    private static RegionDef Stamped(params RegionStamp[] stamps) => Region(FordTiles) with { Stamps = [.. stamps] };
+
+    /// <summary>A wall of impassable tiles down column 8: everything east of it is cut off from the start.</summary>
+    private static (int X, int Y, byte Height, byte Material, TileFlags Flags)[] Wall(TileFlags flags = TileFlags.Impassable)
+        => [.. Enumerable.Range(0, 32).Select(y => (8, y, (byte)0, Grass, flags))];
+
+    private static (string, string) World(RegionDef def) => ($"world/{def.Id}.json", JsonSerializer.Serialize(def, ArcJson.Options));
+
+    private static (string, string) Map(string id, string json) => ($"maps/{id}.json", json);
+
+    private static IReadOnlyList<ContentError> ErrorsOf(RegionDef def) => ValidationTests.ErrorsOfChapter(World(def), Map("ford", FordMap));
+
+    private static void Loads(params RegionDef[] defs)
+        => Assert.NotNull(ValidationTests.LoadChapter([.. defs.Select(World), Map("ford", FordMap)]));
+
+    [Fact]
+    public void A_stamp_that_matches_its_map_loads_though_its_materials_are_listed_in_another_order()
+        => Loads(Stamped(FordStamp));
+
+    [Theory]
+    [InlineData(4, 6, 2, River, TileFlags.Water, "height 2, the map has 3")]
+    [InlineData(4, 6, 3, Grass, TileFlags.Water, "material 'grass/lush', the map has 'water/river'")]
+    [InlineData(4, 6, 3, River, TileFlags.None, "flags None, the map has Water")]
+    [InlineData(5, 6, 3, River, TileFlags.Water, "height 3, the map has 2; material 'water/river', the map has 'grass/lush'; flags Water, the map has None")]
+    public void A_stamp_that_differs_from_its_map_is_an_error(int x, int y, byte height, byte material, TileFlags flags, string difference)
+    {
+        var tiles = FordTiles.Where(t => (t.X, t.Y) != (x, y)).Append((x, y, height, material, flags)).ToArray();
+
+        Assert.Equal(
+            [new ContentError(RegionFile, "/stamps/0", $"The stamp 'ford' doesn't match its map at ({x}, {y}): the region has {difference}.")],
+            ErrorsOf(Region(tiles) with { Stamps = [FordStamp] }));
+    }
+
+    [Fact]
+    public void A_stamp_over_void_is_an_error()
+    {
+        var def = Region((31, 5, 2, Grass, TileFlags.None), (31, 6, 3, River, TileFlags.Water)) with
+        {
+            Size = [64, 32],
+            Stamps = [new RegionStamp("ford", new Tile(31, 5), 1)],
+        };
+
+        Assert.Equal(
+            [new ContentError(RegionFile, "/stamps/0", "The stamp 'ford' doesn't match its map at (32, 5): the region has void there.")],
+            ErrorsOf(def));
+    }
+
+    [Fact]
+    public void A_stamp_reports_only_its_first_bad_tile()
+    {
+        var error = Assert.Single(ErrorsOf(Stamped(FordStamp) with { Chunks = [new RegionChunk(0, 0, RegionTests.Tiles())] }));
+
+        Assert.Equal("The stamp 'ford' doesn't match its map at (4, 5): the region has height 0, the map has 2.", error.Message);
+    }
+
+    [Fact]
+    public void A_stamp_on_an_unknown_map_is_an_error()
+        => Assert.Equal([new ContentError(RegionFile, "/stamps/0/map", "Unknown map 'nowhere'.")],
+            ErrorsOf(Stamped(new RegionStamp("nowhere", new Tile(4, 5), 1))));
+
+    [Fact]
+    public void A_stamp_on_a_map_that_failed_to_load_reports_only_the_map()
+    {
+        var errors = ValidationTests.ErrorsOfChapter(World(Stamped(new RegionStamp("bad", new Tile(4, 5), 1))),
+            Map("bad", """{ "id": "bad", "size": [1, 1], "tiles": "not base64!", "materials": ["grass/lush"], "props": [], "zones": {} }"""));
+
+        Assert.Equal("chapter-01/maps/bad.json", Assert.Single(errors).File);
+    }
+
+    [Fact]
+    public void Two_stamps_of_one_map_are_an_error()
+        => Assert.Equal(
+            [new ContentError(RegionFile, "/stamps/1/map", "The map 'ford' is stamped twice, but an encounter on it must resolve to one place.")],
+            ErrorsOf(Region([.. FordTiles, .. FordTiles.Select(t => (t.X + 10, t.Y, t.Height, t.Material, t.Flags))]) with
+            {
+                Stamps = [FordStamp, new RegionStamp("ford", new Tile(14, 5), 1)],
+            }));
+
+    [Theory]
+    [InlineData(31, 5)]             // one column over the east side
+    [InlineData(4, 31)]             // one row over the south side
+    [InlineData(-1, 5)]
+    [InlineData(4, -1)]
+    [InlineData(int.MaxValue, 5)]   // its far corner wraps round in an int
+    public void A_stamp_outside_the_region_is_an_error(int x, int y)
+        => Assert.Equal(
+            [new ContentError(RegionFile, "/stamps/0", $"The stamp 'ford' at ({x}, {y}) is 2x2, which doesn't fit in the 32x32 region.")],
+            ErrorsOf(Stamped(new RegionStamp("ford", new Tile(x, y), 1))));
+
+    [Fact]
+    public void A_spot_or_spawn_that_cant_be_reached_is_an_error()
+    {
+        var def = Region(Wall()) with
+        {
+            Spawns = new RegionSpawns(new Tile(0, 0), new Tile(10, 10)),
+            Beats = [new BeatSpot("ch1_ember", new Tile(7, 9)), new BeatSpot("ch1_old_maud", new Tile(9, 9)), new BeatSpot("ch1_wall", new Tile(8, 2))],
+        };
+
+        Assert.Equal(
+            [
+                new ContentError(RegionFile, "/spawns/recovery", "The recovery spawn at (10, 10) can't be reached from the start."),
+                new ContentError(RegionFile, "/beats/1/at", "The beat 'ch1_old_maud' at (9, 9) can't be reached from the start."),
+                new ContentError(RegionFile, "/beats/2/at", "The beat 'ch1_wall' at (8, 2) can't be reached from the start."),
+            ],
+            ErrorsOf(def));
+    }
+
+    [Fact]
+    public void Two_markers_on_one_cut_off_tile_are_each_reported_once()
+    {
+        var def = Region(Wall()) with
+        {
+            Beats = [new BeatSpot("ch1_a", new Tile(9, 9)), new BeatSpot("ch1_b", new Tile(9, 9))],
+        };
+
+        Assert.Equal(["/beats/0/at", "/beats/1/at"], ErrorsOf(def).Select(e => e.Pointer));
+    }
+
+    [Fact]
+    public void Deep_water_cuts_a_region_in_two()
+        => Assert.Equal("The beat 'b' at (9, 9) can't be reached from the start.", Assert.Single(
+            ErrorsOf(Region(Wall(TileFlags.Deep | TileFlags.Water)) with { Beats = [new BeatSpot("b", new Tile(9, 9))] })).Message);
+
+    [Fact]
+    public void Shallow_water_can_be_crossed()
+        => Loads(Region(Wall(TileFlags.Water | TileFlags.Difficult)) with { Beats = [new BeatSpot("b", new Tile(9, 9))] });
+
+    [Fact]
+    public void A_marker_in_void_cant_be_reached()
+        => Assert.Equal("The beat 'b' at (40, 0) can't be reached from the start.", Assert.Single(
+            ErrorsOf(Region() with { Size = [64, 32], Beats = [new BeatSpot("b", new Tile(40, 0))] })).Message);
+
+    [Fact]
+    public void A_marker_outside_the_region_cant_be_reached()
+        => Assert.Equal("The beat 'b' at (-1, 0) can't be reached from the start.", Assert.Single(
+            ErrorsOf(Region() with { Beats = [new BeatSpot("b", new Tile(-1, 0))] })).Message);
+
+    [Fact]
+    public void A_corner_cant_be_cut()
+        => Assert.Equal("The beat 'b' at (1, 1) can't be reached from the start.", Assert.Single(
+            ErrorsOf(Region((1, 0, 0, Grass, TileFlags.Impassable), (0, 1, 0, Grass, TileFlags.Impassable)) with
+            {
+                Spawns = new RegionSpawns(new Tile(0, 0), new Tile(0, 0)),
+                Beats = [new BeatSpot("b", new Tile(1, 1))],
+            })).Message);
+
+    [Fact]
+    public void A_step_of_2_levels_can_be_climbed_both_ways()
+        => Loads(Region("up", Plain(8, 31, 2)) with { Beats = [new BeatSpot("b", new Tile(9, 9))] },
+            Region("down", Plain(0, 7, 2)) with { Beats = [new BeatSpot("b", new Tile(9, 9))] });
+
+    [Fact]
+    public void A_step_of_3_levels_cant_be_climbed()
+        => Assert.Equal("The beat 'b' at (9, 9) can't be reached from the start.", Assert.Single(
+            ErrorsOf(Region(Plain(8, 31, 3)) with { Beats = [new BeatSpot("b", new Tile(9, 9))] })).Message);
+
+    /// <summary>Whole columns of plain ground at one height.</summary>
+    private static (int X, int Y, byte Height, byte Material, TileFlags Flags)[] Plain(int firstColumn, int lastColumn, byte height)
+        =>
+        [
+            .. from x in Enumerable.Range(firstColumn, lastColumn - firstColumn + 1)
+               from y in Enumerable.Range(0, 32)
+               select (x, y, height, Grass, TileFlags.None),
+        ];
+
+    [Fact]
+    public void A_start_that_cant_be_stood_on_is_reported_alone()
+    {
+        var def = Region((0, 0, 0, Grass, TileFlags.Impassable)) with { Beats = [new BeatSpot("b", new Tile(9, 9))] };
+
+        Assert.Equal([new ContentError(RegionFile, "/spawns/start", "The start spawn at (0, 0) can't be stood on.")], ErrorsOf(def));
+    }
+
+    [Fact]
+    public void A_stamp_that_cant_be_reached_is_an_error()
+    {
+        var ring = from x in Enumerable.Range(3, 4)
+                   from y in Enumerable.Range(4, 4)
+                   where x is 3 or 6 || y is 4 or 7
+                   select (x, y, (byte)0, Grass, TileFlags.Impassable);
+
+        Assert.Equal(
+            [new ContentError(RegionFile, "/stamps/0", "The stamp 'ford' at (4, 5) can't be reached from the start.")],
+            ErrorsOf(Region([.. FordTiles, .. ring]) with { Stamps = [FordStamp] }));
+    }
+
+    [Fact]
+    public void One_tile_of_a_stamp_is_enough_to_reach_it()
+    {
+        var ring = from x in Enumerable.Range(3, 4)
+                   from y in Enumerable.Range(4, 4)
+                   where (x is 3 or 6 || y is 4 or 7) && (x, y) != (4, 4)
+                   select (x, y, (byte)0, Grass, TileFlags.Impassable);
+
+        Loads(Region([.. FordTiles, .. ring]) with { Stamps = [FordStamp] });
+    }
+
+    [Fact]
+    public void Two_stamps_that_overlap_are_an_error()
+    {
+        var other = MapJson("bank", 1, 1, FordMaterials, [2, 1, 0]);
+        var def = Stamped(FordStamp, new RegionStamp("bank", new Tile(5, 6), 0));
+
+        Assert.Equal(
+            [new ContentError(RegionFile, "/stamps/1", "The stamp 'bank' at (5, 6) overlaps the stamp 'ford' at (4, 5).")],
+            ValidationTests.ErrorsOfChapter(World(def), Map("ford", FordMap), Map("bank", other)));
+    }
+
+    [Fact]
+    public void Two_stamps_side_by_side_are_allowed()
+    {
+        var other = MapJson("bank", 1, 1, FordMaterials, [0, 1, 0]);
+        var def = Stamped(FordStamp, new RegionStamp("bank", new Tile(6, 6), 0));
+
+        Assert.NotNull(ValidationTests.LoadChapter(World(def), Map("ford", FordMap), Map("bank", other)));
+    }
+
+    private static RegionDef WithEdges(string id, params RegionEdge[] edges) => Region(id) with { Edges = [.. edges] };
+
+    [Theory]
+    [InlineData("east", "west")]
+    [InlineData("west", "east")]
+    [InlineData("north", "south")]
+    [InlineData("south", "north")]
+    public void Edges_on_facing_sides_are_allowed(string side, string facing)
+        => Loads(WithEdges("a", new RegionEdge("b", side, 12)), WithEdges("b", new RegionEdge("a", facing, 12)));
+
+    [Fact]
+    public void Edges_that_disagree_with_a_neighbour_are_an_error()
+    {
+        var errors = ValidationTests.ErrorsOfChapter(World(WithEdges("a", new RegionEdge("b", "east", 12))),
+            World(WithEdges("b", new RegionEdge("a", "north", 12))));
+
+        Assert.Equal(
+            [
+                new ContentError("chapter-01/world/a.json", "/edges/0", "This region meets 'b' on its east side, but 'b' has no west edge back to it."),
+                new ContentError("chapter-01/world/b.json", "/edges/0", "This region meets 'a' on its north side, but 'a' has no south edge back to it."),
+            ],
+            errors);
+    }
+
+    [Fact]
+    public void A_neighbour_that_doesnt_list_this_region_disagrees()
+        => Assert.Equal(
+            [new ContentError("chapter-01/world/a.json", "/edges/0", "This region meets 'b' on its east side, but 'b' has no west edge back to it.")],
+            ValidationTests.ErrorsOfChapter(World(WithEdges("a", new RegionEdge("b", "east", 12))), World(WithEdges("b"))));
+
+    [Fact]
+    public void A_region_with_no_neighbour_loaded_skips_its_edge_check()
+        => Loads(WithEdges("a", new RegionEdge("skarrow_hills", "east", 12)));
+
+    [Fact]
+    public void A_neighbour_that_failed_to_load_reports_only_its_own_error()
+    {
+        var broken = WithEdges("b") with { Chapter = 0 };
+
+        var errors = ValidationTests.ErrorsOfChapter(World(WithEdges("a", new RegionEdge("b", "east", 12))), World(broken));
+
+        Assert.Equal("chapter-01/world/b.json", Assert.Single(errors).File);
+    }
+}

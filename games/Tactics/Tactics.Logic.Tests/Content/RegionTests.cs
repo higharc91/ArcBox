@@ -9,7 +9,7 @@ public sealed class RegionTests
     private const int TilesInChunk = 32 * 32;
 
     /// <summary>A chunk's base64, every tile blank but the given ones, which are in the chunk's own coordinates.</summary>
-    private static string Tiles(params (int X, int Y, byte Height, byte Material, TileFlags Flags)[] tiles)
+    internal static string Tiles(params (int X, int Y, byte Height, byte Material, TileFlags Flags)[] tiles)
     {
         var bytes = new byte[TilesInChunk * 3];
         foreach (var (x, y, height, material, flags) in tiles)
@@ -91,14 +91,15 @@ public sealed class RegionTests
     [Fact]
     public void A_region_loads_from_its_world_file()
     {
-        var def = Region(32, 32, new RegionChunk(0, 0, Tiles((1, 2, 3, 1, TileFlags.Water)))) with
+        var def = Region(32, 32, new RegionChunk(0, 0, Tiles((1, 2, 3, 1, TileFlags.Water), (4, 5, 2, 0, TileFlags.None)))) with
         {
-            Stamps = [new RegionStamp("field", new Tile(4, 5), 2)],
+            Stamps = [new RegionStamp("post", new Tile(4, 5), 2)],
             Beats = [new BeatSpot("ch1_old_maud", new Tile(6, 7))],
             Edges = [new RegionEdge("skarrow_hills", "east", 12)],
         };
 
-        var pack = ValidationTests.LoadChapter(("world/r.json", Json(def)));
+        var pack = ValidationTests.LoadChapter(("world/r.json", Json(def)),
+            ("maps/post.json", """{ "id": "post", "size": [1, 1], "tiles": "AAAA", "materials": ["grass/lush"], "props": [], "zones": {} }"""));
 
         Assert.Equal(["r"], pack.Regions.Keys);
         Assert.Same(StringComparer.Ordinal, pack.Regions.KeyComparer);
@@ -161,7 +162,8 @@ public sealed class RegionTests
     [Fact]
     public void A_chunk_partly_inside_the_region_is_allowed()
     {
-        var pack = ValidationTests.LoadChapter(("world/r.json", Json(Region(33, 33, new RegionChunk(1, 1, Tiles())))));
+        var def = Region(33, 33, new RegionChunk(1, 1, Tiles())) with { Spawns = new RegionSpawns(new Tile(32, 32), new Tile(32, 32)) };
+        var pack = ValidationTests.LoadChapter(("world/r.json", Json(def)));
 
         Assert.True(pack.RegionFor("r")!.Walkable(new Tile(32, 32)));
     }
@@ -250,7 +252,7 @@ public sealed class RegionTests
     [Fact]
     public void Two_regions_with_one_id_are_a_content_error()
     {
-        var region = Json(Region(32, 32));
+        var region = Json(Region(32, 32, new RegionChunk(0, 0, Tiles())));
 
         var error = Assert.Single(ValidationTests.ErrorsOfChapter(("world/a.json", region), ("world/b.json", region)));
 
@@ -268,11 +270,29 @@ public sealed class RegionTests
     }
 
     [Fact]
-    public void From_refuses_a_region_the_loader_would_refuse()
+    public void From_refuses_a_bad_size_a_repeated_chunk_and_bad_chunk_bytes()
     {
         Assert.Throws<ArgumentException>(() => WorldRegion.From(Region(32, 32, new RegionChunk(0, 0, "AAAA"))));
         Assert.Throws<ArgumentException>(() => WorldRegion.From(Region(32, 32) with { Size = [32] }));
         Assert.Throws<ArgumentException>(() => WorldRegion.From(Region(32, 32, new RegionChunk(0, 0, Tiles()), new RegionChunk(0, 0, Tiles()))));
         Assert.Throws<ArgumentException>(() => WorldRegion.From(Region(32, 32, new RegionChunk(0, 0, Tiles((0, 0, 0, 2, TileFlags.None))))));
+        Assert.Throws<ArgumentException>(() => WorldRegion.From(Region(32, 32, new RegionChunk(0, 0, "not base64!"))));
+        Assert.Throws<ArgumentException>(() => WorldRegion.From(Region(32, 32, new RegionChunk(0, 0, Tiles((0, 0, 10, 0, TileFlags.None))))));
+        Assert.Throws<ArgumentException>(() => WorldRegion.From(Region(32, 32, new RegionChunk(0, 0, Tiles((0, 0, 0, 0, (TileFlags)0x40))))));
     }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    public void A_chapter_below_1_is_a_content_error(int chapter)
+        => Assert.Equal([new ContentError(RegionFile, "/chapter", $"The chapter must be at least 1, got {chapter}.")],
+            ErrorsOf(Region(32, 32, new RegionChunk(0, 0, Tiles())) with { Chapter = chapter }));
+
+    [Theory]
+    [InlineData("up")]
+    [InlineData("East")]
+    [InlineData("")]
+    public void A_side_that_isnt_a_compass_point_is_a_content_error(string side)
+        => Assert.Equal([new ContentError(RegionFile, "/edges/0/side", $"The side '{side}' must be north, east, south or west.")],
+            ErrorsOf(Region(32, 32, new RegionChunk(0, 0, Tiles())) with { Edges = [new RegionEdge("skarrow_hills", side, 0)] }));
 }
