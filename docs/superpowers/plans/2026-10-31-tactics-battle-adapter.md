@@ -44,5 +44,5 @@ Milestone 3b (the Godot TV scene) gets its own plan once 3a is merged and has be
 **Not covered yet:** a playtest on real phones.
 
 **Known limits:**
-- `turn` view data is about 17 KB at level 1 with 6 abilities. Casters at level 10, with many area spells, will be larger. Measure before the 64 KB warning matters.
+- **Turn view size.** Tile targets that affect no one are sent as bare `[x, y]` tiles (`PhoneChoices`). The largest level-10 kit then comes to 23 KB (sorcerer; the druid went from 45 to 15 KB). `ViewSizeTests` keeps every class under 32 KB, half the platform's 64 KB warning.
 - The map on the phone shows only the bounding box of units and moves; there's no terrain yet (3b sends map tiles).

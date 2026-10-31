@@ -67,7 +67,10 @@ export interface AbilityChoice {
   name: string;
   tooltip: string;
   cost: Cost;
+  /** Targets that affect someone, with their previews. */
   targets: TargetChoice[];
+  /** The other legal aim tiles, bare (a tile-aimed area spell can have hundreds): pickable on the map. */
+  tiles: Tile[];
 }
 
 export interface TurnChoices {

@@ -71,6 +71,23 @@ describe("tactics phone module", () => {
     expect(send).toHaveBeenLastCalledWith({ action: "endTurn" });
   });
 
+  it("turn: an area spell can be aimed at a bare tile picked on the map", () => {
+    const v = view("turn");
+    const data = v.data as unknown as TurnData;
+    const [x, y] = data.me.at;
+    data.choices.abilities = [{
+      ability: "wizard.fireball", item: null, name: "Fireball", tooltip: "Boom", cost: { action: 1, resource: { mana: 3 } },
+      targets: [], tiles: [[x + 1, y]],
+    }];
+    const send = vi.fn();
+    render(<ControllerScreen view={v} send={send} me="ALEX" game="tactics" />);
+    fireEvent.click(screen.getByRole("button", { name: /^Fireball/ }));
+    // A single legal target is picked for you; the map marks it as an aim tile.
+    expect(document.querySelectorAll(".tx-cell.aim")).toHaveLength(1);
+    fireEvent.click(screen.getByRole("button", { name: "Use" }));
+    expect(send).toHaveBeenLastCalledWith({ action: "use", data: { ability: "wizard.fireball", tile: [x + 1, y] } });
+  });
+
   it("turn: the d-pad moves the cursor off your own tile", () => {
     show("turn");
     const cursor = () => document.querySelector(".tx-cell.cursor")!;

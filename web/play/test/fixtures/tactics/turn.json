@@ -722,7 +722,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "tiles": []
         },
         {
           "ability": "common.disengage",
@@ -750,7 +751,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "tiles": []
         },
         {
           "ability": "common.dodge",
@@ -778,7 +780,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "tiles": []
         },
         {
           "ability": "common.help",
@@ -823,7 +826,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "tiles": []
         },
         {
           "ability": "rogue.cunning_hide",
@@ -851,7 +855,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "tiles": []
         },
         {
           "ability": "common.use_item",
@@ -913,7 +918,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "tiles": []
         }
       ],
       "canDelay": true

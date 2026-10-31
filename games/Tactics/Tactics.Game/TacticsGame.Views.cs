@@ -9,6 +9,29 @@ namespace Tactics.Game;
 public sealed record UnitView(UnitId Id, string Name, string Side, string? Sprite, Tile At, int Hp, int MaxHp, int TempHp,
     string Life, int Countdown, ImmutableArray<string> Conditions, string? Player);
 
+/// <summary>
+/// An ability on the phone's turn screen. <see cref="Targets"/> are the targets that affect someone (with their
+/// previews); <see cref="Tiles"/> are the other legal aim tiles, bare, since a tile-aimed area spell can have hundreds
+/// and each would otherwise repeat an empty preview (adapter spec §8: the view stays under 64 KB).
+/// </summary>
+public sealed record PhoneAbility(AbilityId Ability, ItemId? Item, string Name, string Tooltip, CostDef Cost,
+    ImmutableArray<TargetChoice> Targets, ImmutableArray<Tile> Tiles);
+
+/// <summary><see cref="TurnChoices"/> as the phone gets them, abilities compacted (<see cref="PhoneAbility"/>).</summary>
+public sealed record PhoneChoices(UnitId Unit, TurnEconomy Economy, ImmutableArray<MoveChoice> Moves,
+    ImmutableArray<PhoneAbility> Abilities, bool CanDelay)
+{
+    /// <summary>Compacts <paramref name="choices"/>: a tile target that affects no one becomes a bare tile.</summary>
+    public static PhoneChoices Of(TurnChoices choices) => new(choices.Unit, choices.Economy, choices.Moves,
+        [.. choices.Abilities.Select(a =>
+        {
+            bool Bare(TargetChoice t) => t.Target.Unit is null && t.Target.Tile == t.Aim && t.Affected.IsEmpty;
+            return new PhoneAbility(a.Ability, a.Item, a.Name, a.Tooltip, a.Cost,
+                [.. a.Targets.Where(t => !Bare(t))], [.. a.Targets.Where(Bare).Select(t => t.Aim)]);
+        })],
+        choices.CanDelay);
+}
+
 /// <summary>The battle as the TV draws it (adapter spec §8).</summary>
 public sealed record BattleView(string Encounter, string Map, int Round, ImmutableArray<UnitId> Order, UnitId? Active,
     ImmutableArray<UnitView> Units, ImmutableArray<Beat> Beats, string? Outcome);
@@ -90,7 +113,7 @@ public sealed partial class TacticsGame
             {
                 me = UnitViewOf(me),
                 units = state.Units.Values.Where(DownedRules.InBattle).Select(UnitViewOf),
-                choices = Choices.For(state, unit, Rules),
+                choices = PhoneChoices.Of(Choices.For(state, unit, Rules)),
             })
                 with { DeadlineUtc = _ctx.TimerDeadline(Timers.Turn) };
         return Custom(Screens.Status, new

@@ -142,8 +142,11 @@ export function Turn({ data, send }: CustomScreenProps) {
   const ability: AbilityChoice | null = abilityIx === null ? null : choices.abilities[abilityIx] ?? null;
   const names = useMemo(() => new Map(units.map((u) => [u.id, u.name])), [units]);
   const move = ability ? undefined : choices.moves.find((m) => same(m.to, cursor));
-  const target: TargetChoice | undefined = ability?.targets.find((t) => same(t.aim, cursor))
-    ?? (ability?.targets.length === 1 ? ability.targets[0] : undefined);
+  // Every legal target: the ones with previews, then the bare tiles, which are only picked on the map.
+  const all: TargetChoice[] = useMemo(() => ability
+    ? [...ability.targets, ...ability.tiles.map((t): TargetChoice => ({ target: { unit: null, tile: t }, aim: t, affected: [] }))]
+    : [], [ability]);
+  const target: TargetChoice | undefined = all.find((t) => same(t.aim, cursor)) ?? (all.length === 1 ? all[0] : undefined);
 
   const use = (a: AbilityChoice, t: TargetChoice) =>
     send("use", { ability: a.ability, item: a.item ?? undefined, unit: t.target.unit ?? undefined, tile: t.target.tile ?? undefined });
@@ -166,7 +169,7 @@ export function Turn({ data, send }: CustomScreenProps) {
       </div>
 
       <MiniMap me={me} units={units} cursor={cursor} onPick={setCursor}
-        reach={ability ? [] : choices.moves.map((m) => m.to)} aims={ability ? ability.targets.map((t) => t.aim) : []} />
+        reach={ability ? [] : choices.moves.map((m) => m.to)} aims={all.map((t) => t.aim)} />
       <DPad cursor={cursor} onMove={setCursor} />
 
       {ability ? (
