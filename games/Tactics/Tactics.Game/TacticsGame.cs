@@ -65,7 +65,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     private readonly HashSet<ProfileId> _awaited = [];
 
     /// <inheritdoc />
-    public GameManifest Manifest { get; } = new(Id, "Tactics", "Turn-based co-op battles, played week after week", MinPlayers: 1,
+    public GameManifest Manifest { get; } = new(Id, Brand.Name, Brand.Tagline, MinPlayers: 1,
         MaxPlayers: 6, UsesCampaigns: true, ResumesAfterRestart: true);
 
     /// <summary>

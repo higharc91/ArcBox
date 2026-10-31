@@ -85,6 +85,10 @@ python3 -m unittest discover -s tools/tactics-lore
 
 ## 6. The setting: Embers of the Vale
 
+**Name.** The game's player-facing title is **Wardenflame**, chosen 2026-10-31 (`Tactics.Game.Brand`).
+**Embers of the Vale** is the setting of the first campaign. The working name "tactics" stays in code, ids and content
+paths: renaming them would break saved campaigns and cached packs, and players never see them.
+
 Chosen 2026-10-31. The campaign's working title was already *Embers of the Vale* in the Platform v2 spec and the
 mockups, and the bible builds on it. It's written in `content/tactics/base/lore/`; `world.json` is the place to start.
 
