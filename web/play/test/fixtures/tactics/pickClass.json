@@ -64,7 +64,8 @@
         "name": "Wizard",
         "role": "control"
       }
-    ]
+    ],
+    "portal": "/c/ABCD"
   },
   "viewId": "v1",
   "deadlineUtc": null,

@@ -71,6 +71,8 @@ export interface AbilityChoice {
   targets: TargetChoice[];
   /** The other legal aim tiles, bare (a tile-aimed area spell can have hundreds): pickable on the map. */
   tiles: Tile[];
+  /** How it's aimed: at a unit, a tile, a direction (a line or cone from you), or just used ("self"). */
+  aim?: "unit" | "tile" | "direction" | "self";
 }
 
 export interface TurnChoices {
@@ -93,12 +95,21 @@ export interface ReactOption {
   id: string;
   label: string;
   target: string | null;
+  /** What the reaction does. */
+  tooltip?: string | null;
 }
 
 export interface ReactData {
   unit: string;
   trigger: string;
-  cause: { kind: string; actor: string | null; target: string | null; ability: string | null } | null;
+  cause: {
+    kind: string; actor: string | null; target: string | null; ability: string | null;
+    roll?: { total: number; vs: number } | null;
+  } | null;
+  /** The acting unit's name, the target's ("you" when it's you) and the ability's, in words. */
+  actor?: string | null;
+  targetName?: string | null;
+  ability?: string | null;
   options: ReactOption[];
 }
 
@@ -130,4 +141,6 @@ export interface ResultsData {
   lines: { name: string; xp: number; injuries: string[] }[];
   vip: boolean;
   level: number;
+  /** The campaign portal's path, where characters are made and grown; null outside a campaign. */
+  portal?: string | null;
 }

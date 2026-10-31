@@ -94,6 +94,24 @@ public sealed class PlannerTests
     }
 
     [Fact]
+    public void Nobody_helps_an_ally_with_no_foe_in_reach()
+    {
+        // Two goblins cut off from the party by a wall (as goblins across the river were in play): nothing they do this
+        // turn reaches a foe, and Help's advantage would go to waste, so neither spends its action on it.
+        string Row() => string.Join(' ', Enumerable.Range(0, 12).Select(x => x == 6 ? "0#" : "0."));
+        var battle = On(string.Join('\n', Enumerable.Repeat(Row(), 3)))
+            .With(A("common.help")).WithConditions(C("helped"))
+            .Enemy("gob1", First(Monster("goblin")), T(10, 1), new AiControlled("brute"))
+            .Enemy("gob2", Monster("goblin"), T(10, 2), new AiControlled("brute"))
+            .Party("kara", TestSheets.Fighter, T(1, 1));
+        var (state, _) = battle.Start();
+
+        var plan = Ai.Plan(state, U("gob1"), battle.Rules);
+
+        Assert.True(UseOf(plan, "common.help") is null, plan.Explain);
+    }
+
+    [Fact]
     public void Brute_finishes_low_hp_enemy()
     {
         // The fighter (AC 18) has 2 HP left; the rogue (AC 14) is easier to hit but can't be killed with one blow.

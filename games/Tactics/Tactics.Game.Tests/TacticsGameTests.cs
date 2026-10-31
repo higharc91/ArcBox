@@ -171,7 +171,8 @@ public sealed class TacticsGameTests
 
         var interrupted = new Session();
         interrupted.ToBattle(everyoneAway: true);
-        for (var i = 0; i < 40; i++)
+        // Stop early in the battle (8 pacing steps, well before any battle here can end).
+        for (var i = 0; i < 8; i++)
             interrupted.Harness.Advance(TimeSpan.FromSeconds(7));
         Assert.Equal(TacticsPhase.Battle, interrupted.Game.Phase);
 

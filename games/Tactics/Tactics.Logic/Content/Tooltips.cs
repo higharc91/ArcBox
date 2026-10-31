@@ -46,8 +46,36 @@ public static class Tooltips
         List<string> parts = [];
         for (var i = 0; i < effects.Length; i++)
             parts.Add(i == 0 && lead is AttackEffect or SaveEffect ? LeadBody(effects[0], level, rules) : Phrase(effects[i], level, rules));
+        // An ability that affects only its user speaks to them: "you gain your Move again", not "target gains its Move again".
+        if (a.Target.Kind == TargetKind.Self && a.Target.Area.Shape is AreaShape.Self or AreaShape.Single)
+            parts = [.. parts.Select(SecondPerson)];
         var text = parts.Count == 0 ? header : $"{header}: {string.Join("; ", parts)}";
         return string.IsNullOrEmpty(a.Flavor) ? text : $"{text} — {a.Flavor}";
+    }
+
+    /// <summary>"target {verb}" at the start of a phrase, said to the unit itself ("target gains" → "you gain").</summary>
+    private static readonly (string Target, string You)[] Subjects =
+    [
+        ("target gains", "you gain"), ("target gets", "you get"), ("target loses", "you lose"), ("target is", "you are"),
+        ("target can't", "you can't"), ("target has", "you have"), ("target resists", "you resist"),
+    ];
+
+    /// <summary>Once "you" is the subject, the rest of the phrase agrees with it.</summary>
+    private static readonly (System.Text.RegularExpressions.Regex Pattern, string With)[] YouAgreement =
+    [
+        (new(@"\bhas\b"), "have"), (new(@"\bis attacked\b"), "are attacked"), (new(@"\bresists\b"), "resist"), (new(@"\bits\b"), "your"),
+    ];
+
+    /// <summary>
+    /// A phrase that starts "target {verb}" reworded for the unit itself; any other phrase is left alone (in "your next
+    /// single-target spell", the target isn't you).
+    /// </summary>
+    private static string SecondPerson(string phrase)
+    {
+        foreach (var (target, you) in Subjects)
+            if (phrase.StartsWith(target + " ", StringComparison.Ordinal) || phrase == target)
+                return YouAgreement.Aggregate(you + phrase[target.Length..], (text, form) => form.Pattern.Replace(text, form.With));
+        return phrase;
     }
 
     /// <summary>The tooltip for <paramref name="p"/> as used by a unit of <paramref name="level"/>.</summary>

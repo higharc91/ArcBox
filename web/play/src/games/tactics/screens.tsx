@@ -36,10 +36,16 @@ export function costText(cost: Cost): string {
 // ---- Muster, encounter pick, results -------------------------------------------------------------------------------
 
 export function PickClass({ data, send }: CustomScreenProps) {
-  const { classes } = data as { classes: ClassOption[] };
+  const { classes, portal } = data as { classes: ClassOption[]; portal?: string | null };
   return (
     <div class="tx tx-pick">
       <h2>Choose your class</h2>
+      {portal ? (
+        <p class="tx-dim">
+          Or <a class="tx-link" href={portal} target="_blank" rel="noopener">make your own character</a> (race, scores,
+          background), then come back.
+        </p>
+      ) : null}
       <div class="tx-grid">
         {classes.map((c) => (
           <button type="button" key={c.id} class="tx-class" onClick={() => send("pickClass", { class: c.id })}>
@@ -81,6 +87,7 @@ export function Results({ data, send }: CustomScreenProps) {
           </li>
         ))}
       </ul>
+      {r.portal ? <p><a class="tx-link" href={r.portal} target="_blank" rel="noopener">Your character: spend XP and change picks</a></p> : null}
       {r.vip ? (
         <div class="tx-actions">
           <button type="button" class="big" onClick={() => send("next")}>Next battle</button>
@@ -112,15 +119,33 @@ const TRIGGERS: Record<string, string> = {
   spellCast: "A foe is casting a spell",
 };
 
+/** "Goblin's Attack is hitting you: 16 against AC 11", from the reaction's cause; null when there's nothing to say. */
+export function reactionDetail(r: ReactData): string | null {
+  if (!r.actor) return null;
+  const what = r.ability ? `${r.actor}'s ${r.ability}` : r.actor;
+  switch (r.trigger) {
+    case "beforeHit": {
+      const roll = r.cause?.roll;
+      return `${what} is hitting ${r.targetName ?? "you"}${roll ? `: ${roll.total} against AC ${roll.vs}` : ""}`;
+    }
+    case "leavesReach": return `${r.actor} is moving out of your reach`;
+    case "spellCast": return `${r.actor} is casting ${r.ability ?? "a spell"}`;
+    default: return what;
+  }
+}
+
 export function ReactPrompt({ data, send }: CustomScreenProps) {
   const r = data as ReactData;
+  const detail = reactionDetail(r);
   return (
     <div class="tx tx-react">
       <p class="tx-big">{TRIGGERS[r.trigger] ?? "You can react"}</p>
-      <div class="tx-actions">
+      {detail ? <p class="tx-react-detail">{detail}</p> : null}
+      <div class="tx-actions tx-react-options">
         {r.options.map((o) => (
           <button type="button" key={o.id} class={o.id === "pass" ? "" : "big"} onClick={() => send("react", { choice: o.id })}>
             {o.label}
+            {o.tooltip ? <span class="tx-react-tip">{o.tooltip}</span> : null}
           </button>
         ))}
       </div>
@@ -140,10 +165,12 @@ export function Turn({ data, send }: CustomScreenProps) {
   const map = useMap(mapId);
   const [abilityIx, setAbilityIx] = useState<number | null>(null);
   const [cursor, setCursor] = useState<Tile>(me.at);
+  // A new view resets the selection, but the same view sent again (a reconnect, a refresh) keeps what you were doing.
+  const content = useMemo(() => JSON.stringify(data), [data]);
   useEffect(() => {
     setAbilityIx(null);
     setCursor(me.at);
-  }, [data]);
+  }, [content]);
 
   const ability: AbilityChoice | null = abilityIx === null ? null : choices.abilities[abilityIx] ?? null;
   const names = useMemo(() => new Map(units.map((u) => [u.id, u.name])), [units]);
@@ -167,10 +194,10 @@ export function Turn({ data, send }: CustomScreenProps) {
       <div class="tx-me">
         <b>{me.name}</b>
         <Hp unit={me} />
-        <span class="tx-pips" aria-label="Turn economy">
-          <i class={e.action || e.extraActions > 0 ? "on" : ""}>A</i>
-          <i class={e.bonus ? "on" : ""}>B</i>
-          <i class={e.moveLeft > 0 ? "on" : ""}>{e.moveLeft}</i>
+        <span class="tx-pips" aria-label="What you have left this turn">
+          <i class={e.action || e.extraActions > 0 ? "on" : ""} title="Your action">Action</i>
+          <i class={e.bonus ? "on" : ""} title="Your bonus action">Bonus</i>
+          <i class={e.moveLeft > 0 ? "on" : ""} title="Tiles of movement left">Move {e.moveLeft}</i>
         </span>
       </div>
 
@@ -178,7 +205,8 @@ export function Turn({ data, send }: CustomScreenProps) {
       {ability ? (
         <div class="tx-actions tx-commit">
           <button type="button" class="big" disabled={!target} onClick={() => target && use(ability, target)}>
-            {target ? `Use${target.target.unit && target.target.unit !== me.id ? ` on ${names.get(target.target.unit) ?? ""}` : ""}` : "Pick a target"}
+            {target ? `Use${target.target.unit && target.target.unit !== me.id ? ` on ${names.get(target.target.unit) ?? ""}` : ""}`
+              : ability.aim === "direction" ? "Pick a direction" : ability.aim === "tile" ? "Pick a tile" : "Pick a target"}
           </button>
           <button type="button" onClick={() => setAbilityIx(null)}>Back</button>
         </div>

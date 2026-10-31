@@ -119,20 +119,22 @@ public sealed partial class TacticsGame
                 _ctx.CancelTimer(Timers.Turn);
                 _turnTimerFor = null;
             }
+            // A player's reaction prompt is on their phone the moment the offer exists, so its 10 s start then, not once the
+            // TV has caught up (else the prompt shows without a countdown and its window runs long).
+            if (state.Pending is ReactionOffer played && IsPlayed(played.Reactor))
+            {
+                if (_reactTimerFor?.Reactor != played.Reactor || _reactTimerFor?.Seq != _seq)
+                {
+                    _ctx.SetTimer(Timers.React, _timing.Reaction);
+                    _reactTimerFor = (played.Reactor, _seq);
+                }
+                return;
+            }
             if (_awaitShown is not null)
                 return;
 
             if (state.Pending is ReactionOffer offer)
             {
-                if (IsPlayed(offer.Reactor))
-                {
-                    if (_reactTimerFor?.Reactor != offer.Reactor || _reactTimerFor?.Seq != _seq)
-                    {
-                        _ctx.SetTimer(Timers.React, _timing.Reaction);
-                        _reactTimerFor = (offer.Reactor, _seq);
-                    }
-                    return;
-                }
                 ApplyAi(new React(offer.Reactor, Ai.React(state, offer, Rules)), aiFinished: false);
                 continue;
             }

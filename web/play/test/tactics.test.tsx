@@ -155,8 +155,52 @@ describe("tactics phone module", () => {
   it("react: a reaction answers the offer", () => {
     const send = show("react");
     expect(screen.getByText("You're about to be hit")).toBeTruthy();
-    fireEvent.click(screen.getByRole("button", { name: "Shield" }));
+    fireEvent.click(screen.getByRole("button", { name: /^Shield/ }));
     expect(send).toHaveBeenLastCalledWith({ action: "react", data: { choice: "wizard.shield" } });
+  });
+
+  it("react: says who is hitting whom with what roll, and what each reaction does", () => {
+    show("react");
+    expect(screen.getByText("Goblin's Attack is hitting you: 16 against AC 11")).toBeTruthy();
+    expect(screen.getByText("Self: you get +5 AC until the end of your turn")).toBeTruthy();
+  });
+
+  it("turn: the economy chips are spelled out, and a cone asks for a direction", () => {
+    const v = view("turn");
+    const data = v.data as unknown as TurnData;
+    const [x, y] = data.me.at;
+    data.choices.abilities = [{
+      ability: "wizard.burning_hands", item: null, name: "Burning Hands", tooltip: "Cone", cost: { action: 1 },
+      targets: [], tiles: [[x + 1, y], [x - 1, y]], aim: "direction",
+    }];
+    render(<ControllerScreen view={v} send={() => {}} me="ALEX" game="tactics" />);
+    expect(screen.getByTitle("Your action").textContent).toBe("Action");
+    expect(screen.getByTitle("Tiles of movement left").textContent).toBe(`Move ${data.choices.economy.moveLeft}`);
+    fireEvent.click(screen.getByRole("button", { name: /^Burning Hands/ }));
+    expect(screen.getByRole("button", { name: "Pick a direction" })).toBeTruthy();
+  });
+
+  it("turn: the same view sent again keeps your selection; a new one clears it", () => {
+    const v = view("turn");
+    const { rerender } = render(<ControllerScreen view={v} send={() => {}} me="ALEX" game="tactics" />);
+    fireEvent.click(screen.getByRole("button", { name: /^Dash/ }));
+    expect(screen.getByRole("button", { name: "Back" })).toBeTruthy();
+
+    rerender(<ControllerScreen view={structuredClone(v)} send={() => {}} me="ALEX" game="tactics" />);   // a reconnect re-sends it
+    expect(screen.getByRole("button", { name: "Back" })).toBeTruthy();
+
+    const moved = structuredClone(v);
+    (moved.data as unknown as TurnData).choices.economy.moveLeft = 0;
+    rerender(<ControllerScreen view={moved} send={() => {}} me="ALEX" game="tactics" />);
+    expect(screen.queryByRole("button", { name: "Back" })).toBeNull();
+  });
+
+  it("class pick and results link to the campaign portal", () => {
+    show("pickClass");
+    expect(screen.getByRole("link", { name: "make your own character" }).getAttribute("href")).toBe("/c/ABCD");
+    cleanup();
+    show("results");
+    expect(screen.getByRole("link", { name: /Your character/ }).getAttribute("href")).toBe("/c/ABCD");
   });
 
   it("results: the VIP goes on to the next battle", () => {

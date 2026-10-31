@@ -15,21 +15,37 @@ public sealed record UnitView(UnitId Id, string Name, string Side, string? Sprit
 /// and each would otherwise repeat an empty preview (adapter spec §8: the view stays under 64 KB).
 /// </summary>
 public sealed record PhoneAbility(AbilityId Ability, ItemId? Item, string Name, string Tooltip, CostDef Cost,
-    ImmutableArray<TargetChoice> Targets, ImmutableArray<Tile> Tiles);
+    ImmutableArray<TargetChoice> Targets, ImmutableArray<Tile> Tiles, string Aim = "unit");
 
 /// <summary><see cref="TurnChoices"/> as the phone gets them, abilities compacted (<see cref="PhoneAbility"/>).</summary>
 public sealed record PhoneChoices(UnitId Unit, TurnEconomy Economy, ImmutableArray<MoveChoice> Moves,
     ImmutableArray<PhoneAbility> Abilities, bool CanDelay)
 {
-    /// <summary>Compacts <paramref name="choices"/>: a tile target that affects no one becomes a bare tile.</summary>
-    public static PhoneChoices Of(TurnChoices choices) => new(choices.Unit, choices.Economy, choices.Moves,
+    /// <summary>
+    /// Compacts <paramref name="choices"/>: a tile target that affects no one becomes a bare tile. Each ability says how
+    /// it's aimed (<see cref="AimOf"/>), so the phone can say "Pick a direction" for a cone.
+    /// </summary>
+    public static PhoneChoices Of(TurnChoices choices, RulesPack? rules = null) => new(choices.Unit, choices.Economy, choices.Moves,
         [.. choices.Abilities.Select(a =>
         {
             bool Bare(TargetChoice t) => t.Target.Unit is null && t.Target.Tile == t.Aim && t.Affected.IsEmpty;
+            var def = rules is null ? null
+                : a.Item is { } item && rules.Items.TryGetValue(item, out var it) ? rules.Abilities.GetValueOrDefault(it.Use)
+                : rules.Abilities.GetValueOrDefault(a.Ability);
             return new PhoneAbility(a.Ability, a.Item, a.Name, a.Tooltip, a.Cost,
-                [.. a.Targets.Where(t => !Bare(t))], [.. a.Targets.Where(Bare).Select(t => t.Aim)]);
+                [.. a.Targets.Where(t => !Bare(t))], [.. a.Targets.Where(Bare).Select(t => t.Aim)], AimOf(def));
         })],
         choices.CanDelay);
+
+    /// <summary>"self", "direction" (a line or cone from the user), "tile" or "unit".</summary>
+    public static string AimOf(AbilityDef? ability) => ability?.Target switch
+    {
+        null => "unit",
+        { Kind: TargetKind.Self, Area.Shape: AreaShape.Line or AreaShape.Cone } => "direction",
+        { Kind: TargetKind.Self } or { Area.Shape: AreaShape.AllAllies or AreaShape.AllEnemies } => "self",
+        { Kind: TargetKind.Tile or TargetKind.EmptyTile } => "tile",
+        _ => "unit",
+    };
 }
 
 /// <summary>The battle as the TV draws it (adapter spec §8).</summary>
@@ -70,6 +86,7 @@ public sealed partial class TacticsGame
             TacticsPhase.Muster when _doc.For(profile) is null => Custom(Screens.PickClass, new
             {
                 classes = Rules.Classes.Values.Select(c => new ClassOption(c.Id, c.Name, c.Role)),
+                portal = PortalPath(),
             }),
             TacticsPhase.Muster => new WaitView("Waiting for everyone to choose a class"),
             TacticsPhase.EncounterPick when IsVip(player) => Custom(Screens.PickEncounter, new { encounters = EncounterOptions() }),
@@ -78,7 +95,7 @@ public sealed partial class TacticsGame
             TacticsPhase.Results => Custom(Screens.Results, new
             {
                 outcome = _result?.Outcome.ToString(), encounter = _resultEncounter, lines = ResultLines(), vip = IsVip(player),
-                level = _doc.PartyLevel,
+                level = _doc.PartyLevel, portal = PortalPath(),
             }),
             TacticsPhase.Resuming when IsVip(player) => new ButtonsView(
                 $"Resuming… waiting for {string.Join(", ", Waiting())}", [new Option("continue", "Continue without them")]),
@@ -101,11 +118,16 @@ public sealed partial class TacticsGame
                 unit,
                 trigger = offer.Trigger,
                 cause = offer.Cause,
+                // Who is doing what to whom, in words, so a 10 s decision doesn't start with working it out.
+                actor = offer.Cause is { } c && state.Units.TryGetValue(c.Actor, out var actor) ? actor.Sheet.Name : null,
+                targetName = offer.Cause?.Target is { } t && state.Units.TryGetValue(t, out var tu) ? (t == unit ? "you" : tu.Sheet.Name) : null,
+                ability = offer.Cause?.Ability is { } ca ? Rules.Abilities.GetValueOrDefault(ca)?.Name : null,
                 options = offer.Options.Select(o => new
                 {
                     id = o.Id,
                     label = o.Ability is { } a ? Rules.Abilities.GetValueOrDefault(a)?.Name ?? a.Value : "Don't react",
                     target = o.Target,
+                    tooltip = o.Ability is { } ta && Rules.Abilities.TryGetValue(ta, out var def) ? Tooltips.For(def, me.Sheet.Level, Rules) : null,
                 }),
             }) with { DeadlineUtc = _ctx.TimerDeadline(Timers.React) };
         if (state.Active == unit && state.Pending is null && IsPlayed(unit) && _aiFinishing != unit)
@@ -114,7 +136,7 @@ public sealed partial class TacticsGame
                 me = UnitViewOf(me),
                 map = state.MapId,
                 units = state.Units.Values.Where(DownedRules.InBattle).Select(UnitViewOf),
-                choices = PhoneChoices.Of(Choices.For(state, unit, Rules)),
+                choices = PhoneChoices.Of(Choices.For(state, unit, Rules), Rules),
             })
                 with { DeadlineUtc = _ctx.TimerDeadline(Timers.Turn) };
         return Custom(Screens.Status, new
@@ -132,6 +154,9 @@ public sealed partial class TacticsGame
         var at = state.Order.IndexOf(unit);
         return at > state.TurnIndex ? at - state.TurnIndex : null;
     }
+
+    /// <summary>The campaign portal's path (<c>/c/&lt;code&gt;</c>), or null outside a real campaign.</summary>
+    private string? PortalPath() => _lease.Info.Id == "local" ? null : $"/c/{_lease.Info.Code}";
 
     private static CustomView Custom(string screen, object data)
         => new(Id, screen, JsonSerializer.SerializeToElement(data, ArcJson.Options));

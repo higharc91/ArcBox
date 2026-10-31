@@ -28,7 +28,8 @@
       }
     ],
     "vip": true,
-    "level": 1
+    "level": 1,
+    "portal": "/c/ABCD"
   },
   "viewId": "v1",
   "deadlineUtc": null,

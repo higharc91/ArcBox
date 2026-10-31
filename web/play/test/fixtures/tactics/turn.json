@@ -701,7 +701,7 @@
           "ability": "common.dash",
           "item": null,
           "name": "Dash",
-          "tooltip": "Self: target gains its Move again",
+          "tooltip": "Self: you gain your Move again",
           "cost": {
             "action": 1
           },
@@ -724,13 +724,14 @@
               ]
             }
           ],
-          "tiles": []
+          "tiles": [],
+          "aim": "self"
         },
         {
           "ability": "common.disengage",
           "item": null,
           "name": "Disengage",
-          "tooltip": "Self: target is Disengaged until the end of your turn",
+          "tooltip": "Self: you are Disengaged until the end of your turn",
           "cost": {
             "action": 1
           },
@@ -753,13 +754,14 @@
               ]
             }
           ],
-          "tiles": []
+          "tiles": [],
+          "aim": "self"
         },
         {
           "ability": "common.dodge",
           "item": null,
           "name": "Dodge",
-          "tooltip": "Self: target is Dodging for 1 round",
+          "tooltip": "Self: you are Dodging for 1 round",
           "cost": {
             "action": 1
           },
@@ -782,7 +784,8 @@
               ]
             }
           ],
-          "tiles": []
+          "tiles": [],
+          "aim": "self"
         },
         {
           "ability": "common.help",
@@ -828,13 +831,14 @@
               ]
             }
           ],
-          "tiles": []
+          "tiles": [],
+          "aim": "unit"
         },
         {
           "ability": "rogue.cunning_hide",
           "item": null,
           "name": "Cunning Action: Hide",
-          "tooltip": "Self: target is Hidden for 1 round",
+          "tooltip": "Self: you are Hidden for 1 round",
           "cost": {
             "bonus": 1
           },
@@ -857,7 +861,8 @@
               ]
             }
           ],
-          "tiles": []
+          "tiles": [],
+          "aim": "self"
         },
         {
           "ability": "common.use_item",
@@ -920,7 +925,8 @@
               ]
             }
           ],
-          "tiles": []
+          "tiles": [],
+          "aim": "unit"
         }
       ],
       "canDelay": true

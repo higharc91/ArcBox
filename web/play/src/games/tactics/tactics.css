@@ -60,3 +60,10 @@
 .tx-pick input { grid-row: span 2; }
 .tx-pick-tip { color: var(--dim); font-size: 13px; line-height: 1.3; }
 .tx-actions button.on { outline: 2px solid #ffd60a; }
+
+/* Reaction prompt: who is doing what, and what each reaction does. */
+.tx-react-detail { font-size: 17px; }
+.tx-react-options button { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; text-align: left; }
+.tx-react-tip { font-size: 13px; color: var(--dim); font-weight: 400; }
+.tx-link { color: #8ab4ff; text-decoration: underline; }
+.tx-pips i { min-width: 0; }

@@ -194,7 +194,7 @@ public sealed class TooltipTests
         Assert.Equal("6 tiles: summons a wolf for 10 rounds", Tooltips.For(Enemy(6, new SummonEffect("wolf", Rounds: 10)), 1, Rules));
         Assert.Equal("6 tiles: summons 2 × archer for the battle",
             Tooltips.For(Enemy(6, new SummonEffect("bandit.archer", 2)), 1, Rules));
-        Assert.Equal("Self: target gains 2 devotion",
+        Assert.Equal("Self: you gain 2 devotion",
             Tooltips.For(Ability(TargetKind.Self, 0, new AreaDef(AreaShape.Self), null, new GrantResourceEffect("devotion", 2)), 1, Rules));
         Assert.Equal("4 tiles: target gets +2 AC for 3 rounds",
             Tooltips.For(Enemy(4, new StatModEffect(new StaticMods(Ac: 2), 3)), 1, Rules));
@@ -221,9 +221,9 @@ public sealed class TooltipTests
     [Fact]
     public void New_block_options_have_phrases()
     {
-        Assert.Equal("Self: target gains its Move again", Tooltips.For(Ability(TargetKind.Self, 0, new AreaDef(AreaShape.Self), null,
+        Assert.Equal("Self: you gain your Move again", Tooltips.For(Ability(TargetKind.Self, 0, new AreaDef(AreaShape.Self), null,
             new ExtraActionEffect("move")), 1, Rules));
-        Assert.Equal("Self: target gains 1 of its class resource, even above its maximum", Tooltips.For(Ability(TargetKind.Self, 0,
+        Assert.Equal("Self: you gain 1 of your class resource, even above your maximum", Tooltips.For(Ability(TargetKind.Self, 0,
             new AreaDef(AreaShape.Self), null, new GrantResourceEffect(GrantResourceEffect.Primary, 1, OverMax: true)), 1, Rules));
     }
 
