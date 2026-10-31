@@ -5,16 +5,17 @@
   "description": "barks/<speaker>.json: short battle and camp lines for one speaker, by the moment that prompts them. The game picks one by weight from the battle RNG, so a replay says the same lines.",
   "type": "object",
   "properties": {
-    "speaker": { "$ref": "common.schema.json#/$defs/id", "description": "A character id, or 'narrator'." },
+    "speaker": {
+      "$ref": "common.schema.json#/$defs/id",
+      "description": "A character id, or 'narrator'."
+    },
     "events": {
-      "type": "object",
-      "propertyNames": {
-        "enum": ["battle_start", "turn_start", "hit", "miss", "crit", "kill", "ally_down", "low_hp", "healed", "revived",
-          "level_up", "victory", "defeat", "camp", "town"]
-      },
-      "additionalProperties": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/line" }, "minItems": 1 }
+      "$ref": "common.schema.json#/$defs/barkEvents"
     }
   },
-  "required": ["speaker", "events"],
+  "required": [
+    "speaker",
+    "events"
+  ],
   "additionalProperties": false
 }

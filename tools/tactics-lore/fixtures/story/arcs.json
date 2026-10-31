@@ -1,0 +1,8 @@
+{ "arcs": [{ "id": "arc_one", "chapter": 3, "region": "mirewood", "title": "One", "levels": [1, 2], "summary": "s",
+  "beats": [
+    { "id": "find_mill", "kind": "discovery", "place": "old_mill", "summary": "s", "sets": ["mill_found"] },
+    { "id": "gated", "kind": "story", "place": "nowhere", "requires": ["never_set"], "summary": "s",
+      "choices": [{ "id": "a", "label": "A", "summary": "s", "sets": ["chose_a"] }, { "id": "b", "label": "B", "summary": "s", "sets": [] }] },
+    { "id": "fight", "kind": "battle", "encounter": "forest_ruins", "summary": "s" }
+  ] }],
+  "endings": [{ "id": "end", "title": "End", "summary": "s", "sets": ["ending_one"], "sequel": "s" }] }

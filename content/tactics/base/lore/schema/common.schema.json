@@ -9,9 +9,24 @@
       "pattern": "^[a-z][a-z0-9_]*$",
       "description": "snake_case, unique within its kind across every loaded lore pack. Matches the rules pack's ids, so a character id can be a preset id."
     },
-    "ids": { "type": "array", "items": { "$ref": "#/$defs/id" }, "uniqueItems": true },
-    "text": { "type": "string", "minLength": 1 },
-    "texts": { "type": "array", "items": { "$ref": "#/$defs/text" }, "minItems": 1 },
+    "ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "texts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/text"
+      },
+      "minItems": 1
+    },
     "flag": {
       "type": "string",
       "pattern": "^[a-z][a-z0-9_]*$",
@@ -23,15 +38,28 @@
       "description": "An art key as Tactics.Logic's ArtManifests defines it: '<set>.<asset>' or '<set>.<asset>.<variant>' (e.g. 'chapters.mirewood', 'characters.aldric')."
     },
     "mood": {
-      "enum": ["idle", "happy", "angry", "sad", "hurt", "surprised"],
+      "enum": [
+        "idle",
+        "happy",
+        "angry",
+        "sad",
+        "hurt",
+        "surprised"
+      ],
       "description": "A portrait mood: the keys of portraits/manifest.json 'moods'."
     },
     "unlock": {
       "type": "object",
       "description": "When the TV and phones may show this. Every key present must hold. Leave unlock out for always-known lore.",
       "properties": {
-        "flag": { "$ref": "#/$defs/flag" },
-        "chapter": { "type": "integer", "minimum": 1, "description": "Shown once the party has reached this chapter." }
+        "flag": {
+          "$ref": "#/$defs/flag"
+        },
+        "chapter": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Shown once the party has reached this chapter."
+        }
       },
       "additionalProperties": false
     },
@@ -43,17 +71,67 @@
       "type": "object",
       "description": "One spoken or shown line. The id is stable so translations and pre-rendered voice files can key on it; changing text keeps the id.",
       "properties": {
-        "id": { "$ref": "#/$defs/id" },
-        "text": { "$ref": "#/$defs/text" },
-        "mood": { "$ref": "#/$defs/mood" },
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "text": {
+          "$ref": "#/$defs/text"
+        },
+        "mood": {
+          "$ref": "#/$defs/mood"
+        },
         "direction": {
           "$ref": "#/$defs/text",
           "description": "How to deliver it, for a voice actor or an expressive TTS model (e.g. 'dry, under his breath'). Never shown."
         },
-        "weight": { "type": "integer", "minimum": 1, "description": "Relative chance among a bark event's lines. Default 1." }
+        "weight": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Relative chance among a bark event's lines. Default 1."
+        }
       },
-      "required": ["id", "text"],
+      "required": [
+        "id",
+        "text"
+      ],
       "additionalProperties": false
+    },
+    "flags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/flag"
+      },
+      "uniqueItems": true
+    },
+    "barkEvents": {
+      "type": "object",
+      "description": "Moment → lines. The engine maps its battle events to these names; any it doesn't raise yet are simply unused.",
+      "propertyNames": {
+        "enum": [
+          "battle_start",
+          "turn_start",
+          "hit",
+          "miss",
+          "crit",
+          "kill",
+          "ally_down",
+          "low_hp",
+          "healed",
+          "revived",
+          "level_up",
+          "victory",
+          "defeat",
+          "camp",
+          "town"
+        ]
+      },
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/line"
+        },
+        "minItems": 1
+      }
     }
   }
 }

@@ -5,19 +5,30 @@
   "description": "lore/pack.json. Shaped like the rules pack's manifest.json on purpose, but named pack.json so Tactics.Logic's ArtManifests (which reads every <set>/manifest.json in the content folder) doesn't take the lore folder for an art set.",
   "type": "object",
   "properties": {
-    "id": { "$ref": "common.schema.json#/$defs/id" },
-    "loreVersion": { "const": 1 },
-    "requires": { "$ref": "common.schema.json#/$defs/ids" },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "loreVersion": {
+      "const": 1
+    },
+    "requires": {
+      "$ref": "common.schema.json#/$defs/ids"
+    },
     "files": {
       "type": "array",
       "uniqueItems": true,
       "items": {
         "type": "string",
-        "pattern": "^(world|timeline|factions|regions|characters)\\.json$|^(codex|barks)/[a-z0-9_-]+\\.json$"
+        "pattern": "^(world|timeline|factions|regions|characters|backgrounds|arcs)\\.json$|^(codex|barks|voices)/[a-z0-9_-]+\\.json$"
       },
       "description": "Lore files relative to the lore folder, in load order."
     }
   },
-  "required": ["id", "loreVersion", "requires", "files"],
+  "required": [
+    "id",
+    "loreVersion",
+    "requires",
+    "files"
+  ],
   "additionalProperties": false
 }

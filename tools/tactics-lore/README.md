@@ -9,4 +9,4 @@ python3 tools/tactics-lore/check.py <base-dir> <chapter-dir> # packs in load ord
 python3 -m unittest discover -s tools/tactics-lore           # the checker's own tests
 ```
 
-Standard library only. `fixtures/valid` shows every file kind in use; `fixtures/invalid` has one of each mistake.
+Standard library only. `fixtures/valid` shows the file kinds in use, `fixtures/story` adds arcs, and `fixtures/invalid` has one of each mistake.

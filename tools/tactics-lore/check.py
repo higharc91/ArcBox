@@ -24,7 +24,8 @@ ROOT = Path(__file__).resolve().parents[2]
 CONTENT = ROOT / "content" / "tactics" / "base"
 SCHEMAS = CONTENT / "lore" / "schema"
 FILE_SCHEMA = {"world": "world", "timeline": "timeline", "factions": "factions", "regions": "regions",
-               "characters": "characters", "codex": "codex", "barks": "barks"}
+               "characters": "characters", "codex": "codex", "barks": "barks", "voices": "voices",
+               "backgrounds": "backgrounds", "arcs": "arcs"}
 NARRATOR = "narrator"
 
 
@@ -120,17 +121,28 @@ def art_keys(content: Path) -> set[str]:
 
 
 def rules_ids(content: Path) -> dict[str, set[str]] | None:
-    """Monster and encounter ids from the rules pack, or None when there is no rules pack beside the lore."""
+    """Monster, encounter and background ids from the rules pack, and the story flags its encounter triggers set; None
+    when there is no rules pack beside the lore."""
     manifest = content / "rules" / "manifest.json"
     if not manifest.is_file():
         return None
-    ids: dict[str, set[str]] = {"monsters": set(), "encounters": set()}
+    ids: dict[str, set[str]] = {"monsters": set(), "encounters": set(), "backgrounds": set(), "flags": set()}
     for file in json.loads(manifest.read_text(encoding="utf-8"))["files"]:
-        kind = file.split("/")[0]
+        kind = file.split("/")[0].removesuffix(".json")
         if kind in ids:
             doc = json.loads((content / "rules" / file).read_text(encoding="utf-8"))
             ids[kind].update(d["id"] for d in (doc if isinstance(doc, list) else [doc]))
+            if kind == "encounters":
+                ids["flags"].update(value for key, value, _ in _walk(doc) if key == "setFlag")
     return ids
+
+
+def _walk(node, ptr: str = ""):
+    """Every (key, value, pointer) in a JSON document, depth first."""
+    items = node.items() if isinstance(node, dict) else enumerate(node) if isinstance(node, list) else ()
+    for key, value in items:
+        yield key, value, f"{ptr}/{key}"
+        yield from _walk(value, f"{ptr}/{key}")
 
 
 def portrait_moods(content: Path) -> set[str]:
@@ -150,8 +162,10 @@ def check(lore_dirs: list[Path], content: Path = CONTENT) -> Errors:
     moods = portrait_moods(content)
 
     defs: dict[str, dict[str, tuple[dict, str]]] = {k: {} for k in
-                                                    ("character", "faction", "region", "place", "codex", "era", "event")}
+                                                    ("character", "faction", "region", "place", "codex", "era", "event",
+                                                     "voice", "background", "arc", "beat", "ending")}
     barks: list[tuple[dict, str]] = []
+    docs: list[tuple[dict, str]] = []
     world_seen: str | None = None
     line_ids: dict[str, str] = {}
     pack_ids: list[str] = []
@@ -193,6 +207,7 @@ def check(lore_dirs: list[Path], content: Path = CONTENT) -> Errors:
             if len(errors) > before:
                 continue
             kind = _kind(file)
+            docs.append((doc, where))
             if kind == "world":
                 if world_seen:
                     errors.add(where, "", f"only one world.json is allowed; {world_seen} already defines the world")
@@ -212,8 +227,21 @@ def check(lore_dirs: list[Path], content: Path = CONTENT) -> Errors:
             elif kind == "codex":
                 for n, entry in enumerate(doc["entries"]):
                     _define(defs["codex"], entry, where, f"/entries/{n}", "codex entry", errors)
-            elif kind == "barks":
-                barks.append((doc, where))
+            elif kind == "backgrounds":
+                for n, entry in enumerate(doc["backgrounds"]):
+                    _define(defs["background"], entry, where, f"/backgrounds/{n}", "background", errors)
+            elif kind == "arcs":
+                for n, arc in enumerate(doc["arcs"]):
+                    _define(defs["arc"], arc, where, f"/arcs/{n}", "arc", errors)
+                    for b, beat in enumerate(arc["beats"]):
+                        _define(defs["beat"], beat, where, f"/arcs/{n}/beats/{b}", "beat", errors)
+                for n, ending in enumerate(doc["endings"]):
+                    _define(defs["ending"], ending, where, f"/endings/{n}", "ending", errors)
+            if kind == "voices":
+                _define(defs["voice"], doc, where, "", "voice set", errors)
+            if kind in ("barks", "voices"):
+                if kind == "barks":
+                    barks.append((doc, where))
                 for event, lines in doc["events"].items():
                     for n, line in enumerate(lines):
                         at = f"/events/{event}/{n}/id"
@@ -223,8 +251,29 @@ def check(lore_dirs: list[Path], content: Path = CONTENT) -> Errors:
                         if "mood" in line and line["mood"] not in moods:
                             errors.add(where, at, f"mood '{line['mood']}' has no portrait")
 
-    _references(defs, barks, art, rules_ids(content), errors)
+    rules = rules_ids(content)
+    _references(defs, barks, art, rules, errors)
+    if defs["arc"]:
+        _flags(defs, docs, rules, errors)
     return errors
+
+
+def _flags(defs: dict, docs: list, rules: dict | None, errors: Errors) -> None:
+    """Once a pack set has arcs, every flag the lore waits on must be set somewhere: by a beat, a choice or an ending, or
+    by a rules encounter trigger. A misspelt flag would otherwise leave a secret locked for ever."""
+    set_by = set(rules["flags"]) if rules else set()
+    for table in ("beat", "ending"):
+        for entry, _ in defs[table].values():
+            set_by.update(entry.get("sets", []))
+            for choice in entry.get("choices", []):
+                set_by.update(choice["sets"])
+    for doc, where in docs:
+        for key, value, ptr in _walk(doc):
+            waits = [value["flag"]] if key == "unlock" and "flag" in value else value if key == "requires" else []
+            for i, flag in enumerate(waits):
+                if flag not in set_by:
+                    at = f"{ptr}/flag" if key == "unlock" else f"{ptr}/{i}"
+                    errors.add(where, at, f"nothing sets the story flag '{flag}' (no beat, choice, ending or encounter)")
 
 
 def _define(table: dict, entry: dict, where: str, ptr: str, kind: str, errors: Errors) -> None:
@@ -288,6 +337,22 @@ def _references(defs: dict, barks: list, art: set[str], rules: dict | None, erro
                 errors.add(*at(loc + "/subject"), f"the rules pack has no monster '{e['subject']}'")
         elif "subject" in e and e["subject"] not in subjects:
             errors.add(*at(loc + "/subject"), f"no character, faction, region or place has the id '{e['subject']}'")
+    for id_, (b, loc) in defs["background"].items():
+        if rules is not None and id_ not in rules["backgrounds"]:
+            errors.add(*at(loc + "/id"), f"the rules pack has no background '{id_}'")
+        for i, tie in enumerate(b["ties"]):
+            if tie not in subjects:
+                errors.add(*at(loc + f"/ties/{i}"), f"no character, faction, region or place has the id '{tie}'")
+    for id_, (a, loc) in defs["arc"].items():
+        if a["region"] not in defs["region"]:
+            errors.add(*at(loc + "/region"), f"no region has the id '{a['region']}'")
+        elif defs["region"][a["region"]][0]["chapter"] != a["chapter"]:
+            errors.add(*at(loc + "/chapter"), f"the region '{a['region']}' is chapter {defs['region'][a['region']][0]['chapter']}")
+    for id_, (b, loc) in defs["beat"].items():
+        if "place" in b:
+            need("place", b["place"], loc, "/place", "place")
+        if "encounter" in b and rules is not None and b["encounter"] not in rules["encounters"]:
+            errors.add(*at(loc + "/encounter"), f"the rules pack has no encounter '{b['encounter']}'")
     for doc, where in barks:
         if doc["speaker"] != NARRATOR and doc["speaker"] not in defs["character"]:
             errors.add(where, "/speaker", f"no character has the id '{doc['speaker']}' (or use '{NARRATOR}')")

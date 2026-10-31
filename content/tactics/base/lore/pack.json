@@ -8,7 +8,15 @@
     "factions.json",
     "regions.json",
     "characters.json",
+    "backgrounds.json",
+    "arcs.json",
     "codex/vale.json",
-    "codex/bestiary.json"
+    "codex/bestiary.json",
+    "voices/steady.json",
+    "voices/fierce.json",
+    "voices/wry.json",
+    "voices/earnest.json",
+    "voices/scholarly.json",
+    "voices/grim.json"
   ]
 }

@@ -1,0 +1,2 @@
+{ "id": "calm", "name": "Calm", "description": "A test voice.", "voice": { "direction": "Even." },
+  "events": { "crit": [{ "id": "voice_calm_crit_1", "text": "Clean.", "mood": "happy" }] } }

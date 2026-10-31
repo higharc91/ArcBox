@@ -1,7 +1,7 @@
 # Tactics Lore — Design Spec
 
 - **Date:** 2026-10-31
-- **Status:** Approved. Setting chosen: *Embers of the Vale* (§6); the base bible is written
+- **Status:** Approved and complete for the first campaign. Setting: *Embers of the Vale* (§6). Engine integration: §7
 - **Builds on:** [Tactics rules engine](2026-10-30-tactics-rules-engine-design.md) (on branch `ccr-472d8660-sxpjlj`, not yet merged),
   [Platform v2](2026-10-29-platform-v2-design.md) §3.6 (content delivery), [REDLINE audio](2026-10-26-redline-audio-design.md) (voice themes)
 
@@ -37,7 +37,10 @@ rules-engine branch whichever lands first.
 | `regions.json` | one per biome, tied to its chapter card (`chapters.<id>`) and rules encounter ids; places with world-map icon kinds | |
 | `characters.json` | the person behind a preset: role, wants, flaw, gated secret, relationships, **voice brief** | |
 | `codex/*.json` | unlockable entries the phones show between battles | any |
-| `barks/<speaker>.json` | short lines per battle/camp event, with a portrait mood, delivery direction and weight | one per speaker |
+| `backgrounds.json` | each rules background's personal thread: a private **hook** for the player, the thread and payoff for writers, ties, and a secret only that player learns | |
+| `arcs.json` | the campaign's spine: one arc per chapter as **beats** (story, choice, battle, discovery, camp) with places, rules encounters, the flags they need and set, and **choices** the party votes on; plus the **endings** and the sequel each leads to | base, or a chapter pack's own arc |
+| `voices/<id>.json` | a **player voice set** chosen in the creator, with its casting brief and barks per event | one per voice |
+| `barks/<speaker>.json` | barks for a named NPC or the narrator, same line format as voice sets | one per speaker |
 
 Schemas: `content/tactics/base/lore/schema/*.schema.json` (draft 2020-12).
 
@@ -68,8 +71,12 @@ Schemas: `content/tactics/base/lore/schema/*.schema.json` (draft 2020-12).
 3. Resolves references: characters, factions, codex `related`, bark speakers.
 4. Checks art keys (presets, chapter cards, crests, icons) using the same harvest rule as `ArtManifests.Load`.
 5. Checks moods and global line-id uniqueness.
-6. When a rules pack sits beside the lore, checks bestiary subjects and region encounters against its monster and
-   encounter ids.
+6. When a rules pack sits beside the lore, checks bestiary subjects, region and beat encounters, and background ids
+   against its monster, encounter and background ids.
+7. Once the loaded packs have arcs, **every flag the lore waits on** (an `unlock.flag` or a beat's `requires`) must be
+   set by a beat, a choice, an ending or a rules encounter's `setFlag`. A misspelt flag would otherwise leave a secret
+   locked for ever.
+8. Checks each arc's chapter against its region's, and beat places against the regions' places.
 
 ```bash
 python3 tools/tactics-lore/check.py
@@ -100,40 +107,92 @@ Halden, as in the mockups. Mockups 01 and 02 now label Emberwick and the Ashen F
 cards. Sample player characters (Kara, Aldric, Wren, Ilyra, Tamsin, Sefa) are players' characters, so they are not in
 `characters.json`.
 
-**Story flags the bible uses.** These are the names encounter triggers (`setFlag`) and the exploration and dialogue
-work (sub-project 5) should set:
+**What's written** (`content/tactics/base/lore/`, about 15,000 words of JSON): the world, a 16-event timeline, 9 factions,
+5 regions with 20 places, 19 named NPCs on existing presets with voice briefs, 29 codex entries, a personal thread
+for each of the 12 rules backgrounds, 5 chapter arcs of 5–7 beats with 7 party votes, 3 endings, and 6 player voice
+sets (Steady, Fierce, Wry, Earnest, Scholarly, Grim) with 102 barks.
 
-| Flag | Set when |
+**Story flags.** `arcs.json` is the authority, and the checker keeps everything else in step with it. Engine and
+dialogue code should set exactly these names:
+
+| Flag | Set by (beat → choice) |
 |---|---|
-| `ch1_skarrow_spared` | The party makes peace with Mother Skarrow instead of killing her |
-| `ch1_met_maud` | The party talks to Old Maud |
-| `ch1_halden_confessed` | Mayor Halden admits he knew the ford's ember was fading |
-| `ch2_court_audience` | The Glimmer Court grants the party an audience |
-| `ch2_bree_journal` | Bree shows the party her journal |
-| `ch2_corvin_page` | Corvin finds the page he doesn't remember writing |
-| `ch3_bridge_taken` | Vorga's bridge is taken (`warlord_bridge`) |
-| `ch3_maren_parley` | The party parleys with Maren Sorrel |
-| `ch3_marrowby_truth` | The Buried Crypt's records name Celandine Marrowby |
-| `ch4_rime_found` | The party finds Ivo Rime's tower |
-| `ch4_pip_remembers` | Pip remembers the night of the Fall |
-| `ch5_gate_passed` | The party gets past Ser Halvard |
-| `ch5_stranger_goal` | The Hooded Stranger reveals their goal |
-| `truth_cost` | The party learns what ember-fire takes (Chapter III, the Buried Crypt) |
-| `truth_crossing` | The party learns the flame was stolen (Skarrow song, or the Warden Archive) |
-| `truth_fall` | The party learns what Oswin did on the night of the Fall |
+| `ch1_skarrow_slain` / `ch1_skarrow_spared` | `ch1_the_ford_choice` → `ch1_force` / `ch1_parley` |
+| `ch1_met_maud` | `ch1_old_maud` |
+| `ch1_halden_confessed` | `ch1_granary` (needs `ch1_skarrow_spared`) |
+| `ch1_ember_found` | `ch1_the_ember` |
+| `ch2_kindled_cell_broken` | `ch2_drowned_waystation` (`forest_ruins`) |
+| `ch2_court_audience` | `ch2_court_audience` |
+| `ch2_paid_memory` / `ch2_court_tricked` / `ch2_ember_left`; `ch2_ember_taken` | `ch2_the_bargain` → `ch2_pay` / `ch2_trick` / `ch2_leave`; pay and trick also set `ch2_ember_taken` |
+| `ch2_bree_journal` | `ch2_bree_journal` |
+| `ch2_corvin_page` | `ch2_corvin_page` |
+| `truth_crossing` | `ch3_skarrow_messenger` (needs `ch1_skarrow_spared`), or `ch5_the_archive` |
+| `ch3_bridge_taken` | `ch3_the_bridge` (`warlord_bridge`; its own trigger sets `bridge_down` mid-battle) |
+| `ch3_vorga_spared` / `ch3_vorga_slain` | `ch3_vorgas_fate` → `ch3_spare_vorga` / `ch3_kill_vorga` |
+| `truth_cost`, `ch3_marrowby_truth` | `ch3_buried_crypt` (`crypt_hall`) |
+| `ch3_maren_parley` | `ch3_maren_parley` |
+| `ch4_rime_found` | `ch4_crystal_caves` (`crystal_cave`) |
+| `ch4_ivo_helped` / `ch4_ivo_stopped` | `ch4_ivos_choice` → `ch4_help_ivo` / `ch4_stop_ivo` |
+| `ch4_pip_remembers`, `truth_fall` | `ch4_pip_remembers` |
+| `ch5_gate_passed` + `ch5_halvard_slain` / `ch5_halvard_released` | `ch5_the_gate` → `ch5_fight_halvard` / `ch5_release_halvard` (release only makes sense with `truth_fall`) |
+| `ch5_stranger_goal` | `ch5_the_stranger` |
+| `ch5_ritual_broken` | `ch5_the_ritual` (encounter still to be written) |
+| `ending_rekindled` / `ending_returned` / `ending_extinguished` | `ch5_the_last_vote` → `ch5_choose_rekindle` / `ch5_choose_return` / `ch5_choose_extinguish` |
 
-## 7. Follow-ups (after the rules engine merges)
+## 7. Engine integration contract
+
+For whoever builds the game side (rules engine, sub-project 5 exploration and dialogue, TV and phone UI). Lore is data
+only; nothing here needs an engine change to merge, and the engine can adopt it a piece at a time.
+
+**Loading.**
+- Read `content/tactics/base/lore/pack.json`, then each file it lists, in order. Chapter packs ship their own
+  `lore/pack.json` with `requires` and `replaces`, merged the same way the rules packs are (§2).
+- The files arrive with the content pack already (Platform v2 §3.6); no server change.
+- Until a C# loader exists, `tools/tactics-lore/check.py` is the validator. When the engine loads lore, port its
+  checks into `Tactics.Logic` validation so a bad pack fails like a bad rules pack (follow-up 4).
+
+**Flags.**
+- Story flags are the engine's existing ones: encounter `setFlag`, `BattleResult.FlagsSet`, and whatever
+  sub-project 5 adds for exploration and dialogue. Lore never sets flags; it only reads them.
+- When a beat or choice in `arcs.json` happens, set its `sets` flags. The table in §6 lists them all.
+
+**Unlocks.**
+- An entry with `unlock` is visible once every key holds: `flag` is set, and the party has reached `chapter`.
+- An entry without `unlock` is always visible.
+- Secrets (`characters[].secret`, `backgrounds[].secret`) are never shown before their unlock. Background secrets go
+  **only to the phone of the player whose character has that background**; that player chooses whether to share it.
+
+**Arcs.**
+- `arcs.json` is the outline sub-project 5 builds scenes from, not a script to execute line by line.
+- A beat with `requires` only happens when those flags are set.
+- `kind: choice` is a party vote: each option's `label` is the vote text, the leader breaks ties (mockup 02), and the
+  chosen option's `sets` flags are set.
+- `encounter` names the rules encounter to start.
+
+**Barks.**
+- A player character's barks come from the voice set its player picked in the creator (`voices/<id>.json`). Store the
+  voice id on the character; it needs a Voice step in the creator.
+- NPCs and the narrator use `barks/<speaker>.json`.
+- Map engine events to bark events: `battle_start`, `turn_start`, `hit`, `miss`, `crit`, `kill`, `ally_down`
+  (an ally is Downed), `low_hp`, `healed`, `revived`, `level_up`, `victory`, `defeat`, `camp`, `town`. An event
+  with no lines says nothing.
+- Pick by `weight` (default 1) from the battle RNG, so replays and resumed battles are identical.
+- Show the speaker's portrait in the line's `mood`. Speak the line through `/api/tts` with the voice's `theme`, or
+  play a pre-rendered file keyed by line id (§4).
+- Rate-limit barks in the UI (at most one every few seconds, never over a `say` line) so battles don't get chatty.
+
+**Text.** Line ids are stable; translation and pre-rendered audio key on them (§4). Everything else is shown as written.
+
+## 8. Follow-ups
 
 1. **`say.lineId`.** An optional key on the encounter `say` action that resolves to a lore line, so trigger dialogue
-   gets ids, translations and pre-rendered voice. The literal `line` stays as the fallback. This is an engine change,
-   so it waits for the branch.
+   gets ids, translations and pre-rendered voice. The literal `line` stays as the fallback. An engine change.
 2. **Faction crest art.** `crests/` is one atlas sheet per class and subclass, with no per-crest keys. Faction crests
    need their own art set before `factions[].crest` can point at real art.
-3. **Voice sets for player characters.** Players make their own characters, so battle barks need to be keyed by a
-   voice set chosen in the creator, not by named speaker: a `voices/*.json` kind and a Voice step in the creator.
-   `barks/<speaker>.json` stays for NPCs and the narrator.
-4. **Dialogue, quests, background hooks and recaps.** The narrative layer (branching conversations with tagged
-   options and skill checks, the quest journal, a personal thread per rules background, "Previously on…") is designed
-   with sub-project 5, which owns the runtime.
-5. **Port the checker into `Tactics.Logic` validation** once lore is loaded by the game, so a bad pack fails the
-   same way a bad rules pack does (TV shows the reason, campaign won't start).
+3. **Sub-project 5's dialogue format.** Branching conversations (nodes, tagged options for background, race and
+   class, skill checks where the party picks who rolls), the quest journal, and the "Previously on…" recap are scene
+   scripts built on `arcs.json`. They belong to sub-project 5, which owns the runtime; they get their own lore file
+   kinds then.
+4. **Port the checker into `Tactics.Logic` validation** once the game loads lore.
+5. **A Chapter V encounter** for `ch5_the_ritual` (the Hall of the Flame with the red dragon), and encounters for the
+   remaining story battles as chapters are built.
