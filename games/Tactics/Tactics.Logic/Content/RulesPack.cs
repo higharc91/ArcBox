@@ -32,6 +32,7 @@ public sealed partial class RulesPack
         AiProfiles = catalog.AiProfiles;
         Xp = catalog.Xp;
         Regions = catalog.Regions;
+        _grounds = Regions.ToImmutableSortedDictionary(r => r.Key, r => new Lazy<WorldGround>(() => WorldGround.Of(r.Value, maps)), StringComparer.Ordinal);
         _injuryPassives = injuries.Values.ToImmutableSortedDictionary(i => InjuryPassiveId(i.Id),
             i => new PassiveDef(InjuryPassiveId(i.Id), i.Hook, null, i.Effects.IsDefault ? [] : i.Effects, i.Static with { MaxHp = 0 },
                 Target: PassiveTarget.Self), StringComparer.Ordinal);
@@ -39,6 +40,7 @@ public sealed partial class RulesPack
 
     private readonly ImmutableSortedDictionary<string, UnitSheet> _monsterSheets;
     private readonly ImmutableSortedDictionary<string, PassiveDef> _injuryPassives;
+    private readonly ImmutableSortedDictionary<string, Lazy<WorldGround>> _grounds;
 
     /// <summary>The content hash; a battle records it in <see cref="BattleState.ContentHash"/>.</summary>
     public string Hash { get; }
@@ -96,6 +98,9 @@ public sealed partial class RulesPack
 
     /// <summary>The overworld region with this id, or null.</summary>
     public WorldRegion? RegionFor(string id) => Regions.GetValueOrDefault(id);
+
+    /// <summary>The ground of the region with this id, or null: one shared instance, built the first time it's asked for, since every room walks the same ground.</summary>
+    public WorldGround? GroundFor(string id) => _grounds.GetValueOrDefault(id)?.Value;
 
     /// <summary>
     /// The id of the passive that carries an injury's static modifiers (<c>"injury:&lt;id&gt;"</c>). <see cref="SheetBuilder"/>

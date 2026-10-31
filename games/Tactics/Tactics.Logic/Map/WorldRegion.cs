@@ -63,7 +63,7 @@ public sealed class WorldRegion
             : null;
     }
 
-    /// <summary>True when the party may walk on the tile: not void, not impassable, not deep, as on a battle map.</summary>
+    /// <summary>True when the painted tile isn't void, impassable or deep. Stamped props aren't here: ask <see cref="WorldGround"/> whether the party can stand on it.</summary>
     public bool Walkable(Tile t) => TileAt(t) is { } tile && (tile.Flags & (TileFlags.Impassable | TileFlags.Deep)) == 0;
 
     /// <summary>

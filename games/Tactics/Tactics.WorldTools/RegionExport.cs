@@ -203,7 +203,8 @@ public static partial class RegionExport
     }
 
     private static bool NeedsTheStart(string problem)
-        => problem.Contains("can't be reached from the start", StringComparison.Ordinal) || problem.StartsWith("The start spawn", StringComparison.Ordinal);
+        => problem.Contains("can't be reached from the start", StringComparison.Ordinal) || problem.Contains("can't get from there to", StringComparison.Ordinal)
+           || problem.StartsWith("The start spawn", StringComparison.Ordinal);
 
     /// <summary>
     /// Loads a copy of the pack with this region in it, as the game will. It's a copy of the same pack, not a pack on top, because a
@@ -267,6 +268,8 @@ public static partial class RegionExport
 
         if (Has("can't be reached from the start"))
             return $"Paint a walkable way to it, climbing no more than {ClassDef.DefaultJump} levels a step, or move the marker.";
+        if (Has("can't get from there to"))
+            return $"Paint a way out, climbing no more than {ClassDef.DefaultJump} levels a step, or move the marker.";
         if (Has("can't be stood on"))
             return "Move the Start marker onto walkable ground, or clear the tile's Impassable or Deep flag.";
         if (Has("doesn't match its map"))

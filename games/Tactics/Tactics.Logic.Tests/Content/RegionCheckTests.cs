@@ -302,6 +302,59 @@ public sealed class RegionCheckTests
         => Assert.NotNull(ValidationTests.LoadChapter(GateFiles("""{ "party_spawn": [] }""")));
 
     [Fact]
+    public void A_marker_only_reachable_through_a_prop_is_an_error()
+    {
+        // A 3x1 corridor whose middle tile holds a crate, walled so the crate is the only way to its east end.
+        const string door = """{ "id": "door", "size": [3, 1], "tiles": "AAEAAAEAAAEA", "materials": ["water/river", "grass/lush"], "props": [{ "id": "crate", "at": [1, 0], "blocks": true, "cover": "half" }], "zones": {} }""";
+        var def = Region(
+            (5, 4, 0, Grass, TileFlags.Impassable), (6, 4, 0, Grass, TileFlags.Impassable), (7, 5, 0, Grass, TileFlags.Impassable),
+            (5, 6, 0, Grass, TileFlags.Impassable), (6, 6, 0, Grass, TileFlags.Impassable)) with
+        {
+            Stamps = [new RegionStamp("door", new Tile(4, 5), 0)],
+            Beats = [new BeatSpot("b", new Tile(6, 5))],
+        };
+
+        Assert.Equal(
+            [new ContentError(RegionFile, "/beats/0/at", "The beat 'b' at (6, 5) can't be reached from the start.")],
+            ValidationTests.ErrorsOfChapter(World(def), Map("door", door)));
+    }
+
+    /// <summary>A whole chunk 3 levels up with a one-tile pit at (9, 9) that can be dropped into and not climbed out of.</summary>
+    private static (int X, int Y, byte Height, byte Material, TileFlags Flags)[] Pit()
+        => [.. Plain(0, 31, 3).Where(t => (t.X, t.Y) != (9, 9)), (9, 9, 0, Grass, TileFlags.None)];
+
+    [Fact]
+    public void A_pocket_you_cant_walk_back_from_is_an_error()
+        => Assert.Equal(
+            [new ContentError(RegionFile, "/beats/0/at", "The beat 'pit' at (9, 9) can be walked to, but the party can't get from there to the beat 'far'.")],
+            ErrorsOf(Region(Pit()) with { Beats = [new BeatSpot("pit", new Tile(9, 9)), new BeatSpot("far", new Tile(20, 20))] }));
+
+    [Fact]
+    public void A_recovery_spawn_in_a_pocket_is_an_error()
+        => Assert.Equal(
+            [new ContentError(RegionFile, "/spawns/recovery", "The recovery spawn at (9, 9) can be walked to, but the party can't get from there to the beat 'far'.")],
+            ErrorsOf(Region(Pit()) with { Spawns = new RegionSpawns(new Tile(0, 0), new Tile(9, 9)), Beats = [new BeatSpot("far", new Tile(20, 20))] }));
+
+    [Fact]
+    public void A_stamp_whose_party_spawn_is_in_a_pocket_is_an_error()
+    {
+        var map = MapJson("hole", 1, 1, FordMaterials, [0, 1, 0], """{ "party_spawn": [[0, 0]] }""");
+        var def = Region(Pit()) with { Stamps = [new RegionStamp("hole", new Tile(9, 9), 0)], Beats = [new BeatSpot("far", new Tile(20, 20))] };
+
+        Assert.Equal(
+            [new ContentError(RegionFile, "/stamps/0", "The stamp 'hole' at (9, 9) can be walked to, but the party can't get from there to the beat 'far'.")],
+            ValidationTests.ErrorsOfChapter(World(def), Map("hole", map)));
+    }
+
+    /// <summary>
+    /// The story never sends anyone in, so this one is <c>StoryOrder</c>'s warning at export, where a painter part way through still gets
+    /// the file, rather than a pack the game refuses.
+    /// </summary>
+    [Fact]
+    public void A_pit_with_no_marker_in_it_loads()
+        => Loads(Region(Pit()) with { Beats = [new BeatSpot("far", new Tile(20, 20))] });
+
+    [Fact]
     public void Two_stamps_that_overlap_are_an_error()
     {
         var other = MapJson("bank", 1, 1, FordMaterials, [2, 1, 0]);

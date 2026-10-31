@@ -114,6 +114,7 @@ clicking a line that names a tile goes to it.
 | undefined flag bits, heights outside 0 to 9 | A cell a swatch can't make | Repaint it |
 | uses too many materials | Over the limit for one region | Repaint some tiles with fewer materials |
 | can't be reached from the start | A marker no one can walk to | Paint a way, climbing 2 or less a step, or move the marker |
+| can't get from there to | A marker below a one-way drop, cut off from the rest of the story | Paint a way out, climbing 2 or less a step, or move the marker |
 | can't be stood on | The Start marker is on Impassable or Deep | Move it, or clear the flag |
 | doesn't match its map | Paint inside a stamp | Select its marker, press Apply stamp |
 | doesn't fit, overlaps, stamped twice | A stamp is misplaced | Move the marker or delete one. A map can only be stamped once |

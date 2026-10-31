@@ -438,6 +438,28 @@ public sealed class AshenFordDraftTests
     }
 
     [Fact]
+    public void A_beat_in_a_pit_stops_the_export_and_goes_to_it()
+    {
+        var pit = new Tile(44, 57);
+        var source = AshenFordDraft.Build(Draft.Value.Pack);
+        Pit(source, pit);
+        source.Beats[source.Beats.FindIndex(b => b.Beat == "ch1_the_ember")] = new BeatSpot("ch1_the_ember", pit);
+        var rules = RegionExportTests.CopyRules();
+        try
+        {
+            var problem = Assert.Single(RegionExport.Export(Painted(source), rules, ContentPaths.ContentBase).Problems);
+
+            Assert.StartsWith("The beat 'ch1_the_ember' at (44, 57) can be walked to, but the party can't get from there to", problem, StringComparison.Ordinal);
+            Assert.EndsWith("Paint a way out, climbing no more than 2 levels a step, or move the marker.", problem, StringComparison.Ordinal);
+            Assert.Equal(pit, RegionExport.TileIn(problem));
+        }
+        finally
+        {
+            Directory.Delete(rules, recursive: true);
+        }
+    }
+
+    [Fact]
     public void A_wider_pit_gives_its_count_and_box()
     {
         var region = Changed(source => Pit(source, new Tile(44, 57), new Tile(44, 58)));

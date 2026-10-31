@@ -55,8 +55,9 @@ internal sealed partial class Validation
     /// <summary>
     /// Checks each region against the rest of the pack (spec §3.4): every stamp sits inside the region on a known map, tile
     /// for tile, with no map stamped twice and no two stamps overlapping; the spawns, beat spots and stamps can be reached
-    /// on foot from the start; and a neighbour that's loaded has an edge back on the facing side with the negated offset.
-    /// A stamp on a map that failed to load skips the map checks, as an encounter does.
+    /// on foot from the start, round the stamps' blocking props; no marker strands the party away from another; and a neighbour
+    /// that's loaded has an edge back on the facing side with the negated offset. A stamp on a map that failed to load skips the map
+    /// checks, as an encounter does.
     /// </summary>
     public void CheckRegions(IEnumerable<Loaded<RegionDef>> regions, IReadOnlyDictionary<string, BattleMap> maps)
     {
@@ -90,6 +91,7 @@ internal sealed partial class Validation
         IReadOnlyDictionary<string, BattleMap> maps, string file, string ptr)
     {
         private readonly RegionDef _def = region.Def;
+        private readonly Terrain _ground = WorldGround.Of(region, maps).Terrain;
 
         /// <summary>A stamp that sits inside the region, on a known map.</summary>
         private sealed record Placed(int Index, RegionStamp Stamp, BattleMap Map)
@@ -202,13 +204,13 @@ internal sealed partial class Validation
         {
             var spawns = Pointer.Append(ptr, "spawns");
             var start = _def.Spawns.Start;
-            if (!region.Walkable(start))
+            if (!_ground.Walkable(start))
             {
                 v.Error(file, Pointer.Append(spawns, "start"), $"The start spawn at {start} can't be stood on.");
                 return;
             }
 
-            var reached = Flood(start);
+            var reached = WorldWalk.Reach(_ground, start, ClassDef.DefaultJump);
             void Unreached(string marker, Tile at, string pointer)
                 => v.Error(file, pointer, $"{marker} at {at} can't be reached from the start.");
 
@@ -228,24 +230,41 @@ internal sealed partial class Validation
                 else if (!stamp.Tiles().Any(t => reached.Contains(t.World)))
                     Unreached($"The stamp '{name}'", stamp.Stamp.At, At("stamps", stamp.Index));
             }
+            Stranded(start, reached, stamps);
         }
 
         /// <summary>
-        /// Every tile that can be walked to from <paramref name="start"/>, stepping north, east, south or west. As in
-        /// <see cref="Paths.StepCost"/>, a step climbs at most the rules' default Jump and can drop any height, so a cliff is one way.
+        /// Reports each place the story puts the party that it can't walk on from: the recovery spawn, a beat's spot or a stamp's party
+        /// spawn, on the far side of a one-way drop from a beat or stamp still to go to. Those can't be avoided, so they stop the pack. Going
+        /// down a drop for good isn't wrong in itself: a pocket that holds the rest of the story is fine, and a pit with no marker in it is
+        /// <c>StoryOrder</c>'s warning at export, as nothing sends the party in. A stamp with no party spawn has no one place to stop at.
         /// </summary>
-        private HashSet<Tile> Flood(Tile start)
+        private void Stranded(Tile start, HashSet<Tile> reached, List<Placed> stamps)
         {
-            var reached = new HashSet<Tile> { start };
-            var open = new Stack<Tile>([start]);
-            while (open.TryPop(out var tile))
+            var trapped = WorldWalk.Trapped(_ground, start, ClassDef.DefaultJump);
+            if (trapped.Count == 0)
+                return;
+
+            List<(string Name, ImmutableArray<Tile> Tiles)> goals =
+            [
+                .. _def.Beats.Select(b => ($"beat '{b.Beat}'", ImmutableArray.Create(b.At))),
+                .. stamps.Select(s => ($"stamp '{s.Stamp.Map}'", s.Tiles().Select(t => t.World).ToImmutableArray())),
+            ];
+            List<(string Name, string Pointer, ImmutableArray<Tile> Tiles)> stops =
+            [
+                ("recovery spawn", Pointer.Append(Pointer.Append(ptr, "spawns"), "recovery"), [_def.Spawns.Recovery]),
+                .. _def.Beats.Select((b, i) => ($"beat '{b.Beat}'", Pointer.Append(At("beats", i), "at"), ImmutableArray.Create(b.At))),
+                .. stamps.Select(s => ($"stamp '{s.Stamp.Map}'", At("stamps", s.Index), s.PartySpawn())),
+            ];
+
+            foreach (var (name, pointer, tiles) in stops)
             {
-                var height = region.TileAt(tile)!.Height;
-                foreach (var next in (ReadOnlySpan<Tile>)[new(tile.X, tile.Y - 1), new(tile.X + 1, tile.Y), new(tile.X, tile.Y + 1), new(tile.X - 1, tile.Y)])
-                    if (region.Walkable(next) && region.TileAt(next)!.Height - height <= ClassDef.DefaultJump && reached.Add(next))
-                        open.Push(next);
+                if (tiles.Where(trapped.Contains).Cast<Tile?>().FirstOrDefault() is not { } stop)
+                    continue;
+                var onward = WorldWalk.Reach(_ground, stop, ClassDef.DefaultJump);
+                if (goals.FirstOrDefault(g => g.Tiles.Any(reached.Contains) && !g.Tiles.Any(onward.Contains)) is { Name: not null } missed)
+                    v.Error(file, pointer, $"The {name} at {stop} can be walked to, but the party can't get from there to the {missed.Name}.");
             }
-            return reached;
         }
 
         private void Edges()
