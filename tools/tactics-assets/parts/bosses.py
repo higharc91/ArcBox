@@ -20,6 +20,7 @@ from typing import Callable
 import numpy as np
 from PIL import Image
 
+from arcpix import form as F
 from arcpix.canvas import Canvas, SlotTable
 from arcpix.out import PACK, PREVIEWS, save, write_json
 from arcpix.palette import FAMILIES, ramp
@@ -31,11 +32,10 @@ SLOTS = SlotTable()
 for _s in ("hide", "hide2", "wing", "horn", "eyes", "mouth", "glow", "fx", "accent", "wood", "metal", "cloth", "stone",
            "gold", "hair"):
     SLOTS.id(_s)
-_SCRATCH = SlotTable()
 
 ANIMS: dict[str, tuple[float, bool, int]] = {   # name -> (fps, loop, frames)
-    "idle": (6.0, True, 4), "walk": (8.0, True, 4), "attack": (10.0, False, 5), "special": (9.0, False, 6),
-    "hurt": (8.0, False, 2), "down": (4.0, False, 2),
+    "idle": (8.0, True, 8), "walk": (10.0, True, 8), "attack": (12.0, False, 8), "special": (11.0, False, 10),
+    "hurt": (10.0, False, 3), "down": (4.0, False, 2),
 }
 ORDER = ["idle", "walk", "attack", "special", "hurt", "down"]
 FX_SLOTS = {"fx"}                       # light and air: never outlined, so breath and shockwaves read as glow
@@ -46,7 +46,7 @@ class Pose(B.Pose):
     """beasts.Pose plus what bigger monsters animate. Every monster reads the same table, so a whole encounter plays
     in step; each drawing decides what a value means for its body (a club, a fist, a wing, a tongue)."""
     anim: str = "idle"
-    k: int = 0                          # frame within the animation (seeds flicker)
+    k: int = 0                          # nearest key pose (per-key tables and one-off effects)
     phase: float = 0                    # 0..1 around a looping animation
     wing: float = 0                     # -1 down-stroke .. 1 raised
     arm: float = 0                      # -1 wound up .. 1 struck through
@@ -54,34 +54,87 @@ class Pose(B.Pose):
     charge: float = 0                   # special build-up 0..1
     burst: float = 0                    # special release 0..1
     fall: float = 0                     # down progress 0..1
+    kf: float = 0                       # position between key poses (k is round(kf)); per-key tables lerp on it
+    f: int = 0                          # the frame's index within its animation (seeds flicker and flow)
+
+
+# Key poses: the extremes of each animation. The frames played are tweens between them (see _poses), so a monster's
+# per-key tables (club angles, fist positions) stay short and every in-between comes for free.
+_WALK_LEGS = [((3, -3, -3, 3), (0, 2, 2, 0)), ((1, -1, -1, 1), (0, 0, 0, 0)),
+              ((-3, 3, 3, -3), (2, 0, 0, 2)), ((-1, 1, 1, -1), (0, 0, 0, 0))]
+KEYS: dict[str, list[Pose]] = {
+    "idle": [Pose(anim="idle", k=k, bob=(0, 0.5, 1, 0.5)[k], wing=(0, 0.3, 0.5, 0.3)[k], head=(0, (0, 0, 1, 0)[k]))
+             for k in range(4)],
+    "walk": [Pose(anim="walk", k=k, bob=(1, 0, 1, 0)[k], legs=_WALK_LEGS[k][0], lift=_WALK_LEGS[k][1],
+                  wing=(1, 0, -1, 0)[k], tilt=(0.2, 0, 0.2, 0)[k]) for k in range(4)],
+    "attack": [
+        Pose(anim="attack", k=0, lunge=-2, tilt=-0.5, arm=-0.5, head=(-2, -1), wing=0.3),
+        Pose(anim="attack", k=1, lunge=-4, tilt=-1, arm=-1, bob=-1, head=(-4, -3), wing=0.8),
+        Pose(anim="attack", k=2, lunge=5, tilt=1, arm=1, jaw=True, head=(5, 3), wing=-0.5),
+        Pose(anim="attack", k=3, lunge=4, tilt=0.8, arm=1, jaw=True, head=(4, 3), wing=-0.7, burst=1),
+        Pose(anim="attack", k=4, lunge=1, tilt=0.2, arm=0.4, head=(1, 1))],
+    "special": [
+        Pose(anim="special", k=0, charge=0.35, lunge=-1, head=(-2, -2), wing=0.5, tilt=-0.4),
+        Pose(anim="special", k=1, charge=0.7, lunge=-2, head=(-4, -5), wing=1, tilt=-0.8, bob=-1),
+        Pose(anim="special", k=2, charge=1, lunge=-3, head=(-5, -6), wing=1, tilt=-1, bob=-1),
+        Pose(anim="special", k=3, burst=0.6, lunge=3, head=(4, 3), jaw=True, wing=-0.6, tilt=0.8),
+        Pose(anim="special", k=4, burst=1, lunge=3, head=(5, 4), jaw=True, wing=-1, tilt=1),
+        Pose(anim="special", k=5, burst=0.35, lunge=1, head=(2, 2), jaw=True, tilt=0.3)],
+    "hurt": [Pose(anim="hurt", k=0, lunge=-3, bob=1, head=(-2, -1), hurt=True, tilt=-1, wing=0.6),
+             Pose(anim="hurt", k=1, lunge=-1, head=(-1, 0), hurt=True, tilt=-0.4, wing=0.2)],
+    "down": [Pose(anim="down", k=0, fall=0.5, bob=2, head=(1, 3), hurt=True, wing=-0.3),
+             Pose(anim="down", k=1, fall=1, down=True, bob=4, head=(2, 6), wing=-0.6)],
+}
+# Where each played frame sits between the keys. Attack: a three-frame wind-up, the strike, a swing-through
+# in-between, the impact, a settle and the recovery. Special: the gather takes five frames (magic gathers for longer)
+# with the peak held a beat, then the release, the impact held, and the fade.
+_TIMING: dict[str, list[float]] = {
+    "idle": [i / 2 for i in range(8)], "walk": [i / 2 for i in range(8)],
+    "attack": [0, 0.6, 1, 2, 2.6, 3, 3.5, 4], "special": [0, 0.5, 1, 1.5, 2, 2, 3, 4, 4, 5],
+    "hurt": [0, 0.5, 1], "down": [0, 1],
+}
+
+
+def _mix(a, b, t: float):
+    """Lerps numbers and tuples of numbers; anything else (flags, names) comes from the nearer side."""
+    if isinstance(a, bool) or isinstance(a, str):
+        return a if t < 0.5 else b
+    if isinstance(a, (int, float)):
+        return a + (b - a) * t
+    if isinstance(a, tuple):
+        return tuple(_mix(x, y, t) for x, y in zip(a, b))
+    return a if t < 0.5 else b
+
+
+def _key_at(table: list, kf: float, loop: bool):
+    """A per-key table read at a fractional key: lerped between neighbours (wrapping round for loops)."""
+    n = len(table)
+    i0 = int(math.floor(kf)) % n if loop else min(int(math.floor(kf)), n - 1)
+    i1 = (i0 + 1) % n if loop else min(i0 + 1, n - 1)
+    return _mix(table[i0], table[i1], kf - math.floor(kf))
+
+
+def _at(table: list, p: "Pose"):
+    return _key_at(table, p.kf, p.anim in ("idle", "walk"))
 
 
 def _poses() -> dict[str, list[Pose]]:
-    walk_legs = [((3, -3, -3, 3), (0, 2, 2, 0)), ((1, -1, -1, 1), (0, 0, 0, 0)),
-                 ((-3, 3, 3, -3), (2, 0, 0, 2)), ((-1, 1, 1, -1), (0, 0, 0, 0))]
-    out: dict[str, list[Pose]] = {
-        "idle": [Pose(anim="idle", k=k, phase=k / 4, bob=(0, 0.5, 1, 0.5)[k], wing=(0, 0.3, 0.5, 0.3)[k],
-                      head=(0, (0, 0, 1, 0)[k])) for k in range(4)],
-        "walk": [Pose(anim="walk", k=k, phase=k / 4, bob=(1, 0, 1, 0)[k], legs=walk_legs[k][0], lift=walk_legs[k][1],
-                      wing=(1, 0, -1, 0)[k], tilt=(0.2, 0, 0.2, 0)[k]) for k in range(4)],
-        "attack": [
-            Pose(anim="attack", k=0, lunge=-2, tilt=-0.5, arm=-0.5, head=(-2, -1), wing=0.3),
-            Pose(anim="attack", k=1, lunge=-4, tilt=-1, arm=-1, bob=-1, head=(-4, -3), wing=0.8),
-            Pose(anim="attack", k=2, lunge=5, tilt=1, arm=1, jaw=True, head=(5, 3), wing=-0.5),
-            Pose(anim="attack", k=3, lunge=4, tilt=0.8, arm=1, jaw=True, head=(4, 3), wing=-0.7, burst=1),
-            Pose(anim="attack", k=4, lunge=1, tilt=0.2, arm=0.4, head=(1, 1))],
-        "special": [
-            Pose(anim="special", k=0, charge=0.35, lunge=-1, head=(-2, -2), wing=0.5, tilt=-0.4),
-            Pose(anim="special", k=1, charge=0.7, lunge=-2, head=(-4, -5), wing=1, tilt=-0.8, bob=-1),
-            Pose(anim="special", k=2, charge=1, lunge=-3, head=(-5, -6), wing=1, tilt=-1, bob=-1),
-            Pose(anim="special", k=3, burst=0.6, lunge=3, head=(4, 3), jaw=True, wing=-0.6, tilt=0.8),
-            Pose(anim="special", k=4, burst=1, lunge=3, head=(5, 4), jaw=True, wing=-1, tilt=1),
-            Pose(anim="special", k=5, burst=0.35, lunge=1, head=(2, 2), jaw=True, tilt=0.3)],
-        "hurt": [Pose(anim="hurt", k=0, lunge=-3, bob=1, head=(-2, -1), hurt=True, tilt=-1, wing=0.6),
-                 Pose(anim="hurt", k=1, lunge=-1, head=(-1, 0), hurt=True, tilt=-0.4, wing=0.2)],
-        "down": [Pose(anim="down", k=0, fall=0.5, bob=2, head=(1, 3), hurt=True, wing=-0.3),
-                 Pose(anim="down", k=1, fall=1, down=True, bob=4, head=(2, 6), wing=-0.6)],
-    }
+    from dataclasses import fields
+    out: dict[str, list[Pose]] = {}
+    for a in ORDER:
+        keys, loop = KEYS[a], a in ("idle", "walk")
+        frames = []
+        for i, kf in enumerate(_TIMING[a]):
+            base = keys[0]
+            vals = {fl.name: _key_at([getattr(kp, fl.name) for kp in keys], kf, loop) for fl in fields(base)}
+            vals.update(anim=a, kf=kf, f=i, k=int(math.floor(kf + 0.5)) % len(keys),
+                        phase=i / len(_TIMING[a]) if loop else 0.0)
+            if a == "special" and i == 5:                       # the held peak: the gathered power shudders
+                vals.update(bob=vals["bob"] + 1, head=(vals["head"][0] + 1, vals["head"][1]))
+            if a == "attack" and i == 6:                        # the settle after impact: tails and wings catch up
+                vals.update(wing=vals["wing"] * 0.4)
+            frames.append(Pose(**vals))
+        out[a] = frames
     for a in ORDER:
         assert len(out[a]) == ANIMS[a][2], a
     return out
@@ -95,127 +148,11 @@ def frame_poses() -> list[tuple[str, int, Pose]]:
 
 
 # ------------------------------------------------------------------------------------------------ shape helpers
-def _grid(c: Canvas) -> tuple[np.ndarray, np.ndarray]:
-    yy, xx = np.mgrid[0:c.h, 0:c.w]
-    return yy + 0.5, xx + 0.5
-
-
-def ell(c: Canvas, cx: float, cy: float, rx: float, ry: float) -> np.ndarray:
-    yy, xx = _grid(c)
-    return ((xx - cx) / max(rx, 0.5)) ** 2 + ((yy - cy) / max(ry, 0.5)) ** 2 <= 1.0
-
-
-def poly(c: Canvas, pts: list[tuple[float, float]]) -> np.ndarray:
-    s = Canvas(c.w, c.h, _SCRATCH)
-    s.polygon(pts, "x")
-    return s.slot > 0
-
-
-def tube(c: Canvas, pts: list[tuple[float, float]], radii: list[float]) -> np.ndarray:
-    """A tapered tube through `pts` (one radius per point): necks, tails, limbs, tentacles of smoke."""
-    yy, xx = _grid(c)
-    m = np.zeros((c.h, c.w), bool)
-    for (x0, y0), (x1, y1), r0, r1 in zip(pts, pts[1:], radii, radii[1:]):
-        n = max(2, int(math.hypot(x1 - x0, y1 - y0) * 2))
-        for t in np.linspace(0, 1, n):
-            x, y, r = x0 + (x1 - x0) * t, y0 + (y1 - y0) * t, r0 + (r1 - r0) * t
-            m |= (xx - x) ** 2 + (yy - y) ** 2 <= max(r, 0.5) ** 2
-    return m
-
-
-def curve(p0, p1, p2, n: int = 6) -> list[tuple[float, float]]:
-    """Quadratic Bezier through p0 and p2, pulled towards p1."""
-    out = []
-    for i in range(n + 1):
-        t = i / n
-        out.append(((1 - t) ** 2 * p0[0] + 2 * (1 - t) * t * p1[0] + t * t * p2[0],
-                    (1 - t) ** 2 * p0[1] + 2 * (1 - t) * t * p1[1] + t * t * p2[1]))
-    return out
-
-
-def _erode(m: np.ndarray) -> np.ndarray:
-    e = m.copy()
-    e[1:, :] &= m[:-1, :]
-    e[:-1, :] &= m[1:, :]
-    e[:, 1:] &= m[:, :-1]
-    e[:, :-1] &= m[:, 1:]
-    e[0, :] = e[-1, :] = False
-    e[:, 0] = e[:, -1] = False
-    return e
-
-
-def _dilate(m: np.ndarray) -> np.ndarray:
-    d = m.copy()
-    d[1:, :] |= m[:-1, :]
-    d[:-1, :] |= m[1:, :]
-    d[:, 1:] |= m[:, :-1]
-    d[:, :-1] |= m[:, 1:]
-    return d
-
-
-def _blur(a: np.ndarray) -> np.ndarray:
-    p = np.pad(a, 1, mode="edge")
-    h, w = a.shape
-    return sum(p[1 + dy:1 + dy + h, 1 + dx:1 + dx + w] for dy in (-1, 0, 1) for dx in (-1, 0, 1)) / 9.0
-
-
-def shift(m: np.ndarray, dx: int, dy: int) -> np.ndarray:
-    out = np.zeros_like(m)
-    h, w = m.shape
-    ys, yd = (slice(0, h - dy), slice(dy, h)) if dy >= 0 else (slice(-dy, h), slice(0, h + dy))
-    xs, xd = (slice(0, w - dx), slice(dx, w)) if dx >= 0 else (slice(-dx, w), slice(0, w + dx))
-    out[yd, xd] = m[ys, xs]
-    return out
-
-
-def paint(c: Canvas, mask: np.ndarray, slot: str, *, base: float = 3.0, k: float = 1.8, depth: int = 5,
-          light=(-0.55, -0.85), lo: int = 1, hi: int = 5, cast: bool = True, dither: bool = False) -> None:
-    """Fills `mask` with `slot`, lit like a sphere from the top-left. The surface normal comes from the distance to
-    the silhouette's edge, so any shape (a neck, a wing, a boulder) gets a lit rim, a shadowed underside and a flat
-    middle. With `cast`, the part shades what it covers one pixel below-right, separating overlapping parts."""
-    if not mask.any():
-        return
-    d = mask.astype(np.float32)
-    m = mask.copy()
-    for _ in range(depth):
-        m = _erode(m)
-        d += m
-    g = _blur(_blur(d))
-    gy, gx = np.gradient(g)
-    ln = np.hypot(gx, gy) + 1e-6
-    rr = 1.0 - np.clip((d - 1) / depth, 0, 1)
-    nx, ny = -gx / ln * rr, -gy / ln * rr
-    nz = np.sqrt(np.clip(1 - rr * rr, 0, 1))
-    dot = (nx * light[0] + ny * light[1]) * 0.9 + nz * 0.35 - 0.25
-    v = base + dot * k
-    sh = np.round(v)
-    yy, xx = np.mgrid[0:c.h, 0:c.w]
-    if dither:
-        sh -= ((np.abs(v - np.round(v)) > 0.44) & ((xx + yy) % 2 == 1) & (v < np.round(v))).astype(np.float32)
-    sh = np.clip(sh, lo, hi).astype(np.uint8)
-    if cast:
-        under = (c.slot > 0) & ~mask & (c.flags == 0) & (shift(mask, 1, 1) | shift(mask, 0, 1))
-        c.shade[under] = np.maximum(c.shade[under].astype(np.int16) - 1, 0).astype(np.uint8)
-    c.slot[mask] = c.slots.id(slot)
-    c.shade[mask] = sh[mask]
-    c.flags[mask] = 0
-
-
-def flat(c: Canvas, mask: np.ndarray, slot: str, shade: int) -> None:
-    c.slot[mask] = c.slots.id(slot)
-    c.shade[mask] = shade
-    c.flags[mask] = 0
-
-
-def recolour(c: Canvas, mask: np.ndarray, slot: str, delta: int = 0) -> None:
-    """Moves already-shaded pixels to another slot, keeping their light (belly scales, moss, frost)."""
-    m = mask & (c.slot > 0)
-    c.slot[m] = c.slots.id(slot)
-    c.shade[m] = np.clip(c.shade[m].astype(np.int16) + delta, 0, 5).astype(np.uint8)
-
-
-def _rng(*seed: int) -> np.random.Generator:
-    return np.random.default_rng([abs(int(s)) for s in seed])
+# The mask helpers live in arcpix.form (shared with beasts and the bestiary); the short private names stay so the
+# drawings below read as before.
+_grid, _erode, _dilate, _blur, _rng, _depth = F.grid, F.erode, F.dilate, F.blur, F.rng, F.depth_map
+ell, poly, tube, curve, shift, paint, flat, recolour, glow_fill = (F.ell, F.poly, F.tube, F.curve, F.shift, F.paint,
+                                                                  F.flat, F.recolour, F.glow_fill)
 
 
 def flame(c: Canvas, x0: float, y0: float, ang: float, length: float, width: float, seed: int, *,
@@ -386,13 +323,13 @@ def dragon(direction: str, p: Pose) -> Canvas:
         c.rect(fx - 3, fy + 1, fx + 4, fy + 2, "hide", 2)
         for cx_ in (fx, fx + 3, fx + 6):                                  # claws
             c.px(cx_ - 1, fy + 2, "horn", 4)
-    scales(c, "hide", p.k)
+    scales(c, "hide", 0)
     # ---------------------------------------------------------------- near wing, head
     _wing(c, bx + 4, by - 11 - lean, wl, -1, 3.4, span=1.15, elev=66)
     _dragon_head(c, hx, hy, p)
     # ---------------------------------------------------------------- breath
     if p.charge:
-        r = _rng(3, p.k)
+        r = _rng(3, p.f)
         glow = (_dilate(throat) & nm | belly & shift(ell(c, bx + 14, by, 9, 9), 0, 0)) & (r.random((96, 96)) <
                                                                                        0.25 + p.charge * 0.6)
         flat(c, glow, "glow", 3 + int(p.charge * 2))
@@ -400,12 +337,12 @@ def dragon(direction: str, p: Pose) -> Canvas:
             c.px(hx + 16 + i, hy - 3 - i * 2, "glow", 5 - i)
     if p.anim == "idle":                                # smoke curling from the nostrils as it breathes
         for i in range(2):
-            t = (p.k + i * 2) % 4
+            t = ((p.f + i * 4) % 8) / 2
             paint(c, ell(c, hx + 16 + t * 0.8 + i, hy - 3 - t * 3, 1.2 + t * 0.4, 1 + t * 0.3), "hair",
                   base=3.6 - t * 0.4, k=1.0, depth=1, cast=False)
     if breath:
-        flame(c, hx + 13, hy + 5, math.radians(72), 12 + 22 * p.burst, 2 + 5 * p.burst, 7 + p.k)
-        r = _rng(9, p.k)
+        flame(c, hx + 13, hy + 5, math.radians(72), 12 + 22 * p.burst, 2 + 5 * p.burst, 7 + p.f)
+        r = _rng(9, p.f)
         pool = ell(c, hx + 20, gy - 1, 4 + 9 * p.burst, 1.5 + 2 * p.burst)
         flat(c, pool, "glow", 3)
         flat(c, pool & ell(c, hx + 19, gy - 1, 2 + 6 * p.burst, 1 + p.burst), "glow", 5)
@@ -472,7 +409,7 @@ def _dragon_back(p: Pose) -> Canvas:
               depth=2)
     # head (seen from behind) and neck
     if p.burst and p.anim == "special":
-        flame(c, hx - 9, hy - 1, math.radians(205), 8 + 12 * p.burst, 2 + 5 * p.burst, 17 + p.k)
+        flame(c, hx - 9, hy - 1, math.radians(205), 8 + 12 * p.burst, 2 + 5 * p.burst, 17 + p.f)
     head = ell(c, hx, hy, 6, 5) | poly(c, [(hx - 2, hy - 4), (hx - 10, hy - 4), (hx - 11, hy - 1), (hx - 2, hy + 3)])
     if p.jaw:
         head |= poly(c, [(hx - 2, hy + 2), (hx - 10, hy + 3), (hx - 9, hy + 6), (hx - 1, hy + 5)])
@@ -513,7 +450,7 @@ def _dragon_back(p: Pose) -> Canvas:
     tx, ty = tail[-1]
     paint(c, poly(c, [(tx - 2, ty + 1), (tx + 4, ty - 5), (tx + 7, ty), (tx + 2, ty + 3)]), "wing", depth=2)
     _spikes(c, [(x, y - r + 1.5) for (x, y), r in zip(tail[1:4], (6, 4.6, 3.2))], 2.2, every=1, back=-1, shade=3)
-    scales(c, "hide", p.k)
+    scales(c, "hide", 0)
     # both wings rise from the shoulders, over the neck's root: from behind they frame the whole body
     _wing(c, bx - 6, by - 13 - lean, wl + 0.1, 1, 2.7, span=1.15, elev=48, root=(bx + 2, by - 6))
     _wing(c, bx - 14, by - 11 - lean, wl, -1, 3.3, span=1.15, elev=44, root=(bx - 8, by - 4))
@@ -542,10 +479,10 @@ def _club_pose(p: Pose) -> tuple[tuple[float, float], float]:
     """Where the club hand is (relative to the right shoulder) and the club's angle (0 = hanging straight down,
     + swings it forward / clockwise), per frame."""
     if p.anim == "attack":
-        return [((-2, -12), -2.2), ((-5, -17), -2.0), ((8, 4), 0.9), ((7, 10), 1.25), ((4, 12), 0.5)][p.k]
+        return _at([((-2, -12), -2.2), ((-5, -17), -2.0), ((8, 4), 0.9), ((7, 10), 1.25), ((4, 12), 0.5)], p)
     if p.anim == "special":
-        return [((-9, -16), -2.0), ((-12, -19), -1.8), ((-13, -20), -1.75), ((-12, 11), 0.05), ((-12, 13), 0.0),
-                ((-10, 12), 0.3)][p.k]
+        return _at([((-9, -16), -2.0), ((-12, -19), -1.8), ((-13, -20), -1.75), ((-12, 11), 0.05), ((-12, 13), 0.0),
+                ((-10, 12), 0.3)], p)
     if p.anim == "hurt":
         return ((2, 12), 0.15)
     if p.anim == "walk":
@@ -655,7 +592,7 @@ def troll(direction: str, p: Pose) -> Canvas:
         club()
         arm(rs, hand, True)
     if slam:
-        _slam(c, M.x(tip[0]), gy, p.burst, p.k)
+        _slam(c, M.x(tip[0]), gy, p.burst, p.f)
     return c
 
 
@@ -777,7 +714,7 @@ def _chisel(c: Canvas, slot: str, seed: int, density: float = 0.05) -> None:
                 c.shade[y, x + 1] = max(1, int(c.shade[y, x + 1]) - 1)
 
 
-def golem(direction: str, p: Pose) -> Canvas:
+def golem(direction: str, p: Pose, form: str = "") -> Canvas:
     """A stone golem: stacked cut blocks, a head sunk between boulder shoulders with a glowing visor slit, fists
     like masonry and runes cut into chest and forearms. The runes pulse at rest; the special charges them from the
     shoulder down to the fist and lands a glowing punch."""
@@ -822,6 +759,14 @@ def golem(direction: str, p: Pose) -> Canvas:
         paint(c, ell(c, *M.p(sx_, by - 13), 7, 6), "stone", base=3.0, depth=3)
         recolour(c, ell(c, *M.p(sx_ - 1, by - 17), 5, 2.4) & c.mask("stone"), "hide2", 0)    # moss on top
     _arm(c, M, (bx + 16 + twist * 0.3, by - 12), rh, back, True, p.charge if p.anim == "special" else 0)
+    if form == "crystal":                                               # crystal clusters grown through the stone
+        for side in (-1, 1):
+            sx_ = bx + side * 15 + twist * 0.3
+            for j, (ddx, h, lean) in enumerate(((-3, 7, -1.5), (0, 10, 0.5), (3, 6, 2))):
+                _crystal(c, *M.p(sx_ + ddx, by - 17), h - (side < 0) * 2, M.s * lean)
+        _crystal(c, *M.p(hx + 2, hy - 7), 5, M.s * 1.0)
+        for t, y in ((-4, by + 2), (5, by - 1)):
+            _crystal(c, *M.p(bx + t + twist * 0.3, y), 4, M.s * (0.8 if t > 0 else -0.8))
     # runes cut into the chest (a ring and a cross on the front, a tall sigil on the back)
     cx_, cy_ = M.p(bx + twist * 0.3, by - 6)
     if not back:
@@ -833,16 +778,26 @@ def golem(direction: str, p: Pose) -> Canvas:
         for k in range(4):
             c.line(cx_ - 2 + k % 2 * 4, cy_ - 7 + k * 3, cx_ + 2 - k % 2 * 4, cy_ - 5 + k * 3, "glow", pulse - 1)
         c.line(cx_, cy_ - 8, cx_, cy_ + 6, "glow", pulse)
-    _chisel(c, "stone", 71 + p.k)
+    _chisel(c, "stone", 71)
     if p.hurt and p.k == 0:                                             # chips knocked off
         for dx, dy in ((10, -20), (14, -16), (8, -24)):
             c.rect(*M.p(bx + dx, by + dy), *M.p(bx + dx + 1, by + dy + 1), "stone", 4)
     if p.anim == "special" and p.burst:
         fx_, fy_ = M.p(*rh)
-        _rune_burst(c, fx_ + M.s * 6, fy_, p.burst, p.k)
+        _rune_burst(c, fx_ + M.s * 6, fy_, p.burst, p.f)
     if p.anim == "attack" and p.k == 3:
         _slam(c, M.x(rh[0]), gy, 0.5, 3)
     return c
+
+
+def _crystal(c: Canvas, x: float, y: float, h: float, lean: float) -> None:
+    """One crystal prism: a lit left facet, a dark right facet and a bright tip, in the hide2 slot."""
+    m = poly(c, [(x - 1.8, y + 1), (x + 1.8, y + 1), (x + 1.2 + lean, y - h + 2), (x + lean, y - h),
+                 (x - 1.2 + lean, y - h + 2)])
+    flat(c, m, "hide2", 3)
+    flat(c, m & (_grid(c)[1] < x + lean * 0.5), "hide2", 4)
+    flat(c, m & ~shift(m, -1, 0), "hide2", 2)
+    c.px(x + lean, y - h + 1, "hide2", 5)
 
 
 def _bx(M: _Mirror, x0, y0, x1, y1) -> tuple[float, float, float, float]:
@@ -852,10 +807,11 @@ def _bx(M: _Mirror, x0, y0, x1, y1) -> tuple[float, float, float, float]:
 
 def _golem_fist(p: Pose, bx: float, by: float) -> tuple[float, float]:
     if p.anim == "attack":
-        return [(bx + 19, by - 18), (bx + 15, by - 24), (bx + 23, by + 12), (bx + 22, by + 18), (bx + 20, by + 10)][p.k]
+        return _at([(bx + 19, by - 18), (bx + 15, by - 24), (bx + 23, by + 12), (bx + 22, by + 18),
+                    (bx + 20, by + 10)], p)
     if p.anim == "special":
-        return [(bx + 12, by - 4), (bx + 8, by - 6), (bx + 6, by - 7), (bx + 21, by - 7), (bx + 22, by - 6),
-                (bx + 19, by)][p.k]
+        return _at([(bx + 12, by - 4), (bx + 8, by - 6), (bx + 6, by - 7), (bx + 21, by - 7), (bx + 22, by - 6),
+                (bx + 19, by)], p)
     if p.anim == "walk":
         return (bx + 18 - p.legs[0] * 0.6, by + 11)
     if p.anim == "hurt":
@@ -923,30 +879,6 @@ def _golem_down(c: Canvas, p: Pose, M: _Mirror) -> Canvas:
 
 
 # ------------------------------------------------------------------------------------------------- elementals
-def _depth(mask: np.ndarray, n: int = 6) -> np.ndarray:
-    d = mask.astype(np.int16)
-    m = mask.copy()
-    for _ in range(n):
-        m = _erode(m)
-        d += m
-    return d
-
-
-def glow_fill(c: Canvas, mask: np.ndarray, slot: str, *, lo: int = 2, hi: int = 5, step: float = 1.5,
-              seed: int | None = None, flicker: float = 0.0) -> None:
-    """Fills a self-lit body: shade rises with depth from the edge, so the core burns brightest (fire, magic).
-    `flicker` darkens or brightens random pixel pairs so consecutive frames shimmer."""
-    d = _depth(mask)
-    sh = np.clip(lo + (d - 1) / step, lo, hi).astype(np.int16)
-    if seed is not None and flicker:
-        r = _rng(seed)
-        noise = r.random(mask.shape)
-        sh = np.where(noise < flicker, sh - 1, np.where(noise > 1 - flicker * 0.6, sh + 1, sh))
-    c.slot[mask] = c.slots.id(slot)
-    c.shade[mask] = np.clip(sh, lo - 1, hi)[mask].astype(np.uint8)
-    c.flags[mask] = 0
-
-
 _ELEMENT_FIST = {
     "attack": [(-3, -6), (-6, -9), (9, -2), (11, -1), (5, 2)],
     "special": [(-2, -4), (-4, -8), (-5, -10), (2, -12), (3, -13), (1, -6)],
@@ -962,7 +894,7 @@ def _el_hands(p: Pose, bx: float, by: float, reach: float = 1.0) -> tuple[tuple[
     if p.anim == "walk":
         lh, rh = (lh[0] + p.legs[1] * 0.7, lh[1]), (rh[0] + p.legs[0] * 0.7, rh[1])
     if p.anim in _ELEMENT_FIST:
-        dx, dy = _ELEMENT_FIST[p.anim][p.k]
+        dx, dy = _at(_ELEMENT_FIST[p.anim], p)
         rh = (bx + 15 + dx * reach, by + 4 + dy)
         if p.anim == "special":
             lh = (bx - 15 - dx * reach, by + 4 + dy)
@@ -977,7 +909,7 @@ def fire_elemental(direction: str, p: Pose) -> Canvas:
     c = Canvas(64, 64, SLOTS)
     M = _Mirror(32, direction == "back")
     gy = 60
-    seed = ORDER.index(p.anim) * 10 + p.k
+    seed = ORDER.index(p.anim) * 20 + p.f
     r = _rng(41, seed)
     fall = p.fall
     flare = p.burst if p.anim == "special" else 0
@@ -1007,7 +939,7 @@ def fire_elemental(direction: str, p: Pose) -> Canvas:
         body |= poly(c, M.pts([(x - 1.5, y), (x + 1.5, y), (x + r.uniform(-2, 2), y - r.uniform(3, 7))]))
     glow_fill(c, body, "hide", lo=2, hi=5, step=1.3, seed=seed + 5, flicker=0.12)
     core = _depth(body) >= 5
-    flat(c, core, "hide2", 4 + (p.k % 2))
+    flat(c, core, "hide2", 4 + (p.f % 2))
     if direction != "back" and fall < 1:
         eh = 1 if p.hurt else 2
         for ex in (hx - 3, hx + 2):
@@ -1041,7 +973,7 @@ def water_elemental(direction: str, p: Pose) -> Canvas:
     c = Canvas(64, 64, SLOTS)
     M = _Mirror(32, direction == "back")
     gy = 60
-    seed = ORDER.index(p.anim) * 10 + p.k
+    seed = ORDER.index(p.anim) * 20 + p.f
     r = _rng(43, seed)
     fall = p.fall
     rear = p.charge * 4 if p.anim == "special" else 0
@@ -1068,7 +1000,7 @@ def water_elemental(direction: str, p: Pose) -> Canvas:
                 c.rect(ex, hy - 1, ex + 1, hy - 1 + (0 if p.hurt else 1), "eyes", 5 if not p.hurt else 2)
         for k in range(3):                                                  # streaks of light running down
             sx = bx - 4 + k * 3
-            y0 = by - 4 + ((p.k + k) % 4) * 4
+            y0 = by - 4 + ((p.f + k * 2) % 8) * 2
             c.line(*M.p(sx, y0), *M.p(sx, y0 + 3), "hide", 5)
     m = c.mask("hide")
     foam = m & ~shift(m, 0, 1) | m & ~shift(m, 0, 2) & (r.random(m.shape) < 0.5)
@@ -1094,7 +1026,7 @@ def earth_elemental(direction: str, p: Pose) -> Canvas:
     back = direction == "back"
     M = _Mirror(32, back)
     gy = 60
-    seed = ORDER.index(p.anim) * 10 + p.k
+    seed = ORDER.index(p.anim) * 20 + p.f
     r = _rng(47, seed)
     if p.fall >= 1:
         for (x, y, rx, ry) in ((22, 55, 8, 5), (34, 54, 9, 6), (45, 56, 6, 4), (29, 47, 6, 5), (39, 48, 5, 4)):
@@ -1134,9 +1066,9 @@ def earth_elemental(direction: str, p: Pose) -> Canvas:
         c.polygon([(cx_ + 1, cy_ + 2), (cx_ + 3, cy_ + 2), (cx_ + 3 + M.s * side, cy_ - 2)], "glow", 3)
         c.px(cx_ - 1 + M.s * side, cy_ - 3, "glow", 5)
     recolour(c, c.mask("stone") & ~shift(c.mask("stone"), 0, 2) & (r.random((64, 64)) < 0.55), "hide2", 0)  # moss
-    leaf_texture(c, "stone", 13 + p.k, density=0.08)
+    leaf_texture(c, "stone", 13, density=0.08)
     for i in range(3):                                                       # orbiting pebbles
-        a = p.phase * math.tau + i * math.tau / 3 if p.anim == "idle" else i * 2.1 + p.k
+        a = p.phase * math.tau + i * math.tau / 3 if p.anim == "idle" else i * 2.1 + p.f * 0.5
         c.rect(*M.p(bx + math.cos(a) * 19, by - 6 + math.sin(a) * 5), *M.p(bx + math.cos(a) * 19 + 1,
                                                                            by - 6 + math.sin(a) * 5), "stone", 3)
     if slam:
@@ -1145,7 +1077,7 @@ def earth_elemental(direction: str, p: Pose) -> Canvas:
             x = bx + dx
             c.polygon(M.pts([(x - 3, gy), (x + 3, gy), (x + (i % 2) - 0.5, gy - h)]), "stone", 3)
             c.line(*M.p(x - 1, gy - 1), *M.p(x + (i % 2) - 0.5, gy - h + 1), "stone", 4)
-        _slam(c, M.x(bx), gy, p.burst, p.k)
+        _slam(c, M.x(bx), gy, p.burst, p.f)
     if p.anim == "special" and p.charge:
         for i in range(int(p.charge * 5)):
             c.px(*M.p(bx + r.uniform(-16, 16), gy - r.uniform(0, 3)), "stone", 4)
@@ -1159,7 +1091,7 @@ def air_elemental(direction: str, p: Pose) -> Canvas:
     M = _Mirror(32, direction == "back")
     gy = 60
     fall = p.fall
-    spin = p.k * 1.1 + ORDER.index(p.anim) * 0.4
+    spin = p.f * 0.55 + ORDER.index(p.anim) * 0.4
     bx = 32 + p.lunge * 0.4 + p.tilt
     hover = 5 - fall * 5
     top, bot = 9 + p.bob * 1.5 + fall * 24 - p.charge * 2, gy - 2 - hover
@@ -1227,9 +1159,9 @@ def wraith(direction: str, p: Pose) -> Canvas:
     c = Canvas(48, 48, SLOTS)
     back = direction == "back"
     M = _Mirror(24, back)
-    seed = ORDER.index(p.anim) * 10 + p.k
+    seed = ORDER.index(p.anim) * 20 + p.f
     r = _rng(61, seed)
-    wave = p.phase * math.tau if p.anim in ("idle", "walk") else p.k * 1.3
+    wave = p.phase * math.tau if p.anim in ("idle", "walk") else p.f * 0.7
     if p.fall >= 1:
         heap = ell(c, *M.p(24, 42), 11, 3.5) | poly(c, M.pts([(17, 42), (24, 35), (31, 42)]))
         paint(c, heap, "cloth", base=2.6, depth=2)
@@ -1270,7 +1202,7 @@ def wraith(direction: str, p: Pose) -> Canvas:
         c.line(*M.p(x, ty + 9), *M.p(x - 1 + i, ty + 21), "cloth", 1)
     # arms: sleeves reaching forward, bone claws
     if p.anim == "attack":
-        hand = [(bx + 9, ty + 2), (bx + 8, ty - 3), (bx + 15, ty + 14), (bx + 15, ty + 17), (bx + 12, ty + 12)][p.k]
+        hand = _at([(bx + 9, ty + 2), (bx + 8, ty - 3), (bx + 15, ty + 14), (bx + 15, ty + 17), (bx + 12, ty + 12)], p)
     elif scream:
         hand = (bx + 9 - p.charge * 3, ty + 2 - p.charge * 2) if p.charge else (bx + 13, ty + 6)
     else:
@@ -1326,135 +1258,209 @@ def _scream(c: Canvas, M: _Mirror, x: float, y: float, t: float, seed: int) -> N
 
 
 # ----------------------------------------------------------------------------------------------------- mimic
-_MIMIC_AT = (7, 12)                     # where props.chest's 26x26 canvas sits in the 40x40 frame
-_CHEST_SLOTS = {"wood": "wood", "metal": "metal", "gold": "gold", "dark": "hair"}
-
-
-def _chest_import(back: bool) -> Canvas:
-    """props.chest, copied pixel for pixel into this set's slots (minus its outline, which the sheet adds back the
-    same way). The mimic's resting frames are this canvas, so on the map it is the prop until it moves."""
-    from . import props as PR
-    src = PR.chest()
-    c = Canvas(40, 40, SLOTS)
-    ox, oy = _MIMIC_AT
-    for y in range(src.h):
-        for x in range(src.w):
-            sid = int(src.slot[y, x])
-            if sid and not src.flags[y, x]:
-                c.px(x + ox, y + oy, _CHEST_SLOTS[PR.SLOTS.name(sid)], int(src.shade[y, x]))
-    if back:                                                            # the lock is on the far side
-        c.rect(ox + 12, oy + 19, ox + 14, oy + 21, "wood", 3)
-        c.px(ox + 12, oy + 19, "wood", 2)
-    return c
-
-
-# per frame: lid lift (px), hop (px, - is up), lean (px), tongue length, tongue mode, eyes open
-_MIMIC_POSES: dict[str, list[tuple[float, float, float, float, str, bool]]] = {
-    "idle": [(0, 0, 0, 0, "", False), (0, 0, 0, 0, "", False), (1.5, 0, 0, 0, "", True), (0, 0, 0, 0, "", False)],
-    "walk": [(2, 0, 0, 0, "", True), (5, -5, 1, 2, "lick", True), (3, -2, 1, 0, "", True), (0, 0, 0, 0, "", False)],
-    "attack": [(3, 0, -1, 0, "", True), (6.5, -1, -2, 4, "lick", True), (5, -3, 4, 9, "out", True),
-               (0, 0, 5, 0, "", True), (2, 0, 2, 0, "", True)],
-    "special": [(5, 0, 0, 3, "lick", True), (6.5, 0, -1, 6, "coil", True), (6.5, 0, 1, 16, "out", True),
-                (6, 0, 1, 11, "out", True), (1, 0, 0, 0, "", True), (2, 0, 0, 2, "lick", True)],
-    "hurt": [(5, 0, -3, 4, "limp", False), (3, 0, -1, 2, "limp", False)],
-    "down": [(5.5, 0, -1, 6, "limp", False), (6.5, 0, 0, 9, "limp", False)],
+# Per played frame: lid opening (0 shut .. 1 thrown back), hop (px, - is up), lean (px forward), squash (px the body
+# sinks), tongue length, tongue mode, eyes open. The mimic's timing is its own, so it reads the frame index (p.f).
+_MIMIC: dict[str, list[tuple[float, float, float, float, float, str, bool]]] = {
+    "idle": [(0, 0, 0, 0, 0, "", False), (0, 0, 0, 0, 0, "", False), (0, 0, 0, -0.5, 0, "", False),
+             (0.12, 0, 0, -0.5, 0, "", True), (0.24, 0, 0, -0.5, 0, "", True), (0.12, 0, 0, 0, 0, "", True),
+             (0, 0, 0, 0, 0, "", False), (0, 0, 0, 0, 0, "", False)],
+    "walk": [(0, 0, 0, 1.5, 0, "", False), (0.15, -3, 1, -0.5, 0, "", True), (0.32, -5, 2, -1, 3, "lick", True),
+             (0.12, -2, 2, 0, 0, "", True), (0, 0, 2, 1.5, 0, "", False), (0.15, -3, 3, -0.5, 0, "", True),
+             (0.3, -5, 3, -1, 2, "lick", True), (0.1, -2, 2, 0, 0, "", True)],
+    "attack": [(0.15, 0, -1, 0.5, 0, "", True), (0.3, 0, -2, 1.5, 2, "lick", True), (1.0, -2, 3, -1, 6, "out", True),
+               (1.0, -1, 6, -1, 9, "out", True), (0, 0, 7, 1, 0, "", True), (0.05, 0, 7, 0.5, 0, "", True),
+               (0.1, 0, 3, 0, 0, "", True), (0.05, 0, 1, 0, 0, "", True)],
+    "special": [(0.3, 0, 0, 0.5, 2, "lick", True), (0.7, 0, -1, 1, 5, "coil", True), (1.0, 0, -1, 1, 5, "coil", True),
+                (1.0, 0, -2, 1.5, 6, "coil", True), (1.0, 0, 1, -0.5, 11, "out", True),
+                (1.0, 0, 2, -1, 19, "out", True), (1.0, 0, 2, -1, 19, "wrap", True), (1.0, 0, -2, 1, 12, "out", True),
+                (0.8, 0, -1, 0.5, 5, "lick", True), (0.2, 0, 0, 0, 0, "", True)],
+    "hurt": [(0.4, 0, -3, 1, 4, "limp", False), (0.25, 0, -2, 0.5, 2, "limp", False), (0.1, 0, -1, 0, 0, "", True)],
+    "down": [(0.6, 0, -1, 1, 6, "limp", False), (0.95, 0, 0, 2, 10, "limp", False)],
 }
 
 
 def mimic(direction: str, p: Pose) -> Canvas:
-    """A mimic: indistinguishable from props.chest at rest (idle frame 0 is the chest itself), then the lid lifts
-    to show eyes, rows of teeth and a long tongue. It hops to walk, lunges and snaps to attack and, for the special,
-    lashes its tongue out to drag its prey in."""
+    """A mimic: at rest a convincing treasure chest (planked front, iron corner brackets and bands, studs, a lock
+    plate with a keyhole, a domed lid with its seam), until the lid cracks and two eyes glint. It hops to walk; the
+    attack throws the lid back on rows of teeth and a tongue and snaps it shut on the target (the snap held); the
+    special lashes the tongue out across a tile and reels it back. From behind, the lid lifts away from the camera
+    and the teeth show only past its edge."""
     back = direction == "back"
-    lid, hop, lean, tongue, mode, eyes = _MIMIC_POSES[p.anim][p.k]
-    if not lid and not hop and not lean:
-        c = _chest_import(back)
-        if p.anim == "attack" and p.k == 3:
-            _chomp(c, 32, 22)
-        return c
-    c = Canvas(40, 40, SLOTS)
-    M = _Mirror(20, back)
-    ox, oy = _MIMIC_AT[0] + lean, _MIMIC_AT[1] + hop
+    lid, hop, lean, squash, tongue, mode, eyes = _MIMIC[p.anim][min(p.f, len(_MIMIC[p.anim]) - 1)]
+    c = Canvas(48, 48, SLOTS)
+    M = _Mirror(24, back)
+    gy = 44
 
     def L(x: float, y: float) -> tuple[float, float]:
-        return M.p(ox + x, oy + y)
+        return M.p(x + lean, y + hop)
 
-    from .props import iso_box
-    iso_box(c, int(M.x(ox + 13)), int(oy + 8), 11, 8, "wood")
-    for bx_ in (5, 21):                                                 # metal bands
-        c.line(*L(bx_, 13), *L(bx_, 21), "metal", 3)
-    c.line(*L(13, 19), *L(13, 25), "metal", 2)
-    front = [L(2, 13.5), L(13, 19), L(24, 13.5)]
-    hinge = [L(2, 13.5), L(13, 8), L(24, 13.5)]
-    maw = poly(c, [hinge[0], hinge[1], hinge[2], front[1]])
-    if not back:
-        flat(c, maw, "mouth", 1)
-        flat(c, maw & shift(maw, 0, 2) & ~shift(maw, 0, -3), "mouth", 0)       # the throat, deep at the back
-        for x in range(3, 24, 3):                                           # lower teeth along the rim
-            tx, ty = L(x, 13.5 + (5.5 - abs(13 - x) * 0.5))
-            c.polygon([(tx - 1, ty + 0.5), (tx + 1, ty + 0.5), (tx, ty - 2)], "horn", 5 if x < 13 else 4)
-    c.rect(*L(12, 20), *L(14, 22), "gold", 4)                               # the lock, still on the body
-    c.px(*L(13, 22), "hair", 0)
-    # the lid swings up about its back edge; from the front we see its inside, from behind its outside
-    fx, fy = L(13, 19 - 2.2 * lid)
-    lid_face = poly(c, [hinge[0], (fx, fy), hinge[2], hinge[1]]) if lid > 2.5 else poly(c, [
-        hinge[0], (fx, fy), hinge[2], L(13, 8 - lid)])
-    dome = poly(c, [L(2, 13.5 - lid * 0.9), (fx, fy - 2), L(24, 13.5 - lid * 0.9), L(24, 11.5 - lid * 0.9),
-                    (fx, fy - 4.5), L(2, 11.5 - lid * 0.9)])
-    if back:
-        paint(c, lid_face | dome, "wood", base=3.4, depth=2)
-        c.line(*L(2, 12.5 - lid * 0.9), fx, fy - 3, "metal", 4)
-        c.line(fx, fy - 3, *L(24, 12.5 - lid * 0.9), "metal", 3)
-        for x in (6, 10, 16, 20):                                           # teeth peeking past the lid's edge
-            tx = ox + x
-            c.px(*M.p(tx, oy + 13.5 - lid * 0.9 - 2 - (1 if x in (10, 16) else 0)), "horn", 5)
+    def P(pts):
+        return poly(c, [L(x, y) for x, y in pts])
+
+    x0, x1, dx, dy = 11, 33, 6, -4                      # front face span, depth offset of the far edges
+    yb, yt = gy - 1, gy - 11 + squash                   # body front face, bottom and rim
+    if hop < 0:                                          # in the air the shadow stays, the chest stretches a hair
+        yt -= 0.5
+    front = P([(x0, yt), (x1, yt), (x1, yb), (x0, yb)])
+    side = P([(x1, yt), (x1 + dx, yt + dy), (x1 + dx, yb + dy), (x1, yb)])
+    # the maw: the open top of the body, deep red going black at the back
+    maw = P([(x0, yt), (x1, yt), (x1 + dx, yt + dy), (x0 + dx, yt + dy)])
+    flat(c, side, "wood", 2)
+    flat(c, front, "wood", 3)
+    yy, xx = np.mgrid[0:48, 0:48]
+    for k in range(int(yt) + 3, int(yb), 3):            # planks: a dark seam and a lit lip under it
+        seam = front & (yy == k)
+        flat(c, seam, "wood", 1)
+        flat(c, front & (yy == k + 1) & ((xx + k) % 7 != 0), "wood", 4)
+    flat(c, side & ((xx + yy) % 4 == 0) & (yy > yt + 2), "wood", 1)
+    flat(c, front & ~shift(front, M.s, 0), "wood", 4)                   # lit left edge
+    flat(c, front & ~shift(front, 0, -1), "wood", 2)                    # bottom lip
+    # iron: corner brackets, two bands, a bottom rim; rivets on all of them
+    for bx_ in (x0 + 4, x1 - 4):
+        band = P([(bx_ - 1, yt), (bx_ + 1, yt), (bx_ + 1, yb), (bx_ - 1, yb)])
+        flat(c, band, "metal", 3)
+        flat(c, band & ~shift(band, M.s, 0), "metal", 4)
+        for ry in range(int(yt) + 2, int(yb), 3):
+            c.px(*L(bx_, ry), "metal", 5)
+    for cx_ in (x0, x1):
+        br = P([(cx_ - (0 if cx_ == x0 else 2), yb - 3), (cx_ + (2 if cx_ == x0 else 0), yb - 3),
+                (cx_ + (2 if cx_ == x0 else 0), yb), (cx_ - (0 if cx_ == x0 else 2), yb)])
+        flat(c, br, "metal", 2)
+    c.line(*L(x1 + 1, yb - 1), *L(x1 + dx - 1, yb + dy + 1), "metal", 1)
+    flat(c, P([(x1, yt + 1), (x1 + dx, yt + dy + 1), (x1 + dx, yt + dy + 3), (x1, yt + 3)]), "metal", 2)  # side band
+    if not back:                                         # the lock plate and keyhole on the front
+        lx = (x0 + x1) / 2
+        plate = P([(lx - 2, yt + 1), (lx + 2, yt + 1), (lx + 2, yt + 5), (lx, yt + 6.5), (lx - 2, yt + 5)])
+        flat(c, plate, "gold", 4)
+        flat(c, plate & ~shift(plate, 0, 1), "gold", 5)
+        flat(c, plate & ~shift(plate, 0, -1), "gold", 2)
+        c.px(*L(lx, yt + 3), "hair", 0)
+        c.px(*L(lx, yt + 4), "hair", 0)
+    else:                                                # hinges on the back
+        for hx_ in (x0 + 6, x1 - 6):
+            c.rect(*L(hx_ - 1, yt), *L(hx_ + 1, yt + 2), "metal", 3)
+    # lid: a dome over the top. h = how far its free edge has risen
+    lh = 6.5                                             # lid depth (front face height when shut)
+    if lid < 0.3:                                        # shut, or just cracked: a dark slit under the raised lid
+        gap = round(lid * 9)
+        if gap:
+            slit = P([(x0, yt - gap - 0.5), (x1, yt - gap - 0.5), (x1 + dx, yt + dy - gap), (x1 + dx, yt + dy),
+                      (x1, yt), (x0, yt)])
+            flat(c, slit, "mouth", 0)
+            flat(c, slit & ~shift(slit, 0, -1), "mouth", 1)
+            if not back:
+                for tx in np.arange(x0 + 2, x1 - 1, 3):
+                    c.px(*L(tx, yt - 1), "horn", 5)
+                    if gap > 1:
+                        c.px(*L(tx + 1.5, yt - gap), "horn", 4)
+                if eyes and gap > 1:
+                    for ex in ((x0 + x1) / 2 - 5, (x0 + x1) / 2 + 4):
+                        c.px(*L(ex, yt - gap / 2 - 0.5), "eyes", 5)
+                        c.px(*L(ex + 1, yt - gap / 2 - 0.5), "eyes", 3)
+        _mimic_lid_shut(c, L, P, x0, x1, dx, dy, yt - gap, lh, back, M)
     else:
-        flat(c, dome, "wood", 3)
-        c.line(*L(2, 12.5 - lid * 0.9), fx, fy - 3, "metal", 4)
-        c.line(fx, fy - 3, *L(24, 12.5 - lid * 0.9), "metal", 3)
-        if lid > 2.5:
-            flat(c, lid_face, "wood", 1)
-            flat(c, lid_face & ~shift(lid_face, 0, 1), "wood", 2)
-            for t in np.linspace(0.08, 0.92, 7):                           # upper teeth along the lid's front edge
-                if t < 0.5:
-                    x0, y0 = hinge[0][0] + (fx - hinge[0][0]) * t * 2, hinge[0][1] + (fy - hinge[0][1]) * t * 2
-                else:
-                    x0, y0 = fx + (hinge[2][0] - fx) * (t - 0.5) * 2, fy + (hinge[2][1] - fy) * (t - 0.5) * 2
-                c.polygon([(x0 - 1, y0 - 0.5), (x0 + 1, y0 - 0.5), (x0, y0 + 2.5)], "horn", 5)
+        ang = lid * math.radians(115)
+        h = math.sin(ang) * 11
+        bk = (1 - math.cos(ang)) * 0.5
+        if not back:
+            flat(c, maw, "mouth", 1)
+            flat(c, maw & shift(maw, 0, 2), "mouth", 0)
+            for tx in np.arange(x0 + 1.5, x1, 2.6):          # lower teeth along the front rim
+                th = 1.5 + 1.5 * min(1, lid * 2)
+                c.polygon([L(tx - 1, yt + 0.5), L(tx + 1, yt + 0.5), L(tx, yt - th)], "horn", 5 if tx < 22 else 4)
+            for i in range(3):                               # and down the side rim
+                tx, ty = x1 + 1.5 + i * 2, yt - 1 - i * 1.4
+                c.polygon([L(tx - 0.8, ty + 0.5), L(tx + 0.8, ty + 0.5), L(tx, ty - 1.8)], "horn", 3)
+            # the lid's inside, hinged on the far edge and swinging up
+            fx0, fy = x0 + dx * bk, yt + dy - h
+            inner = P([(x0 + dx, yt + dy), (x1 + dx, yt + dy), (x1 + dx * bk, fy), (fx0, fy)])
+            outer = P([(fx0, fy), (x1 + dx * bk, fy), (x1 + dx * bk, fy - 2.5 * (1 - lid * 0.6)),
+                       (fx0, fy - 2.5 * (1 - lid * 0.6))])
+            flat(c, outer, "wood", 4)
+            flat(c, inner, "wood", 1)
+            flat(c, inner & ~shift(inner, 0, -1), "wood", 2)
+            for tx in np.arange(fx0 + 1.5, x1 + dx * bk, 2.6):  # upper teeth hanging from the lid's edge
+                c.polygon([L(tx - 1, fy - 0.5), L(tx + 1, fy - 0.5), L(tx, fy + 2.5 + lid)], "horn", 5)
+            for bx_ in (x0 + 4, x1 - 4):
+                c.line(*L(bx_ + dx * bk, fy - 2), *L(bx_ + dx * bk, fy), "metal", 4)
             if eyes:
-                ey = (hinge[1][1] + fy) / 2 - 1
-                for ex in (-3, 2):
-                    c.rect(fx + ex, ey, fx + ex + 1, ey, "eyes", 5)
-                    c.px(fx + ex + 1, ey, "eyes", 2)
-        elif eyes:                                                          # peeking out of a crack
-            c.line(*L(4, 13.5 - lid * 0.5), *L(22, 13.5 - lid * 0.5), "mouth", 0)
-            c.px(*L(10, 13), "eyes", 5)
-            c.px(*L(15, 13), "eyes", 5)
-        if tongue:
-            _tongue(c, L, M, tongue, mode, p.k)
-    if p.anim == "walk" and p.k in (0, 3):                                   # dust kicked up at take-off
-        for dx in (-12, 12):
-            c.px(*M.p(20 + dx, 37), "fx", 3)
+                ey = yt + dy - h * 0.55
+                for ex in ((x0 + x1) / 2 + dx * 0.5 - 4, (x0 + x1) / 2 + dx * 0.5 + 3):
+                    c.rect(*L(ex, ey), *L(ex + 1, ey), "eyes", 5)
+                    c.px(*L(ex + 1, ey), "eyes", 2)
+                    c.px(*L(ex, ey - 1), "wood", 0)
+            if tongue:
+                _mimic_tongue(c, L, M, (x0 + x1) / 2 + 2, yt - 1, tongue, mode, p.f)
+        else:
+            # from behind: the lid's outer face tilts up away from us; teeth peek out under its far edge
+            far_y = yt + dy - h * 0.9
+            outer = P([(x0, yt), (x1, yt), (x1 + dx, far_y), (x0 + dx, far_y)])
+            paint(c, outer, "wood", base=3.3, depth=2, cast=False)
+            for bx_ in (x0 + 4, x1 - 4):
+                c.line(*L(bx_, yt), *L(bx_ + dx, far_y), "metal", 3)
+            if h > 3:
+                for tx in np.arange(x0 + dx + 1.5, x1 + dx, 2.6):
+                    c.polygon([L(tx - 1, far_y), L(tx + 1, far_y), L(tx, far_y - 2)], "horn", 4)
+            if tongue and mode in ("out", "wrap"):
+                _mimic_tongue(c, L, M, x0 + dx + 4, far_y - 1, tongue * 0.7, "out", p.f)
+    if p.anim == "attack" and p.f in (4, 5):
+        _chomp(c, *L(x1 + 4, yt - 2))
+    if p.anim == "walk" and p.f in (0, 4):                     # dust where it lands
+        for d in (-1, 1):
+            c.px(*M.p(24 + d * 15 + lean, 43), "fx", 3)
+            c.px(*M.p(24 + d * 17 + lean, 42), "fx", 2)
+    if p.anim == "down" and p.f == 1:                          # coins spilled from the maw
+        for i, (cx_, cy_) in enumerate(((36, 43), (39, 42), (34, 42), (41, 43))):
+            c.px(*M.p(cx_, cy_), "gold", 5 if i % 2 == 0 else 3)
+            c.px(*M.p(cx_ + 1, cy_), "gold", 3)
     return c
 
 
-def _tongue(c: Canvas, L, M: _Mirror, length: float, mode: str, k: int) -> None:
-    sx, sy = L(13, 15)
-    if mode == "limp":                                                       # lolling out over the front
-        pts = [(sx, sy), (sx + M.s * 2, sy + 4), (sx + M.s * 3, sy + 4 + length * 0.6), (sx + M.s * 5, sy + 4 +
-                                                                                           length * 0.8)]
+def _mimic_lid_shut(c: Canvas, L, P, x0, x1, dx, dy, yt, lh, back: bool, M) -> None:
+    """The closed lid: a barrel dome over the body with its seam, bands running over it and a rim of iron."""
+    face = P([(x0, yt), (x1, yt), (x1, yt - lh + 2), (x1 - 1, yt - lh), (x0 + 1, yt - lh), (x0, yt - lh + 2)])
+    top = P([(x0 + 1, yt - lh), (x1 - 1, yt - lh), (x1 + dx - 1, yt - lh + dy), (x0 + dx + 1, yt - lh + dy)])
+    side = P([(x1, yt), (x1 + dx, yt + dy), (x1 + dx, yt + dy - lh + 2), (x1 + dx - 1, yt + dy - lh),
+              (x1 - 1, yt - lh), (x1, yt - lh + 2)])
+    yy, xx = np.mgrid[0:48, 0:48]
+    flat(c, side, "wood", 2)
+    flat(c, top, "wood", 5)
+    flat(c, face, "wood", 4)
+    flat(c, face & (yy >= yt - 2), "wood", 3)                       # the dome turning under
+    flat(c, face & ~shift(face, 0, -1), "metal", 3)                 # the lid's iron rim
+    c.line(*L(x0, yt), *L(x1, yt), "hair", 0)                       # the seam
+    for bx_ in (x0 + 4, x1 - 4):
+        c.line(*L(bx_, yt - lh), *L(bx_, yt - 1), "metal", 4)
+        c.line(*L(bx_ + 1, yt - lh), *L(bx_ + 1, yt - 1), "metal", 3)
+        c.line(*L(bx_, yt - lh), *L(bx_ + dx, yt - lh + dy), "metal", 5)
+    if not back:                                                    # the hasp from the lid down to the lock
+        lx = (x0 + x1) / 2
+        c.rect(*L(lx - 1, yt - 2), *L(lx + 1, yt), "gold", 3)
+        c.px(*L(lx - 1, yt - 2), "gold", 5)
+
+
+def _mimic_tongue(c: Canvas, L, M: _Mirror, sx: float, sy: float, length: float, mode: str, f: int) -> None:
+    if mode == "limp":                                              # lolling out over the front
+        pts = [(sx, sy), (sx + 3, sy + 2), (sx + 4, sy + 2 + length * 0.6), (sx + 6, sy + 3 + length * 0.7)]
     elif mode == "coil":
-        pts = [(sx, sy), (sx + M.s * 4, sy - 3), (sx + M.s * 6, sy + 1), (sx + M.s * 3, sy + 3)]
+        pts = [(sx, sy), (sx + 3, sy - 4), (sx + 6, sy - 2), (sx + 5, sy + 1), (sx + 3, sy - 1)]
     elif mode == "lick":
-        pts = [(sx, sy), (sx + M.s * length * 0.5, sy + 1), (sx + M.s * length, sy - 1)]
-    else:                                                                    # lashed out at the target
-        pts = [(sx, sy), (sx + M.s * length * 0.35, sy - 2), (sx + M.s * length * 0.7, sy + 1),
-               (sx + M.s * length, sy - 1)]
-    paint(c, tube(c, pts, [2.2] + [1.8] * (len(pts) - 2) + [1.4]), "hide2", base=3.4, depth=1)
+        pts = [(sx, sy), (sx + length * 0.5, sy - 1.5), (sx + length, sy - 0.5)]
+    elif mode == "wrap":                                            # curled round the prey at full reach
+        pts = [(sx, sy), (sx + length * 0.35, sy - 3), (sx + length * 0.7, sy - 1), (sx + length, sy - 4),
+               (sx + length - 2, sy - 7), (sx + length - 4, sy - 4)]
+    else:                                                           # lashed out at the target
+        wob = math.sin(f * 1.7) * 1.2
+        pts = [(sx, sy), (sx + length * 0.35, sy - 2 + wob), (sx + length * 0.7, sy + 0.5 - wob), (sx + length, sy - 1)]
+    pts = [L(x, y) for x, y in pts]
+    paint(c, tube(c, pts, [2.2] + [1.7] * (len(pts) - 2) + [1.3]), "hide2", base=3.4, depth=1)
     c.line(*pts[0], *pts[1], "hide2", 2)                                     # the centre groove
     if mode == "out":
         tx, ty = pts[-1]
-        c.polygon([(tx, ty - 2), (tx + M.s * 3, ty - 1), (tx, ty + 2)], "hide2", 4)      # forked tip
+        c.polygon([(tx, ty - 2), (tx + M.s * 3, ty - 1.5), (tx + M.s * 1.5, ty), (tx + M.s * 3, ty + 1.5),
+                   (tx, ty + 2)], "hide2", 4)                                  # forked tip
+    for x, y in pts[1:-1:2]:
+        c.px(x, y + 2, "mouth", 3)                                            # a drip of drool
 
 
 def _chomp(c: Canvas, x: float, y: float) -> None:
@@ -1472,7 +1478,7 @@ def imp(direction: str, p: Pose) -> Canvas:
     back = direction == "back"
     M = _Mirror(16, back)
     gy = 30
-    beat = (1, 0.2, -0.9, 0.2)[p.k % 4] if p.anim in ("idle", "walk") else p.wing
+    beat = math.cos(p.phase * math.tau * 2) if p.anim in ("idle", "walk") else p.wing
     if p.fall >= 1:
         beat = -1
     cx = 15 + p.lunge * 0.6 + p.tilt
@@ -1500,7 +1506,7 @@ def imp(direction: str, p: Pose) -> Canvas:
         recolour(c, ell(c, *M.p(cx + 0.5, cy + 3), 2, 2.5) & c.mask("hide"), "hide2", 0)       # belly
     fire = p.anim == "special"
     if p.anim == "attack":
-        hand = [(cx + 4, cy - 3), (cx + 3, cy - 6), (cx + 8, cy + 2), (cx + 8, cy + 3), (cx + 6, cy + 1)][p.k]
+        hand = _at([(cx + 4, cy - 3), (cx + 3, cy - 6), (cx + 8, cy + 2), (cx + 8, cy + 3), (cx + 6, cy + 1)], p)
     elif fire and p.charge:
         hand = (cx + 4, cy - 1 - p.charge * 2)
     elif fire and p.burst:
@@ -1562,7 +1568,7 @@ def hound(direction: str, p: Pose) -> Canvas:
     gy = 37
     lunge, bob, hdy, stretch, jaw = p.lunge, p.bob, p.head[1], 0.0, p.jaw
     if p.anim == "special":
-        lunge, bob, hdy, stretch, jaw = _POUNCE[p.k]
+        lunge, bob, hdy, stretch, jaw = _at(_POUNCE, p)
     legs, lift = p.legs, p.lift
     if p.anim == "special" and p.k in (2, 3):
         legs, lift = (5, -5, 4, -4), (4, 3, 4, 3)
@@ -1599,7 +1605,7 @@ def hound(direction: str, p: Pose) -> Canvas:
     paint(c, ell(c, hx, hy, 3.6, 3.2), "hide", base=3.1, depth=2)
     paint(c, ell(c, hx + 3.5, hy + 1, 2.6, 1.6), "hide2", base=3.2, depth=1)  # muzzle
     c.px(hx + 5.5, hy + 0.5, "mouth", 0)                                     # nose
-    pant = p.anim == "idle" and p.k % 2 == 1 or p.anim == "walk"
+    pant = p.anim == "idle" and p.f % 4 >= 2 or p.anim == "walk"
     if jaw:
         c.line(hx + 2, hy + 3, hx + 5, hy + 3, "mouth", 1)
         c.px(hx + 4, hy + 2.5, "horn", 5)
@@ -1619,7 +1625,7 @@ def hound(direction: str, p: Pose) -> Canvas:
     nk = poly(c, [(cx + 5, by - 3), (cx + 8, by - 5), (cx + 8, by - 2), (cx + 6, by + 2), (cx + 4, by - 1)])
     paint(c, nk & c.mask(), "accent", base=3.0, depth=1)                       # bandana
     c.polygon([(cx + 5, by), (cx + 7, by), (cx + 6, by + 3)], "accent", 2)
-    leaf_texture(c, "hide", 17 + p.k, density=0.08)
+    F.fur(c, "hide", cx, by, seed=17, cell=(3, 3), length=2, fill=0.5)
     return c.mirrored() if direction == "back" else c
 
 
@@ -1631,7 +1637,7 @@ def sapling(direction: str, p: Pose) -> Canvas:
     back = direction == "back"
     M = _Mirror(20, back)
     gy = 37
-    seed = ORDER.index(p.anim) * 10 + p.k
+    seed = ORDER.index(p.anim) * 20 + p.f
     r = _rng(83, seed)
     sway = math.sin(p.phase * math.tau) * 1.2 if p.anim == "idle" else p.legs[0] * 0.3
     fall = p.fall
@@ -1656,7 +1662,7 @@ def sapling(direction: str, p: Pose) -> Canvas:
         c.line(*M.p(cx + k, by - 1), *M.p(cx + k + tilt * 0.3, by - 7 - abs(k)), "wood", 2)
     # twig arms
     if p.anim == "attack":
-        hand = [(cx + 6, by - 15), (cx + 4, by - 18), (cx + 11, by - 8), (cx + 11, by - 6), (cx + 8, by - 9)][p.k]
+        hand = _at([(cx + 6, by - 15), (cx + 4, by - 18), (cx + 11, by - 8), (cx + 11, by - 6), (cx + 8, by - 9)], p)
     elif p.anim == "special" and (p.charge or p.burst):
         hand = (cx + 6, by - 18)
     else:
@@ -1683,7 +1689,7 @@ def sapling(direction: str, p: Pose) -> Canvas:
             c.line(*M.p(cx - 2, fy), *M.p(cx - 1, fy), "eyes", 1)
             c.line(*M.p(cx + 1, fy), *M.p(cx + 2, fy), "eyes", 1)
         else:
-            blink = p.anim == "idle" and p.k == 3
+            blink = p.anim == "idle" and p.f == 6
             for ex in (cx - 2, cx + 1.5):
                 c.px(*M.p(ex, fy), "eyes", 1 if blink else 5)
                 if not blink:
@@ -1694,7 +1700,7 @@ def sapling(direction: str, p: Pose) -> Canvas:
     for (dx, dy, rx, ry, base) in ((-5, 1, 5, 4, 2.6), (5, 1, 5, 4, 2.6), (0, -3, 6.5, 5, 3.1)):
         paint(c, ell(c, *M.p(tx + dx + sway * (1 if dy < 0 else 0.6), ty + dy), rx, ry), "hide", base=base, k=2.0,
               depth=3)
-    leaf_texture(c, "hide", 29 + p.k, density=0.22)
+    leaf_texture(c, "hide", 29, density=0.22)
     bloom = p.anim == "special" and (p.burst or p.charge > 0.6)
     if bloom:
         for i in range(int(3 + 4 * max(p.burst, p.charge * 0.5))):           # flowers opening in the crown
@@ -1744,6 +1750,11 @@ BOSS_RAMPS = {
     "hound_black": ramp("#3a3640", shift=0.05, spread=1.2), "cream": ramp("#e3d3b0", shift=0.05, spread=0.8),
     "nose": ramp("#3a2a30", shift=0.04, spread=1.2), "ally": ramp("#e6bd5c", shift=0.06),
     "heal": ramp("#9fef8a", shift=0.05, spread=0.8),
+    "crystal_stone": ramp("#7f86a8", shift=0.06, spread=1.0), "crystal": ramp("#b9a4ff", shift=0.05, spread=0.85),
+    "radiant": ramp("#f2c85a", shift=0.07, spread=1.0), "radiant_core": ramp("#fff2c4", shift=0.04, spread=0.5),
+    # shadow fire: a near-black violet body with a deep violet core and pale eyes: it burns darker than the room
+    "umbral": ramp("#2c1d48", shift=0.05, spread=0.75), "umbral_core": ramp("#6a3ab0", shift=0.06, spread=0.8),
+    "ghost_violet": ramp("#f0dcff", shift=0.03, spread=0.12),
 }
 
 PLAYER_ACCENTS = {f"p{i + 1}": ramp(h, shift=0.06) for i, h in enumerate(
@@ -1773,6 +1784,7 @@ class Monster:
     flying: bool = False
     tags: list[str] = field(default_factory=list)
     summoner: str | None = None         # companions: the subclass that brings them (class/subclass)
+    forms: dict[str, str] = field(default_factory=dict)   # variant -> drawing form ("" = the base drawing)
 
 
 def _v(**slots: str) -> dict[str, str]:
@@ -1810,11 +1822,15 @@ CATALOGUE: list[Monster] = [
         "basalt": _v(stone="terrain/stone_dark", hide2="terrain/crust", glow="magic/fire", eyes="magic/fire",
                      fx="magic/fire"),
         "temple": _v(stone="terrain/stone_warm", hide2="terrain/moss", glow="magic/holy", eyes="magic/holy",
-                     fx="magic/holy")},
-        "elite", tags=["construct", "large"]),
+                     fx="magic/holy"),
+        "crystal": _v(stone="boss/crystal_stone", hide2="boss/crystal", glow="magic/arcane", eyes="magic/arcane",
+                      fx="magic/arcane")},
+        "elite", tags=["construct", "large"], forms={"crystal": "crystal"}),
     Monster("fire_elemental", "Fire Elemental", fire_elemental, (64, 64), (32, 60), {
         "ember": _v(hide="boss/flame", hide2="boss/flame_core", eyes="boss/char", fx="magic/fire"),
-        "azure": _v(hide="boss/azure", hide2="boss/azure_core", eyes="boss/char", fx="magic/frost")},
+        "azure": _v(hide="boss/azure", hide2="boss/azure_core", eyes="boss/char", fx="magic/frost"),
+        "radiant": _v(hide="boss/radiant", hide2="boss/radiant_core", eyes="boss/amber", fx="magic/holy"),
+        "shadow": _v(hide="boss/umbral", hide2="boss/umbral_core", eyes="boss/ghost_violet", fx="magic/shadow")},
         "elite", tags=["elemental", "fire", "large"]),
     Monster("water_elemental", "Water Elemental", water_elemental, (64, 64), (32, 60), {
         "sea": _v(hide="terrain/water", hide2="boss/foam", eyes="magic/frost", fx="boss/foam"),
@@ -1838,7 +1854,7 @@ CATALOGUE: list[Monster] = [
         "shade": _v(cloth="boss/shade", mouth="boss/void", eyes="magic/blood", fx="magic/shadow",
                     horn="horn/obsidian")},
         flying=True, tags=["undead", "incorporeal"]),
-    Monster("mimic", "Mimic", mimic, (40, 40), (20, 37), {
+    Monster("mimic", "Mimic", mimic, (48, 48), (24, 44), {
         "oak": _v(wood="wood/oak", metal="metal/iron", gold="metal/gold", hair="cloth/charcoal", mouth="boss/maw",
                   hide2="boss/tongue", horn="boss/ivory", eyes="eyes/gold", fx="boss/dust"),
         "ironbound": _v(wood="wood/dark", metal="metal/steel", gold="metal/silver", hair="cloth/charcoal",
@@ -1877,18 +1893,18 @@ def ramps(variant: dict[str, str]) -> dict[str, list[str]]:
     return out
 
 
-_CANVAS_CACHE: dict[tuple[str, str, int], Canvas] = {}
+_CANVAS_CACHE: dict[tuple[str, str, str, int], Canvas] = {}
 
 
-def canvases(m: Monster) -> list[Canvas]:
-    """Both facings' frames, outlined, in sheet order (front row, then back row). Drawn once per monster; every
-    palette variant renders from the same canvases."""
+def canvases(m: Monster, form: str = "") -> list[Canvas]:
+    """Both facings' frames, outlined, in sheet order (front row, then back row). Drawn once per monster and form;
+    every palette variant of that form renders from the same canvases."""
     out = []
     for d in ("front", "back"):
         for i, (_a, _k, pose) in enumerate(frame_poses()):
-            key = (m.id, d, i)
+            key = (m.id, form, d, i)
             if key not in _CANVAS_CACHE:
-                cv = m.draw(d, pose)
+                cv = m.draw(d, pose, form) if form else m.draw(d, pose)
                 cv.outline(skip=FX_SLOTS)
                 _CANVAS_CACHE[key] = cv
             out.append(_CANVAS_CACHE[key])
@@ -1904,7 +1920,7 @@ def frames(m: Monster, variant: str, accent: list[str] | None = None) -> list[Im
         pal = ramps(m.variants[variant])
         if accent:
             pal["accent"] = accent
-        _FRAME_CACHE[key] = [cv.render(pal) for cv in canvases(m)]
+        _FRAME_CACHE[key] = [cv.render(pal) for cv in canvases(m, m.forms.get(variant, ""))]
     return _FRAME_CACHE[key]
 
 
@@ -2003,8 +2019,8 @@ def _previews(n: int) -> None:
             grids[group].append(Tile(_anim_grid(fr[n:]), m.name, "back facing (drawn, not mirrored)"))
     sections = [contact_sheet(g, grids[g], columns={"Bosses": 2, "Big monsters": 4}.get(g, 5), zoom=2)
                 for g, _ in GROUPS]
-    save(stack("Bosses · animations", sections, subtitle="One animation per row: idle 4 · walk 4 · attack 5 · "
-                                                         "special 6 · hurt 2 · down 2"),
+    save(stack("Bosses · animations", sections, subtitle="One animation per row: " + " · ".join(
+        f"{a} {ANIMS[a][2]}" for a in ORDER)),
          PREVIEWS / "22-bosses-anims.png")
     _gif(n)
     _diorama()
@@ -2093,8 +2109,9 @@ def _diorama() -> None:
            D.prop("torch", 8, 1, frame=2), D.prop("chest_open", 7, 2), D.prop("chest", 1, 1),
            D.prop("crystals", 0, 0, "violet"), D.prop("crystals", 9, 0, "violet"), D.prop("rubble", 0, 6, "dark"),
            D.prop("rubble", 7, 7, "dark")]
-    sp += boss("dragon", "red", 4, 1, 17, mirror=True, big=True)
-    sp += boss("mimic", "oak", 8, 3, 10, mirror=True)
+    meta = anims_meta()
+    sp += boss("dragon", "red", 4, 1, meta["special"]["frames"][7], mirror=True, big=True)    # the breath, held
+    sp += boss("mimic", "oak", 8, 3, meta["attack"]["frames"][3], mirror=True)
     sp += boss("wraith", "wraith", 2, 3, 1, mirror=True)
     sp += [D.unit("kara", 4, 5, "back"), D.unit("tamsin", 7, 5, "back", mirror=True),
            D.unit("sefa", 2, 6, "back"), D.unit("class_druid", 5, 7, "back", mirror=True)]
