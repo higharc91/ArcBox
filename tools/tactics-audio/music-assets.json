@@ -58,13 +58,12 @@
    "seed": 4201
   },
   "title": {
-   "asset": "asset_3acs17kiJzzWvzC2ipKtGf43",
-   "job": "job_PPSHNZqeFaYw3PJnWEYcinxn",
-   "cu": 60.0,
-   "duration": 110,
-   "group": "music",
-   "loop": true,
-   "seed": 4200
+   "asset": "asset_6TnCD7PKzmiUhz3BdvdLRQfR",
+   "job": "job_ajrXJ3ruWKe43Wz3QSFypSXy",
+   "model": "model_elevenlabs-music-v2-5",
+   "seed": 4231,
+   "vocals": true,
+   "cu": 60
   },
   "victory": {
    "asset": "asset_MAXy5nqbKgkpGeG6HqQdiPNs",
@@ -121,6 +120,15 @@
    "seed": 4224,
    "vocals": false,
    "cu": 60
+  },
+  "title_classic": {
+   "asset": "asset_3acs17kiJzzWvzC2ipKtGf43",
+   "job": "job_PPSHNZqeFaYw3PJnWEYcinxn",
+   "cu": 60.0,
+   "duration": 110,
+   "group": "music",
+   "loop": true,
+   "seed": 4200
   }
  },
  "failures": [
@@ -129,5 +137,14 @@
    "job": "job_tR4cUkXzaWJBr86Q64NYVuaX",
    "error": "internal error (model temporarily unavailable); billed 30 CU; retried as job_B8khteDX3xZZbmQkv81JQYQf"
   }
- ]
+ ],
+ "drafts": {
+  "title_draft_a_period_folk": {
+   "asset": "asset_ccij6YZ2TLGfurhm2ZFWJN5m",
+   "job": "job_TDaotLUZr6A5bwS9HWV3xYkP",
+   "seed": 4230,
+   "cu": 60,
+   "note": "not chosen"
+  }
+ }
 }

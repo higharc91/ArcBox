@@ -80,7 +80,15 @@
       ],
       "loop": true,
       "group": "music",
-      "use": "Title screen"
+      "use": "The title screen and the flyover"
+    },
+    "title_classic": {
+      "files": [
+        "title_classic.ogg"
+      ],
+      "loop": true,
+      "group": "music",
+      "use": "The original orchestral title theme, kept as an alternative"
     },
     "town_emberwick": {
       "files": [

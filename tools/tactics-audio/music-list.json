@@ -1,12 +1,13 @@
 {
  "title": {
-  "prompt": "Majestic fantasy RPG title theme: sweeping orchestral strings, French horns carrying a hopeful heroic melody, harp arpeggios, light celtic flute counter-melody, timpani accents, 92 BPM, D major, warm and nostalgic like a classic 16-bit era tactics game reimagined with live orchestra. Instrumental only. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "prompt": "Epic medieval fantasy title theme: a low monastic male choir humming a plainchant-like modal melody without words, cathedral bells tolling, pipe organ pedal tones, medieval harp arpeggios and a hurdy-gurdy drone, then heroic French horns and low strings take up the chant melody, frame drums and timpani building a slow processional march. Ancient, sacred and heroic, a kingdom's last fire guarded by knights. D dorian, 84 BPM, medieval choral orchestral. Steady tempo throughout, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
   "duration": 110,
   "variants": 1,
   "group": "music",
   "loop": true,
-  "use": "Title screen",
-  "seed": 4200
+  "use": "The title screen and the flyover",
+  "seed": 4231,
+  "vocals": true
  },
  "explore": {
   "prompt": "Calm fantasy exploration music for a world map: gentle acoustic guitar and harp, wooden flute melody, soft string pads, light hand percussion, pastoral and curious, 84 BPM, G major, folk orchestral. Instrumental only. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
@@ -130,5 +131,14 @@
   "use": "Emberwick in good times: festivals, and the epilogue after the flame is rekindled",
   "seed": 4220,
   "vocals": false
+ },
+ "title_classic": {
+  "prompt": "Majestic fantasy RPG title theme: sweeping orchestral strings, French horns carrying a hopeful heroic melody, harp arpeggios, light celtic flute counter-melody, timpani accents, 92 BPM, D major, warm and nostalgic like a classic 16-bit era tactics game reimagined with live orchestra. Instrumental only. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 110,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "The original orchestral title theme, kept as an alternative",
+  "seed": 4200
  }
 }
