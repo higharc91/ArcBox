@@ -943,6 +943,17 @@ Every encounter is inside the 60–95% band at its level, and every median is in
 
 **forest_ruins.** Two of the four bandits became `cultist`s (the Kindled cell), and the other two stay as hired swords, so the encounter still has 7 units. Two other mixes failed. 2 bandits and 3 cultists won 84.2% but ran long (mean 12.3, LONG). 3 bandits and 2 cultists won 81.9% at a mean of 11.8. The cultists' ranged Dark Bolt and caster caution keep them at the back. The kept mix adds about one round, and 4 of 360 battles reach the round cap. The baseline here (88.9%) is 2 points above the main table's 86.9%: this is the current content, measured in the same run.
 
-**Caveat: the companion AI in the finale.** Played by the `companion` profile, which absent players' characters use, a level-10 party of 5 won the finale only 1 time in 10 seeds. That profile is more cautious (0.6), and it runs into the 12-round ritual clock. The other new encounters went 8 to 10 out of 10 with that profile. The Sim's role profiles are the yardstick, as in the main report. If absent players matter in the finale, the ritual clock (`survive:12` in `lose`) is the lever.
+**Ritual clock raised to 14 rounds (owner's call).** In the finale, the companion AI used for absent players won
+only 1 time in 10 with the original 12-round clock (`survive:12` in `lose`), because it is more cautious (0.6) and ran
+out the clock. The clock is now `survive:14`, and Maren's "three more turns" warning moves to round 11. The re-run
+sweep and companion check:
+
+- **Sweep** (level 10, sizes 4–6, 6 parties × 20 seeds):
+  - Win rate overall: 67.2% before, 70.8% after.
+  - By party size (4 / 5 / 6): 40.8 / 76.7 / 84.2% before, 43.3 / 82.5 / 86.7% after.
+- **Companion AI** (a party of 5, 20 seeds): won 6 of 20, where it won 1 of 10 before.
+
+The finale stays the hardest fight on purpose. The intended lever is the party: XP from replaying earlier encounters
+raises their odds.
 
 **Golden replays.** `UPDATE_GOLDENS=1` rewrote all six golden files byte-for-byte identical. A step-by-step check replayed `warlord-bridge`'s 352 commands under the pack before and after, comparing the full state JSON and the events after every command. The events were identical at all 353 steps, and so was the outcome: Won in round 12. Two state fields differ: `units.warlord.sheet.name` (Goblin Boss → Vorga) and `contentHash`, which is the pack's hash and changes with any content edit. The AI also records identical command lists under both packs for seeds 3, 11 and 15. The warlord_bridge sweep's report is identical too.

@@ -4,7 +4,7 @@
                { "unit": "cultist", "zone": "north_gallery", "count": 2, "level": 10, "tag": "kindled" },
                { "unit": "cultist", "zone": "south_gallery", "count": 2, "level": 10, "tag": "kindled" } ],
   "xp": 2500, "loot": ["crypt_vault"],
-  "objectives": { "win": "defeat:maren_sorrel", "lose": { "any": ["party_out", "survive:12"] } },
+  "objectives": { "win": "defeat:maren_sorrel", "lose": { "any": ["party_out", "survive:14"] } },
   "triggers": [
     { "id": "maren_ritual", "when": { "round": 1 },
       "do": [ { "say": { "speaker": "maren_sorrel", "line": "You came. I hoped you would. Stand with me and watch the Vale grow warm again." } },
@@ -19,7 +19,7 @@
     { "id": "dragon_fury", "when": { "hpBelow": { "tag": "dragon", "percent": 50 } },
       "do": [ { "say": { "speaker": "maren_sorrel", "line": "Burn, then! Burn them all, and let the hearth have them!" } },
               { "phase": { "tag": "dragon", "number": 1 } } ] },
-    { "id": "ritual_waning", "when": { "round": 9 },
+    { "id": "ritual_waning", "when": { "round": 11 },
       "do": [ { "say": { "speaker": "maren_sorrel", "line": "Three more turns of the flame and it is done. You cannot stop it now." } },
               { "cameraHint": "heart" } ] }
   ] }
