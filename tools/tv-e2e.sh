@@ -43,6 +43,10 @@
 # --autostart. The phones are tools/tactics-playtest/bots.cjs, which needs no browser: they fight the encounter to its end,
 # hold the results for TV_HOLD seconds, and end the session. REDLINE's audio and qualifying checks don't apply. It fails unless:
 #   - the TV logs `TACTICS screen tactics-results` and saved a screenshot of them;
+#   - its `AUDIO` lines show music from the start, effects during the battle, and at the Results a change to the victory or defeat
+#     sting (or camp, if the party fled); and, on an encounter whose rules have `say` lines, a recorded clip for one of them:
+#     `AUDIO Voice clip say_<encounter>_<n>`. To keep a run from playing through your speakers, add --audio-driver Dummy to TV_ENGINE_ARGS:
+#     the lines are the same;
 #   - ARCBOX_RECONNECT=1: once the TV has played beat ARCBOX_AT_BEAT, it's killed outright and relaunched after a few seconds,
 #     with no --new-room, so it resumes through user://session.json and ResumeHost, and shots go in <out>/tv-relaunched. It must
 #     log `ROOM <CODE>` again (never another code), then `TACTICS catch-up to beat <n>, <m> skipped`, and the first BEAT it
@@ -378,6 +382,22 @@ if [[ "$GAME" == "tactics" ]]; then
   [[ -n "$RESULTS" ]] && log "the TV showed the results · line $RESULTS" || tactics_fail "TACTICS screen tactics-results on the TV"
   SHOT=$(find "$OUT" -name '*tactics-results*.png' | tail -1)
   [[ -n "$SHOT" ]] && log "results screenshot: $SHOT" || tactics_fail "a screenshot of the results"
+
+  # The sound, from the AUDIO lines: music from the start, effects with the beats, and the music changing at the Results.
+  FIRST_MUSIC=$(after 0 '/^AUDIO Music /')
+  [[ -n "$FIRST_MUSIC" ]] && log "music: $(sed -n "${FIRST_MUSIC}p" "$OUT/tv.log") · line $FIRST_MUSIC" || tactics_fail "an AUDIO Music line"
+  EFFECTS=$(grep -c '^AUDIO Sfx ' "$OUT/tv.log" || true)
+  (( EFFECTS > 0 )) && log "effects: $EFFECTS AUDIO Sfx lines" || tactics_fail "AUDIO Sfx lines"
+  if [[ -n "$RESULTS" ]]; then
+    ENDING=$(awk -v to="$RESULTS" 'NR < to && /^AUDIO Music / { line = $3 } END { print line }' "$OUT/tv.log")
+    FIGHTING=$(awk -v to="$RESULTS" 'NR < to && /^AUDIO Music / { print $3 }' "$OUT/tv.log" | tail -2 | head -1)
+    log "music at the results: $FIGHTING, then $ENDING"
+    [[ "$ENDING" =~ ^(victory|defeat|camp)$ ]] || tactics_fail "the music changing at the Results (it was $ENDING)"
+  fi
+  if grep -q '"say"' "$ROOT/content/tactics/base/rules/encounters/$ENCOUNTER.json"; then
+    CLIP=$(grep -m1 -E "^AUDIO Voice clip say_${ENCOUNTER}_" "$OUT/tv.log" || true)
+    [[ -n "$CLIP" ]] && log "voice: $CLIP" || tactics_fail "a voice clip for a say line of $ENCOUNTER"
+  fi
 
   if (( PHONES_EXIT != 0 )) || [[ -n "$ERRORS" ]] || (( TACTICS_FAIL )); then
     log "FAILED (phones exit $PHONES_EXIT)"

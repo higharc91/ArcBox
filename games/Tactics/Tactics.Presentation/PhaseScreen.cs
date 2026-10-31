@@ -1,6 +1,7 @@
 using System.Collections.Immutable;
 using System.Globalization;
 using Tactics.Game;
+using Tactics.Presentation.Audio;
 
 namespace Tactics.Presentation;
 
@@ -28,8 +29,11 @@ public sealed record ScreenRow(string Title, string Detail, string? Chip, string
 /// <param name="Empty">The big text to show instead of the table when it has no rows, or null.</param>
 /// <param name="Shot">The label for <c>--shots</c>: a new label is a new screenshot.</param>
 /// <param name="Board">The battle to draw on the board, or null. If it can't be drawn, the screen still reads without it.</param>
+/// <param name="Music">What should be playing on this screen, or null to leave it.</param>
+/// <param name="Ambience">The bed under it, or null for quiet.</param>
+/// <param name="Banner">The strip in the title art to play over the results, or null.</param>
 public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? Notice, int PartyLevel,
-    ImmutableArray<ScreenRow> Rows, string? Empty, string Shot, BattleView? Board = null)
+    ImmutableArray<ScreenRow> Rows, string? Empty, string Shot, BattleView? Board = null, MusicCue? Music = null, string? Ambience = null, string? Banner = null)
 {
     /// <summary>The screen for <paramref name="view"/>. A phase this build doesn't know still shows the banner.</summary>
     public static PhaseScreen Of(TacticsHostView view)
@@ -38,7 +42,7 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
         var screen = new PhaseScreen(view.Phase, view.Banner, Tone.Neutral, view.Notice, view.PartyLevel, [], null, shot);
         if (!Enum.TryParse<TacticsPhase>(view.Phase, out var phase))
             return screen;
-        return phase switch
+        var drawn = phase switch
         {
             TacticsPhase.Muster => Muster(screen, view),
             TacticsPhase.EncounterPick => EncounterPick(screen, view),
@@ -47,6 +51,7 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
             TacticsPhase.Battle => Battle(screen, view),
             _ => screen,
         };
+        return drawn with { Music = MusicChoice.Of(view), Ambience = MusicChoice.AmbienceOf(view) };
     }
 
     private static PhaseScreen Muster(PhaseScreen screen, TacticsHostView view) => screen with
@@ -82,6 +87,12 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
                 _ => "Results",
             },
             Tone = view.Outcome == "Won" ? Tone.Good : Tone.Bad,
+            Banner = view.Outcome switch
+            {
+                "Won" => "victory_anim",
+                "Lost" => "defeat_anim",
+                _ => null,
+            },
             Rows = [.. lines.Select(r => new ScreenRow(r.Name, r.Injuries.IsEmpty ? "No injuries" : string.Join(", ", r.Injuries), null,
                 $"+{r.Xp.ToString(CultureInfo.InvariantCulture)} XP"))],
             Empty = lines.IsEmpty ? "No results to show" : null,

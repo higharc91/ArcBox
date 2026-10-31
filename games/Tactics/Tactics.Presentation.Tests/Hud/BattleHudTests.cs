@@ -259,4 +259,19 @@ public sealed class BattleHudTests
         Assert.True(BattleHud.Covers(new BoardArea(feet.X - 10, feet.Y - 30, 20, 20), units, fit));
         Assert.False(BattleHud.Covers(new BoardArea(feet.X + 200, feet.Y, 20, 20), units, fit));
     }
+
+    [Theory]
+    [InlineData("hero3", "Party", null, "frame_p3")]
+    [InlineData("hero3", "Party", "hero3", "frame_active_p3")]
+    [InlineData("goblin.1", "Enemy", null, "frame_enemy")]
+    [InlineData("goblin.1", "Enemy", "goblin.1", "frame_active")]
+    [InlineData("ally1", "Party", null, "frame_inactive")]
+    [InlineData("hero7", "Party", "hero7", "frame_active")]
+    public void Each_unit_has_its_frame_and_all_are_in_the_kit(string id, string side, string? active, string frame)
+    {
+        var slot = Hud(Battle(active is null ? null : Id(active), 1, [Unit(id, side)])).Order[0];
+
+        Assert.Equal(frame, slot.Frame);
+        Assert.NotNull(HudArt.Load(Pack.Root, UnitArt.Load(Pack.Root)).Turn(frame));
+    }
 }

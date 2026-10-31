@@ -2,12 +2,13 @@ using System.Collections.Immutable;
 using System.Numerics;
 using Tactics.Game;
 using Tactics.Logic;
+using Tactics.Presentation.Audio;
 using Tactics.Presentation.Board;
 
 namespace Tactics.Presentation.Beats;
 
 /// <summary>A line to say: <paramref name="Speaker"/> is who it's by, or null for the storyteller, in voice theme <paramref name="Theme"/>.</summary>
-public sealed record SpokenLine(string? Speaker, string Text, string Theme);
+public sealed record SpokenLine(string? Speaker, string Text, string Theme, string? Clip = null);
 
 /// <summary>One image to draw over the board, in art pixels.</summary>
 /// <param name="Path">Relative to the pack's root.</param>
@@ -39,7 +40,11 @@ public sealed record BeatCatchUp(int Seq, int Skipped);
 /// <param name="Busy">Something on screen is moving, so the units need redrawing.</param>
 /// <param name="Started">A beat that began, with how long it's scripted to take.</param>
 /// <param name="CaughtUp">A catch-up since the last tick, if there was one.</param>
-public sealed record BeatTick(ImmutableArray<int> Shown, ImmutableArray<SpokenLine> Lines, ImmutableArray<string> Moments, bool BoardChanged, bool Busy, BeatScript? Started, BeatCatchUp? CaughtUp = null);
+public sealed record BeatTick(ImmutableArray<int> Shown, ImmutableArray<SpokenLine> Lines, ImmutableArray<string> Moments, bool BoardChanged, bool Busy, BeatScript? Started, BeatCatchUp? CaughtUp = null)
+{
+    /// <summary>Sounds this tick reached, by id.</summary>
+    public ImmutableArray<string> Sounds { get; init; } = [];
+}
 
 /// <summary>
 /// Plays a battle's beats one at a time, from their own events, and keeps the battle as the player has seen it
@@ -53,7 +58,7 @@ public sealed record BeatTick(ImmutableArray<int> Shown, ImmutableArray<SpokenLi
 /// dropped beat is never reported, so the game only hears about the newest, which is what it's waiting on.
 /// </para>
 /// </summary>
-public sealed class BeatPlayer(FxArt fx, UnitArt art)
+public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, VoiceClips? voices = null)
 {
     private const double LongestFrame = 0.1;         // a hitch slows a beat down, rather than skipping it
     private const double SecondsPerWord = 0.36;      // the narrator's own reading pace
@@ -76,6 +81,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
 
     private readonly BeatQueue _queue = new();
     private readonly List<(Cue Cue, double Start)> _fading = [];
+    private readonly Queue<SpokenLine> _unread = [];     // lines waiting their turn, as the voice speaks one at a time
     private BattleView? _live;
     private BeatScript? _script;
     private BeatCatchUp? _caughtUp;
@@ -86,6 +92,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
     private double _real;       // since the start, as the game sees it
     private double _rest;
     private double _captionUntil;
+    private double _captionRead;      // when the caption's line has been said, so the next can come up
     private double _aiFinishedUntil;
     private bool _dirty;
     private bool _aiBegan;
@@ -145,6 +152,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
         _queue.Clear();
         _fading.Clear();
         (_script, _live, Shown, Caption, _rest, AiFinished, _caughtUp) = (null, null, null, null, 0, null, null);
+        _unread.Clear();
     }
 
     /// <summary>Moves on by <paramref name="delta"/> seconds.</summary>
@@ -154,7 +162,9 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
         _now += seconds;
         _real += delta;
         var faded = _fading.RemoveAll(f => _now >= f.Start + f.Cue.Length) > 0;
-        if (Caption is not null && _now >= _captionUntil)
+        if (_unread.Count > 0 && _now >= _captionRead)
+            Caption = Captioned(_unread.Dequeue());
+        else if (Caption is not null && _now >= _captionUntil)
             Caption = null;
 
         var redraw = _dirty || faded;     // whatever just went is still in the last frame drawn
@@ -166,6 +176,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
         var shown = ImmutableArray<int>.Empty;
         var lines = ImmutableArray.CreateBuilder<SpokenLine>();
         var moments = ImmutableArray.CreateBuilder<string>();
+        var heard = ImmutableArray.CreateBuilder<string>();
         BeatScript? started = null;
 
         if (_rest > 0)
@@ -184,7 +195,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
         {
             _clock += seconds;
             for (; _next < playing.Cues.Length && playing.Cues[_next].At <= _clock; _next++)
-                Reach(playing.Cues[_next], lines, moments);
+                Reach(playing.Cues[_next], lines, moments, heard);
             if (_clock >= playing.Length)
             {
                 shown = [playing.Seq];
@@ -198,7 +209,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
         var caughtUp = _caughtUp;
         _caughtUp = null;
         return new BeatTick(shown, lines.ToImmutable(), moments.ToImmutable(), caughtUp is not null || !DisplayedBattle.SameBoard(board, Shown?.Board),
-            _script is not null || _fading.Count > 0 || !shown.IsEmpty || redraw || _dirty || AiFinished is not null, started, caughtUp);
+            _script is not null || _fading.Count > 0 || !shown.IsEmpty || redraw || _dirty || AiFinished is not null, started, caughtUp) { Sounds = heard.ToImmutable() };
     }
 
     private BeatScript? Begin()
@@ -210,14 +221,14 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
         if (_queue.Next() is not { } beat)
             return null;
         (_opening, _played) = (beat.Seq, beat.Seq);     // if working out its script throws, it's already off the queue
-        (_script, _next, _clock) = (BeatScript.Of(beat, Shown, _live, fx), 0, 0);
+        (_script, _next, _clock) = (BeatScript.Of(beat, Shown, _live, fx, sounds), 0, 0);
         _opening = null;
         if (beat.Actor is { } actor && beat.Events.Any(e => e.AiFinished))
             (AiFinished, _aiFinishedUntil, _aiBegan) = (actor, _now + Math.Max(_script.Length, BeatTiming.AiFinished), true);
         return _script;
     }
 
-    private void Reach(Cue cue, ImmutableArray<SpokenLine>.Builder lines, ImmutableArray<string>.Builder moments)
+    private void Reach(Cue cue, ImmutableArray<SpokenLine>.Builder lines, ImmutableArray<string>.Builder moments, ImmutableArray<string>.Builder heard)
     {
         switch (cue)
         {
@@ -230,6 +241,9 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
             case MomentCue moment:
                 moments.Add(moment.Label);
                 break;
+            case SoundCue sound:
+                heard.Add(sound.Id);
+                break;
             case BurstCue or PopCue or BadgeCue or FlightCue:
                 _fading.Add((cue, _now - (_clock - cue.At)));
                 break;
@@ -239,11 +253,21 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
     private SpokenLine Say(LineCue line)
     {
         var narrator = line.Speaker == TacticsVoices.NarratorSpeaker;
+        var clip = Shown is { } battle ? voices?.For(battle.Encounter, line.Speaker, line.Line) : null;
         var said = new SpokenLine(narrator ? null : Shown?.Units.FirstOrDefault(u => u.Id.Value == line.Speaker)?.Name ?? Words.Title(line.Speaker), line.Line,
-            TacticsVoices.ForSpeaker(line.Speaker));
-        Caption = said;
-        _captionUntil = _now + CaptionExtra + line.Line.Split(' ').Length * SecondsPerWord;
+            TacticsVoices.ForSpeaker(line.Speaker), clip?.Path);
+        if (Caption is null || _now >= _captionRead)
+            Caption = Captioned(said);
+        else
+            _unread.Enqueue(said);
         return said;
+    }
+
+    private SpokenLine Captioned(SpokenLine line)
+    {
+        _captionRead = _now + line.Text.Split(' ').Length * SecondsPerWord;
+        _captionUntil = _captionRead + CaptionExtra;
+        return line;
     }
 
     /// <summary>This moment of the beat, on <paramref name="terrain"/> as it's drawn.</summary>

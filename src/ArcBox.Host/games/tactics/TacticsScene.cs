@@ -8,6 +8,7 @@ using Godot;
 using Tactics.Game;
 using Tactics.Logic;
 using Tactics.Presentation;
+using Tactics.Presentation.Audio;
 using Tactics.Presentation.Beats;
 using Tactics.Presentation.Board;
 using Tactics.Presentation.Hud;
@@ -62,6 +63,12 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private BoardTerrain? _terrain;
     private BoardChanges? _planned;
     private Narrator? _narrator;
+    private TacticsAudio _audio = null!;
+    private SoundBank? _sound;
+    private VoiceClips? _voices;
+    private TitleArt? _titleArt;
+    private bool _soundUnreadable;
+    private ResultBanner _resultBanner = null!;
     private PanelContainer _caption = null!;
     private Label _captionText = null!;
     private BeatScript? _playing;
@@ -103,6 +110,9 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _notice.Visible = false;
         column.AddChild(_notice);
 
+        _resultBanner = new ResultBanner();
+        column.AddChild(_resultBanner);
+
         _rows = ArcTheme.VBox(0);
         _rows.SizeFlagsVertical = SizeFlags.ExpandFill;
         _empty = ArcTheme.Label("", ArcTheme.Black, 72);
@@ -123,6 +133,9 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _caption.OffsetBottom = -40;
         _caption.Visible = false;
         AddChild(_caption);
+
+        _audio = new TacticsAudio();
+        AddChild(_audio);
     }
 
     public override void _Process(double delta)
@@ -151,7 +164,11 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         }
         foreach (var line in tick.Lines)
         {
-            _narrator?.Say(line.Text, line.Theme, NarrationPriority.Commentary);
+            _narrator?.Say(line.Text, line.Theme, NarrationPriority.Commentary, clip: line.Clip is { } clip ? Path.Combine(_content[BasePack], clip) : null);
+        }
+        foreach (var sound in tick.Sounds)
+        {
+            _audio.Play(sound);
         }
         foreach (var moment in tick.Moments)
         {
@@ -222,6 +239,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
 
     private void Show(PhaseScreen screen)
     {
+        LoadSound();
         _meta.Text = screen.Meta.ToUpperInvariant();
         _title.Text = screen.Title;
         _title.AddThemeColorOverride("font_color", Accent(screen.Tone, Colors.White));
@@ -231,6 +249,9 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _rows.Visible = screen.Empty is null;
         ShowRows(screen);
         ShowBoard(screen);
+        _audio.Music(screen.Music);
+        _audio.Ambience(screen.Ambience);
+        _resultBanner.Show(screen.Banner is { } banner ? _titleArt?.Strip(banner) : null, _content.GetValueOrDefault(BasePack));
         _notice.Visible = screen.Notice is not null && !_board.Visible;
         _noticeText.Text = screen.Notice ?? "";
         _hud?.ShowNotice(screen.Notice);
@@ -241,6 +262,51 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             GD.Print($"TACTICS screen {screen.Shot}");
             _shots?.Capture(screen.Shot);
         }
+    }
+
+    /// <summary>The pack's sound and title art. If they can't be read the game plays on without them: a TV with no sound must not stop anything.</summary>
+    private void LoadSound()
+    {
+        if (_sound is not null || _soundUnreadable || !_content.TryGetValue(BasePack, out var root))
+        {
+            return;
+        }
+        try
+        {
+            _sound = SoundBank.Load(root);
+            _voices = VoiceClips.Load(root);
+            _titleArt = TitleArt.Load(root);
+            _audio.Use(root, _sound);
+            ShowLogo(Path.Combine(root, _titleArt.Logo));
+            _resultBanner.Shots = _shots;
+        }
+        catch (Exception ex) when (ex is IOException or JsonException or FormatException or ArgumentException
+            or InvalidOperationException or KeyNotFoundException)
+        {
+            _soundUnreadable = true;
+            GD.PushWarning($"Tactics sound: can't read the pack's manifests: {ex.Message}");
+        }
+    }
+
+    /// <summary>The logo takes the place of the name's slab at the left of the header.</summary>
+    private void ShowLogo(string path)
+    {
+        var image = File.Exists(path) ? Image.LoadFromFile(path) : null;
+        if (image is null || image.IsEmpty())
+        {
+            return;
+        }
+        var logo = new TextureRect
+        {
+            Texture = ImageTexture.CreateFromImage(image),
+            ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
+            StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered,
+            TextureFilter = TextureFilterEnum.Nearest,
+            CustomMinimumSize = new Vector2(ShellLayout.HeaderHeight * image.GetWidth() / (float)image.GetHeight(), ShellLayout.HeaderHeight),
+        };
+        _header.GetChild<Control>(0).Visible = false;
+        _header.AddChild(logo);
+        _header.MoveChild(logo, 0);
     }
 
     /// <summary>The board replaces the header and table in battle. If it can't be drawn, they stay, with the encounter's name.</summary>
@@ -273,7 +339,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _art ??= ArtIndex.Load(root);
             _unitArt ??= UnitArt.Load(root);
             _fx ??= FxArt.Load(root);
-            _player ??= new BeatPlayer(_fx, _unitArt);
+            _player ??= new BeatPlayer(_fx, _unitArt, _sound, _voices);
             _loop ??= new BeatLoop(_player, Finished, Present, message => GD.PushError($"Tactics board: {message}"));
             if (_hud is null)
             {

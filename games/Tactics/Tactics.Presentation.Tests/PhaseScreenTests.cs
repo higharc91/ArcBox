@@ -213,4 +213,26 @@ public sealed class PhaseScreenTests
         Assert.Equal("Intermission", screen.Meta);
         Assert.Empty(screen.Rows);
     }
+
+    [Theory]
+    [InlineData("Won", "victory_anim")]
+    [InlineData("Lost", "defeat_anim")]
+    [InlineData("Fled", null)]
+    public void The_results_name_their_banner_and_what_to_play(string outcome, string? banner)
+    {
+        var screen = PhaseScreen.Of(View("Results", outcome: outcome, results: []));
+
+        Assert.Equal(banner, screen.Banner);
+        Assert.Equal(global::Tactics.Presentation.Audio.MusicChoice.Of(View("Results", outcome: outcome, results: [])), screen.Music);
+        Assert.Null(screen.Ambience);
+    }
+
+    [Fact]
+    public void Only_the_results_have_a_banner_and_a_screen_says_its_music()
+    {
+        var screen = PhaseScreen.Of(View("Muster"));
+
+        Assert.Null(screen.Banner);
+        Assert.Equal(new global::Tactics.Presentation.Audio.MusicCue("title"), screen.Music);
+    }
 }

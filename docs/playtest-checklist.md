@@ -146,6 +146,14 @@ so tick those on the night. To play alongside the bots, see "With your own phone
 - [ ] **(person)** On a map with a raised back corner, a unit behind a panel can still be followed (the panel fades; a
       prompt moves down the left side instead).
 - [ ] **(person)** The HUD feels part of the same picture as the board at 2560×1440, not laid over it.
+- [ ] **(person)** Music: each loop runs seamlessly, the crossfades between Muster, the encounter list and the fight sound right, and the boss and finale tracks suit their fights. The logs prove what played, not how it sounds.
+- [ ] **(person)** The VICTORY and DEFEAT stings land as the banner comes up, and the step into camp music afterwards feels natural.
+- [ ] **(person)** The mix: music, ambience, effects and voice balance on the real TV, ambience sits under the rest, and the voice ducking is enough for a line to be understood from the sofa.
+- [ ] **(person)** Effects match what is on screen: swings land with the blow, footsteps suit the ground, no sound is too loud or repeats annoyingly. Turn ticks and footsteps are the likeliest to wear thin over a long battle.
+- [ ] **(person)** A weapon or creature sounds right for what it is. Weapons come from the unit's art preset, so a player's real gear may differ.
+- [ ] **(person)** Recorded lines on `warlord_bridge`: each voice suits its speaker, lines never overlap, and captions keep up with the voice when two lines share a beat.
+- [ ] **(person)** The VICTORY and DEFEAT strips read well on the Results and the logo reads well in the header at 2560×1440, and the Results rows are still comfortable with the banner above them.
+- [ ] **(person)** Player colours on the turn-order frames read as each player's, next to the stripes.
 - [ ] **(person)** Join on a real phone over the LAN (`--people=1`): the QR opens the join page and the turn screen matches
       the TV. Checked here only in a browser on the PC, not on a phone.
 

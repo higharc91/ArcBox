@@ -16,7 +16,15 @@ namespace Tactics.Presentation.Hud;
 /// <param name="Ai">A character whose player is away, so the AI is playing it.</param>
 /// <param name="Downed">It's on the ground.</param>
 /// <param name="Stripe">Its stripe in ui/manifest.json's <c>turnOrder</c>: its player's colour, or its side's.</param>
-public sealed record HudSlot(UnitId Id, string Name, string? Sprite, UnitTone Tone, bool Active, bool Ai, bool Downed, string Stripe);
+public sealed record HudSlot(UnitId Id, string Name, string? Sprite, UnitTone Tone, bool Active, bool Ai, bool Downed, string Stripe)
+{
+    /// <summary>Its frame in ui/manifest.json's <c>turnOrder</c>: its player's colour, or its side's.</summary>
+    public string Frame => Stripe.StartsWith(PlayerStripe, StringComparison.Ordinal)
+        ? $"{(Active ? "frame_active_p" : "frame_p")}{Stripe[PlayerStripe.Length..]}"
+        : Active ? "frame_active" : Tone == UnitTone.Enemy ? "frame_enemy" : "frame_inactive";
+
+    private const string PlayerStripe = "stripe_p";
+}
 
 /// <summary>
 /// What the battle HUD says, worded and ready to draw. Everything comes from the battle as the player has seen it, so the HUD

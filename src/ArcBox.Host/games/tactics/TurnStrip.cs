@@ -28,9 +28,7 @@ public partial class TurnStrip : Control
 
     private readonly HudArt _art;
     private readonly Func<string, Texture2D?> _load;
-    private readonly StyleBoxTexture _active;
-    private readonly StyleBoxTexture _inactive;
-    private readonly StyleBoxTexture _enemy;
+    private readonly Dictionary<string, StyleBoxTexture> _frames = [];
     private readonly Dictionary<string, StyleBoxTexture> _stripes = [];
     private readonly Texture2D? _turn;
     private ImmutableArray<HudSlot> _slots = [];
@@ -42,9 +40,6 @@ public partial class TurnStrip : Control
         TextureFilter = TextureFilterEnum.Nearest;
         MouseFilter = MouseFilterEnum.Ignore;
         _turn = load(art.TurnPath);
-        _active = Frame("frame_active");
-        _inactive = Frame("frame_inactive");
-        _enemy = Frame("frame_enemy");
     }
 
     /// <summary>Shows <paramref name="hud"/>'s order, redrawing only if it has changed: this is called on every frame of a beat.</summary>
@@ -94,7 +89,7 @@ public partial class TurnStrip : Control
         {
             DrawTextureRectRegion(picture, window, Region(face.Source), tint);
         }
-        DrawStyleBox(slot.Active ? _active : slot.Tone == UnitTone.Enemy ? _enemy : _inactive, box);
+        DrawStyleBox(FrameOf(slot.Frame), box);
 
         if (slot.Active)
         {
@@ -141,10 +136,14 @@ public partial class TurnStrip : Control
         return cut + "…";
     }
 
-    private StyleBoxTexture Frame(string name)
+    private StyleBoxTexture FrameOf(string name)
     {
+        if (_frames.TryGetValue(name, out var known))
+        {
+            return known;
+        }
         var piece = _art.Turn(name);
-        return new StyleBoxTexture
+        return _frames[name] = new StyleBoxTexture
         {
             Texture = _turn,
             RegionRect = Region(piece.Rect),

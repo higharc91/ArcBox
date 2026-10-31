@@ -1,6 +1,7 @@
 using System.Collections.Immutable;
 using Tactics.Game;
 using Tactics.Logic;
+using Tactics.Presentation.Audio;
 
 namespace Tactics.Presentation.Beats;
 
@@ -146,6 +147,9 @@ public sealed record LineCue(double At, string Speaker, string Line) : Cue(At, 0
 /// <summary>A moment worth a screenshot with <c>--shots</c>.</summary>
 public sealed record MomentCue(double At, string Label) : Cue(At, 0);
 
+/// <summary>A sound, by its id in sfx/manifest.json, at the moment the picture shows what makes it.</summary>
+public sealed record SoundCue(double At, string Id) : Cue(At, 0);
+
 /// <summary>
 /// One beat as a timed list of what to show, worked out from its own events and the battle as it stood before them. Things
 /// happen in the order the engine emitted them, so nothing gets ahead of what caused it: a bridge can't sink before the walk that triggers it.
@@ -179,9 +183,9 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
     private static readonly ImmutableHashSet<string> Blows = [Attack, "thrust", "slam", "spin", "flurry", "bash", Special];
 
     /// <summary>The script for <paramref name="beat"/>. <paramref name="shown"/> is the battle as the player last saw it; <paramref name="live"/> is the newest view.</summary>
-    public static BeatScript Of(Beat beat, BattleView shown, BattleView live, FxArt fx) => new Builder(beat, shown, live, fx).Build();
+    public static BeatScript Of(Beat beat, BattleView shown, BattleView live, FxArt fx, SoundBank? sounds = null) => new Builder(beat, shown, live, fx, sounds).Build();
 
-    private sealed class Builder(Beat beat, BattleView shown, BattleView live, FxArt fx)
+    private sealed class Builder(Beat beat, BattleView shown, BattleView live, FxArt fx, SoundBank? sounds)
     {
         private readonly List<Cue> _cues = [];
         private BattleView _view = shown;
@@ -196,6 +200,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         private int _at;
         private bool _big;             // this beat alters more than a spell's tile or two: all of it is one collapse
         private bool _collapsing;
+        private bool _shot;            // this ability's blow arrived through the air
+        private bool _voiced;          // this ability's effect has a sound of its own
 
         public BeatScript Build()
         {
@@ -287,6 +293,19 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
 
         private void Moment(string label, double after = 0) => _cues.Add(new MomentCue(_t + after, label));
 
+        // A sound the pack has, unless the same one has only just gone: an area's targets land a few hundredths apart.
+        private void Sound(string? id, double? at = null)
+        {
+            var when = at ?? _t;
+            if (id is not null && sounds is { } bank && bank.Has(id)
+                && !_cues.OfType<SoundCue>().Any(s => s.Id == id && Math.Abs(s.At - when) < SoundChoice.SameSoundGap))
+                _cues.Add(new SoundCue(when, id));
+        }
+
+        private UnitGear GearOf(UnitId id) => sounds?.Gear(_view.Units.FirstOrDefault(u => u.Id == id)?.Sprite) ?? new UnitGear(null, false, null, false, false);
+
+        private void Cry(UnitId id, string what) => Sound(GearOf(id).Family is { } family ? $"{family}_{what}" : null);
+
         private void Play(BattleEvent e)
         {
             switch (e)
@@ -296,6 +315,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     break;
                 case Pushed pushed:
                     _cues.Add(new SlideCue(_t, BeatTiming.Slide, pushed.Unit, pushed.From, pushed.To));
+                    Sound("pushed");
                     _t += BeatTiming.Slide;
                     Apply(e);
                     break;
@@ -304,17 +324,19 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     break;
                 case Collided collided:
                     Burst(Spark, TileOf(collided.Unit));
+                    Sound("collided");
                     _cues.Add(new ShakeCue(_t, BeatTiming.Slide));
                     _t += BeatTiming.Slide;
                     break;
                 case Teleported port:
                     Burst(Puff, port.From);
                     Burst(Puff, port.To);
+                    Sound("spell_misty_step");
                     _t += BeatTiming.Puff;
                     Apply(e);
                     break;
                 case AbilityUsed used:
-                    (_ability, _swings, _hits, _rolls) = (used, 0, 0, 0);
+                    (_ability, _swings, _hits, _rolls, _shot, _voiced) = (used, 0, 0, 0, false, false);
                     Swing(used);
                     break;
                 case Rolled { Kind: RollKind.Attack } when _ability is { } again:
@@ -340,24 +362,29 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     break;
                 case Healed healed:
                     Burst(_ability?.Presentation?.Fx is null ? Heal : null, TileOf(healed.Unit));
+                    Sound(_voiced ? null : "healed");
                     Pop(healed.Unit, $"+{healed.Amount}", PopStyle.Heal);
                     Apply(e);
                     Land();
                     break;
                 case ConditionApplied or ConditionRemoved:
                     Apply(e);
+                    Sound(e is ConditionApplied gained ? SoundChoice.Condition(gained.Condition.Value) : null);
                     Moment(e is ConditionApplied ? "condition" : "condition-ends", BeatTiming.Condition * 0.8);
                     _t += InArea ? 0 : BeatTiming.Condition;
                     break;
                 case ConcentrationBroken broken:
                     Burst(Puff, TileOf(broken.Caster));
+                    Sound("concentration_broken");
                     break;
                 case Countered countered:
                     Burst(Magic, TileOf(countered.Caster));
+                    Sound("countered");
                     _t += BeatTiming.Impact;
                     break;
                 case Downed downed:
                     Burst(Dust, TileOf(downed.Unit));
+                    Sound("downed");
                     Apply(e);
                     Moment("downed", BeatTiming.Down * 0.8);
                     _t += InArea ? 0 : BeatTiming.Down;
@@ -367,15 +394,18 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     break;
                 case Revived revived:
                     Burst(Heal, TileOf(revived.Unit));
+                    Sound("revived");
                     Apply(e);
                     _t += BeatTiming.Puff;
                     break;
                 case CountdownTicked:
+                    Sound("ui_countdown_tick");
                     Apply(e);
                     _t += BeatTiming.Condition;
                     break;
                 case Spawned spawned:
                     Burst(Puff, spawned.At);
+                    Sound("spawned");
                     Apply(e);
                     Moment("spawn", BeatTiming.Puff * 0.8);
                     _t += BeatTiming.Puff;
@@ -386,6 +416,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     _t += BeatTiming.Puff;
                     break;
                 case ZoneCreated:
+                    Sound("zone_created");
                     Apply(e);
                     Moment("zone", BeatTiming.Zone * 0.8);
                     _t += BeatTiming.Zone;
@@ -407,7 +438,12 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 case PhaseEntered phase:
                     PlayPhase(phase);
                     break;
-                case TurnStarted:
+                case RoundStarted round:
+                    Sound(round.Round == 1 ? "battle_start" : "round_start");
+                    Apply(e);
+                    break;
+                case TurnStarted turn:
+                    Sound(_view.Units.FirstOrDefault(u => u.Id == turn.Unit)?.Player is null ? "ui_turn_start" : "ui_your_turn");
                     Apply(e);
                     _t += BeatTiming.Turn;
                     break;
@@ -416,6 +452,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     _t += BeatTiming.Finale;
                     break;
                 case ReactionOffered:
+                    Sound("ui_reaction_prompt");
                     Apply(e);
                     _cues.Add(new MomentCue(_t, BeatPlayer.ReactionMoment));
                     break;
@@ -430,8 +467,44 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             for (var i = 1; i < moved.Path.Length; i++)
             {
                 _cues.Add(new WalkCue(_t, BeatTiming.Step, moved.Unit, moved.Path[i - 1], moved.Path[i]));
+                Footstep(moved.Unit, moved.Path[i]);
                 _t += BeatTiming.Step;
                 Apply(new Moved(moved.Unit, [moved.Path[i - 1], moved.Path[i]]));
+            }
+        }
+
+        private void Footstep(UnitId unit, Tile tile)
+        {
+            var gear = GearOf(unit);
+            if (gear.Flies)
+            {
+                Sound("flap_wings");
+            }
+            else if (gear.Heavy)
+            {
+                Sound("step_heavy");
+            }
+            else
+            {
+                Sound(sounds?.Step(_view.Map, tile));
+                Sound(gear.Armoured ? "step_armor" : null);
+            }
+        }
+
+        // A blow is the weapon's sound; anything else is a spell gathering, then the sound of what it makes.
+        private void SwingSound(AbilityUsed used, string anim)
+        {
+            var blow = used.Presentation?.Fx is null && used.Presentation?.Projectile is null || Blows.Contains(anim[(anim.LastIndexOf('.') + 1)..]);
+            Cry(used.Source, "attack");
+            Sound(blow ? SoundChoice.Swing(GearOf(used.Source).Weapon) : SoundChoice.IsSpell(used.Presentation?.Fx) ? "spell_cast" : null);
+        }
+
+        private void EffectSound(string? key, double? at = null)
+        {
+            if (key is not null && sounds?.ForEffect(key) is { } effect)
+            {
+                _voiced = true;
+                Sound(effect, at);
             }
         }
 
@@ -451,6 +524,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             if (aim is not { } target || target == source)
             {
                 _cues.Add(new PoseCue(_t, BeatTiming.Cast, used.Source, anim));
+                Sound(SoundChoice.IsSpell(effect) ? "spell_cast" : null);
+                EffectSound(effect);
                 Burst(effect, source);
                 _t += BeatTiming.Cast;
                 return;
@@ -465,18 +540,28 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 var flight = Math.Min(BeatTiming.FlightBase + BeatTiming.FlightPerTile * reach, BeatTiming.FlightMost);
                 _cues.Add(new PoseCue(_t, BeatTiming.Windup + flight, used.Source, anim, source, target));
                 _cues.Add(new FlightCue(_t + BeatTiming.Windup, flight, shot, source, target));
+                Cry(used.Source, "attack");
+                if (plain)
+                    Sound(SoundChoice.Shot(GearOf(used.Source).Weapon), _t + BeatTiming.Windup);
+                else
+                    Sound("spell_cast");
+                EffectSound(flies ? used.Presentation?.Fx : null, _t + BeatTiming.Windup);
+                _shot = plain;
                 _t += BeatTiming.Windup + flight;
             }
             else if (reach <= 1 && Blows.Contains(anim[(anim.LastIndexOf('.') + 1)..]))
             {
                 _cues.Add(new LungeCue(_t, BeatTiming.Lunge, used.Source, source, target, anim));
+                SwingSound(used, anim);
                 _t += BeatTiming.Windup;
             }
             else
             {
                 _cues.Add(new PoseCue(_t, BeatTiming.Windup, used.Source, anim, source, target));
+                SwingSound(used, anim);
                 _t += BeatTiming.Windup;
             }
+            EffectSound(effect);
             if (clip is { Aimed: true })
                 Burst(effect, source, toward: target);
             else
@@ -489,6 +574,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             if (TileOf(unit) is not { } tile)
                 return;
             _cues.Add(new BadgeCue(_t, BeatTiming.Badge, unit, tile, roll.Kept, roll.Success));
+            Sound("ui_dice_roll");
             Moment("save", 0.1);
             _t += _rolls++ == 0 ? BeatTiming.BadgeHold : BeatTiming.Stagger;   // a second roll is an area's: they resolve together
             _rolled = true;
@@ -499,11 +585,13 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             if (resolved.Crit)
             {
                 Burst(Crit, TileOf(resolved.Target));
+                Sound("attack_crit");
                 Pop(resolved.Target, CritWord, PopStyle.Crit, 1);
             }
             else if (!resolved.Hit)
             {
                 Pop(resolved.Target, Miss, PopStyle.Damage);
+                Sound("attack_miss");
                 _cues.Add(new PoseCue(_t, BeatTiming.Impact, resolved.Target, Dodge));
                 _t += InArea ? BeatTiming.Stagger : BeatTiming.Impact;
             }
@@ -515,6 +603,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             if (hit.Amount > 0)
                 Pop(hit.Unit, $"-{hit.Amount}", PopStyle.Damage);
             _cues.Add(new PoseCue(_t, BeatTiming.Impact, hit.Unit, Hurt));
+            Sound(SoundChoice.Impact(hit.Type, GearOf(hit.Unit).Armoured, _shot));
+            Cry(hit.Unit, "hurt");
             Moment("hit", 0.08);
             Apply(hit);
             Land();
@@ -541,6 +631,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             if (TileOf(fell.Unit) is not { } tile)
                 return;
             _cues.Add(new FallCue(_t, BeatTiming.Fall, fell.Unit, tile, fell.Levels));
+            Sound(fell.IntoDeep ? "fell_deep" : "fell");
             if (!fell.IntoDeep)
                 Burst(Dust, tile, _t + BeatTiming.Fall);
             if (_hold < BeatTiming.Fall)
@@ -551,6 +642,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         {
             _cues.Add(new PoseCue(_t, BeatTiming.Down, unit, Down));
             var fallen = _t + BeatTiming.Down;
+            Cry(unit, "death");
+            Sound("died", fallen);
             Burst(Puff, TileOf(unit), fallen);
             _cues.Add(new ApplyCue(fallen, e));
             _t = InArea ? _t : fallen;     // in an area they all fall together, and the others carry on
@@ -565,6 +658,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             else
             {
                 var rumble = _big ? BeatTiming.Rumble : BeatTiming.SmallRumble;
+                Sound("terrain_shift");
                 _cues.Add(new ShakeCue(_t, rumble + (_big ? BeatTiming.Collapse : BeatTiming.Slide)));
                 _t += rumble;
                 _collapsing = _big;
