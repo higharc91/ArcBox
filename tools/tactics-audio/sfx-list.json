@@ -1171,7 +1171,7 @@
   "seed": 7544
  },
  "step_grass": {
-  "prompt": "Two footsteps of a boot-wearing adventurer walking on grass, close and dry",
+  "prompt": "Two footsteps of a boot-wearing adventurer walking on grass, close-miked, no reverb",
   "negative": "music, speech, voice, reverb tail, background noise",
   "duration": 0.5,
   "variants": 3,
@@ -1180,7 +1180,7 @@
   "use": "Moved: one per tile entered on terrain grass_*"
  },
  "step_dirt": {
-  "prompt": "Two footsteps of a boot-wearing adventurer walking on packed dirt path, close and dry",
+  "prompt": "Two footsteps of a boot-wearing adventurer walking on packed dirt path, close-miked, no reverb",
   "negative": "music, speech, voice, reverb tail, background noise",
   "duration": 0.5,
   "variants": 3,
@@ -1189,7 +1189,7 @@
   "use": "Moved: one per tile entered on terrain dirt_*, path_packed"
  },
  "step_stone": {
-  "prompt": "Two footsteps of a boot-wearing adventurer walking on stone flagstones, close and dry",
+  "prompt": "Two footsteps of a boot-wearing adventurer walking on stone flagstones, close-miked, no reverb",
   "negative": "music, speech, voice, reverb tail, background noise",
   "duration": 0.5,
   "variants": 3,
@@ -1198,7 +1198,7 @@
   "use": "Moved: one per tile entered on terrain cobble_*, flagstone_*, rock_*"
  },
  "step_wood": {
-  "prompt": "Two footsteps of a boot-wearing adventurer walking on wooden planks, hollow creaky, close and dry",
+  "prompt": "Two footsteps of a boot-wearing adventurer walking on wooden planks, hollow creaky, close-miked, no reverb",
   "negative": "music, speech, voice, reverb tail, background noise",
   "duration": 0.5,
   "variants": 3,
@@ -1207,7 +1207,7 @@
   "use": "Moved: one per tile entered on terrain planks_*"
  },
  "step_sand": {
-  "prompt": "Two footsteps of a boot-wearing adventurer walking on dry sand, close and dry",
+  "prompt": "Two footsteps of a boot-wearing adventurer walking on dry sand, close-miked, no reverb",
   "negative": "music, speech, voice, reverb tail, background noise",
   "duration": 0.5,
   "variants": 3,
@@ -1216,7 +1216,7 @@
   "use": "Moved: one per tile entered on terrain sand_desert"
  },
  "step_snow": {
-  "prompt": "Two footsteps of a boot-wearing adventurer walking on fresh crunchy snow, close and dry",
+  "prompt": "Two footsteps of a boot-wearing adventurer walking on fresh crunchy snow, close-miked, no reverb",
   "negative": "music, speech, voice, reverb tail, background noise",
   "duration": 0.5,
   "variants": 3,
@@ -1225,7 +1225,7 @@
   "use": "Moved: one per tile entered on terrain snow_fresh"
  },
  "step_water": {
-  "prompt": "Two footsteps of a boot-wearing adventurer walking on shallow water, splashing, close and dry",
+  "prompt": "Two footsteps of a boot-wearing adventurer walking on shallow water, splashing, close-miked, no reverb",
   "negative": "music, speech, voice, reverb tail, background noise",
   "duration": 0.5,
   "variants": 3,
@@ -1234,7 +1234,7 @@
   "use": "Moved: one per tile entered on terrain water_clear (shallow)"
  },
  "step_mud": {
-  "prompt": "Two footsteps of a boot-wearing adventurer walking on squelchy swamp mud, close and dry",
+  "prompt": "Two footsteps of a boot-wearing adventurer walking on squelchy swamp mud, close-miked, no reverb",
   "negative": "music, speech, voice, reverb tail, background noise",
   "duration": 0.5,
   "variants": 3,
@@ -1243,7 +1243,7 @@
   "use": "Moved: one per tile entered on terrain mud_swamp, water_swamp"
  },
  "step_ice": {
-  "prompt": "Two footsteps of a boot-wearing adventurer walking on slippery ice, crisp scraping, close and dry",
+  "prompt": "Two footsteps of a boot-wearing adventurer walking on slippery ice, crisp scraping, close-miked, no reverb",
   "negative": "music, speech, voice, reverb tail, background noise",
   "duration": 0.5,
   "variants": 3,
@@ -1252,7 +1252,7 @@
   "use": "Moved: one per tile entered on terrain ice_clear"
  },
  "step_lava": {
-  "prompt": "Two footsteps of a boot-wearing adventurer walking on hot cracked volcanic rock with sizzle, close and dry",
+  "prompt": "Two footsteps of a boot-wearing adventurer walking on hot cracked volcanic rock with sizzle, close-miked, no reverb",
   "negative": "music, speech, voice, reverb tail, background noise",
   "duration": 0.5,
   "variants": 3,

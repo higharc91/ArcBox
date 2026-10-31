@@ -11,6 +11,38 @@
       "group": "ambience",
       "loop": true
     },
+    "arrow_armor.1": {
+      "asset": "asset_hNUChWqRdCM77K7NsZi1sJYk",
+      "job": "job_VWC9sGAbziG2C8V88z1otk2F",
+      "cu": 1.5,
+      "duration": 0.4,
+      "group": "weapon",
+      "loop": false
+    },
+    "arrow_armor.2": {
+      "asset": "asset_DbHkFVKrxsAMXUj1cv6Fk9QP",
+      "job": "job_VWC9sGAbziG2C8V88z1otk2F",
+      "cu": 1.5,
+      "duration": 0.4,
+      "group": "weapon",
+      "loop": false
+    },
+    "arrow_flesh.1": {
+      "asset": "asset_ayX7v7hbLxJB7PAdVY2LSqvt",
+      "job": "job_TsGqW5DuPmsX1EeQwwc9YJbm",
+      "cu": 1.5,
+      "duration": 0.4,
+      "group": "weapon",
+      "loop": false
+    },
+    "arrow_flesh.2": {
+      "asset": "asset_KtEo7SeTKRuKaiGHuFcUBwzX",
+      "job": "job_TsGqW5DuPmsX1EeQwwc9YJbm",
+      "cu": 1.5,
+      "duration": 0.4,
+      "group": "weapon",
+      "loop": false
+    },
     "attack_crit.1": {
       "asset": "asset_jmm4ZSeYihteda4QzKknY7HF",
       "job": "job_RyhPMMiXUmuvDcK17iLpWfws",
@@ -59,6 +91,30 @@
       "group": "battle",
       "loop": false
     },
+    "blade_armor.1": {
+      "asset": "asset_TjSsFXZBKhGFrbm2wzqbM4r3",
+      "job": "job_V8XPREMduayquwDRRzgjbmsK",
+      "cu": 1.6666666666666667,
+      "duration": 0.5,
+      "group": "weapon",
+      "loop": false
+    },
+    "blade_armor.2": {
+      "asset": "asset_toFz99h9dnJpFB5mwpqACFo3",
+      "job": "job_V8XPREMduayquwDRRzgjbmsK",
+      "cu": 1.6666666666666667,
+      "duration": 0.5,
+      "group": "weapon",
+      "loop": false
+    },
+    "blade_armor.3": {
+      "asset": "asset_QPxpTYjEnbaf4wQTSby3zpHh",
+      "job": "job_V8XPREMduayquwDRRzgjbmsK",
+      "cu": 1.6666666666666667,
+      "duration": 0.5,
+      "group": "weapon",
+      "loop": false
+    },
     "blade_flesh.1": {
       "asset": "asset_EnopzbJxXU3VVp7Wwht51viQ",
       "job": "job_25pw8TNaAPte1ZmBtf7pjutB",
@@ -97,6 +153,70 @@
       "cu": 1.5,
       "duration": 0.4,
       "group": "battle",
+      "loop": false
+    },
+    "blunt_armor.1": {
+      "asset": "asset_yPQkCSqMibJXsRtXojau13JH",
+      "job": "job_rV6Mbw5xtg8gcXDX4Rcgzh18",
+      "cu": 1.5,
+      "duration": 0.5,
+      "group": "weapon",
+      "loop": false
+    },
+    "blunt_armor.2": {
+      "asset": "asset_NyxTrFATLZf5ypPktZX64eUy",
+      "job": "job_rV6Mbw5xtg8gcXDX4Rcgzh18",
+      "cu": 1.5,
+      "duration": 0.5,
+      "group": "weapon",
+      "loop": false
+    },
+    "blunt_flesh.1": {
+      "asset": "asset_42YmukBNHM8orjw2s7KF7jEq",
+      "job": "job_15EjBW4TcYwQ1HUP4GVCA9nP",
+      "cu": 1.3333333333333333,
+      "duration": 0.4,
+      "group": "weapon",
+      "loop": false
+    },
+    "blunt_flesh.2": {
+      "asset": "asset_ntXPAXRsEb2PgyFadkkq78V5",
+      "job": "job_15EjBW4TcYwQ1HUP4GVCA9nP",
+      "cu": 1.3333333333333333,
+      "duration": 0.4,
+      "group": "weapon",
+      "loop": false
+    },
+    "blunt_flesh.3": {
+      "asset": "asset_kBB5MGs3maLcEeu5kXPg2Aoj",
+      "job": "job_15EjBW4TcYwQ1HUP4GVCA9nP",
+      "cu": 1.3333333333333333,
+      "duration": 0.4,
+      "group": "weapon",
+      "loop": false
+    },
+    "bow_release.1": {
+      "asset": "asset_baRzDpTMrLVfUKZqKqRdWkGx",
+      "job": "job_p8Yvf5R9yPWWA2UnZ5etpuUw",
+      "cu": 1.6666666666666667,
+      "duration": 0.5,
+      "group": "weapon",
+      "loop": false
+    },
+    "bow_release.2": {
+      "asset": "asset_zhdfNGqZmqTv3YoAtA1xK9zY",
+      "job": "job_p8Yvf5R9yPWWA2UnZ5etpuUw",
+      "cu": 1.6666666666666667,
+      "duration": 0.5,
+      "group": "weapon",
+      "loop": false
+    },
+    "bow_release.3": {
+      "asset": "asset_6GzbEdnc59LrrFJRhYgxPia4",
+      "job": "job_p8Yvf5R9yPWWA2UnZ5etpuUw",
+      "cu": 1.6666666666666667,
+      "duration": 0.5,
+      "group": "weapon",
       "loop": false
     },
     "buff_applied.1": {
@@ -145,6 +265,30 @@
       "cu": 3.0,
       "duration": 0.9,
       "group": "battle",
+      "loop": false
+    },
+    "crossbow_release.1": {
+      "asset": "asset_abDgnKBsJNff52Wd7ciN7K4r",
+      "job": "job_c1WvJUYGJRNPiGhEJNoZFbGp",
+      "cu": 1.5,
+      "duration": 0.5,
+      "group": "weapon",
+      "loop": false
+    },
+    "crossbow_release.2": {
+      "asset": "asset_zQYU5HsvcY21H6PuKMgChFHe",
+      "job": "job_c1WvJUYGJRNPiGhEJNoZFbGp",
+      "cu": 1.5,
+      "duration": 0.5,
+      "group": "weapon",
+      "loop": false
+    },
+    "crossbow_reload": {
+      "asset": "asset_n3rtES4LVoj8bAuKbC1t4Nys",
+      "job": "job_QKjnWQXg6pn8rwxM76x3v4H5",
+      "cu": 3.0,
+      "duration": 0.8,
+      "group": "weapon",
       "loop": false
     },
     "debuff_applied.1": {
@@ -403,6 +547,22 @@
       "group": "battle",
       "loop": false
     },
+    "fell.1": {
+      "asset": "asset_CGoryvBPonC6X73K3mUK1EDP",
+      "job": "job_XraLzQP6qWmgYpmhGuDrtaFq",
+      "cu": 2.0,
+      "duration": 0.6,
+      "group": "battle",
+      "loop": false
+    },
+    "fell.2": {
+      "asset": "asset_1vG8EgZpLLCq3sojpFmSCUkP",
+      "job": "job_XraLzQP6qWmgYpmhGuDrtaFq",
+      "cu": 2.0,
+      "duration": 0.6,
+      "group": "battle",
+      "loop": false
+    },
     "fell_deep": {
       "asset": "asset_TzdxKMCgjTpY43TEWD6SYnF9",
       "job": "job_WQ6rjFAU16myquy9xVxmgMpL",
@@ -425,6 +585,38 @@
       "cu": 3.0,
       "duration": 0.9,
       "group": "battle",
+      "loop": false
+    },
+    "pierce_armor.1": {
+      "asset": "asset_2wG65ABfm3VjXUp9UQc1wMnM",
+      "job": "job_GLUqYmc5i26JRNVGLwS34973",
+      "cu": 1.5,
+      "duration": 0.4,
+      "group": "weapon",
+      "loop": false
+    },
+    "pierce_armor.2": {
+      "asset": "asset_yoSsLTPDtSjTC1LRScTXp5cz",
+      "job": "job_GLUqYmc5i26JRNVGLwS34973",
+      "cu": 1.5,
+      "duration": 0.4,
+      "group": "weapon",
+      "loop": false
+    },
+    "pierce_flesh.1": {
+      "asset": "asset_zdmrX2HKgWkm31d1XieLmVfw",
+      "job": "job_eA3qza4PcdxDqd47ZmrQRxFS",
+      "cu": 1.5,
+      "duration": 0.4,
+      "group": "weapon",
+      "loop": false
+    },
+    "pierce_flesh.2": {
+      "asset": "asset_bsXTnQLfeH2YTXqaS85oA8Bu",
+      "job": "job_eA3qza4PcdxDqd47ZmrQRxFS",
+      "cu": 1.5,
+      "duration": 0.4,
+      "group": "weapon",
       "loop": false
     },
     "pushed.1": {
@@ -459,12 +651,76 @@
       "group": "battle",
       "loop": false
     },
+    "sling_release": {
+      "asset": "asset_i94ad3UiwtMzfPeUvbWoUd9A",
+      "job": "job_w2LcT4Ym5ona1U5dQzNRH7Nh",
+      "cu": 2.0,
+      "duration": 0.5,
+      "group": "weapon",
+      "loop": false
+    },
+    "smoke_poof.1": {
+      "asset": "asset_UVQnY1XHCcfxeRd1frfrqtkG",
+      "job": "job_CkwD1vZgi7QEUVDpjDeQ9Ahw",
+      "cu": 2.0,
+      "duration": 0.6,
+      "group": "spell",
+      "loop": false
+    },
+    "smoke_poof.2": {
+      "asset": "asset_2MZyhatJFWCHjziVPZgg3RbS",
+      "job": "job_CkwD1vZgi7QEUVDpjDeQ9Ahw",
+      "cu": 2.0,
+      "duration": 0.6,
+      "group": "spell",
+      "loop": false
+    },
     "spawned": {
       "asset": "asset_BBNzRb4Vd9uyfxcXYkhSRm36",
       "job": "job_XZAjuzD65eftduaY5eXfu26R",
       "cu": 3.0,
       "duration": 0.9,
       "group": "battle",
+      "loop": false
+    },
+    "spell_arcane_circle.1": {
+      "asset": "asset_SkN6rXpg6nbYWqDMzDtAbDWS",
+      "job": "job_qnEKQEqybh4wEEvBkXeGzDsk",
+      "cu": 6.0,
+      "duration": 2.0,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_arcane_circle.2": {
+      "asset": "asset_QtM6DNGUUYrVxGrn9fbmB593",
+      "job": "job_qnEKQEqybh4wEEvBkXeGzDsk",
+      "cu": 6.0,
+      "duration": 2.0,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_bless": {
+      "asset": "asset_xNYioeUrRNuwxWawmaTYaXNK",
+      "job": "job_CyzTbwwUd6buZmjgLcGVMaTM",
+      "cu": 5.0,
+      "duration": 1.5,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_eldritch": {
+      "asset": "asset_VkgZYqPNPAWTz9ujVvz4EtmU",
+      "job": "job_nwyqs46wuzGjdV4LvkR6Pohv",
+      "cu": 4.0,
+      "duration": 1.2,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_fire_aura": {
+      "asset": "asset_eEqLGgY828WPgBFanTDMKZYd",
+      "job": "job_FEEw5VhvHsZ8qUSa5z7HnaCQ",
+      "cu": 5.0,
+      "duration": 1.4,
+      "group": "spell",
       "loop": false
     },
     "spell_fire_explosion.1": {
@@ -483,12 +739,172 @@
       "group": "spell",
       "loop": false
     },
+    "spell_fireball": {
+      "asset": "asset_55ETJAzpzsZNcrkjKWwjxGdU",
+      "job": "job_rUj7t31g3bj9BLmWouDkBn1p",
+      "cu": 4.0,
+      "duration": 1.2,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_holy_heal.1": {
+      "asset": "asset_ZqZ6hgm6NBWkwf2aFMaETmVz",
+      "job": "job_ZyT2VceN5VvdB3juD8VWQuPt",
+      "cu": 6.0,
+      "duration": 2.0,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_holy_heal.2": {
+      "asset": "asset_LuPE4xFFr99UHyMuP6keNyca",
+      "job": "job_ZyT2VceN5VvdB3juD8VWQuPt",
+      "cu": 6.0,
+      "duration": 2.0,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_holy_pillar": {
+      "asset": "asset_wb59tnYntevQoVUNhsyWgGxZ",
+      "job": "job_X7RRRS5ck9TDEsWVcScGhiwW",
+      "cu": 6.0,
+      "duration": 2.0,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_ice.1": {
+      "asset": "asset_98E1qVST3TS9Qjnj9ACeG4Zk",
+      "job": "job_EDtcaWynRGjZ7BQnBADjP7Qv",
+      "cu": 4.5,
+      "duration": 1.5,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_ice.2": {
+      "asset": "asset_WqJYgXAPeY5PQ3H3PXWFhR14",
+      "job": "job_EDtcaWynRGjZ7BQnBADjP7Qv",
+      "cu": 4.5,
+      "duration": 1.5,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_lightning.1": {
+      "asset": "asset_uhFF9SqD6D8GSFqvdXzP92BD",
+      "job": "job_K9fUx1xqVNfV9uxQuzLjaE1h",
+      "cu": 4.5,
+      "duration": 1.5,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_lightning.2": {
+      "asset": "asset_ePyMDj3bN9ZXaQTfjY5iT4ix",
+      "job": "job_K9fUx1xqVNfV9uxQuzLjaE1h",
+      "cu": 4.5,
+      "duration": 1.5,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_misty_step.1": {
+      "asset": "asset_Xo4AHTy6AX2fo8cYTvnKf7Zb",
+      "job": "job_Taea4kjejmDUzCmfWq91wesR",
+      "cu": 3.0,
+      "duration": 1.0,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_misty_step.2": {
+      "asset": "asset_SEB8Dcds6k1eStRnm54UmJCX",
+      "job": "job_Taea4kjejmDUzCmfWq91wesR",
+      "cu": 3.0,
+      "duration": 1.0,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_nature_circle": {
+      "asset": "asset_QT4XTaPGbZkUMauehRoSMbcm",
+      "job": "job_qwwfz1ym8FYtTMvVs8wzRCR6",
+      "cu": 6.0,
+      "duration": 1.8,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_nature_heal": {
+      "asset": "asset_MVRgfdNX6EUmn9UXeDnpsf5i",
+      "job": "job_c6PvFnpuhsk48rC58bieKEjA",
+      "cu": 6.0,
+      "duration": 1.8,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_poison_cloud": {
+      "asset": "asset_mSCWhvYkYPUrX5oM6rbaevNn",
+      "job": "job_XehXuMJT6wyLKk53p1H6KjgM",
+      "cu": 6.0,
+      "duration": 2.0,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_psychic": {
+      "asset": "asset_5RzzD1oot3LKQVEymmPbdpSY",
+      "job": "job_CeQrNKC4FsoCvuoVL8SGkPFF",
+      "cu": 5.0,
+      "duration": 1.4,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_shadow.1": {
+      "asset": "asset_ZcuDmhUkNvobair6octazt5Z",
+      "job": "job_dxFRchtbW7ZtHnsFPnttQWy2",
+      "cu": 5.5,
+      "duration": 1.8,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_shadow.2": {
+      "asset": "asset_3xcKzVM5bNgK42SogeSWzfX1",
+      "job": "job_dxFRchtbW7ZtHnsFPnttQWy2",
+      "cu": 5.5,
+      "duration": 1.8,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_shield": {
+      "asset": "asset_2mZWphhuRRi6VMCRq2f5dsvb",
+      "job": "job_1W9GbaZQKnQnRVxVZk61tMLL",
+      "cu": 4.0,
+      "duration": 1.2,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_thunderwave": {
+      "asset": "asset_kZeV7A6UNcGGxB4D7B3m9fUi",
+      "job": "job_hTdxpmNm1u6iYTEEkmQVXwd8",
+      "cu": 5.0,
+      "duration": 1.5,
+      "group": "spell",
+      "loop": false
+    },
     "terrain_shift": {
       "asset": "asset_fqvRhdQuroEk2fWj5Je5mxmJ",
       "job": "job_o268KW9covNiRBsr9BpsNUFD",
       "cu": 4.0,
       "duration": 1.2,
       "group": "battle",
+      "loop": false
+    },
+    "throw.1": {
+      "asset": "asset_qKDqToPvPHqF9hzexGVFfUsS",
+      "job": "job_sZJhXi4a2Ag3KDAAMNNphtsv",
+      "cu": 1.5,
+      "duration": 0.5,
+      "group": "weapon",
+      "loop": false
+    },
+    "throw.2": {
+      "asset": "asset_CU2f7xNUvY4YGz4f8TVWra4a",
+      "job": "job_sZJhXi4a2Ag3KDAAMNNphtsv",
+      "cu": 1.5,
+      "duration": 0.5,
+      "group": "weapon",
       "loop": false
     },
     "zone_created": {
