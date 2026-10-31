@@ -1,0 +1,216 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/class.schema.json",
+  "title": "Class",
+  "description": "classes/<id>.json: one class with its subclasses inline (spec §4.5). Documentation only: the C# loader (Tactics.Logic PackLoader and Validation) is the authority and also checks meaning (spec §4.10).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "name": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    },
+    "hitDie": {
+      "enum": [
+        6,
+        8,
+        10,
+        12
+      ]
+    },
+    "saves": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/stat"
+      }
+    },
+    "armorProf": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "weaponProf": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "skillChoices": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "from": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "count",
+        "from"
+      ]
+    },
+    "startingKit": {
+      "type": "object",
+      "properties": {
+        "weapon": {
+          "type": "string",
+          "description": "A weapon id from weapons.json."
+        },
+        "armor": {
+          "type": "string",
+          "description": "An armour id from armor.json; empty for none."
+        },
+        "shield": {
+          "type": "boolean"
+        },
+        "bag": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "item": {
+                "type": "string"
+              },
+              "count": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "item",
+              "count"
+            ]
+          }
+        }
+      },
+      "required": [
+        "weapon",
+        "armor"
+      ]
+    },
+    "resources": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "common.schema.json#/$defs/byLevel"
+      },
+      "description": "Resource pools by level."
+    },
+    "features": {
+      "$ref": "common.schema.json#/$defs/featuresByLevel",
+      "description": "Features gained at each level; every level 1–10 needs at least one."
+    },
+    "subclasses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "name": {
+            "type": "string"
+          },
+          "companion": {
+            "type": "string",
+            "description": "A monster id."
+          },
+          "features": {
+            "$ref": "common.schema.json#/$defs/featuresByLevel",
+            "description": "Features at exactly levels 3, 6 and 10."
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "features"
+        ]
+      }
+    },
+    "defaultPicks": {
+      "type": "object",
+      "patternProperties": {
+        "^(10|[1-9])$": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "aiTags": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "priority": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/stat"
+          },
+          "minItems": 6,
+          "maxItems": 6,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "tags",
+        "priority"
+      ]
+    },
+    "castingStat": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/stat"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "jump": {
+      "type": "integer"
+    },
+    "replaces": {
+      "$ref": "common.schema.json#/$defs/replaces"
+    },
+    "primaryResource": {
+      "type": "string",
+      "description": "One of resources: what grantResource \"primary\" means for this class."
+    },
+    "unarmoredDefense": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/stat"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Stat modifier added to AC when unarmored (e.g. \"con\" for Barbarian, \"wis\" for Monk)."
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "role",
+    "hitDie",
+    "saves",
+    "skillChoices",
+    "startingKit",
+    "features",
+    "aiTags"
+  ]
+}

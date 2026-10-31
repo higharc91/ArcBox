@@ -1,0 +1,6 @@
+[
+  { "id": "none", "name": "Unarmoured", "kind": "None", "baseAc": 10 },
+  { "id": "leather", "name": "Leather armour", "kind": "Light", "baseAc": 11 },
+  { "id": "scale_mail", "name": "Scale mail", "kind": "Medium", "baseAc": 14 },
+  { "id": "chain_mail", "name": "Chain mail", "kind": "Heavy", "baseAc": 16 }
+]

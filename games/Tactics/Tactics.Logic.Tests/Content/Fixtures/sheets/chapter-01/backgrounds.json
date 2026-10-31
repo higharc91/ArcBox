@@ -1,0 +1,3 @@
+[
+  { "id": "scholar", "name": "Scholar", "boosts": { "int": 2, "wis": 1 }, "skills": ["arcana", "history"], "trinket": "ink pot" }
+]

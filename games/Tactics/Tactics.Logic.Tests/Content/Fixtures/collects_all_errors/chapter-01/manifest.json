@@ -1,0 +1,2 @@
+{ "id": "chapter-01", "rulesVersion": 1, "requires": ["base"],
+  "files": ["abilities/chapter.json", "maps/bad.json", "classes/monk.json", "encounters/bad.json"] }

@@ -1,0 +1,6 @@
+{ "abilities": [
+    { "id": "chapter.flare", "name": "Flare", "tier": 1, "cost": { "action": 1 },
+      "target": { "kind": "enemy", "range": 6, "los": true, "area": { "shape": "single" } },
+      "effects": [ { "attack": { "kind": "spell" }, "onHit": [ { "damage": { "dice": "2d6", "type": "fire" } } ] } ],
+      "presentation": { "anim": "characters.cast", "fx": "signature.no_such_flare", "projectile": "projectiles.fireball" } }
+] }

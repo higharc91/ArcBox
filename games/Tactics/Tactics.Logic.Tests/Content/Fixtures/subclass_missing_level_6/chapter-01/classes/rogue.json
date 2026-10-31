@@ -1,0 +1,19 @@
+{ "id": "rogue", "name": "Rogue", "role": "striker", "hitDie": 8, "saves": ["dex", "int"],
+  "armorProf": ["light"], "weaponProf": ["simple", "finesse"],
+  "skillChoices": { "count": 4, "from": ["stealth", "acrobatics", "deception", "sleight_of_hand"] },
+  "startingKit": { "weapon": "rapier", "armor": "leather" },
+  "resources": { "edge": { "1": 2, "10": 4 } },
+  "features": {
+    "1": [ { "ability": "test.strike" } ], "2": [ { "ability": "test.bolt" } ], "3": [ { "passive": "test.tough" } ],
+    "4": [ { "passive": "test.sneak" } ], "5": [ { "attacks": 2 } ], "6": [ { "ability": "test.mend" } ],
+    "7": [ { "ability": "test.hold" } ], "8": [ { "passive": "test.tough" } ], "9": [ { "ability": "test.hold" } ],
+    "10": [ { "attacks": 3 } ]
+  },
+  "subclasses": [
+    { "id": "rogue.duelist", "name": "Duelist",
+      "features": { "3": [ { "ability": "test.hold" } ], "6": [ { "passive": "test.tough" } ], "10": [ { "ability": "test.bolt" } ] } },
+    { "id": "rogue.shadow", "name": "Shadow",
+      "features": { "3": [ { "ability": "test.hold" } ], "10": [ { "ability": "test.bolt" } ] } }
+  ],
+  "aiTags": { "tags": ["melee"], "priority": ["dex", "con", "wis", "cha", "int", "str"] },
+  "jump": 3 }

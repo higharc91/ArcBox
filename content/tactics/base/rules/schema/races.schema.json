@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/races.schema.json",
+  "title": "Races",
+  "description": "races.json (spec §4.6). Documentation only: the C# loader (Tactics.Logic PackLoader and Validation) is the authority and also checks meaning (spec §4.10).",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "$ref": "common.schema.json#/$defs/id"
+      },
+      "name": {
+        "type": "string"
+      },
+      "size": {
+        "enum": [
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "move": {
+        "type": "integer"
+      },
+      "darkvision": {
+        "type": "integer"
+      },
+      "jump": {
+        "type": "integer"
+      },
+      "resist": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "passives": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "ability": {
+        "type": "string"
+      },
+      "extraSkills": {
+        "type": "integer"
+      },
+      "replaces": {
+        "$ref": "common.schema.json#/$defs/replaces"
+      }
+    },
+    "required": [
+      "id",
+      "name",
+      "size",
+      "move"
+    ]
+  }
+}

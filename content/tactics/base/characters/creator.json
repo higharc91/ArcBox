@@ -1002,6 +1002,52 @@
         "windstep",
         "iron_body"
       ]
+    },
+    "barbarian": {
+      "name": "Barbarian",
+      "role": "Defender",
+      "gear": {
+        "torso": "harness",
+        "legs": "kilt",
+        "feet": "boots",
+        "hands": "wraps",
+        "weapon": "greataxe",
+        "cape": "pelt",
+        "marks": "warpaint"
+      },
+      "colours": {
+        "cloth1": "leather/tan",
+        "cloth2": "cloth/rust",
+        "leather": "leather/dark",
+        "paint": "paint/woad"
+      },
+      "subclasses": [
+        "berserker",
+        "earthshaker",
+        "spiritwarden"
+      ]
+    },
+    "sorcerer": {
+      "name": "Sorcerer",
+      "role": "Blaster",
+      "gear": {
+        "torso": "silk_robe",
+        "legs": "skirt",
+        "feet": "sandals",
+        "hands": "bare",
+        "weapon": "spellfire"
+      },
+      "colours": {
+        "cloth1": "cloth/royal_purple",
+        "cloth2": "cloth/ochre",
+        "trim": "metal/gold",
+        "magic": "magic/wild"
+      },
+      "subclasses": [
+        "draconic",
+        "chaos",
+        "runeborn"
+      ]
     }
   },
   "subclasses": {
@@ -1506,6 +1552,115 @@
         "cloth1": "cloth/charcoal",
         "cloth2": "cloth/rust",
         "metal": "metal/iron"
+      },
+      "companion": null
+    },
+    "berserker": {
+      "name": "Path of the Berserker",
+      "class": "barbarian",
+      "role": "Frenzy: reckless extra attacks",
+      "gear": {
+        "weapon": "axe",
+        "offhand": "hand_axe",
+        "headgear": "wolf_pelt"
+      },
+      "colours": {
+        "cloth1": "leather/dark",
+        "cloth2": "cloth/crimson",
+        "leather": "leather/red",
+        "blade": "metal/dark",
+        "paint": "paint/crimson"
+      },
+      "companion": null
+    },
+    "earthshaker": {
+      "name": "Earthshaker",
+      "class": "barbarian",
+      "role": "Ground slams that crack the terrain",
+      "gear": {
+        "weapon": "maul",
+        "headgear": "horned_helm",
+        "hands": "gauntlets"
+      },
+      "colours": {
+        "cloth1": "leather/brown",
+        "cloth2": "cloth/sand",
+        "metal": "metal/iron",
+        "blade": "metal/iron",
+        "magic": "magic/earth",
+        "paint": "paint/ochre"
+      },
+      "companion": null
+    },
+    "spiritwarden": {
+      "name": "Spiritwarden",
+      "class": "barbarian",
+      "role": "Ancestral spirits shield allies",
+      "gear": {
+        "weapon": "axe",
+        "offhand": "spirit_totem",
+        "headgear": "antlers"
+      },
+      "colours": {
+        "cloth1": "hair/silver",
+        "cloth2": "cloth/teal",
+        "magic": "magic/spirit",
+        "paint": "paint/jade"
+      },
+      "companion": null
+    },
+    "draconic": {
+      "name": "Draconic Bloodline",
+      "class": "sorcerer",
+      "role": "Dragon scales, elemental damage",
+      "gear": {
+        "torso": "drake_robe",
+        "headgear": "circlet",
+        "marks": "scales",
+        "shoulders": "drake_pauldrons",
+        "horns": "small"
+      },
+      "colours": {
+        "cloth1": "cloth/charcoal",
+        "cloth2": "skin/dragon_red",
+        "metal": "metal/gold",
+        "magic": "magic/fire"
+      },
+      "companion": null
+    },
+    "chaos": {
+      "name": "Chaos Bloodline",
+      "class": "sorcerer",
+      "role": "Wild magic surges",
+      "gear": {
+        "torso": "motley_robe",
+        "weapon": "wild_motes",
+        "float": "chaos_orb"
+      },
+      "colours": {
+        "cloth1": "cloth/teal",
+        "cloth2": "cloth/crimson",
+        "trim": "metal/gold",
+        "magic": "magic/wild"
+      },
+      "companion": null
+    },
+    "runeborn": {
+      "name": "Runeborn",
+      "class": "sorcerer",
+      "role": "Lays glowing runes on the ground",
+      "gear": {
+        "weapon": "rune_staff",
+        "marks": "runes",
+        "shoulders": "rune_stones",
+        "hands": "rune_marked"
+      },
+      "colours": {
+        "cloth1": "cloth/slate",
+        "cloth2": "metal/gold",
+        "wood": "wood/dark",
+        "magic": "magic/rune",
+        "metal": "terrain/stone"
       },
       "companion": null
     }

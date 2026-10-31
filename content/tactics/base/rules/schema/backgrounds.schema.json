@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/backgrounds.schema.json",
+  "title": "Backgrounds",
+  "description": "backgrounds.json (spec §4.6). Documentation only: the C# loader (Tactics.Logic PackLoader and Validation) is the authority and also checks meaning (spec §4.10).",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "$ref": "common.schema.json#/$defs/id"
+      },
+      "name": {
+        "type": "string"
+      },
+      "boosts": {
+        "type": "object",
+        "propertyNames": {
+          "enum": [
+            "str",
+            "dex",
+            "con",
+            "int",
+            "wis",
+            "cha"
+          ]
+        },
+        "additionalProperties": {
+          "type": "integer"
+        }
+      },
+      "skills": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "trinket": {
+        "type": "string"
+      },
+      "replaces": {
+        "$ref": "common.schema.json#/$defs/replaces"
+      }
+    },
+    "required": [
+      "id",
+      "name",
+      "boosts",
+      "skills"
+    ]
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/monsters.schema.json",
+  "title": "Monsters",
+  "description": "monsters/<family>.json: stat blocks (spec §4.7). Documentation only: the C# loader (Tactics.Logic PackLoader and Validation) is the authority and also checks meaning (spec §4.10).",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "$ref": "common.schema.json#/$defs/id"
+      },
+      "name": {
+        "type": "string"
+      },
+      "cr": {
+        "type": "string",
+        "description": "e.g. \"1/4\" or \"3\""
+      },
+      "xp": {
+        "type": "integer"
+      },
+      "level": {
+        "type": "integer"
+      },
+      "scores": {
+        "type": "object",
+        "propertyNames": {
+          "enum": [
+            "str",
+            "dex",
+            "con",
+            "int",
+            "wis",
+            "cha"
+          ]
+        },
+        "additionalProperties": {
+          "type": "integer"
+        }
+      },
+      "hp": {
+        "$ref": "common.schema.json#/$defs/byLevel"
+      },
+      "ac": {
+        "type": "integer"
+      },
+      "armor": {
+        "enum": [
+          "None",
+          "Light",
+          "Medium",
+          "Heavy"
+        ]
+      },
+      "move": {
+        "type": "integer"
+      },
+      "jump": {
+        "type": "integer"
+      },
+      "initiativeBonus": {
+        "type": "integer"
+      },
+      "saves": {
+        "type": "array",
+        "items": {
+          "$ref": "common.schema.json#/$defs/stat"
+        }
+      },
+      "skills": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "resources": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "integer"
+        }
+      },
+      "abilities": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "passives": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "weapon": {
+        "$ref": "common.schema.json#/$defs/weapon",
+        "description": "The monster's own natural weapon, written inline (weapons.json holds the gear characters carry)."
+      },
+      "attacks": {
+        "type": "integer"
+      },
+      "resist": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "immune": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "vulnerable": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "tags": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "castingStat": {
+        "$ref": "common.schema.json#/$defs/stat"
+      },
+      "aiProfile": {
+        "type": "string"
+      },
+      "sprite": {
+        "type": "string",
+        "description": "An art key, e.g. \"beasts.wolf.grey\"."
+      },
+      "phases": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "hpBelow": {
+              "type": "integer"
+            },
+            "abilities": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "passives": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "aiProfile": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "hpBelow"
+          ]
+        }
+      },
+      "replaces": {
+        "$ref": "common.schema.json#/$defs/replaces"
+      }
+    },
+    "required": [
+      "id",
+      "name",
+      "cr",
+      "xp",
+      "scores",
+      "hp",
+      "ac",
+      "weapon",
+      "aiProfile",
+      "sprite"
+    ]
+  }
+}

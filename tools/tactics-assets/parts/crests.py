@@ -181,17 +181,75 @@ def wind(c, x, y):
 def gauntlet(c, x, y):
     fist(c, x, y)
     c.rect(x - 4, y - 3, x + 4, y - 3, "accent", 5)
+def labrys(c, x, y):
+    """A double-bitted war axe: the barbarian."""
+    c.rect(x, y - 6, x, y + 6, "accent", 3)
+    for s in (-1, 1):
+        c.polygon([(x + s * 1, y - 5), (x + s * 5, y - 7), (x + s * 6.5, y - 3), (x + s * 5, y + 1),
+                   (x + s * 1, y - 1)], "sym", 4)
+        c.line(x + s * 5, y - 6, x + s * 6, y - 3, "sym", 5)
+    c.px(x, y - 7, "accent", 4)
+def cupped_flame(c, x, y):
+    """Magic held in a bare hand, no focus: the sorcerer."""
+    c.polygon([(x - 5.5, y + 1), (x + 5.5, y + 1), (x + 3.5, y + 6), (x - 3.5, y + 6)], "accent", 3)
+    for k in (-3, 0, 3):
+        c.px(x + k, y + 1, "accent", 5)
+    c.polygon([(x, y - 7), (x + 3.5, y - 2), (x + 2.5, y + 1), (x - 2.5, y + 1), (x - 3.5, y - 2)], "sym", 4)
+    c.polygon([(x, y - 3), (x + 1.5, y), (x - 1.5, y)], "sym", 5)
+def wolf(c, x, y):
+    c.polygon([(x - 5, y - 7), (x - 2, y - 3), (x + 2, y - 3), (x + 5, y - 7), (x + 5.5, y), (x + 1, y + 6),
+               (x - 1, y + 6), (x - 5.5, y)], "sym", 4)
+    c.px(x - 2, y, "accent", 0); c.px(x + 2, y, "accent", 0)
+    c.rect(x - 1, y + 4, x + 1, y + 5, "accent", 0)
+    c.px(x - 4, y - 5, "sym", 5)
+def cracked_earth(c, x, y):
+    c.rect(x - 6, y + 1, x + 6, y + 5, "sym", 4)
+    c.rect(x - 6, y + 1, x + 6, y + 1, "sym", 5)
+    for dx, dy in ((0, 1), (-1, 2), (-1, 3), (0, 4), (1, 5)):
+        c.px(x + dx, y + dy, "accent", 0)
+    c.rect(x - 5, y - 3, x - 4, y - 2, "sym", 5); c.rect(x + 3, y - 5, x + 4, y - 4, "sym", 5)
+    c.px(x, y - 6, "sym", 4)
+    _ln(c, -2, -1, -2, -2, x, y, "accent", 3); _ln(c, 2, -1, 2, -3, x, y, "accent", 3)
+def ghost(c, x, y):
+    c.ellipse(x + 0.5, y - 1.5, 4.2, 4.2, "sym", 4)
+    c.rect(x - 4, y - 1, x + 4, y + 4, "sym", 4)
+    for k in (-3, 0, 3):
+        c.rect(x + k, y + 5, x + k + 1, y + 6, "sym", 3)
+    c.rect(x - 2, y - 2, x - 1, y - 1, "accent", 0); c.rect(x + 2, y - 2, x + 3, y - 1, "accent", 0)
+    c.px(x - 3, y - 4, "sym", 5)
+def wing(c, x, y):
+    c.polygon([(x - 6, y + 5), (x - 4, y - 6), (x + 6, y - 5), (x + 4, y - 2), (x + 6, y + 1), (x + 2, y + 1),
+               (x + 3, y + 4), (x - 1, y + 3)], "sym", 4)
+    for tx, ty in ((6, -5), (6, 1), (3, 4)):                              # the spars
+        _ln(c, -4, -5, tx - 1, ty, x, y, "accent", 3)
+    _ln(c, -4, -6, -6, 5, x, y, "sym", 5)
+def chaos_star(c, x, y):
+    for a in range(8):
+        ang = a * math.pi / 4
+        ex, ey = x + math.cos(ang) * 6, y + math.sin(ang) * 6
+        c.line(x + math.cos(ang) * 2, y + math.sin(ang) * 2, ex, ey, "sym", 5 if a % 2 else 4)
+        for da in (-0.6, 0.6):
+            c.px(ex - math.cos(ang + da) * 1.6, ey - math.sin(ang + da) * 1.6, "sym", 4)
+    c.ellipse(x + 0.5, y + 0.5, 1.6, 1.6, "accent", 3)
+def rune(c, x, y):
+    c.rect(x, y - 6, x, y + 6, "sym", 5)
+    _ln(c, 0, -1, -4, -5, x, y, "sym", 4); _ln(c, 0, -1, 4, -5, x, y, "sym", 4)
+    _ln(c, 0, 3, -3, 6, x, y, "sym", 4); _ln(c, 0, 3, 3, 6, x, y, "sym", 4)
+    for dx, dy in ((-4, 1), (4, 1)):
+        c.px(x + dx, y + dy, "accent", 4)
 
 
 CLASS_SYMBOL: dict[str, Sym] = {"fighter": swords, "rogue": dagger, "wizard": star, "cleric": sun, "ranger": bow,
-                                "paladin": cross, "bard": lute, "druid": leaf, "warlock": eye, "monk": fist}
+                                "paladin": cross, "bard": lute, "druid": leaf, "warlock": eye, "monk": fist,
+                                "barbarian": labrys, "sorcerer": cupped_flame}
 SUB_SYMBOL: dict[str, Sym] = {
     "vanguard": tower_shield, "weaponmaster": halberd, "warlord": banner, "shadow": mask, "trickster": bomb,
     "duelist": rapier, "evoker": flame, "chronomancer": hourglass, "geomancer": mountain, "life": heart,
     "war": hammer, "light": rays, "sharpshooter": target, "beastmaster": paw, "warden": vine, "guardian": heater,
     "crusader": holy_sword, "avenger": brand, "valor": horn, "lore": book, "siren": note, "shapeshifter": antlers,
     "stormcaller": bolt, "grovekeeper": flower, "hexblade": cursed, "fiendbound": imp, "void": spiral,
-    "open_hand": palm, "windstep": wind, "iron_body": gauntlet,
+    "open_hand": palm, "windstep": wind, "iron_body": gauntlet, "berserker": wolf, "earthshaker": cracked_earth,
+    "spiritwarden": ghost, "draconic": wing, "chaos": chaos_star, "runeborn": rune,
 }
 
 
@@ -222,7 +280,7 @@ def subclass_badge(sub: str) -> Canvas:
 
 
 # Fields that are too pale (or too gold) for a gold symbol get a deeper field or an ivory symbol instead.
-FIELD_OVERRIDE = {"cleric": "cloth/wine", "paladin": "cloth/sky", "monk": "cloth/rust"}
+FIELD_OVERRIDE = {"cleric": "cloth/wine", "paladin": "cloth/sky", "monk": "cloth/rust", "barbarian": "cloth/crimson"}
 IVORY_SYMBOL = {"monk", "cleric", "paladin"}
 
 
@@ -258,7 +316,7 @@ def build() -> None:
     save(bsheet, out / "subclasses.png")
     write_json({"classes": {"file": "classes.png", "size": [32, 32], "order": classes},
                 "subclasses": {"file": "subclasses.png", "size": [22, 22], "rects": index}}, out / "manifest.json")
-    save(stack("Crests", [contact_sheet("Classes", ctiles, columns=10, zoom=4),
+    save(stack("Crests", [contact_sheet("Classes", ctiles, columns=12, zoom=4),
                           contact_sheet("Subclasses", stiles, columns=6, zoom=4)],
                "Heraldry for the creator, character cards and signature-ability callouts."),
          PREVIEWS / "31-crests.png")

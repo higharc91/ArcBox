@@ -1,0 +1,17 @@
+{
+  "id": "chapter-01",
+  "rulesVersion": 1,
+  "requires": ["base"],
+  "files": [
+    "races.json",
+    "backgrounds.json",
+    "injuries.json",
+    "abilities/rogue.json",
+    "classes/rogue.json",
+    "encounters/named_units.json",
+    "encounters/on_crate.json",
+    "encounters/on_party.json",
+    "encounters/zone_too_small.json",
+    "encounters/fixed_in_zone.json"
+  ]
+}

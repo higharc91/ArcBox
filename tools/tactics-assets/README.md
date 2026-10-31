@@ -51,11 +51,14 @@ A player's character is **a name, a race, a class and a look** (`parts/creator.p
 | Axis | Decides |
 |---|---|
 | Race (11) | Build, body (ears, tusks, snout), tail, and which skins, hair, beards and horns are on offer |
-| Class (10) | The starting kit: torso, legs, feet, hands, weapon, off-hand, cape, headgear, plus starting colours |
+| Class (12) | The starting kit: torso, legs, feet, hands, weapon, off-hand, cape, headgear, plus starting colours |
 | Look | The player's picks, limited to what the race offers: body type, skin, eyes, hair style and colour, facial hair, horns, face markings and paint, plus colour changes to the kit |
 
 The races are Human, Elf, Half-Elf, Dwarf, Halfling, Gnome, Half-Orc, Tiefling, Aasimar, Goliath and
-Dragonborn.
+Dragonborn. The classes are the twelve SRD 5.2 classes: Fighter, Rogue, Wizard, Cleric, Ranger, Paladin, Bard,
+Druid, Warlock, Monk, Barbarian and Sorcerer. The barbarian goes unarmoured (a fur harness and kilt, a pelt, war
+paint and a greataxe); the sorcerer carries no focus at all, just raw magic cupped in a bare hand and a silk robe.
+A kit can carry face marks and a paint colour (the barbarian's war paint); the player's own picks win over them.
 
 The options are:
 
@@ -73,7 +76,7 @@ The options are:
 See `previews/08-customisation.png`.
 
 `make_character(name, race, class, look)` merges these into a recipe, and rejects picks the race doesn't offer
-(for example, hair on a dragonborn). Any race can take any class, so there are 110 combinations, and
+(for example, hair on a dragonborn). Any race can take any class, so there are 132 combinations, and
 `previews/06-race-class.png` renders every one. `characters/creator.json` exports the races and kits, so the
 phone creator offers exactly these options. The TV draws the name on nameplates and the turn order; the sprite
 doesn't carry it. The creator mockup is `docs/superpowers/mockups/tactics/07-phone-creator.png`.
@@ -82,9 +85,10 @@ doesn't carry it. The creator mockup is `docs/superpowers/mockups/tactics/07-pho
 
 `previews/19-equipment.png` shows the equipment layers:
 
-- **Weapons (18):** sword, greatsword, axe, mace, warhammer, flail, scimitar, dagger, rapier, spear, halberd,
-  staff, quarterstaff, wand, tome, lute, bow, crossbow. Each plays the attack animation that suits it (swing,
-  thrust, shoot or cast).
+- **Weapons (20):** sword, greatsword, axe, greataxe, mace, warhammer, maul, flail, scimitar, dagger, rapier,
+  spear, halberd, staff, quarterstaff, wand, tome, lute, bow, crossbow. Each plays the attack animation that suits
+  it (swing, thrust, shoot or cast). Subclass foci (crystal, storm and rune staffs, a sorcerer's spellfire or wild
+  motes) cast like the staff.
 - **Torso armour (10).**
 - **Headgear (9).**
 
@@ -147,9 +151,23 @@ Swing frames carry a motion smear, drawn by the weapon layer from the pose's `sm
 
 ### Subclasses
 
-There are 30 subclasses (`creator.SUBCLASSES`, three per class), picked at level 3. Each overrides parts of the
+There are 36 subclasses (`creator.SUBCLASSES`, three per class), picked at level 3. Each overrides parts of the
 class kit's gear and colours. Beastmaster, Grovekeeper and Fiendbound also name a companion, which the bosses set
 draws. Pass `make_character(..., subclass=id)`.
+
+The barbarian's paths are the Berserker (a wolf-head pelt, an axe in each hand, crimson war paint), the
+Earthshaker (a stone maul and a horned helm) and the Spiritwarden (antlers and a bone totem with an ancestor's
+wisp). Each sorcerer bloodline has a signature piece that changes the silhouette, so the three read apart at TV
+distance:
+
+| Bloodline | Signature | Also |
+|---|---|---|
+| Draconic | Layered scale pauldrons with horn spines, in the dragon's colour (`shoulders/drake_pauldrons`) | Small horns, scales on the cheeks and neck, a charcoal robe |
+| Chaos | An orb of unstable magic hovering off the far shoulder, its core cycling colours as two motes orbit it (`float/chaos_orb`) | A robe split in two clashing colours, wild motes in the hand |
+| Runeborn | A carved stone slab floating off each shoulder, glowing runes cut in its face (`shoulders/rune_stones`) | A carved rune staff, rune marks on the face and the backs of the hands |
+
+`shoulders` is drawn over the torso and hair; `float` is drawn first in both facings, so a floating piece passes
+behind the body. Floating pieces bob against the body's breath and step.
 
 The previews are `previews/06b-subclasses.png` (front, back and swing for each). The phone's subclass picker reads
 `characters/subclasses.png` and `subclasses.json`.
@@ -270,7 +288,7 @@ variants: frost wolf, polar bear, magma slime, three drake colours, and others.
 
 | Atlas | Contents |
 |---|---|
-| Abilities | 32 icons at 24×24, coloured by class |
+| Abilities | 34 icons at 24×24, coloured by class |
 | Items | 35 icons at 24×24 |
 | Status | 18 icons at 16×16 |
 | Frames | 26×26 frames: five rarities plus an ability frame |

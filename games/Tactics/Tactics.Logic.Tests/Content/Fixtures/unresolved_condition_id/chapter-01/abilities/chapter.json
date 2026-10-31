@@ -1,0 +1,5 @@
+{ "abilities": [
+    { "id": "chapter.daze", "name": "Daze", "tier": 1, "cost": { "action": 1 },
+      "target": { "kind": "enemy", "range": 4, "los": true, "area": { "shape": "single" } },
+      "effects": [ { "save": { "stat": "con" }, "onFail": [ { "apply": "stunnned", "rounds": 1 } ] } ] }
+] }

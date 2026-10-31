@@ -1,0 +1,5 @@
+{ "abilities": [
+    { "id": "chapter.cleave", "name": "Cleave", "tier": 0, "cost": { "action": 1 },
+      "target": { "kind": "enemy", "range": 1, "los": false, "area": { "shape": "cross", "size": 1 } },
+      "effects": [ { "attack": { "kind": "weapon" }, "onHit": [ { "damage": { "weapon": true } }, { "apply": "prone", "rounds": 1 } ] } ] }
+] }

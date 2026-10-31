@@ -1,0 +1,21 @@
+{
+  "id": "base",
+  "rulesVersion": 1,
+  "requires": [],
+  "files": [
+    "conditions.json",
+    "races.json",
+    "backgrounds.json",
+    "injuries.json",
+    "weapons.json",
+    "armor.json",
+    "xp.json",
+    "ai-profiles.json",
+    "items.json",
+    "abilities/test.json",
+    "classes/fighter.json",
+    "monsters/beasts.json",
+    "maps/field.json",
+    "encounters/field_skirmish.json"
+  ]
+}

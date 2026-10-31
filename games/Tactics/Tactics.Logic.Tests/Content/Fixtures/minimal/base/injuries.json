@@ -1,0 +1,3 @@
+[
+  { "id": "sprained_ankle", "name": "Sprained ankle", "weight": 3, "static": { "move": -1 } }
+]

@@ -1,0 +1,62 @@
+{
+  "id": "cleric", "name": "Cleric", "role": "healer", "hitDie": 8, "saves": ["wis", "cha"],
+  "armorProf": ["light", "medium", "shield"], "weaponProf": ["simple"],
+  "skillChoices": { "count": 2, "from": ["medicine", "religion", "insight", "history", "persuasion"] },
+  "startingKit": { "weapon": "mace", "armor": "chain_shirt", "shield": true,
+                   "bag": [ { "item": "potion_of_healing", "count": 1 } ] },
+  "resources": { "devotion": { "1": 4, "2": 5, "3": 5, "4": 7, "5": 8, "6": 11, "7": 13, "8": 14, "9": 15, "10": 16 } },
+  "primaryResource": "devotion",
+  "features": {
+    "1": [ { "choose": 3, "from": ["cleric.sacred_flame", "cleric.toll_the_dead", "cleric.word_of_radiance", "cleric.resistance"] },
+           { "choose": 4, "from": ["cleric.bless", "cleric.bane", "cleric.cure_wounds", "cleric.guiding_bolt", "cleric.healing_word", "cleric.inflict_wounds", "cleric.shield_of_faith", "cleric.command"] } ],
+    "2": [ { "ability": "cleric.divine_spark" },
+           { "ability": "cleric.turn_undead" },
+           { "choose": 1, "from": ["cleric.bless", "cleric.bane", "cleric.cure_wounds", "cleric.guiding_bolt", "cleric.healing_word", "cleric.inflict_wounds", "cleric.shield_of_faith", "cleric.command"] } ],
+    "3": [ { "choose": 1, "from": ["cleric.bless", "cleric.bane", "cleric.cure_wounds", "cleric.guiding_bolt", "cleric.healing_word", "cleric.inflict_wounds", "cleric.shield_of_faith", "cleric.command", "cleric.aid", "cleric.hold_person", "cleric.lesser_restoration", "cleric.spiritual_weapon", "cleric.blindness"] } ],
+    "4": [ { "choose": 1, "from": ["cleric.sacred_flame", "cleric.toll_the_dead", "cleric.word_of_radiance", "cleric.resistance"] },
+           { "choose": 1, "from": ["cleric.bless", "cleric.bane", "cleric.cure_wounds", "cleric.guiding_bolt", "cleric.healing_word", "cleric.inflict_wounds", "cleric.shield_of_faith", "cleric.command", "cleric.aid", "cleric.hold_person", "cleric.lesser_restoration", "cleric.spiritual_weapon", "cleric.blindness"] } ],
+    "5": [ { "ability": "cleric.sear_undead" },
+           { "choose": 2, "from": ["cleric.bless", "cleric.bane", "cleric.cure_wounds", "cleric.guiding_bolt", "cleric.healing_word", "cleric.inflict_wounds", "cleric.shield_of_faith", "cleric.command", "cleric.aid", "cleric.hold_person", "cleric.lesser_restoration", "cleric.spiritual_weapon", "cleric.blindness", "cleric.spirit_guardians", "cleric.mass_healing_word", "cleric.dispel_magic", "cleric.bestow_curse"] } ],
+    "6": [ { "choose": 1, "from": ["cleric.bless", "cleric.bane", "cleric.cure_wounds", "cleric.guiding_bolt", "cleric.healing_word", "cleric.inflict_wounds", "cleric.shield_of_faith", "cleric.command", "cleric.aid", "cleric.hold_person", "cleric.lesser_restoration", "cleric.spiritual_weapon", "cleric.blindness", "cleric.spirit_guardians", "cleric.mass_healing_word", "cleric.dispel_magic", "cleric.bestow_curse"] } ],
+    "7": [ { "passive": "cleric.divine_strike" },
+           { "choose": 1, "from": ["cleric.bless", "cleric.bane", "cleric.cure_wounds", "cleric.guiding_bolt", "cleric.healing_word", "cleric.inflict_wounds", "cleric.shield_of_faith", "cleric.command", "cleric.aid", "cleric.hold_person", "cleric.lesser_restoration", "cleric.spiritual_weapon", "cleric.blindness", "cleric.spirit_guardians", "cleric.mass_healing_word", "cleric.dispel_magic", "cleric.bestow_curse", "cleric.banishment", "cleric.death_ward"] } ],
+    "8": [ { "choose": 1, "from": ["cleric.bless", "cleric.bane", "cleric.cure_wounds", "cleric.guiding_bolt", "cleric.healing_word", "cleric.inflict_wounds", "cleric.shield_of_faith", "cleric.command", "cleric.aid", "cleric.hold_person", "cleric.lesser_restoration", "cleric.spiritual_weapon", "cleric.blindness", "cleric.spirit_guardians", "cleric.mass_healing_word", "cleric.dispel_magic", "cleric.bestow_curse", "cleric.banishment", "cleric.death_ward"] } ],
+    "9": [ { "choose": 2, "from": ["cleric.bless", "cleric.bane", "cleric.cure_wounds", "cleric.guiding_bolt", "cleric.healing_word", "cleric.inflict_wounds", "cleric.shield_of_faith", "cleric.command", "cleric.aid", "cleric.hold_person", "cleric.lesser_restoration", "cleric.spiritual_weapon", "cleric.blindness", "cleric.spirit_guardians", "cleric.mass_healing_word", "cleric.dispel_magic", "cleric.bestow_curse", "cleric.banishment", "cleric.death_ward", "cleric.flame_strike", "cleric.mass_cure_wounds", "cleric.greater_restoration"] } ],
+    "10": [ { "ability": "cleric.divine_intervention" },
+            { "choose": 1, "from": ["cleric.bless", "cleric.bane", "cleric.cure_wounds", "cleric.guiding_bolt", "cleric.healing_word", "cleric.inflict_wounds", "cleric.shield_of_faith", "cleric.command", "cleric.aid", "cleric.hold_person", "cleric.lesser_restoration", "cleric.spiritual_weapon", "cleric.blindness", "cleric.spirit_guardians", "cleric.mass_healing_word", "cleric.dispel_magic", "cleric.bestow_curse", "cleric.banishment", "cleric.death_ward", "cleric.flame_strike", "cleric.mass_cure_wounds", "cleric.greater_restoration"] } ]
+  },
+  "subclasses": [
+    { "id": "cleric.life", "name": "Life Domain",
+      "features": {
+        "3": [ { "ability": "life.preserve_life" } ],
+        "6": [ { "ability": "life.word_of_renewal" } ],
+        "10": [ { "ability": "life.mass_revival" } ]
+      } },
+    { "id": "cleric.war", "name": "War Domain",
+      "features": {
+        "3": [ { "ability": "war.guided_strike" }, { "ability": "war.war_priest" } ],
+        "6": [ { "passive": "war.crusaders_zeal" } ],
+        "10": [ { "ability": "war.avatar_of_battle" } ]
+      } },
+    { "id": "cleric.light", "name": "Light Domain",
+      "features": {
+        "3": [ { "ability": "light.radiance_of_the_dawn" } ],
+        "6": [ { "ability": "light.warding_flare" }, { "passive": "light.burning_luminescence" } ],
+        "10": [ { "ability": "light.corona_of_light" } ]
+      } }
+  ],
+  "defaultPicks": {
+    "1": ["cleric.sacred_flame", "cleric.toll_the_dead", "cleric.word_of_radiance", "cleric.guiding_bolt", "cleric.healing_word", "cleric.bless", "cleric.cure_wounds"],
+    "2": ["cleric.sacred_flame", "cleric.toll_the_dead", "cleric.word_of_radiance", "cleric.guiding_bolt", "cleric.healing_word", "cleric.bless", "cleric.cure_wounds", "cleric.shield_of_faith"],
+    "3": ["cleric.sacred_flame", "cleric.toll_the_dead", "cleric.word_of_radiance", "cleric.guiding_bolt", "cleric.healing_word", "cleric.bless", "cleric.cure_wounds", "cleric.shield_of_faith", "cleric.spiritual_weapon"],
+    "4": ["cleric.sacred_flame", "cleric.toll_the_dead", "cleric.word_of_radiance", "cleric.guiding_bolt", "cleric.healing_word", "cleric.bless", "cleric.cure_wounds", "cleric.shield_of_faith", "cleric.spiritual_weapon", "cleric.resistance", "cleric.hold_person"],
+    "5": ["cleric.sacred_flame", "cleric.toll_the_dead", "cleric.word_of_radiance", "cleric.guiding_bolt", "cleric.healing_word", "cleric.bless", "cleric.cure_wounds", "cleric.shield_of_faith", "cleric.spiritual_weapon", "cleric.resistance", "cleric.hold_person", "cleric.spirit_guardians", "cleric.mass_healing_word"],
+    "6": ["cleric.sacred_flame", "cleric.toll_the_dead", "cleric.word_of_radiance", "cleric.guiding_bolt", "cleric.healing_word", "cleric.bless", "cleric.cure_wounds", "cleric.shield_of_faith", "cleric.spiritual_weapon", "cleric.resistance", "cleric.hold_person", "cleric.spirit_guardians", "cleric.mass_healing_word", "cleric.aid"],
+    "7": ["cleric.sacred_flame", "cleric.toll_the_dead", "cleric.word_of_radiance", "cleric.guiding_bolt", "cleric.healing_word", "cleric.bless", "cleric.cure_wounds", "cleric.shield_of_faith", "cleric.spiritual_weapon", "cleric.resistance", "cleric.hold_person", "cleric.spirit_guardians", "cleric.mass_healing_word", "cleric.aid", "cleric.death_ward"],
+    "8": ["cleric.sacred_flame", "cleric.toll_the_dead", "cleric.word_of_radiance", "cleric.guiding_bolt", "cleric.healing_word", "cleric.bless", "cleric.cure_wounds", "cleric.shield_of_faith", "cleric.spiritual_weapon", "cleric.resistance", "cleric.hold_person", "cleric.spirit_guardians", "cleric.mass_healing_word", "cleric.aid", "cleric.death_ward", "cleric.banishment"],
+    "9": ["cleric.sacred_flame", "cleric.toll_the_dead", "cleric.word_of_radiance", "cleric.guiding_bolt", "cleric.healing_word", "cleric.bless", "cleric.cure_wounds", "cleric.shield_of_faith", "cleric.spiritual_weapon", "cleric.resistance", "cleric.hold_person", "cleric.spirit_guardians", "cleric.mass_healing_word", "cleric.aid", "cleric.death_ward", "cleric.banishment", "cleric.flame_strike", "cleric.mass_cure_wounds"],
+    "10": ["cleric.sacred_flame", "cleric.toll_the_dead", "cleric.word_of_radiance", "cleric.guiding_bolt", "cleric.healing_word", "cleric.bless", "cleric.cure_wounds", "cleric.shield_of_faith", "cleric.spiritual_weapon", "cleric.resistance", "cleric.hold_person", "cleric.spirit_guardians", "cleric.mass_healing_word", "cleric.aid", "cleric.death_ward", "cleric.banishment", "cleric.flame_strike", "cleric.mass_cure_wounds", "cleric.greater_restoration"]
+  },
+  "aiTags": { "tags": ["healer", "support", "caster"], "priority": ["wis", "con", "str", "dex", "cha", "int"] },
+  "castingStat": "wis"
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/items.schema.json",
+  "title": "Items",
+  "description": "items.json: consumables; using one runs its ability. Documentation only: the C# loader (Tactics.Logic PackLoader and Validation) is the authority and also checks meaning (spec §4.10).",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "$ref": "common.schema.json#/$defs/id"
+      },
+      "name": {
+        "type": "string"
+      },
+      "use": {
+        "type": "string",
+        "description": "An ability id."
+      },
+      "tags": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "replaces": {
+        "$ref": "common.schema.json#/$defs/replaces"
+      }
+    },
+    "required": [
+      "id",
+      "name",
+      "use"
+    ]
+  }
+}

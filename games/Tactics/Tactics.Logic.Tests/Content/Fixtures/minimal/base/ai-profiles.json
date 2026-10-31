@@ -1,0 +1,4 @@
+[
+  { "id": "brute", "damage": 1.0, "kill": 1.5, "control": 0.5, "heal": 0, "revive": 0, "caution": 0.2, "focusFire": 1.0,
+    "objective": 0.5, "hoard": 0.1 }
+]

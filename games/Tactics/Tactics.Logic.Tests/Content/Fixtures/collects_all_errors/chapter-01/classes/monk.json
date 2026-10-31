@@ -1,0 +1,16 @@
+{ "id": "monk", "name": "Monk", "role": "striker", "hitDie": 8, "saves": ["str", "dex"],
+  "armorProf": [], "weaponProf": ["simple"],
+  "skillChoices": { "count": 2, "from": ["acrobatics", "athletics"] },
+  "startingKit": { "weapon": "quarterstaff", "armor": "none" },
+  "resources": { "ki": { "1": 2, "10": 10 } },
+  "features": {
+    "1": [ { "passive": "monk.ki" } ], "2": [ { "ability": "test.bolt" } ], "3": [ { "passive": "test.tough" } ],
+    "4": [ { "passive": "test.sneak" } ], "5": [ { "attacks": 2 } ], "6": [ { "ability": "test.mend" } ],
+    "8": [ { "passive": "test.tough" } ], "9": [ { "ability": "test.hold" } ], "10": [ { "attacks": 3 } ]
+  },
+  "subclasses": [
+    { "id": "monk.open_hand", "name": "Open Hand",
+      "features": { "3": [ { "ability": "test.hold" } ], "6": [ { "passive": "test.tough" } ], "10": [ { "ability": "test.bolt" } ] } }
+  ],
+  "aiTags": { "tags": ["melee"], "priority": ["dex", "wis", "con", "str", "int", "cha"] },
+  "jump": 3 }
