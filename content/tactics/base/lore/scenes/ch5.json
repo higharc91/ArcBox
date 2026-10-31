@@ -402,19 +402,19 @@
             {
               "id": "ch5_the_archive_history_3",
               "speaker": "oswin_hale",
-              "text": "The Vale was warm for three hundred years. And every hearth, every forge, every lamp burned a little of the people who used it.",
+              "text": "The Vale was warm for three hundred years, and paid for every hearth in memory. You know that part. You have read it.",
               "mood": "sad"
             },
             {
               "id": "ch5_the_archive_history_4",
               "speaker": "oswin_hale",
-              "text": "Two centuries ago a Keeper learned the price, and decided the Vale could not afford to know it. So we kept it secret, and sold shards anyway.",
+              "text": "A Keeper learned the price two centuries ago, and buried it in the Sunscar. You found his ledger. We went on selling shards anyway.",
               "mood": "idle"
             },
             {
               "id": "ch5_the_archive_history_5",
               "speaker": "oswin_hale",
-              "text": "I read those books when I was made Keeper. I swore I would never touch the fire, and I never have. It is why I remember.",
+              "text": "When I was made Keeper I read it too. I swore I would never touch the fire, and I never have. It is why I remember.",
               "mood": "angry",
               "direction": "the warmth breaking through as anger"
             },
@@ -543,7 +543,7 @@
             {
               "id": "ch5_the_archive_maud_1",
               "speaker": "narrator",
-              "text": "You set his account against Maud's, line by line. The ember thrown from the high window. The red sky. A hooded figure on the wall.",
+              "text": "You set his account against Maud's, line by line. The red sky. The ember coming down like a thrown stone. A hooded figure on the hill.",
               "mood": "idle"
             },
             {
@@ -798,7 +798,7 @@
             },
             {
               "id": "pip",
-              "label": "You visit Pip at night and ask her what she remembers. Why?",
+              "label": "You've watched Pip since the day you came. Why?",
               "to": "pip",
               "tags": {
                 "background": [
@@ -997,12 +997,6 @@
               "speaker": "maren_sorrel",
               "text": "Every one of these people chose this. Eleven lives, and the flame burns again, and ten thousand children are warm this winter.",
               "mood": "idle"
-            },
-            {
-              "id": "ch5_ritual_lead_plea_2",
-              "speaker": "maren_sorrel",
-              "text": "I remember the Hearth Age. Hundreds of lives of it. Warm kitchens, full granaries. I owe it to every one of them to bring it back.",
-              "mood": "sad"
             },
             {
               "id": "ch5_ritual_lead_plea_3",
@@ -1438,7 +1432,7 @@
             {
               "id": "ch5_last_vote_pip_want_1",
               "speaker": "pip_ashdown",
-              "text": "I want Bree to remember her husband. I want the goblin children to eat. I want it to stop eating people. I don't know which one that is.",
+              "text": "I want Bree to remember Ned. I want the goblin children to eat. I want it to stop eating people. I don't know which one that is.",
               "mood": "sad"
             },
             {
@@ -1638,7 +1632,7 @@
             {
               "id": "ch5_epilogue_rekindled_open_4",
               "speaker": "bree_tallow",
-              "text": "I'm still writing him down, every night. Some nights I read it back and I don't know who it's about.",
+              "text": "I'm still writing Ned down, every night. Some nights I read it back and I don't know who it's about.",
               "mood": "sad",
               "direction": "softening without slowing down"
             }
@@ -1792,7 +1786,7 @@
             {
               "id": "ch5_epilogue_returned_open_3",
               "speaker": "bree_tallow",
-              "text": "He sang flat. He burned the bread. He laughed like a goose. I remember. I remember all of it.",
+              "text": "Ned sang flat. He burned the bread. He laughed like a goose. I remember. I remember all of it.",
               "mood": "surprised",
               "direction": "stopping mid-task, for once"
             },
@@ -1941,7 +1935,7 @@
             {
               "id": "ch5_epilogue_extinguished_open_3",
               "speaker": "bree_tallow",
-              "text": "He sang flat. Did I ever tell you? Flat as a griddle, and he burned the bread, and I loved him. I remember now.",
+              "text": "Ned whistled through his teeth when he was nervous. Did I ever tell you? I don't need the book for that any more. I remember.",
               "mood": "surprised",
               "direction": "stopping mid-task, for once"
             },
@@ -2210,11 +2204,13 @@
       "title": "The Hills",
       "requires": [
         "ending_extinguished",
-        "ch1_skarrow_spared"
+        "ch1_skarrow_spared",
+        "ch1_halden_confessed"
       ],
       "cast": [
         "narrator",
-        "mother_skarrow"
+        "mother_skarrow",
+        "halden_varrow"
       ],
       "start": "open",
       "nodes": [
@@ -2232,6 +2228,13 @@
               "speaker": "mother_skarrow",
               "text": "Neighbours. That is your word for people you shout at and still feed. Good. We will be neighbours.",
               "mood": "happy"
+            },
+            {
+              "id": "ch5_epi_clan_spared_extinguished_open_3",
+              "speaker": "halden_varrow",
+              "text": "Six years I hid the cold so nobody would leave. Now everyone can see it, and nobody has. I should have trusted them.",
+              "mood": "sad",
+              "direction": "quiet, a little hoarse"
             }
           ],
           "end": true
@@ -2598,7 +2601,7 @@
             {
               "id": "ch5_epi_memory_returned_open_1",
               "speaker": "narrator",
-              "text": "When the fire leaves, the Vale remembers what it lost. All but one memory: the one you gave the Court. That was paid, not burned.",
+              "text": "When the fire leaves, the Vale remembers what it lost. All but one memory: the one the Court ate. The Court gives nothing back.",
               "mood": "idle"
             },
             {
@@ -2637,7 +2640,7 @@
             {
               "id": "ch5_epi_memory_extinguished_open_2",
               "speaker": "narrator",
-              "text": "Not burned. Paid. You chose to give it, to carry the fire here, and here is where the fire ended. It bought something after all.",
+              "text": "The Court ate it, and the Court gives nothing back. You gave it to carry the fire here, and here is where the fire ended.",
               "mood": "idle"
             }
           ],

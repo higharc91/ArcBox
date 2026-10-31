@@ -521,12 +521,6 @@
               "speaker": "ysolde",
               "mood": "idle",
               "text": "Only one of you need pay. Each of you, decide in your own heart whether you would. I will not ask who. Not yet."
-            },
-            {
-              "id": "ch2_heartpool_open_5",
-              "speaker": "narrator",
-              "mood": "idle",
-              "text": "Each of you thinks of something you would hate to lose. Keep it to yourself, for now."
             }
           ],
           "options": [
@@ -569,7 +563,7 @@
               "id": "ch2_heartpool_what_1",
               "speaker": "ysolde",
               "mood": "idle",
-              "text": "It becomes us. A courtier, a lantern, a scent of rain. It will be loved here, very much. You will simply not have it any more."
+              "text": "The Court eats it. It becomes a courtier, a lantern, a scent of rain, and it is loved here. It never comes back to you."
             },
             {
               "id": "ch2_heartpool_what_2",
@@ -734,7 +728,7 @@
               "id": "ch2_heartpool_pay_3",
               "speaker": "narrator",
               "mood": "surprised",
-              "text": "In the pool, the memory blooms into a small new light. In the galleries above, three courtiers flicker and go out."
+              "text": "In the pool the memory blooms into a small new light, and the Court drinks it down. Above, three courtiers flicker and go out."
             },
             {
               "id": "ch2_heartpool_pay_4",
@@ -1062,6 +1056,14 @@
               "to": "help"
             },
             {
+              "id": "halden",
+              "label": "Halden kept a secret to spare the town, too.",
+              "to": "halden",
+              "requires": [
+                "ch1_halden_confessed"
+              ]
+            },
+            {
               "id": "pip",
               "label": "Does Pip know?",
               "to": "pip",
@@ -1107,6 +1109,19 @@
               "mood": "happy",
               "text": "He sang terribly. Properly terribly. Write that down. Write it twice.",
               "direction": "laughing through it"
+            }
+          ],
+          "next": "close"
+        },
+        {
+          "id": "halden",
+          "lines": [
+            {
+              "id": "ch2_bree_halden_1",
+              "speaker": "bree_tallow",
+              "text": "Halden lied so folk wouldn't leave. I'm only keeping my own grief to myself. That's not the same. Is it?",
+              "mood": "hurt",
+              "direction": "quick, then slowing"
             }
           ],
           "next": "close"

@@ -28,7 +28,7 @@
             {
               "id": "ch3_guest_right_arrive_3",
               "speaker": "lark",
-              "text": "Well, look who crossed the desert. I was beginning to think I'd have to give you a sad ending.",
+              "text": "Look who crossed the desert. I'm Lark, the songkeeper. I was beginning to think I'd have to give you a sad ending.",
               "mood": "happy",
               "direction": "delighted, half singing it"
             },
@@ -414,7 +414,7 @@
             {
               "id": "ch3_skarrow_messenger_song_1",
               "speaker": "mother_skarrow",
-              "text": "You fed my children, valley people. So I give you what I do not give to strangers. The rest of the song.",
+              "text": "You fed my children, valley people. So I give you what I do not give to strangers. Not all of it. The last verse stays with the clan.",
               "mood": "idle",
               "direction": "her words through the runner; her slow, deliberate cadence"
             },
@@ -441,9 +441,16 @@
             {
               "id": "ch3_skarrow_messenger_song_5",
               "speaker": "lark",
-              "text": "That's it. That's the verse before the last. I've been looking for it for twenty years.",
+              "text": "That's the verse before the last. I've been looking for it for twenty years.",
               "mood": "surprised",
               "direction": "barely breathing"
+            },
+            {
+              "id": "ch3_skarrow_messenger_song_6",
+              "speaker": "lark",
+              "text": "Seven came home, my version goes. Hers says they came back running. Same seven, I'd wager, seen from different doorsteps.",
+              "mood": "idle",
+              "direction": "half sung, then thoughtful"
             }
           ],
           "sets": [
@@ -488,13 +495,13 @@
             {
               "id": "ch3_skarrow_messenger_more_1",
               "speaker": "narrator",
-              "text": "The boy shakes his head. The last verse belongs to the clan, he says, and the clan has only just started trusting you.",
+              "text": "The boy shakes his head. Who they took it from is in the last verse, he says, and the last verse is not his to carry.",
               "mood": "idle"
             },
             {
               "id": "ch3_skarrow_messenger_more_2",
               "speaker": "lark",
-              "text": "Of course it does. Of course she has.",
+              "text": "Of course not. I'd keep it too, if it were mine.",
               "mood": "sad",
               "direction": "laughing at themself, a little hurt"
             }
@@ -1404,7 +1411,7 @@
             {
               "id": "ch3_crypt_door_stair_2",
               "speaker": "narrator",
-              "text": "Its seal is older than the Fall. But someone has dug the stair clear, recently, and gone in.",
+              "text": "The sand has been dug away from it, and recently. Someone has gone in ahead of you.",
               "mood": "surprised"
             },
             {
@@ -1529,7 +1536,7 @@
             {
               "id": "ch3_crypt_records_quiet_1",
               "speaker": "narrator",
-              "text": "The last bone Warden falls, and the crypt is still. Beyond the dais lies a vault of shelves, dry as the day it was sealed.",
+              "text": "The last bone Warden falls. Beyond the dais, an inner door bears a seal older than the Fall. It gives at last, onto a vault of shelves.",
               "mood": "idle"
             },
             {
@@ -1634,7 +1641,7 @@
             {
               "id": "ch3_crypt_records_ledger_6",
               "speaker": "lark",
-              "text": "Bree's hearth. Corvin's missing years. Pip, born on the warm bank, remembering things that never happened to her.",
+              "text": "Your archivist begged for records the fire never touched. Well, here they are. He won't thank you for them.",
               "mood": "hurt"
             }
           ],
@@ -1710,15 +1717,21 @@
             {
               "id": "ch3_crypt_records_last_page_1",
               "speaker": "narrator",
-              "text": "Against the inner seal sit the bones of a Warden who never got it open. Under one hand is a last page, written in a hurry.",
+              "text": "Outside the inner seal sit the bones of a Warden who came too late to open it. Under one hand lies a last page, written in a hurry.",
               "mood": "idle"
             },
             {
               "id": "ch3_crypt_records_last_page_2",
               "speaker": "narrator",
-              "text": "It is dated the night of the Fall. The Keep is burning. Warden Marrowby ran with the vault chest. I saw her go, and could not stop her.",
+              "text": "Night of the Fall. The sky is red over the Keep. Young Warden Marrowby has fled with a chest of shards. I saw her go, and could not stop her.",
               "mood": "surprised",
               "direction": "reading; the hand on the page was shaking"
+            },
+            {
+              "id": "ch3_crypt_records_last_page_5",
+              "speaker": "narrator",
+              "text": "I came to seal this in with the rest, but the door was shut for good. Let whoever opens it know.",
+              "mood": "sad"
             },
             {
               "id": "ch3_crypt_records_last_page_3",
@@ -1958,7 +1971,7 @@
             {
               "id": "ch3_maren_parley_rim_3",
               "speaker": "maren_sorrel",
-              "text": "You've been in the crypt. I can see it on you. Everyone has that look, the day they learn what the fire takes.",
+              "text": "You've been in the crypt, so now you know what the fire takes. I'm sorry. It's a hard thing to carry out into the sun.",
               "mood": "idle"
             },
             {
@@ -2383,9 +2396,21 @@
               "mood": "sad"
             },
             {
+              "id": "ch3_maren_parley_farewell_3",
+              "speaker": "maren_sorrel",
+              "text": "The crater's ember is in the glass below. The Scarwalkers would never let me touch it. You're their guests. Take it to the Keep.",
+              "mood": "idle"
+            },
+            {
               "id": "ch3_maren_parley_farewell_2",
               "speaker": "narrator",
               "text": "She leaves the water and the white cloth where they are, and walks away along the crater's rim without looking back.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_maren_parley_farewell_4",
+              "speaker": "narrator",
+              "text": "You lift the Sunscar's ember out of the black glass. It is hot as noon, and it leans, very slightly, toward the Keep.",
               "mood": "idle"
             }
           ],

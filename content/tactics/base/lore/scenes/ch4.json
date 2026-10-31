@@ -385,12 +385,6 @@
               "speaker": "narrator",
               "text": "The ledgers are orders for stone and iron. One is a mason's complaint: the Wardens wanted the flame hall built stronger than the gate.",
               "mood": "idle"
-            },
-            {
-              "id": "ch4_greyhold_hist_pass_2",
-              "speaker": "narrator",
-              "text": "Stronger than the gate. They feared what was inside more than anything that might come from outside.",
-              "mood": "surprised"
             }
           ],
           "next": "cage"
@@ -1246,12 +1240,6 @@
               "speaker": "pip_ashdown",
               "text": "And the fire went everywhere. It broke and flew out of the windows like birds. And he was screaming. I was screaming.",
               "mood": "hurt"
-            },
-            {
-              "id": "ch4_pip_remembers_memory_6",
-              "speaker": "narrator",
-              "text": "The Keep did not fall because the Hearthflame was attacked. It fell because a Warden-Keeper tried to put it out, and someone stopped him halfway.",
-              "mood": "sad"
             }
           ],
           "sets": [
@@ -1268,11 +1256,9 @@
               "id": "maud",
               "label": "Old Maud said she saw the Stranger's face that night.",
               "to": "maud",
-              "tags": {
-                "background": [
-                  "hermit"
-                ]
-              }
+              "requires": [
+                "ch1_met_maud"
+              ]
             },
             {
               "id": "oswin",
@@ -1341,6 +1327,13 @@
               "direction": "a child, nine years old"
             },
             {
+              "id": "ch4_pip_remembers_close_4",
+              "speaker": "pip_ashdown",
+              "text": "When you go to the Keep, I'm coming. Don't say no. I know the way in. He does, so I do.",
+              "mood": "idle",
+              "direction": "quick and stubborn, then suddenly old and slow"
+            },
+            {
               "id": "ch4_pip_remembers_close_3",
               "speaker": "narrator",
               "text": "High on the dark ridge above the camp, a hooded figure stands and watches the fire, and does not come down.",
@@ -1403,7 +1396,7 @@
             {
               "id": "ch4_pip_doctor_open_6",
               "speaker": "ivo_rime",
-              "text": "Am I? Well. Doctor's orders, then. I'll walk you all down the mountain.",
+              "text": "Am I? Well. Doctor's orders, then. I'll see you all down the mountain. After that, keep her warm.",
               "mood": "happy",
               "direction": "surprised into a laugh"
             }

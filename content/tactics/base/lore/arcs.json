@@ -57,7 +57,7 @@
           "id": "ch1_the_ember",
           "kind": "story",
           "place": "river_docks",
-          "summary": "Under the docks, the party finds the ford's ember in the riverbed, dim as a coal. The Ash Market has been chipping shards off it. A Kindled preacher named Maren Sorrel arrives in town offering to save it. The Stranger tells the party there are four more, and that the next lies in Mirewood.",
+          "summary": "Under the docks, the party finds the ford's ember in the riverbed, dim as a coal. The Ash Market has been chipping shards off it. A Kindled preacher named Maren Sorrel arrives in town offering to save it. The Stranger tells the party there are four more, that the next lies in Mirewood, and that this one will keep better near its sisters. The party takes the ford's ember with them: from here on, the party carries every ember it takes.",
           "sets": ["ch1_ember_found"]
         }
       ]
@@ -91,9 +91,9 @@
           "place": "the_heartpool",
           "summary": "Ysolde's price for the ember is a memory: something the payer would hate to forget. Each player privately decides whether to offer one, and the party votes on the bargain.",
           "choices": [
-            { "id": "ch2_pay", "label": "We'll pay what the Court asks.", "summary": "Someone gives up a memory and the party takes the ember. Part of the Court fades with it, and Ysolde thanks them anyway.", "sets": ["ch2_paid_memory", "ch2_ember_taken"] },
-            { "id": "ch2_trick", "label": "Find a loophole in the bargain.", "summary": "An Arcana or Deception check: the party pays with a memory that isn't theirs. It works, and the Court never forgets it.", "sets": ["ch2_court_tricked", "ch2_ember_taken"] },
-            { "id": "ch2_leave", "label": "Leave the ember with the Court.", "summary": "The party walks away. The Court owes them a favour, and the Kindled will try again.", "sets": ["ch2_ember_left"] }
+            { "id": "ch2_pay", "label": "We'll pay what the Court asks.", "summary": "Someone gives up a memory and the party takes the ember. The Court eats the memory, so it is never restored, even if the fire goes out. Part of the Court fades with the ember, and Ysolde thanks them anyway.", "sets": ["ch2_paid_memory", "ch2_ember_taken"] },
+            { "id": "ch2_trick", "label": "Find a loophole in the bargain.", "summary": "An Arcana or Deception check: the party pays with a memory that isn't theirs, and takes the ember. It works, and the Court never forgets it.", "sets": ["ch2_court_tricked", "ch2_ember_taken"] },
+            { "id": "ch2_leave", "label": "Leave the ember with the Court.", "summary": "The party walks away and the ember stays with the Court. The Court owes them a favour, and pays it in Chapter V: Ysolde brings the ember to Ember Keep herself. The Kindled will try again.", "sets": ["ch2_ember_left"] }
           ]
         },
         {
@@ -164,7 +164,7 @@
           "id": "ch3_maren_parley",
           "kind": "story",
           "place": "the_crater",
-          "summary": "At the crater's edge Maren Sorrel meets the party under a flag of truce. She knows the cost and thinks it worth paying. She asks the party to bring the embers to Ember Keep with her, and lets slip that she can't always tell her own memories from the ones the fire gave her.",
+          "summary": "At the crater's edge Maren Sorrel meets the party under a flag of truce. She knows the cost and thinks it worth paying. She asks the party to bring the embers to Ember Keep with her, and lets slip that she can't always tell her own memories from the ones the fire gave her. She lets the party take the crater's ember, which the Scarwalkers would never let her touch.",
           "sets": ["ch3_maren_parley"]
         }
       ]
@@ -203,14 +203,14 @@
           "place": "rime_tower",
           "summary": "Ivo Rime has found a way to put burned memories back, and wants to try it on his dead wife.",
           "choices": [
-            { "id": "ch4_help_ivo", "label": "Let him try.", "summary": "It half works. She remembers him for a minute, then is gone for good. Ivo leaves the Kindled and owes the party everything.", "sets": ["ch4_ivo_helped"] },
+            { "id": "ch4_help_ivo", "label": "Let him try.", "summary": "It half works. She remembers him for a minute, then is gone for good. Ivo leaves the Kindled, gives the party the cold ember, and owes them everything.", "sets": ["ch4_ivo_helped"] },
             { "id": "ch4_stop_ivo", "label": "Stop him.", "summary": "The party fights Ivo and takes his research. The cold ember is theirs, and Maren loses her scholar.", "sets": ["ch4_ivo_stopped"] }
           ]
         },
         {
           "id": "ch4_pip_remembers",
           "kind": "camp",
-          "summary": "At camp in the snow, Pip wakes screaming with a memory that isn't hers: she was Oswin Hale, on the night of the Fall, putting out the Hearthflame, until a hooded figure stopped his hand and the flame shattered.",
+          "summary": "At camp in the snow, Pip wakes screaming with a memory that isn't hers: she was Oswin Hale, on the night of the Fall, putting out the Hearthflame, until a hooded figure stopped his hand and the flame shattered. Afterwards she insists on coming to Ember Keep: she knows the way in, because Oswin did.",
           "sets": ["ch4_pip_remembers", "truth_fall"]
         }
       ]
@@ -221,7 +221,7 @@
       "region": "ember_keep",
       "title": "The Heart of the Flame",
       "levels": [9, 10],
-      "summary": "The party carries the embers to Ember Keep, where the Last Watch, the Kindled, a sleeping dragon and the Hooded Stranger all wait for the Vale's choice.",
+      "summary": "The party carries the embers it has taken to Ember Keep, where the Last Watch, the Kindled, a sleeping dragon and the Hooded Stranger all wait for the Vale's choice.",
       "beats": [
         {
           "id": "ch5_the_gate",

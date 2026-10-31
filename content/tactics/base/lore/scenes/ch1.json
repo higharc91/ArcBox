@@ -60,7 +60,7 @@
               "id": "ch1_mayor_halden_2",
               "speaker": "halden_varrow",
               "mood": "idle",
-              "text": "The Skarrow goblins took the ford bridge nine days ago. It's our only road east, and every cart of winter flour comes over it."
+              "text": "The Skarrow goblins took the ford bridge nine days ago. Every cart of winter flour comes over it."
             },
             {
               "id": "ch1_mayor_halden_3",
@@ -1996,7 +1996,7 @@
               "id": "ch1_docks_open_4",
               "speaker": "narrator",
               "mood": "sad",
-              "text": "The ford's ember. It is the size of a cart wheel, and it is cracked and chipped all over, as if something has been gnawing it."
+              "text": "The ford's ember. It is no bigger than a loaf, and cracked and chipped all over, as if something has been gnawing it."
             }
           ],
           "sets": [
@@ -2446,10 +2446,17 @@
               "text": "Whatever they ask for, think before you say yes. Things given in Mirewood stay given."
             },
             {
+              "id": "ch1_four_more_where_4",
+              "speaker": "hooded_stranger",
+              "text": "She'll keep better near her sisters than in the mud. Leave her here, and the Ash Market will have her in chips by spring.",
+              "mood": "sad",
+              "direction": "quiet, faintly sad"
+            },
+            {
               "id": "ch1_four_more_where_3",
               "speaker": "narrator",
               "mood": "idle",
-              "text": "The lantern on the pier gutters. When it steadies, you are alone with the sound of the river."
+              "text": "The lantern on the pier gutters. When it steadies you are alone, and the ford's ember sits warm in your pack."
             }
           ],
           "end": true

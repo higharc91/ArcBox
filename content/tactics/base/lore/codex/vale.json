@@ -72,7 +72,7 @@
       "id": "codex_the_crossing",
       "title": "The Seven Who Crossed",
       "category": "history",
-      "body": "Before the Hearthflame, the Vale was a cold, hungry country. Seven people crossed the Greywall into the lands beyond and came back with fire. The songs say it was given to them. The Skarrow clan's oldest song says otherwise: it says the seven came back running.",
+      "body": "Before the Hearthflame, the Vale was a cold, hungry country. Seven people crossed the Greywall into the lands beyond and came back with fire. The Warden songs say it was given to them, and that the seven came home. The Skarrow clan's oldest song says otherwise: it says the seven came back running. Each song has a last verse its keepers do not sing to strangers.",
       "unlock": { "flag": "truth_crossing" },
       "related": ["codex_greywall", "codex_skarrow"]
     },
@@ -148,7 +148,7 @@
       "title": "The Glimmer Court",
       "category": "factions",
       "subject": "glimmer_court",
-      "body": "The fey of Mirewood, who woke in the century since an ember sank into the marsh. Beautiful, courteous and strange. A bargain made with the Court is always kept, one way or another.",
+      "body": "The fey of Mirewood, who woke in the century since an ember sank into the marsh. Beautiful, courteous and strange. A bargain made with the Court is always kept, one way or another. What the Court is paid, it eats: a memory given to the Court never comes back.",
       "unlock": { "chapter": 2 },
       "related": ["codex_ember_touched"]
     },
