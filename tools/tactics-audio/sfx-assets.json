@@ -1,0 +1,55 @@
+{
+  "model": "model_mirelo-sfx-2-0-text-to-audio",
+  "team": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "clips": {
+    "amb_river": {
+      "asset": "asset_qiysNMkDMjTicHxj1Gx3ZxNS",
+      "job": "job_WDrNxQB88jvphJ9FanPdTKFs",
+      "cu": 48.0,
+      "duration": 16,
+      "group": "ambience",
+      "loop": true
+    },
+    "blade_flesh.1": {
+      "asset": "asset_EnopzbJxXU3VVp7Wwht51viQ",
+      "job": "job_25pw8TNaAPte1ZmBtf7pjutB",
+      "cu": 1.3333333333333333,
+      "duration": 0.4,
+      "group": "weapon",
+      "loop": false
+    },
+    "blade_flesh.2": {
+      "asset": "asset_aZEhd5anW897WVFsqYsYH8ZB",
+      "job": "job_25pw8TNaAPte1ZmBtf7pjutB",
+      "cu": 1.3333333333333333,
+      "duration": 0.4,
+      "group": "weapon",
+      "loop": false
+    },
+    "blade_flesh.3": {
+      "asset": "asset_YSTpxeTnErEBvYf6Yk9pfStY",
+      "job": "job_25pw8TNaAPte1ZmBtf7pjutB",
+      "cu": 1.3333333333333333,
+      "duration": 0.4,
+      "group": "weapon",
+      "loop": false
+    },
+    "spell_fire_explosion.1": {
+      "asset": "asset_p6iMw7fB4xmfKSyWZRUDkrbH",
+      "job": "job_PUQ72JMpPXR5sc7F6bwxEHsH",
+      "cu": 5.5,
+      "duration": 1.8,
+      "group": "spell",
+      "loop": false
+    },
+    "spell_fire_explosion.2": {
+      "asset": "asset_XgfWoP3s7vWcFp5QZyZdg8QV",
+      "job": "job_PUQ72JMpPXR5sc7F6bwxEHsH",
+      "cu": 5.5,
+      "duration": 1.8,
+      "group": "spell",
+      "loop": false
+    }
+  }
+}
