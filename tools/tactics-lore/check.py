@@ -445,6 +445,15 @@ def _scenes(defs: dict, scenes: list, rules: dict | None, errors: Errors) -> Non
                     for i, id_ in enumerate(ids):
                         if known is not None and id_ not in known:
                             errors.add(where, f"{oat}/tags/{kind}/{i}", f"no {kind} has the id '{id_}'")
+            opts = node.get("options", [])
+            if opts and all(o.get("requires") for o in opts):
+                # Every option is gated: some earlier vote must guarantee one of them shows, i.e. for one choice beat,
+                # each of its choices sets a flag that one of these options waits on.
+                waits = {f for o in opts for f in o["requires"]}
+                if not any(beat_choices and all(set(c["sets"]) & waits for c in beat_choices)
+                           for beat_choices in (b.get("choices", []) for b, _ in defs["beat"].values())):
+                    errors.add(where, at, "every option is gated on flags, and no earlier vote guarantees one of them "
+                                          "is set: the party could be left with nothing to pick")
             for target in out:
                 if target not in nodes:
                     errors.add(where, at, f"leads to '{target}', which isn't a node in this scene")

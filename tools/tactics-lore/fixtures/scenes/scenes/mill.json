@@ -1,31 +1,188 @@
 {
   "scenes": [
     {
-      "id": "at_the_mill", "beat": "find_mill", "cast": ["aldric", "narrator"], "start": "open",
+      "id": "at_the_mill",
+      "beat": "find_mill",
+      "cast": [
+        "aldric",
+        "narrator"
+      ],
+      "start": "open",
       "nodes": [
-        { "id": "open", "lines": [{ "id": "mill_open", "speaker": "narrator", "text": "The wheel is still." }],
-          "sets": ["mill_found"],
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "mill_open",
+              "speaker": "narrator",
+              "text": "The wheel is still."
+            }
+          ],
+          "sets": [
+            "mill_found"
+          ],
           "options": [
-            { "id": "look", "label": "Look closer.", "check": { "skill": "perception", "dc": 12, "pass": "seen", "fail": "done" } },
-            { "id": "pray", "label": "Say a prayer.", "to": "done", "tags": { "background": ["acolyte"] } }
-          ] },
-        { "id": "seen", "lines": [{ "id": "mill_seen", "speaker": "aldric", "text": "Tracks.", "mood": "surprised" }],
-          "next": "done" },
-        { "id": "done", "lines": [{ "id": "mill_done", "speaker": "aldric", "text": "Let's go." }], "end": true }
+            {
+              "id": "look",
+              "label": "Look closer.",
+              "check": {
+                "skill": "perception",
+                "dc": 12,
+                "pass": "seen",
+                "fail": "done"
+              }
+            },
+            {
+              "id": "pray",
+              "label": "Say a prayer.",
+              "to": "done",
+              "tags": {
+                "background": [
+                  "acolyte"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "seen",
+          "lines": [
+            {
+              "id": "mill_seen",
+              "speaker": "aldric",
+              "text": "Tracks.",
+              "mood": "surprised"
+            }
+          ],
+          "next": "done"
+        },
+        {
+          "id": "done",
+          "lines": [
+            {
+              "id": "mill_done",
+              "speaker": "aldric",
+              "text": "Let's go."
+            }
+          ],
+          "end": true
+        }
       ]
     },
     {
-      "id": "broken", "beat": "gated", "cast": ["aldric"], "start": "vote",
+      "id": "broken",
+      "beat": "gated",
+      "cast": [
+        "aldric"
+      ],
+      "start": "vote",
       "nodes": [
-        { "id": "vote", "vote": true,
-          "lines": [{ "id": "mill_open", "speaker": "stranger", "text": "Choose.", "mood": "angry" }],
-          "sets": ["made_up_flag"],
+        {
+          "id": "vote",
+          "vote": true,
+          "lines": [
+            {
+              "id": "mill_open",
+              "speaker": "stranger",
+              "text": "Choose.",
+              "mood": "angry"
+            }
+          ],
+          "sets": [
+            "made_up_flag"
+          ],
           "options": [
-            { "id": "pick_a", "label": "A", "choice": "a", "to": "gone" },
-            { "id": "pick_z", "label": "Z", "choice": "z", "to": "end", "tags": { "background": ["pirate"] } }
-          ] },
-        { "id": "end", "lines": [{ "id": "mill_bye", "speaker": "aldric", "text": "Bye." }], "next": "end", "end": true },
-        { "id": "orphan", "lines": [{ "id": "mill_orphan", "speaker": "aldric", "text": "Nobody hears this." }], "end": true }
+            {
+              "id": "pick_a",
+              "label": "A",
+              "choice": "a",
+              "to": "gone"
+            },
+            {
+              "id": "pick_z",
+              "label": "Z",
+              "choice": "z",
+              "to": "end",
+              "tags": {
+                "background": [
+                  "pirate"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "end",
+          "lines": [
+            {
+              "id": "mill_bye",
+              "speaker": "aldric",
+              "text": "Bye."
+            }
+          ],
+          "next": "end",
+          "end": true
+        },
+        {
+          "id": "orphan",
+          "lines": [
+            {
+              "id": "mill_orphan",
+              "speaker": "aldric",
+              "text": "Nobody hears this."
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "dead_end",
+      "beat": "find_mill",
+      "cast": [
+        "aldric"
+      ],
+      "start": "ask",
+      "nodes": [
+        {
+          "id": "ask",
+          "lines": [
+            {
+              "id": "mill_ask",
+              "speaker": "aldric",
+              "text": "Well?"
+            }
+          ],
+          "options": [
+            {
+              "id": "if_found",
+              "label": "We found it.",
+              "requires": [
+                "mill_found"
+              ],
+              "to": "bye"
+            },
+            {
+              "id": "if_a",
+              "label": "We chose A.",
+              "requires": [
+                "chose_a"
+              ],
+              "to": "bye"
+            }
+          ]
+        },
+        {
+          "id": "bye",
+          "lines": [
+            {
+              "id": "mill_ask_bye",
+              "speaker": "aldric",
+              "text": "Good."
+            }
+          ],
+          "end": true
+        }
       ]
     }
   ]

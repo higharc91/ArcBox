@@ -92,6 +92,8 @@ class CheckTests(unittest.TestCase):
             "/scenes/1/nodes/0: leads to 'gone', which isn't a node in this scene",
             "/scenes/1/nodes/1: a node needs exactly one of 'options', 'next' or 'end'",
             "/scenes/1/nodes/2: the node 'orphan' can't be reached from the start",
+            "/scenes/2/nodes/0: every option is gated on flags, and no earlier vote guarantees one of them is set: "
+            "the party could be left with nothing to pick",
         ])
         # The well-formed scene (a check, a tagged option, a flag the beat sets) raises nothing.
         self.assertFalse([e for e in errors if "/scenes/0/" in e], errors)

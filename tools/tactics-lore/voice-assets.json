@@ -350,6 +350,16 @@
       "preset": "Fenrir",
       "text": "Good as new. Nearly."
     },
+    "Fenrir.6394acee": {
+      "asset": "asset_nRxum7nhoobb2pRxo4YTa7GX",
+      "preset": "Fenrir",
+      "text": "Who's got the stew? I could eat a goblin. Not literally."
+    },
+    "Fenrir.6d1ab317": {
+      "asset": "asset_xwAqkaqimMAPvaewKJXMXnMV",
+      "preset": "Fenrir",
+      "text": "This isn't over!"
+    },
     "Fenrir.81c57220": {
       "asset": "asset_KipiYeSNTzQJEwkeY9KDtjJj",
       "preset": "Fenrir",
@@ -364,6 +374,16 @@
       "asset": "asset_cX9aMNHP5fXTeAVug6QFPz1e",
       "preset": "Fenrir",
       "text": "Just a scratch. A big one."
+    },
+    "Fenrir.ca46be9d": {
+      "asset": "asset_5L4fs5eunqv4bUGVn4TTTS4L",
+      "preset": "Fenrir",
+      "text": "Ha! Told you we'd win!"
+    },
+    "Fenrir.ede73bfc": {
+      "asset": "asset_ZRx2HKXoeHTt94TCJfQsWoSU",
+      "preset": "Fenrir",
+      "text": "Sing something, someone. Loud."
     },
     "Kore.07eee67a": {
       "asset": "asset_RRw6nTcaWLicSfg5BLbf6QjK",
@@ -450,10 +470,20 @@
       "preset": "Kore",
       "text": "Hold together. We do this properly."
     },
+    "Pulcherrima.1c30b36e": {
+      "asset": "asset_cHvqsGgPoEDHVoerW76X35Fs",
+      "preset": "Pulcherrima",
+      "text": "Who's got the stew? I could eat a goblin. Not literally."
+    },
     "Pulcherrima.26bfc3bf": {
       "asset": "asset_YiM3GhZMiVzP7VestZJ98qJx",
       "preset": "Pulcherrima",
       "text": "Who's buying at the Last Coal?"
+    },
+    "Pulcherrima.2d99e7fd": {
+      "asset": "asset_YTNEPKTror7GPpBBYyAjrSuS",
+      "preset": "Pulcherrima",
+      "text": "Sing something, someone. Loud."
     },
     "Pulcherrima.3f3253f3": {
       "asset": "asset_yDAf3a8d3L2ZnfNX8ayh1Pys",
@@ -474,6 +504,11 @@
       "asset": "asset_AAFzEzJKqVBiNKR17nVxBtre",
       "preset": "Pulcherrima",
       "text": "Good as new. Nearly."
+    },
+    "Pulcherrima.eb2e145e": {
+      "asset": "asset_WiHmKtG3DjA7Cu4TvNEDZppW",
+      "preset": "Pulcherrima",
+      "text": "This isn't over!"
     },
     "Pulcherrima.feb0ebbf": {
       "asset": "asset_fU1vq1sNsohHfeaJ9JfMrAgq",
