@@ -1,5 +1,5 @@
 {
-  "about": "Casting for the player voice sets' pre-rendered barks. Each set has two casts, so a player can pick a lower or a higher voice for the same personality. Presets are Gemini TTS / Chirp3-HD voice names, the same ones the server's live TTS uses (en-US-Chirp3-HD-<preset>), so a line with no clip can be spoken live in the same voice.",
+  "about": "One voice per speaker, everywhere: pre-rendered lines, and live TTS of any line without a clip (the TV's /api/tts with theme tactics.npc.<id>). Presets are Gemini TTS / Chirp3-HD voice names (en-US-Chirp3-HD-<preset>). Player voice sets have two casts each (low, high). NPCs have one; where two speakers must share a preset, a pitch shift (semitones) or a filter keeps them apart in the pre-rendered clips. Filters can't reach live TTS, so major speakers get presets of their own. The ArcBox host (lobby) is Puck, so Wardenflame keeps Puck off its speakers.",
   "model": "model_google-gemini-3-8-flash-tts",
   "language": "en-US",
   "sets": {
@@ -9,5 +9,32 @@
     "fierce":    { "low": "Fenrir",        "high": "Pulcherrima" },
     "wry":       { "low": "Zubenelgenubi", "high": "Despina" },
     "steady":    { "low": "Alnilam",       "high": "Kore" }
+  },
+  "filters": {
+    "helm": "A voice inside a closed helm: short metallic reflections and the top end rolled off.",
+    "echo": "A faint cold echo, as if the room were larger and older than it looks.",
+    "fey": "A soft shimmer: a quiet, slightly detuned double behind the voice."
+  },
+  "characters": {
+    "narrator":           { "preset": "Algieba",      "note": "warm storyteller" },
+    "halden_varrow":      { "preset": "Charon",       "note": "warm baritone, hoarse" },
+    "corvin_ashby":       { "preset": "Sadachbia",    "note": "light, quick, anxious" },
+    "tobin_fell":         { "preset": "Orus",         "pitch": -2, "note": "deep, rough bass" },
+    "rook":               { "preset": "Umbriel",      "note": "dry, low, unhurried" },
+    "vorga":              { "preset": "Iapetus",      "pitch": 1, "note": "young swagger; clear and loud" },
+    "ivo_rime":           { "preset": "Enceladus",    "note": "soft-spoken, exhausted" },
+    "oswin_hale":         { "preset": "Rasalgethi",   "filter": "echo", "note": "dry, cold, very old" },
+    "halvard":            { "preset": "Schedar",      "pitch": -2, "filter": "helm", "note": "deep and hollow inside the helm" },
+    "hooded_stranger":    { "preset": "Sadaltager",   "pitch": -2, "filter": "echo", "note": "shares scholarly.low; pitch and echo keep them apart" },
+    "lark":               { "preset": "Aoede",        "note": "androgynous, musical" },
+    "bree_tallow":        { "preset": "Zephyr",       "note": "alto, brisk and kind" },
+    "maren_sorrel":       { "preset": "Sulafat",      "note": "warm, persuasive alto" },
+    "mother_aubrine":     { "preset": "Vindemiatrix", "note": "clear mezzo, measured" },
+    "dagna_holt":         { "preset": "Callirrhoe",   "pitch": -1, "note": "low, flat, few words" },
+    "pip_ashdown":        { "preset": "Leda",         "pitch": 3, "note": "a child; shares earnest.high, pitched up" },
+    "old_maud":           { "preset": "Achernar",     "pitch": -1, "note": "ancient, papery" },
+    "celandine_marrowby": { "preset": "Autonoe",      "note": "smooth, cultured alto" },
+    "mother_skarrow":     { "preset": "Laomedeia",    "pitch": -2, "note": "cracked, rasping" },
+    "ysolde":             { "preset": "Despina",      "pitch": 1, "filter": "fey", "note": "shares wry.high; fey shimmer and pitch keep them apart" }
   }
 }
