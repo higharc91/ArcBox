@@ -27,6 +27,7 @@
     "abilities/warlock.json",
     "abilities/barbarian.json",
     "abilities/sorcerer.json",
+    "abilities/villains.json",
     "classes/fighter.json",
     "classes/cleric.json",
     "classes/rogue.json",
@@ -46,15 +47,22 @@
     "monsters/bosses.json",
     "monsters/wildshape.json",
     "monsters/companions.json",
+    "monsters/villains.json",
     "maps/river_crossing.json",
     "maps/forest_ruins.json",
     "maps/crypt_hall.json",
     "maps/crystal_cave.json",
     "maps/warlord_bridge.json",
+    "maps/keep_gate.json",
+    "maps/hall_of_the_flame.json",
     "encounters/river_crossing.json",
     "encounters/forest_ruins.json",
     "encounters/crypt_hall.json",
     "encounters/crystal_cave.json",
-    "encounters/warlord_bridge.json"
+    "encounters/warlord_bridge.json",
+    "encounters/ford_assault.json",
+    "encounters/rime_tower.json",
+    "encounters/keep_gate.json",
+    "encounters/hall_of_the_flame.json"
   ]
 }

@@ -1,0 +1,21 @@
+{ "id": "keep_gate", "name": "The Broken Gate", "map": "keep_gate", "level": 9, "party": { "min": 4, "max": 6 },
+  "enemies": [ { "unit": "halvard", "at": [8, 5], "id": "halvard", "tag": "halvard", "level": 9 },
+               { "unit": "skeleton_archer", "zone": "north_rampart", "count": 1, "level": 9, "tag": "bone_wardens" },
+               { "unit": "skeleton_archer", "zone": "south_rampart", "count": 1, "level": 9, "tag": "bone_wardens" },
+               { "unit": "skeleton", "zone": "courtyard", "count": 2, "level": 9, "tag": "bone_wardens" } ],
+  "xp": 1700, "loot": ["crypt_vault"],
+  "objectives": { "win": "defeat:halvard" },
+  "triggers": [
+    { "id": "halvard_challenge", "when": { "round": 1 },
+      "do": [ { "say": { "speaker": "halvard", "line": "I hold this gate for the Keeper. Turn back, or I will hold it against you." } },
+              { "cameraHint": "gate" } ] },
+    { "id": "halvard_wardens", "when": { "round": 3 },
+      "do": [ { "say": { "speaker": "halvard", "line": "Wardens, to your posts. Forgive me, friends. The oath does not let me fight you alone." } },
+              { "spawn": { "unit": "skeleton", "at": "courtyard", "count": 2, "tag": "bone_wardens", "level": 9 } },
+              { "cameraHint": "courtyard" } ] },
+    { "id": "halvard_gate", "when": { "unitEntersZone": { "tag": "party", "zone": "gate", "count": 1 } },
+      "do": [ { "say": { "speaker": "halvard", "line": "So, you have reached the gate. No one has stood beneath it in a hundred years." } } ] },
+    { "id": "halvard_resolve", "when": { "hpBelow": { "tag": "halvard", "percent": 50 } },
+      "do": [ { "say": { "speaker": "halvard", "line": "You fight with honour. I am sorry. I am not permitted to lose." } },
+              { "phase": { "tag": "halvard", "number": 1 } } ] }
+  ] }

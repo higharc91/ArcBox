@@ -5,6 +5,15 @@
   "data": {
     "encounters": [
       {
+        "id": "ford_assault",
+        "name": "Storming the Ford",
+        "level": 1,
+        "min": 4,
+        "max": 6,
+        "fits": true,
+        "companions": 0
+      },
+      {
         "id": "river_crossing",
         "name": "River Crossing",
         "level": 1,
@@ -44,6 +53,33 @@
         "id": "crystal_cave",
         "name": "Crystal Cave",
         "level": 7,
+        "min": 4,
+        "max": 6,
+        "fits": true,
+        "companions": 0
+      },
+      {
+        "id": "rime_tower",
+        "name": "Rime Tower",
+        "level": 7,
+        "min": 4,
+        "max": 6,
+        "fits": true,
+        "companions": 0
+      },
+      {
+        "id": "keep_gate",
+        "name": "The Broken Gate",
+        "level": 9,
+        "min": 4,
+        "max": 6,
+        "fits": true,
+        "companions": 0
+      },
+      {
+        "id": "hall_of_the_flame",
+        "name": "The Hall of the Flame",
+        "level": 10,
         "min": 4,
         "max": 6,
         "fits": true,

@@ -910,3 +910,39 @@ dotnet run -c Release --project games/Tactics/Tactics.Sim -- \
   - 6: cleric, cleric, rogue, rogue, sorcerer, wizard
   - 6: druid, fighter, monk, warlock, wizard, wizard
   - 6: druid, paladin, ranger, rogue, sorcerer, sorcerer
+
+## Addendum (2026-10-31): Wardenflame story battles
+
+Four story encounters with named villains, the Vorga swap in `warlord_bridge`, and Kindled cultists in `forest_ruins`. Content only: no `Tactics.Logic` or `Tactics.Sim` changes, and no existing monster or ability changed.
+
+**Sweep:** each encounter at its own level only, sizes 4, 5 and 6, 6 parties per size, 20 seeds, Normal, round cap 30. That is 360 battles per row, with the same party generator as the main sweep:
+
+```
+dotnet run -c Release --project games/Tactics/Tactics.Sim -- --encounters <id> --levels <level> \
+  --sizes 4,5,6 --parties 6 --seeds 20 --difficulty Normal --round-cap 30
+```
+
+| Encounter | Level | Win rate | By size 4 / 5 / 6 | Mean rounds | Median rounds | Capped | Downs / Outs per battle |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| ford_assault | 1 | 83.3% | 64.2 / 90.8 / 95.0% | 8.4 | 8.0 | 3 | 3.4 / 1.1 |
+| forest_ruins (with cultists) | 3 | 88.1% | 69.2 / 95.0 / 100% | 10.6 | 10.0 | 4 | 1.4 / 0.5 |
+| forest_ruins (before, same sweep) | 3 | 88.9% | 71.7 / 95.0 / 100% | 9.8 | 9.0 | 0 | 1.4 / 0.6 |
+| rime_tower | 7 | 92.8% | 78.3 / 100 / 100% | 11.3 | 10.5 | 1 | 1.0 / 0.4 |
+| keep_gate | 9 | 87.5% | 71.7 / 91.7 / 99.2% | 10.2 | 10.0 | 0 | 1.7 / 0.9 |
+| hall_of_the_flame | 10 | 67.2% | 40.8 / 76.7 / 84.2% | 8.4 | 9.0 | 0 | 1.8 / 0.9 |
+| warlord_bridge (Vorga) | 5 | 89.7% | 79.2 / 90.0 / 100% | 10.9 | 12.0 | 0 | identical to `goblin_boss` |
+
+Every encounter is inside the 60–95% band at its level, and every median is inside 8–12 rounds. Like the sample encounters, they don't scale with party size, so parties of 4 sit 13–35 points below the overall rate. The finale is the hardest on purpose. Parties of 4 win 41% there, which is below the band if you count them alone.
+
+**Tuning rounds.** First pass at 6 seeds: ford 86.1% (median 7, short), rime 99.1%, keep 93.5%, hall 46.3%, where most losses came from the 12-round ritual clock rather than wipes. The changes:
+- Mother Skarrow 34 → 44 HP, for length.
+- Ivo 95 → 140 HP, AC 14 → 15, Rime Grasp 3d6 → 4d6.
+- Halvard 240 → 280 HP.
+- Maren 170 → 105 HP, in three steps (130, 115, 105).
+- Halvard's taunt (`taunted`) was never used by the AI, so it became Warden's Judgement, a weapon strike with a push and prone. The AI uses it about 1.5 times a battle. keep_gate went from 88.6% to 87.5%.
+
+**forest_ruins.** Two of the four bandits became `cultist`s (the Kindled cell), and the other two stay as hired swords, so the encounter still has 7 units. Two other mixes failed. 2 bandits and 3 cultists won 84.2% but ran long (mean 12.3, LONG). 3 bandits and 2 cultists won 81.9% at a mean of 11.8. The cultists' ranged Dark Bolt and caster caution keep them at the back. The kept mix adds about one round, and 4 of 360 battles reach the round cap. The baseline here (88.9%) is 2 points above the main table's 86.9%: this is the current content, measured in the same run.
+
+**Caveat: the companion AI in the finale.** Played by the `companion` profile, which absent players' characters use, a level-10 party of 5 won the finale only 1 time in 10 seeds. That profile is more cautious (0.6), and it runs into the 12-round ritual clock. The other new encounters went 8 to 10 out of 10 with that profile. The Sim's role profiles are the yardstick, as in the main report. If absent players matter in the finale, the ritual clock (`survive:12` in `lose`) is the lever.
+
+**Golden replays.** `UPDATE_GOLDENS=1` rewrote all six golden files byte-for-byte identical. A step-by-step check replayed `warlord-bridge`'s 352 commands under the pack before and after, comparing the full state JSON and the events after every command. The events were identical at all 353 steps, and so was the outcome: Won in round 12. Two state fields differ: `units.warlord.sheet.name` (Goblin Boss → Vorga) and `contentHash`, which is the pack's hash and changes with any content edit. The AI also records identical command lists under both packs for seeds 3, 11 and 15. The warlord_bridge sweep's report is identical too.
