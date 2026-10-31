@@ -1,0 +1,13 @@
+{
+  "about": "Casting for the player voice sets' pre-rendered barks. Each set has two casts, so a player can pick a lower or a higher voice for the same personality. Presets are Gemini TTS / Chirp3-HD voice names, the same ones the server's live TTS uses (en-US-Chirp3-HD-<preset>), so a line with no clip can be spoken live in the same voice.",
+  "model": "model_google-gemini-3-8-flash-tts",
+  "language": "en-US",
+  "sets": {
+    "grim":      { "low": "Algenib",       "high": "Gacrux" },
+    "earnest":   { "low": "Achird",        "high": "Leda" },
+    "scholarly": { "low": "Sadaltager",    "high": "Erinome" },
+    "fierce":    { "low": "Fenrir",        "high": "Pulcherrima" },
+    "wry":       { "low": "Zubenelgenubi", "high": "Despina" },
+    "steady":    { "low": "Alnilam",       "high": "Kore" }
+  }
+}
