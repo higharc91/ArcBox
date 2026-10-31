@@ -201,3 +201,6 @@ body:has(.screen.wf-lobby) { background: #07080f; }
 .wf-lobby .pick-row b { font: 800 20px var(--wf-serif); }
 .wf-lobby .pick-row[aria-pressed="true"] { border-color: var(--wf-gold); background: rgba(230, 189, 92, 0.12); }
 .wf-lobby .pick-row .tag { border-radius: 4px; }
+
+/* The way back to the ArcBox game list, under the start button on Wardenflame's own step. */
+.wf-lobby .back-to-games { display: block; margin: 14px auto 0; min-height: 44px; font-family: var(--wf-serif); letter-spacing: 0.08em; opacity: 0.85; }

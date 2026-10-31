@@ -110,7 +110,7 @@ describe("lobby theme: a themed game", () => {
     registerModuleForTests("quest", themed);
     const { container } = render(<Lobby lobby={lobbyFor("quest")} me="p1" {...lobbyProps} />);
     const root = container.firstElementChild!;
-    expect(root.className).toBe("screen lobby quest-theme");
+    expect(root.className).toBe("screen lobby game-step quest-theme");
     expect(root.querySelector(".test-backdrop")?.getAttribute("data-screen")).toBe("lobby");
     expect(root.querySelector(".test-banner")?.textContent).toBe("QUEST");
     expect([...root.querySelectorAll(".badge.chip")].map((b) => b.textContent)).toEqual(["Jess", "Dave"]);
@@ -119,6 +119,30 @@ describe("lobby theme: a themed game", () => {
     // Wording the theme leaves out keeps the default, and no control is lost.
     expect(container.textContent).toContain(DEFAULT_LOBBY_TEXT.newCampaign);
     expect(container.querySelector("button.start")).not.toBeNull();
+  });
+
+  it("is a step of its own: the ArcBox game list is not on it, and the VIP can step back to the plain lobby", () => {
+    registerModuleForTests("quest", themed);
+    const { container } = render(<Lobby lobby={lobbyFor("quest")} me="p1" {...lobbyProps} />);
+    expect(container.firstElementChild!.className).toBe("screen lobby game-step quest-theme");
+    expect(container.querySelector(".game-card")).toBeNull();
+    const back = [...container.querySelectorAll("button")].find((b) => b.textContent === "Choose another game")!;
+    act(() => back.click());
+    // The ArcBox lobby itself is never themed: no class, backdrop, banner or badges, and the games are back.
+    expect(container.firstElementChild!.className).toBe("screen lobby");
+    expect(container.querySelector(".test-backdrop, .test-banner, .badge")).toBeNull();
+    expect(container.querySelectorAll(".game-card")).toHaveLength(2);
+    // Picking the same game again returns to its step.
+    const quest = [...container.querySelectorAll(".game-card")].find((b) => b.textContent?.includes("Quest")) as HTMLButtonElement;
+    act(() => quest.click());
+    expect(container.firstElementChild!.className).toBe("screen lobby game-step quest-theme");
+  });
+
+  it("offers no way back to players who aren't the VIP", () => {
+    registerModuleForTests("quest", themed);
+    const { container } = render(<Lobby lobby={lobbyFor("quest")} me="p2" {...lobbyProps} />);
+    expect(container.textContent).not.toContain("Choose another game");
+    expect(container.textContent).toContain("Waiting for Jess to start");
   });
 
   it("switches back to the default look when the room picks another game", () => {
@@ -135,7 +159,7 @@ describe("lobby theme: a themed game", () => {
     const { container } = render(<Lobby lobby={lobbyFor("quest")} me="p1" {...lobbyProps} />);
     expect(container.firstElementChild!.className).toBe("screen lobby");
     await act(() => registerModuleForTests("quest", themed));
-    expect(container.firstElementChild!.className).toBe("screen lobby quest-theme");
+    expect(container.firstElementChild!.className).toBe("screen lobby game-step quest-theme");
   });
 
   it("themes 'Who are you?' by the room's game, with a badge on each seat tile", () => {
