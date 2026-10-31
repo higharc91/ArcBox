@@ -790,6 +790,11 @@
       "preset": "Despina",
       "text": "The Court is patient. The Court has nothing but patience."
     },
+    "Despina.842e0f80": {
+      "asset": "asset_xr5UhZMGS7bJmUb3uYhVjc66",
+      "preset": "Despina",
+      "text": "Your fires are so small out here. I like them. They don't pretend."
+    },
     "Despina.85ba4b60": {
       "asset": "asset_6avZ51pvgQZLHTmrq9Gk3zYF",
       "preset": "Despina",
@@ -834,6 +839,71 @@
       "asset": "asset_BvnUfkPN9KoMocaqxHJikCFA",
       "preset": "Despina",
       "text": "No, no, no. Not you. Not today."
+    },
+    "Enceladus.22a6e522": {
+      "asset": "asset_zraiVeKusjwT36BqufKUvucg",
+      "preset": "Enceladus",
+      "text": "There. Clean. You'll want that bound."
+    },
+    "Enceladus.293676f6": {
+      "asset": "asset_3EiAWGqLx84kMznPuyVjs5X3",
+      "preset": "Enceladus",
+      "text": "Not yet. I haven't finished."
+    },
+    "Enceladus.31f6ba1f": {
+      "asset": "asset_rsjQM6vKrLtdyTzfw3NzXYuL",
+      "preset": "Enceladus",
+      "text": "Hm. You're quicker than you look."
+    },
+    "Enceladus.59b77082": {
+      "asset": "asset_m8RfzDmaDSBzYRNxZGRsRyhu",
+      "preset": "Enceladus",
+      "text": "I'm fine. Physicians are the worst patients."
+    },
+    "Enceladus.789a463a": {
+      "asset": "asset_nDkeGo887PsPAz9J4RqFpzNu",
+      "preset": "Enceladus",
+      "text": "Please don't make me do this. I've so little time left for anything else."
+    },
+    "Enceladus.87f4d0a4": {
+      "asset": "asset_H2m1i55Kc4mZxQNp5xWTGXCS",
+      "preset": "Enceladus",
+      "text": "Go down the mountain. Get warm. Forget you came here."
+    },
+    "Enceladus.8e427416": {
+      "asset": "asset_q1uy27ynp7WsS9NNaehmXgA6",
+      "preset": "Enceladus",
+      "text": "Hold still. It's worse if you move."
+    },
+    "Enceladus.92ff92f0": {
+      "asset": "asset_dM1x154szuoozBtodDKQTxxx",
+      "preset": "Enceladus",
+      "text": "Just under the ribs. I always did know where to cut."
+    },
+    "Enceladus.93bac4b3": {
+      "asset": "asset_2PQJ9UVEFiQEu7Dx887f2Bjc",
+      "preset": "Enceladus",
+      "text": "Time of death. No. I don't keep count any more."
+    },
+    "Enceladus.9761cf82": {
+      "asset": "asset_SSonDuJyZYeMWt4VtRFg5vHV",
+      "preset": "Enceladus",
+      "text": "I'm sorry. You're standing between me and the only thing I have left."
+    },
+    "Enceladus.bd258562": {
+      "asset": "asset_iZ2FC5H6qxV91U5sRzwQPPxc",
+      "preset": "Enceladus",
+      "text": "Wait. Please. My notes. Don't burn my notes."
+    },
+    "Enceladus.db2579af": {
+      "asset": "asset_kabE2PnEBuGhCXDKQW5MGGF6",
+      "preset": "Enceladus",
+      "text": "They don't feel it. I checked. I checked so carefully."
+    },
+    "Enceladus.e8cddb2a": {
+      "asset": "asset_p2jtgR14WqtrehrN92Wpat8Y",
+      "preset": "Enceladus",
+      "text": "Breathe slowly. This will be over soon."
     },
     "Erinome.0a651bb5": {
       "asset": "asset_hHg3Aocin7Z8ZvRZc2frbjEu",
@@ -1529,6 +1599,76 @@
       "asset": "asset_j9D7cJfPordpZYFbJEDMimDL",
       "preset": "Sadaltager",
       "text": "I'll be writing this up."
+    },
+    "Sulafat.09c96d59": {
+      "asset": "asset_ML9FrkeRQgMyKNGqtsvtVsYv",
+      "preset": "Sulafat",
+      "text": "I don't want to hurt you. I want you warm. Both can be true today."
+    },
+    "Sulafat.45e0c7b6": {
+      "asset": "asset_9WudFN8wTd6DEjYfRg4MQhxw",
+      "preset": "Sulafat",
+      "text": "Rest now. When you wake, it will be warm."
+    },
+    "Sulafat.52b79d99": {
+      "asset": "asset_TqJAdZsmhCrpFu5CVea953xw",
+      "preset": "Sulafat",
+      "text": "I'll remember you kindly. I remember everyone kindly."
+    },
+    "Sulafat.54462050": {
+      "asset": "asset_MbfBRpAjkDjqBmMpfbvt7Nn3",
+      "preset": "Sulafat",
+      "text": "One hurt now, ten thousand spared. I've done the sums."
+    },
+    "Sulafat.71b02bf9": {
+      "asset": "asset_ZtAEv5yALtqg3HkfqXYQ1sKC",
+      "preset": "Sulafat",
+      "text": "Kindled, rise. The cold doesn't care if you're tired."
+    },
+    "Sulafat.7399eb5e": {
+      "asset": "asset_3gpNYjsJLFtEkFrUne6nYLWw",
+      "preset": "Sulafat",
+      "text": "Still standing. Good. There's still time to listen."
+    },
+    "Sulafat.85b97cd4": {
+      "asset": "asset_R1VqcUQVE4VqDyRK4LqgTMze",
+      "preset": "Sulafat",
+      "text": "I had a plan. I was the only one with a plan."
+    },
+    "Sulafat.9422c710": {
+      "asset": "asset_4gdRkxAqU8jVeZCMAZsueyAa",
+      "preset": "Sulafat",
+      "text": "Then who keeps them warm? Tell me that. Who?"
+    },
+    "Sulafat.965686b3": {
+      "asset": "asset_duiqALxHmTmdm7gvt9HvKAqM",
+      "preset": "Sulafat",
+      "text": "You've felt the cold. Stand with me, or stand aside."
+    },
+    "Sulafat.9fbc0f8b": {
+      "asset": "asset_ocpiBp8MGGuNVZdfiz9RXsKq",
+      "preset": "Sulafat",
+      "text": "I'm sorry. I'll carry that one too."
+    },
+    "Sulafat.a81e33f9": {
+      "asset": "asset_xWJtwBFBmm5vPjKkPvezTY7m",
+      "preset": "Sulafat",
+      "text": "Your warmth goes into the flame now. It won't be wasted."
+    },
+    "Sulafat.c472266b": {
+      "asset": "asset_dpGLLTUBT4e2SLBmnN8E3XkU",
+      "preset": "Sulafat",
+      "text": "Not yet. They're all counting on me."
+    },
+    "Sulafat.edc72231": {
+      "asset": "asset_zx61bfKkJuyi3MruFSBeN5vZ",
+      "preset": "Sulafat",
+      "text": "Every winter we argue, more children freeze. Let's not argue."
+    },
+    "Sulafat.fcf5927e": {
+      "asset": "asset_M2Ck6UpSjJnUhyPjyTwQJ78n",
+      "preset": "Sulafat",
+      "text": "I've felt worse. I remember being worse."
     },
     "Umbriel.00d2ed56": {
       "asset": "asset_UdzCbtXLwLHH3QNs4JNHXzQ6",
