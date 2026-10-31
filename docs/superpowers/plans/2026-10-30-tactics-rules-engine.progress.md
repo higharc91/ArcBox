@@ -15,7 +15,7 @@ When every task is done, one whole-branch review runs.
 
 **Handing off:** read [`2026-10-30-tactics-rules-engine.handoff.md`](2026-10-30-tactics-rules-engine.handoff.md) first. It has the workflow, the notes for each remaining task, every ruling, and the exact agent instructions.
 
-**Status:** Tasks 1–22 are done. Tasks 18–21 were done in a local session and Task 22 from a cloud session writing into the local checkout. Task 23 (balance pass) is implemented in `98b06c5`, and its review came back **Needs fixes**. **Fix round 1 is next:** start from [the Task 23 review](2026-10-30-tactics-rules-engine.task-23-review.md). So far the win-rate and battle-length targets are met, the 2% target is partly met, and the role-band target is not (52 of 60 values in band; see the [final report](../reports/2026-10-30-tactics-balance.md)). The whole-branch final review follows.
+**Status (2026-10-31):** every task is done, and so is the whole-branch final review (fix round 1 and the review fixes are on `ccr-18ad4510-q68nad`, stacked on this branch). The [final report](../reports/2026-10-30-tactics-balance.md) has the final sweep. One target is met: battle length. Three are partly met: the role bands (46 of 60 in band), the 2% usage target (29 of 55 situational) and the win rate (4 of 5 encounters; crystal_cave is 95.6%). **Waiting on the user:** the decisions listed under "Task 23 fix round 1 and the whole-branch review", then merging.
 
 **How to resume:**
 1. Find the first task below that isn't `done`.
@@ -280,6 +280,7 @@ Hunger of Hadar's ticks were halved to 1d6 + 1d6, and Wall of Fire's burn cut to
 2. **The dice that step down at levels 3 and 7** (monk, Eldritch Blast, bard heals): keep the level-1 floor, or smooth the dice and move another lever (attacks, beams, pools) with them.
 3. **Quickened from level 7.** It's affordable there, and the sampled loadouts are unchanged. The alternative is a cheaper Quickened from level 2, which the sweep would have to re-check.
 4. **Measuring the Striker band by damage per target** rather than total damage would let Fireball go back toward the SRD. That's a `Tactics.Sim` change.
+5. **The sorcerer's Cone of Cold at level 10.** It's +33% at the ladder's floor (3d6 over 49 tiles), and −29% as a 25-tile cone, because the AI stops valuing it. The options: accept it, drop it from the level-9 default picks, or measure the Striker band per target (item 4).
 
 ### Triage of the deferred table
 
