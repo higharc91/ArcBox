@@ -6,6 +6,7 @@ using Tactics.Game;
 using Tactics.Logic;
 using Tactics.Presentation.Beats;
 using Tactics.Presentation.Board;
+using Tactics.Presentation.Hud;
 
 namespace Tactics.Presentation.Tests;
 
@@ -100,6 +101,26 @@ public sealed class HostViewContractTests
         Assert.StartsWith("Results · ", over.Meta);
         Assert.Equal(2, over.Rows.Length);
         Assert.All(over.Rows, r => Assert.EndsWith(" XP", r.Value));
+    }
+
+    [Fact]
+    public void The_warlords_objectives_reach_the_tv_and_read_as_the_encounter_says()
+    {
+        var rules = Pack.Value;
+        ProfileId?[] profiles = [new ProfileId("pr_ana"), new ProfileId("pr_bo"), new ProfileId("pr_cy"), new ProfileId("pr_di")];
+        string[] classes = ["fighter", "cleric", "wizard", "rogue"];
+        var game = new TacticsGame(rules);
+        var h = new GameHarness<TacticsGame>(game, playerCount: 4, seed: 3, profiles: profiles);
+        var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", profiles[0]!.Value,
+            [.. profiles.Select((p, i) => new CampaignMember(p!.Value, $"Player{i + 1}", CampaignRole.Player, DateTimeOffset.UnixEpoch))], 1);
+        h.StartCampaign(new FakeCampaignLease(info, new TacticsCampaignRules(rules).NewDocument(info)));
+        for (var i = 0; i < classes.Length; i++)
+            h.Input(i, new { action = "pickClass", data = new { @class = classes[i] } });
+        h.Input(0, new { action = "pickEncounter", data = new { encounter = "warlord_bridge" } });
+
+        var battle = OverTheWire(game).Battle!;
+
+        Assert.Equal("Defeat the warlord, or survive 11 rounds", BattleHud.Of(battle, battle, "", null, null).Objective);
     }
 
     /// <summary>

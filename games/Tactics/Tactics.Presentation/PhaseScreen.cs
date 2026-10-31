@@ -114,6 +114,8 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
     // A first look at what a fight does to its units is worth a screenshot.
     private static string ShotMoment(BattleView battle)
     {
+        if (battle.Reacting is not null)
+            return "-reaction";
         if (battle.Units.Any(u => u.Life == "Downed"))
             return "-downed";
         return battle.Units.Any(u => u.Life == "Up" && !u.Conditions.IsEmpty) ? "-conditions" : "";

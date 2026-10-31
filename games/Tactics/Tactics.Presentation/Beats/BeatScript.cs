@@ -91,6 +91,9 @@ public static class BeatTiming
     /// <summary>The last beat of a battle, before Results replaces it.</summary>
     public const double Finale = 0.9;
 
+    /// <summary>The least the "AI finished" badge stays up: a timed-out turn can be a single end of turn, over in a moment.</summary>
+    public const double AiFinished = 1.5;
+
     /// <summary>The shortest a beat can be.</summary>
     public const double Least = 0.12;
 

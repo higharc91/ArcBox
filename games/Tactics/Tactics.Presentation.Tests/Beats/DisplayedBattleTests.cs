@@ -190,4 +190,14 @@ public sealed class DisplayedBattleTests
 
         Assert.True(DisplayedBattle.SameBoard(one, two));
     }
+
+    [Fact]
+    public void A_changed_objective_shows_when_its_event_plays()
+    {
+        var next = new ObjectivesDef(ObjectiveExpr.Of("survive:3"), ObjectiveExpr.Of("party_out"));
+
+        var after = DisplayedBattle.Apply(View(), new ObjectiveChanged(next), View());
+
+        Assert.Same(next, after.Objectives);
+    }
 }

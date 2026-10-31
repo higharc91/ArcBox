@@ -29,6 +29,22 @@ public sealed class UnitArtTests
         => Assert.Equal(column, Art.Value.Sprite("beasts.wolf.grey")!.Anim(key).Frames[0]);
 
     [Fact]
+    public void A_dodge_on_a_sheet_with_none_stands_still_rather_than_swinging()
+    {
+        var wolf = Art.Value.Sprite("beasts.wolf.grey")!;
+
+        Assert.Same(wolf.Idle, wolf.Anim("dodge"));
+    }
+
+    [Fact]
+    public void A_special_on_a_sheet_with_none_is_its_cast()
+    {
+        var goblin = Art.Value.Sprite("characters.goblin_cutthroat")!;
+
+        Assert.Same(goblin.Anim("cast"), goblin.Anim("special"));
+    }
+
+    [Fact]
     public void The_stand_in_is_the_same_figure_each_time_without_reading_the_disk_again()
         => Assert.Same(Art.Value.StandIn(UnitTone.Enemy), Art.Value.StandIn(UnitTone.Enemy));
 

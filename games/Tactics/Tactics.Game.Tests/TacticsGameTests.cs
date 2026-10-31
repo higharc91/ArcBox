@@ -273,6 +273,57 @@ public sealed class TacticsGameTests
     }
 
     [Fact]
+    public void The_tv_is_told_who_a_waiting_reaction_belongs_to_while_it_waits()
+    {
+        var s = new Session(seed: 3);
+        s.ToBattle();
+        Assert.Null(s.Host.Battle!.Reacting);
+        for (var step = 0; step < 5_000; step++)
+        {
+            for (var p = 0; p < 4; p++)
+            {
+                if (s.Screen(p) is { Screen: TacticsGame.Screens.React })
+                {
+                    var host = s.Host;
+                    var reactor = ((ReactionOffer)s.Game.Document.Battle!.State.Pending!).Reactor;
+                    Assert.Equal(reactor, host.Battle!.Reacting);
+                    Assert.EndsWith(" can react", host.Banner);
+                    s.Harness.Advance(TimeSpan.FromSeconds(11));
+                    Assert.NotEqual(reactor, s.Host.Battle?.Reacting);
+                    return;
+                }
+                if (s.Screen(p) is { Screen: TacticsGame.Screens.Turn })
+                    s.Send(p, "endTurn");
+            }
+            s.Harness.Advance(TimeSpan.FromSeconds(7));
+        }
+        Assert.Fail("No reaction was offered to a player.");
+    }
+
+    [Fact]
+    public void A_prompt_whose_player_leaves_is_not_a_prompt_any_more()
+    {
+        var s = new Session(seed: 3);
+        s.ToBattle();
+        for (var step = 0; step < 5_000; step++)
+        {
+            for (var p = 0; p < 4; p++)
+            {
+                if (s.Screen(p) is { Screen: TacticsGame.Screens.React })
+                {
+                    s.Harness.SetConnected(p, false);
+                    Assert.Null(s.Host.Battle?.Reacting);
+                    return;
+                }
+                if (s.Screen(p) is { Screen: TacticsGame.Screens.Turn })
+                    s.Send(p, "endTurn");
+            }
+            s.Harness.Advance(TimeSpan.FromSeconds(7));
+        }
+        Assert.Fail("No reaction was offered to a player.");
+    }
+
+    [Fact]
     public void Malformed_input_from_a_phone_is_ignored_not_fatal()
     {
         var s = new Session();

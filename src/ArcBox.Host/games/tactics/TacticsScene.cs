@@ -10,6 +10,7 @@ using Tactics.Logic;
 using Tactics.Presentation;
 using Tactics.Presentation.Beats;
 using Tactics.Presentation.Board;
+using Tactics.Presentation.Hud;
 
 namespace ArcBox.Host.Games.Tactics;
 
@@ -19,6 +20,7 @@ namespace ArcBox.Host.Games.Tactics;
 /// here comes from <c>Tactics.Presentation</c>; this class only draws it.
 /// <para>
 /// In battle, what's drawn is <see cref="BeatPlayer.Shown"/>, never the view: the view is already past the beat on screen.
+/// That goes for the HUD too (<see cref="HudLayer"/>), but for a reaction prompt that's waiting.
 /// Each beat that finishes sends <c>shown</c>. That only ever shortens the game's wait, so nothing here can hold the game up.
 /// </para>
 /// </summary>
@@ -42,9 +44,9 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private Control _header = null!;
     private Control _table = null!;
     private BoardCanvas _board = null!;
-    private Control _battleHead = null!;
-    private Label _battleMeta = null!;
-    private Label _battleTitle = null!;
+    private HudLayer? _hud;
+    private BattleHud? _said;
+    private string _banner = "";
     private ArtIndex? _art;
     private UnitArt? _unitArt;
     private BattleMap? _map;
@@ -96,13 +98,6 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         AddChild(_board);
         MoveChild(_board, 1);   // over the background, under the column
 
-        _battleMeta = ArcTheme.Meta("Battle", 16);
-        _battleTitle = ArcTheme.Label("", ArcTheme.Bold, 30);
-        _battleHead = ArcTheme.Panel(ArcTheme.GlassBox(ArcTheme.Red, 20, 8), ArcTheme.VBox(0, _battleMeta, _battleTitle));
-        _battleHead.SizeFlagsHorizontal = SizeFlags.ShrinkBegin;
-        _battleHead.Visible = false;
-        column.AddChild(_battleHead);
-
         _noticeText = ArcTheme.Label("", ArcTheme.SemiBold, 28, ArcTheme.Gold);
         _notice = ArcTheme.Panel(ArcTheme.GlassBox(ArcTheme.Gold, 28, 10), _noticeText);
         _notice.Visible = false;
@@ -137,6 +132,32 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             return;
         }
 
+        try
+        {
+            Step(delta);
+        }
+        catch (Exception ex)    // whatever a beat threw: one bad beat must not stick the TV on it, with Results held behind it
+        {
+            var seq = _player.Skip();
+            GD.PushError($"Tactics board: dropped beat {seq?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "?"}: {ex.Message}");
+            if (seq is { } dropped)
+            {
+                _signal("shown", new { seq = dropped });
+            }
+        }
+        if (_held is { } held && _player.Idle)
+        {
+            _held = null;
+            Show(held);
+        }
+    }
+
+    private void Step(double delta)
+    {
+        if (_player is null)
+        {
+            return;
+        }
         var tick = _player.Tick(delta);
         if (tick.Started is { } started)
         {
@@ -159,11 +180,6 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         if (tick.BoardChanged || tick.Busy)
         {
             Redraw();
-        }
-        if (_held is { } held && _player.Idle)
-        {
-            _held = null;
-            Show(held);
         }
     }
 
@@ -226,13 +242,14 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _title.Text = screen.Title;
         _title.AddThemeColorOverride("font_color", Accent(screen.Tone, Colors.White));
         _level.Text = screen.PartyLevel.ToString();
-        _notice.Visible = screen.Notice is not null;
-        _noticeText.Text = screen.Notice ?? "";
         _empty.Visible = screen.Empty is not null;
         _empty.Text = screen.Empty ?? "";
         _rows.Visible = screen.Empty is null;
         ShowRows(screen);
         ShowBoard(screen);
+        _notice.Visible = screen.Notice is not null && !_board.Visible;
+        _noticeText.Text = screen.Notice ?? "";
+        _hud?.ShowNotice(screen.Notice);
 
         if (screen.Shot != _lastShot)
         {
@@ -244,6 +261,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     /// <summary>The board replaces the header and table in battle. If it can't be drawn, they stay, with the encounter's name.</summary>
     private void ShowBoard(PhaseScreen screen)
     {
+        _banner = screen.Title;
         var drawn = screen.Board is { } battle && DrawBoard(battle);
         if (!drawn)
         {
@@ -251,11 +269,12 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _caption.Visible = false;
         }
         _board.Visible = drawn;
-        _battleHead.Visible = drawn;
+        if (_hud is not null)
+        {
+            _hud.Visible = drawn;
+        }
         _header.Visible = !drawn;
         _table.Visible = !drawn;
-        _battleMeta.Text = screen.Meta.ToUpperInvariant();
-        _battleTitle.Text = screen.Title;
     }
 
     private bool DrawBoard(BattleView battle)
@@ -270,6 +289,12 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _unitArt ??= UnitArt.Load(root);
             _fx ??= FxArt.Load(root);
             _player ??= new BeatPlayer(_fx, _unitArt);
+            if (_hud is null)
+            {
+                _hud = new HudLayer(root, HudArt.Load(root, _unitArt));
+                AddChild(_hud);
+                MoveChild(_hud, _caption.GetIndex());   // over the board and under the caption
+            }
             if (_map?.Id != battle.Map)
             {
                 _map = BoardMap.Parse(File.ReadAllText(Path.Combine(root, "rules", "maps", $"{battle.Map}.json")));
@@ -307,8 +332,11 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _board.SetPlan(BoardPlan.Build(_terrain, _art), fit, root);
         }
         var frame = _player.Frame(_terrain);
-        _board.SetUnits(UnitPlan.Build(shown, _terrain, _unitArt, fit, frame.Places, frame.Poses), _unitArt);
+        var units = UnitPlan.Build(shown, _terrain, _unitArt, fit, frame.Places, frame.Poses);
+        _board.SetUnits(units, _unitArt);
         _board.SetEffects(frame.Draws, frame.Shake);
+        _said = BattleHud.Of(shown, _player.Live ?? shown, _banner, _said, _player.AiFinished);
+        _hud?.Show(_said, units, fit, _player.AiFinished);
     }
 
     private void ShowRows(PhaseScreen screen)

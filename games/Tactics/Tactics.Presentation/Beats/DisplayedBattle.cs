@@ -48,6 +48,7 @@ public static class DisplayedBattle
         ZoneCreated zone => WithBoard(shown, b => b with { Zones = b.Zones.Add(new ZoneView(zone.Zone.Serial, zone.Zone.Kind, zone.Zone.Tiles)) }),
         ZoneEnded zone => WithBoard(shown, b => b with { Zones = b.Zones.RemoveAll(z => z.Serial == zone.Serial) }),
         TerrainAltered altered => WithBoard(shown, b => Altered(b, altered.Tiles, live.Board ?? BoardChanges.None)),
+        ObjectiveChanged changed => shown with { Objectives = changed.Objectives },
         _ => shown,
     };
 

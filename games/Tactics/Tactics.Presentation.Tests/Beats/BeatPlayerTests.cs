@@ -270,4 +270,158 @@ public sealed class BeatPlayerTests
         Run(player, 1);
         Assert.True(player.Idle);
     }
+
+    // A beat that can't be scripted, and one whose line throws when it's reached, part way through playing.
+    private static Beat Broken(int seq) => new(seq, Hero, [new Moved(Hero, [])]);
+
+    private static Beat BrokenLater(int seq) => new(seq, Hero, [new Said(Hero.Value, null!)]);
+
+    [Fact]
+    public void A_beat_that_breaks_while_playing_can_be_dropped_too()
+    {
+        var player = Player();
+        player.Receive(View(3, 10));
+        player.Receive(View(4, 10, BrokenLater(1), Walk(2, 3, 4)));
+
+        Assert.ThrowsAny<Exception>(() => Run(player, 1));
+
+        Assert.Equal(1, player.Skip());
+        Assert.Equal([2], Run(player, 1));
+    }
+
+    [Fact]
+    public void A_broken_beat_can_be_dropped_and_the_next_one_plays()
+    {
+        var player = Player();
+        player.Receive(View(3, 10));
+        player.Receive(View(4, 10, Broken(1), Walk(2, 3, 4)));
+
+        Assert.ThrowsAny<Exception>(() => Run(player, 1));
+
+        Assert.Equal(1, player.Skip());
+        Assert.Equal([2], Run(player, 1));
+    }
+
+    [Fact]
+    public void Dropping_the_last_beat_heals_to_the_view_and_redraws()
+    {
+        var player = Player();
+        player.Receive(View(3, 10));
+        player.Receive(View(4, 10, Broken(1)));
+        Assert.ThrowsAny<Exception>(() => Run(player, 1));
+
+        player.Skip();
+
+        Assert.True(player.Idle);
+        Assert.Equal(new Tile(4, 3), player.Shown!.Units[0].At);
+        Assert.True(player.Tick(Frame).Busy);
+        Assert.False(player.Tick(Frame).Busy);
+    }
+
+    [Fact]
+    public void Dropping_with_nothing_playing_drops_nothing()
+    {
+        var player = Player();
+        player.Receive(View(3, 10));
+
+        Assert.Null(player.Skip());
+    }
+
+    [Fact]
+    public void The_tick_that_clears_the_last_number_asks_for_a_redraw()
+    {
+        var player = Player();
+        player.Receive(View(3, 10));
+        player.Receive(View(3, 6, new Beat(1, null, [new Damaged(Foe, 4, null, 6)])));
+
+        // The number outlasts its beat, and nothing follows it. The last busy tick must be the one that left nothing to draw.
+        var drawsAfterLastBusy = -1;
+        for (var t = 0.0; t < 3; t += Frame)
+            if (player.Tick(Frame).Busy)
+                drawsAfterLastBusy = player.Frame(River).Draws.Length;
+
+        Assert.Equal(0, drawsAfterLastBusy);
+    }
+
+    [Fact]
+    public void A_beat_the_ai_finished_badges_its_unit_while_it_plays()
+    {
+        var player = Player();
+        player.Receive(View(3, 10));
+        player.Receive(View(4, 10, new Beat(1, Hero, [new Moved(Hero, [new Tile(3, 3), new Tile(4, 3)]) { AiFinished = true }])));
+
+        var tick = player.Tick(Frame);
+
+        Assert.Equal(Hero, player.AiFinished);
+        Assert.Contains(BeatPlayer.AiFinishedMoment, tick.Moments);
+    }
+
+    [Fact]
+    public void The_badge_lasts_long_enough_to_read_even_on_a_beat_that_is_only_an_end_of_turn()
+    {
+        var player = Player();
+        player.Receive(View(3, 10));
+        player.Receive(View(3, 10, new Beat(1, Hero, [new TurnEnded(Hero) { AiFinished = true }])));
+
+        Run(player, BeatTiming.AiFinished - 0.1);
+        Assert.Equal(Hero, player.AiFinished);
+
+        Run(player, 0.2);
+        Assert.Null(player.AiFinished);
+    }
+
+    [Fact]
+    public void The_tick_that_ends_the_badge_asks_for_a_redraw()
+    {
+        var player = Player();
+        player.Receive(View(3, 10));
+        player.Receive(View(3, 10, new Beat(1, Hero, [new TurnEnded(Hero) { AiFinished = true }])));
+
+        UnitId? atLastBusy = Hero;
+        for (var t = 0.0; t < 3; t += Frame)
+            if (player.Tick(Frame).Busy)
+                atLastBusy = player.AiFinished;
+
+        Assert.Null(atLastBusy);
+    }
+
+    [Fact]
+    public void A_normal_beat_has_no_badge()
+    {
+        var player = Player();
+        player.Receive(View(3, 10));
+        player.Receive(View(4, 10, Walk(1, 3, 4)));
+
+        var tick = player.Tick(Frame);
+
+        Assert.Null(player.AiFinished);
+        Assert.Empty(tick.Moments);
+    }
+
+    [Fact]
+    public void Reset_takes_the_badge_away()
+    {
+        var player = Player();
+        player.Receive(View(3, 10));
+        player.Receive(View(3, 10, new Beat(1, Hero, [new TurnEnded(Hero) { AiFinished = true }])));
+        player.Tick(Frame);
+
+        player.Reset();
+
+        Assert.Null(player.AiFinished);
+    }
+
+    [Fact]
+    public void The_live_view_can_be_read_while_the_shown_one_lags()
+    {
+        var player = Player();
+        player.Receive(View(3, 10));
+        var live = View(4, 10, Walk(1, 3, 4));
+        player.Receive(live);
+
+        player.Tick(Frame);
+
+        Assert.Same(live, player.Live);
+        Assert.NotSame(live, player.Shown);
+    }
 }

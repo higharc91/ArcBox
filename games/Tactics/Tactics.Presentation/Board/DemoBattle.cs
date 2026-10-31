@@ -9,7 +9,7 @@ namespace Tactics.Presentation.Board;
 /// looked at. <c>:changed</c> adds what a fight does to a map: zones, raised tiles (one on the back corner, burning, which
 /// must leave the board where it was) and the bridge's tiles sunk. <c>:fight</c> adds one of every kind of unit: a turn in
 /// progress, a Downed character, conditions, a summon, flyers, a boss wider than a tile, a sprite the pack doesn't have, and
-/// Out and Dead units, which aren't drawn.
+/// Out and Dead units, which aren't drawn, and on the HUD a long turn order and a reaction prompt.
 /// </summary>
 public static class DemoBattle
 {
@@ -31,6 +31,7 @@ public static class DemoBattle
         Unit("gone", "Party", "characters.class_monk", 2, 11, 0, 20, "Out"),
         Unit("goblin", "Enemy", "characters.goblin_cutthroat", 9, 5, 3, 7),
         Unit("scout", "Enemy", "characters.kobold", 5, 7, 5, 5),
+        Unit("lookout", "Enemy", "characters.kobold", 0, 0, 5, 5),
         Unit("spider", "Enemy", "beasts.spider.black", 9, 8, 6, 11, "Up", 0, "stunned"),
         Unit("archer", "Enemy", "characters.goblin_archer", 12, 3, 7, 7),
         Unit("wolf", "Enemy", "beasts.wolf.grey", 10, 6, 11, 11),
@@ -62,8 +63,9 @@ public static class DemoBattle
         var changed = spec.EndsWith(Changed, StringComparison.Ordinal);
         var fight = spec.EndsWith(Fight, StringComparison.Ordinal);
         var map = changed ? spec[..^Changed.Length] : fight ? spec[..^Fight.Length] : spec;
-        var battle = new BattleView(map, map, 2, [], fight ? new UnitId("fighter") : null, fight ? Units() : [], [], null,
-            changed ? Changes() : BoardChanges.None);
-        return new TacticsHostView("Battle", "Board demo", null, 1, [], null, battle, null, null);
+        var units = fight ? Units() : [];
+        var battle = new BattleView(map, map, 2, [.. units.Select(u => u.Id)], fight ? new UnitId("fighter") : null, units, [], null,
+            changed ? Changes() : BoardChanges.None, ObjectivesDef.Default, fight ? new UnitId("rogue") : null);
+        return new TacticsHostView("Battle", fight ? "rogue can react" : "Board demo", null, 1, [], null, battle, null, null);
     }
 }

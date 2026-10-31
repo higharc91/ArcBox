@@ -56,6 +56,9 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
     private const float ShakeSize = 2.5f;
     private const float BadgeScale = 1;
 
+    /// <summary>The moment, for <c>--shots</c>, that a beat the AI finished starts.</summary>
+    public const string AiFinishedMoment = "ai-finished";
+
     private readonly BeatQueue _queue = new();
     private readonly List<(Cue Cue, double Start)> _fading = [];
     private BattleView? _live;
@@ -65,12 +68,22 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
     private double _now;        // since the start
     private double _rest;
     private double _captionUntil;
+    private double _aiFinishedUntil;
+    private bool _dirty;
+    private bool _aiBegan;
+    private int? _opening;
 
     /// <summary>The battle as the player has seen it, or null before the first view.</summary>
     public BattleView? Shown { get; private set; }
 
     /// <summary>The line to show, while it's still being read.</summary>
     public SpokenLine? Caption { get; private set; }
+
+    /// <summary>The newest view, which runs ahead of <see cref="Shown"/>.</summary>
+    public BattleView? Live => _live;
+
+    /// <summary>The unit to badge: its turn timed out, or its player left, and the AI is finishing it on screen.</summary>
+    public UnitId? AiFinished { get; private set; }
 
     /// <summary>True when nothing's left to play.</summary>
     public bool Idle => _script is null && _queue.Count == 0;
@@ -94,7 +107,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
     {
         _queue.Clear();
         _fading.Clear();
-        (_script, _live, Shown, Caption, _rest) = (null, null, null, null, 0);
+        (_script, _live, Shown, Caption, _rest, AiFinished) = (null, null, null, null, 0, null);
     }
 
     /// <summary>Moves on by <paramref name="delta"/> seconds.</summary>
@@ -102,9 +115,14 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
     {
         var seconds = Math.Min(delta, LongestFrame);
         _now += seconds;
-        _fading.RemoveAll(f => _now >= f.Start + f.Cue.Length);
+        var faded = _fading.RemoveAll(f => _now >= f.Start + f.Cue.Length) > 0;
         if (Caption is not null && _now >= _captionUntil)
             Caption = null;
+
+        var redraw = _dirty || faded;     // whatever just went is still in the last frame drawn
+        _dirty = false;
+        if (AiFinished is not null && _now >= _aiFinishedUntil)
+            (AiFinished, redraw) = (null, true);
 
         var board = Shown?.Board;
         var shown = ImmutableArray<int>.Empty;
@@ -119,6 +137,9 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
         else if (Begin() is { } script)
         {
             started = script;
+            if (_aiBegan)
+                moments.Add(AiFinishedMoment);
+            _aiBegan = false;
         }
 
         if (_script is { } playing)
@@ -137,14 +158,18 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
         }
 
         return new BeatTick(shown, lines.ToImmutable(), moments.ToImmutable(), !DisplayedBattle.SameBoard(board, Shown?.Board),
-            _script is not null || _fading.Count > 0 || !shown.IsEmpty, started);
+            _script is not null || _fading.Count > 0 || !shown.IsEmpty || redraw || AiFinished is not null, started);
     }
 
     private BeatScript? Begin()
     {
         if (_script is not null || Shown is null || _live is null || _queue.Next() is not { } beat)
             return null;
+        _opening = beat.Seq;     // if working out its script throws, it's already off the queue
         (_script, _next, _clock) = (BeatScript.Of(beat, Shown, _live, fx), 0, 0);
+        _opening = null;
+        if (beat.Actor is { } actor && beat.Events.Any(e => e.AiFinished))
+            (AiFinished, _aiFinishedUntil, _aiBegan) = (actor, _now + Math.Max(_script.Length, BeatTiming.AiFinished), true);
         return _script;
     }
 
@@ -304,6 +329,19 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art)
             draws.Add(new FxDraw(UnitArt.NumbersPath, rect, new Vector2(pen, centre.Y - rect.Height / 2f + 1), new Vector2(rect.Width, rect.Height), 0, false, alpha));
             pen += advance;
         }
+    }
+
+    /// <summary>Drops the beat that's playing, for one that can't be played: returns its number, so it can still be reported, or null if none was.</summary>
+    public int? Skip()
+    {
+        var seq = _script?.Seq ?? _opening;
+        (_script, _opening) = (null, null);
+        _fading.Clear();
+        _rest = BeatTiming.Rest;
+        _dirty = true;
+        if (_queue.Count == 0 && _live is not null)
+            Shown = _live;
+        return seq;
     }
 
     private const float UnitReach = 28;     // about a figure's height: a number starts at its head

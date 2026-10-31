@@ -115,6 +115,28 @@ the time, so it can be found in the logs.
 - [ ] Remote player (optional): one player joins over a Discord screen share of the TV, with their own phone on the
       server's public address or a tunnel; nothing in the game rewards reaction speed.
 
+## Tactics battle on the TV
+
+Ticked boxes were proved on real battles with the TV and bots
+(`docs/superpowers/reports/2026-10-31-tactics-tv-scene/task-5-*.png`). Boxes marked **(person)** only a person can judge,
+so tick those on the night. To play alongside the bots, see "With your own phone" in `tools/tactics-playtest/bots.cjs`.
+
+- [x] **Turn order:** faces in order with the active unit first, bigger, with its NOW tab, and it moves on with each turn.
+- [x] **Round:** the round and whose turn it is follow the beat on screen, not the game ahead of it.
+- [x] **Falling out:** a unit that's Out or Dead leaves the strip; a Downed one stays, dimmed; a long order shows "+n".
+- [x] **AI badge:** a character whose player has gone shows the blue AI badge on the strip; enemies don't.
+- [x] **Objectives:** `warlord_bridge` reads "Defeat the warlord, or survive 11 rounds"; the other four read "Defeat every enemy".
+- [x] **AI finished:** a player sits out their turn; after 60 s the AI finishes it, with the "AI finished" badge over that unit.
+- [x] **Reaction prompt:** "<name> can react" comes up for as long as the phone shows the choice, and goes when it's answered.
+- [ ] **(person)** The strip, round and objective can be read from the sofa on the real TV, names under the faces included.
+- [ ] **(person)** The "AI finished" badge stays up long enough to notice, and isn't mistaken for the strip's AI badge.
+- [ ] **(person)** A reaction prompt is noticed by the room in its 10 s, and "Choosing on their phone" tells the others to wait.
+- [ ] **(person)** On a map with a raised back corner, a unit behind a panel can still be followed (the panel fades; a
+      prompt moves down the left side instead).
+- [ ] **(person)** The HUD feels part of the same picture as the board at 2560×1440, not laid over it.
+- [ ] **(person)** Join on a real phone over the LAN (`--people=1`): the QR opens the join page and the turn screen matches
+      the TV. Checked here only in a browser on the PC, not on a phone.
+
 ## After
 
 - [ ] Save the server console log and the Godot log (`%APPDATA%\Godot\app_userdata\ArcBox\logs`) if anything failed.

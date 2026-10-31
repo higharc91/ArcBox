@@ -172,6 +172,14 @@ public sealed class PhaseScreenTests
     }
 
     [Fact]
+    public void A_waiting_reaction_gets_a_shot_of_its_own()
+    {
+        var battle = Fight() with { Reacting = new UnitId("hero1") };
+
+        Assert.Equal("tactics-battle-river_crossing-reaction", PhaseScreen.Of(View("Battle", battle: battle)).Shot);
+    }
+
+    [Fact]
     public void A_battle_with_no_banner_falls_back_to_the_round()
     {
         Assert.Equal("Round 2", PhaseScreen.Of(View("Battle", "", battle: Fight())).Title);

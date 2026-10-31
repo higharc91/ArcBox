@@ -34,17 +34,20 @@ public sealed record UnitSprite(string Path, int Width, int Height, int AnchorX,
     private const string Special = "special";
     private const string Attack = "attack";
     private const string Cast = "cast";
+    private const string Dodge = "dodge";
 
     /// <summary>
     /// The animation for a manifest name or a presentation key (<c>walk</c>, <c>characters.cast</c>). The sets don't share
-    /// their lists, so what a sheet lacks falls back: a cast to its special, anything else to its attack, and then to idle.
+    /// their lists, so what a sheet lacks falls back: a cast to its special and a special to its cast (a boss on a character
+    /// sheet has no special, and gathering itself reads better than a swing at nobody), a dodge to standing still, which is
+    /// what a miss looks like, anything else to its attack, and then to idle.
     /// </summary>
     public UnitAnim Anim(string key)
     {
         var name = key[(key.LastIndexOf('.') + 1)..];
         return Anims.GetValueOrDefault(name)
-            ?? (name == Cast ? Anims.GetValueOrDefault(Special) : null)
-            ?? Anims.GetValueOrDefault(Attack)
+            ?? (name == Cast ? Anims.GetValueOrDefault(Special) : name == Special ? Anims.GetValueOrDefault(Cast) : null)
+            ?? (name == Dodge ? null : Anims.GetValueOrDefault(Attack))
             ?? Idle;
     }
 

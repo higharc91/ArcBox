@@ -165,7 +165,8 @@ public static class UnitPlan
     private static long OrderOf(Tile tile, UnitSprite sprite)
         => BoardOrder.Key(sprite.Width > BoardProjection.HalfWidth * 2 ? new Tile(tile.X + tile.Y, 0) : tile, BoardLayer.Unit);
 
-    private static UnitTone ToneOf(string side) => side switch
+    /// <summary>The tone for a view's side.</summary>
+    public static UnitTone ToneOf(string side) => side switch
     {
         "Party" => UnitTone.Party,
         "Enemy" => UnitTone.Enemy,

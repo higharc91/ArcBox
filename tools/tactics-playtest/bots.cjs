@@ -13,6 +13,11 @@
 //   --fight              attack anything in reach and walk toward the foes; without it the bots only end their turns
 //   --leave              once the battle is on, every bot disconnects, so the AI plays each hero: a whole battle with nobody
 //                        at a phone. It exits at that point; the TV runs on to Results, so give --quit-after room
+//   --sit-out=turn,react sit out what's named, so the game's timers run out as they do for a real player who's gone quiet: the
+//                        first bot to get a turn leaves it for the 60 s timer, and then the AI finishes it (the TV badges
+//                        that), and no reaction prompt is ever answered, so each one stays up for its 10 s
+//   --people=<n>         wait for n real phones to join and claim a seat before starting, so you can play alongside the bots:
+//                        tell the TV's room code to your phone, then choose a class on it (see "With your own phone" below)
 //   --then=end|next      after the results: end the session (default), or play the next battle, forever
 //   --timeout=<seconds>  give up after this long (default 900)
 //
@@ -30,6 +35,15 @@
 // GODOT is the Godot 4.7.2 .NET console exe (the console one, or there is no stdout to read ROOM from). Keep the --no-build:
 // a TV started while `dotnet run` was still building hung before its first line. A battle takes about 4 minutes, since
 // nothing sends `shown` yet, so give --quit-after room. Stop the server afterwards: it holds the port and locks its files.
+//
+// With your own phone: start the server on the LAN and the TV as above, with the PC's own address in both, so the QR works:
+//
+//   ... dotnet run --no-build --no-launch-profile --project src/ArcBox.Server --urls http://0.0.0.0:5080 &
+//   "$GODOT" --path src/ArcBox.Host -- --new-room --server=http://<pc-ip>:5080 --res=1920x1080 --quit-after=1200 > "$TEMP/tv.log" 2>&1 &
+//   node tools/tactics-playtest/bots.cjs --room-log="$TEMP/tv.log" --server=http://localhost:5080 --players=3 --people=1 --fight --hold=1
+//
+// Then open http://<pc-ip>:5080 on the phone, type the room code and your name, and choose "I'm new here" if it asks who you
+// are. The bots start the game once you're in, and pick the encounter once you've picked a class.
 //
 // The bots do the lobby themselves: the first to join is the VIP, who selects Tactics and makes a campaign, the others
 // claim seats in it, and the VIP starts. So the TV needs no --autostart. --autostart=tactics:<n> works too: it selects
@@ -53,6 +67,8 @@ const holdMs = Number(opt('hold', 3)) * 1000;
 const fight = opt('fight', false) === true;
 const leave = opt('leave', false) === true;
 const then = String(opt('then', 'end'));
+const sitOut = String(opt('sit-out', '')).split(',');
+const people = Number(opt('people', 0));
 const timeoutMs = Number(opt('timeout', 900)) * 1000;
 
 const NAMES = ['Ana', 'Bo', 'Cy', 'Dee', 'Eli', 'Fen'];
@@ -60,6 +76,8 @@ const CLASSES = ['fighter', 'cleric', 'rogue', 'wizard', 'paladin', 'ranger'];
 const TICK_MS = 250;
 /** A turn view that hasn't changed after this long is one the game refused: end the turn instead of waiting for its timer. */
 const STUCK_MS = 4000;
+/** Long enough for the game's 60 s turn timer to go off first. */
+const SIT_OUT_MS = 65000;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
@@ -164,8 +182,18 @@ class Bot {
         log(`${this.name} picks ${encounter}`);
         return this.input('pickEncounter', { encounter });
       case 'turn':
+        if (sitOut.includes('turn') && !state.satOutUntil) {
+          state.satOutUntil = Date.now() + SIT_OUT_MS;
+          log(`${this.name} sits out the turn: the timer will run out`);
+        }
+        if (Date.now() < (state.satOutUntil ?? 0)) return;
         return stuck ? this.input('endTurn') : this.turn();
       case 'react':
+        if (sitOut.includes('react')) {
+          if (state.reactionSeen !== view.viewId) log(`${this.name} sits out a reaction: ${view.data.trigger}`);
+          state.reactionSeen = view.viewId;
+          return;
+        }
         return this.input('react', { choice: 'pass' });
       case 'results':
         if (!view.data.vip) return;
@@ -189,6 +217,8 @@ class Bot {
   await until('Tactics selected', () => vip.lobby.selectedGameId === 'tactics');
   await vip.conn.invoke('CreateCampaign', `Bots ${Date.now() % 100000}`);
   for (const bot of rest) await bot.conn.invoke('ClaimMember', { member: null, profileKeys: [] });
+  if (people > 0) log(`Waiting for ${people} more to join room ${code}`);
+  await until(`${people} more to join`, () => vip.lobby.players.filter((p) => p.connected && p.profile).length >= players + people);
   await until('the room to be able to start', () => vip.lobby.canStart || vip.lobby.inGame);
   if (!vip.lobby.inGame) await vip.conn.invoke('StartGame').catch((e) => log(`Start: ${e.message}`));   // --autostart may have got there first
   await until('the game to start', () => vip.lobby.inGame);

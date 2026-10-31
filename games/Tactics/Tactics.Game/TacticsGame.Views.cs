@@ -86,8 +86,20 @@ public static class HostSprite
 }
 
 /// <summary>The battle as the TV draws it (adapter spec §8).</summary>
+/// <param name="Encounter">The encounter.</param>
+/// <param name="Map">The map.</param>
+/// <param name="Round">The round.</param>
+/// <param name="Order">This round's turn order.</param>
+/// <param name="Active">Whose turn it is.</param>
+/// <param name="Units">The units.</param>
+/// <param name="Beats">The last beats.</param>
+/// <param name="Outcome">How it ended, if it has.</param>
+/// <param name="Board">What it has done to the map.</param>
+/// <param name="Objectives">What wins and loses it, as they stand (<see cref="ObjectiveState.Current"/>).</param>
+/// <param name="Reacting">The unit whose player has a reaction prompt waiting on their phone. An AI's offer isn't a wait, so it isn't here.</param>
 public sealed record BattleView(string Encounter, string Map, int Round, ImmutableArray<UnitId> Order, UnitId? Active,
-    ImmutableArray<UnitView> Units, ImmutableArray<Beat> Beats, string? Outcome, BoardChanges? Board = null);
+    ImmutableArray<UnitView> Units, ImmutableArray<Beat> Beats, string? Outcome, BoardChanges? Board = null, ObjectivesDef? Objectives = null,
+    UnitId? Reacting = null);
 
 /// <summary>An encounter the VIP can pick, with how many AI companions would fill the party up to its minimum.</summary>
 public sealed record EncounterOption(string Id, string Name, int? Level, int Min, int Max, bool Fits, int Companions = 0);
@@ -239,7 +251,8 @@ public sealed partial class TacticsGame
         var state = save.State;
         return new BattleView(save.Encounter, state.MapId, state.Round, state.Order, state.Active,
             [.. state.Units.Values.Select(u => UnitViewOf(u) with { Sprite = HostSprite.Of(u.Sheet.Sprite, u.Sheet.Tags) })],
-            save.Log.IsDefault ? [] : save.Log, state.Outcome?.ToString(), BoardChanges.Of(state));
+            save.Log.IsDefault ? [] : save.Log, state.Outcome?.ToString(), BoardChanges.Of(state), state.Objectives.Current,
+            state.Pending is ReactionOffer offer && IsPlayed(offer.Reactor) ? offer.Reactor : null);
     }
 
     private UnitView UnitViewOf(UnitState u)
