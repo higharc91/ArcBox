@@ -1,10 +1,11 @@
 // A scripted ArcBox Tactics playtest in a real browser, through the dev page (docs/dev-playtest.md).
 //
-//   node tools/tactics-playtest/play.cjs [server] [shots-dir]
+//   node tools/tactics-playtest/play.cjs [server] [shots-dir] [--fight]
 //
 // Needs a running server with the phone app built (`npm run build` in web/play) and Playwright with Chromium
 // (`require('playwright')` must resolve). It creates a room on the dev page with four phones, makes a campaign through
-// the VIP's phone, picks classes and River Crossing, then plays: each player ends their turn and passes on reactions,
+// the VIP's phone, picks classes and River Crossing, then plays: each player ends their turn and passes on reactions
+// (with --fight: attacks a foe in reach through the ability and target screens, else walks toward the foes first),
 // while the dev page's board stands in for the TV (it sends "shown" after each beat). Screenshots of the key screens,
 // and of the board every ~10 s, go to the shots directory. Exits non-zero if the battle doesn't reach its results.
 const { chromium } = require('playwright');
@@ -12,6 +13,49 @@ const fs = require('fs');
 
 const server = process.argv[2] ?? 'http://localhost:5080';
 const out = process.argv[3] ?? 'tactics-shots';
+const fight = process.argv.includes('--fight');
+let attacks = 0;
+
+/** One player's turn the way a person would play it: attack if they can, else step toward the foes, then end. */
+async function playTurn(f) {
+  const attack = f.getByRole('button', { name: /^Attack/ });
+  if (await attack.count()) {
+    await attack.first().click({ timeout: 3000 });
+    const target = f.locator('.tx-targets button').first();
+    if (await target.count()) await target.click({ timeout: 3000 });
+    const use = f.getByRole('button', { name: /^Use/ });
+    if (await use.isEnabled().catch(() => false)) {
+      await use.click({ timeout: 3000 });
+      attacks++;
+      await f.waitForTimeout(600);
+      return;   // the next view comes back as a new turn screen (Move or End turn next loop)
+    }
+    await f.getByRole('button', { name: 'Back' }).click({ timeout: 3000 });
+  }
+  // Walk: the reachable tile nearest a foe, measured on the phone's own map grid.
+  const best = await f.evaluate(() => {
+    const at = [];
+    document.querySelectorAll('.tx-maprow').forEach((row, y) => row.querySelectorAll('.tx-cell').forEach((cell, x) => at.push({ cell, x, y })));
+    const foes = at.filter((c) => c.cell.classList.contains('foe'));
+    const reach = at.filter((c) => c.cell.classList.contains('reach'));
+    let pick = null, bestD = Infinity;
+    for (const r of reach)
+      for (const foe of foes) {
+        const d = Math.abs(r.x - foe.x) + Math.abs(r.y - foe.y);
+        if (d < bestD) { bestD = d; pick = r.cell.getAttribute('aria-label'); }
+      }
+    return pick;
+  });
+  if (best) {
+    await f.getByRole('button', { name: best, exact: true }).click({ timeout: 3000 });
+    const move = f.getByRole('button', { name: /^Move here/ });
+    if (await move.isEnabled().catch(() => false)) {
+      await move.click({ timeout: 3000 });
+      await f.waitForTimeout(600);
+    }
+  }
+  await f.getByRole('button', { name: 'End turn' }).click({ timeout: 3000 });
+}
 fs.mkdirSync(out, { recursive: true });
 
 (async () => {
@@ -61,7 +105,8 @@ fs.mkdirSync(out, { recursive: true });
       if (t.includes('End turn')) {
         if (!seen.has('turn')) { seen.add('turn'); await phoneShot(i, '04-turn'); }
         // The view can change under the tap (a new beat); the next loop tries again.
-        await f.getByRole('button', { name: 'End turn' }).click({ timeout: 3000 }).catch(() => {});
+        if (fight) await playTurn(f).catch(() => {});
+        else await f.getByRole('button', { name: 'End turn' }).click({ timeout: 3000 }).catch(() => {});
       } else if (t.includes("Don't react")) {
         if (!seen.has('react')) { seen.add('react'); await phoneShot(i, '05-react'); }
         await f.getByRole('button', { name: "Don't react" }).click({ timeout: 3000 }).catch(() => {});
@@ -72,7 +117,9 @@ fs.mkdirSync(out, { recursive: true });
   }
   await page.waitForTimeout(1500);
   await shot('08-results');
-  console.log(over ? `Results after ${Math.round((Date.now() - start) / 1000)} s.` : 'The battle never reached its results.');
+  const outcome = (await page.locator('.tx-board-banner b').innerText().catch(() => '')).trim();
+  console.log(over ? `${outcome} after ${Math.round((Date.now() - start) / 1000)} s; ${attacks} attacks from the phones.`
+    : 'The battle never reached its results.');
   await browser.close();
   process.exit(over ? 0 : 1);
 })();

@@ -1,6 +1,10 @@
 # ArcBox Tactics: first browser playtest (2026-10-31)
 
-The first end-to-end run of milestone 3a in a real browser: the dev page standing in for the TV, and four phones in iframes, driven by [`tools/tactics-playtest/play.cjs`](../../../tools/tactics-playtest/play.cjs). Each scripted player only ends their turn and passes on reactions, so the party loses. The point was to see every screen working together, not to play well.
+The first end-to-end run of milestone 3a in a real browser: the dev page standing in for the TV, and four phones in iframes, driven by [`tools/tactics-playtest/play.cjs`](../../../tools/tactics-playtest/play.cjs). There are two modes:
+- **The default:** each scripted player ends their turn and passes on reactions.
+- **`--fight`:** a player attacks a foe in reach through the ability and target screens, and otherwise walks to the reachable tile nearest a foe.
+
+Both lose with level-1 default characters played this simply. The point was to see every screen working together, not to play well.
 
 ## What worked
 
@@ -21,6 +25,14 @@ The first end-to-end run of milestone 3a in a real browser: the dev page standin
 
    The same battle now finishes in about 2 minutes.
 2. **A player's pass on a reaction read "P4 reacts: pass"** in the log. It now reads "P4 lets it go".
+
+## A fight from the phones
+
+In `--fight` mode the party crosses the river and fights. The phones' Attack → target → Use path kills goblins (below). A battle takes about 2 minutes.
+
+![](2026-10-31-tactics-playtest/board-melee.png)
+
+**Something for the AI tuning list:** against a party that hangs back, goblins with nobody in reach spend turn after turn on **Dodge** instead of closing in. In the simulator both sides advance, so this only shows against passive players. It's worth checking how `brute` and `skirmisher` value Dash and approach when no foe is reachable this turn.
 
 ## Still to look at, with real people
 
