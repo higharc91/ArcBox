@@ -3,8 +3,121 @@
   "events": {
     "battle_start": [
       {
-        "id": "bark_vorga_stub",
-        "text": "(to be written)"
+        "id": "bark_vorga_battle_start_1",
+        "text": "You want my bridge? Come and take it! Come on, I'll wait!",
+        "mood": "angry",
+        "direction": "shouting across the canyon, grinning",
+        "weight": 3
+      },
+      {
+        "id": "bark_vorga_battle_start_2",
+        "text": "Look at them! Fat valley folk, all this way just to bleed!",
+        "mood": "happy",
+        "direction": "playing to his warband",
+        "weight": 2
+      },
+      {
+        "id": "bark_vorga_battle_start_3",
+        "text": "Every child who starved in the hills is watching you. Make it a good show!",
+        "mood": "angry",
+        "direction": "the swagger cracks; real anger underneath"
+      },
+      {
+        "id": "bark_vorga_battle_start_4",
+        "text": "Host! Up, up! The valley's come visiting!",
+        "mood": "happy"
+      }
+    ],
+    "hit": [
+      {
+        "id": "bark_vorga_hit_1",
+        "text": "Ha! Feel that? That's three winters of hunger!",
+        "mood": "angry",
+        "weight": 2
+      },
+      {
+        "id": "bark_vorga_hit_2",
+        "text": "Again! Do it again, I dare you to stand up!",
+        "mood": "happy"
+      }
+    ],
+    "miss": [
+      {
+        "id": "bark_vorga_miss_1",
+        "text": "Lucky! Stay lucky, valley folk. It won't last!",
+        "mood": "angry"
+      }
+    ],
+    "crit": [
+      {
+        "id": "bark_vorga_crit_1",
+        "text": "That's for the little ones! Every single one!",
+        "mood": "angry",
+        "direction": "roaring",
+        "weight": 2
+      },
+      {
+        "id": "bark_vorga_crit_2",
+        "text": "Down you go! Down where we've been all along!",
+        "mood": "happy"
+      }
+    ],
+    "kill": [
+      {
+        "id": "bark_vorga_kill_1",
+        "text": "See? Taking works. Asking never fed anybody.",
+        "mood": "angry",
+        "direction": "flat, almost to himself, then loud again",
+        "weight": 2
+      }
+    ],
+    "ally_down": [
+      {
+        "id": "bark_vorga_ally_down_1",
+        "text": "Get up! Nobody lies down on my bridge!",
+        "mood": "angry"
+      }
+    ],
+    "low_hp": [
+      {
+        "id": "bark_vorga_low_hp_1",
+        "text": "Ha! Ha ha! Is that all? My grandmother hits harder!",
+        "mood": "happy",
+        "direction": "laughing through the pain",
+        "weight": 2
+      },
+      {
+        "id": "bark_vorga_low_hp_2",
+        "text": "You think blood scares me? I was born hungry!",
+        "mood": "hurt"
+      }
+    ],
+    "victory": [
+      {
+        "id": "bark_vorga_victory_1",
+        "text": "Go home and tell them! The bridge is Vorga's!",
+        "mood": "happy",
+        "weight": 2
+      },
+      {
+        "id": "bark_vorga_victory_2",
+        "text": "Run back to your mayor. Tell him to open his granaries, or we come for them.",
+        "mood": "angry"
+      }
+    ],
+    "defeat": [
+      {
+        "id": "bark_vorga_defeat_1",
+        "text": "Ha. Ha. Fine. You win the bridge. You don't win the winter.",
+        "mood": "hurt",
+        "direction": "laughing weakly, out of breath",
+        "weight": 2
+      },
+      {
+        "id": "bark_vorga_defeat_2",
+        "text": "Not like this. Not to them.",
+        "mood": "sad",
+        "direction": "quiet, the showman gone"
       }
     ]
   }

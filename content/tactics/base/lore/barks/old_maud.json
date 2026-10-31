@@ -1,10 +1,46 @@
 {
   "speaker": "old_maud",
   "events": {
-    "battle_start": [
+    "town": [
       {
-        "id": "bark_old_maud_stub",
-        "text": "(to be written)"
+        "id": "bark_old_maud_town_1",
+        "text": "Sit down, dearie. I've waited a hundred years, I can wait while you sit.",
+        "mood": "happy",
+        "direction": "ancient, papery, unhurried",
+        "weight": 3
+      },
+      {
+        "id": "bark_old_maud_town_2",
+        "text": "Warm hands and empty heads. Ask yourself why, dearie.",
+        "mood": "idle",
+        "weight": 2
+      },
+      {
+        "id": "bark_old_maud_town_3",
+        "text": "The river remembers. Ask it nicely and it might tell you.",
+        "mood": "idle"
+      },
+      {
+        "id": "bark_old_maud_town_4",
+        "text": "You've the right sort of face for questions. Ask me a better one.",
+        "mood": "happy"
+      },
+      {
+        "id": "bark_old_maud_town_5",
+        "text": "Oh, never get old, dearie. It's dreadful. Wouldn't miss it, mind.",
+        "mood": "happy",
+        "direction": "a cackle that turns into a cough"
+      },
+      {
+        "id": "bark_old_maud_town_6",
+        "text": "Mind the bank. It's softer than it was. Everything's softer than it was.",
+        "mood": "sad"
+      },
+      {
+        "id": "bark_old_maud_town_7",
+        "text": "Never touched a shard. Not once. That's why there's still all of me.",
+        "mood": "idle",
+        "direction": "perfectly lucid"
       }
     ]
   }

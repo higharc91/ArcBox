@@ -1,10 +1,46 @@
 {
   "speaker": "mother_aubrine",
   "events": {
-    "battle_start": [
+    "town": [
       {
-        "id": "bark_mother_aubrine_stub",
-        "text": "(to be written)"
+        "id": "bark_mother_aubrine_town_1",
+        "text": "The flame was given to us. We will be worthy of it, cold or warm.",
+        "mood": "idle",
+        "direction": "clear and measured; the pulpit voice",
+        "weight": 3
+      },
+      {
+        "id": "bark_mother_aubrine_town_2",
+        "text": "Come in out of the wind. There's soup at the back, and nobody counts the bowls.",
+        "mood": "happy",
+        "direction": "gentle, in private",
+        "weight": 2
+      },
+      {
+        "id": "bark_mother_aubrine_town_3",
+        "text": "Pray if you like. If you'd rather not, sit anyway. The chapel doesn't mind.",
+        "mood": "happy"
+      },
+      {
+        "id": "bark_mother_aubrine_town_4",
+        "text": "I buried two this week, old ones, cold in their beds. Pray it stays only the old.",
+        "mood": "sad"
+      },
+      {
+        "id": "bark_mother_aubrine_town_5",
+        "text": "Corvin says the records have holes in them. Corvin says a great many things.",
+        "mood": "idle",
+        "direction": "dry, fond despite herself"
+      },
+      {
+        "id": "bark_mother_aubrine_town_6",
+        "text": "Doubt is a draught under the door. Shut it, and keep the hearth.",
+        "mood": "idle"
+      },
+      {
+        "id": "bark_mother_aubrine_town_7",
+        "text": "Mind how you speak in the square. Fear spreads faster than fever.",
+        "mood": "angry"
       }
     ]
   }

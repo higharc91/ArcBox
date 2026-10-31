@@ -1,10 +1,50 @@
 {
   "speaker": "corvin_ashby",
   "events": {
-    "battle_start": [
+    "town": [
       {
-        "id": "bark_corvin_ashby_stub",
-        "text": "(to be written)"
+        "id": "bark_corvin_ashby_town_1",
+        "text": "Ah, you're back! Good. I've found another gap. Well, not found. More... not found.",
+        "mood": "happy",
+        "direction": "quick, anxious, trailing off",
+        "weight": 3
+      },
+      {
+        "id": "bark_corvin_ashby_town_2",
+        "text": "Forty-one years, simply missing. Who loses forty-one years? Unless...",
+        "mood": "surprised",
+        "direction": "drifts off mid-thought",
+        "weight": 2
+      },
+      {
+        "id": "bark_corvin_ashby_town_3",
+        "text": "Don't touch that pile, it's in order. It doesn't look in order. It is.",
+        "mood": "angry"
+      },
+      {
+        "id": "bark_corvin_ashby_town_4",
+        "text": "If you find anything written down out there, anything at all, bring it to me. Please.",
+        "mood": "idle"
+      },
+      {
+        "id": "bark_corvin_ashby_town_5",
+        "text": "Thirty years reading by ember-lamp, and I can't remember half of what I read. Odd, isn't it?",
+        "mood": "sad"
+      },
+      {
+        "id": "bark_corvin_ashby_town_6",
+        "text": "Old Maud says I ask the wrong questions. She's usually right, which is infuriating.",
+        "mood": "happy"
+      },
+      {
+        "id": "bark_corvin_ashby_town_7",
+        "text": "Ink. Ink doesn't forget. That's the whole... yes. That's the whole point of ink.",
+        "mood": "surprised"
+      },
+      {
+        "id": "bark_corvin_ashby_town_8",
+        "text": "Mother Aubrine calls history a matter of faith. I call it a matter of paper.",
+        "mood": "happy"
       }
     ]
   }

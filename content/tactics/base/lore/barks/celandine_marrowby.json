@@ -1,10 +1,45 @@
 {
   "speaker": "celandine_marrowby",
   "events": {
-    "battle_start": [
+    "town": [
       {
-        "id": "bark_celandine_marrowby_stub",
-        "text": "(to be written)"
+        "id": "bark_celandine_marrowby_town_1",
+        "text": "Of course you may. Everything has a price. Shall we discuss yours?",
+        "mood": "happy",
+        "direction": "smooth, amused, elven lilt; never raises her voice",
+        "weight": 3
+      },
+      {
+        "id": "bark_celandine_marrowby_town_2",
+        "text": "Emberwick is so charming in the cold. Everyone becomes so reasonable.",
+        "mood": "happy"
+      },
+      {
+        "id": "bark_celandine_marrowby_town_3",
+        "text": "Do come up to the house. The lamps are lovely this time of year. Every time of year, really.",
+        "mood": "idle"
+      },
+      {
+        "id": "bark_celandine_marrowby_town_4",
+        "text": "My family has been generous to this town for a century. The town does keep forgetting.",
+        "mood": "idle",
+        "weight": 2
+      },
+      {
+        "id": "bark_celandine_marrowby_town_5",
+        "text": "Grain, coin and patience. I have a great deal of all three. Most people have none.",
+        "mood": "happy"
+      },
+      {
+        "id": "bark_celandine_marrowby_town_6",
+        "text": "The mayor owes me rather a lot. He's sweet about it. Debtors usually are.",
+        "mood": "happy"
+      },
+      {
+        "id": "bark_celandine_marrowby_town_7",
+        "text": "The old days? Don't ask me, darling. I find them dreadfully dull.",
+        "mood": "idle",
+        "direction": "lightly, a beat too quick"
       }
     ]
   }

@@ -3,8 +3,101 @@
   "events": {
     "battle_start": [
       {
-        "id": "bark_ivo_rime_stub",
-        "text": "(to be written)"
+        "id": "bark_ivo_rime_battle_start_1",
+        "text": "Breathe slowly. This will be over soon.",
+        "mood": "idle",
+        "direction": "a physician's bedside manner, very tired",
+        "weight": 3
+      },
+      {
+        "id": "bark_ivo_rime_battle_start_2",
+        "text": "I'm sorry. You're standing between me and the only thing I have left.",
+        "mood": "sad",
+        "weight": 2
+      },
+      {
+        "id": "bark_ivo_rime_battle_start_3",
+        "text": "Please don't make me do this. I've so little time left for anything else.",
+        "mood": "sad"
+      }
+    ],
+    "hit": [
+      {
+        "id": "bark_ivo_rime_hit_1",
+        "text": "Hold still. It's worse if you move.",
+        "mood": "idle",
+        "weight": 2
+      },
+      {
+        "id": "bark_ivo_rime_hit_2",
+        "text": "There. Clean. You'll want that bound.",
+        "mood": "idle"
+      }
+    ],
+    "miss": [
+      {
+        "id": "bark_ivo_rime_miss_1",
+        "text": "Hm. You're quicker than you look.",
+        "mood": "surprised"
+      }
+    ],
+    "crit": [
+      {
+        "id": "bark_ivo_rime_crit_1",
+        "text": "Just under the ribs. I always did know where to cut.",
+        "mood": "sad",
+        "direction": "almost apologetic"
+      }
+    ],
+    "kill": [
+      {
+        "id": "bark_ivo_rime_kill_1",
+        "text": "Time of death. No. I don't keep count any more.",
+        "mood": "sad",
+        "direction": "begins by habit, stops himself",
+        "weight": 2
+      }
+    ],
+    "ally_down": [
+      {
+        "id": "bark_ivo_rime_ally_down_1",
+        "text": "They don't feel it. I checked. I checked so carefully.",
+        "mood": "sad"
+      }
+    ],
+    "low_hp": [
+      {
+        "id": "bark_ivo_rime_low_hp_1",
+        "text": "I'm fine. Physicians are the worst patients.",
+        "mood": "hurt"
+      },
+      {
+        "id": "bark_ivo_rime_low_hp_2",
+        "text": "Not yet. I haven't finished.",
+        "mood": "hurt",
+        "direction": "through his teeth, still quiet",
+        "weight": 2
+      }
+    ],
+    "victory": [
+      {
+        "id": "bark_ivo_rime_victory_1",
+        "text": "Go down the mountain. Get warm. Forget you came here.",
+        "mood": "idle"
+      }
+    ],
+    "defeat": [
+      {
+        "id": "bark_ivo_rime_defeat_1",
+        "text": "Wait. Please. My notes. Don't burn my notes.",
+        "mood": "hurt",
+        "direction": "urgent for the first time",
+        "weight": 2
+      },
+      {
+        "id": "bark_ivo_rime_defeat_2",
+        "text": "Then it was for nothing. All of it, for nothing.",
+        "mood": "sad"
       }
     ]
   }

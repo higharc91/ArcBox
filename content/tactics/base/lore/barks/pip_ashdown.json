@@ -1,10 +1,60 @@
 {
   "speaker": "pip_ashdown",
   "events": {
-    "battle_start": [
+    "town": [
       {
-        "id": "bark_pip_ashdown_stub",
-        "text": "(to be written)"
+        "id": "bark_pip_ashdown_town_1",
+        "text": "I can run that for you! Two coppers. One if you're nice. Three if you're not.",
+        "mood": "happy",
+        "direction": "bright and quick",
+        "weight": 3
+      },
+      {
+        "id": "bark_pip_ashdown_town_2",
+        "text": "I didn't take it. I was holding it. For you. Here.",
+        "mood": "happy",
+        "direction": "an easy, practised lie"
+      },
+      {
+        "id": "bark_pip_ashdown_town_3",
+        "text": "Bree says I'm not to bother you. I'm not bothering. I'm standing.",
+        "mood": "idle"
+      },
+      {
+        "id": "bark_pip_ashdown_town_4",
+        "text": "I know a quicker way round the docks. Don't ask how. I just do.",
+        "mood": "surprised"
+      }
+    ],
+    "camp": [
+      {
+        "id": "bark_pip_ashdown_camp_1",
+        "text": "There's a song in my head again. I never learned it. Want to hear?",
+        "mood": "surprised",
+        "weight": 2
+      },
+      {
+        "id": "bark_pip_ashdown_camp_2",
+        "text": "The stars are wrong tonight. No. They're right. I just remember them different.",
+        "mood": "sad",
+        "direction": "suddenly old and slow"
+      },
+      {
+        "id": "bark_pip_ashdown_camp_3",
+        "text": "Can I sit with you? Just till I'm sleepy. I'm not scared. I'm cold.",
+        "mood": "sad"
+      },
+      {
+        "id": "bark_pip_ashdown_camp_4",
+        "text": "I dreamed of a big stone hall with a fire in the middle. I've never been in a hall.",
+        "mood": "sad",
+        "direction": "slow, far away, then herself again"
+      },
+      {
+        "id": "bark_pip_ashdown_camp_5",
+        "text": "Tell me a story. A true one. I'll know if it isn't.",
+        "mood": "happy",
+        "weight": 2
       }
     ]
   }

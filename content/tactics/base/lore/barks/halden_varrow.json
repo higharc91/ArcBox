@@ -1,10 +1,46 @@
 {
   "speaker": "halden_varrow",
   "events": {
-    "battle_start": [
+    "town": [
       {
-        "id": "bark_halden_varrow_stub",
-        "text": "(to be written)"
+        "id": "bark_halden_varrow_town_1",
+        "text": "Emberwick has seen hard winters before. We'll see this one through, too.",
+        "mood": "idle",
+        "direction": "warm, a little hoarse; the speech voice",
+        "weight": 3
+      },
+      {
+        "id": "bark_halden_varrow_town_2",
+        "text": "Good to see you back. Truly. The square's been quieter than I'd like.",
+        "mood": "happy"
+      },
+      {
+        "id": "bark_halden_varrow_town_3",
+        "text": "The council wants numbers and hope. I can only manage one at a time.",
+        "mood": "sad",
+        "direction": "a tired joke",
+        "weight": 2
+      },
+      {
+        "id": "bark_halden_varrow_town_4",
+        "text": "Mind the frost by the well. That's new. That was never there before.",
+        "mood": "surprised"
+      },
+      {
+        "id": "bark_halden_varrow_town_5",
+        "text": "Not now. Please. Whatever it is, not here, not in the square.",
+        "mood": "hurt",
+        "direction": "suddenly quiet and fast"
+      },
+      {
+        "id": "bark_halden_varrow_town_6",
+        "text": "Speeches, speeches. I've given so many I dream in them.",
+        "mood": "happy"
+      },
+      {
+        "id": "bark_halden_varrow_town_7",
+        "text": "If anyone asks, things are well in hand. Are they? No. Don't answer that.",
+        "mood": "idle"
       }
     ]
   }

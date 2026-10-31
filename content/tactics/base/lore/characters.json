@@ -18,6 +18,7 @@
         }
       },
       "voice": {
+        "theme": "tactics.npc.halden-varrow",
         "description": "Warm baritone, a little hoarse, a man who has given too many speeches. Reassuring until he is cornered, then quiet and fast.",
         "sample": "The ford is the only road east. If those goblins hold the bridge past the new moon, Emberwick goes hungry this winter."
       },
@@ -57,6 +58,7 @@
         }
       },
       "voice": {
+        "theme": "tactics.npc.bree-tallow",
         "description": "Alto, brisk and kind, a West-Country lilt. Talks while working; softens without slowing down.",
         "sample": "Sit. Eat. Then you can tell me how bad it is."
       },
@@ -85,6 +87,7 @@
       "wants": "To keep her flock together and believing through the cold.",
       "flaw": "She mistakes certainty for courage.",
       "voice": {
+        "theme": "tactics.npc.mother-aubrine",
         "description": "Clear mezzo, measured, used to filling a chapel. Gentle in private, unbending in public.",
         "sample": "The flame was given to us. It is not ours to bargain with."
       },
@@ -119,6 +122,7 @@
         }
       },
       "voice": {
+        "theme": "tactics.npc.corvin-ashby",
         "description": "Light, quick tenor, an anxious academic. Trails off mid-sentence when he has an idea.",
         "sample": "There should be a record for every year. There isn't. Forty-one years are simply… not there."
       },
@@ -147,6 +151,7 @@
       "wants": "To make Emberwick safe, and to stop feeling like she failed it.",
       "flaw": "She wants someone to blame, and goblins are easiest.",
       "voice": {
+        "theme": "tactics.npc.dagna-holt",
         "description": "Low, flat, Northern; few words. A soldier's patience that runs out suddenly.",
         "sample": "Two of mine died on that bridge. I'd like a reason that's better than hunger."
       },
@@ -175,6 +180,7 @@
       "wants": "To keep his forge lit.",
       "flaw": "Would buy a shard from anyone, no questions asked.",
       "voice": {
+        "theme": "tactics.npc.tobin-fell",
         "description": "Deep, rough bass, slow speech, answers questions with a grunt before the words.",
         "sample": "Bring me the steel and I'll make it sing. Bring me a shard and I'll make it scream."
       },
@@ -204,6 +210,7 @@
         }
       },
       "voice": {
+        "theme": "tactics.npc.pip-ashdown",
         "description": "A child's voice, bright and quick, suddenly old and slow when she is remembering something that isn't hers.",
         "sample": "I know this song. I don't know how I know it."
       },
@@ -231,6 +238,7 @@
       "wants": "For someone to listen, before she dies.",
       "flaw": "Speaks in riddles out of a century of habit.",
       "voice": {
+        "theme": "tactics.npc.old-maud",
         "description": "Ancient, papery, unhurried; a cackle that turns into a cough. Perfectly lucid underneath.",
         "sample": "It didn't fall, dearie. It was thrown."
       },
@@ -253,6 +261,7 @@
       "wants": "To find the last verse of the Song of the Seven, which no one has sung in two centuries.",
       "flaw": "Treats everything as a story, including other people's pain.",
       "voice": {
+        "theme": "tactics.npc.lark",
         "description": "Androgynous, musical, warm; slips into song mid-sentence. Never quite serious.",
         "sample": "Seven went over the Greywall and seven came home. The song doesn't say what they brought, but it does say it was heavy."
       },
@@ -282,6 +291,7 @@
         }
       },
       "voice": {
+        "theme": "tactics.npc.celandine-marrowby",
         "description": "Smooth, cultured alto with an elven lilt; amused; never raises her voice, because she never needs to.",
         "sample": "Of course the town can have grain. Everything has a price; I'm simply the one who remembers it."
       },
@@ -294,7 +304,7 @@
         {
           "with": "rook",
           "kind": "unknown",
-          "note": "His best customer and his worst secret."
+          "note": "Rook's best customer and worst secret."
         }
       ]
     },
@@ -310,6 +320,7 @@
       "wants": "To be on the winning side when the embers run out.",
       "flaw": "Loyal only to the deal.",
       "voice": {
+        "theme": "tactics.npc.rook",
         "description": "Dry, low, unhurried; a river accent; every sentence sounds like an offer.",
         "sample": "I don't take sides. I take payment."
       },
@@ -322,7 +333,7 @@
         {
           "with": "hooded_stranger",
           "kind": "unknown",
-          "note": "Her best customer and her worst secret."
+          "note": "Has never seen the Stranger's face, and never once charged for what the Stranger asks."
         }
       ]
     },
@@ -344,6 +355,7 @@
         }
       },
       "voice": {
+        "theme": "tactics.npc.mother-skarrow",
         "description": "Cracked, rasping, dry humour; speaks the valley tongue slowly and deliberately, as a courtesy, and the hill tongue fast.",
         "sample": "You lock your grain and call us thieves. Sit. We will talk about who stole what."
       },
@@ -372,6 +384,7 @@
       "wants": "To take enough from the Vale that his people never go hungry again.",
       "flaw": "Would rather drop the bridge into the chasm than lose it.",
       "voice": {
+        "theme": "tactics.npc.vorga",
         "description": "Young, loud, a showman's swagger over real anger; laughs when he's losing.",
         "sample": "You want my bridge? Come and take it!"
       },
@@ -395,6 +408,7 @@
       "wants": "To keep the Court alive, and to understand why mortals give away the things they love.",
       "flaw": "Cannot break a bargain, even one that destroys her.",
       "voice": {
+        "theme": "tactics.npc.ysolde",
         "description": "Soft, musical, unplaceable accent; never hurries and never raises her voice; pauses before names as if tasting them.",
         "sample": "Everything in Mirewood has a price, little flame. Tell me something you would hate to forget."
       },
@@ -424,6 +438,7 @@
         }
       },
       "voice": {
+        "theme": "tactics.npc.maren-sorrel",
         "description": "Warm, persuasive alto; a preacher's rhythm, but quiet. Never sounds like a villain.",
         "sample": "You've felt how cold it's getting. I'm the only one in the Vale with a plan to stop it."
       },
@@ -452,6 +467,7 @@
       "wants": "To bring his wife back as herself, not as one of the walking dead of the pass.",
       "flaw": "Grief has made him willing to do anything to anyone.",
       "voice": {
+        "theme": "tactics.npc.ivo-rime",
         "description": "Soft-spoken, precise, exhausted; a doctor's bedside manner over something broken.",
         "sample": "They walk, but they don't remember. I want to know where the remembering went."
       },
@@ -481,6 +497,7 @@
         }
       },
       "voice": {
+        "theme": "tactics.npc.oswin-hale",
         "description": "Dry, cold, precise, very old; long silences; occasionally a scholar's warmth breaks through before he smothers it.",
         "sample": "I remember every year of the Vale's history. You have no idea how heavy that is."
       },
@@ -509,6 +526,7 @@
       "wants": "To be released from his oath with honour.",
       "flaw": "Cannot imagine breaking an oath, even one that should never have been sworn.",
       "voice": {
+        "theme": "tactics.npc.halvard",
         "description": "Deep and hollow inside the helm, formal old-fashioned courtesy, unfailingly polite while trying to kill you.",
         "sample": "I hold this gate for the Keeper. Turn back, or I will hold it against you."
       },
@@ -536,6 +554,7 @@
         }
       },
       "voice": {
+        "theme": "tactics.npc.hooded-stranger",
         "description": "Quiet, ageless, unplaceable accent; never states anything directly; sounds faintly amused and faintly sad.",
         "sample": "You're asking the right questions. You're just asking the wrong people."
       },

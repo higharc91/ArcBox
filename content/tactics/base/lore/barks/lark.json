@@ -3,8 +3,119 @@
   "events": {
     "battle_start": [
       {
-        "id": "bark_lark_stub",
-        "text": "(to be written)"
+        "id": "bark_lark_battle_start_1",
+        "text": "Ah, a battle! Do try to do something worth a verse.",
+        "mood": "happy",
+        "direction": "musical, never quite serious",
+        "weight": 3
+      },
+      {
+        "id": "bark_lark_battle_start_2",
+        "text": "Gather round, gather round, and mind the pointy end.",
+        "mood": "happy",
+        "direction": "half sung"
+      },
+      {
+        "id": "bark_lark_battle_start_3",
+        "text": "Every good song has a fight in the middle. Here's ours.",
+        "mood": "idle"
+      }
+    ],
+    "hit": [
+      {
+        "id": "bark_lark_hit_1",
+        "text": "Ha! That'll rhyme with something.",
+        "mood": "happy"
+      }
+    ],
+    "miss": [
+      {
+        "id": "bark_lark_miss_1",
+        "text": "Hm. We'll leave that out of the ballad.",
+        "mood": "idle",
+        "weight": 2
+      }
+    ],
+    "crit": [
+      {
+        "id": "bark_lark_crit_1",
+        "text": "Oh, that's the second verse, right there!",
+        "mood": "happy"
+      }
+    ],
+    "kill": [
+      {
+        "id": "bark_lark_kill_1",
+        "text": "And here the singer pauses, out of respect.",
+        "mood": "sad"
+      }
+    ],
+    "ally_down": [
+      {
+        "id": "bark_lark_ally_down_1",
+        "text": "No, no, no. That's not how this one goes!",
+        "mood": "surprised",
+        "weight": 2
+      }
+    ],
+    "low_hp": [
+      {
+        "id": "bark_lark_low_hp_1",
+        "text": "Oh, this is the sad part, isn't it. I hate the sad part.",
+        "mood": "hurt"
+      }
+    ],
+    "healed": [
+      {
+        "id": "bark_lark_healed_1",
+        "text": "Bless you. You'll get a chorus all your own.",
+        "mood": "happy"
+      }
+    ],
+    "level_up": [
+      {
+        "id": "bark_lark_level_up_1",
+        "text": "Someone's growing into their legend.",
+        "mood": "happy"
+      }
+    ],
+    "victory": [
+      {
+        "id": "bark_lark_victory_1",
+        "text": "And they lived, and the song went on. For now.",
+        "mood": "happy",
+        "weight": 2
+      }
+    ],
+    "camp": [
+      {
+        "id": "bark_lark_camp_1",
+        "text": "There's a last verse to the Song of the Seven. Nobody's sung it in two hundred years. I'll find it.",
+        "mood": "idle",
+        "weight": 2
+      },
+      {
+        "id": "bark_lark_camp_2",
+        "text": "Sleep now, sleep now, the river is wide, and the fire keeps watch on the other side.",
+        "mood": "sad",
+        "direction": "sung softly, a lullaby",
+        "weight": 2
+      },
+      {
+        "id": "bark_lark_camp_3",
+        "text": "Songs don't burn. That's why I keep them.",
+        "mood": "idle"
+      },
+      {
+        "id": "bark_lark_camp_4",
+        "text": "Hum along if you know it. Nobody ever knows it.",
+        "mood": "happy",
+        "direction": "humming first"
+      },
+      {
+        "id": "bark_lark_camp_5",
+        "text": "You'll want to tell this one well, when you're old. I'd start practising.",
+        "mood": "happy"
       }
     ]
   }

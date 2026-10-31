@@ -3,8 +3,201 @@
   "events": {
     "battle_start": [
       {
-        "id": "bark_narrator_stub",
-        "text": "(to be written)"
+        "id": "bark_narrator_battle_start_1",
+        "text": "Steel comes out, and the Vale holds its breath.",
+        "mood": "idle",
+        "direction": "warm storyteller, present tense, unhurried",
+        "weight": 3
+      },
+      {
+        "id": "bark_narrator_battle_start_2",
+        "text": "The wind drops, as if it wants to watch.",
+        "mood": "idle",
+        "weight": 2
+      },
+      {
+        "id": "bark_narrator_battle_start_3",
+        "text": "Here, on cold ground, they make their stand.",
+        "mood": "idle"
+      },
+      {
+        "id": "bark_narrator_battle_start_4",
+        "text": "Every fight in the Vale is about bread, in the end. This one too.",
+        "mood": "sad"
+      },
+      {
+        "id": "bark_narrator_battle_start_5",
+        "text": "Nobody wanted it to come to this. It has anyway.",
+        "mood": "sad"
+      }
+    ],
+    "turn_start": [
+      {
+        "id": "bark_narrator_turn_start_1",
+        "text": "A breath. A choice.",
+        "mood": "idle"
+      },
+      {
+        "id": "bark_narrator_turn_start_2",
+        "text": "The moment turns, and waits.",
+        "mood": "idle"
+      },
+      {
+        "id": "bark_narrator_turn_start_3",
+        "text": "Someone has to move first.",
+        "mood": "idle"
+      }
+    ],
+    "crit": [
+      {
+        "id": "bark_narrator_crit_1",
+        "text": "A perfect stroke. The kind they tell about later.",
+        "mood": "surprised",
+        "weight": 2
+      },
+      {
+        "id": "bark_narrator_crit_2",
+        "text": "Clean, and true, and terrible.",
+        "mood": "idle"
+      },
+      {
+        "id": "bark_narrator_crit_3",
+        "text": "For a heartbeat, the whole field goes still.",
+        "mood": "surprised"
+      },
+      {
+        "id": "bark_narrator_crit_4",
+        "text": "That one will be remembered.",
+        "mood": "idle"
+      }
+    ],
+    "kill": [
+      {
+        "id": "bark_narrator_kill_1",
+        "text": "And the ground takes one more.",
+        "mood": "sad",
+        "weight": 2
+      },
+      {
+        "id": "bark_narrator_kill_2",
+        "text": "One fewer. It never feels like enough.",
+        "mood": "sad"
+      },
+      {
+        "id": "bark_narrator_kill_3",
+        "text": "It's done. Quick, at least.",
+        "mood": "sad"
+      },
+      {
+        "id": "bark_narrator_kill_4",
+        "text": "Someone, somewhere, will wonder why they don't come home.",
+        "mood": "sad"
+      }
+    ],
+    "ally_down": [
+      {
+        "id": "bark_narrator_ally_down_1",
+        "text": "Down, but not gone. Not yet.",
+        "mood": "hurt",
+        "weight": 2
+      },
+      {
+        "id": "bark_narrator_ally_down_2",
+        "text": "A friend falls, and the others hear it like a bell.",
+        "mood": "sad"
+      },
+      {
+        "id": "bark_narrator_ally_down_3",
+        "text": "Someone calls a name across the field.",
+        "mood": "hurt"
+      }
+    ],
+    "victory": [
+      {
+        "id": "bark_narrator_victory_1",
+        "text": "It's over. The living count each other, twice.",
+        "mood": "happy",
+        "weight": 2
+      },
+      {
+        "id": "bark_narrator_victory_2",
+        "text": "Quiet comes back to the field slowly, like birds.",
+        "mood": "idle"
+      },
+      {
+        "id": "bark_narrator_victory_3",
+        "text": "They've won the day. The winter is another matter.",
+        "mood": "sad"
+      },
+      {
+        "id": "bark_narrator_victory_4",
+        "text": "Breath, and blood, and the long walk home.",
+        "mood": "idle"
+      }
+    ],
+    "defeat": [
+      {
+        "id": "bark_narrator_defeat_1",
+        "text": "Not today. The road will still be there tomorrow.",
+        "mood": "sad",
+        "weight": 2
+      },
+      {
+        "id": "bark_narrator_defeat_2",
+        "text": "They fall back, and the Vale grows a little colder.",
+        "mood": "sad"
+      },
+      {
+        "id": "bark_narrator_defeat_3",
+        "text": "Some days are lost. This is one of them.",
+        "mood": "sad"
+      }
+    ],
+    "level_up": [
+      {
+        "id": "bark_narrator_level_up_1",
+        "text": "They are not who they were when this began.",
+        "mood": "happy",
+        "weight": 2
+      },
+      {
+        "id": "bark_narrator_level_up_2",
+        "text": "Something in them settles, sure and new.",
+        "mood": "happy"
+      },
+      {
+        "id": "bark_narrator_level_up_3",
+        "text": "A little stronger now. A little harder to break.",
+        "mood": "happy"
+      }
+    ],
+    "camp": [
+      {
+        "id": "bark_narrator_camp_1",
+        "text": "The fire burns low. Somebody puts on another log.",
+        "mood": "idle",
+        "weight": 2
+      },
+      {
+        "id": "bark_narrator_camp_2",
+        "text": "Out past the firelight, the Vale is cold and very quiet.",
+        "mood": "sad"
+      },
+      {
+        "id": "bark_narrator_camp_3",
+        "text": "Stew, smoke and old stories. The road can wait till morning.",
+        "mood": "happy",
+        "weight": 2
+      },
+      {
+        "id": "bark_narrator_camp_4",
+        "text": "Somebody laughs. It surprises everyone, and it helps.",
+        "mood": "happy"
+      },
+      {
+        "id": "bark_narrator_camp_5",
+        "text": "Stars over the Greywall, the same as they ever were. Or nearly.",
+        "mood": "idle"
       }
     ]
   }

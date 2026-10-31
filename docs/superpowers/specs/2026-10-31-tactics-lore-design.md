@@ -181,6 +181,12 @@ only; nothing here needs an engine change to merge, and the engine can adopt it 
 - Map engine events to bark events: `battle_start`, `turn_start`, `hit`, `miss`, `crit`, `kill`, `ally_down`
   (an ally is Downed), `low_hp`, `healed`, `revived`, `level_up`, `victory`, `defeat`, `camp`, `town`. An event
   with no lines says nothing.
+- **Perspective.** Bark events are from the speaker's side:
+  - `hit`, `miss`, `crit` and `kill` are the speaker's own attack landing, missing, critting or killing;
+  - `low_hp`, `healed` and `revived` happen to the speaker;
+  - `victory` and `defeat` are the speaker's side winning or losing. A villain's `defeat` is the party's win.
+- **Presence.** An NPC barks only when present: a unit in the battle, or in the cast of the scene that just played
+  for `town` and `camp`. Bark lines carry no flags, so presence is what keeps a dead or absent character quiet.
 - Pick by `weight` (default 1) from the battle RNG, so replays and resumed battles are identical.
 - Show the speaker's portrait in the line's `mood`. Speak the line through `/api/tts` with the voice's `theme`, or
   play a pre-rendered file keyed by line id (§4).

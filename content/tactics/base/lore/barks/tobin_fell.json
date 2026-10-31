@@ -1,10 +1,46 @@
 {
   "speaker": "tobin_fell",
   "events": {
-    "battle_start": [
+    "town": [
       {
-        "id": "bark_tobin_fell_stub",
-        "text": "(to be written)"
+        "id": "bark_tobin_fell_town_1",
+        "text": "Mm. Bring me the steel. I'll see what's left in the fire.",
+        "mood": "idle",
+        "direction": "deep, rough, slow; a grunt before the words",
+        "weight": 3
+      },
+      {
+        "id": "bark_tobin_fell_town_2",
+        "text": "Forge is cold this morning. Colder than yesterday.",
+        "mood": "sad",
+        "weight": 2
+      },
+      {
+        "id": "bark_tobin_fell_town_3",
+        "text": "Hm. That edge has seen work. Leave it with me.",
+        "mood": "idle"
+      },
+      {
+        "id": "bark_tobin_fell_town_4",
+        "text": "Don't ask where the last shard came from. I didn't.",
+        "mood": "idle"
+      },
+      {
+        "id": "bark_tobin_fell_town_5",
+        "text": "Mm. Good steel remembers the hammer. Better than I do, some days.",
+        "mood": "sad"
+      },
+      {
+        "id": "bark_tobin_fell_town_6",
+        "text": "Four Fells at this anvil before me. I'll not be the one lets it go out.",
+        "mood": "sad",
+        "direction": "slower still; he doesn't say this lightly",
+        "weight": 2
+      },
+      {
+        "id": "bark_tobin_fell_town_7",
+        "text": "Shut the door. You're letting the heat out. What's left of it.",
+        "mood": "angry"
       }
     ]
   }

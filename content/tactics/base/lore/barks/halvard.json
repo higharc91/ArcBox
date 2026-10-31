@@ -3,8 +3,100 @@
   "events": {
     "battle_start": [
       {
-        "id": "bark_halvard_stub",
-        "text": "(to be written)"
+        "id": "bark_halvard_battle_start_1",
+        "text": "I hold this gate for the Keeper. You have my apologies, and my blade.",
+        "mood": "idle",
+        "direction": "deep, hollow, unfailingly polite",
+        "weight": 3
+      },
+      {
+        "id": "bark_halvard_battle_start_2",
+        "text": "Well met. I regret, sincerely, what comes next.",
+        "mood": "sad"
+      },
+      {
+        "id": "bark_halvard_battle_start_3",
+        "text": "Come, then. It has been a long while since anyone tried.",
+        "mood": "idle"
+      }
+    ],
+    "turn_start": [
+      {
+        "id": "bark_halvard_turn_start_1",
+        "text": "By your leave.",
+        "mood": "idle",
+        "direction": "a small formal bow of the voice"
+      }
+    ],
+    "hit": [
+      {
+        "id": "bark_halvard_hit_1",
+        "text": "Forgive me.",
+        "mood": "sad",
+        "weight": 2
+      },
+      {
+        "id": "bark_halvard_hit_2",
+        "text": "A fair stroke, I hope. I try to keep them clean.",
+        "mood": "idle"
+      }
+    ],
+    "miss": [
+      {
+        "id": "bark_halvard_miss_1",
+        "text": "Well moved. Truly well moved.",
+        "mood": "surprised",
+        "direction": "genuine admiration"
+      }
+    ],
+    "crit": [
+      {
+        "id": "bark_halvard_crit_1",
+        "text": "My apologies. That one will not heal kindly.",
+        "mood": "sad"
+      }
+    ],
+    "kill": [
+      {
+        "id": "bark_halvard_kill_1",
+        "text": "Rest now. You held well.",
+        "mood": "sad",
+        "direction": "gentle, like a captain to his own",
+        "weight": 2
+      }
+    ],
+    "low_hp": [
+      {
+        "id": "bark_halvard_low_hp_1",
+        "text": "Ah. There it is. I had nearly forgotten what this felt like.",
+        "mood": "surprised",
+        "weight": 2
+      },
+      {
+        "id": "bark_halvard_low_hp_2",
+        "text": "Steady. The oath holds, even when I do not.",
+        "mood": "hurt"
+      }
+    ],
+    "victory": [
+      {
+        "id": "bark_halvard_victory_1",
+        "text": "Go back down the mountain. Live long. Do not come again.",
+        "mood": "sad"
+      }
+    ],
+    "defeat": [
+      {
+        "id": "bark_halvard_defeat_1",
+        "text": "Well fought. I thank you. I thank you most sincerely.",
+        "mood": "happy",
+        "direction": "relief under the courtesy",
+        "weight": 2
+      },
+      {
+        "id": "bark_halvard_defeat_2",
+        "text": "The gate is yours. I held it as long as I was able.",
+        "mood": "sad"
       }
     ]
   }

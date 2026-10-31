@@ -1,10 +1,47 @@
 {
   "speaker": "ysolde",
   "events": {
-    "battle_start": [
+    "town": [
       {
-        "id": "bark_ysolde_stub",
-        "text": "(to be written)"
+        "id": "bark_ysolde_town_1",
+        "text": "Welcome, little flame. Mind where you step. Some of the moss is listening.",
+        "mood": "happy",
+        "direction": "soft, musical, never hurried",
+        "weight": 3
+      },
+      {
+        "id": "bark_ysolde_town_2",
+        "text": "You keep your memories in such fragile cups. How do you bear it?",
+        "mood": "surprised"
+      },
+      {
+        "id": "bark_ysolde_town_3",
+        "text": "Tell me something you would hate to forget. Only tell me. I won't take it. Not yet.",
+        "mood": "idle",
+        "weight": 2
+      },
+      {
+        "id": "bark_ysolde_town_4",
+        "text": "Names are such sweet things. Yours tastes of smoke, and of something older.",
+        "mood": "happy",
+        "direction": "a pause before the name, as if tasting it"
+      },
+      {
+        "id": "bark_ysolde_town_5",
+        "text": "The Court is patient. The Court has nothing but patience.",
+        "mood": "idle"
+      },
+      {
+        "id": "bark_ysolde_town_6",
+        "text": "Forgetting is a door, not a wall. You simply never look back through it.",
+        "mood": "sad"
+      }
+    ],
+    "camp": [
+      {
+        "id": "bark_ysolde_camp_1",
+        "text": "Your fires are so small out here. I like them. They don't pretend.",
+        "mood": "happy"
       }
     ]
   }
