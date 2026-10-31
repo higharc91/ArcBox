@@ -1,0 +1,86 @@
+{
+  "model": "model_elevenlabs-music-v2-5",
+  "team": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "clips": {
+    "battle": {
+      "asset": "asset_MAQZgeCqXt424oekkyG4PAor",
+      "job": "job_6dEgfhCXP9v5Nxa4GmsPKF97",
+      "cu": 60.0,
+      "duration": 120,
+      "group": "music",
+      "loop": true,
+      "seed": 4202
+    },
+    "boss": {
+      "asset": "asset_UNk41TGrEKnz6Pxjxh8sVU6F",
+      "job": "job_wrXADYQk1iHQypR8XZdgLnRa",
+      "cu": 60.0,
+      "duration": 120,
+      "group": "music",
+      "loop": true,
+      "seed": 4203
+    },
+    "camp": {
+      "asset": "asset_dZ93E5bc4K4ChR3M5QVN5Aie",
+      "job": "job_ZowxHGxiv4xf6A4y6VoSKAq5",
+      "cu": 60.0,
+      "duration": 100,
+      "group": "music",
+      "loop": true,
+      "seed": 4204
+    },
+    "defeat": {
+      "asset": "asset_HFJWTD7W9ET2ebhNAoGmPeTw",
+      "job": "job_Rctitx67evZE2kfVbzcFS4tk",
+      "cu": 30.0,
+      "duration": 6,
+      "group": "sting",
+      "loop": false,
+      "seed": 4206
+    },
+    "dungeon": {
+      "asset": "asset_fovDZaKz3xvW6LrP4oDyiusW",
+      "job": "job_TdmCqT3g7cebejUw7fp1awVh",
+      "cu": 60.0,
+      "duration": 120,
+      "group": "music",
+      "loop": true,
+      "seed": 4207
+    },
+    "explore": {
+      "asset": "asset_ubey6KEijfohr9gucCBDdqFU",
+      "job": "job_CzkKXufEB24csWRLRT1rmScZ",
+      "cu": 60.0,
+      "duration": 120,
+      "group": "music",
+      "loop": true,
+      "seed": 4201
+    },
+    "title": {
+      "asset": "asset_3acs17kiJzzWvzC2ipKtGf43",
+      "job": "job_PPSHNZqeFaYw3PJnWEYcinxn",
+      "cu": 60.0,
+      "duration": 110,
+      "group": "music",
+      "loop": true,
+      "seed": 4200
+    },
+    "victory": {
+      "asset": "asset_MAXy5nqbKgkpGeG6HqQdiPNs",
+      "job": "job_B8khteDX3xZZbmQkv81JQYQf",
+      "cu": 30.0,
+      "duration": 7,
+      "group": "sting",
+      "loop": false,
+      "seed": 4205
+    }
+  },
+  "failures": [
+    {
+      "clip": "victory",
+      "job": "job_tR4cUkXzaWJBr86Q64NYVuaX",
+      "error": "internal error (model temporarily unavailable); billed 30 CU; retried as job_B8khteDX3xZZbmQkv81JQYQf"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+ "title": {
+  "prompt": "Majestic fantasy RPG title theme: sweeping orchestral strings, French horns carrying a hopeful heroic melody, harp arpeggios, light celtic flute counter-melody, timpani accents, 92 BPM, D major, warm and nostalgic like a classic 16-bit era tactics game reimagined with live orchestra. Instrumental only. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 110,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "Title screen",
+  "seed": 4200
+ },
+ "explore": {
+  "prompt": "Calm fantasy exploration music for a world map: gentle acoustic guitar and harp, wooden flute melody, soft string pads, light hand percussion, pastoral and curious, 84 BPM, G major, folk orchestral. Instrumental only. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 120,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "World map and peaceful field maps",
+  "seed": 4201
+ },
+ "battle": {
+  "prompt": "Driving fantasy tactics battle theme: urgent staccato strings ostinato, pounding taiko and snare, bold brass melody, rising tension and heroic resolve, 140 BPM, E minor, orchestral with a celtic fiddle lead. Instrumental only. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 120,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "Normal battles",
+  "seed": 4202
+ },
+ "boss": {
+  "prompt": "Epic boss battle music: full orchestra and dark choir-like synth pads (no words), heavy low brass and pounding war drums, relentless string runs, dramatic chord stabs, 150 BPM, C minor, menacing and grand, fighting a dragon or lich. Instrumental only. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 120,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "Boss battles (any unit with the boss tag)",
+  "seed": 4203
+ },
+ "camp": {
+  "prompt": "Warm acoustic campfire music: fingerpicked nylon guitar, soft lute, gentle fiddle melody, cello drone, cozy and reflective evening rest between battles, 76 BPM, A major, intimate medieval folk. Instrumental only. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 100,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "Camp and party screen",
+  "seed": 4204
+ },
+ "victory": {
+  "prompt": "Triumphant fantasy RPG victory fanfare: bright brass fanfare over rolling timpani and cymbal swell, quick ascending string run, resolves on a major chord, 120 BPM, B-flat major. Instrumental only. Short self-contained sting with a clear ending, no loop.",
+  "duration": 7,
+  "variants": 1,
+  "group": "sting",
+  "loop": false,
+  "use": "BattleEnded with victory",
+  "seed": 4205
+ },
+ "defeat": {
+  "prompt": "Somber fantasy RPG defeat sting: slow mournful solo cello and low strings, descending minor phrase, soft muffled timpani roll, ends on a hollow minor chord, D minor. Instrumental only. Short self-contained sting with a clear ending, no loop.",
+  "duration": 6,
+  "variants": 1,
+  "group": "sting",
+  "loop": false,
+  "use": "BattleEnded with defeat",
+  "seed": 4206
+ },
+ "dungeon": {
+  "prompt": "Tense dark dungeon music: low sustained strings, eerie celesta motif, distant deep drum pulses, dissonant woodwind swells, sparse and creeping, 70 BPM, F-sharp minor, ominous ambient orchestral. Instrumental only. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
+  "duration": 120,
+  "variants": 1,
+  "group": "music",
+  "loop": true,
+  "use": "Dungeons, caves and tense story maps",
+  "seed": 4207
+ }
+}
