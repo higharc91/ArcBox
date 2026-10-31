@@ -27,7 +27,7 @@ The commands below go through `TacticsCampaignRules.Handle`. Each refusal comes 
 
 ## Level-up and banked choices
 
-When the party levels up (adapter spec §6), every character keeps everything its player chose: race, background, scores, picks and subclass. Its picks gain the class's **default choices for the new slots**, so it's whole in the next battle, even for a member who wasn't there. Its owner can change those picks, choose the subclass and spend increases in the portal. That's how choices are "banked" for absent players (rules-engine §4.7).
+When the party levels up (adapter spec §6), every character keeps everything its player chose: race, background, scores, picks and subclass. Its picks gain the class's **default choices for the new slots**, so it's whole in the next battle, even for a member who wasn't there. Its owner can change those picks, choose the subclass and spend increases in the portal. That's how choices are "banked" for absent players (rules-engine §3.9).
 
 This replaces the first adapter's level-up, which rebuilt every character as a default human of its class.
 
