@@ -1,7 +1,7 @@
-# Tactics assets
+# Wardenflame assets (working name: tactics)
 
-Procedural pixel art for the tactics RPG. The art is drawn in Python, not by hand: every sprite is code over a
-small set of parts. Re-running the build gives byte-identical output, so the content pack's hash changes only
+Procedural pixel art for Wardenflame, the tactics RPG. The art is drawn in Python, not by hand: every sprite is code
+over a small set of parts. Re-running the build gives byte-identical output, so the content pack's hash changes only
 when the art does.
 
 ```bash
@@ -116,38 +116,46 @@ directions. In the front facing the weapon hand is on screen-right.
 
 ### Animations
 
-There are 23 animations and 79 frames per facing. The manifest gives each animation's frame indices, fps and
-whether it loops (indices are per row; the back row is the same indices plus 79). `previews/04-animations.png` shows
-every one.
+There are 38 animations and 189 frames per facing. The manifest gives each animation's frame indices, fps and
+whether it loops (indices are per row; the back row is the same indices plus 189). Read indices from the manifest:
+never hard-code them. `previews/04-animations.png` shows every one.
 
 | Anim | Frames | Use |
 |---|---|---|
-| idle | 4, loop | Exploration: breathes, then blinks |
-| ready | 4, loop | Battle stance: weapon up, knees bent |
-| walk | 4, loop | |
-| attack | 5 | Overhead swing (swords, axes, maces, hammers, flails, scimitars): anticipation, wind-up, smear, impact, recover |
-| thrust | 4 | Spears, daggers, rapiers, halberds |
-| shoot | 4 | Bows and crossbows: raise, draw, hold, release |
-| cast | 4 | Staffs, wands, tomes and instruments: gather, raise, channel, release |
-| slam | 5 | Heavy leap attack for two-handers |
-| spin | 4 | Whirlwind cleave |
-| flurry | 6 | Unarmed or dual-wield combo: jab, cross, jab, kick |
-| bash | 3 | Shield bash |
-| block | 2 | |
-| dodge | 2 | |
-| jump | 3 | Ledges, and the monk's leap |
-| item | 3 | Drink a potion, read a scroll |
-| victory | 3, loop | |
-| hurt | 2 | |
-| down | 1 | The "downed" state |
-| rise | 2 | Getting up after a revive |
-| sit | 4, loop | Seated on a bench, log or chair. The game draws the seat |
-| doze | 2, loop | Seated, eyes shut, head nodding (camp at night) |
-| talk | 4, loop | Gesturing in dialogue |
-| wave | 4, loop | Greeting |
+| idle | 6, loop | Exploration: breathes, blinks; hands, hair and cloak lag the breath |
+| ready | 6, loop | Battle stance: the weapon bobs a beat behind the breath |
+| walk | 8, loop | Contact, down, passing, up for each foot, with arm swing |
+| run | 6, loop | |
+| attack | 7 | Overhead swing (swords, axes, maces, hammers, flails, scimitars): anticipation, wind-up, smear (index 2), held impact, recover |
+| thrust | 6 | Spears, daggers, rapiers, halberds. No smear |
+| shoot | 6 | Bows and crossbows: raise, draw, hold, release |
+| cast | 7 | Generic spell: gather, raise, release |
+| point | 4 | Quick single-target bolt (cantrips) |
+| pray | 6 | Divine casting (clerics, paladins) |
+| channel | 4, loop | Holding concentration |
+| summon | 7 | Arms raised: big areas and summons |
+| buff | 6 | Fist to chest or weapon raised: self and ally boosts |
+| slam | 7 | Heavy leap attack for two-handers |
+| spin | 5 | Whirlwind cleave |
+| flurry | 7 | Unarmed or dual-wield combo |
+| bash | 5 | Shield bash |
+| block, dodge | 3, 4 | Dodge slides the body and ends back on the anchor |
+| knockback | 5 | Pushed: slides, stumbles, ends back on the anchor |
+| stagger | 5 | |
+| jump, hop, climb | 5, 4, 5 | Ledges and height steps. Bodies rise at most 4 px; the game supplies the arc |
+| item | 5 | Drink a potion, read a scroll |
+| hurt | 3 | Frame 0 is the flash-ready recoil |
+| down | 4 | Hit, buckle, knee, slump. **Hold the last frame** for the downed state |
+| rise | 4 | Starts from the downed pose |
+| death | 6 | Topples and ends lying flat, ready to fade |
+| victory, cheer | 4, 4, loop | |
+| kneel, crouch, sneak | 3, 2 loop, 6 loop | |
+| sit, doze, talk, wave | 4, 2, 4, 4, loop | Seated (the game draws the seat), dozing, gesturing, greeting |
 
-Swing frames carry a motion smear, drawn by the weapon layer from the pose's `smear` angle. `build.py`'s
-`ATTACK_FOR` maps each weapon to its basic attack animation.
+Poses carry secondary motion: `drag` trails hair, capes, hems and tails by a frame (`character_parts.loose_rows`
+lists which rows hang free), `crouch` drops the hips and bends the knees, `shift` slides the body and `tilt` topples
+it (death). Swing frames carry a motion smear, drawn by the weapon layer from the pose's `smear` angle. `build.py`'s
+`ATTACK_FOR` maps each weapon to its basic attack animation, and abilities name theirs in `presentation.anim`.
 
 ### Subclasses
 
@@ -237,6 +245,13 @@ wrapping), so tiling never shows a seam.
 The previews in `12-diorama-*.png` use `arcpix/iso.py`, a small isometric renderer. Maps are written as ASCII in
 `parts/dioramas.py`, and a diorama is the quickest way to judge new terrain or props together.
 
+Biome tops: `bog`, `forest_floor`, `forest_needles`, `dunes`, `sandstone`, `ash`, `basalt`, `pavers` and a `frost`
+grass. Sides: `lava_side` (a 16-frame crusted cliff with glowing seams), `ice_side`, `basalt_side` and sandstone in
+two colours. Water, bog and lava are 16-frame loops. Glowing textures carry `emissive` (a colour plus a rule for
+scattering point lights over them). Shore foam is the ambient `shore_foam` decal, laid on each water tile along each
+bank edge. Grass and the dirt and cliff sides use the `alt`, `root` and `moss` slots: a hand-made palette must map
+them.
+
 ## Props
 
 `content/tactics/base/props/` holds 37 billboard props in palette variants, anchored at their ground contact
@@ -245,6 +260,21 @@ pixel. Animated props (campfire, torch, banner) are horizontal strips. For each 
 - `blocks`: whether it stops movement;
 - `cover`: `none`, `half` or `full`, for ranged attacks;
 - `height`: in height steps, for line of sight.
+
+There are now 68 props, including faceted rocks, boulders and crags in 8 materials, layered-canopy trees, ruins,
+fences in four materials, a cart, ladder, cage, barricades, shrine, tomb, lantern, cacti, swamp trees and lily pads.
+Kit props are drawn in the map's projection and anchored on the tile centre; `layer: ground` props (lily pads) lie
+under units.
+
+**Lights.** Light-source props (campfire, torch, lamp post, crystals, altar, lantern, shrine, vent, will-o'-wisp,
+glowing mushrooms) carry `light`: `at` (image px, per frame where it moves), `radius` (tiles), `colour` per variant,
+a `flicker` curve name and an `emissive` L8 mask strip. The manifest's `lighting` group documents placement, the
+flicker curves (fire, torch, candle, pulse, steady) and the Godot recipe: an OmniLight3D per light, emission from the
+mask. This is what makes HD-2D scenes glow.
+
+**Dioramas** (`previews/12-diorama-*.png`): one per biome kit. Grassland, frostpeak (snow), mirewood (swamp),
+sunscar (desert), ember-keep (volcanic, lit only by its own lights), greenhollow (forest) and highward (castle
+courtyard). Interiors are the dungeon set's hall and crypt.
 
 ## Portraits
 
@@ -269,18 +299,31 @@ them for custom heroes the same way.
 | `numbers.png` | Bitmap combat numbers (0–9, `+`, `-`, MISS, CRIT) in damage, heal, crit and mana styles, with advances. Draw them at 2× the UI scale |
 | `dice.png` | A gold and a dark d20 with the number box left blank (`numberCentre`), plus a crit starburst |
 
+| `hud.png` | Tooltip with a header band, toasts (info, success, warning, danger), objective tracker, reaction prompt panel, minimap frame and compass, map pips, glints |
+| `glyphs.png` | Controller and keyboard prompts: Xbox and PlayStation face buttons, bumpers, triggers, d-pad, sticks, keycaps A–Z, 0–9 and named keys, a 9-slice blank key, mouse buttons |
+
+Animated strips: `panel_shimmer` (a gleam that stays in the 9-slice corners), `countdown_ring` (turns ember in the last
+quarter), `heal_sweep` and `ghost_drain` (see `bars.compose`). Buttons have a `focused` state for the controller
+cursor, and the turn order has `frame_p1..p6` and `frame_active_p1..p6`.
+
 `previews/15-ui-mock.png` is a whole battle screen composed from the kit, terrain, characters and portraits.
 
 ## Beasts
 
-`content/tactics/base/beasts/` holds monsters that don't fit the humanoid rig:
+`content/tactics/base/beasts/` holds monsters off the humanoid rig: a quadruped rig (wolf, boar, bear) and drawings
+of their own (drake, giant spider, slime, giant bat). Frames are 48×48, anchored at (24, 44), with idle 6, walk 8 (a
+four-beat gait), attack 7 (coil, lunge, held bite, recover), special 7, hurt 3 and down 4 (hold the last frame).
+Row 0 is the front; row 1 is the back, drawn from behind (rump and tail nearest the camera). Bodies are lit masses
+(`arcpix/form.py`), with fur as short combed strokes and scales as rows, both anchored to the body so they don't
+crawl between frames. Variants include alpha wolf, undead bear, crystal slime, vampire bat and phase spider; some
+variants change the drawing (`forms`). `previews/18-beasts-scale.png` sets them beside a hero.
 
-- A quadruped rig: wolf, boar, bear, drake.
-- Separate drawings: giant spider, slime, giant bat.
+## Bestiary
 
-They use 48×48 frames anchored at (24, 44), with the same animation names (idle, walk, attack, hurt, down) and
-the same two facings as characters, so the battle code treats every unit alike. Each beast ships in palette
-variants: frost wolf, polar bear, magma slime, three drake colours, and others.
+`content/tactics/base/bestiary/` holds creatures drawn ahead of their stat blocks: warg (with a goblin-rider
+variant), hookbeak, giant scorpion, harpy, will-o'-wisp, gargoyle and giant crab. They follow the beasts contract.
+No rules refer to them yet. To use one, give it a stat block and move it into `beasts` or `bosses`: a C# test
+requires every creature there to have one.
 
 ## Icons
 
@@ -296,16 +339,31 @@ variants: frost wolf, polar bear, magma slime, three drake colours, and others.
 `manifest.json` maps each icon id to its atlas rect, category and tags. Palette-swapped icons (potions, gems)
 share a `shape`.
 
+**Ability icons by id.** `abilities_by_id.png` (24 px) and `abilities_by_id@2x.png` (drawn natively at 48 px, for
+UI scales of 2× and up) hold one icon per player ability in the rules pack. The art key is `icons.<ability id>`
+(`icons.wizard.fire_bolt`); `manifest.abilityIcons[id]` gives `rect`/`rect2x`, `class`, `tier`, `glyph`, `badge` and
+`reaction`. The grammar: the plate is the class colour, the glyph is the effect or damage type, the badge is the
+twist, a gold tab is the spell tier, a gold hook marks a reaction and three dots mark an area version. Specs live in
+`parts/ability_icons.py` (`SPECS`); a new ability falls back to `_infer`. Contact sheets per class are
+`previews/16-icons-abilities-<class>.png`.
+
 ## Effects
 
-`content/tactics/base/fx/` holds 23 effects in 50 colour variants. Each is a horizontal strip, and its manifest
+`content/tactics/base/fx/` holds 41 effects in colour variants. Each is a horizontal strip, and its manifest
 entry gives:
 
-- frame size, fps, `loop` and `loopStart`;
+- frame size (up to 96–128 px for big spells), fps, `loop` and `loopStart`;
 - the anchor, and where it attaches: `feet`, `body`, `overhead` or `projectile` (projectile art faces +x and the
   game rotates it);
 - blend mode: `add` for glows, `normal` for smoke and dust;
 - layer: `ground` (under units) or `over`.
+
+Big effects are built in layers: anticipation, a 1–2 frame white-hot `flash`, core, body, sparks with motion trails
+(a small seeded particle model) and residue. The Elements group gives every damage type its own look (flames,
+frost, shock, necrotic, radiant, psychic, thunder, acid, toxin, force); Boons and wards adds restore, ward, bless,
+inspire, rage, hold, dispel and web. `signature/` adds 12 school spells (`spell_*`: Fireball, Lightning Bolt, Cone
+of Cold, Spirit Guardians and others), whose entries carry `school` instead of `subclass`. Abilities pick their
+effect in `presentation.fx`.
 
 ## Backgrounds
 
@@ -329,8 +387,10 @@ The manifest pairs each biome with a sky.
 
 - **`worldmap/`:** a tileable parchment, 12 location icons, an animated party pin and quest marker, and a generated
   sample campaign map.
-- **`title/`:** the logo and emblem, moment banners (VICTORY, DEFEAT, LEVEL UP, YOUR TURN, BOSS ...), a chapter
-  ribbon, a 5×7 pixel font with advances, and a title-screen key art.
+- **`title/`:** the game's name lives in `parts/title.py` (`GAME_NAME = "Wardenflame"`, `CAMPAIGN`); a rename is one
+  edit and `build.py title`. `logo_gleam` and the `victory_anim`, `defeat_anim` and `level_up_anim` strips animate
+  the logo and moment banners. Also: the logo and emblem, moment banners (VICTORY, DEFEAT, LEVEL UP, YOUR TURN, BOSS
+  ...), a chapter ribbon, a 5×7 pixel font with advances, and a title-screen key art.
 - **`parts/showcase.py`:** renders `previews/anim-battle.gif`, a short battle built only from the pack's files. It's
   the quickest end-to-end check that sets agree on scale, anchors and timing.
 
