@@ -41,6 +41,24 @@
       ],
       "columns": 6,
       "gutter": 1
+    },
+    "abilityId": {
+      "file": "abilities_by_id.png",
+      "cell": [
+        24,
+        24
+      ],
+      "columns": 20,
+      "gutter": 1
+    },
+    "abilityId2x": {
+      "file": "abilities_by_id@2x.png",
+      "cell": [
+        48,
+        48
+      ],
+      "columns": 20,
+      "gutter": 1
     }
   },
   "icons": {
@@ -1683,6 +1701,9550 @@
       ]
     }
   },
+  "abilityIcons": {
+    "barbarian.rage": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        1,
+        1,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        1,
+        1,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "barbarian",
+      "tier": 0,
+      "glyph": "flame",
+      "badge": "fist",
+      "reaction": false
+    },
+    "barbarian.reckless_attack": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        27,
+        1,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        51,
+        1,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "barbarian",
+      "tier": 0,
+      "glyph": "skull",
+      "badge": "axe",
+      "reaction": false
+    },
+    "barbarian.cleaving_blow": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        53,
+        1,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        101,
+        1,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "barbarian",
+      "tier": 0,
+      "glyph": "axe",
+      "badge": "push",
+      "reaction": false
+    },
+    "barbarian.savage_roar": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        79,
+        1,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        151,
+        1,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "barbarian",
+      "tier": 0,
+      "glyph": "fang",
+      "badge": "wave",
+      "reaction": false
+    },
+    "barbarian.crushing_leap": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        105,
+        1,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        201,
+        1,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "barbarian",
+      "tier": 0,
+      "glyph": "quake",
+      "badge": "leap",
+      "reaction": false
+    },
+    "barbarian.whirlwind_slash": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        131,
+        1,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        251,
+        1,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "barbarian",
+      "tier": 0,
+      "glyph": "spin",
+      "badge": "axe",
+      "reaction": false
+    },
+    "barbarian.earthshaker": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        157,
+        1,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        301,
+        1,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "barbarian",
+      "tier": 0,
+      "glyph": "quake",
+      "badge": null,
+      "reaction": false
+    },
+    "barbarian.brutal_strike": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        183,
+        1,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        351,
+        1,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "barbarian",
+      "tier": 0,
+      "glyph": "hammer",
+      "badge": "burst",
+      "reaction": false
+    },
+    "barbarian.relentless_rage": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        209,
+        1,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        401,
+        1,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "barbarian",
+      "tier": 0,
+      "glyph": "heart",
+      "badge": "flame",
+      "reaction": false
+    },
+    "berserker.frenzy_strike": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        1,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        1,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "barbarian",
+      "tier": 0,
+      "glyph": "claw",
+      "badge": "flame",
+      "reaction": false
+    },
+    "berserker.retaliation": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        261,
+        1,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        501,
+        1,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "barbarian",
+      "tier": 0,
+      "glyph": "axe",
+      "badge": "burst",
+      "reaction": true
+    },
+    "berserker.bloodlust_roar": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        287,
+        1,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        551,
+        1,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "barbarian",
+      "tier": 0,
+      "glyph": "fang",
+      "badge": "wave",
+      "reaction": false
+    },
+    "earthshaker.quake_slam": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        1,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        1,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "barbarian",
+      "tier": 0,
+      "glyph": "hammer",
+      "badge": "quake",
+      "reaction": false
+    },
+    "earthshaker.tectonic_rift": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        339,
+        1,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        651,
+        1,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "barbarian",
+      "tier": 0,
+      "glyph": "fissure",
+      "badge": null,
+      "reaction": false
+    },
+    "earthshaker.cataclysm": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        365,
+        1,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        701,
+        1,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "barbarian",
+      "tier": 0,
+      "glyph": "spire",
+      "badge": "burst",
+      "reaction": false
+    },
+    "spiritwarden.ancestral_ward": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        391,
+        1,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        751,
+        1,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "barbarian",
+      "tier": 0,
+      "glyph": "wisp",
+      "badge": "shield",
+      "reaction": false
+    },
+    "spiritwarden.spirit_shield": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        417,
+        1,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        801,
+        1,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "barbarian",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": null,
+      "reaction": true
+    },
+    "spiritwarden.vengeful_ancestors": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        443,
+        1,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        851,
+        1,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "barbarian",
+      "tier": 0,
+      "glyph": "wisp",
+      "badge": "sword",
+      "reaction": false
+    },
+    "bard.bardic_inspiration": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        469,
+        1,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        901,
+        1,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 0,
+      "glyph": "note",
+      "badge": "star",
+      "reaction": false
+    },
+    "bard.song_of_rest": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        495,
+        1,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        951,
+        1,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 0,
+      "glyph": "note",
+      "badge": "heart",
+      "reaction": false
+    },
+    "bard.countercharm": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        1,
+        27,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        1,
+        51,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 0,
+      "glyph": "note",
+      "badge": "shield",
+      "reaction": false
+    },
+    "bard.vicious_mockery": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        27,
+        27,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        51,
+        51,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 0,
+      "glyph": "bubble",
+      "badge": null,
+      "reaction": false
+    },
+    "bard.thunderclap": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        53,
+        27,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        101,
+        51,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 0,
+      "glyph": "hand",
+      "badge": "wave",
+      "reaction": false
+    },
+    "bard.minor_illusion": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        79,
+        27,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        151,
+        51,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 0,
+      "glyph": "mask",
+      "badge": null,
+      "reaction": false
+    },
+    "bard.healing_word": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        105,
+        27,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        201,
+        51,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 1,
+      "glyph": "bubble",
+      "badge": "plus",
+      "reaction": false
+    },
+    "bard.cure_wounds": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        131,
+        27,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        251,
+        51,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 1,
+      "glyph": "plus",
+      "badge": "hand",
+      "reaction": false
+    },
+    "bard.dissonant_whispers": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        157,
+        27,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        301,
+        51,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 1,
+      "glyph": "bubble",
+      "badge": "wave",
+      "reaction": false
+    },
+    "bard.faerie_fire": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        183,
+        27,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        351,
+        51,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 1,
+      "glyph": "sparkle",
+      "badge": null,
+      "reaction": false
+    },
+    "bard.heroism": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        209,
+        27,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        401,
+        51,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 1,
+      "glyph": "heart",
+      "badge": "star",
+      "reaction": false
+    },
+    "bard.thunderwave": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        27,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        51,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 1,
+      "glyph": "wave",
+      "badge": "push",
+      "reaction": false
+    },
+    "bard.shatter": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        261,
+        27,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        501,
+        51,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 2,
+      "glyph": "shatter",
+      "badge": null,
+      "reaction": false
+    },
+    "bard.hold_person": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        287,
+        27,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        551,
+        51,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 2,
+      "glyph": "chain",
+      "badge": null,
+      "reaction": false
+    },
+    "bard.lesser_restoration": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        27,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        51,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 2,
+      "glyph": "drop",
+      "badge": "plus",
+      "reaction": false
+    },
+    "bard.silence": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        339,
+        27,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        651,
+        51,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 2,
+      "glyph": "note",
+      "badge": "nope",
+      "reaction": false
+    },
+    "bard.hypnotic_pattern": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        365,
+        27,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        701,
+        51,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 3,
+      "glyph": "spiral",
+      "badge": null,
+      "reaction": false
+    },
+    "bard.mass_healing_word": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        391,
+        27,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        751,
+        51,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 3,
+      "glyph": "bubble",
+      "badge": "plus",
+      "reaction": false
+    },
+    "bard.dispel_magic": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        417,
+        27,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        801,
+        51,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 3,
+      "glyph": "rune",
+      "badge": "nope",
+      "reaction": false
+    },
+    "bard.greater_invisibility": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        443,
+        27,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        851,
+        51,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 4,
+      "glyph": "hood",
+      "badge": "sparkle",
+      "reaction": false
+    },
+    "bard.dimension_door": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        469,
+        27,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        901,
+        51,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 4,
+      "glyph": "portal",
+      "badge": null,
+      "reaction": false
+    },
+    "bard.hold_monster": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        495,
+        27,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        951,
+        51,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 5,
+      "glyph": "chain",
+      "badge": "fang",
+      "reaction": false
+    },
+    "bard.greater_restoration": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        1,
+        53,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        1,
+        101,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 5,
+      "glyph": "sun",
+      "badge": "plus",
+      "reaction": false
+    },
+    "valor.combat_inspiration": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        27,
+        53,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        51,
+        101,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 0,
+      "glyph": "note",
+      "badge": "sword",
+      "reaction": false
+    },
+    "valor.battle_magic": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        53,
+        53,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        101,
+        101,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": "rune",
+      "reaction": false
+    },
+    "lore.cutting_words": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        79,
+        53,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        151,
+        101,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 0,
+      "glyph": "bubble",
+      "badge": "claw",
+      "reaction": true
+    },
+    "lore.counterspell": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        105,
+        53,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        201,
+        101,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 3,
+      "glyph": "hand",
+      "badge": "nope",
+      "reaction": true
+    },
+    "lore.magical_secrets": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        131,
+        53,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        251,
+        101,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 2,
+      "glyph": "book",
+      "badge": "rune",
+      "reaction": false
+    },
+    "lore.peerless_skill": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        157,
+        53,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        301,
+        101,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 0,
+      "glyph": "die",
+      "badge": null,
+      "reaction": false
+    },
+    "siren.alluring_verse": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        183,
+        53,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        351,
+        101,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 0,
+      "glyph": "note",
+      "badge": "heart",
+      "reaction": false
+    },
+    "siren.enthralling_aria": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        209,
+        53,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        401,
+        101,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 2,
+      "glyph": "note",
+      "badge": "spiral",
+      "reaction": false
+    },
+    "siren.sirens_call": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        53,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        101,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "bard",
+      "tier": 0,
+      "glyph": "wave",
+      "badge": "pull",
+      "reaction": false
+    },
+    "cleric.sacred_flame": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        261,
+        53,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        501,
+        101,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 0,
+      "glyph": "flame",
+      "badge": null,
+      "reaction": false
+    },
+    "cleric.toll_the_dead": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        287,
+        53,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        551,
+        101,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 0,
+      "glyph": "bell",
+      "badge": null,
+      "reaction": false
+    },
+    "cleric.word_of_radiance": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        53,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        101,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 0,
+      "glyph": "sun",
+      "badge": "wave",
+      "reaction": false
+    },
+    "cleric.resistance": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        339,
+        53,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        651,
+        101,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": null,
+      "reaction": false
+    },
+    "cleric.bless": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        365,
+        53,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        701,
+        101,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 1,
+      "glyph": "halo",
+      "badge": null,
+      "reaction": false
+    },
+    "cleric.bane": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        391,
+        53,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        751,
+        101,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 1,
+      "glyph": "halo",
+      "badge": "down",
+      "reaction": false
+    },
+    "cleric.cure_wounds": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        417,
+        53,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        801,
+        101,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 1,
+      "glyph": "plus",
+      "badge": "hand",
+      "reaction": false
+    },
+    "cleric.guiding_bolt": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        443,
+        53,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        851,
+        101,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 1,
+      "glyph": "comet",
+      "badge": null,
+      "reaction": false
+    },
+    "cleric.healing_word": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        469,
+        53,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        901,
+        101,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 1,
+      "glyph": "bubble",
+      "badge": "plus",
+      "reaction": false
+    },
+    "cleric.inflict_wounds": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        495,
+        53,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        951,
+        101,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 1,
+      "glyph": "skull",
+      "badge": "hand",
+      "reaction": false
+    },
+    "cleric.shield_of_faith": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        1,
+        79,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        1,
+        151,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 1,
+      "glyph": "shield",
+      "badge": "sparkle",
+      "reaction": false
+    },
+    "cleric.command": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        27,
+        79,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        51,
+        151,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 1,
+      "glyph": "bubble",
+      "badge": "down",
+      "reaction": false
+    },
+    "cleric.aid": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        53,
+        79,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        101,
+        151,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 2,
+      "glyph": "heart",
+      "badge": "up",
+      "reaction": false
+    },
+    "cleric.hold_person": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        79,
+        79,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        151,
+        151,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 2,
+      "glyph": "chain",
+      "badge": null,
+      "reaction": false
+    },
+    "cleric.lesser_restoration": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        105,
+        79,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        201,
+        151,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 2,
+      "glyph": "drop",
+      "badge": "plus",
+      "reaction": false
+    },
+    "cleric.spiritual_weapon": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        131,
+        79,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        251,
+        151,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 2,
+      "glyph": "hammer",
+      "badge": "sparkle",
+      "reaction": false
+    },
+    "cleric.blindness": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        157,
+        79,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        301,
+        151,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 2,
+      "glyph": "eye",
+      "badge": "nope",
+      "reaction": false
+    },
+    "cleric.spirit_guardians": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        183,
+        79,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        351,
+        151,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 3,
+      "glyph": "wisp",
+      "badge": "spin",
+      "reaction": false
+    },
+    "cleric.mass_healing_word": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        209,
+        79,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        401,
+        151,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 3,
+      "glyph": "bubble",
+      "badge": "plus",
+      "reaction": false
+    },
+    "cleric.dispel_magic": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        79,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        151,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 3,
+      "glyph": "rune",
+      "badge": "nope",
+      "reaction": false
+    },
+    "cleric.bestow_curse": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        261,
+        79,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        501,
+        151,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 3,
+      "glyph": "skull",
+      "badge": "down",
+      "reaction": false
+    },
+    "cleric.banishment": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        287,
+        79,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        551,
+        151,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 4,
+      "glyph": "portal",
+      "badge": null,
+      "reaction": false
+    },
+    "cleric.death_ward": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        79,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        151,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 4,
+      "glyph": "shield",
+      "badge": "skull",
+      "reaction": false
+    },
+    "cleric.flame_strike": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        339,
+        79,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        651,
+        151,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 5,
+      "glyph": "flame",
+      "badge": "sun",
+      "reaction": false
+    },
+    "cleric.mass_cure_wounds": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        365,
+        79,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        701,
+        151,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 5,
+      "glyph": "plus",
+      "badge": "hand",
+      "reaction": false
+    },
+    "cleric.greater_restoration": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        391,
+        79,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        751,
+        151,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 5,
+      "glyph": "sun",
+      "badge": "plus",
+      "reaction": false
+    },
+    "cleric.divine_spark": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        417,
+        79,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        801,
+        151,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 0,
+      "glyph": "star",
+      "badge": "heart",
+      "reaction": false
+    },
+    "cleric.turn_undead": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        443,
+        79,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        851,
+        151,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 0,
+      "glyph": "skull",
+      "badge": "sun",
+      "reaction": false
+    },
+    "cleric.sear_undead": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        469,
+        79,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        901,
+        151,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 0,
+      "glyph": "skull",
+      "badge": "flame",
+      "reaction": false
+    },
+    "cleric.divine_intervention": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        495,
+        79,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        951,
+        151,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 0,
+      "glyph": "wings",
+      "badge": "plus",
+      "reaction": false
+    },
+    "life.preserve_life": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        1,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        1,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 0,
+      "glyph": "heart",
+      "badge": "sun",
+      "reaction": false
+    },
+    "life.word_of_renewal": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        27,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        51,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 0,
+      "glyph": "ankh",
+      "badge": "plus",
+      "reaction": false
+    },
+    "life.mass_revival": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        53,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        101,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 0,
+      "glyph": "ankh",
+      "badge": "sun",
+      "reaction": false
+    },
+    "war.guided_strike": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        79,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        151,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 0,
+      "glyph": "target",
+      "badge": "sword",
+      "reaction": false
+    },
+    "war.war_priest": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        105,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        201,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 0,
+      "glyph": "hammer",
+      "badge": "sun",
+      "reaction": false
+    },
+    "war.avatar_of_battle": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        131,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        251,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 0,
+      "glyph": "crown",
+      "badge": "sword",
+      "reaction": false
+    },
+    "light.radiance_of_the_dawn": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        157,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        301,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 0,
+      "glyph": "sun",
+      "badge": null,
+      "reaction": false
+    },
+    "light.warding_flare": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        183,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        351,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 0,
+      "glyph": "burst",
+      "badge": "shield",
+      "reaction": true
+    },
+    "light.corona_of_light": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        209,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        401,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "cleric",
+      "tier": 0,
+      "glyph": "halo",
+      "badge": "sun",
+      "reaction": false
+    },
+    "common.attack": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "common.dash": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        261,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        501,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "boot",
+      "badge": "wind",
+      "reaction": false
+    },
+    "common.disengage": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        287,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        551,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "footprints",
+      "badge": null,
+      "reaction": false
+    },
+    "common.dodge": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "wind",
+      "reaction": false
+    },
+    "common.help": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        339,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        651,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "hand",
+      "badge": "up",
+      "reaction": false
+    },
+    "common.shove": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        365,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        701,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "hand",
+      "badge": "push",
+      "reaction": false
+    },
+    "common.use_item": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        391,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        751,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "potion",
+      "badge": null,
+      "reaction": false
+    },
+    "item.potion_of_healing": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        417,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        801,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "item",
+      "tier": 0,
+      "glyph": "potion",
+      "badge": null,
+      "reaction": false
+    },
+    "item.greater_healing": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        443,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        851,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "item",
+      "tier": 0,
+      "glyph": "potion",
+      "badge": "star",
+      "reaction": false
+    },
+    "item.alchemists_fire": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        469,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        901,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "item",
+      "tier": 0,
+      "glyph": "potion",
+      "badge": "flame",
+      "reaction": false
+    },
+    "item.smoke_bomb": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        495,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        951,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "item",
+      "tier": 0,
+      "glyph": "bomb",
+      "badge": "cloud",
+      "reaction": false
+    },
+    "druid.wild_shape_wolf": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        1,
+        131,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        1,
+        251,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 0,
+      "glyph": "paw",
+      "badge": "moon",
+      "reaction": false
+    },
+    "druid.wild_shape_bear": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        27,
+        131,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        51,
+        251,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 0,
+      "glyph": "paw",
+      "badge": "leaf",
+      "reaction": false
+    },
+    "druid.wild_shape_dire_wolf": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        53,
+        131,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        101,
+        251,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 0,
+      "glyph": "fang",
+      "badge": "paw",
+      "reaction": false
+    },
+    "druid.thorn_whip": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        79,
+        131,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        151,
+        251,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 0,
+      "glyph": "thorn",
+      "badge": "pull",
+      "reaction": false
+    },
+    "druid.produce_flame": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        105,
+        131,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        201,
+        251,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 0,
+      "glyph": "hand",
+      "badge": "flame",
+      "reaction": false
+    },
+    "druid.shillelagh": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        131,
+        131,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        251,
+        251,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 0,
+      "glyph": "club",
+      "badge": null,
+      "reaction": false
+    },
+    "druid.entangle": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        157,
+        131,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        301,
+        251,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 1,
+      "glyph": "vines",
+      "badge": null,
+      "reaction": false
+    },
+    "druid.faerie_fire": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        183,
+        131,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        351,
+        251,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 1,
+      "glyph": "sparkle",
+      "badge": null,
+      "reaction": false
+    },
+    "druid.thunderwave": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        209,
+        131,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        401,
+        251,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 1,
+      "glyph": "wave",
+      "badge": "push",
+      "reaction": false
+    },
+    "druid.cure_wounds": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        131,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        251,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 1,
+      "glyph": "plus",
+      "badge": "hand",
+      "reaction": false
+    },
+    "druid.healing_word": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        261,
+        131,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        501,
+        251,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 1,
+      "glyph": "bubble",
+      "badge": "plus",
+      "reaction": false
+    },
+    "druid.fog_cloud": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        287,
+        131,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        551,
+        251,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 1,
+      "glyph": "cloud",
+      "badge": null,
+      "reaction": false
+    },
+    "druid.hold_person": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        131,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        251,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 2,
+      "glyph": "chain",
+      "badge": null,
+      "reaction": false
+    },
+    "druid.spike_growth": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        339,
+        131,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        651,
+        251,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 2,
+      "glyph": "spikes",
+      "badge": null,
+      "reaction": false
+    },
+    "druid.barkskin": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        365,
+        131,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        701,
+        251,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 2,
+      "glyph": "shield",
+      "badge": "leaf",
+      "reaction": false
+    },
+    "druid.moonbeam": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        391,
+        131,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        751,
+        251,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 2,
+      "glyph": "moon",
+      "badge": "sparkle",
+      "reaction": false
+    },
+    "druid.lesser_restoration": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        417,
+        131,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        801,
+        251,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 2,
+      "glyph": "drop",
+      "badge": "plus",
+      "reaction": false
+    },
+    "druid.call_lightning": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        443,
+        131,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        851,
+        251,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 3,
+      "glyph": "cloud",
+      "badge": "bolt",
+      "reaction": false
+    },
+    "druid.sleet_storm": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        469,
+        131,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        901,
+        251,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 3,
+      "glyph": "cloud",
+      "badge": "snowflake",
+      "reaction": false
+    },
+    "druid.dispel_magic": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        495,
+        131,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        951,
+        251,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 3,
+      "glyph": "rune",
+      "badge": "nope",
+      "reaction": false
+    },
+    "druid.conjure_animals": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        1,
+        157,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        1,
+        301,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 3,
+      "glyph": "rune",
+      "badge": "paw",
+      "reaction": false
+    },
+    "druid.ice_storm": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        27,
+        157,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        51,
+        301,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 4,
+      "glyph": "cloud",
+      "badge": "crystal",
+      "reaction": false
+    },
+    "druid.blight": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        53,
+        157,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        101,
+        301,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 4,
+      "glyph": "leaf",
+      "badge": "skull",
+      "reaction": false
+    },
+    "druid.mass_cure_wounds": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        79,
+        157,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        151,
+        301,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 5,
+      "glyph": "plus",
+      "badge": "hand",
+      "reaction": false
+    },
+    "druid.greater_restoration": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        105,
+        157,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        201,
+        301,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 5,
+      "glyph": "sun",
+      "badge": "plus",
+      "reaction": false
+    },
+    "shapeshifter.dire_form": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        131,
+        157,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        251,
+        301,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 0,
+      "glyph": "fang",
+      "badge": "paw",
+      "reaction": false
+    },
+    "shapeshifter.elder_bear_form": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        157,
+        157,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        301,
+        301,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 0,
+      "glyph": "paw",
+      "badge": "crown",
+      "reaction": false
+    },
+    "shapeshifter.primal_mend": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        183,
+        157,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        351,
+        301,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 0,
+      "glyph": "leaf",
+      "badge": "plus",
+      "reaction": false
+    },
+    "stormcaller.gale_burst": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        209,
+        157,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        401,
+        301,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 0,
+      "glyph": "wind",
+      "badge": "push",
+      "reaction": false
+    },
+    "stormcaller.chain_tempest": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        157,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        301,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 2,
+      "glyph": "bolt",
+      "badge": "chain",
+      "reaction": false
+    },
+    "stormcaller.wrath_of_the_tempest": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        261,
+        157,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        501,
+        301,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 0,
+      "glyph": "tornado",
+      "badge": "bolt",
+      "reaction": false
+    },
+    "grovekeeper.bloom": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        287,
+        157,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        551,
+        301,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 0,
+      "glyph": "flower",
+      "badge": "plus",
+      "reaction": false
+    },
+    "grovekeeper.sanctuary_grove": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        157,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        301,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 2,
+      "glyph": "tree",
+      "badge": "plus",
+      "reaction": false
+    },
+    "grovekeeper.ancient_canopy": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        339,
+        157,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        651,
+        301,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "druid",
+      "tier": 0,
+      "glyph": "tree",
+      "badge": "sun",
+      "reaction": false
+    },
+    "fighter.second_wind": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        365,
+        157,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        701,
+        301,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "fighter",
+      "tier": 0,
+      "glyph": "heart",
+      "badge": "wind",
+      "reaction": false
+    },
+    "fighter.action_surge": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        391,
+        157,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        751,
+        301,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "fighter",
+      "tier": 0,
+      "glyph": "bolt",
+      "badge": "sword",
+      "reaction": false
+    },
+    "fighter.trip_attack": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        417,
+        157,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        801,
+        301,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "fighter",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": "down",
+      "reaction": false
+    },
+    "fighter.pushing_attack": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        443,
+        157,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        851,
+        301,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "fighter",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": "push",
+      "reaction": false
+    },
+    "fighter.menacing_attack": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        469,
+        157,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        901,
+        301,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "fighter",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": "skull",
+      "reaction": false
+    },
+    "fighter.precision_attack": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        495,
+        157,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        951,
+        301,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "fighter",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": "target",
+      "reaction": false
+    },
+    "fighter.goading_attack": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        1,
+        183,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        1,
+        351,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "fighter",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": "bubble",
+      "reaction": false
+    },
+    "fighter.rally": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        27,
+        183,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        51,
+        351,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "fighter",
+      "tier": 0,
+      "glyph": "banner",
+      "badge": "heart",
+      "reaction": false
+    },
+    "fighter.feinting_attack": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        53,
+        183,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        101,
+        351,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "fighter",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": "mask",
+      "reaction": false
+    },
+    "vanguard.charge": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        79,
+        183,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        151,
+        351,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "fighter",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "push",
+      "reaction": false
+    },
+    "vanguard.challenge": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        105,
+        183,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        201,
+        351,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "fighter",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "bubble",
+      "reaction": false
+    },
+    "vanguard.shield_wall": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        131,
+        183,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        251,
+        351,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "fighter",
+      "tier": 0,
+      "glyph": "shields",
+      "badge": null,
+      "reaction": false
+    },
+    "vanguard.mass_challenge": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        157,
+        183,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        301,
+        351,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "fighter",
+      "tier": 0,
+      "glyph": "banner",
+      "badge": "shield",
+      "reaction": false
+    },
+    "weaponmaster.cleave": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        183,
+        183,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        351,
+        351,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "fighter",
+      "tier": 0,
+      "glyph": "spin",
+      "badge": "sword",
+      "reaction": false
+    },
+    "weaponmaster.blade_dance": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        209,
+        183,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        401,
+        351,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "fighter",
+      "tier": 0,
+      "glyph": "swords",
+      "badge": "spin",
+      "reaction": false
+    },
+    "weaponmaster.execution_strike": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        183,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        351,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "fighter",
+      "tier": 0,
+      "glyph": "axe",
+      "badge": "skull",
+      "reaction": false
+    },
+    "warlord.commanders_strike": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        261,
+        183,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        501,
+        351,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "fighter",
+      "tier": 0,
+      "glyph": "bubble",
+      "badge": "sword",
+      "reaction": false
+    },
+    "warlord.maneuvering_order": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        287,
+        183,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        551,
+        351,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "fighter",
+      "tier": 0,
+      "glyph": "banner",
+      "badge": "boot",
+      "reaction": false
+    },
+    "warlord.rallying_cry": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        183,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        351,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "fighter",
+      "tier": 0,
+      "glyph": "banner",
+      "badge": "up",
+      "reaction": false
+    },
+    "warlord.to_arms": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        339,
+        183,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        651,
+        351,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "fighter",
+      "tier": 0,
+      "glyph": "banner",
+      "badge": "swords",
+      "reaction": false
+    },
+    "monk.unarmed_strike": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        365,
+        183,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        701,
+        351,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "monk",
+      "tier": 0,
+      "glyph": "fist",
+      "badge": null,
+      "reaction": false
+    },
+    "monk.martial_arts": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        391,
+        183,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        751,
+        351,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "monk",
+      "tier": 0,
+      "glyph": "fist",
+      "badge": "star",
+      "reaction": false
+    },
+    "monk.flurry_of_blows": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        417,
+        183,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        801,
+        351,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "monk",
+      "tier": 0,
+      "glyph": "fists",
+      "badge": null,
+      "reaction": false
+    },
+    "monk.heightened_flurry": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        443,
+        183,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        851,
+        351,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "monk",
+      "tier": 0,
+      "glyph": "fists",
+      "badge": "up",
+      "reaction": false
+    },
+    "monk.step_of_the_wind": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        469,
+        183,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        901,
+        351,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "monk",
+      "tier": 0,
+      "glyph": "footprints",
+      "badge": "wind",
+      "reaction": false
+    },
+    "monk.patient_defense": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        495,
+        183,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        951,
+        351,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "monk",
+      "tier": 0,
+      "glyph": "lotus",
+      "badge": null,
+      "reaction": false
+    },
+    "monk.deflect_attacks": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        1,
+        209,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        1,
+        401,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "monk",
+      "tier": 0,
+      "glyph": "hand",
+      "badge": "arrow",
+      "reaction": true
+    },
+    "monk.stunning_strike": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        27,
+        209,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        51,
+        401,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "monk",
+      "tier": 0,
+      "glyph": "fist",
+      "badge": "bolt",
+      "reaction": false
+    },
+    "open_hand.palm_strike": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        53,
+        209,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        101,
+        401,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "monk",
+      "tier": 0,
+      "glyph": "hand",
+      "badge": "push",
+      "reaction": false
+    },
+    "open_hand.sweeping_kick": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        79,
+        209,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        151,
+        401,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "monk",
+      "tier": 0,
+      "glyph": "spin",
+      "badge": "down",
+      "reaction": false
+    },
+    "open_hand.wholeness_of_body": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        105,
+        209,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        201,
+        401,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "monk",
+      "tier": 0,
+      "glyph": "lotus",
+      "badge": "plus",
+      "reaction": false
+    },
+    "open_hand.quivering_palm": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        131,
+        209,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        251,
+        401,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "monk",
+      "tier": 0,
+      "glyph": "hand",
+      "badge": "wave",
+      "reaction": false
+    },
+    "windstep.gale_leap": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        157,
+        209,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        301,
+        401,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "monk",
+      "tier": 0,
+      "glyph": "leap",
+      "badge": "wind",
+      "reaction": false
+    },
+    "windstep.cyclone_kick": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        183,
+        209,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        351,
+        401,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "monk",
+      "tier": 0,
+      "glyph": "tornado",
+      "badge": "boot",
+      "reaction": false
+    },
+    "windstep.tempest_dash": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        209,
+        209,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        401,
+        401,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "monk",
+      "tier": 0,
+      "glyph": "wind",
+      "badge": "bolt",
+      "reaction": false
+    },
+    "iron_body.iron_skin": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        209,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        401,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "monk",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "fist",
+      "reaction": false
+    },
+    "iron_body.counter_palm": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        261,
+        209,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        501,
+        401,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "monk",
+      "tier": 0,
+      "glyph": "hand",
+      "badge": "burst",
+      "reaction": true
+    },
+    "iron_body.adamantine_form": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        287,
+        209,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        551,
+        401,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "monk",
+      "tier": 0,
+      "glyph": "lotus",
+      "badge": "star",
+      "reaction": false
+    },
+    "paladin.lay_on_hands": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        209,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        401,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 0,
+      "glyph": "hand",
+      "badge": "heart",
+      "reaction": false
+    },
+    "paladin.divine_smite": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        339,
+        209,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        651,
+        401,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 1,
+      "glyph": "sword",
+      "badge": "burst",
+      "reaction": false
+    },
+    "paladin.divine_smite_2": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        365,
+        209,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        701,
+        401,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 2,
+      "glyph": "sword",
+      "badge": "burst",
+      "reaction": false
+    },
+    "paladin.divine_smite_3": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        391,
+        209,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        751,
+        401,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 3,
+      "glyph": "sword",
+      "badge": "burst",
+      "reaction": false
+    },
+    "paladin.bless": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        417,
+        209,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        801,
+        401,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 1,
+      "glyph": "halo",
+      "badge": null,
+      "reaction": false
+    },
+    "paladin.command": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        443,
+        209,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        851,
+        401,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 1,
+      "glyph": "bubble",
+      "badge": "down",
+      "reaction": false
+    },
+    "paladin.compelled_duel": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        469,
+        209,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        901,
+        401,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 1,
+      "glyph": "swords",
+      "badge": "target",
+      "reaction": false
+    },
+    "paladin.cure_wounds": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        495,
+        209,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        951,
+        401,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 1,
+      "glyph": "plus",
+      "badge": "hand",
+      "reaction": false
+    },
+    "paladin.shield_of_faith": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        1,
+        235,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        1,
+        451,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 1,
+      "glyph": "shield",
+      "badge": "sparkle",
+      "reaction": false
+    },
+    "paladin.aid": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        27,
+        235,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        51,
+        451,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 2,
+      "glyph": "heart",
+      "badge": "up",
+      "reaction": false
+    },
+    "paladin.lesser_restoration": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        53,
+        235,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        101,
+        451,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 2,
+      "glyph": "drop",
+      "badge": "plus",
+      "reaction": false
+    },
+    "paladin.dispel_magic": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        79,
+        235,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        151,
+        451,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 3,
+      "glyph": "rune",
+      "badge": "nope",
+      "reaction": false
+    },
+    "paladin.elemental_weapon": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        105,
+        235,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        201,
+        451,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 3,
+      "glyph": "sword",
+      "badge": "rune",
+      "reaction": false
+    },
+    "guardian.sanctuary_aegis": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        131,
+        235,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        251,
+        451,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "heart",
+      "reaction": false
+    },
+    "guardian.righteous_challenge": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        157,
+        235,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        301,
+        451,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 0,
+      "glyph": "banner",
+      "badge": "target",
+      "reaction": false
+    },
+    "guardian.divine_intervention": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        183,
+        235,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        351,
+        451,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 0,
+      "glyph": "wings",
+      "badge": "shield",
+      "reaction": true
+    },
+    "guardian.aegis_of_faith": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        209,
+        235,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        401,
+        451,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "sun",
+      "reaction": false
+    },
+    "crusader.searing_smite": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        235,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        451,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": "flame",
+      "reaction": false
+    },
+    "crusader.consecrated_ground": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        261,
+        235,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        501,
+        451,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 0,
+      "glyph": "rune",
+      "badge": "flame",
+      "reaction": false
+    },
+    "crusader.dawnbreaker": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        287,
+        235,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        551,
+        451,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 0,
+      "glyph": "sun",
+      "badge": "sword",
+      "reaction": false
+    },
+    "avenger.vow_of_enmity": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        235,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        451,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 0,
+      "glyph": "eye",
+      "badge": "target",
+      "reaction": false
+    },
+    "avenger.abjure_enemy": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        339,
+        235,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        651,
+        451,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 0,
+      "glyph": "hand",
+      "badge": "skull",
+      "reaction": false
+    },
+    "avenger.relentless_step": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        365,
+        235,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        701,
+        451,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 0,
+      "glyph": "footprints",
+      "badge": "sparkle",
+      "reaction": false
+    },
+    "avenger.soul_of_vengeance": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        391,
+        235,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        751,
+        451,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "paladin",
+      "tier": 0,
+      "glyph": "wisp",
+      "badge": "sword",
+      "reaction": false
+    },
+    "elf.fey_step": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        417,
+        235,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        801,
+        451,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "race",
+      "tier": 0,
+      "glyph": "spiral",
+      "badge": "leaf",
+      "reaction": false
+    },
+    "dwarf.stoneskin": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        443,
+        235,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        851,
+        451,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "race",
+      "tier": 0,
+      "glyph": "rock",
+      "badge": "shield",
+      "reaction": false
+    },
+    "tiefling.hellish_rebuke": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        469,
+        235,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        901,
+        451,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "race",
+      "tier": 1,
+      "glyph": "flame",
+      "badge": "skull",
+      "reaction": true
+    },
+    "aasimar.healing_hands": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        495,
+        235,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        951,
+        451,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "race",
+      "tier": 0,
+      "glyph": "hand",
+      "badge": "plus",
+      "reaction": false
+    },
+    "goliath.stones_endurance": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        1,
+        261,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        1,
+        501,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "race",
+      "tier": 0,
+      "glyph": "rock",
+      "badge": "heart",
+      "reaction": true
+    },
+    "dragonborn.breath_weapon": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        27,
+        261,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        51,
+        501,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "race",
+      "tier": 0,
+      "glyph": "cone",
+      "badge": null,
+      "reaction": false
+    },
+    "ranger.hunters_mark": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        53,
+        261,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        101,
+        501,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "ranger",
+      "tier": 1,
+      "glyph": "target",
+      "badge": "paw",
+      "reaction": false
+    },
+    "ranger.vanish": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        79,
+        261,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        151,
+        501,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "ranger",
+      "tier": 0,
+      "glyph": "hood",
+      "badge": "leaf",
+      "reaction": false
+    },
+    "ranger.cure_wounds": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        105,
+        261,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        201,
+        501,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "ranger",
+      "tier": 1,
+      "glyph": "plus",
+      "badge": "hand",
+      "reaction": false
+    },
+    "ranger.ensnaring_strike": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        131,
+        261,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        251,
+        501,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "ranger",
+      "tier": 1,
+      "glyph": "vines",
+      "badge": "arrow",
+      "reaction": false
+    },
+    "ranger.entangle": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        157,
+        261,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        301,
+        501,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "ranger",
+      "tier": 1,
+      "glyph": "vines",
+      "badge": null,
+      "reaction": false
+    },
+    "ranger.hail_of_thorns": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        183,
+        261,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        351,
+        501,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "ranger",
+      "tier": 1,
+      "glyph": "volley",
+      "badge": "thorn",
+      "reaction": false
+    },
+    "ranger.spike_growth": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        209,
+        261,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        401,
+        501,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "ranger",
+      "tier": 2,
+      "glyph": "spikes",
+      "badge": null,
+      "reaction": false
+    },
+    "ranger.barkskin": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        261,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        501,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "ranger",
+      "tier": 2,
+      "glyph": "shield",
+      "badge": "leaf",
+      "reaction": false
+    },
+    "ranger.lesser_restoration": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        261,
+        261,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        501,
+        501,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "ranger",
+      "tier": 2,
+      "glyph": "drop",
+      "badge": "plus",
+      "reaction": false
+    },
+    "ranger.lightning_arrow": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        287,
+        261,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        551,
+        501,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "ranger",
+      "tier": 3,
+      "glyph": "arrow",
+      "badge": "bolt",
+      "reaction": false
+    },
+    "ranger.conjure_barrage": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        261,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        501,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "ranger",
+      "tier": 3,
+      "glyph": "volley",
+      "badge": "sparkle",
+      "reaction": false
+    },
+    "sharpshooter.deadeye": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        339,
+        261,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        651,
+        501,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "ranger",
+      "tier": 0,
+      "glyph": "target",
+      "badge": "arrow",
+      "reaction": false
+    },
+    "sharpshooter.piercing_shot": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        365,
+        261,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        701,
+        501,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "ranger",
+      "tier": 0,
+      "glyph": "beam",
+      "badge": "arrow",
+      "reaction": false
+    },
+    "sharpshooter.volley": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        391,
+        261,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        751,
+        501,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "ranger",
+      "tier": 0,
+      "glyph": "volley",
+      "badge": null,
+      "reaction": false
+    },
+    "beastmaster.sic": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        417,
+        261,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        801,
+        501,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "ranger",
+      "tier": 0,
+      "glyph": "paw",
+      "badge": "target",
+      "reaction": false
+    },
+    "beastmaster.pack_bond": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        443,
+        261,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        851,
+        501,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "ranger",
+      "tier": 0,
+      "glyph": "paw",
+      "badge": "heart",
+      "reaction": false
+    },
+    "beastmaster.alpha_howl": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        469,
+        261,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        901,
+        501,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "ranger",
+      "tier": 0,
+      "glyph": "moon",
+      "badge": "fang",
+      "reaction": false
+    },
+    "warden.vine_snare": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        495,
+        261,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        951,
+        501,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "ranger",
+      "tier": 0,
+      "glyph": "vines",
+      "badge": "pull",
+      "reaction": false
+    },
+    "warden.natures_veil": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        1,
+        287,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        1,
+        551,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "ranger",
+      "tier": 0,
+      "glyph": "leaf",
+      "badge": "shield",
+      "reaction": false
+    },
+    "warden.guardian_tree": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        27,
+        287,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        51,
+        551,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "ranger",
+      "tier": 0,
+      "glyph": "tree",
+      "badge": "shield",
+      "reaction": false
+    },
+    "rogue.cunning_dash": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        53,
+        287,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        101,
+        551,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "rogue",
+      "tier": 0,
+      "glyph": "boot",
+      "badge": "wind",
+      "reaction": false
+    },
+    "rogue.cunning_disengage": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        79,
+        287,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        151,
+        551,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "rogue",
+      "tier": 0,
+      "glyph": "footprints",
+      "badge": null,
+      "reaction": false
+    },
+    "rogue.cunning_hide": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        105,
+        287,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        201,
+        551,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "rogue",
+      "tier": 0,
+      "glyph": "hood",
+      "badge": null,
+      "reaction": false
+    },
+    "rogue.steady_aim": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        131,
+        287,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        251,
+        551,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "rogue",
+      "tier": 0,
+      "glyph": "target",
+      "badge": "eye",
+      "reaction": false
+    },
+    "rogue.trip": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        157,
+        287,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        301,
+        551,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "rogue",
+      "tier": 0,
+      "glyph": "dagger",
+      "badge": "down",
+      "reaction": false
+    },
+    "rogue.poison_strike": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        183,
+        287,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        351,
+        551,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "rogue",
+      "tier": 0,
+      "glyph": "dagger",
+      "badge": "drop",
+      "reaction": false
+    },
+    "rogue.withdraw": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        209,
+        287,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        401,
+        551,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "rogue",
+      "tier": 0,
+      "glyph": "dagger",
+      "badge": "footprints",
+      "reaction": false
+    },
+    "rogue.daze": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        287,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        551,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "rogue",
+      "tier": 0,
+      "glyph": "dagger",
+      "badge": "star",
+      "reaction": false
+    },
+    "rogue.knock_out": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        261,
+        287,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        501,
+        551,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "rogue",
+      "tier": 0,
+      "glyph": "dagger",
+      "badge": "zzz",
+      "reaction": false
+    },
+    "rogue.obscure": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        287,
+        287,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        551,
+        551,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "rogue",
+      "tier": 0,
+      "glyph": "dagger",
+      "badge": "cloud",
+      "reaction": false
+    },
+    "rogue.uncanny_dodge": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        287,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        551,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "rogue",
+      "tier": 0,
+      "glyph": "wind",
+      "badge": "dagger",
+      "reaction": true
+    },
+    "shadow.shadowstep": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        339,
+        287,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        651,
+        551,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "rogue",
+      "tier": 0,
+      "glyph": "spiral",
+      "badge": "footprints",
+      "reaction": false
+    },
+    "shadow.cloak_of_shadows": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        365,
+        287,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        701,
+        551,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "rogue",
+      "tier": 0,
+      "glyph": "hood",
+      "badge": "moon",
+      "reaction": false
+    },
+    "trickster.caltrops": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        391,
+        287,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        751,
+        551,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "rogue",
+      "tier": 0,
+      "glyph": "spikes",
+      "badge": null,
+      "reaction": false
+    },
+    "trickster.smoke_bomb": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        417,
+        287,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        801,
+        551,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "rogue",
+      "tier": 0,
+      "glyph": "bomb",
+      "badge": "cloud",
+      "reaction": false
+    },
+    "trickster.snap_trap": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        443,
+        287,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        851,
+        551,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "rogue",
+      "tier": 0,
+      "glyph": "trap",
+      "badge": null,
+      "reaction": false
+    },
+    "trickster.flashbang": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        469,
+        287,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        901,
+        551,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "rogue",
+      "tier": 0,
+      "glyph": "bomb",
+      "badge": "burst",
+      "reaction": false
+    },
+    "duelist.riposte": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        495,
+        287,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        951,
+        551,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "rogue",
+      "tier": 0,
+      "glyph": "swords",
+      "badge": "burst",
+      "reaction": true
+    },
+    "duelist.parry_stance": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        1,
+        313,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        1,
+        601,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "rogue",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": "shield",
+      "reaction": false
+    },
+    "duelist.master_flourish": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        27,
+        313,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        51,
+        601,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "rogue",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": "star",
+      "reaction": false
+    },
+    "sorcerer.innate_sorcery": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        53,
+        313,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        101,
+        601,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "hand",
+      "badge": "star",
+      "reaction": false
+    },
+    "sorcerer.font_of_magic_mana": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        79,
+        313,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        151,
+        601,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "drop",
+      "badge": "star",
+      "reaction": false
+    },
+    "sorcerer.font_of_magic_sorcery": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        105,
+        313,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        201,
+        601,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "drop",
+      "badge": "star",
+      "reaction": false
+    },
+    "sorcerer.metamagic_twinned": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        131,
+        313,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        251,
+        601,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "metamagic",
+      "badge": "orb",
+      "reaction": false
+    },
+    "sorcerer.metamagic_extended": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        157,
+        313,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        301,
+        601,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "metamagic",
+      "badge": "hourglass",
+      "reaction": false
+    },
+    "sorcerer.metamagic_careful": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        183,
+        313,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        351,
+        601,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "metamagic",
+      "badge": "shield",
+      "reaction": false
+    },
+    "sorcerer.metamagic_quickened": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        209,
+        313,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        401,
+        601,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "metamagic",
+      "badge": "bolt",
+      "reaction": false
+    },
+    "sorcerer.metamagic_distant": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        313,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        601,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "metamagic",
+      "badge": "arrow",
+      "reaction": false
+    },
+    "sorcerer.fire_bolt": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        261,
+        313,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        501,
+        601,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "comet",
+      "badge": null,
+      "reaction": false
+    },
+    "sorcerer.ray_of_frost": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        287,
+        313,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        551,
+        601,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "beam",
+      "badge": "snowflake",
+      "reaction": false
+    },
+    "sorcerer.shocking_grasp": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        313,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        601,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "hand",
+      "badge": "bolt",
+      "reaction": false
+    },
+    "sorcerer.acid_splash": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        339,
+        313,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        651,
+        601,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "drop",
+      "badge": "burst",
+      "reaction": false
+    },
+    "sorcerer.chill_touch": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        365,
+        313,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        701,
+        601,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "hand",
+      "badge": "snowflake",
+      "reaction": false
+    },
+    "sorcerer.poison_spray": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        391,
+        313,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        751,
+        601,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "cone",
+      "badge": null,
+      "reaction": false
+    },
+    "sorcerer.chromatic_orb": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        417,
+        313,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        801,
+        601,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 1,
+      "glyph": "orb",
+      "badge": "sparkle",
+      "reaction": false
+    },
+    "sorcerer.burning_hands": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        443,
+        313,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        851,
+        601,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 1,
+      "glyph": "cone",
+      "badge": "hand",
+      "reaction": false
+    },
+    "sorcerer.magic_missile": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        469,
+        313,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        901,
+        601,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 1,
+      "glyph": "missiles",
+      "badge": null,
+      "reaction": false
+    },
+    "sorcerer.shield": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        495,
+        313,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        951,
+        601,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 1,
+      "glyph": "shield",
+      "badge": "sparkle",
+      "reaction": true
+    },
+    "sorcerer.thunderwave": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        1,
+        339,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        1,
+        651,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 1,
+      "glyph": "wave",
+      "badge": "push",
+      "reaction": false
+    },
+    "sorcerer.sleep": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        27,
+        339,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        51,
+        651,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 1,
+      "glyph": "zzz",
+      "badge": "moon",
+      "reaction": false
+    },
+    "sorcerer.scorching_ray": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        53,
+        339,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        101,
+        651,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 2,
+      "glyph": "beam",
+      "badge": "flame",
+      "reaction": false
+    },
+    "sorcerer.shatter": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        79,
+        339,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        151,
+        651,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 2,
+      "glyph": "shatter",
+      "badge": null,
+      "reaction": false
+    },
+    "sorcerer.hold_person": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        105,
+        339,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        201,
+        651,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 2,
+      "glyph": "chain",
+      "badge": null,
+      "reaction": false
+    },
+    "sorcerer.misty_step": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        131,
+        339,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        251,
+        651,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 2,
+      "glyph": "spiral",
+      "badge": null,
+      "reaction": false
+    },
+    "sorcerer.web": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        157,
+        339,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        301,
+        651,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 2,
+      "glyph": "web",
+      "badge": null,
+      "reaction": false
+    },
+    "sorcerer.fireball": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        183,
+        339,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        351,
+        651,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 3,
+      "glyph": "burst",
+      "badge": "flame",
+      "reaction": false
+    },
+    "sorcerer.lightning_bolt": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        209,
+        339,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        401,
+        651,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 3,
+      "glyph": "bolt",
+      "badge": null,
+      "reaction": false
+    },
+    "sorcerer.haste": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        339,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        651,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 3,
+      "glyph": "hourglass",
+      "badge": "wind",
+      "reaction": false
+    },
+    "sorcerer.slow": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        261,
+        339,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        501,
+        651,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 3,
+      "glyph": "hourglass",
+      "badge": "down",
+      "reaction": false
+    },
+    "sorcerer.counterspell": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        287,
+        339,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        551,
+        651,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 3,
+      "glyph": "hand",
+      "badge": "nope",
+      "reaction": true
+    },
+    "sorcerer.ice_storm": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        339,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        651,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 4,
+      "glyph": "cloud",
+      "badge": "crystal",
+      "reaction": false
+    },
+    "sorcerer.wall_of_fire": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        339,
+        339,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        651,
+        651,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 4,
+      "glyph": "wall",
+      "badge": "flame",
+      "reaction": false
+    },
+    "sorcerer.banishment": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        365,
+        339,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        701,
+        651,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 4,
+      "glyph": "portal",
+      "badge": null,
+      "reaction": false
+    },
+    "sorcerer.greater_invisibility": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        391,
+        339,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        751,
+        651,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 4,
+      "glyph": "hood",
+      "badge": "sparkle",
+      "reaction": false
+    },
+    "sorcerer.cone_of_cold": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        417,
+        339,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        801,
+        651,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 5,
+      "glyph": "cone",
+      "badge": "snowflake",
+      "reaction": false
+    },
+    "sorcerer.hold_monster": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        443,
+        339,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        851,
+        651,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 5,
+      "glyph": "chain",
+      "badge": "fang",
+      "reaction": false
+    },
+    "draconic.dragon_breath": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        469,
+        339,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        901,
+        651,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "cone",
+      "badge": "wings",
+      "reaction": false
+    },
+    "draconic.dragon_wings": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        495,
+        339,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        951,
+        651,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "wings",
+      "badge": null,
+      "reaction": false
+    },
+    "chaos.tides_of_chaos": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        1,
+        365,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        1,
+        701,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "die",
+      "badge": "spiral",
+      "reaction": false
+    },
+    "chaos.wild_surge": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        27,
+        365,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        51,
+        701,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "spiral",
+      "badge": "burst",
+      "reaction": false
+    },
+    "chaos.bend_luck": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        53,
+        365,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        101,
+        701,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "die",
+      "badge": "hand",
+      "reaction": true
+    },
+    "chaos.controlled_surge": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        79,
+        365,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        151,
+        701,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "orb",
+      "badge": "burst",
+      "reaction": false
+    },
+    "runeborn.ember_rune": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        105,
+        365,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        201,
+        701,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "rune",
+      "badge": null,
+      "reaction": false
+    },
+    "runeborn.frost_rune": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        131,
+        365,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        251,
+        701,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 2,
+      "glyph": "rune",
+      "badge": null,
+      "reaction": false
+    },
+    "runeborn.grand_sigil": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        157,
+        365,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        301,
+        701,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "sorcerer",
+      "tier": 0,
+      "glyph": "rune",
+      "badge": "star",
+      "reaction": false
+    },
+    "warlock.eldritch_blast": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        183,
+        365,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        351,
+        701,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 0,
+      "glyph": "comet",
+      "badge": null,
+      "reaction": false
+    },
+    "warlock.hex": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        209,
+        365,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        401,
+        701,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 1,
+      "glyph": "eye_tri",
+      "badge": null,
+      "reaction": false
+    },
+    "warlock.chill_touch": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        365,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        701,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 0,
+      "glyph": "hand",
+      "badge": "snowflake",
+      "reaction": false
+    },
+    "warlock.poison_spray": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        261,
+        365,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        501,
+        701,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 0,
+      "glyph": "cone",
+      "badge": null,
+      "reaction": false
+    },
+    "warlock.fiendish_vigor": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        287,
+        365,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        551,
+        701,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 0,
+      "glyph": "heart",
+      "badge": "up",
+      "reaction": false
+    },
+    "warlock.maddening_hex": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        365,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        701,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 0,
+      "glyph": "eye_tri",
+      "badge": "spiral",
+      "reaction": false
+    },
+    "warlock.one_with_shadows": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        339,
+        365,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        651,
+        701,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 0,
+      "glyph": "moon",
+      "badge": "hood",
+      "reaction": false
+    },
+    "warlock.shroud_of_shadow": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        365,
+        365,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        701,
+        701,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 0,
+      "glyph": "hood",
+      "badge": "sparkle",
+      "reaction": false
+    },
+    "warlock.arms_of_hadar": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        391,
+        365,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        751,
+        701,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 1,
+      "glyph": "tentacles",
+      "badge": null,
+      "reaction": false
+    },
+    "warlock.armor_of_agathys": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        417,
+        365,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        801,
+        701,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 1,
+      "glyph": "shield",
+      "badge": "snowflake",
+      "reaction": false
+    },
+    "warlock.hellish_rebuke": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        443,
+        365,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        851,
+        701,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 1,
+      "glyph": "flame",
+      "badge": "skull",
+      "reaction": true
+    },
+    "warlock.witch_bolt": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        469,
+        365,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        901,
+        701,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 1,
+      "glyph": "bolt",
+      "badge": null,
+      "reaction": false
+    },
+    "warlock.shatter": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        495,
+        365,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        951,
+        701,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 2,
+      "glyph": "shatter",
+      "badge": null,
+      "reaction": false
+    },
+    "warlock.misty_step": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        1,
+        391,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        1,
+        751,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 2,
+      "glyph": "spiral",
+      "badge": null,
+      "reaction": false
+    },
+    "warlock.hold_person": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        27,
+        391,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        51,
+        751,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 2,
+      "glyph": "chain",
+      "badge": null,
+      "reaction": false
+    },
+    "warlock.darkness": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        53,
+        391,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        101,
+        751,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 2,
+      "glyph": "cloud",
+      "badge": null,
+      "reaction": false
+    },
+    "warlock.hunger_of_hadar": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        79,
+        391,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        151,
+        751,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 3,
+      "glyph": "eye",
+      "badge": "tentacles",
+      "reaction": false
+    },
+    "warlock.counterspell": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        105,
+        391,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        201,
+        751,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 3,
+      "glyph": "hand",
+      "badge": "nope",
+      "reaction": true
+    },
+    "warlock.vampiric_touch": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        131,
+        391,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        251,
+        751,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 3,
+      "glyph": "fang",
+      "badge": "drop",
+      "reaction": false
+    },
+    "warlock.blight": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        157,
+        391,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        301,
+        751,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 4,
+      "glyph": "leaf",
+      "badge": "skull",
+      "reaction": false
+    },
+    "warlock.dimension_door": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        183,
+        391,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        351,
+        751,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 4,
+      "glyph": "portal",
+      "badge": null,
+      "reaction": false
+    },
+    "warlock.shadow_of_moil": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        209,
+        391,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        401,
+        751,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 4,
+      "glyph": "hood",
+      "badge": "flame",
+      "reaction": false
+    },
+    "warlock.synaptic_static": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        391,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        751,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 5,
+      "glyph": "burst",
+      "badge": "bolt",
+      "reaction": false
+    },
+    "warlock.hold_monster": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        261,
+        391,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        501,
+        751,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 5,
+      "glyph": "chain",
+      "badge": "fang",
+      "reaction": false
+    },
+    "hexblade.hexblades_curse": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        287,
+        391,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        551,
+        751,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": "eye_tri",
+      "reaction": false
+    },
+    "hexblade.cursed_slash": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        391,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        751,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": "drop",
+      "reaction": false
+    },
+    "hexblade.armor_of_hexes": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        339,
+        391,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        651,
+        751,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "eye_tri",
+      "reaction": true
+    },
+    "fiendbound.hellfire_surge": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        365,
+        391,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        701,
+        751,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 2,
+      "glyph": "flame",
+      "badge": "burst",
+      "reaction": false
+    },
+    "fiendbound.hurl_through_hell": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        391,
+        391,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        751,
+        751,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 0,
+      "glyph": "portal",
+      "badge": "flame",
+      "reaction": false
+    },
+    "void.rift_step": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        417,
+        391,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        801,
+        751,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 0,
+      "glyph": "portal",
+      "badge": "footprints",
+      "reaction": false
+    },
+    "void.gravitational_pull": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        443,
+        391,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        851,
+        751,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 0,
+      "glyph": "orb",
+      "badge": "pull",
+      "reaction": false
+    },
+    "void.entropic_ward": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        469,
+        391,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        901,
+        751,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "spiral",
+      "reaction": true
+    },
+    "void.abyssal_singularity": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        495,
+        391,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        951,
+        751,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "warlock",
+      "tier": 0,
+      "glyph": "spiral",
+      "badge": "orb",
+      "reaction": false
+    },
+    "wizard.fire_bolt": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        1,
+        417,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        1,
+        801,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 0,
+      "glyph": "comet",
+      "badge": null,
+      "reaction": false
+    },
+    "wizard.ray_of_frost": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        27,
+        417,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        51,
+        801,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 0,
+      "glyph": "beam",
+      "badge": "snowflake",
+      "reaction": false
+    },
+    "wizard.shocking_grasp": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        53,
+        417,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        101,
+        801,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 0,
+      "glyph": "hand",
+      "badge": "bolt",
+      "reaction": false
+    },
+    "wizard.acid_splash": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        79,
+        417,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        151,
+        801,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 0,
+      "glyph": "drop",
+      "badge": "burst",
+      "reaction": false
+    },
+    "wizard.chill_touch": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        105,
+        417,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        201,
+        801,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 0,
+      "glyph": "hand",
+      "badge": "snowflake",
+      "reaction": false
+    },
+    "wizard.poison_spray": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        131,
+        417,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        251,
+        801,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 0,
+      "glyph": "cone",
+      "badge": null,
+      "reaction": false
+    },
+    "wizard.magic_missile": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        157,
+        417,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        301,
+        801,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 1,
+      "glyph": "missiles",
+      "badge": null,
+      "reaction": false
+    },
+    "wizard.burning_hands": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        183,
+        417,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        351,
+        801,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 1,
+      "glyph": "cone",
+      "badge": "hand",
+      "reaction": false
+    },
+    "wizard.shield": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        209,
+        417,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        401,
+        801,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 1,
+      "glyph": "shield",
+      "badge": "sparkle",
+      "reaction": true
+    },
+    "wizard.sleep": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        417,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        801,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 1,
+      "glyph": "zzz",
+      "badge": "moon",
+      "reaction": false
+    },
+    "wizard.thunderwave": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        261,
+        417,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        501,
+        801,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 1,
+      "glyph": "wave",
+      "badge": "push",
+      "reaction": false
+    },
+    "wizard.chromatic_orb": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        287,
+        417,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        551,
+        801,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 1,
+      "glyph": "orb",
+      "badge": "sparkle",
+      "reaction": false
+    },
+    "wizard.mage_armor": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        417,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        801,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 1,
+      "glyph": "shield",
+      "badge": "rune",
+      "reaction": false
+    },
+    "wizard.ray_of_sickness": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        339,
+        417,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        651,
+        801,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 1,
+      "glyph": "beam",
+      "badge": "skull",
+      "reaction": false
+    },
+    "wizard.grease": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        365,
+        417,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        701,
+        801,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 1,
+      "glyph": "drop",
+      "badge": "down",
+      "reaction": false
+    },
+    "wizard.scorching_ray": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        391,
+        417,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        751,
+        801,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 2,
+      "glyph": "beam",
+      "badge": "flame",
+      "reaction": false
+    },
+    "wizard.hold_person": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        417,
+        417,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        801,
+        801,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 2,
+      "glyph": "chain",
+      "badge": null,
+      "reaction": false
+    },
+    "wizard.misty_step": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        443,
+        417,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        851,
+        801,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 2,
+      "glyph": "spiral",
+      "badge": null,
+      "reaction": false
+    },
+    "wizard.shatter": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        469,
+        417,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        901,
+        801,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 2,
+      "glyph": "shatter",
+      "badge": null,
+      "reaction": false
+    },
+    "wizard.web": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        495,
+        417,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        951,
+        801,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 2,
+      "glyph": "web",
+      "badge": null,
+      "reaction": false
+    },
+    "wizard.blur": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        1,
+        443,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        1,
+        851,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 2,
+      "glyph": "mask",
+      "badge": "wind",
+      "reaction": false
+    },
+    "wizard.invisibility": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        27,
+        443,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        51,
+        851,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 2,
+      "glyph": "hood",
+      "badge": null,
+      "reaction": false
+    },
+    "wizard.fireball": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        53,
+        443,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        101,
+        851,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 3,
+      "glyph": "burst",
+      "badge": "flame",
+      "reaction": false
+    },
+    "wizard.lightning_bolt": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        79,
+        443,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        151,
+        851,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 3,
+      "glyph": "bolt",
+      "badge": null,
+      "reaction": false
+    },
+    "wizard.counterspell": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        105,
+        443,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        201,
+        851,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 3,
+      "glyph": "hand",
+      "badge": "nope",
+      "reaction": true
+    },
+    "wizard.haste": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        131,
+        443,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        251,
+        851,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 3,
+      "glyph": "hourglass",
+      "badge": "wind",
+      "reaction": false
+    },
+    "wizard.slow": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        157,
+        443,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        301,
+        851,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 3,
+      "glyph": "hourglass",
+      "badge": "down",
+      "reaction": false
+    },
+    "wizard.hypnotic_pattern": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        183,
+        443,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        351,
+        851,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 3,
+      "glyph": "spiral",
+      "badge": null,
+      "reaction": false
+    },
+    "wizard.dispel_magic": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        209,
+        443,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        401,
+        851,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 3,
+      "glyph": "rune",
+      "badge": "nope",
+      "reaction": false
+    },
+    "wizard.ice_storm": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        443,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        851,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 4,
+      "glyph": "cloud",
+      "badge": "crystal",
+      "reaction": false
+    },
+    "wizard.greater_invisibility": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        261,
+        443,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        501,
+        851,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 4,
+      "glyph": "hood",
+      "badge": "sparkle",
+      "reaction": false
+    },
+    "wizard.blight": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        287,
+        443,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        551,
+        851,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 4,
+      "glyph": "leaf",
+      "badge": "skull",
+      "reaction": false
+    },
+    "wizard.wall_of_fire": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        443,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        851,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 4,
+      "glyph": "wall",
+      "badge": "flame",
+      "reaction": false
+    },
+    "wizard.banishment": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        339,
+        443,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        651,
+        851,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 4,
+      "glyph": "portal",
+      "badge": null,
+      "reaction": false
+    },
+    "wizard.cone_of_cold": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        365,
+        443,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        701,
+        851,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 5,
+      "glyph": "cone",
+      "badge": "snowflake",
+      "reaction": false
+    },
+    "wizard.cloudkill": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        391,
+        443,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        751,
+        851,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 5,
+      "glyph": "cloud",
+      "badge": "skull",
+      "reaction": false
+    },
+    "wizard.hold_monster": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        417,
+        443,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        801,
+        851,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 5,
+      "glyph": "chain",
+      "badge": "fang",
+      "reaction": false
+    },
+    "wizard.arcane_recovery": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        443,
+        443,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        851,
+        851,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 0,
+      "glyph": "book",
+      "badge": "up",
+      "reaction": false
+    },
+    "evoker.sculpted_nova": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        469,
+        443,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        901,
+        851,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 1,
+      "glyph": "burst",
+      "badge": "shield",
+      "reaction": false
+    },
+    "evoker.sculpted_inferno": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        495,
+        443,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        951,
+        851,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 0,
+      "glyph": "burst",
+      "badge": "shield",
+      "reaction": false
+    },
+    "chronomancer.time_shift": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        1,
+        469,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        1,
+        901,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 0,
+      "glyph": "hourglass",
+      "badge": "spiral",
+      "reaction": false
+    },
+    "chronomancer.accelerate": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        27,
+        469,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        51,
+        901,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 0,
+      "glyph": "hourglass",
+      "badge": "up",
+      "reaction": false
+    },
+    "chronomancer.temporal_stasis": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        53,
+        469,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        101,
+        901,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 0,
+      "glyph": "hourglass",
+      "badge": "chain",
+      "reaction": false
+    },
+    "geomancer.raise_earth": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        79,
+        469,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        151,
+        901,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 0,
+      "glyph": "spire",
+      "badge": "up",
+      "reaction": false
+    },
+    "geomancer.sink_earth": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        105,
+        469,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        201,
+        901,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 0,
+      "glyph": "quake",
+      "badge": "down",
+      "reaction": false
+    },
+    "geomancer.tremor": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        131,
+        469,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        251,
+        901,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 0,
+      "glyph": "quake",
+      "badge": "wave",
+      "reaction": false
+    },
+    "geomancer.stone_spire": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        157,
+        469,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        301,
+        901,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "wizard",
+      "tier": 0,
+      "glyph": "spire",
+      "badge": null,
+      "reaction": false
+    }
+  },
   "frames": {
     "common": {
       "atlas": "frames.png",
@@ -1797,6 +11359,7 @@
   "notes": {
     "background": "icons are transparent; draw them over a frame or panel",
     "frame": "draw the 26x26 frame, then the 24x24 icon at iconOffset; items take their rarity's frame, abilities the 'ability' frame",
-    "scaling": "nearest-neighbour at whole multiples only (2x-3x on phones, 3x-4x on the TV)"
+    "scaling": "nearest-neighbour at whole multiples only (2x-3x on phones, 3x-4x on the TV)",
+    "abilityIcons": "one icon per rules-pack ability, keyed by the ability id unchanged (art key 'icons.<ability id>', e.g. icons.wizard.fire_bolt). Each has a 24x24 rect in abilities_by_id.png and a natively drawn 48x48 rect2x in abilities_by_id@2x.png (use it at 2x scale and above). The icon is a full-bleed tinted plate: draw it inside the 'ability' frame, or on its own"
   }
 }

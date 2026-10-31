@@ -356,7 +356,7 @@ BUTTONS = {
     "secondary": {"normal": {"fill": "glass_hi"}, "disabled": {"fill": "slate"}, "text": "ink"},
     "danger": {"normal": {"fill": "red"}, "disabled": {"fill": "red_dull"}, "text": "ink"},
 }
-STATES = ("normal", "hover", "pressed", "disabled")
+STATES = ("normal", "hover", "pressed", "disabled", "focused")
 BW, BH = 18, 13
 
 
@@ -364,6 +364,12 @@ def _button(state: str) -> Canvas:
     """A raised button: lit rim on the top-left, a dark lip underneath. Pressed drops 1 px and loses the lip, so
     the face sits where the lip was; hover lifts every shade by one and adds a soft halo."""
     c = Canvas(BW + 4, BH + 4, SLOTS)
+    if state == "focused":
+        c = Canvas(BW + 6, BH + 6, SLOTS)
+        c.blit(_button("normal"), 1, 1)
+        _halo(c, "rim", 5)
+        _halo(c, "rim", 2)
+        return c
     if state == "pressed":
         rings: list[Ring] = [("fill", 1, 2, 3)]
         _paint(c, 2, 3, _depth_rect(BW, BH - 1, 2), rings, "fill", mid=3, top=(2,), bottom=())
@@ -385,8 +391,10 @@ def buttons() -> dict[str, dict[str, Piece]]:
         out[kind] = {}
         for st in STATES:
             pal = spec["disabled"] if st == "disabled" else spec["normal"]
-            pal = {**pal, "glow": pal["fill"]}
-            out[kind][st] = Piece(_button(st), pal, slice=(6, 6, 6, 6), outset=(1, 1, 1, 1),
+            pal = {**pal, "glow": pal["fill"], "rim": "gold"}
+            o = 2 if st == "focused" else 1
+            out[kind][st] = Piece(_button(st), pal, slice=(6 + o - 1, 6 + o - 1, 6 + o - 1, 6 + o - 1),
+                                  outset=(o, o, o, o),
                                   padding=(5, 4, 5, 4), alpha={"glow": 0.45},
                                   extra={"contentOffset": [0, 1] if st == "pressed" else [0, 0],
                                          "text": "dim" if st == "disabled" else spec["text"]})
@@ -739,6 +747,20 @@ def turn_order() -> dict[str, Piece]:
         c, m = _portrait_frame(kind)
         out[f"frame_{kind}"] = Piece(c, pal, slice=m["slice"], outset=m["outset"], alpha={"glow": 0.4},
                                      extra={"window": m["window"]})
+    # Player-coloured frames: the TV shows whose hero is whose (p1-p6 from STYLE.md). Inactive heroes get a rim in
+    # their player's colour; the active one keeps the gold rim with an inner line in that colour.
+    for p in PLAYERS:
+        c, m = _portrait_frame("inactive")
+        out[f"frame_{p}"] = Piece(c, {"edge": p, "line": "glass"}, slice=m["slice"], outset=m["outset"],
+                                  extra={"window": m["window"], "player": p})
+        c, m = _portrait_frame("active")
+        inner = (c.slot == SLOTS.id("edge")) & (c.flags == 0)
+        d = _depth_rect(c.w, c.h, 0)
+        ring2 = inner & (d == d[inner].max())
+        c.slot[ring2] = SLOTS.id("tint")
+        out[f"frame_active_{p}"] = Piece(c, {"edge": "gold", "glow": "gold", "tint": p}, slice=m["slice"],
+                                         outset=m["outset"], alpha={"glow": 0.4},
+                                         extra={"window": m["window"], "player": p})
     out["now_tab"] = Piece(_now_tab(), {"fill": "gold", "text": "rim_crit"},
                            extra={"attach": "x = frame box left + 2, y = frame box top - 7"})
     out["ai_badge"] = Piece(_ai_badge(), {"fill": "magic", "text": "shadow"},
@@ -979,6 +1001,7 @@ def build() -> None:
 
     # buttons
     bs = buttons()
+    BUTTONS_CACHE.update(bs)
     atlas = Atlas(256)
     for kind, states in bs.items():
         for st, p in states.items():
@@ -1085,8 +1108,37 @@ def build() -> None:
     save(img, OUT / "dice.png")
     man["dice"] = {"file": "dice.png", "pieces": {k: _entry(p, rects[k]) for k, p in dc.items()}}
 
+    # the second half of the kit (parts/ui_hud.py): HUD extras, animated strips, input glyphs
+    from parts import ui_hud as H
+    hud = H.hud_pieces(ps)
+    img, rects = H.pack(hud)
+    save(img, OUT / "hud.png")
+    man["hud"] = {"file": "hud.png", "pieces": {k: _entry(p, rects[k]) for k, p in hud.items()}}
+    anims = H.strips(ps)
+    man["anims"] = {}
+    for k, (fr, meta) in anims.items():
+        save(H.strip_image(fr), OUT / f"{k}.png")
+        man["anims"][k] = {"file": f"{k}.png", "frame": [fr[0].canvas.w, fr[0].canvas.h], "frames": len(fr),
+                           **meta}
+        if fr[0].slice:
+            man["anims"][k].update({"slice": list(fr[0].slice), "outset": list(fr[0].outset)})
+    gl = H.glyphs()
+    img, rects = H.pack(gl, 192)
+    save(img, OUT / "glyphs.png")
+    man["glyphs"] = {"file": "glyphs.png", "pieces": {k: _entry(p, rects[k]) for k, p in gl.items()},
+                     "note": "Gamepad (Xbox letters and colours, PlayStation shapes), keyboard and mouse prompts at 1x."
+                             " "
+                             "key_blank is a 9-slice cap for any legend the game sets itself. Show glyphs at the "
+                             "UI scale beside the action's name, e.g. [A] Confirm  [B] Back  [LB][RB] Cycle."}
+    man["bars"]["compose"] += [
+        "Damage ghost drain (anims.ghost_drain): after the hit, hold the ghost 0.3 s, then over the strip's 5 "
+        "frames tile frame f as the ghost and ease its width to the new value.",
+        "Heal sweep (anims.heal_sweep): grow the fill to the new value over 0.3 s; meanwhile play the sweep "
+        "additively across the healed span (scale its travel to that span, clip it to the fill).",
+    ]
     write_json(man, OUT / "manifest.json")
     _previews(ps, bs, frames, fills, mk, ph, cu, to, nf, dc)
+    _extras_preview(ps, hud, anims, gl, to, frames, fills)
 
 
 def _entry(p: Piece, rect: list[int]) -> dict:
@@ -1205,6 +1257,75 @@ def _previews(ps, bs, frames, fills, mk, ph, cu, to, nf, dc) -> None:
     _mock(ps, bs, frames, fills, mk, ph, cu, to, nf, dc)
 
 
+def _extras_preview(ps, hud, anims, gl, to, frames, fills) -> None:
+    """previews/15-ui-extras.png (the ui_hud pieces, stretched as the game uses them) and 15-ui-bars.gif."""
+    from parts import ui_hud as H
+    sections = []
+    tiles = []
+    for k in ("tooltip_header", "toast_info", "toast_success", "toast_warning", "toast_danger", "objective",
+              "reaction", "minimap"):
+        p = hud[k]
+        ol, ot, orr, ob = p.outset
+        w, h = {"tooltip_header": (96, 40), "objective": (110, 40), "reaction": (130, 44), "minimap": (64, 64)}.get(
+            k, (100, 16))
+        tiles.append(Tile(_row([p.image(), nine(p.image(), p.slice, w + ol + orr, h + ot + ob)], 8), k,
+                          f"source, then stretched to {w}x{h}"))
+    tiles.append(Tile(_row([hud[k].image() for k in hud if k.startswith(("check_", "pip_", "glint_", "minimap_"))],
+                           4), "checks · map pips · glints · compass"))
+    sections.append(contact_sheet("HUD extras", tiles, columns=3, zoom=3, checker=True,
+                                  subtitle="Tooltip with a header band, toasts by mood, objective tracker and its "
+                                           "boxes, the reaction prompt, the minimap frame and its pips."))
+    tiles = []
+    for k, (fr, meta) in anims.items():
+        tiles.append(Tile(strip([p.image() for p in fr], 1, gap=3), k, f"{len(fr)} frames"))
+    sections.append(contact_sheet("Animated strips", tiles, columns=1, zoom=3, checker=True,
+                                  subtitle="Panel shimmer (corner cells only, so any size works), the reaction "
+                                           "countdown, the heal sweep and the damage-ghost drain."))
+    tiles = [Tile(p.image(), k.replace("pad_", "").replace("key_", "")) for k, p in gl.items()]
+    sections.append(contact_sheet("Input glyphs", tiles, columns=12, zoom=4, checker=True, label_h=22,
+                                  subtitle="Xbox face buttons in their own colours, PlayStation shapes, bumpers, "
+                                           "triggers, d-pad, sticks, menu/view, keycaps and the mouse."))
+    tiles = [Tile(to[f"frame_{p}"].image(), f"frame_{p}") for p in PLAYERS]
+    tiles += [Tile(to[f"frame_active_{p}"].image(), f"frame_active_{p}") for p in PLAYERS]
+    tiles += [Tile(_row([bs.image() for bs in (BUTTONS_CACHE[k]["focused"] for k in BUTTONS_CACHE)], 6),
+                   "buttons · focused", "the controller's cursor")] if BUTTONS_CACHE else []
+    sections.append(contact_sheet("Turn order · player colours", tiles, columns=6, zoom=3, checker=True))
+    save(stack("UI kit · extras for TV and controller", sections), PREVIEWS / "15-ui-extras.png")
+
+    # bars in motion: a hit (ghost holds, then drains), then a heal (fill grows under the sweep)
+    fr = frames["standard"].image()
+    pi = {n: p.image() for n, p in fills["hp"].items()}
+    drain = [p.image() for p in anims["ghost_drain"][0]]
+    sweep = [p.image() for p in anims["heal_sweep"][0]]
+    gif = []
+    W = 96
+    inner = W - 4
+    seq = [(0.9, 0.9, None, None)] * 3 + [(0.45, 0.9, 0, None)] * 3
+    seq += [(0.45, 0.9 - (0.45 * t / 4), min(t, 4), None) for t in range(5)] + [(0.45, 0, None, None)] * 3
+    seq += [(0.45 + 0.35 * min(1, t / 3), 0, None, t) for t in range(6)] + [(0.8, 0, None, None)] * 4
+    for value, ghost, df, sf in seq:
+        f = dict(pi)
+        if df is not None:
+            f["ghost_mid"] = drain[df]
+            f["ghost_right"] = drain[df].crop((0, 0, 1, drain[df].height))
+        im = bar(fr, f, W, value, ghost)
+        if sf is not None:
+            lo, hi = round(inner * 0.45), round(inner * value)
+            sw = sweep[sf]
+            span = Image.new("RGBA", (max(1, hi - lo), sw.height))
+            span.alpha_composite(sw.resize((max(1, hi - lo), sw.height), Image.NEAREST))
+            layer = Image.new("RGBA", im.size)
+            layer.alpha_composite(span, (2 + lo, 2))
+            im = Image.alpha_composite(im, layer)
+        canvas = Image.new("RGBA", (W + 16, fr.height + 16), BG)
+        canvas.alpha_composite(im, (8, 8))
+        gif.append(scale(canvas, 5).convert("RGB"))
+    gif[0].save(PREVIEWS / "15-ui-bars.gif", save_all=True, append_images=gif[1:], duration=80, loop=0, optimize=True)
+
+
+BUTTONS_CACHE: dict = {}
+
+
 def _portraits() -> dict[str, Image.Image]:
     """Real portraits from the portraits set when it is built; otherwise a head crop of the composed character."""
     from parts import characters as C
@@ -1248,7 +1369,9 @@ def _turn_strip_image(to, n: int = 8) -> Image.Image:
     out = Image.new("RGBA", (n * step + 3, fw + 10), (0, 0, 0, 0))
     for i, (rid, por) in enumerate(list(_portraits().items())[:n]):
         x, y = i * step, 4
-        kind = "active" if i == 0 else "enemy" if rid in ENEMY_IDS else "inactive"
+        own = OWNERS.get(rid)
+        kind = "enemy" if rid in ENEMY_IDS else (f"active_{own}" if i == 0 else own) if own else \
+            "active" if i == 0 else "inactive"
         out.alpha_composite(_framed(to, rid, kind, por), (x, y))
         stripe = pieces[f"stripe_{OWNERS.get(rid, 'enemy')}"]
         out.alpha_composite(nine(stripe, (2, 0, 2, 0), fw - 10, stripe.height), (x + 5, y + fw - 2))
@@ -1506,6 +1629,39 @@ def _mock_frame(ps, bs, frames, fills, mk, ph, cu, to, nf, dc, f: int):
         x = ex + 60 + i * 56
         put(ps["card"], x, ey + 49, w, 11)
         text(x + w / 2, ey + 54.5, lab, 4.4, INK, True, "mm")
+    # extras: objective tracker, minimap, a toast and the controller hints (parts/ui_hud.py)
+    from parts import ui_hud as H
+    hud = H.hud_pieces(ps)
+    put(hud["objective"], 10, 47, 132, 34)
+    text(18, 50.5, "OBJECTIVE", 4.3, gold)
+    text(118, 50.5, "R2", 4.3, muted)
+    for i, (st, lab) in enumerate((("done", "Reach the ford"), ("open", "Take the bridge"))):
+        bx_, by_ = 17, 60 + i * 10
+        img.alpha_composite(hud[f"check_{st}"].image(), (bx_, by_ - 1))
+        text(bx_ + 14, by_ + 0.5, lab, 5, muted if st == "done" else INK, False)
+    mm = hud["minimap"]
+    mmap = Image.new("RGBA", (50, 50), (34, 52, 40, 230))
+    md = ImageDraw.Draw(mmap)
+    md.polygon([(25, 4), (46, 25), (25, 46), (4, 25)], fill=(74, 118, 64, 255))
+    md.line([(14, 30), (36, 14)], fill=(76, 140, 196, 255), width=3)
+    img.alpha_composite(mmap, (17, 99))
+    put(mm, 14, 96, 56, 56)
+    mc = hud["minimap_compass"].image()
+    img.alpha_composite(mc, (14 + 28 - mc.width // 2, 96 - 6))
+    for kind, (px_, py_) in (("you", (34, 128)), ("ally", (40, 132)), ("ally", (30, 120)), ("enemy", (50, 112)),
+                             ("enemy", (54, 118)), ("objective", (56, 104))):
+        img.alpha_composite(hud[f"pip_{kind}"].image(), (px_, py_))
+    put(hud["toast_success"], 452, 150, 150, 16)
+    text(469, 155, "Ilyra reached level 4", 5, INK, False)
+    hx, hy = 236, MOCK_H - 76
+    gl = H.glyphs()
+    for g, lab in (("pad_a", "Confirm"), ("pad_b", "Back"), ("pad_lb", None), ("pad_rb", "Target")):
+        im = gl[g].image()
+        img.alpha_composite(im, (hx, hy + (15 - im.height) // 2))
+        hx += im.width + 4
+        if lab:
+            text(hx, hy + 4.5, lab, 5, INK)
+            hx += len(lab) * 4 + 8
     # a line of dialogue
     dx, dy, dw = 232, MOCK_H - 56, 176
     put(ps["dialogue"], dx, dy, dw, 46)

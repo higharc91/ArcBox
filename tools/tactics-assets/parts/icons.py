@@ -1829,10 +1829,13 @@ def build() -> None:
     sheet, rects = _atlas(frames, len(frames), FRAME)
     save(sheet, out / "frames.png")
     atlases["frame"] = {"file": "frames.png", "cell": [FRAME, FRAME], "columns": len(frames), "gutter": 1}
+    by_id, id_atlases = _ability_atlas(out)
+    atlases.update(id_atlases)
     write_json({
         "sizes": {"ability": ICON, "item": ICON, "status": STATUS, "frame": FRAME},
         "atlases": atlases,
         "icons": icons,
+        "abilityIcons": by_id,
         "frames": {k: {"atlas": "frames.png", "rect": rect, "size": [FRAME, FRAME], "iconOffset": [1, 1]}
                    for k, rect in zip(FRAMES, rects)},
         "rarities": RARITIES,
@@ -1841,9 +1844,68 @@ def build() -> None:
             "frame": "draw the 26x26 frame, then the 24x24 icon at iconOffset; items take their rarity's frame, "
                      "abilities the 'ability' frame",
             "scaling": "nearest-neighbour at whole multiples only (2x-3x on phones, 3x-4x on the TV)",
+            "abilityIcons": "one icon per rules-pack ability, keyed by the ability id unchanged (art key "
+                            "'icons.<ability id>', e.g. icons.wizard.fire_bolt). Each has a 24x24 rect in "
+                            "abilities_by_id.png and a natively drawn 48x48 rect2x in abilities_by_id@2x.png (use it "
+                            "at 2x scale and above). The icon is a full-bleed tinted plate: draw it inside the "
+                            "'ability' frame, or on its own",
         },
     }, out / "manifest.json")
     _previews(rendered, frames)
+
+
+def _ability_atlas(out) -> tuple[dict[str, dict], dict[str, dict]]:
+    """The id-keyed ability icons (parts/ability_icons.py): every player ability in the rules pack at 24 px and a
+    native 48 px, packed in rules-pack order, plus one review sheet per class."""
+    from parts import ability_icons as AI
+    abilities = AI.abilities()
+    small, large = [], []
+    for ab in abilities:
+        spec = AI.parse(ab.spec)
+        small.append(AI.compose(spec, ab.cls, ab.tier, ab.react, 1))
+        large.append(AI.compose(spec, ab.cls, ab.tier, ab.react, 2))
+    cols = 20
+    sheet1, rects1 = _atlas(small, cols, ICON)
+    sheet2, rects2 = _atlas(large, cols, ICON * 2)
+    save(sheet1, out / "abilities_by_id.png")
+    save(sheet2, out / "abilities_by_id@2x.png")
+    by_id = {}
+    for ab, r1, r2 in zip(abilities, rects1, rects2):
+        spec = AI.parse(ab.spec)
+        by_id[ab.id] = {"atlas": "abilities_by_id.png", "rect": r1, "atlas2x": "abilities_by_id@2x.png", "rect2x": r2,
+                        "size": [ICON, ICON], "category": "ability", "class": ab.cls, "tier": ab.tier,
+                        "glyph": spec.main.glyph, "badge": spec.badge.glyph if spec.badge else None,
+                        "reaction": ab.react}
+    _ability_sheets(abilities, small, large, AI.SIGNATURE)
+    return by_id, {
+        "abilityId": {"file": "abilities_by_id.png", "cell": [ICON, ICON], "columns": cols, "gutter": 1},
+        "abilityId2x": {"file": "abilities_by_id@2x.png", "cell": [ICON * 2, ICON * 2], "columns": cols, "gutter": 1},
+    }
+
+
+def _ability_sheets(abilities, small, large, signature) -> None:
+    """previews/16-icons-abilities-<class>.png: each tile is the 24 px icon at 2x beside the native 48 px one, so a
+    reviewer sees both what a phone shows and what the TV shows. The class's signature abilities lead."""
+    groups: dict[str, list[int]] = {}
+    for i, ab in enumerate(abilities):
+        groups.setdefault(ab.cls if ab.cls not in ("race", "item") else "common", []).append(i)
+    for cls, idx in groups.items():
+        sig = signature.get(cls, [])
+        idx = sorted(idx, key=lambda i: (abilities[i].id.split(".", 1)[1] not in sig, i))
+        tiles = []
+        for i in idx:
+            pair = Image.new("RGBA", (ICON * 2 * 2 + 4, ICON * 2), (0, 0, 0, 0))
+            pair.alpha_composite(scale(small[i], 2), (0, 0))
+            pair.alpha_composite(large[i], (ICON * 2 + 4, 0))
+            ab = abilities[i]
+            sub = ("★ " if ab.id.split(".", 1)[1] in sig else "") + ab.id
+            tiles.append(Tile(pair, ab.name[:24], sub))
+        title = "Ability icons · " + ("common, items and races" if cls == "common" else cls)
+        save(contact_sheet(title, tiles, columns=7, zoom=2, label_h=36,
+                           subtitle="Keyed by ability id (icons.<id>). Left: 24 px at 2x (phone). Right: the native "
+                                    "48 px (TV). Plate = class, glyph = effect and damage type, badge = the twist, "
+                                    "gold tab = spell tier, hook = reaction. ★ = signature."),
+             PREVIEWS / f"16-icons-abilities-{cls}.png")
 
 
 def _in_frame(icon: Image.Image, fr: Image.Image) -> Image.Image:

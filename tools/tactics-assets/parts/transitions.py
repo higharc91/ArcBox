@@ -71,8 +71,71 @@ def blinds() -> np.ndarray:
     return _norm((ys % 10) / 10 * 0.7 + xs / W * 0.3)
 
 
+def clock() -> np.ndarray:
+    """A clock-hand sweep from twelve o'clock, clockwise: a round's timer running out, or a new day."""
+    xs, ys = _grid()
+    return _norm(np.arctan2(xs - W / 2, -(ys - H / 2)) % (2 * math.pi))
+
+
+def shards() -> np.ndarray:
+    """The screen breaks into glass shards (seeded Voronoi cells) that fall away in a ripple from the impact point,
+    each cell clearing in one piece: the battle-start shatter."""
+    rng = np.random.default_rng(7)
+    pts = rng.uniform((0, 0), (W, H), (60, 2))
+    xs, ys = _grid()
+    d = np.stack([np.hypot(xs - px, ys - py) for px, py in pts])
+    cell = d.argmin(0)
+    order = np.hypot(pts[:, 0] - W * 0.42, pts[:, 1] - H * 0.45)
+    order = order / order.max() * 0.8 + rng.uniform(0, 0.2, len(pts))
+    edge = np.sort(d, 0)
+    crack = (edge[1] - edge[0]) < 0.9                           # cracks go first, so the pattern shows
+    return _norm(np.where(crack, order[cell] * 0.6, order[cell]))
+
+
+def hexes() -> np.ndarray:
+    """Hexagonal tiles flipping in a diagonal wave, each one growing from its centre (a tactics-board cousin of
+    diamonds)."""
+    xs, ys = _grid()
+    size = 7.0
+    q = (xs * math.sqrt(3) / 3 - ys / 3) / size
+    r = (ys * 2 / 3) / size
+    cx, cz = q, r
+    cy = -cx - cz
+    rx, ry, rz = np.round(cx), np.round(cy), np.round(cz)
+    dx, dy, dz = np.abs(rx - cx), np.abs(ry - cy), np.abs(rz - cz)
+    rx = np.where((dx > dy) & (dx > dz), -ry - rz, rx)
+    rz = np.where(~((dx > dy) & (dx > dz)) & ~(dy > dz), -rx - ry, rz)
+    hx = size * math.sqrt(3) * (rx + rz / 2)
+    hy = size * 1.5 * rz
+    local = np.hypot(xs - hx, ys - hy) / size
+    return _norm((hx / W + hy / H) * 0.4 + local * 0.2)
+
+
+def drip() -> np.ndarray:
+    """Ink running down the screen in uneven columns: a defeat, or a scene going dark."""
+    rng = np.random.default_rng(11)
+    xs, ys = _grid()
+    col = (xs // 4).astype(int)
+    lag = rng.uniform(0, 0.35, col.max() + 1)
+    lag = np.convolve(lag, np.ones(3) / 3, mode="same")         # neighbouring drips move together
+    return _norm(ys / H * 0.65 + lag[col])
+
+
+def burn() -> np.ndarray:
+    """A page burning away from the bottom edge, its front ragged with seeded noise: chapter endings, flashbacks."""
+    rng = np.random.default_rng(3)
+    xs, ys = _grid()
+    noise = np.zeros((H, W))
+    for scale, amp in ((16, 0.6), (8, 0.3), (4, 0.15)):
+        g = rng.uniform(0, 1, (H // scale + 2, W // scale + 2))
+        big = np.kron(g, np.ones((scale, scale)))[:H, :W]
+        noise += big * amp
+    return _norm((1 - ys / H) * 1.2 + noise * 0.45)
+
+
 TRANSITIONS = {"diamonds": diamonds, "iris": iris, "swirl": swirl, "slash": slash, "curtain": curtain,
-               "dissolve": dissolve, "blinds": blinds}
+               "dissolve": dissolve, "blinds": blinds, "clock": clock, "shards": shards, "hexes": hexes,
+               "drip": drip, "burn": burn}
 
 SHADER = """shader_type canvas_item;   // a full-screen rect drawn over everything
 uniform sampler2D map : filter_nearest;  // transitions/<name>.png
