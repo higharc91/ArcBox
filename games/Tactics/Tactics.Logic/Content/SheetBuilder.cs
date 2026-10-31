@@ -176,6 +176,16 @@ public static class SheetBuilder
     // ---- Picks ------------------------------------------------------------------------------------------------------
 
     /// <summary>
+    /// The "choose N of" features a <paramref name="level"/> character of <paramref name="cls"/> (and
+    /// <paramref name="subclass"/>, if chosen) has, each with the level it comes at: what a character's picks are made from.
+    /// </summary>
+    public static ImmutableArray<(int Level, FeatureRef Feature)> PickChoices(ClassDef cls, SubclassDef? subclass, int level)
+        => PickRules.Choices(cls, subclass, Math.Clamp(level, 1, MaxLevel));
+
+    /// <summary>The class's default loadout at <paramref name="level"/> (the picks of an AI-built character).</summary>
+    public static ImmutableArray<AbilityId> DefaultLoadout(ClassDef cls, int level) => DefaultPicks(cls, level);
+
+    /// <summary>
     /// The class's default loadout at <paramref name="level"/>: the whole list of the highest <c>defaultPicks</c> level at or
     /// below it (a loadout, not an addition to the lower ones), or nothing when there is none.
     /// </summary>

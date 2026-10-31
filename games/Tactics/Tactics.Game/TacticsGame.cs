@@ -353,9 +353,8 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         CancelBattleTimers();
     }
 
-    /// <summary>The character rebuilt at <paramref name="level"/> with its default picks, keeping its injuries and bag.</summary>
-    private CharacterRecord LevelUp(CharacterRecord c, int level)
-        => SheetBuilder.DefaultCharacter(c.Name, c.Race, c.Class, c.Subclass, level, Rules) with { Injuries = c.Injuries, Bag = c.Bag };
+    /// <summary>The character at the party's new level, as its player made it (<see cref="CharacterRules.LevelUp"/>).</summary>
+    private CharacterRecord LevelUp(CharacterRecord c, int level) => CharacterRules.LevelUp(c, level, Rules);
 
     // ---- Helpers ------------------------------------------------------------------------------------------------------
 
