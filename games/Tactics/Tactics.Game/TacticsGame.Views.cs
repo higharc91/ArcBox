@@ -49,15 +49,15 @@ public sealed partial class TacticsGame
                 classes = Rules.Classes.Values.Select(c => new ClassOption(c.Id, c.Name, c.Role)),
             }),
             TacticsPhase.Muster => new WaitView("Waiting for everyone to choose a class"),
-            TacticsPhase.EncounterPick when player.IsVip => Custom(Screens.PickEncounter, new { encounters = EncounterOptions() }),
-            TacticsPhase.EncounterPick => new WaitView($"Waiting for {_players.FirstOrDefault(p => p.IsVip)?.Name ?? "the host"} to choose a battle"),
+            TacticsPhase.EncounterPick when IsVip(player) => Custom(Screens.PickEncounter, new { encounters = EncounterOptions() }),
+            TacticsPhase.EncounterPick => new WaitView($"Waiting for {Vip?.Name ?? "the host"} to choose a battle"),
             TacticsPhase.Battle => BattleScreen(profile),
             TacticsPhase.Results => Custom(Screens.Results, new
             {
-                outcome = _result?.Outcome.ToString(), encounter = _resultEncounter, lines = ResultLines(), vip = player.IsVip,
+                outcome = _result?.Outcome.ToString(), encounter = _resultEncounter, lines = ResultLines(), vip = IsVip(player),
                 level = _doc.PartyLevel,
             }),
-            TacticsPhase.Resuming when player.IsVip => new ButtonsView(
+            TacticsPhase.Resuming when IsVip(player) => new ButtonsView(
                 $"Resuming… waiting for {string.Join(", ", Waiting())}", [new Option("continue", "Continue without them")]),
             TacticsPhase.Resuming => new WaitView($"Resuming… waiting for {string.Join(", ", Waiting())}"),
             _ => (ControllerView)new WaitView("Waiting…"),
@@ -124,10 +124,11 @@ public sealed partial class TacticsGame
     {
         if (_result is null || _doc.Battle is not null && _phase != TacticsPhase.Results)
             return [];
-        return [.. _players.Select((p, i) =>
+        return [.. _resultMembers.Select((profile, i) =>
         {
             var unit = UnitFor(i);
-            return new ResultLine(p.Name, _result.Xp.GetValueOrDefault(unit),
+            var name = _players.FirstOrDefault(p => p.Profile == profile)?.Name ?? _doc.For(profile)?.Character.Name ?? unit.Value;
+            return new ResultLine(name, _result.Xp.GetValueOrDefault(unit),
                 [.. _result.Injuries.GetValueOrDefault(unit, []).Select(inj => Rules.Injuries.GetValueOrDefault(inj)?.Name ?? inj.Value)]);
         })];
     }
@@ -156,7 +157,7 @@ public sealed partial class TacticsGame
             case TacticsPhase.Muster:
                 return "Choose your classes on your phones";
             case TacticsPhase.EncounterPick:
-                return $"{_players.FirstOrDefault(p => p.IsVip)?.Name ?? "The host"} is choosing a battle";
+                return $"{Vip?.Name ?? "The host"} is choosing a battle";
             case TacticsPhase.Results:
                 return _result?.Outcome == BattleOutcome.Won ? $"Victory at {_resultEncounter}!" : $"Defeat at {_resultEncounter}";
             case TacticsPhase.Resuming:

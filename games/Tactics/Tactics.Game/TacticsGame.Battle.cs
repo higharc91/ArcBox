@@ -14,7 +14,7 @@ public sealed partial class TacticsGame
     private int? _awaitShown;
 
     /// <summary>The rest of the AI's plan for the unit whose turn it is.</summary>
-    private (UnitId Unit, Queue<Command> Commands)? _plan;
+    private (UnitId Unit, int Round, int TurnIndex, Queue<Command> Commands)? _plan;
 
     /// <summary>A played unit whose turn the AI is finishing (it timed out, or its seat dropped mid-turn).</summary>
     private UnitId? _aiFinishing;
@@ -153,7 +153,8 @@ public sealed partial class TacticsGame
 
     private Command NextAiCommand(BattleState state, UnitId active)
     {
-        if (_plan is not { } plan || plan.Unit != active || plan.Commands.Count == 0)
+        if (_plan is not { } plan || plan.Unit != active || plan.Round != state.Round || plan.TurnIndex != state.TurnIndex
+            || plan.Commands.Count == 0)
         {
             var options = _aiFinishing == active
                 ? new AiOptions(AllowItems: false, AllowDelay: false, RemainingOnly: true, ProfileOverride: Companion)
@@ -161,7 +162,7 @@ public sealed partial class TacticsGame
                     ? new AiOptions(AllowItems: true)     // an absent member: the companion's one-potion rule applies
                     : new AiOptions();
             var commands = Ai.Plan(state, active, Rules, options).Commands;
-            plan = (active, new Queue<Command>(commands.IsDefaultOrEmpty ? [new EndTurn(active)] : commands));
+            plan = (active, state.Round, state.TurnIndex, new Queue<Command>(commands.IsDefaultOrEmpty ? [new EndTurn(active)] : commands));
             _plan = plan;
         }
         return plan.Commands.Dequeue();
@@ -171,6 +172,14 @@ public sealed partial class TacticsGame
     {
         var before = State;
         var resolution = Battle.Apply(before, command, Rules, aiFinished);
+        if (resolution.Rejected is not null && command is React react && before.Pending is ReactionOffer offer)
+        {
+            // An answer the engine won't take: pass rather than ask again forever.
+            var pass = offer.Options.FirstOrDefault(o => o.Id == Reactions.Pass) ?? offer.Options[0];
+            if (react.Choice.Id != pass.Id)
+                ApplyAi(new React(react.Actor, pass), aiFinished);
+            return;
+        }
         if (resolution.Rejected is not null)
         {
             // The plan went stale (a reaction moved things): end the turn rather than loop. A refused EndTurn can't happen
@@ -227,6 +236,7 @@ public sealed partial class TacticsGame
             return;
         }
         _toasts.Remove(player.Id);
+        _plan = null;   // the player decided: nothing the AI planned for this turn still applies
         SetState(resolution.State);
         if (command is React)
         {
@@ -279,15 +289,16 @@ public sealed partial class TacticsGame
     private void TurnTimedOut()
     {
         _turnTimerFor = null;
-        if (State.Active is { } active && IsPlayed(active) && State.Pending is null)
-            _aiFinishing = active;
+        if (State.Active is { } active && IsPlayed(active))
+            _aiFinishing = active;     // finished by the AI once any pending reaction is answered
         Drive();
     }
 
     private void ReactionTimedOut()
     {
+        var timedOut = _reactTimerFor;
         _reactTimerFor = null;
-        if (State.Pending is ReactionOffer offer && IsPlayed(offer.Reactor))
+        if (State.Pending is ReactionOffer offer && IsPlayed(offer.Reactor) && timedOut?.Reactor == offer.Reactor)
         {
             // No answer: the same rule the AI uses (rules-engine spec §5.5).
             var resolution = Battle.Apply(State, new React(offer.Reactor, Ai.React(State, offer, Rules)), Rules);

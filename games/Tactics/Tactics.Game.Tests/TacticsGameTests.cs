@@ -24,9 +24,11 @@ public sealed class TacticsGameTests
     /// <summary>A four-member campaign session: the harness, its lease and the game.</summary>
     private sealed class Session
     {
-        public Session(int seed = 1, JsonElement? document = null, TacticsGame? game = null)
+        /// <param name="reseated">Members sit in the opposite order (another night, other phones).</param>
+        public Session(int seed = 1, JsonElement? document = null, TacticsGame? game = null, bool reseated = false)
         {
-            Profiles = [.. Enumerable.Range(1, 4).Select(i => (ProfileId?)new ProfileId($"pr_member{i}"))];
+            var order = reseated ? new[] { 4, 3, 2, 1 } : [1, 2, 3, 4];
+            Profiles = [.. order.Select(i => (ProfileId?)new ProfileId($"pr_member{i}"))];
             Game = game ?? new TacticsGame(Rules);
             Harness = new GameHarness<TacticsGame>(Game, playerCount: 4, seed: seed, profiles: Profiles);
             var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", Profiles[0]!.Value,
@@ -241,6 +243,63 @@ public sealed class TacticsGameTests
             s.Harness.Advance(TimeSpan.FromSeconds(7));
         }
         Assert.Fail("No reaction was offered to a player.");
+    }
+
+    [Fact]
+    public void Malformed_input_from_a_phone_is_ignored_not_fatal()
+    {
+        var s = new Session();
+        s.Harness.StartCampaign(s.Lease);
+
+        s.Send(1, "pickClass", new { @class = 1 });
+        s.Send(1, "pickClass", new[] { 1, 2 });
+        s.Harness.Input(1, 42);
+        s.Harness.Input(1, new { data = "no action" });
+
+        Assert.Equal(TacticsPhase.Muster, s.Game.Phase);
+        Assert.Equal("Pick one of the classes.", s.Screen(1)?.Header);
+        s.Send(1, "pickClass", new { @class = "cleric" });
+        Assert.NotNull(s.Game.Document.For(s.Profiles[1]!.Value));
+    }
+
+    [Fact]
+    public void After_a_restart_the_first_player_back_can_continue_without_the_others()
+    {
+        var s = new Session();
+        s.ToBattle();
+        for (var i = 0; i < 10; i++)
+            s.Harness.Advance(TimeSpan.FromSeconds(7));
+
+        var resumed = new Session(document: s.Lease.Document);
+        resumed.Harness.Resume(resumed.Lease);
+        Assert.Equal(TacticsPhase.Resuming, resumed.Game.Phase);
+
+        // The platform's VIP (player 1) never comes back; player 3 does, and may go on without the rest.
+        resumed.Harness.SetConnected(2, true);
+        Assert.IsType<ButtonsView>(resumed.Harness.PlayerView(2));
+        resumed.Send(2, "continue");
+        Assert.Equal(TacticsPhase.Battle, resumed.Game.Phase);
+    }
+
+    [Fact]
+    public void Results_name_each_member_however_the_room_is_seated()
+    {
+        var s = new Session();
+        s.ToBattle(everyoneAway: true);
+        for (var i = 0; i < 10; i++)
+            s.Harness.Advance(TimeSpan.FromSeconds(7));
+
+        // Another night, in another order: the saved battle carries on and finishes.
+        var other = new Session(document: s.Lease.Document, reseated: true);
+        other.Harness.StartCampaign(other.Lease);
+        for (var p = 0; p < 4; p++)
+            other.Harness.SetConnected(p, false);
+        other.PlayOut();
+
+        Assert.Equal(TacticsPhase.Results, other.Game.Phase);
+        var lines = other.Host.Results!.Value;
+        // Party order is the first night's: member 1 first, who now sits in seat 4 (Player4).
+        Assert.Equal(["Player4", "Player3", "Player2", "Player1"], lines.Select(l => l.Name));
     }
 
     /// <summary>Advances until some player's phone shows their turn; returns who, and the screen.</summary>

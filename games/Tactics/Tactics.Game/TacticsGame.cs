@@ -56,9 +56,10 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     private string? _notice;
     private readonly Dictionary<PlayerId, (int Count, string Text)> _toasts = [];
 
-    // Results
+    // Results: who was in the battle, in party order, so lines match units whatever the seating is now.
     private BattleResult? _result;
     private string? _resultEncounter;
+    private ImmutableArray<ProfileId> _resultMembers = [];
 
     // Resuming: the members who were playing before the restart and haven't come back yet.
     private readonly HashSet<ProfileId> _awaited = [];
@@ -66,6 +67,16 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     /// <inheritdoc />
     public GameManifest Manifest { get; } = new(Id, "Tactics", "Turn-based co-op battles, played week after week", MinPlayers: 1,
         MaxPlayers: 6, UsesCampaigns: true, ResumesAfterRestart: true);
+
+    /// <summary>
+    /// Who picks the battle and moves the session on: the platform's VIP while they're here, else the first connected
+    /// player. The platform's flag is fixed when the session starts (and is nobody's after a restart, when nobody is
+    /// connected yet), so the game decides for itself rather than wait on someone who may never come back.
+    /// </summary>
+    private Player? Vip => _players.FirstOrDefault(p => p.IsVip && _online.Contains(p.Id))
+                           ?? _players.FirstOrDefault(p => _online.Contains(p.Id));
+
+    private bool IsVip(Player player) => Vip?.Id == player.Id;
 
     /// <summary>The phase the session is in.</summary>
     public TacticsPhase Phase => _phase;
@@ -119,7 +130,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         }
         _awaited.Clear();
         foreach (var unit in _doc.Battle!.State.Units.Values)
-            if (unit.Controller is PlayerControlled { Owner: var owner })
+            if (unit.Controller is PlayerControlled { Owner: var owner } && _players.Any(p => p.Profile == owner))
                 _awaited.Add(owner);
         _phase = TacticsPhase.Resuming;
         if (_awaited.Count == 0)
@@ -164,25 +175,27 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         {
             return;
         }
+        if (custom.Action is null)
+            return;
         switch (_phase)
         {
             case TacticsPhase.Muster when custom.Action == "pickClass":
                 PickClass(player, profile, custom.Data);
                 break;
-            case TacticsPhase.EncounterPick when custom.Action == "pickEncounter" && player.IsVip:
+            case TacticsPhase.EncounterPick when custom.Action == "pickEncounter" && IsVip(player):
                 PickEncounter(player, custom.Data);
                 break;
             case TacticsPhase.Battle:
                 BattleInput(player, profile, custom);
                 break;
-            case TacticsPhase.Results when player.IsVip && custom.Action is "next":
+            case TacticsPhase.Results when IsVip(player) && custom.Action is "next":
                 _result = null;
                 ToMusterOrPick();
                 break;
-            case TacticsPhase.Results when player.IsVip && custom.Action is "end":
+            case TacticsPhase.Results when IsVip(player) && custom.Action is "end":
                 _ctx.EndGame(new GameResults([], $"The party is level {_doc.PartyLevel}; {_doc.Completed.Length} battles won."));
                 break;
-            case TacticsPhase.Resuming when player.IsVip && custom.Action == "continue":
+            case TacticsPhase.Resuming when IsVip(player) && custom.Action == "continue":
                 _awaited.Clear();
                 ContinueBattle();
                 break;
@@ -234,6 +247,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
 
     private void ToMusterOrPick()
     {
+        _toasts.Clear();
         _phase = TacticsPhase.Muster;
         MusterDone();
     }
@@ -242,14 +256,17 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     private void MusterDone()
     {
         if (_phase == TacticsPhase.Muster && _players.Where(p => _online.Contains(p.Id)).All(p => _doc.For(p.Profile!.Value) is not null))
+        {
+            _toasts.Clear();
             _phase = TacticsPhase.EncounterPick;
+        }
     }
 
     private void PickClass(Player player, ProfileId profile, JsonElement? data)
     {
         if (_doc.For(profile) is not null)
             return;
-        var cls = data is { ValueKind: JsonValueKind.Object } d && d.TryGetProperty("class", out var c) ? c.GetString() : null;
+        var cls = Str(data, "class");
         if (cls is null || !Rules.Classes.ContainsKey(cls))
         {
             Toast(player.Id, "Pick one of the classes.");
@@ -285,7 +302,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
 
     private void PickEncounter(Player vip, JsonElement? data)
     {
-        var id = data is { ValueKind: JsonValueKind.Object } d && d.TryGetProperty("encounter", out var e) ? e.GetString() : null;
+        var id = Str(data, "encounter");
         if (id is null || !Rules.Encounters.TryGetValue(id, out var encounter))
         {
             Toast(vip.Id, "Pick one of the battles.");
@@ -331,7 +348,8 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             Completed = result.Outcome == BattleOutcome.Won ? _doc.Completed.Add(save.Encounter) : _doc.Completed,
         };
         _lease.Checkpoint(_doc.ToJson(), $"After {name}");
-        (_result, _resultEncounter, _phase) = (result, name, TacticsPhase.Results);
+        (_result, _resultEncounter, _resultMembers, _phase) = (result, name, save.Members, TacticsPhase.Results);
+        _toasts.Clear();
         CancelBattleTimers();
     }
 

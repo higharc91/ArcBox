@@ -19,9 +19,7 @@
       {
         "name": "Player3",
         "xp": 250,
-        "injuries": [
-          "Bruised pride"
-        ]
+        "injuries": []
       },
       {
         "name": "Player4",
