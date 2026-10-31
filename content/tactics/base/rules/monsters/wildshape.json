@@ -16,5 +16,11 @@
     "weapon": { "id": "bite", "damage": "1d10", "damageType": "piercing", "stat": "str", "finesse": false, "ranged": false,
                 "range": 1, "reach": false, "tags": ["natural"] },
     "abilities": [], "passives": ["dire_wolf.knockdown"], "skills": ["perception", "stealth"], "tags": ["beast"],
-    "aiProfile": "brute", "sprite": "beasts.wolf.wildshape" }
+    "aiProfile": "brute", "sprite": "beasts.wolf.wildshape" },
+  { "id": "elder_bear", "name": "Elder Bear", "level": 6, "cr": "2", "xp": 450, "move": 5, "attacks": 2,
+    "scores": { "str": 19, "dex": 13, "con": 17, "int": 3, "wis": 13, "cha": 8 }, "hp": 44, "ac": 15,
+    "weapon": { "id": "claws", "damage": "2d6", "damageType": "slashing", "stat": "str", "finesse": false, "ranged": false,
+                "range": 1, "reach": false, "tags": ["natural"] },
+    "abilities": [], "passives": [], "skills": ["perception"], "tags": ["beast"],
+    "aiProfile": "brute", "sprite": "beasts.bear.wildshape" }
 ]

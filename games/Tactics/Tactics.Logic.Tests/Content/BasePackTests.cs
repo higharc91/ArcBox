@@ -14,12 +14,6 @@ public sealed class BasePackTests
 
     private static readonly string[] Classes = ["barbarian", "bard", "cleric", "druid", "fighter", "monk", "paladin", "ranger", "rogue", "sorcerer", "warlock", "wizard"];
 
-    /// <summary>The classes whose subclasses are still to be written (Task 20).</summary>
-    private static readonly string[] SubclassesPending = ["bard", "druid", "sorcerer", "warlock"];
-
-    /// <summary>The classes whose 3 subclasses are complete.</summary>
-    private static readonly string[] MartialClasses = ["barbarian", "fighter", "monk", "paladin", "ranger", "rogue"];
-
     private static readonly string[] AiProfiles = ["archer", "boss", "boss_cruel", "brute", "caster", "companion", "coward", "healer", "skirmisher"];
 
     private static UnitId U(string id) => new(id);
@@ -45,7 +39,7 @@ public sealed class BasePackTests
         Assert.Equal(["black_eye", "bruised_pride", "concussion", "cracked_ribs", "deep_cut", "shaken", "sprained_ankle", "wrenched_shoulder"],
             pack.Injuries.Keys.Select(i => i.Value));
         Assert.Equal(["alchemists_fire", "greater_healing", "potion_of_healing", "smoke_bomb"], pack.Items.Keys.Select(i => i.Value));
-        Assert.Equal(["bear", "dire_wolf", "giant_spider", "goblin", "goblin_archer", "goblin_boss", "hobgoblin", "hound", "kobold", "skeleton", "wolf", "zombie"],
+        Assert.Equal(["bear", "dire_wolf", "elder_bear", "giant_spider", "goblin", "goblin_archer", "goblin_boss", "hobgoblin", "hound", "imp", "kobold", "sapling", "skeleton", "wolf", "zombie"],
             pack.Monsters.Keys);
         Assert.Equal(XpTable.Default.Thresholds, pack.Xp.Thresholds);
         Assert.Equal(["river_crossing"], pack.Maps.Keys);
@@ -68,13 +62,7 @@ public sealed class BasePackTests
 
         foreach (var cls in pack.Classes.Values)
         {
-            Assert.Equal(SubclassesPending.Contains(cls.Id), cls.SubclassesPending);
-            if (cls.SubclassesPending)
-                Assert.Empty(cls.Subclasses);
-            else if (MartialClasses.Contains(cls.Id))
-                Assert.Equal(3, cls.Subclasses.Length);
-            else
-                Assert.Single(cls.Subclasses);
+            Assert.Equal(3, cls.Subclasses.Length);
             Assert.All(Enumerable.Range(1, 10), level => Assert.True(cls.DefaultPicks.ContainsKey(level), $"{cls.Id} has no default picks at {level}."));
             Assert.Contains(cls.PrimaryResource!, cls.Resources.Keys);
         }

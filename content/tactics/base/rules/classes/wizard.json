@@ -28,6 +28,18 @@
         "3": [ { "ability": "evoker.sculpted_nova" } ],
         "6": [ { "passive": "evoker.empowered_evocation" } ],
         "10": [ { "ability": "evoker.sculpted_inferno" } ]
+      } },
+    { "id": "wizard.chronomancer", "name": "Chronomancer",
+      "features": {
+        "3": [ { "ability": "chronomancer.time_shift" }, { "passive": "chronomancer.temporal_awareness" } ],
+        "6": [ { "ability": "chronomancer.accelerate" } ],
+        "10": [ { "ability": "chronomancer.temporal_stasis" } ]
+      } },
+    { "id": "wizard.geomancer", "name": "Geomancer",
+      "features": {
+        "3": [ { "ability": "geomancer.raise_earth" }, { "ability": "geomancer.sink_earth" } ],
+        "6": [ { "passive": "geomancer.earthen_ward" }, { "ability": "geomancer.tremor" } ],
+        "10": [ { "ability": "geomancer.stone_spire" } ]
       } }
   ],
   "defaultPicks": {

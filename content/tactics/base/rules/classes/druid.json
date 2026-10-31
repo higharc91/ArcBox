@@ -52,8 +52,26 @@
                                     "druid.sleet_storm", "druid.dispel_magic", "druid.conjure_animals", "druid.ice_storm",
                                     "druid.blight", "druid.mass_cure_wounds", "druid.greater_restoration"] } ]
   },
-  "subclasses": [],
-  "subclassesPending": true,
+  "subclasses": [
+    { "id": "druid.shapeshifter", "name": "Circle of the Shapeshifter",
+      "features": {
+        "3": [ { "ability": "shapeshifter.dire_form" }, { "passive": "shapeshifter.primal_strike" } ],
+        "6": [ { "ability": "shapeshifter.elder_bear_form" } ],
+        "10": [ { "passive": "shapeshifter.apex_predator" }, { "ability": "shapeshifter.primal_mend" } ]
+      } },
+    { "id": "druid.stormcaller", "name": "Circle of the Stormcaller",
+      "features": {
+        "3": [ { "ability": "stormcaller.gale_burst" } ],
+        "6": [ { "ability": "stormcaller.chain_tempest" }, { "passive": "stormcaller.storm_born" } ],
+        "10": [ { "ability": "stormcaller.wrath_of_the_tempest" } ]
+      } },
+    { "id": "druid.grovekeeper", "name": "Circle of the Grovekeeper", "companion": "sapling",
+      "features": {
+        "3": [ { "passive": "grovekeeper.companion" }, { "ability": "grovekeeper.bloom" } ],
+        "6": [ { "ability": "grovekeeper.sanctuary_grove" } ],
+        "10": [ { "ability": "grovekeeper.ancient_canopy" } ]
+      } }
+  ],
   "defaultPicks": {
     "1": ["druid.thorn_whip", "druid.produce_flame", "druid.entangle", "druid.faerie_fire", "druid.thunderwave"],
     "2": ["druid.thorn_whip", "druid.produce_flame", "druid.entangle", "druid.faerie_fire", "druid.thunderwave",

@@ -226,11 +226,8 @@ public sealed class ValidationTests
     }
 
     [Fact]
-    public void Subclasses_pending_skips_the_subclass_checks()
+    public void Class_must_have_at_least_one_subclass()
     {
-        var pack = LoadChapter(("classes/druid.json", ClassJson("druid", subclasses: "\"subclassesPending\": true")));
-        Assert.Contains("druid", pack.Classes.Keys);
-
         var error = Assert.Single(ErrorsOfChapter(("classes/druid.json", ClassJson("druid", subclasses: "\"subclasses\": []"))));
         Assert.Equal(new ContentError("chapter-01/classes/druid.json", "/subclasses", "Class 'druid' has no subclasses."), error);
     }
@@ -280,7 +277,9 @@ public sealed class ValidationTests
                   { "id": "longsword", "damage": "1d10", "damageType": "slashing", "stat": "str", "finesse": false, "ranged": false, "range": 1, "reach": false, "tags": [] } ]
                 """),
             ("armor.json", """[ { "id": "plate", "name": "Plate", "kind": "Armoured", "baseAc": 18 }, { "id": "none", "name": "Nothing", "kind": "None", "baseAc": 10 } ]"""),
-            ("classes/druid.json", ClassJson("druid", subclasses: "\"subclassesPending\": true").Replace("\"quarterstaff\"", "\"club\"", StringComparison.Ordinal)
+            ("classes/druid.json", ClassJson("druid",
+                subclasses: """ "subclasses": [ { "id": "druid.grovekeeper", "name": "Grovekeeper", "features": { "3": [ { "ability": "test.mend" } ], "6": [ { "attacks": 1 } ], "10": [ { "attacks": 1 } ] } } ] """)
+                .Replace("\"quarterstaff\"", "\"club\"", StringComparison.Ordinal)
                 .Replace("\"armor\": \"none\"", "\"armor\": \"hide\"", StringComparison.Ordinal)));
 
         Assert.Equal(

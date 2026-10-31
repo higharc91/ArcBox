@@ -57,8 +57,26 @@
                                     "warlock.vampiric_touch", "warlock.blight", "warlock.dimension_door",
                                     "warlock.shadow_of_moil", "warlock.synaptic_static", "warlock.hold_monster"] } ]
   },
-  "subclasses": [],
-  "subclassesPending": true,
+  "subclasses": [
+    { "id": "warlock.hexblade", "name": "Hexblade",
+      "features": {
+        "3": [ { "ability": "hexblade.hexblades_curse" }, { "passive": "hexblade.hex_warrior" } ],
+        "6": [ { "attacks": 2 }, { "ability": "hexblade.cursed_slash" } ],
+        "10": [ { "ability": "hexblade.armor_of_hexes" } ]
+      } },
+    { "id": "warlock.fiendbound", "name": "Fiendbound", "companion": "imp",
+      "features": {
+        "3": [ { "passive": "fiendbound.companion" }, { "passive": "fiendbound.dark_ones_blessing" } ],
+        "6": [ { "ability": "fiendbound.hellfire_surge" }, { "passive": "fiendbound.fiendish_resilience" } ],
+        "10": [ { "ability": "fiendbound.hurl_through_hell" } ]
+      } },
+    { "id": "warlock.void", "name": "Voidcaller",
+      "features": {
+        "3": [ { "ability": "void.rift_step" }, { "ability": "void.gravitational_pull" } ],
+        "6": [ { "ability": "void.entropic_ward" } ],
+        "10": [ { "ability": "void.abyssal_singularity" } ]
+      } }
+  ],
   "defaultPicks": {
     "1": ["warlock.chill_touch", "warlock.arms_of_hadar", "warlock.hellish_rebuke"],
     "2": ["warlock.chill_touch", "warlock.arms_of_hadar", "warlock.hellish_rebuke", "warlock.agonizing_blast",

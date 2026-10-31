@@ -8,6 +8,9 @@
     "4": [ { "passive": "test.sneak" } ], "5": [ { "attacks": 2 } ], "6": [ { "ability": "test.mend" } ],
     "8": [ { "passive": "test.tough" } ], "9": [ { "ability": "test.hold" } ], "10": [ { "attacks": 3 } ]
   },
-  "subclassesPending": true,
+  "subclasses": [
+    { "id": "monk.open_hand", "name": "Open Hand",
+      "features": { "3": [ { "ability": "test.hold" } ], "6": [ { "passive": "test.tough" } ], "10": [ { "ability": "test.bolt" } ] } }
+  ],
   "aiTags": { "tags": ["melee"], "priority": ["dex", "wis", "con", "str", "int", "cha"] },
   "jump": 3 }

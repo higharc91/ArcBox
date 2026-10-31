@@ -134,10 +134,6 @@
         ]
       }
     },
-    "subclassesPending": {
-      "type": "boolean",
-      "description": "Temporary: load the class before its subclasses are written."
-    },
     "defaultPicks": {
       "type": "object",
       "patternProperties": {

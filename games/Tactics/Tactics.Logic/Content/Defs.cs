@@ -304,8 +304,7 @@ public sealed record SubclassDef(string Id, string Name, ImmutableSortedDictiona
 /// per-level resource pools, the features gained at each level 1–10, its subclasses, the default picks (the whole loadout
 /// of the highest listed level at or below a character's level, used when it has chosen none), AI hints, the casting stat
 /// and the Jump score. <see cref="PrimaryResource"/> (one of <see cref="Resources"/>) is what <c>grantResource
-/// "primary"</c> means for its characters. <see cref="SubclassesPending"/> lets a class be loaded before its subclasses are written (a stop-gap
-/// until every class has them). <see cref="Replaces"/> lets a later pack override an id.
+/// "primary"</c> means for its characters. <see cref="Replaces"/> lets a later pack override an id.
 /// </summary>
 public sealed record ClassDef(string Id, string Name, string Role, int HitDie, ImmutableArray<Stat> Saves,
     ImmutableArray<string> ArmorProf, ImmutableArray<string> WeaponProf, SkillChoicesDef SkillChoices, StartingKitDef StartingKit,
@@ -314,7 +313,6 @@ public sealed record ClassDef(string Id, string Name, string Role, int HitDie, I
     ImmutableSortedDictionary<int, ImmutableArray<AbilityId>> DefaultPicks, ClassAiTags AiTags,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] Stat? CastingStat = null,
     int Jump = 2,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool SubclassesPending = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? PrimaryResource = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] Stat? UnarmoredDefense = null);

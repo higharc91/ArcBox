@@ -54,8 +54,26 @@
                                     "bard.mass_healing_word", "bard.dispel_magic", "bard.greater_invisibility",
                                     "bard.dimension_door", "bard.hold_monster", "bard.greater_restoration"] } ]
   },
-  "subclasses": [],
-  "subclassesPending": true,
+  "subclasses": [
+    { "id": "bard.valor", "name": "College of Valor",
+      "features": {
+        "3": [ { "ability": "valor.combat_inspiration" }, { "passive": "valor.battle_readiness" } ],
+        "6": [ { "attacks": 2 } ],
+        "10": [ { "ability": "valor.battle_magic" } ]
+      } },
+    { "id": "bard.lore", "name": "College of Lore",
+      "features": {
+        "3": [ { "ability": "lore.cutting_words" }, { "passive": "lore.arcane_scholar" } ],
+        "6": [ { "ability": "lore.counterspell" }, { "ability": "lore.magical_secrets" } ],
+        "10": [ { "ability": "lore.peerless_skill" } ]
+      } },
+    { "id": "bard.siren", "name": "College of the Siren",
+      "features": {
+        "3": [ { "ability": "siren.alluring_verse" } ],
+        "6": [ { "ability": "siren.enthralling_aria" } ],
+        "10": [ { "ability": "siren.sirens_call" } ]
+      } }
+  ],
   "defaultPicks": {
     "1": ["bard.vicious_mockery", "bard.thunderclap", "bard.healing_word", "bard.cure_wounds", "bard.dissonant_whispers"],
     "2": ["bard.vicious_mockery", "bard.thunderclap", "bard.healing_word", "bard.cure_wounds", "bard.dissonant_whispers",

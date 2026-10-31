@@ -30,8 +30,26 @@
     "10": [ { "choose": 1, "from": ["sorcerer.fire_bolt", "sorcerer.ray_of_frost", "sorcerer.shocking_grasp", "sorcerer.acid_splash", "sorcerer.chill_touch", "sorcerer.poison_spray"] },
             { "choose": 1, "from": ["sorcerer.chromatic_orb", "sorcerer.burning_hands", "sorcerer.magic_missile", "sorcerer.shield", "sorcerer.thunderwave", "sorcerer.sleep", "sorcerer.scorching_ray", "sorcerer.shatter", "sorcerer.hold_person", "sorcerer.misty_step", "sorcerer.web", "sorcerer.fireball", "sorcerer.lightning_bolt", "sorcerer.haste", "sorcerer.slow", "sorcerer.counterspell", "sorcerer.ice_storm", "sorcerer.wall_of_fire", "sorcerer.banishment", "sorcerer.greater_invisibility", "sorcerer.cone_of_cold", "sorcerer.hold_monster"] } ]
   },
-  "subclasses": [],
-  "subclassesPending": true,
+  "subclasses": [
+    { "id": "sorcerer.draconic", "name": "Draconic Bloodline",
+      "features": {
+        "3": [ { "passive": "draconic.dragon_scales" }, { "ability": "draconic.dragon_breath" } ],
+        "6": [ { "passive": "draconic.elemental_affinity" } ],
+        "10": [ { "ability": "draconic.dragon_wings" } ]
+      } },
+    { "id": "sorcerer.chaos", "name": "Wild Chaos",
+      "features": {
+        "3": [ { "ability": "chaos.tides_of_chaos" }, { "ability": "chaos.wild_surge" } ],
+        "6": [ { "ability": "chaos.bend_luck" } ],
+        "10": [ { "ability": "chaos.controlled_surge" } ]
+      } },
+    { "id": "sorcerer.runeborn", "name": "Runeborn",
+      "features": {
+        "3": [ { "ability": "runeborn.ember_rune" } ],
+        "6": [ { "ability": "runeborn.frost_rune" }, { "passive": "runeborn.runic_ward" } ],
+        "10": [ { "ability": "runeborn.grand_sigil" } ]
+      } }
+  ],
   "defaultPicks": {
     "1": ["sorcerer.fire_bolt", "sorcerer.ray_of_frost", "sorcerer.shocking_grasp", "sorcerer.acid_splash", "sorcerer.chromatic_orb", "sorcerer.burning_hands"],
     "2": ["sorcerer.fire_bolt", "sorcerer.ray_of_frost", "sorcerer.shocking_grasp", "sorcerer.acid_splash", "sorcerer.chromatic_orb", "sorcerer.burning_hands", "sorcerer.metamagic_twinned", "sorcerer.metamagic_quickened", "sorcerer.shield"],

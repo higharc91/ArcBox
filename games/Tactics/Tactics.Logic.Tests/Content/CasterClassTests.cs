@@ -137,4 +137,67 @@ public sealed class CasterClassTests
         Assert.Null(orb.Rejected);
         Assert.Equal(2, orb.Events.OfType<AttackResolved>().Count());
     }
+
+    [Fact]
+    public void Raise_tile_blocks_los_next_attack()
+    {
+        var geo = SheetBuilder.ForCharacter(
+            SheetBuilder.DefaultCharacter("geo", "human", "wizard", "wizard.geomancer", 3, Rules), Rules) with
+        {
+            InitiativeBonus = 40,
+        };
+        var gob = SheetBuilder.ForMonster("hobgoblin", Rules) with { InitiativeBonus = -20 };
+        var (state, rules) = Start(("geo", geo, T(1, 1)), ("gob", gob, T(4, 1)));
+
+        // Raise the tile at (2, 1) by +2 with geomancer.raise_earth (bonus action), blocking line of sight to (4, 1).
+        var raised = Battle.Apply(state, new Use(U("geo"), A("geomancer.raise_earth"), new Target(Tile: T(2, 1))), rules);
+        Assert.Null(raised.Rejected);
+        Assert.Equal(2, raised.State.HeightDelta[T(2, 1)]);
+
+        var blocked = Battle.Apply(raised.State, new Use(U("geo"), A("wizard.fire_bolt"), new Target(Unit: U("gob"))), rules);
+        Assert.NotNull(blocked.Rejected);
+        Assert.Equal(RejectCode.NoLineOfSight, blocked.Rejected!.Code);
+    }
+
+    [Fact]
+    public void Swap_moves_ally_turn_before_enemy()
+    {
+        var chrono = SheetBuilder.ForCharacter(
+            SheetBuilder.DefaultCharacter("chrono", "human", "wizard", "wizard.chronomancer", 3, Rules), Rules) with
+        {
+            InitiativeBonus = 40,
+        };
+        var gob = SheetBuilder.ForMonster("hobgoblin", Rules) with { InitiativeBonus = 10 };
+        var kara = Character("fighter", 3) with { InitiativeBonus = -10 };
+        var (state, rules) = Start(("chrono", chrono, T(1, 1)), ("gob", gob, T(5, 1)), ("kara", kara, T(2, 1)));
+        Assert.Equal([U("chrono"), U("gob"), U("kara")], state.Order);
+
+        // Time Shift on gob swaps gob with the next slot (kara), moving kara ahead of gob for this round.
+        var swapped = Battle.Apply(state, new Use(U("chrono"), A("chronomancer.time_shift"), new Target(Unit: U("gob"))), rules);
+        Assert.Null(swapped.Rejected);
+        Assert.Equal([U("chrono"), U("kara"), U("gob")], swapped.State.Order);
+    }
+
+    [Fact]
+    public void Sapling_and_imp_spawn_at_battle_start_and_act_after_owner()
+    {
+        var grove = SheetBuilder.ForCharacter(
+            SheetBuilder.DefaultCharacter("grove", "human", "druid", "druid.grovekeeper", 6, Rules), Rules) with
+        {
+            InitiativeBonus = 40,
+        };
+        var fiend = SheetBuilder.ForCharacter(
+            SheetBuilder.DefaultCharacter("fiend", "human", "warlock", "warlock.fiendbound", 6, Rules), Rules) with
+        {
+            InitiativeBonus = 20,
+        };
+        var gob = SheetBuilder.ForMonster("hobgoblin", Rules) with { InitiativeBonus = -20 };
+        var (state, _) = Start(("grove", grove, T(1, 1)), ("fiend", fiend, T(1, 2)), ("gob", gob, T(6, 1)));
+
+        Assert.Contains(U("grove.sapling.1"), state.Units.Keys);
+        Assert.Contains(U("fiend.imp.0"), state.Units.Keys);
+        Assert.Equal([U("grove"), U("grove.sapling.1"), U("fiend"), U("fiend.imp.0"), U("gob")], state.Order);
+        Assert.Equal(30, Rules.MonsterSheet("sapling", 6)!.MaxHp);
+        Assert.Equal(24, Rules.MonsterSheet("imp", 6)!.MaxHp);
+    }
 }

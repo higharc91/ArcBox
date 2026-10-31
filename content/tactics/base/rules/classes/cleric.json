@@ -31,6 +31,18 @@
         "3": [ { "ability": "life.preserve_life" } ],
         "6": [ { "ability": "life.word_of_renewal" } ],
         "10": [ { "ability": "life.mass_revival" } ]
+      } },
+    { "id": "cleric.war", "name": "War Domain",
+      "features": {
+        "3": [ { "ability": "war.guided_strike" }, { "ability": "war.war_priest" } ],
+        "6": [ { "passive": "war.crusaders_zeal" } ],
+        "10": [ { "ability": "war.avatar_of_battle" } ]
+      } },
+    { "id": "cleric.light", "name": "Light Domain",
+      "features": {
+        "3": [ { "ability": "light.radiance_of_the_dawn" } ],
+        "6": [ { "ability": "light.warding_flare" }, { "passive": "light.burning_luminescence" } ],
+        "10": [ { "ability": "light.corona_of_light" } ]
       } }
   ],
   "defaultPicks": {

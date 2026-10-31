@@ -8,8 +8,8 @@ namespace Tactics.Logic;
 internal sealed partial class Validation
 {
     /// <summary>
-    /// A class: hit die, resource tables, a feature at every level 1–10, subclasses with features at exactly 3, 6 and 10
-    /// (unless <see cref="ClassDef.SubclassesPending"/>), the stat priority, and every id its features and kit name (an empty
+    /// A class: hit die, resource tables, a feature at every level 1–10, subclasses with features at exactly 3, 6 and 10,
+    /// the stat priority, and every id its features and kit name (an empty
     /// kit armour is none). Each level's <c>defaultPicks</c> must be a loadout a character of that level could pick from the
     /// class's own <c>choose</c> features (<see cref="PickRules"/>; subclass choices aren't counted, since the default
     /// loadout serves every subclass). A <c>primaryResource</c> must be one of the class's resources.
@@ -32,7 +32,7 @@ internal sealed partial class Validation
             FeatureLists(def.Features, file, features, level => level is >= 1 and <= 10, "Level {0} is outside levels 1–10.");
 
             var subclasses = Pointer.Append(ptr, "subclasses");
-            if (def.Subclasses.IsEmpty && !def.SubclassesPending)
+            if (def.Subclasses.IsEmpty)
                 Error(file, subclasses, $"Class '{def.Id}' has no subclasses.");
             for (var i = 0; i < def.Subclasses.Length; i++)
             {
@@ -41,12 +41,9 @@ internal sealed partial class Validation
                 if (string.IsNullOrWhiteSpace(sub.Id))
                     Error(file, Pointer.Append(at, "id"), "The id is empty.");
                 var subFeatures = Pointer.Append(at, "features");
-                if (!def.SubclassesPending)
-                {
-                    foreach (var level in SubclassLevels)
-                        if (!sub.Features.TryGetValue(level, out var list) || list.IsEmpty)
-                            Error(file, subFeatures, $"Subclass '{sub.Id}' has no features at level {level}.");
-                }
+                foreach (var level in SubclassLevels)
+                    if (!sub.Features.TryGetValue(level, out var list) || list.IsEmpty)
+                        Error(file, subFeatures, $"Subclass '{sub.Id}' has no features at level {level}.");
                 FeatureLists(sub.Features, file, subFeatures, level => SubclassLevels.Contains(level),
                     "Subclass features come only at levels 3, 6 and 10, not {0}.");
                 if (sub.Companion is { } companion)
