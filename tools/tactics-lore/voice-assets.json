@@ -705,10 +705,20 @@
       "preset": "Algieba",
       "text": "Over flatbread and bitter tea, the elder tells the party what the desert knows, and Lark puts it into the valley tongue."
     },
+    "Algieba.3478f000": {
+      "asset": "asset_QhSPNE8XCCXum9m5FQAKddyA",
+      "preset": "Algieba",
+      "text": "Nell opens her eyes."
+    },
     "Algieba.34d4ae9b": {
       "asset": "asset_UdEwsVcucgtcsYpoT8ULCtRr",
       "preset": "Algieba",
       "text": "She smiles, and is herself again, warm and certain. If it frightened her, nothing in her face admits it."
+    },
+    "Algieba.37ea9988": {
+      "asset": "asset_oj85YEx5fzMaBrzTxizgo91L",
+      "preset": "Algieba",
+      "text": "She looks at him for a long time. Then she smiles, the way people smile at someone who is late, and forgiven."
     },
     "Algieba.38ead1d3": {
       "asset": "asset_nsTUGo8y4ZhemGBikvG2PhoN",
@@ -799,6 +809,11 @@
       "asset": "asset_z3fJBZzceUBoNGe7AhcmRcM1",
       "preset": "Algieba",
       "text": "Greyhold is a dwarven road-hold, carved into the mountain and frozen solid. Its doors stand open. Its halls are full of books and ice."
+    },
+    "Algieba.4d624ee5": {
+      "asset": "asset_bNUcpZjarXK2YJuQ6HBmD5B4",
+      "preset": "Algieba",
+      "text": "Nell lies still on the narrow bed. The brazier ticks. Below the tower, the dead of the pass have gathered in the snow, waiting for nothing."
     },
     "Algieba.4dd39f07": {
       "asset": "asset_qwkBkFGnuih3zYESwPo5q6VZ",
@@ -914,6 +929,11 @@
       "asset": "asset_thry6c7MUv95PZGgcgkksWKN",
       "preset": "Algieba",
       "text": "You remember that morning. You remember it differently than she does."
+    },
+    "Algieba.76ba832f": {
+      "asset": "asset_3pPcGV7n8AVMRxCDSEhimW6D",
+      "preset": "Algieba",
+      "text": "She lifts a hand to his face and says his name, once. Then the light goes out of her, gently, and this time she does not walk again."
     },
     "Algieba.77b2c064": {
       "asset": "asset_Ge83wCAM3huhkuyEnt1e2JgC",
@@ -1039,6 +1059,11 @@
       "asset": "asset_KrNT1BXyPqusmyij9MEzmERB",
       "preset": "Algieba",
       "text": "The dead walk by close enough to touch. A pilgrim's lips move without a sound, shaping the same word over and over."
+    },
+    "Algieba.9d0e6338": {
+      "asset": "asset_fxiW9Zrm8VbwDSnnyvgrzRob",
+      "preset": "Algieba",
+      "text": "You set the ember against the cold one. For one breath the caves glow gold, and every dead thing on the mountain turns its head."
     },
     "Algieba.9e3232ce": {
       "asset": "asset_VLZkqTY5pWVmZvSYhEJYaGSY",
@@ -1180,6 +1205,11 @@
       "preset": "Algieba",
       "text": "The last bone Warden falls. Beyond the dais, an inner door bears a seal older than the Fall. It gives at last, onto a vault of shelves."
     },
+    "Algieba.c0229661": {
+      "asset": "asset_y669KCYA3SPjMXzzwy9CWvy2",
+      "preset": "Algieba",
+      "text": "He fights like a doctor, which is to say he knows exactly where it hurts, and he hates every moment of it."
+    },
     "Algieba.c1d578c5": {
       "asset": "asset_rirebCu16pqfv7soYRi9ehde",
       "preset": "Algieba",
@@ -1314,6 +1344,11 @@
       "asset": "asset_EtXak9YjAdGUM1wgYoxNTQwy",
       "preset": "Algieba",
       "text": "The pilgrim at the front stops, and bows, and walks on. For a moment she looked as if she remembered why."
+    },
+    "Algieba.da872c0f": {
+      "asset": "asset_XcCHtYAGrYgeS74SkfvGBtri",
+      "preset": "Algieba",
+      "text": "It is over quickly. His notes go into your packs. The cold ember, dull and blue in its cave, is yours to carry."
     },
     "Algieba.daff5262": {
       "asset": "asset_XYLPg4GybBZbhQUYw2HUBfJ1",
@@ -2710,6 +2745,11 @@
       "preset": "Enceladus",
       "text": "Then it was for nothing. All of it, for nothing."
     },
+    "Enceladus.0ea4fffa": {
+      "asset": "asset_HZPqqpnid3f8gKcQqLTfJeoG",
+      "preset": "Enceladus",
+      "text": "Nell?"
+    },
     "Enceladus.12652ecb": {
       "asset": "asset_2rB7KswDsaHuNnERAL4Non2W",
       "preset": "Enceladus",
@@ -2750,6 +2790,21 @@
       "preset": "Enceladus",
       "text": "Hm. You're quicker than you look."
     },
+    "Enceladus.3f6892ea": {
+      "asset": "asset_vzRVD3BBbMcHXnu2yZoPDE3f",
+      "preset": "Enceladus",
+      "text": "Leave her the brazier. Please. She never liked the cold."
+    },
+    "Enceladus.48419d35": {
+      "asset": "asset_wqJwWx8tZmBsEfF1eeMkeXbj",
+      "preset": "Enceladus",
+      "text": "I can't remember her mother's name. The fire took it. Nell would laugh. She never liked her mother."
+    },
+    "Enceladus.53b53e1b": {
+      "asset": "asset_agwUDrGmfQoFjGPoPqtVM6UW",
+      "preset": "Enceladus",
+      "text": "Thank you. That was a minute. I said I would take a minute."
+    },
     "Enceladus.59b77082": {
       "asset": "asset_m8RfzDmaDSBzYRNxZGRsRyhu",
       "preset": "Enceladus",
@@ -2759,6 +2814,11 @@
       "asset": "asset_1fyAf6P8VL3Ygk9C5UsGyT8s",
       "preset": "Enceladus",
       "text": "That's heavy. But it isn't a sickness. It's a debt the dead ran up, and it isn't yours to pay alone."
+    },
+    "Enceladus.68169e34": {
+      "asset": "asset_hEvRUWTQnoJSm9XuU9MZc9gm",
+      "preset": "Enceladus",
+      "text": "Ah. Yes. I thought you might. You have honest faces."
     },
     "Enceladus.6827e27f": {
       "asset": "asset_zPpRXHU8TabDBZVwHWy2PY4Z",
@@ -2804,6 +2864,11 @@
       "asset": "asset_LjepUbabiXcbEYUgspjx96xB",
       "preset": "Enceladus",
       "text": "That will do. They're paid to dig, not to die. Come up, all of you, before your fingers go black."
+    },
+    "Enceladus.aeee5b29": {
+      "asset": "asset_pGTcWMjrXGVnA2KKEw6Lexju",
+      "preset": "Enceladus",
+      "text": "I'm done with the Kindled. Maren wanted the cold ember lit. It's yours. And whatever else I have, if you ever need a doctor."
     },
     "Enceladus.babdef8c": {
       "asset": "asset_BMkXPeCinMPTWJj563nMmtpF",
@@ -3809,6 +3874,11 @@
       "asset": "asset_7cUzzPxagRB3tnZ3sFudQgbY",
       "preset": "Leda",
       "text": "Me. I've got ones that aren't mine. Songs, and roads, and a man who's very tired. I don't want to carry him around any more."
+    },
+    "Leda.65ca5584": {
+      "asset": "asset_6Yk5392g6srbRGajEaLQx9RW",
+      "preset": "Leda",
+      "text": "We'll leave it. I'll leave a scarf as well. One of them."
     },
     "Leda.74591c3b": {
       "asset": "asset_PoFhnkKkW6XcTT4Rrgh3iEeX",
