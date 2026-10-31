@@ -142,7 +142,8 @@
             ]
           },
           "offset": {
-            "type": "integer"
+            "type": "integer",
+            "description": "How far along the shared side the neighbour's tile 0 sits from this region's tile 0. The neighbour's facing edge carries the negated value: 5 here, -5 there."
           }
         },
         "required": [

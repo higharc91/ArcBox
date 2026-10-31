@@ -31,5 +31,9 @@ public sealed record BeatSpot(string Beat, [property: JsonRequired] Tile At);
 /// <summary>Where the party starts in a region, and where it recovers.</summary>
 public sealed record RegionSpawns([property: JsonRequired] Tile Start, [property: JsonRequired] Tile Recovery);
 
-/// <summary>Where a region meets its neighbour: the region it joins, on which side, and how far along that side.</summary>
+/// <summary>
+/// Where a region meets its neighbour: the region it joins and on which side. <see cref="Offset"/> is how far along the shared
+/// side the neighbour's tile 0 sits from this region's tile 0, so the neighbour's facing edge carries the negated value: if one
+/// says 5, the other says -5.
+/// </summary>
 public sealed record RegionEdge(string Neighbour, string Side, [property: JsonRequired] int Offset);

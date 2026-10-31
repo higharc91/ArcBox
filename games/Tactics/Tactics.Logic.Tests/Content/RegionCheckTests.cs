@@ -22,8 +22,8 @@ public sealed class RegionCheckTests
 
     private static readonly RegionStamp FordStamp = new("ford", new Tile(4, 5), 1);
 
-    private static string MapJson(string id, int width, int height, string materials, byte[] tiles)
-        => $$"""{ "id": "{{id}}", "size": [{{width}}, {{height}}], "tiles": "{{Convert.ToBase64String(tiles)}}", "materials": {{materials}}, "props": [], "zones": {} }""";
+    private static string MapJson(string id, int width, int height, string materials, byte[] tiles, string zones = "{}")
+        => $$"""{ "id": "{{id}}", "size": [{{width}}, {{height}}], "tiles": "{{Convert.ToBase64String(tiles)}}", "materials": {{materials}}, "props": [], "zones": {{zones}} }""";
 
     private static RegionDef Region(string id, params (int X, int Y, byte Height, byte Material, TileFlags Flags)[] tiles)
         => new(id, id, 1, [32, 32], ["grass/lush", "water/river"], [new RegionChunk(0, 0, RegionTests.Tiles(tiles))], [], [],
@@ -228,6 +228,49 @@ public sealed class RegionCheckTests
         Loads(Region([.. FordTiles, .. ring]) with { Stamps = [FordStamp] });
     }
 
+    /// <summary>
+    /// A 4x1 map stamped at (4, 5). Its second tile is impassable and the region walls in the two tiles east of it, so only
+    /// map tile (0, 0) can be walked to.
+    /// </summary>
+    private static IReadOnlyList<ContentError> ErrorsOfGate(string zones)
+        => ValidationTests.ErrorsOfChapter(GateFiles(zones));
+
+    private static (string, string)[] GateFiles(string zones)
+    {
+        var map = MapJson("gate", 4, 1, FordMaterials, [0, 1, 0, 0, 1, 4, 0, 1, 0, 0, 1, 0], zones);
+        var def = Region(
+            (5, 5, 0, Grass, TileFlags.Impassable), (6, 4, 0, Grass, TileFlags.Impassable), (7, 4, 0, Grass, TileFlags.Impassable),
+            (8, 5, 0, Grass, TileFlags.Impassable), (6, 6, 0, Grass, TileFlags.Impassable), (7, 6, 0, Grass, TileFlags.Impassable)) with
+        {
+            Stamps = [new RegionStamp("gate", new Tile(4, 5), 0)],
+        };
+        return [World(def), Map("gate", map)];
+    }
+
+    [Fact]
+    public void A_party_spawn_tile_that_cant_be_reached_is_an_error()
+        => Assert.Equal(
+            [new ContentError(RegionFile, "/stamps/0", "The party spawn of the stamp 'gate' at (6, 5) can't be reached from the start.")],
+            ErrorsOfGate("""{ "party_spawn": [[2, 0]] }"""));
+
+    [Fact]
+    public void Only_the_first_party_spawn_tile_that_cant_be_reached_is_reported()
+        => Assert.Equal(
+            [new ContentError(RegionFile, "/stamps/0", "The party spawn of the stamp 'gate' at (7, 5) can't be reached from the start.")],
+            ErrorsOfGate("""{ "party_spawn": [[0, 0], [3, 0], [2, 0]] }"""));
+
+    [Fact]
+    public void A_party_spawn_that_can_be_reached_loads_though_other_tiles_of_the_stamp_cant()
+        => Assert.NotNull(ValidationTests.LoadChapter(GateFiles("""{ "party_spawn": [[0, 0]] }""")));
+
+    [Fact]
+    public void A_map_with_other_zones_keeps_the_any_tile_rule()
+        => Assert.NotNull(ValidationTests.LoadChapter(GateFiles("""{ "nave": [[2, 0]] }""")));
+
+    [Fact]
+    public void An_empty_party_spawn_keeps_the_any_tile_rule()
+        => Assert.NotNull(ValidationTests.LoadChapter(GateFiles("""{ "party_spawn": [] }""")));
+
     [Fact]
     public void Two_stamps_that_overlap_are_an_error()
     {
@@ -256,7 +299,7 @@ public sealed class RegionCheckTests
     [InlineData("north", "south")]
     [InlineData("south", "north")]
     public void Edges_on_facing_sides_are_allowed(string side, string facing)
-        => Loads(WithEdges("a", new RegionEdge("b", side, 12)), WithEdges("b", new RegionEdge("a", facing, 12)));
+        => Loads(WithEdges("a", new RegionEdge("b", side, 12)), WithEdges("b", new RegionEdge("a", facing, -12)));
 
     [Fact]
     public void Edges_that_disagree_with_a_neighbour_are_an_error()
@@ -271,6 +314,29 @@ public sealed class RegionCheckTests
             ],
             errors);
     }
+
+    [Theory]
+    [InlineData(5, -5)]
+    [InlineData(-5, 5)]
+    [InlineData(0, 0)]
+    [InlineData(int.MaxValue, -int.MaxValue)]
+    public void Facing_edges_with_negated_offsets_are_allowed(int offset, int back)
+        => Loads(WithEdges("a", new RegionEdge("b", "east", offset)), WithEdges("b", new RegionEdge("a", "west", back)));
+
+    [Theory]
+    [InlineData(5, 5)]
+    [InlineData(5, -4)]
+    [InlineData(int.MinValue, int.MinValue)]    // minus this doesn't fit in an int, and wraps round to itself
+    public void Facing_edges_whose_offsets_arent_negated_are_an_error(int offset, int back)
+        => Assert.Equal(
+            [
+                new ContentError("chapter-01/world/a.json", "/edges/0",
+                    $"This region meets 'b' on its east side at offset {offset}, so 'b' needs a west edge at offset {-(long)offset}, not {back}."),
+                new ContentError("chapter-01/world/b.json", "/edges/0",
+                    $"This region meets 'a' on its west side at offset {back}, so 'a' needs an east edge at offset {-(long)back}, not {offset}."),
+            ],
+            ValidationTests.ErrorsOfChapter(World(WithEdges("a", new RegionEdge("b", "east", offset))),
+                World(WithEdges("b", new RegionEdge("a", "west", back)))));
 
     [Fact]
     public void A_neighbour_that_doesnt_list_this_region_disagrees()

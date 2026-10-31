@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Text.Json;
 
 namespace Tactics.Logic;
@@ -57,8 +58,8 @@ internal sealed partial class Validation
     /// <summary>
     /// Checks each region against the rest of the pack (spec §3.4): every stamp sits inside the region on a known map, tile
     /// for tile, with no map stamped twice and no two stamps overlapping; the spawns, beat spots and stamps can be reached
-    /// on foot from the start; and a neighbour that's loaded has an edge back on the facing side. Edges' offsets aren't
-    /// compared. A stamp on a map that failed to load skips the map checks, as an encounter does.
+    /// on foot from the start; and a neighbour that's loaded has an edge back on the facing side with the negated offset.
+    /// A stamp on a map that failed to load skips the map checks, as an encounter does.
     /// </summary>
     public void CheckRegions(IEnumerable<Loaded<RegionDef>> regions, IReadOnlyDictionary<string, BattleMap> maps)
     {
@@ -102,6 +103,12 @@ internal sealed partial class Validation
                     for (var x = 0; x < Map.Width; x++)
                         yield return (new Tile(Stamp.At.X + x, Stamp.At.Y + y), new Tile(x, y));
             }
+
+            /// <summary>The world tiles of the map's <c>party_spawn</c> zone, in the map's order; none if it has no such zone.</summary>
+            public ImmutableArray<Tile> PartySpawn()
+                => Map.Zones.TryGetValue("party_spawn", out var zone)
+                    ? [.. zone.Select(t => new Tile(Stamp.At.X + t.X, Stamp.At.Y + t.Y))]
+                    : [];
 
             public bool Overlaps(Placed other)
                 => Stamp.At.X < other.Stamp.At.X + other.Map.Width && other.Stamp.At.X < Stamp.At.X + Map.Width
@@ -181,8 +188,9 @@ internal sealed partial class Validation
         }
 
         /// <summary>
-        /// Reports each marker the party can't walk to. A stamp is reached when any of its tiles is. With nowhere to start from
-        /// nothing else can be said, so a bad start is reported alone.
+        /// Reports each marker the party can't walk to. A stamp must have every tile of its map's <c>party_spawn</c> zone reached,
+        /// and reports the first that isn't, so a battle can't begin with the party cut off; a map with no such zone needs any
+        /// one of its tiles reached. With nowhere to start from nothing else can be said, so a bad start is reported alone.
         /// </summary>
         private void Reachable(List<Placed> stamps)
         {
@@ -204,8 +212,16 @@ internal sealed partial class Validation
                 if (!reached.Contains(_def.Beats[i].At))
                     Unreached($"The beat '{_def.Beats[i].Beat}'", _def.Beats[i].At, Pointer.Append(At("beats", i), "at"));
             foreach (var stamp in stamps)
-                if (!stamp.Tiles().Any(t => reached.Contains(t.World)))
-                    Unreached($"The stamp '{stamp.Stamp.Map}'", stamp.Stamp.At, At("stamps", stamp.Index));
+            {
+                var name = stamp.Stamp.Map;
+                if (stamp.PartySpawn() is [_, ..] spawn)
+                {
+                    if (spawn.Where(t => !reached.Contains(t)).Cast<Tile?>().FirstOrDefault() is { } cutOff)
+                        Unreached($"The party spawn of the stamp '{name}'", cutOff, At("stamps", stamp.Index));
+                }
+                else if (!stamp.Tiles().Any(t => reached.Contains(t.World)))
+                    Unreached($"The stamp '{name}'", stamp.Stamp.At, At("stamps", stamp.Index));
+            }
         }
 
         /// <summary>Every tile that can be walked to from <paramref name="start"/>, stepping north, east, south or west.</summary>
@@ -231,8 +247,13 @@ internal sealed partial class Validation
                 if (!regions.TryGetValue(edge.Neighbour, out var neighbour))
                     continue;
                 var facing = Facing(edge.Side);
-                if (!neighbour.Edges.Any(e => e.Neighbour == _def.Id && e.Side == facing))
+                var expected = -(long)edge.Offset;
+                var back = neighbour.Edges.Where(e => e.Neighbour == _def.Id && e.Side == facing).ToList();
+                if (back.Count == 0)
                     v.Error(file, At("edges", i), $"This region meets '{edge.Neighbour}' on its {edge.Side} side, but '{edge.Neighbour}' has no {facing} edge back to it.");
+                else if (!back.Any(e => e.Offset == expected))
+                    v.Error(file, At("edges", i), $"This region meets '{edge.Neighbour}' on its {edge.Side} side at offset {edge.Offset}, "
+                        + $"so '{edge.Neighbour}' needs {(facing == "east" ? "an" : "a")} {facing} edge at offset {expected}, not {back[0].Offset}.");
             }
         }
     }
