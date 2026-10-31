@@ -179,7 +179,8 @@ def main(argv: list[str]) -> int:
         for j in jobs():
             if not j["done"] and j["raw"] not in seen:
                 seen.add(j["raw"])
-                todo.append({"raw": j["raw"], "preset": j["preset"], "text": j["text"]})
+                todo.append({"raw": j["raw"], "preset": j["preset"], "text": j["text"], "line": j["line"],
+                             "speaker": j["speaker"], "scene": j["line"].startswith("ch")})
         print(json.dumps(todo, indent=1))
         return 0
     if cmd == "import":
