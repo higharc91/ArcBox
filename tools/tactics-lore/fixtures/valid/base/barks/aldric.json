@@ -1,0 +1,4 @@
+{ "speaker": "aldric", "events": {
+  "battle_start": [{ "id": "aldric_start_1", "text": "Shields up.", "mood": "angry", "direction": "calm, firm" },
+                   { "id": "aldric_start_2", "text": "Together.", "weight": 2 }],
+  "low_hp": [{ "id": "aldric_low_1", "text": "Not yet.", "mood": "hurt" }] } }

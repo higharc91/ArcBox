@@ -1,0 +1,3 @@
+{ "regions": [{ "id": "mirewood", "name": "Mirewood", "chapter": 2, "card": "chapters.mirewood", "summary": "Wet.", "history": "Older.",
+  "mood": "Hushed.", "factions": ["raiders"], "encounters": ["forest_ruins"],
+  "places": [{ "id": "old_mill", "name": "Old Mill", "kind": "ruins", "summary": "Broken.", "unlock": { "flag": "mill_found" } }] }] }

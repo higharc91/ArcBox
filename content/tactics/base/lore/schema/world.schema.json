@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/lore/schema/world.schema.json",
+  "title": "World bible",
+  "description": "world.json: the setting's core truths. One per campaign; only the base pack writes it. Writers and drafting tools read this before anything else.",
+  "type": "object",
+  "properties": {
+    "name": { "$ref": "common.schema.json#/$defs/text" },
+    "pitch": { "$ref": "common.schema.json#/$defs/text", "description": "One sentence: the campaign on the back of the box." },
+    "premise": { "$ref": "common.schema.json#/$defs/text" },
+    "tone": { "$ref": "common.schema.json#/$defs/texts", "description": "Adjectives and touchstones, e.g. 'warm', 'wry', 'never grimdark'." },
+    "themes": { "$ref": "common.schema.json#/$defs/texts" },
+    "pillars": {
+      "$ref": "common.schema.json#/$defs/texts",
+      "description": "Rules a chapter must not break (e.g. 'magic always costs something visible')."
+    },
+    "magic": {
+      "type": "object",
+      "properties": {
+        "source": { "$ref": "common.schema.json#/$defs/text" },
+        "cost": { "$ref": "common.schema.json#/$defs/text" },
+        "rules": { "$ref": "common.schema.json#/$defs/texts" }
+      },
+      "required": ["source", "cost", "rules"],
+      "additionalProperties": false
+    },
+    "peoples": {
+      "type": "array",
+      "description": "How each playable race fits this world. Keys are rules race ids.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "race": { "$ref": "common.schema.json#/$defs/id" },
+          "summary": { "$ref": "common.schema.json#/$defs/text" },
+          "naming": { "$ref": "common.schema.json#/$defs/text" },
+          "examples": { "$ref": "common.schema.json#/$defs/texts" }
+        },
+        "required": ["race", "summary", "naming", "examples"],
+        "additionalProperties": false
+      }
+    },
+    "glossary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "term": { "$ref": "common.schema.json#/$defs/text" },
+          "definition": { "$ref": "common.schema.json#/$defs/text" }
+        },
+        "required": ["term", "definition"],
+        "additionalProperties": false
+      }
+    },
+    "avoid": {
+      "$ref": "common.schema.json#/$defs/texts",
+      "description": "What no chapter may use: non-SRD setting names and creatures (spec §4.10 says story content is original), tired tropes, tone breaks."
+    }
+  },
+  "required": ["name", "pitch", "premise", "tone", "themes", "pillars", "magic", "peoples", "glossary", "avoid"],
+  "additionalProperties": false
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/lore/schema/timeline.schema.json",
+  "title": "Timeline",
+  "description": "timeline.json: the eras and the events in them, oldest first.",
+  "type": "object",
+  "properties": {
+    "eras": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "$ref": "common.schema.json#/$defs/id" },
+          "name": { "$ref": "common.schema.json#/$defs/text" },
+          "summary": { "$ref": "common.schema.json#/$defs/text" },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "$ref": "common.schema.json#/$defs/id" },
+                "when": { "$ref": "common.schema.json#/$defs/text", "description": "In the world's own reckoning, e.g. '312 AF'." },
+                "title": { "$ref": "common.schema.json#/$defs/text" },
+                "summary": { "$ref": "common.schema.json#/$defs/text" },
+                "unlock": { "$ref": "common.schema.json#/$defs/unlock" }
+              },
+              "required": ["id", "title", "summary"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": ["id", "name", "summary", "events"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["eras"],
+  "additionalProperties": false
+}

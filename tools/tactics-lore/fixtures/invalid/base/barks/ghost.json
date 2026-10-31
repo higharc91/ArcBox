@@ -1,0 +1,1 @@
+{ "speaker": "ghost", "events": { "battle_start": [{ "id": "dup_line", "text": "Boo." }] } }
