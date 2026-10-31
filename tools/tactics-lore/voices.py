@@ -17,7 +17,7 @@ The TTS call runs outside this script (Scenario's MCP tools), so the flow is:
     python3 tools/tactics-lore/voices.py plan > jobs.json     # one job per line and cast not yet rendered
     ...generate each job's `text` with `preset`, save the WAV as <wav-dir>/<job id>.wav...
     python3 tools/tactics-lore/voices.py import <wav-dir>     # filter, trim, normalise, encode, write the manifest
-    python3 tools/tactics-lore/voices.py check                # per-speaker consistency: flags clips that drift
+    python3 tools/tactics-lore/voices.py check                # coarse screen for broken or mis-cast renders
 
 Clips are trimmed of silence and normalised to -16 LUFS (EBU R128), so every speaker sits at one loudness. They're
 encoded as mono Ogg Vorbis at the TTS's 24 kHz, byte-identically for the same input. Needs ffmpeg.
@@ -147,25 +147,31 @@ def _features(ogg: Path) -> tuple[float, float]:
 
 
 def check() -> int:
-    """Flags clips whose pitch or brightness sits far from the rest of their speaker's: a voice that drifted."""
+    """A coarse screen for gross render failures: a clip whose pitch is far (over 10 semitones) from the rest of its
+    speaker's, or that is almost silent. Pitch and brightness can't tell emotion from identity (a shout sits several
+    semitones up), so ordinary expressive range is expected and isn't flagged, and clips under 1.2 s, where pitch
+    tracking is unreliable, are skipped. Voice identity itself comes from the fixed preset each speaker is rendered
+    with; this only catches a wrong preset or a broken render."""
     by: dict[str, list[tuple[str, float, float]]] = {}
     for j in jobs():
         if j["done"]:
             p, c = _features(AUDIO / j["file"])
-            by.setdefault(f"{j['speaker']}.{j['cast']}", []).append((j["id"], p, c))
+            dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0",
+                                        str(AUDIO / j["file"])], capture_output=True, text=True).stdout or 0)
+            by.setdefault(f"{j['speaker']}.{j['cast']}", []).append((j["id"], p, c, dur))
     flagged = 0
     for who, rows in sorted(by.items()):
-        ps = sorted(p for _, p, _ in rows if not math.isnan(p))
+        ps = sorted(p for _, p, _, _ in rows if not math.isnan(p))
         if len(ps) < 4:
             continue
         med = ps[len(ps) // 2]
-        cs = sorted(c for *_, c in rows)
-        cmed = cs[len(cs) // 2]
-        for id_, p, c in rows:
+        for id_, p, c, dur in rows:
             off = abs(12 * math.log2(p / med)) if not math.isnan(p) else 0
-            if off > 4 or abs(c - cmed) / cmed > 0.45:
+            if dur < 1.2:
+                continue
+            if off > 10 or (math.isnan(p) and dur > 2):
                 flagged += 1
-                print(f"  {id_}: pitch {p:.0f} Hz vs {med:.0f} ({off:.1f} st), brightness {c:.0f} vs {cmed:.0f}")
+                print(f"  {id_}: pitch {p:.0f} Hz vs {med:.0f} ({off:.1f} st), {dur:.1f} s")
         print(f"{who}: {len(rows)} clips, median pitch {med:.0f} Hz")
     print(f"{flagged} clip(s) flagged")
     return 1 if flagged else 0

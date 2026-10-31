@@ -305,6 +305,11 @@
       "preset": "Algenib",
       "text": "Done."
     },
+    "Algenib.4e08983e": {
+      "asset": "asset_bW3i8466XtmHVVsCvivJZEWg",
+      "preset": "Algenib",
+      "text": "I can't sleep near the fire anymore. Don't ask me why. I don't know why."
+    },
     "Algenib.676a2a7d": {
       "asset": "asset_6oqvRAVhtZv9g9xnGixKAz1G",
       "preset": "Algenib",
@@ -344,6 +349,11 @@
       "asset": "asset_gP2JBDvkBjejA1Pka28w5L2c",
       "preset": "Algenib",
       "text": "Pain. Means I'm alive."
+    },
+    "Algenib.a88f0e3b": {
+      "asset": "asset_uCXhyaJXbNSqt1qE4FUNgv1t",
+      "preset": "Algenib",
+      "text": "Don't touch the shards. Nothing that glows like that comes free."
     },
     "Algenib.be985898": {
       "asset": "asset_EHQQ9vgBv45WvjXMkeKPYo8y",
@@ -409,6 +419,11 @@
       "asset": "asset_umXtZqvXhCu4TDdTErRP74sD",
       "preset": "Algieba",
       "text": "Stars over the Greywall, the same as they ever were. Or nearly."
+    },
+    "Algieba.2a4d99b8": {
+      "asset": "asset_LCRQ9L4rk6iSsx6pbdfMxbvL",
+      "preset": "Algieba",
+      "text": "Emberwick, at the Ashen Ford. The ground is warm underfoot, and the river steams in the evening cold."
     },
     "Algieba.2bbf198d": {
       "asset": "asset_fcB6FCDErSSjWoXzU63LNSHB",
@@ -494,6 +509,11 @@
       "asset": "asset_5TvT6wmCbiiQa5ExUTtdjyv1",
       "preset": "Algieba",
       "text": "Steel comes out, and the Vale holds its breath."
+    },
+    "Algieba.9761d678": {
+      "asset": "asset_QCkkFdeJwZLAKjUJ9MrYUsV4",
+      "preset": "Algieba",
+      "text": "It used to be warmer. Nobody in town will say so."
     },
     "Algieba.a845d540": {
       "asset": "asset_MjBv5CsL5sdd8BwcYqpKxEuA",
@@ -760,6 +780,11 @@
       "preset": "Callirrhoe",
       "text": "Sleep. I'll take the watch. Habit."
     },
+    "Callirrhoe.18b34b19": {
+      "asset": "asset_Tq5vwii1aYTNJZc3LmfitmkL",
+      "preset": "Callirrhoe",
+      "text": "Calm's for after. Bridge first."
+    },
     "Callirrhoe.2a8e1a33": {
       "asset": "asset_Sdm99AytkEz9LEvdjvjNzUEQ",
       "preset": "Callirrhoe",
@@ -845,10 +870,20 @@
       "preset": "Callirrhoe",
       "text": "That'll do."
     },
+    "Callirrhoe.ea9d7b93": {
+      "asset": "asset_XnMFKdhSBJS7qhmbBRA7WkiX",
+      "preset": "Callirrhoe",
+      "text": "Forty winters she's led them. Clever. She'll smile at you while her archers find the range."
+    },
     "Callirrhoe.eab8bc3a": {
       "asset": "asset_f9PV7SsUJa6Sb8ZuacgVAk2Z",
       "preset": "Callirrhoe",
       "text": "Damn it."
+    },
+    "Callirrhoe.f211df98": {
+      "asset": "asset_Yw1tnfbWmzmYMFCQHaxAyoU9",
+      "preset": "Callirrhoe",
+      "text": "Killed two of my guards doing it. Coll and Annet. Good people."
     },
     "Callirrhoe.ffb52268": {
       "asset": "asset_J29oQitszoNdnbH1Eyc3gbQM",
@@ -870,10 +905,40 @@
       "preset": "Charon",
       "text": "The council wants numbers and hope. I can only manage one at a time."
     },
+    "Charon.406ad9e9": {
+      "asset": "asset_bKvKYazPCDCUs1kkSVNLLW3U",
+      "preset": "Charon",
+      "text": "Bree. Not now."
+    },
+    "Charon.5284baa8": {
+      "asset": "asset_8FGxo8kHCiYyVhuYtuVug2b2",
+      "preset": "Charon",
+      "text": "A hill clan. Their chief is an old woman they call Mother Skarrow. I've never met her, and I don't need to."
+    },
+    "Charon.82a7b551": {
+      "asset": "asset_UCy22QhYFazA9HtHyQeiRo5B",
+      "preset": "Charon",
+      "text": "People will be calmer if it's you who goes. Calm matters this winter. More than you'd think."
+    },
+    "Charon.8c3fe910": {
+      "asset": "asset_Tn4RPnB64CWwwPYgxo7KKCFj",
+      "preset": "Charon",
+      "text": "The Skarrow goblins took the ford bridge nine days ago. Every cart of winter flour comes over it."
+    },
     "Charon.8db36886": {
       "asset": "asset_2nZEoqCeWh4UdJoxFA1vD2Dw",
       "preset": "Charon",
       "text": "Mind the frost by the well. That's new. That was never there before."
+    },
+    "Charon.8efdc9b2": {
+      "asset": "asset_pr8RqnHMzyu3rea7TRdJZxfB",
+      "preset": "Charon",
+      "text": "Friends. Thank you for coming. I'd shake every hand, but the light's going, and so is our grain."
+    },
+    "Charon.d16e8c0c": {
+      "asset": "asset_ufSQtX5UmaB8d7dP6gpXD19T",
+      "preset": "Charon",
+      "text": "There. That's what I hoped to hear. They still tell the story of you in this square, you know."
     },
     "Charon.e01e3d61": {
       "asset": "asset_Cq2HoSardJVZK8nqtxdjLZSE",
@@ -889,6 +954,16 @@
       "asset": "asset_7NbcHW7HrVjjunvPQcwhuSNi",
       "preset": "Charon",
       "text": "Emberwick has seen hard winters before. We'll see this one through, too."
+    },
+    "Charon.ffd896e4": {
+      "asset": "asset_ogSKuJurvPP4fsTWhKi39ZTx",
+      "preset": "Charon",
+      "text": "The new moon is eleven days off. After that the last carts stop running, and Emberwick starts eating its seed corn."
+    },
+    "Despina.07b8986c": {
+      "asset": "asset_kb8DRidYAh62o36knRJoJiin",
+      "preset": "Despina",
+      "text": "And nobody even lost a boot. A small miracle."
     },
     "Despina.0ea4ecdf": {
       "asset": "asset_AcTDWA5gC9aBQtLZpZpUdERX",
@@ -970,6 +1045,11 @@
       "preset": "Despina",
       "text": "Well. This'll be memorable."
     },
+    "Despina.87a0353f": {
+      "asset": "asset_g4U4SYbfPedqc1vbhRXTAKx8",
+      "preset": "Despina",
+      "text": "I'm fine. Mostly fine. Ask me again in a minute."
+    },
     "Despina.9009ed50": {
       "asset": "asset_x7nq4Y5cVKVvouByCPZ68Dpm",
       "preset": "Despina",
@@ -999,6 +1079,11 @@
       "asset": "asset_CGdu1sZoruSLo2LBjMnPHaFX",
       "preset": "Despina",
       "text": "Forgetting is a door, not a wall. You simply never look back through it."
+    },
+    "Despina.bba84fa9": {
+      "asset": "asset_YaE5es4axvk4GYe4PqUcxe4o",
+      "preset": "Despina",
+      "text": "Forgetting is a door that opens only one way, little flame. Mind which side of it you stand on."
     },
     "Despina.da6dc41d": {
       "asset": "asset_MerBKreykeX8vXYJbKbNvA28",
@@ -1100,6 +1185,11 @@
       "preset": "Erinome",
       "text": "I'll be writing this up."
     },
+    "Erinome.274e56ad": {
+      "asset": "asset_EhkZzfF48FWvUCU5eEV6Ky6d",
+      "preset": "Erinome",
+      "text": "Exactly as the old treatises describe. With rather more shouting."
+    },
     "Erinome.441a3787": {
       "asset": "asset_JPqv8m8pKdx9a7oBgyaBdB7z",
       "preset": "Erinome",
@@ -1109,6 +1199,11 @@
       "asset": "asset_qhTWYts1SFDn5BGaxrZtA65t",
       "preset": "Erinome",
       "text": "Has anyone noticed the gaps in their memories? I'm keeping notes. In ink."
+    },
+    "Erinome.6d44882b": {
+      "asset": "asset_ikSxkubDKhutLop4ERcsNy1o",
+      "preset": "Erinome",
+      "text": "Has anyone noticed how quiet the old songs go about the Hearthflame? I'm keeping notes."
     },
     "Erinome.75006168": {
       "asset": "asset_tvq6AWFP1bcf1MVGv14NV4bo",
@@ -1175,6 +1270,11 @@
       "preset": "Fenrir",
       "text": "Good as new. Nearly."
     },
+    "Fenrir.0726f773": {
+      "asset": "asset_tL6DpaUWih11D33waCL5NiD2",
+      "preset": "Fenrir",
+      "text": "Who's got the stew? I could eat a whole boar, tusks and all."
+    },
     "Fenrir.6394acee": {
       "asset": "asset_nRxum7nhoobb2pRxo4YTa7GX",
       "preset": "Fenrir",
@@ -1220,6 +1320,11 @@
       "preset": "Gacrux",
       "text": "Not again. Not again."
     },
+    "Gacrux.23c78b29": {
+      "asset": "asset_6kdPxS6ktH8n3iWav6URv1Y5",
+      "preset": "Gacrux",
+      "text": "Don't touch the shards. Nothing that glows like that comes free."
+    },
     "Gacrux.28650f41": {
       "asset": "asset_6soUUi6k3mAciTifZMJ4EfY1",
       "preset": "Gacrux",
@@ -1244,6 +1349,11 @@
       "asset": "asset_X2UWwajGcrY2TcXzHWxSMGpd",
       "preset": "Gacrux",
       "text": "Hm. I'll live."
+    },
+    "Gacrux.728c6215": {
+      "asset": "asset_QjD2j8pxWzyygkADpXVmCNKm",
+      "preset": "Gacrux",
+      "text": "I can't sleep near the fire anymore. Don't ask me why. I don't know why."
     },
     "Gacrux.aa983b5b": {
       "asset": "asset_49ybzU5R936zExWa3RL2hGEX",
@@ -1525,6 +1635,11 @@
       "preset": "Laomedeia",
       "text": "Go home. Tell them the bridge stays ours until the grain comes."
     },
+    "Leda.1e0f981f": {
+      "asset": "asset_DgZ1BaQgyzUqzYBxH1vPdkCC",
+      "preset": "Leda",
+      "text": "You came! I told Bree you'd come. The mayor's been asking for you all day, and he's ever so cross."
+    },
     "Leda.2622a84e": {
       "asset": "asset_rNxxrh722FkQagiVXpvrcH8a",
       "preset": "Leda",
@@ -1640,6 +1755,11 @@
       "preset": "Pulcherrima",
       "text": "Good as new. Nearly."
     },
+    "Pulcherrima.7182c432": {
+      "asset": "asset_yg9KPwkJm22PMoaezfWCgyw5",
+      "preset": "Pulcherrima",
+      "text": "Who's got the stew? I could eat a whole boar, tusks and all."
+    },
     "Pulcherrima.eb2e145e": {
       "asset": "asset_WiHmKtG3DjA7Cu4TvNEDZppW",
       "preset": "Pulcherrima",
@@ -1745,6 +1865,11 @@
       "preset": "Sadachbia",
       "text": "Mother Aubrine calls history a matter of faith. I call it a matter of paper."
     },
+    "Sadachbia.c24316e4": {
+      "asset": "asset_2ozW8PCdZswYhEN7HmY1yhUc",
+      "preset": "Sadachbia",
+      "text": "Thirty years in these records, and forty-one years are simply missing from them. Nobody else seems to mind."
+    },
     "Sadachbia.c888f978": {
       "asset": "asset_rKgMcLm5fTtuBq8s4TYzEvav",
       "preset": "Sadachbia",
@@ -1759,6 +1884,11 @@
       "asset": "asset_ATABnyrsEjUtP3ZxDk4fvEbh",
       "preset": "Sadachbia",
       "text": "Ah, you're back! Good. I've found another gap. Well, not found. More... not found."
+    },
+    "Sadaltager.08c4ba35": {
+      "asset": "asset_b41E9LSEoMpt2pF5MeAHLk2y",
+      "preset": "Sadaltager",
+      "text": "Exactly as the old treatises describe. With rather more shouting."
     },
     "Sadaltager.09436a1d": {
       "asset": "asset_yhxWCLAbWPLWsvthAiUpX1od",
@@ -1819,6 +1949,11 @@
       "asset": "asset_RdouhH55wWVSH7eWwpU6EduS",
       "preset": "Sadaltager",
       "text": "Good questions. Wrong ears."
+    },
+    "Sadaltager.684c4aad": {
+      "asset": "asset_nAG5rcSzrkoR6EpycqTxd1M1",
+      "preset": "Sadaltager",
+      "text": "Has anyone noticed how quiet the old songs go about the Hearthflame? I'm keeping notes."
     },
     "Sadaltager.6c002256": {
       "asset": "asset_PWReFpbRjCS3TAHuqJ4aTN1z",
@@ -2120,6 +2255,11 @@
       "preset": "Vindemiatrix",
       "text": "The flame was given to us. We will be worthy of it, cold or warm."
     },
+    "Zephyr.04bf9fbe": {
+      "asset": "asset_tNJU48MZG5jaKkPYJvS31PRR",
+      "preset": "Zephyr",
+      "text": "She sent a little one down for bread in the spring. Asked at the granary gate, polite as you like."
+    },
     "Zephyr.11f3a189": {
       "asset": "asset_A8umT1AjUkmLTDzrMnWxJ4eh",
       "preset": "Zephyr",
@@ -2154,6 +2294,11 @@
       "asset": "asset_g7vGG4iB5jiK2zfgrFjtiHHG",
       "preset": "Zephyr",
       "text": "I'm all right. I'm all right. Keep going."
+    },
+    "Zephyr.9d5e4532": {
+      "asset": "asset_dCfxgNae5yciEJxfheLAT7D3",
+      "preset": "Zephyr",
+      "text": "Pip, let them breathe. You lot, there's stew when he's done with you. Don't let him talk it cold."
     },
     "Zephyr.aeacefe3": {
       "asset": "asset_Nszi4o67fGSFeVvXX1r4vCB4",
@@ -2195,6 +2340,11 @@
       "preset": "Zubenelgenubi",
       "text": "Run now, joke later."
     },
+    "Zubenelgenubi.0eba04cc": {
+      "asset": "asset_QzbaXjexWqtp2gucGwZJ2rkR",
+      "preset": "Zubenelgenubi",
+      "text": "I'm fine. Mostly fine. Ask me again in a minute."
+    },
     "Zubenelgenubi.1e88eaac": {
       "asset": "asset_DPkwwEnrbL21migMvxd79nBh",
       "preset": "Zubenelgenubi",
@@ -2204,6 +2354,11 @@
       "asset": "asset_SZFiLkVfzS7kGy3wMcHgJRTE",
       "preset": "Zubenelgenubi",
       "text": "Don't look so surprised."
+    },
+    "Zubenelgenubi.435389f8": {
+      "asset": "asset_c7A9pXdAV2NdJpSkzv38Gaj9",
+      "preset": "Zubenelgenubi",
+      "text": "And nobody even lost a boot. A small miracle."
     },
     "Zubenelgenubi.58b63538": {
       "asset": "asset_ELDM1SReeZeL9guXaLVJYgip",

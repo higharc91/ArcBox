@@ -1,0 +1,1228 @@
+{
+  "about": "Pre-rendered lines: line id -> cast -> file in this folder. 'main' is a speaker's own voice; player voice sets have 'low' and 'high'. See tools/tactics-lore/voices.py.",
+  "model": "model_google-gemini-3-8-flash-tts",
+  "casts": {
+    "grim": {
+      "low": "Algenib",
+      "high": "Gacrux"
+    },
+    "earnest": {
+      "low": "Achird",
+      "high": "Leda"
+    },
+    "scholarly": {
+      "low": "Sadaltager",
+      "high": "Erinome"
+    },
+    "fierce": {
+      "low": "Fenrir",
+      "high": "Pulcherrima"
+    },
+    "wry": {
+      "low": "Zubenelgenubi",
+      "high": "Despina"
+    },
+    "steady": {
+      "low": "Alnilam",
+      "high": "Kore"
+    }
+  },
+  "characters": {
+    "bree_tallow": {
+      "preset": "Zephyr"
+    },
+    "celandine_marrowby": {
+      "preset": "Autonoe"
+    },
+    "corvin_ashby": {
+      "preset": "Sadachbia"
+    },
+    "dagna_holt": {
+      "preset": "Callirrhoe",
+      "pitch": -1
+    },
+    "halden_varrow": {
+      "preset": "Charon"
+    },
+    "halvard": {
+      "preset": "Schedar",
+      "pitch": -2,
+      "filter": "helm"
+    },
+    "hooded_stranger": {
+      "preset": "Sadaltager",
+      "pitch": -2,
+      "filter": "echo"
+    },
+    "ivo_rime": {
+      "preset": "Enceladus"
+    },
+    "lark": {
+      "preset": "Aoede"
+    },
+    "maren_sorrel": {
+      "preset": "Sulafat"
+    },
+    "mother_aubrine": {
+      "preset": "Vindemiatrix"
+    },
+    "mother_skarrow": {
+      "preset": "Laomedeia",
+      "pitch": -2
+    },
+    "narrator": {
+      "preset": "Algieba"
+    },
+    "old_maud": {
+      "preset": "Achernar",
+      "pitch": -1
+    },
+    "oswin_hale": {
+      "preset": "Rasalgethi",
+      "filter": "echo"
+    },
+    "pip_ashdown": {
+      "preset": "Leda",
+      "pitch": 3
+    },
+    "rook": {
+      "preset": "Umbriel"
+    },
+    "tobin_fell": {
+      "preset": "Orus",
+      "pitch": -2
+    },
+    "vorga": {
+      "preset": "Iapetus",
+      "pitch": 1
+    },
+    "ysolde": {
+      "preset": "Despina",
+      "pitch": 1,
+      "filter": "fey"
+    }
+  },
+  "lines": {
+    "bark_bree_tallow_ally_down_1": {
+      "main": "bark_bree_tallow_ally_down_1.ea905fbb.ogg"
+    },
+    "bark_bree_tallow_battle_start_1": {
+      "main": "bark_bree_tallow_battle_start_1.ba7e1843.ogg"
+    },
+    "bark_bree_tallow_camp_1": {
+      "main": "bark_bree_tallow_camp_1.8fea7eca.ogg"
+    },
+    "bark_bree_tallow_camp_2": {
+      "main": "bark_bree_tallow_camp_2.039be485.ogg"
+    },
+    "bark_bree_tallow_healed_1": {
+      "main": "bark_bree_tallow_healed_1.063eb625.ogg"
+    },
+    "bark_bree_tallow_hit_1": {
+      "main": "bark_bree_tallow_hit_1.dcd999bb.ogg"
+    },
+    "bark_bree_tallow_low_hp_1": {
+      "main": "bark_bree_tallow_low_hp_1.f4cc6b5b.ogg"
+    },
+    "bark_bree_tallow_town_1": {
+      "main": "bark_bree_tallow_town_1.3aae5448.ogg"
+    },
+    "bark_bree_tallow_town_2": {
+      "main": "bark_bree_tallow_town_2.3dc9ca60.ogg"
+    },
+    "bark_bree_tallow_town_3": {
+      "main": "bark_bree_tallow_town_3.17d8b294.ogg"
+    },
+    "bark_bree_tallow_town_4": {
+      "main": "bark_bree_tallow_town_4.474c6354.ogg"
+    },
+    "bark_bree_tallow_town_5": {
+      "main": "bark_bree_tallow_town_5.9eb68d0f.ogg"
+    },
+    "bark_bree_tallow_victory_1": {
+      "main": "bark_bree_tallow_victory_1.88f9c1cb.ogg"
+    },
+    "bark_celandine_marrowby_town_1": {
+      "main": "bark_celandine_marrowby_town_1.0c429f1c.ogg"
+    },
+    "bark_celandine_marrowby_town_2": {
+      "main": "bark_celandine_marrowby_town_2.4432cd28.ogg"
+    },
+    "bark_celandine_marrowby_town_3": {
+      "main": "bark_celandine_marrowby_town_3.f5c4af6d.ogg"
+    },
+    "bark_celandine_marrowby_town_4": {
+      "main": "bark_celandine_marrowby_town_4.ec3763a7.ogg"
+    },
+    "bark_celandine_marrowby_town_5": {
+      "main": "bark_celandine_marrowby_town_5.3bb096a6.ogg"
+    },
+    "bark_celandine_marrowby_town_6": {
+      "main": "bark_celandine_marrowby_town_6.bc693515.ogg"
+    },
+    "bark_celandine_marrowby_town_7": {
+      "main": "bark_celandine_marrowby_town_7.894233d4.ogg"
+    },
+    "bark_corvin_ashby_town_1": {
+      "main": "bark_corvin_ashby_town_1.43f67d33.ogg"
+    },
+    "bark_corvin_ashby_town_2": {
+      "main": "bark_corvin_ashby_town_2.754c8395.ogg"
+    },
+    "bark_corvin_ashby_town_3": {
+      "main": "bark_corvin_ashby_town_3.280f8097.ogg"
+    },
+    "bark_corvin_ashby_town_4": {
+      "main": "bark_corvin_ashby_town_4.a9902e5e.ogg"
+    },
+    "bark_corvin_ashby_town_6": {
+      "main": "bark_corvin_ashby_town_6.03af2b05.ogg"
+    },
+    "bark_corvin_ashby_town_7": {
+      "main": "bark_corvin_ashby_town_7.b1a310f1.ogg"
+    },
+    "bark_corvin_ashby_town_8": {
+      "main": "bark_corvin_ashby_town_8.b3f5e0db.ogg"
+    },
+    "bark_dagna_holt_ally_down_1": {
+      "main": "bark_dagna_holt_ally_down_1.ff93315f.ogg"
+    },
+    "bark_dagna_holt_ally_down_2": {
+      "main": "bark_dagna_holt_ally_down_2.41f6474b.ogg"
+    },
+    "bark_dagna_holt_battle_start_1": {
+      "main": "bark_dagna_holt_battle_start_1.26ec0bc2.ogg"
+    },
+    "bark_dagna_holt_battle_start_2": {
+      "main": "bark_dagna_holt_battle_start_2.147b8fa2.ogg"
+    },
+    "bark_dagna_holt_battle_start_3": {
+      "main": "bark_dagna_holt_battle_start_3.43d579f7.ogg"
+    },
+    "bark_dagna_holt_camp_1": {
+      "main": "bark_dagna_holt_camp_1.6214915d.ogg"
+    },
+    "bark_dagna_holt_camp_2": {
+      "main": "bark_dagna_holt_camp_2.7ac0db21.ogg"
+    },
+    "bark_dagna_holt_crit_1": {
+      "main": "bark_dagna_holt_crit_1.4c576aa2.ogg"
+    },
+    "bark_dagna_holt_defeat_1": {
+      "main": "bark_dagna_holt_defeat_1.66e4f293.ogg"
+    },
+    "bark_dagna_holt_healed_1": {
+      "main": "bark_dagna_holt_healed_1.ff09c641.ogg"
+    },
+    "bark_dagna_holt_hit_1": {
+      "main": "bark_dagna_holt_hit_1.e4cfc937.ogg"
+    },
+    "bark_dagna_holt_hit_2": {
+      "main": "bark_dagna_holt_hit_2.818d1d12.ogg"
+    },
+    "bark_dagna_holt_kill_1": {
+      "main": "bark_dagna_holt_kill_1.ec90a23c.ogg"
+    },
+    "bark_dagna_holt_kill_2": {
+      "main": "bark_dagna_holt_kill_2.62cbb1d2.ogg"
+    },
+    "bark_dagna_holt_low_hp_1": {
+      "main": "bark_dagna_holt_low_hp_1.b78d5029.ogg"
+    },
+    "bark_dagna_holt_miss_1": {
+      "main": "bark_dagna_holt_miss_1.4594bb4e.ogg"
+    },
+    "bark_dagna_holt_revived_1": {
+      "main": "bark_dagna_holt_revived_1.51964b23.ogg"
+    },
+    "bark_dagna_holt_turn_start_1": {
+      "main": "bark_dagna_holt_turn_start_1.15fea1ae.ogg"
+    },
+    "bark_dagna_holt_turn_start_2": {
+      "main": "bark_dagna_holt_turn_start_2.d24e2314.ogg"
+    },
+    "bark_dagna_holt_victory_1": {
+      "main": "bark_dagna_holt_victory_1.58175f8b.ogg"
+    },
+    "bark_dagna_holt_victory_2": {
+      "main": "bark_dagna_holt_victory_2.a110d71f.ogg"
+    },
+    "bark_halden_varrow_town_1": {
+      "main": "bark_halden_varrow_town_1.b8325026.ogg"
+    },
+    "bark_halden_varrow_town_2": {
+      "main": "bark_halden_varrow_town_2.87c718ba.ogg"
+    },
+    "bark_halden_varrow_town_3": {
+      "main": "bark_halden_varrow_town_3.8a1e40ee.ogg"
+    },
+    "bark_halden_varrow_town_4": {
+      "main": "bark_halden_varrow_town_4.151bd3d0.ogg"
+    },
+    "bark_halden_varrow_town_5": {
+      "main": "bark_halden_varrow_town_5.98084a54.ogg"
+    },
+    "bark_halden_varrow_town_6": {
+      "main": "bark_halden_varrow_town_6.4c3de132.ogg"
+    },
+    "bark_halden_varrow_town_7": {
+      "main": "bark_halden_varrow_town_7.31cb3fbd.ogg"
+    },
+    "bark_halvard_battle_start_1": {
+      "main": "bark_halvard_battle_start_1.dc7397a4.ogg"
+    },
+    "bark_halvard_battle_start_2": {
+      "main": "bark_halvard_battle_start_2.e8000817.ogg"
+    },
+    "bark_halvard_battle_start_3": {
+      "main": "bark_halvard_battle_start_3.ad4ccaf3.ogg"
+    },
+    "bark_halvard_crit_1": {
+      "main": "bark_halvard_crit_1.576f15e4.ogg"
+    },
+    "bark_halvard_defeat_1": {
+      "main": "bark_halvard_defeat_1.cc630589.ogg"
+    },
+    "bark_halvard_defeat_2": {
+      "main": "bark_halvard_defeat_2.d250943c.ogg"
+    },
+    "bark_halvard_hit_1": {
+      "main": "bark_halvard_hit_1.7b6e3edc.ogg"
+    },
+    "bark_halvard_hit_2": {
+      "main": "bark_halvard_hit_2.0df71d36.ogg"
+    },
+    "bark_halvard_kill_1": {
+      "main": "bark_halvard_kill_1.14d21826.ogg"
+    },
+    "bark_halvard_low_hp_1": {
+      "main": "bark_halvard_low_hp_1.6cafb8b8.ogg"
+    },
+    "bark_halvard_low_hp_2": {
+      "main": "bark_halvard_low_hp_2.44e8458c.ogg"
+    },
+    "bark_halvard_miss_1": {
+      "main": "bark_halvard_miss_1.50b31f8a.ogg"
+    },
+    "bark_halvard_turn_start_1": {
+      "main": "bark_halvard_turn_start_1.47684058.ogg"
+    },
+    "bark_halvard_victory_1": {
+      "main": "bark_halvard_victory_1.ab9db06a.ogg"
+    },
+    "bark_hooded_stranger_camp_1": {
+      "main": "bark_hooded_stranger_camp_1.3547d4cb.ogg"
+    },
+    "bark_hooded_stranger_camp_2": {
+      "main": "bark_hooded_stranger_camp_2.1c9a68ad.ogg"
+    },
+    "bark_hooded_stranger_camp_3": {
+      "main": "bark_hooded_stranger_camp_3.1f726ade.ogg"
+    },
+    "bark_hooded_stranger_camp_4": {
+      "main": "bark_hooded_stranger_camp_4.d26a83a2.ogg"
+    },
+    "bark_hooded_stranger_town_1": {
+      "main": "bark_hooded_stranger_town_1.3ac10faa.ogg"
+    },
+    "bark_hooded_stranger_town_2": {
+      "main": "bark_hooded_stranger_town_2.93452632.ogg"
+    },
+    "bark_hooded_stranger_town_3": {
+      "main": "bark_hooded_stranger_town_3.8c354560.ogg"
+    },
+    "bark_hooded_stranger_town_4": {
+      "main": "bark_hooded_stranger_town_4.e238e97f.ogg"
+    },
+    "bark_ivo_rime_ally_down_1": {
+      "main": "bark_ivo_rime_ally_down_1.4b1b763a.ogg"
+    },
+    "bark_ivo_rime_battle_start_1": {
+      "main": "bark_ivo_rime_battle_start_1.ce0f23bb.ogg"
+    },
+    "bark_ivo_rime_battle_start_2": {
+      "main": "bark_ivo_rime_battle_start_2.b980bd18.ogg"
+    },
+    "bark_ivo_rime_battle_start_3": {
+      "main": "bark_ivo_rime_battle_start_3.2bf0a72b.ogg"
+    },
+    "bark_ivo_rime_crit_1": {
+      "main": "bark_ivo_rime_crit_1.22d1552b.ogg"
+    },
+    "bark_ivo_rime_defeat_1": {
+      "main": "bark_ivo_rime_defeat_1.1d8496c9.ogg"
+    },
+    "bark_ivo_rime_defeat_2": {
+      "main": "bark_ivo_rime_defeat_2.5a1babd4.ogg"
+    },
+    "bark_ivo_rime_hit_1": {
+      "main": "bark_ivo_rime_hit_1.ec069527.ogg"
+    },
+    "bark_ivo_rime_hit_2": {
+      "main": "bark_ivo_rime_hit_2.9dfcaa27.ogg"
+    },
+    "bark_ivo_rime_kill_1": {
+      "main": "bark_ivo_rime_kill_1.fe7848c4.ogg"
+    },
+    "bark_ivo_rime_low_hp_1": {
+      "main": "bark_ivo_rime_low_hp_1.03b04768.ogg"
+    },
+    "bark_ivo_rime_low_hp_2": {
+      "main": "bark_ivo_rime_low_hp_2.f4e9beaa.ogg"
+    },
+    "bark_ivo_rime_miss_1": {
+      "main": "bark_ivo_rime_miss_1.741f1ead.ogg"
+    },
+    "bark_ivo_rime_victory_1": {
+      "main": "bark_ivo_rime_victory_1.c66f2742.ogg"
+    },
+    "bark_lark_ally_down_1": {
+      "main": "bark_lark_ally_down_1.d3cbf4ba.ogg"
+    },
+    "bark_lark_battle_start_1": {
+      "main": "bark_lark_battle_start_1.faa997b5.ogg"
+    },
+    "bark_lark_battle_start_2": {
+      "main": "bark_lark_battle_start_2.e9da2cd5.ogg"
+    },
+    "bark_lark_battle_start_3": {
+      "main": "bark_lark_battle_start_3.d01b2329.ogg"
+    },
+    "bark_lark_camp_1": {
+      "main": "bark_lark_camp_1.8c84394e.ogg"
+    },
+    "bark_lark_camp_2": {
+      "main": "bark_lark_camp_2.0dd7c203.ogg"
+    },
+    "bark_lark_camp_3": {
+      "main": "bark_lark_camp_3.47f3b804.ogg"
+    },
+    "bark_lark_camp_4": {
+      "main": "bark_lark_camp_4.75d76d50.ogg"
+    },
+    "bark_lark_camp_5": {
+      "main": "bark_lark_camp_5.3c8f2e26.ogg"
+    },
+    "bark_lark_crit_1": {
+      "main": "bark_lark_crit_1.dadb5dbc.ogg"
+    },
+    "bark_lark_healed_1": {
+      "main": "bark_lark_healed_1.65dfe94c.ogg"
+    },
+    "bark_lark_hit_1": {
+      "main": "bark_lark_hit_1.5de804e9.ogg"
+    },
+    "bark_lark_kill_1": {
+      "main": "bark_lark_kill_1.64d7b9e2.ogg"
+    },
+    "bark_lark_level_up_1": {
+      "main": "bark_lark_level_up_1.cc70c2db.ogg"
+    },
+    "bark_lark_low_hp_1": {
+      "main": "bark_lark_low_hp_1.212d0648.ogg"
+    },
+    "bark_lark_miss_1": {
+      "main": "bark_lark_miss_1.27e4a469.ogg"
+    },
+    "bark_lark_victory_1": {
+      "main": "bark_lark_victory_1.14825b09.ogg"
+    },
+    "bark_maren_sorrel_ally_down_1": {
+      "main": "bark_maren_sorrel_ally_down_1.3f8fd1c4.ogg"
+    },
+    "bark_maren_sorrel_battle_start_1": {
+      "main": "bark_maren_sorrel_battle_start_1.372b86b7.ogg"
+    },
+    "bark_maren_sorrel_battle_start_2": {
+      "main": "bark_maren_sorrel_battle_start_2.d0c681b3.ogg"
+    },
+    "bark_maren_sorrel_battle_start_3": {
+      "main": "bark_maren_sorrel_battle_start_3.4067d94d.ogg"
+    },
+    "bark_maren_sorrel_crit_1": {
+      "main": "bark_maren_sorrel_crit_1.7e7b99e5.ogg"
+    },
+    "bark_maren_sorrel_defeat_1": {
+      "main": "bark_maren_sorrel_defeat_1.698c1506.ogg"
+    },
+    "bark_maren_sorrel_defeat_2": {
+      "main": "bark_maren_sorrel_defeat_2.2bb34c98.ogg"
+    },
+    "bark_maren_sorrel_hit_1": {
+      "main": "bark_maren_sorrel_hit_1.0f27d309.ogg"
+    },
+    "bark_maren_sorrel_kill_1": {
+      "main": "bark_maren_sorrel_kill_1.7a759f4e.ogg"
+    },
+    "bark_maren_sorrel_low_hp_1": {
+      "main": "bark_maren_sorrel_low_hp_1.4c4ea837.ogg"
+    },
+    "bark_maren_sorrel_low_hp_2": {
+      "main": "bark_maren_sorrel_low_hp_2.a45d6522.ogg"
+    },
+    "bark_maren_sorrel_miss_1": {
+      "main": "bark_maren_sorrel_miss_1.39c82797.ogg"
+    },
+    "bark_maren_sorrel_victory_1": {
+      "main": "bark_maren_sorrel_victory_1.6222a731.ogg"
+    },
+    "bark_maren_sorrel_victory_2": {
+      "main": "bark_maren_sorrel_victory_2.5964ee0c.ogg"
+    },
+    "bark_mother_aubrine_town_1": {
+      "main": "bark_mother_aubrine_town_1.dbea8e13.ogg"
+    },
+    "bark_mother_aubrine_town_2": {
+      "main": "bark_mother_aubrine_town_2.59fbf7f1.ogg"
+    },
+    "bark_mother_aubrine_town_3": {
+      "main": "bark_mother_aubrine_town_3.2f9fc438.ogg"
+    },
+    "bark_mother_aubrine_town_4": {
+      "main": "bark_mother_aubrine_town_4.a0332d18.ogg"
+    },
+    "bark_mother_aubrine_town_5": {
+      "main": "bark_mother_aubrine_town_5.85f85101.ogg"
+    },
+    "bark_mother_aubrine_town_6": {
+      "main": "bark_mother_aubrine_town_6.fb0f8764.ogg"
+    },
+    "bark_mother_aubrine_town_7": {
+      "main": "bark_mother_aubrine_town_7.54ef4883.ogg"
+    },
+    "bark_mother_skarrow_ally_down_1": {
+      "main": "bark_mother_skarrow_ally_down_1.99b9e0b6.ogg"
+    },
+    "bark_mother_skarrow_battle_start_1": {
+      "main": "bark_mother_skarrow_battle_start_1.643e6027.ogg"
+    },
+    "bark_mother_skarrow_battle_start_2": {
+      "main": "bark_mother_skarrow_battle_start_2.f8e24da9.ogg"
+    },
+    "bark_mother_skarrow_battle_start_3": {
+      "main": "bark_mother_skarrow_battle_start_3.de019a05.ogg"
+    },
+    "bark_mother_skarrow_crit_1": {
+      "main": "bark_mother_skarrow_crit_1.b5964de6.ogg"
+    },
+    "bark_mother_skarrow_defeat_1": {
+      "main": "bark_mother_skarrow_defeat_1.f2d02731.ogg"
+    },
+    "bark_mother_skarrow_hit_1": {
+      "main": "bark_mother_skarrow_hit_1.a8a57c70.ogg"
+    },
+    "bark_mother_skarrow_kill_1": {
+      "main": "bark_mother_skarrow_kill_1.281a834e.ogg"
+    },
+    "bark_mother_skarrow_low_hp_1": {
+      "main": "bark_mother_skarrow_low_hp_1.9511e53e.ogg"
+    },
+    "bark_mother_skarrow_low_hp_2": {
+      "main": "bark_mother_skarrow_low_hp_2.18a7e6b8.ogg"
+    },
+    "bark_mother_skarrow_miss_1": {
+      "main": "bark_mother_skarrow_miss_1.cb584b82.ogg"
+    },
+    "bark_mother_skarrow_victory_1": {
+      "main": "bark_mother_skarrow_victory_1.75c16ffb.ogg"
+    },
+    "bark_narrator_ally_down_1": {
+      "main": "bark_narrator_ally_down_1.8eb28cf7.ogg"
+    },
+    "bark_narrator_ally_down_2": {
+      "main": "bark_narrator_ally_down_2.633ef67d.ogg"
+    },
+    "bark_narrator_ally_down_3": {
+      "main": "bark_narrator_ally_down_3.6ef4dd41.ogg"
+    },
+    "bark_narrator_battle_start_1": {
+      "main": "bark_narrator_battle_start_1.1e183e7d.ogg"
+    },
+    "bark_narrator_battle_start_2": {
+      "main": "bark_narrator_battle_start_2.680de547.ogg"
+    },
+    "bark_narrator_battle_start_3": {
+      "main": "bark_narrator_battle_start_3.57dda68c.ogg"
+    },
+    "bark_narrator_battle_start_4": {
+      "main": "bark_narrator_battle_start_4.c8fd8b44.ogg"
+    },
+    "bark_narrator_battle_start_5": {
+      "main": "bark_narrator_battle_start_5.3b683ffe.ogg"
+    },
+    "bark_narrator_camp_1": {
+      "main": "bark_narrator_camp_1.81ed1b02.ogg"
+    },
+    "bark_narrator_camp_2": {
+      "main": "bark_narrator_camp_2.6904955c.ogg"
+    },
+    "bark_narrator_camp_3": {
+      "main": "bark_narrator_camp_3.e86b8bfe.ogg"
+    },
+    "bark_narrator_camp_4": {
+      "main": "bark_narrator_camp_4.5383c618.ogg"
+    },
+    "bark_narrator_camp_5": {
+      "main": "bark_narrator_camp_5.5d5018ed.ogg"
+    },
+    "bark_narrator_crit_1": {
+      "main": "bark_narrator_crit_1.47013fcc.ogg"
+    },
+    "bark_narrator_crit_2": {
+      "main": "bark_narrator_crit_2.fe79cb75.ogg"
+    },
+    "bark_narrator_crit_3": {
+      "main": "bark_narrator_crit_3.36180fb6.ogg"
+    },
+    "bark_narrator_crit_4": {
+      "main": "bark_narrator_crit_4.8efed4b4.ogg"
+    },
+    "bark_narrator_defeat_1": {
+      "main": "bark_narrator_defeat_1.2469078f.ogg"
+    },
+    "bark_narrator_defeat_2": {
+      "main": "bark_narrator_defeat_2.dd25c162.ogg"
+    },
+    "bark_narrator_defeat_3": {
+      "main": "bark_narrator_defeat_3.588660db.ogg"
+    },
+    "bark_narrator_kill_1": {
+      "main": "bark_narrator_kill_1.8ceef282.ogg"
+    },
+    "bark_narrator_kill_2": {
+      "main": "bark_narrator_kill_2.a33a3682.ogg"
+    },
+    "bark_narrator_kill_3": {
+      "main": "bark_narrator_kill_3.cb6e3fc0.ogg"
+    },
+    "bark_narrator_kill_4": {
+      "main": "bark_narrator_kill_4.8ada19c7.ogg"
+    },
+    "bark_narrator_level_up_1": {
+      "main": "bark_narrator_level_up_1.a9b58f3d.ogg"
+    },
+    "bark_narrator_level_up_2": {
+      "main": "bark_narrator_level_up_2.eec116df.ogg"
+    },
+    "bark_narrator_level_up_3": {
+      "main": "bark_narrator_level_up_3.54db2bdc.ogg"
+    },
+    "bark_narrator_turn_start_1": {
+      "main": "bark_narrator_turn_start_1.f7f73dc0.ogg"
+    },
+    "bark_narrator_turn_start_2": {
+      "main": "bark_narrator_turn_start_2.baaf26bc.ogg"
+    },
+    "bark_narrator_turn_start_3": {
+      "main": "bark_narrator_turn_start_3.b52b55ab.ogg"
+    },
+    "bark_narrator_victory_1": {
+      "main": "bark_narrator_victory_1.2c6d72ea.ogg"
+    },
+    "bark_narrator_victory_2": {
+      "main": "bark_narrator_victory_2.0018f7c6.ogg"
+    },
+    "bark_narrator_victory_3": {
+      "main": "bark_narrator_victory_3.13a16560.ogg"
+    },
+    "bark_narrator_victory_4": {
+      "main": "bark_narrator_victory_4.06e871a9.ogg"
+    },
+    "bark_old_maud_town_1": {
+      "main": "bark_old_maud_town_1.ab5a6e1e.ogg"
+    },
+    "bark_old_maud_town_2": {
+      "main": "bark_old_maud_town_2.3350ad53.ogg"
+    },
+    "bark_old_maud_town_3": {
+      "main": "bark_old_maud_town_3.caaa9ec4.ogg"
+    },
+    "bark_old_maud_town_4": {
+      "main": "bark_old_maud_town_4.75eff5ec.ogg"
+    },
+    "bark_old_maud_town_5": {
+      "main": "bark_old_maud_town_5.f2770b4d.ogg"
+    },
+    "bark_old_maud_town_6": {
+      "main": "bark_old_maud_town_6.928c5d0e.ogg"
+    },
+    "bark_old_maud_town_7": {
+      "main": "bark_old_maud_town_7.ee04a66b.ogg"
+    },
+    "bark_oswin_hale_battle_start_1": {
+      "main": "bark_oswin_hale_battle_start_1.2a7f35c1.ogg"
+    },
+    "bark_oswin_hale_battle_start_2": {
+      "main": "bark_oswin_hale_battle_start_2.28d20d79.ogg"
+    },
+    "bark_oswin_hale_battle_start_3": {
+      "main": "bark_oswin_hale_battle_start_3.2b15afe6.ogg"
+    },
+    "bark_oswin_hale_crit_1": {
+      "main": "bark_oswin_hale_crit_1.adf93a44.ogg"
+    },
+    "bark_oswin_hale_defeat_1": {
+      "main": "bark_oswin_hale_defeat_1.19146227.ogg"
+    },
+    "bark_oswin_hale_defeat_2": {
+      "main": "bark_oswin_hale_defeat_2.ab93cac3.ogg"
+    },
+    "bark_oswin_hale_hit_1": {
+      "main": "bark_oswin_hale_hit_1.161cf6a0.ogg"
+    },
+    "bark_oswin_hale_hit_2": {
+      "main": "bark_oswin_hale_hit_2.d5eee041.ogg"
+    },
+    "bark_oswin_hale_kill_1": {
+      "main": "bark_oswin_hale_kill_1.5b1b2c37.ogg"
+    },
+    "bark_oswin_hale_low_hp_1": {
+      "main": "bark_oswin_hale_low_hp_1.8d682abf.ogg"
+    },
+    "bark_oswin_hale_low_hp_2": {
+      "main": "bark_oswin_hale_low_hp_2.641f7926.ogg"
+    },
+    "bark_oswin_hale_miss_1": {
+      "main": "bark_oswin_hale_miss_1.7dfc7a74.ogg"
+    },
+    "bark_oswin_hale_turn_start_1": {
+      "main": "bark_oswin_hale_turn_start_1.255cb4db.ogg"
+    },
+    "bark_oswin_hale_victory_1": {
+      "main": "bark_oswin_hale_victory_1.60188fee.ogg"
+    },
+    "bark_pip_ashdown_camp_1": {
+      "main": "bark_pip_ashdown_camp_1.4ba63120.ogg"
+    },
+    "bark_pip_ashdown_camp_2": {
+      "main": "bark_pip_ashdown_camp_2.61030d54.ogg"
+    },
+    "bark_pip_ashdown_camp_3": {
+      "main": "bark_pip_ashdown_camp_3.4d34e7d5.ogg"
+    },
+    "bark_pip_ashdown_camp_4": {
+      "main": "bark_pip_ashdown_camp_4.52eb3c78.ogg"
+    },
+    "bark_pip_ashdown_camp_5": {
+      "main": "bark_pip_ashdown_camp_5.6d263bac.ogg"
+    },
+    "bark_pip_ashdown_town_1": {
+      "main": "bark_pip_ashdown_town_1.397e121f.ogg"
+    },
+    "bark_pip_ashdown_town_2": {
+      "main": "bark_pip_ashdown_town_2.d7b45627.ogg"
+    },
+    "bark_pip_ashdown_town_3": {
+      "main": "bark_pip_ashdown_town_3.4e7aef4f.ogg"
+    },
+    "bark_pip_ashdown_town_4": {
+      "main": "bark_pip_ashdown_town_4.8ec99094.ogg"
+    },
+    "bark_rook_battle_start_1": {
+      "main": "bark_rook_battle_start_1.e9ed23f6.ogg"
+    },
+    "bark_rook_battle_start_2": {
+      "main": "bark_rook_battle_start_2.7a1fbece.ogg"
+    },
+    "bark_rook_defeat_1": {
+      "main": "bark_rook_defeat_1.ff1ab44a.ogg"
+    },
+    "bark_rook_hit_1": {
+      "main": "bark_rook_hit_1.d3c83949.ogg"
+    },
+    "bark_rook_low_hp_1": {
+      "main": "bark_rook_low_hp_1.cea8846a.ogg"
+    },
+    "bark_rook_town_1": {
+      "main": "bark_rook_town_1.84d37d2d.ogg"
+    },
+    "bark_rook_town_2": {
+      "main": "bark_rook_town_2.d631c60e.ogg"
+    },
+    "bark_rook_town_3": {
+      "main": "bark_rook_town_3.8687997d.ogg"
+    },
+    "bark_rook_town_4": {
+      "main": "bark_rook_town_4.bbc056ea.ogg"
+    },
+    "bark_rook_town_5": {
+      "main": "bark_rook_town_5.ef775681.ogg"
+    },
+    "bark_rook_town_6": {
+      "main": "bark_rook_town_6.d5d8184c.ogg"
+    },
+    "bark_rook_victory_1": {
+      "main": "bark_rook_victory_1.ab51079d.ogg"
+    },
+    "bark_tobin_fell_town_1": {
+      "main": "bark_tobin_fell_town_1.583dbcfc.ogg"
+    },
+    "bark_tobin_fell_town_2": {
+      "main": "bark_tobin_fell_town_2.35f7c2cc.ogg"
+    },
+    "bark_tobin_fell_town_3": {
+      "main": "bark_tobin_fell_town_3.fafcaeb5.ogg"
+    },
+    "bark_tobin_fell_town_4": {
+      "main": "bark_tobin_fell_town_4.922b0c91.ogg"
+    },
+    "bark_tobin_fell_town_5": {
+      "main": "bark_tobin_fell_town_5.55b7d35e.ogg"
+    },
+    "bark_tobin_fell_town_6": {
+      "main": "bark_tobin_fell_town_6.11974beb.ogg"
+    },
+    "bark_tobin_fell_town_7": {
+      "main": "bark_tobin_fell_town_7.5b35af17.ogg"
+    },
+    "bark_vorga_ally_down_1": {
+      "main": "bark_vorga_ally_down_1.bd8d3156.ogg"
+    },
+    "bark_vorga_battle_start_1": {
+      "main": "bark_vorga_battle_start_1.2a08532a.ogg"
+    },
+    "bark_vorga_battle_start_2": {
+      "main": "bark_vorga_battle_start_2.58442a76.ogg"
+    },
+    "bark_vorga_battle_start_3": {
+      "main": "bark_vorga_battle_start_3.9cfafc2f.ogg"
+    },
+    "bark_vorga_battle_start_4": {
+      "main": "bark_vorga_battle_start_4.2a235a53.ogg"
+    },
+    "bark_vorga_crit_1": {
+      "main": "bark_vorga_crit_1.35982a2e.ogg"
+    },
+    "bark_vorga_crit_2": {
+      "main": "bark_vorga_crit_2.ac6931ea.ogg"
+    },
+    "bark_vorga_defeat_1": {
+      "main": "bark_vorga_defeat_1.c07211b9.ogg"
+    },
+    "bark_vorga_defeat_2": {
+      "main": "bark_vorga_defeat_2.ee383094.ogg"
+    },
+    "bark_vorga_hit_1": {
+      "main": "bark_vorga_hit_1.f852c21f.ogg"
+    },
+    "bark_vorga_hit_2": {
+      "main": "bark_vorga_hit_2.f06398ec.ogg"
+    },
+    "bark_vorga_kill_1": {
+      "main": "bark_vorga_kill_1.7323ba97.ogg"
+    },
+    "bark_vorga_low_hp_1": {
+      "main": "bark_vorga_low_hp_1.1734b5b5.ogg"
+    },
+    "bark_vorga_low_hp_2": {
+      "main": "bark_vorga_low_hp_2.8ba78fa7.ogg"
+    },
+    "bark_vorga_miss_1": {
+      "main": "bark_vorga_miss_1.4bd99d20.ogg"
+    },
+    "bark_vorga_victory_1": {
+      "main": "bark_vorga_victory_1.adf56a81.ogg"
+    },
+    "bark_vorga_victory_2": {
+      "main": "bark_vorga_victory_2.702ae2c5.ogg"
+    },
+    "bark_ysolde_camp_1": {
+      "main": "bark_ysolde_camp_1.0abc41f7.ogg"
+    },
+    "bark_ysolde_town_1": {
+      "main": "bark_ysolde_town_1.f199582e.ogg"
+    },
+    "bark_ysolde_town_2": {
+      "main": "bark_ysolde_town_2.b4b05fd2.ogg"
+    },
+    "bark_ysolde_town_3": {
+      "main": "bark_ysolde_town_3.0a3a7ba5.ogg"
+    },
+    "bark_ysolde_town_4": {
+      "main": "bark_ysolde_town_4.1ca11f3b.ogg"
+    },
+    "bark_ysolde_town_5": {
+      "main": "bark_ysolde_town_5.46ea99ad.ogg"
+    },
+    "voice_earnest_ally_down_1": {
+      "high": "voice_earnest_ally_down_1.df179278.ogg",
+      "low": "voice_earnest_ally_down_1.4236ee5f.ogg"
+    },
+    "voice_earnest_ally_down_2": {
+      "high": "voice_earnest_ally_down_2.b3f610f6.ogg",
+      "low": "voice_earnest_ally_down_2.2f8f44dd.ogg"
+    },
+    "voice_earnest_battle_start_1": {
+      "high": "voice_earnest_battle_start_1.2fdc3d4b.ogg",
+      "low": "voice_earnest_battle_start_1.eb0f70b8.ogg"
+    },
+    "voice_earnest_battle_start_2": {
+      "high": "voice_earnest_battle_start_2.fd6bcf63.ogg",
+      "low": "voice_earnest_battle_start_2.d9075662.ogg"
+    },
+    "voice_earnest_camp_1": {
+      "high": "voice_earnest_camp_1.22888634.ogg",
+      "low": "voice_earnest_camp_1.25d19660.ogg"
+    },
+    "voice_earnest_camp_2": {
+      "high": "voice_earnest_camp_2.1b6c01b7.ogg",
+      "low": "voice_earnest_camp_2.b3aa4397.ogg"
+    },
+    "voice_earnest_crit_1": {
+      "high": "voice_earnest_crit_1.a87a7a9e.ogg",
+      "low": "voice_earnest_crit_1.093a87b9.ogg"
+    },
+    "voice_earnest_crit_2": {
+      "high": "voice_earnest_crit_2.41306ecc.ogg",
+      "low": "voice_earnest_crit_2.cfacb10b.ogg"
+    },
+    "voice_earnest_defeat_1": {
+      "high": "voice_earnest_defeat_1.216d29df.ogg",
+      "low": "voice_earnest_defeat_1.f6d198be.ogg"
+    },
+    "voice_earnest_healed_1": {
+      "high": "voice_earnest_healed_1.80f6176e.ogg",
+      "low": "voice_earnest_healed_1.d82460a4.ogg"
+    },
+    "voice_earnest_healed_2": {
+      "high": "voice_earnest_healed_2.f01787e6.ogg",
+      "low": "voice_earnest_healed_2.ac6848ff.ogg"
+    },
+    "voice_earnest_kill_1": {
+      "high": "voice_earnest_kill_1.e409f287.ogg",
+      "low": "voice_earnest_kill_1.ed6d9668.ogg"
+    },
+    "voice_earnest_kill_2": {
+      "high": "voice_earnest_kill_2.ed50098b.ogg",
+      "low": "voice_earnest_kill_2.aef1d790.ogg"
+    },
+    "voice_earnest_low_hp_1": {
+      "high": "voice_earnest_low_hp_1.4b5dc243.ogg",
+      "low": "voice_earnest_low_hp_1.a4807855.ogg"
+    },
+    "voice_earnest_low_hp_2": {
+      "high": "voice_earnest_low_hp_2.d90b750d.ogg",
+      "low": "voice_earnest_low_hp_2.7237c2f0.ogg"
+    },
+    "voice_earnest_victory_1": {
+      "high": "voice_earnest_victory_1.9b4d9a13.ogg",
+      "low": "voice_earnest_victory_1.5b8f9287.ogg"
+    },
+    "voice_earnest_victory_2": {
+      "high": "voice_earnest_victory_2.f2130931.ogg",
+      "low": "voice_earnest_victory_2.8d4bec6f.ogg"
+    },
+    "voice_fierce_ally_down_1": {
+      "high": "voice_fierce_ally_down_1.001fbfaa.ogg",
+      "low": "voice_fierce_ally_down_1.9d2b6a19.ogg"
+    },
+    "voice_fierce_ally_down_2": {
+      "high": "voice_fierce_ally_down_2.1bd7900c.ogg",
+      "low": "voice_fierce_ally_down_2.6e29d940.ogg"
+    },
+    "voice_fierce_battle_start_1": {
+      "high": "voice_fierce_battle_start_1.c3abd17d.ogg",
+      "low": "voice_fierce_battle_start_1.4f759ca3.ogg"
+    },
+    "voice_fierce_battle_start_2": {
+      "high": "voice_fierce_battle_start_2.9c86fb1f.ogg",
+      "low": "voice_fierce_battle_start_2.564a7859.ogg"
+    },
+    "voice_fierce_camp_2": {
+      "high": "voice_fierce_camp_2.abb80bc9.ogg",
+      "low": "voice_fierce_camp_2.ee774575.ogg"
+    },
+    "voice_fierce_crit_1": {
+      "high": "voice_fierce_crit_1.ca5d51d9.ogg",
+      "low": "voice_fierce_crit_1.4aa6feeb.ogg"
+    },
+    "voice_fierce_crit_2": {
+      "high": "voice_fierce_crit_2.32ce0874.ogg",
+      "low": "voice_fierce_crit_2.3d28418e.ogg"
+    },
+    "voice_fierce_defeat_1": {
+      "high": "voice_fierce_defeat_1.667357b8.ogg",
+      "low": "voice_fierce_defeat_1.4205e20c.ogg"
+    },
+    "voice_fierce_healed_1": {
+      "high": "voice_fierce_healed_1.01f4c251.ogg",
+      "low": "voice_fierce_healed_1.43e48d79.ogg"
+    },
+    "voice_fierce_healed_2": {
+      "high": "voice_fierce_healed_2.194e71c8.ogg",
+      "low": "voice_fierce_healed_2.337bcd50.ogg"
+    },
+    "voice_fierce_kill_1": {
+      "high": "voice_fierce_kill_1.474abc4a.ogg",
+      "low": "voice_fierce_kill_1.c98bbe4a.ogg"
+    },
+    "voice_fierce_kill_2": {
+      "high": "voice_fierce_kill_2.7d7022c4.ogg",
+      "low": "voice_fierce_kill_2.7d61db5b.ogg"
+    },
+    "voice_fierce_low_hp_1": {
+      "high": "voice_fierce_low_hp_1.907dc307.ogg",
+      "low": "voice_fierce_low_hp_1.7dc31495.ogg"
+    },
+    "voice_fierce_low_hp_2": {
+      "high": "voice_fierce_low_hp_2.791a9c59.ogg",
+      "low": "voice_fierce_low_hp_2.cfee7b06.ogg"
+    },
+    "voice_fierce_victory_1": {
+      "high": "voice_fierce_victory_1.4e4cff85.ogg",
+      "low": "voice_fierce_victory_1.0048ec9a.ogg"
+    },
+    "voice_fierce_victory_2": {
+      "high": "voice_fierce_victory_2.84c6ff6e.ogg",
+      "low": "voice_fierce_victory_2.af5654d5.ogg"
+    },
+    "voice_grim_ally_down_1": {
+      "high": "voice_grim_ally_down_1.9870db6c.ogg",
+      "low": "voice_grim_ally_down_1.e01533a2.ogg"
+    },
+    "voice_grim_ally_down_2": {
+      "high": "voice_grim_ally_down_2.557b6bd4.ogg",
+      "low": "voice_grim_ally_down_2.72f614dc.ogg"
+    },
+    "voice_grim_battle_start_1": {
+      "high": "voice_grim_battle_start_1.e8ccd9f5.ogg",
+      "low": "voice_grim_battle_start_1.276788b8.ogg"
+    },
+    "voice_grim_battle_start_2": {
+      "high": "voice_grim_battle_start_2.52518eec.ogg",
+      "low": "voice_grim_battle_start_2.3abf06de.ogg"
+    },
+    "voice_grim_crit_1": {
+      "high": "voice_grim_crit_1.4bc2a986.ogg",
+      "low": "voice_grim_crit_1.d7ce53d1.ogg"
+    },
+    "voice_grim_crit_2": {
+      "high": "voice_grim_crit_2.8cdc3156.ogg",
+      "low": "voice_grim_crit_2.8411bda2.ogg"
+    },
+    "voice_grim_defeat_1": {
+      "high": "voice_grim_defeat_1.49694c92.ogg",
+      "low": "voice_grim_defeat_1.042fe343.ogg"
+    },
+    "voice_grim_healed_1": {
+      "high": "voice_grim_healed_1.7643bce5.ogg",
+      "low": "voice_grim_healed_1.01ce6909.ogg"
+    },
+    "voice_grim_healed_2": {
+      "high": "voice_grim_healed_2.bac9189c.ogg",
+      "low": "voice_grim_healed_2.d8271c50.ogg"
+    },
+    "voice_grim_kill_1": {
+      "high": "voice_grim_kill_1.9c8b7245.ogg",
+      "low": "voice_grim_kill_1.79c83142.ogg"
+    },
+    "voice_grim_kill_2": {
+      "high": "voice_grim_kill_2.28c7b545.ogg",
+      "low": "voice_grim_kill_2.9a631c25.ogg"
+    },
+    "voice_grim_low_hp_1": {
+      "high": "voice_grim_low_hp_1.d27b34e6.ogg",
+      "low": "voice_grim_low_hp_1.3ac93b7e.ogg"
+    },
+    "voice_grim_low_hp_2": {
+      "high": "voice_grim_low_hp_2.6909dc62.ogg",
+      "low": "voice_grim_low_hp_2.dd7ee2a2.ogg"
+    },
+    "voice_grim_victory_1": {
+      "high": "voice_grim_victory_1.8b562753.ogg",
+      "low": "voice_grim_victory_1.827ab200.ogg"
+    },
+    "voice_grim_victory_2": {
+      "high": "voice_grim_victory_2.cbcb2cf6.ogg",
+      "low": "voice_grim_victory_2.f0b20c4a.ogg"
+    },
+    "voice_scholarly_ally_down_1": {
+      "high": "voice_scholarly_ally_down_1.8d654be9.ogg",
+      "low": "voice_scholarly_ally_down_1.c51bc783.ogg"
+    },
+    "voice_scholarly_ally_down_2": {
+      "high": "voice_scholarly_ally_down_2.05486df2.ogg",
+      "low": "voice_scholarly_ally_down_2.8791e13b.ogg"
+    },
+    "voice_scholarly_battle_start_1": {
+      "high": "voice_scholarly_battle_start_1.f336154d.ogg",
+      "low": "voice_scholarly_battle_start_1.40072a22.ogg"
+    },
+    "voice_scholarly_battle_start_2": {
+      "high": "voice_scholarly_battle_start_2.c4b998b5.ogg",
+      "low": "voice_scholarly_battle_start_2.1d94125a.ogg"
+    },
+    "voice_scholarly_camp_1": {
+      "high": "voice_scholarly_camp_1.0f382d6b.ogg",
+      "low": "voice_scholarly_camp_1.416fc288.ogg"
+    },
+    "voice_scholarly_crit_1": {
+      "high": "voice_scholarly_crit_1.f3e5243a.ogg",
+      "low": "voice_scholarly_crit_1.e1a2dc22.ogg"
+    },
+    "voice_scholarly_defeat_1": {
+      "high": "voice_scholarly_defeat_1.1c7498e8.ogg",
+      "low": "voice_scholarly_defeat_1.7c302d12.ogg"
+    },
+    "voice_scholarly_healed_1": {
+      "high": "voice_scholarly_healed_1.7eff4817.ogg",
+      "low": "voice_scholarly_healed_1.e4d11ef8.ogg"
+    },
+    "voice_scholarly_healed_2": {
+      "high": "voice_scholarly_healed_2.f7212387.ogg",
+      "low": "voice_scholarly_healed_2.e5aa7a5e.ogg"
+    },
+    "voice_scholarly_kill_1": {
+      "high": "voice_scholarly_kill_1.3e5f9a60.ogg",
+      "low": "voice_scholarly_kill_1.831a102c.ogg"
+    },
+    "voice_scholarly_kill_2": {
+      "high": "voice_scholarly_kill_2.4a808e7b.ogg",
+      "low": "voice_scholarly_kill_2.d8bbd91a.ogg"
+    },
+    "voice_scholarly_low_hp_1": {
+      "high": "voice_scholarly_low_hp_1.ed3e178f.ogg",
+      "low": "voice_scholarly_low_hp_1.04049f7e.ogg"
+    },
+    "voice_scholarly_low_hp_2": {
+      "high": "voice_scholarly_low_hp_2.0f8a2784.ogg",
+      "low": "voice_scholarly_low_hp_2.c8c5ed9b.ogg"
+    },
+    "voice_scholarly_victory_1": {
+      "high": "voice_scholarly_victory_1.857117c2.ogg",
+      "low": "voice_scholarly_victory_1.a4901d08.ogg"
+    },
+    "voice_scholarly_victory_2": {
+      "high": "voice_scholarly_victory_2.e3c39255.ogg",
+      "low": "voice_scholarly_victory_2.ae0ebeff.ogg"
+    },
+    "voice_steady_ally_down_1": {
+      "high": "voice_steady_ally_down_1.1eb06051.ogg",
+      "low": "voice_steady_ally_down_1.f25d7b7f.ogg"
+    },
+    "voice_steady_ally_down_2": {
+      "high": "voice_steady_ally_down_2.235b94cc.ogg",
+      "low": "voice_steady_ally_down_2.9ee5e832.ogg"
+    },
+    "voice_steady_battle_start_1": {
+      "high": "voice_steady_battle_start_1.2e2fa2d2.ogg",
+      "low": "voice_steady_battle_start_1.b8e256be.ogg"
+    },
+    "voice_steady_battle_start_2": {
+      "high": "voice_steady_battle_start_2.ec174188.ogg",
+      "low": "voice_steady_battle_start_2.0f651eb5.ogg"
+    },
+    "voice_steady_camp_1": {
+      "high": "voice_steady_camp_1.03a5dada.ogg",
+      "low": "voice_steady_camp_1.348187d2.ogg"
+    },
+    "voice_steady_camp_2": {
+      "high": "voice_steady_camp_2.cdb61059.ogg",
+      "low": "voice_steady_camp_2.3e77d18e.ogg"
+    },
+    "voice_steady_crit_1": {
+      "high": "voice_steady_crit_1.4ce2b91a.ogg",
+      "low": "voice_steady_crit_1.d6f694a6.ogg"
+    },
+    "voice_steady_crit_2": {
+      "high": "voice_steady_crit_2.714836cf.ogg",
+      "low": "voice_steady_crit_2.169a735c.ogg"
+    },
+    "voice_steady_defeat_1": {
+      "high": "voice_steady_defeat_1.7c5acdb6.ogg",
+      "low": "voice_steady_defeat_1.7a3a9a93.ogg"
+    },
+    "voice_steady_healed_1": {
+      "high": "voice_steady_healed_1.72a36f1c.ogg",
+      "low": "voice_steady_healed_1.7496aca1.ogg"
+    },
+    "voice_steady_healed_2": {
+      "high": "voice_steady_healed_2.b11c6eed.ogg",
+      "low": "voice_steady_healed_2.c7d2cd4c.ogg"
+    },
+    "voice_steady_kill_1": {
+      "high": "voice_steady_kill_1.ffd4ecdb.ogg",
+      "low": "voice_steady_kill_1.8184bc60.ogg"
+    },
+    "voice_steady_kill_2": {
+      "high": "voice_steady_kill_2.35e5a73e.ogg",
+      "low": "voice_steady_kill_2.6f9a9ecf.ogg"
+    },
+    "voice_steady_low_hp_1": {
+      "high": "voice_steady_low_hp_1.ad2fc99e.ogg",
+      "low": "voice_steady_low_hp_1.32d34212.ogg"
+    },
+    "voice_steady_low_hp_2": {
+      "high": "voice_steady_low_hp_2.f7ba5054.ogg",
+      "low": "voice_steady_low_hp_2.ffda522c.ogg"
+    },
+    "voice_steady_victory_1": {
+      "high": "voice_steady_victory_1.ba5ef66a.ogg",
+      "low": "voice_steady_victory_1.e71a9f99.ogg"
+    },
+    "voice_steady_victory_2": {
+      "high": "voice_steady_victory_2.0c620609.ogg",
+      "low": "voice_steady_victory_2.9520c05d.ogg"
+    },
+    "voice_wry_ally_down_1": {
+      "high": "voice_wry_ally_down_1.1ad68e0e.ogg",
+      "low": "voice_wry_ally_down_1.6b602046.ogg"
+    },
+    "voice_wry_ally_down_2": {
+      "high": "voice_wry_ally_down_2.197c9c16.ogg",
+      "low": "voice_wry_ally_down_2.c2301700.ogg"
+    },
+    "voice_wry_battle_start_1": {
+      "high": "voice_wry_battle_start_1.2cb74d97.ogg",
+      "low": "voice_wry_battle_start_1.dcaa8910.ogg"
+    },
+    "voice_wry_battle_start_2": {
+      "high": "voice_wry_battle_start_2.7cfa7ada.ogg",
+      "low": "voice_wry_battle_start_2.6d7e6235.ogg"
+    },
+    "voice_wry_camp_1": {
+      "high": "voice_wry_camp_1.7fef05ef.ogg",
+      "low": "voice_wry_camp_1.acb4ddb2.ogg"
+    },
+    "voice_wry_camp_2": {
+      "high": "voice_wry_camp_2.c53aa2ca.ogg",
+      "low": "voice_wry_camp_2.c04ad67a.ogg"
+    },
+    "voice_wry_crit_1": {
+      "high": "voice_wry_crit_1.7481677d.ogg",
+      "low": "voice_wry_crit_1.eccc897f.ogg"
+    },
+    "voice_wry_crit_2": {
+      "high": "voice_wry_crit_2.99814fbb.ogg",
+      "low": "voice_wry_crit_2.ecb57859.ogg"
+    },
+    "voice_wry_defeat_1": {
+      "high": "voice_wry_defeat_1.04eb320a.ogg",
+      "low": "voice_wry_defeat_1.02638f1f.ogg"
+    },
+    "voice_wry_healed_1": {
+      "high": "voice_wry_healed_1.a5997d3d.ogg",
+      "low": "voice_wry_healed_1.aff6db42.ogg"
+    },
+    "voice_wry_healed_2": {
+      "high": "voice_wry_healed_2.990299f4.ogg",
+      "low": "voice_wry_healed_2.5a4eb32c.ogg"
+    },
+    "voice_wry_kill_1": {
+      "high": "voice_wry_kill_1.3c8cd494.ogg",
+      "low": "voice_wry_kill_1.d149d969.ogg"
+    },
+    "voice_wry_kill_2": {
+      "high": "voice_wry_kill_2.a2907d43.ogg",
+      "low": "voice_wry_kill_2.2aa11bbc.ogg"
+    },
+    "voice_wry_low_hp_2": {
+      "high": "voice_wry_low_hp_2.1e35f9d7.ogg",
+      "low": "voice_wry_low_hp_2.7a180e76.ogg"
+    },
+    "voice_wry_victory_2": {
+      "high": "voice_wry_victory_2.b93f39de.ogg",
+      "low": "voice_wry_victory_2.8623a47e.ogg"
+    }
+  }
+}
