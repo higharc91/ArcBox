@@ -371,27 +371,94 @@ public sealed class StageEndTests
         Assert.Equal(Region.Spawns.Recovery, Saved(s).At);
     }
 
-    /// <summary>XP and injuries after a loss are exactly what the battle result says, as they were before the world.</summary>
-    [Fact]
-    public void A_loss_keeps_xp_and_injuries_as_they_are_today()
+    /// <summary>
+    /// The fight's own toll on every hero, before it ends: an injury each, and the first item of every bag drunk, as the engine
+    /// records them (the injury in <see cref="BattleState.Injuries"/>, the item out of the unit's bag).
+    /// </summary>
+    private static Func<BattleState, BattleState> Hurt(Session s)
     {
-        var s = Fighting(Force);
-        var before = s.Game.Document.Members;
+        var injury = Rules.Injuries.Keys.First();
+        var heroes = Enumerable.Range(0, s.Game.Document.Battle!.Members.Length).Select(TacticsGame.UnitFor).ToArray();
+        return state =>
+        {
+            foreach (var unit in heroes)
+            {
+                var u = state.Units[unit];
+                state = state with
+                {
+                    Injuries = state.Injuries.Add(new RecordedInjury(unit, injury)),
+                    Units = state.Units.SetItem(unit, u with { Bag = u.Bag.IsDefaultOrEmpty ? [] : u.Bag.RemoveAt(0) }),
+                };
+            }
+            return state;
+        };
+    }
+
+    /// <summary>
+    /// A loss heals (the user's rule, 2026-11-01): every hero wakes with the character they went in with, without the fight's injuries and
+    /// with what they drank back in the bag, and still gets the half XP the result pays. Older injuries stay.
+    /// </summary>
+    [Fact]
+    public void A_loss_heals_the_party_and_keeps_half_xp()
+    {
+        // Every hero carries a scar from an earlier fight, which a loss doesn't take away: put in the save, and the fight resumed from it.
+        var old = Rules.Injuries.Keys.Last();
+        var doc = TacticsDocument.Read(Fighting(Force).Lease.Document);
+        doc = doc with { Members = Ordinal.Map(doc.Members.Select(m => (m.Key, m.Value with { Character = m.Value.Character with { Injuries = [old] } }))) };
+        var s = new Session(document: doc.ToJson(), game: WithLore(null));
+        s.Harness.Resume(s.Lease);
+        for (var p = 0; p < 4; p++)
+            s.Harness.SetConnected(p, true);
+        Assert.Equal(TacticsPhase.Battle, s.Game.Phase);
         var members = s.Game.Document.Battle!.Members;
+        var before = s.Game.Document.Members;
+        Assert.Contains(members, m => !before[m.Value].Character.Bag.IsDefaultOrEmpty);     // something to drink, or the test proves nothing
         BattleResult? result = null;
         var engine = s.Game.ResultEngine;
         s.Game.ResultEngine = (state, rules) => result = engine(state, rules);
 
-        Ended(s, BattleOutcome.Lost);
+        Ended(s, BattleOutcome.Lost, Hurt(s));
+
+        Assert.NotNull(result);
+        Assert.NotEmpty(result.Injuries);
+        for (var i = 0; i < members.Length; i++)
+        {
+            var (was, now) = (before[members[i].Value], s.Game.Document.Members[members[i].Value]);
+            Assert.Equal(was.Xp + result.Xp.GetValueOrDefault(TacticsGame.UnitFor(i)), now.Xp);
+            Assert.Equal([old], now.Character.Injuries);
+            Assert.Equal(was.Character.Bag, now.Character.Bag);
+            Assert.Equal(was.Character, now.Character);
+        }
+        var saved = TacticsDocument.Read(s.Lease.Document).Members;       // the checkpoint at Results, which a restart resumes from
+        foreach (var m in members)
+            Assert.Equal((before[m.Value].Character.Injuries, before[m.Value].Character.Bag), (saved[m.Value].Character.Injuries, saved[m.Value].Character.Bag),
+                (a, b) => a.Injuries.SequenceEqual(b.Injuries) && a.Bag.SequenceEqual(b.Bag));
+        Assert.DoesNotContain("ford_assault", s.Game.Document.Completed);
+    }
+
+    /// <summary>A win or a flight keeps the fight's toll, as before: its injuries are added, and what was drunk stays gone.</summary>
+    [Theory]
+    [InlineData(BattleOutcome.Won)]
+    [InlineData(BattleOutcome.Fled)]
+    public void A_win_or_a_flight_keeps_the_fights_injuries_and_spent_items(BattleOutcome outcome)
+    {
+        var s = Fighting(Force);
+        var members = s.Game.Document.Battle!.Members;
+        var before = s.Game.Document.Members;
+        BattleResult? result = null;
+        var engine = s.Game.ResultEngine;
+        s.Game.ResultEngine = (state, rules) => result = engine(state, rules);
+
+        Ended(s, outcome, Hurt(s));
 
         Assert.NotNull(result);
         for (var i = 0; i < members.Length; i++)
         {
             var (was, now) = (before[members[i].Value], s.Game.Document.Members[members[i].Value]);
-            Assert.Equal(was.Xp + result.Xp.GetValueOrDefault(TacticsGame.UnitFor(i)), now.Xp);
             Assert.Equal([.. was.Character.Injuries, .. result.Injuries.GetValueOrDefault(TacticsGame.UnitFor(i), [])], now.Character.Injuries);
+            Assert.NotEmpty(now.Character.Injuries);
+            Assert.Equal(was.Character.Bag.IsDefaultOrEmpty ? [] : was.Character.Bag.RemoveAt(0), now.Character.Bag);
         }
-        Assert.DoesNotContain("ford_assault", s.Game.Document.Completed);
     }
 
     [Fact]

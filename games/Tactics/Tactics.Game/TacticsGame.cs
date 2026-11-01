@@ -452,6 +452,11 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
 
     // ---- Results ------------------------------------------------------------------------------------------------------
 
+    /// <summary>
+    /// Ends the battle at Results. Every hero gains the XP the result pays (half on a loss, by the rules). A win or a flight keeps the fight's
+    /// injuries and what was used from the bag. A loss keeps neither (the user's rule, 2026-11-01): the party wakes healed, without that
+    /// fight's injuries and with the potions it drank, so a retry is fair. HP isn't carried between fights, so healed is the sheet's max.
+    /// </summary>
     private void EndBattle()
     {
         var save = _doc.Battle!;
@@ -468,12 +473,13 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             var unit = UnitFor(i);
             if (!members.TryGetValue(save.Members[i].Value, out var record) || !state.Units.TryGetValue(unit, out var u))
                 continue;
-            var injuries = result.Injuries.GetValueOrDefault(unit, []);
             members = members.SetItem(save.Members[i].Value, record with
             {
                 Xp = record.Xp + result.Xp.GetValueOrDefault(unit),
                 Fought = true,
-                Character = record.Character with { Injuries = record.Character.Injuries.AddRange(injuries), Bag = u.Bag },
+                Character = result.Outcome == BattleOutcome.Lost
+                    ? record.Character
+                    : record.Character with { Injuries = record.Character.Injuries.AddRange(result.Injuries.GetValueOrDefault(unit, [])), Bag = u.Bag },
             });
         }
 
