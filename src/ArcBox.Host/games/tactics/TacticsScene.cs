@@ -40,8 +40,6 @@ namespace ArcBox.Host.Games.Tactics;
 /// </summary>
 public partial class TacticsScene : Control, IGameScene, IContentScene, ISignalingScene, IAudioScene, IConnectionScene
 {
-    /// <summary>A table this short leaves its rows at this share of the height, not stretched into slabs.</summary>
-
     private const string BasePack = "base";
 
     /// <summary>How many screenshots <c>--shots</c> takes of each kind of moment.</summary>
@@ -291,6 +289,10 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
                 _takeoverHeldSaid = true;
                 GD.Print($"TACTICS takeover held over 1 s: {open.Waiting} blocks still to record");
             }
+        }
+        else
+        {
+            (_takeoverHeldSince, _takeoverHeldSaid) = (null, false);    // no takeover waits (the fight ended, or took over): the next counts from its own start
         }
         var state = StageLayout.WorldOf(new WorldSeen(_world is not null, _world?.Now == WorldCanvas.Stage.Open,
             _world is { Plan: not null, Ground: not null }, _world?.Now == WorldCanvas.Stage.Failed, _unreadableWorld is not null, stageShown));

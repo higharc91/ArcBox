@@ -36,15 +36,6 @@ public sealed partial class StoryLayer : Control
         AddChild(_card);
     }
 
-    /// <summary>The newest line number the track has seen.</summary>
-    public int? Seq => _track.Seq;
-
-    /// <summary>What's showing, or null with no scene.</summary>
-    public StoryScreen? Screen => _track.Screen;
-
-    /// <summary>Whether a skill check is up, which dims the world.</summary>
-    public bool Dimmed => _track.Screen?.Dimmed == true;
-
     /// <summary>A host view, read at <paramref name="now"/> on the TV's clock.</summary>
     public StoryTick Receive(TacticsHostView view, DateTimeOffset now)
     {
