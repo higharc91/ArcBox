@@ -125,7 +125,10 @@ public sealed record MoveStep(UnitId Unit, Tile From, Tile To, Tile LastFree, bo
     private bool Final(BattleWriter w) => !w.State.Queue.Any(s => s is MoveStep step && step.Unit == Unit);
 
     /// <summary>
-    /// Stops the walk here: called on its next step, whose <see cref="LastFree"/> is the tile to fall back to.
+    /// Stops the walk here: called on its next step, whose <see cref="LastFree"/> is the tile to fall back to. If a unit has arrived on
+    /// <see cref="LastFree"/> since the walker left it (a trigger's spawn, a summon), the walker steps instead to the free walkable tile
+    /// nearest it (<see cref="Summons.FreeTile"/>: by distance, ties in <see cref="Tile"/> order), so no two units share a tile (the
+    /// user's decision 8, 2026-11-01). With no free tile on the map at all it falls back to <see cref="LastFree"/> as before.
     /// </summary>
     internal void Halt(BattleWriter w)
     {
@@ -134,7 +137,8 @@ public sealed record MoveStep(UnitId Unit, Tile From, Tile To, Tile LastFree, bo
         var unit = w.Unit(Unit);
         if (!DownedRules.InBattle(unit) || unit.Pos == LastFree || !Movement.Shared(w, unit.Pos, Unit))
             return;
-        w.Set(unit with { Pos = LastFree });
-        w.Emit(new Moved(Unit, [unit.Pos, LastFree]));
+        var back = Movement.Shared(w, LastFree, Unit) ? Summons.FreeTile(w, LastFree, mapZone: null) ?? LastFree : LastFree;
+        w.Set(unit with { Pos = back });
+        w.Emit(new Moved(Unit, [unit.Pos, back]));
     }
 }
