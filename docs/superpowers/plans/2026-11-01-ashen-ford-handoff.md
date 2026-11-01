@@ -33,13 +33,19 @@ Expect 0 warnings and no failures, with the exception of `A_rebuild_on_the_large
 - Dusk light for the region and fights at the ford, and a region-level ground grade.
 - Terrain repainted by place, and Emberwick, fields, road, burned ground, ford, docks, hills and Maud's hut built by hand in `AshenFordDraft`.
 - Story walk times hold (start to ford about 42 s), and both story branches walk.
+- Ground edges blend through 16 baked dither masks, world only. Rough stone replaces the slabs on the hills, the road is a narrow track with a verge, the camp is tight round its fire, the frost is duller and the woods are denser.
+- The ford has a broken `bridge_u` stub, causeways and pickets. **A true bridge means changing the battle map, which is the user's call.**
+- 50 people stand in the region, with loader checks, and the overlay has a grid index. `PersonMarker` round-trips through the scene.
 
-<!-- STATUS -->
+**State at handoff:** 5,044 of 5,044 tests pass, and the tree is clean. Measured in Debug with no shots at 1920×1080: a region crossing had 0 of 3,794 frames over 16 ms, p99 7.29, 4,136 draw calls. A town walk had 0 of 3,379, p99 8.44, overlay median 3.87 and p99 6.14. Texture memory rose to 104 MB from 43 MB, mostly character sheets, so check that on a modest box.
+
+**Nobody has looked at the latest state on the TV.** The `place-*.png` shots are from before the items above, and no e2e run has happened since the ground and people work.
 
 ## What's left, in order
 
-1. **Finish anything marked unfinished above.** It's the list A to J: ground edges, rock, road, ford, camp, hills, woods, people, workspace markers, the whole walk and e2e runs.
-2. **Put the new props in.** The chosen sprites are in `docs/superpowers/reports/2026-10-31-tactics-overworld/new-props/`, with `tent_hide_source_1024.png` as the tent's full-size source. The user approved them. The comparison sheet is `art-props-compare.png` beside that folder. They're opaque-or-clear sprites, generated with Scenario.
+1. **Look first.** Replace `place-*.png`, and add `place-square-with-people.png`. Then run all five `tv-e2e` modes and an `ARCBOX_SHOTS=0` walk. Battle draw calls haven't been re-measured either. People during an in-place fight are unverified on the TV: `WalkShow` keeps them when the party is hidden, and the fade uses walkers only. Put people in the picture sweep.
+2. **Finish the workspace:** the `BuildingMarker` footprint outline, snapping, and a Props, Buildings and People section in `tools/tactics-world/README.md`. Add people and the final numbers to `docs/tv-host.md`.
+3. **Put the new props in.** The chosen sprites are in `docs/superpowers/reports/2026-10-31-tactics-overworld/new-props/`, with `tent_hide_source_1024.png` as the tent's full-size source. The user approved them. The comparison sheet is `art-props-compare.png` beside that folder. They're generated with Scenario, and their alpha is only 0 or 255.
    - Move them into `content/tactics/base/props/`, and update `props/manifest.json`: `size`, `anchor` (the ground contact pixel) and `height`. The old sizes are much smaller.
    - `tent_hide.png` (96×89) is a new `hide` variant of `tent`. Keep `canvas` and `red`. Use it at the goblin camp.
    - `haystack`, `sack`, `stump`, `log`, `signpost` replace their old art. Check each prop's variants in the manifest first.
@@ -48,7 +54,7 @@ Expect 0 warnings and no failures, with the exception of `A_rebuild_on_the_large
    - `lantern_iron.png` is a **new prop**, not a replacement: the old `lantern` is an 8-frame animated stone lantern. Add it with light data, and use it at the docks and market. Its base is off-centre, so set the anchor under the base.
    - Rebuild the palette (`tools/tactics-world/palette/props.*`) with the workspace's tools, then re-export, and check the export is byte-identical on a second run.
    - The prop's size may shift footprints and sorting. Sweep `OverlayPictureTests`, and look on the TV.
-3. **Walk the whole region on the real TV** and compare with mockup 02. Fix what's wrong. Be harsh: for each place ask whether someone would name it without being told.
+4. **Walk the whole region on the real TV** and compare with mockup 02. Fix what's wrong. Be harsh: for each place ask whether someone would name it without being told.
 
 ## If there's time
 
@@ -58,7 +64,8 @@ Expect 0 warnings and no failures, with the exception of `A_rebuild_on_the_large
 ## Rules that bind you
 
 - Don't change game rules, balance numbers or the server-to-phone contract. If you think you must, stop and ask.
-- No new generated art without asking: Scenario spends the user's credits. `docs` holds no key; the method is in the note below.
+- No new generated art without asking: Scenario spends the user's credits. The method is below.
+- Regenerating the region means deleting the scene, then `--draft`, `--dress`, `--export`. That wipes any hand painting, so check `git log` on the scene first, and never do it once the user has painted.
 - Read frames, sizes, anchors and variants from manifests. Never hard-code them.
 - Anything worded, ordered or computed is pure C# with tests, shown failing first. Godot classes only draw.
 - Keep the `river_crossing` stamp's tiles, the ford as the only river crossing, both story branches, and start to ford at 35 to 50 s. Don't weaken a check to pass it, and say so if you change a threshold.
