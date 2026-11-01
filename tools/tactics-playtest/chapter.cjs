@@ -169,8 +169,8 @@ function shots(file, display, dir) {
         once(`scene ${scene}`, scene, 1800);
         if (m[4] === 'asking') once(`ask ${scene} ${m[2]}`, `${scene}-question`, 2500);
       }
-      // the roll's verdict, as its die lands
-      if (line === 'AUDIO Sfx ui_confirm' || line === 'AUDIO Sfx ui_error') once(`roll ${scene} ${n}`, `${scene}-roll`, 600);
+      // the roll's verdict, as its die lands: one shot a scene, as other confirms and errors sound the same
+      if (line === 'AUDIO Sfx ui_confirm' || line === 'AUDIO Sfx ui_error') once(`roll ${scene}`, `${scene}-roll`, 600);
       if (/^TACTICS screen tactics-battle-/.test(line)) once(`fight ${fights}`, `fight-${fights + 1}`, 9000);
       if (line === 'TACTICS screen tactics-results' && !seen.has(`results ${fights}`)) {
         once(`results ${fights}`, `results-${fights + 1}`, 2500);
