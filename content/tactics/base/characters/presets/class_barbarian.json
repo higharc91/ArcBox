@@ -1,0 +1,39 @@
+{
+  "id": "class_barbarian",
+  "name": "Barbarian",
+  "race": "goliath",
+  "class": "barbarian",
+  "build": "large",
+  "layers": {
+    "body": "human",
+    "torso": "harness",
+    "legs": "kilt",
+    "feet": "boots",
+    "hands": "wraps",
+    "weapon": "greataxe",
+    "cape": "pelt",
+    "marks": "warpaint",
+    "beard": "braided"
+  },
+  "palette": {
+    "eyes": "eyes/blue",
+    "leather": "leather/dark",
+    "wood": "wood/oak",
+    "metal": "metal/steel",
+    "trim": "metal/gold",
+    "magic": "magic/arcane",
+    "horn": "horn/ivory",
+    "hair": "hair/brown",
+    "cloth1": "leather/tan",
+    "cloth2": "cloth/rust",
+    "skin": "skin/stone_grey",
+    "paint": "paint/woad",
+    "blade": "metal/steel"
+  },
+  "tags": [
+    "goliath",
+    "barbarian",
+    "class"
+  ],
+  "sheet": "presets/class_barbarian.png"
+}

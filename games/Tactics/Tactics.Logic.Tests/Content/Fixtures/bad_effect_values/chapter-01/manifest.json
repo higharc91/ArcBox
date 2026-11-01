@@ -1,0 +1,1 @@
+{ "id": "chapter-01", "rulesVersion": 1, "requires": ["base"], "files": ["abilities/chapter.json"] }

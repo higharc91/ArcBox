@@ -1,0 +1,16 @@
+{ "id": "forest_ruins", "size": [14, 12],
+  "tiles": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQEAAQEAAQEAAQEAAQEAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQEAAQEAAQEAAQEAAQEAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQEAAQEAAQEAAQEAAQEAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQEAAQEAAQEAAQEAAQEAAQEAAAAAAAAAAAAAAAAAAAAAAAIAAAIAAAIAAAIAAAIAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAIAAAIAAAIAAAIAAAIAAAAAAAAAAAAAAAAAAAMAAAMAAAMAAAMAAAIAAAIAAAIAAAIAAAIAAAIAAAAAAAAAAAAAAAAAAAMAAAMAAAMAAAMAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAMAAAMAAAMAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAMAAAMAAAMAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+  "materials": ["grass/lush", "flagstone/mossy", "cobble/grey", "dirt/dark"],
+  "props": [
+    { "id": "pillar", "at": [7, 2], "blocks": true, "cover": "three_quarters" },
+    { "id": "pillar_broken", "at": [12, 2], "blocks": true, "cover": "half" },
+    { "id": "pillar_broken", "at": [7, 5], "blocks": true, "cover": "half" },
+    { "id": "rubble", "at": [5, 7], "blocks": false, "cover": "half" },
+    { "id": "rock_mossy", "at": [9, 9], "blocks": true, "cover": "three_quarters" }
+  ],
+  "zones": {
+    "party_spawn": [[1, 9], [2, 9], [1, 10], [2, 10], [3, 10], [2, 11]],
+    "ruin_courtyard": [[8, 3], [9, 3], [8, 4], [9, 4], [10, 4], [10, 5]],
+    "wolf_den": [[10, 7], [11, 7], [10, 8], [11, 8]],
+    "exit": [[13, 5], [13, 6]]
+  } }

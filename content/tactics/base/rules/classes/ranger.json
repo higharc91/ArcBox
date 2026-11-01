@@ -1,0 +1,70 @@
+{
+  "id": "ranger", "name": "Ranger", "role": "striker", "hitDie": 10, "saves": ["str", "dex"],
+  "armorProf": ["light", "medium", "shield"], "weaponProf": ["simple", "martial"],
+  "skillChoices": { "count": 3, "from": ["perception", "stealth", "survival", "animal_handling", "athletics", "insight", "investigation",
+                                         "nature"] },
+  "startingKit": { "weapon": "longbow", "armor": "studded_leather", "shield": false,
+                   "bag": [ { "item": "potion_of_healing", "count": 1 } ] },
+  "resources": { "focus": { "1": 1, "3": 2, "4": 3, "6": 4, "8": 5 } },
+  "primaryResource": "focus",
+  "features": {
+    "1": [ { "ability": "ranger.hunters_mark" }, { "passive": "ranger.hunters_mark_bonus" },
+           { "choose": 2, "from": ["ranger.cure_wounds", "ranger.ensnaring_strike", "ranger.entangle", "ranger.hail_of_thorns"] } ],
+    "2": [ { "passive": "ranger.archery" } ],
+    "3": [ { "choose": 1, "from": ["ranger.cure_wounds", "ranger.ensnaring_strike", "ranger.entangle", "ranger.hail_of_thorns"] } ],
+    "4": [ { "choose": 1, "from": ["ranger.cure_wounds", "ranger.ensnaring_strike", "ranger.entangle", "ranger.hail_of_thorns"] } ],
+    "5": [ { "attacks": 2 },
+           { "choose": 1, "from": ["ranger.cure_wounds", "ranger.ensnaring_strike", "ranger.entangle", "ranger.hail_of_thorns",
+                                   "ranger.spike_growth", "ranger.barkskin", "ranger.lesser_restoration"] } ],
+    "6": [ { "passive": "ranger.roving" } ],
+    "7": [ { "choose": 1, "from": ["ranger.cure_wounds", "ranger.ensnaring_strike", "ranger.entangle", "ranger.hail_of_thorns",
+                                   "ranger.spike_growth", "ranger.barkskin", "ranger.lesser_restoration"] } ],
+    "8": [ { "choose": 1, "from": ["ranger.cure_wounds", "ranger.ensnaring_strike", "ranger.entangle", "ranger.hail_of_thorns",
+                                   "ranger.spike_growth", "ranger.barkskin", "ranger.lesser_restoration"] } ],
+    "9": [ { "choose": 1, "from": ["ranger.cure_wounds", "ranger.ensnaring_strike", "ranger.entangle", "ranger.hail_of_thorns",
+                                   "ranger.spike_growth", "ranger.barkskin", "ranger.lesser_restoration", "ranger.lightning_arrow",
+                                   "ranger.conjure_barrage"] } ],
+    "10": [ { "ability": "ranger.vanish" },
+            { "choose": 1, "from": ["ranger.cure_wounds", "ranger.ensnaring_strike", "ranger.entangle", "ranger.hail_of_thorns",
+                                    "ranger.spike_growth", "ranger.barkskin", "ranger.lesser_restoration", "ranger.lightning_arrow",
+                                    "ranger.conjure_barrage"] } ]
+  },
+  "subclasses": [
+    { "id": "ranger.sharpshooter", "name": "Sharpshooter",
+      "features": {
+        "3": [ { "ability": "sharpshooter.deadeye" }, { "passive": "sharpshooter.high_ground_mastery" } ],
+        "6": [ { "ability": "sharpshooter.piercing_shot" } ],
+        "10": [ { "ability": "sharpshooter.volley" } ]
+      } },
+    { "id": "ranger.beastmaster", "name": "Beastmaster", "companion": "hound",
+      "features": {
+        "3": [ { "passive": "beastmaster.companion" }, { "ability": "beastmaster.sic" } ],
+        "6": [ { "ability": "beastmaster.pack_bond" } ],
+        "10": [ { "ability": "beastmaster.alpha_howl" }, { "passive": "beastmaster.ferocious_bond" } ]
+      } },
+    { "id": "ranger.warden", "name": "Warden",
+      "features": {
+        "3": [ { "ability": "warden.vine_snare" }, { "passive": "warden.tough_bark" } ],
+        "6": [ { "ability": "warden.natures_veil" } ],
+        "10": [ { "ability": "warden.guardian_tree" } ]
+      } }
+  ],
+  "defaultPicks": {
+    "1": ["ranger.hail_of_thorns", "ranger.ensnaring_strike"],
+    "2": ["ranger.hail_of_thorns", "ranger.ensnaring_strike"],
+    "3": ["ranger.hail_of_thorns", "ranger.ensnaring_strike", "ranger.entangle"],
+    "4": ["ranger.hail_of_thorns", "ranger.ensnaring_strike", "ranger.entangle", "ranger.cure_wounds"],
+    "5": ["ranger.hail_of_thorns", "ranger.ensnaring_strike", "ranger.entangle", "ranger.cure_wounds", "ranger.spike_growth"],
+    "6": ["ranger.hail_of_thorns", "ranger.ensnaring_strike", "ranger.entangle", "ranger.cure_wounds", "ranger.spike_growth"],
+    "7": ["ranger.hail_of_thorns", "ranger.ensnaring_strike", "ranger.entangle", "ranger.cure_wounds", "ranger.spike_growth",
+          "ranger.barkskin"],
+    "8": ["ranger.hail_of_thorns", "ranger.ensnaring_strike", "ranger.entangle", "ranger.cure_wounds", "ranger.spike_growth",
+          "ranger.barkskin", "ranger.lesser_restoration"],
+    "9": ["ranger.hail_of_thorns", "ranger.ensnaring_strike", "ranger.entangle", "ranger.cure_wounds", "ranger.spike_growth",
+          "ranger.barkskin", "ranger.lesser_restoration", "ranger.lightning_arrow"],
+    "10": ["ranger.hail_of_thorns", "ranger.ensnaring_strike", "ranger.entangle", "ranger.cure_wounds", "ranger.spike_growth",
+           "ranger.barkskin", "ranger.lesser_restoration", "ranger.lightning_arrow", "ranger.conjure_barrage"]
+  },
+  "aiTags": { "tags": ["striker", "ranged", "back"], "priority": ["dex", "wis", "con", "str", "int", "cha"] },
+  "castingStat": "wis"
+}

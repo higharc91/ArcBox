@@ -1,0 +1,20 @@
+[
+  { "id": "human", "name": "Human", "size": "medium", "move": 4, "resist": [], "passives": ["human.resourceful"], "extraSkills": 1 },
+  { "id": "elf", "name": "Elf", "size": "medium", "move": 4, "darkvision": 6, "resist": [], "passives": ["elf.fey_ancestry"],
+    "ability": "elf.fey_step" },
+  { "id": "half_elf", "name": "Half-Elf", "size": "medium", "move": 4, "darkvision": 6, "resist": [], "passives": ["elf.fey_ancestry"],
+    "extraSkills": 1 },
+  { "id": "dwarf", "name": "Dwarf", "size": "medium", "move": 3, "darkvision": 12, "resist": ["poison"], "passives": [],
+    "ability": "dwarf.stoneskin" },
+  { "id": "halfling", "name": "Halfling", "size": "small", "move": 3, "resist": [], "passives": ["halfling.lucky"] },
+  { "id": "gnome", "name": "Gnome", "size": "small", "move": 3, "darkvision": 6, "resist": [], "passives": ["gnome.cunning"] },
+  { "id": "half_orc", "name": "Half-Orc", "size": "medium", "move": 4, "darkvision": 6, "resist": [],
+    "passives": ["half_orc.relentless_endurance"] },
+  { "id": "tiefling", "name": "Tiefling", "size": "medium", "move": 4, "darkvision": 6, "resist": ["fire"], "passives": [],
+    "ability": "tiefling.hellish_rebuke" },
+  { "id": "aasimar", "name": "Aasimar", "size": "medium", "move": 4, "darkvision": 6, "resist": ["necrotic", "radiant"], "passives": [],
+    "ability": "aasimar.healing_hands" },
+  { "id": "goliath", "name": "Goliath", "size": "medium", "move": 4, "resist": [], "passives": [], "ability": "goliath.stones_endurance" },
+  { "id": "dragonborn", "name": "Dragonborn", "size": "medium", "move": 4, "darkvision": 6, "resist": ["fire"], "passives": [],
+    "ability": "dragonborn.breath_weapon" }
+]

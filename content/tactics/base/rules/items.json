@@ -1,0 +1,6 @@
+[
+  { "id": "potion_of_healing", "name": "Potion of Healing", "use": "item.potion_of_healing", "tags": ["healing", "potion"] },
+  { "id": "greater_healing", "name": "Potion of Greater Healing", "use": "item.greater_healing", "tags": ["healing", "potion"] },
+  { "id": "alchemists_fire", "name": "Alchemist's Fire", "use": "item.alchemists_fire", "tags": ["damage", "thrown"] },
+  { "id": "smoke_bomb", "name": "Smoke Bomb", "use": "item.smoke_bomb", "tags": ["obscure", "thrown"] }
+]

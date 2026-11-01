@@ -1,0 +1,20 @@
+[
+  { "id": "brute", "damage": 1.0, "kill": 1.5, "control": 0.15, "heal": 0.3, "revive": 0.5, "caution": 0.05, "focusFire": 0.5,
+    "objective": 1.0, "hoard": 0.2 },
+  { "id": "skirmisher", "damage": 1.0, "kill": 1.5, "control": 0.2, "heal": 0.3, "revive": 0.5, "caution": 0.1, "focusFire": 1.0,
+    "objective": 1.0, "hoard": 0.3 },
+  { "id": "archer", "damage": 1.0, "kill": 1.2, "control": 0.2, "heal": 0.3, "revive": 0.5, "caution": 0.2, "focusFire": 1.0,
+    "objective": 1.0, "hoard": 0.3 },
+  { "id": "caster", "damage": 1.0, "kill": 1.2, "control": 1.2, "heal": 0.6, "revive": 1.0, "caution": 0.25, "focusFire": 0.8,
+    "objective": 1.0, "hoard": 0.5 },
+  { "id": "healer", "damage": 0.5, "kill": 0.6, "control": 0.3, "heal": 2.0, "revive": 3.0, "caution": 0.2, "focusFire": 0.5,
+    "objective": 1.0, "hoard": 0.4 },
+  { "id": "coward", "damage": 0.8, "kill": 1.0, "control": 0.2, "heal": 0.5, "revive": 0.5, "caution": 0.6, "focusFire": 0.5,
+    "objective": 0.5, "hoard": 0.3, "fleeBelowHp": 0.3 },
+  { "id": "boss", "damage": 1.2, "kill": 1.5, "control": 1.0, "heal": 0.6, "revive": 1.0, "caution": 0.1, "focusFire": 1.2,
+    "objective": 1.5, "hoard": 0.2 },
+  { "id": "boss_cruel", "damage": 1.2, "kill": 1.5, "control": 1.0, "heal": 0.6, "revive": 1.0, "caution": 0.1, "focusFire": 1.2,
+    "objective": 1.5, "hoard": 0.2, "cruel": true },
+  { "id": "companion", "damage": 1.0, "kill": 1.2, "control": 0.8, "heal": 1.5, "revive": 4.0, "caution": 0.6, "focusFire": 0.8,
+    "objective": 1.5, "hoard": 0.0 }
+]

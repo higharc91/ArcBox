@@ -15,7 +15,9 @@
       "bard",
       "druid",
       "warlock",
-      "monk"
+      "monk",
+      "barbarian",
+      "sorcerer"
     ]
   },
   "subclasses": {
@@ -202,6 +204,42 @@
       "iron_body": [
         44,
         198,
+        22,
+        22
+      ],
+      "berserker": [
+        0,
+        220,
+        22,
+        22
+      ],
+      "earthshaker": [
+        22,
+        220,
+        22,
+        22
+      ],
+      "spiritwarden": [
+        44,
+        220,
+        22,
+        22
+      ],
+      "draconic": [
+        0,
+        242,
+        22,
+        22
+      ],
+      "chaos": [
+        22,
+        242,
+        22,
+        22
+      ],
+      "runeborn": [
+        44,
+        242,
         22,
         22
       ]

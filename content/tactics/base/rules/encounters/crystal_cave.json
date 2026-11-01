@@ -1,0 +1,6 @@
+{ "id": "crystal_cave", "name": "Crystal Cave", "map": "crystal_cave", "level": 7, "party": { "min": 4, "max": 6 },
+  "enemies": [ { "unit": "giant_spider", "zone": "spider_nest", "count": 3, "level": 7, "variant": "red" },
+               { "unit": "kobold_slinger", "zone": "crystal_ridge", "count": 4, "level": 7 },
+               { "unit": "kobold", "zone": "chasm_ledge", "count": 3, "level": 7, "aiProfile": "skirmisher" } ],
+  "xp": 1200, "loot": ["crystal_hoard"],
+  "objectives": { "win": "defeat_all" } }

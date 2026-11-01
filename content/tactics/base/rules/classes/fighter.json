@@ -1,0 +1,69 @@
+{
+  "id": "fighter", "name": "Fighter", "role": "defender", "hitDie": 10, "saves": ["str", "con"],
+  "armorProf": ["light", "medium", "heavy", "shield"], "weaponProf": ["simple", "martial"],
+  "skillChoices": { "count": 2, "from": ["athletics", "perception", "intimidation", "acrobatics", "animal_handling", "history",
+                                         "insight", "persuasion", "survival"] },
+  "startingKit": { "weapon": "longsword", "armor": "chain_mail", "shield": true,
+                   "bag": [ { "item": "potion_of_healing", "count": 1 } ] },
+  "resources": { "superiority": { "1": 2, "7": 3, "10": 5 }, "second_wind": { "1": 2 } },
+  "primaryResource": "superiority",
+  "features": {
+    "1": [ { "choose": 1, "from": ["fighter.style_defense", "fighter.style_dueling", "fighter.style_great_weapon"] },
+           { "ability": "fighter.second_wind" },
+           { "choose": 2, "from": ["fighter.trip_attack", "fighter.pushing_attack", "fighter.menacing_attack", "fighter.precision_attack",
+                                   "fighter.goading_attack", "fighter.rally", "fighter.feinting_attack"] } ],
+    "2": [ { "ability": "fighter.action_surge" } ],
+    "3": [ { "choose": 1, "from": ["fighter.trip_attack", "fighter.pushing_attack", "fighter.menacing_attack", "fighter.precision_attack",
+                                   "fighter.goading_attack", "fighter.rally", "fighter.feinting_attack"] } ],
+    "4": [ { "choose": 1, "from": ["fighter.trip_attack", "fighter.pushing_attack", "fighter.menacing_attack", "fighter.precision_attack",
+                                   "fighter.goading_attack", "fighter.rally", "fighter.feinting_attack"] } ],
+    "5": [ { "attacks": 2 } ],
+    "6": [ { "choose": 1, "from": ["fighter.trip_attack", "fighter.pushing_attack", "fighter.menacing_attack", "fighter.precision_attack",
+                                   "fighter.goading_attack", "fighter.rally", "fighter.feinting_attack"] } ],
+    "7": [ { "passive": "fighter.studied_attacks" } ],
+    "8": [ { "choose": 1, "from": ["fighter.trip_attack", "fighter.pushing_attack", "fighter.menacing_attack", "fighter.precision_attack",
+                                   "fighter.goading_attack", "fighter.rally", "fighter.feinting_attack"] } ],
+    "9": [ { "passive": "fighter.indomitable" } ],
+    "10": [ { "choose": 1, "from": ["fighter.trip_attack", "fighter.pushing_attack", "fighter.menacing_attack", "fighter.precision_attack",
+                                    "fighter.goading_attack", "fighter.rally", "fighter.feinting_attack"] } ]
+  },
+  "subclasses": [
+    { "id": "fighter.vanguard", "name": "Vanguard",
+      "features": {
+        "3": [ { "ability": "vanguard.charge" }, { "ability": "vanguard.challenge" } ],
+        "6": [ { "ability": "vanguard.shield_wall" }, { "passive": "vanguard.hold_the_line" } ],
+        "10": [ { "ability": "vanguard.mass_challenge" }, { "passive": "vanguard.unbreakable" } ]
+      } },
+    { "id": "fighter.weaponmaster", "name": "Weaponmaster",
+      "features": {
+        "3": [ { "ability": "weaponmaster.cleave" }, { "passive": "weaponmaster.keen_edge" } ],
+        "6": [ { "ability": "weaponmaster.blade_dance" }, { "passive": "weaponmaster.relentless" } ],
+        "10": [ { "ability": "weaponmaster.execution_strike" }, { "passive": "weaponmaster.master_of_arms" } ]
+      } },
+    { "id": "fighter.warlord", "name": "Warlord",
+      "features": {
+        "3": [ { "ability": "warlord.commanders_strike" }, { "ability": "warlord.maneuvering_order" } ],
+        "6": [ { "ability": "warlord.rallying_cry" }, { "passive": "warlord.inspiring_presence" } ],
+        "10": [ { "ability": "warlord.to_arms" }, { "passive": "warlord.tactical_genius" } ]
+      } }
+  ],
+  "defaultPicks": {
+    "1": ["fighter.style_defense", "fighter.trip_attack", "fighter.precision_attack"],
+    "2": ["fighter.style_defense", "fighter.trip_attack", "fighter.precision_attack"],
+    "3": ["fighter.style_defense", "fighter.trip_attack", "fighter.precision_attack", "fighter.goading_attack"],
+    "4": ["fighter.style_defense", "fighter.trip_attack", "fighter.precision_attack", "fighter.goading_attack", "fighter.rally"],
+    "5": ["fighter.style_defense", "fighter.trip_attack", "fighter.precision_attack", "fighter.goading_attack", "fighter.rally"],
+    "6": ["fighter.style_defense", "fighter.trip_attack", "fighter.precision_attack", "fighter.goading_attack", "fighter.rally",
+          "fighter.pushing_attack"],
+    "7": ["fighter.style_defense", "fighter.trip_attack", "fighter.precision_attack", "fighter.goading_attack", "fighter.rally",
+          "fighter.pushing_attack"],
+    "8": ["fighter.style_defense", "fighter.trip_attack", "fighter.precision_attack", "fighter.goading_attack", "fighter.rally",
+          "fighter.pushing_attack", "fighter.menacing_attack"],
+    "9": ["fighter.style_defense", "fighter.trip_attack", "fighter.precision_attack", "fighter.goading_attack", "fighter.rally",
+          "fighter.pushing_attack", "fighter.menacing_attack"],
+    "10": ["fighter.style_defense", "fighter.trip_attack", "fighter.precision_attack", "fighter.goading_attack", "fighter.rally",
+           "fighter.pushing_attack", "fighter.menacing_attack", "fighter.feinting_attack"]
+  },
+  "aiTags": { "tags": ["defender", "melee", "front"], "priority": ["str", "con", "dex", "wis", "cha", "int"] },
+  "castingStat": null
+}

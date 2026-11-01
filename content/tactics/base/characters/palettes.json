@@ -708,6 +708,30 @@
         "#8fe04a",
         "#b7ef67",
         "#dbfe87"
+      ],
+      "spirit": [
+        "#409096",
+        "#51adab",
+        "#66c8bc",
+        "#7fe8d0",
+        "#97f5d7",
+        "#aeffde"
+      ],
+      "rune": [
+        "#12637a",
+        "#1a8590",
+        "#26aaa7",
+        "#35c9b4",
+        "#52dcba",
+        "#74efc3"
+      ],
+      "wild": [
+        "#70268c",
+        "#9533a5",
+        "#c344c2",
+        "#e65ad2",
+        "#f476d2",
+        "#ff92d4"
       ]
     },
     "eyes": {
@@ -1417,6 +1441,36 @@
       "paint": "paint/woad",
       "blade": "metal/steel"
     },
+    "class_barbarian": {
+      "eyes": "eyes/blue",
+      "leather": "leather/dark",
+      "wood": "wood/oak",
+      "metal": "metal/steel",
+      "trim": "metal/gold",
+      "magic": "magic/arcane",
+      "horn": "horn/ivory",
+      "hair": "hair/brown",
+      "cloth1": "leather/tan",
+      "cloth2": "cloth/rust",
+      "skin": "skin/stone_grey",
+      "paint": "paint/woad",
+      "blade": "metal/steel"
+    },
+    "class_sorcerer": {
+      "eyes": "eyes/radiant",
+      "leather": "leather/brown",
+      "wood": "wood/oak",
+      "metal": "metal/steel",
+      "trim": "metal/gold",
+      "magic": "magic/wild",
+      "horn": "horn/ivory",
+      "hair": "hair/violet",
+      "cloth1": "cloth/royal_purple",
+      "cloth2": "cloth/ochre",
+      "skin": "skin/celestial_silver",
+      "paint": "paint/woad",
+      "blade": "metal/steel"
+    },
     "goblin_cutthroat": {
       "eyes": "eyes/gold",
       "leather": "leather/brown",
@@ -1971,6 +2025,8 @@
     "class_druid",
     "class_warlock",
     "class_monk",
+    "class_barbarian",
+    "class_sorcerer",
     "goblin_cutthroat",
     "goblin_spear",
     "goblin_shaman",

@@ -1,0 +1,12 @@
+[
+  { "id": "cracked_ribs", "name": "Cracked ribs", "weight": 3, "static": { "maxHp": -5 } },
+  { "id": "sprained_ankle", "name": "Sprained ankle", "weight": 3, "static": { "move": -1 } },
+  { "id": "concussion", "name": "Concussion", "weight": 2, "static": { "saves": { "int": -1, "wis": -1 } } },
+  { "id": "deep_cut", "name": "Deep cut", "weight": 2, "static": {},
+    "hook": "onBattleStart", "effects": [ { "apply": "bleeding", "rounds": 0 } ] },
+  { "id": "wrenched_shoulder", "name": "Wrenched shoulder", "weight": 2, "static": { "attack": -1 } },
+  { "id": "black_eye", "name": "Black eye", "weight": 3, "static": {} },
+  { "id": "bruised_pride", "name": "Bruised pride", "weight": 3, "static": { "initiative": -1 } },
+  { "id": "shaken", "name": "Shaken", "weight": 2, "static": {},
+    "hook": "onBattleStart", "effects": [ { "apply": "frightened", "rounds": 0 } ] }
+]

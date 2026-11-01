@@ -1,0 +1,8 @@
+[
+  { "id": "wolf", "name": "Wolf", "cr": "1/4", "xp": 50, "level": 1,
+    "scores": { "str": 12, "dex": 15, "con": 12, "int": 3, "wis": 12, "cha": 6 }, "hp": 11, "ac": 13,
+    "weapon": { "id": "bite", "damage": "2d4+2", "damageType": "piercing", "stat": "str", "finesse": false, "ranged": false,
+                "range": 1, "reach": false, "tags": [] },
+    "abilities": ["test.strike"], "passives": [], "tags": ["beast"],
+    "aiProfile": "brute", "sprite": "beasts.wolf.grey" }
+]

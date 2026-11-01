@@ -1,0 +1,14 @@
+[
+  { "id": "padded", "name": "Padded armour", "kind": "Light", "baseAc": 11 },
+  { "id": "leather", "name": "Leather armour", "kind": "Light", "baseAc": 11 },
+  { "id": "studded_leather", "name": "Studded leather", "kind": "Light", "baseAc": 12 },
+  { "id": "hide", "name": "Hide armour", "kind": "Medium", "baseAc": 12 },
+  { "id": "chain_shirt", "name": "Chain shirt", "kind": "Medium", "baseAc": 13 },
+  { "id": "scale_mail", "name": "Scale mail", "kind": "Medium", "baseAc": 14 },
+  { "id": "breastplate", "name": "Breastplate", "kind": "Medium", "baseAc": 14 },
+  { "id": "half_plate", "name": "Half plate", "kind": "Medium", "baseAc": 15 },
+  { "id": "ring_mail", "name": "Ring mail", "kind": "Heavy", "baseAc": 14 },
+  { "id": "chain_mail", "name": "Chain mail", "kind": "Heavy", "baseAc": 16 },
+  { "id": "splint", "name": "Splint armour", "kind": "Heavy", "baseAc": 17 },
+  { "id": "plate", "name": "Plate armour", "kind": "Heavy", "baseAc": 18 }
+]

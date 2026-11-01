@@ -1,0 +1,12 @@
+{ "id": "field_skirmish", "name": "Skirmish in the field", "map": "field", "party": { "min": 1, "max": 4 },
+  "enemies": [ { "unit": "wolf", "zone": "enemy_spawn", "count": 2, "tag": "pack" },
+               { "unit": "wolf", "at": [4, 4], "aiProfile": "brute" } ],
+  "xp": 250, "loot": ["common"],
+  "objectives": { "win": { "any": ["defeat_all", "reach:exit:1"] } },
+  "triggers": [
+    { "id": "howl", "when": { "any": [ { "round": 3 }, { "hpBelow": { "tag": "pack", "percent": 50 } } ] },
+      "do": [ { "say": { "speaker": "pack", "line": "The pack howls." } },
+              { "spawn": { "unit": "wolf", "at": "enemy_spawn", "count": 1, "tag": "late" } } ] },
+    { "id": "late_falls", "when": { "unitDies": { "tag": "late" } }, "once": false,
+      "do": [ { "setObjective": { "win": "defeat:pack" } } ] }
+  ] }

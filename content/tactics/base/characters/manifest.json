@@ -323,6 +323,7 @@
     ],
     "legs": [
       "greaves",
+      "kilt",
       "pants",
       "shorts",
       "skirt"
@@ -337,13 +338,17 @@
       "chain",
       "coat",
       "doublet",
+      "drake_robe",
       "dress",
       "gi",
+      "harness",
       "leather",
+      "motley_robe",
       "plate",
       "rags",
       "robe",
       "scale",
+      "silk_robe",
       "tabard",
       "tunic",
       "vest",
@@ -373,6 +378,8 @@
     ],
     "marks": [
       "freckles",
+      "runes",
+      "scales",
       "scar",
       "stripes",
       "tattoo",
@@ -404,7 +411,8 @@
       "open_helm",
       "straw_hat",
       "winged_helm",
-      "wizard_hat"
+      "wizard_hat",
+      "wolf_pelt"
     ],
     "weapon": [
       "axe",
@@ -414,6 +422,7 @@
       "crystal_staff",
       "dagger",
       "flail",
+      "greataxe",
       "greatsword",
       "halberd",
       "holy_staff",
@@ -422,43 +431,58 @@
       "lute",
       "lyre",
       "mace",
+      "maul",
       "pitchfork",
       "quarterstaff",
       "rapier",
+      "rune_staff",
       "scimitar",
       "scroll",
       "smith_hammer",
       "spear",
+      "spellfire",
       "staff",
       "storm_staff",
       "sword",
       "tankard",
       "tome",
       "wand",
-      "warhammer"
+      "warhammer",
+      "wild_motes"
     ],
     "hands": [
       "bare",
       "gauntlets",
       "gloves",
+      "rune_marked",
       "wraps"
+    ],
+    "shoulders": [
+      "drake_pauldrons",
+      "rune_stones"
+    ],
+    "float": [
+      "chaos_orb"
     ],
     "offhand": [
       "blade",
       "bomb",
       "buckler",
       "dagger",
+      "hand_axe",
       "kite_shield",
       "lantern",
       "main_gauche",
       "orb",
       "round_shield",
+      "spirit_totem",
       "tower_shield",
       "war_horn"
     ]
   },
   "order": {
     "front": [
+      "float",
       "tail",
       "cape",
       "body",
@@ -468,6 +492,7 @@
       "torso",
       "beard",
       "hair",
+      "shoulders",
       "headgear",
       "horns",
       "weapon",
@@ -475,6 +500,7 @@
       "offhand"
     ],
     "back": [
+      "float",
       "offhand",
       "body",
       "marks",
@@ -487,6 +513,7 @@
       "cape",
       "beard",
       "hair",
+      "shoulders",
       "headgear",
       "horns"
     ]
@@ -519,6 +546,8 @@
     "class_druid",
     "class_warlock",
     "class_monk",
+    "class_barbarian",
+    "class_sorcerer",
     "goblin_cutthroat",
     "goblin_spear",
     "goblin_shaman",

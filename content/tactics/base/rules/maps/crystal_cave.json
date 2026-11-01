@@ -1,0 +1,16 @@
+{ "id": "crystal_cave", "size": [14, 12],
+  "tiles": "AgAAAgAAAgAAAgAAAgAAAAMQAAMQAAMQAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAAMQAAMQAAMQAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgIAAgIAAgAAAgAAAgAAAgAAAgAAAgAAAwAAAwAAAwAAAgAAAgAAAgAAAgIAAgIAAgAAAgAAAgAAAgAAAgAAAgAAAwAAAwAAAwAAAgAAAgAAAgAAAgIAAgIAAgQAAgQAAgQAAgAAAgAAAgAAAwAAAwAAAwAAAgAAAgAAAgEAAgEAAgEAAgQAAgQAAgQAAgEAAgEAAgAAAwAAAwAAAwAAAgAAAgAAAgEAAgEAAgEAAgQAAgQAAgQAAgEAAgEAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgQAAgQAAgQAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAAMQAAMQAAMQAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAAMQAAMQAAMQAgAAAgAAAgAAAgAAAgAAAgAA",
+  "materials": ["cave_floor/cool", "mine_gravel/brown", "wet_stone/glow", "void/deep", "mine_boards/oak"],
+  "props": [
+    { "id": "crystal_big", "at": [4, 3], "blocks": true, "cover": "three_quarters" },
+    { "id": "minecart", "at": [7, 3], "blocks": true, "cover": "half" },
+    { "id": "stalagmite", "at": [8, 6], "blocks": true, "cover": "three_quarters" },
+    { "id": "crystal_big", "at": [11, 2], "blocks": true, "cover": "three_quarters" }
+  ],
+  "zones": {
+    "party_spawn": [[1, 5], [2, 5], [1, 6], [2, 6], [1, 7], [2, 7]],
+    "chasm_ledge": [[9, 4], [10, 4], [9, 5], [10, 5], [9, 6], [10, 6]],
+    "crystal_ridge": [[11, 3], [12, 3], [11, 4], [12, 4]],
+    "spider_nest": [[9, 7], [10, 7], [9, 8], [10, 8]],
+    "exit": [[13, 5], [13, 6]]
+  } }

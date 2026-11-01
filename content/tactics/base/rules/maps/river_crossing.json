@@ -1,0 +1,16 @@
+{ "id": "river_crossing", "size": [14, 12],
+  "tiles": "AAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAwMAAwMAAwMAAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAwMAAwMAAwMAAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAwMAAwMAAwMAAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAwMAAwMAAwMAAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAgMAAgMAAgMAAgMAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAQAAAQAAAQEAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAQAAAQEAAQEAAQEAAAAAAAAAAAAAAAAAAAAAAAEAAAIDAAIDAQEAAQEAAQEAAQEAAQAAAQAAAAAAAAAAAAAAAAAAAAEAAAEAAAIDAAIDAQEAAQAAAQAAAQAAAQAAAQAAAAAAAAAAAAAAAAEAAAEAAAAAAAIRAAIRAQAAAQAAAQAAAQAAAQAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAQAAAQAAAQAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAIRAAIRAQAAAQAAAQAAAQAAAQAAAQAA",
+  "materials": ["grass/lush", "dirt/dark", "water/clear", "rock/grey"],
+  "props": [
+    { "id": "crate", "at": [5, 4], "blocks": true, "cover": "three_quarters" },
+    { "id": "crate", "at": [4, 6], "blocks": true, "cover": "three_quarters" },
+    { "id": "crate", "at": [9, 9], "blocks": true, "cover": "three_quarters" },
+    { "id": "rock_large", "at": [11, 4], "blocks": true, "cover": "three_quarters" }
+  ],
+  "zones": {
+    "party_spawn": [[1, 9], [2, 9], [1, 10], [2, 10], [3, 10], [2, 11]],
+    "ridge_spawn": [[11, 2], [12, 2]],
+    "goblin_camp": [[9, 5], [10, 5], [9, 6], [10, 6], [9, 8], [10, 8]],
+    "ford": [[6, 7], [7, 7], [6, 8], [7, 8]],
+    "exit": [[13, 5], [13, 6]]
+  } }

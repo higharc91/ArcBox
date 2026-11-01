@@ -1,0 +1,8 @@
+{ "id": "named_units", "name": "Named units", "map": "field", "party": { "min": 1, "max": 4 },
+  "enemies": [ { "unit": "wolf", "at": [4, 4], "id": "alpha", "tag": "leader" },
+               { "unit": "wolf", "zone": "enemy_spawn", "count": 2, "level": 3, "variant": "dire", "aiProfile": "brute" },
+               { "unit": "wolf", "at": [4, 3] } ],
+  "npcs": [ { "unit": "wolf", "at": [1, 1], "id": "pet" } ],
+  "xp": 400, "loot": ["common", "rare"],
+  "objectives": { "win": "defeat:leader" },
+  "triggers": [ { "id": "howl", "when": { "round": 2 }, "do": [ { "say": { "speaker": "leader", "line": "Grr." } } ] } ] }

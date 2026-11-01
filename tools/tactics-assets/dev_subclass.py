@@ -5,7 +5,8 @@ from parts.creator import SUBCLASSES, CLASSES, make_character, Look
 from parts.characters import compose
 from parts.rig import ANIMS
 RACE = {"fighter": "human", "rogue": "halfling", "wizard": "elf", "cleric": "dwarf", "ranger": "half_elf",
-        "paladin": "dragonborn", "bard": "tiefling", "druid": "gnome", "warlock": "human", "monk": "half_orc"}
+        "paladin": "dragonborn", "bard": "tiefling", "druid": "gnome", "warlock": "human", "monk": "half_orc",
+        "barbarian": "human", "sorcerer": "aasimar"}
 ATK = {"attack": "attack"}
 cells, rows = [], []
 for cls in CLASSES:

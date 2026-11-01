@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/manifest.schema.json",
+  "title": "Rules pack manifest",
+  "description": "A pack's manifest.json (spec §4.9). Documentation only: the C# loader (Tactics.Logic PackLoader and Validation) is the authority and also checks meaning (spec §4.10).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "A non-empty id, unique within its kind across every loaded pack."
+    },
+    "rulesVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "requires": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(conditions|races|backgrounds|injuries|weapons|armor|xp|ai-profiles|items)\\.json$|^(abilities|classes|monsters|maps|encounters)/[^/]+\\.json$"
+      },
+      "description": "Content files, relative to the pack folder."
+    }
+  },
+  "required": [
+    "id",
+    "rulesVersion",
+    "requires",
+    "files"
+  ],
+  "additionalProperties": false
+}

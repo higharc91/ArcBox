@@ -1,0 +1,27 @@
+{
+  "abilities": [
+    { "id": "rogue.hide", "name": "Hide", "tier": 0, "cost": { "bonus": 1 },
+      "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "self" } },
+      "effects": [ { "heal": { "dice": "1d4" } } ] },
+    { "id": "rogue.step", "name": "Cunning Step", "tier": 0, "cost": { "bonus": 1 },
+      "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "self" } },
+      "effects": [ { "heal": { "dice": "1d4" } } ] },
+    { "id": "rogue.dash", "name": "Cunning Dash", "tier": 0, "cost": { "bonus": 1 },
+      "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "self" } },
+      "effects": [ { "heal": { "dice": "1d4" } } ] },
+    { "id": "rogue.blind", "name": "Blinding Powder", "tier": 0, "cost": { "action": 1 },
+      "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "self" } },
+      "effects": [ { "heal": { "dice": "1d4" } } ] },
+    { "id": "rogue.shadowstep", "name": "Shadow Step", "tier": 0, "cost": { "bonus": 1 },
+      "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "self" } },
+      "effects": [ { "heal": { "dice": "1d4" } } ] },
+    { "id": "rogue.umbra", "name": "Umbral Strike", "tier": 0, "cost": { "action": 1 },
+      "target": { "kind": "self", "range": 0, "los": false, "area": { "shape": "self" } },
+      "effects": [ { "heal": { "dice": "1d4" } } ] }
+  ],
+  "passives": [
+    { "id": "rogue.evasion", "static": { "saves": { "dex": 1 } } },
+    { "id": "rogue.shadow_sense", "static": { "initiative": 1 } },
+    { "id": "rogue.hardy", "static": { "maxHp": 2 } }
+  ]
+}

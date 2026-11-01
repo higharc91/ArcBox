@@ -1,0 +1,5 @@
+[
+  { "id": "wanderer", "name": "Wanderer", "size": "medium", "move": 4, "resist": [], "passives": [] },
+  { "id": "dwarf", "name": "Dwarf", "size": "medium", "move": 3, "resist": ["poison"], "passives": [], "darkvision": 12 },
+  { "id": "hopper", "name": "Hopper", "size": "small", "move": 4, "resist": [], "passives": [], "jump": 4 }
+]

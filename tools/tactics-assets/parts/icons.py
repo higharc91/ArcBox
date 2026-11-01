@@ -822,6 +822,34 @@ def a_ki() -> Canvas:
     return c
 
 
+def a_rage() -> Canvas:
+    """A wrapped fist raised in a blood-red flame: a barbarian's rage."""
+    c = new()
+    flame(c, 12, 23, 9, 22, "fx")
+    fist(c, 6, 9, wrap="cloth")
+    for x, y in ((3, 6), (21, 9), (19, 3)):
+        c.px(x, y, "fx", 5)
+    return c
+
+
+def a_metamagic() -> Canvas:
+    """A spell orb caught in two bands that bend it: a sorcerer reshaping magic on the fly."""
+    c = new()
+    c.ellipse(12, 12, 5.5, 5.5, "fx")
+    ball(c, "fx", lo=1)
+    for k in range(48):                                    # two twisted bands wrapping round the orb
+        a = k / 48 * 2 * math.pi
+        for ph, sl in ((0.0, "fx2"), (math.pi, "core")):
+            x = 12 + math.cos(a) * 9.5
+            y = 12 + math.sin(a) * 9.5 * math.cos(a * 2 + ph) * 0.55
+            front = math.sin(a * 2 + ph) > 0
+            if front or c.slot[int(y), int(x)] == 0:
+                c.px(x, y, sl, 5 if front else 3)
+    twinkle(c, 20, 4, "fx2", 1)
+    twinkle(c, 4, 19, "core", 1)
+    return c
+
+
 def a_misty_step() -> Canvas:
     """A swirl of silver mist closing on itself: you vanish here and step out there."""
     c = new()
@@ -1627,6 +1655,9 @@ ABILITIES = [
     _A("misty_step", a_misty_step, ["wizard", "warlock", "spell", "teleport"], fx="mist", fx2="magic/arcane"),
     _A("second_wind", a_second_wind, ["fighter", "healing", "bonus"], fx="slash", liquid="healing",
        paper="bandage"),
+    _A("rage", a_rage, ["barbarian", "buff", "melee"], fx="magic/blood", skin="skin/tan", cloth="leather/tan"),
+    _A("metamagic", a_metamagic, ["sorcerer", "spell", "buff"], fx="magic/wild", fx2="magic/frost",
+       core="magic/holy"),
 ]
 
 STATUSES = [

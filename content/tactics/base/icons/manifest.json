@@ -668,6 +668,44 @@
         "bonus"
       ]
     },
+    "rage": {
+      "atlas": "abilities.png",
+      "rect": [
+        1,
+        105,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "barbarian",
+        "buff",
+        "melee"
+      ]
+    },
+    "metamagic": {
+      "atlas": "abilities.png",
+      "rect": [
+        27,
+        105,
+        24,
+        24
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "tags": [
+        "sorcerer",
+        "spell",
+        "buff"
+      ]
+    },
     "poisoned": {
       "atlas": "status.png",
       "rect": [

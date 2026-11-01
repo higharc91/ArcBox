@@ -110,6 +110,24 @@
     ],
     "iron_body": [
       "iron_body_iron_skin"
+    ],
+    "berserker": [
+      "berserker_frenzy"
+    ],
+    "earthshaker": [
+      "earthshaker_quake_slam"
+    ],
+    "spiritwarden": [
+      "spiritwarden_ancestral_ward"
+    ],
+    "draconic": [
+      "draconic_dragon_breath"
+    ],
+    "chaos": [
+      "chaos_wild_surge"
+    ],
+    "runeborn": [
+      "runeborn_rune_circle"
     ]
   },
   "effects": {
@@ -891,6 +909,158 @@
       },
       "default": "steel",
       "note": "the counter flash is on the front-right; mirror for the other facings"
+    },
+    "berserker_frenzy": {
+      "name": "Frenzy",
+      "subclass": "berserker",
+      "class": "barbarian",
+      "frame": [
+        48,
+        52
+      ],
+      "frames": 10,
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        20,
+        28
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "rage": "berserker_frenzy_rage.png"
+      },
+      "default": "rage",
+      "note": "the rage flares round the unit and the cuts land to its right; mirror for a left-facing attacker"
+    },
+    "earthshaker_quake_slam": {
+      "name": "Quake Slam",
+      "subclass": "earthshaker",
+      "class": "barbarian",
+      "frame": [
+        64,
+        56
+      ],
+      "frames": 11,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        32,
+        40
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "ground",
+      "variants": {
+        "grass": "earthshaker_quake_slam_grass.png",
+        "sand": "earthshaker_quake_slam_sand.png",
+        "snow": "earthshaker_quake_slam_snow.png"
+      },
+      "default": "grass",
+      "note": "on the tile struck (in front of the unit); pick the variant of the tile's top; units on it are knocked prone and the tile becomes difficult terrain"
+    },
+    "spiritwarden_ancestral_ward": {
+      "name": "Ancestral Ward",
+      "subclass": "spiritwarden",
+      "class": "barbarian",
+      "frame": [
+        44,
+        60
+      ],
+      "frames": 10,
+      "fps": 10,
+      "loop": true,
+      "anchor": [
+        22,
+        52
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "spirit": "spiritwarden_ancestral_ward_spirit.png"
+      },
+      "default": "spirit",
+      "loopStart": 5,
+      "note": "on the shielded ally; holds while the ward lasts"
+    },
+    "draconic_dragon_breath": {
+      "name": "Dragon's Breath",
+      "subclass": "draconic",
+      "class": "sorcerer",
+      "frame": [
+        72,
+        44
+      ],
+      "frames": 10,
+      "fps": 14,
+      "loop": false,
+      "anchor": [
+        6,
+        22
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "draconic_dragon_breath_fire.png",
+        "frost": "draconic_dragon_breath_frost.png",
+        "lightning": "draconic_dragon_breath_lightning.png",
+        "acid": "draconic_dragon_breath_acid.png"
+      },
+      "default": "fire",
+      "note": "a cone two tiles long to the right; mirror for a left-facing caster; pick the bloodline's element"
+    },
+    "chaos_wild_surge": {
+      "name": "Wild Surge",
+      "subclass": "chaos",
+      "class": "sorcerer",
+      "frame": [
+        48,
+        48
+      ],
+      "frames": 10,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        24,
+        30
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "wild": "chaos_wild_surge_wild.png"
+      },
+      "default": "wild",
+      "note": "the colours trade places every frame on purpose"
+    },
+    "runeborn_rune_circle": {
+      "name": "Rune Circle",
+      "subclass": "runeborn",
+      "class": "sorcerer",
+      "frame": [
+        56,
+        44
+      ],
+      "frames": 13,
+      "fps": 10,
+      "loop": true,
+      "anchor": [
+        28,
+        32
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "ground",
+      "variants": {
+        "teal": "runeborn_rune_circle_teal.png",
+        "ember": "runeborn_rune_circle_ember.png"
+      },
+      "default": "teal",
+      "loopStart": 7,
+      "note": "laid on a tile; it holds until an enemy steps in and sets it off"
     }
   }
 }

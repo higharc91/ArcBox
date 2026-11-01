@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/encounter.schema.json",
+  "title": "Encounter",
+  "description": "encounters/<id>.json (spec §4.8). Documentation only: the C# loader (Tactics.Logic PackLoader and Validation) is the authority and also checks meaning (spec §4.10).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "name": {
+      "type": "string"
+    },
+    "map": {
+      "type": "string"
+    },
+    "level": {
+      "type": "integer",
+      "description": "The intended party level (1..10) for balance checks."
+    },
+    "party": {
+      "type": "object",
+      "properties": {
+        "min": {
+          "type": "integer"
+        },
+        "max": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "min",
+        "max"
+      ]
+    },
+    "enemies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "unit": {
+            "type": "string",
+            "description": "A monster id."
+          },
+          "at": {
+            "$ref": "common.schema.json#/$defs/tile"
+          },
+          "zone": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer"
+          },
+          "level": {
+            "type": "integer",
+            "description": "Overrides the monster's level (only the sheet's Level changes; the stat block isn't rescaled)."
+          },
+          "variant": {
+            "type": "string",
+            "description": "A sprite recolour: the monster's sprite key with this as its third part (beasts.wolf.dire)."
+          },
+          "tag": {
+            "type": "string",
+            "description": "What objectives and triggers call it; defaults to the monster id."
+          },
+          "aiProfile": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "description": "Names this one unit in the battle (count must be 1). Without it units are numbered \"<monster>.<n>\" in placement order."
+          }
+        },
+        "required": [
+          "unit"
+        ],
+        "description": "Placed with either at or zone."
+      }
+    },
+    "npcs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "unit": {
+            "type": "string",
+            "description": "A monster id."
+          },
+          "at": {
+            "$ref": "common.schema.json#/$defs/tile"
+          },
+          "zone": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer"
+          },
+          "level": {
+            "type": "integer",
+            "description": "Overrides the monster's level (only the sheet's Level changes; the stat block isn't rescaled)."
+          },
+          "variant": {
+            "type": "string",
+            "description": "A sprite recolour: the monster's sprite key with this as its third part (beasts.wolf.dire)."
+          },
+          "tag": {
+            "type": "string",
+            "description": "What objectives and triggers call it; defaults to the monster id."
+          },
+          "aiProfile": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "description": "Names this one unit in the battle (count must be 1). Without it units are numbered \"<monster>.<n>\" in placement order."
+          }
+        },
+        "required": [
+          "unit"
+        ],
+        "description": "Placed with either at or zone."
+      },
+      "description": "Protected NPCs."
+    },
+    "xp": {
+      "type": "integer"
+    },
+    "loot": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "objectives": {
+      "type": "object",
+      "properties": {
+        "win": {
+          "$ref": "common.schema.json#/$defs/objective"
+        },
+        "lose": {
+          "$ref": "common.schema.json#/$defs/objective"
+        }
+      },
+      "required": [
+        "win"
+      ],
+      "description": "lose defaults to party_out."
+    },
+    "triggers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "once": {
+            "type": "boolean",
+            "default": true
+          },
+          "when": {
+            "type": "object",
+            "description": "Every key present must hold: round, unitEntersZone{tag, zone, count = 1}, hpBelow{tag, percent}, unitDies{tag}, flag, counter{name, atLeast}, objective{name: an objective leaf, state: met | unmet}, all[...], any[...]. Tags are unit tags, or \"party\" / \"enemy\"."
+          },
+          "do": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "Exactly one of: say{speaker, line}, spawn{unit, at (zone or [x, y]), count, tag, level, aiProfile, ally}, setFlag: name, addCounter{name, amount = 1}, setObjective{win?, lose?}, cameraHint: zone or [x, y], endBattle: Won | Lost | Fled, phase{tag, number} (the phases of the one monster with that tag; a trigger watching hpBelow on it uses the phase's percentage), or effects[...] with exactly one of tag, zone or at (and an optional source tag)."
+            }
+          }
+        },
+        "required": [
+          "id",
+          "when",
+          "do"
+        ]
+      }
+    },
+    "replaces": {
+      "$ref": "common.schema.json#/$defs/replaces"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "map",
+    "party",
+    "enemies"
+  ]
+}

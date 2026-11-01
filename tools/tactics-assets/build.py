@@ -118,7 +118,7 @@ def build_characters() -> None:
 
     # Every animation, one row each, on a character that would use it.
     showcase = {"idle": "kara", "ready": "kara", "walk": "tamsin", "attack": "kara", "thrust": "wren",
-                "shoot": "tamsin", "cast": "ilyra", "slam": "class_paladin", "spin": "black_knight",
+                "shoot": "tamsin", "cast": "class_sorcerer", "slam": "class_barbarian", "spin": "black_knight",
                 "flurry": "class_monk", "bash": "kara", "block": "aldric", "dodge": "wren", "jump": "class_monk",
                 "item": "sefa", "victory": "kara", "hurt": "aldric", "down": "aldric", "rise": "aldric",
                 "sit": "mayor", "doze": "aldric", "talk": "barmaid", "wave": "child"}
@@ -151,7 +151,8 @@ def build_characters() -> None:
     rnames = [creator.RACES[r].name for r in races]
     cnames = [creator.CLASSES[c].name for c in classes]
     save(matrix("Characters · any race, any class", rnames, cnames, grid_front, zoom=3,
-                subtitle="Players name their hero and pick a race and a class. All 110 combinations compose from the "
+                subtitle=f"Players name their hero and pick a race and a class. All {len(races) * len(classes)} "
+                         "combinations compose from the "
                          "same layers (race defaults shown; hair, skin, horns and colours are the player's)."),
          PREVIEWS / "06-race-class.png")
     save(matrix("Characters · any race, any class (back)", rnames, cnames, grid_back, zoom=3),
@@ -277,7 +278,8 @@ def build_palettes() -> None:
 
 
 SUBCLASS_RACE = {"fighter": "human", "rogue": "halfling", "wizard": "elf", "cleric": "dwarf", "ranger": "half_elf",
-                 "paladin": "dragonborn", "bard": "tiefling", "druid": "gnome", "warlock": "human", "monk": "half_orc"}
+                 "paladin": "dragonborn", "bard": "tiefling", "druid": "gnome", "warlock": "human", "monk": "half_orc",
+                 "barbarian": "human", "sorcerer": "aasimar"}
 
 
 def build_subclasses(out: Path) -> None:
@@ -305,7 +307,7 @@ def build_subclasses(out: Path) -> None:
                 "note": "front idle of each subclass on a sample race, for the subclass picker"},
                out / "subclasses.json")
     cols = ["I", "II", "III"]
-    img = matrix("Subclasses · 30, picked at level 3", names, cols, cells, zoom=3,
+    img = matrix(f"Subclasses · {len(creator.SUBCLASSES)}, picked at level 3", names, cols, cells, zoom=3,
                  subtitle="Each subclass reshapes its class kit (gear, colours, companions). Front · back · swing.")
     # label each cell with its subclass name under the matrix's cells
     from PIL import ImageDraw
@@ -419,7 +421,8 @@ def build_customisation() -> None:
 # Which attack animation a weapon plays; anything not listed (staff, wand, tome, lute, unarmed) casts.
 ATTACK_FOR = {"sword": "attack", "greatsword": "attack", "axe": "attack", "mace": "attack", "dagger": "thrust",
               "spear": "thrust", "rapier": "thrust", "bow": "shoot", "warhammer": "attack", "flail": "attack",
-              "scimitar": "attack", "quarterstaff": "attack", "halberd": "thrust", "crossbow": "shoot"}
+              "scimitar": "attack", "quarterstaff": "attack", "halberd": "thrust", "crossbow": "shoot",
+              "greataxe": "attack", "maul": "attack"}
 
 
 def build_anim_previews() -> None:
@@ -446,7 +449,7 @@ def build_anim_previews() -> None:
             return "bash"
         if not w:
             return "flurry"
-        if w in ("greatsword", "warhammer", "axe"):
+        if w in ("greatsword", "warhammer", "axe", "greataxe", "maul"):
             return "slam"
         if w in ("halberd", "flail", "scimitar"):
             return "spin"
@@ -479,7 +482,7 @@ def build_anim_previews() -> None:
 
     for name, title, recipes, cols in (
             ("anim-party", "The party", PARTY, 6),
-            ("anim-classes", "Class starters", CLASSES, 5),
+            ("anim-classes", "Class starters", CLASSES, 6),
             ("anim-enemies", "Enemies", ENEMIES, 4)):
         stage_gif(PREVIEWS / f"{name}.gif", title, actors_for(recipes), script(recipes), zoom=4, columns=cols)
 

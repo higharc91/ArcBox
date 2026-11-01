@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/armor.schema.json",
+  "title": "Armour",
+  "description": "armor.json: suits of armour (a shield isn't one: a character with a shield gets +2 AC). The kind caps the DEX bonus (none and light: all of it, medium: +2, heavy: none, and initiative -2). Documentation only: the C# loader (Tactics.Logic PackLoader and Validation) is the authority and also checks meaning (spec §4.10).",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "$ref": "common.schema.json#/$defs/id"
+      },
+      "name": {
+        "type": "string"
+      },
+      "kind": {
+        "enum": [
+          "None",
+          "Light",
+          "Medium",
+          "Heavy"
+        ]
+      },
+      "baseAc": {
+        "type": "integer",
+        "description": "The AC before the DEX bonus."
+      },
+      "replaces": {
+        "$ref": "common.schema.json#/$defs/replaces"
+      }
+    },
+    "required": [
+      "id",
+      "name",
+      "kind",
+      "baseAc"
+    ]
+  }
+}

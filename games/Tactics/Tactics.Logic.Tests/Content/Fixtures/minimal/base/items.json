@@ -1,0 +1,3 @@
+[
+  { "id": "potion", "name": "Potion of healing", "use": "test.potion", "tags": ["healing"] }
+]

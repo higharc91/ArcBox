@@ -1,0 +1,9 @@
+[
+  { "id": "lit", "name": "Lit", "tags": ["magical"], "static": { "attackedRanged": "advantage" } },
+  { "id": "prone", "name": "Prone", "tags": ["physical"], "static": { "attackedMelee": "advantage", "attackedRanged": "disadvantage" } },
+  { "id": "incapacitated", "name": "Incapacitated", "tags": [], "static": { "incapacitated": true } },
+  { "id": "stunned", "name": "Stunned", "tags": ["magical"], "implies": "incapacitated", "static": { "autoFailSaves": ["str", "dex"] } },
+  { "id": "burning", "name": "Burning", "tags": ["fire"],
+    "passives": [ { "id": "burning.tick", "hook": "onTurnStart", "target": "self",
+                    "effects": [ { "damage": { "dice": "1d4", "type": "fire" } } ] } ] }
+]

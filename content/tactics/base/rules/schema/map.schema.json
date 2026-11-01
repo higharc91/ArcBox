@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/map.schema.json",
+  "title": "Battle map",
+  "description": "maps/<id>.json (spec §4.8). Documentation only: the C# loader (Tactics.Logic PackLoader and Validation) is the authority and also checks meaning (spec §4.10).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "size": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "[w, h]"
+    },
+    "tiles": {
+      "type": "string",
+      "contentEncoding": "base64",
+      "description": "w × h × 3 bytes, row-major: height, material index, flags (water 1, difficult 2, impassable 4, hazard 8, deep 16)."
+    },
+    "materials": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Terrain art, e.g. \"grass/lush\"."
+    },
+    "props": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "at": {
+            "$ref": "common.schema.json#/$defs/tile"
+          },
+          "blocks": {
+            "type": "boolean"
+          },
+          "cover": {
+            "enum": [
+              "none",
+              "half",
+              "three_quarters"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "at"
+        ]
+      }
+    },
+    "zones": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "$ref": "common.schema.json#/$defs/tile"
+        }
+      }
+    },
+    "replaces": {
+      "$ref": "common.schema.json#/$defs/replaces"
+    }
+  },
+  "required": [
+    "id",
+    "size",
+    "tiles",
+    "materials"
+  ]
+}

@@ -1,0 +1,1 @@
+{"id": "bad", "size": [3, 2], "tiles": "AAAAAAQAAAAAAAAAAAAAAABA", "materials": ["grass/lush", "dirt/dark"], "props": [{"id": "crate", "at": [5, 0], "blocks": true, "cover": "total"}], "zones": {"spawn": [[0, 0], [3, 1]]}}

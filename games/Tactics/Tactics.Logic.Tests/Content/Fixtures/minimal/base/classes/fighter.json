@@ -1,0 +1,27 @@
+{
+  "id": "fighter", "name": "Fighter", "role": "defender", "hitDie": 10, "saves": ["str", "con"],
+  "armorProf": ["light", "medium", "heavy", "shield"], "weaponProf": ["simple", "martial"],
+  "skillChoices": { "count": 2, "from": ["athletics", "perception", "survival"] },
+  "startingKit": { "weapon": "longsword", "armor": "chain_mail", "shield": true, "bag": [ { "item": "potion", "count": 1 } ] },
+  "resources": { "grit": { "1": 2, "5": 3, "9": 5 } },
+  "features": {
+    "1": [ { "ability": "test.strike" }, { "passive": "test.tough" } ],
+    "2": [ { "choose": 1, "from": ["test.bolt", "test.mend"] } ],
+    "3": [ { "resourceRegen": { "resource": "grit", "amount": 1, "everyRounds": 2 } } ],
+    "4": [ { "passive": "test.sneak" } ],
+    "5": [ { "attacks": 2 } ],
+    "6": [ { "ability": "test.hold" } ],
+    "7": [ { "ability": "test.mend" } ],
+    "8": [ { "passive": "test.tough" } ],
+    "9": [ { "ability": "test.bolt" } ],
+    "10": [ { "attacks": 3 } ]
+  },
+  "subclasses": [
+    { "id": "fighter.vanguard", "name": "Vanguard", "companion": "wolf",
+      "features": { "3": [ { "ability": "test.hold" } ], "6": [ { "passive": "test.tough" } ], "10": [ { "ability": "test.bolt" } ] } }
+  ],
+  "defaultPicks": { "2": ["test.bolt"] },
+  "aiTags": { "tags": ["melee", "tank"], "priority": ["str", "con", "dex", "wis", "cha", "int"] },
+  "castingStat": null,
+  "jump": 2
+}

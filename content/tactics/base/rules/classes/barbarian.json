@@ -1,0 +1,48 @@
+{
+  "id": "barbarian", "name": "Barbarian", "role": "defender", "hitDie": 12, "saves": ["str", "con"],
+  "armorProf": ["light", "medium", "shield"], "weaponProf": ["simple", "martial"],
+  "skillChoices": { "count": 2, "from": ["athletics", "intimidation", "nature", "perception", "survival", "animal_handling"] },
+  "startingKit": { "weapon": "greataxe", "armor": "", "shield": false,
+                   "bag": [ { "item": "potion_of_healing", "count": 1 } ] },
+  "resources": { "rage": { "1": 2, "3": 3, "5": 4, "6": 5 } },
+  "primaryResource": "rage",
+  "unarmoredDefense": "con",
+  "features": {
+    "1": [ { "ability": "barbarian.rage" }, { "ability": "barbarian.cleaving_blow" } ],
+    "2": [ { "ability": "barbarian.reckless_attack" }, { "passive": "barbarian.danger_sense" } ],
+    "3": [ { "ability": "barbarian.savage_roar" } ],
+    "4": [ { "ability": "barbarian.crushing_leap" } ],
+    "5": [ { "attacks": 2 }, { "passive": "barbarian.fast_movement" } ],
+    "6": [ { "ability": "barbarian.whirlwind_slash" } ],
+    "7": [ { "passive": "barbarian.feral_instinct" } ],
+    "8": [ { "ability": "barbarian.earthshaker" } ],
+    "9": [ { "ability": "barbarian.brutal_strike" }, { "ability": "barbarian.relentless_rage" } ],
+    "10": [ { "passive": "barbarian.indomitable_might" } ]
+  },
+  "subclasses": [
+    { "id": "barbarian.berserker", "name": "Path of the Berserker",
+      "features": {
+        "3": [ { "ability": "berserker.frenzy_strike" }, { "passive": "berserker.mindless_rage" } ],
+        "6": [ { "ability": "berserker.retaliation" } ],
+        "10": [ { "ability": "berserker.bloodlust_roar" } ]
+      } },
+    { "id": "barbarian.earthshaker", "name": "Earthshaker",
+      "features": {
+        "3": [ { "ability": "earthshaker.quake_slam" }, { "passive": "earthshaker.stone_hide" } ],
+        "6": [ { "ability": "earthshaker.tectonic_rift" } ],
+        "10": [ { "ability": "earthshaker.cataclysm" } ]
+      } },
+    { "id": "barbarian.spiritwarden", "name": "Spiritwarden",
+      "features": {
+        "3": [ { "ability": "spiritwarden.ancestral_ward" }, { "passive": "spiritwarden.ancestral_protectors" } ],
+        "6": [ { "ability": "spiritwarden.spirit_shield" } ],
+        "10": [ { "ability": "spiritwarden.vengeful_ancestors" } ]
+      } }
+  ],
+  "defaultPicks": {
+    "1": [], "2": [], "3": [], "4": [], "5": [], "6": [], "7": [], "8": [], "9": [], "10": []
+  },
+  "aiTags": { "tags": ["defender", "melee", "front"], "priority": ["str", "con", "dex", "wis", "cha", "int"] },
+  "castingStat": null,
+  "jump": 3
+}

@@ -1,0 +1,7 @@
+[
+  { "id": "longsword", "damage": "1d8", "damageType": "slashing", "stat": "str", "finesse": false, "ranged": false, "range": 1, "reach": false, "tags": ["martial"] },
+  { "id": "rapier", "damage": "1d8", "damageType": "piercing", "stat": "dex", "finesse": true, "ranged": false, "range": 1, "reach": false, "tags": ["martial"] },
+  { "id": "shortsword", "damage": "1d6", "damageType": "piercing", "stat": "dex", "finesse": true, "ranged": false, "range": 1, "reach": false, "tags": ["martial"] },
+  { "id": "quarterstaff", "damage": "1d6", "damageType": "bludgeoning", "stat": "str", "finesse": false, "ranged": false, "range": 1, "reach": false, "tags": ["simple"] },
+  { "id": "longbow", "damage": "1d8", "damageType": "piercing", "stat": "dex", "finesse": false, "ranged": true, "range": 8, "reach": false, "tags": ["martial"] }
+]

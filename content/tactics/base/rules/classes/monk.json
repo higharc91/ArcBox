@@ -1,0 +1,48 @@
+{
+  "id": "monk", "name": "Monk", "role": "striker", "hitDie": 8, "saves": ["str", "dex"],
+  "armorProf": [], "weaponProf": ["simple", "martial_light"],
+  "skillChoices": { "count": 2, "from": ["acrobatics", "stealth", "athletics", "history", "insight", "religion"] },
+  "startingKit": { "weapon": "spear", "armor": "", "shield": false,
+                   "bag": [ { "item": "potion_of_healing", "count": 1 } ] },
+  "resources": { "ki": { "1": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10 } },
+  "primaryResource": "ki",
+  "unarmoredDefense": "wis",
+  "features": {
+    "1": [ { "attacks": 2 }, { "ability": "monk.unarmed_strike" }, { "ability": "monk.martial_arts" } ],
+    "2": [ { "ability": "monk.flurry_of_blows" }, { "ability": "monk.step_of_the_wind" }, { "passive": "monk.unarmored_movement" } ],
+    "3": [ { "ability": "monk.deflect_attacks" } ],
+    "4": [ { "ability": "monk.patient_defense" } ],
+    "5": [ { "attacks": 3 }, { "ability": "monk.stunning_strike" } ],
+    "6": [ { "passive": "monk.unarmored_movement_2" } ],
+    "7": [ { "passive": "monk.evasion" } ],
+    "8": [ { "passive": "monk.self_restoration" } ],
+    "9": [ { "passive": "monk.acrobatic_movement" } ],
+    "10": [ { "ability": "monk.heightened_flurry" } ]
+  },
+  "subclasses": [
+    { "id": "monk.open_hand", "name": "Way of the Open Hand",
+      "features": {
+        "3": [ { "ability": "open_hand.palm_strike" }, { "ability": "open_hand.sweeping_kick" } ],
+        "6": [ { "ability": "open_hand.wholeness_of_body" } ],
+        "10": [ { "ability": "open_hand.quivering_palm" } ]
+      } },
+    { "id": "monk.windstep", "name": "Way of the Windstep",
+      "features": {
+        "3": [ { "ability": "windstep.gale_leap" }, { "passive": "windstep.fleet_of_foot" } ],
+        "6": [ { "ability": "windstep.cyclone_kick" } ],
+        "10": [ { "ability": "windstep.tempest_dash" } ]
+      } },
+    { "id": "monk.iron_body", "name": "Way of Iron Body",
+      "features": {
+        "3": [ { "ability": "iron_body.iron_skin" }, { "passive": "iron_body.mountain_stance" } ],
+        "6": [ { "ability": "iron_body.counter_palm" } ],
+        "10": [ { "ability": "iron_body.adamantine_form" } ]
+      } }
+  ],
+  "defaultPicks": {
+    "1": [], "2": [], "3": [], "4": [], "5": [], "6": [], "7": [], "8": [], "9": [], "10": []
+  },
+  "aiTags": { "tags": ["striker", "melee", "mobile"], "priority": ["dex", "wis", "con", "str", "int", "cha"] },
+  "castingStat": "wis",
+  "jump": 3
+}

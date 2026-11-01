@@ -1,0 +1,14 @@
+[
+  { "id": "acolyte", "name": "Acolyte", "boosts": { "wis": 2, "cha": 1 }, "skills": ["insight", "religion"], "trinket": "prayer beads" },
+  { "id": "criminal", "name": "Criminal", "boosts": { "dex": 2, "con": 1 }, "skills": ["sleight_of_hand", "stealth"], "trinket": "crowbar" },
+  { "id": "folk_hero", "name": "Folk Hero", "boosts": { "str": 2, "wis": 1 }, "skills": ["animal_handling", "survival"], "trinket": "battered shovel" },
+  { "id": "noble", "name": "Noble", "boosts": { "cha": 2, "int": 1 }, "skills": ["history", "persuasion"], "trinket": "signet ring" },
+  { "id": "sage", "name": "Sage", "boosts": { "int": 2, "con": 1 }, "skills": ["arcana", "history"], "trinket": "bottle of ink" },
+  { "id": "soldier", "name": "Soldier", "boosts": { "str": 2, "con": 1 }, "skills": ["athletics", "intimidation"], "trinket": "bone dice" },
+  { "id": "outlander", "name": "Outlander", "boosts": { "con": 2, "str": 1 }, "skills": ["athletics", "survival"], "trinket": "hunting trap" },
+  { "id": "entertainer", "name": "Entertainer", "boosts": { "cha": 2, "dex": 1 }, "skills": ["acrobatics", "performance"], "trinket": "wooden flute" },
+  { "id": "guild_artisan", "name": "Guild Artisan", "boosts": { "int": 2, "dex": 1 }, "skills": ["insight", "persuasion"], "trinket": "artisan's tools" },
+  { "id": "hermit", "name": "Hermit", "boosts": { "wis": 2, "con": 1 }, "skills": ["medicine", "religion"], "trinket": "herbalism kit" },
+  { "id": "sailor", "name": "Sailor", "boosts": { "str": 2, "dex": 1 }, "skills": ["athletics", "perception"], "trinket": "belaying pin" },
+  { "id": "urchin", "name": "Urchin", "boosts": { "dex": 2, "wis": 1 }, "skills": ["sleight_of_hand", "stealth"], "trinket": "city map" }
+]

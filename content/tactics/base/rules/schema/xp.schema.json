@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/xp.schema.json",
+  "title": "XP table",
+  "description": "xp.json: cumulative XP for levels 1–10, starting at 0. Documentation only: the C# loader (Tactics.Logic PackLoader and Validation) is the authority and also checks meaning (spec §4.10).",
+  "type": "object",
+  "properties": {
+    "thresholds": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "minItems": 1
+    },
+    "replaces": {
+      "const": "xp"
+    }
+  },
+  "required": [
+    "thresholds"
+  ],
+  "additionalProperties": false
+}

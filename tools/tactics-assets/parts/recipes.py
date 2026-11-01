@@ -1,4 +1,4 @@
-"""Ready-made characters assembled from the parts: the sample party, ten class starters and a set of enemies.
+"""Ready-made characters assembled from the parts: the sample party, twelve class starters and a set of enemies.
 These double as tests that the parts compose, and as presets the character creator can start from."""
 from __future__ import annotations
 
@@ -66,6 +66,11 @@ CLASSES = [
     make_character("Monk", "human", "monk", Look(skin="olive", hair="topknot", hair_colour="black", beard="moustache"),
                    id="class_monk",
                    tags=("class",)),
+    make_character("Barbarian", "goliath", "barbarian", Look(beard="braided", marks="warpaint", paint="woad"),
+                   id="class_barbarian", tags=("class",)),
+    make_character("Sorcerer", "aasimar", "sorcerer", Look(body_type="feminine", skin="celestial_silver", hair="long",
+                                                           hair_colour="violet"),
+                   id="class_sorcerer", tags=("class",)),
 ]
 
 ENEMIES = [

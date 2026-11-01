@@ -17,7 +17,7 @@ writes from the real character layers for screen 07. The real game builds these 
 | [04 · Phone battle](04-phone-battle.png) | Your turn (action economy and actions), targeting (cycle targets or move a free cursor on the TV's diagonal grid), and waiting (turn queue, reaction, sheet) |
 | [05 · Phone party and portal](05-phone-party.png) | Party vote, the point-buy character creator, choosing a subclass after a missed week, and trading |
 | [06 · Phone joining each week](06-phone-join.png) | One-tap "Continue as…" for a remembered phone, the "Who are you?" roster for a new one, and "Pick your seat" mid-game to take back an offline character (Platform v2 §3.1–3.2) |
-| [07 · Phone character creator](07-phone-creator.png) | Naming the hero, then any race with any class (11 × 10), then the look: skin, hair, horns and colours, limited to what the race offers. Uses the real sprites from `tools/tactics-assets` (`assets/race-class.png`) |
+| [07 · Phone character creator](07-phone-creator.png) | Naming the hero, then any race with any class (11 × 12), then the look: skin, hair, horns and colours, limited to what the race offers. Uses the real sprites from `tools/tactics-assets` (`assets/race-class.png`) |
 
 Sample party: Kara (Jess), Aldric (Dave, away this session), Wren (Priya), Ilyra (Sam, leader this
 session) and Tamsin (Marcus). Sefa (Alex) is a new recruit in the creator.

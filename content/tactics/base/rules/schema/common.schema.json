@@ -1,0 +1,861 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/common.schema.json",
+  "title": "Shared definitions",
+  "description": "Definitions the other rules schemas refer to. Documentation only: the C# loader (Tactics.Logic PackLoader and Validation) is the authority and also checks meaning (spec §4.10).",
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "A non-empty id, unique within its kind across every loaded pack."
+    },
+    "replaces": {
+      "type": "string",
+      "description": "Set to this definition's own id to override the definition an earlier pack gave it. Without it, a repeated id is a load error."
+    },
+    "stat": {
+      "enum": [
+        "str",
+        "dex",
+        "con",
+        "int",
+        "wis",
+        "cha"
+      ]
+    },
+    "tile": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "[x, y]"
+    },
+    "dice": {
+      "type": "string",
+      "pattern": "^(\\d+d\\d+([+-]\\d+)?|[+-]?\\d+)$",
+      "description": "e.g. \"2d6+1\", \"1d4\" or \"3\""
+    },
+    "byLevel": {
+      "description": "A value, or a table keyed by level (\"1\", \"5\", …), optionally wrapped as {\"byLevel\": {...}}. The highest key at or below the level wins. A table must start at level 1 and stay within 1–10.",
+      "anyOf": [
+        {
+          "type": [
+            "string",
+            "integer"
+          ]
+        },
+        {
+          "type": "object",
+          "patternProperties": {
+            "^(10|[1-9])$": {}
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "byLevel": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "byLevel"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "addends": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(mod\\.(str|dex|con|int|wis|cha|cast)|prof|level)$"
+      },
+      "description": "Named addends: mod.<stat>, mod.cast, prof, level."
+    },
+    "effect": {
+      "type": "object",
+      "description": "One effect block: exactly one block key (attack, save, damage, heal, tempHp, revive, apply, remove, cleanse, dispel, help, push, pull, teleport, swap, dash, jumpTo, zone, alterTerrain, hazard, summon, transform, grantResource, extraAction, refreshReaction, statMod, mark, taunt, reveal, turnOrder, chain, repeat, if, random) holding its parameters, with branches (onHit, onMiss, onCrit, onFail, onSuccess, then, else, effects) and, for a shorthand block, its other parameters beside the key: {\"apply\": \"lit\", \"rounds\": 1}. attack.kind is \"weapon\" or \"spell\"; apply.untilSave needs an enclosing save. save.dcStat sets the DC to 8 + proficiency + that stat's modifier instead of the casting stat's (a shove's STR). grantResource.amount may scale by level; grantResource.resource \"primary\" is the target's class primaryResource (else its first resource), and overMax lets the grant pass the sheet's pool. extraAction.kind is \"action\", \"bonus\" or \"move\" (the target gains its Move again: Dash). zone.blocksSight blocks line of sight into, out of and through its tiles. alterTerrain.deep also turns the tiles deep (a collapse): whoever stands on them falls in.",
+      "anyOf": [
+        {
+          "required": [
+            "attack"
+          ]
+        },
+        {
+          "required": [
+            "save"
+          ]
+        },
+        {
+          "required": [
+            "damage"
+          ]
+        },
+        {
+          "required": [
+            "heal"
+          ]
+        },
+        {
+          "required": [
+            "tempHp"
+          ]
+        },
+        {
+          "required": [
+            "revive"
+          ]
+        },
+        {
+          "required": [
+            "apply"
+          ]
+        },
+        {
+          "required": [
+            "remove"
+          ]
+        },
+        {
+          "required": [
+            "cleanse"
+          ]
+        },
+        {
+          "required": [
+            "dispel"
+          ]
+        },
+        {
+          "required": [
+            "help"
+          ]
+        },
+        {
+          "required": [
+            "push"
+          ]
+        },
+        {
+          "required": [
+            "pull"
+          ]
+        },
+        {
+          "required": [
+            "teleport"
+          ]
+        },
+        {
+          "required": [
+            "swap"
+          ]
+        },
+        {
+          "required": [
+            "dash"
+          ]
+        },
+        {
+          "required": [
+            "jumpTo"
+          ]
+        },
+        {
+          "required": [
+            "zone"
+          ]
+        },
+        {
+          "required": [
+            "alterTerrain"
+          ]
+        },
+        {
+          "required": [
+            "hazard"
+          ]
+        },
+        {
+          "required": [
+            "summon"
+          ]
+        },
+        {
+          "required": [
+            "transform"
+          ]
+        },
+        {
+          "required": [
+            "grantResource"
+          ]
+        },
+        {
+          "required": [
+            "extraAction"
+          ]
+        },
+        {
+          "required": [
+            "refreshReaction"
+          ]
+        },
+        {
+          "required": [
+            "statMod"
+          ]
+        },
+        {
+          "required": [
+            "mark"
+          ]
+        },
+        {
+          "required": [
+            "taunt"
+          ]
+        },
+        {
+          "required": [
+            "reveal"
+          ]
+        },
+        {
+          "required": [
+            "turnOrder"
+          ]
+        },
+        {
+          "required": [
+            "chain"
+          ]
+        },
+        {
+          "required": [
+            "repeat"
+          ]
+        },
+        {
+          "required": [
+            "if"
+          ]
+        },
+        {
+          "required": [
+            "random"
+          ]
+        }
+      ]
+    },
+    "effects": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/effect"
+      }
+    },
+    "staticMods": {
+      "type": "object",
+      "properties": {
+        "ac": {
+          "type": "integer"
+        },
+        "attack": {
+          "type": "integer"
+        },
+        "damage": {
+          "type": "integer"
+        },
+        "move": {
+          "type": "integer"
+        },
+        "initiative": {
+          "type": "integer"
+        },
+        "saves": {
+          "type": "object",
+          "propertyNames": {
+            "enum": [
+              "str",
+              "dex",
+              "con",
+              "int",
+              "wis",
+              "cha"
+            ]
+          },
+          "additionalProperties": {
+            "type": "integer"
+          }
+        },
+        "incapacitated": {
+          "type": "boolean"
+        },
+        "cantMove": {
+          "type": "boolean"
+        },
+        "ownAttacks": {
+          "enum": [
+            "none",
+            "advantage",
+            "disadvantage"
+          ]
+        },
+        "attackedMelee": {
+          "enum": [
+            "none",
+            "advantage",
+            "disadvantage"
+          ]
+        },
+        "attackedRanged": {
+          "enum": [
+            "none",
+            "advantage",
+            "disadvantage"
+          ]
+        },
+        "autoFailSaves": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "str",
+              "dex",
+              "con",
+              "int",
+              "wis",
+              "cha"
+            ]
+          }
+        },
+        "critWhenAdjacent": {
+          "type": "boolean"
+        },
+        "invisible": {
+          "type": "boolean"
+        },
+        "resist": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "immune": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extraActions": {
+          "type": "integer"
+        },
+        "maxHp": {
+          "type": "integer",
+          "description": "Added to the maximum HP of a character's sheet when it is built (Cracked ribs: -5). Only passives and injuries may carry it; a condition can't (the loader rejects it)."
+        },
+        "saveEdges": {
+          "type": "object",
+          "propertyNames": {
+            "enum": [
+              "str",
+              "dex",
+              "con",
+              "int",
+              "wis",
+              "cha"
+            ]
+          },
+          "additionalProperties": {
+            "enum": [
+              "none",
+              "advantage",
+              "disadvantage"
+            ]
+          },
+          "description": "Advantage or disadvantage on saves of each stat (one source each)."
+        },
+        "saveProficiencies": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "str",
+              "dex",
+              "con",
+              "int",
+              "wis",
+              "cha"
+            ]
+          },
+          "description": "Saves of these stats add proficiency (once)."
+        },
+        "evasion": {
+          "type": "boolean",
+          "description": "DEX saves for half: none on a success, half on a failure."
+        }
+      },
+      "description": "Modifiers that hold while their passive or condition does.",
+      "additionalProperties": false
+    },
+    "when": {
+      "type": "object",
+      "properties": {
+        "all": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/when"
+          }
+        },
+        "any": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/when"
+          }
+        },
+        "not": {
+          "$ref": "#/$defs/when"
+        },
+        "weapon": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "advantage": {
+          "type": "boolean"
+        },
+        "flanked": {
+          "type": "boolean"
+        },
+        "targetHasCondition": {
+          "type": "string"
+        },
+        "hpBelow": {
+          "type": "integer"
+        },
+        "heightAbove": {
+          "type": "integer"
+        },
+        "isSpell": {
+          "type": "boolean"
+        },
+        "damageType": {
+          "type": "string"
+        },
+        "targetTag": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean"
+        }
+      },
+      "description": "A test on a hook's situation; every key present must hold.",
+      "additionalProperties": false
+    },
+    "passive": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "A non-empty id, unique within its kind across every loaded pack."
+        },
+        "hook": {
+          "enum": [
+            "onBattleStart",
+            "onRoundStart",
+            "onTurnStart",
+            "onTurnEnd",
+            "beforeAttackRoll",
+            "onAttackHit",
+            "onAttackMiss",
+            "onDamaged",
+            "onSave",
+            "onMove",
+            "onEnterTile",
+            "onDowned",
+            "onKill",
+            "onAllyDowned"
+          ]
+        },
+        "when": {
+          "$ref": "#/$defs/when"
+        },
+        "effects": {
+          "$ref": "#/$defs/effects"
+        },
+        "static": {
+          "$ref": "#/$defs/staticMods"
+        },
+        "oncePerTurn": {
+          "type": "boolean"
+        },
+        "oncePerRound": {
+          "type": "boolean"
+        },
+        "usesPerBattle": {
+          "type": "integer"
+        },
+        "target": {
+          "enum": [
+            "other",
+            "self"
+          ]
+        },
+        "replaces": {
+          "type": "string",
+          "description": "Set to this definition's own id to override the definition an earlier pack gave it. Without it, a repeated id is a load error."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "A passive (spec §4.4). Passives that affect their owner (turn, round or battle start, move hooks) need \"target\": \"self\"."
+    },
+    "area": {
+      "type": "object",
+      "properties": {
+        "shape": {
+          "enum": [
+            "single",
+            "self",
+            "burst",
+            "line",
+            "cone",
+            "cross",
+            "ring",
+            "all_allies",
+            "all_enemies"
+          ]
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "includeSelf": {
+          "type": "boolean"
+        },
+        "friendlyFire": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "shape"
+      ]
+    },
+    "ability": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "A non-empty id, unique within its kind across every loaded pack."
+        },
+        "name": {
+          "type": "string"
+        },
+        "tier": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "cost": {
+          "type": "object",
+          "properties": {
+            "action": {
+              "type": "integer"
+            },
+            "bonus": {
+              "type": "integer"
+            },
+            "reaction": {
+              "type": "integer"
+            },
+            "move": {
+              "type": "integer"
+            },
+            "resource": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "integer"
+              }
+            },
+            "uses": {
+              "type": "integer"
+            },
+            "concentration": {
+              "type": "boolean"
+            }
+          }
+        },
+        "target": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "enum": [
+                "self",
+                "ally",
+                "enemy",
+                "any_unit",
+                "downed_ally",
+                "tile",
+                "empty_tile"
+              ]
+            },
+            "range": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 12
+            },
+            "minRange": {
+              "type": "integer"
+            },
+            "los": {
+              "type": "boolean"
+            },
+            "heightTolerance": {
+              "type": "integer"
+            },
+            "area": {
+              "$ref": "#/$defs/area"
+            }
+          },
+          "required": [
+            "kind",
+            "range",
+            "los",
+            "area"
+          ]
+        },
+        "effects": {
+          "$ref": "#/$defs/effects"
+        },
+        "presentation": {
+          "type": "object",
+          "properties": {
+            "anim": {
+              "type": "string"
+            },
+            "fx": {
+              "type": "string"
+            },
+            "projectile": {
+              "type": "string"
+            }
+          },
+          "description": "Art keys \"<set>.<asset>\", checked against the art manifests."
+        },
+        "ai": {
+          "type": "object",
+          "properties": {
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "flavor": {
+          "type": "string"
+        },
+        "isWeaponAttack": {
+          "type": "boolean"
+        },
+        "replaces": {
+          "type": "string",
+          "description": "Set to this definition's own id to override the definition an earlier pack gave it. Without it, a repeated id is a load error."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "tier",
+        "cost",
+        "target",
+        "effects"
+      ],
+      "description": "An ability (spec §4.2)."
+    },
+    "feature": {
+      "description": "Exactly one of ability, passive, choose (with from), resourceRegen or attacks.",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "ability": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "ability"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "passive": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "passive"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "choose": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "from": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "choose",
+            "from"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "resourceRegen": {
+              "type": "object",
+              "properties": {
+                "resource": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "integer"
+                },
+                "everyRounds": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "resource",
+                "amount",
+                "everyRounds"
+              ]
+            }
+          },
+          "required": [
+            "resourceRegen"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "attacks": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "attacks"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "featuresByLevel": {
+      "type": "object",
+      "patternProperties": {
+        "^(10|[1-9])$": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/feature"
+          },
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "weapon": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "damage": {
+          "$ref": "#/$defs/dice"
+        },
+        "damageType": {
+          "type": "string"
+        },
+        "stat": {
+          "enum": [
+            "str",
+            "dex",
+            "con",
+            "int",
+            "wis",
+            "cha"
+          ]
+        },
+        "finesse": {
+          "type": "boolean"
+        },
+        "ranged": {
+          "type": "boolean"
+        },
+        "range": {
+          "type": "integer"
+        },
+        "reach": {
+          "type": "boolean"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "damage",
+        "damageType",
+        "stat"
+      ]
+    },
+    "objective": {
+      "description": "A leaf (defeat_all, party_out, defeat:<tag>, survive:<rounds>, reach:<zone>:<count>, protect:<tag>, flag:<name>) or {\"any\": [...]} / {\"all\": [...]}.",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "any": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/objective"
+              }
+            },
+            "all": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/objective"
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

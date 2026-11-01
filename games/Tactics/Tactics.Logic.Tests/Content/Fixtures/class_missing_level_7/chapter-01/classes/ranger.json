@@ -1,0 +1,16 @@
+{ "id": "ranger", "name": "Ranger", "role": "striker", "hitDie": 10, "saves": ["str", "dex"],
+  "armorProf": ["light", "medium"], "weaponProf": ["simple", "martial"],
+  "skillChoices": { "count": 3, "from": ["perception", "stealth", "survival"] },
+  "startingKit": { "weapon": "longbow", "armor": "leather" },
+  "resources": { "focus": { "1": 2, "10": 6 } },
+  "features": {
+    "1": [ { "ability": "test.strike" } ], "2": [ { "ability": "test.bolt" } ], "3": [ { "passive": "test.tough" } ],
+    "4": [ { "passive": "test.sneak" } ], "5": [ { "attacks": 2 } ], "6": [ { "ability": "test.mend" } ],
+    "8": [ { "passive": "test.tough" } ], "9": [ { "ability": "test.hold" } ], "10": [ { "attacks": 3 } ]
+  },
+  "subclasses": [
+    { "id": "ranger.warden", "name": "Warden",
+      "features": { "3": [ { "ability": "test.hold" } ], "6": [ { "passive": "test.tough" } ], "10": [ { "ability": "test.bolt" } ] } }
+  ],
+  "aiTags": { "tags": ["ranged"], "priority": ["dex", "wis", "con", "str", "int", "cha"] },
+  "castingStat": "wis", "jump": 2 }

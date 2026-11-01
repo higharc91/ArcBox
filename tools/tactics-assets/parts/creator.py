@@ -4,7 +4,8 @@ Race and class are independent axes:
   * a Race decides the *body*: build (standard / short / large), body part (ears, tusks, a snout), tail, which
     skins, hair, beards and horns are on offer, and sensible defaults for each;
   * a ClassKit decides the *gear*: torso, legs, feet, hands, weapon, off-hand, cape, headgear, and the starting
-    cloth and metal colours.
+    cloth and metal colours. A kit may also carry face marks (the barbarian's war paint) and a paint colour; the
+    player's or the race's own marks and paint win over them.
 A Look holds the player's own picks from what the race offers (and any colour changes to the kit).
 
 make_character(name, race, class, look) merges the three into a Recipe, which composes like any other preset. Every
@@ -133,6 +134,14 @@ CLASSES: dict[str, ClassKit] = {k.id: k for k in [
              "Blaster"),
     ClassKit("monk", "Monk", {"torso": "tunic", "legs": "pants", "feet": "sandals", "hands": "bare"},
              {"cloth1": "cloth/ochre", "cloth2": "cloth/rust"}, "Skirmisher"),
+    ClassKit("barbarian", "Barbarian", {"torso": "harness", "legs": "kilt", "feet": "boots", "hands": "wraps",
+                                        "weapon": "greataxe", "cape": "pelt", "marks": "warpaint"},
+             {"cloth1": "leather/tan", "cloth2": "cloth/rust", "leather": "leather/dark", "paint": "paint/woad"},
+             "Defender"),
+    ClassKit("sorcerer", "Sorcerer", {"torso": "silk_robe", "legs": "skirt", "feet": "sandals", "hands": "bare",
+                                      "weapon": "spellfire"},
+             {"cloth1": "cloth/royal_purple", "cloth2": "cloth/ochre", "trim": "metal/gold", "magic": "magic/wild"},
+             "Blaster"),
 ]}
 
 @dataclass(frozen=True)
@@ -256,6 +265,30 @@ SUBCLASSES: dict[str, Subclass] = {s.id: s for s in [
     _sub("monk", "iron_body", "Way of Iron Body", "Counters, self-healing",
          {"torso": "gi", "hands": "gauntlets", "legs": "greaves"},
          {"cloth1": "cloth/charcoal", "cloth2": "cloth/rust", "metal": "metal/iron"}),
+    # Barbarian
+    _sub("barbarian", "berserker", "Path of the Berserker", "Frenzy: reckless extra attacks",
+         {"weapon": "axe", "offhand": "hand_axe", "headgear": "wolf_pelt"},
+         {"cloth1": "leather/dark", "cloth2": "cloth/crimson", "leather": "leather/red", "blade": "metal/dark",
+          "paint": "paint/crimson"}),
+    _sub("barbarian", "earthshaker", "Earthshaker", "Ground slams that crack the terrain",
+         {"weapon": "maul", "headgear": "horned_helm", "hands": "gauntlets"},
+         {"cloth1": "leather/brown", "cloth2": "cloth/sand", "metal": "metal/iron", "blade": "metal/iron",
+          "magic": "magic/earth", "paint": "paint/ochre"}),
+    _sub("barbarian", "spiritwarden", "Spiritwarden", "Ancestral spirits shield allies",
+         {"weapon": "axe", "offhand": "spirit_totem", "headgear": "antlers"},
+         {"cloth1": "hair/silver", "cloth2": "cloth/teal", "magic": "magic/spirit", "paint": "paint/jade"}),
+    # Sorcerer
+    _sub("sorcerer", "draconic", "Draconic Bloodline", "Dragon scales, elemental damage",
+         {"torso": "drake_robe", "headgear": "circlet", "marks": "scales", "shoulders": "drake_pauldrons",
+          "horns": "small"},
+         {"cloth1": "cloth/charcoal", "cloth2": "skin/dragon_red", "metal": "metal/gold", "magic": "magic/fire"}),
+    _sub("sorcerer", "chaos", "Chaos Bloodline", "Wild magic surges",
+         {"torso": "motley_robe", "weapon": "wild_motes", "float": "chaos_orb"},
+         {"cloth1": "cloth/teal", "cloth2": "cloth/crimson", "trim": "metal/gold", "magic": "magic/wild"}),
+    _sub("sorcerer", "runeborn", "Runeborn", "Lays glowing runes on the ground",
+         {"weapon": "rune_staff", "marks": "runes", "shoulders": "rune_stones", "hands": "rune_marked"},
+         {"cloth1": "cloth/slate", "cloth2": "metal/gold", "wood": "wood/dark", "magic": "magic/rune",
+          "metal": "terrain/stone"}),
 ]}
 
 _BASE_COLOURS = {"eyes": "eyes/dark", "leather": "leather/brown", "wood": "wood/oak", "metal": "metal/steel",
@@ -345,7 +378,9 @@ def make_character(name: str, race: str, cls: str, look: Look | None = None, *, 
     palette["hair"] = f"hair/{lk.hair_colour or r.default.get('hair_colour', 'brown')}"
     palette["eyes"] = f"eyes/{lk.eyes or r.default.get('eyes', 'dark')}"
     palette["horn"] = f"horn/{lk.horn or r.default.get('horn', 'ivory')}"
-    palette["paint"] = f"paint/{lk.paint or r.default.get('paint', 'woad')}"
+    paint = lk.paint or r.default.get("paint")             # the player's paint, else the race's, else the kit's
+    kit_paint = palette.pop("paint", "paint/woad")
+    palette["paint"] = f"paint/{paint}" if paint else kit_paint
     palette.update(lk.colours)
 
     rid = id or "".join(ch for ch in name.lower().replace(" ", "_") if ch.isalnum() or ch == "_")
