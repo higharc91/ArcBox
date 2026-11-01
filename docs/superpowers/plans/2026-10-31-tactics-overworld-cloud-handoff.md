@@ -164,6 +164,16 @@ Keep this list, add to it, and put it at the top of your final report. Don't sto
     - checkpoints are named after the beat's first scene.
 23. **Seat colours still wait** (decision 14). Story voters show as gold initials meanwhile.
 24. **Server start loads the Tactics content first,** adding about 1.5 s to every server's startup, including Redline-only use. That stopped rooms being closed as hung while the pack loaded inside a room's first call.
+25. **The end-of-battle walk halt is an engine behaviour change.** `Objectives.End` now halts walks still queued, which fixes the share-the-tile crash; a battle that ends mid-walk gains one `Moved` event before `BattleEnded`. No numbers changed. §2 says rule changes need the user's sign-off, so please confirm.
+26. **After a server restart, the saved line is spoken again** (5d plan: "the saved line replays"). The "never replay a voice line" rule was written for a TV that rejoins; please confirm a server restart is an exception. When the phones reach a restarted server before the TV, that line is only shown, never spoken.
+27. **Boss music:** only warlord_bridge, keep_gate and hall_of_the_flame get boss music and the boss victory fanfare. `rime_tower` (Ivo Rime, Chapter 4's climax, with a phase change and voiced lines) and `ford_assault` (Mother Skarrow) play the ordinary themes. Should either get them?
+28. **The vote countdown can run up to the network delay behind the server.** The server still owns the deadline. Acceptable, or should the server also send its own "now"?
+29. **"Back to walking"** shows on the battle list even in a pack with no region, where it does nothing. Hiding it needs a new field in the screen's data (a contract change).
+30. **Two questions in a row:** after the fix wave, the second question plays the "your turn" sound and arrival again. Say if it should stay quiet.
+31. **Chapter e2e runs on the force branch are about a coin toss** (the bots lose most Ford Assault retries). Keep them manual, or gate them somewhere?
+
+**Defaults the review fix wave adds:** the VIP can end the session from inside a scene (the cursor is saved on every line); a resumed battle keeps the stage it was saved with, and a repainted region that no longer matches puts it on the plain board.
+
 
 
 **Defaults added tonight, which the user can overrule:** the edge note ("The road goes on, but not today.") once a session; a one-tile jag with both sides open doesn't slide; quick taps latch one step; the pad's sectors (n/s 60°, roads 48°, e/w 24°); the leader's arrival pulse on opening the walk; a called-off battle wins and loses nothing; the adapter catches any engine exception but out-of-memory; followers rejoin the trail at its nearest point after a rest; the title card crossfades and gives up after 10 s; the wall bump is 0.12 tile over 0.15 s with the step sound at -14 dB.
