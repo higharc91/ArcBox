@@ -159,6 +159,7 @@ public sealed class UnitArt
     private readonly Dictionary<(string Style, string Text), (ArtRect Rect, int Advance)> _glyphs = [];
     private readonly Dictionary<UnitTone, UnitSprite> _standIns = [];
     private readonly HashSet<string> _presets = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, EmoteStrip> _emotes = new(StringComparer.Ordinal);
     private readonly Dictionary<string, int> _heads = new(StringComparer.Ordinal);
     private readonly Dictionary<string, int> _headOffsets = new(StringComparer.Ordinal);
     private ManifestSet _characters = null!;
@@ -211,6 +212,9 @@ public sealed class UnitArt
         return art;
     }
 
+    /// <summary>An emote by its name in emotes/manifest.json (<c>alert</c> is the story's "!"), or null for one the pack doesn't have.</summary>
+    public EmoteStrip? Emote(string name) => _emotes.GetValueOrDefault(name);
+
     private void ReadCrown(string packRoot)
     {
         var path = System.IO.Path.Combine(packRoot, EmoteSet, "manifest.json");
@@ -219,9 +223,11 @@ public sealed class UnitArt
         using var doc = JsonDocument.Parse(File.ReadAllText(path));
         var root = doc.RootElement;
         var (frame, anchor) = (root.GetProperty("frame"), root.GetProperty("anchor"));
-        Crown = new EmoteStrip($"{EmoteSet}/{EmoteSet}.png", frame[0].GetInt32(), frame[1].GetInt32(), anchor[0].GetInt32(), anchor[1].GetInt32(),
-            root.GetProperty("emotes").GetProperty("crown").GetProperty("row").GetInt32(), root.GetProperty("frames").GetInt32(),
-            root.GetProperty("fps").GetDouble(), root.GetProperty("loopStart").GetInt32());
+        foreach (var emote in root.GetProperty("emotes").EnumerateObject())
+            _emotes[emote.Name] = new EmoteStrip($"{EmoteSet}/{EmoteSet}.png", frame[0].GetInt32(), frame[1].GetInt32(), anchor[0].GetInt32(),
+                anchor[1].GetInt32(), emote.Value.GetProperty("row").GetInt32(), root.GetProperty("frames").GetInt32(), root.GetProperty("fps").GetDouble(),
+                root.GetProperty("loopStart").GetInt32());
+        Crown = Emote("crown");
     }
 
     /// <summary>The sprite for a key, or null if the pack has none. A monster's unknown or missing variant takes its first.</summary>

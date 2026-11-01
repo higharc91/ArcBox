@@ -4,9 +4,11 @@ using ArcBox.Sdk.Campaigns;
 using ArcBox.Sdk.Testing;
 using Tactics.Game;
 using Tactics.Logic;
+using Tactics.Presentation.Audio;
 using Tactics.Presentation.Beats;
 using Tactics.Presentation.Board;
 using Tactics.Presentation.Hud;
+using Tactics.Presentation.Story;
 using Tactics.Presentation.World;
 
 namespace Tactics.Presentation.Tests;
@@ -289,6 +291,73 @@ public sealed class HostViewContractTests
         for (var i = 0; i < classes.Length; i++)
             h.SetConnected(i, false);
         return (game, h);
+    }
+
+    /// <summary>
+    /// The mayor's request as the TV takes it (overworld 5d §9, §10): the "!" over the mayor in the world, the narrator's opening shown on a
+    /// fresh track and not said, Pip's line said with its own clip, and the question that ends the node on the panel, all from real views.
+    /// </summary>
+    [Fact]
+    public void A_real_scene_reads_as_a_story_view()
+    {
+        var rules = Pack.Value;
+        var lore = LoreBook.Load(ContentRoot);
+        var ground = rules.GroundFor("ashen_ford")!;
+        var region = rules.RegionFor("ashen_ford")!.Def;
+        var spot = region.Beats.Single(b => b.Beat == "ch1_mayors_request").At;
+        var near = WorldWalk.Reach(ground.Terrain, region.Spawns.Start, ClassDef.DefaultJump)
+            .Where(t => t != spot && StoryRules.InReach(ground.Terrain, t, spot)).OrderBy(t => Math.Abs(t.X - spot.X) + Math.Abs(t.Y - spot.Y)).ThenBy(t => t).First();
+        ProfileId?[] profiles = [new ProfileId("pr_ana"), new ProfileId("pr_bo")];
+        var game = new TacticsGame(rules, lore: lore, seed: new TacticsSeed([], []) with { At = near });
+        var h = new GameHarness<TacticsGame>(game, playerCount: 2, seed: 3, profiles: profiles);
+        var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", profiles[0]!.Value,
+            [.. profiles.Select((p, i) => new CampaignMember(p!.Value, $"Player{i + 1}", CampaignRole.Player, DateTimeOffset.UnixEpoch))], 1);
+        h.StartCampaign(new FakeCampaignLease(info, new TacticsCampaignRules(rules).NewDocument(info)));
+        h.Input(0, new { action = "pickClass", data = new { @class = "fighter" } });
+        h.Input(1, new { action = "pickClass", data = new { @class = "cleric" } });
+        var units = UnitArt.Load(ContentRoot);
+        var track = new StoryTrack(VoiceClips.Load(ContentRoot), HudArt.Load(ContentRoot, units));
+
+        var walking = OverTheWire(game);
+        var mark = Assert.Single(StoryMarks.Of(walking.Explore!, new BoardTerrain(ground.Map, null), units));
+        Assert.Equal(spot, mark.At);
+        Assert.Equal("characters.child", walking.Explore!.Markers!.Value[0].Sprite);       // Pip, the first of the cast who isn't the narrator
+        Assert.Equal(units.Sprite("characters.child"), mark.Figure!.Sprite);
+        Assert.Equal(units.Emote("alert"), mark.Emote);
+        Assert.Null(track.Receive(walking.Story, DateTimeOffset.UnixEpoch).Screen);
+
+        var leader = h.Players.ToList().FindIndex(p => p.Id == game.Leader!.Id);
+        h.Input(leader, new { action = "interact" });
+        var opening = OverTheWire(game);
+        var first = track.Receive(opening.Story, h.Now);
+        Assert.Null(first.Say);                                            // a fresh track: the first line shows
+        Assert.True(first.Screen!.Caption!.Narrator);
+        Assert.StartsWith("Emberwick, at the Ashen Ford.", string.Concat(first.Screen.Caption.Rows[0].Select(r => r.Text)));
+        Assert.Null(Assert.Single(StoryMarks.Of(opening.Explore!, new BoardTerrain(ground.Map, null), units)).Emote);   // its scene plays: no "!"
+
+        var said = new List<string>();
+        StoryTick tick = first;
+        for (var guard = 0; guard < 20 && tick.Screen?.Vote is null; guard++)
+        {
+            h.Advance(OverTheWire(game).Story!.Until!.Value - h.Now);
+            tick = track.Receive(OverTheWire(game).Story, h.Now);
+            if (tick.Say is { } say)
+            {
+                Assert.Equal(OverTheWire(game).Story!.Line!.Id, say.Line);
+                Assert.Equal(VoiceClips.Load(ContentRoot).ForLine(say.Line)!.Path, say.Clip);
+                said.Add(say.Line);
+            }
+        }
+
+        Assert.Equal(["ch1_mayor_open_2", "ch1_mayor_open_3", "ch1_mayor_open_4", "ch1_mayor_halden_1", "ch1_mayor_halden_2", "ch1_mayor_halden_3",
+            "ch1_mayor_halden_4"], said);
+        Assert.Equal("Halden Varrow", tick.Screen!.Caption!.Speaker);
+        Assert.Equal("portraits/mayor_sad.png", tick.Screen.Caption.Portrait!.Path);
+        var vote = tick.Screen.Vote!;
+        Assert.Equal("Leader's choice", vote.Heading);
+        Assert.Equal($"{game.Leader!.Name} chooses for the party", vote.Tally);
+        Assert.Equal("“Who are these goblins?”", Assert.Single(vote.Rows[0].Label));
+        Assert.NotNull(vote.Clock);
     }
 
     private static void AssertSame(BattleView live, BattleView shown)

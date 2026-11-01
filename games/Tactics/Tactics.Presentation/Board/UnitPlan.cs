@@ -149,11 +149,27 @@ public static class UnitPlan
         return new BoardUnit(OrderOf(place.Over, sprite), id, UnitTone.Party, feet, sprite, anim, PhaseOf(id), row, mirror, Math.Min(sprite.Width * RingShare, MaxRing),
             false, [], [], null, null, [], feet, null)
         {
-            CrownAt = walker.Leads ? new Vector2(feet.X, feet.Y - sprite.AnchorY + sprite.HeadTop - Gap) : null,
+            CrownAt = walker.Leads ? Overhead(feet, sprite) : null,
             Away = !walker.Here,
             Outlined = true,
         };
     }
+
+    /// <summary>
+    /// A figure standing in the world as dressing (a story beat's, overworld 5d default 12): idle, looking at the viewer, with no ring and no
+    /// marks, sorted among the party by its tile. <paramref name="sprite"/> is a key the pack may not draw: then it's the neutral stand-in.
+    /// </summary>
+    public static BoardUnit Figure(string id, string? sprite, UnitPlace place, UnitArt art, Func<Vector2, bool, Vector2>? pixels = null)
+    {
+        var drawn = art.Sprite(sprite) ?? art.StandIn(UnitTone.Neutral);
+        var feet = pixels?.Invoke(place.Feet, true) ?? place.Feet;
+        var unit = new UnitId(id);
+        return new BoardUnit(OrderOf(place.Over, drawn), unit, UnitTone.Neutral, feet, drawn, drawn.Idle, PhaseOf(unit), 0, false, 0, false, [], [], null,
+            null, [], feet, null);
+    }
+
+    /// <summary>Where the tail of an emote over a standing figure goes: a crown's or a "!"'s, just over the head of <paramref name="sprite"/> at <paramref name="feet"/>.</summary>
+    public static Vector2 Overhead(Vector2 feet, UnitSprite sprite) => new(feet.X, feet.Y - sprite.AnchorY + sprite.HeadTop - Gap);
 
     private static BoardUnit Unit(UnitView unit, UnitView[] all, UnitId? active, UnitArt art, float top, UnitPlace place, UnitPose? pose, Tile offset)
     {
