@@ -676,7 +676,10 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             }
             AddChild(_story);
         }
-        MoveChild(_story, _caption.GetIndex());     // over the world and its panels, which the check and the card dim
+        if (StoryOrder.Move(_story.GetIndex(), _caption.GetIndex()) is { } to)
+        {
+            MoveChild(_story, to);      // just under the fight's caption, over the world and its panels, which the check and the card dim
+        }
         if (!_markerShot && view.Explore?.Markers is { IsDefaultOrEmpty: false } marks && marks.Any(m => m.Emote is not null) && view.Story is null)
         {
             _markerShot = true;
