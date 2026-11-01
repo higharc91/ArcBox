@@ -29,6 +29,7 @@ public static class MusicChoice
     {
         ["warlord_bridge"] = Boss,
         ["keep_gate"] = Boss,
+        ["rime_tower"] = Boss,          // Ivo Rime, Chapter 4's climax: the user's call, 2026-11-01 (Ford Assault stays ordinary)
         ["hall_of_the_flame"] = Finale,
     }.ToImmutableDictionary();
 

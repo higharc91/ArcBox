@@ -60,8 +60,8 @@ public sealed class MusicChoiceTests
         ["crypt_hall"] = "battle",
         ["crystal_cave"] = "battle",
         ["ford_assault"] = "battle",
-        ["rime_tower"] = "battle",
         ["warlord_bridge"] = "boss",
+        ["rime_tower"] = "boss",
         ["keep_gate"] = "boss",
         ["hall_of_the_flame"] = "finale",
     };
@@ -101,6 +101,7 @@ public sealed class MusicChoiceTests
     [Theory]
     [InlineData("warlord_bridge")]
     [InlineData("keep_gate")]
+    [InlineData("rime_tower")]
     [InlineData("hall_of_the_flame")]
     public void Beating_a_boss_plays_the_grand_fanfare(string encounter)
         => Assert.Equal(new MusicCue("victory_boss", Then: "camp"),
