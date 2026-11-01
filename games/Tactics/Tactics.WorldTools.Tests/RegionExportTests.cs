@@ -7,6 +7,12 @@ using Tactics.Logic.Tests;
 
 namespace Tactics.WorldTools.Tests;
 
+/// <summary>
+/// Not in parallel with the other classes: two of these check that no <c>tactics-region-check-*</c> folder is left in the shared temp
+/// folder, and any other class exporting at the same moment has one there for a while (the full suite failed on that once).
+/// </summary>
+[CollectionDefinition(nameof(RegionExportTests), DisableParallelization = true)]
+[Collection(nameof(RegionExportTests))]
 public sealed class RegionExportTests : IDisposable
 {
     private const string Grass = "grass/lush", Beat = "ch1_mayors_request";
