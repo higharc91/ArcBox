@@ -16,6 +16,10 @@ namespace ArcBox.Host.Games.Tactics;
 /// simply unlit. Why not Light2D is in docs/tv-host.md. What glows by itself is drawn again, unlit, in its place in the painter's order,
 /// so what stands in front of it still hides it. The items themselves are painted by <see cref="BoardPainter"/>, which a world's blocks share.
 /// </para>
+/// <para>
+/// Over a world it paints no board of its own: <see cref="SetDrawn"/> gives it, frame by frame, only what stands in front of the units, already
+/// baked by <see cref="WorldCanvas"/>, and the units, their marks and the halos in view go through here as they do in a battle.
+/// </para>
 /// </summary>
 public partial class BoardCanvas : Node2D
 {
@@ -31,7 +35,7 @@ public partial class BoardCanvas : Node2D
     private static readonly Color NeutralRing = new("dbceb7");
     private static readonly Color ActiveRing = new("ffe794");
 
-    private readonly BoardPainter _painter = new();
+    private readonly BoardPainter _painter;
     private readonly List<object> _items = [];
     private readonly List<long> _orders = [];
     private ImmutableArray<BoardUnit> _units = [];
@@ -45,9 +49,18 @@ public partial class BoardCanvas : Node2D
     private readonly FxLayer _over;
     private BoardLighting? _lighting;
     private Vector2 _origin;
+    private bool _baked;
+    private (System.Numerics.Vector2 Min, System.Numerics.Vector2 Max)? _view;
 
     public BoardCanvas()
+        : this(new BoardPainter())
     {
+    }
+
+    /// <summary>A board that shares <paramref name="painter"/>'s textures, as one over a world does.</summary>
+    internal BoardCanvas(BoardPainter painter)
+    {
+        _painter = painter;
         TextureFilter = TextureFilterEnum.Nearest;
         TextureRepeat = TextureRepeatEnum.Enabled;   // a side deeper than its texture repeats
         _halos = new FxLayer(Load, additive: true);
@@ -74,13 +87,36 @@ public partial class BoardCanvas : Node2D
             _items.Add(drawn);
             _orders.Add(item.Order);
         }
-        _halos.Show(_lighting?.Halos(_clock) ?? []);
+        _halos.Show(HalosNow());
         _animated = plan.Animated;
         _origin = new Vector2(fit.Origin.X, fit.Origin.Y);
         Position = _origin;
         Scale = new Vector2(fit.Scale, fit.Scale);
         Merge();
     }
+
+    /// <summary>How long the last drawing took, in milliseconds.</summary>
+    public double LastDrawMs { get; private set; }
+
+    /// <summary>Draws over a world lit by <paramref name="lighting"/>, with items whose colours are baked. Units still read the light as it flickers.</summary>
+    internal void JoinWorld(BoardLighting? lighting)
+    {
+        _lighting = lighting;
+        _baked = true;
+    }
+
+    /// <summary>Paints <paramref name="items"/>, prepared by <see cref="BoardPainter.Prepare(LitItem, BoardLighting?)"/> and bound, in place of a plan. Their <paramref name="orders"/> are the painter's order.</summary>
+    internal void SetDrawn(IEnumerable<object> items, IEnumerable<long> orders)
+    {
+        _items.Clear();
+        _items.AddRange(items);
+        _orders.Clear();
+        _orders.AddRange(orders);
+        Merge();
+    }
+
+    /// <summary>Limits the halos to a view of the board, in art pixels, as a region has far more of them than a screen.</summary>
+    internal void SetView(System.Numerics.Vector2 min, System.Numerics.Vector2 max) => _view = (min, max);
 
     /// <summary>Shows <paramref name="units"/> over the current plan, which stays as it is, so this can run on every frame.</summary>
     public void SetUnits(ImmutableArray<BoardUnit> units, UnitArt art)
@@ -116,14 +152,25 @@ public partial class BoardCanvas : Node2D
         {
             _tick = tick;
             _marks.Tick(_clock);
-            _halos.Show(_lighting?.Halos(_clock) ?? []);
+            _halos.Show(HalosNow());
             QueueRedraw();
         }
     }
 
+    private ImmutableArray<FxDraw> HalosNow()
+    {
+        if (_lighting is null)
+        {
+            return [];
+        }
+        return _view is { } view ? _lighting.Halos(_clock, view.Min, view.Max) : _lighting.Halos(_clock);
+    }
+
     public override void _Draw()
     {
+        var clock = System.Diagnostics.Stopwatch.GetTimestamp();
         _lighting?.Step(_clock);
+        var light = _baked ? null : _lighting;
         foreach (var step in _sequence)
         {
             if (step < 0)
@@ -132,9 +179,10 @@ public partial class BoardCanvas : Node2D
             }
             else
             {
-                _painter.Paint(this, _items[step], _lighting, _clock);
+                _painter.Paint(this, _items[step], light, _clock);
             }
         }
+        LastDrawMs = System.Diagnostics.Stopwatch.GetElapsedTime(clock).TotalMilliseconds;
     }
 
     private static Color Colour(Rgb colour, float alpha = 1) => new(colour.R, colour.G, colour.B, alpha);

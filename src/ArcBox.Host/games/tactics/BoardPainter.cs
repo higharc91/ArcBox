@@ -8,7 +8,8 @@ namespace ArcBox.Host.Games.Tactics;
 /// alike and differ in their light. A board reads it at each draw, from the lighting passed to <see cref="Paint"/>. A block is drawn once,
 /// so <see cref="Prepare(LitItem, BoardLighting?)"/> bakes each item at its mean from the lighting of the whole region, and the block paints
 /// with no lighting at all. <see cref="Prepare(LitItem, BoardLighting?)"/> makes only arrays and is safe off the main thread; textures
-/// are attached by <see cref="Bind"/>, on it.
+/// are attached by <see cref="Bind"/>, on it. With <see cref="Frames"/>, what's animated is drawn from a single frame that changes in place,
+/// so it goes on moving where it's recorded once.
 /// </summary>
 internal sealed class BoardPainter
 {
@@ -22,6 +23,7 @@ internal sealed class BoardPainter
         public Color[] Colours { get; } = colours;
         public Texture2D? Texture { get; set; }
         public Texture2D? Glow { get; set; }
+        public bool OneFrame { get; set; }
     }
 
     private sealed class DrawnSprite(LitSprite lit, Rect2 target, Vector2 size, Color baked)
@@ -32,6 +34,7 @@ internal sealed class BoardPainter
         public Color Baked { get; } = baked;
         public Texture2D? Texture { get; set; }
         public Texture2D? Glow { get; set; }
+        public bool OneFrame { get; set; }
     }
 
     private static readonly Color GridLine = new(0, 0, 0, 0.22f);
@@ -43,6 +46,9 @@ internal sealed class BoardPainter
 
     /// <summary>The pack's root, which files are read from.</summary>
     public string Root { get; set; } = "";
+
+    /// <summary>Where animated art goes, for drawing that's recorded once; null to step through its strip at each draw.</summary>
+    public FrameTextures? Frames { get; set; }
 
     /// <summary>
     /// What <see cref="Paint"/> needs for <paramref name="item"/>, before its textures. With <paramref name="baked"/>, the lighting of the whole
@@ -56,16 +62,21 @@ internal sealed class BoardPainter
         if (drawn is DrawnFace face)
         {
             var lit = face.Lit;
-            face.Texture = lit.Art ? Texture(lit.Face) : null;
-            face.Glow = lit.Glow && lit.Face.Image is { Glow: { } rule } image ? Glow(image.Path, null, rule.Colour) : null;
+            face.Texture = lit.Art ? Texture(lit.Face.Image, lit.Face.Facing == Facing.Up) : null;
+            face.Glow = lit.Glow && lit.Face.Image is { Glow: { } rule } image ? Glow(image, null, rule.Colour) : null;
+            face.OneFrame = Moves(lit.Face.Image);
         }
         else if (drawn is DrawnSprite sprite)
         {
             var lit = sprite.Lit;
-            sprite.Texture = Load(lit.Sprite.Image.Path);
-            sprite.Glow = lit.Glow && lit.Sprite.Light is { } light ? Glow(lit.Sprite.Image.Path, light.Mask, light.Colour) : null;
+            sprite.Texture = Texture(lit.Sprite.Image, false);
+            sprite.Glow = lit.Glow && lit.Sprite.Light is { } light ? Glow(lit.Sprite.Image, light.Mask, light.Colour) : null;
+            sprite.OneFrame = Moves(lit.Sprite.Image);
         }
     }
+
+    /// <summary>Loads an image the way items that lie <paramref name="flat"/> or stand will draw it. Only on the main thread: this reads a file.</summary>
+    public void Preload(ArtImage image, bool flat) => Texture(image, flat);
 
     /// <summary>Paints one item on <paramref name="canvas"/> as things stand at <paramref name="clock"/>. With no <paramref name="now"/>, its colours are as prepared.</summary>
     public void Paint(CanvasItem canvas, object drawn, BoardLighting? now, double clock)
@@ -102,23 +113,40 @@ internal sealed class BoardPainter
         return _textures[file] = ImageTexture.CreateFromImage(loaded);
     }
 
-    /// <summary>What a face is drawn with. A top lies turned on its tile, so a still one goes through <see cref="DitherTexels"/>; one that moves doesn't stay long enough to read as a comb.</summary>
-    private Texture2D? Texture(Face face) => face.Facing == Facing.Up && face.Image is { Frames: 1, Path: var file } ? LoadTop(file) : Load(face.Image?.Path);
-
-    private Texture2D? LoadTop(string file)
+    /// <summary>What an image is drawn with. A top lies turned on its tile, so it goes through <see cref="DitherTexels"/>.</summary>
+    private Texture2D? Texture(ArtImage? image, bool flat)
     {
-        if (_tops.TryGetValue(file, out var known))
+        if (image is null)
+        {
+            return null;
+        }
+        if (Moves(image))
+        {
+            return Frames!.Of(image.Path) ?? ((flat ? Turned(image) : Pixels(image.Path)) is { } strip ? Frames.Add(image.Path, image, strip) : Load(image.Path));
+        }
+        return flat ? LoadTop(image) : Load(image.Path);
+    }
+
+    private bool Moves(ArtImage? image) => Frames is not null && image is { Frames: > 1 };
+
+    private Texture2D? LoadTop(ArtImage image)
+    {
+        if (_tops.TryGetValue(image.Path, out var known))
         {
             return known;
         }
-        if (Pixels(file) is not { } art)
+        return _tops[image.Path] = Turned(image) is { } top ? ImageTexture.CreateFromImage(top) : Load(image.Path);   // which warns
+    }
+
+    /// <summary>A top's pixels as they go to the TV: doubled if it has dither, and as they are if not.</summary>
+    private Image? Turned(ArtImage image)
+    {
+        if (Pixels(image.Path) is not { } art)
         {
-            return _tops[file] = Load(file);   // which warns
+            return null;
         }
-        var doubled = DitherTexels.Doubled(art.GetData(), art.GetWidth(), art.GetHeight());
-        return _tops[file] = ImageTexture.CreateFromImage(doubled is null
-            ? art
-            : Image.CreateFromData(art.GetWidth() * DitherTexels.Scale, art.GetHeight() * DitherTexels.Scale, false, Image.Format.Rgba8, doubled));
+        var doubled = DitherTexels.Doubled(art.GetData(), art.GetWidth(), art.GetHeight(), image.Frames);
+        return doubled is null ? art : Image.CreateFromData(art.GetWidth() * DitherTexels.Scale, art.GetHeight() * DitherTexels.Scale, false, Image.Format.Rgba8, doubled);
     }
 
     private static DrawnFace Prepare(LitFace lit, BoardLighting? baked)
@@ -135,20 +163,21 @@ internal sealed class BoardPainter
                 colours[i] = Colour(lit.MeanColourAt(i, baked), face.Alpha);
             }
         }
-        return new DrawnFace(lit, points, face.Grid ? [.. points, points[0]] : null, uvs, colours);
+        return new DrawnFace(baked is null ? lit : lit with { Probes = [] }, points, face.Grid ? [.. points, points[0]] : null, uvs, colours);
     }
 
     private static DrawnSprite Prepare(LitSprite lit, BoardLighting? baked)
     {
         var sprite = lit.Sprite;
         var size = new Vector2(sprite.Size.X, sprite.Size.Y);
-        return new DrawnSprite(lit, new Rect2(new Vector2(sprite.TopLeft.X, sprite.TopLeft.Y), size), size, baked is null ? Colors.White : Colour(lit.MeanLight(baked)));
+        return new DrawnSprite(baked is null ? lit : lit with { Probe = null }, new Rect2(new Vector2(sprite.TopLeft.X, sprite.TopLeft.Y), size), size,
+            baked is null ? Colors.White : Colour(lit.MeanLight(baked)));
     }
 
     private static void PaintFace(CanvasItem canvas, DrawnFace drawn, BoardLighting? now, double clock)
     {
         LightUp(drawn, now);
-        var uvs = FrameUvs(drawn, clock);
+        var uvs = drawn.OneFrame ? drawn.Uvs : FrameUvs(drawn, clock);
         if (drawn.Lit.Art)
         {
             if (drawn.Texture is null)
@@ -202,7 +231,7 @@ internal sealed class BoardPainter
     {
         if (drawn.Texture is not null)
         {
-            var source = new Rect2(new Vector2(drawn.Lit.Sprite.Image.FrameAt(clock) * drawn.Size.X, 0), drawn.Size);
+            var source = new Rect2(new Vector2(drawn.OneFrame ? 0 : drawn.Lit.Sprite.Image.FrameAt(clock) * drawn.Size.X, 0), drawn.Size);
             var light = now is null ? drawn.Baked : Colour(drawn.Lit.LightNow(now));
             canvas.DrawTextureRectRegion(drawn.Texture, drawn.Target, source, light);
             if (drawn.Glow is not null)
@@ -213,16 +242,20 @@ internal sealed class BoardPainter
     }
 
     /// <summary>What of a strip of the pack glows by itself, as a texture of its own: once each, as it's work over every pixel.</summary>
-    private Texture2D? Glow(string file, string? mask, Rgb colour)
+    private Texture2D? Glow(ArtImage image, string? mask, Rgb colour)
     {
-        if (_glows.TryGetValue(file, out var known))
+        if (_glows.TryGetValue(image.Path, out var known))
         {
             return known;
         }
-        return _glows[file] = Bake(file, mask, colour);
+        if (Bake(image.Path, mask, colour) is not { } glow)
+        {
+            return _glows[image.Path] = null;
+        }
+        return _glows[image.Path] = Moves(image) ? Frames!.Add($"glow:{image.Path}", image, glow) : ImageTexture.CreateFromImage(glow);
     }
 
-    private Texture2D? Bake(string file, string? mask, Rgb colour)
+    private Image? Bake(string file, string? mask, Rgb colour)
     {
         if (Pixels(file) is not { } art)
         {
@@ -242,7 +275,7 @@ internal sealed class BoardPainter
         {
             return null;
         }
-        return ImageTexture.CreateFromImage(Image.CreateFromData(art.GetWidth(), art.GetHeight(), false, Image.Format.Rgba8, glow));
+        return Image.CreateFromData(art.GetWidth(), art.GetHeight(), false, Image.Format.Rgba8, glow);
     }
 
     private Image? Pixels(string file, Image.Format format = Image.Format.Rgba8)

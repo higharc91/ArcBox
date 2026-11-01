@@ -248,13 +248,23 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
         var depth = (top - bottom) * BoardProjection.HeightStep;
         var along = (facing == Facing.U ? tile.Y : tile.X) % TilesPerTexture / (float)TilesPerTexture;
         var (u0, u1) = (along, along + 1f / TilesPerTexture);
-        var rows = image is { Height: > (int)TileTexels } ? Math.Min(1, depth / image.Height) : depth / TileTexels;   // a tall texture clamps, others repeat
+        var clamps = image is { Height: > (int)TileTexels };     // a tall texture clamps, others repeat
+        var drawn = clamps ? Math.Min(depth, image!.Height) : depth;
+        var rows = clamps ? drawn / image!.Height : depth / TileTexels;
         var shade = facing == Facing.U ? ShadeU : ShadeV;
         var key = BoardOrder.Key(tile, BoardLayer.Side);
         var edge = Edge(tile, facing, top);
-        var drop = new Vector2(0, depth);
+        var drop = new Vector2(0, drawn);
         items.Add(new Face(key, tile, FaceKind.Side, facing, [edge.Near, edge.Far, edge.Far + drop, edge.Near + drop],
             [new(u0, 0), new(u1, 0), new(u1, rows), new(u0, rows)], image, image is null ? NoArt : null, shade));
+        if (depth > drawn)
+        {
+            // Clamped: past the art, the wall goes on as its last row, which is what the art fades to.
+            var last = 1 - 0.5f / image!.Height;
+            var floor = new Vector2(0, depth);
+            items.Add(new Face(key, tile, FaceKind.Side, facing, [edge.Near + drop, edge.Far + drop, edge.Far + floor, edge.Near + floor],
+                [new(u0, last), new(u1, last), new(u1, last), new(u0, last)], image, null, shade));
+        }
 
         if (look.Lip is { } lip && art.Texture(lip) is { } lipImage)
         {

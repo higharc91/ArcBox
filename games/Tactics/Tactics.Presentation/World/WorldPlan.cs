@@ -12,6 +12,14 @@ public readonly record struct ArtArea(Vector2 Min, Vector2 Max)
     public bool Overlaps(ArtArea other) => Min.X < other.Max.X && other.Min.X < Max.X && Min.Y < other.Max.Y && other.Min.Y < Max.Y;
 }
 
+/// <summary>An image a plan draws.</summary>
+/// <param name="Image">The image.</param>
+/// <param name="Flat">It lies on the ground, turned, so the TV gets it through <see cref="DitherTexels"/>.</param>
+public readonly record struct PlannedImage(ArtImage Image, bool Flat);
+
+/// <summary>Where a lit item is in a plan: in <see cref="WorldPlan.Blocks"/>, and in that block's <see cref="LitBoard.Items"/>.</summary>
+public readonly record struct ItemAt(int Block, int Item);
+
 /// <summary>One block of the world.</summary>
 /// <param name="Index">Its place in <see cref="WorldPlan.Blocks"/>.</param>
 /// <param name="Tiles">The tiles it holds.</param>
@@ -39,25 +47,36 @@ public sealed class WorldPlan
 
     private static readonly int ChunkShift = BitOperations.Log2(WorldRegion.ChunkSize);   // a shift floors, for tiles above the map
 
-    private WorldPlan(BoardTerrain terrain, ImmutableArray<BlockPlan> blocks, BoardLighting lighting, ImmutableArray<string> paths)
+    private readonly (long Order, ArtArea Box)[][] _boxes;
+
+    private WorldPlan(BoardTerrain terrain, ImmutableArray<BlockPlan> blocks, BoardLighting lighting, ImmutableArray<string> paths, ImmutableArray<PlannedImage> images, ImmutableArray<string> halos)
     {
         Terrain = terrain;
         Blocks = blocks;
         Lighting = lighting;
         Paths = paths;
+        Images = images;
+        Halos = halos;
+        _boxes = [.. blocks.Select(b => b.Lit.Items.Select(i => (i.Order, BoxOf(i))).ToArray())];
     }
 
     /// <summary>The ground it was built from.</summary>
     public BoardTerrain Terrain { get; }
 
     /// <summary>Every block, in the order they're drawn.</summary>
-    public ImmutableArray<BlockPlan> Blocks { get; }
+    public ImmutableArray<BlockPlan> Blocks { get; private set; }
 
     /// <summary>The one lighting of the whole region.</summary>
     public BoardLighting Lighting { get; }
 
     /// <summary>Every image the plan draws, once each, relative to the pack's root.</summary>
     public ImmutableArray<string> Paths { get; }
+
+    /// <summary>The images of its items, once each for each way they're used.</summary>
+    public ImmutableArray<PlannedImage> Images { get; }
+
+    /// <summary>The images of its lights' halos, once each, which <see cref="Images"/> doesn't have.</summary>
+    public ImmutableArray<string> Halos { get; }
 
     /// <summary>The plan for <paramref name="terrain"/>, whose map's id names the region for its light.</summary>
     public static WorldPlan Build(BoardTerrain terrain, ArtIndex art, int blockSize = WorldTuning.BlockSize)
@@ -73,9 +92,52 @@ public sealed class WorldPlan
         var lighting = BoardLighting.Of(plans, terrain.Map.Id, art.Lighting);
         ImmutableArray<BlockPlan> blocks = [.. inOrder.Select((c, i) => new BlockPlan(i, c.Tiles, c.Column + c.Row, plans[i], LitBoard.Build(plans[i], lighting)))];
 
-        var images = plans.SelectMany(p => p.Items).Select(i => i is Face face ? face.Image?.Path : ((Sprite)i).Image.Path).OfType<string>();
-        var halos = lighting.Lights.Select(l => l.Halo?.Path).OfType<string>();
-        return new WorldPlan(terrain, blocks, lighting, [.. images.Concat(halos).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal)]);
+        ImmutableArray<PlannedImage> images =
+        [
+            .. plans.SelectMany(p => p.Items)
+                .Select(i => i is Face face ? (face.Image, Flat: face.Facing == Facing.Up) : (((Sprite)i).Image, Flat: false))
+                .Where(i => i.Image is not null)
+                .DistinctBy(i => (i.Image!.Path, i.Flat))
+                .OrderBy(i => i.Image!.Path, StringComparer.Ordinal)
+                .ThenBy(i => i.Flat)
+                .Select(i => new PlannedImage(i.Image!, i.Flat)),
+        ];
+        ImmutableArray<string> halos = [.. lighting.Lights.Select(l => l.Halo?.Path).OfType<string>().Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal)];
+        return new WorldPlan(terrain, blocks, lighting, [.. images.Select(i => i.Image.Path).Concat(halos).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal)], images, halos);
+    }
+
+    /// <summary>
+    /// Lets go of what each item read of the light, once its colours are baked. A region's probes are most of what its plan weighs, and nothing but
+    /// baking reads them. Do this before the plan is shared: it isn't safe beside another thread's reads.
+    /// </summary>
+    public void DropProbes()
+    {
+        var blocks = ImmutableArray.CreateBuilder<BlockPlan>(Blocks.Length);
+        foreach (var block in Blocks)
+        {
+            ImmutableArray<LitItem> items = [.. block.Lit.Items.Select(i => i switch
+            {
+                LitFace face => face with { Probes = [] },
+                LitSprite sprite => sprite with { Probe = null },
+                _ => i,
+            })];
+            blocks.Add(block with { Lit = block.Lit with { Items = items } });
+        }
+        Blocks = blocks.MoveToImmutable();
+    }
+
+    /// <summary>The blocks with something drawn in <paramref name="view"/>, in draw order.</summary>
+    public ImmutableArray<BlockPlan> BlocksIn(ArtArea view) => [.. Blocks.Where(b => !b.Plan.Items.IsEmpty && new ArtArea(b.Plan.Min, b.Plan.Max).Overlaps(view))];
+
+    /// <summary>What a unit covers: its sprite and the ring at its feet, facing either way. Its marks stand above everything, so they don't count.</summary>
+    public static ArtArea AreaOf(BoardUnit unit)
+    {
+        var sprite = unit.Sprite;
+        var left = unit.Feet.X - (unit.Mirror ? sprite.Width - sprite.AnchorX : sprite.AnchorX);
+        var top = unit.Feet.Y - sprite.AnchorY;
+        var ring = new Vector2(unit.Ring, unit.Ring / 2);
+        return new ArtArea(Vector2.Min(new Vector2(left, top), unit.Feet - ring),
+            Vector2.Max(new Vector2(left + sprite.Width, top + sprite.Height), unit.Feet + ring));
     }
 
     /// <summary>
@@ -101,23 +163,27 @@ public sealed class WorldPlan
     /// What's drawn over <paramref name="area"/> later than <paramref name="afterOrder"/>, in painter's order: what must go again over a unit
     /// standing there. It reads each item's real extent, so a tall side in front is found though its tile is off the area.
     /// </summary>
-    public ImmutableArray<LitItem> ItemsOver(ArtArea area, long afterOrder)
+    public ImmutableArray<LitItem> ItemsOver(ArtArea area, long afterOrder) => [.. Over(area, afterOrder).Select(at => Blocks[at.Block].Lit.Items[at.Item])];
+
+    /// <summary>As <see cref="ItemsOver"/>, as where each item is, for a frame to find what it prepared of them.</summary>
+    public ImmutableArray<ItemAt> Over(ArtArea area, long afterOrder)
     {
-        var found = new List<LitItem>();
+        var found = new List<(long Order, ItemAt At)>();
         foreach (var block in Blocks)
         {
             if (block.Plan.Items.IsEmpty || !new ArtArea(block.Plan.Min, block.Plan.Max).Overlaps(area))
                 continue;
-            foreach (var item in block.Lit.Items)
-                if (item.Order > afterOrder && Covers(item, area))
-                    found.Add(item);
+            var boxes = _boxes[block.Index];
+            for (var i = 0; i < boxes.Length; i++)
+                if (boxes[i].Order > afterOrder && boxes[i].Box.Overlaps(area))
+                    found.Add((boxes[i].Order, new ItemAt(block.Index, i)));
         }
-        return [.. found.OrderBy(i => i.Order)];
+        return [.. found.OrderBy(f => f.Order).Select(f => f.At)];
     }
 
-    private static bool Covers(LitItem item, ArtArea area)
+    private static ArtArea BoxOf(LitItem item)
     {
         var (min, max) = BoardPlan.Bounds(item is LitFace face ? face.Face : ((LitSprite)item).Sprite);
-        return new ArtArea(min, max).Overlaps(area);
+        return new ArtArea(min, max);
     }
 }

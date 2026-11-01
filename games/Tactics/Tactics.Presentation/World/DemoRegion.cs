@@ -1,7 +1,10 @@
 using System.Collections.Immutable;
 using System.Text.Json;
+using System.Numerics;
 using ArcBox.Sdk;
+using Tactics.Game;
 using Tactics.Logic;
+using Tactics.Presentation.Beats;
 using Tactics.Presentation.Board;
 
 namespace Tactics.Presentation.World;
@@ -13,6 +16,8 @@ namespace Tactics.Presentation.World;
 public static class DemoRegion
 {
     private const string PropsMap = "demo_props";
+    private const string WalkerSprite = "characters.class_fighter";
+    private const int WalkerHp = 34;
 
     // One prop to this many tiles, and of those, one in this many gives light. That's 960 lights on 160 x 120, as the lighting tests use.
     private const int TilesPerProp = 5;
@@ -33,6 +38,19 @@ public static class DemoRegion
         var maps = def.Stamps.Select(s => s.Map).Distinct(StringComparer.Ordinal)
             .ToDictionary(m => m, m => BoardMap.Parse(File.ReadAllText(Path.Combine(rules, "maps", $"{m}.json"))), StringComparer.Ordinal);
         return WorldGround.Of(WorldRegion.From(def), maps);
+    }
+
+    /// <summary>One unit walking <paramref name="heading"/> at <paramref name="place"/>, <paramref name="seconds"/> into its stride: the party, until there is one.</summary>
+    public static ImmutableArray<BoardUnit> StandIn(BoardTerrain terrain, UnitArt art, UnitPlace place, Vector2 heading, double seconds)
+    {
+        var id = new UnitId("walker");
+        var at = new Tile(Math.Clamp((int)place.Map.X, 0, terrain.Map.Width - 1), Math.Clamp((int)place.Map.Y, 0, terrain.Map.Height - 1));
+        var unit = new UnitView(id, id.Value, "Party", WalkerSprite, at, WalkerHp, WalkerHp, 0, "Up", 0, [], null);
+        var battle = new BattleView(terrain.Map.Id, terrain.Map.Id, 1, [id], null, [unit], [], null, BoardChanges.None, ObjectivesDef.Default, null);
+        var noStrip = new BoardFit(new Vector2(0, float.MaxValue / 4), 1);     // the world has no top strip for its marks to clear
+        return UnitPlan.Build(battle, terrain, art, noStrip,
+            new Dictionary<UnitId, UnitPlace> { [id] = place },
+            new Dictionary<UnitId, UnitPose> { [id] = new UnitPose(BeatScript.WalkAnim, seconds, heading) });
     }
 
     /// <summary>A generated region with a river through rolling hills, thick with props and lights. The same every time.</summary>

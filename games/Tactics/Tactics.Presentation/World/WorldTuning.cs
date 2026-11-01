@@ -14,4 +14,7 @@ public static class WorldTuning
 
     /// <summary>How far ahead of the party blocks are queued, in seconds of its walking.</summary>
     public const float QueueAhead = 2;
+
+    /// <summary>How long the opening fade takes, in seconds. Everything that can't wait a frame's budget happens behind it.</summary>
+    public const double FadeSeconds = 0.4;
 }

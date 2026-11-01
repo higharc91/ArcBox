@@ -55,7 +55,7 @@ Everything after `--` on the Godot command line; all optional.
 | `--drop-signals` | Dev only: the TV never sends a host signal, so a game runs on its fallback timers. Proves a game doesn't need them. |
 | `--beat-log` | Dev only: print a `BEAT` line for each Tactics beat played: when it ran, how long it took and what was in it. |
 | `--tactics-demo[=<map>[:changed\|:fight]]` | Dev only: show a Tactics board without a server, with the art from the repository's `content/` (default `river_crossing`). `:changed` adds zones, raised tiles and the bridge's tiles sunk; `:fight` adds one of every kind of unit. With `--shots` it saves `…-tactics-battle-<map>.png`. |
-| `--world-demo[=<region>|hilly[:<block tiles>]]` | Dev only: draw a whole region in blocks without a server, with the art and region from the repository's `content/` (default `ashen_ford`; `hilly` is `DemoRegion`'s stress case), pan over it, print what it cost in `WORLD` lines and quit. Use `--res=1920x1080`. With `--shots` it saves `world-<spec>.png` after the pan. See [the world](#the-world). |
+| `--world-demo[=<region>|hilly[:<block tiles>]]` | Dev only: open a whole region the way the TV will, without a server, with the art and region from the repository's `content/` (default `ashen_ford`; `hilly` is `DemoRegion`'s stress case), walk a stand-in the length of it at twice walking pace, print what it cost in `WORLD` lines and quit. Use `--res=1920x1080`. With `--shots` it saves `world-<spec>.png`, then one `world-<spot>.png` for each place `WorldSpots` finds: behind a cliff, behind a crate, water at a block edge, a block corner, the region's edge and both sides of the void. See [the world](#the-world). |
 | `--walk-log` | Dev only: print a `WALK` line for each step the TV shows. Parsed now; the exploration screen prints them. |
 | `--demo=campaign-lobby` | Dev only: show the lobby with a built-in campaign game selected, its campaign list and a roster with seated and away members (`Shell/CampaignLobbyDemo.cs`), without a server. With `--shots` it saves `001-lobby.png`. |
 
@@ -265,20 +265,34 @@ hub; its header has the commands.
 A region is drawn from cached blocks: `WorldPlan` cuts `BoardPlan`'s items into 16-tile squares (`BoardPlan.BuildBlock`, the same code with `WorldGround`'s real neighbours, so there's no
 seam or skirt) that share one `BoardLighting`, and `WorldBlock` records each one's items in `_Draw` once, so moving the camera changes only a transform. `Blocks` is in draw order: `ZIndex` is
 block column + row, with the column breaking ties. That agrees with `BoardOrder` for anything up to two tiles wide, and the pack's widest prop is 56 px. `BlockQueue` hands out unrecorded blocks
-nearest first, around where the party will be in 2 s. `ItemsOver` is what must go again over a unit.
+nearest first, around where the party will be in 2 s.
 
-Measured with `--world-demo` (2026-10-31, one run each, RTX 5080, 1920x1080, the usual Debug build, capped at the project's 144 fps, with the owner's other programs running). `_Draw` is the worst of a
-first recording, while the JIT is cold; a block's median is well under that.
+`WorldCanvas` is a `CanvasLayer` under the UI, because a block's Z sorts across its whole layer. It opens behind a fade: the plan and its baked colours off the main thread, then a texture a frame, then the blocks in view. Only then does the fade lift, and the rest go at 4 ms a frame, while the party is already moving. A block seen before its turn logs `WORLD late block`. Colours are baked at each light's mean, and the probes are then dropped, so floors don't flicker; flicker stays on halos and units, and halos are limited to the view. Water and flames go on moving in blocks recorded once because `FrameTextures` rewrites a single-frame texture in place, with a second one for what glows.
 
-| | Ashen Ford | `hilly` (160x120, 3840 props, 960 lights) |
+Over the blocks, a `BoardCanvas` (`SetDrawn`) paints each frame's units with only the items that sort after them and cross their rectangles (`WorldPlan.Over`), the same pixels in the same baked light. Painting something twice would show if it were half see-through, but no lip or prop in the pack has a partly clear pixel. A unit's marks stand above everything, so a bar stays visible over a figure hidden by a cliff.
+
+The pack's tops are square and lie turned 45 degrees on a tile, so a checker dither's diagonals run straight down the screen, and at scale 2 every patch of dither was a comb of vertical stripes. `DitherTexels` keeps a top's dither a checker: the TV gets the top at twice its size, which samples exactly as it did at any scale, and only texels that are part of a checker get a pattern that lands upright, in the same two colours. No filter or UV can do this, because outlines must stay where the turn puts them. A top with no dither (cobble, planks, water) is drawn as it is. See [the proof](superpowers/reports/2026-10-31-tactics-overworld/stripes-art-before-after.png): the art, then before, then after. A tall side clamps as the manifest says, so a drop deeper than `chasm_side` shows its art at its own size and goes on as its last row.
+
+Measured with `--world-demo` (2026-10-31, one run each, RTX 5080, 1920x1080, the usual Debug build, capped at the project's 144 fps, so 6.94 ms is the floor, with the owner's other programs running), on a full walk at twice walking pace that starts as the fade lifts. `_Draw` is a first recording, while the JIT is cold.
+
+| | Ashen Ford (170 tiles) | `hilly` (120 tiles, 3840 props, 960 lights) |
 |---|---|---|
-| Items planned, lit | 23,669, 30,402 | 36,393, 85,563 |
-| Off-thread build | 196 ms | 367 ms |
-| `_Draw` per block, worst, median | 1.42, 0.17 ms | 2.20, 0.80 ms |
-| Whole world at 4 ms a frame | 0.06 s, 8 frames | 0.14 s, 20 frames |
-| Added memory: managed, engine | 27, 7 MB | 87, 17 MB |
-| Render CPU while panning, median, worst | 0.76, 1.53 ms | 1.39, 2.43 ms |
-| Draw calls in view, at most | 2,982 | 3,935 |
+| Items, lit | 30,434 | 85,563 |
+| Off-thread build, with the bake | 449 ms | 658 ms |
+| Textures, behind the fade: total, worst | 50, 10.2 ms | 24, 6.2 ms |
+| Binding, behind the fade | 6 ms | 14 ms |
+| Blocks still to record at reveal | 49 of 80 | 57 of 80 |
+| `_Draw` per block, worst, median | 1.04, 0.25 ms | 2.37, 0.80 ms |
+| Recording in a frame, worst, over how many frames | 4.23 ms, 4 | 4.77 ms, 12 |
+| Frame during recording, worst | 12.34 ms | 7.14 ms |
+| Frame after the first second, worst | 6.94 ms | 6.94 ms |
+| Frames over 16 ms | 0 of 3,650 | 0 of 2,571 |
+| Overlay a frame: query, draw, p99 | 0.03, 0.07 ms | 0.05, 0.09 ms |
+| Render CPU, median, worst | 0.96, 2.33 ms | 1.80, 2.61 ms |
+| Draw calls in view, at most | 2,936 | 3,839 |
+| Added memory: managed, engine | 24, 11 MB | 63, 19 MB |
+
+The overlay query's worst is about 6.5 ms, once, on its first call behind the fade, as the JIT compiles it.
 
 So recording costs about 0.6 µs an item, and the cost that's left in a frame is the draw calls, as texture changes break the batches: a battle's board has about 500. No modest TV box has been measured.
 

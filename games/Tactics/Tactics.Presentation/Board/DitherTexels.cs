@@ -20,39 +20,64 @@ public static class DitherTexels
     public const int Scale = 2;
 
     /// <summary>
-    /// <paramref name="rgba"/>, one frame of a top that tiles, at <see cref="Scale"/> times its size with its dither turned upright; or null if
-    /// it has no dither, so that it's drawn as it is.
+    /// <paramref name="rgba"/>, a top that tiles, as a strip of <paramref name="frames"/> side by side, at <see cref="Scale"/> times its size with
+    /// its dither turned upright; or null if no frame has any dither, so that it's drawn as it is.
     /// </summary>
-    public static byte[]? Doubled(ReadOnlySpan<byte> rgba, int width, int height)
+    public static byte[]? Doubled(ReadOnlySpan<byte> rgba, int width, int height, int frames = 1)
     {
-        var art = MemoryMarshal.Cast<byte, uint>(rgba);
-        var dither = new bool[art.Length];
-        var any = false;
+        var strip = MemoryMarshal.Cast<byte, uint>(rgba);
+        var frameWidth = width / frames;
+        var art = new uint[frameWidth * height];
+        var doubled = default(byte[]);
+        for (var frame = 0; frame < frames; frame++)
+        {
+            for (var y = 0; y < height; y++)
+                strip.Slice(y * width + frame * frameWidth, frameWidth).CopyTo(art.AsSpan(y * frameWidth));
+            if (!AnyDither(art, frameWidth, height))
+                continue;
+            doubled ??= Plain(strip, width, height);
+            Pattern(art, frameWidth, height, MemoryMarshal.Cast<byte, uint>(doubled.AsSpan()), width * Scale, frame * frameWidth * Scale);
+        }
+        return doubled;
+    }
+
+    private static bool AnyDither(uint[] art, int width, int height)
+    {
         for (var y = 0; y < height; y++)
             for (var x = 0; x < width; x++)
-                any |= dither[y * width + x] = IsDither(art, width, height, x, y);
-        if (!any)
-            return null;
+                if (IsDither(art, width, height, x, y))
+                    return true;
+        return false;
+    }
 
-        var doubled = new byte[rgba.Length * Scale * Scale];
+    /// <summary>The strip with each texel made four.</summary>
+    private static byte[] Plain(ReadOnlySpan<uint> strip, int width, int height)
+    {
+        var doubled = new byte[strip.Length * sizeof(uint) * Scale * Scale];
         var texels = MemoryMarshal.Cast<byte, uint>(doubled.AsSpan());
-        var wide = width * Scale;
+        for (var y = 0; y < height * Scale; y++)
+            for (var x = 0; x < width * Scale; x++)
+                texels[y * width * Scale + x] = strip[y / Scale * width + x / Scale];
+        return doubled;
+    }
+
+    /// <summary>Lays the pattern over the dither of one frame, which starts <paramref name="from"/> texels into the doubled strip's rows.</summary>
+    private static void Pattern(uint[] art, int width, int height, Span<uint> texels, int wide, int from)
+    {
         for (var y = 0; y < height; y++)
             for (var x = 0; x < width; x++)
             {
-                var own = art[y * width + x];
-                var (even, odd) = (own, own);
-                if (dither[y * width + x])
-                    (even, odd) = ((x + y & 1) == 0 ? (own, At(art, width, height, x + 1, y)) : (At(art, width, height, x + 1, y), own));
-
+                if (!IsDither(art, width, height, x, y))
+                    continue;
+                var (own, beside) = (art[y * width + x], At(art, width, height, x + 1, y));
+                var (even, odd) = (x + y & 1) == 0 ? (own, beside) : (beside, own);
                 for (var j = 0; j < Scale; j++)
                     for (var i = 0; i < Scale; i++)
                     {
                         var (u, v) = (x * Scale + i, y * Scale + j);
-                        texels[v * wide + u] = (Across(u, v) + Down(u, v) & 1) == 0 ? even : odd;
+                        texels[v * wide + from + u] = (Across(u, v) + Down(u, v) & 1) == 0 ? even : odd;
                     }
             }
-        return doubled;
     }
 
     // Which art column and every-other-row a doubled texel lands in, at scale 2, from the projection's x = U - V and y = (U + V) / 2.

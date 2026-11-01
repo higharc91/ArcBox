@@ -113,6 +113,36 @@ public sealed class DitherTexelsTests
     }
 
     [Fact]
+    public void A_strip_turns_each_frame_alone()
+    {
+        // Two frames side by side, as the art lays them out: a checker, then a plain field. Neither may leak into the other at the join.
+        var strip = new uint[Size * 2 * Size];
+        for (var y = 0; y < Size; y++)
+            for (var x = 0; x < Size; x++)
+                (strip[y * Size * 2 + x], strip[y * Size * 2 + x + Size]) = (Checker(x, y), Light);
+        var single = Texels(DitherTexels.Doubled(Bytes(Painted(Checker)), Size, Size)!);
+
+        var doubled = Texels(DitherTexels.Doubled(Bytes(strip), Size * 2, Size, frames: 2)!);
+
+        Assert.Equal(Size * 2 * Size * 4, doubled.Length);
+        for (var y = 0; y < Size * 2; y++)
+            for (var x = 0; x < Size * 2; x++)
+            {
+                Assert.Equal(single[y * Size * 2 + x], doubled[y * Size * 4 + x]);
+                Assert.Equal(Light, doubled[y * Size * 4 + x + Size * 2]);
+            }
+    }
+
+    [Fact]
+    public void A_strip_with_no_dither_in_any_frame_is_left_alone()
+    {
+        var strip = new uint[Size * 2 * Size];
+        Array.Fill(strip, Light);
+
+        Assert.Null(DitherTexels.Doubled(Bytes(strip), Size * 2, Size, frames: 2));
+    }
+
+    [Fact]
     public void A_dot_with_a_friend_on_one_corner_isnt_a_dither()
     {
         var art = Painted((x, y) => (x, y) is (10, 10) or (11, 11) ? Dot : Light);

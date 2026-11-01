@@ -317,7 +317,10 @@ public sealed class BoardLighting
     }
 
     /// <summary>The soft glow about each source at a moment, which stands in for the recipe's bloom.</summary>
-    public ImmutableArray<FxDraw> Halos(double seconds)
+    public ImmutableArray<FxDraw> Halos(double seconds) => Halos(seconds, new Vector2(float.MinValue), new Vector2(float.MaxValue));
+
+    /// <summary>The halos that show between <paramref name="min"/> and <paramref name="max"/>, in art pixels: a region has far more than a view.</summary>
+    public ImmutableArray<FxDraw> Halos(double seconds, Vector2 min, Vector2 max)
     {
         var draws = ImmutableArray.CreateBuilder<FxDraw>();
         foreach (var light in Lights)
@@ -326,7 +329,10 @@ public sealed class BoardLighting
                 continue;
             var at = light.Sources[light.Sources.Length == 1 ? 0 : (int)(seconds * light.Fps) % light.Sources.Length];
             var size = halo.Size * (light.Radius * HaloTilesToScale);
-            draws.Add(new FxDraw(halo.Path, new ArtRect(0, 0, (int)halo.Size.X, (int)halo.Size.Y), at - size / 2, size, 0, true,
+            var (from, to) = (at - size / 2, at + size / 2);
+            if (from.X >= max.X || from.Y >= max.Y || to.X <= min.X || to.Y <= min.Y)
+                continue;
+            draws.Add(new FxDraw(halo.Path, new ArtRect(0, 0, (int)halo.Size.X, (int)halo.Size.Y), from, size, 0, true,
                 Math.Clamp(HaloAlpha * light.Flicker(seconds), 0, 1)));
         }
         return draws.ToImmutable();

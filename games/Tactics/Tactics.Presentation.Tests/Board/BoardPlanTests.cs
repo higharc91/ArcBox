@@ -121,6 +121,23 @@ public sealed class BoardPlanTests
     }
 
     [Fact]
+    public void A_chasm_wall_deeper_than_its_art_keeps_the_art_at_its_size_and_goes_on_as_void()
+    {
+        var plan = Plan(Map(["cave_floor/cool", "void/deep"], [], "6:0:0 0:1:16 6:0:0"));   // 8 steps: 128 px, against 64 px of art
+        var walls = SidesOf(plan, new Tile(0, 0)).Where(s => s.Facing == Facing.U).ToArray();
+
+        Assert.Equal(2, walls.Length);
+        var (art, below) = (walls[0], walls[1]);
+        Assert.Equal(1f, art.Uvs[3].Y);
+        Assert.Equal(64, art.Points[3].Y - art.Points[0].Y);                  // the art at its own size
+        Assert.Equal(art.Points[3], below.Points[0]);                         // joined up
+        Assert.Equal(BoardProjection.Corner(1, 0, -2), below.Points[3]);      // down to the void
+        Assert.Equal(below.Uvs[0].Y, below.Uvs[3].Y);                         // one row of the art, its last: what the manifest calls clamped
+        Assert.True(below.Uvs[0].Y is > 0.97f and < 1f);
+        Assert.Equal(art.Image, below.Image);
+    }
+
+    [Fact]
     public void A_void_sinks_well_below_its_height_so_the_chasm_walls_show()
     {
         var plan = Plan(Map(["cave_floor/cool", "void/deep"], [], "2:0:0 0:1:16 2:0:0"));

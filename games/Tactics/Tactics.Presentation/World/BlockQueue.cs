@@ -34,6 +34,26 @@ public sealed class BlockQueue
         return block;
     }
 
+    /// <summary>
+    /// Takes what a frame can record: the nearest blocks while <paramref name="cost"/>'s guess at them, in milliseconds, fits in
+    /// <paramref name="budgetMs"/>, and always one, or a block dearer than the budget would never be drawn.
+    /// </summary>
+    public IReadOnlyList<BlockPlan> TakeWithin(Vector2 aim, Func<BlockPlan, double> cost, double budgetMs)
+    {
+        var taken = new List<BlockPlan>();
+        var planned = 0.0;
+        while (Peek(aim) is { } block)
+        {
+            var dear = cost(block);
+            if (taken.Count > 0 && planned + dear > budgetMs)
+                break;
+            Next(aim);
+            taken.Add(block);
+            planned += dear;
+        }
+        return taken;
+    }
+
     private int Nearest(Vector2 aim)
     {
         var nearest = _waiting.Count - 1;
