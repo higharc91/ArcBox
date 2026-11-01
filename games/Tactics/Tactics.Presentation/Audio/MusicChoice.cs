@@ -20,6 +20,7 @@ public static class MusicChoice
     private const string Boss = "boss";
     private const string Finale = "finale";
     private const string Victory = "victory";
+    private const string BossVictory = "victory_boss";
     private const string Defeat = "defeat";
     private const string Camp = "camp";
     private const string Emberwick = "town_emberwick";
@@ -48,7 +49,7 @@ public static class MusicChoice
     }.ToImmutableDictionary();
 
     /// <summary>Every track named here.</summary>
-    public static IEnumerable<string> Ids => [Title, Explore, Fight, Boss, Finale, Victory, Defeat, Camp, Emberwick];
+    public static IEnumerable<string> Ids => [Title, Explore, Fight, Boss, Finale, Victory, BossVictory, Defeat, Camp, Emberwick];
 
     /// <summary>The music for <paramref name="view"/>, or null to leave what's playing, as across a server restart.</summary>
     public static MusicCue? Of(TacticsHostView view)
@@ -63,13 +64,16 @@ public static class MusicChoice
             TacticsPhase.Battle when view.Battle is { } battle => new MusicCue(Fights.GetValueOrDefault(battle.Encounter, Fight)),
             TacticsPhase.Results => view.Outcome switch
             {
-                "Won" => new MusicCue(Victory, Camp),
+                "Won" => new MusicCue(IsBoss(view.LastBattle) ? BossVictory : Victory, Camp),
                 "Lost" => new MusicCue(Defeat, Camp),
                 _ => new MusicCue(Camp),
             },
             _ => null,
         };
     }
+
+    /// <summary>Whether <paramref name="battle"/> was a fight with boss music, so winning it earns the grander fanfare.</summary>
+    private static bool IsBoss(BattleView? battle) => battle is not null && Fights.ContainsKey(battle.Encounter);
 
     /// <summary>The bed under <paramref name="view"/>'s fight, or null away from one.</summary>
     public static string? AmbienceOf(TacticsHostView view) => view.Phase == nameof(TacticsPhase.Battle) && view.Battle is { } battle ? Ambience(battle.Map) : null;

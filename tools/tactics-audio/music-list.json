@@ -46,22 +46,22 @@
   "seed": 4204
  },
  "victory": {
-  "prompt": "Triumphant fantasy RPG victory fanfare: bright brass fanfare over rolling timpani and cymbal swell, quick ascending string run, resolves on a major chord, 120 BPM, B-flat major. Instrumental only. Short self-contained sting with a clear ending, no loop.",
-  "duration": 7,
+  "prompt": "Short victory fanfare for winning a battle in a medieval fantasy game, played by a real acoustic symphony orchestra: a bold brass fanfare of trumpets and French horns on a clear heroic motif, timpani rolls and a cymbal swell, sweeping string runs rising up, ending on a full, triumphant D major chord held with a timpani roll to a clean finish. Recorded live orchestra, rich and warm, cinematic. No synthesizers, no electronic keyboard, no drum machine, no pads.",
+  "duration": 9,
   "variants": 1,
   "group": "sting",
   "loop": false,
   "use": "BattleEnded with victory",
-  "seed": 4205
+  "seed": 4240
  },
  "defeat": {
-  "prompt": "Somber fantasy RPG defeat sting: slow mournful solo cello and low strings, descending minor phrase, soft muffled timpani roll, ends on a hollow minor chord, D minor. Instrumental only. Short self-contained sting with a clear ending, no loop.",
-  "duration": 6,
+  "prompt": "Defeat theme for losing a battle in a medieval fantasy game, real acoustic chamber orchestra: a slow, mournful melody on solo cello answered by a sorrowful oboe, a falling minor phrase that moves through several chords (D minor, B-flat, G minor, A), soft muffled timpani heartbeat underneath, low strings sigh, then a quiet harp figure and a final dark D minor chord that fades to silence. Melodic and moving, a real tune, not a single held note. No synthesizers, no electronic keyboard, no drones.",
+  "duration": 10,
   "variants": 1,
   "group": "sting",
   "loop": false,
   "use": "BattleEnded with defeat",
-  "seed": 4206
+  "seed": 4242
  },
  "dungeon": {
   "prompt": "Tense dark dungeon music: low sustained strings, eerie celesta motif, distant deep drum pulses, dissonant woodwind swells, sparse and creeping, 70 BPM, F-sharp minor, ominous ambient orchestral. Instrumental only. Steady tempo throughout, no intro swell, no fade-out ending, ends on the same chord and energy it starts with so it can loop seamlessly.",
@@ -140,5 +140,14 @@
   "loop": true,
   "use": "The original orchestral title theme, kept as an alternative",
   "seed": 4200
+ },
+ "victory_boss": {
+  "prompt": "Grand boss-victory fanfare for a medieval fantasy game, real acoustic orchestra and choir: cathedral bells ring out, a monastic choir sings a triumphant wordless chant in full voice, heroic French horns and trumpets answer with a soaring fanfare, timpani and bass drum thunder, strings swell, building to a huge D major final chord sustained by choir, organ and brass with a last bell, then a clean ending. Epic, hard-won, a kingdom saved. No synthesizers, no electronic keyboard, no drum machine.",
+  "duration": 16,
+  "variants": 1,
+  "group": "sting",
+  "loop": false,
+  "use": "BattleEnded with victory over a boss (generated with vocals allowed, for the wordless choir)",
+  "seed": 4241
  }
 }

@@ -74,6 +74,30 @@ public sealed class MusicChoiceTests
     public void Results_play_a_sting_and_then_settle(string outcome, string sting)
         => Assert.Equal(new MusicCue(sting, Then: "camp"), MusicChoice.Of(View("Results", outcome: outcome)));
 
+    [Theory]
+    [InlineData("warlord_bridge")]
+    [InlineData("keep_gate")]
+    [InlineData("hall_of_the_flame")]
+    public void Beating_a_boss_plays_the_grand_fanfare(string encounter)
+        => Assert.Equal(new MusicCue("victory_boss", Then: "camp"),
+            MusicChoice.Of(View("Results", outcome: "Won") with { LastBattle = Fight(encounter) }));
+
+    [Theory]
+    [InlineData("river_crossing")]
+    [InlineData("ford_assault")]
+    public void Beating_an_ordinary_fight_plays_the_usual_fanfare(string encounter)
+        => Assert.Equal(new MusicCue("victory", Then: "camp"),
+            MusicChoice.Of(View("Results", outcome: "Won") with { LastBattle = Fight(encounter) }));
+
+    [Fact]
+    public void Losing_to_a_boss_is_still_the_defeat_theme()
+        => Assert.Equal(new MusicCue("defeat", Then: "camp"),
+            MusicChoice.Of(View("Results", outcome: "Lost") with { LastBattle = Fight("keep_gate") }));
+
+    [Fact]
+    public void The_boss_fanfare_is_a_sting_that_ends()
+        => Assert.False(Bank.Value.Track("victory_boss")!.Loop);
+
     [Fact]
     public void A_party_that_fled_gets_no_sting() => Assert.Equal(new MusicCue("camp"), MusicChoice.Of(View("Results", outcome: "Fled")));
 
