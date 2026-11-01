@@ -617,6 +617,14 @@ class Bot {
       // at once, so a run waits on no 45 s vote. The game's own timers would get there too.
       case 'dialogue':
         if (silent || !view.data.canSkip || !view.data.line) return;
+        // With a TV, a line is skipped only once the TV has taken it (its --story-log STORY line), and the dwell counts from then, as
+        // someone reading the TV would: a slow TV otherwise missed a line skipped the moment it came up. At most a minute's wait.
+        if (tv && !tv.host && tvLog) {
+          tv.read();
+          state.lineSince = state.lineFor === view.data.line ? state.lineSince : Date.now();
+          state.lineFor = view.data.line;
+          if (!tv.storyShown?.has(view.data.line) && Date.now() - state.lineSince < RESULTS_WAIT_MS) return;
+        }
         state.lineAt ??= Date.now() + lineMs;
         if (Date.now() < state.lineAt) return;
         state.lineAt = undefined;
@@ -724,6 +732,9 @@ class Watch {
         this.markersSeen = Date.now();
       }
       if (/^STORY card /.test(line)) this.card ??= Date.now();
+      // --story-log: each line the TV has taken, said or shown
+      m = /^STORY \d+ (\S+) (?:said|shown) /.exec(line);
+      if (m) (this.storyShown ??= new Set()).add(m[1]);
       // a snap puts the party somewhere new (a first view, a new epoch): at a tile's middle
       m = /^TACTICS walk snapped to (-?[\d.]+) (-?[\d.]+)/.exec(line);
       if (m) [this.tile, this.placed] = [[Math.floor(Number(m[1])), Math.floor(Number(m[2]))], Date.now()];
