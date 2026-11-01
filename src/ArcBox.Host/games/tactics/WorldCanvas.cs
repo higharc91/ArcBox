@@ -104,6 +104,9 @@ internal sealed partial class WorldCanvas : CanvasLayer
     /// <summary>True once the fade has lifted.</summary>
     public bool Revealed => Now == Stage.Open && _fade is { Visible: false };
 
+    /// <summary>How far the fade has lifted, 0 to 1: 0 until it's <see cref="Stage.Open"/>, and 1 once it's <see cref="Revealed"/>.</summary>
+    public double Lifted => Now != Stage.Open ? 0 : _fade is { Visible: true } ? Math.Min(_fading / WorldTuning.FadeSeconds, 1) : 1;
+
     /// <summary>The blocks not yet recorded.</summary>
     public int Waiting => (_queue?.Count ?? 0) + _recording.Count;
 

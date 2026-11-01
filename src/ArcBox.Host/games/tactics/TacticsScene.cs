@@ -66,6 +66,10 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private WalkLog? _walkLog;
     private PhaseScreen? _screen;
     private bool _revealed;
+    private bool _loadingShot;
+    private bool _walking;
+    private bool _battle;
+    private WorldReveal _reveal = WorldReveal.Loading;
     private double _shotAt;
     private double _stillFor;
     private double _lastWalked;
@@ -204,6 +208,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             }
             return;
         }
+        Reveal(world);
         if (world.Plan is not { } plan || _unitArt is not { } art)
         {
             return;
@@ -226,12 +231,46 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             _audio.Play(step, WorldTuning.FootstepDb);
         }
+        _worldHud?.Clear(frame.Units, frame.Fit);
+        WalkMoments(world, frame, delta);
+    }
+
+    /// <summary>
+    /// The region's title card stays over the world until the world is there to see, and gives way to it as the world's fade lifts
+    /// (<see cref="WorldReveal"/>). Nodes are touched only when that changes.
+    /// </summary>
+    private void Reveal(WorldCanvas world)
+    {
+        var reveal = WorldReveal.Of(world.Now == WorldCanvas.Stage.Open, world.Lifted);
+        if (_shots is not null && !_loadingShot && world.Now == WorldCanvas.Stage.Near)
+        {
+            _loadingShot = true;
+            _shots.Capture("tactics-world-loading");
+        }
+        if (reveal == _reveal)
+        {
+            return;
+        }
+        _reveal = reveal;
+        Cover();
+    }
+
+    /// <summary>
+    /// The backdrop, header and table: the whole screen with no world or board, under the board in a fight, and the world's title card
+    /// while it opens. The world's own panels come in as the card goes.
+    /// </summary>
+    private void Cover()
+    {
+        var card = _walking ? _reveal.Card : 1f;
+        var tint = new Color(1, 1, 1, card);
+        _backdrop.Visible = card > 0;
+        _header.Visible = _table.Visible = !_battle && card > 0;
+        _backdrop.Modulate = _header.Modulate = _table.Modulate = tint;
         if (_worldHud is { } hud)
         {
-            hud.Visible = world.Now == WorldCanvas.Stage.Open;
-            hud.Clear(frame.Units, frame.Fit);
+            hud.Visible = _walking && _reveal.Panels > 0;
+            hud.Modulate = new Color(1, 1, 1, _reveal.Panels);
         }
-        WalkMoments(world, frame, delta);
     }
 
     private void WalkMoments(WorldCanvas world, WalkFrame frame, double delta)
@@ -429,11 +468,6 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             world.Suspend();
             GD.Print($"TACTICS world put away: {WorldCanvas.MemoryText()}");
         }
-        if (!drawn && _worldHud is not null)
-        {
-            _worldHud.Visible = false;
-        }
-        _backdrop.Visible = !drawn;
         return drawn;
     }
 
@@ -468,10 +502,12 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         if (_world is null)
         {
             OpenWorld(root, explore.Region);
+            _reveal = WorldReveal.Loading;
         }
         else if (_world.Suspended)
         {
             _world.Resume();
+            _reveal = WorldReveal.Loading;
             GD.Print($"TACTICS world back: {WorldCanvas.MemoryText()}");
         }
         if (_walk is { } walk)
@@ -489,7 +525,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     {
         _worldRegion = region;
         _walk = null;
-        _revealed = false;
+        (_revealed, _loadingShot) = (false, false);
         _walkStats = LogWalks ? new WalkStats() : null;
         _walkLog = LogWalks ? new WalkLog() : null;
         _world = new WorldCanvas(root, () => DemoRegion.FromPack(root, region));
@@ -583,8 +619,8 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             _hud.Visible = drawn;
         }
-        _header.Visible = !drawn && !walking;
-        _table.Visible = !drawn && !walking;
+        (_walking, _battle) = (walking, drawn);
+        Cover();
     }
 
     private bool DrawBoard(BattleView battle)
