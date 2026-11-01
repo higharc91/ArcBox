@@ -29,6 +29,9 @@ public sealed partial class TacticsGame
     /// </summary>
     private int _epoch;
 
+    /// <summary>How the party came to its tile when the last fight ended, for the TV: what <see cref="ExploreView.Arrived"/> says.</summary>
+    private string? _arrived;
+
     /// <summary>Whoever leads now, by member id; null with nobody to lead.</summary>
     private string? _lead;
 
@@ -143,6 +146,7 @@ public sealed partial class TacticsGame
     {
         LeaveExploration();
         _toasts.Clear();
+        _arrived = null;
         if (Rules.Encounters.GetValueOrDefault(encounter) is { } def && _players.Count <= def.Party.Max)
         {
             FillAbsentCharacters();
@@ -349,6 +353,7 @@ public sealed partial class TacticsGame
             _facing = new Tile(2 * move.To.X - from.X, 2 * move.To.Y - from.Y);
             if (!move.Diagonal)
                 _lastAlongX = move.To.Y == from.Y;
+            _arrived = null;     // walking again: the last epoch's arrival is over
             var leg = new WalkLeg(++_walkSeq, move.To, ms);
             _legs = (_legs.Length < LegsKept ? _legs : _legs.RemoveAt(0)).Add(leg);
             (_notice, _leadNote) = (null, null);      // whatever it said, the party has moved on
@@ -585,6 +590,66 @@ public sealed partial class TacticsGame
     private string? WantedLeader() => _sessionLead is { } own && CanLead(own) && !(TakebackAt > _ctx.Now) ? own
         : _lead is { } still && CanLead(still) ? still
         : NextAfter(_lead ?? _sessionLead);
+
+    // ---- After a fight (overworld 5c, Task 4) ---------------------------------------------------------------------------
+
+    /// <summary>What <see cref="ExploreView.Arrived"/> says after a fight the party won or fled: it falls in behind the leader where it stands.</summary>
+    internal const string FellIn = "fellIn";
+
+    /// <summary>What <see cref="ExploreView.Arrived"/> says after a fight the party lost: it wakes at the region's recovery spawn.</summary>
+    internal const string Woke = "woke";
+
+    /// <summary>
+    /// Puts the party back in the world after a fight on a stamped map, before the battle is dropped (5c §6). A loss wakes it at the
+    /// recovery spawn, which the region check keeps out of every stamp. A win or a flight stands it where the fight left it
+    /// (<see cref="Landing"/>). Either is a teleport: a new <see cref="_epoch"/>, with no legs to follow. A fight on a map the region doesn't
+    /// stamp leaves the party where it was, with no new epoch. Call it after the story has taken the fight's outcome, so that a stamp the
+    /// outcome arms counts.
+    /// </summary>
+    private void Land(BattleSave save, BattleOutcome outcome)
+    {
+        if (_region is not { } region || StageFor(save.State.MapId) is not { } stage)
+            return;
+        var at = outcome == BattleOutcome.Lost ? region.Def.Spawns.Recovery : Landing(save, stage);
+        (_at, _facing, _arrived) = (at, new Tile(at.X + 1, at.Y), outcome == BattleOutcome.Lost ? Woke : FellIn);
+        _epoch++;
+        _legs = [];
+    }
+
+    /// <summary>
+    /// Where walking resumes after a fight won or fled (5c default 4): the leader's battle tile in the world, or if the leader isn't Up, that
+    /// of the first hero who is, in member order. The tile must be one the party could have walked to, by the rule
+    /// <see cref="EnterWorld"/> holds a saved place to (walkable, and reached from the region's start), and outside any armed stamp, this
+    /// one included after a flight or a fight from the list, or another the outcome has just armed: else stepping out would start a fight,
+    /// or a swimmer's nearest bank could be cut off from the rest of the world. If the tile isn't one, it's the nearest that is
+    /// (<see cref="BattleStage.Standable"/>), then the first of the map's <c>party_spawn</c> that is, as <c>StoryOrder</c> assumes, then the
+    /// tile the party stood on when the fight began, and last the start spawn, which always is.
+    /// </summary>
+    private Tile Landing(BattleSave save, BattleStage stage)
+    {
+        var ground = Rules.GroundFor(_region!.Def.Id)!.Terrain;
+        var start = _region.Def.Spawns.Start;
+        var reached = WorldWalk.Reach(ground, start, ClassDef.DefaultJump);
+        var armed = Armed()?.Stage;
+        bool Allowed(Tile t) => ground.Map.InBounds(t) && reached.Contains(t) && armed?.Holds(t) != true;
+
+        var spawn = Rules.MapFor(save.State.MapId)?.Zones.GetValueOrDefault("party_spawn") is { IsDefault: false } zone ? zone : [];
+        ImmutableArray<Tile> fallback = [.. spawn.Select(stage.ToWorld), _at, start];
+        var hero = LandingHero(save);
+        var from = hero is { } unit ? stage.ToWorld(unit.Pos) : fallback[0];
+        return BattleStage.Standable(ground, from, fallback, Allowed) ?? start;
+    }
+
+    /// <summary>The leader's hero if it's Up, else the first Up hero in member order, else null.</summary>
+    private UnitState? LandingHero(BattleSave save)
+    {
+        var units = save.State.Units;
+        UnitState? Up(ProfileId member)
+            => save.Members.IndexOf(member) is var i and >= 0 && units.TryGetValue(UnitFor(i), out var u) && u.Life == LifeState.Up ? u : null;
+        if (_lead is { } lead && Up(new ProfileId(lead)) is { } leader)
+            return leader;
+        return save.Members.OrderBy(m => m.Value, StringComparer.Ordinal).Select(Up).FirstOrDefault(u => u is not null);
+    }
 
     // ---- Saving -------------------------------------------------------------------------------------------------------
 

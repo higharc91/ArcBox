@@ -533,6 +533,18 @@ public sealed class WalkModelTests
             var after = Look();
             var now = _context.Clock;
             var party = after.Party;
+            if (party.Epoch != _epoch && (before.Phase == TacticsPhase.Results || after.Phase == TacticsPhase.Results))
+            {
+                // A fight in the world ended: the party was put back, as a teleport, somewhere it could have walked to, outside the stamp if
+                // the fight is still on offer.
+                Must(party.Epoch == _epoch + 1, $"the epoch went {_epoch} to {party.Epoch} after a fight");
+                Must(party.Legs.IsEmpty, "legs across a teleport");
+                Must(Tiles.Value.Contains(party.At), $"the party was put back where it can't walk from the start, {party.At}");
+                Must(ArmedStage()?.Holds(party.At) != true, $"the party was put back inside the armed stamp, at {party.At}");
+                Must(party.Arrived is TacticsGame.FellIn or TacticsGame.Woke, $"put back with Arrived {party.Arrived}");
+                Must(party.Arrived != TacticsGame.Woke || party.At == Rules.RegionFor("ashen_ford")!.Def.Spawns.Recovery, "woke away from the recovery spawn");
+                _epoch = party.Epoch;
+            }
             Must(party.Epoch == _epoch, "the epoch changed");
             Must(Ground.Map.InBounds(party.At) && Ground.Walkable(party.At), $"the party is on a bad tile, {party.At}");
             Must(party.Legs.Length <= 12, "more than 12 legs");

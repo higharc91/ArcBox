@@ -543,12 +543,15 @@ public sealed class ExplorationTests
     [Fact]
     public void Next_after_results_goes_back_to_walking_on_the_same_tile()
     {
+        // A fight on a map the region doesn't stamp is on a plain board, so the party is where it was. (One on a stamped map stands
+        // the party where the fight left it: StageEndTests.)
+        var unstamped = Rules.Encounters.Values.First(e => Rules.RegionFor(Ford)!.StampFor(e.Map) is null && e.Party.Max >= 4).Id;
         var there = NearStart();
         var s = new Session(document: DocumentAt(Saved(there)));
         s.Harness.StartCampaign(s.Lease);
         Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
         s.Send(0, "battles");
-        s.Send(0, "pickEncounter", new { encounter = "river_crossing" });
+        s.Send(0, "pickEncounter", new { encounter = unstamped });
         for (var p = 0; p < 4; p++)
             s.Harness.SetConnected(p, false);
         s.PlayOut();

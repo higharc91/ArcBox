@@ -434,13 +434,32 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         var name = Rules.Encounters.GetValueOrDefault(save.Encounter)?.Name ?? save.Encounter;
         _doc = _doc with
         {
-            Members = members, PartyLevel = Math.Max(level, _doc.PartyLevel), Battle = null,
+            Members = members, PartyLevel = Math.Max(level, _doc.PartyLevel),
             Completed = result.Outcome == BattleOutcome.Won ? _doc.Completed.Add(save.Encounter) : _doc.Completed,
+            World = StoryAfter(save, result),
         };
+        // The story first, then the place, so that the place keeps clear of a stamp the story has just armed; both before the checkpoint,
+        // so a restart at Results resumes on the new tile with the beat done.
+        Land(save, result.Outcome);
+        _doc = _doc with { Battle = null };
+        KeepWorld();
         _lease.Checkpoint(_doc.ToJson(), $"After {name}");
         (_result, _resultEncounter, _resultMembers, _phase) = (result, name, save.Members, TacticsPhase.Results);
         _toasts.Clear();
         CancelBattleTimers();
+    }
+
+    /// <summary>
+    /// The story after a fight (5c §6, defaults 6 and 7): a beat won is done, with the flags the battle set and the beat's own. A loss or a
+    /// flight changes nothing, so the stamp stays armed and the fight can be tried again, and a fight from the battle list is no beat.
+    /// </summary>
+    private WorldSave? StoryAfter(BattleSave save, BattleResult result)
+    {
+        if (_doc.World is not { } world || result.Outcome != BattleOutcome.Won || save.Beat is not { } done || world.Beats.Contains(done))
+            return _doc.World;
+        var beat = _region is null ? null : Lore.ArcFor(_region.Def.Id)?.Beats.FirstOrDefault(b => b.Id == done);
+        IEnumerable<string> set = [.. result.FlagsSet.IsDefault ? [] : result.FlagsSet, .. beat?.Sets ?? []];
+        return world with { Flags = [.. world.Flags.Concat(set).Distinct()], Beats = world.Beats.Add(done) };
     }
 
     /// <summary>The character at the party's new level, as its player made it (<see cref="CharacterRules.LevelUp"/>).</summary>

@@ -164,8 +164,14 @@ public sealed record WalkerView(string Id, string Name, string Sprite, bool Here
 /// wall turns back, and a held walk reaching one. The TV bumps whenever it goes up, which catches what <paramref name="Blocked"/> can't:
 /// a latched tap into a wall is refused and let go in the same moment. A new <paramref name="Epoch"/> may start it again from 0.
 /// </param>
+/// <param name="Arrived">
+/// How the party came to <paramref name="At"/> when a fight in the world ended, so the TV knows how to show that <paramref name="Epoch"/>
+/// (overworld 5c §3): <c>fellIn</c> after a win or a flight, where the followers fall in behind the leader; <c>woke</c> after a loss, at
+/// the recovery spawn. Null otherwise, and again from the party's next step or fight.
+/// </param>
 public sealed record ExploreView(string Region, string Name, int Epoch, int Seq, Tile At, Tile Facing, bool Held,
-    ImmutableArray<WalkLeg> Legs, ImmutableArray<WalkerView> Party, string? Leader, int Chapter = 0, bool Blocked = false, int Bumps = 0);
+    ImmutableArray<WalkLeg> Legs, ImmutableArray<WalkerView> Party, string? Leader, int Chapter = 0, bool Blocked = false, int Bumps = 0,
+    string? Arrived = null);
 
 /// <summary>The TV's view of a tactics session (adapter spec §8).</summary>
 /// <param name="Phase">The phase.</param>
@@ -265,7 +271,7 @@ public sealed partial class TacticsGame
     private ExploreView? ExploreViewOf() => _region is not { } region ? null : new ExploreView(region.Def.Id, region.Def.Name, _epoch, _walkSeq, _at, _facing, _dir is not null && !_blocked, _legs,
         [.. Walkers().Select(w => new WalkerView(w.Player.Profile!.Value.Value, w.Player.Name,
             HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{w.Character.Class}"])!, w.Here, w.Leads))],
-        Leader?.Name, region.Def.Chapter, _dir is not null && _blocked, _bumps);
+        Leader?.Name, region.Def.Chapter, _dir is not null && _blocked, _bumps, _arrived);
 
     private ControllerView BattleScreen(ProfileId profile)
     {
