@@ -89,7 +89,8 @@ internal static class PackLoader
                     try
                     {
                         var bytes = File.ReadAllBytes(Path.Combine(pack.Dir, file));
-                        hashed.Add((label, bytes));
+                        if (kind != FileKind.Region)    // battles never read the world, so a repaint mustn't restart one
+                            hashed.Add((label, bytes));
                         if (Parse(bytes, label, v) is { } doc)
                             using (doc)
                                 Read(kind, doc.RootElement, label, content, v);

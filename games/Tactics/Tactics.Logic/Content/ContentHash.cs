@@ -4,8 +4,8 @@ using System.Text;
 namespace Tactics.Logic;
 
 /// <summary>
-/// The content hash that pins a battle to the rules it started under (spec §2.5, §4.9): SHA-256 over every loaded pack
-/// file, as lowercase hex.
+/// The content hash that pins a battle to the rules it started under (spec §2.5, §4.9): SHA-256 over every pack file a
+/// battle can read, as lowercase hex. Downloads have their own hash, in the server's content registry.
 /// </summary>
 public static class ContentHash
 {

@@ -127,12 +127,12 @@ public sealed class RegionTests
     }
 
     [Fact]
-    public void A_regions_bytes_are_in_the_content_hash()
+    public void A_regions_bytes_arent_in_the_content_hash()
     {
         var one = ValidationTests.LoadChapter(("world/r.json", Json(Region(32, 32, new RegionChunk(0, 0, Tiles())))));
         var other = ValidationTests.LoadChapter(("world/r.json", Json(Region(32, 32, new RegionChunk(0, 0, Tiles((0, 0, 1, 0, TileFlags.None)))))));
 
-        Assert.NotEqual(one.Hash, other.Hash);
+        Assert.Equal(one.Hash, other.Hash);
     }
 
     [Fact]

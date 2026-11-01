@@ -42,7 +42,7 @@ public sealed partial class RulesPack
     private readonly ImmutableSortedDictionary<string, PassiveDef> _injuryPassives;
     private readonly ImmutableSortedDictionary<string, Lazy<WorldGround>> _grounds;
 
-    /// <summary>The content hash; a battle records it in <see cref="BattleState.ContentHash"/>.</summary>
+    /// <summary>The hash of everything a battle runs under; a battle records it in <see cref="BattleState.ContentHash"/>. Regions aren't in it.</summary>
     public string Hash { get; }
 
     /// <summary>Abilities by id.</summary>
@@ -134,7 +134,9 @@ public sealed partial class RulesPack
     /// Loads rules packs (spec §4.9) in dependency order, <c>"base"</c> first and then by <c>requires</c>, whatever order the
     /// folders are given in; each folder holds a pack's <c>manifest.json</c> and the files it lists. Every file is validated
     /// (spec §4.10), and the art keys too when <paramref name="art"/> is given. <see cref="Hash"/> is the
-    /// <see cref="ContentHash"/> of every loaded file. Throws <see cref="ContentException"/> with every error found.
+    /// <see cref="ContentHash"/> of every loaded file but the regions in <c>world/</c>, which no battle reads, so repainting one
+    /// doesn't restart a saved battle; a stamped map's tiles stay pinned by its map file. Throws <see cref="ContentException"/> with
+    /// every error found.
     /// </summary>
     public static RulesPack Load(IEnumerable<string> packDirectories, ArtManifest? art = null)
     {

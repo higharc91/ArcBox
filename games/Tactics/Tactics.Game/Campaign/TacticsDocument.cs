@@ -53,16 +53,26 @@ public sealed record BattleSave(string Encounter, ulong Seed, ImmutableArray<Pro
     ImmutableArray<Beat> Log,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<CharacterRecord> Companions = default);
 
+/// <summary>Where the party is in the world, and how far through its story.</summary>
+/// <param name="Region">The region's id.</param>
+/// <param name="At">The leader's tile. A repaint can make it illegal, and it's checked on the way in.</param>
+/// <param name="Facing">The tile the leader faces.</param>
+/// <param name="LastLeader">The profile that led last, which the next session's leader follows in member order; null before anyone has.</param>
+/// <param name="Flags">The story flags set so far.</param>
+/// <param name="Beats">The story beats done so far.</param>
+public sealed record WorldSave(string Region, Tile At, Tile Facing, string? LastLeader, ImmutableArray<string> Flags, ImmutableArray<string> Beats);
+
 /// <summary>
-/// The campaign document, version 0 (adapter spec §6): the party's level, each member's character and XP, the encounters
-/// won, and the battle under way, if any. Members are keyed by profile id.
+/// The campaign document, version 1 (adapter spec §6): the party's level, each member's character and XP, the encounters
+/// won, the battle under way, if any, and the party's place in the world, or null if it has none yet, which means the start
+/// spawn. Members are keyed by profile id. Version 0 is the same without <see cref="World"/>.
 /// </summary>
 public sealed record TacticsDocument(int Version, string? RulesHash, int PartyLevel,
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedDictionary<string, MemberRecord> Members,
-    ImmutableArray<string> Completed, BattleSave? Battle)
+    ImmutableArray<string> Completed, BattleSave? Battle, WorldSave? World = null)
 {
     /// <summary>The document version this code reads and writes.</summary>
-    public const int CurrentVersion = 0;
+    public const int CurrentVersion = 1;
 
     /// <summary>How many beats a saved battle keeps.</summary>
     public const int LogBeats = 20;
@@ -73,18 +83,22 @@ public sealed record TacticsDocument(int Version, string? RulesHash, int PartyLe
     /// <summary>The member's record, or null when they have no character yet.</summary>
     public MemberRecord? For(ProfileId profile) => Members.GetValueOrDefault(profile.Value);
 
-    /// <summary>Reads a document; an empty or unreadable one is a new campaign's.</summary>
+    /// <summary>Reads a document of any version up to <see cref="CurrentVersion"/>, as that version; an empty or unreadable one is a new campaign's.</summary>
     public static TacticsDocument Read(JsonElement json)
     {
         if (json.ValueKind != JsonValueKind.Object || !json.EnumerateObject().Any())
             return New;
         var doc = json.Deserialize<TacticsDocument>(ArcJson.Options)
                   ?? throw new JsonException("The campaign document is null.");
-        if (doc.Version != CurrentVersion)
-            throw new JsonException($"Campaign document version {doc.Version} isn't supported (this build reads {CurrentVersion}).");
+        if (doc.Version is < 0 or > CurrentVersion)
+            throw new JsonException($"Campaign document version {doc.Version} isn't supported (this build reads 0 to {CurrentVersion}).");
         return doc with
         {
+            Version = CurrentVersion,
             Completed = doc.Completed.IsDefault ? [] : doc.Completed,
+            World = doc.World is { } world
+                ? world with { Flags = world.Flags.IsDefault ? [] : world.Flags, Beats = world.Beats.IsDefault ? [] : world.Beats }
+                : null,
             Members = Ordinal.Map((doc.Members ?? Ordinal.Map<MemberRecord>()).Where(m => m.Value?.Character is not null)
                 .Select(m => (m.Key, m.Value with { Character = Whole(m.Value.Character) }))),
         };

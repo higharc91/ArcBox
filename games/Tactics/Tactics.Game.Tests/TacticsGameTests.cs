@@ -9,20 +9,22 @@ namespace Tactics.Game.Tests;
 /// <summary><see cref="TacticsGame"/> on the platform harness: muster, encounter pick, the battle loop, results and resume.</summary>
 public sealed class TacticsGameTests
 {
-    private static readonly Lazy<RulesPack> Pack = new(() =>
+    private static readonly Lazy<RulesPack> Pack = new(() => RulesPack.Load([Path.Combine(ContentBase(), "rules")]));
+
+    private static string ContentBase()
     {
         for (var dir = new DirectoryInfo(AppContext.BaseDirectory); dir is not null; dir = dir.Parent)
             if (File.Exists(Path.Combine(dir.FullName, "ArcBox.slnx")))
-                return RulesPack.Load([Path.Combine(dir.FullName, "content", "tactics", "base", "rules")]);
+                return Path.Combine(dir.FullName, "content", "tactics", "base");
         throw new DirectoryNotFoundException("No ArcBox.slnx above the test binaries.");
-    });
+    }
 
-    private static RulesPack Rules => Pack.Value;
+    internal static RulesPack Rules => Pack.Value;
 
     private static readonly string[] FourClasses = ["fighter", "cleric", "rogue", "wizard"];
 
     /// <summary>A four-member campaign session: the harness, its lease and the game.</summary>
-    private sealed class Session
+    internal sealed class Session
     {
         /// <param name="reseated">Members sit in the opposite order (another night, other phones).</param>
         public Session(int seed = 1, JsonElement? document = null, TacticsGame? game = null, bool reseated = false)
@@ -201,6 +203,44 @@ public sealed class TacticsGameTests
         Assert.NotNull(resumed.Host.Notice);
         Assert.Equal(Rules.Hash, resumed.Game.Document.Battle!.State.ContentHash);
         Assert.Equal(1, resumed.Game.Document.Battle.Log[0].Seq);
+    }
+
+    [Fact]
+    public void A_repainted_region_doesnt_restart_a_saved_battle()
+    {
+        var s = new Session();
+        s.ToBattle(everyoneAway: true);
+        for (var i = 0; i < 20; i++)
+            s.Harness.Advance(TimeSpan.FromSeconds(7));
+        var saved = TacticsDocument.Read(s.Lease.Document);
+
+        var rules = Directory.CreateTempSubdirectory("tactics-repaint-test-");
+        try
+        {
+            var from = Path.Combine(ContentBase(), "rules");
+            foreach (var file in Directory.EnumerateFiles(from, "*", SearchOption.AllDirectories))
+            {
+                var to = Path.Combine(rules.FullName, Path.GetRelativePath(from, file));
+                Directory.CreateDirectory(Path.GetDirectoryName(to)!);
+                File.Copy(file, to);
+            }
+            var region = Path.Combine(rules.FullName, "world", "ashen_ford.json");
+            var before = File.ReadAllText(region);
+            var after = before.Replace("The Ashen Ford", "The Ashen Ford, repainted", StringComparison.Ordinal);
+            Assert.NotEqual(before, after);
+            File.WriteAllText(region, after);
+
+            var resumed = new Session(document: saved.ToJson(), game: new TacticsGame(RulesPack.Load([rules.FullName])));
+            resumed.Harness.Resume(resumed.Lease);
+
+            Assert.Null(resumed.Host.Notice);
+            Assert.True(saved.Battle!.Log[0].Seq > 1);
+            Assert.True(resumed.Game.Document.Battle!.Log[0].Seq >= saved.Battle.Log[0].Seq);
+        }
+        finally
+        {
+            rules.Delete(recursive: true);
+        }
     }
 
     [Fact]
