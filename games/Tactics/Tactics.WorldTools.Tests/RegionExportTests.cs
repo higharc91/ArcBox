@@ -8,13 +8,34 @@ using Tactics.Logic.Tests;
 namespace Tactics.WorldTools.Tests;
 
 /// <summary>
-/// Not in parallel with the other classes: two of these check that no <c>tactics-region-check-*</c> folder is left in the shared temp
-/// folder, and any other class exporting at the same moment has one there for a while (the full suite failed on that once).
+/// The tests that look in the shared temp folder for <c>tactics-region-check-*</c> folders, run with nothing else in parallel: any other
+/// class exporting at the same moment has one there for a while (the full suite failed on that twice).
 /// </summary>
-[CollectionDefinition(nameof(RegionExportTests), DisableParallelization = true)]
-[Collection(nameof(RegionExportTests))]
+[CollectionDefinition(Name, DisableParallelization = true)]
+public sealed class TempFolderCollection
+{
+    public const string Name = "the shared temp folder";
+}
+
+[Collection(TempFolderCollection.Name)]
 public sealed class RegionExportTests : IDisposable
 {
+    /// <summary>
+    /// The check folders in <paramref name="temp"/>, after up to 5 s for any not in <paramref name="before"/> to go: another test's export
+    /// cleans up its own, so only one that an export here left behind stays.
+    /// </summary>
+    private static HashSet<string> LeftBehind(string temp, IReadOnlySet<string> before)
+    {
+        var deadline = DateTime.UtcNow.AddSeconds(5);
+        while (true)
+        {
+            var now = Directory.GetDirectories(temp, "tactics-region-check-*").ToHashSet();
+            if (now.IsSubsetOf(before) || DateTime.UtcNow > deadline)
+                return now;
+            Thread.Sleep(50);
+        }
+    }
+
     private const string Grass = "grass/lush", Beat = "ch1_mayors_request";
 
     private const string Unreachable = "Paint a walkable way to it, climbing no more than 2 levels a step, or move the marker.";
@@ -306,7 +327,7 @@ public sealed class RegionExportTests : IDisposable
         File.SetAttributes(file, FileAttributes.Normal);
 
         Assert.Empty(result.Problems);
-        Assert.Subset(before, Directory.GetDirectories(temp, "tactics-region-check-*").ToHashSet());
+        Assert.Subset(before, LeftBehind(temp, before));
     }
 
     [Fact]
@@ -675,7 +696,7 @@ public sealed class RegionExportTests : IDisposable
         Export(Field() with { Beats = [new BeatSpot(Beat, new Tile(50, 50))] });
         Export(Field());
 
-        Assert.Subset(before, Directory.GetDirectories(temp, "tactics-region-check-*").ToHashSet());
+        Assert.Subset(before, LeftBehind(temp, before));
     }
 
     [Theory]
