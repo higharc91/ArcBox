@@ -34,7 +34,9 @@ public sealed record StoryTick(StorySay? Say, bool Cut, StoryScreen? Screen, boo
 /// <item>
 /// A track is running once it has seen the story, or seen the party with no scene under way (walking, a fight, Muster): a TV that watched
 /// the walk up to the "!" says the scene's first line. A TV whose first sight of the story is mid-line, mid-question or mid-roll, or that
-/// comes in while a story waits to resume (Resuming), only shows: it never starts a line partway (5d §8).
+/// comes in while a story waits to resume (Resuming), only shows: it never starts a line partway (5d §8). A track that had the story
+/// before and watched it wait to resume (a server restart: the server starts the saved line again, from its beginning, as the party comes
+/// back) says that line if it never heard it, as a line it watched start.
 /// </item>
 /// <item>A line is never said twice in one campaign: a server restart that shows its saved line again, with a new Seq, shows it silently.</item>
 /// <item>
@@ -57,6 +59,8 @@ public sealed class StoryTrack(VoiceClips? clips, HudArt? art = null, SpeechFall
     private string? _speakingText;
     private string? _campaign;
     private bool _watching;
+    private bool _ran;
+    private bool _resumed;
     private (int Seq, string State, string? Skill, bool Asking)? _question;
     private double _revealed = double.PositiveInfinity;
 
@@ -71,18 +75,21 @@ public sealed class StoryTrack(VoiceClips? clips, HudArt? art = null, SpeechFall
     /// but Resuming), which is what lets the next scene's first line be said.
     /// </summary>
     public StoryTick Receive(TacticsHostView? host, DateTimeOffset now)
-        => Receive(host?.Story, now, watching: host is not null && host.Phase != nameof(TacticsPhase.Resuming));
+        => Receive(host?.Story, now, watching: host is not null && host.Phase != nameof(TacticsPhase.Resuming),
+            resuming: host?.Phase == nameof(TacticsPhase.Resuming));
 
     /// <summary>
     /// A host view's story, as it comes (null outside a scene), at <paramref name="now"/> on the TV's clock, which only the question's countdown
     /// reads (<see cref="VoteClock"/>). <paramref name="watching"/>, with no story: the TV sees the party, with no story waiting to resume.
+    /// <paramref name="resuming"/>, with no story: a story waits to resume, and its saved line will start again from its beginning.
     /// </summary>
-    public StoryTick Receive(StoryView? view, DateTimeOffset now, bool watching = false)
+    public StoryTick Receive(StoryView? view, DateTimeOffset now, bool watching = false, bool resuming = false)
     {
         if (view is null)
         {
             _view = null;
             _watching = watching;
+            _resumed = resuming && _ran;                 // only a track that had the story knows what it heard of it
             (_question, _revealed, Screen) = (null, double.PositiveInfinity, null);
             _clock.Stop();
             var ending = _speakingText;
@@ -96,9 +103,9 @@ public sealed class StoryTrack(VoiceClips? clips, HudArt? art = null, SpeechFall
         _campaign = view.Campaign ?? _campaign;
         if (another)
             Seq = null;                                  // another story on this TV: what was heard is kept by campaign, so it says nothing here
-        var fresh = Seq is null && !_watching;
-        var started = Seq is null ? _watching : view.Seq != Seq;    // a lower Seq too: the server went back, and shows another line
-        _watching = false;
+        var fresh = Seq is null && !_watching && !_resumed;
+        var started = Seq is null ? _watching || _resumed : view.Seq != Seq;    // a lower Seq too: the server went back, and shows another line
+        (_watching, _resumed, _ran) = (false, false, true);
         StorySay? say = null;
         var cut = false;
         var showing = Showing(view);

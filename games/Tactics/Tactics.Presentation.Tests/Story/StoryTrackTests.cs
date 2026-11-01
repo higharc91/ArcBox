@@ -293,6 +293,42 @@ public sealed class StoryTrackTests
         Assert.Equal("ch1_mayor_open_4", track.Receive(Showing(7, Line("ch1_mayor_open_4")), T0).Say!.Line);
     }
 
+    /// <summary>
+    /// Task 11's chapter run, at line 3 of Old Maud's scene: the server moved on to line 4 and saved it, and stopped before the TV heard of it.
+    /// The TV's connection dropped, it came back to Resuming, and once the party was back the saved line started again with a new Seq. That
+    /// line was never said, and it starts from its beginning in front of a TV that watched the story wait: it's said, as a new line is. Before
+    /// the fix the reconnect's "first view only shows" swallowed it, and Maud's question was never heard.
+    /// </summary>
+    [Fact]
+    public void A_line_the_tv_never_heard_is_said_when_a_restart_starts_it_again()
+    {
+        var resuming = new TacticsHostView(nameof(TacticsPhase.Resuming), "", null, 1, [], null, null, null, null);
+        var track = Running(4);
+        Assert.NotNull(track.Receive(Showing(5, Line("ch1_mayor_open_3")), T0).Say);
+        track.Rejoin();                                                   // the server went away; line 4 started (seq 6) unseen
+        track.Receive(resuming, T0);
+
+        var replay = track.Receive(resuming with { Phase = nameof(TacticsPhase.Story), Story = Showing(7, Line("ch1_mayor_open_4")) }, T0);
+
+        Assert.Equal("ch1_mayor_open_4", replay.Say!.Line);
+    }
+
+    /// <summary>The same restart, on a line the TV had said: the replay is shown, never said twice.</summary>
+    [Fact]
+    public void A_line_the_tv_heard_isnt_said_again_when_a_restart_starts_it_again()
+    {
+        var resuming = new TacticsHostView(nameof(TacticsPhase.Resuming), "", null, 1, [], null, null, null, null);
+        var track = Running(4);
+        Assert.NotNull(track.Receive(Showing(5, Line("ch1_mayor_open_3")), T0).Say);
+        track.Rejoin();
+        track.Receive(resuming, T0);
+
+        var replay = track.Receive(resuming with { Phase = nameof(TacticsPhase.Story), Story = Showing(6, Line("ch1_mayor_open_3")) }, T0);
+
+        Assert.Null(replay.Say);
+        Assert.Equal("ch1_mayor_open_3", replay.Screen!.Caption!.Line);
+    }
+
     [Fact]
     public void A_line_the_tv_joined_on_isnt_said_when_a_restart_shows_it_again()
     {

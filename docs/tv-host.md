@@ -62,7 +62,7 @@ Everything after `--` on the Godot command line; all optional.
 | `--world-demo[=<region>|hilly[:<block tiles>]]` | Dev only: open a whole region the way the TV will, without a server, with the art and region from the repository's `content/` (default `ashen_ford`; `hilly` is `DemoRegion`'s stress case), walk a stand-in the length of it at twice walking pace, print what it cost in `WORLD` lines and quit. Use `--res=1920x1080`. With `--shots` it saves `world-<spec>.png`, then one `world-<spot>.png` for each place `WorldSpots` finds: behind a cliff, behind a crate, water at a block edge, a block corner, the region's edge and both sides of the void. See [the world](#the-world). |
 | `--walk-log` | Dev only: print `WALK <seq> <x> <y> <ms>` as each step reaches the TV, `<ms>` being the wall clock in Unix milliseconds, and a `WALKSTATS` line every 288 frames of walking: frame times, and how many pixels the leader and the ground moved a frame. See [walking](#walking). |
 | `--story-demo[=<step>]` | Dev only: play the story over the world without a server (`StoryDemo` in Tactics.Presentation), from the real lore and region: the "!" over Pip, the narrator and speakers with their faces and clips, a leader's choice, a party vote that ties and is broken, eleven long options, six roller cards, a pass and a fail, the gap between scenes and the chapter card. `<step>` starts at `marker`, `line`, `choice`, `gap`, `vote`, `tie`, `many`, `check`, `pass`, `fail` or `card`. With `--shots` it saves a `tactics-story-*` shot of each. |
-| `--story-log` | Dev only: print `STORY <seq> <line> said\|shown <state>` for each line of a scene the TV takes: `said` when it spoke it. See [the story](#the-story). |
+| `--story-log` | Dev only: print `STORY <seq> <line> said\|shown <state>` for each line of a scene the TV takes: `said` when it spoke it; `STORY marker <beat> <x> <y> <emote\|->` for each beat on offer whenever they change (`STORY marker none` for none); and `STORY card <chapter>` as a chapter's card comes up. See [the story](#the-story). |
 | `--demo=campaign-lobby` | Dev only: show the lobby with a built-in campaign game selected, its campaign list and a roster with seated and away members (`Shell/CampaignLobbyDemo.cs`), without a server. With `--shots` it saves `001-lobby.png`. |
 
 Unknown arguments are reported as warnings and ignored.
@@ -351,7 +351,7 @@ A scene (overworld 5d) plays over the world. `StoryTrack` (Tactics.Presentation)
 
 - **The voice**: a new line on a running track says its clip at Question priority, cutting the last. A TV that watched the party walk up
   says the scene's first line; one that joins mid-line, mid-question or mid-roll, or while a story waits to resume, shows it silently. A
-  line is never said twice in one campaign (`StoryView.Campaign`), so a restart's replayed line is shown, not said. No view is dropped: a lower Seq means the server went back, and is shown, question and all. After a reconnect the first view only shows. A cut stops the voice only while it's still the story's own line (`StoryVoice.Owns`). A line with no clip shows its caption (`StoryVoice.Fallback`, the user's decision 1).
+  line is never said twice in one campaign (`StoryView.Campaign`), so a restart's replayed line is shown, not said. A TV that had the story and watched it wait at Resuming says the saved line as it starts again if it never heard it (the server may have moved on to it just before it stopped). No view is dropped: a lower Seq means the server went back, and is shown, question and all. After a reconnect the first view only shows. A cut stops the voice only while it's still the story's own line (`StoryVoice.Owns`). A line with no clip shows its caption (`StoryVoice.Fallback`, the user's decision 1).
 - **The panels** (1920×1080 layout, the HUD's pieces): `StoryPanel`, the caption at the bottom left with the speaker's face in the line's
   mood and their name on the dialogue tab, the question lit in gold; `VoteBoard`, the question at the bottom right, growing upward, its rows
   sized by `VoteLayout` so eleven fit; `CheckBoard`, the skill check full over the dimmed world, with a card for each roller and the d20
@@ -363,7 +363,9 @@ A scene (overworld 5d) plays over the world. `StoryTrack` (Tactics.Presentation)
   `-roll-tumbling`, `-roll-pass`, `-roll-fail`, `-gap` and `-card`, at most two of each.
 
 The bots play it with `node tools/tactics-playtest/bots.cjs --story[=<scenes>] [--story-pick=<option ids>]` against a server seeded by the
-beat (`Tactics__Seed__At__0`/`__1`, and `Tactics__Seed__Beats__0` for a later beat).
+beat (`Tactics__Seed__At__0`/`__1`, and `Tactics__Seed__Beats__0` for a later beat). All of Chapter 1, from a fresh campaign to the card on
+either branch, is `ARCBOX_CHAPTER=1 ARCBOX_BRANCH=force|parley tools/tv-e2e.sh`, which the bots play with `--chapter` from the TV's
+`STORY marker` lines ([the Tactics README](../games/Tactics/README.md#bot-phones-and-the-tv-end-to-end)).
 
 ## Adding a game scene
 
