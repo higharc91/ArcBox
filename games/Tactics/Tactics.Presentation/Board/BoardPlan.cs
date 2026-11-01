@@ -163,6 +163,44 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
         return new BoardPlan(ordered, min, max, ordered.Any(i => ImageOf(i) is { Frames: > 1 }));
     }
 
+    /// <summary>
+    /// The part of <see cref="Build"/>'s plan that belongs to the tiles of <paramref name="rect"/>, by the same code, so
+    /// neighbours outside it are read from <paramref name="terrain"/> and there's no seam or skirt at its edges. Items stay in
+    /// the terrain's own tiles and art pixels, with their keys, so plans of different rects sort together. Without
+    /// <paramref name="grid"/> no tile is outlined. An empty rect's plan has no items and sits at the origin.
+    /// </summary>
+    public static BoardPlan BuildBlock(BoardTerrain terrain, ArtIndex art, TileRect rect, bool grid)
+    {
+        var items = new List<BoardItem>();
+        foreach (var tile in terrain.TilesIn(rect))
+            AddTile(items, terrain, art, tile);
+        AddProps(items, terrain, art, rect);
+        AddZones(items, terrain, art, rect);
+
+        ImmutableArray<BoardItem> ordered = [.. items.OrderBy(i => i.Order).Select(i => !grid && i is Face { Grid: true } face ? face with { Grid = false } : i)];
+        if (ordered.IsEmpty)
+            return new BoardPlan([], Vector2.Zero, Vector2.Zero, false);
+        var (min, max) = (new Vector2(float.MaxValue), new Vector2(float.MinValue));
+        foreach (var item in ordered)
+        {
+            var (from, to) = Bounds(item);
+            (min, max) = (Vector2.Min(min, from), Vector2.Max(max, to));
+        }
+        return new BoardPlan(ordered, min, max, ordered.Any(i => ImageOf(i) is { Frames: > 1 }));
+    }
+
+    /// <summary>The box an item covers, in art pixels.</summary>
+    public static (Vector2 Min, Vector2 Max) Bounds(BoardItem item)
+    {
+        if (item is Sprite sprite)
+            return (sprite.TopLeft, sprite.TopLeft + sprite.Size);
+        var points = ((Face)item).Points;
+        var (min, max) = (points[0], points[0]);
+        for (var i = 1; i < points.Length; i++)
+            (min, max) = (Vector2.Min(min, points[i]), Vector2.Max(max, points[i]));
+        return (min, max);
+    }
+
     private static ArtImage? ImageOf(BoardItem item) => item is Face face ? face.Image : ((Sprite)item).Image;
 
     private static IEnumerable<Vector2> Extent(BoardItem item)
@@ -246,10 +284,10 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
             [new(u, v), new(u + step, v), new(u + step, v + step), new(u, v + step)], image, image is null ? NoArt : null, shade);
     }
 
-    private static void AddProps(List<BoardItem> items, BoardTerrain terrain, ArtIndex art)
+    private static void AddProps(List<BoardItem> items, BoardTerrain terrain, ArtIndex art, TileRect? within = null)
     {
         var mapVariants = terrain.Map.Materials.Select(m => MaterialLook.Of(m).Variant).ToArray();
-        foreach (var prop in terrain.Map.Props.Where(p => terrain.Map.InBounds(p.At)))
+        foreach (var prop in terrain.Map.Props.Where(p => terrain.Map.InBounds(p.At) && within?.Contains(p.At) != false))
         {
             // A prop takes the colour of the ground under it, or failing that of anything on the map.
             if (art.Prop(prop.Id, mapVariants.Prepend(terrain.Look(prop.At).Variant)) is not { } sprite)
@@ -260,12 +298,12 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
         }
     }
 
-    private static void AddZones(List<BoardItem> items, BoardTerrain terrain, ArtIndex art)
+    private static void AddZones(List<BoardItem> items, BoardTerrain terrain, ArtIndex art, TileRect? within = null)
     {
         foreach (var zone in terrain.Changes.Zones.OrderBy(z => z.Serial))
         {
             var hazard = ZoneArt.HazardFor(zone.Kind) is { } id ? art.Hazard(id) : null;
-            foreach (var tile in zone.Tiles.Where(terrain.Map.InBounds))
+            foreach (var tile in zone.Tiles.Where(t => terrain.Map.InBounds(t) && within?.Contains(t) != false))
             {
                 var ground = BoardOrder.Key(tile, BoardLayer.Ground);
                 if (hazard is null)

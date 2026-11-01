@@ -19,9 +19,14 @@ internal static class Pack
 
     private static readonly Lazy<ArtIndex> ArtOnce = new(() => ArtIndex.Load(Root));
 
+    private static readonly Lazy<RulesPack> RulesOnce = new(() => RulesPack.Load([Path.Combine(Root, "rules")]));
+
     public static string Root => RootDir.Value;
 
     public static ArtIndex Art => ArtOnce.Value;
+
+    /// <summary>The ground of one of the pack's regions, from its rules as the server loads them.</summary>
+    public static WorldGround Ground(string id) => RulesOnce.Value.GroundFor(id) ?? throw new InvalidOperationException($"No region {id}.");
 
     /// <summary>The columns of an animation, by a set's manifest: what the art says, so a redraw doesn't need a test changed.</summary>
     public static int[] Frames(string set, string anim)

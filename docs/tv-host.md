@@ -55,6 +55,8 @@ Everything after `--` on the Godot command line; all optional.
 | `--drop-signals` | Dev only: the TV never sends a host signal, so a game runs on its fallback timers. Proves a game doesn't need them. |
 | `--beat-log` | Dev only: print a `BEAT` line for each Tactics beat played: when it ran, how long it took and what was in it. |
 | `--tactics-demo[=<map>[:changed\|:fight]]` | Dev only: show a Tactics board without a server, with the art from the repository's `content/` (default `river_crossing`). `:changed` adds zones, raised tiles and the bridge's tiles sunk; `:fight` adds one of every kind of unit. With `--shots` it saves `…-tactics-battle-<map>.png`. |
+| `--world-demo[=<region>|hilly[:<block tiles>]]` | Dev only: draw a whole region in blocks without a server, with the art and region from the repository's `content/` (default `ashen_ford`; `hilly` is `DemoRegion`'s stress case), pan over it, print what it cost in `WORLD` lines and quit. Use `--res=1920x1080`. With `--shots` it saves `world-<spec>.png` after the pan. See [the world](#the-world). |
+| `--walk-log` | Dev only: print a `WALK` line for each step the TV shows. Parsed now; the exploration screen prints them. |
 | `--demo=campaign-lobby` | Dev only: show the lobby with a built-in campaign game selected, its campaign list and a roster with seated and away members (`Shell/CampaignLobbyDemo.cs`), without a server. With `--shots` it saves `001-lobby.png`. |
 
 Unknown arguments are reported as warnings and ignored.
@@ -232,6 +234,9 @@ A region's blocks can share one `BoardLighting` (`Of` takes several plans), so a
 grid of tile-sized buckets, and `MeanAt` reads each light at its mean for baked art, whatever `Step` has done. Only `Step` is unsafe
 beside another thread's reads of "now".
 
+`BoardPainter` paints `LitBoard` items for both. A board passes its lighting at every draw; a world's blocks bake from the whole region's lighting when they're prepared
+(`LitFace.MeanColourAt`, `LitSprite.MeanLight`, which no `Step` moves) and paint with none.
+
 What glows by itself (`GlowMask`, from the pack's masks or, where the pack has none, the brightest shades of the light's colour) is
 baked once and drawn again unlit, in its place in the painter's order, so a unit in front still hides it. Sources get the pack's
 additive halos, in place of the recipe's bloom. The recipe's banding and dither aren't done: they need a shader. Figures take the light
@@ -254,6 +259,28 @@ carries on. If drawing fails, no beat is to blame: it logs that once and the bea
 To run the TV against a real game without
 phones or a browser, `tools/tactics-playtest/bots.cjs` joins a room as N players and plays a whole session over the real
 hub; its header has the commands.
+
+## The world
+
+A region is drawn from cached blocks: `WorldPlan` cuts `BoardPlan`'s items into 16-tile squares (`BoardPlan.BuildBlock`, the same code with `WorldGround`'s real neighbours, so there's no
+seam or skirt) that share one `BoardLighting`, and `WorldBlock` records each one's items in `_Draw` once, so moving the camera changes only a transform. `Blocks` is in draw order: `ZIndex` is
+block column + row, with the column breaking ties. That agrees with `BoardOrder` for anything up to two tiles wide, and the pack's widest prop is 56 px. `BlockQueue` hands out unrecorded blocks
+nearest first, around where the party will be in 2 s. `ItemsOver` is what must go again over a unit.
+
+Measured with `--world-demo` (2026-10-31, one run each, RTX 5080, 1920x1080, the usual Debug build, capped at the project's 144 fps, with the owner's other programs running). `_Draw` is the worst of a
+first recording, while the JIT is cold; a block's median is well under that.
+
+| | Ashen Ford | `hilly` (160x120, 3840 props, 960 lights) |
+|---|---|---|
+| Items planned, lit | 23,669, 30,402 | 36,393, 85,563 |
+| Off-thread build | 196 ms | 367 ms |
+| `_Draw` per block, worst, median | 1.42, 0.17 ms | 2.20, 0.80 ms |
+| Whole world at 4 ms a frame | 0.06 s, 8 frames | 0.14 s, 20 frames |
+| Added memory: managed, engine | 27, 7 MB | 87, 17 MB |
+| Render CPU while panning, median, worst | 0.76, 1.53 ms | 1.39, 2.43 ms |
+| Draw calls in view, at most | 2,982 | 3,935 |
+
+So recording costs about 0.6 µs an item, and the cost that's left in a frame is the draw calls, as texture changes break the batches: a battle's board has about 500. No modest TV box has been measured.
 
 ## Adding a game scene
 

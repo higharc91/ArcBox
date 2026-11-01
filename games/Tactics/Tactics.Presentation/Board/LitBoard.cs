@@ -14,6 +14,9 @@ public sealed record LitFace(Face Face, ImmutableArray<LightProbe> Probes, bool 
 {
     /// <summary>A corner's colour now: the face's own, times the light there if it takes any.</summary>
     public Rgb ColourAt(int corner, BoardLighting lighting) => Probes.IsEmpty ? Face.Tint : Face.Tint.Times(lighting.At(Probes[corner]));
+
+    /// <summary>A corner's colour for art that's baked: as <see cref="ColourAt"/>, with every light at its mean, whatever the last step left.</summary>
+    public Rgb MeanColourAt(int corner, BoardLighting lighting) => Probes.IsEmpty ? Face.Tint : Face.Tint.Times(lighting.MeanAt(Probes[corner]));
 }
 
 /// <summary>A sprite with what it needs from the light.</summary>
@@ -24,6 +27,9 @@ public sealed record LitSprite(Sprite Sprite, LightProbe? Probe, bool Glow) : Li
 {
     /// <summary>What to modulate it by now.</summary>
     public Rgb LightNow(BoardLighting lighting) => Probe is null ? new Rgb(1, 1, 1) : lighting.At(Probe);
+
+    /// <summary>What to modulate it by when it's baked: as <see cref="LightNow"/>, with every light at its mean, whatever the last step left.</summary>
+    public Rgb MeanLight(BoardLighting lighting) => Probe is null ? new Rgb(1, 1, 1) : lighting.MeanAt(Probe);
 }
 
 /// <summary>

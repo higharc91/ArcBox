@@ -145,6 +145,14 @@ public partial class Main : Control
             OnHostView(new HostViewEvent("tactics", JsonSerializer.SerializeToElement(global::Tactics.Presentation.Board.DemoBattle.View(board), ArcJson.Options)));
             return;
         }
+        if (_args.WorldDemo is { } region)
+        {
+            // Dev only: a whole region in blocks, measured; the art comes from the repository.
+            GD.Print("World demo: no server connection");
+            var worldPack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "tactics", "base"));
+            AddChild(new Games.Tactics.WorldDemo(region, worldPack, _args.ShotsDir));
+            return;
+        }
         if (_args.Demo == AppArgs.DemoCampaignLobby)
         {
             // Dev only: the lobby of a campaign game with a built-in campaign list and roster, no server.

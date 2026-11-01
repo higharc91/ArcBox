@@ -16,6 +16,13 @@ public static class BoardMap
             .ToBattleMap();
 }
 
+/// <summary>A rectangle of tiles: <see cref="X"/> and <see cref="Y"/> are its first tile.</summary>
+public readonly record struct TileRect(int X, int Y, int W, int H)
+{
+    /// <summary>True when <paramref name="tile"/> is inside.</summary>
+    public bool Contains(Tile tile) => tile.X >= X && tile.Y >= Y && tile.X < X + W && tile.Y < Y + H;
+}
+
 /// <summary>
 /// The map as the board draws it now: the map file plus what the battle changed, with each tile's look and the height its
 /// top is drawn at. That height isn't always the rules' (a void is drawn sunk), so anything standing on a tile takes its
@@ -82,6 +89,14 @@ public sealed class BoardTerrain
 
     /// <summary>Every tile, row by row.</summary>
     public IEnumerable<Tile> Tiles => Enumerable.Range(0, Map.Height).SelectMany(y => Enumerable.Range(0, Map.Width).Select(x => new Tile(x, y)));
+
+    /// <summary>The tiles of <paramref name="rect"/> that are on the map, row by row.</summary>
+    public IEnumerable<Tile> TilesIn(TileRect rect)
+    {
+        for (var y = Math.Max(rect.Y, 0); y < Math.Min(rect.Y + rect.H, Map.Height); y++)
+            for (var x = Math.Max(rect.X, 0); x < Math.Min(rect.X + rect.W, Map.Width); x++)
+                yield return new Tile(x, y);
+    }
 
     /// <summary>How a tile looks. A tile sunk in the battle takes the look of the map's chasm.</summary>
     public MaterialLook Look(Tile tile) => _looks[Index(tile)];

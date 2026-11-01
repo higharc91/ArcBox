@@ -12,7 +12,9 @@ namespace ArcBox.Host.Shell;
 /// car, e.g. one whose country plays the theme only) and <c>--autostart=&lt;gameId&gt;[:&lt;players&gt;]</c>
 /// (select that game and start it once enough players are in; for scripted runs), and <c>--perf</c> (F3 overlay on
 /// from the start, logged every 5 s), and <c>--audio-log</c> (print <c>AUDIO &lt;bus&gt; &lt;name&gt;</c> for every sound played),
-/// the dev-only <c>--tactics-demo[=&lt;map&gt;[:changed]]</c> (show a battle's board, without a server)
+/// the dev-only <c>--tactics-demo[=&lt;map&gt;[:changed]]</c> (show a battle's board, without a server),
+/// the dev-only <c>--world-demo[=&lt;region&gt;|hilly[:&lt;block tiles&gt;]]</c> (draw a whole region in blocks, pan over it and print what it cost),
+/// the dev-only <c>--walk-log</c> (print a <c>WALK</c> line for each step shown)
 /// the dev-only <c>--drop-signals</c> (never send a host signal, so a game runs on its fallback timers),
 /// the dev-only <c>--beat-log</c> (print a <c>BEAT</c> line with each Tactics beat's timing)
 /// and the dev-only <c>--demo=campaign-lobby</c> (show the lobby with a built-in campaign and roster, without a server).
@@ -40,6 +42,12 @@ public sealed record AppArgs
 
     /// <summary>Dev only: the board to show instead of connecting (<c>Tactics.Presentation.Board.DemoBattle</c>), or null.</summary>
     public string? TacticsDemo { get; init; }
+
+    /// <summary>Dev only: the region to draw and measure instead of connecting (<c>Tactics.Presentation.World.DemoRegion</c>), or null.</summary>
+    public string? WorldDemo { get; init; }
+
+    /// <summary>Dev only: print a <c>WALK</c> line for each step the TV shows.</summary>
+    public bool WalkLog { get; init; }
 
     /// <summary>Dev only: the TV never sends a host signal, to prove a game doesn't need them.</summary>
     public bool DropSignals { get; init; }
@@ -95,6 +103,12 @@ public sealed record AppArgs
                     break;
                 case "--tactics-demo":
                     args = args with { TacticsDemo = string.IsNullOrWhiteSpace(value) ? "river_crossing" : value };
+                    break;
+                case "--world-demo":
+                    args = args with { WorldDemo = string.IsNullOrWhiteSpace(value) ? "ashen_ford" : value };
+                    break;
+                case "--walk-log" when value is null:
+                    args = args with { WalkLog = true };
                     break;
                 case "--drop-signals" when value is null:
                     args = args with { DropSignals = true };

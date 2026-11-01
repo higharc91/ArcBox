@@ -48,7 +48,7 @@ public sealed class BoardLightingTests
     /// <summary>Most of the finale's lights by their step: what the real data gives, and it's more than half of the curve's eight.</summary>
     private const int LavaPhases = 5;
 
-    /// <summary>Each map's light, stated here by hand: a room of the recipe, or null for open air. A new map fails until it's looked at.</summary>
+    /// <summary>Each map and region's light, stated here by hand: a room of the recipe, or null for open air. A new one fails until it's looked at.</summary>
     private static readonly Dictionary<string, string?> StatedLight = new()
     {
         ["crypt_hall"] = "crypt",
@@ -58,6 +58,7 @@ public sealed class BoardLightingTests
         ["keep_gate"] = null,
         ["river_crossing"] = null,
         ["warlord_bridge"] = null,
+        ["ashen_ford"] = null,
     };
 
     private static LitBoard LitOf(BattleMap map, BoardChanges? changes = null) => LitBoard.Build(Plan(map, changes), Lit(map, changes));
@@ -372,21 +373,55 @@ public sealed class BoardLightingTests
     }
 
     [Fact]
-    public void Every_map_says_what_light_it_has_so_a_new_one_cant_slip_in_by_a_word_in_its_name()
+    public void Every_map_and_region_says_what_light_it_has_so_a_new_one_cant_slip_in_by_a_word_in_its_name()
     {
-        var maps = Directory.GetFiles(Path.Combine(Pack.Root, "rules", "maps"), "*.json").Select(f => Path.GetFileNameWithoutExtension(f)!).ToArray();
+        string[] Files(string folder) => [.. Directory.GetFiles(Path.Combine(Pack.Root, "rules", folder), "*.json").Select(f => Path.GetFileNameWithoutExtension(f)!)];
+        var (maps, regions) = (Files("maps"), Files("world"));
         var rooms = Pack.Manifest("dungeon").RootElement.GetProperty("lighting").GetProperty("ambient");
 
-        Assert.Equal(StatedLight.Keys.Order(), maps.Order());
-        foreach (var id in maps)
+        Assert.Equal(StatedLight.Keys.Order(), maps.Concat(regions).Order());
+        foreach (var id in maps.Concat(regions))
         {
             float Lifted(JsonElement a, int c) => a[c].GetSingle() + (1 - a[c].GetSingle()) * BoardLighting.AmbientLift;
             var stated = StatedLight[id] is { } room
                 ? new Rgb(Lifted(rooms.GetProperty(room), 0), Lifted(rooms.GetProperty(room), 1), Lifted(rooms.GetProperty(room), 2))
                 : new Rgb(1, 1, 1);
 
-            Assert.Equal(stated, Lit(Pack.Map(id)).Ambient);
+            Assert.Equal(stated, Lit(regions.Contains(id) ? Pack.Ground(id).Map : Pack.Map(id)).Ambient);
         }
+    }
+
+    [Fact]
+    public void A_baked_colour_is_the_mean_whatever_the_flicker_was_last_stepped_to()
+    {
+        var map = Map("test", ["cobble/grey"], [Prop("torch", 2, 2)], Flat(6, 6));
+        var lighting = Lit(map);
+        var lit = LitBoard.Build(Plan(map), lighting);
+        var face = lit.Items.OfType<LitFace>().First(f => f.Art && f.Face.Kind == FaceKind.Top && f.Face.Tile == new Tile(4, 4));   // near the torch the light is at its ceiling, and wouldn't flicker
+        var sprite = lit.Items.OfType<LitSprite>().Single();
+
+        var (faces, sprites, nows) = (new HashSet<Rgb>(), new HashSet<Rgb>(), new HashSet<Rgb>());
+        foreach (var seconds in new[] { 0, 0.13, 0.4, 0.71, 1.9, 7.3 })
+        {
+            lighting.Step(seconds);
+            faces.Add(face.MeanColourAt(0, lighting));
+            sprites.Add(sprite.MeanLight(lighting));
+            nows.Add(face.ColourAt(0, lighting));
+        }
+
+        Assert.True(nows.Count > 1, "The torch never flickered, so this proves nothing.");
+        Assert.Equal(face.Face.Tint.Times(lighting.MeanAt(face.Face.Points[0])), Assert.Single(faces));
+        Assert.Equal(lighting.MeanAt(sprite.Sprite.TopLeft + sprite.Sprite.Size / 2), Assert.Single(sprites));
+    }
+
+    [Fact]
+    public void What_takes_no_light_has_no_mean_either()
+    {
+        var map = Map("test", ["cobble/grey"], [Prop("crate", 2, 2)], Flat(4, 4));
+        var lit = LitBoard.Build(Plan(map), Lit(map));
+
+        Assert.All(lit.Items.OfType<LitFace>(), f => Assert.Equal(f.Face.Tint, f.MeanColourAt(0, lit.Lighting)));
+        Assert.All(lit.Items.OfType<LitSprite>(), s => Assert.Equal(new Rgb(1, 1, 1), s.MeanLight(lit.Lighting)));
     }
 
     [Fact]
