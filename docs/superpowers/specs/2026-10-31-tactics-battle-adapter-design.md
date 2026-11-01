@@ -179,7 +179,7 @@ Because the engine's state includes the RNG and any pending reaction, the battle
 | Screen | When | Data |
 |---|---|---|
 | `pickClass` | Muster, no character | the 12 classes with role and one line each |
-| `pickEncounter` | VIP, Encounter pick | the encounters (§3) |
+| `pickEncounter` | VIP, Encounter pick | the encounters (§3), and `canWalk`: whether "Back to walking" has a world to go back to (false in a pack with no region) |
 | `turn` | your turn | your unit, the economy pips, `TurnChoices` (§5), a mini-map of nearby tiles |
 | `react` | your reaction | the trigger ("The goblin is leaving your reach"), the options with odds, and a 10 s deadline (`DeadlineUtc`) |
 | `status` | anyone else's turn | whose turn it is, "you're up in n" (exact, rules-engine §3.2), and your HP and conditions |

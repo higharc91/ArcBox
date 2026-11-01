@@ -307,7 +307,8 @@ public sealed partial class TacticsGame
             TacticsPhase.Muster => new WaitView("Waiting for everyone to choose a class"),
             TacticsPhase.Exploration => WalkScreen(player, profile),
             TacticsPhase.Story => StoryScreen(player, profile),
-            TacticsPhase.EncounterPick when IsVip(player) => Custom(Screens.PickEncounter, new { encounters = EncounterOptions() }),
+            // canWalk: whether "Back to walking" goes anywhere, which it doesn't in a pack with no region (decisions 9 and 29).
+            TacticsPhase.EncounterPick when IsVip(player) => Custom(Screens.PickEncounter, new { encounters = EncounterOptions(), canWalk = _region is not null }),
             TacticsPhase.EncounterPick => new WaitView($"Waiting for {Vip?.Name ?? "the host"} to choose a battle"),
             TacticsPhase.Battle => BattleScreen(profile),
             TacticsPhase.Results => Custom(Screens.Results, new

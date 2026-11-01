@@ -30,6 +30,7 @@ describe("tactics phone module", () => {
       .filter((n) => !n.startsWith("portal-")).sort();
     expect(names).toEqual([
       "check-pick", "check-rolled", "choice-follower", "choice-leader", "dialogue", "dialogue-leader", "pickClass", "pickEncounter",
+      "pickEncounter-noWalk",
       "react", "results", "status", "turn", "vote", "vote-tie", "walk-follower", "walk-interact", "walk-leader",
     ]);
     for (const name of names) {

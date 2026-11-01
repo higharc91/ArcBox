@@ -623,4 +623,17 @@ describe("the battle list, from the world", () => {
     fireEvent.click(screen.getByRole("button", { name: "Back to walking" }));
     expect(send).toHaveBeenLastCalledWith({ action: "backToWalk" });
   });
+
+  it("has no Back to walking in a pack with no world (canWalk false), so there's no dead button", () => {
+    show("pickEncounter-noWalk");
+    expect(screen.queryByRole("button", { name: "Back to walking" })).toBeNull();
+    expect(screen.getByRole("button", { name: /River Crossing/ })).toBeTruthy();
+  });
+
+  it("has no Back to walking from a server that doesn't say canWalk", () => {
+    const v = view("pickEncounter");
+    delete (v.data as Record<string, unknown>).canWalk;
+    render(<ControllerScreen view={v} send={() => {}} me="ALEX" game="tactics" />);
+    expect(screen.queryByRole("button", { name: "Back to walking" })).toBeNull();
+  });
 });

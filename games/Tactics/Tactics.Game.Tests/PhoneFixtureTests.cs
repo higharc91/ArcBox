@@ -35,6 +35,7 @@ public sealed class PhoneFixtureTests
     {
         var screens = Capture();
         Assert.Equal([.. new[] { "pickClass", "pickEncounter", "react", "results", "status", "turn", "walk-follower", "walk-leader" }], screens.Keys.Order(StringComparer.Ordinal));
+        Assert.True(screens["pickEncounter"]["data"]!["canWalk"]!.GetValue<bool>());       // a world to go back to
 
         Check(screens);
     }
@@ -113,8 +114,19 @@ public sealed class PhoneFixtureTests
         return seen;
     }
 
+    /// <summary>
+    /// A pack with no region sends the phones what it always did, but for the battle list's <c>canWalk</c>, which is false there: its
+    /// own fixture, <c>pickEncounter-noWalk</c>, from which the phone hides "Back to walking".
+    /// </summary>
     [Fact]
-    public void A_pack_with_no_region_sends_the_phones_what_it_always_did() => Check(Capture(ExplorationTests.NoRegion.Value));
+    public void A_pack_with_no_region_sends_the_phones_what_it_always_did()
+    {
+        var screens = Capture(ExplorationTests.NoRegion.Value);
+        Assert.True(screens.Remove("pickEncounter", out var list));
+        Assert.False(list["data"]!["canWalk"]!.GetValue<bool>());
+        screens["pickEncounter-noWalk"] = list;
+        Check(screens);
+    }
 
     [Fact]
     public void Portal_views_match_their_fixtures()
