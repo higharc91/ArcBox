@@ -206,8 +206,12 @@ public sealed record StoryLineView(string Id, string Speaker, string? Name, stri
 /// <param name="Ask">The question open, or null.</param>
 /// <param name="Check">The skill check under way, or null.</param>
 /// <param name="Until">When what's showing ends: the line (a question's close is <see cref="StoryAskView.Deadline"/>), the gap or the reveal.</param>
+/// <param name="Campaign">
+/// The campaign the story is of: <see cref="Seq"/> counts within it, so a TV that sees it change knows another story has begun, and what it
+/// heard of the last one says nothing of this one.
+/// </param>
 public sealed record StoryView(int Seq, string Scene, string Title, string State, StoryLineView? Line, StoryAskView? Ask, StoryCheckView? Check,
-    DateTimeOffset? Until);
+    DateTimeOffset? Until, string? Campaign = null);
 
 /// <summary>An option of a question, for the TV, with who has voted for it: the tally is the TV's alone (5d flag 7).</summary>
 public sealed record StoryOptionView(string Id, string Label, string? Skill, int? Dc, ImmutableArray<string> Voters);
@@ -221,8 +225,12 @@ public sealed record StoryOptionView(string Id, string Label, string? Skill, int
 /// <param name="Decider">Who breaks the tie, or chooses for the party: their player's name.</param>
 /// <param name="Deadline">When it closes, or null while it waits for a phone.</param>
 /// <param name="Options">What's offered, in the node's order; only the tied during a tie-break.</param>
+/// <param name="Span">
+/// How long its clock ran when it started, in seconds, with <paramref name="Deadline"/>: the question's length, or longer if the line asking it
+/// outlasts that. The TV counts down against it, and learns how far its own clock is off the server's when it sees a question open.
+/// </param>
 public sealed record StoryAskView(bool Party, int Voted, int Of, ImmutableArray<string> Away, bool Tie, string? Decider, DateTimeOffset? Deadline,
-    ImmutableArray<StoryOptionView> Options);
+    ImmutableArray<StoryOptionView> Options, double? Span = null);
 
 /// <summary>A character who can roll a skill check, for the TV.</summary>
 /// <param name="Member">Their member id.</param>
@@ -244,9 +252,10 @@ public sealed record StoryCardView(string Member, string Name, string Player, st
 /// <param name="Roll">The roll, once made.</param>
 /// <param name="Tie">True while a tie over who rolls is being broken.</param>
 /// <param name="Decider">Who breaks it: their player's name.</param>
+/// <param name="Span">How long the pick's clock ran when it started, in seconds, with <paramref name="Deadline"/> (<see cref="StoryAskView.Span"/>).</param>
 /// <param name="Deadline">When the pick closes, or null.</param>
 public sealed record StoryCheckView(string Skill, int Dc, string Title, ImmutableArray<StoryCardView> Cards, string? Chosen, RollResult? Roll,
-    bool Tie = false, string? Decider = null, DateTimeOffset? Deadline = null);
+    bool Tie = false, string? Decider = null, DateTimeOffset? Deadline = null, double? Span = null);
 
 /// <summary>The TV's view of a tactics session (adapter spec §8).</summary>
 /// <param name="Phase">The phase.</param>

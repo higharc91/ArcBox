@@ -88,6 +88,28 @@ public sealed class StoryScreenTests
     public void Apostrophes_are_typeset()
         => Assert.Contains("I’d shake every hand", Words(Screen(Showing(1, Line("ch1_mayor_halden_1"))).Caption!));
 
+    [Theory]
+    [InlineData("'tis the season.", "’tis the season.")]
+    [InlineData("Lock 'em up.", "Lock ’em up.")]
+    [InlineData("Back in '90.", "Back in ’90.")]
+    [InlineData("She said ('not the ford') twice.", "She said (‘not the ford’) twice.")]
+    [InlineData("\"'Twas me,\" he said.", "\"’Twas me,\" he said.")]
+    [InlineData("The Skarrows' bridge.", "The Skarrows’ bridge.")]
+    [InlineData("'Ember' they call it.", "‘Ember’ they call it.")]
+    public void Apostrophes_and_quotes_are_set_by_what_they_do(string text, string set)
+        => Assert.Equal(set, StoryScreen.Typeset(text));
+
+    [Fact]
+    public void Someone_the_lore_doesnt_list_speaks_under_their_id_not_as_the_narrator()
+    {
+        var caption = Screen(Showing(1, new StoryLineView("x_1", "old_ferryman", null, null, "idle", "Mind the step."))).Caption!;
+
+        Assert.False(caption.Narrator);
+        Assert.Equal("Old Ferryman", caption.Speaker);
+        Assert.Null(caption.Portrait);
+        Assert.Equal("“Mind the step.”", Words(caption));
+    }
+
     [Fact]
     public void A_quote_inside_a_line_opens_and_closes()
         => Assert.Equal("‘Ember’ they call it.",
@@ -239,6 +261,49 @@ public sealed class StoryScreenTests
             var label = StoryScreen.Label(option.Label);
             Assert.True(label.Length <= StoryScreen.LabelRows, $"{option.Id}: {label.Length} rows");
             Assert.All(label, row => Assert.True(row.Length <= StoryScreen.LabelColumns, $"{option.Id}: '{row}'"));
+        }
+    }
+
+    /// <summary>
+    /// The most a question offers in the lore, Maren's <c>ask_me</c> with all eleven of its options (more than any party is offered at once,
+    /// since some exclude others), fits the panel's height: smaller, and every label within its rows.
+    /// </summary>
+    [Fact]
+    public void Eleven_long_options_fit_the_panel()
+    {
+        var node = Lore.Scenes.Single(s => s.Id == "ch3_maren_parley").Node("ask_me")!;
+        var ask = Ask(true, 0, 4, [.. node.Options.Select(o => o.Check is { } c ? Check(o.Id, o.Label, c.Skill, c.Dc) : Option(o.Id, o.Label))],
+            deadline: T0.AddSeconds(45));
+
+        var vote = Screen(Showing(4, Line("ch1_mayor_halden_4"), States.Asking, ask)).Vote!;
+
+        Assert.Equal(11, vote.Rows.Length);
+        Assert.True(vote.Height <= VoteLayout.MaxHeight, $"{vote.Height} tall");
+        Assert.True(vote.Scale < 1);
+        Assert.All(vote.Rows, r => Assert.True(r.Label.Length <= StoryScreen.LabelRows));
+        Assert.All(vote.Rows.SelectMany(r => r.Label), row => Assert.True(row.Length <= VoteLayout.Columns(vote.Scale), row));
+    }
+
+    [Fact]
+    public void A_few_options_keep_their_full_size()
+    {
+        var ask = Ask(true, 0, 4, [Option("a", "We'll clear the ford by force."), Option("b", "We'll go and parley with the chief."),
+            Check("c", "First, what's it worth to you?", "persuasion", 15)], deadline: T0.AddSeconds(45));
+
+        var vote = Screen(Showing(4, Line("ch1_mayor_halden_4"), States.Asking, ask)).Vote!;
+
+        Assert.Equal(1, vote.Scale);
+        Assert.Equal(VoteLayout.Chrome + vote.Rows.Sum(r => VoteLayout.RowHeight(r, 1)), vote.Height);
+    }
+
+    [Fact]
+    public void Every_question_in_the_lore_fits_the_panel()
+    {
+        foreach (var node in Lore.Scenes.SelectMany(s => s.Nodes).Where(n => !n.Options.IsEmpty))
+        {
+            var ask = Ask(true, 0, 4, [.. node.Options.Select(o => o.Check is { } c ? Check(o.Id, o.Label, c.Skill, c.Dc) : Option(o.Id, o.Label))],
+                deadline: T0.AddSeconds(45));
+            Assert.True(Screen(Showing(4, Line("ch1_mayor_halden_4"), States.Asking, ask)).Vote!.Height <= VoteLayout.MaxHeight, node.Id);
         }
     }
 

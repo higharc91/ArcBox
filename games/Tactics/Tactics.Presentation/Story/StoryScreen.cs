@@ -37,7 +37,13 @@ public sealed record VoteRow(string Id, string Letter, ImmutableArray<string> La
 /// <param name="Rows">What's offered.</param>
 /// <param name="Tally">The line under them: "4 of 4 voted · 2–2 tie, Sam decides".</param>
 /// <param name="Away">"Dave is away and doesn't vote", or null.</param>
-public sealed record VotePanel(string Heading, bool Party, bool Tie, string? Clock, ImmutableArray<VoteRow> Rows, string Tally, string? Away);
+/// <param name="Scale">The size its rows are drawn at, from 1 down (<see cref="VoteLayout"/>), so every option fits the panel's height.</param>
+public sealed record VotePanel(string Heading, bool Party, bool Tie, string? Clock, ImmutableArray<VoteRow> Rows, string Tally, string? Away,
+    float Scale = 1)
+{
+    /// <summary>How tall the panel is drawn, in layout pixels.</summary>
+    public float Height => VoteLayout.Height(Rows, Scale);
+}
 
 /// <summary>A character who can roll, as a card (mockup 03).</summary>
 /// <param name="Member">Their member id.</param>
@@ -133,7 +139,8 @@ public sealed record StoryScreen(int Seq, string Scene, string Title, string Sta
 
     private static StoryCaption CaptionOf(StoryLineView line, HudArt? art, bool asking)
     {
-        var narrator = line.Name is null;
+        var narrator = line.Speaker == SceneDef.Narrator;
+        var name = narrator ? null : line.Name ?? Presentation.Words.Title(line.Speaker);   // someone the lore doesn't list still speaks
         var text = Typeset(line.Text);
         var strong = asking ? QuestionStart(text) : -1;
         var words = Words(text, strong).ToList();
@@ -142,7 +149,7 @@ public sealed record StoryScreen(int Seq, string Scene, string Title, string Sta
             words[0] = words[0] with { Text = $"“{words[0].Text}" };
             words[^1] = words[^1] with { Text = $"{words[^1].Text}”" };
         }
-        return new StoryCaption(line.Id, line.Name, narrator ? null : art?.Speaker(line.Portrait, line.Mood, line.Role), Wrap(words, CaptionColumns));
+        return new StoryCaption(line.Id, name, narrator ? null : art?.Speaker(line.Portrait, line.Mood, line.Role), Wrap(words, CaptionColumns));
     }
 
     /// <summary>
@@ -216,29 +223,62 @@ public sealed record StoryScreen(int Seq, string Scene, string Title, string Sta
         return runs.ToImmutable();
     }
 
-    /// <summary>Straight quotes as the TV's font sets them: ’ in a word or after it, ‘ opening one.</summary>
-    private static string Typeset(string text)
+    /// <summary>The words an apostrophe starts by standing for what's left out: 'tis, 'twas, 'em. Its mark is ’, as in "don’t".</summary>
+    private static readonly string[] Elisions = ["tis", "twas", "twere", "twill", "em", "til", "cause", "neath", "n"];
+
+    /// <summary>
+    /// Straight quotes as the TV's font sets them: ‘ opening a quote (at the start, or after a space, a bracket, a dash or another quote),
+    /// and ’ everywhere else: in a word, after one, or starting a word that leaves letters out ('tis, 'em, '90s).
+    /// </summary>
+    public static string Typeset(string text)
     {
         var set = new StringBuilder(text.Length);
         for (var i = 0; i < text.Length; i++)
-            set.Append(text[i] == '\'' ? (i == 0 || text[i - 1] == ' ' ? '‘' : '’') : text[i]);
+        {
+            if (text[i] != '\'')
+            {
+                set.Append(text[i]);
+                continue;
+            }
+            var opens = i == 0 || text[i - 1] is ' ' or '(' or '[' or '"' or '“' or '—' or '–' or '-';
+            set.Append(opens && !Elided(text, i + 1) ? '‘' : '’');
+        }
         return set.ToString();
+    }
+
+    /// <summary>Whether the word at <paramref name="at"/> is one an apostrophe elides into: a known one, or a number ('90s).</summary>
+    private static bool Elided(string text, int at)
+    {
+        if (at < text.Length && char.IsDigit(text[at]))
+            return true;
+        var end = at;
+        while (end < text.Length && char.IsLetter(text[end]))
+            end++;
+        var word = text[at..end];
+        return Elisions.Any(e => word.Equals(e, StringComparison.OrdinalIgnoreCase));
     }
 
     // ---- The vote ------------------------------------------------------------------------------------------------------------
 
     /// <summary>An option's label as the panel shows it: in quotes, as someone in the party says it, wrapped to <see cref="LabelColumns"/>.</summary>
-    public static ImmutableArray<string> Label(string label)
-        => [.. Wrap(Typeset($"“{label}”").Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(w => new CaptionRun(w, false)), LabelColumns)
+    public static ImmutableArray<string> Label(string label, int columns = LabelColumns)
+        => [.. Wrap(Typeset($"“{label}”").Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(w => new CaptionRun(w, false)), columns)
             .Select(row => string.Concat(row.Select(r => r.Text)))];
 
     private static VotePanel VoteOf(StoryAskView ask, string? clock)
     {
-        var rows = ask.Options.Select((o, i) => new VoteRow(o.Id, Letter(i), Label(o.Label),
-            o.Skill is { } skill && o.Dc is { } dc ? $"{SkillName(skill)} check · DC {dc.ToString(CultureInfo.InvariantCulture)}" : null,
-            o.Voters.IsDefault ? [] : o.Voters));
         var heading = ask.Tie ? "Tie-break" : ask.Party ? "Party vote" : "Leader's choice";
-        return new VotePanel(heading, ask.Party, ask.Tie, ask.Deadline is null ? null : clock, [.. rows], Tally(ask), ask.Party ? Away(ask.Away) : null);
+        ImmutableArray<VoteRow> rows = [];
+        var scale = 1f;
+        foreach (var size in VoteLayout.Scales)
+        {
+            (rows, scale) = ([.. ask.Options.Select((o, i) => new VoteRow(o.Id, Letter(i), Label(o.Label, VoteLayout.Columns(size)),
+                o.Skill is { } skill && o.Dc is { } dc ? $"{SkillName(skill)} check · DC {dc.ToString(CultureInfo.InvariantCulture)}" : null,
+                o.Voters.IsDefault ? [] : o.Voters))], size);
+            if (VoteLayout.Height(rows, size) <= VoteLayout.MaxHeight)
+                break;
+        }
+        return new VotePanel(heading, ask.Party, ask.Tie, ask.Deadline is null ? null : clock, rows, Tally(ask), ask.Party ? Away(ask.Away) : null, scale);
     }
 
     private static string Tally(StoryAskView ask)

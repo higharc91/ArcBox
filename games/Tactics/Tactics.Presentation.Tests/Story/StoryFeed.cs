@@ -44,16 +44,16 @@ internal static class StoryFeed
         => speaker == "narrator" ? new StoryLineView(id, speaker, null, null, "idle", text) : new StoryLineView(id, speaker, "Someone", "mayor", "idle", text, "npc");
 
     public static StoryView Showing(int seq, StoryLineView? line, string state = TacticsGame.StoryStates.Lines, StoryAskView? ask = null,
-        StoryCheckView? check = null, string scene = "ch1_mayor", string title = "The Mayor's Request", DateTimeOffset? until = null)
-        => new(seq, scene, title, state, line, ask, check, until ?? T0.AddSeconds(5));
+        StoryCheckView? check = null, string scene = "ch1_mayor", string title = "The Mayor's Request", DateTimeOffset? until = null, string? campaign = null)
+        => new(seq, scene, title, state, line, ask, check, until ?? T0.AddSeconds(5), campaign);
 
     public static StoryOptionView Option(string id, string label, params string[] voters) => new(id, label, null, null, [.. voters]);
 
     public static StoryOptionView Check(string id, string label, string skill, int dc, params string[] voters) => new(id, label, skill, dc, [.. voters]);
 
     public static StoryAskView Ask(bool party, int voted, int of, ImmutableArray<StoryOptionView> options, ImmutableArray<string>? away = null, bool tie = false,
-        string? decider = null, DateTimeOffset? deadline = null)
-        => new(party, voted, of, away ?? [], tie, decider, deadline, options);
+        string? decider = null, DateTimeOffset? deadline = null, double? span = null)
+        => new(party, voted, of, away ?? [], tie, decider, deadline, options, span);
 
     public static StoryCardView Card(string member, string name, string player, int bonus, string note = "CHA 12", bool here = true, int votes = 0)
         => new(member, name, player, $"characters.class_fighter", bonus, note, here, votes);

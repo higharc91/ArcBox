@@ -32,18 +32,18 @@ public sealed class StoryVoteTests
     internal static void Vote(Session s, int seat, string option) => s.Send(seat, "vote", new { option });
 
     /// <summary>The ford choice's opening question, the leader's: what to ask the mayor first.</summary>
-    internal static Session AtTheMayorsQuestion(int harnessSeed = 1)
+    internal static Session AtTheMayorsQuestion(int harnessSeed = 1, TacticsTiming? timing = null)
     {
-        var s = Telling(FordChoice, harnessSeed: harnessSeed);
+        var s = Telling(FordChoice, harnessSeed: harnessSeed, timing: timing);
         Until(s, () => Story(s).State == TacticsGame.StoryStates.Asking, "the mayor's question");
         Assert.Equal("open", Cursor(s)!.Node);
         return s;
     }
 
     /// <summary>The ford choice's party vote (mockup 02), its question heard: the leader asked about the cases.</summary>
-    internal static Session AtTheVote(bool heard = true, int harnessSeed = 1)
+    internal static Session AtTheVote(bool heard = true, int harnessSeed = 1, TacticsTiming? timing = null)
     {
-        var s = AtTheMayorsQuestion(harnessSeed);
+        var s = AtTheMayorsQuestion(harnessSeed, timing);
         Vote(s, StageBattleTests.Lead(s), "cases");
         Until(s, () => Story(s).State == TacticsGame.StoryStates.Asking && Cursor(s)!.Node == "vote", "the vote");
         if (heard)
@@ -63,6 +63,26 @@ public sealed class StoryVoteTests
     private static string[] Options(Session s) => [.. Ask(s).Options.Select(o => o.Id)];
 
     // ---- Opening ------------------------------------------------------------------------------------------------------------------
+
+    /// <summary>
+    /// The TV's countdown needs no guess at the question's length (5d §10): the view says how long its clock ran from the start, with the
+    /// deadline, and nothing while it holds. A server tuned to 60 s votes says 60. The view also names the campaign its Seq counts in.
+    /// </summary>
+    [Fact]
+    public void A_question_tells_the_tv_how_long_its_clock_runs()
+    {
+        var s = AtTheVote(heard: false);
+        Assert.Equal(45, Ask(s).Span);
+        Assert.Equal(OpenedAt(s) + TimeSpan.FromSeconds(45), Ask(s).Deadline);
+        Assert.Equal("c1", Story(s).Campaign);
+
+        for (var p = 0; p < 4; p++)
+            s.Harness.SetConnected(p, false);
+        Assert.Null(Ask(s).Span);
+
+        var slow = AtTheVote(heard: false, timing: TacticsTiming.Default with { Story = StoryTiming.Default with { Vote = TimeSpan.FromSeconds(60) } });
+        Assert.Equal(60, Ask(slow).Span);
+    }
 
     [Fact]
     public void Options_open_as_the_last_line_starts()

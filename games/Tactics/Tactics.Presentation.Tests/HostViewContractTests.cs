@@ -324,23 +324,23 @@ public sealed class HostViewContractTests
         Assert.Equal("characters.child", walking.Explore!.Markers!.Value[0].Sprite);       // Pip, the first of the cast who isn't the narrator
         Assert.Equal(units.Sprite("characters.child"), mark.Figure!.Sprite);
         Assert.Equal(units.Emote("alert"), mark.Emote);
-        Assert.Null(track.Receive(walking.Story, DateTimeOffset.UnixEpoch).Screen);
+        Assert.Null(track.Receive(walking, DateTimeOffset.UnixEpoch).Screen);                // the TV watches the party walk up
 
         var leader = h.Players.ToList().FindIndex(p => p.Id == game.Leader!.Id);
         h.Input(leader, new { action = "interact" });
         var opening = OverTheWire(game);
-        var first = track.Receive(opening.Story, h.Now);
-        Assert.Null(first.Say);                                            // a fresh track: the first line shows
+        var first = track.Receive(opening, h.Now);
+        Assert.Equal("ch1_mayor_open_1", first.Say!.Line);                // it watched the walk up, so the first line is said
         Assert.True(first.Screen!.Caption!.Narrator);
         Assert.StartsWith("Emberwick, at the Ashen Ford.", string.Concat(first.Screen.Caption.Rows[0].Select(r => r.Text)));
         Assert.Null(Assert.Single(StoryMarks.Of(opening.Explore!, new BoardTerrain(ground.Map, null), units)).Emote);   // its scene plays: no "!"
 
-        var said = new List<string>();
+        var said = new List<string> { first.Say.Line };
         StoryTick tick = first;
         for (var guard = 0; guard < 20 && tick.Screen?.Vote is null; guard++)
         {
             h.Advance(OverTheWire(game).Story!.Until!.Value - h.Now);
-            tick = track.Receive(OverTheWire(game).Story, h.Now);
+            tick = track.Receive(OverTheWire(game), h.Now);
             if (tick.Say is { } say)
             {
                 Assert.Equal(OverTheWire(game).Story!.Line!.Id, say.Line);
@@ -349,7 +349,7 @@ public sealed class HostViewContractTests
             }
         }
 
-        Assert.Equal(["ch1_mayor_open_2", "ch1_mayor_open_3", "ch1_mayor_open_4", "ch1_mayor_halden_1", "ch1_mayor_halden_2", "ch1_mayor_halden_3",
+        Assert.Equal(["ch1_mayor_open_1", "ch1_mayor_open_2", "ch1_mayor_open_3", "ch1_mayor_open_4", "ch1_mayor_halden_1", "ch1_mayor_halden_2", "ch1_mayor_halden_3",
             "ch1_mayor_halden_4"], said);
         Assert.Equal("Halden Varrow", tick.Screen!.Caption!.Speaker);
         Assert.Equal("portraits/mayor_sad.png", tick.Screen.Caption.Portrait!.Path);

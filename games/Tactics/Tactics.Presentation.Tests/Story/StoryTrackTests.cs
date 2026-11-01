@@ -101,6 +101,102 @@ public sealed class StoryTrackTests
     }
 
     [Fact]
+    public void A_tv_that_watched_the_walk_up_says_the_first_line()
+    {
+        var track = Track();
+        track.Receive(null, T0, watching: true);                        // walking up to the "!"
+
+        var first = track.Receive(Showing(1, Line("ch1_mayor_open_1")), T0);
+
+        Assert.Equal("ch1_mayor_open_1", first.Say!.Line);
+    }
+
+    [Fact]
+    public void A_tv_that_came_in_on_a_story_waiting_to_resume_says_nothing_of_its_saved_line()
+    {
+        var track = Track();
+        track.Receive(null, T0, watching: false);                       // Resuming: the saved line comes back with a new Seq
+
+        Assert.Null(track.Receive(Showing(9, Line("ch1_mayor_open_3")), T0).Say);
+        Assert.Equal("ch1_mayor_open_4", track.Receive(Showing(10, Line("ch1_mayor_open_4")), T0).Say!.Line);
+    }
+
+    [Fact]
+    public void A_host_view_says_whether_the_tv_is_watching()
+    {
+        var walking = new TacticsHostView(nameof(TacticsPhase.Exploration), "", null, 1, [], null, null, null, null);
+        var resuming = walking with { Phase = nameof(TacticsPhase.Resuming) };
+
+        var watched = Track();
+        watched.Receive(walking, T0);
+        var waited = Track();
+        waited.Receive(resuming, T0);
+
+        Assert.NotNull(watched.Receive(walking with { Phase = nameof(TacticsPhase.Story), Story = Showing(1, Line("ch1_mayor_open_1")) }, T0).Say);
+        Assert.Null(waited.Receive(walking with { Phase = nameof(TacticsPhase.Story), Story = Showing(1, Line("ch1_mayor_open_1")) }, T0).Say);
+    }
+
+    [Fact]
+    public void A_new_campaign_at_a_higher_seq_is_a_new_story()
+    {
+        var track = Track();
+        track.Receive(null, T0, watching: true);
+        Assert.NotNull(track.Receive(Showing(1, Line("ch1_mayor_open_1"), campaign: "embers"), T0).Say);
+        Assert.NotNull(track.Receive(Showing(2, Line("ch1_mayor_open_2"), campaign: "embers"), T0).Say);
+        track.Receive(null, T0, watching: true);                        // another party starts its own campaign, from the start
+
+        var again = track.Receive(Showing(30, Line("ch1_mayor_open_1"), campaign: "ashes"), T0);
+
+        Assert.Equal("ch1_mayor_open_1", again.Say!.Line);              // heard in the other story: new in this one
+        Assert.Equal("ch1_mayor_open_2", track.Receive(Showing(31, Line("ch1_mayor_open_2"), campaign: "ashes"), T0).Say!.Line);
+    }
+
+    [Fact]
+    public void A_late_view_is_dropped_not_taken_for_a_new_story()
+    {
+        var track = Running(5);
+        track.Receive(Showing(6, Line("ch1_mayor_open_2")), T0);
+
+        var late = track.Receive(Showing(5, Line("ch1_mayor_open_1")), T0);
+
+        Assert.Null(late.Say);
+        Assert.False(late.Cut);                                           // the newest line goes on
+        Assert.Equal("ch1_mayor_open_2", late.Screen!.Caption!.Line);
+        Assert.Equal(6, track.Seq);
+        Assert.Null(track.Receive(Showing(7, Line("ch1_mayor_open_2")), T0).Say);   // still heard: the same story
+    }
+
+    [Fact]
+    public void A_view_far_behind_in_the_same_campaign_is_late_not_a_new_story()
+    {
+        var track = Track();
+        track.Receive(Showing(20, Line("ch1_mayor_open_1"), campaign: "embers"), T0);
+        Assert.NotNull(track.Receive(Showing(21, Line("ch1_mayor_open_2"), campaign: "embers"), T0).Say);
+
+        var late = track.Receive(Showing(12, Line("ch1_mayor_open_1"), campaign: "embers"), T0);
+
+        Assert.False(late.Cut);
+        Assert.Equal(21, track.Seq);
+        Assert.Null(track.Receive(Showing(22, Line("ch1_mayor_open_2"), campaign: "embers"), T0).Say);   // still heard
+    }
+
+    [Fact]
+    public void The_server_says_how_long_its_votes_run()
+    {
+        var track = new StoryTrack(Clips, Art);                           // the TV's default is a 45 s vote
+        var tv = T0.AddSeconds(-8);                                       // and its clock is 8 s slow
+        track.Receive(Showing(1, Line("ch1_mayor_open_1")), tv);
+        track.Receive(Showing(2, Line("ch1_mayor_halden_4"), States.Asking,
+            Ask(true, 0, 2, [Option("a", "Yes."), Option("b", "No.")], deadline: T0.AddSeconds(60), span: 60)), tv);
+
+        Assert.Equal("1:00", track.Screen!.Vote!.Clock);
+        track.Tick(10);
+        track.Receive(Showing(2, Line("ch1_mayor_halden_4"), States.Asking,
+            Ask(true, 2, 2, [Option("a", "Yes.", "A", "B"), Option("b", "No.")], deadline: T0.AddSeconds(12), span: 60)), tv.AddSeconds(10));
+        Assert.Equal("0:02", track.Screen.Vote.Clock);                    // the settle, on the server's time
+    }
+
+    [Fact]
     public void The_next_line_after_joining_speaks()
     {
         var track = Track();
@@ -278,86 +374,109 @@ public sealed class StoryTrackTests
     }
 
     /// <summary>
-    /// The property: whatever views a TV sees, from whenever it joins, through dropped views, server restarts and new campaigns, every line
-    /// it speaks is the one showing in the view it came with, and it never speaks a line twice on one track.
+    /// The property: whatever views a TV sees, from whenever it joins, through dropped and late views, server restarts and new campaigns, every
+    /// line it speaks is the one showing in the view it came with, and it never speaks a line twice in one campaign. And it isn't silent for
+    /// nothing: a TV that watched the party walk up says the scene's first line.
     /// </summary>
     [Fact]
     public void A_tv_joining_anywhere_never_speaks_a_line_out_of_turn_or_twice()
     {
         var lines = AllLines().Select(l => LineOf(l.Line)).ToArray();
+        var firstLinesSaid = 0;
         for (var seed = 0; seed < 400; seed++)
         {
             var random = new Random(seed);
-            var views = ServerStory(random, lines);
-            var join = random.Next(views.Count);
+            var feed = ServerStory(random, lines);
+            var join = random.Next(feed.Count);
             var track = Track(random.Next(4) == 0 ? SpeechFallback.Speech : SpeechFallback.Captions);
-            var heard = new HashSet<string>();
-            int? seq = null;
-            foreach (var view in views.Skip(join).Where(_ => random.Next(5) > 0))    // a slow TV misses a fifth of them
+            var heard = new HashSet<(string?, string)>();
+            for (var i = 0; i + 1 < feed.Count; i++)
+                if (random.Next(12) == 0)
+                    (feed[i], feed[i + 1]) = (feed[i + 1], feed[i]);                  // now and then two come the wrong way round
+            var shown = feed.Skip(join).Where(_ => random.Next(5) > 0).ToList();    // and a slow TV misses a fifth of them
+            var watched = false;
+            foreach (var (view, watching) in shown)
             {
-                if (view is not null && seq is { } s && view.Seq < s)
-                    heard.Clear();                                        // a new campaign: a new track
-                if (view is not null)
-                    seq = view.Seq;
-                var tick = track.Receive(view, T0);
+                var tick = track.Receive(view, T0, watching);
                 if (tick.Say is { } say)
                 {
                     Assert.True(view?.Line?.Id == say.Line, $"seed {seed}: spoke {say.Line} over {view?.Line?.Id}");
-                    Assert.True(heard.Add(say.Line), $"seed {seed}: spoke {say.Line} twice");
+                    Assert.True(heard.Add((view!.Campaign, say.Line)), $"seed {seed}: spoke {say.Line} twice");
                 }
+                if (watched && view is { Seq: 1, State: States.Lines, Line: { } first })
+                {
+                    Assert.True(tick.Say?.Line == first.Id, $"seed {seed}: the walk-up's first line went unsaid");
+                    firstLinesSaid++;
+                }
+                watched = view is null && watching;
                 Assert.Null(track.Tick(random.NextDouble()).Say);
             }
         }
+        Assert.True(firstLinesSaid > 20, $"only {firstLinesSaid} walk-ups seen");
     }
 
     /// <summary>
-    /// A server's story, as the views it sends: lines one after another with a new Seq each, questions on a node's last line, rolls, gaps,
-    /// a restart that replays its saved line, and now and then a new campaign starting its Seq again.
+    /// A server's story, as the views it sends, each with whether the TV sees the party then: lines one after another with a new Seq each,
+    /// questions on a node's last line, rolls, gaps, walking between beats, a restart that waits to resume and replays its saved line, and now
+    /// and then a new campaign, which walks up to its first line at Seq 1 or goes on from its own saved Seq.
     /// </summary>
-    private static List<StoryView?> ServerStory(Random random, StoryLineView[] lines)
+    private static List<(StoryView? View, bool Watching)> ServerStory(Random random, StoryLineView[] lines)
     {
-        var views = new List<StoryView?>();
+        var views = new List<(StoryView?, bool)>();
+        var campaign = 0;
         var seq = random.Next(0, 50);
         var at = random.Next(lines.Length);
+        StoryView Say(StoryLineView? line, int n, string state = States.Lines, StoryAskView? ask = null, StoryCheckView? check = null)
+            => Showing(n, line, state, ask, check, campaign: $"c{campaign}");
+        void Add(StoryView? view, bool watching = false) => views.Add((view, watching));
         for (var step = 0; step < 80; step++)
         {
             var line = lines[at % lines.Length];
-            switch (random.Next(10))
+            switch (random.Next(11))
             {
-                case 0:     // a restart: no scene while it resumes, then the saved line again
-                    views.Add(null);
-                    views.Add(Showing(++seq, line));
+                case 0:     // a restart: no scene while it waits to resume, then the saved line again
+                    Add(null, watching: false);
+                    Add(Say(line, ++seq));
                     break;
                 case 1:     // a question, a tie-break, maybe a roll
-                    var ask = Ask(true, 1, 2, [Option("a", "Yes.", "Ana"), Option("b", "No.")], deadline: T0.AddSeconds(45));
-                    views.Add(Showing(seq, line, States.Asking, ask));
-                    views.Add(Showing(seq, line, States.TieBreak, ask with { Tie = true, Decider = "Ana" }));
+                    var ask = Ask(true, 1, 2, [Option("a", "Yes.", "Ana"), Option("b", "No.")], deadline: T0.AddSeconds(45), span: 45);
+                    Add(Say(line, seq, States.Asking, ask));
+                    Add(Say(line, seq, States.TieBreak, ask with { Tie = true, Decider = "Ana", Span = 10 }));
                     if (random.Next(2) == 0)
                     {
-                        views.Add(Showing(seq, line, States.PickRoller,
-                            check: new StoryCheckView("insight", 12, "Yes.", Cards(), null, null, Deadline: T0.AddSeconds(20))));
-                        views.Add(Rolled(seq, Cards(), random.Next(1, 21)));
+                        Add(Say(line, seq, States.PickRoller, check: new StoryCheckView("insight", 12, "Yes.", Cards(), null, null, Deadline: T0.AddSeconds(20), Span: 20)));
+                        Add(Say(null, seq, States.Rolled, check: new StoryCheckView("persuasion", 15, "Yes.", Cards(), "pr_b", Rolls.Flat(random.Next(1, 21), 5, 15))));
                     }
                     at++;
-                    views.Add(Showing(++seq, lines[at % lines.Length]));
+                    Add(Say(lines[at % lines.Length], ++seq));
                     break;
                 case 2:     // the scene ends: a gap, then the next one
-                    views.Add(Showing(seq, null, States.Gap));
+                    Add(Say(null, seq, States.Gap));
                     at++;
-                    views.Add(Showing(++seq, lines[at % lines.Length]));
+                    Add(Say(lines[at % lines.Length], ++seq));
                     break;
-                case 3 when step > 40:     // another campaign on this TV
-                    seq = random.Next(0, 3);
-                    views.Add(Showing(++seq, line));
+                case 3:     // the beat ends: the party walks to the next, and it starts
+                    Add(null, watching: true);
+                    Add(null, watching: true);
+                    at++;
+                    Add(Say(lines[at % lines.Length], ++seq));
+                    break;
+                case 4 when step > 30:     // another campaign on this TV, from its start or from where it was saved
+                    campaign++;
+                    seq = random.Next(2) == 0 ? 0 : random.Next(0, 200);
+                    Add(null, watching: true);
+                    at = random.Next(lines.Length);
+                    Add(Say(lines[at % lines.Length], ++seq));
                     break;
                 default:    // the next line; sometimes the same line twice in a row, as a node that says it again would
                     at += random.Next(3) == 0 ? 0 : 1;
-                    views.Add(Showing(++seq, lines[at % lines.Length]));
+                    Add(Say(lines[at % lines.Length], ++seq));
                     break;
             }
         }
         return views;
     }
+
 
     private static System.Collections.Immutable.ImmutableArray<StoryCardView> Cards()
         => [Card("pr_a", "Kara", "Jess", 1), Card("pr_b", "Wren", "Priya", 5, "Proficient · CHA 14", votes: 2)];

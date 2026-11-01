@@ -68,6 +68,12 @@ public sealed partial class TacticsGame
     /// </summary>
     private DateTimeOffset? _due;
 
+    /// <summary>
+    /// How long the open question's clock ran when it started, in seconds: its length, or longer when the line asking it outlasts that; null
+    /// while it holds. The TV reads its countdown by it (<see cref="StoryAskView.Span"/>), so it never has to guess the length.
+    /// </summary>
+    private double? _span;
+
     /// <summary>When everyone here had answered, which starts the settle (5d default 5); null while someone hasn't.</summary>
     private DateTimeOffset? _allInAt;
 
@@ -579,12 +585,14 @@ public sealed partial class TacticsGame
         }
         var due = _ctx.Now + QuestionLength();
         _due = due > _lineDue ? due : _lineDue;
+        _span = (_due.Value - _ctx.Now).TotalSeconds;
         Reclose();
     }
 
     private void Hold()
     {
         (_due, _closeAt, _allInAt) = (null, null, null);
+        _span = null;
         _ctx.CancelTimer(Timers.Vote);
     }
 
@@ -621,6 +629,7 @@ public sealed partial class TacticsGame
     {
         _ctx.CancelTimer(Timers.Vote);
         (_offered, _closeAt, _due, _allInAt, _checking, _tied) = ([], null, null, null, null, []);
+        _span = null;
         _votes.Clear();
         _pickedBy = null;
     }
@@ -893,7 +902,7 @@ public sealed partial class TacticsGame
         var line = _telling is StoryStates.Gap or StoryStates.Rolled || CurrentLine() is not { } showing ? null : LineView(showing);
         var asking = Questioning && _checking is null;
         return new StoryView(_storySeq, scene.Id, scene.Title, _telling, line, asking ? AskView() : null,
-            _checking is not null || _telling == StoryStates.Rolled ? CheckView(scene) : null, _lineDue);
+            _checking is not null || _telling == StoryStates.Rolled ? CheckView(scene) : null, _lineDue, _lease.Info.Id);
     }
 
     private string PlayerName(string member) => _players.FirstOrDefault(p => p.Profile?.Value == member)?.Name ?? member;
@@ -912,7 +921,7 @@ public sealed partial class TacticsGame
         return new StoryAskView(PartyQuestion, votes.Count, of, Away(), _telling == StoryStates.TieBreak, Decider() is { } d ? PlayerName(d) : null,
             _closeAt, [.. OptionsShown().Select(o => new StoryOptionView(o.Id, o.Label, o.Check?.Skill, o.Check?.Dc, PartyQuestion
                 ? [.. _players.Where(p => votes.Any(v => v.Key == p.Profile?.Value && v.Value == o.Id)).Select(p => p.Name)]
-                : votes.Any(v => v.Value == o.Id) && Leader is { } leader ? [leader.Name] : []))]);
+                : votes.Any(v => v.Value == o.Id) && Leader is { } leader ? [leader.Name] : []))], _closeAt is null ? null : _span);
     }
 
     /// <summary>
@@ -953,7 +962,7 @@ public sealed partial class TacticsGame
             [.. CardsWithNotes(skill).Select(c => new StoryCardView(c.Member, c.Character.Name, c.Player.Name,
                 HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{c.Character.Class}"]), c.Bonus, c.Note, c.Here, votes.Count(v => v.Value == c.Member)))],
             roll?.Member, roll is null ? null : Rolls.Flat(roll.Die, roll.Bonus, roll.Dc), tie, tie && Decider() is { } d ? PlayerName(d) : null,
-            roll is null ? _closeAt : null);
+            roll is null ? _closeAt : null, roll is null && _closeAt is not null ? _span : null);
     }
 
     /// <summary>
