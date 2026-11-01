@@ -177,7 +177,15 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
         AddProps(items, terrain, art, rect);
         AddZones(items, terrain, art, rect);
 
-        ImmutableArray<BoardItem> ordered = [.. items.OrderBy(i => i.Order).Select(i => !grid && i is Face { Grid: true } face ? face with { Grid = false } : i)];
+        return Of([.. items.OrderBy(i => i.Order).Select(i => !grid && i is Face { Grid: true } face ? face with { Grid = false } : i)]);
+    }
+
+    /// <summary>
+    /// A plan of <paramref name="ordered"/>, which are already in painter's order, with the area they cover. An empty plan has no items and
+    /// sits at the origin.
+    /// </summary>
+    public static BoardPlan Of(ImmutableArray<BoardItem> ordered)
+    {
         if (ordered.IsEmpty)
             return new BoardPlan([], Vector2.Zero, Vector2.Zero, false);
         var (min, max) = (new Vector2(float.MaxValue), new Vector2(float.MinValue));
@@ -187,6 +195,23 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
             (min, max) = (Vector2.Min(min, from), Vector2.Max(max, to));
         }
         return new BoardPlan(ordered, min, max, ordered.Any(i => ImageOf(i) is { Frames: > 1 }));
+    }
+
+    /// <summary>
+    /// The same plan moved by <paramref name="delta"/> art pixels: every face's points, every sprite's top left and the area. Tiles, keys, UVs
+    /// and light stay as they are, so a plan built in one frame (a region's) can be drawn in another (a battle map's, overworld 5c §4).
+    /// </summary>
+    public BoardPlan Shifted(Vector2 delta)
+    {
+        if (delta == Vector2.Zero)
+            return this;
+        ImmutableArray<BoardItem> items = [.. Items.Select(BoardItem (i) => i switch
+        {
+            Face face => face with { Points = [.. face.Points.Select(p => p + delta)] },
+            Sprite sprite => sprite with { TopLeft = sprite.TopLeft + delta },
+            _ => throw new InvalidOperationException($"Unknown board item {i.GetType().Name}."),
+        })];
+        return this with { Items = items, Min = Min + delta, Max = Max + delta };
     }
 
     /// <summary>The box an item covers, in art pixels.</summary>

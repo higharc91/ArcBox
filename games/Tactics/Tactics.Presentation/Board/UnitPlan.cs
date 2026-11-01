@@ -115,16 +115,18 @@ public static class UnitPlan
     /// <summary>
     /// The drawn units of <paramref name="battle"/> (Up and Downed), back to front. A unit in <paramref name="places"/> is
     /// drawn there and not on its tile, and a unit in <paramref name="poses"/> plays that instead of idling, if it's on its feet.
+    /// <paramref name="worldOffset"/> is the world tile of the map's (0, 0) for a battle drawn in place (<see cref="World.StagePlan"/>), whose
+    /// board keeps the region's keys: it moves only where units sort, never where they're drawn.
     /// </summary>
     public static ImmutableArray<BoardUnit> Build(BattleView battle, BoardTerrain terrain, UnitArt art, BoardFit fit,
-        IReadOnlyDictionary<UnitId, UnitPlace>? places = null, IReadOnlyDictionary<UnitId, UnitPose>? poses = null)
+        IReadOnlyDictionary<UnitId, UnitPlace>? places = null, IReadOnlyDictionary<UnitId, UnitPose>? poses = null, Tile worldOffset = default)
     {
         var drawn = battle.Units.Where(u => u.Life is "Up" or "Downed" && terrain.Map.InBounds(u.At)).ToArray();
         var top = (BoardFit.Area.Y - fit.Origin.Y) / fit.Scale;
         return [.. drawn
             .Select(unit => Unit(unit, drawn, battle.Active, art, top,
                 places is not null && places.TryGetValue(unit.Id, out var place) ? place : UnitPlace.On(terrain, unit.At),
-                poses?.GetValueOrDefault(unit.Id)))
+                poses?.GetValueOrDefault(unit.Id), worldOffset))
             .OrderBy(u => u.Order)];
     }
 
@@ -153,7 +155,7 @@ public static class UnitPlan
         };
     }
 
-    private static BoardUnit Unit(UnitView unit, UnitView[] all, UnitId? active, UnitArt art, float top, UnitPlace place, UnitPose? pose)
+    private static BoardUnit Unit(UnitView unit, UnitView[] all, UnitId? active, UnitArt art, float top, UnitPlace place, UnitPose? pose, Tile offset)
     {
         var tone = ToneOf(unit.Side);
         var sprite = art.Sprite(unit.Sprite) ?? art.StandIn(tone);
@@ -179,7 +181,7 @@ public static class UnitPlan
             y = arrow - art.ArrowAnchorY;
         var shift = Math.Max(0, top - y);
 
-        return new BoardUnit(OrderOf(place.Over, sprite), unit.Id, tone, feet, sprite,
+        return new BoardUnit(OrderOf(new Tile(place.Over.X + offset.X, place.Over.Y + offset.Y), sprite), unit.Id, tone, feet, sprite,
             downed ? new UnitAnim([sprite.Down.Frames[^1]], 1, false)
                 : pose is not null ? new UnitAnim([sprite.Anim(pose.Anim).FrameAt(pose.Seconds)], 1, false)
                 : sprite.Idle,

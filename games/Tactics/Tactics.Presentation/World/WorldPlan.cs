@@ -120,6 +120,25 @@ public sealed class WorldPlan
         Blocks = blocks.MoveToImmutable();
     }
 
+    /// <summary>
+    /// The blocks a change of height or sinking at <paramref name="touched"/> reaches, in <see cref="Blocks"/>' order. A tile's change reaches
+    /// its neighbours' sides, and a sunk tile turns a deck beside it into a bridge, whose own neighbours' sides then come down further, so every
+    /// block within two tiles counts (<see cref="StagePlan.WorldBlocks"/> builds them again).
+    /// </summary>
+    public ImmutableArray<BlockPlan> Near(IEnumerable<Tile> touched)
+    {
+        const int Spread = 2;
+        var near = touched.SelectMany(t => Enumerable.Range(-Spread, 2 * Spread + 1)
+            .SelectMany(dy => Enumerable.Range(-Spread, 2 * Spread + 1).Select(dx => new Tile(t.X + dx, t.Y + dy)))).ToHashSet();
+        return [.. Blocks.Where(b => near.Any(b.Tiles.Contains))];
+    }
+
+    /// <summary>
+    /// <paramref name="block"/> drawing <paramref name="plan"/> instead, in this plan's lighting, which a fight doesn't change: the light of a prop
+    /// that sank stays (overworld handoff §6). The TV swaps it in for the block of the same <see cref="BlockPlan.Index"/>.
+    /// </summary>
+    public BlockPlan Relit(BlockPlan block, BoardPlan plan) => block with { Plan = plan, Lit = LitBoard.Build(plan, Lighting) };
+
     /// <summary>The blocks with something drawn in <paramref name="view"/>, in draw order.</summary>
     public ImmutableArray<BlockPlan> BlocksIn(ArtArea view) => [.. Blocks.Where(b => !b.Plan.Items.IsEmpty && new ArtArea(b.Plan.Min, b.Plan.Max).Overlaps(view))];
 

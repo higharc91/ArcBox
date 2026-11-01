@@ -28,6 +28,9 @@ internal static class Pack
     /// <summary>The ground of one of the pack's regions, from its rules as the server loads them.</summary>
     public static WorldGround Ground(string id) => RulesOnce.Value.GroundFor(id) ?? throw new InvalidOperationException($"No region {id}.");
 
+    /// <summary>One of the pack's regions, from its rules as the server loads them.</summary>
+    public static WorldRegion Region(string id) => RulesOnce.Value.RegionFor(id) ?? throw new InvalidOperationException($"No region {id}.");
+
     /// <summary>The columns of an animation, by a set's manifest: what the art says, so a redraw doesn't need a test changed.</summary>
     public static int[] Frames(string set, string anim)
     {
