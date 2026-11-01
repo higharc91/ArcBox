@@ -6,8 +6,8 @@ using Tactics.Presentation.World;
 namespace Tactics.Presentation.Board;
 
 /// <summary>
-/// Which of the units' marks the TV draws at a moment: their HP bars, Downed counts, condition icons and turn arrow. Pure: <c>TacticsScene</c>
-/// applies it to what <see cref="UnitPlan.Build"/> and <see cref="BeatPlayer.Frame"/> give.
+/// Which of the units' marks the TV draws at a moment: their HP bars, Downed counts, condition icons and turn arrow, and the numbers and die
+/// badges that pop up over them. Pure: <c>TacticsScene</c> applies it to what <see cref="UnitPlan.Build"/> and <see cref="BeatPlayer.Frame"/> give.
 /// </summary>
 public static class MarkRule
 {
@@ -16,9 +16,11 @@ public static class MarkRule
     /// <summary>
     /// Whether the units' marks show at <paramref name="stage"/>: only while the fight is being played, on the plain board
     /// (<see cref="StageStep.Off"/>) or in the world (<see cref="StageStep.Fighting"/>, <see cref="StageStep.Fading"/>). Not in the walk-in,
-    /// where the party is still walking as it does in the world, with no bars, nor once the results are over the world, nor in the wake after them.
+    /// where the party is still walking as it does in the world, with no bars, nor once the results are over the world, nor in the wake after
+    /// them. And never while the header and table are over the board (<paramref name="covered"/>: <see cref="PhaseScreen.OverWorld"/>), which
+    /// comes while the last blow still plays: a bar would poke out bright from under the table, and the counts show through it.
     /// </summary>
-    public static bool Shown(StageStep stage) => stage is StageStep.Off or StageStep.Fighting or StageStep.Fading;
+    public static bool Shown(StageStep stage, bool covered) => !covered && stage is StageStep.Off or StageStep.Fighting or StageStep.Fading;
 
     /// <summary>The units with no marks: no bar, no count, no icons and no turn arrow.</summary>
     public static ImmutableArray<BoardUnit> Bare(ImmutableArray<BoardUnit> units)
@@ -26,9 +28,16 @@ public static class MarkRule
             ? [.. units.Select(u => u with { Bar = null, Countdown = null, Icons = [], ArrowAt = null })]
             : units;
 
-    /// <summary>The units as they're drawn this moment: with their marks if <paramref name="shown"/>, clear of the beat's numbers (<see cref="ClearOfPops"/>), or bare.</summary>
-    public static ImmutableArray<BoardUnit> Apply(ImmutableArray<BoardUnit> units, BeatFrame beat, UnitArt art, bool shown)
-        => shown ? ClearOfPops(units, beat.Pops, art) : Bare(units);
+    /// <summary>The beat's draws with its marks (<see cref="FxDraw.Mark"/>) left out unless <paramref name="shown"/>; the scene's own effects stay.</summary>
+    public static ImmutableArray<FxDraw> Effects(ImmutableArray<FxDraw> draws, bool shown)
+        => shown || !draws.Any(d => d.Mark) ? draws : [.. draws.Where(d => !d.Mark)];
+
+    /// <summary>
+    /// The units and the beat's draws as they're drawn this moment: if <paramref name="shown"/>, all of it, with no Downed count near a number
+    /// popping up (<see cref="ClearOfPops"/>); otherwise the units bare and the beat's numbers and badges gone.
+    /// </summary>
+    public static (ImmutableArray<BoardUnit> Units, ImmutableArray<FxDraw> Draws) Apply(ImmutableArray<BoardUnit> units, BeatFrame beat, UnitArt art, bool shown)
+        => shown ? (ClearOfPops(units, beat.Pops, art), beat.Draws) : (Bare(units), Effects(beat.Draws, false));
 
     /// <summary>
     /// The units with no Downed count while a number pops up over that unit, or close enough beside its count to be read with it: "-10" next to
