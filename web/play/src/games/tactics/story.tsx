@@ -145,8 +145,11 @@ function OptionBody({ option, letter, tag }: { option: StoryOption; letter: stri
 const questionKey = (kind: string, tie: boolean, parts: string[]) => [kind, tie ? "tie" : "open", ...parts].join("\n");
 /** Option ids repeat across a story's questions, so the words go in too. */
 const voteKey = (d: VoteData) => questionKey(d.party ? "vote" : "choice", d.tie, d.options.map((o) => `${o.id}=${o.label}`));
-const checkKey = (d: CheckData) =>
-  questionKey(d.roll ? "rolled" : "check", d.tie, [d.skill, String(d.dc), d.title, ...d.cards.map((c) => c.id)]);
+/**
+ * A check is what it tests (skill, DC, the option's words), and whether it's rolled or tied; not who can roll it. Someone getting a
+ * character mid-check adds a card, and that mustn't remount every phone's check (an alert again, a tap in flight dropped).
+ */
+const checkKey = (d: CheckData) => questionKey(d.roll ? "rolled" : "check", d.tie, [d.skill, String(d.dc), d.title]);
 
 /** How long a tap held behind one already sent waits for the view that answers it before it goes anyway. */
 export const QUEUE_MS = 1500;

@@ -391,6 +391,46 @@ describe("alerts", () => {
     expect(p.alerts()).toBe(2);
   });
 
+  it("a card added mid-check (someone got a character) is the same check: no alert, no remount, and a held tap still goes", () => {
+    const p = phone();
+    const pick = (change?: (d: Record<string, unknown>) => void) => (d: Record<string, unknown>) => { d.canChoose = true; d.mine = null; change?.(d); };
+    p.to(view("check-pick", pick()));
+    expect(p.alerts()).toBe(1);
+    const first = document.querySelector(".tx-check");
+    act(() => {
+      screen.getByRole("button", { name: /Player2/ }).click();
+      screen.getByRole("button", { name: /Player3/ }).click();      // held behind the first, for the next view
+    });
+    vi.advanceTimersByTime(500);
+    // Buzzes so far: the alert, and the taps' own feedback. From here on, only a send's tap cue may buzz.
+    const [buzzed, sent] = [p.alerts(), p.send.mock.calls.length];
+    p.to(view("check-pick", pick((d) => {
+      const cards = d.cards as { id: string; name: string; player: string }[];
+      cards.push({ ...cards[0]!, id: "pr_member5", name: "Player5", player: "Player5" });
+      d.mine = "pr_member2";
+    }), "v2"));
+
+    expect(p.alerts() - buzzed).toBe(p.send.mock.calls.length - sent);     // no alert
+    expect(document.querySelector(".tx-check")).toBe(first);
+    expect(screen.getByRole("button", { name: /Player5/ })).toBeTruthy();
+    expect(p.send.mock.calls.map((c) => c[0])).toEqual([
+      { action: "pickRoller", data: { member: "pr_member2" } },
+      { action: "pickRoller", data: { member: "pr_member3" } },
+    ]);
+    expect(pressed(screen.getByRole("button", { name: /Player3/ }))).toBe("true");
+  });
+
+  it("the same check rolled is a new screen, and so is its tie-break", () => {
+    const p = phone();
+    p.to(view("check-pick", (d) => { d.canChoose = true; }));
+    const first = document.querySelector(".tx-check");
+    p.to(view("check-pick", (d) => { d.canChoose = true; d.tie = true; d.decider = "Player1"; d.tied = ["pr_member2", "pr_member3"]; }, "v2"));
+    const tie = document.querySelector(".tx-check");
+    expect(tie).not.toBe(first);
+    p.to(view("check-rolled", undefined, "v3"));
+    expect(document.querySelector(".tx-check")).not.toBe(tie);
+  });
+
   it("a tap held behind question 1 never goes out on question 2", () => {
     const p = phone();
     p.to(view("vote"));
