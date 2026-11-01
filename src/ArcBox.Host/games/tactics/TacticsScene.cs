@@ -1050,7 +1050,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         }
         var frame = _player.Frame(_terrain);
         var units = UnitPlan.Build(shown, _terrain, _unitArt, fit, frame.Places, frame.Poses);
-        _board.SetUnits(units, _unitArt);
+        _board.SetUnits(MarkRule.ClearOfPops(units, frame.Pops, _unitArt), _unitArt);
         _board.SetEffects(frame.Draws, frame.Shake);
         _said = BattleHud.Of(shown, _player.Live ?? shown, _banner, _said, _player.AiFinished);
         _hud?.Show(_said, units, fit, _player.AiFinished);
@@ -1093,7 +1093,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         var beat = _player.Frame(_terrain);
         var stage = StageFrame.Of(beat, director, where, walk.Fit, _stageShake);
         var units = stage.Shown(UnitPlan.Build(shown, _terrain, _unitArt, stage.Fit, stage.Places, stage.Poses, where.Origin));
-        board.SetUnits(units, _unitArt);
+        board.SetUnits(MarkRule.ClearOfPops(units, beat.Pops, _unitArt), _unitArt);
         board.SetEffects(beat.Draws, System.Numerics.Vector2.Zero);
         board.GridAlpha = director.GridAlpha;
         _stageShake = beat.Shake;      // on the camera: the world and the board shake together
