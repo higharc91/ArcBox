@@ -53,16 +53,31 @@ public static class MarkRule
     /// <summary>Where a count is drawn (<c>UnitMarks.DrawDigits</c>), in art pixels: its top left and size.</summary>
     public static (Vector2 TopLeft, Vector2 Size) CountBox(UnitCountdown count, UnitArt art)
     {
+        var glyphs = CountGlyphs(count, art);
+        if (glyphs.IsEmpty)
+            return (count.Centre, Vector2.Zero);
+        var min = glyphs.Aggregate(new Vector2(float.MaxValue), (m, g) => Vector2.Min(m, g.TopLeft));
+        var max = glyphs.Aggregate(new Vector2(float.MinValue), (m, g) => Vector2.Max(m, g.TopLeft + g.Size));
+        return (min, max - min);
+    }
+
+    /// <summary>
+    /// A count's digits as <c>UnitMarks.DrawDigits</c> draws them, in <see cref="UnitArt.NumbersPath"/> at <see cref="UnitPlan.CountdownScale"/>:
+    /// centred on the count's middle, each on the advance of the one before, each centred up and down.
+    /// </summary>
+    public static ImmutableArray<(ArtRect Source, Vector2 TopLeft, Vector2 Size)> CountGlyphs(UnitCountdown count, UnitArt art)
+    {
         var glyphs = count.Text.Select(art.Digit).ToArray();
         const int scale = UnitPlan.CountdownScale;
-        var left = count.Centre.X - glyphs.Sum(g => g.Advance) * scale / 2f;
-        var (pen, right, height) = (left, left, 0f);
+        var pen = count.Centre.X - glyphs.Sum(g => g.Advance) * scale / 2f;
+        var drawn = ImmutableArray.CreateBuilder<(ArtRect, Vector2, Vector2)>(glyphs.Length);
         foreach (var (rect, advance) in glyphs)
         {
-            (right, height) = (MathF.Max(right, pen + rect.Width * scale), MathF.Max(height, rect.Height * scale));
+            var size = new Vector2(rect.Width, rect.Height) * scale;
+            drawn.Add((rect, new Vector2(pen, count.Centre.Y - size.Y / 2), size));
             pen += advance * scale;
         }
-        return (new Vector2(left, count.Centre.Y - height / 2), new Vector2(right - left, height));
+        return drawn.MoveToImmutable();
     }
 
     private static bool Crowded(BoardUnit unit, UnitCountdown count, ImmutableArray<PopBox> pops, UnitArt art)

@@ -64,7 +64,12 @@ public sealed record BattleIntro(BattleStage Stage, ImmutableArray<HeroWalk> Her
     private const string HeroPrefix = "hero";
     private const string Idle = "idle";
     private const int Detour = 6;           // the steps more than its shortest walk a hero may take, waiting or going round
-    private const int MostOrders = 120;     // the orders tried for who goes first: every order of up to five heroes
+
+    /// <summary>
+    /// The most places-in-time <see cref="Apart"/> looks at, over all its tries, before it gives up and the party fades. It runs on the TV's main
+    /// thread as the fight starts, so it's bounded by work, not by how the heroes happen to stand: a party of six in the open needs a few hundred.
+    /// </summary>
+    public const int MostSearched = 20_000;
 
     private static readonly IntroFrame Done = new(ImmutableDictionary<UnitId, UnitPlace>.Empty, ImmutableDictionary<UnitId, UnitPose>.Empty, [], 1, 0, false);
 
@@ -98,12 +103,13 @@ public sealed record BattleIntro(BattleStage Stage, ImmutableArray<HeroWalk> Her
             var path = from is { } start ? PathTo(world.Rules, TileUnder(start.Map), slot) : [];
             walks.Add(new HeroWalk(unit.Id, walker, from, path));
         }
-        var fades = walks.Any(w => w.From is null || w.Path.IsEmpty);
-        if (!fades && Apart(world.Rules, walks) is { } apart)
+        // A party that fades anyway pays nothing for timing its walks; and a timed walk keeps clear of the enemies too, so a detour never makes it fade.
+        bool NearEnemy(Tile t) => enemies.Any(e => Distance(t, e) <= StageTuning.EnemyClearance);
+        var fades = walks.Any(w => w.From is null || w.Path.IsEmpty || w.Path.SkipLast(1).Any(NearEnemy));
+        if (!fades && Apart(world.Rules, walks, NearEnemy, out _) is { } apart)
             walks = [.. apart];
         else
             fades = true;
-        fades |= walks.Any(w => w.Path.SkipLast(1).Any(t => enemies.Any(e => Distance(t, e) <= StageTuning.EnemyClearance)));
         if (fades)
             walks = [.. walks.Select(w => w with { Path = [] })];
 
@@ -236,51 +242,79 @@ public sealed record BattleIntro(BattleStage Stage, ImmutableArray<HeroWalk> Her
     /// <summary>
     /// The heroes' walks timed so that no two are ever on one tile at the same step of the clock, nor pass through each other on the way:
     /// each walks in turn on the steps left free by those before it, waiting where it stands or going round (at most <see cref="Detour"/>
-    /// steps over its shortest, and under <see cref="StageTuning.FarSteps"/> in all), and stays on its slot once there, so nobody walks
-    /// through it. A hero already on its slot goes first, so it stays, then the longest walk; if some hero can't get through, the other orders
-    /// are tried. Null if no order works, and then the party fades. Heroes whose walkers stood together share that tile only at the start:
-    /// from the first step on, they're apart.
+    /// steps over its shortest, and under <see cref="StageTuning.FarSteps"/> in all), never onto a tile <paramref name="avoid"/> says to keep off
+    /// but its slot, and stays on its slot once there, so nobody walks through it.
+    /// <para>
+    /// Heroes already on their slots go first and stay; then the walkers, longest walk first. If a walker can't get through, it goes first among
+    /// the walkers next try, so there are at most as many tries as walkers. It's given up, and the party fades (null), when a walker can't get
+    /// through even at the front of the walkers, with only the standing heroes before it (one of them is in its way, or its slot can't be
+    /// reached in time, and no order changes that), or when the search has looked at <see cref="MostSearched"/> places in time
+    /// (<paramref name="searched"/> says how many it did). Heroes whose walkers stood together share that tile only at the start: from the
+    /// first step on, they're apart.
+    /// </para>
     /// </summary>
-    public static ImmutableArray<HeroWalk>? Apart(Terrain rules, IReadOnlyList<HeroWalk> walks)
+    public static ImmutableArray<HeroWalk>? Apart(Terrain rules, IReadOnlyList<HeroWalk> walks, Func<Tile, bool>? avoid, out int searched)
     {
+        searched = 0;
         if (walks.Count <= 1)
             return [.. walks];
-        var first = Enumerable.Range(0, walks.Count).OrderBy(i => walks[i].Steps > 0).ThenByDescending(i => walks[i].Steps).ThenBy(i => walks[i].Unit.Value, StringComparer.Ordinal).ToArray();
-        foreach (var order in Orders(first).Take(MostOrders))
+        var standing = Enumerable.Range(0, walks.Count).Where(i => walks[i].Steps == 0).OrderBy(i => walks[i].Unit.Value, StringComparer.Ordinal).ToArray();
+        var walking = Enumerable.Range(0, walks.Count).Where(i => walks[i].Steps > 0)
+            .OrderByDescending(i => walks[i].Steps).ThenBy(i => walks[i].Unit.Value, StringComparer.Ordinal).ToList();
+        var budget = new Budget(rules);
+        for (var tries = 0; tries < Math.Max(1, walking.Count); tries++)
         {
             var taken = new Taken();
             var timed = new ImmutableArray<Tile>[walks.Count];
-            var ok = true;
-            foreach (var i in order)
+            int? failed = null;
+            foreach (var i in standing.Concat(walking))
             {
                 var most = Math.Max(walks[i].Steps, Math.Min(walks[i].Steps + Detour, StageTuning.FarSteps - 1));     // a walk-in of more steps would be a scurry
-                if (TimedPath(rules, walks[i].Path[0], walks[i].Path[^1], most, taken) is not { } path)
+                if (TimedPath(rules, walks[i].Path[0], walks[i].Path[^1], most, taken, avoid, budget) is not { } path)
                 {
-                    ok = false;
+                    failed = i;
                     break;
                 }
                 taken.Add(path);
                 timed[i] = path;
             }
-            if (ok)
+            searched = budget.Spent;
+            if (failed is not { } stuck)
                 return [.. walks.Select((w, i) => w with { Path = timed[i] })];
+            if (budget.Out || walking[0] == stuck)
+                return null;        // it failed at the front, with only the standing heroes before it, or the search has run long
+            walking.Remove(stuck);
+            walking.Insert(0, stuck);
         }
         return null;
     }
 
-    /// <summary>Every order of <paramref name="first"/>, starting with itself, the same way every time.</summary>
-    private static IEnumerable<int[]> Orders(int[] first)
+    /// <summary><see cref="Apart"/> with no tiles to keep off, for its tests.</summary>
+    public static ImmutableArray<HeroWalk>? Apart(Terrain rules, IReadOnlyList<HeroWalk> walks) => Apart(rules, walks, null, out _);
+
+    /// <summary>How much of <see cref="MostSearched"/> the search has used, and each tile's steps, worked out once for all the tries.</summary>
+    private sealed class Budget(Terrain rules)
     {
-        if (first.Length <= 1)
+        private readonly Dictionary<Tile, Tile[]> _steps = [];
+
+        public int Spent { get; private set; }
+
+        /// <summary>Staying put, then the party's own steps from <paramref name="tile"/>.</summary>
+        public Tile[] Moves(Tile tile)
         {
-            yield return first;
-            yield break;
+            if (!_steps.TryGetValue(tile, out var moves))
+                _steps[tile] = moves = [tile, .. WorldWalk.Steps(rules, tile, ClassDef.DefaultJump)];
+            return moves;
         }
-        for (var lead = 0; lead < first.Length; lead++)
+
+        public bool Out => Spent >= MostSearched;
+
+        public bool Take()
         {
-            var rest = first.Where((_, i) => i != lead).ToArray();
-            foreach (var tail in Orders(rest))
-                yield return [first[lead], .. tail];
+            if (Out)
+                return false;
+            Spent++;
+            return true;
         }
     }
 
@@ -317,7 +351,7 @@ public sealed record BattleIntro(BattleStage Stage, ImmutableArray<HeroWalk> Her
     /// The quickest walk from <paramref name="from"/> to <paramref name="to"/> on the steps <paramref name="taken"/> leaves free, waits included,
     /// in at most <paramref name="most"/> steps; null if there's none. Waiting is tried before stepping, then the steps in their usual order.
     /// </summary>
-    private static ImmutableArray<Tile>? TimedPath(Terrain rules, Tile from, Tile to, int most, Taken taken)
+    private static ImmutableArray<Tile>? TimedPath(Terrain rules, Tile from, Tile to, int most, Taken taken, Func<Tile, bool>? avoid, Budget budget)
     {
         var back = new Dictionary<(Tile, int), Tile>();
         var frontier = new List<Tile> { from };
@@ -327,9 +361,12 @@ public sealed record BattleIntro(BattleStage Stage, ImmutableArray<HeroWalk> Her
         {
             var next = new List<Tile>();
             foreach (var tile in frontier)
-                foreach (var step in WorldWalk.Steps(rules, tile, ClassDef.DefaultJump).Prepend(tile))
+            {
+                if (!budget.Take())
+                    return null;
+                foreach (var step in budget.Moves(tile))
                 {
-                    if (!taken.Free(tile, step, k) || !back.TryAdd((step, k + 1), tile))
+                    if (!taken.Free(tile, step, k) || (step != to && step != tile && avoid?.Invoke(step) == true) || !back.TryAdd((step, k + 1), tile))
                         continue;
                     if (step == to && taken.Clear(to, k + 1))
                     {
@@ -341,6 +378,7 @@ public sealed record BattleIntro(BattleStage Stage, ImmutableArray<HeroWalk> Her
                     }
                     next.Add(step);
                 }
+            }
             frontier = next;
         }
         return null;

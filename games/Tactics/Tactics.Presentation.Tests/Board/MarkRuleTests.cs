@@ -231,4 +231,34 @@ public sealed class MarkRuleTests
         }
         Assert.All(draws, d => Assert.Equal(d.Path is UnitArt.NumbersPath or UnitArt.DicePath, d.Mark));
     }
+
+    // Review of the fix wave, item 4: the box the rule keeps numbers out of is where the digits are drawn. UnitMarks.DrawDigits draws CountGlyphs.
+    [Theory]
+    [InlineData("1")]
+    [InlineData("2")]
+    [InlineData("3")]
+    [InlineData("10")]
+    public void A_counts_box_holds_exactly_the_digits_drawn(string text)
+    {
+        var count = new UnitCountdown(new Vector2(40, 72), text);
+        var glyphs = MarkRule.CountGlyphs(count, Art.Value);
+        var (topLeft, size) = MarkRule.CountBox(count, Art.Value);
+
+        Assert.Equal(text.Length, glyphs.Length);
+        Assert.Equal(glyphs.Min(g => g.TopLeft.X), topLeft.X);
+        Assert.Equal(glyphs.Min(g => g.TopLeft.Y), topLeft.Y);
+        Assert.Equal(glyphs.Max(g => g.TopLeft.X + g.Size.X), topLeft.X + size.X, 3);
+        Assert.Equal(glyphs.Max(g => g.TopLeft.Y + g.Size.Y), topLeft.Y + size.Y, 3);
+        for (var i = 0; i < text.Length; i++)
+        {
+            var (rect, advance) = Art.Value.Digit(text[i]);
+            Assert.Equal(rect, glyphs[i].Source);
+            Assert.Equal(new Vector2(rect.Width, rect.Height) * UnitPlan.CountdownScale, glyphs[i].Size);
+            Assert.Equal(count.Centre.Y, glyphs[i].TopLeft.Y + glyphs[i].Size.Y / 2, 3);
+            if (i > 0)
+                Assert.Equal(Art.Value.Digit(text[i - 1]).Advance * UnitPlan.CountdownScale, glyphs[i].TopLeft.X - glyphs[i - 1].TopLeft.X, 3);
+        }
+        var width = text.Sum(c => Art.Value.Digit(c).Advance) * UnitPlan.CountdownScale;
+        Assert.Equal(count.Centre.X - width / 2f, glyphs[0].TopLeft.X, 3);      // centred on its advances
+    }
 }

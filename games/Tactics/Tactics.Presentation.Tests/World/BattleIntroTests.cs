@@ -146,20 +146,20 @@ public sealed class BattleIntroTests
 
     public static TheoryData<int> Seeds => [.. Enumerable.Range(1, 60)];
 
-    /// <summary>A party of four, close together west of the stamp, in a world with rocks about: what the hardware check's seed does.</summary>
-    private static (StageScript Script, BattleIntro Intro, Dictionary<string, UnitPlace> Walkers, Tile[] Slots) Bunched(int seed)
+    /// <summary>A party of <paramref name="size"/> (four, by default), close together west of the stamp, in a world with rocks about: what the hardware check's seed does.</summary>
+    private static (StageScript Script, BattleIntro Intro, Dictionary<string, UnitPlace> Walkers, Tile[] Slots) Bunched(int seed, int size = 4)
     {
         var random = new Random(seed);
         TileInfo Ground(int x, int y) => x < Origin.X && random.Next(7) == 0 ? StageWorld.Flat(0, StageWorld.Rock, TileFlags.Impassable) : StageWorld.Flat(0);
         var script = new StageScript(Ground);
-        var slots = Enumerable.Range(0, 24).Select(i => new Tile(i % 4, i / 4)).OrderBy(_ => random.Next()).Take(4).ToArray();
+        var slots = Enumerable.Range(0, 24).Select(i => new Tile(i % 4, i / 4)).OrderBy(_ => random.Next()).Take(size).ToArray();
         ImmutableArray<UnitView> units = [.. slots.Select((t, i) => Unit($"hero{i + 1}", "Party", t)), Unit("enemy1", "Enemy", new Tile(7, 0)), Unit("enemy2", "Enemy", new Tile(7, 5))];
         var free = Enumerable.Range(0, 30).Select(i => new Tile(Origin.X - 1 - i % 5, Origin.Y + i / 5)).Where(t => script.Terrain.Rules.Walkable(t)).OrderBy(_ => random.Next()).ToArray();
-        var stood = new Tile[4];
-        for (var i = 0; i < 4; i++)
+        var stood = new Tile[size];
+        for (var i = 0; i < size; i++)
             stood[i] = i > 0 && random.Next(5) == 0 ? stood[random.Next(i)] : free[i];      // now and then two walkers stand together
         var walkers = stood.Select((t, i) => (Key: $"p{i + 1}", Place: new UnitPlace(new Vector2(t.X + 0.5f, t.Y + 0.5f), 0))).ToDictionary(w => w.Key, w => w.Place);
-        var battle = Battle(units: units) with { Stage = new StageView(Region, Origin, 0, ["p1", "p2", "p3", "p4"]) };
+        var battle = Battle(units: units) with { Stage = new StageView(Region, Origin, 0, [.. Enumerable.Range(1, size).Select(n => $"p{n}")]) };
         return (script, BattleIntro.Plan(battle, script.Stage, script.Terrain, walkers), walkers, slots);
     }
 
@@ -178,9 +178,16 @@ public sealed class BattleIntroTests
     // Walkers that stood together may share their tile until then.
     [Theory]
     [MemberData(nameof(Seeds))]
-    public void Two_heroes_are_never_on_one_tile_in_the_walk_in(int seed)
+    public void Two_heroes_are_never_on_one_tile_in_the_walk_in(int seed) => NeverOnOneTile(seed, 4);
+
+    // The same for a party of six, the most the base pack's encounters field (review of the fix wave, item 1).
+    [Theory]
+    [MemberData(nameof(Seeds))]
+    public void Six_heroes_are_never_on_one_tile_in_the_walk_in(int seed) => NeverOnOneTile(seed, 6);
+
+    private static void NeverOnOneTile(int seed, int size)
     {
-        var (script, intro, walkers, slots) = Bunched(seed);
+        var (script, intro, walkers, slots) = Bunched(seed, size);
         if (intro.Fades)
             return;     // put on their slots in the dark
 
@@ -231,7 +238,66 @@ public sealed class BattleIntroTests
             }
         }
         Assert.True(walked >= 50, $"{walked} of 60 walked");
+        var worst = Enumerable.Range(1, 60).Max(seed =>
+        {
+            var (script, intro, _, _) = Bunched(seed, 6);
+            BattleIntro.Apart(script.Terrain.Rules, [.. intro.Heroes.Where(h => !h.Path.IsEmpty)], null, out var searched);
+            return searched;
+        });
+        Assert.True(worst < BattleIntro.MostSearched / 2, $"a bunched party of six searched {worst} places");
         Assert.True(collided >= 20, $"{collided} would have collided");
+    }
+
+    /// <summary>A world with a wall down x = 10 but for a gap at y = 12, and six heroes, each walking from <paramref name="from"/> to <paramref name="to"/>.</summary>
+    private static (Terrain Rules, HeroWalk[] Walks) Walled(params (Tile From, Tile To)[] heroes)
+    {
+        var script = new StageScript((x, y) => x == 10 && y != 12 ? StageWorld.Flat(0, StageWorld.Rock, TileFlags.Impassable) : StageWorld.Flat(0));
+        var rules = script.Terrain.Rules;
+        return (rules, [.. heroes.Select((h, i) => new HeroWalk(new UnitId($"hero{i + 1}"), $"p{i + 1}", null, BattleIntro.PathTo(rules, h.From, h.To)))]);
+    }
+
+    // Review of the fix wave, item 1: one hero standing on its slot in a one-tile gap in a wall, and the rest needing to pass through it. No
+    // order gets them by, and the search took 300 to 430 ms of the TV's main thread finding that out. Now the first walker blocked by a
+    // standing hero ends it: the party fades, having looked at a bounded number of places.
+    [Fact]
+    public void Six_heroes_blocked_by_one_standing_in_a_gap_fade_for_little_work()
+    {
+        var (rules, walks) = Walled((new(10, 12), new(10, 12)),
+            (new(6, 10), new(14, 11)), (new(6, 12), new(14, 12)), (new(7, 14), new(14, 13)), (new(5, 11), new(15, 12)), (new(6, 13), new(15, 13)));
+        Assert.All(walks, w => Assert.False(w.Path.IsEmpty));       // alone, each could walk it
+
+        Assert.Null(BattleIntro.Apart(rules, walks, null, out var searched));
+        // No more work than the first walker's one failed try against the standing hero: no other order is tried.
+        var first = walks.Skip(1).OrderByDescending(w => w.Steps).ThenBy(w => w.Unit.Value, StringComparer.Ordinal).First();
+        Assert.Null(BattleIntro.Apart(rules, [walks[0], first], null, out var alone));
+        Assert.Equal(alone, searched);
+        Assert.InRange(searched, 1, BattleIntro.MostSearched / 10);
+    }
+
+    // With nobody standing in it, six heroes through one gap would have to file through it one behind another, more than the walks' slack
+    // allows: the search stops at its bound (about 7 ms warm, in Release, when written) and the party fades.
+    [Fact]
+    public void Six_heroes_through_one_gap_stop_at_the_search_bound_and_fade()
+    {
+        var (rules, walks) = Walled((new(8, 12), new(12, 12)),
+            (new(6, 10), new(14, 11)), (new(6, 12), new(14, 12)), (new(7, 14), new(14, 13)), (new(5, 11), new(15, 12)), (new(6, 13), new(15, 13)));
+
+        Assert.Null(BattleIntro.Apart(rules, walks, null, out var searched));
+        Assert.Equal(BattleIntro.MostSearched, searched);
+    }
+
+    // Item 2: a detour round another hero keeps clear of the enemies, so timing the walks never makes a party that could walk in fade.
+    [Fact]
+    public void A_timed_detour_keeps_clear_of_tiles_to_avoid()
+    {
+        var (rules, walks) = Walled((new(12, 12), new(16, 12)), (new(16, 12), new(12, 12)));     // head on, along one row: one goes round
+        foreach (var side in new Func<Tile, bool>[] { t => t.Y > 12, t => t.Y < 12 })         // whichever way it would go, the other is the way
+        {
+            var apart = BattleIntro.Apart(rules, walks, side, out _);
+
+            Assert.NotNull(apart);
+            Assert.All(apart!.Value, w => Assert.DoesNotContain(w.Path, t => side(t)));
+        }
     }
 
     [Fact]
