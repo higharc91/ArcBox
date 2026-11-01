@@ -110,6 +110,45 @@ public sealed class SceneLoadTests
         Assert.Null(LoreBook.Empty.ClipSeconds("l1"));
     }
 
+    /// <summary>
+    /// Review (rules NOTE 2 and 3): what a game can play but would never show, which <c>tools/tactics-lore/check.py</c> refuses as well. An
+    /// option back to its own node is never offered (<see cref="SceneRun.Offered"/> counts the node as played), and a node whose every option
+    /// waits on flags can be left with nothing, unless one vote's choices each set a flag one of them waits on.
+    /// </summary>
+    [Fact]
+    public void A_scene_that_can_never_show_an_option_is_warned_of()
+    {
+        const string arcs = """
+            { "arcs": [{ "id": "a", "chapter": 1, "region": "r", "beats": [
+                { "id": "pick", "kind": "choice", "choices": [{ "id": "c1", "sets": ["left"] }, { "id": "c2", "sets": ["right"] }] },
+                { "id": "talk", "kind": "story" } ] }] }
+            """;
+        const string scenes = """
+            { "scenes": [{ "id": "s", "beat": "talk", "cast": ["narrator"], "start": "hub", "nodes": [
+                { "id": "hub", "lines": [{ "id": "l1", "speaker": "narrator", "text": "Hub." }], "options": [
+                  { "id": "again", "label": "Again.", "to": "hub" },
+                  { "id": "try", "label": "Try.", "check": { "skill": "athletics", "dc": 10, "pass": "sides", "fail": "hub" } },
+                  { "id": "on", "label": "On.", "to": "sides" } ] },
+                { "id": "sides", "lines": [{ "id": "l2", "speaker": "narrator", "text": "Which?" }], "options": [
+                  { "id": "l", "label": "Left.", "to": "gated", "requires": ["left"] },
+                  { "id": "r", "label": "Right.", "to": "gated", "requires": ["right"] } ] },
+                { "id": "gated", "lines": [{ "id": "l3", "speaker": "narrator", "text": "Maybe." }], "options": [
+                  { "id": "m", "label": "Maybe.", "to": "done", "requires": ["left", "maybe"] } ] },
+                { "id": "done", "lines": [{ "id": "l4", "speaker": "narrator", "text": "Done." }], "end": true } ] }] }
+            """;
+
+        var book = Load(("arcs.json", arcs), ("scenes/one.json", scenes));
+
+        Assert.Equal(
+        [
+            "the option 'again' of the node 'hub' of the scene 's' leads back to its own node, so it's never offered.",
+            "the option 'try' of the node 'hub' of the scene 's' leads back to its own node, so it's never offered.",
+            "the node 'gated' of the scene 's' has every option gated on flags, and no vote guarantees one of them is set: the party could be left with nothing to pick.",
+        ], book.Warnings.Select(w => w[(w.IndexOf(": ", StringComparison.Ordinal) + 2)..]));
+        Assert.All(book.Warnings, w => Assert.Contains("one.json", w, StringComparison.Ordinal));      // each names its file
+        Assert.Empty(LoreBook.Empty.Warnings);
+    }
+
     /// <summary>Scenes with no arcs to play them aren't read: as before, a pack with no <c>arcs.json</c> is the empty book.</summary>
     [Fact]
     public void Scenes_without_arcs_are_the_empty_book()

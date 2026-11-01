@@ -13,6 +13,11 @@ public sealed class BaseLoreTests
     private static IEnumerable<(Arc Arc, ArcBeat Beat)> Battles()
         => Book.Value.Arcs.SelectMany(arc => arc.Beats.Where(b => b.Kind == ArcBeat.Battle).Select(b => (arc, b)));
 
+    /// <summary>The base lore has nothing a game would play and never show (<see cref="LoreBook.Warnings"/>), as <c>check.py</c> agrees.</summary>
+    [Fact]
+    public void The_base_lore_has_no_warnings()
+        => Assert.Empty(Book.Value.Warnings);
+
     [Fact]
     public void Every_chapter_has_its_arc_in_order()
         => Assert.Equal([1, 2, 3, 4, 5], Book.Value.Arcs.Select(a => a.Chapter));

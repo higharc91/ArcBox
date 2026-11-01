@@ -10,7 +10,8 @@ namespace ArcBox.Server.Games.Tactics;
 /// <see cref="RoomOptions.GameCallTimeout"/> (2 s) has the room closed as hung. On a loaded machine (a TV rendering in software on the same
 /// box, in the end-to-end runs) that happened to the first campaign, to Muster, and to a restarted server's room as every phone rejoined at
 /// once. A pack that fails to load doesn't stop the server: it's logged here, and it fails the first Tactics room with its errors, as
-/// before, since <see cref="Lazy{T}"/> keeps the exception. It logs <c>Tactics content loaded in &lt;n&gt; ms</c> when it's done.
+/// before, since <see cref="Lazy{T}"/> keeps the exception. Lore the game plays but would never show (<see cref="LoreBook.Warnings"/>) is
+/// logged as a warning, one line each. It logs <c>Tactics content loaded in &lt;n&gt; ms</c> when it's done.
 /// </summary>
 internal sealed class TacticsWarmup(Lazy<RulesPack> pack, Lazy<LoreBook> lore, ILogger<TacticsWarmup> log) : IHostedService
 {
@@ -20,7 +21,8 @@ internal sealed class TacticsWarmup(Lazy<RulesPack> pack, Lazy<LoreBook> lore, I
         {
             var clock = Stopwatch.StartNew();
             _ = pack.Value;
-            _ = lore.Value;
+            foreach (var warning in lore.Value.Warnings)
+                log.LogWarning("Tactics lore: {Warning}", warning);     // played, but never shown: tools/tactics-lore/check.py refuses it
             log.LogInformation("Tactics content loaded in {Ms} ms", clock.ElapsedMilliseconds);
         }
         catch (Exception e)

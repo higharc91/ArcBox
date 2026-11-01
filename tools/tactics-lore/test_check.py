@@ -124,6 +124,31 @@ class CheckTests(unittest.TestCase):
             "/scenes/3/after: only a battle beat has an aftermath, and 'find_mill' is a discovery beat",
         ])
 
+    def test_an_option_back_to_its_own_node_is_refused(self):
+        """The game never offers an option leading to a node already played, its own included, so it could never show.
+        Tactics.Logic's LoreBook warns of the same thing (LoreBook.Warnings)."""
+        def line(id_: str) -> dict:
+            return {"id": id_, "speaker": "narrator", "text": "t"}
+
+        with tempfile.TemporaryDirectory() as tmp:
+            pack = Path(tmp) / "loops"
+            (pack / "scenes").mkdir(parents=True)
+            (pack / "pack.json").write_text(json.dumps(
+                {"id": "loops", "loreVersion": 1, "requires": ["story"], "files": ["scenes/loops.json"]}))
+            (pack / "scenes" / "loops.json").write_text(json.dumps({"scenes": [{
+                "id": "loops", "beat": "find_mill", "cast": ["narrator"], "start": "hub", "nodes": [
+                    {"id": "hub", "lines": [line("loops_1")], "options": [
+                        {"id": "again", "label": "Again.", "to": "hub"},
+                        {"id": "try", "label": "Try.", "check": {"skill": "athletics", "dc": 10, "pass": "out", "fail": "hub"}},
+                        {"id": "go", "label": "Go.", "to": "out"}]},
+                    {"id": "out", "lines": [line("loops_2")], "end": True}]}]}))
+            errors = check.check([FIXTURES / "valid" / "base", FIXTURES / "story", pack])
+        mine = sorted(e.split("#")[1] for e in errors if "scenes/loops.json" in e.split("#")[0])
+        self.assertEqual(mine, [
+            "/scenes/0/nodes/0/options/0: leads back to its own node 'hub', so it's never offered",
+            "/scenes/0/nodes/0/options/1: leads back to its own node 'hub', so it's never offered",
+        ])
+
     def test_art_keys_follow_the_rules_engine_harvest(self):
         keys = check.art_keys(check.CONTENT)
         self.assertIn("chapters.mirewood", keys)

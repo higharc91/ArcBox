@@ -83,6 +83,59 @@ public class AddTacticsTests
         }
     }
 
+    /// <summary>
+    /// Review (rules NOTE 2 and 3): lore the game would play but never show (<see cref="LoreBook.Warnings"/>) is logged as the server
+    /// starts, as <c>tools/tactics-lore/check.py</c> refuses it. Here the base pack's art and rules, with a lore pack of one such scene.
+    /// </summary>
+    [Fact]
+    public async Task Lore_that_can_never_show_an_option_is_logged_at_start()
+    {
+        var log = new LogSink();
+        var repo = AppContext.BaseDirectory;
+        while (!File.Exists(Path.Combine(repo, "ArcBox.slnx")))
+            repo = Path.GetDirectoryName(repo)!;
+        var real = Path.Combine(repo, "content", TacticsGame.Id, "base");
+        var root = Directory.CreateTempSubdirectory("arcbox-lore-warning").FullName;
+        try
+        {
+            var pack = Path.Combine(root, TacticsGame.Id, "base");
+            Directory.CreateDirectory(pack);
+            foreach (var dir in Directory.EnumerateDirectories(real).Where(d => Path.GetFileName(d) != "lore"))
+                Directory.CreateSymbolicLink(Path.Combine(pack, Path.GetFileName(dir)), dir);
+            var lore = Directory.CreateDirectory(Path.Combine(pack, "lore", "scenes")).Parent!.FullName;
+            File.WriteAllText(Path.Combine(lore, "pack.json"), """{ "id": "base", "loreVersion": 1, "files": ["arcs.json", "scenes/s.json"] }""");
+            File.WriteAllText(Path.Combine(lore, "arcs.json"), """
+                { "arcs": [{ "id": "a", "chapter": 1, "region": "r", "beats": [{ "id": "talk", "kind": "story" }] }] }
+                """);
+            File.WriteAllText(Path.Combine(lore, "scenes", "s.json"), """
+                { "scenes": [{ "id": "s", "beat": "talk", "cast": ["narrator"], "start": "hub", "nodes": [
+                    { "id": "hub", "lines": [{ "id": "l1", "speaker": "narrator", "text": "Hub." }], "options": [
+                      { "id": "again", "label": "Again.", "to": "hub" }, { "id": "on", "label": "On.", "to": "done" } ] },
+                    { "id": "done", "lines": [{ "id": "l2", "speaker": "narrator", "text": "Done." }], "end": true } ] }] }
+                """);
+
+            using var sp = Build(log, contentRoot: root);
+            var hosted = sp.GetServices<IHostedService>().ToList();
+            foreach (var service in hosted)
+                await service.StartAsync(TestContext.Current.CancellationToken);
+            for (var waited = 0; waited < 300 && !log.Entries.Any(e => e.Text.Contains("content loaded", StringComparison.Ordinal)); waited++)
+                await Task.Delay(100, TestContext.Current.CancellationToken);
+
+            var warning = Assert.Single(log.Entries, e => e.Level == LogLevel.Warning);
+            Assert.Contains("Tactics lore:", warning.Text, StringComparison.Ordinal);
+            Assert.Contains("the option 'again' of the node 'hub' of the scene 's' leads back to its own node", warning.Text, StringComparison.Ordinal);
+            foreach (var service in hosted)
+                await service.StopAsync(TestContext.Current.CancellationToken);
+        }
+        finally
+        {
+            // The links first, on their own, so nothing of the real content can go with the copy.
+            foreach (var link in Directory.EnumerateDirectories(Path.Combine(root, TacticsGame.Id, "base")).Where(d => new DirectoryInfo(d).LinkTarget is not null))
+                Directory.Delete(link);
+            Directory.Delete(root, recursive: true);
+        }
+    }
+
     [Fact]
     public void AddTactics_lists_the_campaign_game_and_its_rules()
     {

@@ -40,9 +40,10 @@ public sealed class LoreBook
     private readonly ConcurrentDictionary<string, double?> _clipSeconds = new(StringComparer.Ordinal);
 
     private LoreBook(ImmutableArray<Arc> arcs, ImmutableArray<SceneDef> scenes, ImmutableArray<LoreCharacter> characters,
-        ImmutableDictionary<string, string> clipFiles, ImmutableDictionary<string, string> places)
+        ImmutableDictionary<string, string> clipFiles, ImmutableDictionary<string, string> places, ImmutableArray<string> warnings)
     {
         _places = places;
+        Warnings = warnings;
         Arcs = arcs;
         Scenes = scenes;
         _byRegion = arcs.ToImmutableSortedDictionary(a => a.Region, a => a, StringComparer.Ordinal);
@@ -53,13 +54,21 @@ public sealed class LoreBook
     }
 
     /// <summary>A book with no arcs, for a game with no lore: no beat is ever available.</summary>
-    public static LoreBook Empty { get; } = new([], [], [], ImmutableDictionary<string, string>.Empty, ImmutableDictionary<string, string>.Empty);
+    public static LoreBook Empty { get; } = new([], [], [], ImmutableDictionary<string, string>.Empty, ImmutableDictionary<string, string>.Empty, []);
 
     /// <summary>Every arc, in the file's order.</summary>
     public ImmutableArray<Arc> Arcs { get; }
 
     /// <summary>Every scene, in the order the pack lists its files and each file lists them.</summary>
     public ImmutableArray<SceneDef> Scenes { get; }
+
+    /// <summary>
+    /// What the lore has that a game can play but would never show, each naming its file, in the pack's order (review): an option that
+    /// leads back to its own node, which <see cref="SceneRun.Offered"/> never offers, since that node has played; and a node whose every
+    /// option waits on flags, unless one choice beat's choices each set a flag one of them waits on, so a vote guarantees one shows (with
+    /// none, the scene's stage ends there). <c>tools/tactics-lore/check.py</c> refuses both, by the same rules; the server logs these.
+    /// </summary>
+    public ImmutableArray<string> Warnings { get; }
 
     /// <summary>The arc set in <paramref name="region"/>, or null if none is.</summary>
     public Arc? ArcFor(string region) => _byRegion.GetValueOrDefault(region);
@@ -135,6 +144,8 @@ public sealed class LoreBook
 
         var beats = arcs.SelectMany(a => a.Beats).ToImmutableDictionary(b => b.Id, b => b.Kind, StringComparer.Ordinal);
         var scenes = ImmutableArray.CreateBuilder<SceneDef>();
+        var warnings = ImmutableArray.CreateBuilder<string>();
+        var choiceBeats = arcs.SelectMany(a => a.Beats).Where(b => !b.Choices.IsEmpty).ToImmutableArray();
         var seen = new HashSet<string>(StringComparer.Ordinal);
         var aftermath = new HashSet<string>(StringComparer.Ordinal);
         foreach (var file in files.Where(f => f.StartsWith("scenes/", StringComparison.Ordinal)))
@@ -150,6 +161,7 @@ public sealed class LoreBook
                 else if (aftermath.Contains(scene.Beat))
                     throw new InvalidDataException($"{scenePath}: the scene '{scene.Id}' is a lead-in of '{scene.Beat}', and comes after one of its aftermath scenes.");
                 scenes.Add(scene);
+                warnings.AddRange(Unshown(scene, choiceBeats).Select(w => $"{scenePath}: {w}"));
             }
         }
 
@@ -165,7 +177,23 @@ public sealed class LoreBook
 
         var lines = scenes.SelectMany(s => s.Lines).Select(l => l.Id).ToImmutableHashSet(StringComparer.Ordinal);
         return new LoreBook(arcs, scenes.ToImmutable(), characters, Clips(Path.Combine(lore, "audio"), lines),
-            places.ToImmutableDictionary(p => p.Id, p => p.Name, StringComparer.Ordinal));
+            places.ToImmutableDictionary(p => p.Id, p => p.Name, StringComparer.Ordinal), warnings.ToImmutable());
+    }
+
+    /// <summary>What of <paramref name="scene"/> can never show (<see cref="Warnings"/>), node by node.</summary>
+    private static IEnumerable<string> Unshown(SceneDef scene, ImmutableArray<ArcBeat> choiceBeats)
+    {
+        foreach (var node in scene.Nodes)
+        {
+            var where = $"the node '{node.Id}' of the scene '{scene.Id}'";
+            foreach (var option in node.Options.Where(o => o.Targets.Contains(node.Id)))
+                yield return $"the option '{option.Id}' of {where} leads back to its own node, so it's never offered.";
+            if (node.Options.IsEmpty || node.Options.Any(o => o.Requires.IsEmpty))
+                continue;
+            var waits = node.Options.SelectMany(o => o.Requires).ToHashSet(StringComparer.Ordinal);
+            if (!choiceBeats.Any(b => b.Choices.All(c => c.Sets.Any(waits.Contains))))
+                yield return $"{where} has every option gated on flags, and no vote guarantees one of them is set: the party could be left with nothing to pick.";
+        }
     }
 
     /// <summary>

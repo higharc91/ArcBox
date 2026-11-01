@@ -439,6 +439,9 @@ def _scenes(defs: dict, scenes: list, rules: dict | None, errors: Errors) -> Non
                 if "check" in option:
                     targets += [option["check"]["pass"], option["check"]["fail"]]
                 out.update(targets)
+                if node["id"] in targets:
+                    # The game never offers an option that leads to a node already played, and its own node is (SceneRun.Offered).
+                    errors.add(where, oat, f"leads back to its own node '{node['id']}', so it's never offered")
                 if "choice" in option:
                     if not node.get("vote"):
                         errors.add(where, f"{oat}/choice", "only a vote's options can be an arcs.json choice")
