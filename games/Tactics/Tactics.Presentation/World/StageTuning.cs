@@ -3,12 +3,13 @@ namespace Tactics.Presentation.World;
 /// <summary>
 /// The numbers of a fight in the world (overworld 5c §5), chosen while the user was away: only a person watching can say if they're right.
 /// Together they keep the walk-in under <see cref="FormingMost"/>, inside the 3 s the game waits for the first beat's <c>shown</c>
-/// (<c>TacticsTiming.FormUp</c>), so a slow walk-in never holds the game.
+/// (<c>TacticsTiming.FormUp</c>), so a slow walk-in never holds the game. The plan had 1.2 s and 1.4 s, 2.6 s in all; they're 1.0 and 1.2 so
+/// that the walk-in, the frame that builds the stage, the view's way to the TV and the opening beat's own playing still come in under 3 s.
 /// </summary>
 public static class StageTuning
 {
     /// <summary>The longest the heroes take to walk to their slots, in seconds. A longer path walks faster.</summary>
-    public const double WalkInMost = 1.2;
+    public const double WalkInMost = 1.0;
 
     /// <summary>A hero's step on the way to its slot when there's time, in seconds: the party's own walking pace.</summary>
     public const double StepSeconds = 0.3;
@@ -29,7 +30,7 @@ public static class StageTuning
     public const double StepInStagger = 0.2;
 
     /// <summary>The longest all of them take to step in, from the first starting to the last arriving, in seconds.</summary>
-    public const double StepInMost = 1.4;
+    public const double StepInMost = 1.2;
 
     /// <summary>One enemy's or companion's step in from a tile out, in seconds.</summary>
     public const double StepInSeconds = 0.4;

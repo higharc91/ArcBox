@@ -308,47 +308,4 @@ public sealed class PhaseScreenTests
         Assert.Null(screen.Banner);
         Assert.Equal(new global::Tactics.Presentation.Audio.MusicCue("title"), screen.Music);
     }
-
-    // Overworld 5c §4: a fight in the world keeps the world on screen, round the board, under the results and while it waits to resume.
-    [Fact]
-    public void A_fight_in_the_world_keeps_the_world_through_results_and_resuming()
-    {
-        var explore = new ExploreView("ashen_ford", "The Ashen Ford", 2, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], "Ana", Arrived: "fellIn");
-        var staged = Fight() with { Stage = new StageView("ashen_ford", new Tile(100, 52), 1, ["p1"]) };
-
-        foreach (var view in new[]
-        {
-            View("Battle", battle: staged) with { Explore = explore },
-            View("Resuming", battle: staged) with { Explore = explore },
-            View("Results", outcome: "Won", results: []) with { LastBattle = staged, Explore = explore },
-        })
-        {
-            var screen = PhaseScreen.Of(view);
-            Assert.True(screen.InPlace, view.Phase);
-            Assert.Same(explore, screen.World);
-            Assert.NotNull(screen.Walk);
-        }
-        Assert.NotNull(PhaseScreen.Of(View("Battle", battle: staged) with { Explore = explore }).Board);
-        Assert.Equal("Results · Battle won", PhaseScreen.Of(View("Results", outcome: "Won", results: []) with { LastBattle = staged, Explore = explore }).Meta);
-    }
-
-    [Fact]
-    public void A_fight_on_a_plain_board_doesnt_draw_the_world()
-    {
-        var explore = new ExploreView("ashen_ford", "The Ashen Ford", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], "Ana");
-
-        foreach (var view in new[]
-        {
-            View("Battle", battle: Fight()) with { Explore = explore },
-            View("Resuming", battle: Fight()) with { Explore = explore },
-            View("Results", outcome: "Won", results: []) with { LastBattle = Fight(), Explore = explore },
-            View("EncounterPick") with { Explore = explore },
-        })
-        {
-            var screen = PhaseScreen.Of(view);
-            Assert.False(screen.InPlace, view.Phase);
-            Assert.Null(screen.World);
-        }
-        Assert.False(PhaseScreen.Of(View("Exploration") with { Explore = explore }).InPlace);
-    }
 }

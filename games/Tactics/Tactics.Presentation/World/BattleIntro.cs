@@ -58,6 +58,8 @@ public sealed record BattleIntro(BattleStage Stage, ImmutableArray<HeroWalk> Her
 {
     private const string HeroPrefix = "hero";
 
+    private static readonly IntroFrame Done = new(ImmutableDictionary<UnitId, UnitPlace>.Empty, ImmutableDictionary<UnitId, UnitPose>.Empty, [], 1, 0, false);
+
     /// <summary>When the grid starts to come up.</summary>
     public double GridStart => WalkEnd;
 
@@ -115,6 +117,8 @@ public sealed record BattleIntro(BattleStage Stage, ImmutableArray<HeroWalk> Her
     /// <summary>The walk-in <paramref name="seconds"/> after it started, on <paramref name="world"/>.</summary>
     public IntroFrame At(double seconds, BoardTerrain world)
     {
+        if (seconds >= End)
+            return Done;
         var places = ImmutableDictionary.CreateBuilder<UnitId, UnitPlace>();
         var poses = ImmutableDictionary.CreateBuilder<UnitId, UnitPose>();
         var hidden = ImmutableHashSet.CreateBuilder<UnitId>();

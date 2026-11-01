@@ -47,14 +47,21 @@ public sealed record FallIn(ImmutableDictionary<string, UnitPlace> From, Immutab
         return new FallIn(from.ToImmutable(), to.ToImmutable(), seed.ToImmutable());
     }
 
-    /// <summary>Where each walker that falls in is, <paramref name="seconds"/> in: eased in and out, and at <see cref="To"/> once it's over.</summary>
-    public ImmutableDictionary<string, UnitPlace> At(double seconds)
+    /// <summary>
+    /// Where each walker that falls in is, <paramref name="seconds"/> in: eased in and out, and at <see cref="To"/> once it's over. Written into
+    /// <paramref name="into"/>, which is cleared first and given back, so a frame allocates nothing.
+    /// </summary>
+    public Dictionary<string, UnitPlace> At(double seconds, Dictionary<string, UnitPlace>? into = null)
     {
+        var places = into ?? new Dictionary<string, UnitPlace>(StringComparer.Ordinal);
+        places.Clear();
         var t = (float)Math.Clamp(seconds / StageTuning.FallIn, 0, 1);
         var eased = t * t * (3 - 2 * t);
-        return To.ToImmutableDictionary(p => p.Key, p => From.TryGetValue(p.Key, out var start)
-            ? new UnitPlace(Vector2.Lerp(start.Map, p.Value.Map, eased), float.Lerp(start.Height, p.Value.Height, eased))
-            : p.Value, StringComparer.Ordinal);
+        foreach (var (walker, end) in To)
+            places[walker] = From.TryGetValue(walker, out var start)
+                ? new UnitPlace(Vector2.Lerp(start.Map, end.Map, eased), float.Lerp(start.Height, end.Height, eased))
+                : end;
+        return places;
     }
 
     private static UnitPlace On(BoardTerrain world, Tile tile)

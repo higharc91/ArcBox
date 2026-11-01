@@ -191,8 +191,20 @@ internal sealed class GroundWindow
         return BoardPlan.Of([.. built.Items.Select(Rekey)]).Shifted(BoardProjection.Corner(_x, _y, 0));
     }
 
-    /// <summary>Where the region's own skirt goes down to, as <see cref="BoardTerrain.Base"/> works it out for the whole region.</summary>
-    public static float SkirtOf(BattleMap world)
+    private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<BattleMap, Box> Skirts = [];
+
+    private sealed class Box(float value)
+    {
+        public float Value { get; } = value;
+    }
+
+    /// <summary>
+    /// Where the region's own skirt goes down to, as <see cref="BoardTerrain.Base"/> works it out for the whole region. It reads every tile, so
+    /// it's worked out once for each region's map, and a fight starting doesn't pay for it.
+    /// </summary>
+    public static float SkirtOf(BattleMap world) => Skirts.GetValue(world, map => new Box(Lowest(map))).Value;
+
+    private static float Lowest(BattleMap world)
     {
         var lowest = int.MaxValue;
         for (var y = 0; y < world.Height; y++)

@@ -68,7 +68,7 @@ public sealed class StageDirectorTests
         Assert.Equal(StageStep.Fighting, director.Stage);
         Assert.True(forming <= StageTuning.FormingMost + 1 / 60.0, $"{forming} s");
         Assert.True(StageTuning.FormingMost < formUp);
-        Assert.Equal(2.0, director.Intro!.End, 6);     // 5 steps in 1.2 s, then three stepping in 0.2 s apart for 0.4 s
+        Assert.Equal(1.8, director.Intro!.End, 6);     // 5 steps in 1.0 s, then three stepping in 0.2 s apart for 0.4 s
     }
 
     [Fact]
@@ -211,7 +211,7 @@ public sealed class StageDirectorTests
         Assert.False(director.WalkersShown);
         Assert.NotNull(director.CameraTarget);
 
-        var screen = PhaseScreen.Of(Results(Battle(lastSeq: 10), Explore(epoch: 2, at: new Tile(17, 12), arrived: "fellIn")));
+        var screen = PhaseScreen.Of(Results(Battle(lastSeq: 10), Explore(epoch: 2, at: new Tile(17, 12), arrived: "fellIn")), director);
         Assert.True(screen.InPlace);
         Assert.NotNull(screen.World);
         Assert.Equal("Results · Battle won", screen.Meta);
@@ -465,6 +465,39 @@ public sealed class StageDirectorTests
         Assert.Equal(StageStep.FallingIn, director.Stage);
         Assert.True(director.BeatsRun);
         Assert.Empty(director.Hidden);
+    }
+
+    // Review of 5c, finding 5: a fight that ends with no word of where the party went must not fall in to where it stood before.
+    [Fact]
+    public void A_fight_ended_with_no_new_epoch_just_ends()
+    {
+        var (_, director) = Started();
+        Run(director, 0.5);
+
+        director.Receive(Walking(Explore(epoch: 1)));
+
+        Assert.Equal(StageStep.Walking, director.Stage);
+        Assert.Null(director.Walkers);
+        Assert.Empty(director.Seed);
+        Assert.False(director.InPlace);
+    }
+
+    // Review of 5c, finding 7: the terrain the walk-in reads must be the fight's region's.
+    [Fact]
+    public void A_world_of_another_region_mid_walk_in_goes_to_the_plain_board()
+    {
+        var (_, director) = Started();
+        Run(director, 0.3);
+
+        director.SetWorld(WorldState.Ready, new BoardTerrain(StageWorld.Map("elsewhere", 4, 4, (_, _) => StageWorld.Flat(0)), null));
+
+        Assert.Equal(StageStep.Fighting, director.Stage);
+        Assert.False(director.InPlace);
+        Assert.True(director.BeatsRun);
+        Assert.Empty(director.Hidden);
+        Assert.Empty(director.Places);
+        Run(director, 1);
+        Assert.False(director.InPlace);
     }
 
     // ---- Properties ----------------------------------------------------------------------------------------------------

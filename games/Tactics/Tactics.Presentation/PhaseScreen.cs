@@ -35,16 +35,22 @@ public sealed record ScreenRow(string Title, string Detail, string? Chip, string
 /// <param name="Banner">The strip in the title art to play over the results, or null.</param>
 /// <param name="World">The party to draw in the world, or null. If it can't be drawn, the screen still reads without it.</param>
 /// <param name="Walk">What the world's panels say, with <paramref name="World"/>.</param>
-/// <param name="InPlace">
-/// The fight stands in the world (overworld 5c §4), so the world stays on screen round the board, under the results and while resuming
-/// (<see cref="World.StageDirector"/> says how). <paramref name="World"/> is the party then, as the view has it.
+/// <param name="InPlace">The fight's board is drawn on the world (overworld 5c §4), not on the plain board: <see cref="World.StageDirector.InPlace"/>.</param>
+/// <param name="OverWorld">
+/// The header and table go over the world, with no backdrop: the results and the wait to resume of a fight in the world, which keep the
+/// world on screen.
 /// </param>
 public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? Notice, int PartyLevel,
     ImmutableArray<ScreenRow> Rows, string? Empty, string Shot, BattleView? Board = null, MusicCue? Music = null, string? Ambience = null, string? Banner = null,
-    ExploreView? World = null, WalkHud? Walk = null, bool InPlace = false)
+    ExploreView? World = null, WalkHud? Walk = null, bool InPlace = false, bool OverWorld = false)
 {
-    /// <summary>The screen for <paramref name="view"/>. A phase this build doesn't know still shows the banner.</summary>
-    public static PhaseScreen Of(TacticsHostView view)
+    /// <summary>
+    /// The screen for <paramref name="view"/>. A phase this build doesn't know still shows the banner. With <paramref name="stage"/>, which has
+    /// had the view, a fight in the world keeps the world (<see cref="World.StageDirector.InWorld"/>), and the party is the one the stage lets
+    /// the walk follow (<see cref="World.StageDirector.Walk"/>), so its new epoch waits for the results to be over. Without it, every fight is
+    /// on the plain board, as before the world.
+    /// </summary>
+    public static PhaseScreen Of(TacticsHostView view, StageDirector? stage = null)
     {
         var shot = $"tactics-{view.Phase.ToLowerInvariant()}";
         var screen = new PhaseScreen(view.Phase, view.Banner, Tone.Neutral, view.Notice, view.PartyLevel, [], null, shot);
@@ -61,18 +67,15 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
             _ => screen,
         };
         drawn = drawn with { Music = MusicChoice.Of(view), Ambience = MusicChoice.AmbienceOf(view) };
-        return InWorld(phase, view) && view.Explore is { } explore
-            ? drawn with { InPlace = true, World = explore, Walk = WalkHud.Of(explore, view.PartyLevel) }
-            : drawn;
+        if (stage is null)
+            return drawn;
+        var world = stage.Walk ?? view.Explore;
+        if (stage.InWorld && phase is TacticsPhase.Battle or TacticsPhase.Resuming or TacticsPhase.Results && world is not null)
+            drawn = drawn with { World = world, Walk = WalkHud.Of(world, view.PartyLevel), OverWorld = phase != TacticsPhase.Battle };
+        else if (drawn.World is not null && world is not null)
+            drawn = drawn with { World = world, Walk = WalkHud.Of(world, view.PartyLevel) };
+        return drawn with { InPlace = stage.InPlace };
     }
-
-    /// <summary>True for a fight in the world, and its results, and while it waits to resume.</summary>
-    private static bool InWorld(TacticsPhase phase, TacticsHostView view) => phase switch
-    {
-        TacticsPhase.Battle or TacticsPhase.Resuming => view.Battle?.Stage is not null,
-        TacticsPhase.Results => view.LastBattle?.Stage is not null,
-        _ => false,
-    };
 
     private static PhaseScreen Exploration(PhaseScreen screen, TacticsHostView view) => screen with
     {

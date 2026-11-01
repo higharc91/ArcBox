@@ -80,9 +80,17 @@ public sealed class StageDirector(Func<string, BattleMap?> maps)
     private ExploreView? _held;          // the party as it was when the fight began
     private bool _holding;
     private FallIn? _fall;
+    private readonly Dictionary<string, UnitPlace> _walkers = new(StringComparer.Ordinal);    // the fall-in's places, reused frame to frame
 
     /// <summary>Where the fight is in its timeline.</summary>
     public StageStep Stage { get; private set; }
+
+    /// <summary>
+    /// The screen is about a fight in the world: one on a stamped map the TV knows, from its walk-in to the party walking again. The world is
+    /// wanted then, and kept, even while <see cref="InPlace"/> is false and the plain board shows the fight. <see cref="PhaseScreen"/> reads
+    /// this and <see cref="InPlace"/>, and nothing else, so the screen and the stage always agree.
+    /// </summary>
+    public bool InWorld => Where is not null && Stage is not (StageStep.Off or StageStep.Walking);
 
     /// <summary>Where the fight stands in the world, or null with none.</summary>
     public BattleStage? Where { get; private set; }
@@ -123,8 +131,8 @@ public sealed class StageDirector(Func<string, BattleMap?> maps)
     /// <summary>The view the walk track should follow now: the party as it stood until the fight is over, so its new epoch waits for the results.</summary>
     public ExploreView? Walk { get; private set; }
 
-    /// <summary>Where the walkers are drawn while they fall in, in world tiles; null for the walk track's own places.</summary>
-    public ImmutableDictionary<string, UnitPlace>? Walkers { get; private set; }
+    /// <summary>Where the walkers are drawn while they fall in, in world tiles; null for the walk track's own places. It's reused from frame to frame.</summary>
+    public IReadOnlyDictionary<string, UnitPlace>? Walkers { get; private set; }
 
     /// <summary>Where the followers stand after falling in, for <see cref="WalkTrack.Seed"/> once the track has taken <see cref="Walk"/>'s new epoch.</summary>
     public ImmutableDictionary<string, UnitPlace> Seed => _fall?.Seed ?? NoWalkers;
@@ -135,8 +143,9 @@ public sealed class StageDirector(Func<string, BattleMap?> maps)
     public void SetWorld(WorldState state, BoardTerrain? terrain = null)
     {
         (_world, _terrain) = (state, terrain ?? _terrain);
-        if (state == WorldState.Failed && _inPlace)
+        if (_inPlace && !Drawable)
         {
+            // It failed, or it's another region's now: what's on it can't be read, so the fight goes back to the plain board.
             _inPlace = false;
             if (Stage == StageStep.Forming)
                 Go(StageStep.Fighting);
@@ -290,7 +299,9 @@ public sealed class StageDirector(Func<string, BattleMap?> maps)
         switch (Stage)
         {
             case StageStep.Forming or StageStep.Fighting or StageStep.Fading or StageStep.Results:
-                if (_fresh || !_inPlace || Where is not { } stage || _latest is not { } explore || _terrain is null || _battle is null)
+                // A fight that ends with no new epoch (no view of the party since, or one from before it) has nowhere to fall in to.
+                if (_fresh || !_inPlace || Where is not { } stage || _latest is not { } explore || _terrain is null || _battle is null
+                    || explore.Arrived is null || explore.Epoch == _held?.Epoch)
                 {
                     Finish();
                     break;
@@ -347,7 +358,7 @@ public sealed class StageDirector(Func<string, BattleMap?> maps)
         Fade = (float)Math.Clamp(fade, 0, 1);
         WalkersShown = Stage is StageStep.Off or StageStep.FallingIn or StageStep.Walking || (Stage == StageStep.Waking && _dark)
             || (Stage == StageStep.Results && _fresh);
-        Walkers = Stage == StageStep.FallingIn ? _fall?.At(_clock) : null;
+        Walkers = Stage == StageStep.FallingIn && _fall is { } fall ? fall.At(_clock, _walkers) : null;
         Walk = _holding && _held is { } held && _latest is { } latest && latest.Epoch != held.Epoch ? held : _latest;
         CameraTarget = InPlace && Where is { } where && _terrain is not null ? Middle(where, _terrain) : null;
     }

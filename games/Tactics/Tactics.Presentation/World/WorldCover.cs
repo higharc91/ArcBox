@@ -63,11 +63,18 @@ public sealed class WorldCover
     /// <summary>
     /// What to draw: with the world <paramref name="walking"/>, the card as far as it's up and the panels as they come in; otherwise the whole
     /// screen, with the header and table only out of a <paramref name="battle"/>, where the board has their place.
+    /// <para>
+    /// A fight in the world (overworld 5c) has the world drawn too. Its board, on the world, has the screen as a fight has it: no header, no
+    /// table, and none of the world's panels, which would cover the battle's HUD. Its results and its wait to resume (<paramref name="overWorld"/>)
+    /// put the header and table straight over the world, with no backdrop and no world panels.
+    /// </para>
     /// </summary>
-    public CoverLook Look(bool walking, bool battle)
+    public CoverLook Look(bool walking, bool battle, bool overWorld = false)
     {
+        if (walking && overWorld)
+            return new CoverLook(1, Reveal.Card > 0, true, 0);
         var card = walking ? Reveal.Card : 1f;
-        var panels = walking ? Reveal.Panels : 0f;
+        var panels = walking && !battle ? Reveal.Panels : 0f;
         return new CoverLook(card, card > 0, !battle && card > 0, panels);
     }
 }

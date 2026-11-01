@@ -346,16 +346,35 @@ public sealed class StagePlanTests(ITestOutputHelper output)
             Array.Sort(times);
             return times[runs / 2];
         }
-        var wholeMs = Median(9, () => _ = new BoardTerrain(ground.Map, null));
-        var i = 0;
-        var stageMs = Median(21, () => plan = plan.With(i++ % 2 == 0 ? changes : null));
+        // The same rebuild as it would be without the window: a terrain of the whole region, and the drawn rect's plan in its light. Runs of the
+        // two take turns, so whatever else the machine is doing slows both alike.
+        var worldChanges = BoardChangesOnWorld.Of(changes, stage);
+        var drawn = plan.Drawn;
+        var lighting = plan.Lighting;
+        void Whole()
+        {
+            var terrain = new BoardTerrain(ground.Map, worldChanges);
+            _ = LitBoard.Build(BoardPlan.BuildBlock(terrain, Pack.Art, drawn, grid: true), lighting);
+        }
+        var (window, whole) = (new List<double>(), new List<double>());
+        for (var i = 0; i < 21; i++)
+        {
+            var watch = Stopwatch.StartNew();
+            plan = plan.With(i % 2 == 0 ? changes : null);
+            window.Add(watch.Elapsed.TotalMilliseconds);
+            watch.Restart();
+            Whole();
+            whole.Add(watch.Elapsed.TotalMilliseconds);
+        }
+        var (stageMs, wholeMs) = (window.Order().ElementAt(10), whole.Order().ElementAt(10));
+        var terrainMs = Median(9, () => _ = new BoardTerrain(ground.Map, null));
         var blocks = 0;
         var blocksMs = Median(5, () => blocks = plan.WorldBlocks(world, touched, changes).Length);
-        output.WriteLine($"160x120: whole BoardTerrain {wholeMs:F2} ms; stage rebuild {stageMs:F2} ms ({plan.Plan.Items.Length} items, {plan.Lit.Items.Length} lit, "
-            + $"{plan.Lighting.Lights.Length} lights); {blocks} world blocks {blocksMs:F2} ms");
+        output.WriteLine($"160x120: whole BoardTerrain {terrainMs:F2} ms; stage rebuild {stageMs:F2} ms against {wholeMs:F2} ms without the window "
+            + $"({plan.Plan.Items.Length} items, {plan.Lit.Items.Length} lit, {plan.Lighting.Lights.Length} lights); {blocks} world blocks {blocksMs:F2} ms");
 
-        // Alone it's about 5 ms in Debug on 4 cores; with the whole solution's tests running beside it, up to 25. The bound only catches a
-        // rebuild that has gone back to reading the whole region, which is several times slower again.
-        Assert.True(stageMs < 60, $"a stage rebuild took {stageMs:F2} ms (median)");
+        // Alone it's about 5 ms in Debug against 13 or so; under load both grow. A rebuild that went back to reading the whole region would cost
+        // what the second does, so it has to stay well under it.
+        Assert.True(stageMs < wholeMs * 0.75, $"a stage rebuild took {stageMs:F2} ms, against {wholeMs:F2} ms reading the whole region");
     }
 }
