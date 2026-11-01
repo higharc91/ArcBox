@@ -114,7 +114,7 @@ clicking a line that names a tile goes to it.
 | undefined flag bits, heights outside 0 to 9 | A cell a swatch can't make | Repaint it |
 | uses too many materials | Over the limit for one region | Repaint some tiles with fewer materials |
 | can't be reached from the start | A marker no one can walk to | Paint a way, climbing 2 or less a step, or move the marker |
-| can't get from there to | A marker below a one-way drop, cut off from the rest of the story | Paint a way out, climbing 2 or less a step, or move the marker |
+| can't walk back to the start | The Recovery marker is below a one-way drop, so a beaten party would wake with no way back | Paint a way out, climbing 2 or less a step, or move the marker |
 | can't be stood on | The Start marker is on Impassable or Deep | Move it, or clear the flag |
 | doesn't match its map | Paint inside a stamp | Select its marker, press Apply stamp |
 | doesn't fit, overlaps, stamped twice | A stamp is misplaced | Move the marker or delete one. A map can only be stamped once |
@@ -203,9 +203,9 @@ scene: it refuses without `--rules=<a copy of the pack>`. `--click-first-problem
 presses Go to tile. These print `Parameter "t" is null` as they save: it's Godot failing to make the scene's thumbnail with no renderer, and
 it's harmless.
 
-**A region file is in the rules pack, so any change to it changes the pack's hash.** A battle saved under the old hash starts again, with a
-notice, the next time that campaign opens, and each TV downloads the whole pack again. So don't deploy every export: send them in batches.
-The restart lasts until milestone 5b, which takes `rules/world/` out of the hash a battle save compares. The TV's download stays.
+**A region file is in the rules pack, so any change to it changes the pack's download hash.** Each TV downloads the whole pack again, so
+don't deploy every export: send them in batches. A saved battle doesn't notice: `rules/world/` isn't in the hash a battle save compares, so a
+repaint doesn't restart a fight. Listing a new region in `manifest.json` does, as the manifest is in that hash.
 
 ## Rebuilding the palette
 

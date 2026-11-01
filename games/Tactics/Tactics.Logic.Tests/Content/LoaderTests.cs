@@ -114,7 +114,10 @@ public sealed class LoaderTests
                 File.Copy(from, to);
             }
             var path = Path.Combine(rules.FullName, file);
-            File.WriteAllText(path, File.ReadAllText(path).Replace(text, $" {text}", StringComparison.Ordinal));
+            var before = File.ReadAllText(path);
+            var after = before.Replace(text, $" {text}", StringComparison.Ordinal);
+            Assert.NotEqual(before, after);
+            File.WriteAllText(path, after);
 
             Assert.Equal(same, RulesPack.Load([ContentPaths.BaseRules]).Hash == RulesPack.Load([rules.FullName]).Hash);
         }

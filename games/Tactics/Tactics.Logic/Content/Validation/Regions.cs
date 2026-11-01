@@ -22,6 +22,11 @@ internal sealed partial class Validation
                 Error(file, Pointer.Append(ptr, "size"), "The size must be [w, h], both at least 1.");
                 return null;
             }
+            if (w > WorldRegion.MaxSide || h > WorldRegion.MaxSide)
+            {
+                Error(file, Pointer.Append(ptr, "size"), $"The size {w}x{h} is over the limit of {WorldRegion.MaxSide} tiles a side.");
+                return null;
+            }
 
             var errors = Errors.Count;
             if (def.Chapter < 1)
@@ -55,9 +60,10 @@ internal sealed partial class Validation
     /// <summary>
     /// Checks each region against the rest of the pack (spec §3.4): every stamp sits inside the region on a known map, tile
     /// for tile, with no map stamped twice and no two stamps overlapping; the spawns, beat spots and stamps can be reached
-    /// on foot from the start, round the stamps' blocking props; no marker strands the party away from another; and a neighbour
+    /// on foot from the start, round the stamps' blocking props; the recovery spawn can walk back to the start; and a neighbour
     /// that's loaded has an edge back on the facing side with the negated offset. A stamp on a map that failed to load skips the map
-    /// checks, as an encounter does.
+    /// checks, as an encounter does. Whether a one-way drop strands the party depends on the story's order, which is
+    /// <c>StoryOrder</c>'s to check at export.
     /// </summary>
     public void CheckRegions(IEnumerable<Loaded<RegionDef>> regions, IReadOnlyDictionary<string, BattleMap> maps)
     {
@@ -230,41 +236,10 @@ internal sealed partial class Validation
                 else if (!stamp.Tiles().Any(t => reached.Contains(t.World)))
                     Unreached($"The stamp '{name}'", stamp.Stamp.At, At("stamps", stamp.Index));
             }
-            Stranded(start, reached, stamps);
-        }
 
-        /// <summary>
-        /// Reports each place the story puts the party that it can't walk on from: the recovery spawn, a beat's spot or a stamp's party
-        /// spawn, on the far side of a one-way drop from a beat or stamp still to go to. Those can't be avoided, so they stop the pack. Going
-        /// down a drop for good isn't wrong in itself: a pocket that holds the rest of the story is fine, and a pit with no marker in it is
-        /// <c>StoryOrder</c>'s warning at export, as nothing sends the party in. A stamp with no party spawn has no one place to stop at.
-        /// </summary>
-        private void Stranded(Tile start, HashSet<Tile> reached, List<Placed> stamps)
-        {
-            var trapped = WorldWalk.Trapped(_ground, start, ClassDef.DefaultJump);
-            if (trapped.Count == 0)
-                return;
-
-            List<(string Name, ImmutableArray<Tile> Tiles)> goals =
-            [
-                .. _def.Beats.Select(b => ($"beat '{b.Beat}'", ImmutableArray.Create(b.At))),
-                .. stamps.Select(s => ($"stamp '{s.Stamp.Map}'", s.Tiles().Select(t => t.World).ToImmutableArray())),
-            ];
-            List<(string Name, string Pointer, ImmutableArray<Tile> Tiles)> stops =
-            [
-                ("recovery spawn", Pointer.Append(Pointer.Append(ptr, "spawns"), "recovery"), [_def.Spawns.Recovery]),
-                .. _def.Beats.Select((b, i) => ($"beat '{b.Beat}'", Pointer.Append(At("beats", i), "at"), ImmutableArray.Create(b.At))),
-                .. stamps.Select(s => ($"stamp '{s.Stamp.Map}'", At("stamps", s.Index), s.PartySpawn())),
-            ];
-
-            foreach (var (name, pointer, tiles) in stops)
-            {
-                if (tiles.Where(trapped.Contains).Cast<Tile?>().FirstOrDefault() is not { } stop)
-                    continue;
-                var onward = WorldWalk.Reach(_ground, stop, ClassDef.DefaultJump);
-                if (goals.FirstOrDefault(g => g.Tiles.Any(reached.Contains) && !g.Tiles.Any(onward.Contains)) is { Name: not null } missed)
-                    v.Error(file, pointer, $"The {name} at {stop} can be walked to, but the party can't get from there to the {missed.Name}.");
-            }
+            // A beaten party wakes here at any point in the story. The order of everything else is StoryOrder's to judge: the loader can't read lore.
+            if (WorldWalk.Trapped(_ground, start, ClassDef.DefaultJump).Contains(_def.Spawns.Recovery))
+                v.Error(file, Pointer.Append(spawns, "recovery"), $"The recovery spawn at {_def.Spawns.Recovery} can't walk back to the start.");
         }
 
         private void Edges()

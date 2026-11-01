@@ -85,6 +85,16 @@ public sealed class DocumentTests
         Assert.Null(read.LastLeader);
     }
 
+    [Fact]
+    public void A_world_with_default_lists_can_be_written()
+    {
+        var world = new WorldSave("r", new Tile(1, 2), new Tile(1, 3), null, default, default);
+
+        Assert.Empty(world.Flags);
+        Assert.Empty((world with { Beats = default }).Beats);
+        Assert.Empty(TacticsDocument.Read((TacticsDocument.New with { World = world }).ToJson()).World!.Flags);
+    }
+
     [Theory]
     [InlineData(2)]
     [InlineData(-1)]

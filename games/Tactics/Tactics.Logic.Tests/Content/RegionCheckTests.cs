@@ -210,7 +210,7 @@ public sealed class RegionCheckTests
         // Columns 0 to 7 stand 3 levels up, and a wall down column 9 leaves column 8 as the foot of the drop and nothing else.
         var def = Region([.. Plain(0, 7, 3), .. Enumerable.Range(0, 32).Select(y => (9, y, (byte)0, Grass, TileFlags.Impassable))]) with
         {
-            Spawns = new RegionSpawns(new Tile(0, 0), new Tile(8, 0)),
+            Spawns = new RegionSpawns(new Tile(0, 0), new Tile(1, 0)),
             Beats = [new BeatSpot("foot", new Tile(8, 31))],
         };
 
@@ -323,27 +323,30 @@ public sealed class RegionCheckTests
     private static (int X, int Y, byte Height, byte Material, TileFlags Flags)[] Pit()
         => [.. Plain(0, 31, 3).Where(t => (t.X, t.Y) != (9, 9)), (9, 9, 0, Grass, TileFlags.None)];
 
+    /// <summary>A beaten party wakes here whatever the story's order, so it's the one marker the loader can say this about.</summary>
     [Fact]
     public void A_pocket_you_cant_walk_back_from_is_an_error()
         => Assert.Equal(
-            [new ContentError(RegionFile, "/beats/0/at", "The beat 'pit' at (9, 9) can be walked to, but the party can't get from there to the beat 'far'.")],
-            ErrorsOf(Region(Pit()) with { Beats = [new BeatSpot("pit", new Tile(9, 9)), new BeatSpot("far", new Tile(20, 20))] }));
+            [new ContentError(RegionFile, "/spawns/recovery", "The recovery spawn at (9, 9) can't walk back to the start.")],
+            ErrorsOf(Region(Pit()) with { Spawns = new RegionSpawns(new Tile(0, 0), new Tile(9, 9)) }));
+
+    /// <summary>The loader can't read lore, so only <c>StoryOrder</c> can tell a story that ends in the pit from one that needs to leave it.</summary>
+    [Fact]
+    public void A_story_can_end_in_a_pit_whichever_order_the_beats_are_listed()
+    {
+        BeatSpot pit = new("in_the_pit", new Tile(9, 9)), far = new("far", new Tile(20, 20));
+
+        Loads(Region(Pit()) with { Beats = [far, pit] });
+        Loads(Region(Pit()) with { Beats = [pit, far] });
+    }
 
     [Fact]
-    public void A_recovery_spawn_in_a_pocket_is_an_error()
-        => Assert.Equal(
-            [new ContentError(RegionFile, "/spawns/recovery", "The recovery spawn at (9, 9) can be walked to, but the party can't get from there to the beat 'far'.")],
-            ErrorsOf(Region(Pit()) with { Spawns = new RegionSpawns(new Tile(0, 0), new Tile(9, 9)), Beats = [new BeatSpot("far", new Tile(20, 20))] }));
-
-    [Fact]
-    public void A_stamp_whose_party_spawn_is_in_a_pocket_is_an_error()
+    public void A_stamp_in_a_pit_is_left_to_the_story()
     {
         var map = MapJson("hole", 1, 1, FordMaterials, [0, 1, 0], """{ "party_spawn": [[0, 0]] }""");
         var def = Region(Pit()) with { Stamps = [new RegionStamp("hole", new Tile(9, 9), 0)], Beats = [new BeatSpot("far", new Tile(20, 20))] };
 
-        Assert.Equal(
-            [new ContentError(RegionFile, "/stamps/0", "The stamp 'hole' at (9, 9) can be walked to, but the party can't get from there to the beat 'far'.")],
-            ValidationTests.ErrorsOfChapter(World(def), Map("hole", map)));
+        Assert.NotNull(ValidationTests.LoadChapter(World(def), Map("hole", map)));
     }
 
     /// <summary>

@@ -438,19 +438,58 @@ public sealed class AshenFordDraftTests
     }
 
     [Fact]
-    public void A_beat_in_a_pit_stops_the_export_and_goes_to_it()
+    public void A_beat_in_a_pit_with_the_story_still_to_go_is_a_warning_at_the_next_leg()
     {
         var pit = new Tile(44, 57);
         var source = AshenFordDraft.Build(Draft.Value.Pack);
         Pit(source, pit);
-        source.Beats[source.Beats.FindIndex(b => b.Beat == "ch1_the_ember")] = new BeatSpot("ch1_the_ember", pit);
+        source.Beats[source.Beats.FindIndex(b => b.Beat == "ch1_mayors_request")] = new BeatSpot("ch1_mayors_request", pit);
+        var rules = RegionExportTests.CopyRules();
+        try
+        {
+            var result = RegionExport.Export(Painted(source), rules, ContentPaths.ContentBase);
+
+            Assert.Empty(result.Problems);
+            Assert.NotNull(result.Written);
+            Assert.Contains(result.StoryWarnings, w => w.Contains("from (44, 57)", StringComparison.Ordinal) && w.Contains("can't walk to", StringComparison.Ordinal));
+        }
+        finally
+        {
+            Directory.Delete(rules, recursive: true);
+        }
+    }
+
+    [Fact]
+    public void A_story_that_ends_in_a_pit_loses_no_leg_to_it()
+    {
+        var pit = new Tile(44, 57);
+        var draft = Draft.Value;
+        var last = StoryOrder.Check(draft.Region, draft.Pack, ContentPaths.ContentBase).Legs[^1].Beat;
+        Assert.Equal("ch1_the_ember", last);
+        var region = Changed(source =>
+        {
+            Pit(source, pit);
+            source.Beats[source.Beats.FindIndex(b => b.Beat == last)] = new BeatSpot(last, pit);
+        });
+
+        var story = StoryOrder.Check(region, draft.Pack, ContentPaths.ContentBase);
+
+        Assert.DoesNotContain(story.Problems, p => p.Contains("from (44, 57)", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void A_recovery_spawn_in_a_pit_stops_the_export_and_goes_to_it()
+    {
+        var pit = new Tile(44, 57);
+        var source = AshenFordDraft.Build(Draft.Value.Pack);
+        Pit(source, pit);
+        source.Recovery = pit;
         var rules = RegionExportTests.CopyRules();
         try
         {
             var problem = Assert.Single(RegionExport.Export(Painted(source), rules, ContentPaths.ContentBase).Problems);
 
-            Assert.StartsWith("The beat 'ch1_the_ember' at (44, 57) can be walked to, but the party can't get from there to", problem, StringComparison.Ordinal);
-            Assert.EndsWith("Paint a way out, climbing no more than 2 levels a step, or move the marker.", problem, StringComparison.Ordinal);
+            Assert.Equal("The recovery spawn at (44, 57) can't walk back to the start. Paint a way out, climbing no more than 2 levels a step, or move the marker.", problem);
             Assert.Equal(pit, RegionExport.TileIn(problem));
         }
         finally

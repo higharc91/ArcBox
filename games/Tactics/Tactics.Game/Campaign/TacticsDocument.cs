@@ -54,13 +54,20 @@ public sealed record BattleSave(string Encounter, ulong Seed, ImmutableArray<Pro
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<CharacterRecord> Companions = default);
 
 /// <summary>Where the party is in the world, and how far through its story.</summary>
-/// <param name="Region">The region's id.</param>
+/// <param name="Region">The region's id. A hand-edited document can leave it null, and the party then goes to the start with a notice, keeping its story.</param>
 /// <param name="At">The leader's tile. A repaint can make it illegal, and it's checked on the way in.</param>
 /// <param name="Facing">The tile the leader faces.</param>
 /// <param name="LastLeader">The profile whose session it last was, whoever held the lead at the end, which the next session's leader follows in member order; null before anyone has.</param>
 /// <param name="Flags">The story flags set so far.</param>
 /// <param name="Beats">The story beats done so far.</param>
-public sealed record WorldSave(string Region, Tile At, Tile Facing, string? LastLeader, ImmutableArray<string> Flags, ImmutableArray<string> Beats);
+public sealed record WorldSave(string Region, Tile At, Tile Facing, string? LastLeader, ImmutableArray<string> Flags, ImmutableArray<string> Beats)
+{
+    /// <summary>The story flags set so far; never a default array, so a read or a write can't throw.</summary>
+    public ImmutableArray<string> Flags { get => field.IsDefault ? [] : field; init; } = Flags;
+
+    /// <summary>The story beats done so far; never a default array, so a read or a write can't throw.</summary>
+    public ImmutableArray<string> Beats { get => field.IsDefault ? [] : field; init; } = Beats;
+}
 
 /// <summary>
 /// The campaign document, version 1 (adapter spec §6): the party's level, each member's character and XP, the encounters
@@ -96,9 +103,6 @@ public sealed record TacticsDocument(int Version, string? RulesHash, int PartyLe
         {
             Version = CurrentVersion,
             Completed = doc.Completed.IsDefault ? [] : doc.Completed,
-            World = doc.World is { } world
-                ? world with { Flags = world.Flags.IsDefault ? [] : world.Flags, Beats = world.Beats.IsDefault ? [] : world.Beats }
-                : null,
             Members = Ordinal.Map((doc.Members ?? Ordinal.Map<MemberRecord>()).Where(m => m.Value?.Character is not null)
                 .Select(m => (m.Key, m.Value with { Character = Whole(m.Value.Character) }))),
         };
