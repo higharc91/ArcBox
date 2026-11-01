@@ -122,7 +122,12 @@ public sealed record Face(long Order, Tile Tile, FaceKind Kind, Facing Facing, I
 /// <param name="Size">One frame's size.</param>
 /// <param name="Light">The light it gives, or null.</param>
 /// <param name="Lit">Takes the board's light. What the rules mean is left out, so it stays clear.</param>
-public sealed record Sprite(long Order, Tile Tile, ArtImage Image, Vector2 TopLeft, Vector2 Size, PropLight? Light = null, bool Lit = true) : BoardItem(Order, Tile);
+/// <param name="TileHeight">The manifest height of the prop in tiles (default 1).</param>
+public sealed record Sprite(long Order, Tile Tile, ArtImage Image, Vector2 TopLeft, Vector2 Size, PropLight? Light = null, bool Lit = true, int TileHeight = 1) : BoardItem(Order, Tile)
+{
+    /// <summary>True when this sprite is a prop of height 2 or more.</summary>
+    public bool IsTallProp => (Order & 0xFF) == (long)BoardLayer.Prop && TileHeight >= 2;
+}
 
 /// <summary>
 /// The board, ready to draw: every face and sprite in painter's order, and the area they cover. Pure: built from a
@@ -329,7 +334,7 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
                 continue;
             var topLeft = terrain.Centre(prop.At) - new Vector2(sprite.AnchorX, sprite.AnchorY);
             items.Add(new Sprite(BoardOrder.Key(prop.At, BoardLayer.Prop), prop.At, sprite.Image, topLeft, new Vector2(sprite.Width, sprite.Height),
-                terrain.Changes.Sunk.Contains(prop.At) ? null : sprite.Light));    // what went down with its tile has gone out, whatever the chasm is
+                terrain.Changes.Sunk.Contains(prop.At) ? null : sprite.Light, TileHeight: sprite.TileHeight));    // what went down with its tile has gone out, whatever the chasm is
         }
     }
 

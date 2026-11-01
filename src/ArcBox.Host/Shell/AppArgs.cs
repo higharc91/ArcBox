@@ -113,7 +113,7 @@ public sealed record AppArgs
                     args = args with { TacticsDemo = string.IsNullOrWhiteSpace(value) ? "river_crossing" : value };
                     break;
                 case "--world-demo":
-                    args = args with { WorldDemo = string.IsNullOrWhiteSpace(value) ? "ashen_ford" : value };
+                    args = args with { WorldDemo = string.IsNullOrWhiteSpace(value) ? "wood" : value };
                     break;
                 case "--walk-log" when value is null:
                     args = args with { WalkLog = true };

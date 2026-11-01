@@ -21,6 +21,25 @@ public sealed class WorldPlanTests
 
     public static TheoryData<string> Regions => ["ashen_ford", "hills"];
 
+    [Fact]
+    public void Wood_region_has_at_least_1500_tall_props_in_view_and_walkable_trail()
+    {
+        var ground = DemoRegion.Wood(160, 120);
+        Assert.True(ground.Map.Props.Length >= 6000, $"Expected >=6000 props, got {ground.Map.Props.Length}");
+
+        var tallIds = new HashSet<string> { "tree", "pine", "dead_tree", "lamp_post", "lantern" };
+        Assert.All(ground.Map.Props, p => Assert.Contains(p.Id, tallIds));
+
+        var start = DemoRegion.WoodStart(160, 120);
+        Assert.True(ground.Terrain.Walkable(start));
+        var route = WorldRoute.Across(ground.Terrain, start, ClassDef.DefaultJump);
+        Assert.True(route.Length >= 100, $"Expected route >= 100 tiles, got {route.Length}");
+
+        // In a view-sized area (e.g. 80x60 tiles), there should be >= 1500 tall props
+        var viewProps = ground.Map.Props.Count(p => p.At.X >= 10 && p.At.X < 90 && p.At.Y >= 20 && p.At.Y < 80);
+        Assert.True(viewProps >= 1500, $"Expected >= 1500 tall props in view, got {viewProps}");
+    }
+
     private static WorldGround GroundOf(string name) => name == "hills" ? HillsGround.Value : FordGround.Value;
 
     private static WorldPlan PlanOf(string name) => name == "hills" ? HillsPlan.Value : FordPlan.Value;

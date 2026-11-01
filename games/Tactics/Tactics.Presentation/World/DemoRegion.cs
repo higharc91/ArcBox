@@ -28,6 +28,8 @@ public static class DemoRegion
 
     private static readonly string[] Plain = ["tree", "pine", "bush", "rock_medium", "rock_large", "tall_grass", "stump", "boulder", "dead_tree", "crate"];
     private static readonly string[] Lit = ["torch", "campfire", "lamp_post", "lantern"];
+    private static readonly string[] TallPlain = ["tree", "pine", "dead_tree"];
+    private static readonly string[] TallLit = ["lamp_post", "lantern"];
 
     /// <summary>The region <paramref name="id"/> as the base pack at <paramref name="packRoot"/> has it, with only its stamped maps read.</summary>
     public static WorldGround FromPack(string packRoot, string id)
@@ -115,6 +117,67 @@ public static class DemoRegion
                 continue;
             var kinds = props.Count % PropsPerLight == 0 ? Lit : Plain;
             props.Add(new PropPlacement(kinds[random.Next(kinds.Length)], at, true, Cover.None));
+        }
+        return props.ToImmutable();
+    }
+
+    /// <summary>A dense wood with a trail winding through it, containing over 1,500 tall props in one view's reach.</summary>
+    public static WorldGround Wood(int width = 160, int height = 120)
+    {
+        var tiles = new byte[width * height * 3];
+        for (var y = 0; y < height; y++)
+            for (var x = 0; x < width; x++)
+                LayWood(tiles.AsSpan((y * width + x) * 3, 3), x, y, height);
+
+        var (columns, rows) = ((width + WorldRegion.ChunkSize - 1) / WorldRegion.ChunkSize, (height + WorldRegion.ChunkSize - 1) / WorldRegion.ChunkSize);
+        ImmutableArray<RegionChunk> chunks = [.. Enumerable.Range(0, rows).SelectMany(r => Enumerable.Range(0, columns).Select(c => Chunk(tiles, width, height, c, r)))];
+        var start = WoodStart(width, height);
+        var def = new RegionDef("demo_wood", "Demo wood", 0, [width, height], Materials, chunks, [new RegionStamp(PropsMap, new Tile(0, 0), 0)], [],
+            new RegionSpawns(start, start), []);
+        var props = BattleMap.FromBytes(PropsMap, 1, 1, new byte[3], ["void/deep"], ScatterWood(tiles, width, height),
+            ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty);
+        return WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap> { [PropsMap] = props });
+    }
+
+    /// <summary>Starting tile on the trail for <see cref="Wood"/>.</summary>
+    public static Tile WoodStart(int width, int height) => new(4, (int)Math.Round(WoodTrailAt(4, height)));
+
+    private static double WoodTrailAt(int x, int height) => height * 0.5 + height * 0.2 * Math.Sin(x * 0.045);
+
+    private static void LayWood(Span<byte> tile, int x, int y, int height)
+    {
+        var fromTrail = Math.Abs(y - WoodTrailAt(x, height));
+        if (fromTrail < 2.0)
+        {
+            tile[0] = 2; // rise
+            tile[1] = Dirt;
+            tile[2] = 0;
+            return;
+        }
+        var rolling = Math.Sin(x * 0.15) * Math.Cos(y * 0.12) + Math.Sin(x * 0.3 + y * 0.2);
+        var level = Math.Clamp((int)Math.Round(2.5 + rolling), 1, WorldRegion.MaxHeight);
+        var material = fromTrail < 3.5 ? GrassB : GrassA;
+        tile[0] = (byte)level;
+        tile[1] = material;
+        tile[2] = 0;
+    }
+
+    private static ImmutableArray<PropPlacement> ScatterWood(byte[] tiles, int width, int height)
+    {
+        var random = new Random(42);
+        var props = ImmutableArray.CreateBuilder<PropPlacement>();
+        var taken = new HashSet<Tile>();
+        var targetCount = 7200;
+        var attempts = 0;
+        while (props.Count < targetCount && attempts++ < 50000)
+        {
+            var at = new Tile(random.Next(width), random.Next(height));
+            var fromTrail = Math.Abs(at.Y - WoodTrailAt(at.X, height));
+            if (fromTrail < 1.8 || !taken.Add(at))
+                continue;
+            var isLit = props.Count % 12 == 0;
+            var kind = isLit ? TallLit[random.Next(TallLit.Length)] : TallPlain[random.Next(TallPlain.Length)];
+            props.Add(new PropPlacement(kind, at, true, Cover.None));
         }
         return props.ToImmutable();
     }

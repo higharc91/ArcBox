@@ -18,6 +18,7 @@ namespace ArcBox.Host.Games.Tactics;
 internal sealed partial class WorldDemo : Node
 {
     private const string Stress = "hilly";
+    private const string WoodSpec = "wood";
     private const float StepsPerSecond = 2 / 0.3f;      // twice the walking pace of a tile per 0.3 s
     private const double RegularFrameMs = 16;           // the task's line: a frame over this, regularly, stops the work
     private const double ColdSeconds = 1;               // frames this close to the start have the JIT in them
@@ -66,15 +67,33 @@ internal sealed partial class WorldDemo : Node
         RenderingServer.ViewportSetMeasureRenderTime(GetViewport().GetViewportRid(), true);
         _art = UnitArt.Load(_pack);
         var parts = _spec.Split(':');
-        var blocks = parts.Length > 1 ? int.Parse(parts[1], CultureInfo.InvariantCulture) : WorldTuning.BlockSize;
-        _canvas = new WorldCanvas(_pack, () => Ground(parts[0]), blocks);
+        var blocks = parts.Length > 1 && int.TryParse(parts[1], CultureInfo.InvariantCulture, out var b) ? b : WorldTuning.BlockSize;
+        bool separate = true;
+        TallProps.Mode mode = TallProps.Mode.PerBlock;
+        if (parts.Length > 1)
+        {
+            if (parts[1].Equals("baked", StringComparison.OrdinalIgnoreCase)) separate = false;
+            else if (parts[1].Equals("perprop", StringComparison.OrdinalIgnoreCase)) mode = TallProps.Mode.PerProp;
+            else if (parts[1].Equals("perblock", StringComparison.OrdinalIgnoreCase)) mode = TallProps.Mode.PerBlock;
+        }
+        _canvas = new WorldCanvas(_pack, () => Ground(parts[0]), blocks, separate, mode);
         AddChild(_canvas);
     }
 
     private WorldGround Ground(string region)
     {
-        var ground = region == Stress ? DemoRegion.Hilly(160, 120) : DemoRegion.FromPack(_pack, region);
-        var start = region == Stress ? new Tile(80, 60) : RegionStart(region);
+        var ground = region switch
+        {
+            Stress => DemoRegion.Hilly(160, 120),
+            WoodSpec => DemoRegion.Wood(160, 120),
+            _ => DemoRegion.FromPack(_pack, region),
+        };
+        var start = region switch
+        {
+            Stress => new Tile(80, 60),
+            WoodSpec => DemoRegion.WoodStart(160, 120),
+            _ => RegionStart(region),
+        };
         _route = WorldRoute.Across(ground.Terrain, start, ClassDef.DefaultJump);
         _spots = WorldSpots.Of(new BoardTerrain(ground.Map, null), ground.Terrain);
         _ground = ground;

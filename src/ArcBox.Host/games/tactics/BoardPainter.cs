@@ -1,4 +1,5 @@
 using Godot;
+using Tactics.Logic;
 using Tactics.Presentation.Board;
 
 namespace ArcBox.Host.Games.Tactics;
@@ -93,8 +94,23 @@ internal sealed class BoardPainter
     /// <summary>Loads an image the way items that lie <paramref name="flat"/> or stand will draw it. Only on the main thread: this reads a file.</summary>
     public void Preload(ArtImage image, bool flat) => Texture(image, flat);
 
+    /// <summary>True when <paramref name="drawn"/> is a prepared tall prop.</summary>
+    public static bool IsTallProp(object drawn) => drawn is DrawnSprite { Lit.IsTallProp: true };
+
+    /// <summary>The painter's order key of <paramref name="drawn"/>.</summary>
+    public static long OrderOf(object drawn) => drawn is DrawnSprite s ? s.Lit.Order : drawn is DrawnFace f ? f.Lit.Order : 0;
+
+    /// <summary>The screen target rectangle of <paramref name="drawn"/>.</summary>
+    public static Rect2 TargetOf(object drawn) => drawn is DrawnSprite s ? s.Target : default;
+
+    /// <summary>The tile of <paramref name="drawn"/>.</summary>
+    public static Tile TileOf(object drawn) => drawn is DrawnSprite s ? s.Lit.Sprite.Tile : default;
+
     /// <summary>Paints one item on <paramref name="canvas"/> as things stand at <paramref name="clock"/>. With no <paramref name="now"/>, its colours are as prepared.</summary>
-    public void Paint(CanvasItem canvas, object drawn, BoardLighting? now, double clock)
+    public void Paint(CanvasItem canvas, object drawn, BoardLighting? now, double clock) => Paint(canvas, drawn, now, clock, 1f);
+
+    /// <summary>Paints one item on <paramref name="canvas"/> with <paramref name="alpha"/> modulation.</summary>
+    public void Paint(CanvasItem canvas, object drawn, BoardLighting? now, double clock, float alpha)
     {
         if (drawn is DrawnFace face)
         {
@@ -102,7 +118,7 @@ internal sealed class BoardPainter
         }
         else if (drawn is DrawnSprite sprite)
         {
-            PaintSprite(canvas, sprite, now, clock);
+            PaintSprite(canvas, sprite, now, clock, alpha);
         }
     }
 
@@ -264,16 +280,21 @@ internal sealed class BoardPainter
         return drawn.FrameUvs;
     }
 
-    private static void PaintSprite(CanvasItem canvas, DrawnSprite drawn, BoardLighting? now, double clock)
+    private static void PaintSprite(CanvasItem canvas, DrawnSprite drawn, BoardLighting? now, double clock, float alpha = 1f)
     {
         if (drawn.Texture is not null)
         {
             var source = new Rect2(new Vector2(drawn.OneFrame ? 0 : drawn.Lit.Sprite.Image.FrameAt(clock) * drawn.Size.X, 0), drawn.Size);
             var light = now is null ? drawn.Baked : Colour(drawn.Lit.LightNow(now));
+            if (alpha < 1f)
+            {
+                light = new Color(light.R, light.G, light.B, light.A * alpha);
+            }
             canvas.DrawTextureRectRegion(drawn.Texture, drawn.Target, source, light);
             if (drawn.Glow is not null)
             {
-                canvas.DrawTextureRectRegion(drawn.Glow, drawn.Target, source);
+                var glow = alpha < 1f ? new Color(1, 1, 1, alpha) : Colors.White;
+                canvas.DrawTextureRectRegion(drawn.Glow, drawn.Target, source, glow);
             }
         }
     }

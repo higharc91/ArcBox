@@ -25,6 +25,9 @@ public sealed record LitFace(Face Face, ImmutableArray<LightProbe> Probes, bool 
 /// <param name="Glow">Draw what glows of it over that, unlit.</param>
 public sealed record LitSprite(Sprite Sprite, LightProbe? Probe, bool Glow) : LitItem(Sprite.Order)
 {
+    /// <summary>True when this sprite is a prop of height 2 or more.</summary>
+    public bool IsTallProp => Sprite.IsTallProp;
+
     /// <summary>What to modulate it by now.</summary>
     public Rgb LightNow(BoardLighting lighting) => Probe is null ? new Rgb(1, 1, 1) : lighting.At(Probe);
 

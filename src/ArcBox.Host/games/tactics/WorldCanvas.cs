@@ -53,7 +53,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         Failed,
     }
 
-    private sealed record Built(WorldGround Ground, WorldPlan Plan, object[][] Items, string Times);
+    private sealed record Built(WorldGround Ground, WorldPlan Plan, object[][] StaticItems, object[][] TallItems, object[][] AllItems, string Times);
 
     private const int BelowUi = -1;
     private const float ViewMargin = 64;                    // art pixels round the view for halos, the widest sway of any flame
@@ -64,6 +64,8 @@ internal sealed partial class WorldCanvas : CanvasLayer
     private readonly FrameTextures _frames = new();
     private readonly Func<WorldGround> _ground;
     private readonly int _blockSize;
+    private readonly bool _separateTallProps;
+    private readonly TallProps.Mode _tallPropsMode;
     private readonly List<WorldBlock> _blocks = [];
     private readonly List<WorldBlock> _recording = [];
     private readonly HashSet<int> _late = [];
@@ -71,13 +73,17 @@ internal sealed partial class WorldCanvas : CanvasLayer
 
     private Task<Built> _building = null!;
     private Node2D _world = null!;
+    private TallProps? _tallProps;
     private BoardCanvas _over = null!;
     private ColorRect _back = null!;
     private ColorRect _fade = null!;
     private BlockQueue _queue = null!;
     private object[][] _items = [];
+    private object[][] _tallItems = [];
+    private object[][] _allItems = [];
     private int _texture;
     private double _clock;
+    private double _delta;
     private double _fading;
     private double _msPerItem = FirstGuessMsPerItem;
     private int _backAt;
@@ -90,12 +96,15 @@ internal sealed partial class WorldCanvas : CanvasLayer
     private Task<(BlockPlan Block, object[] Items)[]>? _repainting;
 
     /// <summary>A world that shows what <paramref name="ground"/> builds, off the main thread, with art from <paramref name="packRoot"/>.</summary>
-    public WorldCanvas(string packRoot, Func<WorldGround> ground, int blockSize = WorldTuning.BlockSize)
+    public WorldCanvas(string packRoot, Func<WorldGround> ground, int blockSize = WorldTuning.BlockSize,
+        bool separateTallProps = true, TallProps.Mode tallPropsMode = TallProps.Mode.PerBlock)
     {
         _painter.Root = packRoot;
         _painter.Frames = _frames;
         _ground = ground;
         _blockSize = blockSize;
+        _separateTallProps = separateTallProps;
+        _tallPropsMode = tallPropsMode;
         Layer = BelowUi;
     }
 
@@ -320,15 +329,28 @@ internal sealed partial class WorldCanvas : CanvasLayer
         var planned = clock.Elapsed.TotalMilliseconds;
         closing.ThrowIfCancellationRequested();
         var baked = plan.Lighting.Active ? plan.Lighting : null;
-        var items = new object[plan.Blocks.Length][];
+        var staticItems = new object[plan.Blocks.Length][];
+        var tallItems = new object[plan.Blocks.Length][];
+        var allItems = new object[plan.Blocks.Length][];
         foreach (var block in plan.Blocks)
         {
             closing.ThrowIfCancellationRequested();
-            items[block.Index] = [.. block.Lit.Items.Select(i => BoardPainter.Prepare(i, baked))];
+            var prepared = block.Lit.Items.Select(i => BoardPainter.Prepare(i, baked)).ToArray();
+            allItems[block.Index] = prepared;
+            if (_separateTallProps)
+            {
+                staticItems[block.Index] = [.. prepared.Where(i => !BoardPainter.IsTallProp(i))];
+                tallItems[block.Index] = [.. prepared.Where(BoardPainter.IsTallProp)];
+            }
+            else
+            {
+                staticItems[block.Index] = prepared;
+                tallItems[block.Index] = [];
+            }
         }
         plan.DropProbes();
-        var prepared = clock.Elapsed.TotalMilliseconds;
-        return new Built(ground, plan, items, $"ground {parsed:0} ms, plan+light {planned - parsed:0} ms, bake {prepared - planned:0} ms, total {prepared:0} ms");
+        var preparedTime = clock.Elapsed.TotalMilliseconds;
+        return new Built(ground, plan, staticItems, tallItems, allItems, $"ground {parsed:0} ms, plan+light {planned - parsed:0} ms, bake {preparedTime - planned:0} ms, total {preparedTime:0} ms");
     }
 
     /// <summary>Puts the world where <paramref name="fit"/> says.</summary>
@@ -379,12 +401,23 @@ internal sealed partial class WorldCanvas : CanvasLayer
         var over = plan.Overlay(units);
         QueryMs = Stopwatch.GetElapsedTime(clock).TotalMilliseconds;
         OverItems = over.Length;
-        _over.SetDrawn(over.Select(at => _items[at.Block][at.Item]), over.Select(plan.OrderOf));
+        _tallProps?.Update(units, _delta, _clock);
+
+        if (_separateTallProps)
+        {
+            var nonTall = over.Where(at => !BoardPainter.IsTallProp(_allItems[at.Block][at.Item])).ToArray();
+            _over.SetDrawn(nonTall.Select(at => _allItems[at.Block][at.Item]), nonTall.Select(plan.OrderOf));
+        }
+        else
+        {
+            _over.SetDrawn(over.Select(at => _allItems[at.Block][at.Item]), over.Select(plan.OrderOf));
+        }
         _over.SetUnits(units, art);
     }
 
     public override void _Process(double delta)
     {
+        _delta = delta;
         _clock += delta;
         _frames.Step(_clock);
         SwapRepainted();
@@ -430,13 +463,21 @@ internal sealed partial class WorldCanvas : CanvasLayer
         var built = _building.Result;
         BuildTimes = built.Times;
         (Ground, Plan) = (built.Ground, built.Plan);
-        _items = built.Items;
+        _items = built.StaticItems;
+        _tallItems = built.TallItems;
+        _allItems = built.AllItems;
         _queue = new BlockQueue(Plan.Blocks);
         foreach (var block in Plan.Blocks)
         {
             var node = new WorldBlock(_painter, _items[block.Index], block.Z);
             _blocks.Add(node);
             _world.AddChild(node);
+        }
+
+        if (_separateTallProps)
+        {
+            _tallProps = new TallProps(_painter, Plan.Blocks, _tallItems, _tallPropsMode);
+            _world.AddChild(_tallProps);
         }
 
         _over = new BoardCanvas(_painter) { ZIndex = Plan.Blocks.Max(b => b.Z) + 1 };
@@ -469,6 +510,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
             {
                 block.Bind();
             }
+            _tallProps?.Bind();
             LoadMs = LoadMs with { Bind = Stopwatch.GetElapsedTime(clock).TotalMilliseconds };
             Now = Stage.Near;
             return;
@@ -484,6 +526,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         {
             _recording.Add(_blocks[block.Index]);
             _blocks[block.Index].Record();
+            _tallProps?.Record(block.Index);
         }
         _hurry = null;
     }

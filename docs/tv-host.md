@@ -302,6 +302,23 @@ The overlay query's worst is about 6.5 ms, once, on its first call behind the fa
 
 So recording costs about 0.6 µs an item, and the cost that's left in a frame is the draw calls, as texture changes break the batches: a battle's board has about 500. No modest TV box has been measured.
 
+### Tall props fading spike (2026-11-01)
+
+Tested with `--world-demo=wood` (160×120 tiles, 7,200 tall props, >1,500 in view reach, 230 tiles crossing) on RTX 5080 at 1920×1080:
+
+| | `wood:baked` (static blocks) | `wood` (`PerBlock` tall props) | `wood:perprop` (`PerProp` tall props) |
+|---|---|---|---|
+| Items, lit | 72,473 | 72,473 | 72,473 |
+| Off-thread build, with bake | 409 ms | 404 ms | 426 ms |
+| Frame ms (median, p95, p99, worst) | 6.94, 6.94, 6.94, 10.66 | 6.94, 6.94, 6.95, 10.29 | 6.94, 6.94, 7.14, 10.59 |
+| Frames over 16 ms | 0 of 4,946 | 0 of 4,946 | 0 of 4,942 |
+| Render CPU ms (median, worst) | 0.95, 1.96 ms | 0.72, 1.28 ms | 0.82, 1.50 ms |
+| GPU ms (median, worst) | 0.15, 2.63 ms | 0.05, 2.69 ms | 0.04, 0.28 ms |
+| Draw calls in view, at most | 3,199 | 1,954 | 1,520 |
+| Added engine memory at end | +14.5 MB | +14.1 MB | +31.3 MB |
+
+Decision: Fading passes. `PerBlock` maintains the 6.94 ms median, 0 frames over 16 ms, reduces draw calls to under 2,000, and avoids the engine node memory overhead of thousands of individual canvas items. Task 5 proceeds with fading.
+
 A build that fails, on a bad or half-downloaded pack, logs its error once. The scene then frees the world and shows the header with the region's name, and fights still work.
 
 ## Walking
