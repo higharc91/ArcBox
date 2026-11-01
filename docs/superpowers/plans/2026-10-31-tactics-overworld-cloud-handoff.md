@@ -44,7 +44,9 @@ The user's standard for this work, in their words: "Spend a ton of time on makin
 
 ## 3. Where things stand
 
-<!-- STATUS -->
+Expect about 3,600 .NET tests and 333 web tests, all passing, with 0 warnings. If they don't, stop and find out why before building on it.
+
+**What works now:** after Muster the party stands in Ashen Ford. The leader steers from an 8-way pad on their phone, and the party walks the real TV world with the camera following. Leader rotation, handover, saved position, a stop that survives a lost release, and TV drops are all done. The battle list is still reached with `battles`, and a list fight returns to the world. **The world has no story and no fights on the spot yet.**
 
 | Milestone | State | Where |
 |---|---|---|
@@ -62,11 +64,13 @@ Reports and proof shots are in `docs/superpowers/reports/2026-10-31-tactics-over
 
 Each milestone's plan is complete: read everything above its "### Task 1" first, because the flags and defaults there bind you.
 
-1. <!-- NEXT -->
-2. Build 5c from its plan.
-3. Build 5d from its plan.
-4. Review the whole branch deeply, with one independent reviewer per area (rules engine, adapter, TV, phone, content, tools), then one fix wave.
-5. Update `docs/superpowers/reports/2026-10-31-tactics-tv-scene.md` and add an overworld report, with open items ranked.
+1. **Finish Task 11 of 5b** if `git log` has no `feat(tactics-playtest): the bots walk`: see §5.
+2. **Catch engine failures,** the first item in §5.
+3. **Do the interaction fixes.** [The interaction review](../reports/2026-10-31-tactics-overworld/interaction-review-5b.md) has a ruling on each item. Do every **Do** item before 5c, with tests.
+4. Build 5c from its plan.
+5. Build 5d from its plan.
+6. Review the whole branch deeply, with one independent reviewer per area (rules engine, adapter, TV, phone, content, tools), then one fix wave.
+7. Update `docs/superpowers/reports/2026-10-31-tactics-tv-scene.md` and add an overworld report, with open items ranked.
 
 **How the work was run, and what paid off:** a fresh implementer per task or pair of tasks, then an independent reviewer told not to trust the implementer's report, then a fix round, then a scoped re-review. Reviewers probing real behaviour found far more than reading did. Keep these:
 
@@ -83,7 +87,8 @@ Each milestone's plan is complete: read everything above its "### Task 1" first,
 - **A second overlap remains:** `LastFree` can go stale if something spawns onto the tile a walker just left. Only `dragon_wakes` in `hall_of_the_flame`, with its `hpBelow` branch, might do this in the base pack. Choosing a fallback tile is a rules decision, so it's on the user's list.
 - **Battles that don't end:** about 1.4% of sweep battles hit the 1,500-iteration cap, mostly a passive hero against archers that Dodge forever at range. Not a hang, because a player who moves ends it. Worth a line in the AI's notes.
 
-- **A one-off followers lag:** once, with a rate limiter flooded and stops being lost, followers sat about 8 tiles behind the leader. Not reproduced since. <!-- FOLLOWERS -->
+- **Task 11, if unfinished:** Muster now lands on `walk`, so `tools/tactics-playtest/bots.cjs` must send `battles` or every `tools/tv-e2e.sh` mode fails. Add the walking modes, then measure thumb-to-TV latency (target ≤ 100 ms) and how long a killed or silent phone takes to raise the disconnect event. 5d and interaction review item 10 depend on that second number.
+- **A one-off followers lag:** once, with a rate limiter flooded and stops being lost, followers sat about 8 tiles behind the leader. Not reproduced since. Task 11 was asked to add a flooding bot and check.
 - **A flaky test, maybe:** one full run failed one unidentified test after Task 9. Three later runs and 3 after Task 10 were clean. If you see it, name it and fix it.
 - **One late crash:** in a baseline run the TV died about 7.3 s in, around quit, with speech on. Not seen since it went off, but the count is small.
 - **`Unable to create shader cache directory ShadowFrustumShaderRD/...`** appears in some filled-cache runs. Harmless so far, uninvestigated.
