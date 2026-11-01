@@ -55,7 +55,7 @@ public static class BoardOrder
 }
 
 /// <summary>What a <see cref="Face"/> is.</summary>
-public enum FaceKind { Under, Side, Lip, Top, Tint, Decal }
+public enum FaceKind { Under, Side, Lip, Top, Tint, Decal, Building, Shadow }
 
 /// <summary>Which way a <see cref="Face"/> looks: up, or along +U (screen lower right) or +V (screen lower left).</summary>
 public enum Facing { Up, U, V }
@@ -91,10 +91,15 @@ public abstract record BoardItem(long Order, Tile Tile);
 /// <param name="Grid">Outlined, as a tile the battle can use.</param>
 /// <param name="Lit">Takes the board's light. What the rules mean is left out, so it stays clear.</param>
 /// <param name="VertexTints">Per-corner tint colors before light (empty for uniform <see cref="Tint"/>).</param>
+/// <param name="Lights">What shows over it, unlit, once the light has gone down: a building's windows.</param>
+/// <param name="Part">The building it's a piece of, by its place in the map's buildings, or -1.</param>
 public sealed record Face(long Order, Tile Tile, FaceKind Kind, Facing Facing, ImmutableArray<Vector2> Points, ImmutableArray<Vector2> Uvs,
     ArtImage? Image, Rgb? Fill, float Shade = 1, float Alpha = 1, bool Grid = false, bool Lit = true,
-    ImmutableArray<Rgb> VertexTints = default) : BoardItem(Order, Tile)
+    ImmutableArray<Rgb> VertexTints = default, ArtImage? Lights = null, int Part = -1) : BoardItem(Order, Tile)
 {
+    /// <summary>It lies turned on a tile, so the TV gets its art through <see cref="DitherTexels"/>. A shadow lies down but its art is drawn upright, pixel for pixel.</summary>
+    public bool Flat => Facing == Facing.Up && Kind != FaceKind.Shadow;
+
     /// <summary>Its colour before any light: its fill, or white for art, at its shade.</summary>
     public Rgb Tint => (Fill ?? new Rgb(1, 1, 1)).Times(new Rgb(Shade, Shade, Shade));
 
@@ -146,7 +151,8 @@ public sealed record Face(long Order, Tile Tile, FaceKind Kind, Facing Facing, I
 /// <param name="Light">The light it gives, or null.</param>
 /// <param name="Lit">Takes the board's light. What the rules mean is left out, so it stays clear.</param>
 /// <param name="TileHeight">The manifest height of the prop in tiles (default 1).</param>
-public sealed record Sprite(long Order, Tile Tile, ArtImage Image, Vector2 TopLeft, Vector2 Size, PropLight? Light = null, bool Lit = true, int TileHeight = 1) : BoardItem(Order, Tile)
+/// <param name="Part">The building it hangs on, by its place in the map's buildings, or -1.</param>
+public sealed record Sprite(long Order, Tile Tile, ArtImage Image, Vector2 TopLeft, Vector2 Size, PropLight? Light = null, bool Lit = true, int TileHeight = 1, int Part = -1) : BoardItem(Order, Tile)
 {
     /// <summary>True when this sprite is a prop of height 2 or more.</summary>
     public bool IsTallProp => (Order & 0xFF) == (long)BoardLayer.Prop && TileHeight >= 2;
@@ -205,6 +211,7 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
         foreach (var tile in terrain.TilesIn(rect))
             AddTile(items, terrain, art, tile, world, origin);
         AddProps(items, terrain, art, rect);
+        BuildingPlan.Add(items, terrain, art, rect);
         AddZones(items, terrain, art, rect);
 
         return Of([.. items.OrderBy(i => i.Order).Select(i => !grid && i is Face { Grid: true } face ? face with { Grid = false } : i)]);

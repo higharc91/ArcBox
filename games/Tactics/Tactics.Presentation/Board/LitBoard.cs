@@ -68,8 +68,15 @@ public sealed record LitBoard(ImmutableArray<LitItem> Items, BoardLighting Light
 
     private static void AddFace(ImmutableArray<LitItem>.Builder items, Face face, BoardLighting lighting)
     {
+        if (face.Kind == FaceKind.Shadow)
+        {
+            // In cells as the top under it is: it's see-through, so the overlay can repaint it only over a cell of the top it repaints.
+            foreach (var cell in face.Cells())
+                items.Add(new LitFace(cell, [], true, false));
+            return;
+        }
         var lit = lighting.Active && face.Lit;
-        var glow = lighting.Active && face.Image?.Glow is not null;
+        var glow = lighting.Active && (face.Image?.Glow is not null || (face.Lights is not null && lighting.Ambient != BoardLighting.Daylight));
         if (!lit || face.Kind != FaceKind.Top || !Reached(face, lighting))
         {
             items.Add(new LitFace(face, lit ? Probes(face, lighting) : [], true, glow));

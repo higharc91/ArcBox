@@ -140,7 +140,8 @@ public sealed class BoardLighting
     private const float HaloAlpha = 0.55f;
     private const float HaloTilesToScale = 0.5f;
 
-    private static readonly Rgb Daylight = new(1, 1, 1);
+    /// <summary>Open air at noon: the art as drawn.</summary>
+    public static readonly Rgb Daylight = new(1, 1, 1);
 
     private readonly float[] _energy;
     private readonly float[] _mean;

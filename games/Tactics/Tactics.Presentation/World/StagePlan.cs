@@ -143,7 +143,7 @@ public sealed class StagePlan
         // What's in front matters only where it can cover the stage: the stamp and a tile round it, which walkers step in from, and above it.
         var near = new TileRect(stamp.X - 1, stamp.Y - 1, stamp.W + 2, stamp.H + 2);
         var (min, max) = (new Vector2(float.MaxValue), new Vector2(float.MinValue));
-        foreach (var item in built.Items.Where(i => near.Contains(i.Tile)))
+        foreach (var item in built.Items.Where(i => near.Contains(i.Tile) && i is not Face { Kind: FaceKind.Building }))
         {
             var (from, to) = BoardPlan.Bounds(item);
             (min, max) = (Vector2.Min(min, from), Vector2.Max(max, to));
@@ -257,7 +257,9 @@ internal sealed class GroundWindow
             .. world.StampedTiles.Where(t => t.X >= x && t.Y >= y && t.X < x + width && t.Y < y + height)
                 .Select(t => new Tile(t.X - x, t.Y - y)),
         ];
+        // All of them, in their order: a building stands on tiles outside a window, and its place in the list says which pieces go together.
+        ImmutableArray<BuildingPlacement> buildings = [.. world.Buildings.Select(b => b with { At = new Tile(b.At.X - x, b.At.Y - y) })];
         return BattleMap.FromBytes(world.Id, width, height, bytes, world.Materials, props,
-            ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty, stamped);
+            ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty, stamped, buildings);
     }
 }

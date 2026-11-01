@@ -398,6 +398,57 @@ public sealed class StagePlanTests(ITestOutputHelper output)
             Assert.Contains(skirt, f => f.Tile == missing && f.Kind == FaceKind.Decal);
     }
 
+    /// <summary>The ford with a tavern <paramref name="dx"/>, <paramref name="dy"/> from the stamp's far corner.</summary>
+    private static (WorldGround Ground, BattleStage Stage, Tile At) Built(int dx, int dy)
+    {
+        var (_, stage, map) = Ford.Value;
+        var at = new Tile(stage.Origin.X + stage.Width + dx, stage.Origin.Y + stage.Depth + dy);
+        var region = WorldRegion.From(Pack.Region("ashen_ford").Def with { Buildings = [new RegionBuilding("tavern", "red", at)] });
+        return (WorldGround.Of(region, new Dictionary<string, BattleMap> { ["river_crossing"] = map }, Pack.Manifests), stage, at);
+    }
+
+    [Theory]
+    [InlineData(1, -6)]
+    [InlineData(-6, 1)]
+    [InlineData(1, 1)]
+    public void A_building_in_front_of_the_stamp_stands_on_the_stage_exactly_as_in_the_world(int dx, int dy)
+    {
+        var (ground, stage, _) = Built(dx, dy);
+
+        var plan = StagePlan.Build(ground, stage, null, Pack.Art).Plan;
+
+        var world = BoardPlan.BuildBlock(new BoardTerrain(ground.Map, null), Pack.Art, new TileRect(0, 0, ground.Map.Width, ground.Map.Height), grid: true, world: true)
+            .Shifted(-BoardFit.StageOffset(stage)).Items.Select(i => i is Face f && !StampHolds(stage, f.Tile) ? f with { Grid = false } : i).Select(Whole).ToHashSet(StringComparer.Ordinal);
+        Assert.Contains(plan.Items, i => i is Face { Kind: FaceKind.Building });
+        Assert.All(plan.Items, i => Assert.Contains(Whole(i), world));
+    }
+
+    private static bool StampHolds(BattleStage stage, Tile tile) => stage.Holds(tile);
+
+    [Fact]
+    public void A_building_in_front_of_the_stamp_sorts_over_a_unit_on_the_stamp_behind_it()
+    {
+        var (ground, stage, _) = Built(1, -6);
+
+        var columns = StagePlan.Build(ground, stage, null, Pack.Art).Plan.Items.OfType<Face>().Where(f => f.Kind == FaceKind.Building).ToArray();
+
+        Assert.All(columns, c => Assert.True(c.Order > BoardOrder.Key(stage.Origin, BoardLayer.Unit)));
+    }
+
+    [Fact]
+    public void A_building_behind_the_stamp_stays_in_the_world_under_the_stage()
+    {
+        var (ground, stage, at) = Built(-stage0Width() - 3, -stage0Depth() - 3);
+
+        var plan = StagePlan.Build(ground, stage, null, Pack.Art).Plan;
+
+        Assert.DoesNotContain(plan.Items, i => i is Face { Kind: FaceKind.Building });
+    }
+
+    private static int stage0Width() => Ford.Value.Stage.Width;
+
+    private static int stage0Depth() => Ford.Value.Stage.Depth;
+
     [Fact]
     public void The_stage_draws_props_near_the_fight()
     {

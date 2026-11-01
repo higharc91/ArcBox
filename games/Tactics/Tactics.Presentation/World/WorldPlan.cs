@@ -92,7 +92,7 @@ public sealed class WorldPlan
         ImmutableArray<PlannedImage> images =
         [
             .. plans.SelectMany(p => p.Items)
-                .Select(i => i is Face face ? (face.Image, Flat: face.Facing == Facing.Up) : (((Sprite)i).Image, Flat: false))
+                .SelectMany(i => i is Face face ? [(face.Image, Flat: face.Flat), (Image: face.Lights, Flat: false)] : new[] { (Image: (ArtImage?)((Sprite)i).Image, Flat: false) })
                 .Where(i => i.Image is not null)
                 .DistinctBy(i => (i.Image!.Path, i.Flat))
                 .OrderBy(i => i.Image!.Path, StringComparer.Ordinal)

@@ -78,8 +78,11 @@ internal sealed class BoardPainter
         if (drawn is DrawnFace face)
         {
             var lit = face.Lit;
-            face.Texture = lit.Art ? Texture(lit.Face.Image, lit.Face.Facing == Facing.Up) : null;
-            face.Glow = lit.Glow && lit.Face.Image is { Glow: { } rule } image ? Glow(image, null, rule.Colour) : null;
+            face.Texture = lit.Art ? Texture(lit.Face.Image, lit.Face.Flat) : null;
+            face.Glow = !lit.Glow ? null
+                : lit.Face.Lights is { } lights ? Texture(lights, false)
+                : lit.Face.Image is { Glow: { } rule } image ? Glow(image, null, rule.Colour)
+                : null;
             face.OneFrame = Moves(lit.Face.Image);
         }
         else if (drawn is DrawnSprite sprite)
@@ -102,7 +105,7 @@ internal sealed class BoardPainter
     {
         if (drawn is DrawnFace face)
         {
-            PaintFace(canvas, face, now, clock);
+            PaintFace(canvas, face, now, clock, alpha);
         }
         else if (drawn is DrawnSprite sprite)
         {
@@ -217,10 +220,21 @@ internal sealed class BoardPainter
             baked is null ? Colors.White : Colour(lit.MeanLight(baked)));
     }
 
-    private static void PaintFace(CanvasItem canvas, DrawnFace drawn, BoardLighting? now, double clock)
+    private static void PaintFace(CanvasItem canvas, DrawnFace drawn, BoardLighting? now, double clock, float alpha = 1f)
     {
         LightUp(drawn, now);
         var uvs = drawn.OneFrame ? drawn.Uvs : FrameUvs(drawn, clock);
+        if (alpha < 1f)
+        {
+            // Only what's fading comes here, and it fades as whole faces: nothing else in a frame pays for this.
+            var colours = drawn.Colours.Select(c => new Color(c.R, c.G, c.B, c.A * alpha)).ToArray();
+            canvas.DrawPrimitive(drawn.Points, colours, uvs, drawn.Texture);
+            if (drawn.Glow is not null)
+            {
+                canvas.DrawPrimitive(drawn.Points, Unlit.Select(c => c with { A = alpha }).ToArray(), uvs, drawn.Glow);
+            }
+            return;
+        }
         if (drawn.Lit.Art)
         {
             if (drawn.Texture is null)

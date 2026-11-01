@@ -42,6 +42,44 @@ public static class DemoRegion
         return WorldGround.Of(WorldRegion.From(def), maps, ArtManifests.Load(packRoot));
     }
 
+    /// <summary>
+    /// A flat lawn with one tavern on it, across the corner of four blocks, a crate before it and a lamp post behind it: the proof of what sorting and fading a building takes.
+    /// </summary>
+    public static WorldGround Tavern(string packRoot)
+    {
+        const int side = WorldRegion.ChunkSize;
+        var def = new RegionDef("demo_tavern", "Demo tavern", 0, [side, side], ["grass/autumn"], [new RegionChunk(0, 0, Convert.ToBase64String(new byte[WorldRegion.ChunkBytes]))], [], [],
+            new RegionSpawns(TavernWalk()[0], TavernWalk()[0]), [],
+            [new RegionProps("crate", null, [new Tile(18, 15)]), new RegionProps("lamp_post", null, [new Tile(15, 12)])],
+            [new RegionBuilding("tavern", "red", new Tile(14, 14))]);
+        return WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap>(), ArtManifests.Load(packRoot));
+    }
+
+    /// <summary>Twice round <see cref="Tavern"/>, one tile from its walls.</summary>
+    public static ImmutableArray<Tile> TavernWalk()
+    {
+        var (left, top, right, bottom) = (13, 13, 17, 16);
+        ImmutableArray<Tile> lap =
+        [
+            .. Enumerable.Range(left, right - left).Select(x => new Tile(x, top)),
+            .. Enumerable.Range(top, bottom - top).Select(y => new Tile(right, y)),
+            .. Enumerable.Range(0, right - left).Select(i => new Tile(right - i, bottom)),
+            .. Enumerable.Range(0, bottom - top).Select(i => new Tile(left, bottom - i)),
+        ];
+        return [.. lap, .. lap];
+    }
+
+    /// <summary>Where <c>--world-demo=tavern</c> looks: a walker on each side of it.</summary>
+    public static ImmutableArray<WorldSpot> TavernSpots()
+    {
+        var look = new Tile(15, 15);
+        return
+        [
+            new WorldSpot("tavern-behind", look, new Tile(15, 13)), new WorldSpot("tavern-behind-right", look, new Tile(17, 13)),
+            new WorldSpot("tavern-door", look, new Tile(15, 16)), new WorldSpot("tavern-left", look, new Tile(13, 15)), new WorldSpot("tavern-right", look, new Tile(17, 15)),
+        ];
+    }
+
     /// <summary>One unit walking <paramref name="heading"/> at <paramref name="place"/>, <paramref name="seconds"/> into its stride: the party, until there is one.</summary>
     public static ImmutableArray<BoardUnit> StandIn(BoardTerrain terrain, UnitArt art, UnitPlace place, Vector2 heading, double seconds)
     {

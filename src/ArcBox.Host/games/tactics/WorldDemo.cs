@@ -19,10 +19,11 @@ internal sealed partial class WorldDemo : Node
 {
     private const string Stress = "hilly";
     private const string WoodSpec = "wood";
+    private const string TavernSpec = "tavern";
     private const float StepsPerSecond = 2 / 0.3f;      // twice the walking pace of a tile per 0.3 s
     private const double RegularFrameMs = 16;           // the task's line: a frame over this, regularly, stops the work
     private const double ColdSeconds = 1;               // frames this close to the start have the JIT in them
-    private const int SettleFrames = 3;                 // before a shot, for the overlay to have drawn what the shot is of
+    private const int FadeFrames = 40;                  // before a shot, for a fade to have finished, which also has the overlay drawn
     private const double SecondLook = 0.3;              // between two shots of water, to see that it moved
 
     private enum Stage { Loading, Crossing, Spots, Done }
@@ -78,16 +79,18 @@ internal sealed partial class WorldDemo : Node
         {
             Stress => DemoRegion.Hilly(160, 120),
             WoodSpec => DemoRegion.Wood(160, 120),
+            TavernSpec => DemoRegion.Tavern(_pack),
             _ => DemoRegion.FromPack(_pack, region),
         };
         var start = region switch
         {
             Stress => new Tile(80, 60),
             WoodSpec => DemoRegion.WoodStart(160, 120),
+            TavernSpec => DemoRegion.TavernWalk()[0],
             _ => RegionStart(region),
         };
-        _route = WorldRoute.Across(ground.Terrain, start, ClassDef.DefaultJump);
-        _spots = WorldSpots.Of(new BoardTerrain(ground.Map, null), ground.Terrain);
+        _route = region == TavernSpec ? DemoRegion.TavernWalk() : WorldRoute.Across(ground.Terrain, start, ClassDef.DefaultJump);
+        _spots = region == TavernSpec ? DemoRegion.TavernSpots() : WorldSpots.Of(new BoardTerrain(ground.Map, null), ground.Terrain);
         _ground = ground;
         return ground;
     }
@@ -223,7 +226,7 @@ internal sealed partial class WorldDemo : Node
         var place = UnitPlace.On(terrain, spot.Stand);
         _canvas.Place(WorldView.Centred(terrain.Centre(spot.Look)));
         _canvas.ShowUnits(DemoRegion.StandIn(terrain, _art, place, new System.Numerics.Vector2(1, 0), _clock), _art);
-        if (++_settling < SettleFrames)
+        if (++_settling < FadeFrames)
         {
             return;
         }

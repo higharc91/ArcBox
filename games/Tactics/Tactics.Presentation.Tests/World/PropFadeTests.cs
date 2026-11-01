@@ -220,6 +220,54 @@ public sealed class PropFadeTests
         Assert.Equal(over.OrderBy(o => plan.OrderOf(o.At)).Select(o => o.At), over.Select(o => o.At));
     }
 
+    private static (WorldPlan Plan, PropFade Fade) Tavern()
+    {
+        var plan = WorldPlan.Build(new BoardTerrain(DemoRegion.Tavern(Pack.Root).Map, null), Pack.Art);
+        return (plan, new PropFade(plan));
+    }
+
+    private static BoardUnit WalkerOn(WorldPlan plan, Tile tile) => MakeWalker(BoardOrder.Key(tile, BoardLayer.Unit), plan.Terrain.Centre(tile));
+
+    private static ItemAt[] Pieces(WorldPlan plan) =>
+    [
+        .. plan.Blocks.SelectMany(b => b.Lit.Items.Select((item, i) => (item, at: new ItemAt(b.Index, i))))
+            .Where(x => x.item is LitFace { Face.Part: >= 0 } or LitSprite { Sprite.Part: >= 0 }).Select(x => x.at),
+    ];
+
+    [Fact]
+    public void A_walker_behind_a_building_fades_all_of_it_with_its_smoke_and_sign()
+    {
+        var (plan, fade) = Tavern();
+
+        fade.Update([WalkerOn(plan, new Tile(15, 13))], dt: WorldTuning.PropFadeSeconds);
+
+        Assert.All(Pieces(plan), at => Assert.True(fade.IsFaded(at)));
+    }
+
+    [Theory]
+    [InlineData(15, 16)]    // at the tavern's door
+    [InlineData(17, 15)]    // beside it, on the right
+    [InlineData(25, 25)]    // nowhere near it
+    public void A_walker_it_doesnt_hide_fades_nothing(int x, int y)
+    {
+        var (plan, fade) = Tavern();
+
+        fade.Update([WalkerOn(plan, new Tile(x, y))], dt: WorldTuning.PropFadeSeconds);
+
+        Assert.All(Pieces(plan), at => Assert.False(fade.IsFaded(at)));
+    }
+
+    [Fact]
+    public void Nothing_of_a_building_fades_in_a_fight()
+    {
+        var (plan, fade) = Tavern();
+        fade.InFight = true;
+
+        fade.Update([WalkerOn(plan, new Tile(15, 13))], dt: WorldTuning.PropFadeSeconds);
+
+        Assert.Empty(fade.Faded);
+    }
+
     [Fact]
     public void A_faded_tree_isnt_repainted_solid_over_a_walker()
     {

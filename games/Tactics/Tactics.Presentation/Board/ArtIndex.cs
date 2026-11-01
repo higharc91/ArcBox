@@ -41,9 +41,17 @@ public sealed class ArtIndex
     private sealed record PropFamily(ImmutableArray<(string Name, string Path)> Variants, int Frames, double Fps,
         int Width, int Height, int AnchorX, int AnchorY, int TileHeight, PropLight? Light, ImmutableDictionary<string, Rgb> Colours);
 
+    private sealed record BuildingVariant(string Image, string? Shadow, string? Lights);
+
+    private sealed record BuildingFamily(ImmutableDictionary<string, BuildingVariant> Variants, int Frames, double Fps, Vector2 Size, Vector2 Origin, int Width, int Depth,
+        ImmutableArray<ImmutableArray<bool>> Blocks, bool Walkable, ImmutableArray<Vector2> Smoke, ImmutableArray<Vector2> Signs, string? Sign, ImmutableArray<Vector2> Glows);
+
     private readonly Dictionary<string, Family> _textures = new(StringComparer.Ordinal);
     private readonly Dictionary<string, PropFamily> _props = new(StringComparer.Ordinal);
     private readonly Dictionary<string, HazardArt> _hazards = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, BuildingFamily> _buildings = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, OverlayArt> _overlays = new(StringComparer.Ordinal);
+    private string _root = "";
 
     private ArtIndex()
     {
@@ -53,7 +61,7 @@ public sealed class ArtIndex
     public static ArtIndex Load(string packRoot)
     {
         string Read(string set) => File.ReadAllText(Path.Combine(packRoot, set, "manifest.json"));
-        var index = new ArtIndex();
+        var index = new ArtIndex { _root = packRoot };
         foreach (var set in new[] { "terrain", "dungeon" })
         {
             using var doc = JsonDocument.Parse(Read(set));
@@ -65,6 +73,8 @@ public sealed class ArtIndex
             index.AddProps(dungeon.RootElement.GetProperty("props"), "dungeon/");
         using (var hazards = JsonDocument.Parse(Read("hazards")))
             index.AddHazards(hazards.RootElement);
+        using (var town = JsonDocument.Parse(Read("town")))
+            index.AddTown(town.RootElement);
         using (var recipe = JsonDocument.Parse(Read("dungeon")))
             index.Lighting = Recipe(recipe.RootElement);
         return index;
@@ -99,6 +109,19 @@ public sealed class ArtIndex
     /// <summary>The hazard, or null if the pack has no such hazard.</summary>
     public HazardArt? Hazard(string id) => _hazards.GetValueOrDefault(id);
 
+    /// <summary>The building in <paramref name="variant"/>, or null if the pack has no such building or variant. Reads where its art has pixels, once per image.</summary>
+    public BuildingArt? Building(string id, string variant)
+    {
+        if (!_buildings.TryGetValue(id, out var family) || !family.Variants.TryGetValue(variant, out var files))
+            return null;
+        ArtImage Strip(string path, int frames) => new(path, frames, frames > 1 ? family.Fps : 0, (int)family.Size.Y);
+        var image = Strip(files.Image, family.Frames);
+        return new BuildingArt(id, image, files.Shadow is { } shadow ? Strip(shadow, 1) : null, files.Lights is { } lights ? Strip(lights, family.Frames) : null, family.Size, family.Origin,
+            family.Width, family.Depth, family.Blocks, family.Walkable, family.Smoke, _overlays.GetValueOrDefault("smoke"), family.Signs,
+            family.Sign is { } sign ? _overlays.GetValueOrDefault(sign) : null, family.Glows, BuildingShape.Of(Path.Combine(_root, files.Image), (int)family.Size.X),
+            files.Shadow is { } cast ? BuildingShape.ShadowTiles(Path.Combine(_root, cast), family.Origin) : []);
+    }
+
     /// <summary>A decal texture by its shorthand name (e.g. "scorch_burnt") or family and variant.</summary>
     public ArtImage? Decal(string name, string? variant = null)
     {
@@ -121,6 +144,33 @@ public sealed class ArtIndex
 
     /// <summary>A decal texture by <see cref="ArtRef"/>.</summary>
     public ArtImage? Decal(ArtRef decal) => Texture(decal);
+
+    private void AddTown(JsonElement town)
+    {
+        const string prefix = "town/";
+        static ImmutableArray<Vector2> Points(JsonElement attach, string name)
+            => attach.TryGetProperty(name, out var points) ? [.. points.EnumerateArray().Select(Point)] : [];
+        foreach (var entry in town.GetProperty("overlays").EnumerateObject())
+        {
+            var e = entry.Value;
+            _overlays[entry.Name] = new OverlayArt(new ArtImage(prefix + e.GetProperty("image").GetString(), e.GetProperty("frames").GetInt32(), e.GetProperty("fps").GetDouble(),
+                e.GetProperty("size")[1].GetInt32()), Point(e.GetProperty("size")), Point(e.GetProperty("anchor")));
+        }
+        foreach (var entry in town.GetProperty("buildings").EnumerateObject())
+        {
+            var e = entry.Value;
+            var blocks = e.GetProperty("blocks");
+            var rows = blocks[0].ValueKind == JsonValueKind.Array ? blocks.EnumerateArray().ToArray() : [blocks];
+            static string? File(JsonElement variant, string name) => variant.TryGetProperty(name, out var file) ? prefix + file.GetString() : null;
+            var attach = e.GetProperty("attach");
+            _buildings[entry.Name] = new BuildingFamily(
+                e.GetProperty("variants").EnumerateObject().ToImmutableDictionary(v => v.Name, v => new BuildingVariant(File(v.Value, "image")!, File(v.Value, "shadow"), File(v.Value, "lights")), StringComparer.Ordinal),
+                e.GetProperty("frames").GetInt32(), e.GetProperty("fps").GetDouble(), Point(e.GetProperty("size")), Point(e.GetProperty("origin")),
+                e.GetProperty("footprint")[0].GetInt32(), e.GetProperty("footprint")[1].GetInt32(),
+                [.. rows.Select(r => r.EnumerateArray().Select(b => b.GetInt32() != 0).ToImmutableArray())], e.GetProperty("walkable").GetBoolean(),
+                Points(attach, "smoke"), Points(attach, "sign"), e.TryGetProperty("sign", out var sign) ? sign.GetString() : null, Points(attach, "light"));
+        }
+    }
 
     private static (string Name, string Path) Pick(ImmutableArray<(string Name, string Path)> variants, IEnumerable<string> prefer)
     {

@@ -11,8 +11,11 @@ namespace Tactics.Presentation.World;
 /// </summary>
 public sealed class PropFade
 {
-    /// <summary>A tall prop tracked for occlusion and fading.</summary>
-    private readonly record struct TallProp(ItemAt At, long Order, ArtArea Area);
+    /// <summary>
+    /// A tall prop or a piece of a building, tracked for occlusion and fading. Pieces of a <paramref name="Group"/> fade together, and only a <paramref name="Covers"/> piece,
+    /// a building's wall and not its smoke, fades them.
+    /// </summary>
+    private readonly record struct TallProp(ItemAt At, long Order, ArtArea Area, int Group, bool Covers);
 
     private const float Solid = 0.999f;
 
@@ -21,6 +24,7 @@ public sealed class PropFade
     private readonly float[] _alphas;
     private readonly float[] _targetAlphas;
     private readonly bool[] _faded;
+    private readonly bool[] _covered;
     private readonly List<int> _fadedNow = [];
     private readonly List<int> _flipped = [];
     private bool _inFight;
@@ -29,6 +33,7 @@ public sealed class PropFade
     public PropFade(WorldPlan plan)
     {
         _props = [.. Collect(plan)];
+        _covered = new bool[_props.Length == 0 ? 0 : _props.Max(p => p.Group) + 1];
         _byAt = new Dictionary<ItemAt, int>(_props.Length);
         _alphas = new float[_props.Length];
         _targetAlphas = new float[_props.Length];
@@ -64,15 +69,25 @@ public sealed class PropFade
 
     private static IEnumerable<TallProp> Collect(WorldPlan plan)
     {
+        var buildings = plan.Terrain.Map.Buildings.Length;
+        var (group, tall) = (buildings, 0);
         foreach (var block in plan.Blocks)
         {
             for (var i = 0; i < block.Lit.Items.Length; i++)
             {
-                if (block.Lit.Items[i] is LitSprite { IsTallProp: true } sprite)
+                var (drawn, part, covers) = block.Lit.Items[i] switch
                 {
-                    var (min, max) = BoardPlan.Bounds(sprite.Sprite);
-                    yield return new TallProp(new ItemAt(block.Index, i), sprite.Order, new ArtArea(min, max));
+                    LitSprite { IsTallProp: true } sprite => (sprite.Sprite, -1, true),
+                    LitSprite { Sprite.Part: >= 0 } sprite => (sprite.Sprite, sprite.Sprite.Part, false),
+                    LitFace { Face.Part: >= 0 } face => ((BoardItem)face.Face, face.Face.Part, true),
+                    _ => (default(BoardItem), -1, false),
+                };
+                if (drawn is null)
+                {
+                    continue;
                 }
+                var (min, max) = BoardPlan.Bounds(drawn);
+                yield return new TallProp(new ItemAt(block.Index, i), drawn.Order, new ArtArea(min, max), part >= 0 ? part : group + tall++, covers);
             }
         }
     }
@@ -149,18 +164,20 @@ public sealed class PropFade
 
     private void UpdateTargets(IReadOnlyList<BoardUnit> walkers)
     {
-        for (var i = 0; i < _props.Length; i++)
+        Array.Clear(_covered);
+        if (!_inFight)
         {
-            var occluded = false;
-            if (!_inFight)
+            foreach (var prop in _props)
             {
-                var prop = _props[i];
-                for (var w = 0; w < walkers.Count && !occluded; w++)
+                for (var w = 0; prop.Covers && !_covered[prop.Group] && w < walkers.Count; w++)
                 {
-                    occluded = prop.Order > walkers[w].Order && prop.Area.Overlaps(WorldPlan.AreaOf(walkers[w]));
+                    _covered[prop.Group] = prop.Order > walkers[w].Order && prop.Area.Overlaps(WorldPlan.AreaOf(walkers[w]));
                 }
             }
-            _targetAlphas[i] = occluded ? WorldTuning.PropFadeAlpha : 1f;
+        }
+        for (var i = 0; i < _props.Length; i++)
+        {
+            _targetAlphas[i] = _covered[_props[i].Group] ? WorldTuning.PropFadeAlpha : 1f;
         }
     }
 }

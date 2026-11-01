@@ -338,6 +338,78 @@ public sealed class OverlayPictureTests
         Assert.Equal(0, wrong);
     }
 
+    private static readonly Lazy<(WorldGround Ground, Sheet Sheet)> Tavern = new(() =>
+    {
+        var ground = DemoRegion.Tavern(Pack.Root);
+        return (ground, Read(WorldPlan.Build(new BoardTerrain(ground.Map, null), Pack.Art)));
+    });
+
+    [Fact]
+    public void The_tavern_is_really_drawn_and_blocks_where_its_manifest_says()
+    {
+        var (ground, sheet) = Tavern.Value;
+
+        Assert.Contains(sheet.Plan.Blocks.SelectMany(b => b.Plan.Items), i => i is Face { Kind: FaceKind.Building });
+        Assert.All(DemoRegion.TavernWalk(), t => Assert.True(ground.Terrain.Walkable(t), $"{t}"));
+    }
+
+    [Fact]
+    public void A_walk_all_the_way_round_a_tavern_comes_out_as_true_painters_order()
+    {
+        var (_, sheet) = Tavern.Value;
+
+        var (wrong, worst, mean, most) = Sweep(sheet, DemoRegion.TavernWalk(), 0.11f, _output, u => sheet.Plan.Overlay(u));
+
+        _output.WriteLine($"{wrong} wrong frames, worst {worst} px, mean {mean:0.0} items, most {most}");
+        Assert.Equal(0, wrong);
+    }
+
+    [Fact]
+    public void A_walk_round_a_tavern_that_fades_it_comes_out_as_true_painters_order()
+    {
+        var (_, sheet) = Tavern.Value;
+
+        var (wrong, worst, faded) = Faded(sheet, Walked(sheet.Plan.Terrain, DemoRegion.TavernWalk(), 0.11f), 0.03, _output);
+
+        _output.WriteLine($"{wrong} wrong frames, worst {worst} px, {faded} frames with a fade");
+        Assert.True(faded > 0);
+        Assert.Equal(0, wrong);
+    }
+
+    [Fact]
+    public void A_party_split_across_a_tavern_keeps_the_one_in_front_clear_of_it()
+    {
+        var (_, sheet) = Tavern.Value;
+        var terrain = sheet.Plan.Terrain;
+        var (behind, front) = (UnitPlace.On(terrain, new Tile(15, 13)), UnitPlace.On(terrain, new Tile(15, 16)));
+        var places = new Dictionary<string, UnitPlace> { ["a"] = behind, ["b"] = front, ["c"] = behind };
+
+        var (wrong, worst, faded) = Faded(sheet, Enumerable.Repeat(places, 30), 1 / 60.0, _output);
+
+        _output.WriteLine($"{wrong} wrong frames, worst {worst} px");
+        Assert.Equal(30, faded);
+        Assert.Equal(0, wrong);
+    }
+
+    [Fact]
+    public void The_tavern_as_its_blocks_record_it_is_true_painters_order_where_its_art_has_pixels()
+    {
+        var sheet = Read(WorldPlan.Build(new BoardTerrain(Tavern.Value.Ground.Map, null), Pack.Art), masked: true);
+        var (min, max) = (new Vector2(float.MaxValue), new Vector2(float.MinValue));
+        foreach (var shape in sheet.All)
+            (min, max) = (Vector2.Min(min, shape.Min), Vector2.Max(max, shape.Max));
+        var corner = new Vector2(MathF.Floor(min.X), MathF.Floor(min.Y));
+        var (width, height) = ((int)(max.X - corner.X) + 2, (int)(max.Y - corner.Y) + 2);
+        var (drawn, truth) = (new int[width * height], new int[width * height]);
+
+        foreach (var shape in sheet.All)
+            Paint(drawn, corner, width, height, shape);
+        foreach (var shape in sheet.All.OrderBy(s => s.Order).ThenBy(s => s.Id))
+            Paint(truth, corner, width, height, shape);
+
+        Assert.Equal(0, drawn.Zip(truth).Count(p => p.First != p.Second));
+    }
+
     [Fact]
     public void Without_the_closure_the_walk_goes_wrong_so_this_test_can_fail()
     {
