@@ -56,6 +56,8 @@ public sealed class TacticsGameTests
             Assert.Equal(TacticsPhase.Muster, Game.Phase);
             for (var i = 0; i < 4; i++)
                 Send(i, "pickClass", new { @class = FourClasses[i] });
+            Assert.Equal(TacticsPhase.Exploration, Game.Phase);
+            Send(0, "battles");
             Assert.Equal(TacticsPhase.EncounterPick, Game.Phase);
             if (everyoneAway)
                 for (var i = 1; i < 4; i++)
@@ -64,6 +66,15 @@ public sealed class TacticsGameTests
             Assert.Equal(TacticsPhase.Battle, Game.Phase);
             if (everyoneAway)
                 Harness.SetConnected(0, false);
+        }
+
+        /// <summary>Starts, and everyone picks a class, which puts the party in the world.</summary>
+        public void ToWalking()
+        {
+            Harness.StartCampaign(Lease);
+            for (var i = 0; i < 4; i++)
+                Send(i, "pickClass", new { @class = FourClasses[i] });
+            Assert.Equal(TacticsPhase.Exploration, Game.Phase);
         }
 
         /// <summary>Lets time pass in fallback-timer steps until the battle is over (or the step budget runs out).</summary>

@@ -43,6 +43,7 @@ public sealed class HostViewContractTests
         h.StartCampaign(new FakeCampaignLease(info, new TacticsCampaignRules(rules).NewDocument(info)));
         for (var i = 0; i < classes.Length; i++)
             h.Input(i, new { action = "pickClass", data = new { @class = classes[i] } });
+        h.Input(0, new { action = "battles" });
         h.Input(0, new { action = "pickEncounter", data = new { encounter = "river_crossing" } });
 
         var battle = OverTheWire(game).Battle!;
@@ -75,11 +76,19 @@ public sealed class HostViewContractTests
 
         var muster = OverTheWire(game);
         Assert.Equal("Muster · 0 ready", PhaseScreen.Of(muster).Meta);
+        Assert.Equal("ashen_ford", muster.Explore!.Region);
 
         h.Input(0, new { action = "pickClass", data = new { @class = "fighter" } });
         Assert.Equal(["Player1"], PhaseScreen.Of(OverTheWire(game)).Rows.Select(r => r.Title));
         h.Input(1, new { action = "pickClass", data = new { @class = "cleric" } });
 
+        var walking = OverTheWire(game);
+        Assert.Equal("Exploration", walking.Phase);
+        Assert.Equal("Exploration · The Ashen Ford", PhaseScreen.Of(walking).Meta);
+        Assert.Equal(["Player1", "Player2"], walking.Explore!.Party.Select(w => w.Name));
+        Assert.All(walking.Explore.Party, w => Assert.StartsWith("characters.class_", w.Sprite));
+
+        h.Input(0, new { action = "battles" });
         var pick = PhaseScreen.Of(OverTheWire(game));
         Assert.Contains(pick.Rows, r => r is { Title: "River Crossing", Detail: "4–6 players · +2 AI companions", Value: "Lv 1" });
 
@@ -94,11 +103,13 @@ public sealed class HostViewContractTests
         Assert.NotEmpty(fight.Battle.Beats.SelectMany(b => b.Events));   // the polymorphic events survive the trip
         Assert.StartsWith("Battle · River Crossing · Round ", PhaseScreen.Of(fight).Meta);
         Assert.NotNull(fight.Battle.Board);                              // and so do the board's changes
+        Assert.Equal("ashen_ford", fight.Explore!.Region);               // a TV joining mid-fight still learns the region
 
         for (var step = 0; step < 20_000 && game.Phase == TacticsPhase.Battle; step++)
             h.Advance(TimeSpan.FromSeconds(7));
         h.SetConnected(0, true);
 
+        Assert.NotNull(OverTheWire(game).Explore);
         var over = PhaseScreen.Of(OverTheWire(game));
         Assert.StartsWith("Results · ", over.Meta);
         Assert.Equal(2, over.Rows.Length);
@@ -118,6 +129,7 @@ public sealed class HostViewContractTests
         h.StartCampaign(new FakeCampaignLease(info, new TacticsCampaignRules(rules).NewDocument(info)));
         for (var i = 0; i < classes.Length; i++)
             h.Input(i, new { action = "pickClass", data = new { @class = classes[i] } });
+        h.Input(0, new { action = "battles" });
         h.Input(0, new { action = "pickEncounter", data = new { encounter = "warlord_bridge" } });
 
         var battle = OverTheWire(game).Battle!;
@@ -239,6 +251,7 @@ public sealed class HostViewContractTests
         h.StartCampaign(new FakeCampaignLease(info, new TacticsCampaignRules(rules).NewDocument(info)));
         for (var i = 0; i < classes.Length; i++)
             h.Input(i, new { action = "pickClass", data = new { @class = classes[i] } });
+        h.Input(0, new { action = "battles" });
         h.Input(0, new { action = "pickEncounter", data = new { encounter } });
         for (var i = 0; i < classes.Length; i++)
             h.SetConnected(i, false);

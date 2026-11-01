@@ -80,6 +80,7 @@ public sealed class MusicChoiceTests
     [Theory]
     [InlineData("Muster", "title")]
     [InlineData("EncounterPick", "explore")]
+    [InlineData("Exploration", "explore")]
     public void The_screens_before_a_fight_have_their_own_tunes(string phase, string track)
         => Assert.Equal(new MusicCue(track), MusicChoice.Of(View(phase)));
 
@@ -94,6 +95,7 @@ public sealed class MusicChoiceTests
         Assert.Equal("amb_river", MusicChoice.AmbienceOf(View("Battle", Fight("river_crossing", "river_crossing"))));
         Assert.Null(MusicChoice.AmbienceOf(View("Results", outcome: "Won")));
         Assert.Null(MusicChoice.AmbienceOf(View("Muster")));
+        Assert.Null(MusicChoice.AmbienceOf(View("Exploration")));
     }
 
     [Fact]

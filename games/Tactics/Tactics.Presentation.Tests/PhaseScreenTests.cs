@@ -27,6 +27,25 @@ public sealed class PhaseScreenTests
     }
 
     [Fact]
+    public void Exploration_says_where_the_party_is_and_has_no_board()
+    {
+        var view = View("Exploration", "Ana leads the party", battle: Fight()) with
+        {
+            Explore = new ExploreView("ashen_ford", "The Ashen Ford", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], "Ana"),
+        };
+
+        var screen = PhaseScreen.Of(view);
+
+        Assert.Equal("Exploration · The Ashen Ford", screen.Meta);
+        Assert.Equal("Ana leads the party", screen.Title);
+        Assert.Equal("tactics-exploration", screen.Shot);
+        Assert.Null(screen.Board);
+    }
+
+    [Fact]
+    public void Exploration_with_no_region_in_the_view_still_reads() => Assert.Equal("Exploration", PhaseScreen.Of(View("Exploration")).Meta);
+
+    [Fact]
     public void A_phase_number_this_build_does_not_define_only_shows_the_banner()
     {
         var screen = PhaseScreen.Of(View("99", "Hello", battle: Fight()));

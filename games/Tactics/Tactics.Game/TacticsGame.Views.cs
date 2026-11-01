@@ -111,6 +111,37 @@ public sealed record ClassOption(string Id, string Name, string Role);
 /// <summary>A member's line on the results screen.</summary>
 public sealed record ResultLine(string Name, int Xp, ImmutableArray<string> Injuries);
 
+/// <summary>One step the party took: the tile it reached and how long the step takes.</summary>
+/// <param name="Seq">The step's number, which only goes up.</param>
+/// <param name="To">The tile at the end of it.</param>
+/// <param name="Ms">How long it takes to walk.</param>
+public sealed record WalkLeg(int Seq, Tile To, int Ms);
+
+/// <summary>A member of the party on the TV.</summary>
+/// <param name="Id">Their profile.</param>
+/// <param name="Name">Their player's name.</param>
+/// <param name="Sprite">Their sprite key (<see cref="HostSprite"/>).</param>
+/// <param name="Here">True while their phone is connected.</param>
+/// <param name="Leads">True for the leader.</param>
+public sealed record WalkerView(string Id, string Name, string Sprite, bool Here, bool Leads);
+
+/// <summary>
+/// The party in the world, for the TV: in every phase once a region exists, so a TV that joins mid-fight can learn the region. It
+/// changes only when a step commits or <paramref name="Held"/> does.
+/// </summary>
+/// <param name="Region">The region's id.</param>
+/// <param name="Name">The region's name.</param>
+/// <param name="Epoch">Changes on a teleport, or a new session: the path can't be followed across it, so the TV snaps.</param>
+/// <param name="Seq">The number of the last step.</param>
+/// <param name="At">The leader's tile.</param>
+/// <param name="Facing">The tile the leader faces.</param>
+/// <param name="Held">True while the leader holds a direction.</param>
+/// <param name="Legs">The last few steps, oldest first. The TV can miss views, so it fills in from these.</param>
+/// <param name="Party">The party, in member order.</param>
+/// <param name="Leader">The leader's player's name, or null with nobody here to lead.</param>
+public sealed record ExploreView(string Region, string Name, int Epoch, int Seq, Tile At, Tile Facing, bool Held,
+    ImmutableArray<WalkLeg> Legs, ImmutableArray<WalkerView> Party, string? Leader);
+
 /// <summary>The TV's view of a tactics session (adapter spec §8).</summary>
 /// <param name="Phase">The phase.</param>
 /// <param name="Banner">The prompt banner.</param>
@@ -125,9 +156,10 @@ public sealed record ResultLine(string Name, int Xp, ImmutableArray<string> Inju
 /// At Results, the battle as it ended. The blow that ends a battle goes straight to Results, so no <paramref name="Battle"/>
 /// ever carries it: without this the TV could never play it.
 /// </param>
+/// <param name="Explore">The party in the world, in every phase; null for a pack with no region.</param>
 public sealed record TacticsHostView(string Phase, string Banner, string? Notice, int PartyLevel,
     ImmutableArray<string> Mustered, ImmutableArray<EncounterOption>? Encounters, BattleView? Battle,
-    string? Outcome, ImmutableArray<ResultLine>? Results, BattleView? LastBattle = null);
+    string? Outcome, ImmutableArray<ResultLine>? Results, BattleView? LastBattle = null, ExploreView? Explore = null);
 
 public sealed partial class TacticsGame
 {
@@ -137,7 +169,7 @@ public sealed partial class TacticsGame
         _phase == TacticsPhase.EncounterPick ? EncounterOptions() : null,
         _doc.Battle is not null && _phase is TacticsPhase.Battle or TacticsPhase.Resuming ? BattleViewOf() : null,
         _result?.Outcome.ToString(), _phase == TacticsPhase.Results ? ResultLines() : null,
-        _phase == TacticsPhase.Results ? _lastBattle : null);
+        _phase == TacticsPhase.Results ? _lastBattle : null, ExploreViewOf());
 
     /// <inheritdoc />
     public ControllerView PlayerView(PlayerId id)
@@ -147,12 +179,13 @@ public sealed partial class TacticsGame
             return new WaitView("Waiting…");
         var view = _phase switch
         {
-            TacticsPhase.Muster when _doc.For(profile) is null => Custom(Screens.PickClass, new
+            TacticsPhase.Muster or TacticsPhase.Exploration when _doc.For(profile) is null => Custom(Screens.PickClass, new
             {
                 classes = Rules.Classes.Values.Select(c => new ClassOption(c.Id, c.Name, c.Role)),
                 portal = PortalPath(),
             }),
             TacticsPhase.Muster => new WaitView("Waiting for everyone to choose a class"),
+            TacticsPhase.Exploration => WalkScreen(player, profile),
             TacticsPhase.EncounterPick when IsVip(player) => Custom(Screens.PickEncounter, new { encounters = EncounterOptions() }),
             TacticsPhase.EncounterPick => new WaitView($"Waiting for {Vip?.Name ?? "the host"} to choose a battle"),
             TacticsPhase.Battle => BattleScreen(profile),
@@ -166,10 +199,48 @@ public sealed partial class TacticsGame
             TacticsPhase.Resuming => new WaitView($"Resuming… waiting for {string.Join(", ", Waiting())}"),
             _ => (ControllerView)new WaitView("Waiting…"),
         };
-        return view is CustomView custom && _toasts.TryGetValue(id, out var toast)
+        // A toast changes the view, and a new view means a new viewId under the leader's thumb.
+        return view is CustomView { Screen: not Screens.Walk } custom && _toasts.TryGetValue(id, out var toast)
             ? custom with { Header = toast.Text }
             : view;
     }
+
+    /// <summary>
+    /// The walk screen. It holds nothing that changes as the party walks (no tile, deadline or toast): the server mints a new
+    /// view only when this JSON changes, and a new view would drop whatever the pad is sending.
+    /// </summary>
+    private CustomView WalkScreen(Player player, ProfileId profile)
+    {
+        var character = _doc.For(profile)!.Character;
+        var vip = IsVip(player);
+        return Custom(Screens.Walk, new
+        {
+            leader = _lead == profile.Value,
+            leaderName = Leader?.Name,
+            region = _region?.Def.Name,
+            objective = Objective(),
+            me = new { name = character.Name, cls = ClassName(character), level = _doc.PartyLevel },
+            party = Walkers().Select(w => new { name = w.Player.Name, cls = ClassName(w.Character), here = w.Here, leads = w.Leads }),
+            vip,
+            canBattle = vip && !Rules.Encounters.IsEmpty,
+            portal = PortalPath(),
+        });
+    }
+
+    /// <summary>What the party is out to do. Story beats fill this in (overworld 5d).</summary>
+    private static string Objective() => "Explore the region";
+
+    private string ClassName(CharacterRecord character) => Rules.Classes.GetValueOrDefault(character.Class)?.Name ?? character.Class;
+
+    /// <summary>The session's players who have a character, in member order, since seats change between nights.</summary>
+    private IEnumerable<(Player Player, CharacterRecord Character, bool Here, bool Leads)> Walkers()
+        => _doc.Members.SelectMany(m => _players.Where(p => p.Profile?.Value == m.Key)
+            .Select(p => (p, m.Value.Character, _online.Contains(p.Id), _lead == m.Key)));
+
+    private ExploreView? ExploreViewOf() => _region is not { } region ? null : new ExploreView(region.Def.Id, region.Def.Name, _epoch, 0, _at, _facing, false, [],
+        [.. Walkers().Select(w => new WalkerView(w.Player.Profile!.Value.Value, w.Player.Name,
+            HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{w.Character.Class}"])!, w.Here, w.Leads))],
+        Leader?.Name);
 
     private ControllerView BattleScreen(ProfileId profile)
     {
@@ -278,6 +349,8 @@ public sealed partial class TacticsGame
                 return _result?.Outcome == BattleOutcome.Won ? $"Victory at {_resultEncounter}!" : $"Defeat at {_resultEncounter}";
             case TacticsPhase.Resuming:
                 return "Resuming the battle…";
+            case TacticsPhase.Exploration:
+                return Leader is { } leader ? $"{leader.Name} leads the party" : "The party waits for someone to lead it";
         }
         var state = State;
         if (state.Pending is ReactionOffer offer)

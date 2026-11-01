@@ -52,7 +52,7 @@ public static class MusicChoice
         return phase switch
         {
             TacticsPhase.Muster => new MusicCue(Title),
-            TacticsPhase.EncounterPick => new MusicCue(Explore),
+            TacticsPhase.EncounterPick or TacticsPhase.Exploration => new MusicCue(Explore),
             TacticsPhase.Battle when view.Battle is { } battle => new MusicCue(Fights.GetValueOrDefault(battle.Encounter, Fight)),
             TacticsPhase.Results => view.Outcome switch
             {

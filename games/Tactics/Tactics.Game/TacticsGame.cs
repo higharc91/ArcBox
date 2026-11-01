@@ -7,7 +7,7 @@ using Tactics.Logic;
 namespace Tactics.Game;
 
 /// <summary>Where a session is (adapter spec §3).</summary>
-public enum TacticsPhase { Muster, EncounterPick, Battle, Results, Resuming }
+public enum TacticsPhase { Muster, EncounterPick, Battle, Results, Resuming, Exploration }
 
 /// <summary>
 /// ArcBox Tactics on the platform (adapter spec): a campaign game whose sessions muster the party, pick an encounter and
@@ -36,13 +36,13 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     public static class Screens
     {
         public const string PickClass = "pickClass", PickEncounter = "pickEncounter", Turn = "turn", React = "react",
-            Status = "status", Results = "results";
+            Status = "status", Results = "results", Walk = "walk";
     }
 
     /// <summary>The timer keys.</summary>
     public static class Timers
     {
-        public const string Turn = "turn", React = "react", Pace = "pace";
+        public const string Turn = "turn", React = "react", Pace = "pace", Step = "step", Lead = "lead", Save = "save";
     }
 
     private readonly TacticsTiming _timing = timing ?? TacticsTiming.Default;
@@ -99,12 +99,15 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         foreach (var p in players)
             _online.Add(p.Id);
         _doc = TacticsDocument.Read(campaign.Document) with { RulesHash = Rules.Hash };
+        EnterWorld();
+        ReconsiderLeader();
+        KeepWorld();
         Save();
         if (_doc.Battle is { } unfinished)   // the last session stopped mid-battle: carry on with whoever is here
         {
             if (unfinished.State.ContentHash != Rules.Hash)
             {
-                _notice = "The rules changed since this battle began, so it starts again.";
+                Note("The rules changed since this battle began, so it starts again.");
                 RestartBattle(unfinished);
             }
             ContinueBattle();
@@ -118,6 +121,9 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     {
         (_ctx, _players, _lease) = (ctx, players, campaign ?? new MemoryLease(TacticsDocument.New.ToJson()));
         _doc = TacticsDocument.Read(_lease.Document);
+        EnterWorld();
+        _sessionLead = _doc.World?.LastLeader;     // a restart isn't a new session, so the lead doesn't rotate
+        SaveWorld();
         if (_doc.Battle is not { } save)
         {
             ToMusterOrPick();
@@ -126,7 +132,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
 
         if (save.State.ContentHash != Rules.Hash)
         {
-            _notice = "The rules changed since this battle began, so it starts again.";
+            Note("The rules changed since this battle began, so it starts again.");
             RestartBattle(save);
         }
         _awaited.Clear();
@@ -144,6 +150,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         if (connected ? !_online.Add(id) : !_online.Remove(id))
             return;
         var player = _players.FirstOrDefault(p => p.Id == id);
+        ReconsiderLeader();
         switch (_phase)
         {
             case TacticsPhase.Muster:
@@ -183,10 +190,24 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             case TacticsPhase.Muster when custom.Action == "pickClass":
                 PickClass(player, profile, custom.Data);
                 break;
+            case TacticsPhase.Exploration when custom.Action == "pickClass":
+                PickClass(player, profile, custom.Data);
+                break;
+            case TacticsPhase.Exploration when custom.Action == "battles" && IsVip(player):
+                LeaveExploration();
+                _toasts.Clear();
+                _phase = TacticsPhase.EncounterPick;
+                break;
+            case TacticsPhase.Exploration when custom.Action == "endSession" && IsVip(player):
+                EndSession();
+                break;
             case TacticsPhase.EncounterPick when custom.Action == "pickEncounter" && IsVip(player):
                 PickEncounter(player, custom.Data);
                 break;
-            case TacticsPhase.Battle:
+            case TacticsPhase.EncounterPick when custom.Action == "backToWalk" && IsVip(player) && _region is not null:
+                ToExploration();
+                break;
+            case TacticsPhase.Battle when !IsWorldAction(custom.Action):
                 BattleInput(player, profile, custom);
                 break;
             case TacticsPhase.Results when IsVip(player) && custom.Action is "next":
@@ -194,7 +215,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
                 ToMusterOrPick();
                 break;
             case TacticsPhase.Results when IsVip(player) && custom.Action is "end":
-                _ctx.EndGame(new GameResults([], $"The party is level {_doc.PartyLevel}; {_doc.Completed.Length} battles won."));
+                EndSession();
                 break;
             case TacticsPhase.Resuming when IsVip(player) && custom.Action == "continue":
                 _awaited.Clear();
@@ -259,7 +280,10 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         if (_phase == TacticsPhase.Muster && _players.Where(p => _online.Contains(p.Id)).All(p => _doc.For(p.Profile!.Value) is not null))
         {
             _toasts.Clear();
-            _phase = TacticsPhase.EncounterPick;
+            if (_region is not null)
+                ToExploration();
+            else
+                _phase = TacticsPhase.EncounterPick;
         }
     }
 
@@ -276,6 +300,8 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         SetMember(profile, new MemberRecord(NewCharacter(player.Name, cls, _doc.PartyLevel), Xp: 0));
         Save();
         MusterDone();
+        if (_phase == TacticsPhase.Exploration)
+            ReconsiderLeader();
     }
 
     private CharacterRecord NewCharacter(string name, string cls, int level)

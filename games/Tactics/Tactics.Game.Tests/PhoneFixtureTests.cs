@@ -116,6 +116,7 @@ public sealed class PhoneFixtureTests
         string[] classes = ["fighter", "cleric", "rogue", "wizard"];
         for (var i = 0; i < 4; i++)
             h.Input(i, new { action = "pickClass", data = new { @class = classes[i] } });
+        h.Input(0, new { action = "battles" });
         Look();
         h.Input(0, new { action = "pickEncounter", data = new { encounter = "river_crossing" } });
 

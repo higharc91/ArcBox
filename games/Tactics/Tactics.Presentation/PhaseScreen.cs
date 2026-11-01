@@ -49,10 +49,16 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
             TacticsPhase.Results => Results(screen, view),
             TacticsPhase.Resuming => Resuming(screen, view),
             TacticsPhase.Battle => Battle(screen, view),
+            TacticsPhase.Exploration => Exploration(screen, view),
             _ => screen,
         };
         return drawn with { Music = MusicChoice.Of(view), Ambience = MusicChoice.AmbienceOf(view) };
     }
+
+    private static PhaseScreen Exploration(PhaseScreen screen, TacticsHostView view) => screen with
+    {
+        Meta = view.Explore is { } explore ? $"Exploration · {explore.Name}" : "Exploration",
+    };
 
     private static PhaseScreen Muster(PhaseScreen screen, TacticsHostView view) => screen with
     {

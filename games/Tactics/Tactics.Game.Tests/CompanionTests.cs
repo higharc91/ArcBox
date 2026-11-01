@@ -40,6 +40,7 @@ public sealed class CompanionTests
     private static void ToBattle(GameHarness<TacticsGame> h)
     {
         PickClasses(h);
+        h.Input(0, new { action = "battles" });
         h.Input(0, new { action = "pickEncounter", data = new { encounter = "river_crossing" } });
     }
 
@@ -49,6 +50,7 @@ public sealed class CompanionTests
         var (h, game, lease) = TwoPlayers();
         h.StartCampaign(lease);
         PickClasses(h);
+        h.Input(0, new { action = "battles" });
         var pick = (CustomView)h.PlayerView(0);
         var crossing = pick.Data.GetProperty("encounters").EnumerateArray().Single(e => e.GetProperty("id").GetString() == "river_crossing");
         Assert.True(crossing.GetProperty("fits").GetBoolean());
