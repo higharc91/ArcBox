@@ -80,7 +80,9 @@ The TV's dev flag `--walk-log` prints what the bots and the e2e run read:
 | `… ARCBOX_DROP_SIGNALS=1` | with `ARCBOX_STAGE=1`: the TV runs with `--drop-signals`, so the game paces every beat on its fallbacks. Everything above must still happen |
 | `… ARCBOX_WALK=1` | the party walks Ashen Ford. The TV's step numbers climb and the leader really moves on it. The server restarts and the party is on its saved tile. The TV is killed and the new one snaps to the party's tile. The leader's phone is cut and no step starts after the 750 ms lease. The median press-to-`WALK` time is at most `ARCBOX_WALK_LATENCY` (default 100 ms). Screenshots of the party walking and stopped |
 
-`ARCBOX_WALK_SCRIPT` changes the route; it needs `pause:restart` and then `pause:tv`. Shots and logs land in `ARCBOX_E2E_OUT` (default `/tmp/arcbox-tv-e2e-<time>`). Software rendering on Linux draws a frame every 30 to 50 ms, so judge its screenshots for what's on them, not for smoothness. The numbers from the first Linux runs are in [the Task 11 report](../../docs/superpowers/reports/2026-10-31-tactics-overworld/task11-bots-e2e.md).
+`ARCBOX_WALK_SCRIPT` changes the route; it needs `pause:restart` and then `pause:tv`. Shots and logs land in `ARCBOX_E2E_OUT` (default `/tmp/arcbox-tv-e2e-<time>`). Software rendering on Linux draws a frame every 30 to 50 ms, so judge its screenshots for what's on them, not for smoothness.
+
+**Don't judge hitches from a run with shots.** Every screenshot stalls the TV's frames: on the RTX 5080 the same fight start logged a 216 ms `WORLD back` frame with them, and 2 to 5 ms without. `ARCBOX_SHOTS=0` turns the TV's shots off, and the checks for them with it (the default, 1, takes them). For frame times, run with `ARCBOX_SHOTS=0 TV_ARGS=--perf` and read the `PERF` lines. The numbers from the first Linux runs are in [the Task 11 report](../../docs/superpowers/reports/2026-10-31-tactics-overworld/task11-bots-e2e.md).
 
 ## Adding a chapter pack
 

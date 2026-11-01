@@ -76,7 +76,7 @@
 #     ARCBOX_WALK_SLACK ms (default 250: the TV's own frame, which is slow on software rendering), and hears that the party stopped;
 #     and another phone sees the leader disconnect;
 #   - the median press-to-WALK-line time of --walk-latency is at most ARCBOX_WALK_LATENCY ms (default 100, the plan's target);
-#   - the TV took screenshots of the party walking and stopped, has an AUDIO Music line, and no errors.
+#   - the TV took screenshots of the party walking and stopped (not with ARCBOX_SHOTS=0), has an AUDIO Music line, and no errors.
 # The run's numbers are in phones.log: `LATENCY`, `DROP … after … ms`.
 #
 # In the world (ARCBOX_STAGE=1): the server's Development seed (Tactics:Seed) starts the campaign after Ashen Ford's vote, four
@@ -96,7 +96,7 @@
 #   - ARCBOX_RESTART=1: the server restarts at that beat; the TV is back in the room and plays on from a newer beat;
 #   - ARCBOX_DROP_SIGNALS=1: the TV runs with --drop-signals, so the game hears no `shown` and paces every beat on its fallbacks;
 #     the TV logs the dropped signals, and all of the above still happens;
-#   - the TV took shots of the walk-in, the fight in place and the results, has music, and no errors.
+#   - the TV took shots of the walk-in, the fight in place and the results (not with ARCBOX_SHOTS=0), has music, and no errors.
 #
 # On Windows (Git Bash) there's no Xvfb: the TV opens a real window on your screen, at TV_RES, with Godot's default rendering
 # driver, and processes are stopped with taskkill, as Windows has no TERM. Put the .NET SDK's dotnet first on PATH and set GODOT
@@ -131,6 +131,9 @@
 #   TV_PRESET        render preset (default low; software rendering can't keep up with the phase timers otherwise)
 #   TV_LINGER        seconds the TV keeps running after the phones finish, for its last shots (default 12)
 #   TV_ARGS          extra TV app arguments, e.g. --perf (log fps every 5 s)
+#   ARCBOX_SHOTS     0 = the TV takes no screenshots, and the checks for them are skipped (default 1). A shot stalls the TV's frames
+#                    (a 216 ms fight start with them, 2 to 5 ms without, on an RTX 5080), so judge hitches and frame times only from a
+#                    run with ARCBOX_SHOTS=0 and TV_ARGS=--perf. REDLINE's phones take theirs either way (their folder is set here)
 #   TV_ENGINE_ARGS   extra Godot engine arguments, before the --, e.g. --position 160,100 to place the window; Godot counts from the left edge of the leftmost monitor, so x can't be negative
 #   TV_REMATCH       1 (with ARCBOX_FULL=1) = after the race, the VIP phone starts a second one in the same room
 #                    and plays it to its first Reveal (shots in <out>/phones-rematch)
@@ -149,6 +152,7 @@ PHONES=${ARCBOX_PHONES:-$([[ "$GAME" == "tactics" ]] && echo 4 || echo 3)}
 RES=${TV_RES:-1280x720}
 PRESET=${TV_PRESET:-low}
 LINGER=${TV_LINGER:-12}
+SHOTS=${ARCBOX_SHOTS:-1}
 OUT=${ARCBOX_E2E_OUT:-/tmp/arcbox-tv-e2e-$(date +%Y%m%d-%H%M%S)}
 FULL=${ARCBOX_FULL:-}
 RESTART=${ARCBOX_RESTART:-}
@@ -207,6 +211,10 @@ if [[ ( "$STAGE" == "1" || "$DROP_SIGNALS" == "1" ) && ( "$GAME" != "tactics" ||
 fi
 if [[ "$DROP_SIGNALS" == "1" && "$STAGE" != "1" ]]; then
   echo "ARCBOX_DROP_SIGNALS=1 goes with ARCBOX_STAGE=1." >&2
+  exit 2
+fi
+if [[ "$SHOTS" != "0" && "$SHOTS" != "1" ]]; then
+  echo "ARCBOX_SHOTS is 1 (screenshots, the default) or 0 (none), not $SHOTS." >&2
   exit 2
 fi
 if [[ "$RECONNECT" == "1" && "$RESTART" == "1" ]]; then
@@ -318,15 +326,17 @@ if [[ -z "$WINDOWS" ]]; then
   sleep 1
 fi
 QUIT_AFTER=$([[ "$FULL" == "1" ]] && echo 2700 || echo 900)
-# start_tv <shots dir> <TV app arguments>…: the TV on Xvfb, or on Windows in a real window; it adds to tv.log.
+# start_tv <shots dir> <TV app arguments>…: the TV on Xvfb, or on Windows in a real window; it adds to tv.log. With ARCBOX_SHOTS=0
+# it takes no screenshots.
 start_tv() {
-  local shots=$1
+  local shots=(--shots="$1")
   shift
+  [[ "$SHOTS" == "0" ]] && shots=()
   if [[ -n "$WINDOWS" ]]; then
-    "$GODOT" ${TV_ENGINE_ARGS:-} --path "$ROOT/src/ArcBox.Host" -- --shots="$shots" --preset="$PRESET" --res="$RES" --server="$URL" \
+    "$GODOT" ${TV_ENGINE_ARGS:-} --path "$ROOT/src/ArcBox.Host" -- "${shots[@]}" --preset="$PRESET" --res="$RES" --server="$URL" \
       --quit-after="$QUIT_AFTER" --audio-log "$@" ${TV_ARGS:-} >> "$OUT/tv.log" 2>&1 &
   else
-    DISPLAY=":$DISPLAY_NUM" "$GODOT" ${TV_ENGINE_ARGS:-} --path "$ROOT/src/ArcBox.Host" --rendering-driver vulkan -- --shots="$shots" --preset="$PRESET" --res="$RES" \
+    DISPLAY=":$DISPLAY_NUM" "$GODOT" ${TV_ENGINE_ARGS:-} --path "$ROOT/src/ArcBox.Host" --rendering-driver vulkan -- "${shots[@]}" --preset="$PRESET" --res="$RES" \
       --server="$URL" --quit-after="$QUIT_AFTER" --audio-log "$@" ${TV_ARGS:-} >> "$OUT/tv.log" 2>&1 &
   fi
   TV_PID=$!
@@ -503,6 +513,7 @@ if [[ "$GAME" == "tactics" && "$WALK" == "1" ]]; then
   [[ -n "$WALKSTATS" ]] && log "the TV's frames while walking: median of the walks' median frame times $WALKSTATS ms"
 
   for moment in walking stopped; do
+    [[ "$SHOTS" == "0" ]] && break
     SHOT=$(find "$OUT" -name "*tactics-world-$moment-*.png" | sort | tail -1)
     [[ -n "$SHOT" ]] && log "a shot of the party $moment: $SHOT" || walk_fail "a screenshot of the party $moment"
   done
@@ -676,6 +687,7 @@ if [[ "$GAME" == "tactics" && "$STAGE" == "1" ]]; then
     (( DROPPED > 0 )) && log "stage: the TV dropped $DROPPED shown signals, and the fights went on without them" || stage_fail "dropped shown signals in the TV log"
   fi
   for shot in stage-forming stage-fighting stage-results tactics-results; do
+    [[ "$SHOTS" == "0" ]] && break
     SHOT=$(find "$OUT" -name "*$shot*.png" | sort | tail -1)
     [[ -n "$SHOT" ]] && log "a shot of $shot: $SHOT" || stage_fail "a screenshot of $shot"
   done
@@ -814,8 +826,10 @@ if [[ "$GAME" == "tactics" ]]; then
   fi
   RESULTS=$(after "${RESUMED_AT:-0}" '$0 == "TACTICS screen tactics-results"')
   [[ -n "$RESULTS" ]] && log "the TV showed the results · line $RESULTS" || tactics_fail "TACTICS screen tactics-results on the TV"
-  SHOT=$(find "$OUT" -name '*tactics-results*.png' | tail -1)
-  [[ -n "$SHOT" ]] && log "results screenshot: $SHOT" || tactics_fail "a screenshot of the results"
+  if [[ "$SHOTS" != "0" ]]; then
+    SHOT=$(find "$OUT" -name '*tactics-results*.png' | tail -1)
+    [[ -n "$SHOT" ]] && log "results screenshot: $SHOT" || tactics_fail "a screenshot of the results"
+  fi
 
   # The sound, from the AUDIO lines: music from the start, effects with the beats, and the music changing at the Results.
   FIRST_MUSIC=$(after 0 '/^AUDIO Music /')
