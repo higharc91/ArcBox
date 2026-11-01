@@ -171,13 +171,15 @@ public sealed class WorldPlan
     /// What a frame must repaint over <paramref name="units"/>, in painter's order. An item is repainted whole, so what crosses a unit isn't enough: an item it
     /// doesn't cross can stand in front of a part of a repainted one, and would be painted over. So what crosses a repainted item, later than it, goes
     /// again too, until nothing more does. Items cross by the shapes they cover, not their boxes: on open ground every tile's box overlaps the next one's, and
-    /// the closure would run away across the map, where their diamonds only meet.
+    /// the closure would run away across the map, where their diamonds only meet. Items faded by <paramref name="fade"/> are skipped so they aren't repainted solid.
     /// </summary>
-    public ImmutableArray<ItemAt> Overlay(IEnumerable<BoardUnit> units)
+    public ImmutableArray<ItemAt> Overlay(IEnumerable<BoardUnit> units, PropFade? fade = null)
     {
         var (chosen, waiting) = (new HashSet<ItemAt>(), new Stack<ItemAt>());
         void Add(ItemAt at)
         {
+            if (fade?.IsFaded(at) == true)
+                return;
             if (chosen.Add(at))
                 waiting.Push(at);
         }

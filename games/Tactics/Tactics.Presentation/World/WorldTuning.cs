@@ -21,6 +21,12 @@ public static class WorldTuning
     /// <summary>How long the title card waits for the world to open, in seconds of frames, before the screen goes on without it.</summary>
     public const double OpenTimeout = 10;
 
+    /// <summary>Opacity of a tall prop when faded in front of a walker.</summary>
+    public const float PropFadeAlpha = 0.35f;
+
+    /// <summary>How long a tall prop takes to fade in or out, in seconds.</summary>
+    public const double PropFadeSeconds = 0.2;
+
     // ---- The playhead (WalkTrack) --------------------------------------------------------------------------------------
 
     /// <summary>The jitter buffer, in seconds of path: how far behind the server the party is drawn once it has got going.</summary>

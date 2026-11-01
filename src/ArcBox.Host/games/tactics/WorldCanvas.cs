@@ -74,6 +74,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
     private Task<Built> _building = null!;
     private Node2D _world = null!;
     private TallProps? _tallProps;
+    private PropFade? _propFade;
     private BoardCanvas _over = null!;
     private ColorRect _back = null!;
     private ColorRect _fade = null!;
@@ -147,6 +148,10 @@ internal sealed partial class WorldCanvas : CanvasLayer
         }
         _stage.Clock = _clock;
         _stage.Visible = true;
+        if (_propFade is not null)
+        {
+            _propFade.InFight = true;
+        }
         _over.SetView(System.Numerics.Vector2.Zero, System.Numerics.Vector2.Zero);    // the stage has the halos round it: they'd show twice
         return _stage;
     }
@@ -160,6 +165,10 @@ internal sealed partial class WorldCanvas : CanvasLayer
         }
         stage.Visible = false;
         _staged = null;
+        if (_propFade is not null)
+        {
+            _propFade.InFight = false;
+        }
         _over.SetView(_view.Min - new System.Numerics.Vector2(ViewMargin), _view.Max + new System.Numerics.Vector2(ViewMargin));
     }
 
@@ -292,6 +301,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         _items = [];
         _painter.Release();
         _frames.Release();
+        _propFade = null;
         Plan = null;
         GD.Print("WORLD closed");
     }
@@ -398,10 +408,18 @@ internal sealed partial class WorldCanvas : CanvasLayer
         }
         var clock = Stopwatch.GetTimestamp();
         var plan = Plan;
-        var over = plan.Overlay(units);
+        _propFade?.Update(units, _delta);
+        var over = plan.Overlay(units, _propFade);
         QueryMs = Stopwatch.GetElapsedTime(clock).TotalMilliseconds;
         OverItems = over.Length;
-        _tallProps?.Update(units, _delta, _clock);
+        if (_tallProps is not null && _propFade is not null)
+        {
+            _tallProps.Update(_propFade, _clock);
+        }
+        else
+        {
+            _tallProps?.Update(units, _delta, _clock);
+        }
 
         if (_separateTallProps)
         {
@@ -463,6 +481,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         var built = _building.Result;
         BuildTimes = built.Times;
         (Ground, Plan) = (built.Ground, built.Plan);
+        _propFade = new PropFade(Plan);
         _items = built.StaticItems;
         _tallItems = built.TallItems;
         _allItems = built.AllItems;
