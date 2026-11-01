@@ -690,7 +690,7 @@ if [[ "$GAME" == "tactics" ]]; then
   set +e
   run_bots() {
     node "$ROOT/tools/tactics-playtest/bots.cjs" --server="$URL" --room="$CODE" --players="$PHONES" --encounter="$ENCOUNTER" \
-      ${ARCBOX_BOT_ARGS:---fight} --hold="$HOLD" --timeout=1500 2>&1 | tee "$OUT/phones.log"
+      ${ARCBOX_BOT_ARGS:---fight} --hold="$HOLD" --timeout=1500 --tv-log="$OUT/tv.log" 2>&1 | tee "$OUT/phones.log"
     return "${PIPESTATUS[0]}"
   }
   beats_played() { awk '/^BEAT [0-9]+ / && $2 > n { n = $2 } END { print n + 0 }' "$OUT/tv.log"; }
