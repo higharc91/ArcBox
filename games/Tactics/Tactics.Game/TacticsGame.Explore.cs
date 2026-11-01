@@ -206,7 +206,7 @@ public sealed partial class TacticsGame
         _epoch = (int)(_ctx.Now.ToUnixTimeSeconds() % int.MaxValue);
         _storySeq = Math.Max(saved?.StorySeq ?? 0, saved?.Story?.Seq ?? 0);     // the TV's line number goes on from where it was
         var start = region.Def.Spawns.Start;
-        if (saved is not null && saved.Region == region.Def.Id && CanStandOn(saved.At, start))
+        if (saved is not null && saved.Region == region.Def.Id && CanStandOn(saved.At))
             (_at, _facing) = (saved.At, saved.Facing);
         else
         {
@@ -216,10 +216,10 @@ public sealed partial class TacticsGame
         }
     }
 
-    private bool CanStandOn(Tile at, Tile start)
+    private bool CanStandOn(Tile at)
     {
         var terrain = Rules.GroundFor(_region!.Def.Id)!.Terrain;
-        return terrain.Map.InBounds(at) && terrain.Walkable(at) && WorldWalk.Reach(terrain, start, ClassDef.DefaultJump).Contains(at);
+        return terrain.Map.InBounds(at) && terrain.Walkable(at) && Rules.ReachFor(_region.Def.Id)!.Contains(at);
     }
 
     private void Note(string text) => _notice = _notice is null ? text : $"{_notice} {text}";
@@ -675,7 +675,7 @@ public sealed partial class TacticsGame
     {
         var ground = Rules.GroundFor(_region!.Def.Id)!.Terrain;
         var start = _region.Def.Spawns.Start;
-        var reached = WorldWalk.Reach(ground, start, ClassDef.DefaultJump);
+        var reached = Rules.ReachFor(_region.Def.Id)!;
         var armed = Armed()?.Stage;
         bool Allowed(Tile t) => ground.Map.InBounds(t) && reached.Contains(t) && armed?.Holds(t) != true;
 

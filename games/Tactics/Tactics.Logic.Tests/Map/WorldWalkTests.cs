@@ -297,6 +297,22 @@ public sealed class WorldWalkTests
         Assert.Null(rules.GroundFor("nowhere"));
     }
 
+    /// <summary>
+    /// Review (rules NOTE 5): the flood from a region's start is the same for every room, so the pack keeps one, next to the ground,
+    /// rather than each resume, landing and scene's travel walking the whole region again.
+    /// </summary>
+    [Fact]
+    public void The_pack_shares_one_flood_from_each_regions_start()
+    {
+        var rules = RulesPack.Load([ContentPaths.BaseRules]);
+        var (id, region) = rules.Regions.First();
+
+        var reach = rules.ReachFor(id)!;
+        Assert.Same(reach, rules.ReachFor(id));
+        Assert.True(WorldWalk.Reach(rules.GroundFor(id)!.Terrain, region.Def.Spawns.Start, ClassDef.DefaultJump).SetEquals(reach));
+        Assert.Null(rules.ReachFor("nowhere"));
+    }
+
     // ---- Routes, for the bots and the tests that play a chapter -------------------------------------------------------------------
 
     /// <summary>Walks <paramref name="taps"/> from <paramref name="from"/> by <see cref="WorldWalk.Next"/>, checking each is taken as asked.</summary>

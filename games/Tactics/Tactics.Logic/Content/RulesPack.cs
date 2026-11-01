@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Collections.Immutable;
 
 namespace Tactics.Logic;
@@ -33,6 +34,9 @@ public sealed partial class RulesPack
         Xp = catalog.Xp;
         Regions = catalog.Regions;
         _grounds = Regions.ToImmutableSortedDictionary(r => r.Key, r => new Lazy<WorldGround>(() => WorldGround.Of(r.Value, maps)), StringComparer.Ordinal);
+        _reach = Regions.ToImmutableSortedDictionary(r => r.Key,
+            r => new Lazy<FrozenSet<Tile>>(() => WorldWalk.Reach(GroundFor(r.Key)!.Terrain, r.Value.Def.Spawns.Start, ClassDef.DefaultJump).ToFrozenSet()),
+            StringComparer.Ordinal);
         _injuryPassives = injuries.Values.ToImmutableSortedDictionary(i => InjuryPassiveId(i.Id),
             i => new PassiveDef(InjuryPassiveId(i.Id), i.Hook, null, i.Effects.IsDefault ? [] : i.Effects, i.Static with { MaxHp = 0 },
                 Target: PassiveTarget.Self), StringComparer.Ordinal);
@@ -41,6 +45,7 @@ public sealed partial class RulesPack
     private readonly ImmutableSortedDictionary<string, UnitSheet> _monsterSheets;
     private readonly ImmutableSortedDictionary<string, PassiveDef> _injuryPassives;
     private readonly ImmutableSortedDictionary<string, Lazy<WorldGround>> _grounds;
+    private readonly ImmutableSortedDictionary<string, Lazy<FrozenSet<Tile>>> _reach;
 
     /// <summary>The hash of everything a battle runs under; a battle records it in <see cref="BattleState.ContentHash"/>. Regions aren't in it.</summary>
     public string Hash { get; }
@@ -101,6 +106,13 @@ public sealed partial class RulesPack
 
     /// <summary>The ground of the region with this id, or null: one shared instance, built the first time it's asked for, since every room walks the same ground.</summary>
     public WorldGround? GroundFor(string id) => _grounds.GetValueOrDefault(id)?.Value;
+
+    /// <summary>
+    /// Every tile of the region with this id that can be walked to from its start spawn (<see cref="WorldWalk.Reach"/> with
+    /// <see cref="ClassDef.DefaultJump"/>), or null: one shared set, flooded the first time it's asked for, as <see cref="GroundFor"/> is.
+    /// A place the party stands, lands or travels to has to be in it.
+    /// </summary>
+    public IReadOnlySet<Tile>? ReachFor(string id) => _reach.GetValueOrDefault(id)?.Value;
 
     /// <summary>
     /// The id of the passive that carries an injury's static modifiers (<c>"injury:&lt;id&gt;"</c>). <see cref="SheetBuilder"/>
