@@ -1,0 +1,37 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "vote",
+  "data": {
+    "party": true,
+    "canChoose": true,
+    "options": [
+      {
+        "id": "force",
+        "label": "We\u0027ll clear the ford by force.",
+        "skill": null,
+        "dc": null
+      },
+      {
+        "id": "parley",
+        "label": "We\u0027ll go and parley with the chief.",
+        "skill": null,
+        "dc": null
+      },
+      {
+        "id": "pay",
+        "label": "First, what\u0027s it worth to you?",
+        "skill": "persuasion",
+        "dc": 15
+      }
+    ],
+    "mine": "force",
+    "chosen": null,
+    "tie": false,
+    "decider": null,
+    "away": []
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:02:03.4001248\u002B00:00",
+  "header": null
+}

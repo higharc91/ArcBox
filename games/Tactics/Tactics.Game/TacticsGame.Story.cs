@@ -80,6 +80,9 @@ public sealed partial class TacticsGame
     /// </summary>
     private const string LeaderPick = "\u0001leader";
 
+    /// <summary>Who made the choice's pick in <see cref="_votes"/>: their phone shows it as theirs, and a new leader's as the party's.</summary>
+    private string? _pickedBy;
+
     /// <summary>The check that won and is being rolled for, while the party picks who rolls (or breaks a tie over it).</summary>
     private SceneOption? _checking;
 
@@ -422,6 +425,7 @@ public sealed partial class TacticsGame
         _ctx.CancelTimer(Timers.Vote);
         (_offered, _closeAt, _due, _allInAt, _checking, _tied) = ([], null, null, null, null, []);
         _votes.Clear();
+        _pickedBy = null;
     }
 
     /// <summary>What can be answered: the options on offer, or who can roll.</summary>
@@ -497,6 +501,8 @@ public sealed partial class TacticsGame
         if ((!PartyQuestion && member != _lead) || !Answers().Contains(pick))
             return;
         _votes[PartyQuestion ? member : LeaderPick] = pick;
+        if (!PartyQuestion)
+            _pickedBy = member;
         Reclose();
     }
 
@@ -712,10 +718,15 @@ public sealed partial class TacticsGame
                 : votes.Any(v => v.Value == o.Id) && Leader is { } leader ? [leader.Name] : []))]);
     }
 
-    /// <summary>What <paramref name="member"/> has answered, as their phone shows it: their vote, or the leader's choice for the leader.</summary>
+    /// <summary>
+    /// What <paramref name="member"/> has answered, as their phone shows it: their vote, or the choice they made as leader. A leader who
+    /// took over a choice already made sees it as the party's (<see cref="PartyChoice"/>), not as theirs: they never made it.
+    /// </summary>
+    private string? PartyChoice() => !PartyQuestion && _votes.TryGetValue(LeaderPick, out var pick) && Answers().Contains(pick) ? pick : null;
+
     private string? MineOf(string member)
     {
-        var key = PartyQuestion ? member : member == _lead ? LeaderPick : null;
+        var key = PartyQuestion ? member : member == _pickedBy ? LeaderPick : null;
         return key is not null && _votes.TryGetValue(key, out var pick) && Answers().Contains(pick) ? pick : null;
     }
 
@@ -763,6 +774,7 @@ public sealed partial class TacticsGame
                 canChoose = Decider() is { } decider ? decider == member : true,
                 options = OptionsShown().Select(o => new { id = o.Id, label = o.Label, skill = o.Check?.Skill, dc = o.Check?.Dc }),
                 mine = MineOf(member),
+                chosen = PartyChoice(),
                 tie = _telling == StoryStates.TieBreak,
                 decider = Decider() is { } d ? PlayerName(d) : null,
                 away = Away(_awayAtOpen),

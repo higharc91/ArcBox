@@ -1,0 +1,49 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "walk",
+  "data": {
+    "leader": true,
+    "leaderName": "Player1",
+    "region": "The Ashen Ford",
+    "objective": "Go to The Ford Bridge",
+    "me": {
+      "name": "Player1",
+      "cls": "Fighter",
+      "level": 1
+    },
+    "party": [
+      {
+        "name": "Player1",
+        "cls": "Fighter",
+        "here": true,
+        "leads": true
+      },
+      {
+        "name": "Player2",
+        "cls": "Cleric",
+        "here": true,
+        "leads": false
+      },
+      {
+        "name": "Player3",
+        "cls": "Rogue",
+        "here": true,
+        "leads": false
+      },
+      {
+        "name": "Player4",
+        "cls": "Wizard",
+        "here": true,
+        "leads": false
+      }
+    ],
+    "vip": true,
+    "canBattle": false,
+    "portal": "/c/ABCD",
+    "interact": "Talk"
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}

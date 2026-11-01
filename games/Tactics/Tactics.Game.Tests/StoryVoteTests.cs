@@ -542,6 +542,30 @@ public sealed class StoryVoteTests
         Assert.Equal("why", Cursor(s)!.Node);
     }
 
+    /// <summary>
+    /// A leader who takes over a choice already made sees it as the party's (<c>chosen</c>), not as theirs (<c>mine</c>): they never made
+    /// it. It stands unless they change it. Everyone else sees the pick read-only.
+    /// </summary>
+    [Fact]
+    public void A_new_leader_sees_an_inherited_choice_as_the_partys()
+    {
+        var s = AtTheMayorsQuestion();
+        var lead = StageBattleTests.Lead(s);
+        Vote(s, lead, "why");
+        Assert.Equal("why", Data(s, lead).GetProperty("mine").GetString());
+        Assert.Equal("why", Data(s, (lead + 1) % 4).GetProperty("chosen").GetString());
+
+        s.Harness.SetConnected(lead, false);
+
+        var next = StageBattleTests.Lead(s);
+        Assert.Equal(JsonValueKind.Null, Data(s, next).GetProperty("mine").ValueKind);
+        Assert.Equal("why", Data(s, next).GetProperty("chosen").GetString());
+        Vote(s, next, "cases");
+        Assert.Equal("cases", Data(s, next).GetProperty("mine").GetString());
+        s.Harness.Advance(Ask(s).Deadline!.Value - s.Harness.Now);
+        Assert.Equal("cases", Cursor(s)!.Node);
+    }
+
     [Fact]
     public void An_unanswered_choice_takes_its_first_option_after_30_seconds()
     {

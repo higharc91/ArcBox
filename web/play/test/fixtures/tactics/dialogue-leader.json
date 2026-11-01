@@ -1,0 +1,17 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "dialogue",
+  "data": {
+    "title": "The Ford Choice",
+    "line": "ch1_ford_open_3",
+    "speaker": "Halden Varrow",
+    "portrait": "mayor",
+    "mood": "idle",
+    "text": "There. Forty of them, perhaps. Dagna has eight guards left. And she has you.",
+    "canSkip": true
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}

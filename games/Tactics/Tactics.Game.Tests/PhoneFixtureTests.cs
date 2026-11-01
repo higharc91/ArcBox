@@ -14,7 +14,7 @@ namespace Tactics.Game.Tests;
 /// </summary>
 public sealed class PhoneFixtureTests
 {
-    private static readonly Lazy<RulesPack> Pack = new(() =>
+    internal static readonly Lazy<RulesPack> Pack = new(() =>
     {
         for (var dir = new DirectoryInfo(AppContext.BaseDirectory); dir is not null; dir = dir.Parent)
             if (File.Exists(Path.Combine(dir.FullName, "ArcBox.slnx")))
@@ -37,6 +37,80 @@ public sealed class PhoneFixtureTests
         Assert.Equal([.. new[] { "pickClass", "pickEncounter", "react", "results", "status", "turn", "walk-follower", "walk-leader" }], screens.Keys.Order(StringComparer.Ordinal));
 
         Check(screens);
+    }
+
+    /// <summary>
+    /// The story's phone screens (overworld 5d §9), from the ford choice played with the base pack's lore: Interact on the walk screen, a line
+    /// for a follower and for the leader, the leader's choice and how everyone else sees it, a party vote with a vote in, a tie-break, and a skill check being picked and
+    /// rolled. Each is a real view from a real session, as the others are.
+    /// </summary>
+    [Fact]
+    public void Every_story_screen_matches_its_fixture()
+    {
+        var screens = CaptureStory();
+        Assert.Equal([.. new[] { "check-pick", "check-rolled", "choice-follower", "choice-leader", "dialogue", "dialogue-leader", "vote", "vote-tie", "walk-interact" }],
+            screens.Keys.Order(StringComparer.Ordinal));
+
+        Check(screens);
+    }
+
+    private static JsonNode Node(ControllerView view) => JsonSerializer.SerializeToNode<ControllerView>(view with { ViewId = "v1" }, ArcJson.Options)!;
+
+    private static SortedDictionary<string, JsonNode> CaptureStory()
+    {
+        var seen = new SortedDictionary<string, JsonNode>(StringComparer.Ordinal);
+        TacticsGameTests.Session Ford()
+        {
+            var s = new TacticsGameTests.Session(seed: 3, game: new TacticsGame(Pack.Value, lore: StoryTests.Lore,
+                seed: StoryTests.SeedFor(StoryTests.FordChoice) with { At = StoryTests.NearSpot(StoryTests.FordChoice) }));
+            s.ToWalking();
+            return s;
+        }
+        void Until(TacticsGameTests.Session s, Func<bool> done)
+        {
+            for (var i = 0; i < 3_000 && !done(); i++)
+                s.Harness.Advance(TimeSpan.FromMilliseconds(100));
+            Assert.True(done());
+        }
+        StoryView Story(TacticsGameTests.Session s) => s.Host.Story!;
+
+        // The leader is seat 0, the session's first member.
+        var s = Ford();
+        seen["walk-interact"] = Node(s.Harness.PlayerView(0));
+        s.Send(0, "interact");
+        StoryTests.LineEnds(s);
+        StoryTests.LineEnds(s);     // a line with a speaker who has a portrait
+        seen["dialogue-leader"] = Node(s.Harness.PlayerView(0));
+        seen["dialogue"] = Node(s.Harness.PlayerView(1));
+        Until(s, () => Story(s).State == TacticsGame.StoryStates.Asking);
+        seen["choice-leader"] = Node(s.Harness.PlayerView(0));
+        s.Send(0, "vote", new { option = "cases" });
+        seen["choice-follower"] = Node(s.Harness.PlayerView(1));     // read-only, with the leader's pick
+        Until(s, () => Story(s).State == TacticsGame.StoryStates.Asking && StoryTests.Cursor(s)!.Node == "vote");
+        s.Harness.SetConnected(3, false);
+        s.Send(1, "vote", new { option = "force" });
+        seen["vote"] = Node(s.Harness.PlayerView(1));
+        s.Send(2, "vote", new { option = "parley" });
+        s.Harness.Advance(Story(s).Ask!.Deadline!.Value - s.Harness.Now);
+        Assert.Equal(TacticsGame.StoryStates.TieBreak, Story(s).State);
+        seen["vote-tie"] = Node(s.Harness.PlayerView(0));
+
+        var c = Ford();
+        c.Send(0, "interact");
+        Until(c, () => Story(c).State == TacticsGame.StoryStates.Asking);
+        c.Send(0, "vote", new { option = "cases" });
+        Until(c, () => Story(c).State == TacticsGame.StoryStates.Asking && StoryTests.Cursor(c)!.Node == "vote");
+        c.Harness.SetConnected(3, false);       // an away card
+        for (var p = 0; p < 3; p++)
+            c.Send(p, "vote", new { option = "pay" });
+        Until(c, () => Story(c).State == TacticsGame.StoryStates.PickRoller);
+        c.Send(1, "pickRoller", new { member = "pr_member3" });
+        seen["check-pick"] = Node(c.Harness.PlayerView(1));
+        for (var p = 0; p < 3; p++)
+            c.Send(p, "pickRoller", new { member = "pr_member3" });
+        Until(c, () => Story(c).State == TacticsGame.StoryStates.Rolled);
+        seen["check-rolled"] = Node(c.Harness.PlayerView(1));
+        return seen;
     }
 
     [Fact]

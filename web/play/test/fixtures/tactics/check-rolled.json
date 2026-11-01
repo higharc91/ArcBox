@@ -1,0 +1,64 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "check",
+  "data": {
+    "skill": "persuasion",
+    "dc": 15,
+    "title": "First, what\u0027s it worth to you?",
+    "cards": [
+      {
+        "id": "pr_member1",
+        "name": "Player1",
+        "player": "Player1",
+        "cls": "Fighter",
+        "bonus": 0,
+        "note": "CHA 10",
+        "here": true
+      },
+      {
+        "id": "pr_member2",
+        "name": "Player2",
+        "player": "Player2",
+        "cls": "Cleric",
+        "bonus": 2,
+        "note": "Proficient \u00B7 CHA 10",
+        "here": true
+      },
+      {
+        "id": "pr_member3",
+        "name": "Player3",
+        "player": "Player3",
+        "cls": "Rogue",
+        "bonus": 0,
+        "note": "CHA 10",
+        "here": true
+      },
+      {
+        "id": "pr_member4",
+        "name": "Player4",
+        "player": "Player4",
+        "cls": "Wizard",
+        "bonus": 0,
+        "note": "CHA 10",
+        "here": false
+      }
+    ],
+    "mine": null,
+    "canChoose": false,
+    "tie": false,
+    "decider": null,
+    "tied": [],
+    "roll": {
+      "member": "pr_member3",
+      "die": 6,
+      "bonus": 0,
+      "total": 6,
+      "dc": 15,
+      "success": false
+    }
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}
