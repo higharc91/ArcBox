@@ -33,7 +33,9 @@
 //                        route.cs works out with the server's own walking rule (it needs dotnet); the step into the stamp starts the
 //                        fight. After each results the VIP goes on, so the next walk starts where that fight left the party (after a
 //                        loss, the recovery spawn). After the last, the party walks on a few steps and the VIP ends the session. It
-//                        needs to know where the party is: --tv-log with the TV's --walk-log, or --host
+//                        needs to know where the party is: --tv-log with the TV's --walk-log, or --host. A beat's scenes (its
+//                        lead-in, its aftermath) play through: the leader skips each line after 1.5 s, and every bot that may answer a
+//                        vote takes the first option, and a check the best bonus, so no run waits on a 45 s vote
 //   --timeout=<seconds>  give up after this long (default 900)
 //
 // Phone views have no position and bots answer each view once, so walking is a scripted loop of its own. Without these modes the
@@ -303,6 +305,8 @@ const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
 /** The TV's log or the host view (Watch), for the VIP to wait for the TV's results. */
 let tv = null;
 const RESULTS_WAIT_MS = 60000;
+/** How long a scene's line stays up before the leader's bot skips it: long enough to be seen on the TV. */
+const LINE_MS = 1500;
 
 /** Every bot, for a timeout to say what each was looking at. */
 const everyone = [];
@@ -527,6 +531,25 @@ class Bot {
           return;
         }
         return this.input('react', { choice: 'pass' });
+      // A scene (overworld 5d): the leader skips each line once it has been up a moment, and votes, choices and checks get an answer
+      // at once, so a run waits on no 45 s vote. The game's own timers would get there too.
+      case 'dialogue':
+        if (!view.data.canSkip || !view.data.line) return;
+        state.lineAt ??= Date.now() + LINE_MS;
+        if (Date.now() < state.lineAt) return;
+        state.lineAt = undefined;
+        log(`${this.name} skips line ${view.data.line}`);
+        return this.input('skip', { line: view.data.line });
+      case 'vote':
+        if (!view.data.canChoose || view.data.mine || !view.data.options?.length) return;
+        log(`${this.name} votes ${view.data.options[0].id}`);
+        return this.input('vote', { option: view.data.options[0].id });
+      case 'check': {
+        if (!view.data.canChoose || view.data.mine || !view.data.cards?.length) return;
+        const best = view.data.cards.reduce((a, b) => (b.bonus > a.bonus ? b : a));
+        log(`${this.name} picks ${best.name} to roll ${view.data.skill}`);
+        return this.input('pickRoller', { member: best.id });
+      }
       case 'walk':
         newBattle();
         if (walking || stampFights || !view.data.vip) return;
@@ -761,6 +784,8 @@ async function walkAbout(bots, lines, watch) {
 }
 
 const inBattle = (bots) => bots.some((b) => ['turn', 'status', 'react'].includes(b.view?.screen));
+/** A scene is on: the beat's lead-in, before its fight (overworld 5d). */
+const inStory = (bots) => bots.some((b) => ['dialogue', 'vote', 'check'].includes(b.view?.screen));
 
 /** Waits up to <ms> for <test>, and gives back what it last said. */
 async function within(ms, test) {
@@ -818,13 +843,22 @@ async function walkIntoStamp(bots, watch, stamp, after) {
     await walkTo(leader, null);
     const went = await within(4000, () => {
       watch.read();
-      return watch.seq !== was || inBattle(bots);
+      return watch.seq !== was || inBattle(bots) || inStory(bots);
     });
-    if (inBattle(bots)) return log(`STAMP the fight starts at step ${i + 1} of ${dirs.length}`);
+    if (inStory(bots) || inBattle(bots)) return startsFight(bots, `at step ${i + 1} of ${dirs.length}`);
     if (!went) throw new Error(`Step ${i + 1} of ${dirs.length} (${dir}, from ${watch.tile}) never went`);
   }
-  if (!(await within(5000, () => inBattle(bots)))) throw new Error(`The step into ${stamp.map}'s stamp started no fight`);
-  log('STAMP the fight starts after the last step');
+  if (!(await within(5000, () => inBattle(bots) || inStory(bots)))) throw new Error(`The step into ${stamp.map}'s stamp started no fight`);
+  return startsFight(bots, 'after the last step');
+}
+
+/** The step into the stamp went in: through the beat's lead-in, if it has one (the bots answer it as they go), to the fight. */
+async function startsFight(bots, when) {
+  if (inStory(bots)) {
+    log(`STAMP a scene starts ${when}`);
+    await until('the fight after the scene', () => inBattle(bots));
+  }
+  log(`STAMP the fight starts ${when}`);
 }
 
 /** After the last fight: walk on a little from the battlefield, any way that's open, so the TV shows the party walking again. */

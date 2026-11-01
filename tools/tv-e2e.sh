@@ -82,7 +82,9 @@
 # In the world (ARCBOX_STAGE=1): the server's Development seed (Tactics:Seed) starts the campaign after Ashen Ford's vote, four
 # steps from River Crossing's stamp, with its fight on offer (ARCBOX_ENCOUNTER=ford_assault: the Ford Assault's, after the other
 # vote). The TV has --walk-log, and the bots run --walk-to-stamp=2 --lose=1 --fight --tv-log: they walk into the stamp, lose that
-# fight on purpose, wake at the recovery spawn, walk all the way back in, and fight it again to win. It fails unless:
+# fight on purpose, wake at the recovery spawn, walk all the way back in, and fight it again to win. The beat's lead-in scene plays
+# before the first fight and its aftermath after a win: the leader's bot skips each line after 1.5 s, and the bots answer votes and
+# checks at once. It fails unless:
 #   - both walk-ins started a fight (the bots' `STAMP the fight starts`), and the TV walked each in in place
 #     (`TACTICS stage Forming in place`) on the encounter's map;
 #   - the first fight was lost, and the TV then showed `TACTICS stage Waking` and snapped the party to the recovery spawn's middle;
@@ -575,6 +577,8 @@ if [[ "$GAME" == "tactics" && "$STAGE" == "1" ]]; then
   # Each walk-in: the bots' step into the stamp started a fight, and the TV drew it in place.
   STARTS=$(grep -c 'STAMP the fight starts' "$OUT/phones.log" || true)
   (( STARTS == 2 )) && log "stage: both walk-ins started a fight" || stage_fail "two walk-ins that start a fight (the bots logged $STARTS)"
+  # The beat's lead-in scene plays before the first walk-in's fight only (a retry skips it); the bots skip its lines and answer it.
+  log "stage: scenes before a fight: $(grep -c 'STAMP a scene starts' "$OUT/phones.log" || true); lines skipped: $(grep -c ' skips line ' "$OUT/phones.log" || true)"
   FIGHTS=$(grep -nE "^TACTICS screen tactics-battle-$MAP(-|$)" "$OUT/tv.log" | cut -d: -f1 | paste -sd' ' || true)
   INPLACE=$(grep -c '^TACTICS stage Forming in place$' "$OUT/tv.log" || true)
   log "stage: the TV showed the battle at lines ${FIGHTS:-none}, and walked in in place $INPLACE times"
