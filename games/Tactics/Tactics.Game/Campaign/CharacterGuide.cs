@@ -89,7 +89,7 @@ public static class CharacterGuide
         List<string> facts =
         [
             $"Speed: {Tiles(race.Move)} a turn.",
-            $"Size: {TitleCase(race.Size)}.",
+            $"Size: {TitleCase(race.Size)}{NotInBattles}.",
             race.Darkvision > 0
                 ? $"Darkvision: {Tiles(race.Darkvision)}. Battles have no darkness yet, so it doesn't change a fight."
                 : "Senses: normal sight.",
@@ -99,7 +99,7 @@ public static class CharacterGuide
         if (race.ExtraSkills > 0)
             facts.Add($"Skilled: {Count(race.ExtraSkills, "more skill", "more skills")} from your class's list.");
         if (race.Jump is { } jump)
-            facts.Add($"Climbs {Count(jump, "level", "levels")} in one step.");
+            facts.Add(Climbs(jump));
         facts.Add("Ability boosts come from your background, not your race.");
         List<string> traits = [];
         if (race.Ability is { } ability)
@@ -120,8 +120,8 @@ public static class CharacterGuide
         [
             $"Hit points: {cls.HitDie} + your CON modifier at level 1, then {hpLevel} + CON modifier each level (hit die d{cls.HitDie}).",
             $"Saving throws: {Join(cls.Saves.Select(StatName))}.",
-            cls.ArmorProf.IsDefaultOrEmpty ? "Armour: none." : $"Armour: {Join(cls.ArmorProf.Select(Armor))}.",
-            cls.WeaponProf.IsDefaultOrEmpty ? "Weapons: none." : $"Weapons: {Join(cls.WeaponProf.Select(w => $"{w} weapons"))}.",
+            cls.ArmorProf.IsDefaultOrEmpty ? $"Armour: none{NotInBattles}." : $"Armour: {Join(cls.ArmorProf.Select(Armor))}{NotInBattles}.",
+            cls.WeaponProf.IsDefaultOrEmpty ? $"Weapons: none{NotInBattles}." : $"Weapons: {Join(cls.WeaponProf.Select(w => WeaponProf(w, rules)))}{NotInBattles}.",
             $"Skills: {Count(cls.SkillChoices.Count, "skill", "skills")} from {Join(cls.SkillChoices.From.Select(SkillName), "or")}, the first not already from your background.",
         ];
         if (cls.CastingStat is { } casting)
@@ -130,6 +130,8 @@ public static class CharacterGuide
             facts.Add($"Unarmoured defence: without armour, Armour Class adds your {Short(unarmored)} modifier.");
         foreach (var (id, table) in cls.Resources)
             facts.Add($"{TitleCase(id.Replace('_', ' '))}: {table.At(Math.Clamp(upTo - 1, 1, 10))} per battle at level {Math.Clamp(upTo - 1, 1, 10)}, {table.At(10)} by level 10.");
+        if (cls.Jump != ClassDef.DefaultJump)
+            facts.Add(Climbs(cls.Jump));
         var weapon = rules.Weapons.TryGetValue(cls.StartingKit.Weapon, out var w) ? Words(w.Id) : Words(cls.StartingKit.Weapon);
         var armor = rules.Armors.TryGetValue(cls.StartingKit.Armor, out var a) ? a.Name.ToLowerInvariant() : Words(cls.StartingKit.Armor);
         facts.Add($"Starts with: {weapon}{(string.IsNullOrEmpty(cls.StartingKit.Armor) ? "" : $", {armor}")}{(cls.StartingKit.Shield ? ", a shield" : "")}.");
@@ -176,6 +178,25 @@ public static class CharacterGuide
         _ => $"{TitleCase(role)}.",
     };
 
+    /// <summary>
+    /// The rule for facts the pack holds but no battle reads yet (size, armour and weapon proficiencies, a keepsake): they're shown, with
+    /// this said after them, as darkvision says it doesn't change a fight.
+    /// </summary>
+    public const string NotInBattles = " (not used in battles yet)";
+
+    /// <summary>"Climbs 3 levels in one step (most climb 2)": the Jump a battle's movement uses.</summary>
+    private static string Climbs(int jump)
+        => $"Climbs {Count(jump, "level", "levels")} in one step (most climb {ClassDef.DefaultJump}).";
+
+    /// <summary>
+    /// A weapon proficiency: a category, every part of it a weapon tag ("martial_light" → "light martial weapons"), or else a weapon by
+    /// its name ("hand_crossbow" → "hand crossbow").
+    /// </summary>
+    private static string WeaponProf(string prof, RulesPack rules)
+        => prof.Split('_').All(part => rules.Weapons.Values.Any(w => w.Tags.Contains(part)))
+            ? $"{string.Join(' ', prof.Split('_').Reverse())} weapons"
+            : Words(prof);
+
     private static string Armor(string prof) => prof switch
     {
         "shield" => "shields",
@@ -193,7 +214,7 @@ public static class CharacterGuide
             $"Skills: {Join(b.Skills.Select(SkillName))}.",
         ];
         if (!string.IsNullOrEmpty(b.Trinket))
-            facts.Add($"Keepsake: {b.Trinket}.");
+            facts.Add($"Keepsake: {b.Trinket}{NotInBattles}.");
         return new BackgroundGuide(b.Name, [.. facts], b.Boosts, b.Skills.IsDefault ? [] : b.Skills);
     }
 

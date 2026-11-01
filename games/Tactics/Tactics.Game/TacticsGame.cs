@@ -113,6 +113,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         _doc = TacticsDocument.Read(campaign.Document) with { RulesHash = Rules.Hash };
         if (seed is not null)
             _doc = seed.SeedInto(_doc, Rules);
+        _doc = Coloured(_doc);
         EnterWorld();
         ElectAtStart();
         KeepWorld();
@@ -134,7 +135,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     public void Resume(IGameContext ctx, IReadOnlyList<Player> players, ICampaignLease? campaign)
     {
         (_ctx, _players, _lease) = (ctx, players, campaign ?? new MemoryLease(TacticsDocument.New.ToJson()));
-        _doc = TacticsDocument.Read(_lease.Document);
+        _doc = Coloured(TacticsDocument.Read(_lease.Document));
         EnterWorld();
         _sessionLead = _doc.World?.LastLeader;     // a restart isn't a new session, so the lead doesn't rotate
         SaveWorld();
@@ -386,7 +387,19 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         => SheetBuilder.DefaultCharacter(name, "human", cls, null, level, Rules);
 
     private void SetMember(ProfileId profile, MemberRecord record)
-        => _doc = _doc with { Members = _doc.Members.SetItem(profile.Value, record) };
+        => _doc = Coloured(_doc with { Members = _doc.Members.SetItem(profile.Value, record) });
+
+    /// <summary>
+    /// The document with every member's colour assigned (<see cref="PlayerColors.Assign"/>), kept from then on: in the campaign's join
+    /// order, or, for a session outside a campaign, the order the players sat down in.
+    /// </summary>
+    private TacticsDocument Coloured(TacticsDocument doc)
+    {
+        var order = PlayerColors.JoinOrder(_lease.Info).ToList();
+        if (order.Count == 0)
+            order = [.. _players.Where(p => p.Profile is not null).Select(p => p.Profile!.Value.Value)];
+        return doc with { Members = PlayerColors.Assign(doc.Members, order) };
+    }
 
     /// <summary>
     /// Characters for members who have none and aren't here to pick: the class that best fills the party's missing role

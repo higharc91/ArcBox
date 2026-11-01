@@ -85,6 +85,7 @@ public sealed class CharacterScreenTests
     [InlineData("#000000", "#bababa")]
     [InlineData("#ff00ff", "#ff94ff")]
     [InlineData("#123456", "#96bfe9")]
+    [InlineData("#0011cc", "#b2b9ff")]   // its red lands on 178.5: halves round to even, here and on the phone
     public void The_phone_and_the_server_lighten_alike(string hex, string made) => Assert.Equal(made, PlayerColors.Readable(hex));
 
     [Fact]
@@ -109,16 +110,33 @@ public sealed class CharacterScreenTests
     }
 
     [Fact]
-    public void Defaults_go_round_the_palette_in_join_order()
+    public void Defaults_go_round_the_palette_in_join_order_skipping_colours_taken()
     {
         Assert.Equal(PlayerColors.Palette[0].Hex, PlayerColors.Default(0));
         Assert.Equal(PlayerColors.Palette[1].Hex, PlayerColors.Default(1));
         Assert.Equal(PlayerColors.Palette[0].Hex, PlayerColors.Default(PlayerColors.Palette.Length));
-        Assert.Equal(0, PlayerColors.JoinIndex(Info, "pr_ana", ["pr_bo", "pr_ana"]));
-        Assert.Equal(1, PlayerColors.JoinIndex(Info, "pr_bo", []));
-        // A member the campaign doesn't list (a session outside one) comes after those it does, in document order.
-        Assert.Equal(3, PlayerColors.JoinIndex(Info, "pr_zed", ["pr_ana", "pr_cy", "pr_zed"]));
-        Assert.Equal(1, PlayerColors.JoinIndex(null, "pr_zed", ["pr_cy", "pr_zed"]));
+        Assert.Equal(PlayerColors.Default(1), PlayerColors.FreeDefault(1, [PlayerColors.Default(0)]));
+        Assert.Equal(PlayerColors.Default(2), PlayerColors.FreeDefault(1, [PlayerColors.Default(1), null]));
+        Assert.Equal(PlayerColors.Default(3), PlayerColors.FreeDefault(1, PlayerColors.Palette.Select(c => c.Hex).Where(h => h != PlayerColors.Default(3))));
+        Assert.Equal(PlayerColors.Default(1), PlayerColors.FreeDefault(1, PlayerColors.Palette.Select(c => c.Hex)));    // all taken: share
+    }
+
+    private static MemberRecord Member(string? color = null) => new(SheetBuilder.DefaultCharacter("X", "human", "fighter", null, 1, Rules), 0, Color: color);
+
+    /// <summary>Colours are given in join order, once; a member who has one keeps it, and one given later skips what others have.</summary>
+    [Fact]
+    public void Assigning_keeps_colours_and_never_duplicates_a_default()
+    {
+        var members = Ordinal.Map<MemberRecord>([("pr_a", Member()), ("pr_b", Member(PlayerColors.Default(0))), ("pr_c", Member())]);
+        var given = PlayerColors.Assign(members, ["pr_c", "pr_a", "pr_b"]);
+        Assert.Equal(PlayerColors.Default(0), given["pr_b"].Color);       // kept, though they joined third
+        Assert.Equal(PlayerColors.Default(1), given["pr_c"].Color);       // first to join: Gold is taken, so the next free
+        Assert.Equal(PlayerColors.Default(2), given["pr_a"].Color);       // Sky would be its own, but c has it; then Coral
+        Assert.Same(given, PlayerColors.Assign(given, ["pr_c", "pr_a", "pr_b"]));      // nothing more to give
+
+        // A member leaving doesn't move anyone's colour: it's kept with them.
+        var after = PlayerColors.Assign(given.Remove("pr_c"), ["pr_a", "pr_b"]);
+        Assert.Equal(given["pr_a"].Color, after["pr_a"].Color);
     }
 
     [Fact]
@@ -133,16 +151,35 @@ public sealed class CharacterScreenTests
         Assert.Equal("Pick a colour.", refused.Error);
     }
 
+    /// <summary>
+    /// A member who never picked is given their join order's free colour the first time the campaign is changed, and keeps it; the view of
+    /// a document saved before colours shows the same colour without writing anything.
+    /// </summary>
     [Fact]
-    public void A_character_from_before_colours_takes_its_join_orders_default_and_saves_none()
+    public void A_character_from_before_colours_is_given_its_join_orders_colour_and_keeps_it()
     {
-        var doc = Created(Bo, doc: Created(Ana));
-        var read = TacticsDocument.Read(doc);
-        Assert.Null(read.For(Ana)!.Color);
-        Assert.DoesNotContain("\"color\"", doc.GetRawText());
-        var view = View(doc, Bo);
+        var old = TacticsDocument.Read(Created(Bo, doc: Created(Ana)));
+        old = old with { Members = Ordinal.Map(old.Members.Select(m => (m.Key, m.Value with { Color = null }))) };
+        Assert.DoesNotContain("\"color\"", old.ToJson().GetRawText());
+        var view = View(old.ToJson(), Bo);
         Assert.Equal(PlayerColors.Default(1), view["me"]!["color"]!.GetValue<string>());
         Assert.Equal([PlayerColors.Default(0), PlayerColors.Default(1)], view["party"]!.AsArray().Select(p => p!["color"]!.GetValue<string>()));
+
+        // Any change saves them: Ana changes hers, and Bo's default is now kept with him.
+        var saved = TacticsDocument.Read(Portal.Handle(Info, old.ToJson(), Ana, "setColor", Json(new { color = "#d2b4ff" })).Document!.Value);
+        Assert.Equal("#d2b4ff", saved.For(Ana)!.Color);
+        Assert.Equal(PlayerColors.Default(1), saved.For(Bo)!.Color);
+    }
+
+    /// <summary>A new member's default skips a colour someone already picked, and the picker is told which colours are whose.</summary>
+    [Fact]
+    public void A_new_members_default_skips_taken_colours_and_the_picker_marks_them()
+    {
+        var doc = Created(Ana, PlayerColors.Default(1));      // Ana picked Bo's would-be default
+        var colors = View(doc, Bo)["options"]!["colors"]!;
+        Assert.Equal(PlayerColors.Default(2), colors["current"]!.GetValue<string>());     // Sky is Ana's: the next free, Coral
+        Assert.Equal([(PlayerColors.Default(1), "Ana")], colors["taken"]!.AsArray().Select(t => (t!["hex"]!.GetValue<string>(), t["name"]!.GetValue<string>())));
+        Assert.Equal(PlayerColors.Default(2), TacticsDocument.Read(Created(Bo, doc: doc)).For(Bo)!.Color);
     }
 
     [Fact]
@@ -167,6 +204,7 @@ public sealed class CharacterScreenTests
         Assert.Equal(["grass", "stone", "ash", "panel"], colors["grounds"]!.AsArray().Select(g => g!["name"]!.GetValue<string>()));
         Assert.Equal(PlayerColors.MinContrast, colors["minContrast"]!.GetValue<double>());
         Assert.Equal(PlayerColors.Default(1), colors["current"]!.GetValue<string>());
+        Assert.Equal([PlayerColors.Default(0)], colors["taken"]!.AsArray().Select(t => t!["hex"]!.GetValue<string>()));
     }
 
     // ---- The TV and the phones ------------------------------------------------------------------------------------------------
@@ -222,7 +260,7 @@ public sealed class CharacterScreenTests
     {
         var dwarf = CharacterGuide.Race(Rules.Races["dwarf"], Rules);
         Assert.Contains("Speed: 3 tiles a turn.", dwarf.Facts);
-        Assert.Contains("Size: Medium.", dwarf.Facts);
+        Assert.Contains("Size: Medium (not used in battles yet).", dwarf.Facts);
         Assert.Contains("Resistant to poison damage: takes half.", dwarf.Facts);
         Assert.Contains(dwarf.Facts, f => f.StartsWith("Darkvision: 12 tiles.", StringComparison.Ordinal));
         Assert.Contains("Ability boosts come from your background, not your race.", dwarf.Facts);
@@ -269,8 +307,8 @@ public sealed class CharacterScreenTests
         Assert.Equal("Healer: keeps the party standing.", cleric.Role);
         Assert.Contains("Hit points: 8 + your CON modifier at level 1, then 5 + CON modifier each level (hit die d8).", cleric.Facts);
         Assert.Contains("Saving throws: Wisdom and Charisma.", cleric.Facts);
-        Assert.Contains("Armour: light armour, medium armour and shields.", cleric.Facts);
-        Assert.Contains("Weapons: simple weapons.", cleric.Facts);
+        Assert.Contains("Armour: light armour, medium armour and shields (not used in battles yet).", cleric.Facts);
+        Assert.Contains("Weapons: simple weapons (not used in battles yet).", cleric.Facts);
         Assert.Contains(cleric.Facts, f => f.StartsWith("Spellcasting: Wisdom.", StringComparison.Ordinal));
         Assert.Contains(cleric.Facts, f => f.StartsWith("Skills: 2 skills from Medicine, Religion, Insight, History or Persuasion", StringComparison.Ordinal));
         Assert.Equal([1, 2, 3], cleric.Levels.Select(l => l.Level));
@@ -284,11 +322,46 @@ public sealed class CharacterScreenTests
         Assert.All(rogue.Subclasses, s => Assert.Empty(s.Levels));      // nothing before level 3
     }
 
+    /// <summary>No guide shows an id: no underscores, no "class.thing", in any fact, name, drive or feature text, at any level.</summary>
+    [Fact]
+    public void No_guide_text_shows_a_raw_id()
+    {
+        var d = CharacterGuide.For(Rules.Races.Values, Rules.Classes.Values, Rules.Backgrounds.Values, 9, Rules, "cleric");
+        var texts = d.Races.Values.SelectMany(r => r.Facts.Append(r.Name))
+            .Concat(d.Classes.Values.SelectMany(c => c.Facts.Append(c.Name).Append(c.Role).Concat(c.Subclasses.Select(x => x.Name))))
+            .Concat(d.Backgrounds.Values.SelectMany(b => b.Facts.Append(b.Name)))
+            .Concat(d.Features.Values.SelectMany(f => f.Tags.Append(f.Name).Append(f.Text)))
+            .Concat(d.Skills.Values.SelectMany(k => new[] { k.Name, k.Text }))
+            .Concat(d.Stats.Values.SelectMany(x => x.Drives.Append(x.Name)))
+            .ToList();
+        Assert.NotEmpty(texts);
+        var id = new System.Text.RegularExpressions.Regex(@"_|\b[a-z]+\.[a-z]");
+        Assert.All(texts, t => Assert.False(id.IsMatch(t), t));
+    }
+
+    /// <summary>
+    /// Facts the pack holds that no battle reads say so (the one rule, <see cref="CharacterGuide.NotInBattles"/>), and the Jump a battle's
+    /// movement does read is given for a class that changes it.
+    /// </summary>
+    [Fact]
+    public void Facts_no_battle_reads_say_so_and_jump_is_given()
+    {
+        var rogue = CharacterGuide.Class(Rules.Classes["rogue"], 2, 2, Rules);
+        Assert.Contains("Climbs 3 levels in one step (most climb 2).", rogue.Facts);
+        Assert.Contains("Weapons: simple weapons, hand crossbow, longsword, rapier and shortsword (not used in battles yet).",
+            CharacterGuide.Class(Rules.Classes["bard"], 2, 2, Rules).Facts);
+        Assert.Contains("Armour: light armour (not used in battles yet).", rogue.Facts);
+        Assert.DoesNotContain(CharacterGuide.Class(Rules.Classes["cleric"], 2, 2, Rules).Facts, f => f.StartsWith("Climbs", StringComparison.Ordinal));
+        Assert.Contains(CharacterGuide.Class(Rules.Classes["monk"], 2, 2, Rules).Facts, f => f.StartsWith("Weapons: simple weapons and light martial weapons", StringComparison.Ordinal));
+        Assert.Contains("Size: Medium (not used in battles yet).", CharacterGuide.Race(Rules.Races["dwarf"], Rules).Facts);
+        Assert.Contains("Keepsake: prayer beads (not used in battles yet).", CharacterGuide.Background(Rules.Backgrounds["acolyte"]).Facts);
+    }
+
     [Fact]
     public void A_background_lists_its_boosts_skills_and_keepsake()
     {
         var acolyte = CharacterGuide.Background(Rules.Backgrounds["acolyte"]);
-        Assert.Equal(["Ability boosts: WIS +2 and CHA +1.", "Skills: Insight and Religion.", "Keepsake: prayer beads."], acolyte.Facts);
+        Assert.Equal(["Ability boosts: WIS +2 and CHA +1.", "Skills: Insight and Religion.", "Keepsake: prayer beads (not used in battles yet)."], acolyte.Facts);
         Assert.Equal("Sleight of Hand", CharacterGuide.SkillName("sleight_of_hand"));
         Assert.Equal("Animal Handling", CharacterGuide.SkillName("animal_handling"));
     }

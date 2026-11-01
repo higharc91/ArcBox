@@ -312,9 +312,8 @@ public sealed partial class TacticsGame
         _result?.Outcome.ToString(), _phase == TacticsPhase.Results ? ResultLines() : null,
         _phase == TacticsPhase.Results ? _lastBattle : null, ExploreViewOf(), Coloured(StoryViewOf()), _card, _phase == TacticsPhase.Results ? _resultNote : null);
 
-    /// <summary>The player's colour (<see cref="PlayerColors.Of"/>): theirs, else the palette's for their place in the campaign's join order.</summary>
-    private string ColorOf(string member)
-        => PlayerColors.Of(_doc.Members.GetValueOrDefault(member), PlayerColors.JoinIndex(_lease.Info, member, _doc.Members.Keys));
+    /// <summary>The player's colour: the one kept with them (every member has one, <see cref="PlayerColors.Assign"/>).</summary>
+    private string ColorOf(string member) => _doc.Members.GetValueOrDefault(member)?.Color ?? PlayerColors.Default(0);
 
     /// <summary>A scene's view with the players' colours on its question and its roll's cards, for the TV's vote dots.</summary>
     private StoryView? Coloured(StoryView? story) => story is null ? null : story with

@@ -15,7 +15,8 @@ public sealed record GroundColor(string Name, string Hex);
 /// vote dots and their phone. A colour has to stand out where it's drawn, so every colour is checked against grass, stone and ash (the
 /// ring) and the navy panels (the dots): one that doesn't reach <see cref="MinContrast"/> on all four is lightened until it does
 /// (<see cref="Readable"/>). Lightening, never darkening, because the panels are dark and the ring has a dark outline. A member
-/// who never picked (a character from before colours, or one made at Muster) gets the palette's colour for their place in join order.
+/// who never picked (a character from before colours, or one made at Muster) is given one once (<see cref="Assign"/>): the first palette
+/// colour from their place in join order that nobody has, which is then kept with them, so it never shifts when someone joins or leaves.
 /// </summary>
 public static class PlayerColors
 {
@@ -47,22 +48,41 @@ public static class PlayerColors
     public static string Default(int joinIndex) => Palette[((joinIndex % Palette.Length) + Palette.Length) % Palette.Length].Hex;
 
     /// <summary>
-    /// Where <paramref name="member"/> is in join order: their place in <paramref name="info"/>'s members, or, for a member it doesn't
-    /// list (a session outside a campaign), their place among <paramref name="documentMembers"/> after all of those.
+    /// The default for the <paramref name="joinIndex"/>th member: the first palette colour from <see cref="Default"/>(joinIndex) on, round
+    /// the palette, that isn't <paramref name="taken"/>; with every one taken, <see cref="Default"/>(joinIndex).
     /// </summary>
-    public static int JoinIndex(CampaignInfo? info, string member, IEnumerable<string> documentMembers)
+    public static string FreeDefault(int joinIndex, IEnumerable<string?> taken)
     {
-        var listed = info?.Members ?? [];
-        for (var i = 0; i < listed.Count; i++)
-            if (listed[i].Profile.Value == member)
-                return i;
-        var rest = documentMembers.Where(m => !listed.Any(l => l.Profile.Value == m)).ToList();
-        var at = rest.IndexOf(member);
-        return listed.Count + (at < 0 ? rest.Count : at);
+        var used = taken.Where(t => t is not null).ToHashSet(StringComparer.Ordinal);
+        for (var k = 0; k < Palette.Length; k++)
+            if (!used.Contains(Default(joinIndex + k)))
+                return Default(joinIndex + k);
+        return Default(joinIndex);
     }
 
-    /// <summary>The member's colour: the one they picked, else <see cref="Default"/> for their place in join order.</summary>
-    public static string Of(MemberRecord? record, int joinIndex) => record?.Color is { } picked && Parse(picked) is not null ? picked : Default(joinIndex);
+    /// <summary>
+    /// Every member with a colour: one who has a readable colour keeps it; each without, taken in <paramref name="joinOrder"/> (then any
+    /// member it doesn't name, in document order), gets <see cref="FreeDefault"/> for their place. Members are returned unchanged when
+    /// all have one, so a caller can tell whether there's anything to save.
+    /// </summary>
+    public static ImmutableSortedDictionary<string, MemberRecord> Assign(ImmutableSortedDictionary<string, MemberRecord> members,
+        IEnumerable<string> joinOrder)
+    {
+        var order = joinOrder.Where(members.ContainsKey).Distinct().ToList();
+        order.AddRange(members.Keys.Where(k => !order.Contains(k)));
+        var result = members;
+        for (var i = 0; i < order.Count; i++)
+        {
+            var record = result[order[i]];
+            if (Parse(record.Color) is not null)
+                continue;
+            result = result.SetItem(order[i], record with { Color = FreeDefault(i, result.Values.Select(r => Parse(r.Color))) });
+        }
+        return result;
+    }
+
+    /// <summary>A campaign's join order: its members as <paramref name="info"/> lists them.</summary>
+    public static IEnumerable<string> JoinOrder(CampaignInfo? info) => (info?.Members ?? []).Select(m => m.Profile.Value);
 
     /// <summary>"#RRGGBB" or "#rrggbb" as lower-case "#rrggbb"; null for anything else.</summary>
     public static string? Parse(string? hex)

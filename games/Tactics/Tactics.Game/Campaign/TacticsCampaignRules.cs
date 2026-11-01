@@ -61,12 +61,11 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
     private JsonElement View(CampaignInfo info, JsonElement document, ProfileId member)
     {
         var rules = pack.Value;
-        var doc = TacticsDocument.Read(document);
-        var party = info.Members.Select((m, i) => doc.For(m.Profile) is { } r
-            ? new { name = m.DisplayName, character = Describe(r.Character), xp = r.Xp, you = m.Profile == member, color = (string?)PlayerColors.Of(r, i) }
+        var doc = Coloured(TacticsDocument.Read(document), info);
+        var party = info.Members.Select(m => doc.For(m.Profile) is { } r
+            ? new { name = m.DisplayName, character = Describe(r.Character), xp = r.Xp, you = m.Profile == member, color = r.Color }
             : new { name = m.DisplayName, character = "No character yet", xp = 0, you = m.Profile == member, color = (string?)null });
         var mine = doc.For(member);
-        var joinIndex = PlayerColors.JoinIndex(info, member.Value, doc.Members.Keys);
         var creating = mine is null || mine.CanRemake;
         object? options = creating
             ? new
@@ -75,7 +74,9 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
                 classes = rules.Classes.Values.Select(c => new { id = c.Id, name = c.Name, role = c.Role }),
                 backgrounds = rules.Backgrounds.Values.Select(b => new { id = b.Id, name = b.Name, boosts = b.Boosts }),
                 pointBuy = CharacterRules.PointBuy,
-                colors = Colors(PlayerColors.Of(mine, joinIndex)),
+                colors = Colors(mine?.Color ?? NewMemberColor(doc, info, member), info.Members
+                    .Where(m => m.Profile != member && doc.For(m.Profile)?.Color is not null)
+                    .Select(m => new { hex = doc.For(m.Profile)!.Color!, name = m.DisplayName })),
             }
             : null;
         // What the details sheets explain: everything on offer while creating, else the member's own race, class and background.
@@ -88,7 +89,7 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
         return JsonSerializer.SerializeToElement(new
         {
             level = doc.PartyLevel, completed = doc.Completed, party,
-            me = mine is null ? null : Mine(mine, rules, joinIndex),
+            me = mine is null ? null : Mine(mine, rules),
             options,
             details,
         }, ArcJson.Options);
@@ -96,14 +97,26 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
 
     /// <summary>
     /// The colours on offer, the grounds they're checked against and the contrast they need, and the colour the member has now (their
-    /// pick, else their default by join order), which creation starts on.
+    /// pick, else the default they'll be given), which creation starts on, and the colours other members have, which the picker marks: a
+    /// player may share one, but should know.
     /// </summary>
-    private static object Colors(string current) => new
+    private static object Colors(string current, IEnumerable<object> taken) => new
     {
-        palette = PlayerColors.Palette, grounds = PlayerColors.Grounds, minContrast = PlayerColors.MinContrast, current,
+        palette = PlayerColors.Palette, grounds = PlayerColors.Grounds, minContrast = PlayerColors.MinContrast, current, taken,
     };
 
-    private object Mine(MemberRecord record, RulesPack rules, int joinIndex)
+    /// <summary>The document with every member's colour assigned (<see cref="PlayerColors.Assign"/>), in the campaign's join order.</summary>
+    private static TacticsDocument Coloured(TacticsDocument doc, CampaignInfo info)
+        => doc with { Members = PlayerColors.Assign(doc.Members, PlayerColors.JoinOrder(info)) };
+
+    /// <summary>The colour a member without a character will be given: the first free one from their place in join order.</summary>
+    private static string NewMemberColor(TacticsDocument doc, CampaignInfo info, ProfileId member)
+    {
+        var index = info.Members.Select(m => m.Profile).ToList().IndexOf(member);
+        return PlayerColors.FreeDefault(index < 0 ? info.Members.Count : index, doc.Members.Values.Select(r => r.Color));
+    }
+
+    private object Mine(MemberRecord record, RulesPack rules)
     {
         var c = record.Character;
         rules.Classes.TryGetValue(c.Class, out var cls);
@@ -129,7 +142,7 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
                 from = ch.Feature.From.Select(id => Option(id, c.Level, rules)),
                 picked = placed[i],
             }).ToArray(),
-            color = PlayerColors.Of(record, joinIndex),
+            color = record.Color,
             skills = sheet?.Skills.ToImmutableArray() ?? [],
             saves = sheet?.SaveProficiencies ?? [],
             // Each skill's bonus in a story check, as SkillCheck rolls it.
@@ -169,7 +182,8 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
         try
         {
             var rules = pack.Value;
-            var doc = TacticsDocument.Read(document);
+            // Any command keeps the colours of members who had none (PlayerColors.Assign), so a default never shifts later.
+            var doc = Coloured(TacticsDocument.Read(document), info);
             var mine = doc.For(member);
             (CharacterRecord? Character, string? Problem) result;
             string? color = null;
@@ -228,7 +242,7 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
                     : mine with { Character = character };
             if (color is not null)
                 record = record with { Color = color };
-            var updated = doc with { Members = doc.Members.SetItem(member.Value, record) };
+            var updated = Coloured(doc with { Members = doc.Members.SetItem(member.Value, record) }, info);
             return new(updated.ToJson(), null);
         }
         catch (Exception e) when (e is InvalidOperationException or FormatException or JsonException)
