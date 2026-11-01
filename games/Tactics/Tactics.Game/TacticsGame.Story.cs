@@ -147,7 +147,44 @@ public sealed partial class TacticsGame
         var opening = SceneRun.Next(scenes, StoryFlags(), null, aftermath: false) ?? scenes.FirstOrDefault();
         var figure = opening?.Cast.Where(c => c != SceneDef.Narrator).Select(Lore.Character).FirstOrDefault(c => c is not null);
         var waiting = Cursor?.Beat != beat.Id || AtTheFight(beat) && _phase == TacticsPhase.Exploration;
-        return [new StoryMarker(beat.Id, spot, figure is null ? null : $"characters.{figure.Preset}", waiting ? "alert" : null)];
+        // While one of its scenes plays, the scene's cast stands in the figure's place (CastOf), so nobody is shown twice.
+        var playing = _phase == TacticsPhase.Story && Cursor?.Beat == beat.Id && CurrentScene() is not null;
+        return [new StoryMarker(beat.Id, spot, figure is null || playing ? null : $"characters.{figure.Preset}", waiting ? "alert" : null)];
+    }
+
+    /// <summary>
+    /// Who stands in the world for the scene under way (the user's answer of 2026-11-01, item 21): each of its speakers who isn't the
+    /// narrator and is in the lore, at <see cref="SceneSpot(SceneDef, ArcBeat, Terrain)"/>, on tiles <see cref="SceneCast.Place"/> chooses clear of the party, facing
+    /// the leader. Empty outside the Story phase, with no scene, and in the chapter's card; so they leave as the scene ends. In the gap
+    /// before a scene, it's that scene's cast, where the party has just travelled to.
+    /// </summary>
+    private ImmutableArray<CastView> CastOf()
+    {
+        if (_phase != TacticsPhase.Story || _telling == StoryStates.Card || _region is not { } region || CurrentScene() is not { } scene
+            || BeatNamed(scene.Beat) is not { } beat)
+            return [];
+        var cast = SceneCast.Speakers(scene).Select(Lore.Character).OfType<LoreCharacter>().ToList();
+        if (cast.Count == 0)
+            return [];
+        var ground = Rules.GroundFor(region.Def.Id)!.Terrain;
+        var reached = Rules.ReachFor(region.Def.Id)!;
+        HashSet<Tile> party = [_at, .. _legs.Select(l => l.To)];
+        var tiles = SceneCast.Place(ground, SceneSpot(scene, beat, ground), _at, _facing, party, cast.Count, t => ground.Map.InBounds(t) && reached.Contains(t));
+        return [.. tiles.Select((t, i) => new CastView(cast[i].Id, cast[i].Name, $"characters.{cast[i].Preset}", t, _at))];
+    }
+
+    /// <summary>
+    /// Where <paramref name="scene"/> of <paramref name="beat"/> plays in the region: for a scene set in another place, that place's spot
+    /// (<see cref="StoryRules.SpotFor"/>, where <see cref="TravelFor"/> takes the party), else its beat's. Where the party stands when
+    /// there's no spot, or the leader isn't within <see cref="StoryRules.Reach"/> steps of it: a battle's aftermath, which plays where the
+    /// fight ended, or a lead-in begun by stepping into the stamp, away from the "!".
+    /// </summary>
+    private Tile SceneSpot(SceneDef scene, ArcBeat beat, Terrain ground)
+    {
+        var spot = scene.Place is { } place && place != beat.Place
+            ? StoryArc is { } arc ? StoryRules.SpotFor(arc, _region!.Def, place) : null
+            : SpotOf(beat);
+        return spot is { } at && StoryRules.InReach(ground, _at, at) ? at : _at;
     }
 
     /// <summary>

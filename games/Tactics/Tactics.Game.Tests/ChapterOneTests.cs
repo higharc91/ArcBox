@@ -91,6 +91,12 @@ public abstract class ChapterOne
         public List<string> Lines { get; } = [];
 
         public List<BattleOutcome> Fights { get; } = [];
+
+        /// <summary>Who stood in the world for each scene (<see cref="ExploreView.Cast"/>), by character id, as it first showed: every scene's the same throughout.</summary>
+        public Dictionary<string, string[]> Casts { get; } = [];
+
+        /// <summary>How far each scene's cast stood from the leader at most, in tiles along x or y.</summary>
+        public Dictionary<string, int> CastReach { get; } = [];
         public int Restarts { get; private set; }
         public int Steps { get; private set; }
 
@@ -137,6 +143,7 @@ public abstract class ChapterOne
                         break;
                     case TacticsPhase.Exploration:
                         Assert.DoesNotContain(Ember, World.Beats);      // never walking after the last beat without its card
+                        Assert.Empty(Host.Explore!.Cast!.Value);         // the cast leaves with its scene
                         WalkToTheMarker();
                         break;
                     case TacticsPhase.Story:
@@ -191,6 +198,7 @@ public abstract class ChapterOne
         {
             if (Host.Story is { } story)
             {
+                SeeCast(story);
                 if (Played.Count == 0 || Played[^1] != story.Scene)
                     Played.Add(story.Scene);
                 if (story.Line is { } line && (Lines.Count == 0 || Lines[^1] != line.Id))
@@ -224,6 +232,40 @@ public abstract class ChapterOne
                     Answer();
             }
             Harness.Advance(TimeSpan.FromMilliseconds(250));
+        }
+
+        /// <summary>
+        /// The scene's cast as the TV is told it: the same all through the scene, each on a tile of their own the party could walk to, never
+        /// the leader's or the trail's, facing the leader; and nobody in the card. A marker's figure never stands beside them.
+        /// </summary>
+        private void SeeCast(StoryView story)
+        {
+            var explore = Host.Explore!;
+            var cast = explore.Cast!.Value;
+            if (Host.Chapter is not null)
+            {
+                Assert.Empty(cast);
+                return;
+            }
+            var ids = cast.Select(c => c.Id).ToArray();
+            if (Casts.TryGetValue(story.Scene, out var seen))
+                Assert.Equal(seen, ids);
+            else
+                Casts[story.Scene] = ids;
+            var ground = Rules.GroundFor(explore.Region)!.Terrain;
+            var reached = Rules.ReachFor(explore.Region)!;
+            Assert.Equal(cast.Length, cast.Select(c => c.At).Distinct().Count());
+            foreach (var c in cast)
+            {
+                Assert.True(ground.Walkable(c.At) && reached.Contains(c.At), $"{c.Id} stands on {c.At} in {story.Scene}, which can't be stood on.");
+                Assert.NotEqual(explore.At, c.At);
+                Assert.DoesNotContain(c.At, explore.Legs.Select(l => l.To));
+                Assert.Equal(explore.At, c.Facing);
+                Assert.Equal($"characters.{_lore.Character(c.Id)!.Preset}", c.Sprite);
+                CastReach[story.Scene] = Math.Max(CastReach.GetValueOrDefault(story.Scene), Math.Max(Math.Abs(c.At.X - explore.At.X), Math.Abs(c.At.Y - explore.At.Y)));
+            }
+            if (!cast.IsEmpty)
+                Assert.All(explore.Markers!.Value, m => Assert.Null(m.Sprite));
         }
 
         /// <summary>Everyone who may answer does: the branch's option where it's offered, else the first; the best bonus to roll.</summary>
@@ -305,6 +347,18 @@ public abstract class ChapterOne
         }
     }
 
+    /// <summary>The casts both branches share, and every cast within sight of the leader: never further from them than the cast may stand from its spot.</summary>
+    protected static void AssertCommonCasts(Play play)
+    {
+        Assert.Equal(["pip_ashdown", "bree_tallow", "halden_varrow", "dagna_holt", "hooded_stranger"], play.Casts["ch1_mayor"]);
+        Assert.Equal(["halden_varrow", "dagna_holt", "bree_tallow"], play.Casts["ch1_ford"]);
+        Assert.Equal(["old_maud", "hooded_stranger"], play.Casts["ch1_maud"]);
+        Assert.Equal(["pip_ashdown", "rook"], play.Casts["ch1_docks"]);
+        Assert.Equal(["maren_sorrel", "mother_aubrine"], play.Casts["ch1_kindler"]);
+        Assert.Equal(["hooded_stranger"], play.Casts["ch1_four_more"]);
+        Assert.All(play.CastReach, r => Assert.True(r.Value <= SceneCast.Reach, $"{r.Key}'s cast stood {r.Value} tiles from the leader."));
+    }
+
     /// <summary>Plays the chapter, and checks its end: every beat done, the card shown once, its checkpoint, and walking after.</summary>
     protected static Play Played(Play play, string[] scenes)
     {
@@ -338,6 +392,11 @@ public sealed class ChapterOneTests : ChapterOne
     {
         var play = Played(new Play(branch: "force"), ByForce);
 
+        // Mother Skarrow and Dagna at the bridge for the dawn and for what it cost (item 21), and every other scene's speakers at its spot.
+        Assert.Equal(["mother_skarrow", "dagna_holt"], play.Casts["ch1_dawn"]);
+        Assert.Equal(["mother_skarrow", "dagna_holt"], play.Casts["ch1_bridge_cost"]);
+        AssertCommonCasts(play);
+
         Assert.Contains("ch1_skarrow_slain", play.World.Flags);
         Assert.DoesNotContain("ch1_skarrow_spared", play.World.Flags);
         Assert.Equal([BattleOutcome.Won], play.Fights);
@@ -348,6 +407,14 @@ public sealed class ChapterOneTests : ChapterOne
     public void Chapter_1_plays_by_parley()
     {
         var play = Played(new Play(branch: "parley"), ByParley);
+
+        // Mother Skarrow stands at her camp for the parley, and the speakers of every other scene at theirs (item 21).
+        Assert.Equal(["mother_skarrow"], play.Casts["ch1_parley"]);
+        Assert.Equal(["mother_skarrow", "dagna_holt"], play.Casts["ch1_young_ones"]);
+        Assert.Equal(["mother_skarrow", "dagna_holt"], play.Casts["ch1_road_east"]);
+        Assert.Equal(["halden_varrow", "dagna_holt", "celandine_marrowby", "mother_aubrine"], play.Casts["ch1_granary"]);
+        Assert.Equal(["mother_skarrow"], play.Casts["ch1_song"]);
+        AssertCommonCasts(play);
 
         Assert.Contains("ch1_skarrow_spared", play.World.Flags);
         Assert.Contains("ch1_halden_confessed", play.World.Flags);

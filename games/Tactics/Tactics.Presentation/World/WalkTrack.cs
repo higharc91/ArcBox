@@ -60,6 +60,8 @@ public sealed class WalkTrack
     private Terrain? _rules;           // the ground the last Places stood on, for a follower finding its way back to the trail
     private (Tile At, Tile Facing)? _faced; // the server's last say on where the leader stands and faces, so a view sent again doesn't turn anyone twice
     private (int Epoch, int Bumps)? _bumps; // the last view's count of refused steps, for a refused press whose Blocked view was missed
+    private HashSet<Tile> _kept = [];  // tiles someone else stands on (a scene's cast), which no follower takes
+    private bool _reslot;              // the kept tiles changed during a rest: whoever stands on one moves
 
     /// <summary>How far the leader has walked, in tiles, ever. It only goes up. A floor of this ticking over is a footstep.</summary>
     public double Walked { get; private set; }
@@ -133,6 +135,19 @@ public sealed class WalkTrack
         _seeded = true;
     }
 
+    /// <summary>
+    /// Keeps <paramref name="tiles"/> clear of followers: a scene's cast stands there (<see cref="ExploreView.Cast"/>). A rest's formation
+    /// leaves them out, and a follower already standing on one when they change steps aside to another tile, at the next
+    /// <see cref="Places"/>; nobody else moves. The leader's tile is the server's, which never puts anyone on it.
+    /// </summary>
+    public void Keep(IReadOnlyCollection<Tile> tiles)
+    {
+        if (_kept.SetEquals(tiles))
+            return;
+        _kept = [.. tiles];
+        _reslot = true;
+    }
+
     /// <summary>Moves everything on by <paramref name="seconds"/>.</summary>
     public void Advance(double seconds)
     {
@@ -157,6 +172,9 @@ public sealed class WalkTrack
         _rules = terrain.Rules;
         if (Resting && !_slotted)
             Fan(terrain);
+        else if (Resting && _reslot)
+            Reslot(terrain);
+        _reslot = false;
 
         var speed = (float)Math.Min(_speed, 1);
         foreach (var walker in _walkers)
@@ -490,13 +508,26 @@ public sealed class WalkTrack
                 (walker.Offset, walker.Drift, walker.At) = (slot - PointAt(walker.Along), Vector2.Zero, slot);
     }
 
-    private void Choose(BoardTerrain terrain)
+    /// <summary>The kept tiles changed during a rest: each follower whose place is on one of them takes another, and the rest stay put.</summary>
+    private void Reslot(BoardTerrain terrain)
     {
-        var followers = _walkers.Skip(1).Where(w => !_seeded || w.Slot is null).ToList();
+        var moving = _walkers.Skip(1).Where(w => w.Slot is { } slot && _kept.Contains(TileUnder(slot))).ToList();
+        if (moving.Count > 0)
+            Choose(terrain, moving);
+    }
+
+    /// <summary>
+    /// Chooses places for the followers: all of them, or those with none after a seed, or just <paramref name="only"/>, round everyone
+    /// else's. Never on a kept tile (<see cref="Keep"/>).
+    /// </summary>
+    private void Choose(BoardTerrain terrain, List<Walker>? only = null)
+    {
+        var followers = only ?? _walkers.Skip(1).Where(w => !_seeded || w.Slot is null).ToList();
         var rules = terrain.Rules;
         var open = Reachable(terrain, _path[^1].Tile);
-        if (_seeded)
-            open.RemoveAll(t => _walkers.Any(w => w.Slot is { } slot && TileUnder(slot) == t));
+        if (_seeded || only is not null)
+            open.RemoveAll(t => _walkers.Any(w => !followers.Contains(w) && w.Slot is { } slot && TileUnder(slot) == t));
+        open.RemoveAll(_kept.Contains);
         var (centre, way) = (_path[^1].At, _path.Count > 1 ? Vector2.Normalize(_path[^1].At - _path[^2].At) : _restFace);
         var side = new Vector2(-way.Y, way.X);
         for (var i = 0; followers.Count > 0 && open.Count > 0; i++)

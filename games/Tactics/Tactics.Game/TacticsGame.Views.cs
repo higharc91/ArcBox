@@ -173,9 +173,21 @@ public sealed record WalkerView(string Id, string Name, string Sprite, bool Here
 /// The story beat on offer, where it waits (overworld 5d §2): at most one, since one beat is offered at a time. It changes only when what's
 /// on offer does, or its scene starts or ends, never with a step.
 /// </param>
+/// <param name="Cast">
+/// Who stands at the scene's spot while a scene plays (the user's answer of 2026-11-01, item 21): its speakers who aren't the narrator, in
+/// the order they first speak, each on a tile of their own that no walker stands on. Empty outside a scene, and in the chapter's card.
+/// </param>
 public sealed record ExploreView(string Region, string Name, int Epoch, int Seq, Tile At, Tile Facing, bool Held,
     ImmutableArray<WalkLeg> Legs, ImmutableArray<WalkerView> Party, string? Leader, int Chapter = 0, bool Blocked = false, int Bumps = 0,
-    string? Arrived = null, ImmutableArray<StoryMarker>? Markers = null);
+    string? Arrived = null, ImmutableArray<StoryMarker>? Markers = null, ImmutableArray<CastView>? Cast = null);
+
+/// <summary>A speaker of the scene under way, standing in the world (<see cref="ExploreView.Cast"/>). Dressing only: it doesn't block the party.</summary>
+/// <param name="Id">The character's id in the lore.</param>
+/// <param name="Name">The character's name.</param>
+/// <param name="Sprite">Their sprite key: <c>characters.&lt;preset&gt;</c>.</param>
+/// <param name="At">The tile they stand on.</param>
+/// <param name="Facing">The tile they look towards: the leader's, so they face the party.</param>
+public sealed record CastView(string Id, string Name, string Sprite, Tile At, Tile Facing);
 
 /// <summary>
 /// A story beat's marker in the world (overworld 5d §2, default 12): who stands at its spot, and the emote over them. Dressing only: the
@@ -363,7 +375,7 @@ public sealed partial class TacticsGame
     private ExploreView? ExploreViewOf() => _region is not { } region ? null : new ExploreView(region.Def.Id, region.Def.Name, _epoch, _walkSeq, _at, _facing, _dir is not null && !_blocked, _legs,
         [.. Walkers().Select(w => new WalkerView(w.Player.Profile!.Value.Value, w.Player.Name,
             HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{w.Character.Class}"])!, w.Here, w.Leads))],
-        Leader?.Name, region.Def.Chapter, _dir is not null && _blocked, _bumps, _arrived, Markers());
+        Leader?.Name, region.Def.Chapter, _dir is not null && _blocked, _bumps, _arrived, Markers(), CastOf());
 
     private ControllerView BattleScreen(ProfileId profile)
     {

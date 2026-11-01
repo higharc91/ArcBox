@@ -167,13 +167,15 @@ public static class UnitPlan
     /// <summary>
     /// A figure standing in the world as dressing (a story beat's, overworld 5d default 12): idle, looking at the viewer, with no ring and no
     /// marks, sorted among the party by its tile. <paramref name="sprite"/> is a key the pack may not draw: then it's the neutral stand-in.
+    /// With <paramref name="look"/>, a way across the map, it looks that way instead (a scene's cast, towards the party), as a walker does.
     /// </summary>
-    public static BoardUnit Figure(string id, string? sprite, UnitPlace place, UnitArt art, Func<Vector2, bool, Vector2>? pixels = null)
+    public static BoardUnit Figure(string id, string? sprite, UnitPlace place, UnitArt art, Func<Vector2, bool, Vector2>? pixels = null, Vector2? look = null)
     {
         var drawn = art.Sprite(sprite) ?? art.StandIn(UnitTone.Neutral);
         var feet = pixels?.Invoke(place.Feet, true) ?? place.Feet;
         var unit = new UnitId(id);
-        return new BoardUnit(OrderOf(place.Over, drawn), unit, UnitTone.Neutral, feet, drawn, drawn.Idle, PhaseOf(unit), 0, false, 0, false, [], [], null,
+        var (row, mirror) = look is { } way && way != Vector2.Zero ? Looking(way.X, way.Y) : (0, false);
+        return new BoardUnit(OrderOf(place.Over, drawn), unit, UnitTone.Neutral, feet, drawn, drawn.Idle, PhaseOf(unit), row, mirror, 0, false, [], [], null,
             null, [], feet, null);
     }
 

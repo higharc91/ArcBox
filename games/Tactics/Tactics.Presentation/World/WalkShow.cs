@@ -55,6 +55,7 @@ public sealed class WalkShow
 
     private ImmutableArray<WalkerView> _party = [];
     private ImmutableArray<StoryMarker> _markers = [];
+    private ImmutableArray<CastView> _cast = [];
     private bool _started;
     private int _epoch;
     private int _seq;
@@ -71,6 +72,9 @@ public sealed class WalkShow
 
     /// <summary>Whether the newest view had a direction held.</summary>
     public bool Held { get; private set; }
+
+    /// <summary>The scene's cast standing in the world, as the newest view has it (<see cref="ExploreView.Cast"/>).</summary>
+    public IReadOnlyList<CastView> Cast => _cast;
 
     /// <summary>The party, in the newest view's order.</summary>
     public IReadOnlyList<WalkerView> Party => _party;
@@ -96,6 +100,8 @@ public sealed class WalkShow
             _told = view.Seq;        // what's in a first view was walked before this TV came
         (_started, _epoch, _seq, _party, Held) = (true, view.Epoch, view.Seq, view.Party.IsDefault ? [] : view.Party, view.Held);
         _markers = view.Markers is { IsDefault: false } markers ? markers : [];
+        _cast = view.Cast is { IsDefault: false } cast ? cast : [];
+        _track.Keep([.. _cast.Select(c => c.At)]);      // followers stand clear of the scene's cast
         _track.Receive(view);       // a press into a wall turns the leader to face it there
         _bumped |= _bump.Receive(view);     // and leans them into it, in Frame
 
@@ -158,7 +164,8 @@ public sealed class WalkShow
         var bump = bumped ? _sounds?.Step(_terrain.Map, new Tile((int)MathF.Floor(focus.Map.X), (int)MathF.Floor(focus.Map.Y))) : null;
 
         ImmutableArray<BoardUnit> units = stage?.Hidden == true ? [] : [.. UnitPlan.Walkers(_party, drawn, _track.Poses, _art, _pixels)
-            .Concat(StoryMarks.Of(_markers, _terrain, _art, _pixels).Select(m => m.Unit).OfType<BoardUnit>()).OrderBy(u => u.Order)];
+            .Concat(StoryMarks.Of(_markers, _terrain, _art, _pixels).Select(m => m.Unit).OfType<BoardUnit>())
+            .Concat(StoryMarks.Cast(_cast, _terrain, _art, _pixels)).OrderBy(u => u.Order)];
         var fit = stage is { Shake: var shake } && shake != Vector2.Zero ? _camera.Fit with { Origin = _camera.Fit.Origin + shake * _camera.Fit.Scale } : _camera.Fit;
         return new WalkFrame(units, fit, focus.Map, _track.Heading * TilesPerSecond, footstep, cut, _track.Walked, focus.Feet, bumped, bump);
     }

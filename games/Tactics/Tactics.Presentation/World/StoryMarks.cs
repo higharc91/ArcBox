@@ -40,6 +40,18 @@ public static class StoryMarks
         return [.. markers.Where(m => terrain.Map.InBounds(m.At)).Select(m => Of(m, terrain, art, pixels))];
     }
 
+    /// <summary>
+    /// The scene's cast (<see cref="ExploreView.Cast"/>), ready to draw among the party: each idle on their tile, looking towards the tile
+    /// the server says (the leader's), with no ring and no marks. Anyone off the map isn't drawn.
+    /// </summary>
+    public static ImmutableArray<BoardUnit> Cast(ImmutableArray<CastView> cast, BoardTerrain terrain, UnitArt art, Func<Vector2, bool, Vector2>? pixels = null)
+    {
+        if (cast.IsDefaultOrEmpty)
+            return [];
+        return [.. cast.Where(c => terrain.Map.InBounds(c.At)).Select(c => UnitPlan.Figure($"cast:{c.Id}", c.Sprite, UnitPlace.On(terrain, c.At), art, pixels,
+            new Vector2(c.Facing.X - c.At.X, c.Facing.Y - c.At.Y)))];
+    }
+
     private static StoryMark Of(StoryMarker marker, BoardTerrain terrain, UnitArt art, Func<Vector2, bool, Vector2>? pixels)
     {
         var place = UnitPlace.On(terrain, marker.At);

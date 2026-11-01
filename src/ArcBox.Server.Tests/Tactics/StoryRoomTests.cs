@@ -146,4 +146,23 @@ public sealed class StoryRoomTests
         Assert.Equal(1, options["force"].GetProperty("voters").GetArrayLength());
         Assert.Equal(2, options["parley"].GetProperty("voters").GetArrayLength());
     }
+
+    private static JsonElement Cast(JsonElement host) => host.GetProperty("explore").GetProperty("cast");
+
+    /// <summary>
+    /// The scene's cast (the user's answer of 2026-11-01, item 21) through a real room: the TV is told who stands where, and a TV that comes
+    /// back mid-scene is told the same, tile for tile, in its first view.
+    /// </summary>
+    [Fact]
+    public async Task A_TV_that_comes_back_mid_scene_sees_the_cast()
+    {
+        await using var f = await AtTheFordAsync();
+        var cast = Cast(Host(f));
+        Assert.Equal(["halden_varrow", "dagna_holt", "bree_tallow"], cast.EnumerateArray().Select(c => c.GetProperty("id").GetString()));
+
+        await f.Room.BindHostAsync("host2", "host-token");
+        var back = (JsonElement)f.Sender.Of("host2", ClientMethods.HostView).Last().Args[1]!;
+        Assert.Equal("Story", back.GetProperty("phase").GetString());
+        Assert.Equal(cast.GetRawText(), Cast(back).GetRawText());
+    }
 }
