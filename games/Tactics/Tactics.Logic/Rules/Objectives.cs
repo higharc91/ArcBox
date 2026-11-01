@@ -120,12 +120,16 @@ public static class Objectives
 
     /// <summary>
     /// Ends the battle with <paramref name="outcome"/>, unless it is already over: sets <see cref="BattleState.Outcome"/>,
-    /// clears the queue (the turn hand-off included) and any pending decision, and emits <see cref="BattleEnded"/>.
+    /// halts any walk still under way (<see cref="MoveStep.Halt"/>: the steps it drops won't run, and a walker part-way
+    /// through an ally can't stay on its tile), clears the queue (the turn hand-off included) and any pending decision, and
+    /// emits <see cref="BattleEnded"/>.
     /// </summary>
     internal static void End(BattleWriter w, BattleOutcome outcome)
     {
         if (w.State.Outcome is not null)
             return;
+        while (w.State.Queue.OfType<MoveStep>().FirstOrDefault() is { } walk)
+            walk.Halt(w);
         w.State = w.State with { Outcome = outcome, Queue = [], Pending = null };
         w.Emit(new BattleEnded(outcome));
     }
