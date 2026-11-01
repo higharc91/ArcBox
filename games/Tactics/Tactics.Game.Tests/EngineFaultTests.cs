@@ -304,8 +304,146 @@ public sealed class EngineFaultTests
         Assert.False(s.Harness.IsOver);
         Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
         Assert.Null(TacticsDocument.Read(s.Lease.Document).Battle);
-        Assert.Contains(TacticsGame.BattleCalledOff, s.Host.Notice);
+        Assert.Equal(TacticsGame.BattleCalledOff, s.Host.Notice);     // not "it starts again" first: it doesn't
         Assert.Equal("start", Assert.Single(faults).Where);
+
+        // A restart that works still says so.
+        var fine = new Session(document: stale);
+        fine.Harness.Resume(fine.Lease);
+        Assert.Equal("The rules changed since this battle began, so it starts again.", fine.Host.Notice);
+    }
+
+    [Fact]
+    public void A_turn_the_ai_fails_to_plan_is_ended_and_the_battle_plays_on()
+    {
+        var (game, faults) = Watched();
+        var s = new Session(game: game);
+        s.ToBattle(everyoneAway: true);
+        var broken = s.Game.Document.Battle!.State.Order.First(u => !IsHero(u));
+        game.PlanEngine = (state, unit, rules, options) => unit == broken ? throw Forced() : Ai.Plan(state, unit, rules, options);
+
+        s.PlayOut();
+
+        Assert.False(s.Harness.IsOver);
+        Assert.Equal(TacticsPhase.Results, s.Game.Phase);
+        Assert.NotEmpty(faults);
+        Assert.All(faults, f => Assert.Equal(("plan", (string?)null), (f.Where, f.Command)));
+        Assert.Equal(faults.Count, faults.Select(f => (f.Round, f.TurnIndex)).Distinct().Count());
+    }
+
+    [Fact]
+    public void A_reaction_the_ai_rule_fails_to_choose_on_a_timeout_is_passed_and_counts_as_a_skip()
+    {
+        var (game, faults) = Watched();
+        var s = new Session(seed: 3, game: game);
+        s.ToBattle();
+        for (var step = 0; step < 5_000; step++)
+        {
+            for (var p = 0; p < 4; p++)
+            {
+                if (s.Screen(p) is { Screen: TacticsGame.Screens.React } react)
+                {
+                    var offer = s.Game.Document.Battle!.State.Pending;
+                    game.ReactEngine = (_, _, _) => throw Forced();
+
+                    // Exactly to the prompt's deadline, so the AI's next step (which would apply normally) hasn't come yet.
+                    s.Harness.Advance(react.DeadlineUtc!.Value - s.Harness.Now);
+
+                    Assert.False(s.Harness.IsOver);
+                    Assert.NotSame(offer, s.Game.Document.Battle?.State.Pending);
+                    Assert.Equal("reaction", Assert.Single(faults).Where);
+                    Assert.Equal(1, s.Game.Skips);
+                    Assert.Equal(TacticsGame.MoveFailed, s.Host.Notice);
+
+                    game.ReactEngine = Ai.React;
+                    s.PlayOut();
+                    Assert.Equal(TacticsPhase.Results, s.Game.Phase);
+                    return;
+                }
+                if (s.Screen(p) is { Screen: TacticsGame.Screens.Turn })
+                    s.Send(p, "endTurn");
+            }
+            s.Harness.Advance(TimeSpan.FromSeconds(7));
+        }
+        Assert.Fail("No reaction was offered to a player.");
+    }
+
+    [Fact]
+    public void A_fault_handler_that_throws_loses_the_log_line_not_the_room()
+    {
+        var game = new TacticsGame(TacticsGameTests.Rules) { FaultLogged = _ => throw new InvalidOperationException("The log is down.") };
+        var s = new Session(game: game);
+        s.ToBattle();
+        var (player, screen) = WaitForTurn(s);
+        var saved = s.Lease.Document.GetRawText();
+        game.ApplyEngine = (state, command, rules, ai) => command is EndTurn ? Battle.Apply(state, command, rules, ai) : throw Forced();
+
+        s.Send(player, "move", new { path = screen.Data.GetProperty("choices").GetProperty("moves")[0].GetProperty("path") });
+
+        Assert.False(s.Harness.IsOver);
+        Assert.Equal(saved, s.Lease.Document.GetRawText());
+        Assert.Equal(TacticsGame.MoveFailedTryAgain, s.Screen(player)?.Header);
+        Assert.Equal(TacticsGame.MoveFailed, s.Host.Notice);
+    }
+
+    [Fact]
+    public void A_battle_whose_result_the_engine_fails_on_is_called_off()
+    {
+        var (game, faults) = Watched();
+        var s = new Session(game: game);
+        s.ToBattle(everyoneAway: true);
+        game.ResultEngine = (_, _) => throw Forced();
+
+        s.PlayOut();
+
+        Assert.False(s.Harness.IsOver);
+        Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
+        Assert.Equal("result", Assert.Single(faults).Where);
+        var doc = TacticsDocument.Read(s.Lease.Document);
+        Assert.Null(doc.Battle);
+        Assert.Empty(doc.Completed);
+        Assert.All(doc.Members.Values, m => Assert.Equal(0, m.Xp));
+        Assert.Empty(s.Lease.Checkpoints);
+        Assert.Equal(TacticsGame.BattleCalledOff, s.Host.Notice);
+    }
+
+    [Fact]
+    public void A_seat_the_engine_fails_to_hand_over_keeps_its_controller_and_the_returning_player_is_told()
+    {
+        var (game, faults) = Watched();
+        var s = new Session(game: game);
+        s.ToBattle();
+        game.HandEngine = (_, _, _) => throw Forced();
+
+        s.Harness.SetConnected(1, false);
+        Assert.False(s.Harness.IsOver);
+        Assert.Equal(TacticsPhase.Battle, s.Game.Phase);
+        Assert.Equal("hand", Assert.Single(faults).Where);
+
+        s.Harness.SetConnected(1, true);
+        Assert.False(s.Harness.IsOver);
+        Assert.Equal(TacticsGame.HandBackFailed, s.Screen(1)?.Header);
+
+        // The battle still plays out, the AI deciding for whoever the engine wouldn't hand back.
+        s.PlayOut();
+        Assert.Equal(TacticsPhase.Results, s.Game.Phase);
+    }
+
+    [Fact]
+    public void A_saved_battle_the_engine_fails_to_hand_back_on_opening_still_opens_and_says_so()
+    {
+        var first = new Session();
+        first.ToBattle();
+        var (game, faults) = Watched();
+        game.HandEngine = (_, _, _) => throw Forced();
+        var s = new Session(document: first.Lease.Document, game: game);
+
+        s.Harness.StartCampaign(s.Lease);
+
+        Assert.False(s.Harness.IsOver);
+        Assert.Equal(TacticsPhase.Battle, s.Game.Phase);
+        Assert.Equal(4, faults.Count(f => f.Where == "hand"));
+        Assert.Contains(Enumerable.Range(0, 4), p => s.Screen(p)?.Header == TacticsGame.HandBackFailed);
     }
 
     private static (int Player, CustomView Screen) WaitForTurn(Session s)

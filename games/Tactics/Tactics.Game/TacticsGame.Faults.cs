@@ -40,6 +40,9 @@ public sealed partial class TacticsGame
     /// <summary>What the VIP is told when a battle won't start.</summary>
     public const string BattleWontStart = "Something went wrong starting that battle. Pick another.";
 
+    /// <summary>What a returning player is told when their hero couldn't be handed back to them.</summary>
+    public const string HandBackFailed = "Something went wrong handing your hero back, so the AI plays it for now.";
+
     /// <summary>What everyone is told when a battle can't go on at all: it's dropped with nothing won or lost.</summary>
     public const string BattleCalledOff = "Something went wrong with that battle, so it was called off. Nothing was won or lost.";
 
@@ -55,13 +58,29 @@ public sealed partial class TacticsGame
     /// <summary>The engine's <see cref="Battle.Start"/>. A seam for tests that need it to fail.</summary>
     internal Func<BattleSetup, RulesPack, ulong, Resolution> StartEngine { get; set; } = Battle.Start;
 
+    /// <summary>The AI's <see cref="Ai.Plan"/>. A seam for tests that need it to fail.</summary>
+    internal Func<BattleState, UnitId, RulesPack, AiOptions?, TurnPlan> PlanEngine { get; set; } = Ai.Plan;
+
+    /// <summary>The AI's <see cref="Ai.React"/>. A seam for tests that need it to fail.</summary>
+    internal Func<BattleState, ReactionOffer, RulesPack, ReactionChoice> ReactEngine { get; set; } = Ai.React;
+
+    /// <summary>The engine's <see cref="Battle.Result"/>. A seam for tests that need it to fail.</summary>
+    internal Func<BattleState, RulesPack, BattleResult?> ResultEngine { get; set; } = Battle.Result;
+
+    /// <summary>The engine's <see cref="Battle.Hand"/>. A seam for tests that need it to fail.</summary>
+    internal Func<BattleState, UnitId, Controller, BattleState> HandEngine { get; set; } = Battle.Hand;
+
+    /// <summary>The AI steps skipped in a row (<see cref="_skips"/>), for tests.</summary>
+    internal int Skips => _skips;
+
     /// <summary>The failure notice on the TV, and when it went up; null while there's none.</summary>
     private DateTimeOffset? _faultAt;
 
     /// <summary>
     /// AI steps in a row that failed and were skipped (a reaction passed or a turn ended in their place), with no command
     /// applying normally in between. More than a round's worth means every unit is failing, and the battle is called off
-    /// rather than skip turns forever.
+    /// rather than skip turns forever. Kept in memory only: a reopened save starts it from 0, which is still bounded, and
+    /// the same for every open of the same save.
     /// </summary>
     private int _skips;
 
@@ -92,11 +111,40 @@ public sealed partial class TacticsGame
     /// <summary>Logs a failure and puts the notice on the TV.</summary>
     private void Fault(string where, BattleState? before, Command? command, Exception e)
     {
+        _faultAt = _ctx.Now;
         var save = _doc.Battle;
-        FaultLogged?.Invoke(new EngineFault(where, save?.Encounter ?? "", save?.Seed ?? 0, _seq, before?.Round ?? 0, before?.TurnIndex ?? 0,
+        Report(() => new EngineFault(where, save?.Encounter ?? "", save?.Seed ?? 0, _seq, before?.Round ?? 0, before?.TurnIndex ?? 0,
             command is null ? null : JsonSerializer.Serialize(command, ArcJson.Options),
             before is null ? null : JsonSerializer.Serialize(before, ArcJson.Options), e));
-        _faultAt = _ctx.Now;
+    }
+
+    /// <summary>
+    /// Builds and hands over a fault, if anyone listens. Nothing in it may end the room: a state that won't serialise or a
+    /// handler that throws loses the log line, never the session.
+    /// </summary>
+    private void Report(Func<EngineFault> fault)
+    {
+        if (FaultLogged is not { } logged)
+            return;
+        try
+        {
+            logged(fault());
+        }
+        catch (Exception e) when (e is not OutOfMemoryException)
+        {
+            // Nowhere left to say it: the game does no I/O of its own.
+        }
+    }
+
+    /// <summary>
+    /// Counts one more skipped AI step, and calls the battle off (returning true) if that's more than a round's worth.
+    /// </summary>
+    private bool SkippedTooMany(BattleState before)
+    {
+        if (++_skips <= Math.Max(before.Order.Length, 1))
+            return false;
+        CallOffBattle();
+        return true;
     }
 
     /// <summary>The TV's notice: <see cref="_notice"/>, then the failure notice while it stands.</summary>
@@ -138,12 +186,13 @@ public sealed partial class TacticsGame
     private void SkipFailedStep(BattleState before, Command? failed, bool aiFinished)
     {
         _plan = null;
-        if (Fallback(before, failed) is not { } fallback || ++_skips > Math.Max(before.Order.Length, 1))
+        if (Fallback(before, failed) is not { } fallback)
         {
             CallOffBattle();
             return;
         }
-        ApplyAi(fallback, aiFinished, skipping: true);
+        if (!SkippedTooMany(before))
+            ApplyAi(fallback, aiFinished, skipping: true);
     }
 
     /// <summary>
@@ -161,6 +210,34 @@ public sealed partial class TacticsGame
         ToMusterOrPick();
     }
 
+    /// <summary><see cref="Battle.Hand"/>, or null if the engine failed (logged; the controller stays as it was).</summary>
+    private BattleState? TryHand(BattleState state, UnitId unit, Controller controller)
+    {
+        try
+        {
+            return HandEngine(state, unit, controller);
+        }
+        catch (Exception e) when (IsEngineFailure(e))
+        {
+            Fault("hand", state, null, e);
+            return null;
+        }
+    }
+
+    /// <summary><see cref="Battle.Result"/>, or null if the engine failed (logged).</summary>
+    private BattleResult? TryResult(BattleState state)
+    {
+        try
+        {
+            return ResultEngine(state, Rules) ?? throw new InvalidOperationException("The battle is over but has no result.");
+        }
+        catch (Exception e) when (IsEngineFailure(e))
+        {
+            Fault("result", state, null, e);
+            return null;
+        }
+    }
+
     /// <summary><see cref="Begin"/>, or null if the engine failed, which is logged.</summary>
     private Resolution? TryBegin(string encounter, ulong seed, ImmutableArray<ProfileId> members, ImmutableArray<CharacterRecord> companions)
     {
@@ -170,7 +247,7 @@ public sealed partial class TacticsGame
         }
         catch (Exception e) when (IsEngineFailure(e))
         {
-            FaultLogged?.Invoke(new EngineFault("start", encounter, seed, 0, 0, 0, null, null, e));
+            Report(() => new EngineFault("start", encounter, seed, 0, 0, 0, null, null, e));
             return null;
         }
     }

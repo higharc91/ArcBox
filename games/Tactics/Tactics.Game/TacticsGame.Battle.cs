@@ -80,9 +80,10 @@ public sealed partial class TacticsGame
     {
         if (TryBegin(save.Encounter, save.Seed, save.Members, save.Companions) is not { } resolution)
         {
-            CallOffBattle();
+            CallOffBattle();     // its notice only: the battle doesn't start again after all
             return false;
         }
+        Note("The rules changed since this battle began, so it starts again.");
         _doc = _doc with { Battle = save with { State = resolution.State, Log = [] } };
         _seq = 0;
         AddBeat(null, resolution.Events);
@@ -97,7 +98,12 @@ public sealed partial class TacticsGame
         var state = State;
         for (var i = 0; i < Save_.Members.Length; i++)
             if (state.Units.ContainsKey(UnitFor(i)))
-                state = Battle.Hand(state, UnitFor(i), ControllerFor(Save_.Members[i]));
+            {
+                if (TryHand(state, UnitFor(i), ControllerFor(Save_.Members[i])) is { } handed)
+                    state = handed;
+                else
+                    HandBackFailedFor(Save_.Members[i]);     // it keeps the controller it was saved with
+            }
         SetState(state);
         Save();
         Drive();
@@ -107,13 +113,26 @@ public sealed partial class TacticsGame
     {
         if (UnitOf(profile) is not { } unit || !State.Units.ContainsKey(unit))
             return;
-        if (connected && _aiFinishing == unit)
-            (_aiFinishing, _plan) = (null, null);     // back in time: what's left of the turn is theirs again
-        SetState(Battle.Hand(State, unit, connected ? new PlayerControlled(profile) : new AiControlled(Companion)));
+        // If the engine fails to hand the unit over it keeps its controller: a returning player's hero stays the AI's (they're
+        // told), and a leaving player's is played by the AI anyway, since a player who isn't here doesn't decide for it.
+        if (TryHand(State, unit, connected ? new PlayerControlled(profile) : new AiControlled(Companion)) is { } handed)
+        {
+            if (connected && _aiFinishing == unit)
+                (_aiFinishing, _plan) = (null, null);     // back in time: what's left of the turn is theirs again
+            SetState(handed);
+        }
+        else if (connected)
+            HandBackFailedFor(profile);
         if (!connected && State.Active == unit && State.Pending is null)
             _aiFinishing = unit;     // the AI finishes what's left of the turn
         Save();
         Drive();
+    }
+
+    private void HandBackFailedFor(ProfileId profile)
+    {
+        if (_players.FirstOrDefault(p => p.Profile == profile && _online.Contains(p.Id)) is { } player)
+            Toast(player.Id, HandBackFailed);
     }
 
     // ---- The loop -----------------------------------------------------------------------------------------------------
@@ -155,7 +174,7 @@ public sealed partial class TacticsGame
 
             if (state.Pending is ReactionOffer offer)
             {
-                ApplyAi(new React(offer.Reactor, AiReaction(state, offer)), aiFinished: false);
+                AnswerForReactor(state, offer);
                 continue;
             }
 
@@ -192,7 +211,7 @@ public sealed partial class TacticsGame
             ImmutableArray<Command> commands;
             try
             {
-                commands = Ai.Plan(state, active, Rules, options).Commands;
+                commands = PlanEngine(state, active, Rules, options).Commands;
             }
             catch (Exception e) when (IsEngineFailure(e))
             {
@@ -205,18 +224,25 @@ public sealed partial class TacticsGame
         return plan.Commands.Dequeue();
     }
 
-    /// <summary>The AI's answer to <paramref name="offer"/>; a pass if choosing one fails (logged).</summary>
-    private ReactionChoice AiReaction(BattleState state, ReactionOffer offer)
+    /// <summary>
+    /// Answers <paramref name="offer"/> by the AI's rule. If choosing fails (logged), the reaction is passed, and that pass is
+    /// a skip like any other (<see cref="SkipFailedStep"/>).
+    /// </summary>
+    private void AnswerForReactor(BattleState state, ReactionOffer offer)
     {
+        ReactionChoice choice;
         try
         {
-            return Ai.React(state, offer, Rules);
+            choice = ReactEngine(state, offer, Rules);
         }
         catch (Exception e) when (IsEngineFailure(e))
         {
             Fault("reaction", state, null, e);
-            return Pass(offer);
+            if (!SkippedTooMany(state))
+                ApplyAi(new React(offer.Reactor, Pass(offer)), aiFinished: false, skipping: true);
+            return;
         }
+        ApplyAi(new React(offer.Reactor, choice), aiFinished: false);
     }
 
     /// <param name="command">The AI's step, or the step taken for a player whose time ran out.</param>
@@ -368,7 +394,7 @@ public sealed partial class TacticsGame
         if (State.Pending is ReactionOffer offer && IsPlayed(offer.Reactor) && timedOut?.Reactor == offer.Reactor)
         {
             // No answer: the same rule the AI uses (rules-engine spec §5.5), and the same fallbacks if it fails.
-            ApplyAi(new React(offer.Reactor, AiReaction(State, offer)), aiFinished: false);
+            AnswerForReactor(State, offer);
         }
         Drive();
     }

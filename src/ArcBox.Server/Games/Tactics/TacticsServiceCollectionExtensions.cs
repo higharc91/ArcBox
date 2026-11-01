@@ -36,11 +36,16 @@ public static class TacticsServiceCollectionExtensions
 
     /// <summary>
     /// An engine failure the game caught and carried on from (rules-engine spec §8), with what reproduces it: the encounter,
-    /// seed and beat, the command, and the state from before it, which <c>Battle.Apply</c> fails on again.
+    /// seed and beat and the command as an error; the state from before it, which <c>Battle.Apply</c> fails on again, at
+    /// Debug, since it runs to tens of KB.
     /// </summary>
     private static void LogFault(ILogger log, EngineFault fault)
-        => log.LogError(fault.Error,
-            "Tactics engine failure ({Where}) in {Encounter}, seed {Seed}, after beat {Beat}, round {Round}, turn {TurnIndex}. "
-            + "Command: {Command}. State before: {State}",
-            fault.Where, fault.Encounter, fault.Seed, fault.Beat, fault.Round, fault.TurnIndex, fault.Command ?? "none", fault.State ?? "none");
+    {
+        log.LogError(fault.Error,
+            "Tactics engine failure ({Where}) in {Encounter}, seed {Seed}, after beat {Beat}, round {Round}, turn {TurnIndex}. Command: {Command}",
+            fault.Where, fault.Encounter, fault.Seed, fault.Beat, fault.Round, fault.TurnIndex, fault.Command ?? "none");
+        if (fault.State is not null)
+            log.LogDebug("Tactics engine failure ({Where}) in {Encounter}, seed {Seed}, after beat {Beat}: state before: {State}",
+                fault.Where, fault.Encounter, fault.Seed, fault.Beat, fault.State);
+    }
 }

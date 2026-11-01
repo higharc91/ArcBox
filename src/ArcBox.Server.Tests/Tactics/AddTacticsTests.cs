@@ -23,7 +23,7 @@ public class AddTacticsTests
         services.AddLogging(b =>
         {
             if (log is not null)
-                b.AddProvider(log);
+                b.AddProvider(log).SetMinimumLevel(LogLevel.Debug);
         });
         services.AddOptions<ContentOptions>().Configure(o => o.Root = Path.Combine(repo, "content"));
         services.AddSingleton<IHostEnvironment>(new Env(repo));
@@ -54,13 +54,17 @@ public class AddTacticsTests
         game.FaultLogged(new EngineFault("ai", "river_crossing", 108, 41, 3, 2, "{\"$type\":\"EndTurn\",\"actor\":\"goblin1\"}",
             "{\"round\":3}", new InvalidOperationException("hero1 and goblin1 share the tile (4, 5).")));
 
-        var (_, level, text) = Assert.Single(log.Entries, e => e.Category.EndsWith(nameof(TacticsGame), StringComparison.Ordinal));
-        Assert.Equal(LogLevel.Error, level);
-        Assert.Contains("seed 108", text);
-        Assert.Contains("after beat 41", text);
-        Assert.Contains("goblin1", text);
-        Assert.Contains("{\"round\":3}", text);
-        Assert.Contains("share the tile", text);
+        var entries = log.Entries.Where(e => e.Category.EndsWith(nameof(TacticsGame), StringComparison.Ordinal)).ToList();
+        // The error says what failed and how to get there again, without the state, which goes to Debug.
+        var error = Assert.Single(entries, e => e.Level == LogLevel.Error).Text;
+        Assert.Contains("seed 108", error);
+        Assert.Contains("after beat 41", error);
+        Assert.Contains("goblin1", error);
+        Assert.Contains("share the tile", error);
+        Assert.DoesNotContain("{\"round\":3}", error);
+        var debug = Assert.Single(entries, e => e.Level == LogLevel.Debug).Text;
+        Assert.Contains("seed 108", debug);
+        Assert.Contains("{\"round\":3}", debug);
     }
 
     private sealed class Env(string root) : IHostEnvironment

@@ -107,7 +107,6 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         {
             if (unfinished.State.ContentHash != Rules.Hash)
             {
-                Note("The rules changed since this battle began, so it starts again.");
                 if (!RestartBattle(unfinished))
                     return;     // called off: the party is back where a battle's results would have sent it
             }
@@ -133,7 +132,6 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
 
         if (save.State.ContentHash != Rules.Hash)
         {
-            Note("The rules changed since this battle began, so it starts again.");
             if (!RestartBattle(save))
                 return;
         }
@@ -396,8 +394,12 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     {
         var save = _doc.Battle!;
         var state = save.State;
+        if (TryResult(state) is not { } result)
+        {
+            CallOffBattle();
+            return;
+        }
         _lastBattle = BattleViewOf();
-        var result = Battle.Result(state, Rules)!;
         var members = _doc.Members;
         for (var i = 0; i < save.Members.Length; i++)
         {
