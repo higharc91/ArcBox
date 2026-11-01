@@ -548,6 +548,153 @@ public sealed class StageEndTests
         Assert.Equal(("ch1_ford_assault", StorySave.After), (Saved(resumed).Story!.Beat, Saved(resumed).Story!.Stage));
     }
 
+    /// <summary>
+    /// Ashen Ford repainted with River Crossing's stamp moved by <paramref name="dx"/>, <paramref name="dy"/> tiles, its ground painted
+    /// there too so the region still checks, or with the stamp taken out.
+    /// </summary>
+    private static RulesPack Restamped(int dx, int dy, bool remove = false) => ExplorationTests.EditedRules(rules =>
+    {
+        var path = Path.Combine(rules, "world", "ashen_ford.json");
+        var region = JsonNode.Parse(File.ReadAllText(path))!;
+        var stamps = region["stamps"]!.AsArray();
+        var stamp = stamps.Single(st => st!["map"]!.GetValue<string>() == "river_crossing")!;
+        if (remove)
+            stamps.Remove(stamp);
+        else
+        {
+            var at = stamp["at"]!.AsArray();
+            stamp["at"] = new JsonArray(at[0]!.GetValue<int>() + dx, at[1]!.GetValue<int>() + dy);
+            // The ground the stamp stood on, painted at its new place as well, as a repaint that moves it would.
+            var chunks = region["chunks"]!.AsArray().ToDictionary(c => (c!["x"]!.GetValue<int>(), c["y"]!.GetValue<int>()),
+                c => (Node: c!, Tiles: Convert.FromBase64String(c!["tiles"]!.GetValue<string>())));
+            int Index(Tile t) => (t.Y % WorldRegion.ChunkSize * WorldRegion.ChunkSize + t.X % WorldRegion.ChunkSize) * 3;
+            byte[] Chunk(Tile t) => chunks[(t.X / WorldRegion.ChunkSize, t.Y / WorldRegion.ChunkSize)].Tiles;
+            var old = Stage;
+            var copied = new List<(Tile To, byte[] Bytes)>();
+            for (var y = 0; y < old.Depth; y++)
+                for (var x = 0; x < old.Width; x++)
+                {
+                    var from = old.ToWorld(new Tile(x, y));
+                    copied.Add((new Tile(from.X + dx, from.Y + dy), Chunk(from)[Index(from)..(Index(from) + 3)]));
+                }
+            foreach (var (to, bytes) in copied)
+                bytes.CopyTo(Chunk(to), Index(to));
+            foreach (var (node, tiles) in chunks.Values)
+                node["tiles"] = Convert.ToBase64String(tiles);
+        }
+        File.WriteAllText(path, region.ToJsonString());
+    });
+
+    /// <summary>A fight in the world, saved, and resumed with everyone back on <paramref name="rules"/>.</summary>
+    private static (Session Before, Session After) ResumedOn(RulesPack rules)
+    {
+        var s = Fighting(Force);
+        var resumed = new Session(document: s.Lease.Document, game: WithLore(null, rules: rules));
+        resumed.Harness.Resume(resumed.Lease);
+        for (var i = 0; i < 4; i++)
+            resumed.Harness.SetConnected(i, true);
+        Assert.Equal(TacticsPhase.Battle, resumed.Game.Phase);
+        return (s, resumed);
+    }
+
+    [Fact]
+    public void A_battle_saves_its_stage()
+    {
+        var s = Fighting(Force);
+
+        Assert.Equal(new SavedStage(Stage.Origin, Stage.Height), TacticsDocument.Read(s.Lease.Document).Battle!.Stage);
+        var node = JsonNode.Parse(s.Lease.Document.GetRawText())!["battle"]!["stage"]!;
+        Assert.Equal(Stage.Height, node["height"]!.GetValue<int>());
+    }
+
+    [Fact]
+    public void A_plain_board_battle_saves_no_stage()
+    {
+        var unstamped = Rules.Encounters.Values.First(e => Rules.RegionFor(Ford)!.StampFor(e.Map) is null && e.Party.Max >= 4);
+        var s = FromTheList(unstamped.Id);
+
+        Assert.Null(TacticsDocument.Read(s.Lease.Document).Battle!.Stage);
+        Assert.Null(JsonNode.Parse(s.Lease.Document.GetRawText())!["battle"]!["stage"]);       // not written: the save reads as before
+    }
+
+    /// <summary>
+    /// Review (rules FIX-SOON): a region file isn't in the battle's hash, so a repaint that moves the stamp doesn't restart a saved fight.
+    /// It's no longer where the fight was drawn, so it's a plain board, and the party ends it where it stood before the fight.
+    /// </summary>
+    [Theory]
+    [InlineData(-3, 0, false)]
+    [InlineData(0, 0, true)]
+    public void A_repaint_that_moves_the_stamp_puts_a_saved_battle_on_a_plain_board(int dx, int dy, bool remove)
+    {
+        var (before, resumed) = ResumedOn(Restamped(dx, dy, remove));
+        var stood = TacticsDocument.Read(before.Lease.Document).World!.At;
+        Assert.Equal(before.Game.Document.Battle!.State.Round, resumed.Game.Document.Battle!.State.Round);    // the same fight goes on
+        Assert.Null(resumed.Host.Notice);
+        Assert.Null(resumed.Host.Battle!.Stage);
+        var epoch = resumed.Host.Explore!.Epoch;
+
+        Ended(resumed, BattleOutcome.Won, Put(HeroOf(resumed, LeaderOf(resumed)), WestBank));
+
+        Assert.Equal(stood, resumed.Host.Explore!.At);      // where it stood before the fight, not the moved stamp's tile
+        Assert.Equal(epoch, resumed.Host.Explore.Epoch);
+        Assert.Equal(stood, Saved(resumed).At);
+    }
+
+    [Fact]
+    public void A_loss_on_a_moved_stamp_also_stays_where_the_party_stood()
+    {
+        var (before, resumed) = ResumedOn(Restamped(-3, 0));
+        var stood = TacticsDocument.Read(before.Lease.Document).World!.At;
+
+        Ended(resumed, BattleOutcome.Lost);
+
+        Assert.Equal(stood, resumed.Host.Explore!.At);
+    }
+
+    [Fact]
+    public void A_fight_called_off_on_a_moved_stamp_leaves_the_epoch()
+    {
+        var (before, resumed) = ResumedOn(Restamped(-3, 0));
+        var stood = TacticsDocument.Read(before.Lease.Document).World!.At;
+        var epoch = resumed.Host.Explore!.Epoch;
+        resumed.Game.ResultEngine = (_, _) => throw new InvalidOperationException("forced");
+
+        EndOnNextCommand(resumed, BattleOutcome.Won);
+        PlayOn(resumed);
+
+        Assert.Equal(TacticsGame.BattleCalledOff, resumed.Host.Notice);
+        Assert.Equal((stood, epoch), (resumed.Host.Explore!.At, resumed.Host.Explore.Epoch));     // a plain board: nothing to snap back
+        Assert.Null(resumed.Host.Explore.Arrived);
+    }
+
+    [Fact]
+    public void A_repaint_that_keeps_the_stamp_keeps_the_stage()
+    {
+        var (_, resumed) = ResumedOn(Restamped(0, 0));
+
+        Assert.Equal(Stage.Origin, resumed.Host.Battle!.Stage!.Origin);
+        Ended(resumed, BattleOutcome.Won, Put(HeroOf(resumed, LeaderOf(resumed)), WestBank));
+        Assert.Equal(World(WestBank), resumed.Host.Explore!.At);
+    }
+
+    [Fact]
+    public void A_battle_saved_before_stages_were_kept_uses_the_regions_stamp()
+    {
+        var s = Fighting(Force);
+        var node = JsonNode.Parse(s.Lease.Document.GetRawText())!;
+        node["battle"]!.AsObject().Remove("stage");
+        var doc = System.Text.Json.JsonSerializer.SerializeToElement(node);
+
+        var resumed = new Session(document: doc, game: WithLore(null));
+        resumed.Harness.Resume(resumed.Lease);
+        for (var i = 0; i < 4; i++)
+            resumed.Harness.SetConnected(i, true);
+
+        Assert.Equal(Stage.Origin, resumed.Host.Battle!.Stage!.Origin);
+        Ended(resumed, BattleOutcome.Won, Put(HeroOf(resumed, LeaderOf(resumed)), WestBank));
+        Assert.Equal(World(WestBank), resumed.Host.Explore!.At);
+    }
+
     // ---- The battle list --------------------------------------------------------------------------------------------
 
     private static Session FromTheList(string encounter, TacticsSeed? seed = null, Tile? at = null)

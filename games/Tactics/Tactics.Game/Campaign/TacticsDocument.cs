@@ -53,10 +53,19 @@ public sealed record Beat(int Seq, UnitId? Actor, ImmutableArray<BattleEvent> Ev
 /// The story beat this fight is, if it's one (overworld 5c): a win completes it. Null for a fight from the battle list, which touches no
 /// story, and for every battle saved before 5c. Left out of the JSON when null, and no version bump: a missing member reads as null.
 /// </param>
+/// <param name="Stage">
+/// Where the fight was drawn in the world when it began (the stamp's origin and height), or null on a plain board. A region file isn't in
+/// the battle's hash, so a repaint doesn't restart the fight; if the region's stamp has moved since, the fight goes on on a plain board
+/// (review). Left out of the JSON when null, and no version bump: a battle saved before it reads with none, and uses the region's stamp.
+/// </param>
 public sealed record BattleSave(string Encounter, ulong Seed, ImmutableArray<ProfileId> Members, BattleState State,
     ImmutableArray<Beat> Log,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<CharacterRecord> Companions = default,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] string? Beat = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] string? Beat = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] SavedStage? Stage = null);
+
+/// <summary>Where a battle was drawn in the world (<see cref="BattleStage"/>), as saved with it: its map's tile (0, 0) and the height added.</summary>
+public sealed record SavedStage(Tile Origin, int Height);
 
 /// <summary>
 /// A roll made in a scene (overworld 5d §6), kept with the node it leads to so a restart never rolls again: who rolled, for which option

@@ -447,7 +447,7 @@ public sealed partial class TacticsGame
             save.Log.IsDefault ? [] : save.Log, state.Outcome?.ToString(), BoardChanges.Of(state), state.Objectives.Current,
             state.Pending is ReactionOffer offer && IsPlayed(offer.Reactor) ? offer.Reactor : null,
             Rules.Encounters.GetValueOrDefault(save.Encounter)?.Name,
-            StageFor(state.MapId) is { } stage
+            StageOf(save) is { } stage
                 ? new StageView(_region!.Def.Id, stage.Origin, stage.Height, [.. save.Members.Select(m => m.Value)])
                 : null);
     }

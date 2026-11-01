@@ -60,12 +60,14 @@ public sealed partial class TacticsGame
         if (TryBegin(encounter, seed, members, companions) is not { } resolution)
             return false;
         (_lastBattle, _arrived) = (null, null);
+        var stage = StageFor(resolution.State.MapId);
         _doc = _doc with
         {
-            Battle = new BattleSave(encounter, seed, members, resolution.State, [], companions.IsEmpty ? default : companions, beat),
+            Battle = new BattleSave(encounter, seed, members, resolution.State, [], companions.IsEmpty ? default : companions, beat,
+                stage is { } st ? new SavedStage(st.Origin, st.Height) : null),
         };
         _seq = 0;
-        if (AddBeat(null, resolution.Events) is { } opening && StageFor(resolution.State.MapId) is not null)
+        if (AddBeat(null, resolution.Events) is { } opening && stage is not null)
         {
             _awaitShown = opening;
             _formUp = (opening, _ctx.Now + _timing.FormUp);

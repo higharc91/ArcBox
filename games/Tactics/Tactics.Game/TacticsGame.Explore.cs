@@ -133,6 +133,19 @@ public sealed partial class TacticsGame
     private BattleStage? StageFor(string map) => _region is { } region && Rules.MapFor(map) is { } battleMap ? BattleStage.Of(region, battleMap) : null;
 
     /// <summary>
+    /// Where the battle <paramref name="save"/> is drawn, and lands: the stage it was saved with, while the region still stamps its map
+    /// there (origin and height); a plain board if a repaint has moved or removed that stamp since (review), so the party ends it where it
+    /// stood before the fight. A battle saved before stages were kept takes the region's stamp, as it always did.
+    /// </summary>
+    private BattleStage? StageOf(BattleSave save)
+    {
+        var live = StageFor(save.State.MapId);
+        if (save.Stage is not { } saved)
+            return live;
+        return live is { } stage && stage.Origin == saved.Origin && stage.Height == saved.Height ? stage : null;
+    }
+
+    /// <summary>
     /// The fight on offer and where it stands: the arc's available beat (<see cref="StoryRules.Available"/>), if it's a battle whose
     /// encounter's map the region stamps. Every other stamp is ordinary ground, and so is this one once its beat is done. One beat is on
     /// offer at a time, so at most one stamp is armed, and it never has to name its encounter (5c default 2).
@@ -625,13 +638,13 @@ public sealed partial class TacticsGame
     /// Puts the party back in the world after a fight on a stamped map, before the battle is dropped (5c §6). A loss wakes it at the
     /// recovery spawn, which the region check keeps out of every stamp. A win or a flight stands it where the fight left it
     /// (<see cref="Landing"/>). Either is a teleport: a new <see cref="_epoch"/>, with no legs to follow. A fight on a map the region doesn't
-    /// stamp leaves the party where it was, with no new epoch. Call it after the story has taken the fight's outcome, so that a stamp the
+    /// stamp, or no longer stamps where the fight was saved (<see cref="StageOf"/>), leaves the party where it was, with no new epoch. Call it after the story has taken the fight's outcome, so that a stamp the
     /// outcome arms counts.
     /// </summary>
     private void Land(BattleSave save, BattleOutcome outcome)
     {
         _arrived = null;
-        if (_region is not { } region || StageFor(save.State.MapId) is not { } stage)
+        if (_region is not { } region || StageOf(save) is not { } stage)
             return;
         var at = outcome == BattleOutcome.Lost ? region.Def.Spawns.Recovery : Landing(save, stage);
         (_at, _facing, _arrived) = (at, new Tile(at.X + 1, at.Y), outcome == BattleOutcome.Lost ? Woke : FellIn);
