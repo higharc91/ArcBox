@@ -78,6 +78,14 @@ describe("the walk pad", () => {
     expect(document.querySelector(".tx-pad")).not.toBeNull();
   });
 
+  it("shows each player's colour in the party and on your card", () => {
+    show("walk-follower");
+    const data = (fixtures["./fixtures/tactics/walk-follower.json"]!.default as { data: { me: { color: string }; party: { color: string }[] } }).data;
+    const dots = [...document.querySelectorAll<HTMLElement>(".tx-walk-party .tx-dot")];
+    expect(dots.map((d) => d.style.getPropertyValue("--c"))).toEqual(data.party.map((p) => p.color));
+    expect(document.querySelector<HTMLElement>(".tx-walk .tx-me")!.style.getPropertyValue("--c")).toBe(data.me.color);
+  });
+
   it("draws its chevrons where the party goes, the road directions on a road's bearing", () => {
     show("walk-leader");
     const turn = (dir: string) => document.querySelector(`.tx-chevron.${dir}`)!.getAttribute("transform");

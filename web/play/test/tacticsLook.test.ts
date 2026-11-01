@@ -1,0 +1,62 @@
+import { describe, expect, it } from "vitest";
+import { compose, paint, recipe, type Creator } from "../src/games/tactics/look";
+
+// The pack's own files: the creator's options and the class presets the asset tools baked.
+const files = import.meta.glob<{ default: unknown }>("../../../content/tactics/base/characters/{creator.json,presets/class_*.json}", { eager: true });
+const file = (name: string) => files[`../../../content/tactics/base/characters/${name}`]!.default;
+const creator = file("creator.json") as Creator;
+const preset = (cls: string) => file(`presets/class_${cls}.json`) as {
+  build: string; layers: Record<string, string>; palette: Record<string, string>; race: string;
+};
+
+/** A frame of ramp-map pixels from a picture: "." empty, a digit the slot (shade 2). */
+const frame = (rows: string[]) => {
+  const height = rows.length, width = rows[0]!.length;
+  const data = new Uint8ClampedArray(width * height * 4);
+  rows.forEach((row, y) => [...row].forEach((ch, x) => {
+    if (ch === ".") return;
+    data.set([Number(ch) * 16, 2 * 32, 0, 255], (y * width + x) * 4);
+  }));
+  return { width, height, data };
+};
+
+describe("the look", () => {
+  /** The class presets were made from their own race with its default look: the recipe built from the pack must be theirs. */
+  it("a race and class make the recipe the asset tools made for the class's preset", () => {
+    for (const cls of Object.keys(creator.classes)) {
+      const p = preset(cls);
+      const r = recipe(creator.races[p.race]!, creator.classes[cls]!, p.palette);
+      expect(r.build.replace("_f", "")).toBe(p.build.replace("_f", ""));
+      for (const layer of ["body", "torso", "legs", "weapon"]) expect(r.layers[layer], `${cls} ${layer}`).toBe(p.layers[layer]);
+    }
+  });
+
+  it("the race's look and the class's kit go together", () => {
+    const r = recipe(creator.races.dwarf!, creator.classes.wizard!, preset("wizard").palette);
+    expect(r.build).toBe("short");
+    expect(r.layers.beard).toBe("full");
+    expect(r.layers.torso).toBe(creator.classes.wizard!.gear.torso);
+    expect(r.palette.skin).toBe("skin/tan");
+    expect(r.palette.hair).toBe("hair/copper");
+    expect(r.palette.cloth1).toBe("cloth/navy");
+    // A race with no hair has no hair layer.
+    expect(recipe(creator.races.goliath!, creator.classes.fighter!, preset("fighter").palette).layers.hair).toBeUndefined();
+  });
+
+  it("layers stack top-last-wins and the silhouette is outlined once", () => {
+    const c = compose(["body", "hat"], { body: frame(["...", ".1.", "..."]), hat: frame(["...", ".2.", "..."]) }, 3, 3);
+    expect(c.slot[4]).toBe(2);                           // the hat's pixel over the body's
+    expect([...c.outline]).toEqual([0, 1, 0, 1, 0, 1, 0, 1, 0]);   // its four neighbours, not the corners
+    expect(c.slot[1]).toBe(2);
+    expect(c.shade[1]).toBe(0);
+  });
+
+  it("paints each slot from its ramp, outline pixels darkened towards the outline colour", () => {
+    const c = compose(["body"], { body: frame(["..", "1."]) }, 2, 2);
+    const px = paint(c, { skin: 1 }, { skin: "skin/x" }, { skin: { x: ["#000000", "#111111", "#808080", "#ffffff"] } }, { colour: "#000000", mix: 0.5 });
+    expect([...px.slice(8, 12)]).toEqual([128, 128, 128, 255]);   // shade 2
+    expect([...px.slice(0, 4)]).toEqual([0, 0, 0, 255]);           // above it: outline, shade 0 mixed
+    expect([...px.slice(12, 16)]).toEqual([0, 0, 0, 255]);
+    expect(px[7]).toBe(0);                                        // the diagonal stays empty
+  });
+});

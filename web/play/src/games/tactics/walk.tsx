@@ -1,3 +1,4 @@
+import type { JSX } from "preact";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "preact/hooks";
 import { useFeedback } from "../../feedback/feedback";
 import type { CustomScreenProps } from "../module";
@@ -258,6 +259,7 @@ function Party({ party }: { party: WalkMember[] }) {
       {party.map((m) => (
         <li key={m.name} class={`${m.leads ? "leads" : ""}${m.here ? "" : " away"}`}>
           {m.leads ? <span class="tx-crown" title="Leads the party"><LineIcon name="crown" /></span> : null}
+          {m.color ? <i class="tx-dot" style={{ "--c": m.color } as JSX.CSSProperties} aria-hidden="true" /> : null}
           <b>{m.name}</b>
           <span class="tx-walk-cls">{m.here ? m.cls : "away"}</span>
         </li>
@@ -342,7 +344,7 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
           <p>{d.objective}</p>
         </div>
         {d.leader ? null : (
-          <div class="tx-me">
+          <div class="tx-me" style={d.me.color ? ({ "--c": d.me.color } as JSX.CSSProperties) : undefined} data-color={d.me.color ? "" : undefined}>
             {/* Player characters have no sprite: the class's portrait from the pack stands in, as on the lobby's cards. */}
             <Portrait unit={{ name: d.me.name, sprite: null, hp: 1, maxHp: 1, side: "Party" }} cls={classId(d.me.cls)} size={40} tone="you" />
             <div class="tx-me-name">

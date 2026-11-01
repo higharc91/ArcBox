@@ -143,6 +143,8 @@ export interface WalkMember {
   cls: string;
   here: boolean;
   leads: boolean;
+  /** Their colour, "#rrggbb"; absent from an older server. */
+  color?: string;
 }
 
 /** The walk screen. It holds nothing that changes as the party walks: a new view would drop what the pad is sending. */
@@ -151,7 +153,8 @@ export interface WalkData {
   leaderName: string | null;
   region: string | null;
   objective: string;
-  me: { name: string; cls: string; level: number };
+  /** `color`: the player's colour, "#rrggbb" (their pick, else their join order's); absent from an older server. */
+  me: { name: string; cls: string; level: number; color?: string };
   party: WalkMember[];
   vip: boolean;
   canBattle: boolean;
