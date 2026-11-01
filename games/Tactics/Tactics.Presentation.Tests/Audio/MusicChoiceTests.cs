@@ -48,24 +48,48 @@ public sealed class MusicChoiceTests
         Assert.True(Bank.Value.Track("battle")!.Loop);
     }
 
+    /// <summary>
+    /// The music each encounter in the rules is meant to have. Any encounter falls back to the battle theme, so this list is
+    /// what makes the choice a decision: a new encounter fails <see cref="Every_encounter_in_the_rules_has_its_music_decided"/>
+    /// until it's added here, with the battle theme or its own.
+    /// </summary>
+    private static readonly Dictionary<string, string> FightMusic = new()
+    {
+        ["river_crossing"] = "battle",
+        ["forest_ruins"] = "battle",
+        ["crypt_hall"] = "battle",
+        ["crystal_cave"] = "battle",
+        ["ford_assault"] = "battle",
+        ["rime_tower"] = "battle",
+        ["warlord_bridge"] = "boss",
+        ["keep_gate"] = "boss",
+        ["hall_of_the_flame"] = "finale",
+    };
+
+    public static TheoryData<string, string> Fights
+    {
+        get
+        {
+            var rows = new TheoryData<string, string>();
+            foreach (var (encounter, track) in FightMusic)
+                rows.Add(encounter, track);
+            return rows;
+        }
+    }
+
     [Theory]
-    [InlineData("river_crossing", "battle")]
-    [InlineData("forest_ruins", "battle")]
-    [InlineData("crypt_hall", "battle")]
-    [InlineData("crystal_cave", "battle")]
-    [InlineData("ford_assault", "battle")]
-    [InlineData("rime_tower", "battle")]
-    [InlineData("warlord_bridge", "boss")]
-    [InlineData("keep_gate", "boss")]
-    [InlineData("hall_of_the_flame", "finale")]
+    [MemberData(nameof(Fights))]
     public void A_fight_plays_what_its_encounter_calls_for(string encounter, string track)
         => Assert.Equal(new MusicCue(track), MusicChoice.Of(View("Battle", Fight(encounter))));
 
     [Fact]
-    public void Every_encounter_in_the_rules_has_music()
+    public void Every_encounter_in_the_rules_has_its_music_decided()
     {
-        foreach (var file in Directory.GetFiles(Path.Combine(Pack.Root, "rules", "encounters")))
-            Assert.NotNull(MusicChoice.Of(View("Battle", Fight(Path.GetFileNameWithoutExtension(file)))));
+        var encounters = Directory.GetFiles(Path.Combine(Pack.Root, "rules", "encounters"), "*.json")
+            .Select(Path.GetFileNameWithoutExtension).Order(StringComparer.Ordinal).ToArray();
+
+        Assert.NotEmpty(encounters);
+        Assert.Equal(encounters, FightMusic.Keys.Order(StringComparer.Ordinal).ToArray());
     }
 
     [Theory]
