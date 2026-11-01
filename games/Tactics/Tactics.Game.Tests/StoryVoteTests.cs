@@ -204,7 +204,7 @@ public sealed class StoryVoteTests
 
         var again = new Session(document: s.Lease.Document, game: new TacticsGame(Rules, lore: lore));
         again.Harness.Resume(again.Lease);
-        again.Harness.SetConnected(0, true);
+        StoryResumeTests.AllBack(again);
         Assert.Equal(TacticsGame.StoryStates.Asking, Story(again).State);
         Assert.DoesNotContain("why", Ask(again).Options.Select(o => o.Id));
     }

@@ -137,24 +137,48 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         EnterWorld();
         _sessionLead = _doc.World?.LastLeader;     // a restart isn't a new session, so the lead doesn't rotate
         SaveWorld();
+        _awaited.Clear();
         if (_doc.Battle is not { } save)
         {
-            ToMusterOrPick();
-            return;
-        }
-
-        if (save.State.ContentHash != Rules.Hash)
-        {
-            if (!RestartBattle(save))
+            // A scene under way waits for the party as a battle does (5d §8): nobody is connected yet, and a scene played to nobody would be
+            // lost on them. A beat waiting at its fight, or no beat, has nothing to play, so the party is simply back in the world.
+            if (_region is null || _doc.World?.Story is not { Stage: StorySave.Lead or StorySave.After })
+            {
+                ToMusterOrPick();
                 return;
+            }
+            foreach (var player in _players)
+                if (player.Profile is { } member && _doc.For(member) is not null)
+                    _awaited.Add(member);
         }
-        _awaited.Clear();
-        foreach (var unit in _doc.Battle!.State.Units.Values)
-            if (unit.Controller is PlayerControlled { Owner: var owner } && _players.Any(p => p.Profile == owner))
-                _awaited.Add(owner);
+        else
+        {
+            if (save.State.ContentHash != Rules.Hash)
+            {
+                if (!RestartBattle(save))
+                    return;
+            }
+            foreach (var unit in _doc.Battle!.State.Units.Values)
+                if (unit.Controller is PlayerControlled { Owner: var owner } && _players.Any(p => p.Profile == owner))
+                    _awaited.Add(owner);
+        }
         _phase = TacticsPhase.Resuming;
         if (_awaited.Count == 0)
+            CarryOn();
+    }
+
+    /// <summary>
+    /// Out of Resuming, once everyone awaited is back or the VIP goes on without them: into the battle, or to the scene's saved line. Anyone
+    /// here with no character picks one during the scene, as they can at any time in one, rather than hold it up at Muster.
+    /// </summary>
+    private void CarryOn()
+    {
+        _awaited.Clear();
+        _toasts.Clear();
+        if (_doc.Battle is not null)
             ContinueBattle();
+        else
+            ResumeStory();
     }
 
     /// <inheritdoc />
@@ -172,7 +196,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
                 break;
             case TacticsPhase.Resuming:
                 if (connected && player?.Profile is { } profile && _awaited.Remove(profile) && _awaited.Count == 0)
-                    ContinueBattle();
+                    CarryOn();
                 break;
             case TacticsPhase.Story:
                 StoryPresenceChanged();
@@ -247,8 +271,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
                 EndSession();
                 break;
             case TacticsPhase.Resuming when IsVip(player) && custom.Action == "continue":
-                _awaited.Clear();
-                ContinueBattle();
+                CarryOn();
                 break;
         }
     }

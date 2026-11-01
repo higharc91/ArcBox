@@ -119,6 +119,9 @@ public sealed class StoryModelTests
         private (string Beat, string Scene)? _sceneOf;
         private ImmutableHashSet<string> _played = [];
         private (string State, int Seq)? _question;
+
+        /// <summary>The question being asked, by its line's number, and when that line ends: it mustn't close before.</summary>
+        private (int Seq, DateTimeOffset Heard)? _asking;
         private DateTimeOffset _askedAt;
         private bool _wasAnswerable;
         private int _beatsDone;
@@ -129,6 +132,8 @@ public sealed class StoryModelTests
             _late = _r.Next(2) == 0;
             _quietLeader = _r.Next(2) == 0;
             var seats = _r.Next(1, 5);
+            if (_quietLeader)
+                seats = 4;      // three to split a vote while the leader says nothing
             var doc = TacticsDocument.Read(BaseDocument.Value);
             var members = doc.Members.Keys.OrderBy(_ => _r.Next()).ToArray();
             foreach (var member in members)
@@ -171,14 +176,54 @@ public sealed class StoryModelTests
         private void Restart(int back)
         {
             var before = _lease.Read().World?.Story;
+            var state = _game.Phase == TacticsPhase.Story ? Host.Story?.State : null;
+            if (state is not null)
+                RestartsIn.Add(state);
             _context = new Context(_seed * 7 + _log.Count, _late) { Now = _context.Now + TimeSpan.FromSeconds(3) };
             _game = new TacticsGame(Rules, null, Lore);
             _online.Clear();
             _game.Resume(_context, _players, _lease);
-            CheckResumed(before);
+            (_question, _asking) = (null, null);
+            // A scene waits for the party (5d §8, review finding 2): nothing plays and no clock runs until they're back.
+            if (before is { Stage: StorySave.Lead or StorySave.After } && _game.Document.Battle is null)
+            {
+                Must(_game.Phase == TacticsPhase.Resuming, $"a restart in a scene went to {_game.Phase}, not Resuming");
+                Must(_context.Timers.Count == 0, $"a scene's clock ran while it waited for the party: {string.Join(",", _context.Timers.Keys)}");
+                _resumeFrom = before;
+            }
+            else
+                CheckResumed(before);
             foreach (var seat in Enumerable.Range(0, _players.Count).Where(s => (back >> s & 1) == 1))
                 Connect(seat, true);
         }
+
+        /// <summary>The cursor a restart is coming back to, checked when the scene starts again.</summary>
+        private StorySave? _resumeFrom;
+
+        /// <summary>The states a scene was in when the server restarted, so the test can tell the runs restarted where it matters.</summary>
+        public HashSet<string> RestartsIn { get; } = [];
+
+        /// <summary>A new session on the saved document, as the next night: Muster, then the scene on its saved line.</summary>
+        private void NewSession()
+        {
+            var before = _lease.Read().World?.Story;
+            var resumable = before is { Stage: StorySave.Lead or StorySave.After, Scene: not null } && _lease.Read().Battle is null;
+            _context = new Context(_seed * 11 + _log.Count, _late) { Now = _context.Now + TimeSpan.FromSeconds(3) };
+            _game = new TacticsGame(Rules, null, Lore);
+            _online.Clear();
+            _online.UnionWith(Enumerable.Range(0, _players.Count));
+            (_question, _asking) = (null, null);
+            _game.Start(_context, _players, _lease);
+            foreach (var seat in Enumerable.Range(0, _players.Count).Where(s => !HasCharacter(s)))
+                Connect(seat, false);
+            if (resumable)
+            {
+                _resumeFrom = before;
+                Sessions++;
+            }
+        }
+
+        public int Sessions { get; private set; }
 
         /// <summary>Moves the party next to <paramref name="start"/>'s beat with its story so far, as a fresh session, and starts it.</summary>
         private void Teleport((string Beat, TacticsSeed Seed) start)
@@ -271,6 +316,22 @@ public sealed class StoryModelTests
         {
             var roll = _r.Next(100);
             var seat = _r.Next(_players.Count);
+            if (_game.Phase == TacticsPhase.Resuming && _r.Next(3) == 0)
+                return new Event(_r.Next(2) == 0 ? "continue" : "conn", seat, 0);
+            // The rare moments to restart in: a roll's reveal, the gap between scenes, a tie-break.
+            if (Host.Story?.State is TacticsGame.StoryStates.Rolled or TacticsGame.StoryStates.Gap or TacticsGame.StoryStates.TieBreak
+                && _r.Next(Host.Story.State == TacticsGame.StoryStates.TieBreak ? 2 : 4) == 0)
+                return new Event(_r.Next(3) == 0 ? "session" : "restart", seat, _r.Next(1 << _players.Count));
+            // A quiet leader's party vote: two others split it, one each way, and nobody else votes, so it ties.
+            if (_quietLeader && Host.Story is { Ask: { Party: true, Tie: false } ask } && _r.Next(2) == 0)
+            {
+                var votedFor = ask.Options.SelectMany(o => o.Voters).ToHashSet();
+                var splitter = Enumerable.Range(0, _players.Count)
+                    .FirstOrDefault(p => p != LeaderSeat() && _online.Contains(p) && HasCharacter(p) && !votedFor.Contains(_players[p].Name), -1);
+                return ask.Voted < 2 && splitter >= 0 && ask.Options.Length >= 2
+                    ? new Event("split", splitter, ask.Voted)
+                    : new Event("wait", seat, _r.Next(1, 6_000));
+            }
             if (Host.Story is { Ask: not null } or { Check: not null } && _r.Next(2) == 0)      // a question open: answers come thick and fast
                 return new Event(Host.Story.Ask is not null ? "vote" : "pick", seat, _r.Next(8));
             return roll switch
@@ -282,7 +343,8 @@ public sealed class StoryModelTests
                 < 68 => new Event("disc", seat, 0),
                 < 76 => new Event("conn", seat, 0),
                 < 79 => new Event("leaderLeaves", seat, 0),
-                < 84 => new Event("restart", seat, _r.Next(1 << _players.Count)),
+                < 83 => new Event("restart", seat, _r.Next(1 << _players.Count)),
+                < 84 => new Event("session", seat, 0),
                 < 88 => new Event("walk", seat, _r.Next(9)),
                 < 91 => new Event("pickClass", seat, 0),
                 < 94 => new Event("interact", seat, 0),
@@ -301,10 +363,13 @@ public sealed class StoryModelTests
                     break;
                 case "vote" or "pick" when _quietLeader && e.Seat == LeaderSeat():
                     break;
+                case "split":
+                    Send(e.Seat, new { action = "vote", data = new { option = Host.Story!.Ask!.Options[e.N].Id } });
+                    break;
                 case "vote" when _online.Contains(e.Seat):
                 {
                     var options = Host.Story?.Ask?.Options.Select(o => o.Id).ToArray() ?? [];
-                    var option = options.Length > 0 && e.N < 6 ? options[e.N % (_quietLeader ? Math.Min(2, options.Length) : options.Length)] : "stale_" + e.N;
+                    var option = options.Length > 0 && e.N < 6 ? options[_quietLeader ? e.Seat % Math.Min(2, options.Length) : e.N % options.Length] : "stale_" + e.N;
                     Send(e.Seat, new { action = "vote", data = new { option } });
                     break;
                 }
@@ -332,6 +397,12 @@ public sealed class StoryModelTests
                     break;
                 case "restart":
                     Restart(e.N);
+                    break;
+                case "session":
+                    NewSession();
+                    break;
+                case "continue" when _online.Contains(e.Seat):
+                    Send(e.Seat, new { action = "continue" });
                     break;
                 case "walk" when _online.Contains(e.Seat):
                 {
@@ -381,6 +452,8 @@ public sealed class StoryModelTests
             for (var seat = 0; seat < _players.Count; seat++)
                 if (HasCharacter(seat))
                     Connect(seat, true);
+            _log.Add("everyone back");
+            Check("everyone back");
             var end = _context.Now + TimeSpan.FromMinutes(30);
             while (_game.Phase == TacticsPhase.Story && _context.Now < end)
             {
@@ -400,7 +473,7 @@ public sealed class StoryModelTests
             var cursor = saved?.Story;
             if (_log.Count == 0)
                 _log.Add(what);
-            _log[^1] += $" [{_game.Phase} {host.Story?.State} {cursor?.Scene}/{cursor?.Node}/{cursor?.Line}]";
+            _log[^1] += $" [{_game.Phase} {host.Story?.State} {cursor?.Scene}/{cursor?.Node}/{cursor?.Line} {string.Join(",", _context.Timers.Keys)}]";
 
             if (_game.Phase == TacticsPhase.Story)
             {
@@ -417,7 +490,8 @@ public sealed class StoryModelTests
             else
                 Must(_game.Phase switch
                 {
-                    TacticsPhase.Muster or TacticsPhase.Resuming => true,
+                    TacticsPhase.Muster => true,
+                    TacticsPhase.Resuming => _context.Timers.Keys.All(k => k is not (TacticsGame.Timers.Line or TacticsGame.Timers.Vote)),
                     TacticsPhase.Exploration or TacticsPhase.Battle => cursor is null or { Stage: StorySave.Fight },
                     TacticsPhase.Results => cursor is null or { Stage: StorySave.Fight or StorySave.After },
                     _ => cursor is null,
@@ -425,6 +499,23 @@ public sealed class StoryModelTests
             if (_game.Phase == TacticsPhase.Battle && cursor is not null)
                 Must(_game.Document.Battle?.Beat == cursor.Beat, "a fight that isn't the cursor's beat");
 
+            // A question never closes before the line that asks it has been heard, and a question that holds runs no clock.
+            var story0 = _game.Phase == TacticsPhase.Story ? host.Story : null;
+            if (_asking is { } asked && !(story0 is { State: TacticsGame.StoryStates.Asking } a && a.Seq == asked.Seq))
+            {
+                Must(_context.Now >= asked.Heard, $"a question closed at {_context.Now:mm:ss.fff}, before its line ended at {asked.Heard:mm:ss.fff}");
+                _asking = null;
+            }
+            if (story0 is { State: TacticsGame.StoryStates.Asking, Until: { } heard } asking)
+                _asking = (asking.Seq, heard);
+            if (story0 is { State: TacticsGame.StoryStates.Asking or TacticsGame.StoryStates.TieBreak or TacticsGame.StoryStates.PickRoller } open
+                && (open.Ask?.Deadline ?? open.Check?.Deadline) is null)
+                Must(!_context.Timers.ContainsKey(TacticsGame.Timers.Vote), "a question holds with its clock still running");
+            if (_resumeFrom is { } from && _game.Phase == TacticsPhase.Story)
+            {
+                _resumeFrom = null;
+                CheckResumed(from);
+            }
             if (cursor is not null)
                 CheckCursor(cursor, saved!);
             if (host.Story is { } story)
@@ -562,6 +653,8 @@ public sealed class StoryModelTests
 
         public int BeatsDone => _beatsDone;
 
+        public int Fights => _fights;
+
         /// <summary>Every state a scene was seen in, so the test can tell the runs reached ties, picks and rolls.</summary>
         public HashSet<string> States { get; } = [];
     }
@@ -572,17 +665,28 @@ public sealed class StoryModelTests
     public void Scenes_hold_up_against_their_model()
     {
         var beats = 0;
+        var (fights, sessions) = (0, 0);
         var states = new HashSet<string>();
-        for (var seed = 1; seed <= Seeds; seed++)
+        var restarts = new HashSet<string>();
+        var only = int.TryParse(Environment.GetEnvironmentVariable("STORY_MODEL_SEED"), out var one) ? one : 0;
+        for (var seed = only > 0 ? only : 1; seed <= (only > 0 ? only : Seeds); seed++)
         {
             var run = new Run(seed);
             run.Play(EventsPerSeed);
             beats += run.BeatsDone;
             states.UnionWith(run.States);
+            restarts.UnionWith(run.RestartsIn);
+            (fights, sessions) = (fights + run.Fights, sessions + run.Sessions);
         }
         string[] all = [TacticsGame.StoryStates.Lines, TacticsGame.StoryStates.Asking, TacticsGame.StoryStates.TieBreak,
             TacticsGame.StoryStates.PickRoller, TacticsGame.StoryStates.Rolled, TacticsGame.StoryStates.Gap];
         Assert.Empty(all.Except(states));
+        // The rare moments the runs must reach: a restart mid-roll, between scenes, on a tie-break, and in a line and a question; a new
+        // session on a saved scene; a fight from the story.
+        Assert.Empty(new[] { TacticsGame.StoryStates.Rolled, TacticsGame.StoryStates.Gap, TacticsGame.StoryStates.TieBreak,
+            TacticsGame.StoryStates.Lines, TacticsGame.StoryStates.Asking }.Except(restarts));
+        Assert.True(sessions > 0, "no new session started on a saved scene");
+        Assert.True(fights > 0, "no fight started from the story");
         Assert.True(beats >= Seeds, $"only {beats} beats were finished in {Seeds} runs: the model isn't reaching the ends of scenes");
     }
 }

@@ -520,6 +520,10 @@ public sealed class StageEndTests
 
         var resumed = new Session(document: s.Lease.Document, game: WithLore(null));
         resumed.Harness.Resume(resumed.Lease);
+        Assert.Equal(TacticsPhase.Resuming, resumed.Game.Phase);      // the beat's aftermath waits for the party (5d)
+        Assert.Equal(World(WestBank), resumed.Host.Explore!.At);
+        for (var i = 0; i < 4; i++)
+            resumed.Harness.SetConnected(i, true);
 
         Assert.Equal(TacticsPhase.Exploration, resumed.Game.Phase);
         Assert.Equal(World(WestBank), resumed.Host.Explore!.At);

@@ -203,6 +203,7 @@ public sealed class StoryCheckTests
 
         var again = new Session(seed: 99, document: s.Lease.Document, game: new TacticsGame(Rules, lore: Lore));
         again.Harness.Resume(again.Lease);
+        StoryResumeTests.AllBack(again);
 
         Assert.Equal(TacticsGame.StoryStates.Rolled, Story(again).State);
         Assert.Equal(roll, Cursor(again)!.Roll);

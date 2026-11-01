@@ -461,7 +461,7 @@ public sealed partial class TacticsGame
             case TacticsPhase.Results:
                 return _result?.Outcome == BattleOutcome.Won ? $"Victory at {_resultEncounter}!" : $"Defeat at {_resultEncounter}";
             case TacticsPhase.Resuming:
-                return "Resuming the battle…";
+                return _doc.Battle is null ? "Resuming the story…" : "Resuming the battle…";
             case TacticsPhase.Exploration:
                 return Leader is { } leader ? $"{leader.Name} leads the party" : "The party waits for someone to lead it";
             case TacticsPhase.Story:

@@ -599,6 +599,7 @@ public sealed class StoryTests
 
         var again = new Session(document: s.Lease.Document, game: new TacticsGame(Rules, lore: Lore));
         again.Harness.Resume(again.Lease);
+        StoryResumeTests.AllBack(again);
 
         Assert.Equal(TacticsPhase.Story, again.Game.Phase);
         Assert.Equal(line, Story(again).Line!.Id);
@@ -648,6 +649,7 @@ public sealed class StoryTests
 
         var again = new Session(document: moved.ToJson(), game: new TacticsGame(Rules, lore: Lore));
         again.Harness.Resume(again.Lease);
+        StoryResumeTests.AllBack(again);
 
         Assert.Equal(TacticsPhase.Story, again.Game.Phase);
         Assert.Equal(SceneNamed("ch1_maud").Nodes[0].Lines[0].Id, Story(again).Line!.Id);
