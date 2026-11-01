@@ -142,7 +142,13 @@ Keep this list, add to it, and put it at the top of your final report. Don't sto
 10. **A battle the engine can't continue is called off with nothing won or lost**: no XP, injuries, Results or checkpoint, and the party goes back to the world. The alternative is counting it as a loss: `CallOffBattle` is the one place to change. (`0eec931`)
 11. **Rules invariants run only in Debug builds.** On a Release server a broken state (the share-the-tile bug, say) won't throw: it's kept and saved. The checks are cheap; turning them on for production is the user's call.
 12. **The pad from e/w:** a thumb already holding e or w keeps it out to 72°, so sliding round onto a road switches 8.6° off the road rather than 10°. Guaranteeing 10° would shrink e/w from 24° to about 21°. (`51505fc`)
-13. **The battle list hidden from normal play** once 5c's fights on the spot land: the night session's default is a developer switch, where the spec keeps it visible as a shortcut.
+13. **The battle list hidden from normal play**, as the user asked: `Tactics:BattleList`, Development only, off by default. A pack with no region keeps its list. The bots and `tv-e2e.sh` turn it on. (`f681da2`)
+14. **Seat colours wait for 5d.** The room has no stable seat to share (`PlayerSlot.JoinOrder` repeats after a leave and never reaches the game), so the TV's walker rings stay the party green with a dark outline. Giving the TV and phone one seat number needs an SDK and lobby protocol change; 5d's vote dots need the same thing. The phone's palette is also weak for deuteranopia (sky against violet) and tritanopia (sky against green).
+15. **Fleeing lands outside the stamp**, usually where the fight began, not at the stamp as the 5c plan said: standing in an armed stamp is what the landing rule forbids.
+16. **A player whose turn comes first** gets their 60 s only after the walk-in (at most 3 s).
+17. **Losing a lead to a blip:** a stand-in always keeps the lead at least 3 s after it's handed over, and the session leader takes it back after the party has been stopped for 3 s.
+
+**Defaults added tonight, which the user can overrule:** the edge note ("The road goes on, but not today.") once a session; a one-tile jag with both sides open doesn't slide; quick taps latch one step; the pad's sectors (n/s 60°, roads 48°, e/w 24°); the leader's arrival pulse on opening the walk; a called-off battle wins and loses nothing; the adapter catches any engine exception but out-of-memory; followers rejoin the trail at its nearest point after a rest; the title card crossfades and gives up after 10 s; the wall bump is 0.12 tile over 0.15 s with the step sound at -14 dB.
 
 **Ideas the user wants noted for later design** (not in this slice; don't build without them):
 - **Mobs out in the overworld:** wild enemies roaming the regions, away from the stamped story battles. Open questions: how often fights happen, whether they pay XP (decision 3's farming problem), which encounters and maps they use given that battles need a matching map, and whether the party can avoid them. A cheap visual step that changes no rules: the armed stamp's enemies idle or pace inside their area before the party arrives.
@@ -156,3 +162,7 @@ Keep this list, add to it, and put it at the top of your final report. Don't sto
 - How it sounds: footsteps at -18 dB, `town_emberwick`, the board's audio levels.
 - Sofa distance on a real TV, and a modest TV box. Performance is only measured on an RTX 5080, Debug build.
 - The Ash pattern repeats every 4 tiles. A low-frequency vertex tint is the cheap fix to try in polish.
+- Whether the wall bump (about 5 px at 720p) reads from the sofa, and how the 3 s takeback, latched taps and jag slides feel.
+- Followers briefly overlap on quick U-turns (seen in Task 11's shots).
+- Responsiveness on a real phone over Wi-Fi with a GPU TV. Here, press to the TV's step was 24–35 ms median, mostly the software renderer.
+- Whether the 24° e/w pad sectors feel too thin.
