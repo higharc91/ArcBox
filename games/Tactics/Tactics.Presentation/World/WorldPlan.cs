@@ -94,8 +94,8 @@ public sealed class WorldPlan
             .. plans.SelectMany(p => p.Items)
                 .SelectMany(i => i is Face face ? [(face.Image, Flat: face.Flat), (Image: face.Lights, Flat: false)] : new[] { (Image: (ArtImage?)((Sprite)i).Image, Flat: false) })
                 .Where(i => i.Image is not null)
-                .DistinctBy(i => (i.Image!.Path, i.Flat))
-                .OrderBy(i => i.Image!.Path, StringComparer.Ordinal)
+                .DistinctBy(i => (i.Image!.Key, i.Flat))
+                .OrderBy(i => i.Image!.Key, StringComparer.Ordinal)
                 .ThenBy(i => i.Flat)
                 .Select(i => new PlannedImage(i.Image!, i.Flat)),
         ];

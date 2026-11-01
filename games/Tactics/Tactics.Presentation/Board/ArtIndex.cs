@@ -14,10 +14,11 @@ public sealed record ArtRef(string Family, string Variant);
 /// <param name="Height">The image's height in pixels, where a face needs it to sample one.</param>
 /// <param name="Glow">A texture's rule for glowing by itself, or null.</param>
 /// <param name="Phase">How many frames ahead it runs, so that one strip can loop out of step with itself. Each phase is a texture of its own on the TV.</param>
-public sealed record ArtImage(string Path, int Frames, double Fps, int Height = 32, TextureGlow? Glow = null, int Phase = 0)
+/// <param name="Blend">A top laid over its neighbour (<see cref="GroundBlend"/>): which mask it goes through, or -1. Each is a texture of its own on the TV.</param>
+public sealed record ArtImage(string Path, int Frames, double Fps, int Height = 32, TextureGlow? Glow = null, int Phase = 0, int Blend = -1)
 {
-    /// <summary>What tells it from the same strip in another phase.</summary>
-    public string Key => Phase == 0 ? Path : $"{Path}#{Phase}";
+    /// <summary>What tells it from the same strip in another phase, or the same top through another mask.</summary>
+    public string Key => Blend >= 0 ? $"{Path}~{Blend}" : Phase == 0 ? Path : $"{Path}#{Phase}";
 
     /// <summary>The frame showing <paramref name="seconds"/> into the loop.</summary>
     public int FrameAt(double seconds) => Frames <= 1 ? 0 : ((int)(seconds * Fps) + Phase) % Frames;

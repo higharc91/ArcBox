@@ -155,7 +155,7 @@ public sealed class WorldDrawingTests
     {
         var plan = Ford.Value;
 
-        Assert.Equal(plan.Images.Length, plan.Images.Select(i => (i.Image.Path, i.Flat)).Distinct().Count());
+        Assert.Equal(plan.Images.Length, plan.Images.Select(i => (i.Image.Key, i.Flat)).Distinct().Count());
         Assert.Contains(plan.Images, i => i.Flat && i.Image.Path.EndsWith("ash_grey.png", StringComparison.Ordinal));
         Assert.Contains(plan.Images, i => !i.Flat && i.Image.Frames == 1);
         Assert.Contains(plan.Images, i => i.Image.Frames > 1);

@@ -158,6 +158,10 @@ internal sealed class BoardPainter
         {
             return null;
         }
+        if (image.Blend >= 0)
+        {
+            return LoadBlend(image);
+        }
         if (Moves(image))
         {
             return Frames!.Of(image.Key) ?? ((flat ? Turned(image) : Pixels(image.Path)) is { } strip ? Strip(image.Key, image, strip) : Load(image.Path));
@@ -174,6 +178,23 @@ internal sealed class BoardPainter
             return known;
         }
         return _tops[image.Path] = Turned(image) is { } top ? Upload(top) : Load(image.Path);   // which warns
+    }
+
+    /// <summary>A top through one of <see cref="GroundBlend"/>'s masks, baked once for each ground and way the world uses. The art's files don't change.</summary>
+    private Texture2D? LoadBlend(ArtImage image)
+    {
+        if (_tops.TryGetValue(image.Key, out var known))
+        {
+            return known;
+        }
+        if (Pixels(image.Path) is not { } art)
+        {
+            return _tops[image.Key] = null;
+        }
+        var doubled = DitherTexels.Always(art.GetData(), art.GetWidth(), art.GetHeight());
+        art.Dispose();
+        var masked = GroundBlend.Masked(doubled, image.Blend);
+        return _tops[image.Key] = Upload(Image.CreateFromData(GroundBlend.Size, GroundBlend.Size, false, Image.Format.Rgba8, masked));
     }
 
     /// <summary>A top's pixels as they go to the TV: doubled if it has dither, and as they are if not.</summary>

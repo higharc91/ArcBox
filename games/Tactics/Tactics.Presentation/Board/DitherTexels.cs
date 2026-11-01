@@ -49,6 +49,9 @@ public static class DitherTexels
         return doubled;
     }
 
+    /// <summary><paramref name="rgba"/>, a top, at <see cref="Scale"/> times its size whether or not it has dither, for what has to be masked in those texels.</summary>
+    public static byte[] Always(ReadOnlySpan<byte> rgba, int width, int height) => Doubled(rgba, width, height) ?? Plain(MemoryMarshal.Cast<byte, uint>(rgba), width, height);
+
     private static bool AnyDither(uint[] art, int width, int height)
     {
         var (seen, waiting) = (new bool[art.Length], new Stack<(int X, int Y)>());

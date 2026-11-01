@@ -55,7 +55,7 @@ public static class BoardOrder
 }
 
 /// <summary>What a <see cref="Face"/> is.</summary>
-public enum FaceKind { Under, Side, Lip, Top, Tint, Decal, Building, Shadow }
+public enum FaceKind { Under, Side, Lip, Top, Blend, Tint, Decal, Building, Shadow }
 
 /// <summary>Which way a <see cref="Face"/> looks: up, or along +U (screen lower right) or +V (screen lower left).</summary>
 public enum Facing { Up, U, V }
@@ -399,6 +399,9 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
         }
         items.Add(top);
 
+        if (world)
+            AddBlends(items, terrain, art, tile, top, inRegion);
+
         if (world && !isStamped && !look.Void && !look.Water && !terrain.Changes.Sunk.Contains(tile))
         {
             var material = terrain.Map.Materials[terrain.Map[tile].Material];
@@ -410,6 +413,22 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
                      BoardProjection.Corner(x + 1, y + 1, height), BoardProjection.Corner(x, y + 1, height)],
                     [new(0, 0), new(1, 0), new(1, 1), new(0, 1)], decalImage, null, shade));
             }
+        }
+    }
+
+    /// <summary>What runs over a tile from beside it (<see cref="GroundBlend"/>): the neighbour's top where this one lies, at the colour it has there. A stamp's tile has no drift.</summary>
+    private static void AddBlends(List<BoardItem> items, BoardTerrain terrain, ArtIndex art, Tile tile, Face top, Tile inRegion)
+    {
+        foreach (var edge in GroundBlend.Of(terrain, tile))
+        {
+            if (art.Texture(MaterialLook.Of(edge.Material).Top) is not { } image)
+                continue;
+            var graded = top.Tint.Times(GroundGrade.Of(terrain.Map.Id, edge.Material));
+            var (x, y) = (inRegion.X, inRegion.Y);
+            ImmutableArray<Rgb> tints = edge.Stamped
+                ? [graded, graded, graded, graded]
+                : [GroundTint(x, y, graded), GroundTint(x + 1, y, graded), GroundTint(x + 1, y + 1, graded), GroundTint(x, y + 1, graded)];
+            items.Add(top with { Order = BoardOrder.Key(tile, BoardLayer.Ground), Kind = FaceKind.Blend, Image = image with { Glow = null, Blend = edge.Mask }, Grid = false, VertexTints = tints });
         }
     }
 

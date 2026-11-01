@@ -459,10 +459,10 @@ public sealed class StagePlanTests(ITestOutputHelper output)
 
         Assert.Equal(BoardLighting.Dusk, stagePlan.Lighting.Ambient);
         var lit = world.Blocks.SelectMany(b => b.Lit.Items).OfType<LitFace>().Where(f => f.Art && !f.Probes.IsEmpty)
-            .ToLookup(f => (f.Face.Tile, f.Face.Kind, Corner: f.Face.Points[0]));
+            .ToLookup(f => (f.Face.Tile, f.Face.Kind, Art: f.Face.Image?.Key, Corner: f.Face.Points[0]));
         var compared = 0;
         foreach (var face in stagePlan.Lit.Items.OfType<LitFace>().Where(f => f.Art && !f.Probes.IsEmpty))
-            foreach (var same in lit[(face.Face.Tile, face.Face.Kind, face.Face.Points[0] + shift)])
+            foreach (var same in lit[(face.Face.Tile, face.Face.Kind, face.Face.Image?.Key, face.Face.Points[0] + shift)])
             {
                 var (mine, theirs) = (face.MeanColourAt(0, stagePlan.Lighting), same.MeanColourAt(0, world.Lighting));
                 Assert.True(Math.Abs(mine.R - theirs.R) + Math.Abs(mine.G - theirs.G) + Math.Abs(mine.B - theirs.B) < 0.02f, $"{face.Face.Tile} {face.Face.Kind}: {mine} against {theirs}");

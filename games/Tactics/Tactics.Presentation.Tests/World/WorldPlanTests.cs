@@ -89,7 +89,7 @@ public sealed class WorldPlanTests
         var terrain = new BoardTerrain(GroundOf(name).Map, null);
         var whole = BoardPlan.Build(terrain, Pack.Art);
         var blocks = PlanOf(name).Blocks.SelectMany(b => b.Plan.Items).OrderBy(i => i.Order).ToArray();
-        var baseBlocks = blocks.Where(i => i is not Face { Kind: FaceKind.Decal }).ToArray();
+        var baseBlocks = blocks.Where(i => i is not Face { Kind: FaceKind.Decal or FaceKind.Blend }).ToArray();
 
         Assert.DoesNotContain(baseBlocks, i => i is Face { Grid: true });
         Assert.Equal(whole.Items.Select(i => i is Face f ? Key(f with { Grid = false }) : Key(i)), baseBlocks.Select(Key));

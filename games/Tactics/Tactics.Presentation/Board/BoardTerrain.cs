@@ -67,6 +67,7 @@ public sealed class BoardTerrain
 
         var chasmLook = MaterialLook.Of(chasm ?? ChasmMaterial(map));
         var looks = map.Materials.Select(MaterialLook.Of).ToArray();
+        Ranks = [.. map.Materials.Select(GroundBlend.Rank)];
         var lowest = int.MaxValue;
         foreach (var tile in Tiles)
         {
@@ -83,6 +84,9 @@ public sealed class BoardTerrain
         }
         Base = skirt ?? lowest - 1;
     }
+
+    /// <summary>How firmly each of the map's materials lies (<see cref="GroundBlend.Rank"/>).</summary>
+    public ImmutableArray<int> Ranks { get; }
 
     /// <summary>The map file.</summary>
     public BattleMap Map { get; }

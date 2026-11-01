@@ -77,7 +77,7 @@ public sealed record LitBoard(ImmutableArray<LitItem> Items, BoardLighting Light
         }
         var lit = lighting.Active && face.Lit;
         var glow = lighting.Active && (face.Image?.Glow is not null || (face.Lights is not null && lighting.Ambient != BoardLighting.Daylight));
-        if (!lit || face.Kind != FaceKind.Top || !Reached(face, lighting))
+        if (!lit || face.Kind is not (FaceKind.Top or FaceKind.Blend) || !Reached(face, lighting))
         {
             items.Add(new LitFace(face, lit ? Probes(face, lighting) : [], true, glow));
             return;
