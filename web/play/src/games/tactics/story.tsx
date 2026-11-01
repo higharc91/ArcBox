@@ -124,15 +124,16 @@ function OptionBody({ option, letter, tag }: { option: StoryOption; letter: stri
   );
 }
 
-/** Plays the alert again when a tie-break lands on this phone, which is already showing the question. */
-function useTieAlert(tie: boolean, mine: boolean) {
-  const sfx = useSfx();
-  const was = useRef(tie);
-  useEffect(() => {
-    if (tie && !was.current && mine) sfx("yourTurn");
-    was.current = tie;
-  }, [tie]);
-}
+/**
+ * A question's screen is keyed by what it asks (`voteKey`, `checkKey`), so a new question is a new screen: it alerts,
+ * and nothing tapped on the one before carries over to it. A tie-break is a new question too, so a tap held from the
+ * open round is dropped, and the decider breaks the tie from the tie-break's own view.
+ */
+const questionKey = (kind: string, tie: boolean, parts: string[]) => [kind, tie ? "tie" : "open", ...parts].join("\n");
+/** Option ids repeat across a story's questions, so the words go in too. */
+const voteKey = (d: VoteData) => questionKey(d.party ? "vote" : "choice", d.tie, d.options.map((o) => `${o.id}=${o.label}`));
+const checkKey = (d: CheckData) =>
+  questionKey(d.roll ? "rolled" : "check", d.tie, [d.skill, String(d.dc), d.title, ...d.cards.map((c) => c.id)]);
 
 /** How long a tap held behind one already sent waits for the view that answers it before it goes anyway. */
 export const QUEUE_MS = 1500;
@@ -154,9 +155,9 @@ function useAnswer(viewId: string, serverMine: string | null, tie: boolean, post
   const inflight = useRef<string | null>(null);
   const queued = useRef<string | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const round = useRef({ tie, answered: false });
-  if (round.current.tie !== tie) round.current = { tie, answered: false };
-  const fresh = tie && !round.current.answered;
+  // A tie-break is its own screen (`questionKey`), so this is whether this tie-break has been answered yet.
+  const answered = useRef(false);
+  const fresh = tie && !answered.current;
   const mine = local ?? (fresh ? null : serverMine);
   const earlier = fresh && !local ? serverMine : null;
 
@@ -191,7 +192,7 @@ function useAnswer(viewId: string, serverMine: string | null, tie: boolean, post
 
   const tap = (id: string) => {
     if (id === mine) return;
-    round.current.answered = true;
+    answered.current = true;
     setLocal(id);
     sfx("confirm");
     if (inflight.current === viewId) queued.current = id;
@@ -205,10 +206,14 @@ function useAnswer(viewId: string, serverMine: string | null, tie: boolean, post
  * and shows as yours before the server's view comes back, and stays changeable until the clock runs out. Those who
  * can't answer see the options read-only, with the party's choice when there is one.
  */
-export function Vote({ data, send, viewId }: CustomScreenProps) {
+export function Vote(props: CustomScreenProps) {
+  const key = voteKey(props.data as VoteData);
+  return <VoteQuestion key={key} question={key} {...props} />;
+}
+
+function VoteQuestion({ data, send, viewId, question }: CustomScreenProps & { question: string }) {
   const d = data as VoteData;
-  const alerted = useAlertOnMount("yourTurn", d.canChoose);
-  useTieAlert(d.tie, d.canChoose);
+  const alerted = useAlertOnMount("yourTurn", question, d.canChoose);
   const { mine, earlier, tap: pick } = useAnswer(viewId, d.mine, d.tie, (id) => send("vote", { option: id }));
 
   const eyebrow = d.tie ? "Tie-break" : d.party ? "Party vote" : "The leader's choice";
@@ -291,9 +296,9 @@ function D20({ value }: { value: number }) {
   );
 }
 
-function RollPanel({ roll, by }: { roll: CheckRoll; by: CheckCard | undefined }) {
+function RollPanel({ roll, by, question }: { roll: CheckRoll; by: CheckCard | undefined; question: string }) {
   // A reconnect re-sends the rolled view: its remount stays quiet and still, as an alert's does.
-  const fresh = useAlertOnMount("dice");
+  const fresh = useAlertOnMount("dice", question);
   const verdict = roll.success ? "Success" : "Failure";
   return (
     <div class={`tx-roll ${roll.success ? "ok" : "bad"}${fresh ? " fresh" : ""}`} role="status"
@@ -311,10 +316,10 @@ function RollPanel({ roll, by }: { roll: CheckRoll; by: CheckCard | undefined })
 }
 
 /** The roll, and the card of who rolled it. */
-function Rolled({ roll, by }: { roll: CheckRoll; by: CheckCard | undefined }) {
+function Rolled({ roll, by, question }: { roll: CheckRoll; by: CheckCard | undefined; question: string }) {
   return (
     <>
-      <RollPanel roll={roll} by={by} />
+      <RollPanel roll={roll} by={by} question={question} />
       {by ? <div class="tx-rcards one"><div class="tx-rcard on" role="group" aria-label={`${by.name}, ${signed(by.bonus)}, ${by.note}`}><CardBody card={by} tag={{ text: "Rolled" }} /></div></div> : null}
     </>
   );
@@ -325,10 +330,14 @@ function Rolled({ roll, by }: { roll: CheckRoll; by: CheckCard | undefined }) {
  * from, and who's away (they can still be picked: their character rolls). On a tie the decider picks among the tied. Then
  * the roll: the die, the sum against the DC, and the verdict.
  */
-export function Check({ data, send, viewId }: CustomScreenProps) {
+export function Check(props: CustomScreenProps) {
+  const key = checkKey(props.data as CheckData);
+  return <CheckQuestion key={key} question={key} {...props} />;
+}
+
+function CheckQuestion({ data, send, viewId, question }: CustomScreenProps & { question: string }) {
   const d = data as CheckData;
-  const alerted = useAlertOnMount("yourTurn", d.canChoose && !d.roll);
-  useTieAlert(d.tie, d.canChoose);
+  const alerted = useAlertOnMount("yourTurn", question, d.canChoose && !d.roll);
   const { mine, earlier, tap: pick } = useAnswer(viewId, d.mine, d.tie, (id) => send("pickRoller", { member: id }));
 
   const roll = d.roll;
@@ -347,7 +356,7 @@ export function Check({ data, send, viewId }: CustomScreenProps) {
         <p class="tx-check-for"><span class="tx-dc">DC {d.dc}</span><span>“{d.title}”</span></p>
         {roll ? null : <Clock />}
       </div>
-      {roll ? <Rolled roll={roll} by={d.cards.find((c) => c.id === roll.member)} /> : (
+      {roll ? <Rolled roll={roll} by={d.cards.find((c) => c.id === roll.member)} question={question} /> : (
         <>
           <h3 class={`tx-sect${d.tie ? " tie" : ""}`}>{heading}</h3>
           <ul class="tx-rcards" aria-label="Who rolls">

@@ -4,6 +4,7 @@ import type { CustomView } from "../src/protocol";
 import { loadModule } from "../src/games/registry";
 import { QUEUE_MS } from "../src/games/tactics/story";
 import { ControllerScreen } from "../src/widgets/ControllerScreen";
+import { Feedback, FeedbackContext } from "../src/feedback/feedback";
 
 // Real views from a real session, written by games/Tactics/Tactics.Game.Tests/PhoneFixtureTests.cs.
 const fixtures = import.meta.glob<{ default: unknown }>("./fixtures/tactics/*.json", { eager: true });
@@ -35,7 +36,41 @@ beforeEach(() => {
 afterEach(() => {
   cleanup();
   vi.useRealTimers();
+  vi.unstubAllGlobals();
 });
+
+/**
+ * A run of views on one phone with the speaker on, counting its alerts by their buzz (the sound needs an AudioContext,
+ * which tests don't have). The clock starts clear of any alert an earlier test played.
+ */
+let clear = Date.now();
+function phone() {
+  const vibrate = vi.fn(() => true);
+  vi.stubGlobal("navigator", { ...navigator, vibrate });
+  // Each test's fake clock starts again from the real one, so each phone starts an hour past the last.
+  clear += 3_600_000;
+  vi.setSystemTime(clear);
+  const feedback = new Feedback({ getItem: () => null, setItem() {}, removeItem() {} } as never, { unlock() {}, play() {} } as never);
+  const send = vi.fn();
+  const shown = (v: CustomView) => (
+    <FeedbackContext.Provider value={feedback}>
+      <ControllerScreen view={v} send={send} me="Player1" game="tactics" />
+    </FeedbackContext.Provider>
+  );
+  let utils: ReturnType<typeof render> | null = null;
+  const to = (v: CustomView) => {
+    if (utils) utils.rerender(shown(v));
+    else utils = render(shown(v));
+    vi.advanceTimersByTime(10);
+  };
+  /** A reconnect: the screen goes, and the same view comes back. */
+  const remount = (v: CustomView) => {
+    utils?.unmount();
+    utils = null;
+    to(v);
+  };
+  return { send, to, remount, alerts: () => vibrate.mock.calls.length };
+}
 
 describe("dialogue", () => {
   it("shows the line and its speaker", () => {
@@ -286,6 +321,106 @@ describe("skill checks", () => {
     expect(roll.textContent).toMatch(/6\s*\+\s*0\s*=\s*6\s*vs DC\s*15/);
     expect(within(roll as HTMLElement).getByText(/Player3 rolled/)).toBeTruthy();
     expect(screen.queryAllByRole("button").filter((b) => b.closest(".tx-check"))).toEqual([]);
+  });
+});
+
+describe("alerts", () => {
+  it("a who-rolls question right after a vote alerts too: the quiet window is the vote's, not every question's", () => {
+    const p = phone();
+    p.to(view("vote"));
+    expect(p.alerts()).toBe(1);
+    expect(document.querySelector(".tx-ask.arrived")).not.toBeNull();
+    vi.advanceTimersByTime(2500);
+    p.to(view("check-pick", (d) => { d.canChoose = true; }, "v2"));
+    expect(p.alerts()).toBe(2);
+    expect(document.querySelector(".tx-check.arrived")).not.toBeNull();
+  });
+
+  it("a reconnect re-sending the same question stays quiet and still", () => {
+    const p = phone();
+    p.to(view("check-pick", (d) => { d.canChoose = true; }));
+    expect(p.alerts()).toBe(1);
+    vi.advanceTimersByTime(1000);
+    p.remount(view("check-pick", (d) => { d.canChoose = true; }, "v2"));
+    expect(p.alerts()).toBe(1);
+    expect(document.querySelector(".tx-check.arrived")).toBeNull();
+    // Long after, it's an arrival again (a reload, say).
+    vi.advanceTimersByTime(5000);
+    p.remount(view("check-pick", (d) => { d.canChoose = true; }, "v3"));
+    expect(p.alerts()).toBe(2);
+  });
+
+  it("a question straight after another is a new screen: it alerts, and the same question's next view doesn't", () => {
+    const p = phone();
+    p.to(view("vote"));
+    p.to(view("vote", (d) => { d.mine = "parley"; }, "v2"));
+    expect(p.alerts()).toBe(1);
+    const first = document.querySelector(".tx-ask");
+    p.to(view("choice-leader", undefined, "v3"));
+    expect(p.alerts()).toBe(2);
+    expect(document.querySelector(".tx-ask")).not.toBe(first);
+    expect(document.querySelector(".tx-ask.arrived")).not.toBeNull();
+  });
+
+  it("a question that reuses the last one's option ids is still a new question", () => {
+    const p = phone();
+    p.to(view("vote"));
+    p.to(view("vote", (d) => { (d.options as { label: string }[])[0]!.label = "We'll hold the ford."; }, "v2"));
+    expect(p.alerts()).toBe(2);
+  });
+
+  it("two skill checks in a row are two questions; the same check's next view is not", () => {
+    const p = phone();
+    const pick = (change?: (d: Record<string, unknown>) => void) => (d: Record<string, unknown>) => { d.canChoose = true; change?.(d); };
+    p.to(view("check-pick", pick()));
+    p.to(view("check-pick", pick((d) => { d.mine = "pr_member2"; }), "v2"));
+    expect(p.alerts()).toBe(1);
+    p.to(view("check-pick", pick((d) => { d.skill = "athletics"; d.title = "We'll swim it."; }), "v3"));
+    expect(p.alerts()).toBe(2);
+  });
+
+  it("a tap held behind question 1 never goes out on question 2", () => {
+    const p = phone();
+    p.to(view("vote"));
+    act(() => {
+      option(/parley with the chief/).click();
+      option(/what's it worth/).click();
+    });
+    p.to(view("choice-leader", undefined, "v2"));
+    vi.advanceTimersByTime(QUEUE_MS + 100);
+    expect(p.send.mock.calls.map((c) => c[0])).toEqual([{ action: "vote", data: { option: "parley" } }]);
+    expect(screen.getAllByRole("button").filter((b) => b.closest(".tx-options") && pressed(b) === "true")).toEqual([]);
+  });
+
+  it("a tap held when the vote closes in a tie is dropped: the decider breaks it from the tie-break's view", () => {
+    const p = phone();
+    // A two-way vote that ties: the tie-break offers the very same options.
+    p.to(view("vote", (d) => { d.mine = null; d.options = (d.options as unknown[]).slice(0, 2); }));
+    act(() => {
+      option(/clear the ford by force/).click();
+      option(/parley with the chief/).click();
+    });
+    p.to(view("vote-tie", (d) => { d.mine = "force"; }, "v2"));
+    vi.advanceTimersByTime(QUEUE_MS + 100);
+    expect(p.send.mock.calls.map((c) => c[0])).toEqual([{ action: "vote", data: { option: "force" } }]);
+    expect(pressed(option(/parley with the chief/))).toBe("false");
+    expect(within(option(/clear the ford by force/)).getByText("You voted this earlier")).toBeTruthy();
+  });
+
+  it("a tie-break landing on the decider's phone alerts once; on anyone else's, not at all", () => {
+    const p = phone();
+    p.to(view("vote", (d) => { d.options = (d.options as unknown[]).slice(0, 2); }));
+    vi.advanceTimersByTime(3000);
+    p.to(view("vote-tie", undefined, "v2"));
+    expect(p.alerts()).toBe(2);
+    p.to(view("vote-tie", (d) => { d.mine = "parley"; }, "v3"));
+    expect(p.alerts()).toBe(2);
+    cleanup();
+
+    const q = phone();
+    q.to(view("vote"));
+    q.to(view("vote-tie", (d) => { d.canChoose = false; }, "v2"));
+    expect(q.alerts()).toBe(1);
   });
 });
 

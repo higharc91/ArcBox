@@ -306,7 +306,7 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
   // Opening the screen as leader is an arrival too. Its sound and buzz come from `useAlertOnMount`, which stays quiet
   // when a reconnect re-sends the view; taking the lead later plays them here.
   // A reconnect's remount inside the alert's quiet window doesn't pulse either.
-  const alerted = useAlertOnMount("yourTurn", d.leader);
+  const alerted = useAlertOnMount("yourTurn", "walk", d.leader);
   const led = useRef(d.leader);
   const arrived = useRef(alerted);
   if (d.leader && !led.current) arrived.current = true;

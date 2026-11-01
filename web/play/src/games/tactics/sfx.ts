@@ -97,21 +97,30 @@ export function useSfx(): (cue: Cue) => void {
   return (cue) => play(feedback, cue);
 }
 
-/** When each alert last played, so a remount soon after stays quiet; per cue, so one alert never wakes another. */
+/** How long after an alert a remount of the same screen stays quiet: long enough for a reconnect to re-send the view. */
+export const ALERT_QUIET_MS = 4000;
+
+/**
+ * When each screen last alerted, by cue and the screen's identity, so a remount of that screen soon after stays quiet
+ * while a different screen still alerts: a who-rolls question straight after a vote, or a second question in a row.
+ */
 const lastAlert = new Map<string, number>();
 
 /**
- * Plays an alert once when a screen appears, if `when` holds then; a remount within a few seconds (a reconnect re-sends
- * the view) stays quiet. Only `when` at mount counts. Says whether it alerted, from the first render on, so the screen
- * can play a matching animation (or not) without a re-render.
+ * Plays an alert once when a screen appears, if `when` holds then; a remount of the same `screen` (an identity the
+ * caller builds from what the view asks) within `ALERT_QUIET_MS` stays quiet, as that's a reconnect re-sending the view.
+ * Only `when` at mount counts. Says whether it alerted, from the first render on, so the screen can play a matching
+ * animation (or not) without a re-render.
  */
-export function useAlertOnMount(cue: "yourTurn" | "reaction" | "dice", when = true): boolean {
+export function useAlertOnMount(cue: "yourTurn" | "reaction" | "dice", screen: string, when = true): boolean {
   const sfx = useSfx();
   const [fresh] = useState(() => {
     if (!when) return false;
     const now = Date.now();
-    if (now - (lastAlert.get(cue) ?? -Infinity) < 4000) return false;
-    lastAlert.set(cue, now);
+    for (const [key, at] of lastAlert) if (now - at >= ALERT_QUIET_MS) lastAlert.delete(key);
+    const key = `${cue}\n${screen}`;
+    if (lastAlert.has(key)) return false;
+    lastAlert.set(key, now);
     return true;
   });
   useEffect(() => {

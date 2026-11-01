@@ -220,7 +220,7 @@ export function ReactPrompt({ data, send }: CustomScreenProps) {
   const r = data as ReactData;
   const detail = reactionDetail(r);
   const sfx = useSfx();
-  useAlertOnMount("reaction");
+  useAlertOnMount("reaction", "react");
   const answer = (id: string) => {
     sfx(id === "pass" ? "cancel" : "confirm");
     send("react", { choice: id });
