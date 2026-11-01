@@ -1,13 +1,13 @@
-[gd_scene format=4]
+[gd_scene format=4 uid="uid://by5f44arlyirs"]
 
-[ext_resource type="Script" path="res://addons/region_tools/Region.cs" id="1_wwkm1"]
-[ext_resource type="TileSet" path="res://palette/materials.tres" id="2_mepkm"]
-[ext_resource type="TileSet" path="res://palette/heights.tres" id="3_gsmy8"]
-[ext_resource type="TileSet" path="res://palette/flags.tres" id="4_mrhb6"]
-[ext_resource type="Script" path="res://addons/region_tools/BeatMarker.cs" id="5_6j5ui"]
+[ext_resource type="Script" uid="uid://d3i1ust8tmsgr" path="res://addons/region_tools/Region.cs" id="1_wwkm1"]
+[ext_resource type="TileSet" uid="uid://ci202gi2p1d3v" path="res://palette/materials.tres" id="2_mepkm"]
+[ext_resource type="TileSet" uid="uid://c6akubvykylt1" path="res://palette/heights.tres" id="3_gsmy8"]
+[ext_resource type="TileSet" uid="uid://ckko4oius7rem" path="res://palette/flags.tres" id="4_mrhb6"]
+[ext_resource type="Script" uid="uid://bmak5sxcx76pe" path="res://addons/region_tools/BeatMarker.cs" id="5_6j5ui"]
 [ext_resource type="TileSet" path="res://palette/props.tres" id="5_mepkm"]
-[ext_resource type="Script" path="res://addons/region_tools/StampMarker.cs" id="6_d6wau"]
-[ext_resource type="Script" path="res://addons/region_tools/SpawnMarker.cs" id="7_cinhb"]
+[ext_resource type="Script" uid="uid://ce704xca6p4vm" path="res://addons/region_tools/StampMarker.cs" id="6_d6wau"]
+[ext_resource type="Script" uid="uid://dqr75ni0ysuxt" path="res://addons/region_tools/SpawnMarker.cs" id="7_cinhb"]
 
 [node name="Region" type="Node2D" unique_id=87856395]
 script = ExtResource("1_wwkm1")

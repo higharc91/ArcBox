@@ -94,18 +94,6 @@ internal sealed class BoardPainter
     /// <summary>Loads an image the way items that lie <paramref name="flat"/> or stand will draw it. Only on the main thread: this reads a file.</summary>
     public void Preload(ArtImage image, bool flat) => Texture(image, flat);
 
-    /// <summary>True when <paramref name="drawn"/> is a prepared tall prop.</summary>
-    public static bool IsTallProp(object drawn) => drawn is DrawnSprite { Lit.IsTallProp: true };
-
-    /// <summary>The painter's order key of <paramref name="drawn"/>.</summary>
-    public static long OrderOf(object drawn) => drawn is DrawnSprite s ? s.Lit.Order : drawn is DrawnFace f ? f.Lit.Order : 0;
-
-    /// <summary>The screen target rectangle of <paramref name="drawn"/>.</summary>
-    public static Rect2 TargetOf(object drawn) => drawn is DrawnSprite s ? s.Target : default;
-
-    /// <summary>The tile of <paramref name="drawn"/>.</summary>
-    public static Tile TileOf(object drawn) => drawn is DrawnSprite s ? s.Lit.Sprite.Tile : default;
-
     /// <summary>Paints one item on <paramref name="canvas"/> as things stand at <paramref name="clock"/>. With no <paramref name="now"/>, its colours are as prepared.</summary>
     public void Paint(CanvasItem canvas, object drawn, BoardLighting? now, double clock) => Paint(canvas, drawn, now, clock, 1f);
 

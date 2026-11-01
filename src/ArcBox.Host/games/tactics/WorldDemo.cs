@@ -68,15 +68,7 @@ internal sealed partial class WorldDemo : Node
         _art = UnitArt.Load(_pack);
         var parts = _spec.Split(':');
         var blocks = parts.Length > 1 && int.TryParse(parts[1], CultureInfo.InvariantCulture, out var b) ? b : WorldTuning.BlockSize;
-        bool separate = true;
-        TallProps.Mode mode = TallProps.Mode.PerBlock;
-        if (parts.Length > 1)
-        {
-            if (parts[1].Equals("baked", StringComparison.OrdinalIgnoreCase)) separate = false;
-            else if (parts[1].Equals("perprop", StringComparison.OrdinalIgnoreCase)) mode = TallProps.Mode.PerProp;
-            else if (parts[1].Equals("perblock", StringComparison.OrdinalIgnoreCase)) mode = TallProps.Mode.PerBlock;
-        }
-        _canvas = new WorldCanvas(_pack, () => Ground(parts[0]), blocks, separate, mode);
+        _canvas = new WorldCanvas(_pack, () => Ground(parts[0]), blocks);
         AddChild(_canvas);
     }
 
@@ -215,7 +207,7 @@ internal sealed partial class WorldDemo : Node
         Log($"_Draw per block, first time: {Spread(_canvas.BlockMs)}, sum {_canvas.BlockMs.Sum():0.0} ms");
         Log($"render CPU ms {Spread(all.Select(f => f.RenderCpu))}; GPU ms {Spread(all.Select(f => f.RenderGpu))}; at most {all.Max(f => f.DrawCalls):N0} draw calls");
         Log($"overlay query ms {Spread(all.Select(f => f.Query))}; draw ms {Spread(all.Select(f => f.Draw))}; items {Spread(all.Select(f => (double)f.Items))}");
-        Log($"blocks recorded once, whatever the walk did: {_canvas.RecordedOnce}");
+        Log($"blocks recorded once, whatever the walk did: {_canvas.RecordedOnce}; recorded again for a fade: {_canvas.Rerecorded}");
         Log($"memory at end of crossing: {MemoryText()}");
     }
 

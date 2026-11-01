@@ -191,7 +191,7 @@ public sealed class RegionWriterTests
 
         var region = Region(source);
 
-        var ground = WorldGround.Of(region, new Dictionary<string, BattleMap>()).Terrain;
+        var ground = WorldGround.Of(region, new Dictionary<string, BattleMap>(), ArtManifest.None).Terrain;
 
         Assert.True(ground.Walkable(new Tile(5, 5)));
         Assert.Equal(new TileInfo(0, 0, TileFlags.Impassable), region.TileAt(new Tile(5, 6)));

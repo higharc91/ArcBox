@@ -196,13 +196,14 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
     /// neighbours outside it are read from <paramref name="terrain"/> and there's no seam or skirt at its edges. Items stay in
     /// the terrain's own tiles and art pixels, with their keys, so plans of different rects sort together. Without
     /// <paramref name="grid"/> no tile is outlined. An empty rect's plan has no items and sits at the origin.
-    /// With <paramref name="world"/>, decals and ground tint are added (skipping stamped tiles).
+    /// With <paramref name="world"/>, decals and ground tint are added (skipping stamped tiles). They go by where a tile is in the region, and <paramref name="origin"/>
+    /// is where this terrain's tile (0, 0) is in it, for a terrain that's a window on a region.
     /// </summary>
-    public static BoardPlan BuildBlock(BoardTerrain terrain, ArtIndex art, TileRect rect, bool grid, bool world = false)
+    public static BoardPlan BuildBlock(BoardTerrain terrain, ArtIndex art, TileRect rect, bool grid, bool world = false, Tile origin = default)
     {
         var items = new List<BoardItem>();
         foreach (var tile in terrain.TilesIn(rect))
-            AddTile(items, terrain, art, tile, world);
+            AddTile(items, terrain, art, tile, world, origin);
         AddProps(items, terrain, art, rect);
         AddZones(items, terrain, art, rect);
 
@@ -349,7 +350,7 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
         return art.Decal(pick);
     }
 
-    private static void AddTile(List<BoardItem> items, BoardTerrain terrain, ArtIndex art, Tile tile, bool world = false)
+    private static void AddTile(List<BoardItem> items, BoardTerrain terrain, ArtIndex art, Tile tile, bool world = false, Tile origin = default)
     {
         var look = terrain.Look(tile);
         var height = terrain.Top(tile);
@@ -370,9 +371,10 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
             Grid = !look.Void && !terrain.Map[tile].Flags.HasFlag(TileFlags.Impassable),
         };
         var isStamped = terrain.Map.StampedTiles.Contains(tile);
+        var inRegion = new Tile(tile.X + origin.X, tile.Y + origin.Y);
         if (world && !isStamped)
         {
-            var (x, y) = (tile.X, tile.Y);
+            var (x, y) = (inRegion.X, inRegion.Y);
             top = top with
             {
                 VertexTints =
@@ -389,7 +391,7 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
         if (world && !isStamped && !look.Void && !look.Water && !terrain.Changes.Sunk.Contains(tile))
         {
             var material = terrain.Map.Materials[terrain.Map[tile].Material];
-            if (DecalFor(tile, material, art) is { } decalImage)
+            if (DecalFor(inRegion, material, art) is { } decalImage)
             {
                 var (x, y) = (tile.X, tile.Y);
                 items.Add(new Face(BoardOrder.Key(tile, BoardLayer.Ground), tile, FaceKind.Decal, Facing.Up,

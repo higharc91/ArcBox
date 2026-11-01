@@ -80,7 +80,7 @@ public sealed class RegionExportTests : IDisposable
 
     private const string Unreachable = "Paint a walkable way to it, climbing no more than 2 levels a step, or move the marker.";
 
-    private static readonly Lazy<RulesPack> Base = new(() => RulesPack.Load([ContentPaths.BaseRules]));
+    private static readonly Lazy<RulesPack> Base = new(() => RulesPack.Load([ContentPaths.BaseRules], ArtManifests.Load(ContentPaths.ContentBase)));
 
     /// <summary>A copy of the base rules: an export writes into its pack, so each test gets its own.</summary>
     private readonly string _rules = CopyRules();

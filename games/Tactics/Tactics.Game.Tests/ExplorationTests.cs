@@ -63,7 +63,7 @@ public sealed class ExplorationTests
                 File.Copy(file, to);
             }
             change(copy.FullName);
-            return RulesPack.Load([copy.FullName]);
+            return RulesPack.Load([copy.FullName], ArtManifests.Load(ContentRules()));
         }
         finally
         {

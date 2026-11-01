@@ -17,7 +17,7 @@ public sealed class WorldWalkTests
     {
         var def = new RegionDef("r", "R", 1, [64, 32], ["grass/lush"], [new RegionChunk(0, 0, RegionTests.Tiles())], [new RegionStamp("ascii", new Tile(4, 5), 0)], [],
             new RegionSpawns(Origin, Origin), []);
-        return WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap> { ["ascii"] = AsciiMap.Parse("0. 0C") });
+        return WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap> { ["ascii"] = AsciiMap.Parse("0. 0C") }, ArtManifest.None);
     }
 
     [Fact]
@@ -40,7 +40,7 @@ public sealed class WorldWalkTests
             new RegionSpawns(Origin, Origin), [],
             [new RegionProps("tree", "autumn", [new Tile(1, 0)])]);
         var ground = WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap>(),
-            new Dictionary<string, PropArtDef> { ["tree"] = new("tree", ["autumn"], true, Cover.Total, 4) });
+            new ArtManifest([], ImmutableDictionary<string, PropArtDef>.Empty.Add("tree", new("tree", ["autumn"], true, Cover.Total, 4))));
         Assert.Null(WorldWalk.Next(ground.Terrain, Origin, WalkDir.E, Jump, null));
     }
 
@@ -51,7 +51,7 @@ public sealed class WorldWalkTests
     {
         var def = new RegionDef("r", "R", 1, [32, 32], ["grass/lush"], [new RegionChunk(0, 0, RegionTests.Tiles())], [], [],
             new RegionSpawns(Origin, Origin), [], Buildings: [.. buildings]);
-        return WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap>(), Town.Props, Town.Buildings);
+        return WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap>(), Town);
     }
 
     [Fact]
@@ -99,13 +99,31 @@ public sealed class WorldWalkTests
     }
 
     [Fact]
+    public void A_prop_nothing_defines_cant_quietly_be_walkable()
+    {
+        var def = new RegionDef("r", "R", 1, [32, 32], ["grass/lush"], [new RegionChunk(0, 0, RegionTests.Tiles())], [], [],
+            new RegionSpawns(Origin, Origin), [], [new RegionProps("tree", "autumn", [new Tile(1, 0)])]);
+
+        Assert.Contains("'tree'", Assert.Throws<ArgumentException>(() => WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap>(), ArtManifest.None)).Message);
+    }
+
+    [Fact]
+    public void A_building_nothing_defines_cant_quietly_be_walkable()
+    {
+        var def = new RegionDef("r", "R", 1, [32, 32], ["grass/lush"], [new RegionChunk(0, 0, RegionTests.Tiles())], [], [],
+            new RegionSpawns(Origin, Origin), [], Buildings: [new RegionBuilding("tavern", "red", new Tile(1, 0))]);
+
+        Assert.Contains("'tavern'", Assert.Throws<ArgumentException>(() => WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap>(), ArtManifest.None)).Message);
+    }
+
+    [Fact]
     public void A_soft_prop_doesnt()
     {
         var def = new RegionDef("r", "R", 1, [64, 32], ["grass/lush"], [new RegionChunk(0, 0, RegionTests.Tiles())], [], [],
             new RegionSpawns(Origin, Origin), [],
             [new RegionProps("bush", null, [new Tile(1, 0)])]);
         var ground = WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap>(),
-            new Dictionary<string, PropArtDef> { ["bush"] = new("bush", [], false, Cover.None, 1) });
+            new ArtManifest([], ImmutableDictionary<string, PropArtDef>.Empty.Add("bush", new("bush", [], false, Cover.None, 1))));
         Assert.NotNull(WorldWalk.Next(ground.Terrain, Origin, WalkDir.E, Jump, null));
     }
 
@@ -362,7 +380,7 @@ public sealed class WorldWalkTests
     [Fact]
     public void The_pack_shares_one_ground_per_region()
     {
-        var rules = RulesPack.Load([ContentPaths.BaseRules]);
+        var rules = RulesPack.Load([ContentPaths.BaseRules], Town);
         var id = rules.Regions.Keys.First();
 
         Assert.Same(rules.GroundFor(id), rules.GroundFor(id));

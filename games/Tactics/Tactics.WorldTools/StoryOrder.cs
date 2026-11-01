@@ -41,7 +41,7 @@ public static class StoryOrder
     public static StoryWalk Check(WorldRegion region, RulesPack rules, string contentBase)
     {
         var (legs, retries, problems) = (new List<StoryLeg>(), new List<StoryLeg>(), new List<string>());
-        var walk = new RegionWalk(region, rules.Maps, rules.Art?.Props ?? ArtManifests.DefaultProps, rules.Art?.Buildings);
+        var walk = new RegionWalk(region, rules.Maps, rules.Art ?? ArtManifest.None);
         var trapped = walk.Trapped(region.Def.Spawns.Start);
         if (trapped.Count > 0)
             problems.Add($"{TileSpread.Say(trapped, "can be walked into but has no way back", "can be walked into but have no way back")}. Paint a way out, climbing no more than {ClassDef.DefaultJump} levels a step, or raise {TileSpread.It(trapped)}.");

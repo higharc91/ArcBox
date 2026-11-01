@@ -24,7 +24,7 @@ public sealed class StoryRoomTests
         throw new DirectoryNotFoundException("No ArcBox.slnx above the test binaries.");
     }
 
-    private static readonly Lazy<RulesPack> Pack = new(() => RulesPack.Load([Path.Combine(ContentBase(), "rules")]));
+    private static readonly Lazy<RulesPack> Pack = new(() => RulesPack.Load([Path.Combine(ContentBase(), "rules")], ArtManifests.Load(ContentBase())));
     private static readonly Lazy<LoreBook> Lore = new(() => LoreBook.Load(ContentBase()));
 
     private static readonly string[] Phones = ["c1", "c2", "c3"];

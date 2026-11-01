@@ -39,7 +39,7 @@ public static class DemoRegion
             ?? throw new FormatException($"Region {id} is empty.");
         var maps = def.Stamps.Select(s => s.Map).Distinct(StringComparer.Ordinal)
             .ToDictionary(m => m, m => BoardMap.Parse(File.ReadAllText(Path.Combine(rules, "maps", $"{m}.json"))), StringComparer.Ordinal);
-        return WorldGround.Of(WorldRegion.From(def), maps);
+        return WorldGround.Of(WorldRegion.From(def), maps, ArtManifests.Load(packRoot));
     }
 
     /// <summary>One unit walking <paramref name="heading"/> at <paramref name="place"/>, <paramref name="seconds"/> into its stride: the party, until there is one.</summary>
@@ -69,7 +69,7 @@ public static class DemoRegion
             new RegionSpawns(new Tile(width / 2, height / 2), new Tile(width / 2, height / 2)), []);
         var props = BattleMap.FromBytes(PropsMap, 1, 1, new byte[3], ["void/deep"], Scatter(tiles, width, height),
             ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty);
-        return WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap> { [PropsMap] = props });
+        return WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap> { [PropsMap] = props }, ArtManifest.None);
     }
 
     private static double RiverAt(int x, int height) => height * 0.5 + height * 0.18 * Math.Sin(x * 0.07) + height * 0.06 * Math.Sin(x * 0.19 + 1);
@@ -136,7 +136,7 @@ public static class DemoRegion
             new RegionSpawns(start, start), []);
         var props = BattleMap.FromBytes(PropsMap, 1, 1, new byte[3], ["void/deep"], ScatterWood(tiles, width, height),
             ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty);
-        return WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap> { [PropsMap] = props });
+        return WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap> { [PropsMap] = props }, ArtManifest.None);
     }
 
     /// <summary>Starting tile on the trail for <see cref="Wood"/>.</summary>

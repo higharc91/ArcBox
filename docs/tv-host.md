@@ -279,7 +279,7 @@ Over the blocks, a `BoardCanvas` (`SetDrawn`) paints each frame's units with wha
 
 The pack's tops are square and lie turned 45 degrees on a tile, so a checker dither's diagonals run straight down the screen, and at scale 2 every patch of dither was a comb of vertical stripes. `DitherTexels` keeps a top's dither a checker: the TV gets the top at twice its size, which samples exactly as it did at any scale, and only texels that are part of a checker get a pattern that lands upright, in the same two colours. No filter or UV can do this, because outlines must stay where the turn puts them. A top with no dither (cobble, planks, water) is drawn as it is. See [the proof](superpowers/reports/2026-10-31-tactics-overworld/stripes-art-before-after.png): the art, then before, then after. A tall side clamps as the manifest says, so a drop deeper than `chasm_side` shows its art at its own size and goes on as its last row. Doubling costs four times the memory, so it's for tops with real dither: a frame needs `LeastPatch` (8) texels of dither touching, and the art's real dither comes in patches of 80 and up, while specks in sand, flagstone and dungeon floors, and the crypt's runes, are 7 at most.
 
-**Ground dressing and props:** In the world, `WorldPlan` adds decals and vertex tint to ground tiles. Decals (`flowers`, `leaves`, `pebbles`, `scorch_burnt`, `bones_bone`, `cracks_dark`, `puddle_water`, `puddle_swamp`, `blood_red`) are placed at ~1 tile in 6 by deterministic hash of tile coordinates and material. Ordinary ground skips blood and bones. Stamped tiles get no decals and no tint, ensuring a battle stage draws identically to its battle map. Ground tint is a slow continuous sine drift baked into vertex colours across block boundaries, stopping ash and water repeating every 4 tiles with no new art and zero draw calls. Region props are drawn with their specified variants on their tiles, low props bake into static blocks while tall props (height >= 2) separate into their own layer, and props with light data light up the ground via the shared `BoardLighting`. `StagePlan` draws region props near the fight so a fight retains its surroundings. Battle boards built with `BoardPlan.Build` remain completely unchanged.
+**Ground dressing and props:** In the world, `WorldPlan` adds decals and vertex tint to ground tiles. Decals (`flowers`, `leaves`, `pebbles`, `scorch_burnt`, `bones_bone`, `cracks_dark`, `puddle_water`, `puddle_swamp`, `blood_red`) are placed at ~1 tile in 6 by deterministic hash of tile coordinates and material. Ordinary ground skips blood and bones. Stamped tiles get no decals and no tint, ensuring a battle stage draws identically to its battle map. Ground tint is a slow continuous sine drift baked into vertex colours across block boundaries, stopping ash and water repeating every 4 tiles with no new art and zero draw calls. Region props are drawn with their specified variants on their tiles, in the static blocks in painter's order, tall or low, and props with light data light up the ground via the shared `BoardLighting`. What they block comes from the pack's art manifest, read explicitly by the server (`RulesPack.Load`) and the TV (`DemoRegion.FromPack`) alike: `WorldGround.Of` refuses a prop or building it has no definition for, so a missing definition can't mean walkable, and the two can't disagree on a tile. `StagePlan` draws region props near the fight so a fight retains its surroundings. Battle boards built with `BoardPlan.Build` remain completely unchanged.
 
 Measured with `--world-demo` (2026-10-31, one run each, RTX 5080, 1920x1080, the usual Debug build, capped at the project's 144 fps, so 6.94 ms is the floor, with the owner's other programs running), on a full walk at twice walking pace that starts as the fade lifts. `_Draw` is a first recording, while the JIT is cold.
 
@@ -304,22 +304,27 @@ The overlay query's worst is about 6.5 ms, once, on its first call behind the fa
 
 So recording costs about 0.6 µs an item, and the cost that's left in a frame is the draw calls, as texture changes break the batches: a battle's board has about 500. No modest TV box has been measured.
 
-### Tall props fading spike (2026-11-01)
+### Fading
 
-Tested with `--world-demo=wood` (160×120 tiles, 7,200 tall props, >1,500 in view reach, 230 tiles crossing) on RTX 5080 at 1920×1080:
+A prop of height 2 or more that stands in front of a walker fades, and comes back when the walker has gone. Every prop is in its block, in painter's order, so it's right against the ground and against everything else, and a block never has to be sorted against a layer of its own. `PropFade` says what's faded. A faded prop is left out of its recorded block (`WorldBlock.Leave`), which records that block again, once as the fade starts and once as it ends, never as the alpha eases (`PropFade.TakeChanges`). It's painted in its sorted place in the frame's overlay at its alpha, with the units (`WorldPlan.PaintOver`): over a walker behind it and under one in front. What stands in front of a faded prop goes over it as it goes over a unit, so a crate in front of a faded tree stays clear. In a fight nothing fades: `PropFade.InFight` makes what's faded solid at once, as a fight's frames don't read it.
 
-| | `wood:baked` (static blocks) | `wood` (`PerBlock` tall props) | `wood:perprop` (`PerProp` tall props) |
+`OverlayPictureTests` holds all this to true painter's order, in rastered pixels: the whole region as its blocks record it, a walk across Ashen Ford, 25 walks past trees one tile beside them, a party stopped behind a tree and a party split across one, with what fades in play: 0 wrong pixels. A separate layer for tall props, at a block's Z, can't pass: it drew over terrain and low props in front (4,169 pixels on 38 of 153 props of Ashen Ford, worst 951 on one boulder), and faded trees above everything lay over walkers in front of them.
+
+Measured with no `--shots` (2026-11-01, RTX 5080, 1920×1080, Debug build, capped at 144 fps, one run each, on a crossing at twice walking pace). This repeats the fading spike, which predated decals and measured a layer that's gone: its best of 1,954 draw calls on `wood` isn't comparable, as that layer got them by drawing trees out of order.
+
+| | Ashen Ford (171 tiles, 153 tall props) | `wood` (230 tiles, 7,200 tall props) | `hilly` (120 tiles, 3,840 props, 960 lights) |
 |---|---|---|---|
-| Items, lit | 72,473 | 72,473 | 72,473 |
-| Off-thread build, with bake | 409 ms | 404 ms | 426 ms |
-| Frame ms (median, p95, p99, worst) | 6.94, 6.94, 6.94, 10.66 | 6.94, 6.94, 6.95, 10.29 | 6.94, 6.94, 7.14, 10.59 |
-| Frames over 16 ms | 0 of 4,946 | 0 of 4,946 | 0 of 4,942 |
-| Render CPU ms (median, worst) | 0.95, 1.96 ms | 0.72, 1.28 ms | 0.82, 1.50 ms |
-| GPU ms (median, worst) | 0.15, 2.63 ms | 0.05, 2.69 ms | 0.04, 0.28 ms |
-| Draw calls in view, at most | 3,199 | 1,954 | 1,520 |
-| Added engine memory at end | +14.5 MB | +14.1 MB | +31.3 MB |
-
-Decision: Fading passes. `PerBlock` maintains the 6.94 ms median, 0 frames over 16 ms, reduces draw calls to under 2,000, and avoids the engine node memory overhead of thousands of individual canvas items. Task 5 proceeds with fading.
+| Items, lit | 33,435 | 75,758 | 88,554 |
+| Off-thread build, with bake | 341 ms | 435 ms | 507 ms |
+| Frame ms after the first second: median, p95, p99, worst | 6.94, 6.94, 6.94, 6.94 | 6.94, 7.14, 8.33, 9.90 | 6.94, 6.94, 6.94, 6.94 |
+| Frames over 16 ms | 0 of 3,671 | 1 of 4,916, the first frame | 0 of 2,571 |
+| Render CPU ms: median, worst | 0.87, 1.83 | 1.11, 2.22 | 1.46, 2.31 |
+| GPU ms: median, worst | 0.07, 0.28 | 0.14, 0.53 | 0.13, 0.59 |
+| Draw calls, at most | 3,430 | 3,829 | 4,359 |
+| Blocks recorded again for a fade | 16 | 231 | 49 |
+| Overlay: query ms median, p99, worst | 0.03, 0.42, 2.98 | 0.31, 5.63, 6.95 | 0.11, 1.91, 7.83 |
+| Items over the blocks: p99, worst | 18, 19 | 182, 204 | 58, 67 |
+| Added engine memory at end | +12.3 MB | +15.9 MB | +19.2 MB |
 
 ### Ambient life (2026-11-01)
 

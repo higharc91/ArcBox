@@ -133,17 +133,10 @@ public static partial class RegionExport
         if (painted.Props.Count == 0)
             return [];
 
+        // With no art nothing can be said about a prop here, and the pack's own check of the file reports that.
         IReadOnlyDictionary<string, PropArtDef>? propDefs = null;
-        try
-        {
-            if (Directory.Exists(contentBase))
-                propDefs = ArtManifests.Load(contentBase).Props;
-        }
-        catch
-        {
-            // If art manifest fails to load, fall back to DefaultProps
-        }
-        propDefs ??= ArtManifests.DefaultProps;
+        if (Directory.Exists(contentBase))
+            propDefs = ArtManifests.Load(contentBase).Props;
 
         var warnings = new List<string>();
 
@@ -251,7 +244,9 @@ public static partial class RegionExport
             return new ExportResult(null, [.. problems]) { Warnings = warnings };
 
         // Before the file moves, so nothing thrown here can report "not written" for a file that was.
-        ImmutableArray<string> story = checks.Pack is { } pack ? StoryOrder.Check(pack.RegionFor(region.Id)!, pack, contentBase).Problems : [];
+        ImmutableArray<string> story = checks.Pack is { } pack && (pack.Art is not null || !WorldGround.NeedsArt(region))
+            ? StoryOrder.Check(pack.RegionFor(region.Id)!, pack, contentBase).Problems
+            : [];
         var path = Path.Combine(rulesDirectory, "world", $"{region.Id}.json");
         if (Replace(path, bytes) is { } failure)
             return new ExportResult(null, [failure]) { Warnings = warnings };

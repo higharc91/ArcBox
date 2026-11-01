@@ -322,6 +322,23 @@ public sealed class WorldPlanTests
     }
 
     [Fact]
+    public void The_tvs_ground_and_the_servers_agree_on_every_tile_of_the_ford()
+    {
+        var tv = DemoRegion.FromPack(Pack.Root, "ashen_ford");
+        var server = RulesPack.Load([Path.Combine(Pack.Root, "rules")], ArtManifests.Load(Pack.Root)).GroundFor("ashen_ford")!;
+        var blocked = 0;
+
+        for (var y = 0; y < server.Map.Height; y++)
+            for (var x = 0; x < server.Map.Width; x++)
+            {
+                var tile = new Tile(x, y);
+                Assert.True(server.Terrain.Walkable(tile) == tv.Terrain.Walkable(tile), $"{tile}");
+                blocked += server.Terrain.PropAt(tile) is { Blocks: true } ? 1 : 0;
+            }
+        Assert.True(blocked > 0);
+    }
+
+    [Fact]
     public void The_pack_region_loads_from_its_file_as_the_rules_build_it()
     {
         var loaded = DemoRegion.FromPack(Pack.Root, "ashen_ford");
@@ -335,7 +352,7 @@ public sealed class WorldPlanTests
     public void A_region_prop_is_drawn_on_its_tile_with_its_variant()
     {
         var region = WorldRegion.From(Pack.Region("ashen_ford").Def with { Props = [new RegionProps("tree", "autumn", [new Tile(10, 10)])] });
-        var ground = WorldGround.Of(region, ImmutableDictionary<string, BattleMap>.Empty);
+        var ground = WorldGround.Of(region, ImmutableDictionary<string, BattleMap>.Empty, Pack.Manifests);
         var plan = WorldPlan.Build(new BoardTerrain(ground.Map, null), Pack.Art);
         var block = plan.Blocks.Single(b => b.Tiles.Contains(new Tile(10, 10)));
         var sprite = block.Plan.Items.OfType<Sprite>().Single(s => s.Tile == new Tile(10, 10));
@@ -347,7 +364,7 @@ public sealed class WorldPlanTests
     public void A_prop_with_light_data_lights_the_ground()
     {
         var region = WorldRegion.From(Pack.Region("ashen_ford").Def with { Props = [new RegionProps("torch", "fire", [new Tile(10, 10)])] });
-        var ground = WorldGround.Of(region, ImmutableDictionary<string, BattleMap>.Empty);
+        var ground = WorldGround.Of(region, ImmutableDictionary<string, BattleMap>.Empty, Pack.Manifests);
         var plan = WorldPlan.Build(new BoardTerrain(ground.Map, null), Pack.Art);
         var block = plan.Blocks.Single(b => b.Tiles.Contains(new Tile(10, 10)));
 

@@ -31,9 +31,15 @@ public sealed class WorldGround
     /// <summary>The ground as it stands. Nothing changes it: a region has no height deltas, zones or sunk tiles.</summary>
     public Terrain Terrain { get; }
 
-    /// <summary>Builds the ground of <paramref name="region"/>, whose stamps are looked up in <paramref name="maps"/>.</summary>
-    public static WorldGround Of(WorldRegion region, IReadOnlyDictionary<string, BattleMap> maps,
-        IReadOnlyDictionary<string, PropArtDef>? propDefs = null, IReadOnlyDictionary<string, BuildingArtDef>? buildingDefs = null)
+    /// <summary>True when <paramref name="region"/> holds what only art defines, so its ground can't be built without an <see cref="ArtManifest"/>.</summary>
+    public static bool NeedsArt(RegionDef region) => !region.Props.IsDefaultOrEmpty || !region.Buildings.IsDefaultOrEmpty;
+
+    /// <summary>
+    /// Builds the ground of <paramref name="region"/>, whose stamps are looked up in <paramref name="maps"/>. What its props and buildings block comes from
+    /// <paramref name="art"/>, and throws <see cref="ArgumentException"/> for one that isn't there: the server and the TV have to agree on every tile, so a missing definition
+    /// can't be taken to mean walkable.
+    /// </summary>
+    public static WorldGround Of(WorldRegion region, IReadOnlyDictionary<string, BattleMap> maps, ArtManifest art)
     {
         var (width, height) = (region.Def.Size[0], region.Def.Size[1]);
         var materials = region.Def.Materials;
@@ -55,21 +61,22 @@ public sealed class WorldGround
                     : ((byte)tile.Height, (byte)tile.Material, (byte)tile.Flags);
             }
 
-        var propsLookup = propDefs ?? ArtManifests.DefaultProps;
-        var buildingLookup = buildingDefs ?? ArtManifests.DefaultBuildings;
         List<PropPlacement> allProps =
         [
             .. region.Def.Stamps.Where(s => maps.ContainsKey(s.Map))
                 .SelectMany(s => maps[s.Map].Props.Select(p => p with { At = new Tile(p.At.X + s.At.X, p.At.Y + s.At.Y) })),
             .. (region.Def.Props.IsDefault ? [] : region.Def.Props).SelectMany(group =>
             {
-                var blocks = propsLookup?.TryGetValue(group.Id, out var def) == true ? def.Blocks : false;
-                var cover = propsLookup?.TryGetValue(group.Id, out var def2) == true ? def2.Cover : Cover.None;
-                return group.At.Select(t => new PropPlacement(group.Id, t, blocks, cover, group.Variant));
+                if (!art.Props.TryGetValue(group.Id, out var def))
+                    throw new ArgumentException($"Region '{region.Def.Id}' has the prop '{group.Id}', which the art manifest doesn't define.", nameof(art));
+                return group.At.Select(t => new PropPlacement(group.Id, t, def.Blocks, def.Cover, group.Variant));
             }),
-            .. region.Buildings.SelectMany(b => buildingLookup?.GetValueOrDefault(b.Id) is { } def
-                ? def.Blocked(b.At).Where(t => t.X >= 0 && t.Y >= 0 && t.X < width && t.Y < height).Select(t => new PropPlacement(BuildingProp + b.Id, t, true, def.Cover))
-                : []),
+            .. region.Buildings.SelectMany(b =>
+            {
+                if (!art.Buildings.TryGetValue(b.Id, out var def))
+                    throw new ArgumentException($"Region '{region.Def.Id}' has the building '{b.Id}', which the art manifest doesn't define.", nameof(art));
+                return def.Blocked(b.At).Where(t => t.X >= 0 && t.Y >= 0 && t.X < width && t.Y < height).Select(t => new PropPlacement(BuildingProp + b.Id, t, true, def.Cover));
+            }),
         ];
         var stampedTiles = region.Def.Stamps.Where(s => maps.ContainsKey(s.Map))
             .SelectMany(s =>

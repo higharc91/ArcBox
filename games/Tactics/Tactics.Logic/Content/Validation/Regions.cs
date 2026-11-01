@@ -145,7 +145,8 @@ internal sealed partial class Validation
         IReadOnlyDictionary<string, BattleMap> maps, string file, string ptr)
     {
         private readonly RegionDef _def = region.Def;
-        private readonly Terrain _ground = WorldGround.Of(region, maps, v.Art?.Props, v.Art?.Buildings).Terrain;
+        /// <summary>The ground, or null for a pack loaded with no art and a region that needs some: what it blocks can't be said, so walking isn't judged.</summary>
+        private readonly Terrain? _ground = v.Art is null && WorldGround.NeedsArt(region.Def) ? null : WorldGround.Of(region, maps, v.Art ?? ArtManifest.None).Terrain;
 
         /// <summary>A stamp that sits inside the region, on a known map.</summary>
         private sealed record Placed(int Index, RegionStamp Stamp, BattleMap Map)
@@ -315,6 +316,8 @@ internal sealed partial class Validation
         /// </summary>
         private void Reachable(List<Placed> stamps)
         {
+            if (_ground is null)
+                return;
             var spawns = Pointer.Append(ptr, "spawns");
             var start = _def.Spawns.Start;
             if (!_ground.Walkable(start))

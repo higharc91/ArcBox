@@ -20,6 +20,9 @@ public readonly record struct PlannedImage(ArtImage Image, bool Flat);
 /// <summary>Where a lit item is in a plan: in <see cref="WorldPlan.Blocks"/>, and in that block's <see cref="LitBoard.Items"/>.</summary>
 public readonly record struct ItemAt(int Block, int Item);
 
+/// <summary>An item a frame paints over the blocks, at <paramref name="Alpha"/>.</summary>
+public readonly record struct OverItem(ItemAt At, float Alpha);
+
 /// <summary>One block of the world.</summary>
 /// <param name="Index">Its place in <see cref="WorldPlan.Blocks"/>.</param>
 /// <param name="Tiles">The tiles it holds.</param>
@@ -171,7 +174,8 @@ public sealed class WorldPlan
     /// What a frame must repaint over <paramref name="units"/>, in painter's order. An item is repainted whole, so what crosses a unit isn't enough: an item it
     /// doesn't cross can stand in front of a part of a repainted one, and would be painted over. So what crosses a repainted item, later than it, goes
     /// again too, until nothing more does. Items cross by the shapes they cover, not their boxes: on open ground every tile's box overlaps the next one's, and
-    /// the closure would run away across the map, where their diamonds only meet. Items faded by <paramref name="fade"/> are skipped so they aren't repainted solid.
+    /// the closure would run away across the map, where their diamonds only meet. An item faded by <paramref name="fade"/> isn't repainted solid, and goes in with the
+    /// units: it's out of its block and painted again in its place, so what stands in front of it has to go over it.
     /// </summary>
     public ImmutableArray<ItemAt> Overlay(IEnumerable<BoardUnit> units, PropFade? fade = null)
     {
@@ -186,12 +190,28 @@ public sealed class WorldPlan
 
         foreach (var unit in units)
             Touching(Shape.Of(AreaOf(unit)), default, unit.Order, Add);
+        if (fade is not null)
+            foreach (var faded in fade.Faded)
+                waiting.Push(fade.AtOf(faded));
         while (waiting.TryPop(out var at))
         {
             var shape = _shapes[at.Block][at.Item];
             Touching(shape, at, shape.Order, Add);
         }
         return [.. Painted(chosen)];
+    }
+
+    /// <summary>
+    /// All a frame paints over the blocks, in painter's order, for merging with the units: <see cref="Overlay"/>, solid, and each item <paramref name="fade"/> has left out of its
+    /// block, at its alpha, so a faded tree is over a walker behind it and under one in front. This is the whole of what decides what's over the blocks.
+    /// </summary>
+    public ImmutableArray<OverItem> PaintOver(IEnumerable<BoardUnit> units, PropFade? fade = null)
+    {
+        var solid = Overlay(units, fade).Select(at => new OverItem(at, 1));
+        if (fade is null || fade.Faded.Count == 0)
+            return [.. solid];
+        return [.. solid.Concat(fade.Faded.Select(i => new OverItem(fade.AtOf(i), fade.AlphaOf(i))))
+            .OrderBy(o => OrderOf(o.At)).ThenBy(o => o.At.Block).ThenBy(o => o.At.Item)];
     }
 
     /// <summary>The place in the painter's order of the item <paramref name="at"/>.</summary>

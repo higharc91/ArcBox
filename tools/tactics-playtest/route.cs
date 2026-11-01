@@ -14,7 +14,7 @@ if (args.Length != 5)
     Console.Error.WriteLine("usage: route.cs <rules dir> <region> <map> <x> <y>");
     return 2;
 }
-var rules = RulesPack.Load([args[0]]);
+var rules = RulesPack.Load([args[0]], ArtManifests.Load(Directory.GetParent(Path.TrimEndingDirectorySeparator(Path.GetFullPath(args[0])))!.FullName));
 var region = rules.RegionFor(args[1]) ?? throw new ArgumentException($"No region {args[1]}.");
 var map = rules.MapFor(args[2]) ?? throw new ArgumentException($"No map {args[2]}.");
 var stage = BattleStage.Of(region, map) ?? throw new ArgumentException($"{args[1]} doesn't stamp {args[2]}.");

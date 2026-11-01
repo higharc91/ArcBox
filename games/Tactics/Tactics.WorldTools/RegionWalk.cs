@@ -18,13 +18,8 @@ public sealed class RegionWalk
 
     private readonly Terrain _terrain;
 
-    /// <summary>The ground of <paramref name="region"/>. <paramref name="maps"/> must hold its stamped maps.</summary>
-    public RegionWalk(WorldRegion region, IReadOnlyDictionary<string, BattleMap> maps) : this(region, maps, null) { }
-
-    /// <summary>The ground of <paramref name="region"/> with prop definitions.</summary>
-    public RegionWalk(WorldRegion region, IReadOnlyDictionary<string, BattleMap> maps, IReadOnlyDictionary<string, PropArtDef>? propDefs,
-        IReadOnlyDictionary<string, BuildingArtDef>? buildingDefs = null)
-        => _terrain = WorldGround.Of(region, maps, propDefs, buildingDefs).Terrain;
+    /// <summary>The ground of <paramref name="region"/>. <paramref name="maps"/> must hold its stamped maps, and <paramref name="art"/> its props and buildings.</summary>
+    public RegionWalk(WorldRegion region, IReadOnlyDictionary<string, BattleMap> maps, ArtManifest art) => _terrain = WorldGround.Of(region, maps, art).Terrain;
 
     /// <summary>Walking on an existing <see cref="WorldGround"/>.</summary>
     public RegionWalk(WorldGround ground) => _terrain = ground.Terrain;

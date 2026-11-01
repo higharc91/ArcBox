@@ -138,7 +138,7 @@ public sealed class StagePlan
         var stamp = new TileRect(stage.Origin.X, stage.Origin.Y, stage.Width, stage.Depth);
         var drawn = new TileRect(stamp.X, stamp.Y, stamp.W + Reach, stamp.H + Reach);
         var window = GroundWindow.Of(ground, drawn, BoardChangesOnWorld.Of(changes, stage), BoardTerrain.ChasmMaterial(ground.Map, stamp), skirt);
-        var built = window.Block(art, drawn, grid: true).Shifted(-BoardFit.StageOffset(stage));
+        var built = window.Block(art, drawn, grid: true, world: true).Shifted(-BoardFit.StageOffset(stage));
 
         // What's in front matters only where it can cover the stage: the stamp and a tile round it, which walkers step in from, and above it.
         var near = new TileRect(stamp.X - 1, stamp.Y - 1, stamp.W + 2, stamp.H + 2);
@@ -197,7 +197,7 @@ internal sealed class GroundWindow
     /// <summary><see cref="BoardPlan.BuildBlock"/> of the region's tiles <paramref name="rect"/>, at the region's tiles, keys and art pixels.</summary>
     public BoardPlan Block(ArtIndex art, TileRect rect, bool grid, bool world = false)
     {
-        var built = BoardPlan.BuildBlock(_terrain, art, rect with { X = rect.X - _x, Y = rect.Y - _y }, grid, world);
+        var built = BoardPlan.BuildBlock(_terrain, art, rect with { X = rect.X - _x, Y = rect.Y - _y }, grid, world, new Tile(_x, _y));
         return BoardPlan.Of([.. built.Items.Select(Rekey)]).Shifted(BoardProjection.Corner(_x, _y, 0));
     }
 

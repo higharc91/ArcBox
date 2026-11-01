@@ -67,17 +67,17 @@ public sealed record ArtManifest(
     public ArtManifest(ImmutableSortedSet<string> keys) : this(keys, ImmutableDictionary<string, PropArtDef>.Empty, ImmutableDictionary<string, BuildingArtDef>.Empty) { }
 
     public ArtManifest(ImmutableSortedSet<string> keys, ImmutableDictionary<string, PropArtDef> props) : this(keys, props, ImmutableDictionary<string, BuildingArtDef>.Empty) { }
+
+    /// <summary>
+    /// No art at all, for a region with nothing in it that art defines. <see cref="WorldGround.Of"/> refuses a region's prop or building it has no definition for, so this can't
+    /// quietly make one walkable.
+    /// </summary>
+    public static ArtManifest None { get; } = new([]);
 }
 
 /// <summary>Reads the art sets' manifests.</summary>
 public static class ArtManifests
 {
-    /// <summary>Default props loaded from the base pack, for callers with no ArtManifest passed.</summary>
-    public static IReadOnlyDictionary<string, PropArtDef>? DefaultProps { get; set; }
-
-    /// <summary>Default buildings loaded from the base pack, for callers with no ArtManifest passed.</summary>
-    public static IReadOnlyDictionary<string, BuildingArtDef>? DefaultBuildings { get; set; }
-
     /// <summary>
     /// Reads <c>&lt;set&gt;/manifest.json</c> for every set folder in <paramref name="contentBaseDir"/> (e.g.
     /// <c>content/tactics/base</c>; the <c>rules</c> folder is a rules pack, not an art set). The manifests differ in shape,
@@ -133,11 +133,7 @@ public static class ArtManifests
         }
         if (errors.Count > 0)
             throw new ContentException([.. errors]);
-        var immutableProps = props.ToImmutableDictionary(StringComparer.Ordinal);
-        var immutableBuildings = buildings.ToImmutableDictionary(StringComparer.Ordinal);
-        DefaultProps = immutableProps;
-        DefaultBuildings = immutableBuildings;
-        return new ArtManifest(Ordinal.Set(keys), immutableProps, immutableBuildings);
+        return new ArtManifest(Ordinal.Set(keys), props.ToImmutableDictionary(StringComparer.Ordinal), buildings.ToImmutableDictionary(StringComparer.Ordinal));
     }
 
     /// <summary>A manifest writes <c>blocks</c> as rows for a footprint more than a tile deep, and as one row for a footprint one tile deep.</summary>

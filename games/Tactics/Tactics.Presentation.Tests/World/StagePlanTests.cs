@@ -26,7 +26,7 @@ public sealed class StagePlanTests(ITestOutputHelper output)
 
     private static string Whole(BoardItem item) => item switch
     {
-        Face f => $"{f.Order} {f.Tile} {Geometry(f)} {string.Join(' ', f.Uvs)} {f.Shade}",
+        Face f => $"{f.Order} {f.Tile} {Geometry(f)} {string.Join(' ', f.Uvs)} {f.Shade} {(f.VertexTints.IsDefaultOrEmpty ? "" : string.Join(' ', f.VertexTints))}",
         Sprite s => $"{s.Order} {s.Tile} {Geometry(s)}",
         _ => throw new InvalidOperationException(),
     };
@@ -115,7 +115,7 @@ public sealed class StagePlanTests(ITestOutputHelper output)
         // Against the world, everything the stage draws is the world's own item, moved: no seam in texture, shade, light or order.
         var world = new BoardTerrain(ground.Map, BoardChangesOnWorld.Of(changes, stage), BoardTerrain.ChasmMaterial(ground.Map, stamp));
         var drawn = new TileRect(stamp.X, stamp.Y, stamp.W + StagePlan.Reach, stamp.H + StagePlan.Reach);
-        var worldItems = BoardPlan.BuildBlock(world, Pack.Art, drawn, grid: true).Shifted(-BoardFit.StageOffset(stage)).Items
+        var worldItems = BoardPlan.BuildBlock(world, Pack.Art, drawn, grid: true, world: true).Shifted(-BoardFit.StageOffset(stage)).Items
             .Select(i => i is Face f && !stamp.Contains(f.Tile) ? f with { Grid = false } : i).Select(Whole).ToHashSet(StringComparer.Ordinal);
         Assert.All(stagePlan.Plan.Items, i => Assert.Contains(Whole(i), worldItems));
     }
@@ -383,6 +383,22 @@ public sealed class StagePlanTests(ITestOutputHelper output)
     }
 
     [Fact]
+    public void The_ground_past_the_stamp_keeps_the_worlds_tint_and_decals_so_a_fight_shows_no_step()
+    {
+        var (ground, stage, _) = Ford.Value;
+        var shift = -BoardFit.StageOffset(stage);
+        var world = WorldPlan.Build(new BoardTerrain(ground.Map, null), Pack.Art).Blocks.Select(b => b.Plan.Shifted(shift)).SelectMany(p => p.Items).OfType<Face>()
+            .Where(f => f.Kind is FaceKind.Top or FaceKind.Decal).ToDictionary(f => (f.Tile, f.Kind));
+        var skirt = StagePlan.Build(ground, stage, null, Pack.Art).Plan.Items.OfType<Face>()
+            .Where(f => f.Kind is FaceKind.Top or FaceKind.Decal && !ground.Map.StampedTiles.Contains(f.Tile)).ToArray();
+
+        Assert.Contains(skirt, f => f.Kind == FaceKind.Decal);
+        Assert.All(skirt, f => Assert.Equal(Whole(world[(f.Tile, f.Kind)]).Split(' ').Skip(3), Whole(f).Split(' ').Skip(3)));
+        foreach (var missing in skirt.Where(f => f.Kind == FaceKind.Top).Select(f => f.Tile).Where(t => world.ContainsKey((t, FaceKind.Decal))))
+            Assert.Contains(skirt, f => f.Tile == missing && f.Kind == FaceKind.Decal);
+    }
+
+    [Fact]
     public void The_stage_draws_props_near_the_fight()
     {
         var (ground, stage, map) = Ford.Value;
@@ -390,7 +406,7 @@ public sealed class StagePlanTests(ITestOutputHelper output)
         var baseRegion = Pack.Region("ashen_ford");
         var regionDef = baseRegion.Def with { Props = [new RegionProps("tree", "autumn", [propTile])] };
         var regionWithProp = WorldRegion.From(regionDef);
-        var groundWithProp = WorldGround.Of(regionWithProp, new Dictionary<string, BattleMap> { ["river_crossing"] = map });
+        var groundWithProp = WorldGround.Of(regionWithProp, new Dictionary<string, BattleMap> { ["river_crossing"] = map }, Pack.Manifests);
         var stagePlan = StagePlan.Build(groundWithProp, stage, null, Pack.Art);
 
         var prop = stagePlan.Plan.Items.OfType<Sprite>().FirstOrDefault(s => s.Tile == propTile);

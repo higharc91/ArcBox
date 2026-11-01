@@ -26,7 +26,7 @@ public sealed class RegionTests
 
     private static string Json(RegionDef def) => JsonSerializer.Serialize(def, ArcJson.Options);
 
-    private static bool Standable(WorldRegion region, Tile t) => WorldGround.Of(region, new Dictionary<string, BattleMap>()).Terrain.Walkable(t);
+    private static bool Standable(WorldRegion region, Tile t) => WorldGround.Of(region, new Dictionary<string, BattleMap>(), ArtManifest.None).Terrain.Walkable(t);
 
     private static IReadOnlyList<ContentError> ErrorsOf(string json)
         => ValidationTests.ErrorsOfChapter(("world/r.json", json));

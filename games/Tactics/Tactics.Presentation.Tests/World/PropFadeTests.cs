@@ -162,6 +162,65 @@ public sealed class PropFadeTests
     }
 
     [Fact]
+    public void A_fight_makes_whats_faded_solid_at_once_as_its_frames_may_not_read_the_fade()
+    {
+        var tree = new PropPlacement("tree", new Tile(5, 5), true, Cover.None);
+        var plan = WorldPlan.Build(new BoardTerrain(Map(16, 16, (_, _) => 0, tree), null), Pack.Art);
+        var fade = new PropFade(plan);
+        var walker = MakeWalker(BoardOrder.Key(new Tile(5, 4), BoardLayer.Unit), BoardProjection.Corner(5, 5, 0) + new Vector2(16, 8));
+        fade.Update([walker], dt: WorldTuning.PropFadeSeconds);
+        fade.TakeChanges((_, _) => { });
+
+        fade.InFight = true;
+
+        Assert.Equal(1f, fade.AlphaOf(0));
+        Assert.Empty(fade.Faded);
+        var left = new List<bool>();
+        fade.TakeChanges((_, faded) => left.Add(faded));
+        Assert.Equal([false], left);
+    }
+
+    [Fact]
+    public void A_block_hears_of_a_fade_as_it_starts_and_as_it_ends_and_not_as_it_eases()
+    {
+        var tree = new PropPlacement("tree", new Tile(5, 5), true, Cover.None);
+        var plan = WorldPlan.Build(new BoardTerrain(Map(16, 16, (_, _) => 0, tree), null), Pack.Art);
+        var fade = new PropFade(plan);
+        var walker = MakeWalker(BoardOrder.Key(new Tile(5, 4), BoardLayer.Unit), BoardProjection.Corner(5, 5, 0) + new Vector2(16, 8));
+        var heard = new List<bool>();
+
+        for (var frame = 0; frame < 60; frame++)
+        {
+            fade.Update([walker], dt: 1 / 60.0);
+            fade.TakeChanges((_, faded) => heard.Add(faded));
+        }
+        for (var frame = 0; frame < 60; frame++)
+        {
+            fade.Update([], dt: 1 / 60.0);
+            fade.TakeChanges((_, faded) => heard.Add(faded));
+        }
+
+        Assert.Equal([true, false], heard);
+    }
+
+    [Fact]
+    public void A_faded_tree_is_painted_at_its_alpha_and_in_its_place()
+    {
+        var tree = new PropPlacement("tree", new Tile(5, 5), true, Cover.None);
+        var plan = WorldPlan.Build(new BoardTerrain(Map(16, 16, (_, _) => 0, tree), null), Pack.Art);
+        var fade = new PropFade(plan);
+        var walker = MakeWalker(BoardOrder.Key(new Tile(5, 4), BoardLayer.Unit), BoardProjection.Corner(5, 5, 0) + new Vector2(16, 8));
+        fade.Update([walker], dt: WorldTuning.PropFadeSeconds);
+
+        var over = plan.PaintOver([walker], fade);
+
+        var faded = Assert.Single(over, o => o.Alpha < 1);
+        Assert.Equal(WorldTuning.PropFadeAlpha, faded.Alpha);
+        Assert.True(plan.OrderOf(faded.At) > walker.Order);
+        Assert.Equal(over.OrderBy(o => plan.OrderOf(o.At)).Select(o => o.At), over.Select(o => o.At));
+    }
+
+    [Fact]
     public void A_faded_tree_isnt_repainted_solid_over_a_walker()
     {
         var tree = new PropPlacement("tree", new Tile(5, 5), true, Cover.None);

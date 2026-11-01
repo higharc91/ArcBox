@@ -42,6 +42,7 @@ public partial class BoardCanvas : Node2D
     private readonly BoardPainter _painter;
     private readonly List<object> _items = [];
     private readonly List<long> _orders = [];
+    private readonly List<float> _alphas = [];
     private ImmutableArray<BoardUnit> _units = [];
     private int[] _sequence = [];
     private bool _animated;
@@ -89,12 +90,14 @@ public partial class BoardCanvas : Node2D
         _lighting = lit.Lighting.Active ? lit.Lighting : null;
         _items.Clear();
         _orders.Clear();
+        _alphas.Clear();
         foreach (var item in lit.Items)
         {
             var drawn = BoardPainter.Prepare(item);
             _painter.Bind(drawn);
             _items.Add(drawn);
             _orders.Add(item.Order);
+            _alphas.Add(1);
         }
         _halos.Show(HalosNow());
         _animated = plan.Animated;
@@ -122,6 +125,7 @@ public partial class BoardCanvas : Node2D
         Planned = false;
         _items.Clear();
         _orders.Clear();
+        _alphas.Clear();
         (_units, _sequence, _lighting) = ([], [], null);
         _marks.Clear();
         _halos.Show([]);
@@ -174,13 +178,25 @@ public partial class BoardCanvas : Node2D
         _baked = true;
     }
 
-    /// <summary>Paints <paramref name="items"/>, prepared by <see cref="BoardPainter.Prepare(LitItem, BoardLighting?)"/> and bound, in place of a plan. Their <paramref name="orders"/> are the painter's order.</summary>
-    internal void SetDrawn(IEnumerable<object> items, IEnumerable<long> orders)
+    /// <summary>
+    /// Paints <paramref name="items"/>, prepared by <see cref="BoardPainter.Prepare(LitItem, BoardLighting?)"/> and bound, in place of a plan. Their <paramref name="orders"/> are the
+    /// painter's order, and <paramref name="alphas"/>, if any, what each is painted at.
+    /// </summary>
+    internal void SetDrawn(IEnumerable<object> items, IEnumerable<long> orders, IEnumerable<float>? alphas = null)
     {
         _items.Clear();
         _items.AddRange(items);
         _orders.Clear();
         _orders.AddRange(orders);
+        _alphas.Clear();
+        if (alphas is null)
+        {
+            _alphas.AddRange(Enumerable.Repeat(1f, _items.Count));
+        }
+        else
+        {
+            _alphas.AddRange(alphas);
+        }
         Merge();
     }
 
@@ -252,7 +268,7 @@ public partial class BoardCanvas : Node2D
             }
             else
             {
-                _painter.Paint(this, _items[step], light, _clock);
+                _painter.Paint(this, _items[step], light, _clock, _alphas[step]);
             }
         }
         BoardPainter.GridAlpha = 1;
