@@ -786,6 +786,15 @@ public sealed class AshenFordDraftTests
     }
 
     [Fact]
+    public void Mauds_hut_stands_alone()
+    {
+        var draft = Draft.Value;
+        var hut = draft.Region.Buildings.Single(b => Distance(b.At, draft.Spot("ch1_old_maud")) <= 8);
+        Assert.Equal("cottage", hut.Id);
+        Assert.DoesNotContain(draft.Region.Buildings, b => b != hut && Distance(b.At, hut.At) < 28);
+    }
+
+    [Fact]
     public void The_fields_have_their_fences_hay_and_a_mill()
     {
         var draft = Draft.Value;
