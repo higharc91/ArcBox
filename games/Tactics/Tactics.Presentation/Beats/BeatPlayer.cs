@@ -69,7 +69,10 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
     private const float PopRow = 22;
     private const float BadgeRise = 56;
     private const float LungeReach = 0.45f;
-    private const float StepHop = 0.15f;
+
+    /// <summary>How high a stride lifts a walking unit, in height steps.</summary>
+    public const float StepHop = 0.15f;
+
     private const float ShakeSize = 2.5f;
     private const float BadgeScale = 1;
 

@@ -27,6 +27,67 @@ public sealed class UnitPlanTests
 
     private static BoardUnit One(string? active, params UnitView[] units) => Assert.Single(Plan(active, units), u => u.Id.Value == units[0].Id.Value);
 
+    private static ImmutableArray<WalkerView> Walkers(params string[] ids)
+        => [.. ids.Select((id, i) => new WalkerView(id, id, "characters.class_rogue", true, i == 0))];
+
+    [Fact]
+    public void Walkers_have_no_bars_and_only_the_leader_a_crown()
+    {
+        var places = new Dictionary<string, UnitPlace> { ["a"] = new(new Vector2(3.5f, 3.5f), 1), ["b"] = new(new Vector2(2.5f, 3.5f), 0) };
+        var poses = new Dictionary<string, UnitPose> { ["a"] = new("idle", 3, new Vector2(1, 0)), ["b"] = new("idle", 3, new Vector2(1, 0)) };
+
+        var units = UnitPlan.Walkers(Walkers("a", "b"), places, poses, Art.Value);
+
+        Assert.All(units, u => Assert.Null(u.Bar));
+        Assert.All(units, u => Assert.False(u.Active));
+        var crowned = Assert.Single(units, u => u.CrownAt is not null);
+        Assert.Equal("a", crowned.Id.Value);
+        Assert.True(crowned.CrownAt!.Value.Y < crowned.Feet.Y - 20);
+        Assert.Equal(places["a"].Feet, crowned.Feet);
+    }
+
+    [Fact]
+    public void Walkers_are_in_the_painters_order()
+    {
+        var places = new Dictionary<string, UnitPlace> { ["a"] = new(new Vector2(5.5f, 5.5f), 0), ["b"] = new(new Vector2(2.5f, 2.5f), 0) };
+
+        var units = UnitPlan.Walkers(Walkers("a", "b"), places, new Dictionary<string, UnitPose>(), Art.Value);
+
+        Assert.Equal(["b", "a"], units.Select(u => u.Id.Value));
+    }
+
+    [Fact]
+    public void A_walker_with_no_place_isnt_drawn()
+        => Assert.Empty(UnitPlan.Walkers(Walkers("a"), new Dictionary<string, UnitPlace>(), new Dictionary<string, UnitPose>(), Art.Value));
+
+    [Theory]
+    [InlineData(1, 0, 0, false)]
+    [InlineData(0, 1, 0, true)]
+    [InlineData(0, -1, 1, true)]
+    [InlineData(-1, 0, 1, false)]
+    public void A_walker_shows_the_facing_its_pose_says(float x, float y, int row, bool mirror)
+    {
+        var places = new Dictionary<string, UnitPlace> { ["a"] = new(new Vector2(3.5f, 3.5f), 0) };
+        var poses = new Dictionary<string, UnitPose> { ["a"] = new("walk", 0.25, new Vector2(x, y)) };
+
+        var unit = Assert.Single(UnitPlan.Walkers(Walkers("a"), places, poses, Art.Value));
+
+        Assert.Equal((row, mirror), (unit.Row, unit.Mirror));
+        Assert.Equal(Pack.Frames("characters", "walk")[3], unit.Anim.FrameAt(0));
+    }
+
+    [Fact]
+    public void An_idle_walker_keeps_breathing_on_the_canvass_clock()
+    {
+        var places = new Dictionary<string, UnitPlace> { ["a"] = new(new Vector2(3.5f, 3.5f), 0) };
+        var poses = new Dictionary<string, UnitPose> { ["a"] = new("idle", 2, new Vector2(1, 0)) };
+
+        var unit = Assert.Single(UnitPlan.Walkers(Walkers("a"), places, poses, Art.Value));
+
+        Assert.True(unit.Anim.Loop);
+        Assert.True(unit.Anim.Frames.Length > 1);
+    }
+
     [Fact]
     public void A_unit_stands_on_the_centre_of_its_tile_as_the_terrain_draws_it()
     {

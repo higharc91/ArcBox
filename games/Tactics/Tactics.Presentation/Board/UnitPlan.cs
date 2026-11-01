@@ -62,7 +62,11 @@ public sealed record UnitCountdown(Vector2 Centre, string Text);
 /// <param name="ArrowAt">Where the point of the turn arrow goes, on the active unit.</param>
 public sealed record BoardUnit(long Order, UnitId Id, UnitTone Tone, Vector2 Feet, UnitSprite Sprite, UnitAnim Anim, double Phase, int Row, bool Mirror,
     float Ring, bool Active, ImmutableArray<StatusEffect> Under, ImmutableArray<StatusEffect> Over, UnitBar? Bar, UnitCountdown? Countdown,
-    ImmutableArray<ArtRect> Icons, Vector2 IconsAt, Vector2? ArrowAt);
+    ImmutableArray<ArtRect> Icons, Vector2 IconsAt, Vector2? ArrowAt)
+{
+    /// <summary>Where the anchor of the leader's crown goes (the crown row of emotes/manifest.json); null for anyone else.</summary>
+    public Vector2? CrownAt { get; init; }
+}
 
 /// <summary>
 /// The units of a battle, ready to draw: what stands where, sorted into the painter's order, with what marks each one.
@@ -86,6 +90,7 @@ public static class UnitPlan
     public const int CountdownScale = 2;
 
     private const string Prone = "prone";     // a Downed unit is always prone, and already lying down
+    private const string Idling = "idle";
     private const int DigitHeight = 12;
     private const int Gap = 2;
     private const float LyingHeight = 14;     // how tall a figure lying down is
@@ -109,6 +114,28 @@ public static class UnitPlan
                 places is not null && places.TryGetValue(unit.Id, out var place) ? place : UnitPlace.On(terrain, unit.At),
                 poses?.GetValueOrDefault(unit.Id)))
             .OrderBy(u => u.Order)];
+    }
+
+    /// <summary>
+    /// The party in the world, back to front: walkers from <see cref="World.WalkTrack"/>, each with its ring and no bar, and a crown over
+    /// whoever leads. A walker with no place yet isn't drawn. An idling pose animates on the canvas's clock, as an idle unit does.
+    /// </summary>
+    public static ImmutableArray<BoardUnit> Walkers(IEnumerable<WalkerView> party, IReadOnlyDictionary<string, UnitPlace> places,
+        IReadOnlyDictionary<string, UnitPose> poses, UnitArt art)
+        => [.. party.Where(w => places.ContainsKey(w.Id)).Select(w => Walker(w, places[w.Id], poses.GetValueOrDefault(w.Id), art)).OrderBy(u => u.Order)];
+
+    private static BoardUnit Walker(WalkerView walker, UnitPlace place, UnitPose? pose, UnitArt art)
+    {
+        var sprite = art.Sprite(walker.Sprite) ?? art.StandIn(UnitTone.Party);
+        var (row, mirror) = pose?.Facing is { } look ? Looking(look.X, look.Y) : (0, false);
+        var feet = place.Feet;
+        var id = new UnitId(walker.Id);
+        var anim = pose is null || pose.Anim == Idling ? sprite.Idle : new UnitAnim([sprite.Anim(pose.Anim).FrameAt(pose.Seconds)], 1, false);
+        return new BoardUnit(OrderOf(place.Over, sprite), id, UnitTone.Party, feet, sprite, anim, PhaseOf(id), row, mirror, Math.Min(sprite.Width * RingShare, MaxRing),
+            false, [], [], null, null, [], feet, null)
+        {
+            CrownAt = walker.Leads ? new Vector2(feet.X, feet.Y - sprite.AnchorY + sprite.HeadTop - Gap) : null,
+        };
     }
 
     private static BoardUnit Unit(UnitView unit, UnitView[] all, UnitId? active, UnitArt art, float top, UnitPlace place, UnitPose? pose)

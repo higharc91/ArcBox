@@ -54,6 +54,7 @@ public sealed class BoardTerrain
         var heights = Changes.Heights.ToImmutableSortedDictionary(h => h.At, h => h.Delta);
         var sunk = Changes.Sunk.ToImmutableSortedSet();
         var terrain = new Terrain(map, heights, [], sunk);
+        Rules = terrain;
         var (width, count) = (map.Width, map.Width * map.Height);
         _looks = new MaterialLook[count];
         _tops = new float[count];
@@ -83,6 +84,9 @@ public sealed class BoardTerrain
 
     /// <summary>What the battle changed.</summary>
     public BoardChanges Changes { get; }
+
+    /// <summary>The same ground as the rules see it: what can be stood on and walked to.</summary>
+    public Terrain Rules { get; }
 
     /// <summary>The height the board's outer skirt goes down to, in steps: from the map file, so a fight doesn't change it.</summary>
     public float Base { get; }
