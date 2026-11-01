@@ -9,7 +9,7 @@ export const DIRS: readonly Dir[] = ["n", "ne", "e", "se", "s", "sw", "w", "nw"]
 /** The pad's dead zone, as a share of its radius. The hub drawn on the pad is this size. */
 export const DEAD_ZONE = 0.18;
 /** How far past a sector's edge a held direction holds, in degrees, so a thumb resting on the edge doesn't flicker. */
-const STICK_DEGREES = 6;
+export const STICK_DEGREES = 6;
 /** How far into the dead zone a held direction holds, as a share of it. */
 const STICK_DEAD_ZONE = 0.75;
 
@@ -22,26 +22,66 @@ export const STOP_RETRY_MS = 150;
 /** Direction changes go out at most this often. A stop isn't held back. */
 export const CHANGE_MS = 66;
 
-/** Degrees clockwise from up. */
-const bearing = (dx: number, dy: number) => (Math.atan2(dx, -dy) * 180) / Math.PI;
+const DEG = 180 / Math.PI;
+
+/**
+ * Where a road runs on the pad, in degrees clockwise from up. The TV's tiles are twice as wide as they are tall on
+ * screen, so a road along a map axis climbs one screen unit for every two across: `ne` is atan2(2, 1) ≈ 63.4°, not 45°.
+ */
+export const ROAD_BEARING = Math.atan2(2, 1) * DEG;
+/** Half the width of the n and s sectors: wide, as going straight up or down the screen is the easy aim. */
+const N_HALF = 30;
+/** Half the width of the e and w sectors: thin, so a thumb aimed along a road has room either side of it. */
+const E_HALF = 12;
+
+/** A direction's sector on the pad, `from` to `to` clockwise in degrees from up (`from` may be negative), and where its chevron points. */
+export interface Sector { dir: Dir; from: number; to: number; aim: number }
+
+const [up, across, road] = [N_HALF, 90 - E_HALF, ROAD_BEARING];   // the n/ne and ne/e boundaries; the other six mirror them
+
+/**
+ * The pad's sectors, mirrored in each quadrant: n and s 60° wide, the road directions 48°, e and w 24°. Boundaries sit
+ * at 30° (n/ne) and 78° (ne/e), so a thumb on a road's bearing has 14.6° to the e side and 33.4° to the n side.
+ */
+export const SECTORS: readonly Sector[] = [
+  { dir: "n", from: -up, to: up, aim: 0 },
+  { dir: "ne", from: up, to: across, aim: road },
+  { dir: "e", from: across, to: 180 - across, aim: 90 },
+  { dir: "se", from: 180 - across, to: 180 - up, aim: 180 - road },
+  { dir: "s", from: 180 - up, to: 180 + up, aim: 180 },
+  { dir: "sw", from: 180 + up, to: 180 + across, aim: 180 + road },
+  { dir: "w", from: 180 + across, to: 360 - across, aim: 270 },
+  { dir: "nw", from: 360 - across, to: 360 - up, aim: 360 - road },
+];
+
+/** Degrees clockwise from up, in [0, 360). */
+const bearing = (dx: number, dy: number) => (Math.atan2(dx, -dy) * DEG + 360) % 360;
+
+/** How far `deg` lies outside `s`, in degrees; 0 inside it. */
+function outside(s: Sector, deg: number): number {
+  const mid = (s.from + s.to) / 2;
+  const off = Math.abs((((deg - mid) % 360) + 540) % 360 - 180);
+  return Math.max(0, off - (s.to - s.from) / 2);
+}
+
+/** The sector holding `deg`, each one running from its `from` up to, but not including, its `to`. They tile the circle. */
+const sectorAt = (deg: number): Dir => SECTORS.find((s) => (deg - s.from + 360) % 360 < s.to - s.from)!.dir;
 
 /**
  * The sector of a point relative to the pad's centre, in radii with y down; null in the dead zone. Only the angle counts
- * outside it, so a thumb that has slid off the pad steers just the same.
+ * outside it, so a thumb that has slid off the pad steers just the same. A boundary belongs to the sector clockwise of it.
  */
 export function dirAt(dx: number, dy: number, deadZone = DEAD_ZONE): Dir | null {
   if (Math.hypot(dx, dy) <= deadZone) return null;
-  const sector = Math.round(bearing(dx, dy) / 45);
-  return DIRS[(sector + 8) % 8]!;
+  return sectorAt(bearing(dx, dy));
 }
 
-/** `dirAt` for a thumb already holding `held`, which it keeps until the thumb has clearly left it. */
+/** `dirAt` for a thumb already holding `held`, which it keeps until the thumb is `STICK_DEGREES` past its sector's edge. */
 export function stickyDirAt(dx: number, dy: number, deadZone: number, held: Dir | null): Dir | null {
   if (held === null) return dirAt(dx, dy, deadZone);
   const next = dirAt(dx, dy, deadZone * STICK_DEAD_ZONE);
   if (next === null || next === held) return next;
-  const off = Math.abs(((bearing(dx, dy) - DIRS.indexOf(held) * 45 + 540) % 360) - 180);
-  return off <= 22.5 + STICK_DEGREES ? held : next;
+  return outside(SECTORS[DIRS.indexOf(held)]!, bearing(dx, dy)) <= STICK_DEGREES ? held : next;
 }
 
 export interface WalkClock {

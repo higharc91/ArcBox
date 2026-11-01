@@ -211,10 +211,10 @@ describe("tactics phone module", () => {
     expect(screen.getByRole("link", { name: /Your character/ }).getAttribute("href")).toBe("/c/ABCD");
   });
 
-  it("results: the VIP goes on to the next battle", () => {
+  it("results: the VIP carries on, back to the world (the action is still next)", () => {
     const send = show("results");
     expect(screen.getByText("Victory")).toBeTruthy();
-    fireEvent.click(screen.getByRole("button", { name: "Next battle" }));
+    fireEvent.click(screen.getByRole("button", { name: "Carry on" }));
     expect(send).toHaveBeenLastCalledWith({ action: "next" });
   });
 

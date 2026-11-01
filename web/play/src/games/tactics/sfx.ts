@@ -99,10 +99,14 @@ export function useSfx(): (cue: Cue) => void {
 
 let lastAlert = { cue: "", at: 0 };
 
-/** Plays an alert once when a screen appears; a remount within a few seconds (a reconnect re-sends the view) stays quiet. */
-export function useAlertOnMount(cue: "yourTurn" | "reaction"): void {
+/**
+ * Plays an alert once when a screen appears, if `when` holds then; a remount within a few seconds (a reconnect re-sends
+ * the view) stays quiet. Only `when` at mount counts.
+ */
+export function useAlertOnMount(cue: "yourTurn" | "reaction", when = true): void {
   const sfx = useSfx();
   useEffect(() => {
+    if (!when) return;
     const now = Date.now();
     if (lastAlert.cue === cue && now - lastAlert.at < 4000) return;
     lastAlert = { cue, at: now };

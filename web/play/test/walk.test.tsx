@@ -73,6 +73,27 @@ describe("the walk pad", () => {
     expect(document.querySelector(".tx-pad")).not.toBeNull();
   });
 
+  it("draws its chevrons where the party goes, the road directions on a road's bearing", () => {
+    show("walk-leader");
+    const turn = (dir: string) => document.querySelector(`.tx-chevron.${dir}`)!.getAttribute("transform");
+    expect([turn("n"), turn("ne"), turn("e"), turn("se"), turn("s"), turn("sw"), turn("w"), turn("nw")].map((t) => t!.match(/rotate\(([\d.]+)\)/)![1]))
+      .toEqual(["0.00", "63.43", "90.00", "116.57", "180.00", "243.43", "270.00", "296.57"]);
+    expect([...document.querySelectorAll(".tx-chevron.small")].map((c) => c.classList[1])).toEqual(["e", "w"]);
+  });
+
+  it("a press along a road, 10 degrees off it either way, walks the road", () => {
+    const { send } = show("walk-leader");
+    const { zone } = pad();
+    const road = Math.atan2(2, 1);
+    for (const off of [-10, 10]) {
+      const a = road + (off * Math.PI) / 180;
+      pointer(zone, "pointerdown", 100 + 80 * Math.sin(a), 100 - 80 * Math.cos(a));
+      pointer(zone, "pointerup", 100, 100);
+      vi.advanceTimersByTime(200);
+    }
+    expect(walks(send).filter((d) => d !== null)).toEqual(["ne", "ne"]);
+  });
+
   it("sends a direction at once on press, and steers without a stop", () => {
     const { send } = show("walk-leader");
     const { zone } = pad();
@@ -348,7 +369,8 @@ describe("the walk screen", () => {
     expect(send.mock.calls.length).toBeGreaterThan(4);
     expect(onSend).not.toHaveBeenCalled();
 
-    fireEvent.click(screen.getByRole("button", { name: "Choose a battle" }));
+    fireEvent.click(screen.getByRole("button", { name: "End session" }));
+    fireEvent.click(screen.getByRole("button", { name: "Yes, end it" }));
     expect(onSend).toHaveBeenCalledTimes(1);
   });
 
@@ -405,9 +427,10 @@ describe("the walk screen", () => {
     expect(document.querySelector(".tx-walk")!.textContent).toContain("The party waits for someone to lead it");
   });
 
-  it("becoming leader buzzes and flags the change, once; a phone that opens as leader doesn't", () => {
+  it("opening as leader buzzes and flags it, as nobody has told this phone yet; a reconnect a moment later doesn't", () => {
     const vibrate = vi.fn(() => true);
     vi.stubGlobal("navigator", { ...navigator, vibrate });
+    vi.setSystemTime(Date.now() + 60_000);      // clear of any alert an earlier test played
     const feedback = quietFeedback();
     const shown = (v: CustomView) => (
       <FeedbackContext.Provider value={feedback}>
@@ -416,21 +439,71 @@ describe("the walk screen", () => {
     );
     const opened = render(shown(view("walk-leader")));
     vi.advanceTimersByTime(10);
-    expect(vibrate).not.toHaveBeenCalled();
-    expect(document.querySelector(".tx-walk.arrived")).toBeNull();
+    expect(vibrate).toHaveBeenCalledTimes(1);
+    expect(vibrate).toHaveBeenLastCalledWith([60, 80, 120]);
+    expect(document.querySelector(".tx-walk.arrived")).not.toBeNull();
+    opened.rerender(shown(view("walk-leader", undefined, "v2")));
+    expect(vibrate).toHaveBeenCalledTimes(1);
     opened.unmount();
 
+    render(shown(view("walk-leader", undefined, "v3")));     // the same view again after a reconnect
+    vi.advanceTimersByTime(10);
+    expect(vibrate).toHaveBeenCalledTimes(1);
+  });
+
+  it("opening as a follower says nothing", () => {
+    const vibrate = vi.fn(() => true);
+    vi.stubGlobal("navigator", { ...navigator, vibrate });
+    vi.setSystemTime(Date.now() + 60_000);
+    render(
+      <FeedbackContext.Provider value={quietFeedback()}>
+        <ControllerScreen view={view("walk-follower")} send={vi.fn()} me="ALEX" game="tactics" />
+      </FeedbackContext.Provider>,
+    );
+    vi.advanceTimersByTime(10);
+    expect(vibrate).not.toHaveBeenCalled();
+    expect(document.querySelector(".tx-walk.arrived")).toBeNull();
+  });
+
+  it("becoming leader buzzes and flags the change, once", () => {
+    const vibrate = vi.fn(() => true);
+    vi.stubGlobal("navigator", { ...navigator, vibrate });
+    vi.setSystemTime(Date.now() + 60_000);
+    const feedback = quietFeedback();
+    const shown = (v: CustomView) => (
+      <FeedbackContext.Provider value={feedback}>
+        <ControllerScreen view={v} send={vi.fn()} me="ALEX" game="tactics" />
+      </FeedbackContext.Provider>
+    );
     const { rerender } = render(shown(view("walk-follower")));
+    expect(document.querySelector(".tx-walk.arrived")).toBeNull();
     rerender(shown(view("walk-leader", undefined, "v2")));
     expect(vibrate).toHaveBeenCalledTimes(1);
     expect(document.querySelector(".tx-walk.arrived")).not.toBeNull();
     rerender(shown(view("walk-leader", undefined, "v3")));
     expect(vibrate).toHaveBeenCalledTimes(1);
+    rerender(shown(view("walk-follower", undefined, "v4")));
+    expect(document.querySelector(".tx-walk.arrived")).toBeNull();
   });
 
-  it("the VIP can go to the battle list; nobody else sees it", () => {
+  it("says under the banner what to do: the leader walks, everyone watches the TV", () => {
+    show("walk-leader");
+    expect(document.querySelector(".tx-walk-who + .tx-walk-hint")!.textContent).toBe("Hold a direction to walk. Watch the TV.");
+    cleanup();
+    show("walk-follower");
+    expect(document.querySelector(".tx-walk-who + .tx-walk-hint")!.textContent).toBe("Player1 steers. Watch the TV.");
+    cleanup();
+    show("walk-follower", (d) => {
+      d.leaderName = null;
+    });
+    expect(document.querySelector(".tx-walk-hint")).toBeNull();
+  });
+
+  it("the VIP can go to the battle list, after a confirm; nobody else sees it", () => {
     const { send } = show("walk-leader");
     fireEvent.click(screen.getByRole("button", { name: "Choose a battle" }));
+    expect(send).not.toHaveBeenCalledWith({ action: "battles" });
+    fireEvent.click(screen.getByRole("button", { name: "Yes, choose one" }));
     expect(send).toHaveBeenLastCalledWith({ action: "battles" });
     cleanup();
     show("walk-follower");
@@ -465,11 +538,28 @@ describe("the walk screen", () => {
     expect(send).toHaveBeenLastCalledWith({ action: "endSession" });
   });
 
-  it("the confirm lapses by itself", async () => {
+  it("Choose a battle needs a confirm too, and \"Keep walking\" takes the place of the first tap", () => {
+    const { send } = show("walk-leader");
+    const buttons = () => [...document.querySelectorAll<HTMLButtonElement>(".tx-walk-host button")];
+    const first = screen.getByRole("button", { name: "Choose a battle" });
+    const place = buttons().indexOf(first as HTMLButtonElement);
+    fireEvent.click(first);
+    expect(screen.getByRole("group", { name: "Stop walking to choose a battle?" })).toBeTruthy();
+
+    const sure = screen.getByRole("button", { name: "Yes, choose one" });
+    expect(buttons().indexOf(sure as HTMLButtonElement)).not.toBe(place);
+    expect(buttons()[place]!.textContent).toBe("Keep walking");
+    fireEvent.click(buttons()[place]!);        // a double tap lands on "Keep walking"
+    expect(screen.queryByRole("button", { name: "Yes, choose one" })).toBeNull();
+    expect(screen.getByRole("button", { name: "Choose a battle" })).toBeTruthy();
+    expect(send.mock.calls.some((c) => (c[0] as { action: string }).action !== "walk")).toBe(false);   // only pings went out
+  });
+
+  it.each([["End session", "Yes, end it"], ["Choose a battle", "Yes, choose one"]])("the %s confirm lapses by itself", async (ask, yes) => {
     show("walk-leader");
-    fireEvent.click(screen.getByRole("button", { name: "End session" }));
+    fireEvent.click(screen.getByRole("button", { name: ask }));
     await vi.advanceTimersByTimeAsync(5000);
-    expect(screen.queryByRole("button", { name: "Yes, end it" })).toBeNull();
+    expect(screen.queryByRole("button", { name: yes })).toBeNull();
   });
 
   it("the VIP's buttons sleep while a thumb is on the pad", () => {

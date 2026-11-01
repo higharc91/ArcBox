@@ -109,7 +109,7 @@ export function Results({ data, send }: CustomScreenProps) {
       {r.portal ? <p><a class="tx-link" href={r.portal} target="_blank" rel="noopener">Your character: spend XP and change picks</a></p> : null}
       {r.vip ? (
         <div class="tx-foot">
-          <button type="button" class="tx-btn gold" onClick={() => send("next")}>Next battle</button>
+          <button type="button" class="tx-btn gold" onClick={() => send("next")}>Carry on</button>
           <button type="button" class="tx-btn ghost" onClick={() => send("end")}>End session</button>
         </div>
       ) : <p class="tx-note center">Waiting for the host…</p>}

@@ -2,12 +2,12 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "preact/ho
 import { useFeedback } from "../../feedback/feedback";
 import type { CustomScreenProps } from "../module";
 import { Portrait } from "./art";
-import { useSfx } from "./sfx";
+import { useAlertOnMount, useSfx } from "./sfx";
 import type { WalkData, WalkMember } from "./types";
 import { LineIcon } from "./ui";
-import { DEAD_ZONE, DIRS, dirAt, stickyDirAt, WalkSender, type Dir } from "./walkModel";
+import { DEAD_ZONE, dirAt, SECTORS, stickyDirAt, WalkSender, type Dir, type Sector } from "./walkModel";
 
-/** How long "End session" waits for its confirm before it stands down. */
+/** How long "Choose a battle" and "End session" wait for their confirm before they stand down. */
 const CONFIRM_MS = 4000;
 /** How far the knob travels from the centre, as a share of the pad's radius. */
 const KNOB_REACH = 0.6;
@@ -20,25 +20,31 @@ const polar = (r: number, deg: number) => {
   return `${(r * Math.sin(a)).toFixed(2)} ${(-r * Math.cos(a)).toFixed(2)}`;
 };
 
-/** One sector of the pad, from the hub's edge to the rim. */
-function wedge(i: number): string {
-  const [from, to, inner, outer] = [i * 45 - 21.5, i * 45 + 21.5, DEAD_ZONE * 100 + 2, 98];
+/** One sector of the pad, from the hub's edge to the rim, a degree short of each edge so the sectors read apart. */
+function wedge({ from: start, to: end }: Sector): string {
+  const [from, to, inner, outer] = [start + 1, end - 1, DEAD_ZONE * 100 + 2, 98];
   return `M${polar(inner, from)}L${polar(outer, from)}A${outer} ${outer} 0 0 1 ${polar(outer, to)}L${polar(inner, to)}A${inner} ${inner} 0 0 0 ${polar(inner, from)}Z`;
 }
 
-const WEDGES = DIRS.map((_, i) => wedge(i));
+const WEDGES = SECTORS.map(wedge);
 
 /**
- * The pad's face: eight sectors, a chevron in each, and a dashed hub the size of the dead zone. It's drawn once and
- * painted by CSS from `data-dir`.
+ * The pad's face: eight sectors as `SECTORS` lays them out, a chevron in each, and a dashed hub the size of the dead
+ * zone. Each chevron points where the party goes, so the road directions' sit on a road's bearing, not at 45°; the thin
+ * e and w sectors get the small ones. It's drawn once and painted by CSS from `data-dir`.
  */
 function PadFace() {
   return (
     <svg viewBox="-100 -100 200 200" aria-hidden="true">
-      {DIRS.map((dir, i) => <path key={dir} class={`tx-wedge ${dir}`} d={WEDGES[i]} />)}
-      {DIRS.map((dir, i) => (
-        <path key={dir} class={`tx-chevron ${dir}${i % 2 ? " small" : ""}`} transform={`rotate(${i * 45}) translate(0 -66)`} d="M-11 5L0 -6L11 5" />
-      ))}
+      {SECTORS.map((s, i) => <path key={s.dir} class={`tx-wedge ${s.dir}`} d={WEDGES[i]} />)}
+      {SECTORS.map(({ dir, aim }) => {
+        // The thin sectors' chevrons sit smaller and further out, where their wedge is wide enough to clear the roads'.
+        const thin = dir === "e" || dir === "w";
+        return (
+          <path key={dir} class={`tx-chevron ${dir}${thin ? " small" : ""}`}
+            transform={`rotate(${aim.toFixed(2)}) translate(0 ${thin ? -80 : -66})${thin ? " scale(0.75)" : ""}`} d="M-11 5L0 -6L11 5" />
+        );
+      })}
       <circle class="tx-hub" r={DEAD_ZONE * 100} />
     </svg>
   );
@@ -170,27 +176,34 @@ function Pad({ sender }: { sender: WalkSender }) {
 
 /** The VIP's way out of the world. It's at the far end of the screen from the pad, and it sleeps while a thumb is on it. */
 function HostMenu({ canBattle, send }: { canBattle: boolean; send: CustomScreenProps["send"] }) {
-  const [sure, setSure] = useState(false);
+  // Both take the whole table out of the walk, and the leader's pad with it, so both ask first.
+  const [sure, setSure] = useState<"battles" | "endSession" | null>(null);
   const sfx = useSfx();
   useEffect(() => {
     if (!sure) return;
-    const id = setTimeout(() => setSure(false), CONFIRM_MS);
+    const id = setTimeout(() => setSure(null), CONFIRM_MS);
     return () => clearTimeout(id);
   }, [sure]);
 
-  // The confirm isn't under the finger that asked for it: a double tap lands on "Keep walking".
+  // The confirm isn't under the finger that asked for it: "Keep walking" takes that finger's place, so a double tap
+  // lands on it.
   if (sure) {
+    const keep = <button type="button" class="tx-btn ghost" onClick={() => { sfx("cancel"); setSure(null); }}>Keep walking</button>;
+    const yes = (
+      <button type="button" class="tx-btn gold" onClick={() => { sfx("confirm"); send(sure); }}>
+        {sure === "battles" ? "Yes, choose one" : "Yes, end it"}
+      </button>
+    );
     return (
-      <div class="tx-walk-host sure" role="group" aria-label="End the session?">
-        <button type="button" class="tx-btn gold" onClick={() => { sfx("confirm"); send("endSession"); }}>Yes, end it</button>
-        <button type="button" class="tx-btn ghost" onClick={() => { sfx("cancel"); setSure(false); }}>Keep walking</button>
+      <div class="tx-walk-host sure" role="group" aria-label={sure === "battles" ? "Stop walking to choose a battle?" : "End the session?"}>
+        {sure === "battles" ? <>{keep}{yes}</> : <>{yes}{keep}</>}
       </div>
     );
   }
   return (
     <div class="tx-walk-host">
-      {canBattle ? <button type="button" class="tx-btn ghost" onClick={() => { sfx("confirm"); send("battles"); }}>Choose a battle</button> : <span />}
-      <button type="button" class="tx-btn ghost" onClick={() => { sfx("select"); setSure(true); }}>End session</button>
+      {canBattle ? <button type="button" class="tx-btn ghost" onClick={() => { sfx("select"); setSure("battles"); }}>Choose a battle</button> : <span />}
+      <button type="button" class="tx-btn ghost" onClick={() => { sfx("select"); setSure("endSession"); }}>End session</button>
     </div>
   );
 }
@@ -253,13 +266,18 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
   }, []);
 
   // A class, not state with a timer: CSS plays the arrival once, and nothing re-renders under the thumb that follows.
+  // Opening the screen as leader is an arrival too. Its sound and buzz come from `useAlertOnMount`, which stays quiet
+  // when a reconnect re-sends the view; taking the lead later plays them here.
   const led = useRef(d.leader);
-  const arrived = useRef(false);
+  const arrived = useRef(d.leader);
   if (d.leader && !led.current) arrived.current = true;
   if (!d.leader) arrived.current = false;
   led.current = d.leader;
+  useAlertOnMount("yourTurn", d.leader);
+  const mounted = useRef(false);
   useEffect(() => {
-    if (arrived.current) sfx("yourTurn");
+    if (mounted.current && arrived.current) sfx("yourTurn");
+    mounted.current = true;
   }, [d.leader]);
 
   return (
@@ -270,12 +288,16 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
           <span class="tx-crown"><LineIcon name="crown" /></span>
           <b>{d.leader ? "You lead the party" : d.leaderName ? `${d.leaderName} leads` : "The party waits for someone to lead it"}</b>
         </div>
+        {d.leader || d.leaderName
+          ? <p class="tx-walk-hint">{d.leader ? "Hold a direction to walk. Watch the TV." : `${d.leaderName} steers. Watch the TV.`}</p>
+          : null}
         <div class="tx-walk-goal">
           {d.region ? <span class="tx-eyebrow">{d.region}</span> : null}
           <p>{d.objective}</p>
         </div>
         {d.leader ? null : (
           <div class="tx-me">
+            {/* Player characters have no sprite: the class's portrait from the pack stands in, as on the lobby's cards. */}
             <Portrait unit={{ name: d.me.name, sprite: null, hp: 1, maxHp: 1, side: "Party" }} cls={classId(d.me.cls)} size={40} tone="you" />
             <div class="tx-me-name">
               <b>{d.me.name}</b>
