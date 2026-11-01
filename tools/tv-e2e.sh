@@ -240,6 +240,7 @@ esac
 RESTART_KILL=
 case "$RESTART" in
   ""|1) ;;
+  0) RESTART= ;;      # off, as it always was
   kill)
     if [[ "$GAME" != "tactics" || "$WALK" == "1" ]]; then
       echo "ARCBOX_RESTART=kill is for a Tactics battle, stage or chapter run, not REDLINE or ARCBOX_WALK=1." >&2
