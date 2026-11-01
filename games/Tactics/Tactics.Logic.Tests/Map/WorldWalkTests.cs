@@ -296,4 +296,59 @@ public sealed class WorldWalkTests
         Assert.Same(rules.GroundFor(id), rules.GroundFor(id));
         Assert.Null(rules.GroundFor("nowhere"));
     }
+
+    // ---- Routes, for the bots and the tests that play a chapter -------------------------------------------------------------------
+
+    /// <summary>Walks <paramref name="taps"/> from <paramref name="from"/> by <see cref="WorldWalk.Next"/>, checking each is taken as asked.</summary>
+    private static Tile Walked(Terrain terrain, Tile from, IEnumerable<WalkDir> taps)
+    {
+        foreach (var dir in taps)
+        {
+            var (dx, dy) = WorldWalk.Delta(dir);
+            var move = WorldWalk.Next(terrain, from, dir, Jump, null);
+            Assert.Equal(new WalkMove(new Tile(from.X + dx, from.Y + dy), move!.Value.Cost, move.Value.Diagonal, false), move);
+            from = move.Value.To;
+        }
+        return from;
+    }
+
+    [Fact]
+    public void A_route_goes_round_a_wall_by_steps_taken_as_asked()
+    {
+        var terrain = TerrainOf("0. 0. 0. 0.\n0# 0# 0# 0.\n0. 0. 0. 0.");
+        var goal = new Tile(0, 2);
+
+        var taps = WorldWalk.Route(terrain, Origin, t => t == goal, Jump)!.Value;
+
+        Assert.Equal(goal, Walked(terrain, Origin, taps));
+        Assert.Equal(8, taps.Length);       // along the top, down the open column, back along the bottom: a diagonal can't cut the wall's corners
+    }
+
+    [Fact]
+    public void A_route_is_shortest_in_steps_with_diagonals()
+    {
+        var terrain = TerrainOf("0. 0. 0.\n0. 0. 0.\n0. 0. 0.");
+
+        var taps = WorldWalk.Route(terrain, Origin, t => t == new Tile(2, 2), Jump)!.Value;
+
+        Assert.Equal([WalkDir.S, WalkDir.S], taps);
+    }
+
+    [Fact]
+    public void A_route_from_the_goal_is_empty()
+        => Assert.Empty(WorldWalk.Route(TerrainOf("0. 0."), Origin, t => t == Origin, Jump)!.Value);
+
+    [Fact]
+    public void There_is_no_route_up_a_cliff()
+        => Assert.Null(WorldWalk.Route(TerrainOf("0. 3."), Origin, t => t == new Tile(1, 0), Jump));
+
+    [Fact]
+    public void A_route_keeps_out_of_what_it_avoids_but_may_end_in_it()
+    {
+        var terrain = TerrainOf("0. 0. 0.\n0. 0. 0.");
+        var avoid = (Tile t) => t.X == 1;
+
+        Assert.Null(WorldWalk.Route(terrain, Origin, t => t == new Tile(2, 0), Jump, avoid));
+        Assert.Equal(new Tile(1, 1), Walked(terrain, Origin, WorldWalk.Route(terrain, Origin, t => t == new Tile(1, 1), Jump, avoid)!.Value));
+    }
 }
