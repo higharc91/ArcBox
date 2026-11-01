@@ -8,6 +8,8 @@
 #   ARCBOX_GAME=tactics GODOT=… tools/tv-e2e.sh                                     a Tactics battle to its Results, with bot phones
 #   ARCBOX_GAME=tactics ARCBOX_RECONNECT=1 GODOT=… tools/tv-e2e.sh                  the TV is killed mid-battle and comes back
 #   ARCBOX_GAME=tactics ARCBOX_RESTART=1 GODOT=… tools/tv-e2e.sh                    the server restarts mid-battle
+#   ARCBOX_GAME=tactics ARCBOX_WALK=1 GODOT=… tools/tv-e2e.sh                       the party walks Ashen Ford: a server restart, a
+#                                                                                   killed TV, the press-to-TV time and a dropped phone
 #
 # What it does (REDLINE; Tactics is below):
 #   1. builds the phone app (web/play/dist), the server and the TV host (skip with --skip-build);
@@ -55,6 +57,23 @@
 #     `ROOM <CODE>` again (never another code), show `TACTICS screen tactics-resuming`, and play a new beat after it. The
 #     bots rejoin by themselves. Then Results as above.
 #
+# Walking (ARCBOX_GAME=tactics ARCBOX_WALK=1): the TV starts with --walk-log as well, and the bots walk the world after Muster rather
+# than fighting (bots.cjs --walk=ARCBOX_WALK_SCRIPT --walk-latency=<presses> --walk-drop=kill --tv-log --go). At the script's
+# pause:restart the server is stopped and started again, as ARCBOX_RESTART does; at pause:tv the TV is killed and relaunched, as
+# ARCBOX_RECONNECT does. Each time the bots go on once the TV is back. It fails unless:
+#   - the TV's WALK lines, which number the steps it was told of, climb by more than ARCBOX_WALK_STEPS (default 12) before the
+#     restart, and only climb, between each restart and the next; and its WALKAT lines, where it drew the party, put the leader
+#     somewhere else by the restart: --walk really moved the party on the TV;
+#   - after the restart the TV says room <CODE> again, and the first step after it starts beside the tile of the last step before it,
+#     and any WALKAT before that step has the leader on that tile: the party is on its saved tile;
+#   - after the kill the new TV says room <CODE>, then `TACTICS walk snapped to` the middle of the party's tile, and takes steps again;
+#   - --walk-drop: the TV is told of no step that began more than the lease (750 ms) after the leader's phone was cut, give or take
+#     ARCBOX_WALK_SLACK ms (default 250: the TV's own frame, which is slow on software rendering), and hears that the party stopped;
+#     and another phone sees the leader disconnect;
+#   - the median press-to-WALK-line time of --walk-latency is at most ARCBOX_WALK_LATENCY ms (default 100, the plan's target);
+#   - the TV took screenshots of the party walking and stopped, has an AUDIO Music line, and no errors.
+# The run's numbers are in phones.log: `LATENCY`, `DROP … after … ms`.
+#
 # On Windows (Git Bash) there's no Xvfb: the TV opens a real window on your screen, at TV_RES, with Godot's default rendering
 # driver, and processes are stopped with taskkill, as Windows has no TERM. Put the .NET SDK's dotnet first on PATH and set GODOT
 # to the *_console.exe (the plain exe has no stdout to read ROOM from). Only Tactics was run there. Git Bash has no
@@ -68,6 +87,9 @@
 #   ARCBOX_GAME      redline (default) or tactics
 #   ARCBOX_RECONNECT 1 = (tactics) kill and relaunch the TV mid-battle, and check it catches up
 #   ARCBOX_AT_BEAT   (tactics) the beat at which to kill the TV or restart the server (default 30)
+#   ARCBOX_WALK      1 = (tactics) walk the world rather than fight, with a server restart, a TV kill and a dropped phone (above)
+#   ARCBOX_WALK_SCRIPT (walk) the bots' --walk script; it must have pause:restart and then pause:tv
+#   ARCBOX_WALK_PRESSES (walk) presses timed for the latency (default 20)
 #   ARCBOX_ENCOUNTER (tactics) the encounter (default river_crossing)
 #   TV_HOLD          (tactics) seconds the bots leave the results up (default 6)
 #   ARCBOX_FULL      1 = race to the chequered flag and back to the lobby (passed to the phone script)
@@ -105,6 +127,14 @@ RECONNECT=${ARCBOX_RECONNECT:-}
 AT_BEAT=${ARCBOX_AT_BEAT:-30}
 ENCOUNTER=${ARCBOX_ENCOUNTER:-river_crossing}
 HOLD=${TV_HOLD:-6}
+WALK=${ARCBOX_WALK:-}
+# From Ashen Ford's spawn: the road east, rests long enough for a screenshot and a save, the restart, the TV, and back towards the gate.
+WALK_SCRIPT=${ARCBOX_WALK_SCRIPT:-e:3,stop:2,ne:2.5,stop:2,pause:restart,ne:1.5,stop:2,pause:tv,se:1,ne:1,stop:2,w:1.5,stop:2}
+WALK_PRESSES=${ARCBOX_WALK_PRESSES:-20}
+WALK_STEPS=${ARCBOX_WALK_STEPS:-12}
+WALK_SLACK=${ARCBOX_WALK_SLACK:-250}
+WALK_LATENCY=${ARCBOX_WALK_LATENCY:-100}
+LEASE_MS=750   # WalkTiming.HoldLease
 case "$(uname -s)" in
   MINGW*|MSYS*|CYGWIN*) WINDOWS=1 ;;
   *) WINDOWS= ;;
@@ -135,6 +165,10 @@ if [[ "$RECONNECT" == "1" && "$GAME" != "tactics" ]]; then
 fi
 if [[ "$GAME" == "tactics" && ( "$FULL" == "1" || "$SWAP" == "1" || "${TV_REMATCH:-}" == "1" ) ]]; then
   echo "ARCBOX_FULL, ARCBOX_SWAP and TV_REMATCH are REDLINE's: a Tactics run always goes to the Results." >&2
+  exit 2
+fi
+if [[ "$WALK" == "1" && ( "$GAME" != "tactics" || "$RECONNECT" == "1" || "$RESTART" == "1" ) ]]; then
+  echo "ARCBOX_WALK=1 is for ARCBOX_GAME=tactics, and does its own restart and reconnect." >&2
   exit 2
 fi
 if [[ "$RECONNECT" == "1" && "$RESTART" == "1" ]]; then
@@ -252,7 +286,7 @@ log "starting the TV ($RES, preset $PRESET)"
 : > "$OUT/tv.log"
 if [[ "$GAME" == "tactics" ]]; then
   QUIT_AFTER=1800
-  start_tv "$OUT/tv" --new-room --beat-log
+  start_tv "$OUT/tv" --new-room --beat-log $([[ "$WALK" == "1" ]] && echo --walk-log)
 else
   start_tv "$OUT/tv" --new-room --autostart="redline:$PHONES"
 fi
@@ -266,6 +300,172 @@ for _ in $(seq 1 360); do
 done
 [[ -n "$CODE" ]] || { log "no ROOM line from the TV after 180 s"; tail -30 "$OUT/tv.log"; exit 1; }
 log "TV opened room $CODE"
+
+# ---- 4w. Tactics walking: the bots walk the world, the server restarts, the TV is killed, and the leader's phone is cut.
+if [[ "$GAME" == "tactics" && "$WALK" == "1" ]]; then
+  GO="$OUT/go"
+  mkdir -p "$GO"
+  log "phones: $PHONES bots walk: $WALK_SCRIPT, then $WALK_PRESSES timed presses, then the leader's phone is cut"
+  set +e
+  : > "$OUT/phones.log"
+  node "$ROOT/tools/tactics-playtest/bots.cjs" --server="$URL" --room="$CODE" --players="$PHONES" --hold=1 --timeout=600 \
+    --walk="$WALK_SCRIPT" --walk-latency="$WALK_PRESSES" --walk-drop=kill --go="$GO" --tv-log="$OUT/tv.log" > >(tee "$OUT/phones.log") 2>&1 &
+  PHONES_PID=$!
+  # last_step [<before line>]: the tile of the newest WALK line, as "x y", before a TV log line if given.
+  last_step() { awk -v to="${1:-0}" '(to == 0 || NR < to) && /^WALK [0-9]+ / { t = $3 " " $4 } END { print t }' "$OUT/tv.log"; }
+  # wait_tv <from line> <awk condition> <seconds>: the first TV log line after <from> that matches, waiting for it; or nothing.
+  wait_tv() {
+    local n=""
+    for _ in $(seq 1 $(( $3 * 5 ))); do
+      n=$(awk -v from="$1" -v code="$CODE" "NR > from && ($2) { print NR; exit }" "$OUT/tv.log")
+      [[ -n "$n" ]] && break
+      sleep 0.2
+    done
+    echo "$n"
+  }
+  RESTART_AT=0 SAVED="" KILL_AT=0 KILLED_ON="" OLD_TV_UP=0
+  while kill -0 "$PHONES_PID" 2>/dev/null; do
+    if (( RESTART_AT == 0 )) && grep -qE '^[0-9:]+ PAUSE restart$' "$OUT/phones.log"; then
+      SAVED=$(last_step)
+      RESTART_AT=$(wc -l < "$OUT/tv.log")
+      log "restart: the party stopped on $SAVED; stopping the server (TV log line $RESTART_AT)"
+      stop_pid "$SERVER_PID" "server"
+      sleep 2
+      start_server "$OUT/server-restarted.log"
+      log "restart: the server is back; waiting for the TV to put the party somewhere"
+      [[ -n "$(wait_tv "$RESTART_AT" '/^TACTICS walk snapped to /' 90)" ]] || log "restart: the TV didn't snap the party anywhere"
+      touch "$GO/restart"
+    fi
+    if (( KILL_AT == 0 )) && grep -qE '^[0-9:]+ PAUSE tv$' "$OUT/phones.log"; then
+      KILLED_ON=$(last_step)
+      KILL_AT=$(wc -l < "$OUT/tv.log")
+      log "reconnect: the party stopped on $KILLED_ON; killing the TV (log line $KILL_AT)"
+      signal_pid KILL "$TV_PID"
+      sleep 3
+      kill -0 "$TV_PID" 2>/dev/null && OLD_TV_UP=1
+      start_tv "$OUT/tv-relaunched" --beat-log --walk-log
+      [[ -n "$(wait_tv "$KILL_AT" '/^TACTICS world open:/' 180)" ]] || log "reconnect: the new TV didn't open the world"
+      touch "$GO/tv"
+    fi
+    sleep 0.2
+  done
+  wait "$PHONES_PID"
+  PHONES_EXIT=$?
+  PHONES_PID=""
+  set -e
+  log "letting the TV finish its shots ($LINGER s)"
+  sleep "$LINGER"
+  cleanup
+  TV_PID="" XVFB_PID="" SERVER_PID=""
+
+  # ---- 5w. the checks
+  WALK_FAIL=0
+  walk_fail() { log "walk: MISSING $*"; WALK_FAIL=1; }
+  after() { awk -v from="$1" -v code="$CODE" "NR > from && ($2) { print NR; exit }" "$OUT/tv.log"; }
+  # at_middle <tile "x y"> <place "x y">: the place is the middle of the tile.
+  at_middle() { awk -v s="$1" -v t="$2" 'BEGIN { split(s, a, " "); split(t, b, " "); dx = b[1] - a[1] - 0.5; dy = b[2] - a[2] - 0.5
+    exit !(dx * dx < 0.0025 && dy * dy < 0.0025) }'; }
+  ERRORS=$(awk '
+    pending != "" { if (tolower($0) !~ /^ *at: .*(alsa|audio|pulse)/) print pending; pending = "" }
+    /^ *\[[0-9]+\] / { next }
+    tolower($0) ~ /exception|error/ && tolower($0) !~ /alsa|audio|pulse/ { pending = $0 }
+    END { if (pending != "") print pending }' "$OUT/tv.log")
+  if [[ -n "$ERRORS" ]]; then
+    log "errors in the TV log:"
+    echo "$ERRORS"
+  fi
+  END_LINE=$(( $(wc -l < "$OUT/tv.log") + 1 ))
+  (( RESTART_AT > 0 )) || { walk_fail "PAUSE restart from the bots"; RESTART_AT=$END_LINE; }
+  (( KILL_AT > 0 )) || { walk_fail "PAUSE tv from the bots"; KILL_AT=$END_LINE; }
+
+  # Seq climbs: the WALK lines between one interruption and the next only go up, and there are enough before the first.
+  BEFORE=$(awk -v to="$RESTART_AT" 'NR < to && /^WALK [0-9]+ / { n++ } END { print n + 0 }' "$OUT/tv.log")
+  log "the TV was told of $BEFORE steps before the restart, $(grep -c '^WALK [0-9]' "$OUT/tv.log" || true) in all"
+  (( BEFORE > WALK_STEPS )) || walk_fail "more than $WALK_STEPS steps on the TV before the restart"
+  DOWN=$(awk -v a="$RESTART_AT" -v b="$KILL_AT" '
+    NR == a || NR == b { last = 0 }
+    /^WALK [0-9]+ / { if ($2 <= last) print NR ": " $0 " after " last; last = $2 }' "$OUT/tv.log")
+  [[ -z "$DOWN" ]] || walk_fail "WALK lines that only climb; these didn't: $DOWN"
+  # --walk moved the party, as the TV drew it.
+  MOVED=$(awk -v to="$RESTART_AT" 'NR < to && /^WALKAT / { if (!n++) { x = $5; y = $6 } lx = $5; ly = $6 }
+    END { dx = lx - x; dy = ly - y; if (dx < 0) dx = -dx; if (dy < 0) dy = -dy; print (dx > dy ? dx : dy) + 0 }' "$OUT/tv.log")
+  log "the TV drew the leader $MOVED tiles from where it started, before the restart"
+  awk -v m="$MOVED" 'BEGIN { exit !(m >= 4) }' || walk_fail "the leader drawn 4 tiles or more from the start"
+
+  # The restart: the TV back in the room, and the party where it was saved.
+  if [[ -n "$SAVED" ]] && (( RESTART_AT < END_LINE )); then
+    [[ -n "$(after "$RESTART_AT" '$0 == "ROOM " code')" ]] && log "restart: the TV is back in room $CODE" || walk_fail "ROOM $CODE from the TV after the restart"
+    SNAP=$(after "$RESTART_AT" '/^TACTICS walk snapped to /')
+    if [[ -z "$SNAP" ]]; then
+      walk_fail "TACTICS walk snapped to, after the restart"
+    else
+      AT=$(sed -n "${SNAP}p" "$OUT/tv.log" | awk '{ print $5 " " $6 }')
+      log "restart: saved on $SAVED; the TV put the party on $AT"
+      at_middle "$SAVED" "$AT" || walk_fail "the party on the middle of the saved tile $SAVED after the restart (it was on $AT)"
+      FIRST=$(after "$SNAP" '/^WALK [0-9]+ /')
+      NEXT=""
+      [[ -z "$FIRST" ]] || NEXT=$(sed -n "${FIRST}p" "$OUT/tv.log" | awk '{ print $3 " " $4 }')
+      log "restart: the first step after it went to ${NEXT:-nowhere}"
+      [[ -n "$NEXT" ]] && awk -v s="$SAVED" -v n="$NEXT" 'BEGIN { split(s, a, " "); split(n, b, " "); dx = a[1] - b[1]; dy = a[2] - b[2]
+        exit !(dx >= -1 && dx <= 1 && dy >= -1 && dy <= 1 && (dx != 0 || dy != 0)) }' \
+        || walk_fail "the first step after the restart beside the saved tile $SAVED (it went to ${NEXT:-nowhere})"
+    fi
+  fi
+
+  # The killed TV: back in the room, snapped to where the party stood, and walking again.
+  if [[ -n "$KILLED_ON" ]] && (( KILL_AT < END_LINE )); then
+    (( OLD_TV_UP == 0 )) || walk_fail "the old TV gone: it was still running when the new one started"
+    [[ -n "$(after "$KILL_AT" '$0 == "ROOM " code')" ]] && log "reconnect: the new TV is in room $CODE" || walk_fail "ROOM $CODE from the new TV"
+    SNAP=$(after "$KILL_AT" '/^TACTICS walk snapped to /')
+    if [[ -z "$SNAP" ]]; then
+      walk_fail "TACTICS walk snapped to, from the new TV"
+    else
+      AT=$(sed -n "${SNAP}p" "$OUT/tv.log" | awk '{ print $5 " " $6 }')
+      log "reconnect: the party stood on $KILLED_ON; the new TV snapped to $AT"
+      at_middle "$KILLED_ON" "$AT" || walk_fail "the new TV's snap to the middle of $KILLED_ON (it was $AT)"
+      [[ -n "$(after "$SNAP" '/^WALK [0-9]+ /')" ]] || walk_fail "a step on the new TV"
+    fi
+  fi
+
+  # The dropped phone.
+  CUT=$({ grep -oE 'DROP kill at [0-9]+' "$OUT/phones.log" || true; } | awk '{ print $4 }' | tail -1)
+  if [[ -z "$CUT" ]]; then
+    walk_fail "DROP kill from the bots"
+  else
+    LAST=$(awk -v cut="$CUT" '/^WALK [0-9]+ / && $5 > cut - 2000 { t = $5 } END { print t == "" ? "none" : t - cut }' "$OUT/tv.log")
+    STOPPED=$(awk -v cut="$CUT" '/^WALKAT / && $2 > cut && $4 == 0 { print $2 - cut; exit }' "$OUT/tv.log")
+    log "drop: the last step reached the TV $LAST ms after the cut; the TV heard the party had stopped ${STOPPED:-never} ms after it"
+    [[ "$LAST" =~ ^-?[0-9]+$ ]] && (( LAST <= LEASE_MS + WALK_SLACK )) || walk_fail "no step later than the lease after the cut ($LAST ms > $LEASE_MS + $WALK_SLACK)"
+    [[ -n "$STOPPED" ]] || walk_fail "a WALKAT line saying the party stopped after the cut"
+    { grep -E 'DROP (party stopped|lead passed|disconnect) after' "$OUT/phones.log" || true; } | sed 's/^[0-9:]* //' | while read -r line; do log "drop: $line"; done
+    grep -qE 'DROP disconnect after' "$OUT/phones.log" || walk_fail "the leader's disconnect, seen from another phone"
+  fi
+
+  # The press-to-TV time.
+  LATENCY=$({ grep -E 'LATENCY [0-9]+ of' "$OUT/phones.log" || true; } | tail -1 | sed 's/^[0-9:]* //')
+  if [[ -z "$LATENCY" ]]; then
+    walk_fail "a LATENCY line from the bots"
+  else
+    log "latency: $LATENCY"
+    MEDIAN=$(echo "$LATENCY" | sed -E 's/.*median (-?[0-9]+).*/\1/')
+    [[ "$MEDIAN" =~ ^-?[0-9]+$ ]] && (( MEDIAN <= WALK_LATENCY )) || walk_fail "a median press-to-TV time of $WALK_LATENCY ms or less (it was $MEDIAN)"
+  fi
+  WALKSTATS=$({ grep -E '^WALKSTATS' "$OUT/tv.log" || true; } | awk '{ print $6 }' | sort -n | awk '{ a[NR] = $1 } END { if (NR) print a[int((NR + 1) / 2)] }')
+  [[ -n "$WALKSTATS" ]] && log "the TV's frames while walking: median of the walks' median frame times $WALKSTATS ms"
+
+  for moment in walking stopped; do
+    SHOT=$(find "$OUT" -name "*tactics-world-$moment-*.png" | sort | tail -1)
+    [[ -n "$SHOT" ]] && log "a shot of the party $moment: $SHOT" || walk_fail "a screenshot of the party $moment"
+  done
+  [[ -n "$(after 0 '/^AUDIO Music /')" ]] || walk_fail "an AUDIO Music line"
+
+  if (( PHONES_EXIT != 0 )) || [[ -n "$ERRORS" ]] || (( WALK_FAIL )); then
+    log "FAILED (phones exit $PHONES_EXIT)"
+    exit 1
+  fi
+  log "OK"
+  exit 0
+fi
 
 # ---- 4t. Tactics: bot phones fight it out, and the TV or the server goes away part way through.
 if [[ "$GAME" == "tactics" ]]; then

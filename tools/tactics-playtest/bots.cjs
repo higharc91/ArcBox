@@ -26,7 +26,10 @@
 // VIP leaves the walk screen with `battles`, and the run is the battle it always was. With any of them the party walks, and then the
 // VIP ends the session. They run in this order:
 //
-//   --walk="e:4,ne:2,stop:1"  hold each direction for that many seconds, pinging as the pad does; stop rests
+//   --walk="e:4,ne:2,stop:1"  hold each direction for that many seconds, pinging as the pad does; stop rests. pause:<name> logs
+//                             `PAUSE <name>` and waits for a file <name> in --go, so a script can restart the server or kill the TV
+//                             there; it then goes on with whoever leads once the phones have a fresh walk screen
+//   --go=<dir>                where pause:<name> looks for its file (tools/tv-e2e.sh's ARCBOX_WALK=1 makes them)
 //   --walk-latency[=<n>]      n presses (default 20), each timed against the TV's WALK line in --tv-log, or with --host the host view
 //   --walk-flood[=<n>]        n seconds (default 10) of the leader alternating a press and a stop at 60 messages a second, far over
 //                             the 20 a second the server's limiter lets through, so that stops are lost
@@ -34,7 +37,8 @@
 //                             another phone. kill (the default) ends the sockets with no SignalR or WebSocket goodbye. stall leaves them
 //                             open and silent: a phone that just stops. Phones connect through a small proxy here, with stateful
 //                             reconnect on, as web/play's transport has it
-//   --tv-log=<file>           the TV's stdout, redirected: wait for `TACTICS world open` and read WALK lines from it
+//   --tv-log=<file>           the TV's stdout, redirected: wait for `TACTICS world open:` and read WALK lines from it, and with the
+//                             TV's --walk-log, WALKAT lines, for when the TV heard the party had stopped
 //   --host                    this process opens the room and watches the host view, with no TV: enough for --walk-drop
 //
 // Run it (on Windows, from Git Bash; the database goes in a temp file so the run leaves no campaign behind):
@@ -97,11 +101,13 @@ const floodSeconds = count('walk-flood', 10);
 const dropMode = opt('walk-drop') === undefined ? null : opt('walk-drop') === true ? 'kill' : String(opt('walk-drop'));
 const asHost = opt('host', false) === true;
 const tvLog = opt('tv-log') ?? opt('room-log');
+const goDir = opt('go') && opt('go') !== true ? String(opt('go')) : null;
 const walking = Boolean(walkScript || latencyPresses || floodSeconds || dropMode);
 
 /** The phone's cadence while a direction is held, and its retry after a stop. */
 const PING_MS = 250;
 const STOP_RETRY_MS = 150;
+const IDLE_PING_MS = 3000;
 const FLOOD_MS = 1000 / 60;
 /** Long enough for any disconnect event a phone can raise. */
 const DROP_WATCH_MS = 120000;
@@ -119,6 +125,9 @@ const RECONNECT_MS = Array.from({ length: 120 }, () => 1000);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
 
+/** Every bot, for a timeout to say what each was looking at. */
+const everyone = [];
+
 async function until(what, test) {
   const end = Date.now() + timeoutMs;
   while (Date.now() < end) {
@@ -126,7 +135,8 @@ async function until(what, test) {
     if (value) return value;
     await sleep(TICK_MS);
   }
-  throw new Error(`Timed out waiting for ${what}`);
+  const screens = everyone.map((b) => `${b.name} on ${b.view?.screen ?? 'nothing'}`).join(', ');
+  throw new Error(`Timed out waiting for ${what}${screens ? ` (${screens})` : ''}`);
 }
 
 async function roomCode() {
@@ -165,6 +175,7 @@ class Line {
   cut(mode) {
     this.mode = mode;
     for (const [phone, up] of this.pairs) {
+      if (phone.destroyed || up.destroyed) continue;
       phone.unpipe(up);
       up.unpipe(phone);
       if (mode === 'kill') {
@@ -190,6 +201,7 @@ class Bot {
     this.acted = null;       // the viewId last answered
     this.seenAt = 0;         // when that view arrived
     this.moved = false;      // walked this turn already
+    this.rejoining = 0;      // when it last set about rejoining its seat
     const builder = new HubConnectionBuilder().withUrl(`${url}/hub`).withAutomaticReconnect(RECONNECT_MS).configureLogging(LogLevel.Critical);
     this.conn = (dropMode ? builder.withStatefulReconnect() : builder).build();
     this.conn.on('LobbyChanged', (l) => { this.lobby = l; });
@@ -198,6 +210,7 @@ class Bot {
     this.conn.on('RoomClosed', (why) => { this.closed = why || 'closed'; });
     this.conn.on('Kicked', () => { this.closed = 'kicked'; });
     this.conn.onreconnected(() => this.rejoin());
+    everyone.push(this);
   }
 
   async join(code) {
@@ -209,6 +222,7 @@ class Bot {
 
   /** Back in this seat after a lost connection, as a phone does it. */
   async rejoin() {
+    this.rejoining = Date.now();
     try {
       await this.conn.invoke('Rejoin', this.seat.code, this.seat.playerId, this.seat.secret);
       log(`${this.name} rejoined ${this.seat.code}`);
@@ -252,11 +266,13 @@ class Bot {
         const best = choices.moves.reduce((a, b) => (near(b.to) < near(a.to) ? b : a));
         if (near(best.to) < near(me.at)) {
           this.moved = true;
+          log(`${this.name} moves`);
           return this.input('move', { path: best.path });
         }
       }
     }
     this.moved = false;
+    log(`${this.name} ends the turn`);
     return this.input('endTurn');
   }
 
@@ -286,6 +302,7 @@ class Bot {
           log(`${this.name} sits out the turn: the timer will run out`);
         }
         if (Date.now() < (state.satOutUntil ?? 0)) return;
+        if (stuck) log(`${this.name}: the game refused that, so ends the turn`);
         return stuck ? this.input('endTurn') : this.turn();
       case 'react':
         if (sitOut.includes('react')) {
@@ -318,6 +335,7 @@ class Watch {
     this.host = host;
     this.seq = 0;
     this.at = 0;
+    this.shown = [];
     this.held = false;
     host?.on('HostView', (_, v) => {
       const e = v?.explore;
@@ -327,15 +345,54 @@ class Watch {
     });
   }
 
+  /** Reads what the TV has added to its log since the last read. */
   read() {
     if (this.host || !tvLog || !fs.existsSync(tvLog)) return;
-    const last = [...fs.readFileSync(tvLog, 'utf8').matchAll(/^WALK (\d+) (-?\d+) (-?\d+) (\d+)/gm)].at(-1);
-    if (last) [this.seq, this.at] = [Number(last[1]), Number(last[4])];
+    const size = fs.statSync(tvLog).size;
+    if (size < (this.pos ?? 0)) [this.pos, this.rest] = [0, ''];    // a new log
+    if (size === (this.pos ?? 0)) return;
+    const fd = fs.openSync(tvLog, 'r');
+    const chunk = Buffer.alloc(size - (this.pos ?? 0));
+    fs.readSync(fd, chunk, 0, chunk.length, this.pos ?? 0);
+    fs.closeSync(fd);
+    this.pos = size;
+    const lines = ((this.rest ?? '') + chunk.toString('utf8')).split('\n');
+    this.rest = lines.pop();
+    for (const line of lines) {
+      let m = /^WALK (\d+) (-?\d+) (-?\d+) (\d+)/.exec(line);
+      if (m) [this.seq, this.at] = [Number(m[1]), Number(m[4])];
+      // --walk-log's WALKAT lines: whether a direction is held, as the TV heard
+      m = /^WALKAT (\d+) \d+ ([01]) /.exec(line);
+      if (m) {
+        this.shown.push({ at: Number(m[1]), held: m[2] === '1' });
+        this.held = m[2] === '1';
+      }
+    }
+  }
+
+  /** When the TV first drew the party with nothing held, after <since>, by its clock; or undefined. */
+  stoppedAfter(since) {
+    return this.shown?.find((s) => s.at > since && !s.held)?.at;
   }
 }
 
-const walkTo = (bot, dir) => bot.conn.invoke('SendInput', bot.view.viewId, { action: 'walk', data: { dir } })
-  .catch((e) => log(`${bot.name}: walk failed: ${e.message}`));
+const walkTo = (bot, dir) => {
+  bot.walkSent = Date.now();
+  return bot.conn.invoke('SendInput', bot.view.viewId, { action: 'walk', data: { dir } })
+    .catch((e) => log(`${bot.name}: walk failed: ${e.message}`));
+};
+
+/**
+ * The pad's idle ping: the leader's phone says it's stopped every IDLE_PING_MS while nothing is held, so a quiet leader keeps the lead
+ * (the server passes it on after 8 s of silence). Every bot does it whenever it leads, until it's cut off.
+ */
+function idlePings(bots) {
+  setInterval(() => {
+    for (const bot of bots)
+      if (!bot.cutOff && bot.conn.state === 'Connected' && bot.view?.screen === 'walk' && bot.view.data.leader
+        && Date.now() - (bot.walkSent ?? 0) >= IDLE_PING_MS) void walkTo(bot, null);
+  }, 100).unref();
+}
 
 /** Holds `dir` for `ms`, pinging as the pad does. */
 async function hold(leader, dir, ms) {
@@ -352,8 +409,27 @@ async function release(leader) {
   await walkTo(leader, null);
 }
 
-async function runScript(leader) {
+/** Whoever leads, once every phone is connected and has a walk screen from since it last rejoined. */
+const leaderOf = (bots) => until('a leader', () =>
+  bots.every((b) => b.conn.state === 'Connected' && b.view?.screen === 'walk' && b.seenAt >= b.rejoining) && bots.find((b) => b.view.data.leader));
+
+/** Waits for the file <name> in --go, and gives back who leads after it. */
+async function pause(bots, name) {
+  if (!goDir) throw new Error(`pause:${name} needs --go=<dir>`);
+  log(`PAUSE ${name}`);
+  const file = path.join(goDir, name);
+  await until(`${file} to go on`, () => fs.existsSync(file));
+  const leader = await leaderOf(bots);
+  log(`GO ${name}: ${leader.name} leads`);
+  return leader;
+}
+
+async function runScript(bots, leader) {
   for (const [dir, seconds] of walkScript) {
+    if (dir === 'pause') {
+      leader = await pause(bots, seconds);
+      continue;
+    }
     log(`WALK ${dir} for ${seconds} s`);
     if (dir === 'stop') {
       await release(leader);
@@ -361,6 +437,7 @@ async function runScript(leader) {
     } else await hold(leader, dir, Number(seconds) * 1000);
   }
   await release(leader);
+  return leader;
 }
 
 async function runLatency(leader, watch) {
@@ -403,6 +480,7 @@ async function runDrop(leader, line, others, watch) {
   await hold(leader, 'e', 1000);
   void walkTo(leader, 'e');
   const cut = Date.now();
+  leader.cutOff = true;
   line.cut(dropMode);
   log(`DROP ${dropMode} at ${cut}`);
   const seen = {};
@@ -414,20 +492,23 @@ async function runDrop(leader, line, others, watch) {
   };
   const eye = others[0];
   while (Date.now() - cut < DROP_WATCH_MS && seen.disconnect === undefined) {
-    note('party stopped', () => watch.host && !watch.held);
+    watch.read();
+    note('party stopped', () => (watch.host ? !watch.held : watch.stoppedAfter(cut) !== undefined));
     note('lead passed', () => eye.view?.screen === 'walk' && eye.view.data.leaderName !== leader.name);
     note('disconnect', () => eye.lobby?.players.find((p) => p.name === leader.name)?.connected === false);
     await sleep(10);
   }
-  if (watch.host) log(`DROP last step ${watch.at - cut} ms after the cut`);
+  watch.read();
+  if (watch.host || tvLog) log(`DROP last step ${watch.at - cut} ms after the cut`);
+  if (!watch.host && tvLog) log(`DROP the TV drew the party stopped ${(watch.stoppedAfter(cut) ?? NaN) - cut} ms after the cut, by its clock`);
   if (seen.disconnect === undefined) throw new Error(`No disconnect event in ${DROP_WATCH_MS} ms`);
 }
 
 async function walkAbout(bots, lines, watch) {
-  const leader = await until('a leader', () => bots.find((b) => b.view?.screen === 'walk' && b.view.data.leader));
+  let leader = await leaderOf(bots);
   log(`${leader.name} leads`);
-  if (tvLog && !asHost) await until('the world on the TV', () => fs.existsSync(tvLog) && fs.readFileSync(tvLog, 'utf8').includes('TACTICS world open'));
-  if (walkScript) await runScript(leader);
+  if (tvLog && !asHost) await until('the world on the TV', () => fs.existsSync(tvLog) && fs.readFileSync(tvLog, 'utf8').includes('TACTICS world open:'));
+  if (walkScript) leader = await runScript(bots, leader);
   if (latencyPresses) await runLatency(leader, watch);
   if (floodSeconds) await runFlood(leader);
   if (dropMode) await runDrop(leader, lines[bots.indexOf(leader)], bots.filter((b) => b !== leader), watch);
@@ -470,6 +551,7 @@ async function walkAbout(bots, lines, watch) {
       for (const bot of bots) void bot.act(state);
       return bots.some((b) => b.view?.screen === 'walk' && b.view.data.leader);
     });
+    idlePings(bots);
     await walkAbout(bots, lines, watch);
     process.exit(0);
   }
