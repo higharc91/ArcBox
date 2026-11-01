@@ -410,6 +410,39 @@ public sealed class OverlayPictureTests
         Assert.Equal(0, drawn.Zip(truth).Count(p => p.First != p.Second));
     }
 
+    public static TheoryData<string> Buildings => [.. Pack.Manifests.Buildings.Keys.Order(StringComparer.Ordinal)];
+
+    /// <summary>Blocks draw in their own order, which holds only for what isn't too wide, so every building is tried across the corner of four blocks, with things in front.</summary>
+    [Theory]
+    [MemberData(nameof(Buildings))]
+    public void A_building_across_a_block_corner_is_true_painters_order_where_its_art_has_pixels(string id)
+    {
+        const int side = 32;
+        var (width, depth) = (Pack.Manifests.Buildings[id].Width, Pack.Manifests.Buildings[id].Depth);
+        var at = new Tile(16 - width + 1, 16 - depth + 1);
+        ImmutableArray<PropPlacement> props =
+        [
+            new("crate", new Tile(at.X + width, at.Y + depth), true, Cover.None), new("tree", new Tile(at.X + width + 1, at.Y), true, Cover.None),
+            new("tree", new Tile(at.X, at.Y + depth + 1), true, Cover.None), new("lamp_post", new Tile(at.X - 1, at.Y - 1), true, Cover.None),
+        ];
+        var map = BattleMap.FromBytes("corner", side, side, new byte[side * side * 3], ["grass/autumn"], props, ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty, null,
+            [new BuildingPlacement(id, Pack.Manifests.Buildings[id].Variants[0], at, 0)]);
+        var sheet = Read(WorldPlan.Build(new BoardTerrain(map, null), Pack.Art), masked: true);
+        var (min, max) = (new Vector2(float.MaxValue), new Vector2(float.MinValue));
+        foreach (var shape in sheet.All)
+            (min, max) = (Vector2.Min(min, shape.Min), Vector2.Max(max, shape.Max));
+        var corner = new Vector2(MathF.Floor(min.X), MathF.Floor(min.Y));
+        var (columns, rows) = ((int)(max.X - corner.X) + 2, (int)(max.Y - corner.Y) + 2);
+        var (drawn, truth) = (new int[columns * rows], new int[columns * rows]);
+
+        foreach (var shape in sheet.All)
+            Paint(drawn, corner, columns, rows, shape);
+        foreach (var shape in sheet.All.OrderBy(s => s.Order).ThenBy(s => s.Id))
+            Paint(truth, corner, columns, rows, shape);
+
+        Assert.Equal(0, drawn.Zip(truth).Count(p => p.First != p.Second));
+    }
+
     [Fact]
     public void Without_the_closure_the_walk_goes_wrong_so_this_test_can_fail()
     {
