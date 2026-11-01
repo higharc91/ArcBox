@@ -29,9 +29,9 @@ public partial class BoardCanvas : Node2D
     private const int RingPoints = 28;
     private const float RingWidth = 1.5f;
     private const float ActiveRingWidth = 2.5f;
-    private const float SeatRingWidth = 2f;           // a walker's ring in their seat's colour, over a dark one, so it reads on any ground
-    private const float SeatOutlineWidth = 4f;
-    private const float SeatOutlineAlpha = 0.8f;
+    private const float OutlinedRingWidth = 2f;       // a walker's ring, over a dark one, so the party's green reads on grass
+    private const float RingOutlineWidth = 4f;
+    private const float RingOutlineAlpha = 0.8f;
 
     private static readonly Color PartyRing = new("63d36f");    // ui/manifest.json's palette: hp, enemy, gold
     private static readonly Color EnemyRing = new("e2534c");
@@ -233,10 +233,10 @@ public partial class BoardCanvas : Node2D
             var angle = Mathf.Tau * i / RingPoints;
             points[i] = feet + new Vector2(Mathf.Cos(angle) * unit.Ring, Mathf.Sin(angle) * unit.Ring / 2);
         }
-        if (unit.Seat is { } seat)
+        if (unit.Outlined)
         {
-            DrawPolyline(points, Colour(SeatColours.Outline, SeatOutlineAlpha), SeatOutlineWidth);
-            DrawPolyline(points, unit.Away ? Colour(seat) * AwayShade : Colour(seat), SeatRingWidth);
+            DrawPolyline(points, Colour(UnitPlan.RingOutline, RingOutlineAlpha), RingOutlineWidth);
+            DrawPolyline(points, unit.Away ? ToneColour(unit.Tone) * AwayShade : ToneColour(unit.Tone), OutlinedRingWidth);
             return;
         }
         DrawPolyline(points, unit.Active ? ActiveRing : ToneColour(unit.Tone), unit.Active ? ActiveRingWidth : RingWidth);

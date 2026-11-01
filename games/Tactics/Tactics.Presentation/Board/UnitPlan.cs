@@ -70,8 +70,11 @@ public sealed record BoardUnit(long Order, UnitId Id, UnitTone Tone, Vector2 Fee
     /// <summary>A walker whose player's phone has gone: drawn a little dim.</summary>
     public bool Away { get; init; }
 
-    /// <summary>A walker's seat colour (<see cref="SeatColours"/>), for their ring; null for a unit in a fight, whose ring is its side's.</summary>
-    public Rgb? Seat { get; init; }
+    /// <summary>
+    /// A walker's ring goes over a dark one (<see cref="UnitPlan.RingOutline"/>), so the party's green reads on grass as well as stone; a unit in a
+    /// fight has its side's ring alone, as ever.
+    /// </summary>
+    public bool Outlined { get; init; }
 }
 
 /// <summary>
@@ -80,6 +83,9 @@ public sealed record BoardUnit(long Order, UnitId Id, UnitTone Tone, Vector2 Fee
 /// </summary>
 public static class UnitPlan
 {
+    /// <summary>What a walker's ring is drawn over, so it reads on any ground.</summary>
+    public static readonly Rgb RingOutline = Rgb.Hex("#0b0b10");
+
     /// <summary>An HP bar's width.</summary>
     public const int BarWidth = 30;
 
@@ -129,11 +135,9 @@ public static class UnitPlan
     /// </summary>
     public static ImmutableArray<BoardUnit> Walkers(IEnumerable<WalkerView> party, IReadOnlyDictionary<string, UnitPlace> places,
         IReadOnlyDictionary<string, UnitPose> poses, UnitArt art, Func<Vector2, bool, Vector2>? pixels = null)
-        => [.. party.Select((w, seat) => (w, seat)).Where(s => places.ContainsKey(s.w.Id))
-            .Select(s => Walker(s.w, s.seat, places[s.w.Id], poses.GetValueOrDefault(s.w.Id), art, pixels)).OrderBy(u => u.Order)];
+        => [.. party.Where(w => places.ContainsKey(w.Id)).Select(w => Walker(w, places[w.Id], poses.GetValueOrDefault(w.Id), art, pixels)).OrderBy(u => u.Order)];
 
-    // The seat is the walker's place in the party, which is member order: it doesn't change when someone leads, steps away or comes back.
-    private static BoardUnit Walker(WalkerView walker, int seat, UnitPlace place, UnitPose? pose, UnitArt art, Func<Vector2, bool, Vector2>? pixels)
+    private static BoardUnit Walker(WalkerView walker, UnitPlace place, UnitPose? pose, UnitArt art, Func<Vector2, bool, Vector2>? pixels)
     {
         var sprite = art.Sprite(walker.Sprite) ?? art.StandIn(UnitTone.Party);
         var (row, mirror) = pose?.Facing is { } look ? Looking(look.X, look.Y) : (0, false);
@@ -145,7 +149,7 @@ public static class UnitPlan
         {
             CrownAt = walker.Leads ? new Vector2(feet.X, feet.Y - sprite.AnchorY + sprite.HeadTop - Gap) : null,
             Away = !walker.Here,
-            Seat = SeatColours.Of(seat),
+            Outlined = true,
         };
     }
 

@@ -31,7 +31,7 @@ public sealed partial class SeatColoursTests
     public void Each_stands_well_off_its_outline()
     {
         foreach (var hex in SeatColours.Hex)
-            Assert.True(Contrast(Rgb.Hex(hex), SeatColours.Outline) >= 7, $"{hex} is {Contrast(Rgb.Hex(hex), SeatColours.Outline):0.0}:1");
+            Assert.True(Contrast(Rgb.Hex(hex), UnitPlan.RingOutline) >= 7, $"{hex} is {Contrast(Rgb.Hex(hex), UnitPlan.RingOutline):0.0}:1");
     }
 
     // The ring the review found lost in the grass was the party's one green. A seat's colour is brighter than any grass, stone or ash in the
