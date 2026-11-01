@@ -147,6 +147,24 @@ Keep this list, add to it, and put it at the top of your final report. Don't sto
 15. **Fleeing lands outside the stamp**, usually where the fight began, not at the stamp as the 5c plan said: standing in an armed stamp is what the landing rule forbids.
 16. **A player whose turn comes first** gets their 60 s only after the walk-in (at most 3 s).
 17. **Losing a lead to a blip:** a stand-in always keeps the lead at least 3 s after it's handed over, and the session leader takes it back after the party has been stopped for 3 s.
+18. **A lost fight leaves the party weaker for the retry.** Injuries stack and potions stay spent. After one loss of Ford Assault, the bots lost every retry seen (14 of 14), so "a loss re-arms the stamp" is a soft net and a real group could spiral. Together with decision 3 (half XP on a loss), a rules question; no rules changed.
+19. **Ford Assault is hard for bots:** they win River Crossing 40 of 40 fresh, but Ford Assault about 5 of 10 from the "!" side, 4 of 20 from elsewhere. A balance question, if it matters.
+20. **Bree Tallow's `innkeeper_angry` portrait reads as a bald man.** It needs new Scenario art, which needs the user's OK.
+21. **Scenes with no one standing in the world:** only the beat with the "!" puts its figure in the world (default 12), so Mother Skarrow isn't shown during the parley, and nobody is at the bridge in "Mother Skarrow lies where she fell".
+22. **Story wording and choices the night made:**
+    - a question already asked in a scene isn't offered again, which stops hubs looping when nobody answers;
+    - an all-check choice nobody answers spends a roll;
+    - the question line can't be skipped, and a skip is ignored for 0.6 s after a new line;
+    - votes and roller picks send on the first tap and can change until the close;
+    - a leader's choice made before a lead change stands, and the new leader can change it;
+    - away players can be picked to roll;
+    - the chosen roller's card says "Rolls for the party";
+    - panel words such as "Party vote", "Leader's choice", "Tie-break" and "Waiting for a phone to come back";
+    - the chapter card isn't saved, so a restart during it skips it;
+    - checkpoints are named after the beat's first scene.
+23. **Seat colours still wait** (decision 14). Story voters show as gold initials meanwhile.
+24. **Server start loads the Tactics content first,** adding about 1.5 s to every server's startup, including Redline-only use. That stopped rooms being closed as hung while the pack loaded inside a room's first call.
+
 
 **Defaults added tonight, which the user can overrule:** the edge note ("The road goes on, but not today.") once a session; a one-tile jag with both sides open doesn't slide; quick taps latch one step; the pad's sectors (n/s 60°, roads 48°, e/w 24°); the leader's arrival pulse on opening the walk; a called-off battle wins and loses nothing; the adapter catches any engine exception but out-of-memory; followers rejoin the trail at its nearest point after a rest; the title card crossfades and gives up after 10 s; the wall bump is 0.12 tile over 0.15 s with the step sound at -14 dB.
 
@@ -166,3 +184,7 @@ Keep this list, add to it, and put it at the top of your final report. Don't sto
 - Followers briefly overlap on quick U-turns (seen in Task 11's shots).
 - Responsiveness on a real phone over Wi-Fi with a GPU TV. Here, press to the TV's step was 24–35 ms median, mostly the software renderer.
 - Whether the 24° e/w pad sectors feel too thin.
+- Story pacing and voices: every playthrough tonight skipped lines after 1.5 to 2.5 s.
+- Whether the 11-option vote panel's smallest rows (about 14 px at 720p) read from the sofa.
+- The walk-in on a GPU: a hero who waits a step to stay apart, and the faint grid on grass.
+- Whether the 0.6 s skip guard, instant-send votes and the d20 spin feel right on real phones.
