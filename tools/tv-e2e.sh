@@ -13,6 +13,8 @@
 #   ARCBOX_STAGE=1 GODOT=… tools/tv-e2e.sh                                          a fight in the world: walk in, lose, wake, walk back
 #                                                                                   in and win (with ARCBOX_RECONNECT=1, ARCBOX_RESTART=1
 #                                                                                   or ARCBOX_DROP_SIGNALS=1 too)
+#   ARCBOX_CHAPTER=1 ARCBOX_BRANCH=force|parley GODOT=… tools/tv-e2e.sh             all of Chapter 1 from a fresh campaign, on a branch
+#                                                                                   (with ARCBOX_RESTART=1 and ARCBOX_RECONNECT=1 mid-scene)
 #
 # What it does (REDLINE; Tactics is below):
 #   1. builds the phone app (web/play/dist), the server and the TV host (skip with --skip-build);
@@ -98,6 +100,25 @@
 #     the TV logs the dropped signals, and all of the above still happens;
 #   - the TV took shots of the walk-in, the fight in place and the results (not with ARCBOX_SHOTS=0), has music, and no errors.
 #
+# All of Chapter 1 (ARCBOX_CHAPTER=1, the 5d plan's ARCBOX_STORY): a fresh campaign, no seed. The TV has --walk-log and --story-log, and
+# the bots run --chapter --branch=ARCBOX_BRANCH --fight --line=ARCBOX_LINE --tv-log: from the spawn they walk to each "!" the TV's
+# `STORY marker` lines show, by route.cs, tap Interact, skip each line after ARCBOX_LINE seconds (default 2.5), vote for the branch at
+# the ford and take the first option elsewhere, roll with the best bonus, fight each battle beat to win (a loss puts its "!" back, and
+# they walk to it again), and once the chapter's card is up walk on a few steps and end the session. ARCBOX_SILENT=1 (force only:
+# a vote nobody answers takes its first option) passes --silent, so nobody skips, votes or picks and the game's timers run every
+# scene; it fails if the bots answered anything. ARCBOX_DROP_SIGNALS=1 runs the TV with --drop-signals, and checks it dropped them. With ARCBOX_RESTART=1 the server restarts once ARCBOX_AT_LINE (default
+# 3) lines of ARCBOX_RESTART_SCENE (default ch1_maud) have been said; with ARCBOX_RECONNECT=1 the TV is killed and relaunched at that line
+# of ARCBOX_RECONNECT_SCENE (default ch1_docks); both can be in one run. Shots of each scene, question, roll, fight, results, the card and
+# the walk after it are taken from the X display into <out>/chapter (tools/tactics-playtest/chapter.cjs shots). It fails unless
+# (tools/tactics-playtest/chapter.cjs check):
+#   - the TV's lines come in the branch's scenes, in order, each scene's lines a walk of its graph to an end, and every line said once
+#     (the line a relaunched TV comes back to is only shown);
+#   - the battle beat's fight is on the TV between its lead-in and its aftermath, and the bots' last fight was won;
+#   - the chapter's card is up after the last line (`STORY card`), and the party takes a step after it;
+#   - ARCBOX_RESTART=1: the TV is back in room <CODE>, and its first line after the restart is the one it showed before: the saved line;
+#   - ARCBOX_RECONNECT=1: the new TV is in room <CODE>, shows the line it came back to without saying it, and goes on;
+#   - the TV log has no errors, and the phones exited 0.
+#
 # On Windows (Git Bash) there's no Xvfb: the TV opens a real window on your screen, at TV_RES, with Godot's default rendering
 # driver, and processes are stopped with taskkill, as Windows has no TERM. Put the .NET SDK's dotnet first on PATH and set GODOT
 # to the *_console.exe (the plain exe has no stdout to read ROOM from). Only Tactics was run there. Git Bash has no
@@ -112,7 +133,13 @@
 #   ARCBOX_AT_BEAT   (tactics) the beat at which to kill the TV or restart the server (default 30)
 #   ARCBOX_WALK      1 = (tactics) walk the world rather than fight, with a server restart, a TV kill and a dropped phone (above)
 #   ARCBOX_STAGE     1 = fights where the party walks into them, one lost and one fought again (above); implies ARCBOX_GAME=tactics
-#   ARCBOX_DROP_SIGNALS 1 = (stage) the TV sends the game no signals, so every beat goes on its fallback
+#   ARCBOX_CHAPTER   1 = all of Chapter 1 from a fresh campaign (above); implies ARCBOX_GAME=tactics
+#   ARCBOX_BRANCH    (chapter) force (default) or parley: the option the bots vote for at the ford
+#   ARCBOX_SILENT    1 = (chapter, force) the bots answer nothing in a scene: the game's timers resolve every line, vote and check
+#   ARCBOX_LINE      (chapter) seconds a line is up before the leader's bot skips it (default 2.5)
+#   ARCBOX_AT_LINE   (chapter) the line of the scene at which to restart the server or kill the TV (default 3)
+#   ARCBOX_RESTART_SCENE, ARCBOX_RECONNECT_SCENE (chapter) the scenes for those (default ch1_maud and ch1_docks: on both branches)
+#   ARCBOX_DROP_SIGNALS 1 = (stage or chapter) the TV sends the game no signals, so every beat goes on its fallback
 #   ARCBOX_WALK_SCRIPT (walk) the bots' --walk script; it must have pause:restart and then pause:tv
 #   ARCBOX_WALK_PRESSES (walk) presses timed for the latency (default 20)
 #   ARCBOX_ENCOUNTER (tactics) the encounter (default river_crossing)
@@ -146,8 +173,15 @@ set -euo pipefail
 ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 GODOT=${GODOT:-$(command -v godot || true)}
 STAGE=${ARCBOX_STAGE:-}
+CHAPTER=${ARCBOX_CHAPTER:-}
+SILENT=${ARCBOX_SILENT:-}
+BRANCH=${ARCBOX_BRANCH:-force}
+LINE_S=${ARCBOX_LINE:-2.5}
+AT_LINE=${ARCBOX_AT_LINE:-3}
+RESTART_SCENE=${ARCBOX_RESTART_SCENE:-ch1_maud}
+RECONNECT_SCENE=${ARCBOX_RECONNECT_SCENE:-ch1_docks}
 DROP_SIGNALS=${ARCBOX_DROP_SIGNALS:-}
-GAME=${ARCBOX_GAME:-$([[ "$STAGE" == "1" ]] && echo tactics || echo redline)}
+GAME=${ARCBOX_GAME:-$([[ "$STAGE" == "1" || "$CHAPTER" == "1" ]] && echo tactics || echo redline)}
 PHONES=${ARCBOX_PHONES:-$([[ "$GAME" == "tactics" ]] && echo 4 || echo 3)}
 RES=${TV_RES:-1280x720}
 PRESET=${TV_PRESET:-low}
@@ -209,15 +243,27 @@ if [[ ( "$STAGE" == "1" || "$DROP_SIGNALS" == "1" ) && ( "$GAME" != "tactics" ||
   echo "ARCBOX_STAGE=1 and ARCBOX_DROP_SIGNALS=1 are for ARCBOX_GAME=tactics, without ARCBOX_WALK=1." >&2
   exit 2
 fi
-if [[ "$DROP_SIGNALS" == "1" && "$STAGE" != "1" ]]; then
-  echo "ARCBOX_DROP_SIGNALS=1 goes with ARCBOX_STAGE=1." >&2
+if [[ "$DROP_SIGNALS" == "1" && "$STAGE" != "1" && "$CHAPTER" != "1" ]]; then
+  echo "ARCBOX_DROP_SIGNALS=1 goes with ARCBOX_STAGE=1 or ARCBOX_CHAPTER=1." >&2
   exit 2
 fi
 if [[ "$SHOTS" != "0" && "$SHOTS" != "1" ]]; then
   echo "ARCBOX_SHOTS is 1 (screenshots, the default) or 0 (none), not $SHOTS." >&2
   exit 2
 fi
-if [[ "$RECONNECT" == "1" && "$RESTART" == "1" ]]; then
+if [[ "$CHAPTER" == "1" && ( "$GAME" != "tactics" || "$WALK" == "1" || "$STAGE" == "1" ) ]]; then
+  echo "ARCBOX_CHAPTER=1 is a Tactics run of its own, without ARCBOX_WALK=1 or ARCBOX_STAGE=1." >&2
+  exit 2
+fi
+if [[ "$CHAPTER" == "1" && "$BRANCH" != "force" && "$BRANCH" != "parley" ]]; then
+  echo "ARCBOX_BRANCH is force or parley, not $BRANCH." >&2
+  exit 2
+fi
+if [[ "$SILENT" == "1" && ( "$CHAPTER" != "1" || "$BRANCH" != "force" ) ]]; then
+  echo "ARCBOX_SILENT=1 goes with ARCBOX_CHAPTER=1, on the force branch: a vote nobody answers takes its first option." >&2
+  exit 2
+fi
+if [[ "$RECONNECT" == "1" && "$RESTART" == "1" && "$CHAPTER" != "1" ]]; then
   echo "ARCBOX_RECONNECT=1 and ARCBOX_RESTART=1 are separate runs." >&2
   exit 2
 fi
@@ -264,6 +310,7 @@ cleanup() {
     pkill -TERM -P "$PHONES_PID" 2>/dev/null || true   # the phone script and its tee (ARCBOX_RESTART runs them in the background)
     stop_pid "$PHONES_PID" "phones"
   fi
+  stop_pid "${SHOTS_PID:-}" "shots"
   stop_pid "$TV_PID" "TV"
   stop_pid "$XVFB_PID" "Xvfb"
   stop_pid "$SERVER_PID" "server"
@@ -344,8 +391,9 @@ start_tv() {
 log "starting the TV ($RES, preset $PRESET)"
 : > "$OUT/tv.log"
 if [[ "$GAME" == "tactics" ]]; then
-  QUIT_AFTER=1800
-  start_tv "$OUT/tv" --new-room --beat-log $([[ "$WALK" == "1" || "$STAGE" == "1" ]] && echo --walk-log) $([[ "$DROP_SIGNALS" == "1" ]] && echo --drop-signals)
+  QUIT_AFTER=$([[ "$CHAPTER" == "1" ]] && echo 7200 || echo 1800)
+  start_tv "$OUT/tv" --new-room --beat-log $([[ "$WALK" == "1" || "$STAGE" == "1" || "$CHAPTER" == "1" ]] && echo --walk-log) \
+    $([[ "$CHAPTER" == "1" ]] && echo --story-log) $([[ "$DROP_SIGNALS" == "1" ]] && echo --drop-signals)
 else
   start_tv "$OUT/tv" --new-room --autostart="redline:$PHONES"
 fi
@@ -520,6 +568,129 @@ if [[ "$GAME" == "tactics" && "$WALK" == "1" ]]; then
   [[ -n "$(after 0 '/^AUDIO Music /')" ]] || walk_fail "an AUDIO Music line"
 
   if (( PHONES_EXIT != 0 )) || [[ -n "$ERRORS" ]] || (( WALK_FAIL )); then
+    log "FAILED (phones exit $PHONES_EXIT)"
+    exit 1
+  fi
+  log "OK"
+  exit 0
+fi
+
+# ---- 4c. All of Chapter 1: the bots walk from the spawn to each "!", play every scene and fight, to the card and a walk after it.
+if [[ "$GAME" == "tactics" && "$CHAPTER" == "1" ]]; then
+  log "chapter: $PHONES bots play Chapter 1 by $BRANCH$([[ "$SILENT" == "1" ]] && echo ", answering nothing")$([[ "$DROP_SIGNALS" == "1" ]] && echo ", the TV sends no signals")$([[ "$RESTART" == "1" ]] && echo ", the server restarts at line $AT_LINE of $RESTART_SCENE")$([[ "$RECONNECT" == "1" ]] && echo ", the TV is killed at line $AT_LINE of $RECONNECT_SCENE")"
+  SHOTS_PID=""
+  if [[ -z "$WINDOWS" && "$SHOTS" != "0" ]] && command -v import > /dev/null; then
+    node "$ROOT/tools/tactics-playtest/chapter.cjs" shots "$OUT/tv.log" ":$DISPLAY_NUM" "$OUT/chapter" > "$OUT/shots.log" 2>&1 &
+    SHOTS_PID=$!
+  fi
+  set +e
+  : > "$OUT/phones.log"
+  node "$ROOT/tools/tactics-playtest/bots.cjs" --server="$URL" --room="$CODE" --players="$PHONES" --chapter --branch="$BRANCH" \
+    --line="$LINE_S" ${ARCBOX_BOT_ARGS:---fight} $([[ "$SILENT" == "1" ]] && echo --silent) --hold="$HOLD" --timeout=1800 \
+    --tv-log="$OUT/tv.log" > >(tee "$OUT/phones.log") 2>&1 &
+  PHONES_PID=$!
+  said_in() { grep -cE "^STORY [0-9]+ $1_[a-z0-9_]+ said" "$OUT/tv.log" || true; }
+  RESTART_AT=0 KILL_AT=0 OLD_TV_UP=0
+  while kill -0 "$PHONES_PID" 2>/dev/null; do
+    if [[ "$RESTART" == "1" ]] && (( RESTART_AT == 0 )) && (( $(said_in "$RESTART_SCENE") >= AT_LINE )); then
+      RESTART_AT=$(wc -l < "$OUT/tv.log")
+      log "restart: stopping the server at line $AT_LINE of $RESTART_SCENE, mid-scene (TV log line $RESTART_AT)"
+      stop_pid "$SERVER_PID" "server"
+      sleep 2
+      start_server "$OUT/server-restarted.log"
+      log "restart: the server is back"
+    fi
+    if [[ "$RECONNECT" == "1" ]] && (( KILL_AT == 0 )) && (( $(said_in "$RECONNECT_SCENE") >= AT_LINE )); then
+      KILL_AT=$(wc -l < "$OUT/tv.log")
+      log "reconnect: killing the TV at line $AT_LINE of $RECONNECT_SCENE, mid-scene (log line $KILL_AT)"
+      signal_pid KILL "$TV_PID"
+      sleep 3
+      kill -0 "$TV_PID" 2>/dev/null && OLD_TV_UP=1
+      start_tv "$OUT/tv-relaunched" --beat-log --walk-log --story-log $([[ "$DROP_SIGNALS" == "1" ]] && echo --drop-signals)
+    fi
+    sleep 0.2
+  done
+  wait "$PHONES_PID"
+  PHONES_EXIT=$?
+  PHONES_PID=""
+  set -e
+  log "letting the TV finish its shots ($LINGER s)"
+  sleep "$LINGER"
+  cleanup
+  TV_PID="" XVFB_PID="" SERVER_PID=""
+
+  # ---- 5c. the checks
+  CHAPTER_FAIL=0
+  chapter_fail() { log "chapter: MISSING $*"; CHAPTER_FAIL=1; }
+  after() { awk -v from="$1" -v code="$CODE" "NR > from && ($2) { print NR; exit }" "$OUT/tv.log"; }
+  line_of() { sed -n "${1}p" "$OUT/tv.log"; }
+  ERRORS=$(awk '
+    pending != "" { if (tolower($0) !~ /^ *at: .*(alsa|audio|pulse)/) print pending; pending = "" }
+    /^ *\[[0-9]+\] / { next }
+    tolower($0) ~ /exception|error/ && tolower($0) !~ /alsa|audio|pulse/ { pending = $0 }
+    END { if (pending != "") print pending }' "$OUT/tv.log")
+  if [[ -n "$ERRORS" ]]; then
+    log "errors in the TV log:"
+    echo "$ERRORS"
+  fi
+  CHECK_ARGS=()
+  (( KILL_AT > 0 )) && CHECK_ARGS+=(--relaunched-at="$(after "$KILL_AT" '/^Godot Engine /')")
+  (( RESTART_AT > 0 )) && CHECK_ARGS+=(--restarted-at="$RESTART_AT")
+  CHECKED=$(node "$ROOT/tools/tactics-playtest/chapter.cjs" check "$OUT/tv.log" "$BRANCH" "${CHECK_ARGS[@]}") || CHAPTER_FAIL=1
+  while read -r line; do log "chapter: $line"; done <<< "$CHECKED"
+  OUTCOMES=$(grep -oE '^[0-9:]+ (Won|Lost|Fled) at .*:' "$OUT/phones.log" | sed -E 's/^[0-9:]+ //; s/:$//' || true)
+  log "chapter: the fights: $(paste -sd';' <<< "$OUTCOMES" | sed 's/;/; /g')"
+  [[ "$(tail -1 <<< "$OUTCOMES")" == Won\ at\ * ]] || chapter_fail "the last fight won"
+  log "chapter: $(grep -cE 'CHAPTER [0-9]+: ' "$OUT/phones.log" || true) walks to a \"!\", $(grep -c 'routing again' "$OUT/phones.log" || true) routed again; $(grep -E 'CHAPTER walking on' "$OUT/phones.log" | sed 's/^[0-9:]* //' || true)"
+
+  # The restart: the TV back in the room, and the scene on from its saved line, which it showed again.
+  if [[ "$RESTART" == "1" ]]; then
+    if (( RESTART_AT == 0 )); then
+      chapter_fail "a restart at line $AT_LINE of $RESTART_SCENE"
+    else
+      BEFORE=$(awk -v to="$RESTART_AT" 'NR <= to && /^STORY [0-9]+ [a-z]/ { l = $3 } END { print l }' "$OUT/tv.log")
+      BACK=$(after "$RESTART_AT" '$0 == "ROOM " code')
+      FIRST=$(after "${BACK:-$RESTART_AT}" '/^STORY [0-9]+ [a-z]/')
+      GOT=$([[ -n "$FIRST" ]] && line_of "$FIRST" | awk '{ print $3 " " $4 }' || true)
+      # The saved line is the last the TV showed, or the next: the server can move on to it, and save it, before the TV hears.
+      NEXT=$(awk '/^STORY [0-9]+ [a-z]/ && $3 != l { l = $3; print l }' "$OUT/tv.log" | awk -v b="$BEFORE" 'p { print; exit } $0 == b { p = 1 }')
+      log "restart: the TV showed $BEFORE before it, was back at line ${BACK:-never}, and then showed ${GOT:-nothing}"
+      [[ -n "$BACK" ]] || chapter_fail "ROOM $CODE from the TV after the restart"
+      [[ "${GOT%% *}" == "$BEFORE" || "${GOT%% *}" == "$NEXT" ]] \
+        || chapter_fail "the saved line first after the restart: $BEFORE or the one after it, $NEXT (it was ${GOT:-nothing})"
+      [[ -z "$(after "$RESTART_AT" '$0 == "TACTICS screen tactics-resuming"')" ]] || log "restart: the TV showed Resuming"
+    fi
+  fi
+  # The killed TV: the new one in the room, and on with the scene.
+  if [[ "$RECONNECT" == "1" ]]; then
+    if (( KILL_AT == 0 )); then
+      chapter_fail "a TV kill at line $AT_LINE of $RECONNECT_SCENE"
+    else
+      (( OLD_TV_UP == 0 )) || chapter_fail "the old TV gone: it was still running when the new one started"
+      BACK=$(after "$KILL_AT" '$0 == "ROOM " code')
+      BORN=$(after "$KILL_AT" '/^Godot Engine /')
+      FIRST=$(after "${BORN:-$KILL_AT}" '/^STORY [0-9]+ [a-z]/')
+      log "reconnect: the new TV was in room $CODE at line ${BACK:-never}; its first line: $([[ -n "$FIRST" ]] && line_of "$FIRST")"
+      [[ -n "$BACK" && -n "$FIRST" ]] || chapter_fail "ROOM $CODE and a line of the scene from the new TV"
+      [[ -z "$FIRST" || "$(line_of "$FIRST" | awk '{ print $4 }')" == "shown" ]] || chapter_fail "the new TV's first line only shown, not said"
+    fi
+  fi
+  if [[ "$DROP_SIGNALS" == "1" ]]; then
+    DROPPED=$(grep -c "^Host signal 'shown' dropped" "$OUT/tv.log" || true)
+    (( DROPPED > 0 )) && log "chapter: the TV dropped $DROPPED shown signals, and the fight went on without them" || chapter_fail "dropped shown signals in the TV log"
+  fi
+  if [[ "$SILENT" == "1" ]]; then
+    ANSWERED=$(grep -cE ' (skips line|votes|picks .* to roll) ' "$OUT/phones.log" || true)
+    (( ANSWERED == 0 )) && log "chapter: nobody skipped, voted or picked: the game's timers ran every scene" \
+      || chapter_fail "a silent run: the bots answered $ANSWERED times"
+  fi
+  for shot in chapter-card walking-after; do
+    SHOT=$(find "$OUT/chapter" -name "*$shot.png" 2> /dev/null | sort | tail -1)
+    [[ -n "$SHOT" || -z "$SHOTS_PID" ]] && log "a shot of the $shot: ${SHOT:-none, no import}" || chapter_fail "a shot of the $shot"
+  done
+  log "chapter: $(find "$OUT/chapter" -name '*.png' 2> /dev/null | wc -l) shots in $OUT/chapter"
+
+  if (( PHONES_EXIT != 0 )) || [[ -n "$ERRORS" ]] || (( CHAPTER_FAIL )); then
     log "FAILED (phones exit $PHONES_EXIT)"
     exit 1
   fi

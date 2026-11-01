@@ -685,6 +685,42 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             _storyMoment = ("story-card", 0);
         }
+        if (LogStory)
+        {
+            LogMarks(view);
+        }
+    }
+
+    private string? _marksLogged;
+    private string? _cardLogged;
+
+    /// <summary>
+    /// <c>--story-log</c>: a <c>STORY marker &lt;beat&gt; &lt;x&gt; &lt;y&gt; &lt;emote|-&gt;</c> line for each beat on offer whenever they
+    /// change (<c>STORY marker none</c> for none), and <c>STORY card &lt;chapter&gt;</c> as a chapter's card comes up: for the bots to
+    /// walk to the "!" and the e2e run to see the chapter end.
+    /// </summary>
+    private void LogMarks(TacticsHostView view)
+    {
+        if (view.Explore?.Markers is { IsDefault: false } marks)
+        {
+            var key = marks.IsEmpty ? "none" : string.Join(" | ", marks.Select(m => $"{m.Beat} {m.At.X} {m.At.Y} {m.Emote ?? "-"}"));
+            if (key != _marksLogged)
+            {
+                _marksLogged = key;
+                foreach (var line in key.Split(" | "))
+                {
+                    GD.Print($"STORY marker {line}");
+                }
+            }
+        }
+        if (view.Chapter != _cardLogged)
+        {
+            _cardLogged = view.Chapter;
+            if (view.Chapter is not null)
+            {
+                GD.Print($"STORY card {view.Chapter}");
+            }
+        }
     }
 
     /// <summary>What a story tick asks: the voice cut, a line said, a sound played, a line logged with <c>--story-log</c>, and a shot.</summary>

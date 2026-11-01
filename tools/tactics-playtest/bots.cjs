@@ -70,6 +70,14 @@
 //                             the VIP ends the session. Start the server with a Development seed by the beat (tools/tv-e2e.sh's
 //                             ARCBOX_SERVER_ENV), as the bots don't walk to it
 //   --story-pick=<ids>        option ids to prefer, comma-separated (e.g. why,insight to take the ford choice's check)
+//   --chapter                 all of the chapter, from wherever the party is (a fresh campaign needs no seed): the beat on offer, from
+//                             the TV's --story-log `STORY marker` lines (or --host's view), is walked to by route.cs, round every stamp,
+//                             each step checked against the TV's WALK line (routed again if it went elsewhere), and Interact tapped once
+//                             offered; then the next, a lost fight's "!" again, until the TV shows `STORY card`; then a few steps, and
+//                             the VIP ends the session. Every bot votes for --branch and --story-pick's ids, else the first option
+//   --branch=force|parley     the option to vote for at the ford (default force)
+//   --line=<seconds>          how long a line is up before the leader skips it (default 1.5)
+//   --silent                  in a scene nobody answers anything or skips a line: it all runs on the game's timers
 //
 // Run it (on Windows, from Git Bash; the database goes in a temp file so the run leaves no campaign behind):
 //
@@ -145,7 +153,15 @@ let resultsLeft = 0;
 const losing = () => fightsDone < loseFights;
 /** --story[=<n>] and --story-pick=<ids>: walk to the "!" and play n beats, choosing these options where offered. */
 const storyBeats = opt('story') === undefined ? 0 : opt('story') === true ? 1 : Number(opt('story'));
-const storyPick = String(opt('story-pick', '')).split(',').filter(Boolean);
+/** --chapter: play all of the region's chapter from wherever the party is, walking to each "!" in turn, to its card and a walk after. */
+const chapter = opt('chapter', false) === true;
+/** --branch=force|parley: the option the party votes for at the ford. */
+const branch = String(opt('branch', 'force'));
+/** --silent: nobody answers anything or skips a line, so every line, vote, choice and check runs on the game's own timers. */
+const silent = opt('silent', false) === true;
+const storyPick = [...(chapter ? [branch] : []), ...String(opt('story-pick', '')).split(',').filter(Boolean)];
+/** --line=<seconds>: how long a line stays up before the leader's bot skips it. */
+const lineMs = Number(opt('line', 1.5)) * 1000;
 
 /** The phone's cadence while a direction is held, and its retry after a stop. */
 const PING_MS = 250;
@@ -257,7 +273,8 @@ function bestUse(units, choices) {
         if (u.side === 'Enemy') {
           if (u.life !== 'Up') continue;
           const left = u.hp + (u.tempHp ?? 0);
-          score += Math.min(a.damage, left) + (a.damage >= left ? 6 : 0);
+          // a foe whose fall wins the fight (Mother Skarrow) is worth half as much again
+          score += (Math.min(a.damage, left) + (a.damage >= left ? 6 : 0)) * (TARGETS.has(u.id) ? 1.5 : 1);
         } else {
           if (a.damage > 0) score -= 100;
           const missing = u.maxHp - u.hp;
@@ -275,8 +292,21 @@ function bestUse(units, choices) {
   return best;
 }
 
-/** The weakest foe, the nearest of those equally weak: the one the whole party goes for. */
-const weakest = (foes, from) => foes.reduce((a, b) => (b.hp < a.hp || (b.hp === a.hp && dist(from, b.at) < dist(from, a.at)) ? b : a));
+/** The foes whose fall wins a fight, from every encounter's `defeat:<id>` objectives. */
+const TARGETS = new Set((() => {
+  try {
+    return fs.readdirSync(path.join(RULES, 'encounters')).filter((f) => f.endsWith('.json')).flatMap((f) => {
+      const win = JSON.parse(fs.readFileSync(path.join(RULES, 'encounters', f), 'utf8')).objectives?.win ?? {};
+      return [...(win.any ?? []), ...(win.all ?? [])].filter((o) => typeof o === 'string' && o.startsWith('defeat:')).map((o) => o.slice(7));
+    });
+  } catch {
+    return [];     // no encounters to read: every foe is worth the same
+  }
+})());
+
+/** The weakest foe, the nearest of those equally weak: the one the whole party goes for; but a foe whose fall wins it before any. */
+const weakest = (foes, from) => foes.find((f) => TARGETS.has(f.id))
+  ?? foes.reduce((a, b) => (b.hp < a.hp || (b.hp === a.hp && dist(from, b.at) < dist(from, a.at)) ? b : a));
 
 /**
  * Where to walk to get nearer <goal>, or null to stand: the reachable tile nearest it on foot, on dry ground if that gets nearer (a hero
@@ -318,8 +348,6 @@ const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
 /** The TV's log or the host view (Watch), for the VIP to wait for the TV's results. */
 let tv = null;
 const RESULTS_WAIT_MS = 60000;
-/** How long a scene's line stays up before the leader's bot skips it: long enough to be seen on the TV. */
-const LINE_MS = 1500;
 
 /** Every bot, for a timeout to say what each was looking at. */
 const everyone = [];
@@ -550,6 +578,10 @@ class Bot {
   async act(state) {
     const view = this.view;
     if (view?.kind !== 'custom') return;
+    if (this.index === 0 && view.screen === 'dialogue' && view.data.line && view.data.line !== state.lineSeen) {
+      state.lineSeen = view.data.line;
+      log(`LINE ${view.data.line} ${view.data.speaker ?? 'narrator'}`);
+    }
     const stuck = this.acted === view.viewId && Date.now() - this.seenAt > STUCK_MS;
     if (this.acted === view.viewId && !stuck) return;
     if (stuck) this.seenAt = Date.now();
@@ -584,19 +616,23 @@ class Bot {
       // A scene (overworld 5d): the leader skips each line once it has been up a moment, and votes, choices and checks get an answer
       // at once, so a run waits on no 45 s vote. The game's own timers would get there too.
       case 'dialogue':
-        if (!view.data.canSkip || !view.data.line) return;
-        state.lineAt ??= Date.now() + LINE_MS;
+        if (silent || !view.data.canSkip || !view.data.line) return;
+        state.lineAt ??= Date.now() + lineMs;
         if (Date.now() < state.lineAt) return;
         state.lineAt = undefined;
         log(`${this.name} skips line ${view.data.line}`);
         return this.input('skip', { line: view.data.line });
-      case 'vote':
+      case 'vote': {
         if (storyBeats) return this.storyAnswer(state);
-        if (!view.data.canChoose || view.data.mine || !view.data.options?.length) return;
-        log(`${this.name} votes ${view.data.options[0].id}`);
-        return this.input('vote', { option: view.data.options[0].id });
+        if (silent || !view.data.canChoose || view.data.mine || !view.data.options?.length) return;
+        const ids = view.data.options.map((o) => o.id);
+        const pick = storyPick.find((id) => ids.includes(id)) ?? ids[0];
+        log(`${this.name} votes ${pick}`);
+        return this.input('vote', { option: pick });
+      }
       case 'check': {
         if (storyBeats) return this.storyAnswer(state);
+        if (silent) return;
         if (!view.data.canChoose || view.data.mine || !view.data.cards?.length) return;
         const best = view.data.cards.reduce((a, b) => (b.bonus > a.bonus ? b : a));
         log(`${this.name} picks ${best.name} to roll ${view.data.skill}`);
@@ -605,7 +641,7 @@ class Bot {
       case 'walk':
         newBattle();
         if (storyBeats) return this.storyWalk(state);
-        if (walking || stampFights || !view.data.vip) return;
+        if (walking || stampFights || chapter || !view.data.vip) return;
         state.walkAt ??= Date.now() + holdMs;
         if (Date.now() < state.walkAt) return;
         state.walkAt = undefined;
@@ -627,7 +663,7 @@ class Bot {
         log(`${view.data.outcome} at ${view.data.encounter}: ${view.data.lines.map((l) => `${l.name} +${l.xp} XP`).join(', ')}`);
         resultsLeft = Date.now();
         fightsDone++;
-        return this.input(then === 'next' || stampFights ? 'next' : 'end');
+        return this.input(then === 'next' || stampFights || chapter ? 'next' : 'end');
     }
   }
 }
@@ -648,8 +684,11 @@ class Watch {
         this.shownSeq = beat;
         host.invoke('HostSignal', 'shown', { seq: beat }).catch(() => {});
       }
+      if (v?.chapter && !this.card) this.card = Date.now();
       const e = v?.explore;
       if (!e) return;
+      const marks = (e.markers ?? []).map((m) => ({ beat: m.beat, at: m.at, emote: m.emote ?? null }));
+      if (JSON.stringify(marks) !== JSON.stringify(this.markers)) [this.markers, this.markersSeen] = [marks, Date.now()];
       this.held = e.held;
       if (String(e.at) !== String(this.tile) || e.epoch !== this.epoch) [this.tile, this.epoch, this.placed] = [e.at, e.epoch, Date.now()];
       if (e.seq !== this.seq) [this.seq, this.at] = [e.seq, Date.now()];
@@ -670,11 +709,21 @@ class Watch {
     const lines = ((this.rest ?? '') + chunk.toString('utf8')).split('\n');
     this.rest = lines.pop();
     for (const line of lines) {
+      // STORY marker lines come one a beat, together: a run of them is the whole set
+      this.lineNo = (this.lineNo ?? 0) + (/^STORY marker /.test(line) ? 0 : 1);
       let m = /^WALK (\d+) (-?\d+) (-?\d+) (\d+)/.exec(line);
       if (m) [this.seq, this.at, this.tile, this.placed] = [Number(m[1]), Number(m[4]), [Number(m[2]), Number(m[3])], Date.now()];
       // the TV's screens: a fight's, and its results, which the VIP waits for as someone watching the TV would
       if (/^TACTICS screen tactics-battle-/.test(line)) this.battleShown = Date.now();
       if (line === 'TACTICS screen tactics-results') this.resultsShown = Date.now();
+      // --story-log: the beats on offer, each time they change, and a chapter's card
+      m = /^STORY marker (\S+)(?: (-?\d+) (-?\d+) (\S+))?$/.exec(line);
+      if (m) {
+        if (this.markerLines !== this.lineNo) [this.markers, this.markerLines] = [[], this.lineNo];
+        if (m[1] !== 'none') this.markers.push({ beat: m[1], at: [Number(m[2]), Number(m[3])], emote: m[4] === '-' ? null : m[4] });
+        this.markersSeen = Date.now();
+      }
+      if (/^STORY card /.test(line)) this.card ??= Date.now();
       // a snap puts the party somewhere new (a first view, a new epoch): at a tile's middle
       m = /^TACTICS walk snapped to (-?[\d.]+) (-?[\d.]+)/.exec(line);
       if (m) [this.tile, this.placed] = [[Math.floor(Number(m[1])), Math.floor(Number(m[2]))], Date.now()];
@@ -861,17 +910,25 @@ function stampOf(id) {
   throw new Error(`No region stamps ${map}, the map of ${id}`);
 }
 
-/** The pad directions from <tile> into the stamp, one a step, by the server's own walking rule (route.cs). */
-async function routeFrom(stamp, tile) {
+/**
+ * The pad directions from <tile>, one a step, by the server's own walking rule (route.cs): into the stamp of <stamp>'s map, or with
+ * <beat>, into reach of that beat's "!" (none if it's in reach already).
+ */
+async function routeFrom(stamp, tile, beat = null) {
   const { execFile } = require('child_process');
-  const args = ['run', path.join(__dirname, 'route.cs'), '--', RULES, stamp.region, stamp.map, String(tile[0]), String(tile[1])];
+  const goal = beat ? ['beat', beat] : [stamp.map];
+  const args = ['run', path.join(__dirname, 'route.cs'), '--', RULES, stamp.region, ...goal, String(tile[0]), String(tile[1])];
   const [out, err] = await new Promise((resolve) => execFile('dotnet', args, { encoding: 'utf8' },
     (e, stdout, stderr) => resolve([String(stdout ?? '').trim(), `${stderr ?? ''}${e && !stderr ? e.message : ''}`.trim()])));
   const line = out.split('\n').at(-1);
+  if (line === 'here') return [];      // there already: in reach of the beat, or on the stamp
   if (!line || line === 'none' || !/^[nsew ]+$/.test(line))
-    throw new Error(`No way from ${tile} into ${stamp.map}'s stamp (route.cs said: ${out || 'nothing'}${err ? `; ${err.slice(0, 400)}` : ''})`);
+    throw new Error(`No way from ${tile} ${beat ? `to ${beat}` : `into ${stamp.map}'s stamp`} (route.cs said: ${out || 'nothing'}${err ? `; ${err.slice(0, 400)}` : ''})`);
   return line.split(' ');
 }
+
+/** The tile change of a screen direction, as WorldWalk.Delta has it. */
+const DELTA = { n: [-1, -1], ne: [0, -1], e: [1, -1], se: [1, 0], s: [1, 1], sw: [0, 1], w: [-1, 1], nw: [-1, 0] };
 
 /**
  * --walk-to-stamp: the leader walks the party from where it stands into the stamp, a tap a step (a press and a release: the server takes
@@ -914,8 +971,8 @@ async function startsFight(bots, when) {
   log(`STAMP the fight starts ${when}`);
 }
 
-/** After the last fight: walk on a little from the battlefield, any way that's open, so the TV shows the party walking again. */
-async function walkOn(bots, watch) {
+/** After the last fight (or the chapter): walk on a little, any way that's open, so the TV shows the party walking again. */
+async function walkOn(bots, watch, label = 'STAMP') {
   const leader = await leaderOf(bots);
   for (const dir of ['w', 'sw', 'nw', 's', 'n', 'e', 'ne', 'se']) {
     watch.read();
@@ -924,9 +981,9 @@ async function walkOn(bots, watch) {
     await release(leader);
     await sleep(600);
     watch.read();
-    if (watch.seq - was >= 3) return log(`STAMP walking on: ${watch.seq - was} steps ${dir}`);
+    if (watch.seq - was >= 3) return log(`${label} walking on: ${watch.seq - was} steps ${dir}`);
   }
-  log('STAMP walking on: no way was open');
+  log(`${label} walking on: no way was open`);
 }
 
 /** --walk-to-stamp=<n>: n fights, each walked into from wherever the last left the party, then a few steps on, and the session ends. */
@@ -951,6 +1008,101 @@ async function fightAtStamps(bots, watch, state) {
     after = watch.host ? started : resultsLeft;
   }
   await walkOn(bots, watch);
+  const vip = bots[0];
+  await vip.input('endSession');
+  await until('the session to end', () => vip.ended);
+  log(`Session over: ${vip.ended.message ?? ''}`);
+}
+
+const onWalk = (bots) => bots.every((b) => b.view?.screen === 'walk');
+
+/**
+ * --chapter: walks the party into reach of the beat on offer, a tap a step by route.cs, checking each step lands where the route said
+ * (a party put somewhere the bots didn't know of is routed again from where the step went), and taps Interact once it's offered. A
+ * step into an armed stamp on the way starts the beat as well. Gives back once the beat has begun.
+ */
+async function walkToBeat(bots, watch, region, marker) {
+  for (let attempt = 1; attempt <= 6; attempt++) {
+    const tile = await until('where the party stands', () => {
+      watch.read();
+      return watch.tile;
+    });
+    const dirs = await routeFrom({ region }, tile, marker.beat);
+    let leader = await leaderOf(bots);
+    log(`CHAPTER ${leader.name} walks ${dirs.length} steps from ${tile} to ${marker.beat}${attempt > 1 ? ` (route ${attempt})` : ''}`);
+    let at = tile;
+    let off = false;
+    for (const [i, dir] of dirs.entries()) {
+      watch.read();
+      const was = watch.seq;
+      leader = bots.find((b) => b.view?.screen === 'walk' && b.view.data.leader) ?? leader;
+      await walkTo(leader, dir);
+      await walkTo(leader, null);
+      const went = await within(4000, () => {
+        watch.read();
+        return watch.seq !== was || !onWalk(bots);
+      });
+      if (!onWalk(bots)) return log(`CHAPTER ${marker.beat} begins at step ${i + 1} of ${dirs.length}: a stamp`);
+      at = [at[0] + DELTA[dir][0], at[1] + DELTA[dir][1]];
+      if (!went || String(watch.tile) !== String(at)) {
+        log(`CHAPTER step ${i + 1} (${dir}) ${went ? `went to ${watch.tile}, not ${at}` : 'never went'}: routing again`);
+        off = true;
+        break;
+      }
+    }
+    if (off) continue;
+    const lead = await within(5000, () => bots.find((b) => b.view?.screen === 'walk' && b.view.data.leader && b.view.data.interact));
+    if (!lead) {
+      log(`CHAPTER no Interact at ${at}: routing again`);
+      continue;
+    }
+    log(`CHAPTER ${lead.name} taps ${lead.view.data.interact}: ${marker.beat}`);
+    await lead.input('interact');
+    if (await within(5000, () => !onWalk(bots))) return log(`CHAPTER ${marker.beat} begins`);
+    log('CHAPTER the tap started nothing: trying again');
+  }
+  throw new Error(`Couldn't get to ${marker.beat}`);
+}
+
+/**
+ * --chapter: from wherever the party is, the beat on offer (the TV's STORY marker lines, or the host view), walked to and played, and
+ * so on to the chapter's card; then a walk, and the session ends. A fight lost puts its "!" back, so it's walked to again.
+ */
+async function playChapter(bots, watch, state) {
+  const region = JSON.parse(fs.readFileSync(path.join(RULES, 'world', 'ashen_ford.json'), 'utf8')).id;
+  setInterval(() => {
+    if (bots.some((b) => b.closed)) {
+      console.error(`Room closed: ${bots.find((b) => b.closed).closed}`);
+      process.exit(1);
+    }
+    for (const bot of bots) void bot.act(state);
+  }, TICK_MS).unref();
+  idlePings(bots);
+  await until('the walk screen', () => bots.some((b) => b.view?.screen === 'walk' && b.view.data.leader));
+  if (tvLog && !asHost) await until('the world on the TV', () => fs.existsSync(tvLog) && fs.readFileSync(tvLog, 'utf8').includes('TACTICS world open:'));
+  let since = 0;
+  for (let n = 1; ; n++) {
+    const marker = await until('a "!" on offer, or the chapter\'s card', () => {
+      watch.read();
+      if (watch.card) return 'card';
+      return onWalk(bots) && watch.markersSeen > since && watch.markers?.find((m) => m.emote === 'alert');
+    });
+    if (marker === 'card') break;
+    log(`CHAPTER ${n}: ${marker.beat} at ${marker.at}`);
+    since = Date.now();
+    await walkToBeat(bots, watch, region, marker);
+    await until(`${marker.beat} to be over`, () => {
+      watch.read();
+      return watch.card || (onWalk(bots) && watch.markersSeen > since);
+    });
+    log(`CHAPTER ${marker.beat} is over`);
+    // The TV puts the new "!" up in the same view as it wakes or moves the party, and can log it first: a moment for the snap.
+    await sleep(2000);
+  }
+  log(`CHAPTER the card: ${fs.existsSync(String(tvLog)) ? (fs.readFileSync(tvLog, 'utf8').match(/^STORY card (.*)$/m)?.[1] ?? '') : ''}`);
+  await until('walking after the card', () => onWalk(bots) && bots.some((b) => b.view.data.leader));
+  await sleep(holdMs);
+  await walkOn(bots, watch, 'CHAPTER');
   const vip = bots[0];
   await vip.input('endSession');
   await until('the session to end', () => vip.ended);
@@ -985,6 +1137,11 @@ async function fightAtStamps(bots, watch, state) {
   log('Game on');
 
   const state = { nextPick: Date.now() + holdMs };
+  if (chapter) {
+    await playChapter(bots, watch, state);
+    await Promise.all(bots.map((b) => b.conn.stop()));
+    process.exit(0);
+  }
   if (stampFights) {
     await fightAtStamps(bots, watch, state);
     await Promise.all(bots.map((b) => b.conn.stop()));
