@@ -11,6 +11,8 @@ import { DEAD_ZONE, dirAt, SECTORS, stickyDirAt, WalkSender, type Dir, type Sect
 const CONFIRM_MS = 4000;
 /** How far the knob travels from the centre, as a share of the pad's radius. */
 const KNOB_REACH = 0.6;
+/** How long a tapped Interact stays asleep when no new view comes (the server found the spot out of reach by then). */
+const INTERACT_REARM_MS = 2000;
 
 const ARROWS: Record<string, [number, number]> = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0] };
 
@@ -213,6 +215,36 @@ function HostMenu({ canBattle, send }: { canBattle: boolean; send: CustomScreenP
   );
 }
 
+/**
+ * The leader's Interact button, while a beat's spot is in reach: "Talk", "Look around"… It sits at the foot of the info
+ * column, never between the pad and the thumb, so its coming and going doesn't move the pad. One tap starts the beat; a
+ * second tap of a double tap is dropped, and the button wakes again if the server didn't take it (out of reach by then).
+ */
+function Interact({ label, send, viewId }: { label: string; send: CustomScreenProps["send"]; viewId: string }) {
+  const sfx = useSfx();
+  const [sent, setSent] = useState<string | null>(null);
+  const sentFor = useRef<string | null>(null);
+  useEffect(() => {
+    if (!sent) return;
+    const id = setTimeout(() => { sentFor.current = null; setSent(null); }, INTERACT_REARM_MS);
+    return () => clearTimeout(id);
+  }, [sent]);
+  const busy = sent === viewId;
+  return (
+    <button type="button" class="tx-btn gold tx-interact" disabled={busy} aria-disabled={busy}
+      onClick={() => {
+        if (sentFor.current === viewId) return;
+        sentFor.current = viewId;
+        setSent(viewId);
+        sfx("confirm");
+        send("interact");
+      }}>
+      <LineIcon name="speech" />
+      {label}
+    </button>
+  );
+}
+
 function Party({ party }: { party: WalkMember[] }) {
   return (
     <ul class="tx-walk-party" aria-label="The party">
@@ -313,6 +345,7 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
         )}
         <Party party={d.party} />
         {d.portal && !d.leader ? <p><a class="tx-link" href={d.portal} target="_blank" rel="noopener">Your character</a></p> : null}
+        {d.leader && d.interact ? <Interact label={d.interact} send={send} viewId={viewId} /> : null}
       </div>
       {d.leader ? <Pad sender={sender} /> : null}
     </div>

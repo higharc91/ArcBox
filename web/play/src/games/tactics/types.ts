@@ -157,6 +157,86 @@ export interface WalkData {
   canBattle: boolean;
   /** The campaign portal's path; null outside a campaign. */
   portal?: string | null;
+  /** The leader's Interact button ("Talk", "Look around"…), while a beat's spot is in reach; null or absent otherwise. */
+  interact?: string | null;
+}
+
+/**
+ * A line of a scene. Everything is null between lines (the gap between scenes, or while a roll is revealed). The narrator
+ * has no speaker and no portrait. `canSkip` is the leader's, and a skip names `line`, so a late tap can't skip the next.
+ */
+export interface DialogueData {
+  title: string | null;
+  line: string | null;
+  speaker: string | null;
+  /** A portrait preset of the pack's (`portraits/manifest.json`), drawn in `mood`. */
+  portrait: string | null;
+  mood: string | null;
+  text: string | null;
+  canSkip: boolean;
+}
+
+export interface StoryOption {
+  id: string;
+  label: string;
+  /** The skill check picking it starts, if any. */
+  skill: string | null;
+  dc: number | null;
+}
+
+/**
+ * A question: the party's vote (`party`), or a choice the leader makes for everyone. On a tie only the tied options come,
+ * and `decider` breaks it. No tally: that's the TV's. `chosen` is the party's pick of a leader's choice, for those who
+ * didn't make it.
+ */
+export interface VoteData {
+  party: boolean;
+  canChoose: boolean;
+  options: StoryOption[];
+  mine: string | null;
+  chosen: string | null;
+  tie: boolean;
+  decider: string | null;
+  /** The players away when it was asked, by name. */
+  away: string[];
+}
+
+export interface CheckCard {
+  /** The member's id, which `pickRoller` sends. */
+  id: string;
+  name: string;
+  player: string;
+  /** The class's name, as shown. */
+  cls: string;
+  bonus: number;
+  /** Where the bonus comes from: "Proficient · CHA 14". */
+  note: string;
+  here: boolean;
+}
+
+export interface CheckRoll {
+  member: string;
+  die: number;
+  bonus: number;
+  total: number;
+  dc: number;
+  success: boolean;
+}
+
+/** A skill check: the party picks who rolls, by a vote on the same rules, then the roll. */
+export interface CheckData {
+  skill: string;
+  dc: number;
+  /** The option it's for. */
+  title: string;
+  cards: CheckCard[];
+  mine: string | null;
+  canChoose: boolean;
+  tie: boolean;
+  decider: string | null;
+  /** On a tie, the members it's between. */
+  tied: string[];
+  roll: CheckRoll | null;
 }
 
 export interface ResultsData {

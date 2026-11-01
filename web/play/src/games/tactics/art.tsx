@@ -108,6 +108,24 @@ export function Portrait({ unit, cls, size, tone }: { unit: Pick<UnitView, "name
   );
 }
 
+/**
+ * A story speaker's portrait: a pack preset ("mayor") in the line's mood, falling back to idle, at `size` CSS px (a
+ * whole multiple of the 40 px files). A framed initial until the pack loads, or for a preset it doesn't have.
+ */
+export function MoodPortrait({ preset, mood, name, size }: { preset: string; mood: string | null; name: string; size: 80 | 120 }) {
+  const base = usePackBase();
+  const portraits = usePortraits();
+  const moods = portraits?.presets[preset];
+  const file = moods ? (mood ? moods[mood] : undefined) ?? moods.idle : undefined;
+  return (
+    <span class={`tx-portrait s${size} npc`}>
+      {base && file
+        ? <img src={`${base}portraits/${file}`} alt="" width={size} height={size} draggable={false} />
+        : <b aria-hidden="true">{name.slice(0, 1)}</b>}
+    </span>
+  );
+}
+
 /** A class's crest (32 px art) at `scale`×; blank until loaded. */
 export function Crest({ cls, scale = 1 }: { cls: string; scale?: 1 | 2 }) {
   const base = usePackBase();

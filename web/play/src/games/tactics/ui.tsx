@@ -65,7 +65,7 @@ export function Conditions({ ids }: { ids: string[] }) {
  * The turn clock. The game's deadline reaches the app shell, not the screen's data, so this mirrors the shell's own
  * countdown (`.ptimer`, which the tactics CSS hides on this screen). Null while there is none.
  */
-function useShellClock(anchor: { current: HTMLElement | null }): { text: string; urgent: boolean } | null {
+export function useShellClock(anchor: { current: HTMLElement | null }): { text: string; urgent: boolean } | null {
   const [clock, setClock] = useState<{ text: string; urgent: boolean } | null>(null);
   useEffect(() => {
     const read = () => {
@@ -132,4 +132,6 @@ const ICONS = {
   sword: '<path d="M14.5 3.5H20.5V9.5L9 21 6 18 17.5 6.5"/><path d="M4 15l5 5M3 21l2.5-2.5"/>',
   shield: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M12 7v10"/>',
   crown: '<path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z"/>',
+  speech: '<path d="M4 5h16v11h-9l-5 4v-4H4z"/><path d="M12 8v3M12 13.5v.01"/>',
+  skip: '<path d="M5 5l8 7-8 7zM16 5v14"/>',
 } as const;

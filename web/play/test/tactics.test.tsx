@@ -28,7 +28,10 @@ describe("tactics phone module", () => {
   it("renders every screen the game sends", () => {
     const names = Object.keys(fixtures).map((k) => k.replace("./fixtures/tactics/", "").replace(".json", ""))
       .filter((n) => !n.startsWith("portal-")).sort();
-    expect(names).toEqual(["pickClass", "pickEncounter", "react", "results", "status", "turn", "walk-follower", "walk-leader"]);
+    expect(names).toEqual([
+      "check-pick", "check-rolled", "choice-follower", "choice-leader", "dialogue", "dialogue-leader", "pickClass", "pickEncounter",
+      "react", "results", "status", "turn", "vote", "vote-tie", "walk-follower", "walk-interact", "walk-leader",
+    ]);
     for (const name of names) {
       render(<ControllerScreen view={view(name)} send={() => {}} me="ALEX" game="tactics" />);
       expect(screen.queryByText("This screen needs a newer app")).toBeNull();
