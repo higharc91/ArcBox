@@ -146,6 +146,114 @@ public sealed class BattleIntroTests
 
     public static TheoryData<int> Seeds => [.. Enumerable.Range(1, 60)];
 
+    /// <summary>A party of four, close together west of the stamp, in a world with rocks about: what the hardware check's seed does.</summary>
+    private static (StageScript Script, BattleIntro Intro, Dictionary<string, UnitPlace> Walkers, Tile[] Slots) Bunched(int seed)
+    {
+        var random = new Random(seed);
+        TileInfo Ground(int x, int y) => x < Origin.X && random.Next(7) == 0 ? StageWorld.Flat(0, StageWorld.Rock, TileFlags.Impassable) : StageWorld.Flat(0);
+        var script = new StageScript(Ground);
+        var slots = Enumerable.Range(0, 24).Select(i => new Tile(i % 4, i / 4)).OrderBy(_ => random.Next()).Take(4).ToArray();
+        ImmutableArray<UnitView> units = [.. slots.Select((t, i) => Unit($"hero{i + 1}", "Party", t)), Unit("enemy1", "Enemy", new Tile(7, 0)), Unit("enemy2", "Enemy", new Tile(7, 5))];
+        var free = Enumerable.Range(0, 30).Select(i => new Tile(Origin.X - 1 - i % 5, Origin.Y + i / 5)).Where(t => script.Terrain.Rules.Walkable(t)).OrderBy(_ => random.Next()).ToArray();
+        var stood = new Tile[4];
+        for (var i = 0; i < 4; i++)
+            stood[i] = i > 0 && random.Next(5) == 0 ? stood[random.Next(i)] : free[i];      // now and then two walkers stand together
+        var walkers = stood.Select((t, i) => (Key: $"p{i + 1}", Place: new UnitPlace(new Vector2(t.X + 0.5f, t.Y + 0.5f), 0))).ToDictionary(w => w.Key, w => w.Place);
+        var battle = Battle(units: units) with { Stage = new StageView(Region, Origin, 0, ["p1", "p2", "p3", "p4"]) };
+        return (script, BattleIntro.Plan(battle, script.Stage, script.Terrain, walkers), walkers, slots);
+    }
+
+    /// <summary>Where each hero is drawn <paramref name="t"/> seconds in, in the stage's tiles: walking, or on its slot.</summary>
+    private static Dictionary<UnitId, Vector2> Where(BattleIntro intro, BoardTerrain terrain, Tile[] slots, double t)
+    {
+        var frame = intro.At(t, terrain);
+        return intro.Heroes.Select((h, i) => (h.Unit, At: frame.Places.TryGetValue(h.Unit, out var place) ? place.Map
+            : new Vector2(slots[int.Parse(h.Unit.Value[4..], System.Globalization.CultureInfo.InvariantCulture) - 1].X + 0.5f,
+                slots[int.Parse(h.Unit.Value[4..], System.Globalization.CultureInfo.InvariantCulture) - 1].Y + 0.5f)))
+            .ToDictionary(p => p.Unit, p => p.At);
+    }
+
+    // The hardware check (local-windows-checks §5.6): four heroes walked in and three bodies showed, two bars stacked on one spot. The
+    // property: whatever the ground and wherever the walkers stand, two heroes are never closer than half a tile, from the first step on.
+    // Walkers that stood together may share their tile until then.
+    [Theory]
+    [MemberData(nameof(Seeds))]
+    public void Two_heroes_are_never_on_one_tile_in_the_walk_in(int seed)
+    {
+        var (script, intro, walkers, slots) = Bunched(seed);
+        if (intro.Fades)
+            return;     // put on their slots in the dark
+
+        foreach (var walk in intro.Heroes)
+        {
+            var from = walkers[walk.Walker];
+            Assert.Equal(new Tile((int)MathF.Floor(from.Map.X), (int)MathF.Floor(from.Map.Y)), walk.Path[0]);
+            Assert.All(walk.Path.Zip(walk.Path.Skip(1)), p => Assert.True(p.First == p.Second || WorldWalk.Legal(script.Terrain.Rules, p.First, p.Second, ClassDef.DefaultJump)));
+            Assert.True(walk.Steps < StageTuning.FarSteps);
+        }
+        Assert.True(intro.WalkEnd <= StageTuning.WalkInMost + 1e-9);
+        for (var t = 0.0; t <= intro.WalkEnd + 0.01; t += 0.004)
+        {
+            var at = Where(intro, script.Terrain, slots, t).ToArray();
+            for (var a = 0; a < at.Length; a++)
+                for (var b = a + 1; b < at.Length; b++)
+                {
+                    var together = intro.Heroes.Single(h => h.Unit == at[a].Key).Path[0] == intro.Heroes.Single(h => h.Unit == at[b].Key).Path[0];
+                    if (together && t < intro.Step)
+                        continue;
+                    Assert.True(Vector2.Distance(at[a].Value, at[b].Value) >= 0.5f, $"{at[a].Key} and {at[b].Key} at {t:0.000} s: {at[a].Value}, {at[b].Value}");
+                }
+        }
+    }
+
+    // That the property isn't empty: most of these parties walk in rather than fade, and the shortest walks alone would have run into each
+    // other in many of them (47 of 60 when written), which is what the timing is for. All 60 walked.
+    [Fact]
+    public void Bunched_parties_mostly_walk_and_their_shortest_walks_alone_would_collide()
+    {
+        var (walked, collided) = (0, 0);
+        foreach (var seed in Enumerable.Range(1, 60))
+        {
+            var (script, intro, walkers, slots) = Bunched(seed);
+            if (intro.Fades)
+                continue;
+            walked++;
+            var shortest = intro.Heroes.Select(h => BattleIntro.PathTo(script.Terrain.Rules, h.Path[0], h.Path[^1])).ToArray();
+            var longest = shortest.Max(p => p.Length);
+            for (var k = 1; k < longest; k++)
+            {
+                var on = shortest.Select(p => p[Math.Min(k, p.Length - 1)]).ToArray();
+                if (on.Distinct().Count() < on.Length)
+                {
+                    collided++;
+                    break;
+                }
+            }
+        }
+        Assert.True(walked >= 50, $"{walked} of 60 walked");
+        Assert.True(collided >= 20, $"{collided} would have collided");
+    }
+
+    [Fact]
+    public void A_hero_on_its_slot_stays_and_the_others_go_round()
+    {
+        // hero2 stands on its slot, which is on hero1's way: hero2 stays, and hero1 goes round it.
+        var script = new StageScript();
+        ImmutableArray<UnitView> units = [Unit("hero1", "Party", new Tile(2, 2)), Unit("hero2", "Party", new Tile(1, 2)), Unit("enemy1", "Enemy", new Tile(7, 0))];
+        var walkers = new Dictionary<string, UnitPlace>
+        {
+            ["p1"] = new(new Vector2(Origin.X - 0.5f, Origin.Y + 2.5f), 0),
+            ["p2"] = new(new Vector2(Origin.X + 1.5f, Origin.Y + 2.5f), 0),
+        };
+        var intro = BattleIntro.Plan(Battle(units: units), script.Stage, script.Terrain, walkers);
+
+        Assert.False(intro.Fades);
+        var hero1 = intro.Heroes.Single(h => h.Unit.Value == "hero1");
+        Assert.DoesNotContain(new Tile(Origin.X + 1, Origin.Y + 2), hero1.Path);
+        Assert.Equal(new Tile(Origin.X + 2, Origin.Y + 2), hero1.Path[^1]);
+        Assert.Equal(0, intro.Heroes.Single(h => h.Unit.Value == "hero2").Steps);
+    }
+
     [Fact]
     public void Only_heroes_with_a_walker_walk()
     {

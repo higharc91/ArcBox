@@ -4,6 +4,7 @@ using Tactics.Game;
 using Tactics.Logic;
 using Tactics.Presentation.Beats;
 using Tactics.Presentation.Board;
+using Tactics.Presentation.World;
 
 namespace Tactics.Presentation.Tests.Board;
 
@@ -135,5 +136,57 @@ public sealed class MarkRuleTests
         var drawn = UnitPlan.Build(Battle(Downed()), River, Art.Value, Fit);
         Assert.Equal(drawn, MarkRule.ClearOfPops(drawn, [], Art.Value));
         Assert.Equal(drawn, MarkRule.ClearOfPops(drawn, default, Art.Value));
+    }
+
+    [Theory]
+    [InlineData(StageStep.Off, true)]           // the plain board
+    [InlineData(StageStep.Forming, false)]      // the walk-in
+    [InlineData(StageStep.Fighting, true)]
+    [InlineData(StageStep.Fading, true)]        // the last blow's numbers still play
+    [InlineData(StageStep.Results, false)]
+    [InlineData(StageStep.FallingIn, false)]
+    [InlineData(StageStep.Waking, false)]
+    [InlineData(StageStep.Walking, false)]
+    public void Marks_show_only_while_the_fight_is_played(StageStep stage, bool shown)
+        => Assert.Equal(shown, MarkRule.Shown(stage));
+
+    [Fact]
+    public void Every_step_of_the_timeline_has_a_say() => Assert.Equal(8, Enum.GetValues<StageStep>().Length);     // a new step needs a line above
+
+    [Fact]
+    public void Bare_units_have_no_bar_count_icons_or_arrow_and_are_otherwise_as_they_were()
+    {
+        ImmutableArray<UnitView> units = [Unit(Hero, "Party", 3, 3) with { Conditions = ["poisoned"] }, Unit(Other, "Party", 5, 3, hp: 0, life: "Downed", countdown: 2),
+            Unit(Foe, "Enemy", 9, 3)];
+        var drawn = UnitPlan.Build(Battle(units) with { Active = Hero }, River, Art.Value, Fit);
+        Assert.Contains(drawn, u => !u.Icons.IsEmpty);
+        Assert.Contains(drawn, u => u.ArrowAt is not null);
+
+        var bare = MarkRule.Bare(drawn);
+
+        Assert.All(bare, u => Assert.True(u.Bar is null && u.Countdown is null && u.Icons.IsEmpty && u.ArrowAt is null));
+        Assert.Equal(drawn.Select(u => (u.Id, u.Feet, u.Order, u.Anim, u.Ring)), bare.Select(u => (u.Id, u.Feet, u.Order, u.Anim, u.Ring)));
+    }
+
+    // The hardware check (§5.6): in the walk-in every hero had a bar, where the world shows none. Through the director: none in the walk-in,
+    // all of them once the fight's on.
+    [Fact]
+    public void A_walk_in_has_no_bars_and_the_fight_has_them()
+    {
+        var script = new World.StageScript();
+        var director = script.Director();
+        director.Receive(World.StageScript.Walking());
+        director.Receive(World.StageScript.Fight(World.StageScript.Battle()), script.Walkers(new Tile(12, 12), new Tile(12, 13)));
+        var terrain = new BoardTerrain(script.Map, null);
+        var fit = BoardFit.For(terrain, Pack.Art);
+        ImmutableArray<BoardUnit> Now() => MarkRule.Apply(UnitPlan.Build(World.StageScript.Battle(), terrain, Art.Value, fit, director.Places, director.Poses),
+            new BeatFrame(ImmutableDictionary<UnitId, UnitPlace>.Empty, ImmutableDictionary<UnitId, UnitPose>.Empty, [], Vector2.Zero), Art.Value,
+            MarkRule.Shown(director.Stage));
+
+        Assert.Equal(StageStep.Forming, director.Stage);
+        Assert.All(Now(), u => Assert.Null(u.Bar));
+        World.StageScript.Run(director, director.Intro!.End + 0.05);
+        Assert.Equal(StageStep.Fighting, director.Stage);
+        Assert.All(Now(), u => Assert.NotNull(u.Bar));
     }
 }
