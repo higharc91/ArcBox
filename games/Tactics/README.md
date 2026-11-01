@@ -33,11 +33,19 @@ Muster lands on the walk screen. By default the VIP leaves it with `battles`, pi
 
 | Option | What the bots do |
 |---|---|
-| `--fight` | attack what's in reach and walk towards the foes; without it they only end their turns |
+| `--fight` | play to win from what the phone shows (below); without it they only end their turns |
+| `--lose[=<n>]` | lose the first n fights (default every one): walk up to the foes and do nothing there |
+| `--classes=a,b,…` | the class each bot picks, in order (default fighter, cleric, rogue, wizard, paladin, ranger) |
 | `--area`, `--sit-out=turn,react`, `--leave` | prefer area spells; let the turn and reaction timers run out; leave the battle to the AI |
 | `--then=next` | play the next battle after the Results, for ever, instead of ending the session |
 | `--people=<n>` | wait for n real phones to take a seat first, to play alongside the bots |
 | `--host` | open the room and watch the host view themselves, with no TV |
+| `--host --shown` | and answer every beat with `shown` at once, so a battle with no TV takes seconds: for trying the bots' play over many battles |
+| `--walk-to-stamp[=<n>]` | fight n times (default 1) where the party walks into a fight, not from the list (below) |
+
+**How `--fight` plays.** Each bot reads its turn screen's previews, as a player would. A friend who is down or below half health is healed first, and a healer keeps its spells for that, attacking with what costs nothing. Otherwise it takes the use with the most expected damage, a kill worth more, so the party finishes the hurt foe before spreading its blows, and never one that would hurt a friend. The party holds the ground it started on and takes on whatever comes within 7 tiles of it. Once the foes have kept away for two of the party's turns each, or two or fewer are left, it goes after them, the weakest first. It walks by the map's own ground: round the river to the ford, and never standing in water when dry ground will do. With no TV (`--host --shown`), 4 bots at level 1 won River Crossing 40 times out of 40, and the Ford Assault 4 times out of 20. The old play, which walked straight at the nearest foe and used the first ability in reach, lost River Crossing every time on the TV.
+
+**`--walk-to-stamp`** needs to know where the party stands: the TV's `--walk-log` lines through `--tv-log`, or `--host`. From there `route.cs` (`dotnet run tools/tactics-playtest/route.cs -- <rules> <region> <map> <x> <y>`) gives the way into the stamp of `--encounter`'s map, by the server's own walking rule. The leader taps it out, a step at a time, waiting for each, and the step into the stamp starts the fight. After each results the VIP goes on, so the next walk starts where the last fight left the party: after a loss, at the recovery spawn, about 100 steps away. After the last fight the party walks on a few steps, and the VIP ends the session.
 
 Every bot logs each move, ability and end of turn, and a timeout says which screen each bot was on. With no TV nothing sends `shown`, so each AI beat waits its fallback (400 ms plus 250 ms an event, at most 6 s), and a battle takes minutes: a `--host` run with `--timeout=40` times out mid-battle with the bots still playing, which is the "no turn logged" the handoff saw.
 
@@ -67,6 +75,9 @@ The TV's dev flag `--walk-log` prints what the bots and the e2e run read:
 | `ARCBOX_GAME=tactics` | a battle to its Results, with music, effects, the ending sting and a voice clip on the TV |
 | `… ARCBOX_RECONNECT=1` | the TV is killed at `ARCBOX_AT_BEAT` (default 30) and relaunched; it catches up to a newer beat, never an old one |
 | `… ARCBOX_RESTART=1` | the server restarts at that beat; the TV shows Resuming and plays on |
+| `ARCBOX_STAGE=1` | a Development seed puts the party four steps from River Crossing's stamp (`ARCBOX_ENCOUNTER=ford_assault`: the Ford Assault's) with its fight on offer. The bots walk in and the TV draws the fight in place. They lose it on purpose, and the party wakes at the recovery spawn. They walk all the way back in, the same encounter starts in place again, and they fight to win: victory music, the fall-in, then a step. Shots of the walk-in, the fight and the results over the world |
+| `… ARCBOX_RECONNECT=1`, `… ARCBOX_RESTART=1` | with `ARCBOX_STAGE=1`: the TV is killed, or the server restarted, mid-way through the first fight. The TV catches up with no old beat, or plays on from a newer one |
+| `… ARCBOX_DROP_SIGNALS=1` | with `ARCBOX_STAGE=1`: the TV runs with `--drop-signals`, so the game paces every beat on its fallbacks. Everything above must still happen |
 | `… ARCBOX_WALK=1` | the party walks Ashen Ford. The TV's step numbers climb and the leader really moves on it. The server restarts and the party is on its saved tile. The TV is killed and the new one snaps to the party's tile. The leader's phone is cut and no step starts after the 750 ms lease. The median press-to-`WALK` time is at most `ARCBOX_WALK_LATENCY` (default 100 ms). Screenshots of the party walking and stopped |
 
 `ARCBOX_WALK_SCRIPT` changes the route; it needs `pause:restart` and then `pause:tv`. Shots and logs land in `ARCBOX_E2E_OUT` (default `/tmp/arcbox-tv-e2e-<time>`). Software rendering on Linux draws a frame every 30 to 50 ms, so judge its screenshots for what's on them, not for smoothness. The numbers from the first Linux runs are in [the Task 11 report](../../docs/superpowers/reports/2026-10-31-tactics-overworld/task11-bots-e2e.md).

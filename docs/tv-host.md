@@ -332,6 +332,11 @@ director every fight is on the plain board, as before the world.
   `tactics-beat-stage-*` shots of the walk-in, the grid and each step of the timeline.
 - **The world isn't ready**: the plain board plays the fight and the stage takes over, with a 0.25 s fade, once the world opens. A world
   that can't be drawn leaves the fight on the plain board. A world brought back for a fight comes back with no card and no fade.
+- **End to end**: `ARCBOX_STAGE=1 tools/tv-e2e.sh` has bot phones walk into River Crossing's stamp, lose, wake at the recovery spawn,
+  walk back and win, with `ARCBOX_RECONNECT=1`, `ARCBOX_RESTART=1` or `ARCBOX_DROP_SIGNALS=1` for a TV killed, a server restarted or
+  no signals at all ([the Tactics README](../games/Tactics/README.md#bot-phones-and-the-tv-end-to-end)). A TV that falls behind the
+  game (bots play faster than software rendering draws) skips a results screen the game has already left: the bots' VIP waits for
+  the TV's `TACTICS screen tactics-results` before going on, as someone watching the TV would.
 
 ## Adding a game scene
 

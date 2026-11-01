@@ -10,6 +10,9 @@
 #   ARCBOX_GAME=tactics ARCBOX_RESTART=1 GODOT=… tools/tv-e2e.sh                    the server restarts mid-battle
 #   ARCBOX_GAME=tactics ARCBOX_WALK=1 GODOT=… tools/tv-e2e.sh                       the party walks Ashen Ford: a server restart, a
 #                                                                                   killed TV, the press-to-TV time and a dropped phone
+#   ARCBOX_STAGE=1 GODOT=… tools/tv-e2e.sh                                          a fight in the world: walk in, lose, wake, walk back
+#                                                                                   in and win (with ARCBOX_RECONNECT=1, ARCBOX_RESTART=1
+#                                                                                   or ARCBOX_DROP_SIGNALS=1 too)
 #
 # What it does (REDLINE; Tactics is below):
 #   1. builds the phone app (web/play/dist), the server and the TV host (skip with --skip-build);
@@ -76,6 +79,23 @@
 #   - the TV took screenshots of the party walking and stopped, has an AUDIO Music line, and no errors.
 # The run's numbers are in phones.log: `LATENCY`, `DROP … after … ms`.
 #
+# In the world (ARCBOX_STAGE=1): the server's Development seed (Tactics:Seed) starts the campaign after Ashen Ford's vote, four
+# steps from River Crossing's stamp, with its fight on offer (ARCBOX_ENCOUNTER=ford_assault: the Ford Assault's, after the other
+# vote). The TV has --walk-log, and the bots run --walk-to-stamp=2 --lose=1 --fight --tv-log: they walk into the stamp, lose that
+# fight on purpose, wake at the recovery spawn, walk all the way back in, and fight it again to win. It fails unless:
+#   - both walk-ins started a fight (the bots' `STAMP the fight starts`), and the TV walked each in in place
+#     (`TACTICS stage Forming in place`) on the encounter's map;
+#   - the first fight was lost, and the TV then showed `TACTICS stage Waking` and snapped the party to the recovery spawn's middle;
+#   - after the wake the TV showed a second battle on the map, walked in in place, and the bots' results name the same encounter;
+#   - the second fight's results are on the TV, with the victory music at a win (defeat at a loss), and after a win
+#     `TACTICS stage FallingIn`, then `TACTICS stage Walking` and a step: the fall-in, and walking again;
+#   - ARCBOX_RECONNECT=1: the TV is killed at ARCBOX_AT_BEAT of the first fight and relaunched; it says room <CODE>, catches up
+#     (`TACTICS catch-up to beat <n>`), and the first beat it plays is n, newer than any it played before: no replay;
+#   - ARCBOX_RESTART=1: the server restarts at that beat; the TV is back in the room and plays on from a newer beat;
+#   - ARCBOX_DROP_SIGNALS=1: the TV runs with --drop-signals, so the game hears no `shown` and paces every beat on its fallbacks;
+#     the TV logs the dropped signals, and all of the above still happens;
+#   - the TV took shots of the walk-in, the fight in place and the results, has music, and no errors.
+#
 # On Windows (Git Bash) there's no Xvfb: the TV opens a real window on your screen, at TV_RES, with Godot's default rendering
 # driver, and processes are stopped with taskkill, as Windows has no TERM. Put the .NET SDK's dotnet first on PATH and set GODOT
 # to the *_console.exe (the plain exe has no stdout to read ROOM from). Only Tactics was run there. Git Bash has no
@@ -89,6 +109,8 @@
 #   ARCBOX_RECONNECT 1 = (tactics) kill and relaunch the TV mid-battle, and check it catches up
 #   ARCBOX_AT_BEAT   (tactics) the beat at which to kill the TV or restart the server (default 30)
 #   ARCBOX_WALK      1 = (tactics) walk the world rather than fight, with a server restart, a TV kill and a dropped phone (above)
+#   ARCBOX_STAGE     1 = fights where the party walks into them, one lost and one fought again (above); implies ARCBOX_GAME=tactics
+#   ARCBOX_DROP_SIGNALS 1 = (stage) the TV sends the game no signals, so every beat goes on its fallback
 #   ARCBOX_WALK_SCRIPT (walk) the bots' --walk script; it must have pause:restart and then pause:tv
 #   ARCBOX_WALK_PRESSES (walk) presses timed for the latency (default 20)
 #   ARCBOX_ENCOUNTER (tactics) the encounter (default river_crossing)
@@ -118,7 +140,9 @@ set -euo pipefail
 
 ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 GODOT=${GODOT:-$(command -v godot || true)}
-GAME=${ARCBOX_GAME:-redline}
+STAGE=${ARCBOX_STAGE:-}
+DROP_SIGNALS=${ARCBOX_DROP_SIGNALS:-}
+GAME=${ARCBOX_GAME:-$([[ "$STAGE" == "1" ]] && echo tactics || echo redline)}
 PHONES=${ARCBOX_PHONES:-$([[ "$GAME" == "tactics" ]] && echo 4 || echo 3)}
 RES=${TV_RES:-1280x720}
 PRESET=${TV_PRESET:-low}
@@ -173,6 +197,10 @@ if [[ "$GAME" == "tactics" && ( "$FULL" == "1" || "$SWAP" == "1" || "${TV_REMATC
 fi
 if [[ "$WALK" == "1" && ( "$GAME" != "tactics" || "$RECONNECT" == "1" || "$RESTART" == "1" ) ]]; then
   echo "ARCBOX_WALK=1 is for ARCBOX_GAME=tactics, and does its own restart and reconnect." >&2
+  exit 2
+fi
+if [[ ( "$STAGE" == "1" || "$DROP_SIGNALS" == "1" ) && ( "$GAME" != "tactics" || "$WALK" == "1" ) ]]; then
+  echo "ARCBOX_STAGE=1 and ARCBOX_DROP_SIGNALS=1 are for ARCBOX_GAME=tactics, without ARCBOX_WALK=1." >&2
   exit 2
 fi
 if [[ "$RECONNECT" == "1" && "$RESTART" == "1" ]]; then
@@ -247,12 +275,23 @@ fi
 PORT=$(node -e 'const s=require("net").createServer();s.listen(0,"127.0.0.1",()=>{console.log(s.address().port);s.close()})')
 URL="http://127.0.0.1:$PORT"
 SERVER_DLL="$ROOT/src/ArcBox.Server/bin/Debug/net10.0/ArcBox.Server.dll"
+# ARCBOX_STAGE=1: a Development seed puts a new campaign four steps from the stamp of the encounter's map, with its beat on offer:
+# River Crossing after the parley, the Ford Assault after the vote to fight. Region-less encounters aren't staged.
+if [[ "$STAGE" == "1" ]]; then
+  case "$ENCOUNTER" in
+    river_crossing) STAGE_FLAG=ch1_skarrow_spared ;;
+    ford_assault) STAGE_FLAG=ch1_skarrow_slain ;;
+    *) echo "ARCBOX_STAGE=1 knows river_crossing and ford_assault, Ashen Ford's two fights, not $ENCOUNTER." >&2; exit 2 ;;
+  esac
+  STAGE_ENV="Tactics__Seed__Region=ashen_ford Tactics__Seed__At__0=96 Tactics__Seed__At__1=61 Tactics__Seed__Flags__0=$STAGE_FLAG"
+  STAGE_ENV+=" Tactics__Seed__Beats__0=ch1_mayors_request Tactics__Seed__Beats__1=ch1_the_ford_choice"
+fi
 # This run's own database, so a restart finds its rooms again (ARCBOX_RESTART) and no run sees another's.
 DB="$OUT/arcbox.db"
 # start_server <log>: the server on $URL and $DB, in the background; returns once it answers.
 start_server() {
   local out=$1
-  (cd "$ROOT/src/ArcBox.Server" && exec env ASPNETCORE_ENVIRONMENT=Development Tactics__BattleList=true Storage__Path="$DB" ${ARCBOX_SERVER_ENV:-} dotnet "$SERVER_DLL" --urls "$URL") > "$out" 2>&1 &
+  (cd "$ROOT/src/ArcBox.Server" && exec env ASPNETCORE_ENVIRONMENT=Development Tactics__BattleList=true Storage__Path="$DB" ${STAGE_ENV:-} ${ARCBOX_SERVER_ENV:-} dotnet "$SERVER_DLL" --urls "$URL") > "$out" 2>&1 &
   SERVER_PID=$!
   for _ in $(seq 1 60); do
     curl -sf -o /dev/null "$URL/" && return 0
@@ -290,7 +329,7 @@ log "starting the TV ($RES, preset $PRESET)"
 : > "$OUT/tv.log"
 if [[ "$GAME" == "tactics" ]]; then
   QUIT_AFTER=1800
-  start_tv "$OUT/tv" --new-room --beat-log $([[ "$WALK" == "1" ]] && echo --walk-log)
+  start_tv "$OUT/tv" --new-room --beat-log $([[ "$WALK" == "1" || "$STAGE" == "1" ]] && echo --walk-log) $([[ "$DROP_SIGNALS" == "1" ]] && echo --drop-signals)
 else
   start_tv "$OUT/tv" --new-room --autostart="redline:$PHONES"
 fi
@@ -464,6 +503,176 @@ if [[ "$GAME" == "tactics" && "$WALK" == "1" ]]; then
   [[ -n "$(after 0 '/^AUDIO Music /')" ]] || walk_fail "an AUDIO Music line"
 
   if (( PHONES_EXIT != 0 )) || [[ -n "$ERRORS" ]] || (( WALK_FAIL )); then
+    log "FAILED (phones exit $PHONES_EXIT)"
+    exit 1
+  fi
+  log "OK"
+  exit 0
+fi
+
+# ---- 4s. Tactics in the world: the bots walk into the stamp, lose, wake at the recovery spawn, walk back in and fight it again.
+if [[ "$GAME" == "tactics" && "$STAGE" == "1" ]]; then
+  log "stage: $PHONES bots walk into $ENCOUNTER's stamp twice, losing the first fight$([[ "$RECONNECT" == "1" ]] && echo ", the TV is killed at beat $AT_BEAT")$([[ "$RESTART" == "1" ]] && echo ", the server restarts at beat $AT_BEAT")$([[ "$DROP_SIGNALS" == "1" ]] && echo ", the TV sends no signals")"
+  set +e
+  : > "$OUT/phones.log"
+  node "$ROOT/tools/tactics-playtest/bots.cjs" --server="$URL" --room="$CODE" --players="$PHONES" --encounter="$ENCOUNTER" \
+    --walk-to-stamp=2 --lose=1 ${ARCBOX_BOT_ARGS:---fight} --hold="$HOLD" --timeout=1500 --tv-log="$OUT/tv.log" > >(tee "$OUT/phones.log") 2>&1 &
+  PHONES_PID=$!
+  beats_played() { awk -v from="${1:-0}" 'NR > from && /^BEAT [0-9]+ / && $2 > n { n = $2 } END { print n + 0 }' "$OUT/tv.log"; }
+  MARK=0 LAST_BEAT=0 OLD_TV_UP=0
+  if [[ "$RECONNECT" == "1" || "$RESTART" == "1" ]]; then
+    # In the first fight: beats count from 1 in each battle.
+    while kill -0 "$PHONES_PID" 2>/dev/null && (( $(beats_played) < AT_BEAT )); do sleep 0.2; done
+    MARK=$(wc -l < "$OUT/tv.log")
+    LAST_BEAT=$(beats_played)
+    if (( LAST_BEAT < AT_BEAT )); then
+      log "stage: the first fight ended before beat $AT_BEAT"
+    elif [[ "$RECONNECT" == "1" ]]; then
+      log "reconnect: killing the TV at beat $LAST_BEAT, mid-fight (log line $MARK)"
+      signal_pid KILL "$TV_PID"
+      sleep 3
+      kill -0 "$TV_PID" 2>/dev/null && OLD_TV_UP=1
+      start_tv "$OUT/tv-relaunched" --beat-log --walk-log $([[ "$DROP_SIGNALS" == "1" ]] && echo --drop-signals)
+    else
+      log "restart: stopping the server at beat $LAST_BEAT, mid-fight (log line $MARK)"
+      stop_pid "$SERVER_PID" "server"
+      sleep 2
+      start_server "$OUT/server-restarted.log"
+      log "restart: the server is back"
+    fi
+  fi
+  wait "$PHONES_PID"
+  PHONES_EXIT=$?
+  PHONES_PID=""
+  set -e
+  log "letting the TV finish its shots ($LINGER s)"
+  sleep "$LINGER"
+  cleanup
+  TV_PID="" XVFB_PID="" SERVER_PID=""
+
+  # ---- 5s. the checks
+  STAGE_FAIL=0
+  stage_fail() { log "stage: MISSING $*"; STAGE_FAIL=1; }
+  after() { awk -v from="$1" -v code="$CODE" "NR > from && ($2) { print NR; exit }" "$OUT/tv.log"; }
+  line_of() { sed -n "${1}p" "$OUT/tv.log"; }
+  ERRORS=$(awk '
+    pending != "" { if (tolower($0) !~ /^ *at: .*(alsa|audio|pulse)/) print pending; pending = "" }
+    /^ *\[[0-9]+\] / { next }
+    tolower($0) ~ /exception|error/ && tolower($0) !~ /alsa|audio|pulse/ { pending = $0 }
+    END { if (pending != "") print pending }' "$OUT/tv.log")
+  if [[ -n "$ERRORS" ]]; then
+    log "errors in the TV log:"
+    echo "$ERRORS"
+  fi
+  MAP=$(node -e 'console.log(JSON.parse(require("fs").readFileSync(process.argv[1], "utf8")).map)' "$ROOT/content/tactics/base/rules/encounters/$ENCOUNTER.json")
+  RECOVERY=$(node -e 'const fs = require("fs"), path = require("path"); const dir = process.argv[1];
+    for (const f of fs.readdirSync(dir)) { const r = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8"));
+      if ((r.stamps || []).some((s) => s.map === process.argv[2])) { console.log(r.spawns.recovery.join(" ")); break; } }' \
+    "$ROOT/content/tactics/base/rules/world" "$MAP")
+  OUTCOMES=$(grep -oE '^[0-9:]+ (Won|Lost|Fled) at .*:' "$OUT/phones.log" | sed -E 's/^[0-9:]+ //; s/:$//' || true)
+  log "stage: the fights: $(paste -sd';' <<< "$OUTCOMES" | sed 's/;/; /g')"
+
+  # Each walk-in: the bots' step into the stamp started a fight, and the TV drew it in place.
+  STARTS=$(grep -c 'STAMP the fight starts' "$OUT/phones.log" || true)
+  (( STARTS == 2 )) && log "stage: both walk-ins started a fight" || stage_fail "two walk-ins that start a fight (the bots logged $STARTS)"
+  FIGHTS=$(grep -nE "^TACTICS screen tactics-battle-$MAP(-|$)" "$OUT/tv.log" | cut -d: -f1 | paste -sd' ' || true)
+  INPLACE=$(grep -c '^TACTICS stage Forming in place$' "$OUT/tv.log" || true)
+  log "stage: the TV showed the battle at lines ${FIGHTS:-none}, and walked in in place $INPLACE times"
+  (( INPLACE >= 2 )) || stage_fail "TACTICS stage Forming in place for each fight (it was $INPLACE)"
+
+  # The first fight was lost, and the party woke at the recovery spawn.
+  FIRST=$(sed -n 1p <<< "$OUTCOMES")
+  SECOND=$(sed -n 2p <<< "$OUTCOMES")
+  [[ "$FIRST" == Lost\ at\ * ]] || stage_fail "the first fight lost, with --lose=1 (it was ${FIRST:-nothing})"
+  RESULTS1=$(after "$MARK" '$0 == "TACTICS screen tactics-results"')
+  [[ -n "$RESULTS1" ]] || RESULTS1=$(after 0 '$0 == "TACTICS screen tactics-results"')
+  WOKE=$(after "${RESULTS1:-0}" '/^TACTICS stage Waking/')
+  SNAP=$(after "${WOKE:-0}" '/^TACTICS walk snapped to /')
+  WANT=$(awk -v t="$RECOVERY" 'BEGIN { split(t, a, " "); printf "%.1f %.1f", a[1] + 0.5, a[2] + 0.5 }')
+  if [[ -n "$WOKE" && -n "$SNAP" ]]; then
+    GOT=$(line_of "$SNAP" | awk '{ print $5 " " $6 }')
+    log "stage: woke (line $WOKE), and snapped to $GOT; the recovery spawn is $RECOVERY"
+    [[ "$GOT" == "$WANT" ]] || stage_fail "the party woken on the recovery spawn's middle, $WANT (it was $GOT)"
+  else
+    stage_fail "TACTICS stage Waking after the first results, then a snap to the recovery spawn"
+  fi
+
+  # The second walk-in played the same encounter, in place, after the wake.
+  SECOND_FIGHT=$(after "${SNAP:-0}" "index(\$0, \"TACTICS screen tactics-battle-$MAP\") == 1")     # with a moment after it, or not
+  [[ -n "$SECOND_FIGHT" ]] || stage_fail "a second battle on $MAP after the wake"
+  [[ -n "$SECOND" && "${SECOND#* at }" == "${FIRST#* at }" ]] && log "stage: the second fight was the same encounter: $SECOND" \
+    || stage_fail "the same encounter twice (first ${FIRST:-nothing}, then ${SECOND:-nothing})"
+  if [[ -n "$SECOND_FIGHT" ]]; then
+    n=$(after "$SECOND_FIGHT" '/^TACTICS stage Forming/')
+    [[ -n "$n" && "$(line_of "$n")" == "TACTICS stage Forming in place" ]] || stage_fail "the second fight walked in in place"
+  fi
+
+  # The second fight to its end: the music at its results, and after a win, the fall-in and walking again.
+  RESULTS2=$(after "${SECOND_FIGHT:-0}" '$0 == "TACTICS screen tactics-results"')
+  if [[ -z "$RESULTS2" ]]; then
+    stage_fail "the second fight's results on the TV"
+  else
+    ENDING=$(awk -v to="$RESULTS2" 'NR < to && /^AUDIO Music / { m = $3 } END { print m }' "$OUT/tv.log")
+    log "stage: music at the second results: $ENDING"
+    case "$SECOND" in
+      Won\ *)
+        [[ "$ENDING" == "victory" ]] || stage_fail "the victory music at a win (it was $ENDING)"
+        FELL=$(after "$RESULTS2" '/^TACTICS stage FallingIn/')
+        WALKED=$(after "${FELL:-$RESULTS2}" '/^TACTICS stage Walking/')
+        STEP=$(after "${WALKED:-$RESULTS2}" '/^WALK [0-9]+ /')
+        [[ -n "$FELL" && -n "$WALKED" && -n "$STEP" ]] && log "stage: fell in (line $FELL), walking (line $WALKED), and a step: $(line_of "$STEP")" \
+          || stage_fail "the fall-in after the win, then walking and a step"
+        ;;
+      Lost\ *) [[ "$ENDING" == "defeat" ]] || stage_fail "the defeat music at a loss (it was $ENDING)" ;;
+    esac
+  fi
+
+  # The TV killed mid-fight: back in the room, a catch-up, and no beat it had played before.
+  if [[ "$RECONNECT" == "1" ]]; then
+    (( LAST_BEAT >= AT_BEAT )) || stage_fail "beat $AT_BEAT before the first fight ended"
+    (( OLD_TV_UP == 0 )) || stage_fail "the old TV gone: it was still running when the new one started"
+    BACK=$(after "$MARK" '$0 == "ROOM " code')
+    CAUGHT=$(after "${BACK:-$MARK}" '/^TACTICS catch-up to beat /')
+    BEAT=$(after "${BACK:-$MARK}" '/^BEAT [0-9]+ /')
+    if [[ -z "$BACK" || -z "$CAUGHT" || -z "$BEAT" ]]; then
+      stage_fail "ROOM $CODE, a catch-up and a beat from the relaunched TV"
+    else
+      WANT_BEAT=$(line_of "$CAUGHT" | awk '{ sub(",", "", $5); print $5 }')
+      GOT_BEAT=$(line_of "$BEAT" | awk '{ print $2 }')
+      log "reconnect: $(line_of "$CAUGHT") · then beat $GOT_BEAT; beat $LAST_BEAT was the last before it died"
+      [[ "$GOT_BEAT" == "$WANT_BEAT" ]] || stage_fail "the catch-up's beat first (it said $WANT_BEAT and played $GOT_BEAT)"
+      (( GOT_BEAT > LAST_BEAT )) || stage_fail "a beat newer than $LAST_BEAT first: an old beat came back ($GOT_BEAT)"
+      n=$(after "$BACK" '/^TACTICS stage /')
+      log "reconnect: the new TV's first stage: $(line_of "${n:-0}")"
+    fi
+  fi
+
+  # The server restarted mid-fight: the TV back in the room and on from a newer beat, as ARCBOX_RESTART=1 checks a plain fight.
+  if [[ "$RESTART" == "1" ]]; then
+    (( LAST_BEAT >= AT_BEAT )) || stage_fail "beat $AT_BEAT before the first fight ended"
+    RESUMING=$(after "$MARK" '$0 == "TACTICS screen tactics-resuming"')
+    BACK=$(awk -v from="$MARK" -v to="${RESULTS1:-0}" -v code="$CODE" 'NR > from && (to == 0 || NR < to) && $0 == "ROOM " code { n = NR } END { print n + 0 }' "$OUT/tv.log")
+    BEFORE_BACK=$(awk -v to="$BACK" 'NR < to && /^BEAT [0-9]+ / && $2 > n { n = $2 } END { print n + 0 }' "$OUT/tv.log")
+    n=$(after "$BACK" '/^BEAT [0-9]+ /')
+    GOT_BEAT=$([[ -n "$n" ]] && line_of "$n" | awk '{ print $2 }' || true)
+    if (( BACK > 0 )) && [[ -n "$GOT_BEAT" ]] && (( GOT_BEAT > BEFORE_BACK )); then
+      log "restart: $([[ -n "$RESUMING" ]] && echo "Resuming at line $RESUMING; ")the TV was back at line $BACK and played on from beat $GOT_BEAT, after $BEFORE_BACK"
+    else
+      stage_fail "the TV back in room $CODE after the restart, and on from a newer beat than $BEFORE_BACK"
+    fi
+  fi
+
+  [[ -n "$(after 0 '/^AUDIO Music /')" ]] || stage_fail "an AUDIO Music line"
+  if [[ "$DROP_SIGNALS" == "1" ]]; then
+    DROPPED=$(grep -c "^Host signal 'shown' dropped" "$OUT/tv.log" || true)
+    (( DROPPED > 0 )) && log "stage: the TV dropped $DROPPED shown signals, and the fights went on without them" || stage_fail "dropped shown signals in the TV log"
+  fi
+  for shot in stage-forming stage-fighting stage-results tactics-results; do
+    SHOT=$(find "$OUT" -name "*$shot*.png" | sort | tail -1)
+    [[ -n "$SHOT" ]] && log "a shot of $shot: $SHOT" || stage_fail "a screenshot of $shot"
+  done
+
+  if (( PHONES_EXIT != 0 )) || [[ -n "$ERRORS" ]] || (( STAGE_FAIL )); then
     log "FAILED (phones exit $PHONES_EXIT)"
     exit 1
   fi

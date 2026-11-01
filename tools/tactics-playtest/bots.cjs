@@ -10,7 +10,15 @@
 //   --encounter=<id>     default river_crossing
 //   --hold=<seconds>     how long each screen stays up: between class picks, before the encounter pick, on the results
 //                        (default 3; a run taking screenshots wants the phases on air for a moment)
-//   --fight              attack anything in reach and walk toward the foes; without it the bots only end their turns
+//   --fight              play to win, from what the phone shows: heal a friend who's down or badly hurt first (a healer keeps its
+//                        spells for that and attacks with cantrips), else the use that previews the most damage, a kill worth more,
+//                        so the party finishes off the hurt foe; never one that would hurt a friend. The party holds the ground it
+//                        started on and takes on whatever comes within 7 tiles of it, walking by the map's own ground (round the river
+//                        to the ford, never standing in water when dry ground will do); once the foes keep away for two of the party's
+//                        turns each, or two or fewer are left, it goes after them, the weakest first. Without --fight the bots only
+//                        end their turns. River Crossing at level 1 with 4 bots: 40 won of 40 with no TV (--host --shown)
+//   --lose[=<n>]         lose the first n fights (default every one) on purpose: walk up to the foes and do nothing there
+//   --classes=a,b,…      the class each bot picks at Muster, in order (default fighter, cleric, rogue, wizard, paladin, ranger)
 //   --leave              once the battle is on, every bot disconnects, so the AI plays each hero: a whole battle with nobody
 //                        at a phone. It exits at that point; the TV runs on to Results, so give --quit-after room
 //   --sit-out=turn,react sit out what's named, so the game's timers run out as they do for a real player who's gone quiet: the
@@ -20,6 +28,12 @@
 //   --people=<n>         wait for n real phones to join and claim a seat before starting, so you can play alongside the bots:
 //                        tell the TV's room code to your phone, then choose a class on it (see "With your own phone" below)
 //   --then=end|next      after the results: end the session (default), or play the next battle, forever
+//   --walk-to-stamp[=<n>] fight n times (default 1) where the party walks into a fight, rather than from the battle list: from wherever
+//                        it stands, the leader walks it into the stamp of --encounter's map, a tap a step, by a route that
+//                        route.cs works out with the server's own walking rule (it needs dotnet); the step into the stamp starts the
+//                        fight. After each results the VIP goes on, so the next walk starts where that fight left the party (after a
+//                        loss, the recovery spawn). After the last, the party walks on a few steps and the VIP ends the session. It
+//                        needs to know where the party is: --tv-log with the TV's --walk-log, or --host
 //   --timeout=<seconds>  give up after this long (default 900)
 //
 // Phone views have no position and bots answer each view once, so walking is a scripted loop of its own. Without these modes the
@@ -40,6 +54,10 @@
 //   --tv-log=<file>           the TV's stdout, redirected: wait for `TACTICS world open:` and read WALK lines from it, and with the
 //                             TV's --walk-log, WALKAT lines, for when the TV heard the party had stopped
 //   --host                    this process opens the room and watches the host view, with no TV: enough for --walk-drop
+//   --shown                   with --host, answer every beat with `shown` at once, as a TV that draws in no time, so that a battle with
+//                             no TV takes seconds rather than minutes: for trying the bots' play over many battles
+//
+// BOTS_DEBUG=1 in the environment logs the board as each bot sees it on each of its turn views.
 //
 // Run it (on Windows, from Git Bash; the database goes in a temp file so the run leaves no campaign behind):
 //
@@ -100,9 +118,19 @@ const latencyPresses = count('walk-latency', 20);
 const floodSeconds = count('walk-flood', 10);
 const dropMode = opt('walk-drop') === undefined ? null : opt('walk-drop') === true ? 'kill' : String(opt('walk-drop'));
 const asHost = opt('host', false) === true;
+const answerShown = asHost && opt('shown', false) === true;
 const tvLog = opt('tv-log') ?? opt('room-log');
 const goDir = opt('go') && opt('go') !== true ? String(opt('go')) : null;
 const walking = Boolean(walkScript || latencyPresses || floodSeconds || dropMode);
+/** --lose[=<n>]: the fights to lose on purpose, the first n of them, or every one. */
+const loseFights = count('lose', Infinity);
+/** --walk-to-stamp[=<n>]: fights to walk into, from wherever the party is, one after another. */
+const stampFights = count('walk-to-stamp', 1);
+/** Fights over so far: the VIP counts them as it leaves each results screen. */
+let fightsDone = 0;
+/** When the VIP last went on from a results screen. */
+let resultsLeft = 0;
+const losing = () => fightsDone < loseFights;
 
 /** The phone's cadence while a direction is held, and its retry after a stop. */
 const PING_MS = 250;
@@ -113,7 +141,7 @@ const FLOOD_MS = 1000 / 60;
 const DROP_WATCH_MS = 120000;
 
 const NAMES = ['Ana', 'Bo', 'Cy', 'Dee', 'Eli', 'Fen'];
-const CLASSES = ['fighter', 'cleric', 'rogue', 'wizard', 'paladin', 'ranger'];
+const CLASSES = opt('classes') && opt('classes') !== true ? String(opt('classes')).split(',') : ['fighter', 'cleric', 'rogue', 'wizard', 'paladin', 'ranger'];
 const TICK_MS = 250;
 /** A turn view that hasn't changed after this long is one the game refused: end the turn instead of waiting for its timer. */
 const STUCK_MS = 4000;
@@ -123,7 +151,158 @@ const SIT_OUT_MS = 65000;
 const RECONNECT_MS = Array.from({ length: 120 }, () => 1000);
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+/** Battle tiles are [x, y]; reach and range are Manhattan. */
+const dist = (a, b) => Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
+
+const RULES = path.join(__dirname, '../../content/tactics/base/rules');
+const [WATER, DIFFICULT, IMPASSABLE, DEEP] = [1, 2, 4, 16];
+/** Paths.StepCost's climb: a Jump of 2, the default. */
+const JUMP = 2;
+const maps = new Map();
+/**
+ * A battle map from its file, as the bots need it: each tile's height and flags, and the tiles a prop blocks. Null for a map they can't
+ * read, when they walk by the phone's moves alone.
+ */
+function mapOf(id) {
+  if (!maps.has(id)) {
+    let map = null;
+    try {
+      const file = JSON.parse(fs.readFileSync(path.join(RULES, 'maps', `${id}.json`), 'utf8'));
+      const bytes = Buffer.from(file.tiles, 'base64');
+      const [w, h] = file.size;
+      const blocked = new Set((file.props ?? []).filter((p) => p.blocks).map((p) => `${p.at[0]},${p.at[1]}`));
+      map = {
+        w, h,
+        height: (x, y) => bytes[(y * w + x) * 3],
+        flags: (x, y) => bytes[(y * w + x) * 3 + 2],
+        walkable: (x, y) => x >= 0 && y >= 0 && x < w && y < h && !(bytes[(y * w + x) * 3 + 2] & (IMPASSABLE | DEEP)) && !blocked.has(`${x},${y}`),
+        far: new Map(),
+      };
+    } catch {
+      // walk by the phone's moves alone
+    }
+    maps.set(id, map);
+  }
+  return maps.get(id);
+}
+
+const inWater = (map, [x, y]) => Boolean(map && x >= 0 && y >= 0 && x < map.w && y < map.h && map.flags(x, y) & WATER);
+
+/**
+ * How far each tile is from <goal> on foot, in Move, by Paths.StepCost's rule on the map's own ground (no units, no changed heights):
+ * so a hero goes round the river to the ford rather than standing on the bank nearest a foe across it. A flood back from the goal.
+ */
+function farFrom(map, goal) {
+  const key = `${goal[0]},${goal[1]}`;
+  if (map.far.has(key)) return map.far.get(key);
+  const far = new Map([[key, 0]]);
+  const open = [[0, goal[0], goal[1]]];
+  while (open.length) {
+    open.sort((a, b) => b[0] - a[0]);
+    const [cost, x, y] = open.pop();
+    if (cost > far.get(`${x},${y}`)) continue;
+    for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+      const [fx, fy] = [x + dx, y + dy];      // a step from (fx, fy) onto (x, y)
+      if (!map.walkable(fx, fy)) continue;
+      const onto = x === goal[0] && y === goal[1] || map.walkable(x, y);
+      if (!onto) continue;
+      const climb = map.height(x, y) - map.height(fx, fy);
+      if (climb > JUMP) continue;
+      const step = (map.flags(x, y) & DIFFICULT ? 2 : 1) + Math.max(0, climb - 1);
+      const next = cost + step;
+      if (next < (far.get(`${fx},${fy}`) ?? Infinity)) {
+        far.set(`${fx},${fy}`, next);
+        open.push([next, fx, fy]);
+      }
+    }
+  }
+  map.far.set(key, far);
+  return far;
+}
+
+/**
+ * The best use of this turn's action or bonus action, or null: what a player who reads the phone's previews would pick. A heal for a
+ * friend who's down or badly hurt comes first; then the most expected damage, a kill worth more, so the party finishes off the hurt foe
+ * rather than spreading its blows. Anything that would hurt a friend is out, and so is a use that previews nothing (a buff, say).
+ */
+function bestUse(units, choices) {
+  const byId = new Map(units.map((u) => [u.id, u]));
+  const economy = choices.economy ?? {};
+  // A healer keeps its spells for healing: it attacks with what costs nothing (a cantrip, a weapon) while it has a heal to cast.
+  const healer = choices.abilities.some((a) => !a.item && a.targets.some((t) => t.affected.some((x) => x.heal > 0)));
+  let best = null;
+  for (const ability of choices.abilities) {
+    const cost = ability.cost ?? {};
+    if (cost.reaction || (cost.action && !economy.action) || (cost.bonus && !economy.bonus) || (!cost.action && !cost.bonus)) continue;
+    for (const target of ability.targets) {
+      let score = 0;
+      for (const a of target.affected) {
+        const u = byId.get(a.unit);
+        if (!u) continue;
+        if (u.side === 'Enemy') {
+          if (u.life !== 'Up') continue;
+          const left = u.hp + (u.tempHp ?? 0);
+          score += Math.min(a.damage, left) + (a.damage >= left ? 6 : 0);
+        } else {
+          if (a.damage > 0) score -= 100;
+          const missing = u.maxHp - u.hp;
+          if (a.heal > 0 && (u.life === 'Downed' || u.hp * 2 <= u.maxHp)) score += Math.min(a.heal, missing) + (u.life === 'Downed' ? 30 : 4);
+        }
+      }
+      const heals = target.affected.some((x) => x.heal > 0);
+      if (healer && !heals && cost.resource && Object.keys(cost.resource).length) score -= 8;
+      // An item is spent for good, so it has to be worth it; and an action beats a bonus action of the same worth, as the bonus can follow.
+      if (ability.item) score -= 3;
+      if (cost.bonus && !cost.action) score -= 0.5;
+      if (score >= 1 && (!best || score > best.score)) best = { score, ability, target };
+    }
+  }
+  return best;
+}
+
+/** The weakest foe, the nearest of those equally weak: the one the whole party goes for. */
+const weakest = (foes, from) => foes.reduce((a, b) => (b.hp < a.hp || (b.hp === a.hp && dist(from, b.at) < dist(from, a.at)) ? b : a));
+
+/**
+ * Where to walk to get nearer <goal>, or null to stand: the reachable tile nearest it on foot, on dry ground if that gets nearer (a hero
+ * in the ford fights from the river bed, and a goblin on the bank above doesn't), the ford only when nothing dry does, and the cheapest
+ * of those equally near.
+ */
+function stepTowards(data, goal, { wade = true, within = 0 } = {}) {
+  const { me, choices } = data;
+  const map = mapOf(data.map);
+  const far = map ? farFrom(map, goal) : null;
+  const near = (tile) => far?.get(`${tile[0]},${tile[1]}`) ?? 1000 + dist(tile, goal);
+  if (dist(me.at, goal) <= within) return null;
+  const closest = (moves) => moves.reduce((a, b) => (near(b.to) < near(a.to) || (near(b.to) === near(a.to) && b.cost < a.cost) ? b : a), moves[0]);
+  const dry = choices.moves.filter((m) => !inWater(map, m.to));
+  for (const moves of wade ? [dry, choices.moves] : [dry]) {
+    const best = moves.length ? closest(moves) : null;
+    if (best && near(best.to) < near(me.at)) return best;
+  }
+  return null;
+}
+
+/**
+ * How the party fights a battle, shared by every bot: each holds the ground it started on and lets the foes come to it, taking on any
+ * that come within ENGAGE tiles of the party's start, so it fights together and out of reach of whatever shoots from afar. Once the foes
+ * have kept away for a while (QUIET turns each of the party's in a row with nobody near), or two or fewer are left, it goes after them,
+ * the weakest first. Without that, a party would stand at its start for ever while an archer across the river kept its distance.
+ */
+const ENGAGE = 7;
+const QUIET = 2;
+const tactic = { home: new Map(), quiet: 0, advance: false };
+function newBattle() {
+  tactic.home.clear();
+  tactic.quiet = 0;
+  tactic.advance = false;
+}
+
 const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
+
+/** The TV's log or the host view (Watch), for the VIP to wait for the TV's results. */
+let tv = null;
+const RESULTS_WAIT_MS = 60000;
 
 /** Every bot, for a timeout to say what each was looking at. */
 const everyone = [];
@@ -240,8 +419,12 @@ class Bot {
   /** The player's move on a `turn` screen: one command per view. */
   turn() {
     const { me, units, choices } = this.view.data;
-    const foes = units.filter((u) => u.side === 'Enemy');
-    const dist = (a, b) => Math.max(Math.abs(a[0] - b[0]), Math.abs(a[1] - b[1]));
+    const foes = units.filter((u) => u.side === 'Enemy' && u.life === 'Up');
+    if (process.env.BOTS_DEBUG && this.debugSeen !== this.view.viewId) {
+      this.debugSeen = this.view.viewId;
+      log(`  ${this.name} at ${me.at} hp ${me.hp}/${me.maxHp} mv ${choices.economy?.moveLeft} | ${units.map((u) => `${u.name.slice(0, 6)}${u.side === 'Enemy' ? '!' : ''}@${u.at}:${u.hp}${u.life === 'Up' ? '' : u.life[0]}`).join(' ')}`);
+    }
+    if (losing()) return this.loseTurn(me, foes, choices);
     if (fight) {
       if (area) {
         const friends = units.filter((u) => u.side !== 'Enemy').map((u) => u.id);
@@ -254,21 +437,54 @@ class Bot {
           }
         }
       }
-      for (const ability of choices.abilities.filter((a) => !a.item && a.cost?.action)) {
-        const target = ability.targets.find((t) => foes.some((f) => f.id === t.target.unit));
-        if (target) {
-          log(`${this.name} uses ${ability.name}`);
-          return this.input('use', { ability: ability.ability, unit: target.target.unit });
+      const best = bestUse(units, choices);
+      if (best) {
+        const whom = units.find((u) => u.id === best.target.target.unit)?.name;
+        log(`${this.name} uses ${best.ability.name}${whom ? ` on ${whom}` : ''}`);
+        return this.input('use', {
+          ability: best.ability.ability, item: best.ability.item ?? undefined,
+          unit: best.target.target.unit ?? undefined, tile: best.target.target.tile ?? undefined,
+        });
+      }
+      if (!tactic.home.has(this.name)) tactic.home.set(this.name, me.at);
+      const home = tactic.home.get(this.name);
+      const starts = [...tactic.home.values()];
+      const close = foes.filter((f) => starts.some((h) => dist(f.at, h) <= ENGAGE));
+      if (close.length) tactic.quiet = 0;
+      if (!tactic.advance && foes.length <= 2) {
+        tactic.advance = true;
+        log(`${this.name}: ${foes.length} foe${foes.length === 1 ? '' : 's'} left, so the party goes after them`);
+      }
+      // Walk only while there's still an action to take where the walk ends: to the weakest foe near the party, or once the party goes
+      // after them, the weakest of all; otherwise back to where this hero started.
+      if (!this.moved && choices.economy?.action && foes.length) {
+        const after = tactic.advance ? foes : close;
+        const to = after.length ? stepTowards(this.view.data, weakest(after, me.at).at) : stepTowards(this.view.data, home, { wade: false, within: 1 });
+        if (to) {
+          this.moved = true;
+          log(`${this.name} moves${after.length ? '' : ' back'}`);
+          return this.input('move', { path: to.path });
         }
       }
-      if (!this.moved && foes.length && choices.moves.length) {
-        const near = (tile) => Math.min(...foes.map((f) => dist(tile, f.at)));
-        const best = choices.moves.reduce((a, b) => (near(b.to) < near(a.to) ? b : a));
-        if (near(best.to) < near(me.at)) {
-          this.moved = true;
-          log(`${this.name} moves`);
-          return this.input('move', { path: best.path });
-        }
+      if (!close.length && !tactic.advance && ++tactic.quiet >= QUIET * Math.max(1, tactic.home.size)) {
+        tactic.advance = true;
+        log(`${this.name}: the foes keep away, so the party goes after them`);
+      }
+    }
+    this.moved = false;
+    log(`${this.name} ends the turn`);
+    return this.input('endTurn');
+  }
+
+  /** --lose: walk up to the foes and stand there, doing nothing, so the party falls. */
+  loseTurn(me, foes, choices) {
+    if (!this.moved && foes.length && choices.moves.length) {
+      const near = (tile) => Math.min(...foes.map((f) => dist(tile, f.at)));
+      const best = choices.moves.reduce((a, b) => (near(b.to) < near(a.to) ? b : a));
+      if (near(best.to) < near(me.at)) {
+        this.moved = true;
+        log(`${this.name} walks into the foes`);
+        return this.input('move', { path: best.path });
       }
     }
     this.moved = false;
@@ -312,19 +528,30 @@ class Bot {
         }
         return this.input('react', { choice: 'pass' });
       case 'walk':
-        if (walking || !view.data.vip) return;
+        newBattle();
+        if (walking || stampFights || !view.data.vip) return;
         state.walkAt ??= Date.now() + holdMs;
         if (Date.now() < state.walkAt) return;
         state.walkAt = undefined;
         log(`${this.name} leaves the walk for the battle list`);
         return this.input('battles');
       case 'results':
+        newBattle();
         if (!view.data.vip) return;
+        // With a TV, the results stay up until it shows them too: the bots can play faster than it draws, so it can be a few beats
+        // behind, and a VIP who went on at once would take the results off the air before the last blow had landed. At most a minute.
+        state.resultsSince ??= Date.now();
+        if (tv && !tv.host && tvLog) {
+          tv.read();
+          if (!(tv.resultsShown > (tv.battleShown ?? 0)) && Date.now() - state.resultsSince < RESULTS_WAIT_MS) return;
+        }
         state.resultsAt ??= Date.now() + holdMs;
         if (Date.now() < state.resultsAt) return;
-        state.resultsAt = undefined;
+        [state.resultsAt, state.resultsSince] = [undefined, undefined];
         log(`${view.data.outcome} at ${view.data.encounter}: ${view.data.lines.map((l) => `${l.name} +${l.xp} XP`).join(', ')}`);
-        return this.input(then === 'next' ? 'next' : 'end');
+        resultsLeft = Date.now();
+        fightsDone++;
+        return this.input(then === 'next' || stampFights ? 'next' : 'end');
     }
   }
 }
@@ -337,10 +564,18 @@ class Watch {
     this.at = 0;
     this.shown = [];
     this.held = false;
+    this.shownSeq = 0;
     host?.on('HostView', (_, v) => {
+      // --shown: answer each new beat at once, as a TV that draws in no time, so a battle with no TV isn't paced by the fallbacks
+      const beat = v?.battle?.beats?.at(-1)?.seq;
+      if (answerShown && beat !== undefined && beat !== this.shownSeq) {     // a beat's seq only climbs, until the next battle
+        this.shownSeq = beat;
+        host.invoke('HostSignal', 'shown', { seq: beat }).catch(() => {});
+      }
       const e = v?.explore;
       if (!e) return;
       this.held = e.held;
+      if (String(e.at) !== String(this.tile) || e.epoch !== this.epoch) [this.tile, this.epoch, this.placed] = [e.at, e.epoch, Date.now()];
       if (e.seq !== this.seq) [this.seq, this.at] = [e.seq, Date.now()];
     });
   }
@@ -360,7 +595,13 @@ class Watch {
     this.rest = lines.pop();
     for (const line of lines) {
       let m = /^WALK (\d+) (-?\d+) (-?\d+) (\d+)/.exec(line);
-      if (m) [this.seq, this.at] = [Number(m[1]), Number(m[4])];
+      if (m) [this.seq, this.at, this.tile, this.placed] = [Number(m[1]), Number(m[4]), [Number(m[2]), Number(m[3])], Date.now()];
+      // the TV's screens: a fight's, and its results, which the VIP waits for as someone watching the TV would
+      if (/^TACTICS screen tactics-battle-/.test(line)) this.battleShown = Date.now();
+      if (line === 'TACTICS screen tactics-results') this.resultsShown = Date.now();
+      // a snap puts the party somewhere new (a first view, a new epoch): at a tile's middle
+      m = /^TACTICS walk snapped to (-?[\d.]+) (-?[\d.]+)/.exec(line);
+      if (m) [this.tile, this.placed] = [[Math.floor(Number(m[1])), Math.floor(Number(m[2]))], Date.now()];
       // --walk-log's WALKAT lines: whether a direction is held, as the TV heard
       m = /^WALKAT (\d+) \d+ ([01]) /.exec(line);
       if (m) {
@@ -519,9 +760,120 @@ async function walkAbout(bots, lines, watch) {
   await until('the session to end', () => ender.ended);
 }
 
+const inBattle = (bots) => bots.some((b) => ['turn', 'status', 'react'].includes(b.view?.screen));
+
+/** Waits up to <ms> for <test>, and gives back what it last said. */
+async function within(ms, test) {
+  const end = Date.now() + ms;
+  let value = test();
+  while (!value && Date.now() < end) {
+    await sleep(20);
+    value = test();
+  }
+  return value;
+}
+
+/** Where the encounter is fought in the world: the region whose stamp is its map, from the content. */
+function stampOf(id) {
+  const { map } = JSON.parse(fs.readFileSync(path.join(RULES, 'encounters', `${id}.json`), 'utf8'));
+  for (const file of fs.readdirSync(path.join(RULES, 'world')).filter((f) => f.endsWith('.json'))) {
+    const region = JSON.parse(fs.readFileSync(path.join(RULES, 'world', file), 'utf8'));
+    if ((region.stamps ?? []).some((s) => s.map === map)) return { region: region.id, map };
+  }
+  throw new Error(`No region stamps ${map}, the map of ${id}`);
+}
+
+/** The pad directions from <tile> into the stamp, one a step, by the server's own walking rule (route.cs). */
+async function routeFrom(stamp, tile) {
+  const { execFile } = require('child_process');
+  const args = ['run', path.join(__dirname, 'route.cs'), '--', RULES, stamp.region, stamp.map, String(tile[0]), String(tile[1])];
+  const [out, err] = await new Promise((resolve) => execFile('dotnet', args, { encoding: 'utf8' },
+    (e, stdout, stderr) => resolve([String(stdout ?? '').trim(), `${stderr ?? ''}${e && !stderr ? e.message : ''}`.trim()])));
+  const line = out.split('\n').at(-1);
+  if (!line || line === 'none' || !/^[nsew ]+$/.test(line))
+    throw new Error(`No way from ${tile} into ${stamp.map}'s stamp (route.cs said: ${out || 'nothing'}${err ? `; ${err.slice(0, 400)}` : ''})`);
+  return line.split(' ');
+}
+
+/**
+ * --walk-to-stamp: the leader walks the party from where it stands into the stamp, a tap a step (a press and a release: the server takes
+ * a tap as one step, latched if the party is still on its way), waiting for each step before the next, as the TV log's WALK lines or
+ * the host view say. The step into the stamp starts the fight, so it shows as the phones' battle screens rather than as a step.
+ * <after>: the party must have been put somewhere since then (a snap, a new epoch), so the walk starts from where the last fight left it.
+ */
+async function walkIntoStamp(bots, watch, stamp, after) {
+  if (tvLog && !asHost) await until('the world on the TV', () => fs.existsSync(tvLog) && fs.readFileSync(tvLog, 'utf8').includes('TACTICS world open:'));
+  const tile = await until('where the party stands', () => {
+    watch.read();
+    return watch.placed > after && watch.tile;
+  });
+  let leader = await leaderOf(bots);
+  const dirs = await routeFrom(stamp, tile);
+  log(`STAMP ${leader.name} walks ${dirs.length} steps from ${tile} into ${stamp.map}: ${dirs.join(' ')}`);
+  for (const [i, dir] of dirs.entries()) {
+    watch.read();
+    const was = watch.seq;
+    leader = bots.find((b) => b.view?.screen === 'walk' && b.view.data.leader) ?? leader;
+    await walkTo(leader, dir);
+    await walkTo(leader, null);
+    const went = await within(4000, () => {
+      watch.read();
+      return watch.seq !== was || inBattle(bots);
+    });
+    if (inBattle(bots)) return log(`STAMP the fight starts at step ${i + 1} of ${dirs.length}`);
+    if (!went) throw new Error(`Step ${i + 1} of ${dirs.length} (${dir}, from ${watch.tile}) never went`);
+  }
+  if (!(await within(5000, () => inBattle(bots)))) throw new Error(`The step into ${stamp.map}'s stamp started no fight`);
+  log('STAMP the fight starts after the last step');
+}
+
+/** After the last fight: walk on a little from the battlefield, any way that's open, so the TV shows the party walking again. */
+async function walkOn(bots, watch) {
+  const leader = await leaderOf(bots);
+  for (const dir of ['w', 'sw', 'nw', 's', 'n', 'e', 'ne', 'se']) {
+    watch.read();
+    const was = watch.seq;
+    await hold(leader, dir, 1500);
+    await release(leader);
+    await sleep(600);
+    watch.read();
+    if (watch.seq - was >= 3) return log(`STAMP walking on: ${watch.seq - was} steps ${dir}`);
+  }
+  log('STAMP walking on: no way was open');
+}
+
+/** --walk-to-stamp=<n>: n fights, each walked into from wherever the last left the party, then a few steps on, and the session ends. */
+async function fightAtStamps(bots, watch, state) {
+  const stamp = stampOf(encounter);
+  setInterval(() => {
+    if (bots.some((b) => b.closed)) {
+      console.error(`Room closed: ${bots.find((b) => b.closed).closed}`);
+      process.exit(1);
+    }
+    for (const bot of bots) void bot.act(state);
+  }, TICK_MS).unref();
+  await until('the walk screen', () => bots.some((b) => b.view?.screen === 'walk' && b.view.data.leader));
+  let after = -1;
+  for (let i = 0; i < stampFights; i++) {
+    await walkIntoStamp(bots, watch, stamp, after);
+    const started = Date.now();
+    log(`FIGHT ${i + 1} of ${stampFights}, ${losing() ? 'to lose' : 'to win'}`);
+    await until(`fight ${i + 1} to end`, () => fightsDone > i && bots.every((b) => b.view?.screen === 'walk'));
+    // Where the fight left the party: the host view has it as the fight ends, the TV once the results are over. A TV that came back
+    // mid-fight snaps the walk to where it stood before the fight, so for the TV only a snap after the results counts.
+    after = watch.host ? started : resultsLeft;
+  }
+  await walkOn(bots, watch);
+  const vip = bots[0];
+  await vip.input('endSession');
+  await until('the session to end', () => vip.ended);
+  log(`Session over: ${vip.ended.message ?? ''}`);
+}
+
 (async () => {
   const host = asHost ? new HubConnectionBuilder().withUrl(`${server}/hub`).configureLogging(LogLevel.Critical).build() : null;
   const watch = new Watch(host);
+  tv = watch;
   let code;
   if (host) {
     await host.start();
@@ -546,6 +898,11 @@ async function walkAbout(bots, lines, watch) {
   log('Game on');
 
   const state = { nextPick: Date.now() + holdMs };
+  if (stampFights) {
+    await fightAtStamps(bots, watch, state);
+    await Promise.all(bots.map((b) => b.conn.stop()));
+    process.exit(0);
+  }
   if (walking) {
     await until('the walk screen', () => {
       for (const bot of bots) void bot.act(state);
