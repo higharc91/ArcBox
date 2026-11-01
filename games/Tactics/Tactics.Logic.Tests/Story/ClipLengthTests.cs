@@ -96,6 +96,11 @@ public sealed class ClipLengthTests
         Assert.Null(Of(Clip(0, 36000)));
         Assert.Null(Of(badCrc));
         Assert.Null(Of(good[..^10]));
+
+        // Cut at a page boundary, every page is whole and checks out, but the last has no end-of-stream flag.
+        byte[] cutAtPage = [.. Page(VorbisHead(24000), 0, type: 2), .. Page(new byte[600], 18000, sequence: 1)];
+        Assert.Null(Of(cutAtPage));
+        Assert.Equal(0.75, Of([.. cutAtPage, .. Page(new byte[40], 18000, type: 4, sequence: 2)]));
         Assert.Null(Of([.. good, 0, 0, 0]));
         Assert.Null(Of(Clip(24000, -1)));
         Assert.Null(Of(otherStream));

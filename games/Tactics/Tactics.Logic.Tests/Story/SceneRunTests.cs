@@ -82,7 +82,7 @@ public sealed class SceneRunTests
     public void Options_filter_on_flags_and_tags()
     {
         var open = Scene("ch1_maud").Node("open")!;
-        string[] Ids(IReadOnlySet<string> flags, PartyTags tags) => [.. SceneRun.Offered(open, flags, tags).Select(o => o.Id)];
+        string[] Ids(IReadOnlySet<string> flags, PartyTags tags) => [.. SceneRun.Offered(open, flags, tags, Set()).Select(o => o.Id)];
 
         Assert.Equal(["fell"], Ids(Set(), PartyTags.None));
         Assert.Equal(["fell", "slain"], Ids(Set("ch1_skarrow_slain"), PartyTags.None));
@@ -91,16 +91,16 @@ public sealed class SceneRunTests
 
         // Any one tag of any kind is enough: the reeds offer the wild way to a druid or a ranger.
         var reeds = Scene("ch2_reeds").Node("open")!;
-        Assert.Equal(["go"], SceneRun.Offered(reeds, Set(), Tags(races: ["elf"], classes: ["fighter"])).Select(o => o.Id));
-        Assert.Equal(["dwarf", "wild", "go"], SceneRun.Offered(reeds, Set(), Tags(races: ["dwarf"], classes: ["ranger"])).Select(o => o.Id));
-        Assert.Equal(["wild", "go"], SceneRun.Offered(reeds, Set(), Tags(classes: ["druid"])).Select(o => o.Id));
+        Assert.Equal(["go"], SceneRun.Offered(reeds, Set(), Tags(races: ["elf"], classes: ["fighter"]), Set()).Select(o => o.Id));
+        Assert.Equal(["dwarf", "wild", "go"], SceneRun.Offered(reeds, Set(), Tags(races: ["dwarf"], classes: ["ranger"]), Set()).Select(o => o.Id));
+        Assert.Equal(["wild", "go"], SceneRun.Offered(reeds, Set(), Tags(classes: ["druid"]), Set()).Select(o => o.Id));
 
         // An option tagged with two kinds needs only one of them.
         var either = new SceneNode("n", [new SceneLine("l", "narrator", "t", "idle")], [], [new SceneOption("o", "O", "n", null, [], [], new OptionTags(["sage"], [], ["wizard"]), null)],
             false, null, false);
-        Assert.Single(SceneRun.Offered(either, Set(), Tags(classes: ["wizard"])));
-        Assert.Single(SceneRun.Offered(either, Set(), Tags(backgrounds: ["sage"])));
-        Assert.Empty(SceneRun.Offered(either, Set(), Tags(backgrounds: ["noble"], races: ["elf"], classes: ["fighter"])));
+        Assert.Single(SceneRun.Offered(either, Set(), Tags(classes: ["wizard"]), Set()));
+        Assert.Single(SceneRun.Offered(either, Set(), Tags(backgrounds: ["sage"]), Set()));
+        Assert.Empty(SceneRun.Offered(either, Set(), Tags(backgrounds: ["noble"], races: ["elf"], classes: ["fighter"]), Set()));
     }
 
     [Fact]
@@ -113,9 +113,9 @@ public sealed class SceneRunTests
         var party = PartyTags.Of([here, away]);
 
         Assert.Equal(["soldier", "folk_hero"], party.Backgrounds.Order().Reverse());
-        Assert.Contains("hill", SceneRun.Offered(Scene("ch1_parley").Node("open")!, Set(), party).Select(o => o.Id));
-        Assert.Contains("wizard", SceneRun.Offered(Scene("ch4_caves_lead").Node("open")!, Set(), party).Select(o => o.Id));
-        Assert.DoesNotContain("hill", SceneRun.Offered(Scene("ch1_parley").Node("open")!, Set(), PartyTags.Of([here])).Select(o => o.Id));
+        Assert.Contains("hill", SceneRun.Offered(Scene("ch1_parley").Node("open")!, Set(), party, Set()).Select(o => o.Id));
+        Assert.Contains("wizard", SceneRun.Offered(Scene("ch4_caves_lead").Node("open")!, Set(), party, Set()).Select(o => o.Id));
+        Assert.DoesNotContain("hill", SceneRun.Offered(Scene("ch1_parley").Node("open")!, Set(), PartyTags.Of([here]), Set()).Select(o => o.Id));
     }
 
     /// <summary>A hub's questions can each be asked once, so a scene nobody answers still reaches its way on.</summary>
@@ -125,7 +125,7 @@ public sealed class SceneRunTests
         var willow = Scene("ch2_willow");
         var more = willow.Node("more")!;
 
-        Assert.Equal(["origin", "kindled", "ember"], SceneRun.Offered(more, Set(), PartyTags.None).Select(o => o.Id));
+        Assert.Equal(["origin", "kindled", "ember"], SceneRun.Offered(more, Set(), PartyTags.None, Set()).Select(o => o.Id));
         Assert.Equal(["kindled", "ember"], SceneRun.Offered(more, Set(), PartyTags.None, Set("open", "origin", "more")).Select(o => o.Id));
         Assert.Equal(["ember"], SceneRun.Offered(more, Set(), PartyTags.None, Set("open", "origin", "kindled", "more")).Select(o => o.Id));
 
@@ -139,7 +139,7 @@ public sealed class SceneRunTests
     public void An_unanswered_vote_takes_the_first_option()
     {
         var vote = Scene("ch1_ford").Node("vote")!;
-        var offered = SceneRun.Offered(vote, Set(), PartyTags.None);
+        var offered = SceneRun.Offered(vote, Set(), PartyTags.None, Set());
 
         Assert.Equal(["force", "parley", "pay"], offered.Select(o => o.Id));
         Assert.Equal("force", SceneRun.Unanswered(offered, vote: true).Id);
@@ -155,13 +155,13 @@ public sealed class SceneRunTests
     public void An_unanswered_choice_skips_a_check()
     {
         var why = Scene("ch1_ford").Node("why")!;
-        var offered = SceneRun.Offered(why, Set(), PartyTags.None);
+        var offered = SceneRun.Offered(why, Set(), PartyTags.None, Set());
 
         Assert.Equal(["insight", "fair"], offered.Select(o => o.Id));
         Assert.Equal("fair", SceneRun.Unanswered(offered, vote: false).Id);
 
         // With nothing but checks, there's no way round one.
-        var trick = SceneRun.Offered(Scene("ch2_heartpool").Node("trick")!, Set(), PartyTags.None);
+        var trick = SceneRun.Offered(Scene("ch2_heartpool").Node("trick")!, Set(), PartyTags.None, Set());
         Assert.Equal(["arcana", "deceive"], trick.Select(o => o.Id));
         Assert.Equal("arcana", SceneRun.Unanswered(trick, vote: false).Id);
         Assert.Throws<ArgumentException>(() => SceneRun.Unanswered([], vote: false));
@@ -261,64 +261,86 @@ public sealed class SceneRunTests
     /// <summary>
     /// Walks every way through <paramref name="scene"/> from <paramref name="flags"/>: every option offered, both results of every check,
     /// with each node's and option's flags set as they play. Reports a node that leads nowhere, offers nothing, or a way round that
-    /// never ends. States are (node, nodes played, flags), so each is walked once.
+    /// never ends, and gives every set of flags the scene can end with. States are (node, nodes played, flags), and each is walked
+    /// once: <paramref name="memo"/> keeps what each ends with.
     /// </summary>
-    private static void Explore(SceneDef scene, ArcBeat beat, ImmutableHashSet<string> flags, PartyTags tags, ISet<string> problems, ISet<string> seen)
+    private static List<ImmutableHashSet<string>> Explore(SceneDef scene, ArcBeat beat, ImmutableHashSet<string> flags, PartyTags tags, ISet<string> problems,
+        Dictionary<string, List<ImmutableHashSet<string>>> memo)
     {
         var onPath = new HashSet<string>();
 
-        void Visit(string id, ImmutableHashSet<string> played, ImmutableHashSet<string> flags)
+        List<ImmutableHashSet<string>> Visit(string id, ImmutableHashSet<string> played, ImmutableHashSet<string> flags)
         {
-            var key = $"{scene.Id}|{id}|{string.Join(',', played.Order())}|{string.Join(',', flags.Order())}";
+            var key = $"{scene.Id}|{id}|{KeyOf(played)}|{KeyOf(flags)}";
             if (onPath.Contains(key))
             {
                 problems.Add($"{scene.Id}: a way round through '{id}' never ends");
-                return;
+                return [];
             }
-            if (!seen.Add(key))
-                return;
+            if (memo.TryGetValue(key, out var known))
+                return known;
             if (scene.Node(id) is not { } node)
             {
                 problems.Add($"{scene.Id}: '{id}' isn't a node");
-                return;
+                return [];
             }
             onPath.Add(key);
             (played, flags) = (played.Add(id), flags.Union(node.Sets));
-            if (node.Next is { } next)
-                Visit(next, played, flags);
-            else if (!node.End)
+            var ends = new List<ImmutableHashSet<string>>();
+            if (node.End)
+                ends.Add(flags);
+            else if (node.Next is { } next)
+                ends.AddRange(Visit(next, played, flags));
+            else
             {
                 var offered = SceneRun.Offered(node, flags, tags, played);
                 if (offered.IsEmpty)
                     problems.Add($"{scene.Id}: '{id}' offers nothing with [{string.Join(", ", flags.Order())}]");
                 foreach (var option in offered)
                     foreach (var passed in option.Check is null ? [(bool?)null] : new bool?[] { true, false })
-                        Visit(SceneRun.Target(option, passed), played, flags.Union(SceneRun.Sets(option, beat)));
+                        ends.AddRange(Visit(SceneRun.Target(option, passed), played, flags.Union(SceneRun.Sets(option, beat))));
             }
             onPath.Remove(key);
+            return memo[key] = [.. ends.DistinctBy(KeyOf)];
         }
 
-        Visit(scene.Start, [], flags);
+        return Visit(scene.Start, [], flags);
     }
 
-    /// <summary>Every scene a branch plays at a beat, with the flags it starts from: the lead-in, then a battle's aftermath.</summary>
-    private static IEnumerable<(SceneDef Scene, ImmutableHashSet<string> Flags)> Played(BeatStep step)
+    private static string KeyOf(IEnumerable<string> flags) => string.Join(',', flags.Order());
+
+    /// <summary>
+    /// Plays a branch's beat as the game will: from the flags set before it (not the branch's choice, which only its vote sets), each
+    /// scene in turn, tested as it starts with the flags the scene before it ended with, through every way <paramref name="run"/> gives
+    /// it to end. A battle's own flags are set at the win, before its aftermath. Adds every scene played to <paramref name="played"/>.
+    /// </summary>
+    private static void PlayBeat(BeatStep step, Func<SceneDef, ImmutableHashSet<string>, IEnumerable<ImmutableHashSet<string>>> run, ISet<string> played)
     {
         var scenes = Book.ScenesOf(step.Beat.Id);
-        foreach (var aftermath in step.Beat.Kind == ArcBeat.Battle ? [false, true] : new[] { false })
+
+        void Stage(ImmutableHashSet<string> flags, string? after, bool aftermath, int depth)
         {
-            var count = 0;
-            for (var scene = SceneRun.Next(scenes, step.During, null, aftermath); scene is not null; scene = SceneRun.Next(scenes, step.During, scene.Id, aftermath))
+            Assert.True(depth <= scenes.Length, $"'{step.Beat.Id}' plays more scenes than it has.");
+            if (SceneRun.Next(scenes, flags, after, aftermath) is not { } scene)
             {
-                Assert.True(++count <= scenes.Length, $"'{step.Beat.Id}' plays more scenes than it has.");
-                yield return (scene, step.During);
+                if (!aftermath && step.Beat.Kind == ArcBeat.Battle)
+                    Stage(flags.Union(step.Beat.Sets), null, aftermath: true, 0);
+                return;
             }
+            played.Add(scene.Id);
+            foreach (var end in run(scene, flags).DistinctBy(KeyOf).ToList())
+                Stage(end, scene.Id, aftermath, depth + 1);
         }
+
+        Stage(step.Before, null, aftermath: false, 0);
     }
+
+    private static IEnumerable<BeatStep> EveryStep() => Campaign.Branches(Book).SelectMany(b => b).DistinctBy(s => (s.Beat.Id, KeyOf(s.Before)));
 
     /// <summary>
     /// The 5d plan's "no option offered can't happen": on both branches of Chapter I, and every branch of the campaign after it, every
-    /// node anyone can reach offers something, with no tags in the party and with all of them, and every way round a hub ends.
+    /// node anyone can reach offers something, with no tags in the party and with all of them, and every way round a hub ends. Each
+    /// scene starts with the flags the one before it ended with, and a vote's flags are set only when it's voted.
     /// </summary>
     [Fact]
     public void Every_reachable_node_offers_something_on_both_branches()
@@ -327,13 +349,9 @@ public sealed class SceneRunTests
         var played = new HashSet<string>();
         foreach (var tags in new[] { PartyTags.None, Everything() })
         {
-            var seen = new HashSet<string>();
-            foreach (var step in Campaign.Branches(Book).SelectMany(b => b))
-                foreach (var (scene, flags) in Played(step))
-                {
-                    played.Add(scene.Id);
-                    Explore(scene, step.Beat, flags, tags, problems, seen);
-                }
+            var memo = new Dictionary<string, List<ImmutableHashSet<string>>>();
+            foreach (var step in EveryStep())
+                PlayBeat(step, (scene, flags) => Explore(scene, step.Beat, flags, tags, problems, memo), played);
         }
         Assert.Empty(problems);
         Assert.Equal(Book.Scenes.Select(s => s.Id).Order(), played.Order());
@@ -360,32 +378,43 @@ public sealed class SceneRunTests
     public void A_scene_nobody_answers_still_ends()
     {
         var problems = new SortedSet<string>(StringComparer.Ordinal);
-        foreach (var step in Campaign.Branches(Book).SelectMany(b => b).DistinctBy(s => (s.Beat.Id, string.Join(',', s.During.Order()))))
-            foreach (var (scene, start) in Played(step))
-                foreach (var passed in new[] { true, false })
+        var scenes = new HashSet<string>();
+
+        IEnumerable<ImmutableHashSet<string>> Unanswered(SceneDef scene, ArcBeat beat, ImmutableHashSet<string> start)
+        {
+            var ends = new List<ImmutableHashSet<string>>();
+            foreach (var passed in new[] { true, false })
+            {
+                var (id, flags, played, steps) = (scene.Start, start, ImmutableHashSet<string>.Empty, 0);
+                while (scene.Node(id) is { End: false } node && steps++ <= scene.Nodes.Length * scene.Nodes.Length)
                 {
-                    var (id, flags, played, steps) = (scene.Start, start, ImmutableHashSet<string>.Empty, 0);
-                    while (scene.Node(id) is { End: false } node && steps++ <= scene.Nodes.Length * scene.Nodes.Length)
+                    (played, flags) = (played.Add(id), flags.Union(node.Sets));
+                    if (node.Next is { } next)
                     {
-                        (played, flags) = (played.Add(id), flags.Union(node.Sets));
-                        if (node.Next is { } next)
-                        {
-                            id = next;
-                            continue;
-                        }
-                        var offered = SceneRun.Offered(node, flags, PartyTags.None, played);
-                        if (offered.IsEmpty)
-                        {
-                            problems.Add($"{scene.Id}: '{id}' offers nothing");
-                            break;
-                        }
-                        var option = SceneRun.Unanswered(offered, node.Vote);
-                        (id, flags) = (SceneRun.Target(option, option.Check is null ? null : passed), flags.Union(SceneRun.Sets(option, step.Beat)));
+                        id = next;
+                        continue;
                     }
-                    if (scene.Node(id) is not { End: true })
-                        problems.Add($"{scene.Id}: unanswered, it stops at '{id}' after {steps} steps");
+                    var offered = SceneRun.Offered(node, flags, PartyTags.None, played);
+                    if (offered.IsEmpty)
+                    {
+                        problems.Add($"{scene.Id}: '{id}' offers nothing");
+                        break;
+                    }
+                    var option = SceneRun.Unanswered(offered, node.Vote);
+                    (id, flags) = (SceneRun.Target(option, option.Check is null ? null : passed), flags.Union(SceneRun.Sets(option, beat)));
                 }
+                if (scene.Node(id) is { End: true } end)
+                    ends.Add(flags.Union(end.Sets));
+                else
+                    problems.Add($"{scene.Id}: unanswered, it stops at '{id}' after {steps} steps");
+            }
+            return ends;
+        }
+
+        foreach (var step in EveryStep())
+            PlayBeat(step, (scene, flags) => Unanswered(scene, step.Beat, flags), scenes);
         Assert.Empty(problems);
+        Assert.NotEmpty(scenes);
     }
 
     /// <summary>

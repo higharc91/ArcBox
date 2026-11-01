@@ -136,6 +136,30 @@ public sealed class SceneLoadTests
         Assert.Equal([1.5, null, null, null, null, null], lengths);
     }
 
+    /// <summary>Loading reads only the manifest: a clip is read the first time its line asks, and kept.</summary>
+    [Fact]
+    public void Load_doesnt_open_a_clip_until_its_line_asks()
+    {
+        const string manifest = """{ "lines": { "l1": { "main": "l1.ogg" }, "l2": { "main": "l2.ogg" } } }""";
+        var lengths = WithPack([("arcs.json", Arcs), ("scenes/one.json", Scenes), ("audio/manifest.json", manifest)], dir =>
+        {
+            var audio = Path.Combine(dir, "lore", "audio");
+            var l1 = Path.Combine(audio, "l1.ogg");
+            File.WriteAllBytes(l1, "not a clip yet"u8.ToArray());
+            var book = LoreBook.Load(dir);
+
+            // Written after Load: had Load read the clips, l1 would be the bad file and l2 missing.
+            File.WriteAllBytes(l1, ClipLengthTests.Clip(24000, 36000));
+            File.WriteAllBytes(Path.Combine(audio, "l2.ogg"), ClipLengthTests.Clip(24000, 48000));
+            var first = (book.ClipSeconds("l1"), book.ClipSeconds("l2"));
+            File.Delete(l1);
+            return (first, Again: book.ClipSeconds("l1"));
+        });
+
+        Assert.Equal(((double?)1.5, (double?)2.0), lengths.first);
+        Assert.Equal(1.5, lengths.Again);
+    }
+
     [Fact]
     public void A_pack_with_no_audio_manifest_has_no_clips()
         => Assert.Null(Load(("arcs.json", Arcs), ("scenes/one.json", Scenes)).ClipSeconds("l1"));
@@ -145,6 +169,10 @@ public sealed class SceneLoadTests
     [InlineData("""{ "lines": [] }""", "the manifest has no 'lines' object")]
     [InlineData("""{ "lines": { "l1": { "main": 3 } } }""", "the line 'l1' has a 'main' that isn't a string")]
     [InlineData("""{ "lines": """, "can't be read as lore")]
+    [InlineData("""{ "lines": { "l1": { "main": "../secret.ogg" } } }""", "the line 'l1' names the clip '../secret.ogg', which isn't in the audio folder")]
+    [InlineData("""{ "lines": { "l1": { "main": "clips/../../secret.ogg" } } }""", "isn't in the audio folder")]
+    [InlineData("""{ "lines": { "l1": { "main": "..\\secret.ogg" } } }""", "isn't in the audio folder")]
+    [InlineData("""{ "lines": { "l1": { "main": "/etc/secret.ogg" } } }""", "isn't in the audio folder")]
     public void An_audio_manifest_that_cant_be_read_is_refused_naming_it(string manifest, string problem)
     {
         var error = Assert.Throws<InvalidDataException>(() => Load(("arcs.json", Arcs), ("scenes/one.json", Scenes), ("audio/manifest.json", manifest)));
@@ -193,6 +221,10 @@ public sealed class SceneLoadTests
         { SceneOf($$"""{ "id": "n", "lines": [{{Line}}], "vote": "yes", "options": [{ "id": "o", "label": "O", "to": "n" }] }"""), "has a 'vote' that isn't true or false" },
         { SceneOf($$"""{ "id": "n", "lines": [{{Line}}], "end": true }""").Replace("\"start\"", "\"after\": 1, \"start\"", StringComparison.Ordinal), "the scene 's' has a 'after' that isn't true or false" },
         { """{ "scenes": [{ "beat": "talk" }] }""", "a scene has no 'id'" },
+        { SceneOf($$"""{ "id": "n", "lines": [{{Line}}], "end": true }""").Replace("\"start\"", "\"after\": true, \"start\"", StringComparison.Ordinal),
+            "the scene 's' is an aftermath, and only a battle beat has one: 'talk' is a story beat" },
+        { SceneOf($$"""{ "id": "n", "lines": [{{Line}}], "options": [{ "id": "o", "label": "O", "check": { "skill": "juggling", "dc": 10, "pass": "n", "fail": "n" } }] }"""),
+            "the check of the option 'o' of the node 'n' of the scene 's' is of 'juggling', which isn't a skill" },
         { """{ "scenes": {} }""", "the file has a 'scenes' that isn't a list" },
         { """{ "scenes": [ """, "can't be read as lore" },
     };
@@ -205,6 +237,19 @@ public sealed class SceneLoadTests
 
         Assert.Contains("bad.json", error.Message, StringComparison.Ordinal);
         Assert.Contains(problem, error.Message, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void An_aftermath_before_a_lead_in_is_refused_across_files()
+    {
+        var after = SceneOf($$"""{ "id": "n", "lines": [{{Line}}], "end": true }""", beat: "fight", id: "won").Replace("\"start\"", "\"after\": true, \"start\"", StringComparison.Ordinal);
+        var lead = SceneOf($$"""{ "id": "n", "lines": [{ "id": "l2", "speaker": "narrator", "text": "t" }], "end": true }""", beat: "fight", id: "late");
+
+        var error = Assert.Throws<InvalidDataException>(() => Load(("arcs.json", Arcs), ("scenes/one.json", after), ("scenes/two.json", lead)));
+
+        Assert.Contains("two.json", error.Message, StringComparison.Ordinal);
+        Assert.Contains("the scene 'late' is a lead-in of 'fight', and comes after one of its aftermath scenes", error.Message, StringComparison.Ordinal);
+        Assert.Equal(["late", "won"], Load(("arcs.json", Arcs), ("scenes/one.json", lead), ("scenes/two.json", after)).ScenesOf("fight").Select(s => s.Id));
     }
 
     [Fact]

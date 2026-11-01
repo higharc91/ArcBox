@@ -48,12 +48,13 @@ public static class SceneRun
 
     /// <summary>
     /// What <paramref name="node"/> offers, in its order: each option whose <c>requires</c> are set, that the party's tags match, and
-    /// that doesn't lead back to a node that's already played in this scene (<paramref name="played"/>). That last is so a hub's
+    /// that doesn't lead back to a node that's already played in this scene (<paramref name="played"/>, required: an empty set
+    /// only as a scene starts). That last is so a hub's
     /// questions can each be asked once: an option asked, or a check tried, is gone the next time round, and only the way on is left.
     /// Without it, a hub nobody answers would take its first question for ever (5d plan, default 3 and the user's decision 2).
     /// </summary>
-    public static ImmutableArray<SceneOption> Offered(SceneNode node, IReadOnlySet<string> flags, PartyTags tags, IReadOnlySet<string>? played = null)
-        => [.. node.Options.Where(o => o.Requires.All(flags.Contains) && tags.Match(o.Tags) && (played is null || !o.Targets.Any(played.Contains)))];
+    public static ImmutableArray<SceneOption> Offered(SceneNode node, IReadOnlySet<string> flags, PartyTags tags, IReadOnlySet<string> played)
+        => [.. node.Options.Where(o => o.Requires.All(flags.Contains) && tags.Match(o.Tags) && !o.Targets.Any(played.Contains))];
 
     /// <summary>
     /// What a question nobody answers takes, from what's <paramref name="offered"/>: a vote takes the first option, as the spec says, and

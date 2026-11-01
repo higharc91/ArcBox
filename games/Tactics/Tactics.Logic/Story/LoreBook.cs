@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Collections.Immutable;
 using System.Text.Json;
 
@@ -34,10 +35,11 @@ public sealed class LoreBook
     private readonly ImmutableSortedDictionary<string, Arc> _byRegion;
     private readonly ImmutableDictionary<string, ImmutableArray<SceneDef>> _scenesByBeat;
     private readonly ImmutableDictionary<string, LoreCharacter> _characters;
-    private readonly ImmutableDictionary<string, double> _clips;
+    private readonly ImmutableDictionary<string, string> _clipFiles;
+    private readonly ConcurrentDictionary<string, double?> _clipSeconds = new(StringComparer.Ordinal);
 
     private LoreBook(ImmutableArray<Arc> arcs, ImmutableArray<SceneDef> scenes, ImmutableArray<LoreCharacter> characters,
-        ImmutableDictionary<string, double> clips)
+        ImmutableDictionary<string, string> clipFiles)
     {
         Arcs = arcs;
         Scenes = scenes;
@@ -45,11 +47,11 @@ public sealed class LoreBook
         _scenesByBeat = scenes.GroupBy(s => s.Beat, StringComparer.Ordinal)
             .ToImmutableDictionary(g => g.Key, g => g.ToImmutableArray(), StringComparer.Ordinal);
         _characters = characters.ToImmutableDictionary(c => c.Id, c => c, StringComparer.Ordinal);
-        _clips = clips;
+        _clipFiles = clipFiles;
     }
 
     /// <summary>A book with no arcs, for a game with no lore: no beat is ever available.</summary>
-    public static LoreBook Empty { get; } = new([], [], [], ImmutableDictionary<string, double>.Empty);
+    public static LoreBook Empty { get; } = new([], [], [], ImmutableDictionary<string, string>.Empty);
 
     /// <summary>Every arc, in the file's order.</summary>
     public ImmutableArray<Arc> Arcs { get; }
@@ -69,9 +71,25 @@ public sealed class LoreBook
     /// <summary>
     /// How long the clip of the scene line <paramref name="line"/> plays, in seconds: its speaker's own voice (<c>main</c>) in
     /// <c>audio/manifest.json</c>. Null when the line has no clip, its file is missing, or it can't be read (<see cref="ClipLength"/>):
-    /// the game then gives the line a reading timer.
+    /// the game then gives the line a reading timer. The file is read the first time its line asks, not at <see cref="Load"/>, since
+    /// lines are spoken one at a time and reading all 829 would hold up the first room; the answer is kept after that.
     /// </summary>
-    public double? ClipSeconds(string line) => _clips.TryGetValue(line, out var seconds) ? seconds : null;
+    public double? ClipSeconds(string line)
+        => _clipFiles.TryGetValue(line, out var path) ? _clipSeconds.GetOrAdd(line, static (_, file) => Measure(file), path) : null;
+
+    /// <summary>A clip's length, or null when it isn't there, can't be opened, or isn't a whole Ogg Vorbis stream.</summary>
+    private static double? Measure(string path)
+    {
+        try
+        {
+            using var ogg = File.OpenRead(path);
+            return ClipLength.Of(ogg);
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            return null;
+        }
+    }
 
     /// <summary>
     /// Reads the lore of <paramref name="basePack"/>, the folder that holds <c>lore/</c> (<c>content/tactics/base</c>). A pack with no
@@ -107,9 +125,10 @@ public sealed class LoreBook
         if (characters.GroupBy(c => c.Id, StringComparer.Ordinal).FirstOrDefault(g => g.Count() > 1) is { } twice)
             throw new InvalidDataException($"{characterPath}: the character '{twice.Key}' is listed twice.");
 
-        var beats = arcs.SelectMany(a => a.Beats).Select(b => b.Id).ToImmutableHashSet(StringComparer.Ordinal);
+        var beats = arcs.SelectMany(a => a.Beats).ToImmutableDictionary(b => b.Id, b => b.Kind, StringComparer.Ordinal);
         var scenes = ImmutableArray.CreateBuilder<SceneDef>();
         var seen = new HashSet<string>(StringComparer.Ordinal);
+        var aftermath = new HashSet<string>(StringComparer.Ordinal);
         foreach (var file in files.Where(f => f.StartsWith("scenes/", StringComparison.Ordinal)))
         {
             var scenePath = Path.Combine(lore, file);
@@ -117,6 +136,11 @@ public sealed class LoreBook
             {
                 if (!seen.Add(scene.Id))
                     throw new InvalidDataException($"{scenePath}: the scene '{scene.Id}' is already in the pack.");
+                // A battle beat plays its lead-in, the fight, then its aftermath, so in the pack's order no lead-in can follow an aftermath.
+                if (scene.After)
+                    aftermath.Add(scene.Beat);
+                else if (aftermath.Contains(scene.Beat))
+                    throw new InvalidDataException($"{scenePath}: the scene '{scene.Id}' is a lead-in of '{scene.Beat}', and comes after one of its aftermath scenes.");
                 scenes.Add(scene);
             }
         }
@@ -126,14 +150,15 @@ public sealed class LoreBook
     }
 
     /// <summary>
-    /// The clip length of each of <paramref name="lines"/> that has a <c>main</c> clip in the manifest of <paramref name="audio"/> and
-    /// whose file can be read. No manifest means no clips; a manifest that's there and can't be read is lore that can't be read.
+    /// The clip file of each of <paramref name="lines"/> that has a <c>main</c> clip in the manifest of <paramref name="audio"/>: only
+    /// the manifest is read here. No manifest means no clips; a manifest that's there and can't be read is lore that can't be read, as
+    /// is one naming a file outside the audio folder (an absolute path, or one with <c>..</c>).
     /// </summary>
-    private static ImmutableDictionary<string, double> Clips(string audio, ImmutableHashSet<string> lines)
+    private static ImmutableDictionary<string, string> Clips(string audio, ImmutableHashSet<string> lines)
     {
         var manifest = Path.Combine(audio, "manifest.json");
         if (lines.IsEmpty || !File.Exists(manifest))
-            return ImmutableDictionary<string, double>.Empty;
+            return ImmutableDictionary<string, string>.Empty;
         var listed = Read(manifest, root => Field(root, "lines", "the manifest") switch
         {
             { ValueKind: JsonValueKind.Object } all => all.EnumerateObject().Where(l => lines.Contains(l.Name))
@@ -141,22 +166,14 @@ public sealed class LoreBook
             _ => throw new BadLore("the manifest has no 'lines' object."),
         });
 
-        var clips = ImmutableDictionary.CreateBuilder<string, double>(StringComparer.Ordinal);
+        var clips = ImmutableDictionary.CreateBuilder<string, string>(StringComparer.Ordinal);
         foreach (var (line, file) in listed)
         {
             if (file is null)
                 continue;
-            var path = Path.Combine(audio, file);
-            try
-            {
-                using var ogg = File.OpenRead(path);
-                if (ClipLength.Of(ogg) is { } seconds)
-                    clips[line] = seconds;
-            }
-            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
-            {
-                // A clip that isn't there, or can't be opened, leaves its line on a reading timer.
-            }
+            if (Path.IsPathRooted(file) || file.Split('/', '\\').Contains(".."))
+                throw new InvalidDataException($"{manifest} can't be read as lore: the line '{line}' names the clip '{file}', which isn't in the audio folder.");
+            clips[line] = Path.Combine(audio, file);
         }
         return clips.ToImmutable();
     }
@@ -211,16 +228,19 @@ public sealed class LoreBook
     /// A scene, refused unless it can be played to the end without a lookup failing: its <c>beat</c> is one of <paramref name="beats"/>,
     /// its nodes have distinct ids and <c>start</c> is one of them, each node has at least one line and exactly one of <c>options</c>
     /// (at least one), <c>next</c> or <c>end: true</c>, each option has <c>to</c> or a <c>check</c>, and everything they lead to is a
-    /// node of the scene. What a game can play but a writer wouldn't want (a node nobody reaches, a flag nothing sets) is
+    /// node of the scene; only a battle beat's scene is an aftermath (<c>after</c>); and every check is of a skill in
+    /// <see cref="SkillCheck.Skills"/>. These are <c>tools/tactics-lore/check.py</c>'s rules too, so the server and the tool agree. What a game can play but a writer wouldn't want (a node nobody reaches, a flag nothing sets) is
     /// <c>tools/tactics-lore</c>'s to find.
     /// </summary>
-    private static SceneDef ReadScene(JsonElement e, ImmutableHashSet<string> beats)
+    private static SceneDef ReadScene(JsonElement e, ImmutableDictionary<string, string> beats)
     {
         var id = Required(e, "id", "a scene");
         var where = $"the scene '{id}'";
         var beat = Required(e, "beat", where);
-        if (!beats.Contains(beat))
+        if (!beats.TryGetValue(beat, out var kind))
             throw new BadLore($"{where} plays the beat '{beat}', which no arc has.");
+        if (Flag(e, "after", where) && kind != ArcBeat.Battle)
+            throw new BadLore($"{where} is an aftermath, and only a battle beat has one: '{beat}' is a {kind} beat.");
         var nodes = List(e, "nodes", where, required: true).Select(n => ReadNode(n, where)).ToImmutableArray();
         var scene = new SceneDef(id, beat, Optional(e, "place", where), Optional(e, "title", where) ?? "", Strings(e, "requires", where),
             Strings(e, "unless", where), Strings(e, "cast", where), Required(e, "start", where), nodes, Flag(e, "after", where));
@@ -271,6 +291,8 @@ public sealed class LoreBook
             ? new SceneCheck(Required(c, "skill", $"the check of {where}"), Whole(c, "dc", $"the check of {where}"),
                 Required(c, "pass", $"the check of {where}"), Required(c, "fail", $"the check of {where}"))
             : null;
+        if (check is not null && SkillCheck.StatOf(check.Skill) is null)
+            throw new BadLore($"the check of {where} is of '{check.Skill}', which isn't a skill.");
         var to = Optional(e, "to", where);
         if (to is null && check is null)
             throw new BadLore($"{where} needs 'to' or a 'check'.");

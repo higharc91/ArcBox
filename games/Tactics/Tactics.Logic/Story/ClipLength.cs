@@ -12,11 +12,15 @@ public static class ClipLength
     /// <summary>The longest an Ogg page can be: a 27-byte header, 255 lacing values and 255 segments of 255 bytes.</summary>
     private const int MaxPage = 27 + 255 + 255 * 255;
 
+    /// <summary>The header flag of a stream's last page.</summary>
+    private const byte EndOfStream = 0x04;
+
     private static readonly uint[] CrcTable = BuildCrcTable();
 
     /// <summary>
     /// The clip's length in seconds, or null if <paramref name="ogg"/> isn't a whole Ogg Vorbis stream: not Ogg, not Vorbis, a page whose
-    /// checksum is wrong, a file cut short (its last page must end the stream) or no last page with a sample count. The stream must
+    /// checksum is wrong, a file cut short (its last page must end the file and carry the end-of-stream flag, so a cut at a page
+    /// boundary is caught too) or no last page with a sample count. The stream must
     /// be seekable; it's read from the start.
     /// </summary>
     public static double? Of(Stream ogg)
@@ -42,7 +46,7 @@ public static class ClipLength
             var tail = ReadUpTo(ogg, (int)(length - start));
             for (var at = tail.Length - 27; at >= 0; at--)
                 if (Page(tail, at) is { } last && last.End == tail.Length)
-                    return last.Serial == first.Serial && last.Granule >= 0 ? last.Granule / (double)rate : null;
+                    return last.Serial == first.Serial && last.Ends && last.Granule >= 0 ? last.Granule / (double)rate : null;
             return null;
         }
         catch (IOException)
@@ -51,8 +55,8 @@ public static class ClipLength
         }
     }
 
-    /// <summary>An Ogg page found at <paramref name="at"/>: where its body starts and ends in the buffer, its stream and its granule.</summary>
-    private readonly record struct OggPage(int Body, int End, uint Serial, long Granule);
+    /// <summary>An Ogg page found at <paramref name="at"/>: where its body starts and ends in the buffer, its stream, its granule and whether it ends the stream.</summary>
+    private readonly record struct OggPage(int Body, int End, uint Serial, long Granule, bool Ends);
 
     /// <summary>The page at <paramref name="at"/> if one starts there, lies wholly in the buffer and its checksum holds; otherwise null.</summary>
     private static OggPage? Page(byte[] buffer, int at)
@@ -75,7 +79,7 @@ public static class ClipLength
         if (crc != BinaryPrimitives.ReadUInt32LittleEndian(data[22..26]))
             return null;
         return new OggPage(at + 27 + segments, at + size, BinaryPrimitives.ReadUInt32LittleEndian(data[14..18]),
-            BinaryPrimitives.ReadInt64LittleEndian(data[6..14]));
+            BinaryPrimitives.ReadInt64LittleEndian(data[6..14]), (data[5] & EndOfStream) != 0);
     }
 
     /// <summary>Ogg's CRC-32: polynomial 0x04C11DB7, not reflected, starting from 0.</summary>
