@@ -22,8 +22,9 @@ public static class TacticsServiceCollectionExtensions
     /// <summary>
     /// Wires up ArcBox Tactics: its rules pack, loaded once from <c>&lt;Content:Root&gt;/tactics/base</c> (the rules and the
     /// art manifests they're checked against), its lore from the same folder, the game, its campaign rules and its voice themes (one per
-    /// speaker, for live speech). The pack and the lore load on first use, so the server starts without them (the registry only reads
-    /// the manifest); a missing or broken pack fails the first tactics room, with every error listed. In Development only, a
+    /// speaker, for live speech). The pack and the lore load in the background as the server starts (<see cref="TacticsWarmup"/>), or on
+    /// first use if that comes sooner, so the server starts without them (the registry only reads the manifest); a missing or broken pack
+    /// fails the first tactics room, with every error listed. In Development only, a
     /// <c>Tactics:Seed</c> section starts new campaigns part way through their story (<see cref="SeedFrom"/>), and
     /// <c>Tactics:BattleList</c> offers the battle list from the world (<see cref="BattleListSetting"/>).
     /// </summary>
@@ -35,6 +36,7 @@ public static class TacticsServiceCollectionExtensions
             return RulesPack.Load([Path.Combine(basePack, "rules")], ArtManifests.Load(basePack));
         }));
         services.AddSingleton(sp => new Lazy<LoreBook>(() => LoreBook.Load(BasePack(sp))));
+        services.AddHostedService<TacticsWarmup>();
         services.AddArcGame(sp =>
         {
             var log = sp.GetRequiredService<ILogger<TacticsGame>>();

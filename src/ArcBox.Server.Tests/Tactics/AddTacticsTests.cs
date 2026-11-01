@@ -11,13 +11,15 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Tactics.Game;
+using Tactics.Logic;
 
 namespace ArcBox.Server.Tests.Tactics;
 
 public class AddTacticsTests
 {
     /// <summary>The server's own wiring, with the content root at the repository's <c>content</c> folder.</summary>
-    private static ServiceProvider Build(LogSink? log = null, string environment = "Test", Dictionary<string, string?>? settings = null)
+    private static ServiceProvider Build(LogSink? log = null, string environment = "Test", Dictionary<string, string?>? settings = null,
+        string? contentRoot = null)
     {
         var repo = AppContext.BaseDirectory;
         while (!File.Exists(Path.Combine(repo, "ArcBox.slnx")))
@@ -28,13 +30,57 @@ public class AddTacticsTests
             if (log is not null)
                 b.AddProvider(log).SetMinimumLevel(LogLevel.Debug);
         });
-        services.AddOptions<ContentOptions>().Configure(o => o.Root = Path.Combine(repo, "content"));
+        services.AddOptions<ContentOptions>().Configure(o => o.Root = contentRoot ?? Path.Combine(repo, "content"));
         services.AddSingleton<IHostEnvironment>(new Env(repo) { EnvironmentName = environment });
         if (settings is not null)
             services.AddSingleton<IConfiguration>(new ConfigurationBuilder().AddInMemoryCollection(settings).Build());
         services.AddTactics();
         services.AddSingleton<IGameRegistry, GameRegistry>();
         return services.BuildServiceProvider();
+    }
+
+    /// <summary>
+    /// The pack loads as the server starts, not in the first room's game call: a call over the rooms' 2 s watchdog closes the room as
+    /// hung, and the pack takes about 1.4 s to load on an idle machine, which a loaded one ran over in the end-to-end runs.
+    /// </summary>
+    [Fact]
+    public async Task The_pack_and_lore_load_as_the_server_starts()
+    {
+        using var sp = Build();
+        var (pack, lore) = (sp.GetRequiredService<Lazy<RulesPack>>(), sp.GetRequiredService<Lazy<LoreBook>>());
+        Assert.False(pack.IsValueCreated);
+
+        foreach (var service in sp.GetServices<IHostedService>())
+            await service.StartAsync(TestContext.Current.CancellationToken);
+
+        for (var waited = 0; waited < 300 && !(pack.IsValueCreated && lore.IsValueCreated); waited++)
+            await Task.Delay(100, TestContext.Current.CancellationToken);
+        Assert.True(pack.IsValueCreated && lore.IsValueCreated);
+    }
+
+    [Fact]
+    public async Task A_pack_that_wont_load_is_only_logged_at_start_and_still_fails_the_first_room()
+    {
+        var log = new LogSink();
+        var empty = Directory.CreateTempSubdirectory("arcbox-no-content").FullName;
+        try
+        {
+            using var sp = Build(log, contentRoot: empty);
+            var hosted = sp.GetServices<IHostedService>().ToList();
+            foreach (var service in hosted)
+                await service.StartAsync(TestContext.Current.CancellationToken);
+            for (var waited = 0; waited < 300 && !log.Entries.Any(e => e.Level == LogLevel.Warning); waited++)
+                await Task.Delay(100, TestContext.Current.CancellationToken);
+
+            Assert.Contains(log.Entries, e => e.Level == LogLevel.Warning && e.Text.Contains("Tactics content", StringComparison.Ordinal));
+            Assert.ThrowsAny<Exception>(() => sp.GetRequiredService<Lazy<RulesPack>>().Value);
+            foreach (var service in hosted)
+                await service.StopAsync(TestContext.Current.CancellationToken);
+        }
+        finally
+        {
+            Directory.Delete(empty, recursive: true);
+        }
     }
 
     [Fact]
