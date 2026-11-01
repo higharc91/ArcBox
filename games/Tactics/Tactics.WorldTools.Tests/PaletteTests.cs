@@ -204,4 +204,34 @@ public sealed class PaletteTests
         Assert.Equal((x, y), PaletteBuilder.FlagsAtlas((TileFlags)bits));
         Assert.Equal((TileFlags)bits, PaletteBuilder.FlagsAt(x, y));
     }
+
+    [Fact]
+    public void The_palette_lists_every_prop_in_the_props_manifest()
+    {
+        var propsManifest = Path.Combine(ContentPaths.ContentBase, "props", "manifest.json");
+        var swatches = PaletteBuilder.PropSwatches(propsManifest);
+
+        Assert.NotEmpty(swatches);
+        Assert.Contains(swatches, s => s.Id == "tree" && s.Variant == "green" && s.Blocks);
+        Assert.All(swatches, s => Assert.True(File.Exists(Path.Combine(ContentPaths.ContentBase, s.Texture)), s.Texture));
+    }
+
+    [Fact]
+    public void Prop_atlas_coordinates_round_trip()
+    {
+        var (x, y) = PaletteBuilder.PropAtlas("tree", "green");
+        var (id, variant) = PaletteBuilder.PropAt(x, y);
+
+        Assert.Equal(("tree", "green"), (id, variant));
+    }
+
+    [Fact]
+    public void A_blocking_prop_swatch_is_marked()
+    {
+        var tile = new byte[PaletteBuilder.TileSize * PaletteBuilder.TileSize * 4];
+        Assert.False(PaletteBuilder.HasBlockingMark(tile));
+
+        PaletteBuilder.MarkBlocking(tile);
+        Assert.True(PaletteBuilder.HasBlockingMark(tile));
+    }
 }

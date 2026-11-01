@@ -21,6 +21,9 @@ public static class RegionScene
     /// <summary>The Flags layer's node name.</summary>
     public const string FlagsLayer = "Flags";
 
+    /// <summary>The Props layer's node name.</summary>
+    public const string PropsLayer = "Props";
+
     /// <summary>The node holding <see cref="BeatMarker"/>s.</summary>
     public const string Beats = "Beats";
 
@@ -30,7 +33,9 @@ public static class RegionScene
     /// <summary>The node holding <see cref="SpawnMarker"/>s.</summary>
     public const string Spawns = "Spawns";
 
-    private static readonly string[] Layers = [MaterialLayer, HeightLayer, FlagsLayer];
+    private static readonly string[] Layers = [MaterialLayer, HeightLayer, FlagsLayer, PropsLayer];
+
+    private static readonly string[] RequiredLayers = [MaterialLayer, HeightLayer, FlagsLayer];
 
     private static readonly string[] Groups = [Beats, Stamps, Spawns];
 
@@ -50,6 +55,7 @@ public static class RegionScene
         var material = root.GetNode<TileMapLayer>(MaterialLayer);
         var height = root.GetNode<TileMapLayer>(HeightLayer);
         var flags = root.GetNode<TileMapLayer>(FlagsLayer);
+        var props = root.GetNodeOrNull<TileMapLayer>(PropsLayer);
         var spawns = root.GetNode(Spawns).GetChildren().OfType<SpawnMarker>().ToList();
         var scene = root.SceneFilePath;
 
@@ -62,12 +68,19 @@ public static class RegionScene
                 var at = flags.GetCellAtlasCoords(cell);
                 return PaletteBuilder.FlagsAt(at.X, at.Y);
             }),
+            Props = props is null
+                ? System.Collections.Immutable.ImmutableDictionary<Tile, (string Id, string? Variant)>.Empty
+                : props.GetUsedCells().ToDictionary(ToTile, cell =>
+                {
+                    var at = props.GetCellAtlasCoords(cell);
+                    return PaletteBuilder.PropAt(at.X, at.Y);
+                }),
             Beats = [.. root.GetNode(Beats).GetChildren().OfType<BeatMarker>().Select(b => new BeatSpot(b.Beat, b.Tile))],
             Stamps = [.. root.GetNode(Stamps).GetChildren().OfType<StampMarker>().Select(s => new RegionStamp(s.Map, s.Tile, s.HeightOffset))],
             Starts = [.. spawns.Where(s => s.Kind == SpawnMarker.SpawnKind.Start).Select(s => s.Tile)],
             Recoveries = [.. spawns.Where(s => s.Kind == SpawnMarker.SpawnKind.Recovery).Select(s => s.Tile)],
             OldStamps = [.. root.GetNode(Stamps).GetChildren().OfType<StampMarker>().SelectMany(s => s.Pending)],
-            MovedNodes = [.. Layers.Concat(Groups).Where(name => root.GetNode<Node2D>(name).Transform != Transform2D.Identity)],
+            MovedNodes = [.. Layers.Concat(Groups).Where(name => root.GetNodeOrNull<Node2D>(name)?.Transform != Transform2D.Identity && root.GetNodeOrNull<Node2D>(name) is not null)],
             Strays = Strays(root),
             SceneFile = scene.Length > 0 ? Path.GetFileNameWithoutExtension(scene) : null,
         };
@@ -76,7 +89,7 @@ public static class RegionScene
     /// <summary>What the scene lacks of the convention, as lines for the problem list.</summary>
     public static IReadOnlyList<string> MissingParts(Region root)
     {
-        var layers = Layers.Where(name => root.GetNodeOrNull<TileMapLayer>(name) is null)
+        var layers = RequiredLayers.Where(name => root.GetNodeOrNull<TileMapLayer>(name) is null)
             .Select(name => $"The scene has no {name} tile layer. Add a TileMapLayer called {name} under the Region node, or make the scene with --new.");
         var groups = Groups.Where(name => root.GetNodeOrNull<Node2D>(name) is null)
             .Select(name => $"The scene has no {name} node. Add a Node2D called {name} under the Region node, or make the scene with --new.");
@@ -114,6 +127,17 @@ public static class RegionScene
                 height.SetCell(cell, 0, heightTile);
             if (FlagsAtlas(info.Flags) is { } flagsTile)
                 flags.SetCell(cell, 0, flagsTile);
+        }
+
+        if (ResourceLoader.Exists(Palette.Props))
+        {
+            var props = AddLayer(root, PropsLayer, GD.Load<TileSet>(Palette.Props));
+            foreach (var group in source.Props)
+            {
+                var (px, py) = PaletteBuilder.PropAtlas(group.Id, group.Variant);
+                foreach (var tile in group.At)
+                    props.SetCell(new Vector2I(tile.X, tile.Y), 0, new Vector2I(px, py));
+            }
         }
 
         var beats = AddGroup(root, Beats);

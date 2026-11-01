@@ -36,8 +36,10 @@ public sealed record ExportResult(string? Written, ImmutableArray<string> Proble
     private string Pending => Warnings.Length switch
     {
         0 => "",
-        1 => " 1 old stamp area still needs repainting.",
-        var count => $" {count} old stamp areas still need repainting.",
+        1 when Warnings[0].Contains("old stamp") => " 1 old stamp area still needs repainting.",
+        1 => " 1 warning.",
+        var count when Warnings.All(w => w.Contains("old stamp")) => $" {count} old stamp areas still need repainting.",
+        var count => $" {count} warnings.",
     };
 
     private string Story => StoryWarnings.Length switch
@@ -54,6 +56,9 @@ public sealed record ExportResult(string? Written, ImmutableArray<string> Proble
 /// </summary>
 public static partial class RegionExport
 {
+    /// <summary>The materials that count as roads: blocking props on them produce a warning.</summary>
+    public static readonly ImmutableHashSet<string> RoadMaterials = AshenFordDraft.RoadMaterials;
+
     /// <summary>What a region is called while it's checked, if its own id can't name a file.</summary>
     private const string StandInId = "region_being_checked";
 
@@ -123,13 +128,86 @@ public static partial class RegionExport
         return [.. painted.OldStamps.Select(old => StampBrush.PendingWarning(old, StampMaps.Read(rulesDirectory, old.Map), covered)).OfType<string>()];
     }
 
+    private static List<string> PropWarnings(PaintedRegion painted, string rulesDirectory, string contentBase)
+    {
+        if (painted.Props.Count == 0)
+            return [];
+
+        IReadOnlyDictionary<string, PropArtDef>? propDefs = null;
+        try
+        {
+            if (Directory.Exists(contentBase))
+                propDefs = ArtManifests.Load(contentBase).Props;
+        }
+        catch
+        {
+            // If art manifest fails to load, fall back to DefaultProps
+        }
+        propDefs ??= ArtManifests.DefaultProps;
+
+        var warnings = new List<string>();
+
+        // 1. Blocking prop on road tile
+        foreach (var (tile, (id, _)) in painted.Props.OrderBy(p => p.Key.Y).ThenBy(p => p.Key.X))
+        {
+            if (painted.Materials.TryGetValue(tile, out var mat) && RoadMaterials.Contains(mat))
+            {
+                var blocks = propDefs?.TryGetValue(id, out var def) == true ? def.Blocks : false;
+                if (blocks)
+                    warnings.Add($"The tile {tile} has a blocking prop '{id}' on a road. Move the prop off the road, or change the material.");
+            }
+        }
+
+        // 2. Prop on beat spot
+        foreach (var (tile, (id, _)) in painted.Props.OrderBy(p => p.Key.Y).ThenBy(p => p.Key.X))
+        {
+            if (painted.Beats.FirstOrDefault(b => b.At == tile) is { } beat)
+                warnings.Add($"The tile {tile} has a prop '{id}' on the beat '{beat.Beat}'. Move the prop, or move the beat marker.");
+        }
+
+        // 3. Prop on spawn
+        foreach (var (tile, (id, _)) in painted.Props.OrderBy(p => p.Key.Y).ThenBy(p => p.Key.X))
+        {
+            if (painted.Starts.Contains(tile))
+                warnings.Add($"The tile {tile} has a prop '{id}' on the start spawn. Move the prop, or move the spawn marker.");
+            if (painted.Recoveries.Contains(tile))
+                warnings.Add($"The tile {tile} has a prop '{id}' on the recovery spawn. Move the prop, or move the spawn marker.");
+        }
+
+        // 4. Tall prop within 4 tiles in front of a stamp (+x or +y)
+        foreach (var stamp in painted.Stamps)
+        {
+            var map = StampMaps.Read(rulesDirectory, stamp.Map);
+            if (map is null)
+                continue;
+
+            var (left, top, right, bottom) = (stamp.At.X, stamp.At.Y, stamp.At.X + map.Width, stamp.At.Y + map.Height);
+            foreach (var (tile, (id, _)) in painted.Props.OrderBy(p => p.Key.Y).ThenBy(p => p.Key.X))
+            {
+                var height = propDefs?.TryGetValue(id, out var def) == true ? def.Height : 1;
+                if (height >= 2)
+                {
+                    if (tile.X >= left && tile.X < right && tile.Y >= top && tile.Y < bottom)
+                        continue;
+
+                    var inFrontX = tile.X >= right && tile.X < right + 4 && tile.Y >= top && tile.Y < bottom + 4;
+                    var inFrontY = tile.Y >= bottom && tile.Y < bottom + 4 && tile.X >= left && tile.X < right + 4;
+                    if (inFrontX || inFrontY)
+                        warnings.Add($"The tile {tile} has a tall prop '{id}' in front of the stamp '{stamp.Map}'. Move the prop, or move the stamp.");
+                }
+            }
+        }
+
+        return warnings;
+    }
+
     private static ExportResult Run(PaintedRegion painted, string rulesDirectory, string contentBase)
     {
         if (!File.Exists(Path.Combine(rulesDirectory, "manifest.json")))
             return new ExportResult(null, [$"{rulesDirectory} isn't a rules pack: it has no manifest.json. Copy content/tactics/base/rules there, or fix --rules."]);
 
         var problems = new List<string>();
-        ImmutableArray<string> warnings = [.. PendingWarnings(painted, rulesDirectory)];
+        ImmutableArray<string> warnings = [.. PendingWarnings(painted, rulesDirectory), .. PropWarnings(painted, rulesDirectory, contentBase)];
         if (!ValidId(painted.Id))
             problems.Add($"The region id '{painted.Id}' must be lower-case letters, digits and underscores. Change Id on the Region node.");
 
@@ -154,7 +232,7 @@ public static partial class RegionExport
             return new ExportResult(null, [.. problems]) { Warnings = warnings };
 
         var bytes = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(region, FileOptions) + "\n");
-        var checks = Check(rulesDirectory, region.Id, bytes);
+        var checks = Check(rulesDirectory, region.Id, bytes, contentBase);
         problems.AddRange(painted.Starts.Count == 0 ? checks.Problems.Where(p => !NeedsTheStart(p)) : checks.Problems);
         if (problems.Count > 0)
             return new ExportResult(null, [.. problems]) { Warnings = warnings };
@@ -211,7 +289,7 @@ public static partial class RegionExport
     /// region already listed would then have its id twice; the copy also means an old file there is replaced, not checked. Gives what's
     /// wrong, or the loaded pack if nothing is.
     /// </summary>
-    private static (List<string> Problems, RulesPack? Pack) Check(string rulesDirectory, string id, byte[] region)
+    private static (List<string> Problems, RulesPack? Pack) Check(string rulesDirectory, string id, byte[] region, string contentBase)
     {
         var copy = Directory.CreateTempSubdirectory("tactics-region-check-").FullName;
         var entry = $"world/{id}.json";
@@ -245,7 +323,8 @@ public static partial class RegionExport
                 files.Add(entry);
             File.WriteAllText(manifestPath, manifest.ToJsonString());
 
-            return ([], RulesPack.Load([copy]));
+            var art = Directory.Exists(contentBase) ? ArtManifests.Load(contentBase) : null;
+            return ([], RulesPack.Load([copy], art));
         }
         catch (ContentException ex)
         {

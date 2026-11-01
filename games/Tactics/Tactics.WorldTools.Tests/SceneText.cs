@@ -15,7 +15,7 @@ internal static partial class SceneText
     /// <summary>The bytes of one cell in a <c>tile_map_data</c>: x, y, source, atlas x, atlas y and alternative, two bytes each.</summary>
     private const int CellBytes = 12;
 
-    private static readonly string[] Layers = ["Material", "Height", "Flags"];
+    private static readonly string[] Layers = ["Material", "Height", "Flags", "Props"];
 
     private static readonly Dictionary<string, string> MarkerGroups = new(StringComparer.Ordinal)
     {
@@ -80,12 +80,13 @@ internal static partial class SceneText
             Materials = Cells(nodes, "Material").ToDictionary(c => c.At, c => names.GetValueOrDefault(c.Source, $"source {c.Source}")),
             Heights = Cells(nodes, "Height").ToDictionary(c => c.At, c => c.AtlasX),
             Flags = Cells(nodes, "Flags").ToDictionary(c => c.At, c => PaletteBuilder.FlagsAt(c.AtlasX, c.AtlasY)),
+            Props = Cells(nodes, "Props").ToDictionary(c => c.At, c => PaletteBuilder.PropAt(c.AtlasX, c.AtlasY)),
             Beats = [.. Markers(nodes, "BeatMarker").Select(n => new BeatSpot(Text(n["Beat"]), n.Tile))],
             Stamps = [.. stamps.Select(n => new RegionStamp(Text(n["Map"]), n.Tile, int.Parse(n["HeightOffset"] ?? "0", CultureInfo.InvariantCulture)))],
             Starts = [.. spawns.Where(n => (n["Kind"] ?? "0") == "0").Select(n => n.Tile)],
             Recoveries = [.. spawns.Where(n => n["Kind"] == "1").Select(n => n.Tile)],
             OldStamps = [.. stamps.SelectMany(OldAreas)],
-            MovedNodes = [.. Layers.Concat(MarkerGroups.Values.Order(StringComparer.Ordinal)).Where(name => nodes.Single(n => n.Parent == "." && n.Name == name).Moved)],
+            MovedNodes = [.. Layers.Concat(MarkerGroups.Values.Order(StringComparer.Ordinal)).Where(name => nodes.SingleOrDefault(n => n.Parent == "." && n.Name == name)?.Moved == true)],
             Strays = Strays(nodes),
             SceneFile = Path.GetFileNameWithoutExtension(scene),
         };
@@ -176,7 +177,7 @@ internal static partial class SceneText
 
     private static List<Cell> Cells(List<Node> nodes, string layer)
     {
-        if (nodes.Single(n => n.Parent == "." && n.Name == layer)["tile_map_data"] is not { } data)
+        if (nodes.SingleOrDefault(n => n.Parent == "." && n.Name == layer)?["tile_map_data"] is not { } data)
             return [];
 
         const string Open = "PackedByteArray(\"";

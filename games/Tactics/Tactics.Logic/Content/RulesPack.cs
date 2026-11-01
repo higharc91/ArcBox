@@ -14,6 +14,7 @@ public sealed partial class RulesPack
         Catalog? catalog = null, ImmutableSortedDictionary<string, UnitSheet>? monsterSheets = null, ArtManifest? art = null)
     {
         _monsterSheets = monsterSheets ?? Ordinal.Map<UnitSheet>();
+        Art = art;
         Hash = hash;
         Abilities = abilities;
         Passives = passives;
@@ -41,6 +42,9 @@ public sealed partial class RulesPack
     private readonly ImmutableSortedDictionary<string, UnitSheet> _monsterSheets;
     private readonly ImmutableSortedDictionary<string, PassiveDef> _injuryPassives;
     private readonly ImmutableSortedDictionary<string, Lazy<WorldGround>> _grounds;
+
+    /// <summary>The art manifest the pack was loaded with, if any.</summary>
+    public ArtManifest? Art { get; }
 
     /// <summary>The hash of everything a battle runs under; a battle records it in <see cref="BattleState.ContentHash"/>. Regions aren't in it.</summary>
     public string Hash { get; }

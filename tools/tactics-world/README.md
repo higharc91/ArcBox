@@ -45,6 +45,7 @@ drag with the middle mouse to move around. Ctrl+Z undoes.
 | `Material` | What a tile is made of. Each swatch is the corner of the real texture, so it won't line up the way it does in the game | Void. Fine for a whole 32x32 chunk. In a chunk with any paint it's a hole, which the export refuses |
 | `Height` | The tile's height, 0 to 9 | Height 0 |
 | `Flags` | How a tile plays. A swatch is a combination of marks, and the palette has all 32 | Plain ground |
+| `Props` | Props and scenery. Swatches show the prop's art at a small size; blocking props are marked with a red X in the corner | No prop on the tile. Erasing a prop leaves the ground underneath alone |
 
 **The Height ramp** is a contour map: clear is 0, then 1 blue, 2 cyan, 3 green, 4 lime, 5 yellow, 6 orange, 7 red, 8 pink and 9 violet.
 The number is on each tile when you're zoomed in. A party can climb 2 levels in a step, and can drop any distance. So a drop of 3 or more is
@@ -131,6 +132,10 @@ clicking a line that names a tile goes to it.
 | Warning (the file is still written) | What it means | What to do |
 |---|---|---|
 | old stamp at (x, y) may still be in the world | A pending area | Repaint it, then Done repainting |
+| a blocking prop on a road | A tree or obstacle blocking a road or street | Move the prop off the road, or change the material |
+| a prop on a beat spot | A prop placed on a story beat's tile | Move the prop, or move the beat marker |
+| a prop on a spawn | A prop placed on the Start or Recovery spawn | Move the prop, or move the spawn marker |
+| a tall prop in front of a stamp | A prop of height 2 or more within 4 tiles in front of a battle stamp (+X or +Y), where it would hide the fight | Move the prop, or move the stamp |
 | a beat has no spot | The story reaches a beat with no marker | Add a `BeatMarker` |
 | a battle beat has no stamp | Its encounter's map isn't stamped here | Add a `StampMarker`, press Apply stamp |
 | party can't walk to a beat | The story can't get there in order, or, for a battle, can't reach its spot or a step into its stamp | Paint a way there, or move the marker |

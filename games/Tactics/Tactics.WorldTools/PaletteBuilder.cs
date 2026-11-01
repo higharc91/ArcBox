@@ -7,6 +7,9 @@ namespace Tactics.WorldTools;
 /// <summary>One paintable material: its name, its texture relative to the terrain manifest, and its swatch's file name.</summary>
 public sealed record MaterialSwatch(string Material, string Texture, string File);
 
+/// <summary>One paintable prop: its id, variant, blocking state, cover, height, texture and file name.</summary>
+public sealed record PropSwatch(string Id, string? Variant, bool Blocks, Cover Cover, int Height, string Texture, string File);
+
 /// <summary>
 /// What the painting workspace's palette holds. Materials come from the terrain manifest, and sides aren't listed because the game
 /// chooses them. Height and flags tiles are drawn here as plain RGBA, top row first, so the Godot project only saves them.
@@ -21,6 +24,9 @@ public static class PaletteBuilder
 
     /// <summary>Tiles along a row of the flags atlas.</summary>
     private const int FlagsAtlasColumns = 8;
+
+    /// <summary>Tiles along a row of the props atlas.</summary>
+    public const int PropAtlasColumns = 16;
 
     /// <summary>A height tile's alpha: enough to read as a wash, little enough to see the material through it.</summary>
     private const byte ShadeAlpha = 140;
@@ -149,6 +155,111 @@ public static class PaletteBuilder
 
     /// <summary>The flag combination at a cell of the flags atlas.</summary>
     public static TileFlags FlagsAt(int x, int y) => (TileFlags)(y * FlagsAtlasColumns + x);
+
+    /// <summary>Default swatches loaded for prop atlas coordinate lookups.</summary>
+    public static IReadOnlyList<PropSwatch>? DefaultPropSwatches { get; set; }
+
+    /// <summary>Every paintable prop from its manifest, ordered by prop id then variant.</summary>
+    public static IReadOnlyList<PropSwatch> PropSwatches(string manifestPath)
+    {
+        using var manifest = JsonDocument.Parse(File.ReadAllBytes(manifestPath));
+        var list = new List<PropSwatch>();
+        var props = manifest.RootElement.GetProperty("props");
+        foreach (var prop in props.EnumerateObject().OrderBy(p => p.Name, StringComparer.Ordinal))
+        {
+            var blocks = prop.Value.TryGetProperty("blocks", out var b) && b.GetBoolean();
+            var cover = prop.Value.TryGetProperty("cover", out var c) ? ParseCover(c.GetString()) : Cover.None;
+            var height = prop.Value.TryGetProperty("height", out var h) ? h.GetInt32() : 1;
+            if (prop.Value.TryGetProperty("variants", out var vars) && vars.ValueKind == JsonValueKind.Object)
+            {
+                var variants = vars.EnumerateObject().OrderBy(v => v.Name, StringComparer.Ordinal).ToList();
+                if (variants.Count > 0)
+                {
+                    foreach (var variant in variants)
+                        list.Add(new PropSwatch(prop.Name, variant.Name, blocks, cover, height, $"props/{variant.Value.GetString()!}", $"{prop.Name}_{variant.Name}.png"));
+                    continue;
+                }
+            }
+            list.Add(new PropSwatch(prop.Name, null, blocks, cover, height, "", $"{prop.Name}.png"));
+        }
+        return list;
+    }
+
+    /// <summary>Every prop swatch from <paramref name="contentBase"/>'s <c>props/manifest.json</c>.</summary>
+    public static IReadOnlyList<PropSwatch> AllPropSwatches(string contentBase)
+        => PropSwatches(Path.Combine(contentBase, "props", "manifest.json"));
+
+    /// <summary>Where a prop sits in the props atlas.</summary>
+    public static (int X, int Y) PropAtlas(string id, string? variant = null)
+    {
+        var swatches = DefaultPropSwatches ??= FallbackSwatches();
+        var index = -1;
+        for (var i = 0; i < swatches.Count; i++)
+        {
+            if (swatches[i].Id == id && (swatches[i].Variant == variant || variant is null))
+            {
+                index = i;
+                break;
+            }
+        }
+        if (index < 0)
+            throw new ArgumentException($"Unknown prop '{id}' with variant '{variant}'.", nameof(id));
+        return (index % PropAtlasColumns, index / PropAtlasColumns);
+    }
+
+    /// <summary>The prop at a cell of the props atlas.</summary>
+    public static (string Id, string? Variant) PropAt(int x, int y)
+    {
+        var swatches = DefaultPropSwatches ??= FallbackSwatches();
+        var index = y * PropAtlasColumns + x;
+        if (index < 0 || index >= swatches.Count)
+            throw new ArgumentOutOfRangeException(nameof(x), $"Cell ({x}, {y}) is outside the prop atlas.");
+        var swatch = swatches[index];
+        return (swatch.Id, swatch.Variant);
+    }
+
+    /// <summary>Marks a 32x32 RGBA tile as blocking with the impassable mark in the bottom left.</summary>
+    public static void MarkBlocking(byte[] tile)
+    {
+        Fill(tile, 2, 18, 10, 12, (200, 40, 40), 255);
+        Draw(tile, 'X', 2, 4, 19, (255, 255, 255));
+    }
+
+    /// <summary>Whether a prop swatch tile has the blocking mark.</summary>
+    public static bool HasBlockingMark(byte[] tile)
+    {
+        var at = (18 * TileSize + 2) * 4;
+        return tile[at] == 200 && tile[at + 1] == 40 && tile[at + 2] == 40;
+    }
+
+    private static Cover ParseCover(string? cover) => cover switch
+    {
+        "full" or "total" => Cover.Total,
+        "half" => Cover.Half,
+        "three_quarters" => Cover.ThreeQuarters,
+        _ => Cover.None,
+    };
+
+    private static List<PropSwatch> FallbackSwatches()
+    {
+        var dir = new DirectoryInfo(AppContext.BaseDirectory);
+        while (dir is not null)
+        {
+            var candidate = Path.Combine(dir.FullName, "content", "tactics", "base", "props", "manifest.json");
+            if (File.Exists(candidate))
+                return [.. PropSwatches(candidate)];
+            dir = dir.Parent;
+        }
+        dir = new DirectoryInfo(Directory.GetCurrentDirectory());
+        while (dir is not null)
+        {
+            var candidate = Path.Combine(dir.FullName, "content", "tactics", "base", "props", "manifest.json");
+            if (File.Exists(candidate))
+                return [.. PropSwatches(candidate)];
+            dir = dir.Parent;
+        }
+        return [];
+    }
 
     private static void Fill(byte[] tile, int left, int top, int width, int height, (byte R, byte G, byte B) colour, byte alpha)
     {

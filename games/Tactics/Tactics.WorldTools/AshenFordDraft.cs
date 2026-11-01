@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using Tactics.Logic;
 
 namespace Tactics.WorldTools;
@@ -41,6 +42,9 @@ public static class AshenFordDraft
     private const string Rock = "rock/grey", DarkRock = "rock/dark", Ash = "ash/grey", Basalt = "basalt/dark", Water = "water/clear";
     private const string Street = "cobble/warm", Wall = "cobble/grey", Square = "flagstone/warm", Quay = "flagstone/grey";
     private const string Deck = "planks/oak", Roof = "planks/dark";
+
+    /// <summary>What the road is made of: the packed path, and the town's cobbles and square.</summary>
+    public static readonly ImmutableHashSet<string> RoadMaterials = ["cobble/warm", "flagstone/warm", "path/packed"];
 
     /// <summary>River Crossing's corner: its column 6 and 7 are the river, its rows 7 and 8 the ford.</summary>
     private static readonly Tile StampAt = new(100, 52);

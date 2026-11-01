@@ -802,4 +802,145 @@ public sealed class RegionExportTests : IDisposable
 
         Assert.All(problems, p => Assert.True(p.Trim().Split(". ").Length >= 2, p));
     }
+
+    [Fact]
+    public void A_painted_prop_reaches_the_region_file()
+    {
+        var painted = Field() with
+        {
+            Props = new Dictionary<Tile, (string Id, string? Variant)>
+            {
+                [new Tile(2, 2)] = ("tree", "green"),
+            },
+        };
+
+        var result = Export(painted);
+
+        Assert.Empty(result.Problems);
+        var json = File.ReadAllText(result.Written!);
+        var def = JsonSerializer.Deserialize<RegionDef>(json, ArcJson.Options)!;
+        var group = Assert.Single(def.Props);
+        Assert.Equal("tree", group.Id);
+        Assert.Equal("green", group.Variant);
+        Assert.Equal([new Tile(2, 2)], group.At);
+    }
+
+    [Fact]
+    public void A_second_export_is_byte_identical()
+    {
+        var painted = Field() with
+        {
+            Props = new Dictionary<Tile, (string Id, string? Variant)>
+            {
+                [new Tile(3, 3)] = ("tree", "green"),
+                [new Tile(2, 2)] = ("crate", "oak"),
+            },
+        };
+
+        var first = Export(painted);
+        Assert.Empty(first.Problems);
+        var firstBytes = File.ReadAllBytes(first.Written!);
+        var second = Export(painted);
+        Assert.Empty(second.Problems);
+        var secondBytes = File.ReadAllBytes(second.Written!);
+
+        Assert.True(firstBytes.AsSpan().SequenceEqual(secondBytes));
+    }
+
+    [Fact]
+    public void A_blocking_prop_on_a_road_warns_and_goes_to_it()
+    {
+        var roadTile = new Tile(2, 2);
+        var painted = Field() with
+        {
+            Materials = Grid(6, 6).ToDictionary(t => t.Key, t => t.Key == roadTile ? "path/packed" : Grass),
+            Props = new Dictionary<Tile, (string Id, string? Variant)>
+            {
+                [roadTile] = ("tree", "green"),
+            },
+        };
+
+        var result = Export(painted);
+
+        var warning = Assert.Single(result.Warnings);
+        Assert.Equal(roadTile, RegionExport.TileIn(warning));
+    }
+
+    [Fact]
+    public void A_prop_on_a_beat_spot_warns()
+    {
+        var beatTile = new Tile(5, 5);
+        var painted = Field() with
+        {
+            Props = new Dictionary<Tile, (string Id, string? Variant)>
+            {
+                [beatTile] = ("reed", "green"),
+            },
+        };
+
+        var result = Export(painted);
+
+        var warning = Assert.Single(result.Warnings);
+        Assert.Equal(beatTile, RegionExport.TileIn(warning));
+    }
+
+    [Fact]
+    public void A_prop_on_a_spawn_warns()
+    {
+        var startTile = new Tile(0, 0);
+        var painted = Field() with
+        {
+            Props = new Dictionary<Tile, (string Id, string? Variant)>
+            {
+                [startTile] = ("reed", "green"),
+            },
+        };
+
+        var result = Export(painted);
+
+        var warning = Assert.Single(result.Warnings);
+        Assert.Equal(startTile, RegionExport.TileIn(warning));
+    }
+
+    [Fact]
+    public void A_tall_prop_in_front_of_a_stamp_warns()
+    {
+        var map = Base.Value.MapFor("river_crossing")!;
+        var stampAt = new Tile(4, 4);
+        var frontTile = new Tile(stampAt.X + map.Width + 1, stampAt.Y + 2);
+        var (w, h) = (stampAt.X + map.Width + 8, stampAt.Y + map.Height + 8);
+        var painted = Stamped(map) with
+        {
+            Width = w,
+            Height = h,
+            Materials = Grid(w, h),
+            Props = new Dictionary<Tile, (string Id, string? Variant)>
+            {
+                [frontTile] = ("tree", "green"),
+            },
+        };
+
+        var result = Export(painted);
+
+        var warning = Assert.Single(result.Warnings);
+        Assert.Equal(frontTile, RegionExport.TileIn(warning));
+    }
+
+    [Fact]
+    public void A_tree_across_the_road_fails_the_story_order()
+    {
+        var draft = AshenFordDraft.Build(Base.Value);
+        draft.Props.Add(new RegionProps("tree", "green", [
+            new Tile(49, 61), new Tile(49, 62), new Tile(49, 63),
+            new Tile(10, 61), new Tile(10, 62), new Tile(10, 63),
+        ]));
+        var materials = PaletteBuilder.AllSwatches(ContentPaths.ContentBase).Select(s => s.Material).ToHashSet(StringComparer.Ordinal);
+        var def = RegionWriter.Write(draft, materials).Region!;
+        var region = WorldRegion.From(def);
+
+        var problems = StoryOrder.Check(region, Base.Value, ContentPaths.ContentBase).Problems;
+
+        Assert.NotEmpty(problems);
+        Assert.Contains(problems, p => p.Contains("can't walk to", StringComparison.Ordinal));
+    }
 }
