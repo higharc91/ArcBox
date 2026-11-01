@@ -408,21 +408,22 @@ public sealed class EngineFaultTests
     }
 
     [Fact]
-    public void A_seat_the_engine_fails_to_hand_over_keeps_its_controller_and_the_returning_player_is_told()
+    public void A_seat_the_engine_fails_to_hand_back_stays_the_ais_and_the_returning_player_is_told()
     {
         var (game, faults) = Watched();
         var s = new Session(game: game);
         s.ToBattle();
+        s.Harness.SetConnected(1, false);     // handed to the AI normally
         game.HandEngine = (_, _, _) => throw Forced();
 
-        s.Harness.SetConnected(1, false);
+        s.Harness.SetConnected(1, true);
+
         Assert.False(s.Harness.IsOver);
         Assert.Equal(TacticsPhase.Battle, s.Game.Phase);
         Assert.Equal("hand", Assert.Single(faults).Where);
-
-        s.Harness.SetConnected(1, true);
-        Assert.False(s.Harness.IsOver);
+        Assert.IsType<AiControlled>(s.Game.Document.Battle!.State.Units[TacticsGame.UnitFor(1)].Controller);
         Assert.Equal(TacticsGame.HandBackFailed, s.Screen(1)?.Header);
+        Assert.Null(s.Host.Notice);     // nobody moved: the TV says nothing
 
         // The battle still plays out, the AI deciding for whoever the engine wouldn't hand back.
         s.PlayOut();
@@ -430,7 +431,28 @@ public sealed class EngineFaultTests
     }
 
     [Fact]
-    public void A_saved_battle_the_engine_fails_to_hand_back_on_opening_still_opens_and_says_so()
+    public void A_seat_that_leaves_and_returns_while_hand_overs_fail_is_still_theirs_and_nobody_is_told_otherwise()
+    {
+        var (game, faults) = Watched();
+        var s = new Session(game: game);
+        s.ToBattle();
+        game.HandEngine = (_, _, _) => throw Forced();
+
+        s.Harness.SetConnected(1, false);     // fails: the hero stays theirs, and the AI decides while they're away
+        Assert.Equal("hand", Assert.Single(faults).Where);
+        Assert.Null(s.Host.Notice);
+        s.Harness.SetConnected(1, true);      // already theirs: nothing to hand back, nothing to fail
+
+        Assert.False(s.Harness.IsOver);
+        Assert.Single(faults);
+        Assert.Equal(new PlayerControlled(s.Profiles[1]!.Value), s.Game.Document.Battle!.State.Units[TacticsGame.UnitFor(1)].Controller);
+        Assert.NotEqual(TacticsGame.HandBackFailed, s.Screen(1)?.Header);
+        s.PlayOut();
+        Assert.Equal(TacticsPhase.Results, s.Game.Phase);
+    }
+
+    [Fact]
+    public void A_saved_battle_opened_by_the_same_players_needs_no_hand_over()
     {
         var first = new Session();
         first.ToBattle();
@@ -440,10 +462,28 @@ public sealed class EngineFaultTests
 
         s.Harness.StartCampaign(s.Lease);
 
+        Assert.Equal(TacticsPhase.Battle, s.Game.Phase);
+        Assert.Empty(faults);
+        Assert.DoesNotContain(Enumerable.Range(0, 4), p => s.Screen(p)?.Header == TacticsGame.HandBackFailed);
+    }
+
+    [Fact]
+    public void A_saved_battle_the_engine_fails_to_hand_back_on_opening_still_opens_and_says_so()
+    {
+        var first = new Session();
+        first.ToBattle(everyoneAway: true);     // saved with every hero the AI's
+        var (game, faults) = Watched();
+        game.HandEngine = (_, _, _) => throw Forced();
+        var s = new Session(document: first.Lease.Document, game: game);
+
+        s.Harness.StartCampaign(s.Lease);
+
         Assert.False(s.Harness.IsOver);
         Assert.Equal(TacticsPhase.Battle, s.Game.Phase);
         Assert.Equal(4, faults.Count(f => f.Where == "hand"));
+        Assert.All(Enumerable.Range(0, 4), p => Assert.True(s.Screen(p) is not { } view || view.Header == TacticsGame.HandBackFailed));
         Assert.Contains(Enumerable.Range(0, 4), p => s.Screen(p)?.Header == TacticsGame.HandBackFailed);
+        Assert.Null(s.Host.Notice);
     }
 
     private static (int Player, CustomView Screen) WaitForTurn(Session s)

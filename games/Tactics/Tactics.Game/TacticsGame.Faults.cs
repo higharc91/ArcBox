@@ -108,10 +108,11 @@ public sealed partial class TacticsGame
     /// </summary>
     private static bool IsEngineFailure(Exception e) => e is not OutOfMemoryException;
 
-    /// <summary>Logs a failure and puts the notice on the TV.</summary>
-    private void Fault(string where, BattleState? before, Command? command, Exception e)
+    /// <summary>Logs a failure and, for a failed move (<paramref name="tv"/>), puts the notice on the TV.</summary>
+    private void Fault(string where, BattleState? before, Command? command, Exception e, bool tv = true)
     {
-        _faultAt = _ctx.Now;
+        if (tv)
+            _faultAt = _ctx.Now;
         var save = _doc.Battle;
         Report(() => new EngineFault(where, save?.Encounter ?? "", save?.Seed ?? 0, _seq, before?.Round ?? 0, before?.TurnIndex ?? 0,
             command is null ? null : JsonSerializer.Serialize(command, ArcJson.Options),
@@ -210,16 +211,22 @@ public sealed partial class TacticsGame
         ToMusterOrPick();
     }
 
-    /// <summary><see cref="Battle.Hand"/>, or null if the engine failed (logged; the controller stays as it was).</summary>
+    /// <summary>
+    /// <see cref="Battle.Hand"/>, or null if the engine failed (logged; the controller stays as it was). A unit that already
+    /// has <paramref name="controller"/> isn't handed at all. Nobody moved, so the TV says nothing: the returning player's
+    /// toast is enough.
+    /// </summary>
     private BattleState? TryHand(BattleState state, UnitId unit, Controller controller)
     {
+        if (state.Units.TryGetValue(unit, out var u) && u.Controller == controller)
+            return state;
         try
         {
             return HandEngine(state, unit, controller);
         }
         catch (Exception e) when (IsEngineFailure(e))
         {
-            Fault("hand", state, null, e);
+            Fault("hand", state, null, e, tv: false);
             return null;
         }
     }
