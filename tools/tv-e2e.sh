@@ -684,11 +684,14 @@ if [[ "$GAME" == "tactics" && "$CHAPTER" == "1" ]]; then
     (( ANSWERED == 0 )) && log "chapter: nobody skipped, voted or picked: the game's timers ran every scene" \
       || chapter_fail "a silent run: the bots answered $ANSWERED times"
   fi
-  for shot in chapter-card walking-after; do
-    SHOT=$(find "$OUT/chapter" -name "*$shot.png" 2> /dev/null | sort | tail -1)
-    [[ -n "$SHOT" || -z "$SHOTS_PID" ]] && log "a shot of the $shot: ${SHOT:-none, no import}" || chapter_fail "a shot of the $shot"
-  done
-  log "chapter: $(find "$OUT/chapter" -name '*.png' 2> /dev/null | wc -l) shots in $OUT/chapter"
+  # The shots, when there were any to take (ARCBOX_SHOTS=0, Windows or no ImageMagick: none).
+  if [[ -n "$SHOTS_PID" ]]; then
+    for shot in chapter-card walking-after; do
+      SHOT=$({ find "$OUT/chapter" -name "*$shot.png" 2> /dev/null || true; } | sort | tail -1)
+      [[ -n "$SHOT" ]] && log "a shot of the $shot: $SHOT" || chapter_fail "a shot of the $shot"
+    done
+    log "chapter: $({ find "$OUT/chapter" -name '*.png' 2> /dev/null || true; } | wc -l) shots in $OUT/chapter"
+  fi
 
   if (( PHONES_EXIT != 0 )) || [[ -n "$ERRORS" ]] || (( CHAPTER_FAIL )); then
     log "FAILED (phones exit $PHONES_EXIT)"
