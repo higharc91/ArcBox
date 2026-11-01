@@ -1,6 +1,7 @@
 using System.Collections.Immutable;
 using System.Numerics;
 using Tactics.Presentation.Beats;
+using Tactics.Presentation.World;
 
 namespace Tactics.Presentation.Board;
 
@@ -11,6 +12,23 @@ namespace Tactics.Presentation.Board;
 public static class MarkRule
 {
     private const float Gap = 2;     // above and below a count: closer than that, a number over it reads as part of it
+
+    /// <summary>
+    /// Whether the units' marks show at <paramref name="stage"/>: only while the fight is being played, on the plain board
+    /// (<see cref="StageStep.Off"/>) or in the world (<see cref="StageStep.Fighting"/>, <see cref="StageStep.Fading"/>). Not in the walk-in,
+    /// where the party is still walking as it does in the world, with no bars, nor once the results are over the world, nor in the wake after them.
+    /// </summary>
+    public static bool Shown(StageStep stage) => stage is StageStep.Off or StageStep.Fighting or StageStep.Fading;
+
+    /// <summary>The units with no marks: no bar, no count, no icons and no turn arrow.</summary>
+    public static ImmutableArray<BoardUnit> Bare(ImmutableArray<BoardUnit> units)
+        => units.Any(u => u.Bar is not null || u.Countdown is not null || !u.Icons.IsEmpty || u.ArrowAt is not null)
+            ? [.. units.Select(u => u with { Bar = null, Countdown = null, Icons = [], ArrowAt = null })]
+            : units;
+
+    /// <summary>The units as they're drawn this moment: with their marks if <paramref name="shown"/>, clear of the beat's numbers (<see cref="ClearOfPops"/>), or bare.</summary>
+    public static ImmutableArray<BoardUnit> Apply(ImmutableArray<BoardUnit> units, BeatFrame beat, UnitArt art, bool shown)
+        => shown ? ClearOfPops(units, beat.Pops, art) : Bare(units);
 
     /// <summary>
     /// The units with no Downed count while a number pops up over that unit, or close enough beside its count to be read with it: "-10" next to
