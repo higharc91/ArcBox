@@ -132,9 +132,10 @@ public sealed class StoryTrack(VoiceClips? clips, HudArt? art = null, SpeechFall
 
     /// <summary>
     /// The TV's connection dropped: what it missed can't be caught up, so the next view only shows, as a TV joining does, and its line isn't
-    /// started partway. What was heard stays heard.
+    /// started partway. What was heard stays heard. A story it saw waiting to resume may have resumed while it was away, so that's
+    /// forgotten too: only a Resuming seen since this drop lets the saved line be said.
     /// </summary>
-    public void Rejoin() => (Seq, _watching) = (null, false);
+    public void Rejoin() => (Seq, _watching, _resumed) = (null, false, false);
 
     /// <summary>The words of the story line the track last started, or null: the only voice a <see cref="StoryTick.Cut"/> may stop (<see cref="StoryVoice.Owns"/>).</summary>
     public string? Speaking => _speakingText;

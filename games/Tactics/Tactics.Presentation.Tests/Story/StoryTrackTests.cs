@@ -313,6 +313,29 @@ public sealed class StoryTrackTests
         Assert.Equal("ch1_mayor_open_4", replay.Say!.Line);
     }
 
+    /// <summary>
+    /// Review: the TV saw the story wait at Resuming, then dropped again while it waited. The party came back without it, and its line was
+    /// 3 s under way when the TV returned: that's a TV joining mid-question, so nothing is said, and the clock shows the time left, not the
+    /// question's whole span as if the TV had watched it open.
+    /// </summary>
+    [Fact]
+    public void A_tv_that_dropped_while_the_story_waited_to_resume_joins_its_line_silently()
+    {
+        var resuming = new TacticsHostView(nameof(TacticsPhase.Resuming), "", null, 1, [], null, null, null, null);
+        var track = Running(4);
+        Assert.NotNull(track.Receive(Showing(5, Line("ch1_mayor_open_3")), T0).Say);
+        track.Rejoin();
+        track.Receive(resuming, T0);
+        track.Rejoin();                                                   // gone again, while the story waits
+
+        var ask = Ask(true, 0, 4, [Option("a", "Yes."), Option("b", "No.")], deadline: T0.AddSeconds(12), span: 45);
+        var back = track.Receive(resuming with { Phase = nameof(TacticsPhase.Story), Story = Showing(7, Line("ch1_mayor_open_4"), States.Asking, ask) },
+            T0.AddSeconds(3));
+
+        Assert.Null(back.Say);
+        Assert.Equal("0:09", back.Screen!.Vote!.Clock);
+    }
+
     /// <summary>The same restart, on a line the TV had said: the replay is shown, never said twice.</summary>
     [Fact]
     public void A_line_the_tv_heard_isnt_said_again_when_a_restart_starts_it_again()
