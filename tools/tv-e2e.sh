@@ -13,7 +13,7 @@
 #   ARCBOX_STAGE=1 GODOT=… tools/tv-e2e.sh                                          a fight in the world: walk in, lose, wake, walk back
 #                                                                                   in and fight it again (with ARCBOX_RECONNECT=1,
 #                                                                                   ARCBOX_RESTART=1 or ARCBOX_DROP_SIGNALS=1 too)
-#   ARCBOX_CHAPTER=1 ARCBOX_BRANCH=force|parley GODOT=… tools/tv-e2e.sh             all of Chapter 1 from a fresh campaign, on a branch
+#   ARCBOX_CHAPTER=1 ARCBOX_BRANCH=force|parley|skip-assault GODOT=… tools/tv-e2e.sh all of Chapter 1 from a fresh campaign, on a branch
 #                                                                                   (with ARCBOX_RESTART=1 and ARCBOX_RECONNECT=1 mid-scene)
 #
 # What it does (REDLINE; Tactics is below):
@@ -139,7 +139,9 @@
 #   ARCBOX_WALK      1 = (tactics) walk the world rather than fight, with a server restart, a TV kill and a dropped phone (above)
 #   ARCBOX_STAGE     1 = fights where the party walks into them, one lost and one fought again (above); implies ARCBOX_GAME=tactics
 #   ARCBOX_CHAPTER   1 = all of Chapter 1 from a fresh campaign (above); implies ARCBOX_GAME=tactics
-#   ARCBOX_BRANCH    (chapter) force (default) or parley: the option the bots vote for at the ford
+#   ARCBOX_BRANCH    (chapter) force (default) or parley: the option the bots vote for at the ford. skip-assault is force with a
+#                    Development seed that has the Ford Assault done (Tactics__Seed__Beats__0=ch1_ford_assault), so the ford choice goes
+#                    straight on to Old Maud with no fight: the chapter to its card without the assault's coin toss (decision 31)
 #   ARCBOX_SILENT    1 = (chapter, force) the bots answer nothing in a scene: the game's timers resolve every line, vote and check
 #   ARCBOX_LINE      (chapter) seconds a line is up before the leader's bot skips it (default 2.5)
 #   ARCBOX_AT_LINE   (chapter) the line of the scene at which to restart the server or kill the TV (default 3)
@@ -277,8 +279,8 @@ if [[ "$CHAPTER" == "1" && ( "$GAME" != "tactics" || "$WALK" == "1" || "$STAGE" 
   echo "ARCBOX_CHAPTER=1 is a Tactics run of its own, without ARCBOX_WALK=1 or ARCBOX_STAGE=1." >&2
   exit 2
 fi
-if [[ "$CHAPTER" == "1" && "$BRANCH" != "force" && "$BRANCH" != "parley" ]]; then
-  echo "ARCBOX_BRANCH is force or parley, not $BRANCH." >&2
+if [[ "$CHAPTER" == "1" && "$BRANCH" != "force" && "$BRANCH" != "parley" && "$BRANCH" != "skip-assault" ]]; then
+  echo "ARCBOX_BRANCH is force, parley or skip-assault, not $BRANCH." >&2
   exit 2
 fi
 if [[ "$SILENT" == "1" && ( "$CHAPTER" != "1" || "$BRANCH" != "force" ) ]]; then
@@ -398,6 +400,12 @@ if [[ "$STAGE" == "1" ]]; then
   esac
   STAGE_ENV="Tactics__Seed__Region=ashen_ford Tactics__Seed__At__0=96 Tactics__Seed__At__1=61 Tactics__Seed__Flags__0=$STAGE_FLAG"
   STAGE_ENV+=" Tactics__Seed__Beats__0=ch1_mayors_request Tactics__Seed__Beats__1=ch1_the_ford_choice"
+fi
+# ARCBOX_BRANCH=skip-assault: a new campaign with the Ford Assault done, which the bots play by force, so nothing is left to fight.
+VOTE=$BRANCH
+if [[ "$CHAPTER" == "1" && "$BRANCH" == "skip-assault" ]]; then
+  STAGE_ENV="Tactics__Seed__Beats__0=ch1_ford_assault"
+  VOTE=force
 fi
 # This run's own database, so a restart finds its rooms again (ARCBOX_RESTART) and no run sees another's.
 DB="$OUT/arcbox.db"
@@ -641,7 +649,7 @@ if [[ "$GAME" == "tactics" && "$CHAPTER" == "1" ]]; then
   fi
   set +e
   : > "$OUT/phones.log"
-  node "$ROOT/tools/tactics-playtest/bots.cjs" --server="$URL" --room="$CODE" --players="$PHONES" --chapter --branch="$BRANCH" \
+  node "$ROOT/tools/tactics-playtest/bots.cjs" --server="$URL" --room="$CODE" --players="$PHONES" --chapter --branch="$VOTE" \
     --line="$LINE_S" ${ARCBOX_BOT_ARGS:---fight} $([[ "$SILENT" == "1" ]] && echo --silent) --hold="$HOLD" --timeout=1800 \
     --tv-log="$OUT/tv.log" > >(tee "$OUT/phones.log") 2>&1 &
   PHONES_PID=$!
@@ -694,7 +702,11 @@ if [[ "$GAME" == "tactics" && "$CHAPTER" == "1" ]]; then
   while read -r line; do log "chapter: $line"; done <<< "$CHECKED"
   OUTCOMES=$(grep -oE '^[0-9:]+ (Won|Lost|Fled) at .*:' "$OUT/phones.log" | sed -E 's/^[0-9:]+ //; s/:$//' || true)
   log "chapter: the fights: $(paste -sd';' <<< "$OUTCOMES" | sed 's/;/; /g')"
-  [[ "$(tail -1 <<< "$OUTCOMES")" == Won\ at\ * ]] || chapter_fail "the last fight won"
+  if [[ "$BRANCH" == "skip-assault" ]]; then
+    [[ -z "$OUTCOMES" ]] || chapter_fail "no fight (the assault was done)"
+  else
+    [[ "$(tail -1 <<< "$OUTCOMES")" == Won\ at\ * ]] || chapter_fail "the last fight won"
+  fi
   log "chapter: $(grep -cE 'CHAPTER [0-9]+: ' "$OUT/phones.log" || true) walks to a \"!\", $(grep -c 'routing again' "$OUT/phones.log" || true) routed again; $(grep -E 'CHAPTER walking on' "$OUT/phones.log" | sed 's/^[0-9:]* //' || true)"
 
   # The restart: the TV back in the room, and the scene on from its saved line, which it showed again.

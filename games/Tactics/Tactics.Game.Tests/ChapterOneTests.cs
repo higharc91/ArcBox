@@ -41,9 +41,11 @@ public abstract class ChapterOne
         private readonly bool _answer;
         private int _toLose;
 
-        public Play(int players = 4, string? branch = null, bool answer = true, LoreBook? lore = null, int lose = 0)
+        private readonly TacticsSeed? _seed;
+
+        public Play(int players = 4, string? branch = null, bool answer = true, LoreBook? lore = null, int lose = 0, TacticsSeed? seed = null)
         {
-            (_players, _branch, _answer, _lore, _toLose) = (players, branch, answer, lore ?? StoryTests.Lore, lose);
+            (_players, _branch, _answer, _lore, _toLose, _seed) = (players, branch, answer, lore ?? StoryTests.Lore, lose, seed);
             Profiles = [.. Enumerable.Range(1, players).Select(i => (ProfileId?)new ProfileId($"pr_member{i}"))];
             var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", Profiles[0]!.Value,
                 [.. Profiles.Select((p, i) => new CampaignMember(p!.Value, $"Player{i + 1}", i == 0 ? CampaignRole.Owner : CampaignRole.Player,
@@ -105,7 +107,7 @@ public abstract class ChapterOne
 
         private (TacticsGame, GameHarness<TacticsGame>) Open(int seed)
         {
-            var game = new TacticsGame(Rules, lore: _lore);
+            var game = new TacticsGame(Rules, lore: _lore, seed: _seed);
             return (game, new GameHarness<TacticsGame>(game, playerCount: _players, seed: seed, profiles: Profiles));
         }
 
@@ -419,6 +421,23 @@ public sealed class ChapterOneTests : ChapterOne
         Assert.Contains("ch1_skarrow_spared", play.World.Flags);
         Assert.Contains("ch1_halden_confessed", play.World.Flags);
         Assert.Equal([BattleOutcome.Won], play.Fights);
+    }
+}
+
+public sealed class ChapterOneSkippedAssaultTests : ChapterOne
+{
+    /// <summary>
+    /// The force branch with the Ford Assault already done (a Development seed: tv-e2e's ARCBOX_BRANCH=skip-assault): the ford choice goes
+    /// straight on to Old Maud, there's no fight, and the chapter still ends with its card.
+    /// </summary>
+    [Fact]
+    public void Chapter_1_plays_by_force_with_the_assault_done()
+    {
+        var play = Played(new Play(branch: "force", seed: new TacticsSeed([], ["ch1_ford_assault"])),
+            ["ch1_mayor", "ch1_ford", "ch1_maud", "ch1_docks", "ch1_kindler", "ch1_four_more"]);
+
+        Assert.Empty(play.Fights);
+        Assert.Contains("ch1_skarrow_slain", play.World.Flags);
     }
 }
 

@@ -1,7 +1,7 @@
 // What tools/tv-e2e.sh's ARCBOX_CHAPTER=1 needs beyond the bots: a check of the TV's log against the chapter's scenes, and shots of
 // the TV's display at each moment of the chapter worth seeing.
 //
-//   node tools/tactics-playtest/chapter.cjs check <tv.log> <force|parley> [--relaunched-at=<line>] [--restarted-at=<line>]
+//   node tools/tactics-playtest/chapter.cjs check <tv.log> <force|parley|skip-assault> [--relaunched-at=<line>] [--restarted-at=<line>]
 //   node tools/tactics-playtest/chapter.cjs shots <tv.log> <X display> <dir>
 //
 // check reads the TV's --story-log lines (STORY <seq> <line> said|shown <state>, STORY card <chapter>) and the scenes in
@@ -12,7 +12,7 @@
 //   - every line is said exactly once on the TV: never twice, and never not at all, but for the line a relaunched TV came back to,
 //     which it only shows (--relaunched-at: the TV log line where the new TV started), and for the line a restart came back to
 //     (--restarted-at: the TV log line where the server stopped), which a TV the phones beat back to the server only shows;
-//   - the battle beat's fight is on the TV between its lead-in and its aftermath;
+//   - the battle beat's fight is on the TV between its lead-in and its aftermath (skip-assault, force with the assault done: none);
 //   - the chapter's card comes up after the last line, and the party takes a step after it.
 // It prints the scenes and the count of lines as it goes.
 //
@@ -27,9 +27,10 @@ const ORDER = {
   force: ['ch1_mayor', 'ch1_ford', 'ch1_dawn', 'ch1_bridge_cost', 'ch1_maud', 'ch1_docks', 'ch1_kindler', 'ch1_four_more'],
   parley: ['ch1_mayor', 'ch1_ford', 'ch1_parley', 'ch1_young_ones', 'ch1_road_east', 'ch1_maud', 'ch1_granary', 'ch1_song', 'ch1_docks',
     'ch1_kindler', 'ch1_four_more'],
+  'skip-assault': ['ch1_mayor', 'ch1_ford', 'ch1_maud', 'ch1_docks', 'ch1_kindler', 'ch1_four_more'],
 };
 /** The fight of each branch, between its lead-in and its aftermath. */
-const FIGHT = { force: ['ch1_dawn', 'ch1_bridge_cost'], parley: ['ch1_young_ones', 'ch1_road_east'] };
+const FIGHT = { force: ['ch1_dawn', 'ch1_bridge_cost'], parley: ['ch1_young_ones', 'ch1_road_east'], 'skip-assault': null };
 
 const sceneOf = new Map(SCENES.flatMap((sc) => sc.nodes.flatMap((n) => (n.lines ?? []).map((l) => [l.id, sc.id]))));
 
@@ -115,10 +116,12 @@ function check(file, branch, args) {
   // The fight between its lead-in and its aftermath.
   const lastOf = (scene) => shown.filter((s) => sceneOf.get(s.line) === scene).at(-1)?.at ?? 0;
   const firstOf = (scene) => shown.find((s) => sceneOf.get(s.line) === scene)?.at ?? 0;
-  const [lead, after] = FIGHT[branch];
-  const fight = lines.findIndex((l, i) => i + 1 > lastOf(lead) && /^TACTICS screen tactics-battle-/.test(l)) + 1;
-  if (!fight || !(fight < firstOf(after))) fail.push(`a fight on the TV between ${lead} and ${after}`);
-  else console.log(`the fight: ${lines[fight - 1]} (line ${fight})`);
+  if (FIGHT[branch]) {
+    const [lead, after] = FIGHT[branch];
+    const fight = lines.findIndex((l, i) => i + 1 > lastOf(lead) && /^TACTICS screen tactics-battle-/.test(l)) + 1;
+    if (!fight || !(fight < firstOf(after))) fail.push(`a fight on the TV between ${lead} and ${after}`);
+    else console.log(`the fight: ${lines[fight - 1]} (line ${fight})`);
+  } else if (lines.some((l) => /^TACTICS screen tactics-battle-/.test(l))) fail.push('no fight on the TV (the assault was done)');
 
   // The card after the last line, and a step after it.
   const card = lines.findIndex((l) => /^STORY card /.test(l)) + 1;
