@@ -327,6 +327,74 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 /* The reaction prompt has the shell's countdown at the bottom, so its footer stays in the flow. */
 .tx-react .tx-foot { position: static; margin-bottom: 0; background: none; }
 
+/* ---------------------------------------------------------------- out in the world: the walk screen and its pad */
+/* The screen fills the window and doesn't scroll, so nothing moves the pad under a thumb. Only the info column scrolls. */
+.screen[data-game="tactics"]:has(.tx-walk) { height: 100vh; height: 100dvh; min-height: 0; overflow: hidden; overscroll-behavior: none; }
+.screen[data-game="tactics"]:has(.tx-walk) .widget { min-height: 0; }
+.tx-walk { --pad: clamp(200px, min(100vw - 2 * var(--gutter), 46dvh), 320px); min-height: 0; gap: 0; padding-bottom: 0; }
+.tx-walk-info { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 8px; padding-bottom: 8px; }
+.tx-walk-who { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 6px 12px; border-radius: 8px; border: 1px solid var(--wf-line); background: var(--wf-fill); }
+.tx-walk-who b { font: 800 17px/1.15 var(--wf-serif); letter-spacing: 0.04em; }
+.tx-walk.lead .tx-walk-who { border-color: var(--wf-edge); background: linear-gradient(90deg, rgba(230, 189, 92, 0.28), rgba(230, 189, 92, 0.05)); }
+.tx-walk.lead .tx-walk-who b { color: var(--wf-gold-hi); }
+.tx-crown { flex: none; display: inline-grid; color: var(--wf-gold); }
+.tx-crown .tx-line-icon { fill: rgba(230, 189, 92, 0.28); }
+.tx-walk-goal p { font-size: 17px; line-height: 1.25; }
+.tx-walk .tx-me { flex: none; padding: 6px 12px 6px 6px; }
+.tx-walk-party { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.tx-walk-party li { display: flex; align-items: center; gap: 6px; min-width: 0; padding: 5px 8px; border-radius: 8px; border: 1px solid transparent; background: var(--wf-fill); }
+.tx-walk-party li.leads { border-color: var(--wf-edge); }
+.tx-walk-party li.away { opacity: 0.55; }
+.tx-walk-party b { min-width: 0; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tx-walk-cls { margin-left: auto; font-size: 13px; color: var(--wf-muted); white-space: nowrap; }
+.tx-walk-party .tx-line-icon { width: 16px; height: 16px; }
+
+/* The VIP's way out: small, at the top, as far from a thumb as the screen goes, and dead while a thumb is on the pad. */
+.tx-walk-host { flex: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.tx .tx-walk-host .tx-btn { min-height: 44px; font: 700 14px/1.1 var(--wf-sans); letter-spacing: 0.01em; box-shadow: none; }
+.tx-walk.held .tx-walk-host { pointer-events: none; opacity: 0.4; }
+
+/* The pad. The zone around it takes presses too, all the way across, so a wide thumb still lands. */
+.tx-padzone { flex: none; display: grid; place-items: center; margin: 0 calc(-1 * var(--gutter)); padding: 8px var(--gutter) calc(10px + var(--safe-bottom));
+  touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
+.tx-pad { position: relative; width: var(--pad); height: var(--pad); border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle at 50% 42%, #2b3266, #141735 62%, #0a0b1a); border: 2px solid var(--wf-edge);
+  box-shadow: 0 0 0 5px rgba(7, 8, 15, 0.7), 0 10px 26px rgba(4, 5, 12, 0.7), inset 0 0 26px rgba(4, 5, 12, 0.6); }
+.tx-pad svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.tx-wedge { fill: rgba(255, 255, 255, 0.05); }
+.tx-chevron { fill: none; stroke: var(--wf-gold); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; opacity: 0.75; }
+.tx-chevron.small { stroke-width: 4; opacity: 0.45; }
+.tx-hub { fill: rgba(7, 8, 15, 0.7); stroke: rgba(230, 189, 92, 0.55); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.tx-pad-knob { position: absolute; left: 39%; top: 39%; width: 22%; height: 22%; border-radius: 50%; will-change: transform;
+  background: radial-gradient(circle at 50% 35%, #ffe7a8, #e6bd5c 55%, #a07c33); border: 1px solid #fff0c0; opacity: 0.55; box-shadow: 0 3px 8px rgba(4, 5, 12, 0.7); }
+.tx-pad.down { border-color: var(--wf-gold-hi); box-shadow: 0 0 0 5px rgba(230, 189, 92, 0.3), 0 0 30px rgba(230, 189, 92, 0.45), inset 0 0 26px rgba(4, 5, 12, 0.6); }
+.tx-pad.down .tx-pad-knob { opacity: 1; }
+.tx-pad.down .tx-hub { fill: rgba(230, 189, 92, 0.16); }
+.tx-pad[data-dir="n"] .tx-wedge.n, .tx-pad[data-dir="ne"] .tx-wedge.ne, .tx-pad[data-dir="e"] .tx-wedge.e, .tx-pad[data-dir="se"] .tx-wedge.se,
+.tx-pad[data-dir="s"] .tx-wedge.s, .tx-pad[data-dir="sw"] .tx-wedge.sw, .tx-pad[data-dir="w"] .tx-wedge.w, .tx-pad[data-dir="nw"] .tx-wedge.nw { fill: var(--wf-gold); }
+.tx-pad[data-dir="n"] .tx-chevron.n, .tx-pad[data-dir="ne"] .tx-chevron.ne, .tx-pad[data-dir="e"] .tx-chevron.e, .tx-pad[data-dir="se"] .tx-chevron.se,
+.tx-pad[data-dir="s"] .tx-chevron.s, .tx-pad[data-dir="sw"] .tx-chevron.sw, .tx-pad[data-dir="w"] .tx-chevron.w, .tx-pad[data-dir="nw"] .tx-chevron.nw { stroke: var(--wf-on-gold); opacity: 1; }
+
+/* Becoming leader, with eyes on the TV: the pad swells in and the line above it flashes. */
+.tx-walk.arrived .tx-pad { animation: tx-pad-arrive 1.1s ease-out backwards; }
+.tx-walk.arrived .tx-walk-who { animation: tx-who-arrive 1.8s ease-out backwards; }
+@keyframes tx-pad-arrive {
+  0% { transform: scale(0.72); opacity: 0; }
+  45% { transform: scale(1.04); opacity: 1; box-shadow: 0 0 0 9px rgba(255, 231, 168, 0.55), 0 0 44px rgba(230, 189, 92, 0.8); }
+  100% { transform: scale(1); }
+}
+@keyframes tx-who-arrive { 0%, 40% { background: rgba(230, 189, 92, 0.45); border-color: var(--wf-gold-hi); } }
+
+/* A phone on its side: the pad goes under the right thumb, and the screen takes the width it's given. */
+@media (orientation: landscape) and (max-height: 520px) {
+  .screen[data-game="tactics"]:has(.tx-walk) { max-width: none; }
+  .screen[data-game="tactics"]:has(.tx-walk) .pstatus { padding-top: 4px; padding-bottom: 2px; }
+  .tx-walk { --pad: clamp(200px, 100dvh - 68px, 300px); flex-direction: row; gap: 12px; padding-right: calc(var(--gutter) + env(safe-area-inset-right, 0px)); }
+  .tx-walk-info { min-width: 0; padding-bottom: calc(8px + var(--safe-bottom)); }
+  .tx-walk-host { grid-template-columns: repeat(2, minmax(0, 116px)); justify-content: start; }
+  .tx-padzone { margin: 0 calc(-1 * var(--gutter)) 0 0; padding: 0 var(--gutter) var(--safe-bottom) 24px; }
+}
+
 /* ---------------------------------------------------------------- narrow phones (360 px) */
 @media (max-width: 374px) {
   .tx-foot .tx-line-icon { display: none; }
@@ -335,7 +403,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 
 /* ---------------------------------------------------------------- motion */
 @media (prefers-reduced-motion: reduce) {
-  .tx-banner, .tx-alert, .tx-clock.urgent, .tx .tx-cell.cursor { animation: none; }
+  .tx-banner, .tx-alert, .tx-clock.urgent, .tx .tx-cell.cursor, .tx-walk.arrived .tx-pad, .tx-walk.arrived .tx-walk-who { animation: none; }
   .tx-bar > i { transition: none; }
   .tx button:not(:disabled):active { transform: none; }
 }

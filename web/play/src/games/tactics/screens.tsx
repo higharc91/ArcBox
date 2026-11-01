@@ -61,6 +61,9 @@ export function PickEncounter({ data, send }: CustomScreenProps) {
           </li>
         ))}
       </ul>
+      <div class="tx-foot">
+        <button type="button" class="tx-btn ghost" onClick={() => { sfx("cancel"); send("backToWalk"); }}>Back to walking</button>
+      </div>
     </div>
   );
 }

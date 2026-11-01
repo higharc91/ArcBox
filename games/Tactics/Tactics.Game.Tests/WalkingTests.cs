@@ -827,6 +827,55 @@ public sealed class WalkingTests
     }
 
     [Fact]
+    public void The_idle_ping_of_a_phone_that_lost_the_lead_wins_it_back()
+    {
+        var s = At(Road());
+        s.Harness.Advance(TimeSpan.FromSeconds(8));
+        Assert.Equal(s.Harness.Players[1].Id, s.Game.Leader!.Id);
+
+        Walk(s, null, player: 1);       // a follower's idle ping is nothing to the party...
+        Assert.Equal(s.Harness.Players[1].Id, s.Game.Leader!.Id);
+        Assert.False(Party(s).Held);
+
+        Walk(s, null);                  // ...and the phone that went quiet is heard again by its own
+
+        Assert.Equal(s.Harness.Players[0].Id, s.Game.Leader!.Id);
+        Assert.Equal(0, Party(s).Seq);
+    }
+
+    [Fact]
+    public void A_ping_that_comes_back_mid_walk_waits_for_the_party_to_stop()
+    {
+        var s = At(Road());
+        s.Harness.Advance(TimeSpan.FromSeconds(8));
+        Walk(s, "se", player: 1);
+
+        Walk(s, null);                  // heard, but the lead only changes with the party stopped
+        Assert.Equal(s.Harness.Players[1].Id, s.Game.Leader!.Id);
+        Assert.True(Party(s).Held);
+
+        Walk(s, null, player: 1);
+
+        Assert.Equal(s.Harness.Players[0].Id, s.Game.Leader!.Id);
+    }
+
+    [Fact]
+    public void Idle_pings_keep_a_quiet_leader_leading()
+    {
+        var s = At(Road());
+
+        for (var i = 0; i < 10; i++)
+        {
+            s.Harness.Advance(TimeSpan.FromSeconds(3));
+            Walk(s, null);
+            Walk(s, null, player: 1);
+        }
+
+        Assert.Equal(s.Harness.Players[0].Id, s.Game.Leader!.Id);
+        Assert.Equal(0, Party(s).Seq);
+    }
+
+    [Fact]
     public void A_silent_session_leader_who_reconnects_comes_back()
     {
         var s = At(Road());

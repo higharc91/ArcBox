@@ -44,6 +44,10 @@ export interface CustomScreenProps {
   data: unknown;
   /** Posts a CustomInput `{ action, data }` for the current view; `data` is left out when undefined. Callable as often as needed. */
   send(action: string, data?: unknown): void;
+  /** `send` for input that streams: the same message, without the tap cue. */
+  stream(action: string, data?: unknown): void;
+  /** The view's id. Input goes out under the newest view, so anything held across a view change has to say so again. */
+  viewId: string;
 }
 
 /** What a game's between-sessions portal screen is given (portal API, spec §3.4). */

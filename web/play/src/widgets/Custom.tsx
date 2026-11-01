@@ -14,7 +14,9 @@ export function Custom({ view, send }: { view: CustomView; send: Send }) {
   const { module, state } = useGameModule(view.module);
   const Screen = module?.screens?.[view.screen];
   if (Screen) {
-    return <Screen data={view.data} send={(action, data) => send(data === undefined ? { action } : { action, data })} />;
+    const payload = (action: string, data: unknown) => (data === undefined ? { action } : { action, data });
+    return <Screen data={view.data} viewId={view.viewId} send={(action, data) => send(payload(action, data))}
+      stream={(action, data) => send(payload(action, data), { quiet: true })} />;
   }
   if (state === "loading") {
     return (

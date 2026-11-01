@@ -4,7 +4,7 @@ import type { ControllerView } from "../protocol";
 import type { KeyValueStore } from "../session/storage";
 import type { ResultKind } from "../games/module";
 import { moduleFor } from "../games/registry";
-import { PATTERNS, vibrate } from "./haptics";
+import { PATTERNS, vibrate, type HapticName } from "./haptics";
 import { Sounds } from "./sounds";
 
 /** localStorage key for the speaker toggle: "1" muted, "0" not. Shared by every room. */
@@ -118,6 +118,11 @@ export class Feedback {
     if (this.mutedValue) return;
     vibrate(PATTERNS.pop);
     this.sounds.play("pop");
+  }
+
+  /** A vibration and nothing else, for a control that's felt rather than heard. */
+  buzz(pattern: HapticName): void {
+    if (!this.mutedValue) vibrate(PATTERNS[pattern]);
   }
 
   private cue(kind: "tap" | ResultKind): void {

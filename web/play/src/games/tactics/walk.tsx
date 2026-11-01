@@ -1,0 +1,292 @@
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "preact/hooks";
+import { useFeedback } from "../../feedback/feedback";
+import type { CustomScreenProps } from "../module";
+import { Portrait } from "./art";
+import { useSfx } from "./sfx";
+import type { WalkData, WalkMember } from "./types";
+import { LineIcon } from "./ui";
+import { DEAD_ZONE, DIRS, dirAt, stickyDirAt, WalkSender, type Dir } from "./walkModel";
+
+/** How long "End session" waits for its confirm before it stands down. */
+const CONFIRM_MS = 4000;
+/** How far the knob travels from the centre, as a share of the pad's radius. */
+const KNOB_REACH = 0.6;
+
+const ARROWS: Record<string, [number, number]> = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0] };
+
+/** A point on the pad's drawing, whose radius is 100, `deg` clockwise from up. */
+const polar = (r: number, deg: number) => {
+  const a = (deg * Math.PI) / 180;
+  return `${(r * Math.sin(a)).toFixed(2)} ${(-r * Math.cos(a)).toFixed(2)}`;
+};
+
+/** One sector of the pad, from the hub's edge to the rim. */
+function wedge(i: number): string {
+  const [from, to, inner, outer] = [i * 45 - 21.5, i * 45 + 21.5, DEAD_ZONE * 100 + 2, 98];
+  return `M${polar(inner, from)}L${polar(outer, from)}A${outer} ${outer} 0 0 1 ${polar(outer, to)}L${polar(inner, to)}A${inner} ${inner} 0 0 0 ${polar(inner, from)}Z`;
+}
+
+const WEDGES = DIRS.map((_, i) => wedge(i));
+
+/**
+ * The pad's face: eight sectors, a chevron in each, and a dashed hub the size of the dead zone. It's drawn once and
+ * painted by CSS from `data-dir`.
+ */
+function PadFace() {
+  return (
+    <svg viewBox="-100 -100 200 200" aria-hidden="true">
+      {DIRS.map((dir, i) => <path key={dir} class={`tx-wedge ${dir}`} d={WEDGES[i]} />)}
+      {DIRS.map((dir, i) => (
+        <path key={dir} class={`tx-chevron ${dir}${i % 2 ? " small" : ""}`} transform={`rotate(${i * 45}) translate(0 -66)`} d="M-11 5L0 -6L11 5" />
+      ))}
+      <circle class="tx-hub" r={DEAD_ZONE * 100} />
+    </svg>
+  );
+}
+
+/**
+ * The walk pad. Everything a thumb does is written straight to the DOM from these listeners (`useWobble`'s way): it must
+ * not re-render while held, and all it says goes through `sender`. The whole zone around the pad takes presses, so a
+ * thumb that lands a little wide while the eyes are on the TV still counts, and the pad's place is read at every move,
+ * so a page that shifts under a held thumb doesn't throw it off.
+ */
+function Pad({ sender }: { sender: WalkSender }) {
+  const zone = useRef<HTMLDivElement>(null);
+  const face = useRef<HTMLDivElement>(null);
+  const knob = useRef<HTMLSpanElement>(null);
+  const feedback = useFeedback();
+  const buzz = useRef(feedback);
+  buzz.current = feedback;
+
+  useEffect(() => {
+    const area = zone.current!;
+    const dot = knob.current!;
+    const pad = face.current!;
+    const root = area.closest(".tx-walk");
+    let pointer: number | null = null;
+    let dir: Dir | null = null;
+    const keys = new Set<string>();
+
+    const paint = (down: boolean, x = 0, y = 0) => {
+      pad.dataset.dir = dir ?? "";
+      pad.classList.toggle("down", down);
+      root?.classList.toggle("held", down);
+      dot.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
+    };
+
+    /** Goes to `next`, says so, and if it's a change under a thumb already down, ticks. */
+    const steer = (next: Dir | null, tick: boolean) => {
+      if (next === dir) return;
+      dir = next;
+      if (next) sender.press(next);
+      else sender.release();
+      if (tick) buzz.current?.buzz("walkTurn");
+    };
+
+    const follow = (e: PointerEvent, tick: boolean) => {
+      const box = pad.getBoundingClientRect();
+      const radius = box.width / 2 || 1;
+      const [px, py] = [e.clientX - box.left - radius, e.clientY - box.top - radius];
+      steer(stickyDirAt(px / radius, py / radius, DEAD_ZONE, dir), tick);
+      const shrink = Math.min(1, (KNOB_REACH * radius) / (Math.hypot(px, py) || 1));
+      paint(true, px * shrink, py * shrink);
+    };
+
+    /** Lets go of everything, whichever way the hold ended. A thumb still down has to come up and press again. */
+    const letGo = () => {
+      pointer = null;
+      keys.clear();
+      steer(null, false);
+      paint(false);
+    };
+
+    const down = (e: PointerEvent) => {
+      if (pointer !== null || keys.size > 0 || e.button > 0) return;
+      e.preventDefault();
+      pointer = e.pointerId;
+      try {
+        area.setPointerCapture(e.pointerId);
+      } catch {
+        // No capture, no steering past the zone's edge: the release still arrives while the thumb is on it.
+      }
+      buzz.current?.buzz("walkPress");
+      follow(e, false);
+    };
+    const move = (e: PointerEvent) => {
+      if (e.pointerId === pointer) follow(e, true);
+    };
+    const end = (e: PointerEvent) => {
+      if (e.pointerId === pointer) letGo();
+    };
+
+    const key = (e: KeyboardEvent, on: boolean) => {
+      if (!ARROWS[e.key]) return;
+      e.preventDefault();
+      if (e.repeat || pointer !== null) return;
+      if (on) keys.add(e.key);
+      else keys.delete(e.key);
+      const [x, y] = [...keys].reduce(([a, b], k) => [a + ARROWS[k]![0], b + ARROWS[k]![1]], [0, 0]);
+      steer(dirAt(x, y, 0), false);
+      paint(keys.size > 0);
+    };
+    const keyDown = (e: KeyboardEvent) => key(e, true);
+    const keyUp = (e: KeyboardEvent) => key(e, false);
+    const prevent = (e: Event) => e.preventDefault();
+    const hidden = () => {
+      if (document.visibilityState === "hidden") letGo();
+    };
+
+    const listen: [EventTarget, string, EventListener][] = [
+      [area, "pointerdown", down as EventListener],
+      [area, "pointermove", move as EventListener],
+      [area, "pointerup", end as EventListener],
+      [area, "pointercancel", end as EventListener],
+      [area, "lostpointercapture", end as EventListener],
+      [area, "contextmenu", prevent],
+      [area, "selectstart", prevent],
+      [area, "dragstart", prevent],
+      [window, "keydown", keyDown as EventListener],
+      [window, "keyup", keyUp as EventListener],
+      [window, "blur", letGo],
+      [window, "pagehide", letGo],
+      [document, "visibilitychange", hidden],
+    ];
+    for (const [target, type, fn] of listen) target.addEventListener(type, fn);
+    return () => {
+      for (const [target, type, fn] of listen) target.removeEventListener(type, fn);
+      letGo();
+    };
+  }, [sender]);
+
+  return (
+    <div class="tx-padzone" ref={zone}>
+      <div class="tx-pad" ref={face} role="img" aria-label="Walking pad: hold a direction to walk, and let go to stop">
+        <PadFace />
+        <span class="tx-pad-knob" ref={knob} />
+      </div>
+    </div>
+  );
+}
+
+/** The VIP's way out of the world. It's at the far end of the screen from the pad, and it sleeps while a thumb is on it. */
+function HostMenu({ canBattle, send }: { canBattle: boolean; send: CustomScreenProps["send"] }) {
+  const [sure, setSure] = useState(false);
+  const sfx = useSfx();
+  useEffect(() => {
+    if (!sure) return;
+    const id = setTimeout(() => setSure(false), CONFIRM_MS);
+    return () => clearTimeout(id);
+  }, [sure]);
+
+  // The confirm isn't under the finger that asked for it: a double tap lands on "Keep walking".
+  if (sure) {
+    return (
+      <div class="tx-walk-host sure" role="group" aria-label="End the session?">
+        <button type="button" class="tx-btn gold" onClick={() => { sfx("confirm"); send("endSession"); }}>Yes, end it</button>
+        <button type="button" class="tx-btn ghost" onClick={() => { sfx("cancel"); setSure(false); }}>Keep walking</button>
+      </div>
+    );
+  }
+  return (
+    <div class="tx-walk-host">
+      {canBattle ? <button type="button" class="tx-btn ghost" onClick={() => { sfx("confirm"); send("battles"); }}>Choose a battle</button> : <span />}
+      <button type="button" class="tx-btn ghost" onClick={() => { sfx("select"); setSure(true); }}>End session</button>
+    </div>
+  );
+}
+
+function Party({ party }: { party: WalkMember[] }) {
+  return (
+    <ul class="tx-walk-party" aria-label="The party">
+      {party.map((m) => (
+        <li key={m.name} class={`${m.leads ? "leads" : ""}${m.here ? "" : " away"}`}>
+          {m.leads ? <span class="tx-crown" title="Leads the party"><LineIcon name="crown" /></span> : null}
+          <b>{m.name}</b>
+          <span class="tx-walk-cls">{m.here ? m.cls : "away"}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/** A class's name as the art knows it. */
+const classId = (name: string) => name.toLowerCase().replaceAll(" ", "_");
+
+/**
+ * Out in the world. The leader has the pad; everyone else sees who leads, what the party is out to do, their character and
+ * the party. Every phone here keeps pinging, not only the leader's, because that's how a phone the server stopped hearing
+ * wins its place back. Nothing on this screen changes as the party walks, so nothing re-renders under a held thumb.
+ */
+export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
+  const d = data as WalkData;
+  const sfx = useSfx();
+
+  // The screen's `stream` closes over its view's id, so timers must reach the newest one, or all they send is dropped.
+  const out = useRef(stream);
+  out.current = stream;
+  const sender = useMemo(() => new WalkSender((dir) => out.current("walk", { dir })), []);
+
+  const view = useRef(viewId);
+  useLayoutEffect(() => {
+    if (view.current === viewId) return;
+    view.current = viewId;
+    sender.newView();
+  }, [viewId]);
+
+  useEffect(() => {
+    const look = () => {
+      if (document.visibilityState === "hidden") sender.sleep();
+      else sender.wake();
+    };
+    const sleep = () => sender.sleep();
+    const wake = () => sender.wake();
+    look();
+    document.addEventListener("visibilitychange", look);
+    window.addEventListener("pagehide", sleep);
+    window.addEventListener("pageshow", wake);
+    return () => {
+      document.removeEventListener("visibilitychange", look);
+      window.removeEventListener("pagehide", sleep);
+      window.removeEventListener("pageshow", wake);
+      sender.dispose();
+    };
+  }, []);
+
+  // A class, not state with a timer: CSS plays the arrival once, and nothing re-renders under the thumb that follows.
+  const led = useRef(d.leader);
+  const arrived = useRef(false);
+  if (d.leader && !led.current) arrived.current = true;
+  if (!d.leader) arrived.current = false;
+  led.current = d.leader;
+  useEffect(() => {
+    if (arrived.current) sfx("yourTurn");
+  }, [d.leader]);
+
+  return (
+    <div class={`tx tx-walk ${d.leader ? "lead" : "follow"}${arrived.current ? " arrived" : ""}`}>
+      <div class="tx-walk-info">
+        {d.vip ? <HostMenu canBattle={d.canBattle} send={send} /> : null}
+        <div class="tx-walk-who">
+          <span class="tx-crown"><LineIcon name="crown" /></span>
+          <b>{d.leader ? "You lead the party" : d.leaderName ? `${d.leaderName} leads` : "The party waits for someone to lead it"}</b>
+        </div>
+        <div class="tx-walk-goal">
+          {d.region ? <span class="tx-eyebrow">{d.region}</span> : null}
+          <p>{d.objective}</p>
+        </div>
+        {d.leader ? null : (
+          <div class="tx-me">
+            <Portrait unit={{ name: d.me.name, sprite: null, hp: 1, maxHp: 1, side: "Party" }} cls={classId(d.me.cls)} size={40} tone="you" />
+            <div class="tx-me-name">
+              <b>{d.me.name}</b>
+              <span>{d.me.cls} · level {d.me.level}</span>
+            </div>
+          </div>
+        )}
+        <Party party={d.party} />
+        {d.portal && !d.leader ? <p><a class="tx-link" href={d.portal} target="_blank" rel="noopener">Your character</a></p> : null}
+      </div>
+      {d.leader ? <Pad sender={sender} /> : null}
+    </div>
+  );
+}

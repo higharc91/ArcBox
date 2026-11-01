@@ -34,7 +34,7 @@ public sealed class PhoneFixtureTests
     public void Every_phone_screen_matches_its_fixture()
     {
         var screens = Capture();
-        Assert.Equal([.. new[] { "pickClass", "pickEncounter", "react", "results", "status", "turn" }], screens.Keys.Order(StringComparer.Ordinal));
+        Assert.Equal([.. new[] { "pickClass", "pickEncounter", "react", "results", "status", "turn", "walk-follower", "walk-leader" }], screens.Keys.Order(StringComparer.Ordinal));
 
         Check(screens);
     }
@@ -106,23 +106,28 @@ public sealed class PhoneFixtureTests
         void Look()
         {
             for (var p = 0; p < 4; p++)
-                if (h.PlayerView(p) is CustomView view && !seen.ContainsKey(view.Screen))
+                if (h.PlayerView(p) is CustomView view && !seen.ContainsKey(Named(view)))
                     // As the base type, as the server sends it, so the "kind" discriminator is written.
-                    seen[view.Screen] = JsonSerializer.SerializeToNode<ControllerView>(view with { ViewId = "v1" }, ArcJson.Options)!;
+                    seen[Named(view)] = JsonSerializer.SerializeToNode<ControllerView>(view with { ViewId = "v1" }, ArcJson.Options)!;
         }
+
+        // One screen, two ways to see it: only the leader has the pad.
+        static string Named(CustomView view) => view.Screen != TacticsGame.Screens.Walk ? view.Screen
+            : view.Data.GetProperty("leader").GetBoolean() ? "walk-leader" : "walk-follower";
 
         h.StartCampaign(lease);
         Look();
         string[] classes = ["fighter", "cleric", "rogue", "wizard"];
         for (var i = 0; i < 4; i++)
             h.Input(i, new { action = "pickClass", data = new { @class = classes[i] } });
+        Look();
         h.Input(0, new { action = "battles" });
         Look();
         h.Input(0, new { action = "pickEncounter", data = new { encounter = "river_crossing" } });
 
         // Players end their turns at once (after the first turn screen is seen) so enemies walk past them and draw
         // reactions; reactions are left to time out.
-        for (var step = 0; step < 5_000 && game.Phase == TacticsPhase.Battle && seen.Count < 5; step++)
+        for (var step = 0; step < 5_000 && game.Phase == TacticsPhase.Battle && seen.Count < 7; step++)
         {
             Look();
             for (var p = 0; p < 4; p++)

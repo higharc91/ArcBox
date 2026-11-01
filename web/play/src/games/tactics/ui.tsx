@@ -131,4 +131,5 @@ const ICONS = {
   next: '<path d="M9 5l7 7-7 7"/>',
   sword: '<path d="M14.5 3.5H20.5V9.5L9 21 6 18 17.5 6.5"/><path d="M4 15l5 5M3 21l2.5-2.5"/>',
   shield: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M12 7v10"/>',
+  crown: '<path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z"/>',
 } as const;

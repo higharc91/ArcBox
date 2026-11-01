@@ -137,6 +137,28 @@ export interface EncounterOption {
   companions?: number;
 }
 
+export interface WalkMember {
+  name: string;
+  /** The class's name, as shown. */
+  cls: string;
+  here: boolean;
+  leads: boolean;
+}
+
+/** The walk screen. It holds nothing that changes as the party walks: a new view would drop what the pad is sending. */
+export interface WalkData {
+  leader: boolean;
+  leaderName: string | null;
+  region: string | null;
+  objective: string;
+  me: { name: string; cls: string; level: number };
+  party: WalkMember[];
+  vip: boolean;
+  canBattle: boolean;
+  /** The campaign portal's path; null outside a campaign. */
+  portal?: string | null;
+}
+
 export interface ResultsData {
   outcome: "Won" | "Lost" | "Fled" | string | null;
   encounter: string | null;
