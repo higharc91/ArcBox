@@ -129,7 +129,7 @@ The local session was on Windows with an RTX 5080. Check what you have.
 
 **The user's answers, 2026-11-01** (these settle the matching items below):
 - **Boss music:** Rime Tower also gets the boss theme and the boss victory fanfare. Ford Assault stays ordinary. (27) *To build.*
-- **Losing (refined after comparing with BG3, Divinity, FFT, Fire Emblem, XCOM and Darkest Dungeon):** a lost fight's injuries heal, so the retry is fair and there's no death spiral. The penalty is **no XP for a loss** (this also closes the farming hole) and **consumables used in the lost fight stay spent**. Earlier injuries stay. Results after a loss shows no injuries, just: "You wake at the recovery point. Wounds tended — no XP. Potions used are gone." This is the user's rules change. (3, 18) *Being built.*
+- **Losing (refined after comparing with BG3, Divinity, FFT, Fire Emblem, XCOM and Darkest Dungeon):** a lost fight's injuries heal, so the retry is fair and there's no death spiral. The penalty is **no XP for a loss** (this also closes the farming hole) and **consumables used in the lost fight stay spent**. Earlier injuries stay. Results after a loss shows no injuries, just: "You wake at the recovery point. Wounds tended — no XP. Potions used are gone." This is the user's rules change. (3, 18) *Built.*
 - **Spawn clash, as built:** the clash is in the battle engine (`MoveStep.Halt`'s `LastFree`). The walker goes to the nearest free walkable tile measured from the tile it left, Manhattan distance, ties in tile order. No path or climb check: literally the nearest free tile.
 - **No-clip lines:** captions only (`StoryVoice.Fallback = Captions`, already the default). (1) *Settled.*
 - **Restart:** the saved line is spoken again after a server restart. (26) *Settled.*
@@ -159,7 +159,7 @@ Keep this list, add to it, and put it at the top of your final report. Don't sto
 **Decisions:**
 1. Speech fallback for lines with no clip: a Google TTS key, or captions only. The local session leans towards captions only. 5d has one switch, `StoryVoice.Fallback`.
 2. Unanswered votes take the first option, so nobody touching a phone kills Mother Skarrow. The rule stands with a 45 s timer.
-3. Losing pays half XP every time, so retrying can be farmed. Left alone as a rules change.
+3. ~~Losing pays half XP every time, so retrying can be farmed.~~ Settled by the user, 2026-11-01: a lost fight pays no XP, its injuries heal (earlier ones stay) and the consumables used in it stay spent.
 4. `hall_of_the_flame` is 16 px short of drawing at 2×, on the darkest map.
 5. The balance decisions in the rules-engine tracker.
 6. **Environmental tiles:** the user wants tiles with effects that interact with spells, such as water and lightning. Hazards stay harmless until this is designed with them. Bring it up when 5d finishes.
@@ -174,7 +174,7 @@ Keep this list, add to it, and put it at the top of your final report. Don't sto
 15. **Fleeing lands outside the stamp**, usually where the fight began, not at the stamp as the 5c plan said: standing in an armed stamp is what the landing rule forbids.
 16. **A player whose turn comes first** gets their 60 s only after the walk-in (at most 3 s).
 17. **Losing a lead to a blip:** a stand-in always keeps the lead at least 3 s after it's handed over, and the session leader takes it back after the party has been stopped for 3 s.
-18. **A lost fight leaves the party weaker for the retry.** Injuries stack and potions stay spent. After one loss of Ford Assault, the bots lost most retries (14 of 15 seen; one drop-signals run won its retry), so "a loss re-arms the stamp" is a soft net and a real group could spiral. Together with decision 3 (half XP on a loss), a rules question; no rules changed.
+18. **A lost fight leaves the party weaker for the retry.** Injuries stack and potions stay spent. After one loss of Ford Assault, the bots lost most retries (14 of 15 seen; one drop-signals run won its retry), so "a loss re-arms the stamp" is a soft net and a real group could spiral. Settled with decision 3 (2026-11-01): a loss now pays no XP and heals its own injuries; consumables stay spent.
 19. **Ford Assault is hard for bots:** they win River Crossing 40 of 40 fresh, but Ford Assault about 5 of 10 from the "!" side, 4 of 20 from elsewhere. A balance question, if it matters.
 20. **Bree Tallow's `innkeeper_angry` portrait reads as a bald man.** It needs new Scenario art, which needs the user's OK.
 21. **Scenes with no one standing in the world:** only the beat with the "!" puts its figure in the world (default 12), so Mother Skarrow isn't shown during the parley, and nobody is at the bridge in "Mother Skarrow lies where she fell".

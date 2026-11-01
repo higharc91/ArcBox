@@ -222,6 +222,30 @@ describe("tactics phone module", () => {
     expect(send).toHaveBeenLastCalledWith({ action: "next" });
   });
 
+  it("results after a win list each hero's XP and injuries, and no loss line", () => {
+    const v = view("results");
+    (v.data as unknown as { lines: { injuries: string[] }[] }).lines[0]!.injuries = ["Black Eye"];
+    render(<ControllerScreen view={v} send={() => {}} me="ALEX" game="tactics" />);
+    expect(screen.getAllByText("+250 XP").length).toBeGreaterThan(0);
+    expect(screen.getByText("Black Eye")).toBeTruthy();
+    expect(document.querySelector(".tx-result-note")).toBeNull();
+  });
+
+  it("results after a loss show the server's one line, and no XP or injuries on the heroes", () => {
+    const note = "You wake at the recovery point. Wounds tended — no XP. Potions used are gone.";
+    const v = view("results");
+    const d = v.data as unknown as { outcome: string; note: string | null; lines: { xp: number; injuries: string[] }[] };
+    d.outcome = "Lost";
+    d.note = note;
+    for (const l of d.lines) l.xp = 0;
+    d.lines[0]!.injuries = ["Black Eye"];       // even if a server sent one, a loss tended it
+    render(<ControllerScreen view={v} send={() => {}} me="ALEX" game="tactics" />);
+    expect(screen.getByText("Defeat")).toBeTruthy();
+    expect(screen.getByText(note)).toBeTruthy();
+    expect(screen.queryByText(/XP$/)).toBeNull();
+    expect(screen.queryByText("Black Eye")).toBeNull();
+  });
+
   it("status: says who is acting and when you're up", () => {
     show("status");
     // The "Now acting" card: its label, then the acting unit's name.

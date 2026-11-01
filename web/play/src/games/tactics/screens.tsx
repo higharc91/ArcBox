@@ -95,17 +95,20 @@ function NamedPortrait({ name, size }: { name: string; size: 40 | 60 }) {
 export function Results({ data, send }: CustomScreenProps) {
   const r = data as ResultsData;
   const won = r.outcome === "Won";
+  // After a loss the server's line says it all: no "+0 XP" or injuries on each hero.
+  const lost = r.outcome === "Lost";
   return (
     <div class="tx tx-results">
       <MomentBanner art={won ? "victory" : "defeat"} text={won ? "Victory" : "Defeat"} tone={won ? "won" : "lost"} />
       <p class="tx-note center">{r.encounter} · party level {r.level}</p>
+      {r.note ? <p class="tx-note center tx-result-note">{r.note}</p> : null}
       <ul class="tx-lines">
         {r.lines.map((l) => (
           <li key={l.name}>
             <NamedPortrait name={l.name} size={40} />
             <b>{l.name}</b>
-            <span class="tx-xp">+{l.xp} XP</span>
-            {l.injuries.length > 0 ? <span class="tx-injury">{l.injuries.join(", ")}</span> : null}
+            {lost ? null : <span class="tx-xp">+{l.xp} XP</span>}
+            {!lost && l.injuries.length > 0 ? <span class="tx-injury">{l.injuries.join(", ")}</span> : null}
           </li>
         ))}
       </ul>

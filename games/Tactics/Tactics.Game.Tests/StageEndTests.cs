@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Text.Json.Nodes;
 using ArcBox.Sdk;
 using Tactics.Logic;
@@ -395,11 +396,11 @@ public sealed class StageEndTests
     }
 
     /// <summary>
-    /// A loss heals (the user's rule, 2026-11-01): every hero wakes with the character they went in with, without the fight's injuries and
-    /// with what they drank back in the bag, and still gets the half XP the result pays. Older injuries stay.
+    /// A loss (the user's rule, 2026-11-01): every hero wakes with that fight's injuries tended and its earlier ones as they were, gets no XP,
+    /// and what they drank in the fight stays gone.
     /// </summary>
     [Fact]
-    public void A_loss_heals_the_party_and_keeps_half_xp()
+    public void A_loss_tends_the_fights_wounds_pays_no_xp_and_keeps_potions_spent()
     {
         // Every hero carries a scar from an earlier fight, which a loss doesn't take away: put in the save, and the fight resumed from it.
         var old = Rules.Injuries.Keys.Last();
@@ -421,19 +422,70 @@ public sealed class StageEndTests
 
         Assert.NotNull(result);
         Assert.NotEmpty(result.Injuries);
-        for (var i = 0; i < members.Length; i++)
-        {
-            var (was, now) = (before[members[i].Value], s.Game.Document.Members[members[i].Value]);
-            Assert.Equal(was.Xp + result.Xp.GetValueOrDefault(TacticsGame.UnitFor(i)), now.Xp);
-            Assert.Equal([old], now.Character.Injuries);
-            Assert.Equal(was.Character.Bag, now.Character.Bag);
-            Assert.Equal(was.Character, now.Character);
-        }
+        Assert.All(result.Xp.Values, xp => Assert.Equal(0, xp));
+        static ImmutableArray<ItemStack> Drunk(ImmutableArray<ItemStack> bag) => bag.IsDefaultOrEmpty ? [] : bag.RemoveAt(0);
         var saved = TacticsDocument.Read(s.Lease.Document).Members;       // the checkpoint at Results, which a restart resumes from
         foreach (var m in members)
-            Assert.Equal((before[m.Value].Character.Injuries, before[m.Value].Character.Bag), (saved[m.Value].Character.Injuries, saved[m.Value].Character.Bag),
-                (a, b) => a.Injuries.SequenceEqual(b.Injuries) && a.Bag.SequenceEqual(b.Bag));
+        {
+            var (was, now, kept) = (before[m.Value], s.Game.Document.Members[m.Value], saved[m.Value]);
+            Assert.Equal(was.Xp, now.Xp);
+            Assert.Equal([old], now.Character.Injuries);
+            Assert.Equal(Drunk(was.Character.Bag), now.Character.Bag);
+            Assert.Equal((was.Xp, [old], Drunk(was.Character.Bag)), (kept.Xp, kept.Character.Injuries, kept.Character.Bag),
+                (a, b) => a.Item1 == b.Item1 && a.Item2.SequenceEqual(b.Item2) && a.Item3.SequenceEqual(b.Item3));
+        }
         Assert.DoesNotContain("ford_assault", s.Game.Document.Completed);
+    }
+
+    /// <summary>
+    /// Results after a loss (the user's rule): no hero's line lists an injury, the XP is 0, and one line says what the loss did, the same on
+    /// the phone and the TV.
+    /// </summary>
+    [Fact]
+    public void Results_after_a_loss_list_no_injuries_and_say_what_it_did()
+    {
+        var s = Fighting(Force);
+
+        Ended(s, BattleOutcome.Lost, Hurt(s));
+
+        const string note = "You wake at the recovery point. Wounds tended — no XP. Potions used are gone.";
+        Assert.Equal(note, TacticsGame.LossNote(woke: true));
+        var host = s.Host;
+        Assert.Equal(note, host.ResultNote);
+        Assert.All(host.Results!.Value, r => Assert.Equal((0, 0), (r.Xp, r.Injuries.Length)));
+        var phone = (CustomView)s.Harness.PlayerView(0);
+        Assert.Equal(note, phone.Data.GetProperty("note").GetString());
+        foreach (var line in phone.Data.GetProperty("lines").EnumerateArray())
+            Assert.Equal(0, line.GetProperty("injuries").GetArrayLength());
+
+        s.Send(0, "next");
+        Assert.Null(s.Host.ResultNote);
+    }
+
+    [Theory]
+    [InlineData(BattleOutcome.Won)]
+    [InlineData(BattleOutcome.Fled)]
+    public void Results_after_a_win_or_a_flight_have_no_loss_line_and_list_injuries(BattleOutcome outcome)
+    {
+        var s = Fighting(Force);
+
+        Ended(s, outcome, Hurt(s));
+
+        Assert.Null(s.Host.ResultNote);
+        Assert.All(s.Host.Results!.Value, r => Assert.NotEmpty(r.Injuries));
+        Assert.Equal(System.Text.Json.JsonValueKind.Null, ((CustomView)s.Harness.PlayerView(0)).Data.GetProperty("note").ValueKind);
+    }
+
+    /// <summary>A loss with no world to wake in (a plain board) still tends the fight's wounds, and says so without the waking.</summary>
+    [Fact]
+    public void A_loss_on_a_plain_board_says_nothing_of_waking()
+    {
+        var unstamped = Rules.Encounters.Values.First(e => Rules.RegionFor(Ford)!.StampFor(e.Map) is null && e.Party.Max >= 4);
+        var s = FromTheList(unstamped.Id);
+
+        Ended(s, BattleOutcome.Lost);
+
+        Assert.Equal("Wounds tended — no XP. Potions used are gone.", s.Host.ResultNote);
     }
 
     /// <summary>A win or a flight keeps the fight's toll, as before: its injuries are added, and what was drunk stays gone.</summary>

@@ -249,6 +249,8 @@ export interface ResultsData {
   outcome: "Won" | "Lost" | "Fled" | string | null;
   encounter: string | null;
   lines: { name: string; xp: number; injuries: string[] }[];
+  /** After a loss, the one line the server words for it ("Wounds tended — no XP…"); null otherwise. */
+  note?: string | null;
   vip: boolean;
   level: number;
   /** The campaign portal's path, where characters are made and grown; null outside a campaign. */

@@ -69,6 +69,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
 
     // Results: who was in the battle, in party order, so lines match units whatever the seating is now.
     private BattleResult? _result;
+    private string? _resultNote;
     private BattleView? _lastBattle;
     private string? _resultEncounter;
     private ImmutableArray<ProfileId> _resultMembers = [];
@@ -453,9 +454,9 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     // ---- Results ------------------------------------------------------------------------------------------------------
 
     /// <summary>
-    /// Ends the battle at Results. Every hero gains the XP the result pays (half on a loss, by the rules). A win or a flight keeps the fight's
-    /// injuries and what was used from the bag. A loss keeps neither (the user's rule, 2026-11-01): the party wakes healed, without that
-    /// fight's injuries and with the potions it drank, so a retry is fair. HP isn't carried between fights, so healed is the sheet's max.
+    /// Ends the battle at Results. Every hero gains the XP the result pays (none on a loss, by the rules) and keeps what it used from the bag.
+    /// A win or a flight keeps the fight's injuries; a loss doesn't (the user's rule, 2026-11-01): the party wakes with that fight's wounds
+    /// tended, earlier injuries as they were, and the potions it drank gone (<see cref="LossNote"/>). HP isn't carried between fights.
     /// </summary>
     private void EndBattle()
     {
@@ -477,9 +478,13 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             {
                 Xp = record.Xp + result.Xp.GetValueOrDefault(unit),
                 Fought = true,
-                Character = result.Outcome == BattleOutcome.Lost
-                    ? record.Character
-                    : record.Character with { Injuries = record.Character.Injuries.AddRange(result.Injuries.GetValueOrDefault(unit, [])), Bag = u.Bag },
+                Character = record.Character with
+                {
+                    Injuries = result.Outcome == BattleOutcome.Lost
+                        ? record.Character.Injuries
+                        : record.Character.Injuries.AddRange(result.Injuries.GetValueOrDefault(unit, [])),
+                    Bag = u.Bag,
+                },
             });
         }
 
@@ -500,6 +505,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         KeepWorld();
         _lease.Checkpoint(_doc.ToJson(), $"After {name}");
         (_result, _resultEncounter, _resultMembers, _phase) = (result, name, save.Members, TacticsPhase.Results);
+        _resultNote = result.Outcome == BattleOutcome.Lost ? LossNote(woke: _arrived == Woke) : null;
         _toasts.Clear();
         CancelBattleTimers();
     }

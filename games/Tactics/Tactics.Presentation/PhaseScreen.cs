@@ -143,8 +143,12 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
                 "Lost" => "defeat_anim",
                 _ => null,
             },
-            Rows = [.. lines.Select(r => new ScreenRow(r.Name, r.Injuries.IsEmpty ? "No injuries" : string.Join(", ", r.Injuries), null,
-                $"+{r.Xp.ToString(CultureInfo.InvariantCulture)} XP"))],
+            // After a loss the game's one line says it all (TacticsGame.LossNote): no injury words and no "+0 XP" on each row.
+            Notice = view.ResultNote ?? screen.Notice,
+            Rows = [.. lines.Select(r => view.Outcome == "Lost"
+                ? new ScreenRow(r.Name, "", null, null)
+                : new ScreenRow(r.Name, r.Injuries.IsEmpty ? "No injuries" : string.Join(", ", r.Injuries), null,
+                    $"+{r.Xp.ToString(CultureInfo.InvariantCulture)} XP"))],
             Empty = lines.IsEmpty ? "No results to show" : null,
         };
     }

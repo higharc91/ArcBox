@@ -46,10 +46,6 @@ public sealed class StoryResumeTests
     }
 
     /// <summary>
-    /// Review (adapter NOTE 3): a long scene, or a question held with every phone asleep, could only be left by closing the room. The VIP
-    /// can end the session from inside a scene; the cursor is saved on every line, so the next session starts on the same line.
-    /// </summary>
-    /// <summary>
     /// What ending the session in a scene must leave (review A4): no clock of the scene's still running (the line's, the question's), and
     /// the document saved as it ends, the party's place with it.
     /// </summary>
@@ -62,6 +58,10 @@ public sealed class StoryResumeTests
         Assert.Equal(s.Game.Document.ToJson().GetRawText(), s.Lease.Document.GetRawText());
     }
 
+    /// <summary>
+    /// Review (adapter NOTE 3): a long scene, or a question held with every phone asleep, could only be left by closing the room. The VIP
+    /// can end the session from inside a scene; the cursor is saved on every line, so the next session starts on the same line.
+    /// </summary>
     [Fact]
     public void The_vip_can_end_the_session_in_a_scene()
     {

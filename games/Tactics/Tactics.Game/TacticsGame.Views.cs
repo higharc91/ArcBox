@@ -276,10 +276,11 @@ public sealed record StoryCheckView(string Skill, int Dc, string Title, Immutabl
 /// <param name="Explore">The party in the world, in every phase; null for a pack with no region.</param>
 /// <param name="Story">The scene under way, in the Story phase; null otherwise.</param>
 /// <param name="Chapter">The chapter that has just ended, while its card shows ("Chapter I · The Bridge at the Ford"); null otherwise.</param>
+/// <param name="ResultNote">At Results after a loss, what the loss did to the party (<see cref="TacticsGame.LossNote"/>); null otherwise.</param>
 public sealed record TacticsHostView(string Phase, string Banner, string? Notice, int PartyLevel,
     ImmutableArray<string> Mustered, ImmutableArray<EncounterOption>? Encounters, BattleView? Battle,
     string? Outcome, ImmutableArray<ResultLine>? Results, BattleView? LastBattle = null, ExploreView? Explore = null, StoryView? Story = null,
-    string? Chapter = null);
+    string? Chapter = null, string? ResultNote = null);
 
 public sealed partial class TacticsGame
 {
@@ -289,7 +290,7 @@ public sealed partial class TacticsGame
         _phase == TacticsPhase.EncounterPick ? EncounterOptions() : null,
         _doc.Battle is not null && _phase is TacticsPhase.Battle or TacticsPhase.Resuming ? BattleViewOf() : null,
         _result?.Outcome.ToString(), _phase == TacticsPhase.Results ? ResultLines() : null,
-        _phase == TacticsPhase.Results ? _lastBattle : null, ExploreViewOf(), StoryViewOf(), _card);
+        _phase == TacticsPhase.Results ? _lastBattle : null, ExploreViewOf(), StoryViewOf(), _card, _phase == TacticsPhase.Results ? _resultNote : null);
 
     /// <inheritdoc />
     public ControllerView PlayerView(PlayerId id)
@@ -313,7 +314,7 @@ public sealed partial class TacticsGame
             TacticsPhase.Battle => BattleScreen(profile),
             TacticsPhase.Results => Custom(Screens.Results, new
             {
-                outcome = _result?.Outcome.ToString(), encounter = _resultEncounter, lines = ResultLines(), vip = IsVip(player),
+                outcome = _result?.Outcome.ToString(), encounter = _resultEncounter, lines = ResultLines(), note = _resultNote, vip = IsVip(player),
                 level = _doc.PartyLevel, portal = PortalPath(),
             }),
             TacticsPhase.Resuming when IsVip(player) => new ButtonsView(
@@ -426,6 +427,14 @@ public sealed partial class TacticsGame
             .Select(e => new EncounterOption(e.Id, e.Name, e.Level, e.Party.Min, e.Party.Max,
                 _players.Count <= e.Party.Max, Math.Max(0, e.Party.Min - _players.Count)))];
 
+    /// <summary>
+    /// The one line Results show after a loss, on the phone and the TV alike: the party wakes with that fight's wounds tended, no XP, and the
+    /// potions it drank gone. <paramref name="woke"/>: it woke at the region's recovery point (a loss with no world to wake in doesn't).
+    /// </summary>
+    public static string LossNote(bool woke)
+        => (woke ? "You wake at the recovery point. " : "") + "Wounds tended — no XP. Potions used are gone.";
+
+    /// <summary>Each hero's line at Results: the XP the result pays, and the fight's injuries, except after a loss, which tends them.</summary>
     private ImmutableArray<ResultLine> ResultLines()
     {
         if (_result is null || _doc.Battle is not null && _phase != TacticsPhase.Results)
@@ -434,7 +443,7 @@ public sealed partial class TacticsGame
         {
             var unit = UnitFor(i);
             var name = _players.FirstOrDefault(p => p.Profile == profile)?.Name ?? _doc.For(profile)?.Character.Name ?? unit.Value;
-            return new ResultLine(name, _result.Xp.GetValueOrDefault(unit),
+            return new ResultLine(name, _result.Xp.GetValueOrDefault(unit), _result.Outcome == BattleOutcome.Lost ? [] :
                 [.. _result.Injuries.GetValueOrDefault(unit, []).Select(inj => Rules.Injuries.GetValueOrDefault(inj)?.Name ?? inj.Value)]);
         })];
     }
