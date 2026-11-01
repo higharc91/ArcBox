@@ -9,7 +9,8 @@ public sealed record ArcChoice(string Id, string Label, ImmutableArray<string> S
 /// <summary>
 /// One beat of an arc, as <c>lore/arcs.json</c> writes it. <see cref="Kind"/> is <c>story</c>, <c>choice</c>, <c>battle</c>,
 /// <c>discovery</c> or <c>camp</c>. A battle beat names its <see cref="Encounter"/>. <see cref="Requires"/> are the flags it waits
-/// for, and <see cref="Sets"/> the flags it sets once done; a choice's options set their own.
+/// for, and <see cref="Sets"/> the flags it sets once done; a choice's options set their own. A beat can have no <see cref="Place"/>
+/// (<c>ch4_pip_remembers</c> is a camp anywhere).
 /// </summary>
 public sealed record ArcBeat(string Id, string Kind, string? Place, string? Encounter, ImmutableArray<string> Requires,
     ImmutableArray<string> Sets, ImmutableArray<ArcChoice> Choices)
@@ -23,8 +24,8 @@ public sealed record Arc(string Id, int Chapter, string Region, string Title, Im
 
 /// <summary>
 /// The arcs of the lore (lore spec), read from a pack's <c>lore/pack.json</c> and the <c>arcs.json</c> it lists. Lore isn't part of
-/// the rules pack, and <c>tools/tactics-lore</c> checks it, so a book trusts its shape and refuses only what it can't read. A pack
-/// that lists no <c>arcs.json</c> has no arcs.
+/// the rules pack, and <c>tools/tactics-lore</c> checks it, so a book checks only what it needs to play: every field it reads is
+/// there and of the right type. A pack with no lore, or whose lore lists no <c>arcs.json</c>, has no arcs.
 /// </summary>
 public sealed class LoreBook
 {
@@ -46,20 +47,25 @@ public sealed class LoreBook
     public Arc? ArcFor(string region) => _byRegion.GetValueOrDefault(region);
 
     /// <summary>
-    /// Reads the lore of <paramref name="basePack"/>, the folder that holds <c>lore/</c> (<c>content/tactics/base</c>). Throws
-    /// <see cref="InvalidDataException"/>, naming the file, when the lore can't be read or two arcs share a region or an arc repeats a beat,
-    /// and an <see cref="IOException"/> when a file is missing: a server without its lore is deployed wrong, as one without its rules is.
+    /// Reads the lore of <paramref name="basePack"/>, the folder that holds <c>lore/</c> (<c>content/tactics/base</c>). A pack with no
+    /// <c>lore/pack.json</c> has no arcs, as one whose pack lists no <c>arcs.json</c> has none: the server keeps the book for the life of
+    /// the process, so a missing file mustn't fail every room. Lore that's there and can't be read throws
+    /// <see cref="InvalidDataException"/>, naming the file: bad JSON, a field missing or of the wrong type, two arcs sharing a region,
+    /// or an arc repeating a beat.
     /// </summary>
     public static LoreBook Load(string basePack)
     {
         var lore = Path.Combine(basePack, "lore");
         var pack = Path.Combine(lore, "pack.json");
-        var listed = Read(pack, root => root.TryGetProperty("files", out var files) && files.EnumerateArray().Any(f => f.GetString() == "arcs.json"));
+        if (!File.Exists(pack))
+            return Empty;
+        var listed = Read(pack, root => List(root, "files", "the pack", required: false)
+            .Any(f => f.ValueKind == JsonValueKind.String && f.GetString() == "arcs.json"));
         if (!listed)
             return Empty;
 
         var path = Path.Combine(lore, "arcs.json");
-        var arcs = Read(path, root => root.GetProperty("arcs").EnumerateArray().Select(ReadArc).ToImmutableArray());
+        var arcs = Read(path, root => List(root, "arcs", "the file", required: true).Select(ReadArc).ToImmutableArray());
         if (arcs.GroupBy(a => a.Region, StringComparer.Ordinal).FirstOrDefault(g => g.Count() > 1) is { } shared)
             throw new InvalidDataException($"{path}: the region '{shared.Key}' has more than one arc.");
         foreach (var arc in arcs)
@@ -68,6 +74,9 @@ public sealed class LoreBook
         return new LoreBook(arcs);
     }
 
+    /// <summary>Lore that can't be read; <see cref="Read{T}"/> names the file.</summary>
+    private sealed class BadLore(string message) : Exception(message);
+
     private static T Read<T>(string path, Func<JsonElement, T> read)
     {
         try
@@ -75,26 +84,71 @@ public sealed class LoreBook
             using var json = JsonDocument.Parse(File.ReadAllBytes(path));
             return read(json.RootElement);
         }
-        catch (Exception ex) when (ex is JsonException or KeyNotFoundException or InvalidOperationException)
+        catch (Exception ex) when (ex is JsonException or BadLore or IOException or UnauthorizedAccessException)
         {
             throw new InvalidDataException($"{path} can't be read as lore: {ex.Message}", ex);
         }
     }
 
     private static Arc ReadArc(JsonElement e)
-        => new(e.GetProperty("id").GetString()!, e.GetProperty("chapter").GetInt32(), e.GetProperty("region").GetString()!,
-            e.TryGetProperty("title", out var title) ? title.GetString() ?? "" : "",
-            [.. e.GetProperty("beats").EnumerateArray().Select(ReadBeat)]);
+    {
+        var id = Required(e, "id", "an arc");
+        var where = $"the arc '{id}'";
+        return new(id, Whole(e, "chapter", where), Required(e, "region", where), Optional(e, "title", where) ?? "",
+            [.. List(e, "beats", where, required: true).Select(ReadBeat)]);
+    }
 
     private static ArcBeat ReadBeat(JsonElement e)
-        => new(e.GetProperty("id").GetString()!, e.GetProperty("kind").GetString()!, Optional(e, "place"), Optional(e, "encounter"),
-            Strings(e, "requires"), Strings(e, "sets"),
-            e.TryGetProperty("choices", out var choices)
-                ? [.. choices.EnumerateArray().Select(c => new ArcChoice(c.GetProperty("id").GetString()!, Optional(c, "label") ?? "", Strings(c, "sets")))]
-                : []);
+    {
+        var id = Required(e, "id", "a beat");
+        var where = $"the beat '{id}'";
+        return new(id, Required(e, "kind", where), Optional(e, "place", where), Optional(e, "encounter", where),
+            Strings(e, "requires", where), Strings(e, "sets", where), [.. List(e, "choices", where, required: false).Select(c => ReadChoice(c, where))]);
+    }
 
-    private static string? Optional(JsonElement e, string name) => e.TryGetProperty(name, out var value) ? value.GetString() : null;
+    private static ArcChoice ReadChoice(JsonElement e, string beat)
+    {
+        var id = Required(e, "id", $"a choice of {beat}");
+        var where = $"the choice '{id}'";
+        return new(id, Optional(e, "label", where) ?? "", Strings(e, "sets", where));
+    }
 
-    private static ImmutableArray<string> Strings(JsonElement e, string name)
-        => e.TryGetProperty(name, out var list) ? [.. list.EnumerateArray().Select(s => s.GetString()!)] : [];
+    private static JsonElement Field(JsonElement e, string name, string where)
+    {
+        if (e.ValueKind != JsonValueKind.Object)
+            throw new BadLore($"{where} isn't a JSON object.");
+        return e.TryGetProperty(name, out var value) ? value : default;
+    }
+
+    private static string Required(JsonElement e, string name, string where)
+        => Optional(e, name, where) ?? throw new BadLore($"{where} has no '{name}'.");
+
+    /// <summary>A string, or null when it's missing or null.</summary>
+    private static string? Optional(JsonElement e, string name, string where) => Field(e, name, where) switch
+    {
+        { ValueKind: JsonValueKind.Undefined or JsonValueKind.Null } => null,
+        { ValueKind: JsonValueKind.String } value => value.GetString(),
+        _ => throw new BadLore($"{where} has a '{name}' that isn't a string."),
+    };
+
+    private static int Whole(JsonElement e, string name, string where)
+        => Field(e, name, where) is { ValueKind: JsonValueKind.Number } value && value.TryGetInt32(out var n)
+            ? n
+            : throw new BadLore($"{where} needs a whole number for '{name}'.");
+
+    private static IEnumerable<JsonElement> List(JsonElement e, string name, string where, bool required) => Field(e, name, where) switch
+    {
+        { ValueKind: JsonValueKind.Array } value => value.EnumerateArray(),
+        { ValueKind: JsonValueKind.Undefined or JsonValueKind.Null } when !required => [],
+        { ValueKind: JsonValueKind.Undefined or JsonValueKind.Null } => throw new BadLore($"{where} has no '{name}' list."),
+        _ => throw new BadLore($"{where} has a '{name}' that isn't a list."),
+    };
+
+    private static ImmutableArray<string> Strings(JsonElement e, string name, string where)
+        =>
+        [
+            .. List(e, name, where, required: false).Select(s => s.ValueKind == JsonValueKind.String
+                ? s.GetString()!
+                : throw new BadLore($"{where} has something in '{name}' that isn't a string.")),
+        ];
 }

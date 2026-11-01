@@ -5,7 +5,7 @@ namespace Tactics.Logic.Tests;
 public sealed class BattleStageTests
 {
     /// <summary>A 4-wide, 3-deep stage at (10, 20), 2 levels up: not square, so a swapped x and y can't pass.</summary>
-    private static readonly BattleStage Stage = new("ford", new Tile(10, 20), 2, 4, 3);
+    private static readonly BattleStage Stage = new(Map: "ford", Origin: new Tile(10, 20), Height: 2, Width: 4, Depth: 3);
 
     private static WorldRegion RegionWith(params RegionStamp[] stamps)
         => WorldRegion.From(new RegionDef("r", "R", 1, [64, 64], ["ground"], [], [.. stamps], [],
@@ -30,7 +30,8 @@ public sealed class BattleStageTests
         var random = new Random(5);
         for (var i = 0; i < 2000; i++)
         {
-            var stage = new BattleStage("m", new Tile(random.Next(-50, 500), random.Next(-50, 500)), random.Next(0, 9), random.Next(1, 30), random.Next(1, 30));
+            var stage = new BattleStage(Map: "m", Origin: new Tile(random.Next(-50, 500), random.Next(-50, 500)), Height: random.Next(0, 9),
+                Width: random.Next(1, 30), Depth: random.Next(1, 30));
             var t = new Tile(random.Next(-100, 600), random.Next(-100, 600));
 
             Assert.Equal(t, stage.ToBattle(stage.ToWorld(t)));
@@ -55,7 +56,7 @@ public sealed class BattleStageTests
         for (var i = 0; i < 200; i++)
         {
             var (width, depth) = (random.Next(1, 16), random.Next(1, 16));
-            var stage = new BattleStage("m", new Tile(random.Next(0, 40), random.Next(0, 40)), 0, width, depth);
+            var stage = new BattleStage(Map: "m", Origin: new Tile(random.Next(0, 40), random.Next(0, 40)), Height: 0, Width: width, Depth: depth);
             var map = MapOf("m", width, depth);
             for (var x = stage.Origin.X - 2; x < stage.Origin.X + width + 2; x++)
                 for (var y = stage.Origin.Y - 2; y < stage.Origin.Y + depth + 2; y++)

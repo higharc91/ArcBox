@@ -8,6 +8,11 @@ namespace Tactics.Logic;
 /// <see cref="BattleMap.Width"/> and <see cref="BattleMap.Height"/> do. The engine never sees it: a battle plays on the map's own tiles,
 /// and this converts between those and the world's for whoever has to put the fight in the world (overworld 5c §1).
 /// </summary>
+/// <param name="Map">The battle map's id.</param>
+/// <param name="Origin">The world tile of the map's tile (0, 0).</param>
+/// <param name="Height">The vertical offset: the levels added to the map's heights in the world. Not the depth, which is <paramref name="Depth"/>.</param>
+/// <param name="Width">The map's size along x.</param>
+/// <param name="Depth">The map's size along y, which <see cref="BattleMap.Height"/> calls its height.</param>
 public readonly record struct BattleStage(string Map, Tile Origin, int Height, int Width, int Depth)
 {
     /// <summary>
@@ -31,7 +36,7 @@ public readonly record struct BattleStage(string Map, Tile Origin, int Height, i
     /// plays on a plain board as it did before the world. The loader allows one stamp per map, so every encounter on a map shares it.
     /// </summary>
     public static BattleStage? Of(WorldRegion region, BattleMap map)
-        => region.StampFor(map.Id) is { } stamp ? new BattleStage(map.Id, stamp.At, stamp.Height, map.Width, map.Height) : null;
+        => region.StampFor(map.Id) is { } stamp ? new BattleStage(Map: map.Id, Origin: stamp.At, Height: stamp.Height, Width: map.Width, Depth: map.Height) : null;
 
     /// <summary>
     /// A tile the party can stand on, as near <paramref name="from"/> as can be: <paramref name="from"/> itself if it's walkable, else

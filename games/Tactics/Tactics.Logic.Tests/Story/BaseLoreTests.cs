@@ -87,10 +87,104 @@ public sealed class BaseLoreTests
         }
     }
 
+    [Fact]
+    public void A_pack_with_no_lore_folder_has_no_arcs()
+    {
+        var pack = Directory.CreateTempSubdirectory("tactics-lore-test-");
+        try
+        {
+            Assert.Same(LoreBook.Empty, LoreBook.Load(pack.FullName));
+            Assert.Same(LoreBook.Empty, LoreBook.Load(Path.Combine(pack.FullName, "not-even-here")));
+        }
+        finally
+        {
+            pack.Delete(recursive: true);
+        }
+    }
+
+    [Fact]
+    public void A_lore_folder_with_no_pack_has_no_arcs()
+    {
+        var pack = Directory.CreateTempSubdirectory("tactics-lore-test-");
+        try
+        {
+            Directory.CreateDirectory(Path.Combine(pack.FullName, "lore"));
+            File.WriteAllText(Path.Combine(pack.FullName, "lore", "arcs.json"), """{ "arcs": [] }""");
+
+            Assert.Same(LoreBook.Empty, LoreBook.Load(pack.FullName));
+        }
+        finally
+        {
+            pack.Delete(recursive: true);
+        }
+    }
+
+    [Theory]
+    [InlineData("""{ "files": "arcs.json" }""", "the pack has a 'files' that isn't a list")]
+    [InlineData("""[]""", "the pack isn't a JSON object")]
+    [InlineData("""{ "files": [ """, "can't be read as lore")]
+    public void A_pack_that_cant_be_read_is_refused_naming_the_file(string json, string problem)
+    {
+        var pack = Directory.CreateTempSubdirectory("tactics-lore-test-");
+        try
+        {
+            Directory.CreateDirectory(Path.Combine(pack.FullName, "lore"));
+            File.WriteAllText(Path.Combine(pack.FullName, "lore", "pack.json"), json);
+
+            var error = Assert.Throws<InvalidDataException>(() => LoreBook.Load(pack.FullName));
+
+            Assert.Contains("pack.json", error.Message, StringComparison.Ordinal);
+            Assert.Contains(problem, error.Message, StringComparison.Ordinal);
+        }
+        finally
+        {
+            pack.Delete(recursive: true);
+        }
+    }
+
+    /// <summary>A listed arcs.json that isn't there is lore that can't be read, not lore that isn't there.</summary>
+    [Fact]
+    public void A_listed_arcs_file_that_is_missing_is_refused_naming_it()
+    {
+        var pack = Directory.CreateTempSubdirectory("tactics-lore-test-");
+        try
+        {
+            Directory.CreateDirectory(Path.Combine(pack.FullName, "lore"));
+            File.WriteAllText(Path.Combine(pack.FullName, "lore", "pack.json"), """{ "files": ["arcs.json"] }""");
+
+            Assert.Contains("arcs.json", Assert.Throws<InvalidDataException>(() => LoreBook.Load(pack.FullName)).Message, StringComparison.Ordinal);
+        }
+        finally
+        {
+            pack.Delete(recursive: true);
+        }
+    }
+
     [Theory]
     [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "region": "r", "beats": [] }, { "id": "b", "chapter": 2, "region": "r", "beats": [] }] }""", "the region 'r' has more than one arc")]
     [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "region": "r", "beats": [{ "id": "x", "kind": "story" }, { "id": "x", "kind": "camp" }] }] }""", "the arc 'a' lists the beat 'x' twice")]
-    [InlineData("""{ "arcs": [{ "id": "a", "region": "r", "beats": [] }] }""", "can't be read as lore")]
+    [InlineData("""{ "arcs": [{ "id": "a", "region": "r", "beats": [] }] }""", "the arc 'a' needs a whole number for 'chapter'")]
+    [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1.5, "region": "r", "beats": [] }] }""", "the arc 'a' needs a whole number for 'chapter'")]
+    [InlineData("""{ "arcs": [{ "id": "a", "chapter": "1", "region": "r", "beats": [] }] }""", "the arc 'a' needs a whole number for 'chapter'")]
+    [InlineData("""{ "arcs": [{ "id": "a", "chapter": 99999999999, "region": "r", "beats": [] }] }""", "the arc 'a' needs a whole number for 'chapter'")]
+    [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "region": null, "beats": [] }] }""", "the arc 'a' has no 'region'")]
+    [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "beats": [] }] }""", "the arc 'a' has no 'region'")]
+    [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "region": 7, "beats": [] }] }""", "the arc 'a' has a 'region' that isn't a string")]
+    [InlineData("""{ "arcs": [{ "chapter": 1, "region": "r", "beats": [] }] }""", "an arc has no 'id'")]
+    [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "region": "r" }] }""", "the arc 'a' has no 'beats' list")]
+    [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "region": "r", "beats": {} }] }""", "the arc 'a' has a 'beats' that isn't a list")]
+    [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "region": "r", "title": 3, "beats": [] }] }""", "the arc 'a' has a 'title' that isn't a string")]
+    [InlineData("""{ "arcs": [7] }""", "an arc isn't a JSON object")]
+    [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "region": "r", "beats": [{ "id": "x" }] }] }""", "the beat 'x' has no 'kind'")]
+    [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "region": "r", "beats": [{ "id": null, "kind": "story" }] }] }""", "a beat has no 'id'")]
+    [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "region": "r", "beats": [{ "id": "x", "kind": "story", "place": false }] }] }""", "the beat 'x' has a 'place' that isn't a string")]
+    [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "region": "r", "beats": [{ "id": "x", "kind": "story", "requires": "flag" }] }] }""", "the beat 'x' has a 'requires' that isn't a list")]
+    [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "region": "r", "beats": [{ "id": "x", "kind": "story", "requires": [null] }] }] }""", "the beat 'x' has something in 'requires' that isn't a string")]
+    [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "region": "r", "beats": [{ "id": "x", "kind": "story", "sets": [1] }] }] }""", "the beat 'x' has something in 'sets' that isn't a string")]
+    [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "region": "r", "beats": [{ "id": "x", "kind": "choice", "choices": [{ "label": "L" }] }] }] }""", "a choice of the beat 'x' has no 'id'")]
+    [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "region": "r", "beats": [{ "id": "x", "kind": "choice", "choices": [{ "id": "c", "sets": [true] }] }] }] }""", "the choice 'c' has something in 'sets' that isn't a string")]
+    [InlineData("""{ "arcs": null }""", "the file has no 'arcs' list")]
+    [InlineData("""[]""", "the file isn't a JSON object")]
     [InlineData("""{ "arcs": [ """, "can't be read as lore")]
     public void Lore_that_cant_be_played_is_refused_naming_the_file(string arcs, string problem)
     {

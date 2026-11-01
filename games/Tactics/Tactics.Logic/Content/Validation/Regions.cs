@@ -102,7 +102,7 @@ internal sealed partial class Validation
         /// <summary>A stamp that sits inside the region, on a known map.</summary>
         private sealed record Placed(int Index, RegionStamp Stamp, BattleMap Map)
         {
-            public BattleStage Stage => new(Stamp.Map, Stamp.At, Stamp.Height, Map.Width, Map.Height);
+            public BattleStage Stage => new(Map: Stamp.Map, Origin: Stamp.At, Height: Stamp.Height, Width: Map.Width, Depth: Map.Height);
 
             public IEnumerable<(Tile World, Tile OnMap)> Tiles()
             {
