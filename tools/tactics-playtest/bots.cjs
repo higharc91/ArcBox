@@ -22,6 +22,21 @@
 //   --then=end|next      after the results: end the session (default), or play the next battle, forever
 //   --timeout=<seconds>  give up after this long (default 900)
 //
+// Phone views have no position and bots answer each view once, so walking is a scripted loop of its own. Without these modes the
+// VIP leaves the walk screen with `battles`, and the run is the battle it always was. With any of them the party walks, and then the
+// VIP ends the session. They run in this order:
+//
+//   --walk="e:4,ne:2,stop:1"  hold each direction for that many seconds, pinging as the pad does; stop rests
+//   --walk-latency[=<n>]      n presses (default 20), each timed against the TV's WALK line in --tv-log, or with --host the host view
+//   --walk-flood[=<n>]        n seconds (default 10) of the leader alternating a press and a stop at 60 messages a second, far over
+//                             the 20 a second the server's limiter lets through, so that stops are lost
+//   --walk-drop[=kill|stall]  hold, then cut the connection with no stop, and time the party stopping and the disconnect event from
+//                             another phone. kill (the default) ends the sockets with no SignalR or WebSocket goodbye. stall leaves them
+//                             open and silent: a phone that just stops. Phones connect through a small proxy here, with stateful
+//                             reconnect on, as web/play's transport has it
+//   --tv-log=<file>           the TV's stdout, redirected: wait for `TACTICS world open` and read WALK lines from it
+//   --host                    this process opens the room and watches the host view, with no TV: enough for --walk-drop
+//
 // Run it (on Windows, from Git Bash; the database goes in a temp file so the run leaves no campaign behind):
 //
 //   export PATH="/c/Users/fatma/AppData/Local/Microsoft/dotnet:$PATH"
@@ -55,6 +70,7 @@
 // being told. It needs web/play/node_modules (`npm ci` in web/play). Prints each step, and exits non-zero on a timeout or a
 // closed room.
 const fs = require('fs');
+const net = require('net');
 const path = require('path');
 const { HubConnectionBuilder, LogLevel } = require(path.join(__dirname, '../../web/play/node_modules/@microsoft/signalr'));
 
@@ -74,6 +90,21 @@ const then = String(opt('then', 'end'));
 const sitOut = String(opt('sit-out', '')).split(',');
 const people = Number(opt('people', 0));
 const timeoutMs = Number(opt('timeout', 900)) * 1000;
+const walkScript = opt('walk') && opt('walk') !== true ? String(opt('walk')).split(',').map((s) => s.split(':')) : null;
+const count = (name, fallback) => (opt(name) === undefined ? 0 : opt(name) === true ? fallback : Number(opt(name)));
+const latencyPresses = count('walk-latency', 20);
+const floodSeconds = count('walk-flood', 10);
+const dropMode = opt('walk-drop') === undefined ? null : opt('walk-drop') === true ? 'kill' : String(opt('walk-drop'));
+const asHost = opt('host', false) === true;
+const tvLog = opt('tv-log') ?? opt('room-log');
+const walking = Boolean(walkScript || latencyPresses || floodSeconds || dropMode);
+
+/** The phone's cadence while a direction is held, and its retry after a stop. */
+const PING_MS = 250;
+const STOP_RETRY_MS = 150;
+const FLOOD_MS = 1000 / 60;
+/** Long enough for any disconnect event a phone can raise. */
+const DROP_WATCH_MS = 120000;
 
 const NAMES = ['Ana', 'Bo', 'Cy', 'Dee', 'Eli', 'Fen'];
 const CLASSES = ['fighter', 'cleric', 'rogue', 'wizard', 'paladin', 'ranger'];
@@ -108,9 +139,48 @@ async function roomCode() {
   });
 }
 
+/** A socket pair between one phone and the server, which can go away in the two ways a phone does. */
+class Line {
+  constructor() {
+    this.mode = null;
+    this.pairs = [];
+    const target = new URL(server);
+    this.listener = net.createServer((phone) => {
+      if (this.mode === 'kill') return phone.destroy();
+      if (this.mode === 'stall') return phone.on('error', () => {});   // it answers nothing, as a phone that's gone doesn't
+      const up = net.connect(Number(target.port), target.hostname);
+      phone.on('error', () => up.destroy());
+      up.on('error', () => phone.destroy());
+      phone.pipe(up);
+      up.pipe(phone);
+      this.pairs.push([phone, up]);
+    });
+  }
+
+  async open() {
+    await new Promise((r) => this.listener.listen(0, '127.0.0.1', r));
+    return `http://127.0.0.1:${this.listener.address().port}`;
+  }
+
+  cut(mode) {
+    this.mode = mode;
+    for (const [phone, up] of this.pairs) {
+      phone.unpipe(up);
+      up.unpipe(phone);
+      if (mode === 'kill') {
+        up.resetAndDestroy();
+        phone.destroy();
+      } else {
+        up.pause();
+        phone.pause();
+      }
+    }
+  }
+}
+
 /** One phone: a connection, the newest lobby and view, and what it has acted on. */
 class Bot {
-  constructor(index) {
+  constructor(index, url = server) {
     this.index = index;
     this.name = NAMES[index];
     this.lobby = null;
@@ -120,7 +190,8 @@ class Bot {
     this.acted = null;       // the viewId last answered
     this.seenAt = 0;         // when that view arrived
     this.moved = false;      // walked this turn already
-    this.conn = new HubConnectionBuilder().withUrl(`${server}/hub`).withAutomaticReconnect(RECONNECT_MS).configureLogging(LogLevel.Critical).build();
+    const builder = new HubConnectionBuilder().withUrl(`${url}/hub`).withAutomaticReconnect(RECONNECT_MS).configureLogging(LogLevel.Critical);
+    this.conn = (dropMode ? builder.withStatefulReconnect() : builder).build();
     this.conn.on('LobbyChanged', (l) => { this.lobby = l; });
     this.conn.on('ControllerView', (v) => { this.view = v; this.seenAt = Date.now(); });
     this.conn.on('GameEnded', (r) => { this.ended = r; });
@@ -223,6 +294,13 @@ class Bot {
           return;
         }
         return this.input('react', { choice: 'pass' });
+      case 'walk':
+        if (walking || !view.data.vip) return;
+        state.walkAt ??= Date.now() + holdMs;
+        if (Date.now() < state.walkAt) return;
+        state.walkAt = undefined;
+        log(`${this.name} leaves the walk for the battle list`);
+        return this.input('battles');
       case 'results':
         if (!view.data.vip) return;
         state.resultsAt ??= Date.now() + holdMs;
@@ -234,9 +312,143 @@ class Bot {
   }
 }
 
+/** The TV, or with --host the host view: the newest step shown, and when. */
+class Watch {
+  constructor(host) {
+    this.host = host;
+    this.seq = 0;
+    this.at = 0;
+    this.held = false;
+    host?.on('HostView', (_, v) => {
+      const e = v?.explore;
+      if (!e) return;
+      this.held = e.held;
+      if (e.seq !== this.seq) [this.seq, this.at] = [e.seq, Date.now()];
+    });
+  }
+
+  read() {
+    if (this.host || !tvLog || !fs.existsSync(tvLog)) return;
+    const last = [...fs.readFileSync(tvLog, 'utf8').matchAll(/^WALK (\d+) (-?\d+) (-?\d+) (\d+)/gm)].at(-1);
+    if (last) [this.seq, this.at] = [Number(last[1]), Number(last[4])];
+  }
+}
+
+const walkTo = (bot, dir) => bot.conn.invoke('SendInput', bot.view.viewId, { action: 'walk', data: { dir } })
+  .catch((e) => log(`${bot.name}: walk failed: ${e.message}`));
+
+/** Holds `dir` for `ms`, pinging as the pad does. */
+async function hold(leader, dir, ms) {
+  const end = Date.now() + ms;
+  while (Date.now() < end) {
+    await walkTo(leader, dir);
+    await sleep(Math.min(PING_MS, Math.max(0, end - Date.now())));
+  }
+}
+
+async function release(leader) {
+  await walkTo(leader, null);
+  await sleep(STOP_RETRY_MS);
+  await walkTo(leader, null);
+}
+
+async function runScript(leader) {
+  for (const [dir, seconds] of walkScript) {
+    log(`WALK ${dir} for ${seconds} s`);
+    if (dir === 'stop') {
+      await release(leader);
+      await sleep(Number(seconds) * 1000);
+    } else await hold(leader, dir, Number(seconds) * 1000);
+  }
+  await release(leader);
+}
+
+async function runLatency(leader, watch) {
+  const times = [];
+  const dirs = ['e', 'w'];
+  for (let i = 0; i < latencyPresses; i++) {
+    watch.read();
+    const was = watch.seq;
+    const pressed = Date.now();
+    await walkTo(leader, dirs[i % 2]);
+    while (watch.seq === was && Date.now() - pressed < 1500) {
+      await sleep(4);
+      watch.read();
+    }
+    if (watch.seq !== was) times.push(watch.at - pressed);
+    else log(`LATENCY press ${i}: no step`);
+    await release(leader);
+    await sleep(700);    // a step's end, so that the next press steps at once
+  }
+  times.sort((a, b) => a - b);
+  log(`LATENCY ${times.length} of ${latencyPresses} presses, ms: median ${times[times.length >> 1]} p90 ${times[Math.floor(times.length * 0.9)]} worst ${times.at(-1)}`);
+}
+
+async function runFlood(leader) {
+  log(`FLOOD ${floodSeconds} s`);
+  const end = Date.now() + floodSeconds * 1000;
+  let press = true;
+  while (Date.now() < end) {
+    void walkTo(leader, press ? 'e' : null);
+    press = !press;
+    await sleep(FLOOD_MS);
+  }
+  await sleep(1100);    // the limiter's bucket back, so the stop can't be lost
+  await release(leader);
+  log('FLOOD over');
+}
+
+/** Holds, cuts the leader's line, and times what the others see. */
+async function runDrop(leader, line, others, watch) {
+  await hold(leader, 'e', 1000);
+  void walkTo(leader, 'e');
+  const cut = Date.now();
+  line.cut(dropMode);
+  log(`DROP ${dropMode} at ${cut}`);
+  const seen = {};
+  const note = (what, test) => {
+    if (seen[what] === undefined && test()) {
+      seen[what] = Date.now() - cut;
+      log(`DROP ${what} after ${seen[what]} ms`);
+    }
+  };
+  const eye = others[0];
+  while (Date.now() - cut < DROP_WATCH_MS && seen.disconnect === undefined) {
+    note('party stopped', () => watch.host && !watch.held);
+    note('lead passed', () => eye.view?.screen === 'walk' && eye.view.data.leaderName !== leader.name);
+    note('disconnect', () => eye.lobby?.players.find((p) => p.name === leader.name)?.connected === false);
+    await sleep(10);
+  }
+  if (watch.host) log(`DROP last step ${watch.at - cut} ms after the cut`);
+  if (seen.disconnect === undefined) throw new Error(`No disconnect event in ${DROP_WATCH_MS} ms`);
+}
+
+async function walkAbout(bots, lines, watch) {
+  const leader = await until('a leader', () => bots.find((b) => b.view?.screen === 'walk' && b.view.data.leader));
+  log(`${leader.name} leads`);
+  if (tvLog && !asHost) await until('the world on the TV', () => fs.existsSync(tvLog) && fs.readFileSync(tvLog, 'utf8').includes('TACTICS world open'));
+  if (walkScript) await runScript(leader);
+  if (latencyPresses) await runLatency(leader, watch);
+  if (floodSeconds) await runFlood(leader);
+  if (dropMode) await runDrop(leader, lines[bots.indexOf(leader)], bots.filter((b) => b !== leader), watch);
+  log('WALK done');
+  const ender = bots.find((b) => b.view?.data?.vip && (!dropMode || b !== leader));
+  if (!ender) return log('The VIP was the one cut: the session stays open');
+  await ender.input('endSession');
+  await until('the session to end', () => ender.ended);
+}
+
 (async () => {
-  const code = await roomCode();
-  const bots = Array.from({ length: players }, (_, i) => new Bot(i));
+  const host = asHost ? new HubConnectionBuilder().withUrl(`${server}/hub`).configureLogging(LogLevel.Critical).build() : null;
+  const watch = new Watch(host);
+  let code;
+  if (host) {
+    await host.start();
+    code = (await host.invoke('CreateRoom')).code;
+  } else code = await roomCode();
+  const lines = dropMode ? Array.from({ length: players }, () => new Line()) : [];
+  const urls = await Promise.all(lines.map((l) => l.open()));
+  const bots = Array.from({ length: players }, (_, i) => new Bot(i, urls[i]));
   for (const bot of bots) await bot.join(code);
   const [vip, ...rest] = bots;
 
@@ -253,6 +465,14 @@ class Bot {
   log('Game on');
 
   const state = { nextPick: Date.now() + holdMs };
+  if (walking) {
+    await until('the walk screen', () => {
+      for (const bot of bots) void bot.act(state);
+      return bots.some((b) => b.view?.screen === 'walk' && b.view.data.leader);
+    });
+    await walkAbout(bots, lines, watch);
+    process.exit(0);
+  }
   await until('the session to end', () => {
     if (bots.some((b) => b.closed)) throw new Error(`Room closed: ${bots.find((b) => b.closed).closed}`);
     if (leave && bots.some((b) => ['turn', 'status', 'react'].includes(b.view?.screen))) return 'left';
