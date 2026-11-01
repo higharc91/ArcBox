@@ -103,7 +103,10 @@ export function Dialogue({ data, send, viewId }: CustomScreenProps) {
 
 // ---- Votes and choices ---------------------------------------------------------------------------------------------
 
-function OptionBody({ option, letter, tag }: { option: StoryOption; letter: string; tag: string | null }) {
+/** A ribbon on an option or a card: yours, the party's, or (on a tie-break) your vote from before the tie. */
+interface Tag { text: string; earlier?: boolean }
+
+function OptionBody({ option, letter, tag }: { option: StoryOption; letter: string; tag: Tag | null }) {
   return (
     <>
       <span class="tx-letter" aria-hidden="true">{letter}</span>
@@ -116,7 +119,7 @@ function OptionBody({ option, letter, tag }: { option: StoryOption; letter: stri
           </span>
         ) : null}
       </span>
-      {tag ? <span class="tx-opt-tag">{tag}</span> : null}
+      {tag ? <span class={`tx-opt-tag${tag.earlier ? " earlier" : ""}`}>{tag.text}</span> : null}
     </>
   );
 }
@@ -131,6 +134,72 @@ function useTieAlert(tie: boolean, mine: boolean) {
   }, [tie]);
 }
 
+/** How long a tap held behind one already sent waits for the view that answers it before it goes anyway. */
+export const QUEUE_MS = 1500;
+
+/**
+ * An answer to a question (a vote, or a roller pick) as this phone sees it, and a way to tap one.
+ *
+ * - A tap shows as yours at once. A second tap before the server's view comes back would go out on a view the server
+ *   has already moved past, and be dropped, so it waits for that view (or `QUEUE_MS`, if none comes) and goes out on
+ *   it then. The latest tap wins.
+ * - On a tie-break, the server's `mine` is still this player's vote from the open round. It's shown as `earlier`, not as
+ *   this question's answer, until they tap: any tied option they tap goes out, their earlier vote included.
+ */
+function useAnswer(viewId: string, serverMine: string | null, tie: boolean, post: (id: string) => void) {
+  const sfx = useSfx();
+  const out = useRef(post);
+  out.current = post;
+  const [local, setLocal] = useState<string | null>(null);
+  const inflight = useRef<string | null>(null);
+  const queued = useRef<string | null>(null);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const round = useRef({ tie, answered: false });
+  if (round.current.tie !== tie) round.current = { tie, answered: false };
+  const fresh = tie && !round.current.answered;
+  const mine = local ?? (fresh ? null : serverMine);
+  const earlier = fresh && !local ? serverMine : null;
+
+  const go = (id: string, view: string) => {
+    inflight.current = view;
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = setTimeout(() => {
+      timer.current = null;
+      inflight.current = null;
+      const next = queued.current;
+      queued.current = null;
+      if (next) go(next, view);
+    }, QUEUE_MS);
+    out.current(id);
+  };
+
+  // A new view: the server has heard the last tap. One held behind it goes now, unless the view already says so.
+  const latest = useRef(serverMine);
+  latest.current = serverMine;
+  useEffect(() => {
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = null;
+    inflight.current = null;
+    const next = queued.current;
+    queued.current = null;
+    if (next && next !== latest.current) go(next, viewId);
+    else setLocal(null);
+  }, [viewId]);
+  useEffect(() => () => {
+    if (timer.current) clearTimeout(timer.current);
+  }, []);
+
+  const tap = (id: string) => {
+    if (id === mine) return;
+    round.current.answered = true;
+    setLocal(id);
+    sfx("confirm");
+    if (inflight.current === viewId) queued.current = id;
+    else go(id, viewId);
+  };
+  return { mine, earlier, tap };
+}
+
 /**
  * A question: the party's vote, or the leader's choice for everyone. Options are big tap targets; a tap answers at once
  * and shows as yours before the server's view comes back, and stays changeable until the clock runs out. Those who
@@ -138,18 +207,9 @@ function useTieAlert(tie: boolean, mine: boolean) {
  */
 export function Vote({ data, send, viewId }: CustomScreenProps) {
   const d = data as VoteData;
-  const sfx = useSfx();
   const alerted = useAlertOnMount("yourTurn", d.canChoose);
   useTieAlert(d.tie, d.canChoose);
-  const [tapped, setTapped] = useState<{ id: string; view: string } | null>(null);
-  const mine = tapped?.view === viewId ? tapped.id : d.mine;
-
-  const pick = (id: string) => {
-    if (id === mine) return;
-    setTapped({ id, view: viewId });
-    sfx("confirm");
-    send("vote", { option: id });
-  };
+  const { mine, earlier, tap: pick } = useAnswer(viewId, d.mine, d.tie, (id) => send("vote", { option: id }));
 
   const eyebrow = d.tie ? "Tie-break" : d.party ? "Party vote" : "The leader's choice";
   const title = d.tie
@@ -164,8 +224,10 @@ export function Vote({ data, send, viewId }: CustomScreenProps) {
       : d.party
         ? "You can change your vote until time runs out."
         : "You lead, so this one's yours. You can change it until time runs out.";
-  const tagOf = (id: string) =>
-    id === mine ? (d.party ? "Your vote" : "Your choice") : !mine && id === d.chosen ? "The party's choice" : null;
+  const tagOf = (id: string): Tag | null =>
+    id === mine ? { text: d.party ? "Your vote" : "Your choice" }
+      : id === earlier ? { text: "You voted this earlier", earlier: true }
+        : !mine && id === d.chosen ? { text: "The party's choice" } : null;
 
   return (
     <div class={`tx tx-ask${alerted ? " arrived" : ""}`}>
@@ -173,7 +235,7 @@ export function Vote({ data, send, viewId }: CustomScreenProps) {
       <ul class={`tx-options${d.canChoose ? "" : " static"}`} aria-label="Options">
         {d.options.map((o, i) => {
           const tag = tagOf(o.id);
-          const on = tag !== null;
+          const on = tag !== null && !tag.earlier;
           return (
             <li key={o.id}>
               {d.canChoose ? (
@@ -202,10 +264,10 @@ export function Vote({ data, send, viewId }: CustomScreenProps) {
 /** A class's name as the art knows it. */
 const classId = (name: string) => name.toLowerCase().replaceAll(" ", "_");
 
-function CardBody({ card, tag }: { card: CheckCard; tag: string | null }) {
+function CardBody({ card, tag }: { card: CheckCard; tag: Tag | null }) {
   return (
     <>
-      {tag ? <span class="tx-rcard-tag">{tag}</span> : !card.here ? <span class="tx-rcard-tag away">Away</span> : null}
+      {tag ? <span class={`tx-rcard-tag${tag.earlier ? " earlier" : ""}`}>{tag.text}</span> : !card.here ? <span class="tx-rcard-tag away">Away</span> : null}
       <Portrait unit={{ name: card.name, sprite: null, hp: 1, maxHp: 1, side: "Party" }} cls={classId(card.cls)} size={60} />
       <b class="tx-rcard-name">{card.name}</b>
       <span class="tx-rcard-who">{card.player !== card.name ? `${card.player} · ${card.cls}` : card.cls}</span>
@@ -230,11 +292,11 @@ function D20({ value }: { value: number }) {
 }
 
 function RollPanel({ roll, by }: { roll: CheckRoll; by: CheckCard | undefined }) {
-  const sfx = useSfx();
-  useEffect(() => sfx("dice"), [roll.member, roll.die]);
+  // A reconnect re-sends the rolled view: its remount stays quiet and still, as an alert's does.
+  const fresh = useAlertOnMount("dice");
   const verdict = roll.success ? "Success" : "Failure";
   return (
-    <div class={`tx-roll ${roll.success ? "ok" : "bad"}`} role="status"
+    <div class={`tx-roll ${roll.success ? "ok" : "bad"}${fresh ? " fresh" : ""}`} role="status"
       aria-label={`${by?.name ?? "The party"} rolled ${roll.die}, ${signed(roll.bonus)}, ${roll.total} against DC ${roll.dc}: ${verdict}`}>
       <D20 value={roll.die} />
       <div class="tx-roll-text">
@@ -253,7 +315,7 @@ function Rolled({ roll, by }: { roll: CheckRoll; by: CheckCard | undefined }) {
   return (
     <>
       <RollPanel roll={roll} by={by} />
-      {by ? <div class="tx-rcards one"><div class="tx-rcard on" role="group" aria-label={`${by.name}, ${signed(by.bonus)}, ${by.note}`}><CardBody card={by} tag="Rolled" /></div></div> : null}
+      {by ? <div class="tx-rcards one"><div class="tx-rcard on" role="group" aria-label={`${by.name}, ${signed(by.bonus)}, ${by.note}`}><CardBody card={by} tag={{ text: "Rolled" }} /></div></div> : null}
     </>
   );
 }
@@ -265,25 +327,17 @@ function Rolled({ roll, by }: { roll: CheckRoll; by: CheckCard | undefined }) {
  */
 export function Check({ data, send, viewId }: CustomScreenProps) {
   const d = data as CheckData;
-  const sfx = useSfx();
   const alerted = useAlertOnMount("yourTurn", d.canChoose && !d.roll);
   useTieAlert(d.tie, d.canChoose);
-  const [tapped, setTapped] = useState<{ id: string; view: string } | null>(null);
-  const mine = tapped?.view === viewId ? tapped.id : d.mine;
-
-  const pick = (id: string) => {
-    if (id === mine) return;
-    setTapped({ id, view: viewId });
-    sfx("confirm");
-    send("pickRoller", { member: id });
-  };
+  const { mine, earlier, tap: pick } = useAnswer(viewId, d.mine, d.tie, (id) => send("pickRoller", { member: id }));
 
   const roll = d.roll;
   const heading = d.tie
     ? d.canChoose ? "Tied: you break it" : `Tied: ${d.decider ?? "the leader"} breaks it`
     : d.canChoose ? "Who rolls? Vote for one" : "The party is picking who rolls";
   const pickable = (c: CheckCard) => d.canChoose && (!d.tie || d.tied.includes(c.id));
-  const tagOf = (c: CheckCard) => (c.id === mine ? "Your pick" : null);
+  const tagOf = (c: CheckCard): Tag | null =>
+    c.id === mine ? { text: "Your pick" } : c.id === earlier ? { text: "Your pick earlier", earlier: true } : null;
 
   return (
     <div class={`tx tx-check${roll ? " rolled" : ""}${alerted ? " arrived" : ""}`}>
@@ -299,8 +353,8 @@ export function Check({ data, send, viewId }: CustomScreenProps) {
           <ul class="tx-rcards" aria-label="Who rolls">
             {d.cards.map((c) => {
               const tag = tagOf(c);
-              const cls = `tx-rcard${tag ? " on" : ""}${c.here ? "" : " away"}${d.tie && !d.tied.includes(c.id) ? " out" : ""}`;
-              const label = `${c.name}, ${signed(c.bonus)}, ${c.note}${c.here ? "" : ", away"}${tag ? `, ${tag.toLowerCase()}` : ""}`;
+              const cls = `tx-rcard${tag && !tag.earlier ? " on" : ""}${c.here ? "" : " away"}${d.tie && !d.tied.includes(c.id) ? " out" : ""}`;
+              const label = `${c.name}, ${signed(c.bonus)}, ${c.note}${c.here ? "" : ", away"}${tag ? `, ${tag.text.toLowerCase()}` : ""}`;
               return (
                 <li key={c.id}>
                   {d.canChoose ? (

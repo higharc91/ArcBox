@@ -97,20 +97,21 @@ export function useSfx(): (cue: Cue) => void {
   return (cue) => play(feedback, cue);
 }
 
-let lastAlert = { cue: "", at: 0 };
+/** When each alert last played, so a remount soon after stays quiet; per cue, so one alert never wakes another. */
+const lastAlert = new Map<string, number>();
 
 /**
  * Plays an alert once when a screen appears, if `when` holds then; a remount within a few seconds (a reconnect re-sends
  * the view) stays quiet. Only `when` at mount counts. Says whether it alerted, from the first render on, so the screen
  * can play a matching animation (or not) without a re-render.
  */
-export function useAlertOnMount(cue: "yourTurn" | "reaction", when = true): boolean {
+export function useAlertOnMount(cue: "yourTurn" | "reaction" | "dice", when = true): boolean {
   const sfx = useSfx();
   const [fresh] = useState(() => {
     if (!when) return false;
     const now = Date.now();
-    if (lastAlert.cue === cue && now - lastAlert.at < 4000) return false;
-    lastAlert = { cue, at: now };
+    if (now - (lastAlert.get(cue) ?? -Infinity) < 4000) return false;
+    lastAlert.set(cue, now);
     return true;
   });
   useEffect(() => {

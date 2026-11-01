@@ -2,6 +2,7 @@ import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vite
 import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/preact";
 import type { CustomView } from "../src/protocol";
 import { loadModule } from "../src/games/registry";
+import { QUEUE_MS } from "../src/games/tactics/story";
 import { ControllerScreen } from "../src/widgets/ControllerScreen";
 
 // Real views from a real session, written by games/Tactics/Tactics.Game.Tests/PhoneFixtureTests.cs.
@@ -171,6 +172,55 @@ describe("votes and choices", () => {
     expect(send).toHaveBeenLastCalledWith({ action: "vote", data: { option: "parley" } });
   });
 
+  it("on a tie-break, my vote from the open round isn't my answer yet: tapping it sends", () => {
+    // The crown passed to me mid-question; I'd voted force before the tie.
+    const { send, again } = show("vote-tie", (d) => { d.mine = "force"; });
+    expect(pressed(option(/clear the ford by force/))).toBe("false");
+    expect(within(option(/clear the ford by force/)).getByText("You voted this earlier")).toBeTruthy();
+    fireEvent.click(option(/clear the ford by force/));
+    expect(send).toHaveBeenLastCalledWith({ action: "vote", data: { option: "force" } });
+    expect(pressed(option(/clear the ford by force/))).toBe("true");
+
+    // The server's view comes back with it: it's my answer now, and a second tap sends nothing more.
+    again(view("vote-tie", (d) => { d.mine = "force"; }, "v2"));
+    expect(within(option(/clear the ford by force/)).getByText("Your vote")).toBeTruthy();
+    fireEvent.click(option(/clear the ford by force/));
+    expect(send).toHaveBeenCalledTimes(1);
+  });
+
+  it("a second tap before the view comes back waits for it, then goes on the new view", () => {
+    const first = vi.fn();
+    const { rerender } = render(<ControllerScreen view={view("vote")} send={first} me="Player1" game="tactics" />);
+    act(() => {
+      option(/parley with the chief/).click();
+      option(/what's it worth/).click();
+    });
+    expect(first.mock.calls.map((c) => c[0])).toEqual([{ action: "vote", data: { option: "parley" } }]);
+    // The latest tap is the one shown.
+    expect(pressed(option(/what's it worth/))).toBe("true");
+    expect(pressed(option(/parley with the chief/))).toBe("false");
+
+    const second = vi.fn();
+    rerender(<ControllerScreen view={view("vote", (d) => { d.mine = "parley"; }, "v2")} send={second} me="Player1" game="tactics" />);
+    expect(second.mock.calls.map((c) => c[0])).toEqual([{ action: "vote", data: { option: "pay" } }]);
+    expect(first).toHaveBeenCalledTimes(1);
+    expect(pressed(option(/what's it worth/))).toBe("true");
+  });
+
+  it("a held tap goes anyway if no view comes back", () => {
+    const { send } = show("vote");
+    act(() => {
+      option(/parley with the chief/).click();
+      option(/what's it worth/).click();
+    });
+    expect(send).toHaveBeenCalledTimes(1);
+    vi.advanceTimersByTime(QUEUE_MS + 100);
+    expect(send.mock.calls.map((c) => c[0])).toEqual([
+      { action: "vote", data: { option: "parley" } },
+      { action: "vote", data: { option: "pay" } },
+    ]);
+  });
+
   it("shows a tie-break someone else decides read-only", () => {
     show("vote-tie", (d) => { d.canChoose = false; });
     expect(screen.getByText("Tied: Player1 breaks it")).toBeTruthy();
@@ -207,6 +257,26 @@ describe("skill checks", () => {
     expect(send).not.toHaveBeenCalled();
     fireEvent.click(screen.getByRole("button", { name: /Player2/ }));
     expect(send).toHaveBeenLastCalledWith({ action: "pickRoller", data: { member: "pr_member2" } });
+  });
+
+  it("on a tie, the decider's own earlier pick is tappable and sends", () => {
+    const { send } = show("check-pick", (d) => { d.tie = true; d.decider = "Player1"; d.tied = ["pr_member2", "pr_member3"]; });
+    expect(pressed(screen.getByRole("button", { name: /Player3/ }))).toBe("false");
+    expect(within(screen.getByRole("button", { name: /Player3/ })).getByText("Your pick earlier")).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: /Player3/ }));
+    expect(send).toHaveBeenLastCalledWith({ action: "pickRoller", data: { member: "pr_member3" } });
+    expect(pressed(screen.getByRole("button", { name: /Player3/ }))).toBe("true");
+  });
+
+  it("rolls the die (sound and spin) once: a reconnect's remount stays still", () => {
+    show("check-rolled");
+    vi.advanceTimersByTime(5000);
+    cleanup();
+    show("check-rolled");
+    expect(document.querySelector(".tx-roll")!.classList.contains("fresh")).toBe(true);
+    cleanup();
+    show("check-rolled");
+    expect(document.querySelector(".tx-roll")!.classList.contains("fresh")).toBe(false);
   });
 
   it("shows the roll", () => {
@@ -264,8 +334,12 @@ describe("Interact", () => {
     expect(document.querySelector(".tx-padzone")).toBe(zone);
     expect(face.classList.contains("down")).toBe(true);
     expect(send).toHaveBeenLastCalledWith({ action: "walk", data: { dir: "n" } });
+    // It keeps pinging while held: more walks go out across the wait, every one north.
+    const before = send.mock.calls.length;
     vi.advanceTimersByTime(500);
-    expect(send).toHaveBeenLastCalledWith({ action: "walk", data: { dir: "n" } });
+    const pings = send.mock.calls.slice(before).map((c) => c[0]);
+    expect(pings.length).toBeGreaterThanOrEqual(2);
+    expect(pings).toEqual(pings.map(() => ({ action: "walk", data: { dir: "n" } })));
     expect(screen.getByRole("button", { name: "Talk" })).toBeTruthy();
   });
 });
