@@ -44,7 +44,7 @@ public sealed class StorageWriter : BackgroundService
     /// <summary>
     /// How a flush gets its connection: <see cref="ArcDb.Open"/> unless set. Settable so tests can stand in a disk that fails.
     /// </summary>
-    public Func<SqliteConnection>? Connect { get; init; }
+    internal Func<SqliteConnection>? Connect { get; init; }
 
     private readonly ArcDb _db;
     private readonly TimeProvider _time;
@@ -64,6 +64,7 @@ public sealed class StorageWriter : BackgroundService
     private int _failures;                   // flushes in a row the storage has failed
     private DateTimeOffset? _failingSince;   // when the first of them did
     private DateTimeOffset? _retryAt;        // when the loop tries again; null while the storage is fine
+    private readonly HashSet<string> _forgotten = new(StringComparer.Ordinal);    // forgotten while running: not to be kept
 
     public StorageWriter(ArcDb db, TimeProvider time, ILogger<StorageWriter> log)
     {
@@ -151,6 +152,8 @@ public sealed class StorageWriter : BackgroundService
     /// </summary>
     private void Requeue(Dictionary<string, Action<SqliteConnection>> ops, List<string> kept, DateTimeOffset since)
     {
+        kept.RemoveAll(_forgotten.Contains);
+        _forgotten.Clear();
         if (kept.Count == 0) return;
         if (_pending.Count == 0 || since < _pendingSince) _pendingSince = since;
         foreach (var key in kept) _pending.TryAdd(key, ops[key]);
@@ -191,14 +194,14 @@ public sealed class StorageWriter : BackgroundService
     }
 
     /// <summary>The wait before retry <paramref name="failures"/> (1 for the first): <see cref="RetryFirst"/>, doubling, at most <see cref="RetryMost"/>.</summary>
-    public static TimeSpan RetryAfter(int failures)
+    internal static TimeSpan RetryAfter(int failures)
         => TimeSpan.FromTicks(Math.Min(RetryMost.Ticks, RetryFirst.Ticks << Math.Clamp(failures - 1, 0, 20)));
 
     /// <summary>
     /// True when <paramref name="e"/> is the storage's fault rather than the write's: SQLite's busy, locked, out of memory,
     /// read-only, I/O, full, can't-open and protocol errors, and any I/O exception. Those writes are kept and retried.
     /// </summary>
-    public static bool IsStorageFault(Exception e) => e switch
+    internal static bool IsStorageFault(Exception e) => e switch
     {
         SqliteException sqlite => sqlite.SqliteErrorCode is 5 or 6 or 7 or 8 or 10 or 13 or 14 or 15,
         IOException or UnauthorizedAccessException => true,
@@ -206,11 +209,34 @@ public sealed class StorageWriter : BackgroundService
     };
 
     /// <summary>True while the storage is failing and the writer is waiting to try again.</summary>
-    public bool Failing
+    internal bool Failing
     {
         get
         {
             lock (_lock) return _failures > 0;
+        }
+    }
+
+    /// <summary>
+    /// Drops the operation queued under <paramref name="key"/>, if it hasn't run: one nobody needs any more, such as a campaign's snapshot
+    /// that newer ones have pushed out of its last <c>MaxSnapshots</c>, so a disk that's down for long can't pile up keys without end.
+    /// One already running and kept by a failing disk is dropped as it comes back.
+    /// </summary>
+    public void Forget(string key)
+    {
+        lock (_lock)
+        {
+            if (_pending.Remove(key)) _order.Remove(key);
+            else if (_inFlightCount > 0) _forgotten.Add(key);
+        }
+    }
+
+    /// <summary>How many operations are queued and not yet running. For tests.</summary>
+    internal int PendingCount
+    {
+        get
+        {
+            lock (_lock) return _pending.Count;
         }
     }
 
@@ -261,7 +287,9 @@ public sealed class StorageWriter : BackgroundService
         // stops this service, Kestrel may have spent the whole shutdown timeout closing the phones' connections, so the
         // token is often already cancelled: honouring it would drop the last seat changes without trying (and its
         // exception aborted the process). The cap keeps a stalled disk from holding the shutdown up for good.
-        var drain = FlushAsync(CancellationToken.None);
+        // While the storage fails, the drain retries with the usual back-off until the cap.
+        using var giveUp = new CancellationTokenSource();
+        var drain = DrainAsync(giveUp.Token);
         try
         {
             await drain.WaitAsync(StopDrainLimit).ConfigureAwait(false);
@@ -271,6 +299,7 @@ public sealed class StorageWriter : BackgroundService
             // The drain carries on in the background until the process exits; observe a late failure so it isn't unobserved.
             _ = drain.ContinueWith(t => _log.LogError(t.Exception, "Storage drain failed after the writer stopped"),
                 CancellationToken.None, TaskContinuationOptions.OnlyOnFaulted, TaskScheduler.Default);
+            await giveUp.CancelAsync().ConfigureAwait(false);
             int unwritten;
             lock (_lock) unwritten = _inFlightCount + _pending.Count;
             _log.LogError("Storage writer stopped after waiting {Limit} for its last writes: {Unwritten} queued writes may be lost",
@@ -281,6 +310,24 @@ public sealed class StorageWriter : BackgroundService
         lock (_lock) left = _pending.Count;
         if (left > 0)
             _log.LogError("Storage writer stopped with the storage failing: {Unwritten} queued writes are lost", left);
+    }
+
+    /// <summary>Flushes, and while the storage fails and writes are kept, waits out the back-off (wall-clock time) and flushes again.</summary>
+    private async Task DrainAsync(CancellationToken giveUp)
+    {
+        await FlushAsync(CancellationToken.None).ConfigureAwait(false);
+        for (var tries = 1; Failing && PendingCount > 0 && !giveUp.IsCancellationRequested; tries++)
+        {
+            try
+            {
+                await Task.Delay(RetryAfter(tries), giveUp).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                return;
+            }
+            await FlushAsync(CancellationToken.None).ConfigureAwait(false);
+        }
     }
 
     /// <summary>
@@ -307,6 +354,10 @@ public sealed class StorageWriter : BackgroundService
             transaction.Commit();
             Interlocked.Add(ref _writesExecuted, order.Count);
             return ([], null);
+        }
+        catch (Exception e) when (IsStorageFault(e))
+        {
+            return ([.. order], e);     // the disk, not a write: the whole batch waits for it, rather than failing again one by one
         }
         catch (Exception e)
         {

@@ -356,7 +356,7 @@ public class StorageWriterTests
     }
 
     [Fact]
-    public async Task A_write_the_disk_fails_mid_batch_is_kept_and_one_that_fails_on_its_own_is_dropped()
+    public async Task A_batch_the_disk_fails_is_kept_whole_and_a_write_that_fails_on_its_own_is_dropped()
     {
         var (db, _, time) = Create();
         using var _db = db;
@@ -373,7 +373,8 @@ public class StorageWriterTests
 
         await writer.FlushAsync(ct);
         Assert.True(writer.Failing);
-        Assert.Equal(1, writer.WritesExecuted);
+        Assert.Equal(0, writer.WritesExecuted);        // the disk's fault: the whole batch waits, nothing is tried one by one
+        Assert.Equal(3, writer.PendingCount);
 
         full = false;
         await writer.FlushAsync(ct);
@@ -442,5 +443,48 @@ public class StorageWriterTests
 
         Assert.Equal(2, db.Scalar<int>("SELECT v FROM scratch"));
         Assert.False(writer.Failing);
+    }
+
+    /// <summary>Review: a stop on a disk that's failing retries, with the back-off, inside the drain's cap, rather than trying once.</summary>
+    [Fact]
+    public async Task StopAsync_retries_a_failing_disk_inside_the_cap()
+    {
+        var (db, _, time) = Create();
+        using var _db = db;
+        var failures = 2;
+        var disk = new FailingDisk(db) { Broken = true };
+        using var writer = new StorageWriter(db, time, NullLogger<StorageWriter>.Instance)
+        {
+            Connect = () =>
+            {
+                disk.Broken = failures-- > 0;
+                return disk.Open();
+            },
+            StopDrainLimit = TimeSpan.FromSeconds(4),
+        };
+        writer.Write("a", Insert("a", 1));
+
+        await writer.StopAsync(new CancellationToken(canceled: true));
+
+        Assert.Equal(1, db.Scalar<int>("SELECT COUNT(*) FROM scratch"));         // the third try: after 0.5 s and 1 s of back-off
+        Assert.Equal(3, disk.Tries);
+    }
+
+    [Fact]
+    public async Task StopAsync_on_a_disk_that_stays_down_gives_up_at_the_cap_and_says_so()
+    {
+        var (db, _, time) = Create();
+        using var _db = db;
+        var log = new RecordingLogger();
+        var disk = new FailingDisk(db) { Broken = true };
+        using var writer = new StorageWriter(db, time, log) { Connect = disk.Open, StopDrainLimit = TimeSpan.FromMilliseconds(1200) };
+        writer.Write("a", Insert("a", 1));
+
+        var clock = System.Diagnostics.Stopwatch.StartNew();
+        await writer.StopAsync(new CancellationToken(canceled: true));
+
+        Assert.InRange(clock.Elapsed, TimeSpan.FromSeconds(1), Patience);
+        Assert.InRange(disk.Tries, 2, 3);
+        Assert.Contains(log.Entries, e => e.Level == LogLevel.Error && e.Message.Contains("1 queued writes may be lost"));
     }
 }
