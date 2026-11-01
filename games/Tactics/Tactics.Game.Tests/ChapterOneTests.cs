@@ -10,17 +10,18 @@ namespace Tactics.Game.Tests;
 /// <summary>
 /// All of Chapter 1 (overworld 5d, Task 11), from a fresh campaign at the region's spawn to the chapter card and walking after it, on
 /// either branch: the party walks to each "!" by the walking rule, taps Interact, plays every scene, fights each battle beat and goes on.
-/// Nothing is seeded, so the order of the beats, the travel between places and every saved cursor are the game's own.
+/// Nothing is seeded, so the order of the beats, the travel between places and every saved cursor are the game's own. The cases are
+/// classes of their own, so xUnit runs them side by side.
 /// </summary>
-public sealed class ChapterOneTests
+public abstract class ChapterOne
 {
     private const string Ember = "ch1_the_ember";
 
     /// <summary>The scenes each branch plays, in order, and the battle between them.</summary>
-    private static readonly string[] ByForce =
+    protected static readonly string[] ByForce =
         ["ch1_mayor", "ch1_ford", "ch1_dawn", "fight:ch1_ford_assault", "ch1_bridge_cost", "ch1_maud", "ch1_docks", "ch1_kindler", "ch1_four_more"];
 
-    private static readonly string[] ByParley =
+    protected static readonly string[] ByParley =
     [
         "ch1_mayor", "ch1_ford", "ch1_parley", "ch1_young_ones", "fight:ch1_river_crossing", "ch1_road_east", "ch1_maud", "ch1_granary",
         "ch1_song", "ch1_docks", "ch1_kindler", "ch1_four_more",
@@ -32,7 +33,7 @@ public sealed class ChapterOneTests
     /// A campaign of <paramref name="players"/> members, played through its chapter by a party that answers as told. With
     /// <see cref="RestartEveryLine"/>, the server restarts as each new line starts, and everyone comes back.
     /// </summary>
-    private sealed class Play
+    protected sealed class Play
     {
         private readonly int _players;
         private readonly LoreBook _lore;
@@ -57,6 +58,27 @@ public sealed class ChapterOneTests
         public TacticsGame Game { get; private set; }
         public GameHarness<TacticsGame> Harness { get; private set; }
         public bool RestartEveryLine { get; init; }
+
+        /// <summary>
+        /// Restart at every moment of every scene, once each: a new line, an open question, a tie-break, the pick of who rolls, a roll
+        /// before its reveal, and the gap between scenes. A question reopens after a restart (votes aren't saved), so each moment is
+        /// restarted at only once, and the party answers it the second time.
+        /// </summary>
+        public bool RestartEveryMoment { get; init; }
+
+        /// <summary>
+        /// Party votes tie: the leader holds back and two others split between the branch's option and another, so the leader breaks the
+        /// tie once the vote's clock runs out.
+        /// </summary>
+        public bool Ties { get; init; }
+
+        /// <summary>The moments a restart hit, by state: <c>lines</c>, <c>asking</c>, <c>tieBreak</c>, <c>pickRoller</c>, <c>rolled</c>, <c>gap</c>.</summary>
+        public Dictionary<string, int> RestartedAt { get; } = [];
+
+        /// <summary>Each roll as it was made, and as each restart showed it again: never made twice.</summary>
+        public List<(string Line, int Die)> Rolls { get; } = [];
+
+        private readonly HashSet<string> _moments = [];
 
         /// <summary>The scenes as they started, and each fight as <c>fight:&lt;beat&gt;</c>, in order.</summary>
         public List<string> Played { get; } = [];
@@ -176,6 +198,14 @@ public sealed class ChapterOneTests
                         return;
                     }
                 }
+                if (World.Story?.Roll is { } roll)
+                    Rolls.Add(($"{story.Scene} {roll.Option}", roll.Die));
+                if (RestartEveryMoment && _moments.Add($"{story.Scene} {story.Line?.Id} {story.State}"))
+                {
+                    RestartedAt[story.State] = RestartedAt.GetValueOrDefault(story.State) + 1;
+                    Restart();
+                    return;
+                }
                 if (_answer)
                     Answer();
             }
@@ -193,7 +223,16 @@ public sealed class ChapterOneTests
                 if (view.Screen == TacticsGame.Screens.Vote)
                 {
                     var ids = view.Data.GetProperty("options").EnumerateArray().Select(o => o.GetProperty("id").GetString()!).ToList();
-                    Send(p, "vote", new { option = ids.Contains(_branch ?? "") ? _branch : ids[0] });
+                    var mine = ids.Contains(_branch ?? "") ? _branch! : ids[0];
+                    if (Ties && view.Data.GetProperty("party").GetBoolean() && !view.Data.GetProperty("tie").GetBoolean() && ids.Count > 1)
+                    {
+                        // The leader holds back; the first two others split, one for the branch's option and one for another.
+                        var others = Enumerable.Range(0, _players).Where(o => o != Lead).ToList();
+                        if (p == Lead || others.IndexOf(p) > 1)
+                            continue;
+                        mine = others.IndexOf(p) == 0 ? mine : ids.First(id => id != mine);
+                    }
+                    Send(p, "vote", new { option = mine });
                 }
                 else if (view.Screen == TacticsGame.Screens.Check)
                 {
@@ -253,7 +292,7 @@ public sealed class ChapterOneTests
     }
 
     /// <summary>Plays the chapter, and checks its end: every beat done, the card shown once, its checkpoint, and walking after.</summary>
-    private static Play Played(Play play, string[] scenes)
+    protected static Play Played(Play play, string[] scenes)
     {
         play.ToTheEnd();
         Assert.Equal(scenes, play.Played.Distinct());      // a lost fight comes again
@@ -276,7 +315,10 @@ public sealed class ChapterOneTests
         Assert.Equal(scenes.Where(s => !s.StartsWith("fight:", StringComparison.Ordinal)), play.Lines.Select(l => sceneOf[l]).Distinct());
         return play;
     }
+}
 
+public sealed class ChapterOneTests : ChapterOne
+{
     [Fact]
     public void Chapter_1_plays_by_force()
     {
@@ -297,7 +339,10 @@ public sealed class ChapterOneTests
         Assert.Contains("ch1_halden_confessed", play.World.Flags);
         Assert.Equal([BattleOutcome.Won], play.Fights);
     }
+}
 
+public sealed class ChapterOneUnansweredTests : ChapterOne
+{
     /// <summary>Nobody touches a phone from the mayor to the ember: every vote and choice runs out, which takes the first option (decision 2).</summary>
     [Fact]
     public void Chapter_1_plays_with_every_vote_unanswered()
@@ -306,7 +351,10 @@ public sealed class ChapterOneTests
 
         Assert.Contains("ch1_skarrow_slain", play.World.Flags);
     }
+}
 
+public sealed class ChapterOneCompanionTests : ChapterOne
+{
     [Fact]
     public void Chapter_1_plays_with_one_player_and_companions()
     {
@@ -314,7 +362,10 @@ public sealed class ChapterOneTests
 
         Assert.Single(TacticsDocument.Read(play.Lease.Document).Members);
     }
+}
 
+public sealed class ChapterOneRestartLineTests : ChapterOne
+{
     [Theory]
     [InlineData("force")]
     [InlineData("parley")]
@@ -324,11 +375,39 @@ public sealed class ChapterOneTests
 
         Assert.Equal(play.Lines.Count, play.Restarts);
     }
+}
 
+public sealed class ChapterOneRestartMomentTests : ChapterOne
+{
+    /// <summary>
+    /// Review: a restart at every moment, not only every line: mid-vote, on a tie-break, at the pick of who rolls, between a roll and its
+    /// reveal, and in the gap between scenes. Each comes back: no question is lost, no roll is made twice, no beat or flag repeats. With
+    /// the roll's save taken out of <c>Roll</c>, both cases fail: the restart rolls again.
+    /// </summary>
+    [Theory]
+    [InlineData("force")]
+    [InlineData("parley")]
+    public void Chapter_1_plays_with_a_restart_at_every_moment(string branch)
+    {
+        var play = Played(new Play(branch: branch) { RestartEveryMoment = true, Ties = true }, branch == "force" ? ByForce : ByParley);
+
+        foreach (var state in new[] { "lines", "asking", "tieBreak", "pickRoller", "rolled", "gap" })
+            Assert.True(play.RestartedAt.GetValueOrDefault(state) > 0, $"No restart at {state}: {string.Join(", ", play.RestartedAt)}");
+        foreach (var option in play.Rolls.GroupBy(r => r.Line))
+            Assert.Single(option.Select(r => r.Die).Distinct());       // the same die before and after every restart: never rolled again
+        Assert.NotEmpty(play.Rolls);
+    }
+}
+
+public sealed class ChapterOneNoClipsTests : ChapterOne
+{
     [Fact]
     public void Chapter_1_plays_with_no_clips()
         => Played(new Play(branch: "parley", lore: StoryTests.NoClips.Value), ByParley);
+}
 
+public sealed class ChapterOneDefeatTests : ChapterOne
+{
     /// <summary>The assault lost twice: the party wakes at the recovery spawn, walks back, and the retry goes straight to the fight.</summary>
     [Fact]
     public void Chapter_1_plays_with_a_defeat_in_its_battle()
