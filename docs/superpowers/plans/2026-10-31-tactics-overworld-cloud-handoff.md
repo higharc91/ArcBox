@@ -127,6 +127,24 @@ The local session was on Windows with an RTX 5080. Check what you have.
 
 ## 8. The user's list
 
+**The user's answers, 2026-11-01** (these settle the matching items below):
+- **Boss music:** Rime Tower also gets the boss theme and the boss victory fanfare. Ford Assault stays ordinary. (27) *To build.*
+- **Losing:** waking at the recovery spawn after a loss fully heals the party and clears battle injuries, so a retry is fair. Half XP on a loss stays. This is the user's rules change. (3, 18) *To build.*
+- **No-clip lines:** captions only (`StoryVoice.Fallback = Captions`, already the default). (1) *Settled.*
+- **Restart:** the saved line is spoken again after a server restart. (26) *Settled.*
+- **End-of-battle walk halt:** confirmed. (25) *Settled.*
+- **Bree Tallow's angry portrait:** regenerate it in Scenario to match her other moods. (20) *To build.*
+- **The VIP can end the session from inside a scene.** (Review default.) *Being built.*
+- **Unanswered votes keep the first option** at 45 s. (2) *Settled.*
+- **Environmental tiles:** start a draft design doc now (no code), for the user to review. (6) *To write.*
+- **TVs cache region data per file,** so an export only re-downloads what changed. (7) *To build.*
+- **The vote countdown:** leave it; the server owns the deadline. (28) *Settled.*
+- **A second question in a row alerts again.** (30) *Being built.*
+- **Player colours:** each player picks their colour with a colour picker at character creation. It's used for their TV ring, vote dots and phone. This replaces "stable seat colours". (14) *To build.*
+- **Scene cast:** every scene places its non-narrator speakers at the scene's spot in the world while it plays. (21) *To build.*
+- **"Back to walking":** hidden when there's no world, using a new canWalk flag (a small contract change). (9, 29) *To build.*
+- **Spawn clash:** a walker on a spawn's tile steps to the nearest free walkable tile. (8) *To build.*
+
 Keep this list, add to it, and put it at the top of your final report. Don't stop work for these.
 
 **Decisions:**
