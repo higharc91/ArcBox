@@ -60,7 +60,7 @@ public static class MusicChoice
         {
             TacticsPhase.Muster => new MusicCue(Title),
             TacticsPhase.EncounterPick => new MusicCue(Explore),
-            TacticsPhase.Exploration => new MusicCue(view.Explore is { } explore ? Regions.GetValueOrDefault(explore.Region, Explore) : Explore),
+            TacticsPhase.Exploration or TacticsPhase.Story => new MusicCue(view.Explore is { } explore ? Regions.GetValueOrDefault(explore.Region, Explore) : Explore),
             TacticsPhase.Battle when view.Battle is { } battle => new MusicCue(Fights.GetValueOrDefault(battle.Encounter, Fight)),
             TacticsPhase.Results => view.Outcome switch
             {

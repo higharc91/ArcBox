@@ -45,6 +45,7 @@ public static class TacticsServiceCollectionExtensions
             return new TacticsGame(sp.GetRequiredService<Lazy<RulesPack>>(), lore: sp.GetRequiredService<Lazy<LoreBook>>(), seed: seed, battleList: battleList)
             {
                 FaultLogged = fault => LogFault(log, fault),
+                StoryLogged = problem => log.LogWarning("Tactics story: {Problem}", problem),
             };
         });
         services.AddSingleton<ICampaignRules>(sp => new TacticsCampaignRules(sp.GetRequiredService<Lazy<RulesPack>>()));

@@ -64,6 +64,7 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
             TacticsPhase.Resuming => Resuming(screen, view),
             TacticsPhase.Battle => Battle(screen, view),
             TacticsPhase.Exploration => Exploration(screen, view),
+            TacticsPhase.Story => Story(screen, view),
             _ => screen,
         };
         drawn = drawn with { Music = MusicChoice.Of(view), Ambience = MusicChoice.AmbienceOf(view) };
@@ -83,6 +84,12 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
         Empty = view.Explore?.Name,
         World = view.Explore,
         Walk = view.Explore is { } shown ? WalkHud.Of(shown, view.PartyLevel) : null,
+    };
+
+    // A scene plays over the world (overworld 5d): the world stays drawn, and the scene's own panels are the story's to draw.
+    private static PhaseScreen Story(PhaseScreen screen, TacticsHostView view) => Exploration(screen, view) with
+    {
+        Meta = view.Story is { } story ? $"Story · {story.Title}" : "Story",
     };
 
     private static PhaseScreen Muster(PhaseScreen screen, TacticsHostView view) => screen with

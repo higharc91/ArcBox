@@ -205,4 +205,12 @@ public sealed class BaseLoreTests
             pack.Delete(recursive: true);
         }
     }
+    /// <summary>The walk screen's objective says "Go to" a beat's place by name (5d plan §2), so every place a beat names has one.</summary>
+    [Fact]
+    public void Every_beat_place_has_a_name()
+    {
+        foreach (var beat in Book.Value.Arcs.SelectMany(a => a.Beats).Where(b => b.Place is not null))
+            Assert.False(string.IsNullOrWhiteSpace(Book.Value.PlaceName(beat.Place!)), $"The place '{beat.Place}' of '{beat.Id}' has no name.");
+        Assert.Equal("Emberwick", Book.Value.PlaceName("emberwick_town"));
+    }
 }

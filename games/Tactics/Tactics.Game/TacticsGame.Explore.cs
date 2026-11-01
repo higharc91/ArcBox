@@ -111,7 +111,12 @@ public sealed partial class TacticsGame
     /// <summary>Who has the pad, if anyone.</summary>
     public Player? Leader => _lead is { } lead ? _players.FirstOrDefault(p => p.Profile?.Value == lead) : null;
 
-    private static bool IsWorldAction(string action) => action is "walk" or "battles" or "backToWalk" or "endSession";
+    /// <summary>
+    /// The inputs of the world and its story, never a battle's: one that arrives late, from a screen the fight has replaced, is dropped
+    /// rather than read as a command the battle doesn't know.
+    /// </summary>
+    private static bool IsWorldAction(string action)
+        => action is "walk" or "battles" or "backToWalk" or "endSession" or "interact" or "skip" or "vote" or "pickRoller";
 
     // ---- Fights in the world (overworld 5c) ----------------------------------------------------------------------------
 
@@ -179,6 +184,7 @@ public sealed partial class TacticsGame
         _region = region;
         // Not 0: a server restart restarts Seq under a TV that may have stayed up, and to it only a new Epoch means "snap".
         _epoch = (int)(_ctx.Now.ToUnixTimeSeconds() % int.MaxValue);
+        _storySeq = Math.Max(saved?.StorySeq ?? 0, saved?.Story?.Seq ?? 0);     // the TV's line number goes on from where it was
         var start = region.Def.Spawns.Start;
         if (saved is not null && saved.Region == region.Def.Id && CanStandOn(saved.At, start))
             (_at, _facing) = (saved.At, saved.Facing);
@@ -591,10 +597,12 @@ public sealed partial class TacticsGame
         SaveWorld();
     }
 
-    // A guard against the lead changing hands mid-scene (5d flag 9) goes on the first arm, not at the top of ReconsiderLeader: the
-    // session's leader must wait for the scene to end, but a leader who drops mid-scene still has to be replaced. The first arm already
-    // waits for the takeback: a stand-in who can still lead keeps it until the party has been stopped long enough.
-    private string? WantedLeader() => _sessionLead is { } own && CanLead(own) && !(TakebackAt > _ctx.Now) ? own
+    // The guard against the lead changing hands mid-scene (5d flag 9) is on the first arm, not at the top of ReconsiderLeader: the
+    // session's leader waits for the scene to end, so a tie-break or a choice can't change hands under the party, but a leader who drops
+    // mid-scene still has to be replaced, which the other arms do. The first arm also waits for the takeback: a stand-in who can still lead
+    // keeps it until the party has been stopped long enough. With nobody leading at all, mid-scene or not, the session's leader is first.
+    private string? WantedLeader() => (_phase != TacticsPhase.Story || _lead is null) && _sessionLead is { } own && CanLead(own) && !(TakebackAt > _ctx.Now)
+        ? own
         : _lead is { } still && CanLead(still) ? still
         : NextAfter(_lead ?? _sessionLead);
 

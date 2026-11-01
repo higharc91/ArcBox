@@ -21,11 +21,63 @@ public sealed record WalkTiming(TimeSpan Step, TimeSpan DropStep, TimeSpan HoldL
 }
 
 /// <summary>
-/// The adapter's clocks in one place (adapter spec §9, decision 5): a player's turn, a reaction prompt, how long an
-/// AI beat may wait for the TV's <c>shown</c> signal before the next one goes anyway, and walking, which defaults to
-/// <see cref="WalkTiming.Default"/>.
+/// The clocks of a scene (overworld 5d §4): the server's alone, since the TV sends nothing back for a line. Each is a number only a person
+/// can judge, so they're here to be tuned, not in the rules.
 /// </summary>
-public sealed record TacticsTiming(TimeSpan Turn, TimeSpan Reaction, TimeSpan PaceBase, TimeSpan PacePerEvent, TimeSpan PaceMax, WalkTiming? Walk = null)
+public sealed record StoryTiming
+{
+    /// <summary>The defaults of the 5d plan's tunables.</summary>
+    public static StoryTiming Default { get; } = new();
+
+    /// <summary>The pause after a line's clip before the next line: 0.5 s.</summary>
+    public TimeSpan LineGap { get; init; } = TimeSpan.FromSeconds(0.5);
+
+    /// <summary>How long a line with no clip is read for, for each word: 0.36 s.</summary>
+    public TimeSpan PerWord { get; init; } = TimeSpan.FromSeconds(0.36);
+
+    /// <summary>How long a line with no clip is read for, on top of its words: 1.2 s.</summary>
+    public TimeSpan ReadBase { get; init; } = TimeSpan.FromSeconds(1.2);
+
+    /// <summary>How long the party has to vote: 45 s (the user's decision 2).</summary>
+    public TimeSpan Vote { get; init; } = TimeSpan.FromSeconds(45);
+
+    /// <summary>How long the leader has to choose for the party: 30 s.</summary>
+    public TimeSpan Choice { get; init; } = TimeSpan.FromSeconds(30);
+
+    /// <summary>How long the decider has to break a tie: 10 s.</summary>
+    public TimeSpan TieBreak { get; init; } = TimeSpan.FromSeconds(10);
+
+    /// <summary>How long the party has to pick who rolls: 20 s.</summary>
+    public TimeSpan Roller { get; init; } = TimeSpan.FromSeconds(20);
+
+    /// <summary>How long a question stays open once everyone here has answered, for one last change: 2 s.</summary>
+    public TimeSpan Settle { get; init; } = TimeSpan.FromSeconds(2);
+
+    /// <summary>How long a roll's result shows before the scene goes on: 4.5 s.</summary>
+    public TimeSpan Reveal { get; init; } = TimeSpan.FromSeconds(4.5);
+
+    /// <summary>The pause between two scenes of a beat, with the next one's title: 2 s.</summary>
+    public TimeSpan SceneGap { get; init; } = TimeSpan.FromSeconds(2);
+
+    /// <summary>How long the card at the end of a chapter shows: 6 s.</summary>
+    public TimeSpan Card { get; init; } = TimeSpan.FromSeconds(6);
+
+    /// <summary>
+    /// How long a line plays: its clip of <paramref name="clip"/> seconds and <see cref="LineGap"/>, or with no clip, a reading timer of
+    /// <see cref="PerWord"/> for each word of <paramref name="text"/> and <see cref="ReadBase"/>.
+    /// </summary>
+    public TimeSpan Line(double? clip, string text) => clip is { } seconds
+        ? TimeSpan.FromSeconds(seconds) + LineGap
+        : PerWord * text.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).Length + ReadBase;
+}
+
+/// <summary>
+/// The adapter's clocks in one place (adapter spec §9, decision 5): a player's turn, a reaction prompt, how long an
+/// AI beat may wait for the TV's <c>shown</c> signal before the next one goes anyway, walking, which defaults to
+/// <see cref="WalkTiming.Default"/>, and scenes, which default to <see cref="StoryTiming.Default"/>.
+/// </summary>
+public sealed record TacticsTiming(TimeSpan Turn, TimeSpan Reaction, TimeSpan PaceBase, TimeSpan PacePerEvent, TimeSpan PaceMax, WalkTiming? Walk = null,
+    StoryTiming? Story = null)
 {
     /// <summary>60 s turns (rules-engine spec §5.5), 10 s reactions, 400 ms + 250 ms per event up to 6 s per AI beat.</summary>
     public static TacticsTiming Default { get; } = new(TimeSpan.FromSeconds(60), TimeSpan.FromSeconds(10),
@@ -33,6 +85,9 @@ public sealed record TacticsTiming(TimeSpan Turn, TimeSpan Reaction, TimeSpan Pa
 
     /// <summary>The clocks of walking the world.</summary>
     public WalkTiming Walk { get; init; } = Walk ?? WalkTiming.Default;
+
+    /// <summary>The clocks of a scene.</summary>
+    public StoryTiming Story { get; init; } = Story ?? StoryTiming.Default;
 
     /// <summary>
     /// How long the TV's "Something went wrong with that move" stays up at least: it comes down with the first command that

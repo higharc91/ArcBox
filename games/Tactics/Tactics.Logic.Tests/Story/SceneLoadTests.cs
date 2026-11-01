@@ -261,4 +261,28 @@ public sealed class SceneLoadTests
         Assert.Contains("two.json", error.Message, StringComparison.Ordinal);
         Assert.Contains("the scene 's' is already in the pack", error.Message, StringComparison.Ordinal);
     }
+    [Fact]
+    public void A_place_is_named_by_the_regions_file()
+    {
+        const string regions = """
+            { "regions": [{ "id": "r", "name": "R", "places": [{ "id": "inn", "name": "The Last Coal", "kind": "town" }, { "id": "yard", "name": "The Yard" }] }] }
+            """;
+        var book = Load(("arcs.json", Arcs), ("regions.json", regions));
+
+        Assert.Equal("The Last Coal", book.PlaceName("inn"));
+        Assert.Equal("The Yard", book.PlaceName("yard"));
+        Assert.Null(book.PlaceName("moon"));
+        Assert.Null(Load(("arcs.json", Arcs)).PlaceName("inn"));       // no regions file, no names
+    }
+
+    [Fact]
+    public void A_place_with_no_name_is_refused()
+    {
+        const string regions = """{ "regions": [{ "id": "r", "places": [{ "id": "inn" }] }] }""";
+
+        var error = Assert.Throws<InvalidDataException>(() => Load(("arcs.json", Arcs), ("regions.json", regions)));
+
+        Assert.Contains("regions.json", error.Message, StringComparison.Ordinal);
+        Assert.Contains("the place 'inn' has no 'name'", error.Message, StringComparison.Ordinal);
+    }
 }

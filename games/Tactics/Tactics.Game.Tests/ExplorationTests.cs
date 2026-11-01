@@ -120,9 +120,9 @@ public sealed class ExplorationTests
     }
 
     [Fact]
-    public void Exploration_is_at_the_end_of_the_phases_so_old_values_keep_their_order()
+    public void Exploration_came_after_the_battle_phases_so_old_values_keep_their_order()
     {
-        Assert.Equal(TacticsPhase.Exploration, Enum.GetValues<TacticsPhase>()[^1]);
+        Assert.Equal(TacticsPhase.Exploration, Enum.GetValues<TacticsPhase>()[5]);     // and Story after it (StoryTests)
         Assert.Equal(5, (int)TacticsPhase.Exploration);
     }
 

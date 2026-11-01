@@ -58,6 +58,43 @@ public sealed record BattleSave(string Encounter, ulong Seed, ImmutableArray<Pro
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<CharacterRecord> Companions = default,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] string? Beat = null);
 
+/// <summary>
+/// A roll made in a scene (overworld 5d §6), kept with the node it leads to so a restart never rolls again: who rolled, for which option
+/// and skill, the DC, the die, their bonus and whether it passed.
+/// </summary>
+public sealed record StoryRoll(string Member, string Option, string Skill, int Dc, int Die, int Bonus, bool Passed);
+
+/// <summary>
+/// Where a story beat is (overworld 5d §7), saved on every line so that a restart resumes on the same line. Votes aren't kept: a restart
+/// reopens the question.
+/// </summary>
+/// <param name="Beat">The beat being played.</param>
+/// <param name="Stage">Which of the beat's scenes: <see cref="Lead"/> (all a story beat has), <see cref="Fight"/> or <see cref="After"/>.</param>
+/// <param name="Scene">The scene, or null with none (a battle beat at its fight).</param>
+/// <param name="Node">The node whose line is showing; null in the gap before <paramref name="Scene"/> starts.</param>
+/// <param name="Line">The line of <paramref name="Node"/> showing, from 0.</param>
+/// <param name="Seq">The number of that line's showing, which only goes up, so the TV can tell a line it hasn't said.</param>
+/// <param name="Played">
+/// The nodes of the scene played so far, so a restart doesn't offer a question already asked (<see cref="SceneRun.Offered"/>).
+/// </param>
+/// <param name="Roll">The roll that led to <paramref name="Node"/>, while its result shows; then null.</param>
+public sealed record StorySave(string Beat, string Stage, string? Scene, string? Node, int Line, int Seq,
+    ImmutableArray<string> Played = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] StoryRoll? Roll = null)
+{
+    /// <summary>The scenes before a fight, and all of a story beat's.</summary>
+    public const string Lead = "lead";
+
+    /// <summary>A battle beat at its fight.</summary>
+    public const string Fight = "fight";
+
+    /// <summary>A battle beat's aftermath.</summary>
+    public const string After = "after";
+
+    /// <summary>The nodes played; never a default array.</summary>
+    public ImmutableArray<string> Played { get => field.IsDefault ? [] : field; init; } = Played;
+}
+
 /// <summary>Where the party is in the world, and how far through its story.</summary>
 /// <param name="Region">The region's id. A hand-edited document can leave it null, and the party then goes to the start with a notice, keeping its story.</param>
 /// <param name="At">The leader's tile. A repaint can make it illegal, and it's checked on the way in.</param>
@@ -65,7 +102,17 @@ public sealed record BattleSave(string Encounter, ulong Seed, ImmutableArray<Pro
 /// <param name="LastLeader">The profile whose session it last was, whoever held the lead at the end, which the next session's leader follows in member order; null before anyone has.</param>
 /// <param name="Flags">The story flags set so far.</param>
 /// <param name="Beats">The story beats done so far.</param>
-public sealed record WorldSave(string Region, Tile At, Tile Facing, string? LastLeader, ImmutableArray<string> Flags, ImmutableArray<string> Beats)
+/// <param name="Story">
+/// The beat under way, or null between beats (overworld 5d). One more optional field and no version bump: a document from before reads
+/// with none, and a null isn't written.
+/// </param>
+/// <param name="StorySeq">
+/// The number of the last scene line shown (<see cref="StoryView.Seq"/>), kept between beats too, so the TV's line number only ever goes
+/// up, across restarts and sessions: a TV that stays up while the server restarts must never take a new line for an old one. 0 isn't written.
+/// </param>
+public sealed record WorldSave(string Region, Tile At, Tile Facing, string? LastLeader, ImmutableArray<string> Flags, ImmutableArray<string> Beats,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] StorySave? Story = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int StorySeq = 0)
 {
     /// <summary>The story flags set so far; never a default array, so a read or a write can't throw.</summary>
     public ImmutableArray<string> Flags { get => field.IsDefault ? [] : field; init; } = Flags;

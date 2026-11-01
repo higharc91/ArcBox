@@ -42,6 +42,23 @@ public sealed class PhaseScreenTests
         Assert.Null(screen.Board);
     }
 
+    /// <summary>A scene plays over the world, as walking does (overworld 5d): the TV draws the scene's panels on it in Task 10.</summary>
+    [Fact]
+    public void A_scene_keeps_the_world_and_says_which_it_is()
+    {
+        var explore = new ExploreView("ashen_ford", "The Ashen Ford", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], "Ana", Chapter: 1);
+        var story = new StoryView(3, "ch1_mayor", "Emberwick at Dusk", "lines", null, null, null, null);
+
+        var screen = PhaseScreen.Of(View("Story", "Emberwick at Dusk", level: 2) with { Explore = explore, Story = story });
+
+        Assert.Equal("Story · Emberwick at Dusk", screen.Meta);
+        Assert.Same(explore, screen.World);
+        Assert.Equal("Chapter I · The Ashen Ford", screen.Walk!.Title);
+        Assert.Equal("tactics-story", screen.Shot);
+        Assert.Null(screen.Board);
+        Assert.Equal("Story", PhaseScreen.Of(View("Story")).Meta);      // and still reads with nothing to draw
+    }
+
     [Fact]
     public void Exploration_draws_the_world_and_has_no_table()
     {

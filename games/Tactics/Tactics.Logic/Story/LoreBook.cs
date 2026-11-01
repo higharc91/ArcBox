@@ -25,8 +25,8 @@ public sealed record Arc(string Id, int Chapter, string Region, string Title, Im
 
 /// <summary>
 /// The lore a game plays (lore spec §7), read from a pack's <c>lore/pack.json</c> and the files it lists: the arcs of <c>arcs.json</c>,
-/// the scenes of <c>scenes/*.json</c>, the characters of <c>characters.json</c>, and how long each scene line's clip plays, from
-/// <c>audio/manifest.json</c>. Lore isn't part of the rules pack, and <c>tools/tactics-lore</c> checks it, so a book checks only what it
+/// the scenes of <c>scenes/*.json</c>, the characters of <c>characters.json</c>, the places' names of <c>regions.json</c>, and how long
+/// each scene line's clip plays, from <c>audio/manifest.json</c>. Lore isn't part of the rules pack, and <c>tools/tactics-lore</c> checks it, so a book checks only what it
 /// needs to play: every field it reads is there and of the right type, and each scene's graph holds together (see
 /// <see cref="ReadScene"/>). A pack with no lore, or whose lore lists no <c>arcs.json</c>, has no arcs and no scenes.
 /// </summary>
@@ -36,11 +36,13 @@ public sealed class LoreBook
     private readonly ImmutableDictionary<string, ImmutableArray<SceneDef>> _scenesByBeat;
     private readonly ImmutableDictionary<string, LoreCharacter> _characters;
     private readonly ImmutableDictionary<string, string> _clipFiles;
+    private readonly ImmutableDictionary<string, string> _places;
     private readonly ConcurrentDictionary<string, double?> _clipSeconds = new(StringComparer.Ordinal);
 
     private LoreBook(ImmutableArray<Arc> arcs, ImmutableArray<SceneDef> scenes, ImmutableArray<LoreCharacter> characters,
-        ImmutableDictionary<string, string> clipFiles)
+        ImmutableDictionary<string, string> clipFiles, ImmutableDictionary<string, string> places)
     {
+        _places = places;
         Arcs = arcs;
         Scenes = scenes;
         _byRegion = arcs.ToImmutableSortedDictionary(a => a.Region, a => a, StringComparer.Ordinal);
@@ -51,7 +53,7 @@ public sealed class LoreBook
     }
 
     /// <summary>A book with no arcs, for a game with no lore: no beat is ever available.</summary>
-    public static LoreBook Empty { get; } = new([], [], [], ImmutableDictionary<string, string>.Empty);
+    public static LoreBook Empty { get; } = new([], [], [], ImmutableDictionary<string, string>.Empty, ImmutableDictionary<string, string>.Empty);
 
     /// <summary>Every arc, in the file's order.</summary>
     public ImmutableArray<Arc> Arcs { get; }
@@ -67,6 +69,12 @@ public sealed class LoreBook
 
     /// <summary>The character with this id, or null: the narrator isn't one, and neither is an id the pack doesn't have.</summary>
     public LoreCharacter? Character(string id) => _characters.GetValueOrDefault(id);
+
+    /// <summary>
+    /// The name of the place <paramref name="id"/> (<c>regions.json</c>, a region's <c>places</c>), as the walk screen's objective says it, or
+    /// null for a place the pack doesn't name.
+    /// </summary>
+    public string? PlaceName(string id) => _places.GetValueOrDefault(id);
 
     /// <summary>
     /// How long the clip of the scene line <paramref name="line"/> plays, in seconds: its speaker's own voice (<c>main</c>) in
@@ -145,8 +153,19 @@ public sealed class LoreBook
             }
         }
 
+        var regionsPath = Path.Combine(lore, "regions.json");
+        var places = files.Contains("regions.json")
+            ? Read(regionsPath, root => List(root, "regions", "the file", required: true)
+                .SelectMany(r => List(r, "places", $"the region '{Optional(r, "id", "a region")}'", required: false))
+                .Select(p => (Id: Required(p, "id", "a place"), Name: Required(p, "name", $"the place '{Optional(p, "id", "a place")}'")))
+                .ToImmutableArray())
+            : [];
+        if (places.GroupBy(p => p.Id, StringComparer.Ordinal).FirstOrDefault(g => g.Count() > 1) is { } named)
+            throw new InvalidDataException($"{regionsPath}: the place '{named.Key}' is listed twice.");
+
         var lines = scenes.SelectMany(s => s.Lines).Select(l => l.Id).ToImmutableHashSet(StringComparer.Ordinal);
-        return new LoreBook(arcs, scenes.ToImmutable(), characters, Clips(Path.Combine(lore, "audio"), lines));
+        return new LoreBook(arcs, scenes.ToImmutable(), characters, Clips(Path.Combine(lore, "audio"), lines),
+            places.ToImmutableDictionary(p => p.Id, p => p.Name, StringComparer.Ordinal));
     }
 
     /// <summary>

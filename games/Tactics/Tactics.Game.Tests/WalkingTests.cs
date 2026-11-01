@@ -806,6 +806,10 @@ public sealed class WalkingTests
 
     // ---- What the phones and the TV see -------------------------------------------------------------------------------
 
+    /// <summary>
+    /// With no beat in reach (these tests play without lore). Since 5d the leader's Interact can change its view on a step, but only the step
+    /// that brings a beat into reach or takes it out: StoryTests.A_step_with_no_change_of_reach_changes_no_view (5d flag 8).
+    /// </summary>
     [Fact]
     public void A_step_doesnt_change_any_phone_view()
     {

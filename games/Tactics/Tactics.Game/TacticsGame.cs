@@ -7,7 +7,7 @@ using Tactics.Logic;
 namespace Tactics.Game;
 
 /// <summary>Where a session is (adapter spec §3).</summary>
-public enum TacticsPhase { Muster, EncounterPick, Battle, Results, Resuming, Exploration }
+public enum TacticsPhase { Muster, EncounterPick, Battle, Results, Resuming, Exploration, Story }
 
 /// <summary>
 /// ArcBox Tactics on the platform (adapter spec): a campaign game whose sessions muster the party, pick an encounter and
@@ -47,13 +47,13 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     public static class Screens
     {
         public const string PickClass = "pickClass", PickEncounter = "pickEncounter", Turn = "turn", React = "react",
-            Status = "status", Results = "results", Walk = "walk";
+            Status = "status", Results = "results", Walk = "walk", Dialogue = "dialogue", Vote = "vote", Check = "check";
     }
 
     /// <summary>The timer keys.</summary>
     public static class Timers
     {
-        public const string Turn = "turn", React = "react", Pace = "pace", Step = "step", Lead = "lead", Save = "save";
+        public const string Turn = "turn", React = "react", Pace = "pace", Step = "step", Lead = "lead", Save = "save", Line = "line", Vote = "vote";
     }
 
     private readonly TacticsTiming _timing = timing ?? TacticsTiming.Default;
@@ -174,6 +174,9 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
                 if (connected && player?.Profile is { } profile && _awaited.Remove(profile) && _awaited.Count == 0)
                     ContinueBattle();
                 break;
+            case TacticsPhase.Story:
+                StoryPresenceChanged();
+                break;
             case TacticsPhase.Battle:
                 if (player?.Profile is { } who)
                     SeatChanged(who, connected);
@@ -209,6 +212,15 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
                 break;
             case TacticsPhase.Exploration when custom.Action == "pickClass":
                 PickClass(player, profile, custom.Data);
+                break;
+            case TacticsPhase.Exploration when custom.Action == "interact":
+                Interact(player);
+                break;
+            case TacticsPhase.Story when custom.Action == "pickClass":
+                PickClass(player, profile, custom.Data);
+                break;
+            case TacticsPhase.Story:
+                StoryInput(player, profile, custom);
                 break;
             case TacticsPhase.Exploration when custom.Action == "battles" && IsVip(player) && battleList:
                 LeaveExploration();
@@ -251,6 +263,9 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
                 break;
             case TacticsPhase.Exploration:
                 WalkTimer(key);
+                break;
+            case TacticsPhase.Story:
+                StoryTimer(key);
                 break;
         }
     }
@@ -303,13 +318,18 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         MusterDone();
     }
 
-    /// <summary>Muster ends once every connected member has a character (absent ones get theirs at battle start).</summary>
+    /// <summary>
+    /// Muster ends once every connected member has a character (absent ones get theirs at battle start), in the world, or in the scene the
+    /// last session or a restart left off in, on its saved line (overworld 5d §8).
+    /// </summary>
     private void MusterDone()
     {
         if (_phase == TacticsPhase.Muster && _players.Where(p => _online.Contains(p.Id)).All(p => _doc.For(p.Profile!.Value) is not null))
         {
             _toasts.Clear();
-            if (_region is not null)
+            if (_region is not null && _doc.World?.Story is not null)
+                ResumeStory();
+            else if (_region is not null)
                 ToExploration();
             else
                 _phase = TacticsPhase.EncounterPick;
@@ -329,8 +349,10 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         SetMember(profile, new MemberRecord(NewCharacter(player.Name, cls, _doc.PartyLevel), Xp: 0));
         Save();
         MusterDone();
-        if (_phase == TacticsPhase.Exploration)
+        if (_phase is TacticsPhase.Exploration or TacticsPhase.Story)
             ReconsiderLeader();
+        if (_phase == TacticsPhase.Story)
+            StoryPresenceChanged();     // one more who can answer
     }
 
     private CharacterRecord NewCharacter(string name, string cls, int level)

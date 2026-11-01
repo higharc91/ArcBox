@@ -123,4 +123,46 @@ public sealed class DocumentTests
             WalkTiming.Default);
         Assert.Equal(TimeSpan.FromSeconds(3), WalkTiming.Default.TakebackAfter);
     }
+    // ---- The story's cursor (overworld 5d) ----------------------------------------------------------------------------
+
+    /// <summary>5d adds one optional field to the world and no version bump: a version 1 document from 5c reads with no story under way.</summary>
+    [Fact]
+    public void A_version_1_document_with_no_story_reads()
+    {
+        const string written = """
+            { "version": 1, "rulesHash": "h", "partyLevel": 1, "members": {}, "completed": [], "battle": null,
+              "world": { "region": "ashen_ford", "at": [30, 65], "facing": [31, 65], "lastLeader": null, "flags": ["f"], "beats": ["b"] } }
+            """;
+
+        var doc = TacticsDocument.Read(Json(written));
+
+        Assert.Null(doc.World!.Story);
+        Assert.Equal(["f"], doc.World.Flags);
+        Assert.DoesNotContain("story", doc.ToJson().GetRawText(), StringComparison.Ordinal);     // and none is written back
+    }
+
+    [Fact]
+    public void A_saved_story_round_trips()
+    {
+        var roll = new StoryRoll("pr_ana", "pay", "persuasion", 15, 14, 5, true);
+        var story = new StorySave("ch1_the_ford_choice", StorySave.Lead, "ch1_ford", "pay_pass", 0, 41, ["open", "cases", "vote"], roll);
+        var doc = TacticsDocument.New with { World = new WorldSave("ashen_ford", new Tile(30, 65), new Tile(31, 65), null, ["f"], ["b"], story) };
+
+        var again = TacticsDocument.Read(doc.ToJson()).World!.Story!;
+
+        Assert.Equal(story with { Played = [] }, again with { Played = [] });
+        Assert.Equal(["open", "cases", "vote"], again.Played);
+        Assert.Equal(roll, again.Roll);
+    }
+
+    [Fact]
+    public void A_story_with_no_nodes_played_yet_reads_with_none()
+    {
+        const string written = """{ "beat": "b", "stage": "lead", "scene": "s", "node": null, "line": 0, "seq": 3 }""";
+
+        var story = JsonSerializer.Deserialize<StorySave>(written, ArcJson.Options)!;
+
+        Assert.Empty(story.Played);
+        Assert.Null(story.Roll);
+    }
 }

@@ -117,6 +117,16 @@ public sealed class MusicChoiceTests
         Assert.Equal(new MusicCue("explore"), MusicChoice.Of(View("EncounterPick") with { Explore = explore }));
     }
 
+    /// <summary>A scene keeps the region's music, so walking up to the mayor doesn't change the tune.</summary>
+    [Fact]
+    public void A_scene_keeps_the_regions_track()
+    {
+        var explore = new ExploreView("ashen_ford", "The Ashen Ford", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], null);
+
+        Assert.Equal(new MusicCue("town_emberwick"), MusicChoice.Of(View("Story") with { Explore = explore }));
+        Assert.Equal(new MusicCue("explore"), MusicChoice.Of(View("Story")));
+    }
+
     [Fact]
     public void A_region_with_no_track_of_its_own_gets_the_field_tune()
     {
