@@ -81,6 +81,7 @@ public sealed class StageDirector(Func<string, BattleMap?> maps)
     private double _takeover = -1;       // seconds since the world took over from the plain board, if it has
     private ExploreView? _latest;
     private ExploreView? _held;          // the party as it was when the fight began
+    private string? _outcome;            // how the fight ended, as the results or its last view said
     private bool _holding;
     private FallIn? _fall;
     private ImmutableDictionary<string, UnitPlace>? _seed;     // the fall-in's followers, until the walk has had them
@@ -186,6 +187,8 @@ public sealed class StageDirector(Func<string, BattleMap?> maps)
     {
         if (view.Explore is { } explore)
             _latest = explore;
+        if ((view.Phase == nameof(TacticsPhase.Results) ? view.Outcome ?? view.LastBattle?.Outcome : view.Battle?.Outcome) is { } ended)
+            _outcome = ended;
         switch (view.Phase)
         {
             case nameof(TacticsPhase.Battle) or nameof(TacticsPhase.Resuming) when view.Battle is { } battle:
@@ -259,6 +262,7 @@ public sealed class StageDirector(Func<string, BattleMap?> maps)
             return;
 
         (Intro, _fall, _seed, _awaitingBlow, _fresh, _dark, _takeover, _inPlace) = (null, null, null, false, false, false, -1, false);
+        _outcome = battle.Outcome;
         if (battle.Stage is not { } view || maps(battle.Map) is not { } map)
         {
             Where = null;
@@ -321,13 +325,13 @@ public sealed class StageDirector(Func<string, BattleMap?> maps)
             case StageStep.Forming or StageStep.Fighting or StageStep.Fading or StageStep.Results:
                 // A fight that ends with no new epoch (no view of the party since, or one from before it) has nowhere to fall in to.
                 if (_fresh || !_inPlace || Where is not { } stage || _latest is not { } explore || _terrain is null || _battle is null
-                    || explore.Arrived is null || explore.Epoch == _held?.Epoch)
+                    || explore.Epoch == _held?.Epoch || ArrivalOf(explore) is not { } arrived)
                 {
                     Finish();
                     break;
                 }
                 Intro = null;
-                if (explore.Arrived == "woke")
+                if (arrived == "woke")
                 {
                     _dark = false;
                     Go(StageStep.Waking);
@@ -343,6 +347,18 @@ public sealed class StageDirector(Func<string, BattleMap?> maps)
                 break;
         }
     }
+
+    /// <summary>
+    /// How the party came to the new epoch's tile. The server says so in <see cref="ExploreView.Arrived"/> only until the party's next step, and
+    /// a TV a step behind (a slow frame, a quick thumb) can hear of the epoch and that step together. Then the fight's outcome says it: a loss
+    /// wakes the party, a win or a flight falls it in. Without that, the followers would stand stacked on the leader's tile.
+    /// </summary>
+    private string? ArrivalOf(ExploreView explore) => explore.Arrived ?? _outcome switch
+    {
+        nameof(BattleOutcome.Lost) => "woke",
+        nameof(BattleOutcome.Won) or nameof(BattleOutcome.Fled) => "fellIn",
+        _ => null,
+    };
 
     private void Finish()
     {

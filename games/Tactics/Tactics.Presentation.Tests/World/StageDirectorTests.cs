@@ -24,11 +24,11 @@ public sealed class StageDirectorTests
     }
 
     /// <summary>Plays a started fight through its walk-in and its last blow, to the results with <paramref name="after"/> as the party.</summary>
-    private static void ToResults(StageDirector director, ExploreView after, ImmutableArray<UnitView>? final = null)
+    private static void ToResults(StageDirector director, ExploreView after, ImmutableArray<UnitView>? final = null, string outcome = "Won")
     {
         Run(director, StageTuning.FormingMost + 0.1);
         director.Receive(Fight(Battle(lastSeq: 9)));
-        director.Receive(Results(Battle(lastSeq: 10, units: final), after));
+        director.Receive(Results(Battle(lastSeq: 10, units: final), after, outcome));
         director.LastBlowPlayed();
         Run(director, StageTuning.GridOut + 0.05);
     }
@@ -267,6 +267,48 @@ public sealed class StageDirectorTests
         Assert.Equal(new Vector2(20.5f, 13.5f), fall.At(StageTuning.FallIn)["p1"].Map);
         Assert.Equal(new Vector2(20f, 13f), fall.At(StageTuning.FallIn / 2)["p1"].Map);
         _ = script;
+    }
+
+    /// <summary>
+    /// The server's <see cref="ExploreView.Arrived"/> lasts only until the party's next step. A TV that hears of the new epoch and a step
+    /// together (a slow frame, a thumb on the pad as the results go) still falls the party in, from the fight's outcome: seen on the e2e TV,
+    /// where the four walkers stood stacked on the leader's tile instead.
+    /// </summary>
+    [Fact]
+    public void A_win_heard_with_a_step_already_taken_still_falls_in()
+    {
+        var (_, director) = Started();
+        var final = Units(hero1: new Tile(3, 2), hero2: new Tile(5, 1));
+        var after = Explore(epoch: 2, at: new Tile(20, 13), arrived: "fellIn");
+        ToResults(director, after, final);
+
+        director.Receive(Walking(Explore(epoch: 2, at: new Tile(20, 14), seq: 1)));     // the step cleared Arrived
+
+        Assert.Equal(StageStep.FallingIn, director.Stage);
+        Assert.True(director.Seed.ContainsKey("p2"));
+        Assert.NotEqual(director.Walkers!["p1"].Map, director.Walkers["p2"].Map);
+    }
+
+    [Fact]
+    public void A_loss_heard_with_a_step_already_taken_still_wakes()
+    {
+        var (_, director) = Started();
+        ToResults(director, Explore(epoch: 2, at: new Tile(3, 3), arrived: "woke"), outcome: "Lost");
+
+        director.Receive(Walking(Explore(epoch: 2, at: new Tile(3, 4), seq: 1)));
+
+        Assert.Equal(StageStep.Waking, director.Stage);
+    }
+
+    [Fact]
+    public void A_step_in_the_same_epoch_is_no_arrival()
+    {
+        var (_, director) = Started();
+        ToResults(director, Explore(epoch: 1, at: new Tile(12, 13), seq: 1));
+
+        director.Receive(Walking(Explore(epoch: 1, at: new Tile(12, 14), seq: 2)));
+
+        Assert.Equal(StageStep.Walking, director.Stage);
     }
 
     [Fact]
