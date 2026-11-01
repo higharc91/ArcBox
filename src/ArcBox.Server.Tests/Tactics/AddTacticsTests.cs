@@ -1,8 +1,10 @@
 using ArcBox.Sdk.Campaigns;
+using ArcBox.Sdk.Testing;
 using ArcBox.Server.Content;
 using ArcBox.Server.Games;
 using ArcBox.Server.Games.Tactics;
 using ArcBox.Server.Tests.Speech.Support;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
@@ -14,7 +16,7 @@ namespace ArcBox.Server.Tests.Tactics;
 public class AddTacticsTests
 {
     /// <summary>The server's own wiring, with the content root at the repository's <c>content</c> folder.</summary>
-    private static ServiceProvider Build(LogSink? log = null)
+    private static ServiceProvider Build(LogSink? log = null, string environment = "Test", Dictionary<string, string?>? settings = null)
     {
         var repo = AppContext.BaseDirectory;
         while (!File.Exists(Path.Combine(repo, "ArcBox.slnx")))
@@ -26,7 +28,9 @@ public class AddTacticsTests
                 b.AddProvider(log).SetMinimumLevel(LogLevel.Debug);
         });
         services.AddOptions<ContentOptions>().Configure(o => o.Root = Path.Combine(repo, "content"));
-        services.AddSingleton<IHostEnvironment>(new Env(repo));
+        services.AddSingleton<IHostEnvironment>(new Env(repo) { EnvironmentName = environment });
+        if (settings is not null)
+            services.AddSingleton<IConfiguration>(new ConfigurationBuilder().AddInMemoryCollection(settings).Build());
         services.AddTactics();
         services.AddSingleton<IGameRegistry, GameRegistry>();
         return services.BuildServiceProvider();
@@ -65,6 +69,89 @@ public class AddTacticsTests
         var debug = Assert.Single(entries, e => e.Level == LogLevel.Debug).Text;
         Assert.Contains("seed 108", debug);
         Assert.Contains("{\"round\":3}", debug);
+    }
+
+    [Fact]
+    public void The_game_reads_the_base_packs_lore()
+    {
+        using var sp = Build();
+        var game = Assert.IsType<TacticsGame>(sp.GetRequiredService<IGameRegistry>().Create(TacticsGame.Id));
+
+        Assert.Equal("ch1_mayors_request", game.Lore.ArcFor("ashen_ford")?.Beats[0].Id);
+    }
+
+    private static readonly Dictionary<string, string?> Seeded = new()
+    {
+        ["Tactics:Seed:Flags:0"] = "ch1_skarrow_slain",
+        ["Tactics:Seed:Beats:0"] = "ch1_mayors_request",
+        ["Tactics:Seed:Beats:1"] = "ch1_the_ford_choice",
+    };
+
+    /// <summary>A new local session of the game the server makes, and the story its campaign starts with.</summary>
+    private static WorldSave? StartedWorld(string environment, Dictionary<string, string?>? settings)
+    {
+        using var sp = Build(environment: environment, settings: settings);
+        var game = Assert.IsType<TacticsGame>(sp.GetRequiredService<IGameRegistry>().Create(TacticsGame.Id));
+        new GameHarness<TacticsGame>(game, playerCount: 1).Start();
+        return game.Document.World;
+    }
+
+    [Fact]
+    public void A_seed_starts_a_new_campaign_part_way_through_its_story_in_development()
+    {
+        var world = StartedWorld("Development", Seeded);
+
+        Assert.NotNull(world);
+        Assert.Equal(["ch1_skarrow_slain"], world.Flags);
+        Assert.Equal(["ch1_mayors_request", "ch1_the_ford_choice"], world.Beats);
+    }
+
+    [Theory]
+    [InlineData("Production")]
+    [InlineData("Staging")]
+    public void A_seed_is_ignored_outside_development(string environment)
+    {
+        var world = StartedWorld(environment, Seeded);
+
+        Assert.NotNull(world);
+        Assert.Empty(world.Flags);
+        Assert.Empty(world.Beats);
+    }
+
+    [Fact]
+    public void Development_with_no_seed_starts_at_the_beginning()
+        => Assert.Empty(StartedWorld("Development", new Dictionary<string, string?>())!.Beats);
+
+    private static IConfigurationSection Section(Dictionary<string, string?> settings)
+        => new ConfigurationBuilder().AddInMemoryCollection(settings).Build().GetSection(TacticsServiceCollectionExtensions.SeedSection);
+
+    [Fact]
+    public void A_seed_reads_its_region_and_tile()
+    {
+        var seed = TacticsServiceCollectionExtensions.SeedFrom(Section(new()
+        {
+            ["Tactics:Seed:Region"] = "ashen_ford", ["Tactics:Seed:At:0"] = "96", ["Tactics:Seed:At:1"] = "60",
+        }));
+
+        Assert.NotNull(seed);
+        Assert.Equal(("ashen_ford", new global::Tactics.Logic.Tile(96, 60)), (seed.Region, seed.At));
+        Assert.Empty(seed.Flags);
+        Assert.Empty(seed.Beats);
+    }
+
+    [Fact]
+    public void No_seed_section_is_no_seed()
+        => Assert.Null(TacticsServiceCollectionExtensions.SeedFrom(Section(new() { ["Tactics:Other"] = "x" })));
+
+    [Fact]
+    public void A_seed_tile_that_isnt_two_numbers_is_refused()
+    {
+        var error = Assert.Throws<InvalidOperationException>(() => TacticsServiceCollectionExtensions.SeedFrom(Section(new()
+        {
+            ["Tactics:Seed:At:0"] = "96", ["Tactics:Seed:At:1"] = "60", ["Tactics:Seed:At:2"] = "1",
+        })));
+
+        Assert.Contains("Tactics:Seed:At", error.Message, StringComparison.Ordinal);
     }
 
     private sealed class Env(string root) : IHostEnvironment

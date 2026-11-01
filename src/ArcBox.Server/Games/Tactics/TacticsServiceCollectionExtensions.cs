@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using ArcBox.Sdk.Campaigns;
 using ArcBox.Server.Content;
 using ArcBox.Server.Speech;
@@ -9,29 +10,65 @@ namespace ArcBox.Server.Games.Tactics;
 
 public static class TacticsServiceCollectionExtensions
 {
+    /// <summary>The configuration section of a Development seed (<see cref="TacticsSeed"/>).</summary>
+    public const string SeedSection = "Tactics:Seed";
+
     /// <summary>
     /// Wires up ArcBox Tactics: its rules pack, loaded once from <c>&lt;Content:Root&gt;/tactics/base</c> (the rules and the
-    /// art manifests they're checked against), the game, its campaign rules and its voice themes (one per speaker, for live speech). The pack loads on first use, so the server
-    /// starts without it (the registry only reads the manifest); a missing or broken pack fails the first tactics room,
-    /// with every error listed.
+    /// art manifests they're checked against), its lore from the same folder, the game, its campaign rules and its voice themes (one per
+    /// speaker, for live speech). The pack and the lore load on first use, so the server starts without them (the registry only reads
+    /// the manifest); a missing or broken pack fails the first tactics room, with every error listed. In Development only, a
+    /// <c>Tactics:Seed</c> section starts new campaigns part way through their story (<see cref="SeedFrom"/>).
     /// </summary>
     public static IServiceCollection AddTactics(this IServiceCollection services)
     {
         services.AddSingleton(sp => new Lazy<RulesPack>(() =>
         {
-            var options = sp.GetRequiredService<IOptions<ContentOptions>>().Value;
-            var root = Path.GetFullPath(options.Root, sp.GetRequiredService<IHostEnvironment>().ContentRootPath);
-            var basePack = Path.Combine(root, TacticsGame.Id, "base");
+            var basePack = BasePack(sp);
             return RulesPack.Load([Path.Combine(basePack, "rules")], ArtManifests.Load(basePack));
         }));
+        services.AddSingleton(sp => new Lazy<LoreBook>(() => LoreBook.Load(BasePack(sp))));
         services.AddArcGame(sp =>
         {
             var log = sp.GetRequiredService<ILogger<TacticsGame>>();
-            return new TacticsGame(sp.GetRequiredService<Lazy<RulesPack>>()) { FaultLogged = fault => LogFault(log, fault) };
+            var seed = sp.GetRequiredService<IHostEnvironment>().IsDevelopment() && sp.GetService<IConfiguration>() is { } config
+                ? SeedFrom(config.GetSection(SeedSection))
+                : null;
+            return new TacticsGame(sp.GetRequiredService<Lazy<RulesPack>>(), lore: sp.GetRequiredService<Lazy<LoreBook>>(), seed: seed)
+            {
+                FaultLogged = fault => LogFault(log, fault),
+            };
         });
         services.AddSingleton<ICampaignRules>(sp => new TacticsCampaignRules(sp.GetRequiredService<Lazy<RulesPack>>()));
         services.AddVoiceThemes(TacticsVoices.All);
         return services;
+    }
+
+    /// <summary>
+    /// The seed a <c>Tactics:Seed</c> section describes, or null if there's no such section: <c>Flags</c> and <c>Beats</c> are lists of
+    /// ids, <c>Region</c> a region id and <c>At</c> a tile as <c>[x, y]</c>, each optional. For example, in
+    /// <c>appsettings.Development.json</c>, <c>"Tactics": { "Seed": { "Flags": ["ch1_skarrow_slain"], "Beats": ["ch1_mayors_request",
+    /// "ch1_the_ford_choice"] } }</c> starts a new campaign with the assault on the ford on offer. Throws
+    /// <see cref="InvalidOperationException"/> for an <c>At</c> that isn't a tile.
+    /// </summary>
+    public static TacticsSeed? SeedFrom(IConfigurationSection section)
+    {
+        if (!section.Exists())
+            return null;
+        var at = section.GetSection("At").Get<int[]>();
+        if (at is not (null or { Length: 0 } or { Length: 2 }))
+            throw new InvalidOperationException($"{SeedSection}:At must be a tile, [x, y].");
+        return new TacticsSeed(Ids(section, "Flags"), Ids(section, "Beats"), section["Region"], at is { Length: 2 } ? new Tile(at[0], at[1]) : null);
+    }
+
+    private static ImmutableArray<string> Ids(IConfigurationSection section, string name) => [.. section.GetSection(name).Get<string[]>() ?? []];
+
+    /// <summary>Where the base pack is: <c>&lt;Content:Root&gt;/tactics/base</c>, from the content root.</summary>
+    private static string BasePack(IServiceProvider sp)
+    {
+        var options = sp.GetRequiredService<IOptions<ContentOptions>>().Value;
+        var root = Path.GetFullPath(options.Root, sp.GetRequiredService<IHostEnvironment>().ContentRootPath);
+        return Path.Combine(root, TacticsGame.Id, "base");
     }
 
     /// <summary>

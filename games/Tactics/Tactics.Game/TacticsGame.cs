@@ -13,13 +13,15 @@ public enum TacticsPhase { Muster, EncounterPick, Battle, Results, Resuming, Exp
 /// ArcBox Tactics on the platform (adapter spec): a campaign game whose sessions muster the party, pick an encounter and
 /// play it on <see cref="Battle"/>, with phones choosing for present players and the AI for everyone else. It does no I/O
 /// and never reads the clock: time is <see cref="IGameContext"/>'s, and the campaign document is saved through the lease
-/// after every command.
+/// after every command. Its story is read from <c>lore</c>, and without it no beat is ever on offer. A <c>seed</c> starts a campaign
+/// with no place in the world yet part way through its story (Development only).
 /// </summary>
-public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? timing = null)
+public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? timing = null, Lazy<LoreBook>? lore = null, TacticsSeed? seed = null)
     : IGame, ICampaignGame, IResumableGame, IHostAware
 {
     /// <summary>A game on a loaded pack (tests, tools).</summary>
-    public TacticsGame(RulesPack rules, TacticsTiming? timing = null) : this(new Lazy<RulesPack>(rules), timing)
+    public TacticsGame(RulesPack rules, TacticsTiming? timing = null, LoreBook? lore = null, TacticsSeed? seed = null)
+        : this(new Lazy<RulesPack>(rules), timing, lore is null ? null : new Lazy<LoreBook>(lore), seed)
     {
     }
 
@@ -28,6 +30,9 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     /// the content.
     /// </summary>
     private RulesPack Rules => pack.Value;
+
+    /// <summary>The arcs the story is played from, loaded on first use as the rules are; <see cref="LoreBook.Empty"/> without any.</summary>
+    public LoreBook Lore => lore?.Value ?? LoreBook.Empty;
 
     /// <summary>The game id in the manifest and on the phone (<c>web/play/src/games/tactics</c>).</summary>
     public const string Id = "tactics";
@@ -99,6 +104,8 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         foreach (var p in players)
             _online.Add(p.Id);
         _doc = TacticsDocument.Read(campaign.Document) with { RulesHash = Rules.Hash };
+        if (seed is not null)
+            _doc = seed.SeedInto(_doc, Rules);
         EnterWorld();
         ElectAtStart();
         KeepWorld();
