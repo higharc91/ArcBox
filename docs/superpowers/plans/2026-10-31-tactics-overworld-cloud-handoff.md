@@ -129,7 +129,8 @@ The local session was on Windows with an RTX 5080. Check what you have.
 
 **The user's answers, 2026-11-01** (these settle the matching items below):
 - **Boss music:** Rime Tower also gets the boss theme and the boss victory fanfare. Ford Assault stays ordinary. (27) *To build.*
-- **Losing:** waking at the recovery spawn after a loss fully heals the party and clears battle injuries, so a retry is fair. Half XP on a loss stays. This is the user's rules change. (3, 18) *To build.*
+- **Losing (refined after comparing with BG3, Divinity, FFT, Fire Emblem, XCOM and Darkest Dungeon):** a lost fight's injuries heal, so the retry is fair and there's no death spiral. The penalty is **no XP for a loss** (this also closes the farming hole) and **consumables used in the lost fight stay spent**. Earlier injuries stay. Results after a loss shows no injuries, just: "You wake at the recovery point. Wounds tended — no XP. Potions used are gone." This is the user's rules change. (3, 18) *Being built.*
+- **Spawn clash, as built:** the clash is in the battle engine (`MoveStep.Halt`'s `LastFree`). The walker goes to the nearest free walkable tile measured from the tile it left, Manhattan distance, ties in tile order. No path or climb check: literally the nearest free tile.
 - **No-clip lines:** captions only (`StoryVoice.Fallback = Captions`, already the default). (1) *Settled.*
 - **Restart:** the saved line is spoken again after a server restart. (26) *Settled.*
 - **End-of-battle walk halt:** confirmed. (25) *Settled.*
