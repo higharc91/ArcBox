@@ -48,6 +48,24 @@ public static class Rolls
     public static RollResult D20(BattleWriter w, int modifier, int vs, Edge edge, bool critOn20, bool autoMissOn1)
     {
         var (dice, kept) = RollD20(w, edge);
+        return Outcome(dice, kept, modifier, vs, critOn20, autoMissOn1);
+    }
+
+    /// <summary>
+    /// A d20 rolled outside a battle, for a scene's skill check (5d plan §6): <paramref name="die"/> (1–20, rolled by the caller) +
+    /// <paramref name="modifier"/> against <paramref name="vs"/>, by <see cref="D20"/>'s rule with no edge and no natural 20 or 1, as
+    /// saves roll.
+    /// </summary>
+    public static RollResult Flat(int die, int modifier, int vs)
+    {
+        ArgumentOutOfRangeException.ThrowIfLessThan(die, 1);
+        ArgumentOutOfRangeException.ThrowIfGreaterThan(die, 20);
+        return Outcome([die], die, modifier, vs, critOn20: false, autoMissOn1: false);
+    }
+
+    /// <summary>The one success rule of a d20: the total reaches <paramref name="vs"/>, unless a natural rule says otherwise.</summary>
+    private static RollResult Outcome(ImmutableArray<int> dice, int kept, int modifier, int vs, bool critOn20, bool autoMissOn1)
+    {
         var total = kept + modifier;
         var crit = critOn20 && kept == 20;
         var fumble = autoMissOn1 && kept == 1;

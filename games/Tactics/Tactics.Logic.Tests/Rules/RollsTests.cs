@@ -110,4 +110,37 @@ public sealed class RollsTests
         Assert.Equal(0, Rolls.Damage(w, Dice.Parse("1d4-10"), crit: false));
         Assert.Equal(5, Rolls.Damage(w, Dice.Parse("5"), crit: true));
     }
+
+    // ---- Flat rolls (skill checks out of battle) ----------------------------------------------------------------------------
+
+    /// <summary>A flat roll is <see cref="Rolls.D20"/> with no edge and no natural rules, given the die D20 would have rolled.</summary>
+    [Fact]
+    public void Flat_agrees_with_D20()
+    {
+        for (var seed = 1UL; seed <= 400; seed++)
+            foreach (var (modifier, vs) in new[] { (0, 10), (5, 15), (-2, 19), (9, 10), (3, 24) })
+            {
+                var d20 = Rolls.D20(Writer(seed), modifier, vs, Edge.None, critOn20: false, autoMissOn1: false);
+                var flat = Rolls.Flat(d20.Kept, modifier, vs);
+                Assert.Equal(d20.D20s, flat.D20s);
+                Assert.Equal(d20 with { D20s = flat.D20s }, flat);
+            }
+    }
+
+    [Fact]
+    public void Flat_succeeds_at_the_dc_and_has_no_natural_rules()
+    {
+        Assert.True(Rolls.Flat(10, 5, 15).Success);
+        Assert.False(Rolls.Flat(9, 5, 15).Success);
+
+        // A natural 20 that falls short fails, and a natural 1 that reaches the DC succeeds.
+        var twenty = Rolls.Flat(20, -2, 19);
+        Assert.Equal((false, false, false, 18), (twenty.Success, twenty.Crit, twenty.Fumble, twenty.Total));
+        var one = Rolls.Flat(1, 9, 10);
+        Assert.Equal((true, false, false, 10), (one.Success, one.Crit, one.Fumble, one.Total));
+        Assert.Equal([7], Rolls.Flat(7, 0, 5).D20s);
+
+        Assert.Throws<ArgumentOutOfRangeException>(() => Rolls.Flat(0, 0, 10));
+        Assert.Throws<ArgumentOutOfRangeException>(() => Rolls.Flat(21, 0, 10));
+    }
 }
