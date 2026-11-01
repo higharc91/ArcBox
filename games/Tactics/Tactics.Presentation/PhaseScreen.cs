@@ -137,10 +137,14 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
         };
     }
 
+    // A scene waiting for the party (overworld 5d §8) keeps the world behind the wait, as the wait to resume a fight in the world does.
     private static PhaseScreen Resuming(PhaseScreen screen, TacticsHostView view) => screen with
     {
         Meta = view.Battle is { } battle ? $"Resuming · {Words.Encounter(battle)}" : "Resuming",
         Empty = "Waiting for the players to come back",
+        World = view.Battle is null ? view.Explore : null,
+        Walk = view.Battle is null && view.Explore is { } explore ? WalkHud.Of(explore, view.PartyLevel) : null,
+        OverWorld = view.Battle is null && view.Explore is not null,
     };
 
     // The board, with the banner and which fight this is. The encounter's name is for a TV that can't draw the map.

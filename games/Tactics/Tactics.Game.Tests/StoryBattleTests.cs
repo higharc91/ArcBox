@@ -272,6 +272,106 @@ public sealed class StoryBattleTests
         Assert.Equal("Go to The Ford Bridge", Data(s, 0).GetProperty("objective").GetString());
     }
 
+    /// <summary>
+    /// Review: after the parley, the crossing is in another place, so it waits at its marker, however the parley ended: played straight through,
+    /// after a restart during its lines, or in a new session. The place comes from the saved cursor, not from memory.
+    /// </summary>
+    [Theory]
+    [InlineData("restart")]
+    [InlineData("session")]
+    public void After_a_parley_resumed_the_crossing_still_waits_at_its_marker(string how)
+    {
+        var s = AtTheVote();
+        for (var p = 0; p < 4; p++)
+            Vote(s, p, "parley");
+        Until(s, () => Story(s).Scene == "ch1_parley" && Story(s).State == TacticsGame.StoryStates.Lines, "the parley's lines");
+
+        var again = new Session(document: s.Lease.Document, game: new TacticsGame(Rules, lore: Lore));
+        if (how == "restart")
+        {
+            again.Harness.Resume(again.Lease);
+            StoryResumeTests.AllBack(again);
+        }
+        else
+            again.Harness.StartCampaign(again.Lease);
+        Assert.Equal("ch1_parley", Story(again).Scene);
+        PlayOut(again);
+
+        Assert.Equal(TacticsPhase.Exploration, again.Game.Phase);
+        Assert.Equal(Crossing, Assert.Single(again.Host.Explore!.Markers!.Value).Beat);
+        Assert.Null(TacticsDocument.Read(again.Lease.Document).World!.Story);
+    }
+
+    /// <summary>A copy of the rules with the clan's fire moved into the ford's stamp: travel to the parley lands on it.</summary>
+    private static readonly Lazy<RulesPack> FireInTheStamp = new(() => ExplorationTests.EditedRules(rules =>
+    {
+        var path = Path.Combine(rules, "world", "ashen_ford.json");
+        var region = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(path))!;
+        var stage = StageBattleTests.Stage;
+        var inside = StageBattleTests.Reached.Where(stage.Holds).Order().First(t => StageBattleTests.Ground.Walkable(t));
+        var fire = region["beats"]!.AsArray().Single(b => b!["beat"]!.GetValue<string>() == "ch1_skarrow_song")!;
+        fire["at"] = new System.Text.Json.Nodes.JsonArray(inside.X, inside.Y);
+        File.WriteAllText(path, region.ToJsonString());
+    }));
+
+    /// <summary>
+    /// Review: travel lands clear of a stamp that the beat's outcome arms. Mid-beat nothing is armed, but the crossing's stamp arms as the
+    /// parley ends, so a landing inside it would start the fight on the party's first step.
+    /// </summary>
+    [Fact]
+    public void Travel_lands_clear_of_a_stamp_the_beat_will_arm()
+    {
+        var rules = FireInTheStamp.Value;
+        var at = NearSpot(FordChoice);
+        var s = new Session(game: new TacticsGame(rules, lore: Lore, seed: SeedFor(FordChoice) with { At = at }));
+        s.ToWalking();
+        s.Send(StageBattleTests.Lead(s), "interact");
+        Until(s, () => Story(s).State == TacticsGame.StoryStates.Asking, "the mayor's question");
+        Vote(s, StageBattleTests.Lead(s), "cases");
+        Until(s, () => Story(s).State == TacticsGame.StoryStates.Asking && Cursor(s)!.Node == "vote", "the vote");
+        for (var p = 0; p < 4; p++)
+            Vote(s, p, "parley");
+        Until(s, () => Story(s).Scene == "ch1_parley", "the parley");
+
+        var landed = s.Host.Explore!.At;
+        Assert.Equal(TacticsGame.Travelled, s.Host.Explore.Arrived);
+        Assert.False(StageBattleTests.Stage.Holds(landed), $"{landed} is inside the stamp the parley arms");
+        PlayOut(s);
+        Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
+        Assert.False(StageBattleTests.Stage.Holds(s.Host.Explore!.At));
+    }
+
+    /// <summary>Review: with the real lore, after a win and its aftermath the party stands clear of every stamp that's armed, on ground it can walk.</summary>
+    [Theory]
+    [InlineData("force")]
+    [InlineData("parley")]
+    public void After_a_win_and_its_aftermath_the_party_is_clear_of_armed_stamps(string branch)
+    {
+        var s = branch == "force" ? SteppedIn(StageBattleTests.Force) : NearBeat(Crossing, StageBattleTests.Parley);
+        if (branch == "parley")
+            s.Send(StageBattleTests.Lead(s), "interact");
+        ToTheFight(s);
+        StageEndTests.Ended(s, BattleOutcome.Won);
+        s.Send(0, "next");
+        PlayOut(s);
+
+        Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
+        var at = s.Host.Explore!.At;
+        Assert.True(StageBattleTests.Ground.Walkable(at));
+        Assert.Contains(at, StageBattleTests.Reached);
+        var world = World(s);
+        if (StoryRules.Available(StoryTests.Arc, world.Flags.ToHashSet(), world.Beats.ToHashSet()) is { Kind: ArcBeat.Battle })
+            Assert.False(StageBattleTests.Stage.Holds(at), $"{at} is in the armed stamp");
+        // And a step from here doesn't start a fight.
+        var lead = StageBattleTests.Lead(s);
+        foreach (var dir in new[] { "n", "e", "s", "w" })
+        {
+            s.Send(lead, "walk", new { dir });
+            s.Send(lead, "walk", new { dir = (string?)null });
+            Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
+        }
+    }
+
     // ---- The end of the chapter --------------------------------------------------------------------------------------------------
 
     private static readonly TacticsSeed AllButTheEmber = new(["ch1_skarrow_spared", "ch1_met_maud", "ch1_halden_confessed"],

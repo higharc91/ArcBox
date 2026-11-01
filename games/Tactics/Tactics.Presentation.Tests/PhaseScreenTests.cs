@@ -59,6 +59,23 @@ public sealed class PhaseScreenTests
         Assert.Equal("Story", PhaseScreen.Of(View("Story")).Meta);      // and still reads with nothing to draw
     }
 
+    /// <summary>A scene waiting for the party after a restart keeps the world behind the wait; a battle's wait off the world doesn't change.</summary>
+    [Fact]
+    public void A_scene_waiting_to_resume_keeps_the_world_behind_it()
+    {
+        var explore = new ExploreView("ashen_ford", "The Ashen Ford", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], null, Chapter: 1);
+
+        var waiting = PhaseScreen.Of(View("Resuming", "Resuming the story…") with { Explore = explore });
+
+        Assert.Same(explore, waiting.World);
+        Assert.True(waiting.OverWorld);
+        Assert.Equal("Waiting for the players to come back", waiting.Empty);
+        Assert.Equal("Chapter I · The Ashen Ford", waiting.Walk!.Title);
+        var battle = PhaseScreen.Of(View("Resuming", battle: Fight()) with { Explore = explore });
+        Assert.Null(battle.World);
+        Assert.False(battle.OverWorld);
+    }
+
     [Fact]
     public void Exploration_draws_the_world_and_has_no_table()
     {
@@ -105,8 +122,7 @@ public sealed class PhaseScreenTests
     [InlineData("EncounterPick")]
     [InlineData("Battle")]
     [InlineData("Results")]
-    [InlineData("Resuming")]
-    public void Only_exploration_shows_the_world(string phase)
+    public void Only_exploration_shows_the_world(string phase)     // and a scene and its wait to resume: see above
     {
         var explore = new ExploreView("r", "Region", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], "Ana", 1);
 

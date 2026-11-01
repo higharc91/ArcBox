@@ -294,7 +294,13 @@ public sealed class StoryModelTests
             var world = doc.World!;
             Must(world.Story is { Stage: StorySave.Fight } c && c.Beat == doc.Battle?.Beat, "a story fight with no cursor at its fight");
             var beat = Arc.Beats.Single(b => b.Id == world.Story!.Beat);
-            if (_r.Next(4) > 0)
+            var won = _r.Next(4) > 0;
+            if (_r.Next(2) == 0)
+            {
+                FightThrough(won);
+                return;
+            }
+            if (won)
                 world = world with { Flags = [.. world.Flags.Concat(beat.Sets).Distinct()], Story = world.Story! with { Stage = StorySave.After } };
             else
                 _fightsLost++;
@@ -304,6 +310,49 @@ public sealed class StoryModelTests
         }
 
         private int _fights, _fightsLost;
+
+        /// <summary>How many fights went the real way: the engine's end, Results, and the VIP carrying on.</summary>
+        public int RealFights { get; private set; }
+
+        public int FightsLost => _fightsLost;
+
+        /// <summary>
+        /// The fight the real way (review finding 3): the engine ends it on its next command, as <see cref="StageEndTests"/> do, every player
+        /// ending their turns as it plays on; then Results, and the VIP carries on into the aftermath or back to the world.
+        /// </summary>
+        private void FightThrough(bool won)
+        {
+            var engine = _game.ApplyEngine;
+            var game = _game;
+            game.ApplyEngine = (state, command, rules, ai) =>
+            {
+                game.ApplyEngine = engine;
+                var r = engine(state, command, rules, ai);
+                return r with { State = r.State with { Outcome = won ? BattleOutcome.Won : BattleOutcome.Lost } };
+            };
+            for (var i = 0; i < 2_000 && _game.Phase is TacticsPhase.Battle or TacticsPhase.Resuming; i++)
+            {
+                if (_game.Phase == TacticsPhase.Resuming)
+                    foreach (var seat in Enumerable.Range(0, _players.Count))
+                        Connect(seat, true);
+                foreach (var seat in _online.ToArray())
+                    if (_game.PlayerView(_players[seat].Id) is CustomView { Screen: TacticsGame.Screens.Turn })
+                        Send(seat, new { action = "endTurn" });
+                    else if (_game.PlayerView(_players[seat].Id) is CustomView { Screen: TacticsGame.Screens.React })
+                        Send(seat, new { action = "react", data = new { choice = "pass" } });
+                _context.Advance(TimeSpan.FromSeconds(7), Fire);
+            }
+            Must(_game.Phase == TacticsPhase.Results, $"a fight that should have ended is at {_game.Phase}");
+            var world = _lease.Read().World!;
+            Must(won ? world.Story is { Stage: StorySave.After } : world.Story is { Stage: StorySave.Fight }, $"a fight {(won ? "won" : "lost")} left the cursor at {world.Story?.Stage}");
+            (_fights, _fightsLost, RealFights) = (_fights + 1, _fightsLost + (won ? 0 : 1), RealFights + 1);
+            if (_online.Count == 0)
+                Connect(0, true);
+            // The VIP: the platform's, if here, else the first here (TacticsGame.Vip).
+            var vip = _players.FindIndex(p => p.IsVip) is var v and >= 0 && _online.Contains(v) ? v : _online.Order().First();
+            Send(vip, new { action = "next" });
+            Check("carry on");
+        }
 
         public void Play(int events)
         {
@@ -511,6 +560,8 @@ public sealed class StoryModelTests
             if (story0 is { State: TacticsGame.StoryStates.Asking or TacticsGame.StoryStates.TieBreak or TacticsGame.StoryStates.PickRoller } open
                 && (open.Ask?.Deadline ?? open.Check?.Deadline) is null)
                 Must(!_context.Timers.ContainsKey(TacticsGame.Timers.Vote), "a question holds with its clock still running");
+            if (host.Chapter is not null)
+                States.Add("card");
             if (_resumeFrom is { } from && _game.Phase == TacticsPhase.Story)
             {
                 _resumeFrom = null;
@@ -665,7 +716,7 @@ public sealed class StoryModelTests
     public void Scenes_hold_up_against_their_model()
     {
         var beats = 0;
-        var (fights, sessions) = (0, 0);
+        var (fights, sessions, real, lost) = (0, 0, 0, 0);
         var states = new HashSet<string>();
         var restarts = new HashSet<string>();
         var only = int.TryParse(Environment.GetEnvironmentVariable("STORY_MODEL_SEED"), out var one) ? one : 0;
@@ -676,7 +727,7 @@ public sealed class StoryModelTests
             beats += run.BeatsDone;
             states.UnionWith(run.States);
             restarts.UnionWith(run.RestartsIn);
-            (fights, sessions) = (fights + run.Fights, sessions + run.Sessions);
+            (fights, sessions, real, lost) = (fights + run.Fights, sessions + run.Sessions, real + run.RealFights, lost + run.FightsLost);
         }
         string[] all = [TacticsGame.StoryStates.Lines, TacticsGame.StoryStates.Asking, TacticsGame.StoryStates.TieBreak,
             TacticsGame.StoryStates.PickRoller, TacticsGame.StoryStates.Rolled, TacticsGame.StoryStates.Gap];
@@ -687,6 +738,8 @@ public sealed class StoryModelTests
             TacticsGame.StoryStates.Lines, TacticsGame.StoryStates.Asking }.Except(restarts));
         Assert.True(sessions > 0, "no new session started on a saved scene");
         Assert.True(fights > 0, "no fight started from the story");
+        Assert.True(real > 0 && lost > 0 && fights > lost, $"fights: {fights}, {real} the real way, {lost} lost: the runs need wins and losses, through Results");
+        Assert.Contains("card", states);      // a run reached the end of the chapter
         Assert.True(beats >= Seeds, $"only {beats} beats were finished in {Seeds} runs: the model isn't reaching the ends of scenes");
     }
 }

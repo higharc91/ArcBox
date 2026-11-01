@@ -238,12 +238,8 @@ public sealed partial class TacticsGame
     private void BeginScene(SceneDef scene)
     {
         Travel(scene);
-        _lastPlace = StoryRules.PlaceOf(scene, BeatNamed(Cursor!.Beat)!);
         EnterNode(scene, scene.Start);
     }
-
-    /// <summary>The place of the scene that started last, which says whether a battle that follows starts at once (<see cref="StoryRules.Chains"/>).</summary>
-    private string? _lastPlace;
 
     /// <summary>
     /// Plays the node <paramref name="id"/> of <paramref name="scene"/> from its first line: its flags are set as it plays, and it's
@@ -378,6 +374,9 @@ public sealed partial class TacticsGame
             ToTheFight(beat);      // never done without its fight won
             return;
         }
+        // Where the party is as the beat ends: the place of the scene the saved cursor names, so a restart or a new session can't lose it
+        // (review). A beat that ends with no scene of its own is in its own place.
+        var here = CurrentScene() is { } last ? StoryRules.PlaceOf(last, beat) : beat.Place;
         EndTelling();
         var world = _doc.World!;
         _doc = _doc with
@@ -397,8 +396,6 @@ public sealed partial class TacticsGame
             return;
         }
         _lease.Checkpoint(_doc.ToJson(), $"After {BeatTitle(beat)}");
-        var here = _lastPlace ?? beat.Place;
-        _lastPlace = null;
         if (OnOffer() is { } next && StoryRules.Chains(next, here))
         {
             BeginBeat(next, gap: true);      // "Dawn, then": straight into the assault
@@ -435,9 +432,19 @@ public sealed partial class TacticsGame
             return null;
         var ground = Rules.GroundFor(region.Def.Id)!.Terrain;
         var reached = WorldWalk.Reach(ground, region.Def.Spawns.Start, ClassDef.DefaultJump);
-        var armed = Armed()?.Stage;
-        var to = BattleStage.Standable(ground, spot, [spot, _at], t => ground.Map.InBounds(t) && reached.Contains(t) && armed?.Holds(t) != true);
+        // Clear of every stamp a battle still to come could arm: mid-beat nothing is armed yet, and the beat's outcome can arm one (review).
+        var stamps = PendingStamps();
+        var to = BattleStage.Standable(ground, spot, [spot, _at], t => ground.Map.InBounds(t) && reached.Contains(t) && !stamps.Any(st => st.Holds(t)));
         return to is { } tile && tile != _at ? tile : null;
+    }
+
+    /// <summary>Where the arc's battle beats not yet done stand in the region: any of them may arm when the beat under way ends.</summary>
+    private List<BattleStage> PendingStamps()
+    {
+        var done = _doc.World?.Beats ?? [];
+        return [.. (StoryArc?.Beats ?? []).Where(b => b.Kind == ArcBeat.Battle && !done.Contains(b.Id) && b.Encounter is not null)
+            .Select(b => Rules.Encounters.TryGetValue(b.Encounter!, out var def) ? StageFor(def.Map) : null)
+            .OfType<BattleStage>()];
     }
 
     /// <summary>Moves the party for <paramref name="scene"/>, if it's set somewhere else: a teleport, so a new epoch, and the TV fades.</summary>
