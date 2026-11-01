@@ -14,7 +14,7 @@ namespace ArcBox.Host.Shell;
 /// from the start, logged every 5 s), and <c>--audio-log</c> (print <c>AUDIO &lt;bus&gt; &lt;name&gt;</c> for every sound played),
 /// the dev-only <c>--tactics-demo[=&lt;map&gt;[:changed]]</c> (show a battle's board, without a server),
 /// the dev-only <c>--world-demo[=&lt;region&gt;|hilly[:&lt;block tiles&gt;]]</c> (draw a whole region in blocks, pan over it and print what it cost),
-/// the dev-only <c>--walk-log</c> (print a <c>WALK</c> line for each step shown)
+/// the dev-only <c>--walk-log</c> (print a <c>WALK</c> line for each step shown, and <c>WALKAT</c> lines with where the party is drawn),
 /// the dev-only <c>--drop-signals</c> (never send a host signal, so a game runs on its fallback timers),
 /// the dev-only <c>--beat-log</c> (print a <c>BEAT</c> line with each Tactics beat's timing)
 /// and the dev-only <c>--demo=campaign-lobby</c> (show the lobby with a built-in campaign and roster, without a server).

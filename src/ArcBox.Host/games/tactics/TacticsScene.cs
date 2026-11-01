@@ -63,6 +63,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private WorldHud? _worldHud;
     private ExploreView? _explore;
     private WalkStats? _walkStats;
+    private WalkLog? _walkLog;
     private PhaseScreen? _screen;
     private bool _revealed;
     private double _shotAt;
@@ -105,7 +106,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     /// <summary><c>--beat-log</c>: print a <c>BEAT</c> line with each beat's timing.</summary>
     public bool LogBeats { get; set; }
 
-    /// <summary><c>--walk-log</c>: print a <c>WALK</c> line for each step, and how smooth the walking was.</summary>
+    /// <summary><c>--walk-log</c>: print a <c>WALK</c> line for each step, a <c>WALKAT</c> line with where the party is shown, and how smooth the walking was.</summary>
     public bool LogWalks { get; set; }
 
     public void SetNarrator(Narrator narrator) => _narrator = narrator;
@@ -242,6 +243,10 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _shots?.Capture("tactics-exploration");
         }
         var moved = frame.Walked != _lastWalked;
+        if (_walkLog?.Next(_clock.Elapsed.TotalSeconds, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(), _walk!.Seq, _walk.Held, _walk.Party, _walk.Places) is { } at)
+        {
+            GD.Print(at);
+        }
         if (LogWalks && _walkStats is { } stats && frame.Units.FirstOrDefault(u => u.CrownAt is not null) is { } leader)
         {
             if (moved)
@@ -486,6 +491,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _walk = null;
         _revealed = false;
         _walkStats = LogWalks ? new WalkStats() : null;
+        _walkLog = LogWalks ? new WalkLog() : null;
         _world = new WorldCanvas(root, () => DemoRegion.FromPack(root, region));
         AddChild(_world);
         GD.Print($"TACTICS world opening {region}");

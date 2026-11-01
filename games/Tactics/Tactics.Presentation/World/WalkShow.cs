@@ -42,6 +42,19 @@ public sealed class WalkShow
     private int _cuts;
     private int _skips;
     private double _footfalls;
+    private IReadOnlyDictionary<string, UnitPlace> _places = new Dictionary<string, UnitPlace>();
+
+    /// <summary>The newest step this show has heard of.</summary>
+    public int Seq => _seq;
+
+    /// <summary>Whether the newest view had a direction held.</summary>
+    public bool Held { get; private set; }
+
+    /// <summary>The party, in the newest view's order.</summary>
+    public IReadOnlyList<WalkerView> Party => _party;
+
+    /// <summary>Where each walker was put by the last <see cref="Frame"/>, by <see cref="WalkerView.Id"/>.</summary>
+    public IReadOnlyDictionary<string, UnitPlace> Places => _places;
 
     /// <summary>A show on <paramref name="terrain"/>. With no <paramref name="sounds"/>, it's a silent one.</summary>
     public WalkShow(BoardTerrain terrain, UnitArt art, SoundBank? sounds)
@@ -59,7 +72,7 @@ public sealed class WalkShow
 
         if (!_started || view.Epoch != _epoch)
             _told = view.Seq;        // what's in a first view was walked before this TV came
-        (_started, _epoch, _seq, _party) = (true, view.Epoch, view.Seq, view.Party.IsDefault ? [] : view.Party);
+        (_started, _epoch, _seq, _party, Held) = (true, view.Epoch, view.Seq, view.Party.IsDefault ? [] : view.Party, view.Held);
         _track.Receive(view);
 
         var told = _told;
@@ -71,7 +84,7 @@ public sealed class WalkShow
     public WalkFrame Frame(double seconds)
     {
         _track.Advance(seconds);
-        var places = _track.Places(_terrain);
+        var places = _places = _track.Places(_terrain);
         var focus = _track.Focus;
 
         var cut = _track.Cuts != _cuts;
