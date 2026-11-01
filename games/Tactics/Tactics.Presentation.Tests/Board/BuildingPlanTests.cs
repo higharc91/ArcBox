@@ -70,7 +70,7 @@ public sealed class BuildingPlanTests
 
         foreach (var column in Columns("tavern"))
         {
-            Assert.Contains("tavern_red.png", column.Image!.Path);
+            Assert.Equal(Pack.Art.Building("tavern", VariantOf("tavern"))!.Image.Path, column.Image!.Path);
             Assert.True((column.Points[0] - frame - column.Uvs[0] * art.Size).Length() < 0.001f);
             Assert.True((column.Points[2] - frame - column.Uvs[2] * art.Size).Length() < 0.001f);
         }
