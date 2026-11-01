@@ -834,18 +834,30 @@ public sealed class WalkModelTests
         return events;
     }
 
-    [Fact]
-    public void Walking_holds_up_against_its_model()
+    /// <summary>Runs as many seeds as <c>WALK_MODEL_EVENTS</c> asks for, each set up by <paramref name="setup"/>.</summary>
+    private static void Hold(Func<int, Setup> setup)
     {
         var total = int.TryParse(Environment.GetEnvironmentVariable("WALK_MODEL_EVENTS"), out var asked) ? asked : DefaultEvents;
 
         for (var seed = 1; seed <= Math.Max(1, total / EventsPerSeed); seed++)
         {
-            var (setup, events) = (Setup.Of(seed), Generate(seed, EventsPerSeed));
-            if (Failure(setup, events) is { } failure)
-                Assert.Fail($"{setup}\n{failure}\nafter: {string.Join("; ", Shrink(setup, events, failure))}");
+            var (run, events) = (setup(seed), Generate(seed, EventsPerSeed));
+            if (Failure(run, events) is { } failure)
+                Assert.Fail($"{run}\n{failure}\nafter: {string.Join("; ", Shrink(run, events, failure))}");
         }
     }
+
+    /// <summary>Walking with no story, so no stamp is ever armed: the seeds as they were before fights in the world.</summary>
+    [Fact]
+    public void Walking_holds_up_against_its_model() => Hold(seed => Setup.Of(seed) with { Armed = 0 });
+
+    /// <summary>
+    /// Walking with the ford's fight on offer, the same number of seeds again. A seed that <see cref="Setup.Of"/> arms keeps its own
+    /// story, so a seed named in a failure here is the same run in a longer sweep; the rest take the force and parley in turn.
+    /// </summary>
+    [Fact]
+    public void Walking_into_fights_holds_up_against_its_model()
+        => Hold(seed => Setup.Of(seed) is { Armed: > 0 } armed ? armed : Setup.Of(seed) with { Armed = 1 + seed % 2 });
 
     [Theory]
     [InlineData(1)]

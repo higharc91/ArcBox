@@ -13,6 +13,12 @@ public sealed partial class TacticsGame
     /// <summary>The beat the TV has to show before the next AI step, or null when nothing is waiting on it.</summary>
     private int? _awaitShown;
 
+    /// <summary>
+    /// The walk-in of a fight in the world (5c §5): its opening beat, and when its hold runs out. Until the TV shows that beat or the time
+    /// is up, no AI step goes, even if a player acts and so asks the TV to show a later beat with a shorter wait. Null with no walk-in.
+    /// </summary>
+    private (int Beat, DateTimeOffset Until)? _formUp;
+
     /// <summary>The rest of the AI's plan for the unit whose turn it is.</summary>
     private (UnitId Unit, int Round, int TurnIndex, Queue<Command> Commands)? _plan;
 
@@ -53,7 +59,7 @@ public sealed partial class TacticsGame
     {
         if (TryBegin(encounter, seed, members, companions) is not { } resolution)
             return false;
-        _lastBattle = null;
+        (_lastBattle, _arrived) = (null, null);
         _doc = _doc with
         {
             Battle = new BattleSave(encounter, seed, members, resolution.State, [], companions.IsEmpty ? default : companions, beat),
@@ -62,6 +68,7 @@ public sealed partial class TacticsGame
         if (AddBeat(null, resolution.Events) is { } opening && StageFor(resolution.State.MapId) is not null)
         {
             _awaitShown = opening;
+            _formUp = (opening, _ctx.Now + _timing.FormUp);
             _ctx.SetTimer(Timers.Pace, _timing.FormUp);
         }
         _phase = TacticsPhase.Battle;
@@ -358,7 +365,27 @@ public sealed partial class TacticsGame
         if (seq is null)
             return;
         _awaitShown = seq;
-        _ctx.SetTimer(Timers.Pace, _timing.Pace(events));
+        var wait = _timing.Pace(events);
+        if (_formUp is { Until: var until } && until - _ctx.Now > wait)
+            wait = until - _ctx.Now;        // the walk-in isn't over: the AI still waits for it
+        _ctx.SetTimer(Timers.Pace, wait);
+        _paceEvents = events;
+    }
+
+    /// <summary>How many events the beat the AI waits on has, for its fallback wait once the walk-in is over.</summary>
+    private int _paceEvents;
+
+    /// <summary>
+    /// The TV has shown the walk-in's beat: the hold is over. If the AI now waits on a later beat, its wait goes back to that beat's own,
+    /// from now.
+    /// </summary>
+    private void FormedUp(int shown)
+    {
+        if (_formUp is not { Beat: var opening } || shown < opening)
+            return;
+        _formUp = null;
+        if (_awaitShown is { } awaited && awaited > shown)
+            _ctx.SetTimer(Timers.Pace, _timing.Pace(_paceEvents));
     }
 
     private static Command? ParseCommand(UnitId unit, CustomInput input)
@@ -438,6 +465,6 @@ public sealed partial class TacticsGame
         _ctx.CancelTimer(Timers.Turn);
         _ctx.CancelTimer(Timers.React);
         _ctx.CancelTimer(Timers.Pace);
-        (_turnTimerFor, _reactTimerFor, _awaitShown, _plan, _aiFinishing, _faultAt, _skips) = (null, null, null, null, null, null, 0);
+        (_turnTimerFor, _reactTimerFor, _awaitShown, _plan, _aiFinishing, _faultAt, _skips, _formUp) = (null, null, null, null, null, null, 0, null);
     }
 }

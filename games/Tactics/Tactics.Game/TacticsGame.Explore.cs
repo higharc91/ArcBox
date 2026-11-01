@@ -118,6 +118,12 @@ public sealed partial class TacticsGame
     /// <summary>What everyone is told when a fight the party walked into won't start. The party stands where it stopped and can try again.</summary>
     public const string FightWontStart = "Something went wrong starting that fight.";
 
+    /// <summary>
+    /// What everyone is told when the party is too big for the fight it walked into. The checks make every arc battle take a full party, so
+    /// this is a guard, not a case anyone should meet.
+    /// </summary>
+    internal static string FightTooBig(EncounterDef encounter) => $"{encounter.Name} takes at most {encounter.Party.Max} heroes.";
+
     /// <summary>Where the battle map <paramref name="map"/> stands in the region, or null with no region or no stamp of it: a plain board.</summary>
     private BattleStage? StageFor(string map) => _region is { } region && Rules.MapFor(map) is { } battleMap ? BattleStage.Of(region, battleMap) : null;
 
@@ -144,16 +150,17 @@ public sealed partial class TacticsGame
     /// </summary>
     private void StartFight(string encounter, string? beat)
     {
+        var def = Rules.Encounters.GetValueOrDefault(encounter);
+        // Characters first, while the party is still walking: giving one out can settle the lead, and anything the lead arms has to go
+        // with the walk (LeaveExploration), not outlive it into the battle.
+        if (def is not null && _players.Count <= def.Party.Max)
+            FillAbsentCharacters();
         LeaveExploration();
         _toasts.Clear();
-        _arrived = null;
-        if (Rules.Encounters.GetValueOrDefault(encounter) is { } def && _players.Count <= def.Party.Max)
-        {
-            FillAbsentCharacters();
-            if (StartBattle(encounter, (ulong)_ctx.Random.NextInt64(), [.. _players.Select(p => p.Profile!.Value)], Companions(def.Party.Min), beat))
-                return;
-        }
-        Note(FightWontStart);
+        if (def is not null && _players.Count <= def.Party.Max
+            && StartBattle(encounter, (ulong)_ctx.Random.NextInt64(), [.. _players.Select(p => p.Profile!.Value)], Companions(def.Party.Min), beat))
+            return;
+        Note(def is not null && _players.Count > def.Party.Max ? FightTooBig(def) : FightWontStart);
         ToExploration();
     }
 
@@ -608,6 +615,7 @@ public sealed partial class TacticsGame
     /// </summary>
     private void Land(BattleSave save, BattleOutcome outcome)
     {
+        _arrived = null;
         if (_region is not { } region || StageFor(save.State.MapId) is not { } stage)
             return;
         var at = outcome == BattleOutcome.Lost ? region.Def.Spawns.Recovery : Landing(save, stage);

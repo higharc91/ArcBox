@@ -432,12 +432,127 @@ public sealed class StageBattleTests
         var unstamped = Rules.Encounters.Values.First(e => Rules.RegionFor(Ford)!.StampFor(e.Map) is null && e.Party.Max >= 4);
         var s = new Session(game: WithLore(null, battleList: true));
         s.ToWalking();
+        for (var i = 1; i < 4; i++)
+            s.Harness.SetConnected(i, false);
         s.Send(0, "battles");
         s.Send(0, "pickEncounter", new { encounter = unstamped.Id });
         Assert.Equal(TacticsPhase.Battle, s.Game.Phase);
 
         Assert.Null(s.Host.Battle!.Stage);
         Assert.Null(s.Game.Document.Battle!.Beat);
+
+        // No walk-in to wait for: with nobody left to play, the AI goes at once, as it always has.
+        s.Harness.SetConnected(0, false);
+        Assert.True(s.Host.Battle!.Beats.Length > 1);
+    }
+
+    /// <summary>
+    /// The review's case: a stand-in leads, the session's own leader is back inside the takeback window, and the stand-in walks into the
+    /// stamp. Giving out characters as the fight starts settles the lead, which must not leave the lead's timer running into the fight.
+    /// </summary>
+    [Fact]
+    public void A_stand_in_waiting_on_the_takeback_leaves_no_walking_timer_in_the_fight()
+    {
+        var (from, dir) = Entry();
+        var s = new Session(game: WithLore(Force, from));
+        s.Harness.StartCampaign(s.Lease);
+        for (var i = 0; i < 3; i++)
+            s.Send(i, "pickClass", new { @class = "fighter" });
+        s.Harness.SetConnected(3, false);             // no character yet, so the fight gives one out
+        var own = Lead(s);
+        s.Harness.SetConnected(own, false);           // a stand-in takes the lead
+        var standIn = Lead(s);
+        Assert.NotEqual(own, standIn);
+        s.Harness.SetConnected(own, true);            // back, but the stand-in keeps it for the takeback window
+        s.Harness.Advance(TimeSpan.FromMilliseconds(500));
+        Assert.Equal(standIn, Lead(s));
+
+        s.Send(standIn, "walk", new { dir = Name(dir) });
+
+        Assert.Equal(TacticsPhase.Battle, s.Game.Phase);
+        Assert.Empty(s.Harness.ActiveTimers.Intersect(WalkingTimers));
+        s.Harness.Advance(TimeSpan.FromSeconds(10));
+        Assert.Empty(s.Harness.ActiveTimers.Intersect(WalkingTimers));
+    }
+
+    /// <summary>
+    /// A player who acts during the walk-in asks the TV to show their beat, with a short wait of its own: the AI must still wait for the
+    /// walk-in, until the TV shows it or <see cref="TacticsTiming.FormUp"/> is up, whichever comes first.
+    /// </summary>
+    [Fact]
+    public void A_player_acting_during_the_walk_in_doesnt_cut_it_short()
+    {
+        var (s, seat) = HeroFirst();
+        for (var i = 0; i < 4; i++)
+            if (i != seat)
+                s.Harness.SetConnected(i, false);     // everyone else is played by the AI, which only the hold keeps waiting
+        s.Send(seat, "endTurn");
+        var beats = s.Host.Battle!.Beats.Length;
+
+        s.Harness.Advance(TacticsTiming.Default.FormUp - TimeSpan.FromMilliseconds(1));
+        Assert.Equal(beats, s.Host.Battle!.Beats.Length);
+        s.Harness.Advance(TimeSpan.FromMilliseconds(1));
+        Assert.True(s.Host.Battle!.Beats.Length > beats);
+    }
+
+    [Fact]
+    public void Once_the_walk_in_is_shown_the_ai_goes_on_the_usual_wait()
+    {
+        var (s, seat) = HeroFirst();
+        for (var i = 0; i < 4; i++)
+            if (i != seat)
+                s.Harness.SetConnected(i, false);
+        var opening = s.Host.Battle!.Beats[0].Seq;
+        s.Send(seat, "endTurn");
+        var beats = s.Host.Battle!.Beats.Length;
+
+        var events = s.Host.Battle.Beats[^1].Events.Length;
+        Assert.True(TacticsTiming.Default.Pace(events) < TacticsTiming.Default.FormUp);
+
+        s.Harness.HostSignal("shown", new { seq = opening });      // the walk-in is over; the player's beat isn't shown yet
+        Assert.Equal(beats, s.Host.Battle!.Beats.Length);
+        s.Harness.Advance(TacticsTiming.Default.Pace(events));     // its own wait, not the rest of the walk-in's
+
+        Assert.True(s.Host.Battle!.Beats.Length > beats);
+    }
+
+    /// <summary>Ashen Ford's assault for at most three: a party of four is too big, which the checks never let a real arc battle be.</summary>
+    private static readonly Lazy<RulesPack> SmallAssault = new(() => ExplorationTests.EditedRules(rules =>
+    {
+        var path = Path.Combine(rules, "encounters", "ford_assault.json");
+        var node = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(path))!;
+        node["party"]!["min"] = 1;
+        node["party"]!["max"] = 3;
+        File.WriteAllText(path, node.ToJsonString());
+    }));
+
+    [Fact]
+    public void A_party_too_big_for_the_fight_is_told_so_and_walks_on()
+    {
+        var (from, dir) = Entry();
+        var s = Walking(Force, from, rules: SmallAssault.Value);
+
+        s.Send(Lead(s), "walk", new { dir = Name(dir) });
+
+        Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
+        Assert.Equal(TacticsGame.FightTooBig(SmallAssault.Value.Encounters["ford_assault"]), s.Host.Notice);
+        Assert.NotEqual(TacticsGame.FightWontStart, s.Host.Notice);
+        Assert.Equal(from, s.Host.Explore!.At);
+        Assert.Contains(TacticsGame.Timers.Lead, s.Harness.ActiveTimers);
+    }
+
+    [Fact]
+    public void A_fight_the_engine_wont_start_says_so_and_walks_on()
+    {
+        var (from, dir) = Entry();
+        var s = Walking(Force, from);
+        s.Game.StartEngine = (_, _, _) => throw new InvalidOperationException("forced");
+
+        s.Send(Lead(s), "walk", new { dir = Name(dir) });
+
+        Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
+        Assert.Equal(TacticsGame.FightWontStart, s.Host.Notice);
+        Assert.Null(s.Game.Document.Battle);
     }
 
     /// <summary>The walk-in holds the AI, not the players: a hero whose turn comes first can act at once.</summary>

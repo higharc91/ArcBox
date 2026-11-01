@@ -205,6 +205,9 @@ public sealed partial class TacticsGame
     {
         CancelBattleTimers();
         (_faultAt, _skips, _lastBattle, _result) = (null, 0, null, null);
+        // A battle in the world goes from around the party, which stands where it did before: the TV snaps it back as after any fight.
+        if (_doc.Battle is { } save && StageFor(save.State.MapId) is not null)
+            (_epoch, _legs, _arrived) = (_epoch + 1, [], FellIn);
         _doc = _doc with { Battle = null };
         Save();
         Note(BattleCalledOff);

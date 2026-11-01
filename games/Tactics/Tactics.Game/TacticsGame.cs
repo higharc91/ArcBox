@@ -260,7 +260,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         switch (key)
         {
             case Timers.Pace:
-                _awaitShown = null;
+                (_awaitShown, _formUp) = (null, null);
                 Drive();
                 break;
             case Timers.Turn:
@@ -286,6 +286,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         {
             return;
         }
+        FormedUp(seq);
         if (seq < awaited)
             return;     // a stale signal
         _awaitShown = null;

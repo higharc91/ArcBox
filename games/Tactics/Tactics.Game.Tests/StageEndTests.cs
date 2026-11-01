@@ -280,6 +280,72 @@ public sealed class StageEndTests
 
     // ---- A loss -----------------------------------------------------------------------------------------------------
 
+    /// <summary>
+    /// A fight in the world the engine can't finish is called off: nothing won or lost, and the party back where it stood when it began.
+    /// The board goes from around it, so the TV is told as after any fight: a new epoch, falling in.
+    /// </summary>
+    [Fact]
+    public void A_fight_called_off_in_the_world_snaps_the_party_back()
+    {
+        var (from, _) = Entry();
+        var s = Fighting(Force);
+        var epoch = s.Host.Explore!.Epoch;
+        s.Game.ResultEngine = (_, _) => throw new InvalidOperationException("forced");
+
+        EndOnNextCommand(s, BattleOutcome.Won);
+        PlayOn(s);
+
+        Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
+        Assert.Equal(TacticsGame.BattleCalledOff, s.Host.Notice);
+        var party = s.Host.Explore!;
+        Assert.Equal((from, epoch + 1, TacticsGame.FellIn), (party.At, party.Epoch, party.Arrived));
+        Assert.Empty(party.Legs);
+        Assert.Equal(Force.Beats, Saved(s).Beats);
+    }
+
+    /// <summary>A fight on a plain board, called off, leaves the world as it was: there was nothing round the party to take away.</summary>
+    [Fact]
+    public void A_fight_called_off_on_a_plain_board_leaves_the_epoch()
+    {
+        var unstamped = Rules.Encounters.Values.First(e => Rules.RegionFor(Ford)!.StampFor(e.Map) is null && e.Party.Max >= 4);
+        var s = FromTheList(unstamped.Id);
+        var party = s.Host.Explore!;
+        s.Game.ResultEngine = (_, _) => throw new InvalidOperationException("forced");
+
+        EndThrough(s, BattleOutcome.Won);
+
+        Assert.Equal((party.At, party.Epoch), (s.Host.Explore!.At, s.Host.Explore.Epoch));
+        Assert.Null(s.Host.Explore.Arrived);
+    }
+
+    private static void EndThrough(Session s, BattleOutcome outcome)
+    {
+        EndOnNextCommand(s, outcome);
+        PlayOn(s);
+    }
+
+    /// <summary>
+    /// What <see cref="ExploreView.Arrived"/> said after the last fight in the world goes as soon as another fight starts, even one from
+    /// the list, and doesn't come back when that one ends on a plain board.
+    /// </summary>
+    [Fact]
+    public void An_arrival_doesnt_outlive_the_next_fight()
+    {
+        var unstamped = Rules.Encounters.Values.First(e => Rules.RegionFor(Ford)!.StampFor(e.Map) is null && e.Party.Max >= 4);
+        var s = new Session(game: WithLore(Force, Entry().From, battleList: true));
+        s.ToWalking();
+        s.Send(Lead(s), "walk", new { dir = Name(Entry().Dir) });
+        Ended(s, BattleOutcome.Lost);
+        s.Send(0, "next");
+        Assert.Equal(TacticsGame.Woke, s.Host.Explore!.Arrived);
+
+        s.Send(0, "battles");
+        s.Send(0, "pickEncounter", new { encounter = unstamped.Id });
+        Assert.Null(s.Host.Explore!.Arrived);
+        Ended(s, BattleOutcome.Won);
+        Assert.Null(s.Host.Explore!.Arrived);
+    }
+
     [Fact]
     public void A_loss_wakes_the_party_at_the_recovery_spawn_with_a_new_epoch()
     {
