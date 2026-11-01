@@ -59,6 +59,7 @@ public sealed class AshenFordDraftTests
         Flags = source.Tiles.ToDictionary(t => t.Key, t => t.Value.Flags),
         Props = source.Props.SelectMany(g => g.At.Select(t => (Tile: t, g.Id, g.Variant))).ToDictionary(p => p.Tile, p => (p.Id, p.Variant)),
         Beats = [.. source.Beats],
+        Buildings = [.. source.Buildings],
         Stamps = [.. source.Stamps],
         Starts = [source.Start],
         Recoveries = [source.Recovery],
@@ -608,13 +609,84 @@ public sealed class AshenFordDraftTests
         Assert.Contains(east, t => t.X == 159);
     }
 
+    private static BuildingArtDef Art(Proved draft, RegionBuilding building) => draft.Pack.Art!.Buildings[building.Id];
+
+    private static IEnumerable<Tile> Footprint(BuildingArtDef art, Tile at)
+        => Enumerable.Range(0, art.Depth).SelectMany(y => Enumerable.Range(0, art.Width).Select(x => new Tile(at.X + x, at.Y + y)));
+
     [Fact]
-    public void Emberwick_has_a_cobbled_square_and_streets_inside_flat_walls()
+    public void Emberwick_is_a_town_of_twenty_to_thirty_buildings_on_a_cobbled_square()
     {
         var draft = Draft.Value;
         Assert.Equal("cobble/grey", draft.Material(draft.Start));
         Assert.True(draft.Tiles.Count(t => draft.Material(t) == "cobble/grey") >= 150);
         Assert.True(draft.Tiles.Count(t => draft.Material(t) == "cobble/warm") >= 250);
+
+        var homes = draft.Region.Buildings.Where(b => b.Id is "cottage" or "house" or "tavern" or "store" or "smithy" or "chapel").Where(b => Distance(b.At, draft.Start) < 40);
+        Assert.InRange(homes.Count(), 20, 30);
+        foreach (var kit in new[] { "wall_u", "wall_v", "wall_tower", "gate_u", "gate_v", "stall", "notice_board_u", "clutter_crates", "clutter_barrels", "clutter_produce" })
+            Assert.Contains(draft.Region.Buildings, b => b.Id == kit);
+        Assert.All(draft.Region.Buildings.Where(b => b.Id is "wall_u" or "wall_v" or "wall_tower" or "gate_u" or "gate_v"), b => Assert.Equal("warm", b.Variant));
+    }
+
+    [Theory]
+    [InlineData("tavern")]
+    [InlineData("chapel")]
+    [InlineData("store")]
+    [InlineData("smithy")]
+    public void The_square_has_its_chapel_inn_store_and_smithy_on_it(string id)
+    {
+        var draft = Draft.Value;
+        var building = draft.Region.Buildings.First(b => b.Id == id);
+        Assert.Equal("cobble/grey", draft.Material(Art(draft, building).DoorSteps(building.At).Single()));
+    }
+
+    [Fact]
+    public void Every_building_stands_on_flat_ground()
+    {
+        var draft = Draft.Value;
+        foreach (var building in draft.Region.Buildings)
+        {
+            var heights = Footprint(Art(draft, building), building.At).Select(t => draft.Region.TileAt(t)!.Height).Distinct();
+            Assert.True(heights.Count() == 1, $"The {building.Id} at {building.At} stands on heights {string.Join(", ", heights)}.");
+        }
+    }
+
+    [Fact]
+    public void Every_door_can_be_walked_to()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var known = source.Tiles.Values.Select(t => t.Material).ToHashSet(StringComparer.Ordinal);
+        var dressed = WorldRegion.From(RegionWriter.Write(source, known).Region!);
+        var reached = new RegionWalk(dressed, draft.Pack.Maps, draft.Pack.Art!).From(draft.Start);
+
+        foreach (var building in dressed.Buildings)
+            foreach (var step in Art(draft, building).DoorSteps(building.At))
+                Assert.True(reached.Contains(step), $"The door of the {building.Id} at {building.At} opens on {step}.");
+    }
+
+    [Fact]
+    public void The_party_can_walk_every_street_and_leaves_by_a_gate()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var known = source.Tiles.Values.Select(t => t.Material).ToHashSet(StringComparer.Ordinal);
+        var dressed = WorldRegion.From(RegionWriter.Write(source, known).Region!);
+        var walk = new RegionWalk(dressed, draft.Pack.Maps, draft.Pack.Art!);
+
+        var reached = walk.From(draft.Start);
+        var streets = source.Tiles.Where(t => t.Value.Material == "cobble/warm").Select(t => t.Key).ToList();
+        var blocked = streets.Where(t => !reached.Contains(t)).ToList();
+        Assert.True(blocked.Count <= 8, $"{blocked.Count} street tiles can't be walked, the first at {blocked.FirstOrDefault()}.");
+
+        // Both gates shut, the party is inside the wall.
+        var gates = dressed.Buildings.Where(b => b.Id is "gate_u" or "gate_v").SelectMany(b => Footprint(draft.Pack.Art!.Buildings[b.Id], b.At)).ToArray();
+        Assert.Equal(2, gates.Length / 3);
+        var inside = walk.From(draft.Start, gates);
+        Assert.DoesNotContain(draft.Spot("ch1_the_ford_choice"), inside);
     }
 
     [Fact]

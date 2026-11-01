@@ -72,6 +72,7 @@ public static class AshenFordDraft
         new(Track, Scorch, 1.5, 1.5, [(48, 62, 3), (52, 56, 3), (55, 38, 4), (60, 22, 5), (68, 12, 6), (78, 17, 5), (86, 34, 4), (92, 48, 3), (95, 57, 1.4), (99.5, 61.5, 1)]),
         new(Track, Scorch, 1, 1.5, [(94, 54, 2), (91, 64, 2), (93, 76, 2), (96, 88, 2), (96, 94, 2)]),
         new(Track, Scorch, 1.5, 1.5, [(113.5, 57.5, 2), (122, 58, 2), (140, 62, 2), (160, 58, 2)]),
+        new(Track, Thin, 0.5, 0, [(31, 80, 3), (31, 86, 3), (31, 92, 3)]),
     ];
 
     /// <summary>The goat path from the far road up the terraces to the camp, and the track to Maud's.</summary>
@@ -116,6 +117,101 @@ public static class AshenFordDraft
         ("Ten Rods", 34, 97, 14, 12, Ploughed),
     ];
 
+    /// <summary>A building of the town kit, with its footprint's back corner at (<paramref name="X"/>, <paramref name="Y"/>). Every door in the kit faces +y, so a row stands on the north side of its street.</summary>
+    private sealed record Building(string Id, string Variant, int X, int Y);
+
+    /// <summary>Emberwick, by what it's for. Warm stone walls and towers come after, from <see cref="TownTowers"/> and <see cref="TownGates"/>.</summary>
+    private static readonly Building[] Emberwick =
+    [
+        // The square's north side, every door on it.
+        new("tavern", "red", 24, 53),               // The Last Coal
+        new("chapel", "warm", 29, 52),              // the Church of the Hearth
+        new("store", "green", 33, 53),              // the general store
+        new("smithy", "oak", 36, 53),               // Tobin's
+
+        // The market, across the south of the square, with the road to the south gate running through it.
+        new("stall", "red", 25, 65), new("stall", "yellow", 26, 65), new("stall", "blue", 28, 65),
+        new("stall", "green", 34, 65), new("stall", "purple", 35, 65),
+        new("clutter_produce", "mixed", 27, 65), new("clutter_produce", "mixed", 36, 65),
+        new("notice_board_u", "oak", 37, 57),
+
+        // Clutter by the doors.
+        new("clutter_barrels", "oak", 23, 54), new("clutter_crates", "oak", 32, 54), new("clutter_barrels", "oak", 35, 54),
+
+        // Chapel Row, west and east of the square.
+        new("house", "green", 15, 53), new("cottage", "thatch_green", 18, 53), new("house", "red", 21, 53),
+        new("cottage", "slate_blue", 40, 53), new("house", "blue", 43, 53),
+
+        // Mill Lane, and the High Street to the east gate.
+        new("cottage", "shakes_oak", 15, 59), new("house", "blue", 18, 59), new("cottage", "thatch_red", 21, 59),
+        new("house", "green", 40, 59), new("cottage", "shakes_oak", 43, 59),
+
+        // Tanners' Row and Granary Row.
+        new("cottage", "slate_blue", 15, 65), new("cottage", "thatch_green", 18, 65), new("house", "red", 21, 65),
+        new("house", "blue", 40, 65), new("cottage", "thatch_red", 43, 65),
+
+        // Back Lane, under the north wall.
+        new("cottage", "thatch_red", 18, 46), new("house", "green", 24, 46), new("cottage", "shakes_oak", 35, 46), new("cottage", "slate_blue", 41, 46),
+
+        // South Lane, low, so they don't hide the square.
+        new("cottage", "thatch_green", 16, 72), new("cottage", "shakes_oak", 20, 72), new("cottage", "slate_blue", 25, 72), new("cottage", "thatch_red", 34, 72),
+
+        // The granaries. The kit has no barn, so they're two big plank-roofed sheds in a fenced yard.
+        new("cottage", "shakes_oak", 40, 72), new("cottage", "shakes_oak", 43, 72),
+        new("clutter_crates", "oak", 42, 73), new("clutter_barrels", "oak", 45, 73),
+
+        // Clutter down the lanes.
+        new("clutter_barrels", "oak", 17, 60), new("clutter_crates", "oak", 42, 60), new("clutter_produce", "mixed", 20, 66),
+        new("clutter_crates", "oak", 45, 54), new("clutter_barrels", "oak", 23, 66),
+    ];
+
+    /// <summary>The wall's towers, at its corners, in the middle of its runs and either side of each gate.</summary>
+    private static readonly (int X, int Y)[] TownTowers =
+    [
+        (TownLeft, TownTop), (30, TownTop), (TownRight, TownTop),
+        (TownLeft, 61), (TownRight, 60), (TownRight, 64),
+        (TownLeft, TownBottom), (29, TownBottom), (33, TownBottom), (TownRight, TownBottom),
+    ];
+
+    /// <summary>The gates: the road east, and the lane to the south fields.</summary>
+    private static readonly Building[] TownGates = [new("gate_v", "warm", TownRight, 61), new("gate_u", "warm", 30, TownBottom)];
+
+    /// <summary>The wall, in warm stone, round the town from tower to tower, leaving out the gates.</summary>
+    private static IEnumerable<Building> TownWall()
+    {
+        var taken = TownTowers.ToHashSet();
+        var gates = TownGates.SelectMany(g => g.Id == "gate_v" ? Enumerable.Range(0, 3).Select(i => (g.X, g.Y + i)) : Enumerable.Range(0, 3).Select(i => (g.X + i, g.Y))).ToHashSet();
+        foreach (var (x, y) in TownTowers)
+            yield return new Building("wall_tower", "warm", x, y);
+        foreach (var gate in TownGates)
+            yield return gate;
+        for (var x = TownLeft + 1; x < TownRight; x++)
+            foreach (var y in new[] { TownTop, TownBottom })
+                if (!taken.Contains((x, y)) && !gates.Contains((x, y)))
+                    yield return new Building("wall_u", "warm", x, y);
+        for (var y = TownTop + 1; y < TownBottom; y++)
+            foreach (var x in new[] { TownLeft, TownRight })
+                if (!taken.Contains((x, y)) && !gates.Contains((x, y)))
+                    yield return new Building("wall_v", "warm", x, y);
+    }
+
+    /// <summary>What stands in Emberwick that isn't a building.</summary>
+    private static readonly Stand[] InEmberwick =
+    [
+        new("well", "stone", (31, 60)),
+        new("lamp_post", "iron", (25, 57), (37, 59), (25, 63), (37, 63), (28, 61), (34, 61)),       // the square
+        new("lamp_post", "iron", (17, 54), (20, 54), (39, 54), (42, 54)),                           // Chapel Row
+        new("lamp_post", "iron", (20, 60), (45, 60), (39, 60), (20, 66), (45, 66), (39, 66)),       // Mill Lane, the High Street, the rows
+        new("lamp_post", "iron", (22, 47), (33, 47), (40, 47)),                                     // Back Lane
+        new("lamp_post", "iron", (23, 73), (29, 73), (33, 73), (39, 73)),                           // South Lane
+        new("torch", "fire", (46, 60), (46, 64), (29, 78), (33, 78)),                               // inside the gates
+        new("sack", "burlap", (39, 72), (42, 71), (43, 71), (44, 70), (39, 70)),                    // the granary yard
+        new("crate", "oak", (41, 71)),
+        new("cart", "hay", (45, 70)),
+        new("fence_picket", "oak", (38, 69), (39, 69), (40, 69), (43, 69), (44, 69), (45, 69), (46, 69)),
+        new("tree", "autumn", (46, 57), (16, 57), (19, 70), (36, 51), (20, 51), (16, 50)),
+    ];
+
     /// <summary>What stands, of one kind, on these tiles.</summary>
     private sealed record Stand(string Id, string? Variant, params (int X, int Y)[] At);
 
@@ -128,7 +224,7 @@ public static class AshenFordDraft
     ];
 
     /// <summary>All of it, place by place.</summary>
-    private static readonly Stand[] Everything = [.. RoadEast];
+    private static readonly Stand[] Everything = [.. InEmberwick, .. RoadEast];
 
     /// <summary>The party starts on the square, in front of the inn.</summary>
     private static readonly Tile StartSpawn = new(26, 58);
@@ -181,6 +277,7 @@ public static class AshenFordDraft
         land.CopyTo(source);
         source.Stamp(crossing, StampAt, WaterLevel);
         source.Beats.AddRange(Spots.Select(s => new BeatSpot(s.Beat, new Tile(s.X, s.Y))));
+        source.Buildings.AddRange(Emberwick.Concat(TownWall()).Select(b => new RegionBuilding(b.Id, b.Variant, new Tile(b.X, b.Y))));
         return source;
     }
 

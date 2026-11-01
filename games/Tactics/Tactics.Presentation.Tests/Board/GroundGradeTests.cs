@@ -12,6 +12,16 @@ public sealed class GroundGradeTests
         .Select(x => BoardPlan.DecalFor(new Tile(x, y), material, Pack.Art)?.Path)).OfType<string>();
 
     [Fact]
+    public void Chimneys_dont_all_puff_in_step()
+    {
+        var phases = Enumerable.Range(0, 8).Select(x => BuildingPlan.SmokePhase(new Tile(x * 3, 40))).Distinct().Count();
+        Assert.True(phases > 1);
+        var (still, ahead) = (new ArtImage("smoke.png", 8, 8), new ArtImage("smoke.png", 8, 8, Phase: 4));
+        Assert.NotEqual(still.Key, ahead.Key);
+        Assert.Equal((still.FrameAt(0.5) + 4) % 8, ahead.FrameAt(0.5));
+    }
+
+    [Fact]
     public void A_place_with_no_grade_has_its_art_as_drawn() => Assert.Equal(new Rgb(1, 1, 1), GroundGrade.Of("mirewood", "grass/autumn"));
 
     [Fact]

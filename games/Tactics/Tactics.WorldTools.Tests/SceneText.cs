@@ -22,6 +22,7 @@ internal static partial class SceneText
         ["BeatMarker"] = "Beats",
         ["StampMarker"] = "Stamps",
         ["SpawnMarker"] = "Spawns",
+        ["BuildingMarker"] = "Buildings",
     };
 
     private sealed record Node(string Name, string? Parent, Dictionary<string, string> Values)
@@ -82,6 +83,7 @@ internal static partial class SceneText
             Flags = Cells(nodes, "Flags").ToDictionary(c => c.At, c => PaletteBuilder.FlagsAt(c.AtlasX, c.AtlasY)),
             Props = Cells(nodes, "Props").ToDictionary(c => c.At, c => PaletteBuilder.PropAt(c.AtlasX, c.AtlasY)),
             Beats = [.. Markers(nodes, "BeatMarker").Select(n => new BeatSpot(Text(n["Beat"]), n.Tile))],
+            Buildings = [.. Markers(nodes, "BuildingMarker").Select(n => new RegionBuilding(Text(n["Building"]), Text(n["Variant"]), n.Tile))],
             Stamps = [.. stamps.Select(n => new RegionStamp(Text(n["Map"]), n.Tile, int.Parse(n["HeightOffset"] ?? "0", CultureInfo.InvariantCulture)))],
             Starts = [.. spawns.Where(n => (n["Kind"] ?? "0") == "0").Select(n => n.Tile)],
             Recoveries = [.. spawns.Where(n => n["Kind"] == "1").Select(n => n.Tile)],

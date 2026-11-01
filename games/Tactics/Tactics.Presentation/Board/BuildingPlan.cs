@@ -147,7 +147,8 @@ public static class BuildingPlan
         // Smoke rises from the roof, so it goes after all of the building. A sign hangs on one side, and only has to go after the columns behind it.
         foreach (var chimney in art.Smoke)
             if (art.SmokeArt is { } smoke && Mine(World((art.Width - 1, art.Depth - 1))))
-                items.Add(new Sprite(BoardOrder.Key(World((art.Width - 1, art.Depth - 1)), BoardLayer.Over), World((art.Width - 1, art.Depth - 1)), smoke.Image, frame + chimney - smoke.Anchor, smoke.Size, Part: part));
+                items.Add(new Sprite(BoardOrder.Key(World((art.Width - 1, art.Depth - 1)), BoardLayer.Over), World((art.Width - 1, art.Depth - 1)),
+                    smoke.Image with { Phase = SmokePhase(placed.At) }, frame + chimney - smoke.Anchor, smoke.Size, Part: part));
         foreach (var root in art.Signs)
         {
             if (art.SignArt is not { } sign)
@@ -161,6 +162,9 @@ public static class BuildingPlan
     }
 
     private static int Column(BuildingArt art, float x) => (int)MathF.Floor((x - art.Origin.X) / ColumnWidth);
+
+    /// <summary>A town's chimneys don't all puff in step. Four phases of the strip are plenty, and each costs a texture.</summary>
+    public static int SmokePhase(Tile at) => (at.X * 3 + at.Y * 5) % 4 * 2;
 
     /// <summary>The first and last rows with a pixel in the pixel columns from <paramref name="from"/> up to <paramref name="to"/>, or -1 if they're empty.</summary>
     private static (int Top, int Bottom) Span(BuildingShape shape, int from, int to)

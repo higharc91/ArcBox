@@ -73,12 +73,12 @@
     {
       "x": 0,
       "y": 2,
-      "tiles": "Bw0EBw0EBg0EBg0EBg0EBQ0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwEAAwEAAwEAAwEAAwEAAwEAAwEAAwEABw0EBg0EBg0EBg0EBQ0EBQ0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwEAAwEAAwEAAwEAAwEAAwEAAwEAAwEABg0EBg0EBg0EBg0EBQ0EBQ0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwEAAwEAAwEAAwEAAwEAAwEAAwEAAwEABw0EBw0EBw0EBg0EBQ0EBQ0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcABw0EBw0EBw0EBg0EBQ0EBQ0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIABw0EBw0EBw0EBg0EBQ0EBQ0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIABw0EBw0EBw0EBw0EBQ0EBQ0EBQ0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIABw0EBw0EBw0EBg0EBQ0EBQ0EBQ0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIABw0EBw0EBw0EBg0EBQ0EBQ0EBg0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIACA0EBw0EBw0EBg0EBQ0EBQ0EBg0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIACA0EBw0EBw0EBg0EBQ0EBQ0EBg0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIACA0EBw0EBw0EBg0EBg0EBg0EBg0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIACA0EBw0EBw0EBg0EBg0EBg0EBg0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIABw0ECA0EBw0EBg0EBg0EBg0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIACA0ECA0EBw0EBg0EBg0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIACQ0ECA0EBw0EBg0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIACQ0ECA0EBw0EBg0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcACQ0ECA0EBw0EBg0EBQ0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcACQ0ECA0EBw0EBw0EBg0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAgcAAgcACQ0ECQ0ECA0EBw0EBg0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAgcAAgcACQ0ECQ0ECA0EBw0EBw0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAgcAAgcACQ0ECQ0ECA0ECA0EBw0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAgcAAgcACQ0ECQ0ECA0ECA0EBw0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAgcAAgcACQ0ECQ0ECA0ECA0ECA0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAgcAAgcACQ0ECQ0ECA0EBw0EBw0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAgcAAgcACQ0ECQ0ECA0EBw0EBg0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAgcAAgcACQ0ECA0EBw0EBw0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcABA0EBQ0ECQ0ECA0EBw0EBg0EBg0EAgcABg0EBg0EBg0EBQ0EBQ0EBQ0EAgcAAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYABA0EBg0EBg0ECQ0ECA0EBw0EBg0EBg0EBg0EBg0EBg0EBg0EBw0EBQ0EBQ0EBQ0EAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYABg0EBg0EBw0ECQ0ECA0EBw0EBg0EBQ0EBQ0EBg0EBw0EBw0EBw0EBw0EBg0EBg0EBQ0EBQ0EBQ0EAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYABw0EBw0EBw0ECQ0ECA0EBw0EBw0EBg0EBg0EBw0EBw0EBw0EBw0EBw0EBw0EBw0EBg0EBQ0EBQ0EBg0EBg0EBg0EBg0EBg0EBw0EBw0EBw0EBw0EBw0EBw0EBw0EBw0EBw0ECA0ECA0ECA0ECA0EBw0EBw0EBg0EBg0EBw0EBw0EBw0EBw0EBw0EBw0EBw0EBw0EBw0EBw0EBg0EBw0EBw0EBw0ECA0ECA0ECA0ECA0ECA0EBw0EBw0EBw0EBw0ECA0ECA0ECA0E"
+      "tiles": "Bw0EBw0EBg0EBg0EBg0EBQ0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwEAAwEAAwEAAwEAAwEAAwEAAwEAAwEABw0EBg0EBg0EBg0EBQ0EBQ0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwEAAwEAAwEAAwEAAwEAAwEAAwEAAwEABg0EBg0EBg0EBg0EBQ0EBQ0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwEAAwEAAwEAAwEAAwEAAwEAAwEAAwEABw0EBw0EBw0EBg0EBQ0EBQ0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcABw0EBw0EBw0EBg0EBQ0EBQ0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIABw0EBw0EBw0EBg0EBQ0EBQ0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIABw0EBw0EBw0EBw0EBQ0EBQ0EBQ0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIABw0EBw0EBw0EBg0EBQ0EBQ0EBQ0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIABw0EBw0EBw0EBg0EBQ0EBQ0EBg0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIACA0EBw0EBw0EBg0EBQ0EBQ0EBg0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIACA0EBw0EBw0EBg0EBQ0EBQ0EBg0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIACA0EBw0EBw0EBg0EBg0EBg0EBg0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIACA0EBw0EBw0EBg0EBg0EBg0EBg0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIABw0ECA0EBw0EBg0EBg0EBg0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIACA0ECA0EBw0EBg0EBg0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIACQ0ECA0EBw0EBg0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIACQ0ECA0EBw0EBg0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwoACQ0ECA0EBw0EBg0EBQ0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwcAAwcAAwoACQ0ECA0EBw0EBw0EBg0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwcAAwcAAwoACQ0ECQ0ECA0EBw0EBg0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwcAAwcAAwoACQ0ECQ0ECA0EBw0EBw0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwcAAwcAAwoACQ0ECQ0ECA0ECA0EBw0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwcAAwcAAwoACQ0ECQ0ECA0ECA0EBw0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwcAAwcAAwoACQ0ECQ0ECA0ECA0ECA0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwcAAwcAAwoACQ0ECQ0ECA0EBw0EBw0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwcAAwcAAwoACQ0ECQ0ECA0EBw0EBg0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwcAAwcAAwoACQ0ECA0EBw0EBw0EBg0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwcABA0EAwoACQ0ECA0EBw0EBg0EBg0EAgcABg0EBg0EBg0EBQ0EBQ0EBQ0EAgcAAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYABA0EBg0EAwoACQ0ECA0EBw0EBg0EBg0EBg0EBg0EBg0EBg0EBw0EBQ0EBQ0EBQ0EAgcAAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYABg0EBg0EAwoACQ0ECA0EBw0EBg0EBQ0EBQ0EBg0EBw0EBw0EBw0EBw0EBg0EBg0EBQ0EBQ0EBQ0EAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYABw0EBw0EBw0ECQ0ECA0EBw0EBw0EBg0EBg0EBw0EBw0EBw0EBw0EBw0EBw0EBw0EBg0EBQ0EBQ0EBg0EBg0EBg0EBg0EBg0EBw0EBw0EBw0EBw0EBw0EBw0EBw0EBw0EBw0ECA0ECA0ECA0ECA0EBw0EBw0EBg0EBg0EBw0EBw0EBw0EBw0EBw0EBw0EBw0EBw0EBw0EBw0EBg0EBw0EBw0EBw0ECA0ECA0ECA0ECA0ECA0EBw0EBw0EBw0EBw0ECA0ECA0ECA0E"
     },
     {
       "x": 1,
       "y": 2,
-      "tiles": "AwEAAwEAAwEAAwEAAwEAAwEAAwEAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwQAAwQAAwQAAwcAAwcAAwcABQ4ABg4EBg4EBg4EBw4EBw4EBw4EBw4EBw4EAw4AAwEAAwEAAwEAAwEAAwEAAwEAAwEAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwQAAwcAAwcAAwcAAwcABAcABQ4ABg4EBg4EBg4EBw4EBw4EBw4EBw4EBw4EAw4AAwEAAwEAAwEAAwEAAwEAAwEAAwEAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABg4ABg4EBg4EBg4EBw4EBw4EBw4EBw4EBw4EAw4AAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwcAAwcAAwcAAwcAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBA4AAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwcAAwcAAwcAAwcAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBg4EBg4EBg4EBw4EBg4AAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBg4EBg4EBg4EBw4EBg4AAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBg4AAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBg4AAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBg4AAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4ECA4EBg4AAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwcAAwcAAwcAAwcAAwcAAwcABAcABA4ABg4ABw4EBw4EBw4EBw4EBw4ECA4ECA4EBg4AAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwcAAwcAAwcAAwcAAwcAAwcAAgcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBg4AAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBg4AAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBg4AAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBg4AAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBg4AAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBQ4AAgcAAgcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBQ4AAgcAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBQ4AAgcAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBQ4AAgcAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAQcAAwcAAw4ABQ4ABw4EBw4EBw4EBw4EBw4EBw4ECA4EBQ4AAgcAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAQcAAwcAAw4ABQ4ABw4EBw4EBw4EBw4EBw4EBw4ECA4EBQ4AAgcAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAQcAAwcAAw4ABQ4ABw4EBw4EBw4EBw4EBw4ECA4EBQ4AAw4AAgcAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAQcAAwcAAw4ABQ4ABw4EBw4EBw4EBw4EBw4ECA4EBQ4AAw4AAgcAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAQcAAwcAAw4ABQ4ABw4EBw4EBw4EBw4EBw4ECA4EBQ4AAw4AAgcAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAQcAAwcAAw4ABQ4ABw4EBw4EBw4EBw4ECA4ECA4EBQ4AAw4ABQ0EAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAQcAAwcAAw4ABQ4ABw4EBw4EBw4EBw4ECA4ECA4EBQ4AAw4ABg0EAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAQcAAwcAAw4ABQ4ABg4EBg4EBw4EBw4EBw4ECA4ECA4EBQ4AAw4ABw0EAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAQcAAwcAAw4ABQ4ABg4EBw4EBw4EBw4EBw4ECA4ECA4ECA4EAw4ABw0EAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAQcAAwcAAw4ABQ4ABw4EBw4EBw4EBw4EBw4EBw4ECA4EBQ4AAw4ACA0ECA0EBw0EBw0EBg0EBg0EBQ0EBQ0EAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAQcAAwcAAw4ABQ4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBQ4AAw4ACA0ECA0ECA0EBw0EBw0EBg0EBg0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAQcAAwcAAw4ABQ4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBQ4AAw4A"
+      "tiles": "AwEAAwEAAwEAAwEAAwEAAwEAAwEAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwQAAwQAAwQAAwcAAwcAAwcABQ4ABg4EBg4EBg4EBw4EBw4EBw4EBw4EBw4EAw4AAwEAAwEAAwEAAwEAAwEAAwEAAwEAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwQAAwcAAwcAAwcAAwcABAcABQ4ABg4EBg4EBg4EBw4EBw4EBw4EBw4EBw4EAw4AAwEAAwEAAwEAAwEAAwEAAwEAAwEAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABg4ABg4EBg4EBg4EBw4EBw4EBw4EBw4EBw4EAw4AAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwcAAwcAAwcAAwcAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBA4AAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwcAAwcAAwcAAwcAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBg4EBg4EBg4EBw4EBg4AAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBg4EBg4EBg4EBw4EBg4AAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBg4AAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBg4AAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBg4AAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4ECA4EBg4AAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwcAAwcAAwcAAwcAAwcAAwcABAcABA4ABg4ABw4EBw4EBw4EBw4EBw4ECA4ECA4EBg4AAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwIAAwcAAwcAAwcAAwcAAwcAAwcAAgcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBg4AAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBg4AAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBg4AAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBg4AAwIAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBg4AAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBQ4AAwcAAwcAAgcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBQ4AAwcAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBQ4AAwcAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwcAAgcABAcABA4ABg4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBQ4AAwcAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAQcAAwcAAw4ABQ4ABw4EBw4EBw4EBw4EBw4EBw4ECA4EBQ4AAwcAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAQcAAwcAAw4ABQ4ABw4EBw4EBw4EBw4EBw4EBw4ECA4EBQ4AAwcAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAQcAAwcAAw4ABQ4ABw4EBw4EBw4EBw4EBw4ECA4EBQ4AAw4AAwcAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAQcAAwcAAw4ABQ4ABw4EBw4EBw4EBw4EBw4ECA4EBQ4AAw4AAwcAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAQcAAwcAAw4ABQ4ABw4EBw4EBw4EBw4EBw4ECA4EBQ4AAw4AAwcAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAQcAAwcAAw4ABQ4ABw4EBw4EBw4EBw4ECA4ECA4EBQ4AAw4ABQ0EAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAgcAAQcAAwcAAw4ABQ4ABw4EBw4EBw4EBw4ECA4ECA4EBQ4AAw4ABg0EAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAQcAAwcAAw4ABQ4ABg4EBg4EBw4EBw4EBw4ECA4ECA4EBQ4AAw4ABw0EAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAQcAAwcAAw4ABQ4ABg4EBw4EBw4EBw4EBw4ECA4ECA4ECA4EAw4ABw0EAwMAAwMAAwMAAwMAAwMAAwMAAwMAAwMAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAQcAAwcAAw4ABQ4ABw4EBw4EBw4EBw4EBw4EBw4ECA4EBQ4AAw4ACA0ECA0EBw0EBw0EBg0EBg0EBQ0EBQ0EAgcAAgcAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAwYAAQcAAwcAAw4ABQ4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBQ4AAw4ACA0ECA0ECA0EBw0EBw0EBg0EBg0EBQ0EAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAgcAAQcAAwcAAw4ABQ4ABw4EBw4EBw4EBw4EBw4EBw4EBw4EBQ4AAw4A"
     },
     {
       "x": 2,
@@ -197,6 +197,26 @@
   "edges": [],
   "props": [
     {
+      "id": "cart",
+      "variant": "hay",
+      "at": [
+        [
+          45,
+          70
+        ]
+      ]
+    },
+    {
+      "id": "crate",
+      "variant": "oak",
+      "at": [
+        [
+          41,
+          71
+        ]
+      ]
+    },
+    {
       "id": "dead_tree",
       "variant": "grey",
       "at": [
@@ -207,6 +227,138 @@
         [
           92,
           40
+        ]
+      ]
+    },
+    {
+      "id": "fence_picket",
+      "variant": "oak",
+      "at": [
+        [
+          38,
+          69
+        ],
+        [
+          39,
+          69
+        ],
+        [
+          40,
+          69
+        ],
+        [
+          43,
+          69
+        ],
+        [
+          44,
+          69
+        ],
+        [
+          45,
+          69
+        ],
+        [
+          46,
+          69
+        ]
+      ]
+    },
+    {
+      "id": "lamp_post",
+      "variant": "iron",
+      "at": [
+        [
+          17,
+          54
+        ],
+        [
+          20,
+          54
+        ],
+        [
+          20,
+          60
+        ],
+        [
+          20,
+          66
+        ],
+        [
+          22,
+          47
+        ],
+        [
+          23,
+          73
+        ],
+        [
+          25,
+          57
+        ],
+        [
+          25,
+          63
+        ],
+        [
+          28,
+          61
+        ],
+        [
+          29,
+          73
+        ],
+        [
+          33,
+          47
+        ],
+        [
+          33,
+          73
+        ],
+        [
+          34,
+          61
+        ],
+        [
+          37,
+          59
+        ],
+        [
+          37,
+          63
+        ],
+        [
+          39,
+          54
+        ],
+        [
+          39,
+          60
+        ],
+        [
+          39,
+          66
+        ],
+        [
+          39,
+          73
+        ],
+        [
+          40,
+          47
+        ],
+        [
+          42,
+          54
+        ],
+        [
+          45,
+          60
+        ],
+        [
+          45,
+          66
         ]
       ]
     },
@@ -265,9 +417,81 @@
       ]
     },
     {
+      "id": "sack",
+      "variant": "burlap",
+      "at": [
+        [
+          39,
+          70
+        ],
+        [
+          39,
+          72
+        ],
+        [
+          42,
+          71
+        ],
+        [
+          43,
+          71
+        ],
+        [
+          44,
+          70
+        ]
+      ]
+    },
+    {
+      "id": "torch",
+      "variant": "fire",
+      "at": [
+        [
+          29,
+          78
+        ],
+        [
+          33,
+          78
+        ],
+        [
+          46,
+          60
+        ],
+        [
+          46,
+          64
+        ]
+      ]
+    },
+    {
       "id": "tree",
       "variant": "autumn",
       "at": [
+        [
+          16,
+          50
+        ],
+        [
+          16,
+          57
+        ],
+        [
+          19,
+          70
+        ],
+        [
+          20,
+          51
+        ],
+        [
+          36,
+          51
+        ],
+        [
+          46,
+          57
+        ],
         [
           64,
           24
@@ -292,6 +516,1450 @@
           85,
           22
         ]
+      ]
+    },
+    {
+      "id": "well",
+      "variant": "stone",
+      "at": [
+        [
+          31,
+          60
+        ]
+      ]
+    }
+  ],
+  "buildings": [
+    {
+      "id": "wall_tower",
+      "variant": "warm",
+      "at": [
+        14,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        15,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        16,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        17,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        18,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        19,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        20,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        21,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        22,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        23,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        24,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        25,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        26,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        27,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        28,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        29,
+        44
+      ]
+    },
+    {
+      "id": "wall_tower",
+      "variant": "warm",
+      "at": [
+        30,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        31,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        32,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        33,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        34,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        35,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        36,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        37,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        38,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        39,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        40,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        41,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        42,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        43,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        44,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        45,
+        44
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        46,
+        44
+      ]
+    },
+    {
+      "id": "wall_tower",
+      "variant": "warm",
+      "at": [
+        47,
+        44
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        45
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        45
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        46
+      ]
+    },
+    {
+      "id": "cottage",
+      "variant": "thatch_red",
+      "at": [
+        18,
+        46
+      ]
+    },
+    {
+      "id": "house",
+      "variant": "green",
+      "at": [
+        24,
+        46
+      ]
+    },
+    {
+      "id": "cottage",
+      "variant": "shakes_oak",
+      "at": [
+        35,
+        46
+      ]
+    },
+    {
+      "id": "cottage",
+      "variant": "slate_blue",
+      "at": [
+        41,
+        46
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        46
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        47
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        47
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        48
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        48
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        49
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        49
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        50
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        50
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        51
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        51
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        52
+      ]
+    },
+    {
+      "id": "chapel",
+      "variant": "warm",
+      "at": [
+        29,
+        52
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        52
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        53
+      ]
+    },
+    {
+      "id": "house",
+      "variant": "green",
+      "at": [
+        15,
+        53
+      ]
+    },
+    {
+      "id": "cottage",
+      "variant": "thatch_green",
+      "at": [
+        18,
+        53
+      ]
+    },
+    {
+      "id": "house",
+      "variant": "red",
+      "at": [
+        21,
+        53
+      ]
+    },
+    {
+      "id": "tavern",
+      "variant": "red",
+      "at": [
+        24,
+        53
+      ]
+    },
+    {
+      "id": "store",
+      "variant": "green",
+      "at": [
+        33,
+        53
+      ]
+    },
+    {
+      "id": "smithy",
+      "variant": "oak",
+      "at": [
+        36,
+        53
+      ]
+    },
+    {
+      "id": "cottage",
+      "variant": "slate_blue",
+      "at": [
+        40,
+        53
+      ]
+    },
+    {
+      "id": "house",
+      "variant": "blue",
+      "at": [
+        43,
+        53
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        53
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        54
+      ]
+    },
+    {
+      "id": "clutter_barrels",
+      "variant": "oak",
+      "at": [
+        23,
+        54
+      ]
+    },
+    {
+      "id": "clutter_crates",
+      "variant": "oak",
+      "at": [
+        32,
+        54
+      ]
+    },
+    {
+      "id": "clutter_barrels",
+      "variant": "oak",
+      "at": [
+        35,
+        54
+      ]
+    },
+    {
+      "id": "clutter_crates",
+      "variant": "oak",
+      "at": [
+        45,
+        54
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        54
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        55
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        55
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        56
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        56
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        57
+      ]
+    },
+    {
+      "id": "notice_board_u",
+      "variant": "oak",
+      "at": [
+        37,
+        57
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        57
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        58
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        58
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        59
+      ]
+    },
+    {
+      "id": "cottage",
+      "variant": "shakes_oak",
+      "at": [
+        15,
+        59
+      ]
+    },
+    {
+      "id": "house",
+      "variant": "blue",
+      "at": [
+        18,
+        59
+      ]
+    },
+    {
+      "id": "cottage",
+      "variant": "thatch_red",
+      "at": [
+        21,
+        59
+      ]
+    },
+    {
+      "id": "house",
+      "variant": "green",
+      "at": [
+        40,
+        59
+      ]
+    },
+    {
+      "id": "cottage",
+      "variant": "shakes_oak",
+      "at": [
+        43,
+        59
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        59
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        60
+      ]
+    },
+    {
+      "id": "clutter_barrels",
+      "variant": "oak",
+      "at": [
+        17,
+        60
+      ]
+    },
+    {
+      "id": "clutter_crates",
+      "variant": "oak",
+      "at": [
+        42,
+        60
+      ]
+    },
+    {
+      "id": "wall_tower",
+      "variant": "warm",
+      "at": [
+        47,
+        60
+      ]
+    },
+    {
+      "id": "wall_tower",
+      "variant": "warm",
+      "at": [
+        14,
+        61
+      ]
+    },
+    {
+      "id": "gate_v",
+      "variant": "warm",
+      "at": [
+        47,
+        61
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        62
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        63
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        64
+      ]
+    },
+    {
+      "id": "wall_tower",
+      "variant": "warm",
+      "at": [
+        47,
+        64
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        65
+      ]
+    },
+    {
+      "id": "cottage",
+      "variant": "slate_blue",
+      "at": [
+        15,
+        65
+      ]
+    },
+    {
+      "id": "cottage",
+      "variant": "thatch_green",
+      "at": [
+        18,
+        65
+      ]
+    },
+    {
+      "id": "house",
+      "variant": "red",
+      "at": [
+        21,
+        65
+      ]
+    },
+    {
+      "id": "stall",
+      "variant": "red",
+      "at": [
+        25,
+        65
+      ]
+    },
+    {
+      "id": "stall",
+      "variant": "yellow",
+      "at": [
+        26,
+        65
+      ]
+    },
+    {
+      "id": "clutter_produce",
+      "variant": "mixed",
+      "at": [
+        27,
+        65
+      ]
+    },
+    {
+      "id": "stall",
+      "variant": "blue",
+      "at": [
+        28,
+        65
+      ]
+    },
+    {
+      "id": "stall",
+      "variant": "green",
+      "at": [
+        34,
+        65
+      ]
+    },
+    {
+      "id": "stall",
+      "variant": "purple",
+      "at": [
+        35,
+        65
+      ]
+    },
+    {
+      "id": "clutter_produce",
+      "variant": "mixed",
+      "at": [
+        36,
+        65
+      ]
+    },
+    {
+      "id": "house",
+      "variant": "blue",
+      "at": [
+        40,
+        65
+      ]
+    },
+    {
+      "id": "cottage",
+      "variant": "thatch_red",
+      "at": [
+        43,
+        65
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        65
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        66
+      ]
+    },
+    {
+      "id": "clutter_produce",
+      "variant": "mixed",
+      "at": [
+        20,
+        66
+      ]
+    },
+    {
+      "id": "clutter_barrels",
+      "variant": "oak",
+      "at": [
+        23,
+        66
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        66
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        67
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        67
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        68
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        68
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        69
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        69
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        70
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        70
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        71
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        71
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        72
+      ]
+    },
+    {
+      "id": "cottage",
+      "variant": "thatch_green",
+      "at": [
+        16,
+        72
+      ]
+    },
+    {
+      "id": "cottage",
+      "variant": "shakes_oak",
+      "at": [
+        20,
+        72
+      ]
+    },
+    {
+      "id": "cottage",
+      "variant": "slate_blue",
+      "at": [
+        25,
+        72
+      ]
+    },
+    {
+      "id": "cottage",
+      "variant": "thatch_red",
+      "at": [
+        34,
+        72
+      ]
+    },
+    {
+      "id": "cottage",
+      "variant": "shakes_oak",
+      "at": [
+        40,
+        72
+      ]
+    },
+    {
+      "id": "cottage",
+      "variant": "shakes_oak",
+      "at": [
+        43,
+        72
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        72
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        73
+      ]
+    },
+    {
+      "id": "clutter_crates",
+      "variant": "oak",
+      "at": [
+        42,
+        73
+      ]
+    },
+    {
+      "id": "clutter_barrels",
+      "variant": "oak",
+      "at": [
+        45,
+        73
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        73
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        74
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        74
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        75
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        75
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        76
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        76
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        77
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        77
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        14,
+        78
+      ]
+    },
+    {
+      "id": "wall_v",
+      "variant": "warm",
+      "at": [
+        47,
+        78
+      ]
+    },
+    {
+      "id": "wall_tower",
+      "variant": "warm",
+      "at": [
+        14,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        15,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        16,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        17,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        18,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        19,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        20,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        21,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        22,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        23,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        24,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        25,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        26,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        27,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        28,
+        79
+      ]
+    },
+    {
+      "id": "wall_tower",
+      "variant": "warm",
+      "at": [
+        29,
+        79
+      ]
+    },
+    {
+      "id": "gate_u",
+      "variant": "warm",
+      "at": [
+        30,
+        79
+      ]
+    },
+    {
+      "id": "wall_tower",
+      "variant": "warm",
+      "at": [
+        33,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        34,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        35,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        36,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        37,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        38,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        39,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        40,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        41,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        42,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        43,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        44,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        45,
+        79
+      ]
+    },
+    {
+      "id": "wall_u",
+      "variant": "warm",
+      "at": [
+        46,
+        79
+      ]
+    },
+    {
+      "id": "wall_tower",
+      "variant": "warm",
+      "at": [
+        47,
+        79
       ]
     }
   ]

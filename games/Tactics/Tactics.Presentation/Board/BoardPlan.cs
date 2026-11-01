@@ -343,7 +343,7 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
             "dirt" or "path" or "sand" => [.. Pebbles, .. FallenLeaves],
             "swamp" => [PuddleSwamp, CracksDark, .. Leaves],
             "mud" => [PuddleSwamp, .. Pebbles],
-            "rock" or "basalt" => [.. Pebbles, CracksDark],
+            "rock" or "basalt" => [.. Pebbles],
             "ash" or "scorch" => [ScorchBurnt, ScorchBurnt, CracksDark, .. Pebbles],
             "bone" or "crypt_tile" or "crypt_tiles" or "ruin" or "dungeon_floor" or "dungeon_floor_mossy" or "dungeon_floor_cracked" or "dungeon_wall"
                 => [ScorchBurnt, CracksDark, BonesBone, BloodRed, .. Pebbles],

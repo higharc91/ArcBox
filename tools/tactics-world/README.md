@@ -82,6 +82,7 @@ gets dragged, Ctrl+Z, or the export tells you to set its Position back to zero.
 | `Beats` | `BeatMarker`, where a story beat happens | `Beat`, an id from `lore/arcs.json` for the region's chapter |
 | `Stamps` | `StampMarker`, a battle map placed at its corner | `Map`, `HeightOffset` |
 | `Spawns` | `SpawnMarker`, one of each | `Kind`: `Start` or `Recovery` (where a beaten party wakes) |
+| `Buildings` | `BuildingMarker`, a piece of the town kit, on its footprint's back corner | `Building`, an id from `town/manifest.json`, and `Variant`. It draws its corner and its name, not its footprint, for now |
 
 **To move one,** select it in the Scene dock and drag it. It snaps to tiles and outlines the tile it's on. A stamp is different: see below.
 

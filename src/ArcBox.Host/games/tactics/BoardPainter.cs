@@ -160,7 +160,7 @@ internal sealed class BoardPainter
         }
         if (Moves(image))
         {
-            return Frames!.Of(image.Path) ?? ((flat ? Turned(image) : Pixels(image.Path)) is { } strip ? Strip(image.Path, image, strip) : Load(image.Path));
+            return Frames!.Of(image.Key) ?? ((flat ? Turned(image) : Pixels(image.Path)) is { } strip ? Strip(image.Key, image, strip) : Load(image.Path));
         }
         return flat ? LoadTop(image) : Load(image.Path);
     }
