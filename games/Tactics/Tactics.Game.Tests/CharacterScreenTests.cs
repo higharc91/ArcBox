@@ -77,6 +77,16 @@ public sealed class CharacterScreenTests
         Assert.True(PlayerColors.WorstContrast(hex.ToLowerInvariant()) < PlayerColors.MinContrast);
     }
 
+    /// <summary>The phone lightens a colour as it's picked (colors.ts); these are the answers its test pins too.</summary>
+    [Theory]
+    [InlineData("#1b2a6b", "#aeb9ea")]
+    [InlineData("#2e7d32", "#79ce7d")]
+    [InlineData("#C0392B", "#ebaea7")]
+    [InlineData("#000000", "#bababa")]
+    [InlineData("#ff00ff", "#ff94ff")]
+    [InlineData("#123456", "#96bfe9")]
+    public void The_phone_and_the_server_lighten_alike(string hex, string made) => Assert.Equal(made, PlayerColors.Readable(hex));
+
     [Fact]
     public void A_lightened_colour_keeps_its_hue()
     {
@@ -339,7 +349,7 @@ public sealed class CharacterScreenTests
     /// level after the character's. The largest is creation in a level-9 party, where every class sends all ten levels.
     /// </summary>
     [Theory]
-    [InlineData(1, 60_000)]
+    [InlineData(1, 64_000)]
     [InlineData(4, 110_000)]
     [InlineData(9, 200_000)]
     public void The_portal_views_stay_small(int level, int most)
@@ -368,6 +378,7 @@ public sealed class CharacterScreenTests
         }
         Assert.Equal(picks.Order(), placed.Order());
         Assert.Contains("insight", me["skills"]!.AsArray().Select(s => s!.GetValue<string>()));
+        Assert.Equal(SkillCheck.Bonus(CharacterRules.LevelUp(cleric.Character, 4, Rules), "insight", Rules), me["bonuses"]!["insight"]!.GetValue<int>());
         Assert.Equal(["wis", "cha"], me["saves"]!.AsArray().Select(s => s!.GetValue<string>()));
     }
 

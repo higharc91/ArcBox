@@ -35,8 +35,8 @@ public sealed record BackgroundGuide(string Name, ImmutableArray<string> Facts, 
 /// <summary>An ability or passive: its name, what it costs or limits (<paramref name="Tags"/>) and what it does.</summary>
 public sealed record FeatureGuide(string Name, ImmutableArray<string> Tags, string Text);
 
-/// <summary>A skill: its name and the ability score it uses.</summary>
-public sealed record SkillGuide(string Name, Stat Stat);
+/// <summary>A skill: its name, the ability score it uses and how it's rolled.</summary>
+public sealed record SkillGuide(string Name, Stat Stat, string Text);
 
 /// <summary>An ability score: its name and what it drives in play, a line each.</summary>
 public sealed record StatGuide(string Name, ImmutableArray<string> Drives);
@@ -76,7 +76,7 @@ public static class CharacterGuide
         var backgroundGuides = backgrounds.ToImmutableSortedDictionary(b => b.Id, Background, StringComparer.Ordinal);
         var features = featureIds.Select(id => (id, Feature(id, level, rules))).Where(f => f.Item2 is not null)
             .ToImmutableSortedDictionary(f => f.id, f => f.Item2!, StringComparer.Ordinal);
-        var skills = SkillCheck.Skills.ToImmutableSortedDictionary(s => s.Key, s => new SkillGuide(SkillName(s.Key), s.Value), StringComparer.Ordinal);
+        var skills = SkillCheck.Skills.ToImmutableSortedDictionary(s => s.Key, s => Skill(s.Key, s.Value, level), StringComparer.Ordinal);
         var stats = Enum.GetValues<Stat>().ToImmutableSortedDictionary(s => s, s => StatFor(s, rules));
         return new PortalDetails(level, raceGuides, classGuides, backgroundGuides, features, skills, stats);
     }
@@ -241,6 +241,11 @@ public static class CharacterGuide
             tags.Add("Free");
         return [.. tags];
     }
+
+    /// <summary>A skill, and how a story check rolls it (<see cref="SkillCheck"/>): a d20, the stat's modifier and proficiency if you have it.</summary>
+    public static SkillGuide Skill(string id, Stat stat, int level)
+        => new(SkillName(id), stat,
+            $"Story checks: d20 + {Short(stat)} modifier, + {Stats.Proficiency(level)} if proficient, against the DC.");
 
     // ---- Ability scores -------------------------------------------------------------------------------------------
 

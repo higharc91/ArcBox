@@ -132,6 +132,8 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
             color = PlayerColors.Of(record, joinIndex),
             skills = sheet?.Skills.ToImmutableArray() ?? [],
             saves = sheet?.SaveProficiencies ?? [],
+            // Each skill's bonus in a story check, as SkillCheck rolls it.
+            bonuses = sheet is null ? null : SkillCheck.Skills.Keys.ToImmutableSortedDictionary(s => s, s => SkillCheck.Bonus(sheet, s), StringComparer.Ordinal),
         };
     }
 

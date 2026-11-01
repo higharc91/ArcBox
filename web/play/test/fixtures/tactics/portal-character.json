@@ -385,7 +385,27 @@
     "saves": [
       "wis",
       "cha"
-    ]
+    ],
+    "bonuses": {
+      "acrobatics": -1,
+      "animal_handling": 3,
+      "arcana": -1,
+      "athletics": -1,
+      "deception": 3,
+      "history": 1,
+      "insight": 5,
+      "intimidation": 3,
+      "investigation": -1,
+      "medicine": 5,
+      "nature": -1,
+      "perception": 3,
+      "performance": 3,
+      "persuasion": 3,
+      "religion": 1,
+      "sleight_of_hand": -1,
+      "stealth": -1,
+      "survival": 3
+    }
   },
   "options": {
     "races": [
@@ -5353,75 +5373,93 @@
     "skills": {
       "acrobatics": {
         "name": "Acrobatics",
-        "stat": "dex"
+        "stat": "dex",
+        "text": "Story checks: d20 \u002B DEX modifier, \u002B 2 if proficient, against the DC."
       },
       "animal_handling": {
         "name": "Animal Handling",
-        "stat": "wis"
+        "stat": "wis",
+        "text": "Story checks: d20 \u002B WIS modifier, \u002B 2 if proficient, against the DC."
       },
       "arcana": {
         "name": "Arcana",
-        "stat": "int"
+        "stat": "int",
+        "text": "Story checks: d20 \u002B INT modifier, \u002B 2 if proficient, against the DC."
       },
       "athletics": {
         "name": "Athletics",
-        "stat": "str"
+        "stat": "str",
+        "text": "Story checks: d20 \u002B STR modifier, \u002B 2 if proficient, against the DC."
       },
       "deception": {
         "name": "Deception",
-        "stat": "cha"
+        "stat": "cha",
+        "text": "Story checks: d20 \u002B CHA modifier, \u002B 2 if proficient, against the DC."
       },
       "history": {
         "name": "History",
-        "stat": "int"
+        "stat": "int",
+        "text": "Story checks: d20 \u002B INT modifier, \u002B 2 if proficient, against the DC."
       },
       "insight": {
         "name": "Insight",
-        "stat": "wis"
+        "stat": "wis",
+        "text": "Story checks: d20 \u002B WIS modifier, \u002B 2 if proficient, against the DC."
       },
       "intimidation": {
         "name": "Intimidation",
-        "stat": "cha"
+        "stat": "cha",
+        "text": "Story checks: d20 \u002B CHA modifier, \u002B 2 if proficient, against the DC."
       },
       "investigation": {
         "name": "Investigation",
-        "stat": "int"
+        "stat": "int",
+        "text": "Story checks: d20 \u002B INT modifier, \u002B 2 if proficient, against the DC."
       },
       "medicine": {
         "name": "Medicine",
-        "stat": "wis"
+        "stat": "wis",
+        "text": "Story checks: d20 \u002B WIS modifier, \u002B 2 if proficient, against the DC."
       },
       "nature": {
         "name": "Nature",
-        "stat": "int"
+        "stat": "int",
+        "text": "Story checks: d20 \u002B INT modifier, \u002B 2 if proficient, against the DC."
       },
       "perception": {
         "name": "Perception",
-        "stat": "wis"
+        "stat": "wis",
+        "text": "Story checks: d20 \u002B WIS modifier, \u002B 2 if proficient, against the DC."
       },
       "performance": {
         "name": "Performance",
-        "stat": "cha"
+        "stat": "cha",
+        "text": "Story checks: d20 \u002B CHA modifier, \u002B 2 if proficient, against the DC."
       },
       "persuasion": {
         "name": "Persuasion",
-        "stat": "cha"
+        "stat": "cha",
+        "text": "Story checks: d20 \u002B CHA modifier, \u002B 2 if proficient, against the DC."
       },
       "religion": {
         "name": "Religion",
-        "stat": "int"
+        "stat": "int",
+        "text": "Story checks: d20 \u002B INT modifier, \u002B 2 if proficient, against the DC."
       },
       "sleight_of_hand": {
         "name": "Sleight of Hand",
-        "stat": "dex"
+        "stat": "dex",
+        "text": "Story checks: d20 \u002B DEX modifier, \u002B 2 if proficient, against the DC."
       },
       "stealth": {
         "name": "Stealth",
-        "stat": "dex"
+        "stat": "dex",
+        "text": "Story checks: d20 \u002B DEX modifier, \u002B 2 if proficient, against the DC."
       },
       "survival": {
         "name": "Survival",
-        "stat": "wis"
+        "stat": "wis",
+        "text": "Story checks: d20 \u002B WIS modifier, \u002B 2 if proficient, against the DC."
       }
     },
     "stats": {
