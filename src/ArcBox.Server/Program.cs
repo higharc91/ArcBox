@@ -1,4 +1,6 @@
+using System.IO.Compression;
 using System.Text.Json;
+using System.Threading.RateLimiting;
 using ArcBox.Sdk;
 using ArcBox.Server;
 using ArcBox.Server.Campaigns;
@@ -12,8 +14,8 @@ using ArcBox.Server.Rooms;
 using ArcBox.Server.Speech;
 using ArcBox.Server.Storage;
 using Counter.Logic;
-using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.RateLimiting;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Options;
 
@@ -73,8 +75,20 @@ builder.Services.AddRateLimiter(o =>
         }));
 });
 
+// The campaign portal's views run to tens of kilobytes of JSON (Wardenflame's character details), sent on every command's reply too.
+builder.Services.AddResponseCompression(o =>
+{
+    o.EnableForHttps = true;
+    o.Providers.Add<BrotliCompressionProvider>();
+    o.Providers.Add<GzipCompressionProvider>();
+    o.MimeTypes = ["application/json"];
+});
+builder.Services.Configure<BrotliCompressionProviderOptions>(o => o.Level = CompressionLevel.Fastest);
+builder.Services.Configure<GzipCompressionProviderOptions>(o => o.Level = CompressionLevel.Fastest);
+
 var app = builder.Build();
 
+app.UseWhen(c => c.Request.Path.StartsWithSegments("/api/campaigns"), b => b.UseResponseCompression());
 app.UsePhoneApp();
 app.UseRateLimiter();
 app.MapHub<ArcHub>("/hub", o => o.AllowStatefulReconnects = true);

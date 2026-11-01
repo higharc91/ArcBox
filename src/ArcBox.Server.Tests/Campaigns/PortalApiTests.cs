@@ -133,6 +133,25 @@ public class PortalApiTests
         Assert.Equal(other.Code, bea.GetProperty("campaigns")[0].GetProperty("code").GetString());
     }
 
+    /// <summary>A campaign's view is compressed for a phone that asks (Wardenflame's runs to tens of kilobytes); a plain request isn't.</summary>
+    [Theory]
+    [InlineData("br")]
+    [InlineData("gzip")]
+    public async Task A_campaign_is_compressed_when_asked(string encoding)
+    {
+        await using var t = await Table.CreateAsync();
+        var asked = new HttpRequestMessage(HttpMethod.Get, $"/api/campaigns/{t.Code}");
+        asked.Headers.TryAddWithoutValidation("Authorization", "Profile " + t.Ann.Key);
+        asked.Headers.TryAddWithoutValidation("Accept-Encoding", encoding);
+        var response = await t.Http.SendAsync(asked, Ct);
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Equal([encoding], response.Content.Headers.ContentEncoding);
+
+        var plain = await Get(t, $"/api/campaigns/{t.Code}", t.Ann.Key);
+        Assert.Empty(plain.Content.Headers.ContentEncoding);
+        Assert.Equal("Embers", (await Body(plain)).GetProperty("info").GetProperty("name").GetString());
+    }
+
     [Fact]
     public async Task Missing_or_unknown_key_401()
     {
