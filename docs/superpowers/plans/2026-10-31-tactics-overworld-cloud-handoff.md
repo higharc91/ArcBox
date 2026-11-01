@@ -138,7 +138,15 @@ Keep this list, add to it, and put it at the top of your final report. Don't sto
 6. **Environmental tiles:** the user wants tiles with effects that interact with spells, such as water and lightning. Hazards stay harmless until this is designed with them. Bring it up when 5d finishes.
 7. A deployed region export makes each TV re-download all 125 MB. Per-file caching would fix it.
 8. If a spawn lands on the tile a walker just left, where should the walker go: the nearest free tile, or stay and allow the overlap?
-9. "Back to walking" is a dead button on a pack with no region, and Results' "Next battle" now returns to the world. Both need a phone contract change.
+9. "Back to walking" is a dead button on a pack with no region. (Results' "Next battle" is now "Carry on", a label only, `51505fc`.)
+10. **A battle the engine can't continue is called off with nothing won or lost**: no XP, injuries, Results or checkpoint, and the party goes back to the world. The alternative is counting it as a loss: `CallOffBattle` is the one place to change. (`0eec931`)
+11. **Rules invariants run only in Debug builds.** On a Release server a broken state (the share-the-tile bug, say) won't throw: it's kept and saved. The checks are cheap; turning them on for production is the user's call.
+12. **The pad from e/w:** a thumb already holding e or w keeps it out to 72°, so sliding round onto a road switches 8.6° off the road rather than 10°. Guaranteeing 10° would shrink e/w from 24° to about 21°. (`51505fc`)
+13. **The battle list hidden from normal play** once 5c's fights on the spot land: the night session's default is a developer switch, where the spec keeps it visible as a shortcut.
+
+**Ideas the user wants noted for later design** (not in this slice; don't build without them):
+- **Mobs out in the overworld:** wild enemies roaming the regions, away from the stamped story battles. Open questions: how often fights happen, whether they pay XP (decision 3's farming problem), which encounters and maps they use given that battles need a matching map, and whether the party can avoid them. A cheap visual step that changes no rules: the armed stamp's enemies idle or pace inside their area before the party arrives.
+- **Fog of war in the overworld:** the region hidden until the party explores it. Open questions: whether explored ground stays revealed across sessions (it'd live in the campaign save), how far the party sees (and whether heights block sight), and how it reads on the TV from the sofa.
 
 **Defaults the user can overrule:** the 8-way pad; the session leader taking the lead back once stopped; hazards harmless; the loader refusing a recovery spawn below a one-way drop; lines advancing by themselves; one beat at a time; skill rolls with no natural 20 or 1; a skill-to-stat table of 18 SRD lines; `ch1_kindler` having no `place`.
 
