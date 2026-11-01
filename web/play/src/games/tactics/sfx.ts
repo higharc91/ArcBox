@@ -1,4 +1,4 @@
-import { useEffect } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import { useFeedback, type Feedback } from "../../feedback/feedback";
 import { packBase, packJson } from "./pack";
 
@@ -101,16 +101,21 @@ let lastAlert = { cue: "", at: 0 };
 
 /**
  * Plays an alert once when a screen appears, if `when` holds then; a remount within a few seconds (a reconnect re-sends
- * the view) stays quiet. Only `when` at mount counts.
+ * the view) stays quiet. Only `when` at mount counts. Says whether it alerted, from the first render on, so the screen
+ * can play a matching animation (or not) without a re-render.
  */
-export function useAlertOnMount(cue: "yourTurn" | "reaction", when = true): void {
+export function useAlertOnMount(cue: "yourTurn" | "reaction", when = true): boolean {
   const sfx = useSfx();
-  useEffect(() => {
-    if (!when) return;
+  const [fresh] = useState(() => {
+    if (!when) return false;
     const now = Date.now();
-    if (lastAlert.cue === cue && now - lastAlert.at < 4000) return;
+    if (lastAlert.cue === cue && now - lastAlert.at < 4000) return false;
     lastAlert = { cue, at: now };
-    sfx(cue);
+    return true;
+  });
+  useEffect(() => {
+    if (fresh) sfx(cue);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  return fresh;
 }

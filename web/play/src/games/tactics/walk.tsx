@@ -177,8 +177,13 @@ function Pad({ sender }: { sender: WalkSender }) {
 /** The VIP's way out of the world. It's at the far end of the screen from the pad, and it sleeps while a thumb is on it. */
 function HostMenu({ canBattle, send }: { canBattle: boolean; send: CustomScreenProps["send"] }) {
   // Both take the whole table out of the walk, and the leader's pad with it, so both ask first.
-  const [sure, setSure] = useState<"battles" | "endSession" | null>(null);
+  const [asked, setSure] = useState<"battles" | "endSession" | null>(null);
+  // A battle confirm outlives no battles: it goes at once, and stays gone if they come back.
+  const sure = asked === "battles" && !canBattle ? null : asked;
   const sfx = useSfx();
+  useEffect(() => {
+    if (!canBattle) setSure((s) => (s === "battles" ? null : s));
+  }, [canBattle]);
   useEffect(() => {
     if (!sure) return;
     const id = setTimeout(() => setSure(null), CONFIRM_MS);
@@ -268,12 +273,13 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
   // A class, not state with a timer: CSS plays the arrival once, and nothing re-renders under the thumb that follows.
   // Opening the screen as leader is an arrival too. Its sound and buzz come from `useAlertOnMount`, which stays quiet
   // when a reconnect re-sends the view; taking the lead later plays them here.
+  // A reconnect's remount inside the alert's quiet window doesn't pulse either.
+  const alerted = useAlertOnMount("yourTurn", d.leader);
   const led = useRef(d.leader);
-  const arrived = useRef(d.leader);
+  const arrived = useRef(alerted);
   if (d.leader && !led.current) arrived.current = true;
   if (!d.leader) arrived.current = false;
   led.current = d.leader;
-  useAlertOnMount("yourTurn", d.leader);
   const mounted = useRef(false);
   useEffect(() => {
     if (mounted.current && arrived.current) sfx("yourTurn");

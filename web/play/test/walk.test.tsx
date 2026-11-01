@@ -449,6 +449,8 @@ describe("the walk screen", () => {
     render(shown(view("walk-leader", undefined, "v3")));     // the same view again after a reconnect
     vi.advanceTimersByTime(10);
     expect(vibrate).toHaveBeenCalledTimes(1);
+    expect(document.querySelector(".tx-walk")).not.toBeNull();
+    expect(document.querySelector(".tx-walk.arrived")).toBeNull();       // nor does the pulse replay
   });
 
   it("opening as a follower says nothing", () => {
@@ -553,6 +555,22 @@ describe("the walk screen", () => {
     expect(screen.queryByRole("button", { name: "Yes, choose one" })).toBeNull();
     expect(screen.getByRole("button", { name: "Choose a battle" })).toBeTruthy();
     expect(send.mock.calls.some((c) => (c[0] as { action: string }).action !== "walk")).toBe(false);   // only pings went out
+  });
+
+  it("a battle confirm goes when the battles do, and never sends battles", () => {
+    const send = vi.fn();
+    const { rerender } = render(<ControllerScreen view={view("walk-leader")} send={send} me="ALEX" game="tactics" />);
+    fireEvent.click(screen.getByRole("button", { name: "Choose a battle" }));
+    expect(screen.getByRole("button", { name: "Yes, choose one" })).toBeTruthy();
+
+    rerender(<ControllerScreen view={view("walk-leader", (d) => { d.canBattle = false; }, "v2")} send={send} me="ALEX" game="tactics" />);
+    expect(screen.queryByRole("button", { name: "Yes, choose one" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Keep walking" })).toBeNull();
+    expect(screen.getByRole("button", { name: "End session" })).toBeTruthy();
+
+    rerender(<ControllerScreen view={view("walk-leader", undefined, "v3")} send={send} me="ALEX" game="tactics" />);
+    expect(screen.queryByRole("button", { name: "Yes, choose one" })).toBeNull();      // and doesn't come back with them
+    expect(send.mock.calls.some((c) => (c[0] as { action: string }).action === "battles")).toBe(false);
   });
 
   it.each([["End session", "Yes, end it"], ["Choose a battle", "Yes, choose one"]])("the %s confirm lapses by itself", async (ask, yes) => {
