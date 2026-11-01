@@ -108,7 +108,8 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             if (unfinished.State.ContentHash != Rules.Hash)
             {
                 Note("The rules changed since this battle began, so it starts again.");
-                RestartBattle(unfinished);
+                if (!RestartBattle(unfinished))
+                    return;     // called off: the party is back where a battle's results would have sent it
             }
             ContinueBattle();
             return;
@@ -133,7 +134,8 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         if (save.State.ContentHash != Rules.Hash)
         {
             Note("The rules changed since this battle began, so it starts again.");
-            RestartBattle(save);
+            if (!RestartBattle(save))
+                return;
         }
         _awaited.Clear();
         foreach (var unit in _doc.Battle!.State.Units.Values)
@@ -384,7 +386,8 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         }
         FillAbsentCharacters();
         // A party smaller than the encounter needs is filled with AI companions.
-        StartBattle(id, (ulong)_ctx.Random.NextInt64(), [.. _players.Select(p => p.Profile!.Value)], Companions(encounter.Party.Min));
+        if (!StartBattle(id, (ulong)_ctx.Random.NextInt64(), [.. _players.Select(p => p.Profile!.Value)], Companions(encounter.Party.Min)))
+            Toast(vip.Id, BattleWontStart);
     }
 
     // ---- Results ------------------------------------------------------------------------------------------------------

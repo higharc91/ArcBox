@@ -24,9 +24,23 @@ public static class TacticsServiceCollectionExtensions
             var basePack = Path.Combine(root, TacticsGame.Id, "base");
             return RulesPack.Load([Path.Combine(basePack, "rules")], ArtManifests.Load(basePack));
         }));
-        services.AddArcGame(sp => new TacticsGame(sp.GetRequiredService<Lazy<RulesPack>>()));
+        services.AddArcGame(sp =>
+        {
+            var log = sp.GetRequiredService<ILogger<TacticsGame>>();
+            return new TacticsGame(sp.GetRequiredService<Lazy<RulesPack>>()) { FaultLogged = fault => LogFault(log, fault) };
+        });
         services.AddSingleton<ICampaignRules>(sp => new TacticsCampaignRules(sp.GetRequiredService<Lazy<RulesPack>>()));
         services.AddVoiceThemes(TacticsVoices.All);
         return services;
     }
+
+    /// <summary>
+    /// An engine failure the game caught and carried on from (rules-engine spec §8), with what reproduces it: the encounter,
+    /// seed and beat, the command, and the state from before it, which <c>Battle.Apply</c> fails on again.
+    /// </summary>
+    private static void LogFault(ILogger log, EngineFault fault)
+        => log.LogError(fault.Error,
+            "Tactics engine failure ({Where}) in {Encounter}, seed {Seed}, after beat {Beat}, round {Round}, turn {TurnIndex}. "
+            + "Command: {Command}. State before: {State}",
+            fault.Where, fault.Encounter, fault.Seed, fault.Beat, fault.Round, fault.TurnIndex, fault.Command ?? "none", fault.State ?? "none");
 }

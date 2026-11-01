@@ -28,6 +28,12 @@ public sealed record TacticsTiming(TimeSpan Turn, TimeSpan Reaction, TimeSpan Pa
     /// <summary>The clocks of walking the world.</summary>
     public WalkTiming Walk { get; init; } = Walk ?? WalkTiming.Default;
 
+    /// <summary>
+    /// How long the TV's "Something went wrong with that move" stays up at least: it comes down with the first command that
+    /// applies normally after this.
+    /// </summary>
+    public TimeSpan FaultNotice { get; init; } = TimeSpan.FromSeconds(4);
+
     /// <summary>The fallback wait for a beat of <paramref name="events"/> events.</summary>
     public TimeSpan Pace(int events)
     {

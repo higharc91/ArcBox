@@ -165,7 +165,7 @@ public sealed record TacticsHostView(string Phase, string Banner, string? Notice
 public sealed partial class TacticsGame
 {
     /// <inheritdoc />
-    public object HostView() => new TacticsHostView(_phase.ToString(), Banner(), _notice, _doc.PartyLevel,
+    public object HostView() => new TacticsHostView(_phase.ToString(), Banner(), Notice(), _doc.PartyLevel,
         [.. _players.Where(p => _doc.For(p.Profile!.Value) is not null).Select(p => p.Name)],
         _phase == TacticsPhase.EncounterPick ? EncounterOptions() : null,
         _doc.Battle is not null && _phase is TacticsPhase.Battle or TacticsPhase.Resuming ? BattleViewOf() : null,
