@@ -135,7 +135,7 @@ public sealed record WalkerView(string Id, string Name, string Sprite, bool Here
 /// <param name="Seq">The number of the last step.</param>
 /// <param name="At">The leader's tile.</param>
 /// <param name="Facing">The tile the leader faces.</param>
-/// <param name="Held">True while the leader holds a direction.</param>
+/// <param name="Held">True while the leader holds a direction the party can walk. Against a wall it's false, so the party stands, and <paramref name="Facing"/> says which way.</param>
 /// <param name="Legs">The last few steps, oldest first. The TV can miss views, so it fills in from these.</param>
 /// <param name="Party">The party, in member order.</param>
 /// <param name="Leader">The leader's player's name, or null with nobody here to lead.</param>
@@ -237,7 +237,7 @@ public sealed partial class TacticsGame
         => _doc.Members.SelectMany(m => _players.Where(p => p.Profile?.Value == m.Key)
             .Select(p => (p, m.Value.Character, _online.Contains(p.Id), _lead == m.Key)));
 
-    private ExploreView? ExploreViewOf() => _region is not { } region ? null : new ExploreView(region.Def.Id, region.Def.Name, _epoch, _walkSeq, _at, _facing, _dir is not null, _legs,
+    private ExploreView? ExploreViewOf() => _region is not { } region ? null : new ExploreView(region.Def.Id, region.Def.Name, _epoch, _walkSeq, _at, _facing, _dir is not null && !_blocked, _legs,
         [.. Walkers().Select(w => new WalkerView(w.Player.Profile!.Value.Value, w.Player.Name,
             HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{w.Character.Class}"])!, w.Here, w.Leads))],
         Leader?.Name);

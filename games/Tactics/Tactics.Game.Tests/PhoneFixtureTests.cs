@@ -40,6 +40,9 @@ public sealed class PhoneFixtureTests
     }
 
     [Fact]
+    public void A_pack_with_no_region_sends_the_phones_what_it_always_did() => Check(Capture(ExplorationTests.NoRegion.Value));
+
+    [Fact]
     public void Portal_views_match_their_fixtures()
     {
         var rules = Pack.Value;
@@ -92,9 +95,9 @@ public sealed class PhoneFixtureTests
     }
 
     /// <summary>Plays a four-member session until each screen has been seen once, keeping the first of each.</summary>
-    private static SortedDictionary<string, JsonNode> Capture()
+    private static SortedDictionary<string, JsonNode> Capture(RulesPack? pack = null)
     {
-        var rules = Pack.Value;
+        var rules = pack ?? Pack.Value;
         ProfileId?[] profiles = [.. Enumerable.Range(1, 4).Select(i => (ProfileId?)new ProfileId($"pr_member{i}"))];
         var game = new TacticsGame(rules);
         var h = new GameHarness<TacticsGame>(game, playerCount: 4, seed: 3, profiles: profiles);
@@ -127,7 +130,7 @@ public sealed class PhoneFixtureTests
 
         // Players end their turns at once (after the first turn screen is seen) so enemies walk past them and draw
         // reactions; reactions are left to time out.
-        for (var step = 0; step < 5_000 && game.Phase == TacticsPhase.Battle && seen.Count < 7; step++)
+        for (var step = 0; step < 5_000 && game.Phase == TacticsPhase.Battle && seen.Count < (rules.Regions.IsEmpty ? 5 : 7); step++)
         {
             Look();
             for (var p = 0; p < 4; p++)

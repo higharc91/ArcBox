@@ -23,7 +23,10 @@ public sealed partial class TacticsGame
     private Tile _at;
     private Tile _facing;
 
-    /// <summary>What <see cref="ExploreView.Epoch"/> says. See <see cref="EnterWorld"/>.</summary>
+    /// <summary>
+    /// What <see cref="ExploreView.Epoch"/> says. <see cref="EnterWorld"/> seeds it; after that a teleport is just <c>_epoch++</c>
+    /// (with <see cref="_legs"/> cleared), as only a difference matters to the TV.
+    /// </summary>
     private int _epoch;
 
     /// <summary>Whoever leads now, by member id; null with nobody to lead.</summary>
@@ -35,6 +38,15 @@ public sealed partial class TacticsGame
     /// Null until someone is elected, which is what makes a session's rotation happen once.
     /// </summary>
     private string? _sessionLead;
+
+    /// <summary>
+    /// True from an election at Start until the first input. Every seat counts as online during Start, and the room says who's
+    /// absent only after it returns, so until someone has actually spoken the election can still have picked an empty seat.
+    /// </summary>
+    private bool _electionOpen;
+
+    /// <summary>The <see cref="WorldSave.LastLeader"/> an election at Start followed, to go back to if it's retracted.</summary>
+    private string? _electedAfter;
 
     /// <summary>Members who went quiet while leading. They're passed over until their phone is heard from again.</summary>
     private readonly HashSet<string> _silent = [];
@@ -60,6 +72,12 @@ public sealed partial class TacticsGame
 
     /// <summary>When a walk under way has to be saved by, or null with nothing waiting.</summary>
     private DateTimeOffset? _saveBy;
+
+    /// <summary>
+    /// When <see cref="Timers.Save"/> is set for, or null if it isn't. Kept here because the context's own deadline comes from a
+    /// later read of the clock, so it never equals a time worked out here.
+    /// </summary>
+    private DateTimeOffset? _saveAt;
 
     private WalkTiming Walk => _timing.Walk;
 
@@ -269,6 +287,7 @@ public sealed partial class TacticsGame
     /// <summary>Anything at all from a phone means it's alive.</summary>
     private void HeardFrom(ProfileId profile)
     {
+        _electionOpen = false;
         if (profile.Value == _lead)
             _heardAt = _ctx.Now;
         else if (_silent.Remove(profile.Value))
@@ -282,6 +301,8 @@ public sealed partial class TacticsGame
             return;
         if (player?.Profile is { } profile)
             _silent.Remove(profile.Value);
+        if (!connected && _electionOpen && player?.Profile?.Value == _sessionLead)
+            RetractElection();
         if (!connected && player?.Profile?.Value == _lead)
             Halt();
         ReconsiderLeader();
@@ -343,6 +364,22 @@ public sealed partial class TacticsGame
         return free.FirstOrDefault(m => string.CompareOrdinal(m, last) > 0) ?? free.FirstOrDefault();
     }
 
+    /// <summary>The session's one rotation, when it can happen at Start: see <see cref="_electionOpen"/>.</summary>
+    private void ElectAtStart()
+    {
+        var last = _doc.World?.LastLeader;
+        ReconsiderLeader();
+        (_electionOpen, _electedAfter) = (_sessionLead is not null, last);
+    }
+
+    /// <summary>The seat elected at Start was empty: the rotation hasn't happened, so the next one who's here gets it, and it's as if the empty seat was never picked.</summary>
+    private void RetractElection()
+    {
+        _sessionLead = null;
+        _doc = _doc with { World = _doc.World! with { LastLeader = _electedAfter } };
+        Save();
+    }
+
     /// <summary>
     /// Settles who leads, only ever with the party stopped: this session's leader if they're here (electing one if the session has
     /// none yet, which is its one rotation), else whoever already leads, else the next who can. Better a silent member than nobody.
@@ -366,6 +403,8 @@ public sealed partial class TacticsGame
         SaveWorld();
     }
 
+    // A guard against the lead changing hands mid-scene (5d flag 9) goes on the first arm, not at the top of ReconsiderLeader: the
+    // session's leader must wait for the scene to end, but a leader who drops mid-scene still has to be replaced.
     private string? WantedLeader() => _sessionLead is { } own && CanLead(own) ? own
         : _lead is { } still && CanLead(still) ? still
         : NextAfter(_lead ?? _sessionLead);
@@ -392,28 +431,38 @@ public sealed partial class TacticsGame
     }
 
     /// <summary>
-    /// Schedules a save: soon after the party stops, and on a fixed deadline while it walks. A walk that carries on takes back
-    /// the stop's save, so walking in fits and starts saves no more often than walking.
+    /// Schedules a save: soon after the party stops, and by a fixed deadline from the first unsaved step, which a stop can bring
+    /// forward but never push back. A walk that picks up again before the stop's save takes it back, so rests under
+    /// <see cref="WalkTiming.SaveAfterStop"/> save no more often than walking. A rest that long is a real stop, and each one
+    /// saves, so the most this can ever be is one save per rest, which is one a second.
     /// </summary>
     private void SaveSoon()
     {
         if (!WorldChanged)
             return;
+        var now = _ctx.Now;
         if (_dir is null)
         {
-            _ctx.SetTimer(Timers.Save, Walk.SaveAfterStop);
-            return;
+            var soon = now + Walk.SaveAfterStop;
+            SaveAt(_saveBy < soon ? _saveBy.Value : soon);
         }
-        var by = _saveBy ??= _ctx.Now + Walk.SaveWhileWalking;
-        if (_ctx.TimerDeadline(Timers.Save) != by)
-            _ctx.SetTimer(Timers.Save, Longest(by - _ctx.Now, TimeSpan.FromMilliseconds(1)));
+        else
+            SaveAt(_saveBy ??= now + Walk.SaveWhileWalking);
+    }
+
+    private void SaveAt(DateTimeOffset at)
+    {
+        if (_saveAt == at)
+            return;
+        _saveAt = at;
+        _ctx.SetTimer(Timers.Save, Longest(at - _ctx.Now, TimeSpan.FromMilliseconds(1)));
     }
 
     /// <summary>Saves the party's place now, if it has changed, and whatever was scheduled goes with it.</summary>
     private void SaveWorld()
     {
         _ctx.CancelTimer(Timers.Save);
-        _saveBy = null;
+        (_saveBy, _saveAt) = (null, null);
         if (!WorldChanged)
             return;
         KeepWorld();

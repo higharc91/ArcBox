@@ -38,7 +38,7 @@ public sealed class ExplorationTests
         => new(region!, at, new Tile(at.X + 1, at.Y), lastLeader, ["a_flag"], ["a_beat"]);
 
     /// <summary>The rules without their region: a pack with no world.</summary>
-    private static readonly Lazy<RulesPack> NoRegion = new(() => EditedRules(rules =>
+    internal static readonly Lazy<RulesPack> NoRegion = new(() => EditedRules(rules =>
     {
         var manifest = Path.Combine(rules, "manifest.json");
         var node = JsonNode.Parse(File.ReadAllText(manifest))!;
@@ -298,6 +298,88 @@ public sealed class ExplorationTests
             Assert.Equal(expected, TacticsDocument.Read(night.Lease.Document).World!.LastLeader);   // saved at once
             document = night.Lease.Document;
         }
+    }
+
+    /// <summary>The room's order of things: every seat is online for Start, and the absent ones drop just after it returns.</summary>
+    private static (string? Leader, string? Saved, JsonElement Document) Night(JsonElement document, int absentSeat)
+    {
+        var s = new Session(document: document);
+        s.Harness.StartCampaign(s.Lease);
+        s.Harness.SetConnected(absentSeat, false);
+        return (s.Game.Leader?.Profile?.Value, TacticsDocument.Read(s.Lease.Document).World!.LastLeader, s.Lease.Document);
+    }
+
+    [Fact]
+    public void Someone_absent_every_night_doesnt_stop_the_lead_rotating()
+    {
+        var document = DocumentAt(Saved(NearStart(), lastLeader: "pr_member1"));
+
+        // Member 2, in seat 1, never comes. Each night's leader has to be new, and has to be who's saved.
+        foreach (var expected in new[] { "pr_member3", "pr_member4", "pr_member1", "pr_member3" })
+        {
+            var (leader, saved, next) = Night(document, absentSeat: 1);
+
+            Assert.Equal(expected, leader);
+            Assert.Equal(expected, saved);
+            document = next;
+        }
+    }
+
+    [Fact]
+    public void An_absent_member_arriving_late_takes_no_crown()
+    {
+        var s = new Session(document: DocumentAt(Saved(NearStart(), lastLeader: "pr_member1")));
+        s.Harness.StartCampaign(s.Lease);
+        s.Harness.SetConnected(1, false);
+        Assert.Equal("pr_member3", s.Game.Leader!.Profile!.Value.Value);
+
+        s.Harness.SetConnected(1, true);
+
+        Assert.Equal("pr_member3", s.Game.Leader!.Profile!.Value.Value);
+    }
+
+    [Fact]
+    public void Everyone_absent_at_start_leaves_the_rotation_where_it_was()
+    {
+        var s = new Session(document: DocumentAt(Saved(NearStart(), lastLeader: "pr_member1")));
+        s.Harness.StartCampaign(s.Lease);
+
+        for (var p = 0; p < 4; p++)
+            s.Harness.SetConnected(p, false);
+
+        Assert.Null(s.Game.Leader);
+        Assert.Equal("pr_member1", TacticsDocument.Read(s.Lease.Document).World!.LastLeader);
+    }
+
+    [Fact]
+    public void A_session_leader_who_has_been_heard_from_keeps_their_session_through_a_drop()
+    {
+        var s = new Session(document: DocumentAt(Saved(NearStart(), lastLeader: "pr_member1")));
+        s.Harness.StartCampaign(s.Lease);
+        s.Send(1, "walk", new { dir = (string?)null });
+
+        s.Harness.SetConnected(1, false);
+        Assert.Equal("pr_member3", s.Game.Leader!.Profile!.Value.Value);
+        s.Harness.SetConnected(1, true);
+
+        Assert.Equal("pr_member2", s.Game.Leader!.Profile!.Value.Value);
+        Assert.Equal("pr_member2", TacticsDocument.Read(s.Lease.Document).World!.LastLeader);
+    }
+
+    [Fact]
+    public void A_character_filled_in_for_the_only_one_here_gives_the_party_a_leader()
+    {
+        var doc = TacticsDocument.Read(DocumentAt(Saved(NearStart())));
+        var s = new Session(document: (doc with { Members = Ordinal.Map<MemberRecord>() }).ToJson());
+        s.Harness.Resume(s.Lease);
+        s.Harness.SetConnected(0, true);
+        Assert.Null(s.Game.Leader);
+
+        s.Send(0, "battles");
+        s.Send(0, "pickEncounter", new { encounter = "river_crossing" });
+
+        Assert.Equal(TacticsPhase.Battle, s.Game.Phase);
+        Assert.Equal("Player1", s.Host.Explore!.Leader);
     }
 
     [Fact]

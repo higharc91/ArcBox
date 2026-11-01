@@ -100,7 +100,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             _online.Add(p.Id);
         _doc = TacticsDocument.Read(campaign.Document) with { RulesHash = Rules.Hash };
         EnterWorld();
-        ReconsiderLeader();
+        ElectAtStart();
         KeepWorld();
         Save();
         if (_doc.Battle is { } unfinished)   // the last session stopped mid-battle: carry on with whoever is here
@@ -336,6 +336,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             var cls = ClassForMissingRole(_doc.Members.Values.Select(m => m.Character.Class));
             SetMember(player.Profile!.Value, new MemberRecord(NewCharacter(player.Name, cls, _doc.PartyLevel), Xp: 0));
         }
+        ReconsiderLeader();     // someone here may have just got the character that lets them lead
     }
 
     /// <summary>

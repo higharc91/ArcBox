@@ -53,6 +53,7 @@ public sealed class WalkingTests
         s.Harness.StartCampaign(s.Lease);
         Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
         Assert.Equal(s.Harness.Players[0].Id, s.Game.Leader!.Id);
+        Walk(s, null);      // the phone's first idle ping: from here this is really that member's session
         return s;
     }
 
@@ -332,6 +333,23 @@ public sealed class WalkingTests
     }
 
     [Fact]
+    public void A_walk_sets_the_save_timer_once_even_when_the_clock_moves_between_reads()
+    {
+        var c = new Clock(At(Road())) { Skew = TimeSpan.FromMilliseconds(1) };   // as GameSession reads the clock again for the deadline
+
+        c.Walk("se");
+        for (var i = 0; i < 5; i++)
+        {
+            c.Pass(300);
+            c.Walk("se");
+            c.Fire(Step);
+        }
+
+        Assert.Equal(6, c.Seq);
+        Assert.Equal(1, c.SaveSets);
+    }
+
+    [Fact]
     public void A_step_timer_after_a_stop_does_nothing()
     {
         var c = new Clock(At(Road()));
@@ -467,8 +485,28 @@ public sealed class WalkingTests
         Assert.Equal(at, Party(s).At);
         Assert.Equal(new Tile(at.X + dx, at.Y + dy), Party(s).Facing);
         Assert.Empty(Party(s).Legs);
-        Assert.True(Party(s).Held);
         Assert.Equal(phone, PhoneJson(s, 0));
+    }
+
+    [Fact]
+    public void A_party_against_a_wall_stands_and_the_hold_still_ends()
+    {
+        var (at, dir, blocked) = Wall();
+        var s = At(at);
+        var away = Dirs.First(d => d.Dir != blocked && WorldWalk.Next(Ground, at, d.Dir, ClassDef.DefaultJump, null) is { Slid: false }).Name;
+
+        Walk(s, dir);
+
+        Assert.False(Party(s).Held);                     // the TV draws it standing, facing the wall
+        Assert.Contains(Step, s.Harness.ActiveTimers);   // but the thumb is still down
+
+        Walk(s, away);
+        Assert.True(Party(s).Held);
+        Walk(s, null);
+
+        Walk(s, dir);
+        s.Harness.Advance(TimeSpan.FromSeconds(2));
+        Assert.DoesNotContain(Step, s.Harness.ActiveTimers);
     }
 
     [Fact]
@@ -566,13 +604,37 @@ public sealed class WalkingTests
     }
 
     [Fact]
-    public void The_explore_view_stays_about_a_kilobyte()
+    public void The_explore_view_is_a_kilobyte_or_so_for_a_party_of_four()
     {
         var s = At(Road());
 
         Hold(s, "se", 15);
 
         Assert.True(JsonSerializer.SerializeToUtf8Bytes(Party(s), ArcJson.Options).Length < 1024);
+    }
+
+    [Fact]
+    public void The_explore_view_stays_under_1300_bytes_for_a_full_party_with_real_ids()
+    {
+        var doc = TacticsDocument.Read(DocumentAt(Saved(Road())));
+        var character = doc.Members.Values.First();
+        ProfileId?[] profiles = [.. Enumerable.Range(1, 6).Select(i => (ProfileId?)new ProfileId($"pr_{i:0000000000000000}"))];    // 19 characters
+        var full = doc with { Members = Ordinal.Map(profiles.Select(p => (p!.Value.Value, character))) };
+        var h = new GameHarness<TacticsGame>(new TacticsGame(Rules), playerCount: 6, profiles: profiles);
+        var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", profiles[0]!.Value, [], 1);
+        h.StartCampaign(new FakeCampaignLease(info, full.ToJson()));
+
+        h.Input(0, new { action = "walk", data = new { dir = "se" } });
+        for (var i = 0; i < 40; i++)
+        {
+            h.Advance(Ms100);
+            h.Input(0, new { action = "walk", data = new { dir = "se" } });
+        }
+
+        var party = h.HostView<TacticsHostView>().Explore!;
+        Assert.Equal(12, party.Legs.Length);
+        Assert.Equal(6, party.Party.Length);
+        Assert.True(JsonSerializer.SerializeToUtf8Bytes(party, ArcJson.Options).Length < 1300);
     }
 
     [Fact]
@@ -1058,7 +1120,40 @@ public sealed class WalkingTests
     }
 
     [Fact]
-    public void Walking_in_fits_and_starts_saves_no_more_often()
+    public void A_stop_late_in_a_walk_doesnt_stretch_the_fifteen_seconds()
+    {
+        var s = At(Road());
+        for (var i = 0; i < 149; i++)
+        {
+            Walk(s, i / 20 % 2 == 0 ? "se" : "nw");
+            s.Harness.Advance(Ms100);
+        }
+        var at = Party(s).At;
+
+        Walk(s, null);                   // at 14.9 s
+        s.Harness.Advance(Ms100);
+
+        Assert.Equal(at, TacticsDocument.Read(s.Lease.Document).World!.At);
+    }
+
+    [Fact]
+    public void Each_real_rest_saves_once_and_a_rest_is_at_least_a_second()
+    {
+        var s = At(Road());
+        var saves = s.Lease.Saves.Count;
+
+        for (var i = 0; i < 40; i++)       // a tap, then a second and a half's rest, for a minute: every stop is a real stop
+        {
+            Walk(s, i % 2 == 0 ? "se" : "nw");
+            Walk(s, null);
+            s.Harness.Advance(TimeSpan.FromMilliseconds(1500));
+        }
+
+        Assert.Equal(40, s.Lease.Saves.Count - saves);
+    }
+
+    [Fact]
+    public void Rests_under_a_second_save_no_more_often_than_walking()
     {
         var s = At(Road());
         var saves = s.Lease.Saves.Count;
@@ -1166,6 +1261,11 @@ public sealed class WalkingTests
         public Random Random { get; } = new(1);
         public int Seq => ((TacticsHostView)Game.HostView()).Explore!.Seq;
 
+        /// <summary>How much later than the game's own read the deadline is worked out.</summary>
+        public TimeSpan Skew { get; init; }
+
+        public int SaveSets { get; private set; }
+
         public void Pass(int ms) => Now += TimeSpan.FromMilliseconds(ms);
 
         public void Walk(string? dir) => Session(0, "walk", new { dir });
@@ -1182,7 +1282,12 @@ public sealed class WalkingTests
 
         public DateTimeOffset? Deadline(string key) => TimerDeadline(key);
 
-        public void SetTimer(string key, TimeSpan after) => _timers[key] = Now + after;
+        public void SetTimer(string key, TimeSpan after)
+        {
+            SaveSets += key == Save ? 1 : 0;
+            _timers[key] = Now + after + Skew;
+        }
+
         public void CancelTimer(string key) => _timers.Remove(key);
         public DateTimeOffset? TimerDeadline(string key) => _timers.TryGetValue(key, out var at) ? at : null;
         public void EndGame(GameResults results) { }
