@@ -473,16 +473,21 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     }
 
     /// <summary>
-    /// The story after a fight (5c §6, defaults 6 and 7): a beat won is done, with the flags the battle set and the beat's own. A loss or a
-    /// flight changes nothing, so the stamp stays armed and the fight can be tried again, and a fight from the battle list is no beat.
+    /// The story after a fight (5c §6, defaults 6 and 7; 5d §3): a beat won sets the flags the battle set and the beat's own, and goes on to
+    /// its aftermath (<see cref="StorySave.After"/>), which plays once Results are over; the beat is done when that ends. A loss or a flight
+    /// changes nothing, so the beat waits at its fight with its stamp armed, and a fight from the battle list is no beat. A beat the lore no
+    /// longer has is simply done, as before 5d.
     /// </summary>
     private WorldSave? StoryAfter(BattleSave save, BattleResult result)
     {
         if (_doc.World is not { } world || result.Outcome != BattleOutcome.Won || save.Beat is not { } done || world.Beats.Contains(done))
             return _doc.World;
-        var beat = _region is null ? null : Lore.ArcFor(_region.Def.Id)?.Beats.FirstOrDefault(b => b.Id == done);
+        var beat = BeatNamed(done);
         IEnumerable<string> set = [.. result.FlagsSet.IsDefault ? [] : result.FlagsSet, .. beat?.Sets ?? []];
-        return world with { Flags = [.. world.Flags.Concat(set).Distinct()], Beats = world.Beats.Add(done) };
+        world = world with { Flags = [.. world.Flags.Concat(set).Distinct()] };
+        return beat is null
+            ? world with { Beats = world.Beats.Add(done), Story = null }
+            : world with { Story = new StorySave(done, StorySave.After, null, null, 0, _storySeq) };
     }
 
     /// <summary>The character at the party's new level, as its player made it (<see cref="CharacterRules.LevelUp"/>).</summary>

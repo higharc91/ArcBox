@@ -18,6 +18,16 @@ public sealed class StageBattleTests
     /// <summary>The base pack's lore, as the server loads it.</summary>
     internal static readonly Lazy<LoreBook> Lore = new(() => LoreBook.Load(ExplorationTests.ContentRules()));
 
+    /// <summary>
+    /// The lore with the ford fights' scenes taken out, so stepping into the stamp starts the fight at once and a win has no aftermath, as in
+    /// 5c: these tests are about the fight in the world. The lead-ins and aftermaths are <see cref="StoryBattleTests"/>'.
+    /// </summary>
+    internal static readonly Lazy<LoreBook> FightLore = new(() => StoryTests.EditedLore(scenes =>
+    {
+        foreach (var scene in scenes.Where(x => x!["beat"]!.GetValue<string>() is "ch1_ford_assault" or "ch1_river_crossing").ToArray())
+            scenes.Remove(scene);
+    }));
+
     /// <summary>The ford chosen by force: the assault is the beat on offer.</summary>
     internal static readonly TacticsSeed Force = new(["ch1_skarrow_slain"], ["ch1_mayors_request", "ch1_the_ford_choice"]);
 
@@ -64,7 +74,7 @@ public sealed class StageBattleTests
 
     /// <summary>A game of the base pack with its lore, seeded with <paramref name="seed"/> on <paramref name="at"/>.</summary>
     internal static TacticsGame WithLore(TacticsSeed? seed, Tile? at = null, RulesPack? rules = null, TacticsTiming? timing = null, bool battleList = false)
-        => new(rules ?? Rules, timing, Lore.Value, seed is null ? null : seed with { At = at }, battleList);
+        => new(rules ?? Rules, timing, FightLore.Value, seed is null ? null : seed with { At = at }, battleList);
 
     /// <summary>A session walking, with the party at <paramref name="at"/> and <paramref name="seed"/>'s story.</summary>
     internal static Session Walking(TacticsSeed? seed, Tile at, int harnessSeed = 1, RulesPack? rules = null, bool battleList = false)

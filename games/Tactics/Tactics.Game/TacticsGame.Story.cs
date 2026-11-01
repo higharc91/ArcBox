@@ -33,6 +33,9 @@ public sealed partial class TacticsGame
 
         /// <summary>The pause between two scenes of a beat, with the next one's title.</summary>
         public const string Gap = "gap";
+
+        /// <summary>The chapter's card, at its end (5d default 13): <see cref="TacticsHostView.Chapter"/> says which.</summary>
+        public const string Card = "card";
     }
 
     /// <summary>What everyone is told when a saved scene is gone after a content update: the beat starts again from its first scene.</summary>
@@ -102,23 +105,33 @@ public sealed partial class TacticsGame
     /// <summary>The story's flags, as a set.</summary>
     private HashSet<string> StoryFlags() => _doc.World?.Flags.ToHashSet(StringComparer.Ordinal) ?? [];
 
+    /// <summary>The arc of the region the party is in, or null.</summary>
+    private Arc? StoryArc => _region is null ? null : Lore.ArcFor(_region.Def.Id);
+
     /// <summary>The beat on offer (<see cref="StoryRules.Available"/>), or null with no region, no arc or nothing left.</summary>
     private ArcBeat? OnOffer()
     {
-        if (_region is null || _doc.World is not { } world || Lore.ArcFor(_region.Def.Id) is not { } arc)
+        if (_doc.World is not { } world || StoryArc is not { } arc)
             return null;
         return StoryRules.Available(arc, world.Flags.ToHashSet(StringComparer.Ordinal), world.Beats.ToHashSet(StringComparer.Ordinal));
     }
+
+    /// <summary>True once the arc's last beat is done: its chapter is over (spec §2).</summary>
+    private bool ChapterOver => StoryArc is { } arc && _doc.World is { } world && StoryRules.ChapterDone(arc, world.Beats.ToHashSet(StringComparer.Ordinal));
 
     /// <summary>The spot of <paramref name="beat"/> in the region, or null if it has none.</summary>
     private Tile? SpotOf(ArcBeat beat) => _region?.Def.Beats.Where(b => b.Beat == beat.Id).Select(b => (Tile?)b.At).FirstOrDefault();
 
     /// <summary>The beat of the arc with this id, or null.</summary>
-    private ArcBeat? BeatNamed(string id) => _region is null ? null : Lore.ArcFor(_region.Def.Id)?.Beats.FirstOrDefault(b => b.Id == id);
+    private ArcBeat? BeatNamed(string id) => StoryArc?.Beats.FirstOrDefault(b => b.Id == id);
+
+    /// <summary>True while <paramref name="beat"/> is a battle waiting at its fight: its lead-in played, and it was lost, fled or never begun.</summary>
+    private bool AtTheFight(ArcBeat beat) => Cursor is { Stage: StorySave.Fight } c && c.Beat == beat.Id;
 
     /// <summary>
     /// The beat on offer's marker (5d §2, default 12): at its spot, with the first of its opening scene's cast who isn't the narrator, and the
-    /// "!" until its scene starts. Empty with nothing on offer or no spot for it; null for a pack with no region, which has no world.
+    /// "!" while it waits, which includes a fight to try again. Empty with nothing on offer or no spot for it, and during its scenes the
+    /// figure stands with no "!".
     /// </summary>
     private ImmutableArray<StoryMarker> Markers()
     {
@@ -127,24 +140,37 @@ public sealed partial class TacticsGame
         var scenes = Lore.ScenesOf(beat.Id);
         var opening = SceneRun.Next(scenes, StoryFlags(), null, aftermath: false) ?? scenes.FirstOrDefault();
         var figure = opening?.Cast.Where(c => c != SceneDef.Narrator).Select(Lore.Character).FirstOrDefault(c => c is not null);
-        var playing = _phase == TacticsPhase.Story && Cursor?.Beat == beat.Id;
-        return [new StoryMarker(beat.Id, spot, figure is null ? null : $"characters.{figure.Preset}", playing ? null : "alert")];
+        var waiting = Cursor?.Beat != beat.Id || AtTheFight(beat) && _phase == TacticsPhase.Exploration;
+        return [new StoryMarker(beat.Id, spot, figure is null ? null : $"characters.{figure.Preset}", waiting ? "alert" : null)];
     }
 
-    /// <summary>What the party is out to do (5d §2): "Go to" the place of the beat on offer, by name. Its summary would be a spoiler.</summary>
-    private string Objective() => OnOffer() is { Place: { } place } ? $"Go to {Lore.PlaceName(place) ?? place}" : "Explore the region";
+    /// <summary>
+    /// What the party is out to do (5d §2): "Go to" the place of the beat on offer, by name, as its summary would be a spoiler. After the
+    /// chapter's last beat, that the next chapter isn't here yet (5d default 13).
+    /// </summary>
+    private string Objective() => OnOffer() is { Place: { } place } ? $"Go to {Lore.PlaceName(place) ?? place}"
+        : ChapterOver ? $"Chapter {Numeral(_region!.Def.Chapter + 1)} isn't here yet"
+        : "Explore the region";
+
+    /// <summary>A chapter's number as the cards write it.</summary>
+    internal static string Numeral(int n) => n switch
+    {
+        1 => "I", 2 => "II", 3 => "III", 4 => "IV", 5 => "V", 6 => "VI", 7 => "VII", 8 => "VIII", 9 => "IX", 10 => "X",
+        _ => n.ToString(System.Globalization.CultureInfo.InvariantCulture),
+    };
 
     /// <summary>
     /// The leader's Interact button (5d §2): the word for the beat on offer, while the leader is within <see cref="StoryRules.Reach"/> legal
-    /// steps of its spot; else null. A battle beat is still started by stepping into its stamp (overworld 5c), so it has none here.
+    /// steps of its spot; else null. A battle beat has "Begin", as stepping into its stamp does the same.
     /// </summary>
     private string? InteractLabel()
     {
-        if (_phase != TacticsPhase.Exploration || OnOffer() is not { } beat || beat.Kind == ArcBeat.Battle || SpotOf(beat) is not { } spot
+        if (_phase != TacticsPhase.Exploration || OnOffer() is not { } beat || SpotOf(beat) is not { } spot
             || !StoryRules.InReach(Rules.GroundFor(_region!.Def.Id)!.Terrain, _at, spot))
             return null;
         return beat.Kind switch
         {
+            ArcBeat.Battle => "Begin",
             "discovery" => "Look around",
             "camp" => "Sit by the fire",
             _ => "Talk",
@@ -156,30 +182,68 @@ public sealed partial class TacticsGame
     {
         if (player.Profile?.Value != _lead || InteractLabel() is null)
             return;
+        var beat = OnOffer()!;
+        if (beat.Kind == ArcBeat.Battle)
+        {
+            EnterBattleBeat(beat);
+            return;
+        }
         LeaveExploration();      // the party stops, every walking timer goes, and the place is saved
         _toasts.Clear();
-        BeginBeat(OnOffer()!);
+        BeginBeat(beat);
+    }
+
+    /// <summary>
+    /// The party reached a battle beat, by its marker or by stepping into its stamp: its lead-in plays first, and then the fight. A lead-in
+    /// plays once (5d default 10): a beat waiting at its fight, after a loss, goes straight to it.
+    /// </summary>
+    private void EnterBattleBeat(ArcBeat beat)
+    {
+        _toasts.Clear();
+        if (AtTheFight(beat))
+        {
+            StartFight(beat.Encounter!, beat.Id);
+            return;
+        }
+        LeaveExploration();
+        BeginBeat(beat);
     }
 
     // ---- Playing a beat ---------------------------------------------------------------------------------------------------
 
-    /// <summary>Starts <paramref name="beat"/> at its first scene that plays. A beat with none is simply done.</summary>
-    private void BeginBeat(ArcBeat beat)
+    /// <summary>
+    /// Starts <paramref name="beat"/> at its first scene that plays. A scene set in another place moves the party there first, behind the
+    /// gap. A beat with no scene goes on to what follows it: its fight, or for any other, it's done.
+    /// </summary>
+    private void BeginBeat(ArcBeat beat, bool gap = false)
     {
         _phase = TacticsPhase.Story;
         var first = SceneRun.Next(Lore.ScenesOf(beat.Id), StoryFlags(), null, aftermath: false);
         if (first is null)
         {
-            StoryLogged?.Invoke($"The beat '{beat.Id}' has no scene to play, so it's done at once.");
-            FinishBeat(beat);
+            if (beat.Kind != ArcBeat.Battle)
+                StoryLogged?.Invoke($"The beat '{beat.Id}' has no scene to play, so it's done at once.");
+            SetCursor(new StorySave(beat.Id, StorySave.Lead, null, null, 0, _storySeq));
+            StageDone();
             return;
         }
         SetCursor(new StorySave(beat.Id, StorySave.Lead, first.Id, null, 0, _storySeq));
-        EnterNode(first, first.Start);
+        if (gap || TravelFor(first) is not null)
+            Between(first);
+        else
+            BeginScene(first);
     }
 
-    /// <summary>Starts the scene the cursor names, after a gap or on a restart in one.</summary>
-    private void BeginScene(SceneDef scene) => EnterNode(scene, scene.Start);
+    /// <summary>Starts the scene the cursor names, after a gap or on a restart in one: travelling to its place if it's set somewhere else.</summary>
+    private void BeginScene(SceneDef scene)
+    {
+        Travel(scene);
+        _lastPlace = StoryRules.PlaceOf(scene, BeatNamed(Cursor!.Beat)!);
+        EnterNode(scene, scene.Start);
+    }
+
+    /// <summary>The place of the scene that started last, which says whether a battle that follows starts at once (<see cref="StoryRules.Chains"/>).</summary>
+    private string? _lastPlace;
 
     /// <summary>
     /// Plays the node <paramref name="id"/> of <paramref name="scene"/> from its first line: its flags are set as it plays, and it's
@@ -218,6 +282,12 @@ public sealed partial class TacticsGame
     /// <summary>The line showing has run its time, or the leader skipped it: the next line, node or scene.</summary>
     private void LineDone()
     {
+        if (_telling == StoryStates.Card)
+        {
+            (_card, _telling) = (null, StoryStates.Lines);
+            ToExploration();
+            return;
+        }
         if (CurrentScene() is not { } scene)
             return;
         var c = Cursor!;
@@ -235,44 +305,79 @@ public sealed partial class TacticsGame
                     SceneDone(scene);
                 else
                 {
-                    // A node whose question offers nothing (5d plan §8): its last line has played, and the scene ends with the beat.
-                    StoryLogged?.Invoke($"The node '{node.Id}' of '{scene.Id}' offered nothing, so the beat '{c.Beat}' ends there.");
-                    FinishBeat(BeatNamed(c.Beat)!);
+                    // A node whose question offers nothing (5d plan §8): its last line has played, and the scene's stage ends there.
+                    StoryLogged?.Invoke($"The node '{node.Id}' of '{scene.Id}' offered nothing, so the beat '{c.Beat}' goes on from there.");
+                    StageDone();
                 }
                 return;
         }
         // Asking and the rest: the question has been heard, and its own clock closes it.
     }
 
-    /// <summary>The scene ended: the next of the beat's that plays, after a gap, or else the beat is done.</summary>
+    /// <summary>The scene ended: the next of its stage that plays, after a gap, or else what follows the stage.</summary>
     private void SceneDone(SceneDef scene)
     {
         var c = Cursor!;
         var next = SceneRun.Next(Lore.ScenesOf(c.Beat), StoryFlags(), scene.Id, aftermath: c.Stage == StorySave.After);
         if (next is null)
         {
-            FinishBeat(BeatNamed(c.Beat)!);
+            StageDone();
             return;
         }
-        SetCursor(c with { Scene = next.Id, Node = null, Line = 0, Played = [], Roll = null });
-        KeepWorld();
-        Save();
-        ShowGap();
+        Between(next);
     }
 
-    private void ShowGap()
+    /// <summary>The gap before <paramref name="next"/>, saved with the cursor on it, so a restart starts it; the party travels as it begins.</summary>
+    private void Between(SceneDef next)
     {
+        SetCursor(Cursor! with { Scene = next.Id, Node = null, Line = 0, Played = [], Roll = null });
+        Travel(next);
+        KeepWorld();
+        Save();
+        CloseQuestion();
         _telling = StoryStates.Gap;
         _lineDue = _ctx.Now + Tell.SceneGap;
         _ctx.SetTimer(Timers.Line, Tell.SceneGap);
     }
 
     /// <summary>
-    /// The beat is done (5d §2): its own flags are set, it joins the beats done, the cursor goes, and a checkpoint is kept. Then the party
-    /// walks again.
+    /// A stage of the beat has no more scenes: a battle beat's lead-in goes to its fight, and anything else, a story beat or an aftermath,
+    /// ends the beat. A battle beat is only ever done after its fight was won (review finding 1).
+    /// </summary>
+    private void StageDone()
+    {
+        var c = Cursor!;
+        var beat = BeatNamed(c.Beat)!;
+        if (beat.Kind == ArcBeat.Battle && c.Stage != StorySave.After)
+            ToTheFight(beat);
+        else
+            FinishBeat(beat);
+    }
+
+    /// <summary>
+    /// The lead-in is over: the fight (5c), saved at stage <see cref="StorySave.Fight"/> first, so a loss, a flight or a fight that won't
+    /// start leaves the beat waiting there, its stamp armed and its "!" back, and a retry skips the lead-in.
+    /// </summary>
+    private void ToTheFight(ArcBeat beat)
+    {
+        EndTelling();
+        SetCursor(new StorySave(beat.Id, StorySave.Fight, null, null, 0, _storySeq));
+        KeepWorld();
+        Save();
+        StartFight(beat.Encounter!, beat.Id);
+    }
+
+    /// <summary>
+    /// The beat is done (5d §2): its own flags are set, it joins the beats done, the cursor goes, and a checkpoint is kept. Then a battle
+    /// in the place the last scene was set starts at once (5d §3), the chapter ends if that was its last beat, or the party walks again.
     /// </summary>
     private void FinishBeat(ArcBeat beat)
     {
+        if (beat.Kind == ArcBeat.Battle && Cursor?.Stage != StorySave.After)
+        {
+            ToTheFight(beat);      // never done without its fight won
+            return;
+        }
         EndTelling();
         var world = _doc.World!;
         _doc = _doc with
@@ -285,7 +390,20 @@ public sealed partial class TacticsGame
             },
         };
         KeepWorld();
+        if (ChapterOver)
+        {
+            _lease.Checkpoint(_doc.ToJson(), $"End of Chapter {Numeral(StoryArc!.Chapter)}");
+            ShowCard();
+            return;
+        }
         _lease.Checkpoint(_doc.ToJson(), $"After {BeatTitle(beat)}");
+        var here = _lastPlace ?? beat.Place;
+        _lastPlace = null;
+        if (OnOffer() is { } next && StoryRules.Chains(next, here))
+        {
+            BeginBeat(next, gap: true);      // "Dawn, then": straight into the assault
+            return;
+        }
         ToExploration();
     }
 
@@ -300,38 +418,110 @@ public sealed partial class TacticsGame
         _telling = StoryStates.Lines;
     }
 
+    // ---- Another place, and the end of a chapter --------------------------------------------------------------------------------
+
+    /// <summary>What <see cref="ExploreView.Arrived"/> says after the party travels to a scene set somewhere else: the TV fades.</summary>
+    internal const string Travelled = "travel";
+
     /// <summary>
-    /// Back into the beat the cursor names, after Muster or a restart (5d §8): on the saved line, said again with a new
-    /// <see cref="StoryView.Seq"/>; a question reopens, since votes aren't saved; a roll shows its result again, and is never made again.
-    /// A cursor on a scene or node that's gone restarts the beat from its first scene, with a notice. A beat that's gone or done is dropped.
+    /// Where the party goes for <paramref name="scene"/> (5d §3, Another place): a scene set in a place other than its beat's moves the party
+    /// to the spot of the arc's first beat there (<see cref="StoryRules.SpotFor"/>), or the nearest tile to it the party can stand on and
+    /// could have walked to. Null when it plays where the party is: its beat's own place, no spot there, or the party already on it.
+    /// </summary>
+    private Tile? TravelFor(SceneDef scene)
+    {
+        if (_region is not { } region || scene.Place is not { } place || BeatNamed(scene.Beat) is not { } beat || place == beat.Place
+            || StoryArc is not { } arc || StoryRules.SpotFor(arc, region.Def, place) is not { } spot)
+            return null;
+        var ground = Rules.GroundFor(region.Def.Id)!.Terrain;
+        var reached = WorldWalk.Reach(ground, region.Def.Spawns.Start, ClassDef.DefaultJump);
+        var armed = Armed()?.Stage;
+        var to = BattleStage.Standable(ground, spot, [spot, _at], t => ground.Map.InBounds(t) && reached.Contains(t) && armed?.Holds(t) != true);
+        return to is { } tile && tile != _at ? tile : null;
+    }
+
+    /// <summary>Moves the party for <paramref name="scene"/>, if it's set somewhere else: a teleport, so a new epoch, and the TV fades.</summary>
+    private void Travel(SceneDef scene)
+    {
+        if (TravelFor(scene) is not { } to)
+            return;
+        (_at, _facing, _arrived) = (to, new Tile(to.X + 1, to.Y), Travelled);
+        _epoch++;
+        _legs = [];
+    }
+
+    /// <summary>The chapter that just ended, while its card shows; null otherwise.</summary>
+    private string? _card;
+
+    /// <summary>The chapter's last beat is done (5d default 13): its card shows for a while, once, and then the party walks free.</summary>
+    private void ShowCard()
+    {
+        _phase = TacticsPhase.Story;
+        var arc = StoryArc!;
+        _card = $"Chapter {Numeral(arc.Chapter)} · {arc.Title}";
+        _telling = StoryStates.Card;
+        _lineDue = _ctx.Now + Tell.Card;
+        _ctx.SetTimer(Timers.Line, Tell.Card);
+    }
+
+    // ---- Coming back --------------------------------------------------------------------------------------------------------------
+
+    /// <summary>
+    /// Back into the beat the cursor names, after Muster, Results or a restart (5d §8): on the saved line, said again with a new
+    /// <see cref="StoryView.Seq"/>; a question reopens, since votes aren't saved; a roll shows its result again, and is never made again. A
+    /// beat at its fight waits there, in the world. A beat won goes on to its aftermath. A beat that's gone, a scene or node that's gone, or a
+    /// scene that no longer plays with the flags as they are restarts its stage from the beginning with a notice (or is dropped, for a
+    /// beat that's gone); a battle beat is never marked done by any of it.
     /// </summary>
     private void ResumeStory()
     {
         var c = Cursor!;
         _storySeq = Math.Max(_storySeq, c.Seq);
-        if (BeatNamed(c.Beat) is not { } beat || _doc.World!.Beats.Contains(beat.Id))
+        var beat = BeatNamed(c.Beat);
+        var wrongStage = beat is not null && c.Stage != StorySave.Lead && beat.Kind != ArcBeat.Battle;
+        if (beat is null || wrongStage || _doc.World!.Beats.Contains(beat.Id))
         {
+            if (beat is null || wrongStage)
+                Note(StoryChanged);
             _doc = _doc with { World = _doc.World! with { Story = null } };
             Save();
             ToExploration();
             return;
         }
-        _phase = TacticsPhase.Story;
-        var scene = Lore.ScenesOf(beat.Id).FirstOrDefault(s => s.Id == c.Scene);
-        var node = c.Node is null ? null : scene?.Node(c.Node);
-        if (scene is null || (c.Node is not null && (node is null || c.Line < 0 || c.Line >= node.Lines.Length)))
+        if (c.Stage == StorySave.Fight)
         {
+            ToExploration();        // its stamp is armed and its "!" up: the party walks back to it
+            return;
+        }
+        _phase = TacticsPhase.Story;
+        var after = c.Stage == StorySave.After;
+        var scene = Lore.ScenesOf(beat.Id).FirstOrDefault(s => s.Id == c.Scene && s.After == after);
+        var node = c.Node is null ? null : scene?.Node(c.Node);
+        var gone = c.Scene is not null && (scene is null || (c.Node is not null && (node is null || c.Line < 0 || c.Line >= node.Lines.Length))
+            || (c.Node is null && !SceneRun.Plays(scene!, StoryFlags())));
+        if (gone)
             Note(StoryChanged);
-            SetCursor(null);
-            BeginBeat(beat);
+        if (gone || c.Scene is null)
+        {
+            if (!after)
+            {
+                BeginBeat(beat);
+                return;
+            }
+            // The aftermath, from its first scene that plays; with none, the beat is done.
+            SetCursor(c with { Scene = null, Node = null, Line = 0, Played = [], Roll = null });
+            if (SceneRun.Next(Lore.ScenesOf(beat.Id), StoryFlags(), null, aftermath: true) is { } first)
+                Between(first);
+            else
+                FinishBeat(beat);
             return;
         }
         if (node is null)
-            BeginScene(scene);
+            BeginScene(scene!);
         else if (c.Roll is not null)
             ShowRoll();
         else
-            PlayLine(scene, node, c.Line);
+            PlayLine(scene!, node, c.Line);
     }
 
     // ---- Questions ------------------------------------------------------------------------------------------------------------
@@ -805,7 +995,7 @@ public sealed partial class TacticsGame
         var who = line is null ? null : Lore.Character(line.Speaker);
         return Custom(Screens.Dialogue, new
         {
-            title = scene?.Title,
+            title = scene?.Title ?? _card,
             line = line?.Id,
             speaker = who?.Name,
             portrait = who?.Preset,

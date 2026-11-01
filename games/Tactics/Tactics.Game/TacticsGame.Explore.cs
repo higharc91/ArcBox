@@ -141,9 +141,16 @@ public sealed partial class TacticsGame
     {
         if (_region is null || _doc.World is not { } world || Lore.ArcFor(_region.Def.Id) is not { } arc)
             return null;
-        if (StoryRules.Available(arc, world.Flags.ToHashSet(StringComparer.Ordinal), world.Beats.ToHashSet(StringComparer.Ordinal))
-                is not { Kind: ArcBeat.Battle, Encounter: { } encounter } beat
+        // A beat whose fight is won counts as done here though its aftermath is still to play (5d §3): its stamp is ordinary ground, and
+        // the party lands clear of whatever stamp follows it, as 5c did when the beat was done at the win.
+        var beats = world.Beats.ToHashSet(StringComparer.Ordinal);
+        if (world.Story is { Stage: StorySave.After } won)
+            beats.Add(won.Beat);
+        if (StoryRules.Available(arc, world.Flags.ToHashSet(StringComparer.Ordinal), beats) is not { Kind: ArcBeat.Battle, Encounter: { } encounter } beat
             || !Rules.Encounters.TryGetValue(encounter, out var def) || StageFor(def.Map) is not { } stage)
+            return null;
+        // A beat whose lead-in is under way isn't waiting at its stamp: only one at its fight, or not yet begun, is.
+        if (world.Story is { Stage: StorySave.Lead } leading && leading.Beat == beat.Id)
             return null;
         return (beat, stage);
     }
@@ -350,10 +357,10 @@ public sealed partial class TacticsGame
         }
         else if (Armed() is { } armed && armed.Stage.Holds(move.To) && !armed.Stage.Holds(from))
         {
-            // Into the stamp of the fight on offer, from outside it: the party stops one tile short, facing it, and the fight starts.
+            // Into the stamp of the fight on offer, from outside it: the party stops one tile short, facing it, and the beat starts.
             // Nothing of the walk goes on: not this step's save or timer, nor the next.
             _facing = move.To;
-            StartFight(armed.Beat.Encounter!, armed.Beat.Id);
+            EnterBattleBeat(armed.Beat);       // its lead-in first, the first time (5d §3)
             return;
         }
         else

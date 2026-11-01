@@ -181,7 +181,7 @@ public sealed class WalkModelTests
             var last = _lease.World?.LastLeader;
             _context = new Context(_setup.Seed + _commits, _setup.Clock == 2) { Clock = _context.Clock.AddSeconds(2) };
             _over = false;
-            _game = new TacticsGame(Rules, Timing, _setup.Armed > 0 ? StageBattleTests.Lore.Value : null, battleList: true);
+            _game = new TacticsGame(Rules, Timing, _setup.Armed > 0 ? StageBattleTests.FightLore.Value : null, battleList: true);
             (_heldUntil, _dir, _lastAlongX, _commits, _behindSince) = (null, null, null, 0, null);
             (_owed, _latched, _settledAt, _leaderHeard) = (false, false, DateTimeOffset.MinValue, _context.Clock);
             _silent.Clear();
@@ -472,7 +472,17 @@ public sealed class WalkModelTests
             if (_setup.Armed == 0 || _lease.World is not { } world)
                 return null;
             var beat = _setup.Armed == 1 ? "ch1_ford_assault" : "ch1_river_crossing";
-            return world.Beats.Contains(beat) ? null : StageBattleTests.Stage;
+            // A fight won is over though its aftermath is still to play (5d): the beat counts as done from the win.
+            return world.Beats.Contains(beat) || world.Story is { Stage: StorySave.After } won && won.Beat == beat ? null : StageBattleTests.Stage;
+        }
+
+        /// <summary>A phone's view with the walk screen's <c>interact</c> taken out.</summary>
+        private static string WithoutInteract(string phone)
+        {
+            var node = System.Text.Json.Nodes.JsonNode.Parse(phone)!;
+            if (node["data"] is System.Text.Json.Nodes.JsonObject data)
+                data.Remove("interact");
+            return node.ToJsonString();
         }
 
         /// <summary>Runs battle code, setting aside "hero1 and hero2 share the tile", a battle bug of its own with nothing to do with walking.</summary>
@@ -649,7 +659,8 @@ public sealed class WalkModelTests
             (_lastCommit, _lastMs) = (now, leg.Ms);
             _commits++;
             if (before.Phase == after.Phase && before.Party.Leader == after.Party.Leader && e.Kind is not ("disc" or "conn"))
-                Must(before.Phones.SequenceEqual(after.Phones), "a phone changed on a step");
+                // Only the leader's Interact may change on a step, and only as a beat's spot comes into reach or goes out of it (5d flag 8).
+                Must(before.Phones.Select(WithoutInteract).SequenceEqual(after.Phones.Select(WithoutInteract)), "a phone changed on a step");
         }
 
         private void CheckLeaders(Seen after)

@@ -15,7 +15,7 @@ public sealed class StageEndTests
     /// Makes the next command the engine applies end the battle with <paramref name="outcome"/>, after <paramref name="edit"/> has moved
     /// whoever it likes: the end goes through the game's own path, from a real command.
     /// </summary>
-    private static void EndOnNextCommand(Session s, BattleOutcome outcome, Func<BattleState, BattleState>? edit = null)
+    internal static void EndOnNextCommand(Session s, BattleOutcome outcome, Func<BattleState, BattleState>? edit = null)
     {
         var engine = s.Game.ApplyEngine;
         s.Game.ApplyEngine = (state, command, rules, ai) =>
@@ -27,7 +27,7 @@ public sealed class StageEndTests
     }
 
     /// <summary>Plays on, every player ending their turn and the TV never answering, until the battle is over.</summary>
-    private static void PlayOn(Session s)
+    internal static void PlayOn(Session s)
     {
         for (var i = 0; i < 2_000 && s.Game.Phase == TacticsPhase.Battle; i++)
         {
@@ -50,7 +50,7 @@ public sealed class StageEndTests
         => state => state with { Units = state.Units.SetItem(unit, state.Units[unit] with { Pos = at, Life = life, Hp = life == LifeState.Up ? Math.Max(1, state.Units[unit].Hp) : 0 }) };
 
     /// <summary>The fight ended with <paramref name="outcome"/> on the next command, after <paramref name="edit"/>, at Results.</summary>
-    private static Session Ended(Session s, BattleOutcome outcome, Func<BattleState, BattleState>? edit = null)
+    internal static Session Ended(Session s, BattleOutcome outcome, Func<BattleState, BattleState>? edit = null)
     {
         EndOnNextCommand(s, outcome, edit);
         PlayOn(s);
@@ -215,10 +215,18 @@ public sealed class StageEndTests
 
         Ended(s, BattleOutcome.Won, state => state with { Flags = state.Flags.Add("bridge_held") });
 
+        // The flags at the win; the beat is done once its aftermath has played (5d §3), which this lore has none of.
         var world = Saved(s);
-        Assert.Equal([.. Force.Beats, "ch1_ford_assault"], world.Beats);
+        Assert.Equal(Force.Beats, world.Beats);
+        Assert.Equal(new StorySave("ch1_ford_assault", StorySave.After, null, null, 0, world.Story!.Seq) with { Played = [] }, world.Story with { Played = [] });
         Assert.Equal(["ch1_skarrow_slain", "bridge_held"], world.Flags);
         Assert.Contains("ford_assault", TacticsDocument.Read(s.Lease.Document).Completed);
+
+        s.Send(0, "next");
+
+        Assert.Equal([.. Force.Beats, "ch1_ford_assault"], Saved(s).Beats);
+        Assert.Null(Saved(s).Story);
+        Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
     }
 
     [Fact]
@@ -266,11 +274,12 @@ public sealed class StageEndTests
 
             Ended(s, BattleOutcome.Won, Put(HeroOf(s, LeaderOf(s)), WestBank));
 
-            Legal(s, s.Host.Explore!.At, stampArmed: true);
-            s.Send(0, "next");
             var back = s.Host.Explore!.At;
-            Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
+            Legal(s, back, stampArmed: true);
             Assert.Equal(from, back);       // where the fight began: nearer tiles are in the stamp, and so is its party spawn
+            s.Send(0, "next");
+            Assert.Equal(TacticsPhase.Battle, s.Game.Phase);        // in the same place, the second follows at once (5d §3)
+            Assert.Equal("second", s.Game.Document.Battle!.Beat);
         }
         finally
         {
@@ -532,7 +541,7 @@ public sealed class StageEndTests
         Assert.Equal("ch1_ford_assault", resumed.Game.Document.Battle!.Beat);
         Assert.NotNull(resumed.Host.Battle!.Stage);
         Ended(resumed, BattleOutcome.Won);
-        Assert.Contains("ch1_ford_assault", Saved(resumed).Beats);
+        Assert.Equal(("ch1_ford_assault", StorySave.After), (Saved(resumed).Story!.Beat, Saved(resumed).Story!.Stage));
     }
 
     // ---- The battle list --------------------------------------------------------------------------------------------

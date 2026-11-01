@@ -224,31 +224,41 @@ public sealed class StoryModelTests
             _game.OnPlayerConnectionChanged(_players[seat].Id, connected);
         }
 
-        /// <summary>Between beats: walk on to the next one on offer (by a restart that puts the party beside it), passing over fights as won.</summary>
+        /// <summary>Between beats: walk on to the next one on offer, battles too, by a restart that puts the party beside it.</summary>
         private void NextBeat()
         {
             var doc = _lease.Read();
             var world = doc.World!;
-            for (var guard = 0; guard < 20; guard++)
+            if (StoryRules.Available(Arc, world.Flags.ToHashSet(), world.Beats.ToHashSet()) is not { } beat)
             {
-                var beat = StoryRules.Available(Arc, world.Flags.ToHashSet(), world.Beats.ToHashSet());
-                if (beat is null)
-                {
-                    Teleport(Starts[_r.Next(Starts.Length)]);
-                    return;
-                }
-                if (beat.Kind != ArcBeat.Battle)
-                {
-                    var at = StoryTests.NearSpot(beat.Id);
-                    _lease.Document = (doc with { World = world with { At = at, Facing = new Tile(at.X + 1, at.Y) } }).ToJson();
-                    StartSession();
-                    return;
-                }
-                world = world with { Flags = [.. world.Flags.Concat(beat.Sets).Distinct()], Beats = world.Beats.Add(beat.Id) };     // won, as 5c would
-                doc = doc with { World = world };
+                Teleport(Starts[_r.Next(Starts.Length)]);
+                return;
             }
-            throw new ModelBroke("no beat to go to");
+            var at = StoryTests.NearSpot(beat.Id);
+            _lease.Document = (doc with { World = world with { At = at, Facing = new Tile(at.X + 1, at.Y) } }).ToJson();
+            StartSession();
         }
+
+        /// <summary>
+        /// A fight started from a battle beat: the model ends it as 5c would, won or lost, by a restart on the document a fight's end leaves
+        /// (the fights themselves are <see cref="StageEndTests"/>'): won, its flags set and the beat at its aftermath; lost, still at its fight.
+        /// </summary>
+        private void EndFight()
+        {
+            var doc = _lease.Read();
+            var world = doc.World!;
+            Must(world.Story is { Stage: StorySave.Fight } c && c.Beat == doc.Battle?.Beat, "a story fight with no cursor at its fight");
+            var beat = Arc.Beats.Single(b => b.Id == world.Story!.Beat);
+            if (_r.Next(4) > 0)
+                world = world with { Flags = [.. world.Flags.Concat(beat.Sets).Distinct()], Story = world.Story! with { Stage = StorySave.After } };
+            else
+                _fightsLost++;
+            _lease.Document = (doc with { Battle = null, World = world }).ToJson();
+            _fights++;
+            Restart((1 << _players.Count) - 1);
+        }
+
+        private int _fights, _fightsLost;
 
         public void Play(int events)
         {
@@ -350,6 +360,8 @@ public sealed class StoryModelTests
                 }
             }
             Check(e.Kind);
+            if (_game.Phase == TacticsPhase.Battle && _game.Document.Battle?.Beat is not null)
+                EndFight();
             if (_game.Phase != TacticsPhase.Exploration)
                 return;
             if (telling)
@@ -394,11 +406,24 @@ public sealed class StoryModelTests
             {
                 Must(!_context.Timers.Keys.Intersect(StageBattleTests.WalkingTimers).Any(), $"a walking timer in a scene ({what})");
                 Must(!host.Explore!.Held && !host.Explore.Blocked, "the party is held in a scene");
-                Must(cursor is not null, "a scene with no cursor saved");
-                Must(host.Story is not null, "a scene with no story view");
+                if (host.Chapter is null)
+                {
+                    Must(cursor is { Stage: StorySave.Lead or StorySave.After }, "a scene with no lead-in or aftermath cursor saved");
+                    Must(host.Story is not null, "a scene with no story view");
+                }
+                else
+                    Must(cursor is null && host.Story is null, "a chapter card over a scene");
             }
             else
-                Must(cursor is null || _game.Phase == TacticsPhase.Muster, $"a cursor saved in {_game.Phase}");
+                Must(_game.Phase switch
+                {
+                    TacticsPhase.Muster or TacticsPhase.Resuming => true,
+                    TacticsPhase.Exploration or TacticsPhase.Battle => cursor is null or { Stage: StorySave.Fight },
+                    TacticsPhase.Results => cursor is null or { Stage: StorySave.Fight or StorySave.After },
+                    _ => cursor is null,
+                }, $"a {cursor?.Stage} cursor saved in {_game.Phase}");
+            if (_game.Phase == TacticsPhase.Battle && cursor is not null)
+                Must(_game.Document.Battle?.Beat == cursor.Beat, "a fight that isn't the cursor's beat");
 
             if (cursor is not null)
                 CheckCursor(cursor, saved!);
@@ -413,8 +438,16 @@ public sealed class StoryModelTests
         {
             var beat = Arc.Beats.FirstOrDefault(b => b.Id == c.Beat);
             Must(beat is not null && !world.Beats.Contains(c.Beat), $"the cursor's beat {c.Beat} isn't one on offer");
-            var scene = Lore.ScenesOf(c.Beat).FirstOrDefault(s => s.Id == c.Scene);
-            Must(scene is not null, $"the cursor's scene {c.Scene} isn't one of {c.Beat}'s");
+            if (c.Stage == StorySave.Fight || c.Scene is null)
+            {
+                Must(beat!.Kind == ArcBeat.Battle && c.Stage != StorySave.Lead && c.Node is null && c.Played.IsEmpty,
+                    $"a {c.Stage} cursor with no scene for {c.Beat}");
+                (_sceneOf, _played) = (null, []);
+                return;
+            }
+            Must(c.Stage == StorySave.Lead || beat!.Kind == ArcBeat.Battle, $"a {c.Stage} cursor on {c.Beat}");
+            var scene = Lore.ScenesOf(c.Beat).FirstOrDefault(s => s.Id == c.Scene && s.After == (c.Stage == StorySave.After));
+            Must(scene is not null, $"the cursor's scene {c.Scene} isn't one of {c.Beat}'s {c.Stage}");
             if (c.Node is { } id)
             {
                 var node = scene!.Node(id);
@@ -498,6 +531,12 @@ public sealed class StoryModelTests
             if (before is null)
             {
                 Must(_game.Phase != TacticsPhase.Story, "a restart with no cursor went into a scene");
+                return;
+            }
+            if (before.Stage == StorySave.Fight || before.Scene is null)
+            {
+                Must(before.Stage != StorySave.Fight || (_game.Phase != TacticsPhase.Story && after == before),
+                    $"a restart at a fight went to {_game.Phase} with {after?.Stage}");
                 return;
             }
             Must(_game.Phase == TacticsPhase.Story, $"a restart with a cursor went to {_game.Phase}");

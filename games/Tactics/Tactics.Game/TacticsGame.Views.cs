@@ -264,9 +264,11 @@ public sealed record StoryCheckView(string Skill, int Dc, string Title, Immutabl
 /// </param>
 /// <param name="Explore">The party in the world, in every phase; null for a pack with no region.</param>
 /// <param name="Story">The scene under way, in the Story phase; null otherwise.</param>
+/// <param name="Chapter">The chapter that has just ended, while its card shows ("Chapter I · The Bridge at the Ford"); null otherwise.</param>
 public sealed record TacticsHostView(string Phase, string Banner, string? Notice, int PartyLevel,
     ImmutableArray<string> Mustered, ImmutableArray<EncounterOption>? Encounters, BattleView? Battle,
-    string? Outcome, ImmutableArray<ResultLine>? Results, BattleView? LastBattle = null, ExploreView? Explore = null, StoryView? Story = null);
+    string? Outcome, ImmutableArray<ResultLine>? Results, BattleView? LastBattle = null, ExploreView? Explore = null, StoryView? Story = null,
+    string? Chapter = null);
 
 public sealed partial class TacticsGame
 {
@@ -276,7 +278,7 @@ public sealed partial class TacticsGame
         _phase == TacticsPhase.EncounterPick ? EncounterOptions() : null,
         _doc.Battle is not null && _phase is TacticsPhase.Battle or TacticsPhase.Resuming ? BattleViewOf() : null,
         _result?.Outcome.ToString(), _phase == TacticsPhase.Results ? ResultLines() : null,
-        _phase == TacticsPhase.Results ? _lastBattle : null, ExploreViewOf(), StoryViewOf());
+        _phase == TacticsPhase.Results ? _lastBattle : null, ExploreViewOf(), StoryViewOf(), _card);
 
     /// <inheritdoc />
     public ControllerView PlayerView(PlayerId id)
