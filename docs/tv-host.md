@@ -365,7 +365,8 @@ A scene (overworld 5d) plays over the world. `StoryTrack` (Tactics.Presentation)
   that tumbles for 1.2 s and lands on the roll; `ChapterBoard`, the chapter's card. The countdown reads the server's deadline against
   `StoryAskView.Span`, so a skewed TV clock can't show the wrong time.
 - **The world**: the beat on offer has its figure at the spot, with the `alert` emote over them until its scene starts (`StoryMarks`,
-  drawn among the party by `WalkShow`). The dice and the verdict play `ui_dice_roll`, then `ui_confirm` or `ui_error`.
+  drawn among the party by `WalkShow`). While a scene plays, its speakers stand there instead (`ExploreView.Cast`, the user's answer to
+  item 21): the server picks their tiles (`SceneCast`), each looks at the leader, and `WalkTrack.Keep` keeps followers off them. The dice and the verdict play `ui_dice_roll`, then `ui_confirm` or `ui_error`.
 - **Shots**: `tactics-story-marker`, `-line-narrator`, `-line-speaker`, `-choice`, `-vote`, `-vote-tally`, `-tie`, `-vote-many`, `-check`,
   `-roll-tumbling`, `-roll-pass`, `-roll-fail`, `-gap` and `-card`, at most two of each.
 
