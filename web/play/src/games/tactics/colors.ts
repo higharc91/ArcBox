@@ -6,7 +6,8 @@
 
 export interface PaletteColor { hex: string; name: string }
 export interface Ground { name: string; hex: string }
-export interface ColorOptions { palette: PaletteColor[]; grounds: Ground[]; minContrast: number; current: string }
+/** `taken`: the colours other members have, by their names; absent from an older server. */
+export interface ColorOptions { palette: PaletteColor[]; grounds: Ground[]; minContrast: number; current: string; taken?: { hex: string; name: string }[] }
 
 /** "#rrggbb" (any case) as lower case, or null. */
 export function parseHex(hex: string | null | undefined): string | null {

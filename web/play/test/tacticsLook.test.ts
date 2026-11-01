@@ -1,8 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { compose, paint, recipe, type Creator } from "../src/games/tactics/look";
+import { compose, paint, recipe, type CharManifest, type Creator, type Palettes } from "../src/games/tactics/look";
+import { dataUrlBytes, readPng } from "./png";
 
 // The pack's own files: the creator's options and the class presets the asset tools baked.
-const files = import.meta.glob<{ default: unknown }>("../../../content/tactics/base/characters/{creator.json,presets/class_*.json}", { eager: true });
+const files = import.meta.glob<{ default: unknown }>("../../../content/tactics/base/characters/{creator.json,manifest.json,palettes.json,presets/class_*.json}", { eager: true });
 const file = (name: string) => files[`../../../content/tactics/base/characters/${name}`]!.default;
 const creator = file("creator.json") as Creator;
 const preset = (cls: string) => file(`presets/class_${cls}.json`) as {
@@ -58,5 +59,25 @@ describe("the look", () => {
     expect([...px.slice(0, 4)]).toEqual([0, 0, 0, 255]);           // above it: outline, shade 0 mixed
     expect([...px.slice(12, 16)]).toEqual([0, 0, 0, 255]);
     expect(px[7]).toBe(0);                                        // the diagonal stays empty
+  });
+
+  /** The browser's composition, pixel for pixel, against the wizard preset the asset tools baked (front idle frame). */
+  it("composes the wizard preset exactly as the asset tools baked it", async () => {
+    const base = "../../../content/tactics/base/characters/";
+    const manifest = file("manifest.json") as CharManifest;
+    const palettes = file("palettes.json") as Palettes;
+    const p = preset("wizard");
+    const pngs = import.meta.glob<string>("../../../content/tactics/base/characters/{presets/class_wizard,short/*/*}.png", { eager: true, query: "?inline", import: "default" });
+    const { width: w, height: h } = manifest.frame;
+    const frames: Record<string, { width: number; height: number; data: Uint8ClampedArray }> = {};
+    for (const [layer, variant] of Object.entries(p.layers))
+      frames[layer] = { width: w, height: h, data: await readPng(dataUrlBytes(pngs[`${base}${p.build}/${layer}/${variant}.png`]!), w, h) };
+    const mine = paint(compose(manifest.order.front, frames, w, h), manifest.slotIds, p.palette, palettes.ramps, manifest.outline);
+    const baked = await readPng(dataUrlBytes(pngs[`${base}presets/class_wizard.png`]!), w, h);
+    let differ = 0;
+    for (let i = 0; i < baked.length; i += 4)
+      if (baked[i + 3] !== mine[i + 3] || (baked[i + 3] && [0, 1, 2].some((k) => Math.abs(baked[i + k]! - mine[i + k]!) > 1))) differ++;
+    expect(differ).toBe(0);
+    expect(baked.filter((_, i) => i % 4 === 3 && baked[i]! > 0).length).toBeGreaterThan(200);    // a figure, not an empty frame
   });
 });

@@ -131,12 +131,22 @@ export function canCompose(): boolean {
   }
 }
 
-/** The look of a race and class, composed once per pair; null when the pack or a canvas isn't there. */
+/** How long a failed look is remembered before it's tried again (the pack may have been slow, or a request dropped). */
+export const RETRY_MS = 3000;
+
+/**
+ * The look of a race and class, composed once per pair; null when the pack or a canvas isn't there. A failure is forgotten after
+ * RETRY_MS, so the next ask tries again. Each layer sheet is decoded whole to read its first frame: a sheet is one small PNG (3 KB to
+ * 42 KB), cached by the browser and shared by every race and class that wears it, so cropping the decode wasn't worth its complexity.
+ */
 export function lookFor(race: string, cls: string): Promise<Look | null> {
   const key = `${race}/${cls}`;
   let pending = cache.get(key);
   if (!pending) {
-    pending = build(race, cls).catch(() => null);
+    pending = build(race, cls).catch(() => null).then((look) => {
+      if (!look) setTimeout(() => { if (cache.get(key) === pending) cache.delete(key); }, RETRY_MS);
+      return look;
+    });
     cache.set(key, pending);
   }
   return pending;

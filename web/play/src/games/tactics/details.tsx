@@ -60,44 +60,65 @@ const KIND: Record<Topic["kind"], string> = {
 
 const reducedMotion = () => typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/** A heading to put focus on when what opened a sheet has gone: the panel's own heading, else the page's. Made focusable. */
+export function fallbackFocus(): HTMLElement | null {
+  const el = [".tx-portal .tx-panel h2", ".tx-portal h1", "h1"].map((q) => document.querySelector<HTMLElement>(q)).find((x) => x) ?? null;
+  if (el && !el.hasAttribute("tabindex")) el.setAttribute("tabindex", "-1");
+  return el;
+}
+
 /**
- * A modal bottom sheet: a heading and a close button, focus moved in on opening and back to what opened it on closing, Escape and the
- * backdrop close it, and Tab stays inside. It slides up unless the player asked for reduced motion.
+ * A modal bottom sheet: a heading and a close button, focus moved in on opening and back to what opened it on closing (or, when that
+ * has gone, to the panel's heading), Escape and the backdrop close it, and Tab stays inside, wherever focus is on the page: the keys
+ * are heard at the document while it's open. A new `focusKey` (another topic shown, or Back) puts focus on the close button again. It
+ * slides up unless the player asked for reduced motion.
  */
-export function Sheet({ title, eyebrow, onClose, onBack, children, foot, wide = false }: {
+export function Sheet({ title, eyebrow, onClose, onBack, children, foot, wide = false, focusKey, restore }: {
   title: string; eyebrow?: string; onClose(): void; onBack?: () => void; children: ComponentChildren; foot?: ComponentChildren; wide?: boolean;
+  focusKey?: unknown;
+  /** Where focus goes on closing instead of the opener: read when the sheet goes. */
+  restore?: { current: (() => HTMLElement | null) | null };
 }) {
   const box = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const closing = useRef(onClose);
+  closing.current = onClose;
   useEffect(() => {
     const opener = document.activeElement as HTMLElement | null;
-    closeRef.current?.focus();
-    return () => opener?.focus?.();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.stopPropagation();
+        e.preventDefault();
+        closing.current();
+        return;
+      }
+      if (e.key !== "Tab" || !box.current) return;
+      const focusable = [...box.current.querySelectorAll<HTMLElement>("button, [href], input, summary, [tabindex]:not([tabindex='-1'])")]
+        .filter((el) => !(el as HTMLButtonElement).disabled);
+      if (focusable.length === 0) return;
+      const first = focusable[0]!, last = focusable[focusable.length - 1]!;
+      const inside = box.current.contains(document.activeElement);
+      if (!inside || (e.shiftKey && document.activeElement === first)) {
+        e.preventDefault();
+        (e.shiftKey ? last : first).focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey, true);
+    return () => {
+      document.removeEventListener("keydown", onKey, true);
+      const chosen = restore?.current?.();
+      const target = chosen ?? (opener && opener !== document.body && opener.isConnected ? opener : fallbackFocus());
+      target?.focus?.();
+    };
   }, []);
-  const onKey = (e: KeyboardEvent) => {
-    if (e.key === "Escape") {
-      e.stopPropagation();
-      onClose();
-      return;
-    }
-    if (e.key !== "Tab" || !box.current) return;
-    const focusable = [...box.current.querySelectorAll<HTMLElement>("button, [href], input, summary, [tabindex]:not([tabindex='-1'])")]
-      .filter((el) => !(el as HTMLButtonElement).disabled);
-    if (focusable.length === 0) return;
-    const first = focusable[0]!, last = focusable[focusable.length - 1]!;
-    if (e.shiftKey && document.activeElement === first) {
-      e.preventDefault();
-      last.focus();
-    } else if (!e.shiftKey && document.activeElement === last) {
-      e.preventDefault();
-      first.focus();
-    }
-  };
+  useEffect(() => closeRef.current?.focus(), [focusKey]);
   const id = useRef(`tx-sheet-${Math.random().toString(36).slice(2)}`).current;
   return (
     <div class="tx-sheet-scrim" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
-      <div ref={box} class={`tx-sheet${wide ? " wide" : ""}${reducedMotion() ? " still" : ""}`} role="dialog" aria-modal="true" aria-labelledby={id}
-        onKeyDown={onKey}>
+      <div ref={box} class={`tx-sheet${wide ? " wide" : ""}${reducedMotion() ? " still" : ""}`} role="dialog" aria-modal="true" aria-labelledby={id}>
         <header class="tx-sheet-head">
           {onBack ? <button type="button" class="tx-sheet-icon" aria-label="Back" onClick={onBack}>‹</button> : null}
           <div class="tx-sheet-titles">
@@ -113,17 +134,22 @@ export function Sheet({ title, eyebrow, onClose, onBack, children, foot, wide = 
   );
 }
 
-/** The details sheet: a topic, and any topic tapped inside it, with Back to the one before. */
+/**
+ * The details sheet: a topic, and any topic tapped inside it, with Back to the one before. Each new topic, and Back, puts focus on the
+ * close button (the button pressed has gone). After "Choose …" or "Pick …", focus goes to the panel's heading: what opened the sheet may
+ * well go with the change.
+ */
 export function DetailsSheet({ details, topic, context, onClose }: { details: PortalDetails; topic: Topic; context: Context; onClose(): void }) {
   const [stack, setStack] = useState<Topic[]>([topic]);
+  const restore = useRef<(() => HTMLElement | null) | null>(null);
   useEffect(() => setStack([topic]), [JSON.stringify(topic)]);
   const top = stack[stack.length - 1]!;
   const open = (t: Topic) => setStack((s) => [...s, t]);
   const choice = context.choose?.(top) ?? null;
   return (
-    <Sheet title={topicName(details, top)} eyebrow={KIND[top.kind]} onClose={onClose}
-      onBack={stack.length > 1 ? () => setStack((s) => s.slice(0, -1)) : undefined}
-      foot={choice ? <button type="button" class="tx-btn gold" onClick={() => { choice.run(); onClose(); }}>{choice.label}</button> : null}>
+    <Sheet title={topicName(details, top)} eyebrow={KIND[top.kind]} onClose={onClose} focusKey={`${stack.length}:${JSON.stringify(top)}`}
+      restore={restore} onBack={stack.length > 1 ? () => setStack((s) => s.slice(0, -1)) : undefined}
+      foot={choice ? <button type="button" class="tx-btn gold" onClick={() => { restore.current = fallbackFocus; choice.run(); onClose(); }}>{choice.label}</button> : null}>
       <Body details={details} topic={top} context={context} open={open} />
     </Sheet>
   );

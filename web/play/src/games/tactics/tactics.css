@@ -384,6 +384,8 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-swatches { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
 .tx .tx-swatch { position: relative; min-height: 48px; border-radius: 10px; border: 2px solid rgba(255, 255, 255, 0.18); background: var(--c); cursor: pointer; }
 .tx .tx-swatch.on { border-color: var(--wf-ink); box-shadow: 0 0 0 3px #0b0c1c, 0 0 0 5px var(--wf-gold-hi); }
+.tx-swatch.taken { display: grid; place-items: end end; padding: 3px; }
+.tx-swatch-who { min-width: 20px; padding: 1px 5px; border-radius: 999px; font: 800 12px/1.3 var(--wf-sans); color: #fff; background: rgba(10, 11, 26, 0.85); }
 .tx-swatch.custom { display: grid; place-items: center; font: 800 24px var(--wf-sans); color: var(--wf-gold-hi);
   background: conic-gradient(#ff8a80, #ffd23f, #b9f26b, #8ff0c4, #7ccbff, #d2b4ff, #ffa8dd, #ff8a80); }
 .tx-swatch.custom.on { background: var(--c); }

@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { cleanup, fireEvent, render, screen, within } from "@testing-library/preact";
+import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/preact";
 import type { CampaignResponse } from "../src/protocol";
 import { TacticsPortal, placed, pointsSpent, type TacticsPortalView } from "../src/games/tactics/portal";
 import { contrast, readable, worstContrast } from "../src/games/tactics/colors";
@@ -213,7 +213,10 @@ describe("the sheet", () => {
   it("collapses picks to names per choice, with no lists until Change", () => {
     show(cleric);
     expect(screen.queryAllByRole("checkbox")).toHaveLength(0);
-    expect(screen.getAllByRole("button", { name: /^Change level \d+ picks$/ })).toHaveLength(me.choices.length);
+    const changes = screen.getAllByRole("button", { name: /^Change level \d+ picks: / });
+    expect(changes).toHaveLength(me.choices.length);
+    // Two choices at one level are told apart by what they hold.
+    expect(new Set(changes.map((b) => b.getAttribute("aria-label"))).size).toBe(me.choices.length);
     const groups = document.querySelectorAll(".tx-pick-group");
     expect(groups).toHaveLength(me.choices.length);
     const first = me.choices[0]!.picked![0]!;
@@ -223,7 +226,7 @@ describe("the sheet", () => {
   it("Change opens one choice's list, and saving swaps only its picks", () => {
     const send = show(cleric);
     const c = me.choices[0]!;
-    fireEvent.click(screen.getAllByRole("button", { name: `Change level ${c.level} picks` })[0]!);
+    fireEvent.click(screen.getAllByRole("button", { name: new RegExp(`^Change level ${c.level} picks:`) })[0]!);
     const d = dialog();
     expect(within(d).getAllByRole("checkbox")).toHaveLength(c.from.length);
     const save = within(d).getByRole("button", { name: "Save picks" }) as HTMLButtonElement;
@@ -241,7 +244,7 @@ describe("the sheet", () => {
     const send = show(cleric);
     const i = me.choices.findIndex((c) => c.choose === 1 && c.from.length > 1);
     const c = me.choices[i]!;
-    fireEvent.click(screen.getAllByRole("button", { name: `Change level ${c.level} picks` })[me.choices.filter((x, j) => x.level === c.level && j < i).length]!);
+    fireEvent.click(screen.getAllByRole("button", { name: new RegExp(`^Change level ${c.level} picks:`) })[me.choices.filter((x, j) => x.level === c.level && j < i).length]!);
     const other = c.from.find((o) => !me.picks.includes(o.id))!;
     fireEvent.click(within(dialog()).getByRole("checkbox", { name: new RegExp(other.name) }));
     fireEvent.click(within(dialog()).getByRole("button", { name: "Save picks" }));
@@ -295,5 +298,114 @@ describe("the sheet", () => {
       ],
     });
     expect(groups).toEqual([["a", "b"], ["c"]]);
+  });
+});
+
+describe("review fixes", () => {
+  it("Back puts focus on the close button, as a new topic does", () => {
+    show(fresh);
+    fireEvent.click(screen.getByRole("button", { name: "About Wizard" }));
+    const spell = FRESH.details!.classes.wizard!.levels[0]!.choices[0]!.from[0]!;
+    const link = within(dialog()).getAllByRole("button", { name: FRESH.details!.features[spell]!.name })[0]!;
+    link.focus();
+    fireEvent.click(link);
+    expect(document.activeElement).toBe(within(dialog()).getByRole("button", { name: "Close" }));
+    const back = within(dialog()).getByRole("button", { name: "Back" });
+    back.focus();
+    fireEvent.click(back);
+    expect(within(dialog()).getByRole("heading", { name: "Wizard" })).toBeTruthy();
+    expect(document.activeElement).toBe(within(dialog()).getByRole("button", { name: "Close" }));
+  });
+
+  it("after Choose, focus goes to the panel's heading, not to a button the change may take away", () => {
+    show(cleric);
+    const opener = screen.getByRole("button", { name: "About Life Domain" });
+    opener.focus();
+    fireEvent.click(opener);
+    fireEvent.click(within(dialog()).getByRole("button", { name: "Choose Life Domain" }));
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(document.activeElement).toBe(screen.getByRole("heading", { name: CLERIC.me!.name }));
+  });
+
+  it("when what opened the sheet has gone, closing falls back to the panel's heading", () => {
+    show(fresh);
+    const opener = screen.getByRole("button", { name: "About Elf" });
+    fireEvent.click(opener);
+    opener.remove();
+    fireEvent.click(within(dialog()).getByRole("button", { name: "Close" }));
+    expect(document.activeElement).toBe(screen.getByRole("heading", { name: "Make your character" }));
+  });
+
+  it("Escape and Tab work with focus lost to the page", () => {
+    show(fresh);
+    fireEvent.click(screen.getByRole("button", { name: "About Elf" }));
+    (document.activeElement as HTMLElement).blur();
+    expect(document.activeElement).toBe(document.body);
+    fireEvent.keyDown(document.body, { key: "Tab" });
+    expect(dialog().contains(document.activeElement)).toBe(true);
+    (document.activeElement as HTMLElement).blur();
+    fireEvent.keyDown(document.body, { key: "Escape" });
+    expect(screen.queryByRole("dialog")).toBeNull();
+  });
+
+  it("the arrows move along the swatches and pick, with one Tab stop", () => {
+    const send = show(fresh);
+    const radios = screen.getAllByRole("radio");
+    expect(radios.filter((r) => r.tabIndex === 0)).toHaveLength(1);
+    const start = radios.findIndex((r) => r.getAttribute("aria-checked") === "true");
+    fireEvent.keyDown(radios[start]!, { key: "ArrowRight" });
+    const next = screen.getAllByRole("radio")[(start + 1) % radios.length]!;
+    expect(next.getAttribute("aria-checked")).toBe("true");
+    expect(document.activeElement).toBe(next);
+    fireEvent.keyDown(next, { key: "ArrowLeft" });
+    fireEvent.keyDown(screen.getAllByRole("radio")[start]!, { key: "ArrowLeft" });
+    fireEvent.click(screen.getByRole("button", { name: "Create" }));
+    const colors = FRESH.options!.colors!;
+    expect(lastCall(send)[1].color).toBe(colors.palette[(start - 1 + radios.length) % radios.length]!.hex);
+  });
+
+  it("marks the colours other members have, and lets you share one", () => {
+    show(fresh);
+    const taken = FRESH.options!.colors!.taken!;
+    expect(taken.length).toBeGreaterThan(0);
+    const name = FRESH.options!.colors!.palette.find((p) => p.hex === taken[0]!.hex)!.name;
+    const swatch = screen.getByRole("radio", { name: `${name}, ${taken[0]!.name}'s` });
+    fireEvent.click(swatch);
+    expect(swatch.getAttribute("aria-checked")).toBe("true");
+  });
+
+  it("tells a screen reader the colour once a drag settles, not at every step", () => {
+    vi.useFakeTimers();
+    try {
+      show(fresh);
+      const status = screen.getByRole("status");
+      const before = status.textContent;
+      const input = document.querySelector<HTMLInputElement>(".tx-swatch input[type=color]")!;
+      for (const v of ["#102030", "#203040", "#304050"]) fireEvent.input(input, { target: { value: v } });
+      expect(status.textContent).toBe(before);
+      act(() => { vi.advanceTimersByTime(600); });
+      expect(screen.getByRole("status").textContent).toMatch(/lightened from #304050/);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("a stale pick that fits no choice isn't sent again with a Change", () => {
+    const view = structuredClone(CLERIC);
+    view.me!.picks = [...view.me!.picks, "cleric.not_a_spell"];
+    const send = show(view);
+    const c = view.me!.choices[0]!;
+    fireEvent.click(screen.getAllByRole("button", { name: new RegExp(`^Change level ${c.level} picks:`) })[0]!);
+    const drop = c.picked![0]!;
+    fireEvent.click(within(dialog()).getByRole("checkbox", { name: new RegExp(c.from.find((o) => o.id === drop)!.name) }));
+    fireEvent.click(within(dialog()).getByRole("button", { name: "Save picks" }));
+    const picks = lastCall(send)[1].picks as string[];
+    expect(picks).not.toContain("cleric.not_a_spell");
+    expect(picks.slice().sort()).toEqual(CLERIC.me!.picks.filter((p) => p !== drop).sort());
+  });
+
+  it("rounds an exact half byte to even, as the server does", () => {
+    const colors = FRESH.options!.colors!;
+    expect(readable("#0011cc", colors.grounds, colors.minContrast)).toBe("#b2b9ff");
   });
 });

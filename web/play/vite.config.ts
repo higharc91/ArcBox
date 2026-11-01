@@ -19,6 +19,8 @@ export default defineConfig({
     },
   },
   server: {
+    // The tests read the pack's character art to check the look composes as the asset tools bake it (test/tacticsLook.test.ts).
+    fs: { allow: [here("."), here("../../content/tactics/base/characters")] },
     proxy: {
       // The ArcBox server (dotnet run --urls http://0.0.0.0:5080) hosts the SignalR hub.
       "/hub": { target: "http://localhost:5080", ws: true, changeOrigin: true },

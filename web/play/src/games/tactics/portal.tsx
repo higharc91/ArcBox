@@ -4,7 +4,7 @@ import type { PortalProps } from "../module";
 import { Crest, Logo, Portrait } from "./art";
 import { colorName, readable, type ColorOptions, type PaletteColor } from "./colors";
 import { DetailsSheet, modifier, Sheet as Panel, signed, STATS, Tags, type Context, type PortalDetails, type StatKey, type Topic } from "./details";
-import { canCompose, lookFor, type Look } from "./look";
+import { canCompose, lookFor, RETRY_MS, type Look } from "./look";
 import { Section } from "./ui";
 
 /**
@@ -234,12 +234,22 @@ function Pixels({ image, scale, label }: { image: Look["sprite"]; scale: number;
  */
 export function LookPreview({ race, cls, color, title, compact = false }: { race: string; cls: string; color: string | null; title: string; compact?: boolean }) {
   const [look, setLook] = useState<Look | null>(null);
+  const [attempt, setAttempt] = useState(0);
   useEffect(() => {
     let live = true;
-    setLook(null);
-    if (canCompose()) void lookFor(race, cls).then((l) => { if (live) setLook(l); });
-    return () => void (live = false);
-  }, [race, cls]);
+    let retry: ReturnType<typeof setTimeout> | undefined;
+    if (attempt === 0) setLook(null);
+    if (canCompose()) {
+      void lookFor(race, cls).then((l) => {
+        if (!live) return;
+        setLook(l);
+        // A failed look (a slow pack, a dropped request) is tried again a little later, not given up on.
+        if (!l && attempt < 5) retry = setTimeout(() => setAttempt((a) => a + 1), RETRY_MS + 100);
+      });
+    }
+    return () => { live = false; clearTimeout(retry); };
+  }, [race, cls, attempt]);
+  useEffect(() => setAttempt(0), [race, cls]);
   const ring = { "--c": color ?? "transparent" } as JSX.CSSProperties;
   return (
     <figure class={`tx-look${compact ? " compact" : ""}`} aria-label={`Your look: ${title}`}>
@@ -256,7 +266,7 @@ export function LookPreview({ race, cls, color, title, compact = false }: { race
           <Portrait unit={{ name: title, sprite: null, hp: 1, maxHp: 1, side: "Party" }} cls={cls} size={80} tone="you" />
         </div>
       )}
-      {compact ? null : <figcaption><b>{title}</b><span class="tx-tip">{look ? "Your look on the TV, in your colour's ring." : "Your class's portrait."}</span></figcaption>}
+      {compact ? null : <figcaption><b>{title}</b><span class="tx-tip">{look ? "Your look. Your colour marks you on the TV and phones." : "Your class's portrait. Your colour marks you on the TV and phones."}</span></figcaption>}
     </figure>
   );
 }
@@ -275,21 +285,52 @@ export function ColorPicker({ colors, value, onChange, readOnly, heading = true 
 }) {
   const [asked, setAsked] = useState<string | null>(null);
   const custom = value !== null && !colors.palette.some((p) => p.hex === value);
+  const taken = colors.taken ?? [];
+  const whose = (hex: string) => taken.filter((t) => t.hex === hex).map((t) => t.name);
   const pickCustom = (raw: string) => {
     const made = readable(raw, colors.grounds, colors.minContrast);
     if (!made) return;
     setAsked(made === raw.toLowerCase() ? null : raw.toLowerCase());
     onChange(made);
   };
-  const swatch = (p: PaletteColor) => (
-    <button key={p.hex} type="button" role="radio" aria-checked={value === p.hex} aria-label={p.name} class={`tx-swatch${value === p.hex ? " on" : ""}`}
-      style={{ "--c": p.hex } as JSX.CSSProperties} disabled={readOnly} onClick={() => { setAsked(null); onChange(p.hex); }} />
-  );
+  const said = `${value ? colorName(value, colors.palette) : ""}${value && whose(value).length ? `, also ${whose(value).join(" and ")}'s` : ""}${asked ? ` — lightened from ${asked} so it shows on ${listed(colors.grounds.map((g) => g.name))}.` : ""}`;
+  // A screen reader hears the colour once it settles, not every step of a drag across the custom picker.
+  const [announced, setAnnounced] = useState(said);
+  useEffect(() => {
+    const t = setTimeout(() => setAnnounced(said), 500);
+    return () => clearTimeout(t);
+  }, [said]);
+  const group = useRef<HTMLDivElement>(null);
+  // One stop for Tab (the chosen swatch, else the first); the arrows move along the palette and pick, as a radio group does.
+  const current = colors.palette.findIndex((p) => p.hex === value);
+  const onArrow = (e: KeyboardEvent, i: number) => {
+    const step = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
+    if (!step || readOnly) return;
+    e.preventDefault();
+    const n = colors.palette.length;
+    const next = (i + step + n) % n;
+    setAsked(null);
+    onChange(colors.palette[next]!.hex);
+    group.current?.querySelectorAll<HTMLButtonElement>("button[role=radio]")[next]?.focus();
+  };
+  const swatch = (p: PaletteColor, i: number) => {
+    const owners = whose(p.hex);
+    return (
+      <button key={p.hex} type="button" role="radio" aria-checked={value === p.hex}
+        aria-label={owners.length ? `${p.name}, ${owners.join(" and ")}'s` : p.name}
+        tabIndex={i === (current < 0 ? 0 : current) ? 0 : -1}
+        class={`tx-swatch${value === p.hex ? " on" : ""}${owners.length ? " taken" : ""}`}
+        style={{ "--c": p.hex } as JSX.CSSProperties} disabled={readOnly} onKeyDown={(e) => onArrow(e, i)}
+        onClick={() => { setAsked(null); onChange(p.hex); }}>
+        {owners.length ? <span class="tx-swatch-who" aria-hidden="true">{owners.map((o) => o.slice(0, 1)).join("")}</span> : null}
+      </button>
+    );
+  };
   return (
     <div class="tx-colors">
       {heading ? <Section>Your colour</Section> : null}
-      <p class="tx-tip">Your ring on the TV, your vote dots and your phone.</p>
-      <div class="tx-swatches" role="radiogroup" aria-label="Your colour">
+      <p class="tx-tip">Marks you on the TV and on the phones: your ring, your vote dots, your card.</p>
+      <div class="tx-swatches" role="radiogroup" aria-label="Your colour" ref={group}>
         {colors.palette.map(swatch)}
         <label class={`tx-swatch custom${custom ? " on" : ""}`} style={{ "--c": custom ? value! : "transparent" } as JSX.CSSProperties}>
           <span class="tx-sr">Your own colour</span>
@@ -298,15 +339,14 @@ export function ColorPicker({ colors, value, onChange, readOnly, heading = true 
           <span aria-hidden="true">{custom ? "" : "+"}</span>
         </label>
       </div>
+      {taken.length ? <p class="tx-tip">Letters mark colours others have: {taken.map((t) => `${t.name.slice(0, 1)} is ${t.name}`).join(", ")}. You may share one.</p> : null}
       <div class="tx-grounds" aria-hidden="true">
         {colors.grounds.map((g) => (
           <span key={g.name} class="tx-ground" style={{ "--g": g.hex, "--c": value ?? "transparent" } as JSX.CSSProperties}><i />{g.name}</span>
         ))}
       </div>
-      <p class="tx-tip" role="status">
-        {value ? colorName(value, colors.palette) : ""}
-        {asked ? ` — lightened from ${asked} so it shows on ${listed(colors.grounds.map((g) => g.name))}.` : ""}
-      </p>
+      <p class="tx-tip" aria-hidden="true">{said}</p>
+      <span class="tx-sr" role="status">{announced}</span>
     </div>
   );
 }
@@ -476,7 +516,7 @@ function Picks({ me, readOnly, send, explain, details }: { me: Me; readOnly: boo
           <li key={i} class="tx-pick-group">
             <div class="tx-pick-group-head">
               <span>Level {c.level} · choose {c.choose}</span>
-              <button type="button" class="tx-btn ghost tx-more" disabled={readOnly} aria-label={`Change level ${c.level} picks`} onClick={() => setEditing(i)}>Change</button>
+              <button type="button" class="tx-btn ghost tx-more" disabled={readOnly} aria-label={`Change level ${c.level} picks: ${groups[i]!.length ? groups[i]!.map(nameOf).join(", ") : "none yet"}`} onClick={() => setEditing(i)}>Change</button>
             </div>
             <div class="tx-chips">
               {groups[i]!.length === 0 ? <span class="tx-tip">None picked</span> : groups[i]!.map((id) => (
@@ -492,7 +532,8 @@ function Picks({ me, readOnly, send, explain, details }: { me: Me; readOnly: boo
         <PickList choice={me.choices[editing]!} mine={groups[editing]!} elsewhere={groups.flatMap((g, i) => (i === editing ? [] : g.map((id) => [id, me.choices[i]!.level] as const)))}
           details={details} readOnly={readOnly} onClose={() => setEditing(null)}
           onSave={(chosen) => {
-            const others = me.picks.filter((p) => !groups[editing]!.includes(p));
+            // The picks the other choices hold: a pick that fits no choice (a stale one) is left out, or every save would be refused.
+            const others = groups.flatMap((g, i) => (i === editing ? [] : g));
             void send("setPicks", { picks: [...others, ...chosen.filter((p) => !others.includes(p))] });
             setEditing(null);
           }} />
