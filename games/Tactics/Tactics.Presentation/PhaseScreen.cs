@@ -35,9 +35,13 @@ public sealed record ScreenRow(string Title, string Detail, string? Chip, string
 /// <param name="Banner">The strip in the title art to play over the results, or null.</param>
 /// <param name="World">The party to draw in the world, or null. If it can't be drawn, the screen still reads without it.</param>
 /// <param name="Walk">What the world's panels say, with <paramref name="World"/>.</param>
+/// <param name="InPlace">
+/// The fight stands in the world (overworld 5c §4), so the world stays on screen round the board, under the results and while resuming
+/// (<see cref="World.StageDirector"/> says how). <paramref name="World"/> is the party then, as the view has it.
+/// </param>
 public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? Notice, int PartyLevel,
     ImmutableArray<ScreenRow> Rows, string? Empty, string Shot, BattleView? Board = null, MusicCue? Music = null, string? Ambience = null, string? Banner = null,
-    ExploreView? World = null, WalkHud? Walk = null)
+    ExploreView? World = null, WalkHud? Walk = null, bool InPlace = false)
 {
     /// <summary>The screen for <paramref name="view"/>. A phase this build doesn't know still shows the banner.</summary>
     public static PhaseScreen Of(TacticsHostView view)
@@ -56,8 +60,19 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
             TacticsPhase.Exploration => Exploration(screen, view),
             _ => screen,
         };
-        return drawn with { Music = MusicChoice.Of(view), Ambience = MusicChoice.AmbienceOf(view) };
+        drawn = drawn with { Music = MusicChoice.Of(view), Ambience = MusicChoice.AmbienceOf(view) };
+        return InWorld(phase, view) && view.Explore is { } explore
+            ? drawn with { InPlace = true, World = explore, Walk = WalkHud.Of(explore, view.PartyLevel) }
+            : drawn;
     }
+
+    /// <summary>True for a fight in the world, and its results, and while it waits to resume.</summary>
+    private static bool InWorld(TacticsPhase phase, TacticsHostView view) => phase switch
+    {
+        TacticsPhase.Battle or TacticsPhase.Resuming => view.Battle?.Stage is not null,
+        TacticsPhase.Results => view.LastBattle?.Stage is not null,
+        _ => false,
+    };
 
     private static PhaseScreen Exploration(PhaseScreen screen, TacticsHostView view) => screen with
     {
