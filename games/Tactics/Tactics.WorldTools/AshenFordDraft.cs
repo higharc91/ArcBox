@@ -257,6 +257,92 @@ public static class AshenFordDraft
         new("rock_large", "grey", (53, 72), (52, 84)),
     ];
 
+    /// <summary>The burned ground: a farm the fire took, stones split by it, and nothing that grows.</summary>
+    private static readonly Stand[] OnTheBurnedGround =
+    [
+        new("ruin_wall", "dark", (84, 44), (85, 44), (84, 46), (87, 47)),               // what's left of a farmhouse by the road
+        new("rubble", "dark", (85, 45), (86, 46), (83, 45), (86, 44), (88, 45), (84, 47)),
+        new("rubble", "grey", (72, 58), (74, 73), (88, 68), (82, 84), (125, 66), (136, 74), (148, 70), (121, 84)),
+        new("boulder", "dark", (86, 72), (78, 56), (127, 69), (140, 78)),
+        new("fence", "oak", (82, 42), (84, 42)),                                        // and of its fence
+        new("gravestone", "dark", (74, 76), (75, 76), (77, 77)),                        // whoever the fire caught
+    ];
+
+    /// <summary>
+    /// Round the Ford Bridge. The goblins' fires burn on the far bank and their banners stand back from the stamp, so a tall thing never hides a fight. The old Warden stones
+    /// stand at the town's end of the bridge. What's nearest the road is low.
+    /// </summary>
+    private static readonly Stand[] AtTheFord =
+    [
+        new("pillar_broken", "grey", (97, 53), (98, 67), (94, 66), (92, 55)),           // the Warden stones
+        new("ruin_arch", "grey", (96, 68)),
+        new("rubble", "grey", (95, 67), (97, 66), (89, 53), (96, 51)),
+        new("campfire", "fire", (119, 53), (119, 62), (123, 55), (116, 66)),            // goblin fires on the far bank
+        new("banner", "goblin", (118, 50), (121, 64), (124, 52), (120, 68)),
+        new("skull_pike", "bone", (118, 56), (118, 60), (116, 50)),
+        new("barricade", "oak", (114, 53), (114, 62)),
+        new("crate", "oak", (122, 53), (120, 60)),
+        new("signpost", "oak", (127, 55)),
+    ];
+
+    /// <summary>The docks' sheds on their yard, each door on the lane behind the quay. The market's stalls stand on the quay itself.</summary>
+    private static readonly Building[] AtTheDocks =
+    [
+        new("cottage", "shakes_oak", 88, 90), new("house", "blue", 91, 90),         // the fishers'
+        new("cottage", "thatch_green", 88, 98), new("store", "blue", 91, 98),       // the chandler's
+        new("clutter_crates", "oak", 90, 91), new("clutter_barrels", "oak", 90, 99),
+        new("stall", "purple", 96, 92), new("stall", "red", 96, 95),                // the Ash Market
+        new("stall", "blue", 96, 103), new("stall", "purple", 96, 106),
+        new("clutter_crates", "oak", 97, 101), new("clutter_barrels", "oak", 95, 108),
+    ];
+
+    /// <summary>The River Docks. By day it's fish, and by night the Ash Market lights its lanterns: they're all that lights the place.</summary>
+    private static readonly Stand[] OnTheDocks =
+    [
+        new("lantern", "stone", (98, 91), (98, 96), (98, 102), (98, 107), (107, 93), (107, 99), (107, 105)),
+        new("barrel", "oak", (100, 93), (101, 93), (100, 105)),
+        new("crate", "oak", (102, 99), (103, 99), (101, 105)),
+        new("sack", "burlap", (104, 93), (105, 105), (94, 91), (95, 100)),
+        new("cart", "oak", (92, 87)),
+    ];
+
+    /// <summary>The Skarrow camp is three hide tents round one fire, on bare frozen ground. There's no food to be seen, and it's dark past the fire.</summary>
+    private static readonly Stand[] AtTheCamp =
+    [
+        new("tent", "canvas", (130, 21), (133, 19), (137, 22)),
+        new("campfire", "fire", (134, 25)),
+        new("banner", "goblin", (131, 19), (137, 19)),
+        new("skull_pike", "bone", (129, 26), (138, 26)),
+        new("mantlet", "hide", (131, 27)),
+        new("sack", "burlap", (136, 21)),
+    ];
+
+    /// <summary>The Skarrow Hills: bare terraces of frost and rock, a few snowbound pines, and the crags that close them.</summary>
+    private static readonly Stand[] InTheHills =
+    [
+        new("pine_snowy", "snow", (122, 26), (119, 30), (141, 36), (146, 38), (126, 38), (150, 42)),
+        new("crag", "dark", (116, 22), (130, 40), (143, 28), (152, 34)),
+        new("rock_cluster", "dark", (122, 44), (136, 43), (147, 44), (118, 32)),
+        new("boulder", "dark", (127, 42), (140, 41), (121, 36)),
+        new("dead_tree", "dark", (116, 44), (132, 46), (144, 48)),
+    ];
+
+    /// <summary>Old Maud's hut, alone on the burned bank.</summary>
+    private static readonly Building[] AtMauds = [new("cottage", "thatch_green", 130, 88)];
+
+    /// <summary>The charms she's hung about it, the dead trees that stand round it, and nothing else for a long way.</summary>
+    private static readonly Stand[] RoundMauds =
+    [
+        new("dead_tree", "dark", (125, 85), (127, 92), (136, 86), (138, 93), (129, 97), (134, 98)),
+        new("skull_pike", "bone", (128, 90), (133, 88), (134, 91), (129, 87)),
+        new("shrine", "stone", (127, 88)),
+        new("grave_cross", "dark", (136, 90), (137, 89)),
+        new("torch", "fire", (132, 90)),
+    ];
+
+    /// <summary>The reeds, in beds along both banks: from a row to a row, north to south, clear of the stamp. A bed fills every other bank tile that touches water.</summary>
+    private static readonly (int From, int To)[] Reedbeds = [(26, 50), (66, 86)];
+
     /// <summary>A wood: its trees stand about every <paramref name="Every"/> tiles inside <paramref name="Outline"/>, jittered, clear of the roads, and of <see cref="WoodPaths"/>.</summary>
     private sealed record Wood(string Name, int Every, (string Id, string? Variant)[] Trees, (double X, double Y)[] Outline, bool Floor = false);
 
@@ -282,7 +368,7 @@ public static class AshenFordDraft
     ];
 
     /// <summary>All of it, place by place.</summary>
-    private static readonly Stand[] Everything = [.. InEmberwick, .. InTheFields, .. OnTheRoad];
+    private static readonly Stand[] Everything = [.. InEmberwick, .. InTheFields, .. OnTheRoad, .. OnTheBurnedGround, .. AtTheFord];
 
     /// <summary>The party starts on the square, in front of the inn.</summary>
     private static readonly Tile StartSpawn = new(26, 58);
@@ -351,8 +437,24 @@ public static class AshenFordDraft
             foreach (var (x, y) in stand.At)
                 placed.TryAdd(new Tile(x, y), (stand.Id, stand.Variant));
         PlantWoods(source, placed);
+        GrowReeds(source, placed);
         foreach (var group in placed.GroupBy(p => p.Value))
             source.Props.Add(new RegionProps(group.Key.Id, group.Key.Variant, [.. group.Select(p => p.Key).Order()]));
+    }
+
+    /// <summary>Fills <see cref="Reedbeds"/>: a reed on every other bank tile with water beside it.</summary>
+    private static void GrowReeds(RegionSource source, Dictionary<Tile, (string Id, string? Variant)> placed)
+    {
+        (int X, int Y)[] beside = [(1, 0), (-1, 0), (0, 1), (0, -1)];
+        foreach (var (from, to) in Reedbeds)
+            for (var y = from; y <= to; y++)
+                for (var x = 90; x < 125; x++)
+                {
+                    var tile = new Tile(x, y);
+                    if ((x + y) % 2 == 0 && source.Get(tile) is { Flags: TileFlags.None } ground && ground.Material is not (Deck or Quay or Hull) && !RoadMaterials.Contains(ground.Material)
+                        && beside.Any(b => source.Get(new Tile(x + b.X, y + b.Y)) is { } next && next.Flags.HasFlag(TileFlags.Water)))
+                        placed.TryAdd(tile, ("reeds", "swamp"));
+                }
     }
 
     /// <summary>Stands each wood's trees in its outline, each on its own spot of a grid, moved a tile or so. Only this is seeded.</summary>
@@ -737,7 +839,7 @@ public static class AshenFordDraft
                 }
                 foreach (var (x, y) in Rectangle(103, pier + 2, 4, 2))
                 {
-                    Paint(x, y, WaterLevel + 1, Hull, TileFlags.Impassable);
+                    Paint(x, y, WaterLevel, Hull, TileFlags.Impassable);
                     _fixed[x, y] = true;
                 }
             }
@@ -749,7 +851,7 @@ public static class AshenFordDraft
             foreach (var (x, y) in Everywhere())
             {
                 var distance = Distance(x, y, 133, 23);
-                if (distance < 8.5 + (Rough(x, y, 9, 38) - 0.5) * 3)
+                if (distance < 7 + (Rough(x, y, 9, 38) - 0.5) * 3)
                 {
                     Paint(x, y, 7, Mud);
                     _fixed[x, y] = true;
@@ -758,7 +860,7 @@ public static class AshenFordDraft
             }
         }
 
-        /// <summary>Old Maud's knoll, of bare ash, with room for one hut.</summary>
+        /// <summary>Old Maud's knoll, of bare ash, flat on top for the one hut.</summary>
         public void RaiseMauds()
         {
             foreach (var (x, y) in Everywhere())
@@ -766,8 +868,8 @@ public static class AshenFordDraft
                 var distance = Distance(x, y, 132, 91);
                 if (distance < 11)
                 {
-                    Paint(x, y, Math.Max(4 - (int)(distance / 3.6), 2), Ash);
-                    _fixed[x, y] = distance < 6;
+                    Paint(x, y, distance < 7 ? 4 : distance < 9 ? 3 : 2, Ash);
+                    _fixed[x, y] = distance < 7;
                 }
             }
         }

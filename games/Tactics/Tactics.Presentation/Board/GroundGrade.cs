@@ -17,14 +17,14 @@ public static class GroundGrade
     /// </summary>
     private static readonly ImmutableDictionary<string, Rgb> Ford = new Dictionary<string, Rgb>(StringComparer.Ordinal)
     {
-        ["ash/grey"] = new(1.0f, 1.26f, 1.06f),
+        ["ash/grey"] = new(0.98f, 1.12f, 1.08f),
         ["dirt/dark"] = new(0.8f, 1.0f, 1.04f),
         ["dirt/brown"] = new(0.76f, 0.9f, 0.95f),
         ["path/packed"] = new(0.8f, 0.86f, 0.86f),
         ["grass/autumn"] = new(0.72f, 0.88f, 1f),
-        ["grass/dry"] = new(0.84f, 0.82f, 0.76f),
-        ["grass/frost"] = new(0.72f, 0.8f, 0.8f),
-        ["grass/lush"] = new(1.14f, 0.68f, 1.12f),
+        ["grass/dry"] = new(0.88f, 0.78f, 0.74f),
+        ["grass/frost"] = new(0.64f, 0.72f, 0.72f),
+        ["grass/lush"] = new(1.14f, 0.56f, 0.86f),
         ["rock/grey"] = new(0.74f, 0.82f, 0.8f),
         ["rock/dark"] = new(0.74f, 0.82f, 0.8f),
         ["water/clear"] = new(0.72f, 0.82f, 0.84f),

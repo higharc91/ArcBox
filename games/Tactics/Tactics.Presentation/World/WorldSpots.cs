@@ -25,11 +25,6 @@ public static class WorldSpots
     /// </summary>
     public static ImmutableArray<WorldSpot> Parse(string looks)
     {
-        static Tile Read(string tile)
-        {
-            var parts = tile.Split(',');
-            return new Tile(int.Parse(parts[0], System.Globalization.CultureInfo.InvariantCulture), int.Parse(parts[1], System.Globalization.CultureInfo.InvariantCulture));
-        }
         return
         [
             .. looks.Split(';', StringSplitOptions.RemoveEmptyEntries).Select(look =>
@@ -38,6 +33,23 @@ public static class WorldSpots
                 return new WorldSpot(parts[0], Read(parts[1]), Read(parts[^1]));
             }),
         ];
+    }
+
+    /// <summary>The tiles of a walk <c>--world-route</c> names, <c>x,y;x,y;…</c>: a line from corner to corner, on the diagonal and then straight.</summary>
+    public static ImmutableArray<Tile> Route(string corners)
+    {
+        Tile[] at = [.. corners.Split(';', StringSplitOptions.RemoveEmptyEntries).Select(Read)];
+        var tiles = new List<Tile>();
+        foreach (var (from, to) in at.Zip(at.Skip(1)))
+            for (var tile = from; tile != to; tile = new Tile(tile.X + Math.Sign(to.X - tile.X), tile.Y + Math.Sign(to.Y - tile.Y)))
+                tiles.Add(tile);
+        return [.. tiles, at[^1]];
+    }
+
+    private static Tile Read(string tile)
+    {
+        var parts = tile.Split(',');
+        return new Tile(int.Parse(parts[0], System.Globalization.CultureInfo.InvariantCulture), int.Parse(parts[1], System.Globalization.CultureInfo.InvariantCulture));
     }
 
     /// <summary>The spots of <paramref name="terrain"/>, whose rules are <paramref name="ground"/>.</summary>

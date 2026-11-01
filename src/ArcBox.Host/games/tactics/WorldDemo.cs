@@ -36,6 +36,7 @@ internal sealed partial class WorldDemo : Node
     private readonly string _pack;
     private readonly string? _shots;
     private readonly string? _looks;
+    private readonly string? _walk;
     private readonly List<Frame> _frames = [];
 
     private WorldCanvas _canvas = null!;
@@ -55,10 +56,11 @@ internal sealed partial class WorldDemo : Node
     private bool _secondShot;
     private bool _logged;
 
-    public WorldDemo(string spec, string packRoot, string? shots, string? looks = null)
+    public WorldDemo(string spec, string packRoot, string? shots, string? looks = null, string? walk = null)
     {
         _shots = shots;
         _looks = looks;
+        _walk = walk;
         _spec = spec;
         _pack = packRoot;
     }
@@ -95,10 +97,12 @@ internal sealed partial class WorldDemo : Node
             TavernSpec => DemoRegion.TavernWalk()[0],
             TownSpec => DemoRegion.TownWalk()[0],
             SwatchSpec => DemoRegion.SwatchLooks()[0].Stand,
+            _ when _walk is not null => WorldSpots.Route(_walk)[0],
             _ => RegionStart(region),
         };
         _route = region switch
         {
+            _ when _walk is not null => WorldSpots.Route(_walk),
             _ when _looks is not null || region == SwatchSpec => [start, start],
             TavernSpec => DemoRegion.TavernWalk(),
             TownSpec => DemoRegion.TownWalk(),

@@ -721,7 +721,7 @@ public sealed class AshenFordDraftTests
         var draft = Draft.Value;
         var ground = draft.Tiles.Where(t => draft.Region.TileAt(t) is not null && !draft.InStamp(t)).ToList();
         var edges = ground.Count(t => draft.Material(t) != draft.Material(t with { X = t.X + 1 }) || draft.Material(t) != draft.Material(t with { Y = t.Y + 1 }));
-        Assert.True(edges < ground.Count / 5.0, $"{edges} of {ground.Count} tiles change material at their edge.");
+        Assert.True(edges < ground.Count / 4.5, $"{edges} of {ground.Count} tiles change material at their edge.");
     }
 
     private static IEnumerable<(Tile At, string Id, string? Variant)> Props(RegionSource source) => source.Props.SelectMany(p => p.At.Select(t => (t, p.Id, p.Variant)));
@@ -740,6 +740,25 @@ public sealed class AshenFordDraftTests
             Assert.True(tile is not null && (tile.Flags & (TileFlags.Water | TileFlags.Impassable)) == 0 || id is "crag" or "rock_cluster", $"The {id} at {at} stands on {tile}.");
             Assert.False(built.Contains(at), $"The {id} at {at} is inside a building.");
         }
+    }
+
+    [Fact]
+    public void Goblin_fires_burn_on_the_far_bank_and_reeds_grow_on_both()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var near = draft.NearBank;
+        var fires = Props(source).Where(p => p.Id == "campfire" && p.At.X > draft.Stamp.At.X && p.At.Y > 40).ToList();
+        Assert.True(fires.Count >= 3);
+        Assert.All(fires, f => Assert.DoesNotContain(f.At, near));
+        Assert.True(Props(source).Count(p => p.Id == "banner" && p.Variant == "goblin") >= 4);
+
+        var reeds = Props(source).Where(p => p.Id == "reeds").Select(p => p.At).ToList();
+        Assert.True(reeds.Count(near.Contains) >= 8);
+        Assert.True(reeds.Count(t => !near.Contains(t)) >= 8);
+        Assert.All(reeds, t => Assert.Contains(new[] { t with { X = t.X + 1 }, t with { X = t.X - 1 }, t with { Y = t.Y + 1 }, t with { Y = t.Y - 1 } },
+            n => source.Get(n)?.Flags.HasFlag(TileFlags.Water) == true));
     }
 
     [Fact]

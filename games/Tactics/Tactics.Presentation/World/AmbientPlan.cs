@@ -119,7 +119,7 @@ public sealed class AmbientPlan
     private const int ButterflyEvery = 40;      // of the grass tiles
     private const int FireflyEvery = 60;        // of the field tiles, at dusk
     private const int FishEvery = 10;           // of the deep water tiles
-    private const int SteamEvery = 3;           // of the water tiles over the ember; it thins away from there
+    private const int SteamEvery = 2;           // of the water tiles over the ember; it thins away from there
     private const float SteamReach = 34;        // tiles from the stamp's water by which it's down to almost nothing
     private const float SteamAlpha = 0.5f;
     private const float FireflyAlpha = 0.7f;

@@ -51,6 +51,9 @@ public sealed record AppArgs
     /// <summary>Dev only: <c>name@x,y;…</c>, places to look at with <see cref="WorldDemo"/> instead of walking it, or null.</summary>
     public string? WorldLooks { get; init; }
 
+    /// <summary>Dev only: <c>x,y;x,y;…</c>, corners of a walk for <see cref="WorldDemo"/> to take and time in place of its own, or null.</summary>
+    public string? WorldRoute { get; init; }
+
     /// <summary>Dev only: print a <c>WALK</c> line for each step the TV shows.</summary>
     public bool WalkLog { get; init; }
 
@@ -120,6 +123,9 @@ public sealed record AppArgs
                     break;
                 case "--world-looks" when !string.IsNullOrWhiteSpace(value):
                     args = args with { WorldLooks = value };
+                    break;
+                case "--world-route" when !string.IsNullOrWhiteSpace(value):
+                    args = args with { WorldRoute = value };
                     break;
                 case "--walk-log" when value is null:
                     args = args with { WalkLog = true };
