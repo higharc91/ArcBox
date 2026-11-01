@@ -386,12 +386,26 @@ public static class AshenFordDraft
     [
         new("Scarpfoot Wood", 2, [("pine", "green"), ("tree", "autumn"), ("pine", "green")], [(65, 22), (73, 20), (79, 28), (80, 38), (74, 46), (67, 46), (64, 34)], Floor: true),
         new("Bridgewood", 2, [("tree", "autumn"), ("pine", "green"), ("tree", "autumn")], [(82, 4), (100, 5), (98, 18), (91, 24), (86, 18)], Floor: true),
-        new("Cinder Wood", 3, [("dead_tree", "grey"), ("dead_tree", "dark")], [(66, 52), (82, 50), (86, 60), (84, 80), (72, 96), (64, 88)]),
-        new("Black Stand", 5, [("dead_tree", "dark"), ("dead_tree", "grey")], [(120, 72), (146, 66), (152, 86), (146, 106), (124, 110), (118, 96)]),
+        new("Cinder Wood", 2, [("dead_tree", "grey"), ("dead_tree", "dark")], [(66, 52), (82, 50), (86, 60), (84, 80), (72, 96), (64, 88)]),
+        new("Black Stand", 3, [("dead_tree", "dark"), ("dead_tree", "grey")], [(120, 72), (146, 66), (152, 86), (146, 106), (124, 110), (118, 96)]),
     ];
 
     /// <summary>The share of a wood's spots with no tree, so it's never a wall.</summary>
-    private const double WoodGaps = 0.15;
+    private const double WoodGaps = 0.06;
+
+    /// <summary>What grows under a living wood's trees, on some of the tiles they leave: all of it low, and most of it to walk through.</summary>
+    private static readonly (string Id, string? Variant)[] Undergrowth =
+    [
+        ("bush", "autumn"), ("fern", "autumn"), ("tall_grass", "dry"), ("fern", "autumn"), ("bush", "green"), ("mushroom_cluster", "brown"), ("stump", "oak"), ("log", "oak"),
+    ];
+
+    /// <summary>How far apart undergrowth stands, and the share of its spots left bare.</summary>
+    private const int UndergrowthEvery = 2;
+
+    private const double UndergrowthGaps = 0.4;
+
+    /// <summary>How far anything in a wood stands from a road or a way through it.</summary>
+    private const double WoodClear = 1.9;
 
     /// <summary>Ways through the woods, a tile or so each side, so a party can walk them: left along the wood's length, not across it.</summary>
     private static readonly Line[] WoodPaths =
@@ -503,18 +517,39 @@ public static class AshenFordDraft
         {
             var (left, right) = ((int)wood.Outline.Min(p => p.X), (int)wood.Outline.Max(p => p.X));
             var (top, bottom) = ((int)wood.Outline.Min(p => p.Y), (int)wood.Outline.Max(p => p.Y));
-            for (var y = top; y <= bottom; y += wood.Every)
-                for (var x = left; x <= right; x += wood.Every)
+            // A living wood has a second stand of trees in the gaps of the first, thinner, so it isn't a grid.
+            foreach (var (offset, gaps) in wood.Floor ? [(0, WoodGaps), (1, 0.5)] : new[] { (0, WoodGaps) })
+                for (var y = top + offset; y <= bottom; y += wood.Every)
+                    for (var x = left + offset; x <= right; x += wood.Every)
                 {
                     var tile = new Tile(x + random.Next(wood.Every / 2 + 1), y + random.Next(wood.Every / 2 + 1));
                     var tree = wood.Trees[random.Next(wood.Trees.Length)];
-                    if (random.NextDouble() < WoodGaps)
+                    if (random.NextDouble() < gaps)
                         continue;
                     if (Inside(wood.Outline, tile.X, tile.Y) && source.Get(tile) is { Flags: TileFlags.None } ground && !RoadMaterials.Contains(ground.Material)
-                        && ground.Material != Quay && roads.All(r => r.Nearest(tile.X, tile.Y).Distance > 2.5))
+                        && ground.Material != Quay && roads.All(r => r.Nearest(tile.X, tile.Y).Distance > WoodClear))
                         placed.TryAdd(tile, tree);
                 }
+
+            if (wood.Floor)
+                Plant(source, placed, wood, roads, random);
         }
+    }
+
+    /// <summary>Stands <see cref="Undergrowth"/> through a wood, on what the trees left, jittered as they are.</summary>
+    private static void Plant(RegionSource source, Dictionary<Tile, (string Id, string? Variant)> placed, Wood wood, Line[] roads, Random random)
+    {
+        var (left, right) = ((int)wood.Outline.Min(p => p.X), (int)wood.Outline.Max(p => p.X));
+        var (top, bottom) = ((int)wood.Outline.Min(p => p.Y), (int)wood.Outline.Max(p => p.Y));
+        for (var y = top + 1; y <= bottom; y += UndergrowthEvery)
+            for (var x = left + 1; x <= right; x += UndergrowthEvery)
+            {
+                var tile = new Tile(x + random.Next(2), y + random.Next(2));
+                var plant = Undergrowth[random.Next(Undergrowth.Length)];
+                if (random.NextDouble() >= UndergrowthGaps && Inside(wood.Outline, tile.X, tile.Y) && source.Get(tile) is { Flags: TileFlags.None } ground && !RoadMaterials.Contains(ground.Material)
+                    && roads.All(r => r.Nearest(tile.X, tile.Y).Distance > WoodClear))
+                    placed.TryAdd(tile, plant);
+            }
     }
 
     /// <summary>Whether a point's inside an outline.</summary>
@@ -787,7 +822,7 @@ public static class AshenFordDraft
                 }
         }
 
-        /// <summary>The flats for what stands out on the land, and a wood's floor of needles where it has one.</summary>
+        /// <summary>The flats for what stands out on the land, and a wood's floor where it has one: drifts of needles over dark earth, so the art's green patches don't repeat across it.</summary>
         public void Level()
         {
             foreach (var (left, top, width, depth, height) in Levelled)
@@ -799,7 +834,7 @@ public static class AshenFordDraft
 
             foreach (var wood in Woods.Where(w => w.Floor))
                 foreach (var (x, y) in Everywhere().Where(t => Inside(wood.Outline, t.X, t.Y) && Walkable(t.X, t.Y)))
-                    _materials[x, y] = Needles;
+                    _materials[x, y] = Rough(x, y, 8, 60) > 0.5 ? Needles : Mud;
         }
 
         /// <summary>Emberwick's ground, flat so that a building stands square on it: grass in the yards, its streets and its square.</summary>

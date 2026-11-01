@@ -834,7 +834,19 @@ public sealed class AshenFordDraftTests
         var trees = Props(source).Where(p => p.Id is "tree" or "pine" or "dead_tree").Select(p => p.At).ToHashSet();
         Assert.True(trees.Count >= 150, $"{trees.Count} trees.");
         var woods = source.Tiles.Keys.Where(t => Distance(t, new Tile(72, 34)) <= 6).ToList();
-        Assert.True(woods.Count(trees.Contains) >= 12);
+        Assert.True(woods.Count(trees.Contains) >= 28, $"{woods.Count(trees.Contains)} trees in the middle of Scarpfoot Wood.");
+    }
+
+    [Fact]
+    public void A_living_wood_has_something_growing_under_its_trees_and_a_floor_thats_more_than_one_stuff()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var wood = source.Tiles.Keys.Where(t => Distance(t, new Tile(72, 34)) <= 7).ToHashSet();
+
+        Assert.True(Props(source).Count(p => wood.Contains(p.At) && p.Id is "bush" or "fern" or "tall_grass" or "stump" or "log" or "mushroom_cluster") >= 8);
+        Assert.InRange(wood.Count(t => draft.Material(t) == "forest_needles/pine") / (double)wood.Count, 0.35, 0.75);
     }
 
     [Fact]
