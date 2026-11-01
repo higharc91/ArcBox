@@ -635,7 +635,9 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             {
                 _loop.Held = () =>
                 {
-                    Show(screen);
+                    // Made again as the stage is now: the world may have taken the fight over while the blows played, and the
+                    // screen made when the results came would take it off again (StageScreenTests, results held for the last blow).
+                    Show(PhaseScreen.Of(v, director));
                     director.LastBlowPlayed();
                 };
                 return;

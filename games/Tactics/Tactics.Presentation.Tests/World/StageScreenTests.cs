@@ -66,6 +66,32 @@ public sealed class StageScreenTests
         Assert.False(after.InPlace);
     }
 
+    // Whole-branch review, TV finding 2: a TV back mid-fight while the world loads plays it on the plain board. The results come with blows
+    // left, so the scene holds them until the last one plays; the world takes the fight over meanwhile. The results the scene shows then
+    // are made from the view as the stage is at that moment (TacticsScene.Render's held closure), not as it was when they came.
+    [Fact]
+    public void Results_held_for_the_last_blow_are_drawn_as_the_stage_is_when_it_lands()
+    {
+        var script = new StageScript();
+        var director = script.Director(WorldState.Loading);
+        director.Receive(Fight(Battle(lastSeq: 5)));
+        var results = Results(Battle(lastSeq: 9), Explore(epoch: 2, at: new Tile(20, 13), arrived: "fellIn")) with { Results = Lines };
+        director.Receive(results);
+        var held = PhaseScreen.Of(results, director);           // what the scene had when the results came
+        Assert.False(held.InPlace);
+
+        director.SetWorld(WorldState.Ready, script.Terrain);     // the world takes the fight over before the last blow plays
+        Assert.True(director.InPlace);
+        var shown = PhaseScreen.Of(results, director);
+
+        Assert.True(shown.InPlace);                               // the results go over the world, its units where the fight left them
+        Assert.True(shown.OverWorld);
+        Assert.NotEqual(held, shown);                             // so the screen made when they came is stale: the closure makes it again
+        Assert.True(Look(shown).HeaderAndTable);
+        director.LastBlowPlayed();
+        Assert.Equal(StageStep.Fading, director.Stage);
+    }
+
     [Fact]
     public void A_loss_holds_the_old_epoch_until_the_dark()
     {
