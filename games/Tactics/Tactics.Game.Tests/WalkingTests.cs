@@ -871,11 +871,12 @@ public sealed class WalkingTests
 
         Hold(s, "se", 15);
 
-        Assert.True(JsonSerializer.SerializeToUtf8Bytes(Party(s), ArcJson.Options).Length < 1024);
+        // A kilobyte, plus each walker's colour (",\"color\":\"#rrggbb\"", 20 bytes; the character screens, 2026-11-01).
+        Assert.True(JsonSerializer.SerializeToUtf8Bytes(Party(s), ArcJson.Options).Length < 1024 + 4 * 20);
     }
 
     [Fact]
-    public void The_explore_view_stays_under_1300_bytes_for_a_full_party_with_real_ids()
+    public void The_explore_view_stays_under_1420_bytes_for_a_full_party_with_real_ids()
     {
         var doc = TacticsDocument.Read(DocumentAt(Saved(Road())));
         var character = doc.Members.Values.First();
@@ -895,7 +896,7 @@ public sealed class WalkingTests
         var party = h.HostView<TacticsHostView>().Explore!;
         Assert.Equal(12, party.Legs.Length);
         Assert.Equal(6, party.Party.Length);
-        Assert.True(JsonSerializer.SerializeToUtf8Bytes(party, ArcJson.Options).Length < 1300);
+        Assert.True(JsonSerializer.SerializeToUtf8Bytes(party, ArcJson.Options).Length < 1300 + 6 * 20);     // and each colour
     }
 
     [Fact]

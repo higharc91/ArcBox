@@ -8,11 +8,18 @@ namespace Tactics.Game;
 
 /// <summary>
 /// A campaign member's character, the XP it has earned, whether it has been in a battle (<see cref="HasFought"/>; a lost
-/// battle can be worth 0 XP) and whether its one free remake after fighting is used (<see cref="Remade"/>).
+/// battle can be worth 0 XP), whether its one free remake after fighting is used (<see cref="Remade"/>) and the player's
+/// colour (<see cref="Color"/>).
 /// </summary>
+/// <param name="Color">
+/// The player's colour, "#rrggbb", as picked at character creation or on the sheet (<see cref="PlayerColors"/>), for their TV ring, vote
+/// dots and phone. Null when they never picked, and then <see cref="PlayerColors.Default"/> by join order. One more optional field and no
+/// version bump: a document from before reads with none, and a null isn't written.
+/// </param>
 public sealed record MemberRecord(CharacterRecord Character, int Xp,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Fought = false,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Remade = false)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Remade = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Color = null)
 {
     /// <summary>True once the character has been in a battle (or earned XP, for documents from before the flag).</summary>
     [JsonIgnore]

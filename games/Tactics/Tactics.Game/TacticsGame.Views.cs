@@ -137,7 +137,11 @@ public sealed record WalkLeg(int Seq, Tile To, int Ms);
 /// <param name="Sprite">Their sprite key (<see cref="HostSprite"/>).</param>
 /// <param name="Here">True while their phone is connected.</param>
 /// <param name="Leads">True for the leader.</param>
-public sealed record WalkerView(string Id, string Name, string Sprite, bool Here, bool Leads);
+/// <param name="Color">
+/// The player's colour, "#rrggbb" (<see cref="PlayerColors"/>), for their ring: the one they picked, else the palette's for their place in
+/// join order. Always readable on grass, stone and ash.
+/// </param>
+public sealed record WalkerView(string Id, string Name, string Sprite, bool Here, bool Leads, string? Color = null);
 
 /// <summary>
 /// The party in the world, for the TV: in every phase once a region exists, so a TV that joins mid-fight can learn the region. It
@@ -241,8 +245,11 @@ public sealed record StoryOptionView(string Id, string Label, string? Skill, int
 /// How long its clock ran when it started, in seconds, with <paramref name="Deadline"/>: the question's length, or longer if the line asking it
 /// outlasts that. The TV counts down against it, and learns how far its own clock is off the server's when it sees a question open.
 /// </param>
+/// <param name="Colors">
+/// Each party player's colour, "#rrggbb", by their player's name (the names <see cref="StoryOptionView.Voters"/> holds), for the vote dots.
+/// </param>
 public sealed record StoryAskView(bool Party, int Voted, int Of, ImmutableArray<string> Away, bool Tie, string? Decider, DateTimeOffset? Deadline,
-    ImmutableArray<StoryOptionView> Options, double? Span = null);
+    ImmutableArray<StoryOptionView> Options, double? Span = null, ImmutableSortedDictionary<string, string>? Colors = null);
 
 /// <summary>A character who can roll a skill check, for the TV.</summary>
 /// <param name="Member">Their member id.</param>
@@ -254,8 +261,9 @@ public sealed record StoryAskView(bool Party, int Voted, int Of, ImmutableArray<
 /// <param name="Here">False when their phone isn't here: they can still be picked.</param>
 /// <param name="Votes">How many picked them.</param>
 /// <param name="Class">Their class's name, as the phone's card shows it.</param>
+/// <param name="Color">Their player's colour, "#rrggbb" (<see cref="WalkerView.Color"/>).</param>
 public sealed record StoryCardView(string Member, string Name, string Player, string? Sprite, int Bonus, string Note, bool Here, int Votes,
-    string? Class = null);
+    string? Class = null, string? Color = null);
 
 /// <summary>A skill check under way, for the TV.</summary>
 /// <param name="Skill">The skill.</param>
@@ -302,7 +310,22 @@ public sealed partial class TacticsGame
         _phase == TacticsPhase.EncounterPick ? EncounterOptions() : null,
         _doc.Battle is not null && _phase is TacticsPhase.Battle or TacticsPhase.Resuming ? BattleViewOf() : null,
         _result?.Outcome.ToString(), _phase == TacticsPhase.Results ? ResultLines() : null,
-        _phase == TacticsPhase.Results ? _lastBattle : null, ExploreViewOf(), StoryViewOf(), _card, _phase == TacticsPhase.Results ? _resultNote : null);
+        _phase == TacticsPhase.Results ? _lastBattle : null, ExploreViewOf(), Coloured(StoryViewOf()), _card, _phase == TacticsPhase.Results ? _resultNote : null);
+
+    /// <summary>The player's colour (<see cref="PlayerColors.Of"/>): theirs, else the palette's for their place in the campaign's join order.</summary>
+    private string ColorOf(string member)
+        => PlayerColors.Of(_doc.Members.GetValueOrDefault(member), PlayerColors.JoinIndex(_lease.Info, member, _doc.Members.Keys));
+
+    /// <summary>A scene's view with the players' colours on its question and its roll's cards, for the TV's vote dots.</summary>
+    private StoryView? Coloured(StoryView? story) => story is null ? null : story with
+    {
+        Ask = story.Ask is { } ask
+            ? ask with { Colors = Walkers().ToImmutableSortedDictionary(w => w.Player.Name, w => ColorOf(w.Player.Profile!.Value.Value), StringComparer.Ordinal) }
+            : null,
+        Check = story.Check is { } check
+            ? check with { Cards = [.. check.Cards.Select(c => c with { Color = ColorOf(c.Member) })] }
+            : null,
+    };
 
     /// <inheritdoc />
     public ControllerView PlayerView(PlayerId id)
@@ -356,8 +379,9 @@ public sealed partial class TacticsGame
             leaderName = Leader?.Name,
             region = _region?.Def.Name,
             objective = Objective(),
-            me = new { name = character.Name, cls = ClassName(character), level = _doc.PartyLevel },
-            party = Walkers().Select(w => new { name = w.Player.Name, cls = ClassName(w.Character), here = w.Here, leads = w.Leads }),
+            me = new { name = character.Name, cls = ClassName(character), level = _doc.PartyLevel, color = ColorOf(profile.Value) },
+            party = Walkers().Select(w => new { name = w.Player.Name, cls = ClassName(w.Character), here = w.Here, leads = w.Leads,
+                color = ColorOf(w.Player.Profile!.Value.Value) }),
             vip,
             canBattle = vip && battleList && !Rules.Encounters.IsEmpty,
             portal = PortalPath(),
@@ -374,7 +398,7 @@ public sealed partial class TacticsGame
 
     private ExploreView? ExploreViewOf() => _region is not { } region ? null : new ExploreView(region.Def.Id, region.Def.Name, _epoch, _walkSeq, _at, _facing, _dir is not null && !_blocked, _legs,
         [.. Walkers().Select(w => new WalkerView(w.Player.Profile!.Value.Value, w.Player.Name,
-            HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{w.Character.Class}"])!, w.Here, w.Leads))],
+            HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{w.Character.Class}"])!, w.Here, w.Leads, ColorOf(w.Player.Profile!.Value.Value)))],
         Leader?.Name, region.Def.Chapter, _dir is not null && _blocked, _bumps, _arrived, Markers(), CastOf());
 
     private ControllerView BattleScreen(ProfileId profile)

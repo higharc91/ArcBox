@@ -182,6 +182,13 @@ public static class SheetBuilder
     public static ImmutableArray<(int Level, FeatureRef Feature)> PickChoices(ClassDef cls, SubclassDef? subclass, int level)
         => PickRules.Choices(cls, subclass, Math.Clamp(level, 1, MaxLevel));
 
+    /// <summary>
+    /// Which of <see cref="PickChoices"/> each of <paramref name="picks"/> fills, matched as the sheet's check matches them: one list per
+    /// choice, in the same order. A pick that fits none is left out.
+    /// </summary>
+    public static ImmutableArray<ImmutableArray<AbilityId>> AssignPicks(IReadOnlyList<AbilityId> picks, IReadOnlyList<(int Level, FeatureRef Feature)> choices)
+        => PickRules.Assign(picks, choices);
+
     /// <summary>The class's default loadout at <paramref name="level"/> (the picks of an AI-built character).</summary>
     public static ImmutableArray<AbilityId> DefaultLoadout(ClassDef cls, int level) => DefaultPicks(cls, level);
 

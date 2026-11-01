@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Text.Json;
 using ArcBox.Sdk;
 using ArcBox.Sdk.Campaigns;
@@ -61,28 +62,48 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
     {
         var rules = pack.Value;
         var doc = TacticsDocument.Read(document);
-        var party = info.Members.Select(m => doc.For(m.Profile) is { } r
-            ? new { name = m.DisplayName, character = Describe(r.Character), xp = r.Xp, you = m.Profile == member }
-            : new { name = m.DisplayName, character = "No character yet", xp = 0, you = m.Profile == member });
+        var party = info.Members.Select((m, i) => doc.For(m.Profile) is { } r
+            ? new { name = m.DisplayName, character = Describe(r.Character), xp = r.Xp, you = m.Profile == member, color = (string?)PlayerColors.Of(r, i) }
+            : new { name = m.DisplayName, character = "No character yet", xp = 0, you = m.Profile == member, color = (string?)null });
         var mine = doc.For(member);
-        object? options = mine is null || mine.CanRemake
+        var joinIndex = PlayerColors.JoinIndex(info, member.Value, doc.Members.Keys);
+        var creating = mine is null || mine.CanRemake;
+        object? options = creating
             ? new
             {
                 races = rules.Races.Values.Select(r => new { id = r.Id, name = r.Name }),
                 classes = rules.Classes.Values.Select(c => new { id = c.Id, name = c.Name, role = c.Role }),
                 backgrounds = rules.Backgrounds.Values.Select(b => new { id = b.Id, name = b.Name, boosts = b.Boosts }),
                 pointBuy = CharacterRules.PointBuy,
+                colors = Colors(PlayerColors.Of(mine, joinIndex)),
             }
             : null;
+        // What the details sheets explain: everything on offer while creating, else the member's own race, class and background.
+        var own = mine?.Character;
+        var details = CharacterGuide.For(
+            creating ? rules.Races.Values : rules.Races.Values.Where(r => r.Id == own!.Race),
+            creating ? rules.Classes.Values : rules.Classes.Values.Where(c => c.Id == own!.Class),
+            creating ? rules.Backgrounds.Values : rules.Backgrounds.Values.Where(b => b.Id == own!.Background),
+            own?.Level ?? doc.PartyLevel, rules, own?.Class);
         return JsonSerializer.SerializeToElement(new
         {
             level = doc.PartyLevel, completed = doc.Completed, party,
-            me = mine is null ? null : Mine(mine, rules),
+            me = mine is null ? null : Mine(mine, rules, joinIndex),
             options,
+            details,
         }, ArcJson.Options);
     }
 
-    private object Mine(MemberRecord record, RulesPack rules)
+    /// <summary>
+    /// The colours on offer, the grounds they're checked against and the contrast they need, and the colour the member has now (their
+    /// pick, else their default by join order), which creation starts on.
+    /// </summary>
+    private static object Colors(string current) => new
+    {
+        palette = PlayerColors.Palette, grounds = PlayerColors.Grounds, minContrast = PlayerColors.MinContrast, current,
+    };
+
+    private object Mine(MemberRecord record, RulesPack rules, int joinIndex)
     {
         var c = record.Character;
         rules.Classes.TryGetValue(c.Class, out var cls);
@@ -91,6 +112,9 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
         var scores = Enum.GetValues<Stat>().ToDictionary(s => s,
             s => Math.Min(20, c.BaseScores.GetValueOrDefault(s, 10) + (boosts?.GetValueOrDefault(s) ?? 0) + c.Increases.GetValueOrDefault(s)));
         var picks = c.Picks.IsDefaultOrEmpty && cls is not null ? SheetBuilder.DefaultLoadout(cls, c.Level) : c.Picks;
+        var choices = cls is null ? [] : SheetBuilder.PickChoices(cls, subclass, c.Level);
+        var placed = SheetBuilder.AssignPicks(picks, choices);
+        var sheet = Sheet(c, rules);
         return new
         {
             name = c.Name, describe = Describe(c), race = c.Race, @class = c.Class, subclass = c.Subclass, background = c.Background,
@@ -98,13 +122,30 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
             injuries = c.Injuries.Select(i => rules.Injuries.GetValueOrDefault(i)?.Name ?? i.Value),
             increasesLeft = CharacterRules.IncreasesLeft(c),
             subclasses = CharacterRules.NeedsSubclass(c) && cls is not null ? cls.Subclasses.Select(s => new { id = s.Id, name = s.Name }) : null,
-            choices = cls is null ? [] : SheetBuilder.PickChoices(cls, subclass, c.Level).Select(ch => new
+            choices = choices.Select((ch, i) => new
             {
                 level = ch.Level,
                 choose = ch.Feature.Choose,
                 from = ch.Feature.From.Select(id => Option(id, c.Level, rules)),
+                picked = placed[i],
             }).ToArray(),
+            color = PlayerColors.Of(record, joinIndex),
+            skills = sheet?.Skills.ToImmutableArray() ?? [],
+            saves = sheet?.SaveProficiencies ?? [],
         };
+    }
+
+    /// <summary>The character's battle sheet, for its skills and saves; null for a record the pack can't build (an old or damaged one).</summary>
+    private static UnitSheet? Sheet(CharacterRecord c, RulesPack rules)
+    {
+        try
+        {
+            return SheetBuilder.ForCharacter(c, rules);
+        }
+        catch (ContentException)
+        {
+            return null;
+        }
     }
 
     private static object Option(string id, int level, RulesPack rules)
@@ -117,7 +158,9 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
     /// <inheritdoc />
     /// <remarks>
     /// <c>createCharacter</c> {race, class, background, scores}, while the member has no character or may remake it;
-    /// <c>setPicks</c> {picks}; <c>chooseSubclass</c> {subclass}; <c>spendIncrease</c> {stats: one or two}.
+    /// <c>setPicks</c> {picks}; <c>chooseSubclass</c> {subclass}; <c>spendIncrease</c> {stats: one or two}; <c>setColor</c> {color}.
+    /// <c>createCharacter</c> may also carry a <c>color</c>. Any colour is made readable on the TV's grounds (<see cref="PlayerColors.Readable"/>)
+    /// before it's kept, and a remake without one keeps the colour the member had.
     /// </remarks>
     public CommandResult Handle(CampaignInfo info, JsonElement document, ProfileId member, string type, JsonElement data)
     {
@@ -127,6 +170,7 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
             var doc = TacticsDocument.Read(document);
             var mine = doc.For(member);
             (CharacterRecord? Character, string? Problem) result;
+            string? color = null;
             switch (type)
             {
                 case "createCharacter":
@@ -140,7 +184,18 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
                                 scores[stat] = v;
                     result = CharacterRules.Create(name, Str(data, "race"), Str(data, "class"), Str(data, "background"), scores,
                         doc.PartyLevel, rules);
+                    if (data.TryGetProperty("color", out _))
+                    {
+                        if (PlayerColors.Readable(Str(data, "color")) is not { } picked)
+                            return new(null, "Pick a colour.");
+                        color = picked;
+                    }
                     break;
+                case "setColor" when mine is not null:
+                    if (PlayerColors.Readable(Str(data, "color")) is not { } chosen)
+                        return new(null, "Pick a colour.");
+                    var coloured = doc with { Members = doc.Members.SetItem(member.Value, mine with { Color = chosen }) };
+                    return new(coloured.ToJson(), null);
                 case "setPicks" when mine is not null:
                     var picks = data.TryGetProperty("picks", out var list) && list.ValueKind == JsonValueKind.Array
                         ? list.EnumerateArray().Where(e => e.ValueKind == JsonValueKind.String).Select(e => new AbilityId(e.GetString()!)).ToList()
@@ -163,12 +218,14 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
             }
             if (result.Character is not { } character)
                 return new(null, result.Problem);
-            var record = mine is null ? new MemberRecord(character, 0)
+            var record = mine is null ? new MemberRecord(character, 0, Color: color)
                 : type == "createCharacter" && mine.HasFought
                     // The free remake after fighting: the new character keeps what the old one went through (its XP,
                     // injuries and bag), so remaking can't heal scars or refill potions.
                     ? mine with { Character = character with { Injuries = mine.Character.Injuries, Bag = mine.Character.Bag }, Remade = true }
                     : mine with { Character = character };
+            if (color is not null)
+                record = record with { Color = color };
             var updated = doc with { Members = doc.Members.SetItem(member.Value, record) };
             return new(updated.ToJson(), null);
         }
