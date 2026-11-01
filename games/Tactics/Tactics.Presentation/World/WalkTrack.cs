@@ -59,6 +59,7 @@ public sealed class WalkTrack
     private bool _seeded;              // someone else has said where this rest's followers stand
     private Terrain? _rules;           // the ground the last Places stood on, for a follower finding its way back to the trail
     private (Tile At, Tile Facing)? _faced; // the server's last say on where the leader stands and faces, so a view sent again doesn't turn anyone twice
+    private (int Epoch, int Bumps)? _bumps; // the last view's count of refused steps, for a refused press whose Blocked view was missed
 
     /// <summary>How far the leader has walked, in tiles, ever. It only goes up. A floor of this ticking over is a footstep.</summary>
     public double Walked { get; private set; }
@@ -96,12 +97,16 @@ public sealed class WalkTrack
         if (_started && view.Epoch == _epoch && view.Seq < _seq)
             return;
 
+        // A refused press says so: Blocked while it's held, and Bumps up by the time it's let go. Otherwise a step carries on the way it
+        // went, which is all a view with fewer than two legs, as at the spawn, can say for itself.
+        var refused = view.Blocked || (_bumps is { } seen && seen.Epoch == view.Epoch && view.Bumps > seen.Bumps);
+        _bumps = (view.Epoch, view.Bumps);
         if ((view.At, view.Facing) != _faced)
         {
             _faced = (view.At, view.Facing);
             var way = new Vector2(view.Facing.X - view.At.X, view.Facing.Y - view.At.Y);
             if (way != Vector2.Zero)
-                _restFace = CarriesOn(view, way) ? AxisOf(way, _restFace) : TurnTo(way, _restFace);
+                _restFace = !refused && CarriesOn(view, way) ? AxisOf(way, _restFace) : TurnTo(way, _restFace);
         }
         _held = view.Held;
         if (!_started || view.Epoch != _epoch || !Extend(view))

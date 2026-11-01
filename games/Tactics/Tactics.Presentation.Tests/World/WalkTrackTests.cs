@@ -213,6 +213,25 @@ public sealed class WalkTrackTests
         Assert.Equal(Centre(script.At), Leader(track.Places(Flat)));
     }
 
+    // Review: at the spawn there are no legs to tell a turn from a step, so the very first press into a wall must be known by the view's
+    // own word for it: Blocked, or a Bumps that went up.
+    [Theory]
+    [InlineData(1, 1, true, 0, 0, 1)]       // facing se at the spawn, pressing s, held against the wall
+    [InlineData(1, -1, true, 0, 0, -1)]     // pressing e
+    [InlineData(1, 1, false, 1, 0, 1)]      // the Blocked view was missed: only the release came, with the count gone up
+    public void The_first_press_at_the_spawn_into_a_wall_turns_the_leader(int pressX, int pressY, bool blocked, int bumps, int faceX, int faceY)
+    {
+        var track = new WalkTrack();
+        track.Receive(View(Start));
+        Run(track, Flat, 0.5);
+        Assert.Equal(new Vector2(1, 0), track.Poses[Lead].Facing);
+
+        track.Receive(View(Start, new Tile(Start.X + pressX, Start.Y + pressY), false, [], 0) with { Blocked = blocked, Bumps = bumps });
+        Run(track, Flat, 0.05);
+
+        Assert.Equal(new Vector2(faceX, faceY), track.Poses[Lead].Facing);
+    }
+
     // A diagonal that was walked, not pressed into a wall, keeps the facing it walked with at the stop, so a stairstep road doesn't turn
     // the party at every rest.
     [Fact]
