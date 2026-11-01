@@ -10,7 +10,13 @@ namespace Tactics.Logic;
 /// </summary>
 public sealed record RegionDef(string Id, string Name, [property: JsonRequired] int Chapter, ImmutableArray<int> Size,
     ImmutableArray<string> Materials, ImmutableArray<RegionChunk> Chunks, ImmutableArray<RegionStamp> Stamps,
-    ImmutableArray<BeatSpot> Beats, RegionSpawns Spawns, ImmutableArray<RegionEdge> Edges);
+    ImmutableArray<BeatSpot> Beats, RegionSpawns Spawns, ImmutableArray<RegionEdge> Edges,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<RegionProps> Props = default);
+
+/// <summary>
+/// A group of props of the same <see cref="Id"/> and optional <see cref="Variant"/> standing at world tiles <see cref="At"/>.
+/// </summary>
+public sealed record RegionProps(string Id, [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Variant, ImmutableArray<Tile> At);
 
 /// <summary>
 /// One chunk: <see cref="X"/> and <see cref="Y"/> count chunks, not tiles, and <see cref="Tiles"/> is base64 of three bytes per

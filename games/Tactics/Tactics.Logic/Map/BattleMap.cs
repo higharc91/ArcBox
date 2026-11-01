@@ -37,7 +37,7 @@ public enum Cover
 public sealed record TileInfo(int Height, int Material, TileFlags Flags);
 
 /// <summary>An object standing on a tile. A blocking prop cannot be walked into; any prop may give cover.</summary>
-public sealed record PropPlacement(string Id, Tile At, bool Blocks, Cover Cover);
+public sealed record PropPlacement(string Id, Tile At, bool Blocks, Cover Cover, string? Variant = null);
 
 /// <summary>An immutable base map: a grid of tiles, its materials, props and named zones (e.g. spawn areas).</summary>
 public sealed class BattleMap

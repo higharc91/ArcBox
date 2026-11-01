@@ -95,6 +95,49 @@ public sealed class RegionWriterTests
     }
 
     [Fact]
+    public void A_region_with_no_props_loads_as_before()
+    {
+        var source = Source();
+        source.Set(new Tile(0, 0), 0, Grass, TileFlags.None);
+        var def = Written(source);
+        Assert.True(def.Props.IsDefaultOrEmpty);
+        var loaded = WithPack(def, dirs => RulesPack.Load(dirs));
+        Assert.NotNull(loaded.RegionFor(def.Id));
+        Assert.True(loaded.RegionFor(def.Id)!.Def.Props.IsDefaultOrEmpty);
+    }
+
+    [Fact]
+    public void A_props_group_round_trips_byte_identical()
+    {
+        var source = Source();
+        source.Set(new Tile(0, 0), 0, Grass, TileFlags.None);
+        source.Props.Add(new RegionProps("tree", "autumn", [new Tile(10, 12), new Tile(14, 16)]));
+        var def = Written(source);
+        var json = JsonSerializer.Serialize(def, ArcJson.Options);
+        var deserialized = JsonSerializer.Deserialize<RegionDef>(json, ArcJson.Options);
+        var jsonAgain = JsonSerializer.Serialize(deserialized, ArcJson.Options);
+        Assert.Equal(json, jsonAgain);
+    }
+
+    [Fact]
+    public void Props_sort_by_id_variant_and_tile()
+    {
+        var source = Source();
+        source.Set(new Tile(0, 0), 0, Grass, TileFlags.None);
+        source.Props.Add(new RegionProps("tree", "green", [new Tile(20, 20), new Tile(10, 10)]));
+        source.Props.Add(new RegionProps("pine", null, [new Tile(5, 5), new Tile(2, 2)]));
+        source.Props.Add(new RegionProps("tree", "autumn", [new Tile(8, 8)]));
+        var def = Written(source);
+        Assert.Equal(3, def.Props.Length);
+        Assert.Equal(("pine", (string?)null), (def.Props[0].Id, def.Props[0].Variant));
+        Assert.Equal([new Tile(2, 2), new Tile(5, 5)], def.Props[0].At);
+        Assert.Equal(("tree", (string?)"autumn"), (def.Props[1].Id, def.Props[1].Variant));
+        Assert.Equal([new Tile(8, 8)], def.Props[1].At);
+        Assert.Equal(("tree", (string?)"green"), (def.Props[2].Id, def.Props[2].Variant));
+        Assert.Equal([new Tile(10, 10), new Tile(20, 20)], def.Props[2].At);
+    }
+
+    [Fact]
     public void A_chunk_with_no_tiles_is_left_out()
     {
         var source = Source(128, 64);

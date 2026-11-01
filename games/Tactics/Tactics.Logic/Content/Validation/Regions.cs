@@ -54,6 +54,31 @@ internal sealed partial class Validation
                     Error(file, Pointer.Append(Pointer.Append(Pointer.Append(ptr, "edges"), i), "side"),
                         $"The side '{def.Edges[i].Side}' must be north, east, south or west.");
 
+            if (!def.Props.IsDefault)
+            {
+                for (var i = 0; i < def.Props.Length; i++)
+                {
+                    var group = def.Props[i];
+                    var groupPtr = Pointer.Append(Pointer.Append(ptr, "props"), i);
+                    if (art is not null)
+                    {
+                        if (!art.Props.TryGetValue(group.Id, out var propDef))
+                            Error(file, Pointer.Append(groupPtr, "id"), $"Unknown prop '{group.Id}'.");
+                        else if (group.Variant is not null && !propDef.Variants.Contains(group.Variant))
+                            Error(file, Pointer.Append(groupPtr, "variant"), $"Unknown variant '{group.Variant}' for prop '{group.Id}'.");
+                    }
+                    for (var j = 0; j < group.At.Length; j++)
+                    {
+                        var tile = group.At[j];
+                        var tilePtr = Pointer.Append(Pointer.Append(groupPtr, "at"), j);
+                        if (tile.X < 0 || tile.Y < 0 || tile.X >= w || tile.Y >= h)
+                            Error(file, tilePtr, $"Prop '{group.Id}' at {tile} is outside the {w}x{h} region.");
+                        else if (!seen.Contains((tile.X / WorldRegion.ChunkSize, tile.Y / WorldRegion.ChunkSize)))
+                            Error(file, tilePtr, $"Prop '{group.Id}' at {tile} is in a void chunk.");
+                    }
+                }
+            }
+
             return Errors.Count == errors ? def : null;
         });
 
@@ -97,7 +122,7 @@ internal sealed partial class Validation
         IReadOnlyDictionary<string, BattleMap> maps, string file, string ptr)
     {
         private readonly RegionDef _def = region.Def;
-        private readonly Terrain _ground = WorldGround.Of(region, maps).Terrain;
+        private readonly Terrain _ground = WorldGround.Of(region, maps, v.Art?.Props).Terrain;
 
         /// <summary>A stamp that sits inside the region, on a known map.</summary>
         private sealed record Placed(int Index, RegionStamp Stamp, BattleMap Map)
@@ -125,9 +150,30 @@ internal sealed partial class Validation
         public void Run()
         {
             var placed = Stamps();
+            Props(placed);
             Spawns(placed);
             Reachable(placed);
             Edges();
+        }
+
+        private void Props(List<Placed> stamps)
+        {
+            if (_def.Props.IsDefault)
+                return;
+            for (var i = 0; i < _def.Props.Length; i++)
+            {
+                var group = _def.Props[i];
+                var groupPtr = Pointer.Append(Pointer.Append(ptr, "props"), i);
+                for (var j = 0; j < group.At.Length; j++)
+                {
+                    var tile = group.At[j];
+                    foreach (var stamp in stamps.Where(s => s.Stage.Holds(tile)))
+                    {
+                        var at = Pointer.Append(Pointer.Append(groupPtr, "at"), j);
+                        v.Error(file, at, $"Prop '{group.Id}' at {tile} is on the stamp '{stamp.Stamp.Map}'.");
+                    }
+                }
+            }
         }
 
         private string At(string list, int index) => Pointer.Append(Pointer.Append(ptr, list), index);

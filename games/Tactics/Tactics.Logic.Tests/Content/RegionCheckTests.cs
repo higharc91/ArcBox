@@ -41,10 +41,12 @@ public sealed class RegionCheckTests
 
     private static (string, string) Map(string id, string json) => ($"maps/{id}.json", json);
 
-    private static IReadOnlyList<ContentError> ErrorsOf(RegionDef def) => ValidationTests.ErrorsOfChapter(World(def), Map("ford", FordMap));
+    private static readonly ArtManifest Art = ArtManifests.Load(ContentPaths.ContentBase);
+
+    private static IReadOnlyList<ContentError> ErrorsOf(RegionDef def) => ValidationTests.ErrorsOfChapter(Art, World(def), Map("ford", FordMap));
 
     private static void Loads(params RegionDef[] defs)
-        => Assert.NotNull(ValidationTests.LoadChapter([.. defs.Select(World), Map("ford", FordMap)]));
+        => Assert.NotNull(ValidationTests.LoadChapter(Art, [.. defs.Select(World), Map("ford", FordMap)]));
 
     [Fact]
     public void A_stamp_that_matches_its_map_loads_though_its_materials_are_listed_in_another_order()
@@ -464,5 +466,85 @@ public sealed class RegionCheckTests
         var errors = ValidationTests.ErrorsOfChapter(World(WithEdges("a", new RegionEdge("b", "east", 12))), World(broken));
 
         Assert.Equal("chapter-01/world/b.json", Assert.Single(errors).File);
+    }
+
+    [Fact]
+    public void An_unknown_prop_is_an_error()
+    {
+        var def = Region(FordTiles) with
+        {
+            Props = [new RegionProps("nonexistent_prop", null, [new Tile(2, 2)])]
+        };
+        var errors = ErrorsOf(def);
+        Assert.Contains(errors, e => e.Pointer == "/props/0/id" && e.Message.Contains("Unknown prop 'nonexistent_prop'"));
+    }
+
+    [Fact]
+    public void An_unknown_variant_is_an_error()
+    {
+        var def = Region(FordTiles) with
+        {
+            Props = [new RegionProps("tree", "rainbow", [new Tile(2, 2)])]
+        };
+        var errors = ErrorsOf(def);
+        Assert.Contains(errors, e => e.Pointer == "/props/0/variant" && e.Message.Contains("Unknown variant 'rainbow'"));
+    }
+
+    [Fact]
+    public void A_prop_outside_the_region_is_an_error()
+    {
+        var def = Region(FordTiles) with
+        {
+            Props = [new RegionProps("tree", "autumn", [new Tile(35, 10)])]
+        };
+        var errors = ErrorsOf(def);
+        Assert.Contains(errors, e => e.Pointer == "/props/0/at/0" && e.Message.Contains("outside the 32x32 region"));
+    }
+
+    [Fact]
+    public void A_prop_in_a_void_chunk_is_an_error()
+    {
+        var def = new RegionDef("r", "r", 1, [64, 32], ["grass/lush"], [new RegionChunk(0, 0, RegionTests.Tiles())], [], [],
+            new RegionSpawns(new Tile(0, 0), new Tile(1, 0)), [],
+            [new RegionProps("tree", "autumn", [new Tile(40, 10)])]);
+        var errors = ErrorsOf(def);
+        Assert.Contains(errors, e => e.Pointer == "/props/0/at/0" && e.Message.Contains("in a void chunk"));
+    }
+
+    [Fact]
+    public void A_prop_on_a_stamp_is_an_error()
+    {
+        var def = Stamped(FordStamp) with
+        {
+            Props = [new RegionProps("tree", "autumn", [new Tile(4, 5)])]
+        };
+        var errors = ErrorsOf(def);
+        Assert.Contains(errors, e => e.Pointer == "/props/0/at/0" && e.Message.Contains("on the stamp 'ford'"));
+    }
+
+    [Fact]
+    public void A_beat_walled_off_by_props_is_an_error()
+    {
+        var props = Enumerable.Range(0, 32).Select(y => new Tile(8, y)).ToArray();
+        var def = Region(FordTiles) with
+        {
+            Beats = [new BeatSpot("ch1_beat", new Tile(10, 0))],
+            Props = [new RegionProps("tree", "autumn", [.. props])]
+        };
+        var errors = ErrorsOf(def);
+        Assert.Contains(errors, e => e.Pointer == "/beats/0/at" && e.Message.Contains("can't be reached from the start"));
+    }
+
+    [Fact]
+    public void Region_props_stay_out_of_the_battle_hash()
+    {
+        var withoutProps = Region(FordTiles);
+        var withProps = Region(FordTiles) with
+        {
+            Props = [new RegionProps("tree", "autumn", [new Tile(2, 2)])]
+        };
+        var pack1 = ValidationTests.LoadChapter(World(withoutProps), Map("ford", FordMap));
+        var pack2 = ValidationTests.LoadChapter(World(withProps), Map("ford", FordMap));
+        Assert.Equal(pack1.Hash, pack2.Hash);
     }
 }

@@ -29,7 +29,8 @@ public sealed class WorldGround
     public Terrain Terrain { get; }
 
     /// <summary>Builds the ground of <paramref name="region"/>, whose stamps are looked up in <paramref name="maps"/>.</summary>
-    public static WorldGround Of(WorldRegion region, IReadOnlyDictionary<string, BattleMap> maps)
+    public static WorldGround Of(WorldRegion region, IReadOnlyDictionary<string, BattleMap> maps,
+        IReadOnlyDictionary<string, PropArtDef>? propDefs = null)
     {
         var (width, height) = (region.Def.Size[0], region.Def.Size[1]);
         var materials = region.Def.Materials;
@@ -51,11 +52,18 @@ public sealed class WorldGround
                     : ((byte)tile.Height, (byte)tile.Material, (byte)tile.Flags);
             }
 
-        ImmutableArray<PropPlacement> props =
+        var propsLookup = propDefs ?? ArtManifests.DefaultProps;
+        List<PropPlacement> allProps =
         [
             .. region.Def.Stamps.Where(s => maps.ContainsKey(s.Map))
                 .SelectMany(s => maps[s.Map].Props.Select(p => p with { At = new Tile(p.At.X + s.At.X, p.At.Y + s.At.Y) })),
+            .. (region.Def.Props.IsDefault ? [] : region.Def.Props).SelectMany(group =>
+            {
+                var blocks = propsLookup?.TryGetValue(group.Id, out var def) == true ? def.Blocks : false;
+                var cover = propsLookup?.TryGetValue(group.Id, out var def2) == true ? def2.Cover : Cover.None;
+                return group.At.Select(t => new PropPlacement(group.Id, t, blocks, cover, group.Variant));
+            }),
         ];
-        return new WorldGround(BattleMap.FromBytes(region.Def.Id, width, height, bytes, materials, props, ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty));
+        return new WorldGround(BattleMap.FromBytes(region.Def.Id, width, height, bytes, materials, [.. allProps], ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty));
     }
 }

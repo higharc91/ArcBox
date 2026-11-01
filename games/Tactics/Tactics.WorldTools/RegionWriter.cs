@@ -69,9 +69,18 @@ public static class RegionWriter
 
         var chunks = tiles.GroupBy(t => (X: t.Key.X / WorldRegion.ChunkSize, Y: t.Key.Y / WorldRegion.ChunkSize))
             .Select(chunk => new RegionChunk(chunk.Key.X, chunk.Key.Y, Convert.ToBase64String(Bytes(chunk, materials))));
+        var props = source.Props.Count == 0
+            ? default
+            : source.Props
+                .SelectMany(g => g.At.Select(t => (g.Id, g.Variant, Tile: t)))
+                .GroupBy(p => (p.Id, p.Variant))
+                .OrderBy(g => g.Key.Id, StringComparer.Ordinal)
+                .ThenBy(g => g.Key.Variant, StringComparer.Ordinal)
+                .Select(g => new RegionProps(g.Key.Id, g.Key.Variant, [.. g.Select(p => p.Tile).Distinct().Order()]))
+                .ToImmutableArray();
         var def = new RegionDef(source.Id, source.Name, source.Chapter, [source.Width, source.Height],
             [.. materials.OrderBy(m => m.Value).Select(m => m.Key)], [.. chunks], [.. source.Stamps], [.. source.Beats],
-            new RegionSpawns(source.Start, source.Recovery), []);
+            new RegionSpawns(source.Start, source.Recovery), [], props);
         return new WriteResult(def, []);
     }
 
@@ -93,6 +102,7 @@ public static class RegionWriter
             repaired.Set(tile, height, material, info.Flags & KnownFlags);
         }
         repaired.Beats.AddRange(source.Beats);
+        repaired.Props.AddRange(source.Props);
         foreach (var stamp in source.Stamps)
             repaired.AddStamp(stamp);
         return repaired;

@@ -35,6 +35,24 @@ public sealed class WorldWalkTests
     {
         Assert.Null(WorldWalk.Next(Stamped().Terrain, new Tile(4, 5), WalkDir.SE, Jump, null));
         Assert.NotNull(WorldWalk.Next(Stamped().Terrain, new Tile(4, 5), WalkDir.NW, Jump, null));
+
+        var def = new RegionDef("r", "R", 1, [64, 32], ["grass/lush"], [new RegionChunk(0, 0, RegionTests.Tiles())], [], [],
+            new RegionSpawns(Origin, Origin), [],
+            [new RegionProps("tree", "autumn", [new Tile(1, 0)])]);
+        var ground = WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap>(),
+            new Dictionary<string, PropArtDef> { ["tree"] = new("tree", ["autumn"], true, Cover.Total, 4) });
+        Assert.Null(WorldWalk.Next(ground.Terrain, Origin, WalkDir.E, Jump, null));
+    }
+
+    [Fact]
+    public void A_soft_prop_doesnt()
+    {
+        var def = new RegionDef("r", "R", 1, [64, 32], ["grass/lush"], [new RegionChunk(0, 0, RegionTests.Tiles())], [], [],
+            new RegionSpawns(Origin, Origin), [],
+            [new RegionProps("bush", null, [new Tile(1, 0)])]);
+        var ground = WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap>(),
+            new Dictionary<string, PropArtDef> { ["bush"] = new("bush", [], false, Cover.None, 1) });
+        Assert.NotNull(WorldWalk.Next(ground.Terrain, Origin, WalkDir.E, Jump, null));
     }
 
     [Fact]

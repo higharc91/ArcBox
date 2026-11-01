@@ -11,7 +11,7 @@ public sealed partial class RulesPack
     private RulesPack(string hash, ImmutableSortedDictionary<AbilityId, AbilityDef> abilities,
         ImmutableSortedDictionary<string, PassiveDef> passives, ImmutableSortedDictionary<ConditionId, ConditionDef> conditions,
         ImmutableSortedDictionary<InjuryId, InjuryDef> injuries, ImmutableSortedDictionary<string, BattleMap> maps,
-        Catalog? catalog = null, ImmutableSortedDictionary<string, UnitSheet>? monsterSheets = null)
+        Catalog? catalog = null, ImmutableSortedDictionary<string, UnitSheet>? monsterSheets = null, ArtManifest? art = null)
     {
         _monsterSheets = monsterSheets ?? Ordinal.Map<UnitSheet>();
         Hash = hash;
@@ -32,7 +32,7 @@ public sealed partial class RulesPack
         AiProfiles = catalog.AiProfiles;
         Xp = catalog.Xp;
         Regions = catalog.Regions;
-        _grounds = Regions.ToImmutableSortedDictionary(r => r.Key, r => new Lazy<WorldGround>(() => WorldGround.Of(r.Value, maps)), StringComparer.Ordinal);
+        _grounds = Regions.ToImmutableSortedDictionary(r => r.Key, r => new Lazy<WorldGround>(() => WorldGround.Of(r.Value, maps, art?.Props)), StringComparer.Ordinal);
         _injuryPassives = injuries.Values.ToImmutableSortedDictionary(i => InjuryPassiveId(i.Id),
             i => new PassiveDef(InjuryPassiveId(i.Id), i.Hook, null, i.Effects.IsDefault ? [] : i.Effects, i.Static with { MaxHp = 0 },
                 Target: PassiveTarget.Self), StringComparer.Ordinal);
@@ -142,7 +142,7 @@ public sealed partial class RulesPack
     {
         var loaded = PackLoader.Load(packDirectories, art);
         return new RulesPack(loaded.Hash, loaded.Abilities, loaded.Passives, loaded.Conditions, loaded.Injuries, loaded.Maps,
-            loaded.Catalog);
+            loaded.Catalog, art: art);
     }
 
     /// <summary>The rest of a loaded pack's content, which an in-memory pack leaves empty.</summary>

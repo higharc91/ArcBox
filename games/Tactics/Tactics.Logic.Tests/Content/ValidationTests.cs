@@ -416,15 +416,25 @@ public sealed class ValidationTests
         """;
 
     internal static RulesPack LoadChapter(params (string Path, string Json)[] files)
-        => WithChapter(files, null, [], dir => RulesPack.Load([Base, dir]));
+        => LoadChapter(null, files);
+
+    internal static RulesPack LoadChapter(ArtManifest? art, params (string Path, string Json)[] files)
+        => WithChapter(files, null, [], dir => RulesPack.Load([Base, dir], art));
 
     internal static ImmutableArray<ContentError> ErrorsOfChapter(params (string Path, string Json)[] files)
-        => ErrorsOfChapter(files, requires: null);
+        => ErrorsOfChapter(null, files, requires: null);
 
-    private static ImmutableArray<ContentError> ErrorsOfChapter((string Path, string Json)[] files, string? requires = null,
+    internal static ImmutableArray<ContentError> ErrorsOfChapter((string Path, string Json)[] files, string? requires = null,
+        string[]? extraFiles = null)
+        => ErrorsOfChapter(null, files, requires, extraFiles);
+
+    internal static ImmutableArray<ContentError> ErrorsOfChapter(ArtManifest? art, params (string Path, string Json)[] files)
+        => ErrorsOfChapter(art, files, requires: null);
+
+    private static ImmutableArray<ContentError> ErrorsOfChapter(ArtManifest? art, (string Path, string Json)[] files, string? requires = null,
         string[]? extraFiles = null)
         => WithChapter(files, requires, extraFiles ?? [],
-            dir => Assert.Throws<ContentException>(() => RulesPack.Load([Base, dir])).Errors);
+            dir => Assert.Throws<ContentException>(() => RulesPack.Load([Base, dir], art)).Errors);
 
     /// <summary>Writes a temporary <c>chapter-01</c> pack holding <paramref name="files"/> and runs <paramref name="load"/> on it.</summary>
     private static T WithChapter<T>((string Path, string Json)[] files, string? requires, string[] extraFiles, Func<string, T> load)
