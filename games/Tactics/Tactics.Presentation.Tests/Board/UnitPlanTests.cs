@@ -46,6 +46,37 @@ public sealed class UnitPlanTests
         Assert.Equal(places["a"].Feet, crowned.Feet);
     }
 
+    // Interaction review 5b, item 11: "which is me?" Each walker's ring is their seat's colour, by their place in the party, not by who
+    // leads or who's here. The leader keeps the crown as well.
+    [Fact]
+    public void Each_walker_has_their_seats_colour()
+    {
+        WalkerView[] party = [new("a", "a", "characters.class_rogue", true, false), new("b", "b", "characters.class_rogue", false, false),
+            new("c", "c", "characters.class_rogue", true, true)];
+        var places = new Dictionary<string, UnitPlace> { ["a"] = new(new Vector2(3.5f, 3.5f), 0), ["c"] = new(new Vector2(2.5f, 3.5f), 0) };
+
+        var units = UnitPlan.Walkers(party, places, new Dictionary<string, UnitPose>(), Art.Value).ToDictionary(u => u.Id.Value);
+
+        Assert.Equal(SeatColours.Of(0), units["a"].Seat);
+        Assert.Equal(SeatColours.Of(2), units["c"].Seat);      // the third seat, though the second isn't drawn
+        Assert.NotNull(units["c"].CrownAt);
+        Assert.Null(units["a"].CrownAt);
+    }
+
+    [Fact]
+    public void A_handover_doesnt_change_anyones_colour()
+    {
+        var places = new Dictionary<string, UnitPlace> { ["a"] = new(new Vector2(3.5f, 3.5f), 0), ["b"] = new(new Vector2(2.5f, 3.5f), 0) };
+        var before = UnitPlan.Walkers(Walkers("a", "b"), places, new Dictionary<string, UnitPose>(), Art.Value);
+        var after = UnitPlan.Walkers([.. Walkers("a", "b").Select(w => w with { Leads = w.Id == "b" })], places, new Dictionary<string, UnitPose>(), Art.Value);
+
+        Assert.Equal(before.ToDictionary(u => u.Id.Value, u => u.Seat), after.ToDictionary(u => u.Id.Value, u => u.Seat));
+    }
+
+    [Fact]
+    public void A_unit_in_a_fight_has_its_sides_ring_not_a_seat()
+        => Assert.Null(One(null, Unit("hero", "Party", 3, 3)).Seat);
+
     [Fact]
     public void A_walker_whose_phone_is_gone_is_away()
     {
