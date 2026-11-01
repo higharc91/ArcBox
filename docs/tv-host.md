@@ -80,7 +80,14 @@ the lobby exactly as before.
 The server sends `ContentRequired(gameId, packs)` when a game is selected, when it starts and on resume (spec §3.6). The TV
 caches each pack under `user://content/<gameId>/<packId>/<hash>/` (on Linux
 `~/.local/share/godot/app_userdata/ArcBox/content/`), downloading it from the server it's connected to and verifying every
-file; the newest 3 hashes of each pack are kept. A game with no packs (REDLINE, Counter) is shown at once, as before.
+file. A new hash (a new export) downloads only the files that changed: a file an installed version of the pack already
+has, at the same path and with the SHA-256 the server's index lists, is copied from disk and checked instead
+(`ContentPlan.Sources`). Changing one region file of the Tactics pack fetches that file and the index (about 0.66 MB)
+rather than all 4,309 files (122 MB); an unchanged pack fetches nothing, not even the index. This needs nothing from the
+server that it didn't already send, so old servers and old caches work. Up to 3 hashes of each pack are kept, and the
+least recently used go first once the cache is over 1 GiB, though never a pack's newest hash or the one before it, which a
+running game may still read (`ContentPlan.Evict`). Each install logs a `Content <game>/<pack>@<hash> installed: fetched
+… reused …` line. A game with no packs (REDLINE, Counter) is shown at once, as before.
 Otherwise, if a pack isn't cached yet when the game starts, the TV shows a "Loading content… 42%" card (the average
 across the game's packs) and shows the game once every pack is in, with the newest view it was sent meanwhile. If a
 download or its verification fails, the card says "Couldn't load game content" with **Retry** (click or Enter), and the
