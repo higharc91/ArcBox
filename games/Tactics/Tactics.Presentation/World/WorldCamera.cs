@@ -139,10 +139,22 @@ public sealed class WorldCamera
     {
         var clamped = new Vector2(Limited(_centre.X, _width), Limited(_centre.Y, _height));
         Centre = InReach(Vector2.Lerp(_centre, clamped, _edge));
-        var area = BoardFit.Area;
-        var art = BoardProjection.Corner(Centre.X, Centre.Y, _floor) * WorldTuning.Scale;
-        _origin = new Vector2(area.X + area.Width / 2 - art.X, area.Y + area.Height / 2 - art.Y);
+        _origin = OriginOn(Centre, _floor);
         Fit = new BoardFit(new Vector2(MathF.Round(_origin.X), MathF.Round(_origin.Y)), WorldTuning.Scale);
+    }
+
+    /// <summary>The fit of a camera centred on <paramref name="map"/> at <paramref name="height"/>, as a cut there has it.</summary>
+    public static BoardFit FitOn(Vector2 map, float height)
+    {
+        var origin = OriginOn(map, height);
+        return new BoardFit(new Vector2(MathF.Round(origin.X), MathF.Round(origin.Y)), WorldTuning.Scale);
+    }
+
+    private static Vector2 OriginOn(Vector2 map, float height)
+    {
+        var area = BoardFit.Area;
+        var art = BoardProjection.Corner(map.X, map.Y, height) * WorldTuning.Scale;
+        return new Vector2(area.X + area.Width / 2 - art.X, area.Y + area.Height / 2 - art.Y);
     }
 
     /// <summary>Moves <paramref name="centre"/> as little as it takes to bring the party back in reach, along the screen's own axes, which are the map's diagonals.</summary>

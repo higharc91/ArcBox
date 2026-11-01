@@ -159,6 +159,19 @@ public sealed class StageDirector(Func<string, BattleMap?> maps)
     }
 
     /// <summary>
+    /// Where the camera will cut to if <paramref name="world"/> takes the fight over from the plain board now: the stage's middle, as
+    /// <see cref="CameraTarget"/> will be. Null when no takeover is waiting (the fight is already in place, or there's none, or the results came
+    /// with no fight before them), or when <paramref name="world"/> is another region's. The scene holds the world back
+    /// (<see cref="WorldSeen.StageShown"/>) until the blocks there are recorded: a TV back mid-fight cut to the stage while the world was still
+    /// recording the blocks round it (the hardware check's <c>WORLD late block</c> lines).
+    /// </summary>
+    public StageCamera? TakeoverOn(BoardTerrain world)
+        => !_inPlace && !_fresh && Stage is StageStep.Fighting or StageStep.Fading or StageStep.Results && Where is { } where
+            && _battle?.Stage is { } stage && stage.Region == world.Map.Id
+            ? Middle(where, world)
+            : null;
+
+    /// <summary>
     /// Whether the world can be drawn, and its ground as drawn (<see cref="WorldPlan.Terrain"/>). A world of another region counts as loading.
     /// </summary>
     public void SetWorld(WorldState state, BoardTerrain? terrain = null)

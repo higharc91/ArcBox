@@ -13,7 +13,11 @@ namespace Tactics.Presentation.World;
 /// <param name="Built">Its plan and ground are built.</param>
 /// <param name="Failed">It can't be built.</param>
 /// <param name="GivenUp">The scene gave a world up (it failed, or didn't open in time) and has none now.</param>
-public readonly record struct WorldSeen(bool Exists, bool Open, bool Built, bool Failed, bool GivenUp);
+/// <param name="StageShown">
+/// The world's blocks where the camera cuts to when it takes a fight over from the plain board are recorded, or no takeover is waiting
+/// (<see cref="StageDirector.TakeoverOn"/>). Until they are, the plain board keeps the fight, so the cut never shows a block that isn't there.
+/// </param>
+public readonly record struct WorldSeen(bool Exists, bool Open, bool Built, bool Failed, bool GivenUp, bool StageShown = true);
 
 /// <summary>
 /// How the TV lays a screen out for a fight in the world (overworld 5c): what <c>TacticsScene.ShowBoard</c> decides, so Godot only applies it.
@@ -40,7 +44,7 @@ public sealed record StageLayout(bool InPlace, bool PlainBoard, bool Hud, bool B
 
     /// <summary>What the director is told of the world (<see cref="StageDirector.SetWorld"/>).</summary>
     public static WorldState WorldOf(WorldSeen world)
-        => world.Exists && world.Open && world.Built ? WorldState.Ready
+        => world.Exists && world.Open && world.Built && world.StageShown ? WorldState.Ready
             : (world.Exists && world.Failed) || (!world.Exists && world.GivenUp) ? WorldState.Failed
             : WorldState.Loading;
 }

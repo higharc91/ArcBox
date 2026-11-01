@@ -122,6 +122,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private BoardChanges? _stageTerrainFor;
     private bool _inPlace;              // the fight's board is on the world now
     private bool _overWorld;
+    private int _takeoverHeld;       // frames the world has waited to take a fight over, for its blocks at the stage (TellWorld)
     private ExploreView? _fed;          // the last view the walk was given
     private (WorldState State, BoardTerrain? Terrain)? _worldSaid;
     private WalkFrame? _lastWalk;       // the camera, as of the last frame of the world
@@ -271,8 +272,20 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     /// <summary>Tells the director whether the world can be drawn, when that changes.</summary>
     private void TellWorld(StageDirector director)
     {
+        var stageShown = true;
+        if (_world is { Now: WorldCanvas.Stage.Open, Plan: { } plan } open && director.TakeoverOn(plan.Terrain) is { } camera)
+        {
+            var size = GetViewport().GetVisibleRect().Size;
+            stageShown = open.Shows(WorldView.Seen(WorldCamera.FitOn(camera.Map, camera.Height), new System.Numerics.Vector2(size.X, size.Y)), camera.Map);
+            _takeoverHeld = stageShown ? _takeoverHeld : _takeoverHeld + 1;
+            if (stageShown)
+            {
+                GD.Print($"TACTICS takeover: the stage's blocks recorded, after {_takeoverHeld} frames held");
+                _takeoverHeld = 0;
+            }
+        }
         var state = StageLayout.WorldOf(new WorldSeen(_world is not null, _world?.Now == WorldCanvas.Stage.Open,
-            _world is { Plan: not null, Ground: not null }, _world?.Now == WorldCanvas.Stage.Failed, _unreadableWorld is not null));
+            _world is { Plan: not null, Ground: not null }, _world?.Now == WorldCanvas.Stage.Failed, _unreadableWorld is not null, stageShown));
         (WorldState, BoardTerrain?) now = (state, state == WorldState.Ready ? _world!.Plan!.Terrain : null);
         if (_worldSaid is { } said && said.State == now.Item1 && ReferenceEquals(said.Terrain, now.Item2))
         {
@@ -935,6 +948,11 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _inPlace = true;      // so the board's first redraw is on the world, not the plain board's
             var staged = screen.Board is not { } fight || DrawBoard(fight, layout.FeedBoard);
             _board.Visible = false;
+            if (staged && _board.Planned)
+            {
+                _board.LetGo();     // the world has its own copy of the fight's art: a TV back mid-fight drew it on the plain board first
+                GD.Print($"TACTICS plain board let go: {WorldCanvas.MemoryText()}");
+            }
             _inPlace = staged;
             if (!staged)
             {
@@ -1041,7 +1059,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             return;
         }
-        if (_terrain is null || !DisplayedBattle.SameBoard(_planned, shown.Board))
+        if (_terrain is null || !_board.Planned || !DisplayedBattle.SameBoard(_planned, shown.Board))
         {
             _terrain = new BoardTerrain(_map, shown.Board);
             _planned = shown.Board;

@@ -57,10 +57,12 @@ public partial class BoardCanvas : Node2D
     private (System.Numerics.Vector2 Min, System.Numerics.Vector2 Max)? _view;
     private float _gridAlpha = 1;
     private bool _clocked;
+    private readonly bool _ownsPainter;
 
     public BoardCanvas()
         : this(new BoardPainter())
     {
+        _ownsPainter = true;
     }
 
     /// <summary>A board that shares <paramref name="painter"/>'s textures, as one over a world does.</summary>
@@ -82,6 +84,7 @@ public partial class BoardCanvas : Node2D
     /// <summary>Shows <paramref name="plan"/> in its light <paramref name="lit"/>, loading its art from <paramref name="packRoot"/>, placed by <paramref name="fit"/>.</summary>
     public void SetPlan(BoardPlan plan, LitBoard lit, BoardFit fit, string packRoot)
     {
+        Planned = true;
         _painter.Root = packRoot;
         _lighting = lit.Lighting.Active ? lit.Lighting : null;
         _items.Clear();
@@ -99,6 +102,37 @@ public partial class BoardCanvas : Node2D
         Position = _origin;
         Scale = new Vector2(fit.Scale, fit.Scale);
         Merge();
+    }
+
+    /// <summary>It has a plan from <see cref="SetPlan"/>, and the textures for it, since it was made or last let go (<see cref="LetGo"/>).</summary>
+    public bool Planned { get; private set; }
+
+    /// <summary>
+    /// Lets go of the plan, the units, the effects and every texture, at once. For the plain board once its fight has gone onto the world, which
+    /// has its own copy of the same art: kept, they'd sit in video memory beside the world's for as long as the scene lasts (the hardware check's
+    /// 55.6 MB against 38.2 MB, after a TV came back mid-fight). Nothing's drawn until the next <see cref="SetPlan"/>, which loads what it needs.
+    /// Only a board with a painter of its own: a world's board shares the world's.
+    /// </summary>
+    public void LetGo()
+    {
+        if (!_ownsPainter || !Planned)
+        {
+            return;
+        }
+        Planned = false;
+        _items.Clear();
+        _orders.Clear();
+        (_units, _sequence, _lighting) = ([], [], null);
+        _marks.Clear();
+        _halos.Show([]);
+        _light.Show([]);
+        _over.Show([]);
+        // What was drawn last is still recorded, textures and all, and a hidden node isn't drawn again to replace it: clear it now.
+        foreach (var item in new CanvasItem[] { this, _halos, _marks, _light, _over })
+        {
+            RenderingServer.CanvasItemClear(item.GetCanvasItem());
+        }
+        _painter.Release();
     }
 
     /// <summary>Moves the board to <paramref name="fit"/> without building anything again: a fight in the world goes where the stage is.</summary>

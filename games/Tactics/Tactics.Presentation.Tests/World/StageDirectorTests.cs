@@ -466,6 +466,42 @@ public sealed class StageDirectorTests
         Assert.True(director.BeatsRun);
     }
 
+    // The hardware check (§5.4): a TV back mid-fight logged WORLD late block 41, 56 and 62 as the world took over. The takeover cuts the camera
+    // to the stage's middle, and the scene now waits until the world's blocks there are recorded; this says where that is, and when to wait.
+    [Fact]
+    public void A_takeover_says_where_the_camera_will_cut_to_until_it_happens()
+    {
+        var script = new StageScript();
+        var director = script.Director(WorldState.Loading);
+        director.Receive(Fight(Battle(lastSeq: 30)));
+
+        Assert.False(director.InPlace);
+        var cut = Assert.NotNull(director.TakeoverOn(script.Terrain));
+        Assert.Null(director.TakeoverOn(new BoardTerrain(StageWorld.Map("elsewhere", 4, 4, (_, _) => StageWorld.Flat(0)), null)));     // another region's world
+
+        director.SetWorld(WorldState.Ready, script.Terrain);
+        Assert.True(director.InPlace);
+        Assert.Equal(cut, director.CameraTarget);
+        Assert.Null(director.TakeoverOn(script.Terrain));      // it's happened
+    }
+
+    [Fact]
+    public void A_fight_that_starts_in_place_or_results_with_no_fight_wait_for_no_takeover()
+    {
+        var (script, director) = Started();
+        Assert.Equal(StageStep.Forming, director.Stage);
+        Assert.Null(director.TakeoverOn(script.Terrain));
+
+        var fresh = script.Director(WorldState.Loading);
+        fresh.Receive(Results(Battle(lastSeq: 9), Explore(epoch: 2, at: new Tile(20, 13), arrived: "fellIn")));
+        Assert.Equal(StageStep.Results, fresh.Stage);
+        Assert.Null(fresh.TakeoverOn(script.Terrain));
+
+        var walking = script.Director(WorldState.Loading);
+        walking.Receive(Walking());
+        Assert.Null(walking.TakeoverOn(script.Terrain));
+    }
+
     [Fact]
     public void A_world_that_cant_be_drawn_leaves_the_plain_board()
     {
