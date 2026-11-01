@@ -73,7 +73,9 @@ public sealed class WalkShow
         if (!_started || view.Epoch != _epoch)
             _told = view.Seq;        // what's in a first view was walked before this TV came
         (_started, _epoch, _seq, _party, Held) = (true, view.Epoch, view.Seq, view.Party.IsDefault ? [] : view.Party, view.Held);
-        _track.Receive(view);
+        _track.Receive(view);       // a press into a wall turns the leader to face it there
+        // The wall bump (interaction review 5b, item 2) starts here, once the view says Blocked: the leader's nudge toward Facing goes on the
+        // leader's place in Frame, after Places, so the track's path and the followers never see it, and its sound goes out as Footstep does.
 
         var told = _told;
         _told = Math.Max(_told, view.Seq);

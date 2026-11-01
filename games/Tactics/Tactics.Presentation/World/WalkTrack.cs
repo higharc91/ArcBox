@@ -58,6 +58,7 @@ public sealed class WalkTrack
     private bool _slotted;             // this rest's formation has been chosen
     private bool _seeded;              // someone else has said where this rest's followers stand
     private Terrain? _rules;           // the ground the last Places stood on, for a follower finding its way back to the trail
+    private (Tile At, Tile Facing)? _faced; // the server's last say on where the leader stands and faces, so a view sent again doesn't turn anyone twice
 
     /// <summary>How far the leader has walked, in tiles, ever. It only goes up. A floor of this ticking over is a footstep.</summary>
     public double Walked { get; private set; }
@@ -95,9 +96,13 @@ public sealed class WalkTrack
         if (_started && view.Epoch == _epoch && view.Seq < _seq)
             return;
 
-        var way = new Vector2(view.Facing.X - view.At.X, view.Facing.Y - view.At.Y);
-        if (way != Vector2.Zero)
-            _restFace = AxisOf(way, _restFace);
+        if ((view.At, view.Facing) != _faced)
+        {
+            _faced = (view.At, view.Facing);
+            var way = new Vector2(view.Facing.X - view.At.X, view.Facing.Y - view.At.Y);
+            if (way != Vector2.Zero)
+                _restFace = CarriesOn(view, way) ? AxisOf(way, _restFace) : TurnTo(way, _restFace);
+        }
         _held = view.Held;
         if (!_started || view.Epoch != _epoch || !Extend(view))
             Cut(view);
@@ -674,6 +679,36 @@ public sealed class WalkTrack
         if (Vector2.Dot(unit, current) >= sticky - 1e-3f)
             return current;
         return MathF.Abs(way.X) >= MathF.Abs(way.Y) ? new Vector2(MathF.Sign(way.X), 0) : new Vector2(0, MathF.Sign(way.Y));
+    }
+
+    /// <summary>
+    /// The axis to face when the leader turns on the spot, to a way it couldn't go. A way along an axis is that axis. A diagonal, which is
+    /// screen up, down, left or right, has no facing of its own, so it's whichever of its two axes isn't <paramref name="current"/>, and
+    /// the nearer turn of the two if neither is: a press into a wall must always be seen to turn the leader (interaction review 5b, item 2).
+    /// </summary>
+    private static Vector2 TurnTo(Vector2 way, Vector2 current)
+    {
+        if (way.X == 0 || way.Y == 0 || MathF.Abs(way.X) != MathF.Abs(way.Y))
+            return AxisOf(way, current, sticky: 1);
+        var (alongX, alongY) = (new Vector2(MathF.Sign(way.X), 0), new Vector2(0, MathF.Sign(way.Y)));
+        if (current == alongX)
+            return alongY;
+        if (current == alongY)
+            return alongX;
+        return Vector2.Dot(alongY, current) > Vector2.Dot(alongX, current) ? alongY : alongX;
+    }
+
+    /// <summary>
+    /// True when the view's facing only carries on the way its last step went, which is what the server says after every step. Anything
+    /// else is a turn on the spot: a press the way was blocked. With fewer than two steps to go by, it's taken as walked, as it always was.
+    /// </summary>
+    private static bool CarriesOn(ExploreView view, Vector2 way)
+    {
+        var legs = view.Legs.IsDefault ? [] : view.Legs;
+        if (legs.Length < 2 || legs[^1].To != view.At)
+            return true;
+        var from = legs[^2].To;
+        return way == new Vector2(view.At.X - from.X, view.At.Y - from.Y);
     }
 
     /// <summary>

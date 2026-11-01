@@ -181,6 +181,52 @@ public sealed class WalkTrackTests
         Assert.Equal(Centre(script.At), Leader(track.Places(Flat)));
     }
 
+    // Interaction review 5b, item 2: screen up, down, left and right are the map's diagonals, which the art has no facing for. A press
+    // that way into a wall used to keep the old facing whenever that was half of the diagonal, so nothing on the TV answered it.
+    [Theory]
+    [InlineData(1, 0, 1, -1, 0, -1)]        // facing se, pressing e: half of it already, so it turns to the other half, ne
+    [InlineData(1, 0, 1, 1, 0, 1)]          // se, pressing s: sw
+    [InlineData(0, -1, -1, -1, -1, 0)]      // ne, pressing n: nw
+    [InlineData(1, 0, -1, -1, 0, -1)]       // se, pressing n: neither half, so the nearer turn, ne, not all the way round to nw
+    [InlineData(0, 1, 1, -1, 1, 0)]         // sw, pressing e: se
+    public void A_press_into_a_wall_on_a_diagonal_turns_the_leader(int walkX, int walkY, int pressX, int pressY, int faceX, int faceY)
+    {
+        var track = new WalkTrack();
+        var script = new Script(Start);
+        track.Receive(script.Now(false));
+        Walk(track, Flat, script, [.. Repeat(walkX, walkY, 3)], heldAtEnd: false);
+        Run(track, Flat, 0.5);
+        Assert.Equal(new Vector2(walkX, walkY), track.Poses[Lead].Facing);
+
+        var wall = View(script.At, new Tile(script.At.X + pressX, script.At.Y + pressY), false, script.Legs, script.Seq);
+        track.Receive(wall);
+        Run(track, Flat, 0.05);
+        Assert.Equal(new Vector2(faceX, faceY), track.Poses[Lead].Facing);
+
+        // The same view again, as the host view's other changes resend it: it stays turned, and doesn't flip back.
+        track.Receive(wall);
+        Run(track, Flat, 0.05);
+        Assert.Equal(new Vector2(faceX, faceY), track.Poses[Lead].Facing);
+        track.Receive(wall with { Party = [.. wall.Party.Select(w => w with { Here = w.Id != "c" })] });
+        Run(track, Flat, 0.05);
+        Assert.Equal(new Vector2(faceX, faceY), track.Poses[Lead].Facing);
+        Assert.Equal(Centre(script.At), Leader(track.Places(Flat)));
+    }
+
+    // A diagonal that was walked, not pressed into a wall, keeps the facing it walked with at the stop, so a stairstep road doesn't turn
+    // the party at every rest.
+    [Fact]
+    public void A_walked_diagonal_keeps_its_facing_at_the_stop()
+    {
+        var track = new WalkTrack();
+        var script = new Script(Start);
+        track.Receive(script.Now(false));
+        Walk(track, Flat, script, [.. Repeat(1, 0, 3), .. Repeat(1, -1, 3)], heldAtEnd: false);
+        Run(track, Flat, 1);
+
+        Assert.Equal(new Vector2(1, 0), track.Poses[Lead].Facing);
+    }
+
     [Fact]
     public void A_server_gone_quiet_doesnt_run_on_the_spot_for_ever()
     {
