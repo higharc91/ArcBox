@@ -223,7 +223,7 @@ public static class RegionScene
         return layer.TileSet.HasSource(id) ? layer.TileSet.GetSource(id).ResourceName : $"source {id}";
     }
 
-    private static TileMapLayer AddLayer(Region root, string name, TileSet tiles)
+    public static TileMapLayer AddLayer(Region root, string name, TileSet tiles)
     {
         // Behind the root, so its outline of the region's size stays on top of the paint.
         var layer = new TileMapLayer { TileSet = tiles, ShowBehindParent = true };

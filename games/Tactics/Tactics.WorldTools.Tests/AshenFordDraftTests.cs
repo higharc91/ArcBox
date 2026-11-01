@@ -57,6 +57,7 @@ public sealed class AshenFordDraftTests
         Materials = source.Tiles.ToDictionary(t => t.Key, t => t.Value.Material),
         Heights = source.Tiles.ToDictionary(t => t.Key, t => t.Value.Height),
         Flags = source.Tiles.ToDictionary(t => t.Key, t => t.Value.Flags),
+        Props = source.Props.SelectMany(g => g.At.Select(t => (Tile: t, g.Id, g.Variant))).ToDictionary(p => p.Tile, p => (p.Id, p.Variant)),
         Beats = [.. source.Beats],
         Stamps = [.. source.Stamps],
         Starts = [source.Start],
@@ -671,5 +672,93 @@ public sealed class AshenFordDraftTests
         Assert.Contains(draft.Spot("ch1_ford_assault"), draft.NearBank);
         Assert.DoesNotContain(draft.Spot("ch1_river_crossing"), draft.NearBank);
         Assert.All(FordBeats, beat => Assert.True(draft.Walk.Seconds(draft.Spot(beat), draft.InStamp) <= 3, beat));
+    }
+
+    [Fact]
+    public void The_dressing_passes_with_no_warnings()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        Assert.NotEmpty(source.Props);
+        var rules = RegionExportTests.CopyRules();
+        try
+        {
+            var result = RegionExport.Export(Painted(source), rules, ContentPaths.ContentBase);
+            Assert.NotNull(result.Written);
+            Assert.Empty(result.Problems);
+            Assert.Empty(result.Warnings);
+            Assert.Empty(result.StoryWarnings);
+        }
+        finally
+        {
+            Directory.Delete(rules, recursive: true);
+        }
+    }
+
+    [Fact]
+    public void The_story_still_walks_on_both_branches()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var painted = Painted(source);
+        var (builtSource, _) = painted.ToSource();
+        var known = source.Tiles.Values.Select(t => t.Material).ToHashSet(StringComparer.Ordinal);
+        var region = WorldRegion.From(RegionWriter.Write(builtSource, known).Region!);
+
+        var story = StoryOrder.Check(region, draft.Pack, ContentPaths.ContentBase);
+        Assert.Empty(story.Problems);
+        Assert.Equal(["ch1_force", "ch1_parley"], story.Legs.Select(l => l.Branch).Distinct().Order(StringComparer.Ordinal));
+        Assert.All(story.Legs, leg => Assert.NotNull(leg.Seconds));
+        Assert.All(story.Retries, leg => Assert.NotNull(leg.Seconds));
+    }
+
+    [Fact]
+    public void The_road_stays_clear()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+
+        var roadTiles = source.Tiles.Where(t => RoadMaterials.Contains(t.Value.Material)).Select(t => t.Key).ToHashSet();
+        Assert.DoesNotContain(source.Props.SelectMany(p => p.At), t => roadTiles.Contains(t));
+    }
+
+    [Fact]
+    public void Dressing_twice_is_refused_and_changes_nothing()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var propsBefore = source.Props.Select(p => (p.Id, p.Variant, At: p.At.ToArray())).ToList();
+        var tilesBefore = source.Tiles.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
+        var ex = Assert.Throws<InvalidOperationException>(() => AshenFordDraft.Dress(source, draft.Pack));
+        Assert.Contains("already has props", ex.Message, StringComparison.OrdinalIgnoreCase);
+
+        Assert.Equal(propsBefore.Count, source.Props.Count);
+        for (var i = 0; i < propsBefore.Count; i++)
+        {
+            Assert.Equal(propsBefore[i].Id, source.Props[i].Id);
+            Assert.Equal(propsBefore[i].Variant, source.Props[i].Variant);
+            Assert.True(propsBefore[i].At.SequenceEqual(source.Props[i].At));
+        }
+        Assert.Equal(tilesBefore.Count, source.Tiles.Count);
+        foreach (var (tile, info) in tilesBefore)
+            Assert.Equal(info, source.Get(tile));
+    }
+
+    [Fact]
+    public void Dressing_leaves_the_terrain_alone()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        var tilesBefore = source.Tiles.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+        AshenFordDraft.Dress(source, draft.Pack);
+
+        Assert.Equal(tilesBefore.Count, source.Tiles.Count);
+        foreach (var (tile, info) in tilesBefore)
+            Assert.Equal(info, source.Get(tile));
     }
 }

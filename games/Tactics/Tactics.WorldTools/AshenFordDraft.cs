@@ -165,6 +165,389 @@ public static class AshenFordDraft
         return source;
     }
 
+    /// <summary>Dresses the region with props: woods along the road, fences and carts by the fields, clutter in Emberwick, reeds at the banks, dead trees and rubble on the burned bank, and ruins near Maud's hut.</summary>
+    public static void Dress(RegionSource source, RulesPack? pack = null)
+    {
+        if (source.Props.Count > 0)
+            throw new InvalidOperationException("The scene already has props.");
+
+        var dressing = new Dressing(source, new Random(Seed));
+        dressing.Dress();
+    }
+
+    private sealed class Dressing(RegionSource source, Random random)
+    {
+        private static readonly (int X, int Y)[] Neighbors =
+        [
+            (-1, -1), (0, -1), (1, -1),
+            (-1,  0),          (1,  0),
+            (-1,  1), (0,  1), (1,  1),
+        ];
+
+        private readonly RegionSource _source = source;
+        private readonly Random _random = random;
+        private readonly Dictionary<Tile, (string Id, string? Variant, bool Blocks)> _placed = [];
+        private readonly HashSet<Tile> _blocked = [];
+        private readonly HashSet<Tile> _forbidden = [];
+
+        public void Dress()
+        {
+            InitForbidden();
+            Woods();
+            Farms();
+            Emberwick();
+            Reeds();
+            BurnedBank();
+            Ruins();
+
+            foreach (var group in _placed.GroupBy(p => (p.Value.Id, p.Value.Variant)))
+                _source.Props.Add(new RegionProps(group.Key.Id, group.Key.Variant, [.. group.Select(p => p.Key).Distinct().Order()]));
+        }
+
+        private void InitForbidden()
+        {
+            // 1. Non-walkable ground, water, cliffs, void, or road
+            for (var y = 0; y < Height; y++)
+            {
+                for (var x = 0; x < Width; x++)
+                {
+                    var tile = new Tile(x, y);
+                    if (Void(x, y))
+                    {
+                        _forbidden.Add(tile);
+                        continue;
+                    }
+
+                    if (_source.Get(tile) is not { } info)
+                    {
+                        _forbidden.Add(tile);
+                        continue;
+                    }
+
+                    if (info.Flags.HasFlag(TileFlags.Impassable) || info.Flags.HasFlag(TileFlags.Deep) || info.Flags.HasFlag(TileFlags.Water))
+                    {
+                        _forbidden.Add(tile);
+                        continue;
+                    }
+
+                    if (RoadMaterials.Contains(info.Material))
+                    {
+                        _forbidden.Add(tile);
+                        continue;
+                    }
+                }
+            }
+
+            // 2. Stamp area (100, 52) 14x12 and buffer zone around it (including 4 tiles in front along +x and +y)
+            for (var y = 50; y <= 69; y++)
+                for (var x = 98; x <= 119; x++)
+                    _forbidden.Add(new Tile(x, y));
+
+            // 3. Spawns and beat spots with a 2-tile margin
+            ForbidAround(_source.Start, 2);
+            ForbidAround(_source.Recovery, 2);
+            foreach (var beat in _source.Beats)
+                ForbidAround(beat.At, 2);
+
+            // 4. Tracks: keep track center clear
+            foreach (var track in Tracks)
+            {
+                for (var y = 0; y < Height; y++)
+                    for (var x = 0; x < Width; x++)
+                        if (track.Line.Nearest(x, y).Distance < 1.4)
+                            _forbidden.Add(new Tile(x, y));
+            }
+        }
+
+        private void ForbidAround(Tile center, int radius)
+        {
+            for (var dy = -radius; dy <= radius; dy++)
+                for (var dx = -radius; dx <= radius; dx++)
+                    _forbidden.Add(new Tile(center.X + dx, center.Y + dy));
+        }
+
+        private bool CanPlace(Tile t, bool blocks, bool allowAdjacentBlocks = false)
+        {
+            if (_forbidden.Contains(t) || _placed.ContainsKey(t))
+                return false;
+
+            if (blocks && !allowAdjacentBlocks)
+            {
+                foreach (var (dx, dy) in Neighbors)
+                    if (_blocked.Contains(new Tile(t.X + dx, t.Y + dy)))
+                        return false;
+            }
+
+            return true;
+        }
+
+        private void Place(Tile t, string id, string? variant, bool blocks)
+        {
+            _placed[t] = (id, variant, blocks);
+            if (blocks)
+                _blocked.Add(t);
+        }
+
+        private void Woods()
+        {
+            // Middle lands between scarp and river: x: 55..98, y: 12..85
+            var candidates = new List<Tile>();
+            for (var y = 12; y <= 85; y++)
+                for (var x = 55; x <= 98; x++)
+                {
+                    var t = new Tile(x, y);
+                    if (!CanPlace(t, blocks: false))
+                        continue;
+                    if (_source.Get(t) is { } info && (info.Material.StartsWith("grass", StringComparison.Ordinal) || info.Material.StartsWith("forest", StringComparison.Ordinal)))
+                        candidates.Add(t);
+                }
+
+            // Shuffle candidates deterministically
+            Shuffle(candidates);
+
+            var treesPlaced = 0;
+            var pinesPlaced = 0;
+            var stumpsPlaced = 0;
+            var bushesPlaced = 0;
+            var grassPlaced = 0;
+
+            foreach (var t in candidates)
+            {
+                var info = _source.Get(t)!;
+                var isPineGround = info.Material == Needles || (t.Y < 32 && t.X < 75);
+
+                if (isPineGround && pinesPlaced < 30 && CanPlace(t, blocks: true))
+                {
+                    Place(t, "pine", "green", blocks: true);
+                    pinesPlaced++;
+                }
+                else if (treesPlaced < 75 && CanPlace(t, blocks: true))
+                {
+                    var variant = info.Material == Autumn || _random.Next(3) == 0 ? "autumn" : _random.Next(2) == 0 ? "green" : "light";
+                    Place(t, "tree", variant, blocks: true);
+                    treesPlaced++;
+                }
+                else if (stumpsPlaced < 12 && CanPlace(t, blocks: true))
+                {
+                    Place(t, "stump", "oak", blocks: true);
+                    stumpsPlaced++;
+                }
+                else if (bushesPlaced < 45 && CanPlace(t, blocks: false))
+                {
+                    var variant = info.Material == Autumn || _random.Next(2) == 0 ? "autumn" : "green";
+                    Place(t, "bush", variant, blocks: false);
+                    bushesPlaced++;
+                }
+                else if (grassPlaced < 35 && CanPlace(t, blocks: false))
+                {
+                    Place(t, "tall_grass", "green", blocks: false);
+                    grassPlaced++;
+                }
+            }
+        }
+
+        private void Farms()
+        {
+            // Carts near north and south fields
+            var northCart = new Tile(32, 22);
+            if (CanPlace(northCart, blocks: true))
+                Place(northCart, "cart", "hay", blocks: true);
+
+            var southCart = new Tile(32, 88);
+            if (CanPlace(southCart, blocks: true))
+                Place(southCart, "cart", "oak", blocks: true);
+
+            // Short fence runs along field edges, with gaps for walkers
+            (int X, int Y, int Len, bool Horizontal)[] fenceRuns =
+            [
+                (35, 7, 3, true),
+                (41, 7, 3, true),
+                (33, 24, 3, false),
+                (33, 29, 3, false),
+                (36, 96, 3, true),
+                (41, 96, 3, true),
+                (47, 86, 3, true),
+            ];
+
+            foreach (var run in fenceRuns)
+            {
+                for (var i = 0; i < run.Len; i++)
+                {
+                    var t = run.Horizontal ? new Tile(run.X + i, run.Y) : new Tile(run.X, run.Y + i);
+                    if (CanPlace(t, blocks: true, allowAdjacentBlocks: true))
+                        Place(t, "fence", "oak", blocks: true);
+                }
+            }
+        }
+
+        private void Emberwick()
+        {
+            // Crates and barrels in town on dirt/earth tiles against building walls
+            for (var b = 0; b < TownBuildings; b++)
+            {
+                var (bx, by, bw, bd, _) = Buildings[b];
+                var perimeter = new List<Tile>();
+                for (var x = bx - 1; x <= bx + bw; x++)
+                {
+                    perimeter.Add(new Tile(x, by - 1));
+                    perimeter.Add(new Tile(x, by + bd));
+                }
+                for (var y = by; y < by + bd; y++)
+                {
+                    perimeter.Add(new Tile(bx - 1, y));
+                    perimeter.Add(new Tile(bx + bw, y));
+                }
+
+                foreach (var t in perimeter)
+                {
+                    if (CanPlace(t, blocks: true) && _source.Get(t) is { } info && (info.Material == Earth || info.Material == Lush || info.Material == Green))
+                    {
+                        var prop = _random.Next(2) == 0 ? "crate" : "barrel";
+                        Place(t, prop, "oak", blocks: true);
+                        break; // at most 1 prop per building side
+                    }
+                }
+            }
+
+            // Ash Market stalls and docks warehouses: x: 84..98, y: 90..106
+            for (var b = TownBuildings; b < Buildings.Length; b++)
+            {
+                var (bx, by, bw, bd, _) = Buildings[b];
+                var t = new Tile(bx - 1, by + bd / 2);
+                if (CanPlace(t, blocks: true) && _source.Get(t) is { } info && !RoadMaterials.Contains(info.Material))
+                {
+                    var prop = _random.Next(2) == 0 ? "crate" : "barrel";
+                    Place(t, prop, "oak", blocks: true);
+                }
+            }
+        }
+
+        private void Reeds()
+        {
+            // Along river banks, walkable ground near water, height <= 2
+            var reedsPlaced = 0;
+            var grassPlaced = 0;
+
+            for (var y = 0; y < Height; y++)
+            {
+                var riverX = (int)Math.Round(River.ColumnAt(y));
+                for (var x = riverX - 5; x <= riverX + 5; x++)
+                {
+                    var t = new Tile(x, y);
+                    if (!CanPlace(t, blocks: false))
+                        continue;
+
+                    var info = _source.Get(t);
+                    if (info is null || info.Height > WaterLevel + 1)
+                        continue;
+
+                    // Check if adjacent to water
+                    var nearWater = Neighbors.Any(n => _source.Get(new Tile(t.X + n.X, t.Y + n.Y))?.Flags.HasFlag(TileFlags.Water) == true);
+                    if (!nearWater)
+                        continue;
+
+                    if (reedsPlaced < 35 && _random.Next(2) == 0)
+                    {
+                        Place(t, "reeds", "swamp", blocks: false);
+                        reedsPlaced++;
+                    }
+                    else if (grassPlaced < 25)
+                    {
+                        Place(t, "tall_grass", "green", blocks: false);
+                        grassPlaced++;
+                    }
+                }
+            }
+        }
+
+        private void BurnedBank()
+        {
+            // Far bank: x >= 115, y >= 50
+            var candidates = new List<Tile>();
+            for (var y = 50; y < Height; y++)
+                for (var x = 115; x < Width; x++)
+                {
+                    var t = new Tile(x, y);
+                    if (!CanPlace(t, blocks: false))
+                        continue;
+
+                    // Keep clear of Maud's area which has its own dressing
+                    if (Distance(t.X, t.Y, 132, 93) <= 9)
+                        continue;
+
+                    var info = _source.Get(t);
+                    if (info is not null && (info.Material == Ash || info.Material == Basalt || info.Material == DarkEarth || info.Material == DarkRock))
+                        candidates.Add(t);
+                }
+
+            Shuffle(candidates);
+
+            var deadTrees = 0;
+            var boulders = 0;
+            var rubble = 0;
+
+            foreach (var t in candidates)
+            {
+                if (deadTrees < 25 && CanPlace(t, blocks: true))
+                {
+                    var variant = _random.Next(2) == 0 ? "grey" : "dark";
+                    Place(t, "dead_tree", variant, blocks: true);
+                    deadTrees++;
+                }
+                else if (boulders < 18 && CanPlace(t, blocks: true))
+                {
+                    var variant = _random.Next(3) switch { 0 => "dark", 1 => "basalt", _ => "grey" };
+                    Place(t, "boulder", variant, blocks: true);
+                    boulders++;
+                }
+                else if (rubble < 35 && CanPlace(t, blocks: false))
+                {
+                    var variant = _random.Next(2) == 0 ? "dark" : "grey";
+                    Place(t, "rubble", variant, blocks: false);
+                    rubble++;
+                }
+            }
+        }
+
+        private void Ruins()
+        {
+            // Maud's ruins around (132, 93)
+            var wallTiles = new[]
+            {
+                new Tile(128, 91), new Tile(128, 92),
+                new Tile(136, 96), new Tile(136, 97),
+            };
+
+            foreach (var t in wallTiles)
+            {
+                if (CanPlace(t, blocks: true, allowAdjacentBlocks: true))
+                    Place(t, "ruin_wall", "dark", blocks: true);
+            }
+
+            var rubbleTiles = new[]
+            {
+                new Tile(127, 91), new Tile(129, 93), new Tile(128, 90),
+                new Tile(135, 96), new Tile(137, 97), new Tile(136, 98),
+                new Tile(130, 95), new Tile(134, 91),
+            };
+
+            foreach (var t in rubbleTiles)
+            {
+                if (CanPlace(t, blocks: false))
+                    Place(t, "rubble", "grey", blocks: false);
+            }
+        }
+
+        private void Shuffle<T>(List<T> list)
+        {
+            for (var i = list.Count - 1; i > 0; i--)
+            {
+                var j = _random.Next(i + 1);
+                (list[i], list[j]) = (list[j], list[i]);
+            }
+        }
+    }
+
     private static double Smooth(double t)
     {
         t = Math.Clamp(t, 0, 1);
