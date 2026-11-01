@@ -58,11 +58,17 @@ public sealed record Beat(int Seq, UnitId? Actor, ImmutableArray<BattleEvent> Ev
 /// the battle's hash, so a repaint doesn't restart the fight; if the region's stamp has moved since, the fight goes on on a plain board
 /// (review). Left out of the JSON when null, and no version bump: a battle saved before it reads with none, and uses the region's stamp.
 /// </param>
+/// <param name="Plain">
+/// True for a fight begun on a plain board (no stamp of its map where it began, or no region), so that it stays plain if a repaint
+/// later stamps its map: a null <paramref name="Stage"/> alone can't tell that from a battle saved before stages were kept. Left out of
+/// the JSON when false, and no version bump: a battle saved before it reads as not plain, and goes by <paramref name="Stage"/> as before.
+/// </param>
 public sealed record BattleSave(string Encounter, ulong Seed, ImmutableArray<ProfileId> Members, BattleState State,
     ImmutableArray<Beat> Log,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<CharacterRecord> Companions = default,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] string? Beat = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] SavedStage? Stage = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] SavedStage? Stage = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Plain = false);
 
 /// <summary>Where a battle was drawn in the world (<see cref="BattleStage"/>), as saved with it: its map's tile (0, 0) and the height added.</summary>
 public sealed record SavedStage(Tile Origin, int Height);

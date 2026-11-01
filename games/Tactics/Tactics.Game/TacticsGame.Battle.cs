@@ -66,7 +66,7 @@ public sealed partial class TacticsGame
         _doc = _doc with
         {
             Battle = new BattleSave(encounter, seed, members, resolution.State, [], companions.IsEmpty ? default : companions, beat,
-                stage is { } st ? new SavedStage(st.Origin, st.Height) : null),
+                stage is { } st ? new SavedStage(st.Origin, st.Height) : null, Plain: stage is null),
         };
         _seq = 0;
         if (AddBeat(null, resolution.Events) is { } opening && stage is not null)

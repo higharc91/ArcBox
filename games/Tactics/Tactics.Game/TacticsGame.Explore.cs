@@ -135,10 +135,13 @@ public sealed partial class TacticsGame
     /// <summary>
     /// Where the battle <paramref name="save"/> is drawn, and lands: the stage it was saved with, while the region still stamps its map
     /// there (origin and height); a plain board if a repaint has moved or removed that stamp since (review), so the party ends it where it
-    /// stood before the fight. A battle saved before stages were kept takes the region's stamp, as it always did.
+    /// stood before the fight. A fight begun on a plain board stays on one (<see cref="BattleSave.Plain"/>), even if a repaint has stamped
+    /// its map since. A battle saved before stages were kept takes the region's stamp, as it always did.
     /// </summary>
     private BattleStage? StageOf(BattleSave save)
     {
+        if (save.Plain)
+            return null;
         var live = StageFor(save.State.MapId);
         if (save.Stage is not { } saved)
             return live;

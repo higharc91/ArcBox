@@ -734,6 +734,47 @@ public sealed class StageEndTests
         Assert.Null(resumed.Host.Explore.Arrived);
     }
 
+    /// <summary>
+    /// Review (A2): a fight begun on a plain board says so (<see cref="BattleSave.Plain"/>), so a repaint that stamps its map later doesn't
+    /// put it in the world: it goes on on the plain board, and the party ends it where it stood, with no new epoch.
+    /// </summary>
+    [Fact]
+    public void A_plain_board_fight_stays_plain_when_a_repaint_stamps_its_map()
+    {
+        var s = new Session(game: WithLore(new TacticsSeed([], []), Region.Spawns.Start, Restamped(0, 0, remove: true), battleList: true));
+        s.ToWalking();
+        s.Send(0, "battles");
+        s.Send(0, "pickEncounter", new { encounter = "river_crossing" });
+        Assert.Equal(TacticsPhase.Battle, s.Game.Phase);
+        Assert.Null(s.Host.Battle!.Stage);
+        var saved = TacticsDocument.Read(s.Lease.Document);
+        Assert.True(saved.Battle!.Plain);
+        Assert.True(JsonNode.Parse(s.Lease.Document.GetRawText())!["battle"]!["plain"]!.GetValue<bool>());
+        var stood = saved.World!.At;
+
+        var resumed = new Session(document: s.Lease.Document, game: WithLore(null));     // the region as painted now: river_crossing stamped
+        resumed.Harness.Resume(resumed.Lease);
+        for (var i = 0; i < 4; i++)
+            resumed.Harness.SetConnected(i, true);
+        Assert.Equal(TacticsPhase.Battle, resumed.Game.Phase);
+        Assert.Null(resumed.Host.Battle!.Stage);
+        var epoch = resumed.Host.Explore!.Epoch;
+
+        Ended(resumed, BattleOutcome.Won, Put(HeroOf(resumed, LeaderOf(resumed)), WestBank));
+
+        Assert.Equal((stood, epoch), (resumed.Host.Explore!.At, resumed.Host.Explore.Epoch));
+        Assert.Null(resumed.Host.Explore.Arrived);
+    }
+
+    [Fact]
+    public void A_staged_fight_isnt_marked_plain()
+    {
+        var s = Fighting(Force);
+
+        Assert.False(TacticsDocument.Read(s.Lease.Document).Battle!.Plain);
+        Assert.Null(JsonNode.Parse(s.Lease.Document.GetRawText())!["battle"]!["plain"]);      // not written: the save reads as before
+    }
+
     [Fact]
     public void A_repaint_that_keeps_the_stamp_keeps_the_stage()
     {
