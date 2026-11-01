@@ -35,7 +35,7 @@ public sealed record MaterialLook(string Variant, ArtRef Top, ArtRef Side, ArtRe
         var cave = new ArtRef("cave_wall", "cool");
         return family switch
         {
-            "grass" => With(new ArtRef("dirt_side", "brown"), EarthChasm) with { Lip = new ArtRef("grass_lip", variant) },
+            "grass" => With(new ArtRef("dirt_side", "brown"), EarthChasm) with { Lip = variant == "frost" ? new ArtRef("snow_lip", "fresh") : new ArtRef("grass_lip", variant) },
             "dirt" => With(new ArtRef("dirt_side", variant), EarthChasm),
             "ash" or "mud" or "forest_needles" or "forest_floor" => With(new ArtRef("dirt_side", "dark"), EarthChasm),
             "path" => With(new ArtRef("dirt_side", "brown"), EarthChasm),

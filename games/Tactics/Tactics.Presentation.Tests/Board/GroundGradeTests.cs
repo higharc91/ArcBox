@@ -36,6 +36,29 @@ public sealed class GroundGradeTests
         Assert.True(lush.G < lush.R && lush.G < lush.B);
     }
 
+    /// <summary>The frost's own pale blue, in the ford's light: it has to come out a dull cold grey, not lavender, which is what the dusk's purple makes of it unaided.</summary>
+    [Fact]
+    public void Frost_at_the_ford_is_dull_and_cold()
+    {
+        var art = new Rgb(0.75f, 0.84f, 0.92f);
+        var lit = art.Times(GroundGrade.Of("ashen_ford", "grass/frost")).Times(BoardLighting.Dusk);
+
+        Assert.True(lit.B >= lit.R, "It's cold: blue stays over red.");
+        Assert.True(lit.G >= lit.R * 0.9f, "It isn't purple.");
+        Assert.True(Math.Max(lit.R, Math.Max(lit.G, lit.B)) - Math.Min(lit.R, Math.Min(lit.G, lit.B)) < 0.05f, "It's dull.");
+    }
+
+    [Fact]
+    public void Frost_hangs_frost_over_its_edge_not_green_grass() => Assert.Equal(new ArtRef("snow_lip", "fresh"), MaterialLook.Of("grass/frost").Lip);
+
+    [Fact]
+    public void A_forest_floors_green_is_taken_out_at_the_ford()
+    {
+        var floor = GroundGrade.Of("ashen_ford", "forest_needles/pine");
+        Assert.True(floor.G < floor.R);
+        Assert.True(floor.G < 0.75f);
+    }
+
     [Theory]
     [InlineData("cobble/warm")]
     [InlineData("cobble/grey")]
