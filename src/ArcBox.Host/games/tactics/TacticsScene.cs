@@ -122,7 +122,8 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private BoardChanges? _stageTerrainFor;
     private bool _inPlace;              // the fight's board is on the world now
     private bool _overWorld;
-    private int _takeoverHeld;       // frames the world has waited to take a fight over, for its blocks at the stage (TellWorld)
+    private ulong? _takeoverHeldSince;     // when the world began waiting to take a fight over, for its blocks at the stage (TellWorld)
+    private bool _takeoverHeldSaid;
     private ExploreView? _fed;          // the last view the walk was given
     private (WorldState State, BoardTerrain? Terrain)? _worldSaid;
     private WalkFrame? _lastWalk;       // the camera, as of the last frame of the world
@@ -276,12 +277,19 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         if (_world is { Now: WorldCanvas.Stage.Open, Plan: { } plan } open && director.TakeoverOn(plan.Terrain) is { } camera)
         {
             var size = GetViewport().GetVisibleRect().Size;
-            stageShown = open.Shows(WorldView.Seen(WorldCamera.FitOn(camera.Map, camera.Height), new System.Numerics.Vector2(size.X, size.Y)), camera.Map);
-            _takeoverHeld = stageShown ? _takeoverHeld : _takeoverHeld + 1;
+            var map = plan.Terrain.Map;
+            stageShown = open.Shows(WorldCamera.CutSeen(map.Width, map.Height, camera.Map, camera.Height, new System.Numerics.Vector2(size.X, size.Y)), camera.Map);
+            var clock = Time.GetTicksMsec();
+            _takeoverHeldSince ??= clock;
             if (stageShown)
             {
-                GD.Print($"TACTICS takeover: the stage's blocks recorded, after {_takeoverHeld} frames held");
-                _takeoverHeld = 0;
+                GD.Print($"TACTICS takeover: the stage's blocks recorded, after {clock - _takeoverHeldSince} ms held");
+                (_takeoverHeldSince, _takeoverHeldSaid) = (null, false);
+            }
+            else if (!_takeoverHeldSaid && clock - _takeoverHeldSince > 1000)
+            {
+                _takeoverHeldSaid = true;
+                GD.Print($"TACTICS takeover held over 1 s: {open.Waiting} blocks still to record");
             }
         }
         var state = StageLayout.WorldOf(new WorldSeen(_world is not null, _world?.Now == WorldCanvas.Stage.Open,

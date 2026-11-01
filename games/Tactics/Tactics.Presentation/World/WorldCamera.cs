@@ -138,9 +138,22 @@ public sealed class WorldCamera
     private void Show()
     {
         var clamped = new Vector2(Limited(_centre.X, _width), Limited(_centre.Y, _height));
-        Centre = InReach(Vector2.Lerp(_centre, clamped, _edge));
+        Centre = InReach(_party, Vector2.Lerp(_centre, clamped, _edge));
         _origin = OriginOn(Centre, _floor);
         Fit = new BoardFit(new Vector2(MathF.Round(_origin.X), MathF.Round(_origin.Y)), WorldTuning.Scale);
+    }
+
+    /// <summary>
+    /// What a cut to <paramref name="map"/> at <paramref name="floor"/> shows in <paramref name="window"/>, on a region of <paramref name="width"/>
+    /// by <paramref name="height"/> tiles, and as <see cref="Hold"/> glides on from it: a walking camera cuts with the region's clamp, which a
+    /// fight's hold eases off, so near an edge the view starts clamped and slides out to sit on the point. This is everything from the clamped view
+    /// to the unclamped one, which takes in every view between.
+    /// </summary>
+    public static ArtArea CutSeen(int width, int height, Vector2 map, float floor, Vector2 window)
+    {
+        var clamped = InReach(map, new Vector2(Limited(map.X, width), Limited(map.Y, height)));
+        var (from, to) = (WorldView.Seen(FitOn(clamped, floor), window), WorldView.Seen(FitOn(map, floor), window));
+        return new ArtArea(Vector2.Min(from.Min, to.Min), Vector2.Max(from.Max, to.Max));
     }
 
     /// <summary>The fit of a camera centred on <paramref name="map"/> at <paramref name="height"/>, as a cut there has it.</summary>
@@ -158,9 +171,9 @@ public sealed class WorldCamera
     }
 
     /// <summary>Moves <paramref name="centre"/> as little as it takes to bring the party back in reach, along the screen's own axes, which are the map's diagonals.</summary>
-    private Vector2 InReach(Vector2 centre)
+    private static Vector2 InReach(Vector2 party, Vector2 centre)
     {
-        var gap = _party - centre;
+        var gap = party - centre;
         var (across, down) = (gap.X - gap.Y, gap.X + gap.Y);
         var reach = WorldTuning.PartyReach;
         var (wide, tall) = (across - Math.Clamp(across, -reach, reach), down - Math.Clamp(down, -reach, reach));

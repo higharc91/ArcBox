@@ -130,14 +130,9 @@ public partial class UnitMarks : Node2D
         {
             return;
         }
-        var glyphs = countdown.Text.Select(art.Digit).ToArray();
-        var width = glyphs.Sum(g => g.Advance) * UnitPlan.CountdownScale;
-        var pen = countdown.Centre.X - width / 2f;
-        foreach (var (rect, advance) in glyphs)
+        foreach (var (rect, topLeft, size) in MarkRule.CountGlyphs(countdown, art))     // where MarkRule.CountBox says it is
         {
-            var size = new Vector2(rect.Width, rect.Height) * UnitPlan.CountdownScale;
-            DrawTextureRectRegion(texture, new Rect2(new Vector2(pen, countdown.Centre.Y - size.Y / 2), size), Region(rect));
-            pen += advance * UnitPlan.CountdownScale;
+            DrawTextureRectRegion(texture, new Rect2(topLeft.X, topLeft.Y, size.X, size.Y), Region(rect));
         }
     }
 
