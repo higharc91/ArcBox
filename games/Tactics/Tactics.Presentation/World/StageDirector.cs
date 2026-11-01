@@ -351,14 +351,17 @@ public sealed class StageDirector(Func<string, BattleMap?> maps)
     /// <summary>
     /// How the party came to the new epoch's tile. The server says so in <see cref="ExploreView.Arrived"/> only until the party's next step, and
     /// a TV a step behind (a slow frame, a quick thumb) can hear of the epoch and that step together. Then the fight's outcome says it: a loss
-    /// wakes the party, a win or a flight falls it in. Without that, the followers would stand stacked on the leader's tile.
+    /// wakes the party, a win or a flight falls it in. Without that, the followers would stand stacked on the leader's tile. It guesses only
+    /// for the fight's own epoch, the one after the party's when the fight began, in the fight's region: a restarted server starts the epoch
+    /// from its clock, and an aftermath can travel, and either way the party is somewhere a fall-in from the battle would cross to.
     /// </summary>
-    private string? ArrivalOf(ExploreView explore) => explore.Arrived ?? _outcome switch
+    private string? ArrivalOf(ExploreView explore) => explore.Arrived
+        ?? (_held is not { } held || explore.Epoch != held.Epoch + 1 || explore.Region != _battle?.Stage?.Region ? null : _outcome switch
     {
         nameof(BattleOutcome.Lost) => "woke",
         nameof(BattleOutcome.Won) or nameof(BattleOutcome.Fled) => "fellIn",
         _ => null,
-    };
+    });
 
     private void Finish()
     {

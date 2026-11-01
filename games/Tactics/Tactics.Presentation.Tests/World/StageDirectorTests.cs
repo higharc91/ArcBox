@@ -300,6 +300,32 @@ public sealed class StageDirectorTests
         Assert.Equal(StageStep.Waking, director.Stage);
     }
 
+    /// <summary>A server restarted between the results and the first step starts the epoch from its clock, with no arrival: a snap.</summary>
+    [Fact]
+    public void A_restarted_servers_epoch_is_no_arrival()
+    {
+        var (_, director) = Started();
+        ToResults(director, Explore(epoch: 2, at: new Tile(20, 13), arrived: "fellIn"));
+
+        director.Receive(Walking(Explore(epoch: 1_793_500_000, at: new Tile(90, 40))));
+
+        Assert.Equal(StageStep.Walking, director.Stage);
+        Assert.Empty(director.Seed);
+    }
+
+    /// <summary>A slow TV that hears of an aftermath's travel with the fight's epoch has the party in another region: no fall-in to it.</summary>
+    [Fact]
+    public void An_epoch_in_another_region_is_no_arrival()
+    {
+        var (_, director) = Started();
+        ToResults(director, Explore(epoch: 2, at: new Tile(20, 13), arrived: "fellIn"));
+
+        director.Receive(Walking(Explore(epoch: 2, at: new Tile(5, 5), seq: 1) with { Region = "elsewhere" }));
+
+        Assert.NotEqual(StageStep.FallingIn, director.Stage);
+        Assert.Empty(director.Seed);
+    }
+
     [Fact]
     public void A_step_in_the_same_epoch_is_no_arrival()
     {

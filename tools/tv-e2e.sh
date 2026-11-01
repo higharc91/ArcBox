@@ -205,6 +205,10 @@ if [[ ( "$STAGE" == "1" || "$DROP_SIGNALS" == "1" ) && ( "$GAME" != "tactics" ||
   echo "ARCBOX_STAGE=1 and ARCBOX_DROP_SIGNALS=1 are for ARCBOX_GAME=tactics, without ARCBOX_WALK=1." >&2
   exit 2
 fi
+if [[ "$DROP_SIGNALS" == "1" && "$STAGE" != "1" ]]; then
+  echo "ARCBOX_DROP_SIGNALS=1 goes with ARCBOX_STAGE=1." >&2
+  exit 2
+fi
 if [[ "$RECONNECT" == "1" && "$RESTART" == "1" ]]; then
   echo "ARCBOX_RECONNECT=1 and ARCBOX_RESTART=1 are separate runs." >&2
   exit 2

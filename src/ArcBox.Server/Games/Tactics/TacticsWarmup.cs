@@ -25,7 +25,7 @@ internal sealed class TacticsWarmup(Lazy<RulesPack> pack, Lazy<LoreBook> lore, I
         }
         catch (Exception e)
         {
-            log.LogWarning("The Tactics content didn't load ahead of the first room: {Error}", e.Message);
+            log.LogWarning(e, "The Tactics content didn't load ahead of the first room");
         }
     }, cancellationToken);
 
