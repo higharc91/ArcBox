@@ -819,6 +819,37 @@ public sealed class AshenFordDraftTests
     }
 
     [Fact]
+    public void The_old_bridge_is_broken_and_cant_be_walked()
+    {
+        var draft = Draft.Value;
+        var spans = draft.Source.Buildings.Where(b => b.Id == "bridge_u").Select(b => b.At).ToList();
+
+        // A stump from each bank, a span missing, and every tile under it still the river.
+        Assert.Equal(3, spans.Count);
+        Assert.All(spans, t => Assert.Equal(TileFlags.Water | TileFlags.Deep, draft.Region.TileAt(t)!.Flags));
+        Assert.All(spans, t => Assert.False(draft.InStamp(t)));
+        var (west, east) = (spans.Min(t => t.X), spans.Max(t => t.X));
+        Assert.Contains(Enumerable.Range(west, east - west + 1), x => !spans.Contains(new Tile(x, spans[0].Y)));
+        Assert.All(spans, t => Assert.DoesNotContain(t, draft.Walk.From(draft.Start)));
+
+        // Behind the stamp, so it never hides a fight.
+        Assert.All(spans, t => Assert.True(t.Y < draft.Stamp.At.Y));
+    }
+
+    [Fact]
+    public void A_stone_causeway_leads_to_the_crossing_from_each_bank()
+    {
+        var draft = Draft.Value;
+        bool Paved(Tile t) => draft.Material(t) == "cobble/grey";
+        var edge = (West: draft.Stamp.At.X - 1, East: draft.Stamp.At.X + draft.Crossing.Width);
+
+        Assert.True(draft.Tiles.Count(t => Paved(t) && t.X > edge.West - 10 && t.X <= edge.West) > 20);
+        Assert.True(draft.Tiles.Count(t => Paved(t) && t.X >= edge.East && t.X < edge.East + 10) > 20);
+        Assert.Contains(draft.Tiles, t => t.X == edge.West && Paved(t));
+        Assert.Contains(draft.Tiles, t => t.X == edge.East && Paved(t));
+    }
+
+    [Fact]
     public void Bare_stone_is_rough_and_broken_not_laid_in_slabs()
     {
         var draft = Draft.Value;

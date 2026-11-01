@@ -26,7 +26,7 @@ public static class GroundGrade
         ["grass/autumn"] = new(0.72f, 0.88f, 1f),
         ["grass/dry"] = new(0.88f, 0.78f, 0.74f),
         ["grass/frost"] = new(0.64f, 0.72f, 0.72f),
-        ["grass/lush"] = new(1.14f, 0.56f, 0.86f),
+        ["grass/lush"] = new(1.2f, 0.56f, 0.66f),
         ["rock/grey"] = new(0.74f, 0.82f, 0.8f),
         ["rock/dark"] = new(0.74f, 0.82f, 0.8f),
         ["water/clear"] = new(0.72f, 0.82f, 0.84f),

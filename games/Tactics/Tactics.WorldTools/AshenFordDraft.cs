@@ -282,15 +282,34 @@ public static class AshenFordDraft
     private static readonly Stand[] AtTheFord =
     [
         new("pillar_broken", "grey", (97, 53), (98, 67), (94, 66), (92, 55)),           // the Warden stones
-        new("ruin_arch", "grey", (96, 68)),
-        new("rubble", "grey", (95, 67), (97, 66), (89, 53), (96, 51)),
+        new("pillar_broken", "grey", (91, 59), (95, 59), (93, 64), (97, 64)),             // down each side of their causeway
+        new("pillar_broken", "grey", (119, 56), (123, 56), (118, 61), (122, 61)),       // and on the far bank
+        new("ruin_arch", "grey", (96, 68), (94, 58)),
+        new("ruin_wall", "grey", (100, 49), (101, 50)),                                 // the bridge's west abutment
+        new("rubble", "grey", (95, 67), (97, 66), (89, 53), (96, 51), (102, 50), (101, 46), (100, 47), (91, 60), (98, 64)),
         new("campfire", "fire", (119, 53), (119, 62), (123, 55), (116, 66)),            // goblin fires on the far bank
         new("banner", "goblin", (118, 50), (121, 64), (124, 52), (120, 68)),
-        new("skull_pike", "bone", (118, 56), (118, 60), (116, 50)),
-        new("barricade", "oak", (114, 53), (114, 62)),
+        new("banner", "goblin", (103, 47), (99, 59), (98, 64), (118, 55), (118, 62)),   // and their claim on the old bridge, and on both ends of the crossing
+        new("skull_pike", "bone", (118, 56), (118, 60), (116, 50), (99, 58), (99, 65), (103, 49)),
+        new("torch", "fire", (96, 60), (98, 63)),                                       // their pickets on the near bank
+        new("barricade", "oak", (114, 53), (114, 62), (96, 59), (96, 64)),
+        new("barricade", "oak", (116, 55), (116, 61)),
         new("crate", "oak", (122, 53), (120, 60)),
         new("signpost", "oak", (127, 55)),
+        new("tall_grass", "dry", (98, 52), (98, 55), (99, 67), (114, 66), (115, 68), (112, 66), (101, 65)),
     ];
+
+    /// <summary>
+    /// The old Warden bridge, upstream of the ford and behind it, so it never hides a fight. River Crossing's map is a ford, its tiles can't change, and the crossing has to stay
+    /// the only one, so what's left of the bridge is a stump from each bank with a span gone, on piers of its own stone. It can't be walked: its tiles are still the river.
+    /// </summary>
+    private static readonly Building[] OldBridge = [new("bridge_u", "grey", 105, 48), new("bridge_u", "grey", 106, 48), new("bridge_u", "grey", 108, 48)];
+
+    /// <summary>The bridge's deck stands this high, level with the east bank and clear of the water.</summary>
+    private const int BridgeDeck = 3;
+
+    /// <summary>The Wardens' paved road, what's left of it, either side of the crossing: x, y for each end.</summary>
+    private static readonly (double X, double Y)[][] Causeways = [[(88, 61), (99.5, 61.5)], [(113.5, 58), (124, 58)]];
 
     /// <summary>The docks' sheds on their yard, each door on the lane behind the quay. The market's stalls stand on the quay itself.</summary>
     private static readonly Building[] AtTheDocks =
@@ -424,12 +443,14 @@ public static class AshenFordDraft
         land.FillSealed(StartSpawn);
         land.EaseSteps();
         land.FaceTerraces();
+        land.PaveCauseways();
+        land.RaiseOldBridge();
 
         var source = new RegionSource(Id, "The Ashen Ford", 1, Width, Height) { Start = StartSpawn, Recovery = RecoverySpawn };
         land.CopyTo(source);
         source.Stamp(crossing, StampAt, WaterLevel);
         source.Beats.AddRange(Spots.Select(s => new BeatSpot(s.Beat, new Tile(s.X, s.Y))));
-        source.Buildings.AddRange(Emberwick.Concat(TownWall()).Concat(OnTheFarms).Concat(AtTheDocks).Concat(AtMauds).Select(b => new RegionBuilding(b.Id, b.Variant, new Tile(b.X, b.Y))));
+        source.Buildings.AddRange(Emberwick.Concat(TownWall()).Concat(OnTheFarms).Concat(AtTheDocks).Concat(AtMauds).Concat(OldBridge).Select(b => new RegionBuilding(b.Id, b.Variant, new Tile(b.X, b.Y))));
         return source;
     }
 
@@ -593,6 +614,9 @@ public static class AshenFordDraft
 
         /// <summary>The terraced tiles, which <see cref="FaceTerraces"/> finishes.</summary>
         private readonly bool[,] _terraced = new bool[Width, Height];
+
+        /// <summary>The stamp's size, once it's down.</summary>
+        private (int W, int H) _stamp;
 
         public Land(Random random)
         {
@@ -899,6 +923,7 @@ public static class AshenFordDraft
         /// <summary>River Crossing's tiles, and the land round them drawn to their heights so the stamp doesn't sit like a tile on a table. Its ridge's rock runs on a little past it.</summary>
         public void Stamp(BattleMap map)
         {
+            _stamp = (map.Width, map.Height);
             var stamped = StampBrush.Cells(map, StampAt, WaterLevel).ToDictionary(c => (c.At.X, c.At.Y));
             foreach (var cell in stamped.Values)
             {
@@ -1009,6 +1034,33 @@ public static class AshenFordDraft
                 }
             }
         }
+
+        /// <summary>The Wardens' stone road either side of the crossing, grey and broken at the edges, over what's there and at its height.</summary>
+        public void PaveCauseways()
+        {
+            foreach (var causeway in Causeways)
+            {
+                var line = new Line(causeway);
+                foreach (var (x, y) in Everywhere())
+                    if (line.Nearest(x, y).Distance + (Rough(x, y, 5, 52) - 0.5) * 2.4 < 1.3 && Walkable(x, y) && !IsWater(x, y) && !InStamp(x, y))
+                        _materials[x, y] = Plaza;
+            }
+        }
+
+        /// <summary>The old bridge's river tiles, raised under its deck, which keep them what they are, and a ramp of its stone at the west end.</summary>
+        public void RaiseOldBridge()
+        {
+            foreach (var span in OldBridge)
+            {
+                _heights[span.X, span.Y] = BridgeDeck;
+                _flags[span.X, span.Y] = DeepWater;
+                _materials[span.X, span.Y] = Water;
+            }
+            Paint(104, 48, BridgeDeck, Plaza);
+            Paint(103, 48, BridgeDeck - 1, Plaza);
+        }
+
+        private bool InStamp(int x, int y) => x >= StampAt.X && y >= StampAt.Y && x < StampAt.X + _stamp.W && y < StampAt.Y + _stamp.H;
 
         /// <summary>Faces each terrace's edge with scree, so the steps read from a distance and no terrace ends in a straight line of one stuff.</summary>
         public void FaceTerraces()
