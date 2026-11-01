@@ -377,6 +377,28 @@ public sealed class RegionCheckTests
         Assert.NotNull(ValidationTests.LoadChapter(World(def), Map("ford", FordMap), Map("bank", other)));
     }
 
+    [Fact]
+    public void A_recovery_spawn_inside_a_stamp_is_an_error()
+        => Assert.Equal(
+            [new ContentError(RegionFile, "/spawns/recovery", "The recovery spawn at (5, 6) is inside the stamp 'ford', so a beaten party would wake on its battlefield.")],
+            ErrorsOf(Stamped(FordStamp) with { Spawns = new RegionSpawns(new Tile(0, 0), new Tile(5, 6)) }));
+
+    [Fact]
+    public void A_start_spawn_inside_a_stamp_is_an_error()
+        => Assert.Equal(
+            [new ContentError(RegionFile, "/spawns/start", "The start spawn at (4, 5) is inside the stamp 'ford', so a new campaign would begin on its battlefield.")],
+            ErrorsOf(Stamped(FordStamp) with { Spawns = new RegionSpawns(new Tile(4, 5), new Tile(0, 0)) }));
+
+    /// <summary>The stamp covers (4, 5) to (5, 6): a spawn on any side of it, touching it, is outside.</summary>
+    [Theory]
+    [InlineData(3, 5)]
+    [InlineData(6, 5)]
+    [InlineData(4, 4)]
+    [InlineData(5, 7)]
+    [InlineData(6, 7)]
+    public void A_spawn_just_outside_a_stamp_loads(int x, int y)
+        => Loads(Stamped(FordStamp) with { Spawns = new RegionSpawns(new Tile(x, y), new Tile(x, y)) });
+
     private static RegionDef WithEdges(string id, params RegionEdge[] edges) => Region(id) with { Edges = [.. edges] };
 
     [Theory]

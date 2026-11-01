@@ -270,6 +270,8 @@ public static partial class RegionExport
             return $"Paint a walkable way to it, climbing no more than {ClassDef.DefaultJump} levels a step, or move the marker.";
         if (Has("can't walk back to the start"))
             return $"Paint a way out, climbing no more than {ClassDef.DefaultJump} levels a step, or move the marker.";
+        if (Has("spawn at") && Has("is inside the stamp"))
+            return "Move the marker off the stamp.";
         if (Has("can't be stood on"))
             return "Move the Start marker onto walkable ground, or clear the tile's Impassable or Deep flag.";
         if (Has("doesn't match its map"))

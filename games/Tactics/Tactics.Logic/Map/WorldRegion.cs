@@ -67,6 +67,12 @@ public sealed class WorldRegion
     }
 
     /// <summary>
+    /// The stamp of the battle map <paramref name="map"/>, or null if the region doesn't stamp it. The loader allows a map one stamp,
+    /// so an encounter on it resolves to one place.
+    /// </summary>
+    public RegionStamp? StampFor(string map) => Def.Stamps.FirstOrDefault(s => s.Map == map);
+
+    /// <summary>
     /// Decodes one chunk for <paramref name="materials"/> listed materials, or returns null with what's wrong with it. The first
     /// bad tile of each kind is enough to find the problem, as on a battle map: one problem per tile could be thousands.
     /// </summary>

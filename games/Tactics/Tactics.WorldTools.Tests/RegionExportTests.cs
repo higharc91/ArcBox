@@ -192,8 +192,21 @@ public sealed class RegionExportTests : IDisposable
         Assert.Empty(Export(Stamped(map) with { Starts = PartySpawn(map), Recoveries = PartySpawn(map) }).Problems);
     }
 
-    private static ImmutableArray<Tile> PartySpawn(BattleMap map)
-        => [new Tile(map.Zones["party_spawn"][0].X + 4, map.Zones["party_spawn"][0].Y + 4)];
+    /// <summary>
+    /// The tile just west of the stamp, level with the first tile of the map's party spawn: as close to it as a spawn can be, since a
+    /// spawn can't be inside a stamp.
+    /// </summary>
+    private static ImmutableArray<Tile> PartySpawn(BattleMap map) => [new Tile(3, map.Zones["party_spawn"][0].Y + 4)];
+
+    [Fact]
+    public void A_spawn_on_a_stamp_is_refused_naming_the_marker()
+    {
+        var result = Export(Stamped() with { Recoveries = [new Tile(5, 13)] });
+
+        Assert.Null(result.Written);
+        Assert.Equal(["The recovery spawn at (5, 13) is inside the stamp 'river_crossing', so a beaten party would wake on its battlefield. Move the marker off the stamp."],
+            result.Problems);
+    }
 
     public static TheoryData<string> Maps() => [.. Base.Value.Maps.Keys];
 

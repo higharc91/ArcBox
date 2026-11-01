@@ -59,7 +59,7 @@ internal sealed partial class Validation
 
     /// <summary>
     /// Checks each region against the rest of the pack (spec §3.4): every stamp sits inside the region on a known map, tile
-    /// for tile, with no map stamped twice and no two stamps overlapping; the spawns, beat spots and stamps can be reached
+    /// for tile, with no map stamped twice and no two stamps overlapping; neither spawn is inside a stamp; the spawns, beat spots and stamps can be reached
     /// on foot from the start, round the stamps' blocking props; the recovery spawn can walk back to the start; and a neighbour
     /// that's loaded has an edge back on the facing side with the negated offset. A stamp on a map that failed to load skips the map
     /// checks, as an encounter does. Whether a one-way drop strands the party depends on the story's order, which is
@@ -102,6 +102,8 @@ internal sealed partial class Validation
         /// <summary>A stamp that sits inside the region, on a known map.</summary>
         private sealed record Placed(int Index, RegionStamp Stamp, BattleMap Map)
         {
+            public BattleStage Stage => new(Stamp.Map, Stamp.At, Stamp.Height, Map.Width, Map.Height);
+
             public IEnumerable<(Tile World, Tile OnMap)> Tiles()
             {
                 for (var y = 0; y < Map.Height; y++)
@@ -123,6 +125,7 @@ internal sealed partial class Validation
         public void Run()
         {
             var placed = Stamps();
+            Spawns(placed);
             Reachable(placed);
             Edges();
         }
@@ -158,6 +161,22 @@ internal sealed partial class Validation
                 placed.Add(here);
             }
             return placed;
+        }
+
+        /// <summary>
+        /// Reports a spawn inside a stamp (overworld 5c): a new campaign would begin on a battlefield, and a beaten party would wake on
+        /// the one it just lost.
+        /// </summary>
+        private void Spawns(List<Placed> stamps)
+        {
+            var spawns = Pointer.Append(ptr, "spawns");
+            foreach (var (name, at, reason) in new[]
+            {
+                ("start", _def.Spawns.Start, "a new campaign would begin on its battlefield"),
+                ("recovery", _def.Spawns.Recovery, "a beaten party would wake on its battlefield"),
+            })
+                foreach (var stamp in stamps.Where(s => s.Stage.Holds(at)))
+                    v.Error(file, Pointer.Append(spawns, name), $"The {name} spawn at {at} is inside the stamp '{stamp.Stamp.Map}', so {reason}.");
         }
 
         private bool Fits(Tile at, BattleMap map)
