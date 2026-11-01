@@ -153,24 +153,27 @@ public sealed partial class TacticsGame
     }
 
     /// <summary>
-    /// Who stands in the world for the scene under way (the user's answer of 2026-11-01, item 21): each of its speakers who isn't the
-    /// narrator and is in the lore, at <see cref="SceneSpot(SceneDef, ArcBeat, Terrain)"/>, on tiles <see cref="SceneCast.Place"/> chooses clear of the party, facing
-    /// the leader. Empty outside the Story phase, with no scene, and in the chapter's card; so they leave as the scene ends. In the gap
-    /// before a scene, it's that scene's cast, where the party has just travelled to.
+    /// Who stands in the world for the scene under way (the user's answer of 2026-11-01, item 21): the speakers who aren't the narrator and are
+    /// in the lore, of the node playing and every node that can lead to it (<see cref="SceneCast.SpeakersBy"/>), so nobody is shown before a
+    /// line could reveal them. They stand at <see cref="SceneSpot(SceneDef, ArcBeat, Terrain)"/>, facing the leader, on tiles
+    /// <see cref="SceneCast.Place"/> chooses for the whole scene's cast, so each keeps their tile as the cast grows. The tiles depend only on
+    /// what's saved (the scene, the party's tile and facing), so a restart puts everyone where they were. Empty outside the Story phase, in
+    /// the gap before a scene, and in the chapter's card; so they leave as the scene ends.
     /// </summary>
     private ImmutableArray<CastView> CastOf()
     {
-        if (_phase != TacticsPhase.Story || _telling == StoryStates.Card || _region is not { } region || CurrentScene() is not { } scene
-            || BeatNamed(scene.Beat) is not { } beat)
+        if (_phase != TacticsPhase.Story || _telling is StoryStates.Card or StoryStates.Gap || _region is not { } region
+            || CurrentScene() is not { } scene || Cursor?.Node is not { } node || BeatNamed(scene.Beat) is not { } beat)
             return [];
         var cast = SceneCast.Speakers(scene).Select(Lore.Character).OfType<LoreCharacter>().ToList();
-        if (cast.Count == 0)
+        var by = SceneCast.SpeakersBy(scene, node).ToHashSet(StringComparer.Ordinal);
+        if (!cast.Any(c => by.Contains(c.Id)))
             return [];
         var ground = Rules.GroundFor(region.Def.Id)!.Terrain;
         var reached = Rules.ReachFor(region.Def.Id)!;
-        HashSet<Tile> party = [_at, .. _legs.Select(l => l.To)];
-        var tiles = SceneCast.Place(ground, SceneSpot(scene, beat, ground), _at, _facing, party, cast.Count, t => ground.Map.InBounds(t) && reached.Contains(t));
-        return [.. tiles.Select((t, i) => new CastView(cast[i].Id, cast[i].Name, $"characters.{cast[i].Preset}", t, _at))];
+        var tiles = SceneCast.Place(ground, SceneSpot(scene, beat, ground), _at, _facing, [_at], cast.Count, t => ground.Map.InBounds(t) && reached.Contains(t));
+        return [.. tiles.Select((t, i) => (Tile: t, Who: cast[i])).Where(c => by.Contains(c.Who.Id))
+            .Select(c => new CastView(c.Who.Id, c.Who.Name, $"characters.{c.Who.Preset}", c.Tile, _at))];
     }
 
     /// <summary>

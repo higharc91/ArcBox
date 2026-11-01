@@ -114,4 +114,41 @@ public sealed class SceneCastTests
         Assert.All(tiles, t => Assert.True(t.X <= 1, $"{t} is up the cliff."));
         Assert.Equal(5, tiles.Length);
     }
+
+    [Fact]
+    public void The_cast_by_a_node_is_its_speakers_and_those_of_every_node_that_can_lead_to_it()
+    {
+        var mayor = Book.Value.Scenes.Single(s => s.Id == "ch1_mayor");
+        Assert.Equal(["pip_ashdown", "bree_tallow"], SceneCast.SpeakersBy(mayor, "open"));
+        Assert.Equal(["pip_ashdown", "bree_tallow", "halden_varrow", "dagna_holt"], SceneCast.SpeakersBy(mayor, "noble"));
+        Assert.Equal(["pip_ashdown", "bree_tallow", "halden_varrow", "dagna_holt", "hooded_stranger"], SceneCast.SpeakersBy(mayor, "close"));
+        Assert.Empty(SceneCast.SpeakersBy(mayor, "no_such_node"));
+    }
+
+    /// <summary>
+    /// Over every base scene: along every edge the cast only grows (nobody leaves mid-scene), and nobody is in it before a node of theirs
+    /// could have led there, worked out forwards from their lines rather than backwards as <see cref="SceneCast.SpeakersBy"/> does.
+    /// </summary>
+    [Fact]
+    public void Across_every_base_scene_the_cast_only_grows_and_never_comes_early()
+    {
+        foreach (var scene in Book.Value.Scenes)
+            foreach (var node in scene.Nodes)
+            {
+                var cast = SceneCast.SpeakersBy(scene, node.Id);
+                foreach (var next in node.Targets)
+                    Assert.Superset(cast.ToHashSet(), SceneCast.SpeakersBy(scene, next).ToHashSet());
+                foreach (var who in cast)
+                {
+                    var reach = scene.Nodes.Where(n => n.Lines.Any(l => l.Speaker == who)).Select(n => n.Id).ToHashSet();
+                    var todo = new Stack<string>(reach);
+                    while (todo.TryPop(out var id))
+                        foreach (var t in scene.Node(id)!.Targets)
+                            if (reach.Add(t))
+                                todo.Push(t);
+                    Assert.True(reach.Contains(node.Id), $"{scene.Id}/{node.Id}: {who} shows before any line of theirs could lead here.");
+                }
+                Assert.All(node.Lines.Where(l => l.Speaker != SceneDef.Narrator), l => Assert.Contains(l.Speaker, cast));
+            }
+    }
 }

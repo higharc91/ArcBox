@@ -23,6 +23,26 @@ public static class SceneCast
         => [.. scene.Nodes.SelectMany(n => n.Lines).Select(l => l.Speaker).Where(s => s != SceneDef.Narrator).Distinct(StringComparer.Ordinal)];
 
     /// <summary>
+    /// Who is in the scene by node <paramref name="node"/>: the speakers of that node and of every node that can lead to it (its ancestors in
+    /// the scene's graph), in <see cref="Speakers"/>' order, so nobody shows before a line that could reveal them. It depends only on the
+    /// scene and the node, so a restart shows the same, and it only grows along any path, so nobody leaves mid-scene. Empty for a node the
+    /// scene doesn't have.
+    /// </summary>
+    public static ImmutableArray<string> SpeakersBy(SceneDef scene, string node)
+    {
+        if (scene.Node(node) is null)
+            return [];
+        var before = new HashSet<string>(StringComparer.Ordinal) { node };
+        var frontier = new Queue<string>([node]);
+        while (frontier.TryDequeue(out var id))
+            foreach (var parent in scene.Nodes.Where(n => n.Targets.Contains(id, StringComparer.Ordinal)))
+                if (before.Add(parent.Id))
+                    frontier.Enqueue(parent.Id);
+        var here = scene.Nodes.Where(n => before.Contains(n.Id)).SelectMany(n => n.Lines).Select(l => l.Speaker).ToHashSet(StringComparer.Ordinal);
+        return [.. Speakers(scene).Where(here.Contains)];
+    }
+
+    /// <summary>
     /// Where <paramref name="count"/> figures stand for a scene at <paramref name="spot"/>, in the cast's order, one to a tile: the tiles
     /// the party could walk to within <see cref="Reach"/> steps of the spot (by <see cref="WorldWalk.Next"/>, the spot itself first), that
     /// pass <paramref name="allowed"/>, and aren't in <paramref name="party"/> (the leader's tile and the trail behind it). The first speaker
