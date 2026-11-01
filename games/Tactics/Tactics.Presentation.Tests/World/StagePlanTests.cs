@@ -450,6 +450,28 @@ public sealed class StagePlanTests(ITestOutputHelper output)
     private static int stage0Depth() => Ford.Value.Stage.Depth;
 
     [Fact]
+    public void A_fight_at_the_ford_stands_in_the_worlds_dusk_so_handing_over_changes_no_colour()
+    {
+        var (ground, stage, _) = Built(1, -6);
+        var world = WorldPlan.Build(new BoardTerrain(ground.Map, null), Pack.Art);
+        var stagePlan = StagePlan.Build(ground, stage, null, Pack.Art);
+        var shift = BoardFit.StageOffset(stage);
+
+        Assert.Equal(BoardLighting.Dusk, stagePlan.Lighting.Ambient);
+        var lit = world.Blocks.SelectMany(b => b.Lit.Items).OfType<LitFace>().Where(f => f.Art && !f.Probes.IsEmpty)
+            .ToLookup(f => (f.Face.Tile, f.Face.Kind, Corner: f.Face.Points[0]));
+        var compared = 0;
+        foreach (var face in stagePlan.Lit.Items.OfType<LitFace>().Where(f => f.Art && !f.Probes.IsEmpty))
+            foreach (var same in lit[(face.Face.Tile, face.Face.Kind, face.Face.Points[0] + shift)])
+            {
+                var (mine, theirs) = (face.MeanColourAt(0, stagePlan.Lighting), same.MeanColourAt(0, world.Lighting));
+                Assert.True(Math.Abs(mine.R - theirs.R) + Math.Abs(mine.G - theirs.G) + Math.Abs(mine.B - theirs.B) < 0.02f, $"{face.Face.Tile} {face.Face.Kind}: {mine} against {theirs}");
+                compared++;
+            }
+        Assert.True(compared > 100, $"{compared}");
+    }
+
+    [Fact]
     public void The_stage_draws_props_near_the_fight()
     {
         var (ground, stage, map) = Ford.Value;

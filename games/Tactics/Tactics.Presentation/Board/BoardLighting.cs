@@ -140,6 +140,22 @@ public sealed class BoardLighting
     private const float HaloAlpha = 0.55f;
     private const float HaloTilesToScale = 0.5f;
 
+    /// <summary>
+    /// The Ashen Ford's hour (lore: "golden-hour autumn turning cold"; mockup 02): warm and low, a little purple. It's stated, not lifted like a room's: the map's own lamps, fires and
+    /// lit windows do the rest. A figure keeps <see cref="FigureFloor"/>.
+    /// </summary>
+    public static readonly Rgb Dusk = new(0.56f, 0.44f, 0.54f);
+
+    /// <summary>What's lit at <see cref="Dusk"/> rather than at noon: the ford, and its fight when a fight has no world to stand in.</summary>
+    private static readonly ImmutableDictionary<string, Rgb> Grades = ImmutableDictionary<string, Rgb>.Empty.WithComparers(StringComparer.Ordinal)
+        .Add("ashen_ford", Dusk).Add("river_crossing", Dusk);
+
+    /// <summary>What a building's forge and doors give, once it's dark enough to see: warm, and well under a lamp, or a town's walls stand in a rim of fire.</summary>
+    private static readonly Rgb Hearth = Rgb.Hex("#ffb35c");
+    private const float HearthRadius = 2f;
+    private const float HearthPower = 0.3f;
+    private const string HearthFlicker = "candle";
+
     /// <summary>Open air at noon: the art as drawn.</summary>
     public static readonly Rgb Daylight = new(1, 1, 1);
 
@@ -173,14 +189,17 @@ public sealed class BoardLighting
     public static BoardLighting Of(IEnumerable<BoardPlan> plans, string regionId, LightRecipe recipe)
     {
         var lights = new List<BoardLight>();
+        var ambient = AmbientOf(regionId, recipe);
         foreach (var item in plans.SelectMany(p => p.Items))
         {
             if (item is Sprite { Light: { } light } sprite)
                 AddProp(lights, sprite, light, recipe);
             else if (item is Face { Image.Glow: { } glow } face && Scatters(face, glow))
                 AddGlow(lights, face, glow, recipe);
+            else if (item is Face { Emits.IsDefaultOrEmpty: false } building && ambient != Daylight)
+                AddHearths(lights, building, recipe);
         }
-        return new BoardLighting(AmbientOf(regionId, recipe), [.. lights]);
+        return new BoardLighting(ambient, [.. lights]);
     }
 
     /// <summary>Where a figure on <paramref name="feet"/>, in a sprite this tall, reads its light.</summary>
@@ -189,6 +208,8 @@ public sealed class BoardLighting
     /// <summary>A map has a room's light if a word of its id names one of the recipe's rooms: maps don't otherwise say what they are. The rest are open air.</summary>
     private static Rgb AmbientOf(string mapId, LightRecipe recipe)
     {
+        if (Grades.TryGetValue(mapId, out var grade))
+            return grade;
         foreach (var word in mapId.Split('_'))
             if (recipe.Ambient.TryGetValue(word, out var ambient))
                 return Lifted(ambient);
@@ -226,6 +247,16 @@ public sealed class BoardLighting
         var middle = face.Points.Aggregate(Vector2.Zero, Vector2.Add) / face.Points.Length;
         lights.Add(new BoardLight(face.Tile, middle, [middle - new Vector2(0, glow.Lift)], 0, glow.Radius, glow.Colour, glow.Power,
             Curve(glow.Flicker, recipe), PhaseOf(face.Tile, (int)face.Facing), null));
+    }
+
+    private static void AddHearths(List<BoardLight> lights, Face face, LightRecipe recipe)
+    {
+        var halo = NearestHalo(Hearth, recipe);
+        for (var i = 0; i < face.Emits.Length; i++)
+        {
+            var at = face.Points[0] + face.Emits[i];
+            lights.Add(new BoardLight(face.Tile, at, [at], 0, HearthRadius, Hearth, HearthPower, Curve(HearthFlicker, recipe), PhaseOf(face.Tile, i), halo));
+        }
     }
 
     private static ImmutableArray<float> Curve(string name, LightRecipe recipe) => recipe.Flicker.GetValueOrDefault(name, [1f]);

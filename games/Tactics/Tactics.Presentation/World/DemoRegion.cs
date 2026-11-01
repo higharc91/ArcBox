@@ -69,6 +69,74 @@ public static class DemoRegion
         return [.. lap, .. lap];
     }
 
+    /// <summary>
+    /// A small town square at the ford's dusk, for judging the light against mockup 02 before the real Emberwick is built: cobbles, lamps, a well, and buildings round them. It takes
+    /// the ford's id for its light. Nothing here is the region's.
+    /// </summary>
+    public static WorldGround Town(string packRoot)
+    {
+        const int side = WorldRegion.ChunkSize;
+        ImmutableArray<string> materials = ["cobble/warm", "grass/autumn", "path/packed"];
+        const byte cobble = 0, grass = 1, road = 2;
+        var tiles = new byte[side * side * 3];
+        for (var y = 0; y < side; y++)
+            for (var x = 0; x < side; x++)
+                (tiles[(y * side + x) * 3], tiles[(y * side + x) * 3 + 1]) = ((byte)1, x is >= 9 and <= 21 && y is >= 10 and <= 21 ? cobble : x is >= 14 and <= 16 && y > 21 ? road : grass);
+        var start = new Tile(15, 19);
+        var def = new RegionDef("ashen_ford", "Demo town", 0, [side, side], materials, [Chunk(tiles, side, side, 0, 0)], [], [], new RegionSpawns(start, start), [],
+        [
+            new RegionProps("lamp_post", "iron", [new Tile(10, 11), new Tile(20, 11), new Tile(10, 20), new Tile(20, 20), new Tile(13, 25), new Tile(17, 25)]),
+            new RegionProps("well", null, [new Tile(15, 15)]),
+            new RegionProps("crate", "oak", [new Tile(22, 14), new Tile(22, 15)]),
+            new RegionProps("tree", "autumn", [new Tile(3, 12), new Tile(26, 18), new Tile(25, 24), new Tile(5, 24)]),
+            new RegionProps("pine", "green", [new Tile(27, 9), new Tile(3, 18)]),
+        ],
+        [
+            new RegionBuilding("tavern", "red", new Tile(9, 8)),
+            new RegionBuilding("store", "blue", new Tile(13, 8)),
+            new RegionBuilding("smithy", "oak", new Tile(16, 8)),
+            new RegionBuilding("cottage", "shakes_oak", new Tile(19, 8)),
+            new RegionBuilding("chapel", "warm", new Tile(6, 10)),
+            new RegionBuilding("house", "green", new Tile(6, 14)),
+            new RegionBuilding("cottage", "thatch_red", new Tile(6, 17)),
+            new RegionBuilding("house", "blue", new Tile(23, 11)),
+            new RegionBuilding("stall", "red", new Tile(12, 12)),
+            new RegionBuilding("stall", "yellow", new Tile(13, 12)),
+            new RegionBuilding("notice_board_u", "oak", new Tile(18, 12)),
+            new RegionBuilding("clutter_barrels", "oak", new Tile(21, 18)),
+            new RegionBuilding("wall_u", "warm", new Tile(10, 27)), new RegionBuilding("wall_u", "warm", new Tile(11, 27)), new RegionBuilding("wall_u", "warm", new Tile(12, 27)),
+            new RegionBuilding("wall_tower", "warm", new Tile(13, 27)),
+            new RegionBuilding("gate_u", "warm", new Tile(14, 27)),
+            new RegionBuilding("wall_tower", "warm", new Tile(17, 27)),
+            new RegionBuilding("wall_u", "warm", new Tile(18, 27)), new RegionBuilding("wall_u", "warm", new Tile(19, 27)), new RegionBuilding("wall_u", "warm", new Tile(20, 27)),
+        ]);
+        return WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap>(), ArtManifests.Load(packRoot));
+    }
+
+    /// <summary>Round the square, behind the tavern and out through the gate of <see cref="Town"/>.</summary>
+    public static ImmutableArray<Tile> TownWalk()
+    {
+        static IEnumerable<Tile> Line(Tile from, Tile to)
+        {
+            var (dx, dy) = (Math.Sign(to.X - from.X), Math.Sign(to.Y - from.Y));
+            for (var at = from; at != to; at = new Tile(at.X + dx, at.Y + dy))
+                yield return at;
+        }
+        Tile[] corners = [new(15, 19), new(19, 19), new(19, 13), new(21, 13), new(21, 7), new(8, 7), new(8, 9), new(11, 9), new(11, 19), new(15, 19), new(15, 30)];
+        return [.. corners.Zip(corners.Skip(1)).SelectMany(c => Line(c.First, c.Second)), corners[^1]];
+    }
+
+    /// <summary>Where <c>--world-demo=town</c> looks: the square as the mockup has it, a walker behind a house, and through the gate.</summary>
+    public static ImmutableArray<WorldSpot> TownSpots()
+    {
+        var square = new Tile(15, 15);
+        return
+        [
+            new WorldSpot("town-square", square, new Tile(15, 18)), new WorldSpot("town-door", new Tile(11, 11), new Tile(11, 10)),
+            new WorldSpot("town-behind", square, new Tile(14, 7)), new WorldSpot("town-gate", new Tile(15, 26), new Tile(15, 27)),
+        ];
+    }
+
     /// <summary>Where <c>--world-demo=tavern</c> looks: a walker on each side of it.</summary>
     public static ImmutableArray<WorldSpot> TavernSpots()
     {

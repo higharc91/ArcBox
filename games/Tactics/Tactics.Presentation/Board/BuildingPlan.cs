@@ -70,7 +70,7 @@ public sealed record BuildingShape(ImmutableArray<int> Tops, ImmutableArray<int>
 /// <param name="SmokeArt">The smoke.</param>
 /// <param name="Signs">Where a sign's root is, in frame 0.</param>
 /// <param name="SignArt">The sign, or null.</param>
-/// <param name="Glows">Where light comes from, in frame 0.</param>
+/// <param name="Glows">Where light comes from, in frame 0: a forge, and each door of what has lights.</param>
 /// <param name="Shape">Where it has pixels.</param>
 /// <param name="ShadowTiles">The tiles from its back corner that its shadow falls on.</param>
 public sealed record BuildingArt(string Id, ArtImage Image, ArtImage? Shadow, ArtImage? Lights, Vector2 Size, Vector2 Origin, int Width, int Depth,
@@ -137,10 +137,11 @@ public static class BuildingPlan
             // What's walked under goes after whoever's on its tile, where what's walked on goes under them.
             var layer = !art.Walkable && !art.Blocks[front.Y][front.X] ? BoardLayer.Over : BoardLayer.Prop;
             var (min, max) = (frame + new Vector2(from, top), frame + new Vector2(to, bottom + 1));
+            ImmutableArray<Vector2> emits = [.. art.Glows.Where(g => g.X >= from && g.X < to).Select(g => g - new Vector2(from, top))];
             items.Add(new Face(BoardOrder.Key(tile, layer), tile, FaceKind.Building, Facing.U,
                 [min, new Vector2(max.X, min.Y), max, new Vector2(min.X, max.Y)],
                 [.. new[] { new Vector2(from, top), new Vector2(to, top), new Vector2(to, bottom + 1), new Vector2(from, bottom + 1) }.Select(p => p / art.Size)],
-                art.Image, null, Lights: art.Lights, Part: part));
+                art.Image, null, Lights: art.Lights, Part: part, Emits: emits));
         }
 
         // Smoke rises from the roof, so it goes after all of the building. A sign hangs on one side, and only has to go after the columns behind it.

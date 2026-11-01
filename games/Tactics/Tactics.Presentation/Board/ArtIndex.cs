@@ -44,7 +44,7 @@ public sealed class ArtIndex
     private sealed record BuildingVariant(string Image, string? Shadow, string? Lights);
 
     private sealed record BuildingFamily(ImmutableDictionary<string, BuildingVariant> Variants, int Frames, double Fps, Vector2 Size, Vector2 Origin, int Width, int Depth,
-        ImmutableArray<ImmutableArray<bool>> Blocks, bool Walkable, ImmutableArray<Vector2> Smoke, ImmutableArray<Vector2> Signs, string? Sign, ImmutableArray<Vector2> Glows);
+        ImmutableArray<ImmutableArray<bool>> Blocks, bool Walkable, ImmutableArray<Vector2> Smoke, ImmutableArray<Vector2> Signs, string? Sign, ImmutableArray<Vector2> Glows, ImmutableArray<Vector2> Doors);
 
     private readonly Dictionary<string, Family> _textures = new(StringComparer.Ordinal);
     private readonly Dictionary<string, PropFamily> _props = new(StringComparer.Ordinal);
@@ -118,7 +118,7 @@ public sealed class ArtIndex
         var image = Strip(files.Image, family.Frames);
         return new BuildingArt(id, image, files.Shadow is { } shadow ? Strip(shadow, 1) : null, files.Lights is { } lights ? Strip(lights, family.Frames) : null, family.Size, family.Origin,
             family.Width, family.Depth, family.Blocks, family.Walkable, family.Smoke, _overlays.GetValueOrDefault("smoke"), family.Signs,
-            family.Sign is { } sign ? _overlays.GetValueOrDefault(sign) : null, family.Glows, BuildingShape.Of(Path.Combine(_root, files.Image), (int)family.Size.X),
+            family.Sign is { } sign ? _overlays.GetValueOrDefault(sign) : null, files.Lights is null ? family.Glows : [.. family.Glows, .. family.Doors], BuildingShape.Of(Path.Combine(_root, files.Image), (int)family.Size.X),
             files.Shadow is { } cast ? BuildingShape.ShadowTiles(Path.Combine(_root, cast), family.Origin) : []);
     }
 
@@ -168,7 +168,7 @@ public sealed class ArtIndex
                 e.GetProperty("frames").GetInt32(), e.GetProperty("fps").GetDouble(), Point(e.GetProperty("size")), Point(e.GetProperty("origin")),
                 e.GetProperty("footprint")[0].GetInt32(), e.GetProperty("footprint")[1].GetInt32(),
                 [.. rows.Select(r => r.EnumerateArray().Select(b => b.GetInt32() != 0).ToImmutableArray())], e.GetProperty("walkable").GetBoolean(),
-                Points(attach, "smoke"), Points(attach, "sign"), e.TryGetProperty("sign", out var sign) ? sign.GetString() : null, Points(attach, "light"));
+                Points(attach, "smoke"), Points(attach, "sign"), e.TryGetProperty("sign", out var sign) ? sign.GetString() : null, Points(attach, "light"), Points(attach, "door"));
         }
     }
 

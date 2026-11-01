@@ -60,6 +60,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
     private const float ViewMargin = 64;                    // art pixels round the view for halos, the widest sway of any flame
     private const double FirstGuessMsPerItem = 0.005;       // until a block's been timed
     private static readonly Color Dark = new(0.043f, 0.051f, 0.078f);
+    private static readonly Color DuskSky = new(0.082f, 0.063f, 0.133f);    // mockup 02's, at the world's edge
 
     private readonly BoardPainter _painter = new();
     private readonly FrameTextures _frames = new();
@@ -465,6 +466,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
             _world.AddChild(node);
         }
 
+        _back.Color = Plan.Lighting.Ambient == BoardLighting.Dusk ? DuskSky : Dark;
         _over = new BoardCanvas(_painter) { ZIndex = Plan.Blocks.Max(b => b.Z) + 1 };
         _world.AddChild(_over);
         _over.JoinWorld(Plan.Lighting.Active ? Plan.Lighting : null);

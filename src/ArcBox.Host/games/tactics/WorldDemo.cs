@@ -20,6 +20,7 @@ internal sealed partial class WorldDemo : Node
     private const string Stress = "hilly";
     private const string WoodSpec = "wood";
     private const string TavernSpec = "tavern";
+    private const string TownSpec = "town";
     private const float StepsPerSecond = 2 / 0.3f;      // twice the walking pace of a tile per 0.3 s
     private const double RegularFrameMs = 16;           // the task's line: a frame over this, regularly, stops the work
     private const double ColdSeconds = 1;               // frames this close to the start have the JIT in them
@@ -80,6 +81,7 @@ internal sealed partial class WorldDemo : Node
             Stress => DemoRegion.Hilly(160, 120),
             WoodSpec => DemoRegion.Wood(160, 120),
             TavernSpec => DemoRegion.Tavern(_pack),
+            TownSpec => DemoRegion.Town(_pack),
             _ => DemoRegion.FromPack(_pack, region),
         };
         var start = region switch
@@ -87,10 +89,21 @@ internal sealed partial class WorldDemo : Node
             Stress => new Tile(80, 60),
             WoodSpec => DemoRegion.WoodStart(160, 120),
             TavernSpec => DemoRegion.TavernWalk()[0],
+            TownSpec => DemoRegion.TownWalk()[0],
             _ => RegionStart(region),
         };
-        _route = region == TavernSpec ? DemoRegion.TavernWalk() : WorldRoute.Across(ground.Terrain, start, ClassDef.DefaultJump);
-        _spots = region == TavernSpec ? DemoRegion.TavernSpots() : WorldSpots.Of(new BoardTerrain(ground.Map, null), ground.Terrain);
+        _route = region switch
+        {
+            TavernSpec => DemoRegion.TavernWalk(),
+            TownSpec => DemoRegion.TownWalk(),
+            _ => WorldRoute.Across(ground.Terrain, start, ClassDef.DefaultJump),
+        };
+        _spots = region switch
+        {
+            TavernSpec => DemoRegion.TavernSpots(),
+            TownSpec => DemoRegion.TownSpots(),
+            _ => WorldSpots.Of(new BoardTerrain(ground.Map, null), ground.Terrain),
+        };
         _ground = ground;
         return ground;
     }
