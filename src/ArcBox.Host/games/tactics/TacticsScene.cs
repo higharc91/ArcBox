@@ -12,6 +12,7 @@ using Tactics.Presentation.Audio;
 using Tactics.Presentation.Beats;
 using Tactics.Presentation.Board;
 using Tactics.Presentation.Hud;
+using Tactics.Presentation.Story;
 using Tactics.Presentation.World;
 
 namespace ArcBox.Host.Games.Tactics;
@@ -135,6 +136,14 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     /// <summary><c>--walk-log</c>: print a <c>WALK</c> line for each step, a <c>WALKAT</c> line with where the party is shown, and how smooth the walking was.</summary>
     public bool LogWalks { get; set; }
 
+    /// <summary><c>--story-log</c>: print a <c>STORY &lt;seq&gt; &lt;line&gt; said|shown</c> line for each line of a scene the TV takes.</summary>
+    public bool LogStory { get; set; }
+
+    private StoryLayer? _story;
+    private readonly Dictionary<string, int> _storyShots = new(StringComparer.Ordinal);
+    private (string Label, double Since)? _storyMoment;
+    private bool _markerShot;
+
     public void SetNarrator(Narrator narrator) => _narrator = narrator;
 
     public void SetShots(Screenshotter? shots) => _shots = shots;
@@ -244,6 +253,11 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         if (_world is { Repainting: false, Plan: { } worldPlan } painting && _repaints.Take() is { } job)
         {
             painting.Repaint(() => job.Plan.WorldBlocks(worldPlan, job.Tiles, job.Changes));
+        }
+        if (_story is { } story)
+        {
+            PresentStory(story.Step(delta));
+            StoryShot(delta);
         }
         if (_inPlace)
         {
@@ -587,6 +601,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _director.Receive(v, _walk?.Places);
         var director = _director;
         var screen = PhaseScreen.Of(v, director);
+        TellStory(v);
 
         // The battle ended with beats still to play: they finish first, and then this screen. They were the game's last, so nothing waits on them.
         if (screen.Board is null && v.LastBattle is { } last && _player?.Shown is not null && _loop is not null)
@@ -608,6 +623,114 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         }
         Show(screen);
         director.LastBlowPlayed();      // nothing if the results aren't up, or have had it
+    }
+
+    /// <summary>
+    /// Gives the story every host view, so it knows whether the TV watched the party walk up to a scene (overworld 5d §10). The layer is
+    /// made with the pack's art the first time there's a world to tell a story in.
+    /// </summary>
+    private void TellStory(TacticsHostView view)
+    {
+        if (_story is null)
+        {
+            if (view.Explore is null || !_content.TryGetValue(BasePack, out var root))
+            {
+                return;
+            }
+            LoadSound();
+            try
+            {
+                _unitArt ??= UnitArt.Load(root);
+                _story = new StoryLayer(root, _unitArt, _voices);
+            }
+            catch (Exception ex) when (ex is IOException or JsonException or FormatException or ArgumentException or InvalidOperationException or KeyNotFoundException)
+            {
+                GD.PushError($"Tactics story: can't draw it: {ex.Message}");
+                return;
+            }
+            AddChild(_story);
+        }
+        MoveChild(_story, _caption.GetIndex());     // over the world and its panels, which the check and the card dim
+        if (!_markerShot && view.Explore?.Markers is { IsDefaultOrEmpty: false } marks && marks.Any(m => m.Emote is not null) && view.Story is null)
+        {
+            _markerShot = true;
+            _storyMoment = ("story-marker", 0);
+        }
+        PresentStory(_story.Receive(view, DateTimeOffset.UtcNow));
+        if (view.Chapter is not null && _storyMoment?.Label != "story-card")
+        {
+            _storyMoment = ("story-card", 0);
+        }
+    }
+
+    /// <summary>What a story tick asks: the voice cut, a line said, a sound played, a line logged with <c>--story-log</c>, and a shot.</summary>
+    private void PresentStory(StoryTick tick)
+    {
+        if (tick.Cut)
+        {
+            _narrator?.StopAll();
+        }
+        if (tick.Say is { } say)
+        {
+            var clip = say.Clip is { } file && _content.TryGetValue(BasePack, out var root) ? Path.Combine(root, file) : null;
+            _narrator?.Say(say.Text, say.Theme, NarrationPriority.Question, clip: clip);
+        }
+        if (tick.Sound is { } sound)
+        {
+            _audio.Play(sound);
+        }
+        if (tick.Screen is not { } screen)
+        {
+            return;
+        }
+        if (LogStory && (tick.Say is not null || screen.Seq != _storyLogged))
+        {
+            _storyLogged = screen.Seq;
+            GD.Print($"STORY {screen.Seq} {screen.Caption?.Line ?? "-"} {(tick.Say is null ? "shown" : "said")} {screen.State}");
+        }
+        if (Moment(screen, tick) is { } moment && moment != _storyMoment?.Label)
+        {
+            _storyMoment = (moment, 0);
+        }
+    }
+
+    private int _storyLogged = -1;
+
+    /// <summary>The screenshot a story screen is worth, by what it shows: once or twice each, so a run's shots cover every panel.</summary>
+    private static string? Moment(StoryScreen screen, StoryTick tick) => screen switch
+    {
+        { Check.Roll: { Landed: true } roll } => roll.Success ? "story-roll-pass" : "story-roll-fail",
+        { Check.Roll: not null } => tick.Tumbled ? "story-roll-tumbling" : null,
+        { Check: not null } => "story-check",
+        { Vote.Tie: true } => "story-tie",
+        { Vote: { Party: false } vote } => vote.Rows.Any(r => r.Voters.Length > 0) ? "story-choice-made" : "story-choice",
+        { Vote: { Rows.Length: > 4 } } => "story-vote-many",
+        { Vote: { } vote } => vote.Rows.Any(r => r.Voters.Length > 0) ? "story-vote-tally" : "story-vote",
+        { Interlude: not null } => "story-gap",
+        { Caption: { Narrator: true } } => "story-line-narrator",
+        { Caption: not null } => "story-line-speaker",
+        _ => null,
+    };
+
+    /// <summary>Takes the moment's shot once the screen has had a moment to settle, and the world is there to see behind it.</summary>
+    private void StoryShot(double delta)
+    {
+        if (_shots is null || _storyMoment is not { } moment)
+        {
+            return;
+        }
+        _storyMoment = moment with { Since = moment.Since + delta };
+        if (moment.Since < 0.8 || (_world is not null && !_cover.Reveal.Revealed) || (moment.Label == "story-marker" && _world is null))
+        {
+            return;
+        }
+        var taken = _storyShots.GetValueOrDefault(moment.Label);
+        if (taken < 2)
+        {
+            _storyShots[moment.Label] = taken + 1;
+            _shots.Capture($"tactics-{moment.Label}");
+        }
+        _storyMoment = (moment.Label, double.NegativeInfinity);
     }
 
     private void Show(PhaseScreen screen, bool again = false)

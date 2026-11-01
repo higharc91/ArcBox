@@ -10,7 +10,20 @@ namespace Tactics.Presentation.Story;
 /// <param name="Screen">What to show, or null with no scene.</param>
 /// <param name="Tumbled">A roll the TV saw being made started to tumble: the dice's sound.</param>
 /// <param name="Landed">The tumbling die landed: the verdict's sound.</param>
-public sealed record StoryTick(StorySay? Say, bool Cut, StoryScreen? Screen, bool Tumbled = false, bool Landed = false);
+public sealed record StoryTick(StorySay? Say, bool Cut, StoryScreen? Screen, bool Tumbled = false, bool Landed = false)
+{
+    /// <summary>The die rolling (<c>sfx</c>'s <c>Rolled</c> sound).</summary>
+    public const string DiceSound = "ui_dice_roll";
+
+    /// <summary>A roll that passed, as it lands.</summary>
+    public const string PassSound = "ui_confirm";
+
+    /// <summary>A roll that failed, as it lands.</summary>
+    public const string FailSound = "ui_error";
+
+    /// <summary>The sound effect to play this tick, or null: the dice as a roll the TV saw made starts to tumble, the verdict as it lands.</summary>
+    public string? Sound => Tumbled ? DiceSound : Landed ? Screen?.Check?.Roll is { Success: var passed } ? passed ? PassSound : FailSound : null : null;
+}
 
 /// <summary>
 /// The story on the TV, view by view and frame by frame (overworld 5d §10). The server owns every clock and the TV sends nothing back, so this

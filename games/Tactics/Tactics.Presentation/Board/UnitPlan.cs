@@ -67,6 +67,12 @@ public sealed record BoardUnit(long Order, UnitId Id, UnitTone Tone, Vector2 Fee
     /// <summary>Where the anchor of the leader's crown goes (the crown row of emotes/manifest.json); null for anyone else.</summary>
     public Vector2? CrownAt { get; init; }
 
+    /// <summary>An emote over the unit, as the crown is drawn: a story beat's "!" (<see cref="World.StoryMarks"/>); null for none.</summary>
+    public EmoteStrip? Emote { get; init; }
+
+    /// <summary>Where <see cref="Emote"/>'s tail goes.</summary>
+    public Vector2? EmoteAt { get; init; }
+
     /// <summary>A walker whose player's phone has gone: drawn a little dim.</summary>
     public bool Away { get; init; }
 

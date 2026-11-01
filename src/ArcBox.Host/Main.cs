@@ -145,6 +145,16 @@ public partial class Main : Control
             OnHostView(new HostViewEvent("tactics", JsonSerializer.SerializeToElement(global::Tactics.Presentation.Board.DemoBattle.View(board), ArcJson.Options)));
             return;
         }
+        if (_args.StoryDemo is { } storyFrom)
+        {
+            // Dev only: the story's panels and voice over the world, scripted from the real lore, no server; the art comes from the repository.
+            GD.Print("Story demo: no server connection");
+            ShowGame("tactics");
+            var storyPack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "tactics", "base"));
+            (_scene as IContentScene)?.SetContentRoots(new Dictionary<string, string> { ["base"] = storyPack });
+            AddChild(new Games.Tactics.StoryDemoFeeder(storyPack, storyFrom, view => OnHostView(new HostViewEvent("tactics", view))));
+            return;
+        }
         if (_args.WorldDemo is { } region)
         {
             // Dev only: a whole region in blocks, measured; the art comes from the repository.
@@ -874,6 +884,7 @@ public partial class Main : Control
         {
             tactics.LogBeats = _args.BeatLog;
             tactics.LogWalks = _args.WalkLog;
+            tactics.LogStory = _args.StoryLog;
         }
     }
 

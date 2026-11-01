@@ -16,6 +16,8 @@ namespace ArcBox.Host.Shell;
 /// the dev-only <c>--world-demo[=&lt;region&gt;|hilly[:&lt;block tiles&gt;]]</c> (draw a whole region in blocks, pan over it and print what it cost),
 /// the dev-only <c>--walk-log</c> (print a <c>WALK</c> line for each step shown, and <c>WALKAT</c> lines with where the party is drawn),
 /// the dev-only <c>--drop-signals</c> (never send a host signal, so a game runs on its fallback timers),
+/// the dev-only <c>--story-demo[=&lt;step&gt;]</c> (play the story's panels and voice over the world from the real lore, without a server),
+/// the dev-only <c>--story-log</c> (print a <c>STORY</c> line for each line of a scene the TV says or shows),
 /// the dev-only <c>--beat-log</c> (print a <c>BEAT</c> line with each Tactics beat's timing)
 /// and the dev-only <c>--demo=campaign-lobby</c> (show the lobby with a built-in campaign and roster, without a server).
 /// </summary>
@@ -54,6 +56,12 @@ public sealed record AppArgs
 
     /// <summary>Dev only: print a <c>BEAT</c> line for each Tactics beat played.</summary>
     public bool BeatLog { get; init; }
+
+    /// <summary>Dev only: print a <c>STORY</c> line for each line of a Tactics scene the TV says or shows.</summary>
+    public bool StoryLog { get; init; }
+
+    /// <summary>Dev only: play the scripted story (<c>Tactics.Presentation.Story.StoryDemo</c>) instead of connecting, from this step; "" for the start.</summary>
+    public string? StoryDemo { get; init; }
 
     /// <summary>Dev only: a built-in screen to show instead of connecting (<see cref="DemoCampaignLobby"/>), or null.</summary>
     public string? Demo { get; init; }
@@ -115,6 +123,12 @@ public sealed record AppArgs
                     break;
                 case "--beat-log" when value is null:
                     args = args with { BeatLog = true };
+                    break;
+                case "--story-log" when value is null:
+                    args = args with { StoryLog = true };
+                    break;
+                case "--story-demo":
+                    args = args with { StoryDemo = value ?? "" };
                     break;
                 case "--demo" when value == DemoCampaignLobby:
                     args = args with { Demo = value };

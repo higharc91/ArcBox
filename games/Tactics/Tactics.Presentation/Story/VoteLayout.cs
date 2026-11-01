@@ -19,14 +19,14 @@ public static class VoteLayout
     /// <summary>The heading and clock over the rows, the tally under them, and the panel's padding.</summary>
     public const float Chrome = 150;
 
-    /// <summary>A label row's height at full size: its font's line.</summary>
-    public const float LabelLine = 30;
+    /// <summary>A label row's height at full size: the line of its 22 px type.</summary>
+    public const float LabelLine = 34;
 
     /// <summary>A check's detail line ("Persuasion check · DC 15") at full size.</summary>
-    public const float DetailLine = 22;
+    public const float DetailLine = 24;
 
     /// <summary>A row's padding, top and bottom together, at full size.</summary>
-    public const float RowPadding = 20;
+    public const float RowPadding = 16;
 
     /// <summary>The gap between two rows, at full size.</summary>
     public const float RowGap = 10;

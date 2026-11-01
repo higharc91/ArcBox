@@ -77,6 +77,12 @@ public partial class UnitMarks : Node2D
             var corner = new Vector2(crownAt.X - crown.AnchorX, crownAt.Y - crown.AnchorY);
             DrawTextureRectRegion(emotes, new Rect2(corner, size), Region(crown.Source(crown.FrameAt(_clock))));
         }
+        if (unit.EmoteAt is { } emoteAt && unit.Emote is { } emote && _load(emote.Path) is { } sheet)
+        {
+            var size = new Vector2(emote.Width, emote.Height);
+            var corner = new Vector2(emoteAt.X - emote.AnchorX, emoteAt.Y - emote.AnchorY);
+            DrawTextureRectRegion(sheet, new Rect2(corner, size), Region(emote.Source(emote.FrameAt(_clock))));
+        }
         if (unit.ArrowAt is { } arrow && _load(art.Arrow.Path) is { } cursor)
         {
             var size = new Vector2(art.ArrowWidth, art.Arrow.Height);

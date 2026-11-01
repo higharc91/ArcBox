@@ -61,6 +61,16 @@
 //
 // BOTS_DEBUG=1 in the environment logs the board as each bot sees it on each of its turn views.
 //
+// The story (overworld 5d), in place of the battle list:
+//
+//   --story[=<n>]             the leader taps Interact whenever the walk screen offers it, and the phones answer the story's screens: a
+//                             choice or a pick goes to the first of --story-pick that's offered, or else the first option; in a party vote
+//                             the bots split between the first two options, so four of them tie and the leader breaks it; who rolls goes
+//                             the same way among the cards. Each answer waits a moment, so the tally shows. After n scenes (default 1)
+//                             the VIP ends the session. Start the server with a Development seed by the beat (tools/tv-e2e.sh's
+//                             ARCBOX_SERVER_ENV), as the bots don't walk to it
+//   --story-pick=<ids>        option ids to prefer, comma-separated (e.g. why,insight to take the ford choice's check)
+//
 // Run it (on Windows, from Git Bash; the database goes in a temp file so the run leaves no campaign behind):
 //
 //   export PATH="/c/Users/fatma/AppData/Local/Microsoft/dotnet:$PATH"
@@ -133,6 +143,9 @@ let fightsDone = 0;
 /** When the VIP last went on from a results screen. */
 let resultsLeft = 0;
 const losing = () => fightsDone < loseFights;
+/** --story[=<n>] and --story-pick=<ids>: walk to the "!" and play n beats, choosing these options where offered. */
+const storyBeats = opt('story') === undefined ? 0 : opt('story') === true ? 1 : Number(opt('story'));
+const storyPick = String(opt('story-pick', '')).split(',').filter(Boolean);
 
 /** The phone's cadence while a direction is held, and its retry after a stop. */
 const PING_MS = 250;
@@ -496,6 +509,43 @@ class Bot {
     return this.input('endTurn');
   }
 
+  /** --story: the leader taps Interact when it's offered; once the scenes are done, the VIP ends the session. */
+  storyWalk(state) {
+    const { data, viewId } = this.view;
+    if (data.interact && state.interacted !== viewId) {
+      state.interactAt ??= Date.now() + holdMs * 5;   // the "!" has a moment on the TV first
+      if (Date.now() < state.interactAt) return;
+      state.interactAt = undefined;
+      state.interacted = viewId;
+      state.scenes = (state.scenes ?? 0) + 1;
+      log(`${this.name} taps ${data.interact} (scene ${state.scenes})`);
+      return this.input('interact');
+    }
+    if (data.vip && (state.scenes ?? 0) >= storyBeats && !data.interact) {
+      state.endAt ??= Date.now() + holdMs * 2;
+      if (Date.now() < state.endAt) return;
+      log(`${this.name} ends the session after ${state.scenes} scene(s)`);
+      return this.input('endSession');
+    }
+  }
+
+  /** --story: a vote, a choice, a tie-break or who rolls, answered after a moment that grows with the bot's seat, so the tally builds. */
+  storyAnswer(state) {
+    const { screen, data, viewId } = this.view;
+    if (!data.canChoose || data.mine) return;
+    const key = `${this.index}:${viewId}`;
+    state.answerAt ??= {};
+    state.answerAt[key] ??= Date.now() + holdMs * (1 + this.index);
+    if (Date.now() < state.answerAt[key]) return;
+    const ids = screen === 'vote' ? data.options.map((o) => o.id) : data.cards.map((c) => c.id);
+    const offered = data.tie && data.tied?.length ? ids.filter((id) => data.tied.includes(id)) : ids;
+    const preferred = storyPick.find((id) => offered.includes(id));
+    const pick = data.tie || (screen === 'vote' && !data.party) ? preferred ?? offered[0]
+      : preferred && screen === 'check' ? preferred : offered[this.index % Math.min(2, offered.length)];
+    log(`${this.name} ${screen === 'vote' ? 'votes' : 'picks'} ${pick}${data.tie ? ' (tie-break)' : ''}`);
+    return this.input(screen === 'vote' ? 'vote' : 'pickRoller', screen === 'vote' ? { option: pick } : { member: pick });
+  }
+
   /** Answers the newest view, once. */
   async act(state) {
     const view = this.view;
@@ -541,10 +591,12 @@ class Bot {
         log(`${this.name} skips line ${view.data.line}`);
         return this.input('skip', { line: view.data.line });
       case 'vote':
+        if (storyBeats) return this.storyAnswer(state);
         if (!view.data.canChoose || view.data.mine || !view.data.options?.length) return;
         log(`${this.name} votes ${view.data.options[0].id}`);
         return this.input('vote', { option: view.data.options[0].id });
       case 'check': {
+        if (storyBeats) return this.storyAnswer(state);
         if (!view.data.canChoose || view.data.mine || !view.data.cards?.length) return;
         const best = view.data.cards.reduce((a, b) => (b.bonus > a.bonus ? b : a));
         log(`${this.name} picks ${best.name} to roll ${view.data.skill}`);
@@ -552,6 +604,7 @@ class Bot {
       }
       case 'walk':
         newBattle();
+        if (storyBeats) return this.storyWalk(state);
         if (walking || stampFights || !view.data.vip) return;
         state.walkAt ??= Date.now() + holdMs;
         if (Date.now() < state.walkAt) return;

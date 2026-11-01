@@ -98,6 +98,33 @@ public sealed class StoryMarksTests
     }
 
     [Fact]
+    public void The_walk_draws_the_figure_among_the_party_with_its_bang()
+    {
+        var show = new WalkShow(Ground, Art.Value, null);
+        show.Receive(With(new StoryMarker("b", Spot, "characters.mayor", "alert")));
+
+        var frame = show.Frame(1 / 60.0);
+
+        var figure = Assert.Single(frame.Units, u => u.Id.Value == "marker:b");
+        Assert.Equal(Art.Value.Emote("alert"), figure.Emote);
+        Assert.NotNull(figure.EmoteAt);
+        Assert.Equal(4, frame.Units.Length);                              // the party of three, and the figure
+        Assert.Equal(frame.Units.OrderBy(u => u.Order).Select(u => u.Id), frame.Units.Select(u => u.Id));
+
+        show.Receive(View(new Tile(5, 5)));                                // nothing on offer
+        Assert.DoesNotContain(show.Frame(1 / 60.0).Units, u => u.Id.Value.StartsWith("marker:", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void A_fight_hides_the_figure_with_the_party()
+    {
+        var show = new WalkShow(Ground, Art.Value, null);
+        show.Receive(With(new StoryMarker("b", Spot, "characters.mayor", "alert")));
+
+        Assert.Empty(show.Frame(1 / 60.0, stage: new WalkStage(null, 0, null, true, Vector2.Zero)).Units);
+    }
+
+    [Fact]
     public void The_camera_moves_the_figure_and_its_bang_together()
     {
         var shift = new Vector2(7, -3);

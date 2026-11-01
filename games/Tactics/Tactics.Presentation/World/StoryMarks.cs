@@ -12,7 +12,11 @@ namespace Tactics.Presentation.World;
 /// <param name="Figure">Who stands there, sorted among the party by its tile; null with nobody to show.</param>
 /// <param name="Emote">The emote over the spot (the "!"), or null while the beat's scene plays.</param>
 /// <param name="EmoteAt">Where the emote's tail goes (<see cref="EmoteStrip.AnchorX"/>, <see cref="EmoteStrip.AnchorY"/>); null with no emote.</param>
-public sealed record StoryMark(string Beat, Tile At, BoardUnit? Figure, EmoteStrip? Emote, Vector2? EmoteAt);
+public sealed record StoryMark(string Beat, Tile At, BoardUnit? Figure, EmoteStrip? Emote, Vector2? EmoteAt)
+{
+    /// <summary>The figure as the world draws it, among the party, with the "!" over its head; null with nobody standing there.</summary>
+    public BoardUnit? Unit => Figure is null ? null : Figure with { Emote = Emote, EmoteAt = EmoteAt };
+}
 
 /// <summary>
 /// The story's markers in the world (overworld 5d §2, default 12), from <see cref="ExploreView.Markers"/>: the first of the opening scene's cast
@@ -26,8 +30,12 @@ public static class StoryMarks
     /// (<see cref="WalkShow"/>): where feet go on the screen's pixels, so the figure stands still against the ground as the camera moves.
     /// </summary>
     public static ImmutableArray<StoryMark> Of(ExploreView explore, BoardTerrain terrain, UnitArt art, Func<Vector2, bool, Vector2>? pixels = null)
+        => Of(explore.Markers ?? [], terrain, art, pixels);
+
+    /// <summary>The markers <paramref name="markers"/> on <paramref name="terrain"/>, as <see cref="Of(ExploreView, BoardTerrain, UnitArt, Func{Vector2, bool, Vector2}?)"/>.</summary>
+    public static ImmutableArray<StoryMark> Of(ImmutableArray<StoryMarker> markers, BoardTerrain terrain, UnitArt art, Func<Vector2, bool, Vector2>? pixels = null)
     {
-        if (explore.Markers is not { IsDefaultOrEmpty: false } markers)
+        if (markers.IsDefaultOrEmpty)
             return [];
         return [.. markers.Where(m => terrain.Map.InBounds(m.At)).Select(m => Of(m, terrain, art, pixels))];
     }

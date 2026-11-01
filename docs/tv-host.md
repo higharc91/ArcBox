@@ -57,6 +57,8 @@ Everything after `--` on the Godot command line; all optional.
 | `--tactics-demo[=<map>[:changed\|:fight]]` | Dev only: show a Tactics board without a server, with the art from the repository's `content/` (default `river_crossing`). `:changed` adds zones, raised tiles and the bridge's tiles sunk; `:fight` adds one of every kind of unit. With `--shots` it saves `…-tactics-battle-<map>.png`. |
 | `--world-demo[=<region>|hilly[:<block tiles>]]` | Dev only: open a whole region the way the TV will, without a server, with the art and region from the repository's `content/` (default `ashen_ford`; `hilly` is `DemoRegion`'s stress case), walk a stand-in the length of it at twice walking pace, print what it cost in `WORLD` lines and quit. Use `--res=1920x1080`. With `--shots` it saves `world-<spec>.png`, then one `world-<spot>.png` for each place `WorldSpots` finds: behind a cliff, behind a crate, water at a block edge, a block corner, the region's edge and both sides of the void. See [the world](#the-world). |
 | `--walk-log` | Dev only: print `WALK <seq> <x> <y> <ms>` as each step reaches the TV, `<ms>` being the wall clock in Unix milliseconds, and a `WALKSTATS` line every 288 frames of walking: frame times, and how many pixels the leader and the ground moved a frame. See [walking](#walking). |
+| `--story-demo[=<step>]` | Dev only: play the story over the world without a server (`StoryDemo` in Tactics.Presentation), from the real lore and region: the "!" over Pip, the narrator and speakers with their faces and clips, a leader's choice, a party vote that ties and is broken, eleven long options, six roller cards, a pass and a fail, the gap between scenes and the chapter card. `<step>` starts at `marker`, `line`, `choice`, `gap`, `vote`, `tie`, `many`, `check`, `pass`, `fail` or `card`. With `--shots` it saves a `tactics-story-*` shot of each. |
+| `--story-log` | Dev only: print `STORY <seq> <line> said\|shown <state>` for each line of a scene the TV takes: `said` when it spoke it. See [the story](#the-story). |
 | `--demo=campaign-lobby` | Dev only: show the lobby with a built-in campaign game selected, its campaign list and a roster with seated and away members (`Shell/CampaignLobbyDemo.cs`), without a server. With `--shots` it saves `001-lobby.png`. |
 
 Unknown arguments are reported as warnings and ignored.
@@ -337,6 +339,28 @@ director every fight is on the plain board, as before the world.
   no signals at all ([the Tactics README](../games/Tactics/README.md#bot-phones-and-the-tv-end-to-end)). A TV that falls behind the
   game (bots play faster than software rendering draws) skips a results screen the game has already left: the bots' VIP waits for
   the TV's `TACTICS screen tactics-results` before going on, as someone watching the TV would.
+
+## The story
+
+A scene (overworld 5d) plays over the world. `StoryTrack` (Tactics.Presentation) has every host view and decides what's said and shown;
+`StoryLayer` and its panels only draw `StoryScreen`:
+
+- **The voice**: a new line on a running track says its clip at Question priority, cutting the last. A TV that watched the party walk up
+  says the scene's first line; one that joins mid-line, mid-question or mid-roll, or while a story waits to resume, shows it silently. A
+  line is never said twice in one campaign (`StoryView.Campaign`), so a restart's replayed line is shown, not said. No line showing, or no
+  story, cuts the voice. A line with no clip shows its caption (`StoryVoice.Fallback`, the user's decision 1).
+- **The panels** (1920×1080 layout, the HUD's pieces): `StoryPanel`, the caption at the bottom left with the speaker's face in the line's
+  mood and their name on the dialogue tab, the question lit in gold; `VoteBoard`, the question at the bottom right, growing upward, its rows
+  sized by `VoteLayout` so eleven fit; `CheckBoard`, the skill check full over the dimmed world, with a card for each roller and the d20
+  that tumbles for 1.2 s and lands on the roll; `ChapterBoard`, the chapter's card. The countdown reads the server's deadline against
+  `StoryAskView.Span`, so a skewed TV clock can't show the wrong time.
+- **The world**: the beat on offer has its figure at the spot, with the `alert` emote over them until its scene starts (`StoryMarks`,
+  drawn among the party by `WalkShow`). The dice and the verdict play `ui_dice_roll`, then `ui_confirm` or `ui_error`.
+- **Shots**: `tactics-story-marker`, `-line-narrator`, `-line-speaker`, `-choice`, `-vote`, `-vote-tally`, `-tie`, `-vote-many`, `-check`,
+  `-roll-tumbling`, `-roll-pass`, `-roll-fail`, `-gap` and `-card`, at most two of each.
+
+The bots play it with `node tools/tactics-playtest/bots.cjs --story[=<scenes>] [--story-pick=<option ids>]` against a server seeded by the
+beat (`Tactics__Seed__At__0`/`__1`, and `Tactics__Seed__Beats__0` for a later beat).
 
 ## Adding a game scene
 
