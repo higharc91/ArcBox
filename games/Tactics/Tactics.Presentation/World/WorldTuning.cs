@@ -71,6 +71,15 @@ public static class WorldTuning
     /// <summary>How far under a battle's footsteps walking's are, in dB: a battle's are a few at a time, and these are heard for hours.</summary>
     public const float FootstepDb = -8;
 
+    /// <summary>How far the leader leans into a wall that refused a step, in tiles (<see cref="WalkBump"/>).</summary>
+    public const float BumpTiles = 0.12f;
+
+    /// <summary>How long a bump takes, there and back, in seconds.</summary>
+    public const double BumpSeconds = 0.15;
+
+    /// <summary>The bump's sound, the tile's own step, in dB: well under a footstep, as it's a knock and not a stride.</summary>
+    public const float BumpDb = -14;
+
     // ---- Followers ------------------------------------------------------------------------------------------------------
 
     /// <summary>Between one walker and the next, in tiles along the path.</summary>

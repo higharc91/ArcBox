@@ -16,7 +16,10 @@ namespace Tactics.Presentation.World;
 /// <param name="Cut">The camera jumped this frame, rather than moved.</param>
 /// <param name="Walked">How far the leader has walked, in tiles.</param>
 /// <param name="Leader">Where the leader is, in art pixels, before it goes on the screen's pixels.</param>
-public sealed record WalkFrame(ImmutableArray<BoardUnit> Units, BoardFit Fit, Vector2 Tile, Vector2 Velocity, string? Footstep, bool Cut, double Walked, Vector2 Leader);
+/// <param name="Bumped">The leader bumped a wall this frame (<see cref="WalkBump"/>).</param>
+/// <param name="Bump">The bump's sound, the step of the leader's tile, to play at <see cref="WorldTuning.BumpDb"/>; null with no bump or no sound.</param>
+public sealed record WalkFrame(ImmutableArray<BoardUnit> Units, BoardFit Fit, Vector2 Tile, Vector2 Velocity, string? Footstep, bool Cut, double Walked, Vector2 Leader,
+    bool Bumped = false, string? Bump = null);
 
 /// <summary>
 /// The party on the TV, frame by frame: a <see cref="WalkTrack"/>, a <see cref="WorldCamera"/> and the party's units, on one region's ground.
@@ -31,6 +34,7 @@ public sealed class WalkShow
     private readonly UnitArt _art;
     private readonly SoundBank? _sounds;
     private readonly WalkTrack _track = new();
+    private readonly WalkBump _bump = new();
     private readonly WorldCamera _camera;
     private readonly Func<Vector2, bool, Vector2> _pixels;
 
@@ -42,6 +46,7 @@ public sealed class WalkShow
     private int _cuts;
     private int _skips;
     private double _footfalls;
+    private bool _bumped;
     private IReadOnlyDictionary<string, UnitPlace> _places = new Dictionary<string, UnitPlace>();
 
     /// <summary>The newest step this show has heard of.</summary>
@@ -74,8 +79,7 @@ public sealed class WalkShow
             _told = view.Seq;        // what's in a first view was walked before this TV came
         (_started, _epoch, _seq, _party, Held) = (true, view.Epoch, view.Seq, view.Party.IsDefault ? [] : view.Party, view.Held);
         _track.Receive(view);       // a press into a wall turns the leader to face it there
-        // The wall bump (interaction review 5b, item 2) starts here, once the view says Blocked: the leader's nudge toward Facing goes on the
-        // leader's place in Frame, after Places, so the track's path and the followers never see it, and its sound goes out as Footstep does.
+        _bumped |= _bump.Receive(view);     // and leans them into it, in Frame
 
         var told = _told;
         _told = Math.Max(_told, view.Seq);
@@ -97,8 +101,25 @@ public sealed class WalkShow
         var footstep = Footstep(focus.Map, jumped: cut || _track.Skips != _skips);
         (_cuts, _skips) = (_track.Cuts, _track.Skips);
 
+        _bump.Advance(seconds);
+        places = _places = Nudged(places);
+        var bumped = _bumped;
+        _bumped = false;
+        var bump = bumped ? _sounds?.Step(_terrain.Map, new Tile((int)MathF.Floor(focus.Map.X), (int)MathF.Floor(focus.Map.Y))) : null;
+
         var units = UnitPlan.Walkers(_party, places, _track.Poses, _art, _pixels);
-        return new WalkFrame(units, _camera.Fit, focus.Map, _track.Heading * TilesPerSecond, footstep, cut, _track.Walked, focus.Feet);
+        return new WalkFrame(units, _camera.Fit, focus.Map, _track.Heading * TilesPerSecond, footstep, cut, _track.Walked, focus.Feet, bumped, bump);
+    }
+
+    /// <summary>
+    /// The places with the leader leaning into a wall, while a bump is under way. Only the leader moves, on top of the track's place for them,
+    /// so the path, the followers and the camera never see it. The places are the track's own otherwise.
+    /// </summary>
+    private IReadOnlyDictionary<string, UnitPlace> Nudged(IReadOnlyDictionary<string, UnitPlace> places)
+    {
+        if (!_bump.Active || _party.FirstOrDefault(w => w.Leads) is not { } leader || !places.TryGetValue(leader.Id, out var at))
+            return places;
+        return new Dictionary<string, UnitPlace>(places) { [leader.Id] = at with { Map = at.Map + _bump.Offset } };
     }
 
     /// <summary>One foot per so many tiles, however the frames fall. What the party skipped or was put past wasn't walked, so it makes no sound.</summary>

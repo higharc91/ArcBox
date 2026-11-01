@@ -329,6 +329,34 @@ public sealed class WalkShowTests
             Assert.All(show.Frame(Frame).Units, u => Assert.Equal(settled[u.Id], u.Feet));
     }
 
+    // Interaction review 5b, item 2: a press into a wall leans the leader into it and back, with a knock, and nobody else moves.
+    [Fact]
+    public void A_wall_bumps_the_leader_alone_and_knocks_once()
+    {
+        var show = Show();
+        var script = new Script(Start, 3);
+        show.Receive(script.Now(false) with { Bumps = 4 });
+        for (var t = 0.0; t < 2; t += Frame)
+            Assert.False(show.Frame(Frame).Bumped);         // a first view's count is old news
+        var still = show.Places.ToDictionary(p => p.Key, p => p.Value.Map);
+
+        show.Receive(script.Now(false) with { Facing = new Tile(script.At.X, script.At.Y - 1), Blocked = true, Bumps = 5 });
+        var frames = new List<WalkFrame>();
+        var leaned = 0f;
+        for (var t = 0.0; t < WorldTuning.BumpSeconds + 0.1; t += Frame)
+        {
+            frames.Add(show.Frame(Frame));
+            leaned = Math.Max(leaned, still["a"].Y - show.Places["a"].Map.Y);
+            Assert.Equal(still["b"], show.Places["b"].Map);
+            Assert.Equal(still["c"], show.Places["c"].Map);
+        }
+
+        Assert.Single(frames, f => f.Bumped);
+        Assert.NotNull(frames.Single(f => f.Bumped).Bump);
+        Assert.InRange(leaned, WorldTuning.BumpTiles * 0.9f, WorldTuning.BumpTiles + 1e-4f);
+        Assert.Equal(still["a"], show.Places["a"].Map);       // and back
+    }
+
     private static int Reversals(IEnumerable<float> values)
     {
         var (count, last) = (0, 0);

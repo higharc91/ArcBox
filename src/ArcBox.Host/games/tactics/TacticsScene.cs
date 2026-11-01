@@ -74,6 +74,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private double _stillFor;
     private double _lastWalked;
     private int _walkShots;
+    private int _bumpShots;
     private Tone? _titleTone;
     private BoardCanvas _board = null!;
     private HudLayer? _hud;
@@ -231,6 +232,10 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             _audio.Play(step, WorldTuning.FootstepDb);
         }
+        if (frame.Bumped)
+        {
+            Bumped(frame);
+        }
         _worldHud?.Clear(frame.Units, frame.Fit);
         WalkMoments(world, frame, delta);
     }
@@ -311,6 +316,24 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         else if (!moved && _stillFor >= RestBeforeShot && frame.Walked > _shotAt)
         {
             WalkShot(frame, "stopped");
+        }
+    }
+
+    /// <summary>The leader bumped a wall: its knock, a <c>BUMP</c> line with <c>--walk-log</c>, and with <c>--shots</c> a few shots, which land mid-lean.</summary>
+    private void Bumped(WalkFrame frame)
+    {
+        if (frame.Bump is { } knock)
+        {
+            _audio.Play(knock, WorldTuning.BumpDb);
+        }
+        if (LogWalks)
+        {
+            GD.Print(FormattableString.Invariant($"BUMP {DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()} {frame.Tile.X:0.00} {frame.Tile.Y:0.00}"));
+        }
+        if (_shots is not null && _bumpShots < ShotsPerMoment)
+        {
+            _bumpShots++;
+            _shots.Capture(FormattableString.Invariant($"tactics-world-bump-{frame.Tile.X:0}-{frame.Tile.Y:0}"));
         }
     }
 

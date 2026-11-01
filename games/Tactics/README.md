@@ -56,6 +56,7 @@ The TV's dev flag `--walk-log` prints what the bots and the e2e run read:
 
 - `WALK <seq> <x> <y> <unix ms>`: each step the TV is told of, when it reached the TV's main thread. Steps that came in the TV's first view after a snap aren't printed.
 - `WALKAT <unix ms> <seq> <held 0|1> <leader x> <leader y> <widest gap> <name> <x> <y> …`: where the TV drew each walker, leader first, at most every 0.25 s while anything moves and once when it comes to rest. Places are in tiles, with a tile's middle at .50. The widest gap is the furthest any walker is from the one ahead: a follower falling behind shows here.
+- `BUMP <unix ms> <leader x> <leader y>`: the leader bumped a wall, because `Bumps` went up in a view. A first view, a new epoch and a reconnecting TV don't bump. With `--shots` the first few bumps are saved as `tactics-world-bump-<x>-<y>`.
 - `TACTICS walk snapped to <x> <y>`: the party was put somewhere rather than walked there: a first view, a new epoch, a reconnect.
 - `WALKSTATS …`: frame times and how far things moved on screen each frame, once per walk.
 
