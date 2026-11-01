@@ -40,6 +40,12 @@ public sealed record TacticsTiming(TimeSpan Turn, TimeSpan Reaction, TimeSpan Pa
     /// </summary>
     public TimeSpan FaultNotice { get; init; } = TimeSpan.FromSeconds(4);
 
+    /// <summary>
+    /// How long the opening beat of a fight in the world waits for the TV's <c>shown</c> before the AI goes anyway (overworld 5c §5): the
+    /// TV walks the party to its places and steps the enemies in first, which takes at most 2.6 s. The players can act all the while.
+    /// </summary>
+    public TimeSpan FormUp { get; init; } = TimeSpan.FromSeconds(3);
+
     /// <summary>The fallback wait for a beat of <paramref name="events"/> events.</summary>
     public TimeSpan Pace(int events)
     {

@@ -85,6 +85,19 @@ public static class HostSprite
         };
 }
 
+/// <summary>
+/// Where a battle stands in the world (overworld 5c §3), for the TV to draw the board in place. Tiles in the battle are still the map's
+/// own: <paramref name="Origin"/> is the world tile of the map's (0, 0), and <paramref name="Height"/> is added to its heights.
+/// </summary>
+/// <param name="Region">The region's id, as <see cref="ExploreView.Region"/>.</param>
+/// <param name="Origin">The world tile of the battle map's tile (0, 0).</param>
+/// <param name="Height">The levels the stamp is raised by.</param>
+/// <param name="Heroes">
+/// The walker each <c>hero&lt;n&gt;</c> is, by <see cref="WalkerView.Id"/>, in order: <c>hero1</c> first. A hero the AI plays has no
+/// <see cref="UnitView.Player"/>, so this is the only way to tell which walker steps into which slot.
+/// </param>
+public sealed record StageView(string Region, Tile Origin, int Height, ImmutableArray<string> Heroes);
+
 /// <summary>The battle as the TV draws it (adapter spec §8).</summary>
 /// <param name="Encounter">The encounter.</param>
 /// <param name="Map">The map.</param>
@@ -98,9 +111,10 @@ public static class HostSprite
 /// <param name="Objectives">What wins and loses it, as they stand (<see cref="ObjectiveState.Current"/>).</param>
 /// <param name="Reacting">The unit whose player has a reaction prompt waiting on their phone. An AI's offer isn't a wait, so it isn't here.</param>
 /// <param name="Name">The encounter's own name. <paramref name="Encounter"/> is its id.</param>
+/// <param name="Stage">Where it stands in the world, or null for a battle on a plain board: no region, or a map the region doesn't stamp.</param>
 public sealed record BattleView(string Encounter, string Map, int Round, ImmutableArray<UnitId> Order, UnitId? Active,
     ImmutableArray<UnitView> Units, ImmutableArray<Beat> Beats, string? Outcome, BoardChanges? Board = null, ObjectivesDef? Objectives = null,
-    UnitId? Reacting = null, string? Name = null);
+    UnitId? Reacting = null, string? Name = null, StageView? Stage = null);
 
 /// <summary>An encounter the VIP can pick, with how many AI companions would fill the party up to its minimum.</summary>
 public sealed record EncounterOption(string Id, string Name, int? Level, int Min, int Max, bool Fits, int Companions = 0);
@@ -233,7 +247,7 @@ public sealed partial class TacticsGame
             me = new { name = character.Name, cls = ClassName(character), level = _doc.PartyLevel },
             party = Walkers().Select(w => new { name = w.Player.Name, cls = ClassName(w.Character), here = w.Here, leads = w.Leads }),
             vip,
-            canBattle = vip && !Rules.Encounters.IsEmpty,
+            canBattle = vip && battleList && !Rules.Encounters.IsEmpty,
             portal = PortalPath(),
         });
     }
@@ -336,7 +350,10 @@ public sealed partial class TacticsGame
             [.. state.Units.Values.Select(u => UnitViewOf(u) with { Sprite = HostSprite.Of(u.Sheet.Sprite, u.Sheet.Tags) })],
             save.Log.IsDefault ? [] : save.Log, state.Outcome?.ToString(), BoardChanges.Of(state), state.Objectives.Current,
             state.Pending is ReactionOffer offer && IsPlayed(offer.Reactor) ? offer.Reactor : null,
-            Rules.Encounters.GetValueOrDefault(save.Encounter)?.Name);
+            Rules.Encounters.GetValueOrDefault(save.Encounter)?.Name,
+            StageFor(state.MapId) is { } stage
+                ? new StageView(_region!.Def.Id, stage.Origin, stage.Height, [.. save.Members.Select(m => m.Value)])
+                : null);
     }
 
     private UnitView UnitViewOf(UnitState u)

@@ -1,3 +1,4 @@
+using ArcBox.Sdk;
 using ArcBox.Sdk.Campaigns;
 using ArcBox.Sdk.Testing;
 using ArcBox.Server.Content;
@@ -121,6 +122,42 @@ public class AddTacticsTests
     [Fact]
     public void Development_with_no_seed_starts_at_the_beginning()
         => Assert.Empty(StartedWorld("Development", new Dictionary<string, string?>())!.Beats);
+
+    /// <summary>Whether the walk screen of a new local session of the game the server makes offers its VIP the battle list.</summary>
+    private static bool OffersBattleList(string environment, Dictionary<string, string?>? settings)
+    {
+        using var sp = Build(environment: environment, settings: settings);
+        var game = Assert.IsType<TacticsGame>(sp.GetRequiredService<IGameRegistry>().Create(TacticsGame.Id));
+        var h = new GameHarness<TacticsGame>(game, playerCount: 1);
+        h.Start();
+        h.Input(0, new { action = "pickClass", data = new { @class = "fighter" } });
+        var walk = Assert.IsType<CustomView>(h.PlayerView(0));
+        Assert.Equal(TacticsGame.Screens.Walk, walk.Screen);
+        h.Input(0, new { action = "battles" });
+        var offered = walk.Data.GetProperty("canBattle").GetBoolean();
+        Assert.Equal(offered ? TacticsPhase.EncounterPick : TacticsPhase.Exploration, game.Phase);     // the action goes with the button
+        return offered;
+    }
+
+    private static readonly Dictionary<string, string?> BattleListOn = new() { [TacticsServiceCollectionExtensions.BattleListSetting] = "true" };
+
+    [Fact]
+    public void The_battle_list_is_offered_in_development_when_switched_on()
+        => Assert.True(OffersBattleList("Development", BattleListOn));
+
+    [Fact]
+    public void The_battle_list_is_off_in_development_by_default()
+    {
+        Assert.False(OffersBattleList("Development", new Dictionary<string, string?>()));
+        Assert.False(OffersBattleList("Development", null));
+        Assert.False(OffersBattleList("Development", new() { [TacticsServiceCollectionExtensions.BattleListSetting] = "false" }));
+    }
+
+    [Theory]
+    [InlineData("Production")]
+    [InlineData("Staging")]
+    public void The_battle_list_is_never_offered_outside_development(string environment)
+        => Assert.False(OffersBattleList(environment, BattleListOn));
 
     private static IConfigurationSection Section(Dictionary<string, string?> settings)
         => new ConfigurationBuilder().AddInMemoryCollection(settings).Build().GetSection(TacticsServiceCollectionExtensions.SeedSection);

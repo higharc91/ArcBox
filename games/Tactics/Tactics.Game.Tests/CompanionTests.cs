@@ -23,7 +23,7 @@ public sealed class CompanionTests
     private static (GameHarness<TacticsGame> H, TacticsGame Game, FakeCampaignLease Lease) TwoPlayers(JsonElement? document = null)
     {
         ProfileId?[] profiles = [new ProfileId("pr_a"), new ProfileId("pr_b")];
-        var game = new TacticsGame(Rules);
+        var game = new TacticsGame(Rules, battleList: true);
         var h = new GameHarness<TacticsGame>(game, playerCount: 2, profiles: profiles);
         var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", profiles[0]!.Value,
             [.. profiles.Select((p, i) => new CampaignMember(p!.Value, $"Player{i + 1}", CampaignRole.Player, DateTimeOffset.UnixEpoch))], 1);

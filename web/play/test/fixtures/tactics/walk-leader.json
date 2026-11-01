@@ -39,7 +39,7 @@
       }
     ],
     "vip": true,
-    "canBattle": true,
+    "canBattle": false,
     "portal": "/c/ABCD"
   },
   "viewId": "v1",

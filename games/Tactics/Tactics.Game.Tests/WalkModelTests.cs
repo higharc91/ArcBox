@@ -38,14 +38,27 @@ public sealed class WalkModelTests
     /// <param name="Tile">Where the party starts, as an index into the reachable tiles.</param>
     /// <param name="LastLeader">Who led the session before.</param>
     /// <param name="AwayAtStart">The seats with no phone at Start, as a bit mask: the room says so only after Start returns.</param>
-    private sealed record Setup(int Seed, int Seats, int Clock, bool Lacking, bool Others, int Tile, string? LastLeader, int AwayAtStart)
+    /// <param name="Armed">
+    /// 0 for no story; 1 or 2 for the ford chosen by force or by parley, so River Crossing's stamp is armed (overworld 5c), with the party
+    /// starting near it: the walks then step into it, start its fight from a press or a timer, and come back from it.
+    /// </param>
+    private sealed record Setup(int Seed, int Seats, int Clock, bool Lacking, bool Others, int Tile, string? LastLeader, int AwayAtStart, int Armed = 0)
     {
         public static Setup Of(int seed)
         {
             var r = new Random(seed);
-            return new Setup(seed, r.Next(1, 5), r.Next(3), r.Next(4) == 0, r.Next(2) == 0, r.Next(100_000), LastLeaders[r.Next(5)], r.Next(3) == 0 ? r.Next(16) : 0);
+            return new Setup(seed, r.Next(1, 5), r.Next(3), r.Next(4) == 0, r.Next(2) == 0, r.Next(100_000), LastLeaders[r.Next(5)], r.Next(3) == 0 ? r.Next(16) : 0,
+                r.Next(3));
         }
     }
+
+    /// <summary>The reachable tiles within 4 steps of River Crossing's stamp, inside it or out, where an armed run starts.</summary>
+    private static readonly Lazy<Tile[]> NearTheStamp = new(() =>
+    {
+        var stage = StageBattleTests.Stage;
+        return [.. Tiles.Value.Where(t => t.X >= stage.Origin.X - 4 && t.Y >= stage.Origin.Y - 4 && t.X < stage.Origin.X + stage.Width + 4
+            && t.Y < stage.Origin.Y + stage.Depth + 4)];
+    });
 
     private sealed class ModelBroke(string message) : Exception(message);
 
@@ -149,6 +162,14 @@ public sealed class WalkModelTests
                 foreach (var member in pool.Skip(setup.Seats))
                     document = document with { Members = document.Members.Remove(member) };
             document = document with { World = Saved(Tiles.Value[setup.Tile % Tiles.Value.Length], lastLeader: setup.LastLeader) };
+            if (setup.Armed > 0)
+            {
+                var story = setup.Armed == 1 ? StageBattleTests.Force : StageBattleTests.Parley;
+                document = document with
+                {
+                    World = document.World! with { At = NearTheStamp.Value[setup.Tile % NearTheStamp.Value.Length], Flags = story.Flags, Beats = story.Beats },
+                };
+            }
             _players = [.. seated.Select((p, i) => new Player(new PlayerId($"p{i}"), $"Player{i}", i == 0, new ProfileId(p)))];
             _lease = new Lease(new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", _players[0].Profile!.Value, [], 1), document.ToJson());
             _context = new Context(setup.Seed, setup.Clock == 2);
@@ -160,7 +181,7 @@ public sealed class WalkModelTests
             var last = _lease.World?.LastLeader;
             _context = new Context(_setup.Seed + _commits, _setup.Clock == 2) { Clock = _context.Clock.AddSeconds(2) };
             _over = false;
-            _game = new TacticsGame(Rules, Timing);
+            _game = new TacticsGame(Rules, Timing, _setup.Armed > 0 ? StageBattleTests.Lore.Value : null, battleList: true);
             (_heldUntil, _dir, _lastAlongX, _commits, _behindSince) = (null, null, null, 0, null);
             (_owed, _latched, _settledAt, _leaderHeard) = (false, false, DateTimeOffset.MinValue, _context.Clock);
             _silent.Clear();
@@ -397,11 +418,20 @@ public sealed class WalkModelTests
             }
         }
 
+        /// <summary>Picks a fight from the list, or plays on the one the party walked into, to its end, and carries on from Results.</summary>
         private void Fight(Event e, Seen before)
         {
-            foreach (var seat in _online)
-                Applied(() => Send(seat, new { action = "pickEncounter", data = new { encounter = "river_crossing" } }));
-            Check(e, before);
+            if (_game.Phase != TacticsPhase.Battle)
+            {
+                foreach (var seat in _online)
+                    Applied(() => Send(seat, new { action = "pickEncounter", data = new { encounter = "river_crossing" } }));
+                Check(e, before);
+            }
+            if (_game.Phase == TacticsPhase.Results)
+            {
+                CarryOn();
+                return;
+            }
             if (_game.Phase != TacticsPhase.Battle)
                 return;
             if (e.Player % 3 == 0)
@@ -418,6 +448,11 @@ public sealed class WalkModelTests
             }
             if (_game.Phase == TacticsPhase.Battle)
                 throw new Inconclusive();
+            CarryOn();
+        }
+
+        private void CarryOn()
+        {
             if (_game.Phase == TacticsPhase.Results)
                 foreach (var seat in _online.ToArray())
                 {
@@ -426,6 +461,18 @@ public sealed class WalkModelTests
                     Send(seat, new { action = "next" });
                     Check(new Event("next", seat), seen);
                 }
+        }
+
+        /// <summary>
+        /// The stamp the story arms, from the document: River Crossing's while the run's ford fight is on offer, and none once it's won or
+        /// in a run with no story.
+        /// </summary>
+        private BattleStage? ArmedStage()
+        {
+            if (_setup.Armed == 0 || _lease.World is not { } world)
+                return null;
+            var beat = _setup.Armed == 1 ? "ch1_ford_assault" : "ch1_river_crossing";
+            return world.Beats.Contains(beat) ? null : StageBattleTests.Stage;
         }
 
         /// <summary>Runs battle code, setting aside "hero1 and hero2 share the tile", a battle bug of its own with nothing to do with walking.</summary>
@@ -521,6 +568,14 @@ public sealed class WalkModelTests
             {
                 Must(!after.Timers.Overlaps([TacticsGame.Timers.Step, TacticsGame.Timers.Lead, TacticsGame.Timers.Save]), $"a walking timer in {after.Phase}");
                 Must(!party.Held, "held out of exploration");
+                if (before.Phase == TacticsPhase.Exploration && after.Phase == TacticsPhase.Battle)
+                {
+                    // Walked into the stamp: stopped one tile short of it, and saved there at once.
+                    Must(ArmedStage() is { } armed && armed.Holds(party.Facing) && !armed.Holds(party.At) && party.At == before.Party.At && party.Seq == before.Party.Seq,
+                        $"a fight started from {before.Party.At} at {party.At} on {e}");
+                    Must(_lease.World!.At == party.At, "the place wasn't saved as the fight started");
+                }
+                Forget();       // whatever was held went with the walk
             }
         }
 

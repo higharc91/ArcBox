@@ -50,7 +50,7 @@ public sealed class ExplorationTests
     }));
 
     /// <summary>Loads a copy of the rules after <paramref name="change"/> has edited it.</summary>
-    private static RulesPack EditedRules(Action<string> change)
+    internal static RulesPack EditedRules(Action<string> change)
     {
         var copy = Directory.CreateTempSubdirectory("tactics-edited-rules-test-");
         try
@@ -111,7 +111,7 @@ public sealed class ExplorationTests
         });
     }
 
-    private static string ContentRules()
+    internal static string ContentRules()
     {
         for (var dir = new DirectoryInfo(AppContext.BaseDirectory); dir is not null; dir = dir.Parent)
             if (File.Exists(Path.Combine(dir.FullName, "ArcBox.slnx")))
@@ -138,6 +138,75 @@ public sealed class ExplorationTests
         Assert.False(s.Host.Explore.Held);
         Assert.Empty(s.Host.Explore.Legs);
         Assert.Equal(Start, TacticsDocument.Read(s.Lease.Document).World!.At);
+    }
+
+    // ---- The battle list behind the Development switch (the user's decision) ------------------------------------------
+
+    private static bool CanBattle(Session s, int seat) => s.Screen(seat)!.Data.GetProperty("canBattle").GetBoolean();
+
+    [Fact]
+    public void With_the_switch_off_the_world_offers_no_battle_list()
+    {
+        var s = new Session(game: new TacticsGame(Rules));
+        s.ToWalking();
+
+        Assert.False(CanBattle(s, 0));
+        s.Send(0, "battles");
+
+        Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
+        Assert.Null(s.Screen(0)!.Header);       // no toast for a button that isn't there
+    }
+
+    [Fact]
+    public void With_the_switch_on_the_vip_can_choose_a_battle_from_the_world()
+    {
+        var s = new Session(game: new TacticsGame(Rules, battleList: true));
+        s.ToWalking();
+
+        Assert.True(CanBattle(s, 0));
+        Assert.False(CanBattle(s, 1));          // the VIP's alone, as before
+        s.Send(1, "battles");
+        Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
+        s.Send(0, "battles");
+        Assert.Equal(TacticsPhase.EncounterPick, s.Game.Phase);
+    }
+
+    /// <summary>Results' "Carry on" goes back to walking whether or not the list is offered: it's how every fight ends.</summary>
+    [Fact]
+    public void Results_carry_on_to_the_world_with_the_switch_off()
+    {
+        var s = StageBattleTests.Fighting(StageBattleTests.Force);
+        for (var i = 0; i < 4; i++)
+            s.Harness.SetConnected(i, false);
+        s.PlayOut();
+        Assert.Equal(TacticsPhase.Results, s.Game.Phase);
+        s.Harness.SetConnected(0, true);
+
+        s.Send(0, "next");
+
+        Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
+        Assert.False(CanBattle(s, 0));
+    }
+
+    /// <summary>A pack with no region has nowhere else to fight, so its battle list is there whatever the switch says.</summary>
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void A_pack_with_no_region_keeps_its_battle_list_either_way(bool battleList)
+    {
+        var s = new Session(game: new TacticsGame(NoRegion.Value, battleList: battleList));
+        s.Harness.StartCampaign(s.Lease);
+        for (var i = 0; i < 4; i++)
+            s.Send(i, "pickClass", new { @class = "fighter" });
+
+        Assert.Equal(TacticsPhase.EncounterPick, s.Game.Phase);
+        Assert.Equal(TacticsGame.Screens.PickEncounter, s.Screen(0)!.Screen);
+        s.Send(0, "pickEncounter", new { encounter = "river_crossing" });
+        Assert.Equal(TacticsPhase.Battle, s.Game.Phase);
+        Assert.Null(s.Host.Battle!.Stage);
+        s.PlayOut();
+        s.Send(0, "next");
+        Assert.Equal(TacticsPhase.EncounterPick, s.Game.Phase);
     }
 
     [Fact]

@@ -13,7 +13,8 @@
 #
 # What it does (REDLINE; Tactics is below):
 #   1. builds the phone app (web/play/dist), the server and the TV host (skip with --skip-build);
-#   2. starts the server in Development (serves web/play/dist, OpenTDB off) on a free port on 127.0.0.1;
+#   2. starts the server in Development (serves web/play/dist, OpenTDB off, Tactics:BattleList on, as the bots pick their fight
+#      from it) on a free port on 127.0.0.1;
 #   3. starts the TV on its own Xvfb display with software Vulkan:
 #        --new-room --shots=<out>/tv --preset=<low> --res=<1280x720> --server=<url> --autostart=redline:<phones> --audio-log
 #      and reads the room code from its `ROOM <CODE>` log line (the server keeps its rooms in <out>/arcbox.db);
@@ -248,7 +249,7 @@ DB="$OUT/arcbox.db"
 # start_server <log>: the server on $URL and $DB, in the background; returns once it answers.
 start_server() {
   local out=$1
-  (cd "$ROOT/src/ArcBox.Server" && exec env ASPNETCORE_ENVIRONMENT=Development Storage__Path="$DB" dotnet "$SERVER_DLL" --urls "$URL") > "$out" 2>&1 &
+  (cd "$ROOT/src/ArcBox.Server" && exec env ASPNETCORE_ENVIRONMENT=Development Tactics__BattleList=true Storage__Path="$DB" dotnet "$SERVER_DLL" --urls "$URL") > "$out" 2>&1 &
   SERVER_PID=$!
   for _ in $(seq 1 60); do
     curl -sf -o /dev/null "$URL/" && return 0

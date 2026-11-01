@@ -15,6 +15,11 @@ const view = (name: string, change?: (data: Record<string, unknown>) => void, vi
   return { ...v, viewId };
 };
 
+/** The battle list from the world, which only the server's Development switch offers (the fixture is a game as it's played). */
+const withBattles = (d: Record<string, unknown>) => {
+  d.canBattle = true;
+};
+
 const walk = (dir: string | null) => ({ action: "walk", data: { dir } });
 const walks = (send: ReturnType<typeof vi.fn>) => send.mock.calls.map((c) => (c[0] as { data?: { dir?: string | null } }).data?.dir);
 
@@ -502,7 +507,7 @@ describe("the walk screen", () => {
   });
 
   it("the VIP can go to the battle list, after a confirm; nobody else sees it", () => {
-    const { send } = show("walk-leader");
+    const { send } = show("walk-leader", withBattles);
     fireEvent.click(screen.getByRole("button", { name: "Choose a battle" }));
     expect(send).not.toHaveBeenCalledWith({ action: "battles" });
     fireEvent.click(screen.getByRole("button", { name: "Yes, choose one" }));
@@ -513,17 +518,16 @@ describe("the walk screen", () => {
     expect(screen.queryByRole("button", { name: "End session" })).toBeNull();
   });
 
-  it("no battles, no button", () => {
-    show("walk-leader", (d) => {
-      d.canBattle = false;
-    });
+  it("no battle list, no button: in play, fights happen in the world", () => {
+    show("walk-leader");
     expect(screen.queryByRole("button", { name: "Choose a battle" })).toBeNull();
     expect(screen.getByRole("button", { name: "End session" })).toBeTruthy();
   });
 
   it("End session needs a confirm, in a different place from the first tap", () => {
     const { send } = show("walk-leader");
-    const buttons = () => [...document.querySelectorAll<HTMLButtonElement>(".tx-walk-host button")];
+    // Places, not buttons: with no battle list, an empty slot holds the first place, so End session is in the second (as it is with one).
+    const buttons = () => [...document.querySelector(".tx-walk-host")!.children] as HTMLButtonElement[];
     const first = screen.getByRole("button", { name: "End session" });
     const place = buttons().indexOf(first as HTMLButtonElement);
     fireEvent.click(first);
@@ -541,7 +545,7 @@ describe("the walk screen", () => {
   });
 
   it("Choose a battle needs a confirm too, and \"Keep walking\" takes the place of the first tap", () => {
-    const { send } = show("walk-leader");
+    const { send } = show("walk-leader", withBattles);
     const buttons = () => [...document.querySelectorAll<HTMLButtonElement>(".tx-walk-host button")];
     const first = screen.getByRole("button", { name: "Choose a battle" });
     const place = buttons().indexOf(first as HTMLButtonElement);
@@ -559,7 +563,7 @@ describe("the walk screen", () => {
 
   it("a battle confirm goes when the battles do, and never sends battles", () => {
     const send = vi.fn();
-    const { rerender } = render(<ControllerScreen view={view("walk-leader")} send={send} me="ALEX" game="tactics" />);
+    const { rerender } = render(<ControllerScreen view={view("walk-leader", withBattles)} send={send} me="ALEX" game="tactics" />);
     fireEvent.click(screen.getByRole("button", { name: "Choose a battle" }));
     expect(screen.getByRole("button", { name: "Yes, choose one" })).toBeTruthy();
 
@@ -568,13 +572,13 @@ describe("the walk screen", () => {
     expect(screen.queryByRole("button", { name: "Keep walking" })).toBeNull();
     expect(screen.getByRole("button", { name: "End session" })).toBeTruthy();
 
-    rerender(<ControllerScreen view={view("walk-leader", undefined, "v3")} send={send} me="ALEX" game="tactics" />);
+    rerender(<ControllerScreen view={view("walk-leader", withBattles, "v3")} send={send} me="ALEX" game="tactics" />);
     expect(screen.queryByRole("button", { name: "Yes, choose one" })).toBeNull();      // and doesn't come back with them
     expect(send.mock.calls.some((c) => (c[0] as { action: string }).action === "battles")).toBe(false);
   });
 
   it.each([["End session", "Yes, end it"], ["Choose a battle", "Yes, choose one"]])("the %s confirm lapses by itself", async (ask, yes) => {
-    show("walk-leader");
+    show("walk-leader", withBattles);
     fireEvent.click(screen.getByRole("button", { name: ask }));
     await vi.advanceTimersByTimeAsync(5000);
     expect(screen.queryByRole("button", { name: yes })).toBeNull();

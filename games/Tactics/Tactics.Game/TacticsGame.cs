@@ -15,13 +15,19 @@ public enum TacticsPhase { Muster, EncounterPick, Battle, Results, Resuming, Exp
 /// and never reads the clock: time is <see cref="IGameContext"/>'s, and the campaign document is saved through the lease
 /// after every command. Its story is read from <c>lore</c>, and without it no beat is ever on offer. A <c>seed</c> starts a campaign
 /// with no place in the world yet part way through its story (Development only).
+/// <para>
+/// With a region, fights happen in the world, and the VIP's battle list ("Choose a battle" on the walk screen) is offered only with
+/// <c>battleList</c>, a Development-only switch (the user's decision): it's for trying any fight without walking to it. A pack with no
+/// region has no world to fight in, so its battle list is always there, as it was before the world.
+/// </para>
 /// </summary>
-public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? timing = null, Lazy<LoreBook>? lore = null, TacticsSeed? seed = null)
+public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? timing = null, Lazy<LoreBook>? lore = null, TacticsSeed? seed = null,
+    bool battleList = false)
     : IGame, ICampaignGame, IResumableGame, IHostAware
 {
     /// <summary>A game on a loaded pack (tests, tools).</summary>
-    public TacticsGame(RulesPack rules, TacticsTiming? timing = null, LoreBook? lore = null, TacticsSeed? seed = null)
-        : this(new Lazy<RulesPack>(rules), timing, lore is null ? null : new Lazy<LoreBook>(lore), seed)
+    public TacticsGame(RulesPack rules, TacticsTiming? timing = null, LoreBook? lore = null, TacticsSeed? seed = null, bool battleList = false)
+        : this(new Lazy<RulesPack>(rules), timing, lore is null ? null : new Lazy<LoreBook>(lore), seed, battleList)
     {
     }
 
@@ -204,7 +210,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             case TacticsPhase.Exploration when custom.Action == "pickClass":
                 PickClass(player, profile, custom.Data);
                 break;
-            case TacticsPhase.Exploration when custom.Action == "battles" && IsVip(player):
+            case TacticsPhase.Exploration when custom.Action == "battles" && IsVip(player) && battleList:
                 LeaveExploration();
                 _toasts.Clear();
                 _phase = TacticsPhase.EncounterPick;

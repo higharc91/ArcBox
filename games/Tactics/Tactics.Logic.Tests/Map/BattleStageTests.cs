@@ -185,6 +185,31 @@ public sealed class BattleStageTests
         Assert.Null(BattleStage.Standable(ground, new Tile(0, 0), default));
     }
 
+    /// <summary>
+    /// The far bank: the nearest walkable tile is one the rule turns down (in the game, one the region's start can't reach, or inside an
+    /// armed stamp), so the next nearest that it allows goes, and a fallback it turns down is passed over like a wall.
+    /// </summary>
+    [Fact]
+    public void Standable_passes_over_tiles_the_rule_turns_down()
+    {
+        // (2, 0) is in the river. (3, 0) is one step east, but the rule refuses everything east of the river; (0, 0) is two steps west.
+        var ground = Ground("0. 0x 0x 0.");
+        var westOnly = (Tile t) => t.X < 2;
+
+        Assert.Equal(new Tile(3, 0), BattleStage.Standable(ground, new Tile(2, 0), []));
+        Assert.Equal(new Tile(0, 0), BattleStage.Standable(ground, new Tile(2, 0), [], westOnly));
+
+        // Too far to look for, so it comes down to the fallbacks, and the first of them is refused.
+        var wide = Ground("0. 0x 0x 0x 0x 0.");
+        Assert.Equal(new Tile(0, 0), BattleStage.Standable(wide, new Tile(5, 0), [new Tile(5, 0), new Tile(0, 0)], t => t.X == 0));
+        Assert.Null(BattleStage.Standable(wide, new Tile(5, 0), [new Tile(5, 0)], t => t.X == 0));
+    }
+
+    /// <summary>The tile asked for is kept only if the rule allows it, even when it's walkable.</summary>
+    [Fact]
+    public void Standable_tests_the_tile_asked_for_against_the_rule()
+        => Assert.Equal(new Tile(1, 0), BattleStage.Standable(Ground("0. 0. 0."), new Tile(2, 0), [], t => t.X < 2));
+
     [Fact]
     public void Standable_never_picks_a_tile_off_the_ground()
         => Assert.Equal(new Tile(0, 1), BattleStage.Standable(Ground("0#\n0."), new Tile(0, 0), []));

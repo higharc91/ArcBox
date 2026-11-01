@@ -1745,7 +1745,7 @@ public sealed class WalkingTests
         {
             // The session's document, on this clock, resumed so that player 0 still leads.
             Session1 = session;
-            Game = new TacticsGame(Rules);
+            Game = new TacticsGame(Rules, battleList: true);
             Game.Resume(this, session.Harness.Players, new FakeCampaignLease(session.Lease.Info, session.Lease.Document));
             foreach (var player in session.Harness.Players)
                 Game.OnPlayerConnectionChanged(player.Id, true);

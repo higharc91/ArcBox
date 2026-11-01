@@ -94,39 +94,51 @@ public sealed class PhoneFixtureTests
         }
     }
 
-    /// <summary>Plays a four-member session until each screen has been seen once, keeping the first of each.</summary>
+    /// <summary>
+    /// Plays a four-member session until each screen has been seen once, keeping the first of each. The walk screens come first from a
+    /// game as it's played, with no battle list; the rest from one with the Development battle list, which is the way to a fight that
+    /// doesn't depend on the story.
+    /// </summary>
     private static SortedDictionary<string, JsonNode> Capture(RulesPack? pack = null)
     {
         var rules = pack ?? Pack.Value;
         ProfileId?[] profiles = [.. Enumerable.Range(1, 4).Select(i => (ProfileId?)new ProfileId($"pr_member{i}"))];
-        var game = new TacticsGame(rules);
-        var h = new GameHarness<TacticsGame>(game, playerCount: 4, seed: 3, profiles: profiles);
-        var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", profiles[0]!.Value,
-            [.. profiles.Select((p, i) => new CampaignMember(p!.Value, $"Player{i + 1}", CampaignRole.Player, DateTimeOffset.UnixEpoch))], 1);
-        var lease = new FakeCampaignLease(info, new TacticsCampaignRules(rules).NewDocument(info));
         var seen = new SortedDictionary<string, JsonNode>(StringComparer.Ordinal);
-
-        void Look()
-        {
-            for (var p = 0; p < 4; p++)
-                if (h.PlayerView(p) is CustomView view && !seen.ContainsKey(Named(view)))
-                    // As the base type, as the server sends it, so the "kind" discriminator is written.
-                    seen[Named(view)] = JsonSerializer.SerializeToNode<ControllerView>(view with { ViewId = "v1" }, ArcJson.Options)!;
-        }
+        string[] classes = ["fighter", "cleric", "rogue", "wizard"];
 
         // One screen, two ways to see it: only the leader has the pad.
         static string Named(CustomView view) => view.Screen != TacticsGame.Screens.Walk ? view.Screen
             : view.Data.GetProperty("leader").GetBoolean() ? "walk-leader" : "walk-follower";
 
-        h.StartCampaign(lease);
-        Look();
-        string[] classes = ["fighter", "cleric", "rogue", "wizard"];
-        for (var i = 0; i < 4; i++)
-            h.Input(i, new { action = "pickClass", data = new { @class = classes[i] } });
-        Look();
+        (TacticsGame Game, GameHarness<TacticsGame> H, Action Look) Mustered(bool battleList)
+        {
+            var game = new TacticsGame(rules, battleList: battleList);
+            var h = new GameHarness<TacticsGame>(game, playerCount: 4, seed: 3, profiles: profiles);
+            var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", profiles[0]!.Value,
+                [.. profiles.Select((p, i) => new CampaignMember(p!.Value, $"Player{i + 1}", CampaignRole.Player, DateTimeOffset.UnixEpoch))], 1);
+            void Look()
+            {
+                for (var p = 0; p < 4; p++)
+                    if (h.PlayerView(p) is CustomView view && !seen.ContainsKey(Named(view)))
+                        // As the base type, as the server sends it, so the "kind" discriminator is written.
+                        seen[Named(view)] = JsonSerializer.SerializeToNode<ControllerView>(view with { ViewId = "v1" }, ArcJson.Options)!;
+            }
+            h.StartCampaign(new FakeCampaignLease(info, new TacticsCampaignRules(rules).NewDocument(info)));
+            Look();
+            for (var i = 0; i < 4; i++)
+                h.Input(i, new { action = "pickClass", data = new { @class = classes[i] } });
+            Look();
+            return (game, h, Look);
+        }
+
+        Mustered(battleList: false);
+        var (game, h, Look) = Mustered(battleList: true);
         h.Input(0, new { action = "battles" });
         Look();
         h.Input(0, new { action = "pickEncounter", data = new { encounter = "river_crossing" } });
+        // Fought in the world, its opening beat waits for the TV's walk-in (overworld 5c), which a TV here has shown.
+        if (((TacticsHostView)game.HostView()).Battle is { Stage: not null } battle)
+            h.HostSignal("shown", new { seq = battle.Beats[^1].Seq });
 
         // Players end their turns at once (after the first turn screen is seen) so enemies walk past them and draw
         // reactions; reactions are left to time out.

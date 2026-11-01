@@ -20,7 +20,7 @@ public sealed class EngineFaultTests
     private static (TacticsGame Game, List<EngineFault> Faults) Watched()
     {
         var faults = new List<EngineFault>();
-        return (new TacticsGame(TacticsGameTests.Rules) { FaultLogged = faults.Add }, faults);
+        return (new TacticsGame(TacticsGameTests.Rules, battleList: true) { FaultLogged = faults.Add }, faults);
     }
 
     private static bool IsHero(UnitId unit) => unit.Value.StartsWith("hero", StringComparison.Ordinal);
@@ -371,7 +371,7 @@ public sealed class EngineFaultTests
     [Fact]
     public void A_fault_handler_that_throws_loses_the_log_line_not_the_room()
     {
-        var game = new TacticsGame(TacticsGameTests.Rules) { FaultLogged = _ => throw new InvalidOperationException("The log is down.") };
+        var game = new TacticsGame(TacticsGameTests.Rules, battleList: true) { FaultLogged = _ => throw new InvalidOperationException("The log is down.") };
         var s = new Session(game: game);
         s.ToBattle();
         var (player, screen) = WaitForTurn(s);

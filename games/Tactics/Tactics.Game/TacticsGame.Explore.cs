@@ -110,6 +110,49 @@ public sealed partial class TacticsGame
 
     private static bool IsWorldAction(string action) => action is "walk" or "battles" or "backToWalk" or "endSession";
 
+    // ---- Fights in the world (overworld 5c) ----------------------------------------------------------------------------
+
+    /// <summary>What everyone is told when a fight the party walked into won't start. The party stands where it stopped and can try again.</summary>
+    public const string FightWontStart = "Something went wrong starting that fight.";
+
+    /// <summary>Where the battle map <paramref name="map"/> stands in the region, or null with no region or no stamp of it: a plain board.</summary>
+    private BattleStage? StageFor(string map) => _region is { } region && Rules.MapFor(map) is { } battleMap ? BattleStage.Of(region, battleMap) : null;
+
+    /// <summary>
+    /// The fight on offer and where it stands: the arc's available beat (<see cref="StoryRules.Available"/>), if it's a battle whose
+    /// encounter's map the region stamps. Every other stamp is ordinary ground, and so is this one once its beat is done. One beat is on
+    /// offer at a time, so at most one stamp is armed, and it never has to name its encounter (5c default 2).
+    /// </summary>
+    private (ArcBeat Beat, BattleStage Stage)? Armed()
+    {
+        if (_region is null || _doc.World is not { } world || Lore.ArcFor(_region.Def.Id) is not { } arc)
+            return null;
+        if (StoryRules.Available(arc, world.Flags.ToHashSet(StringComparer.Ordinal), world.Beats.ToHashSet(StringComparer.Ordinal))
+                is not { Kind: ArcBeat.Battle, Encounter: { } encounter } beat
+            || !Rules.Encounters.TryGetValue(encounter, out var def) || StageFor(def.Map) is not { } stage)
+            return null;
+        return (beat, stage);
+    }
+
+    /// <summary>
+    /// Starts <paramref name="encounter"/> where the party is, as the beat <paramref name="beat"/>: out of the walk, everyone who has a
+    /// seat in the party (an absent member is given a character, and played by the AI), and companions up to the encounter's smallest
+    /// party, as the battle list does. If it won't start, the party is back to walking where it stopped, with a notice.
+    /// </summary>
+    private void StartFight(string encounter, string? beat)
+    {
+        LeaveExploration();
+        _toasts.Clear();
+        if (Rules.Encounters.GetValueOrDefault(encounter) is { } def && _players.Count <= def.Party.Max)
+        {
+            FillAbsentCharacters();
+            if (StartBattle(encounter, (ulong)_ctx.Random.NextInt64(), [.. _players.Select(p => p.Profile!.Value)], Companions(def.Party.Min), beat))
+                return;
+        }
+        Note(FightWontStart);
+        ToExploration();
+    }
+
     // ---- Coming into the world ----------------------------------------------------------------------------------------
 
     /// <summary>
@@ -287,6 +330,14 @@ public sealed partial class TacticsGame
                 _edgeSaid = true;
                 Note(RoadGoesOn);
             }
+        }
+        else if (Armed() is { } armed && armed.Stage.Holds(move.To) && !armed.Stage.Holds(from))
+        {
+            // Into the stamp of the fight on offer, from outside it: the party stops one tile short, facing it, and the fight starts.
+            // Nothing of the walk goes on: not this step's save or timer, nor the next.
+            _facing = move.To;
+            StartFight(armed.Beat.Encounter!, armed.Beat.Id);
+            return;
         }
         else
         {

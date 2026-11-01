@@ -41,11 +41,14 @@ public readonly record struct BattleStage(string Map, Tile Origin, int Height, i
     /// <summary>
     /// A tile the party can stand on, as near <paramref name="from"/> as can be: <paramref name="from"/> itself if it's walkable, else
     /// the nearest walkable tile at most <see cref="StandReach"/> steps away along x and y (the lowest <see cref="Tile"/> of those
-    /// equally near), else the first walkable tile of <paramref name="fallback"/>; null if there's none of those.
+    /// equally near), else the first walkable tile of <paramref name="fallback"/>; null if there's none of those. With
+    /// <paramref name="allowed"/>, a tile must also pass it: walkability alone can't say that a tile is cut off from the rest of the world,
+    /// or inside a stamp whose fight would start again (overworld 5c, Task 4).
     /// </summary>
-    public static Tile? Standable(Terrain terrain, Tile from, ImmutableArray<Tile> fallback)
+    public static Tile? Standable(Terrain terrain, Tile from, ImmutableArray<Tile> fallback, Func<Tile, bool>? allowed = null)
     {
-        if (terrain.Walkable(from))
+        bool Ok(Tile t) => terrain.Walkable(t) && (allowed is null || allowed(t));
+        if (Ok(from))
             return from;
         for (var distance = 1; distance <= StandReach; distance++)
         {
@@ -55,14 +58,14 @@ public readonly record struct BattleStage(string Map, Tile Origin, int Height, i
                 var dy = distance - Math.Abs(dx);
                 Tile[] ring = dy == 0 ? [new(from.X + dx, from.Y)] : [new(from.X + dx, from.Y - dy), new(from.X + dx, from.Y + dy)];
                 foreach (var t in ring)
-                    if (terrain.Walkable(t) && (best is not { } b || t.CompareTo(b) < 0))
+                    if ((best is not { } b || t.CompareTo(b) < 0) && Ok(t))
                         best = t;
             }
             if (best is not null)
                 return best;
         }
         foreach (var t in fallback.IsDefault ? [] : fallback)
-            if (terrain.Walkable(t))
+            if (Ok(t))
                 return t;
         return null;
     }

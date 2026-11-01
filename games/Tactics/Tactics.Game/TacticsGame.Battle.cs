@@ -43,15 +43,27 @@ public sealed partial class TacticsGame
 
     // ---- Starting and continuing --------------------------------------------------------------------------------------
 
-    /// <summary>Starts a battle, or returns false if the engine failed to (logged), with nothing changed.</summary>
-    private bool StartBattle(string encounter, ulong seed, ImmutableArray<ProfileId> members, ImmutableArray<CharacterRecord> companions)
+    /// <summary>
+    /// Starts a battle, or returns false if the engine failed to (logged), with nothing changed. <paramref name="beat"/> is the story beat
+    /// it is, if any. A battle on a stamped map is drawn in the world, where the TV first walks the party in, so its opening beat holds the
+    /// AI until it's shown, or for <see cref="TacticsTiming.FormUp"/> (5c §5): a player whose turn is first can still act.
+    /// </summary>
+    private bool StartBattle(string encounter, ulong seed, ImmutableArray<ProfileId> members, ImmutableArray<CharacterRecord> companions,
+        string? beat = null)
     {
         if (TryBegin(encounter, seed, members, companions) is not { } resolution)
             return false;
         _lastBattle = null;
-        _doc = _doc with { Battle = new BattleSave(encounter, seed, members, resolution.State, [], companions.IsEmpty ? default : companions) };
+        _doc = _doc with
+        {
+            Battle = new BattleSave(encounter, seed, members, resolution.State, [], companions.IsEmpty ? default : companions, beat),
+        };
         _seq = 0;
-        AddBeat(null, resolution.Events);
+        if (AddBeat(null, resolution.Events) is { } opening && StageFor(resolution.State.MapId) is not null)
+        {
+            _awaitShown = opening;
+            _ctx.SetTimer(Timers.Pace, _timing.FormUp);
+        }
         _phase = TacticsPhase.Battle;
         Drive();
         return true;

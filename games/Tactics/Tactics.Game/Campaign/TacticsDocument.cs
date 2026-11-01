@@ -49,9 +49,14 @@ public sealed record Beat(int Seq, UnitId? Actor, ImmutableArray<BattleEvent> Ev
 /// The AI companions who filled the party up to the encounter's minimum, after the members in party order. They belong to
 /// this battle only: no XP, no place in the campaign.
 /// </param>
+/// <param name="Beat">
+/// The story beat this fight is, if it's one (overworld 5c): a win completes it. Null for a fight from the battle list, which touches no
+/// story, and for every battle saved before 5c. Left out of the JSON when null, and no version bump: a missing member reads as null.
+/// </param>
 public sealed record BattleSave(string Encounter, ulong Seed, ImmutableArray<ProfileId> Members, BattleState State,
     ImmutableArray<Beat> Log,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<CharacterRecord> Companions = default);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<CharacterRecord> Companions = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] string? Beat = null);
 
 /// <summary>Where the party is in the world, and how far through its story.</summary>
 /// <param name="Region">The region's id. A hand-edited document can leave it null, and the party then goes to the start with a notice, keeping its story.</param>

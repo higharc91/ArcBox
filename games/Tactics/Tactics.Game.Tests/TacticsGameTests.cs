@@ -31,7 +31,7 @@ public sealed class TacticsGameTests
         {
             var order = reseated ? new[] { 4, 3, 2, 1 } : [1, 2, 3, 4];
             Profiles = [.. order.Select(i => (ProfileId?)new ProfileId($"pr_member{i}"))];
-            Game = game ?? new TacticsGame(Rules);
+            Game = game ?? new TacticsGame(Rules, battleList: true);     // most tests reach a fight through the list
             Harness = new GameHarness<TacticsGame>(Game, playerCount: 4, seed: seed, profiles: Profiles);
             var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", Profiles[0]!.Value,
                 [.. Profiles.Select((p, i) => new CampaignMember(p!.Value, $"Player{i + 1}", i == 0 ? CampaignRole.Owner : CampaignRole.Player,
@@ -64,6 +64,10 @@ public sealed class TacticsGameTests
                     Harness.SetConnected(i, false);
             Send(0, "pickEncounter", new { encounter });
             Assert.Equal(TacticsPhase.Battle, Game.Phase);
+            // River Crossing is stamped in Ashen Ford, so it's fought in the world, where the opening beat waits for the TV's walk-in
+            // (overworld 5c). These tests are about the battle after it: the TV has shown it.
+            if (Host.Battle!.Stage is not null)
+                Harness.HostSignal("shown", new { seq = Host.Battle.Beats[^1].Seq });
             if (everyoneAway)
                 Harness.SetConnected(0, false);
         }

@@ -14,11 +14,18 @@ public static class TacticsServiceCollectionExtensions
     public const string SeedSection = "Tactics:Seed";
 
     /// <summary>
+    /// The Development switch that offers the VIP the battle list from the world (<c>"Tactics": { "BattleList": true }</c>). Off unless
+    /// it's set, and always off outside Development: in play, fights happen where the party walks into them (the user's decision).
+    /// </summary>
+    public const string BattleListSetting = "Tactics:BattleList";
+
+    /// <summary>
     /// Wires up ArcBox Tactics: its rules pack, loaded once from <c>&lt;Content:Root&gt;/tactics/base</c> (the rules and the
     /// art manifests they're checked against), its lore from the same folder, the game, its campaign rules and its voice themes (one per
     /// speaker, for live speech). The pack and the lore load on first use, so the server starts without them (the registry only reads
     /// the manifest); a missing or broken pack fails the first tactics room, with every error listed. In Development only, a
-    /// <c>Tactics:Seed</c> section starts new campaigns part way through their story (<see cref="SeedFrom"/>).
+    /// <c>Tactics:Seed</c> section starts new campaigns part way through their story (<see cref="SeedFrom"/>), and
+    /// <c>Tactics:BattleList</c> offers the battle list from the world (<see cref="BattleListSetting"/>).
     /// </summary>
     public static IServiceCollection AddTactics(this IServiceCollection services)
     {
@@ -31,10 +38,11 @@ public static class TacticsServiceCollectionExtensions
         services.AddArcGame(sp =>
         {
             var log = sp.GetRequiredService<ILogger<TacticsGame>>();
-            var seed = sp.GetRequiredService<IHostEnvironment>().IsDevelopment() && sp.GetService<IConfiguration>() is { } config
-                ? SeedFrom(config.GetSection(SeedSection))
-                : null;
-            return new TacticsGame(sp.GetRequiredService<Lazy<RulesPack>>(), lore: sp.GetRequiredService<Lazy<LoreBook>>(), seed: seed)
+            // The seed and the battle list are read in Development only.
+            var devSettings = sp.GetRequiredService<IHostEnvironment>().IsDevelopment() ? sp.GetService<IConfiguration>() : null;
+            var seed = devSettings is null ? null : SeedFrom(devSettings.GetSection(SeedSection));
+            var battleList = devSettings?.GetValue<bool>(BattleListSetting) ?? false;
+            return new TacticsGame(sp.GetRequiredService<Lazy<RulesPack>>(), lore: sp.GetRequiredService<Lazy<LoreBook>>(), seed: seed, battleList: battleList)
             {
                 FaultLogged = fault => LogFault(log, fault),
             };
