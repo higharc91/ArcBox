@@ -38,6 +38,7 @@ internal sealed class BoardPainter
     private static readonly Color[] Unlit = [Colors.White, Colors.White, Colors.White, Colors.White];
 
     private readonly Dictionary<string, Texture2D?> _textures = [];
+    private readonly Dictionary<string, Texture2D?> _tops = [];
     private readonly Dictionary<string, Texture2D?> _glows = [];
 
     /// <summary>The pack's root, which files are read from.</summary>
@@ -55,7 +56,7 @@ internal sealed class BoardPainter
         if (drawn is DrawnFace face)
         {
             var lit = face.Lit;
-            face.Texture = lit.Art ? Load(lit.Face.Image?.Path) : null;
+            face.Texture = lit.Art ? Texture(lit.Face) : null;
             face.Glow = lit.Glow && lit.Face.Image is { Glow: { } rule } image ? Glow(image.Path, null, rule.Colour) : null;
         }
         else if (drawn is DrawnSprite sprite)
@@ -99,6 +100,25 @@ internal sealed class BoardPainter
             return _textures[file] = null;
         }
         return _textures[file] = ImageTexture.CreateFromImage(loaded);
+    }
+
+    /// <summary>What a face is drawn with. A top lies turned on its tile, so a still one goes through <see cref="DitherTexels"/>; one that moves doesn't stay long enough to read as a comb.</summary>
+    private Texture2D? Texture(Face face) => face.Facing == Facing.Up && face.Image is { Frames: 1, Path: var file } ? LoadTop(file) : Load(face.Image?.Path);
+
+    private Texture2D? LoadTop(string file)
+    {
+        if (_tops.TryGetValue(file, out var known))
+        {
+            return known;
+        }
+        if (Pixels(file) is not { } art)
+        {
+            return _tops[file] = Load(file);   // which warns
+        }
+        var doubled = DitherTexels.Doubled(art.GetData(), art.GetWidth(), art.GetHeight());
+        return _tops[file] = ImageTexture.CreateFromImage(doubled is null
+            ? art
+            : Image.CreateFromData(art.GetWidth() * DitherTexels.Scale, art.GetHeight() * DitherTexels.Scale, false, Image.Format.Rgba8, doubled));
     }
 
     private static DrawnFace Prepare(LitFace lit, BoardLighting? baked)
