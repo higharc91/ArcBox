@@ -45,6 +45,46 @@ public sealed class StoryResumeTests
         Assert.Equal(1, Cursor(again)!.Line);
     }
 
+    /// <summary>
+    /// Review (adapter NOTE 3): a long scene, or a question held with every phone asleep, could only be left by closing the room. The VIP
+    /// can end the session from inside a scene; the cursor is saved on every line, so the next session starts on the same line.
+    /// </summary>
+    [Fact]
+    public void The_vip_can_end_the_session_in_a_scene()
+    {
+        var s = Telling(Mayor);
+        LineEnds(s);
+        var line = Story(s).Line!.Id;
+
+        s.Send(1, "endSession");
+        Assert.False(s.Harness.IsOver);          // only the VIP's
+        Assert.Equal(TacticsPhase.Story, s.Game.Phase);
+
+        s.Send(0, "endSession");
+
+        Assert.True(s.Harness.IsOver);
+        Assert.Equal(1, Cursor(s)!.Line);
+        var again = Restarted(s);
+        AllBack(again);
+        Assert.Equal(TacticsPhase.Story, again.Game.Phase);
+        Assert.Equal(line, Story(again).Line!.Id);
+    }
+
+    [Fact]
+    public void The_vip_can_end_the_session_at_a_question()
+    {
+        var s = AtTheVote();
+        Vote(s, 1, "pay");
+
+        s.Send(0, "endSession");
+
+        Assert.True(s.Harness.IsOver);
+        var again = Restarted(s);
+        AllBack(again);
+        Assert.Equal(TacticsGame.StoryStates.Asking, Story(again).State);     // votes aren't saved: the question is asked again
+        Assert.Equal("vote", Cursor(again)!.Node);
+    }
+
     [Fact]
     public void It_resumes_on_the_saved_line()
     {

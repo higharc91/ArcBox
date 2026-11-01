@@ -243,6 +243,9 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             case TacticsPhase.Story when custom.Action == "pickClass":
                 PickClass(player, profile, custom.Data);
                 break;
+            case TacticsPhase.Story when custom.Action == "endSession" && IsVip(player):
+                EndSession();       // the cursor is saved on every line, so the next session starts on this one (review)
+                break;
             case TacticsPhase.Story:
                 StoryInput(player, profile, custom);
                 break;

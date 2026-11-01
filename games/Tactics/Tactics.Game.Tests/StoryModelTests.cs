@@ -59,7 +59,14 @@ public sealed class StoryModelTests
 
         public DateTimeOffset? TimerDeadline(string key) => Timers.TryGetValue(key, out var t) ? t.Due : null;
 
-        public void EndGame(GameResults results) => Timers.Clear();
+        public void EndGame(GameResults results)
+        {
+            Timers.Clear();
+            Over = true;
+        }
+
+        /// <summary>True once the game has ended the session: the VIP's endSession, from the walk or from inside a scene.</summary>
+        public bool Over { get; private set; }
 
         /// <summary>Fires every timer due by <paramref name="target"/>, in the order they fire, then moves the clock there.</summary>
         public void Advance(TimeSpan by, Action<string> fire)
@@ -224,6 +231,9 @@ public sealed class StoryModelTests
         }
 
         public int Sessions { get; private set; }
+
+        /// <summary>How many times the VIP ended the session mid-run.</summary>
+        public int Ended { get; private set; }
 
         /// <summary>Moves the party next to <paramref name="start"/>'s beat with its story so far, as a fresh session, and starts it.</summary>
         private void Teleport((string Beat, TacticsSeed Seed) start)
@@ -476,6 +486,13 @@ public sealed class StoryModelTests
                         new { action = "skip", data = new { line = 4 } }, new { action = "next" }, new { action = "endSession" },
                     ];
                     Send(e.Seat, junk[e.N]);
+                    if (_context.Over)
+                    {
+                        // The VIP ended the session, in a scene too (review): the next night picks up on the saved line.
+                        Must(e.N == 5, $"the session ended on {e.Kind}:{e.Seat}:{e.N}");
+                        Ended++;
+                        NewSession();
+                    }
                     break;
                 }
             }
@@ -716,7 +733,7 @@ public sealed class StoryModelTests
     public void Scenes_hold_up_against_their_model()
     {
         var beats = 0;
-        var (fights, sessions, real, lost) = (0, 0, 0, 0);
+        var (fights, sessions, real, lost, ended) = (0, 0, 0, 0, 0);
         var states = new HashSet<string>();
         var restarts = new HashSet<string>();
         var only = int.TryParse(Environment.GetEnvironmentVariable("STORY_MODEL_SEED"), out var one) ? one : 0;
@@ -727,7 +744,7 @@ public sealed class StoryModelTests
             beats += run.BeatsDone;
             states.UnionWith(run.States);
             restarts.UnionWith(run.RestartsIn);
-            (fights, sessions, real, lost) = (fights + run.Fights, sessions + run.Sessions, real + run.RealFights, lost + run.FightsLost);
+            (fights, sessions, real, lost, ended) = (fights + run.Fights, sessions + run.Sessions, real + run.RealFights, lost + run.FightsLost, ended + run.Ended);
         }
         string[] all = [TacticsGame.StoryStates.Lines, TacticsGame.StoryStates.Asking, TacticsGame.StoryStates.TieBreak,
             TacticsGame.StoryStates.PickRoller, TacticsGame.StoryStates.Rolled, TacticsGame.StoryStates.Gap];
@@ -737,6 +754,7 @@ public sealed class StoryModelTests
         Assert.Empty(new[] { TacticsGame.StoryStates.Rolled, TacticsGame.StoryStates.Gap, TacticsGame.StoryStates.TieBreak,
             TacticsGame.StoryStates.Lines, TacticsGame.StoryStates.Asking }.Except(restarts));
         Assert.True(sessions > 0, "no new session started on a saved scene");
+        Assert.True(ended > 0, "the VIP never ended a session");
         Assert.True(fights > 0, "no fight started from the story");
         Assert.True(real > 0 && lost > 0 && fights > lost, $"fights: {fights}, {real} the real way, {lost} lost: the runs need wins and losses, through Results");
         Assert.Contains("card", states);      // a run reached the end of the chapter

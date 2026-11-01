@@ -277,10 +277,20 @@ public sealed partial class TacticsGame
         SaveWorld();
     }
 
+    /// <summary>
+    /// The VIP ends the session, from the walk or from inside a scene: the place is saved, and in a scene its clocks stop, with the cursor
+    /// as saved on its line. An open question's votes go, as on any restart.
+    /// </summary>
     private void EndSession()
     {
         if (_phase == TacticsPhase.Exploration)
             LeaveExploration();
+        else if (_phase == TacticsPhase.Story)
+        {
+            EndTelling();
+            KeepWorld();
+            Save();
+        }
         _ctx.EndGame(new GameResults([], $"The party is level {_doc.PartyLevel}; {_doc.Completed.Length} battles won."));
     }
 
