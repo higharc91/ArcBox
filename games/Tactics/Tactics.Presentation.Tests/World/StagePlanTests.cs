@@ -373,8 +373,12 @@ public sealed class StagePlanTests(ITestOutputHelper output)
         output.WriteLine($"160x120: whole BoardTerrain {terrainMs:F2} ms; stage rebuild {stageMs:F2} ms against {wholeMs:F2} ms without the window "
             + $"({plan.Plan.Items.Length} items, {plan.Lit.Items.Length} lit, {plan.Lighting.Lights.Length} lights); {blocks} world blocks {blocksMs:F2} ms");
 
-        // Alone it's about 5 ms in Debug against 13 or so; under load both grow. A rebuild that went back to reading the whole region would cost
-        // what the second does, so it has to stay well under it.
-        Assert.True(stageMs < wholeMs * 0.75, $"a stage rebuild took {stageMs:F2} ms, against {wholeMs:F2} ms reading the whole region");
+        // The times are printed, not asserted: on real hardware in Release the whole-region read is cheap enough that the ratio between them
+        // sits near 0.8, and under the solution's parallel load both grow tenfold (local-windows-checks.md, problem 1). What keeps the rebuild
+        // quick is that it reads a window round what's drawn, not the region, and that is asserted on the work itself, the same on any machine.
+        var region = ground.Map.Width * ground.Map.Height;
+        var most = (plan.Drawn.W + 5) * (plan.Drawn.H + 5);     // a tile round, and up to 3 more to start on a whole texture
+        Assert.True(plan.Read <= most, $"a stage rebuild read {plan.Read} tiles, against at most {most} round what it draws");
+        Assert.True(plan.Read * 10 < region, $"a stage rebuild read {plan.Read} of the region's {region} tiles");
     }
 }
