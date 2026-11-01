@@ -128,6 +128,7 @@ public sealed class SceneLoadTests
                 { "id": "hub", "lines": [{ "id": "l1", "speaker": "narrator", "text": "Hub." }], "options": [
                   { "id": "again", "label": "Again.", "to": "hub" },
                   { "id": "try", "label": "Try.", "check": { "skill": "athletics", "dc": 10, "pass": "sides", "fail": "hub" } },
+                  { "id": "both", "label": "Both.", "to": "hub", "check": { "skill": "athletics", "dc": 10, "pass": "sides", "fail": "done" } },
                   { "id": "on", "label": "On.", "to": "sides" } ] },
                 { "id": "sides", "lines": [{ "id": "l2", "speaker": "narrator", "text": "Which?" }], "options": [
                   { "id": "l", "label": "Left.", "to": "gated", "requires": ["left"] },
@@ -143,10 +144,26 @@ public sealed class SceneLoadTests
         [
             "the option 'again' of the node 'hub' of the scene 's' leads back to its own node, so it's never offered.",
             "the option 'try' of the node 'hub' of the scene 's' leads back to its own node, so it's never offered.",
+            "the option 'both' of the node 'hub' of the scene 's' leads back to its own node, so it's never offered.",     // its 'to', beside a check
             "the node 'gated' of the scene 's' has every option gated on flags, and no vote guarantees one of them is set: the party could be left with nothing to pick.",
         ], book.Warnings.Select(w => w[(w.IndexOf(": ", StringComparison.Ordinal) + 2)..]));
         Assert.All(book.Warnings, w => Assert.Contains("one.json", w, StringComparison.Ordinal));      // each names its file
         Assert.Empty(LoreBook.Empty.Warnings);
+    }
+
+    /// <summary>
+    /// Review A6: an option with both a <c>to</c> and a check names all three nodes, as <c>check.py</c> counts them, so the two agree on what
+    /// it leads to; where it goes is still the check's to decide.
+    /// </summary>
+    [Fact]
+    public void An_options_to_beside_a_check_is_one_of_its_targets()
+    {
+        var option = new SceneOption("o", "O.", "side", null, [], [], OptionTags.None, new SceneCheck("athletics", 10, "pass", "fail"));
+
+        Assert.Equal(["side", "pass", "fail"], option.Targets);
+        Assert.Equal(("pass", "fail"), (SceneRun.Target(option, passed: true), SceneRun.Target(option, passed: false)));
+        Assert.Equal(["pass", "fail"], (option with { To = null }).Targets);
+        Assert.Equal(["side"], (option with { Check = null }).Targets);
     }
 
     /// <summary>Scenes with no arcs to play them aren't read: as before, a pack with no <c>arcs.json</c> is the empty book.</summary>

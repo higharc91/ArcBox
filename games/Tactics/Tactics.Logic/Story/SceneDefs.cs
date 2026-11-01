@@ -35,9 +35,13 @@ public sealed record OptionTags(ImmutableArray<string> Background, ImmutableArra
 public sealed record SceneOption(string Id, string Label, string? To, string? Choice, ImmutableArray<string> Sets,
     ImmutableArray<string> Requires, OptionTags Tags, SceneCheck? Check)
 {
-    /// <summary>Every node this option can lead to: its <see cref="To"/>, or its check's pass and fail.</summary>
+    /// <summary>
+    /// Every node this option names: its <see cref="To"/>, then its check's pass and fail. A check decides where it goes (<see
+    /// cref="SceneRun.Target"/>), but a <see cref="To"/> written beside one is still a target here, as <c>check.py</c> counts it (review
+    /// A6): it must be a node of the scene, an option naming one already played isn't offered, and one naming its own node is warned of.
+    /// </summary>
     public IEnumerable<string> Targets
-        => Check is { } check ? [check.Pass, check.Fail] : To is { } to ? [to] : [];
+        => [.. To is { } to ? [to] : Array.Empty<string>(), .. Check is { } check ? [check.Pass, check.Fail] : Array.Empty<string>()];
 }
 
 /// <summary>

@@ -140,6 +140,9 @@ class CheckTests(unittest.TestCase):
                     {"id": "hub", "lines": [line("loops_1")], "options": [
                         {"id": "again", "label": "Again.", "to": "hub"},
                         {"id": "try", "label": "Try.", "check": {"skill": "athletics", "dc": 10, "pass": "out", "fail": "hub"}},
+                        # A 'to' beside a check counts as a target, as C#'s SceneOption.Targets has it (review A6).
+                        {"id": "both", "label": "Both.", "to": "hub",
+                         "check": {"skill": "athletics", "dc": 10, "pass": "out", "fail": "out"}},
                         {"id": "go", "label": "Go.", "to": "out"}]},
                     {"id": "out", "lines": [line("loops_2")], "end": True}]}]}))
             errors = check.check([FIXTURES / "valid" / "base", FIXTURES / "story", pack])
@@ -147,6 +150,7 @@ class CheckTests(unittest.TestCase):
         self.assertEqual(mine, [
             "/scenes/0/nodes/0/options/0: leads back to its own node 'hub', so it's never offered",
             "/scenes/0/nodes/0/options/1: leads back to its own node 'hub', so it's never offered",
+            "/scenes/0/nodes/0/options/2: leads back to its own node 'hub', so it's never offered",
         ])
 
     def test_art_keys_follow_the_rules_engine_harvest(self):
