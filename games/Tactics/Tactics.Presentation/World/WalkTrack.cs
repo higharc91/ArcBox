@@ -57,6 +57,7 @@ public sealed class WalkTrack
     private Vector2 _restFace = Vector2.UnitX;
     private bool _slotted;             // this rest's formation has been chosen
     private bool _seeded;              // someone else has said where this rest's followers stand
+    private Terrain? _rules;           // the ground the last Places stood on, for a follower finding its way back to the trail
 
     /// <summary>How far the leader has walked, in tiles, ever. It only goes up. A floor of this ticking over is a footstep.</summary>
     public double Walked { get; private set; }
@@ -131,8 +132,9 @@ public sealed class WalkTrack
         var skipped = MoveHead(seconds);
         Walked = AlongAt(_play);
         var moving = !Resting;
+        var setOff = _slotted && moving;
         _slotted &= !moving;
-        Trail(seconds, skipped, moving);
+        Trail(seconds, skipped, moving, setOff);
         Look(moving);
         Pose(seconds, moving);
     }
@@ -142,6 +144,7 @@ public sealed class WalkTrack
     {
         if (_path.Count == 0)
             return _places;
+        _rules = terrain.Rules;
         if (Resting && !_slotted)
             Fan(terrain);
 
@@ -371,8 +374,12 @@ public sealed class WalkTrack
 
     // ---- Followers -----------------------------------------------------------------------------------------------------
 
-    /// <summary>Moves everyone along the trail, then eases each off it to its place in the formation, or back onto it.</summary>
-    private void Trail(double seconds, bool skipped, bool moving)
+    /// <summary>
+    /// Moves everyone along the trail, then eases each off it to its place in the formation, or back onto it. On
+    /// <paramref name="setOff"/>, the first frame the party walks after a rest, a follower standing off the trail rejoins it where it's
+    /// nearest, not where it left it.
+    /// </summary>
+    private void Trail(double seconds, bool skipped, bool moving, bool setOff)
     {
         var ahead = Walked;
         for (var i = 0; i < _walkers.Count; i++)
@@ -383,6 +390,8 @@ public sealed class WalkTrack
             else
             {
                 ahead = Behind(ahead, out walker.Waiting);
+                if (setOff && !walker.Waiting && walker.Offset.LengthSquared() >= Nearly * Nearly)
+                    Rejoin(walker, ahead);
                 walker.Pace = walker.Offset.LengthSquared() < Rejoined * Rejoined ? Math.Min(walker.Pace + WorldTuning.FollowerPick * seconds, WorldTuning.FollowerMost) : 0;
                 var most = skipped ? double.MaxValue : moving ? walker.Pace * seconds : 0;
                 walker.Along = Math.Min(Math.Max(ahead, walker.Along), walker.Along + most);
@@ -407,6 +416,30 @@ public sealed class WalkTrack
             walker.At = trail + walker.Offset;
             walker.Stepped = walker.Offset.LengthSquared() < Nearly * Nearly ? walked : Vector2.Distance(was, walker.At);
         }
+    }
+
+    /// <summary>
+    /// Takes a follower who is off the trail to the place on it that's nearest, between where it left the trail and its place behind the
+    /// one ahead, and that it can walk to in a straight line. It doesn't move: only what it's walking back to does. Without this, a party
+    /// stopping every second (a flood of presses and releases, a phone that keeps losing its stop) sent each follower back to where it
+    /// left the trail, behind the party, every time it set off, and they fell further behind with each rest.
+    /// </summary>
+    private void Rejoin(Walker walker, double upTo)
+    {
+        if (_rules is not { } rules)
+            return;
+        var (best, nearest) = (walker.Along, Vector2.DistanceSquared(walker.At, PointAt(walker.Along)));
+        for (var along = walker.Along + LineStep; along < upTo + LineStep; along += LineStep)
+        {
+            var point = PointAt(Math.Min(along, upTo));
+            var gap = Vector2.DistanceSquared(walker.At, point);
+            if (gap < nearest && Clear(rules, walker.At, point))
+                (best, nearest) = (Math.Min(along, upTo), gap);
+        }
+        if (best == walker.Along)
+            return;
+        walker.Along = walker.Before = best;
+        (walker.Offset, walker.Drift) = (walker.At - PointAt(best), Vector2.Zero);
     }
 
     /// <summary>A critically damped spring, solved exactly, so that it moves the same at any frame rate and can be interrupted at any moment.</summary>

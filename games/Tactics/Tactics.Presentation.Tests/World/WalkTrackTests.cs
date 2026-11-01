@@ -294,6 +294,83 @@ public sealed class WalkTrackTests
         Assert.All(track.Poses.Values, p => Assert.Equal(Idle, p.Anim));
     }
 
+    // The flood bots.cjs --walk-flood makes: the leader's phone pressing and releasing at 60 messages a second, through the server's
+    // limiter of 20 a second, refilled once a second. A third of each second gets through, flickering, and ends on a release, so the party
+    // stops for most of every second. Each rest fans the followers out by the leader, and before Rejoin each set-off sent them back to
+    // where they'd left the trail: 20 tiles behind after 12 s, and walking backward to get there.
+    [Theory]
+    [InlineData(0)]
+    [InlineData(1)]
+    [InlineData(2)]
+    public void A_flood_of_stops_doesnt_leave_the_followers_behind(int seed)
+    {
+        var ground = Ground(200, 64);
+        var track = new WalkTrack();
+        var script = new Script(new Tile(5, 20));
+        track.Receive(script.Now(false));
+        Run(track, ground, 1);
+
+        var random = new Random(seed);
+        var (tokens, refill, nextMessage, press) = (20, 0.0, 0.0, true);
+        var (held, stepDue, leaseUntil) = (false, 0.0, 0.0);
+        var wire = new List<(double At, bool Held)>();
+        var furthest = new Dictionary<string, float>();
+        var (widest, backward) = (0f, 0f);
+        for (var now = 0.0; now < 12; now += Frame)
+        {
+            if (now >= refill)
+                (tokens, refill) = (20, refill + 1);
+            if (now >= nextMessage)
+            {
+                nextMessage += 1.0 / 60;
+                if (tokens > 0)
+                {
+                    tokens--;
+                    if (press)
+                    {
+                        leaseUntil = now + 0.75;
+                        if (!held && now >= stepDue)
+                            stepDue = now + script.Step(1, 0) / 1000.0;
+                        held = true;
+                    }
+                    else
+                        held = false;
+                    wire.Add((now + 0.005 + random.NextDouble() * 0.03, held));
+                }
+                press = !press;
+            }
+            if (held && now >= leaseUntil)
+                held = false;
+            if (held && now >= stepDue)
+            {
+                stepDue += script.Step(1, 0) / 1000.0;
+                wire.Add((now + 0.005 + random.NextDouble() * 0.03, true));
+            }
+            if (wire.Count > 0 && wire[0].At <= now)
+            {
+                var newest = wire.Last(w => w.At <= now).Held;
+                wire.RemoveAll(w => w.At <= now);
+                track.Receive(script.Now(newest));
+            }
+
+            track.Advance(Frame);
+            var places = track.Places(ground);
+            if (now < 3)
+                continue;     // they start fanned out from the opening rest
+            widest = Math.Max(widest, Vector2.Distance(places[Lead].Map, places["c"].Map));
+            foreach (var id in new[] { "b", "c" })
+            {
+                var x = places[id].Map.X;
+                furthest[id] = Math.Max(furthest.GetValueOrDefault(id, x), x);
+                backward = Math.Max(backward, furthest[id] - x);
+            }
+        }
+
+        Assert.True(script.Seq >= 20, $"the flood walked {script.Seq} steps");
+        Assert.True(widest < 2 * WorldTuning.Spacing + 2, $"the last follower got {widest:0.00} tiles from the leader");
+        Assert.True(backward < 0.3f, $"a follower walked {backward:0.00} tiles back the way the party came");
+    }
+
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
