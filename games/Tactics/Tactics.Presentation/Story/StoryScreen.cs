@@ -19,6 +19,13 @@ public sealed record StoryCaption(string Line, string? Speaker, HudPortrait? Por
 {
     /// <summary>The narrator's words: no name, no face, no quotes.</summary>
     public bool Narrator => Speaker is null;
+
+    /// <summary>By its words, row by row: the same line drawn again is equal, so the TV doesn't rebuild it (<see cref="Contents"/>).</summary>
+    public bool Equals(StoryCaption? other)
+        => other is not null && Line == other.Line && Speaker == other.Speaker && Equals(Portrait, other.Portrait)
+            && Contents.Same(Rows, other.Rows, Contents.Rows<CaptionRun>.Instance);
+
+    public override int GetHashCode() => HashCode.Combine(Line, Speaker, Portrait, Contents.Hash(Rows, Contents.Rows<CaptionRun>.Instance));
 }
 
 /// <summary>An option on the vote panel.</summary>
@@ -27,7 +34,15 @@ public sealed record StoryCaption(string Line, string? Speaker, HudPortrait? Por
 /// <param name="Label">What it says, in quotes, wrapped to <see cref="StoryScreen.LabelColumns"/>.</param>
 /// <param name="Detail">"Persuasion check · DC 15" for a check, else null.</param>
 /// <param name="Voters">Who voted for it, by name: the TV's alone (5d flag 7).</param>
-public sealed record VoteRow(string Id, string Letter, ImmutableArray<string> Label, string? Detail, ImmutableArray<string> Voters);
+public sealed record VoteRow(string Id, string Letter, ImmutableArray<string> Label, string? Detail, ImmutableArray<string> Voters)
+{
+    /// <summary>By its words and voters (<see cref="Contents"/>).</summary>
+    public bool Equals(VoteRow? other)
+        => other is not null && Id == other.Id && Letter == other.Letter && Detail == other.Detail && Contents.Same(Label, other.Label)
+            && Contents.Same(Voters, other.Voters);
+
+    public override int GetHashCode() => HashCode.Combine(Id, Letter, Detail, Contents.Hash(Label), Contents.Hash(Voters));
+}
 
 /// <summary>The question open, at the bottom right (mockup 02).</summary>
 /// <param name="Heading">"Party vote", "Leader's choice" or "Tie-break".</param>
@@ -43,6 +58,13 @@ public sealed record VotePanel(string Heading, bool Party, bool Tie, string? Clo
 {
     /// <summary>How tall the panel is drawn, in layout pixels.</summary>
     public float Height => VoteLayout.Height(Rows, Scale);
+
+    /// <summary>By what it shows, row by row (<see cref="Contents"/>): only a new clock, vote or tally tells two frames apart.</summary>
+    public bool Equals(VotePanel? other)
+        => other is not null && Heading == other.Heading && Party == other.Party && Tie == other.Tie && Clock == other.Clock && Tally == other.Tally
+            && Away == other.Away && Scale == other.Scale && Contents.Same(Rows, other.Rows);
+
+    public override int GetHashCode() => HashCode.Combine(Heading, Party, Tie, Clock, Tally, Away, Scale, Contents.Hash(Rows));
 }
 
 /// <summary>A character who can roll, as a card (mockup 03).</summary>
@@ -92,7 +114,15 @@ public sealed record RollReveal(string Roller, int Face, bool Landed, string Sum
 /// <param name="Clock">The countdown on picking who rolls, or null.</param>
 /// <param name="Footer">"Vote for who rolls · 2 voted", "2–2 tie, Sam decides", or null once rolled.</param>
 /// <param name="Roll">The roll, once made.</param>
-public sealed record CheckPanel(string Heading, string Skill, string Dc, string Title, ImmutableArray<CheckCard> Cards, string? Clock, string? Footer, RollReveal? Roll);
+public sealed record CheckPanel(string Heading, string Skill, string Dc, string Title, ImmutableArray<CheckCard> Cards, string? Clock, string? Footer, RollReveal? Roll)
+{
+    /// <summary>By what it shows, card by card (<see cref="Contents"/>).</summary>
+    public bool Equals(CheckPanel? other)
+        => other is not null && Heading == other.Heading && Skill == other.Skill && Dc == other.Dc && Title == other.Title && Clock == other.Clock
+            && Footer == other.Footer && Equals(Roll, other.Roll) && Contents.Same(Cards, other.Cards);
+
+    public override int GetHashCode() => HashCode.Combine(Heading, Skill, Dc, Title, Clock, Footer, Roll, Contents.Hash(Cards));
+}
 
 /// <summary>
 /// What the TV shows of a scene (overworld 5d §10), worded and laid out from mockups 02 and 03: the caption at the bottom left, the question

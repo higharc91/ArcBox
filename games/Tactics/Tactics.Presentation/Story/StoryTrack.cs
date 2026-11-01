@@ -63,6 +63,7 @@ public sealed class StoryTrack(VoiceClips? clips, HudArt? art = null, SpeechFall
     private bool _resumed;
     private (int Seq, string State, string? Skill, bool Asking)? _question;
     private double _revealed = double.PositiveInfinity;
+    private (StoryView View, string? Clock, double Revealed)? _drawn;
 
     /// <summary>The track's newest line number, or null before its first view.</summary>
     public int? Seq { get; private set; }
@@ -215,5 +216,16 @@ public sealed class StoryTrack(VoiceClips? clips, HudArt? art = null, SpeechFall
         return seen;
     }
 
-    private StoryScreen Draw() => StoryScreen.Of(_view!, art, _clock.Text, _revealed);
+    /// <summary>
+    /// The screen for the view, the clock's words and the die's time. A frame that changes none of them keeps the screen it had, so the
+    /// caption isn't wrapped again; a screen drawn again is equal anyway (<see cref="Contents"/>), which is what the TV's boards check.
+    /// </summary>
+    private StoryScreen Draw()
+    {
+        var clock = _clock.Text;
+        if (Screen is { } screen && _drawn is var (view, words, revealed) && ReferenceEquals(view, _view) && words == clock && revealed.Equals(_revealed))
+            return screen;
+        _drawn = (_view!, clock, _revealed);
+        return StoryScreen.Of(_view!, art, clock, _revealed);
+    }
 }

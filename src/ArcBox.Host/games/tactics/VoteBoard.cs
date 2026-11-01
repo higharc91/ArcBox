@@ -71,8 +71,8 @@ public sealed partial class VoteBoard : Control
         _panel.Position = new Vector2(StoryArt.Layout.X - StoryArt.Margin - VoteLayout.Width, StoryArt.Layout.Y - StoryArt.Margin - _panel.Size.Y);
     }
 
-    /// <summary>A view that changes only the clock keeps its rows.</summary>
-    private static bool SameRows(VotePanel a, VotePanel b) => a.Scale == b.Scale && a.Rows.SequenceEqual(b.Rows, RowComparer.Instance);
+    /// <summary>A view that changes only the clock keeps its rows (a <see cref="VoteRow"/> compares by what it shows).</summary>
+    private static bool SameRows(VotePanel a, VotePanel b) => a.Scale == b.Scale && a.Rows.SequenceEqual(b.Rows);
 
     private void Fill(VotePanel vote)
     {
@@ -129,15 +129,4 @@ public sealed partial class VoteBoard : Control
     }
 
     private static int Px(int size, float scale) => Math.Max(12, (int)MathF.Round(size * scale));
-
-    private sealed class RowComparer : IEqualityComparer<VoteRow>
-    {
-        public static readonly RowComparer Instance = new();
-
-        public bool Equals(VoteRow? a, VoteRow? b)
-            => a is not null && b is not null && a.Id == b.Id && a.Letter == b.Letter && a.Detail == b.Detail && a.Label.SequenceEqual(b.Label)
-                && a.Voters.SequenceEqual(b.Voters);
-
-        public int GetHashCode(VoteRow row) => row.Id.GetHashCode(StringComparison.Ordinal);
-    }
 }

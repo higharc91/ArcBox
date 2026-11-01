@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using Tactics.Game;
 using Tactics.Logic;
 using Tactics.Presentation.Story;
@@ -573,6 +574,119 @@ public sealed class StoryTrackTests
         return views;
     }
 
+    // ---- The no-rebuild contract: the TV's boards redraw only when what they show changes ------------------------------------------
+
+    /// <summary>
+    /// The TV ticks the track every frame, and its boards skip a screen equal (<c>==</c>) to the one up. So two frames with nothing new must
+    /// give equal parts, or every word label is torn down and made again each frame.
+    /// </summary>
+    [Fact]
+    public void Two_frames_of_a_line_give_an_equal_caption()
+    {
+        var track = Running();
+        track.Receive(Showing(2, Line("ch1_mayor_open_2")), T0);
+
+        var a = track.Tick(1 / 60.0).Screen!;
+        var b = track.Tick(1 / 60.0).Screen!;
+
+        Assert.True(a.Caption == b.Caption);
+        Assert.True(a == b);
+        Assert.Same(a, b);                                                // nothing new: not even wrapped again
+    }
+
+    [Fact]
+    public void Two_frames_of_a_question_give_an_equal_caption_and_vote_until_the_clock_moves()
+    {
+        var track = Running();
+        var ask = Ask(true, 1, 3, [Option("a", "Yes, gladly.", "Jess"), Check("b", "Pay him, then.", "persuasion", 15, "Priya", "Sam")],
+            away: ["Dave"], deadline: T0.AddSeconds(20));
+        track.Receive(Showing(2, Line("ch1_mayor_halden_4"), States.Asking, ask), T0);
+
+        var a = track.Tick(0.1).Screen!;
+        var b = track.Tick(0.1).Screen!;
+        Assert.True(a.Caption == b.Caption);
+        Assert.True(a.Vote == b.Vote);
+
+        var later = track.Tick(1).Screen!;                                // a second on: only the clock's words change
+        Assert.False(b.Vote == later.Vote);
+        Assert.True(b.Vote! with { Clock = later.Vote!.Clock } == later.Vote);
+        Assert.True(b.Caption == later.Caption);
+    }
+
+    [Fact]
+    public void Two_frames_of_picking_who_rolls_give_an_equal_check()
+    {
+        var track = Running();
+        track.Receive(Showing(2, Line("ch1_mayor_halden_4"), States.PickRoller,
+            check: new StoryCheckView("persuasion", 15, "First, what's it worth to you?", Cards(), null, null, Deadline: T0.AddSeconds(20))), T0);
+
+        var a = track.Tick(0.1).Screen!;
+        var b = track.Tick(0.1).Screen!;
+
+        Assert.True(a.Check == b.Check);
+    }
+
+    [Fact]
+    public void Two_frames_of_a_landed_roll_give_an_equal_check()
+    {
+        var track = Running();
+        track.Receive(Rolled(2, Cards(), die: 14), T0);                   // joined mid-roll: shown landed
+
+        var a = track.Tick(1 / 60.0).Screen!;
+        var b = track.Tick(1 / 60.0).Screen!;
+
+        Assert.True(a.Check == b.Check);
+    }
+
+    [Fact]
+    public void The_same_view_drawn_twice_gives_equal_parts_with_equal_hashes()
+    {
+        var ask = Ask(true, 1, 3, [Option("a", "Yes, gladly.", "Jess"), Option("b", "No.")], away: ["Dave"], deadline: T0.AddSeconds(20));
+        var asking = Showing(2, Line("ch1_mayor_halden_4"), States.Asking, ask);
+        var picking = Showing(3, Line("ch1_mayor_halden_4"), States.PickRoller,
+            check: new StoryCheckView("persuasion", 15, "First, what's it worth to you?", Cards(), null, null, Deadline: T0.AddSeconds(20)));
+
+        foreach (var view in new[] { asking, picking, Rolled(4, Cards(), die: 7) })
+        {
+            var (a, b) = (StoryScreen.Of(view, Art, "0:12"), StoryScreen.Of(view, Art, "0:12"));
+            Assert.Equal(a, b);
+            Assert.Equal(a.GetHashCode(), b.GetHashCode());
+            Assert.Equal(a.Caption?.GetHashCode(), b.Caption?.GetHashCode());
+            Assert.Equal(a.Vote?.GetHashCode(), b.Vote?.GetHashCode());
+            Assert.Equal(a.Check?.GetHashCode(), b.Check?.GetHashCode());
+        }
+    }
+
+    [Fact]
+    public void What_changes_on_a_board_still_tells_it_apart()
+    {
+        var options = ImmutableArray.Create(Option("a", "Yes.", "Jess"), Option("b", "No."));
+        var view = Showing(2, Line("ch1_mayor_halden_4"), States.Asking, Ask(true, 1, 2, options, deadline: T0.AddSeconds(20)));
+        var screen = StoryScreen.Of(view, Art, "0:12");
+
+        var voted = StoryScreen.Of(view with { Ask = view.Ask! with { Options = [Option("a", "Yes.", "Jess"), Option("b", "No.", "Sam")] } }, Art, "0:12");
+        Assert.NotEqual(screen.Vote, voted.Vote);                          // another voter's pip
+        var relabelled = StoryScreen.Of(view with { Ask = view.Ask! with { Options = [Option("a", "Yes.", "Jess"), Option("b", "Never.")] } }, Art, "0:12");
+        Assert.NotEqual(screen.Vote, relabelled.Vote);                     // another option's words
+        var reworded = StoryScreen.Of(view with { Line = view.Line! with { Text = "Will you help?" } }, Art, "0:12");
+        Assert.NotEqual(screen.Caption, reworded.Caption);                 // another line's words, same id
+        var told = StoryScreen.Of(view with { Line = view.Line! with { Text = "Will you help?" }, Ask = null, State = States.Lines }, Art);
+        Assert.NotEqual(reworded.Caption, told.Caption);                    // the same words, but the question no longer lit
+
+        var cards = Cards();
+        var check = StoryScreen.Of(Rolled(4, cards, die: 7), Art);
+        var revoted = StoryScreen.Of(Rolled(4, [cards[0], cards[1] with { Votes = 3 }], die: 7), Art);
+        Assert.NotEqual(check.Check, revoted.Check);                       // a card's votes
+    }
+
+    /// <summary>These compare by hand (their arrays by what they hold): a field added to one must be added to its Equals and GetHashCode.</summary>
+    [Theory]
+    [InlineData(typeof(StoryCaption), "Line Speaker Portrait Rows Narrator")]
+    [InlineData(typeof(VoteRow), "Id Letter Label Detail Voters")]
+    [InlineData(typeof(VotePanel), "Heading Party Tie Clock Rows Tally Away Scale Height")]
+    [InlineData(typeof(CheckPanel), "Heading Skill Dc Title Cards Clock Footer Roll")]
+    public void A_board_compared_by_hand_has_the_fields_its_equality_reads(Type type, string fields)
+        => Assert.Equal(fields, string.Join(" ", type.GetProperties().Where(p => p.DeclaringType == type && p.Name != "EqualityContract").Select(p => p.Name)));
 
     private static System.Collections.Immutable.ImmutableArray<StoryCardView> Cards()
         => [Card("pr_a", "Kara", "Jess", 1), Card("pr_b", "Wren", "Priya", 5, "Proficient · CHA 14", votes: 2)];
