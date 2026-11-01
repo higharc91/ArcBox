@@ -36,6 +36,10 @@ The app prints `ROOM <CODE>` on stdout whenever it creates or resumes a room, so
 `tools/tv-e2e.sh` uses that to run the TV, the server and bot phones together and collect screenshots from both
 ([`redline-tv.md`](redline-tv.md#toolstv-e2esh-tv-server-and-phones-together)).
 
+Saving a shot stalls the frame it's taken on, so don't judge hitches or frame times from a run with `--shots`: on an RTX 5080 a
+fight's start took 216 ms with shots and 2 to 5 ms without. `ARCBOX_SHOTS=0 tools/tv-e2e.sh` runs the TV without them (and skips
+the checks for them); add `TV_ARGS=--perf` for the frame times.
+
 ## Arguments
 
 Everything after `--` on the Godot command line; all optional.
