@@ -25,6 +25,8 @@ public static class GroundGrade
         ["grass/dry"] = new(0.84f, 0.82f, 0.76f),
         ["grass/frost"] = new(0.72f, 0.8f, 0.8f),
         ["grass/lush"] = new(1.14f, 0.68f, 1.12f),
+        ["rock/grey"] = new(0.74f, 0.82f, 0.8f),
+        ["rock/dark"] = new(0.74f, 0.82f, 0.8f),
         ["water/clear"] = new(0.72f, 0.82f, 0.84f),
     }.ToImmutableDictionary(StringComparer.Ordinal);
 

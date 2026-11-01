@@ -161,7 +161,7 @@ public static class AshenFordDraft
         new("clutter_crates", "oak", 42, 73), new("clutter_barrels", "oak", 45, 73),
 
         // Clutter down the lanes.
-        new("clutter_barrels", "oak", 17, 60), new("clutter_crates", "oak", 42, 60), new("clutter_produce", "mixed", 20, 66),
+        new("clutter_barrels", "oak", 17, 60), new("clutter_crates", "oak", 42, 60), new("clutter_produce", "mixed", 17, 66),
         new("clutter_crates", "oak", 45, 54), new("clutter_barrels", "oak", 23, 66),
     ];
 
@@ -208,23 +208,81 @@ public static class AshenFordDraft
         new("sack", "burlap", (39, 72), (42, 71), (43, 71), (44, 70), (39, 70)),                    // the granary yard
         new("crate", "oak", (41, 71)),
         new("cart", "hay", (45, 70)),
-        new("fence_picket", "oak", (38, 69), (39, 69), (40, 69), (43, 69), (44, 69), (45, 69), (46, 69)),
+        new("fence", "oak", (38, 69), (39, 69), (40, 69), (43, 69), (44, 69), (45, 69), (46, 69)),
         new("tree", "autumn", (46, 57), (16, 57), (19, 70), (36, 51), (20, 51), (16, 50)),
     ];
 
     /// <summary>What stands, of one kind, on these tiles.</summary>
     private sealed record Stand(string Id, string? Variant, params (int X, int Y)[] At);
 
-    /// <summary>Trees by the road, thinning as it nears the fire.</summary>
-    private static readonly Stand[] RoadEast =
+    /// <summary>The farms outside the walls: one mill, one steading, fences along the field edges with a gap to walk through, and hay on the stubble.</summary>
+    private static readonly Building[] OnTheFarms =
     [
-        new("tree", "autumn", (64, 24), (66, 19), (72, 8), (78, 12), (75, 25), (85, 22)),
-        new("dead_tree", "grey", (84, 41), (92, 40)),
-        new("pine", "green", (70, 26), (72, 28), (74, 30), (76, 32), (72, 24), (74, 26), (76, 28), (78, 30), (70, 30), (72, 32), (74, 34), (68, 28)),
+        new("windmill", "stone", 49, 35),
+        new("cottage", "thatch_red", 29, 84),       // the reeve's
+    ];
+
+    /// <summary>The ground a building out on the land stands on, made flat: left, top, width, depth and height.</summary>
+    private static readonly (int X, int Y, int W, int D, int Height)[] Levelled = [(48, 34, 5, 6, TownLevel), (28, 83, 4, 5, TownLevel)];
+
+    /// <summary>A straight run of something, from one end to the other, every <paramref name="Step"/> tiles.</summary>
+    private static (int X, int Y)[] Run((int X, int Y) from, (int X, int Y) to, int step = 1)
+    {
+        var count = Math.Max(Math.Abs(to.X - from.X), Math.Abs(to.Y - from.Y)) / step;
+        return [.. Enumerable.Range(0, count + 1).Select(i => (from.X + Math.Sign(to.X - from.X) * i * step, from.Y + Math.Sign(to.Y - from.Y) * i * step))];
+    }
+
+    private static readonly Stand[] InTheFields =
+    [
+        new("fence", "oak", [.. Run((34, 33), (39, 33)), .. Run((42, 33), (46, 33))]),              // between Long Acre and Gate Close
+        new("fence", "oak", [.. Run((18, 43), (23, 43)), .. Run((26, 43), (31, 43))]),              // under Hearthfield
+        new("fence", "oak", [.. Run((16, 81), (21, 81)), .. Run((24, 81), (28, 81))]),              // along Southfield
+        new("fence", "oak", [.. Run((42, 82), (46, 82)), .. Run((48, 82), (50, 82))]),              // along Low Field
+        new("fence", "oak", (28, 88), (29, 88), (30, 88)),                                          // the reeve's yard
+        new("haystack", "hay", (37, 11), (41, 14), (44, 10), (38, 17), (21, 36), (26, 38), (29, 35), (19, 85), (24, 88), (20, 91), (26, 84), (45, 87), (48, 91)),
+        new("training_dummy", "straw", (40, 28), (37, 87)),                                         // scarecrows
+        new("cart", "hay", (48, 23)),
+        new("well", "stone", (30, 89)),
+        new("torch", "fire", (28, 87)),
+        new("tree", "autumn", (47, 7), (47, 21), (16, 43), (15, 81), (41, 96)),
+    ];
+
+    /// <summary>The road east: a signpost at each fork, a cart or two left on the verge, a wall of the scarp's crags to its west.</summary>
+    private static readonly Stand[] OnTheRoad =
+    [
+        new("signpost", "oak", (51, 63), (66, 9), (88, 49)),
+        new("cart", "oak", (53, 30), (92, 41)),
+        new("crag", "grey", (56, 62), (58, 50), (60, 40), (63, 32), (58, 74), (57, 88), (56, 100)),
+        new("rock_cluster", "grey", (59, 56), (57, 66), (61, 36), (58, 82), (57, 94), (66, 24)),
+        new("rock_large", "grey", (53, 72), (52, 84)),
+    ];
+
+    /// <summary>A wood: its trees stand about every <paramref name="Every"/> tiles inside <paramref name="Outline"/>, jittered, clear of the roads, and of <see cref="WoodPaths"/>.</summary>
+    private sealed record Wood(string Name, int Every, (string Id, string? Variant)[] Trees, (double X, double Y)[] Outline, bool Floor = false);
+
+    /// <summary>Living woods far from the fire, thinning to dead standing timber by the ford.</summary>
+    private static readonly Wood[] Woods =
+    [
+        new("Scarpfoot Wood", 2, [("pine", "green"), ("tree", "autumn"), ("pine", "green")], [(65, 22), (73, 20), (79, 28), (80, 38), (74, 46), (67, 46), (64, 34)], Floor: true),
+        new("Bridgewood", 2, [("tree", "autumn"), ("pine", "green"), ("tree", "autumn")], [(82, 4), (100, 5), (98, 18), (91, 24), (86, 18)], Floor: true),
+        new("Cinder Wood", 3, [("dead_tree", "grey"), ("dead_tree", "dark")], [(66, 52), (82, 50), (86, 60), (84, 80), (72, 96), (64, 88)]),
+        new("Black Stand", 5, [("dead_tree", "dark"), ("dead_tree", "grey")], [(120, 72), (146, 66), (152, 86), (146, 106), (124, 110), (118, 96)]),
+    ];
+
+    /// <summary>The share of a wood's spots with no tree, so it's never a wall.</summary>
+    private const double WoodGaps = 0.15;
+
+    /// <summary>Ways through the woods, a tile or so each side, so a party can walk them: left along the wood's length, not across it.</summary>
+    private static readonly Line[] WoodPaths =
+    [
+        new((80.0, 26.0), (72.0, 34.0), (70.0, 46.0)),
+        new((90.0, 12.0), (92.0, 24.0)),
+        new((74.0, 50.0), (78.0, 66.0), (72.0, 88.0)),
+        new((130.0, 72.0), (140.0, 90.0), (128.0, 106.0)),
     ];
 
     /// <summary>All of it, place by place.</summary>
-    private static readonly Stand[] Everything = [.. InEmberwick, .. RoadEast];
+    private static readonly Stand[] Everything = [.. InEmberwick, .. InTheFields, .. OnTheRoad];
 
     /// <summary>The party starts on the square, in front of the inn.</summary>
     private static readonly Tile StartSpawn = new(26, 58);
@@ -258,6 +316,7 @@ public static class AshenFordDraft
         land.RaiseHills();
         land.CutWater();
         land.PlantFields();
+        land.Level();
         land.BuildTown();
         land.BuildDocks();
         foreach (var road in Roads)
@@ -277,7 +336,7 @@ public static class AshenFordDraft
         land.CopyTo(source);
         source.Stamp(crossing, StampAt, WaterLevel);
         source.Beats.AddRange(Spots.Select(s => new BeatSpot(s.Beat, new Tile(s.X, s.Y))));
-        source.Buildings.AddRange(Emberwick.Concat(TownWall()).Select(b => new RegionBuilding(b.Id, b.Variant, new Tile(b.X, b.Y))));
+        source.Buildings.AddRange(Emberwick.Concat(TownWall()).Concat(OnTheFarms).Select(b => new RegionBuilding(b.Id, b.Variant, new Tile(b.X, b.Y))));
         return source;
     }
 
@@ -287,8 +346,46 @@ public static class AshenFordDraft
         if (source.Props.Count > 0)
             throw new InvalidOperationException("The scene already has props.");
 
+        var placed = new Dictionary<Tile, (string Id, string? Variant)>();
         foreach (var stand in Everything)
-            source.Props.Add(new RegionProps(stand.Id, stand.Variant, [.. stand.At.Select(t => new Tile(t.X, t.Y))]));
+            foreach (var (x, y) in stand.At)
+                placed.TryAdd(new Tile(x, y), (stand.Id, stand.Variant));
+        PlantWoods(source, placed);
+        foreach (var group in placed.GroupBy(p => p.Value))
+            source.Props.Add(new RegionProps(group.Key.Id, group.Key.Variant, [.. group.Select(p => p.Key).Order()]));
+    }
+
+    /// <summary>Stands each wood's trees in its outline, each on its own spot of a grid, moved a tile or so. Only this is seeded.</summary>
+    private static void PlantWoods(RegionSource source, Dictionary<Tile, (string Id, string? Variant)> placed)
+    {
+        var random = new Random(Seed);
+        var roads = Roads.Concat(Tracks).Select(r => r.Line).Concat(WoodPaths).ToArray();
+        foreach (var wood in Woods)
+        {
+            var (left, right) = ((int)wood.Outline.Min(p => p.X), (int)wood.Outline.Max(p => p.X));
+            var (top, bottom) = ((int)wood.Outline.Min(p => p.Y), (int)wood.Outline.Max(p => p.Y));
+            for (var y = top; y <= bottom; y += wood.Every)
+                for (var x = left; x <= right; x += wood.Every)
+                {
+                    var tile = new Tile(x + random.Next(wood.Every / 2 + 1), y + random.Next(wood.Every / 2 + 1));
+                    var tree = wood.Trees[random.Next(wood.Trees.Length)];
+                    if (random.NextDouble() < WoodGaps)
+                        continue;
+                    if (Inside(wood.Outline, tile.X, tile.Y) && source.Get(tile) is { Flags: TileFlags.None } ground && !RoadMaterials.Contains(ground.Material)
+                        && ground.Material != Quay && roads.All(r => r.Nearest(tile.X, tile.Y).Distance > 2.5))
+                        placed.TryAdd(tile, tree);
+                }
+        }
+    }
+
+    /// <summary>Whether a point's inside an outline.</summary>
+    private static bool Inside((double X, double Y)[] outline, double x, double y)
+    {
+        var inside = false;
+        for (var (i, j) = (0, outline.Length - 1); i < outline.Length; j = i++)
+            if ((outline[i].Y > y) != (outline[j].Y > y) && x < (outline[j].X - outline[i].X) * (y - outline[i].Y) / (outline[j].Y - outline[i].Y) + outline[i].X)
+                inside = !inside;
+        return inside;
     }
 
     private static double Smooth(double t)
@@ -461,7 +558,7 @@ public static class AshenFordDraft
         {
             foreach (var (x, y) in Everywhere())
             {
-                var height = FarBank(x, y) ? 2 : 2 + (Rough(x, y, 40, 6) > 0.5 ? 1 : 0);
+                var height = FarBank(x, y) || x > 64 ? 2 : 2 + (Rough(x, y, 40, 6) > 0.5 ? 1 : 0);
                 Paint(x, y, height, Ring(x, y));
             }
         }
@@ -547,6 +644,21 @@ public static class AshenFordDraft
                 }
         }
 
+        /// <summary>The flats for what stands out on the land, and a wood's floor of needles where it has one.</summary>
+        public void Level()
+        {
+            foreach (var (left, top, width, depth, height) in Levelled)
+                foreach (var (x, y) in Rectangle(left, top, width, depth))
+                {
+                    _heights[x, y] = height;
+                    _fixed[x, y] = true;
+                }
+
+            foreach (var wood in Woods.Where(w => w.Floor))
+                foreach (var (x, y) in Everywhere().Where(t => Inside(wood.Outline, t.X, t.Y) && Walkable(t.X, t.Y)))
+                    _materials[x, y] = Needles;
+        }
+
         /// <summary>Emberwick's ground, flat so that a building stands square on it: grass in the yards, its streets and its square.</summary>
         public void BuildTown()
         {
@@ -590,7 +702,8 @@ public static class AshenFordDraft
                 {
                     if (!IsWater(x, y) && !_fixed[x, y])
                     {
-                        Paint(x, y, level, road.Verge);
+                        // Worn earth on the farmland, burned earth nearer the fire.
+                        Paint(x, y, level, road.Verge == Scorch && Ring(x, y) == Thin ? Ploughed : road.Verge);
                         _fixed[x, y] = true;
                     }
                 }

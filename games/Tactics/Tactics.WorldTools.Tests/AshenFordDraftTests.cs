@@ -724,6 +724,48 @@ public sealed class AshenFordDraftTests
         Assert.True(edges < ground.Count / 5.0, $"{edges} of {ground.Count} tiles change material at their edge.");
     }
 
+    private static IEnumerable<(Tile At, string Id, string? Variant)> Props(RegionSource source) => source.Props.SelectMany(p => p.At.Select(t => (t, p.Id, p.Variant)));
+
+    [Fact]
+    public void Nothing_stands_on_water_or_in_rock_or_inside_a_building()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var built = source.Buildings.SelectMany(b => Footprint(draft.Pack.Art!.Buildings[b.Id], b.At)).ToHashSet();
+
+        foreach (var (at, id, _) in Props(source))
+        {
+            var tile = source.Get(at);
+            Assert.True(tile is not null && (tile.Flags & (TileFlags.Water | TileFlags.Impassable)) == 0 || id is "crag" or "rock_cluster", $"The {id} at {at} stands on {tile}.");
+            Assert.False(built.Contains(at), $"The {id} at {at} is inside a building.");
+        }
+    }
+
+    [Fact]
+    public void The_fields_have_their_fences_hay_and_a_mill()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        Assert.Single(source.Buildings, b => b.Id == "windmill");
+        var fields = source.Tiles.Where(t => t.Value.Material is "grass/autumn" or "dirt/brown").Select(t => t.Key).ToHashSet();
+        Assert.True(Props(source).Count(p => p.Id == "haystack" && fields.Contains(p.At)) >= 10);
+        Assert.True(Props(source).Count(p => p.Id == "fence") >= 30);
+    }
+
+    [Fact]
+    public void A_wood_is_dense_enough_to_be_one_and_the_road_through_it_stays_open()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var trees = Props(source).Where(p => p.Id is "tree" or "pine" or "dead_tree").Select(p => p.At).ToHashSet();
+        Assert.True(trees.Count >= 150, $"{trees.Count} trees.");
+        var woods = source.Tiles.Keys.Where(t => Distance(t, new Tile(72, 34)) <= 6).ToList();
+        Assert.True(woods.Count(trees.Contains) >= 12);
+    }
+
     [Fact]
     public void The_hills_climb_in_terraces_to_the_camp()
     {

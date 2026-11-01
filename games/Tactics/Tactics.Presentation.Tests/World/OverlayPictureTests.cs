@@ -301,7 +301,7 @@ public sealed class OverlayPictureTests
     private static Tile StandingTree()
     {
         var terrain = FordGround.Value.Terrain;
-        return Ford.Value.Plan.Blocks.SelectMany(b => b.Plan.Items).OfType<Sprite>().Where(s => s.IsTallProp).Select(s => s.Tile)
+        return Ford.Value.Plan.Blocks.SelectMany(b => b.Plan.Items).OfType<Sprite>().Where(s => s.IsTallProp && s.Image.Path.Contains("tree", StringComparison.Ordinal)).Select(s => s.Tile)
             .First(t => terrain.Walkable(t with { Y = t.Y - 1 }) && terrain.Walkable(t with { Y = t.Y + 1 }));
     }
 
