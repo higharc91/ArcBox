@@ -9,8 +9,8 @@ namespace Tactics.Presentation.Audio;
 public sealed record MusicCue(string Id, string? Then = null);
 
 /// <summary>
-/// What plays for each screen, from the host view. A fight's music goes by its encounter. The manifest's town and regional tracks
-/// aren't here, as the TV has no screen for them yet. Pure: a test holds every id here against the manifest.
+/// What plays for each screen, from the host view. A fight's music goes by its encounter, and walking's by its region, as the
+/// manifest's own notes give them. Pure: a test holds every id here against the manifest.
 /// </summary>
 public static class MusicChoice
 {
@@ -22,12 +22,18 @@ public static class MusicChoice
     private const string Victory = "victory";
     private const string Defeat = "defeat";
     private const string Camp = "camp";
+    private const string Emberwick = "town_emberwick";
 
     private static readonly ImmutableDictionary<string, string> Fights = new Dictionary<string, string>
     {
         ["warlord_bridge"] = Boss,
         ["keep_gate"] = Boss,
         ["hall_of_the_flame"] = Finale,
+    }.ToImmutableDictionary();
+
+    private static readonly ImmutableDictionary<string, string> Regions = new Dictionary<string, string>
+    {
+        ["ashen_ford"] = Emberwick,
     }.ToImmutableDictionary();
 
     private static readonly ImmutableDictionary<string, string> Beds = new Dictionary<string, string>
@@ -42,7 +48,7 @@ public static class MusicChoice
     }.ToImmutableDictionary();
 
     /// <summary>Every track named here.</summary>
-    public static IEnumerable<string> Ids => [Title, Explore, Fight, Boss, Finale, Victory, Defeat, Camp];
+    public static IEnumerable<string> Ids => [Title, Explore, Fight, Boss, Finale, Victory, Defeat, Camp, Emberwick];
 
     /// <summary>The music for <paramref name="view"/>, or null to leave what's playing, as across a server restart.</summary>
     public static MusicCue? Of(TacticsHostView view)
@@ -52,7 +58,8 @@ public static class MusicChoice
         return phase switch
         {
             TacticsPhase.Muster => new MusicCue(Title),
-            TacticsPhase.EncounterPick or TacticsPhase.Exploration => new MusicCue(Explore),
+            TacticsPhase.EncounterPick => new MusicCue(Explore),
+            TacticsPhase.Exploration => new MusicCue(view.Explore is { } explore ? Regions.GetValueOrDefault(explore.Region, Explore) : Explore),
             TacticsPhase.Battle when view.Battle is { } battle => new MusicCue(Fights.GetValueOrDefault(battle.Encounter, Fight)),
             TacticsPhase.Results => view.Outcome switch
             {

@@ -12,6 +12,7 @@ using Tactics.Presentation.Audio;
 using Tactics.Presentation.Beats;
 using Tactics.Presentation.Board;
 using Tactics.Presentation.Hud;
+using Tactics.Presentation.World;
 
 namespace ArcBox.Host.Games.Tactics;
 
@@ -24,6 +25,11 @@ namespace ArcBox.Host.Games.Tactics;
 /// That goes for the HUD too (<see cref="HudLayer"/>).
 /// Each beat that finishes sends <c>shown</c>. That only ever shortens the game's wait, so nothing here can hold the game up.
 /// </para>
+/// <para>
+/// In Exploration, the world (<see cref="WorldCanvas"/>) stands in for all of that. A view only feeds <see cref="WalkShow"/>, and the picture
+/// moves on every frame in <see cref="WalkOn"/>, whether a view came or not. The world is built the first time it's wanted, and only once; it's kept out of
+/// the way behind a fight or a list, and goes when the scene does.
+/// </para>
 /// </summary>
 public partial class TacticsScene : Control, IGameScene, IContentScene, ISignalingScene, IAudioScene
 {
@@ -35,6 +41,11 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     /// <summary>How many screenshots <c>--shots</c> takes of each kind of moment.</summary>
     private const int ShotsPerMoment = 6;
 
+    /// <summary>With <c>--shots</c>, how many shots a walk leaves of the party on the move and at a stop, and how far apart and how long after stopping.</summary>
+    private const int WalkShots = 24;
+    private const double TilesBetweenShots = 24;
+    private const double RestBeforeShot = 1.6;
+
     private Label _meta = null!;
     private Label _title = null!;
     private Label _level = null!;
@@ -44,6 +55,21 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private Label _empty = null!;
     private Control _header = null!;
     private Control _table = null!;
+    private Control _backdrop = null!;
+    private WorldCanvas? _world;
+    private string? _worldRegion;
+    private string? _unreadableWorld;
+    private WalkShow? _walk;
+    private WorldHud? _worldHud;
+    private ExploreView? _explore;
+    private WalkStats? _walkStats;
+    private PhaseScreen? _screen;
+    private bool _revealed;
+    private double _shotAt;
+    private double _stillFor;
+    private double _lastWalked;
+    private int _walkShots;
+    private Tone? _titleTone;
     private BoardCanvas _board = null!;
     private HudLayer? _hud;
     private BattleHud? _said;
@@ -79,6 +105,9 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     /// <summary><c>--beat-log</c>: print a <c>BEAT</c> line with each beat's timing.</summary>
     public bool LogBeats { get; set; }
 
+    /// <summary><c>--walk-log</c>: print a <c>WALK</c> line for each step, and how smooth the walking was.</summary>
+    public bool LogWalks { get; set; }
+
     public void SetNarrator(Narrator narrator) => _narrator = narrator;
 
     public void SetShots(Screenshotter? shots) => _shots = shots;
@@ -94,6 +123,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     public override void _Ready()
     {
         var column = ShellLayout.Frame(this, 24);
+        _backdrop = GetChild<Control>(0);
 
         _meta = ArcTheme.Meta(Brand.Name);
         _title = ArcTheme.Label("", ArcTheme.Bold, 42);
@@ -153,6 +183,105 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         if (_loop is not null && _board.Visible)
         {
             _loop.Step(delta);
+        }
+        if (_world is { Suspended: false } world)
+        {
+            WalkOn(world, delta);
+        }
+    }
+
+    /// <summary>A frame of walking: everything that moves, moved. It touches no node that isn't moving, and it doesn't wait for anything.</summary>
+    private void WalkOn(WorldCanvas world, double delta)
+    {
+        if (world.Now == WorldCanvas.Stage.Failed)
+        {
+            _unreadableWorld = _worldRegion;
+            CloseWorld();
+            if (_screen is { } screen)
+            {
+                Show(screen);
+            }
+            return;
+        }
+        if (world.Plan is not { } plan || _unitArt is not { } art)
+        {
+            return;
+        }
+        if (_walk is null)
+        {
+            _walk = new WalkShow(plan.Terrain, art, _sound);
+            _walk.Receive(_explore!);
+        }
+
+        var frame = _walk.Frame(delta);
+        if (frame.Cut)
+        {
+            GD.Print(FormattableString.Invariant($"TACTICS walk snapped to {frame.Tile.X:0.0} {frame.Tile.Y:0.0}"));
+        }
+        world.Place(frame.Fit);
+        world.Aim(frame.Tile, frame.Velocity);
+        world.ShowUnits(frame.Units, art);
+        if (frame.Footstep is { } step)
+        {
+            _audio.Play(step, WorldTuning.FootstepDb);
+        }
+        if (_worldHud is { } hud)
+        {
+            hud.Visible = world.Now == WorldCanvas.Stage.Open;
+            hud.Clear(frame.Units, frame.Fit);
+        }
+        WalkMoments(world, frame, delta);
+    }
+
+    private void WalkMoments(WorldCanvas world, WalkFrame frame, double delta)
+    {
+        if (!_revealed && world.Revealed)
+        {
+            _revealed = true;
+            GD.Print($"TACTICS world open: {world.BuildTimes}, {world.Waiting} blocks to record, {WorldCanvas.MemoryText()}");
+            _shots?.Capture("tactics-exploration");
+        }
+        var moved = frame.Walked != _lastWalked;
+        if (LogWalks && _walkStats is { } stats && frame.Units.FirstOrDefault(u => u.CrownAt is not null) is { } leader)
+        {
+            if (moved)
+            {
+                stats.Add(delta, System.Numerics.Vector2.Round(frame.Fit.ToScreen(frame.Leader)), frame.Fit.ToScreen(leader.Feet), frame.Fit.Origin);
+            }
+            else if (_stillFor == 0)
+            {
+                stats.Print();
+            }
+        }
+
+        _stillFor = moved ? 0 : _stillFor + delta;
+        _lastWalked = frame.Walked;
+        if (_shots is null || !_revealed || _walkShots >= WalkShots)
+        {
+            return;
+        }
+        if (moved && frame.Walked >= _shotAt + TilesBetweenShots)
+        {
+            WalkShot(frame, "walking");
+        }
+        else if (!moved && _stillFor >= RestBeforeShot && frame.Walked > _shotAt)
+        {
+            WalkShot(frame, "stopped");
+        }
+    }
+
+    private void WalkShot(WalkFrame frame, string moment)
+    {
+        _shotAt = frame.Walked;
+        _walkShots++;
+        _shots?.Capture(FormattableString.Invariant($"tactics-world-{moment}-{frame.Tile.X:0}-{frame.Tile.Y:0}"));
+    }
+
+    private void LogWalk(WalkLeg leg)
+    {
+        if (LogWalks)
+        {
+            GD.Print(FormattableString.Invariant($"WALK {leg.Seq} {leg.To.X} {leg.To.Y} {DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()}"));
         }
     }
 
@@ -249,20 +378,26 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
 
     private void Show(PhaseScreen screen)
     {
+        _screen = screen;
         LoadSound();
         _meta.Text = screen.Meta.ToUpperInvariant();
         _title.Text = screen.Title;
-        _title.AddThemeColorOverride("font_color", Accent(screen.Tone, Colors.White));
+        if (_titleTone != screen.Tone)
+        {
+            _titleTone = screen.Tone;
+            _title.AddThemeColorOverride("font_color", Accent(screen.Tone, Colors.White));
+        }
         _level.Text = screen.PartyLevel.ToString();
         _empty.Visible = screen.Empty is not null;
         _empty.Text = screen.Empty ?? "";
         _rows.Visible = screen.Empty is null;
         ShowRows(screen);
-        ShowBoard(screen);
+        var walking = ShowWorld(screen);
+        ShowBoard(screen, walking);
         _audio.Music(screen.Music);
         _audio.Ambience(screen.Ambience);
         _resultBanner.Show(screen.Banner is { } banner ? _titleArt?.Strip(banner) : null, _content.GetValueOrDefault(BasePack));
-        _notice.Visible = screen.Notice is not null && !_board.Visible;
+        _notice.Visible = screen.Notice is not null && !_board.Visible && !walking;
         _noticeText.Text = screen.Notice ?? "";
         _hud?.ShowNotice(screen.Notice);
 
@@ -270,8 +405,101 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             _lastShot = screen.Shot;
             GD.Print($"TACTICS screen {screen.Shot}");
-            _shots?.Capture(screen.Shot);
+            if (!walking)
+            {
+                _shots?.Capture(screen.Shot);       // the world takes its own, when there's something to see
+            }
         }
+    }
+
+    /// <summary>
+    /// Shows the world for <paramref name="screen"/>, or puts it away. It's built once, whatever the views do; going back to it after a fight is only
+    /// showing it again. False if there's no world on this screen, or none that can be drawn: then the header and table say where the party is.
+    /// </summary>
+    private bool ShowWorld(PhaseScreen screen)
+    {
+        var drawn = screen.World is { } explore && screen.Walk is { } hud && _unreadableWorld != explore.Region && DrawWorld(explore, hud, screen.Notice);
+        if (!drawn && _world is { Suspended: false } world)
+        {
+            world.Suspend();
+            GD.Print($"TACTICS world put away: {WorldCanvas.MemoryText()}");
+        }
+        if (!drawn && _worldHud is not null)
+        {
+            _worldHud.Visible = false;
+        }
+        _backdrop.Visible = !drawn;
+        return drawn;
+    }
+
+    private bool DrawWorld(ExploreView explore, WalkHud hud, string? notice)
+    {
+        if (!_content.TryGetValue(BasePack, out var root))
+        {
+            return false;
+        }
+        try
+        {
+            _unitArt ??= UnitArt.Load(root);
+            if (_worldHud is null)
+            {
+                _worldHud = new WorldHud(root, HudArt.Load(root, _unitArt)) { Visible = false };
+                AddChild(_worldHud);
+                MoveChild(_worldHud, _caption.GetIndex());
+            }
+        }
+        catch (Exception ex) when (ex is IOException or JsonException or FormatException or ArgumentException or InvalidOperationException or KeyNotFoundException)
+        {
+            _unreadableWorld = explore.Region;
+            GD.PushError($"Tactics world: can't draw '{explore.Region}': {ex.Message}");
+            return false;
+        }
+
+        if (_world is not null && _worldRegion != explore.Region)
+        {
+            CloseWorld();
+        }
+        _explore = explore;
+        if (_world is null)
+        {
+            OpenWorld(root, explore.Region);
+        }
+        else if (_world.Suspended)
+        {
+            _world.Resume();
+            GD.Print($"TACTICS world back: {WorldCanvas.MemoryText()}");
+        }
+        if (_walk is { } walk)
+        {
+            foreach (var leg in walk.Receive(explore))
+            {
+                LogWalk(leg);
+            }
+        }
+        _worldHud.Show(hud, notice);
+        return true;
+    }
+
+    private void OpenWorld(string root, string region)
+    {
+        _worldRegion = region;
+        _walk = null;
+        _revealed = false;
+        _walkStats = LogWalks ? new WalkStats() : null;
+        _world = new WorldCanvas(root, () => DemoRegion.FromPack(root, region));
+        AddChild(_world);
+        GD.Print($"TACTICS world opening {region}");
+    }
+
+    /// <summary>Frees the world. A build still running is told to stop, and goes nowhere: the node it was for has gone.</summary>
+    private void CloseWorld()
+    {
+        if (_world is { } world)
+        {
+            RemoveChild(world);
+            world.QueueFree();
+        }
+        (_world, _walk, _worldRegion) = (null, null, null);
     }
 
     /// <summary>
@@ -335,7 +563,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     }
 
     /// <summary>The board replaces the header and table in battle. If it can't be drawn, they stay, with the encounter's name.</summary>
-    private void ShowBoard(PhaseScreen screen)
+    private void ShowBoard(PhaseScreen screen, bool walking)
     {
         _banner = screen.Title;
         var drawn = screen.Board is { } battle && DrawBoard(battle);
@@ -349,8 +577,8 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             _hud.Visible = drawn;
         }
-        _header.Visible = !drawn;
-        _table.Visible = !drawn;
+        _header.Visible = !drawn && !walking;
+        _table.Visible = !drawn && !walking;
     }
 
     private bool DrawBoard(BattleView battle)
@@ -419,6 +647,10 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
 
     private void ShowRows(PhaseScreen screen)
     {
+        if (screen.Rows.IsEmpty && _rows.GetChildCount() == 0)
+        {
+            return;     // a walk's views come 3 to 5 times a second, and there's nothing here to do
+        }
         foreach (var child in _rows.GetChildren())
         {
             _rows.RemoveChild(child);

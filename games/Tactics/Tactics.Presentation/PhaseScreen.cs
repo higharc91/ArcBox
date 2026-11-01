@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using System.Globalization;
 using Tactics.Game;
 using Tactics.Presentation.Audio;
+using Tactics.Presentation.World;
 
 namespace Tactics.Presentation;
 
@@ -32,8 +33,11 @@ public sealed record ScreenRow(string Title, string Detail, string? Chip, string
 /// <param name="Music">What should be playing on this screen, or null to leave it.</param>
 /// <param name="Ambience">The bed under it, or null for quiet.</param>
 /// <param name="Banner">The strip in the title art to play over the results, or null.</param>
+/// <param name="World">The party to draw in the world, or null. If it can't be drawn, the screen still reads without it.</param>
+/// <param name="Walk">What the world's panels say, with <paramref name="World"/>.</param>
 public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? Notice, int PartyLevel,
-    ImmutableArray<ScreenRow> Rows, string? Empty, string Shot, BattleView? Board = null, MusicCue? Music = null, string? Ambience = null, string? Banner = null)
+    ImmutableArray<ScreenRow> Rows, string? Empty, string Shot, BattleView? Board = null, MusicCue? Music = null, string? Ambience = null, string? Banner = null,
+    ExploreView? World = null, WalkHud? Walk = null)
 {
     /// <summary>The screen for <paramref name="view"/>. A phase this build doesn't know still shows the banner.</summary>
     public static PhaseScreen Of(TacticsHostView view)
@@ -58,6 +62,9 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
     private static PhaseScreen Exploration(PhaseScreen screen, TacticsHostView view) => screen with
     {
         Meta = view.Explore is { } explore ? $"Exploration · {explore.Name}" : "Exploration",
+        Empty = view.Explore?.Name,
+        World = view.Explore,
+        Walk = view.Explore is { } shown ? WalkHud.Of(shown, view.PartyLevel) : null,
     };
 
     private static PhaseScreen Muster(PhaseScreen screen, TacticsHostView view) => screen with

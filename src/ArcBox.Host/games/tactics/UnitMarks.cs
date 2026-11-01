@@ -71,6 +71,12 @@ public partial class UnitMarks : Node2D
                 DrawTextureRectRegion(icons, new Rect2(at, new Vector2(icon.Width, icon.Height)), Region(icon));
             }
         }
+        if (unit.CrownAt is { } crownAt && art.Crown is { } crown && _load(crown.Path) is { } emotes)
+        {
+            var size = new Vector2(crown.Width, crown.Height);
+            var corner = new Vector2(crownAt.X - crown.AnchorX, crownAt.Y - crown.AnchorY);
+            DrawTextureRectRegion(emotes, new Rect2(corner, size), Region(crown.Source(crown.FrameAt(_clock))));
+        }
         if (unit.ArrowAt is { } arrow && _load(art.Arrow.Path) is { } cursor)
         {
             var size = new Vector2(art.ArrowWidth, art.Arrow.Height);

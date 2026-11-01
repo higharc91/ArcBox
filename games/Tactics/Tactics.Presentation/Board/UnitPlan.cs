@@ -66,6 +66,9 @@ public sealed record BoardUnit(long Order, UnitId Id, UnitTone Tone, Vector2 Fee
 {
     /// <summary>Where the anchor of the leader's crown goes (the crown row of emotes/manifest.json); null for anyone else.</summary>
     public Vector2? CrownAt { get; init; }
+
+    /// <summary>A walker whose player's phone has gone: drawn a little dim.</summary>
+    public bool Away { get; init; }
 }
 
 /// <summary>
@@ -119,22 +122,24 @@ public static class UnitPlan
     /// <summary>
     /// The party in the world, back to front: walkers from <see cref="World.WalkTrack"/>, each with its ring and no bar, and a crown over
     /// whoever leads. A walker with no place yet isn't drawn. An idling pose animates on the canvas's clock, as an idle unit does.
+    /// <paramref name="pixels"/> says where feet go on the screen's pixels, given whether they're standing still; everything of a walker's follows them.
     /// </summary>
     public static ImmutableArray<BoardUnit> Walkers(IEnumerable<WalkerView> party, IReadOnlyDictionary<string, UnitPlace> places,
-        IReadOnlyDictionary<string, UnitPose> poses, UnitArt art)
-        => [.. party.Where(w => places.ContainsKey(w.Id)).Select(w => Walker(w, places[w.Id], poses.GetValueOrDefault(w.Id), art)).OrderBy(u => u.Order)];
+        IReadOnlyDictionary<string, UnitPose> poses, UnitArt art, Func<Vector2, bool, Vector2>? pixels = null)
+        => [.. party.Where(w => places.ContainsKey(w.Id)).Select(w => Walker(w, places[w.Id], poses.GetValueOrDefault(w.Id), art, pixels)).OrderBy(u => u.Order)];
 
-    private static BoardUnit Walker(WalkerView walker, UnitPlace place, UnitPose? pose, UnitArt art)
+    private static BoardUnit Walker(WalkerView walker, UnitPlace place, UnitPose? pose, UnitArt art, Func<Vector2, bool, Vector2>? pixels)
     {
         var sprite = art.Sprite(walker.Sprite) ?? art.StandIn(UnitTone.Party);
         var (row, mirror) = pose?.Facing is { } look ? Looking(look.X, look.Y) : (0, false);
-        var feet = place.Feet;
+        var feet = pixels?.Invoke(place.Feet, pose is null || pose.Anim == Idling) ?? place.Feet;
         var id = new UnitId(walker.Id);
         var anim = pose is null || pose.Anim == Idling ? sprite.Idle : new UnitAnim([sprite.Anim(pose.Anim).FrameAt(pose.Seconds)], 1, false);
         return new BoardUnit(OrderOf(place.Over, sprite), id, UnitTone.Party, feet, sprite, anim, PhaseOf(id), row, mirror, Math.Min(sprite.Width * RingShare, MaxRing),
             false, [], [], null, null, [], feet, null)
         {
             CrownAt = walker.Leads ? new Vector2(feet.X, feet.Y - sprite.AnchorY + sprite.HeadTop - Gap) : null,
+            Away = !walker.Here,
         };
     }
 

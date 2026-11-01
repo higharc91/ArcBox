@@ -260,4 +260,15 @@ public sealed class SoundBankTests
 
         Assert.All(SoundChoice.Conditions, c => Assert.Contains(c, real));
     }
+
+    [Fact]
+    public void A_step_on_a_regions_ground_is_read_from_that_ground()
+    {
+        var map = Pack.Ground("ashen_ford").Map;
+        var tile = Enumerable.Range(0, map.Width).SelectMany(x => Enumerable.Range(0, map.Height).Select(y => new Tile(x, y)))
+            .First(t => map.Materials[map[t].Material].StartsWith("cobble", StringComparison.Ordinal));
+
+        Assert.Equal("step_stone", Bank.Value.Step(map, tile));
+        Assert.Equal(SoundChoice.DefaultStep, Bank.Value.Step(map, new Tile(-1, -1)));
+    }
 }

@@ -96,8 +96,8 @@ public partial class TacticsAudio : Node
         AudioLog.Play(AudioBuses.Sfx, $"ambience {id}");
     }
 
-    /// <summary>Plays the sound <paramref name="id"/>, next of its files, at its group's level, on a free voice, or over the oldest if all twelve are busy.</summary>
-    public void Play(string id)
+    /// <summary>Plays the sound <paramref name="id"/>, next of its files, at its group's level and <paramref name="db"/> more, on a free voice, or over the oldest if all twelve are busy.</summary>
+    public void Play(string id, float db = 0)
     {
         if (_picker?.Next(id) is not { } file || Stream(file, loop: false) is not { } stream)
         {
@@ -106,7 +106,7 @@ public partial class TacticsAudio : Node
         var voice = _effects.FirstOrDefault(p => !p.Playing) ?? _effects.MinBy(p => _startedAt.GetValueOrDefault(p))!;
         _startedAt[voice] = ++_started;
         voice.Stream = stream;
-        voice.VolumeDb = (float)SoundChoice.LevelDb(_bank?.Sound(id)?.Group ?? "");
+        voice.VolumeDb = (float)SoundChoice.LevelDb(_bank?.Sound(id)?.Group ?? "") + db;
         voice.Play();
         AudioLog.Play(AudioBuses.Sfx, id);
     }

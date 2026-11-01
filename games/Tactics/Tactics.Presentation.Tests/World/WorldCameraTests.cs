@@ -24,6 +24,33 @@ public sealed class WorldCameraTests
             onFrame?.Invoke();
         });
 
+    [Fact]
+    public void A_point_on_pixels_lands_where_the_unrounded_camera_would_put_it()
+    {
+        var camera = new WorldCamera(160, 120);
+        camera.Snap(new Vector2(80.3f, 60.7f), 0);
+        var art = new Vector2(123.3f, 45.8f);
+
+        var on = camera.Fit.ToScreen(camera.OnPixels(art));
+
+        Assert.Equal(MathF.Round(on.X), on.X, 3);
+        Assert.Equal(MathF.Round(on.Y), on.Y, 3);
+        Assert.InRange(MathF.Abs(on.X - camera.Fit.ToScreen(art).X), 0, 1);
+    }
+
+    [Fact]
+    public void A_point_on_the_ground_stays_on_the_ground_as_the_camera_moves()
+    {
+        var camera = new WorldCamera(160, 120);
+        var art = new Vector2(123.3f, 45.8f);
+
+        camera.Snap(new Vector2(81.1f, 59.2f), 0);
+
+        var on = camera.Fit.ToScreen(WorldCamera.OnGround(art));
+        Assert.Equal(MathF.Round(on.X), on.X, 3);
+        Assert.Equal(MathF.Round(on.Y), on.Y, 3);
+    }
+
     private static void Rest(WalkTrack track, WorldCamera camera, BoardTerrain terrain, double seconds, Action? onFrame = null)
     {
         for (var t = 0.0; t < seconds; t += Frame)
@@ -41,10 +68,49 @@ public sealed class WorldCameraTests
         var camera = new WorldCamera(160, 120);
 
         for (var i = 0; i < 2000; i++)
-            camera.Follow(new Vector2(1, 118), 0, Vector2.Zero, Frame);
-
+            camera.Follow(new Vector2(6, 60), 0, Vector2.Zero, Frame);
         Assert.Equal(WorldTuning.EdgeMargin, camera.Centre.X, 3);
+
+        for (var i = 0; i < 2000; i++)
+            camera.Follow(new Vector2(80, 114), 0, Vector2.Zero, Frame);
         Assert.Equal(120 - WorldTuning.EdgeMargin, camera.Centre.Y, 3);
+    }
+
+    [Theory]
+    [InlineData(0, 60)]
+    [InlineData(159, 60)]
+    [InlineData(80, 0)]
+    [InlineData(80, 119)]
+    [InlineData(0, 0)]
+    [InlineData(159, 119)]
+    [InlineData(159, 0)]
+    [InlineData(0, 119)]
+    public void The_party_outranks_the_margin(int x, int y)
+    {
+        var camera = new WorldCamera(160, 120);
+        var map = new Vector2(x + 0.5f, y + 0.5f);
+
+        for (var i = 0; i < 2000; i++)
+            camera.Follow(map, 0, Vector2.Zero, Frame);
+
+        var screen = Screen(camera, map);
+        Assert.InRange(screen.X, 150, 1770);
+        Assert.InRange(screen.Y, 170, 1000);
+    }
+
+    [Fact]
+    public void Walking_along_a_region_edge_into_the_corner_moves_the_camera_smoothly()
+    {
+        var camera = new WorldCamera(160, 120);
+        var last = default(Vector2);
+        for (var i = 0; i < 4000; i++)
+        {
+            var map = new Vector2(150 + 9.5f * i / 4000, 40 - 39.5f * i / 4000);
+            camera.Follow(map, 0, Vector2.Zero, Frame);
+            if (i > 0)
+                Assert.InRange(Vector2.Distance(camera.Centre, last), 0, 0.1f);
+            last = camera.Centre;
+        }
     }
 
     [Fact]
@@ -53,7 +119,7 @@ public sealed class WorldCameraTests
         var camera = new WorldCamera(30, 24);
 
         for (var i = 0; i < 2000; i++)
-            camera.Follow(new Vector2(3, 38), 0, Vector2.UnitX, Frame);
+            camera.Follow(new Vector2(18, 10), 0, Vector2.UnitX, Frame);
 
         Assert.Equal(15, camera.Centre.X, 3);
         Assert.Equal(12, camera.Centre.Y, 3);
@@ -232,7 +298,7 @@ public sealed class WorldCameraTests
         var speeds = new List<float>();
         for (var i = 0; i < 2000; i++)
         {
-            map.X = Math.Min(map.X + TilesPerSecond * (float)Frame, 158);
+            map.X = Math.Min(map.X + TilesPerSecond * (float)Frame, 155);
             camera.Follow(map, 0, Vector2.UnitX, Frame);
             var moved = (camera.Centre.X - was) / (float)Frame;
             if (i > 200)

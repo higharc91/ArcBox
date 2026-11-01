@@ -7,6 +7,7 @@ using Tactics.Logic;
 using Tactics.Presentation.Beats;
 using Tactics.Presentation.Board;
 using Tactics.Presentation.Hud;
+using Tactics.Presentation.World;
 
 namespace Tactics.Presentation.Tests;
 
@@ -114,6 +115,38 @@ public sealed class HostViewContractTests
         Assert.StartsWith("Results · ", over.Meta);
         Assert.Equal(2, over.Rows.Length);
         Assert.All(over.Rows, r => Assert.EndsWith(" XP", r.Value));
+    }
+
+    /// <summary>A real walk, as the TV reads it: the world's screen, then a frame of the party on the real region's ground.</summary>
+    [Fact]
+    public void A_real_walk_reaches_the_tv()
+    {
+        var rules = Pack.Value;
+        ProfileId?[] profiles = [new ProfileId("pr_ana"), new ProfileId("pr_bo")];
+        var game = new TacticsGame(rules);
+        var h = new GameHarness<TacticsGame>(game, playerCount: 2, seed: 3, profiles: profiles);
+        var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", profiles[0]!.Value,
+            [.. profiles.Select((p, i) => new CampaignMember(p!.Value, $"Player{i + 1}", CampaignRole.Player, DateTimeOffset.UnixEpoch))], 1);
+        h.StartCampaign(new FakeCampaignLease(info, new TacticsCampaignRules(rules).NewDocument(info)));
+        h.Input(0, new { action = "pickClass", data = new { @class = "fighter" } });
+        h.Input(1, new { action = "pickClass", data = new { @class = "cleric" } });
+
+        var show = new WalkShow(new BoardTerrain(rules.GroundFor("ashen_ford")!.Map, null), UnitArt.Load(ContentRoot), null);
+        var start = PhaseScreen.Of(OverTheWire(game));
+        Assert.Empty(show.Receive(start.World!));
+        Assert.Equal("Chapter I · The Ashen Ford", start.Walk!.Title);
+        Assert.Contains(start.World!.Party, w => w.Leads && w.Name == start.Walk.Leader);
+        var leader = start.World!.Party.Select((w, i) => (w, i)).Single(p => p.w.Leads).i;
+
+        h.Input(leader, new { action = "walk", data = new { dir = "e" } });
+        var walking = PhaseScreen.Of(OverTheWire(game));
+
+        Assert.Equal(1, walking.World!.Seq);
+        Assert.Equal([1], show.Receive(walking.World).Select(l => l.Seq));
+        var frame = show.Frame(1 / 60.0);
+        Assert.Equal(2, frame.Units.Length);
+        Assert.Single(frame.Units, u => u.CrownAt is not null);
+        Assert.Empty(walking.Rows);
     }
 
     [Fact]

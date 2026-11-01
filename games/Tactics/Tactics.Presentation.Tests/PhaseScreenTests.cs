@@ -43,6 +43,60 @@ public sealed class PhaseScreenTests
     }
 
     [Fact]
+    public void Exploration_draws_the_world_and_has_no_table()
+    {
+        var explore = new ExploreView("ashen_ford", "The Ashen Ford", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], "Ana", Chapter: 1);
+
+        var screen = PhaseScreen.Of(View("Exploration", level: 3) with { Explore = explore });
+
+        Assert.Same(explore, screen.World);
+        Assert.Empty(screen.Rows);
+        Assert.Equal("The Ashen Ford", screen.Empty);       // for a TV that can't draw the world
+        Assert.Equal("Chapter I · The Ashen Ford", screen.Walk!.Title);
+        Assert.Equal("Exploring · Party level 3", screen.Walk.Detail);
+        Assert.Equal("Ana", screen.Walk.Leader);
+    }
+
+    [Theory]
+    [InlineData(1, "I")]
+    [InlineData(2, "II")]
+    [InlineData(3, "III")]
+    [InlineData(4, "IV")]
+    [InlineData(5, "V")]
+    public void A_chapter_is_in_roman_numerals(int chapter, string numeral)
+    {
+        var explore = new ExploreView("r", "Region", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], "Ana", chapter);
+
+        Assert.Equal($"Chapter {numeral} · Region", PhaseScreen.Of(View("Exploration") with { Explore = explore }).Walk!.Title);
+    }
+
+    [Fact]
+    public void The_leaders_panel_shows_who_leads_or_says_nobody_does()
+    {
+        WalkerView[] party = [new("a", "Ana", "characters.class_rogue", true, false), new("b", "Bo", "characters.class_cleric", true, true)];
+        var explore = new ExploreView("r", "Region", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [.. party], "Bo", 1);
+
+        var led = PhaseScreen.Of(View("Exploration") with { Explore = explore }).Walk!;
+        var none = PhaseScreen.Of(View("Exploration") with { Explore = explore with { Leader = null, Party = [party[0]] } }).Walk!;
+
+        Assert.Equal(("Bo", "characters.class_cleric"), (led.Leader, led.LeaderSprite));
+        Assert.Equal(("Nobody's here to lead", null), (none.Leader, none.LeaderSprite));
+    }
+
+    [Theory]
+    [InlineData("Muster")]
+    [InlineData("EncounterPick")]
+    [InlineData("Battle")]
+    [InlineData("Results")]
+    [InlineData("Resuming")]
+    public void Only_exploration_shows_the_world(string phase)
+    {
+        var explore = new ExploreView("r", "Region", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], "Ana", 1);
+
+        Assert.Null(PhaseScreen.Of(View(phase) with { Explore = explore }).World);
+    }
+
+    [Fact]
     public void Exploration_with_no_region_in_the_view_still_reads() => Assert.Equal("Exploration", PhaseScreen.Of(View("Exploration")).Meta);
 
     [Fact]

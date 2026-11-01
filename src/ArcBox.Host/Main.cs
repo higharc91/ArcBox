@@ -872,6 +872,7 @@ public partial class Main : Control
         if (node is global::ArcBox.Host.Games.Tactics.TacticsScene tactics)
         {
             tactics.LogBeats = _args.BeatLog;
+            tactics.LogWalks = _args.WalkLog;
         }
     }
 

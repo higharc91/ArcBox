@@ -56,7 +56,7 @@ Everything after `--` on the Godot command line; all optional.
 | `--beat-log` | Dev only: print a `BEAT` line for each Tactics beat played: when it ran, how long it took and what was in it. |
 | `--tactics-demo[=<map>[:changed\|:fight]]` | Dev only: show a Tactics board without a server, with the art from the repository's `content/` (default `river_crossing`). `:changed` adds zones, raised tiles and the bridge's tiles sunk; `:fight` adds one of every kind of unit. With `--shots` it saves `…-tactics-battle-<map>.png`. |
 | `--world-demo[=<region>|hilly[:<block tiles>]]` | Dev only: open a whole region the way the TV will, without a server, with the art and region from the repository's `content/` (default `ashen_ford`; `hilly` is `DemoRegion`'s stress case), walk a stand-in the length of it at twice walking pace, print what it cost in `WORLD` lines and quit. Use `--res=1920x1080`. With `--shots` it saves `world-<spec>.png`, then one `world-<spot>.png` for each place `WorldSpots` finds: behind a cliff, behind a crate, water at a block edge, a block corner, the region's edge and both sides of the void. See [the world](#the-world). |
-| `--walk-log` | Dev only: print a `WALK` line for each step the TV shows. Parsed now; the exploration screen prints them. |
+| `--walk-log` | Dev only: print `WALK <seq> <x> <y> <ms>` as each step reaches the TV, `<ms>` being the wall clock in Unix milliseconds, and a `WALKSTATS` line every 288 frames of walking: frame times, and how many pixels the leader and the ground moved a frame. See [walking](#walking). |
 | `--demo=campaign-lobby` | Dev only: show the lobby with a built-in campaign game selected, its campaign list and a roster with seated and away members (`Shell/CampaignLobbyDemo.cs`), without a server. With `--shots` it saves `001-lobby.png`. |
 
 Unknown arguments are reported as warnings and ignored.
@@ -297,6 +297,18 @@ The overlay query's worst is about 6.5 ms, once, on its first call behind the fa
 So recording costs about 0.6 µs an item, and the cost that's left in a frame is the draw calls, as texture changes break the batches: a battle's board has about 500. No modest TV box has been measured.
 
 A build that fails, on a bad or half-downloaded pack, logs its error once. The scene then frees the world and shows the header with the region's name, and fights still work.
+
+## Walking
+
+In Exploration the TV shows the world instead of the header and table, and the shell's background is hidden, as the world's layer is under it. The first view of Exploration opens the world behind its fade. It's built once for a scene: joining a party that's already walking, or a reconnect, only feeds it views, and a TV that comes back in a new scene builds its own while the old one's cancelled build goes nowhere. A fight or the battle list suspends it (`WorldCanvas.Suspend`): hidden and not running, with everything kept, and with nothing to do but fade back in. Its canvas item is hidden in the rendering server, not on the node, because Godot redraws a node each time it's shown: hiding the node recorded all 80 blocks again on the way back. It's freed when the scene is, with its textures disposed at once rather than left to the collector. Four sessions in a row end at the same memory: textures 36.7 MB, engine 80.8 MB.
+
+`Render` only feeds `WalkShow`, 3 to 5 times a second, and touches no node that hasn't changed. Everything that moves runs in `TacticsScene.WalkOn` each frame, whether a view came or not: `WalkShow.Frame` advances `WalkTrack`, reads the places, follows with `WorldCamera` (`Snap` when `Cuts` changes), and builds the units. Nothing is sent back, so a slow or missing TV costs a late picture and nothing else. A connection lost mid-walk heals by itself: what's missed is filled in from `Legs` or skipped along the path, and a gap past `Legs` snaps.
+
+**The party** stays on the screen's pixels. The camera rounds its origin, and a moving figure rounded on its own would shake against the frame by a pixel at the walk's beat, as often as 117 times in 288 frames. So what's moving lands where the unrounded camera puts it (`WorldCamera.OnPixels`): it holds still on the screen and the ground goes by under it in whole pixels. What's standing locks to the ground (`OnGround`), so it doesn't creep as the camera settles. The party keeps within `PartyReach` of the view's middle, which outranks `EdgeMargin`: a tile is 128 pixels wide, so at 16 tiles from an edge the party would otherwise walk off the screen. A walker whose phone has gone (`Here` false) is drawn a little dim. The leader's crown is the `crown` row of `emotes/manifest.json`, in `UnitMarks`, so it shows over a cliff.
+
+**The panels** (`WorldHud`, worded by `WalkHud`) are the chapter and region at the top left and the leader at the top right, in the battle HUD's glass and gold. They go see-through over the party, as the battle's do. The chapter comes in the host view's `ExploreView.Chapter`, which phones don't get.
+
+**The sound.** Footsteps go by distance, a foot every `FootstepTiles` of the leader's walk, by the ground underfoot (`SoundBank.Step`), at `FootstepDb` under a battle's. What's skipped or snapped past makes no sound. The Ashen Ford plays `town_emberwick`, as the manifest gives it.
 
 ## Adding a game scene
 

@@ -84,6 +84,23 @@ public sealed class MusicChoiceTests
     public void The_screens_before_a_fight_have_their_own_tunes(string phase, string track)
         => Assert.Equal(new MusicCue(track), MusicChoice.Of(View(phase)));
 
+    [Fact]
+    public void The_ashen_ford_has_the_track_the_manifest_gives_it()
+    {
+        var explore = new ExploreView("ashen_ford", "The Ashen Ford", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], null);
+
+        Assert.Equal(new MusicCue("town_emberwick"), MusicChoice.Of(View("Exploration") with { Explore = explore }));
+        Assert.Equal(new MusicCue("explore"), MusicChoice.Of(View("EncounterPick") with { Explore = explore }));
+    }
+
+    [Fact]
+    public void A_region_with_no_track_of_its_own_gets_the_field_tune()
+    {
+        var explore = new ExploreView("mirewood", "Mirewood", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], null);
+
+        Assert.Equal(new MusicCue("explore"), MusicChoice.Of(View("Exploration") with { Explore = explore }));
+    }
+
     [Theory]
     [InlineData("Resuming")]
     [InlineData("SomePhaseFromTheFuture")]

@@ -47,6 +47,64 @@ public sealed class UnitPlanTests
     }
 
     [Fact]
+    public void A_walker_whose_phone_is_gone_is_away()
+    {
+        WalkerView[] party = [new("a", "a", "characters.class_rogue", true, true), new("b", "b", "characters.class_rogue", false, false)];
+        var places = new Dictionary<string, UnitPlace> { ["a"] = new(new Vector2(3.5f, 3.5f), 0), ["b"] = new(new Vector2(2.5f, 3.5f), 0) };
+
+        var units = UnitPlan.Walkers(party, places, new Dictionary<string, UnitPose>(), Art.Value);
+
+        Assert.Equal(["b"], units.Where(u => u.Away).Select(u => u.Id.Value));
+    }
+
+    [Fact]
+    public void A_walker_and_its_crown_go_on_the_pixels_they_are_given()
+    {
+        var places = new Dictionary<string, UnitPlace> { ["a"] = new(new Vector2(3.5f, 3.5f), 1) };
+        var poses = new Dictionary<string, UnitPose> { ["a"] = new("walk", 0.25, new Vector2(1, 0)) };
+
+        var plain = Assert.Single(UnitPlan.Walkers(Walkers("a"), places, poses, Art.Value));
+        var moved = Assert.Single(UnitPlan.Walkers(Walkers("a"), places, poses, Art.Value, (art, standing) => standing ? art : art + new Vector2(5, 7)));
+
+        Assert.Equal(plain.Feet + new Vector2(5, 7), moved.Feet);
+        Assert.Equal(plain.CrownAt + new Vector2(5, 7), moved.CrownAt);
+        Assert.Equal(plain.Order, moved.Order);
+    }
+
+    [Fact]
+    public void A_standing_walker_is_said_to_be_standing()
+    {
+        var places = new Dictionary<string, UnitPlace> { ["a"] = new(new Vector2(3.5f, 3.5f), 1) };
+        var poses = new Dictionary<string, UnitPose> { ["a"] = new("idle", 0.25, new Vector2(1, 0)) };
+
+        var moved = Assert.Single(UnitPlan.Walkers(Walkers("a"), places, poses, Art.Value, (art, standing) => standing ? art + new Vector2(1, 1) : art));
+
+        Assert.Equal(places["a"].Feet + new Vector2(1, 1), moved.Feet);
+    }
+
+    [Fact]
+    public void The_crown_is_the_one_the_emote_manifest_says()
+    {
+        using var manifest = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.Combine(Pack.Root, "emotes", "manifest.json")));
+        var root = manifest.RootElement;
+        var crown = Art.Value.Crown!;
+
+        Assert.Equal(root.GetProperty("emotes").GetProperty("crown").GetProperty("row").GetInt32(), crown.Row);
+        Assert.Equal(root.GetProperty("frame")[0].GetInt32(), crown.Width);
+        Assert.Equal(root.GetProperty("anchor")[1].GetInt32(), crown.AnchorY);
+        Assert.True(File.Exists(Path.Combine(Pack.Root, crown.Path)));
+    }
+
+    [Fact]
+    public void The_crown_plays_through_once_then_loops_its_tail()
+    {
+        var crown = new EmoteStrip("e.png", 20, 20, 8, 19, 11, Frames: 4, Fps: 8, LoopStart: 2);
+
+        Assert.Equal([0, 1, 2, 3, 2, 3, 2], Enumerable.Range(0, 7).Select(i => crown.FrameAt(i / 8.0 + 0.01)));
+        Assert.Equal(new ArtRect(60, 220, 20, 20), crown.Source(3));
+    }
+
+    [Fact]
     public void Walkers_are_in_the_painters_order()
     {
         var places = new Dictionary<string, UnitPlace> { ["a"] = new(new Vector2(5.5f, 5.5f), 0), ["b"] = new(new Vector2(2.5f, 2.5f), 0) };

@@ -65,6 +65,12 @@ public static class WorldTuning
     /// <summary>The share of a drop's leg walked before the feet leave the ground: the tile's edge.</summary>
     public const float DropEdge = 0.5f;
 
+    /// <summary>The tiles between one foot coming down and the next: half of the walk's stride, which is 0.667 s of animation.</summary>
+    public const double FootstepTiles = 1.11;
+
+    /// <summary>How far under a battle's footsteps walking's are, in dB: a battle's are a few at a time, and these are heard for hours.</summary>
+    public const float FootstepDb = -8;
+
     // ---- Followers ------------------------------------------------------------------------------------------------------
 
     /// <summary>Between one walker and the next, in tiles along the path.</summary>
@@ -116,6 +122,12 @@ public static class WorldTuning
 
     /// <summary>The camera keeps this many tiles from each edge of the region.</summary>
     public const float EdgeMargin = 16;
+
+    /// <summary>
+    /// The farthest the party gets from the middle of the view, in tiles along either of the screen's axes: about 770 px across and 380 down at scale 2, clear of the
+    /// panels. It outranks <see cref="EdgeMargin"/>. A tile is 128 layout pixels wide, so the margin alone would let the party walk off the screen at any edge of a region.
+    /// </summary>
+    public const float PartyReach = 12;
 
     /// <summary>How many tiles either side of the margin the camera eases over.</summary>
     public const float EdgeEase = 3;

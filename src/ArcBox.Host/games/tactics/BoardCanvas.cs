@@ -34,6 +34,7 @@ public partial class BoardCanvas : Node2D
     private static readonly Color EnemyRing = new("e2534c");
     private static readonly Color NeutralRing = new("dbceb7");
     private static readonly Color ActiveRing = new("ffe794");
+    private static readonly Color AwayShade = new(0.68f, 0.68f, 0.74f, 0.82f);     // a walker whose phone has gone: still one of the party
 
     private readonly BoardPainter _painter;
     private readonly List<object> _items = [];
@@ -205,6 +206,7 @@ public partial class BoardCanvas : Node2D
             var source = sprite.Source(unit.Anim.FrameAt(clock), unit.Row);
             var target = new Rect2(corner, unit.Mirror ? new Vector2(-size.X, size.Y) : size);   // a negative width flips, in the same place
             var light = _lighting is { } lighting ? Colour(lighting.ForFigure(BoardLighting.BodyOf(unit.Feet, sprite.Height))) : Colors.White;
+            light = unit.Away ? light * AwayShade : light;
             DrawTextureRectRegion(texture, target, new Rect2(source.X, source.Y, source.Width, source.Height), light);
         }
         else
