@@ -4,6 +4,7 @@ import { MoodPortrait, Portrait } from "./art";
 import { useAlertOnMount, useSfx } from "./sfx";
 import type { CheckCard, CheckData, CheckRoll, DialogueData, StoryOption, VoteData } from "./types";
 import { className, LineIcon, useShellClock } from "./ui";
+import { HostMenu } from "./walk";
 
 /**
  * The story on a phone (5d §9): the line being spoken, the party's votes and the leader's choices, and skill checks.
@@ -21,6 +22,14 @@ const signed = (n: number) => (n < 0 ? `−${-n}` : `+${n}`);
 /** "Ann", "Ann and Bo", "Ann, Bo and Cy". */
 const names = (list: string[]) => (list.length < 2 ? list.join("") : `${list.slice(0, -1).join(", ")} and ${list[list.length - 1]}`);
 const LETTERS = "ABCDEFGHIJ";
+
+/**
+ * The VIP's End session in a scene, walk's menu with its confirm. It heads the screen, above the words and the question, so it's
+ * never where the thumb that skips a line or answers a question is.
+ */
+function StoryHost({ vip, send }: { vip: boolean; send: CustomScreenProps["send"] }) {
+  return vip ? <HostMenu canBattle={false} keep="Keep playing" send={send} /> : null;
+}
 
 /** The question's clock, in its heading, from the shell's countdown (which the CSS hides on these screens). */
 function Clock() {
@@ -72,6 +81,7 @@ export function Dialogue({ data, send, viewId }: CustomScreenProps) {
   const narration = !d.speaker;
   return (
     <div class="tx tx-story">
+      <StoryHost vip={d.vip} send={send} />
       {d.title ? <p class="tx-story-title"><span class="tx-eyebrow">The story</span><b>{d.title}</b></p> : null}
       {/* Live, and never remounted, so a screen reader says each new line as it comes. */}
       <div class="tx-say-live" aria-live="polite">
@@ -239,6 +249,7 @@ function VoteQuestion({ data, send, viewId, question }: CustomScreenProps & { qu
 
   return (
     <div class={`tx tx-ask${alerted ? " arrived" : ""}`}>
+      <StoryHost vip={d.vip} send={send} />
       <AskHead eyebrow={eyebrow} title={title} tie={d.tie} />
       <ul class={`tx-options${d.canChoose ? "" : " static"}`} aria-label="Options">
         {d.options.map((o, i) => {
@@ -353,6 +364,7 @@ function CheckQuestion({ data, send, viewId, question }: CustomScreenProps & { q
 
   return (
     <div class={`tx tx-check${roll ? " rolled" : ""}${alerted ? " arrived" : ""}`}>
+      <StoryHost vip={d.vip} send={send} />
       <div class="tx-check-head">
         <span class="tx-eyebrow">Skill check</span>
         <h2 class="tx-check-skill">{skillName(d.skill)}</h2>

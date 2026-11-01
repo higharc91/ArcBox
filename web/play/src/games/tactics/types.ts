@@ -174,6 +174,8 @@ export interface DialogueData {
   mood: string | null;
   text: string | null;
   canSkip: boolean;
+  /** This phone is the VIP's: it can end the session from the scene. */
+  vip: boolean;
 }
 
 export interface StoryOption {
@@ -199,6 +201,8 @@ export interface VoteData {
   decider: string | null;
   /** The players away when it was asked, by name. */
   away: string[];
+  /** This phone is the VIP's: it can end the session from the scene. */
+  vip: boolean;
 }
 
 export interface CheckCard {
@@ -237,6 +241,8 @@ export interface CheckData {
   /** On a tie, the members it's between. */
   tied: string[];
   roll: CheckRoll | null;
+  /** This phone is the VIP's: it can end the session from the scene. */
+  vip: boolean;
 }
 
 export interface ResultsData {

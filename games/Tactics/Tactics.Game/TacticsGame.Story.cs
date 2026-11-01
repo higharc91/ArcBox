@@ -985,6 +985,7 @@ public sealed partial class TacticsGame
     /// <summary>
     /// A phone in a scene: the line showing, or the question, or the check. None of it changes with what anyone else does, except when the
     /// question itself does: no tally, the countdown of the question's own clock and not of a settle, and who's away as of when it was asked.
+    /// Each says <c>vip</c>, so the VIP's phone has its End session there too (the server takes it in a scene, c23a42f).
     /// </summary>
     private CustomView StoryScreen(Player player, ProfileId profile)
     {
@@ -1001,6 +1002,7 @@ public sealed partial class TacticsGame
                 tie = _telling == StoryStates.TieBreak,
                 decider = Decider() is { } d ? PlayerName(d) : null,
                 away = Away(_awayAtOpen),
+                vip = IsVip(player),
             }) with { DeadlineUtc = _due };
         if (scene is not null && (_checking is not null || _telling == StoryStates.Rolled))
         {
@@ -1022,6 +1024,7 @@ public sealed partial class TacticsGame
                 decider = _telling == StoryStates.TieBreak && Decider() is { } d2 ? PlayerName(d2) : null,
                 tied = _telling == StoryStates.TieBreak ? _tied : [],
                 roll = roll is null ? null : new { member = roll.Member, die = roll.Die, bonus = roll.Bonus, total = roll.Die + roll.Bonus, dc = roll.Dc, success = roll.Passed },
+                vip = IsVip(player),
             }) with { DeadlineUtc = roll is null ? _due : null };
         }
         var line = _telling is StoryStates.Gap or StoryStates.Rolled ? null : CurrentLine();
@@ -1035,6 +1038,7 @@ public sealed partial class TacticsGame
             mood = line?.Mood,
             text = line?.Text,
             canSkip = member == _lead && _telling == StoryStates.Lines && line is not null,
+            vip = IsVip(player),
         });
     }
 }

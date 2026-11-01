@@ -179,7 +179,11 @@ function Pad({ sender }: { sender: WalkSender }) {
 }
 
 /** The VIP's way out of the world. It's at the far end of the screen from the pad, and it sleeps while a thumb is on it. */
-function HostMenu({ canBattle, send }: { canBattle: boolean; send: CustomScreenProps["send"] }) {
+/**
+ * The VIP's menu: Choose a battle (with the battle list) and End session, each behind a confirm. The story's screens show it
+ * too, with no battle and "Keep playing" (`keep`), as the server takes End session in a scene.
+ */
+export function HostMenu({ canBattle, send, keep = "Keep walking" }: { canBattle: boolean; send: CustomScreenProps["send"]; keep?: string }) {
   // Both take the whole table out of the walk, and the leader's pad with it, so both ask first.
   const [asked, setSure] = useState<"battles" | "endSession" | null>(null);
   // A battle confirm outlives no battles: it goes at once, and stays gone if they come back.
@@ -197,7 +201,7 @@ function HostMenu({ canBattle, send }: { canBattle: boolean; send: CustomScreenP
   // The confirm isn't under the finger that asked for it: "Keep walking" takes that finger's place, so a double tap
   // lands on it.
   if (sure) {
-    const keep = <button type="button" class="tx-btn ghost" onClick={() => { sfx("cancel"); setSure(null); }}>Keep walking</button>;
+    const no = <button type="button" class="tx-btn ghost" onClick={() => { sfx("cancel"); setSure(null); }}>{keep}</button>;
     const yes = (
       <button type="button" class="tx-btn gold" onClick={() => { sfx("confirm"); send(sure); }}>
         {sure === "battles" ? "Yes, choose one" : "Yes, end it"}
@@ -205,7 +209,7 @@ function HostMenu({ canBattle, send }: { canBattle: boolean; send: CustomScreenP
     );
     return (
       <div class="tx-walk-host sure" role="group" aria-label={sure === "battles" ? "Stop walking to choose a battle?" : "End the session?"}>
-        {sure === "battles" ? <>{keep}{yes}</> : <>{yes}{keep}</>}
+        {sure === "battles" ? <>{no}{yes}</> : <>{yes}{no}</>}
       </div>
     );
   }

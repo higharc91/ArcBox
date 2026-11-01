@@ -270,7 +270,8 @@ describe("votes and choices", () => {
   it("shows a tie-break someone else decides read-only", () => {
     show("vote-tie", (d) => { d.canChoose = false; });
     expect(screen.getByText("Tied: Player1 breaks it")).toBeTruthy();
-    expect(screen.queryAllByRole("button").filter((b) => b.closest(".tx-ask"))).toEqual([]);
+    // Nothing to answer with: the only button is the VIP's End session, which isn't the question's.
+    expect(screen.queryAllByRole("button").filter((b) => b.closest(".tx-ask") && !b.closest(".tx-walk-host"))).toEqual([]);
   });
 });
 
@@ -500,5 +501,70 @@ describe("Interact", () => {
     expect(pings.length).toBeGreaterThanOrEqual(2);
     expect(pings).toEqual(pings.map(() => ({ action: "walk", data: { dir: "n" } })));
     expect(screen.getByRole("button", { name: "Talk" })).toBeTruthy();
+  });
+});
+
+describe("the VIP's End session in a scene", () => {
+  /** The host menu's places, in order: with no battle list the first is an empty slot, as on the walk screen. */
+  const places = () => [...document.querySelector(".tx-walk-host")!.children];
+
+  it.each([["dialogue-leader"], ["choice-leader"], ["vote-tie"]])("is on the VIP's %s, and on nobody else's", (name) => {
+    show(name);
+    expect(screen.getByRole("button", { name: "End session" })).toBeTruthy();
+    cleanup();
+    show(name, (d) => { d.vip = false; });
+    expect(screen.queryByRole("button", { name: "End session" })).toBeNull();
+  });
+
+  it.each([["dialogue"], ["vote"], ["check-pick"], ["check-rolled"]])("isn't on a player's %s", (name) => {
+    show(name);
+    expect(screen.queryByRole("button", { name: "End session" })).toBeNull();
+  });
+
+  it.each([["check-pick"], ["check-rolled"]])("is on a skill check's screen for the VIP (%s)", (name) => {
+    show(name, (d) => { d.vip = true; });
+    expect(screen.getByRole("button", { name: "End session" })).toBeTruthy();
+  });
+
+  it.each([["dialogue-leader", ".tx-story-foot"], ["choice-leader", ".tx-options"], ["vote-tie", ".tx-options"]])(
+    "heads %s, above the thumbs (%s), and isn't inside them", (name, thumbs) => {
+      show(name);
+      const menu = document.querySelector(".tx-walk-host")!;
+      const root = menu.parentElement!;
+      expect(root.classList.contains("tx")).toBe(true);
+      expect(root.firstElementChild).toBe(menu);
+      const under = document.querySelector(thumbs)!;
+      expect(under.contains(menu)).toBe(false);
+      expect(menu.compareDocumentPosition(under) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    });
+
+  it("asks first: \"Keep playing\" takes the place of the first tap, and yes ends the session", () => {
+    const { send } = show("dialogue-leader");
+    const at = places().indexOf(screen.getByRole("button", { name: "End session" }));
+    fireEvent.click(screen.getByRole("button", { name: "End session" }));
+    expect(send).not.toHaveBeenCalledWith({ action: "endSession" });
+    expect(places()[at]!.textContent).toBe("Keep playing");
+    fireEvent.click(places()[at]!);       // a double tap lands on "Keep playing"
+    expect(screen.queryByRole("button", { name: "Yes, end it" })).toBeNull();
+    expect(send).not.toHaveBeenCalledWith({ action: "endSession" });
+
+    fireEvent.click(screen.getByRole("button", { name: "End session" }));
+    fireEvent.click(screen.getByRole("button", { name: "Yes, end it" }));
+    expect(send).toHaveBeenLastCalledWith({ action: "endSession" });
+  });
+
+  it("works from a question too, and doesn't answer it", () => {
+    const { send } = show("choice-leader");
+    fireEvent.click(screen.getByRole("button", { name: "End session" }));
+    fireEvent.click(screen.getByRole("button", { name: "Yes, end it" }));
+    expect(send.mock.calls.map((c) => (c[0] as { action: string }).action)).toEqual(["endSession"]);
+  });
+
+  it("lets its confirm lapse by itself", () => {
+    show("dialogue-leader");
+    fireEvent.click(screen.getByRole("button", { name: "End session" }));
+    act(() => { vi.advanceTimersByTime(5000); });
+    expect(screen.queryByRole("button", { name: "Yes, end it" })).toBeNull();
+    expect(screen.getByRole("button", { name: "End session" })).toBeTruthy();
   });
 });
