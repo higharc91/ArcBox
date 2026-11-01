@@ -237,7 +237,7 @@ public sealed partial class TacticsGame
         => _doc.Members.SelectMany(m => _players.Where(p => p.Profile?.Value == m.Key)
             .Select(p => (p, m.Value.Character, _online.Contains(p.Id), _lead == m.Key)));
 
-    private ExploreView? ExploreViewOf() => _region is not { } region ? null : new ExploreView(region.Def.Id, region.Def.Name, _epoch, 0, _at, _facing, false, [],
+    private ExploreView? ExploreViewOf() => _region is not { } region ? null : new ExploreView(region.Def.Id, region.Def.Name, _epoch, _walkSeq, _at, _facing, _dir is not null, _legs,
         [.. Walkers().Select(w => new WalkerView(w.Player.Profile!.Value.Value, w.Player.Name,
             HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{w.Character.Class}"])!, w.Here, w.Leads))],
         Leader?.Name);

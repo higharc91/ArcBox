@@ -1,3 +1,5 @@
+using System.Collections.Immutable;
+using System.Text.Json;
 using ArcBox.Sdk;
 using Tactics.Logic;
 
@@ -7,6 +9,11 @@ namespace Tactics.Game;
 /// The party in the world (overworld 5b): which region it's in, the tile it stands on and who leads it. All of it is ready from
 /// the moment a session starts, whatever phase that lands in, so a TV joining mid-fight still learns the region. The live tile
 /// is kept here and reaches the document only through <see cref="SaveWorld"/>.
+/// <para>
+/// Input is level-triggered with a lease (overworld 5b §1, §2), because a stop can be lost in more ways than one: the phone says which way
+/// it's held, and repeats that to keep it held. A timer exists only while something needs it: <see cref="Timers.Step"/> only with a
+/// direction held, <see cref="Timers.Lead"/> only with the pad on someone's screen, and <see cref="Timers.Save"/> only with a change to keep.
+/// </para>
 /// </summary>
 public sealed partial class TacticsGame
 {
@@ -29,10 +36,37 @@ public sealed partial class TacticsGame
     /// </summary>
     private string? _sessionLead;
 
+    /// <summary>Members who went quiet while leading. They're passed over until their phone is heard from again.</summary>
+    private readonly HashSet<string> _silent = [];
+
+    /// <summary>When the leader's phone was last heard from.</summary>
+    private DateTimeOffset _heardAt;
+
+    /// <summary>The direction held, or null when the party's stopped.</summary>
+    private WalkDir? _dir;
+
+    /// <summary>When the hold runs out unless it's repeated.</summary>
+    private DateTimeOffset _heldUntil;
+
+    /// <summary>When the step under way ends: the next can't begin before this, however fast a thumb taps.</summary>
+    private DateTimeOffset _stepDue;
+
+    /// <summary>The held direction is against a wall. The ground doesn't change, so nothing is tried again until the direction does.</summary>
+    private bool _blocked;
+
+    private bool? _lastAlongX;
+    private int _walkSeq;
+    private ImmutableArray<WalkLeg> _legs = [];
+
+    /// <summary>When a walk under way has to be saved by, or null with nothing waiting.</summary>
+    private DateTimeOffset? _saveBy;
+
+    private WalkTiming Walk => _timing.Walk;
+
     /// <summary>Who has the pad, if anyone.</summary>
     public Player? Leader => _lead is { } lead ? _players.FirstOrDefault(p => p.Profile?.Value == lead) : null;
 
-    private static bool IsWorldAction(string action) => action is "battles" or "backToWalk" or "endSession";
+    private static bool IsWorldAction(string action) => action is "walk" or "battles" or "backToWalk" or "endSession";
 
     // ---- Coming into the world ----------------------------------------------------------------------------------------
 
@@ -74,10 +108,17 @@ public sealed partial class TacticsGame
         _toasts.Clear();
         _phase = TacticsPhase.Exploration;
         ReconsiderLeader();
+        _heardAt = _ctx.Now;     // the pad has only just come back
+        LeadClock();
     }
 
     /// <summary>Out of the world, to anywhere: everything walking runs on ends here, and the place is saved at once.</summary>
-    private void LeaveExploration() => SaveWorld();
+    private void LeaveExploration()
+    {
+        Halt();
+        _ctx.CancelTimer(Timers.Lead);     // no pad, no idle ping: the silence rule would take the lead away during any battle
+        SaveWorld();
+    }
 
     private void EndSession()
     {
@@ -86,11 +127,211 @@ public sealed partial class TacticsGame
         _ctx.EndGame(new GameResults([], $"The party is level {_doc.PartyLevel}; {_doc.Completed.Length} battles won."));
     }
 
+    // ---- Walking -------------------------------------------------------------------------------------------------------
+
+    /// <summary>
+    /// The leader's phone saying what it holds. A repeat of the direction held only extends the lease, so pings can't change the
+    /// speed. A press or a change steps in this very call, unless the party is still on its way to a tile, when it goes as that step ends.
+    /// </summary>
+    private void WalkInput(Player player, JsonElement? data)
+    {
+        if (!ReadDir(data, out var dir) || player.Profile?.Value != _lead)
+            return;
+        if (dir is null)
+        {
+            StopWalking();
+            return;
+        }
+
+        var now = _ctx.Now;
+        _heldUntil = now + Walk.HoldLease;
+        if (dir == _dir)
+            return;
+        var held = _dir is not null;
+        (_dir, _blocked) = (dir, false);
+        if (now >= _stepDue)
+            TakeStep(onTime: false);
+        else if (!held)
+            ArmStep();
+    }
+
+    /// <summary>Reads <c>{dir}</c>: false for anything but a direction or an explicit null, which means stopped.</summary>
+    private static bool ReadDir(JsonElement? data, out WalkDir? dir)
+    {
+        dir = null;
+        if (data is not { ValueKind: JsonValueKind.Object } d || !d.TryGetProperty("dir", out var value))
+            return false;
+        if (value.ValueKind == JsonValueKind.Null)
+            return true;
+        if (value.ValueKind != JsonValueKind.String)
+            return false;
+        dir = value.GetString() switch
+        {
+            "n" => WalkDir.N, "ne" => WalkDir.NE, "e" => WalkDir.E, "se" => WalkDir.SE,
+            "s" => WalkDir.S, "sw" => WalkDir.SW, "w" => WalkDir.W, "nw" => WalkDir.NW,
+            _ => null,
+        };
+        return dir is not null;
+    }
+
+    /// <summary>Takes the step the held direction asks for, or turns to face it if the way is blocked. Blocked steps say nothing: a toast would change the phone's view.</summary>
+    private void TakeStep(bool onTime)
+    {
+        var (dir, from, now) = (_dir!.Value, _at, _ctx.Now);
+        if (WorldWalk.Next(Rules.GroundFor(_region!.Def.Id)!.Terrain, from, dir, ClassDef.DefaultJump, _lastAlongX) is not { } move)
+        {
+            var (dx, dy) = WorldWalk.Delta(dir);
+            _facing = new Tile(from.X + dx, from.Y + dy);
+            _blocked = true;
+        }
+        else
+        {
+            var ms = StepMs(from, move);
+            // On time, from when the last step ended, so that a late timer doesn't drift; after a stall or a rest, from now: never a burst.
+            var start = onTime && now - _stepDue < Walk.Step ? _stepDue : now;
+            _stepDue = start + TimeSpan.FromMilliseconds(ms);
+            _at = move.To;
+            _facing = new Tile(2 * move.To.X - from.X, 2 * move.To.Y - from.Y);
+            if (!move.Diagonal)
+                _lastAlongX = move.To.Y == from.Y;
+            var leg = new WalkLeg(++_walkSeq, move.To, ms);
+            _legs = (_legs.Length < LegsKept ? _legs : _legs.RemoveAt(0)).Add(leg);
+            _notice = null;      // whatever it said, the party has moved on
+        }
+        SaveSoon();
+        ArmStep();
+    }
+
+    /// <summary>How many steps <see cref="ExploreView.Legs"/> keeps. The TV takes only the newest view each frame, so it can miss some.</summary>
+    private const int LegsKept = 12;
+
+    /// <summary>A step's length, in milliseconds. It's here, not in <see cref="WorldWalk"/>, because the logic has no clocks.</summary>
+    private int StepMs(Tile from, WalkMove move)
+    {
+        var terrain = Rules.GroundFor(_region!.Def.Id)!.Terrain;
+        var drop = terrain.HeightAt(from) - terrain.HeightAt(move.To);
+        var ms = Walk.Step.TotalMilliseconds * move.Cost * (move.Diagonal ? Math.Sqrt(2) : 1) + Walk.DropStep.TotalMilliseconds * Math.Max(0, drop - 2);
+        return Math.Max(1, (int)Math.Round(ms));
+    }
+
+    /// <summary>Sets the step timer for the next thing that can happen: this step ending, or the lease running out.</summary>
+    private void ArmStep()
+    {
+        var at = _blocked || _heldUntil < _stepDue ? _heldUntil : _stepDue;
+        _ctx.SetTimer(Timers.Step, Longest(at - _ctx.Now, TimeSpan.FromMilliseconds(1)));
+    }
+
+    private static TimeSpan Longest(TimeSpan a, TimeSpan b) => a > b ? a : b;
+
+    private void WalkTimer(string key)
+    {
+        switch (key)
+        {
+            case Timers.Step when _dir is not null:
+                var now = _ctx.Now;
+                if (now >= _heldUntil)
+                    StopWalking();
+                else if (!_blocked && now >= _stepDue)
+                    TakeStep(onTime: true);
+                else
+                    ArmStep();
+                break;
+            case Timers.Lead:
+                LeadTimer();
+                break;
+            case Timers.Save:
+                SaveWorld();
+                break;
+        }
+    }
+
+    /// <summary>Ends the hold and its timer. Everything that stops the party goes through here. False if it wasn't walking.</summary>
+    private bool Halt()
+    {
+        if (_dir is null)
+            return false;
+        (_dir, _blocked) = (null, false);
+        _ctx.CancelTimer(Timers.Step);
+        return true;
+    }
+
+    /// <summary>The party stops of its own accord: a release, or the lease running out. Being stopped is also when the lead can change.</summary>
+    private void StopWalking()
+    {
+        if (!Halt())
+            return;
+        SaveSoon();
+        ReconsiderLeader();
+    }
+
     // ---- The lead -----------------------------------------------------------------------------------------------------
 
-    /// <summary>Whether a member can take the lead: here, with a character.</summary>
+    /// <summary>Anything at all from a phone means it's alive.</summary>
+    private void HeardFrom(ProfileId profile)
+    {
+        if (profile.Value == _lead)
+            _heardAt = _ctx.Now;
+        else if (_silent.Remove(profile.Value))
+            ReconsiderLeader();
+    }
+
+    /// <summary>Someone's phone came or went. Only the leader going stops the party: anyone else can come and go under a walk.</summary>
+    private void WalkerConnection(Player? player, bool connected)
+    {
+        if (_region is null)
+            return;
+        if (player?.Profile is { } profile)
+            _silent.Remove(profile.Value);
+        if (!connected && player?.Profile?.Value == _lead)
+            Halt();
+        ReconsiderLeader();
+        if (!connected)
+            SaveWorld();
+    }
+
+    /// <summary>
+    /// The silence rule: stateful reconnect can hold back the disconnect event, so a leader's phone that says nothing for long
+    /// enough loses the lead. Pings only move <see cref="_heardAt"/>, so there's one timer here, not one for each ping. With nobody to
+    /// hand on to, the leader keeps it.
+    /// </summary>
+    private void LeadTimer()
+    {
+        if (_lead is not { } lead)
+            return;
+        var quiet = _ctx.Now - _heardAt;
+        if (quiet < Walk.LeadSilence)
+        {
+            _ctx.SetTimer(Timers.Lead, Walk.LeadSilence - quiet);
+            return;
+        }
+        if (NextAfter(lead) == lead)
+        {
+            _ctx.SetTimer(Timers.Lead, Walk.LeadSilence);
+            return;
+        }
+        HandLead(lead);
+    }
+
+    /// <summary>Takes the lead from a silent leader: the party stops first.</summary>
+    private void HandLead(string from)
+    {
+        Halt();
+        _silent.Add(from);
+        ReconsiderLeader();
+    }
+
+    /// <summary>Starts the silence clock if there's a pad on someone's screen, and stops it if there isn't.</summary>
+    private void LeadClock()
+    {
+        if (_phase == TacticsPhase.Exploration && _lead is not null)
+            _ctx.SetTimer(Timers.Lead, Walk.LeadSilence);
+        else
+            _ctx.CancelTimer(Timers.Lead);
+    }
+
+    /// <summary>Whether a member can take the lead: here, with a character, and not silent.</summary>
     private bool CanLead(string member)
-        => _doc.Members.ContainsKey(member) && _players.Any(p => p.Profile?.Value == member && _online.Contains(p.Id));
+        => _doc.Members.ContainsKey(member) && !_silent.Contains(member) && _players.Any(p => p.Profile?.Value == member && _online.Contains(p.Id));
 
     /// <summary>
     /// The next member after <paramref name="last"/> who can lead, in member order, which is ordinal by profile because seat
@@ -103,22 +344,31 @@ public sealed partial class TacticsGame
     }
 
     /// <summary>
-    /// Settles who leads: this session's leader if they're here (electing one if the session has none yet, which is its one
-    /// rotation), else whoever already leads, else the next who can.
+    /// Settles who leads, only ever with the party stopped: this session's leader if they're here (electing one if the session has
+    /// none yet, which is its one rotation), else whoever already leads, else the next who can. Better a silent member than nobody.
     /// </summary>
     private void ReconsiderLeader()
     {
-        if (_region is null)
+        if (_region is null || _dir is not null)
             return;
         _sessionLead ??= NextAfter(_doc.World?.LastLeader);
-        var wanted = _sessionLead is { } own && CanLead(own) ? own
-            : _lead is { } still && CanLead(still) ? still
-            : NextAfter(_lead ?? _sessionLead);
+        var wanted = WantedLeader();
+        if (wanted is null && _silent.Count > 0)
+        {
+            _silent.Clear();
+            wanted = WantedLeader();
+        }
         if (wanted == _lead)
             return;
         _lead = wanted;
+        _heardAt = _ctx.Now;
+        LeadClock();
         SaveWorld();
     }
+
+    private string? WantedLeader() => _sessionLead is { } own && CanLead(own) ? own
+        : _lead is { } still && CanLead(still) ? still
+        : NextAfter(_lead ?? _sessionLead);
 
     // ---- Saving -------------------------------------------------------------------------------------------------------
 
@@ -141,9 +391,29 @@ public sealed partial class TacticsGame
         };
     }
 
-    /// <summary>Saves the party's place now, if it has changed.</summary>
+    /// <summary>
+    /// Schedules a save: soon after the party stops, and on a fixed deadline while it walks. A walk that carries on takes back
+    /// the stop's save, so walking in fits and starts saves no more often than walking.
+    /// </summary>
+    private void SaveSoon()
+    {
+        if (!WorldChanged)
+            return;
+        if (_dir is null)
+        {
+            _ctx.SetTimer(Timers.Save, Walk.SaveAfterStop);
+            return;
+        }
+        var by = _saveBy ??= _ctx.Now + Walk.SaveWhileWalking;
+        if (_ctx.TimerDeadline(Timers.Save) != by)
+            _ctx.SetTimer(Timers.Save, Longest(by - _ctx.Now, TimeSpan.FromMilliseconds(1)));
+    }
+
+    /// <summary>Saves the party's place now, if it has changed, and whatever was scheduled goes with it.</summary>
     private void SaveWorld()
     {
+        _ctx.CancelTimer(Timers.Save);
+        _saveBy = null;
         if (!WorldChanged)
             return;
         KeepWorld();

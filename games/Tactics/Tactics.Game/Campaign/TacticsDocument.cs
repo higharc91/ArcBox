@@ -57,7 +57,7 @@ public sealed record BattleSave(string Encounter, ulong Seed, ImmutableArray<Pro
 /// <param name="Region">The region's id.</param>
 /// <param name="At">The leader's tile. A repaint can make it illegal, and it's checked on the way in.</param>
 /// <param name="Facing">The tile the leader faces.</param>
-/// <param name="LastLeader">The profile that led last, which the next session's leader follows in member order; null before anyone has.</param>
+/// <param name="LastLeader">The profile whose session it last was, whoever held the lead at the end, which the next session's leader follows in member order; null before anyone has.</param>
 /// <param name="Flags">The story flags set so far.</param>
 /// <param name="Beats">The story beats done so far.</param>
 public sealed record WorldSave(string Region, Tile At, Tile Facing, string? LastLeader, ImmutableArray<string> Flags, ImmutableArray<string> Beats);

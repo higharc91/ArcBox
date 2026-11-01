@@ -150,7 +150,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         if (connected ? !_online.Add(id) : !_online.Remove(id))
             return;
         var player = _players.FirstOrDefault(p => p.Id == id);
-        ReconsiderLeader();
+        WalkerConnection(player, connected);
         switch (_phase)
         {
             case TacticsPhase.Muster:
@@ -185,10 +185,14 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         }
         if (custom.Action is null)
             return;
+        HeardFrom(profile);
         switch (_phase)
         {
             case TacticsPhase.Muster when custom.Action == "pickClass":
                 PickClass(player, profile, custom.Data);
+                break;
+            case TacticsPhase.Exploration when custom.Action == "walk":
+                WalkInput(player, custom.Data);
                 break;
             case TacticsPhase.Exploration when custom.Action == "pickClass":
                 PickClass(player, profile, custom.Data);
@@ -227,8 +231,19 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     /// <inheritdoc />
     public void OnTimer(string key)
     {
-        if (_phase != TacticsPhase.Battle)
-            return;
+        switch (_phase)
+        {
+            case TacticsPhase.Battle:
+                BattleTimer(key);
+                break;
+            case TacticsPhase.Exploration:
+                WalkTimer(key);
+                break;
+        }
+    }
+
+    private void BattleTimer(string key)
+    {
         switch (key)
         {
             case Timers.Pace:

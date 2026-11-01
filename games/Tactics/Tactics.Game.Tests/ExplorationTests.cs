@@ -34,7 +34,7 @@ public sealed class ExplorationTests
         return (TacticsDocument.Read(s.Lease.Document) with { World = world, PartyLevel = level }).ToJson();
     }
 
-    private static WorldSave Saved(Tile at, string? region = Ford, string? lastLeader = null)
+    internal static WorldSave Saved(Tile at, string? region = Ford, string? lastLeader = null)
         => new(region!, at, new Tile(at.X + 1, at.Y), lastLeader, ["a_flag"], ["a_beat"]);
 
     /// <summary>The rules without their region: a pack with no world.</summary>
@@ -72,23 +72,31 @@ public sealed class ExplorationTests
     }
 
     /// <summary>Ashen Ford with a wall painted around <paramref name="tile"/>, in ground open enough that nothing else is cut off.</summary>
-    private static RulesPack WalledIn(Tile tile) => EditedRules(rules =>
+    private static RulesPack WalledIn(Tile tile)
+    {
+        (Tile, int, byte)[] walls = [.. new[] { new Tile(tile.X + 1, tile.Y), new Tile(tile.X - 1, tile.Y), new Tile(tile.X, tile.Y + 1), new Tile(tile.X, tile.Y - 1) }
+            .Select(wall => (wall, 2, (byte)(Rules.RegionFor(Ford)!.TileAt(wall)!.Flags | TileFlags.Impassable)))];
+        return Painted(walls);
+    }
+
+    /// <summary>Ashen Ford with the given bytes of its tiles rewritten: byte 0 of a tile is its height, 2 its flags.</summary>
+    internal static RulesPack Painted(params (Tile At, int Byte, byte Value)[] paint) => EditedRules(rules =>
     {
         var path = Path.Combine(rules, "world", "ashen_ford.json");
         var region = JsonNode.Parse(File.ReadAllText(path))!;
-        foreach (var wall in new[] { new Tile(tile.X + 1, tile.Y), new Tile(tile.X - 1, tile.Y), new Tile(tile.X, tile.Y + 1), new Tile(tile.X, tile.Y - 1) })
+        foreach (var (at, offset, value) in paint)
         {
-            var (cx, cy) = (wall.X / WorldRegion.ChunkSize, wall.Y / WorldRegion.ChunkSize);
+            var (cx, cy) = (at.X / WorldRegion.ChunkSize, at.Y / WorldRegion.ChunkSize);
             var chunk = region["chunks"]!.AsArray().Single(c => c!["x"]!.GetValue<int>() == cx && c["y"]!.GetValue<int>() == cy)!;
             var tiles = Convert.FromBase64String(chunk["tiles"]!.GetValue<string>());
-            tiles[(wall.Y % WorldRegion.ChunkSize * WorldRegion.ChunkSize + wall.X % WorldRegion.ChunkSize) * 3 + 2] |= (byte)TileFlags.Impassable;
+            tiles[(at.Y % WorldRegion.ChunkSize * WorldRegion.ChunkSize + at.X % WorldRegion.ChunkSize) * 3 + offset] = value;
             chunk["tiles"] = Convert.ToBase64String(tiles);
         }
         File.WriteAllText(path, region.ToJsonString());
     });
 
     /// <summary>A tile in the middle of a five-tile square of level ground the party can reach, away from anything placed on the map.</summary>
-    private static Tile OpenGround()
+    internal static Tile OpenGround()
     {
         var ground = Ground;
         var def = Rules.RegionFor(Ford)!.Def;
