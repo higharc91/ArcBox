@@ -145,8 +145,13 @@ public sealed record WalkerView(string Id, string Name, string Sprite, bool Here
 /// against it: a press that does nothing must not look like letting go or a dropped phone. It's false again once the thumb lifts, so
 /// each press against a wall is its own bump. The phone isn't told, because that would mint a new view under the thumb.
 /// </param>
+/// <param name="Bumps">
+/// How many steps a wall has refused, counting up from 0 each session: every press, change of direction or latched quick tap that a
+/// wall turns back, and a held walk reaching one. The TV bumps whenever it goes up, which catches what <paramref name="Blocked"/> can't:
+/// a latched tap into a wall is refused and let go in the same moment. A new <paramref name="Epoch"/> may start it again from 0.
+/// </param>
 public sealed record ExploreView(string Region, string Name, int Epoch, int Seq, Tile At, Tile Facing, bool Held,
-    ImmutableArray<WalkLeg> Legs, ImmutableArray<WalkerView> Party, string? Leader, int Chapter = 0, bool Blocked = false);
+    ImmutableArray<WalkLeg> Legs, ImmutableArray<WalkerView> Party, string? Leader, int Chapter = 0, bool Blocked = false, int Bumps = 0);
 
 /// <summary>The TV's view of a tactics session (adapter spec §8).</summary>
 /// <param name="Phase">The phase.</param>
@@ -246,7 +251,7 @@ public sealed partial class TacticsGame
     private ExploreView? ExploreViewOf() => _region is not { } region ? null : new ExploreView(region.Def.Id, region.Def.Name, _epoch, _walkSeq, _at, _facing, _dir is not null && !_blocked, _legs,
         [.. Walkers().Select(w => new WalkerView(w.Player.Profile!.Value.Value, w.Player.Name,
             HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{w.Character.Class}"])!, w.Here, w.Leads))],
-        Leader?.Name, region.Def.Chapter, _dir is not null && _blocked);
+        Leader?.Name, region.Def.Chapter, _dir is not null && _blocked, _bumps);
 
     private ControllerView BattleScreen(ProfileId profile)
     {

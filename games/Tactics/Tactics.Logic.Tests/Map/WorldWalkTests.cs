@@ -194,8 +194,10 @@ public sealed class WorldWalkTests
     [Fact]
     public void Holding_a_direction_along_any_wall_never_steps_back_and_forth()
     {
+        var groundsWithJags = 0;
         for (var seed = 1; seed <= 300; seed++)
         {
+            var jags = 0;
             var terrain = RandomGround(seed);
             foreach (var start in Tiles(terrain).Where(terrain.Walkable))
                 foreach (var dir in Enum.GetValues<WalkDir>())
@@ -203,6 +205,8 @@ public sealed class WorldWalkTests
                     var (at, lastAlongX, trail) = (start, (bool?)null, new List<Tile> { start });
                     for (var step = 0; step < 30 && WorldWalk.Next(terrain, at, dir, Jump, lastAlongX) is { } move; step++)
                     {
+                        if (move.Slid && WorldWalk.Delta(dir) is (0, _) or (_, 0))
+                            jags++;         // a road direction slid round a jag
                         if (!move.Diagonal)
                             lastAlongX = move.To.Y == at.Y;
                         at = move.To;
@@ -215,7 +219,10 @@ public sealed class WorldWalkTests
                     for (var i = 1; i < trail.Count; i++)
                         Assert.True((trail[i].X - trail[i - 1].X) * dx + (trail[i].Y - trail[i - 1].Y) * dy >= 0, $"seed {seed}, {dir} from {start}: a step back");
                 }
+            groundsWithJags += jags > 0 ? 1 : 0;
         }
+        // The run has to have walked round jags, or a jag rule that never slid would pass it as trivially jitter-free.
+        Assert.True(groundsWithJags >= 250, $"only {groundsWithJags} of 300 grounds had a jag slide");
     }
 
     [Fact]

@@ -1141,6 +1141,7 @@ public sealed class WalkingTests
         Assert.Equal(s.Harness.Players[1].Id, s.Game.Leader!.Id);
 
         s.Send(0, "endTurn");       // anything at all from that phone
+        s.Harness.Advance(TimeSpan.FromSeconds(3));     // once the stand-in has had the pad 3 s
 
         Assert.Equal(s.Harness.Players[0].Id, s.Game.Leader!.Id);
     }
@@ -1157,6 +1158,7 @@ public sealed class WalkingTests
         Assert.False(Party(s).Held);
 
         Walk(s, null);                  // ...and the phone that went quiet is heard again by its own
+        s.Harness.Advance(TimeSpan.FromSeconds(3));
 
         Assert.Equal(s.Harness.Players[0].Id, s.Game.Leader!.Id);
         Assert.Equal(0, Party(s).Seq);
@@ -1203,6 +1205,7 @@ public sealed class WalkingTests
 
         s.Harness.SetConnected(0, false);
         s.Harness.SetConnected(0, true);
+        s.Harness.Advance(TimeSpan.FromSeconds(3));
 
         Assert.Equal(s.Harness.Players[0].Id, s.Game.Leader!.Id);
     }
@@ -1288,14 +1291,49 @@ public sealed class WalkingTests
     }
 
     [Fact]
-    public void The_session_leader_coming_back_to_a_stopped_party_takes_it_at_once()
+    public void A_stand_in_always_gets_3_seconds_with_the_pad_however_long_the_party_stood()
     {
         var s = At(Road());
-        s.Harness.SetConnected(0, false);
+        for (var i = 0; i < 4; i++)                     // idle 12 s, the leader's phone pinging
+        {
+            s.Harness.Advance(TimeSpan.FromSeconds(3));
+            Walk(s, null);
+        }
+        Walk(s, null);
+        s.Harness.SetConnected(0, false);               // Bo blips...
+        Assert.Equal(s.Harness.Players[1].Id, s.Game.Leader!.Id);
+        Assert.Equal("Player2 leads now.", s.Host.Notice);
 
+        s.Harness.Advance(TimeSpan.FromMilliseconds(500));
+        s.Harness.SetConnected(0, true);                // ...and is back half a second later
+        Assert.Equal(s.Harness.Players[1].Id, s.Game.Leader!.Id);
+        Assert.Equal("Player2 leads now.", s.Host.Notice);
+        s.Harness.Advance(TimeSpan.FromMilliseconds(2499));
+        Assert.Equal(s.Harness.Players[1].Id, s.Game.Leader!.Id);
+
+        s.Harness.Advance(TimeSpan.FromMilliseconds(1));
+        Assert.Equal(s.Harness.Players[0].Id, s.Game.Leader!.Id);
+        Assert.Equal("Player1 leads now.", s.Host.Notice);
+    }
+
+    [Fact]
+    public void A_stand_in_who_presses_straight_after_the_blip_is_heard()
+    {
+        var s = At(Road());
+        for (var i = 0; i < 4; i++)
+        {
+            s.Harness.Advance(TimeSpan.FromSeconds(3));
+            Walk(s, null);
+        }
+        Walk(s, null);
+        s.Harness.SetConnected(0, false);
+        s.Harness.Advance(TimeSpan.FromMilliseconds(500));
         s.Harness.SetConnected(0, true);
 
-        Assert.Equal(s.Harness.Players[0].Id, s.Game.Leader!.Id);
+        Walk(s, "se", player: 1);                       // the thumb that was already reaching for the new pad
+
+        Assert.Equal(1, Party(s).Seq);
+        Assert.Equal(s.Harness.Players[1].Id, s.Game.Leader!.Id);
     }
 
     [Fact]
@@ -1378,10 +1416,75 @@ public sealed class WalkingTests
         Assert.Equal($"{land} Player3 leads now.", s.Host.Notice);
 
         s.Harness.SetConnected(0, true);
+        Assert.Equal($"{land} Player3 leads now.", s.Host.Notice);      // the stand-in keeps it 3 s
+        s.Harness.Advance(TimeSpan.FromSeconds(3));
         Assert.Equal($"{land} Player1 leads now.", s.Host.Notice);
         s.Send(0, "battles");
 
         Assert.Equal(land, s.Host.Notice);
+    }
+
+    [Theory]
+    [InlineData("Jimbo leads now.", "Bo leads now.", "Jimbo leads now.")]                       // a note that ends with another's text
+    [InlineData("Jimbo leads now. Bo leads now.", "Bo leads now.", "Jimbo leads now.")]
+    [InlineData("Bo leads now. Jimbo leads now.", "Bo leads now.", "Jimbo leads now.")]
+    [InlineData("The land changed. Bo leads now. Then more.", "Bo leads now.", "The land changed. Then more.")]
+    [InlineData("Bo leads now.", "Bo leads now.", null)]
+    [InlineData("Not Bo leads now.x", "Bo leads now.", "Not Bo leads now.x")]
+    [InlineData("Bo leads now. Bo leads now.", "Bo leads now.", "Bo leads now.")]              // only the newest goes
+    public void Taking_a_note_down_takes_only_a_whole_note(string notice, string note, string? left)
+        => Assert.Equal(left, TacticsGame.Without(notice, note));
+
+    // ---- Bumps: every step a wall refuses, for the TV -----------------------------------------------------------------
+
+    [Fact]
+    public void Each_press_against_a_wall_is_a_bump()
+    {
+        var (at, dir, _) = Wall();
+        var s = At(at);
+        Assert.Equal(0, Party(s).Bumps);
+
+        Walk(s, dir);
+        Assert.Equal(1, Party(s).Bumps);
+        s.Harness.Advance(Ms100);
+        Walk(s, dir);                   // a ping of the same press isn't another
+        Assert.Equal(1, Party(s).Bumps);
+        Walk(s, null);
+        Walk(s, dir);
+
+        Assert.Equal(2, Party(s).Bumps);
+    }
+
+    [Fact]
+    public void Walking_on_open_ground_doesnt_bump()
+    {
+        var s = At(Road());
+        Hold(s, "se", 5);
+        Assert.Equal(0, Party(s).Bumps);
+    }
+
+    [Fact]
+    public void A_latched_tap_into_a_wall_is_a_bump_the_tv_can_see()
+    {
+        var (at, dir, _) = Wall();
+        var away = Dirs.First(d => WorldWalk.Next(Ground, at, d.Dir, ClassDef.DefaultJump, null) is { Slid: false } m
+            && WorldWalk.Next(Ground, m.To, Opposite(d.Dir), ClassDef.DefaultJump, null)?.To == at).Dir;
+        var s = At(at);
+        Walk(s, Name(away));
+        Walk(s, null);
+        s.Harness.Advance(TimeSpan.FromSeconds(1));
+        Walk(s, Name(Opposite(away)));
+        Walk(s, null);
+        Walk(s, dir);                   // a quick tap into the wall during the step back
+        Walk(s, null);
+
+        s.Harness.Advance(TimeSpan.FromSeconds(1));
+
+        Assert.False(Party(s).Blocked);      // refused and let go in the same moment: Blocked never shows it...
+        Assert.Equal(1, Party(s).Bumps);     // ...but the count does
+        var phones = Enumerable.Range(0, 4).Select(p => PhoneJson(s, p)).ToArray();
+        Walk(s, dir);
+        Assert.Equal(phones, Enumerable.Range(0, 4).Select(p => PhoneJson(s, p)));
     }
 
     [Fact]
@@ -1451,6 +1554,8 @@ public sealed class WalkingTests
         Assert.Equal(resumed.Harness.Players[2].Id, resumed.Game.Leader!.Id);
 
         resumed.Harness.SetConnected(0, true);
+        Assert.Equal(resumed.Harness.Players[2].Id, resumed.Game.Leader!.Id);     // the first back had the pad only just now
+        resumed.Harness.Advance(TimeSpan.FromSeconds(3));
         Assert.Equal(resumed.Harness.Players[0].Id, resumed.Game.Leader!.Id);
     }
 

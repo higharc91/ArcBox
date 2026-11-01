@@ -131,8 +131,8 @@ public sealed class WalkModelTests
         // Quick taps: a press during a step that hasn't stepped yet is owed; let go while owed, it's latched, and takes one step.
         private bool _owed, _latched;
 
-        // The takeback: when the party last stopped, and when whoever leads was last heard from (the silence rule's clock).
-        private DateTimeOffset _stoppedAt, _leaderHeard;
+        // The takeback: when the party last stopped or the lead last changed hands, and when whoever leads was last heard from.
+        private DateTimeOffset _settledAt, _leaderHeard;
         private int _seat = -1;
 
         public Run(Setup setup)
@@ -162,7 +162,7 @@ public sealed class WalkModelTests
             _over = false;
             _game = new TacticsGame(Rules, Timing);
             (_heldUntil, _dir, _lastAlongX, _commits, _behindSince) = (null, null, null, 0, null);
-            (_owed, _latched, _stoppedAt, _leaderHeard) = (false, false, DateTimeOffset.MinValue, _context.Clock);
+            (_owed, _latched, _settledAt, _leaderHeard) = (false, false, DateTimeOffset.MinValue, _context.Clock);
             _silent.Clear();
             _firesEachSecond.Clear();
             if (resume)
@@ -304,6 +304,17 @@ public sealed class WalkModelTests
                     if (!connected && led)
                         Forget();
                     Check(e, before!);
+                    break;
+                }
+                case "blip":    // a phone drops and is back Ms later; -1 is the session's own leader
+                {
+                    var own = _players.FindIndex(p => p.Profile!.Value.Value == _lease.World?.LastLeader);
+                    var seat = e.Player < 0 ? Math.Max(own, 0) : Seat(e);
+                    Apply(new Event("disc", seat), before);
+                    if (!_over && e.Ms > 0)
+                        Advance(e.Ms);
+                    if (!_over)
+                        Apply(new Event("conn", seat), Look());
                     break;
                 }
                 case "tap":     // a press, held for Ms, and let go
@@ -483,7 +494,7 @@ public sealed class WalkModelTests
             if (party.Legs.Length > 0)
                 Must(party.Legs[^1].Seq == party.Seq && party.Legs[^1].To == party.At, "the last leg isn't the party");
             if (before.Timers.Contains(TacticsGame.Timers.Step) && !after.Timers.Contains(TacticsGame.Timers.Step))
-                _stoppedAt = now;
+                _settledAt = now;
             if (!fresh)
                 CheckChange(e, before, after, now);
             if (_latched && !after.Timers.Contains(TacticsGame.Timers.Step) && after.Phase == TacticsPhase.Exploration)
@@ -530,13 +541,13 @@ public sealed class WalkModelTests
                 var silence = e.Kind == "fire:lead" && now - _leaderHeard >= TimeSpan.FromMilliseconds(7999);
                 if (oldCanLead && silence)
                     _silent.Add(old!.Profile!.Value.Value);
-                // The takeback: the session's own leader takes it from a stand-in who could keep it only once the party has been
-                // stopped for 3 s, so that the stand-in's pad doesn't go the moment a thumb lifts.
+                // The takeback: the session's own leader takes it from a stand-in who could keep it only 3 s after the party stopped and 3 s
+                // after the stand-in got it, so that the stand-in's pad doesn't go the moment a thumb lifts or reaches for it.
                 var own = _players.FirstOrDefault(p => p.Profile!.Value.Value == _lease.World?.LastLeader);
                 if (oldCanLead && !silence && own is not null && party.Leader == own.Name
                     && before.Phase == TacticsPhase.Exploration && after.Phase == TacticsPhase.Exploration)
-                    Must(now - _stoppedAt >= TimeSpan.FromMilliseconds(2999), $"the lead went back {(now - _stoppedAt).TotalMilliseconds} ms after the party stopped, on {e}");
-                _leaderHeard = now;
+                    Must(now - _settledAt >= TimeSpan.FromMilliseconds(2999), $"the lead went back {(now - _settledAt).TotalMilliseconds} ms after the party stopped or the stand-in got it, on {e}");
+                (_leaderHeard, _settledAt) = (now, now);       // a new leader is heard, and has the pad for at least 3 s
                 if (!after.Timers.Contains(TacticsGame.Timers.Step))
                     Forget();
             }
@@ -615,9 +626,9 @@ public sealed class WalkModelTests
                 Must((now - since).TotalSeconds <= 15.01, $"unsaved for {(now - since).TotalSeconds} s");
 
             // The session's leader has it back once the party has been stopped for 3 s, give or take a late timer.
-            var takeback = _stoppedAt == DateTimeOffset.MinValue ? _stoppedAt : _stoppedAt.AddMilliseconds(3000 + (_late ? 1600 : 1));
+            var takeback = _settledAt == DateTimeOffset.MinValue ? _settledAt : _settledAt.AddMilliseconds(3000 + (_late ? 1600 : 1));
             if (!stepping && now >= takeback && saved?.LastLeader is { } own && !_silent.Contains(own) && party.Party.FirstOrDefault(w => w.Id == own) is { Here: true } walker)
-                Must(walker.Leads, $"the session's leader {own} is here and the party's been stopped since {_stoppedAt:HH:mm:ss.fff}, but {party.Leader} leads, after {e}");
+                Must(walker.Leads, $"the session's leader {own} is here and the party's been stopped since {_settledAt:HH:mm:ss.fff}, but {party.Leader} leads, after {e}");
         }
     }
 
@@ -692,8 +703,10 @@ public sealed class WalkModelTests
                 events.Add(new Event("adv", Ms: r.Next(6) switch { 0 => r.Next(1, 30), 1 => 66, 2 => 250, 3 => 300, 4 => r.Next(1, 800), _ => rhythm }));
             else if (roll < 765)
                 events.Add(new Event("adv", Ms: r.Next(3) == 0 ? r.Next(8000, 20_000) : r.Next(1000, 3000)));
-            else if (roll < 820)
+            else if (roll < 800)
                 events.Add(new Event("disc", r.Next(4)));
+            else if (roll < 820)      // a blip: a phone drops and comes back, often before a stand-in has had the pad long
+                events.Add(new Event("blip", r.Next(5) == 0 ? -1 : r.Next(4), Ms: r.Next(3) == 0 ? 0 : r.Next(1, 4000)));
             else if (roll < 880)
                 events.Add(new Event("conn", r.Next(4)));
             else if (roll < 900)

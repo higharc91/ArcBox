@@ -247,6 +247,8 @@ public sealed class WalkingRoomTests
         Assert.True(Leads(f, standIn));
 
         await SendAsync(f, lead, Walk(null));                   // the pad resends on the new view
+        Assert.True(Leads(f, standIn));                         // heard, but the stand-in keeps the pad 3 s (WalkTiming.TakebackAfter)
+        await PassAsync(f, TimeSpan.FromSeconds(3));
 
         Assert.True(Leads(f, lead));
         Assert.False(Leads(f, standIn));

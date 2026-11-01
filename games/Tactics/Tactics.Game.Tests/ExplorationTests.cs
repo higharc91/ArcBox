@@ -361,6 +361,7 @@ public sealed class ExplorationTests
         s.Harness.SetConnected(1, false);
         Assert.Equal("pr_member3", s.Game.Leader!.Profile!.Value.Value);
         s.Harness.SetConnected(1, true);
+        s.Harness.Advance(TimeSpan.FromSeconds(3));       // the stand-in keeps the pad a moment: see WalkTiming.TakebackAfter
 
         Assert.Equal("pr_member2", s.Game.Leader!.Profile!.Value.Value);
         Assert.Equal("pr_member2", TacticsDocument.Read(s.Lease.Document).World!.LastLeader);

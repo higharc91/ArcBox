@@ -75,14 +75,17 @@ public sealed partial class TacticsGame
     /// </summary>
     private bool _latched;
 
-    /// <summary>When the party last stopped, which is what <see cref="WalkTiming.TakebackAfter"/> counts from.</summary>
-    private DateTimeOffset _stoppedAt = DateTimeOffset.MinValue;
+    /// <summary>When the party last stopped or the lead last changed hands, whichever is later: what <see cref="WalkTiming.TakebackAfter"/> counts from.</summary>
+    private DateTimeOffset _settledAt = DateTimeOffset.MinValue;
 
     /// <summary>The handover's note on the TV, if it's still up, so the next handover replaces it rather than adding to it.</summary>
     private string? _leadNote;
 
     /// <summary>Whether the party has been told that the road goes on past the region's edge: once a session is enough.</summary>
     private bool _edgeSaid;
+
+    /// <summary>How many steps a wall has refused this session: what <see cref="ExploreView.Bumps"/> says.</summary>
+    private int _bumps;
 
     /// <summary>What the TV says when the party is stopped by the region's edge. The user's to reword.</summary>
     internal const string RoadGoesOn = "The road goes on, but not today.";
@@ -141,14 +144,28 @@ public sealed partial class TacticsGame
 
     private void Note(string text) => _notice = _notice is null ? text : $"{_notice} {text}";
 
-    /// <summary>Takes one note back down, leaving any others up.</summary>
-    private void Unnote(string? text)
+    /// <summary>
+    /// Takes one note back down, leaving any others up. Notes are joined by spaces, so only a whole note counts: the newest one that
+    /// starts the notice or follows a space, and ends it or is followed by one. "Bo leads now." is never cut out of "Jimbo leads now."
+    /// </summary>
+    private void Unnote(string? text) => _notice = Without(_notice, text);
+
+    /// <summary><paramref name="notice"/> with the newest whole note <paramref name="text"/> taken out (see <see cref="Unnote"/>); null if nothing is left.</summary>
+    internal static string? Without(string? notice, string? text)
     {
-        if (text is null || _notice is null)
-            return;
-        _notice = _notice == text ? null
-            : _notice.EndsWith($" {text}", StringComparison.Ordinal) ? _notice[..^(text.Length + 1)]
-            : _notice.Replace($"{text} ", "", StringComparison.Ordinal);
+        if (string.IsNullOrEmpty(text) || notice is null)
+            return notice;
+        for (var at = notice.LastIndexOf(text, StringComparison.Ordinal); at >= 0;
+             at = at == 0 ? -1 : notice.LastIndexOf(text, Math.Min(notice.Length - 1, at + text.Length - 2), StringComparison.Ordinal))
+        {
+            var end = at + text.Length;
+            if ((at > 0 && notice[at - 1] != ' ') || (end < notice.Length && notice[end] != ' '))
+                continue;
+            var (from, to) = end < notice.Length ? (at, end + 1) : (Math.Max(0, at - 1), end);    // with one of the spaces round it
+            var left = notice.Remove(from, to - from);
+            return left.Length == 0 ? null : left;
+        }
+        return notice;
     }
 
     /// <summary>Says on the TV who leads now (5b review item 5). Only the TV: the phones already show it, and a note would mint them a view.</summary>
@@ -264,6 +281,7 @@ public sealed partial class TacticsGame
             var (dx, dy) = WorldWalk.Delta(dir);
             _facing = new Tile(from.X + dx, from.Y + dy);
             _blocked = true;
+            _bumps++;
             if (!_edgeSaid && !terrain.Map.InBounds(_facing))
             {
                 _edgeSaid = true;
@@ -344,7 +362,7 @@ public sealed partial class TacticsGame
         if (_dir is null)
             return false;
         (_dir, _blocked, _owed, _latched) = (null, false, false, false);
-        _stoppedAt = _ctx.Now;
+        _settledAt = _ctx.Now;
         _ctx.CancelTimer(Timers.Step);
         return true;
     }
@@ -440,12 +458,13 @@ public sealed partial class TacticsGame
     /// <summary>
     /// When the session's own leader can take the lead back from whoever stood in for them, or null if nobody is waiting to: only in
     /// the world, with the party stopped and both of them able to lead. It's <see cref="WalkTiming.TakebackAfter"/> from the party
-    /// last stopping, so it lands between walks and not between one press and the next. In any other phase there's no pad to pull
+    /// last stopping or the stand-in getting the lead, whichever is later, so it lands between walks and not between one press and the
+    /// next, and a stand-in whose pad has just appeared isn't left reaching for nothing. In any other phase there's no pad to pull
     /// out from under a thumb, so the lead goes back at once.
     /// </summary>
     private DateTimeOffset? TakebackAt => _phase == TacticsPhase.Exploration && _dir is null && _sessionLead is { } own && _lead is { } standIn
         && standIn != own && CanLead(own) && CanLead(standIn)
-            ? _stoppedAt + Walk.TakebackAfter
+            ? _settledAt + Walk.TakebackAfter
             : null;
 
     /// <summary>Whether a member can take the lead: here, with a character, and not silent.</summary>
@@ -502,7 +521,7 @@ public sealed partial class TacticsGame
         }
         var was = _lead;
         _lead = wanted;
-        _heardAt = _ctx.Now;
+        (_heardAt, _settledAt) = (_ctx.Now, _ctx.Now);      // a stand-in gets the pad for at least TakebackAfter, however long the party stood before
         if (_phase == TacticsPhase.Exploration && was is not null && !_electionOpen && Leader is { } leader)     // not a seat found empty at Start
             SayLeader(leader.Name);
         LeadClock();
