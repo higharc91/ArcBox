@@ -58,7 +58,7 @@ public sealed class WalkShow
     /// <summary>The party, in the newest view's order.</summary>
     public IReadOnlyList<WalkerView> Party => _party;
 
-    /// <summary>Where each walker was put by the last <see cref="Frame"/>, by <see cref="WalkerView.Id"/>.</summary>
+    /// <summary>Where each walker was put by the last <see cref="Frame"/>, by <see cref="WalkerView.Id"/>: the track's places, without a bump's lean.</summary>
     public IReadOnlyDictionary<string, UnitPlace> Places => _places;
 
     /// <summary>A show on <paramref name="terrain"/>. With no <paramref name="sounds"/>, it's a silent one.</summary>
@@ -86,8 +86,18 @@ public sealed class WalkShow
         return view.Legs.IsDefault ? [] : [.. view.Legs.Where(l => l.Seq > told)];
     }
 
-    /// <summary>Moves everything on by <paramref name="seconds"/>.</summary>
-    public WalkFrame Frame(double seconds)
+    /// <summary>The TV's connection came back: what it missed is old news, so the next view only says how many walls had refused a step.</summary>
+    public void Rebase()
+    {
+        _bump.Rebase();
+        _bumped = false;
+    }
+
+    /// <summary>
+    /// Moves everything on by <paramref name="seconds"/>. Until the world is <paramref name="revealed"/> nobody can see the party, so a bump
+    /// then is dropped, sound and all.
+    /// </summary>
+    public WalkFrame Frame(double seconds, bool revealed = true)
     {
         _track.Advance(seconds);
         var places = _places = _track.Places(_terrain);
@@ -101,13 +111,15 @@ public sealed class WalkShow
         var footstep = Footstep(focus.Map, jumped: cut || _track.Skips != _skips);
         (_cuts, _skips) = (_track.Cuts, _track.Skips);
 
+        if (!revealed)
+            _bump.Cancel();
         _bump.Advance(seconds);
-        places = _places = Nudged(places);
-        var bumped = _bumped;
+        var drawn = Nudged(places);
+        var bumped = _bumped && drawn != places;     // a knock only with a lean to see
         _bumped = false;
         var bump = bumped ? _sounds?.Step(_terrain.Map, new Tile((int)MathF.Floor(focus.Map.X), (int)MathF.Floor(focus.Map.Y))) : null;
 
-        var units = UnitPlan.Walkers(_party, places, _track.Poses, _art, _pixels);
+        var units = UnitPlan.Walkers(_party, drawn, _track.Poses, _art, _pixels);
         return new WalkFrame(units, _camera.Fit, focus.Map, _track.Heading * TilesPerSecond, footstep, cut, _track.Walked, focus.Feet, bumped, bump);
     }
 

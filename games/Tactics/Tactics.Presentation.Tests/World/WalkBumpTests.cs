@@ -46,6 +46,31 @@ public sealed class WalkBumpTests
         Assert.True(bump.Receive(Wall(1, epoch: 2)));          // and from there it bumps as ever
     }
 
+    // Review: a websocket reconnect keeps the scene and the epoch, and the presses made while the TV was away are old news.
+    [Fact]
+    public void After_a_reconnect_the_first_view_is_a_baseline()
+    {
+        var bump = new WalkBump();
+        bump.Receive(Wall(3));
+        bump.Rebase();
+
+        Assert.False(bump.Receive(Wall(8)));
+        Assert.True(bump.Receive(Wall(9)));
+    }
+
+    [Fact]
+    public void A_reconnect_in_the_middle_of_a_bump_ends_it()
+    {
+        var bump = new WalkBump();
+        bump.Receive(Wall(0));
+        bump.Receive(Wall(1));
+        bump.Advance(WorldTuning.BumpSeconds / 2);
+        bump.Rebase();
+
+        Assert.False(bump.Active);
+        Assert.Equal(Vector2.Zero, bump.Offset);
+    }
+
     [Fact]
     public void A_bump_goes_toward_the_wall_and_back()
     {

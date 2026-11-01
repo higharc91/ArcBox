@@ -38,6 +38,15 @@ public sealed class WalkBump
         return true;
     }
 
+    /// <summary>
+    /// The TV's connection came back: the next view only says where the count stands, as a first view does, because what was refused while
+    /// the TV was away is old news. A bump under way ends.
+    /// </summary>
+    public void Rebase() => (_started, _since) = (false, double.PositiveInfinity);
+
+    /// <summary>Ends a bump under way, as if it had played: one nobody could see.</summary>
+    public void Cancel() => _since = double.PositiveInfinity;
+
     /// <summary>Moves the bump on by <paramref name="seconds"/>.</summary>
     public void Advance(double seconds)
     {

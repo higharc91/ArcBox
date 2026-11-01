@@ -1,4 +1,5 @@
 using System.Numerics;
+using Tactics.Game;
 using Tactics.Logic;
 using Tactics.Presentation.Audio;
 using Tactics.Presentation.Board;
@@ -333,29 +334,84 @@ public sealed class WalkShowTests
     [Fact]
     public void A_wall_bumps_the_leader_alone_and_knocks_once()
     {
-        var show = Show();
-        var script = new Script(Start, 3);
-        show.Receive(script.Now(false) with { Bumps = 4 });
-        for (var t = 0.0; t < 2; t += Frame)
-            Assert.False(show.Frame(Frame).Bumped);         // a first view's count is old news
-        var still = show.Places.ToDictionary(p => p.Key, p => p.Value.Map);
+        var (show, script, still, drawn) = Bumpable();
 
-        show.Receive(script.Now(false) with { Facing = new Tile(script.At.X, script.At.Y - 1), Blocked = true, Bumps = 5 });
+        show.Receive(Bumped(script, 5));
         var frames = new List<WalkFrame>();
         var leaned = 0f;
         for (var t = 0.0; t < WorldTuning.BumpSeconds + 0.1; t += Frame)
         {
-            frames.Add(show.Frame(Frame));
-            leaned = Math.Max(leaned, still["a"].Y - show.Places["a"].Map.Y);
-            Assert.Equal(still["b"], show.Places["b"].Map);
-            Assert.Equal(still["c"], show.Places["c"].Map);
+            var frame = show.Frame(Frame);
+            frames.Add(frame);
+            var feet = frame.Units.ToDictionary(u => u.Id.Value, u => u.Feet);
+            leaned = Math.Max(leaned, Vector2.Distance(drawn["a"], feet["a"]));
+            Assert.Equal(drawn["b"], feet["b"]);
+            Assert.Equal(drawn["c"], feet["c"]);
+            Assert.Equal(still, show.Places.ToDictionary(p => p.Key, p => p.Value.Map));     // what's logged is where the track put them
         }
 
         Assert.Single(frames, f => f.Bumped);
         Assert.NotNull(frames.Single(f => f.Bumped).Bump);
-        Assert.InRange(leaned, WorldTuning.BumpTiles * 0.9f, WorldTuning.BumpTiles + 1e-4f);
-        Assert.Equal(still["a"], show.Places["a"].Map);       // and back
+        Assert.True(leaned >= 2, $"the leader leaned {leaned} px");
+        Assert.Equal(drawn["a"], frames[^1].Units.Single(u => u.Id.Value == "a").Feet);      // and back
     }
+
+    // Review: the knock is heard only with a lean to see. Under the title card, while the world opens, there's neither.
+    [Fact]
+    public void A_bump_under_the_title_card_is_neither_seen_nor_heard()
+    {
+        var (show, script, _, drawn) = Bumpable();
+
+        show.Receive(Bumped(script, 5));
+        for (var t = 0.0; t < WorldTuning.BumpSeconds + 0.1; t += Frame)
+        {
+            var frame = show.Frame(Frame, revealed: false);
+            Assert.False(frame.Bumped);
+            Assert.Null(frame.Bump);
+            Assert.Equal(drawn["a"], frame.Units.Single(u => u.Id.Value == "a").Feet);
+        }
+        Assert.All(Enumerable.Range(0, 30).Select(_ => show.Frame(Frame)), f => Assert.False(f.Bumped));      // nor later, once it's up
+    }
+
+    [Fact]
+    public void A_bump_with_nobody_leading_is_neither_seen_nor_heard()
+    {
+        var (show, script, _, _) = Bumpable();
+
+        var view = Bumped(script, 5);
+        show.Receive(view with { Party = [.. view.Party.Select(w => w with { Leads = false })], Leader = null });
+
+        Assert.All(Enumerable.Range(0, 30).Select(_ => show.Frame(Frame)), f => Assert.False(f.Bumped));
+    }
+
+    [Fact]
+    public void After_a_reconnect_an_old_count_doesnt_bump()
+    {
+        var (show, script, _, _) = Bumpable();
+
+        show.Rebase();
+        show.Receive(Bumped(script, 9));
+
+        Assert.All(Enumerable.Range(0, 30).Select(_ => show.Frame(Frame)), f => Assert.False(f.Bumped));
+    }
+
+    /// <summary>A party of three at rest, with a count of refused steps already in: where the track has them, and where they're drawn.</summary>
+    private static (WalkShow Show, Script Script, Dictionary<string, Vector2> Still, Dictionary<string, Vector2> Drawn) Bumpable()
+    {
+        var show = Show();
+        var script = new Script(Start, 3);
+        show.Receive(script.Now(false) with { Bumps = 4 });
+        WalkFrame frame = null!;
+        for (var t = 0.0; t < 2; t += Frame)
+        {
+            frame = show.Frame(Frame);
+            Assert.False(frame.Bumped);         // a first view's count is old news
+        }
+        return (show, script, show.Places.ToDictionary(p => p.Key, p => p.Value.Map), frame.Units.ToDictionary(u => u.Id.Value, u => u.Feet));
+    }
+
+    private static ExploreView Bumped(Script script, int bumps)
+        => script.Now(false) with { Facing = new Tile(script.At.X, script.At.Y - 1), Blocked = true, Bumps = bumps };
 
     private static int Reversals(IEnumerable<float> values)
     {

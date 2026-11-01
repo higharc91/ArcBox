@@ -434,6 +434,7 @@ public partial class Main : Control
                 if (!_wasReconnecting)
                 {
                     _wasReconnecting = true;
+                    (_scene as IConnectionScene)?.ConnectionLost();
                     SetBanner("Connection lost · reconnecting…");
                     _shots?.Capture("reconnecting");
                 }
