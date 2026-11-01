@@ -55,7 +55,8 @@
 #     plays must be that n, newer than the last it played before it died: no old beat comes back. Then Results as above;
 #   - ARCBOX_RESTART=1: at the same beat the server is stopped and started on the same URL and database. The TV must log
 #     `ROOM <CODE>` again (never another code), show `TACTICS screen tactics-resuming`, and play a new beat after it. The
-#     bots rejoin by themselves. Then Results as above.
+#     bots rejoin by themselves, and on Linux they're often all back before the TV, so Resuming is over before it hears of it:
+#     then the first beat it plays once back must be newer than any it played before. Then Results as above.
 #
 # Walking (ARCBOX_GAME=tactics ARCBOX_WALK=1): the TV starts with --walk-log as well, and the bots walk the world after Muster rather
 # than fighting (bots.cjs --walk=ARCBOX_WALK_SCRIPT --walk-latency=<presses> --walk-drop=kill --tv-log --go). At the script's
@@ -78,9 +79,8 @@
 # driver, and processes are stopped with taskkill, as Windows has no TERM. Put the .NET SDK's dotnet first on PATH and set GODOT
 # to the *_console.exe (the plain exe has no stdout to read ROOM from). Only Tactics was run there. Git Bash has no
 # Playwright, so REDLINE's phone script won't run unless you install it.
-# Not checked on Linux: the Tactics modes were only run on Windows, so the Xvfb path has run them in no test. The REDLINE modes
-# are the same steps as before, with the TV's start in a function, but weren't rerun either, as the PC this was written
-# on has no Xvfb or Playwright.
+# On Linux (Xvfb, software Vulkan) ARCBOX_GAME=tactics, with ARCBOX_RECONNECT=1, ARCBOX_RESTART=1 and ARCBOX_WALK=1, passed on
+# 2026-11-01. The REDLINE modes are the same steps as before, with the TV's start in a function, but weren't rerun.
 #
 # Environment (all optional except GODOT when `godot` is not on PATH):
 #   GODOT            Godot 4.7.2 .NET binary
@@ -567,7 +567,20 @@ if [[ "$GAME" == "tactics" ]]; then
   elif [[ "$RESTART" == "1" ]]; then
     RESUMING=$(after "$MARK" '$0 == "TACTICS screen tactics-resuming"')   # it comes in ahead of the ROOM line
     if [[ -z "$RESUMING" ]]; then
-      tactics_fail "TACTICS screen tactics-resuming after the restart"
+      # The phones can all be back before the TV is: then Resuming ends before the TV hears of it, and a slow TV mustn't hold the
+      # game up. So the TV, once back, has to play on from a beat newer than any it played before it was back.
+      # The TV can rejoin the server while it shuts down (a ROOM line), and again once it's back: the last before the Results counts.
+      BACK=$(awk -v from="$MARK" -v code="$CODE" 'NR > from && $0 == "TACTICS screen tactics-results" { exit }
+        NR > from && $0 == "ROOM " code { n = NR } END { print n + 0 }' "$OUT/tv.log")
+      BEFORE_BACK=$(awk -v to="$BACK" 'NR < to && /^BEAT [0-9]+ / && $2 > n { n = $2 } END { print n + 0 }' "$OUT/tv.log")
+      n=$(after "$BACK" '/^BEAT [0-9]+ /')
+      GOT=$([[ -n "$n" ]] && sed -n "${n}p" "$OUT/tv.log" | awk '{ print $2 }' || true)
+      if [[ -n "$GOT" ]] && (( GOT > BEFORE_BACK )); then
+        log "restart: the phones were back before the TV, so it never saw Resuming; it played on from beat $GOT, after $BEFORE_BACK"
+        RESUMED_AT=$n
+      else
+        tactics_fail "TACTICS screen tactics-resuming after the restart, or a newer beat than $BEFORE_BACK once the TV was back"
+      fi
     else
       n=$(after "$RESUMING" '/^BEAT [0-9]+ /')
       if [[ -n "$n" ]]; then

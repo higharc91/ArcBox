@@ -25,6 +25,51 @@ Simulated parties have no subclass. The latest numbers and every tuning decision
 
 If a content change alters a golden replay, re-record with `UPDATE_GOLDENS=1 dotnet test games/Tactics/Tactics.Logic.Tests`, review each diff, then run again without the flag. The recording run fails `Warlord_bridge_plays_the_showcase_triggers` if it runs before the replay is written; the second run must pass. To re-record `warlord-bridge` from the AI, empty its `commands` in `Golden/warlord-bridge.replay.json`.
 
+## Bot phones and the TV, end to end
+
+`tools/tactics-playtest/bots.cjs` joins a room as N phones over the real hub, with no browser, and plays a session: the first bot is the VIP, makes a campaign and starts the game, and each bot picks a class at Muster. Its header has every option and how to run the server and TV by hand; it needs `npm ci` in `web/play` first.
+
+Muster lands on the walk screen. By default the VIP leaves it with `battles`, picks `--encounter` (default `river_crossing`) and the run is a battle to its Results:
+
+| Option | What the bots do |
+|---|---|
+| `--fight` | attack what's in reach and walk towards the foes; without it they only end their turns |
+| `--area`, `--sit-out=turn,react`, `--leave` | prefer area spells; let the turn and reaction timers run out; leave the battle to the AI |
+| `--then=next` | play the next battle after the Results, for ever, instead of ending the session |
+| `--people=<n>` | wait for n real phones to take a seat first, to play alongside the bots |
+| `--host` | open the room and watch the host view themselves, with no TV |
+
+Every bot logs each move, ability and end of turn, and a timeout says which screen each bot was on. With no TV nothing sends `shown`, so each AI beat waits its fallback (400 ms plus 250 ms an event, at most 6 s), and a battle takes minutes: a `--host` run with `--timeout=40` times out mid-battle with the bots still playing, which is the "no turn logged" the handoff saw.
+
+With any walking option the party walks instead, and then the VIP ends the session. They run in this order:
+
+| Option | What it does |
+|---|---|
+| `--walk="e:4,ne:2,stop:1"` | holds each screen direction for so many seconds, pinging every 250 ms as the pad does; `stop` rests; `pause:<name>` logs `PAUSE <name>` and waits for the file `<name>` in `--go=<dir>` |
+| `--walk-latency[=<n>]` | n presses (default 20), each timed from the press to the TV's `WALK` line in `--tv-log` (or the host view with `--host`) |
+| `--walk-flood[=<n>]` | n seconds of a press and a stop at 60 messages a second, three times what the server's limiter lets through |
+| `--walk-drop[=kill\|stall]` | holds, then cuts the leader's connection with no stop, and times the party stopping, the lead passing and the disconnect event |
+
+While walking, whoever leads sends the pad's idle ping (a stop every 3 s), so a quiet leader keeps the lead as on a real phone.
+
+The TV's dev flag `--walk-log` prints what the bots and the e2e run read:
+
+- `WALK <seq> <x> <y> <unix ms>`: each step the TV is told of, when it reached the TV's main thread. Steps that came in the TV's first view after a snap aren't printed.
+- `WALKAT <unix ms> <seq> <held 0|1> <leader x> <leader y> <widest gap> <name> <x> <y> …`: where the TV drew each walker, leader first, at most every 0.25 s while anything moves and once when it comes to rest. Places are in tiles, with a tile's middle at .50. The widest gap is the furthest any walker is from the one ahead: a follower falling behind shows here.
+- `TACTICS walk snapped to <x> <y>`: the party was put somewhere rather than walked there: a first view, a new epoch, a reconnect.
+- `WALKSTATS …`: frame times and how far things moved on screen each frame, once per walk.
+
+`tools/tv-e2e.sh` runs the server, a TV on Xvfb (on Windows, in a window) and the bots together, and checks the TV's log. Set `GODOT` to the Godot 4.7.2 .NET binary (on Windows the console one):
+
+| Run | What must happen |
+|---|---|
+| `ARCBOX_GAME=tactics` | a battle to its Results, with music, effects, the ending sting and a voice clip on the TV |
+| `… ARCBOX_RECONNECT=1` | the TV is killed at `ARCBOX_AT_BEAT` (default 30) and relaunched; it catches up to a newer beat, never an old one |
+| `… ARCBOX_RESTART=1` | the server restarts at that beat; the TV shows Resuming and plays on |
+| `… ARCBOX_WALK=1` | the party walks Ashen Ford. The TV's step numbers climb and the leader really moves on it. The server restarts and the party is on its saved tile. The TV is killed and the new one snaps to the party's tile. The leader's phone is cut and no step starts after the 750 ms lease. The median press-to-`WALK` time is at most `ARCBOX_WALK_LATENCY` (default 100 ms). Screenshots of the party walking and stopped |
+
+`ARCBOX_WALK_SCRIPT` changes the route; it needs `pause:restart` and then `pause:tv`. Shots and logs land in `ARCBOX_E2E_OUT` (default `/tmp/arcbox-tv-e2e-<time>`). Software rendering on Linux draws a frame every 30 to 50 ms, so judge its screenshots for what's on them, not for smoothness. The numbers from the first Linux runs are in [the Task 11 report](../../docs/superpowers/reports/2026-10-31-tactics-overworld/task11-bots-e2e.md).
+
 ## Adding a chapter pack
 
 A pack is a folder with a `manifest.json`, and each weekly chapter is its own pack (`chapter-03`, and so on). `base` is always loaded.
