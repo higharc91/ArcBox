@@ -368,7 +368,7 @@ public static class AshenFordDraft
     ];
 
     /// <summary>All of it, place by place.</summary>
-    private static readonly Stand[] Everything = [.. InEmberwick, .. InTheFields, .. OnTheRoad, .. OnTheBurnedGround, .. AtTheFord];
+    private static readonly Stand[] Everything = [.. InEmberwick, .. InTheFields, .. OnTheRoad, .. OnTheBurnedGround, .. AtTheFord, .. OnTheDocks];
 
     /// <summary>The party starts on the square, in front of the inn.</summary>
     private static readonly Tile StartSpawn = new(26, 58);
@@ -422,7 +422,7 @@ public static class AshenFordDraft
         land.CopyTo(source);
         source.Stamp(crossing, StampAt, WaterLevel);
         source.Beats.AddRange(Spots.Select(s => new BeatSpot(s.Beat, new Tile(s.X, s.Y))));
-        source.Buildings.AddRange(Emberwick.Concat(TownWall()).Concat(OnTheFarms).Select(b => new RegionBuilding(b.Id, b.Variant, new Tile(b.X, b.Y))));
+        source.Buildings.AddRange(Emberwick.Concat(TownWall()).Concat(OnTheFarms).Concat(AtTheDocks).Select(b => new RegionBuilding(b.Id, b.Variant, new Tile(b.X, b.Y))));
         return source;
     }
 

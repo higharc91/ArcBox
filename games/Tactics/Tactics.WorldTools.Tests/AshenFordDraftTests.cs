@@ -762,6 +762,18 @@ public sealed class AshenFordDraftTests
     }
 
     [Fact]
+    public void The_docks_have_their_sheds_market_and_lanterns()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var docks = draft.Spot("ch1_the_ember");
+        Assert.True(source.Buildings.Count(b => b.Id == "stall" && Distance(b.At, docks) <= 12) >= 3);
+        Assert.True(source.Buildings.Count(b => b.Id is "cottage" or "house" or "store" && Distance(b.At, docks) <= 14) >= 3);
+        Assert.True(Props(source).Count(p => p.Id == "lantern" && Distance(p.At, docks) <= 12) >= 5);
+    }
+
+    [Fact]
     public void The_fields_have_their_fences_hay_and_a_mill()
     {
         var draft = Draft.Value;

@@ -220,6 +220,24 @@
       ]
     },
     {
+      "id": "barrel",
+      "variant": "oak",
+      "at": [
+        [
+          100,
+          93
+        ],
+        [
+          100,
+          105
+        ],
+        [
+          101,
+          93
+        ]
+      ]
+    },
+    {
       "id": "barricade",
       "variant": "oak",
       "at": [
@@ -302,6 +320,10 @@
         [
           92,
           41
+        ],
+        [
+          92,
+          87
         ]
       ]
     },
@@ -346,6 +368,18 @@
         [
           41,
           71
+        ],
+        [
+          101,
+          105
+        ],
+        [
+          102,
+          99
+        ],
+        [
+          103,
+          99
         ],
         [
           120,
@@ -1098,6 +1132,40 @@
       ]
     },
     {
+      "id": "lantern",
+      "variant": "stone",
+      "at": [
+        [
+          98,
+          91
+        ],
+        [
+          98,
+          96
+        ],
+        [
+          98,
+          102
+        ],
+        [
+          98,
+          107
+        ],
+        [
+          107,
+          93
+        ],
+        [
+          107,
+          99
+        ],
+        [
+          107,
+          105
+        ]
+      ]
+    },
+    {
       "id": "pillar_broken",
       "variant": "grey",
       "at": [
@@ -1622,6 +1690,22 @@
         [
           44,
           70
+        ],
+        [
+          94,
+          91
+        ],
+        [
+          95,
+          100
+        ],
+        [
+          104,
+          93
+        ],
+        [
+          105,
+          105
         ]
       ]
     },
@@ -3361,6 +3445,102 @@
       "at": [
         29,
         84
+      ]
+    },
+    {
+      "id": "cottage",
+      "variant": "shakes_oak",
+      "at": [
+        88,
+        90
+      ]
+    },
+    {
+      "id": "house",
+      "variant": "blue",
+      "at": [
+        91,
+        90
+      ]
+    },
+    {
+      "id": "clutter_crates",
+      "variant": "oak",
+      "at": [
+        90,
+        91
+      ]
+    },
+    {
+      "id": "stall",
+      "variant": "purple",
+      "at": [
+        96,
+        92
+      ]
+    },
+    {
+      "id": "stall",
+      "variant": "red",
+      "at": [
+        96,
+        95
+      ]
+    },
+    {
+      "id": "cottage",
+      "variant": "thatch_green",
+      "at": [
+        88,
+        98
+      ]
+    },
+    {
+      "id": "store",
+      "variant": "blue",
+      "at": [
+        91,
+        98
+      ]
+    },
+    {
+      "id": "clutter_barrels",
+      "variant": "oak",
+      "at": [
+        90,
+        99
+      ]
+    },
+    {
+      "id": "clutter_crates",
+      "variant": "oak",
+      "at": [
+        97,
+        101
+      ]
+    },
+    {
+      "id": "stall",
+      "variant": "blue",
+      "at": [
+        96,
+        103
+      ]
+    },
+    {
+      "id": "stall",
+      "variant": "purple",
+      "at": [
+        96,
+        106
+      ]
+    },
+    {
+      "id": "clutter_barrels",
+      "variant": "oak",
+      "at": [
+        95,
+        108
       ]
     }
   ]
