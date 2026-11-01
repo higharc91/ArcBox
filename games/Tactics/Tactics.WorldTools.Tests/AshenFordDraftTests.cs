@@ -819,6 +819,23 @@ public sealed class AshenFordDraftTests
     }
 
     [Fact]
+    public void Bare_stone_is_rough_and_broken_not_laid_in_slabs()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var ground = draft.Tiles.Where(t => draft.Region.TileAt(t) is not null && !draft.InStamp(t)).ToList();
+
+        // Only the stamp's ridge, run on a little past it, has the pack's slabbed rock: nothing outside it.
+        Assert.DoesNotContain(ground, t => draft.Material(t) is "rock/grey" or "rock/dark");
+        Assert.True(ground.Count(t => draft.Material(t) == "cave_floor/cool") > 2000);
+        Assert.True(ground.Count(t => draft.Material(t) == "mine_gravel/brown") > 400);
+        Assert.True(Props(source).Count(p => p.Id == "crag") >= 25);
+        Assert.True(Props(source).Count(p => p.Id == "rock_cluster") >= 20);
+        Assert.True(Props(source).Count(p => p.Id == "boulder") >= 15);
+    }
+
+    [Fact]
     public void The_hills_climb_in_terraces_to_the_camp()
     {
         var draft = Draft.Value;

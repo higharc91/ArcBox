@@ -39,7 +39,10 @@ public static class AshenFordDraft
 
     // The ground, from the ford out. A place is one or two of these.
     private const string Ash = "ash/grey", Scorch = "dirt/dark", Thin = "grass/dry", Stubble = "grass/autumn", Ploughed = "dirt/brown";
-    private const string Track = "path/packed", Mud = "dirt/dark", Frost = "grass/frost", Rock = "rock/grey", DarkRock = "rock/dark", Water = "water/clear", Needles = "forest_needles/pine";
+    private const string Track = "path/packed", Mud = "dirt/dark", Frost = "grass/frost", Water = "water/clear", Needles = "forest_needles/pine";
+
+    /// <summary>The hills' and the scarp's bare stone is the pack's rough cave floor, as the top meant for rock is laid in slabs the size of a house. The stamp's own rock stays as its map has it.</summary>
+    private const string Rock = "cave_floor/cool", DarkRock = "cave_floor/cool", StampRock = "rock/grey", Scree = "mine_gravel/brown";
     private const string Street = "cobble/warm", Plaza = "cobble/grey", Quay = "flagstone/grey", Deck = "planks/oak", Hull = "planks/dark";
 
     /// <summary>What the road is made of: the packed path and the town's cobbled streets. Things stand on a square, but not on a road.</summary>
@@ -252,8 +255,9 @@ public static class AshenFordDraft
     [
         new("signpost", "oak", (51, 63), (66, 9), (88, 49)),
         new("cart", "oak", (53, 30), (92, 41)),
-        new("crag", "grey", (56, 62), (58, 50), (60, 40), (63, 32), (58, 74), (57, 88), (56, 100)),
-        new("rock_cluster", "grey", (59, 56), (57, 66), (61, 36), (58, 82), (57, 94), (66, 24)),
+        new("crag", "grey", (56, 62), (58, 50), (60, 40), (63, 32), (58, 74), (57, 88), (56, 100), (60, 46), (57, 56), (60, 68), (56, 80), (59, 94), (55, 108), (58, 114), (65, 28)),
+        new("rock_cluster", "grey", (59, 56), (57, 66), (61, 36), (58, 82), (57, 94), (66, 24), (62, 44), (60, 62), (55, 72), (60, 86), (58, 104), (56, 118), (68, 22)),
+        new("boulder", "grey", (55, 58), (63, 50), (54, 76), (63, 72), (62, 90), (53, 96), (61, 110)),
         new("rock_large", "grey", (53, 72), (52, 84)),
     ];
 
@@ -321,9 +325,9 @@ public static class AshenFordDraft
     private static readonly Stand[] InTheHills =
     [
         new("pine_snowy", "snow", (122, 26), (119, 30), (141, 36), (146, 38), (126, 38), (150, 42)),
-        new("crag", "dark", (116, 22), (130, 40), (143, 28), (152, 34)),
-        new("rock_cluster", "dark", (122, 44), (136, 43), (147, 44), (118, 32)),
-        new("boulder", "dark", (127, 42), (140, 41), (121, 36)),
+        new("crag", "dark", (116, 22), (130, 40), (143, 28), (152, 34), (122, 30), (127, 16), (136, 12), (146, 18), (150, 24), (156, 30), (146, 34), (138, 38), (124, 12), (114, 16)),
+        new("rock_cluster", "dark", (122, 44), (136, 43), (147, 44), (118, 32), (128, 34), (141, 22), (119, 18), (132, 14), (148, 30), (154, 42), (140, 14)),
+        new("boulder", "dark", (127, 42), (140, 41), (121, 36), (125, 22), (134, 36), (144, 37), (150, 38), (116, 28), (142, 24)),
         new("dead_tree", "dark", (116, 44), (132, 46), (144, 48)),
     ];
 
@@ -700,7 +704,8 @@ public static class AshenFordDraft
                     continue;
 
                 var level = hill switch { > 0.76 => 9, > 0.5 => 7, > 0.27 => 5, _ => 3 };
-                Paint(x, y, level, level >= 7 ? DarkRock : Frost, level == 9 ? TileFlags.Impassable : TileFlags.None);
+                var loose = Rough(x, y, 10, 20) > (level >= 7 ? 0.48 : 0.55);
+                Paint(x, y, level, loose ? Scree : level >= 7 ? DarkRock : Frost, level == 9 ? TileFlags.Impassable : TileFlags.None);
                 _terraced[x, y] = true;
             }
         }
@@ -804,7 +809,6 @@ public static class AshenFordDraft
                 {
                     if (!IsWater(x, y) && !_fixed[x, y])
                     {
-                        // Worn earth on the farmland, burned earth nearer the fire.
                         Paint(x, y, level, road.Verge == Scorch && Ring(x, y) == Thin ? Ploughed : road.Verge);
                         _fixed[x, y] = true;
                     }
@@ -908,7 +912,7 @@ public static class AshenFordDraft
                 var cell = stamped[(edgeX, edgeY)];
                 var distance = Math.Max(Math.Abs(x - edgeX), Math.Abs(y - edgeY));
                 _heights[x, y] = (int)Math.Round(cell.Height + (_heights[x, y] - cell.Height) * Smooth(distance / 6.0));
-                if (cell.Material == Rock && distance + Rough(x, y, 8, 48) * 6 < 6)
+                if (cell.Material == StampRock && distance + Rough(x, y, 8, 48) * 6 < 6)
                     _materials[x, y] = Rock;
             }
         }
@@ -1003,7 +1007,7 @@ public static class AshenFordDraft
             }
         }
 
-        /// <summary>Faces each terrace's edge with bare rock, so the steps read from a distance.</summary>
+        /// <summary>Faces each terrace's edge with scree, so the steps read from a distance and no terrace ends in a straight line of one stuff.</summary>
         public void FaceTerraces()
         {
             var faces = Everywhere().Where(t => _terraced[t.X, t.Y] && Walkable(t.X, t.Y) && !_fixed[t.X, t.Y]
