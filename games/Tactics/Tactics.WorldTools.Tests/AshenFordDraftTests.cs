@@ -836,6 +836,21 @@ public sealed class AshenFordDraftTests
     }
 
     [Fact]
+    public void The_road_is_a_narrow_worn_track_with_a_verge()
+    {
+        var draft = Draft.Value;
+        var track = draft.Tiles.Where(t => !draft.InStamp(t) && draft.Material(t) == "path/packed").ToHashSet();
+
+        // Nearly every tile of it has its verge within two tiles.
+        var verged = track.Count(t => Enumerable.Range(-2, 5).Any(d => draft.Material(t with { X = t.X + d }) == "dirt/dark" || draft.Material(t with { Y = t.Y + d }) == "dirt/dark"));
+        Assert.True(verged > track.Count * 0.9, $"{verged} of {track.Count}");
+
+        // It's never three tiles wide, but where one way meets another.
+        var wide = track.Count(t => Enumerable.Range(-1, 3).All(dy => Enumerable.Range(-1, 3).All(dx => track.Contains(new Tile(t.X + dx, t.Y + dy)))));
+        Assert.True(wide <= 8, $"{wide} tiles are in the middle of a block of track.");
+    }
+
+    [Fact]
     public void The_hills_climb_in_terraces_to_the_camp()
     {
         var draft = Draft.Value;

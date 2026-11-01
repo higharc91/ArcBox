@@ -79,10 +79,10 @@ public sealed class GroundBlendTests
     }
 
     [Fact]
-    public void All_eight_ways_differ()
+    public void Every_mask_differs()
     {
         Assert.Equal(8, GroundBlend.Ways.Distinct().Count());
-        Assert.Equal(8, Enumerable.Range(0, 8).Select(m => Convert.ToBase64String(GroundBlend.Mask(m))).Distinct().Count());
+        Assert.Equal(16, Enumerable.Range(0, 16).Select(m => Convert.ToBase64String(GroundBlend.Mask(m))).Distinct().Count());
     }
 
     /// <summary>What it leaves of the dither must be the pack's upright checker on the screen, in whole art pixels, or it combs as a turned top does.</summary>
@@ -168,6 +168,20 @@ public sealed class GroundBlendTests
 
         var beside = Map("test", ["dirt/dark", "ash/grey"], null, "01", "01");
         Assert.Equal([(1, 0)], Edges(beside, 0, 0).Select(Way));
+    }
+
+    [Fact]
+    public void A_road_keeps_a_tight_edge_so_a_narrow_track_stays_narrow()
+    {
+        var map = Map("test", ["path/packed", "dirt/dark"], null, "01");
+
+        var edge = Assert.Single(Edges(map, 1, 0));
+        Assert.Equal("path/packed", edge.Material);
+        Assert.Equal(MaskOf(-1, 0) + GroundBlend.Ways.Length, edge.Mask);
+
+        // The far side of the tile is left as it was, where a ground's blend reaches.
+        Assert.Equal(0, Cover(edge.Mask, TileTexels * 3 / 4, TileTexels, 0, GroundBlend.Size));
+        Assert.True(Cover(MaskOf(-1, 0), TileTexels * 3 / 4, TileTexels, 0, GroundBlend.Size) > 0);
     }
 
     [Fact]

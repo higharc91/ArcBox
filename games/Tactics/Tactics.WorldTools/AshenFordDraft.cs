@@ -69,12 +69,15 @@ public static class AshenFordDraft
     /// <summary>The spur that carries River Crossing's rock ridge up into the hills.</summary>
     private static readonly Line Spur = new((112, 50), (120, 42), (128, 34));
 
+    /// <summary>How far a road runs each side of its line: a track a cart wide, the least that still joins along a diagonal, and its verge of dark earth beyond it.</summary>
+    private const double Narrow = 0.72, Verge = 1.2;
+
     /// <summary>The road: x, y and its height there. East gate to the stamp, the side road to the docks, then the stamp's exit to the region's east edge.</summary>
     private static readonly Road[] Roads =
     [
-        new(Track, Scorch, 1.5, 1.5, [(48, 62, 3), (52, 56, 3), (55, 38, 4), (60, 22, 5), (68, 12, 6), (78, 17, 5), (86, 34, 4), (92, 48, 3), (95, 57, 1.4), (99.5, 61.5, 1)]),
-        new(Track, Scorch, 1, 1.5, [(94, 54, 2), (91, 64, 2), (93, 76, 2), (96, 88, 2), (96, 94, 2)]),
-        new(Track, Scorch, 1.5, 1.5, [(113.5, 57.5, 2), (122, 58, 2), (140, 62, 2), (160, 58, 2)]),
+        new(Track, Scorch, Narrow, Verge, [(48, 62, 3), (52, 56, 3), (55, 38, 4), (60, 22, 5), (68, 12, 6), (78, 17, 5), (86, 34, 4), (92, 48, 3), (95, 57, 1.4), (99.5, 61.5, 1)]),
+        new(Track, Scorch, Narrow, Verge, [(94, 54, 2), (91, 64, 2), (93, 76, 2), (96, 88, 2), (96, 94, 2)]),
+        new(Track, Scorch, Narrow, Verge, [(113.5, 57.5, 2), (122, 58, 2), (140, 62, 2), (160, 58, 2)]),
         new(Track, Thin, 0.5, 0, [(31, 80, 3), (31, 86, 3), (31, 92, 3)]),
     ];
 
@@ -809,7 +812,7 @@ public static class AshenFordDraft
                 {
                     if (!IsWater(x, y) && !_fixed[x, y])
                     {
-                        Paint(x, y, level, road.Verge == Scorch && Ring(x, y) == Thin ? Ploughed : road.Verge);
+                        Paint(x, y, level, road.Verge);
                         _fixed[x, y] = true;
                     }
                 }

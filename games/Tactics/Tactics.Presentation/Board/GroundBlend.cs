@@ -32,6 +32,7 @@ public static class GroundBlend
     private const float Sparse = 0.68f;
     private const float Wobble = 0.5f;          // how far, in tiles, the noise can move an edge, from side to side
     private const float WobbleFrom = 0.22f;     // nothing moves right at the seam
+    private const float Tight = 0.45f;          // a road's edge, as a share of that: it's a worn track, not a spreading ground
     private const int NoiseCells = 8;           // a top's width in noise cells, so it tiles with the art
     private const int NoiseSeed = 7211;
 
@@ -40,11 +41,11 @@ public static class GroundBlend
 
     private static readonly Lazy<float[]> Noise = new(BuildNoise);
 
-    private static readonly Lazy<byte[]>[] Masks = [.. Enumerable.Range(0, 8).Select(way => new Lazy<byte[]>(() => Build(Ways[way])))];
+    private static readonly Lazy<byte[]>[] Masks = [.. Enumerable.Range(0, 16).Select(mask => new Lazy<byte[]>(() => Build(Ways[mask % 8], mask < 8 ? 1 : Tight)))];
 
     /// <summary>
-    /// How firmly a material lies: a higher one runs over a lower one, and 0 is what neither runs nor is run into. Ash blows over everything, grass grows over earth, earth over a worn
-    /// track, and all of them over scree and bare rock.
+    /// How firmly a material lies: a higher one runs over a lower one, and 0 is what neither runs nor is run into. Ash blows over everything, grass grows over earth, and all of them
+    /// over scree and bare rock. A road beats them all, as it's what's worn open.
     /// </summary>
     public static int Rank(string material)
     {
@@ -55,7 +56,7 @@ public static class GroundBlend
             "grass" => 6,
             "forest_needles" or "forest_floor" => 5,
             "dirt" or "mud" => 4,
-            "path" => 3,
+            "path" => 8,
             "mine_gravel" => 2,
             "rock" or "cave_floor" or "basalt" or "sandstone" => 1,
             _ => 0,
@@ -90,7 +91,8 @@ public static class GroundBlend
                 continue;
             if (dx != 0 && dy != 0 && (Same(terrain, new Tile(next.X, tile.Y), top, material) || Same(terrain, new Tile(tile.X, next.Y), top, material)))
                 continue;
-            (found ??= []).Add((new GroundEdge(map.Materials[material], way, stamped), terrain.Ranks[material]));
+            var name = map.Materials[material];
+            (found ??= []).Add((new GroundEdge(name, TightEdged(name) ? way + Ways.Length : way, stamped), terrain.Ranks[material]));
         }
         return found is null ? [] : found.OrderBy(f => f.Rank).ThenBy(f => f.Edge.Material, StringComparer.Ordinal).ThenBy(f => f.Edge.Mask).Select(f => f.Edge);
     }
@@ -112,8 +114,10 @@ public static class GroundBlend
     private static bool Same(BoardTerrain terrain, Tile next, float top, int material)
         => terrain.Map.InBounds(next) && terrain.Top(next) == top && terrain.Map[next].Material == material;
 
-    /// <summary>The mask of one of <see cref="Ways"/>: <see cref="Size"/> squared, 255 where the top shows. It tiles, as the art does. Built once.</summary>
-    public static byte[] Mask(int way) => Masks[way].Value;
+    private static bool TightEdged(string material) => material.StartsWith("path/", StringComparison.Ordinal);
+
+    /// <summary>A mask: one of <see cref="Ways"/>, or that plus their length for a road's tight edge. <see cref="Size"/> squared, 255 where the top shows. It tiles, as the art does. Built once.</summary>
+    public static byte[] Mask(int mask) => Masks[mask].Value;
 
     /// <summary><paramref name="rgba"/>, a doubled top, with what <paramref name="way"/>'s mask leaves out made clear.</summary>
     public static byte[] Masked(ReadOnlySpan<byte> rgba, int way)
@@ -139,13 +143,13 @@ public static class GroundBlend
         return distance >= Solid && distance < Half;
     }
 
-    private static byte[] Build((int Dx, int Dy) way)
+    private static byte[] Build((int Dx, int Dy) way, float reach)
     {
         var mask = new byte[Size * Size];
         for (var v = 0; v < Size; v++)
             for (var u = 0; u < Size; u++)
             {
-                var distance = Across(u, v, way);
+                var distance = Across(u, v, way) / reach;
                 var shown = distance < Solid || (distance < Half ? Checker(u, v) : distance < Sparse && Column(u, v) % 2 == 0 && Row(u, v) % 2 == 0);
                 mask[v * Size + u] = (byte)(shown ? 255 : 0);
             }
