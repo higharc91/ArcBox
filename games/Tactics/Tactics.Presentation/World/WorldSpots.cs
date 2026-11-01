@@ -20,6 +20,26 @@ public static class WorldSpots
     private const int NearbyTiles = 12;
     private const string Crate = "crate";
 
+    /// <summary>
+    /// The places <c>--world-looks</c> names: <c>name@x,y</c>, or <c>name@x,y@x,y</c> with the second tile where the figure stands, each ended by a semicolon.
+    /// </summary>
+    public static ImmutableArray<WorldSpot> Parse(string looks)
+    {
+        static Tile Read(string tile)
+        {
+            var parts = tile.Split(',');
+            return new Tile(int.Parse(parts[0], System.Globalization.CultureInfo.InvariantCulture), int.Parse(parts[1], System.Globalization.CultureInfo.InvariantCulture));
+        }
+        return
+        [
+            .. looks.Split(';', StringSplitOptions.RemoveEmptyEntries).Select(look =>
+            {
+                var parts = look.Split('@');
+                return new WorldSpot(parts[0], Read(parts[1]), Read(parts[^1]));
+            }),
+        ];
+    }
+
     /// <summary>The spots of <paramref name="terrain"/>, whose rules are <paramref name="ground"/>.</summary>
     public static ImmutableArray<WorldSpot> Of(BoardTerrain terrain, Terrain ground)
     {

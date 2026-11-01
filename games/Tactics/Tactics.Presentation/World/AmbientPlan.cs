@@ -19,7 +19,8 @@ public readonly record struct AmbientItem(
     Vector2 Anchor,
     bool Mirror,
     long Order,
-    float Alpha = 1f);
+    float Alpha = 1f,
+    bool Add = false);
 
 /// <summary>Metadata for one ambient asset in <c>ambient/manifest.json</c>.</summary>
 public sealed record AmbientAsset(
@@ -108,49 +109,80 @@ public sealed class AmbientManifest
 }
 
 /// <summary>
-/// A small pure scheduler that picks ambient life on screen from the terrain and materials near the camera:
-/// butterflies over grass, fish jumping in deep water, chimney smoke rising from hearths.
+/// A small pure scheduler that picks ambient life on screen from the terrain and materials near the camera: a few butterflies over grass, or at dusk fireflies over the fields, fish
+/// jumping in deep water, chimney smoke rising from hearths, and steam off warm water. What's where is settled once, by hash, so a frame only asks what's in view.
 /// Pure and seeded per region: runs on the TV only, bounded strictly to the camera view.
 /// </summary>
 public sealed class AmbientPlan
 {
-    private readonly BoardTerrain _terrain;
-    private readonly BattleMap _map;
+    private const float Margin = 64;
+    private const int ButterflyEvery = 40;      // of the grass tiles
+    private const int FireflyEvery = 60;        // of the field tiles, at dusk
+    private const int FishEvery = 10;           // of the deep water tiles
+    private const int SteamEvery = 3;           // of the water tiles over the ember; it thins away from there
+    private const float SteamReach = 34;        // tiles from the stamp's water by which it's down to almost nothing
+    private const float SteamAlpha = 0.5f;
+    private const float FireflyAlpha = 0.7f;
+
+    private readonly record struct Spot(Tile Tile, Vector2 Base, int Hash);
+
     private readonly AmbientManifest? _manifest;
-    private readonly int _seed;
-    private readonly ImmutableArray<Tile> _grassTiles;
-    private readonly ImmutableArray<Tile> _deepWaterTiles;
-    private readonly ImmutableArray<PropPlacement> _chimneys;
+    private readonly ImmutableArray<Spot> _flitting;
+    private readonly ImmutableArray<Spot> _fish;
+    private readonly ImmutableArray<Spot> _steam;
+    private readonly ImmutableArray<Spot> _chimneys;
+    private readonly bool _dusk;
 
-    public AmbientPlan(BoardTerrain terrain, BattleMap map, AmbientManifest? manifest = null, int seed = 0)
+    /// <param name="terrain">The ground.</param>
+    /// <param name="map">Its map.</param>
+    /// <param name="manifest">The pack's ambient art.</param>
+    /// <param name="seed">What makes two regions differ.</param>
+    /// <param name="dusk">Whether it's dusk here, when butterflies are gone and fireflies are out.</param>
+    public AmbientPlan(BoardTerrain terrain, BattleMap map, AmbientManifest? manifest = null, int seed = 0, bool dusk = false)
     {
-        _terrain = terrain;
-        _map = map;
         _manifest = manifest;
-        _seed = seed;
+        _dusk = dusk;
 
-        var grass = ImmutableArray.CreateBuilder<Tile>();
-        var water = ImmutableArray.CreateBuilder<Tile>();
+        Spot At(Tile tile, int salt) => new(tile, BoardProjection.Corner(tile.X, tile.Y, map[tile].Height) + new Vector2(16, 8), Hash(seed, tile.X, tile.Y, salt));
+        var warm = map.StampedTiles.Where(t => (map[t].Flags & TileFlags.Water) != 0).ToArray();
+        float FromWarm(Tile tile) => warm.Length == 0 ? float.MaxValue : warm.Min(w => MathF.Abs(w.X - tile.X) + MathF.Abs(w.Y - tile.Y));
+
+        var (flitting, fish, steam) = (ImmutableArray.CreateBuilder<Spot>(), ImmutableArray.CreateBuilder<Spot>(), ImmutableArray.CreateBuilder<Spot>());
         for (var y = 0; y < map.Height; y++)
         {
             for (var x = 0; x < map.Width; x++)
             {
                 var tile = new Tile(x, y);
                 var t = map[tile];
-                if ((t.Flags & (TileFlags.Water | TileFlags.Deep)) == (TileFlags.Water | TileFlags.Deep))
+                var material = t.Material < map.Materials.Length ? map.Materials[t.Material] : "";
+                if ((t.Flags & TileFlags.Water) != 0)
                 {
-                    water.Add(tile);
+                    if ((t.Flags & TileFlags.Deep) != 0 && At(tile, 2).Hash % FishEvery == 0)
+                        fish.Add(At(tile, 2));
+                    if (warm.Length > 0)
+                    {
+                        // Thickest at the ford, as the lore has it, and thinning up and down the river.
+                        var every = SteamEvery * (1 + FromWarm(tile) / SteamReach * 12);
+                        if (At(tile, 3).Hash % (int)every == 0)
+                            steam.Add(At(tile, 3));
+                    }
                 }
-                else if (t.Material < map.Materials.Length && map.Materials[t.Material].Contains("grass", StringComparison.OrdinalIgnoreCase))
+                else if (dusk ? material is "grass/autumn" or "dirt/brown" : material.Contains("grass", StringComparison.OrdinalIgnoreCase))
                 {
-                    grass.Add(tile);
+                    if (At(tile, 1).Hash % (dusk ? FireflyEvery : ButterflyEvery) == 0)
+                        flitting.Add(At(tile, 1));
                 }
             }
         }
-        _grassTiles = grass.ToImmutable();
-        _deepWaterTiles = water.ToImmutable();
-        _chimneys = [.. map.Props.Where(p => p.Id.Contains("chimney", StringComparison.OrdinalIgnoreCase))];
+        (_flitting, _fish, _steam) = (flitting.ToImmutable(), fish.ToImmutable(), steam.ToImmutable());
+        _chimneys = [.. map.Props.Where(p => p.Id.Contains("chimney", StringComparison.OrdinalIgnoreCase)).Select(p => At(p.At, 4))];
     }
+
+    /// <summary>How many steam plumes it has, for tests.</summary>
+    public int SteamCount => _steam.Length;
+
+    /// <summary>How many butterflies or fireflies it has, for tests.</summary>
+    public int FlittingCount => _flitting.Length;
 
     /// <summary>The ambient creatures and particles active within <paramref name="view"/> at <paramref name="clock"/> seconds.</summary>
     public ImmutableArray<AmbientItem> ActiveAt(double clock, ArtArea view)
@@ -161,60 +193,40 @@ public sealed class AmbientPlan
         }
 
         var result = new List<AmbientItem>();
-        var margin = 64f;
-        var paddedView = new ArtArea(view.Min - new Vector2(margin), view.Max + new Vector2(margin));
+        var seen = new ArtArea(view.Min - new Vector2(Margin), view.Max + new Vector2(Margin));
+        bool InView(Vector2 at, float reach) => seen.Overlaps(new ArtArea(at - new Vector2(reach), at + new Vector2(reach)));
 
-        // 1. Butterflies over grass
-        if (_manifest.Assets.TryGetValue("butterfly", out var butterflyAsset) && !_grassTiles.IsEmpty)
+        // 1. Butterflies over grass, or fireflies over the fields at dusk
+        var flitter = _dusk ? "fireflies" : "butterfly";
+        if (_manifest.Assets.TryGetValue(flitter, out var flitterAsset))
         {
-            foreach (var tile in _grassTiles)
+            foreach (var (tile, spot, h) in _flitting)
             {
-                var h = Hash(_seed, tile.X, tile.Y, 1);
-                if (h % 12 != 0)
+                if (!InView(spot, 32))
                 {
                     continue;
                 }
 
-                var height = _map[tile].Height;
-                var basePos = BoardProjection.Corner(tile.X, tile.Y, height) + new Vector2(16, 8);
-                if (!paddedView.Overlaps(new ArtArea(basePos - new Vector2(16), basePos + new Vector2(16))))
-                {
-                    continue;
-                }
-
-                // Wander within a small radius (6 px) so it strictly stays over its grass tile
+                // Wander within a small radius (6 px) so it strictly stays over its tile
                 var phase = (h % 100) * 0.1f;
                 var wx = MathF.Sin((float)(clock * 1.7 + phase)) * 6f;
                 var wy = MathF.Cos((float)(clock * 1.3 + phase)) * 3f - 2f;
-                var pos = basePos + new Vector2(wx, wy);
-
-                var variantKeys = butterflyAsset.Variants.Keys.ToArray();
-                var variant = variantKeys.Length > 0 ? variantKeys[h % variantKeys.Length] : butterflyAsset.DefaultVariant;
-                var path = butterflyAsset.Variants.TryGetValue(variant, out var vp) ? vp : "";
-                var frame = (int)(clock * butterflyAsset.Fps) % butterflyAsset.Frames;
+                var variant = _dusk ? "gold" : Pick(flitterAsset, h);
+                var path = flitterAsset.Variants.GetValueOrDefault(variant, "");
+                var frame = ((int)(clock * flitterAsset.Fps) + h) % flitterAsset.Frames;
                 var mirror = MathF.Cos((float)(clock * 1.7 + phase)) < 0;
-                var order = BoardOrder.Key(tile, BoardLayer.Unit);
-
-                result.Add(new AmbientItem("butterfly", variant, path, tile, pos, frame, butterflyAsset.Frames,
-                    new Vector2(butterflyAsset.FrameWidth, butterflyAsset.FrameHeight),
-                    new Vector2(butterflyAsset.AnchorX, butterflyAsset.AnchorY), mirror, order));
+                result.Add(new AmbientItem(flitter, variant, path, tile, spot + new Vector2(wx, wy), frame, flitterAsset.Frames,
+                    new Vector2(flitterAsset.FrameWidth, flitterAsset.FrameHeight), new Vector2(flitterAsset.AnchorX, flitterAsset.AnchorY), mirror,
+                    BoardOrder.Key(tile, BoardLayer.Unit), _dusk ? FireflyAlpha : 1, flitterAsset.Blend == "add"));
             }
         }
 
         // 2. Fish jumping in deep water
-        if (_manifest.Assets.TryGetValue("fish", out var fishAsset) && !_deepWaterTiles.IsEmpty)
+        if (_manifest.Assets.TryGetValue("fish", out var fishAsset))
         {
-            foreach (var tile in _deepWaterTiles)
+            foreach (var (tile, spot, h) in _fish)
             {
-                var h = Hash(_seed, tile.X, tile.Y, 2);
-                if (h % 10 != 0)
-                {
-                    continue;
-                }
-
-                var height = _map[tile].Height;
-                var basePos = BoardProjection.Corner(tile.X, tile.Y, height) + new Vector2(16, 8);
-                if (!paddedView.Overlaps(new ArtArea(basePos - new Vector2(16), basePos + new Vector2(16))))
+                if (!InView(spot, 16))
                 {
                     continue;
                 }
@@ -226,48 +238,51 @@ public sealed class AmbientPlan
                 if (cycle < duration)
                 {
                     var frame = Math.Clamp((int)(cycle * fishAsset.Fps), 0, fishAsset.Frames - 1);
-                    var variantKeys = fishAsset.Variants.Keys.ToArray();
-                    var variant = variantKeys.Length > 0 ? variantKeys[h % variantKeys.Length] : fishAsset.DefaultVariant;
-                    var path = fishAsset.Variants.TryGetValue(variant, out var vp) ? vp : "";
-                    var mirror = (h & 1) == 0;
-                    var order = BoardOrder.Key(tile, BoardLayer.Unit);
-
-                    result.Add(new AmbientItem("fish", variant, path, tile, basePos, frame, fishAsset.Frames,
-                        new Vector2(fishAsset.FrameWidth, fishAsset.FrameHeight),
-                        new Vector2(fishAsset.AnchorX, fishAsset.AnchorY), mirror, order));
+                    var variant = Pick(fishAsset, h);
+                    result.Add(new AmbientItem("fish", variant, fishAsset.Variants.GetValueOrDefault(variant, ""), tile, spot, frame, fishAsset.Frames,
+                        new Vector2(fishAsset.FrameWidth, fishAsset.FrameHeight), new Vector2(fishAsset.AnchorX, fishAsset.AnchorY), (h & 1) == 0,
+                        BoardOrder.Key(tile, BoardLayer.Unit)));
                 }
             }
         }
 
-        // 3. Chimney smoke
+        // 3. Chimney smoke, and steam off the water, each on its own beat.
         if (_manifest.Assets.TryGetValue("chimney_smoke", out var smokeAsset))
         {
-            foreach (var prop in _chimneys)
+            foreach (var (tile, spot, h) in _chimneys)
             {
-                var height = _map[prop.At].Height;
-                var basePos = BoardProjection.Corner(prop.At.X, prop.At.Y, height) + new Vector2(16, 0);
-                if (!paddedView.Overlaps(new ArtArea(basePos - new Vector2(32), basePos + new Vector2(32))))
+                if (InView(spot, 32))
+                    result.Add(Smoke(smokeAsset, smokeAsset.DefaultVariant, tile, spot + new Vector2(0, -8), (int)(clock * smokeAsset.Fps) + h, 1));
+            }
+            if (smokeAsset.Variants.ContainsKey("steam"))
+            {
+                foreach (var (tile, spot, h) in _steam)
                 {
-                    continue;
+                    if (InView(spot, 48))
+                        result.Add(Smoke(smokeAsset, "steam", tile, spot, (int)(clock * smokeAsset.Fps) + h, SteamAlpha));
                 }
-
-                var frame = (int)(clock * smokeAsset.Fps) % smokeAsset.Frames;
-                var variant = smokeAsset.DefaultVariant;
-                var path = smokeAsset.Variants.TryGetValue(variant, out var vp) ? vp : "";
-                var order = BoardOrder.Key(prop.At, BoardLayer.Over);
-
-                result.Add(new AmbientItem("chimney_smoke", variant, path, prop.At, basePos, frame, smokeAsset.Frames,
-                    new Vector2(smokeAsset.FrameWidth, smokeAsset.FrameHeight),
-                    new Vector2(smokeAsset.AnchorX, smokeAsset.AnchorY), false, order));
             }
         }
 
         return [.. result];
     }
 
+    private static AmbientItem Smoke(AmbientAsset asset, string variant, Tile tile, Vector2 at, int frame, float alpha)
+        => new("chimney_smoke", variant, asset.Variants.GetValueOrDefault(variant, ""), tile, at, frame % asset.Frames, asset.Frames,
+            new Vector2(asset.FrameWidth, asset.FrameHeight), new Vector2(asset.AnchorX, asset.AnchorY), false, BoardOrder.Key(tile, BoardLayer.Over), alpha);
+
+    private static string Pick(AmbientAsset asset, int hash)
+    {
+        var keys = asset.Variants.Keys.Order(StringComparer.Ordinal).ToArray();
+        return keys.Length > 0 ? keys[hash % keys.Length] : asset.DefaultVariant;
+    }
+
     private static int Hash(int seed, int x, int y, int salt)
     {
         var h = seed ^ (x * 73856093) ^ (y * 19349663) ^ (salt * 83492791);
-        return Math.Abs(h);
+        h ^= h >> 13;
+        h *= 1274126177;
+        h ^= h >> 16;
+        return h & int.MaxValue;
     }
 }

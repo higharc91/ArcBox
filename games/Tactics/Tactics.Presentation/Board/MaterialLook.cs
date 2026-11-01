@@ -37,6 +37,8 @@ public sealed record MaterialLook(string Variant, ArtRef Top, ArtRef Side, ArtRe
         {
             "grass" => With(new ArtRef("dirt_side", "brown"), EarthChasm) with { Lip = new ArtRef("grass_lip", variant) },
             "dirt" => With(new ArtRef("dirt_side", variant), EarthChasm),
+            "ash" or "mud" or "forest_needles" or "forest_floor" => With(new ArtRef("dirt_side", "dark"), EarthChasm),
+            "path" => With(new ArtRef("dirt_side", "brown"), EarthChasm),
             "rock" => With(cliff, EarthChasm),
             "lava" => With(new ArtRef("lava_side", variant), EarthChasm),
             "basalt" => With(new ArtRef("basalt_side", variant), EarthChasm),

@@ -16,8 +16,8 @@ public sealed class AshenFordDraftTests
     /// <summary>The beats at the Ford Bridge.</summary>
     private static readonly string[] FordBeats = ["ch1_the_ford_choice", "ch1_ford_assault", "ch1_river_crossing"];
 
-    /// <summary>What the road is made of: the path, and the town's cobbles and square.</summary>
-    private static readonly string[] RoadMaterials = ["cobble/warm", "flagstone/warm", "path/packed"];
+    /// <summary>What can be walked along from the square to the ford: the path, the town's cobbles and the square itself.</summary>
+    private static readonly string[] RoadMaterials = ["cobble/grey", "cobble/warm", "path/packed"];
 
     private static readonly Lazy<Proved> Draft = new(Prove);
 
@@ -609,34 +609,47 @@ public sealed class AshenFordDraftTests
     }
 
     [Fact]
-    public void Emberwick_is_a_village_of_streets_and_buildings()
+    public void Emberwick_has_a_cobbled_square_and_streets_inside_flat_walls()
     {
         var draft = Draft.Value;
-        Assert.Equal("flagstone/warm", draft.Material(draft.Start));
-        var town = draft.Tiles.Where(t => Distance(t, draft.Start) <= 24).ToList();
-        var roofs = town.Where(t => draft.Region.TileAt(t)?.Flags.HasFlag(TileFlags.Impassable) == true && draft.Material(t).StartsWith("planks", StringComparison.Ordinal)).ToHashSet();
-
-        var buildings = 0;
-        while (roofs.Count > 0)
-        {
-            buildings++;
-            var open = new Stack<Tile>([roofs.First()]);
-            while (open.TryPop(out var tile))
-                if (roofs.Remove(tile))
-                    foreach (var (x, y) in new[] { (0, 1), (1, 0), (0, -1), (-1, 0) })
-                        open.Push(new Tile(tile.X + x, tile.Y + y));
-        }
-        Assert.InRange(buildings, 16, 40);
-        Assert.True(town.Count(t => draft.Material(t) == "cobble/warm") > 150);
+        Assert.Equal("cobble/grey", draft.Material(draft.Start));
+        Assert.True(draft.Tiles.Count(t => draft.Material(t) == "cobble/grey") >= 150);
+        Assert.True(draft.Tiles.Count(t => draft.Material(t) == "cobble/warm") >= 250);
     }
 
     [Fact]
-    public void The_far_bank_looks_burned_and_the_near_bank_doesnt()
+    public void The_ground_burned_in_rings_from_the_ford()
     {
         var draft = Draft.Value;
-        static bool Burned(string material) => material is "ash/grey" or "basalt/dark";
-        Assert.DoesNotContain(draft.NearBank, t => Burned(draft.Material(t)));
-        Assert.True(Near(draft, draft.Spot("ch1_old_maud"), 8, Burned) > 0.6);
+        static bool Ash(string material) => material == "ash/grey";
+        static bool Scorched(string material) => material is "ash/grey" or "dirt/dark";
+
+        // On both banks, and on down the far one to Maud's, as the scene says.
+        Assert.True(Near(draft, new Tile(90, 70), 6, Ash) > 0.4);
+        Assert.True(Near(draft, new Tile(122, 66), 6, Scorched) > 0.8);
+        Assert.True(Near(draft, draft.Spot("ch1_old_maud"), 8, Ash) > 0.6);
+
+        // And nothing burned reaches the town.
+        Assert.DoesNotContain(draft.Tiles, t => Distance(t, draft.Start) <= 22 && Ash(draft.Material(t)));
+    }
+
+    [Fact]
+    public void Theres_almost_no_green_and_little_that_shouts()
+    {
+        var draft = Draft.Value;
+        var ground = draft.Tiles.Where(t => draft.Region.TileAt(t) is not null && !draft.InStamp(t)).ToList();
+        Assert.DoesNotContain(ground, t => draft.Material(t) is "grass/green" or "grass/lush" or "forest_floor/mossy");
+        Assert.True(ground.Count(t => draft.Material(t) == "grass/autumn") < ground.Count / 8.0);
+    }
+
+    [Fact]
+    public void A_place_is_broad_and_calm()
+    {
+        // Few tiles have a neighbour of a different ground: the patchwork the first draft was is what this stops.
+        var draft = Draft.Value;
+        var ground = draft.Tiles.Where(t => draft.Region.TileAt(t) is not null && !draft.InStamp(t)).ToList();
+        var edges = ground.Count(t => draft.Material(t) != draft.Material(t with { X = t.X + 1 }) || draft.Material(t) != draft.Material(t with { Y = t.Y + 1 }));
+        Assert.True(edges < ground.Count / 5.0, $"{edges} of {ground.Count} tiles change material at their edge.");
     }
 
     [Fact]
@@ -721,7 +734,7 @@ public sealed class AshenFordDraftTests
         var source = AshenFordDraft.Build(draft.Pack);
         AshenFordDraft.Dress(source, draft.Pack);
 
-        var roadTiles = source.Tiles.Where(t => RoadMaterials.Contains(t.Value.Material)).Select(t => t.Key).ToHashSet();
+        var roadTiles = source.Tiles.Where(t => AshenFordDraft.RoadMaterials.Contains(t.Value.Material)).Select(t => t.Key).ToHashSet();
         Assert.DoesNotContain(source.Props.SelectMany(p => p.At), t => roadTiles.Contains(t));
     }
 

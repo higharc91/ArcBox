@@ -472,8 +472,10 @@ internal sealed partial class WorldCanvas : CanvasLayer
         _over.JoinWorld(Plan.Lighting.Active ? Plan.Lighting : null);
 
         var ambientManifest = AmbientManifest.Load(_painter.Root);
-        var ambientPlan = new AmbientPlan(new BoardTerrain(Ground!.Map, null), Ground.Map, ambientManifest, seed: Ground.Map.Id.GetHashCode());
-        _ambient = new WorldAmbient(ambientPlan, System.IO.Path.Combine(_painter.Root, "ambient"), Plan.Blocks.Max(b => b.Z) + 1);
+        var dusk = Plan.Lighting.Ambient == BoardLighting.Dusk;
+        var ambientPlan = new AmbientPlan(new BoardTerrain(Ground!.Map, null), Ground.Map, ambientManifest, seed: Ground.Map.Id.Sum(c => c), dusk: dusk);
+        var light = Plan.Lighting.Ambient;
+        _ambient = new WorldAmbient(ambientPlan, System.IO.Path.Combine(_painter.Root, "ambient"), new Color(light.R, light.G, light.B), Plan.Blocks.Max(b => b.Z) + 1);
         _world.AddChild(_ambient);
 
         if (_view.Max == _view.Min)

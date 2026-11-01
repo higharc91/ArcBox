@@ -314,46 +314,43 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
         new("pebbles_0", "grey"), new("pebbles_1", "grey"),
     ];
 
+    private static readonly ImmutableArray<ArtRef> FallenLeaves =
+    [
+        new("leaves_0", "autumn"), new("leaves_0", "red"), new("leaves_1", "autumn"), new("leaves_1", "red"),
+    ];
+
     private static readonly ArtRef ScorchBurnt = new("scorch", "burnt");
     private static readonly ArtRef BonesBone = new("bones", "bone");
     private static readonly ArtRef CracksDark = new("cracks", "dark");
-    private static readonly ArtRef PuddleWater = new("puddle", "water");
     private static readonly ArtRef PuddleSwamp = new("puddle", "swamp");
     private static readonly ArtRef BloodRed = new("blood", "red");
 
-    /// <summary>Selects a decal for a tile in the world by deterministic hash of tile coordinates and material (~1 tile in 6).</summary>
+    /// <summary>
+    /// Selects a decal for a tile in the world by deterministic hash of tile coordinates and material (~1 tile in 6). What's chosen from has to belong on the material: pebbles and
+    /// fallen leaves on earth and grass, scorch on ash, a puddle only on what holds water, and stone laid by hand keeps clean but for a stray pebble. Green grass has its flowers.
+    /// </summary>
     public static ArtImage? DecalFor(Tile tile, string material, ArtIndex art)
     {
         var h = DecalHash(tile.X, tile.Y, material);
         if (h % 6 != 0)
             return null;
 
-        var ordinary = !material.Contains("burnt", StringComparison.OrdinalIgnoreCase)
-            && !material.Contains("ash", StringComparison.OrdinalIgnoreCase)
-            && !material.Contains("scorch", StringComparison.OrdinalIgnoreCase)
-            && !material.Contains("bone", StringComparison.OrdinalIgnoreCase)
-            && !material.Contains("crypt", StringComparison.OrdinalIgnoreCase)
-            && !material.Contains("ruin", StringComparison.OrdinalIgnoreCase)
-            && !material.Contains("dungeon", StringComparison.OrdinalIgnoreCase);
-
-        ImmutableArray<ArtRef> pool;
-        if (ordinary)
+        var family = material.Split('/')[0];
+        ImmutableArray<ArtRef> pool = family switch
         {
-            if (material.StartsWith("grass", StringComparison.OrdinalIgnoreCase))
-                pool = [.. Flowers, .. Leaves, .. Pebbles];
-            else if (material.StartsWith("swamp", StringComparison.OrdinalIgnoreCase))
-                pool = [PuddleSwamp, CracksDark, .. Leaves];
-            else if (material.StartsWith("dirt", StringComparison.OrdinalIgnoreCase)
-                || material.StartsWith("path", StringComparison.OrdinalIgnoreCase)
-                || material.StartsWith("sand", StringComparison.OrdinalIgnoreCase))
-                pool = [.. Pebbles, .. Leaves, CracksDark, PuddleWater];
-            else
-                pool = [CracksDark, .. Pebbles, .. Leaves, PuddleWater];
-        }
-        else
-        {
-            pool = [ScorchBurnt, CracksDark, BonesBone, BloodRed, .. Pebbles];
-        }
+            "grass" when material is "grass/green" or "grass/lush" => [.. Flowers, .. Leaves, .. Pebbles],
+            "grass" or "forest_floor" or "forest_needles" => [.. FallenLeaves, .. Pebbles],
+            "dirt" or "path" or "sand" => [.. Pebbles, .. FallenLeaves],
+            "swamp" => [PuddleSwamp, CracksDark, .. Leaves],
+            "mud" => [PuddleSwamp, .. Pebbles],
+            "rock" or "basalt" => [.. Pebbles, CracksDark],
+            "ash" or "scorch" => [ScorchBurnt, ScorchBurnt, CracksDark, .. Pebbles],
+            "bone" or "crypt_tile" or "crypt_tiles" or "ruin" or "dungeon_floor" or "dungeon_floor_mossy" or "dungeon_floor_cracked" or "dungeon_wall"
+                => [ScorchBurnt, CracksDark, BonesBone, BloodRed, .. Pebbles],
+            _ => [],
+        };
+        if (pool.IsEmpty)
+            return (family is "cobble" or "flagstone" or "pavers") && (h / 6) % 8 == 0 ? art.Decal(Pebbles[(int)(h / 48 % 2)]) : null;
 
         var pick = pool[(int)((h / 6) % (uint)pool.Length)];
         return art.Decal(pick);
@@ -369,8 +366,8 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
             items.Add(Flat(FaceKind.Under, BoardOrder.Key(tile, BoardLayer.Under), tile, floor,
                 art.Texture(MaterialLook.Of("void/deep").Top), ShadeDeep));
         }
-        AddSide(items, terrain, art, tile, Facing.U);
-        AddSide(items, terrain, art, tile, Facing.V);
+        AddSide(items, terrain, art, tile, Facing.U, world);
+        AddSide(items, terrain, art, tile, Facing.V, world);
 
         var shade = look.Water
             ? terrain.Deep(tile) ? ShadeDeep : ShadeFord
@@ -381,6 +378,7 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
         };
         var isStamped = terrain.Map.StampedTiles.Contains(tile);
         var inRegion = new Tile(tile.X + origin.X, tile.Y + origin.Y);
+        var graded = world ? top.Tint.Times(GradeOf(terrain, tile)) : top.Tint;
         if (world && !isStamped)
         {
             var (x, y) = (inRegion.X, inRegion.Y);
@@ -388,12 +386,16 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
             {
                 VertexTints =
                 [
-                    GroundTint(x, y, top.Tint),
-                    GroundTint(x + 1, y, top.Tint),
-                    GroundTint(x + 1, y + 1, top.Tint),
-                    GroundTint(x, y + 1, top.Tint),
+                    GroundTint(x, y, graded),
+                    GroundTint(x + 1, y, graded),
+                    GroundTint(x + 1, y + 1, graded),
+                    GroundTint(x, y + 1, graded),
                 ]
             };
+        }
+        else if (graded != top.Tint)
+        {
+            top = top with { VertexTints = [graded, graded, graded, graded] };
         }
         items.Add(top);
 
@@ -411,7 +413,13 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
         }
     }
 
-    private static void AddSide(List<BoardItem> items, BoardTerrain terrain, ArtIndex art, Tile tile, Facing facing)
+    private static Rgb GradeOf(BoardTerrain terrain, Tile tile)
+    {
+        var material = terrain.Map[tile].Material;
+        return material < terrain.Map.Materials.Length ? GroundGrade.Of(terrain.Map.Id, terrain.Map.Materials[material]) : new Rgb(1, 1, 1);
+    }
+
+    private static void AddSide(List<BoardItem> items, BoardTerrain terrain, ArtIndex art, Tile tile, Facing facing, bool world)
     {
         var next = facing == Facing.U ? tile with { X = tile.X + 1 } : tile with { Y = tile.Y + 1 };
         var inside = terrain.Map.InBounds(next);
@@ -454,8 +462,10 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
             var band = Math.Min(LipDepth, depth);
             var hang = new Vector2(0, band);
             var v = band / lipImage.Height;
-            items.Add(new Face(key, tile, FaceKind.Lip, facing, [edge.Near, edge.Far, edge.Far + hang, edge.Near + hang],
-                [new(u0, 0), new(u1, 0), new(u1, v), new(u0, v)], lipImage, null, shade));
+            var lipFace = new Face(key, tile, FaceKind.Lip, facing, [edge.Near, edge.Far, edge.Far + hang, edge.Near + hang],
+                [new(u0, 0), new(u1, 0), new(u1, v), new(u0, v)], lipImage, null, shade);
+            var graded = world ? lipFace.Tint.Times(GradeOf(terrain, tile)) : lipFace.Tint;
+            items.Add(graded == lipFace.Tint ? lipFace : lipFace with { VertexTints = [graded, graded, graded, graded] });
         }
     }
 

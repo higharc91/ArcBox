@@ -970,10 +970,7 @@ public sealed class RegionExportTests : IDisposable
     public void A_tree_across_the_road_fails_the_story_order()
     {
         var draft = AshenFordDraft.Build(Base.Value);
-        draft.Props.Add(new RegionProps("tree", "green", [
-            new Tile(49, 61), new Tile(49, 62), new Tile(49, 63),
-            new Tile(10, 61), new Tile(10, 62), new Tile(10, 63),
-        ]));
+        draft.Props.Add(new RegionProps("tree", "green", [.. Enumerable.Range(0, 64).Select(x => new Tile(x, 34))]));
         var materials = PaletteBuilder.AllSwatches(ContentPaths.ContentBase).Select(s => s.Material).ToHashSet(StringComparer.Ordinal);
         var def = RegionWriter.Write(draft, materials).Region!;
         var region = WorldRegion.From(def);

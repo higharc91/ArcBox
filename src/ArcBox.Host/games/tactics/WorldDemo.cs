@@ -21,6 +21,7 @@ internal sealed partial class WorldDemo : Node
     private const string WoodSpec = "wood";
     private const string TavernSpec = "tavern";
     private const string TownSpec = "town";
+    private const string SwatchSpec = "swatches";
     private const float StepsPerSecond = 2 / 0.3f;      // twice the walking pace of a tile per 0.3 s
     private const double RegularFrameMs = 16;           // the task's line: a frame over this, regularly, stops the work
     private const double ColdSeconds = 1;               // frames this close to the start have the JIT in them
@@ -34,6 +35,7 @@ internal sealed partial class WorldDemo : Node
     private readonly string _spec;
     private readonly string _pack;
     private readonly string? _shots;
+    private readonly string? _looks;
     private readonly List<Frame> _frames = [];
 
     private WorldCanvas _canvas = null!;
@@ -53,9 +55,10 @@ internal sealed partial class WorldDemo : Node
     private bool _secondShot;
     private bool _logged;
 
-    public WorldDemo(string spec, string packRoot, string? shots)
+    public WorldDemo(string spec, string packRoot, string? shots, string? looks = null)
     {
         _shots = shots;
+        _looks = looks;
         _spec = spec;
         _pack = packRoot;
     }
@@ -82,6 +85,7 @@ internal sealed partial class WorldDemo : Node
             WoodSpec => DemoRegion.Wood(160, 120),
             TavernSpec => DemoRegion.Tavern(_pack),
             TownSpec => DemoRegion.Town(_pack),
+            SwatchSpec => DemoRegion.Swatches(_pack),
             _ => DemoRegion.FromPack(_pack, region),
         };
         var start = region switch
@@ -90,16 +94,20 @@ internal sealed partial class WorldDemo : Node
             WoodSpec => DemoRegion.WoodStart(160, 120),
             TavernSpec => DemoRegion.TavernWalk()[0],
             TownSpec => DemoRegion.TownWalk()[0],
+            SwatchSpec => DemoRegion.SwatchLooks()[0].Stand,
             _ => RegionStart(region),
         };
         _route = region switch
         {
+            _ when _looks is not null || region == SwatchSpec => [start, start],
             TavernSpec => DemoRegion.TavernWalk(),
             TownSpec => DemoRegion.TownWalk(),
             _ => WorldRoute.Across(ground.Terrain, start, ClassDef.DefaultJump),
         };
         _spots = region switch
         {
+            _ when _looks is not null => WorldSpots.Parse(_looks),
+            SwatchSpec => DemoRegion.SwatchLooks(),
             TavernSpec => DemoRegion.TavernSpots(),
             TownSpec => DemoRegion.TownSpots(),
             _ => WorldSpots.Of(new BoardTerrain(ground.Map, null), ground.Terrain),

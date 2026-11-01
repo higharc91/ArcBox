@@ -28,6 +28,43 @@ public sealed class AmbientPlanTests
     }
 
     [Fact]
+    public void At_dusk_there_are_a_few_fireflies_over_the_fields_and_no_butterflies()
+    {
+        var map = Map(64, 64, (x, y) => (0, (byte)1, (byte)0));
+        var ambient = new AmbientPlan(new BoardTerrain(map, null), map, AmbientManifest.Load(Pack.Root), seed: 42, dusk: true);
+        var items = ambient.ActiveAt(1, new ArtArea(new Vector2(-4000), new Vector2(4000)));
+
+        Assert.DoesNotContain(items, i => i.Kind == "butterfly");
+        Assert.All(items.Where(i => i.Kind == "fireflies"), f => Assert.True(f.Add));
+        Assert.InRange(ambient.FlittingCount, 20, 110);
+    }
+
+    [Fact]
+    public void Steam_is_thickest_where_the_river_is_warm_and_thins_away_from_it()
+    {
+        // A river down the map, its stamped water at the top.
+        ImmutableHashSet<Tile> warm = [.. Enumerable.Range(0, 4).SelectMany(y => Enumerable.Range(14, 4).Select(x => new Tile(x, y)))];
+        var bytes = new byte[32 * 96 * 3];
+        for (var y = 0; y < 96; y++)
+            for (var x = 14; x < 18; x++)
+                (bytes[(y * 32 + x) * 3 + 1], bytes[(y * 32 + x) * 3 + 2]) = (2, (byte)(TileFlags.Water | TileFlags.Deep));
+        var map = BattleMap.FromBytes("test", 32, 96, bytes, ["grass/lush", "dirt/brown", "water/clear"], [], NoZones, warm);
+        var ambient = new AmbientPlan(new BoardTerrain(map, null), map, AmbientManifest.Load(Pack.Root), seed: 42, dusk: true);
+
+        var steam = ambient.ActiveAt(1, new ArtArea(new Vector2(-8000), new Vector2(8000))).Where(i => i.Variant == "steam").ToArray();
+
+        Assert.NotEmpty(steam);
+        Assert.True(steam.Count(s => s.Tile.Y < 32) > steam.Count(s => s.Tile.Y >= 32) * 2);
+    }
+
+    [Fact]
+    public void Nothing_steams_with_no_stamped_water()
+    {
+        var map = Map(32, 32, (x, y) => (0, (byte)2, (byte)(TileFlags.Water | TileFlags.Deep)));
+        Assert.Equal(0, new AmbientPlan(new BoardTerrain(map, null), map, AmbientManifest.Load(Pack.Root), seed: 42).SteamCount);
+    }
+
+    [Fact]
     public void Butterflies_stay_over_grass()
     {
         // Half grass, half dirt

@@ -160,7 +160,7 @@ public partial class Main : Control
             // Dev only: a whole region in blocks, measured; the art comes from the repository.
             GD.Print("World demo: no server connection");
             var worldPack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "tactics", "base"));
-            AddChild(new Games.Tactics.WorldDemo(region, worldPack, _args.ShotsDir));
+            AddChild(new Games.Tactics.WorldDemo(region, worldPack, _args.ShotsDir, _args.WorldLooks));
             return;
         }
         if (_args.Demo == AppArgs.DemoCampaignLobby)

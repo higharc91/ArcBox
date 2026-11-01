@@ -113,6 +113,33 @@ public static class DemoRegion
         return WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap>(), ArtManifests.Load(packRoot));
     }
 
+    /// <summary>What a material looks like in the ford's light, for choosing them.</summary>
+    private static readonly ImmutableArray<string> SwatchMaterials =
+    [
+        "ash/grey", "basalt/dark", "dirt/dark", "dirt/brown", "path/packed", "grass/dry", "grass/autumn", "grass/frost", "grass/green", "grass/lush",
+        "forest_floor/leafy", "forest_floor/mossy", "forest_needles/pine", "mud/swamp", "rock/grey", "rock/dark", "cobble/warm", "cobble/grey", "flagstone/warm",
+        "flagstone/grey", "flagstone/dark", "pavers/warm", "pavers/grey", "pavers/dark", "sand/desert", "planks/oak",
+    ];
+
+    /// <summary>A band of each of <see cref="SwatchMaterials"/>, six tiles deep, in the ford's light, with four bands to a look.</summary>
+    public static WorldGround Swatches(string packRoot)
+    {
+        const int side = WorldRegion.ChunkSize, band = 6;
+        var (width, depth) = (side, side * ((SwatchMaterials.Length * band + side - 1) / side));
+        var tiles = new byte[width * depth * 3];
+        for (var y = 0; y < depth; y++)
+            for (var x = 0; x < width; x++)
+                (tiles[(y * width + x) * 3], tiles[(y * width + x) * 3 + 1]) = ((byte)1, (byte)Math.Min(y / band, SwatchMaterials.Length - 1));
+        var start = SwatchLooks()[0].Stand;
+        ImmutableArray<RegionChunk> chunks = [.. Enumerable.Range(0, depth / side).Select(r => Chunk(tiles, width, depth, 0, r))];
+        var def = new RegionDef("ashen_ford", "Swatches", 0, [width, depth], SwatchMaterials, chunks, [], [], new RegionSpawns(start, start), []);
+        return WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap>(), ArtManifests.Load(packRoot));
+    }
+
+    /// <summary>Where <c>--world-demo=swatches</c> looks.</summary>
+    public static ImmutableArray<WorldSpot> SwatchLooks()
+        => [.. Enumerable.Range(0, (SwatchMaterials.Length + 3) / 4).Select(i => new WorldSpot($"swatch-{i}", new Tile(16, i * 24 + 12), new Tile(16, i * 24 + 12)))];
+
     /// <summary>Round the square, behind the tavern and out through the gate of <see cref="Town"/>.</summary>
     public static ImmutableArray<Tile> TownWalk()
     {

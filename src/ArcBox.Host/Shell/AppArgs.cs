@@ -48,6 +48,9 @@ public sealed record AppArgs
     /// <summary>Dev only: the region to draw and measure instead of connecting (<c>Tactics.Presentation.World.DemoRegion</c>), or null.</summary>
     public string? WorldDemo { get; init; }
 
+    /// <summary>Dev only: <c>name@x,y;…</c>, places to look at with <see cref="WorldDemo"/> instead of walking it, or null.</summary>
+    public string? WorldLooks { get; init; }
+
     /// <summary>Dev only: print a <c>WALK</c> line for each step the TV shows.</summary>
     public bool WalkLog { get; init; }
 
@@ -114,6 +117,9 @@ public sealed record AppArgs
                     break;
                 case "--world-demo":
                     args = args with { WorldDemo = string.IsNullOrWhiteSpace(value) ? "wood" : value };
+                    break;
+                case "--world-looks" when !string.IsNullOrWhiteSpace(value):
+                    args = args with { WorldLooks = value };
                     break;
                 case "--walk-log" when value is null:
                     args = args with { WalkLog = true };
