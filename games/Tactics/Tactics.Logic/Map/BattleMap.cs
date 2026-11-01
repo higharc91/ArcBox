@@ -45,7 +45,8 @@ public sealed class BattleMap
     private readonly TileInfo[] _tiles;
 
     private BattleMap(string id, int width, int height, TileInfo[] tiles, ImmutableArray<string> materials,
-        ImmutableArray<PropPlacement> props, ImmutableSortedDictionary<string, ImmutableArray<Tile>> zones)
+        ImmutableArray<PropPlacement> props, ImmutableSortedDictionary<string, ImmutableArray<Tile>> zones,
+        ImmutableHashSet<Tile>? stamped = null)
     {
         Id = id;
         Width = width;
@@ -54,6 +55,7 @@ public sealed class BattleMap
         Materials = materials;
         Props = props;
         Zones = zones;
+        StampedTiles = stamped ?? [];
     }
 
     /// <summary>The map's id.</summary>
@@ -74,6 +76,9 @@ public sealed class BattleMap
     /// <summary>Named tile sets, ordered by ordinal name.</summary>
     public ImmutableSortedDictionary<string, ImmutableArray<Tile>> Zones { get; }
 
+    /// <summary>Tiles that are part of a stamp on this map, if any.</summary>
+    public ImmutableHashSet<Tile> StampedTiles { get; }
+
     /// <summary>True when the tile lies on the grid.</summary>
     public bool InBounds(Tile t) => t.X >= 0 && t.Y >= 0 && t.X < Width && t.Y < Height;
 
@@ -86,7 +91,8 @@ public sealed class BattleMap
     /// (x, y) starts at byte <c>(y * w + x) * 3</c>.
     /// </summary>
     public static BattleMap FromBytes(string id, int w, int h, ReadOnlySpan<byte> tiles, ImmutableArray<string> materials,
-        ImmutableArray<PropPlacement> props, ImmutableSortedDictionary<string, ImmutableArray<Tile>> zones)
+        ImmutableArray<PropPlacement> props, ImmutableSortedDictionary<string, ImmutableArray<Tile>> zones,
+        ImmutableHashSet<Tile>? stamped = null)
     {
         if (w <= 0 || h <= 0)
             throw new ArgumentOutOfRangeException(nameof(w), "A map needs a positive size.");
@@ -102,6 +108,6 @@ public sealed class BattleMap
             infos[i] = new TileInfo(tiles[i * 3], material, (TileFlags)tiles[i * 3 + 2]);
         }
 
-        return new BattleMap(id, w, h, infos, materials, props, zones.WithComparers(StringComparer.Ordinal));
+        return new BattleMap(id, w, h, infos, materials, props, zones.WithComparers(StringComparer.Ordinal), stamped);
     }
 }

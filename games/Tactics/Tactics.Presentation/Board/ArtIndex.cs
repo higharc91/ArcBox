@@ -99,6 +99,29 @@ public sealed class ArtIndex
     /// <summary>The hazard, or null if the pack has no such hazard.</summary>
     public HazardArt? Hazard(string id) => _hazards.GetValueOrDefault(id);
 
+    /// <summary>A decal texture by its shorthand name (e.g. "scorch_burnt") or family and variant.</summary>
+    public ArtImage? Decal(string name, string? variant = null)
+    {
+        if (variant is not null)
+            return Texture(new ArtRef(name, variant));
+        return name switch
+        {
+            "scorch_burnt" => Texture(new ArtRef("scorch", "burnt")),
+            "bones_bone" => Texture(new ArtRef("bones", "bone")),
+            "cracks_dark" => Texture(new ArtRef("cracks", "dark")),
+            "puddle_water" => Texture(new ArtRef("puddle", "water")),
+            "puddle_swamp" => Texture(new ArtRef("puddle", "swamp")),
+            "blood_red" => Texture(new ArtRef("blood", "red")),
+            "pebbles" => Texture(new ArtRef("pebbles_0", "grey")),
+            "leaves" => Texture(new ArtRef("leaves_0", "green")),
+            "flowers" => Texture(new ArtRef("flowers_0", "red")),
+            _ => Texture(new ArtRef(name, "")),
+        };
+    }
+
+    /// <summary>A decal texture by <see cref="ArtRef"/>.</summary>
+    public ArtImage? Decal(ArtRef decal) => Texture(decal);
+
     private static (string Name, string Path) Pick(ImmutableArray<(string Name, string Path)> variants, IEnumerable<string> prefer)
     {
         foreach (var name in prefer)

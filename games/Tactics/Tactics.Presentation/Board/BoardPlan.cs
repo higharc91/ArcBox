@@ -55,7 +55,7 @@ public static class BoardOrder
 }
 
 /// <summary>What a <see cref="Face"/> is.</summary>
-public enum FaceKind { Under, Side, Lip, Top, Tint }
+public enum FaceKind { Under, Side, Lip, Top, Tint, Decal }
 
 /// <summary>Which way a <see cref="Face"/> looks: up, or along +U (screen lower right) or +V (screen lower left).</summary>
 public enum Facing { Up, U, V }
@@ -90,11 +90,16 @@ public abstract record BoardItem(long Order, Tile Tile);
 /// <param name="Alpha">Opacity.</param>
 /// <param name="Grid">Outlined, as a tile the battle can use.</param>
 /// <param name="Lit">Takes the board's light. What the rules mean is left out, so it stays clear.</param>
+/// <param name="VertexTints">Per-corner tint colors before light (empty for uniform <see cref="Tint"/>).</param>
 public sealed record Face(long Order, Tile Tile, FaceKind Kind, Facing Facing, ImmutableArray<Vector2> Points, ImmutableArray<Vector2> Uvs,
-    ArtImage? Image, Rgb? Fill, float Shade = 1, float Alpha = 1, bool Grid = false, bool Lit = true) : BoardItem(Order, Tile)
+    ArtImage? Image, Rgb? Fill, float Shade = 1, float Alpha = 1, bool Grid = false, bool Lit = true,
+    ImmutableArray<Rgb> VertexTints = default) : BoardItem(Order, Tile)
 {
     /// <summary>Its colour before any light: its fill, or white for art, at its shade.</summary>
     public Rgb Tint => (Fill ?? new Rgb(1, 1, 1)).Times(new Rgb(Shade, Shade, Shade));
+
+    /// <summary>The colour at corner before light.</summary>
+    public Rgb TintAt(int corner) => VertexTints.IsDefaultOrEmpty ? Tint : VertexTints[corner];
 
     /// <summary>The face as four cells that cover it, so light can peak inside a tile and not only on its corners. None is outlined.</summary>
     public ImmutableArray<Face> Cells()
@@ -110,7 +115,25 @@ public sealed record Face(long Order, Tile Tile, FaceKind Kind, Facing Facing, I
                 _ => [left, middle, front, q[3]],
             };
         }
-        return [.. Enumerable.Range(0, 4).Select(cell => this with { Points = Split(Points, cell), Uvs = Split(Uvs, cell), Grid = false })];
+        static ImmutableArray<Rgb> SplitTints(ImmutableArray<Rgb> q, int cell)
+        {
+            static Rgb Mid(Rgb a, Rgb b) => new((a.R + b.R) / 2, (a.G + b.G) / 2, (a.B + b.B) / 2);
+            var (back, right, front, left, middle) = (Mid(q[0], q[1]), Mid(q[1], q[2]), Mid(q[2], q[3]), Mid(q[3], q[0]), Mid(q[0], q[2]));
+            return cell switch
+            {
+                0 => [q[0], back, middle, left],
+                1 => [back, q[1], right, middle],
+                2 => [middle, right, q[2], front],
+                _ => [left, middle, front, q[3]],
+            };
+        }
+        return [.. Enumerable.Range(0, 4).Select(cell => this with
+        {
+            Points = Split(Points, cell),
+            Uvs = Split(Uvs, cell),
+            Grid = false,
+            VertexTints = VertexTints.IsDefaultOrEmpty ? default : SplitTints(VertexTints, cell),
+        })];
     }
 }
 
@@ -173,12 +196,13 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
     /// neighbours outside it are read from <paramref name="terrain"/> and there's no seam or skirt at its edges. Items stay in
     /// the terrain's own tiles and art pixels, with their keys, so plans of different rects sort together. Without
     /// <paramref name="grid"/> no tile is outlined. An empty rect's plan has no items and sits at the origin.
+    /// With <paramref name="world"/>, decals and ground tint are added (skipping stamped tiles).
     /// </summary>
-    public static BoardPlan BuildBlock(BoardTerrain terrain, ArtIndex art, TileRect rect, bool grid)
+    public static BoardPlan BuildBlock(BoardTerrain terrain, ArtIndex art, TileRect rect, bool grid, bool world = false)
     {
         var items = new List<BoardItem>();
         foreach (var tile in terrain.TilesIn(rect))
-            AddTile(items, terrain, art, tile);
+            AddTile(items, terrain, art, tile, world);
         AddProps(items, terrain, art, rect);
         AddZones(items, terrain, art, rect);
 
@@ -236,7 +260,96 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
     private static IEnumerable<Vector2> Extent(BoardItem item)
         => item is Face face ? face.Points : [((Sprite)item).TopLeft, ((Sprite)item).TopLeft + ((Sprite)item).Size];
 
-    private static void AddTile(List<BoardItem> items, BoardTerrain terrain, ArtIndex art, Tile tile)
+    /// <summary>A slow continuous tint drift across world tile coordinates, stopping ash and water repeating every 4 tiles.</summary>
+    public static Rgb GroundTint(float wx, float wy, Rgb baseTint)
+    {
+        var d1 = MathF.Sin(wx * 0.08f + wy * 0.05f);
+        var d2 = MathF.Cos(wx * 0.05f - wy * 0.07f);
+        var r = Math.Clamp(1f + 0.06f * d1, 0.8f, 1.2f);
+        var g = Math.Clamp(1f + 0.03f * (d1 + d2), 0.8f, 1.2f);
+        var b = Math.Clamp(1f - 0.05f * d2, 0.8f, 1.2f);
+        return new Rgb(baseTint.R * r, baseTint.G * g, baseTint.B * b);
+    }
+
+    private static uint DecalHash(int x, int y, string material)
+    {
+        uint h = 2166136261u;
+        h = (h ^ (uint)x) * 16777619u;
+        h = (h ^ (uint)y) * 16777619u;
+        foreach (var c in material)
+            h = (h ^ (uint)c) * 16777619u;
+        h ^= h >> 16;
+        h *= 0x85ebca6bu;
+        h ^= h >> 13;
+        h *= 0xc2b2ae35u;
+        h ^= h >> 16;
+        return h;
+    }
+
+    private static readonly ImmutableArray<ArtRef> Flowers =
+    [
+        new("flowers_0", "red"), new("flowers_0", "yellow"), new("flowers_0", "white"), new("flowers_0", "blue"),
+        new("flowers_1", "red"), new("flowers_1", "yellow"), new("flowers_1", "white"), new("flowers_1", "blue"),
+        new("flowers_2", "red"), new("flowers_2", "yellow"), new("flowers_2", "white"), new("flowers_2", "blue"),
+    ];
+
+    private static readonly ImmutableArray<ArtRef> Leaves =
+    [
+        new("leaves_0", "autumn"), new("leaves_0", "red"), new("leaves_0", "green"),
+        new("leaves_1", "autumn"), new("leaves_1", "red"), new("leaves_1", "green"),
+    ];
+
+    private static readonly ImmutableArray<ArtRef> Pebbles =
+    [
+        new("pebbles_0", "grey"), new("pebbles_1", "grey"),
+    ];
+
+    private static readonly ArtRef ScorchBurnt = new("scorch", "burnt");
+    private static readonly ArtRef BonesBone = new("bones", "bone");
+    private static readonly ArtRef CracksDark = new("cracks", "dark");
+    private static readonly ArtRef PuddleWater = new("puddle", "water");
+    private static readonly ArtRef PuddleSwamp = new("puddle", "swamp");
+    private static readonly ArtRef BloodRed = new("blood", "red");
+
+    /// <summary>Selects a decal for a tile in the world by deterministic hash of tile coordinates and material (~1 tile in 6).</summary>
+    public static ArtImage? DecalFor(Tile tile, string material, ArtIndex art)
+    {
+        var h = DecalHash(tile.X, tile.Y, material);
+        if (h % 6 != 0)
+            return null;
+
+        var ordinary = !material.Contains("burnt", StringComparison.OrdinalIgnoreCase)
+            && !material.Contains("ash", StringComparison.OrdinalIgnoreCase)
+            && !material.Contains("scorch", StringComparison.OrdinalIgnoreCase)
+            && !material.Contains("bone", StringComparison.OrdinalIgnoreCase)
+            && !material.Contains("crypt", StringComparison.OrdinalIgnoreCase)
+            && !material.Contains("ruin", StringComparison.OrdinalIgnoreCase)
+            && !material.Contains("dungeon", StringComparison.OrdinalIgnoreCase);
+
+        ImmutableArray<ArtRef> pool;
+        if (ordinary)
+        {
+            if (material.StartsWith("grass", StringComparison.OrdinalIgnoreCase))
+                pool = [.. Flowers, .. Leaves, .. Pebbles];
+            else if (material.StartsWith("swamp", StringComparison.OrdinalIgnoreCase))
+                pool = [PuddleSwamp, CracksDark, .. Leaves];
+            else if (material.StartsWith("dirt", StringComparison.OrdinalIgnoreCase)
+                || material.StartsWith("path", StringComparison.OrdinalIgnoreCase)
+                || material.StartsWith("sand", StringComparison.OrdinalIgnoreCase))
+                pool = [.. Pebbles, .. Leaves, CracksDark, PuddleWater];
+            else
+                pool = [CracksDark, .. Pebbles, .. Leaves, PuddleWater];
+        }
+        else
+        {
+            pool = [ScorchBurnt, CracksDark, BonesBone, BloodRed, .. Pebbles];
+        }
+
+        var pick = pool[(int)((h / 6) % (uint)pool.Length)];
+        return art.Decal(pick);
+    }
+
+    private static void AddTile(List<BoardItem> items, BoardTerrain terrain, ArtIndex art, Tile tile, bool world = false)
     {
         var look = terrain.Look(tile);
         var height = terrain.Top(tile);
@@ -252,10 +365,39 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
         var shade = look.Water
             ? terrain.Deep(tile) ? ShadeDeep : ShadeFord
             : 1 + Math.Max(0, height) * ShadePerStep;
-        items.Add(Flat(FaceKind.Top, BoardOrder.Key(tile, BoardLayer.Top), tile, height, art.Texture(look.Top), shade) with
+        var top = Flat(FaceKind.Top, BoardOrder.Key(tile, BoardLayer.Top), tile, height, art.Texture(look.Top), shade) with
         {
             Grid = !look.Void && !terrain.Map[tile].Flags.HasFlag(TileFlags.Impassable),
-        });
+        };
+        var isStamped = terrain.Map.StampedTiles.Contains(tile);
+        if (world && !isStamped)
+        {
+            var (x, y) = (tile.X, tile.Y);
+            top = top with
+            {
+                VertexTints =
+                [
+                    GroundTint(x, y, top.Tint),
+                    GroundTint(x + 1, y, top.Tint),
+                    GroundTint(x + 1, y + 1, top.Tint),
+                    GroundTint(x, y + 1, top.Tint),
+                ]
+            };
+        }
+        items.Add(top);
+
+        if (world && !isStamped && !look.Void && !look.Water && !terrain.Changes.Sunk.Contains(tile))
+        {
+            var material = terrain.Map.Materials[terrain.Map[tile].Material];
+            if (DecalFor(tile, material, art) is { } decalImage)
+            {
+                var (x, y) = (tile.X, tile.Y);
+                items.Add(new Face(BoardOrder.Key(tile, BoardLayer.Ground), tile, FaceKind.Decal, Facing.Up,
+                    [BoardProjection.Corner(x, y, height), BoardProjection.Corner(x + 1, y, height),
+                     BoardProjection.Corner(x + 1, y + 1, height), BoardProjection.Corner(x, y + 1, height)],
+                    [new(0, 0), new(1, 0), new(1, 1), new(0, 1)], decalImage, null, shade));
+            }
+        }
     }
 
     private static void AddSide(List<BoardItem> items, BoardTerrain terrain, ArtIndex art, Tile tile, Facing facing)
@@ -329,8 +471,11 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
         var mapVariants = terrain.Map.Materials.Select(m => MaterialLook.Of(m).Variant).ToArray();
         foreach (var prop in terrain.Map.Props.Where(p => terrain.Map.InBounds(p.At) && within?.Contains(p.At) != false))
         {
-            // A prop takes the colour of the ground under it, or failing that of anything on the map.
-            if (art.Prop(prop.Id, mapVariants.Prepend(terrain.Look(prop.At).Variant)) is not { } sprite)
+            // A prop takes its variant if specified, then the colour of the ground under it, or failing that of anything on the map.
+            var prefer = prop.Variant is not null
+                ? mapVariants.Prepend(terrain.Look(prop.At).Variant).Prepend(prop.Variant)
+                : mapVariants.Prepend(terrain.Look(prop.At).Variant);
+            if (art.Prop(prop.Id, prefer) is not { } sprite)
                 continue;
             var topLeft = terrain.Centre(prop.At) - new Vector2(sprite.AnchorX, sprite.AnchorY);
             items.Add(new Sprite(BoardOrder.Key(prop.At, BoardLayer.Prop), prop.At, sprite.Image, topLeft, new Vector2(sprite.Width, sprite.Height),

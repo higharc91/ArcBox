@@ -64,6 +64,14 @@ public sealed class WorldGround
                 return group.At.Select(t => new PropPlacement(group.Id, t, blocks, cover, group.Variant));
             }),
         ];
-        return new WorldGround(BattleMap.FromBytes(region.Def.Id, width, height, bytes, materials, [.. allProps], ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty));
+        var stampedTiles = region.Def.Stamps.Where(s => maps.ContainsKey(s.Map))
+            .SelectMany(s =>
+            {
+                var map = maps[s.Map];
+                return Enumerable.Range(0, map.Height)
+                    .SelectMany(y => Enumerable.Range(0, map.Width).Select(x => new Tile(s.At.X + x, s.At.Y + y)));
+            }).ToImmutableHashSet();
+        return new WorldGround(BattleMap.FromBytes(region.Def.Id, width, height, bytes, materials, [.. allProps],
+            ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty, stampedTiles));
     }
 }

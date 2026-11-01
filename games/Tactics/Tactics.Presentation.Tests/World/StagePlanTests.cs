@@ -249,7 +249,7 @@ public sealed class StagePlanTests(ITestOutputHelper output)
         // The world's blocks round it are what the whole region, changed, would build: the lowered top and the sides now down to it.
         var changed = new BoardTerrain(ground.Map, BoardChangesOnWorld.Of(changes, stage));
         Assert.True(rebuilt.Length >= 2);
-        Assert.All(rebuilt, b => Assert.Equal(BoardPlan.BuildBlock(changed, Pack.Art, b.Tiles, grid: false).Items.Select(Whole), b.Plan.Items.Select(Whole)));
+        Assert.All(rebuilt, b => Assert.Equal(BoardPlan.BuildBlock(changed, Pack.Art, b.Tiles, grid: false, world: true).Items.Select(Whole), b.Plan.Items.Select(Whole)));
         Assert.All(rebuilt, b => Assert.Equal(world.Blocks[b.Index].Tiles, b.Tiles));
         var top = (BoardItem i) => i is Face { Kind: FaceKind.Top } && i.Tile == stage.ToWorld(lowered);
         var stageTop = (Face)Assert.Single(stagePlan.With(changes).Plan.Items, i => top(i));
@@ -380,5 +380,20 @@ public sealed class StagePlanTests(ITestOutputHelper output)
         var most = (plan.Drawn.W + 5) * (plan.Drawn.H + 5);     // a tile round, and up to 3 more to start on a whole texture
         Assert.True(plan.Read <= most, $"a stage rebuild read {plan.Read} tiles, against at most {most} round what it draws");
         Assert.True(plan.Read * 10 < region, $"a stage rebuild read {plan.Read} of the region's {region} tiles");
+    }
+
+    [Fact]
+    public void The_stage_draws_props_near_the_fight()
+    {
+        var (ground, stage, map) = Ford.Value;
+        var propTile = new Tile(stage.Origin.X + stage.Width, stage.Origin.Y + 1);
+        var baseRegion = Pack.Region("ashen_ford");
+        var regionDef = baseRegion.Def with { Props = [new RegionProps("tree", "autumn", [propTile])] };
+        var regionWithProp = WorldRegion.From(regionDef);
+        var groundWithProp = WorldGround.Of(regionWithProp, new Dictionary<string, BattleMap> { ["river_crossing"] = map });
+        var stagePlan = StagePlan.Build(groundWithProp, stage, null, Pack.Art);
+
+        var prop = stagePlan.Plan.Items.OfType<Sprite>().FirstOrDefault(s => s.Tile == propTile);
+        Assert.NotNull(prop);
     }
 }

@@ -130,7 +130,7 @@ public sealed class StagePlan
         var (x1, y1) = (blocks.Max(b => b.Tiles.X + b.Tiles.W), blocks.Max(b => b.Tiles.Y + b.Tiles.H));
         var window = GroundWindow.Of(_ground, new TileRect(x0, y0, x1 - x0, y1 - y0), BoardChangesOnWorld.Of(changes, Stage),
             BoardTerrain.ChasmMaterial(_ground.Map, Stamp), _skirt);
-        return [.. blocks.Select(b => world.Relit(b, window.Block(_art, b.Tiles, grid: false)))];
+        return [.. blocks.Select(b => world.Relit(b, window.Block(_art, b.Tiles, grid: false, world: true)))];
     }
 
     private static StagePlan Draw(WorldGround ground, ArtIndex art, float skirt, BattleStage stage, BoardChanges changes, BoardLighting lighting)
@@ -195,9 +195,9 @@ internal sealed class GroundWindow
     }
 
     /// <summary><see cref="BoardPlan.BuildBlock"/> of the region's tiles <paramref name="rect"/>, at the region's tiles, keys and art pixels.</summary>
-    public BoardPlan Block(ArtIndex art, TileRect rect, bool grid)
+    public BoardPlan Block(ArtIndex art, TileRect rect, bool grid, bool world = false)
     {
-        var built = BoardPlan.BuildBlock(_terrain, art, rect with { X = rect.X - _x, Y = rect.Y - _y }, grid);
+        var built = BoardPlan.BuildBlock(_terrain, art, rect with { X = rect.X - _x, Y = rect.Y - _y }, grid, world);
         return BoardPlan.Of([.. built.Items.Select(Rekey)]).Shifted(BoardProjection.Corner(_x, _y, 0));
     }
 
@@ -252,6 +252,12 @@ internal sealed class GroundWindow
             .. world.Props.Where(p => p.At.X >= x && p.At.Y >= y && p.At.X < x + width && p.At.Y < y + height)
                 .Select(p => p with { At = new Tile(p.At.X - x, p.At.Y - y) }),
         ];
-        return BattleMap.FromBytes(world.Id, width, height, bytes, world.Materials, props, ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty);
+        ImmutableHashSet<Tile> stamped =
+        [
+            .. world.StampedTiles.Where(t => t.X >= x && t.Y >= y && t.X < x + width && t.Y < y + height)
+                .Select(t => new Tile(t.X - x, t.Y - y)),
+        ];
+        return BattleMap.FromBytes(world.Id, width, height, bytes, world.Materials, props,
+            ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty, stamped);
     }
 }

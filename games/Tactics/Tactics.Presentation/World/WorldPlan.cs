@@ -82,7 +82,7 @@ public sealed class WorldPlan
                 cuts.Add((x / blockSize, y / blockSize, new TileRect(x, y, Math.Min(blockSize, width - x), Math.Min(blockSize, height - y))));
 
         var inOrder = cuts.OrderBy(c => c.Column + c.Row).ThenBy(c => c.Column).ToArray();
-        var plans = inOrder.Select(c => BoardPlan.BuildBlock(terrain, art, c.Tiles, grid: false)).ToArray();
+        var plans = inOrder.Select(c => BoardPlan.BuildBlock(terrain, art, c.Tiles, grid: false, world: true)).ToArray();
         var lighting = BoardLighting.Of(plans, terrain.Map.Id, art.Lighting);
         ImmutableArray<BlockPlan> blocks = [.. inOrder.Select((c, i) => new BlockPlan(i, c.Tiles, c.Column + c.Row, plans[i], LitBoard.Build(plans[i], lighting)))];
 

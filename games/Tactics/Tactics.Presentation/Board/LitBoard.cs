@@ -13,10 +13,10 @@ public abstract record LitItem(long Order);
 public sealed record LitFace(Face Face, ImmutableArray<LightProbe> Probes, bool Art, bool Glow) : LitItem(Face.Order)
 {
     /// <summary>A corner's colour now: the face's own, times the light there if it takes any.</summary>
-    public Rgb ColourAt(int corner, BoardLighting lighting) => Probes.IsEmpty ? Face.Tint : Face.Tint.Times(lighting.At(Probes[corner]));
+    public Rgb ColourAt(int corner, BoardLighting lighting) => Probes.IsEmpty ? Face.TintAt(corner) : Face.TintAt(corner).Times(lighting.At(Probes[corner]));
 
     /// <summary>A corner's colour for art that's baked: as <see cref="ColourAt"/>, with every light at its mean, whatever the last step left.</summary>
-    public Rgb MeanColourAt(int corner, BoardLighting lighting) => Probes.IsEmpty ? Face.Tint : Face.Tint.Times(lighting.MeanAt(Probes[corner]));
+    public Rgb MeanColourAt(int corner, BoardLighting lighting) => Probes.IsEmpty ? Face.TintAt(corner) : Face.TintAt(corner).Times(lighting.MeanAt(Probes[corner]));
 }
 
 /// <summary>A sprite with what it needs from the light.</summary>

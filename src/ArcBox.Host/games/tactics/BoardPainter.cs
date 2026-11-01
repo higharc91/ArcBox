@@ -208,7 +208,9 @@ internal sealed class BoardPainter
         Vector2[] points = [.. face.Points.Select(p => new Vector2(p.X, p.Y))];
         Vector2[] uvs = [.. face.Uvs.Select(p => new Vector2(p.X, p.Y))];
         var colour = Colour(face.Tint, face.Alpha);
-        Color[] colours = [colour, colour, colour, colour];
+        Color[] colours = face.VertexTints.IsDefaultOrEmpty
+            ? [colour, colour, colour, colour]
+            : [.. face.VertexTints.Select(t => Colour(t, face.Alpha))];
         if (baked is not null)
         {
             for (var i = 0; i < colours.Length; i++)
