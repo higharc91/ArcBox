@@ -144,6 +144,14 @@ The local session was on Windows with an RTX 5080. Check what you have.
 - **Scene cast:** every scene places its non-narrator speakers at the scene's spot in the world while it plays. (21) *To build.*
 - **"Back to walking":** hidden when there's no world, using a new canWalk flag (a small contract change). (9, 29) *To build.*
 - **Spawn clash:** a walker on a spawn's tile steps to the nearest free walkable tile. (8) *To build.*
+- **Character screens need much better explanations** (the user's note after reviewing the phone screens). Explain:
+  - racial benefits (traits, ability bonuses, speed, senses, and what each means in play);
+  - class benefits (role, hit die, proficiencies, key features by level, spellcasting);
+  - stat benefits (what each ability score does: which attacks, saves, skills and spells it drives, and the modifier);
+  - other details such as backgrounds, skills and subclasses.
+
+  These must be viewable at any time: during creation (before and after a pick), and from the character sheet afterwards. Tap any race, class, stat, background or feature for its details. *To design and build.*
+- **Character sheet layout** (Claude's notes from the same review): the spell picks repeat the whole list, with full descriptions, for each "Level N: choose k" group, which makes the sheet over 10,000 px tall at 2×. Show the picks and a "Change" button that opens the list. Also add a live look preview (sprite and portrait) to creation, which is where the colour picker goes. *To build, with the item above.*
 
 Keep this list, add to it, and put it at the top of your final report. Don't stop work for these.
 
