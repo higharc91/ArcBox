@@ -168,7 +168,9 @@ function Pad({ sender }: { sender: WalkSender }) {
 
   return (
     <div class="tx-padzone" ref={zone}>
-      <div class="tx-pad" ref={face} role="img" aria-label="Walking pad: hold a direction to walk, and let go to stop">
+      {/* It takes focus so a keyboard finds it, though the arrow keys walk from anywhere on the page. */}
+      <div class="tx-pad" ref={face} role="application" tabIndex={0} aria-keyshortcuts="ArrowUp ArrowDown ArrowLeft ArrowRight"
+        aria-label="Walking pad: hold a direction to walk, and let go to stop. The arrow keys walk too.">
         <PadFace />
         <span class="tx-pad-knob" ref={knob} />
       </div>
@@ -229,9 +231,10 @@ function Interact({ label, send, viewId }: { label: string; send: CustomScreenPr
     const id = setTimeout(() => { sentFor.current = null; setSent(null); }, INTERACT_REARM_MS);
     return () => clearTimeout(id);
   }, [sent]);
+  // Asleep, it's only aria-disabled, not disabled: a disabled button would drop the keyboard's focus to the page.
   const busy = sent === viewId;
   return (
-    <button type="button" class="tx-btn gold tx-interact" disabled={busy} aria-disabled={busy}
+    <button type="button" class="tx-btn gold tx-interact" aria-disabled={busy}
       onClick={() => {
         if (sentFor.current === viewId) return;
         sentFor.current = viewId;
@@ -322,7 +325,8 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
     <div class={`tx tx-walk ${d.leader ? "lead" : "follow"}${arrived.current ? " arrived" : ""}`}>
       <div class="tx-walk-info">
         {d.vip ? <HostMenu canBattle={d.canBattle} send={send} /> : null}
-        <div class="tx-walk-who">
+        {/* A status, so a screen reader hears who leads, and that it's this phone when the lead comes here. */}
+        <div class="tx-walk-who" role="status">
           <span class="tx-crown"><LineIcon name="crown" /></span>
           <b>{d.leader ? "You lead the party" : d.leaderName ? `${d.leaderName} leads` : "The party waits for someone to lead it"}</b>
         </div>

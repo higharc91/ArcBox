@@ -73,21 +73,24 @@ export function Dialogue({ data, send, viewId }: CustomScreenProps) {
   return (
     <div class="tx tx-story">
       {d.title ? <p class="tx-story-title"><span class="tx-eyebrow">The story</span><b>{d.title}</b></p> : null}
-      {d.text ? (
-        <figure key={d.line} class={`tx-say${narration ? " narration" : ""}`}>
-          {d.speaker ? (
-            <figcaption class="tx-say-who">
-              {d.portrait ? <MoodPortrait preset={d.portrait} mood={d.mood} name={d.speaker} size={120} /> : null}
-              <b>{d.speaker}</b>
-            </figcaption>
-          ) : null}
-          <blockquote class="tx-say-text">{narration ? d.text : `“${d.text}”`}</blockquote>
-        </figure>
-      ) : (
-        <div class="tx-say quiet" role="status">
-          <p class="tx-note center">The story goes on. Watch the TV.</p>
-        </div>
-      )}
+      {/* Live, and never remounted, so a screen reader says each new line as it comes. */}
+      <div class="tx-say-live" aria-live="polite">
+        {d.text ? (
+          <figure key={d.line} class={`tx-say${narration ? " narration" : ""}`}>
+            {d.speaker ? (
+              <figcaption class="tx-say-who">
+                {d.portrait ? <MoodPortrait preset={d.portrait} mood={d.mood} name={d.speaker} size={120} /> : null}
+                <b>{d.speaker}</b>
+              </figcaption>
+            ) : null}
+            <blockquote class="tx-say-text">{narration ? d.text : `“${d.text}”`}</blockquote>
+          </figure>
+        ) : (
+          <div class="tx-say quiet">
+            <p class="tx-note center">The story goes on. Watch the TV.</p>
+          </div>
+        )}
+      </div>
       {d.canSkip && d.text ? (
         <div class="tx-foot tx-story-foot">
           <p class="tx-note">Lines move on by themselves.</p>

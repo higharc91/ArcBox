@@ -493,6 +493,23 @@ describe("the walk screen", () => {
     expect(document.querySelector(".tx-walk.arrived")).toBeNull();
   });
 
+  it("tells a screen reader who leads, and when this phone takes the lead", () => {
+    const { rerender } = render(<ControllerScreen view={view("walk-follower")} send={vi.fn()} me="ALEX" game="tactics" />);
+    const status = document.querySelector<HTMLElement>(".tx-walk-who")!;
+    expect(status.getAttribute("role")).toBe("status");
+    rerender(<ControllerScreen view={view("walk-leader", undefined, "v2")} send={vi.fn()} me="ALEX" game="tactics" />);
+    expect(document.querySelector(".tx-walk-who")).toBe(status);
+    expect(status.textContent).toBe("You lead the party");
+  });
+
+  it("the pad takes keyboard focus and says the arrow keys walk", () => {
+    show("walk-leader");
+    const face = document.querySelector<HTMLElement>(".tx-pad")!;
+    expect(face.tabIndex).toBe(0);
+    expect(face.getAttribute("aria-label")).toMatch(/arrow keys/i);
+    expect(face.getAttribute("aria-keyshortcuts")).toBe("ArrowUp ArrowDown ArrowLeft ArrowRight");
+  });
+
   it("says under the banner what to do: the leader walks, everyone watches the TV", () => {
     show("walk-leader");
     expect(document.querySelector(".tx-walk-who + .tx-walk-hint")!.textContent).toBe("Hold a direction to walk. Watch the TV.");

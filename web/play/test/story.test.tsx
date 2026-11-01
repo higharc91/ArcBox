@@ -125,6 +125,17 @@ describe("dialogue", () => {
     expect(document.querySelector(".tx-say.narration")).not.toBeNull();
   });
 
+  it("says each new line to a screen reader, in a live region that stays put", () => {
+    const { again } = show("dialogue");
+    const live = document.querySelector<HTMLElement>(".tx-story [aria-live='polite']")!;
+    expect(live.textContent).toMatch(/Halden Varrow.*Forty of them, perhaps/);
+    again(view("dialogue", (d) => { d.line = "ch1_ford_open_4"; d.speaker = null; d.portrait = null; d.text = "Rain on the ford."; }, "v2"));
+    expect(document.querySelector(".tx-story [aria-live='polite']")).toBe(live);
+    expect(live.textContent).toBe("Rain on the ford.");
+    again(view("dialogue", (d) => { d.line = null; d.speaker = null; d.text = null; }, "v3"));
+    expect(live.textContent).toBe("The story goes on. Watch the TV.");
+  });
+
   it("between lines, shows the scene and no skip", () => {
     show("dialogue-leader", (d) => { d.line = null; d.speaker = null; d.portrait = null; d.mood = null; d.text = null; d.canSkip = false; });
     expect(screen.getByText("The Ford Choice")).toBeTruthy();
@@ -453,6 +464,19 @@ describe("Interact", () => {
     await vi.advanceTimersByTimeAsync(2500);
     fireEvent.click(screen.getByRole("button", { name: "Talk" }));
     expect(send.mock.calls.filter((c) => (c[0] as { action: string }).action === "interact").length).toBe(2);
+  });
+
+  it("a tapped Interact sleeps without dropping keyboard focus", () => {
+    const { send } = show("walk-interact");
+    const talk = screen.getByRole("button", { name: "Talk" }) as HTMLButtonElement;
+    talk.focus();
+    fireEvent.click(talk);
+    expect(talk.getAttribute("aria-disabled")).toBe("true");
+    expect(talk.disabled).toBe(false);
+    expect(document.activeElement).toBe(talk);
+    // Asleep, a tap or Enter on it sends nothing more.
+    fireEvent.click(talk);
+    expect(send.mock.calls.filter((c) => (c[0] as { action: string }).action === "interact").length).toBe(1);
   });
 
   it("keeps the pad working when Interact appears", () => {

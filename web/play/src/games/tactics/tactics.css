@@ -363,6 +363,11 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
   background: radial-gradient(circle at 50% 42%, #2b3266, #141735 62%, #0a0b1a); border: 2px solid var(--wf-edge);
   box-shadow: 0 0 0 5px rgba(7, 8, 15, 0.7), 0 10px 26px rgba(4, 5, 12, 0.7), inset 0 0 26px rgba(4, 5, 12, 0.6); }
 .tx-pad svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* A keyboard that tabs to the pad sees a ring, and the hint under the banner says the arrow keys walk. A thumb never
+   focuses it (the pad takes no pointer events; the zone does). */
+.tx-pad:focus { outline: none; }
+.tx-pad:focus-visible { outline: 2px solid var(--wf-gold-hi); outline-offset: 6px; }
+.tx-walk:has(.tx-pad:focus-visible) .tx-walk-hint::after { content: " The arrow keys walk too."; }
 .tx-wedge { fill: rgba(255, 255, 255, 0.05); }
 .tx-chevron { fill: none; stroke: var(--wf-gold); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; opacity: 0.75; }
 .tx-chevron.small { stroke-width: 5.5; opacity: 0.45; }   /* drawn at 0.75 scale, so about 4 */
@@ -402,7 +407,9 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx .tx-btn.gold.tx-interact { position: sticky; bottom: 0; z-index: 2; flex: none; margin-top: auto; min-height: 56px; font-size: 19px; box-shadow: none;
   animation: tx-interact-in 0.45s ease-out both; }
 .tx .tx-interact .tx-line-icon { width: 22px; height: 22px; }
-.tx .tx-interact:disabled { opacity: 1; color: var(--wf-muted); background: #15172e; border-color: rgba(230, 189, 92, 0.35); box-shadow: none; }
+.tx .tx-interact[aria-disabled="true"] { opacity: 1; color: var(--wf-muted); background: #15172e; border-color: rgba(230, 189, 92, 0.35); box-shadow: none;
+  font-family: var(--wf-sans); letter-spacing: 0.02em; }
+.tx .tx-interact[aria-disabled="true"]:active { transform: none; }
 @keyframes tx-interact-in { 0% { opacity: 0; transform: translateY(8px) scale(0.96); } 55% { filter: brightness(1.25); } }
 
 /* ---------------------------------------------------------------- the story: dialogue (story.tsx) */
