@@ -40,6 +40,7 @@ internal sealed partial class WorldDemo : Node
     private readonly List<Frame> _frames = [];
 
     private WorldCanvas _canvas = null!;
+    private WorldPeople? _people;
     private UnitArt _art = null!;
     private WorldGround? _ground;
     private ImmutableArray<Tile> _route = [];
@@ -195,8 +196,17 @@ internal sealed partial class WorldDemo : Node
         var heading = WorldRoute.Heading(_route, steps);
         _canvas.Place(WorldView.Centred(place.Feet));
         _canvas.Aim(place.Map, heading * StepsPerSecond);
-        _canvas.ShowUnits(DemoRegion.StandIn(terrain, _art, place, heading, _clock), _art);
+        Show(terrain, place, heading);
         return place;
+    }
+
+    /// <summary>The stand-in, and the region's people round where the camera is, as the TV has them.</summary>
+    private void Show(BoardTerrain terrain, UnitPlace place, System.Numerics.Vector2 heading, System.Numerics.Vector2? looking = null)
+    {
+        _people ??= new WorldPeople(_canvas.Ground!.People, terrain, _art);
+        var walkers = DemoRegion.StandIn(terrain, _art, place, heading, _clock);
+        ImmutableArray<BoardUnit> units = [.. walkers.Concat(_people.Units(_clock, looking ?? place.Feet, [])).OrderBy(u => u.Order)];
+        _canvas.ShowUnits(units, walkers, _art);
     }
 
     private void Cross(double delta)
@@ -250,7 +260,7 @@ internal sealed partial class WorldDemo : Node
         var terrain = _canvas.Plan!.Terrain;
         var place = UnitPlace.On(terrain, spot.Stand);
         _canvas.Place(WorldView.Centred(terrain.Centre(spot.Look)));
-        _canvas.ShowUnits(DemoRegion.StandIn(terrain, _art, place, new System.Numerics.Vector2(1, 0), _clock), _art);
+        Show(terrain, place, new System.Numerics.Vector2(1, 0), terrain.Centre(spot.Look));
         if (++_settling < FadeFrames)
         {
             return;

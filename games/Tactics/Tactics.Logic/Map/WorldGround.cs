@@ -19,11 +19,15 @@ public sealed class WorldGround
     /// <summary>What marks a building's blocking tile among the props, so it's never taken for a prop with the same name. No art has this id, so none is drawn.</summary>
     private const string BuildingProp = "building:";
 
-    private WorldGround(BattleMap map)
+    private WorldGround(BattleMap map, ImmutableArray<RegionPerson> people)
     {
         Map = map;
+        People = people;
         Terrain = new Terrain(map, ImmutableSortedDictionary<Tile, int>.Empty, []);
     }
+
+    /// <summary>The people the TV draws. They don't touch the ground: nothing here reads them.</summary>
+    public ImmutableArray<RegionPerson> People { get; }
 
     /// <summary>The whole region as one map.</summary>
     public BattleMap Map { get; }
@@ -87,6 +91,6 @@ public sealed class WorldGround
             }).ToImmutableHashSet();
         return new WorldGround(BattleMap.FromBytes(region.Def.Id, width, height, bytes, materials, [.. allProps],
             ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty, stampedTiles,
-            [.. region.Buildings.Select(b => new BuildingPlacement(b.Id, b.Variant, b.At, region.TileAt(b.At)?.Height ?? 0))]));
+            [.. region.Buildings.Select(b => new BuildingPlacement(b.Id, b.Variant, b.At, region.TileAt(b.At)?.Height ?? 0))]), region.People);
     }
 }

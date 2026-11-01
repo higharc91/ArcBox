@@ -804,6 +804,56 @@ public sealed class AshenFordDraftTests
         Assert.InRange(trodden, 50, 110);
     }
 
+    private static RegionPerson OnePerson(Proved draft, string preset) => draft.Source.People.Single(p => p.Preset == preset);
+
+    [Theory]
+    [InlineData("mayor", "the square", 24, 55, 38, 66)]
+    [InlineData("innkeeper", "The Last Coal's door", 24, 55, 26, 55)]
+    [InlineData("priest", "the chapel", 29, 55, 30, 55)]
+    [InlineData("blacksmith", "the smithy", 36, 55, 37, 55)]
+    [InlineData("guard_captain", "the east gate", 44, 60, 47, 64)]
+    [InlineData("hermit", "her hut", 128, 88, 134, 92)]
+    [InlineData("goblin_shaman", "the camp's fire", 131, 20, 136, 25)]
+    public void Named_people_stand_where_they_live(string preset, string place, int left, int top, int right, int bottom)
+    {
+        var at = OnePerson(Draft.Value, preset).At;
+
+        Assert.True(at.X >= left && at.X <= right && at.Y >= top && at.Y <= bottom, $"The {preset} should be at {place}, and is at {at}.");
+    }
+
+    [Fact]
+    public void Theres_a_town_of_people_about_25_of_them_where_their_work_is()
+    {
+        var draft = Draft.Value;
+        var folk = draft.Source.People.Where(p => p.Preset is not ("mayor" or "innkeeper" or "priest" or "blacksmith" or "guard_captain" or "hermit" or "goblin_shaman" or "minstrel" or "sage" or "noble")).ToList();
+        Assert.InRange(folk.Count, 25, 45);
+
+        var goblins = folk.Where(p => p.Preset.StartsWith("goblin", StringComparison.Ordinal)).ToList();
+        Assert.True(goblins.Count(p => Distance(p.At, draft.Spot("ch1_skarrow_song")) <= 8) >= 3);
+        Assert.True(goblins.Count(p => Distance(p.At, draft.Stamp.At with { X = draft.Stamp.At.X + 7, Y = draft.Stamp.At.Y + 6 }) <= 15) >= 5);
+        Assert.Contains(folk, p => p.Preset == "child");
+        Assert.True(folk.Count(p => p.Preset == "guard") >= 4);
+        Assert.True(folk.Count(p => p.Preset == "merchant") >= 4);
+        Assert.True(folk.Count(p => p.Preset == "fisher" && draft.Material(p.At).StartsWith("planks", StringComparison.Ordinal)) >= 3);
+        Assert.True(folk.Count(p => p.Preset is "farmer" or "farmhand" && p.At.Y is < 44 or > 79) >= 4);
+    }
+
+    [Fact]
+    public void Nobody_stands_on_the_road_the_party_walks_nor_on_a_spawn()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+
+        Assert.DoesNotContain(draft.Source.People, p => draft.Material(p.At) == "path/packed");
+        Assert.DoesNotContain(draft.Source.People, p => p.At == draft.Start || p.At == draft.Recovery);
+
+        // A gate's way through stays clear, and so does every door.
+        var doors = source.Buildings.SelectMany(b => draft.Pack.Art!.Buildings[b.Id].DoorSteps(b.At)).ToHashSet();
+        Assert.Empty(draft.Source.People.Where(p => p.Preset is not ("innkeeper" or "priest" or "blacksmith" or "hermit") && doors.Contains(p.At)).Select(p => $"{p.Preset} {p.At}"));
+        Assert.DoesNotContain(draft.Source.People, p => p.At == new Tile(47, 62) || p.At == new Tile(31, 79));
+    }
+
     [Fact]
     public void Mauds_hut_stands_alone()
     {

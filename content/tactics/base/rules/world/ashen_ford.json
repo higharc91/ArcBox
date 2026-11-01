@@ -5230,5 +5230,539 @@
         108
       ]
     }
+  ],
+  "people": [
+    {
+      "preset": "farmer",
+      "at": [
+        38,
+        13
+      ],
+      "face": "sw"
+    },
+    {
+      "preset": "goblin_cutthroat",
+      "at": [
+        132,
+        23
+      ],
+      "face": "se"
+    },
+    {
+      "preset": "goblin_shaman",
+      "at": [
+        134,
+        24
+      ],
+      "face": "nw"
+    },
+    {
+      "preset": "goblin_spear",
+      "at": [
+        132,
+        25
+      ],
+      "face": "se"
+    },
+    {
+      "preset": "goblin_archer",
+      "at": [
+        135,
+        25
+      ],
+      "face": "sw"
+    },
+    {
+      "preset": "goblin_spear",
+      "at": [
+        134,
+        27
+      ],
+      "face": "sw",
+      "walk": [
+        [
+          134,
+          28
+        ],
+        [
+          133,
+          28
+        ],
+        [
+          133,
+          27
+        ]
+      ]
+    },
+    {
+      "preset": "merchant",
+      "at": [
+        52,
+        31
+      ],
+      "face": "se"
+    },
+    {
+      "preset": "farmhand",
+      "at": [
+        22,
+        37
+      ],
+      "face": "se"
+    },
+    {
+      "preset": "guard",
+      "at": [
+        26,
+        49
+      ],
+      "face": "se",
+      "walk": [
+        [
+          27,
+          49
+        ],
+        [
+          28,
+          49
+        ],
+        [
+          29,
+          49
+        ],
+        [
+          29,
+          48
+        ],
+        [
+          28,
+          48
+        ],
+        [
+          27,
+          48
+        ],
+        [
+          26,
+          48
+        ]
+      ]
+    },
+    {
+      "preset": "goblin_cutthroat",
+      "at": [
+        120,
+        54
+      ],
+      "face": "se"
+    },
+    {
+      "preset": "innkeeper",
+      "at": [
+        25,
+        55
+      ],
+      "face": "sw"
+    },
+    {
+      "preset": "priest",
+      "at": [
+        30,
+        55
+      ],
+      "face": "sw"
+    },
+    {
+      "preset": "blacksmith",
+      "at": [
+        36,
+        55
+      ],
+      "face": "se"
+    },
+    {
+      "preset": "goblin_spear",
+      "at": [
+        117,
+        55
+      ],
+      "face": "sw"
+    },
+    {
+      "preset": "child",
+      "at": [
+        18,
+        56
+      ],
+      "face": "nw"
+    },
+    {
+      "preset": "minstrel",
+      "at": [
+        29,
+        58
+      ],
+      "face": "sw"
+    },
+    {
+      "preset": "sage",
+      "at": [
+        36,
+        58
+      ],
+      "face": "ne"
+    },
+    {
+      "preset": "goblin_archer",
+      "at": [
+        95,
+        58
+      ],
+      "face": "se"
+    },
+    {
+      "preset": "child",
+      "at": [
+        30,
+        59
+      ],
+      "face": "se",
+      "walk": [
+        [
+          30,
+          60
+        ],
+        [
+          30,
+          61
+        ],
+        [
+          31,
+          61
+        ],
+        [
+          32,
+          61
+        ],
+        [
+          32,
+          60
+        ],
+        [
+          32,
+          59
+        ],
+        [
+          31,
+          59
+        ]
+      ]
+    },
+    {
+      "preset": "child",
+      "at": [
+        33,
+        59
+      ],
+      "face": "sw"
+    },
+    {
+      "preset": "farmhand",
+      "at": [
+        37,
+        60
+      ],
+      "face": "sw",
+      "walk": [
+        [
+          37,
+          61
+        ],
+        [
+          36,
+          61
+        ],
+        [
+          36,
+          60
+        ]
+      ]
+    },
+    {
+      "preset": "guard",
+      "at": [
+        48,
+        60
+      ],
+      "face": "sw"
+    },
+    {
+      "preset": "farmer",
+      "at": [
+        41,
+        61
+      ],
+      "face": "se",
+      "walk": [
+        [
+          42,
+          61
+        ],
+        [
+          43,
+          61
+        ],
+        [
+          43,
+          62
+        ],
+        [
+          42,
+          62
+        ],
+        [
+          41,
+          62
+        ]
+      ]
+    },
+    {
+      "preset": "guard",
+      "at": [
+        46,
+        61
+      ],
+      "face": "sw"
+    },
+    {
+      "preset": "goblin_spear",
+      "at": [
+        117,
+        61
+      ],
+      "face": "ne"
+    },
+    {
+      "preset": "barmaid",
+      "at": [
+        20,
+        62
+      ],
+      "face": "se",
+      "walk": [
+        [
+          21,
+          62
+        ],
+        [
+          22,
+          62
+        ],
+        [
+          22,
+          61
+        ],
+        [
+          21,
+          61
+        ],
+        [
+          20,
+          61
+        ]
+      ]
+    },
+    {
+      "preset": "mayor",
+      "at": [
+        29,
+        62
+      ],
+      "face": "se"
+    },
+    {
+      "preset": "guard",
+      "at": [
+        46,
+        63
+      ],
+      "face": "ne"
+    },
+    {
+      "preset": "goblin_spear",
+      "at": [
+        99,
+        63
+      ],
+      "face": "nw"
+    },
+    {
+      "preset": "goblin_archer",
+      "at": [
+        120,
+        63
+      ],
+      "face": "sw"
+    },
+    {
+      "preset": "merchant",
+      "at": [
+        26,
+        64
+      ],
+      "face": "sw"
+    },
+    {
+      "preset": "merchant",
+      "at": [
+        28,
+        64
+      ],
+      "face": "sw"
+    },
+    {
+      "preset": "merchant",
+      "at": [
+        35,
+        64
+      ],
+      "face": "sw"
+    },
+    {
+      "preset": "guard_captain",
+      "at": [
+        45,
+        64
+      ],
+      "face": "ne"
+    },
+    {
+      "preset": "goblin_spear",
+      "at": [
+        99,
+        64
+      ],
+      "face": "se"
+    },
+    {
+      "preset": "farmer",
+      "at": [
+        26,
+        66
+      ],
+      "face": "ne"
+    },
+    {
+      "preset": "barmaid",
+      "at": [
+        35,
+        66
+      ],
+      "face": "ne"
+    },
+    {
+      "preset": "noble",
+      "at": [
+        41,
+        68
+      ],
+      "face": "se"
+    },
+    {
+      "preset": "guard",
+      "at": [
+        30,
+        78
+      ],
+      "face": "se"
+    },
+    {
+      "preset": "guard",
+      "at": [
+        32,
+        78
+      ],
+      "face": "sw"
+    },
+    {
+      "preset": "farmhand",
+      "at": [
+        37,
+        85
+      ],
+      "face": "sw"
+    },
+    {
+      "preset": "farmer",
+      "at": [
+        30,
+        86
+      ],
+      "face": "se"
+    },
+    {
+      "preset": "farmer",
+      "at": [
+        25,
+        87
+      ],
+      "face": "ne"
+    },
+    {
+      "preset": "hermit",
+      "at": [
+        130,
+        90
+      ],
+      "face": "sw"
+    },
+    {
+      "preset": "fisher",
+      "at": [
+        105,
+        92
+      ],
+      "face": "sw"
+    },
+    {
+      "preset": "merchant",
+      "at": [
+        97,
+        93
+      ],
+      "face": "sw"
+    },
+    {
+      "preset": "fisher",
+      "at": [
+        102,
+        93
+      ],
+      "face": "se"
+    },
+    {
+      "preset": "fisher",
+      "at": [
+        104,
+        99
+      ],
+      "face": "se"
+    },
+    {
+      "preset": "merchant",
+      "at": [
+        97,
+        104
+      ],
+      "face": "sw"
+    },
+    {
+      "preset": "fisher",
+      "at": [
+        103,
+        104
+      ],
+      "face": "se"
+    }
   ]
 }

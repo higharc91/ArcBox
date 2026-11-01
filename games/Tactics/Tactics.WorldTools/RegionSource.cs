@@ -39,6 +39,9 @@ public sealed class RegionSource(string id, string name, int chapter, int width,
     /// <summary>The buildings placed in the region.</summary>
     public List<RegionBuilding> Buildings { get; } = [];
 
+    /// <summary>The people standing in the region.</summary>
+    public List<RegionPerson> People { get; } = [];
+
     /// <summary>Where the party starts.</summary>
     public Tile Start { get; set; }
 

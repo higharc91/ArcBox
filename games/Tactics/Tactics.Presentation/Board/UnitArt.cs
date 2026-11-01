@@ -363,9 +363,12 @@ public sealed class UnitArt
     private UnitSprite Character(string preset)
     {
         var build = BuildOf(preset);
-        return new UnitSprite($"{CharacterSet}/presets/{preset}.png", _characters.Width, _characters.Height, _characters.AnchorX, _characters.AnchorY,
+        return new UnitSprite(SheetOf(preset), _characters.Width, _characters.Height, _characters.AnchorX, _characters.AnchorY,
             _heads.GetValueOrDefault(build), _characters.Idle, _characters.Down, _headOffsets.GetValueOrDefault(build), _characters.Anims);
     }
+
+    /// <summary>The file a preset's sprites are in, relative to the pack's root.</summary>
+    public static string SheetOf(string preset) => $"{CharacterSet}/presets/{preset}.png";
 
     private string BuildOf(string preset)
     {

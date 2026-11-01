@@ -36,11 +36,14 @@ public static class RegionScene
     /// <summary>The node holding <see cref="BuildingMarker"/>s.</summary>
     public const string Buildings = "Buildings";
 
+    /// <summary>The node holding <see cref="PersonMarker"/>s.</summary>
+    public const string People = "People";
+
     private static readonly string[] Layers = [MaterialLayer, HeightLayer, FlagsLayer, PropsLayer];
 
     private static readonly string[] RequiredLayers = [MaterialLayer, HeightLayer, FlagsLayer];
 
-    private static readonly string[] Groups = [Beats, Stamps, Spawns, Buildings];
+    private static readonly string[] Groups = [Beats, Stamps, Spawns, Buildings, People];
 
     /// <summary>
     /// Exports the scene. The plugin's button and the headless <c>--export</c> command both call this. It writes
@@ -81,6 +84,7 @@ public static class RegionScene
             Beats = [.. root.GetNode(Beats).GetChildren().OfType<BeatMarker>().Select(b => new BeatSpot(b.Beat, b.Tile))],
             Stamps = [.. root.GetNode(Stamps).GetChildren().OfType<StampMarker>().Select(s => new RegionStamp(s.Map, s.Tile, s.HeightOffset))],
             Buildings = [.. root.GetNode(Buildings).GetChildren().OfType<BuildingMarker>().Select(b => new RegionBuilding(b.Building, b.Variant, b.Tile))],
+            People = [.. root.GetNode(People).GetChildren().OfType<PersonMarker>().Select(p => new RegionPerson(p.Preset, p.Tile, p.Face, PersonText.Walk(p.Walk)))],
             Starts = [.. spawns.Where(s => s.Kind == SpawnMarker.SpawnKind.Start).Select(s => s.Tile)],
             Recoveries = [.. spawns.Where(s => s.Kind == SpawnMarker.SpawnKind.Recovery).Select(s => s.Tile)],
             OldStamps = [.. root.GetNode(Stamps).GetChildren().OfType<StampMarker>().SelectMany(s => s.Pending)],
@@ -156,6 +160,9 @@ public static class RegionScene
         var buildings = AddGroup(root, Buildings);
         for (var i = 0; i < source.Buildings.Count; i++)
             AddMarker(root, buildings, new BuildingMarker { Building = source.Buildings[i].Id, Variant = source.Buildings[i].Variant }, $"{source.Buildings[i].Id}_{i}", source.Buildings[i].At);
+        var people = AddGroup(root, People);
+        for (var i = 0; i < source.People.Count; i++)
+            AddMarker(root, people, new PersonMarker { Preset = source.People[i].Preset, Face = source.People[i].Face, Walk = PersonText.Walk(source.People[i].Walk) }, $"{source.People[i].Preset}_{i}", source.People[i].At);
         return root;
     }
 

@@ -285,7 +285,10 @@ public partial class BoardCanvas : Node2D
         }
         var feet = new Vector2(unit.Feet.X, unit.Feet.Y);
         var clock = _clock + unit.Phase;
-        DrawRing(feet, unit);
+        if (unit.Ring > 0)
+        {
+            DrawRing(feet, unit);
+        }
         foreach (var effect in unit.Under)
         {
             DrawEffect(effect, feet, clock);

@@ -67,6 +67,9 @@ public sealed record BoardUnit(long Order, UnitId Id, UnitTone Tone, Vector2 Fee
     /// <summary>Where the anchor of the leader's crown goes (the crown row of emotes/manifest.json); null for anyone else.</summary>
     public Vector2? CrownAt { get; init; }
 
+    /// <summary>One of a region's people, who stands about and has no say in anything: what they stand behind doesn't fade for them.</summary>
+    public bool Dressing { get; init; }
+
     /// <summary>An emote over the unit, as the crown is drawn: a story beat's "!" (<see cref="World.StoryMarks"/>); null for none.</summary>
     public EmoteStrip? Emote { get; init; }
 
@@ -175,6 +178,19 @@ public static class UnitPlan
         var unit = new UnitId(id);
         return new BoardUnit(OrderOf(place.Over, drawn), unit, UnitTone.Neutral, feet, drawn, drawn.Idle, PhaseOf(unit), 0, false, 0, false, [], [], null,
             null, [], feet, null);
+    }
+
+    /// <summary>
+    /// Someone of a region's people (<see cref="World.WorldPeople"/>): a figure with a way of looking and, with <paramref name="walking"/>, an animation of their own to loop.
+    /// </summary>
+    public static BoardUnit Person(string id, string sprite, UnitPlace place, Vector2 looking, string? walking, UnitArt art, Func<Vector2, bool, Vector2>? pixels = null)
+    {
+        var drawn = art.Sprite(sprite)!;
+        var feet = pixels?.Invoke(place.Feet, walking is null) ?? place.Feet;
+        var unit = new UnitId(id);
+        var (row, mirror) = Looking(looking.X, looking.Y);
+        return new BoardUnit(OrderOf(place.Over, drawn), unit, UnitTone.Neutral, feet, drawn, walking is null ? drawn.Idle : drawn.Anim(walking), PhaseOf(unit), row, mirror, 0, false, [], [], null,
+            null, [], feet, null) { Dressing = true };
     }
 
     /// <summary>Where the tail of an emote over a standing figure goes: a crown's or a "!"'s, just over the head of <paramref name="sprite"/> at <paramref name="feet"/>.</summary>

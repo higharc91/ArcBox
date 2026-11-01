@@ -116,6 +116,71 @@ public sealed class RegionWriterTests
     }
 
     [Fact]
+    public void People_sort_by_where_they_stand_so_a_reexport_is_byte_identical()
+    {
+        RegionPerson[] people =
+        [
+            new("guard", new Tile(20, 4), "sw"), new("merchant", new Tile(3, 9), "se", [new Tile(4, 9), new Tile(4, 10), new Tile(3, 10)]), new("child", new Tile(8, 4), "ne"),
+        ];
+        var (first, second) = (Source(), Source());
+        foreach (var source in new[] { first, second })
+            source.Set(new Tile(0, 0), 1, Grass, TileFlags.None);
+        first.People.AddRange(people);
+        second.People.AddRange(people.Reverse());
+
+        var def = Written(first);
+
+        Assert.Equal([new Tile(8, 4), new Tile(20, 4), new Tile(3, 9)], def.People.Select(p => p.At));
+        Assert.Equal(JsonSerializer.Serialize(def, ArcJson.Options), JsonSerializer.Serialize(Written(second), ArcJson.Options));
+    }
+
+    [Fact]
+    public void A_region_with_nobody_in_it_writes_no_people_at_all()
+    {
+        var source = Source();
+        source.Set(new Tile(0, 0), 1, Grass, TileFlags.None);
+
+        Assert.True(Written(source).People.IsDefault);
+        Assert.DoesNotContain("people", JsonSerializer.Serialize(Written(source), ArcJson.Options), StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void A_person_goes_through_the_file_and_back_as_they_were()
+    {
+        var person = new RegionPerson("merchant", new Tile(3, 9), "se", [new Tile(4, 9), new Tile(3, 9)]);
+        var source = Source();
+        source.Set(new Tile(0, 0), 1, Grass, TileFlags.None);
+        source.People.Add(person);
+
+        var back = JsonSerializer.Deserialize<RegionDef>(JsonSerializer.Serialize(Written(source), ArcJson.Options), ArcJson.Options)!;
+
+        var read = Assert.Single(back.People);
+        Assert.Equal((person.Preset, person.At, person.Face), (read.Preset, read.At, read.Face));
+        Assert.Equal(person.Walk, read.Walk);
+    }
+
+    [Theory]
+    [InlineData("", 0)]
+    [InlineData("31,59", 1)]
+    [InlineData("31,59 32,59 32,60", 3)]
+    public void A_walk_reads_back_from_the_text_a_marker_holds(string text, int tiles)
+    {
+        var walk = PersonText.Walk(text);
+
+        Assert.Equal(tiles, walk.IsDefault ? 0 : walk.Length);
+        Assert.Equal(text, PersonText.Walk(walk));
+    }
+
+    [Fact]
+    public void Repairing_a_source_keeps_its_people()
+    {
+        var source = Source();
+        source.People.Add(new RegionPerson("guard", new Tile(3, 9), "sw"));
+
+        Assert.Equal(source.People, RegionWriter.Repair(source, new HashSet<string> { Grass }, new Dictionary<Tile, TileInfoNamed>()).People);
+    }
+
+    [Fact]
     public void Buildings_sort_by_where_they_stand_so_a_reexport_is_byte_identical()
     {
         var first = Source();

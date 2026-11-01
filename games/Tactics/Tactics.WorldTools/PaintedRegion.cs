@@ -31,6 +31,9 @@ public sealed record PaintedRegion(string Id, string Name, int Chapter, int Widt
     /// <summary>The building markers, each on its footprint's back corner.</summary>
     public IReadOnlyList<RegionBuilding> Buildings { get; init; } = [];
 
+    /// <summary>The person markers.</summary>
+    public IReadOnlyList<RegionPerson> People { get; init; } = [];
+
     /// <summary>The beat markers.</summary>
     public IReadOnlyList<BeatSpot> Beats { get; init; } = [];
 
@@ -75,6 +78,7 @@ public sealed record PaintedRegion(string Id, string Name, int Chapter, int Widt
             source.Set(tile, Heights.GetValueOrDefault(tile), material, Flags.GetValueOrDefault(tile));
         source.Beats.AddRange(Beats);
         source.Buildings.AddRange(Buildings);
+        source.People.AddRange(People);
         foreach (var stamp in Stamps)
             source.AddStamp(stamp);
         foreach (var group in Props.GroupBy(p => (p.Value.Id, p.Value.Variant)))

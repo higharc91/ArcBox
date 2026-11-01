@@ -81,6 +81,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
     private ColorRect _fade = null!;
     private BlockQueue _queue = null!;
     private object[][] _items = [];
+    private string[] _sheets = [];
     private int _texture;
     private double _clock;
     private double _delta;
@@ -389,8 +390,8 @@ internal sealed partial class WorldCanvas : CanvasLayer
     /// <summary>Where blocks are queued around: the party's tile and its speed in tiles a second.</summary>
     public void Aim(System.Numerics.Vector2 tile, System.Numerics.Vector2 velocity) => _aim = BlockQueue.Aim(tile, velocity);
 
-    /// <summary>Shows <paramref name="units"/>, with what stands in front of each painted over them.</summary>
-    public void ShowUnits(ImmutableArray<BoardUnit> units, UnitArt art)
+    /// <summary>Shows <paramref name="units"/>, with what stands in front of each painted over them. Only <paramref name="walkers"/> fade what they're behind: a townsman behind a house stays behind it.</summary>
+    public void ShowUnits(ImmutableArray<BoardUnit> units, ImmutableArray<BoardUnit> walkers, UnitArt art)
     {
         if (Plan is null || _over is null)
         {
@@ -398,7 +399,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         }
         var clock = Stopwatch.GetTimestamp();
         var plan = Plan;
-        _propFade?.Update(units, _delta);
+        _propFade?.Update(walkers, _delta);
         _propFade?.TakeChanges(_leave);
         var over = plan.PaintOver(units, _propFade);
         QueryMs = Stopwatch.GetElapsedTime(clock).TotalMilliseconds;
@@ -457,6 +458,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         BuildTimes = built.Times;
         (Ground, Plan) = (built.Ground, built.Plan);
         _propFade = new PropFade(Plan);
+        _sheets = [.. Ground.People.Select(p => p.Preset).Distinct().Select(UnitArt.SheetOf)];
         _items = built.Items;
         _queue = new BlockQueue(Plan.Blocks);
         foreach (var block in Plan.Blocks)
@@ -498,6 +500,11 @@ internal sealed partial class WorldCanvas : CanvasLayer
         else if (_texture < images + plan.Halos.Length)
         {
             _painter.Load(plan.Halos[_texture++ - images]);
+        }
+        else if (_texture < images + plan.Halos.Length + _sheets.Length)
+        {
+            // Someone's sheet is 100 ms of a decoded image if it's first needed as they come into view.
+            _painter.Load(_sheets[_texture++ - images - plan.Halos.Length]);
         }
         else
         {

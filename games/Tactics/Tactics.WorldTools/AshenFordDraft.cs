@@ -419,6 +419,59 @@ public static class AshenFordDraft
     /// <summary>All of it, place by place.</summary>
     private static readonly Stand[] Everything = [.. InEmberwick, .. InTheFields, .. OnTheRoad, .. OnTheBurnedGround, .. AtTheFord, .. OnTheDocks, .. AtTheCamp, .. InTheHills, .. RoundMauds];
 
+    /// <summary>Someone standing on a tile, looking one way, and walking a loop if they've somewhere to pace.</summary>
+    private static RegionPerson Stood(string preset, int x, int y, string face, params (int X, int Y)[] walk)
+        => new(preset, new Tile(x, y), face, walk.Length == 0 ? default : [.. walk.Select(t => new Tile(t.X, t.Y))]);
+
+    /// <summary>
+    /// Who lives where the lore says. Pip stands on the mayor's beat, as he opens it, and a beat's figure stands in for its own person (<c>WorldPeople</c>), so nobody shows twice. Lark
+    /// and Corvin have no scene in this chapter, so they're where a singer and a scholar would be: on the square by the well, and reading the notice board.
+    /// </summary>
+    private static readonly RegionPerson[] Named =
+    [
+        Stood("mayor", 29, 62, "se"),                   // Halden Varrow, on the square
+        Stood("innkeeper", 25, 55, "sw"),               // Bree Tallow, at The Last Coal's door
+        Stood("priest", 30, 55, "sw"),                  // Mother Aubrine, at the chapel
+        Stood("blacksmith", 36, 55, "se"),              // Tobin Fell, at the smithy
+        Stood("guard_captain", 45, 64, "ne"),           // Dagna Holt, at the east gate
+        Stood("hermit", 130, 90, "sw"),                 // Old Maud, at her hut
+        Stood("goblin_shaman", 134, 24, "nw"),          // Mother Skarrow, by the fire
+        Stood("child", 33, 59, "sw"),                   // Pip
+        Stood("minstrel", 29, 58, "sw"),                // Lark, playing to the square
+        Stood("sage", 36, 58, "ne"),                    // Corvin Ashby, at the notice board
+        Stood("noble", 41, 68, "se"),                   // Celandine Marrowby, watching her granary
+    ];
+
+    /// <summary>Everyone else, by place: no one on a road's line or a door, so the party walks past them and not through them.</summary>
+    private static readonly RegionPerson[] Townsfolk =
+    [
+        // The market: a stallholder behind each stall, and a customer or two.
+        Stood("merchant", 26, 64, "sw"), Stood("merchant", 28, 64, "sw"), Stood("merchant", 35, 64, "sw"),
+        Stood("farmer", 26, 66, "ne"), Stood("barmaid", 35, 66, "ne"),
+        Stood("child", 30, 59, "se", (30, 60), (30, 61), (31, 61), (32, 61), (32, 60), (32, 59), (31, 59)),     // running round the well
+        Stood("farmhand", 37, 60, "sw", (37, 61), (36, 61), (36, 60)),
+
+        // The gates.
+        Stood("guard", 46, 61, "sw"), Stood("guard", 46, 63, "ne"), Stood("guard", 30, 78, "se"), Stood("guard", 32, 78, "sw"), Stood("guard", 48, 60, "sw"),
+
+        // The streets.
+        Stood("farmer", 41, 61, "se", (42, 61), (43, 61), (43, 62), (42, 62), (41, 62)),
+        Stood("barmaid", 20, 62, "se", (21, 62), (22, 62), (22, 61), (21, 61), (20, 61)),
+        Stood("child", 18, 56, "nw"), Stood("guard", 26, 49, "se", (27, 49), (28, 49), (29, 49), (29, 48), (28, 48), (27, 48), (26, 48)),
+
+        // The fields.
+        Stood("farmer", 38, 13, "sw"), Stood("farmhand", 22, 37, "se"), Stood("farmer", 25, 87, "ne"), Stood("farmhand", 37, 85, "sw"), Stood("farmer", 30, 86, "se"),
+        Stood("merchant", 52, 31, "se"),                // and his cart, on the verge
+
+        // The docks: fishers on the jetties, and the Ash Market's stallholders.
+        Stood("fisher", 102, 93, "se"), Stood("fisher", 105, 92, "sw"), Stood("fisher", 104, 99, "se"), Stood("fisher", 103, 104, "se"), Stood("merchant", 97, 93, "sw"), Stood("merchant", 97, 104, "sw"),
+
+        // The camp, thin and cold, and the goblins who hold the ford's approach.
+        Stood("goblin_spear", 132, 25, "se"), Stood("goblin_archer", 135, 25, "sw"), Stood("goblin_cutthroat", 132, 23, "se"), Stood("goblin_spear", 134, 27, "sw", (134, 28), (133, 28), (133, 27)),
+        Stood("goblin_spear", 99, 63, "nw"), Stood("goblin_spear", 99, 64, "se"), Stood("goblin_archer", 95, 58, "se"),
+        Stood("goblin_spear", 117, 55, "sw"), Stood("goblin_spear", 117, 61, "ne"), Stood("goblin_cutthroat", 120, 54, "se"), Stood("goblin_archer", 120, 63, "sw"),
+    ];
+
     /// <summary>The party starts on the square, in front of the inn.</summary>
     private static readonly Tile StartSpawn = new(26, 58);
 
@@ -474,6 +527,7 @@ public static class AshenFordDraft
         source.Stamp(crossing, StampAt, WaterLevel);
         source.Beats.AddRange(Spots.Select(s => new BeatSpot(s.Beat, new Tile(s.X, s.Y))));
         source.Buildings.AddRange(Emberwick.Concat(TownWall()).Concat(OnTheFarms).Concat(AtTheDocks).Concat(AtMauds).Concat(OldBridge).Select(b => new RegionBuilding(b.Id, b.Variant, new Tile(b.X, b.Y))));
+        source.People.AddRange(Named.Concat(Townsfolk));
         return source;
     }
 

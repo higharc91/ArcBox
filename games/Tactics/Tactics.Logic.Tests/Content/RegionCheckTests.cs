@@ -535,6 +535,95 @@ public sealed class RegionCheckTests
         Assert.Contains(errors, e => e.Pointer == "/beats/0/at" && e.Message.Contains("can't be reached from the start"));
     }
 
+    private static RegionDef WithPeople(params RegionPerson[] people) => Region(FordTiles) with { People = [.. people] };
+
+    private static RegionPerson Person(int x, int y, params (int X, int Y)[] walk)
+        => new("guard", new Tile(x, y), "sw", walk.Length == 0 ? default : [.. walk.Select(t => new Tile(t.X, t.Y))]);
+
+    [Fact]
+    public void Someone_standing_on_open_ground_loads() => Loads(WithPeople(Person(10, 10)));
+
+    [Fact]
+    public void Someone_walking_a_loop_loads() => Loads(WithPeople(Person(10, 10, (11, 10), (11, 11), (10, 11))));
+
+    [Fact]
+    public void Someone_with_an_unknown_preset_is_an_error()
+        => Assert.Contains(ErrorsOf(WithPeople(Person(10, 10) with { Preset = "wizard_of_oz" })), e => e.Message.Contains("Unknown character preset 'wizard_of_oz'.", StringComparison.Ordinal));
+
+    [Fact]
+    public void Someone_facing_nowhere_is_an_error()
+        => Assert.Contains(ErrorsOf(WithPeople(Person(10, 10) with { Face = "up" })), e => e.Message.Contains("faces 'up'", StringComparison.Ordinal));
+
+    [Theory]
+    [InlineData(-1, 0)]
+    [InlineData(32, 5)]
+    [InlineData(40, 40)]
+    public void Someone_off_the_region_is_an_error(int x, int y)
+        => Assert.Contains(ErrorsOf(WithPeople(Person(x, y))), e => e.Message.Contains("is off the region", StringComparison.Ordinal));
+
+    [Fact]
+    public void Someone_on_a_stamp_is_an_error()
+    {
+        var def = Stamped(FordStamp) with { People = [Person(5, 5)] };
+        Assert.Contains(ErrorsOf(def), e => e.Message.Contains("is on the stamp 'ford'", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void Someone_on_a_tile_that_blocks_is_an_error()
+    {
+        var def = Region([.. Wall()]) with { People = [Person(8, 3)] };
+        Assert.Contains(ErrorsOf(def), e => e.Message.Contains("stands on a tile that blocks", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void Someone_in_a_prop_that_blocks_is_an_error()
+    {
+        var def = Region(FordTiles) with { Props = [new RegionProps("crate", "oak", [new Tile(10, 10)])], People = [Person(10, 10)] };
+        Assert.Contains(ErrorsOf(def), e => e.Message.Contains("stands on a tile that blocks", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void A_walk_that_jumps_is_an_error()
+        => Assert.Contains(ErrorsOf(WithPeople(Person(10, 10, (12, 10), (11, 10)))), e => e.Message.Contains("goes from (10, 10) to (12, 10), which isn't a step", StringComparison.Ordinal));
+
+    [Fact]
+    public void A_walk_that_doesnt_come_back_is_an_error()
+        => Assert.Contains(ErrorsOf(WithPeople(Person(10, 10, (11, 10), (12, 10)))), e => e.Message.Contains("goes from (12, 10) to (10, 10)", StringComparison.Ordinal));
+
+    [Fact]
+    public void A_walk_up_a_cliff_is_an_error()
+    {
+        var def = Region([(11, 10, (byte)9, Grass, TileFlags.None)]) with { People = [Person(10, 10, (11, 10))] };
+        Assert.Contains(ErrorsOf(def), e => e.Message.Contains("too steep to walk", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void A_walk_through_a_wall_is_an_error()
+    {
+        var def = Region([.. Wall()]) with { People = [Person(7, 3, (8, 3))] };
+        Assert.Contains(ErrorsOf(def), e => e.Message.Contains("(8, 3) stands on a tile that blocks", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void A_long_walk_is_an_error()
+    {
+        var there = Enumerable.Range(1, 7).Select(i => (10 + i, 10));
+        var back = Enumerable.Range(0, 7).Select(i => (17 - i, 11));
+        Assert.Contains(ErrorsOf(WithPeople(Person(10, 10, [.. there, .. back, (10, 11)]))), e => e.Message.Contains("a walk is at most 12", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void People_stay_out_of_the_battle_hash_and_change_no_tile()
+    {
+        var plain = ValidationTests.LoadChapter(World(Region(FordTiles)), Map("ford", FordMap));
+        var peopled = ValidationTests.LoadChapter(Art, World(WithPeople(Person(10, 10))), Map("ford", FordMap));
+
+        Assert.Equal(plain.Hash, peopled.Hash);
+        Assert.Equal(plain.RegionFor("r")!.TileAt(new Tile(10, 10)), peopled.RegionFor("r")!.TileAt(new Tile(10, 10)));
+        Assert.True(peopled.GroundFor("r")!.Terrain.Walkable(new Tile(10, 10)));
+        Assert.Single(peopled.GroundFor("r")!.People);
+    }
+
     private static RegionDef WithBuildings(params RegionBuilding[] buildings) => Region(FordTiles) with { Buildings = [.. buildings] };
 
     [Fact]

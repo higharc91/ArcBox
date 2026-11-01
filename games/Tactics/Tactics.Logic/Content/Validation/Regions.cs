@@ -176,6 +176,7 @@ internal sealed partial class Validation
             var placed = Stamps();
             Props(placed);
             Buildings(placed);
+            People(placed);
             Spawns(placed);
             Reachable(placed);
             Edges();
@@ -217,6 +218,65 @@ internal sealed partial class Validation
                 foreach (var tile in tiles)
                     taken.TryAdd(tile, building);
             }
+        }
+
+        /// <summary>
+        /// Everyone a region shows has to be drawable and has to stand where someone could: on the region, off the stamps, where a fight would run through them, and not on what
+        /// blocks the party. A walk has to be one a person could walk: back to where it began, a step at a time. With no art, what's drawable can't be said, and with no ground, nor can what blocks.
+        /// </summary>
+        private void People(List<Placed> stamps)
+        {
+            for (var i = 0; i < region.People.Length; i++)
+            {
+                var person = region.People[i];
+                var at = At("people", i);
+                if (v.Art is { } art && !art.Keys.Contains($"characters.{person.Preset}"))
+                    v.Error(file, Pointer.Append(at, "preset"), $"Unknown character preset '{person.Preset}'.");
+                if (!RegionPerson.Faces.Contains(person.Face))
+                    v.Error(file, Pointer.Append(at, "face"), $"The {person.Preset} at {person.At} faces '{person.Face}', which is none of {string.Join(", ", RegionPerson.Faces)}.");
+                if (!Standing(person, person.At, stamps, Pointer.Append(at, "at")))
+                    continue;
+
+                var walk = person.Walk.IsDefault ? [] : person.Walk;
+                if (walk.Length > RegionPerson.MostSteps)
+                    v.Error(file, Pointer.Append(at, "walk"), $"The {person.Preset} at {person.At} walks {walk.Length} tiles, and a walk is at most {RegionPerson.MostSteps}.");
+                var from = person.At;
+                for (var j = 0; j < walk.Length && Standing(person, walk[j], stamps, Pointer.Append(Pointer.Append(at, "walk"), j)); j++)
+                {
+                    Stepped(person, from, walk[j], Pointer.Append(Pointer.Append(at, "walk"), j));
+                    from = walk[j];
+                }
+                if (walk.Length > 0 && from == walk[^1])
+                    Stepped(person, from, person.At, Pointer.Append(at, "walk"));
+            }
+        }
+
+        private bool Standing(RegionPerson person, Tile tile, List<Placed> stamps, string at)
+        {
+            if (region.TileAt(tile) is null)
+            {
+                v.Error(file, at, $"The {person.Preset} at {tile} is off the region.");
+                return false;
+            }
+            foreach (var stamp in stamps.Where(s => s.Stage.Holds(tile)))
+            {
+                v.Error(file, at, $"The {person.Preset} at {tile} is on the stamp '{stamp.Stamp.Map}'.");
+                return false;
+            }
+            if (_ground is not null && !_ground.Walkable(tile))
+            {
+                v.Error(file, at, $"The {person.Preset} at {tile} stands on a tile that blocks.");
+                return false;
+            }
+            return true;
+        }
+
+        private void Stepped(RegionPerson person, Tile from, Tile to, string at)
+        {
+            if (Math.Abs(from.X - to.X) + Math.Abs(from.Y - to.Y) != 1)
+                v.Error(file, at, $"The {person.Preset}'s walk goes from {from} to {to}, which isn't a step.");
+            else if (Math.Abs(region.TileAt(from)!.Height - region.TileAt(to)!.Height) > ClassDef.DefaultJump)
+                v.Error(file, at, $"The {person.Preset}'s walk goes from {from} to {to}, which is too steep to walk.");
         }
 
         private string At(string list, int index) => Pointer.Append(Pointer.Append(ptr, list), index);

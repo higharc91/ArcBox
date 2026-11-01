@@ -19,7 +19,11 @@ namespace Tactics.Presentation.World;
 /// <param name="Bumped">The leader bumped a wall this frame (<see cref="WalkBump"/>).</param>
 /// <param name="Bump">The bump's sound, the step of the leader's tile, to play at <see cref="WorldTuning.BumpDb"/>; null with no bump or no sound.</param>
 public sealed record WalkFrame(ImmutableArray<BoardUnit> Units, BoardFit Fit, Vector2 Tile, Vector2 Velocity, string? Footstep, bool Cut, double Walked, Vector2 Leader,
-    bool Bumped = false, string? Bump = null);
+    bool Bumped = false, string? Bump = null)
+{
+    /// <summary>Those of <see cref="Units"/> who aren't <see cref="BoardUnit.Dressing"/>: the party and the story's figures, who are what's kept in view.</summary>
+    public ImmutableArray<BoardUnit> Walkers { get; init; } = Units;
+}
 
 /// <summary>
 /// What a fight in the world (<see cref="StageDirector"/>) asks of the walk this frame.
@@ -49,6 +53,7 @@ public sealed class WalkShow
     private readonly UnitArt _art;
     private readonly SoundBank? _sounds;
     private readonly WalkTrack _track = new();
+    private readonly WorldPeople? _people;
     private readonly WalkBump _bump = new();
     private readonly WorldCamera _camera;
     private readonly Func<Vector2, bool, Vector2> _pixels;
@@ -66,6 +71,9 @@ public sealed class WalkShow
     private bool _bumped;
     private IReadOnlyDictionary<string, UnitPlace> _places = new Dictionary<string, UnitPlace>();
 
+    /// <summary>The seconds it's been moved on by, which is the people's clock.</summary>
+    public double Clock { get; private set; }
+
     /// <summary>The newest step this show has heard of.</summary>
     public int Seq => _seq;
 
@@ -79,9 +87,10 @@ public sealed class WalkShow
     public IReadOnlyDictionary<string, UnitPlace> Places => _places;
 
     /// <summary>A show on <paramref name="terrain"/>. With no <paramref name="sounds"/>, it's a silent one.</summary>
-    public WalkShow(BoardTerrain terrain, UnitArt art, SoundBank? sounds)
+    public WalkShow(BoardTerrain terrain, UnitArt art, SoundBank? sounds, ImmutableArray<RegionPerson> people = default)
     {
         (_terrain, _art, _sounds) = (terrain, art, sounds);
+        _people = people.IsDefaultOrEmpty ? null : new WorldPeople(people, terrain, art);
         _camera = new WorldCamera(terrain.Map.Width, terrain.Map.Height);
         _pixels = (feet, standing) => standing ? WorldCamera.OnGround(feet) : _camera.OnPixels(feet);
     }
@@ -124,6 +133,7 @@ public sealed class WalkShow
     /// </para>
     public WalkFrame Frame(double seconds, bool revealed = true, WalkStage? stage = null)
     {
+        Clock += seconds;
         _track.Advance(seconds);
         var places = _places = _track.Places(_terrain);
         var focus = _track.Focus;
@@ -157,10 +167,12 @@ public sealed class WalkShow
         _bumped = false;
         var bump = bumped ? _sounds?.Step(_terrain.Map, new Tile((int)MathF.Floor(focus.Map.X), (int)MathF.Floor(focus.Map.Y))) : null;
 
-        ImmutableArray<BoardUnit> units = stage?.Hidden == true ? [] : [.. UnitPlan.Walkers(_party, drawn, _track.Poses, _art, _pixels)
+        ImmutableArray<BoardUnit> walkers = stage?.Hidden == true ? [] : [.. UnitPlan.Walkers(_party, drawn, _track.Poses, _art, _pixels)
             .Concat(StoryMarks.Of(_markers, _terrain, _art, _pixels).Select(m => m.Unit).OfType<BoardUnit>()).OrderBy(u => u.Order)];
+        var people = _people?.Units(Clock, focus.Feet, _markers, _pixels) ?? [];
+        ImmutableArray<BoardUnit> units = people.IsEmpty ? walkers : [.. walkers.Concat(people).OrderBy(u => u.Order)];
         var fit = stage is { Shake: var shake } && shake != Vector2.Zero ? _camera.Fit with { Origin = _camera.Fit.Origin + shake * _camera.Fit.Scale } : _camera.Fit;
-        return new WalkFrame(units, fit, focus.Map, _track.Heading * TilesPerSecond, footstep, cut, _track.Walked, focus.Feet, bumped, bump);
+        return new WalkFrame(units, fit, focus.Map, _track.Heading * TilesPerSecond, footstep, cut, _track.Walked, focus.Feet, bumped, bump) { Walkers = walkers };
     }
 
     /// <summary>

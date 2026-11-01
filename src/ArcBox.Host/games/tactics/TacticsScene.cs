@@ -405,7 +405,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         }
         if (_walk is null)
         {
-            _walk = new WalkShow(plan.Terrain, art, _sound);
+            _walk = new WalkShow(plan.Terrain, art, _sound, world.Ground?.People ?? default);
             _fed = null;
         }
         FeedWalk();
@@ -417,7 +417,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         }
         world.Place(frame.Fit);
         world.Aim(frame.Tile, frame.Velocity);
-        world.ShowUnits(frame.Units, art);
+        world.ShowUnits(frame.Units, frame.Walkers, art);
         if (frame.Footstep is { } step)
         {
             _audio.Play(step, WorldTuning.FootstepDb);
@@ -426,7 +426,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             Bumped(frame);
         }
-        _worldHud?.Clear(frame.Units, frame.Fit);
+        _worldHud?.Clear(frame.Walkers, frame.Fit);
         WalkMoments(world, frame, delta);
     }
 
