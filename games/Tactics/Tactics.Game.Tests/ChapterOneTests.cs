@@ -61,10 +61,14 @@ public abstract class ChapterOne
 
         /// <summary>
         /// Restart at every moment of every scene, once each: a new line, an open question, a tie-break, the pick of who rolls, a roll
-        /// before its reveal, and the gap between scenes. A question reopens after a restart (votes aren't saved), so each moment is
-        /// restarted at only once, and the party answers it the second time.
+        /// before its reveal, and the gap between scenes. A question still being answered reopens after a restart (votes aren't saved), so
+        /// each moment is restarted at only once, and the party answers it the second time. A question already decided for a check never
+        /// reopens: a restart while the party picks who rolls comes back to the pick.
         /// </summary>
         public bool RestartEveryMoment { get; init; }
+
+        /// <summary>How many restarts came back to the pick of who rolls, as <see cref="RestartEveryMoment"/> checks.</summary>
+        public int AfterPick { get; private set; }
 
         /// <summary>
         /// Party votes tie: the leader holds back and two others split between the branch's option and another, so the leader breaks the
@@ -203,7 +207,17 @@ public abstract class ChapterOne
                 if (RestartEveryMoment && _moments.Add($"{story.Scene} {story.Line?.Id} {story.State}"))
                 {
                     RestartedAt[story.State] = RestartedAt.GetValueOrDefault(story.State) + 1;
+                    var checking = story.Check is { } check && story.State != TacticsGame.StoryStates.Rolled ? check.Skill : null;
                     Restart();
+                    if (checking is not null)
+                    {
+                        // The vote for the check was decided: the party picks who rolls again, and the question never reopens (review).
+                        var back = Host.Story!;
+                        Assert.Equal(TacticsGame.StoryStates.PickRoller, back.State);
+                        Assert.Null(back.Ask);
+                        Assert.Equal(checking, back.Check!.Skill);
+                        AfterPick++;
+                    }
                     return;
                 }
                 if (_answer)
@@ -381,8 +395,8 @@ public sealed class ChapterOneRestartMomentTests : ChapterOne
 {
     /// <summary>
     /// Review: a restart at every moment, not only every line: mid-vote, on a tie-break, at the pick of who rolls, between a roll and its
-    /// reveal, and in the gap between scenes. Each comes back: no question is lost, no roll is made twice, no beat or flag repeats. With
-    /// the roll's save taken out of <c>Roll</c>, both cases fail: the restart rolls again.
+    /// reveal, and in the gap between scenes. Each comes back: no question is lost, no decided vote reopens, no roll is made twice, no beat
+    /// or flag repeats. With the roll's save taken out of <c>Roll</c>, both cases fail: the restart rolls again.
     /// </summary>
     [Theory]
     [InlineData("force")]
@@ -393,6 +407,7 @@ public sealed class ChapterOneRestartMomentTests : ChapterOne
 
         foreach (var state in new[] { "lines", "asking", "tieBreak", "pickRoller", "rolled", "gap" })
             Assert.True(play.RestartedAt.GetValueOrDefault(state) > 0, $"No restart at {state}: {string.Join(", ", play.RestartedAt)}");
+        Assert.True(play.AfterPick > 0, "No restart while the party picked who rolls.");
         foreach (var option in play.Rolls.GroupBy(r => r.Line))
             Assert.Single(option.Select(r => r.Die).Distinct());       // the same die before and after every restart: never rolled again
         Assert.NotEmpty(play.Rolls);

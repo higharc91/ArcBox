@@ -256,7 +256,7 @@ public sealed partial class TacticsGame
         var node = scene.Node(id)!;
         AddFlags(node.Sets);
         var c = Cursor!;
-        SetCursor(c with { Scene = scene.Id, Node = node.Id, Line = 0, Played = c.Played.Contains(node.Id) ? c.Played : c.Played.Add(node.Id), Roll = null });
+        SetCursor(c with { Scene = scene.Id, Node = node.Id, Line = 0, Played = c.Played.Contains(node.Id) ? c.Played : c.Played.Add(node.Id), Roll = null, Checking = null });
         PlayLine(scene, node, 0);
     }
 
@@ -332,7 +332,7 @@ public sealed partial class TacticsGame
     /// <summary>The gap before <paramref name="next"/>, saved with the cursor on it, so a restart starts it; the party travels as it begins.</summary>
     private void Between(SceneDef next)
     {
-        SetCursor(Cursor! with { Scene = next.Id, Node = null, Line = 0, Played = [], Roll = null });
+        SetCursor(Cursor! with { Scene = next.Id, Node = null, Line = 0, Played = [], Roll = null, Checking = null });
         Travel(next);
         KeepWorld();
         Save();
@@ -481,7 +481,8 @@ public sealed partial class TacticsGame
 
     /// <summary>
     /// Back into the beat the cursor names, after Muster, Results or a restart (5d §8): on the saved line, said again with a new
-    /// <see cref="StoryView.Seq"/>; a question reopens, since votes aren't saved; a roll shows its result again, and is never made again. A
+    /// <see cref="StoryView.Seq"/>; a question reopens, since votes aren't saved, unless it was decided for a check, which goes back to the
+    /// pick of who rolls (<see cref="StorySave.Checking"/>); a roll shows its result again, and is never made again. A
     /// beat at its fight waits there, in the world. A beat won goes on to its aftermath. A beat that's gone, a scene or node that's gone, or a
     /// scene that no longer plays with the flags as they are restarts its stage from the beginning with a notice (or is dropped, for a
     /// beat that's gone); a battle beat is never marked done by any of it.
@@ -522,7 +523,7 @@ public sealed partial class TacticsGame
                 return;
             }
             // The aftermath, from its first scene that plays; with none, the beat is done.
-            SetCursor(c with { Scene = null, Node = null, Line = 0, Played = [], Roll = null });
+            SetCursor(c with { Scene = null, Node = null, Line = 0, Played = [], Roll = null, Checking = null });
             if (SceneRun.Next(Lore.ScenesOf(beat.Id), StoryFlags(), null, aftermath: true) is { } first)
                 Between(first);
             else
@@ -544,11 +545,23 @@ public sealed partial class TacticsGame
 
     /// <summary>
     /// Opens <paramref name="node"/>'s question as its last line starts: what's offered to this party now, given the flags, the party's
-    /// tags and the nodes already played. With nothing offered, the line plays out and the beat ends (<see cref="LineDone"/>).
+    /// tags and the nodes already played. With nothing offered, the line plays out and the beat ends (<see cref="LineDone"/>). A question
+    /// already decided for a check (<see cref="StorySave.Checking"/>, on a restart) goes straight back to the pick of who rolls; if that
+    /// check is no longer on offer, the question is asked again.
     /// </summary>
     private void OpenQuestion(SceneDef scene, SceneNode node)
     {
-        _offered = SceneRun.Offered(node, StoryFlags(), PartyTags.Of(Party().Select(m => m.Character)), Cursor!.Played.ToHashSet(StringComparer.Ordinal));
+        var c = Cursor!;
+        _offered = SceneRun.Offered(node, StoryFlags(), PartyTags.Of(Party().Select(m => m.Character)), c.Played.ToHashSet(StringComparer.Ordinal));
+        if (c.Checking is { } decided)
+        {
+            SetCursor(c with { Checking = null });
+            if (_offered.FirstOrDefault(o => o.Id == decided && o.Check is not null) is { } option)
+            {
+                Decide(option);
+                return;
+            }
+        }
         if (_offered.IsEmpty)
             return;
         Ask(StoryStates.Asking);
@@ -758,7 +771,8 @@ public sealed partial class TacticsGame
 
     /// <summary>
     /// The question settled on <paramref name="option"/>: its flags are set and the scene goes where it leads, in one save. A check goes to
-    /// the party first, to pick who rolls; its flags are set with the roll.
+    /// the party first, to pick who rolls, saved as decided (<see cref="StorySave.Checking"/>), so a restart comes back to the pick and
+    /// never reopens the question (review); its flags are set with the roll.
     /// </summary>
     private void Decide(SceneOption option)
     {
@@ -768,6 +782,9 @@ public sealed partial class TacticsGame
             var offered = _offered;
             CloseQuestion();
             (_offered, _checking) = (offered, option);
+            SetCursor(Cursor! with { Checking = option.Id });
+            KeepWorld();
+            Save();
             Ask(StoryStates.PickRoller);
             return;
         }
@@ -796,7 +813,7 @@ public sealed partial class TacticsGame
         SetCursor(Cursor! with
         {
             Node = SceneRun.Target(option, result.Success), Line = 0,
-            Roll = new StoryRoll(member, option.Id, check.Skill, check.Dc, die, bonus, result.Success),
+            Roll = new StoryRoll(member, option.Id, check.Skill, check.Dc, die, bonus, result.Success), Checking = null,
         });
         KeepWorld();
         Save();

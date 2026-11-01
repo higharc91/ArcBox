@@ -66,7 +66,8 @@ public sealed record StoryRoll(string Member, string Option, string Skill, int D
 
 /// <summary>
 /// Where a story beat is (overworld 5d §7), saved on every line so that a restart resumes on the same line. Votes aren't kept: a restart
-/// reopens the question.
+/// reopens a question still being answered. A question decided for a check is kept (<paramref name="Checking"/>), so a restart goes back
+/// to the pick of who rolls.
 /// </summary>
 /// <param name="Beat">The beat being played.</param>
 /// <param name="Stage">Which of the beat's scenes: <see cref="Lead"/> (all a story beat has), <see cref="Fight"/> or <see cref="After"/>.</param>
@@ -78,9 +79,14 @@ public sealed record StoryRoll(string Member, string Option, string Skill, int D
 /// The nodes of the scene played so far, so a restart doesn't offer a question already asked (<see cref="SceneRun.Offered"/>).
 /// </param>
 /// <param name="Roll">The roll that led to <paramref name="Node"/>, while its result shows; then null.</param>
+/// <param name="Checking">
+/// The option of <paramref name="Node"/>'s question that won and has a check, while the party picks who rolls for it; then null. One more
+/// optional field and no version bump: a document from before reads with none, and a null isn't written.
+/// </param>
 public sealed record StorySave(string Beat, string Stage, string? Scene, string? Node, int Line, int Seq,
     ImmutableArray<string> Played = default,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] StoryRoll? Roll = null)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] StoryRoll? Roll = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Checking = null)
 {
     /// <summary>The scenes before a fight, and all of a story beat's.</summary>
     public const string Lead = "lead";
