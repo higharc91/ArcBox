@@ -7,6 +7,7 @@ public static class GameSceneMap
     {
         ["counter"] = "res://games/counter/CounterScene.tscn",
         ["redline"] = "res://games/redline/RedlineScene.tscn",
+        ["tactics"] = "res://games/tactics/TacticsScene.tscn",
     };
 
     public static string? ScenePath(string gameId) => Paths.GetValueOrDefault(gameId);

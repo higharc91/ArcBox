@@ -1,0 +1,466 @@
+{
+ "bandit_captain.rally_cry": {
+  "fx": "fx.rage.rage"
+ },
+ "barbarian.rage": {
+  "fx": "fx.rage.rage"
+ },
+ "barbarian.savage_roar": {
+  "fx": "fx.rage.rage"
+ },
+ "bard.bardic_inspiration": {
+  "fx": "fx.inspire.gold"
+ },
+ "bard.countercharm": {
+  "fx": "fx.inspire.charm"
+ },
+ "bard.dispel_magic": {
+  "fx": "fx.dispel.arcane"
+ },
+ "bard.dissonant_whispers": {
+  "fx": "fx.psychic.dread"
+ },
+ "bard.greater_restoration": {
+  "fx": "fx.restore.holy"
+ },
+ "bard.heroism": {
+  "fx": "fx.inspire.gold"
+ },
+ "bard.hold_monster": {
+  "fx": "fx.hold.arcane"
+ },
+ "bard.hold_person": {
+  "fx": "fx.hold.arcane"
+ },
+ "bard.lesser_restoration": {
+  "fx": "fx.restore.holy"
+ },
+ "bard.shatter": {
+  "fx": "signature.spell_shatter.thunder"
+ },
+ "bard.thunderclap": {
+  "fx": "fx.thunder.thunder"
+ },
+ "bard.thunderwave": {
+  "fx": "fx.thunder.thunder"
+ },
+ "bard.vicious_mockery": {
+  "fx": "fx.psychic.mind"
+ },
+ "cleric.aid": {
+  "fx": "fx.bless.gold"
+ },
+ "cleric.bless": {
+  "fx": "fx.bless.gold"
+ },
+ "cleric.command": {
+  "fx": "fx.hold.holy"
+ },
+ "cleric.death_ward": {
+  "fx": "fx.ward.holy"
+ },
+ "cleric.dispel_magic": {
+  "fx": "fx.dispel.arcane"
+ },
+ "cleric.flame_strike": {
+  "fx": "signature.spell_flame_strike.holy"
+ },
+ "cleric.greater_restoration": {
+  "fx": "fx.restore.holy"
+ },
+ "cleric.guiding_bolt": {
+  "fx": "fx.radiant.dawn",
+  "projectile": "projectiles.radiant"
+ },
+ "cleric.hold_person": {
+  "fx": "fx.hold.holy"
+ },
+ "cleric.inflict_wounds": {
+  "fx": "fx.necrotic.blood"
+ },
+ "cleric.lesser_restoration": {
+  "fx": "fx.restore.holy"
+ },
+ "cleric.resistance": {
+  "fx": "fx.ward.holy"
+ },
+ "cleric.sacred_flame": {
+  "fx": "fx.radiant.dawn"
+ },
+ "cleric.sear_undead": {
+  "fx": "fx.radiant.dawn"
+ },
+ "cleric.shield_of_faith": {
+  "fx": "fx.ward.holy"
+ },
+ "cleric.spirit_guardians": {
+  "fx": "signature.spell_spirit_guardians.radiant"
+ },
+ "cleric.spiritual_weapon": {
+  "fx": "signature.spell_spiritual_weapon.force"
+ },
+ "cleric.toll_the_dead": {
+  "fx": "fx.necrotic.grave"
+ },
+ "cleric.word_of_radiance": {
+  "fx": "fx.radiant.dawn"
+ },
+ "cult_leader.fanatic_zeal": {
+  "fx": "fx.rage.rage"
+ },
+ "cult_leader.hellfire_burst": {
+  "fx": "fx.flames.hellfire"
+ },
+ "cultist.dark_bolt": {
+  "fx": "fx.necrotic.grave",
+  "projectile": "projectiles.necrotic"
+ },
+ "dragon.fire_breath": {
+  "fx": "signature.draconic_dragon_breath.fire"
+ },
+ "dragonborn.breath_weapon": {
+  "fx": "signature.draconic_dragon_breath.fire"
+ },
+ "drake.flame_breath": {
+  "fx": "signature.draconic_dragon_breath.fire"
+ },
+ "druid.barkskin": {
+  "fx": "fx.ward.nature"
+ },
+ "druid.blight": {
+  "fx": "signature.spell_blight.rot"
+ },
+ "druid.call_lightning": {
+  "fx": "signature.stormcaller_storm.storm"
+ },
+ "druid.dispel_magic": {
+  "fx": "fx.dispel.arcane"
+ },
+ "druid.entangle": {
+  "fx": "signature.warden_vine_snare.root"
+ },
+ "druid.greater_restoration": {
+  "fx": "fx.restore.nature"
+ },
+ "druid.hold_person": {
+  "fx": "fx.hold.nature"
+ },
+ "druid.lesser_restoration": {
+  "fx": "fx.restore.nature"
+ },
+ "druid.moonbeam": {
+  "fx": "signature.spell_moonbeam.moon"
+ },
+ "druid.produce_flame": {
+  "fx": "fx.flames.fire",
+  "projectile": "projectiles.fireball"
+ },
+ "druid.thunderwave": {
+  "fx": "fx.thunder.thunder"
+ },
+ "dwarf.stoneskin": {
+  "fx": "fx.ward.nature"
+ },
+ "fighter.action_surge": {
+  "fx": "fx.rage.valor"
+ },
+ "fighter.rally": {
+  "fx": "fx.inspire.gold"
+ },
+ "fire_elemental.flame_surge": {
+  "fx": "fx.flames.fire"
+ },
+ "giant_bat.screech": {
+  "fx": "fx.thunder.thunder"
+ },
+ "goblin_boss.rally": {
+  "fx": "fx.rage.rage"
+ },
+ "goblin_boss.warcry": {
+  "fx": "fx.rage.rage"
+ },
+ "goblin_shaman.cinder_bolt": {
+  "fx": "fx.flames.fire"
+ },
+ "goliath.stones_endurance": {
+  "fx": "fx.ward.nature"
+ },
+ "item.alchemists_fire": {
+  "fx": "fx.flames.fire"
+ },
+ "lich.death_wave": {
+  "fx": "fx.necrotic.grave"
+ },
+ "lich.paralyzing_touch": {
+  "fx": "fx.frost.frost"
+ },
+ "lich.soul_bolt": {
+  "fx": "fx.necrotic.grave",
+  "projectile": "projectiles.necrotic"
+ },
+ "necromancer.grave_chill": {
+  "fx": "fx.necrotic.grave"
+ },
+ "necromancer.shadow_bolt": {
+  "fx": "fx.necrotic.grave",
+  "projectile": "projectiles.necrotic"
+ },
+ "paladin.aid": {
+  "fx": "fx.bless.gold"
+ },
+ "paladin.bless": {
+  "fx": "fx.bless.gold"
+ },
+ "paladin.command": {
+  "fx": "fx.hold.holy"
+ },
+ "paladin.compelled_duel": {
+  "fx": "fx.hold.holy"
+ },
+ "paladin.dispel_magic": {
+  "fx": "fx.dispel.arcane"
+ },
+ "paladin.divine_smite": {
+  "fx": "fx.radiant.dawn"
+ },
+ "paladin.divine_smite_2": {
+  "fx": "fx.radiant.dawn"
+ },
+ "paladin.divine_smite_3": {
+  "fx": "fx.radiant.dawn"
+ },
+ "paladin.lesser_restoration": {
+  "fx": "fx.restore.holy"
+ },
+ "paladin.shield_of_faith": {
+  "fx": "fx.ward.holy"
+ },
+ "ranger.barkskin": {
+  "fx": "fx.ward.nature"
+ },
+ "ranger.ensnaring_strike": {
+  "fx": "signature.warden_vine_snare.root"
+ },
+ "ranger.entangle": {
+  "fx": "signature.warden_vine_snare.root"
+ },
+ "ranger.lesser_restoration": {
+  "fx": "fx.restore.nature"
+ },
+ "ranger.lightning_arrow": {
+  "fx": "fx.shock.storm"
+ },
+ "rogue.poison_strike": {
+  "fx": "fx.toxin.venom"
+ },
+ "slime.acid_spit": {
+  "fx": "fx.acid.acid",
+  "projectile": "projectiles.acid"
+ },
+ "sorcerer.acid_splash": {
+  "fx": "fx.acid.acid"
+ },
+ "sorcerer.burning_hands": {
+  "fx": "signature.draconic_dragon_breath.fire"
+ },
+ "sorcerer.chill_touch": {
+  "fx": "fx.necrotic.grave"
+ },
+ "sorcerer.chromatic_orb": {
+  "fx": "fx.shock.storm",
+  "projectile": "projectiles.lightning"
+ },
+ "sorcerer.cone_of_cold": {
+  "fx": "signature.spell_cone_of_cold.frost"
+ },
+ "sorcerer.counterspell": {
+  "fx": "fx.dispel.arcane"
+ },
+ "sorcerer.fire_bolt": {
+  "fx": "fx.flames.fire"
+ },
+ "sorcerer.fireball": {
+  "fx": "signature.spell_fireball.fire"
+ },
+ "sorcerer.hold_monster": {
+  "fx": "fx.hold.arcane"
+ },
+ "sorcerer.hold_person": {
+  "fx": "fx.hold.arcane"
+ },
+ "sorcerer.lightning_bolt": {
+  "fx": "signature.spell_lightning_bolt.storm"
+ },
+ "sorcerer.magic_missile": {
+  "fx": "fx.force.force"
+ },
+ "sorcerer.poison_spray": {
+  "fx": "fx.toxin.venom"
+ },
+ "sorcerer.ray_of_frost": {
+  "fx": "fx.frost.frost"
+ },
+ "sorcerer.scorching_ray": {
+  "fx": "fx.flames.fire"
+ },
+ "sorcerer.shatter": {
+  "fx": "signature.spell_shatter.thunder"
+ },
+ "sorcerer.shocking_grasp": {
+  "fx": "fx.shock.storm"
+ },
+ "sorcerer.thunderwave": {
+  "fx": "fx.thunder.thunder"
+ },
+ "sorcerer.wall_of_fire": {
+  "fx": "fx.flames.fire"
+ },
+ "sorcerer.web": {
+  "fx": "fx.web.silk"
+ },
+ "spider.web": {
+  "fx": "fx.web.silk"
+ },
+ "tiefling.hellish_rebuke": {
+  "fx": "fx.flames.hellfire"
+ },
+ "trickster.flashbang": {
+  "fx": "fx.thunder.thunder"
+ },
+ "troll.frenzy_roar": {
+  "fx": "fx.rage.rage"
+ },
+ "vanguard.challenge": {
+  "fx": "fx.rage.valor"
+ },
+ "warlock.armor_of_agathys": {
+  "fx": "fx.frost.frost"
+ },
+ "warlock.arms_of_hadar": {
+  "fx": "fx.necrotic.grave"
+ },
+ "warlock.blight": {
+  "fx": "signature.spell_blight.rot"
+ },
+ "warlock.chill_touch": {
+  "fx": "fx.necrotic.grave"
+ },
+ "warlock.counterspell": {
+  "fx": "fx.dispel.shadow"
+ },
+ "warlock.eldritch_blast": {
+  "fx": "fx.force.eldritch",
+  "projectile": "projectiles.eldritch"
+ },
+ "warlock.hellish_rebuke": {
+  "fx": "fx.flames.hellfire"
+ },
+ "warlock.hold_monster": {
+  "fx": "fx.hold.shadow"
+ },
+ "warlock.hold_person": {
+  "fx": "fx.hold.shadow"
+ },
+ "warlock.hunger_of_hadar": {
+  "fx": "signature.spell_hunger_of_hadar.void"
+ },
+ "warlock.maddening_hex": {
+  "fx": "fx.psychic.dread"
+ },
+ "warlock.poison_spray": {
+  "fx": "fx.toxin.venom"
+ },
+ "warlock.shatter": {
+  "fx": "signature.spell_shatter.thunder"
+ },
+ "warlock.synaptic_static": {
+  "fx": "signature.spell_synaptic_static.mind"
+ },
+ "warlock.vampiric_touch": {
+  "fx": "fx.necrotic.blood"
+ },
+ "warlock.witch_bolt": {
+  "fx": "fx.shock.violet",
+  "projectile": "projectiles.lightning"
+ },
+ "wizard.acid_splash": {
+  "fx": "fx.acid.acid"
+ },
+ "wizard.blight": {
+  "fx": "signature.spell_blight.rot"
+ },
+ "wizard.burning_hands": {
+  "fx": "signature.draconic_dragon_breath.fire"
+ },
+ "wizard.chill_touch": {
+  "fx": "fx.necrotic.grave"
+ },
+ "wizard.chromatic_orb": {
+  "fx": "fx.shock.storm",
+  "projectile": "projectiles.lightning"
+ },
+ "wizard.cloudkill": {
+  "fx": "signature.spell_cloudkill.poison"
+ },
+ "wizard.cone_of_cold": {
+  "fx": "signature.spell_cone_of_cold.frost"
+ },
+ "wizard.counterspell": {
+  "fx": "fx.dispel.arcane"
+ },
+ "wizard.dispel_magic": {
+  "fx": "fx.dispel.arcane"
+ },
+ "wizard.fire_bolt": {
+  "fx": "fx.flames.fire"
+ },
+ "wizard.fireball": {
+  "fx": "signature.spell_fireball.fire"
+ },
+ "wizard.hold_monster": {
+  "fx": "fx.hold.arcane"
+ },
+ "wizard.hold_person": {
+  "fx": "fx.hold.arcane"
+ },
+ "wizard.lightning_bolt": {
+  "fx": "signature.spell_lightning_bolt.storm"
+ },
+ "wizard.mage_armor": {
+  "fx": "fx.ward.arcane"
+ },
+ "wizard.magic_missile": {
+  "fx": "fx.force.force"
+ },
+ "wizard.poison_spray": {
+  "fx": "fx.toxin.venom"
+ },
+ "wizard.ray_of_frost": {
+  "fx": "fx.frost.frost"
+ },
+ "wizard.ray_of_sickness": {
+  "fx": "fx.toxin.sickness",
+  "projectile": "projectiles.poison"
+ },
+ "wizard.scorching_ray": {
+  "fx": "fx.flames.fire"
+ },
+ "wizard.shatter": {
+  "fx": "signature.spell_shatter.thunder"
+ },
+ "wizard.shocking_grasp": {
+  "fx": "fx.shock.storm"
+ },
+ "wizard.thunderwave": {
+  "fx": "fx.thunder.thunder"
+ },
+ "wizard.wall_of_fire": {
+  "fx": "fx.flames.fire"
+ },
+ "wizard.web": {
+  "fx": "fx.web.silk"
+ },
+ "wraith.life_drain": {
+  "fx": "fx.necrotic.blood"
+ }
+}

@@ -57,3 +57,17 @@ Any tuning change means a new sweep and refreshed report tables. Re-record golde
 - `warlord_bridge` keeps a showcase test requiring every trigger, and may change seed. Cost if wrong: one seed change. It moved from seed 11 to 15.
 
 Task 22's fixes also carry one ruling for the user to confirm: `goblin_boss` was raised to 70 HP at level 5 so one Fireball couldn't skip its phase. Task 23 has since raised it to 240.
+
+## Resolution (fix round 1, 2026-10-31)
+
+All five Important findings are resolved. The tracker's "Task 23 fix round 1 and the whole-branch review" section has the details.
+
+1. **The usage target** is reported as partly met: 29 situational, 26 not.
+2. **The timing criterion** is timed on the real 10-enemy encounters: p95 23.5 and 24.9 ms.
+3. **The step-down dice** are explained with each class's output per round, which rises at every level. Smoothing them is a decision for the user.
+4. **Sorcerer affordability** is fixed (Sorcery 2 at level 2; Quickened from level 7), and `ContentLadderTests` enforces it for every class.
+5. **The area-spell ladder** is fixed and enforced by `ContentLadderTests`.
+
+The Minor findings that need the user's decision (the scope beyond numbers, the warlord_bridge redesign) are listed in the tracker. The rest are in the deferred table, which the whole-branch review triaged.
+
+No re-review agent was run on this round. The whole-branch review covered the engine, AI, content loading and Sim code after these changes.

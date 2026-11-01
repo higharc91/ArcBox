@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://addons/region_tools/Commands.cs" id="1"]
+
+[node name="Commands" type="Node"]
+script = ExtResource("1")

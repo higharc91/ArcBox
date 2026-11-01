@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/region.schema.json",
+  "title": "Overworld region",
+  "description": "world/<id>.json. Documentation only: the C# loader (Tactics.Logic PackLoader and Validation) is the authority and also checks meaning.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "name": {
+      "type": "string"
+    },
+    "chapter": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "size": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "[w, h] in tiles."
+    },
+    "materials": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Terrain art, e.g. \"grass/lush\". A tile's material byte indexes this list."
+    },
+    "chunks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "tiles": {
+            "type": "string",
+            "contentEncoding": "base64",
+            "description": "32 × 32 × 3 bytes, row-major: height (0 to 9), material index, flags (water 1, difficult 2, impassable 4, hazard 8, deep 16)."
+          }
+        },
+        "required": [
+          "x",
+          "y",
+          "tiles"
+        ],
+        "additionalProperties": false
+      },
+      "description": "32 × 32 tile chunks. x and y count chunks, not tiles, and each may appear once. A chunk that isn't listed is void: impassable. Unpainted tiles in a listed chunk must be written Impassable, because a tile of zero bytes is walkable ground at height 0."
+    },
+    "stamps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "map": {
+            "type": "string",
+            "description": "A battle map id."
+          },
+          "at": {
+            "$ref": "common.schema.json#/$defs/tile",
+            "description": "The world tile of the map's tile (0, 0)."
+          },
+          "height": {
+            "type": "integer",
+            "description": "Added to the map's heights."
+          }
+        },
+        "required": [
+          "map",
+          "at",
+          "height"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Battle maps placed in the world. A stamp names no encounter, because encounters share maps: the arc's battle beat picks one."
+    },
+    "beats": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "beat": {
+            "type": "string",
+            "description": "A beat id in lore/arcs.json."
+          },
+          "at": {
+            "$ref": "common.schema.json#/$defs/tile"
+          }
+        },
+        "required": [
+          "beat",
+          "at"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "spawns": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "$ref": "common.schema.json#/$defs/tile"
+        },
+        "recovery": {
+          "$ref": "common.schema.json#/$defs/tile"
+        }
+      },
+      "required": [
+        "start",
+        "recovery"
+      ],
+      "additionalProperties": false
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "neighbour": {
+            "type": "string",
+            "description": "The region this one meets."
+          },
+          "side": {
+            "type": "string",
+            "enum": [
+              "north",
+              "east",
+              "south",
+              "west"
+            ]
+          },
+          "offset": {
+            "type": "integer",
+            "description": "How far along the shared side the neighbour's tile 0 sits from this region's tile 0. The neighbour's facing edge carries the negated value: 5 here, -5 there."
+          }
+        },
+        "required": [
+          "neighbour",
+          "side",
+          "offset"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Where the region meets its neighbours."
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "chapter",
+    "size",
+    "spawns"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,273 @@
+{
+  "status": "art waiting for stat blocks: no rules-pack monster refers to these yet. Give a creature a stat block, then move it to beasts or bosses (a C# test requires every creature there to have one).",
+  "framesPerDirection": 35,
+  "directions": {
+    "front": {
+      "row": 0
+    },
+    "back": {
+      "row": 1
+    }
+  },
+  "anims": {
+    "idle": {
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "fps": 6.0,
+      "loop": true
+    },
+    "walk": {
+      "frames": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "fps": 10.0,
+      "loop": true
+    },
+    "attack": {
+      "frames": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "fps": 12.0,
+      "loop": false
+    },
+    "special": {
+      "frames": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      "fps": 11.0,
+      "loop": false
+    },
+    "hurt": {
+      "frames": [
+        28,
+        29,
+        30
+      ],
+      "fps": 10.0,
+      "loop": false
+    },
+    "down": {
+      "frames": [
+        31,
+        32,
+        33,
+        34
+      ],
+      "fps": 8.0,
+      "loop": false
+    }
+  },
+  "creatures": {
+    "warg": {
+      "name": "Warg",
+      "frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "footprint": [
+        1,
+        1
+      ],
+      "flying": false,
+      "tags": [
+        "beast",
+        "mount"
+      ],
+      "variants": {
+        "black": "warg_black.png",
+        "ash": "warg_ash.png",
+        "rider": "warg_rider.png"
+      },
+      "status": "art waiting for a stat block",
+      "note": "the rider variant carries a goblin spearman; a game may treat it as one unit or split it on down"
+    },
+    "hookbeak": {
+      "name": "Hookbeak",
+      "frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "footprint": [
+        1,
+        1
+      ],
+      "flying": false,
+      "tags": [
+        "beast",
+        "large",
+        "hybrid"
+      ],
+      "variants": {
+        "brown": "hookbeak_brown.png",
+        "snow": "hookbeak_snow.png"
+      },
+      "status": "art waiting for a stat block"
+    },
+    "scorpion": {
+      "name": "Giant Scorpion",
+      "frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "footprint": [
+        1,
+        1
+      ],
+      "flying": false,
+      "tags": [
+        "beast",
+        "venom"
+      ],
+      "variants": {
+        "sand": "scorpion_sand.png",
+        "black": "scorpion_black.png",
+        "ember": "scorpion_ember.png"
+      },
+      "status": "art waiting for a stat block"
+    },
+    "harpy": {
+      "name": "Harpy",
+      "frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "footprint": [
+        1,
+        1
+      ],
+      "flying": true,
+      "tags": [
+        "monstrosity",
+        "flying"
+      ],
+      "variants": {
+        "dusk": "harpy_dusk.png",
+        "storm": "harpy_storm.png"
+      },
+      "status": "art waiting for a stat block"
+    },
+    "wisp": {
+      "name": "Will-o'-Wisp",
+      "frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "footprint": [
+        1,
+        1
+      ],
+      "flying": true,
+      "tags": [
+        "fey",
+        "incorporeal",
+        "light"
+      ],
+      "variants": {
+        "marsh": "wisp_marsh.png",
+        "ember": "wisp_ember.png"
+      },
+      "status": "art waiting for a stat block",
+      "note": "self-lit: worth an additive glow or a point light in the game"
+    },
+    "gargoyle": {
+      "name": "Gargoyle",
+      "frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "footprint": [
+        1,
+        1
+      ],
+      "flying": false,
+      "tags": [
+        "construct",
+        "flying"
+      ],
+      "variants": {
+        "granite": "gargoyle_granite.png",
+        "obsidian": "gargoyle_obsidian.png"
+      },
+      "status": "art waiting for a stat block"
+    },
+    "crab": {
+      "name": "Giant Crab",
+      "frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "footprint": [
+        1,
+        1
+      ],
+      "flying": false,
+      "tags": [
+        "beast",
+        "aquatic"
+      ],
+      "variants": {
+        "shore": "crab_shore.png",
+        "deep": "crab_deep.png"
+      },
+      "status": "art waiting for a stat block"
+    }
+  },
+  "notes": {
+    "sheet": "one sheet per creature and variant: row 0 front (facing down-right), row 1 back (drawn from behind, facing up-left); frame size per creature",
+    "contract": "the beasts animation table: idle 6 \u00b7 walk 8 \u00b7 attack 7 \u00b7 special 7 \u00b7 hurt 3 \u00b7 down 4 (the last frame is the body)",
+    "flying": "drawn hovering above the anchor; the game should not snap it to the floor"
+  }
+}

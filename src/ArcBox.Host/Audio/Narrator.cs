@@ -15,6 +15,7 @@ namespace ArcBox.Host.Audio;
 /// (<see cref="NarratorFallbackPolicy"/>). A question cuts off commentary; commentary that has waited 4 s is dropped
 /// (<see cref="NarrationQueue"/>). With no built-in voices either (Linux without speech-dispatcher), the narrator is
 /// <see cref="NarratorState.Off"/>: lines are only logged, each holding the voice for about as long as it would take to say.
+/// A line that comes with a recording plays that instead, and goes down this chain only if the file can't be read.
 /// </summary>
 public partial class Narrator : Node
 {
@@ -121,15 +122,15 @@ public partial class Narrator : Node
     /// <summary>
     /// Queues <paramref name="text"/> in voice theme <paramref name="theme"/> (e.g. <c>redline.questions</c>). An
     /// <paramref name="opener"/> is a commentary line that a question waits behind instead of cutting off
-    /// (<see cref="Narration.Opener"/>).
+    /// (<see cref="Narration.Opener"/>). A <paramref name="clip"/> is the full path of a recording of the line, as Ogg Vorbis.
     /// </summary>
-    public void Say(string text, string theme, NarrationPriority priority, bool opener = false)
+    public void Say(string text, string theme, NarrationPriority priority, bool opener = false, string? clip = null)
     {
         if (string.IsNullOrWhiteSpace(text))
         {
             return;
         }
-        if (_queue.Enqueue(new Narration(text.Trim(), theme, priority, Now, opener)))
+        if (_queue.Enqueue(new Narration(text.Trim(), theme, priority, Now, opener, clip)))
         {
             Cut();
         }
@@ -148,6 +149,11 @@ public partial class Narrator : Node
         while (_main.TryDequeue(out var action))
         {
             action();
+        }
+        if (_mode == Mode.Clip && Now >= _deadline)
+        {
+            _player.Stop();   // a recording's end never came, as on a machine with no sound device; don't hold the queue
+            Done();
         }
         if (_mode is (Mode.Silent or Mode.BuiltIn) && Now >= _deadline)
         {
@@ -195,6 +201,10 @@ public partial class Narrator : Node
     {
         var token = ++_token;
         LastLine = line.Text;
+        if (line.Clip is { } clip && PlayRecording(clip, line))
+        {
+            return;
+        }
         if (_session is { } session && _policy.UseServer(Now))
         {
             _mode = Mode.Fetching;
@@ -239,7 +249,24 @@ public partial class Narrator : Node
         _player.Stream = stream;
         _player.Play();
         _mode = Mode.Clip;
+        _deadline = double.MaxValue;
         AudioLog.Play(AudioBuses.Voice, $"{line.Theme}: {line.Text}");
+        return true;
+    }
+
+    private bool PlayRecording(string path, Narration line)
+    {
+        var stream = System.IO.File.Exists(path) ? AudioStreamOggVorbis.LoadFromFile(path) : null;
+        if (stream is null || stream.GetLength() <= 0)
+        {
+            GD.Print($"NARRATOR can't read the recording {path}; reading the line instead");
+            return false;
+        }
+        _player.Stream = stream;
+        _player.Play();
+        _mode = Mode.Clip;
+        _deadline = Now + stream.GetLength() + 1;
+        AudioLog.Play(AudioBuses.Voice, $"clip {System.IO.Path.GetFileName(path)} {line.Theme}: {line.Text}");
         return true;
     }
 

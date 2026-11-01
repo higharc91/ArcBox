@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/lore/schema/scenes.schema.json",
+  "title": "Scenes",
+  "description": "scenes/<file>.json: the dialogue that plays an arc beat out. A scene is a small graph of nodes; each node shows lines, then moves on, offers the party options, or ends. Data only: the exploration runtime (sub-project 5) plays it, and nothing here needs it to exist.",
+  "type": "object",
+  "properties": {
+    "scenes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/scene"
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "scenes"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "scene": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "beat": {
+          "$ref": "common.schema.json#/$defs/id",
+          "description": "The arcs.json beat this scene plays out. A beat can have several scenes (an approach, the beat itself, an aftermath)."
+        },
+        "place": {
+          "$ref": "common.schema.json#/$defs/id",
+          "description": "A place id from regions.json. Defaults to the beat's place."
+        },
+        "title": {
+          "$ref": "common.schema.json#/$defs/text"
+        },
+        "requires": {
+          "$ref": "common.schema.json#/$defs/flags",
+          "description": "The scene only plays when every flag is set (on top of the beat's own requires)."
+        },
+        "unless": {
+          "$ref": "common.schema.json#/$defs/flags",
+          "description": "The scene doesn't play if any of these flags is set (for the version of a scene that depends on an earlier choice)."
+        },
+        "cast": {
+          "$ref": "common.schema.json#/$defs/ids",
+          "description": "Who appears: character ids, and 'narrator'. Every line's speaker must be in it."
+        },
+        "start": {
+          "$ref": "common.schema.json#/$defs/id",
+          "description": "The first node."
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/node"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "id",
+        "beat",
+        "cast",
+        "start",
+        "nodes"
+      ],
+      "additionalProperties": false
+    },
+    "node": {
+      "type": "object",
+      "description": "Shows its lines in order, sets its flags, then: options (the party picks), next (carry on), or end. Exactly one of the three.",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/spoken"
+          },
+          "minItems": 1
+        },
+        "sets": {
+          "$ref": "common.schema.json#/$defs/flags",
+          "description": "Flags set when the node plays. Must be flags arcs.json sets (the checker enforces it)."
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/option"
+          },
+          "minItems": 1
+        },
+        "vote": {
+          "type": "boolean",
+          "description": "The options are a party vote (mockup 02): everyone picks, the leader breaks ties. Otherwise the player who's talking picks."
+        },
+        "next": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "end": {
+          "const": true
+        }
+      },
+      "required": [
+        "id",
+        "lines"
+      ],
+      "additionalProperties": false
+    },
+    "spoken": {
+      "type": "object",
+      "description": "A line of dialogue: the common line's fields plus who says it. The id is stable, so translations and voice files key on it.",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "speaker": {
+          "$ref": "common.schema.json#/$defs/id",
+          "description": "A character id from characters.json, or 'narrator'."
+        },
+        "text": {
+          "$ref": "common.schema.json#/$defs/text"
+        },
+        "mood": {
+          "$ref": "common.schema.json#/$defs/mood"
+        },
+        "direction": {
+          "$ref": "common.schema.json#/$defs/text",
+          "description": "How to deliver it, for a voice actor or an expressive TTS model. Never shown."
+        }
+      },
+      "required": [
+        "id",
+        "speaker",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    "option": {
+      "type": "object",
+      "description": "Something the party can say or do. Options are shown as text and aren't voiced: player characters speak through their voice sets' barks.",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "label": {
+          "$ref": "common.schema.json#/$defs/text"
+        },
+        "to": {
+          "$ref": "common.schema.json#/$defs/id",
+          "description": "The node it leads to. Omit only when a check decides."
+        },
+        "choice": {
+          "$ref": "common.schema.json#/$defs/id",
+          "description": "The arcs.json choice this option is (its flags are set when it wins). Only in a vote."
+        },
+        "sets": {
+          "$ref": "common.schema.json#/$defs/flags"
+        },
+        "requires": {
+          "$ref": "common.schema.json#/$defs/flags",
+          "description": "Only offered when these flags are set."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Only offered when someone in the party has one of these: a background (backgrounds.json), a race or a class (rules ids).",
+          "properties": {
+            "background": {
+              "$ref": "common.schema.json#/$defs/ids"
+            },
+            "race": {
+              "$ref": "common.schema.json#/$defs/ids"
+            },
+            "class": {
+              "$ref": "common.schema.json#/$defs/ids"
+            }
+          },
+          "additionalProperties": false
+        },
+        "check": {
+          "type": "object",
+          "description": "A skill check: the party picks who rolls. Pass and fail each go to a node.",
+          "properties": {
+            "skill": {
+              "enum": [
+                "acrobatics",
+                "animal_handling",
+                "arcana",
+                "athletics",
+                "deception",
+                "history",
+                "insight",
+                "intimidation",
+                "investigation",
+                "medicine",
+                "nature",
+                "perception",
+                "performance",
+                "persuasion",
+                "religion",
+                "sleight_of_hand",
+                "stealth",
+                "survival"
+              ]
+            },
+            "dc": {
+              "type": "integer",
+              "minimum": 5,
+              "maximum": 25
+            },
+            "pass": {
+              "$ref": "common.schema.json#/$defs/id"
+            },
+            "fail": {
+              "$ref": "common.schema.json#/$defs/id"
+            }
+          },
+          "required": [
+            "skill",
+            "dc",
+            "pass",
+            "fail"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "label"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

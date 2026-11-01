@@ -1,0 +1,48 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "react",
+  "data": {
+    "unit": "hero4",
+    "trigger": "beforeHit",
+    "cause": {
+      "kind": "beforeHit",
+      "actor": "goblin.4",
+      "target": "hero4",
+      "ability": "common.attack",
+      "roll": {
+        "d20s": [
+          12
+        ],
+        "kept": 12,
+        "modifier": 4,
+        "total": 16,
+        "vs": 11,
+        "success": true,
+        "crit": false,
+        "fumble": false
+      },
+      "to": null
+    },
+    "actor": "Goblin",
+    "targetName": "you",
+    "ability": "Attack",
+    "options": [
+      {
+        "id": "pass",
+        "label": "Don\u0027t react",
+        "target": null,
+        "tooltip": null
+      },
+      {
+        "id": "wizard.shield",
+        "label": "Shield",
+        "target": "hero4",
+        "tooltip": "Self: you get \u002B5 AC until the end of your turn"
+      }
+    ]
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:01:26.05\u002B00:00",
+  "header": null
+}

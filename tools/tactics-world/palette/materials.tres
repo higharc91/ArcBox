@@ -1,0 +1,437 @@
+[gd_resource type="TileSet" format=3 uid="uid://ci202gi2p1d3v"]
+
+[ext_resource type="Texture2D" uid="uid://bevq2acwvm65r" path="res://palette/materials/ash_grey.png" id="1_w3tq6"]
+[ext_resource type="Texture2D" uid="uid://dix5ey70w3yeq" path="res://palette/materials/basalt_dark.png" id="2_nn202"]
+[ext_resource type="Texture2D" uid="uid://b82o4qbm4wclc" path="res://palette/materials/flagstone_dark.png" id="3_2db1o"]
+[ext_resource type="Texture2D" uid="uid://cat21lncqtbc1" path="res://palette/materials/flagstone_grey.png" id="4_0fh6j"]
+[ext_resource type="Texture2D" uid="uid://kc0dwt0g4wl7" path="res://palette/materials/flagstone_warm.png" id="5_yputj"]
+[ext_resource type="Texture2D" uid="uid://tx2ci22pmlky" path="res://palette/materials/forest_floor_leafy.png" id="6_x524c"]
+[ext_resource type="Texture2D" uid="uid://ckm6n1o7flj86" path="res://palette/materials/forest_floor_mossy.png" id="7_msc7k"]
+[ext_resource type="Texture2D" uid="uid://bar3iu1ou068m" path="res://palette/materials/forest_needles_pine.png" id="8_444ej"]
+[ext_resource type="Texture2D" uid="uid://demd7tfe060aj" path="res://palette/materials/forest_needles_snowy.png" id="9_ydl3l"]
+[ext_resource type="Texture2D" uid="uid://dws8so2bckfh0" path="res://palette/materials/grass_autumn.png" id="10_w2lna"]
+[ext_resource type="Texture2D" uid="uid://d1l7gw8pdmm5s" path="res://palette/materials/grass_dry.png" id="11_qjyqp"]
+[ext_resource type="Texture2D" uid="uid://clkdo23ngs8bt" path="res://palette/materials/grass_frost.png" id="12_0kv8j"]
+[ext_resource type="Texture2D" uid="uid://do518u87tja1f" path="res://palette/materials/bog_duckweed.png" id="13_pweyj"]
+[ext_resource type="Texture2D" uid="uid://7m77k26g6ooi" path="res://palette/materials/grass_green.png" id="14_5amqg"]
+[ext_resource type="Texture2D" uid="uid://dln5cml54px84" path="res://palette/materials/grass_lush.png" id="15_g6rh4"]
+[ext_resource type="Texture2D" uid="uid://06iml4ipcuk7" path="res://palette/materials/ice_clear.png" id="16_wk7xm"]
+[ext_resource type="Texture2D" uid="uid://ba5d77bk5vfpd" path="res://palette/materials/lava_molten.png" id="17_t4cys"]
+[ext_resource type="Texture2D" uid="uid://dymvq5p5qynt5" path="res://palette/materials/mud_swamp.png" id="18_hn5ws"]
+[ext_resource type="Texture2D" uid="uid://ccel08tf6asx2" path="res://palette/materials/path_packed.png" id="19_xuq3w"]
+[ext_resource type="Texture2D" uid="uid://n7x42h5qxtq4" path="res://palette/materials/pavers_dark.png" id="20_wve4q"]
+[ext_resource type="Texture2D" uid="uid://cm5gjca8txhda" path="res://palette/materials/pavers_grey.png" id="21_24omw"]
+[ext_resource type="Texture2D" uid="uid://c48dnic26litr" path="res://palette/materials/pavers_warm.png" id="22_acfjv"]
+[ext_resource type="Texture2D" uid="uid://bcc0qbkb1uuq" path="res://palette/materials/planks_dark.png" id="23_fx5pb"]
+[ext_resource type="Texture2D" uid="uid://ci72f0ye32bre" path="res://palette/materials/bog_murk.png" id="24_xnbp8"]
+[ext_resource type="Texture2D" uid="uid://b0te70ekbsyq2" path="res://palette/materials/planks_oak.png" id="25_ikmad"]
+[ext_resource type="Texture2D" uid="uid://c602uch6gurep" path="res://palette/materials/rock_dark.png" id="26_fu31y"]
+[ext_resource type="Texture2D" uid="uid://b5hpuvvdafyih" path="res://palette/materials/rock_grey.png" id="27_31ls7"]
+[ext_resource type="Texture2D" uid="uid://bcecdgwxw2g1" path="res://palette/materials/sand_desert.png" id="28_aqfcl"]
+[ext_resource type="Texture2D" uid="uid://cxrdc7o0f1l0i" path="res://palette/materials/sandstone_ochre.png" id="29_52jmy"]
+[ext_resource type="Texture2D" uid="uid://c08kxj4f5q6lc" path="res://palette/materials/sandstone_red.png" id="30_seu6d"]
+[ext_resource type="Texture2D" uid="uid://d2nbk6df1o28a" path="res://palette/materials/snow_fresh.png" id="31_7g6o2"]
+[ext_resource type="Texture2D" uid="uid://4kceh2idyivm" path="res://palette/materials/water_bog.png" id="32_2rbut"]
+[ext_resource type="Texture2D" uid="uid://boohewk543jtw" path="res://palette/materials/water_clear.png" id="33_vlr00"]
+[ext_resource type="Texture2D" uid="uid://plkawc3gool8" path="res://palette/materials/water_swamp.png" id="34_tsff1"]
+[ext_resource type="Texture2D" uid="uid://b522mguurd6tj" path="res://palette/materials/cobble_grey.png" id="35_j1yf7"]
+[ext_resource type="Texture2D" uid="uid://b8aqy0hy2drhx" path="res://palette/materials/cave_floor_cool.png" id="36_g6rh4"]
+[ext_resource type="Texture2D" uid="uid://ol1f1ophdml0" path="res://palette/materials/cobble_warm.png" id="36_hd6im"]
+[ext_resource type="Texture2D" uid="uid://dosfyesjjk1vp" path="res://palette/materials/dirt_brown.png" id="37_m3fug"]
+[ext_resource type="Texture2D" uid="uid://4lluirgmif2o" path="res://palette/materials/crypt_tile_dark.png" id="37_wk7xm"]
+[ext_resource type="Texture2D" uid="uid://csrkyfa8vrmyy" path="res://palette/materials/dirt_dark.png" id="38_ncsiy"]
+[ext_resource type="Texture2D" uid="uid://i8any834mm0s" path="res://palette/materials/crypt_tiles_fel.png" id="38_t4cys"]
+[ext_resource type="Texture2D" uid="uid://bg7ahdo8b05oy" path="res://palette/materials/dungeon_floor_dark.png" id="39_hn5ws"]
+[ext_resource type="Texture2D" uid="uid://df7qn2orqo3pa" path="res://palette/materials/dunes_gold.png" id="39_kfubj"]
+[ext_resource type="Texture2D" uid="uid://bgktc2d1q6dhj" path="res://palette/materials/dunes_pale.png" id="40_2r8ai"]
+[ext_resource type="Texture2D" uid="uid://bov2ko0v4bxsc" path="res://palette/materials/dungeon_floor_warm.png" id="40_xuq3w"]
+[ext_resource type="Texture2D" uid="uid://3brenj33cgdy" path="res://palette/materials/dungeon_floor_cracked_grey.png" id="41_wve4q"]
+[ext_resource type="Texture2D" uid="uid://38eathbxt6is" path="res://palette/materials/dungeon_floor_mossy_dark.png" id="42_24omw"]
+[ext_resource type="Texture2D" uid="uid://igxplewij4pk" path="res://palette/materials/dungeon_wall_dark.png" id="43_acfjv"]
+[ext_resource type="Texture2D" uid="uid://dbcnb42c6g2d4" path="res://palette/materials/dungeon_wall_grey.png" id="44_fx5pb"]
+[ext_resource type="Texture2D" uid="uid://bcupa32sg1ou4" path="res://palette/materials/flagstone_mossy.png" id="45_xnbp8"]
+[ext_resource type="Texture2D" uid="uid://br0vpkkxpqilx" path="res://palette/materials/mine_boards_oak.png" id="47_ikmad"]
+[ext_resource type="Texture2D" uid="uid://bemcd6mpy1o4t" path="res://palette/materials/mine_gravel_brown.png" id="48_fu31y"]
+[ext_resource type="Texture2D" uid="uid://bw4ikatsa4kah" path="res://palette/materials/void_deep.png" id="49_31ls7"]
+[ext_resource type="Texture2D" uid="uid://dn3kccwu2mt53" path="res://palette/materials/wet_stone_glow.png" id="50_aqfcl"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k7yja"]
+resource_name = "ash/grey"
+texture = ExtResource("1_w3tq6")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k3sb1"]
+resource_name = "basalt/dark"
+texture = ExtResource("2_nn202")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ryacp"]
+resource_name = "flagstone/dark"
+texture = ExtResource("3_2db1o")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d5g7a"]
+resource_name = "flagstone/grey"
+texture = ExtResource("4_0fh6j")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_owffp"]
+resource_name = "flagstone/warm"
+texture = ExtResource("5_yputj")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ixhju"]
+resource_name = "forest_floor/leafy"
+texture = ExtResource("6_x524c")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nafwt"]
+resource_name = "forest_floor/mossy"
+texture = ExtResource("7_msc7k")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l58b2"]
+resource_name = "forest_needles/pine"
+texture = ExtResource("8_444ej")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qbcuw"]
+resource_name = "forest_needles/snowy"
+texture = ExtResource("9_ydl3l")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ota18"]
+resource_name = "grass/autumn"
+texture = ExtResource("10_w2lna")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vvvmm"]
+resource_name = "grass/dry"
+texture = ExtResource("11_qjyqp")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rects"]
+resource_name = "grass/frost"
+texture = ExtResource("12_0kv8j")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6kfwp"]
+resource_name = "bog/duckweed"
+texture = ExtResource("13_pweyj")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ldj2r"]
+resource_name = "grass/green"
+texture = ExtResource("14_5amqg")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4a5fb"]
+resource_name = "grass/lush"
+texture = ExtResource("15_g6rh4")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ivs4i"]
+resource_name = "ice/clear"
+texture = ExtResource("16_wk7xm")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_83unm"]
+resource_name = "lava/molten"
+texture = ExtResource("17_t4cys")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_58ksn"]
+resource_name = "mud/swamp"
+texture = ExtResource("18_hn5ws")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_smt8n"]
+resource_name = "path/packed"
+texture = ExtResource("19_xuq3w")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_avlcx"]
+resource_name = "pavers/dark"
+texture = ExtResource("20_wve4q")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6kso7"]
+resource_name = "pavers/grey"
+texture = ExtResource("21_24omw")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fldjj"]
+resource_name = "pavers/warm"
+texture = ExtResource("22_acfjv")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_df8nl"]
+resource_name = "planks/dark"
+texture = ExtResource("23_fx5pb")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7rr83"]
+resource_name = "bog/murk"
+texture = ExtResource("24_xnbp8")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n562c"]
+resource_name = "planks/oak"
+texture = ExtResource("25_ikmad")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_as2gn"]
+resource_name = "rock/dark"
+texture = ExtResource("26_fu31y")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5qhk2"]
+resource_name = "rock/grey"
+texture = ExtResource("27_31ls7")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5gyar"]
+resource_name = "sand/desert"
+texture = ExtResource("28_aqfcl")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5eurd"]
+resource_name = "sandstone/ochre"
+texture = ExtResource("29_52jmy")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5sd35"]
+resource_name = "sandstone/red"
+texture = ExtResource("30_seu6d")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yi8fa"]
+resource_name = "snow/fresh"
+texture = ExtResource("31_7g6o2")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_37uif"]
+resource_name = "water/bog"
+texture = ExtResource("32_2rbut")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0f83w"]
+resource_name = "water/clear"
+texture = ExtResource("33_vlr00")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_62pdu"]
+resource_name = "water/swamp"
+texture = ExtResource("34_tsff1")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ll7gq"]
+resource_name = "cobble/grey"
+texture = ExtResource("35_j1yf7")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_52jmy"]
+resource_name = "cave_floor/cool"
+texture = ExtResource("36_g6rh4")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_seu6d"]
+resource_name = "crypt_tile/dark"
+texture = ExtResource("37_wk7xm")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7g6o2"]
+resource_name = "crypt_tiles/fel"
+texture = ExtResource("38_t4cys")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2rbut"]
+resource_name = "dungeon_floor/dark"
+texture = ExtResource("39_hn5ws")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vlr00"]
+resource_name = "dungeon_floor/warm"
+texture = ExtResource("40_xuq3w")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tsff1"]
+resource_name = "dungeon_floor_cracked/grey"
+texture = ExtResource("41_wve4q")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j1yf7"]
+resource_name = "dungeon_floor_mossy/dark"
+texture = ExtResource("42_24omw")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hd6im"]
+resource_name = "dungeon_wall/dark"
+texture = ExtResource("43_acfjv")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m3fug"]
+resource_name = "dungeon_wall/grey"
+texture = ExtResource("44_fx5pb")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ncsiy"]
+resource_name = "flagstone/mossy"
+texture = ExtResource("45_xnbp8")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xyd1u"]
+resource_name = "cobble/warm"
+texture = ExtResource("36_hd6im")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kfubj"]
+resource_name = "mine_boards/oak"
+texture = ExtResource("47_ikmad")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2r8ai"]
+resource_name = "mine_gravel/brown"
+texture = ExtResource("48_fu31y")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rrpte"]
+resource_name = "void/deep"
+texture = ExtResource("49_31ls7")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nkl3w"]
+resource_name = "wet_stone/glow"
+texture = ExtResource("50_aqfcl")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kwx2t"]
+resource_name = "dirt/brown"
+texture = ExtResource("37_m3fug")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pp4c2"]
+resource_name = "dirt/dark"
+texture = ExtResource("38_ncsiy")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3cbiv"]
+resource_name = "dunes/gold"
+texture = ExtResource("39_kfubj")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7lvhu"]
+resource_name = "dunes/pale"
+texture = ExtResource("40_2r8ai")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[resource]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_k7yja")
+sources/1 = SubResource("TileSetAtlasSource_k3sb1")
+sources/2 = SubResource("TileSetAtlasSource_6kfwp")
+sources/3 = SubResource("TileSetAtlasSource_7rr83")
+sources/4 = SubResource("TileSetAtlasSource_ll7gq")
+sources/5 = SubResource("TileSetAtlasSource_xyd1u")
+sources/6 = SubResource("TileSetAtlasSource_kwx2t")
+sources/7 = SubResource("TileSetAtlasSource_pp4c2")
+sources/8 = SubResource("TileSetAtlasSource_3cbiv")
+sources/9 = SubResource("TileSetAtlasSource_7lvhu")
+sources/10 = SubResource("TileSetAtlasSource_ryacp")
+sources/11 = SubResource("TileSetAtlasSource_d5g7a")
+sources/12 = SubResource("TileSetAtlasSource_owffp")
+sources/13 = SubResource("TileSetAtlasSource_ixhju")
+sources/14 = SubResource("TileSetAtlasSource_nafwt")
+sources/15 = SubResource("TileSetAtlasSource_l58b2")
+sources/16 = SubResource("TileSetAtlasSource_qbcuw")
+sources/17 = SubResource("TileSetAtlasSource_ota18")
+sources/18 = SubResource("TileSetAtlasSource_vvvmm")
+sources/19 = SubResource("TileSetAtlasSource_rects")
+sources/20 = SubResource("TileSetAtlasSource_ldj2r")
+sources/21 = SubResource("TileSetAtlasSource_4a5fb")
+sources/22 = SubResource("TileSetAtlasSource_ivs4i")
+sources/23 = SubResource("TileSetAtlasSource_83unm")
+sources/24 = SubResource("TileSetAtlasSource_58ksn")
+sources/25 = SubResource("TileSetAtlasSource_smt8n")
+sources/26 = SubResource("TileSetAtlasSource_avlcx")
+sources/27 = SubResource("TileSetAtlasSource_6kso7")
+sources/28 = SubResource("TileSetAtlasSource_fldjj")
+sources/29 = SubResource("TileSetAtlasSource_df8nl")
+sources/30 = SubResource("TileSetAtlasSource_n562c")
+sources/31 = SubResource("TileSetAtlasSource_as2gn")
+sources/32 = SubResource("TileSetAtlasSource_5qhk2")
+sources/33 = SubResource("TileSetAtlasSource_5gyar")
+sources/34 = SubResource("TileSetAtlasSource_5eurd")
+sources/35 = SubResource("TileSetAtlasSource_5sd35")
+sources/36 = SubResource("TileSetAtlasSource_yi8fa")
+sources/37 = SubResource("TileSetAtlasSource_37uif")
+sources/38 = SubResource("TileSetAtlasSource_0f83w")
+sources/39 = SubResource("TileSetAtlasSource_62pdu")
+sources/40 = SubResource("TileSetAtlasSource_52jmy")
+sources/41 = SubResource("TileSetAtlasSource_seu6d")
+sources/42 = SubResource("TileSetAtlasSource_7g6o2")
+sources/43 = SubResource("TileSetAtlasSource_2rbut")
+sources/44 = SubResource("TileSetAtlasSource_vlr00")
+sources/45 = SubResource("TileSetAtlasSource_tsff1")
+sources/46 = SubResource("TileSetAtlasSource_j1yf7")
+sources/47 = SubResource("TileSetAtlasSource_hd6im")
+sources/48 = SubResource("TileSetAtlasSource_m3fug")
+sources/49 = SubResource("TileSetAtlasSource_ncsiy")
+sources/50 = SubResource("TileSetAtlasSource_kfubj")
+sources/51 = SubResource("TileSetAtlasSource_2r8ai")
+sources/52 = SubResource("TileSetAtlasSource_rrpte")
+sources/53 = SubResource("TileSetAtlasSource_nkl3w")

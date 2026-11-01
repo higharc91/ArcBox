@@ -25,6 +25,10 @@
       "lair": "icons/lair.png",
       "forest": "icons/forest.png",
       "mountain": "icons/mountain.png",
+      "swamp": "icons/swamp.png",
+      "oasis": "icons/oasis.png",
+      "volcano": "icons/volcano.png",
+      "glacier": "icons/glacier.png",
       "party": "icons/party.png",
       "quest": "icons/quest.png"
     },

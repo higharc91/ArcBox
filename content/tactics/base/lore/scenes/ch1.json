@@ -1,0 +1,2467 @@
+{
+  "scenes": [
+    {
+      "id": "ch1_mayor",
+      "beat": "ch1_mayors_request",
+      "title": "Emberwick at Dusk",
+      "cast": [
+        "narrator",
+        "pip_ashdown",
+        "bree_tallow",
+        "halden_varrow",
+        "dagna_holt",
+        "hooded_stranger"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch1_mayor_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Emberwick, at the Ashen Ford. The ground is warm underfoot, and the river steams in the evening cold."
+            },
+            {
+              "id": "ch1_mayor_open_2",
+              "speaker": "narrator",
+              "mood": "sad",
+              "text": "It used to be warmer. Nobody in town will say so."
+            },
+            {
+              "id": "ch1_mayor_open_3",
+              "speaker": "pip_ashdown",
+              "mood": "happy",
+              "text": "You came! I told Bree you'd come. The mayor's been asking for you all day, and he's ever so cross.",
+              "direction": "bright, breathless, running up"
+            },
+            {
+              "id": "ch1_mayor_open_4",
+              "speaker": "bree_tallow",
+              "mood": "idle",
+              "text": "Pip, let them breathe. You lot, there's stew when he's done with you. Don't let him talk it cold.",
+              "direction": "calling from the inn door, brisk and fond"
+            }
+          ],
+          "next": "halden"
+        },
+        {
+          "id": "halden",
+          "lines": [
+            {
+              "id": "ch1_mayor_halden_1",
+              "speaker": "halden_varrow",
+              "mood": "happy",
+              "text": "Friends. Thank you for coming. I'd shake every hand, but the light's going, and so is our grain.",
+              "direction": "warm, practised, a little hoarse"
+            },
+            {
+              "id": "ch1_mayor_halden_2",
+              "speaker": "halden_varrow",
+              "mood": "idle",
+              "text": "The Skarrow goblins took the ford bridge nine days ago. Every cart of winter flour comes over it."
+            },
+            {
+              "id": "ch1_mayor_halden_3",
+              "speaker": "dagna_holt",
+              "mood": "angry",
+              "text": "Killed two of my guards doing it. Coll and Annet. Good people.",
+              "direction": "flat, low, few words"
+            },
+            {
+              "id": "ch1_mayor_halden_4",
+              "speaker": "halden_varrow",
+              "mood": "sad",
+              "text": "The new moon is eleven days off. After that the last carts stop running, and Emberwick starts eating its seed corn."
+            }
+          ],
+          "options": [
+            {
+              "id": "goblins",
+              "label": "Who are these goblins?",
+              "to": "goblins"
+            },
+            {
+              "id": "hero",
+              "label": "You've got me, Halden. What does the town need?",
+              "to": "hero",
+              "tags": {
+                "background": [
+                  "folk_hero"
+                ]
+              }
+            },
+            {
+              "id": "soldier",
+              "label": "Captain. I was on that bridge with you.",
+              "to": "soldier",
+              "tags": {
+                "background": [
+                  "soldier"
+                ]
+              }
+            },
+            {
+              "id": "noble",
+              "label": "Lady Marrowby asked me to keep an eye on things.",
+              "to": "noble",
+              "tags": {
+                "background": [
+                  "noble"
+                ]
+              }
+            },
+            {
+              "id": "urchin",
+              "label": "Pip. Have you been sleeping?",
+              "to": "urchin",
+              "tags": {
+                "background": [
+                  "urchin"
+                ]
+              }
+            },
+            {
+              "id": "bridge",
+              "label": "Show us the bridge.",
+              "to": "close"
+            }
+          ]
+        },
+        {
+          "id": "goblins",
+          "lines": [
+            {
+              "id": "ch1_mayor_goblins_1",
+              "speaker": "halden_varrow",
+              "mood": "idle",
+              "text": "A hill clan. Their chief is an old woman they call Mother Skarrow. I've never met her, and I don't need to."
+            },
+            {
+              "id": "ch1_mayor_goblins_2",
+              "speaker": "dagna_holt",
+              "mood": "angry",
+              "text": "Forty winters she's led them. Clever. She'll smile at you while her archers find the range."
+            },
+            {
+              "id": "ch1_mayor_goblins_3",
+              "speaker": "bree_tallow",
+              "mood": "sad",
+              "text": "She sent a little one down for bread in the spring. Asked at the granary gate, polite as you like.",
+              "direction": "quieter, from the doorway"
+            },
+            {
+              "id": "ch1_mayor_goblins_4",
+              "speaker": "halden_varrow",
+              "mood": "hurt",
+              "text": "Bree. Not now.",
+              "direction": "quiet and fast"
+            }
+          ],
+          "next": "close"
+        },
+        {
+          "id": "hero",
+          "lines": [
+            {
+              "id": "ch1_mayor_hero_1",
+              "speaker": "halden_varrow",
+              "mood": "happy",
+              "text": "There. That's what I hoped to hear. They still tell the story of you in this square, you know."
+            },
+            {
+              "id": "ch1_mayor_hero_2",
+              "speaker": "halden_varrow",
+              "mood": "idle",
+              "text": "People will be calmer if it's you who goes. Calm matters this winter. More than you'd think."
+            },
+            {
+              "id": "ch1_mayor_hero_3",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "Calm's for after. Bridge first."
+            }
+          ],
+          "next": "close"
+        },
+        {
+          "id": "soldier",
+          "lines": [
+            {
+              "id": "ch1_mayor_soldier_1",
+              "speaker": "dagna_holt",
+              "mood": "sad",
+              "text": "Aye. You were. Not many of us walked off it.",
+              "direction": "softer than usual, then flat again"
+            },
+            {
+              "id": "ch1_mayor_soldier_2",
+              "speaker": "dagna_holt",
+              "mood": "angry",
+              "text": "You saw what they did. When the time comes, you tell them."
+            },
+            {
+              "id": "ch1_mayor_soldier_3",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "You remember that morning. You remember it differently than she does."
+            }
+          ],
+          "next": "close"
+        },
+        {
+          "id": "noble",
+          "lines": [
+            {
+              "id": "ch1_mayor_noble_1",
+              "speaker": "halden_varrow",
+              "mood": "hurt",
+              "text": "Did she. Of course she did. Tell her the town is handling it. And tell her kindly, would you?",
+              "direction": "quiet and fast, the smile slipping"
+            },
+            {
+              "id": "ch1_mayor_noble_2",
+              "speaker": "halden_varrow",
+              "mood": "happy",
+              "text": "The Marrowbys have been very generous to Emberwick. Very generous. We are all very grateful.",
+              "direction": "back to the public voice, too quickly"
+            }
+          ],
+          "next": "close"
+        },
+        {
+          "id": "urchin",
+          "lines": [
+            {
+              "id": "ch1_mayor_urchin_1",
+              "speaker": "pip_ashdown",
+              "mood": "happy",
+              "text": "Course I have. Mostly."
+            },
+            {
+              "id": "ch1_mayor_urchin_2",
+              "speaker": "pip_ashdown",
+              "mood": "sad",
+              "text": "I dreamed the river was boiling again. Again's the wrong word, isn't it? I wasn't there.",
+              "direction": "suddenly slow and old"
+            },
+            {
+              "id": "ch1_mayor_urchin_3",
+              "speaker": "bree_tallow",
+              "mood": "idle",
+              "text": "Bad dreams and too much cheese, that's all. In you come, Pip. Bed."
+            }
+          ],
+          "next": "close"
+        },
+        {
+          "id": "close",
+          "lines": [
+            {
+              "id": "ch1_mayor_close_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Across the square, someone in a deep hood leans in the doorway of the Last Coal. They have not touched the cup in their hand."
+            },
+            {
+              "id": "ch1_mayor_close_2",
+              "speaker": "pip_ashdown",
+              "mood": "surprised",
+              "text": "That one came the same week as the goblins. Never eats. Never sleeps that I've seen. Bree says it's rude to stare.",
+              "direction": "a loud whisper"
+            },
+            {
+              "id": "ch1_mayor_close_3",
+              "speaker": "hooded_stranger",
+              "mood": "idle",
+              "text": "Go and look at your bridge. It's older than your town, and it has seen this before.",
+              "direction": "quiet, faintly amused, faintly sad"
+            },
+            {
+              "id": "ch1_mayor_close_4",
+              "speaker": "halden_varrow",
+              "mood": "idle",
+              "text": "Come down to the bridge end with me. You should see what we're up against before you tell me anything."
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch1_ford",
+      "beat": "ch1_the_ford_choice",
+      "title": "The Ford Choice",
+      "cast": [
+        "narrator",
+        "halden_varrow",
+        "dagna_holt",
+        "bree_tallow"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch1_ford_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "At the town's end of the ford bridge, the old Warden stones are slick with steam. Goblin fires burn on the far bank."
+            },
+            {
+              "id": "ch1_ford_open_2",
+              "speaker": "narrator",
+              "mood": "sad",
+              "text": "Small figures move between them. Fewer than you expected. Thinner."
+            },
+            {
+              "id": "ch1_ford_open_3",
+              "speaker": "halden_varrow",
+              "mood": "idle",
+              "text": "There. Forty of them, perhaps. Dagna has eight guards left. And she has you."
+            },
+            {
+              "id": "ch1_ford_open_4",
+              "speaker": "dagna_holt",
+              "mood": "angry",
+              "text": "Hit them at dawn, from both banks. They'll break. Goblins always break."
+            },
+            {
+              "id": "ch1_ford_open_5",
+              "speaker": "bree_tallow",
+              "mood": "angry",
+              "text": "And the ones who don't break, Dagna? The ones with nowhere left to run to?",
+              "direction": "she has followed them down with a basket"
+            }
+          ],
+          "options": [
+            {
+              "id": "why",
+              "label": "Why did they take the bridge?",
+              "to": "why"
+            },
+            {
+              "id": "truth",
+              "label": "Your guards shot first, Captain. At children.",
+              "to": "truth",
+              "tags": {
+                "background": [
+                  "soldier"
+                ]
+              }
+            },
+            {
+              "id": "cases",
+              "label": "Make your cases. Both of you.",
+              "to": "cases"
+            }
+          ]
+        },
+        {
+          "id": "why",
+          "lines": [
+            {
+              "id": "ch1_ford_why_1",
+              "speaker": "halden_varrow",
+              "mood": "idle",
+              "text": "Hunger, I expect. It's been a lean year for everyone, and the hills are always harder than the valley.",
+              "direction": "smooth, a speech he has given before"
+            },
+            {
+              "id": "ch1_ford_why_2",
+              "speaker": "bree_tallow",
+              "mood": "idle",
+              "text": "Leaner for them. We had the warm fields. They had snow on their fires by the Harvest Month."
+            }
+          ],
+          "options": [
+            {
+              "id": "insight",
+              "label": "There's something he isn't saying.",
+              "check": {
+                "skill": "insight",
+                "dc": 13,
+                "pass": "why_pass",
+                "fail": "why_fail"
+              }
+            },
+            {
+              "id": "fair",
+              "label": "Fair enough.",
+              "to": "cases"
+            }
+          ]
+        },
+        {
+          "id": "why_pass",
+          "lines": [
+            {
+              "id": "ch1_ford_why_pass_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "He answers a heartbeat too fast, and he does not look at the granary roofs behind him."
+            },
+            {
+              "id": "ch1_ford_why_pass_2",
+              "speaker": "halden_varrow",
+              "mood": "hurt",
+              "text": "Whatever you think you see, it can wait until the bridge is ours. Please.",
+              "direction": "cornered: quiet and fast"
+            }
+          ],
+          "next": "cases"
+        },
+        {
+          "id": "why_fail",
+          "lines": [
+            {
+              "id": "ch1_ford_why_fail_1",
+              "speaker": "halden_varrow",
+              "mood": "happy",
+              "text": "Trust me, friends. If there were a simpler answer, I'd have found it years ago.",
+              "direction": "reassuring, warm"
+            }
+          ],
+          "next": "cases"
+        },
+        {
+          "id": "truth",
+          "lines": [
+            {
+              "id": "ch1_ford_truth_1",
+              "speaker": "dagna_holt",
+              "mood": "surprised",
+              "text": "Say that again.",
+              "direction": "very quiet"
+            },
+            {
+              "id": "ch1_ford_truth_2",
+              "speaker": "dagna_holt",
+              "mood": "hurt",
+              "text": "Coll always had a nervous bow hand. I sent him out at first light because I trusted him. Children."
+            },
+            {
+              "id": "ch1_ford_truth_3",
+              "speaker": "dagna_holt",
+              "mood": "angry",
+              "text": "Two of mine are still dead. But I'll want a better reason than hunger now, and I haven't got one.",
+              "direction": "holding herself together"
+            },
+            {
+              "id": "ch1_ford_truth_4",
+              "speaker": "bree_tallow",
+              "mood": "sad",
+              "text": "Oh, Dagna."
+            }
+          ],
+          "next": "cases"
+        },
+        {
+          "id": "cases",
+          "lines": [
+            {
+              "id": "ch1_ford_cases_1",
+              "speaker": "dagna_holt",
+              "mood": "angry",
+              "text": "Here's mine. Every day we talk, the road stays shut. Talk is a luxury, and we've eleven days of it."
+            },
+            {
+              "id": "ch1_ford_cases_2",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "They chose spears over asking. Answer the spears, and the next hungry clan knows what that bridge costs."
+            },
+            {
+              "id": "ch1_ford_cases_3",
+              "speaker": "bree_tallow",
+              "mood": "idle",
+              "text": "And here's mine. That's a whole people up there, and they're hungry for the same reason we are, only worse."
+            },
+            {
+              "id": "ch1_ford_cases_4",
+              "speaker": "bree_tallow",
+              "mood": "sad",
+              "text": "Kill their mother and you've bought a bridge for one winter. Her grandsons will remember it for fifty."
+            },
+            {
+              "id": "ch1_ford_cases_5",
+              "speaker": "halden_varrow",
+              "mood": "sad",
+              "text": "Either way, I need that road. I'd like it quick, and I'd like it cheap. I'm not sure I can have both."
+            }
+          ],
+          "next": "vote"
+        },
+        {
+          "id": "vote",
+          "lines": [
+            {
+              "id": "ch1_ford_vote_1",
+              "speaker": "halden_varrow",
+              "mood": "idle",
+              "text": "The ford is the only road east. If those goblins hold the bridge past the new moon, Emberwick goes hungry this winter."
+            },
+            {
+              "id": "ch1_ford_vote_2",
+              "speaker": "halden_varrow",
+              "mood": "sad",
+              "text": "Will you clear them out, or will you talk to their chief?"
+            }
+          ],
+          "vote": true,
+          "options": [
+            {
+              "id": "force",
+              "label": "We'll clear the ford by force.",
+              "to": "force",
+              "choice": "ch1_force"
+            },
+            {
+              "id": "parley",
+              "label": "We'll go and parley with the chief.",
+              "to": "parley",
+              "choice": "ch1_parley"
+            },
+            {
+              "id": "pay",
+              "label": "First, what's it worth to you?",
+              "check": {
+                "skill": "persuasion",
+                "dc": 15,
+                "pass": "pay_pass",
+                "fail": "pay_fail"
+              }
+            }
+          ]
+        },
+        {
+          "id": "pay_pass",
+          "lines": [
+            {
+              "id": "ch1_ford_pay_pass_1",
+              "speaker": "halden_varrow",
+              "mood": "happy",
+              "text": "Ha. My mother would have liked you. Forty crowns from the town chest, and the Last Coal's best rooms till spring.",
+              "direction": "caught out, then laughing it off"
+            },
+            {
+              "id": "ch1_ford_pay_pass_2",
+              "speaker": "bree_tallow",
+              "mood": "happy",
+              "text": "My best rooms. He means my only rooms. Still. Done."
+            }
+          ],
+          "next": "vote2"
+        },
+        {
+          "id": "pay_fail",
+          "lines": [
+            {
+              "id": "ch1_ford_pay_fail_1",
+              "speaker": "halden_varrow",
+              "mood": "idle",
+              "text": "It's worth Emberwick. I'm afraid that's all I can pay you with that isn't already promised to someone.",
+              "direction": "warm, immovable"
+            },
+            {
+              "id": "ch1_ford_pay_fail_2",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "Twenty crowns. My own. Now choose."
+            }
+          ],
+          "next": "vote2"
+        },
+        {
+          "id": "vote2",
+          "lines": [
+            {
+              "id": "ch1_ford_vote2_1",
+              "speaker": "halden_varrow",
+              "mood": "idle",
+              "text": "So. Spears, or words? Whatever you choose, I'll stand behind it."
+            }
+          ],
+          "vote": true,
+          "options": [
+            {
+              "id": "force",
+              "label": "We'll clear the ford by force.",
+              "to": "force",
+              "choice": "ch1_force"
+            },
+            {
+              "id": "parley",
+              "label": "We'll go and parley with the chief.",
+              "to": "parley",
+              "choice": "ch1_parley"
+            }
+          ]
+        },
+        {
+          "id": "force",
+          "lines": [
+            {
+              "id": "ch1_ford_force_1",
+              "speaker": "dagna_holt",
+              "mood": "happy",
+              "text": "Good. Dawn, then, from both banks. I'll have the guards in the reeds before first light.",
+              "direction": "grim satisfaction"
+            },
+            {
+              "id": "ch1_ford_force_2",
+              "speaker": "bree_tallow",
+              "mood": "sad",
+              "text": "I'll keep the stew warm. For whoever comes back across."
+            },
+            {
+              "id": "ch1_ford_force_3",
+              "speaker": "halden_varrow",
+              "mood": "idle",
+              "text": "Thank you. Truly. Emberwick won't forget this.",
+              "direction": "sincere; the irony is lost on him"
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "parley",
+          "lines": [
+            {
+              "id": "ch1_ford_parley_1",
+              "speaker": "dagna_holt",
+              "mood": "angry",
+              "text": "Talk, then. When she puts a spear through you, remember who told you she would."
+            },
+            {
+              "id": "ch1_ford_parley_2",
+              "speaker": "halden_varrow",
+              "mood": "hurt",
+              "text": "Promise her nothing. Do you understand me? Nothing about the granaries.",
+              "direction": "quiet and fast, a hand on someone's sleeve"
+            },
+            {
+              "id": "ch1_ford_parley_3",
+              "speaker": "bree_tallow",
+              "mood": "happy",
+              "text": "Bread. Two days old, but it's honest. Take it up the hill. Children first, mind.",
+              "direction": "pressing a heavy basket into someone's arms"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch1_parley",
+      "beat": "ch1_the_ford_choice",
+      "place": "skarrow_hills",
+      "title": "The Camp in the Hills",
+      "requires": [
+        "ch1_skarrow_spared"
+      ],
+      "cast": [
+        "narrator",
+        "mother_skarrow"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch1_parley_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "The path into the Skarrow Hills is frozen mud. The camp at the top is smaller than anyone in town imagined."
+            },
+            {
+              "id": "ch1_parley_open_2",
+              "speaker": "narrator",
+              "mood": "sad",
+              "text": "Children watch you from the hide tents. They are too quiet, and their wrists are too thin."
+            },
+            {
+              "id": "ch1_parley_open_3",
+              "speaker": "mother_skarrow",
+              "mood": "idle",
+              "text": "Valley people. Walking. Not running at me with spears. This is new.",
+              "direction": "cracked and rasping; slow, deliberate valley tongue, as a courtesy"
+            },
+            {
+              "id": "ch1_parley_open_4",
+              "speaker": "mother_skarrow",
+              "mood": "idle",
+              "text": "You lock your grain and call us thieves. Sit. We will talk about who stole what."
+            }
+          ],
+          "options": [
+            {
+              "id": "bread",
+              "label": "We brought bread. For the children.",
+              "to": "bread"
+            },
+            {
+              "id": "hill",
+              "label": "I'll greet her in the hill tongue.",
+              "to": "hill",
+              "tags": {
+                "race": [
+                  "half_orc"
+                ]
+              }
+            },
+            {
+              "id": "soldier",
+              "label": "I was on the bridge the day it was taken.",
+              "to": "soldier",
+              "tags": {
+                "background": [
+                  "soldier"
+                ]
+              }
+            },
+            {
+              "id": "terms",
+              "label": "Give us the bridge, and we'll talk about grain.",
+              "to": "terms"
+            }
+          ]
+        },
+        {
+          "id": "bread",
+          "lines": [
+            {
+              "id": "ch1_parley_bread_1",
+              "speaker": "mother_skarrow",
+              "mood": "surprised",
+              "text": "Two-day bread. From the innkeeper, yes? The one who feeds anybody."
+            },
+            {
+              "id": "ch1_parley_bread_2",
+              "speaker": "mother_skarrow",
+              "mood": "sad",
+              "text": "Small kindness. Small stomachs. It is not nothing.",
+              "direction": "dry, but it lands"
+            }
+          ],
+          "next": "terms"
+        },
+        {
+          "id": "hill",
+          "lines": [
+            {
+              "id": "ch1_parley_hill_1",
+              "speaker": "mother_skarrow",
+              "mood": "happy",
+              "text": "Ha! Somebody's mother taught you properly. You say my name like you have been scolded with it.",
+              "direction": "suddenly quick and delighted"
+            },
+            {
+              "id": "ch1_parley_hill_2",
+              "speaker": "mother_skarrow",
+              "mood": "idle",
+              "text": "Then you know a hill word the valley does not have. It means a debt that both sides pretend is a gift."
+            }
+          ],
+          "next": "terms"
+        },
+        {
+          "id": "soldier",
+          "lines": [
+            {
+              "id": "ch1_parley_soldier_1",
+              "speaker": "mother_skarrow",
+              "mood": "angry",
+              "text": "Then you saw. My little ones were down on the bank, digging roots. Your people shot at them."
+            },
+            {
+              "id": "ch1_parley_soldier_2",
+              "speaker": "mother_skarrow",
+              "mood": "sad",
+              "text": "We took the bridge after. Not before. Tell your captain that, if she will hear it."
+            }
+          ],
+          "next": "terms"
+        },
+        {
+          "id": "terms",
+          "lines": [
+            {
+              "id": "ch1_parley_terms_1",
+              "speaker": "mother_skarrow",
+              "mood": "idle",
+              "text": "Here is the bargain, and it is a short one. Your town eats. My clan eats. The bridge goes back to being a bridge."
+            },
+            {
+              "id": "ch1_parley_terms_2",
+              "speaker": "mother_skarrow",
+              "mood": "angry",
+              "text": "Not coin. Coin does not boil. A share of the grain your mayor keeps behind his locks. Every week, until the thaw."
+            }
+          ],
+          "options": [
+            {
+              "id": "word",
+              "label": "A share of the grain. You have our word.",
+              "to": "deal"
+            },
+            {
+              "id": "haggle",
+              "label": "Half now, the rest when the road is open.",
+              "check": {
+                "skill": "persuasion",
+                "dc": 14,
+                "pass": "haggle_pass",
+                "fail": "haggle_fail"
+              }
+            },
+            {
+              "id": "young",
+              "label": "Can you hold your own warriors to this?",
+              "check": {
+                "skill": "insight",
+                "dc": 12,
+                "pass": "young_pass",
+                "fail": "young_fail"
+              }
+            }
+          ]
+        },
+        {
+          "id": "haggle_pass",
+          "lines": [
+            {
+              "id": "ch1_parley_haggle_pass_1",
+              "speaker": "mother_skarrow",
+              "mood": "happy",
+              "text": "Half now, half at the thaw. You bargain like a hill grandmother. I will take it, and I will watch you.",
+              "direction": "a cackle"
+            }
+          ],
+          "next": "deal"
+        },
+        {
+          "id": "haggle_fail",
+          "lines": [
+            {
+              "id": "ch1_parley_haggle_fail_1",
+              "speaker": "mother_skarrow",
+              "mood": "angry",
+              "text": "Half? My children do not eat half. All of it, every week, or go home and fetch your captain."
+            },
+            {
+              "id": "ch1_parley_haggle_fail_2",
+              "speaker": "mother_skarrow",
+              "mood": "idle",
+              "text": "But you climbed the hill. So. Sit down again, and agree with me."
+            }
+          ],
+          "next": "deal"
+        },
+        {
+          "id": "young_pass",
+          "lines": [
+            {
+              "id": "ch1_parley_young_pass_1",
+              "speaker": "mother_skarrow",
+              "mood": "sad",
+              "text": "Most of them. Some of the young ones belong to my grandson now, in their hearts. Vorga. He left us to take instead of ask."
+            },
+            {
+              "id": "ch1_parley_young_pass_2",
+              "speaker": "mother_skarrow",
+              "mood": "idle",
+              "text": "His friends will not like a truce. If they bare their teeth on the bridge, do not kill more of them than you must."
+            }
+          ],
+          "next": "deal"
+        },
+        {
+          "id": "young_fail",
+          "lines": [
+            {
+              "id": "ch1_parley_young_fail_1",
+              "speaker": "mother_skarrow",
+              "mood": "angry",
+              "text": "Forty winters I have held this clan. Do not ask me if I can hold it one more.",
+              "direction": "too sharp, and she knows it"
+            }
+          ],
+          "next": "deal"
+        },
+        {
+          "id": "deal",
+          "lines": [
+            {
+              "id": "ch1_parley_deal_1",
+              "speaker": "mother_skarrow",
+              "mood": "idle",
+              "text": "Then it is agreed. Tell your mayor the old mother will give back his bridge. Tell him she is counting the sacks."
+            },
+            {
+              "id": "ch1_parley_deal_2",
+              "speaker": "narrator",
+              "mood": "happy",
+              "text": "She offers a hand, small and hard as a root. When you take it, the children in the tents begin, at last, to whisper."
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch1_dawn",
+      "beat": "ch1_ford_assault",
+      "title": "Dawn at the Ford",
+      "unless": [
+        "ch1_skarrow_spared"
+      ],
+      "cast": [
+        "narrator",
+        "dagna_holt",
+        "mother_skarrow"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch1_dawn_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Dawn. Mist lies thick on the steaming river, and Dagna's guards wait in the reeds of both banks."
+            },
+            {
+              "id": "ch1_dawn_open_2",
+              "speaker": "mother_skarrow",
+              "mood": "angry",
+              "text": "I see you, valley people. You came with spears after all. I hoped. I am old enough to know better than hope.",
+              "direction": "calling across the bridge, every word deliberate"
+            },
+            {
+              "id": "ch1_dawn_open_3",
+              "speaker": "mother_skarrow",
+              "mood": "idle",
+              "text": "Come, then. Every one of us you kill is one less mouth this winter. Your mayor will be so pleased."
+            },
+            {
+              "id": "ch1_dawn_open_4",
+              "speaker": "dagna_holt",
+              "mood": "angry",
+              "text": "Now. Before she says anything else."
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch1_bridge_cost",
+      "beat": "ch1_ford_assault",
+      "title": "What the Bridge Cost",
+      "unless": [
+        "ch1_skarrow_spared"
+      ],
+      "cast": [
+        "narrator",
+        "mother_skarrow",
+        "dagna_holt"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch1_bridge_cost_open_1",
+              "speaker": "narrator",
+              "mood": "sad",
+              "text": "The fighting is over. On the old stones of the bridge, Mother Skarrow lies where she fell."
+            },
+            {
+              "id": "ch1_bridge_cost_open_2",
+              "speaker": "mother_skarrow",
+              "mood": "hurt",
+              "text": "Hm. Well fought. My grandson always said the valley would never share. I should have listened to him.",
+              "direction": "barely a whisper, a dry laugh in it"
+            },
+            {
+              "id": "ch1_bridge_cost_open_3",
+              "speaker": "mother_skarrow",
+              "mood": "sad",
+              "text": "There was a song I meant to teach somebody. Too late now. It goes into the river with me."
+            },
+            {
+              "id": "ch1_bridge_cost_open_4",
+              "speaker": "narrator",
+              "mood": "sad",
+              "text": "The last of the clan fall back into the hills, carrying their small ones. None of them look back."
+            }
+          ],
+          "options": [
+            {
+              "id": "song",
+              "label": "Tell me the song.",
+              "to": "song"
+            },
+            {
+              "id": "soldier",
+              "label": "Captain. There's something you should know about that first morning.",
+              "to": "soldier",
+              "tags": {
+                "background": [
+                  "soldier"
+                ]
+              }
+            },
+            {
+              "id": "over",
+              "label": "It's over.",
+              "to": "over"
+            }
+          ]
+        },
+        {
+          "id": "song",
+          "lines": [
+            {
+              "id": "ch1_bridge_cost_song_1",
+              "speaker": "mother_skarrow",
+              "mood": "sad",
+              "text": "Seven went up where the wall meets the sky. No. Not for you. Not for the ones with spears.",
+              "direction": "a breath of melody, then nothing"
+            },
+            {
+              "id": "ch1_bridge_cost_song_2",
+              "speaker": "narrator",
+              "mood": "sad",
+              "text": "She does not speak again."
+            }
+          ],
+          "next": "over"
+        },
+        {
+          "id": "soldier",
+          "lines": [
+            {
+              "id": "ch1_bridge_cost_soldier_1",
+              "speaker": "dagna_holt",
+              "mood": "surprised",
+              "text": "Children. Our lads shot at children."
+            },
+            {
+              "id": "ch1_bridge_cost_soldier_2",
+              "speaker": "dagna_holt",
+              "mood": "sad",
+              "text": "And we've just finished what they started. Gods help me."
+            }
+          ],
+          "next": "over"
+        },
+        {
+          "id": "over",
+          "lines": [
+            {
+              "id": "ch1_bridge_cost_over_1",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "The road's open. That's what we came for.",
+              "direction": "flat, not triumphant"
+            },
+            {
+              "id": "ch1_bridge_cost_over_2",
+              "speaker": "dagna_holt",
+              "mood": "sad",
+              "text": "Funny. I thought this would feel like something."
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch1_young_ones",
+      "beat": "ch1_river_crossing",
+      "title": "The Young Ones",
+      "requires": [
+        "ch1_skarrow_spared"
+      ],
+      "cast": [
+        "narrator",
+        "mother_skarrow",
+        "dagna_holt"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch1_young_ones_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "The clan is leaving the bridge, carrying their tents down to the bank. Not all of them."
+            },
+            {
+              "id": "ch1_young_ones_open_2",
+              "speaker": "narrator",
+              "mood": "surprised",
+              "text": "A knot of young goblins holds the middle span, faces painted red, spears levelled. Their war cry is a name. Vorga."
+            },
+            {
+              "id": "ch1_young_ones_open_3",
+              "speaker": "mother_skarrow",
+              "mood": "angry",
+              "text": "My grandson's friends. They would rather die on the stones than eat valley bread. Foolish children."
+            },
+            {
+              "id": "ch1_young_ones_open_4",
+              "speaker": "mother_skarrow",
+              "mood": "sad",
+              "text": "Do what you must. But I have buried enough of them this year. Leave me some to scold."
+            },
+            {
+              "id": "ch1_young_ones_open_5",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "Truce or no truce, they're on my bridge. Ready when you are."
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch1_road_east",
+      "beat": "ch1_river_crossing",
+      "title": "The Road East",
+      "requires": [
+        "ch1_skarrow_spared"
+      ],
+      "cast": [
+        "narrator",
+        "mother_skarrow",
+        "dagna_holt"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch1_road_east_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "The last of the hotheads flee east along the road, toward the far hills, and Vorga, wherever he is."
+            },
+            {
+              "id": "ch1_road_east_open_2",
+              "speaker": "mother_skarrow",
+              "mood": "idle",
+              "text": "They will go to him. He will tell them they were brave. They were. Brave is cheap this winter."
+            },
+            {
+              "id": "ch1_road_east_open_3",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "Bridge is clear. Carts can cross by noon.",
+              "direction": "grudging"
+            },
+            {
+              "id": "ch1_road_east_open_4",
+              "speaker": "dagna_holt",
+              "mood": "sad",
+              "text": "I wanted her dead, you know. For Coll and Annet. I still might, some days.",
+              "direction": "a long pause, then low"
+            },
+            {
+              "id": "ch1_road_east_open_5",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "But I've never seen goblins carry their own children off a bridge before. I'll think on it."
+            },
+            {
+              "id": "ch1_road_east_open_6",
+              "speaker": "mother_skarrow",
+              "mood": "happy",
+              "text": "Your captain thinks. Good. Tell her to think about the grain.",
+              "direction": "dry"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch1_maud",
+      "beat": "ch1_old_maud",
+      "title": "Who Saw the Ember Fall",
+      "cast": [
+        "narrator",
+        "old_maud",
+        "hooded_stranger"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch1_maud_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Downstream of the bridge, the bank is grey and bare for a mile. Nothing has grown here in a hundred years but one crooked hut."
+            },
+            {
+              "id": "ch1_maud_open_2",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "It is hung with charms of bone and river glass that click in the steam. Someone inside is laughing at you."
+            },
+            {
+              "id": "ch1_maud_open_3",
+              "speaker": "old_maud",
+              "mood": "happy",
+              "text": "Took you long enough. A hundred years I've sat here, and finally somebody comes knocking with a sensible face.",
+              "direction": "papery, unhurried; a cackle that turns into a cough"
+            },
+            {
+              "id": "ch1_maud_open_4",
+              "speaker": "old_maud",
+              "mood": "idle",
+              "text": "Go on, then. Ask me. Everybody asks the wrong thing, so I'll forgive you the first one."
+            }
+          ],
+          "sets": [
+            "ch1_met_maud"
+          ],
+          "options": [
+            {
+              "id": "fell",
+              "label": "You were here when the ember fell?",
+              "to": "fell"
+            },
+            {
+              "id": "hermit",
+              "label": "Maud. It's me, from up the bank.",
+              "to": "hermit",
+              "tags": {
+                "background": [
+                  "hermit"
+                ]
+              }
+            },
+            {
+              "id": "sage",
+              "label": "Corvin Ashby told me to find you.",
+              "to": "sage",
+              "tags": {
+                "background": [
+                  "sage"
+                ]
+              }
+            },
+            {
+              "id": "spared",
+              "label": "We made peace with Mother Skarrow.",
+              "to": "spared",
+              "requires": [
+                "ch1_skarrow_spared"
+              ]
+            },
+            {
+              "id": "slain",
+              "label": "Mother Skarrow is dead.",
+              "to": "slain",
+              "requires": [
+                "ch1_skarrow_slain"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hermit",
+          "lines": [
+            {
+              "id": "ch1_maud_hermit_1",
+              "speaker": "old_maud",
+              "mood": "happy",
+              "text": "Ah, there's my quiet neighbour. Never warmed your hands at the wrong fire, did you? That's why you can still think."
+            },
+            {
+              "id": "ch1_maud_hermit_2",
+              "speaker": "old_maud",
+              "mood": "idle",
+              "text": "I told you a name once. You wrote it down, I watched you. Kept it safe, have you?",
+              "direction": "sly"
+            }
+          ],
+          "next": "fell"
+        },
+        {
+          "id": "sage",
+          "lines": [
+            {
+              "id": "ch1_maud_sage_1",
+              "speaker": "old_maud",
+              "mood": "happy",
+              "text": "Corvin! Still counting his missing years, is he? Good boy. Reads by the wrong lamp, but a good boy."
+            }
+          ],
+          "next": "fell"
+        },
+        {
+          "id": "spared",
+          "lines": [
+            {
+              "id": "ch1_maud_spared_1",
+              "speaker": "old_maud",
+              "mood": "happy",
+              "text": "Did you now. She and I are the last two in this valley who remember what we were told. Mind you keep her breathing."
+            }
+          ],
+          "next": "fell"
+        },
+        {
+          "id": "slain",
+          "lines": [
+            {
+              "id": "ch1_maud_slain_1",
+              "speaker": "old_maud",
+              "mood": "sad",
+              "text": "Oh, dearie. She was the other one. The other one who still remembered. Now there's only me, and I'm tired."
+            }
+          ],
+          "next": "fell"
+        },
+        {
+          "id": "fell",
+          "lines": [
+            {
+              "id": "ch1_maud_fell_1",
+              "speaker": "old_maud",
+              "mood": "idle",
+              "text": "Seven years old, I was, and up past my bedtime. The sky went red over the Keep, and the stars came down."
+            },
+            {
+              "id": "ch1_maud_fell_2",
+              "speaker": "old_maud",
+              "mood": "surprised",
+              "text": "It didn't fall, dearie. It was thrown.",
+              "direction": "suddenly very clear, and quiet"
+            },
+            {
+              "id": "ch1_maud_fell_3",
+              "speaker": "old_maud",
+              "mood": "idle",
+              "text": "Falling things tumble. This came down straight, like a stone from a hand. Hissed in the river all night long."
+            },
+            {
+              "id": "ch1_maud_fell_4",
+              "speaker": "old_maud",
+              "mood": "idle",
+              "text": "And I'll tell you something else, since you've a sensible face. I saw who was standing on the hill when it came down."
+            },
+            {
+              "id": "ch1_maud_fell_5",
+              "speaker": "narrator",
+              "mood": "surprised",
+              "text": "Her finger, crooked as a root, points past you across the steaming water. Someone in a deep hood stands on the far bank."
+            },
+            {
+              "id": "ch1_maud_fell_6",
+              "speaker": "old_maud",
+              "mood": "angry",
+              "text": "That one. Same hood. Same face under it. A hundred years, and not one day older. I was seven, dearie, not blind."
+            },
+            {
+              "id": "ch1_maud_fell_7",
+              "speaker": "hooded_stranger",
+              "mood": "idle",
+              "text": "You remember well, Maud. Better than anyone. That was always going to be a problem for somebody.",
+              "direction": "carrying across the water; faintly amused, faintly sad"
+            },
+            {
+              "id": "ch1_maud_fell_8",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Steam rolls up off the river. When it clears, the far bank is empty."
+            }
+          ],
+          "options": [
+            {
+              "id": "who",
+              "label": "Who are they?",
+              "to": "who"
+            },
+            {
+              "id": "track",
+              "label": "Where did they go?",
+              "check": {
+                "skill": "perception",
+                "dc": 15,
+                "pass": "track",
+                "fail": "lost"
+              }
+            }
+          ]
+        },
+        {
+          "id": "who",
+          "lines": [
+            {
+              "id": "ch1_maud_who_1",
+              "speaker": "old_maud",
+              "mood": "idle",
+              "text": "If I knew that, dearie, I'd not have spent a century watching the water. Ask them. They'll answer you sideways."
+            }
+          ],
+          "next": "bye"
+        },
+        {
+          "id": "track",
+          "lines": [
+            {
+              "id": "ch1_maud_track_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "You catch a grey shape on the bridge road, walking toward the docks, unhurried. It leaves no footprints in the ash."
+            }
+          ],
+          "next": "bye"
+        },
+        {
+          "id": "lost",
+          "lines": [
+            {
+              "id": "ch1_maud_lost_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "There is nothing. No footprints in the ash, no sound but the river and Maud's charms clicking in the wind."
+            }
+          ],
+          "next": "bye"
+        },
+        {
+          "id": "bye",
+          "lines": [
+            {
+              "id": "ch1_maud_bye_1",
+              "speaker": "old_maud",
+              "mood": "idle",
+              "text": "I never once warmed my hands at that fire in the river. Think on why I'm the one who remembers."
+            },
+            {
+              "id": "ch1_maud_bye_2",
+              "speaker": "old_maud",
+              "mood": "happy",
+              "text": "Go on. Come back when you've better questions. I'll still be here. It's the one thing I'm good at."
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch1_granary",
+      "beat": "ch1_granary",
+      "title": "The Locked Granaries",
+      "cast": [
+        "narrator",
+        "halden_varrow",
+        "celandine_marrowby",
+        "dagna_holt",
+        "mother_aubrine"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch1_granary_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "The town council meets in the back room of the Last Coal. It is warmer in here than the council deserves."
+            },
+            {
+              "id": "ch1_granary_open_2",
+              "speaker": "halden_varrow",
+              "mood": "happy",
+              "text": "Friends, the road is open and the carts are crossing. Let's thank our heroes, and then let's talk about anything else.",
+              "direction": "a speech"
+            },
+            {
+              "id": "ch1_granary_open_3",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "The goblins, Halden. They want feeding. We gave our word."
+            },
+            {
+              "id": "ch1_granary_open_4",
+              "speaker": "celandine_marrowby",
+              "mood": "happy",
+              "text": "Our word? I don't recall giving mine. And they are, if we're being precise, my granaries.",
+              "direction": "smooth, amused, never raised"
+            },
+            {
+              "id": "ch1_granary_open_5",
+              "speaker": "celandine_marrowby",
+              "mood": "idle",
+              "text": "Of course the clan can have grain. Everything has a price. The question is who pays it, and the town is already so deep in my ledgers."
+            },
+            {
+              "id": "ch1_granary_open_6",
+              "speaker": "mother_aubrine",
+              "mood": "idle",
+              "text": "The chapel can spare its tithe barley. It isn't much. But no one sent to my door has ever been turned away.",
+              "direction": "measured, filling the room"
+            },
+            {
+              "id": "ch1_granary_open_7",
+              "speaker": "halden_varrow",
+              "mood": "sad",
+              "text": "It isn't enough, Mother. If we feed the hills, we're short by spring. I've done the sums."
+            }
+          ],
+          "options": [
+            {
+              "id": "sums",
+              "label": "You've done these sums before, haven't you?",
+              "check": {
+                "skill": "insight",
+                "dc": 14,
+                "pass": "sums_pass",
+                "fail": "sums_fail"
+              }
+            },
+            {
+              "id": "noble",
+              "label": "Lady Marrowby. Your family would want this handled quietly.",
+              "to": "noble",
+              "tags": {
+                "background": [
+                  "noble"
+                ]
+              }
+            },
+            {
+              "id": "acolyte",
+              "label": "Mother Aubrine, if the chapel gives first, the rest will be shamed into it.",
+              "to": "acolyte",
+              "tags": {
+                "background": [
+                  "acolyte"
+                ]
+              }
+            },
+            {
+              "id": "deal",
+              "label": "Then the town eats a little less. That was the deal.",
+              "to": "press"
+            }
+          ]
+        },
+        {
+          "id": "noble",
+          "lines": [
+            {
+              "id": "ch1_granary_noble_1",
+              "speaker": "celandine_marrowby",
+              "mood": "happy",
+              "text": "Clever. You have been listening to me. Yes, a quiet arrangement. Lent at interest, of course, and the mayor signs."
+            },
+            {
+              "id": "ch1_granary_noble_2",
+              "speaker": "celandine_marrowby",
+              "mood": "idle",
+              "text": "People ask me what I remember of the night the Keep fell. I was there, I'm told. It's all smoke to me.",
+              "direction": "light, as if it were a joke"
+            }
+          ],
+          "next": "press"
+        },
+        {
+          "id": "acolyte",
+          "lines": [
+            {
+              "id": "ch1_granary_acolyte_1",
+              "speaker": "mother_aubrine",
+              "mood": "happy",
+              "text": "You always did find the sharp end of a sermon. Very well. The chapel opens its stores first, and in public."
+            },
+            {
+              "id": "ch1_granary_acolyte_2",
+              "speaker": "mother_aubrine",
+              "mood": "idle",
+              "text": "Then we shall see who in this room is willing to be seen giving less than the church."
+            }
+          ],
+          "next": "press"
+        },
+        {
+          "id": "sums_pass",
+          "lines": [
+            {
+              "id": "ch1_granary_sums_pass_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Halden's hand lies flat on a ledger he has not opened. He knows the numbers without looking. He has known them a long time."
+            }
+          ],
+          "next": "confess"
+        },
+        {
+          "id": "sums_fail",
+          "lines": [
+            {
+              "id": "ch1_granary_sums_fail_1",
+              "speaker": "halden_varrow",
+              "mood": "idle",
+              "text": "A mayor does a great many sums, friend. Most of them come out badly. That's the job.",
+              "direction": "warm, a little too smooth"
+            }
+          ],
+          "next": "press"
+        },
+        {
+          "id": "press",
+          "lines": [
+            {
+              "id": "ch1_granary_press_1",
+              "speaker": "dagna_holt",
+              "mood": "angry",
+              "text": "Halden. You locked those gates in the spring, before the clan ever came down. I want to know why.",
+              "direction": "her patience goes all at once"
+            }
+          ],
+          "next": "confess"
+        },
+        {
+          "id": "confess",
+          "lines": [
+            {
+              "id": "ch1_granary_confess_1",
+              "speaker": "halden_varrow",
+              "mood": "hurt",
+              "text": "Because the ground is cooling. The ember under the ford is going out. I've known for six years.",
+              "direction": "cornered: quiet and fast"
+            },
+            {
+              "id": "ch1_granary_confess_2",
+              "speaker": "halden_varrow",
+              "mood": "sad",
+              "text": "Every winter the warm fields give a little less. I measured it. I told no one, because if I had, half the town would have left."
+            },
+            {
+              "id": "ch1_granary_confess_3",
+              "speaker": "halden_varrow",
+              "mood": "sad",
+              "text": "So I locked the grain, let the hills go hungry, and called it prudence. I'm sorry it took goblins to get it out of me."
+            },
+            {
+              "id": "ch1_granary_confess_4",
+              "speaker": "dagna_holt",
+              "mood": "hurt",
+              "text": "Six years. I've sat at your table for six years."
+            },
+            {
+              "id": "ch1_granary_confess_5",
+              "speaker": "mother_aubrine",
+              "mood": "sad",
+              "text": "We were all warming our hands at a fire you knew was dying. Gods forgive you, Halden. I'm not sure I can, yet."
+            },
+            {
+              "id": "ch1_granary_confess_6",
+              "speaker": "celandine_marrowby",
+              "mood": "idle",
+              "text": "Well. That does change the interest, doesn't it.",
+              "direction": "pleasantly, entirely unbothered"
+            }
+          ],
+          "sets": [
+            "ch1_halden_confessed"
+          ],
+          "options": [
+            {
+              "id": "open",
+              "label": "Open the granaries. All of them.",
+              "to": "doors"
+            },
+            {
+              "id": "lend",
+              "label": "Lady Marrowby, lend it without interest.",
+              "check": {
+                "skill": "persuasion",
+                "dc": 15,
+                "pass": "lend_pass",
+                "fail": "lend_fail"
+              }
+            }
+          ]
+        },
+        {
+          "id": "lend_pass",
+          "lines": [
+            {
+              "id": "ch1_granary_lend_pass_1",
+              "speaker": "celandine_marrowby",
+              "mood": "surprised",
+              "text": "Without interest. How very novel. Very well, for this winter. You'll owe me a favour instead, and I never forget a favour.",
+              "direction": "amused in spite of herself"
+            }
+          ],
+          "next": "doors"
+        },
+        {
+          "id": "lend_fail",
+          "lines": [
+            {
+              "id": "ch1_granary_lend_fail_1",
+              "speaker": "celandine_marrowby",
+              "mood": "happy",
+              "text": "No, I don't think so. But I'll lend it gladly. The mayor can sign, now we all know what his signature is worth."
+            }
+          ],
+          "next": "doors"
+        },
+        {
+          "id": "doors",
+          "lines": [
+            {
+              "id": "ch1_granary_doors_1",
+              "speaker": "halden_varrow",
+              "mood": "idle",
+              "text": "The granaries open tomorrow. One sack in four goes up the hill, every week. Dagna, will you see it carried?",
+              "direction": "worn out, but steadier"
+            },
+            {
+              "id": "ch1_granary_doors_2",
+              "speaker": "dagna_holt",
+              "mood": "idle",
+              "text": "Aye. Somebody has to count the sacks honestly."
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch1_song",
+      "beat": "ch1_skarrow_song",
+      "title": "The Clan's Fire",
+      "cast": [
+        "narrator",
+        "mother_skarrow"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch1_song_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Night in the hills. The first sacks of valley grain came up today, and for once there is a pot over the clan's fire."
+            },
+            {
+              "id": "ch1_song_open_2",
+              "speaker": "narrator",
+              "mood": "happy",
+              "text": "Children who were silent a week ago chase each other round the tents, shrieking. Mother Skarrow pretends not to notice."
+            },
+            {
+              "id": "ch1_song_open_3",
+              "speaker": "mother_skarrow",
+              "mood": "idle",
+              "text": "Sit. You are guests now, which is worse than enemies. Guests we have to feed.",
+              "direction": "dry"
+            },
+            {
+              "id": "ch1_song_open_4",
+              "speaker": "mother_skarrow",
+              "mood": "idle",
+              "text": "When the bellies are full, the clan sings. Tonight I sing the old one, because my bones say I should."
+            }
+          ],
+          "options": [
+            {
+              "id": "listen",
+              "label": "We'd be honoured.",
+              "to": "song"
+            },
+            {
+              "id": "ent",
+              "label": "I know a Warden song about seven who crossed the Greywall.",
+              "to": "ent",
+              "tags": {
+                "background": [
+                  "entertainer"
+                ]
+              }
+            },
+            {
+              "id": "outl",
+              "label": "I came over the Greywall too, as a child.",
+              "to": "outl",
+              "tags": {
+                "background": [
+                  "outlander"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "ent",
+          "lines": [
+            {
+              "id": "ch1_song_ent_1",
+              "speaker": "mother_skarrow",
+              "mood": "happy",
+              "text": "The valley song. Seven went over, seven came home, they brought something heavy. Yes. Pretty."
+            },
+            {
+              "id": "ch1_song_ent_2",
+              "speaker": "mother_skarrow",
+              "mood": "idle",
+              "text": "Your song was made by the ones who came home. Ours was made by the ones who watched them come."
+            }
+          ],
+          "next": "song"
+        },
+        {
+          "id": "outl",
+          "lines": [
+            {
+              "id": "ch1_song_outl_1",
+              "speaker": "mother_skarrow",
+              "mood": "surprised",
+              "text": "Hm. I thought you smelled wrong. Not bad. Only far. Like snow from the other side."
+            },
+            {
+              "id": "ch1_song_outl_2",
+              "speaker": "mother_skarrow",
+              "mood": "sad",
+              "text": "Then listen close. This song is about your side of the mountain, a little. Perhaps it is about you."
+            }
+          ],
+          "next": "song"
+        },
+        {
+          "id": "song",
+          "lines": [
+            {
+              "id": "ch1_song_song_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "She closes her eyes. Around the fire the clan goes still, and then, low, begins to hum."
+            },
+            {
+              "id": "ch1_song_song_2",
+              "speaker": "mother_skarrow",
+              "mood": "sad",
+              "text": "Seven went up where the wall meets the sky, seven with nothing, and hungry, and cold.",
+              "direction": "sung, cracked and low"
+            },
+            {
+              "id": "ch1_song_song_3",
+              "speaker": "mother_skarrow",
+              "mood": "sad",
+              "text": "Seven came down when the snow was still falling, seven came down with their hands full of gold.",
+              "direction": "sung"
+            },
+            {
+              "id": "ch1_song_song_4",
+              "speaker": "mother_skarrow",
+              "mood": "surprised",
+              "text": "But nobody runs when they carry a fortune. Seven came down, and the seven came running.",
+              "direction": "sung, faster, the humming rising under it"
+            },
+            {
+              "id": "ch1_song_song_5",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "She stops. The humming stops with her. The fire pops, very loud."
+            }
+          ],
+          "options": [
+            {
+              "id": "ask",
+              "label": "What were they running from?",
+              "to": "rest"
+            },
+            {
+              "id": "plead",
+              "label": "Please. Sing us the rest.",
+              "check": {
+                "skill": "persuasion",
+                "dc": 16,
+                "pass": "crumb",
+                "fail": "rest"
+              }
+            },
+            {
+              "id": "hill",
+              "label": "I'll ask her in the hill tongue, as family would.",
+              "to": "crumb",
+              "tags": {
+                "race": [
+                  "half_orc"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "rest",
+          "lines": [
+            {
+              "id": "ch1_song_rest_1",
+              "speaker": "mother_skarrow",
+              "mood": "idle",
+              "text": "That is the next verse. And the next verse is not for strangers."
+            },
+            {
+              "id": "ch1_song_rest_2",
+              "speaker": "mother_skarrow",
+              "mood": "happy",
+              "text": "You fed my children. That makes you something. Not family. Not yet. Come back when you are.",
+              "direction": "a dry cackle"
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "crumb",
+          "lines": [
+            {
+              "id": "ch1_song_crumb_1",
+              "speaker": "mother_skarrow",
+              "mood": "idle",
+              "text": "You ask well. So, a crumb. In the old song the gold is not gold. We sing gold because it rhymes, and the true word is sad.",
+              "direction": "softening"
+            },
+            {
+              "id": "ch1_song_crumb_2",
+              "speaker": "mother_skarrow",
+              "mood": "happy",
+              "text": "The rest when you are family. Not before. Now eat. You are too thin for valley people.",
+              "direction": "a dry cackle"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch1_docks",
+      "beat": "ch1_the_ember",
+      "title": "Under the Docks",
+      "cast": [
+        "narrator",
+        "pip_ashdown",
+        "rook"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch1_docks_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "By night the river docks belong to the Ash Market. Lanterns float on the water, and nobody uses their real name."
+            },
+            {
+              "id": "ch1_docks_open_2",
+              "speaker": "pip_ashdown",
+              "mood": "surprised",
+              "text": "Down here. Under the third pier, past the eel traps. I don't know how I know that. I've never been under here.",
+              "direction": "slow and old, then bright and frightened"
+            },
+            {
+              "id": "ch1_docks_open_3",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Beneath the pier the river runs shallow over black stone. Something glows in the riverbed, dull red, like a coal at the bottom of a grate."
+            },
+            {
+              "id": "ch1_docks_open_4",
+              "speaker": "narrator",
+              "mood": "sad",
+              "text": "The ford's ember. It is no bigger than a loaf, and cracked and chipped all over, as if something has been gnawing it."
+            }
+          ],
+          "sets": [
+            "ch1_ember_found"
+          ],
+          "options": [
+            {
+              "id": "sailor",
+              "label": "Those are chisel marks. Someone works this from a boat.",
+              "to": "sailor",
+              "tags": {
+                "background": [
+                  "sailor"
+                ]
+              }
+            },
+            {
+              "id": "artisan",
+              "label": "That's the same fire as Tobin's forge.",
+              "to": "artisan",
+              "tags": {
+                "background": [
+                  "guild_artisan"
+                ]
+              }
+            },
+            {
+              "id": "cut",
+              "label": "Someone's been cutting pieces off it.",
+              "to": "rook"
+            }
+          ]
+        },
+        {
+          "id": "sailor",
+          "lines": [
+            {
+              "id": "ch1_docks_sailor_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "You know these moorings. Ropes worn smooth, and a flat skiff tied where no fisherman would tie it. Somebody comes here often."
+            }
+          ],
+          "next": "rook"
+        },
+        {
+          "id": "artisan",
+          "lines": [
+            {
+              "id": "ch1_docks_artisan_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "You know this heat. It is Tobin's forge-fire, the same colour, the same smell, only vast, and failing."
+            }
+          ],
+          "next": "rook"
+        },
+        {
+          "id": "rook",
+          "lines": [
+            {
+              "id": "ch1_docks_rook_1",
+              "speaker": "rook",
+              "mood": "idle",
+              "text": "Careful. You're standing on my livelihood.",
+              "direction": "dry, unhurried, out of the dark"
+            },
+            {
+              "id": "ch1_docks_rook_2",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "A lean figure steps off a skiff onto the black stone, lantern in hand. A river coat, and an easy smile that costs extra."
+            },
+            {
+              "id": "ch1_docks_rook_3",
+              "speaker": "rook",
+              "mood": "idle",
+              "text": "Rook. I run the Ash Market. You've bought from me, or your grandmother did. Everyone has."
+            },
+            {
+              "id": "ch1_docks_rook_4",
+              "speaker": "rook",
+              "mood": "idle",
+              "text": "Yes, we chip her. A shard here, a shard there, and somebody's hearth stays warm. Shame to let it go to waste in the mud."
+            }
+          ],
+          "options": [
+            {
+              "id": "killing",
+              "label": "You're killing it.",
+              "to": "killing"
+            },
+            {
+              "id": "criminal",
+              "label": "Rook. About that job that went wrong.",
+              "to": "criminal",
+              "tags": {
+                "background": [
+                  "criminal"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "killing",
+          "lines": [
+            {
+              "id": "ch1_docks_killing_1",
+              "speaker": "rook",
+              "mood": "idle",
+              "text": "She was dying long before I came. I sell the pieces before they're worth nothing. That's not murder. That's timing."
+            },
+            {
+              "id": "ch1_docks_killing_2",
+              "speaker": "rook",
+              "mood": "surprised",
+              "text": "Here's something for free, since I'm feeling generous. I sell more shards than this ember has to give.",
+              "direction": "lower, more honest"
+            },
+            {
+              "id": "ch1_docks_killing_3",
+              "speaker": "rook",
+              "mood": "idle",
+              "text": "Somebody else supplies the difference. I don't know who. I'd like to, before they decide they don't need me."
+            }
+          ],
+          "next": "close"
+        },
+        {
+          "id": "criminal",
+          "lines": [
+            {
+              "id": "ch1_docks_criminal_1",
+              "speaker": "rook",
+              "mood": "happy",
+              "text": "There you are. Wondered when the river would bring you back. You still owe me, you know."
+            },
+            {
+              "id": "ch1_docks_criminal_2",
+              "speaker": "rook",
+              "mood": "idle",
+              "text": "Here's how you pay. I'm selling the Kindled more shards than exist in the Vale. Find who's supplying the rest, and we're square."
+            }
+          ],
+          "next": "close"
+        },
+        {
+          "id": "close",
+          "lines": [
+            {
+              "id": "ch1_docks_close_1",
+              "speaker": "pip_ashdown",
+              "mood": "sad",
+              "text": "It's so cold now. It was warm here, once. I remember it being warm.",
+              "direction": "small"
+            },
+            {
+              "id": "ch1_docks_close_2",
+              "speaker": "pip_ashdown",
+              "mood": "surprised",
+              "text": "No. I don't. Somebody does."
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch1_kindler",
+      "beat": "ch1_the_ember",
+      "title": "The Woman in Grey",
+      "cast": [
+        "narrator",
+        "maren_sorrel",
+        "mother_aubrine"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch1_kindler_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Next morning a crowd gathers by the chapel steps. A woman in a plain grey coat is speaking, and nobody is leaving."
+            },
+            {
+              "id": "ch1_kindler_open_2",
+              "speaker": "maren_sorrel",
+              "mood": "idle",
+              "text": "You've felt how cold it's getting. The fields. The forges. Your own hearths, a little lower every year.",
+              "direction": "warm, quiet, a preacher's rhythm"
+            },
+            {
+              "id": "ch1_kindler_open_3",
+              "speaker": "maren_sorrel",
+              "mood": "happy",
+              "text": "It doesn't have to be this way. The Hearthflame can burn again. It wants to. It only needs us to be brave enough to feed it."
+            },
+            {
+              "id": "ch1_kindler_open_4",
+              "speaker": "mother_aubrine",
+              "mood": "angry",
+              "text": "Maren Sorrel. I put you out of my chapel once. Don't make me do it to the whole square.",
+              "direction": "from the chapel door, unbending"
+            },
+            {
+              "id": "ch1_kindler_open_5",
+              "speaker": "maren_sorrel",
+              "mood": "idle",
+              "text": "Mother Aubrine. You fed half this town last winter, and you'll bury the other half this one. I'm offering more than prayers.",
+              "direction": "kind, unruffled"
+            },
+            {
+              "id": "ch1_kindler_open_6",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Maren's eyes find you in the crowd. She smiles as if you are old friends."
+            },
+            {
+              "id": "ch1_kindler_open_7",
+              "speaker": "maren_sorrel",
+              "mood": "idle",
+              "text": "You found it, didn't you? Under the docks. I can see it on you. Tell me, what did the ford cost you?"
+            }
+          ],
+          "options": [
+            {
+              "id": "slain",
+              "label": "An old goblin's life.",
+              "to": "slain",
+              "requires": [
+                "ch1_skarrow_slain"
+              ]
+            },
+            {
+              "id": "spared",
+              "label": "A share of the town's grain.",
+              "to": "spared",
+              "requires": [
+                "ch1_skarrow_spared"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "slain",
+          "lines": [
+            {
+              "id": "ch1_kindler_slain_1",
+              "speaker": "maren_sorrel",
+              "mood": "sad",
+              "text": "Then you understand already. Sometimes one life buys a winter for a thousand. That isn't cruelty. It's arithmetic."
+            }
+          ],
+          "next": "pitch"
+        },
+        {
+          "id": "spared",
+          "lines": [
+            {
+              "id": "ch1_kindler_spared_1",
+              "speaker": "maren_sorrel",
+              "mood": "happy",
+              "text": "Grain for peace. That's beautiful, truly. And when the grain runs out, and the ground goes cold? Kindness won't warm it."
+            }
+          ],
+          "next": "pitch"
+        },
+        {
+          "id": "pitch",
+          "lines": [
+            {
+              "id": "ch1_kindler_pitch_1",
+              "speaker": "maren_sorrel",
+              "mood": "idle",
+              "text": "Come and find me when you're ready to save the Vale, and not only this town. I'll be wherever the embers are."
+            },
+            {
+              "id": "ch1_kindler_pitch_2",
+              "speaker": "mother_aubrine",
+              "mood": "sad",
+              "text": "Be careful of her. The worst of it is that she believes every word.",
+              "direction": "quiet, once Maren has gone"
+            }
+          ],
+          "options": [
+            {
+              "id": "key",
+              "label": "Mother, I need to read the church's oldest scriptures.",
+              "to": "key",
+              "tags": {
+                "background": [
+                  "acolyte"
+                ]
+              }
+            },
+            {
+              "id": "careful",
+              "label": "We'll be careful.",
+              "to": "done"
+            }
+          ]
+        },
+        {
+          "id": "key",
+          "lines": [
+            {
+              "id": "ch1_kindler_key_1",
+              "speaker": "mother_aubrine",
+              "mood": "surprised",
+              "text": "The cellar texts? No one has read those in my lifetime. They're very old, and very dull, I'm told."
+            },
+            {
+              "id": "ch1_kindler_key_2",
+              "speaker": "mother_aubrine",
+              "mood": "idle",
+              "text": "But you came home when I wrote to you. Here. The archive key. Bring it back, and bring me what you find.",
+              "direction": "gentle, in private"
+            }
+          ],
+          "next": "done"
+        },
+        {
+          "id": "done",
+          "lines": [
+            {
+              "id": "ch1_kindler_done_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "The crowd breaks up slowly. More than a few of them keep looking back the way Maren went."
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch1_four_more",
+      "beat": "ch1_the_ember",
+      "title": "Four More",
+      "cast": [
+        "narrator",
+        "hooded_stranger"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch1_four_more_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "That night the docks are quiet. The hooded figure waits at the end of the third pier, as if you had arranged to meet."
+            },
+            {
+              "id": "ch1_four_more_open_2",
+              "speaker": "hooded_stranger",
+              "mood": "idle",
+              "text": "You found her. Good. She hasn't long, you know. Cracked and chipped, and cold at the heart. Like most things in this valley.",
+              "direction": "quiet, ageless"
+            },
+            {
+              "id": "ch1_four_more_open_3",
+              "speaker": "hooded_stranger",
+              "mood": "idle",
+              "text": "She isn't the only one. There are four more. You'll want to reach them before the woman in grey does."
+            }
+          ],
+          "options": [
+            {
+              "id": "who",
+              "label": "Who are you?",
+              "to": "who"
+            },
+            {
+              "id": "why",
+              "label": "Why tell us?",
+              "to": "why"
+            },
+            {
+              "id": "outl",
+              "label": "You know where I come from, don't you?",
+              "to": "outl",
+              "tags": {
+                "background": [
+                  "outlander"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "who",
+          "lines": [
+            {
+              "id": "ch1_four_more_who_1",
+              "speaker": "hooded_stranger",
+              "mood": "happy",
+              "text": "Someone who has watched a great many rivers. You're asking the right questions. You're just asking the wrong people.",
+              "direction": "faintly amused"
+            }
+          ],
+          "next": "where"
+        },
+        {
+          "id": "why",
+          "lines": [
+            {
+              "id": "ch1_four_more_why_1",
+              "speaker": "hooded_stranger",
+              "mood": "idle",
+              "text": "Because you came to a bridge and chose. Most people let the choosing happen to them. It matters more than you'd think."
+            }
+          ],
+          "next": "where"
+        },
+        {
+          "id": "outl",
+          "lines": [
+            {
+              "id": "ch1_four_more_outl_1",
+              "speaker": "hooded_stranger",
+              "mood": "sad",
+              "text": "I know the road you came by. It's longer than you remember. Don't ask me to walk it with you. Not yet.",
+              "direction": "a long pause first"
+            }
+          ],
+          "next": "where"
+        },
+        {
+          "id": "where",
+          "lines": [
+            {
+              "id": "ch1_four_more_where_1",
+              "speaker": "hooded_stranger",
+              "mood": "idle",
+              "text": "The nearest lies in Mirewood, where the marsh began to dream. The Court there will want something for it."
+            },
+            {
+              "id": "ch1_four_more_where_2",
+              "speaker": "hooded_stranger",
+              "mood": "sad",
+              "text": "Whatever they ask for, think before you say yes. Things given in Mirewood stay given."
+            },
+            {
+              "id": "ch1_four_more_where_4",
+              "speaker": "hooded_stranger",
+              "text": "She'll keep better near her sisters than in the mud. Leave her here, and the Ash Market will have her in chips by spring.",
+              "mood": "sad",
+              "direction": "quiet, faintly sad"
+            },
+            {
+              "id": "ch1_four_more_where_3",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "The lantern on the pier gutters. When it steadies you are alone, and the ford's ember sits warm in your pack."
+            }
+          ],
+          "end": true
+        }
+      ]
+    }
+  ]
+}

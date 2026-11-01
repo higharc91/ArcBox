@@ -29,6 +29,8 @@ public sealed class ApplyBlock : EffectBlock<ApplyEffect>
         }
 
         var conc = ctx.Ability?.Cost.Concentration == true;
+        if (ctx.ConcentrationLapsed(conc))
+            return;
         var rounds = Metamagic.ExtendRounds(ctx, def.Rounds, conc);
         var condition = new ActiveCondition(def.Condition, ctx.Source, rounds, def.UntilSave, dc, stat,
             Concentration: conc, AppliedThisTurn: ctx.W.State.Active == ctx.Source);

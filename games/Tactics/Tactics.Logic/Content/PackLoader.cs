@@ -37,7 +37,7 @@ internal static class PackLoader
     }
 
     /// <summary>The kinds of content file, by where they sit in a pack.</summary>
-    private enum FileKind { Conditions, Races, Backgrounds, Injuries, Xp, AiProfiles, Items, Weapons, Armor, Abilities, Class, Monsters, Map, Encounter }
+    private enum FileKind { Conditions, Races, Backgrounds, Injuries, Xp, AiProfiles, Items, Weapons, Armor, Abilities, Class, Monsters, Map, Encounter, Region }
 
     /// <summary>Everything read from the packs, in load order, before ids are merged.</summary>
     private sealed class Content
@@ -54,6 +54,7 @@ internal static class PackLoader
         public List<Loaded<ArmorDef>> Armors { get; } = [];
         public List<Loaded<MapContent>> Maps { get; } = [];
         public List<Loaded<EncounterDef>> Encounters { get; } = [];
+        public List<Loaded<RegionDef>> Regions { get; } = [];
         public List<Loaded<AiProfileDef>> AiProfiles { get; } = [];
         public List<Loaded<InjuryDef>> Injuries { get; } = [];
         public List<Loaded<XpTable>> Xp { get; } = [];
@@ -113,6 +114,7 @@ internal static class PackLoader
         var armors = Merge(content.Armors, "armor", v);
         var maps = Merge(content.Maps, "map", v);
         var encounters = Merge(content.Encounters, "encounter", v);
+        var regions = Merge(content.Regions, "region", v);
         var aiProfiles = Merge(content.AiProfiles, "AI profile", v);
         var injuries = Merge(content.Injuries, "injury", v);
         var xp = Merge(content.Xp, "XP table", v);
@@ -132,6 +134,7 @@ internal static class PackLoader
         });
         var battleMaps = Index(maps.Values, m => m.Id, m => m.Def.Map, StringComparer.Ordinal);
         v.CheckEncounters(encounters.Values, battleMaps, Index(monsters.Values, m => m.Id, m => m.Def, StringComparer.Ordinal));
+        v.CheckRegions(regions.Values, battleMaps);
 
         if (v.Errors.Count > 0)
             throw new ContentException([.. v.Errors]);
@@ -152,7 +155,8 @@ internal static class PackLoader
                 Index(armors.Values, a => a.Id, a => a.Def, StringComparer.Ordinal),
                 Index(encounters.Values, e => e.Id, e => e.Def, StringComparer.Ordinal),
                 Index(aiProfiles.Values, a => a.Id, a => a.Def, StringComparer.Ordinal),
-                xp.Values.SingleOrDefault()?.Def ?? XpTable.Default));
+                xp.Values.SingleOrDefault()?.Def ?? XpTable.Default,
+                Index(regions.Values, r => r.Id, r => WorldRegion.From(r.Def), StringComparer.Ordinal)));
     }
 
     // ---- Packs ------------------------------------------------------------------------------------------------------
@@ -254,6 +258,7 @@ internal static class PackLoader
         ["monsters", var name] when name.EndsWith(".json", StringComparison.Ordinal) => FileKind.Monsters,
         ["maps", var name] when name.EndsWith(".json", StringComparison.Ordinal) => FileKind.Map,
         ["encounters", var name] when name.EndsWith(".json", StringComparison.Ordinal) => FileKind.Encounter,
+        ["world", var name] when name.EndsWith(".json", StringComparison.Ordinal) => FileKind.Region,
         _ => null,
     };
 
@@ -325,6 +330,9 @@ internal static class PackLoader
                 break;
             case FileKind.Encounter:
                 Add(c.Encounters, v.Encounter(root, file, ""), d => d.Id, d => d.Replaces, file, "", v);
+                break;
+            case FileKind.Region:
+                Add(c.Regions, v.Region(root, file, ""), d => d.Id, _ => null, file, "", v);
                 break;
             case FileKind.Abilities:
                 if (root.ValueKind != JsonValueKind.Object)

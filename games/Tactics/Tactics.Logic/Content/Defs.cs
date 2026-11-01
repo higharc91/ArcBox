@@ -306,10 +306,14 @@ public sealed record ClassDef(string Id, string Name, string Role, int HitDie, I
     ImmutableSortedDictionary<int, ImmutableArray<FeatureRef>> Features, ImmutableArray<SubclassDef> Subclasses,
     ImmutableSortedDictionary<int, ImmutableArray<AbilityId>> DefaultPicks, ClassAiTags AiTags,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] Stat? CastingStat = null,
-    int Jump = 2,
+    int Jump = ClassDef.DefaultJump,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? PrimaryResource = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] Stat? UnarmoredDefense = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] Stat? UnarmoredDefense = null)
+{
+    /// <summary>The Jump of a class that doesn't set one: how many levels a character can climb in one step.</summary>
+    public const int DefaultJump = 2;
+}
 
 /// <summary>
 /// A race (spec §4.6): size, Move, darkvision in tiles, an optional Jump override, resistances, trait passives, the racial

@@ -52,7 +52,7 @@
       "target": { "kind": "enemy", "range": 4, "los": true, "area": { "shape": "single" } },
       "effects": [ { "save": { "stat": "dex", "dcStat": "dex" },
                      "onFail": [ { "damage": { "dice": "1d4", "type": "fire" } }, { "apply": "burning", "rounds": 3 } ] } ],
-      "presentation": { "anim": "characters.shoot", "fx": "fx.explosion.fire", "projectile": "projectiles.fireball" },
+      "presentation": { "anim": "characters.shoot", "fx": "fx.flames.fire", "projectile": "projectiles.fireball" },
       "ai": { "tags": ["damage", "single", "item"] } },
     { "id": "item.smoke_bomb", "name": "Smoke Bomb", "tier": 0, "cost": { "action": 1 },
       "target": { "kind": "tile", "range": 4, "los": true, "area": { "shape": "burst", "size": 1 } },

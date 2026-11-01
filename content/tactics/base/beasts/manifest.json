@@ -7,7 +7,7 @@
       44
     ]
   },
-  "framesPerDirection": 19,
+  "framesPerDirection": 35,
   "directions": {
     "front": {
       "row": 0
@@ -22,54 +22,70 @@
         0,
         1,
         2,
-        3
+        3,
+        4,
+        5
       ],
-      "fps": 4.0,
+      "fps": 6.0,
       "loop": true
     },
     "walk": {
       "frames": [
-        4,
-        5,
         6,
-        7
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
       ],
-      "fps": 8.0,
+      "fps": 10.0,
       "loop": true
     },
     "attack": {
       "frames": [
-        8,
-        9,
-        10,
-        11
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
       ],
-      "fps": 11.0,
+      "fps": 12.0,
       "loop": false
     },
     "special": {
       "frames": [
-        12,
-        13,
-        14,
-        15
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
       ],
-      "fps": 10.0,
+      "fps": 11.0,
       "loop": false
     },
     "hurt": {
       "frames": [
-        16,
-        17
+        28,
+        29,
+        30
       ],
-      "fps": 8.0,
+      "fps": 10.0,
       "loop": false
     },
     "down": {
       "frames": [
-        18
+        31,
+        32,
+        33,
+        34
       ],
-      "fps": 1.0,
+      "fps": 8.0,
       "loop": false
     }
   },
@@ -81,7 +97,8 @@
         "timber": "wolf_timber.png",
         "dire": "wolf_dire.png",
         "frost": "wolf_frost.png",
-        "wildshape": "wolf_wildshape.png"
+        "wildshape": "wolf_wildshape.png",
+        "alpha": "wolf_alpha.png"
       },
       "tags": [
         "beast",
@@ -106,7 +123,8 @@
         "brown": "bear_brown.png",
         "black": "bear_black.png",
         "polar": "bear_polar.png",
-        "wildshape": "bear_wildshape.png"
+        "wildshape": "bear_wildshape.png",
+        "undead": "bear_undead.png"
       },
       "tags": [
         "beast",
@@ -119,7 +137,8 @@
       "name": "Giant Spider",
       "variants": {
         "black": "spider_black.png",
-        "red": "spider_red.png"
+        "red": "spider_red.png",
+        "phase": "spider_phase.png"
       },
       "tags": [
         "beast"
@@ -131,7 +150,8 @@
       "variants": {
         "green": "slime_green.png",
         "blue": "slime_blue.png",
-        "magma": "slime_magma.png"
+        "magma": "slime_magma.png",
+        "crystal": "slime_crystal.png"
       },
       "tags": [
         "ooze"
@@ -141,7 +161,8 @@
     "bat": {
       "name": "Giant Bat",
       "variants": {
-        "dusk": "bat_dusk.png"
+        "dusk": "bat_dusk.png",
+        "vampire": "bat_vampire.png"
       },
       "tags": [
         "beast"
@@ -161,5 +182,9 @@
       ],
       "flying": false
     }
+  },
+  "notes": {
+    "sheet": "one sheet per beast and variant: row 0 front (facing down-right), row 1 back (drawn from behind, facing up-left); mirror either for the other two diagonals",
+    "anims": "idle 6 \u00b7 walk 8 (a four-beat gait) \u00b7 attack 7 (coil, lunge, held bite, recover) \u00b7 special 7 (crouch, leap, land) \u00b7 hurt 3 \u00b7 down 4 (the last frame is the body)"
   }
 }

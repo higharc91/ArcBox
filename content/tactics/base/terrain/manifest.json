@@ -7,7 +7,8 @@
     "side": "U = distance along the edge / (span * tile); V = depth below the top / tile (repeats)",
     "lip": "drawn over the top band of a side under a top that has one; transparent below its edge",
     "decal": "32x32, alpha; placed on a tile's top in tile-local UV",
-    "animated": "frames are laid out left to right; play at fps, looping"
+    "animated": "frames are laid out left to right; play at fps, looping",
+    "emissive": "textures with an `emissive` entry glow by themselves: render their glow pixels (the brightest shades of `colour`) unlit, and place point lights over them as `light` says"
   },
   "textures": {
     "grass": {
@@ -16,7 +17,8 @@
         "green": "top/grass_green.png",
         "lush": "top/grass_lush.png",
         "dry": "top/grass_dry.png",
-        "autumn": "top/grass_autumn.png"
+        "autumn": "top/grass_autumn.png",
+        "frost": "top/grass_frost.png"
       },
       "frames": 1,
       "fps": 0.0,
@@ -155,10 +157,11 @@
       "kind": "top",
       "variants": {
         "clear": "top/water_clear.png",
-        "swamp": "top/water_swamp.png"
+        "swamp": "top/water_swamp.png",
+        "bog": "top/water_bog.png"
       },
-      "frames": 8,
-      "fps": 6,
+      "frames": 16,
+      "fps": 8,
       "size": [
         128,
         128
@@ -169,8 +172,137 @@
       "variants": {
         "molten": "top/lava_molten.png"
       },
-      "frames": 8,
+      "frames": 16,
+      "fps": 8,
+      "size": [
+        128,
+        128
+      ],
+      "emissive": {
+        "slot": "glow",
+        "light": {
+          "every": 2,
+          "radius": 2.5,
+          "lift": 4,
+          "flicker": "pulse",
+          "power": 0.8
+        },
+        "colour": {
+          "molten": "#ffa94b"
+        }
+      }
+    },
+    "bog": {
+      "kind": "top",
+      "variants": {
+        "duckweed": "top/bog_duckweed.png",
+        "murk": "top/bog_murk.png"
+      },
+      "frames": 16,
       "fps": 6,
+      "size": [
+        128,
+        128
+      ]
+    },
+    "forest_floor": {
+      "kind": "top",
+      "variants": {
+        "leafy": "top/forest_floor_leafy.png",
+        "mossy": "top/forest_floor_mossy.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ]
+    },
+    "forest_needles": {
+      "kind": "top",
+      "variants": {
+        "pine": "top/forest_needles_pine.png",
+        "snowy": "top/forest_needles_snowy.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ]
+    },
+    "dunes": {
+      "kind": "top",
+      "variants": {
+        "gold": "top/dunes_gold.png",
+        "pale": "top/dunes_pale.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ]
+    },
+    "sandstone": {
+      "kind": "top",
+      "variants": {
+        "ochre": "top/sandstone_ochre.png",
+        "red": "top/sandstone_red.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ]
+    },
+    "ash": {
+      "kind": "top",
+      "variants": {
+        "grey": "top/ash_grey.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ],
+      "emissive": {
+        "slot": "glow",
+        "light": {
+          "every": 4,
+          "radius": 1.0,
+          "lift": 2,
+          "flicker": "pulse",
+          "power": 0.25
+        },
+        "colour": {
+          "grey": "#ffa94b"
+        }
+      }
+    },
+    "basalt": {
+      "kind": "top",
+      "variants": {
+        "dark": "top/basalt_dark.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        128
+      ]
+    },
+    "pavers": {
+      "kind": "top",
+      "variants": {
+        "grey": "top/pavers_grey.png",
+        "dark": "top/pavers_dark.png",
+        "warm": "top/pavers_warm.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
       "size": [
         128,
         128
@@ -231,7 +363,61 @@
     "sandstone_side": {
       "kind": "side",
       "variants": {
-        "desert": "side/sandstone_side_desert.png"
+        "desert": "side/sandstone_side_desert.png",
+        "ochre": "side/sandstone_side_ochre.png",
+        "red": "side/sandstone_side_red.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        32
+      ]
+    },
+    "lava_side": {
+      "kind": "side",
+      "variants": {
+        "molten": "side/lava_side_molten.png",
+        "cooling": "side/lava_side_cooling.png"
+      },
+      "frames": 16,
+      "fps": 8,
+      "size": [
+        128,
+        32
+      ],
+      "emissive": {
+        "slot": "glow",
+        "light": {
+          "every": 2,
+          "radius": 1.5,
+          "lift": 0,
+          "flicker": "pulse",
+          "power": 0.5
+        },
+        "colour": {
+          "molten": "#ffa94b",
+          "cooling": "#ab724f"
+        }
+      }
+    },
+    "ice_side": {
+      "kind": "side",
+      "variants": {
+        "glacier": "side/ice_side_glacier.png",
+        "clear": "side/ice_side_clear.png"
+      },
+      "frames": 1,
+      "fps": 0.0,
+      "size": [
+        128,
+        32
+      ]
+    },
+    "basalt_side": {
+      "kind": "side",
+      "variants": {
+        "dark": "side/basalt_side_dark.png"
       },
       "frames": 1,
       "fps": 0.0,

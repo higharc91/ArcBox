@@ -1,5 +1,5 @@
 { "id": "warlord_bridge", "name": "The Warlord's Bridge", "map": "warlord_bridge", "level": 5, "party": { "min": 4, "max": 6 },
-  "enemies": [ { "unit": "goblin_boss", "at": [13, 5], "id": "warlord", "tag": "warlord", "level": 5 },
+  "enemies": [ { "unit": "vorga", "at": [13, 5], "id": "warlord", "tag": "warlord", "level": 5 },
                { "unit": "hobgoblin", "zone": "east_bank", "count": 4, "level": 5 },
                { "unit": "goblin", "zone": "east_bank", "count": 2, "level": 5 } ],
   "xp": 900, "loot": ["goblin_camp"],

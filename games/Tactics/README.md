@@ -47,6 +47,9 @@ These turn SRD 5.2 into this game, and every content file starts from them. **Th
   - Full-caster Mana by level: 4, 6, 8, 10, 11, 12, 13, 14, 15, 16. Bard and druid get 3, 4, 6, 7, 8, 9, 10, 10, 11, 12 because they have a second resource.
   - Every other resource interpolates linearly between the spec §4.5 endpoints (level 1 → level 10), rounding down.
   - *After balancing:* the wizard keeps this Mana table. The bard, cleric, druid and sorcerer pools and the ranger's Focus differ, and warlock spells can cost more than 1 pact.
+- **Affordable on arrival:** every ability a class or subclass grants, offers in a `choose` list or puts in its `defaultPicks` can be paid for from the class's pools at the level it arrives, and pools never shrink as the level rises. Tune a cost and a pool together, or move the pick to the level its cost fits.
+- **The area ladder:** within one class's Mana spells, a higher-tier area spell covering at least as many tiles never deals less direct damage per target than a lower-tier one (equal is fine: the bigger footprint is the upgrade). Two area spells of the same tier whose footprints are within a third of each other differ by at most 1.5× per target. Single-target spells, damage dealt only by a zone and subclass kits aren't on this ladder. Balance tuning has to cut the whole ladder, not only the spells in `defaultPicks`.
+  - `ContentLadderTests` checks both rules at every level 1–10, so they hold beyond the levels and picks the simulator samples.
 - **Spell ranges:** touch → 1. SRD range ≤ 30 ft → 4. Any longer ranged spell → 6.
 - **Weapon ranges:** thrown → 4. Shortbow and light crossbow → 6. Longbow and heavy crossbow → 8.
 - **Areas:** radius r ft → `burst` ⌈r / 10⌉. Cone r ft → `cone` ⌈r / 10⌉ + 1. Line r ft → `line` ⌈r / 10⌉.

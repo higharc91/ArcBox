@@ -205,6 +205,64 @@ def mountain_icon() -> Canvas:
     return c
 
 
+def swamp_icon() -> Canvas:
+    """A bog: a pool of murky wash, a bare snag leaning over it and reeds at its edge."""
+    c = _icon()
+    c.ellipse(12, 19, 9, 3, "a", 2)
+    c.ellipse(11, 18.5, 6, 1.6, "a", 4)
+    c.line(15, 19, 15, 7, "ink", 2)
+    c.line(15, 11, 19, 7, "ink", 2)
+    c.line(15, 9, 12, 6, "ink", 2)
+    for x, h in ((5, 6), (7, 8), (8, 5), (20, 6)):
+        c.line(x, 20, x, 20 - h, "b", 3)
+        c.px(x, 20 - h, "c", 2)
+    c.outline()
+    return c
+
+
+def oasis_icon() -> Canvas:
+    """An oasis: a pool ringed with sand and a palm bending over it."""
+    c = _icon()
+    _ground(c, 20)
+    c.ellipse(12, 19, 8, 2.6, "c", 3)
+    c.ellipse(12, 18.6, 5.5, 1.6, "b", 4)
+    c.line(9, 19, 11, 6, "ink", 2)
+    c.line(10, 19, 12, 6, "ink", 3)
+    for dx, dy in ((-6, 3), (-4, -2), (4, -2), (6, 3), (0, -4)):
+        c.line(12, 6, 12 + dx, 6 + dy, "a", 4 if dx < 0 else 2)
+        c.line(12, 7, 12 + dx, 7 + dy, "a", 3)
+    c.outline()
+    return c
+
+
+def volcano_icon() -> Canvas:
+    """A volcano: a dark cone with lava down its flank and a plume of smoke."""
+    c = _icon()
+    _ground(c, 20)
+    c.polygon([(2, 20), (9, 7), (15, 7), (22, 20)], "c", 2)
+    c.polygon([(2, 20), (9, 7), (12, 7), (8, 20)], "c", 3)
+    c.line(13, 8, 14, 13, "a", 5)
+    c.line(14, 13, 16, 19, "a", 4)
+    c.rect(9, 6, 15, 7, "a", 4)
+    for k, (x, y, rr) in enumerate(((12, 4, 2.2), (14, 2, 1.8), (17, 1, 1.4))):
+        c.ellipse(x, y, rr, rr * 0.8, "paper", 3 if k else 4)
+    c.outline()
+    return c
+
+
+def glacier_icon() -> Canvas:
+    """A glacier: jagged blue-white ice peaks with a crevasse."""
+    c = _icon()
+    _ground(c, 20)
+    c.polygon([(2, 20), (8, 6), (13, 20)], "a", 4)
+    c.polygon([(8, 6), (13, 20), (10, 20)], "a", 2)
+    c.polygon([(9, 20), (15, 3), (22, 20)], "a", 4)
+    c.polygon([(15, 3), (22, 20), (17, 20)], "a", 2)
+    c.line(15, 8, 14, 14, "b", 2)
+    c.outline()
+    return c
+
+
 def party_token(f: int = 0) -> Canvas:
     """The party's pin: a pole with a pennant that waves, and a ground ring."""
     c = _icon()
@@ -245,6 +303,10 @@ ICONS = {
     "lair": (lair, {"a": "stone", "b": "red", "c": "stone"}),
     "forest": (forest_icon, {"a": "forest", "b": "gold", "c": "stone"}),
     "mountain": (mountain_icon, {"a": "stone", "b": "gold", "c": "stone"}),
+    "swamp": (swamp_icon, {"a": "swamp", "b": "forest", "c": "roof"}),
+    "oasis": (oasis_icon, {"a": "forest", "b": "sea", "c": "desert"}),
+    "volcano": (volcano_icon, {"a": "red", "b": "gold", "c": "stone"}),
+    "glacier": (glacier_icon, {"a": "snow", "b": "blue", "c": "stone"}),
 }
 
 
@@ -305,6 +367,19 @@ def sample_map(w: int = 384, h: int = 216, seed: int = 21) -> Image.Image:
         for x, y in sorted(pts, key=lambda p: p[1]):
             if mask[y, x] and 8 < x < w - 8 and 8 < y < h - 8:
                 out.alpha_composite(stamp, (x - stamp.width // 2, y - stamp.height + 2))
+    # a landmark in each biome region: the point deepest inside it (no randomness, so the sites don't move)
+    for name, mask in (("swamp", swamp), ("oasis", desert), ("glacier", snow)):
+        inner = mask.copy()
+        for _ in range(6):
+            shrunk = inner & np.roll(inner, 2, 0) & np.roll(inner, -2, 0) & np.roll(inner, 2, 1) & np.roll(inner, -2, 1)
+            if not shrunk[16:h - 16, 16:w - 16].any():
+                break
+            inner = shrunk
+        cand = np.argwhere(inner[16:h - 16, 16:w - 16])
+        if len(cand):
+            y, x = cand[len(cand) // 2] + 16
+            ic = render_icon(name)
+            out.alpha_composite(ic, (int(x) - 12, int(y) - 21))
     # sites and the roads between them
     land_pts = [(x, y) for x, y in tex.poisson(w, h, 48, r, tries=2000) if not sea[y, x] and 20 < x < w - 20
                 and 20 < y < h - 20]
@@ -370,7 +445,7 @@ def build() -> None:
         bg.alpha_composite(t.image, (4, 4))
         on_paper.append(Tile(bg, t.label, t.sub))
     from arcpix.preview import stack
-    save(stack("World map", [contact_sheet("Locations on parchment", on_paper, columns=7, zoom=4),
+    save(stack("World map", [contact_sheet("Locations on parchment", on_paper, columns=9, zoom=4),
                              contact_sheet("A sample campaign map", [Tile(mp, "", "")], columns=1, zoom=3)],
                "The campaign's map: where the party has been (dotted roads), where they are (the pin) and the fog "
                "over what they haven't explored yet."), PREVIEWS / "27-worldmap.png")

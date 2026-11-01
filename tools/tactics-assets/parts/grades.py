@@ -51,6 +51,15 @@ GRADES = [
     Grade("fey", balance=(0.95, 1.0, 1.05), shadows=(0.03, -0.01, 0.07), highlights=(0.04, 0.06, 0.02),
           saturation=1.25, contrast=0.95, lift=0.03),
     Grade("memory", balance=(1.05, 1.0, 0.85), saturation=0.25, contrast=0.9, lift=0.08),   # flashbacks, sepia
+    # biome moods, to sit over a map's own palette
+    Grade("swamp", balance=(0.92, 1.0, 0.86), shadows=(0.0, 0.03, 0.02), highlights=(0.03, 0.04, -0.03),
+          saturation=0.8, contrast=1.0, exposure=0.9, lift=0.05),                  # murky green haze
+    Grade("desert_heat", balance=(1.08, 1.0, 0.86), shadows=(0.04, 0.0, 0.03), highlights=(0.06, 0.04, -0.02),
+          saturation=1.05, contrast=0.92, exposure=1.05, lift=0.04),               # bleached, warm, hazy
+    Grade("frost", balance=(0.9, 0.97, 1.08), shadows=(-0.01, 0.02, 0.07), highlights=(0.02, 0.03, 0.05),
+          saturation=0.8, contrast=1.05, exposure=1.02, lift=0.02),                # cold blue air
+    Grade("forest_light", balance=(1.0, 1.04, 0.92), shadows=(-0.01, 0.03, 0.04), highlights=(0.07, 0.05, -0.02),
+          saturation=1.1, contrast=1.08),                                          # green shade, sunlit gaps
 ]
 
 
@@ -109,8 +118,10 @@ def build() -> None:
     from arcpix import iso
     from parts import dioramas as D, backgrounds as BG
     base = iso.finish(iso.render(D.ashen_ford(), backdrop=lambda w, h: BG.compose("day", "hills", w, h,
-                                                                                   horizon=int(h * 0.48))), zoom=1)
+                                                                                   horizon=int(h * 0.48)),
+                                 margin=40), zoom=1)
     tiles = [Tile(graded(base, g).convert("RGBA"), g.name) for g in GRADES]
-    save(contact_sheet("Colour grades", tiles, columns=2, zoom=1,
-                       subtitle="One map, ten moods: 16-cube LUTs the TV applies after the world and before the UI."),
+    save(contact_sheet("Colour grades", tiles, columns=3, zoom=1,
+                       subtitle="One map, fourteen moods: 16-cube LUTs the TV applies after the world and before the "
+                                "UI. The last four are biome moods (swamp, desert heat, frost, forest light)."),
          PREVIEWS / "35-grades.png")

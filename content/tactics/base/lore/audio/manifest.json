@@ -1,0 +1,3809 @@
+{
+  "about": "Pre-rendered lines: line id -> cast -> file in this folder. 'main' is a speaker's own voice; player voice sets have 'low' and 'high'. See tools/tactics-lore/voices.py.",
+  "model": "model_google-gemini-3-8-flash-tts",
+  "casts": {
+    "grim": {
+      "low": "Algenib",
+      "high": "Gacrux"
+    },
+    "earnest": {
+      "low": "Achird",
+      "high": "Leda"
+    },
+    "scholarly": {
+      "low": "Sadaltager",
+      "high": "Erinome"
+    },
+    "fierce": {
+      "low": "Fenrir",
+      "high": "Pulcherrima"
+    },
+    "wry": {
+      "low": "Zubenelgenubi",
+      "high": "Despina"
+    },
+    "steady": {
+      "low": "Alnilam",
+      "high": "Kore"
+    }
+  },
+  "characters": {
+    "bree_tallow": {
+      "preset": "Zephyr"
+    },
+    "celandine_marrowby": {
+      "preset": "Autonoe"
+    },
+    "corvin_ashby": {
+      "preset": "Sadachbia"
+    },
+    "dagna_holt": {
+      "preset": "Callirrhoe",
+      "pitch": -1
+    },
+    "halden_varrow": {
+      "preset": "Charon"
+    },
+    "halvard": {
+      "preset": "Schedar",
+      "pitch": -2,
+      "filter": "helm"
+    },
+    "hooded_stranger": {
+      "preset": "Sadaltager",
+      "pitch": -2,
+      "filter": "echo"
+    },
+    "ivo_rime": {
+      "preset": "Enceladus"
+    },
+    "lark": {
+      "preset": "Aoede"
+    },
+    "maren_sorrel": {
+      "preset": "Sulafat"
+    },
+    "mother_aubrine": {
+      "preset": "Vindemiatrix"
+    },
+    "mother_skarrow": {
+      "preset": "Laomedeia",
+      "pitch": -2
+    },
+    "narrator": {
+      "preset": "Algieba"
+    },
+    "old_maud": {
+      "preset": "Achernar",
+      "pitch": -1
+    },
+    "oswin_hale": {
+      "preset": "Rasalgethi",
+      "filter": "echo"
+    },
+    "pip_ashdown": {
+      "preset": "Leda",
+      "pitch": 3
+    },
+    "rook": {
+      "preset": "Umbriel"
+    },
+    "tobin_fell": {
+      "preset": "Orus",
+      "pitch": -2
+    },
+    "vorga": {
+      "preset": "Iapetus",
+      "pitch": 1
+    },
+    "ysolde": {
+      "preset": "Despina",
+      "pitch": 1,
+      "filter": "fey"
+    }
+  },
+  "lines": {
+    "bark_bree_tallow_ally_down_1": {
+      "main": "bark_bree_tallow_ally_down_1.ea905fbb.ogg"
+    },
+    "bark_bree_tallow_battle_start_1": {
+      "main": "bark_bree_tallow_battle_start_1.ba7e1843.ogg"
+    },
+    "bark_bree_tallow_camp_1": {
+      "main": "bark_bree_tallow_camp_1.8fea7eca.ogg"
+    },
+    "bark_bree_tallow_camp_2": {
+      "main": "bark_bree_tallow_camp_2.039be485.ogg"
+    },
+    "bark_bree_tallow_healed_1": {
+      "main": "bark_bree_tallow_healed_1.063eb625.ogg"
+    },
+    "bark_bree_tallow_hit_1": {
+      "main": "bark_bree_tallow_hit_1.dcd999bb.ogg"
+    },
+    "bark_bree_tallow_low_hp_1": {
+      "main": "bark_bree_tallow_low_hp_1.f4cc6b5b.ogg"
+    },
+    "bark_bree_tallow_town_1": {
+      "main": "bark_bree_tallow_town_1.3aae5448.ogg"
+    },
+    "bark_bree_tallow_town_2": {
+      "main": "bark_bree_tallow_town_2.3dc9ca60.ogg"
+    },
+    "bark_bree_tallow_town_3": {
+      "main": "bark_bree_tallow_town_3.17d8b294.ogg"
+    },
+    "bark_bree_tallow_town_4": {
+      "main": "bark_bree_tallow_town_4.474c6354.ogg"
+    },
+    "bark_bree_tallow_town_5": {
+      "main": "bark_bree_tallow_town_5.9eb68d0f.ogg"
+    },
+    "bark_bree_tallow_victory_1": {
+      "main": "bark_bree_tallow_victory_1.88f9c1cb.ogg"
+    },
+    "bark_celandine_marrowby_town_1": {
+      "main": "bark_celandine_marrowby_town_1.0c429f1c.ogg"
+    },
+    "bark_celandine_marrowby_town_2": {
+      "main": "bark_celandine_marrowby_town_2.4432cd28.ogg"
+    },
+    "bark_celandine_marrowby_town_3": {
+      "main": "bark_celandine_marrowby_town_3.f5c4af6d.ogg"
+    },
+    "bark_celandine_marrowby_town_4": {
+      "main": "bark_celandine_marrowby_town_4.ec3763a7.ogg"
+    },
+    "bark_celandine_marrowby_town_5": {
+      "main": "bark_celandine_marrowby_town_5.3bb096a6.ogg"
+    },
+    "bark_celandine_marrowby_town_6": {
+      "main": "bark_celandine_marrowby_town_6.bc693515.ogg"
+    },
+    "bark_celandine_marrowby_town_7": {
+      "main": "bark_celandine_marrowby_town_7.894233d4.ogg"
+    },
+    "bark_corvin_ashby_town_1": {
+      "main": "bark_corvin_ashby_town_1.43f67d33.ogg"
+    },
+    "bark_corvin_ashby_town_2": {
+      "main": "bark_corvin_ashby_town_2.754c8395.ogg"
+    },
+    "bark_corvin_ashby_town_3": {
+      "main": "bark_corvin_ashby_town_3.280f8097.ogg"
+    },
+    "bark_corvin_ashby_town_4": {
+      "main": "bark_corvin_ashby_town_4.a9902e5e.ogg"
+    },
+    "bark_corvin_ashby_town_5": {
+      "main": "bark_corvin_ashby_town_5.ec59514c.ogg"
+    },
+    "bark_corvin_ashby_town_6": {
+      "main": "bark_corvin_ashby_town_6.03af2b05.ogg"
+    },
+    "bark_corvin_ashby_town_7": {
+      "main": "bark_corvin_ashby_town_7.b1a310f1.ogg"
+    },
+    "bark_corvin_ashby_town_8": {
+      "main": "bark_corvin_ashby_town_8.b3f5e0db.ogg"
+    },
+    "bark_dagna_holt_ally_down_1": {
+      "main": "bark_dagna_holt_ally_down_1.ff93315f.ogg"
+    },
+    "bark_dagna_holt_ally_down_2": {
+      "main": "bark_dagna_holt_ally_down_2.41f6474b.ogg"
+    },
+    "bark_dagna_holt_battle_start_1": {
+      "main": "bark_dagna_holt_battle_start_1.26ec0bc2.ogg"
+    },
+    "bark_dagna_holt_battle_start_2": {
+      "main": "bark_dagna_holt_battle_start_2.147b8fa2.ogg"
+    },
+    "bark_dagna_holt_battle_start_3": {
+      "main": "bark_dagna_holt_battle_start_3.43d579f7.ogg"
+    },
+    "bark_dagna_holt_camp_1": {
+      "main": "bark_dagna_holt_camp_1.6214915d.ogg"
+    },
+    "bark_dagna_holt_camp_2": {
+      "main": "bark_dagna_holt_camp_2.7ac0db21.ogg"
+    },
+    "bark_dagna_holt_crit_1": {
+      "main": "bark_dagna_holt_crit_1.4c576aa2.ogg"
+    },
+    "bark_dagna_holt_defeat_1": {
+      "main": "bark_dagna_holt_defeat_1.66e4f293.ogg"
+    },
+    "bark_dagna_holt_healed_1": {
+      "main": "bark_dagna_holt_healed_1.ff09c641.ogg"
+    },
+    "bark_dagna_holt_hit_1": {
+      "main": "bark_dagna_holt_hit_1.e4cfc937.ogg"
+    },
+    "bark_dagna_holt_hit_2": {
+      "main": "bark_dagna_holt_hit_2.818d1d12.ogg"
+    },
+    "bark_dagna_holt_kill_1": {
+      "main": "bark_dagna_holt_kill_1.ec90a23c.ogg"
+    },
+    "bark_dagna_holt_kill_2": {
+      "main": "bark_dagna_holt_kill_2.62cbb1d2.ogg"
+    },
+    "bark_dagna_holt_low_hp_1": {
+      "main": "bark_dagna_holt_low_hp_1.b78d5029.ogg"
+    },
+    "bark_dagna_holt_miss_1": {
+      "main": "bark_dagna_holt_miss_1.4594bb4e.ogg"
+    },
+    "bark_dagna_holt_revived_1": {
+      "main": "bark_dagna_holt_revived_1.51964b23.ogg"
+    },
+    "bark_dagna_holt_turn_start_1": {
+      "main": "bark_dagna_holt_turn_start_1.15fea1ae.ogg"
+    },
+    "bark_dagna_holt_turn_start_2": {
+      "main": "bark_dagna_holt_turn_start_2.d24e2314.ogg"
+    },
+    "bark_dagna_holt_victory_1": {
+      "main": "bark_dagna_holt_victory_1.58175f8b.ogg"
+    },
+    "bark_dagna_holt_victory_2": {
+      "main": "bark_dagna_holt_victory_2.a110d71f.ogg"
+    },
+    "bark_halden_varrow_town_1": {
+      "main": "bark_halden_varrow_town_1.b8325026.ogg"
+    },
+    "bark_halden_varrow_town_2": {
+      "main": "bark_halden_varrow_town_2.87c718ba.ogg"
+    },
+    "bark_halden_varrow_town_3": {
+      "main": "bark_halden_varrow_town_3.8a1e40ee.ogg"
+    },
+    "bark_halden_varrow_town_4": {
+      "main": "bark_halden_varrow_town_4.151bd3d0.ogg"
+    },
+    "bark_halden_varrow_town_5": {
+      "main": "bark_halden_varrow_town_5.98084a54.ogg"
+    },
+    "bark_halden_varrow_town_6": {
+      "main": "bark_halden_varrow_town_6.4c3de132.ogg"
+    },
+    "bark_halden_varrow_town_7": {
+      "main": "bark_halden_varrow_town_7.31cb3fbd.ogg"
+    },
+    "bark_halvard_battle_start_1": {
+      "main": "bark_halvard_battle_start_1.dc7397a4.ogg"
+    },
+    "bark_halvard_battle_start_2": {
+      "main": "bark_halvard_battle_start_2.e8000817.ogg"
+    },
+    "bark_halvard_battle_start_3": {
+      "main": "bark_halvard_battle_start_3.ad4ccaf3.ogg"
+    },
+    "bark_halvard_crit_1": {
+      "main": "bark_halvard_crit_1.576f15e4.ogg"
+    },
+    "bark_halvard_defeat_1": {
+      "main": "bark_halvard_defeat_1.cc630589.ogg"
+    },
+    "bark_halvard_defeat_2": {
+      "main": "bark_halvard_defeat_2.d250943c.ogg"
+    },
+    "bark_halvard_hit_1": {
+      "main": "bark_halvard_hit_1.7b6e3edc.ogg"
+    },
+    "bark_halvard_hit_2": {
+      "main": "bark_halvard_hit_2.0df71d36.ogg"
+    },
+    "bark_halvard_kill_1": {
+      "main": "bark_halvard_kill_1.14d21826.ogg"
+    },
+    "bark_halvard_low_hp_1": {
+      "main": "bark_halvard_low_hp_1.6cafb8b8.ogg"
+    },
+    "bark_halvard_low_hp_2": {
+      "main": "bark_halvard_low_hp_2.44e8458c.ogg"
+    },
+    "bark_halvard_miss_1": {
+      "main": "bark_halvard_miss_1.50b31f8a.ogg"
+    },
+    "bark_halvard_turn_start_1": {
+      "main": "bark_halvard_turn_start_1.47684058.ogg"
+    },
+    "bark_halvard_victory_1": {
+      "main": "bark_halvard_victory_1.ab9db06a.ogg"
+    },
+    "bark_hooded_stranger_camp_1": {
+      "main": "bark_hooded_stranger_camp_1.3547d4cb.ogg"
+    },
+    "bark_hooded_stranger_camp_2": {
+      "main": "bark_hooded_stranger_camp_2.1c9a68ad.ogg"
+    },
+    "bark_hooded_stranger_camp_3": {
+      "main": "bark_hooded_stranger_camp_3.1f726ade.ogg"
+    },
+    "bark_hooded_stranger_camp_4": {
+      "main": "bark_hooded_stranger_camp_4.d26a83a2.ogg"
+    },
+    "bark_hooded_stranger_town_1": {
+      "main": "bark_hooded_stranger_town_1.3ac10faa.ogg"
+    },
+    "bark_hooded_stranger_town_2": {
+      "main": "bark_hooded_stranger_town_2.93452632.ogg"
+    },
+    "bark_hooded_stranger_town_3": {
+      "main": "bark_hooded_stranger_town_3.8c354560.ogg"
+    },
+    "bark_hooded_stranger_town_4": {
+      "main": "bark_hooded_stranger_town_4.e238e97f.ogg"
+    },
+    "bark_ivo_rime_ally_down_1": {
+      "main": "bark_ivo_rime_ally_down_1.4b1b763a.ogg"
+    },
+    "bark_ivo_rime_battle_start_1": {
+      "main": "bark_ivo_rime_battle_start_1.ce0f23bb.ogg"
+    },
+    "bark_ivo_rime_battle_start_2": {
+      "main": "bark_ivo_rime_battle_start_2.b980bd18.ogg"
+    },
+    "bark_ivo_rime_battle_start_3": {
+      "main": "bark_ivo_rime_battle_start_3.2bf0a72b.ogg"
+    },
+    "bark_ivo_rime_crit_1": {
+      "main": "bark_ivo_rime_crit_1.22d1552b.ogg"
+    },
+    "bark_ivo_rime_defeat_1": {
+      "main": "bark_ivo_rime_defeat_1.1d8496c9.ogg"
+    },
+    "bark_ivo_rime_defeat_2": {
+      "main": "bark_ivo_rime_defeat_2.5a1babd4.ogg"
+    },
+    "bark_ivo_rime_hit_1": {
+      "main": "bark_ivo_rime_hit_1.ec069527.ogg"
+    },
+    "bark_ivo_rime_hit_2": {
+      "main": "bark_ivo_rime_hit_2.9dfcaa27.ogg"
+    },
+    "bark_ivo_rime_kill_1": {
+      "main": "bark_ivo_rime_kill_1.fe7848c4.ogg"
+    },
+    "bark_ivo_rime_low_hp_1": {
+      "main": "bark_ivo_rime_low_hp_1.03b04768.ogg"
+    },
+    "bark_ivo_rime_low_hp_2": {
+      "main": "bark_ivo_rime_low_hp_2.f4e9beaa.ogg"
+    },
+    "bark_ivo_rime_miss_1": {
+      "main": "bark_ivo_rime_miss_1.741f1ead.ogg"
+    },
+    "bark_ivo_rime_victory_1": {
+      "main": "bark_ivo_rime_victory_1.c66f2742.ogg"
+    },
+    "bark_lark_ally_down_1": {
+      "main": "bark_lark_ally_down_1.d3cbf4ba.ogg"
+    },
+    "bark_lark_battle_start_1": {
+      "main": "bark_lark_battle_start_1.faa997b5.ogg"
+    },
+    "bark_lark_battle_start_2": {
+      "main": "bark_lark_battle_start_2.e9da2cd5.ogg"
+    },
+    "bark_lark_battle_start_3": {
+      "main": "bark_lark_battle_start_3.d01b2329.ogg"
+    },
+    "bark_lark_camp_1": {
+      "main": "bark_lark_camp_1.8c84394e.ogg"
+    },
+    "bark_lark_camp_2": {
+      "main": "bark_lark_camp_2.0dd7c203.ogg"
+    },
+    "bark_lark_camp_3": {
+      "main": "bark_lark_camp_3.47f3b804.ogg"
+    },
+    "bark_lark_camp_4": {
+      "main": "bark_lark_camp_4.75d76d50.ogg"
+    },
+    "bark_lark_camp_5": {
+      "main": "bark_lark_camp_5.3c8f2e26.ogg"
+    },
+    "bark_lark_crit_1": {
+      "main": "bark_lark_crit_1.dadb5dbc.ogg"
+    },
+    "bark_lark_healed_1": {
+      "main": "bark_lark_healed_1.65dfe94c.ogg"
+    },
+    "bark_lark_hit_1": {
+      "main": "bark_lark_hit_1.5de804e9.ogg"
+    },
+    "bark_lark_kill_1": {
+      "main": "bark_lark_kill_1.64d7b9e2.ogg"
+    },
+    "bark_lark_level_up_1": {
+      "main": "bark_lark_level_up_1.cc70c2db.ogg"
+    },
+    "bark_lark_low_hp_1": {
+      "main": "bark_lark_low_hp_1.212d0648.ogg"
+    },
+    "bark_lark_miss_1": {
+      "main": "bark_lark_miss_1.27e4a469.ogg"
+    },
+    "bark_lark_victory_1": {
+      "main": "bark_lark_victory_1.14825b09.ogg"
+    },
+    "bark_maren_sorrel_ally_down_1": {
+      "main": "bark_maren_sorrel_ally_down_1.3f8fd1c4.ogg"
+    },
+    "bark_maren_sorrel_battle_start_1": {
+      "main": "bark_maren_sorrel_battle_start_1.372b86b7.ogg"
+    },
+    "bark_maren_sorrel_battle_start_2": {
+      "main": "bark_maren_sorrel_battle_start_2.d0c681b3.ogg"
+    },
+    "bark_maren_sorrel_battle_start_3": {
+      "main": "bark_maren_sorrel_battle_start_3.4067d94d.ogg"
+    },
+    "bark_maren_sorrel_crit_1": {
+      "main": "bark_maren_sorrel_crit_1.7e7b99e5.ogg"
+    },
+    "bark_maren_sorrel_defeat_1": {
+      "main": "bark_maren_sorrel_defeat_1.698c1506.ogg"
+    },
+    "bark_maren_sorrel_defeat_2": {
+      "main": "bark_maren_sorrel_defeat_2.2bb34c98.ogg"
+    },
+    "bark_maren_sorrel_hit_1": {
+      "main": "bark_maren_sorrel_hit_1.0f27d309.ogg"
+    },
+    "bark_maren_sorrel_kill_1": {
+      "main": "bark_maren_sorrel_kill_1.7a759f4e.ogg"
+    },
+    "bark_maren_sorrel_low_hp_1": {
+      "main": "bark_maren_sorrel_low_hp_1.4c4ea837.ogg"
+    },
+    "bark_maren_sorrel_low_hp_2": {
+      "main": "bark_maren_sorrel_low_hp_2.a45d6522.ogg"
+    },
+    "bark_maren_sorrel_miss_1": {
+      "main": "bark_maren_sorrel_miss_1.39c82797.ogg"
+    },
+    "bark_maren_sorrel_victory_1": {
+      "main": "bark_maren_sorrel_victory_1.6222a731.ogg"
+    },
+    "bark_maren_sorrel_victory_2": {
+      "main": "bark_maren_sorrel_victory_2.5964ee0c.ogg"
+    },
+    "bark_mother_aubrine_town_1": {
+      "main": "bark_mother_aubrine_town_1.dbea8e13.ogg"
+    },
+    "bark_mother_aubrine_town_2": {
+      "main": "bark_mother_aubrine_town_2.59fbf7f1.ogg"
+    },
+    "bark_mother_aubrine_town_3": {
+      "main": "bark_mother_aubrine_town_3.2f9fc438.ogg"
+    },
+    "bark_mother_aubrine_town_4": {
+      "main": "bark_mother_aubrine_town_4.a0332d18.ogg"
+    },
+    "bark_mother_aubrine_town_5": {
+      "main": "bark_mother_aubrine_town_5.85f85101.ogg"
+    },
+    "bark_mother_aubrine_town_6": {
+      "main": "bark_mother_aubrine_town_6.fb0f8764.ogg"
+    },
+    "bark_mother_aubrine_town_7": {
+      "main": "bark_mother_aubrine_town_7.54ef4883.ogg"
+    },
+    "bark_mother_skarrow_ally_down_1": {
+      "main": "bark_mother_skarrow_ally_down_1.99b9e0b6.ogg"
+    },
+    "bark_mother_skarrow_battle_start_1": {
+      "main": "bark_mother_skarrow_battle_start_1.643e6027.ogg"
+    },
+    "bark_mother_skarrow_battle_start_2": {
+      "main": "bark_mother_skarrow_battle_start_2.f8e24da9.ogg"
+    },
+    "bark_mother_skarrow_battle_start_3": {
+      "main": "bark_mother_skarrow_battle_start_3.de019a05.ogg"
+    },
+    "bark_mother_skarrow_crit_1": {
+      "main": "bark_mother_skarrow_crit_1.b5964de6.ogg"
+    },
+    "bark_mother_skarrow_defeat_1": {
+      "main": "bark_mother_skarrow_defeat_1.f2d02731.ogg"
+    },
+    "bark_mother_skarrow_hit_1": {
+      "main": "bark_mother_skarrow_hit_1.a8a57c70.ogg"
+    },
+    "bark_mother_skarrow_kill_1": {
+      "main": "bark_mother_skarrow_kill_1.281a834e.ogg"
+    },
+    "bark_mother_skarrow_low_hp_1": {
+      "main": "bark_mother_skarrow_low_hp_1.9511e53e.ogg"
+    },
+    "bark_mother_skarrow_low_hp_2": {
+      "main": "bark_mother_skarrow_low_hp_2.18a7e6b8.ogg"
+    },
+    "bark_mother_skarrow_miss_1": {
+      "main": "bark_mother_skarrow_miss_1.cb584b82.ogg"
+    },
+    "bark_mother_skarrow_victory_1": {
+      "main": "bark_mother_skarrow_victory_1.75c16ffb.ogg"
+    },
+    "bark_narrator_ally_down_1": {
+      "main": "bark_narrator_ally_down_1.8eb28cf7.ogg"
+    },
+    "bark_narrator_ally_down_2": {
+      "main": "bark_narrator_ally_down_2.633ef67d.ogg"
+    },
+    "bark_narrator_ally_down_3": {
+      "main": "bark_narrator_ally_down_3.6ef4dd41.ogg"
+    },
+    "bark_narrator_battle_start_1": {
+      "main": "bark_narrator_battle_start_1.1e183e7d.ogg"
+    },
+    "bark_narrator_battle_start_2": {
+      "main": "bark_narrator_battle_start_2.680de547.ogg"
+    },
+    "bark_narrator_battle_start_3": {
+      "main": "bark_narrator_battle_start_3.57dda68c.ogg"
+    },
+    "bark_narrator_battle_start_4": {
+      "main": "bark_narrator_battle_start_4.c8fd8b44.ogg"
+    },
+    "bark_narrator_battle_start_5": {
+      "main": "bark_narrator_battle_start_5.3b683ffe.ogg"
+    },
+    "bark_narrator_camp_1": {
+      "main": "bark_narrator_camp_1.81ed1b02.ogg"
+    },
+    "bark_narrator_camp_2": {
+      "main": "bark_narrator_camp_2.6904955c.ogg"
+    },
+    "bark_narrator_camp_3": {
+      "main": "bark_narrator_camp_3.e86b8bfe.ogg"
+    },
+    "bark_narrator_camp_4": {
+      "main": "bark_narrator_camp_4.5383c618.ogg"
+    },
+    "bark_narrator_camp_5": {
+      "main": "bark_narrator_camp_5.5d5018ed.ogg"
+    },
+    "bark_narrator_crit_1": {
+      "main": "bark_narrator_crit_1.47013fcc.ogg"
+    },
+    "bark_narrator_crit_2": {
+      "main": "bark_narrator_crit_2.fe79cb75.ogg"
+    },
+    "bark_narrator_crit_3": {
+      "main": "bark_narrator_crit_3.36180fb6.ogg"
+    },
+    "bark_narrator_crit_4": {
+      "main": "bark_narrator_crit_4.8efed4b4.ogg"
+    },
+    "bark_narrator_defeat_1": {
+      "main": "bark_narrator_defeat_1.2469078f.ogg"
+    },
+    "bark_narrator_defeat_2": {
+      "main": "bark_narrator_defeat_2.dd25c162.ogg"
+    },
+    "bark_narrator_defeat_3": {
+      "main": "bark_narrator_defeat_3.588660db.ogg"
+    },
+    "bark_narrator_kill_1": {
+      "main": "bark_narrator_kill_1.8ceef282.ogg"
+    },
+    "bark_narrator_kill_2": {
+      "main": "bark_narrator_kill_2.a33a3682.ogg"
+    },
+    "bark_narrator_kill_3": {
+      "main": "bark_narrator_kill_3.cb6e3fc0.ogg"
+    },
+    "bark_narrator_kill_4": {
+      "main": "bark_narrator_kill_4.8ada19c7.ogg"
+    },
+    "bark_narrator_level_up_1": {
+      "main": "bark_narrator_level_up_1.a9b58f3d.ogg"
+    },
+    "bark_narrator_level_up_2": {
+      "main": "bark_narrator_level_up_2.eec116df.ogg"
+    },
+    "bark_narrator_level_up_3": {
+      "main": "bark_narrator_level_up_3.54db2bdc.ogg"
+    },
+    "bark_narrator_turn_start_1": {
+      "main": "bark_narrator_turn_start_1.f7f73dc0.ogg"
+    },
+    "bark_narrator_turn_start_2": {
+      "main": "bark_narrator_turn_start_2.baaf26bc.ogg"
+    },
+    "bark_narrator_turn_start_3": {
+      "main": "bark_narrator_turn_start_3.b52b55ab.ogg"
+    },
+    "bark_narrator_victory_1": {
+      "main": "bark_narrator_victory_1.2c6d72ea.ogg"
+    },
+    "bark_narrator_victory_2": {
+      "main": "bark_narrator_victory_2.0018f7c6.ogg"
+    },
+    "bark_narrator_victory_3": {
+      "main": "bark_narrator_victory_3.13a16560.ogg"
+    },
+    "bark_narrator_victory_4": {
+      "main": "bark_narrator_victory_4.06e871a9.ogg"
+    },
+    "bark_old_maud_town_1": {
+      "main": "bark_old_maud_town_1.ab5a6e1e.ogg"
+    },
+    "bark_old_maud_town_2": {
+      "main": "bark_old_maud_town_2.3350ad53.ogg"
+    },
+    "bark_old_maud_town_3": {
+      "main": "bark_old_maud_town_3.caaa9ec4.ogg"
+    },
+    "bark_old_maud_town_4": {
+      "main": "bark_old_maud_town_4.75eff5ec.ogg"
+    },
+    "bark_old_maud_town_5": {
+      "main": "bark_old_maud_town_5.f2770b4d.ogg"
+    },
+    "bark_old_maud_town_6": {
+      "main": "bark_old_maud_town_6.928c5d0e.ogg"
+    },
+    "bark_old_maud_town_7": {
+      "main": "bark_old_maud_town_7.ee04a66b.ogg"
+    },
+    "bark_oswin_hale_battle_start_1": {
+      "main": "bark_oswin_hale_battle_start_1.2a7f35c1.ogg"
+    },
+    "bark_oswin_hale_battle_start_2": {
+      "main": "bark_oswin_hale_battle_start_2.28d20d79.ogg"
+    },
+    "bark_oswin_hale_battle_start_3": {
+      "main": "bark_oswin_hale_battle_start_3.2b15afe6.ogg"
+    },
+    "bark_oswin_hale_crit_1": {
+      "main": "bark_oswin_hale_crit_1.adf93a44.ogg"
+    },
+    "bark_oswin_hale_defeat_1": {
+      "main": "bark_oswin_hale_defeat_1.19146227.ogg"
+    },
+    "bark_oswin_hale_defeat_2": {
+      "main": "bark_oswin_hale_defeat_2.ab93cac3.ogg"
+    },
+    "bark_oswin_hale_hit_1": {
+      "main": "bark_oswin_hale_hit_1.161cf6a0.ogg"
+    },
+    "bark_oswin_hale_hit_2": {
+      "main": "bark_oswin_hale_hit_2.d5eee041.ogg"
+    },
+    "bark_oswin_hale_kill_1": {
+      "main": "bark_oswin_hale_kill_1.5b1b2c37.ogg"
+    },
+    "bark_oswin_hale_low_hp_1": {
+      "main": "bark_oswin_hale_low_hp_1.8d682abf.ogg"
+    },
+    "bark_oswin_hale_low_hp_2": {
+      "main": "bark_oswin_hale_low_hp_2.641f7926.ogg"
+    },
+    "bark_oswin_hale_miss_1": {
+      "main": "bark_oswin_hale_miss_1.7dfc7a74.ogg"
+    },
+    "bark_oswin_hale_turn_start_1": {
+      "main": "bark_oswin_hale_turn_start_1.255cb4db.ogg"
+    },
+    "bark_oswin_hale_victory_1": {
+      "main": "bark_oswin_hale_victory_1.60188fee.ogg"
+    },
+    "bark_pip_ashdown_camp_1": {
+      "main": "bark_pip_ashdown_camp_1.4ba63120.ogg"
+    },
+    "bark_pip_ashdown_camp_2": {
+      "main": "bark_pip_ashdown_camp_2.61030d54.ogg"
+    },
+    "bark_pip_ashdown_camp_3": {
+      "main": "bark_pip_ashdown_camp_3.4d34e7d5.ogg"
+    },
+    "bark_pip_ashdown_camp_4": {
+      "main": "bark_pip_ashdown_camp_4.52eb3c78.ogg"
+    },
+    "bark_pip_ashdown_camp_5": {
+      "main": "bark_pip_ashdown_camp_5.6d263bac.ogg"
+    },
+    "bark_pip_ashdown_town_1": {
+      "main": "bark_pip_ashdown_town_1.397e121f.ogg"
+    },
+    "bark_pip_ashdown_town_2": {
+      "main": "bark_pip_ashdown_town_2.d7b45627.ogg"
+    },
+    "bark_pip_ashdown_town_3": {
+      "main": "bark_pip_ashdown_town_3.4e7aef4f.ogg"
+    },
+    "bark_pip_ashdown_town_4": {
+      "main": "bark_pip_ashdown_town_4.8ec99094.ogg"
+    },
+    "bark_rook_battle_start_1": {
+      "main": "bark_rook_battle_start_1.e9ed23f6.ogg"
+    },
+    "bark_rook_battle_start_2": {
+      "main": "bark_rook_battle_start_2.7a1fbece.ogg"
+    },
+    "bark_rook_defeat_1": {
+      "main": "bark_rook_defeat_1.ff1ab44a.ogg"
+    },
+    "bark_rook_hit_1": {
+      "main": "bark_rook_hit_1.d3c83949.ogg"
+    },
+    "bark_rook_low_hp_1": {
+      "main": "bark_rook_low_hp_1.cea8846a.ogg"
+    },
+    "bark_rook_town_1": {
+      "main": "bark_rook_town_1.84d37d2d.ogg"
+    },
+    "bark_rook_town_2": {
+      "main": "bark_rook_town_2.d631c60e.ogg"
+    },
+    "bark_rook_town_3": {
+      "main": "bark_rook_town_3.8687997d.ogg"
+    },
+    "bark_rook_town_4": {
+      "main": "bark_rook_town_4.bbc056ea.ogg"
+    },
+    "bark_rook_town_5": {
+      "main": "bark_rook_town_5.ef775681.ogg"
+    },
+    "bark_rook_town_6": {
+      "main": "bark_rook_town_6.d5d8184c.ogg"
+    },
+    "bark_rook_victory_1": {
+      "main": "bark_rook_victory_1.ab51079d.ogg"
+    },
+    "bark_tobin_fell_town_1": {
+      "main": "bark_tobin_fell_town_1.583dbcfc.ogg"
+    },
+    "bark_tobin_fell_town_2": {
+      "main": "bark_tobin_fell_town_2.35f7c2cc.ogg"
+    },
+    "bark_tobin_fell_town_3": {
+      "main": "bark_tobin_fell_town_3.fafcaeb5.ogg"
+    },
+    "bark_tobin_fell_town_4": {
+      "main": "bark_tobin_fell_town_4.922b0c91.ogg"
+    },
+    "bark_tobin_fell_town_5": {
+      "main": "bark_tobin_fell_town_5.55b7d35e.ogg"
+    },
+    "bark_tobin_fell_town_6": {
+      "main": "bark_tobin_fell_town_6.11974beb.ogg"
+    },
+    "bark_tobin_fell_town_7": {
+      "main": "bark_tobin_fell_town_7.5b35af17.ogg"
+    },
+    "bark_vorga_ally_down_1": {
+      "main": "bark_vorga_ally_down_1.bd8d3156.ogg"
+    },
+    "bark_vorga_battle_start_1": {
+      "main": "bark_vorga_battle_start_1.2a08532a.ogg"
+    },
+    "bark_vorga_battle_start_2": {
+      "main": "bark_vorga_battle_start_2.58442a76.ogg"
+    },
+    "bark_vorga_battle_start_3": {
+      "main": "bark_vorga_battle_start_3.9cfafc2f.ogg"
+    },
+    "bark_vorga_battle_start_4": {
+      "main": "bark_vorga_battle_start_4.2a235a53.ogg"
+    },
+    "bark_vorga_crit_1": {
+      "main": "bark_vorga_crit_1.35982a2e.ogg"
+    },
+    "bark_vorga_crit_2": {
+      "main": "bark_vorga_crit_2.ac6931ea.ogg"
+    },
+    "bark_vorga_defeat_1": {
+      "main": "bark_vorga_defeat_1.c07211b9.ogg"
+    },
+    "bark_vorga_defeat_2": {
+      "main": "bark_vorga_defeat_2.ee383094.ogg"
+    },
+    "bark_vorga_hit_1": {
+      "main": "bark_vorga_hit_1.f852c21f.ogg"
+    },
+    "bark_vorga_hit_2": {
+      "main": "bark_vorga_hit_2.f06398ec.ogg"
+    },
+    "bark_vorga_kill_1": {
+      "main": "bark_vorga_kill_1.7323ba97.ogg"
+    },
+    "bark_vorga_low_hp_1": {
+      "main": "bark_vorga_low_hp_1.1734b5b5.ogg"
+    },
+    "bark_vorga_low_hp_2": {
+      "main": "bark_vorga_low_hp_2.8ba78fa7.ogg"
+    },
+    "bark_vorga_miss_1": {
+      "main": "bark_vorga_miss_1.4bd99d20.ogg"
+    },
+    "bark_vorga_victory_1": {
+      "main": "bark_vorga_victory_1.adf56a81.ogg"
+    },
+    "bark_vorga_victory_2": {
+      "main": "bark_vorga_victory_2.702ae2c5.ogg"
+    },
+    "bark_ysolde_camp_1": {
+      "main": "bark_ysolde_camp_1.0abc41f7.ogg"
+    },
+    "bark_ysolde_town_1": {
+      "main": "bark_ysolde_town_1.f199582e.ogg"
+    },
+    "bark_ysolde_town_2": {
+      "main": "bark_ysolde_town_2.b4b05fd2.ogg"
+    },
+    "bark_ysolde_town_3": {
+      "main": "bark_ysolde_town_3.0a3a7ba5.ogg"
+    },
+    "bark_ysolde_town_4": {
+      "main": "bark_ysolde_town_4.1ca11f3b.ogg"
+    },
+    "bark_ysolde_town_5": {
+      "main": "bark_ysolde_town_5.46ea99ad.ogg"
+    },
+    "bark_ysolde_town_6": {
+      "main": "bark_ysolde_town_6.c896ffe9.ogg"
+    },
+    "ch1_bridge_cost_open_1": {
+      "main": "ch1_bridge_cost_open_1.d261d7f3.ogg"
+    },
+    "ch1_bridge_cost_open_2": {
+      "main": "ch1_bridge_cost_open_2.6044701c.ogg"
+    },
+    "ch1_bridge_cost_open_3": {
+      "main": "ch1_bridge_cost_open_3.cd87c5a7.ogg"
+    },
+    "ch1_bridge_cost_open_4": {
+      "main": "ch1_bridge_cost_open_4.0d843dbc.ogg"
+    },
+    "ch1_bridge_cost_over_1": {
+      "main": "ch1_bridge_cost_over_1.5ccafd05.ogg"
+    },
+    "ch1_bridge_cost_over_2": {
+      "main": "ch1_bridge_cost_over_2.42da10f9.ogg"
+    },
+    "ch1_bridge_cost_soldier_1": {
+      "main": "ch1_bridge_cost_soldier_1.8018ae7a.ogg"
+    },
+    "ch1_bridge_cost_soldier_2": {
+      "main": "ch1_bridge_cost_soldier_2.d99efce8.ogg"
+    },
+    "ch1_bridge_cost_song_1": {
+      "main": "ch1_bridge_cost_song_1.ae48080d.ogg"
+    },
+    "ch1_bridge_cost_song_2": {
+      "main": "ch1_bridge_cost_song_2.2cb50e78.ogg"
+    },
+    "ch1_dawn_open_1": {
+      "main": "ch1_dawn_open_1.57455db3.ogg"
+    },
+    "ch1_dawn_open_2": {
+      "main": "ch1_dawn_open_2.7f6f3b2d.ogg"
+    },
+    "ch1_dawn_open_3": {
+      "main": "ch1_dawn_open_3.fe362e89.ogg"
+    },
+    "ch1_dawn_open_4": {
+      "main": "ch1_dawn_open_4.59bf8346.ogg"
+    },
+    "ch1_docks_artisan_1": {
+      "main": "ch1_docks_artisan_1.6bd5dc8e.ogg"
+    },
+    "ch1_docks_close_1": {
+      "main": "ch1_docks_close_1.8e8b613b.ogg"
+    },
+    "ch1_docks_close_2": {
+      "main": "ch1_docks_close_2.315171bc.ogg"
+    },
+    "ch1_docks_criminal_1": {
+      "main": "ch1_docks_criminal_1.1f06642c.ogg"
+    },
+    "ch1_docks_criminal_2": {
+      "main": "ch1_docks_criminal_2.42786348.ogg"
+    },
+    "ch1_docks_killing_1": {
+      "main": "ch1_docks_killing_1.cac21874.ogg"
+    },
+    "ch1_docks_killing_2": {
+      "main": "ch1_docks_killing_2.ef1b1e27.ogg"
+    },
+    "ch1_docks_killing_3": {
+      "main": "ch1_docks_killing_3.75a5ec4f.ogg"
+    },
+    "ch1_docks_open_1": {
+      "main": "ch1_docks_open_1.c9c576bb.ogg"
+    },
+    "ch1_docks_open_2": {
+      "main": "ch1_docks_open_2.a8fabc65.ogg"
+    },
+    "ch1_docks_open_3": {
+      "main": "ch1_docks_open_3.9243975a.ogg"
+    },
+    "ch1_docks_open_4": {
+      "main": "ch1_docks_open_4.f1cefa64.ogg"
+    },
+    "ch1_docks_rook_1": {
+      "main": "ch1_docks_rook_1.b1f33729.ogg"
+    },
+    "ch1_docks_rook_2": {
+      "main": "ch1_docks_rook_2.2602e063.ogg"
+    },
+    "ch1_docks_rook_3": {
+      "main": "ch1_docks_rook_3.1a81a2c3.ogg"
+    },
+    "ch1_docks_rook_4": {
+      "main": "ch1_docks_rook_4.76ee6b8b.ogg"
+    },
+    "ch1_docks_sailor_1": {
+      "main": "ch1_docks_sailor_1.6d1f5c9a.ogg"
+    },
+    "ch1_ford_cases_1": {
+      "main": "ch1_ford_cases_1.2c529cf3.ogg"
+    },
+    "ch1_ford_cases_2": {
+      "main": "ch1_ford_cases_2.58984b22.ogg"
+    },
+    "ch1_ford_cases_3": {
+      "main": "ch1_ford_cases_3.476edd31.ogg"
+    },
+    "ch1_ford_cases_4": {
+      "main": "ch1_ford_cases_4.51adb33d.ogg"
+    },
+    "ch1_ford_cases_5": {
+      "main": "ch1_ford_cases_5.c2e8f3e2.ogg"
+    },
+    "ch1_ford_force_1": {
+      "main": "ch1_ford_force_1.06892ef8.ogg"
+    },
+    "ch1_ford_force_2": {
+      "main": "ch1_ford_force_2.7d39c66c.ogg"
+    },
+    "ch1_ford_force_3": {
+      "main": "ch1_ford_force_3.f6922cc9.ogg"
+    },
+    "ch1_ford_open_1": {
+      "main": "ch1_ford_open_1.f64e0d29.ogg"
+    },
+    "ch1_ford_open_2": {
+      "main": "ch1_ford_open_2.cde95fe7.ogg"
+    },
+    "ch1_ford_open_3": {
+      "main": "ch1_ford_open_3.d955fd91.ogg"
+    },
+    "ch1_ford_open_4": {
+      "main": "ch1_ford_open_4.db2ad6b8.ogg"
+    },
+    "ch1_ford_open_5": {
+      "main": "ch1_ford_open_5.47bb98ad.ogg"
+    },
+    "ch1_ford_parley_1": {
+      "main": "ch1_ford_parley_1.075c5961.ogg"
+    },
+    "ch1_ford_parley_2": {
+      "main": "ch1_ford_parley_2.d2d9390c.ogg"
+    },
+    "ch1_ford_parley_3": {
+      "main": "ch1_ford_parley_3.400b2d3f.ogg"
+    },
+    "ch1_ford_pay_fail_1": {
+      "main": "ch1_ford_pay_fail_1.b880a0c1.ogg"
+    },
+    "ch1_ford_pay_fail_2": {
+      "main": "ch1_ford_pay_fail_2.b0f2f3b1.ogg"
+    },
+    "ch1_ford_pay_pass_1": {
+      "main": "ch1_ford_pay_pass_1.7ad9feb7.ogg"
+    },
+    "ch1_ford_pay_pass_2": {
+      "main": "ch1_ford_pay_pass_2.8f12827f.ogg"
+    },
+    "ch1_ford_truth_1": {
+      "main": "ch1_ford_truth_1.a7b52a99.ogg"
+    },
+    "ch1_ford_truth_2": {
+      "main": "ch1_ford_truth_2.f9b4967e.ogg"
+    },
+    "ch1_ford_truth_3": {
+      "main": "ch1_ford_truth_3.e18a6ca5.ogg"
+    },
+    "ch1_ford_truth_4": {
+      "main": "ch1_ford_truth_4.d822333e.ogg"
+    },
+    "ch1_ford_vote2_1": {
+      "main": "ch1_ford_vote2_1.ece5eb8c.ogg"
+    },
+    "ch1_ford_vote_1": {
+      "main": "ch1_ford_vote_1.dd5dbbab.ogg"
+    },
+    "ch1_ford_vote_2": {
+      "main": "ch1_ford_vote_2.1ee49baf.ogg"
+    },
+    "ch1_ford_why_1": {
+      "main": "ch1_ford_why_1.4cba83d7.ogg"
+    },
+    "ch1_ford_why_2": {
+      "main": "ch1_ford_why_2.ef4aa655.ogg"
+    },
+    "ch1_ford_why_fail_1": {
+      "main": "ch1_ford_why_fail_1.c5da1e75.ogg"
+    },
+    "ch1_ford_why_pass_1": {
+      "main": "ch1_ford_why_pass_1.3c609d91.ogg"
+    },
+    "ch1_ford_why_pass_2": {
+      "main": "ch1_ford_why_pass_2.9cb5a78c.ogg"
+    },
+    "ch1_four_more_open_1": {
+      "main": "ch1_four_more_open_1.69b16b57.ogg"
+    },
+    "ch1_four_more_open_2": {
+      "main": "ch1_four_more_open_2.e7c6ba76.ogg"
+    },
+    "ch1_four_more_open_3": {
+      "main": "ch1_four_more_open_3.4e18c8be.ogg"
+    },
+    "ch1_four_more_outl_1": {
+      "main": "ch1_four_more_outl_1.2dce8732.ogg"
+    },
+    "ch1_four_more_where_1": {
+      "main": "ch1_four_more_where_1.438a7616.ogg"
+    },
+    "ch1_four_more_where_2": {
+      "main": "ch1_four_more_where_2.f93db736.ogg"
+    },
+    "ch1_four_more_where_3": {
+      "main": "ch1_four_more_where_3.17166954.ogg"
+    },
+    "ch1_four_more_where_4": {
+      "main": "ch1_four_more_where_4.7125d168.ogg"
+    },
+    "ch1_four_more_who_1": {
+      "main": "ch1_four_more_who_1.3a1f4eeb.ogg"
+    },
+    "ch1_four_more_why_1": {
+      "main": "ch1_four_more_why_1.3bd43b7c.ogg"
+    },
+    "ch1_granary_acolyte_1": {
+      "main": "ch1_granary_acolyte_1.a4b408e4.ogg"
+    },
+    "ch1_granary_acolyte_2": {
+      "main": "ch1_granary_acolyte_2.dab0cb98.ogg"
+    },
+    "ch1_granary_confess_1": {
+      "main": "ch1_granary_confess_1.a24104c2.ogg"
+    },
+    "ch1_granary_confess_2": {
+      "main": "ch1_granary_confess_2.3d2a94cf.ogg"
+    },
+    "ch1_granary_confess_3": {
+      "main": "ch1_granary_confess_3.1f24e7e2.ogg"
+    },
+    "ch1_granary_confess_4": {
+      "main": "ch1_granary_confess_4.17e1447f.ogg"
+    },
+    "ch1_granary_confess_5": {
+      "main": "ch1_granary_confess_5.09a5bde5.ogg"
+    },
+    "ch1_granary_confess_6": {
+      "main": "ch1_granary_confess_6.0f98c602.ogg"
+    },
+    "ch1_granary_doors_1": {
+      "main": "ch1_granary_doors_1.959ee1f1.ogg"
+    },
+    "ch1_granary_doors_2": {
+      "main": "ch1_granary_doors_2.8ea3074e.ogg"
+    },
+    "ch1_granary_lend_fail_1": {
+      "main": "ch1_granary_lend_fail_1.466fef93.ogg"
+    },
+    "ch1_granary_lend_pass_1": {
+      "main": "ch1_granary_lend_pass_1.d6cf1148.ogg"
+    },
+    "ch1_granary_noble_1": {
+      "main": "ch1_granary_noble_1.05e13743.ogg"
+    },
+    "ch1_granary_noble_2": {
+      "main": "ch1_granary_noble_2.338a2a0c.ogg"
+    },
+    "ch1_granary_open_1": {
+      "main": "ch1_granary_open_1.e32c720d.ogg"
+    },
+    "ch1_granary_open_2": {
+      "main": "ch1_granary_open_2.145c5151.ogg"
+    },
+    "ch1_granary_open_3": {
+      "main": "ch1_granary_open_3.7467d3c4.ogg"
+    },
+    "ch1_granary_open_4": {
+      "main": "ch1_granary_open_4.24a2bbc1.ogg"
+    },
+    "ch1_granary_open_5": {
+      "main": "ch1_granary_open_5.06c51bde.ogg"
+    },
+    "ch1_granary_open_6": {
+      "main": "ch1_granary_open_6.3c2fbe30.ogg"
+    },
+    "ch1_granary_open_7": {
+      "main": "ch1_granary_open_7.1a8d343f.ogg"
+    },
+    "ch1_granary_press_1": {
+      "main": "ch1_granary_press_1.3cbb3dec.ogg"
+    },
+    "ch1_granary_sums_fail_1": {
+      "main": "ch1_granary_sums_fail_1.2b3e5da8.ogg"
+    },
+    "ch1_granary_sums_pass_1": {
+      "main": "ch1_granary_sums_pass_1.f2bee084.ogg"
+    },
+    "ch1_kindler_done_1": {
+      "main": "ch1_kindler_done_1.4c49ace5.ogg"
+    },
+    "ch1_kindler_key_1": {
+      "main": "ch1_kindler_key_1.dca91aa1.ogg"
+    },
+    "ch1_kindler_key_2": {
+      "main": "ch1_kindler_key_2.2d6cf066.ogg"
+    },
+    "ch1_kindler_open_1": {
+      "main": "ch1_kindler_open_1.ffa11b97.ogg"
+    },
+    "ch1_kindler_open_2": {
+      "main": "ch1_kindler_open_2.6fdcd5c8.ogg"
+    },
+    "ch1_kindler_open_3": {
+      "main": "ch1_kindler_open_3.a317dc49.ogg"
+    },
+    "ch1_kindler_open_4": {
+      "main": "ch1_kindler_open_4.169e13b7.ogg"
+    },
+    "ch1_kindler_open_5": {
+      "main": "ch1_kindler_open_5.945d93b9.ogg"
+    },
+    "ch1_kindler_open_6": {
+      "main": "ch1_kindler_open_6.fa622d29.ogg"
+    },
+    "ch1_kindler_open_7": {
+      "main": "ch1_kindler_open_7.2758db33.ogg"
+    },
+    "ch1_kindler_pitch_1": {
+      "main": "ch1_kindler_pitch_1.311e5486.ogg"
+    },
+    "ch1_kindler_pitch_2": {
+      "main": "ch1_kindler_pitch_2.3c14cb52.ogg"
+    },
+    "ch1_kindler_slain_1": {
+      "main": "ch1_kindler_slain_1.ee3f162a.ogg"
+    },
+    "ch1_kindler_spared_1": {
+      "main": "ch1_kindler_spared_1.e9581c34.ogg"
+    },
+    "ch1_maud_bye_1": {
+      "main": "ch1_maud_bye_1.b24b49d6.ogg"
+    },
+    "ch1_maud_bye_2": {
+      "main": "ch1_maud_bye_2.1c65ab25.ogg"
+    },
+    "ch1_maud_fell_1": {
+      "main": "ch1_maud_fell_1.703e251a.ogg"
+    },
+    "ch1_maud_fell_2": {
+      "main": "ch1_maud_fell_2.bfc49e76.ogg"
+    },
+    "ch1_maud_fell_3": {
+      "main": "ch1_maud_fell_3.66ed66ae.ogg"
+    },
+    "ch1_maud_fell_4": {
+      "main": "ch1_maud_fell_4.138bba78.ogg"
+    },
+    "ch1_maud_fell_5": {
+      "main": "ch1_maud_fell_5.0d313f98.ogg"
+    },
+    "ch1_maud_fell_6": {
+      "main": "ch1_maud_fell_6.cbfe4efa.ogg"
+    },
+    "ch1_maud_fell_7": {
+      "main": "ch1_maud_fell_7.cafa5695.ogg"
+    },
+    "ch1_maud_fell_8": {
+      "main": "ch1_maud_fell_8.43794a78.ogg"
+    },
+    "ch1_maud_hermit_1": {
+      "main": "ch1_maud_hermit_1.4e0ec949.ogg"
+    },
+    "ch1_maud_hermit_2": {
+      "main": "ch1_maud_hermit_2.97a47809.ogg"
+    },
+    "ch1_maud_lost_1": {
+      "main": "ch1_maud_lost_1.a5c4977d.ogg"
+    },
+    "ch1_maud_open_1": {
+      "main": "ch1_maud_open_1.f0bbacc3.ogg"
+    },
+    "ch1_maud_open_2": {
+      "main": "ch1_maud_open_2.38feb09d.ogg"
+    },
+    "ch1_maud_open_3": {
+      "main": "ch1_maud_open_3.fad9008b.ogg"
+    },
+    "ch1_maud_open_4": {
+      "main": "ch1_maud_open_4.50070cac.ogg"
+    },
+    "ch1_maud_sage_1": {
+      "main": "ch1_maud_sage_1.b7bdb0d5.ogg"
+    },
+    "ch1_maud_slain_1": {
+      "main": "ch1_maud_slain_1.6ed84455.ogg"
+    },
+    "ch1_maud_spared_1": {
+      "main": "ch1_maud_spared_1.53cb3c98.ogg"
+    },
+    "ch1_maud_track_1": {
+      "main": "ch1_maud_track_1.9494f47c.ogg"
+    },
+    "ch1_maud_who_1": {
+      "main": "ch1_maud_who_1.bb5f5e61.ogg"
+    },
+    "ch1_mayor_close_1": {
+      "main": "ch1_mayor_close_1.bfddf799.ogg"
+    },
+    "ch1_mayor_close_2": {
+      "main": "ch1_mayor_close_2.b7ee95c8.ogg"
+    },
+    "ch1_mayor_close_3": {
+      "main": "ch1_mayor_close_3.a49692f1.ogg"
+    },
+    "ch1_mayor_close_4": {
+      "main": "ch1_mayor_close_4.7cdbfd11.ogg"
+    },
+    "ch1_mayor_goblins_1": {
+      "main": "ch1_mayor_goblins_1.6abdd4d0.ogg"
+    },
+    "ch1_mayor_goblins_2": {
+      "main": "ch1_mayor_goblins_2.b798fc89.ogg"
+    },
+    "ch1_mayor_goblins_3": {
+      "main": "ch1_mayor_goblins_3.3d5c0336.ogg"
+    },
+    "ch1_mayor_goblins_4": {
+      "main": "ch1_mayor_goblins_4.f3a0d422.ogg"
+    },
+    "ch1_mayor_halden_1": {
+      "main": "ch1_mayor_halden_1.a28a68d2.ogg"
+    },
+    "ch1_mayor_halden_2": {
+      "main": "ch1_mayor_halden_2.9a96527a.ogg"
+    },
+    "ch1_mayor_halden_3": {
+      "main": "ch1_mayor_halden_3.79860a20.ogg"
+    },
+    "ch1_mayor_halden_4": {
+      "main": "ch1_mayor_halden_4.26b72526.ogg"
+    },
+    "ch1_mayor_hero_1": {
+      "main": "ch1_mayor_hero_1.73465b72.ogg"
+    },
+    "ch1_mayor_hero_2": {
+      "main": "ch1_mayor_hero_2.50e933ce.ogg"
+    },
+    "ch1_mayor_hero_3": {
+      "main": "ch1_mayor_hero_3.ace591b0.ogg"
+    },
+    "ch1_mayor_noble_1": {
+      "main": "ch1_mayor_noble_1.f2109686.ogg"
+    },
+    "ch1_mayor_noble_2": {
+      "main": "ch1_mayor_noble_2.7c870c87.ogg"
+    },
+    "ch1_mayor_open_1": {
+      "main": "ch1_mayor_open_1.15c4e800.ogg"
+    },
+    "ch1_mayor_open_2": {
+      "main": "ch1_mayor_open_2.8b0008a1.ogg"
+    },
+    "ch1_mayor_open_3": {
+      "main": "ch1_mayor_open_3.193c7bc1.ogg"
+    },
+    "ch1_mayor_open_4": {
+      "main": "ch1_mayor_open_4.66fb5c56.ogg"
+    },
+    "ch1_mayor_soldier_1": {
+      "main": "ch1_mayor_soldier_1.4e1f4079.ogg"
+    },
+    "ch1_mayor_soldier_2": {
+      "main": "ch1_mayor_soldier_2.ade6e018.ogg"
+    },
+    "ch1_mayor_soldier_3": {
+      "main": "ch1_mayor_soldier_3.ff5e9760.ogg"
+    },
+    "ch1_mayor_urchin_1": {
+      "main": "ch1_mayor_urchin_1.2dc4c530.ogg"
+    },
+    "ch1_mayor_urchin_2": {
+      "main": "ch1_mayor_urchin_2.938c4041.ogg"
+    },
+    "ch1_mayor_urchin_3": {
+      "main": "ch1_mayor_urchin_3.71e0f989.ogg"
+    },
+    "ch1_parley_bread_1": {
+      "main": "ch1_parley_bread_1.8c25822a.ogg"
+    },
+    "ch1_parley_bread_2": {
+      "main": "ch1_parley_bread_2.355cad93.ogg"
+    },
+    "ch1_parley_deal_1": {
+      "main": "ch1_parley_deal_1.f1ed9c2f.ogg"
+    },
+    "ch1_parley_deal_2": {
+      "main": "ch1_parley_deal_2.dd3df279.ogg"
+    },
+    "ch1_parley_haggle_fail_1": {
+      "main": "ch1_parley_haggle_fail_1.75f815f7.ogg"
+    },
+    "ch1_parley_haggle_fail_2": {
+      "main": "ch1_parley_haggle_fail_2.6a6a922c.ogg"
+    },
+    "ch1_parley_haggle_pass_1": {
+      "main": "ch1_parley_haggle_pass_1.9c5cdadd.ogg"
+    },
+    "ch1_parley_hill_1": {
+      "main": "ch1_parley_hill_1.4780c336.ogg"
+    },
+    "ch1_parley_hill_2": {
+      "main": "ch1_parley_hill_2.6c185b63.ogg"
+    },
+    "ch1_parley_open_1": {
+      "main": "ch1_parley_open_1.5e51e76b.ogg"
+    },
+    "ch1_parley_open_2": {
+      "main": "ch1_parley_open_2.cfd714a8.ogg"
+    },
+    "ch1_parley_open_3": {
+      "main": "ch1_parley_open_3.78f71d05.ogg"
+    },
+    "ch1_parley_open_4": {
+      "main": "ch1_parley_open_4.bb7c1f39.ogg"
+    },
+    "ch1_parley_soldier_1": {
+      "main": "ch1_parley_soldier_1.aecfcbc3.ogg"
+    },
+    "ch1_parley_soldier_2": {
+      "main": "ch1_parley_soldier_2.6d214a47.ogg"
+    },
+    "ch1_parley_terms_1": {
+      "main": "ch1_parley_terms_1.240b6493.ogg"
+    },
+    "ch1_parley_terms_2": {
+      "main": "ch1_parley_terms_2.5023f5f2.ogg"
+    },
+    "ch1_parley_young_fail_1": {
+      "main": "ch1_parley_young_fail_1.833a159c.ogg"
+    },
+    "ch1_parley_young_pass_1": {
+      "main": "ch1_parley_young_pass_1.5998e9b2.ogg"
+    },
+    "ch1_parley_young_pass_2": {
+      "main": "ch1_parley_young_pass_2.1323850c.ogg"
+    },
+    "ch1_road_east_open_1": {
+      "main": "ch1_road_east_open_1.bd071394.ogg"
+    },
+    "ch1_road_east_open_2": {
+      "main": "ch1_road_east_open_2.65db2db4.ogg"
+    },
+    "ch1_road_east_open_3": {
+      "main": "ch1_road_east_open_3.1ff0c1e8.ogg"
+    },
+    "ch1_road_east_open_4": {
+      "main": "ch1_road_east_open_4.562c7c3f.ogg"
+    },
+    "ch1_road_east_open_5": {
+      "main": "ch1_road_east_open_5.7f710b38.ogg"
+    },
+    "ch1_road_east_open_6": {
+      "main": "ch1_road_east_open_6.9153deb0.ogg"
+    },
+    "ch1_song_crumb_1": {
+      "main": "ch1_song_crumb_1.1aa12ac4.ogg"
+    },
+    "ch1_song_crumb_2": {
+      "main": "ch1_song_crumb_2.6e74076c.ogg"
+    },
+    "ch1_song_ent_1": {
+      "main": "ch1_song_ent_1.2834da7c.ogg"
+    },
+    "ch1_song_ent_2": {
+      "main": "ch1_song_ent_2.d4693cc5.ogg"
+    },
+    "ch1_song_open_1": {
+      "main": "ch1_song_open_1.3d56c7fd.ogg"
+    },
+    "ch1_song_open_2": {
+      "main": "ch1_song_open_2.fa5f5338.ogg"
+    },
+    "ch1_song_open_3": {
+      "main": "ch1_song_open_3.75e2525f.ogg"
+    },
+    "ch1_song_open_4": {
+      "main": "ch1_song_open_4.53fe9861.ogg"
+    },
+    "ch1_song_outl_1": {
+      "main": "ch1_song_outl_1.6b9c6c1f.ogg"
+    },
+    "ch1_song_outl_2": {
+      "main": "ch1_song_outl_2.deea052a.ogg"
+    },
+    "ch1_song_rest_1": {
+      "main": "ch1_song_rest_1.f13264a2.ogg"
+    },
+    "ch1_song_rest_2": {
+      "main": "ch1_song_rest_2.fb0c40b0.ogg"
+    },
+    "ch1_song_song_1": {
+      "main": "ch1_song_song_1.8a91ff86.ogg"
+    },
+    "ch1_song_song_2": {
+      "main": "ch1_song_song_2.da22e3f2.ogg"
+    },
+    "ch1_song_song_3": {
+      "main": "ch1_song_song_3.b0de7a78.ogg"
+    },
+    "ch1_song_song_4": {
+      "main": "ch1_song_song_4.6c9d2460.ogg"
+    },
+    "ch1_song_song_5": {
+      "main": "ch1_song_song_5.3bb967d2.ogg"
+    },
+    "ch1_young_ones_open_1": {
+      "main": "ch1_young_ones_open_1.75595702.ogg"
+    },
+    "ch1_young_ones_open_2": {
+      "main": "ch1_young_ones_open_2.cd508d14.ogg"
+    },
+    "ch1_young_ones_open_3": {
+      "main": "ch1_young_ones_open_3.c007e02d.ogg"
+    },
+    "ch1_young_ones_open_4": {
+      "main": "ch1_young_ones_open_4.ba1bd52f.ogg"
+    },
+    "ch1_young_ones_open_5": {
+      "main": "ch1_young_ones_open_5.f6aa80d0.ogg"
+    },
+    "ch2_bree_book_1": {
+      "main": "ch2_bree_book_1.85eabeef.ogg"
+    },
+    "ch2_bree_book_2": {
+      "main": "ch2_bree_book_2.4b473770.ogg"
+    },
+    "ch2_bree_book_3": {
+      "main": "ch2_bree_book_3.3a772825.ogg"
+    },
+    "ch2_bree_book_4": {
+      "main": "ch2_bree_book_4.bcbe1b1d.ogg"
+    },
+    "ch2_bree_book_5": {
+      "main": "ch2_bree_book_5.8cf28ece.ogg"
+    },
+    "ch2_bree_book_6": {
+      "main": "ch2_bree_book_6.42a330fb.ogg"
+    },
+    "ch2_bree_book_7": {
+      "main": "ch2_bree_book_7.0dd6bbb4.ogg"
+    },
+    "ch2_bree_close_1": {
+      "main": "ch2_bree_close_1.dc1f8505.ogg"
+    },
+    "ch2_bree_close_2": {
+      "main": "ch2_bree_close_2.d7c830ea.ogg"
+    },
+    "ch2_bree_halden_1": {
+      "main": "ch2_bree_halden_1.077ee0da.ogg"
+    },
+    "ch2_bree_help_1": {
+      "main": "ch2_bree_help_1.862af789.ogg"
+    },
+    "ch2_bree_help_2": {
+      "main": "ch2_bree_help_2.5d43498c.ogg"
+    },
+    "ch2_bree_left_1": {
+      "main": "ch2_bree_left_1.923c428e.ogg"
+    },
+    "ch2_bree_left_2": {
+      "main": "ch2_bree_left_2.d48903f7.ogg"
+    },
+    "ch2_bree_open_1": {
+      "main": "ch2_bree_open_1.9447c3c6.ogg"
+    },
+    "ch2_bree_open_2": {
+      "main": "ch2_bree_open_2.b49e03dc.ogg"
+    },
+    "ch2_bree_paid_1": {
+      "main": "ch2_bree_paid_1.a54c6121.ogg"
+    },
+    "ch2_bree_paid_2": {
+      "main": "ch2_bree_paid_2.359bf9f2.ogg"
+    },
+    "ch2_bree_pip_1": {
+      "main": "ch2_bree_pip_1.386812a5.ogg"
+    },
+    "ch2_bree_pip_2": {
+      "main": "ch2_bree_pip_2.044149bb.ogg"
+    },
+    "ch2_bree_pip_3": {
+      "main": "ch2_bree_pip_3.102cbc53.ogg"
+    },
+    "ch2_bree_putout_1": {
+      "main": "ch2_bree_putout_1.d3335472.ogg"
+    },
+    "ch2_bree_putout_2": {
+      "main": "ch2_bree_putout_2.d5ee3f65.ogg"
+    },
+    "ch2_bree_tricked_1": {
+      "main": "ch2_bree_tricked_1.c9669480.ogg"
+    },
+    "ch2_bree_tricked_2": {
+      "main": "ch2_bree_tricked_2.163c53b2.ogg"
+    },
+    "ch2_corvin_beg_1": {
+      "main": "ch2_corvin_beg_1.f26e139f.ogg"
+    },
+    "ch2_corvin_beg_2": {
+      "main": "ch2_corvin_beg_2.e63adc4b.ogg"
+    },
+    "ch2_corvin_beg_3": {
+      "main": "ch2_corvin_beg_3.752d1fa0.ogg"
+    },
+    "ch2_corvin_beg_4": {
+      "main": "ch2_corvin_beg_4.066bf4c8.ogg"
+    },
+    "ch2_corvin_cost_1": {
+      "main": "ch2_corvin_cost_1.de1f61eb.ogg"
+    },
+    "ch2_corvin_cost_2": {
+      "main": "ch2_corvin_cost_2.d112742b.ogg"
+    },
+    "ch2_corvin_dwarf_1": {
+      "main": "ch2_corvin_dwarf_1.24ec2f79.ogg"
+    },
+    "ch2_corvin_dwarf_2": {
+      "main": "ch2_corvin_dwarf_2.352e65c2.ogg"
+    },
+    "ch2_corvin_open_1": {
+      "main": "ch2_corvin_open_1.e83e66ca.ogg"
+    },
+    "ch2_corvin_open_2": {
+      "main": "ch2_corvin_open_2.612688a4.ogg"
+    },
+    "ch2_corvin_open_3": {
+      "main": "ch2_corvin_open_3.69085b17.ogg"
+    },
+    "ch2_corvin_open_4": {
+      "main": "ch2_corvin_open_4.3829af4d.ogg"
+    },
+    "ch2_corvin_open_5": {
+      "main": "ch2_corvin_open_5.c8d4e375.ogg"
+    },
+    "ch2_corvin_open_6": {
+      "main": "ch2_corvin_open_6.10e2914c.ogg"
+    },
+    "ch2_corvin_sage_1": {
+      "main": "ch2_corvin_sage_1.cedbfb5a.ogg"
+    },
+    "ch2_corvin_sage_2": {
+      "main": "ch2_corvin_sage_2.12054736.ogg"
+    },
+    "ch2_heartpool_court_fail_1": {
+      "main": "ch2_heartpool_court_fail_1.aa4d7922.ogg"
+    },
+    "ch2_heartpool_court_pass_1": {
+      "main": "ch2_heartpool_court_pass_1.6fa1f329.ogg"
+    },
+    "ch2_heartpool_court_pass_2": {
+      "main": "ch2_heartpool_court_pass_2.5e6e391e.ogg"
+    },
+    "ch2_heartpool_court_pass_3": {
+      "main": "ch2_heartpool_court_pass_3.506de3f4.ogg"
+    },
+    "ch2_heartpool_hub_1": {
+      "main": "ch2_heartpool_hub_1.ed203bb0.ogg"
+    },
+    "ch2_heartpool_leave_1": {
+      "main": "ch2_heartpool_leave_1.303bc3ce.ogg"
+    },
+    "ch2_heartpool_leave_2": {
+      "main": "ch2_heartpool_leave_2.a3623622.ogg"
+    },
+    "ch2_heartpool_leave_3": {
+      "main": "ch2_heartpool_leave_3.79d8f74c.ogg"
+    },
+    "ch2_heartpool_open_1": {
+      "main": "ch2_heartpool_open_1.8ea0f9ef.ogg"
+    },
+    "ch2_heartpool_open_2": {
+      "main": "ch2_heartpool_open_2.ae020e21.ogg"
+    },
+    "ch2_heartpool_open_3": {
+      "main": "ch2_heartpool_open_3.8c4d7e8f.ogg"
+    },
+    "ch2_heartpool_open_4": {
+      "main": "ch2_heartpool_open_4.108cf5a5.ogg"
+    },
+    "ch2_heartpool_outl_1": {
+      "main": "ch2_heartpool_outl_1.aa3c18be.ogg"
+    },
+    "ch2_heartpool_outl_2": {
+      "main": "ch2_heartpool_outl_2.b08437ea.ogg"
+    },
+    "ch2_heartpool_outl_3": {
+      "main": "ch2_heartpool_outl_3.fde7dc65.ogg"
+    },
+    "ch2_heartpool_pay_1": {
+      "main": "ch2_heartpool_pay_1.21c97ccd.ogg"
+    },
+    "ch2_heartpool_pay_2": {
+      "main": "ch2_heartpool_pay_2.d15be184.ogg"
+    },
+    "ch2_heartpool_pay_3": {
+      "main": "ch2_heartpool_pay_3.fcd8162b.ogg"
+    },
+    "ch2_heartpool_pay_4": {
+      "main": "ch2_heartpool_pay_4.308a1ade.ogg"
+    },
+    "ch2_heartpool_pay_5": {
+      "main": "ch2_heartpool_pay_5.2bc1c944.ogg"
+    },
+    "ch2_heartpool_pay_6": {
+      "main": "ch2_heartpool_pay_6.9d8c4dd3.ogg"
+    },
+    "ch2_heartpool_trick_1": {
+      "main": "ch2_heartpool_trick_1.a36c3ecf.ogg"
+    },
+    "ch2_heartpool_trick_fail_1": {
+      "main": "ch2_heartpool_trick_fail_1.9c269132.ogg"
+    },
+    "ch2_heartpool_trick_fail_2": {
+      "main": "ch2_heartpool_trick_fail_2.4753a661.ogg"
+    },
+    "ch2_heartpool_trick_fail_3": {
+      "main": "ch2_heartpool_trick_fail_3.6af613a1.ogg"
+    },
+    "ch2_heartpool_trick_fail_4": {
+      "main": "ch2_heartpool_trick_fail_4.5e5018d9.ogg"
+    },
+    "ch2_heartpool_trick_pass_1": {
+      "main": "ch2_heartpool_trick_pass_1.ce81a268.ogg"
+    },
+    "ch2_heartpool_trick_pass_2": {
+      "main": "ch2_heartpool_trick_pass_2.843f198a.ogg"
+    },
+    "ch2_heartpool_trick_pass_3": {
+      "main": "ch2_heartpool_trick_pass_3.44883019.ogg"
+    },
+    "ch2_heartpool_trick_pass_4": {
+      "main": "ch2_heartpool_trick_pass_4.dc506ef6.ogg"
+    },
+    "ch2_heartpool_trick_pass_5": {
+      "main": "ch2_heartpool_trick_pass_5.a11971a8.ogg"
+    },
+    "ch2_heartpool_vote_1": {
+      "main": "ch2_heartpool_vote_1.14ef9cd7.ogg"
+    },
+    "ch2_heartpool_vote_2": {
+      "main": "ch2_heartpool_vote_2.569f4021.ogg"
+    },
+    "ch2_heartpool_what_1": {
+      "main": "ch2_heartpool_what_1.0ce49c81.ogg"
+    },
+    "ch2_heartpool_what_2": {
+      "main": "ch2_heartpool_what_2.e51b5392.ogg"
+    },
+    "ch2_journal_lady_1": {
+      "main": "ch2_journal_lady_1.b1325383.ogg"
+    },
+    "ch2_journal_lady_2": {
+      "main": "ch2_journal_lady_2.4761ea73.ogg"
+    },
+    "ch2_journal_lady_3": {
+      "main": "ch2_journal_lady_3.8ea3b467.ogg"
+    },
+    "ch2_journal_nosteal_1": {
+      "main": "ch2_journal_nosteal_1.6c8de96d.ogg"
+    },
+    "ch2_journal_open_1": {
+      "main": "ch2_journal_open_1.6710f736.ogg"
+    },
+    "ch2_journal_open_2": {
+      "main": "ch2_journal_open_2.9641f010.ogg"
+    },
+    "ch2_journal_open_3": {
+      "main": "ch2_journal_open_3.4c5c9c98.ogg"
+    },
+    "ch2_journal_open_4": {
+      "main": "ch2_journal_open_4.4838fb2a.ogg"
+    },
+    "ch2_journal_open_5": {
+      "main": "ch2_journal_open_5.4e2a0206.ogg"
+    },
+    "ch2_journal_path_1": {
+      "main": "ch2_journal_path_1.884f0e5f.ogg"
+    },
+    "ch2_reeds_dwarf_1": {
+      "main": "ch2_reeds_dwarf_1.bef2adde.ogg"
+    },
+    "ch2_reeds_go_1": {
+      "main": "ch2_reeds_go_1.a60da56f.ogg"
+    },
+    "ch2_reeds_open_1": {
+      "main": "ch2_reeds_open_1.40f8508c.ogg"
+    },
+    "ch2_reeds_open_2": {
+      "main": "ch2_reeds_open_2.56d96fbf.ogg"
+    },
+    "ch2_reeds_open_3": {
+      "main": "ch2_reeds_open_3.4e3ebfdd.ogg"
+    },
+    "ch2_reeds_open_4": {
+      "main": "ch2_reeds_open_4.5aec637e.ogg"
+    },
+    "ch2_reeds_open_5": {
+      "main": "ch2_reeds_open_5.aeee5743.ogg"
+    },
+    "ch2_reeds_wild_1": {
+      "main": "ch2_reeds_wild_1.5a4dc213.ogg"
+    },
+    "ch2_willow_elf_1": {
+      "main": "ch2_willow_elf_1.cb3ba43e.ogg"
+    },
+    "ch2_willow_elf_2": {
+      "main": "ch2_willow_elf_2.8f6b6e8c.ogg"
+    },
+    "ch2_willow_kindled_1": {
+      "main": "ch2_willow_kindled_1.ea129ca7.ogg"
+    },
+    "ch2_willow_kindled_2": {
+      "main": "ch2_willow_kindled_2.1aaf4a4d.ogg"
+    },
+    "ch2_willow_more_1": {
+      "main": "ch2_willow_more_1.2b1601ec.ogg"
+    },
+    "ch2_willow_open_1": {
+      "main": "ch2_willow_open_1.fa0a12af.ogg"
+    },
+    "ch2_willow_open_2": {
+      "main": "ch2_willow_open_2.662489ea.ogg"
+    },
+    "ch2_willow_open_3": {
+      "main": "ch2_willow_open_3.a0a841cb.ogg"
+    },
+    "ch2_willow_open_4": {
+      "main": "ch2_willow_open_4.25c223e8.ogg"
+    },
+    "ch2_willow_origin_1": {
+      "main": "ch2_willow_origin_1.e2e4e069.ogg"
+    },
+    "ch2_willow_origin_2": {
+      "main": "ch2_willow_origin_2.8706ec28.ogg"
+    },
+    "ch2_willow_outl_1": {
+      "main": "ch2_willow_outl_1.8c2dbec8.ogg"
+    },
+    "ch2_willow_price_1": {
+      "main": "ch2_willow_price_1.a1935626.ogg"
+    },
+    "ch2_willow_price_2": {
+      "main": "ch2_willow_price_2.5369810e.ogg"
+    },
+    "ch2_willow_sing_fail_1": {
+      "main": "ch2_willow_sing_fail_1.92afaa4b.ogg"
+    },
+    "ch2_willow_sing_pass_1": {
+      "main": "ch2_willow_sing_pass_1.9465bd1b.ogg"
+    },
+    "ch2_willow_sing_pass_2": {
+      "main": "ch2_willow_sing_pass_2.183abe02.ogg"
+    },
+    "ch3_bridge_slain_approach_1": {
+      "main": "ch3_bridge_slain_approach_1.0579e82d.ogg"
+    },
+    "ch3_bridge_slain_approach_2": {
+      "main": "ch3_bridge_slain_approach_2.59201003.ogg"
+    },
+    "ch3_bridge_slain_approach_3": {
+      "main": "ch3_bridge_slain_approach_3.0ddc6f67.ogg"
+    },
+    "ch3_bridge_slain_approach_4": {
+      "main": "ch3_bridge_slain_approach_4.7c01c6bd.ogg"
+    },
+    "ch3_bridge_slain_cross_1": {
+      "main": "ch3_bridge_slain_cross_1.35aafe72.ogg"
+    },
+    "ch3_bridge_slain_fight_1": {
+      "main": "ch3_bridge_slain_fight_1.04fc9978.ogg"
+    },
+    "ch3_bridge_slain_first_1": {
+      "main": "ch3_bridge_slain_first_1.c50c7c5a.ogg"
+    },
+    "ch3_bridge_slain_sorry_1": {
+      "main": "ch3_bridge_slain_sorry_1.609d8045.ogg"
+    },
+    "ch3_bridge_slain_sorry_2": {
+      "main": "ch3_bridge_slain_sorry_2.c7f67573.ogg"
+    },
+    "ch3_bridge_slain_threat_fail_1": {
+      "main": "ch3_bridge_slain_threat_fail_1.156ebdcd.ogg"
+    },
+    "ch3_bridge_slain_threat_pass_1": {
+      "main": "ch3_bridge_slain_threat_pass_1.bf8fd91e.ogg"
+    },
+    "ch3_bridge_slain_threat_pass_2": {
+      "main": "ch3_bridge_slain_threat_pass_2.e5398546.ogg"
+    },
+    "ch3_bridge_spared_approach_1": {
+      "main": "ch3_bridge_spared_approach_1.0579e82d.ogg"
+    },
+    "ch3_bridge_spared_approach_2": {
+      "main": "ch3_bridge_spared_approach_2.dd6f65cd.ogg"
+    },
+    "ch3_bridge_spared_approach_3": {
+      "main": "ch3_bridge_spared_approach_3.85b53238.ogg"
+    },
+    "ch3_bridge_spared_approach_4": {
+      "main": "ch3_bridge_spared_approach_4.8be0966f.ogg"
+    },
+    "ch3_bridge_spared_cross_1": {
+      "main": "ch3_bridge_spared_cross_1.94713ad4.ogg"
+    },
+    "ch3_bridge_spared_cross_2": {
+      "main": "ch3_bridge_spared_cross_2.5a7b1e17.ogg"
+    },
+    "ch3_bridge_spared_fight_1": {
+      "main": "ch3_bridge_spared_fight_1.71b8e78f.ogg"
+    },
+    "ch3_bridge_spared_first_1": {
+      "main": "ch3_bridge_spared_first_1.11e9daa2.ogg"
+    },
+    "ch3_bridge_spared_first_2": {
+      "main": "ch3_bridge_spared_first_2.a64a0393.ogg"
+    },
+    "ch3_bridge_spared_home_1": {
+      "main": "ch3_bridge_spared_home_1.0e6d61a8.ogg"
+    },
+    "ch3_bridge_spared_home_2": {
+      "main": "ch3_bridge_spared_home_2.af70fedc.ogg"
+    },
+    "ch3_bridge_spared_share_fail_1": {
+      "main": "ch3_bridge_spared_share_fail_1.5423478c.ogg"
+    },
+    "ch3_bridge_spared_share_pass_1": {
+      "main": "ch3_bridge_spared_share_pass_1.1928b6aa.ogg"
+    },
+    "ch3_bridge_spared_share_pass_2": {
+      "main": "ch3_bridge_spared_share_pass_2.a1f12a8e.ogg"
+    },
+    "ch3_crypt_door_loud_1": {
+      "main": "ch3_crypt_door_loud_1.9d70f4ba.ogg"
+    },
+    "ch3_crypt_door_loud_2": {
+      "main": "ch3_crypt_door_loud_2.7bc0b852.ogg"
+    },
+    "ch3_crypt_door_quiet_1": {
+      "main": "ch3_crypt_door_quiet_1.5b1f7ee1.ogg"
+    },
+    "ch3_crypt_door_quiet_2": {
+      "main": "ch3_crypt_door_quiet_2.260ae8a4.ogg"
+    },
+    "ch3_crypt_door_stair_1": {
+      "main": "ch3_crypt_door_stair_1.868d46e7.ogg"
+    },
+    "ch3_crypt_door_stair_2": {
+      "main": "ch3_crypt_door_stair_2.824b9f10.ogg"
+    },
+    "ch3_crypt_door_stair_3": {
+      "main": "ch3_crypt_door_stair_3.0c947dd3.ogg"
+    },
+    "ch3_crypt_door_stone_1": {
+      "main": "ch3_crypt_door_stone_1.2fea08a1.ogg"
+    },
+    "ch3_crypt_door_stone_2": {
+      "main": "ch3_crypt_door_stone_2.aa6607b8.ogg"
+    },
+    "ch3_crypt_records_after_1": {
+      "main": "ch3_crypt_records_after_1.dfe34bcc.ogg"
+    },
+    "ch3_crypt_records_dust_1": {
+      "main": "ch3_crypt_records_dust_1.f728a39b.ogg"
+    },
+    "ch3_crypt_records_family_1": {
+      "main": "ch3_crypt_records_family_1.90c12d82.ogg"
+    },
+    "ch3_crypt_records_found_1": {
+      "main": "ch3_crypt_records_found_1.55cb9d59.ogg"
+    },
+    "ch3_crypt_records_gods_1": {
+      "main": "ch3_crypt_records_gods_1.a6d626d8.ogg"
+    },
+    "ch3_crypt_records_knew_1": {
+      "main": "ch3_crypt_records_knew_1.744336a2.ogg"
+    },
+    "ch3_crypt_records_knew_2": {
+      "main": "ch3_crypt_records_knew_2.6428e52e.ogg"
+    },
+    "ch3_crypt_records_last_page_1": {
+      "main": "ch3_crypt_records_last_page_1.648df83b.ogg"
+    },
+    "ch3_crypt_records_last_page_2": {
+      "main": "ch3_crypt_records_last_page_2.3ec9df78.ogg"
+    },
+    "ch3_crypt_records_last_page_3": {
+      "main": "ch3_crypt_records_last_page_3.ad885a17.ogg"
+    },
+    "ch3_crypt_records_last_page_4": {
+      "main": "ch3_crypt_records_last_page_4.cc9d094c.ogg"
+    },
+    "ch3_crypt_records_last_page_5": {
+      "main": "ch3_crypt_records_last_page_5.d9388d4e.ogg"
+    },
+    "ch3_crypt_records_ledger_1": {
+      "main": "ch3_crypt_records_ledger_1.f6f047d2.ogg"
+    },
+    "ch3_crypt_records_ledger_2": {
+      "main": "ch3_crypt_records_ledger_2.a7b49350.ogg"
+    },
+    "ch3_crypt_records_ledger_3": {
+      "main": "ch3_crypt_records_ledger_3.314f51e3.ogg"
+    },
+    "ch3_crypt_records_ledger_4": {
+      "main": "ch3_crypt_records_ledger_4.a7e4d29c.ogg"
+    },
+    "ch3_crypt_records_ledger_5": {
+      "main": "ch3_crypt_records_ledger_5.393e18c7.ogg"
+    },
+    "ch3_crypt_records_ledger_6": {
+      "main": "ch3_crypt_records_ledger_6.32b5dd42.ogg"
+    },
+    "ch3_crypt_records_left_1": {
+      "main": "ch3_crypt_records_left_1.be8508a1.ogg"
+    },
+    "ch3_crypt_records_never_1": {
+      "main": "ch3_crypt_records_never_1.5cdf0eb1.ogg"
+    },
+    "ch3_crypt_records_pages_1": {
+      "main": "ch3_crypt_records_pages_1.02c9312a.ogg"
+    },
+    "ch3_crypt_records_paid_1": {
+      "main": "ch3_crypt_records_paid_1.75cced84.ogg"
+    },
+    "ch3_crypt_records_quiet_1": {
+      "main": "ch3_crypt_records_quiet_1.849be0d8.ogg"
+    },
+    "ch3_crypt_records_quiet_2": {
+      "main": "ch3_crypt_records_quiet_2.72cd7c88.ogg"
+    },
+    "ch3_crypt_records_quiet_3": {
+      "main": "ch3_crypt_records_quiet_3.527fe3af.ogg"
+    },
+    "ch3_crypt_records_scripture_1": {
+      "main": "ch3_crypt_records_scripture_1.2c88bc0a.ogg"
+    },
+    "ch3_crypt_records_stair_1": {
+      "main": "ch3_crypt_records_stair_1.f3e641b5.ogg"
+    },
+    "ch3_crypt_records_stair_2": {
+      "main": "ch3_crypt_records_stair_2.dbe4ff14.ogg"
+    },
+    "ch3_crypt_records_tricked_1": {
+      "main": "ch3_crypt_records_tricked_1.9561575a.ogg"
+    },
+    "ch3_crypt_records_why_now_1": {
+      "main": "ch3_crypt_records_why_now_1.f26ac058.ogg"
+    },
+    "ch3_guest_right_arrive_1": {
+      "main": "ch3_guest_right_arrive_1.1b73b1b4.ogg"
+    },
+    "ch3_guest_right_arrive_2": {
+      "main": "ch3_guest_right_arrive_2.c5ee6fe4.ogg"
+    },
+    "ch3_guest_right_arrive_3": {
+      "main": "ch3_guest_right_arrive_3.fe208b00.ogg"
+    },
+    "ch3_guest_right_arrive_4": {
+      "main": "ch3_guest_right_arrive_4.b2d66ed1.ogg"
+    },
+    "ch3_guest_right_clans_1": {
+      "main": "ch3_guest_right_clans_1.b1c638e8.ogg"
+    },
+    "ch3_guest_right_law_1": {
+      "main": "ch3_guest_right_law_1.d65b0308.ogg"
+    },
+    "ch3_guest_right_law_2": {
+      "main": "ch3_guest_right_law_2.c478a2e3.ogg"
+    },
+    "ch3_guest_right_law_3": {
+      "main": "ch3_guest_right_law_3.c6144870.ogg"
+    },
+    "ch3_guest_right_message_1": {
+      "main": "ch3_guest_right_message_1.4cd597df.ogg"
+    },
+    "ch3_guest_right_message_2": {
+      "main": "ch3_guest_right_message_2.603143a5.ogg"
+    },
+    "ch3_guest_right_more_1": {
+      "main": "ch3_guest_right_more_1.076828b5.ogg"
+    },
+    "ch3_guest_right_news_1": {
+      "main": "ch3_guest_right_news_1.a0191bc7.ogg"
+    },
+    "ch3_guest_right_news_2": {
+      "main": "ch3_guest_right_news_2.acc81481.ogg"
+    },
+    "ch3_guest_right_news_3": {
+      "main": "ch3_guest_right_news_3.6cfb8489.ogg"
+    },
+    "ch3_guest_right_news_4": {
+      "main": "ch3_guest_right_news_4.2ed101a0.ogg"
+    },
+    "ch3_guest_right_news_5": {
+      "main": "ch3_guest_right_news_5.9d34248a.ogg"
+    },
+    "ch3_guest_right_night_1": {
+      "main": "ch3_guest_right_night_1.24c7529a.ogg"
+    },
+    "ch3_guest_right_night_2": {
+      "main": "ch3_guest_right_night_2.f174e960.ogg"
+    },
+    "ch3_guest_right_others_1": {
+      "main": "ch3_guest_right_others_1.8bdf633c.ogg"
+    },
+    "ch3_guest_right_others_2": {
+      "main": "ch3_guest_right_others_2.c45e2ace.ogg"
+    },
+    "ch3_guest_right_sing_1": {
+      "main": "ch3_guest_right_sing_1.3a9c27fd.ogg"
+    },
+    "ch3_guest_right_sing_2": {
+      "main": "ch3_guest_right_sing_2.ba0ccc28.ogg"
+    },
+    "ch3_guest_right_v_slain_1": {
+      "main": "ch3_guest_right_v_slain_1.c5a1f7db.ogg"
+    },
+    "ch3_guest_right_v_slain_2": {
+      "main": "ch3_guest_right_v_slain_2.9d21e90e.ogg"
+    },
+    "ch3_guest_right_v_spared_1": {
+      "main": "ch3_guest_right_v_spared_1.98963fc7.ogg"
+    },
+    "ch3_guest_right_v_spared_2": {
+      "main": "ch3_guest_right_v_spared_2.1fb8570e.ogg"
+    },
+    "ch3_guest_right_vorga_1": {
+      "main": "ch3_guest_right_vorga_1.48942c8c.ogg"
+    },
+    "ch3_guest_right_vorga_2": {
+      "main": "ch3_guest_right_vorga_2.40b58a17.ogg"
+    },
+    "ch3_guest_right_why_1": {
+      "main": "ch3_guest_right_why_1.5012745a.ogg"
+    },
+    "ch3_guest_right_why_2": {
+      "main": "ch3_guest_right_why_2.b3fbca98.ogg"
+    },
+    "ch3_maren_parley_ask_me_1": {
+      "main": "ch3_maren_parley_ask_me_1.7c9f9053.ogg"
+    },
+    "ch3_maren_parley_farewell_1": {
+      "main": "ch3_maren_parley_farewell_1.7cbcf8f5.ogg"
+    },
+    "ch3_maren_parley_farewell_2": {
+      "main": "ch3_maren_parley_farewell_2.b5c06d10.ogg"
+    },
+    "ch3_maren_parley_farewell_3": {
+      "main": "ch3_maren_parley_farewell_3.077fd4c0.ogg"
+    },
+    "ch3_maren_parley_farewell_4": {
+      "main": "ch3_maren_parley_farewell_4.c69fae17.ogg"
+    },
+    "ch3_maren_parley_keep_1": {
+      "main": "ch3_maren_parley_keep_1.466d9f7b.ogg"
+    },
+    "ch3_maren_parley_left_1": {
+      "main": "ch3_maren_parley_left_1.fe30a510.ogg"
+    },
+    "ch3_maren_parley_lives_1": {
+      "main": "ch3_maren_parley_lives_1.feb013d3.ogg"
+    },
+    "ch3_maren_parley_lives_2": {
+      "main": "ch3_maren_parley_lives_2.f42337e5.ogg"
+    },
+    "ch3_maren_parley_paid_1": {
+      "main": "ch3_maren_parley_paid_1.88f9bcaf.ogg"
+    },
+    "ch3_maren_parley_refuse_1": {
+      "main": "ch3_maren_parley_refuse_1.6a388092.ogg"
+    },
+    "ch3_maren_parley_rim_1": {
+      "main": "ch3_maren_parley_rim_1.3d5dcd43.ogg"
+    },
+    "ch3_maren_parley_rim_2": {
+      "main": "ch3_maren_parley_rim_2.58e06f9a.ogg"
+    },
+    "ch3_maren_parley_rim_3": {
+      "main": "ch3_maren_parley_rim_3.299a05ab.ogg"
+    },
+    "ch3_maren_parley_rim_4": {
+      "main": "ch3_maren_parley_rim_4.66508514.ogg"
+    },
+    "ch3_maren_parley_shards_1": {
+      "main": "ch3_maren_parley_shards_1.9471f7d9.ogg"
+    },
+    "ch3_maren_parley_shards_2": {
+      "main": "ch3_maren_parley_shards_2.59e0e09b.ogg"
+    },
+    "ch3_maren_parley_still_1": {
+      "main": "ch3_maren_parley_still_1.58392dc2.ogg"
+    },
+    "ch3_maren_parley_still_2": {
+      "main": "ch3_maren_parley_still_2.2792ea54.ogg"
+    },
+    "ch3_maren_parley_stolen_1": {
+      "main": "ch3_maren_parley_stolen_1.29d4874a.ogg"
+    },
+    "ch3_maren_parley_stolen_2": {
+      "main": "ch3_maren_parley_stolen_2.a6976854.ogg"
+    },
+    "ch3_maren_parley_think_1": {
+      "main": "ch3_maren_parley_think_1.5545d933.ogg"
+    },
+    "ch3_maren_parley_tricked_1": {
+      "main": "ch3_maren_parley_tricked_1.cbf33015.ogg"
+    },
+    "ch3_maren_parley_v_slain_1": {
+      "main": "ch3_maren_parley_v_slain_1.80e235d0.ogg"
+    },
+    "ch3_maren_parley_v_spared_1": {
+      "main": "ch3_maren_parley_v_spared_1.dbeb9ee0.ogg"
+    },
+    "ch3_maren_parley_want_1": {
+      "main": "ch3_maren_parley_want_1.2c7b4182.ogg"
+    },
+    "ch3_maren_parley_want_2": {
+      "main": "ch3_maren_parley_want_2.bcae659f.ogg"
+    },
+    "ch3_maren_parley_want_3": {
+      "main": "ch3_maren_parley_want_3.3b81521d.ogg"
+    },
+    "ch3_maren_parley_want_4": {
+      "main": "ch3_maren_parley_want_4.d012451b.ogg"
+    },
+    "ch3_maren_parley_whose_fail_1": {
+      "main": "ch3_maren_parley_whose_fail_1.b4e71f4c.ogg"
+    },
+    "ch3_maren_parley_whose_pass_1": {
+      "main": "ch3_maren_parley_whose_pass_1.5adbebeb.ogg"
+    },
+    "ch3_maren_parley_whose_pass_2": {
+      "main": "ch3_maren_parley_whose_pass_2.a6ae47f0.ogg"
+    },
+    "ch3_maren_parley_winter_1": {
+      "main": "ch3_maren_parley_winter_1.4fe6371f.ogg"
+    },
+    "ch3_skarrow_messenger_dream_1": {
+      "main": "ch3_skarrow_messenger_dream_1.626aea47.ogg"
+    },
+    "ch3_skarrow_messenger_end_1": {
+      "main": "ch3_skarrow_messenger_end_1.5dda0fc3.ogg"
+    },
+    "ch3_skarrow_messenger_grandson_1": {
+      "main": "ch3_skarrow_messenger_grandson_1.3d66a7ea.ogg"
+    },
+    "ch3_skarrow_messenger_grandson_2": {
+      "main": "ch3_skarrow_messenger_grandson_2.acb0cafc.ogg"
+    },
+    "ch3_skarrow_messenger_grandson_3": {
+      "main": "ch3_skarrow_messenger_grandson_3.3b125355.ogg"
+    },
+    "ch3_skarrow_messenger_honest_1": {
+      "main": "ch3_skarrow_messenger_honest_1.2a4ecfbe.ogg"
+    },
+    "ch3_skarrow_messenger_more_1": {
+      "main": "ch3_skarrow_messenger_more_1.5b9d1aba.ogg"
+    },
+    "ch3_skarrow_messenger_more_2": {
+      "main": "ch3_skarrow_messenger_more_2.02f16f2a.ogg"
+    },
+    "ch3_skarrow_messenger_promise_1": {
+      "main": "ch3_skarrow_messenger_promise_1.9f7ef439.ogg"
+    },
+    "ch3_skarrow_messenger_runner_1": {
+      "main": "ch3_skarrow_messenger_runner_1.9fcc21d6.ogg"
+    },
+    "ch3_skarrow_messenger_runner_2": {
+      "main": "ch3_skarrow_messenger_runner_2.191d3a6a.ogg"
+    },
+    "ch3_skarrow_messenger_soldier_1": {
+      "main": "ch3_skarrow_messenger_soldier_1.e66b0d23.ogg"
+    },
+    "ch3_skarrow_messenger_song_1": {
+      "main": "ch3_skarrow_messenger_song_1.855c445d.ogg"
+    },
+    "ch3_skarrow_messenger_song_2": {
+      "main": "ch3_skarrow_messenger_song_2.efb6659d.ogg"
+    },
+    "ch3_skarrow_messenger_song_3": {
+      "main": "ch3_skarrow_messenger_song_3.28a115f1.ogg"
+    },
+    "ch3_skarrow_messenger_song_4": {
+      "main": "ch3_skarrow_messenger_song_4.69eb6d50.ogg"
+    },
+    "ch3_skarrow_messenger_song_5": {
+      "main": "ch3_skarrow_messenger_song_5.5ad92531.ogg"
+    },
+    "ch3_skarrow_messenger_song_6": {
+      "main": "ch3_skarrow_messenger_song_6.e4e21962.ogg"
+    },
+    "ch3_vorga_shallows_slain_kill_1": {
+      "main": "ch3_vorga_shallows_slain_kill_1.0ca7d09d.ogg"
+    },
+    "ch3_vorga_shallows_slain_kill_2": {
+      "main": "ch3_vorga_shallows_slain_kill_2.8f8d8f57.ogg"
+    },
+    "ch3_vorga_shallows_slain_raids_1": {
+      "main": "ch3_vorga_shallows_slain_raids_1.33927748.ogg"
+    },
+    "ch3_vorga_shallows_slain_ropes_1": {
+      "main": "ch3_vorga_shallows_slain_ropes_1.bc870bff.ogg"
+    },
+    "ch3_vorga_shallows_slain_shallows_1": {
+      "main": "ch3_vorga_shallows_slain_shallows_1.eed949f6.ogg"
+    },
+    "ch3_vorga_shallows_slain_shallows_2": {
+      "main": "ch3_vorga_shallows_slain_shallows_2.1791a295.ogg"
+    },
+    "ch3_vorga_shallows_slain_shallows_3": {
+      "main": "ch3_vorga_shallows_slain_shallows_3.1b9ecf57.ogg"
+    },
+    "ch3_vorga_shallows_slain_spare_1": {
+      "main": "ch3_vorga_shallows_slain_spare_1.8dff55b5.ogg"
+    },
+    "ch3_vorga_shallows_slain_spare_2": {
+      "main": "ch3_vorga_shallows_slain_spare_2.912418bc.ogg"
+    },
+    "ch3_vorga_shallows_slain_spare_3": {
+      "main": "ch3_vorga_shallows_slain_spare_3.6d7c3e90.ogg"
+    },
+    "ch3_vorga_shallows_slain_vote_1": {
+      "main": "ch3_vorga_shallows_slain_vote_1.07b8cd2a.ogg"
+    },
+    "ch3_vorga_shallows_slain_wait_1": {
+      "main": "ch3_vorga_shallows_slain_wait_1.278502b3.ogg"
+    },
+    "ch3_vorga_shallows_slain_wanted_1": {
+      "main": "ch3_vorga_shallows_slain_wanted_1.e36008ca.ogg"
+    },
+    "ch3_vorga_shallows_spared_asked_1": {
+      "main": "ch3_vorga_shallows_spared_asked_1.b3813953.ogg"
+    },
+    "ch3_vorga_shallows_spared_asked_2": {
+      "main": "ch3_vorga_shallows_spared_asked_2.e0972bb4.ogg"
+    },
+    "ch3_vorga_shallows_spared_kill_1": {
+      "main": "ch3_vorga_shallows_spared_kill_1.2ecc95d0.ogg"
+    },
+    "ch3_vorga_shallows_spared_kill_2": {
+      "main": "ch3_vorga_shallows_spared_kill_2.a60af6be.ogg"
+    },
+    "ch3_vorga_shallows_spared_kill_3": {
+      "main": "ch3_vorga_shallows_spared_kill_3.117f08b7.ogg"
+    },
+    "ch3_vorga_shallows_spared_raids_1": {
+      "main": "ch3_vorga_shallows_spared_raids_1.33927748.ogg"
+    },
+    "ch3_vorga_shallows_spared_ropes_1": {
+      "main": "ch3_vorga_shallows_spared_ropes_1.bc870bff.ogg"
+    },
+    "ch3_vorga_shallows_spared_shallows_1": {
+      "main": "ch3_vorga_shallows_spared_shallows_1.eed949f6.ogg"
+    },
+    "ch3_vorga_shallows_spared_shallows_2": {
+      "main": "ch3_vorga_shallows_spared_shallows_2.70f50e57.ogg"
+    },
+    "ch3_vorga_shallows_spared_shallows_3": {
+      "main": "ch3_vorga_shallows_spared_shallows_3.f5ccb4f2.ogg"
+    },
+    "ch3_vorga_shallows_spared_spare_1": {
+      "main": "ch3_vorga_shallows_spared_spare_1.84ac3138.ogg"
+    },
+    "ch3_vorga_shallows_spared_spare_2": {
+      "main": "ch3_vorga_shallows_spared_spare_2.57c78e6f.ogg"
+    },
+    "ch3_vorga_shallows_spared_spare_3": {
+      "main": "ch3_vorga_shallows_spared_spare_3.5c1bbc55.ogg"
+    },
+    "ch3_vorga_shallows_spared_vote_1": {
+      "main": "ch3_vorga_shallows_spared_vote_1.07b8cd2a.ogg"
+    },
+    "ch3_vorga_shallows_spared_wait_1": {
+      "main": "ch3_vorga_shallows_spared_wait_1.278502b3.ogg"
+    },
+    "ch4_caves_after_in_1": {
+      "main": "ch4_caves_after_in_1.68c798c0.ogg"
+    },
+    "ch4_caves_after_open_1": {
+      "main": "ch4_caves_after_open_1.8e54381b.ogg"
+    },
+    "ch4_caves_after_open_2": {
+      "main": "ch4_caves_after_open_2.db3c540a.ogg"
+    },
+    "ch4_caves_after_open_3": {
+      "main": "ch4_caves_after_open_3.cb40b8b3.ogg"
+    },
+    "ch4_caves_after_open_4": {
+      "main": "ch4_caves_after_open_4.5a47c819.ogg"
+    },
+    "ch4_caves_after_open_5": {
+      "main": "ch4_caves_after_open_5.91ec9c90.ogg"
+    },
+    "ch4_caves_after_read_fail_1": {
+      "main": "ch4_caves_after_read_fail_1.48f693dc.ogg"
+    },
+    "ch4_caves_after_read_pass_1": {
+      "main": "ch4_caves_after_read_pass_1.d80d199d.ogg"
+    },
+    "ch4_caves_lead_druid_1": {
+      "main": "ch4_caves_lead_druid_1.dda88530.ogg"
+    },
+    "ch4_caves_lead_fight_1": {
+      "main": "ch4_caves_lead_fight_1.be9ac1d8.ogg"
+    },
+    "ch4_caves_lead_fight_2": {
+      "main": "ch4_caves_lead_fight_2.d55cb9db.ogg"
+    },
+    "ch4_caves_lead_open_1": {
+      "main": "ch4_caves_lead_open_1.f0d8b1d1.ogg"
+    },
+    "ch4_caves_lead_open_2": {
+      "main": "ch4_caves_lead_open_2.4d7971c5.ogg"
+    },
+    "ch4_caves_lead_open_3": {
+      "main": "ch4_caves_lead_open_3.5c07aa7a.ogg"
+    },
+    "ch4_caves_lead_open_4": {
+      "main": "ch4_caves_lead_open_4.8378f276.ogg"
+    },
+    "ch4_caves_lead_wizard_1": {
+      "main": "ch4_caves_lead_wizard_1.3a39897d.ogg"
+    },
+    "ch4_greyhold_artisan_1": {
+      "main": "ch4_greyhold_artisan_1.1fa8bedd.ogg"
+    },
+    "ch4_greyhold_artisan_2": {
+      "main": "ch4_greyhold_artisan_2.0aea3179.ogg"
+    },
+    "ch4_greyhold_cage_1": {
+      "main": "ch4_greyhold_cage_1.d07bc53c.ogg"
+    },
+    "ch4_greyhold_cage_2": {
+      "main": "ch4_greyhold_cage_2.b8faf9a7.ogg"
+    },
+    "ch4_greyhold_cage_3": {
+      "main": "ch4_greyhold_cage_3.f702e8f5.ogg"
+    },
+    "ch4_greyhold_cage_4": {
+      "main": "ch4_greyhold_cage_4.3d3ce6b5.ogg"
+    },
+    "ch4_greyhold_copy_1": {
+      "main": "ch4_greyhold_copy_1.369e520f.ogg"
+    },
+    "ch4_greyhold_dwarf_1": {
+      "main": "ch4_greyhold_dwarf_1.e89baffe.ogg"
+    },
+    "ch4_greyhold_dwarf_2": {
+      "main": "ch4_greyhold_dwarf_2.943ee263.ogg"
+    },
+    "ch4_greyhold_hist_fail_1": {
+      "main": "ch4_greyhold_hist_fail_1.0362481a.ogg"
+    },
+    "ch4_greyhold_hist_pass_1": {
+      "main": "ch4_greyhold_hist_pass_1.ab3e060b.ogg"
+    },
+    "ch4_greyhold_leave_1": {
+      "main": "ch4_greyhold_leave_1.36326960.ogg"
+    },
+    "ch4_greyhold_leave_2": {
+      "main": "ch4_greyhold_leave_2.393e0fa2.ogg"
+    },
+    "ch4_greyhold_open_1": {
+      "main": "ch4_greyhold_open_1.efae82f6.ogg"
+    },
+    "ch4_greyhold_open_2": {
+      "main": "ch4_greyhold_open_2.01eba92d.ogg"
+    },
+    "ch4_greyhold_open_3": {
+      "main": "ch4_greyhold_open_3.88165fb2.ogg"
+    },
+    "ch4_greyhold_open_4": {
+      "main": "ch4_greyhold_open_4.940e8ba4.ogg"
+    },
+    "ch4_greyhold_stolen_1": {
+      "main": "ch4_greyhold_stolen_1.0803f390.ogg"
+    },
+    "ch4_greyhold_why_1": {
+      "main": "ch4_greyhold_why_1.3a609f8d.ogg"
+    },
+    "ch4_ivos_choice_ask_1": {
+      "main": "ch4_ivos_choice_ask_1.d3316c5b.ogg"
+    },
+    "ch4_ivos_choice_ask_2": {
+      "main": "ch4_ivos_choice_ask_2.70ac6db2.ogg"
+    },
+    "ch4_ivos_choice_court_1": {
+      "main": "ch4_ivos_choice_court_1.c0707d3e.ogg"
+    },
+    "ch4_ivos_choice_court_2": {
+      "main": "ch4_ivos_choice_court_2.7d15b40d.ogg"
+    },
+    "ch4_ivos_choice_explain_1": {
+      "main": "ch4_ivos_choice_explain_1.416ff8e6.ogg"
+    },
+    "ch4_ivos_choice_explain_2": {
+      "main": "ch4_ivos_choice_explain_2.ca43bbcf.ogg"
+    },
+    "ch4_ivos_choice_explain_3": {
+      "main": "ch4_ivos_choice_explain_3.c49ec4f7.ogg"
+    },
+    "ch4_ivos_choice_help_1": {
+      "main": "ch4_ivos_choice_help_1.57833883.ogg"
+    },
+    "ch4_ivos_choice_help_2": {
+      "main": "ch4_ivos_choice_help_2.0fce638b.ogg"
+    },
+    "ch4_ivos_choice_help_3": {
+      "main": "ch4_ivos_choice_help_3.488d6571.ogg"
+    },
+    "ch4_ivos_choice_help_4": {
+      "main": "ch4_ivos_choice_help_4.cc21bc8c.ogg"
+    },
+    "ch4_ivos_choice_help_5": {
+      "main": "ch4_ivos_choice_help_5.2f31b0e6.ogg"
+    },
+    "ch4_ivos_choice_help_6": {
+      "main": "ch4_ivos_choice_help_6.ceabe450.ogg"
+    },
+    "ch4_ivos_choice_help_7": {
+      "main": "ch4_ivos_choice_help_7.60388604.ogg"
+    },
+    "ch4_ivos_choice_help_8": {
+      "main": "ch4_ivos_choice_help_8.d459d9be.ogg"
+    },
+    "ch4_ivos_choice_med_fail_1": {
+      "main": "ch4_ivos_choice_med_fail_1.c0173823.ogg"
+    },
+    "ch4_ivos_choice_med_pass_1": {
+      "main": "ch4_ivos_choice_med_pass_1.46c6d296.ogg"
+    },
+    "ch4_ivos_choice_med_pass_2": {
+      "main": "ch4_ivos_choice_med_pass_2.4db3b31d.ogg"
+    },
+    "ch4_ivos_choice_need_1": {
+      "main": "ch4_ivos_choice_need_1.75aa0c5b.ogg"
+    },
+    "ch4_ivos_choice_need_2": {
+      "main": "ch4_ivos_choice_need_2.4fcc6d1d.ogg"
+    },
+    "ch4_ivos_choice_notes_1": {
+      "main": "ch4_ivos_choice_notes_1.9d67487e.ogg"
+    },
+    "ch4_ivos_choice_notes_2": {
+      "main": "ch4_ivos_choice_notes_2.d7618c6c.ogg"
+    },
+    "ch4_ivos_choice_open_1": {
+      "main": "ch4_ivos_choice_open_1.7c92786a.ogg"
+    },
+    "ch4_ivos_choice_open_2": {
+      "main": "ch4_ivos_choice_open_2.ec5d7863.ogg"
+    },
+    "ch4_ivos_choice_open_3": {
+      "main": "ch4_ivos_choice_open_3.f79442b9.ogg"
+    },
+    "ch4_ivos_choice_open_4": {
+      "main": "ch4_ivos_choice_open_4.3eab2f63.ogg"
+    },
+    "ch4_ivos_choice_pip_1": {
+      "main": "ch4_ivos_choice_pip_1.a96c2037.ogg"
+    },
+    "ch4_ivos_choice_pip_2": {
+      "main": "ch4_ivos_choice_pip_2.a63942cf.ogg"
+    },
+    "ch4_ivos_choice_pip_3": {
+      "main": "ch4_ivos_choice_pip_3.fe66e730.ogg"
+    },
+    "ch4_ivos_choice_pip_4": {
+      "main": "ch4_ivos_choice_pip_4.85afd5bb.ogg"
+    },
+    "ch4_ivos_choice_pip_5": {
+      "main": "ch4_ivos_choice_pip_5.a66b6a37.ogg"
+    },
+    "ch4_ivos_choice_pip_6": {
+      "main": "ch4_ivos_choice_pip_6.4d71c454.ogg"
+    },
+    "ch4_ivos_choice_pip_7": {
+      "main": "ch4_ivos_choice_pip_7.f78fc604.ogg"
+    },
+    "ch4_ivos_choice_stop_1": {
+      "main": "ch4_ivos_choice_stop_1.d3db36f5.ogg"
+    },
+    "ch4_ivos_choice_stop_2": {
+      "main": "ch4_ivos_choice_stop_2.a7c036f0.ogg"
+    },
+    "ch4_ivos_choice_stop_3": {
+      "main": "ch4_ivos_choice_stop_3.7f1c55fc.ogg"
+    },
+    "ch4_ivos_choice_stop_4": {
+      "main": "ch4_ivos_choice_stop_4.fefa6d59.ogg"
+    },
+    "ch4_ivos_choice_stop_5": {
+      "main": "ch4_ivos_choice_stop_5.a707ba13.ogg"
+    },
+    "ch4_ivos_choice_stop_6": {
+      "main": "ch4_ivos_choice_stop_6.fe3cef5a.ogg"
+    },
+    "ch4_pilgrim_road_dusk_1": {
+      "main": "ch4_pilgrim_road_dusk_1.5a85cb83.ogg"
+    },
+    "ch4_pilgrim_road_dusk_2": {
+      "main": "ch4_pilgrim_road_dusk_2.0893894f.ogg"
+    },
+    "ch4_pilgrim_road_goliath_1": {
+      "main": "ch4_pilgrim_road_goliath_1.c46401d0.ogg"
+    },
+    "ch4_pilgrim_road_goliath_2": {
+      "main": "ch4_pilgrim_road_goliath_2.58873987.ogg"
+    },
+    "ch4_pilgrim_road_hand_1": {
+      "main": "ch4_pilgrim_road_hand_1.cf03f2f7.ogg"
+    },
+    "ch4_pilgrim_road_hand_2": {
+      "main": "ch4_pilgrim_road_hand_2.511a87ef.ogg"
+    },
+    "ch4_pilgrim_road_keep_1": {
+      "main": "ch4_pilgrim_road_keep_1.463739fe.ogg"
+    },
+    "ch4_pilgrim_road_open_1": {
+      "main": "ch4_pilgrim_road_open_1.bb48b188.ogg"
+    },
+    "ch4_pilgrim_road_open_2": {
+      "main": "ch4_pilgrim_road_open_2.bb6d1523.ogg"
+    },
+    "ch4_pilgrim_road_open_3": {
+      "main": "ch4_pilgrim_road_open_3.3ed2775f.ogg"
+    },
+    "ch4_pilgrim_road_open_4": {
+      "main": "ch4_pilgrim_road_open_4.f80c06b5.ogg"
+    },
+    "ch4_pilgrim_road_open_5": {
+      "main": "ch4_pilgrim_road_open_5.20f3e973.ogg"
+    },
+    "ch4_pilgrim_road_pass_1": {
+      "main": "ch4_pilgrim_road_pass_1.39bbfde4.ogg"
+    },
+    "ch4_pilgrim_road_pass_2": {
+      "main": "ch4_pilgrim_road_pass_2.ce8f42ab.ogg"
+    },
+    "ch4_pilgrim_road_rite_1": {
+      "main": "ch4_pilgrim_road_rite_1.15f6cac9.ogg"
+    },
+    "ch4_pilgrim_road_rite_2": {
+      "main": "ch4_pilgrim_road_rite_2.577f702e.ogg"
+    },
+    "ch4_pilgrim_road_sings_1": {
+      "main": "ch4_pilgrim_road_sings_1.4340f2e4.ogg"
+    },
+    "ch4_pilgrim_road_sings_2": {
+      "main": "ch4_pilgrim_road_sings_2.16f9bcf0.ogg"
+    },
+    "ch4_pilgrim_road_sings_3": {
+      "main": "ch4_pilgrim_road_sings_3.bb64e8ac.ogg"
+    },
+    "ch4_pilgrim_road_song_1": {
+      "main": "ch4_pilgrim_road_song_1.dbd5f236.ogg"
+    },
+    "ch4_pilgrim_road_where_1": {
+      "main": "ch4_pilgrim_road_where_1.54ff02d1.ogg"
+    },
+    "ch4_pilgrim_road_where_2": {
+      "main": "ch4_pilgrim_road_where_2.5fc41f94.ogg"
+    },
+    "ch4_pip_doctor_open_1": {
+      "main": "ch4_pip_doctor_open_1.826057fb.ogg"
+    },
+    "ch4_pip_doctor_open_2": {
+      "main": "ch4_pip_doctor_open_2.8d0e6c9d.ogg"
+    },
+    "ch4_pip_doctor_open_3": {
+      "main": "ch4_pip_doctor_open_3.e7cff36a.ogg"
+    },
+    "ch4_pip_doctor_open_4": {
+      "main": "ch4_pip_doctor_open_4.7d716c33.ogg"
+    },
+    "ch4_pip_doctor_open_5": {
+      "main": "ch4_pip_doctor_open_5.95c0bdfb.ogg"
+    },
+    "ch4_pip_doctor_open_6": {
+      "main": "ch4_pip_doctor_open_6.c41cc2ef.ogg"
+    },
+    "ch4_pip_remembers_close_1": {
+      "main": "ch4_pip_remembers_close_1.015cc317.ogg"
+    },
+    "ch4_pip_remembers_close_2": {
+      "main": "ch4_pip_remembers_close_2.5799008c.ogg"
+    },
+    "ch4_pip_remembers_close_3": {
+      "main": "ch4_pip_remembers_close_3.fb0439b3.ogg"
+    },
+    "ch4_pip_remembers_close_4": {
+      "main": "ch4_pip_remembers_close_4.75c19e7f.ogg"
+    },
+    "ch4_pip_remembers_first_1": {
+      "main": "ch4_pip_remembers_first_1.d4b1769b.ogg"
+    },
+    "ch4_pip_remembers_first_2": {
+      "main": "ch4_pip_remembers_first_2.2e7d135a.ogg"
+    },
+    "ch4_pip_remembers_hold_1": {
+      "main": "ch4_pip_remembers_hold_1.526eb972.ogg"
+    },
+    "ch4_pip_remembers_hood_1": {
+      "main": "ch4_pip_remembers_hood_1.f6733a46.ogg"
+    },
+    "ch4_pip_remembers_maud_1": {
+      "main": "ch4_pip_remembers_maud_1.b7918bcd.ogg"
+    },
+    "ch4_pip_remembers_memory_1": {
+      "main": "ch4_pip_remembers_memory_1.08ee96fb.ogg"
+    },
+    "ch4_pip_remembers_memory_2": {
+      "main": "ch4_pip_remembers_memory_2.be2cd8f9.ogg"
+    },
+    "ch4_pip_remembers_memory_3": {
+      "main": "ch4_pip_remembers_memory_3.ea090047.ogg"
+    },
+    "ch4_pip_remembers_memory_4": {
+      "main": "ch4_pip_remembers_memory_4.09ada010.ogg"
+    },
+    "ch4_pip_remembers_memory_5": {
+      "main": "ch4_pip_remembers_memory_5.1347f41d.ogg"
+    },
+    "ch4_pip_remembers_open_1": {
+      "main": "ch4_pip_remembers_open_1.ca9a3f52.ogg"
+    },
+    "ch4_pip_remembers_open_2": {
+      "main": "ch4_pip_remembers_open_2.bdd9bd32.ogg"
+    },
+    "ch4_pip_remembers_oswin_1": {
+      "main": "ch4_pip_remembers_oswin_1.409f1dd3.ogg"
+    },
+    "ch4_pip_remembers_pray_1": {
+      "main": "ch4_pip_remembers_pray_1.30531cda.ogg"
+    },
+    "ch4_pip_tower_open_1": {
+      "main": "ch4_pip_tower_open_1.d6b6bd2f.ogg"
+    },
+    "ch4_pip_tower_open_2": {
+      "main": "ch4_pip_tower_open_2.60d63c15.ogg"
+    },
+    "ch5_court_favour_open_1": {
+      "main": "ch5_court_favour_open_1.fdf70f1b.ogg"
+    },
+    "ch5_court_favour_open_2": {
+      "main": "ch5_court_favour_open_2.d203b958.ogg"
+    },
+    "ch5_court_favour_open_3": {
+      "main": "ch5_court_favour_open_3.b7982575.ogg"
+    },
+    "ch5_court_favour_open_4": {
+      "main": "ch5_court_favour_open_4.b9596f1b.ogg"
+    },
+    "ch5_court_favour_open_5": {
+      "main": "ch5_court_favour_open_5.c957b492.ogg"
+    },
+    "ch5_epi_clan_slain_extinguished_open_1": {
+      "main": "ch5_epi_clan_slain_extinguished_open_1.c60258ef.ogg"
+    },
+    "ch5_epi_clan_slain_extinguished_open_2": {
+      "main": "ch5_epi_clan_slain_extinguished_open_2.352d613f.ogg"
+    },
+    "ch5_epi_clan_slain_rekindled_open_1": {
+      "main": "ch5_epi_clan_slain_rekindled_open_1.9f6d17fc.ogg"
+    },
+    "ch5_epi_clan_slain_rekindled_open_2": {
+      "main": "ch5_epi_clan_slain_rekindled_open_2.2facfd63.ogg"
+    },
+    "ch5_epi_clan_slain_rekindled_open_3": {
+      "main": "ch5_epi_clan_slain_rekindled_open_3.659715ea.ogg"
+    },
+    "ch5_epi_clan_slain_returned_open_1": {
+      "main": "ch5_epi_clan_slain_returned_open_1.53eb5e74.ogg"
+    },
+    "ch5_epi_clan_slain_returned_open_2": {
+      "main": "ch5_epi_clan_slain_returned_open_2.248abc6c.ogg"
+    },
+    "ch5_epi_clan_spared_extinguished_open_1": {
+      "main": "ch5_epi_clan_spared_extinguished_open_1.542e1d62.ogg"
+    },
+    "ch5_epi_clan_spared_extinguished_open_2": {
+      "main": "ch5_epi_clan_spared_extinguished_open_2.5228fc92.ogg"
+    },
+    "ch5_epi_clan_spared_extinguished_open_3": {
+      "main": "ch5_epi_clan_spared_extinguished_open_3.1316c3b4.ogg"
+    },
+    "ch5_epi_clan_spared_rekindled_open_1": {
+      "main": "ch5_epi_clan_spared_rekindled_open_1.0526616a.ogg"
+    },
+    "ch5_epi_clan_spared_rekindled_open_2": {
+      "main": "ch5_epi_clan_spared_rekindled_open_2.63c2e155.ogg"
+    },
+    "ch5_epi_clan_spared_rekindled_open_3": {
+      "main": "ch5_epi_clan_spared_rekindled_open_3.1780190d.ogg"
+    },
+    "ch5_epi_clan_spared_returned_open_1": {
+      "main": "ch5_epi_clan_spared_returned_open_1.bfd0e63f.ogg"
+    },
+    "ch5_epi_clan_spared_returned_open_2": {
+      "main": "ch5_epi_clan_spared_returned_open_2.0550adca.ogg"
+    },
+    "ch5_epi_close_extinguished_open_1": {
+      "main": "ch5_epi_close_extinguished_open_1.0c95225c.ogg"
+    },
+    "ch5_epi_close_extinguished_open_2": {
+      "main": "ch5_epi_close_extinguished_open_2.31044ef0.ogg"
+    },
+    "ch5_epi_close_extinguished_open_3": {
+      "main": "ch5_epi_close_extinguished_open_3.c1cb4750.ogg"
+    },
+    "ch5_epi_close_rekindled_open_1": {
+      "main": "ch5_epi_close_rekindled_open_1.dc99c94e.ogg"
+    },
+    "ch5_epi_close_rekindled_open_2": {
+      "main": "ch5_epi_close_rekindled_open_2.7c97d0bc.ogg"
+    },
+    "ch5_epi_close_rekindled_open_3": {
+      "main": "ch5_epi_close_rekindled_open_3.63420af7.ogg"
+    },
+    "ch5_epi_close_returned_open_1": {
+      "main": "ch5_epi_close_returned_open_1.8bbe366c.ogg"
+    },
+    "ch5_epi_close_returned_open_2": {
+      "main": "ch5_epi_close_returned_open_2.3363a69b.ogg"
+    },
+    "ch5_epi_close_returned_open_3": {
+      "main": "ch5_epi_close_returned_open_3.aa90e7aa.ogg"
+    },
+    "ch5_epi_halvard_released_open_1": {
+      "main": "ch5_epi_halvard_released_open_1.f082f0a3.ogg"
+    },
+    "ch5_epi_halvard_released_open_2": {
+      "main": "ch5_epi_halvard_released_open_2.d282d31b.ogg"
+    },
+    "ch5_epi_halvard_slain_open_1": {
+      "main": "ch5_epi_halvard_slain_open_1.72ed49a1.ogg"
+    },
+    "ch5_epi_halvard_slain_open_2": {
+      "main": "ch5_epi_halvard_slain_open_2.050598b8.ogg"
+    },
+    "ch5_epi_ivo_helped_open_1": {
+      "main": "ch5_epi_ivo_helped_open_1.3001b5c9.ogg"
+    },
+    "ch5_epi_ivo_helped_open_2": {
+      "main": "ch5_epi_ivo_helped_open_2.be782445.ogg"
+    },
+    "ch5_epi_ivo_helped_open_3": {
+      "main": "ch5_epi_ivo_helped_open_3.cdef9236.ogg"
+    },
+    "ch5_epi_ivo_stopped_open_1": {
+      "main": "ch5_epi_ivo_stopped_open_1.8f1abe34.ogg"
+    },
+    "ch5_epi_ivo_stopped_open_2": {
+      "main": "ch5_epi_ivo_stopped_open_2.035937d7.ogg"
+    },
+    "ch5_epi_memory_extinguished_open_1": {
+      "main": "ch5_epi_memory_extinguished_open_1.edc8af16.ogg"
+    },
+    "ch5_epi_memory_extinguished_open_2": {
+      "main": "ch5_epi_memory_extinguished_open_2.14f77ed9.ogg"
+    },
+    "ch5_epi_memory_left_open_1": {
+      "main": "ch5_epi_memory_left_open_1.6549b70c.ogg"
+    },
+    "ch5_epi_memory_rekindled_open_1": {
+      "main": "ch5_epi_memory_rekindled_open_1.a24abafc.ogg"
+    },
+    "ch5_epi_memory_rekindled_open_2": {
+      "main": "ch5_epi_memory_rekindled_open_2.fb47f43d.ogg"
+    },
+    "ch5_epi_memory_returned_open_1": {
+      "main": "ch5_epi_memory_returned_open_1.e7843cf5.ogg"
+    },
+    "ch5_epi_memory_returned_open_2": {
+      "main": "ch5_epi_memory_returned_open_2.153e1c1d.ogg"
+    },
+    "ch5_epi_memory_tricked_open_1": {
+      "main": "ch5_epi_memory_tricked_open_1.40de0724.ogg"
+    },
+    "ch5_epi_memory_tricked_open_2": {
+      "main": "ch5_epi_memory_tricked_open_2.f18d8007.ogg"
+    },
+    "ch5_epi_vorga_slain_gran_slain_open_1": {
+      "main": "ch5_epi_vorga_slain_gran_slain_open_1.d42b3f54.ogg"
+    },
+    "ch5_epi_vorga_slain_gran_slain_open_2": {
+      "main": "ch5_epi_vorga_slain_gran_slain_open_2.473bb0f1.ogg"
+    },
+    "ch5_epi_vorga_slain_gran_spared_open_1": {
+      "main": "ch5_epi_vorga_slain_gran_spared_open_1.a4b14f6e.ogg"
+    },
+    "ch5_epi_vorga_slain_gran_spared_open_2": {
+      "main": "ch5_epi_vorga_slain_gran_spared_open_2.3e5ebdb7.ogg"
+    },
+    "ch5_epi_vorga_spared_gran_slain_open_1": {
+      "main": "ch5_epi_vorga_spared_gran_slain_open_1.d3471098.ogg"
+    },
+    "ch5_epi_vorga_spared_gran_slain_open_2": {
+      "main": "ch5_epi_vorga_spared_gran_slain_open_2.3298bf5a.ogg"
+    },
+    "ch5_epi_vorga_spared_gran_spared_open_1": {
+      "main": "ch5_epi_vorga_spared_gran_spared_open_1.b6481ccf.ogg"
+    },
+    "ch5_epi_vorga_spared_gran_spared_open_2": {
+      "main": "ch5_epi_vorga_spared_gran_spared_open_2.691c6cea.ogg"
+    },
+    "ch5_epilogue_extinguished_aubrine_1": {
+      "main": "ch5_epilogue_extinguished_aubrine_1.f9ace57a.ogg"
+    },
+    "ch5_epilogue_extinguished_corvin_1": {
+      "main": "ch5_epilogue_extinguished_corvin_1.d364dae8.ogg"
+    },
+    "ch5_epilogue_extinguished_help_1": {
+      "main": "ch5_epilogue_extinguished_help_1.ffd554d5.ogg"
+    },
+    "ch5_epilogue_extinguished_open_1": {
+      "main": "ch5_epilogue_extinguished_open_1.27c3546b.ogg"
+    },
+    "ch5_epilogue_extinguished_open_2": {
+      "main": "ch5_epilogue_extinguished_open_2.e723f4d3.ogg"
+    },
+    "ch5_epilogue_extinguished_open_3": {
+      "main": "ch5_epilogue_extinguished_open_3.8a9977bf.ogg"
+    },
+    "ch5_epilogue_extinguished_open_4": {
+      "main": "ch5_epilogue_extinguished_open_4.24e7c014.ogg"
+    },
+    "ch5_epilogue_extinguished_pip_1": {
+      "main": "ch5_epilogue_extinguished_pip_1.d374f8ec.ogg"
+    },
+    "ch5_epilogue_extinguished_watch_1": {
+      "main": "ch5_epilogue_extinguished_watch_1.271e5a24.ogg"
+    },
+    "ch5_epilogue_rekindled_aubrine_1": {
+      "main": "ch5_epilogue_rekindled_aubrine_1.39451b10.ogg"
+    },
+    "ch5_epilogue_rekindled_keep_1": {
+      "main": "ch5_epilogue_rekindled_keep_1.7e27a8da.ogg"
+    },
+    "ch5_epilogue_rekindled_keeper_1": {
+      "main": "ch5_epilogue_rekindled_keeper_1.67c3d1bd.ogg"
+    },
+    "ch5_epilogue_rekindled_marrowby_1": {
+      "main": "ch5_epilogue_rekindled_marrowby_1.82734e53.ogg"
+    },
+    "ch5_epilogue_rekindled_open_1": {
+      "main": "ch5_epilogue_rekindled_open_1.c7bcba82.ogg"
+    },
+    "ch5_epilogue_rekindled_open_2": {
+      "main": "ch5_epilogue_rekindled_open_2.32f0be6c.ogg"
+    },
+    "ch5_epilogue_rekindled_open_3": {
+      "main": "ch5_epilogue_rekindled_open_3.9d148f48.ogg"
+    },
+    "ch5_epilogue_rekindled_open_4": {
+      "main": "ch5_epilogue_rekindled_open_4.698f0cd4.ogg"
+    },
+    "ch5_epilogue_rekindled_tell_1": {
+      "main": "ch5_epilogue_rekindled_tell_1.577dcb42.ogg"
+    },
+    "ch5_epilogue_rekindled_write_1": {
+      "main": "ch5_epilogue_rekindled_write_1.ec63ce24.ogg"
+    },
+    "ch5_epilogue_returned_back_1": {
+      "main": "ch5_epilogue_returned_back_1.10089ad7.ogg"
+    },
+    "ch5_epilogue_returned_carry_1": {
+      "main": "ch5_epilogue_returned_carry_1.d41e3869.ogg"
+    },
+    "ch5_epilogue_returned_going_1": {
+      "main": "ch5_epilogue_returned_going_1.8224f26a.ogg"
+    },
+    "ch5_epilogue_returned_marrowby_1": {
+      "main": "ch5_epilogue_returned_marrowby_1.73a94fcb.ogg"
+    },
+    "ch5_epilogue_returned_open_1": {
+      "main": "ch5_epilogue_returned_open_1.703ddd93.ogg"
+    },
+    "ch5_epilogue_returned_open_2": {
+      "main": "ch5_epilogue_returned_open_2.316b0a40.ogg"
+    },
+    "ch5_epilogue_returned_open_3": {
+      "main": "ch5_epilogue_returned_open_3.fedb58e1.ogg"
+    },
+    "ch5_epilogue_returned_open_4": {
+      "main": "ch5_epilogue_returned_open_4.4eed37db.ogg"
+    },
+    "ch5_epilogue_returned_wall_1": {
+      "main": "ch5_epilogue_returned_wall_1.a147cbba.ogg"
+    },
+    "ch5_epilogue_returned_wall_2": {
+      "main": "ch5_epilogue_returned_wall_2.e0e066ca.ogg"
+    },
+    "ch5_last_vote_extinguish_1": {
+      "main": "ch5_last_vote_extinguish_1.74d0936f.ogg"
+    },
+    "ch5_last_vote_extinguish_2": {
+      "main": "ch5_last_vote_extinguish_2.e812660d.ogg"
+    },
+    "ch5_last_vote_extinguish_3": {
+      "main": "ch5_last_vote_extinguish_3.0ffbed2e.ogg"
+    },
+    "ch5_last_vote_extinguish_4": {
+      "main": "ch5_last_vote_extinguish_4.85500b06.ogg"
+    },
+    "ch5_last_vote_home_1": {
+      "main": "ch5_last_vote_home_1.fb5d63fe.ogg"
+    },
+    "ch5_last_vote_lock_1": {
+      "main": "ch5_last_vote_lock_1.9ea89188.ogg"
+    },
+    "ch5_last_vote_open_1": {
+      "main": "ch5_last_vote_open_1.7876764b.ogg"
+    },
+    "ch5_last_vote_open_2": {
+      "main": "ch5_last_vote_open_2.0b5d4807.ogg"
+    },
+    "ch5_last_vote_open_3": {
+      "main": "ch5_last_vote_open_3.76a82286.ogg"
+    },
+    "ch5_last_vote_open_4": {
+      "main": "ch5_last_vote_open_4.a1389bd1.ogg"
+    },
+    "ch5_last_vote_open_5": {
+      "main": "ch5_last_vote_open_5.b3af1421.ogg"
+    },
+    "ch5_last_vote_open_6": {
+      "main": "ch5_last_vote_open_6.ab26ae88.ogg"
+    },
+    "ch5_last_vote_pip_want_1": {
+      "main": "ch5_last_vote_pip_want_1.e2cec71e.ogg"
+    },
+    "ch5_last_vote_pip_want_2": {
+      "main": "ch5_last_vote_pip_want_2.92eabed2.ogg"
+    },
+    "ch5_last_vote_rekindle_1": {
+      "main": "ch5_last_vote_rekindle_1.f62e13c8.ogg"
+    },
+    "ch5_last_vote_rekindle_2": {
+      "main": "ch5_last_vote_rekindle_2.00d4699a.ogg"
+    },
+    "ch5_last_vote_rekindle_3": {
+      "main": "ch5_last_vote_rekindle_3.f34ebe79.ogg"
+    },
+    "ch5_last_vote_return_1": {
+      "main": "ch5_last_vote_return_1.45ff789a.ogg"
+    },
+    "ch5_last_vote_return_2": {
+      "main": "ch5_last_vote_return_2.f0b42c19.ogg"
+    },
+    "ch5_last_vote_return_3": {
+      "main": "ch5_last_vote_return_3.e5ec8428.ogg"
+    },
+    "ch5_last_vote_town_1": {
+      "main": "ch5_last_vote_town_1.b0ad14ae.ogg"
+    },
+    "ch5_last_vote_vote_1": {
+      "main": "ch5_last_vote_vote_1.fda27e1e.ogg"
+    },
+    "ch5_last_vote_weigh_1": {
+      "main": "ch5_last_vote_weigh_1.6fd8fffd.ogg"
+    },
+    "ch5_ritual_after_embers_1": {
+      "main": "ch5_ritual_after_embers_1.efd3dbea.ogg"
+    },
+    "ch5_ritual_after_embers_2": {
+      "main": "ch5_ritual_after_embers_2.aac25974.ogg"
+    },
+    "ch5_ritual_after_leave_1": {
+      "main": "ch5_ritual_after_leave_1.7a3bcf30.ogg"
+    },
+    "ch5_ritual_after_name_1": {
+      "main": "ch5_ritual_after_name_1.d08026f7.ogg"
+    },
+    "ch5_ritual_after_name_2": {
+      "main": "ch5_ritual_after_name_2.51aeb179.ogg"
+    },
+    "ch5_ritual_after_open_1": {
+      "main": "ch5_ritual_after_open_1.1c3bbf03.ogg"
+    },
+    "ch5_ritual_after_open_2": {
+      "main": "ch5_ritual_after_open_2.f4f8cd1f.ogg"
+    },
+    "ch5_ritual_after_open_3": {
+      "main": "ch5_ritual_after_open_3.4bf30f7c.ogg"
+    },
+    "ch5_ritual_after_open_4": {
+      "main": "ch5_ritual_after_open_4.0025ae53.ogg"
+    },
+    "ch5_ritual_after_tend_fail_1": {
+      "main": "ch5_ritual_after_tend_fail_1.a81d3f45.ogg"
+    },
+    "ch5_ritual_after_tend_pass_1": {
+      "main": "ch5_ritual_after_tend_pass_1.dfdbb812.ogg"
+    },
+    "ch5_ritual_lead_cage_1": {
+      "main": "ch5_ritual_lead_cage_1.20490271.ogg"
+    },
+    "ch5_ritual_lead_cage_2": {
+      "main": "ch5_ritual_lead_cage_2.9bbd7370.ogg"
+    },
+    "ch5_ritual_lead_fail_1": {
+      "main": "ch5_ritual_lead_fail_1.835c19c7.ogg"
+    },
+    "ch5_ritual_lead_fail_2": {
+      "main": "ch5_ritual_lead_fail_2.f7ae5c00.ogg"
+    },
+    "ch5_ritual_lead_ivo_h_1": {
+      "main": "ch5_ritual_lead_ivo_h_1.29c6b572.ogg"
+    },
+    "ch5_ritual_lead_ivo_s_1": {
+      "main": "ch5_ritual_lead_ivo_s_1.f80e68f9.ogg"
+    },
+    "ch5_ritual_lead_no_1": {
+      "main": "ch5_ritual_lead_no_1.f710d704.ogg"
+    },
+    "ch5_ritual_lead_no_2": {
+      "main": "ch5_ritual_lead_no_2.3ede2585.ogg"
+    },
+    "ch5_ritual_lead_open_1": {
+      "main": "ch5_ritual_lead_open_1.a0923668.ogg"
+    },
+    "ch5_ritual_lead_open_2": {
+      "main": "ch5_ritual_lead_open_2.2bd9dc11.ogg"
+    },
+    "ch5_ritual_lead_open_3": {
+      "main": "ch5_ritual_lead_open_3.b873cbdb.ogg"
+    },
+    "ch5_ritual_lead_open_4": {
+      "main": "ch5_ritual_lead_open_4.0d7a8915.ogg"
+    },
+    "ch5_ritual_lead_pass_1": {
+      "main": "ch5_ritual_lead_pass_1.8a99d63b.ogg"
+    },
+    "ch5_ritual_lead_pass_2": {
+      "main": "ch5_ritual_lead_pass_2.6abd2766.ogg"
+    },
+    "ch5_ritual_lead_pass_3": {
+      "main": "ch5_ritual_lead_pass_3.cf8537d1.ogg"
+    },
+    "ch5_ritual_lead_plea_1": {
+      "main": "ch5_ritual_lead_plea_1.dcb7640c.ogg"
+    },
+    "ch5_ritual_lead_plea_3": {
+      "main": "ch5_ritual_lead_plea_3.862d6ad3.ogg"
+    },
+    "ch5_ritual_lead_wake_1": {
+      "main": "ch5_ritual_lead_wake_1.c8837bae.ogg"
+    },
+    "ch5_the_archive_ask_1": {
+      "main": "ch5_the_archive_ask_1.23a347c2.ogg"
+    },
+    "ch5_the_archive_corvin_1": {
+      "main": "ch5_the_archive_corvin_1.333a7562.ogg"
+    },
+    "ch5_the_archive_corvin_2": {
+      "main": "ch5_the_archive_corvin_2.3efa6219.ogg"
+    },
+    "ch5_the_archive_fell_1": {
+      "main": "ch5_the_archive_fell_1.7360da79.ogg"
+    },
+    "ch5_the_archive_fell_2": {
+      "main": "ch5_the_archive_fell_2.7783c3cf.ogg"
+    },
+    "ch5_the_archive_gladly_1": {
+      "main": "ch5_the_archive_gladly_1.9dd10332.ogg"
+    },
+    "ch5_the_archive_gladly_2": {
+      "main": "ch5_the_archive_gladly_2.8efeb1b1.ogg"
+    },
+    "ch5_the_archive_history_1": {
+      "main": "ch5_the_archive_history_1.f1182331.ogg"
+    },
+    "ch5_the_archive_history_2": {
+      "main": "ch5_the_archive_history_2.7fdd5590.ogg"
+    },
+    "ch5_the_archive_history_3": {
+      "main": "ch5_the_archive_history_3.d65257bd.ogg"
+    },
+    "ch5_the_archive_history_4": {
+      "main": "ch5_the_archive_history_4.1c7dabfd.ogg"
+    },
+    "ch5_the_archive_history_5": {
+      "main": "ch5_the_archive_history_5.ecbd24b2.ogg"
+    },
+    "ch5_the_archive_history_6": {
+      "main": "ch5_the_archive_history_6.3dba2a9c.ogg"
+    },
+    "ch5_the_archive_marrowby_1": {
+      "main": "ch5_the_archive_marrowby_1.3ebd7093.ogg"
+    },
+    "ch5_the_archive_marrowby_2": {
+      "main": "ch5_the_archive_marrowby_2.30c2a6db.ogg"
+    },
+    "ch5_the_archive_maud_1": {
+      "main": "ch5_the_archive_maud_1.05644cff.ogg"
+    },
+    "ch5_the_archive_maud_2": {
+      "main": "ch5_the_archive_maud_2.f62665c7.ogg"
+    },
+    "ch5_the_archive_maud_3": {
+      "main": "ch5_the_archive_maud_3.43236bb6.ogg"
+    },
+    "ch5_the_archive_open_1": {
+      "main": "ch5_the_archive_open_1.114b83b0.ogg"
+    },
+    "ch5_the_archive_open_2": {
+      "main": "ch5_the_archive_open_2.f26eed77.ogg"
+    },
+    "ch5_the_archive_open_3": {
+      "main": "ch5_the_archive_open_3.c24812af.ogg"
+    },
+    "ch5_the_archive_pip_1": {
+      "main": "ch5_the_archive_pip_1.8fc435b1.ogg"
+    },
+    "ch5_the_archive_pip_2": {
+      "main": "ch5_the_archive_pip_2.0be109ad.ogg"
+    },
+    "ch5_the_archive_pip_3": {
+      "main": "ch5_the_archive_pip_3.1a301c77.ogg"
+    },
+    "ch5_the_archive_pip_4": {
+      "main": "ch5_the_archive_pip_4.1a624060.ogg"
+    },
+    "ch5_the_archive_pip_5": {
+      "main": "ch5_the_archive_pip_5.5655ddf2.ogg"
+    },
+    "ch5_the_archive_pip_6": {
+      "main": "ch5_the_archive_pip_6.494755c8.ogg"
+    },
+    "ch5_the_archive_pip_7": {
+      "main": "ch5_the_archive_pip_7.8e4e5154.ogg"
+    },
+    "ch5_the_archive_pip_8": {
+      "main": "ch5_the_archive_pip_8.57ed10bb.ogg"
+    },
+    "ch5_the_archive_scripture_1": {
+      "main": "ch5_the_archive_scripture_1.eed4a661.ogg"
+    },
+    "ch5_the_archive_scripture_2": {
+      "main": "ch5_the_archive_scripture_2.f58263b6.ogg"
+    },
+    "ch5_the_archive_song_1": {
+      "main": "ch5_the_archive_song_1.71a66e7d.ogg"
+    },
+    "ch5_the_archive_verse_1": {
+      "main": "ch5_the_archive_verse_1.e6d13a3d.ogg"
+    },
+    "ch5_the_archive_verse_2": {
+      "main": "ch5_the_archive_verse_2.b6f87a71.ogg"
+    },
+    "ch5_the_archive_verse_3": {
+      "main": "ch5_the_archive_verse_3.7fdac135.ogg"
+    },
+    "ch5_the_gate_choose_1": {
+      "main": "ch5_the_gate_choose_1.df6b1284.ogg"
+    },
+    "ch5_the_gate_fight_1": {
+      "main": "ch5_the_gate_fight_1.bf4e0a4c.ogg"
+    },
+    "ch5_the_gate_fight_2": {
+      "main": "ch5_the_gate_fight_2.1eec7011.ogg"
+    },
+    "ch5_the_gate_fight_3": {
+      "main": "ch5_the_gate_fight_3.fe63db4b.ogg"
+    },
+    "ch5_the_gate_fight_4": {
+      "main": "ch5_the_gate_fight_4.329e32f4.ogg"
+    },
+    "ch5_the_gate_fight_5": {
+      "main": "ch5_the_gate_fight_5.86dcdf99.ogg"
+    },
+    "ch5_the_gate_hand_1": {
+      "main": "ch5_the_gate_hand_1.0f436b9e.ogg"
+    },
+    "ch5_the_gate_know_1": {
+      "main": "ch5_the_gate_know_1.439eef0e.ogg"
+    },
+    "ch5_the_gate_oath_1": {
+      "main": "ch5_the_gate_oath_1.66b11b98.ogg"
+    },
+    "ch5_the_gate_oath_2": {
+      "main": "ch5_the_gate_oath_2.8370c106.ogg"
+    },
+    "ch5_the_gate_open_1": {
+      "main": "ch5_the_gate_open_1.b18cb739.ogg"
+    },
+    "ch5_the_gate_open_2": {
+      "main": "ch5_the_gate_open_2.4011a164.ogg"
+    },
+    "ch5_the_gate_open_3": {
+      "main": "ch5_the_gate_open_3.c46a537d.ogg"
+    },
+    "ch5_the_gate_open_4": {
+      "main": "ch5_the_gate_open_4.b681f0d1.ogg"
+    },
+    "ch5_the_gate_open_5": {
+      "main": "ch5_the_gate_open_5.d9812951.ogg"
+    },
+    "ch5_the_gate_open_6": {
+      "main": "ch5_the_gate_open_6.84667ae3.ogg"
+    },
+    "ch5_the_gate_red_1": {
+      "main": "ch5_the_gate_red_1.c9964d11.ogg"
+    },
+    "ch5_the_gate_release_1": {
+      "main": "ch5_the_gate_release_1.cf543516.ogg"
+    },
+    "ch5_the_gate_wait_1": {
+      "main": "ch5_the_gate_wait_1.4ec6bf55.ogg"
+    },
+    "ch5_the_gate_wait_2": {
+      "main": "ch5_the_gate_wait_2.d095d2aa.ogg"
+    },
+    "ch5_the_gate_wait_3": {
+      "main": "ch5_the_gate_wait_3.22c5bad4.ogg"
+    },
+    "ch5_the_gate_wait_4": {
+      "main": "ch5_the_gate_wait_4.da981b85.ogg"
+    },
+    "ch5_the_gate_wait_5": {
+      "main": "ch5_the_gate_wait_5.c2606ad9.ogg"
+    },
+    "ch5_the_gate_wait_6": {
+      "main": "ch5_the_gate_wait_6.7cc386ee.ogg"
+    },
+    "ch5_the_gate_why_1": {
+      "main": "ch5_the_gate_why_1.8da1f5fa.ogg"
+    },
+    "ch5_the_gate_why_2": {
+      "main": "ch5_the_gate_why_2.1d3a41bb.ogg"
+    },
+    "ch5_the_stranger_close_1": {
+      "main": "ch5_the_stranger_close_1.52c7016b.ogg"
+    },
+    "ch5_the_stranger_close_2": {
+      "main": "ch5_the_stranger_close_2.72e05ad6.ogg"
+    },
+    "ch5_the_stranger_close_3": {
+      "main": "ch5_the_stranger_close_3.5e38f9a7.ogg"
+    },
+    "ch5_the_stranger_home_1": {
+      "main": "ch5_the_stranger_home_1.cf566164.ogg"
+    },
+    "ch5_the_stranger_kin_1": {
+      "main": "ch5_the_stranger_kin_1.e6d131ee.ogg"
+    },
+    "ch5_the_stranger_market_1": {
+      "main": "ch5_the_stranger_market_1.8e26e3ea.ogg"
+    },
+    "ch5_the_stranger_more_1": {
+      "main": "ch5_the_stranger_more_1.007a3084.ogg"
+    },
+    "ch5_the_stranger_open_1": {
+      "main": "ch5_the_stranger_open_1.0e4943e1.ogg"
+    },
+    "ch5_the_stranger_open_2": {
+      "main": "ch5_the_stranger_open_2.72cf14b2.ogg"
+    },
+    "ch5_the_stranger_open_3": {
+      "main": "ch5_the_stranger_open_3.79b4275a.ogg"
+    },
+    "ch5_the_stranger_open_4": {
+      "main": "ch5_the_stranger_open_4.dc4d2b0f.ogg"
+    },
+    "ch5_the_stranger_open_5": {
+      "main": "ch5_the_stranger_open_5.42b4120d.ogg"
+    },
+    "ch5_the_stranger_open_6": {
+      "main": "ch5_the_stranger_open_6.4e2d9c5b.ogg"
+    },
+    "ch5_the_stranger_open_7": {
+      "main": "ch5_the_stranger_open_7.f99e6464.ogg"
+    },
+    "ch5_the_stranger_pip_1": {
+      "main": "ch5_the_stranger_pip_1.5dcccc67.ogg"
+    },
+    "ch5_the_stranger_who_1": {
+      "main": "ch5_the_stranger_who_1.94bd9263.ogg"
+    },
+    "ch5_the_stranger_who_2": {
+      "main": "ch5_the_stranger_who_2.b269a6d2.ogg"
+    },
+    "say_ford_assault_1": {
+      "main": "say_ford_assault_1.e8adbccb.ogg"
+    },
+    "say_ford_assault_2": {
+      "main": "say_ford_assault_2.a64dbc0f.ogg"
+    },
+    "say_ford_assault_3": {
+      "main": "say_ford_assault_3.111d469f.ogg"
+    },
+    "say_hall_of_the_flame_1": {
+      "main": "say_hall_of_the_flame_1.9ed06f98.ogg"
+    },
+    "say_hall_of_the_flame_2": {
+      "main": "say_hall_of_the_flame_2.8a225ca8.ogg"
+    },
+    "say_hall_of_the_flame_3": {
+      "main": "say_hall_of_the_flame_3.3ce7b06d.ogg"
+    },
+    "say_hall_of_the_flame_4": {
+      "main": "say_hall_of_the_flame_4.fbe0a6ca.ogg"
+    },
+    "say_hall_of_the_flame_5": {
+      "main": "say_hall_of_the_flame_5.f75711dd.ogg"
+    },
+    "say_keep_gate_1": {
+      "main": "say_keep_gate_1.c18de716.ogg"
+    },
+    "say_keep_gate_2": {
+      "main": "say_keep_gate_2.149e91db.ogg"
+    },
+    "say_keep_gate_3": {
+      "main": "say_keep_gate_3.c2604ae7.ogg"
+    },
+    "say_keep_gate_4": {
+      "main": "say_keep_gate_4.10588d84.ogg"
+    },
+    "say_rime_tower_1": {
+      "main": "say_rime_tower_1.15b78605.ogg"
+    },
+    "say_rime_tower_2": {
+      "main": "say_rime_tower_2.2f7ca65c.ogg"
+    },
+    "say_rime_tower_3": {
+      "main": "say_rime_tower_3.3639b510.ogg"
+    },
+    "say_warlord_bridge_1": {
+      "main": "say_warlord_bridge_1.cbb93cbc.ogg"
+    },
+    "say_warlord_bridge_2": {
+      "main": "say_warlord_bridge_2.637844be.ogg"
+    },
+    "say_warlord_bridge_3": {
+      "main": "say_warlord_bridge_3.3518d20e.ogg"
+    },
+    "say_warlord_bridge_4": {
+      "main": "say_warlord_bridge_4.6a3890e3.ogg"
+    },
+    "say_warlord_bridge_5": {
+      "main": "say_warlord_bridge_5.d98f0f5d.ogg"
+    },
+    "voice_earnest_ally_down_1": {
+      "high": "voice_earnest_ally_down_1.df179278.ogg",
+      "low": "voice_earnest_ally_down_1.4236ee5f.ogg"
+    },
+    "voice_earnest_ally_down_2": {
+      "high": "voice_earnest_ally_down_2.b3f610f6.ogg",
+      "low": "voice_earnest_ally_down_2.2f8f44dd.ogg"
+    },
+    "voice_earnest_battle_start_1": {
+      "high": "voice_earnest_battle_start_1.2fdc3d4b.ogg",
+      "low": "voice_earnest_battle_start_1.eb0f70b8.ogg"
+    },
+    "voice_earnest_battle_start_2": {
+      "high": "voice_earnest_battle_start_2.fd6bcf63.ogg",
+      "low": "voice_earnest_battle_start_2.d9075662.ogg"
+    },
+    "voice_earnest_camp_1": {
+      "high": "voice_earnest_camp_1.22888634.ogg",
+      "low": "voice_earnest_camp_1.25d19660.ogg"
+    },
+    "voice_earnest_camp_2": {
+      "high": "voice_earnest_camp_2.1b6c01b7.ogg",
+      "low": "voice_earnest_camp_2.b3aa4397.ogg"
+    },
+    "voice_earnest_crit_1": {
+      "high": "voice_earnest_crit_1.a87a7a9e.ogg",
+      "low": "voice_earnest_crit_1.093a87b9.ogg"
+    },
+    "voice_earnest_crit_2": {
+      "high": "voice_earnest_crit_2.41306ecc.ogg",
+      "low": "voice_earnest_crit_2.cfacb10b.ogg"
+    },
+    "voice_earnest_defeat_1": {
+      "high": "voice_earnest_defeat_1.216d29df.ogg",
+      "low": "voice_earnest_defeat_1.f6d198be.ogg"
+    },
+    "voice_earnest_healed_1": {
+      "high": "voice_earnest_healed_1.80f6176e.ogg",
+      "low": "voice_earnest_healed_1.d82460a4.ogg"
+    },
+    "voice_earnest_healed_2": {
+      "high": "voice_earnest_healed_2.f01787e6.ogg",
+      "low": "voice_earnest_healed_2.ac6848ff.ogg"
+    },
+    "voice_earnest_kill_1": {
+      "high": "voice_earnest_kill_1.e409f287.ogg",
+      "low": "voice_earnest_kill_1.ed6d9668.ogg"
+    },
+    "voice_earnest_kill_2": {
+      "high": "voice_earnest_kill_2.ed50098b.ogg",
+      "low": "voice_earnest_kill_2.aef1d790.ogg"
+    },
+    "voice_earnest_low_hp_1": {
+      "high": "voice_earnest_low_hp_1.4b5dc243.ogg",
+      "low": "voice_earnest_low_hp_1.a4807855.ogg"
+    },
+    "voice_earnest_low_hp_2": {
+      "high": "voice_earnest_low_hp_2.d90b750d.ogg",
+      "low": "voice_earnest_low_hp_2.7237c2f0.ogg"
+    },
+    "voice_earnest_victory_1": {
+      "high": "voice_earnest_victory_1.9b4d9a13.ogg",
+      "low": "voice_earnest_victory_1.5b8f9287.ogg"
+    },
+    "voice_earnest_victory_2": {
+      "high": "voice_earnest_victory_2.f2130931.ogg",
+      "low": "voice_earnest_victory_2.8d4bec6f.ogg"
+    },
+    "voice_fierce_ally_down_1": {
+      "high": "voice_fierce_ally_down_1.001fbfaa.ogg",
+      "low": "voice_fierce_ally_down_1.9d2b6a19.ogg"
+    },
+    "voice_fierce_ally_down_2": {
+      "high": "voice_fierce_ally_down_2.1bd7900c.ogg",
+      "low": "voice_fierce_ally_down_2.6e29d940.ogg"
+    },
+    "voice_fierce_battle_start_1": {
+      "high": "voice_fierce_battle_start_1.c3abd17d.ogg",
+      "low": "voice_fierce_battle_start_1.4f759ca3.ogg"
+    },
+    "voice_fierce_battle_start_2": {
+      "high": "voice_fierce_battle_start_2.9c86fb1f.ogg",
+      "low": "voice_fierce_battle_start_2.564a7859.ogg"
+    },
+    "voice_fierce_camp_1": {
+      "high": "voice_fierce_camp_1.6535bff4.ogg",
+      "low": "voice_fierce_camp_1.1934e3b7.ogg"
+    },
+    "voice_fierce_camp_2": {
+      "high": "voice_fierce_camp_2.abb80bc9.ogg",
+      "low": "voice_fierce_camp_2.ee774575.ogg"
+    },
+    "voice_fierce_crit_1": {
+      "high": "voice_fierce_crit_1.ca5d51d9.ogg",
+      "low": "voice_fierce_crit_1.4aa6feeb.ogg"
+    },
+    "voice_fierce_crit_2": {
+      "high": "voice_fierce_crit_2.32ce0874.ogg",
+      "low": "voice_fierce_crit_2.3d28418e.ogg"
+    },
+    "voice_fierce_defeat_1": {
+      "high": "voice_fierce_defeat_1.667357b8.ogg",
+      "low": "voice_fierce_defeat_1.4205e20c.ogg"
+    },
+    "voice_fierce_healed_1": {
+      "high": "voice_fierce_healed_1.01f4c251.ogg",
+      "low": "voice_fierce_healed_1.43e48d79.ogg"
+    },
+    "voice_fierce_healed_2": {
+      "high": "voice_fierce_healed_2.194e71c8.ogg",
+      "low": "voice_fierce_healed_2.337bcd50.ogg"
+    },
+    "voice_fierce_kill_1": {
+      "high": "voice_fierce_kill_1.474abc4a.ogg",
+      "low": "voice_fierce_kill_1.c98bbe4a.ogg"
+    },
+    "voice_fierce_kill_2": {
+      "high": "voice_fierce_kill_2.7d7022c4.ogg",
+      "low": "voice_fierce_kill_2.7d61db5b.ogg"
+    },
+    "voice_fierce_low_hp_1": {
+      "high": "voice_fierce_low_hp_1.907dc307.ogg",
+      "low": "voice_fierce_low_hp_1.7dc31495.ogg"
+    },
+    "voice_fierce_low_hp_2": {
+      "high": "voice_fierce_low_hp_2.791a9c59.ogg",
+      "low": "voice_fierce_low_hp_2.cfee7b06.ogg"
+    },
+    "voice_fierce_victory_1": {
+      "high": "voice_fierce_victory_1.4e4cff85.ogg",
+      "low": "voice_fierce_victory_1.0048ec9a.ogg"
+    },
+    "voice_fierce_victory_2": {
+      "high": "voice_fierce_victory_2.84c6ff6e.ogg",
+      "low": "voice_fierce_victory_2.af5654d5.ogg"
+    },
+    "voice_grim_ally_down_1": {
+      "high": "voice_grim_ally_down_1.9870db6c.ogg",
+      "low": "voice_grim_ally_down_1.e01533a2.ogg"
+    },
+    "voice_grim_ally_down_2": {
+      "high": "voice_grim_ally_down_2.557b6bd4.ogg",
+      "low": "voice_grim_ally_down_2.72f614dc.ogg"
+    },
+    "voice_grim_battle_start_1": {
+      "high": "voice_grim_battle_start_1.e8ccd9f5.ogg",
+      "low": "voice_grim_battle_start_1.276788b8.ogg"
+    },
+    "voice_grim_battle_start_2": {
+      "high": "voice_grim_battle_start_2.52518eec.ogg",
+      "low": "voice_grim_battle_start_2.3abf06de.ogg"
+    },
+    "voice_grim_camp_1": {
+      "high": "voice_grim_camp_1.b65a1286.ogg",
+      "low": "voice_grim_camp_1.eede2e6a.ogg"
+    },
+    "voice_grim_camp_2": {
+      "high": "voice_grim_camp_2.946686dc.ogg",
+      "low": "voice_grim_camp_2.ca741fee.ogg"
+    },
+    "voice_grim_crit_1": {
+      "high": "voice_grim_crit_1.4bc2a986.ogg",
+      "low": "voice_grim_crit_1.d7ce53d1.ogg"
+    },
+    "voice_grim_crit_2": {
+      "high": "voice_grim_crit_2.8cdc3156.ogg",
+      "low": "voice_grim_crit_2.8411bda2.ogg"
+    },
+    "voice_grim_defeat_1": {
+      "high": "voice_grim_defeat_1.49694c92.ogg",
+      "low": "voice_grim_defeat_1.042fe343.ogg"
+    },
+    "voice_grim_healed_1": {
+      "high": "voice_grim_healed_1.7643bce5.ogg",
+      "low": "voice_grim_healed_1.01ce6909.ogg"
+    },
+    "voice_grim_healed_2": {
+      "high": "voice_grim_healed_2.bac9189c.ogg",
+      "low": "voice_grim_healed_2.d8271c50.ogg"
+    },
+    "voice_grim_kill_1": {
+      "high": "voice_grim_kill_1.9c8b7245.ogg",
+      "low": "voice_grim_kill_1.79c83142.ogg"
+    },
+    "voice_grim_kill_2": {
+      "high": "voice_grim_kill_2.28c7b545.ogg",
+      "low": "voice_grim_kill_2.9a631c25.ogg"
+    },
+    "voice_grim_low_hp_1": {
+      "high": "voice_grim_low_hp_1.d27b34e6.ogg",
+      "low": "voice_grim_low_hp_1.3ac93b7e.ogg"
+    },
+    "voice_grim_low_hp_2": {
+      "high": "voice_grim_low_hp_2.6909dc62.ogg",
+      "low": "voice_grim_low_hp_2.dd7ee2a2.ogg"
+    },
+    "voice_grim_victory_1": {
+      "high": "voice_grim_victory_1.8b562753.ogg",
+      "low": "voice_grim_victory_1.827ab200.ogg"
+    },
+    "voice_grim_victory_2": {
+      "high": "voice_grim_victory_2.cbcb2cf6.ogg",
+      "low": "voice_grim_victory_2.f0b20c4a.ogg"
+    },
+    "voice_scholarly_ally_down_1": {
+      "high": "voice_scholarly_ally_down_1.8d654be9.ogg",
+      "low": "voice_scholarly_ally_down_1.c51bc783.ogg"
+    },
+    "voice_scholarly_ally_down_2": {
+      "high": "voice_scholarly_ally_down_2.05486df2.ogg",
+      "low": "voice_scholarly_ally_down_2.8791e13b.ogg"
+    },
+    "voice_scholarly_battle_start_1": {
+      "high": "voice_scholarly_battle_start_1.f336154d.ogg",
+      "low": "voice_scholarly_battle_start_1.40072a22.ogg"
+    },
+    "voice_scholarly_battle_start_2": {
+      "high": "voice_scholarly_battle_start_2.c4b998b5.ogg",
+      "low": "voice_scholarly_battle_start_2.1d94125a.ogg"
+    },
+    "voice_scholarly_camp_1": {
+      "high": "voice_scholarly_camp_1.0f382d6b.ogg",
+      "low": "voice_scholarly_camp_1.416fc288.ogg"
+    },
+    "voice_scholarly_camp_2": {
+      "high": "voice_scholarly_camp_2.ccc6d552.ogg",
+      "low": "voice_scholarly_camp_2.7804662b.ogg"
+    },
+    "voice_scholarly_crit_1": {
+      "high": "voice_scholarly_crit_1.f3e5243a.ogg",
+      "low": "voice_scholarly_crit_1.e1a2dc22.ogg"
+    },
+    "voice_scholarly_crit_2": {
+      "high": "voice_scholarly_crit_2.0c509912.ogg",
+      "low": "voice_scholarly_crit_2.4a39d16d.ogg"
+    },
+    "voice_scholarly_defeat_1": {
+      "high": "voice_scholarly_defeat_1.1c7498e8.ogg",
+      "low": "voice_scholarly_defeat_1.7c302d12.ogg"
+    },
+    "voice_scholarly_healed_1": {
+      "high": "voice_scholarly_healed_1.7eff4817.ogg",
+      "low": "voice_scholarly_healed_1.e4d11ef8.ogg"
+    },
+    "voice_scholarly_healed_2": {
+      "high": "voice_scholarly_healed_2.f7212387.ogg",
+      "low": "voice_scholarly_healed_2.e5aa7a5e.ogg"
+    },
+    "voice_scholarly_kill_1": {
+      "high": "voice_scholarly_kill_1.3e5f9a60.ogg",
+      "low": "voice_scholarly_kill_1.831a102c.ogg"
+    },
+    "voice_scholarly_kill_2": {
+      "high": "voice_scholarly_kill_2.4a808e7b.ogg",
+      "low": "voice_scholarly_kill_2.d8bbd91a.ogg"
+    },
+    "voice_scholarly_low_hp_1": {
+      "high": "voice_scholarly_low_hp_1.ed3e178f.ogg",
+      "low": "voice_scholarly_low_hp_1.04049f7e.ogg"
+    },
+    "voice_scholarly_low_hp_2": {
+      "high": "voice_scholarly_low_hp_2.0f8a2784.ogg",
+      "low": "voice_scholarly_low_hp_2.c8c5ed9b.ogg"
+    },
+    "voice_scholarly_victory_1": {
+      "high": "voice_scholarly_victory_1.857117c2.ogg",
+      "low": "voice_scholarly_victory_1.a4901d08.ogg"
+    },
+    "voice_scholarly_victory_2": {
+      "high": "voice_scholarly_victory_2.e3c39255.ogg",
+      "low": "voice_scholarly_victory_2.ae0ebeff.ogg"
+    },
+    "voice_steady_ally_down_1": {
+      "high": "voice_steady_ally_down_1.1eb06051.ogg",
+      "low": "voice_steady_ally_down_1.f25d7b7f.ogg"
+    },
+    "voice_steady_ally_down_2": {
+      "high": "voice_steady_ally_down_2.235b94cc.ogg",
+      "low": "voice_steady_ally_down_2.9ee5e832.ogg"
+    },
+    "voice_steady_battle_start_1": {
+      "high": "voice_steady_battle_start_1.2e2fa2d2.ogg",
+      "low": "voice_steady_battle_start_1.b8e256be.ogg"
+    },
+    "voice_steady_battle_start_2": {
+      "high": "voice_steady_battle_start_2.ec174188.ogg",
+      "low": "voice_steady_battle_start_2.0f651eb5.ogg"
+    },
+    "voice_steady_camp_1": {
+      "high": "voice_steady_camp_1.03a5dada.ogg",
+      "low": "voice_steady_camp_1.348187d2.ogg"
+    },
+    "voice_steady_camp_2": {
+      "high": "voice_steady_camp_2.cdb61059.ogg",
+      "low": "voice_steady_camp_2.3e77d18e.ogg"
+    },
+    "voice_steady_crit_1": {
+      "high": "voice_steady_crit_1.4ce2b91a.ogg",
+      "low": "voice_steady_crit_1.d6f694a6.ogg"
+    },
+    "voice_steady_crit_2": {
+      "high": "voice_steady_crit_2.714836cf.ogg",
+      "low": "voice_steady_crit_2.169a735c.ogg"
+    },
+    "voice_steady_defeat_1": {
+      "high": "voice_steady_defeat_1.7c5acdb6.ogg",
+      "low": "voice_steady_defeat_1.7a3a9a93.ogg"
+    },
+    "voice_steady_healed_1": {
+      "high": "voice_steady_healed_1.72a36f1c.ogg",
+      "low": "voice_steady_healed_1.7496aca1.ogg"
+    },
+    "voice_steady_healed_2": {
+      "high": "voice_steady_healed_2.b11c6eed.ogg",
+      "low": "voice_steady_healed_2.c7d2cd4c.ogg"
+    },
+    "voice_steady_kill_1": {
+      "high": "voice_steady_kill_1.ffd4ecdb.ogg",
+      "low": "voice_steady_kill_1.8184bc60.ogg"
+    },
+    "voice_steady_kill_2": {
+      "high": "voice_steady_kill_2.35e5a73e.ogg",
+      "low": "voice_steady_kill_2.6f9a9ecf.ogg"
+    },
+    "voice_steady_low_hp_1": {
+      "high": "voice_steady_low_hp_1.ad2fc99e.ogg",
+      "low": "voice_steady_low_hp_1.32d34212.ogg"
+    },
+    "voice_steady_low_hp_2": {
+      "high": "voice_steady_low_hp_2.f7ba5054.ogg",
+      "low": "voice_steady_low_hp_2.ffda522c.ogg"
+    },
+    "voice_steady_victory_1": {
+      "high": "voice_steady_victory_1.ba5ef66a.ogg",
+      "low": "voice_steady_victory_1.e71a9f99.ogg"
+    },
+    "voice_steady_victory_2": {
+      "high": "voice_steady_victory_2.0c620609.ogg",
+      "low": "voice_steady_victory_2.9520c05d.ogg"
+    },
+    "voice_wry_ally_down_1": {
+      "high": "voice_wry_ally_down_1.1ad68e0e.ogg",
+      "low": "voice_wry_ally_down_1.6b602046.ogg"
+    },
+    "voice_wry_ally_down_2": {
+      "high": "voice_wry_ally_down_2.197c9c16.ogg",
+      "low": "voice_wry_ally_down_2.c2301700.ogg"
+    },
+    "voice_wry_battle_start_1": {
+      "high": "voice_wry_battle_start_1.2cb74d97.ogg",
+      "low": "voice_wry_battle_start_1.dcaa8910.ogg"
+    },
+    "voice_wry_battle_start_2": {
+      "high": "voice_wry_battle_start_2.7cfa7ada.ogg",
+      "low": "voice_wry_battle_start_2.6d7e6235.ogg"
+    },
+    "voice_wry_camp_1": {
+      "high": "voice_wry_camp_1.7fef05ef.ogg",
+      "low": "voice_wry_camp_1.acb4ddb2.ogg"
+    },
+    "voice_wry_camp_2": {
+      "high": "voice_wry_camp_2.c53aa2ca.ogg",
+      "low": "voice_wry_camp_2.c04ad67a.ogg"
+    },
+    "voice_wry_crit_1": {
+      "high": "voice_wry_crit_1.7481677d.ogg",
+      "low": "voice_wry_crit_1.eccc897f.ogg"
+    },
+    "voice_wry_crit_2": {
+      "high": "voice_wry_crit_2.99814fbb.ogg",
+      "low": "voice_wry_crit_2.ecb57859.ogg"
+    },
+    "voice_wry_defeat_1": {
+      "high": "voice_wry_defeat_1.04eb320a.ogg",
+      "low": "voice_wry_defeat_1.02638f1f.ogg"
+    },
+    "voice_wry_healed_1": {
+      "high": "voice_wry_healed_1.a5997d3d.ogg",
+      "low": "voice_wry_healed_1.aff6db42.ogg"
+    },
+    "voice_wry_healed_2": {
+      "high": "voice_wry_healed_2.990299f4.ogg",
+      "low": "voice_wry_healed_2.5a4eb32c.ogg"
+    },
+    "voice_wry_kill_1": {
+      "high": "voice_wry_kill_1.3c8cd494.ogg",
+      "low": "voice_wry_kill_1.d149d969.ogg"
+    },
+    "voice_wry_kill_2": {
+      "high": "voice_wry_kill_2.a2907d43.ogg",
+      "low": "voice_wry_kill_2.2aa11bbc.ogg"
+    },
+    "voice_wry_low_hp_1": {
+      "high": "voice_wry_low_hp_1.76814988.ogg",
+      "low": "voice_wry_low_hp_1.7f06ffbf.ogg"
+    },
+    "voice_wry_low_hp_2": {
+      "high": "voice_wry_low_hp_2.1e35f9d7.ogg",
+      "low": "voice_wry_low_hp_2.7a180e76.ogg"
+    },
+    "voice_wry_victory_1": {
+      "high": "voice_wry_victory_1.22a5a93e.ogg",
+      "low": "voice_wry_victory_1.0661802c.ogg"
+    },
+    "voice_wry_victory_2": {
+      "high": "voice_wry_victory_2.b93f39de.ogg",
+      "low": "voice_wry_victory_2.8623a47e.ogg"
+    }
+  }
+}

@@ -15,7 +15,8 @@ public enum NarrationPriority
 /// A commentary line that opens a session ahead of its first question (REDLINE's "Qualifying! …"): a question queued
 /// while it plays or waits goes behind it instead of cutting it off. The game leaves time for it.
 /// </param>
-public sealed record Narration(string Text, string Theme, NarrationPriority Priority, double QueuedAt, bool Opener = false);
+/// <param name="Clip">A recording of the line to play, if there is one. It's never dropped for waiting: it isn't a remark about a moment that's passed.</param>
+public sealed record Narration(string Text, string Theme, NarrationPriority Priority, double QueuedAt, bool Opener = false, string? Clip = null);
 
 /// <summary>
 /// The narrator's one-voice queue (audio spec §3.3): one line at a time; a question preempts commentary (and an older
@@ -66,7 +67,7 @@ public sealed class NarrationQueue
         {
             var line = _pending[0];
             _pending.RemoveAt(0);
-            if (line.Priority == NarrationPriority.Commentary && now - line.QueuedAt > StaleSeconds)
+            if (line.Priority == NarrationPriority.Commentary && line.Clip is null && now - line.QueuedAt > StaleSeconds)
             {
                 dropped?.Add(line);
                 continue;

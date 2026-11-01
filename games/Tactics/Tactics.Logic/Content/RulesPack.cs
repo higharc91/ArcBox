@@ -31,6 +31,7 @@ public sealed partial class RulesPack
         Encounters = catalog.Encounters;
         AiProfiles = catalog.AiProfiles;
         Xp = catalog.Xp;
+        Regions = catalog.Regions;
         _injuryPassives = injuries.Values.ToImmutableSortedDictionary(i => InjuryPassiveId(i.Id),
             i => new PassiveDef(InjuryPassiveId(i.Id), i.Hook, null, i.Effects.IsDefault ? [] : i.Effects, i.Static with { MaxHp = 0 },
                 Target: PassiveTarget.Self), StringComparer.Ordinal);
@@ -87,8 +88,14 @@ public sealed partial class RulesPack
     /// <summary>The XP thresholds per level (<see cref="XpTable.Default"/> unless a pack has <c>xp.json</c>).</summary>
     public XpTable Xp { get; }
 
+    /// <summary>Overworld regions by id, ordinal.</summary>
+    public ImmutableSortedDictionary<string, WorldRegion> Regions { get; }
+
     /// <summary>The base map with this id, or null.</summary>
     public BattleMap? MapFor(string id) => Maps.GetValueOrDefault(id);
+
+    /// <summary>The overworld region with this id, or null.</summary>
+    public WorldRegion? RegionFor(string id) => Regions.GetValueOrDefault(id);
 
     /// <summary>
     /// The id of the passive that carries an injury's static modifiers (<c>"injury:&lt;id&gt;"</c>). <see cref="SheetBuilder"/>
@@ -137,11 +144,12 @@ public sealed partial class RulesPack
         ImmutableSortedDictionary<string, MonsterDef> Monsters, ImmutableSortedDictionary<ItemId, ItemDef> Items,
         ImmutableSortedDictionary<string, WeaponDef> Weapons, ImmutableSortedDictionary<string, ArmorDef> Armors,
         ImmutableSortedDictionary<string, EncounterDef> Encounters, ImmutableSortedDictionary<string, AiProfileDef> AiProfiles,
-        XpTable Xp)
+        XpTable Xp, ImmutableSortedDictionary<string, WorldRegion> Regions)
     {
         public static Catalog Empty { get; } = new(Ordinal.Map<ClassDef>(), Ordinal.Map<RaceDef>(), Ordinal.Map<BackgroundDef>(),
             Ordinal.Map<MonsterDef>(), ImmutableSortedDictionary<ItemId, ItemDef>.Empty, Ordinal.Map<WeaponDef>(),
-            Ordinal.Map<ArmorDef>(), Ordinal.Map<EncounterDef>(), Ordinal.Map<AiProfileDef>(), XpTable.Default);
+            Ordinal.Map<ArmorDef>(), Ordinal.Map<EncounterDef>(), Ordinal.Map<AiProfileDef>(), XpTable.Default,
+            Ordinal.Map<WorldRegion>());
     }
 
     /// <summary>

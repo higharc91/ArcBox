@@ -4,8 +4,8 @@ using Tactics.Sim;
 namespace Tactics.Logic.Tests;
 
 /// <summary>
-/// The simulator plays battles on every core, so its tests run alone, after the parallel ones, and never take CPU from
-/// <see cref="AiPerformanceTests"/>' time budget.
+/// Tests that need the machine to themselves: the simulator plays battles on every core, and
+/// <see cref="AiPerformanceTests"/> measures wall time. They run one at a time, after the parallel tests.
 /// </summary>
 [CollectionDefinition(DisableParallelization = true)]
 public sealed class SimCollection;

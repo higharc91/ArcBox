@@ -115,6 +115,55 @@ the time, so it can be found in the logs.
 - [ ] Remote player (optional): one player joins over a Discord screen share of the TV, with their own phone on the
       server's public address or a tunnel; nothing in the game rewards reaction speed.
 
+## Tactics battle on the TV
+
+Ticked boxes were proved on real battles with the TV and bots
+(`docs/superpowers/reports/2026-10-31-tactics-tv-scene/task-5-*.png` and `task-6-*.png`). Boxes marked **(person)** only a person can judge,
+so tick those on the night. To play alongside the bots, see "With your own phone" in `tools/tactics-playtest/bots.cjs`.
+
+- [x] **Turn order:** faces in order with the active unit first, bigger, with its NOW tab, and it moves on with each turn.
+- [x] **Round:** the round and whose turn it is follow the beat on screen, not the game ahead of it.
+- [x] **Falling out:** a unit that's Out or Dead leaves the strip; a Downed one stays, dimmed; a long order shows "+n".
+- [x] **AI badge:** a character whose player has gone shows the blue AI badge on the strip; enemies don't.
+- [x] **Objectives:** `warlord_bridge` reads "Defeat the warlord, or survive 11 rounds" and `river_crossing` reads "Defeat every
+      enemy". Those two were seen on the TV.
+- [ ] **(person)** `forest_ruins`, `crypt_hall` and `crystal_cave` read "Defeat every enemy" too. Same objective in their files,
+      not yet seen on a TV.
+- [x] **AI finished:** a player sits out their turn; after 60 s the AI finishes it, with the "AI finished" badge over that unit.
+- [x] **Reaction prompt:** "<name> can react" comes up as the beat that raised it plays, and goes when it's answered or timed
+      out. Seen timing out; an answered one wasn't seen on the TV.
+- [x] **TV killed mid-battle:** relaunch it and it's back in the same room, on the board as it stands, playing only the newest
+      beat, and it goes on to the Results (`ARCBOX_GAME=tactics ARCBOX_RECONNECT=1 tools/tv-e2e.sh`).
+- [x] **Server restarted mid-battle:** the TV shows "Resuming the battle…", the phones come back, and the battle carries on to
+      the Results (`ARCBOX_GAME=tactics ARCBOX_RESTART=1 tools/tv-e2e.sh`). Bots rejoined within a second, so the screen was only up briefly.
+- [x] **An area spell:** seen once on a real TV, a level 1 wizard's Sleep on two goblins (`bots.cjs --fight --area`). It's a
+      save spell: no fireball-sized hit was seen.
+- [ ] **(person)** A TV too slow to keep up (over 8 s behind) drops to the newest beat and stays near the game. Tested, not seen
+      on a real slow machine.
+- [ ] **(person)** The strip, round and objective can be read from the sofa on the real TV, names under the faces included.
+- [ ] **(person)** The "AI finished" badge stays up long enough to notice, and isn't mistaken for the strip's AI badge.
+- [ ] **(person)** A reaction prompt is noticed by the room in its 10 s, and "Choosing on their phone" tells the others to wait.
+- [ ] **(person)** On a map with a raised back corner, a unit behind a panel can still be followed (the panel fades; a
+      prompt moves down the left side instead).
+- [ ] **(person)** The HUD feels part of the same picture as the board at 2560×1440, not laid over it.
+- [ ] **(person)** Music: each loop runs seamlessly, the crossfades between Muster, the encounter list and the fight sound right, and the boss and finale tracks suit their fights. The logs prove what played, not how it sounds.
+- [ ] **(person)** The VICTORY and DEFEAT stings land as the banner comes up, and the step into camp music afterwards feels natural.
+- [ ] **(person)** The mix: music, ambience, effects and voice balance on the real TV, ambience sits under the rest, and the voice ducking is enough for a line to be understood from the sofa.
+- [ ] **(person)** Effects match what is on screen: swings land with the blow, footsteps suit the ground, no sound is too loud or repeats annoyingly. Turn ticks and footsteps are the likeliest to wear thin over a long battle.
+- [ ] **(person)** A weapon or creature sounds right for what it is. Weapons come from the unit's art preset, so a player's real gear may differ.
+- [ ] **(person)** Recorded lines on `warlord_bridge`: each voice suits its speaker, lines never overlap, and captions keep up with the voice when two lines share a beat.
+- [ ] **(person)** The VICTORY and DEFEAT strips read well on the Results and the logo reads well in the header at 2560×1440, and the Results rows are still comfortable with the banner above them.
+- [ ] **(person)** Player colours on the turn-order frames read as each player's, next to the stripes.
+- [ ] **(person)** Light: `crypt_hall`, `crystal_cave` and `hall_of_the_flame` feel lit and not just dim from the sofa, the far end of the crypt isn't too dark to follow a fight, and dark figures (skeletons, the wraith) still stand out there. `AmbientLift` and `FigureFloor` are the two numbers to change, both in `BoardLighting`.
+- [ ] **(person)** Flicker: fire, crystals and lava breathe gently and out of step, never as a strobe. Stills can't show this.
+- [ ] **(person)** Zones (ice, webs, poison) stay unlit on purpose, so they're clear; check they don't look pasted on in a dark room.
+- [ ] **(person)** Halos and tile-sized pools look right on the real TV beside the mockups, without the recipe's banded, dithered steps.
+- [ ] **(person)** A brazier's halo sits over a unit in front of it and over a big unit's ring. It's faint (it fades out about 21 art px from the flame, so a ring on the next tile is clear of it, and the dragon's wing in the demo showed only a slight tint). Check nobody's head looks washed out.
+- [ ] **(person)** 130 of `crypt_hall`'s 168 tiles sit at flat ambient. Does a light's reach x sqrt 2 read better than more `AmbientLift`?
+- [ ] **(person)** The wraith on a dark floor: can it be picked out from the sofa?
+- [ ] **(person)** Join on a real phone over the LAN (`--people=1`): the QR opens the join page and the turn screen matches
+      the TV. Checked here only in a browser on the PC, not on a phone.
+
 ## After
 
 - [ ] Save the server console log and the Godot log (`%APPDATA%\Godot\app_userdata\ArcBox\logs`) if anything failed.

@@ -2,6 +2,7 @@ import { useEffect, useState } from "preact/hooks";
 import type { HostClient, HostState } from "./host";
 import { RedlineBoard } from "./RedlineBoard";
 import { isRedlineHostView } from "./redlineView";
+import { TacticsBoard, isTacticsHostView } from "./TacticsBoard";
 
 /** The host side of the dev page: room code, lobby controls and the latest HostView. */
 export function HostPanel({ host }: { host: HostClient }) {
@@ -72,6 +73,8 @@ export function HostPanel({ host }: { host: HostClient }) {
       {hostView ? (
         hostView.gameId === "redline" && isRedlineHostView(hostView.view) ? (
           <RedlineBoard view={hostView.view} />
+        ) : hostView.gameId === "tactics" && isTacticsHostView(hostView.view) ? (
+          <TacticsBoard view={hostView.view} signal={host.signal} />
         ) : (
           <pre class="host-json">{JSON.stringify(hostView.view, null, 2)}</pre>
         )

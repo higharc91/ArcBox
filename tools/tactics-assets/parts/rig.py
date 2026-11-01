@@ -50,7 +50,8 @@ for _k in list(BUILDS):
 
 @dataclass(frozen=True)
 class Pose:
-    """Offsets from the build's rest skeleton. +y is down."""
+    """Offsets from the build's rest skeleton. +y is down; x offsets are in front-view terms (+x = forward, towards
+    the weapon side) and are mirrored for the back view."""
     bob: int = 0                      # everything above the hips moves down by this
     lean: int = 0                     # torso top shifts by this in x (head follows)
     head: tuple[int, int] = (0, 0)    # extra head offset
@@ -64,133 +65,234 @@ class Pose:
     blink: bool = False               # eyes shut for a frame (idles blink, so characters look alive)
     smear: float | None = None        # a swing's previous weapon angle: the weapon draws a motion arc from it
     rise: int = 0                     # lifts the whole body (jumps, leaps); the ground anchor doesn't move
-    expression: str | None = None     # dialogue faces: happy, angry, sad, surprised (None = neutral)
+    expression: str | None = None     # faces: happy, angry, sad, surprised, pain, shut (None = neutral)
     sit: bool = False                 # seated on a bench or log (the game draws the seat): thighs forward
+    crouch: int = 0                   # the hips (and all above) drop by this and the knees bend to take it
+    drag: tuple[int, int] = (0, 0)    # secondary motion: hair, capes, hems and tails trail the body by this
+    shift: int = 0                    # the whole body slides this far along x (knockback, dodges); ends at 0
+    tilt: float = 0.0                 # the whole body topples backwards by this many degrees (death)
 
 
 # Animations: name -> (fps, loop, poses). Built for readability at 32x40 and 3x-4x zoom on a TV. Attacks follow
-# anticipation -> strike (with a smear frame) -> impact -> recovery, so hits land with weight.
+# anticipation -> a short action frame (a smear on swings, none on thrusts) -> a held impact -> recovery. Held
+# frames earn their place through secondary motion: the body holds while hair, capes and hems catch up a frame later.
 F0, F2 = (2, 0), (-2, 0)              # a planted stance
 SIT_DROP = 5                          # how far the hips drop when seated
+DOWNED = Pose(bob=5, head=(1, 2), hand_n=(2, 3), hand_f=(-1, 3), foot_n=(3, 0), foot_f=(-2, 0), weapon=105,
+              kneel=True)             # the held "downed" pose: the last frame of `down`, the first of `rise`
+STANCE = dict(lean=1, crouch=1, foot_n=(2, 0), foot_f=(-3, 0))   # battle stance: knees bent, weight forward
+
+
+def _walk(stride: int, lift: int, *, lean: int = 0, crouch: int = 0, swing: int = 2, weapon: float = 22,
+          hands: tuple[int, int] = (0, 0), drag: int = -1) -> list[Pose]:
+    """A walk cycle: contact, down, passing and up for each foot, with the arms swinging against the legs. `hands`
+    is the arms' carry offset (forward, up) for sneaks; `swing` how far they swing."""
+    hx, hy = hands
+    # (near foot, far foot, crouch, arm phase -1..1, cloth lag)
+    beats = [((stride, 0), (-stride, 0), 0, 1, drag),                       # contact: near heel strikes
+             ((stride - 1, 0), (-stride + 1, 1), 1, 1, drag - 1),          # down: weight onto it, knees give
+             ((1, 0), (0, lift), 0, 0, drag - 1),                          # passing: the far foot swings through
+             ((-1, 0), (stride - 1, lift - 1), -1, -1, drag)]              # up: push off, body at its highest
+    out = []
+    for flip in (False, True):
+        for fn, ff, cr, arm, d in beats:
+            if flip:
+                fn, ff, arm = ff, fn, -arm
+            n, f = fn, ff
+            out.append(Pose(lean=lean, crouch=crouch + cr, foot_n=(n[0] + 1, n[1]), foot_f=(f[0] - 1, f[1]),
+                            hand_n=(hx - arm * swing, hy - (1 if arm < 0 else 0)),
+                            hand_f=(hx + arm * swing, hy - (1 if arm > 0 else 0)),
+                            weapon=weapon + arm * -7, drag=(d, 0)))
+    return out
+
+
 ANIMS: dict[str, tuple[float, bool, list[Pose]]] = {
-    # Exploration idle: breathe in, out, hold, and blink on the way back up.
-    "idle": (4.0, True, [
+    # Exploration idle: settle on the out-breath with the hands and hair a beat behind, rise back, blink, and let
+    # the cloak drift in the breeze before the loop starts again.
+    "idle": (5.0, True, [
         Pose(),
+        Pose(bob=1, drag=(0, -1)),
         Pose(bob=1, hand_n=(1, 1), hand_f=(-1, 1)),
-        Pose(bob=1, hand_n=(1, 1), hand_f=(-1, 1)),
+        Pose(hand_n=(1, 1), hand_f=(-1, 1), drag=(0, 1)),
         Pose(blink=True),
+        Pose(drag=(1, 0)),
     ]),
-    # Battle idle: weapon up, knees bent, weight forward, breathing.
-    "ready": (5.0, True, [
-        Pose(bob=1, lean=1, hand_n=(2, -3), hand_f=(2, -3), foot_n=(2, 0), foot_f=(-3, 0), weapon=40),
-        Pose(bob=2, lean=1, hand_n=(2, -2), hand_f=(2, -2), foot_n=(2, 0), foot_f=(-3, 0), weapon=44),
-        Pose(bob=2, lean=1, hand_n=(2, -2), hand_f=(2, -2), foot_n=(2, 0), foot_f=(-3, 0), weapon=44, blink=True),
-        Pose(bob=1, lean=1, hand_n=(2, -3), hand_f=(2, -3), foot_n=(2, 0), foot_f=(-3, 0), weapon=40),
+    # Battle idle: weapon up, knees bent, weight forward; the weapon bobs a beat behind the breath.
+    "ready": (6.0, True, [
+        Pose(**STANCE, hand_n=(2, -3), hand_f=(2, -3), weapon=40),
+        Pose(**STANCE, bob=1, hand_n=(2, -3), hand_f=(2, -3), weapon=40, drag=(0, -1)),
+        Pose(**STANCE, bob=1, hand_n=(2, -2), hand_f=(2, -2), weapon=44),
+        Pose(**STANCE, bob=1, hand_n=(2, -2), hand_f=(2, -2), weapon=47, blink=True),
+        Pose(**STANCE, hand_n=(2, -2), hand_f=(2, -2), weapon=45, drag=(0, 1)),
+        Pose(**STANCE, hand_n=(2, -3), hand_f=(2, -3), weapon=42),
     ]),
-    "walk": (8.0, True, [
-        Pose(bob=1, foot_n=(3, 0), foot_f=(-3, 0), hand_n=(-1, -1), hand_f=(1, -1), weapon=15),
-        Pose(bob=0, foot_n=(1, 0), foot_f=(-1, 2), hand_n=(0, 0), hand_f=(0, 0), weapon=22),
-        Pose(bob=1, foot_n=(-1, 0), foot_f=(1, 0), hand_n=(2, -1), hand_f=(-2, -1), weapon=30),
-        Pose(bob=0, foot_n=(1, 2), foot_f=(-1, 0), hand_n=(0, 0), hand_f=(0, 0), weapon=22),
+    "walk": (12.0, True, _walk(3, 3)),
+    # Overhead swing (swords, axes, maces): coil, wind up behind the head, smear down, bite, hold, recover.
+    "attack": (14.0, False, [
+        Pose(lean=-1, crouch=1, hand_n=(-1, -9), hand_f=(-1, -2), foot_n=F0, foot_f=F2, weapon=-25, drag=(1, 0)),
+        Pose(lean=-2, head=(-1, 0), hand_n=(-3, -15), hand_f=(-1, -4), foot_n=F0, foot_f=F2, weapon=-60,
+             drag=(2, -1), expression="angry"),
+        Pose(lean=1, crouch=1, head=(1, 0), hand_n=(5, -4), hand_f=(-2, 0), foot_n=(4, 0), foot_f=F2, weapon=110,
+             smear=-60, drag=(-1, 0), expression="angry"),
+        Pose(lean=2, crouch=2, head=(1, 1), hand_n=(5, 1), hand_f=(-2, 1), foot_n=(5, 0), foot_f=F2, weapon=145,
+             drag=(-2, 1), expression="angry"),
+        Pose(lean=2, crouch=2, head=(1, 1), hand_n=(5, 1), hand_f=(-2, 1), foot_n=(5, 0), foot_f=F2, weapon=145,
+             drag=(-1, 0), expression="angry"),
+        Pose(lean=1, crouch=1, hand_n=(4, -1), hand_f=(-1, 0), foot_n=(4, 0), foot_f=F2, weapon=100, drag=(1, 0)),
+        Pose(lean=1, crouch=1, hand_n=(3, -2), hand_f=(0, -1), foot_n=(3, 0), foot_f=(-3, 0), weapon=60),
     ]),
-    # Overhead swing (swords, axes, maces): coil, wind up behind the head, smear down, follow through, recover.
-    "attack": (12.0, False, [
-        Pose(lean=-1, hand_n=(-1, -10), hand_f=(-1, -2), foot_n=F0, foot_f=F2, weapon=-30),
-        Pose(lean=-1, head=(-1, 0), hand_n=(-3, -15), hand_f=(-1, -3), foot_n=F0, foot_f=F2, weapon=-55),
-        Pose(lean=1, bob=1, head=(1, 0), hand_n=(5, -4), hand_f=(-2, 0), foot_n=(4, 0), foot_f=F2, weapon=110,
-             smear=-55),
-        Pose(lean=1, bob=1, head=(1, 0), hand_n=(5, 0), hand_f=(-2, 0), foot_n=(4, 0), foot_f=F2, weapon=140),
-        Pose(hand_n=(3, -2), hand_f=(-1, 0), foot_n=(3, 0), foot_f=F2, weapon=70),
+    # Thrust (spears, daggers, rapiers): draw back, coil, lunge (no smear: a thrust reads by its reach), hold, recover.
+    "thrust": (14.0, False, [
+        Pose(lean=-1, crouch=1, hand_n=(-3, -4), hand_f=(-1, -2), foot_n=(1, 0), foot_f=F2, weapon=80, drag=(1, 0)),
+        Pose(lean=-2, crouch=2, hand_n=(-5, -4), hand_f=(-1, -3), foot_n=(1, 0), foot_f=(-3, 0), weapon=82,
+             drag=(1, -1), expression="angry"),
+        Pose(lean=2, crouch=1, head=(1, 0), hand_n=(7, -4), hand_f=(-2, -1), foot_n=(5, 0), foot_f=(-3, 0), weapon=90,
+             drag=(-2, 0), expression="angry"),
+        Pose(lean=2, crouch=1, head=(1, 0), hand_n=(8, -4), hand_f=(-2, -1), foot_n=(5, 0), foot_f=(-3, 0), weapon=90,
+             drag=(-1, 0), expression="angry"),
+        Pose(lean=1, crouch=1, hand_n=(4, -3), hand_f=(-1, -1), foot_n=(4, 0), foot_f=(-3, 0), weapon=86, drag=(1, 0)),
+        Pose(lean=1, crouch=1, hand_n=(2, -3), hand_f=(1, -2), foot_n=(2, 0), foot_f=(-3, 0), weapon=75),
     ]),
-    # Thrust (spears, daggers, rapiers): draw back, lunge, hold, recover.
-    "thrust": (12.0, False, [
-        Pose(lean=-1, hand_n=(-4, -4), hand_f=(-1, -2), foot_n=(1, 0), foot_f=F2, weapon=80),
-        Pose(lean=2, bob=1, head=(1, 0), hand_n=(7, -4), hand_f=(-2, -1), foot_n=(5, 0), foot_f=F2, weapon=90),
-        Pose(lean=2, bob=1, head=(1, 0), hand_n=(8, -4), hand_f=(-2, -1), foot_n=(5, 0), foot_f=F2, weapon=90),
-        Pose(lean=1, hand_n=(3, -2), hand_f=(-1, 0), foot_n=(3, 0), foot_f=F2, weapon=85),
-    ]),
-    # Shoot (bows, crossbows): raise, draw to the cheek, hold the aim, release (the string snaps forward).
-    "shoot": (8.0, False, [
+    # Shoot (bows, crossbows): raise, nock, draw to the cheek, hold the aim, release (the string snaps), recover.
+    "shoot": (10.0, False, [
+        Pose(hand_n=(4, -5), hand_f=(3, -4), foot_n=F0, foot_f=F2, weapon=0),
         Pose(hand_n=(4, -5), hand_f=(6, -5), foot_n=F0, foot_f=F2, weapon=0, aim=True),
-        Pose(lean=-1, hand_n=(5, -6), hand_f=(7, -8), foot_n=F0, foot_f=F2, weapon=0, aim=True),
-        Pose(lean=-1, bob=1, hand_n=(5, -6), hand_f=(7, -8), foot_n=F0, foot_f=F2, weapon=0, aim=True),
-        Pose(hand_n=(5, -6), hand_f=(2, -5), foot_n=F0, foot_f=F2, weapon=0),
+        Pose(lean=-1, hand_n=(5, -6), hand_f=(7, -8), foot_n=F0, foot_f=F2, weapon=0, aim=True, drag=(1, 0)),
+        Pose(lean=-1, crouch=1, hand_n=(5, -6), hand_f=(7, -8), foot_n=F0, foot_f=F2, weapon=0, aim=True,
+             expression="angry"),
+        Pose(lean=-1, hand_n=(6, -6), hand_f=(1, -5), foot_n=F0, foot_f=F2, weapon=0, drag=(1, 0)),
+        Pose(hand_n=(4, -4), hand_f=(0, -3), foot_n=F0, foot_f=F2, weapon=0),
     ]),
-    # Cast: gather at the chest, raise, channel overhead, release forward.
-    "cast": (8.0, False, [
-        Pose(bob=1, hand_n=(-2, -2), hand_f=(3, -2), weapon=10),
-        Pose(hand_n=(0, -8), hand_f=(0, -8), weapon=5),
-        Pose(head=(0, -1), hand_n=(1, -13), hand_f=(-1, -13), weapon=0),
-        Pose(lean=1, hand_n=(5, -7), hand_f=(3, -7), foot_n=(3, 0), foot_f=F2, weapon=30),
+    # Cast: gather low with the eyes shut, draw it up, channel overhead while the robes lift, release, recover.
+    "cast": (10.0, False, [
+        Pose(crouch=1, bob=1, hand_n=(-2, -2), hand_f=(3, -2), weapon=10),
+        Pose(crouch=1, bob=1, hand_n=(-3, -3), hand_f=(4, -3), weapon=8, expression="shut", drag=(0, -1)),
+        Pose(hand_n=(0, -8), hand_f=(0, -8), weapon=5, expression="shut", drag=(0, 1)),
+        Pose(head=(0, -1), hand_n=(1, -13), hand_f=(-1, -13), weapon=0, drag=(0, -1)),
+        Pose(head=(0, -1), hand_n=(1, -14), hand_f=(-1, -14), weapon=0, drag=(1, -1)),
+        Pose(lean=2, crouch=1, hand_n=(6, -7), hand_f=(4, -7), foot_n=(3, 0), foot_f=F2, weapon=35, drag=(-2, 0),
+             expression="angry"),
+        Pose(lean=1, hand_n=(3, -4), hand_f=(1, -3), foot_n=(2, 0), foot_f=F2, weapon=25, drag=(-1, 0)),
     ]),
-    # Heavy slam (greatswords, hammers, axes): crouch, leap with the weapon high, fall into the strike, land hard.
+    # Heavy slam (greatswords, hammers, axes): crouch, leap with the weapon high, smear down, land hard, hold, rise.
     "slam": (12.0, False, [
-        Pose(bob=2, hand_n=(-2, -6), hand_f=(-1, -4), foot_n=F0, foot_f=F2, weapon=-20),
-        Pose(rise=4, lean=-1, hand_n=(-3, -16), hand_f=(0, -14), foot_n=(1, 2), foot_f=(-1, 2), weapon=-60),
-        Pose(rise=2, lean=2, hand_n=(6, -6), hand_f=(3, -6), foot_n=(2, 1), foot_f=(-2, 1), weapon=100, smear=-60),
-        Pose(bob=4, lean=2, hand_n=(6, 2), hand_f=(3, 2), foot_n=(4, 0), foot_f=(-3, 0), weapon=150),
-        Pose(bob=1, hand_n=(3, -1), hand_f=(0, -1), foot_n=(3, 0), foot_f=F2, weapon=90),
+        Pose(crouch=3, hand_n=(-2, -6), hand_f=(-1, -4), foot_n=F0, foot_f=F2, weapon=-20, drag=(0, -1)),
+        Pose(rise=3, lean=-1, hand_n=(-3, -16), hand_f=(0, -14), foot_n=(1, 2), foot_f=(-1, 2), weapon=-60,
+             drag=(0, 1), expression="angry"),
+        Pose(rise=4, lean=-1, hand_n=(-3, -17), hand_f=(0, -15), foot_n=(1, 3), foot_f=(-1, 3), weapon=-70,
+             expression="angry"),
+        Pose(rise=2, lean=2, hand_n=(6, -6), hand_f=(3, -6), foot_n=(2, 1), foot_f=(-2, 1), weapon=100, smear=-70,
+             drag=(0, -2), expression="angry"),
+        Pose(crouch=4, lean=2, hand_n=(6, 2), hand_f=(3, 2), foot_n=(4, 0), foot_f=(-3, 0), weapon=150,
+             drag=(-1, 1), expression="angry"),
+        Pose(crouch=4, lean=2, hand_n=(6, 2), hand_f=(3, 2), foot_n=(4, 0), foot_f=(-3, 0), weapon=150,
+             drag=(0, 2), expression="angry"),
+        Pose(crouch=1, lean=1, hand_n=(3, -1), hand_f=(0, -1), foot_n=(3, 0), foot_f=F2, weapon=90),
     ]),
-    # Whirlwind cleave: the weapon sweeps all the way round.
+    # Whirlwind cleave: coil, then the weapon sweeps round in two smeared frames, holds, and comes back to guard.
     "spin": (14.0, False, [
-        Pose(lean=-1, hand_n=(-4, -4), hand_f=(-2, -2), foot_n=F0, foot_f=F2, weapon=-90),
-        Pose(hand_n=(6, -3), hand_f=(-3, -2), foot_n=(3, 0), foot_f=F2, weapon=90, smear=-90),
-        Pose(lean=-1, hand_n=(2, 0), hand_f=(-4, -2), foot_n=(1, 0), foot_f=(-3, 0), weapon=165, smear=90),
-        Pose(hand_n=(3, -1), hand_f=(-1, 0), foot_n=(2, 0), foot_f=F2, weapon=60),
+        Pose(lean=-1, crouch=1, hand_n=(-4, -4), hand_f=(-2, -2), foot_n=F0, foot_f=F2, weapon=-90, drag=(1, 0)),
+        Pose(crouch=1, hand_n=(6, -3), hand_f=(-3, -2), foot_n=(3, 0), foot_f=F2, weapon=90, smear=-90,
+             drag=(-2, 0), expression="angry"),
+        Pose(lean=-1, crouch=2, hand_n=(2, 0), hand_f=(-4, -2), foot_n=(1, 0), foot_f=(-3, 0), weapon=165, smear=90,
+             drag=(-2, 1), expression="angry"),
+        Pose(lean=-1, crouch=2, hand_n=(2, 0), hand_f=(-4, -2), foot_n=(1, 0), foot_f=(-3, 0), weapon=165,
+             drag=(1, 0), expression="angry"),
+        Pose(crouch=1, hand_n=(3, -1), hand_f=(-1, 0), foot_n=(2, 0), foot_f=F2, weapon=60),
     ]),
-    # Flurry (unarmed, dual wield): jab, cross, jab, then a kick.
+    # Flurry (unarmed, dual wield): guard, jab, cross, jab, chamber the knee, kick, recover.
     "flurry": (14.0, False, [
-        Pose(lean=1, hand_n=(6, -6), hand_f=(0, -4), foot_n=(3, 0), foot_f=F2, weapon=80),
-        Pose(lean=1, hand_n=(1, -4), hand_f=(9, -6), foot_n=(3, 0), foot_f=F2, weapon=60),
-        Pose(lean=1, bob=1, hand_n=(7, -6), hand_f=(1, -4), foot_n=(3, 0), foot_f=F2, weapon=85),
-        Pose(lean=-1, hand_n=(-1, -4), hand_f=(1, -5), foot_n=(5, 4), foot_f=(-2, 0), weapon=40),
-        Pose(lean=-2, hand_n=(-2, -5), hand_f=(0, -6), foot_n=(8, 6), foot_f=(-2, 0), weapon=40),
-        Pose(hand_n=(2, -3), hand_f=(2, -3), foot_n=(2, 0), foot_f=F2, weapon=40),
+        Pose(crouch=1, hand_n=(2, -5), hand_f=(4, -5), foot_n=(2, 0), foot_f=F2, weapon=50),
+        Pose(lean=1, crouch=1, hand_n=(6, -6), hand_f=(0, -4), foot_n=(3, 0), foot_f=F2, weapon=80, drag=(-1, 0)),
+        Pose(lean=1, crouch=1, hand_n=(1, -4), hand_f=(9, -6), foot_n=(3, 0), foot_f=F2, weapon=60, drag=(-1, 0)),
+        Pose(lean=1, crouch=2, hand_n=(7, -6), hand_f=(1, -4), foot_n=(3, 0), foot_f=F2, weapon=85, drag=(-2, 0),
+             expression="angry"),
+        Pose(lean=-1, hand_n=(-1, -4), hand_f=(1, -5), foot_n=(5, 4), foot_f=(-2, 0), weapon=40, drag=(1, 0)),
+        Pose(lean=-2, hand_n=(-2, -5), hand_f=(0, -6), foot_n=(8, 6), foot_f=(-2, 0), weapon=40, drag=(1, 0),
+             expression="angry"),
+        Pose(crouch=1, hand_n=(2, -3), hand_f=(2, -3), foot_n=(2, 0), foot_f=F2, weapon=40),
     ]),
-    # Shield bash: brace, drive the off-hand forward, recover.
+    # Shield bash: brace, coil behind the shield, drive it forward, hold the impact, recover.
     "bash": (12.0, False, [
-        Pose(lean=-1, hand_n=(-1, -1), hand_f=(2, -3), foot_n=F0, foot_f=F2, weapon=30),
-        Pose(lean=2, bob=1, head=(1, 0), hand_n=(1, -2), hand_f=(12, -4), foot_n=(5, 0), foot_f=F2, weapon=40),
-        Pose(lean=1, hand_n=(1, -1), hand_f=(5, -2), foot_n=(3, 0), foot_f=F2, weapon=35),
+        Pose(lean=-1, crouch=1, hand_n=(-1, -1), hand_f=(2, -3), foot_n=F0, foot_f=F2, weapon=30),
+        Pose(lean=-2, crouch=2, hand_n=(-2, -1), hand_f=(1, -4), foot_n=F0, foot_f=(-3, 0), weapon=28, drag=(1, 0)),
+        Pose(lean=2, crouch=1, head=(1, 0), hand_n=(1, -2), hand_f=(12, -4), foot_n=(5, 0), foot_f=F2, weapon=40,
+             drag=(-2, 0), expression="angry"),
+        Pose(lean=2, crouch=1, head=(1, 0), hand_n=(1, -2), hand_f=(11, -4), foot_n=(5, 0), foot_f=F2, weapon=40,
+             drag=(-1, 0), expression="angry"),
+        Pose(lean=1, crouch=1, hand_n=(1, -1), hand_f=(5, -2), foot_n=(3, 0), foot_f=F2, weapon=35),
     ]),
-    # Block: shield (or weapon) up across the body, braced.
-    "block": (6.0, False, [
-        Pose(bob=1, hand_n=(2, -5), hand_f=(7, -7), foot_n=(2, 0), foot_f=(-3, 0), weapon=45),
-        Pose(bob=2, lean=-1, hand_n=(2, -5), hand_f=(7, -7), foot_n=(2, 0), foot_f=(-3, 0), weapon=45),
+    # Block: shield (or weapon) up across the body, braced; the blow jolts it back a pixel, and it holds.
+    "block": (8.0, False, [
+        Pose(crouch=1, hand_n=(2, -5), hand_f=(7, -7), foot_n=(2, 0), foot_f=(-3, 0), weapon=45),
+        Pose(crouch=2, lean=-1, hand_n=(1, -5), hand_f=(6, -7), foot_n=(2, 0), foot_f=(-3, 0), weapon=48,
+             drag=(1, 0), expression="angry"),
+        Pose(crouch=2, hand_n=(2, -5), hand_f=(7, -7), foot_n=(2, 0), foot_f=(-3, 0), weapon=45),
     ]),
-    "dodge": (10.0, False, [
-        Pose(lean=-2, head=(-2, 0), hand_n=(-2, -2), hand_f=(-3, -2), foot_n=(-2, 0), foot_f=(-4, 0), weapon=10),
-        Pose(lean=-1, bob=1, head=(-1, 0), hand_n=(0, -1), hand_f=(-2, -1), foot_n=(0, 0), foot_f=(-3, 0)),
+    # Dodge: snap the upper body away, hop back a step, land low, come back to guard.
+    "dodge": (12.0, False, [
+        Pose(lean=-2, head=(-2, 0), hand_n=(-2, -2), hand_f=(-3, -2), foot_n=(-1, 0), foot_f=(-3, 0), weapon=10,
+             drag=(2, 0), expression="surprised"),
+        Pose(shift=-2, rise=1, lean=-2, head=(-1, 0), hand_n=(-1, -3), hand_f=(-3, -3), foot_n=(-1, 1),
+             foot_f=(-3, 1), weapon=15, drag=(2, 1)),
+        Pose(shift=-2, crouch=2, lean=-1, hand_n=(0, -1), hand_f=(-2, -1), foot_n=(0, 0), foot_f=(-3, 0), weapon=20,
+             drag=(1, -1)),
+        Pose(shift=-1, crouch=1, hand_n=(1, -2), hand_f=(0, -2), foot_n=(1, 0), foot_f=(-3, 0), weapon=30),
     ]),
-    # Jump (climbing a ledge, a monk's leap): crouch, air, land.
+    # Jump (a ledge, a monk's leap): crouch, launch, tuck at the top, reach down, land. The game moves the sprite
+    # along the arc; `rise` keeps the body inside the frame.
     "jump": (10.0, False, [
-        Pose(bob=2, hand_n=(-1, 0), hand_f=(1, 0), foot_n=F0, foot_f=F2),
-        Pose(rise=7, hand_n=(2, -9), hand_f=(-2, -9), foot_n=(1, 3), foot_f=(-1, 3), weapon=10),
-        Pose(bob=2, hand_n=(2, -1), hand_f=(-2, -1), foot_n=(2, 0), foot_f=(-3, 0)),
+        Pose(crouch=3, hand_n=(-2, 1), hand_f=(1, 1), foot_n=F0, foot_f=F2, drag=(0, -1)),
+        Pose(rise=3, hand_n=(2, -9), hand_f=(-2, -9), foot_n=(1, 2), foot_f=(-1, 1), weapon=10, drag=(0, 1)),
+        Pose(rise=4, hand_n=(2, -6), hand_f=(-2, -6), foot_n=(2, 4), foot_f=(0, 4), weapon=15, drag=(0, 1)),
+        Pose(rise=2, hand_n=(3, -4), hand_f=(-3, -4), foot_n=(1, 1), foot_f=(-1, 1), weapon=20, drag=(0, -1)),
+        Pose(crouch=3, hand_n=(2, -1), hand_f=(-2, -1), foot_n=(2, 0), foot_f=(-3, 0), drag=(0, 1)),
     ]),
-    # Use an item (drink a potion, read a scroll): to the chest, tip back, lower.
-    "item": (6.0, False, [
+    # Use an item (drink a potion, read a scroll): reach to the belt, bring it up, tip back, savour, lower.
+    "item": (8.0, False, [
+        Pose(hand_n=(0, -1), hand_f=(-1, 0), weapon=40),
         Pose(hand_n=(-2, -6), hand_f=(-1, 0), weapon=40),
-        Pose(head=(0, -1), lean=-1, hand_n=(-4, -11), hand_f=(-1, 0), weapon=10),
+        Pose(head=(0, -1), lean=-1, hand_n=(-4, -11), hand_f=(-1, 0), weapon=10, drag=(1, 0)),
+        Pose(head=(-1, -1), lean=-1, hand_n=(-4, -11), hand_f=(-1, 0), weapon=10, blink=True, drag=(1, 1)),
         Pose(hand_n=(0, -3), hand_f=(-1, 0), weapon=30),
     ]),
-    # Victory: weapon raised, a little hop.
+    # Victory: weapon raised, a hop, land, and a pleased blink.
     "victory": (6.0, True, [
-        Pose(hand_n=(0, -16), hand_f=(-1, -1), weapon=-5),
-        Pose(rise=2, hand_n=(0, -17), hand_f=(-2, -3), weapon=0, foot_n=(1, 1), foot_f=(-1, 1)),
+        Pose(hand_n=(0, -16), hand_f=(-1, -1), weapon=-5, expression="happy"),
+        Pose(rise=2, hand_n=(0, -17), hand_f=(-2, -3), weapon=0, foot_n=(1, 1), foot_f=(-1, 1), drag=(0, 1),
+             expression="happy"),
+        Pose(crouch=1, hand_n=(0, -16), hand_f=(-1, -2), weapon=-5, drag=(0, -1), expression="happy"),
         Pose(hand_n=(0, -16), hand_f=(-1, -1), weapon=-5, blink=True),
     ]),
-    "hurt": (8.0, False, [
-        Pose(bob=1, lean=-2, head=(-1, 1), hand_n=(-1, -2), hand_f=(-2, -3), foot_n=(0, 0), foot_f=(-2, 0), weapon=50),
-        Pose(bob=1, lean=-1, head=(-1, 0), hand_n=(0, -1), hand_f=(-1, -2), foot_n=(1, 0), foot_f=(-2, 0), weapon=40),
+    # Hurt: the flash-ready recoil (the game tints this frame), pushed back a pixel, then settle. Short on purpose.
+    "hurt": (10.0, False, [
+        Pose(bob=1, lean=-2, head=(-1, 1), hand_n=(-1, -2), hand_f=(-2, -3), foot_n=(0, 0), foot_f=(-2, 0),
+             weapon=50, drag=(2, 0), expression="pain"),
+        Pose(shift=-1, crouch=1, lean=-1, head=(-1, 0), hand_n=(0, -1), hand_f=(-1, -2), foot_n=(1, 0),
+             foot_f=(-2, 0), weapon=40, drag=(1, 1), expression="pain"),
+        Pose(crouch=1, hand_n=(1, -2), hand_f=(0, -2), foot_n=(2, 0), foot_f=(-3, 0), weapon=40, drag=(-1, 0)),
     ]),
-    "down": (1.0, False, [
-        Pose(bob=5, head=(1, 2), hand_n=(2, 3), hand_f=(-1, 3), foot_n=(3, 0), foot_f=(-2, 0), weapon=105, kneel=True),
+    # Down: hit, the knees give, drop onto one knee (overshooting a pixel), then the held downed slump.
+    "down": (8.0, False, [
+        Pose(bob=1, lean=-2, head=(-1, 1), hand_n=(-1, -2), hand_f=(-2, -3), foot_n=(0, 0), foot_f=(-2, 0),
+             weapon=55, drag=(2, 0), expression="pain"),
+        Pose(crouch=3, lean=1, head=(1, 1), hand_n=(2, 0), hand_f=(0, 0), foot_n=(3, 0), foot_f=(-2, 0), weapon=80,
+             drag=(1, -1), expression="pain"),
+        Pose(bob=5, head=(1, 3), hand_n=(2, 4), hand_f=(-1, 4), foot_n=(3, 0), foot_f=(-2, 0), weapon=110, kneel=True,
+             drag=(0, 1)),
+        DOWNED,
+    ]),
+    # Getting back up after a revive: from the slump, look up, push off the knee, stand into guard.
+    "rise": (8.0, False, [
+        DOWNED,
+        Pose(bob=5, head=(0, 0), hand_n=(1, 1), hand_f=(-1, 2), foot_n=(3, 0), foot_f=(-2, 0), weapon=90, kneel=True),
+        Pose(crouch=3, lean=1, hand_n=(2, 0), hand_f=(0, 0), foot_n=(3, 0), foot_f=(-2, 0), weapon=60, drag=(0, 1)),
+        Pose(crouch=1, hand_n=(2, -1), hand_f=(0, -1), foot_n=(2, 0), foot_f=(-2, 0), weapon=45, drag=(0, -1)),
     ]),
     # Downtime: seated at camp or in a tavern, chatting, waving, dozing by the fire.
     "sit": (3.0, True, [
         Pose(sit=True, hand_n=(3, -3), hand_f=(3, -3), weapon=70),
-        Pose(sit=True, bob=1, hand_n=(3, -3), hand_f=(3, -3), weapon=70),
+        Pose(sit=True, bob=1, hand_n=(3, -3), hand_f=(3, -3), weapon=70, drag=(0, -1)),
         Pose(sit=True, bob=1, hand_n=(3, -3), hand_f=(3, -3), weapon=70),
         Pose(sit=True, hand_n=(3, -3), hand_f=(3, -3), weapon=70, blink=True),
     ]),
@@ -205,20 +307,170 @@ ANIMS: dict[str, tuple[float, bool, list[Pose]]] = {
         Pose(head=(0, 1), hand_n=(3, -6), hand_f=(-2, -1), weapon=45, blink=True),
     ]),
     "wave": (6.0, True, [
-        Pose(hand_n=(0, -15), hand_f=(-1, 0), weapon=0),
-        Pose(hand_n=(3, -14), hand_f=(-1, 0), weapon=15),
-        Pose(hand_n=(0, -15), hand_f=(-1, 0), weapon=0),
-        Pose(hand_n=(-2, -14), hand_f=(-1, 0), weapon=-15),
+        Pose(hand_n=(0, -15), hand_f=(-1, 0), weapon=0, expression="happy"),
+        Pose(hand_n=(3, -14), hand_f=(-1, 0), weapon=15, expression="happy"),
+        Pose(hand_n=(0, -15), hand_f=(-1, 0), weapon=0, expression="happy"),
+        Pose(hand_n=(-2, -14), hand_f=(-1, 0), weapon=-15, expression="happy"),
     ]),
-    # Getting back up after a revive.
-    "rise": (6.0, False, [
-        Pose(bob=5, head=(1, 1), hand_n=(2, 2), hand_f=(-1, 2), foot_n=(3, 0), foot_f=(-2, 0), weapon=90, kneel=True),
-        Pose(bob=3, hand_n=(2, 0), hand_f=(-1, 0), foot_n=(3, 0), foot_f=(-2, 0), weapon=50),
+    # ---- added in the polish pass
+    # Run: a forward lean, long strides with a flight frame, arms pumping, cloth streaming behind.
+    "run": (14.0, True, [
+        Pose(lean=2, crouch=1, foot_n=(6, 0), foot_f=(-5, 2), hand_n=(-3, -3), hand_f=(4, -5), weapon=10,
+             drag=(-2, 0)),
+        Pose(lean=2, crouch=2, foot_n=(3, 0), foot_f=(-3, 4), hand_n=(-1, -3), hand_f=(2, -4), weapon=20,
+             drag=(-3, 0)),
+        Pose(lean=2, rise=1, foot_n=(-2, 2), foot_f=(3, 3), hand_n=(2, -4), hand_f=(-2, -3), weapon=40,
+             drag=(-3, -1)),
+        Pose(lean=2, crouch=1, foot_n=(-5, 2), foot_f=(6, 0), hand_n=(4, -5), hand_f=(-3, -3), weapon=50,
+             drag=(-2, 0)),
+        Pose(lean=2, crouch=2, foot_n=(-3, 4), foot_f=(3, 0), hand_n=(2, -4), hand_f=(-1, -3), weapon=40,
+             drag=(-3, 0)),
+        Pose(lean=2, rise=1, foot_n=(3, 3), foot_f=(-2, 2), hand_n=(-2, -3), hand_f=(2, -4), weapon=20,
+             drag=(-3, -1)),
+    ]),
+    # Knockback: shoved off the feet, slide on planted heels, stumble a step back, catch, recover. Ends at shift 0,
+    # so the game can slide the unit to its new tile underneath.
+    "knockback": (12.0, False, [
+        Pose(shift=-2, lean=-3, head=(-2, 1), hand_n=(-2, -4), hand_f=(-3, -5), foot_n=(1, 1), foot_f=(-2, 0),
+             weapon=60, drag=(3, 0), expression="pain"),
+        Pose(shift=-3, crouch=2, lean=-2, head=(-1, 0), hand_n=(2, -6), hand_f=(-4, -6), foot_n=(3, 0),
+             foot_f=(-3, 0), weapon=50, drag=(2, 0), expression="pain"),
+        Pose(shift=-2, crouch=1, lean=-1, hand_n=(1, -4), hand_f=(-4, -4), foot_n=(2, 0), foot_f=(-4, 2), weapon=45,
+             drag=(1, -1)),
+        Pose(shift=-1, crouch=2, lean=1, hand_n=(2, -3), hand_f=(1, -3), foot_n=(3, 0), foot_f=(-4, 0), weapon=45,
+             drag=(-1, 1)),
+        Pose(**STANCE, hand_n=(2, -3), hand_f=(2, -3), weapon=40),
+    ]),
+    # Stagger: reeling from a heavy blow or a stun: lurch back, sway forward, back, wobble, steady.
+    "stagger": (8.0, False, [
+        Pose(shift=-1, lean=-2, crouch=1, head=(-1, 0), hand_n=(0, -3), hand_f=(-3, -3), foot_n=(1, 0),
+             foot_f=(-3, 1), weapon=55, drag=(2, 0), expression="pain"),
+        Pose(shift=1, lean=2, crouch=2, head=(1, 1), hand_n=(2, 0), hand_f=(1, -1), foot_n=(4, 1), foot_f=(-2, 0),
+             weapon=70, drag=(-2, 0), expression="pain"),
+        Pose(lean=-1, crouch=1, head=(-1, 0), hand_n=(0, -2), hand_f=(-2, -2), foot_n=(3, 0), foot_f=(-3, 0),
+             weapon=55, drag=(1, 0), blink=True),
+        Pose(lean=1, crouch=1, head=(1, 0), hand_n=(1, -1), hand_f=(0, -1), foot_n=(3, 0), foot_f=(-3, 0),
+             weapon=50, drag=(-1, 0)),
+        Pose(**STANCE, hand_n=(2, -2), hand_f=(1, -2), weapon=45),
+    ]),
+    # Death: hit, buckle, drop to the knees, topple backwards, land, and settle flat: the game fades the last frame.
+    "death": (8.0, False, [
+        Pose(bob=1, lean=-2, head=(-1, 1), hand_n=(-1, -2), hand_f=(-2, -3), foot_n=(0, 0), foot_f=(-2, 0),
+             weapon=55, drag=(2, 0), expression="pain"),
+        Pose(crouch=3, lean=-1, head=(-1, 2), hand_n=(0, 2), hand_f=(-1, 2), foot_n=(3, 0), foot_f=(-2, 0),
+             weapon=110, drag=(1, -1), expression="pain"),
+        Pose(head=(1, 2), hand_n=(2, 3), hand_f=(-1, 3), foot_n=(3, 0), foot_f=(-2, 0), weapon=120, kneel=True,
+             drag=(0, 1), expression="pain"),
+        Pose(head=(0, 1), hand_n=(1, 1), hand_f=(-2, 1), foot_n=(3, 0), foot_f=(-2, 0), weapon=130, kneel=True,
+             tilt=45, drag=(2, 0)),
+        Pose(head=(0, 1), hand_n=(1, 2), hand_f=(-2, 2), foot_n=(3, 0), foot_f=(-2, 0), weapon=150, kneel=True,
+             tilt=84, drag=(1, 0)),
+        Pose(head=(0, 0), hand_n=(2, 3), hand_f=(-2, 3), foot_n=(3, 0), foot_f=(-2, 0), weapon=160, kneel=True,
+             tilt=90),
+    ]),
+    # Pray (a divine cast: clerics, paladins): hands together and head bowed, then lifted and opened to the sky.
+    "pray": (8.0, False, [
+        Pose(head=(0, 1), hand_n=(-5, -4), hand_f=(6, -4), weapon=10, expression="shut"),
+        Pose(crouch=1, head=(0, 1), hand_n=(-5, -5), hand_f=(6, -5), weapon=10, expression="shut", drag=(0, 1)),
+        Pose(head=(0, -1), hand_n=(-2, -12), hand_f=(3, -12), weapon=5, expression="shut", drag=(0, -1)),
+        Pose(head=(0, -1), hand_n=(3, -14), hand_f=(-3, -14), weapon=0, drag=(0, -1)),
+        Pose(head=(0, -1), hand_n=(4, -15), hand_f=(-4, -15), weapon=0, drag=(1, -1)),
+        Pose(hand_n=(2, -4), hand_f=(-1, -3), weapon=20, drag=(0, 1)),
+    ]),
+    # Channel: a sustained concentration loop, palms pushed forward, trembling, robes stirring in the flow.
+    "channel": (8.0, True, [
+        Pose(crouch=1, lean=1, hand_n=(4, -6), hand_f=(6, -6), foot_n=F0, foot_f=F2, weapon=30, drag=(-1, -1),
+             expression="angry"),
+        Pose(crouch=1, lean=1, bob=1, hand_n=(5, -6), hand_f=(7, -6), foot_n=F0, foot_f=F2, weapon=32,
+             drag=(-2, -1), expression="angry"),
+        Pose(crouch=1, lean=1, hand_n=(4, -7), hand_f=(6, -7), foot_n=F0, foot_f=F2, weapon=30, drag=(-1, 0),
+             expression="angry"),
+        Pose(crouch=1, lean=1, bob=1, hand_n=(5, -6), hand_f=(6, -5), foot_n=F0, foot_f=F2, weapon=33,
+             drag=(-2, 0), expression="angry"),
+    ]),
+    # Summon (big area spells): gather low, sweep the arms up, hold them high as the robes lift, bring it down.
+    "summon": (9.0, False, [
+        Pose(crouch=2, head=(0, 1), hand_n=(-2, 2), hand_f=(3, 2), foot_n=F0, foot_f=F2, weapon=15,
+             expression="shut"),
+        Pose(crouch=1, hand_n=(1, -6), hand_f=(-1, -6), foot_n=F0, foot_f=F2, weapon=8, expression="shut",
+             drag=(0, 1)),
+        Pose(rise=1, head=(0, -1), hand_n=(4, -15), hand_f=(-4, -15), foot_n=F0, foot_f=F2, weapon=-5, drag=(0, 1)),
+        Pose(rise=2, head=(0, -1), hand_n=(4, -16), hand_f=(-4, -16), foot_n=F0, foot_f=F2, weapon=-5,
+             drag=(0, -1)),
+        Pose(rise=2, head=(0, -1), hand_n=(5, -16), hand_f=(-5, -16), foot_n=F0, foot_f=F2, weapon=-8,
+             drag=(1, -1)),
+        Pose(crouch=2, lean=1, hand_n=(5, -2), hand_f=(-5, -2), foot_n=(3, 0), foot_f=F2, weapon=60, drag=(0, -2),
+             expression="angry"),
+        Pose(crouch=1, hand_n=(3, -2), hand_f=(-1, -2), foot_n=(2, 0), foot_f=F2, weapon=40, drag=(0, 1)),
+    ]),
+    # Point: a quick single-target bolt: cock the hand back by the shoulder, snap it out, recoil, lower.
+    "point": (12.0, False, [
+        Pose(lean=-1, hand_n=(-3, -7), hand_f=(-1, -1), foot_n=F0, foot_f=F2, weapon=30),
+        Pose(lean=1, hand_n=(8, -7), hand_f=(-2, 0), foot_n=(3, 0), foot_f=F2, weapon=85, drag=(-1, 0),
+             expression="angry"),
+        Pose(hand_n=(7, -7), hand_f=(-2, 0), foot_n=(3, 0), foot_f=F2, weapon=80, drag=(1, 0)),
+        Pose(hand_n=(3, -3), hand_f=(-1, 0), foot_n=(2, 0), foot_f=F2, weapon=50),
+    ]),
+    # Buff (a self or ally boost): a fist to the chest, then the weapon thrust up in a rallying cry.
+    "buff": (9.0, False, [
+        Pose(crouch=1, head=(0, 1), hand_n=(-1, -1), hand_f=(1, -2), weapon=30),
+        Pose(crouch=1, hand_n=(-1, -2), hand_f=(6, -6), weapon=30, expression="angry"),
+        Pose(crouch=1, bob=1, hand_n=(-1, -2), hand_f=(6, -6), weapon=30, drag=(0, -1), expression="angry"),
+        Pose(head=(0, -1), hand_n=(0, -16), hand_f=(5, -6), weapon=-5, drag=(0, 1), expression="angry"),
+        Pose(rise=1, head=(0, -1), hand_n=(0, -17), hand_f=(5, -6), weapon=0, expression="happy"),
+        Pose(hand_n=(2, -3), hand_f=(0, -2), weapon=30, drag=(0, -1)),
+    ]),
+    # Kneel (oaths, rest, a respectful bow): lower onto one knee, upright, then bow the head. The game holds the last.
+    "kneel": (6.0, False, [
+        Pose(crouch=3, lean=1, head=(0, 1), hand_n=(2, 0), hand_f=(1, 0), foot_n=(3, 0), foot_f=(-2, 0), weapon=40),
+        Pose(head=(0, -2), hand_n=(1, -1), hand_f=(1, -1), foot_n=(3, 0), foot_f=(-2, 0), weapon=35, kneel=True,
+             drag=(0, 1)),
+        Pose(head=(0, -1), hand_n=(1, -1), hand_f=(1, -1), foot_n=(3, 0), foot_f=(-2, 0), weapon=35, kneel=True,
+             expression="shut"),
+    ]),
+    # Cheer: both arms up, bouncing on the toes.
+    "cheer": (8.0, True, [
+        Pose(crouch=1, hand_n=(1, -15), hand_f=(-1, -14), weapon=-10, expression="happy"),
+        Pose(rise=2, hand_n=(2, -17), hand_f=(-2, -16), weapon=-5, foot_n=(1, 1), foot_f=(-1, 1), drag=(0, 1),
+             expression="happy"),
+        Pose(rise=1, hand_n=(1, -16), hand_f=(-1, -15), weapon=-10, expression="happy"),
+        Pose(crouch=1, hand_n=(2, -13), hand_f=(-2, -12), weapon=-12, drag=(0, -1), expression="happy"),
+    ]),
+    # Crouch: low and still behind cover, breathing.
+    "crouch": (3.0, True, [
+        Pose(crouch=4, lean=2, head=(1, 0), hand_n=(2, -2), hand_f=(3, -2), foot_n=(3, 0), foot_f=(-3, 0),
+             weapon=60),
+        Pose(crouch=4, lean=2, bob=1, head=(1, 0), hand_n=(2, -2), hand_f=(3, -2), foot_n=(3, 0), foot_f=(-3, 0),
+             weapon=60, drag=(0, -1)),
+    ]),
+    # Sneak: the walk cycle low and short, hands carried forward.
+    "sneak": (9.0, True, [p for i, p in enumerate(_walk(2, 2, lean=2, crouch=3, swing=1, weapon=60, hands=(2, -2),
+                                                           drag=0)) if i % 4 != 1]),
+    # Hop: a quick step up or down one height level.
+    "hop": (12.0, False, [
+        Pose(crouch=2, hand_n=(-2, 0), hand_f=(1, 0), foot_n=F0, foot_f=F2, drag=(0, -1)),
+        Pose(rise=4, lean=1, hand_n=(2, -6), hand_f=(-1, -6), foot_n=(2, 3), foot_f=(-1, 2), weapon=15, drag=(0, 1)),
+        Pose(crouch=2, lean=1, hand_n=(2, -2), hand_f=(-1, -2), foot_n=(2, 0), foot_f=(-2, 0), drag=(0, -1)),
+        Pose(hand_n=(1, -1), hand_f=(-1, -1), foot_n=(2, 0), foot_f=(-2, 0), weapon=25, drag=(0, 1)),
+    ]),
+    # Climb: reach up to the ledge, haul up, knee onto it, stand. The game moves the sprite up the height step.
+    "climb": (8.0, False, [
+        Pose(hand_n=(1, -15), hand_f=(0, -14), head=(0, -1), weapon=-10),
+        Pose(rise=3, hand_n=(1, -12), hand_f=(0, -11), foot_n=(1, 3), foot_f=(-1, 0), weapon=-5, drag=(0, 1),
+             expression="angry"),
+        Pose(rise=4, lean=1, hand_n=(2, -8), hand_f=(1, -8), foot_n=(3, 5), foot_f=(-1, 1), weapon=10, drag=(0, 1),
+             expression="angry"),
+        Pose(crouch=2, lean=1, hand_n=(2, -2), hand_f=(1, -2), foot_n=(2, 0), foot_f=(-2, 0), weapon=30,
+             drag=(0, -1)),
+        Pose(hand_n=(1, -1), hand_f=(-1, 0), foot_n=(2, 0), foot_f=(-2, 0), weapon=25),
     ]),
 }
 
 ANIM_ORDER = ["idle", "ready", "walk", "attack", "thrust", "shoot", "cast", "slam", "spin", "flurry", "bash",
-              "block", "dodge", "jump", "item", "victory", "hurt", "down", "rise", "sit", "doze", "talk", "wave"]
+              "block", "dodge", "jump", "item", "victory", "hurt", "down", "rise", "sit", "doze", "talk", "wave",
+              "run", "knockback", "stagger", "death", "pray", "channel", "summon", "point", "buff", "kneel", "cheer",
+              "crouch", "sneak", "hop", "climb"]
+assert sorted(ANIM_ORDER) == sorted(ANIMS), "every animation needs a place in the sheet"
 
 
 def frame_list() -> list[tuple[str, int, Pose]]:
@@ -263,10 +515,11 @@ class Points:
 
 def points(build: Build, pose: Pose, direction: str) -> Points:
     b = build
-    bob = pose.bob + (SIT_DROP if pose.sit else 0)
+    crouch = 0 if pose.kneel or pose.sit else pose.crouch
+    bob = pose.bob + (SIT_DROP if pose.sit else 0) + crouch
     lean = pose.lean
     sy = b.shoulder_y + bob
-    hip = b.hip_y + (bob if pose.kneel or pose.sit else 0)
+    hip = b.hip_y + (bob if pose.kneel or pose.sit else crouch)
     if pose.kneel:
         hip = b.hip_y + 3
         sy = b.shoulder_y + 3

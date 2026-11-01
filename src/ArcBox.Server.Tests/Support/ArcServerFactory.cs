@@ -17,6 +17,7 @@ namespace ArcBox.Server.Tests.Support;
 public sealed class ArcServerFactory : WebApplicationFactory<Program>
 {
     private readonly string? _databaseFile;
+    private readonly bool _withTactics;
     private readonly DirectoryInfo _contentRoot = Directory.CreateTempSubdirectory("arcbox-content-");
 
     /// <summary>A server on a private in-memory database that lives as long as the factory.</summary>
@@ -26,6 +27,12 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
 
     /// <summary>A server on <paramref name="databaseFile"/>, so a second factory on the same file is a restart.</summary>
     public ArcServerFactory(string databaseFile) => _databaseFile = databaseFile;
+
+    /// <summary>
+    /// With <paramref name="withTactics"/>, the content root also links the repository's <c>content/tactics</c>, so the
+    /// real ArcBox Tactics can be played. Off by default: hashing its art at startup would slow every other test.
+    /// </summary>
+    public ArcServerFactory(bool withTactics) => _withTactics = withTactics;
 
     /// <summary>The server's <c>Content:Root</c>: a private directory holding one pack, <c>ledger/base</c>.</summary>
     public string ContentRoot => _contentRoot.FullName;
@@ -69,6 +76,10 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
         if (!disposing) return;
         try
         {
+            // Unlink the repository's tactics content first, so the recursive delete can never reach into it.
+            var link = new DirectoryInfo(Path.Combine(_contentRoot.FullName, "tactics"));
+            if (link.Exists && link.LinkTarget is not null)
+                link.Delete();
             _contentRoot.Delete(true);
         }
         catch (IOException)
@@ -84,5 +95,32 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
         File.WriteAllText(Path.Combine(pack, "hello.txt"), "hello");
         File.WriteAllText(Path.Combine(pack, "maps", "arena.json"), "{\"w\":8}");
         File.WriteAllText(Path.Combine(pack, "blob.xyzunknown"), "blob");
+        if (_withTactics)
+        {
+            var repo = new DirectoryInfo(AppContext.BaseDirectory);
+            while (!File.Exists(Path.Combine(repo.FullName, "ArcBox.slnx")))
+                repo = repo.Parent ?? throw new DirectoryNotFoundException("No ArcBox.slnx above the test binaries.");
+            var source = Path.Combine(repo.FullName, "content", "tactics");
+            var target = Path.Combine(_contentRoot.FullName, "tactics");
+            try
+            {
+                Directory.CreateSymbolicLink(target, source);
+            }
+            catch (IOException)
+            {
+                // Windows refuses symlinks without Developer Mode or admin rights.
+                CopyDirectory(source, target);
+            }
+        }
+    }
+
+    private static void CopyDirectory(string source, string target)
+    {
+        foreach (var file in Directory.EnumerateFiles(source, "*", SearchOption.AllDirectories))
+        {
+            var copy = Path.Combine(target, Path.GetRelativePath(source, file));
+            Directory.CreateDirectory(Path.GetDirectoryName(copy)!);
+            File.Copy(file, copy);
+        }
     }
 }

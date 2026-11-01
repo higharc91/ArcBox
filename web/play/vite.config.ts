@@ -14,6 +14,7 @@ export default defineConfig({
       input: {
         index: here("./index.html"),
         dev: here("./dev.html"),
+        title: here("./title.html"),
       },
     },
   },

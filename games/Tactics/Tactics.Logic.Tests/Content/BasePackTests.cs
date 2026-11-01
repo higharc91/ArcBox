@@ -19,6 +19,14 @@ public sealed class BasePackTests
     private static UnitId U(string id) => new(id);
 
     [Fact]
+    public void Base_pack_has_ashen_ford()
+    {
+        var region = Rules.RegionFor("ashen_ford")!.Def;
+        Assert.Equal(1, region.Chapter);
+        Assert.Equal("river_crossing", Assert.Single(region.Stamps).Map);
+    }
+
+    [Fact]
     public void Base_pack_loads_with_zero_errors_including_art_keys()
     {
         RulesPack pack;
@@ -43,14 +51,17 @@ public sealed class BasePackTests
         [
             "air_elemental", "bandit", "bandit_captain", "bear", "black_knight", "boar", "cult_leader", "cultist", "dark_elf",
             "dire_wolf", "dragon", "drake", "earth_elemental", "elder_bear", "fire_elemental", "giant_bat", "giant_spider",
-            "goblin", "goblin_archer", "goblin_boss", "goblin_shaman", "golem", "hobgoblin", "hound", "imp", "kobold",
-            "kobold_slinger", "lich", "mimic", "necromancer", "orc_brute", "sapling", "skeleton", "skeleton_archer", "slime",
-            "troll", "water_elemental", "wolf", "wraith", "zombie",
+            "goblin", "goblin_archer", "goblin_boss", "goblin_shaman", "golem", "halvard", "hobgoblin", "hound", "imp",
+            "ivo_rime", "kobold", "kobold_slinger", "lich", "maren_sorrel", "mimic", "mother_skarrow", "necromancer",
+            "orc_brute", "sapling", "skeleton", "skeleton_archer", "slime", "troll", "vorga", "water_elemental", "wolf",
+            "wraith", "zombie",
         ];
         Assert.Equal(monsters, pack.Monsters.Keys);
         Assert.Equal(XpTable.Default.Thresholds, pack.Xp.Thresholds);
-        Assert.Equal(["crypt_hall", "crystal_cave", "forest_ruins", "river_crossing", "warlord_bridge"], pack.Maps.Keys);
-        Assert.Equal(["crypt_hall", "crystal_cave", "forest_ruins", "river_crossing", "warlord_bridge"], pack.Encounters.Keys);
+        Assert.Equal(["crypt_hall", "crystal_cave", "forest_ruins", "hall_of_the_flame", "keep_gate", "river_crossing", "warlord_bridge"],
+            pack.Maps.Keys);
+        Assert.Equal(["crypt_hall", "crystal_cave", "ford_assault", "forest_ruins", "hall_of_the_flame", "keep_gate", "rime_tower",
+            "river_crossing", "warlord_bridge"], pack.Encounters.Keys);
         Assert.Equal(AiProfiles, pack.AiProfiles.Keys);
         Assert.Equal(0.3, pack.AiProfiles["coward"].FleeBelowHp);
         Assert.Equal(["boss_cruel"], pack.AiProfiles.Values.Where(p => p.Cruel).Select(p => p.Id));

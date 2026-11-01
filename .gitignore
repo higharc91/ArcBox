@@ -493,3 +493,6 @@ tools/blender/out/
 arcbox.db
 arcbox.db-*
 backups/
+
+# A test scene: see tools/tactics-world/README.md
+tools/tactics-world/regions/_sample.tscn

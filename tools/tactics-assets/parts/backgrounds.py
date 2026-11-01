@@ -30,6 +30,11 @@ SKIES = {
     "night": ["#07081a", "#0c1030", "#141a44", "#1d2656", "#2a3266", "#3a3f72"],
     "overcast": ["#7c8496", "#8e95a4", "#a0a5b0", "#b1b3b8", "#c0bfbd", "#cbc7c0"],
     "ashfall": ["#2a1a1e", "#43242a", "#6a2e2c", "#93402e", "#b85a32", "#d9823e"],
+    # biome skies
+    "swamp": ["#2f3a3a", "#3f4d46", "#566452", "#76805e", "#9a9a6e", "#b9b282"],
+    "desert": ["#5f8fd0", "#7ea7da", "#a6c0de", "#cfd3d0", "#ecd9b6", "#f4d9a4"],
+    "frost": ["#7d97b8", "#97aecb", "#b3c5db", "#cfdbe8", "#e3ebf2", "#eef2f6"],
+    "forest": ["#6f9ac0", "#8db0cc", "#b2c8cf", "#d6dcc6", "#ecdcb0", "#f3d39a"],
 }
 
 RANGES = {      # biome -> [(far colour, near colour), roughness, peak height, snow line]
@@ -37,7 +42,52 @@ RANGES = {      # biome -> [(far colour, near colour), roughness, peak height, s
     "peaks": (("#9db0cc", "#6f7f9e"), 0.8, 0.9, 0.62),
     "mesas": (("#d9b48a", "#b98c66"), 0.3, 0.6, None),
     "volcano": (("#5a3236", "#3a2228"), 0.7, 0.85, None),
+    # biome ranges: the ridge line is shaped by `_ridge`, not plain noise
+    "treeline": (("#7f9aa6", "#4f6e64"), 0.5, 0.42, None),
+    "dunes": (("#e2c39a", "#c99f72"), 0.25, 0.3, None),
+    "marsh": (("#6f7c6c", "#4c5a4a"), 0.4, 0.32, None),
+    "castle": (("#8d98ad", "#68728a"), 0.3, 0.6, None),
+    "glacier": (("#b4c6dc", "#8aa0bf"), 0.85, 0.95, 0.75),
 }
+
+HAZE = {"volcano": "#6a2e2c", "marsh": "#9a9a6e", "treeline": "#d6dcc6", "dunes": "#f0dcb4", "glacier": "#e3ebf2",
+        "castle": "#ddd9d0"}
+
+
+def _ridge(biome: str, layer: str, n: np.ndarray, r: np.random.Generator, h_scale: float) -> np.ndarray:
+    """The skyline for a biome, in pixel rows from the top. Plain ranges are noise; a tree line is noise crowned by
+    conifer spikes; a marsh is low and flat with the odd bare snag; a castle skyline rises in walls and towers with
+    crenellations; dunes are long smooth swells. Everything is periodic in x so the layer tiles."""
+    base = RANGE_H * (1 - h_scale * (0.35 + 0.65 * n))
+    xs = np.arange(RANGE_W)
+    if biome == "treeline":
+        k = 9 if layer == "far" else 13
+        add = np.zeros(RANGE_W)
+        for x0 in tex.poisson(RANGE_W, 1, k * 0.6, r, tries=400):
+            hgt, half = r.uniform(k * 0.9, k * 2.0), r.uniform(k * 0.35, k * 0.55)
+            d = np.abs(((xs - x0[0] + RANGE_W / 2) % RANGE_W) - RANGE_W / 2)
+            add = np.maximum(add, np.clip(hgt * (1 - d / half), 0, None))
+        return (base - add).astype(int)
+    if biome == "marsh":
+        add = np.zeros(RANGE_W)
+        for x0 in tex.poisson(RANGE_W, 1, 40, r, tries=60):
+            d = np.abs(((xs - x0[0] + RANGE_W / 2) % RANGE_W) - RANGE_W / 2)
+            add = np.maximum(add, np.where(d < 1.5, r.uniform(14, 30), 0))
+        return (base - add).astype(int)
+    if biome == "dunes":
+        sw = np.sin(2 * np.pi * xs / RANGE_W * 3 + n * 3) * 0.5 + 0.5
+        return (RANGE_H * (1 - h_scale * (0.4 + 0.6 * sw))).astype(int)
+    if biome == "castle":
+        top = np.full(RANGE_W, RANGE_H * (1 - h_scale * 0.45))
+        x = 0
+        while x < RANGE_W - 30:
+            w = int(r.integers(14, 26))
+            tall = r.uniform(0.6, 1.0) if r.random() < 0.6 else 0.5
+            top[x:x + w] = RANGE_H * (1 - h_scale * tall)
+            x += w + int(r.integers(12, 40))
+        crenel = (xs // 3) % 2 == 0
+        return (top - np.where(crenel, 3, 0)).astype(int)
+    return base.astype(int)
 
 
 def sky(name: str) -> Image.Image:
@@ -77,10 +127,10 @@ def mountain_range(biome: str, layer: str, seed: int) -> Image.Image:
     if biome == "mesas":                                       # flat-topped buttes: terrace the ridge
         n = np.round(n * 4) / 4
     h_scale = (0.55 if layer == "far" else 0.75) * peak
-    ridge = (RANGE_H * (1 - h_scale * (0.35 + 0.65 * n))).astype(int)
+    ridge = _ridge(biome, layer, n, r, h_scale)
     slope = (np.roll(ridge, -4) - np.roll(ridge, 4)).astype(float)   # >0: falls away to the right (shadow side)
     face = np.where(slope < -2, 1, np.where(slope > 2, -1, 0))
-    haze = _hex("#e8e2d6") if biome != "volcano" else _hex("#6a2e2c")
+    haze = _hex(HAZE.get(biome, "#e8e2d6"))
     arr = np.zeros((RANGE_H, RANGE_W, 4), np.uint8)
     for x in range(RANGE_W):
         top = ridge[x]
@@ -162,7 +212,7 @@ def compose(sky_name: str, biome: str, w: int = 640, h: int = 300, horizon: int 
             fill = rg.crop((0, RANGE_H - 1, RANGE_W, RANGE_H)).resize((RANGE_W, h - y - RANGE_H), Image.NEAREST)
             for x in range(0, w, RANGE_W):
                 out.alpha_composite(fill, (x, y + RANGE_H))
-    if sky_name in ("day", "dusk", "overcast"):
+    if sky_name in ("day", "dusk", "overcast", "desert", "forest", "frost"):
         for k, (x, y) in enumerate(((60, 30), (300, 55), (480, 20))):
             out.alpha_composite(cloud(k + 1), (x, y))
     return out
@@ -173,7 +223,8 @@ def build() -> None:
     shutil.rmtree(out, ignore_errors=True)
     for name in SKIES:
         save(sky(name), out / "sky" / f"{name}.png")
-    seeds = {"hills": 3, "peaks": 11, "mesas": 21, "volcano": 31}
+    seeds = {"hills": 3, "peaks": 11, "mesas": 21, "volcano": 31, "treeline": 41, "dunes": 51, "marsh": 61,
+             "castle": 71, "glacier": 81}
     for biome, sd in seeds.items():
         for layer, k in (("far", 0), ("near", 1)):
             save(mountain_range(biome, layer, sd + k), out / "ranges" / f"{biome}_{layer}.png")
@@ -189,12 +240,18 @@ def build() -> None:
         "clouds": [f"clouds/cloud_{k}.png" for k in range(6)],
         "stars": {"file": "stars.png", "tileX": True, "tileY": True},
         "pairings": {"ashen-ford": ["day", "hills"], "frostpeak": ["overcast", "peaks"],
-                     "mirewood": ["dusk", "hills"], "sunscar": ["day", "mesas"], "ember-keep": ["ashfall", "volcano"],
-                     "night": ["night", "peaks"]},
+                     "mirewood": ["swamp", "marsh"], "sunscar": ["desert", "dunes"],
+                     "ember-keep": ["ashfall", "volcano"], "night": ["night", "peaks"],
+                     "greenhollow": ["forest", "treeline"], "highward": ["day", "castle"],
+                     "rimeholt": ["frost", "glacier"]},
+        "biomes": {"grassland": ["day", "hills"], "snow": ["frost", "glacier"], "swamp": ["swamp", "marsh"],
+                   "desert": ["desert", "dunes"], "volcanic": ["ashfall", "volcano"], "forest": ["forest", "treeline"],
+                   "courtyard": ["day", "castle"], "night": ["night", "peaks"]},
     }, out / "manifest.json")
     tiles = [Tile(compose(s, b), f"{s} · {b}") for s, b in
              (("day", "hills"), ("overcast", "peaks"), ("dusk", "hills"), ("day", "mesas"), ("ashfall", "volcano"),
-              ("night", "peaks"))]
+              ("night", "peaks"), ("forest", "treeline"), ("desert", "dunes"), ("swamp", "marsh"),
+              ("day", "castle"), ("frost", "glacier"), ("dusk", "treeline"))]
     save(contact_sheet("Backgrounds", tiles, columns=2, zoom=1,
                        subtitle="Sky gradients, tileable mountain ranges (far and near, for parallax), clouds and "
                                 "stars."), PREVIEWS / "20-backgrounds.png")

@@ -32,7 +32,7 @@ def build() -> None:
     pngs = list(PACK.rglob("*.png"))
     sets = sorted({p.relative_to(PACK).parts[0] for p in pngs})
     size = sum(f.stat().st_size for f in PACK.rglob("*") if f.is_file()) / 1e6
-    d.text((pad + 6, 18), "ArcBox Tactics · asset library", font=font(34, True), fill=EDGE)
+    d.text((pad + 6, 18), "Wardenflame · asset library", font=font(34, True), fill=EDGE)
     d.text((pad + 6, 66), f"{len(sets)} sets · {len(pngs)} PNGs · {size:.1f} MB in content/tactics/base · "
                           f"all procedural, deterministic and recolourable", font=font(18), fill=MUTED)
     y = head

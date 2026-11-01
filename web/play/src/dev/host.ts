@@ -77,6 +77,14 @@ export class HostClient {
   kick = (playerId: string) => this.call("Kick", playerId);
   dismissResults = () => this.update({ results: null });
 
+  /**
+   * Tells the game something the TV saw (platform spec §3.7), e.g. that a beat finished animating. Fire-and-forget,
+   * like the Godot host's: a refusal (rate limit, no game listening) is only logged, never shown.
+   */
+  signal = (kind: string, payload: unknown): void => {
+    this.transport.invoke("HostSignal", kind, payload).catch((err) => console.debug("HostSignal", kind, serverMessage(err)));
+  };
+
   async onVisible(): Promise<void> {
     if (!this.transport.connected) await this.resume();
   }

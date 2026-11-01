@@ -116,6 +116,8 @@ public sealed class ZoneBlock : EffectBlock<ZoneEffect>
     /// <inheritdoc />
     protected override void Run(ZoneEffect def, EffectContext ctx)
     {
+        if (ctx.ConcentrationLapsed(def.Concentration))
+            return;
         var source = ctx.SourceUnit;
         var tiles = Areas.Tiles(def.Area, source.Pos, ctx.Aim ?? source.Pos, ctx.W.Terrain);
         if (!tiles.IsEmpty)

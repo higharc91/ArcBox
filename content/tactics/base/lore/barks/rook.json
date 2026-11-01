@@ -1,0 +1,84 @@
+{
+  "speaker": "rook",
+  "events": {
+    "town": [
+      {
+        "id": "bark_rook_town_1",
+        "text": "Shards, word, a boat at midnight. All for sale. Which do you need?",
+        "mood": "idle",
+        "direction": "dry, low, unhurried; every sentence an offer",
+        "weight": 3
+      },
+      {
+        "id": "bark_rook_town_2",
+        "text": "Prices went up. Everything's colder, and cold costs.",
+        "mood": "idle",
+        "weight": 2
+      },
+      {
+        "id": "bark_rook_town_3",
+        "text": "You didn't see me. That one's free.",
+        "mood": "happy"
+      },
+      {
+        "id": "bark_rook_town_4",
+        "text": "Mind the docks after dark. Not everyone down here is as friendly as me.",
+        "mood": "idle"
+      },
+      {
+        "id": "bark_rook_town_5",
+        "text": "Funny thing. I'm selling more shards than the Vale ought to have. Don't spread that about.",
+        "mood": "surprised",
+        "direction": "lower, the only time it doesn't sound like an offer"
+      },
+      {
+        "id": "bark_rook_town_6",
+        "text": "Everybody wants the same thing in the end. I just get there first.",
+        "mood": "idle"
+      }
+    ],
+    "battle_start": [
+      {
+        "id": "bark_rook_battle_start_1",
+        "text": "Nothing personal. Somebody paid more.",
+        "mood": "idle",
+        "weight": 2
+      },
+      {
+        "id": "bark_rook_battle_start_2",
+        "text": "Last offer. Walk away and I forget your faces.",
+        "mood": "idle"
+      }
+    ],
+    "hit": [
+      {
+        "id": "bark_rook_hit_1",
+        "text": "That one's on the house.",
+        "mood": "happy"
+      }
+    ],
+    "low_hp": [
+      {
+        "id": "bark_rook_low_hp_1",
+        "text": "All right. All right. Let's talk terms.",
+        "mood": "hurt",
+        "weight": 2
+      }
+    ],
+    "victory": [
+      {
+        "id": "bark_rook_victory_1",
+        "text": "Pleasure doing business.",
+        "mood": "happy"
+      }
+    ],
+    "defeat": [
+      {
+        "id": "bark_rook_defeat_1",
+        "text": "Fine. Put it on my tab.",
+        "mood": "hurt",
+        "direction": "wry even now"
+      }
+    ]
+  }
+}

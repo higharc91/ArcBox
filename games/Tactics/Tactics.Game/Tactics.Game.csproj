@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>$(ArcSdkTargetFrameworks)</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Tactics.Game.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tactics.Logic\Tactics.Logic.csproj" />
+    <ProjectReference Include="..\..\..\src\ArcBox.Sdk\ArcBox.Sdk.csproj" />
+  </ItemGroup>
+</Project>

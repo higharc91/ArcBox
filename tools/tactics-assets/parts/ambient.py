@@ -69,6 +69,9 @@ def _ref(ref: str) -> list[str]:
         return AMB_RAMPS[name]
     if fam == "prop":
         return PR.PROP_RAMPS[name]
+    if fam == "tr":
+        from . import terrain as TR
+        return TR.TR_RAMPS[name]
     return FAMILIES[fam][name]
 
 
@@ -230,6 +233,35 @@ def pine_sway(pid: str = "pine", n: int = 8) -> list[Canvas]:
 def dead_tree_sway(n: int = 8) -> list[Canvas]:
     """Bare branches creak: one pixel at the tips, the trunk still."""
     return _sway(_prop("dead_tree").frames()[0], n, pivot=38, top=4, amp=1.2, wave=0.5, power=1.6)
+
+
+def swamp_tree_sway(n: int = 8) -> list[Canvas]:
+    """A cypress barely moves its crown, but the hanging moss swings well behind it, as secondary motion should."""
+    base = _prop("swamp_tree").frames()[0]
+    out = _sway(base, n, pivot=34, top=2, amp=1.2, wave=0.5, power=1.6, shimmer="leaf", seed=7)
+    return out
+
+
+def fern_sway(n: int = 8) -> list[Canvas]:
+    """Fronds bob from the crown: tips travel most, the wave crossing the clump."""
+    return _sway(_prop("fern").frames()[0], n, pivot=23, top=4, amp=1.4, wave=0.0, across=0.6, lean=0.1,
+                 power=1.4)
+
+
+def mushroom_glow(n: int = 8) -> list[Canvas]:
+    """Glowcaps breathe: the cap shades lift and fall a step over the loop."""
+    base = _bare(_prop("mushroom_cluster").frames()[0])
+    sid = base.slots.id("fruit")
+    out = []
+    for f in range(n):
+        c = base.copy()
+        up = math.sin(2 * math.pi * f / n) > 0.3
+        dn = math.sin(2 * math.pi * f / n) < -0.5
+        m = c.slot == sid
+        c.shade[m] = np.clip(c.shade[m].astype(int) + (1 if up else -1 if dn else 0), 1, 5)
+        c.outline()
+        out.append(c)
+    return out
 
 
 def bush_sway(pid: str = "bush", n: int = 8) -> list[Canvas]:
@@ -1297,7 +1329,7 @@ def _prop_variants(pid: str) -> dict[str, dict[str, str]]:
 def _replace(pid: str, make: Callable[[], list[Canvas]], fps: float, name: str, note: str = "") -> Amb:
     p = _prop(pid)
     f0 = p.frames()[0]
-    return Amb(f"{pid}_anim", name, "props", make, _prop_variants(pid), fps, p.anchor or (f0.w // 2, f0.h - 1),
+    return Amb(f"{pid}_anim", name, "props", make, _prop_variants(pid), fps, p.anchor_of(f0),
                replaces=pid, note=note or "start each instance on a random frame so neighbours don't move in step")
 
 
@@ -1312,6 +1344,9 @@ CATALOGUE: list[Amb] = [
     _replace("bush", bush_sway, 6, "Bush rustle"),
     _replace("bush_berry", lambda: bush_sway("bush_berry"), 6, "Berry bush rustle"),
     _replace("tall_grass", grass_wave, 7, "Tall grass wave"),
+    _replace("swamp_tree", swamp_tree_sway, 5, "Cypress sway"),
+    _replace("fern", fern_sway, 6, "Fern bob"),
+    _replace("mushroom_cluster", mushroom_glow, 6, "Toadstool breathing", "the glow variant's light pulses with it"),
     _replace("reeds", reeds_wave, 6, "Reeds wave"),
     _replace("crystals", crystals_shimmer, 10, "Crystal shimmer"),
     _replace("torch", torch_flicker, 10, "Torch flicker", "replaces the 4-frame torch; pair with halo"),
@@ -1575,7 +1610,8 @@ def _composite(dst: np.ndarray, src: Image.Image, x: int, y: int, blend: str) ->
 def _backdrop(w: int, h: int, dusk: bool = False) -> np.ndarray:
     """A patch of grass and water to show overlays over (darkened for additive light)."""
     from . import terrain as TR
-    grass = np.asarray(TR.grass().render(TR.ramps({"main": "terrain/grass"}))).astype(np.float32)
+    green = next(t for t in TR.CATALOGUE if t.id == "grass").variants["green"]
+    grass = np.asarray(TR.grass().render(TR.ramps(green))).astype(np.float32)
     water = np.asarray(TR.water_frames()[0].render(TR.ramps({"main": "terrain/water"}))).astype(np.float32)
     ys, xs = np.mgrid[0:h, 0:w]
     out = np.where(((xs + ys) % 256 < 150)[..., None], grass[ys % 128, xs % 128], water[ys % 128, xs % 128])

@@ -1,61 +1,109 @@
 {
   "frame": [
-    24,
-    24
+    32,
+    32
   ],
   "anchor": [
-    12,
-    12
+    16,
+    16
   ],
   "headings": 16,
   "layout": "row = heading (0 = screen-right, counter-clockwise, 22.5\u00b0 steps), column = frame",
   "projectiles": {
     "arrow": {
       "file": "arrow.png",
-      "frames": 1,
-      "fps": 12,
+      "frames": 4,
+      "fps": 16,
       "blend": "normal"
     },
     "bolt": {
       "file": "bolt.png",
-      "frames": 1,
-      "fps": 12,
+      "frames": 4,
+      "fps": 16,
       "blend": "normal"
     },
     "dagger": {
       "file": "dagger.png",
-      "frames": 4,
-      "fps": 12,
+      "frames": 8,
+      "fps": 20,
       "blend": "normal"
     },
     "rock": {
       "file": "rock.png",
-      "frames": 2,
+      "frames": 4,
       "fps": 12,
       "blend": "normal"
     },
     "fireball": {
       "file": "fireball.png",
-      "frames": 4,
-      "fps": 12,
+      "frames": 6,
+      "fps": 16,
       "blend": "add"
     },
     "eldritch": {
       "file": "eldritch.png",
-      "frames": 4,
-      "fps": 12,
+      "frames": 6,
+      "fps": 14,
       "blend": "add"
     },
     "missile": {
       "file": "missile.png",
-      "frames": 4,
-      "fps": 12,
+      "frames": 6,
+      "fps": 16,
       "blend": "add"
     },
     "ice": {
       "file": "ice.png",
-      "frames": 1,
+      "frames": 4,
       "fps": 12,
+      "blend": "add"
+    },
+    "axe": {
+      "file": "axe.png",
+      "frames": 8,
+      "fps": 20,
+      "blend": "normal"
+    },
+    "javelin": {
+      "file": "javelin.png",
+      "frames": 2,
+      "fps": 12,
+      "blend": "normal"
+    },
+    "acid": {
+      "file": "acid.png",
+      "frames": 4,
+      "fps": 12,
+      "blend": "normal"
+    },
+    "lightning": {
+      "file": "lightning.png",
+      "frames": 6,
+      "fps": 18,
+      "blend": "add"
+    },
+    "radiant": {
+      "file": "radiant.png",
+      "frames": 4,
+      "fps": 14,
+      "blend": "add"
+    },
+    "necrotic": {
+      "file": "necrotic.png",
+      "frames": 4,
+      "fps": 12,
+      "blend": "normal"
+    },
+    "poison": {
+      "file": "poison.png",
+      "frames": 4,
+      "fps": 12,
+      "blend": "normal"
+    },
+    "force": {
+      "file": "force.png",
+      "frames": 4,
+      "fps": 16,
       "blend": "add"
     }
   }

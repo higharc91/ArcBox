@@ -65,7 +65,7 @@ public static class Motion
             var other = wall ? null : OccupantAt(w, next, unit);
             if (wall || other is not null)
             {
-                Collide(w, unit, other?.Id);
+                Collide(w, unit, other?.Id, by);
                 return;
             }
 
@@ -85,7 +85,7 @@ public static class Motion
             {
                 var damage = Rolls.Damage(w, new Dice(drop - 3, 6, 0), crit: false);
                 w.Emit(new Fell(unit, drop, damage, IntoDeep: false));
-                Hp.Damage(w, unit, damage, Bludgeoning);
+                Hp.Damage(w, unit, damage, Bludgeoning, by);
                 if (w.Unit(unit).Life == LifeState.Up)
                     KnockProne(w, unit);
                 return;
@@ -104,17 +104,21 @@ public static class Motion
         DownedRules.Drop(w, unit, null);
     }
 
-    private static void Collide(BattleWriter w, UnitId unit, UnitId? other)
+    /// <summary>
+    /// <paramref name="unit"/>, pushed by <paramref name="by"/>, hit a wall or <paramref name="other"/>: each takes 1d4
+    /// bludgeoning, dealt by the pusher, so a kill counts as the pusher's (<see cref="HookKind.OnKill"/>).
+    /// </summary>
+    private static void Collide(BattleWriter w, UnitId unit, UnitId? other, UnitId? by)
     {
         var damage = w.Roll(4);
         w.Emit(new Collided(unit, other, damage));
-        Hp.Damage(w, unit, damage, Bludgeoning);
+        Hp.Damage(w, unit, damage, Bludgeoning, by);
         if (other is not { } hit)
             return;
 
         var otherDamage = w.Roll(4);
         w.Emit(new Collided(hit, unit, otherDamage));
-        Hp.Damage(w, hit, otherDamage, Bludgeoning);
+        Hp.Damage(w, hit, otherDamage, Bludgeoning, by);
     }
 
     /// <summary>Puts <paramref name="unit"/> prone (<see cref="ConditionApplied"/>), replacing any prone it had.</summary>

@@ -132,7 +132,7 @@ internal sealed partial class Planner
                     }
                     if (cost.Bonus > 0 || Metamagic.IsFreeQuickened(usable.Ability))
                         economy = economy with { Bonus = false };
-                    if (!usable.Ability.IsWeaponAttack && !Metamagic.IsMetamagicAbility(usable.Ability))
+                    if (Metamagic.Shapes(usable.Ability))
                         conditions = conditions.RemoveAll(c => c.Id.Value.StartsWith("metamagic.", StringComparison.Ordinal));
                     else if (Metamagic.IsMetamagicAbility(usable.Ability)
                              && usable.Ability.Effects.OfType<TransformEffect>().FirstOrDefault(t => t.Hook == "metamagic") is { } mm

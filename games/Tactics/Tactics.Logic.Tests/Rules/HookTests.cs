@@ -221,6 +221,33 @@ public sealed class HookTests
     }
 
     [Fact]
+    public void A_concentration_spell_stops_landing_once_its_caster_loses_concentration()
+    {
+        // The first goblin's spines hit the caster for 60 (DC 30): concentration breaks part-way through the spell, so its
+        // condition lands on no one, not even the goblins after the break.
+        var spines = new PassiveDef("test.spines", HookKind.OnDamaged, null, [new DamageEffect(TestAbilities.Flat("60"), "piercing", [])], null);
+        var curse = new AbilityDef(new AbilityId("test.curse"), "Curse", 1, new CostDef(Action: 1, Concentration: true),
+            new TargetDef(TargetKind.Tile, 4, false, new AreaDef(AreaShape.Burst, Size: 1)),
+            [new DamageEffect(TestAbilities.Flat("1"), "force", []), new ApplyEffect(TestConditions.Burning.Id, Rounds: 3)]);
+        var battle = TestBattle.On("""
+            0. 0. 0. 0. 0.
+            0. 0. 0. 0. 0.
+            """)
+            .Party("kara", TestSheets.Fighter with { Abilities = [curse.Id], MaxHp = 200, InitiativeBonus = 10 }, T(0, 0))
+            .Enemy("gob1", Goblin with { Passives = [spines.Id] }, T(3, 0))
+            .Enemy("gob2", Goblin, T(3, 1))
+            .With(curse).WithPassives(spines).WithConditions([.. TestConditions.All]);
+        var (state, _) = battle.Start();
+
+        var (after, events) = battle.Apply(state, new Use(U("kara"), curse.Id, new Target(Tile: T(3, 0))));
+
+        Assert.Contains(events, e => e is ConcentrationBroken);
+        Assert.Null(after.Units[U("kara")].Concentrating);
+        Assert.DoesNotContain(events, e => e is ConditionApplied);
+        Assert.All(after.Units.Values, u => Assert.DoesNotContain(u.Conditions, c => c.Id == TestConditions.Burning.Id));
+    }
+
+    [Fact]
     public void Retaliation_needs_another_unit_and_condition_passives_come_from_their_source()
     {
         // Thorns (once per battle) hits back whoever damaged its owner; it never turns on the owner.
@@ -238,17 +265,22 @@ public sealed class HookTests
             .Enemy("gob", Goblin with { Passives = [thorns.Id], MaxHp = 100 }, T(3, 1))
             .With(shove).WithPassives(thorns).WithConditions([.. TestConditions.All]);
 
-        // A collision (no source) and burning nobody applied (it comes from the goblin itself): no thorns, nothing spent.
+        // Burning nobody applied (it comes from the goblin itself): no thorns, nothing spent.
         var battle = Build();
         var (state, _) = battle.Start();
         state = state.Give("gob", TestConditions.Lasting(TestConditions.Burning));
-        var (after, events) = battle.Apply(state, new Use(U("kara"), shove.Id, new Target(Unit: U("gob"))));
-        Assert.Contains(events, e => e is Collided);
-        (after, var burnt) = battle.Apply(after, new EndTurn(U("kara")));
+        var (after, burnt) = battle.Apply(state, new EndTurn(U("kara")));
         Assert.Contains(new PassiveTriggered(U("gob"), "burning.tick"), burnt);
-        Assert.DoesNotContain(events.AddRange(burnt), e => e is PassiveTriggered { Passive: "test.thorns" });
+        Assert.DoesNotContain(burnt, e => e is PassiveTriggered { Passive: "test.thorns" });
         Assert.Equal(12, after.Units[U("kara")].Hp);
         Assert.False(after.Units[U("gob")].UsesLeft.ContainsKey("test.thorns"));
+
+        // A shove into a wall is the shover's damage: thorns answers it.
+        (state, _) = battle.Start();
+        (after, var events) = battle.Apply(state, new Use(U("kara"), shove.Id, new Target(Unit: U("gob"))));
+        Assert.Equal<BattleEvent>([new PassiveTriggered(U("gob"), "test.thorns"), new Damaged(U("kara"), 1, "piercing", 11)],
+            events.SkipWhile(e => e is not Collided).Skip(2).Take(2));
+        Assert.Equal(0, after.Units[U("gob")].UsesLeft["test.thorns"]);
 
         // Burning the fighter applied comes from the fighter: thorns answers it, once.
         (state, _) = battle.Start();

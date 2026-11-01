@@ -34,12 +34,12 @@
       {
         "id": "voice_earnest_kill_1",
         "text": "I'm sorry. I'm sorry.",
-        "mood": "happy"
+        "mood": "sad"
       },
       {
         "id": "voice_earnest_kill_2",
         "text": "It had to be done.",
-        "mood": "happy"
+        "mood": "sad"
       }
     ],
     "ally_down": [

@@ -1,0 +1,22 @@
+[gd_resource type="TileSet" format=3 uid="uid://c6akubvykylt1"]
+
+[ext_resource type="Texture2D" uid="uid://drd7i5h362e8d" path="res://palette/heights.png" id="1_13suv"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_712a7"]
+resource_name = "heights"
+texture = ExtResource("1_13suv")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+
+[resource]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_712a7")

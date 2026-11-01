@@ -150,6 +150,27 @@ public sealed class TriggerTests
     }
 
     [Fact]
+    public void A_walk_stops_short_of_an_end_tile_taken_during_it()
+    {
+        // Stepping on the gate spawns a helper on the walk's last tile: the walker can pass allies, not stop on one.
+        var map = AsciiMap.Parse("""
+            0. 0. 0. 0. 0.
+            """, Ordinal.Map(("gate", ImmutableArray.Create(T(1, 0))), ("end", ImmutableArray.Create(T(3, 0)))));
+        var battle = TestBattle.On(map)
+            .Party("kara", First(TestSheets.Fighter), T(0, 0))
+            .Enemy("gob", TestSheets.Goblin, T(4, 0))
+            .WithMonsters(("helper", TestSheets.Goblin with { Name = "Helper" }))
+            .WithTriggers(Trigger("arrive", new TriggerWhen(UnitEntersZone: new ZoneWatch(Objectives.PartyTag, "gate", 1)),
+                new TriggerAction(Spawn: new SpawnAction("helper", new PlaceRef("end", null), Ally: true))));
+        var (state, _) = battle.Start(seed: 1);
+
+        var (after, _) = battle.Apply(state, new Move(U("kara"), [T(0, 0), T(1, 0), T(2, 0), T(3, 0)]));
+
+        Assert.Equal(T(2, 0), after.Units[U("kara")].Pos);
+        Assert.Equal(after.Units.Count, after.Units.Values.Select(u => u.Pos).Distinct().Count());
+    }
+
+    [Fact]
     public void Collapse_drops_both_units_sharing_a_tile_mid_walk()
     {
         const string gorge = """

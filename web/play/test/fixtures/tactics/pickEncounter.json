@@ -1,0 +1,93 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "pickEncounter",
+  "data": {
+    "encounters": [
+      {
+        "id": "ford_assault",
+        "name": "Storming the Ford",
+        "level": 1,
+        "min": 4,
+        "max": 6,
+        "fits": true,
+        "companions": 0
+      },
+      {
+        "id": "river_crossing",
+        "name": "River Crossing",
+        "level": 1,
+        "min": 4,
+        "max": 6,
+        "fits": true,
+        "companions": 0
+      },
+      {
+        "id": "forest_ruins",
+        "name": "Forest Ruins",
+        "level": 3,
+        "min": 4,
+        "max": 6,
+        "fits": true,
+        "companions": 0
+      },
+      {
+        "id": "crypt_hall",
+        "name": "Crypt Hall",
+        "level": 5,
+        "min": 4,
+        "max": 6,
+        "fits": true,
+        "companions": 0
+      },
+      {
+        "id": "warlord_bridge",
+        "name": "The Warlord\u0027s Bridge",
+        "level": 5,
+        "min": 4,
+        "max": 6,
+        "fits": true,
+        "companions": 0
+      },
+      {
+        "id": "crystal_cave",
+        "name": "Crystal Cave",
+        "level": 7,
+        "min": 4,
+        "max": 6,
+        "fits": true,
+        "companions": 0
+      },
+      {
+        "id": "rime_tower",
+        "name": "Rime Tower",
+        "level": 7,
+        "min": 4,
+        "max": 6,
+        "fits": true,
+        "companions": 0
+      },
+      {
+        "id": "keep_gate",
+        "name": "The Broken Gate",
+        "level": 9,
+        "min": 4,
+        "max": 6,
+        "fits": true,
+        "companions": 0
+      },
+      {
+        "id": "hall_of_the_flame",
+        "name": "The Hall of the Flame",
+        "level": 10,
+        "min": 4,
+        "max": 6,
+        "fits": true,
+        "companions": 0
+      }
+    ]
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}

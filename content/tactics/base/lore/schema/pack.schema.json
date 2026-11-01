@@ -19,7 +19,7 @@
       "uniqueItems": true,
       "items": {
         "type": "string",
-        "pattern": "^(world|timeline|factions|regions|characters|backgrounds|arcs)\\.json$|^(codex|barks|voices)/[a-z0-9_-]+\\.json$"
+        "pattern": "^(world|timeline|factions|regions|characters|backgrounds|arcs)\\.json$|^(codex|barks|voices|scenes)/[a-z0-9_-]+\\.json$"
       },
       "description": "Lore files relative to the lore folder, in load order."
     }

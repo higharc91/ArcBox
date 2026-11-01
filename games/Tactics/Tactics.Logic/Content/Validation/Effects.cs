@@ -119,6 +119,10 @@ internal sealed partial class Validation
                 break;
             case ZoneEffect zone:
                 AreaSize(zone.Area, file, At("area"));
+                for (var i = 0; !zone.Passives.IsDefault && i < zone.Passives.Length; i++)
+                    if (zone.Passives[i].Static is { MaxHp: not 0 })
+                        Error(file, Pointer.Append(Pointer.Append(Pointer.Append(At("passives"), i), "static"), "maxHp"),
+                            "A zone's passive can't change max HP (only passives and injuries do, when a sheet is built).");
                 NeedsConcentration(zone.Concentration, concentration, file, At("concentration"));
                 break;
             case AlterTerrainEffect terrain:

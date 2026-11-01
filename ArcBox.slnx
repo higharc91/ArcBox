@@ -12,9 +12,15 @@
     <Project Path="games/Redline/tools/Redline.Sim/Redline.Sim.csproj" />
   </Folder>
   <Folder Name="/games/Tactics/">
+    <Project Path="games/Tactics/Tactics.Game.Tests/Tactics.Game.Tests.csproj" />
+    <Project Path="games/Tactics/Tactics.Game/Tactics.Game.csproj" />
     <Project Path="games/Tactics/Tactics.Logic.Tests/Tactics.Logic.Tests.csproj" />
     <Project Path="games/Tactics/Tactics.Logic/Tactics.Logic.csproj" />
+    <Project Path="games/Tactics/Tactics.Presentation.Tests/Tactics.Presentation.Tests.csproj" />
+    <Project Path="games/Tactics/Tactics.Presentation/Tactics.Presentation.csproj" />
     <Project Path="games/Tactics/Tactics.Sim/Tactics.Sim.csproj" />
+    <Project Path="games/Tactics/Tactics.WorldTools.Tests/Tactics.WorldTools.Tests.csproj" />
+    <Project Path="games/Tactics/Tactics.WorldTools/Tactics.WorldTools.csproj" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/ArcBox.Host.Core.Tests/ArcBox.Host.Core.Tests.csproj" />
@@ -25,5 +31,8 @@
     <Project Path="src/ArcBox.Sdk/ArcBox.Sdk.csproj" />
     <Project Path="src/ArcBox.Server.Tests/ArcBox.Server.Tests.csproj" />
     <Project Path="src/ArcBox.Server/ArcBox.Server.csproj" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/tactics-world/Tactics.World.Editor.csproj" />
   </Folder>
 </Solution>

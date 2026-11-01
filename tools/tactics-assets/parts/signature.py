@@ -56,7 +56,11 @@ def _ramp(ref: str) -> list[str]:
 
 
 def ramps(variant: dict[str, str]) -> dict[str, list[str]]:
-    return {slot: _ramp(ref) for slot, ref in variant.items()}
+    """A variant's ramps, plus fx's shared white-hot `flash` and dark `smoke` unless the variant names its own."""
+    out = {slot: _ramp(ref) for slot, ref in variant.items()}
+    out.setdefault("flash", FX.FX_RAMPS["flash"])
+    out.setdefault("smoke", FX.FX_RAMPS["soot"])
+    return out
 
 
 def _v(**slots: str) -> dict[str, str]:
@@ -2385,6 +2389,544 @@ def rune_circle() -> list[Canvas]:
     return out
 
 
+# =============================================================================================================
+# Signature spells: the big named spells, each in its school's visual language
+# =============================================================================================================
+# fire licks and throws embers, frost grows crystals in mist, lightning forks and arcs, necrotic coils green-black
+# round a skull, radiant rays and motes, psychic ripples, thunder rings out concentrically, acid bubbles, poison
+# rolls as cloud, force breaks into hexagons. These sit beside the subclass signatures so a Fireball, a Cone of Cold
+# and a Spirit Guardians each look like nothing else on the field.
+def spell_fireball() -> list[Canvas]:
+    """Fireball: a bead streaks in and swells, a white flash, then a ball of fire two tiles across with flame
+    tongues licking up off it, a shockwave over the ground, debris and embers on arcs, and a towering column of
+    soot (fx's blast at spell scale, with tongues)."""
+    return FX._blast(128, 112, 63.5, 96.0, 25.0, 711, tongues=True)
+
+
+def spell_flame_strike() -> list[Canvas]:
+    """Flame Strike: a ring of holy runes opens in the sky, a column of fire falls through it with a radiant core,
+    hits with a flash and a splash of flame along the ground, burns as licking tongues climb the column, then
+    gutters out into embers and falling motes of light."""
+    W, H, cx, gy = 48, 128, 23.5, 120.5
+    r = tex.rng(721)
+    n = tex.fbm(W, H, 4, r, octaves=3, aspect=0.4)
+    embers = FX._sparks(722, 18, cx, gy - 6, (1.0, 2.6), t0=3, arc=(200, 340), life=(4, 8), big=0.3)
+    reach = [0, 0.3, 0.75, 1, 1, 1, 1, 1, 1, 1, 0.8, 0.5, 0, 0]
+    hw = [0, 5, 7, 11, 13, 13, 12, 11, 10, 8, 6, 4, 0, 0]
+    out = []
+    for i in range(14):
+        f = Field(W, H, ss=1)
+        if i <= 3:                                               # the rune ring in the sky
+            rad = [6, 11, 13, 13][i]
+            f.add("accent", np.where(FX._iso_ring(f, cx, 6, rad, 0.6, 0.35), 5 - (i == 3), EMPTY))
+        if hw[i]:
+            top = 0 if i < 10 else gy * (1 - reach[i])
+            bottom = gy * reach[i] if i < 3 else gy
+            u = np.abs(f.X - cx) / hw[i]
+            lick = np.roll(n, 6 * i, 0)
+            v = 1 - u + (lick - 0.5) * 0.9
+            v = np.where((f.Y >= top) & (f.Y <= bottom), v, EMPTY)
+            f.add("main", _q(v, [(0.05, 1), (0.18, 2), (0.32, 3), (0.5, 4)]))
+            f.add("core", _q(v - u * 0.3, [(0.7, 4), (0.85, 5)]))
+        if 3 <= i <= 11:                                         # flames splashing out along the ground
+            age = i - 3
+            spread = 8 + 3 * min(age, 5)
+            dx = np.abs(f.X - cx) / spread
+            hgt = gy - f.Y
+            local = (12 - age) * (0.4 + 0.8 * np.roll(n, -5 * i, 0)) * np.clip(1 - dx, 0, 1)
+            v = 1 - hgt / np.maximum(local, 1e-3)
+            f.add("main", _q(np.where(hgt >= -2, v, EMPTY), [(0.0, 2), (0.3, 3), (0.55, 4)]))
+            f.add("main", np.where(FX._iso_ring(f, cx, gy, 6 + 3 * age, 0.6, 0.4), max(1, 4 - age // 2), EMPTY))
+        if i == 3:
+            FX._flash(f, cx, gy - 4, 8, 1.6)
+        c = f.canvas()
+        if i == 3:
+            FX._flare(c, cx, gy - 4, 20, vertical=False)
+        FX._draw_sparks(c, embers, i, g=0.18, drag=0.86)
+        if i >= 9:
+            for j in range(6):
+                age = i - 9
+                x = cx - 12 + j * 5
+                _pmax(c, x + math.sin(j + age), 30 + j * 13 + age * 4, "accent", 5 - age)
+        out.append(c)
+    return out
+
+
+def spell_lightning_bolt() -> list[Canvas]:
+    """Lightning Bolt: a line of lightning 128 px (four tiles) to the right. Static crackles at the hand, a leader
+    jumps out, the full bolt cracks white-hot with forks leaping off both sides and arcs crawling along it, flickers
+    to a second path and re-strikes, then breaks into fragments while sparks spit off."""
+    W, H, ox, oy = 128, 48, 4.0, 24.0
+    r = tex.rng(731)
+    paths = [FX._fork(r, ox, oy, W - 2, oy + 2, 2, step=4.0, jag=2.6, chance=0.32),
+             FX._fork(r, ox, oy, W - 2, oy - 2, 2, step=4.0, jag=2.6, chance=0.32)]
+    sparks = FX._sparks(732, 20, W * 0.55, oy, (1.5, 3.5), t0=4, life=(3, 6), spread=3)
+    for s in sparks:
+        s.x = ox + (s.vx * 997 % 1 + 0.05) * (W - 10)
+    out = []
+    for i in range(12):
+        c = Canvas(W, H, SLOTS)
+        if i <= 1:
+            for k in range(3 + i * 2):
+                a = r.uniform(0, 2 * math.pi)
+                x1, y1 = ox + 4 * math.cos(a) * (1 + i), oy + 4 * math.sin(a) * (1 + i)
+                for x, y in FX._jag(r, ox, oy, x1, y1, step=1.5, jag=0.8):
+                    _pmax(c, x, y, "core", 4 + i)
+        if i == 1:
+            FX._bolt_paint(c, paths[0][:1], upto=0.35, halo=False, hot=False, dim=1)
+        elif i == 2:
+            FX._bolt_paint(c, paths[0], thick=True)
+            f = Field(W, H)
+            FX._flash(f, ox + 2, oy, 5)
+            f.canvas(c)
+        elif i in (3, 5):
+            FX._bolt_paint(c, paths[1] if i == 3 else paths[0], thick=i == 5)
+        elif i == 4:
+            FX._bolt_paint(c, paths[0], halo=True, hot=False)
+        elif i == 6:
+            FX._bolt_paint(c, paths[0], halo=False, hot=False, dim=1, levels=1)
+        elif i in (7, 8):
+            frag = Canvas(W, H, SLOTS)
+            FX._bolt_paint(frag, paths[0][:1], halo=False, hot=False, dim=i - 5)
+            cols = np.arange(W)[None, :] // (7 if i == 7 else 5) % 3
+            frag.slot[np.broadcast_to(cols == 0 if i == 7 else cols != 0, (H, W))] = 0
+            c.blit(frag)
+        if 3 <= i <= 8:                                           # arcs crawling along the channel
+            for _ in range(4 if i < 7 else 2):
+                x0 = r.uniform(10, W - 10)
+                pts = FX._jag(r, x0, oy + r.uniform(-3, 3), x0 + r.uniform(-10, 10), oy + r.uniform(-10, 10),
+                              step=1.8, jag=1.2)
+                for x, y in pts:
+                    _pmax(c, x, y, "main", 4 if i < 7 else 3)
+        FX._draw_sparks(c, sparks, i, g=0.3)
+        out.append(c)
+    return out
+
+
+def spell_cone_of_cold() -> list[Canvas]:
+    """Cone of Cold: frost flashes at the hand, a gust of freezing mist rolls out in a cone three tiles long,
+    crystals spike up out of it pointing away from the caster, nearest first, glint, and then shatter into glitter
+    as the mist thins. Faceted shards and mist, never flame-shaped like a breath weapon."""
+    W, H, ox, oy = 112, 64, 6.0, 30.0
+    r = tex.rng(741)
+    n = tex.fbm(W, H, 8, r, octaves=3)
+    shards = []
+    for _ in range(16):
+        d = r.uniform(14, 100)
+        half = 3 + d * 0.3
+        s = r.uniform(-0.85, 0.85)
+        shards.append((ox + d, oy + s * half, d, r.uniform(-25, 25), r.uniform(10, 18) * (0.6 + d / 160)))
+    shards.sort(key=lambda q: q[1])
+    glitter = FX._sparks(742, 26, ox + 50, oy, (1.0, 2.6), t0=8, life=(3, 5), spread=1.5)
+    for k, g in enumerate(glitter):
+        g.x = ox + 20 + (k * 37 % 80)
+        g.y = oy + ((k * 13) % 24 - 12)
+    reach = [0, 30, 62, 90, 104, 106, 106, 106, 106, 0, 0, 0]
+    fade = [0, 0, 0, 0, 0, 0.05, 0.12, 0.22, 0.35, 0.5, 0.65, 0.85]
+    out = []
+    for i in range(12):
+        f = Field(W, H, ss=1)
+        R = reach[i] or (106 if i >= 9 else 0)
+        if R:
+            dx = f.X - ox
+            half = 2.5 + dx * 0.3
+            u = dx / R
+            roll = np.roll(n, -6 * i, 1)
+            shape = (1 - np.abs(f.Y - oy) / half) * np.clip((1 - u) * 5, 0, 1)
+            v = np.where((dx > 0) & (shape > 0), shape * 0.8 + (roll - 0.5) * 0.9 - fade[i], EMPTY)
+            f.add("accent", np.where(_checker_s(f) | (v > 0.3), _q(v, [(0.1, 1), (0.3, 2), (0.5, 3)]), EMPTY))
+        if i <= 1:
+            FX._flash(f, ox + 2, oy, 4 + 2 * i)
+        c = f.canvas()
+        for x, y, d, tilt, ln in shards:
+            g = np.clip((reach[min(i, 8)] - d) / 30, 0, 1) if i < 9 else 1.0
+            if g <= 0 or i >= 9:
+                continue
+            a = math.radians(-90 + tilt * 0.5 + 35)                 # points up and away from the caster
+            tx, ty = x + math.cos(a) * ln * g, y + math.sin(a) * ln * g
+            w = 2.2 + ln * 0.18
+            c.polygon([(x - w, y + 0.5), (tx, ty), (x, y + 0.5)], "main", 4)
+            c.polygon([(x, y + 0.5), (tx, ty), (x + w, y + 0.5)], "main", 2)
+            _lmax(c, x - w + 0.5, y, tx, ty, "main", 5 if i in (5, 6) else 4)
+            if i == 6 and int(d) % 3 == 0:
+                _twinkle(c, tx, ty, "core", 1)
+        FX._draw_sparks(c, glitter, i, hot="core", slot="main", g=0.25)
+        out.append(c)
+    return out
+
+
+def spell_spirit_guardians() -> list[Canvas]:
+    """Spirit Guardians (loop from 3): spectral guardians rise out of the caster and take station on a ring about
+    two tiles across, then circle it with their wings beating and wisps trailing; a faint ring of light marks the
+    zone on the ground. Six identical guardians turning a sixth of a circle per loop, so the loop is seamless."""
+    W, H, cx, gy = 112, 80, 55.5, 60.5
+    N, INTRO = 12, 3
+    out = []
+    for i in range(INTRO + N):
+        f = Field(W, H, ss=1)
+        k = i - INTRO
+        th = np.degrees(np.arctan2((f.Y - gy) * 2.2, f.X - cx))
+        crest = np.cos(np.radians(th - 360 * max(k, 0) / N))
+        rr = 46 if i >= INTRO else 16 + 10 * i
+        f.add("main", np.where(FX._iso_ring(f, cx, gy, rr, 0.6, 0.45), 2 + (crest > 0.6) + (crest > 0.95), EMPTY))
+        f.add("main", np.where(FX._iso_ring(f, cx, gy, rr - 4, 0.5, 0.45) & _checker_s(f), 1, EMPTY))
+        c = f.canvas()
+        for j in range(6):
+            if i < INTRO:
+                a = math.radians(j * 60 - 30 * i)
+                rad = 10 + 12 * i
+                hgt = 10 + 4 * i
+            else:
+                a = math.radians(j * 60 + 60 * k / N)
+                rad = 46
+                hgt = 22 + 2 * math.sin(2 * math.pi * (k / N * 2 + j / 6))
+            x, y = cx + rad * math.cos(a), gy + rad * 0.45 * math.sin(a) - hgt
+            front = math.sin(a) > -0.2
+            base = (4 if front else 2) - (i < INTRO and i == 0)
+            for t in range(1, 11):                                     # wisp tail, trailing the orbit
+                ta = a - math.radians(t * 3.5)
+                tx = cx + rad * math.cos(ta)
+                ty = gy + rad * 0.45 * math.sin(ta) - hgt + 2 + t * 0.5
+                _pmax(c, tx, ty, "main", base - t // 4)
+                if t < 6:
+                    _pmax(c, tx, ty - 1, "main", base - 1 - t // 4)
+            flap = (k if k >= 0 else i) % 6 < 3
+            for sgn in (-1, 1):                                        # wings: three feathers each
+                for fth in range(3):
+                    tipx = x + sgn * (5 + fth * 1.5)
+                    tipy = y - 5 - (4 - fth * 2 if flap else -1 + fth)
+                    _lmax(c, x + sgn * 2, y - 4 + fth, tipx, tipy, "main", base - (fth == 2))
+            c.ellipse(x + 0.5, y - 1, 2.2, 3.6, "main", base)            # robed body
+            c.ellipse(x + 0.5, y - 6.5, 1.7, 1.7, "core", base)          # head
+            _pmax(c, x, y - 2, "core", min(5, base + 1))
+            if front:
+                _pmax(c, x - 1, y - 7, "core", 5)
+                _pmax(c, x + 1, y - 6, "accent", 5)
+        for j in range(8):                                             # motes rising off the zone
+            life = (max(k, 0) + j * 3) % N
+            if life < 6:
+                a = math.radians(j * 45 + 20)
+                _pmax(c, cx + 40 * math.cos(a), gy + 18 * math.sin(a) - life * 3, "accent", 5 - life // 2)
+        out.append(c)
+    return out
+
+
+def spell_moonbeam() -> list[Canvas]:
+    """Moonbeam (loop from 2): a thread of silver light drops onto the tile and widens into a pale cylinder with
+    a dithered edge, glimmers sliding down it, motes of moonlight sifting down and a ring pulsing on the ground.
+    Light that falls (moonbeam) where a pillar of holy light rises."""
+    W, H, cx, gy = 48, 128, 23.5, 120.5
+    N, INTRO = 12, 2
+    out = []
+    for i in range(INTRO + N):
+        f = Field(W, H, ss=1)
+        k = max(0, i - INTRO)
+        hw = [2, 6][i] if i < INTRO else 11
+        bottom = gy * (0.5 if i == 0 else 1.0)
+        u = np.abs(f.X - cx) / hw
+        inside = (f.Y <= bottom) & (u <= 1)
+        edge = (u > 0.75) & ~_checker_s(f)
+        slide = np.sin((f.Y - 4 * 13 * k / N * 2) * 2 * np.pi / 26 + np.floor(f.X) * 1.7) > 0.86
+        sh = np.select([u < 0.25, u < 0.6], [4, 3], 2) + slide
+        fade = np.clip(f.Y / 20, 0, 1)
+        sh = sh - (fade < 0.5) - (fade < 0.2)
+        f.add("main", np.where(inside & ~edge, sh, EMPTY))
+        f.add("core", np.where(inside & (u < 0.15) & (f.Y > 10), 5, EMPTY))
+        pulse = 0.5 + 0.5 * math.cos(2 * math.pi * k / N)
+        f.add("main", np.where(FX._iso_ring(f, cx, gy, 14 + 2 * pulse, 0.6, 0.42), 3 + (pulse > 0.5), EMPTY))
+        f.add("main", np.where(FX._iso_ring(f, cx, gy, 9, 0.5, 0.42), 2, EMPTY))
+        c = f.canvas()
+        if i >= INTRO:
+            for j in range(10):                                       # motes sifting down
+                life = (k + j * 5) % N
+                x = cx - 9 + (j * 7) % 19 + math.sin(life * 0.5 + j) * 1.2
+                y = 14 + (j * 11) % 30 + life * 7
+                if y < gy:
+                    _pmax(c, x, y, "accent", 5 if life < 6 else 4)
+        out.append(c)
+    return out
+
+
+def spell_hunger_of_hadar() -> list[Canvas]:
+    """Hunger of Hadar (loop from 3): a sphere of starless dark swells over the area (two tiles across), cold
+    pinpricks drifting inside it, a violet rim, tendrils writhing up round its edge and drops of acid falling
+    through it. Normal blending: it eats the light."""
+    W, H, cx, gy = 112, 80, 55.5, 58.5
+    N, INTRO = 12, 3
+    r = tex.rng(751)
+    n = np.tile(tex.fbm(48, 80, 4, r, octaves=2), (1, 3))
+    stars = [(r.uniform(-40, 40), r.uniform(-34, 8), int(r.integers(0, N))) for _ in range(22)]
+    drips = [(r.uniform(-34, 34), r.uniform(-30, -10), int(r.integers(0, N))) for _ in range(8)]
+    out = []
+    for i in range(INTRO + N):
+        k = max(0, i - INTRO)
+        s = [0.35, 0.7, 0.95][i] if i < INTRO else 1.0
+        rx, ry = 48 * s, 36 * s
+        f = Field(W, H, ss=1)
+        roll = np.roll(n, 4 * k, 1)[:, :W]                           # 48 px period, 4 px a frame: wraps
+        e = np.hypot((f.X - cx) / rx, (f.Y - (gy - ry * 0.55)) / ry)
+        ground = np.hypot((f.X - cx) / rx, (f.Y - gy) / (rx * 0.42))
+        body = (e < 1) | (ground < 1)
+        f.add("smoke", np.where(body, np.where(roll > 0.62, 1, 0), EMPTY))
+        rim = ((e > 0.93) & (e < 1.0) & (f.Y < gy)) | ((ground > 0.9) & (ground < 1) & (f.Y >= gy - 2))
+        f.add("main", np.where(rim, np.where(f.Y < gy - ry * 0.8, 3, 2), EMPTY))
+        c = f.canvas()
+        for x, y, ph in stars:
+            life = (k + ph) % N
+            if life < 8 and (x / rx) ** 2 + (y / ry + 0.3) ** 2 < 0.7:
+                _pmax(c, cx + x * s + life * 0.4, gy + y * s, "core", 4 if life in (2, 3, 4) else 2)
+        for j in range(8):                                             # tendrils writhing round the rim
+            a = math.radians(j * 45 + 10)
+            bx, by = cx + rx * 0.95 * math.cos(a), gy + rx * 0.4 * math.sin(a)
+            ln = 14 * s + 4 * math.sin(2 * math.pi * k / N + j)
+            front = math.sin(a) > 0
+            for t in range(int(ln)):
+                ph = 2 * math.pi * k / N + j * 1.3 - t * 0.35
+                x = bx + math.sin(ph) * 2.2 * t / ln * 2 + math.cos(a) * t * 0.35
+                y = by - t
+                c.px(x, y, "smoke", 1 if t < ln - 2 else 2)
+                c.px(x + 1, y, "smoke", 0)
+                if front and t % 3 == 0:
+                    c.px(x, y, "main", 2)
+        for x, y, ph in drips:                                         # acid dripping through the dark
+            life = (k + ph) % N
+            if life < 6:
+                _pmax(c, cx + x * s, gy + y * s + life * 4, "accent", 4)
+                _pmax(c, cx + x * s, gy + y * s + life * 4 - 1, "accent", 3)
+        out.append(c)
+    return out
+
+
+def spell_shatter() -> list[Canvas]:
+    """Shatter: a single ringing note (a point of light with thin rings), a flash, then sound made visible:
+    sharp concentric rings in the air and on the ground at once, and the air itself breaking into glassy shards
+    that spin outward and fall. Thunder's rings plus breaking glass."""
+    W, H, cx, gy = 96, 80, 47.5, 64.0
+    cy = gy - 20
+    r = tex.rng(761)
+    shards = FX._sparks(762, 18, cx, cy, (3.0, 5.5), t0=3, life=(4, 7), big=0.0)
+    spins = r.uniform(0, 360, len(shards))
+    out = []
+    for i in range(12):
+        f = Field(W, H)
+        if i == 0:
+            for rad in (3, 6):
+                f.add("main", np.where(np.abs(f.dist(cx, cy) - rad) < 0.5, 3, EMPTY))
+            f.add("core", _q(1 - f.dist(cx, cy) / 2, [(0, 5)]))
+        if i == 1:
+            FX._flash(f, cx, cy, 7)
+        for b in (1, 3, 5):
+            age = i - b
+            if 0 <= age <= 6:
+                rad = 6 + age * 6
+                d = np.abs(f.dist(cx, cy) - rad)
+                sh = max(1, 5 - age // 2 - (b > 1))
+                ring = d < (0.9 if age < 2 else 0.6)
+                if age > 3:
+                    ring &= (np.floor(f.ang(cx, cy) / 8) % 4) != 0
+                f.add("main", np.where(ring, sh, EMPTY))
+                gr = 8 + age * 6.5
+                f.add("main", np.where(FX._iso_ring(f, cx, gy, gr, 0.6, 0.4), max(1, sh - 1), EMPTY))
+        c = f.canvas()
+        if i == 1:
+            FX._flare(c, cx, cy, 22)
+        for p, spin in zip(shards, spins):
+            t = i - p.t0
+            if 0 <= t <= p.life:
+                x, y = FX._spark_at(p, t, 0.4, 0.82)
+                a = math.radians(spin + t * 70)
+                L = 3.5 - t * 0.3
+                sh = 5 if t < 2 else 4 if t < 4 else 3
+                tip = (x + L * math.cos(a), y + L * math.sin(a))
+                back = (x - L * math.cos(a), y - L * math.sin(a))
+                side = (x + 1.5 * math.cos(a + 1.57), y + 1.5 * math.sin(a + 1.57))
+                c.polygon([tip, side, back], "core", sh - 1)
+                _lmax(c, *back, *tip, "core", sh)
+        out.append(c)
+    return out
+
+
+def spell_synaptic_static() -> list[Canvas]:
+    """Synaptic Static: a pink mote of thought pops over the area, flashes, and its wave breaks over everyone:
+    wobbling rings spread over the ground and through the air while jagged static sparks everywhere inside them,
+    then the static flickers out."""
+    W, H, cx, gy = 96, 72, 47.5, 56.0
+    cy = gy - 18
+    r = tex.rng(771)
+    static = [(r.uniform(-40, 40), r.uniform(-30, 10), int(r.integers(2, 11))) for _ in range(30)]
+    out = []
+    for i in range(12):
+        f = Field(W, H)
+        if i == 0:
+            wob = 3 * (1 + 0.2 * np.sin(5 * np.radians(f.ang(cx, cy))))
+            f.add("main", _q(1 - f.dist(cx, cy) / wob, [(0, 3), (0.4, 4)]))
+        if i == 1:
+            FX._flash(f, cx, cy, 6)
+        th = np.radians(f.ang(cx, gy, 2.2))
+        for b in (1, 3, 5, 7):
+            age = i - b
+            if 0 <= age <= 5:
+                rad = 6 + age * 8
+                wob = rad * (1 + 0.1 * np.sin(6 * th + age + b))
+                d = np.abs(f.dist(cx, gy, 2.2) - wob)
+                f.add("main", np.where(d < 0.8, max(1, 5 - age // 2 - (b > 3)), EMPTY))
+                d2 = np.abs(f.dist(cx, cy, 1.3) - rad * 0.8 * (1 + 0.12 * np.sin(5 * np.radians(f.ang(cx, cy)) + b)))
+                f.add("core", np.where((d2 < 0.6) & (age < 4), max(1, 4 - age), EMPTY))
+        c = f.canvas()
+        for x, y, t0 in static:
+            if t0 <= i < t0 + 2 and math.hypot(x, y * 1.6) < 6 + (i - 1) * 8:
+                x0, y0 = cx + x, gy + y
+                pts = [(x0, y0), (x0 + 2, y0 - 2), (x0 + 1, y0), (x0 + 3, y0 - 1), (x0 + 4, y0 + 1)]
+                for (a0, b0), (a1, b1) in zip(pts, pts[1:]):
+                    _lmax(c, a0, b0, a1, b1, "core", 5 - (i - t0))
+        out.append(c)
+    return out
+
+
+def spell_cloudkill() -> list[Canvas]:
+    """Cloudkill (loop from 3): a yellow-green fog boils up over the area and rolls there, its billows breathing out
+    of phase and its body drifting sideways, sickly bubbles rising and dark drips falling. Normal blending; the
+    noise is tiled at a 48 px period and moves 4 px a frame, so twelve frames wrap exactly."""
+    W, H, cx, gy = 112, 72, 55.5, 58.0
+    N, INTRO = 12, 3
+    r = tex.rng(781)
+    edge = np.tile(tex.fbm(48, 72, 3, r, octaves=2), (1, 4))
+    body = np.tile(tex.fbm(48, 72, 2, r, octaves=2), (1, 4))
+    base = [(cx - 34, gy - 4, 11), (cx - 16, gy - 10, 14), (cx + 4, gy - 8, 15), (cx + 24, gy - 6, 13),
+            (cx + 38, gy - 1, 9), (cx - 42, gy + 1, 8), (cx - 6, gy - 22, 11), (cx + 16, gy - 20, 10),
+            (cx - 24, gy - 20, 9), (cx + 2, gy + 2, 12)]
+    phases = r.uniform(0, 2 * math.pi, len(base))
+    bubbles = [(cx + r.uniform(-34, 34), gy - r.uniform(0, 14), int(r.integers(0, N))) for _ in range(9)]
+    out = []
+    for i in range(INTRO + N):
+        k = max(0, i - INTRO)
+        s = [0.4, 0.7, 0.9][i] if i < INTRO else 1.0
+        w = 2 * math.pi * k / N
+        blobs = [(cx + (x - cx) * s, gy + (y - gy) * s, rr * s + 1.2 * math.sin(w + p)) for (x, y, rr), p in
+                 zip(base, phases)]
+        c = Canvas(W, H, SLOTS)
+        _puffs(c, blobs, "main", noise=np.roll(edge, 4 * k, 1)[:, :W], erode=0.05, rough=0.7, sy=1.3,
+               gas=np.roll(body, -4 * k, 1)[:, :W])
+        for x, y, ph in bubbles:
+            life = (k + ph) % N
+            if life < 5 and i >= INTRO:
+                by = y - life * 2
+                for dx, dy, sh in ((0, -1, 4), (-1, 0, 4), (1, 0, 3), (0, 1, 2)):
+                    _pmax(c, x + dx, by + dy, "accent", sh)
+            elif life == 5 and i >= INTRO:
+                for dx, dy in ((-2, -2), (2, -2), (-2, 2), (2, 2)):
+                    _pmax(c, x + dx, y - 10 + dy, "accent", 3)
+        out.append(c)
+    return out
+
+
+def spell_blight() -> list[Canvas]:
+    """Blight: the ground under the target cracks and goes black-green, wisps of rot spiral up round it, a skull
+    looms over its head and crumbles, and ash and withered motes fall. Necrotic: coils, a skull, green on black."""
+    W, H, cx, gy = 64, 80, 31.5, 72.5
+    r = tex.rng(791)
+    n = tex.fbm(W, H, 6, r, octaves=2)
+    cracks = [(r.uniform(0, 360), r.uniform(10, 20)) for _ in range(8)]
+    ash = [(cx + r.uniform(-18, 18), r.uniform(10, 40), r.uniform(0, 6.28)) for _ in range(14)]
+    out = []
+    for i in range(14):
+        c = Canvas(W, H, SLOTS)
+        f = Field(W, H, ss=1)
+        rad = [4, 9, 14, 18, 20, 21, 21, 21, 21, 20, 19, 17, 14, 10][i]
+        e = f.dist(cx, gy, 2.4) / rad
+        f.add("smoke", np.where((e < 1) & (n > 0.35 + 0.3 * e), 1 + (n > 0.6), EMPTY))
+        f.canvas(c)
+        for a, ln in cracks:
+            L = min(ln, rad)
+            ra = math.radians(a)
+            pts = FX._jag(tex.rng(int(a)), cx, gy, cx + L * math.cos(ra), gy + L * 0.42 * math.sin(ra), step=2,
+                          jag=0.8)
+            for x, y in pts:
+                _pmax(c, x, y, "main", 4 if i < 6 else 3 if i < 10 else 2)
+        for j in range(4):                                             # wisps spiralling up
+            if 2 <= i <= 11:
+                age = i - 2
+                pts = []
+                for t in range(8):
+                    a = math.radians(j * 90 + age * 40 - t * 18)
+                    rr = 14 - age * 0.6
+                    pts.append((cx + rr * math.cos(a), gy - 4 - age * 4.5 + t * 2 + rr * 0.4 * math.sin(a)))
+                for t in range(7, 0, -1):
+                    (x0, y0), (x1, y1) = pts[t], pts[t - 1]
+                    _lmax(c, x0, y0, x1, y1, "main" if t < 3 else "smoke", (4 - t // 2) if t < 3 else 2)
+                _mote(c, *pts[0], "core", 5 - (age > 7), big=age < 6)
+        if 5 <= i <= 11:
+            sk = Canvas(W, H, SLOTS)
+            FX._skull(sk, cx, gy - 52, [3, 4, 4, 4, 3, 3, 2][i - 5], [4, 5, 5, 5, 4, 4, 3][i - 5])
+            big = Canvas(W, H, SLOTS)
+            for y in range(H):                                         # the skull at double size, pixel-doubled
+                for x in range(W):
+                    sx, sy = (x - cx) / 2 + cx, (y - (gy - 52)) / 2 + gy - 52
+                    xi, yi = int(sx), int(sy)
+                    if 0 <= xi < W and 0 <= yi < H and sk.slot[yi, xi]:
+                        big.slot[y, x] = sk.slot[yi, xi]
+                        big.shade[y, x] = sk.shade[yi, xi]
+            if i >= 9:
+                gone = tex.rng(800 + i).random((H, W)) < (i - 8) * 0.25
+                big.slot[gone] = 0
+            c.blit(big)
+        for x, y0, ph in ash:
+            age = i - 7
+            if 0 <= age < 7:
+                _pmax(c, x + math.sin(ph + age) * 2, y0 + age * 4, "smoke" if age > 3 else "main", 3 - age // 3)
+        out.append(c)
+    return out
+
+
+def spell_spiritual_weapon() -> list[Canvas]:
+    """Spiritual Weapon: hexagons of force fly together over the target and lock into a spectral hammer, which
+    hangs, rears back and swings down; the blow lands with a flash, a ring and a burst of hexagon shards. Force's
+    hexagons, shaped into a weapon."""
+    W, H, cx, gy = 64, 80, 31.5, 72.5
+    r = tex.rng(801)
+    cells = [(-6, 0), (0, 0), (6, 0), (-3, -5), (3, -5), (-3, 5), (3, 5)]          # the hammer's head
+    cells += [(0, 9 + 5 * k) for k in range(4)]                                        # and its haft
+    start = [(r.uniform(-30, 30), r.uniform(-40, 0)) for _ in cells]
+    burst = FX._sparks(802, 16, cx + 8, gy - 6, (2.5, 5.0), t0=7, arc=(180, 360), life=(3, 6), big=0.0)
+    out = []
+    for i in range(13):
+        f = Field(W, H, ss=1)
+        if 7 <= i <= 10:
+            age = i - 7
+            f.add("main", np.where(FX._iso_ring(f, cx + 8, gy, 6 + 6 * age, 0.6, 0.42), max(1, 4 - age), EMPTY))
+        if i == 7:
+            FX._flash(f, cx + 8, gy - 6, 7)
+        c = f.canvas()
+        if i <= 6:
+            g = min(1.0, i / 3)
+            ang = [0, 0, 0, 0, -25, -45, 70][i]                  # rears back, then swings down
+            px_, py_ = cx - 2, gy - 34                            # the pivot: the haft's end
+            for (hx, hy), (sx, sy) in zip(cells, start):
+                hx2, hy2 = hx, hy - 24
+                a = math.radians(ang)
+                rx = hx2 * math.cos(a) - hy2 * math.sin(a)
+                ry = hx2 * math.sin(a) + hy2 * math.cos(a)
+                tx, ty = px_ + rx, py_ + ry + 24
+                x = sx + cx + (tx - sx - cx) * g
+                y = sy + gy - 30 + (ty - sy - gy + 30) * g
+                sh = 4 if i >= 3 else 3
+                FX._hexagon(c, x, y, 3.0, 30, "main", sh + (i == 3), fill=sh - 2)
+            if i == 6:                                            # the swing's smear
+                for k in range(8):
+                    a = math.radians(-60 + k * 14)
+                    _pmax(c, px_ + 26 * math.sin(a) + 6, py_ + 26 * math.cos(a) * 0.6 + 14, "core", 3 + k // 3)
+        if i == 7:
+            FX._flare(c, cx + 8, gy - 6, 16, vertical=False)
+        for p in burst:
+            t = i - p.t0
+            if 0 <= t <= p.life:
+                x, y = FX._spark_at(p, t, 0.35, 0.82)
+                FX._hexagon(c, x, y, max(1.0, 2.2 - t * 0.3), 30 + t * 40, "main", 5 - int(t) // 2,
+                            fill=max(1, 3 - int(t) // 2))
+        out.append(c)
+    return out
+
+
 # ------------------------------------------------------------------------------------------------------ catalogue
 @dataclass
 class Stage:
@@ -2420,6 +2962,8 @@ class Sig:
     span: int | None = None             # link effects: px from the anchor to the far unit, along +x
     note: str = ""
     stage: Stage = field(default_factory=Stage)
+    school: str = ""                    # signature spells: the school whose look it carries (subclass then only
+                                        # picks the preview's hero)
 
 
 _SHIELD = {"gold": _v(main="gold", core="magic/holy"), "azure": _v(main="magic/arcane", core="magic/frost")}
@@ -2585,6 +3129,59 @@ CATALOGUE: list[Sig] = [
         stage=Stage(hero="L", at="C")),
 ]
 
+# The big named spells, each in its school's look. `subclass` only picks the hero the preview casts them with.
+SPELLS: list[Sig] = [
+    Sig("spell_fireball", "evoker", "Fireball", spell_fireball, {
+        "fire": _v(main="magic/fire", core="magic/holy", smoke="soot")}, 16, (64, 96), "feet", school="fire",
+        note="centred on the target tile; the ball spans about two tiles",
+        stage=Stage(hero="L", other="foe", other_at="C", at="other", hit=3)),
+    Sig("spell_flame_strike", "light", "Flame Strike", spell_flame_strike, {
+        "holy": _v(main="magic/fire", core="magic/holy", accent="gold"),
+        "hellfire": _v(main="fel", core="bile", accent="magic/blood")}, 14, (24, 121), "feet", school="fire",
+        stage=Stage(hero="L", other="foe", other_at="C", at="other", hit=3)),
+    Sig("spell_lightning_bolt", "chronomancer", "Lightning Bolt", spell_lightning_bolt, {
+        "storm": _v(main="storm", core="magic/frost"), "violet": _v(main="eldritch", core="hex")}, 18, (4, 24),
+        "body", school="lightning",
+        note="a line four tiles long to the right of the caster's chest; mirror or rotate to the line",
+        stage=Stage(hero="L", other="foe", other_at="C", hit=2)),
+    Sig("spell_cone_of_cold", "runeborn", "Cone of Cold", spell_cone_of_cold, {
+        "frost": _v(main="ice", core="magic/holy", accent="mist")}, 14, (6, 30), "body", school="frost",
+        note="a cone three tiles long to the right of the caster; mirror or rotate to face",
+        stage=Stage(hero="L", other="foe", other_at="C", hit=4)),
+    Sig("spell_spirit_guardians", "life", "Spirit Guardians", spell_spirit_guardians, {
+        "radiant": _v(main="radiant", core="magic/holy", accent="gold"),
+        "necrotic": _v(main="grave", core="magic/spirit", accent="grave")}, 12, (56, 61), "feet", loop=True,
+        loop_start=3, school="radiant", note="centred on the caster and moves with them; about two tiles across",
+        stage=Stage(other="foe", other_at="FR")),
+    Sig("spell_moonbeam", "grovekeeper", "Moonbeam", spell_moonbeam, {
+        "moon": _v(main="moon", core="magic/frost", accent="magic/holy")}, 12, (24, 121), "feet", loop=True,
+        loop_start=2, school="radiant", note="on the beam's tile; moves when the caster moves it",
+        stage=Stage(hero="L", other="foe", other_at="C", at="other")),
+    Sig("spell_hunger_of_hadar", "void", "Hunger of Hadar", spell_hunger_of_hadar, {
+        "void": _v(smoke="sig/abyss", main="magic/void", core="magic/frost", accent="acid")}, 10, (56, 59), "feet",
+        blend="normal", loop=True, loop_start=3, school="acid",
+        note="a sphere of dark about two tiles across; units inside are hidden in it",
+        stage=Stage(hero="L", other="foe", other_at="C", at="C")),
+    Sig("spell_shatter", "lore", "Shatter", spell_shatter, {
+        "thunder": _v(main="thunder", core="magic/holy")}, 16, (48, 64), "feet", school="thunder",
+        stage=Stage(hero="L", other="foe", other_at="C", at="other", hit=2)),
+    Sig("spell_synaptic_static", "hexblade", "Synaptic Static", spell_synaptic_static, {
+        "mind": _v(main="psychic", core="hex")}, 14, (48, 56), "feet", school="psychic",
+        stage=Stage(hero="L", other="foe", other_at="C", at="other", hit=2)),
+    Sig("spell_cloudkill", "geomancer", "Cloudkill", spell_cloudkill, {
+        "poison": _v(main="poison", accent="bile"), "miasma": _v(main="miasma", accent="hex")}, 8, (56, 58), "feet",
+        blend="normal", loop=True, loop_start=3, school="poison",
+        note="about three tiles across; drifts a tile a turn", stage=Stage(hero="L", other="foe", other_at="C",
+                                                                           at="C")),
+    Sig("spell_blight", "fiendbound", "Blight", spell_blight, {
+        "rot": _v(smoke="necro", main="grave", core="magic/holy")}, 12, (32, 73), "feet", blend="normal",
+        school="necrotic", stage=Stage(hero="L", other="foe", other_at="C", at="other", hit=5)),
+    Sig("spell_spiritual_weapon", "war", "Spiritual Weapon", spell_spiritual_weapon, {
+        "force": _v(main="force", core="magic/holy"), "gold": _v(main="gold", core="magic/holy")}, 14, (32, 73),
+        "feet", school="force", note="the hammer strikes down to the right of the anchor",
+        stage=Stage(hero="L", other="foe", other_at="C", at="other", hit=7)),
+]
+
 ATTACH = {
     **FX.ATTACH,
     "link": "anchor goes on the source unit's chest (15 px above its ground point); the art runs `span` px along +x "
@@ -2600,7 +3197,7 @@ def build() -> None:
     out = PACK / "signature"
     shutil.rmtree(out, ignore_errors=True)
     effects, rendered = {}, {}
-    for e in CATALOGUE:
+    for e in CATALOGUE + SPELLS:
         frames = e.make()
         w, h = frames[0].w, frames[0].h
         files = {}
@@ -2615,9 +3212,10 @@ def build() -> None:
             files[vname] = rel
             rendered[e.id][vname] = imgs
         sub = SUBCLASSES[e.subclass]
-        entry = {"name": e.name, "subclass": e.subclass, "class": sub.cls, "frame": [w, h], "frames": len(frames),
-                 "fps": e.fps, "loop": e.loop, "anchor": list(e.anchor), "attach": e.attach, "blend": e.blend,
-                 "layer": e.layer, "variants": files, "default": next(iter(files))}
+        who = {"school": e.school} if e.school else {"subclass": e.subclass, "class": sub.cls}
+        entry = {"name": e.name, **who, "frame": [w, h], "frames": len(frames), "fps": e.fps, "loop": e.loop,
+                 "anchor": list(e.anchor), "attach": e.attach, "blend": e.blend, "layer": e.layer, "variants": files,
+                 "default": next(iter(files))}
         if e.loop and e.loop_start:
             entry["loopStart"] = e.loop_start
         if e.span:
@@ -2648,6 +3246,9 @@ def build() -> None:
     }, out / "manifest.json")
     _preview_sheet(rendered)
     _preview_gif(rendered)
+    _spells_sheet(rendered)
+    _preview_gif(rendered, only=[e.id for e in SPELLS], path=PREVIEWS / "anim-signature-spells.gif", cols=4,
+                 cell_size=(300, 330), title="Signature spells")
 
 
 CLASS_ORDER = ["fighter", "rogue", "wizard", "cleric", "ranger", "paladin", "bard", "druid", "warlock", "monk",
@@ -2680,10 +3281,25 @@ def _preview_sheet(rendered: dict[str, dict[str, list[Image.Image]]]) -> None:
                "hue-shifted ramps, no anti-aliasing. 3x zoom."), PREVIEWS / "28-signature.png")
 
 
+def _spells_sheet(rendered: dict[str, dict[str, list[Image.Image]]]) -> None:
+    """The signature spells on their own sheet, grouped by school."""
+    tiles = []
+    for e in SPELLS:
+        imgs = rendered[e.id][next(iter(e.variants))]
+        loop = (f"loop from {e.loop_start}" if e.loop_start else "loop") if e.loop else "once"
+        sub = f"{e.school} · {len(imgs)} f · {e.fps} fps · {loop} · {e.blend} · {e.attach}"
+        tiles.append(Tile(strip(imgs, 1, gap=2), f"{e.name}  ({e.id})", sub))
+    save(stack("Signature spells · one look per school", [contact_sheet("Spells", tiles, columns=1, zoom=2,
+                                                                         label_h=40)],
+               "fire licks, frost grows crystals, lightning forks, necrotic coils round a skull, radiant rays, "
+               "psychic ripples, thunder rings, acid bubbles, poison rolls, force breaks into hexagons. 2x zoom."),
+         PREVIEWS / "28b-signature-spells.png")
+
+
 # ------------------------------------------------------------------------------------------------------ animated
 GIF_TICK = 50
 GIF_TICKS = 96
-CELL_W, CELL_H, LABEL_H = 204, 232, 30
+CELL_W_, CELL_H_, LABEL_H = 204, 232, 30
 SPRITE = 2
 TILES = {"C": (0, 0), "L": (-1, 1), "R": (1, -1), "FR": (1, 0), "FL": (0, 1), "BR": (0, -1), "BL": (-1, 0)}
 LIFT = {"feet": 0, "body": 15, "overhead": 36, "link": 15}
@@ -2781,7 +3397,7 @@ def _hero_frame(u: _Units, e: Sig, ms: float, k: int | None, after: bool) -> tup
         return u.beast(st.morph[1]), 24 * SPRITE, 44 * SPRITE
     if st.downed is not None:
         if k is None and not after or (k is not None and k < st.downed):
-            return u.at(e.subclass, "down", 0), 16 * SPRITE, 37 * SPRITE
+            return u.at(e.subclass, "down", 60_000), 16 * SPRITE, 37 * SPRITE
         t_up = (k - st.downed) * 1000 / e.fps if k is not None else 10_000
         rise = u.ANIMS["rise"]
         dur = len(rise[2]) * 1000 / rise[0]
@@ -2796,11 +3412,13 @@ def _hero_frame(u: _Units, e: Sig, ms: float, k: int | None, after: bool) -> tup
 
 
 def _preview_gif(rendered: dict[str, dict[str, list[Image.Image]]], only: list[str] | None = None,
-                 path=None, cols: int = 6) -> None:
+                 path=None, cols: int = 6, cell_size: tuple[int, int] | None = None,
+                 title: str = "Signature abilities") -> None:
     """Every signature effect playing on (or around) a hero of its subclass, over a 3x3 patch of grass at the
     dioramas' 2x scale, with a stand-in foe or ally where the move needs one. Additive effects blend additively."""
     from parts.creator import SUBCLASSES
-    cat = [e for e in CATALOGUE if only is None or e.id in only]
+    cat = [e for e in CATALOGUE + SPELLS if (e.id in only if only is not None else not e.school)]
+    CELL_W, CELL_H = cell_size or (CELL_W_, CELL_H_)
     u = _Units()
     floor, (fx0, fy0) = _floor()
     rows = -(-len(cat) // cols)
@@ -2809,9 +3427,11 @@ def _preview_gif(rendered: dict[str, dict[str, list[Image.Image]]], only: list[s
     H = head + rows * (CELL_H + LABEL_H + 8) + 8
     base = Image.new("RGBA", (W, H), BG)
     d = ImageDraw.Draw(base)
-    d.text((14, 12), "Signature abilities", font=font(20, True), fill=INK)
-    d.text((14, 36), "2x, as in the dioramas · one per subclass, on a hero of that subclass · additive effects "
-                     "blended additively", font=font(12), fill=MUTED)
+    d.text((14, 12), title, font=font(20, True), fill=INK)
+    what = "one per school's big spell" if only is not None and all(e.school for e in cat) else \
+        "one per subclass, on a hero of that subclass"
+    d.text((14, 36), f"2x, as in the dioramas · {what} · additive effects blended additively", font=font(12),
+           fill=MUTED)
     cells = []
     for n, e in enumerate(cat):
         x = 8 + (n % cols) * (CELL_W + 8)
@@ -2820,8 +3440,8 @@ def _preview_gif(rendered: dict[str, dict[str, list[Image.Image]]], only: list[s
         gx, gy = CELL_W // 2, CELL_H - 62
         base.alpha_composite(floor, (x + gx - fx0, y + gy - fy0))
         imgs = rendered[e.id][next(iter(e.variants))]
-        d.text((x + 4, y + CELL_H + 3), f"{_short(SUBCLASSES[e.subclass].name)}: {e.name}", font=font(12, True),
-               fill=INK)
+        who = e.school.title() if e.school else _short(SUBCLASSES[e.subclass].name)
+        d.text((x + 4, y + CELL_H + 3), f"{who}: {e.name}", font=font(12, True), fill=INK)
         d.text((x + 4, y + CELL_H + 17), f"{len(imgs)}f {e.fps}fps {'loop' if e.loop else 'once'} {e.blend} "
                                          f"{e.attach} {e.layer}", font=font(10), fill=MUTED)
         big = [im.resize((im.width * SPRITE, im.height * SPRITE), Image.NEAREST) for im in imgs]

@@ -39,6 +39,12 @@ http://localhost:5080/dev.html?phones=4
 - The room code stays in the address bar (`&room=ABCD`), so reloading the dev page resumes hosting that room.
 - REDLINE needs at least 2 players; Counter works with 1.
 
+### ArcBox Tactics
+
+Pick **Tactics**. It's a campaign game, so the VIP's phone creates a campaign ("New campaign"), and the other phones join it with "I'm new here" (tap it once to open the optional name field, and again to confirm). Then press "Everybody's in". Each phone picks a class and the VIP picks a battle.
+
+The host panel draws the battle board: the map from the content pack, the units, the turn order and the log. It also stands in for the TV's pacing: it tells the game each beat has been shown about 0.7 s after it arrives. `node tools/tactics-playtest/play.cjs` scripts a whole session with screenshots (see its header).
+
 ## 3. Join from real phones on the LAN
 
 1. Find the PC's address: `ipconfig` (Windows), `ipconfig getifaddr en0` (macOS) or `hostname -I` (Linux).

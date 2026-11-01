@@ -62,6 +62,13 @@ public sealed class EffectContext
     /// <summary>The source as it is now.</summary>
     public UnitState SourceUnit => W.Unit(Source);
 
+    /// <summary>
+    /// True when an effect tied to concentration on <see cref="Ability"/> lands after the source has lost it (say, to damage
+    /// from a reaction part-way through the spell): it would outlive the break that should have ended it, so it doesn't land.
+    /// </summary>
+    public bool ConcentrationLapsed(bool concentration)
+        => concentration && Ability is { } ability && SourceUnit.Concentrating != ability.Id;
+
     /// <summary>The target as it is now. Throws when the effect has no target unit.</summary>
     public UnitState TargetUnit(string block)
         => Target is { } id ? W.Unit(id) : throw new InvalidOperationException($"'{block}' needs a target unit.");

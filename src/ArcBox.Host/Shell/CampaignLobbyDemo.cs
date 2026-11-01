@@ -1,6 +1,7 @@
 using ArcBox.Sdk;
 using ArcBox.Sdk.Campaigns;
 using ArcBox.Sdk.Protocol;
+using Tactics.Game;
 
 namespace ArcBox.Host.Shell;
 
@@ -29,7 +30,7 @@ public static class CampaignLobbyDemo
         {
             new("redline", "REDLINE", "Racing trivia: bet your throttle on the category, then answer. 22-car 2026 grid.", 2, 8),
             new("counter", "Counter", "Mash the button. Most presses in 20 seconds wins.", 1, 8),
-            new("tactics", "Vale Tactics", "Turn-based skirmishes in a campaign that carries on between game nights.", 2, 8, UsesCampaigns: true),
+            new("tactics", Brand.Name, Brand.Tagline, 2, 8, UsesCampaigns: true),
         };
         var updated = new DateTimeOffset(2026, 10, 28, 21, 0, 0, TimeSpan.Zero);
         var campaigns = new List<CampaignSummary>

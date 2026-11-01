@@ -239,7 +239,7 @@ public sealed class ConditionTests
         [
             new TurnEnded(U("gob")),
             new TurnStarted(U("kara"), 1),
-            new PassiveTriggered(U("kara"), "burning.tick"),
+            new PassiveTriggered(U("kara"), "burning.tick", U("gob")),
             new Damaged(U("kara"), d6, "fire", 12 - d6),
         ], events);
         Assert.Equal(12 - d6, after.Units[U("kara")].Hp);

@@ -244,5 +244,29 @@
         22
       ]
     }
+  },
+  "anims": {
+    "gleam_shield": {
+      "file": "gleam_shield.png",
+      "frame": [
+        32,
+        32
+      ],
+      "frames": 8,
+      "fps": 16,
+      "blend": "add",
+      "over": "any class crest"
+    },
+    "gleam_medallion": {
+      "file": "gleam_medallion.png",
+      "frame": [
+        22,
+        22
+      ],
+      "frames": 8,
+      "fps": 16,
+      "blend": "add",
+      "over": "any subclass medallion"
+    }
   }
 }

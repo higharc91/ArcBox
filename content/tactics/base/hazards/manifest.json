@@ -109,6 +109,56 @@
       "difficult": true,
       "damage": null,
       "note": "conducts lightning"
+    },
+    "acid": {
+      "ground": "acid.png",
+      "frames": 8,
+      "fps": 8,
+      "blocks": false,
+      "difficult": false,
+      "damage": "acid",
+      "note": "acid pool: damage on entering and at turn start",
+      "over": "acid_over.png"
+    },
+    "spikes": {
+      "ground": "spikes.png",
+      "frames": 8,
+      "fps": 8,
+      "blocks": false,
+      "difficult": true,
+      "damage": "piercing",
+      "note": "spike growth: damage for every tile moved inside",
+      "over": "spikes_over.png"
+    },
+    "fog": {
+      "ground": "fog.png",
+      "frames": 8,
+      "fps": 8,
+      "blocks": false,
+      "difficult": false,
+      "damage": null,
+      "note": "fog cloud: heavily obscured, blocks line of sight; wind disperses it",
+      "over": "fog_over.png"
+    },
+    "sleet": {
+      "ground": "sleet.png",
+      "frames": 8,
+      "fps": 8,
+      "blocks": false,
+      "difficult": true,
+      "damage": null,
+      "note": "sleet storm: difficult, may knock prone, puts out fire",
+      "over": "sleet_over.png"
+    },
+    "electrified": {
+      "ground": "electrified.png",
+      "frames": 8,
+      "fps": 8,
+      "blocks": false,
+      "difficult": false,
+      "damage": "lightning",
+      "note": "lightning damage at turn start",
+      "over": "electrified_over.png"
     }
   },
   "notes": {

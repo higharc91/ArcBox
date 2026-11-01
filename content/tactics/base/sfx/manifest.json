@@ -1,0 +1,1346 @@
+{
+  "about": "Generated sfx: id -> Ogg Vorbis files in this folder (pick one at random when there are several). See tools/tactics-audio/audio.py.",
+  "model": "model_mirelo-sfx-2-0-text-to-audio",
+  "sounds": {
+    "amb_campfire": {
+      "files": [
+        "amb_campfire.ogg"
+      ],
+      "loop": true,
+      "group": "ambience",
+      "use": "Camp screen and night camps"
+    },
+    "amb_dungeon": {
+      "files": [
+        "amb_dungeon.ogg"
+      ],
+      "loop": true,
+      "group": "ambience",
+      "use": "Dungeon and cave maps"
+    },
+    "amb_forest": {
+      "files": [
+        "amb_forest.ogg"
+      ],
+      "loop": true,
+      "group": "ambience",
+      "use": "Forest maps"
+    },
+    "amb_lava": {
+      "files": [
+        "amb_lava.ogg"
+      ],
+      "loop": true,
+      "group": "ambience",
+      "use": "Lava and volcano maps"
+    },
+    "amb_plains_wind": {
+      "files": [
+        "amb_plains_wind.ogg"
+      ],
+      "loop": true,
+      "group": "ambience",
+      "use": "Open field and plains maps"
+    },
+    "amb_rain": {
+      "files": [
+        "amb_rain.ogg"
+      ],
+      "loop": true,
+      "group": "ambience",
+      "use": "Rain weather overlay"
+    },
+    "amb_river": {
+      "files": [
+        "amb_river.ogg"
+      ],
+      "loop": true,
+      "group": "ambience",
+      "use": "River and lakeside maps"
+    },
+    "amb_swamp": {
+      "files": [
+        "amb_swamp.ogg"
+      ],
+      "loop": true,
+      "group": "ambience",
+      "use": "Swamp and marsh maps"
+    },
+    "amb_town": {
+      "files": [
+        "amb_town.ogg"
+      ],
+      "loop": true,
+      "group": "ambience",
+      "use": "Town and market maps"
+    },
+    "arrow_armor": {
+      "files": [
+        "arrow_armor.1.ogg",
+        "arrow_armor.2.ogg"
+      ],
+      "loop": false,
+      "group": "weapon",
+      "use": "Arrow or bolt hits an armoured target"
+    },
+    "arrow_flesh": {
+      "files": [
+        "arrow_flesh.1.ogg",
+        "arrow_flesh.2.ogg"
+      ],
+      "loop": false,
+      "group": "weapon",
+      "use": "Arrow, bolt, dart or javelin hits an unarmoured target"
+    },
+    "attack_crit": {
+      "files": [
+        "attack_crit.1.ogg",
+        "attack_crit.2.ogg"
+      ],
+      "loop": false,
+      "group": "battle",
+      "use": "AttackResolved with Crit=true, layered over the weapon impact"
+    },
+    "attack_miss": {
+      "files": [
+        "attack_miss.1.ogg",
+        "attack_miss.2.ogg",
+        "attack_miss.3.ogg"
+      ],
+      "loop": false,
+      "group": "battle",
+      "use": "AttackResolved with Hit=false"
+    },
+    "bat_attack": {
+      "files": [
+        "bat_attack.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Attack bark for giant_bat",
+      "voice": "bat"
+    },
+    "bat_death": {
+      "files": [
+        "bat_death.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Died for giant_bat",
+      "voice": "bat"
+    },
+    "bat_hurt": {
+      "files": [
+        "bat_hurt.1.ogg",
+        "bat_hurt.2.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Damaged for giant_bat",
+      "voice": "bat"
+    },
+    "battle_start": {
+      "files": [
+        "battle_start.ogg"
+      ],
+      "loop": false,
+      "group": "battle",
+      "use": "Battle begins, before the first RoundStarted"
+    },
+    "bear_attack": {
+      "files": [
+        "bear_attack.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Attack bark for bear, elder_bear, boar",
+      "voice": "bear"
+    },
+    "bear_death": {
+      "files": [
+        "bear_death.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Died for bear, elder_bear, boar",
+      "voice": "bear"
+    },
+    "bear_hurt": {
+      "files": [
+        "bear_hurt.1.ogg",
+        "bear_hurt.2.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Damaged for bear, elder_bear, boar",
+      "voice": "bear"
+    },
+    "blade_armor": {
+      "files": [
+        "blade_armor.1.ogg",
+        "blade_armor.2.ogg",
+        "blade_armor.3.ogg"
+      ],
+      "loop": false,
+      "group": "weapon",
+      "use": "Slashing weapon hits an armoured target"
+    },
+    "blade_flesh": {
+      "files": [
+        "blade_flesh.1.ogg",
+        "blade_flesh.2.ogg",
+        "blade_flesh.3.ogg"
+      ],
+      "loop": false,
+      "group": "weapon",
+      "use": "Slashing weapon hits an unarmoured or beast target"
+    },
+    "block_shield": {
+      "files": [
+        "block_shield.1.ogg",
+        "block_shield.2.ogg"
+      ],
+      "loop": false,
+      "group": "battle",
+      "use": "Attack against a shield bearer that misses by armour"
+    },
+    "blunt_armor": {
+      "files": [
+        "blunt_armor.1.ogg",
+        "blunt_armor.2.ogg"
+      ],
+      "loop": false,
+      "group": "weapon",
+      "use": "Bludgeoning weapon hits an armoured target"
+    },
+    "blunt_flesh": {
+      "files": [
+        "blunt_flesh.1.ogg",
+        "blunt_flesh.2.ogg",
+        "blunt_flesh.3.ogg"
+      ],
+      "loop": false,
+      "group": "weapon",
+      "use": "Bludgeoning weapon hits an unarmoured target"
+    },
+    "bow_release": {
+      "files": [
+        "bow_release.1.ogg",
+        "bow_release.2.ogg",
+        "bow_release.3.ogg"
+      ],
+      "loop": false,
+      "group": "weapon",
+      "use": "Release for shortbow, longbow"
+    },
+    "buff_applied": {
+      "files": [
+        "buff_applied.1.ogg",
+        "buff_applied.2.ogg"
+      ],
+      "loop": false,
+      "group": "battle",
+      "use": "ConditionApplied for a beneficial condition (blessed, hasted, raging)"
+    },
+    "collided": {
+      "files": [
+        "collided.1.ogg",
+        "collided.2.ogg"
+      ],
+      "loop": false,
+      "group": "battle",
+      "use": "Collided with a unit or wall"
+    },
+    "concentration_broken": {
+      "files": [
+        "concentration_broken.ogg"
+      ],
+      "loop": false,
+      "group": "battle",
+      "use": "ConcentrationBroken"
+    },
+    "countered": {
+      "files": [
+        "countered.ogg"
+      ],
+      "loop": false,
+      "group": "battle",
+      "use": "Countered (counterspell)"
+    },
+    "crossbow_release": {
+      "files": [
+        "crossbow_release.1.ogg",
+        "crossbow_release.2.ogg"
+      ],
+      "loop": false,
+      "group": "weapon",
+      "use": "Release for light, hand and heavy crossbow"
+    },
+    "crossbow_reload": {
+      "files": [
+        "crossbow_reload.ogg"
+      ],
+      "loop": false,
+      "group": "weapon",
+      "use": "Reload for loading-tag weapons"
+    },
+    "debuff_applied": {
+      "files": [
+        "debuff_applied.1.ogg",
+        "debuff_applied.2.ogg"
+      ],
+      "loop": false,
+      "group": "battle",
+      "use": "ConditionApplied for a harmful condition (poisoned, frightened, slowed)"
+    },
+    "died": {
+      "files": [
+        "died.1.ogg",
+        "died.2.ogg"
+      ],
+      "loop": false,
+      "group": "battle",
+      "use": "Died (body fades out after the creature's death cry)"
+    },
+    "dmg_acid": {
+      "files": [
+        "dmg_acid.1.ogg",
+        "dmg_acid.2.ogg"
+      ],
+      "loop": false,
+      "group": "impact",
+      "use": "Damaged with Type=acid"
+    },
+    "dmg_bludgeoning": {
+      "files": [
+        "dmg_bludgeoning.1.ogg",
+        "dmg_bludgeoning.2.ogg"
+      ],
+      "loop": false,
+      "group": "impact",
+      "use": "Damaged with Type=bludgeoning"
+    },
+    "dmg_cold": {
+      "files": [
+        "dmg_cold.1.ogg",
+        "dmg_cold.2.ogg"
+      ],
+      "loop": false,
+      "group": "impact",
+      "use": "Damaged with Type=cold"
+    },
+    "dmg_fire": {
+      "files": [
+        "dmg_fire.1.ogg",
+        "dmg_fire.2.ogg"
+      ],
+      "loop": false,
+      "group": "impact",
+      "use": "Damaged with Type=fire"
+    },
+    "dmg_force": {
+      "files": [
+        "dmg_force.1.ogg",
+        "dmg_force.2.ogg"
+      ],
+      "loop": false,
+      "group": "impact",
+      "use": "Damaged with Type=force"
+    },
+    "dmg_lightning": {
+      "files": [
+        "dmg_lightning.1.ogg",
+        "dmg_lightning.2.ogg"
+      ],
+      "loop": false,
+      "group": "impact",
+      "use": "Damaged with Type=lightning"
+    },
+    "dmg_necrotic": {
+      "files": [
+        "dmg_necrotic.1.ogg",
+        "dmg_necrotic.2.ogg"
+      ],
+      "loop": false,
+      "group": "impact",
+      "use": "Damaged with Type=necrotic"
+    },
+    "dmg_piercing": {
+      "files": [
+        "dmg_piercing.1.ogg",
+        "dmg_piercing.2.ogg"
+      ],
+      "loop": false,
+      "group": "impact",
+      "use": "Damaged with Type=piercing"
+    },
+    "dmg_poison": {
+      "files": [
+        "dmg_poison.1.ogg",
+        "dmg_poison.2.ogg"
+      ],
+      "loop": false,
+      "group": "impact",
+      "use": "Damaged with Type=poison"
+    },
+    "dmg_psychic": {
+      "files": [
+        "dmg_psychic.1.ogg",
+        "dmg_psychic.2.ogg"
+      ],
+      "loop": false,
+      "group": "impact",
+      "use": "Damaged with Type=psychic"
+    },
+    "dmg_radiant": {
+      "files": [
+        "dmg_radiant.1.ogg",
+        "dmg_radiant.2.ogg"
+      ],
+      "loop": false,
+      "group": "impact",
+      "use": "Damaged with Type=radiant"
+    },
+    "dmg_slashing": {
+      "files": [
+        "dmg_slashing.1.ogg",
+        "dmg_slashing.2.ogg"
+      ],
+      "loop": false,
+      "group": "impact",
+      "use": "Damaged with Type=slashing"
+    },
+    "dmg_thunder": {
+      "files": [
+        "dmg_thunder.1.ogg",
+        "dmg_thunder.2.ogg"
+      ],
+      "loop": false,
+      "group": "impact",
+      "use": "Damaged with Type=thunder"
+    },
+    "downed": {
+      "files": [
+        "downed.1.ogg",
+        "downed.2.ogg"
+      ],
+      "loop": false,
+      "group": "battle",
+      "use": "Downed (hero at 0 HP, can still be revived)"
+    },
+    "dragon_attack": {
+      "files": [
+        "dragon_attack.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Attack bark for drake, dragon",
+      "voice": "dragon"
+    },
+    "dragon_death": {
+      "files": [
+        "dragon_death.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Died for drake, dragon",
+      "voice": "dragon"
+    },
+    "dragon_hurt": {
+      "files": [
+        "dragon_hurt.1.ogg",
+        "dragon_hurt.2.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Damaged for drake, dragon",
+      "voice": "dragon"
+    },
+    "dust_burst": {
+      "files": [
+        "dust_burst.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "fx.dust.earth, fx.dust"
+    },
+    "elemental_attack": {
+      "files": [
+        "elemental_attack.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Attack bark for fire_elemental, water_elemental, earth_elemental, air_elemental, golem",
+      "voice": "elemental"
+    },
+    "elemental_death": {
+      "files": [
+        "elemental_death.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Died for fire_elemental, water_elemental, earth_elemental, air_elemental, golem",
+      "voice": "elemental"
+    },
+    "elemental_hurt": {
+      "files": [
+        "elemental_hurt.1.ogg",
+        "elemental_hurt.2.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Damaged for fire_elemental, water_elemental, earth_elemental, air_elemental, golem",
+      "voice": "elemental"
+    },
+    "fell": {
+      "files": [
+        "fell.1.ogg",
+        "fell.2.ogg"
+      ],
+      "loop": false,
+      "group": "battle",
+      "use": "Fell onto a lower level"
+    },
+    "fell_deep": {
+      "files": [
+        "fell_deep.ogg"
+      ],
+      "loop": false,
+      "group": "battle",
+      "use": "Fell with IntoDeep=true"
+    },
+    "flap_wings": {
+      "files": [
+        "flap_wings.1.ogg",
+        "flap_wings.2.ogg"
+      ],
+      "loop": false,
+      "group": "footstep",
+      "use": "Moved for flying units (bat, drake, dragon, imp)"
+    },
+    "goblin_attack": {
+      "files": [
+        "goblin_attack.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Attack bark for goblin, goblin_archer, goblin_boss, goblin_shaman, hobgoblin, kobold, kobold_slinger",
+      "voice": "goblin"
+    },
+    "goblin_death": {
+      "files": [
+        "goblin_death.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Died for goblin, goblin_archer, goblin_boss, goblin_shaman, hobgoblin, kobold, kobold_slinger",
+      "voice": "goblin"
+    },
+    "goblin_hurt": {
+      "files": [
+        "goblin_hurt.1.ogg",
+        "goblin_hurt.2.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Damaged for goblin, goblin_archer, goblin_boss, goblin_shaman, hobgoblin, kobold, kobold_slinger",
+      "voice": "goblin"
+    },
+    "healed": {
+      "files": [
+        "healed.1.ogg",
+        "healed.2.ogg"
+      ],
+      "loop": false,
+      "group": "battle",
+      "use": "Healed (generic, when the ability has no spell fx sound)"
+    },
+    "hit_magic": {
+      "files": [
+        "hit_magic.1.ogg",
+        "hit_magic.2.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "fx.hit.magic, fx.hit.spark"
+    },
+    "mimic_attack": {
+      "files": [
+        "mimic_attack.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Attack bark for mimic",
+      "voice": "mimic"
+    },
+    "mimic_death": {
+      "files": [
+        "mimic_death.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Died for mimic",
+      "voice": "mimic"
+    },
+    "mimic_hurt": {
+      "files": [
+        "mimic_hurt.1.ogg",
+        "mimic_hurt.2.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Damaged for mimic",
+      "voice": "mimic"
+    },
+    "orc_attack": {
+      "files": [
+        "orc_attack.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Attack bark for orc_brute",
+      "voice": "orc"
+    },
+    "orc_death": {
+      "files": [
+        "orc_death.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Died for orc_brute",
+      "voice": "orc"
+    },
+    "orc_hurt": {
+      "files": [
+        "orc_hurt.1.ogg",
+        "orc_hurt.2.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Damaged for orc_brute",
+      "voice": "orc"
+    },
+    "pierce_armor": {
+      "files": [
+        "pierce_armor.1.ogg",
+        "pierce_armor.2.ogg"
+      ],
+      "loop": false,
+      "group": "weapon",
+      "use": "Piercing melee weapon hits an armoured target"
+    },
+    "pierce_flesh": {
+      "files": [
+        "pierce_flesh.1.ogg",
+        "pierce_flesh.2.ogg"
+      ],
+      "loop": false,
+      "group": "weapon",
+      "use": "Piercing melee weapon hits an unarmoured target"
+    },
+    "pushed": {
+      "files": [
+        "pushed.1.ogg",
+        "pushed.2.ogg"
+      ],
+      "loop": false,
+      "group": "battle",
+      "use": "Pushed"
+    },
+    "revived": {
+      "files": [
+        "revived.ogg"
+      ],
+      "loop": false,
+      "group": "battle",
+      "use": "Revived"
+    },
+    "round_start": {
+      "files": [
+        "round_start.ogg"
+      ],
+      "loop": false,
+      "group": "battle",
+      "use": "RoundStarted"
+    },
+    "slime_attack": {
+      "files": [
+        "slime_attack.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Attack bark for slime",
+      "voice": "slime"
+    },
+    "slime_death": {
+      "files": [
+        "slime_death.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Died for slime",
+      "voice": "slime"
+    },
+    "slime_hurt": {
+      "files": [
+        "slime_hurt.1.ogg",
+        "slime_hurt.2.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Damaged for slime",
+      "voice": "slime"
+    },
+    "sling_release": {
+      "files": [
+        "sling_release.ogg"
+      ],
+      "loop": false,
+      "group": "weapon",
+      "use": "Release for sling"
+    },
+    "smoke_poof": {
+      "files": [
+        "smoke_poof.1.ogg",
+        "smoke_poof.2.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "fx.poof.white, fx.smoke.grey"
+    },
+    "spawned": {
+      "files": [
+        "spawned.ogg"
+      ],
+      "loop": false,
+      "group": "battle",
+      "use": "Spawned"
+    },
+    "spell_arcane_circle": {
+      "files": [
+        "spell_arcane_circle.1.ogg",
+        "spell_arcane_circle.2.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "fx.circle.arcane, fx.aura.arcane, fx.pillar.arcane"
+    },
+    "spell_bless": {
+      "files": [
+        "spell_bless.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "fx.bless.*, fx.inspire.*"
+    },
+    "spell_cast": {
+      "files": [
+        "spell_cast.1.ogg",
+        "spell_cast.2.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "Caster windup before any spell fx (AbilityUsed)"
+    },
+    "spell_eldritch": {
+      "files": [
+        "spell_eldritch.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "fx.eldritch, fx.force.*"
+    },
+    "spell_fire_aura": {
+      "files": [
+        "spell_fire_aura.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "fx.aura.fire, fx.slash.fire, fx.thrust.fire"
+    },
+    "spell_fire_explosion": {
+      "files": [
+        "spell_fire_explosion.1.ogg",
+        "spell_fire_explosion.2.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "fx.explosion.fire, fx.explosion"
+    },
+    "spell_fireball": {
+      "files": [
+        "spell_fireball.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "fx.fireball.fire projectile flight"
+    },
+    "spell_holy_heal": {
+      "files": [
+        "spell_holy_heal.1.ogg",
+        "spell_holy_heal.2.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "fx.heal.holy, fx.restore.holy"
+    },
+    "spell_holy_pillar": {
+      "files": [
+        "spell_holy_pillar.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "fx.pillar.holy, fx.aura.holy, fx.radiant.*"
+    },
+    "spell_ice": {
+      "files": [
+        "spell_ice.1.ogg",
+        "spell_ice.2.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "fx.ice.frost, fx.frost.frost"
+    },
+    "spell_lightning": {
+      "files": [
+        "spell_lightning.1.ogg",
+        "spell_lightning.2.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "fx.lightning.storm, fx.shock.storm"
+    },
+    "spell_misty_step": {
+      "files": [
+        "spell_misty_step.1.ogg",
+        "spell_misty_step.2.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "fx.misty.mist, fx.misty.shadow, fx.misty.fey; Teleported"
+    },
+    "spell_nature_circle": {
+      "files": [
+        "spell_nature_circle.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "fx.circle.nature, fx.hold.nature, fx.web.silk"
+    },
+    "spell_nature_heal": {
+      "files": [
+        "spell_nature_heal.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "fx.heal.nature, fx.restore.nature"
+    },
+    "spell_poison_cloud": {
+      "files": [
+        "spell_poison_cloud.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "fx.poison.poison, fx.poison.miasma, fx.toxin.*"
+    },
+    "spell_psychic": {
+      "files": [
+        "spell_psychic.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "fx.psychic.*"
+    },
+    "spell_shadow": {
+      "files": [
+        "spell_shadow.1.ogg",
+        "spell_shadow.2.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "fx.hex.shadow, fx.circle.shadow, fx.pillar.shadow, fx.necrotic.*"
+    },
+    "spell_shield": {
+      "files": [
+        "spell_shield.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "fx.shield.*, fx.ward.*"
+    },
+    "spell_thunderwave": {
+      "files": [
+        "spell_thunderwave.ogg"
+      ],
+      "loop": false,
+      "group": "spell",
+      "use": "fx.thunder.thunder"
+    },
+    "spider_attack": {
+      "files": [
+        "spider_attack.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Attack bark for giant_spider",
+      "voice": "spider"
+    },
+    "spider_death": {
+      "files": [
+        "spider_death.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Died for giant_spider",
+      "voice": "spider"
+    },
+    "spider_hurt": {
+      "files": [
+        "spider_hurt.1.ogg",
+        "spider_hurt.2.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Damaged for giant_spider",
+      "voice": "spider"
+    },
+    "step_armor": {
+      "files": [
+        "step_armor.1.ogg",
+        "step_armor.2.ogg"
+      ],
+      "loop": false,
+      "group": "footstep",
+      "use": "Layered over footsteps for heavy-armour units"
+    },
+    "step_dirt": {
+      "files": [
+        "step_dirt.1.ogg",
+        "step_dirt.2.ogg",
+        "step_dirt.3.ogg"
+      ],
+      "loop": false,
+      "group": "footstep",
+      "use": "Moved: one per tile entered on terrain dirt_*, path_packed"
+    },
+    "step_grass": {
+      "files": [
+        "step_grass.1.ogg",
+        "step_grass.2.ogg",
+        "step_grass.3.ogg"
+      ],
+      "loop": false,
+      "group": "footstep",
+      "use": "Moved: one per tile entered on terrain grass_*"
+    },
+    "step_heavy": {
+      "files": [
+        "step_heavy.1.ogg",
+        "step_heavy.2.ogg"
+      ],
+      "loop": false,
+      "group": "footstep",
+      "use": "Moved for large or huge creatures (troll, dragon, golem, bear)"
+    },
+    "step_ice": {
+      "files": [
+        "step_ice.1.ogg",
+        "step_ice.2.ogg",
+        "step_ice.3.ogg"
+      ],
+      "loop": false,
+      "group": "footstep",
+      "use": "Moved: one per tile entered on terrain ice_clear"
+    },
+    "step_lava": {
+      "files": [
+        "step_lava.1.ogg",
+        "step_lava.2.ogg",
+        "step_lava.3.ogg"
+      ],
+      "loop": false,
+      "group": "footstep",
+      "use": "Moved: one per tile entered on terrain lava_molten edge tiles"
+    },
+    "step_mud": {
+      "files": [
+        "step_mud.1.ogg",
+        "step_mud.2.ogg",
+        "step_mud.3.ogg"
+      ],
+      "loop": false,
+      "group": "footstep",
+      "use": "Moved: one per tile entered on terrain mud_swamp, water_swamp"
+    },
+    "step_sand": {
+      "files": [
+        "step_sand.1.ogg",
+        "step_sand.2.ogg",
+        "step_sand.3.ogg"
+      ],
+      "loop": false,
+      "group": "footstep",
+      "use": "Moved: one per tile entered on terrain sand_desert"
+    },
+    "step_snow": {
+      "files": [
+        "step_snow.1.ogg",
+        "step_snow.2.ogg",
+        "step_snow.3.ogg"
+      ],
+      "loop": false,
+      "group": "footstep",
+      "use": "Moved: one per tile entered on terrain snow_fresh"
+    },
+    "step_stone": {
+      "files": [
+        "step_stone.1.ogg",
+        "step_stone.2.ogg",
+        "step_stone.3.ogg"
+      ],
+      "loop": false,
+      "group": "footstep",
+      "use": "Moved: one per tile entered on terrain cobble_*, flagstone_*, rock_*"
+    },
+    "step_water": {
+      "files": [
+        "step_water.1.ogg",
+        "step_water.2.ogg",
+        "step_water.3.ogg"
+      ],
+      "loop": false,
+      "group": "footstep",
+      "use": "Moved: one per tile entered on terrain water_clear (shallow)"
+    },
+    "step_wood": {
+      "files": [
+        "step_wood.1.ogg",
+        "step_wood.2.ogg",
+        "step_wood.3.ogg"
+      ],
+      "loop": false,
+      "group": "footstep",
+      "use": "Moved: one per tile entered on terrain planks_*"
+    },
+    "swing_axe": {
+      "files": [
+        "swing_axe.1.ogg",
+        "swing_axe.2.ogg"
+      ],
+      "loop": false,
+      "group": "weapon",
+      "use": "Swing for handaxe, battleaxe, greataxe, halberd"
+    },
+    "swing_blunt": {
+      "files": [
+        "swing_blunt.1.ogg",
+        "swing_blunt.2.ogg"
+      ],
+      "loop": false,
+      "group": "weapon",
+      "use": "Swing for club, greatclub, mace, flail, morningstar, maul, warhammer, light hammer, quarterstaff, war pick"
+    },
+    "swing_dagger": {
+      "files": [
+        "swing_dagger.1.ogg",
+        "swing_dagger.2.ogg"
+      ],
+      "loop": false,
+      "group": "weapon",
+      "use": "Swing for dagger"
+    },
+    "swing_heavy": {
+      "files": [
+        "swing_heavy.1.ogg",
+        "swing_heavy.2.ogg"
+      ],
+      "loop": false,
+      "group": "weapon",
+      "use": "Swing for greatsword, greataxe, maul, halberd, glaive, pike (heavy tag)"
+    },
+    "swing_sword": {
+      "files": [
+        "swing_sword.1.ogg",
+        "swing_sword.2.ogg",
+        "swing_sword.3.ogg"
+      ],
+      "loop": false,
+      "group": "weapon",
+      "use": "Swing for longsword, shortsword, scimitar, rapier, greatsword, glaive, sickle"
+    },
+    "terrain_shift": {
+      "files": [
+        "terrain_shift.ogg"
+      ],
+      "loop": false,
+      "group": "battle",
+      "use": "TerrainAltered"
+    },
+    "throw": {
+      "files": [
+        "throw.1.ogg",
+        "throw.2.ogg"
+      ],
+      "loop": false,
+      "group": "weapon",
+      "use": "Thrown dagger, handaxe, javelin, dart, light hammer, spear, trident"
+    },
+    "thrust_spear": {
+      "files": [
+        "thrust_spear.1.ogg",
+        "thrust_spear.2.ogg"
+      ],
+      "loop": false,
+      "group": "weapon",
+      "use": "Thrust for spear, pike, lance, trident"
+    },
+    "troll_attack": {
+      "files": [
+        "troll_attack.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Attack bark for troll",
+      "voice": "troll"
+    },
+    "troll_death": {
+      "files": [
+        "troll_death.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Died for troll",
+      "voice": "troll"
+    },
+    "troll_hurt": {
+      "files": [
+        "troll_hurt.1.ogg",
+        "troll_hurt.2.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Damaged for troll",
+      "voice": "troll"
+    },
+    "ui_cancel": {
+      "files": [
+        "ui_cancel.ogg"
+      ],
+      "loop": false,
+      "group": "ui",
+      "use": "Cancel / back"
+    },
+    "ui_confirm": {
+      "files": [
+        "ui_confirm.1.ogg",
+        "ui_confirm.2.ogg"
+      ],
+      "loop": false,
+      "group": "ui",
+      "use": "Confirm an action or target"
+    },
+    "ui_countdown_tick": {
+      "files": [
+        "ui_countdown_tick.1.ogg",
+        "ui_countdown_tick.2.ogg"
+      ],
+      "loop": false,
+      "group": "ui",
+      "use": "CountdownTicked"
+    },
+    "ui_cursor": {
+      "files": [
+        "ui_cursor.1.ogg",
+        "ui_cursor.2.ogg",
+        "ui_cursor.3.ogg"
+      ],
+      "loop": false,
+      "group": "ui",
+      "use": "Cursor moves to another tile or menu item"
+    },
+    "ui_dice_roll": {
+      "files": [
+        "ui_dice_roll.1.ogg",
+        "ui_dice_roll.2.ogg"
+      ],
+      "loop": false,
+      "group": "ui",
+      "use": "Rolled (shown dice roll)"
+    },
+    "ui_error": {
+      "files": [
+        "ui_error.ogg"
+      ],
+      "loop": false,
+      "group": "ui",
+      "use": "Invalid action or blocked tile"
+    },
+    "ui_level_up": {
+      "files": [
+        "ui_level_up.ogg"
+      ],
+      "loop": false,
+      "group": "ui",
+      "use": "Level up after battle"
+    },
+    "ui_loot": {
+      "files": [
+        "ui_loot.1.ogg",
+        "ui_loot.2.ogg"
+      ],
+      "loop": false,
+      "group": "ui",
+      "use": "Loot or pickup collected"
+    },
+    "ui_menu_close": {
+      "files": [
+        "ui_menu_close.ogg"
+      ],
+      "loop": false,
+      "group": "ui",
+      "use": "Menu or panel closes"
+    },
+    "ui_menu_open": {
+      "files": [
+        "ui_menu_open.ogg"
+      ],
+      "loop": false,
+      "group": "ui",
+      "use": "Menu or panel opens"
+    },
+    "ui_reaction_prompt": {
+      "files": [
+        "ui_reaction_prompt.ogg"
+      ],
+      "loop": false,
+      "group": "ui",
+      "use": "ReactionOffered (player must choose)"
+    },
+    "ui_select": {
+      "files": [
+        "ui_select.1.ogg",
+        "ui_select.2.ogg"
+      ],
+      "loop": false,
+      "group": "ui",
+      "use": "Select a unit or menu entry"
+    },
+    "ui_turn_start": {
+      "files": [
+        "ui_turn_start.ogg"
+      ],
+      "loop": false,
+      "group": "ui",
+      "use": "TurnStarted (any unit)"
+    },
+    "ui_your_turn": {
+      "files": [
+        "ui_your_turn.ogg"
+      ],
+      "loop": false,
+      "group": "ui",
+      "use": "TurnStarted for a player-controlled hero"
+    },
+    "undead_attack": {
+      "files": [
+        "undead_attack.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Attack bark for skeleton, skeleton_archer, zombie, necromancer, lich",
+      "voice": "undead"
+    },
+    "undead_death": {
+      "files": [
+        "undead_death.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Died for skeleton, skeleton_archer, zombie, necromancer, lich",
+      "voice": "undead"
+    },
+    "undead_hurt": {
+      "files": [
+        "undead_hurt.1.ogg",
+        "undead_hurt.2.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Damaged for skeleton, skeleton_archer, zombie, necromancer, lich",
+      "voice": "undead"
+    },
+    "whip_crack": {
+      "files": [
+        "whip_crack.1.ogg",
+        "whip_crack.2.ogg"
+      ],
+      "loop": false,
+      "group": "weapon",
+      "use": "Swing for whip"
+    },
+    "wolf_attack": {
+      "files": [
+        "wolf_attack.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Attack bark for wolf, dire_wolf, hound",
+      "voice": "wolf"
+    },
+    "wolf_death": {
+      "files": [
+        "wolf_death.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Died for wolf, dire_wolf, hound",
+      "voice": "wolf"
+    },
+    "wolf_hurt": {
+      "files": [
+        "wolf_hurt.1.ogg",
+        "wolf_hurt.2.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Damaged for wolf, dire_wolf, hound",
+      "voice": "wolf"
+    },
+    "wraith_attack": {
+      "files": [
+        "wraith_attack.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Attack bark for wraith",
+      "voice": "wraith"
+    },
+    "wraith_death": {
+      "files": [
+        "wraith_death.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Died for wraith",
+      "voice": "wraith"
+    },
+    "wraith_hurt": {
+      "files": [
+        "wraith_hurt.1.ogg",
+        "wraith_hurt.2.ogg"
+      ],
+      "loop": false,
+      "group": "creature",
+      "use": "Damaged for wraith",
+      "voice": "wraith"
+    },
+    "zone_created": {
+      "files": [
+        "zone_created.ogg"
+      ],
+      "loop": false,
+      "group": "battle",
+      "use": "ZoneCreated"
+    }
+  }
+}

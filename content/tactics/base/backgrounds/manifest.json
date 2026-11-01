@@ -5,7 +5,11 @@
       "dusk": "sky/dusk.png",
       "night": "sky/night.png",
       "overcast": "sky/overcast.png",
-      "ashfall": "sky/ashfall.png"
+      "ashfall": "sky/ashfall.png",
+      "swamp": "sky/swamp.png",
+      "desert": "sky/desert.png",
+      "frost": "sky/frost.png",
+      "forest": "sky/forest.png"
     },
     "note": "64 x 256 banded gradient: tile horizontally, stretch vertically by whole multiples"
   },
@@ -23,7 +27,17 @@
       "mesas_far": "ranges/mesas_far.png",
       "mesas_near": "ranges/mesas_near.png",
       "volcano_far": "ranges/volcano_far.png",
-      "volcano_near": "ranges/volcano_near.png"
+      "volcano_near": "ranges/volcano_near.png",
+      "treeline_far": "ranges/treeline_far.png",
+      "treeline_near": "ranges/treeline_near.png",
+      "dunes_far": "ranges/dunes_far.png",
+      "dunes_near": "ranges/dunes_near.png",
+      "marsh_far": "ranges/marsh_far.png",
+      "marsh_near": "ranges/marsh_near.png",
+      "castle_far": "ranges/castle_far.png",
+      "castle_near": "ranges/castle_near.png",
+      "glacier_far": "ranges/glacier_far.png",
+      "glacier_near": "ranges/glacier_near.png"
     },
     "parallax": {
       "far": 0.1,
@@ -53,16 +67,62 @@
       "peaks"
     ],
     "mirewood": [
-      "dusk",
-      "hills"
+      "swamp",
+      "marsh"
     ],
     "sunscar": [
-      "day",
-      "mesas"
+      "desert",
+      "dunes"
     ],
     "ember-keep": [
       "ashfall",
       "volcano"
+    ],
+    "night": [
+      "night",
+      "peaks"
+    ],
+    "greenhollow": [
+      "forest",
+      "treeline"
+    ],
+    "highward": [
+      "day",
+      "castle"
+    ],
+    "rimeholt": [
+      "frost",
+      "glacier"
+    ]
+  },
+  "biomes": {
+    "grassland": [
+      "day",
+      "hills"
+    ],
+    "snow": [
+      "frost",
+      "glacier"
+    ],
+    "swamp": [
+      "swamp",
+      "marsh"
+    ],
+    "desert": [
+      "desert",
+      "dunes"
+    ],
+    "volcanic": [
+      "ashfall",
+      "volcano"
+    ],
+    "forest": [
+      "forest",
+      "treeline"
+    ],
+    "courtyard": [
+      "day",
+      "castle"
     ],
     "night": [
       "night",

@@ -26,7 +26,7 @@
       },
       {
         "id": "voice_scholarly_crit_2",
-        "text": "Textbook. Literally; I've read the textbook.",
+        "text": "Exactly as the old treatises describe. With rather more shouting.",
         "mood": "happy"
       }
     ],
@@ -105,7 +105,7 @@
       },
       {
         "id": "voice_scholarly_camp_2",
-        "text": "Has anyone noticed the gaps in their memories? I'm keeping notes. In ink.",
+        "text": "Has anyone noticed how quiet the old songs go about the Hearthflame? I'm keeping notes.",
         "mood": "idle"
       }
     ]

@@ -161,4 +161,42 @@ public class NarrationQueueTests
         Assert.Empty(q.Pending);
         Assert.Null(q.Next(0));
     }
+
+    [Fact]
+    public void A_recorded_line_is_never_dropped_for_waiting()
+    {
+        var q = new NarrationQueue();
+        q.Enqueue(Line("long", 0));
+        q.Enqueue(new Narration("recorded", "tactics.narrator", NarrationPriority.Commentary, 0, Clip: "lore/audio/say_1.ogg"));
+        q.Enqueue(Line("stale", 0));
+
+        Assert.Equal("long", q.Next(0)?.Text);
+        q.Finish();
+        var dropped = new List<Narration>();
+
+        Assert.Equal("recorded", q.Next(NarrationQueue.StaleSeconds + 5, dropped)?.Text);
+        Assert.Empty(dropped);
+        q.Finish();
+        Assert.Null(q.Next(NarrationQueue.StaleSeconds + 5, dropped));
+        Assert.Equal("stale", Assert.Single(dropped).Text);
+    }
+
+    [Fact]
+    public void Clearing_takes_recorded_lines_too_as_they_never_go_stale_by_themselves()
+    {
+        var q = new NarrationQueue();
+        q.Enqueue(new Narration("playing", "tactics.narrator", NarrationPriority.Commentary, 0, Clip: "a.ogg"));
+        q.Enqueue(new Narration("waiting", "tactics.narrator", NarrationPriority.Commentary, 0, Clip: "b.ogg"));
+        q.Next(0);
+
+        q.Clear();
+
+        Assert.Null(q.Current);
+        Assert.Empty(q.Pending);
+        Assert.Null(q.Next(100));
+    }
+
+    [Fact]
+    public void A_line_with_no_clip_has_none_and_waits_as_it_always_did()
+        => Assert.Null(Line("plain", 0).Clip);
 }

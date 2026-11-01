@@ -79,6 +79,24 @@ def _foot(c: Canvas, p: Points, near: bool, slot: str, shade: int = 3, *, toe: i
         c.rect(fx - 1 - toe, fy + 1, fx - 1, fy + 1, slot, shade)
 
 
+def _knee(p: Points, near: bool) -> tuple[float, float]:
+    """Where the knee sits on a standing leg. A leg is two equal bones, so when the foot comes closer to the hip than
+    the rest length (a lifted foot, a crouch) the knee bends forward, the way the toes point; otherwise it is the
+    midpoint of a straight leg."""
+    hx, hy = p.hip_n if near else p.hip_f
+    fx, fy = p.foot_n if near else p.foot_f
+    mx, my = (hx + fx) / 2, (hy + fy) / 2
+    rest = p.build.foot_y - p.build.hip_y
+    d = math.hypot(fx - hx, fy - hy)
+    if d >= rest - 0.5:
+        return mx, my
+    bend = min(4.0, math.sqrt(rest * rest - d * d) / 2)
+    ux, uy = (fy - hy) / max(d, 1e-6), -(fx - hx) / max(d, 1e-6)      # perpendicular to the leg
+    if ux * p.near_sign < 0 or (ux == 0 and uy > 0):
+        ux, uy = -ux, -uy
+    return mx + ux * bend, my + uy * bend
+
+
 def _leg(c: Canvas, p: Points, near: bool, slot: str, *, width: int = 3, shade: int = 3) -> None:
     hx, hy = p.hip_n if near else p.hip_f
     fx, fy = p.foot_n if near else p.foot_f
@@ -95,7 +113,57 @@ def _leg(c: Canvas, p: Points, near: bool, slot: str, *, width: int = 3, shade: 
         c.thick_line(hx, hy, kx, ky, width, slot, shade)
         c.thick_line(kx, ky, fx, fy, width, slot, shade)
         return
-    c.thick_line(hx, hy, fx, fy, width, slot, shade)
+    kx, ky = _knee(p, near)
+    if (kx, ky) == ((hx + fx) / 2, (hy + fy) / 2):
+        c.thick_line(hx, hy, fx, fy, width, slot, shade)
+    else:
+        c.thick_line(hx, hy, kx, ky, width, slot, shade)
+        c.thick_line(kx, ky, fx, fy, width, slot, shade)
+
+
+# Secondary motion. A pose's `drag` says how far the loose parts trail the body; these are the rows of each layer
+# that hang free, as (pivot row, length to full drag). The renderer shears everything below the pivot sideways by
+# up to drag x and lifts or drops it by drag y, so one rule moves every hair style, cloak and hem the same way.
+_LOOSE_HEADGEAR = {"hood", "mask_hood", "wolf_pelt"}
+_LOOSE_TORSO = {"coat", "tabard", "apron", "rags", "gi", "silk_robe", "drake_robe", "motley_robe"}
+_LOOSE_CAPES = {"short_cape", "cloak", "pelt"}
+
+
+def loose_rows(layer: str, variant: str, p: Points) -> tuple[int, int, bool] | None:
+    """(pivot row, rows to full sway, follows drag y) for a layer's free-hanging part, or None if it is rigid."""
+    if layer == "hair":
+        return p.head_y0 + 6, 6, True
+    if layer == "cape" and variant in _LOOSE_CAPES:
+        return p.torso_top + 1, 12, True
+    if layer == "headgear" and variant in _LOOSE_HEADGEAR:
+        return p.head_y0 + p.build.head_h - 1, 6, True
+    if layer == "torso" and variant in _LOOSE_TORSO:
+        return p.torso_bot - 1, 8, False
+    if layer == "legs" and variant == "skirt":
+        return p.torso_bot, 10, False
+    if layer == "tail":
+        return p.torso_bot - 1, 8, False
+    return None
+
+
+def pose_key(layer: str, variant: str, pose):
+    """The pose with the fields this layer can't see reset, so frames that differ only there render once.
+    Only the body draws the face, and only loose layers (and tails) follow the drag."""
+    from dataclasses import replace
+    if layer in ("float", "shoulders"):        # these find their frame number from the exact pose
+        return pose
+    kw = {}
+    if layer != "body" and (pose.expression is not None or pose.blink):
+        kw.update(expression=None, blink=False)
+    if pose.drag != (0, 0) and layer != "tail" and not _loose_variant(layer, variant):
+        kw.update(drag=(0, 0))
+    return replace(pose, **kw) if kw else pose
+
+
+def _loose_variant(layer: str, variant: str) -> bool:
+    return (layer == "hair" or (layer == "cape" and variant in _LOOSE_CAPES)
+            or (layer == "headgear" and variant in _LOOSE_HEADGEAR) or (layer == "torso" and variant in _LOOSE_TORSO)
+            or (layer == "legs" and variant == "skirt"))
 
 
 # ------------------------------------------------------------------------------------------------------- body
@@ -158,9 +226,9 @@ def _dragon_head(c: Canvas, p: Points) -> None:
         c.rect(x1 - 2, y0 + 8, x1 + 3, y0 + 8, "skin", 1)                      # mouth line
         c.px(x1 + 2, y0 + 9, "horn", 5)                                        # a fang
         c.rect(x0 + 3, y0 + 3, x1 - 1, y0 + 3, "skin", 4)                      # brow ridge
-        hurt = p.pose.lean < 0 and p.pose.bob > 0
+        shut = p.pose.expression in ("pain", "shut")
         for ex in (x0 + 4, x0 + 8):
-            if p.pose.kneel or hurt or p.pose.blink:
+            if p.pose.kneel or shut or p.pose.blink:
                 c.px(ex, y0 + 5, "eyes", 0)
             else:
                 c.px(ex, y0 + 4, "eyes", 4)                                    # bright reptile eyes
@@ -186,7 +254,7 @@ def _skeleton(c: Canvas, p: Points) -> None:
     for near in (False, True):                       # legs
         hx, hy = p.hip_n if near else p.hip_f
         fx, fy = p.foot_n if near else p.foot_f
-        kx, ky = (hx + fx) / 2, (hy + fy) / 2
+        kx, ky = _knee(p, near)
         c.line(hx, hy, kx, ky, "skin")
         c.line(kx, ky, fx, fy, "skin")
         c.px(kx + 1, ky, "skin", 4)                   # knee
@@ -271,9 +339,9 @@ def _face(c: Canvas, p: Points) -> None:
     """Eyes, mouth and a cheek light, laid out in 3/4 view (the face sits a little screen-right). Expressions only
     move eyes and mouth: brows would sit under most fringes, so the eyes carry the mood."""
     x0, y0 = p.head_x0 + _face_dx(p), p.head_y0
-    hurt = p.pose.lean < 0 and p.pose.bob > 0
-    down = p.pose.kneel or p.pose.blink
     mood = p.pose.expression
+    hurt = mood == "pain"
+    down = p.pose.kneel or p.pose.blink or mood == "shut"
     ey = y0 + 5
     for ex in (x0 + 4, x0 + 8):
         if down:
@@ -319,6 +387,9 @@ def _face(c: Canvas, p: Points) -> None:
     elif mood == "surprised":                      # an O
         c.px(x0 + 6, my, "skin", 0)
         c.px(x0 + 6, my + 1, "skin", 0)
+    elif hurt:                                     # a grimace: teeth gritted in a wide, uneven line
+        c.rect(x0 + 5, my, x0 + 7, my, "skin", 0)
+        c.px(x0 + 7, my - 1, "skin", 1)
     elif p.build.feminine:
         c.px(x0 + 6, my, "skin", 1)
         c.px(x0 + 7, my, "skin", 2)                # fuller lips
@@ -361,7 +432,7 @@ def legs(kind: str) -> Part:
             for near in (False, True):  # plate on the shins and a knee cop
                 fx, fy = p.foot_n if near else p.foot_f
                 hx, hy = p.hip_n if near else p.hip_f
-                kx, ky = ((fx, hy) if p.pose.sit else ((hx + fx) / 2, (hy + fy) / 2))
+                kx, ky = ((fx, hy) if p.pose.sit else _knee(p, near))
                 c.thick_line(kx, ky, fx, fy - 1, 3, "metal")
                 c.rect(int(kx) - 1, int(ky) - 1, int(kx) + 1, int(ky), "metal", 4)
         elif kind == "shorts":
@@ -370,7 +441,10 @@ def legs(kind: str) -> Part:
                 fx, fy = p.foot_n if near else p.foot_f
                 if p.pose.sit:
                     fy = hy
-                c.thick_line(hx, hy, (hx * 2 + fx) / 3, (hy * 2 + fy) / 3, 3, "cloth2")
+                    c.thick_line(hx, hy, (hx * 2 + fx) / 3, (hy * 2 + fy) / 3, 3, "cloth2")
+                else:
+                    kx, ky = _knee(p, near)
+                    c.thick_line(hx, hy, hx + (kx - hx) * 0.66, hy + (ky - hy) * 0.66, 3, "cloth2")
             c.polygon(_hips(p), "cloth2")
         elif kind == "skirt":  # robe skirt: a trapezoid to the ankles that follows the feet
             b = p.build
@@ -395,10 +469,12 @@ def legs(kind: str) -> Part:
                     c.thick_line(hx, hy, hx + 2 * p.near_sign, hy + 2, 4, "cloth2")
                     continue
                 else:
-                    kx, ky = hx + (fx - hx) * 0.45, hy + (fy - hy) * 0.45
+                    nx, ny = _knee(p, near)
+                    kx, ky = hx + (nx - hx) * 0.9, hy + (ny - hy) * 0.9
                     c.thick_line(hx, hy, kx, ky, 4, "cloth2")
-                    c.thick_line(hx + (fx - hx) * 0.7, hy + (fy - hy) * 0.7, fx, fy - 1, 3, "leather")
-                    sy0, sy1 = int(hy + (fy - hy) * 0.7), int(fy) - 1
+                    wx, wy = nx + (fx - nx) * 0.4, ny + (fy - ny) * 0.4
+                    c.thick_line(wx, wy, fx, fy - 1, 3, "leather")
+                    sy0, sy1 = int(wy), int(fy) - 1
                 lid = c.slots.id("leather")
                 for y in range(sy0, sy1 + 1):          # the wrapping: alternate lit and shadowed turns
                     for x in range(max(0, int(fx) - 3), min(c.w, int(fx) + 4)):
@@ -762,7 +838,7 @@ def cape(kind: str) -> Part:
         if kind == "pelt":
             length = p.torso_bot + 4
         cx = p.torso_cx
-        sway = (p.foot_f[0] - p.mx(16 - 1)) * 0 + (1 if p.pose.bob else 0)
+        sway = 0                           # follow-through comes from the pose's drag (see loose_rows)
         w_top = b.half_w + 1
         w_bot = b.half_w + (3 if kind == "cloak" else 2)
         c.polygon([(cx - w_top + 0.5, top), (cx + w_top - 0.5, top),
@@ -828,11 +904,18 @@ _POSE_INDEX: dict = {}
 def _frame_phase(p: Points) -> int:
     """Which frame of its animation this pose is (the first animation that uses it). Floating pieces use it to
     drift and orbit from frame to frame, since a part only sees the pose, not the clock."""
+    return _phase(p)[0]
+
+
+def _phase(p: Points) -> tuple[int, int]:
+    """(frame index, frame count) of the first animation that uses this pose, so a looping orbit can close its
+    circle whatever the loop's length."""
     if not _POSE_INDEX:
         for name in ANIM_ORDER:
-            for i, pose in enumerate(ANIMS[name][2]):
-                _POSE_INDEX.setdefault(pose, i)
-    return _POSE_INDEX.get(p.pose, 0)
+            poses = ANIMS[name][2]
+            for i, pose in enumerate(poses):
+                _POSE_INDEX.setdefault(pose, (i, len(poses)))
+    return _POSE_INDEX.get(p.pose, (0, 4))
 
 
 def _hover(p: Points) -> int:
@@ -923,13 +1006,14 @@ def float_(kind: str) -> Part:
 def _chaos_orb(c: Canvas, p: Points) -> None:
     b = p.build
     s = -p.near_sign                                                # the far side
-    ph = _frame_phase(p)
+    ph, count = _phase(p)
+    step = 360 / count if count >= 3 else 90                        # one orbit per loop, however long the loop
     ox = p.head_cx + s * (b.head_w // 2 + 5)
     ox = max(5, min(FRAME_W - 6, ox))
     oy = p.head_y0 + 3 - 2 * _hover(p) + (3 if p.pose.kneel else 0)
     motes = []
     for k, (sl, sh) in enumerate((("trim", 5), ("cloth1", 5))):     # two motes on a tilted orbit
-        a = math.radians(ph * 90 + k * 180 + 20)
+        a = math.radians(ph * step + k * 180 + 20)
         mx_, my_ = ox + 0.5 + math.cos(a) * 5.2, oy + math.sin(a) * 2.4 - math.cos(a) * 1.4
         motes.append((math.sin(a) < 0, mx_, my_, -math.sin(a), sl, sh))
     for behind, mx_, my_, _t, sl, sh in motes:
@@ -942,7 +1026,7 @@ def _chaos_orb(c: Canvas, p: Points) -> None:
     swirl = [("cloth1", 4), ("cloth2", 4), ("trim", 4), ("cloth1", 5)]
     sl, sh = swirl[ph % 4]
     for i in range(3):                                              # a streak of the wrong colour churning inside
-        a = math.radians(ph * 90 + 200 + i * 40)
+        a = math.radians(ph * step + 200 + i * 40)
         c.px(ox + 0.5 + math.cos(a) * 1.8, oy + 0.5 + math.sin(a) * 1.8, sl, sh)
     core = [("trim", 5), ("magic", 5), ("cloth2", 5), ("trim", 5)]
     c.rect(ox, oy, ox + 1, oy, *core[ph % 4])                       # the core flickers between colours
@@ -1205,7 +1289,7 @@ def tail(kind: str) -> Part:
     lower back and swing out to the far side; in the back view (mirrored) that puts them over the legs."""
     def draw(c: Canvas, p: Points) -> None:
         bx, by = p.mx(16), p.torso_bot - 1
-        sway = p.pose.bob + (1 if p.pose.lean > 0 else 0)
+        sway = max(-1, min(2, p.pose.drag[1] + (1 if p.pose.lean > 0 else 0)))
         if kind == "devil":
             path = [(0, 0), (-2, 2), (-4, 4), (-6, 5), (-8, 5), (-9, 4), (-10, 2 + sway)]
             for (ax, ay), (bx2, by2) in zip(path, path[1:]):

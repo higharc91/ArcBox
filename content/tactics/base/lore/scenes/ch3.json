@@ -1,0 +1,2422 @@
+{
+  "scenes": [
+    {
+      "id": "ch3_guest_right",
+      "beat": "ch3_guest_right",
+      "title": "The Tent of Cool Water",
+      "cast": [
+        "narrator",
+        "lark"
+      ],
+      "start": "arrive",
+      "nodes": [
+        {
+          "id": "arrive",
+          "lines": [
+            {
+              "id": "ch3_guest_right_arrive_1",
+              "speaker": "narrator",
+              "text": "Noon in the Sunscar. The sand has turned to glass in places, and the light comes up off it as hard as it comes down.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_guest_right_arrive_2",
+              "speaker": "narrator",
+              "text": "At the Tent of Cool Water, a veiled elder waits at the flap, holding a clay bowl in both hands.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_guest_right_arrive_3",
+              "speaker": "lark",
+              "text": "Look who crossed the desert. I'm Lark, the songkeeper. I was beginning to think I'd have to give you a sad ending.",
+              "mood": "happy",
+              "direction": "delighted, half singing it"
+            },
+            {
+              "id": "ch3_guest_right_arrive_4",
+              "speaker": "lark",
+              "text": "Quickly, before she's offended. Drink half the water. Pour the rest on the sand, for the farms that burned.",
+              "mood": "idle",
+              "direction": "a stage whisper"
+            }
+          ],
+          "options": [
+            {
+              "id": "drink",
+              "label": "We drink half, and pour the rest out.",
+              "to": "law"
+            },
+            {
+              "id": "sing",
+              "label": "I'll sing the guest-song Lark taught me.",
+              "to": "sing",
+              "tags": {
+                "background": [
+                  "entertainer"
+                ]
+              }
+            },
+            {
+              "id": "why",
+              "label": "Why pour it away? Water's precious out here.",
+              "to": "why"
+            }
+          ]
+        },
+        {
+          "id": "why",
+          "lines": [
+            {
+              "id": "ch3_guest_right_why_1",
+              "speaker": "lark",
+              "text": "That's the point. You give the sand something you can't spare. Then they give you everything they have.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_guest_right_why_2",
+              "speaker": "narrator",
+              "text": "Half the water goes to the party and half to the sand. The elder watches until the last drop sinks into the glass.",
+              "mood": "idle"
+            }
+          ],
+          "next": "law"
+        },
+        {
+          "id": "sing",
+          "lines": [
+            {
+              "id": "ch3_guest_right_sing_1",
+              "speaker": "narrator",
+              "text": "The old tune rises over the tents and heads turn. Somewhere behind the elder's veil, someone starts to hum along.",
+              "mood": "happy"
+            },
+            {
+              "id": "ch3_guest_right_sing_2",
+              "speaker": "lark",
+              "text": "Every note. Well, you mangled the second verse, but only a little.",
+              "mood": "happy",
+              "direction": "proud, and trying to hide it"
+            }
+          ],
+          "next": "law"
+        },
+        {
+          "id": "law",
+          "lines": [
+            {
+              "id": "ch3_guest_right_law_1",
+              "speaker": "narrator",
+              "text": "The elder lowers the bowl and speaks the law of the tent, slowly, so that strangers can follow.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_guest_right_law_2",
+              "speaker": "lark",
+              "text": "While you sleep under this cloth, every Scarwalker in the Sunscar will bleed for you.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_guest_right_law_3",
+              "speaker": "lark",
+              "text": "Break the peace inside this camp, and no Scarwalker will ever speak your names again. Not your children's, either.",
+              "mood": "idle",
+              "direction": "for once, entirely serious"
+            }
+          ],
+          "next": "news"
+        },
+        {
+          "id": "news",
+          "lines": [
+            {
+              "id": "ch3_guest_right_news_1",
+              "speaker": "narrator",
+              "text": "Over flatbread and bitter tea, the elder tells the party what the desert knows, and Lark puts it into the valley tongue.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_guest_right_news_2",
+              "speaker": "lark",
+              "text": "The only road to the crater crosses the canyon, and the only bridge belongs to a goblin called Vorga. He took it in spring.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_guest_right_news_3",
+              "speaker": "lark",
+              "text": "His Host lets the Scarwalker caravans over to the wells, then keeps the water. A toll, he calls it. The elder has another word.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_guest_right_news_4",
+              "speaker": "narrator",
+              "text": "Across the fire, a hobgoblin in a sun-painted sash sips from the same clay bowl, and pretends not to listen.",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch3_guest_right_news_5",
+              "speaker": "lark",
+              "text": "Yes, he's one of Vorga's. Yes, he's a guest. No, you can't. Let the poor thing finish his tea.",
+              "mood": "happy",
+              "direction": "quick, amused, a hand on someone's arm"
+            }
+          ],
+          "options": [
+            {
+              "id": "vorga",
+              "label": "Tell us about Vorga.",
+              "to": "vorga"
+            },
+            {
+              "id": "message",
+              "label": "Ask the hobgoblin to take Vorga a message.",
+              "to": "message"
+            },
+            {
+              "id": "others",
+              "label": "Has anyone else come this way?",
+              "to": "others"
+            },
+            {
+              "id": "clans",
+              "label": "I know the hill clans. A war band isn't a clan.",
+              "to": "clans",
+              "tags": {
+                "race": [
+                  "half_orc"
+                ]
+              }
+            },
+            {
+              "id": "rest",
+              "label": "We've heard enough. We sleep, and go at dawn.",
+              "to": "night"
+            }
+          ]
+        },
+        {
+          "id": "vorga",
+          "lines": [
+            {
+              "id": "ch3_guest_right_vorga_1",
+              "speaker": "lark",
+              "text": "Young, loud, very fond of his own voice. He sends the Scarwalkers a song every new moon about how he's going to eat them.",
+              "mood": "happy"
+            },
+            {
+              "id": "ch3_guest_right_vorga_2",
+              "speaker": "lark",
+              "text": "Terrible song. Good rhythm, though. And under all the shouting, he's angrier than anyone I've ever met.",
+              "mood": "idle",
+              "direction": "the joke fading as it goes"
+            }
+          ],
+          "options": [
+            {
+              "id": "spared",
+              "label": "Does he know we made peace with his grandmother?",
+              "to": "v_spared",
+              "requires": [
+                "ch1_skarrow_spared"
+              ]
+            },
+            {
+              "id": "slain",
+              "label": "Does he know what happened at the ford?",
+              "to": "v_slain",
+              "requires": [
+                "ch1_skarrow_slain"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "v_spared",
+          "lines": [
+            {
+              "id": "ch3_guest_right_v_spared_1",
+              "speaker": "lark",
+              "text": "He knows. He's telling the whole canyon she sold the clan for a few sacks of grain, and that you're holding the leash.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_guest_right_v_spared_2",
+              "speaker": "lark",
+              "text": "The lads who fought you at the ford were his. The ones who made it home haven't stopped talking about you.",
+              "mood": "surprised"
+            }
+          ],
+          "next": "more"
+        },
+        {
+          "id": "v_slain",
+          "lines": [
+            {
+              "id": "ch3_guest_right_v_slain_1",
+              "speaker": "lark",
+              "text": "He knows. He doesn't sing about the Scarwalkers any more. All the new verses are about you.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch3_guest_right_v_slain_2",
+              "speaker": "lark",
+              "text": "Whatever he thought of her, she was his grandmother. Nobody else was allowed to kill her.",
+              "mood": "sad",
+              "direction": "quiet, not a performance"
+            }
+          ],
+          "next": "more"
+        },
+        {
+          "id": "message",
+          "lines": [
+            {
+              "id": "ch3_guest_right_message_1",
+              "speaker": "narrator",
+              "text": "The hobgoblin hears the party out, sets down his bowl, and answers in a low, careful voice.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_guest_right_message_2",
+              "speaker": "lark",
+              "text": "He says Vorga will be delighted to meet you. He says to bring rope. He seems to think that's funny.",
+              "mood": "surprised"
+            }
+          ],
+          "next": "more"
+        },
+        {
+          "id": "others",
+          "lines": [
+            {
+              "id": "ch3_guest_right_others_1",
+              "speaker": "lark",
+              "text": "A Kindled caravan, nine days ago, under a white cloth. The elder gave them water, because the law says she must.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_guest_right_others_2",
+              "speaker": "lark",
+              "text": "Their leader asked after you by name. Lovely voice. Kind eyes. I didn't like how much I liked her.",
+              "mood": "idle",
+              "direction": "uneasy, trying to make it a joke"
+            }
+          ],
+          "next": "more"
+        },
+        {
+          "id": "clans",
+          "lines": [
+            {
+              "id": "ch3_guest_right_clans_1",
+              "speaker": "lark",
+              "text": "No. A clan has grandmothers. Vorga's Host is everyone who got tired of waiting for the grandmothers.",
+              "mood": "idle"
+            }
+          ],
+          "next": "more"
+        },
+        {
+          "id": "more",
+          "lines": [
+            {
+              "id": "ch3_guest_right_more_1",
+              "speaker": "lark",
+              "text": "Anything else, before the tea runs out?",
+              "mood": "idle"
+            }
+          ],
+          "options": [
+            {
+              "id": "vorga",
+              "label": "Tell us about Vorga.",
+              "to": "vorga"
+            },
+            {
+              "id": "message",
+              "label": "Ask the hobgoblin to take Vorga a message.",
+              "to": "message"
+            },
+            {
+              "id": "others",
+              "label": "Has anyone else come this way?",
+              "to": "others"
+            },
+            {
+              "id": "clans",
+              "label": "I know the hill clans. A war band isn't a clan.",
+              "to": "clans",
+              "tags": {
+                "race": [
+                  "half_orc"
+                ]
+              }
+            },
+            {
+              "id": "rest",
+              "label": "We've heard enough. We sleep, and go at dawn.",
+              "to": "night"
+            }
+          ]
+        },
+        {
+          "id": "night",
+          "lines": [
+            {
+              "id": "ch3_guest_right_night_1",
+              "speaker": "narrator",
+              "text": "Night comes down cold and fast. Under the Tent of Cool Water, for the first time in weeks, the party sleeps without a watch.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_guest_right_night_2",
+              "speaker": "lark",
+              "text": "Nothing in the Sunscar would dare touch you tonight. Tomorrow is another song.",
+              "mood": "idle",
+              "direction": "drowsy, fond"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch3_skarrow_messenger",
+      "beat": "ch3_skarrow_messenger",
+      "title": "The Rest of the Song",
+      "cast": [
+        "narrator",
+        "mother_skarrow",
+        "lark"
+      ],
+      "start": "runner",
+      "nodes": [
+        {
+          "id": "runner",
+          "lines": [
+            {
+              "id": "ch3_skarrow_messenger_runner_1",
+              "speaker": "narrator",
+              "text": "Before dawn, a goblin boy staggers into camp, lips cracked, asking in the hill tongue for the people who brought the grain.",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch3_skarrow_messenger_runner_2",
+              "speaker": "narrator",
+              "text": "He drinks, then shuts his eyes and gives his message the way Mother Skarrow made him learn it: slowly, in her own words.",
+              "mood": "idle"
+            }
+          ],
+          "next": "song"
+        },
+        {
+          "id": "song",
+          "lines": [
+            {
+              "id": "ch3_skarrow_messenger_song_1",
+              "speaker": "mother_skarrow",
+              "text": "You fed my children, valley people. So I give you what I do not give to strangers. Not all of it. The last verse stays with the clan.",
+              "mood": "idle",
+              "direction": "her words through the runner; her slow, deliberate cadence"
+            },
+            {
+              "id": "ch3_skarrow_messenger_song_2",
+              "speaker": "mother_skarrow",
+              "text": "Seven went over the Greywall in the long winters, and seven came back with fire. They came back running.",
+              "mood": "idle",
+              "direction": "half chanted, as a song is remembered"
+            },
+            {
+              "id": "ch3_skarrow_messenger_song_3",
+              "speaker": "mother_skarrow",
+              "text": "The song says the fire had a home on the far side of the mountains. The seven took it. It was not theirs to take.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch3_skarrow_messenger_song_4",
+              "speaker": "mother_skarrow",
+              "text": "Your Wardens sang that it was given. We never warmed our hands at it, so we never forgot. It was stolen.",
+              "mood": "angry",
+              "direction": "dry, unbending"
+            },
+            {
+              "id": "ch3_skarrow_messenger_song_5",
+              "speaker": "lark",
+              "text": "That's the verse before the last. I've been looking for it for twenty years.",
+              "mood": "surprised",
+              "direction": "barely breathing"
+            },
+            {
+              "id": "ch3_skarrow_messenger_song_6",
+              "speaker": "lark",
+              "text": "Seven came home, my version goes. Hers says they came back running. Same seven, I'd wager, seen from different doorsteps.",
+              "mood": "idle",
+              "direction": "half sung, then thoughtful"
+            }
+          ],
+          "sets": [
+            "truth_crossing"
+          ],
+          "options": [
+            {
+              "id": "more",
+              "label": "Is there more? Does it say who they took it from?",
+              "to": "more"
+            },
+            {
+              "id": "dream",
+              "label": "I dream of a fire. I think this song is about where I came from.",
+              "to": "dream",
+              "tags": {
+                "background": [
+                  "outlander"
+                ]
+              }
+            },
+            {
+              "id": "bridge",
+              "label": "I was on the ford bridge that day. Tell her it was our side that shot first.",
+              "to": "soldier",
+              "tags": {
+                "background": [
+                  "soldier"
+                ]
+              }
+            },
+            {
+              "id": "go_on",
+              "label": "Go on. What else did she say?",
+              "to": "grandson"
+            }
+          ]
+        },
+        {
+          "id": "more",
+          "lines": [
+            {
+              "id": "ch3_skarrow_messenger_more_1",
+              "speaker": "narrator",
+              "text": "The boy shakes his head. Who they took it from is in the last verse, he says, and the last verse is not his to carry.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_skarrow_messenger_more_2",
+              "speaker": "lark",
+              "text": "Of course not. I'd keep it too, if it were mine.",
+              "mood": "sad",
+              "direction": "laughing at themself, a little hurt"
+            }
+          ],
+          "next": "grandson"
+        },
+        {
+          "id": "dream",
+          "lines": [
+            {
+              "id": "ch3_skarrow_messenger_dream_1",
+              "speaker": "lark",
+              "text": "Then someone else will want very badly to hear that dream. Be careful who you tell it to.",
+              "mood": "idle",
+              "direction": "suddenly quiet, not playing"
+            }
+          ],
+          "next": "grandson"
+        },
+        {
+          "id": "soldier",
+          "lines": [
+            {
+              "id": "ch3_skarrow_messenger_soldier_1",
+              "speaker": "narrator",
+              "text": "The boy studies the soldier for a long moment. Then he nods, once, as if he will carry that home too.",
+              "mood": "sad"
+            }
+          ],
+          "next": "grandson"
+        },
+        {
+          "id": "grandson",
+          "lines": [
+            {
+              "id": "ch3_skarrow_messenger_grandson_1",
+              "speaker": "narrator",
+              "text": "The boy opens his eyes. The last part, he says, is not the song.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_skarrow_messenger_grandson_2",
+              "speaker": "mother_skarrow",
+              "text": "My grandson Vorga holds the bridge you need. He is a fool and a thief, and he is mine.",
+              "mood": "sad",
+              "direction": "through the runner; the courtesy slips, and this is a grandmother"
+            },
+            {
+              "id": "ch3_skarrow_messenger_grandson_3",
+              "speaker": "mother_skarrow",
+              "text": "Do not kill him, if you can help it. Beat him if you must. Then send him home to me.",
+              "mood": "sad"
+            }
+          ],
+          "options": [
+            {
+              "id": "try",
+              "label": "Tell her we'll try.",
+              "to": "end"
+            },
+            {
+              "id": "promise",
+              "label": "Tell her he'll come home. We promise.",
+              "to": "promise"
+            },
+            {
+              "id": "honest",
+              "label": "We can't promise. That's for Vorga to decide, not us.",
+              "to": "honest"
+            }
+          ]
+        },
+        {
+          "id": "promise",
+          "lines": [
+            {
+              "id": "ch3_skarrow_messenger_promise_1",
+              "speaker": "lark",
+              "text": "Big promise. Goblins remember promises. So do songs.",
+              "mood": "idle"
+            }
+          ],
+          "next": "end"
+        },
+        {
+          "id": "honest",
+          "lines": [
+            {
+              "id": "ch3_skarrow_messenger_honest_1",
+              "speaker": "lark",
+              "text": "Honest. I think she'll like that better than a promise.",
+              "mood": "idle"
+            }
+          ],
+          "next": "end"
+        },
+        {
+          "id": "end",
+          "lines": [
+            {
+              "id": "ch3_skarrow_messenger_end_1",
+              "speaker": "narrator",
+              "text": "The boy repeats it twice to be sure he has it. Then he curls up by the fire, asleep before his tea is cold.",
+              "mood": "happy"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch3_bridge_spared",
+      "beat": "ch3_the_bridge",
+      "title": "Vorga's Bridge",
+      "requires": [
+        "ch1_skarrow_spared"
+      ],
+      "cast": [
+        "narrator",
+        "vorga"
+      ],
+      "start": "approach",
+      "nodes": [
+        {
+          "id": "approach",
+          "lines": [
+            {
+              "id": "ch3_bridge_spared_approach_1",
+              "speaker": "narrator",
+              "text": "The canyon road ends at a bridge of rope and old timber. On the far side stands a wall of shields painted with suns.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_bridge_spared_approach_2",
+              "speaker": "narrator",
+              "text": "A goblin in a chieftain's coat three sizes too big strolls out to the end of the bridge and throws his arms wide.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_bridge_spared_approach_3",
+              "speaker": "vorga",
+              "text": "The grain-carriers! Grandmother's new friends! Did she send you all this way to ask me nicely?",
+              "mood": "happy",
+              "direction": "big and theatrical, playing to his warband"
+            },
+            {
+              "id": "ch3_bridge_spared_approach_4",
+              "speaker": "vorga",
+              "text": "My lads at the ford said you fought well. The ones who came back said it, anyway.",
+              "mood": "angry",
+              "direction": "the grin stays; the voice drops"
+            }
+          ],
+          "options": [
+            {
+              "id": "home",
+              "label": "She wants you home, Vorga.",
+              "to": "home"
+            },
+            {
+              "id": "cross",
+              "label": "We need to cross. We're not here for you.",
+              "to": "cross"
+            },
+            {
+              "id": "share",
+              "label": "Stand aside, and let Emberwick prove it can share.",
+              "check": {
+                "skill": "persuasion",
+                "dc": 15,
+                "pass": "share_pass",
+                "fail": "share_fail"
+              }
+            },
+            {
+              "id": "first",
+              "label": "I was on the ford bridge. It was our side that shot first.",
+              "to": "first",
+              "tags": {
+                "background": [
+                  "soldier"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "home",
+          "lines": [
+            {
+              "id": "ch3_bridge_spared_home_1",
+              "speaker": "vorga",
+              "text": "Home to what? A hill full of thank-yous and a third of a sack each? She bargains, and the little ones get thinner.",
+              "mood": "angry"
+            },
+            {
+              "id": "ch3_bridge_spared_home_2",
+              "speaker": "vorga",
+              "text": "I buried three cousins while she was being reasonable. Tell her I love her. Tell her she's wrong.",
+              "mood": "sad",
+              "direction": "fast, before he can stop himself"
+            }
+          ],
+          "next": "fight"
+        },
+        {
+          "id": "cross",
+          "lines": [
+            {
+              "id": "ch3_bridge_spared_cross_1",
+              "speaker": "vorga",
+              "text": "Everyone's here for me. It's the only bridge! The toll is everything you're carrying, and your boots.",
+              "mood": "happy"
+            },
+            {
+              "id": "ch3_bridge_spared_cross_2",
+              "speaker": "vorga",
+              "text": "No, keep the boots. I'm feeling generous.",
+              "mood": "happy",
+              "direction": "laughing at his own joke"
+            }
+          ],
+          "next": "fight"
+        },
+        {
+          "id": "share_pass",
+          "lines": [
+            {
+              "id": "ch3_bridge_spared_share_pass_1",
+              "speaker": "narrator",
+              "text": "For a breath Vorga doesn't answer. Behind him, the Host's warriors glance at one another.",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch3_bridge_spared_share_pass_2",
+              "speaker": "vorga",
+              "text": "If I let you over, they stop believing me. And then what am I? A hungry boy on a bridge.",
+              "mood": "sad",
+              "direction": "quiet, not meant to carry"
+            }
+          ],
+          "next": "fight"
+        },
+        {
+          "id": "share_fail",
+          "lines": [
+            {
+              "id": "ch3_bridge_spared_share_fail_1",
+              "speaker": "vorga",
+              "text": "Lovely speech. Emberwick makes lovely speeches. Then it locks the granary and makes them again next year.",
+              "mood": "angry"
+            }
+          ],
+          "next": "fight"
+        },
+        {
+          "id": "first",
+          "lines": [
+            {
+              "id": "ch3_bridge_spared_first_1",
+              "speaker": "vorga",
+              "text": "Huh. That's the first time anyone from the valley has said it out loud.",
+              "mood": "surprised",
+              "direction": "caught off guard, the swagger gone for a moment"
+            },
+            {
+              "id": "ch3_bridge_spared_first_2",
+              "speaker": "vorga",
+              "text": "Changes nothing. But I'll remember you said it.",
+              "mood": "idle"
+            }
+          ],
+          "next": "fight"
+        },
+        {
+          "id": "fight",
+          "lines": [
+            {
+              "id": "ch3_bridge_spared_fight_1",
+              "speaker": "narrator",
+              "text": "Vorga raises his spear, and up on the ridge the Host's drums begin.",
+              "mood": "idle"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch3_bridge_slain",
+      "beat": "ch3_the_bridge",
+      "title": "Vorga's Bridge",
+      "requires": [
+        "ch1_skarrow_slain"
+      ],
+      "cast": [
+        "narrator",
+        "vorga"
+      ],
+      "start": "approach",
+      "nodes": [
+        {
+          "id": "approach",
+          "lines": [
+            {
+              "id": "ch3_bridge_slain_approach_1",
+              "speaker": "narrator",
+              "text": "The canyon road ends at a bridge of rope and old timber. On the far side stands a wall of shields painted with suns.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_bridge_slain_approach_2",
+              "speaker": "narrator",
+              "text": "A goblin in a chieftain's coat three sizes too big walks out to the end of the bridge, and stops, and stares.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_bridge_slain_approach_3",
+              "speaker": "vorga",
+              "text": "Oh, it's you. I practised a whole speech for this. Give me a moment, it's a good one.",
+              "mood": "happy",
+              "direction": "too bright, brittle"
+            },
+            {
+              "id": "ch3_bridge_slain_approach_4",
+              "speaker": "vorga",
+              "text": "She was chief for forty winters. You ended it in an afternoon, on a bridge, over grain.",
+              "mood": "angry",
+              "direction": "the speech falls apart into real anger"
+            }
+          ],
+          "options": [
+            {
+              "id": "sorry",
+              "label": "We're sorry about your grandmother.",
+              "to": "sorry"
+            },
+            {
+              "id": "cross",
+              "label": "We need the bridge. That's all.",
+              "to": "cross"
+            },
+            {
+              "id": "threat",
+              "label": "Stand aside, or go the way she did.",
+              "check": {
+                "skill": "intimidation",
+                "dc": 16,
+                "pass": "threat_pass",
+                "fail": "threat_fail"
+              }
+            },
+            {
+              "id": "first",
+              "label": "I was on the ford bridge. It was our side that shot first.",
+              "to": "first",
+              "tags": {
+                "background": [
+                  "soldier"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "sorry",
+          "lines": [
+            {
+              "id": "ch3_bridge_slain_sorry_1",
+              "speaker": "vorga",
+              "text": "Sorry! Hear that, everyone? They're sorry!",
+              "mood": "happy",
+              "direction": "playing to the Host, laughing too loud"
+            },
+            {
+              "id": "ch3_bridge_slain_sorry_2",
+              "speaker": "vorga",
+              "text": "Keep it. Sorry doesn't feed anyone. She tried words for forty winters, and look where it got her.",
+              "mood": "angry"
+            }
+          ],
+          "next": "fight"
+        },
+        {
+          "id": "cross",
+          "lines": [
+            {
+              "id": "ch3_bridge_slain_cross_1",
+              "speaker": "vorga",
+              "text": "That's all, they say! The road, the grain, the hills, my grandmother. That's all.",
+              "mood": "angry",
+              "direction": "mock cheer that cracks"
+            }
+          ],
+          "next": "fight"
+        },
+        {
+          "id": "threat_pass",
+          "lines": [
+            {
+              "id": "ch3_bridge_slain_threat_pass_1",
+              "speaker": "narrator",
+              "text": "A few spears on the far bank waver. Vorga sees it, and laughs louder to cover it.",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch3_bridge_slain_threat_pass_2",
+              "speaker": "vorga",
+              "text": "See that, lads? Take a good look. That's what Emberwick looks like up close.",
+              "mood": "angry"
+            }
+          ],
+          "next": "fight"
+        },
+        {
+          "id": "threat_fail",
+          "lines": [
+            {
+              "id": "ch3_bridge_slain_threat_fail_1",
+              "speaker": "vorga",
+              "text": "There's the valley talking. Threats, then grain, then threats again. At least mine are honest.",
+              "mood": "happy"
+            }
+          ],
+          "next": "fight"
+        },
+        {
+          "id": "first",
+          "lines": [
+            {
+              "id": "ch3_bridge_slain_first_1",
+              "speaker": "vorga",
+              "text": "Your side shot first. Then your side came back and finished it. Do you want a medal for remembering?",
+              "mood": "angry"
+            }
+          ],
+          "next": "fight"
+        },
+        {
+          "id": "fight",
+          "lines": [
+            {
+              "id": "ch3_bridge_slain_fight_1",
+              "speaker": "narrator",
+              "text": "He lifts his grandmother's carved spear, and up on the ridge the Host's drums begin.",
+              "mood": "idle"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch3_vorga_shallows_spared",
+      "beat": "ch3_vorgas_fate",
+      "title": "In the Shallows",
+      "requires": [
+        "ch1_skarrow_spared"
+      ],
+      "cast": [
+        "narrator",
+        "vorga"
+      ],
+      "start": "shallows",
+      "nodes": [
+        {
+          "id": "shallows",
+          "lines": [
+            {
+              "id": "ch3_vorga_shallows_spared_shallows_1",
+              "speaker": "narrator",
+              "text": "The bridge is gone. Below the stepping stones, Vorga kneels in the shallows, spear snapped, the river pulling at his coat.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_vorga_shallows_spared_shallows_2",
+              "speaker": "vorga",
+              "text": "Ha. Well. That went about as well as the bridge did.",
+              "mood": "happy",
+              "direction": "winded, laughing, losing"
+            },
+            {
+              "id": "ch3_vorga_shallows_spared_shallows_3",
+              "speaker": "vorga",
+              "text": "Go on. The Host is watching from the ridge. At least make it look good.",
+              "mood": "idle"
+            }
+          ],
+          "options": [
+            {
+              "id": "ropes",
+              "label": "Why cut the ropes? You nearly drowned your own warriors.",
+              "to": "ropes"
+            },
+            {
+              "id": "asked",
+              "label": "Your grandmother asked us to spare you.",
+              "to": "asked"
+            },
+            {
+              "id": "raids",
+              "label": "Let you go, and you'll raid the river towns before winter.",
+              "to": "raids",
+              "tags": {
+                "background": [
+                  "folk_hero"
+                ]
+              }
+            },
+            {
+              "id": "decide",
+              "label": "Enough. We'll decide.",
+              "to": "vote"
+            }
+          ]
+        },
+        {
+          "id": "ropes",
+          "lines": [
+            {
+              "id": "ch3_vorga_shallows_spared_ropes_1",
+              "speaker": "vorga",
+              "text": "Because it was mine. If I can't hold it, nobody walks over it smiling. Not you, not the Kindled, nobody.",
+              "mood": "angry"
+            }
+          ],
+          "next": "wait"
+        },
+        {
+          "id": "asked",
+          "lines": [
+            {
+              "id": "ch3_vorga_shallows_spared_asked_1",
+              "speaker": "vorga",
+              "text": "She sent you. Of course she did. She always sends someone else to carry things.",
+              "mood": "hurt"
+            },
+            {
+              "id": "ch3_vorga_shallows_spared_asked_2",
+              "speaker": "vorga",
+              "text": "Is she eating? Tell me she's eating, at least.",
+              "mood": "sad",
+              "direction": "very quietly; no audience for this one"
+            }
+          ],
+          "next": "wait"
+        },
+        {
+          "id": "raids",
+          "lines": [
+            {
+              "id": "ch3_vorga_shallows_spared_raids_1",
+              "speaker": "vorga",
+              "text": "Only the towns that lock their granaries. Which, I'll grant you, is all of them.",
+              "mood": "happy"
+            }
+          ],
+          "next": "wait"
+        },
+        {
+          "id": "wait",
+          "lines": [
+            {
+              "id": "ch3_vorga_shallows_spared_wait_1",
+              "speaker": "vorga",
+              "text": "Take your time. I'm not going anywhere. Mostly because of the leg.",
+              "mood": "happy",
+              "direction": "wincing through the grin"
+            }
+          ],
+          "options": [
+            {
+              "id": "ropes",
+              "label": "Why cut the ropes? You nearly drowned your own warriors.",
+              "to": "ropes"
+            },
+            {
+              "id": "asked",
+              "label": "Your grandmother asked us to spare you.",
+              "to": "asked"
+            },
+            {
+              "id": "raids",
+              "label": "Let you go, and you'll raid the river towns before winter.",
+              "to": "raids",
+              "tags": {
+                "background": [
+                  "folk_hero"
+                ]
+              }
+            },
+            {
+              "id": "decide",
+              "label": "Enough. We'll decide.",
+              "to": "vote"
+            }
+          ]
+        },
+        {
+          "id": "vote",
+          "lines": [
+            {
+              "id": "ch3_vorga_shallows_spared_vote_1",
+              "speaker": "narrator",
+              "text": "Up on the ridge the Host watches in silence. Vorga waits in the river, still grinning, water to his waist.",
+              "mood": "idle"
+            }
+          ],
+          "vote": true,
+          "options": [
+            {
+              "id": "spare",
+              "label": "Send him home to his grandmother.",
+              "to": "spare",
+              "choice": "ch3_spare_vorga"
+            },
+            {
+              "id": "kill",
+              "label": "End it here.",
+              "to": "kill",
+              "choice": "ch3_kill_vorga"
+            }
+          ]
+        },
+        {
+          "id": "spare",
+          "lines": [
+            {
+              "id": "ch3_vorga_shallows_spared_spare_1",
+              "speaker": "vorga",
+              "text": "Home. Tail in the river and a valley mercy on my back. She'll never let me forget it.",
+              "mood": "happy",
+              "direction": "laughing, and his voice cracks"
+            },
+            {
+              "id": "ch3_vorga_shallows_spared_spare_2",
+              "speaker": "vorga",
+              "text": "I'll remember who did this. I haven't decided yet whether that's a threat.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_vorga_shallows_spared_spare_3",
+              "speaker": "narrator",
+              "text": "By nightfall the Host's fires on the ridge go out one by one, as the war band breaks up and drifts home to the hills.",
+              "mood": "sad"
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "kill",
+          "lines": [
+            {
+              "id": "ch3_vorga_shallows_spared_kill_1",
+              "speaker": "vorga",
+              "text": "Tell her I held it longer than anyone thought I would.",
+              "mood": "idle",
+              "direction": "still smiling; the last laugh doesn't come"
+            },
+            {
+              "id": "ch3_vorga_shallows_spared_kill_2",
+              "speaker": "narrator",
+              "text": "The Host scatters into the canyons. In the hills above the ford, a runner will carry this home too.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch3_vorga_shallows_spared_kill_3",
+              "speaker": "narrator",
+              "text": "And the truce Emberwick bought with grain will have to bear the weight of it.",
+              "mood": "sad"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch3_vorga_shallows_slain",
+      "beat": "ch3_vorgas_fate",
+      "title": "In the Shallows",
+      "requires": [
+        "ch1_skarrow_slain"
+      ],
+      "cast": [
+        "narrator",
+        "vorga"
+      ],
+      "start": "shallows",
+      "nodes": [
+        {
+          "id": "shallows",
+          "lines": [
+            {
+              "id": "ch3_vorga_shallows_slain_shallows_1",
+              "speaker": "narrator",
+              "text": "The bridge is gone. Below the stepping stones, Vorga kneels in the shallows, spear snapped, the river pulling at his coat.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_vorga_shallows_slain_shallows_2",
+              "speaker": "vorga",
+              "text": "Ha! Beaten by the same people twice. Grandmother and grandson both. Somebody should write that down.",
+              "mood": "happy",
+              "direction": "laughing, bitter, losing"
+            },
+            {
+              "id": "ch3_vorga_shallows_slain_shallows_3",
+              "speaker": "vorga",
+              "text": "Go on, finish the set. The Host is watching. Make it a good story for them.",
+              "mood": "angry"
+            }
+          ],
+          "options": [
+            {
+              "id": "ropes",
+              "label": "Why cut the ropes? You nearly drowned your own warriors.",
+              "to": "ropes"
+            },
+            {
+              "id": "wanted",
+              "label": "She wouldn't have wanted this for you.",
+              "to": "wanted"
+            },
+            {
+              "id": "raids",
+              "label": "Let you go, and you'll raid the river towns before winter.",
+              "to": "raids",
+              "tags": {
+                "background": [
+                  "folk_hero"
+                ]
+              }
+            },
+            {
+              "id": "decide",
+              "label": "Enough. We'll decide.",
+              "to": "vote"
+            }
+          ]
+        },
+        {
+          "id": "ropes",
+          "lines": [
+            {
+              "id": "ch3_vorga_shallows_slain_ropes_1",
+              "speaker": "vorga",
+              "text": "Because it was mine. If I can't hold it, nobody walks over it smiling. Not you, not the Kindled, nobody.",
+              "mood": "angry"
+            }
+          ],
+          "next": "wait"
+        },
+        {
+          "id": "wanted",
+          "lines": [
+            {
+              "id": "ch3_vorga_shallows_slain_wanted_1",
+              "speaker": "vorga",
+              "text": "You don't get to tell me what she wanted. You don't get to have that too.",
+              "mood": "angry",
+              "direction": "low and shaking"
+            }
+          ],
+          "next": "wait"
+        },
+        {
+          "id": "raids",
+          "lines": [
+            {
+              "id": "ch3_vorga_shallows_slain_raids_1",
+              "speaker": "vorga",
+              "text": "Only the towns that lock their granaries. Which, I'll grant you, is all of them.",
+              "mood": "happy"
+            }
+          ],
+          "next": "wait"
+        },
+        {
+          "id": "wait",
+          "lines": [
+            {
+              "id": "ch3_vorga_shallows_slain_wait_1",
+              "speaker": "vorga",
+              "text": "Take your time. I'm not going anywhere. Mostly because of the leg.",
+              "mood": "happy",
+              "direction": "wincing through the grin"
+            }
+          ],
+          "options": [
+            {
+              "id": "ropes",
+              "label": "Why cut the ropes? You nearly drowned your own warriors.",
+              "to": "ropes"
+            },
+            {
+              "id": "wanted",
+              "label": "She wouldn't have wanted this for you.",
+              "to": "wanted"
+            },
+            {
+              "id": "raids",
+              "label": "Let you go, and you'll raid the river towns before winter.",
+              "to": "raids",
+              "tags": {
+                "background": [
+                  "folk_hero"
+                ]
+              }
+            },
+            {
+              "id": "decide",
+              "label": "Enough. We'll decide.",
+              "to": "vote"
+            }
+          ]
+        },
+        {
+          "id": "vote",
+          "lines": [
+            {
+              "id": "ch3_vorga_shallows_slain_vote_1",
+              "speaker": "narrator",
+              "text": "Up on the ridge the Host watches in silence. Vorga waits in the river, still grinning, water to his waist.",
+              "mood": "idle"
+            }
+          ],
+          "vote": true,
+          "options": [
+            {
+              "id": "spare",
+              "label": "Send him home to his clan.",
+              "to": "spare",
+              "choice": "ch3_spare_vorga"
+            },
+            {
+              "id": "kill",
+              "label": "End it here.",
+              "to": "kill",
+              "choice": "ch3_kill_vorga"
+            }
+          ]
+        },
+        {
+          "id": "spare",
+          "lines": [
+            {
+              "id": "ch3_vorga_shallows_slain_spare_1",
+              "speaker": "vorga",
+              "text": "Home. There's nobody there now to tell me I was wrong. That's the worst part, you know.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch3_vorga_shallows_slain_spare_2",
+              "speaker": "vorga",
+              "text": "I'll remember who let me walk. I haven't decided yet what that means.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_vorga_shallows_slain_spare_3",
+              "speaker": "narrator",
+              "text": "Vorga limps east into the canyons. Some of the Host follow him. He doesn't look back to count them.",
+              "mood": "sad"
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "kill",
+          "lines": [
+            {
+              "id": "ch3_vorga_shallows_slain_kill_1",
+              "speaker": "vorga",
+              "text": "Put me next to her, if you can remember where you left her.",
+              "mood": "hurt",
+              "direction": "no laugh left at all"
+            },
+            {
+              "id": "ch3_vorga_shallows_slain_kill_2",
+              "speaker": "narrator",
+              "text": "The Host scatters into the canyons, and the road to the crater lies open.",
+              "mood": "sad"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch3_crypt_door",
+      "beat": "ch3_buried_crypt",
+      "title": "The Buried Crypt",
+      "cast": [
+        "narrator",
+        "lark"
+      ],
+      "start": "stair",
+      "nodes": [
+        {
+          "id": "stair",
+          "lines": [
+            {
+              "id": "ch3_crypt_door_stair_1",
+              "speaker": "narrator",
+              "text": "Half a day past the canyon, the sand gives way to a stair cut into old stone. At the bottom, a door marked with the Wardens' flame.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_crypt_door_stair_2",
+              "speaker": "narrator",
+              "text": "The sand has been dug away from it, and recently. Someone has gone in ahead of you.",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch3_crypt_door_stair_3",
+              "speaker": "lark",
+              "text": "Every Warden song I know ends at a door like this. None of them say what's behind it. That ought to worry me more.",
+              "mood": "idle",
+              "direction": "lightly, not quite managing it"
+            }
+          ],
+          "options": [
+            {
+              "id": "stone",
+              "label": "Dwarven work. Let me read the stone.",
+              "to": "stone",
+              "tags": {
+                "race": [
+                  "dwarf"
+                ]
+              }
+            },
+            {
+              "id": "works",
+              "label": "There's a mechanism in that seal. I can open it quietly.",
+              "to": "quiet",
+              "tags": {
+                "background": [
+                  "guild_artisan"
+                ]
+              }
+            },
+            {
+              "id": "search",
+              "label": "We'll look for another way in.",
+              "check": {
+                "skill": "investigation",
+                "dc": 14,
+                "pass": "quiet",
+                "fail": "loud"
+              }
+            },
+            {
+              "id": "force",
+              "label": "We go through the door.",
+              "to": "loud"
+            }
+          ]
+        },
+        {
+          "id": "stone",
+          "lines": [
+            {
+              "id": "ch3_crypt_door_stone_1",
+              "speaker": "narrator",
+              "text": "The carving is a mason's warning in the old clan script: the dead keep this watch, and keep it still. Below it, a hidden latch.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_crypt_door_stone_2",
+              "speaker": "lark",
+              "text": "Lovely. I'll put that in the chorus.",
+              "mood": "happy",
+              "direction": "a little too quickly"
+            }
+          ],
+          "next": "quiet"
+        },
+        {
+          "id": "quiet",
+          "lines": [
+            {
+              "id": "ch3_crypt_door_quiet_1",
+              "speaker": "narrator",
+              "text": "The door slides aside without a sound. Rows of bone Wardens stand at their posts, and on the dais, someone is chanting.",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch3_crypt_door_quiet_2",
+              "speaker": "lark",
+              "text": "Somebody woke them before we got here. And somebody is still here.",
+              "mood": "surprised",
+              "direction": "a whisper"
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "loud",
+          "lines": [
+            {
+              "id": "ch3_crypt_door_loud_1",
+              "speaker": "narrator",
+              "text": "The door grinds open like a mountain clearing its throat. Below, in the dark, every bone Warden turns its head.",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch3_crypt_door_loud_2",
+              "speaker": "lark",
+              "text": "Ah. Well. They know we're here, then.",
+              "mood": "happy",
+              "direction": "cheerful, and terrified"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch3_crypt_records",
+      "beat": "ch3_buried_crypt",
+      "title": "What the Wardens Buried",
+      "cast": [
+        "narrator",
+        "lark",
+        "hooded_stranger"
+      ],
+      "start": "quiet",
+      "nodes": [
+        {
+          "id": "quiet",
+          "lines": [
+            {
+              "id": "ch3_crypt_records_quiet_1",
+              "speaker": "narrator",
+              "text": "The last bone Warden falls. Beyond the dais, an inner door bears a seal older than the Fall. It gives at last, onto a vault of shelves.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_crypt_records_quiet_2",
+              "speaker": "narrator",
+              "text": "No ember-lamp ever burned down here. The Wardens wrote by daylight from a shaft in the roof, and the pages are still white.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_crypt_records_quiet_3",
+              "speaker": "lark",
+              "text": "Nothing has touched these. No fire at all. Do you know how rare that is in this Vale?",
+              "mood": "surprised",
+              "direction": "hushed, as if in a chapel"
+            }
+          ],
+          "options": [
+            {
+              "id": "oldest",
+              "label": "We'll find the oldest records.",
+              "check": {
+                "skill": "history",
+                "dc": 13,
+                "pass": "found",
+                "fail": "dust"
+              }
+            },
+            {
+              "id": "cellar",
+              "label": "I know how the Church shelves its oldest texts. Let me look.",
+              "to": "found",
+              "tags": {
+                "background": [
+                  "acolyte"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "found",
+          "lines": [
+            {
+              "id": "ch3_crypt_records_found_1",
+              "speaker": "narrator",
+              "text": "On the oldest shelf lies a Keeper's ledger in a careful, tired hand. It is dated a hundred and eighty years after the Lighting.",
+              "mood": "idle"
+            }
+          ],
+          "next": "ledger"
+        },
+        {
+          "id": "dust",
+          "lines": [
+            {
+              "id": "ch3_crypt_records_dust_1",
+              "speaker": "narrator",
+              "text": "Old pages crumble under hurried hands, and an hour goes to dust. Then Lark lifts down a ledger in a careful, tired hand.",
+              "mood": "sad"
+            }
+          ],
+          "next": "ledger"
+        },
+        {
+          "id": "ledger",
+          "lines": [
+            {
+              "id": "ch3_crypt_records_ledger_1",
+              "speaker": "narrator",
+              "text": "It reads: We have learned what the fire takes. Each time it is used, it burns a memory away, and it does not give it back.",
+              "mood": "idle",
+              "direction": "reading aloud, slow; a dead Keeper's words"
+            },
+            {
+              "id": "ch3_crypt_records_ledger_2",
+              "speaker": "narrator",
+              "text": "A smith forgets his trade. A mother forgets her son's face. A whole village forgets the road it came by.",
+              "mood": "sad",
+              "direction": "reading, slower"
+            },
+            {
+              "id": "ch3_crypt_records_ledger_3",
+              "speaker": "narrator",
+              "text": "The Vale cannot live without the flame. Therefore the Vale must not know its price. So ordered, and so sealed.",
+              "mood": "sad",
+              "direction": "the last words of the page, flat"
+            },
+            {
+              "id": "ch3_crypt_records_ledger_4",
+              "speaker": "lark",
+              "text": "Every hearth. Every forge. Every ember-lamp in every window, for three hundred years.",
+              "mood": "sad",
+              "direction": "hollow"
+            },
+            {
+              "id": "ch3_crypt_records_ledger_5",
+              "speaker": "lark",
+              "text": "That's why the songs are all that's left. Nobody ever needed a fire to remember a tune.",
+              "mood": "sad",
+              "direction": "working it out as they say it; the voice gives a little"
+            },
+            {
+              "id": "ch3_crypt_records_ledger_6",
+              "speaker": "lark",
+              "text": "Your archivist begged for records the fire never touched. Well, here they are. He won't thank you for them.",
+              "mood": "hurt"
+            }
+          ],
+          "sets": [
+            "truth_cost"
+          ],
+          "options": [
+            {
+              "id": "paid",
+              "label": "We paid the Court a memory in Mirewood. At least we knew what we were giving.",
+              "to": "paid",
+              "requires": [
+                "ch2_paid_memory"
+              ]
+            },
+            {
+              "id": "tricked",
+              "label": "We paid the Court with a memory that wasn't ours. Whose was it?",
+              "to": "tricked",
+              "requires": [
+                "ch2_court_tricked"
+              ]
+            },
+            {
+              "id": "left",
+              "label": "We walked away from the Court's price. Nobody here was ever offered the choice.",
+              "to": "left",
+              "requires": [
+                "ch2_ember_left"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "paid",
+          "lines": [
+            {
+              "id": "ch3_crypt_records_paid_1",
+              "speaker": "lark",
+              "text": "You knew. You chose. Ysolde told you the price to your face, which makes her the most honest thing in this whole Vale.",
+              "mood": "sad"
+            }
+          ],
+          "next": "last_page"
+        },
+        {
+          "id": "tricked",
+          "lines": [
+            {
+              "id": "ch3_crypt_records_tricked_1",
+              "speaker": "lark",
+              "text": "Somebody's. Somebody who was never asked either. It turns out we've all been paying with other people's memories.",
+              "mood": "sad"
+            }
+          ],
+          "next": "last_page"
+        },
+        {
+          "id": "left",
+          "lines": [
+            {
+              "id": "ch3_crypt_records_left_1",
+              "speaker": "lark",
+              "text": "No. They lit the lamps and warmed their hands, and nobody ever told them there was a bill.",
+              "mood": "sad"
+            }
+          ],
+          "next": "last_page"
+        },
+        {
+          "id": "last_page",
+          "lines": [
+            {
+              "id": "ch3_crypt_records_last_page_1",
+              "speaker": "narrator",
+              "text": "Outside the inner seal sit the bones of a Warden who came too late to open it. Under one hand lies a last page, written in a hurry.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_crypt_records_last_page_2",
+              "speaker": "narrator",
+              "text": "Night of the Fall. The sky is red over the Keep. Young Warden Marrowby has fled with a chest of shards. I saw her go, and could not stop her.",
+              "mood": "surprised",
+              "direction": "reading; the hand on the page was shaking"
+            },
+            {
+              "id": "ch3_crypt_records_last_page_5",
+              "speaker": "narrator",
+              "text": "I came to seal this in with the rest, but the door was shut for good. Let whoever opens it know.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch3_crypt_records_last_page_3",
+              "speaker": "lark",
+              "text": "Marrowby. Celandine Marrowby. She's older than anyone in Emberwick, and remembers less than any of them.",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch3_crypt_records_last_page_4",
+              "speaker": "lark",
+              "text": "A hundred years of ember-lamps in every hall she owns. She's burned that night away. She doesn't know what she did.",
+              "mood": "sad"
+            }
+          ],
+          "sets": [
+            "ch3_marrowby_truth"
+          ],
+          "options": [
+            {
+              "id": "family",
+              "label": "My family's fortune came from the Marrowbys. From this.",
+              "to": "family",
+              "tags": {
+                "background": [
+                  "noble"
+                ]
+              }
+            },
+            {
+              "id": "scripture",
+              "label": "The Church calls the fire a gift. The Wardens knew it was a debt, and hid it.",
+              "to": "scripture",
+              "tags": {
+                "background": [
+                  "acolyte"
+                ]
+              }
+            },
+            {
+              "id": "gods",
+              "label": "Whatever the gods gave the Vale, it wasn't this.",
+              "to": "gods",
+              "tags": {
+                "class": [
+                  "cleric"
+                ]
+              }
+            },
+            {
+              "id": "pages",
+              "label": "Corvin's page. My own lost pages. We found this before, and the fire took it back.",
+              "to": "pages",
+              "tags": {
+                "background": [
+                  "sage"
+                ]
+              }
+            },
+            {
+              "id": "never",
+              "label": "I never once used the fire. Maybe that's why I still remember everything.",
+              "to": "never",
+              "tags": {
+                "background": [
+                  "hermit"
+                ]
+              }
+            },
+            {
+              "id": "take",
+              "label": "Take the ledger and the page. The Vale should read them.",
+              "to": "stair"
+            }
+          ]
+        },
+        {
+          "id": "family",
+          "lines": [
+            {
+              "id": "ch3_crypt_records_family_1",
+              "speaker": "lark",
+              "text": "Then you've a choice to make. Truth is heavy. Gold's heavier, if you're the one carrying it.",
+              "mood": "idle"
+            }
+          ],
+          "next": "stair"
+        },
+        {
+          "id": "scripture",
+          "lines": [
+            {
+              "id": "ch3_crypt_records_scripture_1",
+              "speaker": "lark",
+              "text": "Mother Aubrine will need you to say that gently. And then she'll need you to say it again.",
+              "mood": "sad"
+            }
+          ],
+          "next": "stair"
+        },
+        {
+          "id": "gods",
+          "lines": [
+            {
+              "id": "ch3_crypt_records_gods_1",
+              "speaker": "lark",
+              "text": "The gods might well agree. The Wardens don't seem to have asked them.",
+              "mood": "idle"
+            }
+          ],
+          "next": "stair"
+        },
+        {
+          "id": "pages",
+          "lines": [
+            {
+              "id": "ch3_crypt_records_pages_1",
+              "speaker": "lark",
+              "text": "You and Corvin found it twice and lost it twice. This time it's on a page no fire has ever touched.",
+              "mood": "idle"
+            }
+          ],
+          "next": "stair"
+        },
+        {
+          "id": "never",
+          "lines": [
+            {
+              "id": "ch3_crypt_records_never_1",
+              "speaker": "lark",
+              "text": "Then hold on to it. You may be the only one of us who'll notice when something goes missing.",
+              "mood": "sad"
+            }
+          ],
+          "next": "stair"
+        },
+        {
+          "id": "stair",
+          "lines": [
+            {
+              "id": "ch3_crypt_records_stair_1",
+              "speaker": "narrator",
+              "text": "When the party climbs back into the light, the Hooded Stranger is sitting on the top step, as if they have waited there all day.",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch3_crypt_records_stair_2",
+              "speaker": "hooded_stranger",
+              "text": "You've been reading. It shows. People wear that look when they've dug up a debt.",
+              "mood": "idle",
+              "direction": "quiet; faintly amused, faintly sad"
+            }
+          ],
+          "options": [
+            {
+              "id": "knew",
+              "label": "You knew. All this time, you knew.",
+              "to": "knew"
+            },
+            {
+              "id": "why_now",
+              "label": "Why are you here now?",
+              "to": "why_now"
+            }
+          ]
+        },
+        {
+          "id": "knew",
+          "lines": [
+            {
+              "id": "ch3_crypt_records_knew_1",
+              "speaker": "hooded_stranger",
+              "text": "Would you have believed it from a stranger in a hood, in a warm inn, with all the lamps lit?",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_crypt_records_knew_2",
+              "speaker": "hooded_stranger",
+              "text": "People only believe what they dig up themselves. So you had to dig.",
+              "mood": "idle"
+            }
+          ],
+          "next": "after"
+        },
+        {
+          "id": "why_now",
+          "lines": [
+            {
+              "id": "ch3_crypt_records_why_now_1",
+              "speaker": "hooded_stranger",
+              "text": "Someone ought to be waiting at the top of the stair. It's a long climb, carrying a thing like that.",
+              "mood": "idle"
+            }
+          ],
+          "next": "after"
+        },
+        {
+          "id": "after",
+          "lines": [
+            {
+              "id": "ch3_crypt_records_after_1",
+              "speaker": "lark",
+              "text": "I'm going to write a song about this. Nobody is going to want to hear it.",
+              "mood": "sad",
+              "direction": "tired; not joking at all"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch3_maren_parley",
+      "beat": "ch3_maren_parley",
+      "title": "Under the White Cloth",
+      "cast": [
+        "narrator",
+        "maren_sorrel"
+      ],
+      "start": "rim",
+      "nodes": [
+        {
+          "id": "rim",
+          "lines": [
+            {
+              "id": "ch3_maren_parley_rim_1",
+              "speaker": "narrator",
+              "text": "The crater is a bowl of black glass, too bright to look at. At its edge a white cloth hangs from a spear, and a woman waits beside it.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_maren_parley_rim_2",
+              "speaker": "maren_sorrel",
+              "text": "You came. I hoped you would. Sit on this side, the glass is cooler, and the Scarwalkers can see we're keeping the truce.",
+              "mood": "happy",
+              "direction": "warm and unhurried"
+            },
+            {
+              "id": "ch3_maren_parley_rim_3",
+              "speaker": "maren_sorrel",
+              "text": "You've been in the crypt, so now you know what the fire takes. I'm sorry. It's a hard thing to carry out into the sun.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_maren_parley_rim_4",
+              "speaker": "maren_sorrel",
+              "text": "I learned it thirty years ago, when a shard nearly killed me. I woke up remembering winters I never lived.",
+              "mood": "idle"
+            }
+          ],
+          "sets": [
+            "ch3_maren_parley"
+          ],
+          "next": "ask_me"
+        },
+        {
+          "id": "ask_me",
+          "lines": [
+            {
+              "id": "ch3_maren_parley_ask_me_1",
+              "speaker": "maren_sorrel",
+              "text": "Ask me anything. I'd rather you heard it from me than from a pulpit.",
+              "mood": "idle"
+            }
+          ],
+          "options": [
+            {
+              "id": "still",
+              "label": "You know the price, and you still want to relight it?",
+              "to": "still"
+            },
+            {
+              "id": "lives",
+              "label": "You feed people to it.",
+              "to": "lives"
+            },
+            {
+              "id": "paid",
+              "label": "We paid Ysolde a memory. We know what it costs.",
+              "to": "paid",
+              "requires": [
+                "ch2_paid_memory"
+              ]
+            },
+            {
+              "id": "tricked",
+              "label": "We paid Ysolde with a memory that wasn't ours.",
+              "to": "tricked",
+              "requires": [
+                "ch2_court_tricked"
+              ]
+            },
+            {
+              "id": "left",
+              "label": "We left Mirewood's ember with the Court.",
+              "to": "left",
+              "requires": [
+                "ch2_ember_left"
+              ]
+            },
+            {
+              "id": "stolen",
+              "label": "The fire was stolen. The Skarrow song says so.",
+              "to": "stolen",
+              "requires": [
+                "truth_crossing"
+              ]
+            },
+            {
+              "id": "v_spared",
+              "label": "We sent Vorga home.",
+              "to": "v_spared",
+              "requires": [
+                "ch3_vorga_spared"
+              ]
+            },
+            {
+              "id": "v_slain",
+              "label": "Vorga's dead. We did it.",
+              "to": "v_slain",
+              "requires": [
+                "ch3_vorga_slain"
+              ]
+            },
+            {
+              "id": "shards",
+              "label": "Rook can't have that many shards to sell you. Where do they come from?",
+              "to": "shards",
+              "tags": {
+                "background": [
+                  "criminal"
+                ]
+              }
+            },
+            {
+              "id": "winter",
+              "label": "Emberwick is starving. What does your plan do for them this winter?",
+              "to": "winter",
+              "tags": {
+                "background": [
+                  "folk_hero"
+                ]
+              }
+            },
+            {
+              "id": "want",
+              "label": "What do you want from us, Maren?",
+              "to": "want"
+            }
+          ]
+        },
+        {
+          "id": "still",
+          "lines": [
+            {
+              "id": "ch3_maren_parley_still_1",
+              "speaker": "maren_sorrel",
+              "text": "Every fire costs something. The cold costs more. I've buried children who forgot nothing, because they never lived long enough to.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch3_maren_parley_still_2",
+              "speaker": "maren_sorrel",
+              "text": "A memory for a harvest. I'd make that trade for every child in the Vale. I have made it, over and over.",
+              "mood": "idle"
+            }
+          ],
+          "next": "ask_me"
+        },
+        {
+          "id": "lives",
+          "lines": [
+            {
+              "id": "ch3_maren_parley_lives_1",
+              "speaker": "maren_sorrel",
+              "text": "I feed it the willing, and I won't pretend that's clean. I hold their hands. I keep their names, for as long as I can.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch3_maren_parley_lives_2",
+              "speaker": "maren_sorrel",
+              "text": "Ten thousand people will freeze if I don't. I can count. Some nights I wish I couldn't.",
+              "mood": "sad",
+              "direction": "almost to herself"
+            }
+          ],
+          "next": "ask_me"
+        },
+        {
+          "id": "paid",
+          "lines": [
+            {
+              "id": "ch3_maren_parley_paid_1",
+              "speaker": "maren_sorrel",
+              "text": "Then you know it's bearable. You're still here. You're still yourselves, mostly. That's all I'm asking of the Vale.",
+              "mood": "idle"
+            }
+          ],
+          "next": "ask_me"
+        },
+        {
+          "id": "tricked",
+          "lines": [
+            {
+              "id": "ch3_maren_parley_tricked_1",
+              "speaker": "maren_sorrel",
+              "text": "So did I, once. It frightened me how easy it was. It should frighten you a little, too.",
+              "mood": "idle",
+              "direction": "gently, not accusing"
+            }
+          ],
+          "next": "ask_me"
+        },
+        {
+          "id": "left",
+          "lines": [
+            {
+              "id": "ch3_maren_parley_left_1",
+              "speaker": "maren_sorrel",
+              "text": "I know. So I'll have to go back for it, and Ysolde will make me pay. I wish it had been you.",
+              "mood": "sad"
+            }
+          ],
+          "next": "ask_me"
+        },
+        {
+          "id": "stolen",
+          "lines": [
+            {
+              "id": "ch3_maren_parley_stolen_1",
+              "speaker": "maren_sorrel",
+              "text": "Stolen or given, it kept the Vale alive for three hundred years. I can't hand back three centuries of warm children.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_maren_parley_stolen_2",
+              "speaker": "maren_sorrel",
+              "text": "If someone over the mountains wants it, let them come and ask. I'll tell them how cold it's been without it.",
+              "mood": "idle"
+            }
+          ],
+          "next": "ask_me"
+        },
+        {
+          "id": "v_spared",
+          "lines": [
+            {
+              "id": "ch3_maren_parley_v_spared_1",
+              "speaker": "maren_sorrel",
+              "text": "Good. I offered him bread for that bridge, and he threw it in the canyon. I liked him for it.",
+              "mood": "happy"
+            }
+          ],
+          "next": "ask_me"
+        },
+        {
+          "id": "v_slain",
+          "lines": [
+            {
+              "id": "ch3_maren_parley_v_slain_1",
+              "speaker": "maren_sorrel",
+              "text": "I'm sorry. He was angry for all the right reasons, and nobody ever fed him long enough to find out what else he was.",
+              "mood": "sad"
+            }
+          ],
+          "next": "ask_me"
+        },
+        {
+          "id": "shards",
+          "lines": [
+            {
+              "id": "ch3_maren_parley_shards_1",
+              "speaker": "maren_sorrel",
+              "text": "Rook finds them. Some burn a colour I've never seen, and when I use them, they don't take anything at all.",
+              "mood": "surprised"
+            },
+            {
+              "id": "ch3_maren_parley_shards_2",
+              "speaker": "maren_sorrel",
+              "text": "I stopped asking where they come from. A miracle doesn't owe me an explanation.",
+              "mood": "idle"
+            }
+          ],
+          "next": "ask_me"
+        },
+        {
+          "id": "winter",
+          "lines": [
+            {
+              "id": "ch3_maren_parley_winter_1",
+              "speaker": "maren_sorrel",
+              "text": "Warm fields by spring, if you help me. Full granaries, if the Vale is brave. I can't promise you both by midwinter.",
+              "mood": "sad"
+            }
+          ],
+          "next": "ask_me"
+        },
+        {
+          "id": "want",
+          "lines": [
+            {
+              "id": "ch3_maren_parley_want_1",
+              "speaker": "maren_sorrel",
+              "text": "Bring the embers to Ember Keep, and stand beside me when we light it. Not for me. For them.",
+              "mood": "idle",
+              "direction": "the preacher's rhythm, kept quiet"
+            },
+            {
+              "id": "ch3_maren_parley_want_2",
+              "speaker": "maren_sorrel",
+              "text": "I remember the Hearth Age. Warm winters. My mother keeping bees on the south wall, singing to them.",
+              "mood": "happy",
+              "direction": "fond, lost in it"
+            },
+            {
+              "id": "ch3_maren_parley_want_3",
+              "speaker": "maren_sorrel",
+              "text": "No. That wasn't my mother. That was someone's. I'm sorry, it happens. There are so many of them in here.",
+              "mood": "hurt",
+              "direction": "a stumble, caught too late; she covers it gently"
+            },
+            {
+              "id": "ch3_maren_parley_want_4",
+              "speaker": "maren_sorrel",
+              "text": "It doesn't matter whose they were. They were real, and I owe every one of them that world back.",
+              "mood": "idle"
+            }
+          ],
+          "options": [
+            {
+              "id": "whose",
+              "label": "Which of those memories are yours, Maren?",
+              "check": {
+                "skill": "insight",
+                "dc": 14,
+                "pass": "whose_pass",
+                "fail": "whose_fail"
+              }
+            },
+            {
+              "id": "think",
+              "label": "We'll think about it.",
+              "to": "think"
+            },
+            {
+              "id": "refuse",
+              "label": "No. Not by feeding it lives.",
+              "to": "refuse"
+            },
+            {
+              "id": "keep",
+              "label": "We'll meet you at the Keep, and decide there whose plan it is.",
+              "to": "keep"
+            }
+          ]
+        },
+        {
+          "id": "whose_pass",
+          "lines": [
+            {
+              "id": "ch3_maren_parley_whose_pass_1",
+              "speaker": "maren_sorrel",
+              "text": "Honestly? Some nights I can't find myself in there. Hundreds of lives, and I have to go looking for mine.",
+              "mood": "sad",
+              "direction": "the first time she has said it aloud"
+            },
+            {
+              "id": "ch3_maren_parley_whose_pass_2",
+              "speaker": "maren_sorrel",
+              "text": "Don't tell my people. They need me to be sure.",
+              "mood": "sad"
+            }
+          ],
+          "options": [
+            {
+              "id": "think",
+              "label": "We'll think about it.",
+              "to": "think"
+            },
+            {
+              "id": "refuse",
+              "label": "No. Not by feeding it lives.",
+              "to": "refuse"
+            },
+            {
+              "id": "keep",
+              "label": "We'll meet you at the Keep, and decide there whose plan it is.",
+              "to": "keep"
+            }
+          ]
+        },
+        {
+          "id": "whose_fail",
+          "lines": [
+            {
+              "id": "ch3_maren_parley_whose_fail_1",
+              "speaker": "narrator",
+              "text": "She smiles, and is herself again, warm and certain. If it frightened her, nothing in her face admits it.",
+              "mood": "idle"
+            }
+          ],
+          "options": [
+            {
+              "id": "think",
+              "label": "We'll think about it.",
+              "to": "think"
+            },
+            {
+              "id": "refuse",
+              "label": "No. Not by feeding it lives.",
+              "to": "refuse"
+            },
+            {
+              "id": "keep",
+              "label": "We'll meet you at the Keep, and decide there whose plan it is.",
+              "to": "keep"
+            }
+          ]
+        },
+        {
+          "id": "think",
+          "lines": [
+            {
+              "id": "ch3_maren_parley_think_1",
+              "speaker": "maren_sorrel",
+              "text": "That's all I ask. Think. Then look at the fields this winter, and think again.",
+              "mood": "idle"
+            }
+          ],
+          "next": "farewell"
+        },
+        {
+          "id": "refuse",
+          "lines": [
+            {
+              "id": "ch3_maren_parley_refuse_1",
+              "speaker": "maren_sorrel",
+              "text": "I understand. I'd rather you said no to my face than nodded and lied. The Vale has had enough of that.",
+              "mood": "sad"
+            }
+          ],
+          "next": "farewell"
+        },
+        {
+          "id": "keep",
+          "lines": [
+            {
+              "id": "ch3_maren_parley_keep_1",
+              "speaker": "maren_sorrel",
+              "text": "Then I'll see you at the Keep. I hope we're standing on the same side of the flame.",
+              "mood": "happy"
+            }
+          ],
+          "next": "farewell"
+        },
+        {
+          "id": "farewell",
+          "lines": [
+            {
+              "id": "ch3_maren_parley_farewell_1",
+              "speaker": "maren_sorrel",
+              "text": "The truce holds until sundown. After that, I would rather not be your enemy. But I will be, if I must.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch3_maren_parley_farewell_3",
+              "speaker": "maren_sorrel",
+              "text": "The crater's ember is in the glass below. The Scarwalkers would never let me touch it. You're their guests. Take it to the Keep.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_maren_parley_farewell_2",
+              "speaker": "narrator",
+              "text": "She leaves the water and the white cloth where they are, and walks away along the crater's rim without looking back.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch3_maren_parley_farewell_4",
+              "speaker": "narrator",
+              "text": "You lift the Sunscar's ember out of the black glass. It is hot as noon, and it leans, very slightly, toward the Keep.",
+              "mood": "idle"
+            }
+          ],
+          "end": true
+        }
+      ]
+    }
+  ]
+}

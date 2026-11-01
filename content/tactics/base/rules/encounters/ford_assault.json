@@ -1,0 +1,17 @@
+{ "id": "ford_assault", "name": "Storming the Ford", "map": "river_crossing", "level": 1, "party": { "min": 4, "max": 6 },
+  "enemies": [ { "unit": "mother_skarrow", "at": [12, 3], "id": "mother_skarrow", "tag": "mother_skarrow" },
+               { "unit": "goblin", "zone": "goblin_camp", "count": 3, "tag": "skarrow_clan" },
+               { "unit": "goblin_archer", "zone": "ridge_spawn", "count": 2, "tag": "skarrow_clan" } ],
+  "xp": 300, "loot": ["goblin_camp"],
+  "objectives": { "win": { "any": ["defeat:mother_skarrow", "defeat_all"] } },
+  "triggers": [
+    { "id": "skarrow_greeting", "when": { "round": 1 },
+      "do": [ { "say": { "speaker": "mother_skarrow", "line": "You lock your grain and call us thieves. Come, then, valley folk. Take the bridge from an old woman." } },
+              { "cameraHint": "ridge_spawn" } ] },
+    { "id": "skarrow_ford", "when": { "unitEntersZone": { "tag": "party", "zone": "ford", "count": 1 } },
+      "do": [ { "say": { "speaker": "mother_skarrow", "line": "They are in the water! Shoot them while they wade, children!" } },
+              { "cameraHint": "ford" } ] },
+    { "id": "skarrow_song", "when": { "hpBelow": { "tag": "mother_skarrow", "percent": 50 } },
+      "do": [ { "say": { "speaker": "mother_skarrow", "line": "Forty winters I have buried grandchildren. I will not bury more for you. Sing with me!" } },
+              { "phase": { "tag": "mother_skarrow", "number": 1 } } ] }
+  ] }

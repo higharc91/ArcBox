@@ -11,7 +11,11 @@
     "cave": "cave.png",
     "infernal": "infernal.png",
     "fey": "fey.png",
-    "memory": "memory.png"
+    "memory": "memory.png",
+    "swamp": "swamp.png",
+    "desert_heat": "desert_heat.png",
+    "frost": "frost.png",
+    "forest_light": "forest_light.png"
   },
   "godotShader": "shader_type canvas_item;   // on a full-screen ColorRect over the world, under the UI\nuniform sampler2D screen : hint_screen_texture, filter_nearest;\nuniform sampler2D lut : filter_linear;   // grades/<name>.png\nuniform float strength = 1.0;\nvoid fragment() {\n    vec3 c = texture(screen, SCREEN_UV).rgb;\n    float n = 16.0;\n    float b = c.b * (n - 1.0);\n    float b0 = floor(b), b1 = min(b0 + 1.0, n - 1.0);\n    vec2 uv0 = vec2((b0 * n + c.r * (n - 1.0) + 0.5) / (n * n), (c.g * (n - 1.0) + 0.5) / n);\n    vec2 uv1 = vec2((b1 * n + c.r * (n - 1.0) + 0.5) / (n * n), uv0.y);\n    vec3 g = mix(texture(lut, uv0).rgb, texture(lut, uv1).rgb, b - b0);\n    COLOR = vec4(mix(c, g, strength), 1.0);\n}",
   "notes": "apply to the world before the UI; blend between two grades by strength for time passing"

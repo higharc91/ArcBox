@@ -12,7 +12,8 @@ public static class ContentHash
     /// <summary>
     /// Hashes <paramref name="files"/>, each named <c>"&lt;pack&gt;/&lt;relative path&gt;"</c>, in two stages:
     /// <list type="number">
-    /// <item>each file gets its own SHA-256 over its UTF-8 name, one NUL byte and its bytes;</item>
+    /// <item>each file gets its own SHA-256 over its UTF-8 name, one NUL byte and its bytes, with CRLF line ends read as LF
+    /// (so a Windows checkout with <c>core.autocrlf</c> hashes the same content the same);</item>
     /// <item>the files are sorted by name (ordinal) and the result is SHA-256 over their digests in that order, as lowercase
     /// hex.</item>
     /// </list>
@@ -29,9 +30,20 @@ public static class ContentHash
             using var one = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
             one.AppendData(Encoding.UTF8.GetBytes(path));
             one.AppendData([0]);
-            one.AppendData(bytes);
+            one.AppendData(WithLfLineEnds(bytes));
             all.AppendData(one.GetHashAndReset());
         }
         return Convert.ToHexStringLower(all.GetHashAndReset());
+    }
+
+    private static byte[] WithLfLineEnds(byte[] bytes)
+    {
+        if (Array.IndexOf(bytes, (byte)'\r') < 0)
+            return bytes;
+        var lf = new List<byte>(bytes.Length);
+        for (var i = 0; i < bytes.Length; i++)
+            if (!(bytes[i] == '\r' && i + 1 < bytes.Length && bytes[i + 1] == '\n'))
+                lf.Add(bytes[i]);
+        return [.. lf];
     }
 }

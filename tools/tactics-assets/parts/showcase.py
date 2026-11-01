@@ -88,7 +88,7 @@ def _anim_at(rid: str, t: int) -> tuple[str, int] | None:
         if 15 <= t < 19:
             return "hurt", 0
         if t >= 52:
-            return None if t >= 58 else ("down", 0)
+            return None if t >= 58 else ("down", min(t - 52, 3))   # collapse, then hold the downed pose
     if rid == "ilyra" and 22 <= t < 30:
         return "cast", (t - 22) // 2
     if rid == "goblin_spear" and 34 <= t < 38:
