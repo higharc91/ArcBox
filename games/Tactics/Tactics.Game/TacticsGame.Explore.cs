@@ -66,6 +66,27 @@ public sealed partial class TacticsGame
     /// <summary>The held direction is against a wall. The ground doesn't change, so nothing is tried again until the direction does.</summary>
     private bool _blocked;
 
+    /// <summary>A press or a change of direction came during a step, and hasn't been stepped yet: it goes when that step ends.</summary>
+    private bool _owed;
+
+    /// <summary>
+    /// The thumb lifted while a step was <see cref="_owed"/>: a quick tap, which still takes its one step, at <see cref="_stepDue"/>, and
+    /// then the party stops. Without this a tap faster than the walk would buzz the phone and do nothing.
+    /// </summary>
+    private bool _latched;
+
+    /// <summary>When the party last stopped, which is what <see cref="WalkTiming.TakebackAfter"/> counts from.</summary>
+    private DateTimeOffset _stoppedAt = DateTimeOffset.MinValue;
+
+    /// <summary>The handover's note on the TV, if it's still up, so the next handover replaces it rather than adding to it.</summary>
+    private string? _leadNote;
+
+    /// <summary>Whether the party has been told that the road goes on past the region's edge: once a session is enough.</summary>
+    private bool _edgeSaid;
+
+    /// <summary>What the TV says when the party is stopped by the region's edge. The user's to reword.</summary>
+    internal const string RoadGoesOn = "The road goes on, but not today.";
+
     private bool? _lastAlongX;
     private int _walkSeq;
     private ImmutableArray<WalkLeg> _legs = [];
@@ -120,6 +141,24 @@ public sealed partial class TacticsGame
 
     private void Note(string text) => _notice = _notice is null ? text : $"{_notice} {text}";
 
+    /// <summary>Takes one note back down, leaving any others up.</summary>
+    private void Unnote(string? text)
+    {
+        if (text is null || _notice is null)
+            return;
+        _notice = _notice == text ? null
+            : _notice.EndsWith($" {text}", StringComparison.Ordinal) ? _notice[..^(text.Length + 1)]
+            : _notice.Replace($"{text} ", "", StringComparison.Ordinal);
+    }
+
+    /// <summary>Says on the TV who leads now (5b review item 5). Only the TV: the phones already show it, and a note would mint them a view.</summary>
+    private void SayLeader(string name)
+    {
+        Unnote(_leadNote);
+        _leadNote = $"{name} leads now.";
+        Note(_leadNote);
+    }
+
     /// <summary>Into the world, from Muster, the battle list or Results.</summary>
     private void ToExploration()
     {
@@ -135,6 +174,9 @@ public sealed partial class TacticsGame
     {
         Halt();
         _ctx.CancelTimer(Timers.Lead);     // no pad, no idle ping: the silence rule would take the lead away during any battle
+        Unnote(_leadNote);                 // the walk's own notes would mean nothing over a battle
+        Unnote(RoadGoesOn);
+        _leadNote = null;
         SaveWorld();
     }
 
@@ -149,7 +191,8 @@ public sealed partial class TacticsGame
 
     /// <summary>
     /// The leader's phone saying what it holds. A repeat of the direction held only extends the lease, so pings can't change the
-    /// speed. A press or a change steps in this very call, unless the party is still on its way to a tile, when it goes as that step ends.
+    /// speed. A press or a change steps in this very call, unless the party is still on its way to a tile, when it goes as that step ends,
+    /// even if the thumb has lifted by then (<see cref="_latched"/>).
     /// </summary>
     private void WalkInput(Player player, JsonElement? data)
     {
@@ -157,20 +200,35 @@ public sealed partial class TacticsGame
             return;
         if (dir is null)
         {
-            StopWalking();
+            if (_owed && !_latched)
+            {
+                _latched = true;
+                ArmStep();
+            }
+            else if (!_latched)
+                StopWalking();
             return;
         }
 
         var now = _ctx.Now;
         _heldUntil = now + Walk.HoldLease;
+        if (_latched)
+        {
+            _latched = false;       // pressed again before the tap's step: held once more
+            ArmStep();
+        }
         if (dir == _dir)
             return;
         var held = _dir is not null;
         (_dir, _blocked) = (dir, false);
         if (now >= _stepDue)
             TakeStep(onTime: false);
-        else if (!held)
-            ArmStep();
+        else
+        {
+            _owed = true;
+            if (!held)
+                ArmStep();
+        }
     }
 
     /// <summary>Reads <c>{dir}</c>: false for anything but a direction or an explicit null, which means stopped.</summary>
@@ -192,15 +250,25 @@ public sealed partial class TacticsGame
         return dir is not null;
     }
 
-    /// <summary>Takes the step the held direction asks for, or turns to face it if the way is blocked. Blocked steps say nothing: a toast would change the phone's view.</summary>
+    /// <summary>
+    /// Takes the step the held direction asks for, or turns to face it if the way is blocked. A blocked step tells only the TV
+    /// (<see cref="ExploreView.Blocked"/>, and the road going on at the region's edge): a toast would change the phone's view.
+    /// </summary>
     private void TakeStep(bool onTime)
     {
         var (dir, from, now) = (_dir!.Value, _at, _ctx.Now);
-        if (WorldWalk.Next(Rules.GroundFor(_region!.Def.Id)!.Terrain, from, dir, ClassDef.DefaultJump, _lastAlongX) is not { } move)
+        var terrain = Rules.GroundFor(_region!.Def.Id)!.Terrain;
+        _owed = false;
+        if (WorldWalk.Next(terrain, from, dir, ClassDef.DefaultJump, _lastAlongX) is not { } move)
         {
             var (dx, dy) = WorldWalk.Delta(dir);
             _facing = new Tile(from.X + dx, from.Y + dy);
             _blocked = true;
+            if (!_edgeSaid && !terrain.Map.InBounds(_facing))
+            {
+                _edgeSaid = true;
+                Note(RoadGoesOn);
+            }
         }
         else
         {
@@ -214,7 +282,7 @@ public sealed partial class TacticsGame
                 _lastAlongX = move.To.Y == from.Y;
             var leg = new WalkLeg(++_walkSeq, move.To, ms);
             _legs = (_legs.Length < LegsKept ? _legs : _legs.RemoveAt(0)).Add(leg);
-            _notice = null;      // whatever it said, the party has moved on
+            (_notice, _leadNote) = (null, null);      // whatever it said, the party has moved on
         }
         SaveSoon();
         ArmStep();
@@ -235,7 +303,7 @@ public sealed partial class TacticsGame
     /// <summary>Sets the step timer for the next thing that can happen: this step ending, or the lease running out.</summary>
     private void ArmStep()
     {
-        var at = _blocked || _heldUntil < _stepDue ? _heldUntil : _stepDue;
+        var at = _latched ? _stepDue : _blocked || _heldUntil < _stepDue ? _heldUntil : _stepDue;
         _ctx.SetTimer(Timers.Step, Longest(at - _ctx.Now, TimeSpan.FromMilliseconds(1)));
     }
 
@@ -247,7 +315,14 @@ public sealed partial class TacticsGame
         {
             case Timers.Step when _dir is not null:
                 var now = _ctx.Now;
-                if (now >= _heldUntil)
+                if (_latched && now >= _stepDue)
+                {
+                    TakeStep(onTime: true);     // the tap's one step, then the stop it asked for
+                    StopWalking();
+                }
+                else if (_latched)
+                    ArmStep();
+                else if (now >= _heldUntil)
                     StopWalking();
                 else if (!_blocked && now >= _stepDue)
                     TakeStep(onTime: true);
@@ -268,7 +343,8 @@ public sealed partial class TacticsGame
     {
         if (_dir is null)
             return false;
-        (_dir, _blocked) = (null, false);
+        (_dir, _blocked, _owed, _latched) = (null, false, false, false);
+        _stoppedAt = _ctx.Now;
         _ctx.CancelTimer(Timers.Step);
         return true;
     }
@@ -319,18 +395,19 @@ public sealed partial class TacticsGame
     {
         if (_lead is not { } lead)
             return;
-        var quiet = _ctx.Now - _heardAt;
-        if (quiet < Walk.LeadSilence)
+        var now = _ctx.Now;
+        if (TakebackAt <= now)
         {
-            _ctx.SetTimer(Timers.Lead, Walk.LeadSilence - quiet);
-            return;
+            ReconsiderLeader();
+            if (_lead != lead)
+                return;
         }
-        if (NextAfter(lead) == lead)
-        {
-            _ctx.SetTimer(Timers.Lead, Walk.LeadSilence);
-            return;
-        }
-        HandLead(lead);
+        if (now - _heardAt < Walk.LeadSilence)
+            LeadClock();
+        else if (NextAfter(lead) == lead)
+            LeadClock(now + Walk.LeadSilence);
+        else
+            HandLead(lead);
     }
 
     /// <summary>Takes the lead from a silent leader: the party stops first.</summary>
@@ -341,14 +418,35 @@ public sealed partial class TacticsGame
         ReconsiderLeader();
     }
 
-    /// <summary>Starts the silence clock if there's a pad on someone's screen, and stops it if there isn't.</summary>
-    private void LeadClock()
+    /// <summary>
+    /// Sets the lead's one timer if there's a pad on someone's screen, and stops it if there isn't. It's for whichever comes first: the
+    /// silence rule, by <paramref name="silenceDue"/> or else 8 s from when the leader was last heard, or the session's leader taking the
+    /// lead back (<see cref="TakebackAt"/>).
+    /// </summary>
+    private void LeadClock(DateTimeOffset? silenceDue = null)
     {
-        if (_phase == TacticsPhase.Exploration && _lead is not null)
-            _ctx.SetTimer(Timers.Lead, Walk.LeadSilence);
-        else
+        if (_phase != TacticsPhase.Exploration || _lead is null)
+        {
             _ctx.CancelTimer(Timers.Lead);
+            return;
+        }
+        var now = _ctx.Now;
+        var due = silenceDue ?? _heardAt + Walk.LeadSilence;
+        if (TakebackAt is { } back && back > now && back < due)
+            due = back;
+        _ctx.SetTimer(Timers.Lead, Longest(due - now, TimeSpan.FromMilliseconds(1)));
     }
+
+    /// <summary>
+    /// When the session's own leader can take the lead back from whoever stood in for them, or null if nobody is waiting to: only in
+    /// the world, with the party stopped and both of them able to lead. It's <see cref="WalkTiming.TakebackAfter"/> from the party
+    /// last stopping, so it lands between walks and not between one press and the next. In any other phase there's no pad to pull
+    /// out from under a thumb, so the lead goes back at once.
+    /// </summary>
+    private DateTimeOffset? TakebackAt => _phase == TacticsPhase.Exploration && _dir is null && _sessionLead is { } own && _lead is { } standIn
+        && standIn != own && CanLead(own) && CanLead(standIn)
+            ? _stoppedAt + Walk.TakebackAfter
+            : null;
 
     /// <summary>Whether a member can take the lead: here, with a character, and not silent.</summary>
     private bool CanLead(string member)
@@ -383,6 +481,7 @@ public sealed partial class TacticsGame
     /// <summary>
     /// Settles who leads, only ever with the party stopped: this session's leader if they're here (electing one if the session has
     /// none yet, which is its one rotation), else whoever already leads, else the next who can. Better a silent member than nobody.
+    /// Taking the lead back from a stand-in who can keep it waits for <see cref="TakebackAt"/>. A change is said on the TV.
     /// </summary>
     private void ReconsiderLeader()
     {
@@ -396,16 +495,24 @@ public sealed partial class TacticsGame
             wanted = WantedLeader();
         }
         if (wanted == _lead)
+        {
+            if (TakebackAt is not null)
+                LeadClock();        // the session's leader is waiting: the timer has to come round for them
             return;
+        }
+        var was = _lead;
         _lead = wanted;
         _heardAt = _ctx.Now;
+        if (_phase == TacticsPhase.Exploration && was is not null && !_electionOpen && Leader is { } leader)     // not a seat found empty at Start
+            SayLeader(leader.Name);
         LeadClock();
         SaveWorld();
     }
 
     // A guard against the lead changing hands mid-scene (5d flag 9) goes on the first arm, not at the top of ReconsiderLeader: the
-    // session's leader must wait for the scene to end, but a leader who drops mid-scene still has to be replaced.
-    private string? WantedLeader() => _sessionLead is { } own && CanLead(own) ? own
+    // session's leader must wait for the scene to end, but a leader who drops mid-scene still has to be replaced. The first arm already
+    // waits for the takeback: a stand-in who can still lead keeps it until the party has been stopped long enough.
+    private string? WantedLeader() => _sessionLead is { } own && CanLead(own) && !(TakebackAt > _ctx.Now) ? own
         : _lead is { } still && CanLead(still) ? still
         : NextAfter(_lead ?? _sessionLead);
 

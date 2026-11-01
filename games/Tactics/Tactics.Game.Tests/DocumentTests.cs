@@ -121,5 +121,6 @@ public sealed class DocumentTests
         Assert.Equal(
             new WalkTiming(TimeSpan.FromMilliseconds(300), TimeSpan.FromMilliseconds(60), TimeSpan.FromMilliseconds(750), TimeSpan.FromSeconds(8), TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(15)),
             WalkTiming.Default);
+        Assert.Equal(TimeSpan.FromSeconds(3), WalkTiming.Default.TakebackAfter);
     }
 }

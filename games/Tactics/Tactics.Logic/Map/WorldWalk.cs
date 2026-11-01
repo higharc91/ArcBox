@@ -24,7 +24,7 @@ public enum WalkDir
 /// <summary>
 /// One step of the party. <see cref="Cost"/> is in Move, as <see cref="Paths.StepCost"/> counts it; a diagonal's is its cheaper legal
 /// L-path's total ÷ 2, rounded up, since a diagonal can climb more than one straight step can. <see cref="Diagonal"/> is a step on both
-/// axes, and <see cref="Slid"/> a straight step taken because the diagonal asked for was blocked.
+/// axes, and <see cref="Slid"/> a straight step taken because the step asked for was blocked: a diagonal's axis, or the side of a jag.
 /// </summary>
 public readonly record struct WalkMove(Tile To, int Cost, bool Diagonal, bool Slid);
 
@@ -54,15 +54,15 @@ public static class WorldWalk
 
     /// <summary>
     /// The step from <paramref name="from"/>, which must be on the map, or null if the party stays put. A blocked diagonal tries its two
-    /// axes, <paramref name="lastAlongX"/> saying which the party last moved along, and X first if it hasn't. A blocked straight step
-    /// doesn't slide.
+    /// axes, <paramref name="lastAlongX"/> saying which the party last moved along, and X first if it hasn't. A blocked straight step,
+    /// which is a road direction on screen, slides round a one-tile jag (see <see cref="Jag"/>).
     /// </summary>
     public static WalkMove? Next(Terrain terrain, Tile from, WalkDir dir, int jump, bool? lastAlongX)
     {
         var (dx, dy) = Delta(dir);
         var to = new Tile(from.X + dx, from.Y + dy);
         if (dx == 0 || dy == 0)
-            return Legal(terrain, from, to, jump) ? new WalkMove(to, Paths.StepCost(terrain, from, to, jump), false, false) : null;
+            return Legal(terrain, from, to, jump) ? new WalkMove(to, Paths.StepCost(terrain, from, to, jump), false, false) : Jag(terrain, from, dx, dy, jump);
 
         var (alongX, alongY) = (new Tile(to.X, from.Y), new Tile(from.X, to.Y));
         if (DiagonalCost(terrain, from, to, alongX, alongY, jump) is { } cost)
@@ -72,6 +72,23 @@ public static class WorldWalk
             if (Legal(terrain, from, side, jump))
                 return new WalkMove(side, Paths.StepCost(terrain, from, side, jump), false, true);
         return null;
+    }
+
+    /// <summary>
+    /// The side step round a one-tile jag, for a straight step of (<paramref name="dx"/>, <paramref name="dy"/>) that's blocked. Only
+    /// when exactly one side is open, so it never has to guess what the thumb meant, and only when the step on from that side is open too:
+    /// along a straight wall that step is blocked as well, so the party stands rather than slides back and forth.
+    /// </summary>
+    private static WalkMove? Jag(Terrain terrain, Tile from, int dx, int dy, int jump)
+    {
+        var (left, right) = (new Tile(from.X + dy, from.Y + dx), new Tile(from.X - dy, from.Y - dx));
+        var (leftOpen, rightOpen) = (Legal(terrain, from, left, jump), Legal(terrain, from, right, jump));
+        if (leftOpen == rightOpen)
+            return null;
+        var side = leftOpen ? left : right;
+        return Legal(terrain, side, new Tile(side.X + dx, side.Y + dy), jump)
+            ? new WalkMove(side, Paths.StepCost(terrain, from, side, jump), false, true)
+            : null;
     }
 
     /// <summary>Whether one straight step is legal.</summary>

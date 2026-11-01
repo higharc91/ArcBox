@@ -128,6 +128,13 @@ public sealed class WalkModelTests
         private int _lastMs, _msBefore, _commits, _epoch;
         private DateTimeOffset? _behindSince;
 
+        // Quick taps: a press during a step that hasn't stepped yet is owed; let go while owed, it's latched, and takes one step.
+        private bool _owed, _latched;
+
+        // The takeback: when the party last stopped, and when whoever leads was last heard from (the silence rule's clock).
+        private DateTimeOffset _stoppedAt, _leaderHeard;
+        private int _seat = -1;
+
         public Run(Setup setup)
         {
             (_setup, _late) = (setup, setup.Clock == 1);
@@ -155,6 +162,7 @@ public sealed class WalkModelTests
             _over = false;
             _game = new TacticsGame(Rules, Timing);
             (_heldUntil, _dir, _lastAlongX, _commits, _behindSince) = (null, null, null, 0, null);
+            (_owed, _latched, _stoppedAt, _leaderHeard) = (false, false, DateTimeOffset.MinValue, _context.Clock);
             _silent.Clear();
             _firesEachSecond.Clear();
             if (resume)
@@ -207,7 +215,7 @@ public sealed class WalkModelTests
 
         private int LeaderSeat() => _game.Leader is { } leader ? _players.FindIndex(p => p.Id == leader.Id) : 0;
 
-        private void Forget() => (_heldUntil, _dir) = (null, null);
+        private void Forget() => (_heldUntil, _dir, _owed, _latched) = (null, null, false, false);
 
         public void Play(IEnumerable<Event> events)
         {
@@ -229,11 +237,29 @@ public sealed class WalkModelTests
                         return;
                     var led = _game.Leader?.Id == _players[seat].Id;
                     _silent.Remove(_players[seat].Profile!.Value.Value);
+                    _seat = seat;
                     Send(seat, new { action = "walk", data = new { dir = e.Dir } });
                     if (_game.Phase == TacticsPhase.Exploration && (led || _game.Leader?.Id == _players[seat].Id))
                     {
-                        _dir = e.Dir;
-                        _heldUntil = e.Dir is null ? null : _context.Clock + TimeSpan.FromMilliseconds(750);
+                        var after = Look();
+                        if (e.Dir is null && _owed && _dir is not null)
+                        {
+                            // Let go before the press could step: the tap is latched, and goes as the step under way ends.
+                            Must(after.Timers.Contains(TacticsGame.Timers.Step), "a quick tap was let go and dropped");
+                            (_latched, _heldUntil) = (true, null);
+                        }
+                        else if (e.Dir is null)
+                        {
+                            if (!_latched)
+                                (_dir, _heldUntil) = (null, null);
+                        }
+                        else
+                        {
+                            var changed = e.Dir != _dir;
+                            (_dir, _heldUntil, _latched) = (e.Dir, _context.Clock + TimeSpan.FromMilliseconds(750), false);
+                            if (changed && after.Party.Seq == before!.Party.Seq && after.Party.Held)
+                                _owed = true;       // a press during a step: it hasn't gone yet, but it's owed
+                        }
                     }
                     Check(e, before!);
                     break;
@@ -253,6 +279,8 @@ public sealed class WalkModelTests
                     var which = e.Ms % junk.Length;
                     if (which < 8)      // the rest don't parse, so they aren't heard
                         _silent.Remove(_players[seat].Profile!.Value.Value);
+                    if (which < 8)
+                        _seat = seat;
                     var phase = _game.Phase;
                     Send(seat, junk[which]);
                     if (_game.Phase != phase)
@@ -278,6 +306,16 @@ public sealed class WalkModelTests
                     Check(e, before!);
                     break;
                 }
+                case "tap":     // a press, held for Ms, and let go
+                {
+                    var seat = e.Player < 0 ? LeaderSeat() : Seat(e);
+                    Apply(new Event("walk", seat, e.Dir), before);
+                    if (!_over && e.Ms > 0)
+                        Advance(e.Ms);
+                    if (!_over)
+                        Apply(new Event("walk", seat), Look());
+                    break;
+                }
                 case "adv":
                     Advance(e.Ms);
                     break;
@@ -286,6 +324,7 @@ public sealed class WalkModelTests
                     var seat = Seat(e);
                     if (!_online.Contains(seat))
                         return;
+                    _seat = seat;
                     Send(seat, new { action = "battles" });
                     if (_game.Phase != TacticsPhase.Exploration)
                         Forget();
@@ -297,6 +336,7 @@ public sealed class WalkModelTests
                     var seat = Seat(e);
                     if (!_online.Contains(seat))
                         return;
+                    _seat = seat;
                     Send(seat, new { action = "backToWalk" });
                     Check(e, before!);
                     break;
@@ -306,6 +346,7 @@ public sealed class WalkModelTests
                     var seat = Seat(e);
                     if (!_online.Contains(seat))
                         return;
+                    _seat = seat;
                     Send(seat, new { action = "pickClass", data = new { @class = "fighter" } });
                     Check(e, before!);
                     break;
@@ -318,6 +359,7 @@ public sealed class WalkModelTests
                     var seat = Seat(e);
                     if (!_online.Contains(seat))
                         return;
+                    _seat = seat;
                     Send(seat, new { action = "endSession" });
                     if (_context.Over)
                     {
@@ -369,6 +411,7 @@ public sealed class WalkModelTests
                 foreach (var seat in _online.ToArray())
                 {
                     var seen = Look();
+                    _seat = seat;
                     Send(seat, new { action = "next" });
                     Check(new Event("next", seat), seen);
                 }
@@ -439,8 +482,27 @@ public sealed class WalkModelTests
                 Must(party.Legs[i].Seq == party.Legs[i - 1].Seq + 1, "the legs have a gap");
             if (party.Legs.Length > 0)
                 Must(party.Legs[^1].Seq == party.Seq && party.Legs[^1].To == party.At, "the last leg isn't the party");
+            if (before.Timers.Contains(TacticsGame.Timers.Step) && !after.Timers.Contains(TacticsGame.Timers.Step))
+                _stoppedAt = now;
             if (!fresh)
                 CheckChange(e, before, after, now);
+            if (_latched && !after.Timers.Contains(TacticsGame.Timers.Step) && after.Phase == TacticsPhase.Exploration)
+            {
+                // The latched tap has gone: anything else that stops the party (the leader going, the phase changing) forgot it already.
+                if (after.Party.Seq == before.Party.Seq)
+                {
+                    var (dx, dy) = WorldWalk.Delta(Enum.Parse<WalkDir>(_dir!, ignoreCase: true));
+                    Must(WorldWalk.Next(Ground, before.Party.At, Enum.Parse<WalkDir>(_dir!, ignoreCase: true), ClassDef.DefaultJump, _lastAlongX) is null,
+                        $"a quick tap was let go and dropped, after {e}");
+                    Must(after.Party.Facing == new Tile(before.Party.At.X + dx, before.Party.At.Y + dy), "a quick tap into a wall didn't turn the party");
+                }
+                Forget();
+            }
+            if (_seat >= 0 && before.Party.Leader == _players[_seat].Name || before.Phase != TacticsPhase.Exploration && after.Phase == TacticsPhase.Exploration)
+                _leaderHeard = now;
+            _seat = -1;
+            if (after.Party.Seq != before.Party.Seq || after.Party.Blocked)
+                _owed = false;      // the press was tried: stepped, or turned against a wall
             CheckLeaders(after);
             if (after.Phase == TacticsPhase.Exploration)
                 CheckTimers(e, after, now);
@@ -463,14 +525,25 @@ public sealed class WalkModelTests
             if (was.Leader != party.Leader)
             {
                 Must(!(was.Held && party.Held), "the leader changed with the party held");
-                if (_players.FirstOrDefault(p => p.Name == was.Leader) is { } old && _online.Contains(_players.IndexOf(old)) && e.Kind == "fire:lead")
-                    _silent.Add(old.Profile!.Value.Value);
+                var old = _players.FirstOrDefault(p => p.Name == was.Leader);
+                var oldCanLead = old is not null && _online.Contains(_players.IndexOf(old)) && party.Party.Any(w => w.Name == old.Name && w.Here);
+                var silence = e.Kind == "fire:lead" && now - _leaderHeard >= TimeSpan.FromMilliseconds(7999);
+                if (oldCanLead && silence)
+                    _silent.Add(old!.Profile!.Value.Value);
+                // The takeback: the session's own leader takes it from a stand-in who could keep it only once the party has been
+                // stopped for 3 s, so that the stand-in's pad doesn't go the moment a thumb lifts.
+                var own = _players.FirstOrDefault(p => p.Profile!.Value.Value == _lease.World?.LastLeader);
+                if (oldCanLead && !silence && own is not null && party.Leader == own.Name
+                    && before.Phase == TacticsPhase.Exploration && after.Phase == TacticsPhase.Exploration)
+                    Must(now - _stoppedAt >= TimeSpan.FromMilliseconds(2999), $"the lead went back {(now - _stoppedAt).TotalMilliseconds} ms after the party stopped, on {e}");
+                _leaderHeard = now;
                 if (!after.Timers.Contains(TacticsGame.Timers.Step))
                     Forget();
             }
-            if (e.Kind is "walk" or "junk" or "fire:save" && was.Held == party.Held && was.Seq == party.Seq && was.Facing == party.Facing
-                && was.Leader == party.Leader && before.Phase == after.Phase && before.Notice == after.Notice)
-                Must(before.Host == after.Host, "the host view changed with no step and no change in Held");
+            if (e.Kind is "walk" or "junk" or "fire:save" && was.Held == party.Held && was.Blocked == party.Blocked && was.Seq == party.Seq
+                && was.Facing == party.Facing && was.Leader == party.Leader && before.Phase == after.Phase && before.Notice == after.Notice)
+                Must(before.Host == after.Host, "the host view changed with no step and no change in Held or Blocked");
+            Must(!party.Blocked || !party.Held, "blocked and held at once");
             if (e.Kind == "walk" && before.Phase == after.Phase && was.Leader == party.Leader)
                 Must(before.Phones.SequenceEqual(after.Phones), "a walk input changed a phone");
         }
@@ -482,6 +555,9 @@ public sealed class WalkModelTests
             var step = WorldWalk.Next(Ground, from, Enum.Parse<WalkDir>(_dir!, ignoreCase: true), ClassDef.DefaultJump, _lastAlongX);
             Must(step?.To == leg.To, $"the leg {from} to {leg.To} isn't Next, {step?.To}");
             var move = step!.Value;
+            Must(Ground.Walkable(move.To) && (move.Diagonal || WorldWalk.Legal(Ground, from, move.To, ClassDef.DefaultJump)), $"a step onto a blocked tile, {move.To}");
+            if (_latched)
+                Must(!after.Timers.Contains(TacticsGame.Timers.Step), "a quick tap took more than one step");
             var drop = Ground.HeightAt(from) - Ground.HeightAt(move.To);
             var ms = (int)Math.Round(300.0 * move.Cost * (move.Diagonal ? Math.Sqrt(2) : 1) + 60.0 * Math.Max(0, drop - 2));
             Must(leg.Ms == ms, $"the leg took {leg.Ms} ms, not {ms}");
@@ -506,6 +582,12 @@ public sealed class WalkModelTests
             var leads = after.Party.Party.Where(w => w.Leads).ToArray();
             Must(leads.Length == Math.Min(here, 1), $"{leads.Length} leaders with {here} here");
             Must(leads.All(w => w.Here), "the leader isn't here");
+            // The leader is always a seated, connected player with a character, whenever anyone is.
+            var leader = _game.Leader;
+            Must((leader is not null) == (here > 0), $"a leader {leader?.Name} with {here} here");
+            if (leader is not null)
+                Must(_players.Contains(leader) && _online.Contains(_players.IndexOf(leader)) && after.Party.Party.Any(w => w.Name == leader.Name),
+                    $"the leader {leader.Name} isn't a seated, connected player with a character");
         }
 
         private void CheckTimers(Event e, Seen after, DateTimeOffset now)
@@ -514,7 +596,9 @@ public sealed class WalkModelTests
             var stepping = after.Timers.Contains(TacticsGame.Timers.Step);    // a party against a wall stands, with its hold still running
             Must(after.Timers.Contains(TacticsGame.Timers.Lead) == (_game.Leader is not null), "the lead timer doesn't match the leader");
             Must(!party.Held || stepping, "held with no step timer");
-            Must(!stepping || _heldUntil is not null, "a step timer with nothing held");
+            Must(!stepping || _heldUntil is not null || _latched, "a step timer with nothing held");
+            if (_latched && !_late && _commits > 0)
+                Must(now <= _lastCommit.AddMilliseconds(_lastMs + 1), $"a latched tap still waiting {(now - _lastCommit).TotalMilliseconds} ms after a {_lastMs} ms step");
             var slack = (_late ? _slackMs + 1 : 0) + (_setup.Clock == 2 ? 1 : 0);
             if (_heldUntil is { } until && now > until.AddMilliseconds(slack))
                 Must(!stepping, $"still held {(now - until).TotalMilliseconds} ms past the lease");
@@ -530,8 +614,10 @@ public sealed class WalkModelTests
             if (_behindSince is { } since && !_late)
                 Must((now - since).TotalSeconds <= 15.01, $"unsaved for {(now - since).TotalSeconds} s");
 
-            if (!stepping && saved?.LastLeader is { } own && !_silent.Contains(own) && party.Party.FirstOrDefault(w => w.Id == own) is { Here: true } walker)
-                Must(walker.Leads, $"the session's leader {own} is here and the party's stopped, but {party.Leader} leads, after {e}");
+            // The session's leader has it back once the party has been stopped for 3 s, give or take a late timer.
+            var takeback = _stoppedAt == DateTimeOffset.MinValue ? _stoppedAt : _stoppedAt.AddMilliseconds(3000 + (_late ? 1600 : 1));
+            if (!stepping && now >= takeback && saved?.LastLeader is { } own && !_silent.Contains(own) && party.Party.FirstOrDefault(w => w.Id == own) is { Here: true } walker)
+                Must(walker.Leads, $"the session's leader {own} is here and the party's been stopped since {_stoppedAt:HH:mm:ss.fff}, but {party.Leader} leads, after {e}");
         }
     }
 
@@ -565,6 +651,12 @@ public sealed class WalkModelTests
             }
             events.Add(new Event("walk", -1));
             events.Add(new Event("adv", Ms: r.Next(1, 1500)));
+            if (r.Next(3) == 0)     // a run of quick taps, some faster than the walk
+                for (var k = r.Next(1, 10); k > 0; k--)
+                {
+                    events.Add(new Event("tap", -1, Directions[r.Next(8)], Ms: r.Next(1, 200)));
+                    events.Add(new Event("adv", Ms: r.Next(1, 400)));
+                }
             foreach (var (kind, odds) in new[] { ("end", 12), ("start", 12), ("battles", 12), ("back", 12), ("restart", 20), ("conn", 10) })
                 if (r.Next(odds) == 0)
                     events.Add(new Event(kind, kind == "conn" ? r.Next(4) : 0));
@@ -586,9 +678,14 @@ public sealed class WalkModelTests
                     dir = Directions[r.Next(8)];
                 events.Add(new Event("walk", r.Next(12) == 0 ? r.Next(4) : -1, dir));
             }
-            else if (roll < 400)
+            else if (roll < 370)
             {
                 events.Add(new Event("walk", -1));
+                dir = null;
+            }
+            else if (roll < 400)
+            {
+                events.Add(new Event("tap", r.Next(12) == 0 ? r.Next(4) : -1, Directions[r.Next(8)], Ms: r.Next(6) == 0 ? 0 : r.Next(1, 300)));
                 dir = null;
             }
             else if (roll < 740)

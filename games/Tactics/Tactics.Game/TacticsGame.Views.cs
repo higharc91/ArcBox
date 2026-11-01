@@ -127,7 +127,7 @@ public sealed record WalkerView(string Id, string Name, string Sprite, bool Here
 
 /// <summary>
 /// The party in the world, for the TV: in every phase once a region exists, so a TV that joins mid-fight can learn the region. It
-/// changes only when a step commits or <paramref name="Held"/> does.
+/// changes only when a step commits, the party turns, or <paramref name="Held"/> or <paramref name="Blocked"/> does.
 /// </summary>
 /// <param name="Region">The region's id.</param>
 /// <param name="Name">The region's name.</param>
@@ -140,8 +140,13 @@ public sealed record WalkerView(string Id, string Name, string Sprite, bool Here
 /// <param name="Party">The party, in member order.</param>
 /// <param name="Leader">The leader's player's name, or null with nobody here to lead.</param>
 /// <param name="Chapter">The region's chapter, for the TV's panel.</param>
+/// <param name="Blocked">
+/// True while the leader holds a direction a wall refused (spec §4.5, overworld 5b review item 2), so the TV can bump the leader
+/// against it: a press that does nothing must not look like letting go or a dropped phone. It's false again once the thumb lifts, so
+/// each press against a wall is its own bump. The phone isn't told, because that would mint a new view under the thumb.
+/// </param>
 public sealed record ExploreView(string Region, string Name, int Epoch, int Seq, Tile At, Tile Facing, bool Held,
-    ImmutableArray<WalkLeg> Legs, ImmutableArray<WalkerView> Party, string? Leader, int Chapter = 0);
+    ImmutableArray<WalkLeg> Legs, ImmutableArray<WalkerView> Party, string? Leader, int Chapter = 0, bool Blocked = false);
 
 /// <summary>The TV's view of a tactics session (adapter spec §8).</summary>
 /// <param name="Phase">The phase.</param>
@@ -241,7 +246,7 @@ public sealed partial class TacticsGame
     private ExploreView? ExploreViewOf() => _region is not { } region ? null : new ExploreView(region.Def.Id, region.Def.Name, _epoch, _walkSeq, _at, _facing, _dir is not null && !_blocked, _legs,
         [.. Walkers().Select(w => new WalkerView(w.Player.Profile!.Value.Value, w.Player.Name,
             HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{w.Character.Class}"])!, w.Here, w.Leads))],
-        Leader?.Name, region.Def.Chapter);
+        Leader?.Name, region.Def.Chapter, _dir is not null && _blocked);
 
     private ControllerView BattleScreen(ProfileId profile)
     {

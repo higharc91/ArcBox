@@ -59,6 +59,10 @@ public sealed class WalkingTests
 
     private static void Walk(Session s, string? dir, int player = 0) => s.Send(player, "walk", new { dir });
 
+    private static WalkDir Opposite(WalkDir dir) => (WalkDir)(((int)dir + 4) % 8);
+
+    private static string Name(WalkDir dir) => dir.ToString().ToLowerInvariant();
+
     private static ExploreView Party(Session s) => s.Host.Explore!;
 
     private static string PhoneJson(Session s, int player) => JsonSerializer.Serialize(s.Harness.PlayerView(player), ArcJson.Options);
@@ -184,6 +188,149 @@ public sealed class WalkingTests
         }
 
         Assert.True(Party(s).Seq <= 1, $"{Party(s).Seq} steps in 250 ms");
+        s.Harness.Advance(TimeSpan.FromSeconds(2));
+        Assert.Equal(2, Party(s).Seq);      // the first tap's step, and one for all the taps that came during it
+        Assert.DoesNotContain(Step, s.Harness.ActiveTimers);
+    }
+
+    // ---- Quick taps: a press during a step, let go before it ends, is latched and goes when the step ends ----------------
+
+    [Fact]
+    public void A_tap_during_a_step_takes_one_step_when_that_step_ends()
+    {
+        var road = Road();
+        var c = new Clock(At(road));
+        c.Walk("se");
+        Assert.Equal(1, c.Seq);
+        c.Pass(100);
+        c.Walk(null);
+
+        c.Pass(100);
+        c.Walk("se");
+        c.Pass(50);
+        c.Walk(null);       // let go at 250 ms, before the first step ends at 300
+
+        Assert.Equal(1, c.Seq);
+        Assert.Equal(c.Started + Ms300, c.Deadline(Step));
+        c.Pass(50);
+        c.Fire(Step);
+
+        Assert.Equal(2, c.Seq);
+        Assert.Equal(new Tile(road.X + 2, road.Y), c.Party.At);
+        Assert.False(c.Party.Held);
+        Assert.Null(c.Deadline(Step));      // one step, then stopped
+    }
+
+    [Fact]
+    public void A_latched_tap_goes_on_time_from_a_late_timer_and_takes_only_one_step()
+    {
+        var c = new Clock(At(Road()));
+        c.Walk("se");
+        c.Pass(100);
+        c.Walk(null);
+        c.Pass(50);
+        c.Walk("se");
+        c.Pass(10);
+        c.Walk(null);
+
+        c.Pass(1000);       // the timer fires very late
+        c.Fire(Step);
+
+        Assert.Equal(2, c.Seq);
+        Assert.Null(c.Deadline(Step));
+    }
+
+    [Fact]
+    public void Several_taps_during_one_step_latch_one_step()
+    {
+        var c = new Clock(At(Road()));
+        c.Walk("se");
+        for (var i = 0; i < 4; i++)
+        {
+            c.Pass(30);
+            c.Walk(null);
+            c.Pass(30);
+            c.Walk("se");
+        }
+        c.Pass(10);
+        c.Walk(null);       // 250 ms in
+
+        c.Pass(50);
+        c.Fire(Step);
+
+        Assert.Equal(2, c.Seq);
+        Assert.Null(c.Deadline(Step));
+    }
+
+    [Fact]
+    public void A_tap_in_a_new_direction_during_a_step_goes_that_way()
+    {
+        var road = Road();
+        var c = new Clock(At(road));
+        c.Walk("se");
+        c.Pass(100);
+        c.Walk("nw");       // a change while held, let go before the step ends
+        c.Pass(50);
+        c.Walk(null);
+
+        c.Pass(150);
+        c.Fire(Step);
+
+        Assert.Equal(2, c.Seq);
+        Assert.Equal(road, c.Party.At);
+        Assert.Null(c.Deadline(Step));
+    }
+
+    [Fact]
+    public void A_release_after_the_step_was_taken_latches_nothing()
+    {
+        var c = new Clock(At(Road()));
+        c.Walk("se");
+        c.Pass(100);
+
+        c.Walk(null);       // that press already stepped: nothing is owed
+
+        Assert.Null(c.Deadline(Step));
+        Assert.Equal(1, c.Seq);
+    }
+
+    [Fact]
+    public void A_latched_tap_is_dropped_if_the_leader_goes()
+    {
+        var s = At(Road());
+        Walk(s, "se");
+        s.Harness.Advance(Ms100);
+        Walk(s, null);
+        Walk(s, "se");
+        Walk(s, null);
+
+        s.Harness.SetConnected(0, false);
+        s.Harness.Advance(TimeSpan.FromSeconds(1));
+
+        Assert.Equal(1, Party(s).Seq);
+        Assert.DoesNotContain(Step, s.Harness.ActiveTimers);
+    }
+
+    [Fact]
+    public void A_latched_tap_into_a_wall_turns_the_party_and_stops()
+    {
+        var (at, dir, blocked) = Wall();
+        var away = Dirs.First(d => WorldWalk.Next(Ground, at, d.Dir, ClassDef.DefaultJump, null) is { Slid: false } m
+            && WorldWalk.Next(Ground, m.To, Opposite(d.Dir), ClassDef.DefaultJump, null)?.To == at).Dir;
+        var s = At(at);
+        Walk(s, Name(away));
+        Walk(s, null);
+        s.Harness.Advance(TimeSpan.FromSeconds(1));
+        Walk(s, Name(Opposite(away)));      // back to the wall's tile
+        Walk(s, null);
+        Assert.Equal(at, Party(s).At);
+
+        Walk(s, dir);       // a tap into the wall, during the step back
+        Walk(s, null);
+        s.Harness.Advance(TimeSpan.FromSeconds(1));
+
+        Assert.Equal(at, Party(s).At);
+        Assert.Equal(new Tile(at.X + WorldWalk.Delta(blocked).Dx, at.Y + WorldWalk.Delta(blocked).Dy), Party(s).Facing);
         Assert.DoesNotContain(Step, s.Harness.ActiveTimers);
     }
 
@@ -467,7 +614,8 @@ public sealed class WalkingTests
     {
         foreach (var tile in Reached.Order())
             foreach (var dir in new[] { WalkDir.SE, WalkDir.NW, WalkDir.NE, WalkDir.SW })
-                if (WorldWalk.Next(Ground, tile, dir, ClassDef.DefaultJump, null) is null)
+                if (WorldWalk.Next(Ground, tile, dir, ClassDef.DefaultJump, null) is null    // a wall inside the region, not its edge
+                    && WorldWalk.Delta(dir) is var (dx, dy) && Ground.Map.InBounds(new Tile(tile.X + dx, tile.Y + dy)))
                     return (tile, dir.ToString().ToLowerInvariant(), dir);
         throw new InvalidOperationException("Ashen Ford has no walls.");
     }
@@ -486,6 +634,115 @@ public sealed class WalkingTests
         Assert.Equal(new Tile(at.X + dx, at.Y + dy), Party(s).Facing);
         Assert.Empty(Party(s).Legs);
         Assert.Equal(phone, PhoneJson(s, 0));
+    }
+
+    [Fact]
+    public void A_press_against_a_wall_tells_the_tv_it_was_blocked()
+    {
+        var (at, dir, _) = Wall();
+        var s = At(at);
+        Assert.False(Party(s).Blocked);
+        var phones = Enumerable.Range(0, 4).Select(p => PhoneJson(s, p)).ToArray();
+
+        Walk(s, dir);
+
+        Assert.True(Party(s).Blocked);
+        Assert.False(Party(s).Held);
+        Assert.Equal(phones, Enumerable.Range(0, 4).Select(p => PhoneJson(s, p)));    // the phone stays silent: telling it would mint a view
+        s.Harness.Advance(Ms100);
+        Walk(s, dir);
+        Assert.True(Party(s).Blocked);      // still pressed against it
+
+        Walk(s, null);
+        Assert.False(Party(s).Blocked);     // let go: the next press against it is a new bump
+    }
+
+    [Fact]
+    public void Turning_from_a_wall_to_open_ground_isnt_blocked()
+    {
+        var (at, dir, blocked) = Wall();
+        var s = At(at);
+        Walk(s, dir);
+        var away = Dirs.First(d => d.Dir != blocked && WorldWalk.Next(Ground, at, d.Dir, ClassDef.DefaultJump, null) is not null).Name;
+
+        Walk(s, away);
+
+        Assert.False(Party(s).Blocked);
+        Assert.True(Party(s).Held);
+    }
+
+    [Fact]
+    public void Walking_on_open_ground_is_never_blocked()
+    {
+        var s = At(Road());
+        Walk(s, "se");
+        for (var i = 0; i < 10; i++)
+        {
+            Assert.False(Party(s).Blocked);
+            s.Harness.Advance(Ms100);
+            Walk(s, "se");
+        }
+    }
+
+    /// <summary>A tile beside the map's edge, and a road direction that would walk off it.</summary>
+    private static (Tile At, WalkDir Dir) Edge()
+    {
+        foreach (var tile in Reached.Order())
+            foreach (var dir in new[] { WalkDir.SE, WalkDir.NW, WalkDir.NE, WalkDir.SW })
+                if (WorldWalk.Delta(dir) is var (dx, dy) && !Ground.Map.InBounds(new Tile(tile.X + dx, tile.Y + dy))
+                    && WorldWalk.Next(Ground, tile, dir, ClassDef.DefaultJump, null) is null)
+                    return (tile, dir);
+        throw new InvalidOperationException("Ashen Ford's roads never reach its edge.");
+    }
+
+    private const string RoadGoesOn = "The road goes on, but not today.";
+
+    [Fact]
+    public void The_edge_of_the_region_says_the_road_goes_on()
+    {
+        var (at, dir) = Edge();
+        var s = At(at);
+        var phones = Enumerable.Range(0, 4).Select(p => PhoneJson(s, p)).ToArray();
+
+        Walk(s, Name(dir));
+
+        Assert.Equal(RoadGoesOn, s.Host.Notice);
+        Assert.Equal(phones, Enumerable.Range(0, 4).Select(p => PhoneJson(s, p)));
+    }
+
+    [Fact]
+    public void The_road_goes_on_once_a_session()
+    {
+        var (at, dir) = Edge();
+        var s = At(at);
+        var away = Dirs.First(d => WorldWalk.Next(Ground, at, d.Dir, ClassDef.DefaultJump, null) is { Slid: false } m
+            && WorldWalk.Next(Ground, m.To, Opposite(d.Dir), ClassDef.DefaultJump, null)?.To == at).Dir;
+        Walk(s, Name(dir));
+        Walk(s, null);
+
+        Walk(s, Name(away));        // the step clears it...
+        Assert.Null(s.Host.Notice);
+        Walk(s, null);
+        s.Harness.Advance(TimeSpan.FromSeconds(1));
+        Walk(s, Name(Opposite(away)));
+        Walk(s, null);
+        s.Harness.Advance(TimeSpan.FromSeconds(1));
+        Walk(s, Name(dir));         // ...and coming back to the edge doesn't say it again
+
+        Assert.Equal(at, Party(s).At);
+        Assert.True(Party(s).Blocked);
+        Assert.Null(s.Host.Notice);
+    }
+
+    [Fact]
+    public void A_wall_inside_the_region_says_nothing()
+    {
+        var (at, dir, _) = Wall();
+        var s = At(at);
+
+        Walk(s, dir);
+
+        Assert.Null(s.Host.Notice);
     }
 
     [Fact]
@@ -917,6 +1174,7 @@ public sealed class WalkingTests
         Assert.True(Party(s).Held);
 
         Walk(s, null, player: 1);
+        s.Harness.Advance(TimeSpan.FromSeconds(3));
 
         Assert.Equal(s.Harness.Players[0].Id, s.Game.Leader!.Id);
     }
@@ -950,7 +1208,7 @@ public sealed class WalkingTests
     }
 
     [Fact]
-    public void The_session_leader_takes_it_back_once_stopped()
+    public void The_session_leader_takes_it_back_once_the_party_has_stopped_for_3_seconds()
     {
         var s = At(Road());
         s.Harness.SetConnected(0, false);
@@ -962,8 +1220,71 @@ public sealed class WalkingTests
         Assert.True(Party(s).Held);
 
         Walk(s, null, player: 1);
+        Assert.Equal(s.Harness.Players[1].Id, s.Game.Leader!.Id);   // nor the moment a thumb lifts
+        s.Harness.Advance(TimeSpan.FromMilliseconds(2999));
+        Assert.Equal(s.Harness.Players[1].Id, s.Game.Leader!.Id);
+        s.Harness.Advance(TimeSpan.FromMilliseconds(1));
 
         Assert.Equal(s.Harness.Players[0].Id, s.Game.Leader!.Id);
+        Assert.True(s.Screen(0)!.Data.GetProperty("leader").GetBoolean());
+    }
+
+    [Fact]
+    public void Each_press_by_the_stand_in_restarts_the_takeback_clock()
+    {
+        var s = At(Road());
+        s.Harness.SetConnected(0, false);
+        Walk(s, "se", player: 1);
+        s.Harness.SetConnected(0, true);
+        Walk(s, null, player: 1);
+
+        for (var i = 0; i < 5; i++)      // walk, stop, look around, walk on: never 3 s at rest
+        {
+            s.Harness.Advance(TimeSpan.FromMilliseconds(2500));
+            Walk(s, "se", player: 1);
+            s.Harness.Advance(Ms100);
+            Walk(s, null, player: 1);
+            Assert.Equal(s.Harness.Players[1].Id, s.Game.Leader!.Id);
+        }
+
+        s.Harness.Advance(TimeSpan.FromSeconds(3));
+        Assert.Equal(s.Harness.Players[0].Id, s.Game.Leader!.Id);
+    }
+
+    [Fact]
+    public void The_stand_in_keeps_the_lead_while_holding_against_a_wall()
+    {
+        var (at, dir, _) = Wall();
+        var s = At(at);
+        Walk(s, dir);
+        s.Harness.SetConnected(0, false);      // dropped while pressing: the party stops now
+        Walk(s, dir, player: 1);
+        s.Harness.SetConnected(0, true);
+
+        for (var i = 0; i < 50; i++)
+        {
+            s.Harness.Advance(Ms100);
+            Walk(s, dir, player: 1);
+        }
+
+        Assert.Equal(s.Harness.Players[1].Id, s.Game.Leader!.Id);
+    }
+
+    [Fact]
+    public void The_takeback_waits_on_one_timer()
+    {
+        var c = new Clock(At(Road()));
+        c.Session(0, "walk", new { dir = "se" });
+        c.Game.OnPlayerConnectionChanged(c.Session1.Harness.Players[0].Id, false);
+        Assert.Equal(c.Session1.Harness.Players[1].Id, c.Leader!.Id);
+        c.Pass(500);
+        c.Game.OnPlayerConnectionChanged(c.Session1.Harness.Players[0].Id, true);
+
+        Assert.Equal(c.Started + TimeSpan.FromSeconds(3), c.Deadline(Lead));    // from the stop, not from coming back
+        c.Pass(2500);
+        c.Fire(Lead);
+        Assert.Equal(c.Session1.Harness.Players[0].Id, c.Leader!.Id);
+        Assert.Equal(c.Now + TimeSpan.FromSeconds(8), c.Deadline(Lead));       // and then the silence clock, as for any new leader
     }
 
     [Fact]
@@ -985,9 +1306,82 @@ public sealed class WalkingTests
         Walk(s, "se", player: 1);
         s.Harness.SetConnected(0, true);
 
-        s.Harness.Advance(TimeSpan.FromSeconds(1));
+        s.Harness.Advance(TimeSpan.FromMilliseconds(749 + 3000));
+        Assert.Equal(s.Harness.Players[1].Id, s.Game.Leader!.Id);
+        s.Harness.Advance(TimeSpan.FromMilliseconds(1));
 
         Assert.Equal(s.Harness.Players[0].Id, s.Game.Leader!.Id);
+    }
+
+    // ---- Saying who leads ---------------------------------------------------------------------------------------------
+
+    [Fact]
+    public void A_handover_is_said_on_the_tv_and_nowhere_else()
+    {
+        var s = At(Road());
+        Assert.Null(s.Host.Notice);         // the first leader isn't a handover
+
+        s.Harness.SetConnected(0, false);
+        var phones = Enumerable.Range(1, 3).Select(p => PhoneJson(s, p)).ToArray();
+
+        Assert.Equal("Player2 leads now.", s.Host.Notice);
+        Assert.All(Enumerable.Range(1, 3), p => Assert.DoesNotContain("leads now", PhoneJson(s, p), StringComparison.Ordinal));
+        Assert.Equal(phones, Enumerable.Range(1, 3).Select(p => PhoneJson(s, p)));
+    }
+
+    [Fact]
+    public void A_step_clears_the_handover_notice()
+    {
+        var s = At(Road());
+        s.Harness.SetConnected(0, false);
+
+        Walk(s, "se", player: 1);
+
+        Assert.Null(s.Host.Notice);
+    }
+
+    [Fact]
+    public void Handovers_say_only_the_latest()
+    {
+        var s = At(Road());
+        s.Harness.SetConnected(0, false);
+        s.Harness.SetConnected(1, false);
+
+        Assert.Equal("Player3 leads now.", s.Host.Notice);
+    }
+
+    [Fact]
+    public void The_session_leader_taking_it_back_is_said_too()
+    {
+        var s = At(Road());
+        s.Harness.SetConnected(0, false);
+        Walk(s, "se", player: 1);
+        s.Harness.SetConnected(0, true);
+        Walk(s, null, player: 1);
+
+        s.Harness.Advance(TimeSpan.FromSeconds(3));
+
+        Assert.Equal("Player1 leads now.", s.Host.Notice);
+    }
+
+    [Fact]
+    public void A_handover_notice_doesnt_follow_the_party_to_the_battle_list_and_keeps_others()
+    {
+        var doc = DocumentAt(Saved(new Tile(-1, 0)));      // a notice of its own, about the land changing
+        var s = new Session(document: doc);
+        s.Harness.StartCampaign(s.Lease);
+        var land = s.Host.Notice;
+        Assert.NotNull(land);
+        Walk(s, null);
+        s.Harness.SetConnected(1, false);
+        s.Harness.SetConnected(0, false);
+        Assert.Equal($"{land} Player3 leads now.", s.Host.Notice);
+
+        s.Harness.SetConnected(0, true);
+        Assert.Equal($"{land} Player1 leads now.", s.Host.Notice);
+        s.Send(0, "battles");
+
+        Assert.Equal(land, s.Host.Notice);
     }
 
     [Fact]
@@ -1259,7 +1653,9 @@ public sealed class WalkingTests
         public DateTimeOffset Started { get; }
         public DateTimeOffset Now { get; private set; } = new(2026, 1, 1, 0, 0, 0, TimeSpan.Zero);
         public Random Random { get; } = new(1);
-        public int Seq => ((TacticsHostView)Game.HostView()).Explore!.Seq;
+        public int Seq => Party.Seq;
+        public ExploreView Party => ((TacticsHostView)Game.HostView()).Explore!;
+        public Player? Leader => Game.Leader;
 
         /// <summary>How much later than the game's own read the deadline is worked out.</summary>
         public TimeSpan Skew { get; init; }

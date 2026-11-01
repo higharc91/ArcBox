@@ -9,9 +9,15 @@ namespace Tactics.Game;
 /// <param name="SaveWhileWalking">How often a walk is saved while the party keeps moving.</param>
 public sealed record WalkTiming(TimeSpan Step, TimeSpan DropStep, TimeSpan HoldLease, TimeSpan LeadSilence, TimeSpan SaveAfterStop, TimeSpan SaveWhileWalking)
 {
-    /// <summary>0.30 s a tile, 60 ms a drop level, a 750 ms lease, 8 s of silence, and saves at 1 s after stopping and every 15 s.</summary>
+    /// <summary>0.30 s a tile, 60 ms a drop level, a 750 ms lease, 8 s of silence, saves at 1 s after stopping and every 15 s, and a 3 s takeback.</summary>
     public static WalkTiming Default { get; } = new(TimeSpan.FromMilliseconds(300), TimeSpan.FromMilliseconds(60), TimeSpan.FromMilliseconds(750),
         TimeSpan.FromSeconds(8), TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(15));
+
+    /// <summary>
+    /// How long the party has to have been stopped before the session's own leader takes the lead back from whoever stood in, so that
+    /// the stand-in's pad doesn't vanish the first time a thumb lifts. The party stopping again restarts it, so any press does.
+    /// </summary>
+    public TimeSpan TakebackAfter { get; init; } = TimeSpan.FromSeconds(3);
 }
 
 /// <summary>

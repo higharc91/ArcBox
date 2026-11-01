@@ -112,9 +112,138 @@ public sealed class WorldWalkTests
     public void A_slide_with_no_axis_to_prefer_goes_along_x()
         => Assert.Equal(new Tile(1, 0), From00("0. 0.\n0. 0#", WalkDir.S)!.Value.To);
 
+    // A straight step is a road direction on screen (ne, se, sw, nw). Blocked, it slides round a one-tile jag in the wall, and only then.
+
     [Fact]
-    public void A_blocked_straight_step_doesnt_slide()
-        => Assert.Null(From00("0. 0#\n0. 0.", WalkDir.SE));
+    public void A_blocked_straight_step_slides_round_a_one_tile_jag()
+        => Assert.Equal(new WalkMove(new Tile(0, 1), 1, Diagonal: false, Slid: true), From00("0. 0#\n0. 0.", WalkDir.SE));
+
+    [Fact]
+    public void A_jag_slide_costs_the_side_step()
+        => Assert.Equal(new WalkMove(new Tile(0, 1), 2, Diagonal: false, Slid: true), From00("0. 0#\n0~ 0.", WalkDir.SE));
+
+    [Fact]
+    public void A_blocked_straight_step_along_a_straight_wall_doesnt_slide()
+        => Assert.Null(From00("0. 0#\n0. 0#", WalkDir.SE));
+
+    [Fact]
+    public void A_blocked_straight_step_with_both_sides_open_doesnt_guess()
+        => Assert.Null(WorldWalk.Next(TerrainOf("0. 0.\n0. 0#\n0. 0."), new Tile(0, 1), WalkDir.SE, Jump, null));
+
+    [Fact]
+    public void A_jag_slide_needs_the_side_step_itself_to_be_legal()
+    {
+        Assert.Null(From00("0. 0#\n3. 0.", WalkDir.SE));      // too high to climb to the side
+        Assert.Null(From00("0. 0#\n0. 3.", WalkDir.SE));      // the side is fine, but the way on from it is a climb too high
+    }
+
+    [Fact]
+    public void The_map_edge_is_a_closed_side()
+        => Assert.Null(WorldWalk.Next(TerrainOf("0. 0#\n0# 0."), Origin, WalkDir.SE, Jump, null));
+
+    [Theory]
+    [InlineData(WalkDir.NE)]
+    [InlineData(WalkDir.SE)]
+    [InlineData(WalkDir.SW)]
+    [InlineData(WalkDir.NW)]
+    public void A_jag_slide_is_the_same_rule_turned(WalkDir dir)
+    {
+        // A 5x5 open square with the tile ahead of the centre walled and one side of it walled too: the slide goes to the other side.
+        var (dx, dy) = WorldWalk.Delta(dir);
+        var centre = new Tile(2, 2);
+        var (wall, closed, open) = (new Tile(2 + dx, 2 + dy), new Tile(2 + dy, 2 + dx), new Tile(2 - dy, 2 - dx));
+        var terrain = TerrainOf(Square(5, t => t == wall || t == closed));
+
+        Assert.Equal(new WalkMove(open, 1, Diagonal: false, Slid: true), WorldWalk.Next(terrain, centre, dir, Jump, null));
+    }
+
+    // ---- Walking along walls: what holding a direction does, on many random grounds --------------------------------------
+
+    private static string Square(int size, Func<Tile, bool> wall)
+        => string.Join('\n', Enumerable.Range(0, size).Select(y => string.Join(' ', Enumerable.Range(0, size).Select(x => wall(new Tile(x, y)) ? "0#" : "0."))));
+
+    /// <summary>
+    /// A random 14x14 ground: straight walls along both axes, a few with one-tile jags, corridors one wide, and scattered rocks, at
+    /// random heights so that some steps are climbs too high.
+    /// </summary>
+    private static Terrain RandomGround(int seed)
+    {
+        const int Size = 14;
+        var r = new Random(seed);
+        var walls = new HashSet<Tile>();
+        for (var w = 0; w < 4; w++)
+        {
+            var (alongX, at, from, to) = (r.Next(2) == 0, r.Next(Size), r.Next(Size / 2), r.Next(Size / 2, Size));
+            var jag = r.Next(3) == 0 ? r.Next(from, to) : -1;
+            for (var i = from; i < to; i++)
+            {
+                var off = jag >= 0 && i >= jag ? 1 : 0;
+                walls.Add(alongX ? new Tile(i, at + off) : new Tile(at + off, i));
+                if (r.Next(4) == 0)      // a corridor one wide
+                    walls.Add(alongX ? new Tile(i, at + off + 2) : new Tile(at + off + 2, i));
+            }
+        }
+        for (var i = 0; i < 10; i++)
+            walls.Add(new Tile(r.Next(Size), r.Next(Size)));
+        var heights = Enumerable.Range(0, Size).Select(_ => r.Next(5) == 0 ? 3 : 0).ToArray();
+        var rows = Enumerable.Range(0, Size).Select(y => string.Join(' ', Enumerable.Range(0, Size)
+            .Select(x => $"{(r.Next(8) == 0 ? heights[x] : 0)}{(walls.Contains(new Tile(x, y)) ? '#' : '.')}")));
+        return TerrainOf(string.Join('\n', rows));
+    }
+
+    [Fact]
+    public void Holding_a_direction_along_any_wall_never_steps_back_and_forth()
+    {
+        for (var seed = 1; seed <= 300; seed++)
+        {
+            var terrain = RandomGround(seed);
+            foreach (var start in Tiles(terrain).Where(terrain.Walkable))
+                foreach (var dir in Enum.GetValues<WalkDir>())
+                {
+                    var (at, lastAlongX, trail) = (start, (bool?)null, new List<Tile> { start });
+                    for (var step = 0; step < 30 && WorldWalk.Next(terrain, at, dir, Jump, lastAlongX) is { } move; step++)
+                    {
+                        if (!move.Diagonal)
+                            lastAlongX = move.To.Y == at.Y;
+                        at = move.To;
+                        trail.Add(at);
+                    }
+                    for (var i = 2; i < trail.Count; i++)
+                        Assert.False(trail[i] == trail[i - 2], $"seed {seed}, {dir} from {start}: {string.Join(" ", trail)}");
+                    // Never further back along the direction held than it started: every step, slides included, is forward or sideways.
+                    var (dx, dy) = WorldWalk.Delta(dir);
+                    for (var i = 1; i < trail.Count; i++)
+                        Assert.True((trail[i].X - trail[i - 1].X) * dx + (trail[i].Y - trail[i - 1].Y) * dy >= 0, $"seed {seed}, {dir} from {start}: a step back");
+                }
+        }
+    }
+
+    [Fact]
+    public void Walking_reaches_what_the_floods_reach_and_nothing_more()
+    {
+        for (var seed = 1; seed <= 300; seed++)
+        {
+            var terrain = RandomGround(seed);
+            var start = Tiles(terrain).First(terrain.Walkable);
+            var walked = new HashSet<Tile> { start };
+            var open = new Stack<Tile>([start]);
+            while (open.TryPop(out var tile))
+                foreach (var dir in Enum.GetValues<WalkDir>())
+                    foreach (bool? axis in new bool?[] { null, true, false })
+                        if (WorldWalk.Next(terrain, tile, dir, Jump, axis) is { } move)
+                        {
+                            Assert.True(move.Diagonal || WorldWalk.Legal(terrain, tile, move.To, Jump), $"seed {seed}: {tile} to {move.To} isn't a legal step");
+                            Assert.Equal(1, Math.Max(Math.Abs(move.To.X - tile.X), Math.Abs(move.To.Y - tile.Y)));
+                            if (walked.Add(move.To))
+                                open.Push(move.To);
+                        }
+
+            Assert.Equal(WorldWalk.Reach(terrain, start, Jump).Order(), walked.Order());
+        }
+    }
+
+    private static IEnumerable<Tile> Tiles(Terrain terrain)
+        => Enumerable.Range(0, terrain.Map.Height).SelectMany(y => Enumerable.Range(0, terrain.Map.Width).Select(x => new Tile(x, y)));
 
     [Fact]
     public void A_diagonal_can_climb_4_through_two_legal_legs()
