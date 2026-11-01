@@ -78,9 +78,12 @@ public static class RegionWriter
                 .ThenBy(g => g.Key.Variant, StringComparer.Ordinal)
                 .Select(g => new RegionProps(g.Key.Id, g.Key.Variant, [.. g.Select(p => p.Tile).Distinct().Order()]))
                 .ToImmutableArray();
+        var buildings = source.Buildings.Count == 0
+            ? default
+            : source.Buildings.Distinct().OrderBy(b => b.At.Y).ThenBy(b => b.At.X).ThenBy(b => b.Id, StringComparer.Ordinal).ThenBy(b => b.Variant, StringComparer.Ordinal).ToImmutableArray();
         var def = new RegionDef(source.Id, source.Name, source.Chapter, [source.Width, source.Height],
             [.. materials.OrderBy(m => m.Value).Select(m => m.Key)], [.. chunks], [.. source.Stamps], [.. source.Beats],
-            new RegionSpawns(source.Start, source.Recovery), [], props);
+            new RegionSpawns(source.Start, source.Recovery), [], props, buildings);
         return new WriteResult(def, []);
     }
 
@@ -103,6 +106,7 @@ public static class RegionWriter
         }
         repaired.Beats.AddRange(source.Beats);
         repaired.Props.AddRange(source.Props);
+        repaired.Buildings.AddRange(source.Buildings);
         foreach (var stamp in source.Stamps)
             repaired.AddStamp(stamp);
         return repaired;

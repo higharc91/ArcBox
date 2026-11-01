@@ -11,12 +11,18 @@ namespace Tactics.Logic;
 public sealed record RegionDef(string Id, string Name, [property: JsonRequired] int Chapter, ImmutableArray<int> Size,
     ImmutableArray<string> Materials, ImmutableArray<RegionChunk> Chunks, ImmutableArray<RegionStamp> Stamps,
     ImmutableArray<BeatSpot> Beats, RegionSpawns Spawns, ImmutableArray<RegionEdge> Edges,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<RegionProps> Props = default);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<RegionProps> Props = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<RegionBuilding> Buildings = default);
 
 /// <summary>
 /// A group of props of the same <see cref="Id"/> and optional <see cref="Variant"/> standing at world tiles <see cref="At"/>.
 /// </summary>
 public sealed record RegionProps(string Id, [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Variant, ImmutableArray<Tile> At);
+
+/// <summary>
+/// A building of <c>town/manifest.json</c> standing in the region. <see cref="At"/> is the back corner tile of its footprint: the smallest x and y it covers.
+/// </summary>
+public sealed record RegionBuilding(string Id, string Variant, [property: JsonRequired] Tile At);
 
 /// <summary>
 /// One chunk: <see cref="X"/> and <see cref="Y"/> count chunks, not tiles, and <see cref="Tiles"/> is base64 of three bytes per

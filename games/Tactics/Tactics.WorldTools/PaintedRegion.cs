@@ -28,6 +28,9 @@ public sealed record PaintedRegion(string Id, string Name, int Chapter, int Widt
     /// <summary>The Props layer: a prop id and its variant on each painted tile.</summary>
     public IReadOnlyDictionary<Tile, (string Id, string? Variant)> Props { get; init; } = ImmutableDictionary<Tile, (string Id, string? Variant)>.Empty;
 
+    /// <summary>The buildings. The scene has no markers for them yet, so a region read back from one has none.</summary>
+    public IReadOnlyList<RegionBuilding> Buildings { get; init; } = [];
+
     /// <summary>The beat markers.</summary>
     public IReadOnlyList<BeatSpot> Beats { get; init; } = [];
 
@@ -71,6 +74,7 @@ public sealed record PaintedRegion(string Id, string Name, int Chapter, int Widt
         foreach (var (tile, material) in Materials)
             source.Set(tile, Heights.GetValueOrDefault(tile), material, Flags.GetValueOrDefault(tile));
         source.Beats.AddRange(Beats);
+        source.Buildings.AddRange(Buildings);
         foreach (var stamp in Stamps)
             source.AddStamp(stamp);
         foreach (var group in Props.GroupBy(p => (p.Value.Id, p.Value.Variant)))

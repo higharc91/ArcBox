@@ -201,6 +201,17 @@ public static partial class RegionExport
         return warnings;
     }
 
+    /// <summary>A door opening onto what nobody can stand on: nothing's broken, as a door does nothing yet, but it looks like a mistake.</summary>
+    private static IEnumerable<string> DoorWarnings(RegionDef region, RulesPack pack)
+    {
+        if (region.Buildings.IsDefault || pack.Art is not { } art || pack.GroundFor(region.Id) is not { } ground)
+            yield break;
+        foreach (var building in region.Buildings)
+            foreach (var step in art.Buildings[building.Id].DoorSteps(building.At).Distinct())
+                if (!ground.Map.InBounds(step) || !ground.Terrain.Walkable(step))
+                    yield return $"The door of the '{building.Id}' at {building.At} opens onto {step}, which can't be stood on. Move the building, or clear that tile.";
+    }
+
     private static ExportResult Run(PaintedRegion painted, string rulesDirectory, string contentBase)
     {
         if (!File.Exists(Path.Combine(rulesDirectory, "manifest.json")))
@@ -233,6 +244,8 @@ public static partial class RegionExport
 
         var bytes = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(region, FileOptions) + "\n");
         var checks = Check(rulesDirectory, region.Id, bytes, contentBase);
+        if (checks.Pack is { } checkedPack)
+            warnings = [.. warnings, .. DoorWarnings(region, checkedPack)];
         problems.AddRange(painted.Starts.Count == 0 ? checks.Problems.Where(p => !NeedsTheStart(p)) : checks.Problems);
         if (problems.Count > 0)
             return new ExportResult(null, [.. problems]) { Warnings = warnings };

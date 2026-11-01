@@ -3,8 +3,8 @@ using System.Collections.Immutable;
 namespace Tactics.Logic;
 
 /// <summary>
-/// A region as the party walks it: one <see cref="BattleMap"/> of the whole region, with its stamped maps' props standing at world tiles
-/// and impassable void wherever nothing was painted, so <see cref="Paths.StepCost"/> and <see cref="Terrain.Walkable"/> work on it
+/// A region as the party walks it: one <see cref="BattleMap"/> of the whole region, with its stamped maps' props standing at world tiles,
+/// its buildings' blocking tiles as props of their own, and impassable void wherever nothing was painted, so <see cref="Paths.StepCost"/> and <see cref="Terrain.Walkable"/> work on it
 /// unchanged. Stamped tiles need no copying, as the region's own tiles match the map (the loader checks that). A stamp on an unknown map
 /// adds no props, which only a pack that failed to load can have.
 /// </summary>
@@ -15,6 +15,9 @@ public sealed class WorldGround
 
     /// <summary>A tile's material is one byte.</summary>
     private const int MaxMaterials = 256;
+
+    /// <summary>What marks a building's blocking tile among the props, so it's never taken for a prop with the same name. No art has this id, so none is drawn.</summary>
+    private const string BuildingProp = "building:";
 
     private WorldGround(BattleMap map)
     {
@@ -30,7 +33,7 @@ public sealed class WorldGround
 
     /// <summary>Builds the ground of <paramref name="region"/>, whose stamps are looked up in <paramref name="maps"/>.</summary>
     public static WorldGround Of(WorldRegion region, IReadOnlyDictionary<string, BattleMap> maps,
-        IReadOnlyDictionary<string, PropArtDef>? propDefs = null)
+        IReadOnlyDictionary<string, PropArtDef>? propDefs = null, IReadOnlyDictionary<string, BuildingArtDef>? buildingDefs = null)
     {
         var (width, height) = (region.Def.Size[0], region.Def.Size[1]);
         var materials = region.Def.Materials;
@@ -53,6 +56,7 @@ public sealed class WorldGround
             }
 
         var propsLookup = propDefs ?? ArtManifests.DefaultProps;
+        var buildingLookup = buildingDefs ?? ArtManifests.DefaultBuildings;
         List<PropPlacement> allProps =
         [
             .. region.Def.Stamps.Where(s => maps.ContainsKey(s.Map))
@@ -63,6 +67,9 @@ public sealed class WorldGround
                 var cover = propsLookup?.TryGetValue(group.Id, out var def2) == true ? def2.Cover : Cover.None;
                 return group.At.Select(t => new PropPlacement(group.Id, t, blocks, cover, group.Variant));
             }),
+            .. region.Buildings.SelectMany(b => buildingLookup?.GetValueOrDefault(b.Id) is { } def
+                ? def.Blocked(b.At).Where(t => t.X >= 0 && t.Y >= 0 && t.X < width && t.Y < height).Select(t => new PropPlacement(BuildingProp + b.Id, t, true, def.Cover))
+                : []),
         ];
         var stampedTiles = region.Def.Stamps.Where(s => maps.ContainsKey(s.Map))
             .SelectMany(s =>
@@ -72,6 +79,7 @@ public sealed class WorldGround
                     .SelectMany(y => Enumerable.Range(0, map.Width).Select(x => new Tile(s.At.X + x, s.At.Y + y)));
             }).ToImmutableHashSet();
         return new WorldGround(BattleMap.FromBytes(region.Def.Id, width, height, bytes, materials, [.. allProps],
-            ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty, stampedTiles));
+            ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty, stampedTiles,
+            [.. region.Buildings.Select(b => new BuildingPlacement(b.Id, b.Variant, b.At, region.TileAt(b.At)?.Height ?? 0))]));
     }
 }

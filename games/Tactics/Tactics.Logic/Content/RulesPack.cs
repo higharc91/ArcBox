@@ -33,7 +33,7 @@ public sealed partial class RulesPack
         AiProfiles = catalog.AiProfiles;
         Xp = catalog.Xp;
         Regions = catalog.Regions;
-        _grounds = Regions.ToImmutableSortedDictionary(r => r.Key, r => new Lazy<WorldGround>(() => WorldGround.Of(r.Value, maps, art?.Props)), StringComparer.Ordinal);
+        _grounds = Regions.ToImmutableSortedDictionary(r => r.Key, r => new Lazy<WorldGround>(() => WorldGround.Of(r.Value, maps, art?.Props, art?.Buildings)), StringComparer.Ordinal);
         _injuryPassives = injuries.Values.ToImmutableSortedDictionary(i => InjuryPassiveId(i.Id),
             i => new PassiveDef(InjuryPassiveId(i.Id), i.Hook, null, i.Effects.IsDefault ? [] : i.Effects, i.Static with { MaxHp = 0 },
                 Target: PassiveTarget.Self), StringComparer.Ordinal);

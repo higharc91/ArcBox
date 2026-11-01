@@ -535,6 +535,77 @@ public sealed class RegionCheckTests
         Assert.Contains(errors, e => e.Pointer == "/beats/0/at" && e.Message.Contains("can't be reached from the start"));
     }
 
+    private static RegionDef WithBuildings(params RegionBuilding[] buildings) => Region(FordTiles) with { Buildings = [.. buildings] };
+
+    [Fact]
+    public void A_building_on_open_ground_loads()
+        => Loads(WithBuildings(new RegionBuilding("tavern", "red", new Tile(10, 10))));
+
+    [Fact]
+    public void An_unknown_building_is_an_error()
+        => Assert.Contains(ErrorsOf(WithBuildings(new RegionBuilding("castle", "red", new Tile(10, 10)))),
+            e => e.Pointer == "/buildings/0/id" && e.Message.Contains("Unknown building 'castle'"));
+
+    [Fact]
+    public void An_unknown_variant_of_a_building_is_an_error()
+        => Assert.Contains(ErrorsOf(WithBuildings(new RegionBuilding("tavern", "purple", new Tile(10, 10)))),
+            e => e.Pointer == "/buildings/0/variant" && e.Message.Contains("Unknown variant 'purple' for building 'tavern'"));
+
+    [Theory]
+    [InlineData(30, 10)]    // the tavern is three tiles along x, so its last column is off the region
+    [InlineData(10, 31)]    // and two along y
+    [InlineData(-1, 10)]
+    public void A_footprint_off_the_region_is_an_error(int x, int y)
+        => Assert.Contains(ErrorsOf(WithBuildings(new RegionBuilding("tavern", "red", new Tile(x, y)))),
+            e => e.Pointer == "/buildings/0/at" && e.Message.Contains("outside the 32x32 region"));
+
+    [Fact]
+    public void A_footprint_reaching_into_a_void_chunk_is_an_error()
+    {
+        var def = new RegionDef("r", "R", 1, [64, 32], ["grass/lush", "water/river"], [new RegionChunk(0, 0, RegionTests.Tiles())], [], [],
+            new RegionSpawns(new Tile(0, 0), new Tile(1, 0)), [], Buildings: [new RegionBuilding("tavern", "red", new Tile(30, 10))]);
+
+        Assert.Contains(ErrorsOf(def), e => e.Pointer == "/buildings/0/at" && e.Message.Contains("in a void chunk"));
+    }
+
+    [Fact]
+    public void A_footprint_on_a_stamp_is_an_error()
+    {
+        var def = Stamped(FordStamp) with { Buildings = [new RegionBuilding("tavern", "red", new Tile(3, 4))] };
+
+        Assert.Contains(ErrorsOf(def), e => e.Pointer == "/buildings/0/at" && e.Message.Contains("on the stamp 'ford'"));
+    }
+
+    [Fact]
+    public void Footprints_that_overlap_are_an_error()
+    {
+        var errors = ErrorsOf(WithBuildings(new RegionBuilding("tavern", "red", new Tile(10, 10)), new RegionBuilding("cottage", "slate_blue", new Tile(12, 11))));
+
+        Assert.Contains(errors, e => e.Pointer == "/buildings/1/at" && e.Message.Contains("overlaps the building 'tavern'"));
+    }
+
+    [Fact]
+    public void Footprints_that_only_touch_are_not_an_error()
+        => Loads(WithBuildings(new RegionBuilding("tavern", "red", new Tile(10, 10)), new RegionBuilding("cottage", "slate_blue", new Tile(13, 10))));
+
+    [Fact]
+    public void A_beat_walled_off_by_buildings_is_an_error()
+    {
+        var wall = Enumerable.Range(0, 32).Select(y => new RegionBuilding("wall_v", "grey", new Tile(8, y)));
+        var def = Region(FordTiles) with { Beats = [new BeatSpot("ch1_beat", new Tile(10, 0))], Buildings = [.. wall] };
+
+        Assert.Contains(ErrorsOf(def), e => e.Pointer == "/beats/0/at" && e.Message.Contains("can't be reached from the start"));
+    }
+
+    [Fact]
+    public void Buildings_stay_out_of_the_battle_hash()
+    {
+        var pack1 = ValidationTests.LoadChapter(World(Region(FordTiles)), Map("ford", FordMap));
+        var pack2 = ValidationTests.LoadChapter(World(WithBuildings(new RegionBuilding("tavern", "red", new Tile(10, 10)))), Map("ford", FordMap));
+
+        Assert.Equal(pack1.Hash, pack2.Hash);
+    }
+
     [Fact]
     public void Region_props_stay_out_of_the_battle_hash()
     {

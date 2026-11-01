@@ -38,6 +38,46 @@ public sealed class RegionExportTests : IDisposable
 
     private const string Grass = "grass/lush", Beat = "ch1_mayors_request";
 
+    private static PaintedRegion WithTavern(Tile at, params Tile[] walls) => FlatForBuildings() with
+    {
+        Buildings = [new RegionBuilding("tavern", "red", at)],
+        Flags = walls.ToDictionary(t => t, _ => TileFlags.Impassable),
+    };
+
+    private static PaintedRegion FlatForBuildings()
+    {
+        var tiles = new Dictionary<Tile, string>();
+        for (var y = 0; y < WorldRegion.ChunkSize; y++)
+            for (var x = 0; x < WorldRegion.ChunkSize; x++)
+                tiles[new Tile(x, y)] = Grass;
+        return new PaintedRegion("built", "Built", 1, WorldRegion.ChunkSize, WorldRegion.ChunkSize) { Materials = tiles, Starts = [new Tile(0, 0)], Recoveries = [new Tile(1, 0)] };
+    }
+
+    [Fact]
+    public void A_door_with_nowhere_to_stand_outside_is_a_warning_and_the_file_is_still_written()
+    {
+        // The tavern's door is on its +y face, a tile and a half along, so the tile outside it is (11, 12).
+        var result = RegionExport.Export(WithTavern(new Tile(10, 10), new Tile(11, 12)), _rules, ContentPaths.ContentBase);
+
+        Assert.NotNull(result.Written);
+        Assert.Contains("door of the 'tavern' at (10, 10) opens onto (11, 12)", Assert.Single(result.Warnings), StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void A_door_onto_open_ground_says_nothing()
+        => Assert.Empty(RegionExport.Export(WithTavern(new Tile(10, 10)), _rules, ContentPaths.ContentBase).Warnings);
+
+    [Fact]
+    public void A_buildings_round_trip_through_an_export_is_byte_identical()
+    {
+        var once = RegionExport.Export(WithTavern(new Tile(10, 10)), _rules, ContentPaths.ContentBase);
+        var bytes = File.ReadAllBytes(once.Written!);
+        RegionExport.Export(WithTavern(new Tile(10, 10)), _rules, ContentPaths.ContentBase);
+
+        Assert.Equal(bytes, File.ReadAllBytes(once.Written!));
+        Assert.Contains("\"buildings\"", System.Text.Encoding.UTF8.GetString(bytes), StringComparison.Ordinal);
+    }
+
     private const string Unreachable = "Paint a walkable way to it, climbing no more than 2 levels a step, or move the marker.";
 
     private static readonly Lazy<RulesPack> Base = new(() => RulesPack.Load([ContentPaths.BaseRules]));

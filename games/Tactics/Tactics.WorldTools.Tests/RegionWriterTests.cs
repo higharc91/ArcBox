@@ -107,6 +107,43 @@ public sealed class RegionWriterTests
     }
 
     [Fact]
+    public void A_region_with_no_buildings_writes_none()
+    {
+        var source = Source();
+        source.Set(new Tile(0, 0), 0, Grass, TileFlags.None);
+
+        Assert.DoesNotContain("buildings", JsonSerializer.Serialize(Written(source), ArcJson.Options), StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Buildings_sort_by_where_they_stand_so_a_reexport_is_byte_identical()
+    {
+        var first = Source();
+        first.Set(new Tile(0, 0), 0, Grass, TileFlags.None);
+        first.Buildings.AddRange([new RegionBuilding("tavern", "red", new Tile(20, 4)), new RegionBuilding("house", "blue", new Tile(3, 9)), new RegionBuilding("cottage", "shakes_oak", new Tile(8, 4))]);
+        var second = Source();
+        second.Set(new Tile(0, 0), 0, Grass, TileFlags.None);
+        second.Buildings.AddRange([new RegionBuilding("house", "blue", new Tile(3, 9)), new RegionBuilding("cottage", "shakes_oak", new Tile(8, 4)), new RegionBuilding("tavern", "red", new Tile(20, 4))]);
+
+        var def = Written(first);
+
+        Assert.Equal([new Tile(8, 4), new Tile(20, 4), new Tile(3, 9)], def.Buildings.Select(b => b.At));
+        var json = JsonSerializer.Serialize(def, ArcJson.Options);
+        Assert.Equal(json, JsonSerializer.Serialize(Written(second), ArcJson.Options));
+        Assert.Equal(json, JsonSerializer.Serialize(JsonSerializer.Deserialize<RegionDef>(json, ArcJson.Options), ArcJson.Options));
+    }
+
+    [Fact]
+    public void A_repair_keeps_the_buildings()
+    {
+        var source = Source();
+        source.Set(new Tile(0, 0), 0, Grass, TileFlags.None);
+        source.Buildings.Add(new RegionBuilding("house", "blue", new Tile(3, 9)));
+
+        Assert.Equal(source.Buildings, RegionWriter.Repair(source, new HashSet<string> { Grass }, new Dictionary<Tile, TileInfoNamed>()).Buildings);
+    }
+
+    [Fact]
     public void A_props_group_round_trips_byte_identical()
     {
         var source = Source();

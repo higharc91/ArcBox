@@ -79,6 +79,29 @@ internal sealed partial class Validation
                 }
             }
 
+            if (!def.Buildings.IsDefault)
+            {
+                for (var i = 0; i < def.Buildings.Length; i++)
+                {
+                    var building = def.Buildings[i];
+                    var at = Pointer.Append(Pointer.Append(ptr, "buildings"), i);
+                    BuildingArtDef? known = null;
+                    if (art is not null)
+                    {
+                        if (!art.Buildings.TryGetValue(building.Id, out known))
+                            Error(file, Pointer.Append(at, "id"), $"Unknown building '{building.Id}'.");
+                        else if (!known.Variants.Contains(building.Variant))
+                            Error(file, Pointer.Append(at, "variant"), $"Unknown variant '{building.Variant}' for building '{building.Id}'.");
+                    }
+
+                    var tiles = known?.Footprint(building.At).ToList() ?? [building.At];
+                    if (tiles.Any(t => t.X < 0 || t.Y < 0 || t.X >= w || t.Y >= h))
+                        Error(file, Pointer.Append(at, "at"), $"The building '{building.Id}' at {building.At} is outside the {w}x{h} region.");
+                    else if (tiles.Any(t => !seen.Contains((t.X / WorldRegion.ChunkSize, t.Y / WorldRegion.ChunkSize))))
+                        Error(file, Pointer.Append(at, "at"), $"The building '{building.Id}' at {building.At} is in a void chunk.");
+                }
+            }
+
             return Errors.Count == errors ? def : null;
         });
 
@@ -122,7 +145,7 @@ internal sealed partial class Validation
         IReadOnlyDictionary<string, BattleMap> maps, string file, string ptr)
     {
         private readonly RegionDef _def = region.Def;
-        private readonly Terrain _ground = WorldGround.Of(region, maps, v.Art?.Props).Terrain;
+        private readonly Terrain _ground = WorldGround.Of(region, maps, v.Art?.Props, v.Art?.Buildings).Terrain;
 
         /// <summary>A stamp that sits inside the region, on a known map.</summary>
         private sealed record Placed(int Index, RegionStamp Stamp, BattleMap Map)
@@ -151,6 +174,7 @@ internal sealed partial class Validation
         {
             var placed = Stamps();
             Props(placed);
+            Buildings(placed);
             Spawns(placed);
             Reachable(placed);
             Edges();
@@ -173,6 +197,24 @@ internal sealed partial class Validation
                         v.Error(file, at, $"Prop '{group.Id}' at {tile} is on the stamp '{stamp.Stamp.Map}'.");
                     }
                 }
+            }
+        }
+
+        /// <summary>A footprint can't be on a stamp, whose tiles must match its map, or on another footprint. <see cref="Region"/> has seen that each one fits.</summary>
+        private void Buildings(List<Placed> stamps)
+        {
+            var taken = new Dictionary<Tile, RegionBuilding>();
+            for (var i = 0; i < region.Buildings.Length; i++)
+            {
+                var building = region.Buildings[i];
+                var at = Pointer.Append(At("buildings", i), "at");
+                var tiles = v.Art?.Buildings.GetValueOrDefault(building.Id)?.Footprint(building.At).ToList() ?? [building.At];
+                foreach (var stamp in stamps.Where(s => tiles.Any(s.Stage.Holds)))
+                    v.Error(file, at, $"The building '{building.Id}' at {building.At} is on the stamp '{stamp.Stamp.Map}'.");
+                foreach (var other in tiles.Select(taken.GetValueOrDefault).OfType<RegionBuilding>().Distinct())
+                    v.Error(file, at, $"The building '{building.Id}' at {building.At} overlaps the building '{other.Id}' at {other.At}.");
+                foreach (var tile in tiles)
+                    taken.TryAdd(tile, building);
             }
         }
 

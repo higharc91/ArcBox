@@ -36,6 +36,9 @@ public sealed class RegionSource(string id, string name, int chapter, int width,
     /// <summary>The props placed in the region.</summary>
     public List<RegionProps> Props { get; } = [];
 
+    /// <summary>The buildings placed in the region.</summary>
+    public List<RegionBuilding> Buildings { get; } = [];
+
     /// <summary>Where the party starts.</summary>
     public Tile Start { get; set; }
 

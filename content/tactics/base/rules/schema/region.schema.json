@@ -136,6 +136,33 @@
       },
       "description": "Props placed in the world, grouped by id and variant."
     },
+    "buildings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A building id from town/manifest.json."
+          },
+          "variant": {
+            "type": "string",
+            "description": "One of the building's variants."
+          },
+          "at": {
+            "$ref": "common.schema.json#/$defs/tile",
+            "description": "The back corner tile of its footprint: the smallest x and y it covers."
+          }
+        },
+        "required": [
+          "id",
+          "variant",
+          "at"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Buildings placed in the world, sorted by y, x, id and variant. What each blocks, how tall it is and how it's drawn come from town/manifest.json."
+    },
     "spawns": {
       "type": "object",
       "properties": {

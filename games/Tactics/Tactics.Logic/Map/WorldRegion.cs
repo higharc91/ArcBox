@@ -36,6 +36,9 @@ public sealed class WorldRegion
     /// <summary>The region as written.</summary>
     public RegionDef Def { get; }
 
+    /// <summary>The buildings standing in the region, as written.</summary>
+    public ImmutableArray<RegionBuilding> Buildings => Def.Buildings.IsDefault ? [] : Def.Buildings;
+
     /// <summary>
     /// Builds the region, decoding every chunk. Throws <see cref="ArgumentException"/> on a bad size, a repeated chunk or bad
     /// chunk bytes; the loader reports those as content errors first. Only the loader checks that chunks are inside the region.
