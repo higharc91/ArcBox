@@ -60,6 +60,8 @@ public sealed partial class TacticsGame
         if (TryBegin(encounter, seed, members, companions) is not { } resolution)
             return false;
         (_lastBattle, _arrived) = (null, null);
+        // Whatever the TV said before, of the story, the start or the walk, isn't the fight's: it comes down, as it would on a step (review).
+        (_notice, _leadNote) = (null, null);
         var stage = StageFor(resolution.State.MapId);
         _doc = _doc with
         {
