@@ -321,6 +321,10 @@ Tested with `--world-demo=wood` (160×120 tiles, 7,200 tall props, >1,500 in vie
 
 Decision: Fading passes. `PerBlock` maintains the 6.94 ms median, 0 frames over 16 ms, reduces draw calls to under 2,000, and avoids the engine node memory overhead of thousands of individual canvas items. Task 5 proceeds with fading.
 
+### Ambient life (2026-11-01)
+
+Ambient particles (butterflies over grass, fish jumping in deep water, chimney smoke) are scheduled pure on the TV by `AmbientPlan` bounded strictly to the camera view, and drawn by `WorldAmbient`. Measured with `--world-demo=wood` at 1920×1080 with ambient on: walking median frame time holds at 6.94 ms, 0 frames over 16 ms, and render CPU remains ~0.98 ms.
+
 A build that fails, on a bad or half-downloaded pack, logs its error once. The scene then frees the world and shows the header with the region's name, and fights still work.
 
 ## Walking

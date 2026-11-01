@@ -75,6 +75,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
     private Node2D _world = null!;
     private TallProps? _tallProps;
     private PropFade? _propFade;
+    private WorldAmbient? _ambient;
     private BoardCanvas _over = null!;
     private ColorRect _back = null!;
     private ColorRect _fade = null!;
@@ -302,6 +303,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         _painter.Release();
         _frames.Release();
         _propFade = null;
+        _ambient = null;
         Plan = null;
         GD.Print("WORLD closed");
     }
@@ -438,6 +440,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         _delta = delta;
         _clock += delta;
         _frames.Step(_clock);
+        _ambient?.Update(_view, _clock);
         SwapRepainted();
         if (_stage is { Visible: true } stage)
         {
@@ -502,6 +505,12 @@ internal sealed partial class WorldCanvas : CanvasLayer
         _over = new BoardCanvas(_painter) { ZIndex = Plan.Blocks.Max(b => b.Z) + 1 };
         _world.AddChild(_over);
         _over.JoinWorld(Plan.Lighting.Active ? Plan.Lighting : null);
+
+        var ambientManifest = AmbientManifest.Load(_painter.Root);
+        var ambientPlan = new AmbientPlan(new BoardTerrain(Ground!.Map, null), Ground.Map, ambientManifest, seed: Ground.Map.Id.GetHashCode());
+        _ambient = new WorldAmbient(ambientPlan, System.IO.Path.Combine(_painter.Root, "ambient"), Plan.Blocks.Max(b => b.Z) + 1);
+        _world.AddChild(_ambient);
+
         if (_view.Max == _view.Min)
         {
             Place(WorldView.Centred(BoardProjection.Corner(0, 0, 0)));
