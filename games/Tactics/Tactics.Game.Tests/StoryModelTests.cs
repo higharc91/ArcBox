@@ -24,7 +24,7 @@ namespace Tactics.Game.Tests;
 public sealed class StoryModelTests
 {
     private const int EventsPerSeed = 250;
-    private const int DefaultSeeds = 24;
+    private const int DefaultSeeds = 32;
     private static readonly TimeSpan MaxLate = TimeSpan.FromMilliseconds(700);
 
     private static readonly string[] Backgrounds =
@@ -104,6 +104,9 @@ public sealed class StoryModelTests
         private readonly int _seed;
         private readonly Random _r;
         private readonly bool _late;
+
+        /// <summary>The leader never votes or picks in this run, so ties go to tie-breaks.</summary>
+        private readonly bool _quietLeader;
         private readonly List<Player> _players;
         private readonly Lease _lease;
         private readonly HashSet<int> _online = [];
@@ -124,6 +127,7 @@ public sealed class StoryModelTests
         {
             (_seed, _r) = (seed, new Random(seed));
             _late = _r.Next(2) == 0;
+            _quietLeader = _r.Next(2) == 0;
             var seats = _r.Next(1, 5);
             var doc = TacticsDocument.Read(BaseDocument.Value);
             var members = doc.Members.Keys.OrderBy(_ => _r.Next()).ToArray();
@@ -143,7 +147,7 @@ public sealed class StoryModelTests
             _players = [.. members.Take(seats).Select((m, i) => new Player(new PlayerId($"p{i}"), $"Player{i}", i == 0, new ProfileId(m)))];
             _lease = new Lease(new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", _players[0].Profile!.Value, [], 1), doc.ToJson());
             _context = new Context(seed, _late);
-            Teleport(Starts[_r.Next(Starts.Length)]);
+            Teleport(Starts[_quietLeader ? 1 : _r.Next(Starts.Length)]);     // a quiet leader starts at the ford's vote, for its ties
         }
 
         private void Must(bool ok, string what)
@@ -257,6 +261,8 @@ public sealed class StoryModelTests
         {
             var roll = _r.Next(100);
             var seat = _r.Next(_players.Count);
+            if (Host.Story is { Ask: not null } or { Check: not null } && _r.Next(2) == 0)      // a question open: answers come thick and fast
+                return new Event(Host.Story.Ask is not null ? "vote" : "pick", seat, _r.Next(8));
             return roll switch
             {
                 < 30 => new Event("wait", seat, _r.Next(4) == 0 ? _r.Next(10_000, 40_000) : _r.Next(1, 6_000)),
@@ -283,17 +289,19 @@ public sealed class StoryModelTests
                 case "wait":
                     _context.Advance(TimeSpan.FromMilliseconds(e.N), Fire);
                     break;
+                case "vote" or "pick" when _quietLeader && e.Seat == LeaderSeat():
+                    break;
                 case "vote" when _online.Contains(e.Seat):
                 {
                     var options = Host.Story?.Ask?.Options.Select(o => o.Id).ToArray() ?? [];
-                    var option = options.Length > 0 && e.N < 6 ? options[e.N % options.Length] : "stale_" + e.N;
+                    var option = options.Length > 0 && e.N < 6 ? options[e.N % (_quietLeader ? Math.Min(2, options.Length) : options.Length)] : "stale_" + e.N;
                     Send(e.Seat, new { action = "vote", data = new { option } });
                     break;
                 }
                 case "pick" when _online.Contains(e.Seat):
                 {
                     var cards = Host.Story?.Check?.Cards.Select(c => c.Member).ToArray() ?? [];
-                    var member = cards.Length > 0 && e.N < 6 ? cards[e.N % cards.Length] : "pr_nobody";
+                    var member = cards.Length > 0 && e.N < 6 ? cards[e.N % (_quietLeader ? Math.Min(2, cards.Length) : cards.Length)] : "pr_nobody";
                     Send(e.Seat, new { action = "pickRoller", data = new { member } });
                     break;
                 }
@@ -368,6 +376,7 @@ public sealed class StoryModelTests
                 Check("drain");
             }
             Must(_game.Phase != TacticsPhase.Story, "a scene didn't end in half an hour with everyone here and nobody answering");
+            _beatsDone++;
         }
 
         // ---- The invariants ---------------------------------------------------------------------------------------------
@@ -424,6 +433,7 @@ public sealed class StoryModelTests
 
         private void CheckView(StoryView story, StorySave c)
         {
+            States.Add(story.State);
             Must(story.Seq >= _lastSeq, $"the line number went back from {_lastSeq} to {story.Seq}");
             _lastSeq = story.Seq;
             Must(story.Scene == c.Scene, $"the TV shows {story.Scene}, the save says {c.Scene}");
@@ -512,6 +522,9 @@ public sealed class StoryModelTests
         }
 
         public int BeatsDone => _beatsDone;
+
+        /// <summary>Every state a scene was seen in, so the test can tell the runs reached ties, picks and rolls.</summary>
+        public HashSet<string> States { get; } = [];
     }
 
     private static int Seeds => int.TryParse(Environment.GetEnvironmentVariable("STORY_MODEL_SEEDS"), out var n) && n > 0 ? n : DefaultSeeds;
@@ -520,12 +533,17 @@ public sealed class StoryModelTests
     public void Scenes_hold_up_against_their_model()
     {
         var beats = 0;
+        var states = new HashSet<string>();
         for (var seed = 1; seed <= Seeds; seed++)
         {
             var run = new Run(seed);
             run.Play(EventsPerSeed);
             beats += run.BeatsDone;
+            states.UnionWith(run.States);
         }
+        string[] all = [TacticsGame.StoryStates.Lines, TacticsGame.StoryStates.Asking, TacticsGame.StoryStates.TieBreak,
+            TacticsGame.StoryStates.PickRoller, TacticsGame.StoryStates.Rolled, TacticsGame.StoryStates.Gap];
+        Assert.Empty(all.Except(states));
         Assert.True(beats >= Seeds, $"only {beats} beats were finished in {Seeds} runs: the model isn't reaching the ends of scenes");
     }
 }

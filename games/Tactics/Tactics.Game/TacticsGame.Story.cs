@@ -56,8 +56,38 @@ public sealed partial class TacticsGame
     /// <summary>What the open question offers, in the node's order.</summary>
     private ImmutableArray<SceneOption> _offered = [];
 
-    /// <summary>When the open question closes, or null while it waits for a phone (nobody here can answer it).</summary>
+    /// <summary>When the open question closes, or null while it waits for a phone (nobody here can answer it). The TV's countdown.</summary>
     private DateTimeOffset? _closeAt;
+
+    /// <summary>
+    /// When the open question's own clock runs out, never before its line is heard, or null while it holds. The phones' countdown: a settle
+    /// can close it sooner, but doesn't change their views, so nobody's tap is dropped for a view that changed under it.
+    /// </summary>
+    private DateTimeOffset? _due;
+
+    /// <summary>When everyone here had answered, which starts the settle (5d default 5); null while someone hasn't.</summary>
+    private DateTimeOffset? _allInAt;
+
+    /// <summary>
+    /// The answers to the open question, by member: an option's id, or for who rolls, a member. An answer stands if its phone goes; one for
+    /// something not on offer counts for nothing.
+    /// </summary>
+    private readonly Dictionary<string, string> _votes = new(StringComparer.Ordinal);
+
+    /// <summary>
+    /// The key of a choice's pick in <see cref="_votes"/>: it's the leader's, whoever leads now, so a pick stands if the lead changes hands,
+    /// and the new leader can change it. Not a member id.
+    /// </summary>
+    private const string LeaderPick = "\u0001leader";
+
+    /// <summary>The check that won and is being rolled for, while the party picks who rolls (or breaks a tie over it).</summary>
+    private SceneOption? _checking;
+
+    /// <summary>What a tie-break is between, in order: options' ids, or members.</summary>
+    private ImmutableArray<string> _tied = [];
+
+    /// <summary>Who was away when the question opened, as the phones show it: the TV's list is live.</summary>
+    private ImmutableHashSet<string> _awayAtOpen = [];
 
     private StoryTiming Tell => _timing.Story;
 
@@ -303,6 +333,9 @@ public sealed partial class TacticsGame
 
     // ---- Questions ------------------------------------------------------------------------------------------------------------
 
+    /// <summary>True while a question is open: asked, tied, or who rolls.</summary>
+    private bool Questioning => _telling is StoryStates.Asking or StoryStates.TieBreak or StoryStates.PickRoller;
+
     /// <summary>
     /// Opens <paramref name="node"/>'s question as its last line starts: what's offered to this party now, given the flags, the party's
     /// tags and the nodes already played. With nothing offered, the line plays out and the beat ends (<see cref="LineDone"/>).
@@ -312,25 +345,69 @@ public sealed partial class TacticsGame
         _offered = SceneRun.Offered(node, StoryFlags(), PartyTags.Of(Party().Select(m => m.Character)), Cursor!.Played.ToHashSet(StringComparer.Ordinal));
         if (_offered.IsEmpty)
             return;
-        _telling = StoryStates.Asking;
-        StartQuestionClock(node);
+        Ask(StoryStates.Asking);
     }
+
+    /// <summary>Puts a question to the party, or a tie-break or the pick of who rolls, with its clock in full from now.</summary>
+    private void Ask(string state)
+    {
+        _telling = state;
+        _awayAtOpen = [.. Party().Where(m => !m.Here).Select(m => m.Member)];
+        StartQuestionClock();
+    }
+
+    /// <summary>How long the open question has (5d default 4).</summary>
+    private TimeSpan QuestionLength() => _telling switch
+    {
+        StoryStates.TieBreak => Tell.TieBreak,
+        StoryStates.PickRoller => Tell.Roller,
+        _ when CurrentNode() is { Vote: true } => Tell.Vote,
+        _ => Tell.Choice,
+    };
 
     /// <summary>
     /// Sets the question's clock in full from now, never closing before the line that asks it has been heard. With nobody here to answer,
     /// it holds instead: no timer, until a phone comes back (5d §4).
     /// </summary>
-    private void StartQuestionClock(SceneNode node)
+    private void StartQuestionClock()
     {
+        _allInAt = null;
         if (!Voters().Any())
         {
-            _closeAt = null;
-            _ctx.CancelTimer(Timers.Vote);
+            Hold();
             return;
         }
-        var length = node.Vote ? Tell.Vote : Tell.Choice;
-        var due = _ctx.Now + length;
-        CloseAt(due > _lineDue ? due : _lineDue);
+        var due = _ctx.Now + QuestionLength();
+        _due = due > _lineDue ? due : _lineDue;
+        Reclose();
+    }
+
+    private void Hold()
+    {
+        (_due, _closeAt, _allInAt) = (null, null, null);
+        _ctx.CancelTimer(Timers.Vote);
+    }
+
+    /// <summary>
+    /// When the question closes now: at its own deadline, or once everyone here has answered, after the settle, but never before the line
+    /// that asks it is heard. A change of answer in the settle doesn't move it; someone new who hasn't answered puts it back.
+    /// </summary>
+    private void Reclose()
+    {
+        if (_due is not { } due)
+            return;
+        var at = due;
+        if (AllAnswered())
+        {
+            _allInAt ??= _ctx.Now;
+            var settle = _allInAt.Value + Tell.Settle;
+            settle = settle > _lineDue ? settle : _lineDue;
+            at = settle < due ? settle : due;
+        }
+        else
+            _allInAt = null;
+        if (at != _closeAt)
+            CloseAt(at);
     }
 
     private void CloseAt(DateTimeOffset at)
@@ -339,48 +416,150 @@ public sealed partial class TacticsGame
         _ctx.SetTimer(Timers.Vote, Longest(at - _ctx.Now, TimeSpan.FromMilliseconds(1)));
     }
 
-    /// <summary>Drops the open question, if any, and its clock.</summary>
+    /// <summary>Drops the open question, if any, its answers and its clock.</summary>
     private void CloseQuestion()
     {
         _ctx.CancelTimer(Timers.Vote);
-        (_offered, _closeAt) = ([], null);
+        (_offered, _closeAt, _due, _allInAt, _checking, _tied) = ([], null, null, null, null, []);
+        _votes.Clear();
     }
 
-    /// <summary>Someone came or went, or got a character: an unanswerable question holds, and the first phone back restarts it in full.</summary>
+    /// <summary>What can be answered: the options on offer, or who can roll.</summary>
+    private ImmutableArray<string> Answers()
+        => _checking is { Check: { } check } ? [.. Cards(check.Skill).Select(c => c.Member)] : [.. _offered.Select(o => o.Id)];
+
+    private VoteTally Tally() => new(Answers(), _votes.ToImmutableDictionary(StringComparer.Ordinal));
+
+    /// <summary>The answers that count, by member: those for something still on offer.</summary>
+    private IEnumerable<KeyValuePair<string, string>> LiveVotes()
+    {
+        var answers = Answers();
+        return _votes.Where(v => answers.Contains(v.Value));
+    }
+
+    /// <summary>True for a vote of the party's, or the pick of who rolls; false for a choice that's the leader's.</summary>
+    private bool PartyQuestion => _checking is not null || CurrentNode() is { Vote: true };
+
+    /// <summary>
+    /// True when everyone who can answer has: everyone here with a character for a party's question (and at least one of them), the leader
+    /// for a choice. A tie-break is decided the moment its decider answers, so it never settles.
+    /// </summary>
+    private bool AllAnswered()
+    {
+        if (_telling == StoryStates.TieBreak)
+            return false;
+        if (!PartyQuestion)
+            return _votes.TryGetValue(LeaderPick, out var pick) && Answers().Contains(pick);
+        var present = Voters().Select(p => p.Profile!.Value.Value).ToArray();
+        return present.Length > 0 && VoteRules.AllIn(Tally(), present);
+    }
+
+    /// <summary>The first player here with a character, in seat order: who breaks a tie with no leader (spec §4.2).</summary>
+    private string? FirstConnected() => _players.FirstOrDefault(p => _online.Contains(p.Id) && _doc.For(p.Profile!.Value) is not null)?.Profile!.Value.Value;
+
+    /// <summary>Who decides alone now: the leader for a choice, the leader or else the first here for a tie-break; null for a party's question.</summary>
+    private string? Decider() => _telling == StoryStates.TieBreak ? _lead ?? FirstConnected() : PartyQuestion ? null : _lead;
+
+    /// <summary>
+    /// Someone came or went, or got a character: an unanswerable question holds, the first phone back restarts it in full, and otherwise who
+    /// has still to answer may have changed: a voter who's gone no longer holds up the close, and someone new can still vote.
+    /// </summary>
     private void StoryPresenceChanged()
     {
-        if (_telling != StoryStates.Asking || CurrentNode() is not { } node)
+        if (!Questioning)
             return;
         if (!Voters().Any())
         {
-            _closeAt = null;
-            _ctx.CancelTimer(Timers.Vote);
+            if (_allInAt is null)
+                Hold();         // else everyone had answered before they went: the settle closes it on what they said
         }
-        else if (_closeAt is null)
-            StartQuestionClock(node);
-    }
-
-    /// <summary>The question's clock ran out: it takes what nobody answering takes (5d default 3, the user's decision 2).</summary>
-    private void QuestionDue()
-    {
-        if (_telling != StoryStates.Asking || CurrentNode() is not { } node || _offered.IsEmpty)
-            return;
-        Decide(SceneRun.Unanswered(_offered, node.Vote));
+        else if (_due is null)
+            StartQuestionClock();
+        else
+            Reclose();
     }
 
     /// <summary>
-    /// The question settled on <paramref name="option"/>: its flags are set and the scene goes where it leads, in one save. A check is
-    /// rolled first.
+    /// An answer from a phone: a vote or the leader's choice (<c>vote {option}</c>), or a pick of who rolls (<c>pickRoller {member}</c>). Only
+    /// someone here with a character answers, and only what's on offer counts. A tie-break is decided by its decider's answer at once.
+    /// </summary>
+    private void Answer(ProfileId profile, string? pick, bool roller)
+    {
+        var member = profile.Value;
+        if (pick is null || !Questioning || roller != (_checking is not null) || !Voters().Any(p => p.Profile!.Value.Value == member))
+            return;
+        if (_telling == StoryStates.TieBreak)
+        {
+            if (member == Decider() && _tied.Contains(pick))
+                Resolve(pick);
+            return;
+        }
+        if ((!PartyQuestion && member != _lead) || !Answers().Contains(pick))
+            return;
+        _votes[PartyQuestion ? member : LeaderPick] = pick;
+        Reclose();
+    }
+
+    /// <summary>
+    /// The question's clock ran out, or its settle did. A party's question closes by <see cref="VoteRules.Close"/>: nobody answering takes the
+    /// first option, or for who rolls the best bonus (5d default 6, the user's decision 2). A choice takes the leader's pick, or the first
+    /// option with no check (5d default 3). A tie-break nobody answers takes the first tied.
+    /// </summary>
+    private void QuestionDue()
+    {
+        if (!Questioning || CurrentNode() is null)
+            return;
+        switch (_telling)
+        {
+            case StoryStates.TieBreak:
+                Resolve(_tied[0]);
+                return;
+            case StoryStates.Asking when !PartyQuestion:
+                Resolve(_votes.TryGetValue(LeaderPick, out var pick) && Answers().Contains(pick)
+                    ? pick
+                    : SceneRun.Unanswered(_offered, vote: false).Id);
+                return;
+        }
+        var unanswered = _checking is { Check: { } check }
+            ? (Func<ImmutableArray<string>, string>)(_ => SkillCheck.Best(Cards(check.Skill).Select(c => (c.Member, c.Bonus))))
+            : _ => SceneRun.Unanswered(_offered, vote: true).Id;
+        switch (VoteRules.Close(Tally(), _lead, FirstConnected(), unanswered))
+        {
+            case Won won:
+                Resolve(won.Option);
+                break;
+            case Tied tied:
+                _tied = tied.Options;
+                Ask(StoryStates.TieBreak);
+                break;
+        }
+    }
+
+    /// <summary>The question is settled on <paramref name="answer"/>: an option, or who rolls.</summary>
+    private void Resolve(string answer)
+    {
+        if (_checking is { } check)
+            Roll(check, answer);
+        else
+            Decide(_offered.Single(o => o.Id == answer));
+    }
+
+    /// <summary>
+    /// The question settled on <paramref name="option"/>: its flags are set and the scene goes where it leads, in one save. A check goes to
+    /// the party first, to pick who rolls; its flags are set with the roll.
     /// </summary>
     private void Decide(SceneOption option)
     {
         var (scene, beat) = (CurrentScene()!, BeatNamed(Cursor!.Beat)!);
-        CloseQuestion();
         if (option.Check is not null)
         {
-            Roll(option, SkillCheck.Best(Cards(option.Check.Skill).Select(card => (card.Member, card.Bonus))));
+            var offered = _offered;
+            CloseQuestion();
+            (_offered, _checking) = (offered, option);
+            Ask(StoryStates.PickRoller);
             return;
         }
+        CloseQuestion();
         AddFlags(SceneRun.Sets(option, beat));
         EnterNode(scene, SceneRun.Target(option));
     }
@@ -428,6 +607,12 @@ public sealed partial class TacticsGame
         {
             case "skip":
                 Skip(profile, input.Data);
+                break;
+            case "vote":
+                Answer(profile, Str(input.Data, "option"), roller: false);
+                break;
+            case "pickRoller":
+                Answer(profile, Str(input.Data, "member"), roller: true);
                 break;
         }
     }
@@ -497,23 +682,113 @@ public sealed partial class TacticsGame
         return new StoryLineView(line.Id, line.Speaker, who?.Name, who?.Preset, line.Mood, line.Text, who?.Role);
     }
 
-    /// <summary>The scene for the TV, in the Story phase.</summary>
+    /// <summary>The scene for the TV, in the Story phase, with the live tally: the TV's alone (5d flag 7).</summary>
     private StoryView? StoryViewOf()
     {
         if (_phase != TacticsPhase.Story || CurrentScene() is not { } scene)
             return null;
         var line = _telling is StoryStates.Gap or StoryStates.Rolled || CurrentLine() is not { } showing ? null : LineView(showing);
-        DateTimeOffset? until = _telling == StoryStates.Asking ? _closeAt : _lineDue;
-        return new StoryView(_storySeq, scene.Id, scene.Title, _telling, line, null, null, until);
+        var asking = Questioning && _checking is null;
+        return new StoryView(_storySeq, scene.Id, scene.Title, _telling, line, asking ? AskView() : null,
+            _checking is not null || _telling == StoryStates.Rolled ? CheckView(scene) : null, _lineDue);
+    }
+
+    private string PlayerName(string member) => _players.FirstOrDefault(p => p.Profile?.Value == member)?.Name ?? member;
+
+    /// <summary>The players whose characters are in the party and whose phones aren't here, by name.</summary>
+    private ImmutableArray<string> Away(IEnumerable<string>? members = null)
+        => [.. (members ?? Party().Where(m => !m.Here).Select(m => m.Member)).Select(PlayerName)];
+
+    /// <summary>What's on offer now: everything, or only the tied during a tie-break.</summary>
+    private IEnumerable<SceneOption> OptionsShown() => _telling == StoryStates.TieBreak ? _offered.Where(o => _tied.Contains(o.Id)) : _offered;
+
+    private StoryAskView AskView()
+    {
+        var votes = LiveVotes().ToList();
+        var of = PartyQuestion ? Voters().Select(p => p.Profile!.Value.Value).Union(votes.Select(v => v.Key)).Count() : 1;
+        return new StoryAskView(PartyQuestion, votes.Count, of, Away(), _telling == StoryStates.TieBreak, Decider() is { } d ? PlayerName(d) : null,
+            _closeAt, [.. OptionsShown().Select(o => new StoryOptionView(o.Id, o.Label, o.Check?.Skill, o.Check?.Dc, PartyQuestion
+                ? [.. _players.Where(p => votes.Any(v => v.Key == p.Profile?.Value && v.Value == o.Id)).Select(p => p.Name)]
+                : votes.Any(v => v.Value == o.Id) && Leader is { } leader ? [leader.Name] : []))]);
+    }
+
+    /// <summary>What <paramref name="member"/> has answered, as their phone shows it: their vote, or the leader's choice for the leader.</summary>
+    private string? MineOf(string member)
+    {
+        var key = PartyQuestion ? member : member == _lead ? LeaderPick : null;
+        return key is not null && _votes.TryGetValue(key, out var pick) && Answers().Contains(pick) ? pick : null;
+    }
+
+    /// <summary>Who can roll, as cards: their bonus, and where it comes from ("Proficient · CHA 14", as mockup 03).</summary>
+    private IEnumerable<(string Member, Player Player, CharacterRecord Character, int Bonus, string Note, bool Here)> CardsWithNotes(string skill)
+        => Party().Select(m =>
+        {
+            var sheet = SheetBuilder.ForCharacter(m.Character, Rules);
+            var stat = SkillCheck.StatOf(skill)!.Value;
+            var score = $"{stat.ToString().ToUpperInvariant()} {sheet.Score(stat)}";
+            return (m.Member, m.Player, m.Character, SkillCheck.Bonus(sheet, skill), SkillCheck.Proficient(sheet, skill) ? $"Proficient · {score}" : score, m.Here);
+        });
+
+    /// <summary>The option a saved roll was for, found by its id and skill in the scene, since option ids repeat across nodes.</summary>
+    private static SceneOption? RolledFor(SceneDef scene, StoryRoll roll)
+        => scene.Nodes.SelectMany(n => n.Options).FirstOrDefault(o => o.Id == roll.Option && o.Check?.Skill == roll.Skill);
+
+    private StoryCheckView CheckView(SceneDef scene)
+    {
+        var roll = _telling == StoryStates.Rolled ? Cursor!.Roll : null;
+        var (skill, dc, title) = roll is not null
+            ? (roll.Skill, roll.Dc, RolledFor(scene, roll)?.Label ?? roll.Skill)
+            : (_checking!.Check!.Skill, _checking.Check.Dc, _checking.Label);
+        var votes = LiveVotes().ToList();
+        var tie = _telling == StoryStates.TieBreak;
+        return new StoryCheckView(skill, dc, title,
+            [.. CardsWithNotes(skill).Select(c => new StoryCardView(c.Member, c.Character.Name, c.Player.Name,
+                HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{c.Character.Class}"]), c.Bonus, c.Note, c.Here, votes.Count(v => v.Value == c.Member)))],
+            roll?.Member, roll is null ? null : Rolls.Flat(roll.Die, roll.Bonus, roll.Dc), tie, tie && Decider() is { } d ? PlayerName(d) : null,
+            roll is null ? _closeAt : null);
     }
 
     /// <summary>
-    /// A phone in a scene: the line showing, the speaker and the scene's title, and for the leader alone, Skip. It changes with each line,
-    /// and with nothing anyone else does.
+    /// A phone in a scene: the line showing, or the question, or the check. None of it changes with what anyone else does, except when the
+    /// question itself does: no tally, the countdown of the question's own clock and not of a settle, and who's away as of when it was asked.
     /// </summary>
     private CustomView StoryScreen(Player player, ProfileId profile)
     {
+        var member = profile.Value;
         var scene = CurrentScene();
+        if (Questioning && _checking is null)
+            return Custom(Screens.Vote, new
+            {
+                party = PartyQuestion,
+                canChoose = Decider() is { } decider ? decider == member : true,
+                options = OptionsShown().Select(o => new { id = o.Id, label = o.Label, skill = o.Check?.Skill, dc = o.Check?.Dc }),
+                mine = MineOf(member),
+                tie = _telling == StoryStates.TieBreak,
+                decider = Decider() is { } d ? PlayerName(d) : null,
+                away = Away(_awayAtOpen),
+            }) with { DeadlineUtc = _due };
+        if (scene is not null && (_checking is not null || _telling == StoryStates.Rolled))
+        {
+            var check = CheckView(scene);
+            var roll = _telling == StoryStates.Rolled ? Cursor!.Roll : null;
+            return Custom(Screens.Check, new
+            {
+                skill = check.Skill,
+                dc = check.Dc,
+                title = check.Title,
+                cards = CardsWithNotes(check.Skill).Select(c => new
+                {
+                    id = c.Member, name = c.Character.Name, player = c.Player.Name, cls = ClassName(c.Character), bonus = c.Bonus, note = c.Note,
+                    here = !_awayAtOpen.Contains(c.Member),
+                }),
+                mine = MineOf(member),
+                canChoose = _telling == StoryStates.PickRoller || (_telling == StoryStates.TieBreak && Decider() == member),
+                tie = _telling == StoryStates.TieBreak,
+                decider = _telling == StoryStates.TieBreak && Decider() is { } d2 ? PlayerName(d2) : null,
+                tied = _telling == StoryStates.TieBreak ? _tied : [],
+                roll = roll is null ? null : new { member = roll.Member, die = roll.Die, bonus = roll.Bonus, total = roll.Die + roll.Bonus, dc = roll.Dc, success = roll.Passed },
+            }) with { DeadlineUtc = roll is null ? _due : null };
+        }
         var line = _telling is StoryStates.Gap or StoryStates.Rolled ? null : CurrentLine();
         var who = line is null ? null : Lore.Character(line.Speaker);
         return Custom(Screens.Dialogue, new
@@ -524,7 +799,7 @@ public sealed partial class TacticsGame
             portrait = who?.Preset,
             mood = line?.Mood,
             text = line?.Text,
-            canSkip = profile.Value == _lead && _telling == StoryStates.Lines && line is not null,
+            canSkip = member == _lead && _telling == StoryStates.Lines && line is not null,
         });
     }
 }

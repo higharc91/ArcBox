@@ -475,6 +475,10 @@ public sealed class StoryTests
 
     /// <summary>The base lore with the scene <paramref name="scene"/> taken out of its file.</summary>
     internal static LoreBook StoryLoreWithout(string scene)
+        => EditedLore(scenes => scenes.Remove(scenes.Single(x => x!["id"]!.GetValue<string>() == scene)));
+
+    /// <summary>The base lore's JSON with Chapter 1's scenes edited by <paramref name="edit"/>, and no clips: every line is read on a timer.</summary>
+    internal static LoreBook EditedLore(Action<System.Text.Json.Nodes.JsonArray> edit)
     {
         var copy = Directory.CreateTempSubdirectory("tactics-lore-edited-");
         try
@@ -488,10 +492,12 @@ public sealed class StoryTests
             }
             var path = Path.Combine(copy.FullName, "lore", "scenes", "ch1.json");
             var node = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(path))!;
-            var scenes = node["scenes"]!.AsArray();
-            scenes.Remove(scenes.Single(x => x!["id"]!.GetValue<string>() == scene));
+            edit(node["scenes"]!.AsArray());
             File.WriteAllText(path, node.ToJsonString());
-            return LoreBook.Load(copy.FullName);
+            var book = LoreBook.Load(copy.FullName);
+            foreach (var line in book.Scenes.SelectMany(sc => sc.Lines))
+                _ = book.ClipSeconds(line.Id);
+            return book;
         }
         finally
         {

@@ -205,7 +205,7 @@ public sealed record StoryLineView(string Id, string Speaker, string? Name, stri
 /// <param name="Line">The line showing, or null in a gap or a roll's reveal.</param>
 /// <param name="Ask">The question open, or null.</param>
 /// <param name="Check">The skill check under way, or null.</param>
-/// <param name="Until">When what's showing ends, if a clock says so: the line, the gap, the reveal, or the question's close.</param>
+/// <param name="Until">When what's showing ends: the line (a question's close is <see cref="StoryAskView.Deadline"/>), the gap or the reveal.</param>
 public sealed record StoryView(int Seq, string Scene, string Title, string State, StoryLineView? Line, StoryAskView? Ask, StoryCheckView? Check,
     DateTimeOffset? Until);
 
