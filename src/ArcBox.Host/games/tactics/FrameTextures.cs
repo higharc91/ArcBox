@@ -37,6 +37,20 @@ internal sealed class FrameTextures
         return strip.Texture;
     }
 
+    /// <summary>Lets go of every texture and frame.</summary>
+    public void Release()
+    {
+        foreach (var strip in _strips.Values)
+        {
+            strip.Texture.Dispose();
+            foreach (var frame in strip.Frames)
+            {
+                frame.Dispose();
+            }
+        }
+        _strips.Clear();
+    }
+
     /// <summary>Shows what each image shows at <paramref name="clock"/>. Only what changed costs anything.</summary>
     public void Step(double clock)
     {

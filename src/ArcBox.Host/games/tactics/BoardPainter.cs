@@ -50,6 +50,18 @@ internal sealed class BoardPainter
     /// <summary>Where animated art goes, for drawing that's recorded once; null to step through its strip at each draw.</summary>
     public FrameTextures? Frames { get; set; }
 
+    /// <summary>Lets go of every texture, now rather than when the collector comes round. Nothing may paint with this painter afterwards.</summary>
+    public void Release()
+    {
+        foreach (var texture in _textures.Values.Concat(_tops.Values).Concat(_glows.Values).OfType<Texture2D>().Distinct())
+        {
+            texture.Dispose();
+        }
+        _textures.Clear();
+        _tops.Clear();
+        _glows.Clear();
+    }
+
     /// <summary>
     /// What <see cref="Paint"/> needs for <paramref name="item"/>, before its textures. With <paramref name="baked"/>, the lighting of the whole
     /// region, its colours are frozen at each light's mean here, which needs nothing from the main thread and doesn't care about any <c>Step</c>.
@@ -110,7 +122,23 @@ internal sealed class BoardPainter
             GD.PushWarning($"Tactics board: can't load {path}");
             return _textures[file] = null;
         }
-        return _textures[file] = ImageTexture.CreateFromImage(loaded);
+        return _textures[file] = Upload(loaded);
+    }
+
+    /// <summary>A texture of <paramref name="pixels"/>, which are done with. An Image's memory is native, so the collector doesn't know to hurry.</summary>
+    private static ImageTexture Upload(Image pixels)
+    {
+        var texture = ImageTexture.CreateFromImage(pixels);
+        pixels.Dispose();
+        return texture;
+    }
+
+    /// <summary>Cuts <paramref name="pixels"/> into <see cref="Frames"/>, and they're done with.</summary>
+    private Texture2D Strip(string key, ArtImage image, Image pixels)
+    {
+        var texture = Frames!.Add(key, image, pixels);
+        pixels.Dispose();
+        return texture;
     }
 
     /// <summary>What an image is drawn with. A top lies turned on its tile, so it goes through <see cref="DitherTexels"/>.</summary>
@@ -122,7 +150,7 @@ internal sealed class BoardPainter
         }
         if (Moves(image))
         {
-            return Frames!.Of(image.Path) ?? ((flat ? Turned(image) : Pixels(image.Path)) is { } strip ? Frames.Add(image.Path, image, strip) : Load(image.Path));
+            return Frames!.Of(image.Path) ?? ((flat ? Turned(image) : Pixels(image.Path)) is { } strip ? Strip(image.Path, image, strip) : Load(image.Path));
         }
         return flat ? LoadTop(image) : Load(image.Path);
     }
@@ -135,7 +163,7 @@ internal sealed class BoardPainter
         {
             return known;
         }
-        return _tops[image.Path] = Turned(image) is { } top ? ImageTexture.CreateFromImage(top) : Load(image.Path);   // which warns
+        return _tops[image.Path] = Turned(image) is { } top ? Upload(top) : Load(image.Path);   // which warns
     }
 
     /// <summary>A top's pixels as they go to the TV: doubled if it has dither, and as they are if not.</summary>
@@ -146,7 +174,13 @@ internal sealed class BoardPainter
             return null;
         }
         var doubled = DitherTexels.Doubled(art.GetData(), art.GetWidth(), art.GetHeight(), image.Frames);
-        return doubled is null ? art : Image.CreateFromData(art.GetWidth() * DitherTexels.Scale, art.GetHeight() * DitherTexels.Scale, false, Image.Format.Rgba8, doubled);
+        if (doubled is null)
+        {
+            return art;
+        }
+        var (width, height) = (art.GetWidth(), art.GetHeight());
+        art.Dispose();
+        return Image.CreateFromData(width * DitherTexels.Scale, height * DitherTexels.Scale, false, Image.Format.Rgba8, doubled);
     }
 
     private static DrawnFace Prepare(LitFace lit, BoardLighting? baked)
@@ -252,7 +286,7 @@ internal sealed class BoardPainter
         {
             return _glows[image.Path] = null;
         }
-        return _glows[image.Path] = Moves(image) ? Frames!.Add($"glow:{image.Path}", image, glow) : ImageTexture.CreateFromImage(glow);
+        return _glows[image.Path] = Moves(image) ? Strip($"glow:{image.Path}", image, glow) : Upload(glow);
     }
 
     private Image? Bake(string file, string? mask, Rgb colour)
@@ -270,12 +304,16 @@ internal sealed class BoardPainter
         else if (Pixels(mask, Image.Format.L8) is { } masked && masked.GetSize() == art.GetSize())
         {
             glow = GlowMask.FromMask(pixels, masked.GetData());
+            masked.Dispose();
         }
         else
         {
+            art.Dispose();
             return null;
         }
-        return Image.CreateFromData(art.GetWidth(), art.GetHeight(), false, Image.Format.Rgba8, glow);
+        var (width, height) = (art.GetWidth(), art.GetHeight());
+        art.Dispose();
+        return Image.CreateFromData(width, height, false, Image.Format.Rgba8, glow);
     }
 
     private Image? Pixels(string file, Image.Format format = Image.Format.Rgba8)

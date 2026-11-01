@@ -61,12 +61,58 @@ public sealed class WorldDrawingTests
         var tile = new Tile(30, 65);
         var feet = plan.Terrain.Centre(tile);
         var area = new ArtArea(feet - new Vector2(16, 48), feet + new Vector2(16, 4));
-        var after = BoardOrder.Key(tile, BoardLayer.Unit);
+        var after = BoardOrder.Key(new Tile(tile.X - 3, tile.Y - 3), BoardLayer.Unit);
 
         var found = plan.Over(area, after);
 
         Assert.NotEmpty(found);
         Assert.Equal(plan.ItemsOver(area, after), found.Select(at => plan.Blocks[at.Block].Lit.Items[at.Item]));
+    }
+
+    /// <summary>Round a block corner, what's repainted comes from several blocks, and a later block isn't a later item: only the sort puts them right.</summary>
+    [Fact]
+    public void What_goes_over_a_unit_at_a_block_corner_is_in_painters_order_not_block_order()
+    {
+        var plan = Ford.Value;
+        var corner = new Tile(80, 64);
+        var feet = plan.Terrain.Centre(corner);
+        var area = new ArtArea(feet - new Vector2(48, 96), feet + new Vector2(48, 12));
+
+        var found = plan.Over(area, 0);
+
+        Assert.True(found.Select(at => at.Block).Distinct().Count() > 1);
+        Assert.NotEqual(found.OrderBy(at => at.Block).ThenBy(at => at.Item), found);
+        var orders = found.Select(plan.OrderOf).ToArray();
+        Assert.Equal(orders.Order(), orders);
+    }
+
+    [Fact]
+    public void Items_of_one_order_keep_theirs_with_several_units_round_them()
+    {
+        var plan = Ford.Value;
+        var art = UnitArt.Load(Pack.Root);
+        var party = new[] { new WalkerView("a", "a", "characters.class_rogue", true, true), new WalkerView("b", "b", "characters.class_rogue", true, false) };
+        var places = new Dictionary<string, UnitPlace> { ["a"] = UnitPlace.On(plan.Terrain, new Tile(80, 64)), ["b"] = UnitPlace.On(plan.Terrain, new Tile(79, 63)) };
+        var units = UnitPlan.Walkers(party, places, new Dictionary<string, UnitPose>(), art);
+
+        var found = plan.Overlay(units);
+
+        Assert.Equal(found.OrderBy(plan.OrderOf).ThenBy(at => at.Block).ThenBy(at => at.Item), found);
+        Assert.Equal(found.Distinct(), found);
+    }
+
+    [Fact]
+    public void A_view_is_worked_out_for_a_window_of_any_shape()
+    {
+        var fit = WorldView.Centred(new Vector2(100.25f, 50.25f));
+        Assert.Equal(new Vector2(760, 440), fit.Origin);
+        Assert.Equal(fit.Origin, WorldView.OriginIn(fit, new Vector2(1920, 1080)));
+        Assert.Equal(fit.Origin + new Vector2(320, 0), WorldView.OriginIn(fit, new Vector2(2560, 1080)));
+
+        var seen = WorldView.Seen(fit.Origin, new Vector2(1920, 1080));
+
+        Assert.Equal(new Vector2(-380, -220), seen.Min);
+        Assert.Equal(new Vector2(580, 320), seen.Max);
     }
 
     [Fact]

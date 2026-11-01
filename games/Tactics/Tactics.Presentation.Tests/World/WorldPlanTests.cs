@@ -193,30 +193,6 @@ public sealed class WorldPlanTests
     }
 
     [Fact]
-    public void The_view_window_touches_at_most_9_chunks()
-    {
-        var size = new Vector2(1920, 1080) / WorldTuning.Scale;
-        var most = 0;
-
-        for (var y = -64f; y < 3200; y += 13)
-            for (var x = -3200f; x < 5200; x += 17)
-                most = Math.Max(most, WorldPlan.ChunksIn(new ArtArea(new Vector2(x, y), new Vector2(x, y) + size)).Length);
-
-        Assert.InRange(most, 4, 9);
-    }
-
-    [Fact]
-    public void A_tall_tile_below_the_view_still_counts_as_in_it()
-    {
-        var view = new ArtArea(new Vector2(-16, 854), new Vector2(16, 870));   // ends 154 pixels above the back corner of tile (32, 32)
-
-        var chunks = WorldPlan.ChunksIn(view);
-
-        Assert.Contains((1, 1), chunks);                                       // height 9 and a wall's rise lift it 160
-        Assert.DoesNotContain((2, 2), chunks);                                 // and nothing lifts tile (64, 64) that far
-    }
-
-    [Fact]
     public void Blocks_are_queued_nearest_the_party_first()
     {
         var queue = new BlockQueue(FordPlan.Value.Blocks);
@@ -268,9 +244,9 @@ public sealed class WorldPlanTests
 
         var over = plan.ItemsOver(unit, after);
 
-        var byHand = plan.Blocks.SelectMany(b => b.Lit.Items).Where(i => i.Order > after && LitArea(i).Overlaps(unit)).OrderBy(i => i.Order).ToArray();
+        var inFront = plan.Blocks.SelectMany(b => b.Lit.Items).Where(i => i.Order > after && LitArea(i).Overlaps(unit)).ToHashSet();
         Assert.NotEmpty(over);
-        Assert.Equal(byHand, over);
+        Assert.All(over, i => Assert.Contains(i, inFront));      // and of those, only what really crosses it: a tile's box covers its neighbours' corners, and its diamond doesn't
     }
 
     [Fact]

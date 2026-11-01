@@ -41,13 +41,7 @@ public sealed record BlockPlan(int Index, TileRect Tiles, int Z, BoardPlan Plan,
 /// </summary>
 public sealed class WorldPlan
 {
-    // A tile's top sits between these heights, in steps: a void sunk in a chasm, and a wall on the highest ground.
-    private const float Lowest = -BoardTerrain.VoidSink;
-    private const float Highest = WorldRegion.MaxHeight + BoardTerrain.WallRise;
-
-    private static readonly int ChunkShift = BitOperations.Log2(WorldRegion.ChunkSize);   // a shift floors, for tiles above the map
-
-    private readonly (long Order, ArtArea Box)[][] _boxes;
+    private readonly Shape[][] _shapes;
 
     private WorldPlan(BoardTerrain terrain, ImmutableArray<BlockPlan> blocks, BoardLighting lighting, ImmutableArray<string> paths, ImmutableArray<PlannedImage> images, ImmutableArray<string> halos)
     {
@@ -57,7 +51,7 @@ public sealed class WorldPlan
         Paths = paths;
         Images = images;
         Halos = halos;
-        _boxes = [.. blocks.Select(b => b.Lit.Items.Select(i => (i.Order, BoxOf(i))).ToArray())];
+        _shapes = [.. blocks.Select(b => b.Lit.Items.Select(ShapeOf).ToArray())];
     }
 
     /// <summary>The ground it was built from.</summary>
@@ -141,25 +135,6 @@ public sealed class WorldPlan
     }
 
     /// <summary>
-    /// The chunks a view of the map can show, as chunk column and row. A tile counts if its diamond, at any height it could be drawn at,
-    /// crosses the view, so this holds for any ground.
-    /// </summary>
-    public static ImmutableArray<(int X, int Y)> ChunksIn(ArtArea view)
-    {
-        var (halfWidth, halfHeight, step) = (BoardProjection.HalfWidth, BoardProjection.HalfHeight, BoardProjection.HeightStep);
-        var (firstAcross, lastAcross) = ((int)MathF.Floor(view.Min.X / halfWidth) - 1, (int)MathF.Ceiling(view.Max.X / halfWidth) + 1);
-        var firstDown = (int)MathF.Floor((view.Min.Y + Lowest * step) / halfHeight) - 2;
-        var lastDown = (int)MathF.Ceiling((view.Max.Y + Highest * step) / halfHeight);
-
-        var chunks = new SortedSet<(int, int)>();
-        for (var down = firstDown; down <= lastDown; down++)
-            for (var across = firstAcross; across <= lastAcross; across++)
-                if (((down + across) & 1) == 0)
-                    chunks.Add((((down + across) >> 1) >> ChunkShift, ((down - across) >> 1) >> ChunkShift));
-        return [.. chunks];
-    }
-
-    /// <summary>
     /// What's drawn over <paramref name="area"/> later than <paramref name="afterOrder"/>, in painter's order: what must go again over a unit
     /// standing there. It reads each item's real extent, so a tall side in front is found though its tile is off the area.
     /// </summary>
@@ -168,22 +143,102 @@ public sealed class WorldPlan
     /// <summary>As <see cref="ItemsOver"/>, as where each item is, for a frame to find what it prepared of them.</summary>
     public ImmutableArray<ItemAt> Over(ArtArea area, long afterOrder)
     {
-        var found = new List<(long Order, ItemAt At)>();
-        foreach (var block in Blocks)
-        {
-            if (block.Plan.Items.IsEmpty || !new ArtArea(block.Plan.Min, block.Plan.Max).Overlaps(area))
-                continue;
-            var boxes = _boxes[block.Index];
-            for (var i = 0; i < boxes.Length; i++)
-                if (boxes[i].Order > afterOrder && boxes[i].Box.Overlaps(area))
-                    found.Add((boxes[i].Order, new ItemAt(block.Index, i)));
-        }
-        return [.. found.OrderBy(f => f.Order).Select(f => f.At)];
+        var (found, shape) = (new List<ItemAt>(), Shape.Of(area));
+        Touching(shape, default, afterOrder, found.Add);
+        return [.. Painted(found)];
     }
 
-    private static ArtArea BoxOf(LitItem item)
+    /// <summary>
+    /// What a frame must repaint over <paramref name="units"/>, in painter's order. An item is repainted whole, so what crosses a unit isn't enough: an item it
+    /// doesn't cross can stand in front of a part of a repainted one, and would be painted over. So what crosses a repainted item, later than it, goes
+    /// again too, until nothing more does. Items cross by the shapes they cover, not their boxes: on open ground every tile's box overlaps the next one's, and
+    /// the closure would run away across the map, where their diamonds only meet.
+    /// </summary>
+    public ImmutableArray<ItemAt> Overlay(IEnumerable<BoardUnit> units)
     {
-        var (min, max) = BoardPlan.Bounds(item is LitFace face ? face.Face : ((LitSprite)item).Sprite);
-        return new ArtArea(min, max);
+        var (chosen, waiting) = (new HashSet<ItemAt>(), new Stack<ItemAt>());
+        void Add(ItemAt at)
+        {
+            if (chosen.Add(at))
+                waiting.Push(at);
+        }
+
+        foreach (var unit in units)
+            Touching(Shape.Of(AreaOf(unit)), default, unit.Order, Add);
+        while (waiting.TryPop(out var at))
+        {
+            var shape = _shapes[at.Block][at.Item];
+            Touching(shape, at, shape.Order, Add);
+        }
+        return [.. Painted(chosen)];
+    }
+
+    /// <summary>The place in the painter's order of the item <paramref name="at"/>.</summary>
+    public long OrderOf(ItemAt at) => _shapes[at.Block][at.Item].Order;
+
+    /// <summary>Finds what crosses <paramref name="shape"/> and paints after <paramref name="after"/>, an item of the given order, or anything of a later order.</summary>
+    private void Touching(in Shape shape, ItemAt after, long order, Action<ItemAt> found)
+    {
+        foreach (var block in Blocks)
+        {
+            if (block.Plan.Items.IsEmpty || !new ArtArea(block.Plan.Min, block.Plan.Max).Overlaps(shape.Box))
+                continue;
+            var shapes = _shapes[block.Index];
+            for (var i = 0; i < shapes.Length; i++)
+                if (Later(shapes[i].Order, block.Index, i, order, after) && shapes[i].Crosses(shape))
+                    found(new ItemAt(block.Index, i));
+        }
+    }
+
+    private static bool Later(long order, int block, int item, long afterOrder, ItemAt after)
+        => order != afterOrder ? order > afterOrder : block != after.Block ? block > after.Block : item > after.Item;
+
+    /// <summary>In painter's order. Items of one order keep theirs: a top's cells, then its glow and outline, are one order.</summary>
+    private IEnumerable<ItemAt> Painted(IEnumerable<ItemAt> items) => items.OrderBy(OrderOf).ThenBy(at => at.Block).ThenBy(at => at.Item);
+
+    private static Shape ShapeOf(LitItem item)
+    {
+        var drawn = item is LitFace face ? (BoardItem)face.Face : ((LitSprite)item).Sprite;
+        var (min, max) = BoardPlan.Bounds(drawn);
+        return new Shape(item.Order, new ArtArea(min, max), drawn is Face quad ? [.. quad.Points] : Shape.Corners(new ArtArea(min, max)));
+    }
+
+    /// <summary>What an item covers: a quad, or a sprite's or unit's rectangle, with its box for a quick look.</summary>
+    private readonly record struct Shape(long Order, ArtArea Box, Vector2[] Points)
+    {
+        public static Shape Of(ArtArea area) => new(0, area, Corners(area));
+
+        public static Vector2[] Corners(ArtArea area)
+            => [area.Min, new Vector2(area.Max.X, area.Min.Y), area.Max, new Vector2(area.Min.X, area.Max.Y)];
+
+        /// <summary>True when the two share more than an edge: no edge of either has the other wholly to its outside.</summary>
+        public bool Crosses(in Shape other) => Box.Overlaps(other.Box) && !Apart(Points, other.Points) && !Apart(other.Points, Points);
+
+        private static bool Apart(Vector2[] a, Vector2[] b)
+        {
+            for (var i = 0; i < a.Length; i++)
+            {
+                var edge = a[(i + 1) % a.Length] - a[i];
+                var across = new Vector2(-edge.Y, edge.X);
+                var (minA, maxA) = Range(a, across);
+                var (minB, maxB) = Range(b, across);
+                if (maxA <= minB + Touch || maxB <= minA + Touch)
+                    return true;
+            }
+            return false;
+        }
+
+        private static (float Min, float Max) Range(Vector2[] points, Vector2 axis)
+        {
+            var (min, max) = (float.MaxValue, float.MinValue);
+            foreach (var point in points)
+            {
+                var along = Vector2.Dot(point, axis);
+                (min, max) = (Math.Min(min, along), Math.Max(max, along));
+            }
+            return (min, max);
+        }
+
+        private const float Touch = 1e-3f;
     }
 }

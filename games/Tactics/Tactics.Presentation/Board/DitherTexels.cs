@@ -13,11 +13,19 @@ namespace Tactics.Presentation.Board;
 /// colours and shares. The art's files don't change. Its pattern is in the texture's own space, so it holds however the board is placed, as
 /// long as that's on whole pixels.
 /// </para>
+/// <para>
+/// A top is only worth it if it has dither to speak of, because the doubled texture costs four times the memory. Sand, flagstone, ice, lava and the dungeon's
+/// floors have a few texels that happen to pass for a checker, at most 7 together, and the crypt's runes are made of them. The art's real dither comes in patches of 80
+/// and up. So a frame with no patch of <see cref="LeastPatch"/> texels has no dither.
+/// </para>
 /// </summary>
 public static class DitherTexels
 {
     /// <summary>How many times larger a top is drawn from.</summary>
     public const int Scale = 2;
+
+    /// <summary>The fewest texels of dither touching each other that make a frame dithered: one more than the largest speck in the pack.</summary>
+    public const int LeastPatch = 8;
 
     /// <summary>
     /// <paramref name="rgba"/>, a top that tiles, as a strip of <paramref name="frames"/> side by side, at <see cref="Scale"/> times its size with
@@ -43,10 +51,30 @@ public static class DitherTexels
 
     private static bool AnyDither(uint[] art, int width, int height)
     {
-        for (var y = 0; y < height; y++)
-            for (var x = 0; x < width; x++)
-                if (IsDither(art, width, height, x, y))
+        var (seen, waiting) = (new bool[art.Length], new Stack<(int X, int Y)>());
+        for (var i = 0; i < art.Length; i++)
+        {
+            if (seen[i] || !IsDither(art, width, height, i % width, i / width))
+                continue;
+            seen[i] = true;
+            waiting.Push((i % width, i / width));
+            var patch = 0;
+            while (waiting.TryPop(out var at))
+            {
+                if (++patch >= LeastPatch)
                     return true;
+                for (var dy = -1; dy <= 1; dy++)
+                    for (var dx = -1; dx <= 1; dx++)
+                    {
+                        var (x, y) = ((at.X + dx + width) % width, (at.Y + dy + height) % height);
+                        if (!seen[y * width + x] && IsDither(art, width, height, x, y))
+                        {
+                            seen[y * width + x] = true;
+                            waiting.Push((x, y));
+                        }
+                    }
+            }
+        }
         return false;
     }
 

@@ -54,6 +54,33 @@ public sealed class DitherTexelsTests
         Assert.Null(DitherTexels.Doubled(Bytes(art), Size, Size));
     }
 
+    [Theory]
+    [InlineData("terrain/top/sand_desert.png", false)]
+    [InlineData("terrain/top/flagstone_grey.png", false)]
+    [InlineData("dungeon/textures/top/dungeon_floor_cracked_grey.png", false)]
+    [InlineData("dungeon/textures/top/crypt_tiles_fel.png", false)]
+    [InlineData("terrain/top/grass_green.png", true)]
+    [InlineData("terrain/top/dirt_brown.png", true)]
+    [InlineData("terrain/top/ash_grey.png", true)]
+    [InlineData("terrain/top/path_packed.png", true)]
+    [InlineData("dungeon/textures/top/mine_gravel_mine.png", true)]
+    public void Only_tops_with_real_dither_are_doubled(string file, bool doubled)
+    {
+        var (bytes, width, height) = PngTexels.Read(Path.Combine(Pack.Root, file));
+
+        Assert.Equal(doubled, DitherTexels.Doubled(bytes, width, height) is not null);
+    }
+
+    [Fact]
+    public void A_few_texels_of_checker_are_a_speck_and_a_patch_is_dither()
+    {
+        // A square of checker: 16 texels of it pass the test, in the middle of a square of 6 by 6.
+        uint[] Square(int side) => Painted((x, y) => x >= 8 && x < 8 + side && y >= 8 && y < 8 + side ? Checker(x, y) : Light);
+
+        Assert.Null(DitherTexels.Doubled(Bytes(Square(3)), Size, Size));
+        Assert.NotNull(DitherTexels.Doubled(Bytes(Square(8)), Size, Size));
+    }
+
     [Fact]
     public void A_checker_laid_on_a_tile_doesnt_turn_into_stripes()
     {

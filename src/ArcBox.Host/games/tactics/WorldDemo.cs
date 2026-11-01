@@ -114,6 +114,11 @@ internal sealed partial class WorldDemo : Node
 
     private void Open()
     {
+        if (_canvas.Now == WorldCanvas.Stage.Failed)
+        {
+            _stage = Stage.Done;
+            return;
+        }
         if (_canvas.Plan is null)
         {
             return;
@@ -149,7 +154,7 @@ internal sealed partial class WorldDemo : Node
         var terrain = _canvas.Plan!.Terrain;
         var place = WorldRoute.At(terrain, _route, steps);
         var heading = WorldRoute.Heading(_route, steps);
-        _canvas.Look(place.Feet);
+        _canvas.Place(WorldView.Centred(place.Feet));
         _canvas.Aim(place.Map, heading * StepsPerSecond);
         _canvas.ShowUnits(DemoRegion.StandIn(terrain, _art, place, heading, _clock), _art);
         return place;
@@ -205,7 +210,7 @@ internal sealed partial class WorldDemo : Node
         var spot = _spots[_spot];
         var terrain = _canvas.Plan!.Terrain;
         var place = UnitPlace.On(terrain, spot.Stand);
-        _canvas.Look(terrain.Centre(spot.Look));
+        _canvas.Place(WorldView.Centred(terrain.Centre(spot.Look)));
         _canvas.ShowUnits(DemoRegion.StandIn(terrain, _art, place, new System.Numerics.Vector2(1, 0), _clock), _art);
         if (++_settling < SettleFrames)
         {

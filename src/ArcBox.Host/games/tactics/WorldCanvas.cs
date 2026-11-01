@@ -1,5 +1,6 @@
 using System.Collections.Immutable;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using Godot;
 using Tactics.Logic;
@@ -15,6 +16,10 @@ namespace ArcBox.Host.Games.Tactics;
 /// It opens behind a fade. The plan and its baked colours are built off the main thread, then textures load one a frame, then the blocks in view are
 /// recorded, and only then does the fade lift. The rest are recorded at <see cref="WorldTuning.BlockBudgetMs"/> a frame, nearest to where the party is heading
 /// first, and a block that's seen before its turn logs <c>WORLD late block</c> and shows nothing.
+/// </para>
+/// <para>
+/// While a fight or a list is up it's <see cref="Suspend"/>ed: nothing draws or runs, and it comes back whole with <see cref="Resume"/>. Leaving the tree ends
+/// it. A build still under way is cancelled, what it was doing goes nowhere, and the textures go at once.
 /// </para>
 /// <para>
 /// Each frame, the board over it paints the units with only the items that sort after them and cross their rectangles (<see cref="WorldPlan.Over"/>).
@@ -37,6 +42,9 @@ internal sealed partial class WorldCanvas : CanvasLayer
 
         /// <summary>Showing: the rest are recorded as the frames allow.</summary>
         Open,
+
+        /// <summary>It can't be built. It shows nothing and never will.</summary>
+        Failed,
     }
 
     private sealed record Built(WorldPlan Plan, object[][] Items, string Times);
@@ -53,10 +61,12 @@ internal sealed partial class WorldCanvas : CanvasLayer
     private readonly List<WorldBlock> _blocks = [];
     private readonly List<WorldBlock> _recording = [];
     private readonly HashSet<int> _late = [];
+    private readonly CancellationTokenSource _closing = new();
 
     private Task<Built> _building = null!;
     private Node2D _world = null!;
     private BoardCanvas _over = null!;
+    private ColorRect _back = null!;
     private ColorRect _fade = null!;
     private BlockQueue _queue = null!;
     private object[][] _items = [];
@@ -64,6 +74,8 @@ internal sealed partial class WorldCanvas : CanvasLayer
     private double _clock;
     private double _fading;
     private double _msPerItem = FirstGuessMsPerItem;
+    private int _backAt;
+    private int _backCheck;
     private ArtArea _view;
     private System.Numerics.Vector2 _aim;
 
@@ -90,7 +102,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
     public (double Textures, double Worst, double Bind) LoadMs { get; private set; }
 
     /// <summary>True once the fade has lifted.</summary>
-    public bool Revealed => _fade is { Visible: false };
+    public bool Revealed => Now == Stage.Open && _fade is { Visible: false };
 
     /// <summary>The blocks not yet recorded.</summary>
     public int Waiting => (_queue?.Count ?? 0) + _recording.Count;
@@ -119,11 +131,57 @@ internal sealed partial class WorldCanvas : CanvasLayer
     /// <summary>What's on screen, in art pixels.</summary>
     public ArtArea View => _view;
 
+    /// <summary>What the engine holds, for the log.</summary>
+    public static string MemoryText()
+        => $"textures {Performance.GetMonitor(Performance.Monitor.RenderTextureMemUsed) / (1024 * 1024):0.0} MB, buffers {Performance.GetMonitor(Performance.Monitor.RenderBufferMemUsed) / (1024 * 1024):0.0} MB, engine {Performance.GetMonitor(Performance.Monitor.MemoryStatic) / (1024 * 1024):0.0} MB, managed {GC.GetTotalMemory(false) / (1024.0 * 1024):0.0} MB";
+
+    /// <summary>True while a fight or a list has the screen.</summary>
+    public bool Suspended { get; private set; }
+
+    /// <summary>
+    /// Hides it and stops it running, with everything kept, and a build under way carrying on off the main thread. It's hidden in the rendering server, not on the
+    /// node: Godot redraws a node each time it's shown, which would record every block again on the way back from a fight, all in one frame.
+    /// </summary>
+    public void Suspend()
+    {
+        Suspended = true;
+        RenderingServer.CanvasItemSetVisible(_world.GetCanvasItem(), false);
+        _back.Visible = false;
+        _fade.Visible = false;
+        ProcessMode = ProcessModeEnum.Disabled;
+    }
+
+    /// <summary>Brings it back. What had already been shown lifts from the fade again.</summary>
+    public void Resume()
+    {
+        Suspended = false;
+        RenderingServer.CanvasItemSetVisible(_world.GetCanvasItem(), true);
+        _back.Visible = true;
+        ProcessMode = ProcessModeEnum.Inherit;
+        _backAt = _blocks.Sum(b => b.Recorded);
+        _backCheck = 3;
+        _fading = 0;
+        _fade.Modulate = Colors.White;
+        _fade.Visible = true;
+    }
+
+    public override void _ExitTree()
+    {
+        _closing.Cancel();
+        _blocks.Clear();
+        _recording.Clear();
+        _items = [];
+        _painter.Release();
+        _frames.Release();
+        Plan = null;
+        GD.Print("WORLD closed");
+    }
+
     public override void _Ready()
     {
-        var back = new ColorRect { Color = Dark, ZIndex = -1, MouseFilter = Control.MouseFilterEnum.Ignore };
-        back.SetAnchorsPreset(Control.LayoutPreset.FullRect);
-        AddChild(back);
+        _back = new ColorRect { Color = Dark, ZIndex = -1, MouseFilter = Control.MouseFilterEnum.Ignore };
+        _back.SetAnchorsPreset(Control.LayoutPreset.FullRect);
+        AddChild(_back);
 
         _world = new Node2D
         {
@@ -137,31 +195,38 @@ internal sealed partial class WorldCanvas : CanvasLayer
         _fade.SetAnchorsPreset(Control.LayoutPreset.FullRect);
         AddChild(_fade);
 
-        _building = Task.Run(Build);
+        _building = Task.Run(() => Build(_closing.Token));
     }
 
-    private Built Build()
+    private Built Build(CancellationToken closing)
     {
         var clock = Stopwatch.StartNew();
         var ground = _ground();
         var parsed = clock.Elapsed.TotalMilliseconds;
+        closing.ThrowIfCancellationRequested();
         var plan = WorldPlan.Build(new BoardTerrain(ground.Map, null), ArtIndex.Load(_painter.Root), _blockSize);
         var planned = clock.Elapsed.TotalMilliseconds;
+        closing.ThrowIfCancellationRequested();
         var baked = plan.Lighting.Active ? plan.Lighting : null;
-        object[][] items = [.. plan.Blocks.Select(b => b.Lit.Items.Select(i => BoardPainter.Prepare(i, baked)).ToArray())];
+        var items = new object[plan.Blocks.Length][];
+        foreach (var block in plan.Blocks)
+        {
+            closing.ThrowIfCancellationRequested();
+            items[block.Index] = [.. block.Lit.Items.Select(i => BoardPainter.Prepare(i, baked))];
+        }
         plan.DropProbes();
         var prepared = clock.Elapsed.TotalMilliseconds;
         return new Built(plan, items, $"ground {parsed:0} ms, plan+light {planned - parsed:0} ms, bake {prepared - planned:0} ms, total {prepared:0} ms");
     }
 
-    /// <summary>Puts the middle of the screen at a point of the map, in art pixels, on whole layout pixels.</summary>
-    public void Look(System.Numerics.Vector2 art)
+    /// <summary>Puts the world where <paramref name="fit"/> says.</summary>
+    public void Place(BoardFit fit)
     {
-        var window = GetViewport().GetVisibleRect().Size;
-        var middle = new Vector2(art.X, art.Y) * WorldTuning.Scale;
-        _world.Position = (window / 2 - middle).Round();
-        var half = new System.Numerics.Vector2(window.X, window.Y) / (2 * WorldTuning.Scale);
-        _view = new ArtArea(art - half, art + half);
+        var size = GetViewport().GetVisibleRect().Size;
+        var window = new System.Numerics.Vector2(size.X, size.Y);
+        var origin = WorldView.OriginIn(fit, window);
+        _world.Position = new Vector2(origin.X, origin.Y);
+        _view = WorldView.Seen(origin, window);
         _over?.SetView(_view.Min - new System.Numerics.Vector2(ViewMargin), _view.Max + new System.Numerics.Vector2(ViewMargin));
     }
 
@@ -177,13 +242,10 @@ internal sealed partial class WorldCanvas : CanvasLayer
         }
         var clock = Stopwatch.GetTimestamp();
         var plan = Plan;
-        var over = units.SelectMany(u => plan.Over(WorldPlan.AreaOf(u), u.Order)).Distinct()
-            .Select(at => (Order: plan.Blocks[at.Block].Lit.Items[at.Item].Order, At: at))
-            .OrderBy(i => i.Order)
-            .ToArray();
+        var over = plan.Overlay(units);
         QueryMs = Stopwatch.GetElapsedTime(clock).TotalMilliseconds;
         OverItems = over.Length;
-        _over.SetDrawn(over.Select(i => _items[i.At.Block][i.At.Item]), over.Select(i => i.Order));
+        _over.SetDrawn(over.Select(at => _items[at.Block][at.Item]), over.Select(plan.OrderOf));
         _over.SetUnits(units, art);
     }
 
@@ -191,8 +253,16 @@ internal sealed partial class WorldCanvas : CanvasLayer
     {
         _clock += delta;
         _frames.Step(_clock);
+        if (_backCheck > 0 && --_backCheck == 0)
+        {
+            GD.Print($"WORLD back: {_blocks.Sum(b => b.Recorded) - _backAt} blocks recorded again, of {_blocks.Count}, frame {delta * 1000:0.0} ms");
+        }
         switch (Now)
         {
+            case Stage.Building when _building.IsFaulted || _building.IsCanceled:
+                Now = Stage.Failed;
+                GD.PushError($"The world can't be built: {_building.Exception?.GetBaseException().Message}");
+                break;
             case Stage.Building when _building.IsCompleted:
                 FinishBuild();
                 break;
@@ -233,7 +303,10 @@ internal sealed partial class WorldCanvas : CanvasLayer
         _over = new BoardCanvas(_painter) { ZIndex = Plan.Blocks.Max(b => b.Z) + 1 };
         _world.AddChild(_over);
         _over.JoinWorld(Plan.Lighting.Active ? Plan.Lighting : null);
-        Look(_view.Max == _view.Min ? BoardProjection.Corner(0, 0, 0) : (_view.Min + _view.Max) / 2);
+        if (_view.Max == _view.Min)
+        {
+            Place(WorldView.Centred(BoardProjection.Corner(0, 0, 0)));
+        }
         Now = Stage.Textures;
     }
 
