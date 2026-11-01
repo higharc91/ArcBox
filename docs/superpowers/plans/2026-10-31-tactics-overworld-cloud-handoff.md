@@ -44,14 +44,14 @@ The user's standard for this work, in their words: "Spend a ton of time on makin
 
 ## 3. Where things stand
 
-Expect about 3,600 .NET tests and 333 web tests, all passing, with 0 warnings. If they don't, stop and find out why before building on it.
+Expect 3,603 .NET tests and 335 web tests, all passing, with 0 warnings. If they don't, stop and find out why before building on it.
 
 **What works now:** after Muster the party stands in Ashen Ford. The leader steers from an 8-way pad on their phone, and the party walks the real TV world with the camera following. Leader rotation, handover, saved position, a stop that survives a lost release, and TV drops are all done. The battle list is still reached with `battles`, and a list fight returns to the world. **The world has no story and no fights on the spot yet.**
 
 | Milestone | State | Where |
 |---|---|---|
 | 5a: world format, painting workspace, export, checks, Ashen Ford draft | Done | [plan](2026-10-31-tactics-overworld.md), `tools/tactics-world/README.md` |
-| 5b: walking | Tasks 1 to 10 done; see below for Task 11 | [plan](2026-10-31-tactics-overworld-5b.md) |
+| 5b: walking | Tasks 1 to 10 done, Task 11 partial, interaction fixes to do | [plan](2026-10-31-tactics-overworld-5b.md) |
 | 5c: fights on the spot | Planned, not started | [plan](2026-10-31-tactics-overworld-5c.md) |
 | 5d: the story runtime | Planned, not started | [plan](2026-10-31-tactics-overworld-5d.md) |
 | 5e: tuning and a real session | Needs the user | [spec](../specs/2026-10-31-tactics-overworld-design.md) §6 |
@@ -64,7 +64,7 @@ Reports and proof shots are in `docs/superpowers/reports/2026-10-31-tactics-over
 
 Each milestone's plan is complete: read everything above its "### Task 1" first, because the flags and defaults there bind you.
 
-1. **Finish Task 11 of 5b** if `git log` has no `feat(tactics-playtest): the bots walk`: see §5.
+1. **Finish Task 11 of 5b.** That commit exists but is partial: see §5.
 2. **Catch engine failures,** the first item in §5.
 3. **Do the interaction fixes.** [The interaction review](../reports/2026-10-31-tactics-overworld/interaction-review-5b.md) has a ruling on each item. Do every **Do** item before 5c, with tests.
 4. Build 5c from its plan.
@@ -87,8 +87,11 @@ Each milestone's plan is complete: read everything above its "### Task 1" first,
 - **A second overlap remains:** `LastFree` can go stale if something spawns onto the tile a walker just left. Only `dragon_wakes` in `hall_of_the_flame`, with its `hpBelow` branch, might do this in the base pack. Choosing a fallback tile is a rules decision, so it's on the user's list.
 - **Battles that don't end:** about 1.4% of sweep battles hit the 1,500-iteration cap, mostly a passive hero against archers that Dodge forever at range. Not a hang, because a player who moves ends it. Worth a line in the AI's notes.
 
-- **Task 11, if unfinished:** Muster now lands on `walk`, so `tools/tactics-playtest/bots.cjs` must send `battles` or every `tools/tv-e2e.sh` mode fails. Add the walking modes, then measure thumb-to-TV latency (target ≤ 100 ms) and how long a killed or silent phone takes to raise the disconnect event. 5d and interaction review item 10 depend on that second number.
-- **A one-off followers lag:** once, with a rate limiter flooded and stops being lost, followers sat about 8 tiles behind the leader. Not reproduced since. Task 11 was asked to add a flooding bot and check.
+- **Task 11 is partial.** `bots.cjs` has `battles` by default on the walk screen, plus `--walk`, `--walk-latency`, `--walk-flood`, `--walk-drop=kill|stall`, `--tv-log` and `--host` (no TV).
+    - **`tools/tv-e2e.sh` hasn't run since Muster began landing on `walk`.** `ARCBOX_GAME=tactics`, `ARCBOX_RECONNECT=1` and `ARCBOX_RESTART=1` are unproven. In a no-TV run the VIP sent `battles` and picked river_crossing, but the run timed out at 40 s with no turn logged, so the bots weren't seen playing. Check this first. It may be a real bug.
+    - **Still to do:** add `ARCBOX_WALK=1` (Seq climbs, `--walk-drop` stops within the lease, the party is on the saved tile after a restart, a killed TV snaps back), document the modes in `games/Tactics/README.md`, and measure thumb-to-TV latency (target ≤ 100 ms; needs a TV). `--walk` hasn't been checked to really move the party. Press to host view with no TV: median 1 ms, worst 109 ms, unexplained.
+    - **Measured, on loopback:** a killed phone raises disconnect after about 15 s, and a silent one after about 30 s. The party stopped about 560 ms after the cut in all 5 runs, inside the lease, and the lead passed at about 7.8 s by the silence rule. **So a vanished phone looks connected for 15 to 30 s, and 5d must not treat `connected` as fast.** A real phone's network may differ.
+- **A followers lag, unexplained:** once, with a rate limiter flooded and stops being lost, followers sat about 8 tiles behind the leader. `--walk-flood` hasn't been run with a TV, and the TV has no position log yet. Add a dev line under `--walk-log`. Hypothesis from reading `WalkTrack.cs`, untested: a flood flickers `Held`, each short rest runs `Fan` and pulls followers off the trail, `Trail` zeroes `Pace` while `Offset` is over `Rejoined` (0.2), so followers can't catch up before the next rest. A pure test of that sequence on `WalkTrack` needs no TV, so try that first.
 - **A flaky test, maybe:** one full run failed one unidentified test after Task 9. Three later runs and 3 after Task 10 were clean. If you see it, name it and fix it.
 - **One late crash:** in a baseline run the TV died about 7.3 s in, around quit, with speech on. Not seen since it went off, but the count is small.
 - **`Unable to create shader cache directory ShadowFrustumShaderRD/...`** appears in some filled-cache runs. Harmless so far, uninvestigated.
