@@ -93,7 +93,7 @@
 #   ARCBOX_WALK_PRESSES (walk) presses timed for the latency (default 20)
 #   ARCBOX_ENCOUNTER (tactics) the encounter (default river_crossing)
 #   TV_HOLD          (tactics) seconds the bots leave the results up (default 6)
-#   ARCBOX_SERVER_ENV (tactics) more KEY=value settings for the server, e.g. a Development seed that puts the party by the stamp, so the
+#   ARCBOX_SERVER_ENV more KEY=value settings for the server, in every mode (REDLINE's too, which ignores Tactics ones), e.g. a Development seed that puts the party by the stamp, so the
 #                    fight walks in rather than fading: Tactics__Seed__Region=ashen_ford Tactics__Seed__At__0=96 Tactics__Seed__At__1=61
 #   ARCBOX_BOT_ARGS  (tactics) the bots' fighting options, in place of --fight; e.g. --sit-out=turn for a party that loses
 #   ARCBOX_FULL      1 = race to the chequered flag and back to the lobby (passed to the phone script)

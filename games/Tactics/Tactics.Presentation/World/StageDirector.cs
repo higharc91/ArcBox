@@ -38,6 +38,9 @@ public enum WorldState
     Failed,
 }
 
+/// <summary>A view for the walk to take, and with the view of a fall-in's epoch, where the followers stand (<see cref="WalkShow.Seed"/>).</summary>
+public sealed record WalkNext(ExploreView View, IReadOnlyDictionary<string, UnitPlace>? Seed);
+
 /// <summary>Where the camera holds (<see cref="WorldCamera.Hold"/>) while a fight has it, in world tiles.</summary>
 public readonly record struct StageCamera(Vector2 Map, float Height);
 
@@ -80,6 +83,8 @@ public sealed class StageDirector(Func<string, BattleMap?> maps)
     private ExploreView? _held;          // the party as it was when the fight began
     private bool _holding;
     private FallIn? _fall;
+    private ImmutableDictionary<string, UnitPlace>? _seed;     // the fall-in's followers, until the walk has had them
+    private int _seedEpoch;                                      // the epoch they're for
     private readonly Dictionary<string, UnitPlace> _walkers = new(StringComparer.Ordinal);    // the fall-in's places, reused frame to frame
 
     /// <summary>Where the fight is in its timeline.</summary>
@@ -135,7 +140,22 @@ public sealed class StageDirector(Func<string, BattleMap?> maps)
     public IReadOnlyDictionary<string, UnitPlace>? Walkers { get; private set; }
 
     /// <summary>Where the followers stand after falling in, for <see cref="WalkTrack.Seed"/> once the track has taken <see cref="Walk"/>'s new epoch.</summary>
-    public ImmutableDictionary<string, UnitPlace> Seed => _fall?.Seed ?? NoWalkers;
+    public ImmutableDictionary<string, UnitPlace> Seed => _seed ?? NoWalkers;
+
+    /// <summary>
+    /// What the walk is to take next, given the view it took last (<paramref name="fed"/>), on a world of <paramref name="region"/>: null when
+    /// there's nothing new. The followers' places come with the view of the fall-in's own epoch, once; any other view, a later epoch, a trip to
+    /// another region, has none, so nobody is put back where an old fight left them (5c review, item 1).
+    /// </summary>
+    public WalkNext? NextWalk(ExploreView? fed, string? region)
+    {
+        if (Walk is not { } view || ReferenceEquals(view, fed) || view.Region != region)
+            return null;
+        ImmutableDictionary<string, UnitPlace>? seed = null;
+        if (_seed is { } pending && view.Epoch == _seedEpoch && fed?.Epoch != view.Epoch)
+            (seed, _seed) = (pending, null);
+        return new WalkNext(view, seed);
+    }
 
     /// <summary>
     /// Whether the world can be drawn, and its ground as drawn (<see cref="WorldPlan.Terrain"/>). A world of another region counts as loading.
@@ -238,7 +258,7 @@ public sealed class StageDirector(Func<string, BattleMap?> maps)
         if (!fresh)
             return;
 
-        (Intro, _fall, _awaitingBlow, _fresh, _dark, _takeover, _inPlace) = (null, null, false, false, false, -1, false);
+        (Intro, _fall, _seed, _awaitingBlow, _fresh, _dark, _takeover, _inPlace) = (null, null, null, false, false, false, -1, false);
         if (battle.Stage is not { } view || maps(battle.Map) is not { } map)
         {
             Where = null;
@@ -288,7 +308,7 @@ public sealed class StageDirector(Func<string, BattleMap?> maps)
                     break;
                 }
                 Where = new BattleStage(last.Map, view.Origin, view.Height, map.Width, map.Height);
-                (_fresh, _holding, _inPlace, _fall, Intro) = (true, false, false, null, null);
+                (_fresh, _holding, _inPlace, _fall, _seed, Intro) = (true, false, false, null, null, null);
                 Go(StageStep.Results);
                 break;
         }
@@ -314,6 +334,7 @@ public sealed class StageDirector(Func<string, BattleMap?> maps)
                     break;
                 }
                 _fall = FallIn.Plan(_battle, stage, explore, _terrain);
+                (_seed, _seedEpoch) = (_fall.Seed.IsEmpty ? null : _fall.Seed, explore.Epoch);
                 (_holding, _inPlace) = (false, false);
                 Go(StageStep.FallingIn);
                 break;
@@ -325,7 +346,7 @@ public sealed class StageDirector(Func<string, BattleMap?> maps)
 
     private void Finish()
     {
-        (_holding, _inPlace, _awaitingBlow, Intro) = (false, false, false, null);
+        (_holding, _inPlace, _awaitingBlow, Intro, _fall) = (false, false, false, null, null);
         Go(StageStep.Walking);
     }
 

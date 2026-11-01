@@ -87,7 +87,6 @@ internal sealed partial class WorldCanvas : CanvasLayer
     private BoardCanvas? _stage;
     private StagePlan? _staged;
     private Task<(BlockPlan Block, object[] Items)[]>? _repainting;
-    private Func<ImmutableArray<BlockPlan>>? _repaintNext;
 
     /// <summary>A world that shows what <paramref name="ground"/> builds, off the main thread, with art from <paramref name="packRoot"/>.</summary>
     public WorldCanvas(string packRoot, Func<WorldGround> ground, int blockSize = WorldTuning.BlockSize)
@@ -154,25 +153,19 @@ internal sealed partial class WorldCanvas : CanvasLayer
         _over.SetView(_view.Min - new System.Numerics.Vector2(ViewMargin), _view.Max + new System.Numerics.Vector2(ViewMargin));
     }
 
+    /// <summary>True while blocks are being built again: the next repaint waits (<see cref="RepaintQueue"/> keeps what's asked meanwhile).</summary>
+    public bool Repainting => _repainting is not null;
+
     /// <summary>
     /// Builds the blocks <paramref name="work"/> gives (<see cref="StagePlan.WorldBlocks"/>) off the main thread and swaps them in once they're
-    /// ready. The plan's own blocks stay as they were, so what the walkers' overlay reads is the region as it is. A repaint asked for while one
-    /// is under way waits for it, and only the newest waits.
+    /// ready. The plan's own blocks stay as they were, so what the walkers' overlay reads is the region as it is. Only while not <see cref="Repainting"/>.
     /// </summary>
     public void Repaint(Func<ImmutableArray<BlockPlan>> work)
     {
-        if (_repainting is null)
+        if (_repainting is not null)
         {
-            Start(work);
+            throw new InvalidOperationException("A repaint is already under way.");
         }
-        else
-        {
-            _repaintNext = work;
-        }
-    }
-
-    private void Start(Func<ImmutableArray<BlockPlan>> work)
-    {
         var baked = Plan?.Lighting is { Active: true } lighting ? lighting : null;
         _repainting = Task.Run(() => work().Select(b => (b, b.Lit.Items.Select(i => BoardPainter.Prepare(i, baked)).ToArray())).ToArray());
     }
@@ -199,11 +192,6 @@ internal sealed partial class WorldCanvas : CanvasLayer
         else
         {
             GD.PushError($"The world's blocks can't be built again: {done.Exception?.GetBaseException().Message}");
-        }
-        if (_repaintNext is { } next)
-        {
-            _repaintNext = null;
-            Start(next);
         }
     }
 
