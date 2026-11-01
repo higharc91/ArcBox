@@ -18,6 +18,9 @@ public static class WorldTuning
     /// <summary>How long the opening fade takes, in seconds. Everything that can't wait a frame's budget happens behind it.</summary>
     public const double FadeSeconds = 0.4;
 
+    /// <summary>How long the title card waits for the world to open, in seconds of frames, before the screen goes on without it.</summary>
+    public const double OpenTimeout = 10;
+
     // ---- The playhead (WalkTrack) --------------------------------------------------------------------------------------
 
     /// <summary>The jitter buffer, in seconds of path: how far behind the server the party is drawn once it has got going.</summary>

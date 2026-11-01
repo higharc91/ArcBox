@@ -31,7 +31,7 @@ namespace ArcBox.Host.Games.Tactics;
 /// the way behind a fight or a list, and goes when the scene does.
 /// </para>
 /// </summary>
-public partial class TacticsScene : Control, IGameScene, IContentScene, ISignalingScene, IAudioScene
+public partial class TacticsScene : Control, IGameScene, IContentScene, ISignalingScene, IAudioScene, IConnectionScene
 {
     /// <summary>A table this short leaves its rows at this share of the height, not stretched into slabs.</summary>
     private const int RowSlots = 6;
@@ -69,7 +69,8 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private bool _loadingShot;
     private bool _walking;
     private bool _battle;
-    private WorldReveal _reveal = WorldReveal.Loading;
+    private readonly WorldCover _cover = new();
+    private CoverLook? _coverShown;
     private double _shotAt;
     private double _stillFor;
     private double _lastWalked;
@@ -117,6 +118,9 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     public void SetNarrator(Narrator narrator) => _narrator = narrator;
 
     public void SetShots(Screenshotter? shots) => _shots = shots;
+
+    /// <summary>The connection dropped: walls refused while the TV was away are old news, so the next view doesn't bump anyone.</summary>
+    public void ConnectionLost() => _walk?.Rebase();
 
     public void SetContentRoots(IReadOnlyDictionary<string, string> rootsByPackId)
     {
@@ -199,8 +203,12 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     /// <summary>A frame of walking: everything that moves, moved. It touches no node that isn't moving, and it doesn't wait for anything.</summary>
     private void WalkOn(WorldCanvas world, double delta)
     {
-        if (world.Now == WorldCanvas.Stage.Failed)
+        if (!Reveal(world, delta))
         {
+            if (world.Now != WorldCanvas.Stage.Failed)
+            {
+                GD.PushError($"Tactics world: '{_worldRegion}' didn't open in {WorldTuning.OpenTimeout} s; going on without it");
+            }
             _unreadableWorld = _worldRegion;
             CloseWorld();
             if (_screen is { } screen)
@@ -209,7 +217,6 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             }
             return;
         }
-        Reveal(world);
         if (world.Plan is not { } plan || _unitArt is not { } art)
         {
             return;
@@ -220,7 +227,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _walk.Receive(_explore!);
         }
 
-        var frame = _walk.Frame(delta);
+        var frame = _walk.Frame(delta, _cover.Reveal.Revealed);
         if (frame.Cut)
         {
             GD.Print(FormattableString.Invariant($"TACTICS walk snapped to {frame.Tile.X:0.0} {frame.Tile.Y:0.0}"));
@@ -241,40 +248,47 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     }
 
     /// <summary>
-    /// The region's title card stays over the world until the world is there to see, and gives way to it as the world's fade lifts
-    /// (<see cref="WorldReveal"/>). Nodes are touched only when that changes.
+    /// A frame of the screen over the world (<see cref="WorldCover"/>): the region's title card until the world is there to see. False when
+    /// the world must be given up: it failed, or didn't open in time.
     /// </summary>
-    private void Reveal(WorldCanvas world)
+    private bool Reveal(WorldCanvas world, double delta)
     {
-        var reveal = WorldReveal.Of(world.Now == WorldCanvas.Stage.Open, world.Lifted);
+        var stage = world.Now switch
+        {
+            WorldCanvas.Stage.Open => WorldStage.Open,
+            WorldCanvas.Stage.Failed => WorldStage.Failed,
+            _ => WorldStage.Building,
+        };
+        if (!_cover.Frame(delta, stage, world.Lifted))
+        {
+            return false;
+        }
         if (_shots is not null && !_loadingShot && world.Now == WorldCanvas.Stage.Near)
         {
             _loadingShot = true;
             _shots.Capture("tactics-world-loading");
         }
-        if (reveal == _reveal)
+        Cover();
+        return true;
+    }
+
+    /// <summary>Applies <see cref="WorldCover.Look"/> to the backdrop, header, table and the world's panels. Nodes are touched only when it changes.</summary>
+    private void Cover()
+    {
+        var look = _cover.Look(_walking, _battle);
+        if (look == _coverShown)
         {
             return;
         }
-        _reveal = reveal;
-        Cover();
-    }
-
-    /// <summary>
-    /// The backdrop, header and table: the whole screen with no world or board, under the board in a fight, and the world's title card
-    /// while it opens. The world's own panels come in as the card goes.
-    /// </summary>
-    private void Cover()
-    {
-        var card = _walking ? _reveal.Card : 1f;
-        var tint = new Color(1, 1, 1, card);
-        _backdrop.Visible = card > 0;
-        _header.Visible = _table.Visible = !_battle && card > 0;
+        _coverShown = look;
+        var tint = new Color(1, 1, 1, look.Card);
+        _backdrop.Visible = look.Backdrop;
+        _header.Visible = _table.Visible = look.HeaderAndTable;
         _backdrop.Modulate = _header.Modulate = _table.Modulate = tint;
         if (_worldHud is { } hud)
         {
-            hud.Visible = _walking && _reveal.Panels > 0;
-            hud.Modulate = new Color(1, 1, 1, _reveal.Panels);
+            hud.Visible = look.PanelsShown;
+            hud.Modulate = new Color(1, 1, 1, look.Panels);
         }
     }
 
@@ -506,6 +520,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             if (_worldHud is null)
             {
                 _worldHud = new WorldHud(root, HudArt.Load(root, _unitArt)) { Visible = false };
+                _coverShown = null;
                 AddChild(_worldHud);
                 MoveChild(_worldHud, _caption.GetIndex());
             }
@@ -525,12 +540,12 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         if (_world is null)
         {
             OpenWorld(root, explore.Region);
-            _reveal = WorldReveal.Loading;
+            _cover.Opened();
         }
         else if (_world.Suspended)
         {
             _world.Resume();
-            _reveal = WorldReveal.Loading;
+            _cover.Opened();
             GD.Print($"TACTICS world back: {WorldCanvas.MemoryText()}");
         }
         if (_walk is { } walk)
