@@ -84,7 +84,7 @@ public static class AshenFordDraft
     /// <summary>The goat path from the far road up the terraces to the camp, and the track to Maud's.</summary>
     private static readonly Road[] Tracks =
     [
-        new(Mud, Mud, 1, 1, [(120, 57, 2), (124, 46, 3), (118, 38, 4.5), (124, 32, 5), (133, 33, 6), (136, 28, 7)]),
+        new(Mud, Mud, 1, 1, [(120, 57, 2), (124, 46, 3), (118, 38, 4.5), (124, 32, 5), (133, 33, 6), (135, 29, 7), (134, 26, 7)]),
         new(Scorch, Ash, 0.5, 0.5, [(125, 58, 2), (130, 70, 2), (126, 82, 3), (131, 90, 4)]),
     ];
 
@@ -332,15 +332,24 @@ public static class AshenFordDraft
         new("cart", "oak", (92, 87)),
     ];
 
-    /// <summary>The Skarrow camp is three hide tents round one fire, on bare frozen ground. There's no food to be seen, and it's dark past the fire.</summary>
+    /// <summary>
+    /// The Skarrow camp is four hide tents pulled in round one fire, a hide stretched on its rack, a barricade across the way in and a low palisade behind, on ground trodden to frozen
+    /// mud that stops where the camp stops. There's no food to be seen, and it's dark past the fire.
+    /// </summary>
     private static readonly Stand[] AtTheCamp =
     [
-        new("tent", "canvas", (130, 21), (133, 19), (137, 22)),
-        new("campfire", "fire", (134, 25)),
-        new("banner", "goblin", (131, 19), (137, 19)),
-        new("skull_pike", "bone", (129, 26), (138, 26)),
-        new("mantlet", "hide", (131, 27)),
-        new("sack", "burlap", (136, 21)),
+        new("tent", "canvas", (130, 22), (132, 20), (135, 20), (136, 23)),
+        new("campfire", "fire", (133, 22)),
+        new("mantlet", "hide", (130, 24)),                                                  // the drying rack, with nothing much on it
+        new("log", "oak", (131, 24)),
+        new("stump", "oak", (135, 22)),
+        new("ribcage", "bleached", (129, 20)),
+        new("cage", "rust", (137, 20)),
+        new("sack", "burlap", (134, 20)),
+        new("banner", "goblin", (131, 19), (136, 19)),
+        new("skull_pike", "bone", (129, 26), (137, 26)),
+        new("barricade", "oak", (131, 26), (132, 27), (136, 27)),
+        new("palisade", "log", (128, 21), (128, 22), (128, 23), (129, 18), (130, 18), (132, 17), (133, 17), (134, 17), (136, 18), (137, 19), (138, 21), (138, 22)),
     ];
 
     /// <summary>The Skarrow Hills: bare terraces of frost and rock, a few snowbound pines, and the crags that close them.</summary>
@@ -414,7 +423,7 @@ public static class AshenFordDraft
         ("ch1_river_crossing", 117, 58),
         ("ch1_old_maud", 132, 93),
         ("ch1_granary", 42, 70),
-        ("ch1_skarrow_song", 133, 23),
+        ("ch1_skarrow_song", 133, 24),
         ("ch1_the_ember", 99, 99),
     ];
 
@@ -876,13 +885,13 @@ public static class AshenFordDraft
             }
         }
 
-        /// <summary>The Skarrow camp: a small clearing of trodden frozen mud on the third terrace.</summary>
+        /// <summary>The Skarrow camp: a clearing of trodden frozen mud on the third terrace, no bigger than what stands on it.</summary>
         public void PitchCamp()
         {
             foreach (var (x, y) in Everywhere())
             {
-                var distance = Distance(x, y, 133, 23);
-                if (distance < 7 + (Rough(x, y, 9, 38) - 0.5) * 3)
+                var distance = Distance(x, y, 133, 22.5);
+                if (distance < 5.4 + (Rough(x, y, 7, 38) - 0.5) * 1.6)
                 {
                     Paint(x, y, 7, Mud);
                     _fixed[x, y] = true;

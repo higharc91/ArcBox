@@ -786,6 +786,25 @@ public sealed class AshenFordDraftTests
     }
 
     [Fact]
+    public void The_camp_is_a_place_pulled_in_round_its_fire()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var spot = draft.Spot("ch1_skarrow_song");
+        var near = Props(source).Where(p => Distance(p.At, spot) <= 10).ToList();
+        var fire = near.Single(p => p.Id == "campfire").At;
+
+        Assert.All(near.Where(p => p.Id == "tent"), tent => Assert.True(Distance(tent.At, fire) <= 3, $"The tent at {tent.At} is off by itself."));
+        Assert.Contains(near, p => p.Id == "mantlet");
+        Assert.True(near.Count(p => p.Id is "palisade" or "barricade") >= 8);
+
+        // The trodden ground stops where the camp stops.
+        var trodden = draft.Tiles.Count(t => Distance(t, fire) <= 10 && t.Y < 31 && draft.Material(t) == "dirt/dark");
+        Assert.InRange(trodden, 50, 110);
+    }
+
+    [Fact]
     public void Mauds_hut_stands_alone()
     {
         var draft = Draft.Value;
