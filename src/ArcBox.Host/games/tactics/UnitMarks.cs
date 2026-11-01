@@ -33,6 +33,13 @@ public partial class UnitMarks : Node2D
         QueueRedraw();
     }
 
+    /// <summary>Shows nothing, and forgets the art, which may be let go.</summary>
+    public void Clear()
+    {
+        (_units, _art) = ([], null);
+        QueueRedraw();
+    }
+
     /// <summary>Moves what's animated on to a moment.</summary>
     public void Tick(double clock)
     {

@@ -84,6 +84,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
     private int _backCheck;
     private ArtArea _view;
     private System.Numerics.Vector2 _aim;
+    private System.Numerics.Vector2? _hurry;     // where to record first this frame, ahead of the party (Shows)
     private BoardCanvas? _stage;
     private StagePlan? _staged;
     private Task<(BlockPlan Block, object[] Items)[]>? _repainting;
@@ -344,6 +345,25 @@ internal sealed partial class WorldCanvas : CanvasLayer
         }
     }
 
+    /// <summary>
+    /// True when every block <paramref name="view"/> shows, and a little round it, is recorded. If not, they're recorded first, nearest to
+    /// <paramref name="aim"/> (a tile), ahead of the party's: once, this frame, so call it each frame for as long as it's wanted.
+    /// </summary>
+    public bool Shows(ArtArea view, System.Numerics.Vector2 aim)
+    {
+        if (Plan is null || Now != Stage.Open)
+        {
+            return false;
+        }
+        var margin = new System.Numerics.Vector2(ViewMargin);
+        if (Plan.BlocksIn(new ArtArea(view.Min - margin, view.Max + margin)).All(b => _blocks[b.Index].Recorded > 0))
+        {
+            return true;
+        }
+        _hurry = aim;
+        return false;
+    }
+
     /// <summary>Where blocks are queued around: the party's tile and its speed in tiles a second.</summary>
     public void Aim(System.Numerics.Vector2 tile, System.Numerics.Vector2 velocity) => _aim = BlockQueue.Aim(tile, velocity);
 
@@ -460,11 +480,12 @@ internal sealed partial class WorldCanvas : CanvasLayer
     /// <summary>A block is recorded when the frame ends, so this queues what the last blocks' cost per item says will fit, and always one.</summary>
     private void RecordWithinBudget()
     {
-        foreach (var block in _queue.TakeWithin(_aim, b => _blocks[b.Index].Items * _msPerItem, WorldTuning.BlockBudgetMs))
+        foreach (var block in _queue.TakeWithin(_hurry ?? _aim, b => _blocks[b.Index].Items * _msPerItem, WorldTuning.BlockBudgetMs))
         {
             _recording.Add(_blocks[block.Index]);
             _blocks[block.Index].Record();
         }
+        _hurry = null;
     }
 
     private void Tally()

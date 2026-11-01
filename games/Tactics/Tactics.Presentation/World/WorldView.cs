@@ -22,6 +22,9 @@ public static class WorldView
         return fit.Origin + new Vector2(MathF.Round(margin.X), MathF.Round(margin.Y));
     }
 
+    /// <summary>What a window shows, in art pixels, with the world placed by <paramref name="fit"/>.</summary>
+    public static ArtArea Seen(BoardFit fit, Vector2 window) => Seen(OriginIn(fit, window), window);
+
     /// <summary>What a window shows, in art pixels, with the world's origin at <paramref name="origin"/>.</summary>
     public static ArtArea Seen(Vector2 origin, Vector2 window)
     {
