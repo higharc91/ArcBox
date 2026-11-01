@@ -89,6 +89,11 @@ public sealed class StageRoomTests
             await PassAsync(f, TimeSpan.FromMilliseconds(400));
         }
 
+        // The beat's lead-in scene (overworld 5d) runs on its own timers, lines and any vote alike, with nobody answering and no TV.
+        Assert.Equal("Story", Phase(f));
+        for (var told = TimeSpan.Zero; Phase(f) == "Story" && told < TimeSpan.FromMinutes(15); told += TimeSpan.FromSeconds(1))
+            await PassAsync(f, TimeSpan.FromSeconds(1));
+
         Assert.Equal("Battle", Phase(f));
         var battle = Host(f).GetProperty("battle");
         Assert.Equal("river_crossing", battle.GetProperty("encounter").GetString());
