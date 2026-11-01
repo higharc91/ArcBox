@@ -10,7 +10,8 @@ namespace Tactics.Presentation.Story;
 /// <param name="Screen">What to show, or null with no scene.</param>
 /// <param name="Tumbled">A roll the TV saw being made started to tumble: the dice's sound.</param>
 /// <param name="Landed">The tumbling die landed: the verdict's sound.</param>
-public sealed record StoryTick(StorySay? Say, bool Cut, StoryScreen? Screen, bool Tumbled = false, bool Landed = false)
+/// <param name="Stopping">With <paramref name="Cut"/>, the words of the story line that may still be speaking: the only voice to stop (<see cref="StoryVoice.Owns"/>).</param>
+public sealed record StoryTick(StorySay? Say, bool Cut, StoryScreen? Screen, bool Tumbled = false, bool Landed = false, string? Stopping = null)
 {
     /// <summary>The die rolling (<c>sfx</c>'s <c>Rolled</c> sound).</summary>
     public const string DiceSound = "ui_dice_roll";
@@ -35,28 +36,25 @@ public sealed record StoryTick(StorySay? Say, bool Cut, StoryScreen? Screen, boo
 /// the walk up to the "!" says the scene's first line. A TV whose first sight of the story is mid-line, mid-question or mid-roll, or that
 /// comes in while a story waits to resume (Resuming), only shows: it never starts a line partway (5d §8).
 /// </item>
-/// <item>A line is never said twice in one story: a server restart that shows its saved line again, with a new Seq, shows it silently.</item>
+/// <item>A line is never said twice in one campaign: a server restart that shows its saved line again, with a new Seq, shows it silently.</item>
 /// <item>
-/// Another story is another campaign (<see cref="StoryView.Campaign"/>), or a Seq well below the track's, as a new local campaign counts
-/// from 1 again: what was heard of the last story says nothing of this one. A view one or two behind the newest is late, and is dropped.
+/// No view is dropped. A Seq lower than the track's within one campaign is the server's truth: it went back (a crash that lost its last
+/// writes, then resumed on the saved line, or a rollback), so the view is shown, its question and clock with it, and what was heard keeps a
+/// line from being said again. Another campaign (<see cref="StoryView.Campaign"/>) is another story, where nothing has been heard yet.
 /// </item>
+/// <item>After the TV's connection drops (<see cref="Rejoin"/>), the first view only shows, as a TV joining does.</item>
 /// <item>No line showing, or no story, cuts the voice.</item>
 /// </list>
 /// A line with no clip goes by <see cref="StoryVoice.Fallback"/>.
 /// </summary>
 public sealed class StoryTrack(VoiceClips? clips, HudArt? art = null, SpeechFallback fallback = StoryVoice.Fallback, StoryTiming? timing = null)
 {
-    /// <summary>How far behind the newest Seq a view can be and still be a late one of this story, not the start of another.</summary>
-    public const int LateBy = 2;
-
-    /// <summary>How many lines into a story a TV may first see it: a Seq this low, well behind the track's, is a story begun again.</summary>
-    public const int FirstLines = 3;
-
     private readonly StoryTiming _timing = timing ?? StoryTiming.Default;
     private readonly HashSet<(string? Campaign, string Line)> _heard = [];
     private readonly VoteClock _clock = new();
     private StoryView? _view;
     private string? _speaking;
+    private string? _speakingText;
     private string? _campaign;
     private bool _watching;
     private (int Seq, string State, string? Skill, bool Asking)? _question;
@@ -87,25 +85,19 @@ public sealed class StoryTrack(VoiceClips? clips, HudArt? art = null, SpeechFall
             _watching = watching;
             (_question, _revealed, Screen) = (null, double.PositiveInfinity, null);
             _clock.Stop();
-            return new StoryTick(null, Hush(), null);
+            var ending = _speakingText;
+            return Hush() ? new StoryTick(null, true, null, Stopping: ending) : new StoryTick(null, false, null);
         }
 
-        var another = (view.Campaign is { } campaign && _campaign is { } was && campaign != was) || Restarted(view.Seq);
-        if (!another && view.Seq < Seq)
-            return new StoryTick(null, false, Screen);   // late: the newest has been shown
+        var stopping = _speakingText;
+        var another = view.Campaign is { } campaign && _campaign is { } was && campaign != was;
         var last = _view;
         _view = view;
         _campaign = view.Campaign ?? _campaign;
         if (another)
-        {
-            // Another story on this TV. What was heard is kept by campaign, so a late view of the last one can't be said again; a campaign
-            // that started over under the same name (a new local one) has heard nothing yet.
-            if (Restarted(view.Seq))
-                _heard.RemoveWhere(h => h.Campaign == _campaign);
-            Seq = null;
-        }
+            Seq = null;                                  // another story on this TV: what was heard is kept by campaign, so it says nothing here
         var fresh = Seq is null && !_watching;
-        var started = Seq is null ? _watching : view.Seq > Seq;
+        var started = Seq is null ? _watching : view.Seq != Seq;    // a lower Seq too: the server went back, and shows another line
         _watching = false;
         StorySay? say = null;
         var cut = false;
@@ -114,7 +106,7 @@ public sealed class StoryTrack(VoiceClips? clips, HudArt? art = null, SpeechFall
         {
             say = StoryVoice.For(showing, clips, fallback);
             cut = true;                                  // the last line stops for this one, said or not
-            _speaking = say is null ? null : showing.Id;
+            (_speaking, _speakingText) = (say is null ? null : showing.Id, say?.Text);
         }
         else
         {
@@ -128,14 +120,17 @@ public sealed class StoryTrack(VoiceClips? clips, HudArt? art = null, SpeechFall
         Clock(view, now, fresh);
         var tumbled = Rolling(view, last, fresh);
         Screen = Draw();
-        return new StoryTick(say, cut, Screen, Tumbled: tumbled);
+        return new StoryTick(say, cut, Screen, Tumbled: tumbled, Stopping: cut ? stopping : null);
     }
 
     /// <summary>
-    /// A story counting from its start again under the same campaign (a new local one): a Seq well behind the track's, and among a story's
-    /// first lines. Within one campaign a Seq only goes up, across restarts too, so anything else that's behind is a late view.
+    /// The TV's connection dropped: what it missed can't be caught up, so the next view only shows, as a TV joining does, and its line isn't
+    /// started partway. What was heard stays heard.
     /// </summary>
-    private bool Restarted(int seq) => seq < Seq - LateBy && seq <= FirstLines;
+    public void Rejoin() => (Seq, _watching) = (null, false);
+
+    /// <summary>The words of the story line the track last started, or null: the only voice a <see cref="StoryTick.Cut"/> may stop (<see cref="StoryVoice.Owns"/>).</summary>
+    public string? Speaking => _speakingText;
 
     /// <summary>A frame of <paramref name="seconds"/>: the countdown and the die go on. Nothing is said here.</summary>
     public StoryTick Tick(double seconds)
@@ -159,7 +154,7 @@ public sealed class StoryTrack(VoiceClips? clips, HudArt? art = null, SpeechFall
     private bool Hush()
     {
         var speaking = _speaking is not null;
-        _speaking = null;
+        (_speaking, _speakingText) = (null, null);
         return speaking;
     }
 

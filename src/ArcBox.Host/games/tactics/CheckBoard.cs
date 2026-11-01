@@ -108,7 +108,7 @@ public sealed partial class CheckBoard : Control
             _sum.Text = roll.Landed ? roll.Sum : "";
             _verdict.Text = roll.Landed ? roll.Verdict.ToUpperInvariant() : "";
             _verdict.AddThemeColorOverride("font_color", roll.Success ? StoryArt.Pass : StoryArt.Fail);
-            _roller.Text = roll.Landed ? $"{roll.Roller} rolled for the party" : $"{roll.Roller} rolls…";
+            _roller.Text = roll.Line;
         }
         Place();
     }
@@ -136,14 +136,13 @@ public sealed partial class CheckBoard : Control
             l.AutowrapMode = TextServer.AutowrapMode.WordSmart;
             return l;
         }
-        var votes = card.Votes > 0 ? (card.Votes == 1 ? "1 vote" : $"{card.Votes} votes") : " ";
         var inside = ArcTheme.VBox(6,
             face,
             Centred(StoryArt.Text(card.Name.ToUpperInvariant(), ArcTheme.Spaced("Bold", 3), 30, HudLayer.Ink)),
-            Centred(StoryArt.Text(card.Player, ArcTheme.SemiBold, 22, HudLayer.Muted)),
+            Centred(StoryArt.Text(card.Who, ArcTheme.SemiBold, 22, HudLayer.Muted)),
             Centred(StoryArt.Text(card.Bonus, ArcTheme.Black, 52, card.Chosen ? HudLayer.Gold : HudLayer.Ink)),
             Centred(StoryArt.Text(card.Note, ArcTheme.SemiBold, 18, HudLayer.Muted)),
-            Centred(StoryArt.Text(votes, ArcTheme.Bold, 18, HudLayer.Gold)));
+            Centred(StoryArt.Text(card.VotesText.Length > 0 ? card.VotesText : " ", ArcTheme.Bold, 18, HudLayer.Gold)));
         var box = ArcTheme.Panel(_art.Box(card.Chosen ? "card_selected" : "card"), ArcTheme.Margin(8, 10, 8, 10, inside));
         box.CustomMinimumSize = new Vector2(CardWidth, 0);
         if (card.Tag is not { } tag)

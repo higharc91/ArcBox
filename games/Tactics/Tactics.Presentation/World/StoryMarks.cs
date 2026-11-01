@@ -12,11 +12,11 @@ namespace Tactics.Presentation.World;
 /// <param name="Figure">Who stands there, sorted among the party by its tile; null with nobody to show.</param>
 /// <param name="Emote">The emote over the spot (the "!"), or null while the beat's scene plays.</param>
 /// <param name="EmoteAt">Where the emote's tail goes (<see cref="EmoteStrip.AnchorX"/>, <see cref="EmoteStrip.AnchorY"/>); null with no emote.</param>
-public sealed record StoryMark(string Beat, Tile At, BoardUnit? Figure, EmoteStrip? Emote, Vector2? EmoteAt)
-{
-    /// <summary>The figure as the world draws it, among the party, with the "!" over its head; null with nobody standing there.</summary>
-    public BoardUnit? Unit => Figure is null ? null : Figure with { Emote = Emote, EmoteAt = EmoteAt };
-}
+/// <param name="Unit">
+/// What the world draws, sorted among the party: the figure with the "!" over its head, or with nobody standing there, the "!" alone on the
+/// spot (<see cref="BoardUnit.MarksOnly"/>); null with nothing to draw.
+/// </param>
+public sealed record StoryMark(string Beat, Tile At, BoardUnit? Figure, EmoteStrip? Emote, Vector2? EmoteAt, BoardUnit? Unit = null);
 
 /// <summary>
 /// The story's markers in the world (overworld 5d §2, default 12), from <see cref="ExploreView.Markers"/>: the first of the opening scene's cast
@@ -48,6 +48,9 @@ public static class StoryMarks
         // With nobody standing there, the "!" floats where a head would be, so it reads the same from the sofa.
         var head = figure?.Sprite ?? art.StandIn(UnitTone.Neutral);
         var feet = figure?.Feet ?? pixels?.Invoke(place.Feet, true) ?? place.Feet;
-        return new StoryMark(marker.Beat, marker.At, figure, emote, emote is null ? null : UnitPlan.Overhead(feet, head));
+        var at = emote is null ? (Vector2?)null : UnitPlan.Overhead(feet, head);
+        var unit = figure is not null ? figure with { Emote = emote, EmoteAt = at }
+            : emote is null ? null : UnitPlan.Figure($"marker:{marker.Beat}", null, place, art, pixels) with { MarksOnly = true, Emote = emote, EmoteAt = at };
+        return new StoryMark(marker.Beat, marker.At, figure, emote, at, unit);
     }
 }

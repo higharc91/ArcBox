@@ -340,6 +340,44 @@ public sealed class StoryScreenTests
         Assert.True(Screen(Showing(4, null, States.PickRoller, check: CheckOf())).Dimmed);
     }
 
+    [Theory]
+    [InlineData("Wren", "Priya", "Rogue", "Priya · Rogue")]
+    [InlineData("Bo", "Bo", "Cleric", "Cleric")]          // a bot names its character after itself: the name isn't said twice
+    [InlineData("Wren", "Priya", null, "Priya")]
+    public void A_card_says_who_plays_it_as_the_phone_does(string name, string player, string? cls, string who)
+        => Assert.Equal(who, CheckCard.WhoOf(name, player, cls));
+
+    [Fact]
+    public void A_card_carries_its_class_and_its_votes_in_words()
+    {
+        var view = CheckOf() with { Cards = [Card("pr_wren", "Wren", "Priya", 5, votes: 2) with { Class = "Rogue" }, Card("pr_bo", "Bo", "Bo", 1, votes: 1) with { Class = "Cleric" },
+            Card("pr_kara", "Kara", "Jess", 0)] };
+
+        var cards = Screen(Showing(4, null, States.PickRoller, check: view)).Check!.Cards;
+
+        Assert.Equal(["Priya · Rogue", "Cleric", "Jess"], cards.Select(c => c.Who));
+        Assert.Equal(["2 votes", "1 vote", ""], cards.Select(c => c.VotesText));
+    }
+
+    [Fact]
+    public void The_roll_says_who_rolls_then_who_rolled()
+    {
+        var roll = Rolls.Flat(14, 5, 15);
+
+        Assert.Equal("Wren rolls…", StoryScreen.Reveal(roll, "Wren", 0).Line);
+        Assert.Equal("Wren rolled for the party", StoryScreen.Reveal(roll, "Wren", StoryScreen.Tumble).Line);
+    }
+
+    [Fact]
+    public void A_check_has_the_screen_to_itself_with_no_caption()
+    {
+        var picking = Screen(Showing(4, Line("ch1_mayor_halden_4"), States.PickRoller, check: CheckOf(deadline: T0.AddSeconds(20))));
+
+        Assert.Null(picking.Caption);
+        Assert.NotNull(picking.Check);
+        Assert.NotNull(Screen(Showing(4, Line("ch1_mayor_halden_4"))).Caption);
+    }
+
     [Fact]
     public void A_tie_over_who_rolls_says_who_decides()
         => Assert.Equal("2–2 tie, Sam decides",

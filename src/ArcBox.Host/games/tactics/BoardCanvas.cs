@@ -229,6 +229,10 @@ public partial class BoardCanvas : Node2D
 
     private void DrawUnit(BoardUnit unit)
     {
+        if (unit.MarksOnly)
+        {
+            return;     // only its emote, which UnitMarks draws
+        }
         var feet = new Vector2(unit.Feet.X, unit.Feet.Y);
         var clock = _clock + unit.Phase;
         DrawRing(feet, unit);

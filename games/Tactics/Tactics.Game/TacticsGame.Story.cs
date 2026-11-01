@@ -960,7 +960,7 @@ public sealed partial class TacticsGame
         var tie = _telling == StoryStates.TieBreak;
         return new StoryCheckView(skill, dc, title,
             [.. CardsWithNotes(skill).Select(c => new StoryCardView(c.Member, c.Character.Name, c.Player.Name,
-                HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{c.Character.Class}"]), c.Bonus, c.Note, c.Here, votes.Count(v => v.Value == c.Member)))],
+                HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{c.Character.Class}"]), c.Bonus, c.Note, c.Here, votes.Count(v => v.Value == c.Member), ClassName(c.Character)))],
             roll?.Member, roll is null ? null : Rolls.Flat(roll.Die, roll.Bonus, roll.Dc), tie, tie && Decider() is { } d ? PlayerName(d) : null,
             roll is null ? _closeAt : null, roll is null && _closeAt is not null ? _span : null);
     }

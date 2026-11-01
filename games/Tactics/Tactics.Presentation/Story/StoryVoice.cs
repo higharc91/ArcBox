@@ -32,6 +32,13 @@ public static class StoryVoice
     /// <summary>The voice theme the voice chain reads a line with no clip in.</summary>
     public const string Theme = "tactics.story";
 
+    /// <summary>
+    /// Whether a <see cref="StoryTick.Cut"/> should stop the voice: only while it's still saying the story's own line,
+    /// <paramref name="story"/> (<see cref="StoryTrack.Speaking"/>). A clip that has ended, or commentary that came after it, isn't the
+    /// story's to stop.
+    /// </summary>
+    public static bool Owns(bool speaking, string? playing, string? story) => speaking && story is not null && playing?.Trim() == story.Trim();
+
     /// <summary>What to say for <paramref name="line"/>: its clip, or by <paramref name="fallback"/>, the voice chain's reading, or nothing.</summary>
     public static StorySay? For(StoryLineView line, VoiceClips? clips, SpeechFallback fallback = Fallback)
         => clips?.ForLine(line.Id) is { } clip

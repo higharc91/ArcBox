@@ -149,7 +149,11 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     public void SetShots(Screenshotter? shots) => _shots = shots;
 
     /// <summary>The connection dropped: walls refused while the TV was away are old news, so the next view doesn't bump anyone.</summary>
-    public void ConnectionLost() => _walk?.Rebase();
+    public void ConnectionLost()
+    {
+        _walk?.Rebase();
+        _story?.Rejoin();       // the first view back only shows: no line is started partway
+    }
 
     public void SetContentRoots(IReadOnlyDictionary<string, string> rootsByPackId)
     {
@@ -666,9 +670,9 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     /// <summary>What a story tick asks: the voice cut, a line said, a sound played, a line logged with <c>--story-log</c>, and a shot.</summary>
     private void PresentStory(StoryTick tick)
     {
-        if (tick.Cut)
+        if (tick.Cut && _narrator is { } narrator && StoryVoice.Owns(narrator.Speaking, narrator.LastLine, tick.Stopping))
         {
-            _narrator?.StopAll();
+            narrator.StopAll();     // only the story's own line: commentary after it isn't the story's to stop
         }
         if (tick.Say is { } say)
         {

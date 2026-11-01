@@ -56,7 +56,19 @@ public sealed record VotePanel(string Heading, bool Party, bool Tie, string? Clo
 /// <param name="Chosen">This one rolls.</param>
 /// <param name="Here">Their phone is here.</param>
 /// <param name="Votes">How many picked them.</param>
-public sealed record CheckCard(string Member, string Name, string Player, string? Sprite, string Bonus, string Note, string? Tag, bool Chosen, bool Here, int Votes);
+public sealed record CheckCard(string Member, string Name, string Player, string? Sprite, string Bonus, string Note, string? Tag, bool Chosen, bool Here, int Votes,
+    string Who = "")
+{
+    /// <summary>How many picked them, in words for under the card: "1 vote", "3 votes", or empty for none.</summary>
+    public string VotesText => Votes switch { <= 0 => "", 1 => "1 vote", _ => string.Create(CultureInfo.InvariantCulture, $"{Votes} votes") };
+
+    /// <summary>
+    /// The line under the name, by the phone's rule: "Priya · Rogue" when the player isn't the character's namesake, the class alone when
+    /// they are, and the player when the server sent no class.
+    /// </summary>
+    public static string WhoOf(string name, string player, string? cls)
+        => cls is null ? player : player != name ? $"{player} · {cls}" : cls;
+}
 
 /// <summary>The roll, at the bottom (mockup 03).</summary>
 /// <param name="Roller">Who rolled: the character's name.</param>
@@ -65,7 +77,11 @@ public sealed record CheckCard(string Member, string Name, string Player, string
 /// <param name="Sum">"14 + 5 = 19 vs DC 15".</param>
 /// <param name="Verdict">"Success" or "Failure".</param>
 /// <param name="Success">Whether it passed.</param>
-public sealed record RollReveal(string Roller, int Face, bool Landed, string Sum, string Verdict, bool Success);
+public sealed record RollReveal(string Roller, int Face, bool Landed, string Sum, string Verdict, bool Success)
+{
+    /// <summary>The line under the sum: who rolls, as the die tumbles, and who rolled, once it lands.</summary>
+    public string Line => Landed ? $"{Roller} rolled for the party" : $"{Roller} rolls\u2026";
+}
 
 /// <summary>A skill check, full over the dimmed world (mockup 03).</summary>
 /// <param name="Heading">"Skill check".</param>
@@ -126,7 +142,8 @@ public sealed record StoryScreen(int Seq, string Scene, string Title, string Sta
     /// </summary>
     public static StoryScreen Of(StoryView view, HudArt? art = null, string? clock = null, double revealed = double.PositiveInfinity)
     {
-        var caption = view.Line is { } line && view.State is not (TacticsGame.StoryStates.Gap or TacticsGame.StoryStates.Rolled)
+        // A check has the screen to itself (mockup 03): its line is under the cards, so no caption.
+        var caption = view.Check is null && view.Line is { } line && view.State is not (TacticsGame.StoryStates.Gap or TacticsGame.StoryStates.Rolled)
             ? CaptionOf(line, art, asking: view.Ask is not null)
             : null;
         return new StoryScreen(view.Seq, view.Scene, view.Title, view.State, caption,
@@ -331,7 +348,8 @@ public sealed record StoryScreen(int Seq, string Scene, string Title, string Sta
         return new CheckPanel("Skill check", SkillName(check.Skill), string.Create(CultureInfo.InvariantCulture, $"DC {check.Dc}"),
             Typeset($"“{check.Title}”"),
             [.. cards.Select(c => new CheckCard(c.Member, c.Name, c.Player, c.Sprite, Signed(c.Bonus), c.Note,
-                c.Member == check.Chosen ? "Rolls for the party" : c.Here ? null : $"{c.Player} away", c.Member == check.Chosen, c.Here, c.Votes))],
+                c.Member == check.Chosen ? "Rolls for the party" : c.Here ? null : $"{c.Player} away", c.Member == check.Chosen, c.Here, c.Votes,
+                CheckCard.WhoOf(c.Name, c.Player, c.Class)))],
             roll is null && check.Deadline is not null ? clock : null, footer, roll);
     }
 

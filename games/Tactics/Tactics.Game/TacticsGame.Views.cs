@@ -241,7 +241,9 @@ public sealed record StoryAskView(bool Party, int Voted, int Of, ImmutableArray<
 /// <param name="Note">Where the bonus comes from: "Proficient · WIS 14", or the stat alone.</param>
 /// <param name="Here">False when their phone isn't here: they can still be picked.</param>
 /// <param name="Votes">How many picked them.</param>
-public sealed record StoryCardView(string Member, string Name, string Player, string? Sprite, int Bonus, string Note, bool Here, int Votes);
+/// <param name="Class">Their class's name, as the phone's card shows it.</param>
+public sealed record StoryCardView(string Member, string Name, string Player, string? Sprite, int Bonus, string Note, bool Here, int Votes,
+    string? Class = null);
 
 /// <summary>A skill check under way, for the TV.</summary>
 /// <param name="Skill">The skill.</param>

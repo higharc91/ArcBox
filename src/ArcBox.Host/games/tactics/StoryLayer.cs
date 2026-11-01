@@ -54,6 +54,9 @@ public sealed partial class StoryLayer : Control
         return tick;
     }
 
+    /// <summary>The TV's connection dropped: the next view only shows (<see cref="StoryTrack.Rejoin"/>).</summary>
+    public void Rejoin() => _track.Rejoin();
+
     /// <summary>A frame.</summary>
     public StoryTick Step(double delta)
     {
@@ -64,7 +67,7 @@ public sealed partial class StoryLayer : Control
 
     private void Paint(StoryScreen? screen)
     {
-        _caption.Show(screen?.Check is null ? screen?.Caption : null, screen?.Interlude);   // a check has the screen to itself (mockup 03)
+        _caption.Show(screen?.Caption, screen?.Interlude);
         _vote.Show(screen?.Vote);
         _check.Show(screen?.Check);
     }

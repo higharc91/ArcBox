@@ -151,35 +151,72 @@ public sealed class StoryTrackTests
         Assert.Equal("ch1_mayor_open_2", track.Receive(Showing(31, Line("ch1_mayor_open_2"), campaign: "ashes"), T0).Say!.Line);
     }
 
+    /// <summary>
+    /// A crash that lost the server's last writes: it resumes on the line it saved, under a lower Seq. That's the server's truth, so it's shown,
+    /// and the question its line opens shows with its clock, rather than the TV sitting on a stale line for the vote's 45 s.
+    /// </summary>
     [Fact]
-    public void A_late_view_is_dropped_not_taken_for_a_new_story()
-    {
-        var track = Running(5);
-        track.Receive(Showing(6, Line("ch1_mayor_open_2")), T0);
-
-        var late = track.Receive(Showing(5, Line("ch1_mayor_open_1")), T0);
-
-        Assert.Null(late.Say);
-        Assert.False(late.Cut);                                           // the newest line goes on
-        Assert.Equal("ch1_mayor_open_2", late.Screen!.Caption!.Line);
-        Assert.Equal(6, track.Seq);
-        Assert.Null(track.Receive(Showing(7, Line("ch1_mayor_open_2")), T0).Say);   // still heard: the same story
-    }
-
-    [Fact]
-    public void A_view_far_behind_in_the_same_campaign_is_late_not_a_new_story()
+    public void A_lower_seq_after_a_crash_is_shown_with_its_question()
     {
         var track = Track();
-        track.Receive(Showing(20, Line("ch1_mayor_open_1"), campaign: "embers"), T0);
-        Assert.NotNull(track.Receive(Showing(21, Line("ch1_mayor_open_2"), campaign: "embers"), T0).Say);
+        track.Receive(null, T0, watching: true);
+        track.Receive(Showing(10, Line("ch1_mayor_halden_4"), campaign: "embers"), T0);
+        track.Receive(Showing(11, Line("ch1_mayor_goblins_1"), campaign: "embers"), T0);
+        track.Receive(Showing(12, Line("ch1_mayor_goblins_2"), campaign: "embers"), T0);
 
-        var late = track.Receive(Showing(12, Line("ch1_mayor_open_1"), campaign: "embers"), T0);
+        var back = track.Receive(Showing(11, Line("ch1_mayor_halden_4"), States.Asking,
+            Ask(false, 0, 1, [Option("goblins", "Who are these goblins?")], decider: "Ana", deadline: T0.AddSeconds(30), span: 30), campaign: "embers"), T0);
 
-        Assert.False(late.Cut);
-        Assert.Equal(21, track.Seq);
-        Assert.Null(track.Receive(Showing(22, Line("ch1_mayor_open_2"), campaign: "embers"), T0).Say);   // still heard
+        Assert.Equal(11, track.Seq);
+        Assert.Equal("ch1_mayor_halden_4", back.Screen!.Caption!.Line);
+        Assert.Equal("0:30", back.Screen.Vote!.Clock);
+        Assert.Null(back.Say);                                            // heard before the crash: shown, not said again
+        Assert.True(back.Cut);                                            // and the line it went back from stops
+        Assert.Equal("ch1_mayor_goblins_1", track.Receive(Showing(12, Line("ch1_mayor_goblins_1"), campaign: "embers"), T0).Screen!.Caption!.Line);
     }
 
+    [Fact]
+    public void A_lower_seq_with_a_line_not_yet_heard_says_it()
+    {
+        var track = Running(20);
+        track.Receive(Showing(21, Line("ch1_mayor_open_2")), T0);
+
+        Assert.Equal("ch1_mayor_open_3", track.Receive(Showing(19, Line("ch1_mayor_open_3")), T0).Say!.Line);
+    }
+
+    [Fact]
+    public void After_the_connection_drops_the_first_view_only_shows()
+    {
+        var track = Running(3);
+        track.Rejoin();
+
+        var back = track.Receive(Showing(6, Line("ch1_mayor_halden_1")), T0);
+
+        Assert.Null(back.Say);                                            // it can't be started partway
+        Assert.Equal("ch1_mayor_halden_1", back.Screen!.Caption!.Line);
+        Assert.Equal("ch1_mayor_halden_2", track.Receive(Showing(7, Line("ch1_mayor_halden_2")), T0).Say!.Line);
+    }
+
+    [Fact]
+    public void A_cut_names_the_story_line_it_stops()
+    {
+        var track = Running();
+        var said = track.Receive(Showing(2, Line("ch1_mayor_open_2")), T0).Say!;
+
+        var gap = track.Receive(Showing(2, null, States.Gap), T0);
+
+        Assert.True(gap.Cut);
+        Assert.Equal(said.Text, gap.Stopping);
+    }
+
+    [Theory]
+    [InlineData(true, "It used to be warmer.", "It used to be warmer.", true)]
+    [InlineData(true, " It used to be warmer. ", "It used to be warmer.", true)]
+    [InlineData(false, "It used to be warmer.", "It used to be warmer.", false)]      // the clip has ended
+    [InlineData(true, "First blood!", "It used to be warmer.", false)]               // commentary since: not the story's
+    [InlineData(true, "It used to be warmer.", null, false)]
+    public void A_cut_stops_only_the_storys_own_line(bool speaking, string playing, string? story, bool stops)
+        => Assert.Equal(stops, StoryVoice.Owns(speaking, playing, story));
     [Fact]
     public void The_server_says_how_long_its_votes_run()
     {
@@ -229,19 +266,19 @@ public sealed class StoryTrackTests
     }
 
     [Fact]
-    public void A_lower_seq_after_a_restart_is_a_new_track()
+    public void Another_campaign_is_a_new_track()
     {
-        var track = Running(40);
-        track.Receive(Showing(41, Line("ch1_mayor_open_2")), T0);
+        var track = Track();
+        track.Receive(Showing(40, Line("ch1_mayor_open_1"), campaign: "embers"), T0);
+        track.Receive(Showing(41, Line("ch1_mayor_open_2"), campaign: "embers"), T0);
 
-        var fresh = track.Receive(Showing(1, Line("ch1_mayor_open_1")), T0);    // another campaign, from its start
+        var fresh = track.Receive(Showing(1, Line("ch1_mayor_open_1"), campaign: "ashes"), T0);   // another campaign, mid-line
 
-        Assert.Null(fresh.Say);                                           // a new track shows its first line
+        Assert.Null(fresh.Say);                                           // a new track shows its first view
         Assert.True(fresh.Cut);                                           // and the old one's voice stops
         Assert.Equal(1, track.Seq);
-        Assert.Equal("ch1_mayor_open_2", track.Receive(Showing(2, Line("ch1_mayor_open_2")), T0).Say!.Line);   // heard on the old track, new here
+        Assert.Equal("ch1_mayor_open_2", track.Receive(Showing(2, Line("ch1_mayor_open_2"), campaign: "ashes"), T0).Say!.Line);   // heard in the other
     }
-
     [Fact]
     public void A_server_restart_replays_its_line_silently()
     {

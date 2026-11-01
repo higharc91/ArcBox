@@ -95,6 +95,7 @@ public sealed class StoryCheckTests
             var sheet = SheetBuilder.ForCharacter(s.Game.Document.Members[card.Member].Character, Rules);
             var score = $"CHA {sheet.Score(Stat.Cha)}";
             Assert.Equal(SkillCheck.Proficient(sheet, "persuasion") ? $"Proficient · {score}" : score, card.Note);
+            Assert.Equal(Rules.Classes[s.Game.Document.Members[card.Member].Character.Class].Name, card.Class);   // for the TV's card, as the phone's has it
         }
     }
 

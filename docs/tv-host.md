@@ -347,8 +347,7 @@ A scene (overworld 5d) plays over the world. `StoryTrack` (Tactics.Presentation)
 
 - **The voice**: a new line on a running track says its clip at Question priority, cutting the last. A TV that watched the party walk up
   says the scene's first line; one that joins mid-line, mid-question or mid-roll, or while a story waits to resume, shows it silently. A
-  line is never said twice in one campaign (`StoryView.Campaign`), so a restart's replayed line is shown, not said. No line showing, or no
-  story, cuts the voice. A line with no clip shows its caption (`StoryVoice.Fallback`, the user's decision 1).
+  line is never said twice in one campaign (`StoryView.Campaign`), so a restart's replayed line is shown, not said. No view is dropped: a lower Seq means the server went back, and is shown, question and all. After a reconnect the first view only shows. A cut stops the voice only while it's still the story's own line (`StoryVoice.Owns`). A line with no clip shows its caption (`StoryVoice.Fallback`, the user's decision 1).
 - **The panels** (1920×1080 layout, the HUD's pieces): `StoryPanel`, the caption at the bottom left with the speaker's face in the line's
   mood and their name on the dialogue tab, the question lit in gold; `VoteBoard`, the question at the bottom right, growing upward, its rows
   sized by `VoteLayout` so eleven fit; `CheckBoard`, the skill check full over the dimmed world, with a card for each roller and the d20

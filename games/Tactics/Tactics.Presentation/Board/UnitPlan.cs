@@ -73,6 +73,9 @@ public sealed record BoardUnit(long Order, UnitId Id, UnitTone Tone, Vector2 Fee
     /// <summary>Where <see cref="Emote"/>'s tail goes.</summary>
     public Vector2? EmoteAt { get; init; }
 
+    /// <summary>Nothing of the unit is drawn but its marks: a story beat's "!" with nobody standing under it.</summary>
+    public bool MarksOnly { get; init; }
+
     /// <summary>A walker whose player's phone has gone: drawn a little dim.</summary>
     public bool Away { get; init; }
 

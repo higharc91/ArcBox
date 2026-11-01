@@ -63,6 +63,28 @@ public sealed class StoryMarksTests
         Assert.Null(mark.Figure);
         Assert.Equal(feet.X, mark.EmoteAt!.Value.X);
         Assert.InRange(mark.EmoteAt.Value.Y, feet.Y - standIn.AnchorY, feet.Y - 1);
+        Assert.True(mark.Unit!.MarksOnly);                                // drawn: the "!" alone, with nobody under it
+        Assert.Equal(mark.EmoteAt, mark.Unit.EmoteAt);
+        Assert.Equal(Art.Value.Emote("alert"), mark.Unit.Emote);
+    }
+
+    [Fact]
+    public void The_walk_draws_a_bang_with_nobody_under_it()
+    {
+        var show = new WalkShow(Ground, Art.Value, null);
+        show.Receive(With(new StoryMarker("b", Spot, null, "alert")));
+
+        var bang = Assert.Single(show.Frame(1 / 60.0).Units, u => u.Id.Value == "marker:b");
+
+        Assert.True(bang.MarksOnly);
+        Assert.NotNull(bang.EmoteAt);
+    }
+
+    [Fact]
+    public void A_figure_with_nothing_over_it_is_drawn_whole_and_a_spot_with_neither_isnt_drawn()
+    {
+        Assert.False(StoryMarks.Of(With(new StoryMarker("b", Spot, "characters.mayor", null)), Ground, Art.Value)[0].Unit!.MarksOnly);
+        Assert.Null(StoryMarks.Of(With(new StoryMarker("b", Spot, null, null)), Ground, Art.Value)[0].Unit);
     }
 
     [Fact]
