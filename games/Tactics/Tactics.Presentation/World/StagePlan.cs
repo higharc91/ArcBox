@@ -93,6 +93,9 @@ public sealed class StagePlan
     /// <summary>The tiles the plan can draw, in the region: the stamp and <see cref="Reach"/> on.</summary>
     public TileRect Drawn => new(Stage.Origin.X, Stage.Origin.Y, Stage.Width + Reach, Stage.Depth + Reach);
 
+    /// <summary>Works out what all of <paramref name="ground"/>'s stages share, once, off the main thread: a fight's first stage then costs only its own tiles.</summary>
+    public static void Warm(WorldGround ground) => _ = GroundWindow.SkirtOf(ground.Map);
+
     /// <summary>The stage's plan on <paramref name="ground"/>, with what the battle did (<see cref="BattleView.Board"/>, in battle tiles).</summary>
     public static StagePlan Build(WorldGround ground, BattleStage stage, BoardChanges? changes, ArtIndex art)
     {

@@ -47,6 +47,9 @@ internal sealed class BoardPainter
     /// <summary>The pack's root, which files are read from.</summary>
     public string Root { get; set; } = "";
 
+    /// <summary>How much of a tile's outline shows, 0 to 1: a fight in the world fades its grid in and out (overworld 5c §5). Set while painting, on the main thread, by the board being painted.</summary>
+    public static float GridAlpha { get; set; } = 1;
+
     /// <summary>Where animated art goes, for drawing that's recorded once; null to step through its strip at each draw.</summary>
     public FrameTextures? Frames { get; set; }
 
@@ -227,9 +230,9 @@ internal sealed class BoardPainter
         {
             canvas.DrawPrimitive(drawn.Points, Unlit, uvs, drawn.Glow);
         }
-        if (drawn.Outline is not null)
+        if (drawn.Outline is not null && GridAlpha > 0)
         {
-            canvas.DrawPolyline(drawn.Outline, GridLine, 0.5f);
+            canvas.DrawPolyline(drawn.Outline, GridLine with { A = GridLine.A * GridAlpha }, 0.5f);
         }
     }
 

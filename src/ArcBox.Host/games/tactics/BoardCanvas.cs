@@ -55,6 +55,8 @@ public partial class BoardCanvas : Node2D
     private Vector2 _origin;
     private bool _baked;
     private (System.Numerics.Vector2 Min, System.Numerics.Vector2 Max)? _view;
+    private float _gridAlpha = 1;
+    private bool _clocked;
 
     public BoardCanvas()
         : this(new BoardPainter())
@@ -97,6 +99,35 @@ public partial class BoardCanvas : Node2D
         Position = _origin;
         Scale = new Vector2(fit.Scale, fit.Scale);
         Merge();
+    }
+
+    /// <summary>Moves the board to <paramref name="fit"/> without building anything again: a fight in the world goes where the stage is.</summary>
+    public void SetFit(BoardFit fit)
+    {
+        _origin = new Vector2(fit.Origin.X, fit.Origin.Y);
+        Position = _origin;
+        Scale = new Vector2(fit.Scale, fit.Scale);
+    }
+
+    /// <summary>How much of the grid shows, 0 to 1 (<see cref="Tactics.Presentation.World.StageDirector.GridAlpha"/>).</summary>
+    public float GridAlpha
+    {
+        get => _gridAlpha;
+        set
+        {
+            if (value != _gridAlpha)
+            {
+                _gridAlpha = value;
+                QueueRedraw();
+            }
+        }
+    }
+
+    /// <summary>The board's clock, in seconds: what its units bob and its art steps by. Over a world it's the world's, so nothing steps at the seam.</summary>
+    public double Clock
+    {
+        get => _clock;
+        set => (_clock, _clocked) = (value, true);
     }
 
     /// <summary>How long the last drawing took, in milliseconds.</summary>
@@ -150,7 +181,10 @@ public partial class BoardCanvas : Node2D
         {
             return;
         }
-        _clock += delta;
+        if (!_clocked)
+        {
+            _clock += delta;
+        }
         var tick = (long)(_clock * TicksPerSecond);
         if (tick != _tick)
         {
@@ -175,6 +209,7 @@ public partial class BoardCanvas : Node2D
         var clock = System.Diagnostics.Stopwatch.GetTimestamp();
         _lighting?.Step(_clock);
         var light = _baked ? null : _lighting;
+        BoardPainter.GridAlpha = _gridAlpha;
         foreach (var step in _sequence)
         {
             if (step < 0)
@@ -186,6 +221,7 @@ public partial class BoardCanvas : Node2D
                 _painter.Paint(this, _items[step], light, _clock);
             }
         }
+        BoardPainter.GridAlpha = 1;
         LastDrawMs = System.Diagnostics.Stopwatch.GetElapsedTime(clock).TotalMilliseconds;
     }
 

@@ -11,7 +11,7 @@ namespace ArcBox.Host.Games.Tactics;
 internal sealed partial class WorldBlock : Node2D
 {
     private readonly BoardPainter _painter;
-    private readonly object[] _items;
+    private object[] _items;
 
     public WorldBlock(BoardPainter painter, object[] items, int z)
     {
@@ -46,6 +46,19 @@ internal sealed partial class WorldBlock : Node2D
         foreach (var item in _items)
         {
             _painter.Bind(item);
+        }
+    }
+
+    /// <summary>
+    /// Paints <paramref name="items"/>, prepared and bound, from now on, and records them at the end of this frame if it's been recorded before:
+    /// a fight in the world changed the ground here, or it heals.
+    /// </summary>
+    public void Replace(object[] items)
+    {
+        _items = items;
+        if (Visible)
+        {
+            QueueRedraw();
         }
     }
 

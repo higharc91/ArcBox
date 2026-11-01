@@ -25,6 +25,12 @@ namespace ArcBox.Host.Games.Tactics;
 /// Each frame, the board over it paints the units with only the items that sort after them and cross their rectangles (<see cref="WorldPlan.Over"/>).
 /// Those are the same pixels again, in the same baked light, so nothing but what's behind them changes, except that what's half see-through blends twice.
 /// </para>
+/// <para>
+/// A fight in the world (overworld 5c) draws on a board of its own over that one, in the battle map's pixels, from the region's own tiles
+/// (<see cref="StagePlan"/>): <see cref="ShowStage"/>. It shares the world's painter, so its water and flames step with the world's, and its
+/// colours are baked in the same light. The camera's shake moves the whole world, board and all. Blocks a fight changes are built again off the
+/// main thread (<see cref="Repaint"/>) and swapped in when they're ready.
+/// </para>
 /// </summary>
 internal sealed partial class WorldCanvas : CanvasLayer
 {
@@ -47,7 +53,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         Failed,
     }
 
-    private sealed record Built(WorldPlan Plan, object[][] Items, string Times);
+    private sealed record Built(WorldGround Ground, WorldPlan Plan, object[][] Items, string Times);
 
     private const int BelowUi = -1;
     private const float ViewMargin = 64;                    // art pixels round the view for halos, the widest sway of any flame
@@ -78,6 +84,10 @@ internal sealed partial class WorldCanvas : CanvasLayer
     private int _backCheck;
     private ArtArea _view;
     private System.Numerics.Vector2 _aim;
+    private BoardCanvas? _stage;
+    private StagePlan? _staged;
+    private Task<(BlockPlan Block, object[] Items)[]>? _repainting;
+    private Func<ImmutableArray<BlockPlan>>? _repaintNext;
 
     /// <summary>A world that shows what <paramref name="ground"/> builds, off the main thread, with art from <paramref name="packRoot"/>.</summary>
     public WorldCanvas(string packRoot, Func<WorldGround> ground, int blockSize = WorldTuning.BlockSize)
@@ -91,6 +101,111 @@ internal sealed partial class WorldCanvas : CanvasLayer
 
     /// <summary>How far it's got.</summary>
     public Stage Now { get; private set; } = Stage.Building;
+
+    /// <summary>The region's ground, once it's built.</summary>
+    public WorldGround? Ground { get; private set; }
+
+    /// <summary>The board of a fight in the world, while one is shown.</summary>
+    public BoardCanvas? StageBoard => _stage is { Visible: true } stage ? stage : null;
+
+    /// <summary>
+    /// Shows a fight's board on the world, as <paramref name="plan"/> has it. The plan's items are prepared and bound again only when it's a new
+    /// plan; the units and effects are the caller's, on <see cref="StageBoard"/>.
+    /// </summary>
+    public BoardCanvas? ShowStage(StagePlan plan)
+    {
+        if (Plan is null)
+        {
+            return null;
+        }
+        if (_stage is null)
+        {
+            _stage = new BoardCanvas(_painter) { ZIndex = Plan.Blocks.Max(b => b.Z) + 2 };
+            _world.AddChild(_stage);
+        }
+        if (!ReferenceEquals(plan, _staged))
+        {
+            _staged = plan;
+            var baked = plan.Lighting.Active ? plan.Lighting : null;
+            var items = plan.Lit.Items.Select(i => BoardPainter.Prepare(i, baked)).ToArray();
+            foreach (var item in items)
+            {
+                _painter.Bind(item);
+            }
+            _stage.JoinWorld(baked);
+            _stage.SetDrawn(items, plan.Lit.Items.Select(i => i.Order));
+            _stage.SetFit(new BoardFit(BoardFit.StageOffset(plan.Stage), 1));
+        }
+        _stage.Clock = _clock;
+        _stage.Visible = true;
+        _over.SetView(System.Numerics.Vector2.Zero, System.Numerics.Vector2.Zero);    // the stage has the halos round it: they'd show twice
+        return _stage;
+    }
+
+    /// <summary>Puts the fight's board away, and gives the world its halos back.</summary>
+    public void HideStage()
+    {
+        if (_stage is not { Visible: true } stage)
+        {
+            return;
+        }
+        stage.Visible = false;
+        _staged = null;
+        _over.SetView(_view.Min - new System.Numerics.Vector2(ViewMargin), _view.Max + new System.Numerics.Vector2(ViewMargin));
+    }
+
+    /// <summary>
+    /// Builds the blocks <paramref name="work"/> gives (<see cref="StagePlan.WorldBlocks"/>) off the main thread and swaps them in once they're
+    /// ready. The plan's own blocks stay as they were, so what the walkers' overlay reads is the region as it is. A repaint asked for while one
+    /// is under way waits for it, and only the newest waits.
+    /// </summary>
+    public void Repaint(Func<ImmutableArray<BlockPlan>> work)
+    {
+        if (_repainting is null)
+        {
+            Start(work);
+        }
+        else
+        {
+            _repaintNext = work;
+        }
+    }
+
+    private void Start(Func<ImmutableArray<BlockPlan>> work)
+    {
+        var baked = Plan?.Lighting is { Active: true } lighting ? lighting : null;
+        _repainting = Task.Run(() => work().Select(b => (b, b.Lit.Items.Select(i => BoardPainter.Prepare(i, baked)).ToArray())).ToArray());
+    }
+
+    private void SwapRepainted()
+    {
+        if (_repainting is not { IsCompleted: true } done)
+        {
+            return;
+        }
+        _repainting = null;
+        if (done.IsCompletedSuccessfully)
+        {
+            foreach (var (block, items) in done.Result)
+            {
+                foreach (var item in items)
+                {
+                    _painter.Bind(item);
+                }
+                _blocks[block.Index].Replace(items);
+            }
+            GD.Print($"WORLD repainted {done.Result.Length} blocks round a fight");
+        }
+        else
+        {
+            GD.PushError($"The world's blocks can't be built again: {done.Exception?.GetBaseException().Message}");
+        }
+        if (_repaintNext is { } next)
+        {
+            _repaintNext = null;
+            Start(next);
+        }
+    }
 
     /// <summary>The plan, once it's built.</summary>
     public WorldPlan? Plan { get; private set; }
@@ -154,8 +269,11 @@ internal sealed partial class WorldCanvas : CanvasLayer
         ProcessMode = ProcessModeEnum.Disabled;
     }
 
-    /// <summary>Brings it back. What had already been shown lifts from the fade again.</summary>
-    public void Resume()
+    /// <summary>
+    /// Brings it back. What had already been shown lifts from the fade again, unless it's not to <paramref name="fade"/>: a fight in the world
+    /// comes in with its own walk-in, which a fade would eat.
+    /// </summary>
+    public void Resume(bool fade = true)
     {
         Suspended = false;
         RenderingServer.CanvasItemSetVisible(_world.GetCanvasItem(), true);
@@ -165,7 +283,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         _backCheck = 3;
         _fading = 0;
         _fade.Modulate = Colors.White;
-        _fade.Visible = true;
+        _fade.Visible = fade;
     }
 
     public override void _ExitTree()
@@ -207,7 +325,9 @@ internal sealed partial class WorldCanvas : CanvasLayer
         var ground = _ground();
         var parsed = clock.Elapsed.TotalMilliseconds;
         closing.ThrowIfCancellationRequested();
-        var plan = WorldPlan.Build(new BoardTerrain(ground.Map, null), ArtIndex.Load(_painter.Root), _blockSize);
+        var art = ArtIndex.Load(_painter.Root);
+        var plan = WorldPlan.Build(new BoardTerrain(ground.Map, null), art, _blockSize);
+        StagePlan.Warm(ground);      // what every stage of the region shares, worked out here, so a fight's first frame doesn't
         var planned = clock.Elapsed.TotalMilliseconds;
         closing.ThrowIfCancellationRequested();
         var baked = plan.Lighting.Active ? plan.Lighting : null;
@@ -219,7 +339,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         }
         plan.DropProbes();
         var prepared = clock.Elapsed.TotalMilliseconds;
-        return new Built(plan, items, $"ground {parsed:0} ms, plan+light {planned - parsed:0} ms, bake {prepared - planned:0} ms, total {prepared:0} ms");
+        return new Built(ground, plan, items, $"ground {parsed:0} ms, plan+light {planned - parsed:0} ms, bake {prepared - planned:0} ms, total {prepared:0} ms");
     }
 
     /// <summary>Puts the world where <paramref name="fit"/> says.</summary>
@@ -230,7 +350,10 @@ internal sealed partial class WorldCanvas : CanvasLayer
         var origin = WorldView.OriginIn(fit, window);
         _world.Position = new Vector2(origin.X, origin.Y);
         _view = WorldView.Seen(origin, window);
-        _over?.SetView(_view.Min - new System.Numerics.Vector2(ViewMargin), _view.Max + new System.Numerics.Vector2(ViewMargin));
+        if (_stage is not { Visible: true })
+        {
+            _over?.SetView(_view.Min - new System.Numerics.Vector2(ViewMargin), _view.Max + new System.Numerics.Vector2(ViewMargin));
+        }
     }
 
     /// <summary>Where blocks are queued around: the party's tile and its speed in tiles a second.</summary>
@@ -256,6 +379,11 @@ internal sealed partial class WorldCanvas : CanvasLayer
     {
         _clock += delta;
         _frames.Step(_clock);
+        SwapRepainted();
+        if (_stage is { Visible: true } stage)
+        {
+            stage.Clock = _clock;
+        }
         if (_backCheck > 0 && --_backCheck == 0)
         {
             GD.Print($"WORLD back: {_blocks.Sum(b => b.Recorded) - _backAt} blocks recorded again, of {_blocks.Count}, frame {delta * 1000:0.0} ms");
@@ -293,7 +421,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
     {
         var built = _building.Result;
         BuildTimes = built.Times;
-        Plan = built.Plan;
+        (Ground, Plan) = (built.Ground, built.Plan);
         _items = built.Items;
         _queue = new BlockQueue(Plan.Blocks);
         foreach (var block in Plan.Blocks)

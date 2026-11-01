@@ -30,6 +30,12 @@ namespace ArcBox.Host.Games.Tactics;
 /// moves on every frame in <see cref="WalkOn"/>, whether a view came or not. The world is built the first time it's wanted, and only once; it's kept out of
 /// the way behind a fight or a list, and goes when the scene does.
 /// </para>
+/// <para>
+/// A fight on a stamped map is drawn in the world (overworld 5c): <see cref="StageDirector"/> has every view and says what the fight looks
+/// like, and <see cref="PhaseScreen"/> reads it, so the two agree. The board goes on the world (<see cref="WorldCanvas.ShowStage"/>), the beats
+/// wait for the walk-in, the camera holds on the stage, the walk follows <see cref="StageDirector.Walk"/>, and the results go over the world.
+/// While the world can't be drawn the plain board plays the fight, as it always did.
+/// </para>
 /// </summary>
 public partial class TacticsScene : Control, IGameScene, IContentScene, ISignalingScene, IAudioScene, IConnectionScene
 {
@@ -108,6 +114,19 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private double _playingSince;
     private readonly Dictionary<string, int> _moments = new(StringComparer.Ordinal);
     private readonly Stopwatch _clock = Stopwatch.StartNew();
+    private StageDirector? _director;
+    private readonly Dictionary<string, BattleMap?> _maps = new(StringComparer.Ordinal);
+    private StagePlan? _stagePlan;
+    private StageGround _groundShown = new();
+    private BoardChanges? _stageTerrainFor;
+    private bool _inPlace;              // the fight's board is on the world now
+    private bool _overWorld;
+    private ExploreView? _fed;          // the last view the walk was given
+    private (WorldState State, BoardTerrain? Terrain)? _worldSaid;
+    private WalkFrame? _lastWalk;       // the camera, as of the last frame of the world
+    private System.Numerics.Vector2 _stageShake;
+    private StageStep _stageSeen;
+    private ColorRect _stageFade = null!;
 
     /// <summary><c>--beat-log</c>: print a <c>BEAT</c> line with each beat's timing.</summary>
     public bool LogBeats { get; set; }
@@ -144,6 +163,11 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _board = new BoardCanvas { Visible = false };
         AddChild(_board);
         MoveChild(_board, 1);   // over the background, under the column
+
+        _stageFade = new ColorRect { Color = Colors.Black, Visible = false, MouseFilter = MouseFilterEnum.Ignore };
+        _stageFade.SetAnchorsPreset(LayoutPreset.FullRect);
+        AddChild(_stageFade);
+        MoveChild(_stageFade, 2);   // over the world and the board, under the header, the table and the HUD
 
         _noticeText = ArcTheme.Label("", ArcTheme.SemiBold, 28, ArcTheme.Gold);
         _notice = ArcTheme.Panel(ArcTheme.GlassBox(ArcTheme.Gold, 28, 10), _noticeText);
@@ -190,7 +214,25 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
 
     public override void _Process(double delta)
     {
-        if (_loop is not null && _board.Visible)
+        if (_director is { } director)
+        {
+            TellWorld(director);
+            director.Tick(delta);
+            if (_inPlace && !director.InPlace)
+            {
+                LeaveStage();       // the wake's darkest moment, or a world that's gone
+                (_battle, _coverShown) = (_board.Visible, null);
+                if (_hud is not null)
+                {
+                    _hud.Visible = _board.Visible;
+                }
+                Cover();
+            }
+            _stageFade.Visible = director.Fade > 0;
+            _stageFade.Color = new Color(0, 0, 0, director.Fade);
+            StageMoments(director);
+        }
+        if (_loop is not null && (_board.Visible || _inPlace) && _director?.BeatsRun != false)
         {
             _loop.Step(delta);
         }
@@ -198,6 +240,98 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             WalkOn(world, delta);
         }
+        if (_inPlace)
+        {
+            _loop?.Guard(Redraw);       // the walk-in moves units every frame, and the camera moves the HUD's marks
+        }
+    }
+
+    /// <summary>Tells the director whether the world can be drawn, when that changes.</summary>
+    private void TellWorld(StageDirector director)
+    {
+        (WorldState, BoardTerrain?) now = _world is { Now: WorldCanvas.Stage.Open, Plan: { } plan, Ground: not null } ? (WorldState.Ready, (BoardTerrain?)plan.Terrain)
+            : _world is { Now: WorldCanvas.Stage.Failed } || (_world is null && _unreadableWorld is not null) ? (WorldState.Failed, null)
+            : (WorldState.Loading, null);
+        if (_worldSaid is { } said && said.State == now.Item1 && ReferenceEquals(said.Terrain, now.Item2))
+        {
+            return;
+        }
+        _worldSaid = now;
+        director.SetWorld(now.Item1, now.Item2);
+        if (_screen is { } screen && director.InPlace != screen.InPlace)
+        {
+            Show(screen with { InPlace = director.InPlace });       // the world took the fight over from the plain board
+        }
+    }
+
+    /// <summary>With <c>--shots</c>, a shot as a fight in the world moves from one step of its timeline to the next, and one mid-way through the walk-in.</summary>
+    private void StageMoments(StageDirector director)
+    {
+        if (director.Stage != _stageSeen)
+        {
+            _stageSeen = director.Stage;
+            GD.Print($"TACTICS stage {director.Stage}{(director.InPlace ? " in place" : "")}");
+            if (director.Where is not null)
+            {
+                Shoot($"stage-{director.Stage.ToString().ToLowerInvariant()}");
+            }
+        }
+        if (director.Stage == StageStep.Forming && director.Intro is { } intro && director.InPlace)
+        {
+            if (director.Places.Count > 0 && director.GridAlpha == 0)
+            {
+                Shoot("stage-walk-in");
+            }
+            else if (director.GridAlpha is > 0.3f and < 0.8f)
+            {
+                Shoot("stage-grid");
+            }
+            else if (director.Places.Keys.Any(id => !id.Value.StartsWith("hero", StringComparison.Ordinal)))
+            {
+                Shoot("stage-step-in");
+            }
+        }
+    }
+
+    /// <summary>A battle map of the pack, read once, or null if it can't be read.</summary>
+    private BattleMap? MapFor(string id)
+    {
+        if (_maps.TryGetValue(id, out var known))
+        {
+            return known;
+        }
+        BattleMap? map = null;
+        if (_content.TryGetValue(BasePack, out var root))
+        {
+            try
+            {
+                map = BoardMap.Parse(File.ReadAllText(Path.Combine(root, "rules", "maps", $"{id}.json")));
+            }
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException or FormatException or ArgumentException)
+            {
+                GD.PushWarning($"Tactics stage: can't read map '{id}': {ex.Message}");
+            }
+        }
+        return _maps[id] = map;
+    }
+
+    /// <summary>Gives the walk the view the director lets it follow, and after a fight's new epoch, where the followers stood.</summary>
+    private void FeedWalk()
+    {
+        if (_walk is not { } walk || (_director?.Walk ?? _explore) is not { } view || ReferenceEquals(view, _fed) || view.Region != _worldRegion)
+        {
+            return;
+        }
+        var epoch = _fed?.Epoch;
+        foreach (var leg in walk.Receive(view))
+        {
+            LogWalk(leg);
+        }
+        if (epoch != view.Epoch && _director is { Seed.Count: > 0 } director)
+        {
+            walk.Seed(director.Seed);
+        }
+        _fed = view;
     }
 
     /// <summary>A frame of walking: everything that moves, moved. It touches no node that isn't moving, and it doesn't wait for anything.</summary>
@@ -224,10 +358,11 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         if (_walk is null)
         {
             _walk = new WalkShow(plan.Terrain, art, _sound);
-            _walk.Receive(_explore!);
+            _fed = null;
         }
+        FeedWalk();
 
-        var frame = _walk.Frame(delta, _cover.Reveal.Revealed);
+        var frame = _lastWalk = _walk.Frame(delta, _cover.Reveal.Revealed, _director is { } director ? WalkStage.Of(director, _stageShake) : null);
         if (frame.Cut)
         {
             GD.Print(FormattableString.Invariant($"TACTICS walk snapped to {frame.Tile.X:0.0} {frame.Tile.Y:0.0}"));
@@ -275,7 +410,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     /// <summary>Applies <see cref="WorldCover.Look"/> to the backdrop, header, table and the world's panels. Nodes are touched only when it changes.</summary>
     private void Cover()
     {
-        var look = _cover.Look(_walking, _battle);
+        var look = _cover.Look(_walking, _battle, _overWorld);
         if (look == _coverShown)
         {
             return;
@@ -438,7 +573,10 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             return;
         }
 
-        var screen = PhaseScreen.Of(v);
+        _director ??= new StageDirector(MapFor);
+        _director.Receive(v, _walk?.Places);
+        var director = _director;
+        var screen = PhaseScreen.Of(v, director);
 
         // The battle ended with beats still to play: they finish first, and then this screen. They were the game's last, so nothing waits on them.
         if (screen.Board is null && v.LastBattle is { } last && _player?.Shown is not null && _loop is not null)
@@ -446,7 +584,11 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _player.Receive(last);
             if (!_player.Idle)
             {
-                _loop.Held = () => Show(screen);
+                _loop.Held = () =>
+                {
+                    Show(screen);
+                    director.LastBlowPlayed();
+                };
                 return;
             }
         }
@@ -455,6 +597,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _loop.Held = null;
         }
         Show(screen);
+        director.LastBlowPlayed();      // nothing if the results aren't up, or have had it
     }
 
     private void Show(PhaseScreen screen)
@@ -473,6 +616,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _empty.Text = screen.Empty ?? "";
         _rows.Visible = screen.Empty is null;
         ShowRows(screen);
+        _overWorld = screen.OverWorld;
         var walking = ShowWorld(screen);
         ShowBoard(screen, walking);
         _audio.Music(screen.Music);
@@ -486,9 +630,9 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             _lastShot = screen.Shot;
             GD.Print($"TACTICS screen {screen.Shot}");
-            if (!walking)
+            if (!walking || screen.Board is not null || screen.OverWorld)
             {
-                _shots?.Capture(screen.Shot);       // the world takes its own, when there's something to see
+                _shots?.Capture(screen.Shot);       // the world takes its own, when there's something to see; a fight or its results in it, here
             }
         }
     }
@@ -544,17 +688,15 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         }
         else if (_world.Suspended)
         {
-            _world.Resume();
-            _cover.Opened();
+            var fight = _director?.InWorld == true;     // a fight in the world has its own way in: no card, no fade
+            _world.Resume(fade: !fight);
+            if (!fight)
+            {
+                _cover.Opened();
+            }
             GD.Print($"TACTICS world back: {WorldCanvas.MemoryText()}");
         }
-        if (_walk is { } walk)
-        {
-            foreach (var leg in walk.Receive(explore))
-            {
-                LogWalk(leg);
-            }
-        }
+        FeedWalk();
         _worldHud.Show(hud, notice);
         return true;
     }
@@ -567,6 +709,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _walkStats = LogWalks ? new WalkStats() : null;
         _walkLog = LogWalks ? new WalkLog() : null;
         _world = new WorldCanvas(root, () => DemoRegion.FromPack(root, region));
+        (_stagePlan, _worldSaid, _fed) = (null, null, null);
         AddChild(_world);
         GD.Print($"TACTICS world opening {region}");
     }
@@ -646,6 +789,29 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private void ShowBoard(PhaseScreen screen, bool walking)
     {
         _banner = screen.Title;
+        if (screen.InPlace && walking && _world is { Ground: not null })
+        {
+            // On the world: the fight's board, or at its results the battle as it ended, which the player still has.
+            _inPlace = true;      // so the board's first redraw is on the world, not the plain board's
+            var staged = screen.Board is { } fight ? DrawBoard(fight) : _player?.Shown is not null;
+            _board.Visible = false;
+            _inPlace = staged;
+            if (!staged)
+            {
+                LeaveStage();
+            }
+            if (_hud is not null)
+            {
+                _hud.Visible = staged && screen.Board is not null;
+            }
+            _caption.Visible &= staged;
+            (_walking, _battle) = (walking, staged && !screen.OverWorld);
+            _loop?.Guard(Redraw);
+            Cover();
+            return;
+        }
+
+        LeaveStage();
         var drawn = screen.Board is { } battle && DrawBoard(battle);
         if (!drawn)
         {
@@ -659,6 +825,23 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         }
         (_walking, _battle) = (walking, drawn);
         Cover();
+    }
+
+    /// <summary>Puts the fight's board in the world away, and has the world's blocks a fight changed built again as the region has them.</summary>
+    private void LeaveStage()
+    {
+        _inPlace = false;
+        if (_stagePlan is { } plan && _world is { Plan: { } worldPlan } world)
+        {
+            var healed = _groundShown.Heal(plan.Stage);
+            if (!healed.IsEmpty)
+            {
+                world.Repaint(() => plan.WorldBlocks(worldPlan, healed, null));
+            }
+            world.HideStage();
+        }
+        (_stagePlan, _stageShake, _stageTerrainFor) = (null, System.Numerics.Vector2.Zero, null);
+        _groundShown = new StageGround();
     }
 
     private bool DrawBoard(BattleView battle)
@@ -706,6 +889,11 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     /// <summary>Draws the battle as the player has seen it. The board's plan is only rebuilt when the board has changed.</summary>
     private void Redraw()
     {
+        if (_inPlace)
+        {
+            RedrawStage();
+            return;
+        }
         if (_player?.Shown is not { } shown || _map is null || _fit is not { } fit || _art is null || _unitArt is null || !_content.TryGetValue(BasePack, out var root))
         {
             return;
@@ -723,6 +911,59 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _board.SetEffects(frame.Draws, frame.Shake);
         _said = BattleHud.Of(shown, _player.Live ?? shown, _banner, _said, _player.AiFinished);
         _hud?.Show(_said, units, fit, _player.AiFinished);
+    }
+
+    /// <summary>
+    /// Draws the battle as the player has seen it on the world: the stage's plan from the region's tiles, built again when the board changes, the
+    /// world's blocks round a change built again off the frame, and the units with the director's walk-in over the beat's own places.
+    /// </summary>
+    private void RedrawStage()
+    {
+        if (_player?.Shown is not { } shown || _map is null || _art is null || _unitArt is null || _director?.Where is not { } where
+            || _world is not { Ground: { } ground, Plan: { } worldPlan } world || _lastWalk is not { } walk || where.Map != _map.Id)
+        {
+            return;
+        }
+        var ask = _groundShown.Show(shown.Board, where);
+        if (_stagePlan is null || _stagePlan.Stage != where)
+        {
+            _stagePlan = StagePlan.Build(ground, where, shown.Board, _art);
+        }
+        else if (ask.Restage)
+        {
+            _stagePlan = _stagePlan.With(shown.Board);
+        }
+        if (!ask.Blocks.IsEmpty)
+        {
+            var (plan, changes, touched) = (_stagePlan, _groundShown.World, ask.Blocks);
+            world.Repaint(() => plan.WorldBlocks(worldPlan, touched, changes));
+        }
+        if (_terrain is null || !ReferenceEquals(_stageTerrainFor, shown.Board))
+        {
+            (_terrain, _stageTerrainFor) = (new BoardTerrain(_map, shown.Board), shown.Board);
+        }
+        if (world.ShowStage(_stagePlan) is not { } board)
+        {
+            return;
+        }
+
+        var director = _director;
+        var frame = _player.Frame(_terrain);
+        var places = director.Places.IsEmpty ? frame.Places : frame.Places.SetItems(director.Places);
+        var poses = director.Poses.IsEmpty ? frame.Poses : frame.Poses.SetItems(director.Poses);
+        var steady = walk.Fit with { Origin = walk.Fit.Origin - _stageShake * walk.Fit.Scale };
+        var fit = BoardFit.Stage(where, steady.Origin, steady.Scale);
+        var units = UnitPlan.Build(shown, _terrain, _unitArt, fit, places, poses, where.Origin);
+        if (!director.Hidden.IsEmpty)
+        {
+            units = [.. units.Where(u => !director.Hidden.Contains(u.Id))];
+        }
+        board.SetUnits(units, _unitArt);
+        board.SetEffects(frame.Draws, System.Numerics.Vector2.Zero);
+        board.GridAlpha = director.GridAlpha;
+        _stageShake = frame.Shake;      // on the camera: the world and the board shake together
+        _said = BattleHud.Of(shown, _player.Live ?? shown, _banner, _said, _player.AiFinished);
+        _hud?.Show(_said, units, fit with { Origin = walk.Fit.Origin + BoardFit.StageOffset(where) * walk.Fit.Scale }, _player.AiFinished);
     }
 
     private void ShowRows(PhaseScreen screen)

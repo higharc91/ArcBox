@@ -310,6 +310,29 @@ In Exploration the TV shows the world instead of the header and table, and the s
 
 **The sound.** Footsteps go by distance, a foot every `FootstepTiles` of the leader's walk, by the ground underfoot (`SoundBank.Step`), at `FootstepDb` under a battle's. What's skipped or snapped past makes no sound. The Ashen Ford plays `town_emberwick`, as the manifest gives it.
 
+## Fights in the world
+
+A battle on a stamped map (overworld 5c) is drawn where it stands. `StageDirector` (Tactics.Presentation) has every host view and says
+what the fight looks like: the walk-in, the grid, the camera, the fade, who's hidden, and which `ExploreView` the walk may follow, so the new
+epoch waits for the results. `PhaseScreen.Of(view, director)` reads it, and only it, so the screen and the stage can't disagree; without a
+director every fight is on the plain board, as before the world.
+
+- **The board** is a `BoardCanvas` inside the world's own node (`WorldCanvas.ShowStage`), above the blocks and the walkers' overlay, at the
+  stamp's offset in art pixels (`BoardFit.StageOffset`), drawing `StagePlan`: the stamp and 10 tiles on along +x and +y, built from the
+  region's tiles, so it meets the world with no seam and no skirt. It shares the world's painter, so its water and flames step with the
+  world's (`FrameTextures`), and its colours are baked in the same light. Units come from `UnitPlan.Build(..., worldOffset)`; the beat's
+  shake goes to the camera (`WalkStage.Shake`), so the world and the board shake together. The stage has the halos while it's up.
+- **Beats** wait for the walk-in: `BeatLoop.Step` runs only while `StageDirector.BeatsRun`. The walk-in is at most 2.2 s, inside the game's
+  3 s `FormUp`, so this only ever delays a picture. `LastBlowPlayed` goes to the director when the results are shown.
+- **The ground**: `StageGround` says what each shown board needs. A changed board rebuilds the stage on the frame (about 5 ms on the
+  stress region); a raised or sunk tile also has the world's blocks round it rebuilt off the main thread (`WorldCanvas.Repaint`, 13-24 ms
+  of work) and swapped in, and healed the same way when the fight is over.
+- **The screen**: in the fight, the battle's HUD and no header, table or world panels (`WorldCover.Look`); at Results and Resuming,
+  the header and table straight over the world (`OverWorld`). `--shots` takes the battle and results screens as before, and
+  `tactics-beat-stage-*` shots of the walk-in, the grid and each step of the timeline.
+- **The world isn't ready**: the plain board plays the fight and the stage takes over, with a 0.25 s fade, once the world opens. A world
+  that can't be drawn leaves the fight on the plain board. A world brought back for a fight comes back with no card and no fade.
+
 ## Adding a game scene
 
 1. Create `res://games/<id>/<Name>Scene.tscn` whose root script implements `IGameScene`:

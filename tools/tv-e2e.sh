@@ -93,6 +93,9 @@
 #   ARCBOX_WALK_PRESSES (walk) presses timed for the latency (default 20)
 #   ARCBOX_ENCOUNTER (tactics) the encounter (default river_crossing)
 #   TV_HOLD          (tactics) seconds the bots leave the results up (default 6)
+#   ARCBOX_SERVER_ENV (tactics) more KEY=value settings for the server, e.g. a Development seed that puts the party by the stamp, so the
+#                    fight walks in rather than fading: Tactics__Seed__Region=ashen_ford Tactics__Seed__At__0=96 Tactics__Seed__At__1=61
+#   ARCBOX_BOT_ARGS  (tactics) the bots' fighting options, in place of --fight; e.g. --sit-out=turn for a party that loses
 #   ARCBOX_FULL      1 = race to the chequered flag and back to the lobby (passed to the phone script)
 #   ARCBOX_RESTART   1 = restart the server mid-race and check everyone lands in the same room's lobby (not with ARCBOX_FULL)
 #   ARCBOX_SWAP      1 = swap bot 2's phone mid-race and check it finishes in its seat (implies ARCBOX_FULL=1; needs 2+ phones)
@@ -249,7 +252,7 @@ DB="$OUT/arcbox.db"
 # start_server <log>: the server on $URL and $DB, in the background; returns once it answers.
 start_server() {
   local out=$1
-  (cd "$ROOT/src/ArcBox.Server" && exec env ASPNETCORE_ENVIRONMENT=Development Tactics__BattleList=true Storage__Path="$DB" dotnet "$SERVER_DLL" --urls "$URL") > "$out" 2>&1 &
+  (cd "$ROOT/src/ArcBox.Server" && exec env ASPNETCORE_ENVIRONMENT=Development Tactics__BattleList=true Storage__Path="$DB" ${ARCBOX_SERVER_ENV:-} dotnet "$SERVER_DLL" --urls "$URL") > "$out" 2>&1 &
   SERVER_PID=$!
   for _ in $(seq 1 60); do
     curl -sf -o /dev/null "$URL/" && return 0
@@ -474,7 +477,7 @@ if [[ "$GAME" == "tactics" ]]; then
   set +e
   run_bots() {
     node "$ROOT/tools/tactics-playtest/bots.cjs" --server="$URL" --room="$CODE" --players="$PHONES" --encounter="$ENCOUNTER" \
-      --fight --hold="$HOLD" --timeout=1500 2>&1 | tee "$OUT/phones.log"
+      ${ARCBOX_BOT_ARGS:---fight} --hold="$HOLD" --timeout=1500 2>&1 | tee "$OUT/phones.log"
     return "${PIPESTATUS[0]}"
   }
   beats_played() { awk '/^BEAT [0-9]+ / && $2 > n { n = $2 } END { print n + 0 }' "$OUT/tv.log"; }

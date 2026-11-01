@@ -22,6 +22,21 @@ public sealed record WalkFrame(ImmutableArray<BoardUnit> Units, BoardFit Fit, Ve
     bool Bumped = false, string? Bump = null);
 
 /// <summary>
+/// What a fight in the world (<see cref="StageDirector"/>) asks of the walk this frame.
+/// </summary>
+/// <param name="Hold">Where the camera holds, with no look-ahead and no clamp, or null to follow the party.</param>
+/// <param name="Cuts">The director's <see cref="StageDirector.CameraCuts"/>: the camera cuts to <paramref name="Hold"/> each time it goes up.</param>
+/// <param name="Walkers">Where the walkers are drawn instead of where the track has them, as they fall in; null for the track's.</param>
+/// <param name="Hidden">The party isn't drawn: the fight's own units are.</param>
+/// <param name="Shake">How far the camera is off its place, in art pixels: a heavy hit shakes the world and the board in it together.</param>
+public sealed record WalkStage(StageCamera? Hold, int Cuts, IReadOnlyDictionary<string, UnitPlace>? Walkers, bool Hidden, Vector2 Shake)
+{
+    /// <summary>The stage of a <see cref="StageDirector"/> and the beat's shake.</summary>
+    public static WalkStage Of(StageDirector director, Vector2 shake = default)
+        => new(director.CameraTarget, director.CameraCuts, director.Walkers, !director.WalkersShown, shake);
+}
+
+/// <summary>
 /// The party on the TV, frame by frame: a <see cref="WalkTrack"/>, a <see cref="WorldCamera"/> and the party's units, on one region's ground.
 /// <see cref="Receive"/> takes each view, as it comes, and <see cref="Frame"/> runs once a frame, whether a view came or not. Nothing here
 /// depends on a view having arrived, so footsteps go by the distance walked, and a slow stream of views only slows the picture.
@@ -44,6 +59,7 @@ public sealed class WalkShow
     private int _seq;
     private int _told;
     private int _cuts;
+    private int _stageCuts;
     private int _skips;
     private double _footfalls;
     private bool _bumped;
@@ -86,6 +102,9 @@ public sealed class WalkShow
         return view.Legs.IsDefault ? [] : [.. view.Legs.Where(l => l.Seq > told)];
     }
 
+    /// <summary>Puts followers where a fight left them, after its new epoch (<see cref="WalkTrack.Seed"/>, <see cref="StageDirector.Seed"/>).</summary>
+    public void Seed(IReadOnlyDictionary<string, UnitPlace> places) => _track.Seed(places);
+
     /// <summary>The TV's connection came back: what it missed is old news, so the next view only says how many walls had refused a step.</summary>
     public void Rebase()
     {
@@ -97,30 +116,48 @@ public sealed class WalkShow
     /// Moves everything on by <paramref name="seconds"/>. Until the world is <paramref name="revealed"/> nobody can see the party, so a bump
     /// then is dropped, sound and all.
     /// </summary>
-    public WalkFrame Frame(double seconds, bool revealed = true)
+    /// <para>
+    /// With <paramref name="stage"/>, a fight in the world has the camera and the party's places: the camera holds on the stage (and cuts when
+    /// the director says), and while the party falls in it glides rather than cutting to the track's new epoch.
+    /// </para>
+    public WalkFrame Frame(double seconds, bool revealed = true, WalkStage? stage = null)
     {
         _track.Advance(seconds);
         var places = _places = _track.Places(_terrain);
         var focus = _track.Focus;
 
         var cut = _track.Cuts != _cuts;
-        if (cut)
+        var stageCut = stage is not null && stage.Cuts != _stageCuts;
+        _stageCuts = stage?.Cuts ?? _stageCuts;
+        if (stage?.Hold is { } hold)
+        {
+            if (stageCut)
+                _camera.Snap(hold.Map, hold.Height);
+            else
+                _camera.Hold(hold.Map, hold.Height, seconds);
+            cut = stageCut;
+        }
+        else if (cut && stage?.Walkers is null)
             _camera.Snap(focus.Map, focus.Height);
         else
+        {
+            cut = false;
             _camera.Follow(focus.Map, focus.Height, _track.Heading, seconds);
+        }
         var footstep = Footstep(focus.Map, jumped: cut || _track.Skips != _skips);
         (_cuts, _skips) = (_track.Cuts, _track.Skips);
 
         if (!revealed)
             _bump.Cancel();
         _bump.Advance(seconds);
-        var drawn = Nudged(places);
+        var drawn = stage?.Walkers is { } falling ? Over(places, falling) : Nudged(places);
         var bumped = _bumped && drawn != places;     // a knock only with a lean to see
         _bumped = false;
         var bump = bumped ? _sounds?.Step(_terrain.Map, new Tile((int)MathF.Floor(focus.Map.X), (int)MathF.Floor(focus.Map.Y))) : null;
 
-        var units = UnitPlan.Walkers(_party, drawn, _track.Poses, _art, _pixels);
-        return new WalkFrame(units, _camera.Fit, focus.Map, _track.Heading * TilesPerSecond, footstep, cut, _track.Walked, focus.Feet, bumped, bump);
+        ImmutableArray<BoardUnit> units = stage?.Hidden == true ? [] : UnitPlan.Walkers(_party, drawn, _track.Poses, _art, _pixels);
+        var fit = stage is { Shake: var shake } && shake != Vector2.Zero ? _camera.Fit with { Origin = _camera.Fit.Origin + shake * _camera.Fit.Scale } : _camera.Fit;
+        return new WalkFrame(units, fit, focus.Map, _track.Heading * TilesPerSecond, footstep, cut, _track.Walked, focus.Feet, bumped, bump);
     }
 
     /// <summary>
@@ -132,6 +169,14 @@ public sealed class WalkShow
         if (!_bump.Active || _party.FirstOrDefault(w => w.Leads) is not { } leader || !places.TryGetValue(leader.Id, out var at))
             return places;
         return new Dictionary<string, UnitPlace>(places) { [leader.Id] = at with { Map = at.Map + _bump.Offset } };
+    }
+
+    private static Dictionary<string, UnitPlace> Over(IReadOnlyDictionary<string, UnitPlace> places, IReadOnlyDictionary<string, UnitPlace> over)
+    {
+        var drawn = new Dictionary<string, UnitPlace>(places);
+        foreach (var (id, place) in over)
+            drawn[id] = place;
+        return drawn;
     }
 
     /// <summary>One foot per so many tiles, however the frames fall. What the party skipped or was put past wasn't walked, so it makes no sound.</summary>
