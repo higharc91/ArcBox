@@ -1,0 +1,99 @@
+#pragma warning disable xUnit1031, xUnit1051
+using System.Collections.Concurrent;
+using System.Reflection;
+using System.Text;
+using System.Text.RegularExpressions;
+using ArcBox.Sdk;
+using ArcBox.Sdk.Campaigns;
+using ArcBox.Sdk.Testing;
+using Tactics.Logic;
+using static Tactics.Game.Tests.TacticsGameTests;
+
+namespace Tactics.Game.Tests;
+
+public sealed class ZzSweepTests
+{
+    static readonly TacticsTiming Timing = new(TimeSpan.FromMilliseconds(400), TimeSpan.FromMilliseconds(200), TimeSpan.FromMilliseconds(10), TimeSpan.FromMilliseconds(10), TimeSpan.FromMilliseconds(50));
+    static readonly FieldInfo ResultF = typeof(TacticsGame).GetField("_result", BindingFlags.NonPublic | BindingFlags.Instance)!;
+
+    public sealed record Case(string Enc, int N, int Away, string Mode, int Seed);
+    public sealed record Res(string Kind, string Fp, string? Msg = null);
+
+    static string Norm(string m) => Regex.Replace(Regex.Replace(m, @"\(\d+, \d+\)", "(x, y)"), @"\b(hero|ally)\d+", "$1N");
+
+    static Res One(Case c)
+    {
+        var rng = new Random(c.Seed * 7919 + 17);   // stable across processes
+        var classes = Rules.Classes.Keys.Order(StringComparer.Ordinal).ToArray();
+        var profiles = Enumerable.Range(0, c.N).Select(i => (ProfileId?)new ProfileId($"pr_{i}")).ToArray();
+        var game = new TacticsGame(Rules, Timing);
+        var h = new GameHarness<TacticsGame>(game, playerCount: c.N, seed: c.Seed, profiles: profiles);
+        var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", profiles[0]!.Value, [], 1);
+        var level = Rules.Encounters[c.Enc].Level ?? 1;
+        var doc = TacticsDocument.Read(new TacticsCampaignRules(Rules).NewDocument(info)) with { PartyLevel = level };
+        var lease = new FakeCampaignLease(info, doc.ToJson());
+        h.StartCampaign(lease);
+        for (var i = 0; i < c.N; i++) h.Input(i, new { action = "pickClass", data = new { @class = classes[rng.Next(classes.Length)] } });
+        h.Input(0, new { action = "battles" });
+        var online = c.N - c.Away;
+        for (var i = online; i < c.N; i++) h.SetConnected(i, false);
+        try
+        {
+            h.Input(0, new { action = "pickEncounter", data = new { encounter = c.Enc } });
+            if (game.Phase != TacticsPhase.Battle) return new Res("nostart", "");
+            for (var i = 0; i < 1500 && game.Phase == TacticsPhase.Battle; i++)
+            {
+                if (c.Mode == "pass") for (var p = 0; p < online; p++) h.Input(p, new { action = "endTurn" });
+                h.Advance(TimeSpan.FromMilliseconds(500));
+            }
+            var fp = $"xp {string.Join(",", game.Document.Members.Select(m => m.Value.Xp + "/" + m.Value.Character.Injuries.Length))}";
+            if (game.Phase == TacticsPhase.Battle) return new Res("unfinished", "round " + game.Document.Battle!.State.Round);
+            return new Res(((BattleResult)ResultF.GetValue(game)!).Outcome.ToString(), fp);
+        }
+        catch (Exception e)
+        {
+            var o = e.Data["outcome"] as string;
+            return new Res("crash", "", $"{e.GetType().Name}: {Norm(e.Message)}" + (o is null ? "" : $" [outcome {o}]") + (e is RulesInvariantException ? "" : " @ " + e.StackTrace?.Split('\n').FirstOrDefault()?.Trim()));
+        }
+    }
+
+    static void Phase(List<Case> cases, bool nofix, string outp)
+    {
+        Objectives.ZzNoFix = nofix;
+        var res = new ConcurrentDictionary<Case, Res>();
+        var sw = System.Diagnostics.Stopwatch.StartNew();
+        Parallel.ForEach(cases, new ParallelOptions { MaxDegreeOfParallelism = 14 }, c => res[c] = One(c));
+        var t = new StringBuilder();
+        t.AppendLine($"cases {cases.Count} nofix {nofix} elapsed {sw.Elapsed}");
+        t.AppendLine("enc\tN\taway\tmode\tbattles\tWon\tLost\tunfinished\tnostart\tcrash");
+        foreach (var g in res.GroupBy(k => (k.Key.Enc, k.Key.N, k.Key.Away, k.Key.Mode)).OrderBy(g => g.Key))
+        {
+            int C(string k) => g.Count(x => x.Value.Kind == k);
+            t.AppendLine($"{g.Key.Enc}\t{g.Key.N}\t{g.Key.Away}\t{g.Key.Mode}\t{g.Count()}\t{C("Won")}\t{C("Lost")}\t{C("unfinished")}\t{C("nostart")}\t{C("crash")}");
+        }
+        t.AppendLine("--- distinct crashes");
+        foreach (var g in res.Where(k => k.Value.Kind == "crash").GroupBy(k => k.Value.Msg).OrderByDescending(g => g.Count()))
+            t.AppendLine($"{g.Count()}\t{g.Key}");
+        File.WriteAllText(outp, t.ToString());
+        File.WriteAllLines(outp + ".cases", res.OrderBy(k => k.Key.Enc, StringComparer.Ordinal).ThenBy(k => k.Key.N).ThenBy(k => k.Key.Away).ThenBy(k => k.Key.Mode, StringComparer.Ordinal).ThenBy(k => k.Key.Seed)
+            .Select(k => $"{k.Key.Enc}\t{k.Key.N}\t{k.Key.Away}\t{k.Key.Mode}\t{k.Key.Seed}\t{k.Value.Kind}\t{k.Value.Fp}\t{k.Value.Msg}"));
+    }
+
+    [Fact]
+    public void Sweep()
+    {
+        var seeds = int.Parse(Environment.GetEnvironmentVariable("SWEEP_SEEDS") ?? "20");
+        var cases = new List<Case>();
+        foreach (var (id, e) in Rules.Encounters.OrderBy(k => k.Key, StringComparer.Ordinal))
+            foreach (var n in new[] { 1, 2, 3, 4, 6 })
+            {
+                if (n > e.Party.Max) continue;
+                foreach (var away in n >= 2 ? new[] { 0, 1 } : new[] { 0 })
+                    foreach (var mode in new[] { "pass", "timeout" })
+                        for (var s = 1; s <= seeds; s++) cases.Add(new Case(id, n, away, mode, s));
+            }
+        var outp = Environment.GetEnvironmentVariable("SWEEP_OUT")!;
+        Phase(cases, nofix: true, outp + ".before");
+        if (Environment.GetEnvironmentVariable("SWEEP_BOTH") is not null) Phase(cases, nofix: false, outp + ".after");
+    }
+}

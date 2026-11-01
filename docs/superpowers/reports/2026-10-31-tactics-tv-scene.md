@@ -50,9 +50,9 @@ The TV then ran plain and reconnect battles on the new art. After the last fixes
 
 ## What's left, ranked
 
-**A crash to look at first:** the TV segfaulted about 1 s after launch, before the room appeared, in 2 runs on a fresh empty user-data folder. An identical retry worked, and so did another fresh launch, so the cause is unknown.
+**Fixed since this report:** the fresh-install crash. Loading speech at startup collided with the cold shader compile, and turning `audio/general/text_to_speech` off took empty-cache crashes from 12 of 43 launches to 0 of 30. What actually corrupts the heap isn't known. The TV now also has its music, sound effects, recorded voices and board lighting (see `docs/tv-host.md`), and a dither fix took vertical stripes off the ground.
 
-1. **The TV doesn't use the new sound or light yet:** music, sound effects, recorded voice clips, the Victory and Defeat strips, the lighting data and most of the HUD kit. The narrator uses live speech for now. This is the next pass.
+1. **Sound and light haven't been judged by a person.** The levels and the far side of a dim crypt are on the playtest checklist.
 2. **Unseen on a real TV:** a damaging area spell, zones, pushes, teleports, transformations and the boss's phase. All are tested in code, but only a level 1 Sleep has played on screen, and the boss's phase was never reached. A level 5 party on the Warlord's Bridge is the next thing to play.
 3. **Connecting at home:** phones couldn't reach the PC over plain Wi-Fi, only through Tailscale, and other players would hit the same block. Check the router's AP isolation.
 4. **Every character of a class looks the same** on the TV, because it uses a generic class sprite rather than the character's look.
