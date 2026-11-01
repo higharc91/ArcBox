@@ -368,7 +368,7 @@ public static class AshenFordDraft
     ];
 
     /// <summary>All of it, place by place.</summary>
-    private static readonly Stand[] Everything = [.. InEmberwick, .. InTheFields, .. OnTheRoad, .. OnTheBurnedGround, .. AtTheFord, .. OnTheDocks];
+    private static readonly Stand[] Everything = [.. InEmberwick, .. InTheFields, .. OnTheRoad, .. OnTheBurnedGround, .. AtTheFord, .. OnTheDocks, .. AtTheCamp, .. InTheHills];
 
     /// <summary>The party starts on the square, in front of the inn.</summary>
     private static readonly Tile StartSpawn = new(26, 58);

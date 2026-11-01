@@ -774,6 +774,18 @@ public sealed class AshenFordDraftTests
     }
 
     [Fact]
+    public void The_camp_is_small_and_hungry()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var near = Props(source).Where(p => Distance(p.At, draft.Spot("ch1_skarrow_song")) <= 10).ToList();
+        Assert.InRange(near.Count(p => p.Id == "tent"), 2, 4);
+        Assert.Single(near, p => p.Id == "campfire");
+        Assert.DoesNotContain(near, p => p.Id is "haystack" or "lamp_post" or "crate");
+    }
+
+    [Fact]
     public void The_fields_have_their_fences_hay_and_a_mill()
     {
         var draft = Draft.Value;
