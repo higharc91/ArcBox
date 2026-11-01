@@ -18,7 +18,11 @@ public sealed record SpokenLine(string? Speaker, string Text, string Theme, stri
 /// <param name="Rotation">Radians around its centre.</param>
 /// <param name="Additive">Blended by adding light.</param>
 /// <param name="Alpha">How opaque.</param>
-public sealed record FxDraw(string Path, ArtRect Source, Vector2 TopLeft, Vector2 Size, float Rotation, bool Additive, float Alpha);
+public sealed record FxDraw(string Path, ArtRect Source, Vector2 TopLeft, Vector2 Size, float Rotation, bool Additive, float Alpha)
+{
+    /// <summary>It's a mark for the people watching, a number or a die badge, rather than part of the scene: it goes when the units' marks do (<see cref="MarkRule"/>).</summary>
+    public bool Mark { get; init; }
+}
 
 /// <summary>Where a number that pops up over a unit is drawn this moment, in art pixels.</summary>
 /// <param name="Unit">The unit it's about.</param>
@@ -402,7 +406,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
         foreach (var (rect, advance) in glyphs)
         {
             var size = new Vector2(rect.Width, rect.Height) * NumberScale;
-            draws.Add(new FxDraw(UnitArt.NumbersPath, rect, new Vector2(pen, centre.Y - size.Y / 2), size, 0, false, alpha));
+            draws.Add(new FxDraw(UnitArt.NumbersPath, rect, new Vector2(pen, centre.Y - size.Y / 2), size, 0, false, alpha) { Mark = true });
             (right, height) = (MathF.Max(right, pen + size.X), MathF.Max(height, size.Y));
             pen += advance * NumberScale;
         }
@@ -416,14 +420,14 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
         var size = new Vector2(die.Width, die.Height) * BadgeScale;
         var alpha = share < 0.8f ? 1 : (1 - share) / 0.2f;
         var centre = terrain.Centre(badge.Tile) - new Vector2(0, BadgeRise);
-        draws.Add(new FxDraw(UnitArt.DicePath, die, centre - size / 2, size, 0, false, alpha));
+        draws.Add(new FxDraw(UnitArt.DicePath, die, centre - size / 2, size, 0, false, alpha) { Mark = true });
 
         var digits = badge.Die.ToString(System.Globalization.CultureInfo.InvariantCulture);
         var pen = centre.X - digits.Length * 4;
         foreach (var digit in digits)
         {
             var (rect, advance) = art.Digit(digit);
-            draws.Add(new FxDraw(UnitArt.NumbersPath, rect, new Vector2(pen, centre.Y - rect.Height / 2f + 1), new Vector2(rect.Width, rect.Height), 0, false, alpha));
+            draws.Add(new FxDraw(UnitArt.NumbersPath, rect, new Vector2(pen, centre.Y - rect.Height / 2f + 1), new Vector2(rect.Width, rect.Height), 0, false, alpha) { Mark = true });
             pen += advance;
         }
     }

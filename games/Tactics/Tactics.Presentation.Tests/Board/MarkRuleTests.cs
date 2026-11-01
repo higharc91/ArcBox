@@ -148,7 +148,10 @@ public sealed class MarkRuleTests
     [InlineData(StageStep.Waking, false)]
     [InlineData(StageStep.Walking, false)]
     public void Marks_show_only_while_the_fight_is_played(StageStep stage, bool shown)
-        => Assert.Equal(shown, MarkRule.Shown(stage));
+    {
+        Assert.Equal(shown, MarkRule.Shown(stage, covered: false));
+        Assert.False(MarkRule.Shown(stage, covered: true));
+    }
 
     [Fact]
     public void Every_step_of_the_timeline_has_a_say() => Assert.Equal(8, Enum.GetValues<StageStep>().Length);     // a new step needs a line above
@@ -181,12 +184,51 @@ public sealed class MarkRuleTests
         var fit = BoardFit.For(terrain, Pack.Art);
         ImmutableArray<BoardUnit> Now() => MarkRule.Apply(UnitPlan.Build(World.StageScript.Battle(), terrain, Art.Value, fit, director.Places, director.Poses),
             new BeatFrame(ImmutableDictionary<UnitId, UnitPlace>.Empty, ImmutableDictionary<UnitId, UnitPose>.Empty, [], Vector2.Zero), Art.Value,
-            MarkRule.Shown(director.Stage));
+            MarkRule.Shown(director.Stage, covered: false)).Units;
 
         Assert.Equal(StageStep.Forming, director.Stage);
         Assert.All(Now(), u => Assert.Null(u.Bar));
         World.StageScript.Run(director, director.Intro!.End + 0.05);
         Assert.Equal(StageStep.Fighting, director.Stage);
         Assert.All(Now(), u => Assert.NotNull(u.Bar));
+    }
+
+    [Fact]
+    public void Unshown_the_beats_numbers_and_badges_go_and_its_effects_stay()
+    {
+        var player = new BeatPlayer(Fx.Value, Art.Value);
+        player.Receive(Battle(Downed(), new Beat(1, Foe, [new Damaged(Hero, 10, null, 0)])));
+        var (marked, effects) = (false, false);
+        for (var t = 0.0; t < 3; t += Frame)
+        {
+            player.Tick(Frame);
+            var frame = player.Frame(River);
+            var units = UnitPlan.Build(player.Shown!, River, Art.Value, Fit, frame.Places, frame.Poses);
+            var (shownUnits, shown) = MarkRule.Apply(units, frame, Art.Value, true);
+            var (bareUnits, bare) = MarkRule.Apply(units, frame, Art.Value, false);
+
+            Assert.Equal(frame.Draws, shown);
+            Assert.Equal(frame.Draws.Where(d => !d.Mark), bare);
+            Assert.All(bareUnits, u => Assert.True(u.Bar is null && u.Countdown is null));
+            Assert.Equal(MarkRule.ClearOfPops(units, frame.Pops, Art.Value), shownUnits);
+            marked |= frame.Draws.Any(d => d.Mark);
+            effects |= bare.Length > 0;
+        }
+        Assert.True(marked);        // the "-10"
+        Assert.True(effects);       // the spark of the blow
+    }
+
+    [Fact]
+    public void Numbers_and_die_badges_are_marks_and_bursts_arent()
+    {
+        var player = new BeatPlayer(Fx.Value, Art.Value);
+        player.Receive(Battle(Downed(), new Beat(1, Foe, [new Damaged(Hero, 10, null, 0)])));
+        var draws = new List<FxDraw>();
+        for (var t = 0.0; t < 3; t += Frame)
+        {
+            player.Tick(Frame);
+            draws.AddRange(player.Frame(River).Draws);
+        }
+        Assert.All(draws, d => Assert.Equal(d.Path is UnitArt.NumbersPath or UnitArt.DicePath, d.Mark));
     }
 }

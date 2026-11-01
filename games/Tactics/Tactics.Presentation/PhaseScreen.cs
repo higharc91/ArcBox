@@ -44,6 +44,18 @@ public sealed record PhaseScreen(string Meta, string Title, Tone Tone, string? N
     ImmutableArray<ScreenRow> Rows, string? Empty, string Shot, BattleView? Board = null, MusicCue? Music = null, string? Ambience = null, string? Banner = null,
     ExploreView? World = null, WalkHud? Walk = null, bool InPlace = false, bool OverWorld = false)
 {
+    /// <summary>The rows the table has room for on a screen of its own: a row is a slot's height, whatever the count.</summary>
+    public const int TableSlots = 6;
+
+    /// <summary>
+    /// The table fills the column under the header, as on a screen of its own. Over the world (<see cref="OverWorld"/>) it's only as tall as
+    /// its rows, or its <see cref="Empty"/> text, so the world shows below it rather than an empty glass panel.
+    /// </summary>
+    public bool TableFills => !OverWorld;
+
+    /// <summary>The slots left empty under the rows of a table that fills the column: none over the world, and none with no rows, when <see cref="Empty"/> fills it.</summary>
+    public int EmptySlots => TableFills && !Rows.IsEmpty ? Math.Max(0, TableSlots - Rows.Length) : 0;
+
     /// <summary>
     /// The screen for <paramref name="view"/>. A phase this build doesn't know still shows the banner. With <paramref name="stage"/>, which has
     /// had the view, a fight in the world keeps the world (<see cref="World.StageDirector.InWorld"/>), and the party is the one the stage lets

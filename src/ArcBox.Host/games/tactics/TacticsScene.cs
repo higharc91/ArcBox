@@ -41,7 +41,6 @@ namespace ArcBox.Host.Games.Tactics;
 public partial class TacticsScene : Control, IGameScene, IContentScene, ISignalingScene, IAudioScene, IConnectionScene
 {
     /// <summary>A table this short leaves its rows at this share of the height, not stretched into slabs.</summary>
-    private const int RowSlots = 6;
 
     private const string BasePack = "base";
 
@@ -752,6 +751,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _empty.Visible = screen.Empty is not null;
         _empty.Text = screen.Empty ?? "";
         _rows.Visible = screen.Empty is null;
+        _table.SizeFlagsVertical = _rows.SizeFlagsVertical = _empty.SizeFlagsVertical = screen.TableFills ? SizeFlags.ExpandFill : SizeFlags.ShrinkBegin;
         ShowRows(screen);
         _overWorld = screen.OverWorld;
         var walking = ShowWorld(screen);
@@ -1050,8 +1050,9 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         }
         var frame = _player.Frame(_terrain);
         var units = UnitPlan.Build(shown, _terrain, _unitArt, fit, frame.Places, frame.Poses);
-        _board.SetUnits(MarkRule.Apply(units, frame, _unitArt, MarkRule.Shown(StageStep.Off)), _unitArt);
-        _board.SetEffects(frame.Draws, frame.Shake);
+        var (marked, draws) = MarkRule.Apply(units, frame, _unitArt, MarkRule.Shown(StageStep.Off, covered: false));
+        _board.SetUnits(marked, _unitArt);
+        _board.SetEffects(draws, frame.Shake);
         _said = BattleHud.Of(shown, _player.Live ?? shown, _banner, _said, _player.AiFinished);
         _hud?.Show(_said, units, fit, _player.AiFinished);
     }
@@ -1093,8 +1094,9 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         var beat = _player.Frame(_terrain);
         var stage = StageFrame.Of(beat, director, where, walk.Fit, _stageShake);
         var units = stage.Shown(UnitPlan.Build(shown, _terrain, _unitArt, stage.Fit, stage.Places, stage.Poses, where.Origin));
-        board.SetUnits(MarkRule.Apply(units, beat, _unitArt, MarkRule.Shown(director.Stage)), _unitArt);
-        board.SetEffects(beat.Draws, System.Numerics.Vector2.Zero);
+        var (marked, draws) = MarkRule.Apply(units, beat, _unitArt, MarkRule.Shown(director.Stage, _overWorld));
+        board.SetUnits(marked, _unitArt);
+        board.SetEffects(draws, System.Numerics.Vector2.Zero);
         board.GridAlpha = director.GridAlpha;
         _stageShake = beat.Shake;      // on the camera: the world and the board shake together
         _said = BattleHud.Of(shown, _player.Live ?? shown, _banner, _said, _player.AiFinished);
@@ -1116,10 +1118,10 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             _rows.AddChild(Row(row, Accent(screen.Tone, ArcTheme.Gold)));
         }
-        if (!screen.Rows.IsEmpty && screen.Rows.Length < RowSlots)
+        if (screen.EmptySlots > 0)
         {
             var filler = ArcTheme.Spacer(false, true);
-            filler.SizeFlagsStretchRatio = RowSlots - screen.Rows.Length;
+            filler.SizeFlagsStretchRatio = screen.EmptySlots;
             _rows.AddChild(filler);
         }
     }
