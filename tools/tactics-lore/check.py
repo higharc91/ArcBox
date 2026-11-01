@@ -389,12 +389,20 @@ def _scenes(defs: dict, scenes: list, rules: dict | None, errors: Errors) -> Non
     tagged = {"background": set(defs["background"]) | (rules["backgrounds"] if rules else set()),
               "race": rules["races"] if rules else None, "class": rules["classes"] if rules else None}
     covered: dict[str, set[str]] = {}
+    aftermath: set[str] = set()
 
     for scene, loc in scenes:
         where, _, ptr = loc.partition("#")
         beat = defs["beat"].get(scene["beat"])
         if beat is None:
             errors.add(where, f"{ptr}/beat", f"no beat has the id '{scene['beat']}'")
+        # A battle beat plays its lead-in, then the fight, then its aftermath, so the two kinds can't interleave in file order.
+        if scene.get("after"):
+            if beat is not None and beat[0]["kind"] != "battle":
+                errors.add(where, f"{ptr}/after", f"only a battle beat has an aftermath, and '{scene['beat']}' is a {beat[0]['kind']} beat")
+            aftermath.add(scene["beat"])
+        elif scene["beat"] in aftermath:
+            errors.add(where, ptr, f"a lead-in of '{scene['beat']}' comes after one of its aftermath scenes; move it before them")
         if "place" in scene and scene["place"] not in defs["place"]:
             errors.add(where, f"{ptr}/place", f"no place has the id '{scene['place']}'")
         for i, who in enumerate(scene["cast"]):

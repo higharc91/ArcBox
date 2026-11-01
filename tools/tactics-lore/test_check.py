@@ -98,6 +98,32 @@ class CheckTests(unittest.TestCase):
         # The well-formed scene (a check, a tagged option, a flag the beat sets) raises nothing.
         self.assertFalse([e for e in errors if "/scenes/0/" in e], errors)
 
+    def test_after_is_only_for_a_battle_beat(self):
+        def scene(id_: str, beat: str, after: bool | None) -> dict:
+            s = {"id": id_, "beat": beat, "cast": ["narrator"], "start": "n",
+                 "nodes": [{"id": "n", "lines": [{"id": f"{id_}_1", "speaker": "narrator", "text": "t"}], "end": True}]}
+            if after is not None:
+                s["after"] = after
+            return s
+
+        with tempfile.TemporaryDirectory() as tmp:
+            pack = Path(tmp) / "after"
+            (pack / "scenes").mkdir(parents=True)
+            (pack / "pack.json").write_text(json.dumps(
+                {"id": "after", "loreVersion": 1, "requires": ["story"], "files": ["scenes/after.json"]}))
+            (pack / "scenes" / "after.json").write_text(json.dumps({"scenes": [
+                scene("lead", "fight", None),          # a battle's lead-in, then its aftermath: fine
+                scene("won", "fight", True),
+                scene("late_lead", "fight", False),    # a lead-in after the aftermath
+                scene("found", "find_mill", True),     # a discovery has no fight to come after
+            ]}))
+            errors = check.check([FIXTURES / "valid" / "base", FIXTURES / "story", pack])
+        mine = sorted(e.split("#")[1] for e in errors if "scenes/after.json" in e.split("#")[0])
+        self.assertEqual(mine, [
+            "/scenes/2: a lead-in of 'fight' comes after one of its aftermath scenes; move it before them",
+            "/scenes/3/after: only a battle beat has an aftermath, and 'find_mill' is a discovery beat",
+        ])
+
     def test_art_keys_follow_the_rules_engine_harvest(self):
         keys = check.art_keys(check.CONTENT)
         self.assertIn("chapters.mirewood", keys)

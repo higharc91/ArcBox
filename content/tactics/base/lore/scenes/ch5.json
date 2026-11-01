@@ -277,6 +277,7 @@
     {
       "id": "ch5_gate_duel_after",
       "beat": "ch5_gate_duel",
+      "after": true,
       "title": "He held",
       "cast": [
         "narrator",
@@ -1147,6 +1148,7 @@
     {
       "id": "ch5_ritual_after",
       "beat": "ch5_the_ritual",
+      "after": true,
       "title": "The Heart of the Flame",
       "cast": [
         "narrator",

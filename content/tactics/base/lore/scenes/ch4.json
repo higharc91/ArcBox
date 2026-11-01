@@ -631,6 +631,7 @@
     {
       "id": "ch4_caves_after",
       "beat": "ch4_crystal_caves",
+      "after": true,
       "title": "The Tower Door",
       "cast": [
         "narrator",
@@ -1084,6 +1085,7 @@
     {
       "id": "ch4_rime_tower_after",
       "beat": "ch4_rime_tower",
+      "after": true,
       "title": "The doctor, stopped",
       "cast": [
         "narrator",

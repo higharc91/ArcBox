@@ -116,6 +116,7 @@
     {
       "id": "ch2_journal",
       "beat": "ch2_drowned_waystation",
+      "after": true,
       "title": "The Captured Journal",
       "cast": [
         "narrator",
