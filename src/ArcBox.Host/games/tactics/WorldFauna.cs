@@ -5,11 +5,10 @@ using Tactics.Presentation.World;
 
 namespace ArcBox.Host.Games.Tactics;
 
-/// <summary>Small, deterministic world actors. Their routes stay on clear tiles; farm animals are kept inside inferred fence pens.</summary>
+/// <summary>Small, deterministic world actors. Where they may go is <see cref="FaunaRange"/>'s; art bigger than the world is shrunk by <see cref="SpriteShrink"/>.</summary>
 internal sealed partial class WorldFauna : Node2D
 {
     private const int BlockDepth = 64;
-    private static readonly (int X, int Y)[] Steps = [(0, -1), (1, 0), (0, 1), (-1, 0)];
 
     private sealed class Actor
     {
@@ -48,9 +47,7 @@ internal sealed partial class WorldFauna : Node2D
         _map = map;
         var artIndex = ArtIndex.Load(packRoot);
         var animals = map.Props.Where(p => WorldAnimalIds.Contains(p.Id) && map.InBounds(p.At)).ToArray();
-        var occupied = map.Props.Where(p => !WorldAnimalIds.Contains(p.Id)).Select(p => p.At).ToHashSet();
-        var fences = map.Props.Where(p => p.Id == "fence").Select(p => p.At).ToHashSet();
-        var safe = BuildSafeTiles(map, animals, occupied, fences);
+        var free = FaunaRange.Free(map, artIndex.PropHeight);
 
         foreach (var prop in animals)
         {
@@ -64,12 +61,7 @@ internal sealed partial class WorldFauna : Node2D
                 _ => throw new InvalidOperationException($"No world movement profile for '{prop.Id}'."),
             };
 
-            // Any creature initially inside a complete fence run uses that enclosure, not only the farm stock.
-            var pen = EnclosingPen(prop.At, fences, map);
-            var domain = safe.Where(t => (pen?.Contains(t) ?? Distance(t, prop.At) <= radius)
-                && (!water || (map[t].Flags & TileFlags.Water) != 0))
-                .Concat(!water || (map[prop.At].Flags & TileFlags.Water) != 0 ? [prop.At] : [])
-                .Distinct().OrderBy(t => t).ToArray();
+            var domain = FaunaRange.Domain(map, free, prop.At, radius, water).ToArray();
             var art = artIndex.Prop(WorldAnimalIds.AnimationFamily(prop.Id),
                 prop.Variant is null ? map.Materials : map.Materials.Prepend(prop.Variant));
             if (art is null)
@@ -81,14 +73,25 @@ internal sealed partial class WorldFauna : Node2D
             if (image.IsEmpty())
                 continue;
 
+            // Art made bigger than the world is shrunk to whole pixels once, here, at the manifest's scale.
+            var (frameWidth, frameHeight, anchorX, anchorY) = (art.Width, art.Height, art.AnchorX, art.AnchorY);
+            if (art.Scale < 1)
+            {
+                image.Convert(Image.Format.Rgba8);
+                var strip = SpriteShrink.Shrink(image.GetData(), image.GetWidth(), image.GetHeight(), art.Image.Frames, art.Scale);
+                (anchorX, anchorY) = SpriteShrink.Anchor(art.AnchorX, art.AnchorY, art.Width, art.Height, art.Scale);
+                image = Image.CreateFromData(strip.Width, strip.Height, false, Image.Format.Rgba8, strip.Rgba);
+                (frameWidth, frameHeight) = (strip.FrameWidth, strip.Height);
+            }
+
             var sprite = new Sprite2D
             {
                 Name = $"fauna_{prop.Id}_{prop.At.X}_{prop.At.Y}",
                 Texture = ImageTexture.CreateFromImage(image),
                 Centered = false,
                 RegionEnabled = true,
-                RegionRect = new Rect2(0, 0, art.Width, art.Height),
-                Offset = new Vector2(-art.AnchorX, -art.AnchorY),
+                RegionRect = new Rect2(0, 0, frameWidth, frameHeight),
+                Offset = new Vector2(-anchorX, -anchorY),
                 Modulate = light,
                 TextureFilter = CanvasItem.TextureFilterEnum.Nearest,
                 ZIndex = DepthAt(prop.At),
@@ -99,8 +102,8 @@ internal sealed partial class WorldFauna : Node2D
             {
                 Id = prop.Id, Home = prop.At, Current = prop.At, Target = prop.At,
                 Sprite = sprite, Random = new Random(seed), Domain = domain, WaterOnly = water,
-                RestOffset = new Vector2(-art.AnchorX, -art.AnchorY),
-                FrameWidth = art.Width, FrameHeight = art.Height, Frames = art.Image.Frames,
+                RestOffset = new Vector2(-anchorX, -anchorY),
+                FrameWidth = frameWidth, FrameHeight = frameHeight, Frames = art.Image.Frames,
                 AnimationFps = (float)art.Image.Fps,
                 Speed = speed, PauseMin = pauseMin, PauseMax = pauseMax,
                 From = Foot(prop.At), To = Foot(prop.At),
@@ -166,41 +169,13 @@ internal sealed partial class WorldFauna : Node2D
             .OrderBy(_ => actor.Random.Next()).ToArray();
         foreach (var destination in choices.Take(24))
         {
-            var path = FindPath(actor.Current, destination, actor.Domain.ToHashSet());
-            if (path.Count == 0)
+            var path = FaunaRange.Path(_map, actor.Current, destination, actor.Domain.ToHashSet());
+            if (path.IsEmpty)
                 continue;
             actor.Path = new Queue<Tile>(path);
             return;
         }
         actor.PauseUntil = _clock + 2;
-    }
-
-    private List<Tile> FindPath(Tile from, Tile to, HashSet<Tile> allowed)
-    {
-        var previous = new Dictionary<Tile, Tile> { [from] = from };
-        var queue = new Queue<Tile>();
-        queue.Enqueue(from);
-        while (queue.Count > 0)
-        {
-            var tile = queue.Dequeue();
-            if (tile == to)
-                break;
-            foreach (var (dx, dy) in Steps)
-            {
-                var next = new Tile(tile.X + dx, tile.Y + dy);
-                if (!allowed.Contains(next) || previous.ContainsKey(next))
-                    continue;
-                previous[next] = tile;
-                queue.Enqueue(next);
-            }
-        }
-        if (!previous.ContainsKey(to))
-            return [];
-        var path = new List<Tile>();
-        for (var at = to; at != from; at = previous[at])
-            path.Add(at);
-        path.Reverse();
-        return path;
     }
 
     private void AnimatePose(Actor actor, bool moving)
@@ -230,65 +205,6 @@ internal sealed partial class WorldFauna : Node2D
         var bx = tile.X / WorldTuning.BlockSize;
         var by = tile.Y / WorldTuning.BlockSize;
         return (bx + by) * BlockDepth + tile.X % WorldTuning.BlockSize + tile.Y % WorldTuning.BlockSize + 1;
-    }
-
-    private static HashSet<Tile> BuildSafeTiles(BattleMap map, PropPlacement[] animals, HashSet<Tile> occupied, HashSet<Tile> fences)
-    {
-        var safe = new HashSet<Tile>();
-        var expanded = new HashSet<Tile>(occupied);
-        foreach (var prop in map.Props.Where(p => p.Id != "fence" && !WorldAnimalIds.Contains(p.Id)))
-        {
-            var id = prop.Id;
-            var radius = id.Contains("tree", StringComparison.Ordinal) || id.Contains("pine", StringComparison.Ordinal)
-                || id.Contains("boulder", StringComparison.Ordinal) || id.Contains("house", StringComparison.Ordinal)
-                || id.Contains("cart", StringComparison.Ordinal) || id.Contains("rock_cluster", StringComparison.Ordinal) ? 1 : 0;
-            for (var dy = -radius; dy <= radius; dy++)
-                for (var dx = -radius; dx <= radius; dx++)
-                    expanded.Add(new Tile(prop.At.X + dx, prop.At.Y + dy));
-        }
-        foreach (var animal in animals)
-            expanded.Remove(animal.At);
-
-        for (var y = 0; y < map.Height; y++)
-            for (var x = 0; x < map.Width; x++)
-            {
-                var tile = new Tile(x, y);
-                var info = map[tile];
-                if ((info.Flags & (TileFlags.Deep | TileFlags.Impassable)) == 0 && !expanded.Contains(tile) && !fences.Contains(tile))
-                    safe.Add(tile);
-            }
-        return safe;
-    }
-
-    private static HashSet<Tile>? EnclosingPen(Tile animal, HashSet<Tile> fences, BattleMap map)
-    {
-        (int Left, int Top, int Right, int Bottom, int Area)? best = null;
-        for (var left = Math.Max(0, animal.X - 18); left < animal.X; left++)
-            for (var right = animal.X + 1; right <= Math.Min(map.Width - 1, animal.X + 18); right++)
-                for (var top = Math.Max(0, animal.Y - 18); top < animal.Y; top++)
-                    for (var bottom = animal.Y + 1; bottom <= Math.Min(map.Height - 1, animal.Y + 18); bottom++)
-                    {
-                        var w = right - left - 1;
-                        var h = bottom - top - 1;
-                        var area = w * h;
-                        if (w < 3 || h < 3 || best is { Area: var bestArea } && area >= bestArea)
-                            continue;
-                        var horizontalTop = Enumerable.Range(left, right - left + 1).Count(x => fences.Contains(new Tile(x, top)));
-                        var horizontalBottom = Enumerable.Range(left, right - left + 1).Count(x => fences.Contains(new Tile(x, bottom)));
-                        var verticalLeft = Enumerable.Range(top, bottom - top + 1).Count(y => fences.Contains(new Tile(left, y)));
-                        var verticalRight = Enumerable.Range(top, bottom - top + 1).Count(y => fences.Contains(new Tile(right, y)));
-                        if (horizontalTop < (right - left + 1) * 0.62 || horizontalBottom < (right - left + 1) * 0.62
-                            || verticalLeft < (bottom - top + 1) * 0.62 || verticalRight < (bottom - top + 1) * 0.62)
-                            continue;
-                        best = (left, top, right, bottom, area);
-                    }
-        if (best is not { } pen)
-            return null;
-        var result = new HashSet<Tile>();
-        for (var y = pen.Top + 1; y < pen.Bottom; y++)
-            for (var x = pen.Left + 1; x < pen.Right; x++)
-                result.Add(new Tile(x, y));
-        return result;
     }
 
     private static int Distance(Tile a, Tile b) => Math.Abs(a.X - b.X) + Math.Abs(a.Y - b.Y);

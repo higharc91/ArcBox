@@ -28,8 +28,11 @@ public sealed record ArtImage(string Path, int Frames, double Fps, int Height = 
     public float FrameU(float u, int frame) => (u + frame) / Frames;
 }
 
-/// <summary>A prop's sprite. The anchor is its ground contact pixel, which stands on the tile's centre.</summary>
-public sealed record PropArt(ArtImage Image, int Width, int Height, int AnchorX, int AnchorY, PropLight? Light = null, int TileHeight = 1);
+/// <summary>
+/// A prop's sprite. The anchor is its ground contact pixel, which stands on the tile's centre. <see cref="Scale"/> is the manifest's
+/// <c>scale</c>: art made bigger than the world is drawn that much smaller (<see cref="World.SpriteShrink"/>); 1 for most props.
+/// </summary>
+public sealed record PropArt(ArtImage Image, int Width, int Height, int AnchorX, int AnchorY, PropLight? Light = null, int TileHeight = 1, double Scale = 1);
 
 /// <summary>A hazard's sprites: <see cref="Ground"/> on the tile top, <see cref="Over"/>, if any, above the units.</summary>
 public sealed record HazardArt(ArtImage Ground, ArtImage? Over, Vector2 Frame, Vector2 Origin, Vector2 OverFrame, Vector2 OverOrigin);
@@ -46,7 +49,7 @@ public sealed class ArtIndex
 
     private sealed record PropFamily(ImmutableArray<(string Name, string Path)> Variants, int Frames, double Fps,
         int Width, int Height, int AnchorX, int AnchorY, int TileHeight, PropLight? Light, ImmutableDictionary<string, Rgb> Colours,
-        ImmutableDictionary<string, PropLook> Looks);
+        ImmutableDictionary<string, PropLook> Looks, double Scale);
 
     /// <summary>A variant drawn at a size and anchor of its own (the manifest's <c>looks</c>): a new look added beside older, smaller art.</summary>
     private sealed record PropLook(int Width, int Height, int AnchorX, int AnchorY);
@@ -111,7 +114,7 @@ public sealed class ArtIndex
         var look = prop.Looks.GetValueOrDefault(name) ?? new PropLook(prop.Width, prop.Height, prop.AnchorX, prop.AnchorY);
         return new PropArt(new ArtImage(path, prop.Frames, prop.Fps, look.Height), look.Width, look.Height, look.AnchorX, look.AnchorY,
             prop.Light is { } light ? light with { Colour = prop.Colours.GetValueOrDefault(name, light.Colour) } : null,
-            prop.TileHeight);
+            prop.TileHeight, prop.Scale);
     }
 
     /// <summary>The height of the prop in tiles, from the manifest (default 1).</summary>
@@ -223,7 +226,8 @@ public sealed class ArtIndex
                 e.TryGetProperty("looks", out var looks)
                     ? looks.EnumerateObject().ToImmutableDictionary(l => l.Name, l => new PropLook(l.Value.GetProperty("size")[0].GetInt32(), l.Value.GetProperty("size")[1].GetInt32(),
                         l.Value.GetProperty("anchor")[0].GetInt32(), l.Value.GetProperty("anchor")[1].GetInt32()), StringComparer.Ordinal)
-                    : ImmutableDictionary<string, PropLook>.Empty);
+                    : ImmutableDictionary<string, PropLook>.Empty,
+                e.TryGetProperty("scale", out var scale) ? scale.GetDouble() : 1);
         }
     }
 
