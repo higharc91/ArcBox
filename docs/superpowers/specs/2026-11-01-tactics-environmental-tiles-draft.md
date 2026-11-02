@@ -1,6 +1,6 @@
 # Wardenflame Tactics: environmental tiles that react to spells
 
-> **DRAFT, not approved.** Written on 2026-11-01 for the user to review, as the handoff's §8 asks (item 6). No code has been written. Nothing here changes rules, balance or the phone contract until the user says so. Every number below is a proposal.
+> **Agreed design.** Written as a draft on 2026-11-01. The user answered every question on 2026-11-02 (the table at the end). Build from `docs/superpowers/plans/2026-11-02-tactics-environmental-tiles.md`, which folds those answers in and wins where the two differ.
 
 ## Summary
 
