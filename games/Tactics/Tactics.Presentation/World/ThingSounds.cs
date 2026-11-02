@@ -54,6 +54,7 @@ public static class ThingSounds
         ThingEvents.Unlocked => ["lock_open"],
         ThingEvents.Failed => ["lock_fail"],
         ThingEvents.Revealed => ["secret_found"],
+        ThingEvents.Noticed => ["notice", "secret_found"],      // a quieter "notice" once the pack has one (design §7.6)
         ThingEvents.Spotted => ["trap_spotted"],
         ThingEvents.Sprung => ["trap_spring"],
         ThingEvents.Disarmed => ["trap_disarm"],
@@ -71,7 +72,7 @@ public static class ThingSounds
     public static ImmutableArray<string> All()
     {
         string[] events = [ThingEvents.Opened, ThingEvents.Toggled, ThingEvents.Unlocked, ThingEvents.Failed, ThingEvents.Revealed, ThingEvents.Spotted,
-            ThingEvents.Sprung, ThingEvents.Disarmed, ThingEvents.Taken, ThingEvents.Read, ThingEvents.Used, ThingEvents.Looked];
+            ThingEvents.Sprung, ThingEvents.Disarmed, ThingEvents.Taken, ThingEvents.Read, ThingEvents.Used, ThingEvents.Looked, ThingEvents.Noticed];
         string[] states = [InteractableKinds.Opened, InteractableKinds.Closed];
         return [.. events.SelectMany(e => InteractableKinds.All.Keys.SelectMany(k => states.SelectMany(s => Wanted(e, k, s)))).Distinct(StringComparer.Ordinal)];
     }

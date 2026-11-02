@@ -126,7 +126,7 @@ public sealed record RollReveal(string Roller, int Face, bool Landed, string Sum
 /// <summary>A skill check, full over the dimmed world (mockup 03).</summary>
 /// <param name="Heading">"Skill check".</param>
 /// <param name="Skill">"Persuasion".</param>
-/// <param name="Dc">"DC 15".</param>
+/// <param name="Dc">"DC 15", or "DC hidden" for an active Search, whose DC isn't shown (interactables design §7.4).</param>
 /// <param name="Title">The option it's for, in quotes.</param>
 /// <param name="Cards">Who can roll, in member order.</param>
 /// <param name="Clock">The countdown on picking who rolls, or null.</param>
@@ -383,7 +383,7 @@ public sealed record StoryScreen(int Seq, string Scene, string Title, string Sta
     {
         var cards = check.Cards.IsDefault ? [] : check.Cards;
         var chosen = cards.FirstOrDefault(c => c.Member == check.Chosen);
-        var roll = check.Roll is { } result ? Reveal(result, chosen?.Name ?? check.Chosen ?? "", revealed) : null;
+        var roll = check.Roll is { } result ? Reveal(result, chosen?.Name ?? check.Chosen ?? "", revealed, hidden: check.Dc is null) : null;
         string? footer = null;
         if (roll is null)
         {
@@ -393,7 +393,7 @@ public sealed record StoryScreen(int Seq, string Scene, string Title, string Sta
                 : check.Deadline is null ? "Waiting for a phone to come back"
                 : votes > 0 ? string.Create(CultureInfo.InvariantCulture, $"Vote for who rolls · {votes} voted") : "Vote for who rolls";
         }
-        return new CheckPanel("Skill check", SkillName(check.Skill), string.Create(CultureInfo.InvariantCulture, $"DC {check.Dc}"),
+        return new CheckPanel("Skill check", SkillName(check.Skill), check.Dc is { } dc ? string.Create(CultureInfo.InvariantCulture, $"DC {dc}") : HiddenDc,
             Typeset($"“{check.Title}”"),
             [.. cards.Select(c => new CheckCard(c.Member, c.Name, c.Player, c.Sprite, Signed(c.Bonus), c.Note,
                 c.Member == check.Chosen ? "Rolls for the party" : c.Here ? null : $"{c.Player} away", c.Member == check.Chosen, c.Here, c.Votes,
@@ -405,14 +405,24 @@ public sealed record StoryScreen(int Seq, string Scene, string Title, string Sta
     /// The roll <paramref name="seconds"/> after it showed: the die tumbles through other faces for <see cref="Tumble"/>, then lands on its own,
     /// with the sum and the verdict.
     /// </summary>
-    public static RollReveal Reveal(RollResult roll, string roller, double seconds)
+    /// <remarks>
+    /// With <paramref name="hidden"/> (an active Search, whose DC isn't shown) the sum has no "vs DC", and the verdict says what the search did:
+    /// "Found something" or "Nothing found".
+    /// </remarks>
+    public static RollReveal Reveal(RollResult roll, string roller, double seconds, bool hidden = false)
     {
         var landed = seconds >= Tumble;
         var face = landed ? roll.Kept : (roll.Kept + 7 * (1 + (int)(Math.Max(0, seconds) * TumbleFaces))) % 20 + 1;
         var modifier = roll.Modifier < 0 ? $"{Minus} {-roll.Modifier}" : $"+ {roll.Modifier}";
-        return new RollReveal(roller, face, landed, string.Create(CultureInfo.InvariantCulture, $"{roll.Kept} {modifier} = {roll.Total} vs DC {roll.Vs}"),
-            roll.Success ? "Success" : "Failure", roll.Success);
+        var sum = hidden
+            ? string.Create(CultureInfo.InvariantCulture, $"{roll.Kept} {modifier} = {roll.Total}")
+            : string.Create(CultureInfo.InvariantCulture, $"{roll.Kept} {modifier} = {roll.Total} vs DC {roll.Vs}");
+        var verdict = hidden ? roll.Success ? "Found something" : "Nothing found" : roll.Success ? "Success" : "Failure";
+        return new RollReveal(roller, face, landed, sum, verdict, roll.Success);
     }
+
+    /// <summary>What a check whose DC isn't shown says in its place.</summary>
+    public const string HiddenDc = "DC hidden";
 
     /// <summary>A bonus with its sign: "+5", "+0", "−1".</summary>
     private static string Signed(int bonus) => bonus < 0

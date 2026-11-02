@@ -56,6 +56,10 @@ public sealed class ThingShow
     private const float LabelGap = 18;          // below the feet: just under the tile's front corner
     private const string Skull = "skull";
     private const string Found = "surprise";
+    private const string Noticed = "question";
+
+    /// <summary>The effect a notice wants as it's noticed, the art brief's (§7.6); until the pack has it, the find's puff.</summary>
+    public const string NoticeFx = "fx.notice";
 
     /// <summary>The marker's gold, as the story's: the palette's.</summary>
     public static readonly Rgb Gold = UnitPlan.ActiveRing;
@@ -65,6 +69,12 @@ public sealed class ThingShow
 
     /// <summary>A disarmed or used-up thing's marker.</summary>
     public static readonly Rgb Spent = Rgb.Hex("#9aa0a6");
+
+    /// <summary>A notice's marker (design §7.6): a cool clue-blue, apart from the gold of things to use and the red of traps.</summary>
+    public static readonly Rgb Clue = Rgb.Hex("#7fc8e8");
+
+    /// <summary>A found hidden path's marker: a trail green, flat on the ground.</summary>
+    public static readonly Rgb Trail = Rgb.Hex("#9ad46a");
 
     private static readonly Rgb White = new(1.8f, 1.8f, 1.8f);
     private static readonly Rgb Red = new(1.6f, 0.65f, 0.6f);
@@ -77,7 +87,7 @@ public sealed class ThingShow
         /// <summary>How long it has anything to show.</summary>
         public double Seconds => What switch
         {
-            ThingEvents.Revealed => FoundSeconds,
+            ThingEvents.Revealed or ThingEvents.Noticed => FoundSeconds,
             _ when Appears => Math.Max(PopSeconds, 1.0),
             ThingEvents.Taken or ThingEvents.Opened when Gone => VanishSeconds,
             _ => Math.Max(Strip?.Seconds ?? 0, 1.0),
@@ -114,7 +124,7 @@ public sealed class ThingShow
 
     /// <summary>The events that change what a thing is drawn as. The rest (an unlock, a failure, a look) leave it as it stands.</summary>
     private static readonly ImmutableHashSet<string> Changes = [ThingEvents.Opened, ThingEvents.Toggled, ThingEvents.Sprung, ThingEvents.Disarmed,
-        ThingEvents.Used, ThingEvents.Read, ThingEvents.Taken, ThingEvents.Revealed, ThingEvents.Spotted];
+        ThingEvents.Used, ThingEvents.Read, ThingEvents.Taken, ThingEvents.Revealed, ThingEvents.Spotted, ThingEvents.Noticed];
 
     /// <summary>
     /// A show on <paramref name="terrain"/>, drawing with <paramref name="things"/>. With <paramref name="captions"/> (the art check), every
@@ -179,12 +189,13 @@ public sealed class ThingShow
     {
         var changes = Changes.Contains(happened.What) || was is null;
         var to = changes ? after ?? was! : was ?? after!;
-        var from = happened.What == ThingEvents.Revealed ? null : was;
+        var from = happened.What is ThingEvents.Revealed or ThingEvents.Noticed ? null : was;
         var changed = changes && from is not null && after is not null && from.State != after.State;
         var strip = changed ? _things.Strip(after!, from!.State, after!.State) : null;
         var fx = happened.What switch
         {
             ThingEvents.Revealed => "fx.poof",
+            ThingEvents.Noticed => _fx?.Clip(NoticeFx) is not null ? NoticeFx : "fx.poof",
             ThingEvents.Sprung => "fx.smoke",
             ThingEvents.Disarmed => "fx.dust",
             ThingEvents.Opened or ThingEvents.Toggled when changed && KindOf(to)?.Family == InteractableFamily.Passage => "fx.dust",
@@ -323,6 +334,7 @@ public sealed class ThingShow
 
         var emote = waiting ? null
             : moment is { What: ThingEvents.Revealed } && t < FoundSeconds ? _art.Emote(Found)
+            : moment is { What: ThingEvents.Noticed } && t < FoundSeconds ? _art.Emote(Noticed)
             : Warns(thing) ? _art.Emote(Skull)
             : null;
         var head = marker?.Slab is { } slab ? new Vector2(drawn.X, slab.Min(p => p.Y) - 2)
@@ -441,6 +453,8 @@ public sealed class ThingShow
         ImmutableArray<Vector2> diamond = [feet + new Vector2(0, -quarter), feet + new Vector2(half, 0), feet + new Vector2(0, quarter), feet + new Vector2(-half, 0)];
         var (line, fill) = thing.Kind == "trap"
             ? thing.State switch { "armed" => (Danger, Danger), "sprung" => (Danger, Spent), _ => (Spent, Spent) }
+            : kind?.Family == InteractableFamily.Notice ? (Clue, Clue)
+            : kind?.Family == InteractableFamily.Path ? (Trail, Trail)
             : thing.State is InteractableKinds.Used or InteractableKinds.Taken ? (Spent, Spent) : (Gold, Gold);
         var fillAlpha = thing.Blocks ? 0.4f : thing.Kind == "trap" && thing.State == "sprung" ? 0.3f : 0.12f;
 
@@ -511,6 +525,11 @@ public sealed class ThingShow
             var facing = thing.Facing == "sw" ? "" : $" ({thing.Facing})";
             return new ThingLabel([shown + facing, from], at, pick.Source == ThingSource.Art ? Gold : ThingLook.Plain);
         }
-        return pick.Sprite is null ? new ThingLabel([thing.Name], at, Gold) : null;
+        return pick.Sprite is null ? new ThingLabel([thing.Name], at, KindOf(thing)?.Family switch
+        {
+            InteractableFamily.Notice => Clue,
+            InteractableFamily.Path => Trail,
+            _ => Gold,
+        }) : null;
     }
 }

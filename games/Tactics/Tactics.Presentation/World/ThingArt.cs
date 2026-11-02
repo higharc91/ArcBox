@@ -60,8 +60,12 @@ public sealed class ThingArt
     /// <summary>Props-shaped sets, read when they're there.</summary>
     private static readonly string[] PropSets = ["props", "dungeon", Set];
 
-    /// <summary>What lies flat when its art doesn't say (art brief §4.2: "ground layer").</summary>
+    /// <summary>What lies flat when its art doesn't say (art brief §4.2: "ground layer"), with every notice and hidden path (§7.6).</summary>
     private static readonly ImmutableHashSet<string> FlatKinds = ["sack", "cache", "note", "trap"];
+
+    /// <summary>True when a thing of <paramref name="kind"/> lies flat when its art doesn't say: tracks, a stain, a path are on the ground.</summary>
+    public static bool LiesFlat(string kind)
+        => FlatKinds.Contains(kind) || InteractableKinds.Of(kind)?.Family is InteractableFamily.Notice or InteractableFamily.Path;
 
     private const string Transition = "transition";
 
@@ -110,8 +114,8 @@ public sealed class ThingArt
         if (Find(own, exact: true) is { } art)
             return new ThingPick(ThingSource.Art, own, SpriteOf(art.Asset, art.File), art.Asset.Flat);
         if (thing.StandIn is { } standIn && Find(standIn, exact: false) is { } stand)
-            return new ThingPick(ThingSource.StandIn, standIn, SpriteOf(stand.Asset, stand.File), FlatKinds.Contains(thing.Kind) || stand.Asset.Flat);
-        return new ThingPick(ThingSource.Marker, null, null, FlatKinds.Contains(thing.Kind));
+            return new ThingPick(ThingSource.StandIn, standIn, SpriteOf(stand.Asset, stand.File), LiesFlat(thing.Kind) || stand.Asset.Flat);
+        return new ThingPick(ThingSource.Marker, null, null, LiesFlat(thing.Kind));
     }
 
     /// <summary>

@@ -17,7 +17,8 @@ public sealed record ThingsDemoStep(string Label, double At, TacticsHostView Vie
 /// generated courtyard holding every kind in every state the art brief draws, each labelled with its art key and whether it was drawn from its
 /// own art, a stand-in or the plain marker, on two gallery screens; then, one by one, a chest opening, a hidden cache found, traps seen, set
 /// off and disarmed, a lever working a gate both ways, a locked door unlocked and opened, a secret door found and opened, and a pickup, a
-/// note and a shrine used. The views are the server's own shapes (<see cref="ThingView.Of"/>), so what's drawn is what a session would draw.
+/// note and a shrine used; then the hidden things of design §7: tracks noticed that lead to a cache, a rune sensed by Arcana, the other
+/// notices in a row, a hidden path through a hedge found, and an active Search with its hidden DC. The views are the server's own shapes (<see cref="ThingView.Of"/>), so what's drawn is what a session would draw.
 /// The user's art AI drops its set into <c>content/tactics/base/interactables/</c> and runs this to see it.
 /// </summary>
 public static class ThingsDemo
@@ -26,7 +27,7 @@ public static class ThingsDemo
     public const string Region = "things_demo";
 
     private const int Width = 88;
-    private const int Height = 88;
+    private const int Height = 112;
     private const int FloorHeight = 1;
     private const int WallHeight = 4;
     private static readonly string[] Materials = ["grass/lush", "flagstone/grey", "rock/grey"];
@@ -35,10 +36,19 @@ public static class ThingsDemo
     /// <summary>The kinds in the order the galleries show them, by family as the design's table has them.</summary>
     public static readonly ImmutableArray<string> Kinds =
         ["chest", "crate", "barrel", "sack", "cache", "door", "gate", "drawbridge", "secret_door", "lever", "note", "plaque", "book", "gravestone",
-         "signpost", "pickup", "shrine", "well", "altar", "ambient", "trap"];
+         "signpost", "pickup", "shrine", "well", "altar", "ambient", "trap", "hidden_path",
+         "tracks", "scratches", "disturbed_earth", "bloodstain", "draft", "carving", "rune", "remains"];
+
+    /// <summary>The first 21 kinds fill the first three galleries as they always have; these go where there's room.</summary>
+    private static readonly ImmutableDictionary<string, (int Gallery, int Column, int Row)> Placed = new Dictionary<string, (int, int, int)>
+    {
+        ["hidden_path"] = (2, 1, 3),
+        ["tracks"] = (3, 0, 0), ["scratches"] = (3, 0, 1), ["disturbed_earth"] = (3, 0, 2), ["bloodstain"] = (3, 0, 3),
+        ["draft"] = (3, 1, 0), ["carving"] = (3, 1, 1), ["rune"] = (3, 1, 2), ["remains"] = (3, 1, 3),
+    }.ToImmutableDictionary(StringComparer.Ordinal);
 
     /// <summary>The galleries: the tile where each starts. Each is apart from the rest, so a shot of one shows none of another.</summary>
-    private static readonly Tile[] Galleries = [new(14, 22), new(12, 50), new(14, 74)];
+    private static readonly Tile[] Galleries = [new(14, 22), new(12, 50), new(14, 74), new(14, 100)];
 
     /// <summary>Kinds to a column, and columns to a gallery.</summary>
     private const int Rows = 4, Columns = 2;
@@ -61,6 +71,15 @@ public static class ThingsDemo
     private static readonly Tile KeyAt = new(48, 58);
     private static readonly Tile NoteAt = new(50, 60);
     private static readonly Tile ShrineAt = new(52, 57);
+
+    // The hidden things (design §7), further south.
+    private static readonly Tile TracksAt = new(47, 70);
+    private static readonly Tile TrackCacheAt = new(53, 68);
+    private static readonly Tile RuneAt = new(62, 70);
+    private static readonly int HedgeY = 84;
+    private static readonly Tile PathAt = new(56, 84);
+    private static readonly Tile[] NoticeRow = [new(46, 96), new(49, 97), new(52, 96), new(55, 97), new(58, 96), new(61, 97)];
+    private static readonly Tile SearchedAt = new(67, 92);
 
     /// <summary>The states the art brief draws for a kind: its own, but a floor trap's are its trap's.</summary>
     public static ImmutableArray<string> StatesOf(InteractableKind kind)
@@ -110,7 +129,7 @@ public static class ThingsDemo
         for (var i = 0; i < Kinds.Length; i++)
         {
             var kind = InteractableKinds.Of(Kinds[i])!;
-            var (gallery, column, row) = (i / (Rows * Columns), i % (Rows * Columns) / Rows, i % Rows);
+            var (gallery, column, row) = Placed.TryGetValue(kind.Id, out var placed) ? placed : (i / (Rows * Columns), i % (Rows * Columns) / Rows, i % Rows);
             var states = StatesOf(kind);
             for (var s = 0; s < states.Length; s++)
                 all.Add(View(Def($"{kind.Id}.{states[s]}", kind.Id, Cell(gallery, column, row, s)), states[s]));
@@ -128,7 +147,10 @@ public static class ThingsDemo
         return all.ToImmutable();
     }
 
-    /// <summary>The demo's ground: grass, the galleries and the scenes on flagstone, and the walls the door, the gate and the secret door stand in.</summary>
+    /// <summary>
+    /// The demo's ground: grass, the galleries and the scenes on flagstone, and the walls the door, the gate and the secret door stand in; and a
+    /// hedge, grass that can't be walked, with one tile of it that can: the hidden path, which looks like the rest until it's found.
+    /// </summary>
     public static WorldGround Ground()
     {
         var tiles = new byte[Width * Height * 3];
@@ -138,9 +160,11 @@ public static class ThingsDemo
             {
                 var at = new Tile(x, y);
                 var wall = (x == GateWallX && y is >= 26 and <= 42 && at != GateAt) || (y == DoorWallY && x is >= 42 and <= 70 && at != DoorAt && at != SecretAt);
+                var hedge = y == HedgeY && x is >= 42 and <= 70;
                 var paved = x >= 40 || Near(floor, at);
                 var cell = tiles.AsSpan((y * Width + x) * 3, 3);
                 (cell[0], cell[1], cell[2]) = wall ? ((byte)WallHeight, Rock, (byte)TileFlags.Impassable)
+                    : hedge ? ((byte)FloorHeight, Grass, at == PathAt ? (byte)0 : (byte)TileFlags.Impassable)
                     : ((byte)FloorHeight, paved ? Flagstone : Grass, (byte)0);
             }
         var (columns, rows) = ((Width + WorldRegion.ChunkSize - 1) / WorldRegion.ChunkSize, (Height + WorldRegion.ChunkSize - 1) / WorldRegion.ChunkSize);
@@ -189,12 +213,13 @@ public static class ThingsDemo
             trapped = Def("trapped_crate", "crate", TrappedAt) with { Trap = new TrapDef(10, 10) },
             gate = Def("gate", "gate", GateAt, "se"), lever = Def("lever", "lever", LeverAt) with { Targets = ["gate"] },
             door = Def("door", "door", DoorAt) with { Lock = new LockDef(Pick: 12) }, secret = Def("secret", "secret_door", SecretAt),
-            key = Def("key", "pickup", KeyAt) with { Name = "iron key" }, note = Def("note", "note", NoteAt), shrine = Def("shrine", "shrine", ShrineAt);
+            key = Def("key", "pickup", KeyAt) with { Name = "iron key" }, note = Def("note", "note", NoteAt), shrine = Def("shrine", "shrine", ShrineAt),
+            path = Def("goat_track", "hidden_path", PathAt) with { Name = "goat track", Hidden = new HiddenDef(13, "survival") };
 
         var saves = new Dictionary<string, InteractableSave>(StringComparer.Ordinal);
         void Put(InteractableDef def, InteractableSave save) => (scene[def.Id], saves[def.Id]) = (ThingView.Of(def, save, NoFlags), save);
-        // The secret door is a plug of wall until it's found, as the server sends it (Interactables.Plugged).
-        ImmutableArray<WallPlug> Plugs() => [.. new[] { secret }.Where(d => Interactables.Plugged(d, saves.GetValueOrDefault(d.Id) ?? Interactables.Initial(d), NoFlags))
+        // The secret door is a plug of wall until it's found, as the server sends it (Interactables.Plugged), and the hidden path one of hedge.
+        ImmutableArray<WallPlug> Plugs() => [.. new[] { secret, path }.Where(d => Interactables.Plugged(d, saves.GetValueOrDefault(d.Id) ?? Interactables.Initial(d), NoFlags))
             .Select(d => new WallPlug(d.At, d.Facing ?? "sw"))];
         Put(chest, new InteractableSave("closed"));
         Put(gate, new InteractableSave("closed"));
@@ -299,6 +324,56 @@ public static class ThingsDemo
         Add("taken", "You take the iron key.", 1.5, [(0.05, "things-taken-a"), (0.2, "things-taken-b"), (1.0, "things-taken-d")]);
         Happen((note, ThingEvents.Read, new InteractableSave("read")), (shrine, ThingEvents.Used, new InteractableSave("used")));
         Add("used", "The ember-light warms you.", 2.5, [(0.1, "things-read-a"), (0.35, "things-used-a"), (0.6, "things-used-b"), (2, "things-used-d")]);
+
+        // Hidden things (design §7). Tracks noticed by passive Perception, which lead to a cache: both are found at once.
+        InteractableDef tracks = Def("tracks", "tracks", TracksAt) with { Name = "wolf tracks", Reveals = ["track_cache"] },
+            trackCache = Def("track_cache", "cache", TrackCacheAt),
+            rune = Def("rune", "rune", RuneAt) with { Name = "ward-rune", Hidden = new HiddenDef(12, "arcana") },
+            searched = Def("loose_stone", "cache", SearchedAt) with { Name = "loose flagstone", Hidden = new HiddenDef(14, "investigation") };
+        Go(new Tile(TracksAt.X - 2, TracksAt.Y + 1));
+        Add("notice", null, 2.5, [(1.0, "things-notice-0-before")]);
+        Happen((tracks, ThingEvents.Noticed, new InteractableSave(InteractableKinds.Noticed, Found: true)),
+            (trackCache, ThingEvents.Revealed, new InteractableSave("closed", Found: true)));
+        Add("notice", "Ana notices: Fresh wolf tracks lead east, to a loose stone. Ana spots a hidden cache.", 2.4, Moment("notice"));
+
+        // A rune only Arcana notices: Bo's passive Arcana, not anyone's eyes.
+        Go(new Tile(RuneAt.X - 2, RuneAt.Y + 1));
+        Add("rune", null, 2.5, [(1.0, "things-rune-0-before")]);
+        Happen((rune, ThingEvents.Noticed, new InteractableSave(InteractableKinds.Noticed, Found: true)));
+        Add("rune", "Bo notices: A ward-rune, cut into the flagstone, still faintly warm.", 2.2, Moment("rune"));
+
+        // The rest of the notices, one after another down a row, as a party walking past would notice them.
+        string[] rest = ["scratches", "disturbed_earth", "bloodstain", "draft", "carving", "remains"];
+        var row = rest.Select((kind, i) => Def($"row_{kind}", kind, NoticeRow[i])).ToArray();
+        Go(new Tile(53, 99));
+        Add("notices", null, 2.5, [(1.0, "things-notices-0-before")]);
+        Happen([.. row.Select(d => (d, ThingEvents.Noticed, (InteractableSave?)new InteractableSave(InteractableKinds.Noticed, Found: true)))]);
+        Add("notices", "Ana notices: Deep scratches on the stone, claw-wide.", 2.5, [(0.1, "things-notices-a"), (0.6, "things-notices-b"), (2.2, "things-notices-d")]);
+
+        // A hidden path: one tile of the hedge can be walked, but it's in the way until it's found, and drawn as hedge (a plug, as the secret
+        // door's wall); then the plug goes and the TV draws the path.
+        Go(new Tile(PathAt.X, PathAt.Y + 3));
+        Add("path", null, 2.5, [(1.0, "things-path-0-unfound")]);    // longer: a slow TV mustn't take its shot after the find
+        Happen((path, ThingEvents.Revealed, new InteractableSave(InteractableKinds.FoundPath, Found: true)));
+        Add("path", "Bo spots a goat track.", 2.2, Moment("path"));
+
+        // An active Search: the party picks who rolls Investigation, the DC hidden, and the roll finds the loose flagstone.
+        Go(new Tile(SearchedAt.X - 1, SearchedAt.Y + 1));
+        Add("search", null, 2.5, [(1.0, "things-search-0-before")]);
+        var picking = t;
+        StoryCheckView Check(int[] votes, string? chosen = null, RollResult? roll = null) => new(Interactables.SearchSkill, null, "Search the area",
+            [new StoryCardView("m0", "Ana", "Ana", "characters.class_rogue", 1, "INT 12", true, votes[0]),
+             new StoryCardView("m1", "Bo", "Bo", "characters.class_wizard", 5, "Proficient · INT 16", true, votes[1])],
+            chosen, roll, false, null, roll is null ? DateTimeOffset.UnixEpoch.AddSeconds(picking + 20) : null, roll is null ? 20 : null);
+        StoryView Story(string state, StoryCheckView check) => new(++seq, InteractScenes.SearchId, "Search", state, null, null, check, null);
+        steps.Add(new ThingsDemoStep("search-pick", t, Host(null) with { Phase = nameof(TacticsPhase.Story), Story = Story(TacticsGame.StoryStates.PickRoller, Check([0, 1])) },
+            [(1.5, "things-search-pick")], false));
+        t += 2.5;
+        steps.Add(new ThingsDemoStep("search-rolled", t, Host(null) with { Phase = nameof(TacticsPhase.Story),
+            Story = Story(TacticsGame.StoryStates.Rolled, Check([0, 1], "m1", Rolls.Flat(11, 5, 14) with { Vs = 0 })) }, [(3.5, "things-search-rolled")], false));
+        t += 4.5;
+        Happen((searched, ThingEvents.Revealed, new InteractableSave("closed", Found: true)));
+        Add("search-found", "Bo finds a loose flagstone.", 2.2, Moment("search-found"));
         Add("end", null, 0.5, []);
         return steps.ToImmutable();
     }

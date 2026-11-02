@@ -84,6 +84,30 @@ public sealed class ThingsDemoTests
         Assert.Contains(steps[found].View.Explore!.Things!.Value, t => t.Id == "secret" && t.State == "closed" && t.Blocks);
     }
 
+    /// <summary>The hidden things' scenes (design §7): nothing is sent before it's found, and the search's check has no DC.</summary>
+    [Fact]
+    public void The_hidden_things_are_not_sent_until_found_and_the_search_shows_no_dc()
+    {
+        var steps = ThingsDemo.Steps();
+        int At(string label) => steps.ToList().FindIndex(s => s.Label == label);
+        foreach (var (id, label) in new[] { ("tracks", "notice"), ("track_cache", "notice"), ("rune", "rune"), ("goat_track", "path"), ("loose_stone", "search-found") })
+        {
+            var found = steps.ToList().FindLastIndex(s => s.Label == label);
+            Assert.All(steps.Take(At(label)), s => Assert.DoesNotContain(s.View.Explore!.Things!.Value, t => t.Id == id));
+            Assert.Contains(steps[found].View.Explore!.Things!.Value, t => t.Id == id);
+        }
+        var events = steps.SelectMany(s => s.View.Explore!.ThingEvents!.Value).DistinctBy(e => e.Seq).ToList();
+        Assert.Contains(events, e => e.Id == "tracks" && e.What == ThingEvents.Noticed);
+        Assert.Contains(events, e => e.Id == "track_cache" && e.What == ThingEvents.Revealed);
+        var path = steps[^1].View.Explore!.Things!.Value.Single(t => t.Id == "goat_track");
+        Assert.Equal(("found", false), (path.State, path.Blocks));
+        Assert.True(Ground.Value.Terrain.Walkable(path.At));
+        Assert.False(Ground.Value.Terrain.Walkable(new Tile(path.At.X - 1, path.At.Y)));        // the hedge either side of it
+        Assert.False(Ground.Value.Terrain.Walkable(new Tile(path.At.X + 1, path.At.Y)));
+        Assert.All(steps.Where(s => s.Label.StartsWith("search-", StringComparison.Ordinal) && s.View.Story is not null), s => Assert.Null(s.View.Story!.Check!.Dc));
+        Assert.Contains(steps, s => s.View.Story?.Check?.Roll is { Vs: 0, Success: true });
+    }
+
     [Fact]
     public void The_TV_opens_the_courtyard_for_the_demo_region()
     {
