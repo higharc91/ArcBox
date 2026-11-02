@@ -233,6 +233,20 @@ Keep this list, add to it, and put it at the top of your final report. Don't sto
 - **Moved to fit the new map:** the start (30,65)→(26,58), recovery (30,55)→(31,57), `ch1_mayors_request` →(33,59), `ch1_granary` →(42,70), `ch1_skarrow_song` →(133,24).
 - **Interactable sounds:** all 25 exist now (601755a, 116 CU).
 
+**Hidden things and passive checks (2026-11-02, 62f4fc2..fc88986), for the user:**
+- **Defaults to overrule:** USER DECISIONs 10–17 in the interactables design doc, §7.7:
+  - all eight passive skills can find things;
+  - a notice reveals its targets wherever they are;
+  - range 1–6 tiles;
+  - hidden-path rules;
+  - Search is a check scene;
+  - Search looks within 2 tiles, and a miss can't be retried;
+  - Search costs nothing;
+  - the DC is never shown.
+- **Your call:** should Search also find traps nobody has spotted? Today it only looks for things marked `hidden`.
+- **For a TV pass:** an unfound hidden path, and a secret door more faintly, leave a seam in the wall they hide in, because the plug's front face doesn't match its neighbours'.
+- **Art:** nine new keys (`interactables.<notice>.noticed`, `interactables.hidden_path.found`) plus `fx.notice`, with prompts in `docs/superpowers/specs/2026-11-02-tactics-interactables-art.json`. No `notice` sound yet; it falls back to `secret_found`.
+
 **Defaults the user can overrule:** the 8-way pad; the session leader taking the lead back once stopped; hazards harmless; the loader refusing a recovery spawn below a one-way drop; lines advancing by themselves; one beat at a time; skill rolls with no natural 20 or 1; a skill-to-stat table of 18 SRD lines; `ch1_kindler` having no `place`.
 
 **Only the user can check:**
