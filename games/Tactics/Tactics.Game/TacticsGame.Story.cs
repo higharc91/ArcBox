@@ -483,7 +483,7 @@ public sealed partial class TacticsGame
             || StoryArc is not { } arc || StoryRules.SpotFor(arc, region.Def, place) is not { } spot)
             return null;
         var ground = WalkGround();
-        var reached = Rules.ReachFor(region.Def.Id)!;
+        var reached = WalkReach();      // with the doors and gates as they are now (interactables design §2.4)
         // Clear of every stamp a battle still to come could arm: mid-beat nothing is armed yet, and the beat's outcome can arm one (review).
         var stamps = PendingStamps();
         var to = BattleStage.Standable(ground, spot, [spot, _at], t => ground.Map.InBounds(t) && reached.Contains(t) && !stamps.Any(st => st.Holds(t)));

@@ -207,4 +207,66 @@ public sealed class InteractablesTests
         Assert.DoesNotContain(new Tile(4, 4), WorldWalk.Reach(with, Vault.Start, ClassDef.DefaultJump));       // the door shuts the next room off
         Assert.Contains(new Tile(4, 4), WorldWalk.Reach(world.Terrain, Vault.Start, ClassDef.DefaultJump));
     }
+
+    [Fact]
+    public void Reach_doesnt_go_round_the_corner_of_a_wall()
+    {
+        // From (3, 2), the door at (4, 3) is a diagonal step, and (4, 2) and (3, 3) are its corners: (3, 3) is wall.
+        var ground = Vault.Ground().Terrain;
+        var door = Vault.Def("""{ "id": "d", "kind": "door", "at": [4, 3] }""");
+        Assert.False(Interactables.InReach(ground, new Tile(3, 2), door));
+        Assert.False(Interactables.InReach(ground, new Tile(5, 4), door));
+        Assert.True(Interactables.InReach(ground, new Tile(4, 2), door));
+        Assert.True(Interactables.InReach(ground, new Tile(4, 4), door));
+        // A chest in the corner counts as the walk does: in the way.
+        var sack = Vault.Def("""{ "id": "s", "kind": "sack", "at": [3, 2] }""");
+        Assert.True(Interactables.InReach(ground, new Tile(2, 1), sack));
+        Assert.False(Interactables.InReach(Vault.Ground().With([new Tile(3, 1)]), new Tile(2, 1), sack));
+    }
+
+    [Fact]
+    public void A_stand_in_is_only_ever_its_own_states()
+    {
+        InteractableSave S2(string state) => new(state);
+        var chest = Vault.Def("""{ "id": "c", "kind": "chest", "at": [1, 1] }""");
+        Assert.Equal(("props.chest", "props.chest_open"), (Interactables.StandInOf(chest, S2("closed")), Interactables.StandInOf(chest, S2("open"))));
+        var crate = Vault.Def("""{ "id": "c", "kind": "crate", "at": [1, 1] }""");
+        Assert.Equal("props.crate", Interactables.StandInOf(crate, S2("open")));         // named for open on purpose: no open crate yet
+        var door = Vault.Def("""{ "id": "d", "kind": "door", "at": [1, 1] }""");
+        Assert.Null(Interactables.StandInOf(door, S2("open")));                          // a plain marker
+        var key = Vault.Def("""{ "id": "k", "kind": "pickup", "at": [1, 1], "sets": ["k"] }""");
+        Assert.True(Interactables.Drawn(key, S2("here")));
+        Assert.False(Interactables.Drawn(key, S2("taken")));
+        var cache = Vault.Def("""{ "id": "h", "kind": "cache", "at": [1, 1], "hidden": 5 }""");
+        Assert.False(Interactables.Drawn(cache, S2("open")));
+        Assert.Null(Interactables.StandInOf(cache, S2("open")));
+        // Every kind with any stand-in names one for each state it draws.
+        foreach (var kind in InteractableKinds.All.Values.Where(k => !k.StandIn.IsEmpty))
+            Assert.All(kind.States.Where(st => !kind.Empty.Contains(st)), st => Assert.True(kind.StandIn.ContainsKey(st), $"{kind.Id}.{st}"));
+    }
+
+    /// <summary>The art brief's key list is a manifest today's loader reads, and holds every state of every kind with art of its own.</summary>
+    [Fact]
+    public void The_art_brief_loads_as_a_manifest_and_covers_every_state()
+    {
+        var dir = Directory.CreateTempSubdirectory("tactics-art-brief-");
+        try
+        {
+            Directory.CreateDirectory(Path.Combine(dir.FullName, "interactables"));
+            File.Copy(Path.Combine(ContentPaths.RepoRoot, "docs", "superpowers", "specs", "2026-11-02-tactics-interactables-art.json"),
+                Path.Combine(dir.FullName, "interactables", "manifest.json"));
+            var keys = ArtManifests.Load(dir.FullName).Keys;
+            foreach (var kind in InteractableKinds.All.Values.Where(k => k.Family != InteractableFamily.Ambient))
+            {
+                var states = kind.Family == InteractableFamily.FloorTrap ? ["armed", "disarmed", "sprung"] : kind.States.ToArray();
+                Assert.All(states, st => Assert.Contains($"{kind.Art}.{st}", keys));
+            }
+            Assert.Contains("interactables.chest_opening", keys);
+            Assert.Contains("interactables.trap_springing", keys);
+        }
+        finally
+        {
+            dir.Delete(recursive: true);
+        }
+    }
 }

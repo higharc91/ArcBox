@@ -207,13 +207,22 @@ spent, and the state only moves forward in its kind's order. Only a lever and th
 `WorldGround.With(blocked)` lays a blocking prop on each tile a thing blocks now (`Interactables.Blocking`: closed passages, found or not,
 standing things, seen floor traps), over the region's plain ground. The plain ground stays the region with every passage open, which is how
 it's painted. The game's `WalkGround()` caches it by the blocked set, and **every** use of the ground in the world goes through it: steps,
-Interact reach for beats and things, standing on a saved tile, landing after a fight, travel and the scene cast's tiles. `RulesPack.ReachFor`
-(the flood from the start) stays on the plain ground.
+Interact reach for beats and things, standing on a saved tile, landing after a fight, travel and the scene cast's tiles. Landing and travel
+also take their reach (the flood from the start) on that ground, not the plain one, so the party is never put across a shut door; a saved
+tile is still judged on the plain flood, so a party beyond a gate it shut itself isn't sent back to the road.
+
+**Things that appear.** A thing whose `requires`/`unless` puts it there, and that would stand in the way, never appears on the leader's tile:
+it waits until the leader steps off (`_appeared`), so nobody is put inside a door, and the TV never sees it land on them. After a restart the
+same rule holds on the saved tile.
+
+**Unseen walls.** A step refused by something the TV hasn't been told of (a door nobody has found) doesn't bump: `Bumps` doesn't go up and
+`Blocked` stays false, so the bump can't give the door away. The party just stands.
 
 ### 2.5 Reach and choosing
 
 A thing is in reach on its tile or the eight round it, within a climb (2) of its height (`Interactables.InReach`), so a chest up a cliff
-isn't reached from its foot. The leader's walk screen gains `targets: [{ id, label }]`, nearest first, then the one faced, then by id
+isn't reached from its foot; diagonally only where walking could go diagonally (both corner tiles walkable), so nobody reaches round the corner
+of a wall. In a region that has things, the leader's walk screen gains `targets: [{ id, label }]`, nearest first, then the one faced, then by id
 (nearest first so the list doesn't reorder as the leader turns: the walk screen mustn't change under a thumb). `interact` stays the button: the
 beat's word if a beat is in reach, else the first target's. The input `interact` takes an optional `{ target }`; with none it does the beat in
 reach, else the first target, so today's button works unchanged. The server checks reach and the leader again.
@@ -233,6 +242,10 @@ Either is saved at once. The party isn't halted, since the phone's next hold pin
 - **`ScenePlan(scene, outcomes)`**: a `SceneDef` in 5d's format (narrated lines, options with `SceneCheck`s, `next`/`end`), plus an
   **outcome per node**. The game enters the Story phase with a cursor whose `Thing` names the thing, its state when the interaction began and
   who began it; entering a node applies that node's outcome **in the same save as the node's first line**. The scene ends back in the world.
+  A battle beat waiting at its fight (lost, fled, or one that wouldn't start) keeps its cursor through it: the interaction's cursor holds it as
+  `Thing.Under` and puts it back when it ends, or when it's dropped after a content change, so the step into the stamp still goes straight to
+  the fight, with no lead-in to replay. (Refusing scenes while a fight waits was the other way; it would stop a party reading a note after a
+  loss, which is when it most wants to.)
 
 Outcomes are absolute (`InteractOutcome`: the state it goes to, unlock, the trap's end, a way spent, loot, flags), so applying one twice is the
 same as once, and loot and a trap's effect fire only on the step that changes the thing (`LootDue`, `SpringDue`).
@@ -258,11 +271,11 @@ numbers. The thing's line also shows as the TV's notice, which the next step cle
 
 - **TV:** `ExploreView.Things`: `ThingView(id, kind, at, facing, art, state, standIn, name, blocks, trapped)` for what's there and has been
   seen, in file order; left out of the JSON for a region with none, as `ThingEvents` is, so Ashen Ford's view is byte for byte as before. During an interaction's scene, `StoryView` as for any scene (title = the thing's name).
-- **Phones:** the leader's walk screen gains `targets`; everyone else gets an empty list. In a scene, the 5d screens unchanged.
-- **Never sent:** a hidden thing not found, an unseen floor trap, a thing whose flags don't hold. (The content pack's own files are on the
-  content endpoint, as the region files are; that's the TV's cache, not the protocol.)
-
-The phone fixtures changed by exactly one field, `"targets": []`, on the three walk screens; the TypeScript type has it as optional.
+- **Phones:** in a region that has things, the leader's walk screen gains `targets`, and everyone else's an empty list. In any other region,
+  Ashen Ford today, the walk screen is exactly as before: no field is added, and the phone fixtures are unchanged. In a scene, the 5d screens.
+- **Never sent:** a hidden thing not found, an unseen floor trap, a thing whose flags don't hold, a thing in a state that draws nothing (a
+  pickup taken, a cache emptied), and any event of a passage that isn't there (a lever still moves it, unseen). (The content pack's own files
+  are on the content endpoint, as the region files are; that's the TV's cache, not the protocol.)
 
 ## 3. Effects and rules impact
 
@@ -289,10 +302,17 @@ From `content/tactics/base/props/manifest.json` and `tools/tactics-assets`: pixe
 `blocks`, `cover` (`none` / `half` / `full`) and `height` in 16 px height steps; light sources as the props' `light` block. Props are drawn
 once, front-facing, and the TV mirrors them for the other diagonal; there's no back view.
 
-**A new set, `content/tactics/base/interactables/`,** with a `manifest.json` in the props shape: one entry per kind, its **variants are its
-states**, so the keys are `interactables.<kind>.<state>` (`interactables.chest.open`), which is exactly `ThingView.Art` + `.` + `ThingView.State`
-and what `ArtManifests` already indexes. Transitions are extra variants played once, then the end state holds (as `down` holds its last frame).
-Files: `<kind>_<state>.png`.
+**A new set, `content/tactics/base/interactables/`,** whose `manifest.json` is `props/manifest.json`'s shape exactly: a `props` object of
+assets, each with `variants`, `size`, `anchor`, one `frames`/`fps`, `blocks`, `cover`, `height`, `tags` and an optional `layer`, plus `notes`.
+- **Each kind is an asset whose variants are its states,** one frame each: the keys are `interactables.<kind>.<state>`
+  (`interactables.chest.open`), which is exactly `ThingView.Art` + `.` + `ThingView.State`, and what `ArtManifests` indexes today. A floor
+  trap's states are `armed`, `disarmed`, `sprung`. Files: `<kind>_<state>.png`.
+- **Each transition is an asset of its own,** `<kind>_<transition>` (`interactables.chest_opening`), with one variant, `strip`, and its own
+  `frames` and `fps`, since props have one per asset. It plays once, from its kind's first state to its last (tagged `from:` and `to:`),
+  and then the state holds (as `down` holds its last frame).
+
+The JSON file below is that manifest: copy it to `content/tactics/base/interactables/manifest.json` and draw the files it names. A test copies it
+into a set folder and loads it through `ArtManifests`, and checks it has every state of every kind.
 
 Facing: draw everything facing **sw** (towards the bottom left of the screen). `se` mirrors it. `ne` and `nw` mirror too (no backs, as props).
 A passage's facing says which way its wall runs: `sw`/`ne` along x, `se`/`nw` along y, so one sprite and its mirror cover both walls.
@@ -307,7 +327,7 @@ Sizes are proposals matched to the nearest existing prop; keep the anchor at the
 | `interactables.crate` | closed, open | opening 4 @ 10 | 26×28, [13, 27] | Lid off and leaning. |
 | `interactables.barrel` | closed, open | opening 3 @ 10 | 18×26, [9, 25] | Lid off. |
 | `interactables.sack` | closed, open | opening 3 @ 10 | 16×16, [8, 15] | Open = slumped and tied loose. Ground layer. |
-| `interactables.cache` | closed, open | opening 4 @ 10 | 24×16, [12, 15] | A loose flagstone or a hollow; ground layer. Shown only once found. |
+| `interactables.cache` | closed, open | opening 4 @ 10 | 24×16, [12, 15] | A loose flagstone or a hollow; ground layer. Shown only once found; `open` is never drawn. |
 | `interactables.door` | closed, open | opening 4 @ 10 | 32×56, [16, 48] | Wooden door in a one-tile frame, height 3, cover full when closed. Open = swung aside, the gap clear. |
 | `interactables.gate` | closed, open | opening 6 @ 10 | 40×56, [20, 44] | Iron bars, matching `props.fence_iron`'s footprint; open = raised or swung. |
 | `interactables.drawbridge` | closed, open | opening 8 @ 8 | 64×48, [32, 40] | Closed = raised (upright), open = lying flat across the tile. |
@@ -318,26 +338,28 @@ Sizes are proposals matched to the nearest existing prop; keep the anchor at the
 | `interactables.book` | unread, read | | 24×30, [12, 29] | A book on a lectern. |
 | `interactables.gravestone` | unread, read | | 18×24, [9, 23] | As `props.gravestone`; one sprite is enough. |
 | `interactables.signpost` | unread, read | | 24×34, [12, 33] | As `props.signpost`. |
-| `interactables.pickup` | here, taken | | 24×24, [12, 23] | A generic bundle; `taken` is empty (nothing drawn). Compose with the item icon as `pickups/` does. |
+| `interactables.pickup` | here, taken | | 24×24, [12, 23] | A generic bundle. `taken` is never drawn (the TV isn't sent it): an empty frame is fine. Compose with the item icon as `pickups/` does. |
 | `interactables.shrine` | ready, used | using 6 @ 8 | 36×52, [18, 40] | As `props.shrine`; used = candles out, light off. |
 | `interactables.well` | ready, used | using 4 @ 8 | 34×40, [17, 39] | As `props.well`; the bucket raised when used. |
 | `interactables.altar` | ready, used | using 6 @ 8 | 32×28, [16, 27] | As `props.altar`. |
 | `interactables.trap` | armed, disarmed, sprung | springing 4 @ 12 | 32×16, [16, 15] | Ground layer: a plate or a pit cover, seen; `sprung` = jaws shut or a shallow pit. |
 | `interactables.ambient` | | | | No art: an ambient thing names an existing prop. |
 
-The machine-readable list is `docs/superpowers/specs/2026-11-02-tactics-interactables-art.json`: 20 assets, 41 state frames and 14 transition
-strips (65 transition frames), 106 frames in all.
+The manifest is `docs/superpowers/specs/2026-11-02-tactics-interactables-art.json`: 20 kinds and 14 transition assets, 41 state frames and
+65 transition frames, 106 frames in all.
 
 ### 4.3 Meanwhile
 
 `ThingView.StandIn` is an art key the pack has now, which the TV can draw until the set exists; null means a plain placeholder marker (stage
-two: a gold diamond outline on the tile with the thing's name, which the TV-colours work should style).
+two: a gold diamond outline on the tile with the thing's name, which the TV-colours work should style). A stand-in is only ever named for the
+very state it's drawn in, never borrowed from another state: an open crate is drawn as `props.crate` because the kind says so for `open`, and
+a taken pickup or an emptied cache isn't sent at all.
 
 | Kind | Stand-in now |
 |---|---|
 | chest | `props.chest`, open: `props.chest_open` |
-| crate, barrel, sack | `props.crate`, `props.barrel`, `props.sack` |
-| cache, pickup | `pickups.loot_sack` |
+| crate, barrel, sack | `props.crate`, `props.barrel`, `props.sack`, open as well (there's no open art yet) |
+| cache, pickup | `pickups.loot_sack` while closed or there; not sent once open or taken |
 | gravestone, signpost | `props.gravestone`, `props.signpost` |
 | shrine, well, altar | `props.shrine`, `props.well`, `props.altar` |
 | door, gate, drawbridge, secret door, lever, note, plaque, book, trap | none: the plain marker |
@@ -358,9 +380,14 @@ At load (the loader, `Validation/Interactables.cs`), each with a failing test in
 4. **Levers** work passages of the same region that start as the lever does; a passage has at most one lever, and no lock or `hidden` as well.
 5. **Every thing is reachable** from the start with every passage open (things that stand in the way count as walls), and nothing that stands
    in the way walls off a spawn, a beat's spot or a stamp's party spawn.
-6. **A lock always has a solution:** from the start, open only what's sure (unlocked passages, keys the party is sure to get, levers it can
-   reach) until nothing more opens. A recovery spawn, beat spot or stamp party spawn that's only behind a lock that can be failed for good, or a
-   hidden door, is an error naming the passages: give it a key or another way round.
+6. **A lock always has a solution:** from the start, in the worst state the region can be in (every passage that starts shut, and every one a
+   lever works, whichever way it was left), open only what's sure (unlocked passages, keys the party is sure to get, levers it can reach)
+   until nothing more opens. A recovery spawn, beat spot or stamp party spawn that's only behind a lock that can be failed for good, or a
+   hidden door, is an error naming the passages: give it a key or another way round. A key is sure only from a thing that's always there (no
+   `requires` and no `unless`), in plain sight, and not behind a lock that can be failed.
+6b. **The party can always walk back from where it's put:** the recovery spawn (after a loss), the landing by each stamp (after a fight) and
+   each beat's spot (travel to a scene) are each flooded the same worst-case way, from there; each must reach the start. So a party that wakes
+   beyond a gate whose lever is on the far side, or behind a key door before finding the key, is refused at load.
 7. **A key is obtainable before its lock:** a key a thing of the region gives must come from a thing that's sure to give it in that closure (not
    behind its own door, not hidden, not in a container whose lock can be failed).
 8. **Flags against the story** (`InteractableLore`, a base pack test, since the loader can't read lore): every `requires`, `unless` and key flag

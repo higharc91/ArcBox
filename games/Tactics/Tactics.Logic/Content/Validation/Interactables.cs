@@ -211,27 +211,31 @@ internal sealed partial class Validation
 
         /// <summary>The flags a thing is sure to give once the party reaches it: anything with no check and no lock it could fail.</summary>
         private static bool SureToGive(InteractableDef def, IReadOnlySet<string> keys)
-            => def.Hidden is null && def.Requires.IsEmpty
+            => def.Hidden is null && def.Requires.IsEmpty && def.Unless.IsEmpty
                && (def.Lock is null || def.Lock.Key is { } key && keys.Contains(key))
                && Family(def) is not InteractableFamily.FloorTrap;
 
         /// <summary>
-        /// What the party can reach: <paramref name="optimistic"/>, with every passage open; else only what's sure, from the start: passages
-        /// that open with no check (unlocked, or a key the party is sure to have, or a lever it can reach), and keys from things it's sure to get
-        /// into, until nothing more opens. Things that stand in the way always do.
+        /// What the party can reach from <paramref name="from"/> (the start when null): <paramref name="optimistic"/>, with every passage open;
+        /// else only what's sure, whatever has happened before: every passage shut that can be (one that starts shut, and every one a lever works,
+        /// whichever way its lever was left), opening only those that open with no check (unlocked, or a key the party is sure to have, or a
+        /// lever it can reach), with keys from things it's sure to get into, until nothing more opens. Things that stand in the way always do.
+        /// So a tile whose sure closure holds the start can always walk back to it, under every state the levers and locks can be in.
         /// </summary>
-        private (HashSet<Tile> Reached, HashSet<string> Keys, List<InteractableDef> Shut) Closure(bool optimistic)
+        private (HashSet<Tile> Reached, HashSet<string> Keys, List<InteractableDef> Shut) Closure(bool optimistic, Tile? from = null)
         {
             var solid = _things.Where(t => Family(t.Def) is not (InteractableFamily.Passage or InteractableFamily.FloorTrap)
                 && (t.Def.Blocks ?? Interactables.KindOf(t.Def).Blocks)).Select(t => t.Def.At).ToHashSet();
-            var shut = optimistic ? [] : _things.Where(t => Family(t.Def) == InteractableFamily.Passage && !t.Def.Open).Select(t => t.Def).ToList();
+            var worked = Interactables.Worked(_things.Select(t => t.Def));
+            var shut = optimistic ? [] : _things.Where(t => Family(t.Def) == InteractableFamily.Passage && (!t.Def.Open || worked.Contains(t.Def.Id)))
+                .Select(t => t.Def).ToList();
             var keys = new HashSet<string>(StringComparer.Ordinal);
             var levers = _things.Where(t => Family(t.Def) == InteractableFamily.Switch).Select(t => t.Def).ToList();
-            var worked = Interactables.Worked(_things.Select(t => t.Def));
+            var start = from ?? _def.Spawns.Start;
             while (true)
             {
                 var ground = _world.With([.. solid, .. shut.Select(d => d.At)]);
-                var reached = WorldWalk.Reach(ground, _def.Spawns.Start, ClassDef.DefaultJump);
+                var reached = ground.Walkable(start) ? WorldWalk.Reach(ground, start, ClassDef.DefaultJump) : [];
                 bool Near(InteractableDef d) => Neighbours(d.At).Any(n => reached.Contains(n) && Interactables.InReach(ground, n, d));
                 var before = keys.Count;
                 foreach (var t in _things.Where(t => Near(t.Def) && SureToGive(t.Def, keys)))
@@ -288,6 +292,23 @@ internal sealed partial class Validation
             foreach (var t in _things.Where(t => t.Def.Lock?.Key is { } key && givers.Contains(key) && !keys.Contains(key)))
                 Error(t, "lock/key", $"The key '{t.Def.Lock!.Key}' of '{t.Def.Id}' can't be had before it: what gives it ("
                     + string.Join(", ", givers[t.Def.Lock.Key!].Select(d => $"'{d.Id}'")) + ") is behind it, hidden, or behind a lock that can be failed.");
+
+            // The places the party is put without walking there: it wakes at the recovery spawn, lands by a stamp after a fight, and travels to a
+            // beat's spot for a scene set there. From each, whatever the levers and locks are by then, it must be sure to walk back to the start.
+            var dropped = new List<(string What, Tile At)> { ("The recovery spawn", _def.Spawns.Recovery) };
+            dropped.AddRange(_def.Beats.Select(b => ($"The spot of the beat '{b.Beat}'", b.At)));
+            foreach (var stamp in stamps)
+                dropped.Add(($"The landing by the stamp '{stamp.Map}'",
+                    maps.GetValueOrDefault(stamp.Map)?.Zones.GetValueOrDefault("party_spawn") is { IsDefault: false, Length: > 0 } zone
+                        ? stamp.ToWorld(zone[0]) : stamp.Origin));
+            foreach (var (what, at) in dropped.Where(d => sure.Contains(d.At)))      // what isn't sure from the start is reported above
+            {
+                var (back, _, closed) = Closure(optimistic: false, from: at);
+                if (!back.Contains(_def.Spawns.Start))
+                    v.Error(things[0].File, Pointer.Append(things[0].Pointer, "at"),
+                        $"{what} at {at} can't be sure of a way back to the start ({string.Join(", ", closed.Where(d => Neighbours(d.At).Any(back.Contains)).Select(d => $"'{d.Id}'"))} may be shut): "
+                        + "the party is put there without walking, so give it a lever, a key or a way round on its own side.");
+            }
         }
     }
 }

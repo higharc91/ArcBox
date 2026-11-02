@@ -164,7 +164,8 @@ export interface WalkData {
   interact?: string | null;
   /**
    * The leader's things to interact with in reach (chests, doors, levers…), nearest first, each with its button's words: `interact`
-   * sent with `{ target: id }` uses one. Empty for everyone else; absent from an older server. Its list on the phone is still to come.
+   * sent with `{ target: id }` uses one. Empty for everyone else; absent in a region with no things, and from an older server. Its list on
+   * the phone is still to come.
    */
   targets?: { id: string; label: string }[];
 }

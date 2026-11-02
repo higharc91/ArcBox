@@ -142,8 +142,24 @@ public sealed class InteractModelTests
         // 5. An interaction's cursor is there only in the Story phase, and the TV is never sent what nobody has seen.
         if (now.World.Story?.Thing is not null && s.Game.Phase is not (TacticsPhase.Resuming or TacticsPhase.Muster))
             Assert.Equal(TacticsPhase.Story, s.Game.Phase);
+        // Walking, the only cursor there can be is a battle beat's, waiting at its fight: never an interaction's.
         if (s.Game.Phase == TacticsPhase.Exploration)
-            Assert.Null(now.World.Story);
+            Assert.True(now.World.Story is null or { Thing: null, Stage: StorySave.Fight }, $"a cursor {now.World.Story} while walking after {log}");
+        // Nothing unseen is named: not in the events, the leader's list, or the TV's notice.
+        foreach (var e in s.Host.Explore.ThingEvents ?? [])
+        {
+            var def = Defs.Single(d => d.Id == e.Id);
+            Assert.True(Interactables.Visible(def, Interactables.StateOf(def, now.World.Things), flags), $"an event of unseen '{def.Id}' after {log}");
+        }
+        if (s.Screen(0) is { Screen: TacticsGame.Screens.Walk } walk)
+            foreach (var t in walk.Data.GetProperty("targets").EnumerateArray())
+            {
+                var def = Defs.Single(d => d.Id == t.GetProperty("id").GetString());
+                Assert.True(Interactables.Visible(def, Interactables.StateOf(def, now.World.Things), flags));
+            }
+        var cache = Defs.Single(d => d.Id == "cache");
+        if (!Interactables.StateOf(cache, now.World.Things).Found)
+            Assert.DoesNotContain("hidden cache", s.Host.Notice ?? "");
         foreach (var view in s.Host.Explore.Things ?? [])
         {
             var def = Defs.Single(d => d.Id == view.Id);

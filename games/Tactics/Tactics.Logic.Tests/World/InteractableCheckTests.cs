@@ -138,8 +138,9 @@ public sealed class InteractableCheckTests
         var errors = ValidationTests.ErrorsOfChapter(Vault.World(region),
             Vault.Things("vault", """{ "id": "door", "kind": "door", "at": [4, 3], "lock": { "pick": 12 } }"""));
         Assert.StartsWith("The recovery spawn at (4, 4) is behind a passage that may never open ('door')", Assert.Single(errors).Message);
-        // With a key the party is sure to find on its side, it can always open.
-        Assert.Equal(2, ValidationTests.LoadChapter(Vault.World(region), Vault.Things("vault", Key, Door)).InteractablesIn("vault").Length);
+        // A door with no lock always opens. (A key door would not do: a party that wakes beyond it, before finding the key, is shut in.)
+        Assert.Single(ValidationTests.LoadChapter(Vault.World(region), Vault.Things("vault", """{ "id": "door", "kind": "door", "at": [4, 3] }""")).InteractablesIn("vault"));
+        Assert.Contains("can't be sure of a way back", Assert.Single(ValidationTests.ErrorsOfChapter(Vault.World(region), Vault.Things("vault", Key, Door))).Message);
         // A hidden door may never be found.
         errors = ValidationTests.ErrorsOfChapter(Vault.World(region),
             Vault.Things("vault", """{ "id": "door", "kind": "secret_door", "at": [4, 3], "hidden": 12 }"""));
@@ -186,6 +187,46 @@ public sealed class InteractableCheckTests
         var errors = ValidationTests.ErrorsOfChapter(Vault.World(region), Vault.Things("vault", Key, Door,
             """{ "id": "lever", "kind": "lever", "at": [2, 8], "targets": ["gate"] }""", Gate));
         Assert.StartsWith("The recovery spawn at (4, 7) is behind a passage that may never open ('gate')", Assert.Single(errors).Message);
-        Assert.NotNull(ValidationTests.LoadChapter(Vault.World(region), Vault.Things("vault", Key, Door, Lever, Gate)));
     }
+
+    /// <summary>
+    /// Review: a party that wakes beyond a gate whose lever is on the far side may find the gate shut, whatever it was when the region began.
+    /// From where the party is put without walking, it must be sure of a way back.
+    /// </summary>
+    [Fact]
+    public void A_recovery_spawn_behind_a_gate_whose_lever_is_the_other_side_is_an_error()
+    {
+        var region = Vault.Region() with { Spawns = new RegionSpawns(Vault.Start, new Tile(4, 7)) };
+        Assert.Equal("The recovery spawn at (4, 7) can't be sure of a way back to the start ('gate' may be shut): the party is put there without "
+            + "walking, so give it a lever, a key or a way round on its own side.",
+            Assert.Single(ValidationTests.ErrorsOfChapter(Vault.World(region), Vault.Things("vault", Key, Door, Lever, Gate))).Message);
+        // A gate that starts open, with its lever on: still shut by the time the party wakes, if someone pulled it.
+        Assert.Contains("can't be sure of a way back to the start ('gate' may be shut)", Assert.Single(ValidationTests.ErrorsOfChapter(Vault.World(region), Vault.Things("vault",
+            """{ "id": "door", "kind": "door", "at": [4, 3] }""",
+            """{ "id": "lever", "kind": "lever", "at": [2, 5], "targets": ["gate"], "open": true }""",
+            """{ "id": "gate", "kind": "gate", "at": [5, 6], "open": true }"""))).Message);
+    }
+
+    private const string StampMap = """{ "id": "ford", "size": [2, 2], "tiles": "AAAAAAAAAAAAAAAA", "materials": ["grass/lush"], "props": [], "zones": { "party_spawn": [[0, 0]] } }""";
+
+    private static IReadOnlyList<ContentError> StampErrors(Tile at, params string[] things)
+        => ValidationTests.ErrorsOfChapter(Vault.World(Vault.Region() with { Stamps = [new RegionStamp("ford", at, 0)] }), ("maps/ford.json", StampMap),
+            Vault.Things("vault", things));
+
+    [Fact]
+    public void A_landing_by_a_stamp_beyond_a_lever_gate_is_an_error()
+        => Assert.StartsWith("The landing by the stamp 'ford' at (6, 7) can't be sure of a way back to the start ('gate' may be shut)",
+            Assert.Single(StampErrors(new Tile(6, 7), Key, Door, Lever, Gate)).Message);
+
+    [Theory]
+    [InlineData("""{ "id": "door", "kind": "door", "at": [4, 3], "lock": { "pick": 12 } }""")]
+    [InlineData("""{ "id": "door", "kind": "secret_door", "at": [4, 3], "hidden": 12 }""")]
+    public void A_stamp_behind_a_lock_that_can_be_spent_or_a_door_never_found_is_an_error(string door)
+        => Assert.StartsWith("The party spawn of the stamp 'ford' at (6, 4) is behind a passage that may never open ('door')",
+            Assert.Single(StampErrors(new Tile(6, 4), door)).Message);
+
+    [Fact]
+    public void A_key_that_can_be_taken_away_isnt_sure()
+        => Assert.Contains("can't be had before it",
+            Message(Door, """{ "id": "key", "kind": "pickup", "at": [8, 2], "name": "iron key", "sets": ["iron"], "unless": ["robbed"] }"""));
 }

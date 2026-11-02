@@ -90,12 +90,17 @@ public static class Interactables
 
     /// <summary>
     /// True when the leader at <paramref name="at"/> can reach the thing: on its tile or one of the eight round it, and no more than a
-    /// climb (<see cref="ClassDef.DefaultJump"/>) above or below it, so a chest up a cliff isn't in reach from its foot.
+    /// climb (<see cref="ClassDef.DefaultJump"/>) above or below it, so a chest up a cliff isn't in reach from its foot. Diagonally only as
+    /// walking goes diagonally (<see cref="WorldWalk"/>): both corner tiles walkable, so nobody reaches round the corner of a wall.
     /// </summary>
     public static bool InReach(Terrain terrain, Tile at, InteractableDef def)
-        => Math.Max(Math.Abs(at.X - def.At.X), Math.Abs(at.Y - def.At.Y)) <= 1
-           && terrain.Map.InBounds(at) && terrain.Map.InBounds(def.At)
-           && Math.Abs(terrain.HeightAt(at) - terrain.HeightAt(def.At)) <= ClassDef.DefaultJump;
+    {
+        var (dx, dy) = (def.At.X - at.X, def.At.Y - at.Y);
+        if (Math.Max(Math.Abs(dx), Math.Abs(dy)) > 1 || !terrain.Map.InBounds(at) || !terrain.Map.InBounds(def.At)
+            || Math.Abs(terrain.HeightAt(at) - terrain.HeightAt(def.At)) > ClassDef.DefaultJump)
+            return false;
+        return dx == 0 || dy == 0 || (terrain.Walkable(new Tile(at.X + dx, at.Y)) && terrain.Walkable(new Tile(at.X, at.Y + dy)));
+    }
 
     /// <summary>The ids of the passages some lever of <paramref name="defs"/> works: they open and shut only by it.</summary>
     public static ImmutableHashSet<string> Worked(IEnumerable<InteractableDef> defs)
@@ -122,14 +127,18 @@ public static class Interactables
     public static string ArtState(InteractableDef def, InteractableSave save)
         => KindOf(def).Family == InteractableFamily.FloorTrap ? save.Trap ?? "armed" : save.State;
 
-    /// <summary>The art the pack has now for it in that state (design §4.3), or null for a plain marker. Content's own art key wins.</summary>
+    /// <summary>
+    /// The art the pack has now for it in its art state (design §4.3), or null for a plain marker: only what the kind names for that very
+    /// state, never another state's, so an open chest is never drawn shut. Content's own art key wins.
+    /// </summary>
     public static string? StandInOf(InteractableDef def, InteractableSave save)
-    {
-        if (def.Art is not null)
-            return def.Art;
-        var stand = KindOf(def).StandIn;
-        return stand.GetValueOrDefault(save.State) ?? stand.Values.FirstOrDefault();
-    }
+        => def.Art ?? KindOf(def).StandIn.GetValueOrDefault(ArtState(def, save));
+
+    /// <summary>
+    /// True when its art state draws something: a pickup that's been taken and a cache that's been emptied draw nothing
+    /// (<see cref="InteractableKind.Empty"/>), so the TV isn't sent them.
+    /// </summary>
+    public static bool Drawn(InteractableDef def, InteractableSave save) => !KindOf(def).Empty.Contains(ArtState(def, save));
 
     /// <summary>True for a container or passage whose trap is set and has been seen: the TV shows it's trapped.</summary>
     public static bool Trapped(InteractableDef def, InteractableSave save) => def.Trap is not null && save.TrapSpotted && save.Trap is null;

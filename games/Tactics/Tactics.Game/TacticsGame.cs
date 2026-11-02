@@ -190,6 +190,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             return;
         var player = _players.FirstOrDefault(p => p.Id == id);
         WalkerConnection(player, connected);
+        PartyChanged();
         switch (_phase)
         {
             case TacticsPhase.Muster:
@@ -379,6 +380,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         MusterDone();
         if (_phase is TacticsPhase.Exploration or TacticsPhase.Story)
             ReconsiderLeader();
+        PartyChanged();
         if (_phase == TacticsPhase.Story)
             StoryPresenceChanged();     // one more who can answer
     }

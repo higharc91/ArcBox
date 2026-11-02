@@ -37,8 +37,13 @@ public enum InteractableFamily
 /// <param name="StandIn">An art key the pack has now, by state, for the TV meanwhile; a missing state draws the first's, and none at all a plain marker.</param>
 /// <param name="Text">What it says when its content says nothing.</param>
 /// <param name="MustHide">True for a kind that's always hidden at first (a cache, a secret door): its content must give <see cref="InteractableDef.Hidden"/>.</param>
+/// <param name="Empty">The art states that draw nothing at all (a pickup taken): the TV isn't sent the thing in them.</param>
 public sealed record InteractableKind(string Id, InteractableFamily Family, string Name, string Art, ImmutableArray<string> States, bool Blocks,
-    ImmutableSortedDictionary<string, string> StandIn, ImmutableArray<string> Text, bool MustHide = false);
+    ImmutableSortedDictionary<string, string> StandIn, ImmutableArray<string> Text, bool MustHide = false, ImmutableArray<string> Empty = default)
+{
+    /// <summary>The art states that draw nothing; never a default array.</summary>
+    public ImmutableArray<string> Empty { get => field.IsDefault ? [] : field; init; } = Empty;
+}
 
 /// <summary>
 /// The library of kinds (design §2.2). It's code, not content, because each kind is one of the engine's state machines with its defaults; a
@@ -82,28 +87,31 @@ public static class InteractableKinds
     private static ImmutableSortedDictionary<string, string> Stand(params (string State, string Key)[] keys)
         => keys.ToImmutableSortedDictionary(k => k.State, k => k.Key, StringComparer.Ordinal);
 
-    private static InteractableKind Container(string id, string name, bool blocks, string? closed, string? open, string line, bool hide = false)
+    /// <summary>
+    /// A container. Its stand-in is named for each state on purpose: the pack has an open chest, but no open crate, barrel or sack, so those
+    /// are drawn as they stand (lid and all) until their art comes; an emptied cache draws nothing.
+    /// </summary>
+    private static InteractableKind Container(string id, string name, bool blocks, string closed, string? open, string line, bool hide = false)
         => new(id, InteractableFamily.Container, name, $"interactables.{id}", [Closed, Opened], blocks,
-            Stand([.. new[] { (Closed, closed), (Opened, open ?? closed) }.Where(s => s.Item2 is not null).Select(s => (s.Item1, s.Item2!))]),
-            [line], hide);
+            open is null ? Stand((Closed, closed)) : Stand((Closed, closed), (Opened, open)), [line], hide, open is null ? [Opened] : []);
 
     private static InteractableKind Passage(string id, string name, string line, bool hide = false)
         => new(id, InteractableFamily.Passage, name, $"interactables.{id}", [Closed, Opened], false, Stand(), [line], hide);
 
     private static InteractableKind Readable(string id, string name, bool blocks, string? standIn)
         => new(id, InteractableFamily.Readable, name, $"interactables.{id}", [Unread, Read], blocks,
-            standIn is null ? Stand() : Stand((Unread, standIn)), []);
+            standIn is null ? Stand() : Stand((Unread, standIn), (Read, standIn)), []);
 
     private static InteractableKind Shrine(string id, string name, string standIn, string line)
-        => new(id, InteractableFamily.Shrine, name, $"interactables.{id}", [Ready, Used], true, Stand((Ready, standIn)), [line]);
+        => new(id, InteractableFamily.Shrine, name, $"interactables.{id}", [Ready, Used], true, Stand((Ready, standIn), (Used, standIn)), [line]);
 
     /// <summary>Every kind, by id.</summary>
     public static ImmutableSortedDictionary<string, InteractableKind> All { get; } = new[]
     {
         Container("chest", "chest", true, "props.chest", "props.chest_open", "It's empty."),
-        Container("crate", "crate", true, "props.crate", null, "Nothing but straw."),
-        Container("barrel", "barrel", true, "props.barrel", null, "Rainwater, and nothing else."),
-        Container("sack", "sack", false, "props.sack", null, "Old grain."),
+        Container("crate", "crate", true, "props.crate", "props.crate", "Nothing but straw."),
+        Container("barrel", "barrel", true, "props.barrel", "props.barrel", "Rainwater, and nothing else."),
+        Container("sack", "sack", false, "props.sack", "props.sack", "Old grain."),
         Container("cache", "hidden cache", false, "pickups.loot_sack", null, "Someone hid this, and took it back.", hide: true),
         Passage("door", "door", "The door is shut."),
         Passage("gate", "gate", "The gate is shut."),
@@ -116,7 +124,7 @@ public static class InteractableKinds
         Readable("gravestone", "gravestone", true, "props.gravestone"),
         Readable("signpost", "signpost", false, "props.signpost"),
         new InteractableKind("pickup", InteractableFamily.Pickup, "something on the ground", "interactables.pickup", [Here, Taken], false,
-            Stand((Here, "pickups.loot_sack")), []),
+            Stand((Here, "pickups.loot_sack")), [], Empty: [Taken]),
         Shrine("shrine", "shrine", "props.shrine", "The shrine is quiet now."),
         Shrine("well", "well", "props.well", "The water is cold and clear."),
         Shrine("altar", "altar", "props.altar", "The candles have burnt low."),

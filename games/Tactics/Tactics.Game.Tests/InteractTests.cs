@@ -48,9 +48,9 @@ public sealed class InteractTests
         Until(s, () => Story(s).State != TacticsGame.StoryStates.Asking, "the choice");
     }
 
-    private static Session Again(Session s)
+    private static Session Again(Session s, RulesPack? rules = null)
     {
-        var again = new Session(document: s.Lease.Document, game: new TacticsGame(Vault.Rules.Value));
+        var again = new Session(document: s.Lease.Document, game: new TacticsGame(rules ?? Vault.Rules.Value));
         again.Harness.Resume(again.Lease);
         for (var p = 0; p < 4; p++)
             again.Harness.SetConnected(p, true);
@@ -262,7 +262,7 @@ public sealed class InteractTests
     public void The_lever_wont_shut_the_gate_on_the_leader()
     {
         string[] things = [.. Vault.Things.Where(t => !t.Contains("\"lever\", \"kind\"") && !t.Contains("\"gate\", \"kind\"")),
-            """{ "id": "lever", "kind": "lever", "at": [4, 5], "targets": ["gate"], "open": true }""",
+            """{ "id": "lever", "kind": "lever", "at": [5, 5], "targets": ["gate"], "open": true }""",
             """{ "id": "gate", "kind": "gate", "at": [5, 6], "open": true }"""];
         var s = Vault.At(new Tile(5, 6), Vault.Load(things));      // in the gateway, beside the lever
         Interact(s, "lever");
@@ -368,8 +368,125 @@ public sealed class InteractTests
         s.ToWalking();
         Assert.Null(s.Host.Explore!.Things);
         Assert.Null(s.Host.Explore!.ThingEvents);
-        Assert.Empty(Walk(s).GetProperty("targets").EnumerateArray());
+        Assert.False(Walk(s).TryGetProperty("targets", out _));           // the walk screen is as it was before things
         Assert.Null(Doc(s).World!.Things);
         Assert.DoesNotContain("things", Doc(s).ToJson().GetProperty("world").EnumerateObject().Select(p => p.Name));      // not written
+    }
+
+    /// <summary>
+    /// Review: lose the ford fight, walk off and open a locked sack, come back to the stamp. The beat must still be waiting at its fight, so
+    /// the step into the stamp starts the fight with no lead-in to replay (and no vote to choose the other branch's flags again).
+    /// </summary>
+    [Fact]
+    public void A_battle_beat_waiting_at_its_fight_waits_on_through_an_interaction()
+    {
+        const string assault = "ch1_ford_assault";
+        var (at, dir) = StageBattleTests.Entry();
+        var ground = Rules.GroundFor(StageBattleTests.Ford)!.Terrain;
+        var region = StageBattleTests.Region;
+        var spots = region.Beats.Select(b => b.At).Append(region.Spawns.Start).Append(region.Spawns.Recovery).ToHashSet();
+        var sack = new[] { (-1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1) }.Select(d => new Tile(at.X + d.Item1, at.Y + d.Item2))
+            .First(t => ground.Walkable(t) && !StageBattleTests.Stage.Holds(t) && !spots.Contains(t)
+                && Interactables.InReach(ground, at, Vault0(t)));
+        var rules = Vault.InAshenFord($$"""{ "id": "sack", "kind": "sack", "at": [{{sack.X}}, {{sack.Y}}], "lock": { "pick": 12 } }""");
+        var fight = new StorySave(assault, StorySave.Fight, null, null, 0, 7);
+        var doc = TacticsDocument.Read(ExplorationTests.DocumentAt(null)) with
+        {
+            World = new WorldSave(StageBattleTests.Ford, at, new Tile(at.X + 1, at.Y), null, StageBattleTests.Force.Flags, StageBattleTests.Force.Beats, fight),
+        };
+        var s = new Session(document: doc.ToJson(), game: new TacticsGame(rules, lore: StageBattleTests.Lore.Value));
+        s.Harness.Resume(s.Lease);
+        for (var p = 0; p < 4; p++)
+            s.Harness.SetConnected(p, true);
+        Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
+        var lead = StageBattleTests.Lead(s);
+
+        s.Send(lead, "interact", new { target = "sack" });
+        Assert.Equal(TacticsPhase.Story, s.Game.Phase);
+        Assert.Equal((assault, StorySave.Fight), (Cursor(s)!.Thing!.Under!.Beat, Cursor(s)!.Thing!.Under!.Stage));
+        Until(s, () => Story(s).State == TacticsGame.StoryStates.Asking, "the lock");
+        s.Send(lead, "vote", new { option = "leave" });
+        Finish(s);
+
+        Assert.Equal((assault, StorySave.Fight, null, 7), (Cursor(s)!.Beat, Cursor(s)!.Stage, Cursor(s)!.Thing, Cursor(s)!.Seq));   // still waiting
+        s.Send(lead, "walk", new { dir = StageBattleTests.Name(dir) });
+        Assert.Equal(TacticsPhase.Battle, s.Game.Phase);                 // straight into it: no lead-in
+    }
+
+    private static InteractableDef Vault0(Tile at) => new("x", "sack", at, Text: [], Requires: [], Unless: [], Sets: [], Loot: [], Targets: []);
+
+    [Fact]
+    public void A_door_nobody_has_found_isnt_bumped_into_on_the_tv()
+    {
+        string[] things = ["""{ "id": "seam", "kind": "secret_door", "at": [4, 3], "hidden": 30 }"""];
+        var s = Vault.At(new Tile(4, 2), Vault.Load(things));
+        var bumps = s.Host.Explore!.Bumps;
+        s.Send(0, "walk", new { dir = "sw" });
+        Assert.Equal(new Tile(4, 2), s.Host.Explore!.At);
+        Assert.Equal(bumps, s.Host.Explore!.Bumps);
+        Assert.False(s.Host.Explore!.Blocked);
+        Assert.Null(s.Host.Explore!.Things!.Value.FirstOrDefault(t => t.Id == "seam"));
+        s.Send(0, "walk", new { dir = (string?)null });
+
+        var found = Vault.At(new Tile(4, 2), Vault.Load(things), w => w with { Things = Ordinal.Map(("seam", new InteractableSave("closed", Found: true))) });
+        bumps = found.Host.Explore!.Bumps;
+        found.Send(0, "walk", new { dir = "sw" });
+        Assert.Equal(bumps + 1, found.Host.Explore!.Bumps);             // found, it's a door like any other
+        Assert.True(found.Host.Explore!.Blocked);
+    }
+
+    [Fact]
+    public void A_passage_thats_not_there_moves_unseen()
+    {
+        string[] things =
+        [
+            """{ "id": "lever", "kind": "lever", "at": [2, 2], "targets": ["gate"] }""",
+            """{ "id": "gate", "kind": "gate", "at": [4, 3], "requires": ["gate_built"] }""",
+        ];
+        var s = Vault.At(new Tile(2, 1), Vault.Load(things));
+        Interact(s, "lever");
+        Assert.Equal("open", Saved(s, "gate")!.State);
+        Assert.Equal(["lever"], s.Host.Explore!.ThingEvents!.Value.Select(e => e.Id));
+        Assert.DoesNotContain(s.Host.Explore!.Things!.Value, t => t.Id == "gate");
+    }
+
+    [Fact]
+    public void A_thing_whose_flag_is_set_under_the_leader_waits_for_them_to_step_off()
+    {
+        var rules = Vault.Load([.. Vault.Things, """{ "id": "reliquary", "kind": "chest", "at": [5, 8], "requires": ["blessed"] }"""]);
+        var s = Vault.At(new Tile(5, 8), rules,
+            w => w with { Things = Ordinal.Map(("gate", new InteractableSave("open")), ("lever", new InteractableSave("on"))) });
+        Interact(s, "shrine");
+        Finish(s);
+        Assert.Contains("blessed", Doc(s).World!.Flags);
+        Assert.Equal(new Tile(5, 8), s.Host.Explore!.At);
+        Assert.Null(Thing(s, "reliquary"));                              // not on the leader: it waits
+        Assert.DoesNotContain("reliquary", Targets(s));
+
+        Step(s, "nw");                                                   // off it, to (4, 8)
+        Assert.True(Thing(s, "reliquary")!.Blocks);
+        s.Send(0, "walk", new { dir = "se" });
+        s.Harness.Advance(TimeSpan.FromSeconds(1));
+        Assert.NotEqual(new Tile(5, 8), s.Host.Explore!.At);           // and from then on it stands there
+
+        s.Harness.Advance(TimeSpan.FromSeconds(5));                      // the walk is saved
+        var again = Again(s, rules);                                     // a restart doesn't put it off again
+        Assert.NotNull(Thing(again, "reliquary"));
+    }
+
+    [Fact]
+    public void A_pickup_taken_and_a_cache_emptied_arent_drawn()
+    {
+        var s = Vault.At(new Tile(7, 2));
+        Interact(s, "key");
+        Assert.Null(Thing(s, "key"));
+        s = Vault.At(new Tile(7, 8), world: w => w with
+        {
+            Things = Ordinal.Map(("gate", new InteractableSave("open")), ("lever", new InteractableSave("on")), ("cache", new InteractableSave("closed", Found: true))),
+        });
+        Assert.Equal("pickups.loot_sack", Thing(s, "cache")!.StandIn);
+        Interact(s, "cache");
+        Assert.Equal("open", Saved(s, "cache")!.State);
+        Assert.Null(Thing(s, "cache"));
     }
 }

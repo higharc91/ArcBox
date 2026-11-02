@@ -63,6 +63,9 @@ public sealed partial class TacticsGame
     /// <summary>When the hold runs out unless it's repeated.</summary>
     private DateTimeOffset _heldUntil;
 
+    /// <summary>True while <see cref="_blocked"/> is by something the TV hasn't been told of: <see cref="ExploreView.Blocked"/> stays false.</summary>
+    private bool _unseenWall;
+
     /// <summary>When the step under way ends: the next can't begin before this, however fast a thumb taps.</summary>
     private DateTimeOffset _stepDue;
 
@@ -264,6 +267,7 @@ public sealed partial class TacticsGame
     {
         _toasts.Clear();
         _phase = TacticsPhase.Exploration;
+        NoteAppeared();
         if (LookAround())       // what the party sees as it comes into the world, or back from a fight or a scene
         {
             KeepWorld();
@@ -379,7 +383,11 @@ public sealed partial class TacticsGame
             var (dx, dy) = WorldWalk.Delta(dir);
             _facing = new Tile(from.X + dx, from.Y + dy);
             _blocked = true;
-            _bumps++;
+            // A door nobody has found is a wall the TV doesn't draw: bumping it would give it away, so the party just stands.
+            _unseenWall = WorldWalk.Next(Rules.GroundFor(_region!.Def.Id)!.Terrain, from, dir, ClassDef.DefaultJump, _lastAlongX) is { } plain
+                && UnseenBlocker(plain.To);
+            if (!_unseenWall)
+                _bumps++;
             if (!_edgeSaid && !terrain.Map.InBounds(_facing))
             {
                 _edgeSaid = true;
@@ -684,7 +692,7 @@ public sealed partial class TacticsGame
     {
         var ground = WalkGround();
         var start = _region!.Def.Spawns.Start;
-        var reached = Rules.ReachFor(_region.Def.Id)!;
+        var reached = WalkReach();      // with the doors and gates as they are now (interactables design §2.4)
         var armed = Armed()?.Stage;
         bool Allowed(Tile t) => ground.Map.InBounds(t) && reached.Contains(t) && armed?.Holds(t) != true;
 

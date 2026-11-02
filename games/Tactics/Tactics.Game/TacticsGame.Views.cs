@@ -411,7 +411,7 @@ public sealed partial class TacticsGame
         var vip = IsVip(player);
         var leads = _lead == profile.Value;
         var targets = leads ? ThingTargets() : [];
-        return Custom(Screens.Walk, new
+        var data = JsonSerializer.SerializeToNode(new
         {
             leader = leads,
             leaderName = Leader?.Name,
@@ -424,9 +424,12 @@ public sealed partial class TacticsGame
             canBattle = vip && battleList && !Rules.Encounters.IsEmpty,
             portal = PortalPath(),
             interact = leads ? InteractLabel() ?? targets.FirstOrDefault().Label : null,
-            // Everything else in reach, for the phone's list (interactables design §2.5): it changes only as things come into reach or go.
-            targets = targets.Select(t => new { id = t.Def.Id, label = t.Label }),
-        });
+        }, ArcJson.Options)!.AsObject();
+        // Everything in reach, for the phone's list (interactables design §2.5): it changes only as things come into reach or go. Only in a
+        // region that has things, so a walk screen anywhere else is exactly as it was.
+        if (!AllThings.IsEmpty)
+            data["targets"] = JsonSerializer.SerializeToNode(targets.Select(t => new { id = t.Def.Id, label = t.Label }), ArcJson.Options);
+        return Custom(Screens.Walk, data);
     }
 
     private string ClassName(CharacterRecord character) => Rules.Classes.GetValueOrDefault(character.Class)?.Name ?? character.Class;
@@ -439,7 +442,7 @@ public sealed partial class TacticsGame
     private ExploreView? ExploreViewOf() => _region is not { } region ? null : new ExploreView(region.Def.Id, region.Def.Name, _epoch, _walkSeq, _at, _facing, _dir is not null && !_blocked, _legs,
         [.. Walkers().Select(w => new WalkerView(w.Player.Profile!.Value.Value, w.Player.Name,
             HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{w.Character.Class}"])!, w.Here, w.Leads, ColorOf(w.Player.Profile!.Value.Value)))],
-        Leader?.Name, region.Def.Chapter, _dir is not null && _blocked, _bumps, _arrived, Markers(), CastOf(), ThingViews(),
+        Leader?.Name, region.Def.Chapter, _dir is not null && _blocked && !_unseenWall, _bumps, _arrived, Markers(), CastOf(), ThingViews(),
         Things.IsEmpty ? null : _thingEvents);
 
     private ControllerView BattleScreen(ProfileId profile)

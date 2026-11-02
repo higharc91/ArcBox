@@ -31,13 +31,76 @@ public sealed partial class TacticsGame
     private (ThingCursor Cursor, ScenePlan? Plan)? _thingPlan;
 
     /// <summary>The things of the region the party is in, in the order they're written.</summary>
-    private ImmutableArray<InteractableDef> Things => _region is null ? [] : Rules.InteractablesIn(_region.Def.Id);
+    /// <summary>Every thing of the region the party is in, in the order they're written, there or not.</summary>
+    private ImmutableArray<InteractableDef> AllThings => _region is null ? [] : Rules.InteractablesIn(_region.Def.Id);
+
+    /// <summary>
+    /// The things of the region as the party meets them: all of them but one that would stand in the way and has only just come to be there
+    /// (its flags were set) on the leader's own tile. That one waits until the leader steps off it (<see cref="_appeared"/>), so nobody is
+    /// ever put inside a door or a chest, and the TV never sees it appear on them.
+    /// </summary>
+    private ImmutableArray<InteractableDef> Things
+    {
+        get
+        {
+            var all = AllThings;
+            if (all.IsEmpty || !all.Any(Gated))
+                return all;
+            var flags = StoryFlags();
+            return [.. all.Where(d => !(Gated(d) && d.At == _at && !_appeared.Contains(d.Id) && Interactables.Blocks(d, ThingState(d), flags)))];
+        }
+    }
+
+    private static bool Gated(InteractableDef d) => !d.Requires.IsEmpty || !d.Unless.IsEmpty;
+
+    /// <summary>The things whose flags put them there while the leader stood elsewhere: they stand where they are from then on.</summary>
+    private readonly HashSet<string> _appeared = new(StringComparer.Ordinal);
+
+    /// <summary>Notes every gated thing that's there now and not under the leader, so it's never put off again.</summary>
+    private void NoteAppeared()
+    {
+        var flags = StoryFlags();
+        foreach (var d in AllThings.Where(d => Gated(d) && d.At != _at && Interactables.Present(d, flags)))
+            _appeared.Add(d.Id);
+    }
+
+    /// <summary>The tiles the party could have walked to from the start on the ground as it is now: where it may be landed or sent.</summary>
+    private IReadOnlySet<Tile> WalkReach()
+    {
+        var ground = WalkGround();
+        if (ReferenceEquals(ground, Rules.GroundFor(_region!.Def.Id)!.Terrain))
+            return Rules.ReachFor(_region.Def.Id)!;        // nothing in the way: the pack's own flood
+        if (_walkReach is { } cached && ReferenceEquals(cached.Ground, ground))
+            return cached.Reach;
+        var reach = WorldWalk.Reach(ground, _region!.Def.Spawns.Start, ClassDef.DefaultJump);
+        _walkReach = (ground, reach);
+        return reach;
+    }
+
+    private (Terrain Ground, HashSet<Tile> Reach)? _walkReach;
+
+    /// <summary>Someone's character came or went from the party mid-walk: their eyes count for passive Perception at once, not at the next step.</summary>
+    private void PartyChanged()
+    {
+        if (_phase == TacticsPhase.Exploration && LookAround())
+        {
+            KeepWorld();
+            Save();
+        }
+    }
+
+    /// <summary>True when the tile holds something in the way that the TV hasn't been told of (a door nobody has found): bumping it says nothing.</summary>
+    private bool UnseenBlocker(Tile at)
+    {
+        var flags = StoryFlags();
+        return AllThings.Any(d => d.At == at && Interactables.Blocks(d, ThingState(d), flags) && !Interactables.Visible(d, ThingState(d), flags));
+    }
 
     private ImmutableSortedDictionary<string, InteractableSave>? ThingSaves => _doc.World?.Things;
 
     private InteractableSave ThingState(InteractableDef def) => Interactables.StateOf(def, ThingSaves);
 
-    private InteractableDef? ThingNamed(string id) => Things.FirstOrDefault(d => d.Id == id);
+    private InteractableDef? ThingNamed(string id) => AllThings.FirstOrDefault(d => d.Id == id);
 
     private string ItemName(ItemId id) => Rules.Items.GetValueOrDefault(id)?.Name ?? id.Value;
 
@@ -85,7 +148,7 @@ public sealed partial class TacticsGame
     private void Use(InteractableDef def)
     {
         var save = ThingState(def);
-        var worked = Interactables.Worked(Things).Contains(def.Id);
+        var worked = Interactables.Worked(AllThings).Contains(def.Id);
         switch (InteractScenes.Plan(def, save, StoryFlags(), worked, ItemName))
         {
             case InstantPlan instant:
@@ -108,7 +171,8 @@ public sealed partial class TacticsGame
                 LeaveExploration();
                 _toasts.Clear();
                 _phase = TacticsPhase.Story;
-                SetCursor(new StorySave("", StorySave.Lead, scene.Scene.Id, null, 0, _storySeq, Thing: new ThingCursor(def.Id, save, _lead!)));
+                // A battle beat waiting at its fight keeps its cursor through the interaction, under the thing's, and has it back after.
+                SetCursor(new StorySave("", StorySave.Lead, scene.Scene.Id, null, 0, _storySeq, Thing: new ThingCursor(def.Id, save, _lead!, Cursor)));
                 EnterNode(scene.Scene, scene.Scene.Start);
                 break;
         }
@@ -149,7 +213,8 @@ public sealed partial class TacticsGame
             foreach (var target in def.Targets.Select(ThingNamed).OfType<InteractableDef>())
             {
                 SetThing(target, ThingState(target) with { State = after.State == InteractableKinds.On ? InteractableKinds.Opened : InteractableKinds.Closed });
-                Event(target, ThingEvents.Toggled, by, null);
+                if (Interactables.Visible(target, ThingState(target), StoryFlags()))
+                    Event(target, ThingEvents.Toggled, by, null);      // a passage that isn't there, or isn't found, moves unseen
             }
     }
 
@@ -235,8 +300,9 @@ public sealed partial class TacticsGame
     /// </summary>
     private void SteppedOnto()
     {
-        if (Things.IsEmpty)
+        if (AllThings.IsEmpty)
             return;
+        NoteAppeared();
         var flags = StoryFlags();
         var changed = false;
         foreach (var def in Things.Where(d => d.At == _at))
@@ -283,7 +349,7 @@ public sealed partial class TacticsGame
         if (_thingPlan is { } cached && ReferenceEquals(cached.Cursor, cursor))
             return cached.Plan;
         var plan = ThingNamed(cursor.Id) is { } def
-            ? InteractScenes.Plan(def, cursor.From, StoryFlags(), Interactables.Worked(Things).Contains(def.Id), ItemName, again: true) as ScenePlan
+            ? InteractScenes.Plan(def, cursor.From, StoryFlags(), Interactables.Worked(AllThings).Contains(def.Id), ItemName, again: true) as ScenePlan
             : null;
         _thingPlan = (cursor, plan);
         return plan;
@@ -302,7 +368,7 @@ public sealed partial class TacticsGame
     private void FinishInteraction()
     {
         EndTelling();
-        SetCursor(null);
+        SetCursor(Cursor?.Thing?.Under);        // a battle beat that was waiting at its fight goes on waiting
         KeepWorld();
         Save();
         ToExploration();
@@ -319,7 +385,7 @@ public sealed partial class TacticsGame
         if (scene is null || scene.Id != c.Scene || (c.Node is not null && (node is null || c.Line < 0 || c.Line >= node.Lines.Length)))
         {
             Note(StoryChanged);
-            SetCursor(null);
+            SetCursor(thing.Under);
             Save();
             ToExploration();
             return;
@@ -341,7 +407,7 @@ public sealed partial class TacticsGame
         if (Things.IsEmpty)
             return null;
         var flags = StoryFlags();
-        return [.. Things.Select(d => (Def: d, Save: ThingState(d))).Where(t => Interactables.Visible(t.Def, t.Save, flags))
+        return [.. Things.Select(d => (Def: d, Save: ThingState(d))).Where(t => Interactables.Visible(t.Def, t.Save, flags) && Interactables.Drawn(t.Def, t.Save))
             .Select(t => new ThingView(t.Def.Id, t.Def.Kind, t.Def.At, t.Def.Facing ?? "sw", Interactables.ArtOf(t.Def),
                 Interactables.ArtState(t.Def, t.Save), Interactables.StandInOf(t.Def, t.Save), Interactables.TitleOf(t.Def),
                 Interactables.Blocks(t.Def, t.Save, flags), Interactables.Trapped(t.Def, t.Save)))];

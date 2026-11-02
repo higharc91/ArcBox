@@ -92,6 +92,26 @@ internal static class Vault
         }
     }
 
+    /// <summary>The base pack with <paramref name="things"/> added to Ashen Ford, from a pack of their own.</summary>
+    public static RulesPack InAshenFord(params string[] things)
+    {
+        var dir = Directory.CreateTempSubdirectory("tactics-ford-things-");
+        try
+        {
+            var utf8 = new UTF8Encoding(false);
+            Directory.CreateDirectory(Path.Combine(dir.FullName, "interactables"));
+            File.WriteAllText(Path.Combine(dir.FullName, "manifest.json"),
+                """{ "id": "ford_things", "rulesVersion": 1, "requires": ["base"], "files": ["interactables/ashen_ford.json"] }""", utf8);
+            File.WriteAllText(Path.Combine(dir.FullName, "interactables", "ashen_ford.json"),
+                $$"""{ "region": "ashen_ford", "interactables": [ {{string.Join(", ", things)}} ] }""", utf8);
+            return RulesPack.Load([ContentRules(), dir.FullName]);
+        }
+        finally
+        {
+            dir.Delete(recursive: true);
+        }
+    }
+
     private static string ContentRules() => Path.Combine(ContentBase(), "rules");
 
     private static readonly Lazy<JsonElement> Party = new(() => DocumentAt(null));

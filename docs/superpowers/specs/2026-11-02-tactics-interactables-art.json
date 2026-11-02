@@ -1,9 +1,7 @@
 {
-  "about": "The art brief's keys (docs/superpowers/specs/2026-11-02-tactics-interactables-design.md section 4). A new set, content/tactics/base/interactables/, with a manifest.json in the props shape: each key's variants are its states, so the TV draws interactables.<kind>.<state>. Files are <kind>_<state>.png, drawn at 1x, shown at 2x, facing sw; the TV mirrors them for the other facings. A transition is a horizontal strip played once, from one state to the other. blocks null: the state decides (closed blocks). taken (pickup) may be an empty frame. ambient has no art of its own and isn't listed.",
-  "assets": {
+  "props": {
     "chest": {
-      "key": "interactables.chest",
-      "states": {
+      "variants": {
         "closed": "chest_closed.png",
         "open": "chest_open.png"
       },
@@ -15,23 +13,41 @@
         13,
         25
       ],
+      "frames": 1,
+      "fps": 0.0,
       "blocks": true,
       "cover": "half",
       "height": 1,
-      "transitions": {
-        "opening": {
-          "file": "chest_opening.png",
-          "frames": 4,
-          "fps": 10,
-          "from": "closed",
-          "to": "open"
-        }
+      "tags": [
+        "interactable"
+      ]
+    },
+    "chest_opening": {
+      "variants": {
+        "strip": "chest_opening.png"
       },
-      "standInNow": "props.chest"
+      "size": [
+        26,
+        26
+      ],
+      "anchor": [
+        13,
+        25
+      ],
+      "frames": 4,
+      "fps": 10.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:closed",
+        "to:open"
+      ]
     },
     "crate": {
-      "key": "interactables.crate",
-      "states": {
+      "variants": {
         "closed": "crate_closed.png",
         "open": "crate_open.png"
       },
@@ -43,23 +59,41 @@
         13,
         27
       ],
+      "frames": 1,
+      "fps": 0.0,
       "blocks": true,
       "cover": "half",
       "height": 1,
-      "transitions": {
-        "opening": {
-          "file": "crate_opening.png",
-          "frames": 4,
-          "fps": 10,
-          "from": "closed",
-          "to": "open"
-        }
+      "tags": [
+        "interactable"
+      ]
+    },
+    "crate_opening": {
+      "variants": {
+        "strip": "crate_opening.png"
       },
-      "standInNow": "props.crate"
+      "size": [
+        26,
+        28
+      ],
+      "anchor": [
+        13,
+        27
+      ],
+      "frames": 4,
+      "fps": 10.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:closed",
+        "to:open"
+      ]
     },
     "barrel": {
-      "key": "interactables.barrel",
-      "states": {
+      "variants": {
         "closed": "barrel_closed.png",
         "open": "barrel_open.png"
       },
@@ -71,23 +105,41 @@
         9,
         25
       ],
+      "frames": 1,
+      "fps": 0.0,
       "blocks": true,
       "cover": "half",
       "height": 1,
-      "transitions": {
-        "opening": {
-          "file": "barrel_opening.png",
-          "frames": 3,
-          "fps": 10,
-          "from": "closed",
-          "to": "open"
-        }
+      "tags": [
+        "interactable"
+      ]
+    },
+    "barrel_opening": {
+      "variants": {
+        "strip": "barrel_opening.png"
       },
-      "standInNow": "props.barrel"
+      "size": [
+        18,
+        26
+      ],
+      "anchor": [
+        9,
+        25
+      ],
+      "frames": 3,
+      "fps": 10.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:closed",
+        "to:open"
+      ]
     },
     "sack": {
-      "key": "interactables.sack",
-      "states": {
+      "variants": {
         "closed": "sack_closed.png",
         "open": "sack_open.png"
       },
@@ -99,24 +151,43 @@
         8,
         15
       ],
+      "frames": 1,
+      "fps": 0.0,
       "blocks": false,
       "cover": "none",
       "height": 1,
-      "layer": "ground",
-      "transitions": {
-        "opening": {
-          "file": "sack_opening.png",
-          "frames": 3,
-          "fps": 10,
-          "from": "closed",
-          "to": "open"
-        }
+      "tags": [
+        "interactable"
+      ],
+      "layer": "ground"
+    },
+    "sack_opening": {
+      "variants": {
+        "strip": "sack_opening.png"
       },
-      "standInNow": "props.sack"
+      "size": [
+        16,
+        16
+      ],
+      "anchor": [
+        8,
+        15
+      ],
+      "frames": 3,
+      "fps": 10.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:closed",
+        "to:open"
+      ],
+      "layer": "ground"
     },
     "cache": {
-      "key": "interactables.cache",
-      "states": {
+      "variants": {
         "closed": "cache_closed.png",
         "open": "cache_open.png"
       },
@@ -128,24 +199,43 @@
         12,
         15
       ],
+      "frames": 1,
+      "fps": 0.0,
       "blocks": false,
       "cover": "none",
       "height": 0,
-      "layer": "ground",
-      "transitions": {
-        "opening": {
-          "file": "cache_opening.png",
-          "frames": 4,
-          "fps": 10,
-          "from": "closed",
-          "to": "open"
-        }
+      "tags": [
+        "interactable"
+      ],
+      "layer": "ground"
+    },
+    "cache_opening": {
+      "variants": {
+        "strip": "cache_opening.png"
       },
-      "standInNow": "pickups.loot_sack"
+      "size": [
+        24,
+        16
+      ],
+      "anchor": [
+        12,
+        15
+      ],
+      "frames": 4,
+      "fps": 10.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:closed",
+        "to:open"
+      ],
+      "layer": "ground"
     },
     "door": {
-      "key": "interactables.door",
-      "states": {
+      "variants": {
         "closed": "door_closed.png",
         "open": "door_open.png"
       },
@@ -157,22 +247,41 @@
         16,
         48
       ],
-      "blocks": null,
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
       "cover": "full",
       "height": 3,
-      "transitions": {
-        "opening": {
-          "file": "door_opening.png",
-          "frames": 4,
-          "fps": 10,
-          "from": "closed",
-          "to": "open"
-        }
-      }
+      "tags": [
+        "interactable"
+      ]
+    },
+    "door_opening": {
+      "variants": {
+        "strip": "door_opening.png"
+      },
+      "size": [
+        32,
+        56
+      ],
+      "anchor": [
+        16,
+        48
+      ],
+      "frames": 4,
+      "fps": 10.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 3,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:closed",
+        "to:open"
+      ]
     },
     "gate": {
-      "key": "interactables.gate",
-      "states": {
+      "variants": {
         "closed": "gate_closed.png",
         "open": "gate_open.png"
       },
@@ -184,22 +293,41 @@
         20,
         44
       ],
-      "blocks": null,
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
       "cover": "half",
       "height": 3,
-      "transitions": {
-        "opening": {
-          "file": "gate_opening.png",
-          "frames": 6,
-          "fps": 10,
-          "from": "closed",
-          "to": "open"
-        }
-      }
+      "tags": [
+        "interactable"
+      ]
+    },
+    "gate_opening": {
+      "variants": {
+        "strip": "gate_opening.png"
+      },
+      "size": [
+        40,
+        56
+      ],
+      "anchor": [
+        20,
+        44
+      ],
+      "frames": 6,
+      "fps": 10.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 3,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:closed",
+        "to:open"
+      ]
     },
     "drawbridge": {
-      "key": "interactables.drawbridge",
-      "states": {
+      "variants": {
         "closed": "drawbridge_closed.png",
         "open": "drawbridge_open.png"
       },
@@ -211,22 +339,41 @@
         32,
         40
       ],
-      "blocks": null,
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
       "cover": "none",
       "height": 3,
-      "transitions": {
-        "opening": {
-          "file": "drawbridge_opening.png",
-          "frames": 8,
-          "fps": 8,
-          "from": "closed",
-          "to": "open"
-        }
-      }
+      "tags": [
+        "interactable"
+      ]
+    },
+    "drawbridge_opening": {
+      "variants": {
+        "strip": "drawbridge_opening.png"
+      },
+      "size": [
+        64,
+        48
+      ],
+      "anchor": [
+        32,
+        40
+      ],
+      "frames": 8,
+      "fps": 8.0,
+      "blocks": true,
+      "cover": "none",
+      "height": 3,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:closed",
+        "to:open"
+      ]
     },
     "secret_door": {
-      "key": "interactables.secret_door",
-      "states": {
+      "variants": {
         "closed": "secret_door_closed.png",
         "open": "secret_door_open.png"
       },
@@ -238,22 +385,41 @@
         16,
         48
       ],
-      "blocks": null,
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
       "cover": "full",
       "height": 3,
-      "transitions": {
-        "opening": {
-          "file": "secret_door_opening.png",
-          "frames": 6,
-          "fps": 8,
-          "from": "closed",
-          "to": "open"
-        }
-      }
+      "tags": [
+        "interactable"
+      ]
+    },
+    "secret_door_opening": {
+      "variants": {
+        "strip": "secret_door_opening.png"
+      },
+      "size": [
+        32,
+        56
+      ],
+      "anchor": [
+        16,
+        48
+      ],
+      "frames": 6,
+      "fps": 8.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 3,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:closed",
+        "to:open"
+      ]
     },
     "lever": {
-      "key": "interactables.lever",
-      "states": {
+      "variants": {
         "off": "lever_off.png",
         "on": "lever_on.png"
       },
@@ -265,22 +431,41 @@
         8,
         23
       ],
+      "frames": 1,
+      "fps": 0.0,
       "blocks": false,
       "cover": "none",
       "height": 1,
-      "transitions": {
-        "pulling": {
-          "file": "lever_pulling.png",
-          "frames": 3,
-          "fps": 12,
-          "from": "off",
-          "to": "on"
-        }
-      }
+      "tags": [
+        "interactable"
+      ]
+    },
+    "lever_pulling": {
+      "variants": {
+        "strip": "lever_pulling.png"
+      },
+      "size": [
+        16,
+        24
+      ],
+      "anchor": [
+        8,
+        23
+      ],
+      "frames": 3,
+      "fps": 12.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:off",
+        "to:on"
+      ]
     },
     "note": {
-      "key": "interactables.note",
-      "states": {
+      "variants": {
         "unread": "note_unread.png",
         "read": "note_read.png"
       },
@@ -292,14 +477,18 @@
         8,
         11
       ],
+      "frames": 1,
+      "fps": 0.0,
       "blocks": false,
       "cover": "none",
       "height": 0,
+      "tags": [
+        "interactable"
+      ],
       "layer": "ground"
     },
     "plaque": {
-      "key": "interactables.plaque",
-      "states": {
+      "variants": {
         "unread": "plaque_unread.png",
         "read": "plaque_read.png"
       },
@@ -311,13 +500,17 @@
         10,
         19
       ],
+      "frames": 1,
+      "fps": 0.0,
       "blocks": false,
       "cover": "none",
-      "height": 1
+      "height": 1,
+      "tags": [
+        "interactable"
+      ]
     },
     "book": {
-      "key": "interactables.book",
-      "states": {
+      "variants": {
         "unread": "book_unread.png",
         "read": "book_read.png"
       },
@@ -329,13 +522,17 @@
         12,
         29
       ],
+      "frames": 1,
+      "fps": 0.0,
       "blocks": false,
       "cover": "none",
-      "height": 2
+      "height": 2,
+      "tags": [
+        "interactable"
+      ]
     },
     "gravestone": {
-      "key": "interactables.gravestone",
-      "states": {
+      "variants": {
         "unread": "gravestone_unread.png",
         "read": "gravestone_read.png"
       },
@@ -347,14 +544,17 @@
         9,
         23
       ],
+      "frames": 1,
+      "fps": 0.0,
       "blocks": true,
       "cover": "half",
       "height": 1,
-      "standInNow": "props.gravestone"
+      "tags": [
+        "interactable"
+      ]
     },
     "signpost": {
-      "key": "interactables.signpost",
-      "states": {
+      "variants": {
         "unread": "signpost_unread.png",
         "read": "signpost_read.png"
       },
@@ -366,14 +566,17 @@
         12,
         33
       ],
+      "frames": 1,
+      "fps": 0.0,
       "blocks": false,
       "cover": "none",
       "height": 1,
-      "standInNow": "props.signpost"
+      "tags": [
+        "interactable"
+      ]
     },
     "pickup": {
-      "key": "interactables.pickup",
-      "states": {
+      "variants": {
         "here": "pickup_here.png",
         "taken": "pickup_taken.png"
       },
@@ -385,15 +588,18 @@
         12,
         23
       ],
+      "frames": 1,
+      "fps": 0.0,
       "blocks": false,
       "cover": "none",
       "height": 0,
-      "layer": "ground",
-      "standInNow": "pickups.loot_sack"
+      "tags": [
+        "interactable"
+      ],
+      "layer": "ground"
     },
     "shrine": {
-      "key": "interactables.shrine",
-      "states": {
+      "variants": {
         "ready": "shrine_ready.png",
         "used": "shrine_used.png"
       },
@@ -405,23 +611,41 @@
         18,
         40
       ],
+      "frames": 1,
+      "fps": 0.0,
       "blocks": true,
       "cover": "half",
       "height": 2,
-      "transitions": {
-        "using": {
-          "file": "shrine_using.png",
-          "frames": 6,
-          "fps": 8,
-          "from": "ready",
-          "to": "used"
-        }
+      "tags": [
+        "interactable"
+      ]
+    },
+    "shrine_using": {
+      "variants": {
+        "strip": "shrine_using.png"
       },
-      "standInNow": "props.shrine"
+      "size": [
+        36,
+        52
+      ],
+      "anchor": [
+        18,
+        40
+      ],
+      "frames": 6,
+      "fps": 8.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 2,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:ready",
+        "to:used"
+      ]
     },
     "well": {
-      "key": "interactables.well",
-      "states": {
+      "variants": {
         "ready": "well_ready.png",
         "used": "well_used.png"
       },
@@ -433,23 +657,41 @@
         17,
         39
       ],
+      "frames": 1,
+      "fps": 0.0,
       "blocks": true,
       "cover": "full",
       "height": 2,
-      "transitions": {
-        "using": {
-          "file": "well_using.png",
-          "frames": 4,
-          "fps": 8,
-          "from": "ready",
-          "to": "used"
-        }
+      "tags": [
+        "interactable"
+      ]
+    },
+    "well_using": {
+      "variants": {
+        "strip": "well_using.png"
       },
-      "standInNow": "props.well"
+      "size": [
+        34,
+        40
+      ],
+      "anchor": [
+        17,
+        39
+      ],
+      "frames": 4,
+      "fps": 8.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 2,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:ready",
+        "to:used"
+      ]
     },
     "altar": {
-      "key": "interactables.altar",
-      "states": {
+      "variants": {
         "ready": "altar_ready.png",
         "used": "altar_used.png"
       },
@@ -461,23 +703,41 @@
         16,
         27
       ],
+      "frames": 1,
+      "fps": 0.0,
       "blocks": true,
       "cover": "half",
       "height": 1,
-      "transitions": {
-        "using": {
-          "file": "altar_using.png",
-          "frames": 6,
-          "fps": 8,
-          "from": "ready",
-          "to": "used"
-        }
+      "tags": [
+        "interactable"
+      ]
+    },
+    "altar_using": {
+      "variants": {
+        "strip": "altar_using.png"
       },
-      "standInNow": "props.altar"
+      "size": [
+        32,
+        28
+      ],
+      "anchor": [
+        16,
+        27
+      ],
+      "frames": 6,
+      "fps": 8.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:ready",
+        "to:used"
+      ]
     },
     "trap": {
-      "key": "interactables.trap",
-      "states": {
+      "variants": {
         "armed": "trap_armed.png",
         "disarmed": "trap_disarmed.png",
         "sprung": "trap_sprung.png"
@@ -490,26 +750,51 @@
         16,
         15
       ],
+      "frames": 1,
+      "fps": 0.0,
       "blocks": false,
       "cover": "none",
       "height": 0,
-      "layer": "ground",
-      "transitions": {
-        "springing": {
-          "file": "trap_springing.png",
-          "frames": 4,
-          "fps": 12,
-          "from": "armed",
-          "to": "sprung"
-        }
-      }
+      "tags": [
+        "interactable"
+      ],
+      "layer": "ground"
+    },
+    "trap_springing": {
+      "variants": {
+        "strip": "trap_springing.png"
+      },
+      "size": [
+        32,
+        16
+      ],
+      "anchor": [
+        16,
+        15
+      ],
+      "frames": 4,
+      "fps": 12.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:armed",
+        "to:sprung"
+      ],
+      "layer": "ground"
     }
   },
-  "totals": {
-    "assets": 20,
-    "stateFrames": 41,
-    "transitionStrips": 14,
-    "transitionFrames": 65,
-    "frames": 106
+  "notes": {
+    "about": "The art brief's keys (docs/superpowers/specs/2026-11-02-tactics-interactables-design.md section 4), as the manifest of a new set, content/tactics/base/interactables/manifest.json, in props/manifest.json's shape, so it loads with ArtManifests as it is: each kind's variants are its states (interactables.chest.open = ThingView.Art + '.' + ThingView.State), drawn as one frame each; each transition is an asset of its own, <kind>_<transition>, one strip played once from its first state to its last, then the state holds. Drawn at 1x, shown at 2x, facing sw; the TV mirrors for the other facings. ambient has no art of its own.",
+    "anchor": "the ground contact pixel; stand it on the tile centre",
+    "frames": "a transition is a horizontal strip, played once at fps",
+    "cover": "none | half | full, for ranged attacks (a passage: when closed)",
+    "height": "in height steps (16 px), for line of sight",
+    "layer": "absent = over (a billboard, sorted with units); ground = lies flat under units",
+    "blocks": "a passage's blocks is true and means closed: when open the engine says it doesn't",
+    "empty": "a pickup's taken and a cache's open draw nothing: the TV isn't sent them, so they may be left out",
+    "totals": "20 kinds, 41 state frames, 14 transition strips of 65 frames: 106 frames in all"
   }
 }
