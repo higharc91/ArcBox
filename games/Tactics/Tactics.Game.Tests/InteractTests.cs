@@ -546,5 +546,53 @@ public sealed class InteractTests
         Assert.False(Walk(s).GetProperty("beat").GetBoolean());
         Assert.False(Walk(s, 1).GetProperty("beat").GetBoolean());
     }
-}
 
+    private static readonly string[] HiddenCrate =
+    [
+        """{ "id": "crate", "kind": "crate", "at": [3, 1], "hidden": 30, "loot": [{ "item": "smoke_bomb" }] }""",
+        """{ "id": "watcher", "kind": "crate", "at": [7, 2], "hidden": 1 }""",
+    ];
+
+    [Fact]
+    public void A_hidden_crate_nobody_has_found_is_walked_through_without_a_bump()
+    {
+        var s = Vault.At(new Tile(2, 1), Vault.Load(HiddenCrate));
+        Assert.True(Saved(s, "crate") is null or { Found: false });
+        var bumps = s.Host.Explore!.Bumps;
+        Step(s, "e");                                                    // onto its tile
+        Assert.Equal(new Tile(3, 1), s.Host.Explore!.At);
+        Assert.Equal(bumps, s.Host.Explore!.Bumps);
+        Assert.False(s.Host.Explore!.Blocked);
+        Assert.Null(Thing(s, "crate"));
+        Assert.Empty(s.Host.Explore!.Plugs!.Value);                       // and it's no wall either: it's nothing at all until it's found
+        Step(s, "e");
+        Assert.Equal(new Tile(4, 1), s.Host.Explore!.At);
+    }
+
+    [Fact]
+    public void Once_found_a_hidden_crate_stands_in_the_way()
+    {
+        var s = Vault.At(new Tile(2, 1), Vault.Load(HiddenCrate), w => w with { Things = Ordinal.Map(("crate", new InteractableSave("closed", Found: true))) });
+        var bumps = s.Host.Explore!.Bumps;
+        s.Send(0, "walk", new { dir = "e" });
+        Assert.Equal(new Tile(2, 1), s.Host.Explore!.At);
+        Assert.Equal(bumps + 1, s.Host.Explore!.Bumps);
+        Assert.NotNull(Thing(s, "crate"));
+    }
+
+    [Fact]
+    public void A_hidden_crate_is_never_found_under_the_leader_but_as_they_step_off()
+    {
+        string[] things = ["""{ "id": "crate", "kind": "crate", "at": [3, 1], "hidden": 1 }"""];
+        var s = Vault.At(new Tile(2, 1), Vault.Load(things));
+        // A DC of 1: found from three tiles away, as soon as the party looks. Started beside it, it's found at once.
+        Assert.True(Saved(s, "crate")!.Found);
+
+        var under = Vault.At(new Tile(3, 1), Vault.Load(things));
+        Assert.True(Saved(under, "crate") is null or { Found: false });    // standing on it: not found, so not in the way
+        Assert.Equal(new Tile(3, 1), under.Host.Explore!.At);
+        Step(under, "e");
+        Assert.True(Saved(under, "crate")!.Found);                         // found as they step off, beside them
+        Assert.NotEqual(new Tile(3, 1), under.Host.Explore!.At);
+    }
+}

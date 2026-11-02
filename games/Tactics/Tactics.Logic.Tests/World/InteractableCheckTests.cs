@@ -124,6 +124,15 @@ public sealed class InteractableCheckTests
             Message("""{ "id": "x", "kind": "sack", "at": [8, 8] }""", """{ "id": "c1", "kind": "chest", "at": [5, 6] }"""));
 
     [Fact]
+    public void A_hidden_chest_in_the_only_way_is_judged_as_found_and_refused()
+    {
+        // Unfound it's walked through, but once found it stands there for good: the check counts it as found.
+        var region = Vault.Region() with { Spawns = new RegionSpawns(Vault.Start, new Tile(4, 4)) };
+        var errors = ValidationTests.ErrorsOfChapter(Vault.World(region), Vault.Things("vault", """{ "id": "c1", "kind": "chest", "at": [4, 3], "hidden": 12 }"""));
+        Assert.Equal("The recovery spawn at (4, 4) is walled off by things that stand in the way ('c1').", Assert.Single(errors).Message);
+    }
+
+    [Fact]
     public void A_chest_in_the_only_way_to_the_recovery_spawn_is_an_error()
     {
         var region = Vault.Region() with { Spawns = new RegionSpawns(Vault.Start, new Tile(4, 4)) };

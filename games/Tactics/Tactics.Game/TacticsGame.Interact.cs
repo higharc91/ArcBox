@@ -333,7 +333,8 @@ public sealed partial class TacticsGame
         var (passive, who) = PartyPassive();
         if (who is null)
             return false;       // nobody has a character yet
-        var finds = Interactables.Finds(Things, ThingSaves, StoryFlags(), _at, passive);
+        // Nothing is found under the leader: a hidden chest found there would stand on them. It's found as they step off it.
+        var finds = Interactables.Finds(Things.Where(d => d.At != _at), ThingSaves, StoryFlags(), _at, passive);
         foreach (var (def, found) in finds)
         {
             var save = ThingState(def);

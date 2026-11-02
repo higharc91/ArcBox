@@ -66,15 +66,18 @@ public static class Interactables
     }
 
     /// <summary>
-    /// True when it stands in the way of walking (design §2.4): a passage while it's closed (found or not: a hidden door is a wall), a
-    /// floor trap that's been seen and is still set (the party walks round it), and otherwise as its kind or content says. Something that
-    /// isn't there blocks nothing.
+    /// True when it stands in the way of walking (design §2.4): a passage while it's closed (found or not: a hidden door is a wall, which the
+    /// TV draws as wall, <see cref="Plugged"/>), a floor trap that's been seen and is still set (the party walks round it), and otherwise as
+    /// its kind or content says, once it's been found if it's hidden: a hidden chest nobody has found is walked through, or the party would
+    /// stop at nothing and give it away. Something that isn't there blocks nothing.
     /// </summary>
     public static bool Blocks(InteractableDef def, InteractableSave save, IReadOnlySet<string> flags)
     {
         if (!Present(def, flags))
             return false;
         var kind = KindOf(def);
+        if (def.Hidden is not null && !save.Found && kind.Family != InteractableFamily.Passage)
+            return false;
         return kind.Family switch
         {
             InteractableFamily.Passage => save.State == InteractableKinds.Closed,
