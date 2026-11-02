@@ -15,6 +15,7 @@ from parts.rig import Pose
 from .roster import character
 from .attachments import ATTACHMENTS,HAND_POINTS,SHOULDERS
 from .races import fit_point
+from .materials import SHADOW_LAYERS,contact_shadow
 
 FRAME=(160,160)
 ANCHOR=(80,123)
@@ -195,6 +196,9 @@ def frame(role,race,back,pose):
             image=warp(image,motion)
         data=np.array(image)
         mask=data[:,:,3]>0
+        if name in SHADOW_LAYERS:
+            opaque=mask&(data[:,:,0]!=SLOTS.id('magic')*16)
+            contact_shadow(out,opaque)
         if name in ATTACHMENTS[role] or name in ('near-hand','far-arm','near-palm','far-palm'):
             posed[name]=mask
         out.slot[mask]=data[:,:,0][mask]//16

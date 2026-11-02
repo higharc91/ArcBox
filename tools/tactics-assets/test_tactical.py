@@ -73,6 +73,62 @@ class TacticalTests(unittest.TestCase):
         pose=Pose(drag=(2,1))
         self.assertFalse(np.array_equal(transform('hair',pose,'elf'),transform('head',pose,'elf')))
 
+    def test_material_finishing_preserves_part_coverage_and_materials(self):
+        from parts.tactical_art.base import actor
+        from parts.tactical_art.materials import finish_base,finish_equipment
+        from parts.characters import render_layer
+        from parts.material_finish import finish_part
+        from parts.rig import points,BUILDS
+        for back in (False,True):
+            for outfit in ('robe','mail','leather'):
+                _,_,layers=actor('fighter',back,outfit)
+                original={name:c.slot.copy() for name,c in layers.items()}
+                finish_base(layers,outfit,back);finish_equipment(layers)
+                for name,c in layers.items():
+                    self.assertTrue(np.array_equal(original[name],c.slot),(outfit,back,name))
+                    self.assertTrue((c.shade<=5).all())
+        for direction in ('front','back'):
+            for build in BUILDS:
+                for anim,_,pose in frame_list()[::19]:
+                    for layer,variant in [('torso','rags'),('torso','plate'),('legs','skirt'),('weapon','sword')]:
+                        c=render_layer(layer,variant,build,direction,pose).copy()
+                        original=c.slot.copy()
+                        finish_part(c,layer,variant,points(BUILDS[build],pose,direction))
+                        self.assertTrue(np.array_equal(original,c.slot),(build,direction,anim,variant))
+                        self.assertTrue((c.shade<=5).all())
+        # A one-pixel blade tip is both an upper and lower boundary. Its bright
+        # rim must win rather than being overwritten by the lower-edge shadow.
+        tip=Canvas(8,8,SLOTS);tip.px(3,3,'blade',3)
+        finish_equipment({'weapon':tip})
+        self.assertEqual(5,tip.shade[3,3])
+
+    def test_contact_shadow_preserves_transparency_and_emissive_materials(self):
+        from parts.tactical_art.materials import contact_shadow
+        c=Canvas(8,8,SLOTS)
+        c.rect(2,2,4,4,'cloth1',3);c.px(5,4,'magic',5)
+        slots=c.slot.copy();mask=np.zeros((8,8),bool);mask[2:4,2:5]=True
+        contact_shadow(c,mask)
+        self.assertTrue(np.array_equal(slots,c.slot))
+        self.assertEqual(2,c.shade[4,4])
+        self.assertEqual(3,c.shade[2,2])
+        self.assertEqual(5,c.shade[4,5])
+        self.assertFalse(c.flags.any())
+
+    def test_baked_enemy_materials_match_recolourable_layers_in_action(self):
+        from parts.characters import compose
+        from parts.recipes import ENEMIES
+        # Check every humanoid enemy in both facings, not only a front idle.
+        poses=frame_list()
+        samples=[0]+[i for i,(name,_,_) in enumerate(poses)
+            if name in ('walk','attack','cast','down')]
+        for recipe in ENEMIES:
+            with Image.open(PACK/f'characters/presets/{recipe.id}.png') as sheet:
+                for back in (False,True):
+                    for index in samples:
+                        actual=np.array(sheet.crop((index*32,int(back)*40,(index+1)*32,(int(back)+1)*40)))
+                        expected=np.array(compose(recipe,'back' if back else 'front',poses[index][2]).render(recipe.ramps()))
+                        self.assertTrue(np.array_equal(actual,expected),(recipe.id,back,poses[index][:2]))
+
     def test_every_held_item_and_hand_agree_for_every_race_facing_and_pose(self):
         self.assertEqual(set(CLASSES),set(ATTACHMENTS))
         for race in RACES:

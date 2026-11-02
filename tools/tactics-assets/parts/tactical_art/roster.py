@@ -1,6 +1,6 @@
 """Approved tactical art direction applied to all 12 classes and 11 races.
 
-Static front/back sprite library and independent indexed parts; not full animation.
+Independent indexed parts in both facings, consumed by the runtime animation rig.
 """
 from .base import actor
 from .common import *
@@ -161,6 +161,9 @@ def character(role,race='human',back=False,outfit=None):
             target=offhand if x==14 else weapon
             P(target,[(x,y-s),(x+2,y-1),(x+s,y),(x+3,y+4),(x-2,y+5),(x-s,y+1),(x-2,y-2)],'magic',3)
             P(target,[(x,y-2),(x+2,y+1),(x,y+3),(x-2,y+1)],'magic',5)
+    from .materials import finish_equipment
+    layers['class-headwear']=headwear
+    finish_equipment(layers)
     # Race anatomy is separate from clothing, and shared across all class recipes.
     _,_,racial=race_character(race,back,fitted=False)
     traits=racial['race-details']

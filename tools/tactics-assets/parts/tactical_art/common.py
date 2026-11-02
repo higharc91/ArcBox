@@ -9,9 +9,12 @@ from parts.rig import ANIMS
 
 def composite(layers):
     out=Canvas(64,80,SLOTS)
-    for layer in layers.values():
+    from .materials import SHADOW_LAYERS,contact_shadow
+    for name,layer in layers.items():
         mask=layer.slot!=0
-        for name in ('slot','shade','flags'):
-            getattr(out,name)[mask]=getattr(layer,name)[mask]
+        if name in SHADOW_LAYERS:
+            contact_shadow(out,mask&(layer.slot!=SLOTS.id('magic')))
+        for attribute in ('slot','shade','flags'):
+            getattr(out,attribute)[mask]=getattr(layer,attribute)[mask]
     out.outline()
     return out

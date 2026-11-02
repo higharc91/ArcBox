@@ -72,6 +72,35 @@ every walking frame and animation endpoints, and deliberate failure cases.
 Rebuilds stage the entire set before publishing it, preserving the last working
 sheets if any animation frame fails its contact check.
 
+### Material finishing and review
+
+`parts/tactical_art/materials.py` authors broad cloth folds, turned leather planes,
+plate bevels and sleeve/boot shading before race fitting. Its stencils change only
+shades inside the matching material; they cannot grow silhouettes or repaint trim.
+The posed compositor adds one authoring pixel of contact shadow under overlapping
+opaque parts, following the current hand/equipment masks. Emissive spell pixels
+neither cast these shadows nor receive them. Keep folds broad enough to survive
+the runtime's half-density draw; isolated texture specks usually disappear or flicker.
+
+`parts/material_finish.py` applies the same material direction to the classic
+32×40 library, including all 19 humanoid enemy recipes and NPCs. Those details
+are authored from rig points before cloth trailing and whole-body rotation, and
+are exported in both the recolourable layers and the baked preset sheets.
+Beasts and large bosses keep their separate art pipelines.
+
+To compare a revision, save the previous `tactical/` and `characters/presets/`
+directories, then run:
+
+```bash
+python3 tools/tactics-assets/review_materials.py --before /path/to/snapshot
+```
+
+The generated `material-refinement.png` compares identical
+poses at runtime pixel density; `material-world-comparison.png` uses identical
+world layouts with terrain, props and enemies. These software compositions are
+asset reviews, not Godot screenshots; review the game camera as well.
+`material-enemies.png` shows the finishing pass on every humanoid enemy.
+
 ## How the art is built
 
 - **Indexed drawing.** A canvas pixel is a `(slot, shade)` pair, not a colour. A *slot* is a material: `skin`,

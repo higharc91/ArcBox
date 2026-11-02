@@ -1,7 +1,6 @@
-"""Three-quarter tactical art study, authored as interchangeable indexed layers.
+"""Shared three-quarter anatomy and material-finished garment templates.
 
-Not FFT assets. This uses original geometry with a shared body and separately
-authored garments/gear. Three looks and two facings, not a production animation rig.
+Original geometry, authored as independent indexed layers for the runtime rig.
 """
 from .common import *
 from .common import composite
@@ -187,4 +186,6 @@ def actor(role='fighter',back=False,outfit=None,helmet=True,cloak=True):
         for x in (18,21,24):
             L('cape-behind',x,23,x+6,42,'wood',3)
             P('cape-behind',[(x,23),(x-2,20),(x,18),(x+2,22)],'horn',4)
+    from .materials import finish_base
+    finish_base(layers,outfit,back)
     return composite(layers),pal,layers
