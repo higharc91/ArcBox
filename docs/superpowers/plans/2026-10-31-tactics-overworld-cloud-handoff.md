@@ -144,7 +144,7 @@ The local session was on Windows with an RTX 5080. Check what you have.
 - **Player colours:** each player picks their colour with a colour picker at character creation. It's used for their TV ring, vote dots and phone. This replaces "stable seat colours". (14) *To build.*
 - **Scene cast:** every scene places its non-narrator speakers at the scene's spot in the world while it plays. (21) *To build.*
 - **"Back to walking":** hidden when there's no world, using a new canWalk flag (a small contract change). (9, 29) *To build.*
-- **Spawn clash:** a walker on a spawn's tile steps to the nearest free walkable tile. (8) *To build.*
+- **Spawn clash:** a walker on a spawn's tile steps to the nearest free walkable tile. (8) *Built.*
 - **Character screens need much better explanations** (the user's note after reviewing the phone screens). Explain:
   - racial benefits (traits, ability bonuses, speed, senses, and what each means in play);
   - class benefits (role, hit die, proficiencies, key features by level, spellcasting);
@@ -170,7 +170,7 @@ Keep this list, add to it, and put it at the top of your final report. Don't sto
 11. **Rules invariants run only in Debug builds.** On a Release server a broken state (the share-the-tile bug, say) won't throw: it's kept and saved. The checks are cheap; turning them on for production is the user's call.
 12. **The pad from e/w:** a thumb already holding e or w keeps it out to 72°, so sliding round onto a road switches 8.6° off the road rather than 10°. Guaranteeing 10° would shrink e/w from 24° to about 21°. (`51505fc`)
 13. **The battle list hidden from normal play**, as the user asked: `Tactics:BattleList`, Development only, off by default. A pack with no region keeps its list. The bots and `tv-e2e.sh` turn it on. (`f681da2`)
-14. **Seat colours wait for 5d.** The room has no stable seat to share (`PlayerSlot.JoinOrder` repeats after a leave and never reaches the game), so the TV's walker rings stay the party green with a dark outline. Giving the TV and phone one seat number needs an SDK and lobby protocol change; 5d's vote dots need the same thing. The phone's palette is also weak for deuteranopia (sky against violet) and tritanopia (sky against green).
+14. **Seat colours: superseded.** Each player now picks a colour at character creation, drawn on the TV (walker and battle rings, vote pips, check-card stripes; ac7a937) and phones. History: The room has no stable seat to share (`PlayerSlot.JoinOrder` repeats after a leave and never reaches the game), so the TV's walker rings stay the party green with a dark outline. Giving the TV and phone one seat number needs an SDK and lobby protocol change; 5d's vote dots need the same thing. The phone's palette is also weak for deuteranopia (sky against violet) and tritanopia (sky against green).
 15. **Fleeing lands outside the stamp**, usually where the fight began, not at the stamp as the 5c plan said: standing in an armed stamp is what the landing rule forbids.
 16. **A player whose turn comes first** gets their 60 s only after the walk-in (at most 3 s).
 17. **Losing a lead to a blip:** a stand-in always keeps the lead at least 3 s after it's handed over, and the session leader takes it back after the party has been stopped for 3 s.
@@ -189,7 +189,7 @@ Keep this list, add to it, and put it at the top of your final report. Don't sto
     - panel words such as "Party vote", "Leader's choice", "Tie-break" and "Waiting for a phone to come back";
     - the chapter card isn't saved, so a restart during it skips it;
     - checkpoints are named after the beat's first scene.
-23. **Seat colours still wait** (decision 14). Story voters show as gold initials meanwhile.
+23. **Player colours are built** (see decision 14 and "The user's answers"). On a hero's own turn the ring keeps their colour, drawn wider, and the turn arrow marks whose turn it is; companions and enemies keep the gold turn ring.
 24. **Server start loads the Tactics content first,** adding about 1.5 s to every server's startup, including Redline-only use. That stopped rooms being closed as hung while the pack loaded inside a room's first call.
 25. **The end-of-battle walk halt is an engine behaviour change.** `Objectives.End` now halts walks still queued, which fixes the share-the-tile crash; a battle that ends mid-walk gains one `Moved` event before `BattleEnded`. No numbers changed. §2 says rule changes need the user's sign-off, so please confirm.
 26. **After a server restart, the saved line is spoken again** (5d plan: "the saved line replays"). The "never replay a voice line" rule was written for a TV that rejoins; please confirm a server restart is an exception. When the phones reach a restarted server before the TV, that line is only shown, never spoken.
