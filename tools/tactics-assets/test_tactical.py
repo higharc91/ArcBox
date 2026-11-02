@@ -9,7 +9,7 @@ from PIL import Image
 from arcpix.out import PACK
 from parts.creator import RACES,CLASSES
 from parts.rig import ANIMS,Pose,frame_list
-from parts.tactical_art.animation import FRAME,COLUMNS,frame,transform
+from parts.tactical_art.animation import FRAME,COLUMNS,frame,transform,dagger_grip,dagger_transform
 from parts.tactical_art.build import bake
 
 
@@ -66,5 +66,13 @@ class TacticalTests(unittest.TestCase):
         # Long-haired characters still retain their existing secondary motion.
         pose=Pose(drag=(2,1))
         self.assertFalse(np.array_equal(transform('hair',pose,'elf'),transform('head',pose,'elf')))
+
+    def test_each_rogue_dagger_tracks_its_own_hand_in_every_race_and_pose(self):
+        for race in RACES:
+            for anim,_,pose in frame_list():
+                for blade,arm in (('weapon','near-hand'),('offhand','far-arm')):
+                    grip=dagger_grip(blade,race)
+                    self.assertTrue(np.allclose(dagger_transform(blade,pose,race)@grip,
+                        transform(arm,pose,race)@grip),(race,anim,blade))
 
 if __name__=='__main__':unittest.main()

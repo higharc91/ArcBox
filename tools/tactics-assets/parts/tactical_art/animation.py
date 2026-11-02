@@ -72,6 +72,23 @@ def warp(image,matrix):
     inverse=(e/det,-b/det,(b*f-e*c)/det,-d/det,a/det,(d*c-a*f)/det)
     return image.transform(FRAME,Image.Transform.AFFINE,inverse,Image.Resampling.NEAREST)
 
+def dagger_grip(name,race):
+    """Grip in fitted source pixels, before pose articulation."""
+    x,y=(44,51) if name=='weapon' else (19,48)
+    width={'dwarf':1.10,'halfling':.88,'gnome':.88,'half_orc':1.12,'goliath':1.12}.get(race,1)
+    heights={'dwarf':[0,24,44,57,75,80],'halfling':[0,25,45,58,75,80],
+        'gnome':[0,25,45,58,75,80],'half_orc':[0,9,30,49,75,80],
+        'goliath':[0,9,30,49,75,80]}.get(race,[0,12,33,50,75,80])
+    return np.array([32+(x-32)*width,np.interp(y,[0,12,33,50,75,80],heights),1.])
+
+def dagger_transform(name,pose,race):
+    # Map the grip through the exact arm transform. Rotating the blade around
+    # that mapped point keeps it attached even when the arm stretches or turns.
+    grip=dagger_grip(name,race)
+    arm=transform('near-hand' if name=='weapon' else 'far-arm',pose,race)
+    target=arm@grip
+    return translate(target[0],target[1])@rotate(pose.weapon-25-pose.tilt,(0,0))@translate(-grip[0],-grip[1])
+
 @lru_cache(maxsize=132)
 def colour_table(role,race):
     palette,_=rest(role,race,False)
@@ -101,7 +118,9 @@ def frame(role,race,back,pose):
             image=Image.new('RGBA',FRAME)
             for limb,offset,default in ((left,pose.foot_f,-1),(right,pose.foot_n,1)):
                 image.alpha_composite(warp(limb,transform(name,pose,race)@translate((offset[0]-default)*1.5,-offset[1]*1.5)))
-        else:image=warp(image,transform(name,pose,race))
+        else:
+            motion=dagger_transform(name,pose,race) if role=='rogue' and name in ('weapon','offhand') else transform(name,pose,race)
+            image=warp(image,motion)
         data=np.array(image)
         mask=data[:,:,3]>0
         out.slot[mask]=data[:,:,0][mask]//16

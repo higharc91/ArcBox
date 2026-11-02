@@ -59,9 +59,14 @@ def character(role,race='human',back=False,outfit=None):
                 for x in range(25,40): headwear.clear(x,y)
             P(headwear,[(25,26),(31,28),(40,25),(39,30),(33,33),(26,30)],'cloth2',1)
         L(headwear,23,17,27,12,'cloth1',4)
-        for x,sg in ((18,-1),(45,1)):
-            P(weapon,[(x,51),(x+sg*2,49),(x+sg*8,41),(x+sg*7,46),(x+sg*2,54)],'blade',3)
-            L(weapon,x-2,51,x+3,54,'trim',3)
+        # Each dagger belongs to its own hand. The old combined weapon layer
+        # incorrectly moved the offhand blade with the main-hand swing.
+        for target,x,y,sg in ((offhand,19,48,-1),(weapon,44,51,1)):
+            P(target,[(x,y-2),(x+sg*2,y-4),(x+sg*8,y-12),
+                      (x+sg*7,y-7),(x+sg*2,y)],'blade',3)
+            L(target,x-2,y-3,x+3,y,'trim',3)
+            R(target,x-1,y-1,x+1,y+2,'leather',2)
+        R(layers['far-arm'],17,47,20,50,'skin',3)
         if not back:
             R(extra,24,52,28,56,'leather',2); L(extra,25,53,27,53,'leather',4)
     elif role in ('wizard','druid'):
