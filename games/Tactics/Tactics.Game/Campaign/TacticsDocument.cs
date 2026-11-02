@@ -133,9 +133,18 @@ public sealed record StorySave(string Beat, string Stage, string? Scene, string?
 /// An interaction under way (interactables design §2.7): the thing, its state when the interaction began, which its scene is built from
 /// again after a restart so it's node for node the same, and the member who began it, who gets its loot and whatever its trap does.
 /// <paramref name="Under"/> is the cursor the interaction set aside, a battle beat waiting at its fight, which it puts back when it ends.
+/// <paramref name="Search"/> marks an active Search instead (interactables design §7.4): the ids of the hidden things it looks for, fixed as it
+/// began, so a restart plays the same scene and judges the same things; then <paramref name="Id"/> is empty and <paramref name="From"/> unused.
+/// One more optional field and no version bump: a document from before reads with none, and none isn't written.
 /// </summary>
 public sealed record ThingCursor(string Id, InteractableSave From, string By,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] StorySave? Under = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] StorySave? Under = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> Search = default)
+{
+    /// <summary>True for an active Search, not an interaction with one thing.</summary>
+    [JsonIgnore]
+    public bool Searching => !Search.IsDefault;
+}
 
 /// <summary>Where the party is in the world, and how far through its story.</summary>
 /// <param name="Region">The region's id. A hand-edited document can leave it null, and the party then goes to the start with a notice, keeping its story.</param>

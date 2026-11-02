@@ -325,7 +325,7 @@ public sealed record StoryCardView(string Member, string Name, string Player, st
 
 /// <summary>A skill check under way, for the TV.</summary>
 /// <param name="Skill">The skill.</param>
-/// <param name="Dc">Its DC.</param>
+/// <param name="Dc">Its DC; null for an active Search, whose DC isn't shown: each thing it looks for has its own, and it mustn't say whether there are any (interactables design §7.4).</param>
 /// <param name="Title">The option's label.</param>
 /// <param name="Cards">Who can roll, in member order.</param>
 /// <param name="Chosen">Who rolls, once picked.</param>
@@ -334,7 +334,7 @@ public sealed record StoryCardView(string Member, string Name, string Player, st
 /// <param name="Decider">Who breaks it: their player's name.</param>
 /// <param name="Span">How long the pick's clock ran when it started, in seconds, with <paramref name="Deadline"/> (<see cref="StoryAskView.Span"/>).</param>
 /// <param name="Deadline">When the pick closes, or null.</param>
-public sealed record StoryCheckView(string Skill, int Dc, string Title, ImmutableArray<StoryCardView> Cards, string? Chosen, RollResult? Roll,
+public sealed record StoryCheckView(string Skill, int? Dc, string Title, ImmutableArray<StoryCardView> Cards, string? Chosen, RollResult? Roll,
     bool Tie = false, string? Decider = null, DateTimeOffset? Deadline = null, double? Span = null);
 
 /// <summary>The TV's view of a tactics session (adapter spec §8).</summary>
@@ -451,6 +451,7 @@ public sealed partial class TacticsGame
         {
             data["targets"] = JsonSerializer.SerializeToNode(targets.Select(t => new { id = t.Def.Id, label = t.Label }), ArcJson.Options);
             data["beat"] = leads && InteractLabel() is not null;     // the button is the beat's, not the first thing's
+            data["search"] = leads;     // the leader's Search (design §7.4): only where there are things, so a walk screen elsewhere is as it was
         }
         return Custom(Screens.Walk, data);
     }

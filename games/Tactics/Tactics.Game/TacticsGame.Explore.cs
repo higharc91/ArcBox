@@ -119,7 +119,7 @@ public sealed partial class TacticsGame
     /// rather than read as a command the battle doesn't know.
     /// </summary>
     private static bool IsWorldAction(string action)
-        => action is "walk" or "battles" or "backToWalk" or "endSession" or "interact" or "skip" or "vote" or "pickRoller";
+        => action is "walk" or "battles" or "backToWalk" or "endSession" or "interact" or "search" or "skip" or "vote" or "pickRoller";
 
     // ---- Fights in the world (overworld 5c) ----------------------------------------------------------------------------
 

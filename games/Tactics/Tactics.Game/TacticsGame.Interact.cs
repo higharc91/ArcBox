@@ -27,8 +27,8 @@ public sealed partial class TacticsGame
     /// <summary>The ground walked, and what's blocked on it, so the ground is built again only when that changes.</summary>
     private (string Region, ImmutableSortedSet<Tile> Blocked, Terrain Ground)? _walkGround;
 
-    /// <summary>The party's best passive Perception and whose it is, and the members and players it was worked out for.</summary>
-    private (ImmutableSortedDictionary<string, MemberRecord> Members, IReadOnlyList<Player> Players, int Passive, string? Who)? _passive;
+    /// <summary>The party's best passive score in each skill a thing may be hidden by and whose it is, and the members and players it was worked out for.</summary>
+    private (ImmutableSortedDictionary<string, MemberRecord> Members, IReadOnlyList<Player> Players, ImmutableDictionary<string, (int Passive, string? Who)> Best)? _passive;
 
     /// <summary>The scene of the interaction under way, and the cursor it was built for: it's built again only when that changes.</summary>
     private (ThingCursor Cursor, ScenePlan? Plan)? _thingPlan;
@@ -281,22 +281,27 @@ public sealed partial class TacticsGame
     // ---- Walking past things ----------------------------------------------------------------------------------------------------
 
     /// <summary>
-    /// The best passive Perception of the session's party, here or not (5d default 8, as checks count away characters), and whose it is, the
-    /// first in member order on a tie; worked out again only when a character or the seats change.
+    /// The best passive score of the session's party in each skill a thing may be hidden by (design §7.1), here or not (5d default 8, as checks
+    /// count away characters), and whose it is, the first in member order on a tie; worked out again only when a character or the seats change.
     /// </summary>
-    private (int Passive, string? Who) PartyPassive()
+    private ImmutableDictionary<string, (int Passive, string? Who)> PartyPassives()
     {
         if (_passive is { } cached && cached.Members == _doc.Members && cached.Players == _players)
-            return (cached.Passive, cached.Who);
-        (int Passive, string? Who) best = (int.MinValue, null);
+            return cached.Best;
+        var best = HiddenDef.Skills.ToDictionary(s => s, _ => (Passive: int.MinValue, Who: (string?)null), StringComparer.Ordinal);
         foreach (var (member, _, character, _) in Party())
         {
-            var passive = Interactables.Passive(SheetBuilder.ForCharacter(character, Rules));
-            if (passive > best.Passive)
-                best = (passive, member);
+            var sheet = SheetBuilder.ForCharacter(character, Rules);
+            foreach (var skill in HiddenDef.Skills)
+            {
+                var passive = Interactables.Passive(sheet, skill);
+                if (passive > best[skill].Passive)
+                    best[skill] = (passive, member);
+            }
         }
-        _passive = (_doc.Members, _players, best.Passive, best.Who);
-        return best;
+        var all = best.ToImmutableDictionary(StringComparer.Ordinal);
+        _passive = (_doc.Members, _players, all);
+        return all;
     }
 
     /// <summary>
@@ -325,26 +330,128 @@ public sealed partial class TacticsGame
         }
     }
 
-    /// <summary>What the party's passive Perception finds from where the leader stands; true if anything was found.</summary>
+    /// <summary>
+    /// What the party's passive skills find from where the leader stands (design §2.6, §7.1): each hidden thing by its own skill, traps by
+    /// Perception, what a notice reveals with it, and then, since a find can bring a trap on it into sight or reveal more, again until nothing
+    /// new is found. Everything found says its line, all on the TV's notice at once. True if anything was found.
+    /// </summary>
     private bool LookAround()
     {
         if (Things.IsEmpty)
             return false;
-        var (passive, who) = PartyPassive();
-        if (who is null)
+        var passives = PartyPassives();
+        if (passives[HiddenDef.Perception].Who is null)
             return false;       // nobody has a character yet
-        // Nothing is found under the leader: a hidden chest found there would stand on them. It's found as they step off it.
-        var finds = Interactables.Finds(Things.Where(d => d.At != _at), ThingSaves, StoryFlags(), _at, passive);
-        foreach (var (def, found) in finds)
+        var lines = new List<string>();
+        var any = false;
+        for (var pass = 0; pass <= AllThings.Length; pass++)
+        {
+            // Nothing is found under the leader: a hidden chest found there would stand on them. It's found as they step off it.
+            var near = Things.Where(d => d.At != _at).ToList();
+            var flags = StoryFlags();
+            var found = 0;
+            foreach (var (def, finding, skill) in Interactables.Finds(near, ThingSaves, flags, _at, s => passives[s].Passive))
+                found += Find(def, finding, passives[skill].Who!, lines, searched: false) ? 1 : 0;
+            // What a notice noticed earlier still reveals: a thing that wasn't there then, or was under the leader.
+            foreach (var notice in near.Where(d => Interactables.KindOf(d).Family == InteractableFamily.Notice && ThingState(d).Found))
+                foreach (var (def, finding) in Interactables.Revealing(notice, near, ThingSaves, StoryFlags()))
+                    found += Find(def, finding, passives[HiddenDef.Perception].Who!, lines, searched: false) ? 1 : 0;
+            if (found == 0)
+                break;
+            any = true;
+        }
+        if (lines.Count > 0)
+            Say(string.Join(" ", lines));
+        return any;
+    }
+
+    /// <summary>
+    /// <paramref name="who"/> finds <paramref name="def"/> (design §2.6, §7): a hidden thing is found, a notice noticed (its flags set, its
+    /// words said, and what it reveals found with it), a hidden path found (its flags set), or a trap seen. Its line goes on
+    /// <paramref name="lines"/>. False, and nothing done, if it already was. The caller saves.
+    /// </summary>
+    private bool Find(InteractableDef def, Interactables.Finding finding, string who, List<string> lines, bool searched)
+    {
+        var save = ThingState(def);
+        var name = _doc.Members.GetValueOrDefault(who)?.Character.Name ?? who;
+        string line;
+        if (finding == Interactables.Finding.Spotted)
+        {
+            if (save.TrapSpotted || save.Trap is not null)
+                return false;
+            SetThing(def, save with { TrapSpotted = true });
+            line = $"{name} spots a trap.";
+            Event(def, ThingEvents.Spotted, who, line);
+            lines.Add(line);
+            return true;
+        }
+        if (save.Found)
+            return false;
+        SetThing(def, save with { Found = true });
+        if (Interactables.FoundIsItsOutcome(def))
+            AddFlags(def.Sets);
+        var verb = searched ? "finds" : def.Hidden?.Skill is "arcana" or "religion" ? "senses" : "spots";
+        line = finding == Interactables.Finding.Noticed
+            ? $"{name} notices: {InteractScenes.NoticeText(def)}"
+            : $"{name} {verb} a {Interactables.NameOf(def)}.";
+        Event(def, finding == Interactables.Finding.Noticed ? ThingEvents.Noticed : ThingEvents.Revealed, who, line);
+        lines.Add(line);
+        if (finding == Interactables.Finding.Noticed)
+            foreach (var (next, how) in Interactables.Revealing(def, Things.Where(d => d.At != _at), ThingSaves, StoryFlags()))
+                Find(next, how, who, lines, searched: false);
+        return true;
+    }
+
+    // ---- An active Search (design §7.4) -----------------------------------------------------------------------------------------
+
+    /// <summary>
+    /// The leader searches (design §7.4): a scene in the Story phase whose one check, Investigation, the party picks who rolls. It looks for
+    /// every hidden thing within <see cref="Interactables.SearchRange"/> not found and not already searched for, fixed now and kept in the
+    /// cursor, so a restart judges the same ones. With none it plays just the same, and finds nothing.
+    /// </summary>
+    private void Search(Player player)
+    {
+        if (player.Profile?.Value != _lead || _region is null || AllThings.IsEmpty)
+            return;
+        var looked = Interactables.Searchable(Things, ThingSaves, StoryFlags(), _at);
+        LeaveExploration();
+        _toasts.Clear();
+        _phase = TacticsPhase.Story;
+        var thing = new ThingCursor("", new InteractableSave(InteractScenes.SearchId), _lead!, Cursor, [.. looked.Select(d => d.Id)]);
+        SetCursor(new StorySave("", StorySave.Lead, InteractScenes.SearchId, null, 0, _storySeq, Thing: thing));
+        var scene = ThingPlan(thing)!.Scene;
+        EnterNode(scene, scene.Start);
+    }
+
+    /// <summary>
+    /// A node of the search is entered. Its first: the option is decided at once, so the line goes straight on to the party's pick of who
+    /// rolls (saved as <see cref="StorySave.Checking"/>, as any decided check is). Its result, with the roll that led there: each thing it
+    /// looked for that's there and not found is found if the roll meets its own DC, and is otherwise searched for, for good.
+    /// </summary>
+    private void SearchNodeEntered(ThingCursor cursor, SceneNode node, StoryRoll? roll)
+    {
+        if (node.Id == InteractScenes.SearchId)
+        {
+            SetCursor(Cursor! with { Checking = InteractScenes.SearchOption });
+            return;
+        }
+        if (roll is null)
+            return;
+        var total = roll.Die + roll.Bonus;
+        var lines = new List<string>();
+        var flags = StoryFlags();
+        foreach (var def in cursor.Search.Select(ThingNamed).OfType<InteractableDef>())
         {
             var save = ThingState(def);
-            SetThing(def, found == Interactables.Finding.Revealed ? save with { Found = true } : save with { TrapSpotted = true });
-            var name = _doc.Members[who].Character.Name;
-            var line = found == Interactables.Finding.Revealed ? $"{name} spots a {Interactables.NameOf(def)}." : $"{name} spots a trap.";
-            Event(def, found == Interactables.Finding.Revealed ? ThingEvents.Revealed : ThingEvents.Spotted, who, line);
-            Say(line);
+            if (def.Hidden is not { } hidden || save.Found || !Interactables.Present(def, flags))
+                continue;
+            if (total >= hidden.Dc)
+                Find(def, Interactables.FindingOf(def), roll.Member, lines, searched: true);
+            else
+                SetThing(def, save with { Searched = true });
         }
-        return !finds.IsEmpty;
+        if (lines.Count > 0)
+            Say(string.Join(" ", lines));
     }
 
     // ---- Interactions as scenes -------------------------------------------------------------------------------------------------
@@ -354,16 +461,27 @@ public sealed partial class TacticsGame
     {
         if (_thingPlan is { } cached && ReferenceEquals(cached.Cursor, cursor))
             return cached.Plan;
-        var plan = ThingNamed(cursor.Id) is { } def
+        var plan = cursor.Searching
+            ? new ScenePlan(InteractScenes.SearchScene(cursor.Search.Select(ThingNamed).OfType<InteractableDef>().Select(d => d.Hidden?.Dc ?? InteractScenes.NothingToFind)),
+                ImmutableDictionary<string, InteractOutcome>.Empty)
+            : ThingNamed(cursor.Id) is { } def
             ? InteractScenes.Plan(def, cursor.From, StoryFlags(), Interactables.Worked(AllThings).Contains(def.Id), ItemName, again: true) as ScenePlan
             : null;
         _thingPlan = (cursor, plan);
         return plan;
     }
 
-    /// <summary>A node of an interaction's scene is entered: its outcome applies, in the same save as the node's first line.</summary>
-    private void ThingNodeEntered(SceneNode node)
+    /// <summary>
+    /// A node of an interaction's scene is entered: its outcome applies, in the same save as the node's first line. <paramref name="roll"/>
+    /// is the roll that led there, if one did (a search judges by it).
+    /// </summary>
+    private void ThingNodeEntered(SceneNode node, StoryRoll? roll)
     {
+        if (Cursor?.Thing is { Searching: true } search)
+        {
+            SearchNodeEntered(search, node, roll);
+            return;
+        }
         if (Cursor?.Thing is not { } cursor || ThingPlan(cursor) is not { } plan || !plan.Outcomes.TryGetValue(node.Id, out var outcome)
             || ThingNamed(cursor.Id) is not { } def)
             return;

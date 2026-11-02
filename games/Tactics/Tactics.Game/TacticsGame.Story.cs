@@ -297,7 +297,7 @@ public sealed partial class TacticsGame
         AddFlags(node.Sets);
         var c = Cursor!;
         SetCursor(c with { Scene = scene.Id, Node = node.Id, Line = 0, Played = c.Played.Contains(node.Id) ? c.Played : c.Played.Add(node.Id), Roll = null, Checking = null });
-        ThingNodeEntered(node);     // an interaction's outcome, saved with this node's first line
+        ThingNodeEntered(node, c.Roll);     // an interaction's outcome, saved with this node's first line; the roll that led here, for a search
         PlayLine(scene, node, 0);
     }
 
@@ -1019,6 +1019,9 @@ public sealed partial class TacticsGame
             return (m.Member, m.Player, m.Character, SkillCheck.Bonus(sheet, skill), SkillCheck.Proficient(sheet, skill) ? $"Proficient · {score}" : score, m.Here);
         });
 
+    /// <summary>True while the check is an active Search's: its DC is the lowest of what it looks for, and shows nowhere (interactables design §7.4).</summary>
+    private bool SecretDc => Cursor?.Thing is { Searching: true };
+
     /// <summary>The option a saved roll was for, found by its id and skill in the scene, since option ids repeat across nodes.</summary>
     private static SceneOption? RolledFor(SceneDef scene, StoryRoll roll)
         => scene.Nodes.SelectMany(n => n.Options).FirstOrDefault(o => o.Id == roll.Option && o.Check?.Skill == roll.Skill);
@@ -1031,10 +1034,10 @@ public sealed partial class TacticsGame
             : (_checking!.Check!.Skill, _checking.Check.Dc, _checking.Label);
         var votes = LiveVotes().ToList();
         var tie = _telling == StoryStates.TieBreak;
-        return new StoryCheckView(skill, dc, title,
+        return new StoryCheckView(skill, SecretDc ? null : dc, title,
             [.. CardsWithNotes(skill).Select(c => new StoryCardView(c.Member, c.Character.Name, c.Player.Name,
                 HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{c.Character.Class}"]), c.Bonus, c.Note, c.Here, votes.Count(v => v.Value == c.Member), ClassName(c.Character)))],
-            roll?.Member, roll is null ? null : Rolls.Flat(roll.Die, roll.Bonus, roll.Dc), tie, tie && Decider() is { } d ? PlayerName(d) : null,
+            roll?.Member, roll is null ? null : SecretDc ? Rolls.Flat(roll.Die, roll.Bonus, roll.Dc) with { Vs = 0 } : Rolls.Flat(roll.Die, roll.Bonus, roll.Dc), tie, tie && Decider() is { } d ? PlayerName(d) : null,
             roll is null ? _closeAt : null, roll is null && _closeAt is not null ? _span : null);
     }
 
@@ -1067,7 +1070,7 @@ public sealed partial class TacticsGame
             return Custom(Screens.Check, new
             {
                 skill = check.Skill,
-                dc = check.Dc,
+                dc = check.Dc,      // null for a search
                 title = check.Title,
                 cards = CardsWithNotes(check.Skill).Select(c => new
                 {
@@ -1079,7 +1082,7 @@ public sealed partial class TacticsGame
                 tie = _telling == StoryStates.TieBreak,
                 decider = _telling == StoryStates.TieBreak && Decider() is { } d2 ? PlayerName(d2) : null,
                 tied = _telling == StoryStates.TieBreak ? _tied : [],
-                roll = roll is null ? null : new { member = roll.Member, die = roll.Die, bonus = roll.Bonus, total = roll.Die + roll.Bonus, dc = roll.Dc, success = roll.Passed },
+                roll = roll is null ? null : new { member = roll.Member, die = roll.Die, bonus = roll.Bonus, total = roll.Die + roll.Bonus, dc = SecretDc ? (int?)null : roll.Dc, success = roll.Passed },
                 vip = IsVip(player),
             }) with { DeadlineUtc = roll is null ? _due : null };
         }

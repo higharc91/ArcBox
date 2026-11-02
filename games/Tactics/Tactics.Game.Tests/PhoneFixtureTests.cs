@@ -70,6 +70,25 @@ public sealed class PhoneFixtureTests
         });
     }
 
+    /// <summary>
+    /// The leader's Search (interactables design §7.4) in the vault: the check screen, with no DC, as the party picks who rolls, and its roll,
+    /// which has none either. Nothing hidden is near, and it plays the same.
+    /// </summary>
+    [Fact]
+    public void The_search_check_matches_its_fixture()
+    {
+        var s = Vault.At(new Tile(7, 2));
+        s.Send(0, "search");
+        StoryVoteTests.Until(s, () => s.Host.Story?.State == TacticsGame.StoryStates.PickRoller, "the pick of who rolls");
+        var picking = Node(s.Harness.PlayerView(1));
+        StoryVoteTests.Until(s, () => s.Host.Story?.State == TacticsGame.StoryStates.Rolled, "the roll");
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal)
+        {
+            ["check-search"] = picking,
+            ["check-search-rolled"] = Node(s.Harness.PlayerView(1)),
+        });
+    }
+
     private static JsonNode Node(ControllerView view) => JsonSerializer.SerializeToNode<ControllerView>(view with { ViewId = "v1" }, ArcJson.Options)!;
 
     private static SortedDictionary<string, JsonNode> CaptureStory()

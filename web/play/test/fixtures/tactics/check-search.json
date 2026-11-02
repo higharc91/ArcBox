@@ -1,0 +1,58 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "check",
+  "data": {
+    "skill": "investigation",
+    "dc": null,
+    "title": "Search the area",
+    "cards": [
+      {
+        "id": "pr_member1",
+        "name": "Player1",
+        "player": "Player1",
+        "cls": "Fighter",
+        "bonus": -1,
+        "note": "INT 8",
+        "here": true
+      },
+      {
+        "id": "pr_member2",
+        "name": "Player2",
+        "player": "Player2",
+        "cls": "Cleric",
+        "bonus": -1,
+        "note": "INT 8",
+        "here": true
+      },
+      {
+        "id": "pr_member3",
+        "name": "Player3",
+        "player": "Player3",
+        "cls": "Rogue",
+        "bonus": 1,
+        "note": "INT 12",
+        "here": true
+      },
+      {
+        "id": "pr_member4",
+        "name": "Player4",
+        "player": "Player4",
+        "cls": "Wizard",
+        "bonus": 5,
+        "note": "Proficient \u00B7 INT 17",
+        "here": true
+      }
+    ],
+    "mine": null,
+    "canChoose": true,
+    "tie": false,
+    "decider": null,
+    "tied": [],
+    "roll": null,
+    "vip": false
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:00:20\u002B00:00",
+  "header": null
+}
