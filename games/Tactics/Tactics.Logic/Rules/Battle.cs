@@ -32,7 +32,7 @@ public static partial class Battle
             Counters: Ordinal.Map<int>(), FiredTriggers: Ordinal.Set(), Outcome: null, Injuries: [], ItemsUsed: [],
             NextSerial: 0, StartedThisRound: [], DelayedThisRound: [], Xp: setup.Xp,
             Loot: setup.Loot.IsDefault ? [] : setup.Loot, Difficulty: setup.Difficulty,
-            Triggers: setup.Triggers.IsDefault ? [] : setup.Triggers);
+            Triggers: setup.Triggers.IsDefault ? [] : setup.Triggers) { Environment = setup.Environment };
 
         var w = new BattleWriter(state, rules);
         BeginTurn(w, rules);

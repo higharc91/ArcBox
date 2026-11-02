@@ -12,6 +12,7 @@
     "xp.json",
     "ai-profiles.json",
     "items.json",
+    "environment.json",
     "abilities/common.json",
     "abilities/races.json",
     "abilities/monsters.json",

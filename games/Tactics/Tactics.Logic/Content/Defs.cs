@@ -247,7 +247,9 @@ public sealed record ConditionDef(ConditionId Id, string Name,
 public sealed record Zone(int Serial, UnitId? Owner, string Kind, ImmutableArray<Tile> Tiles, int? RoundsLeft,
     bool Concentration, bool Difficult, ImmutableArray<PassiveDef> Passives,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool AppliedThisTurn = false,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool BlocksSight = false);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool BlocksSight = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Surface = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Source = null);
 
 /// <summary>
 /// An injury a party member can gain when it goes Out (spec §3.8), picked from the rules pack's table by
@@ -449,7 +451,8 @@ public sealed record EncounterDef(string Id, string Name, string Map, PartySizeD
     ImmutableArray<EncounterUnitDef> Npcs, ImmutableArray<LootTableId> Loot, ObjectivesDef Objectives,
     ImmutableArray<TriggerDef> Triggers, int Xp = 250,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Level = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Environment = false);
 
 /// <summary>
 /// An AI weight set (spec §5.3, <c>ai-profiles.json</c>); Task 14's planner reads it. <see cref="Cruel"/> lets it value
