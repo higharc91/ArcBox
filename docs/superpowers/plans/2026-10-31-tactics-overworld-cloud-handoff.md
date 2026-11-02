@@ -247,6 +247,20 @@ Keep this list, add to it, and put it at the top of your final report. Don't sto
 - **For a TV pass:** an unfound hidden path, and a secret door more faintly, leave a seam in the wall they hide in, because the plug's front face doesn't match its neighbours'.
 - **Art:** nine new keys (`interactables.<notice>.noticed`, `interactables.hidden_path.found`) plus `fx.notice`, with prompts in `docs/superpowers/specs/2026-11-02-tactics-interactables-art.json`. No `notice` sound yet; it falls back to `secret_found`.
 
+**Ashen Ford animals, fences and things (2026-11-02, abe55bb..aab5302), for the user:**
+- **Animals:** the pack has a mule, goat, fox, duck and crow. There's no sheep or dog on `world-dressing-design` (a94d7e3); if the local session made them, they aren't pushed yet.
+  - The strips came out about 3× too big, so a `scale` in the props manifest now shrinks them at load: mule 0.38, goat 0.33, fox 0.30, duck 0.25, crow 0.20. Remove it once redrawn art lands.
+  - They now keep to one height level, stay off water (ducks stay on it) and stay in their pens.
+  - The art AI prompt is in `docs/tv-host.md` (the world's animals).
+  - **For a TV pass:** animals still draw over every prop in their block. For now they're kept away from the tile behind a prop; the real fix is drawing them as units.
+- **Fences:** ten spots fixed, with rails on their own field's level, no doubled rails, gates that open onto lanes, and no leaks. A test guards against fences on cliffs, lips, roads and doubled rails.
+- **Things:** 17 in `rules/interactables/ashen_ford.json`.
+  - There are no doors, because the building art's doorways open onto blocked footprints.
+  - Loot: one Potion of Healing in the reeve's chest and one Smoke Bomb in the Ash Market cache. Your call on balance; it's decision 1 in the interactables design doc.
+- **Protocol, your call:** each explore view now carries every visible thing, about 2.9 KB in Ashen Ford, past the 1,420-byte one-packet budget. The fix is to send things only when they change, or only those near the party.
+- **Saved battles restart once:** listing the new file changes the battle hash.
+- **Flaky test:** `ThingShowTests.Fifty_things_cost_a_frame_little_and_allocate_little`, a 1 ms per-frame timing check, now fails often under full-suite load and passes alone. Make it measure work, not wall time.
+
 **Defaults the user can overrule:** the 8-way pad; the session leader taking the lead back once stopped; hazards harmless; the loader refusing a recovery spawn below a one-way drop; lines advancing by themselves; one beat at a time; skill rolls with no natural 20 or 1; a skill-to-stat table of 18 SRD lines; `ch1_kindler` having no `place`.
 
 **Only the user can check:**
