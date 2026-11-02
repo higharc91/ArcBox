@@ -187,9 +187,41 @@ public sealed record WalkerView(string Id, string Name, string Sprite, bool Here
 /// Who stands at the scene's spot while a scene plays (the user's answer of 2026-11-01, item 21): its speakers who aren't the narrator, in
 /// the order they first speak, each on a tile of their own that no walker stands on. Empty outside a scene, and in the chapter's card.
 /// </param>
+/// <param name="Things">
+/// The things to interact with that the TV may draw (interactables design §2.9): what's there and has been seen, in the order they're
+/// written, each in its state. A hidden thing or a trap nobody has seen isn't sent. Null, and left out of the JSON, for a region with no things.
+/// </param>
+/// <param name="ThingEvents">
+/// What has just happened to things, oldest first, for the TV to animate (design §2.8): the last few, each numbered. A new
+/// <paramref name="Epoch"/> may start the numbers again. Null, and left out of the JSON, for a region with no things.
+/// </param>
 public sealed record ExploreView(string Region, string Name, int Epoch, int Seq, Tile At, Tile Facing, bool Held,
     ImmutableArray<WalkLeg> Legs, ImmutableArray<WalkerView> Party, string? Leader, int Chapter = 0, bool Blocked = false, int Bumps = 0,
-    string? Arrived = null, ImmutableArray<StoryMarker>? Markers = null, ImmutableArray<CastView>? Cast = null);
+    string? Arrived = null, ImmutableArray<StoryMarker>? Markers = null, ImmutableArray<CastView>? Cast = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<ThingView>? Things = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<ThingEventView>? ThingEvents = null);
+
+/// <summary>A thing to interact with, as the TV draws it (interactables design §2.9, §4).</summary>
+/// <param name="Id">Its id.</param>
+/// <param name="Kind">Its kind (<see cref="InteractableKinds"/>).</param>
+/// <param name="At">Its tile.</param>
+/// <param name="Facing">Which way its sprite faces: <c>ne</c>, <c>se</c>, <c>sw</c> or <c>nw</c>.</param>
+/// <param name="Art">Its art key, without its state (<c>interactables.chest</c>): the art brief's, which may not be made yet.</param>
+/// <param name="State">The state its art is drawn in: the art's variant (<c>closed</c>, <c>open</c>, <c>on</c>, <c>armed</c>…).</param>
+/// <param name="StandIn">An art key the pack has now, to draw until <paramref name="Art"/> exists; null for a plain marker.</param>
+/// <param name="Name">Its name, as a title.</param>
+/// <param name="Blocks">True while it stands in the way of walking.</param>
+/// <param name="Trapped">True for a thing whose trap is set and has been seen: the TV warns of it.</param>
+public sealed record ThingView(string Id, string Kind, Tile At, string Facing, string Art, string State, string? StandIn, string Name, bool Blocks,
+    bool Trapped);
+
+/// <summary>Something that happened to a thing, for the TV to animate (interactables design §2.8).</summary>
+/// <param name="Seq">Its number, which only goes up in a session.</param>
+/// <param name="Id">The thing.</param>
+/// <param name="What">What happened: one of <see cref="Tactics.Logic.ThingEvents"/>.</param>
+/// <param name="By">The name of the character who did it, or found it; null with nobody.</param>
+/// <param name="Line">What the TV says of it, or null.</param>
+public sealed record ThingEventView(int Seq, string Id, string What, string? By, string? Line);
 
 /// <summary>A speaker of the scene under way, standing in the world (<see cref="ExploreView.Cast"/>). Dressing only: it doesn't block the party.</summary>
 /// <param name="Id">The character's id in the lore.</param>
@@ -378,6 +410,7 @@ public sealed partial class TacticsGame
         var character = _doc.For(profile)!.Character;
         var vip = IsVip(player);
         var leads = _lead == profile.Value;
+        var targets = leads ? ThingTargets() : [];
         return Custom(Screens.Walk, new
         {
             leader = leads,
@@ -390,7 +423,9 @@ public sealed partial class TacticsGame
             vip,
             canBattle = vip && battleList && !Rules.Encounters.IsEmpty,
             portal = PortalPath(),
-            interact = leads ? InteractLabel() : null,
+            interact = leads ? InteractLabel() ?? targets.FirstOrDefault().Label : null,
+            // Everything else in reach, for the phone's list (interactables design §2.5): it changes only as things come into reach or go.
+            targets = targets.Select(t => new { id = t.Def.Id, label = t.Label }),
         });
     }
 
@@ -404,7 +439,8 @@ public sealed partial class TacticsGame
     private ExploreView? ExploreViewOf() => _region is not { } region ? null : new ExploreView(region.Def.Id, region.Def.Name, _epoch, _walkSeq, _at, _facing, _dir is not null && !_blocked, _legs,
         [.. Walkers().Select(w => new WalkerView(w.Player.Profile!.Value.Value, w.Player.Name,
             HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{w.Character.Class}"])!, w.Here, w.Leads, ColorOf(w.Player.Profile!.Value.Value)))],
-        Leader?.Name, region.Def.Chapter, _dir is not null && _blocked, _bumps, _arrived, Markers(), CastOf());
+        Leader?.Name, region.Def.Chapter, _dir is not null && _blocked, _bumps, _arrived, Markers(), CastOf(), ThingViews(),
+        Things.IsEmpty ? null : _thingEvents);
 
     private ControllerView BattleScreen(ProfileId profile)
     {

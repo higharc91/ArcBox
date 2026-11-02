@@ -33,6 +33,7 @@ public sealed partial class RulesPack
         AiProfiles = catalog.AiProfiles;
         Xp = catalog.Xp;
         Regions = catalog.Regions;
+        Interactables = catalog.Interactables ?? ImmutableSortedDictionary.Create<string, ImmutableArray<InteractableDef>>(StringComparer.Ordinal);
         _grounds = Regions.ToImmutableSortedDictionary(r => r.Key, r => new Lazy<WorldGround>(() => WorldGround.Of(r.Value, maps)), StringComparer.Ordinal);
         _reach = Regions.ToImmutableSortedDictionary(r => r.Key,
             r => new Lazy<FrozenSet<Tile>>(() => WorldWalk.Reach(GroundFor(r.Key)!.Terrain, r.Value.Def.Spawns.Start, ClassDef.DefaultJump).ToFrozenSet()),
@@ -97,6 +98,12 @@ public sealed partial class RulesPack
 
     /// <summary>Overworld regions by id, ordinal.</summary>
     public ImmutableSortedDictionary<string, WorldRegion> Regions { get; }
+
+    /// <summary>The things to interact with in each region (<c>interactables/*.json</c>), by region id, in the order they're written.</summary>
+    public ImmutableSortedDictionary<string, ImmutableArray<InteractableDef>> Interactables { get; }
+
+    /// <summary>The things to interact with in the region with this id: none for a region with no <c>interactables</c> file.</summary>
+    public ImmutableArray<InteractableDef> InteractablesIn(string region) => Interactables.GetValueOrDefault(region, []);
 
     /// <summary>The base map with this id, or null.</summary>
     public BattleMap? MapFor(string id) => Maps.GetValueOrDefault(id);
@@ -163,7 +170,8 @@ public sealed partial class RulesPack
         ImmutableSortedDictionary<string, MonsterDef> Monsters, ImmutableSortedDictionary<ItemId, ItemDef> Items,
         ImmutableSortedDictionary<string, WeaponDef> Weapons, ImmutableSortedDictionary<string, ArmorDef> Armors,
         ImmutableSortedDictionary<string, EncounterDef> Encounters, ImmutableSortedDictionary<string, AiProfileDef> AiProfiles,
-        XpTable Xp, ImmutableSortedDictionary<string, WorldRegion> Regions)
+        XpTable Xp, ImmutableSortedDictionary<string, WorldRegion> Regions,
+        ImmutableSortedDictionary<string, ImmutableArray<InteractableDef>>? Interactables = null)
     {
         public static Catalog Empty { get; } = new(Ordinal.Map<ClassDef>(), Ordinal.Map<RaceDef>(), Ordinal.Map<BackgroundDef>(),
             Ordinal.Map<MonsterDef>(), ImmutableSortedDictionary<ItemId, ItemDef>.Empty, Ordinal.Map<WeaponDef>(),

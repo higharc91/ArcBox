@@ -28,6 +28,22 @@ public sealed class WorldGround
     /// <summary>The ground as it stands. Nothing changes it: a region has no height deltas, zones or sunk tiles.</summary>
     public Terrain Terrain { get; }
 
+    /// <summary>The id of the blocking prop that stands for a thing in the way (<see cref="With"/>). Only the server's walking sees it.</summary>
+    public const string ThingProp = "interactable";
+
+    /// <summary>
+    /// The ground with something in the way on each of <paramref name="blocked"/>: a closed door, a chest, a trap the party has seen
+    /// (interactables design §2.4). Walking, reach, landing and the checks use this over the plain ground; the plain ground stays the region
+    /// with every passage open, which is how it's painted. With nothing blocked it's <see cref="Terrain"/> itself.
+    /// </summary>
+    public Terrain With(IReadOnlyCollection<Tile> blocked)
+    {
+        if (blocked.Count == 0)
+            return Terrain;
+        ImmutableArray<PropPlacement> props = [.. Map.Props, .. blocked.Where(Map.InBounds).Select(t => new PropPlacement(ThingProp, t, true, Cover.None))];
+        return new Terrain(Map.WithProps(props), ImmutableSortedDictionary<Tile, int>.Empty, []);
+    }
+
     /// <summary>Builds the ground of <paramref name="region"/>, whose stamps are looked up in <paramref name="maps"/>.</summary>
     public static WorldGround Of(WorldRegion region, IReadOnlyDictionary<string, BattleMap> maps)
     {

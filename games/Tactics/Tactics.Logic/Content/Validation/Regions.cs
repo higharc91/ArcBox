@@ -65,15 +65,22 @@ internal sealed partial class Validation
     /// checks, as an encounter does. Whether a one-way drop strands the party depends on the story's order, which is
     /// <c>StoryOrder</c>'s to check at export.
     /// </summary>
-    public void CheckRegions(IEnumerable<Loaded<RegionDef>> regions, IReadOnlyDictionary<string, BattleMap> maps)
+    public void CheckRegions(IEnumerable<Loaded<RegionDef>> regions, IReadOnlyDictionary<string, BattleMap> maps,
+        IEnumerable<Loaded<RegionThing>>? things = null, IReadOnlySet<string>? injuries = null)
     {
         var loaded = regions.ToList();
         var byId = loaded.ToDictionary(r => r.Id, r => r.Def, StringComparer.Ordinal);
+        var thingsOf = (things ?? []).ToLookup(t => t.Def.Region, StringComparer.Ordinal);
+        foreach (var lost in thingsOf.Where(g => !byId.ContainsKey(g.Key)).SelectMany(g => g))
+            Error(lost.File, Pointer.Append(lost.Pointer, "id"), $"The interactable '{lost.Id}' is in the region '{lost.Def.Region}', which isn't loaded.");
         foreach (var (def, _, _, file, ptr) in loaded)
         {
             try
             {
-                new RegionCheck(this, WorldRegion.From(def), byId, maps, file, ptr).Run();
+                var check = new RegionCheck(this, WorldRegion.From(def), byId, maps, file, ptr);
+                var stamps = check.Run();
+                if (thingsOf[def.Id].ToList() is [_, ..] mine)
+                    new ThingCheck(this, WorldRegion.From(def), maps, stamps, mine, injuries ?? new HashSet<string>()).Run();
             }
             catch (Exception ex) when (NonFatal(ex))
             {
@@ -122,12 +129,14 @@ internal sealed partial class Validation
                    && Stamp.At.Y < other.Stamp.At.Y + other.Map.Height && other.Stamp.At.Y < Stamp.At.Y + Map.Height;
         }
 
-        public void Run()
+        /// <summary>Runs the checks, and gives the world tiles each stamp holds, for <see cref="ThingCheck"/>.</summary>
+        public ImmutableArray<BattleStage> Run()
         {
             var placed = Stamps();
             Spawns(placed);
             Reachable(placed);
             Edges();
+            return [.. placed.Select(p => p.Stage)];
         }
 
         private string At(string list, int index) => Pointer.Append(Pointer.Append(ptr, list), index);

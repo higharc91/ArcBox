@@ -240,7 +240,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
                 PickClass(player, profile, custom.Data);
                 break;
             case TacticsPhase.Exploration when custom.Action == "interact":
-                Interact(player);
+                Interact(player, custom.Data);
                 break;
             case TacticsPhase.Story when custom.Action == "pickClass":
                 PickClass(player, profile, custom.Data);

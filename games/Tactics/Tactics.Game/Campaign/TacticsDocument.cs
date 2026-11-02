@@ -105,10 +105,16 @@ public sealed record StoryRoll(string Member, string Option, string Skill, int D
 /// The option of <paramref name="Node"/>'s question that won and has a check, while the party picks who rolls for it; then null. One more
 /// optional field and no version bump: a document from before reads with none, and a null isn't written.
 /// </param>
+/// <param name="Thing">
+/// The thing being interacted with, when this is an interaction's scene and not a beat's (interactables design §2.7): then
+/// <paramref name="Beat"/> is empty, and the scene is built again from the thing as it was when the interaction began. One more optional
+/// field and no version bump: a document from before reads with none, and a null isn't written.
+/// </param>
 public sealed record StorySave(string Beat, string Stage, string? Scene, string? Node, int Line, int Seq,
     ImmutableArray<string> Played = default,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] StoryRoll? Roll = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Checking = null)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Checking = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ThingCursor? Thing = null)
 {
     /// <summary>The scenes before a fight, and all of a story beat's.</summary>
     public const string Lead = "lead";
@@ -123,6 +129,12 @@ public sealed record StorySave(string Beat, string Stage, string? Scene, string?
     public ImmutableArray<string> Played { get => field.IsDefault ? [] : field; init; } = Played;
 }
 
+/// <summary>
+/// An interaction under way (interactables design §2.7): the thing, its state when the interaction began, which its scene is built from
+/// again after a restart so it's node for node the same, and the member who began it, who gets its loot and whatever its trap does.
+/// </summary>
+public sealed record ThingCursor(string Id, InteractableSave From, string By);
+
 /// <summary>Where the party is in the world, and how far through its story.</summary>
 /// <param name="Region">The region's id. A hand-edited document can leave it null, and the party then goes to the start with a notice, keeping its story.</param>
 /// <param name="At">The leader's tile. A repaint can make it illegal, and it's checked on the way in.</param>
@@ -134,13 +146,19 @@ public sealed record StorySave(string Beat, string Stage, string? Scene, string?
 /// The beat under way, or null between beats (overworld 5d). One more optional field and no version bump: a document from before reads
 /// with none, and a null isn't written.
 /// </param>
+/// <param name="Things">
+/// How each thing to interact with is, by id, once anything about it has changed (interactables design §2.3); a thing not here is as it
+/// started. One more optional field and no version bump: a document from before reads with none, and a null isn't written.
+/// </param>
 /// <param name="StorySeq">
 /// The number of the last scene line shown (<see cref="StoryView.Seq"/>), kept between beats too, so the TV's line number only ever goes
 /// up, across restarts and sessions: a TV that stays up while the server restarts must never take a new line for an old one. 0 isn't written.
 /// </param>
 public sealed record WorldSave(string Region, Tile At, Tile Facing, string? LastLeader, ImmutableArray<string> Flags, ImmutableArray<string> Beats,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] StorySave? Story = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int StorySeq = 0)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int StorySeq = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull), JsonConverter(typeof(OrdinalJsonConverter))]
+    ImmutableSortedDictionary<string, InteractableSave>? Things = null)
 {
     /// <summary>The story flags set so far; never a default array, so a read or a write can't throw.</summary>
     public ImmutableArray<string> Flags { get => field.IsDefault ? [] : field; init; } = Flags;

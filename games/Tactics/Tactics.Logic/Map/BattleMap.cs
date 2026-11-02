@@ -74,6 +74,9 @@ public sealed class BattleMap
     /// <summary>Named tile sets, ordered by ordinal name.</summary>
     public ImmutableSortedDictionary<string, ImmutableArray<Tile>> Zones { get; }
 
+    /// <summary>The same map, sharing its tiles, with <paramref name="props"/> in place of its props: the world's things to interact with standing on it (<see cref="WorldGround.With"/>).</summary>
+    internal BattleMap WithProps(ImmutableArray<PropPlacement> props) => new(Id, Width, Height, _tiles, Materials, props, Zones);
+
     /// <summary>True when the tile lies on the grid.</summary>
     public bool InBounds(Tile t) => t.X >= 0 && t.Y >= 0 && t.X < Width && t.Y < Height;
 

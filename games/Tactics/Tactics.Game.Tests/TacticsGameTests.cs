@@ -11,7 +11,7 @@ public sealed class TacticsGameTests
 {
     private static readonly Lazy<RulesPack> Pack = new(() => RulesPack.Load([Path.Combine(ContentBase(), "rules")]));
 
-    private static string ContentBase()
+    internal static string ContentBase()
     {
         for (var dir = new DirectoryInfo(AppContext.BaseDirectory); dir is not null; dir = dir.Parent)
             if (File.Exists(Path.Combine(dir.FullName, "ArcBox.slnx")))

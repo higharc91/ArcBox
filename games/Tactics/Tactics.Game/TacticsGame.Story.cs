@@ -169,7 +169,7 @@ public sealed partial class TacticsGame
         var by = SceneCast.SpeakersBy(scene, node).ToHashSet(StringComparer.Ordinal);
         if (!cast.Any(c => by.Contains(c.Id)))
             return [];
-        var ground = Rules.GroundFor(region.Def.Id)!.Terrain;
+        var ground = WalkGround();
         var reached = Rules.ReachFor(region.Def.Id)!;
         var tiles = SceneCast.Place(ground, SceneSpot(scene, beat, ground), _at, _facing, [_at], cast.Count, t => ground.Map.InBounds(t) && reached.Contains(t));
         return [.. tiles.Select((t, i) => (Tile: t, Who: cast[i])).Where(c => by.Contains(c.Who.Id))
@@ -212,7 +212,7 @@ public sealed partial class TacticsGame
     private string? InteractLabel()
     {
         if (_phase != TacticsPhase.Exploration || OnOffer() is not { } beat || SpotOf(beat) is not { } spot
-            || !StoryRules.InReach(Rules.GroundFor(_region!.Def.Id)!.Terrain, _at, spot))
+            || !StoryRules.InReach(WalkGround(), _at, spot))
             return null;
         return beat.Kind switch
         {
@@ -223,8 +223,8 @@ public sealed partial class TacticsGame
         };
     }
 
-    /// <summary>The leader tapped Interact: checked again here, since the phone's button can be a step behind.</summary>
-    private void Interact(Player player)
+    /// <summary>The leader tapped Interact for the beat: checked again here, since the phone's button can be a step behind.</summary>
+    private void InteractBeat(Player player)
     {
         if (player.Profile?.Value != _lead || InteractLabel() is null)
             return;
@@ -297,6 +297,7 @@ public sealed partial class TacticsGame
         AddFlags(node.Sets);
         var c = Cursor!;
         SetCursor(c with { Scene = scene.Id, Node = node.Id, Line = 0, Played = c.Played.Contains(node.Id) ? c.Played : c.Played.Add(node.Id), Roll = null, Checking = null });
+        ThingNodeEntered(node);     // an interaction's outcome, saved with this node's first line
         PlayLine(scene, node, 0);
     }
 
@@ -360,7 +361,7 @@ public sealed partial class TacticsGame
     private void SceneDone(SceneDef scene)
     {
         var c = Cursor!;
-        var next = SceneRun.Next(Lore.ScenesOf(c.Beat), StoryFlags(), scene.Id, aftermath: c.Stage == StorySave.After);
+        var next = c.Thing is not null ? null : SceneRun.Next(Lore.ScenesOf(c.Beat), StoryFlags(), scene.Id, aftermath: c.Stage == StorySave.After);
         if (next is null)
         {
             StageDone();
@@ -389,6 +390,11 @@ public sealed partial class TacticsGame
     private void StageDone()
     {
         var c = Cursor!;
+        if (c.Thing is not null)
+        {
+            FinishInteraction();
+            return;
+        }
         var beat = BeatNamed(c.Beat)!;
         if (beat.Kind == ArcBeat.Battle && c.Stage != StorySave.After)
             ToTheFight(beat);
@@ -476,7 +482,7 @@ public sealed partial class TacticsGame
         if (_region is not { } region || scene.Place is not { } place || BeatNamed(scene.Beat) is not { } beat || place == beat.Place
             || StoryArc is not { } arc || StoryRules.SpotFor(arc, region.Def, place) is not { } spot)
             return null;
-        var ground = Rules.GroundFor(region.Def.Id)!.Terrain;
+        var ground = WalkGround();
         var reached = Rules.ReachFor(region.Def.Id)!;
         // Clear of every stamp a battle still to come could arm: mid-beat nothing is armed yet, and the beat's outcome can arm one (review).
         var stamps = PendingStamps();
@@ -531,6 +537,11 @@ public sealed partial class TacticsGame
     {
         var c = Cursor!;
         _storySeq = Math.Max(_storySeq, c.Seq);
+        if (c.Thing is { } thing)
+        {
+            ResumeInteraction(c, thing);
+            return;
+        }
         var beat = BeatNamed(c.Beat);
         var wrongStage = beat is not null && c.Stage != StorySave.Lead && beat.Kind != ArcBeat.Battle;
         if (beat is null || wrongStage || _doc.World!.Beats.Contains(beat.Id))
@@ -816,7 +827,7 @@ public sealed partial class TacticsGame
     /// </summary>
     private void Decide(SceneOption option)
     {
-        var (scene, beat) = (CurrentScene()!, BeatNamed(Cursor!.Beat)!);
+        var (scene, beat) = (CurrentScene()!, CursorBeat());
         if (option.Check is not null)
         {
             var offered = _offered;
@@ -849,7 +860,7 @@ public sealed partial class TacticsGame
         var bonus = SkillCheck.Bonus(_doc.Members[member].Character, check.Skill, Rules);
         var die = _ctx.Random.Next(1, 21);
         var result = SkillCheck.Roll(die, bonus, check.Dc);
-        AddFlags(SceneRun.Sets(option, BeatNamed(Cursor!.Beat)!));
+        AddFlags(SceneRun.Sets(option, CursorBeat()));
         SetCursor(Cursor! with
         {
             Node = SceneRun.Target(option, result.Success), Line = 0,
@@ -928,7 +939,12 @@ public sealed partial class TacticsGame
             _doc = _doc with { World = world with { Flags = all } };
     }
 
-    private SceneDef? CurrentScene() => Cursor is { Scene: { } id } c ? Lore.ScenesOf(c.Beat).FirstOrDefault(s => s.Id == id) : null;
+    private SceneDef? CurrentScene() => Cursor is { Scene: { } id } c
+        ? c.Thing is { } thing ? ThingPlan(thing)?.Scene is { } own && own.Id == id ? own : null : Lore.ScenesOf(c.Beat).FirstOrDefault(s => s.Id == id)
+        : null;
+
+    /// <summary>The beat the cursor plays, or for an interaction, a beat of its own with no choices and no flags.</summary>
+    private ArcBeat CursorBeat() => Cursor!.Thing is not null ? new ArcBeat("", "interaction", null, null, [], [], []) : BeatNamed(Cursor.Beat)!;
 
     private SceneNode? CurrentNode() => Cursor is { Node: { } id } ? CurrentScene()?.Node(id) : null;
 

@@ -221,8 +221,8 @@ public sealed partial class TacticsGame
 
     private bool CanStandOn(Tile at)
     {
-        var terrain = Rules.GroundFor(_region!.Def.Id)!.Terrain;
-        return terrain.Map.InBounds(at) && terrain.Walkable(at) && Rules.ReachFor(_region.Def.Id)!.Contains(at);
+        var terrain = WalkGround();
+        return terrain.Map.InBounds(at) && terrain.Walkable(at) && Rules.ReachFor(_region!.Def.Id)!.Contains(at);
     }
 
     private void Note(string text) => _notice = _notice is null ? text : $"{_notice} {text}";
@@ -264,6 +264,11 @@ public sealed partial class TacticsGame
     {
         _toasts.Clear();
         _phase = TacticsPhase.Exploration;
+        if (LookAround())       // what the party sees as it comes into the world, or back from a fight or a scene
+        {
+            KeepWorld();
+            Save();
+        }
         ReconsiderLeader();
         _heardAt = _ctx.Now;     // the pad has only just come back
         LeadClock();
@@ -367,7 +372,7 @@ public sealed partial class TacticsGame
     private void TakeStep(bool onTime)
     {
         var (dir, from, now) = (_dir!.Value, _at, _ctx.Now);
-        var terrain = Rules.GroundFor(_region!.Def.Id)!.Terrain;
+        var terrain = WalkGround();
         _owed = false;
         if (WorldWalk.Next(terrain, from, dir, ClassDef.DefaultJump, _lastAlongX) is not { } move)
         {
@@ -402,7 +407,8 @@ public sealed partial class TacticsGame
             _arrived = null;     // walking again: the last epoch's arrival is over
             var leg = new WalkLeg(++_walkSeq, move.To, ms);
             _legs = (_legs.Length < LegsKept ? _legs : _legs.RemoveAt(0)).Add(leg);
-            (_notice, _leadNote) = (null, null);      // whatever it said, the party has moved on
+            (_notice, _leadNote, _thingNote) = (null, null, null);      // whatever it said, the party has moved on
+            SteppedOnto();      // a trap underfoot, or something hidden near (interactables design §2.6)
         }
         SaveSoon();
         ArmStep();
@@ -676,8 +682,8 @@ public sealed partial class TacticsGame
     /// </summary>
     private Tile Landing(BattleSave save, BattleStage stage)
     {
-        var ground = Rules.GroundFor(_region!.Def.Id)!.Terrain;
-        var start = _region.Def.Spawns.Start;
+        var ground = WalkGround();
+        var start = _region!.Def.Spawns.Start;
         var reached = Rules.ReachFor(_region.Def.Id)!;
         var armed = Armed()?.Stage;
         bool Allowed(Tile t) => ground.Map.InBounds(t) && reached.Contains(t) && armed?.Holds(t) != true;
