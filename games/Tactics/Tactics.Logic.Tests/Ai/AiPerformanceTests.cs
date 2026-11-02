@@ -38,10 +38,15 @@ public sealed class AiPerformanceTests(ITestOutputHelper output)
         AssertWithinBudget(setup, rules, $"{encounter}, level {level}");
     }
 
-    private void AssertWithinBudget(BattleSetup setup, RulesPack rules, string label)
+    [Fact]
+    [Trait("Category", "Perf")]
+    public void P95_under_250ms_with_overlapping_hazard_paths_on_6_vs_10()
+        => AssertWithinBudget(Setup(BasePackTests.Rules), BasePackTests.Rules, "river_crossing stress with spell hazards", hazards: true);
+
+    private void AssertWithinBudget(BattleSetup setup, RulesPack rules, string label, bool hazards = false)
     {
         // The start of every turn in two played-out battles, cycled: warm up, then time only the Plan calls.
-        var turns = new ulong[] { 1, 2 }.SelectMany(seed => Played(setup, rules, seed, turns: 32)).ToArray();
+        var turns = new ulong[] { 1, 2 }.SelectMany(seed => Played(setup, rules, seed, turns: 32, hazards)).ToArray();
         for (var i = 0; i < Warmup; i++)
             Ai.Plan(turns[i % turns.Length], turns[i % turns.Length].Active!.Value, rules);
         var times = new double[Timed];
@@ -116,9 +121,24 @@ public sealed class AiPerformanceTests(ITestOutputHelper output)
     /// The state at the start of each turn, the AI playing every unit, for <paramref name="turns"/> turns: later turns see a
     /// closed-in, messier field.
     /// </summary>
-    private static IEnumerable<BattleState> Played(BattleSetup setup, RulesPack rules, ulong seed, int turns)
+    private static IEnumerable<BattleState> Played(BattleSetup setup, RulesPack rules, ulong seed, int turns, bool hazards)
     {
         var state = Battle.Start(setup, rules, seed).State;
+        if (hazards)
+        {
+            string[] spells = ["wizard.wall_of_fire", "druid.spike_growth", "druid.moonbeam"];
+            var terrain = new Terrain(setup.Map, ImmutableSortedDictionary<Tile, int>.Empty, []);
+            state = state with
+            {
+                Zones = [.. spells.Select((spell, index) =>
+                {
+                    var effect = rules.Abilities[new AbilityId(spell)].Effects.OfType<ZoneEffect>().Single();
+                    var tiles = Enumerable.Range(0, setup.Map.Width).SelectMany(x => Enumerable.Range(0, setup.Map.Height).Select(y => new Tile(x, y)))
+                        .Where(t => terrain.Walkable(t) && (t.X + t.Y) % 3 == index).ToImmutableArray();
+                    return new Zone(index + 1, null, effect.Kind, tiles, null, false, effect.Difficult, effect.Passives);
+                })], NextSerial = 4,
+            };
+        }
         Assert.Equal(16, state.Units.Count);
         for (var turn = 0; turn < turns && state.Outcome is null; turn++)
         {
