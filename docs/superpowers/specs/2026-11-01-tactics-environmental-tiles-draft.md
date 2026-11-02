@@ -371,3 +371,23 @@ New content (an enemy with a lightning spell for the ford, oil flasks in loot) b
 4. **The scorch decal:** end the zone instead. Scorched then needs only to be remembered, not drawn.
 5. **The path part of the AI defence term:** keep end-of-turn danger only.
 6. **R3 freeze:** keep conduction and fire. That leaves the smallest version worth shipping: **R1 + R2 (decks only) + R6**, on River Crossing, Storming the Ford and Warlord Bridge.
+
+---
+
+## The user's answers (2026-11-02)
+
+All eleven open questions are answered; the draft is now the agreed design, pending a build plan.
+
+| # | Question | Answer |
+|---|---|---|
+| 1 | Conduction | Full damage to everyone in the connected water, DEX save for half; allies and the caster included; Downed units in the water aren't hit |
+| 2 | Freezing | Shallow water only, into slippery ice (difficult terrain, slip check); deep water doesn't freeze |
+| 3 | Burning ground | 1d6 fire on starting a turn in it, or entering it |
+| 4 | Where it's on | Per encounter first; existing fights and balance don't move until each is tuned |
+| 5 | Grease | **Flammable**: grease plus fire becomes burning ground (the user's choice, against the SRD) |
+| 6 | Phone | Move warnings for hazards and a spread preview for targeted spells (small phone contract addition) |
+| 7 | First content | River Crossing and Ford Assault; Ford Assault gains a goblin shaman who casts lightning |
+| 8 | Lava | Harmless until Chapter 5's Hall of the Flame is tuned with it |
+| 9 | Oil flasks | From loot (interactable chests) and future merchants, not starting kits |
+| 10 | AI friendly fire | Allowed on Normal and Hard when it pays off; never on Story difficulty |
+| 11 | AI hazard avoidance | Ship it on its own first, before environmental tiles (it changes AI in every encounter, so bot win rates will move) |
