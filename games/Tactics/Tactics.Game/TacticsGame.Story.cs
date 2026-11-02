@@ -170,7 +170,7 @@ public sealed partial class TacticsGame
         if (!cast.Any(c => by.Contains(c.Id)))
             return [];
         var ground = WalkGround();
-        var reached = Rules.ReachFor(region.Def.Id)!;
+        var reached = WalkReach();      // on the ground as it is, things and painted props in the way
         var tiles = SceneCast.Place(ground, SceneSpot(scene, beat, ground), _at, _facing, [_at], cast.Count, t => ground.Map.InBounds(t) && reached.Contains(t));
         return [.. tiles.Select((t, i) => (Tile: t, Who: cast[i])).Where(c => by.Contains(c.Who.Id))
             .Select(c => new CastView(c.Who.Id, c.Who.Name, $"characters.{c.Who.Preset}", c.Tile, _at))];

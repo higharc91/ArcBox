@@ -1,4 +1,6 @@
+using System.Collections.Immutable;
 using Tactics.Logic;
+using Tactics.Logic.Tests;
 
 namespace Tactics.WorldTools.Tests;
 
@@ -18,7 +20,21 @@ public sealed class RegionWalkTests
             bytes[(wall.Y * WorldRegion.ChunkSize + wall.X) * TileBytes + 2] = (byte)TileFlags.Impassable;
         var def = new RegionDef("r", "R", 1, [WorldRegion.ChunkSize, WorldRegion.ChunkSize], ["grass/lush"], [new RegionChunk(0, 0, Convert.ToBase64String(bytes))], [], [],
             new RegionSpawns(Corner, Corner), []);
-        return new RegionWalk(WorldRegion.From(def), new Dictionary<string, BattleMap>());
+        return new RegionWalk(WorldRegion.From(def), new Dictionary<string, BattleMap>(), ArtManifest.None);
+    }
+
+    [Fact]
+    public void A_wall_of_buildings_cuts_a_walk_as_walls_do()
+    {
+        var bytes = new byte[WorldRegion.ChunkBytes];
+        ImmutableArray<RegionBuilding> wall = [.. Enumerable.Range(0, WorldRegion.ChunkSize).Select(y => new RegionBuilding("wall_v", "grey", new Tile(2, y)))];
+        var def = new RegionDef("r", "R", 1, [WorldRegion.ChunkSize, WorldRegion.ChunkSize], ["grass/lush"], [new RegionChunk(0, 0, Convert.ToBase64String(bytes))], [], [],
+            new RegionSpawns(Corner, Corner), [], Buildings: wall);
+        var art = ArtManifests.Load(ContentPaths.ContentBase);
+
+        var walk = new RegionWalk(WorldRegion.From(def), new Dictionary<string, BattleMap>(), art);
+
+        Assert.Null(walk.Seconds(Corner, t => t == Across));
     }
 
     [Fact]

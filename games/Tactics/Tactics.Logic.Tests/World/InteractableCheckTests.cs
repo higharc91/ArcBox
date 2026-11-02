@@ -72,6 +72,52 @@ public sealed class InteractableCheckTests
         Assert.Contains(part, error.Message);
     }
 
+    private static readonly ArtManifest Art = ArtManifests.Load(ContentPaths.ContentBase);
+
+    private const string Chest = """{ "id": "chest", "kind": "chest", "at": [8, 1] }""";
+
+    private static RegionDef Painted(string id, string variant, params Tile[] at) => Vault.Region() with { Props = [new RegionProps(id, variant, [.. at])] };
+
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void A_painted_prop_on_a_things_tile_is_an_error_with_art_or_without(bool art)
+    {
+        // As a prop on a stamp is: the prop is painted, the thing written by hand, and neither file edits the other.
+        var errors = ValidationTests.ErrorsOfChapter(art ? Art : null, Vault.World(Painted("tall_grass", "green", new Tile(8, 1))), Vault.Things("vault", Chest));
+
+        var error = Assert.Single(errors);
+        Assert.Equal((File, "/interactables/0/at"), (error.File, error.Pointer));
+        Assert.Contains("'chest' at (8, 1) is on the painted prop 'tall_grass'", error.Message);
+    }
+
+    [Fact]
+    public void A_painted_prop_beside_a_thing_is_fine()
+        => Assert.Single(ValidationTests.LoadChapter(Art, Vault.World(Painted("tall_grass", "green", new Tile(7, 1))), Vault.Things("vault", Chest)).InteractablesIn("vault"));
+
+    [Fact]
+    public void Painted_props_and_things_wall_off_together()
+    {
+        // A tree on (4, 2), over the door at (4, 3), shuts the only way down: the door and all behind it can't be reached even with it open.
+        var errors = ValidationTests.ErrorsOfChapter(Art, Vault.World(Painted("tree", "green", new Tile(4, 2))), Vault.Things("vault", Door));
+
+        Assert.Contains(errors, e => e.Message.Contains("'door' at (4, 3) can't be reached from the start", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void The_ground_with_things_in_the_way_keeps_the_painted_props_in_the_way()
+    {
+        var ground = WorldGround.Of(WorldRegion.From(Painted("tree", "green", new Tile(2, 2))), new Dictionary<string, BattleMap>(), Art);
+
+        var with = ground.With([new Tile(3, 2)]);
+
+        Assert.False(with.Walkable(new Tile(2, 2)));        // the painted tree
+        Assert.False(with.Walkable(new Tile(3, 2)));        // the thing
+        Assert.True(with.Walkable(new Tile(4, 2)));
+        Assert.Equal(ground.Map.Buildings, with.Map.Buildings);
+        Assert.Equal(ground.Map.StampedTiles, with.Map.StampedTiles);
+    }
+
     [Fact]
     public void Unknown_items_and_injuries_are_errors()
     {

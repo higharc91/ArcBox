@@ -137,7 +137,7 @@ public partial class RegionToolsPlugin : EditorPlugin
 
             var result = RegionScene.Export(root, Commands.Arg("rules"));
             Finish(result.Status, result.Problems);
-            foreach (var warning in result.StoryWarnings)
+            foreach (var warning in result.StoryWarnings.Concat(result.Warnings.Where(w => !w.Contains("still hold the old stamp"))))
                 _story.AddChild(ProblemButton(warning));
         }
         catch (Exception ex)

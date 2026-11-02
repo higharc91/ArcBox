@@ -12,9 +12,10 @@ public sealed partial class RulesPack
     private RulesPack(string hash, ImmutableSortedDictionary<AbilityId, AbilityDef> abilities,
         ImmutableSortedDictionary<string, PassiveDef> passives, ImmutableSortedDictionary<ConditionId, ConditionDef> conditions,
         ImmutableSortedDictionary<InjuryId, InjuryDef> injuries, ImmutableSortedDictionary<string, BattleMap> maps,
-        Catalog? catalog = null, ImmutableSortedDictionary<string, UnitSheet>? monsterSheets = null)
+        Catalog? catalog = null, ImmutableSortedDictionary<string, UnitSheet>? monsterSheets = null, ArtManifest? art = null)
     {
         _monsterSheets = monsterSheets ?? Ordinal.Map<UnitSheet>();
+        Art = art;
         Hash = hash;
         Abilities = abilities;
         Passives = passives;
@@ -34,7 +35,7 @@ public sealed partial class RulesPack
         Xp = catalog.Xp;
         Regions = catalog.Regions;
         Interactables = catalog.Interactables ?? ImmutableSortedDictionary.Create<string, ImmutableArray<InteractableDef>>(StringComparer.Ordinal);
-        _grounds = Regions.ToImmutableSortedDictionary(r => r.Key, r => new Lazy<WorldGround>(() => WorldGround.Of(r.Value, maps)), StringComparer.Ordinal);
+        _grounds = Regions.ToImmutableSortedDictionary(r => r.Key, r => new Lazy<WorldGround>(() => WorldGround.Of(r.Value, maps, art ?? ArtManifest.None)), StringComparer.Ordinal);
         _reach = Regions.ToImmutableSortedDictionary(r => r.Key,
             r => new Lazy<FrozenSet<Tile>>(() => WorldWalk.Reach(GroundFor(r.Key)!.Terrain, r.Value.Def.Spawns.Start, ClassDef.DefaultJump).ToFrozenSet()),
             StringComparer.Ordinal);
@@ -47,6 +48,9 @@ public sealed partial class RulesPack
     private readonly ImmutableSortedDictionary<string, PassiveDef> _injuryPassives;
     private readonly ImmutableSortedDictionary<string, Lazy<WorldGround>> _grounds;
     private readonly ImmutableSortedDictionary<string, Lazy<FrozenSet<Tile>>> _reach;
+
+    /// <summary>The art manifest the pack was loaded with, if any.</summary>
+    public ArtManifest? Art { get; }
 
     /// <summary>The hash of everything a battle runs under; a battle records it in <see cref="BattleState.ContentHash"/>. Regions aren't in it.</summary>
     public string Hash { get; }
@@ -161,7 +165,7 @@ public sealed partial class RulesPack
     {
         var loaded = PackLoader.Load(packDirectories, art);
         return new RulesPack(loaded.Hash, loaded.Abilities, loaded.Passives, loaded.Conditions, loaded.Injuries, loaded.Maps,
-            loaded.Catalog);
+            loaded.Catalog, art: art);
     }
 
     /// <summary>The rest of a loaded pack's content, which an in-memory pack leaves empty.</summary>

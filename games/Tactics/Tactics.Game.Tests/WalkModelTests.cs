@@ -633,7 +633,7 @@ public sealed class WalkModelTests
                 Must(before.Host == after.Host, "the host view changed with no step and no change in Held or Blocked");
             Must(!party.Blocked || !party.Held, "blocked and held at once");
             if (e.Kind == "walk" && before.Phase == after.Phase && was.Leader == party.Leader)
-                Must(before.Phones.SequenceEqual(after.Phones), "a walk input changed a phone");
+                Must(moved == 0 ? before.Phones.SequenceEqual(after.Phones) : before.Phones.Select(WithoutInteract).SequenceEqual(after.Phones.Select(WithoutInteract)), "a walk input changed a phone");
         }
 
         private void CheckStep(Event e, Seen before, Seen after, DateTimeOffset now)

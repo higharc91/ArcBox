@@ -1,15 +1,17 @@
+using System.Collections.Immutable;
 using Tactics.Logic;
 
 namespace Tactics.WorldTools;
 
 /// <summary>
-/// Claude's first pass of the Ashen Ford, for the user to paint over. It's laid out by hand, as lines and rectangles in tile
-/// coordinates, and noise only roughens their edges, from a fixed seed, so the same pack always gives the same region.
+/// Claude's draft of the Ashen Ford, for the user to paint over. It's laid out by hand, place by place, as rectangles, lines and named lists in tile coordinates. Noise only makes
+/// the slow edge of a ring wander and the banks wind, from a fixed seed, so the same pack always gives the same region. Nothing that stands anywhere comes from a scatter, but for a
+/// wood's trees, jittered inside a drawn outline.
 /// <para>
-/// West to east: Emberwick behind its wall on warm green ground; the scarp, whose north end the road climbs round before running down
-/// through the autumn woods to the ford, with a side road south to the docks. The river cuts the region in two from edge to edge, and
-/// River Crossing is stamped at its only crossing. Past it, the far bank is burned and the terraced hills climb away to the north-east.
-/// The north-west and south-west corners are left as void, as the edge of the map.
+/// West to east: walled Emberwick and its tired fields; the scarp, whose north end the road climbs round before running down through the woods to the ford, with a side road south
+/// to the docks. The river cuts the region in two from edge to edge, and River Crossing is stamped at its only crossing. The ground burned in rings round the ford: ash, then
+/// scorched earth, then thin grass, with the ash running on downstream along the far bank to Maud's. North-east of the ford the frozen hills climb to the camp. The north-west and
+/// south-west corners are left as void, as the edge of the map.
 /// </para>
 /// <para>
 /// Every step between two walkable tiles is 2 or less, so nothing is one way: <see cref="Land.EaseSteps"/> sees to it.
@@ -35,15 +37,28 @@ public static class AshenFordDraft
 
     private const TileFlags DeepWater = TileFlags.Water | TileFlags.Deep, Shallows = TileFlags.Water | TileFlags.Difficult;
 
-    private const string Autumn = "grass/autumn", Dry = "grass/dry", Green = "grass/green", Lush = "grass/lush";
-    private const string Earth = "dirt/brown", DarkEarth = "dirt/dark", Track = "path/packed", Sand = "sand/desert";
-    private const string Leaves = "forest_floor/leafy", Moss = "forest_floor/mossy", Needles = "forest_needles/pine";
-    private const string Rock = "rock/grey", DarkRock = "rock/dark", Ash = "ash/grey", Basalt = "basalt/dark", Water = "water/clear";
-    private const string Street = "cobble/warm", Wall = "cobble/grey", Square = "flagstone/warm", Quay = "flagstone/grey";
-    private const string Deck = "planks/oak", Roof = "planks/dark";
+    // The ground, from the ford out. A place is one or two of these.
+    private const string Ash = "ash/grey", Scorch = "dirt/dark", Thin = "grass/dry", Stubble = "grass/autumn", Ploughed = "dirt/brown";
+    private const string Track = "path/packed", Mud = "dirt/dark", Frost = "grass/frost", Water = "water/clear", Needles = "forest_needles/pine";
+
+    /// <summary>The hills' and the scarp's bare stone is the pack's rough cave floor, as the top meant for rock is laid in slabs the size of a house. The stamp's own rock stays as its map has it.</summary>
+    private const string Rock = "cave_floor/cool", DarkRock = "cave_floor/cool", StampRock = "rock/grey", Scree = "mine_gravel/brown";
+    private const string Street = "cobble/warm", Plaza = "cobble/grey", Quay = "flagstone/grey", Deck = "planks/oak";
+
+    /// <summary>What the road is made of: the packed path and the town's cobbled streets. Things stand on a square, but not on a road.</summary>
+    public static readonly ImmutableHashSet<string> RoadMaterials = ["cobble/warm", "path/packed"];
 
     /// <summary>River Crossing's corner: its column 6 and 7 are the river, its rows 7 and 8 the ford.</summary>
     private static readonly Tile StampAt = new(100, 52);
+
+    /// <summary>The heart of the old fire: the ford.</summary>
+    private static readonly (double X, double Y) Ford = (107, 59);
+
+    /// <summary>The ash doesn't stop in a ring downstream of the bridge: it runs on down the far bank to Maud's ("grey and bare for a mile").</summary>
+    private static readonly Line BurnedBank = new((107.0, 59.0), (122.0, 76.0), (133.0, 96.0));
+
+    /// <summary>How far from the fire's heart, in tiles, the ash stops, the scorched earth stops and the grass comes back thick enough to farm.</summary>
+    private const double AshEnds = 24, ScorchEnds = 37, ThinEnds = 52;
 
     /// <summary>The river, north to south. It runs straight for a while either side of the stamp, whose channel it must meet.</summary>
     private static readonly Line River = new((117, -3), (113, 14), (105, 30), (106.5, 42), (106.5, 52), (106.5, 64), (106.5, 72), (111, 86), (108, 102), (112, 112), (113, 123));
@@ -54,64 +69,490 @@ public static class AshenFordDraft
     /// <summary>The spur that carries River Crossing's rock ridge up into the hills.</summary>
     private static readonly Line Spur = new((112, 50), (120, 42), (128, 34));
 
+    /// <summary>How far a road runs each side of its line: a track a cart wide, the least that still joins along a diagonal, and its verge of dark earth beyond it.</summary>
+    private const double Narrow = 0.72, Verge = 1.2;
+
     /// <summary>The road: x, y and its height there. East gate to the stamp, the side road to the docks, then the stamp's exit to the region's east edge.</summary>
     private static readonly Road[] Roads =
     [
-        new(Track, Earth, 1.5, 2.5, [(50, 62, 3), (52, 52, 3), (55, 38, 4), (60, 22, 5), (68, 12, 6), (78, 17, 5), (86, 34, 4), (92, 48, 3), (95, 57, 1.4), (99.5, 61.5, 1)]),
-        new(Track, Earth, 1, 2, [(94, 54, 2), (91, 64, 2), (93, 76, 2), (96, 88, 2), (96, 94, 2)]),
-        new(Track, DarkEarth, 1.5, 2.5, [(113.5, 57.5, 2), (122, 58, 2), (140, 62, 2), (160, 58, 2)]),
+        new(Track, Scorch, Narrow, Verge, [(48, 62, 3), (52, 56, 3), (55, 38, 4), (60, 22, 5), (68, 12, 6), (78, 17, 5), (86, 34, 4), (92, 48, 3), (95, 57, 1.4), (99.5, 61.5, 1)]),
+        new(Track, Scorch, Narrow, Verge, [(94, 54, 2), (91, 64, 2), (93, 76, 2), (96, 88, 2), (96, 94, 2)]),
+        new(Track, Scorch, Narrow, Verge, [(113.5, 57.5, 2), (122, 58, 2), (140, 62, 2), (160, 58, 2)]),
+        new(Track, Thin, 0.5, 0, [(31, 80, 3), (31, 86, 3), (31, 92, 3)]),
     ];
 
     /// <summary>The goat path from the far road up the terraces to the camp, and the track to Maud's.</summary>
     private static readonly Road[] Tracks =
     [
-        new(Earth, DarkEarth, 1, 2, [(120, 57, 2), (124, 46, 3), (118, 38, 4.5), (124, 32, 5), (133, 33, 6), (136, 28, 7)]),
-        new(DarkEarth, Ash, 0.5, 1.5, [(125, 58, 2), (130, 70, 2), (126, 82, 3), (131, 90, 4)]),
+        new(Mud, Mud, 1, 1, [(120, 57, 2), (124, 46, 3), (118, 38, 4.5), (124, 32, 5), (133, 33, 6), (135, 29, 7), (134, 26, 7)]),
+        new(Scorch, Ash, 0.5, 0.5, [(125, 58, 2), (130, 70, 2), (126, 82, 3), (131, 90, 4)]),
     ];
 
-    /// <summary>The town's buildings: left, top, width, depth, and how high their walls stand.</summary>
-    private static readonly (int X, int Y, int W, int D, int Walls)[] Buildings =
+    /// <summary>The town's walls, one tile thick: left, top, right and bottom.</summary>
+    private const int TownLeft = 14, TownTop = 44, TownRight = 47, TownBottom = 79;
+
+    /// <summary>Emberwick's square, and its streets, which all run into it or into each other: left, top, width and depth.</summary>
+    private static readonly (string Name, int X, int Y, int W, int D)[] Streets =
     [
-        // The square: the chapel to the north, the inn to the south and the general store on the west side.
-        (26, 45, 9, 8, 4), (24, 72, 10, 6, 3), (17, 66, 4, 8, 2),
-
-        // North-west.
-        (12, 47, 7, 4, 2), (12, 52, 4, 7, 2), (17, 53, 3, 7, 2),
-
-        // South-west.
-        (12, 65, 4, 5, 2), (12, 71, 7, 4, 2),
-
-        // Behind the chapel and the inn.
-        (24, 41, 5, 2, 1), (31, 41, 6, 2, 1), (36, 72, 2, 5, 1),
-
-        // North-east, and the granary to the south-east.
-        (41, 46, 6, 4, 2), (41, 51, 3, 7, 2), (45, 52, 3, 7, 2), (40, 65, 8, 11, 3),
-
-        // Along the south lane.
-        (13, 81, 5, 3, 2), (20, 81, 6, 3, 2), (28, 81, 4, 3, 2), (34, 81, 6, 3, 2), (42, 81, 5, 3, 2),
-
-        // The docks' warehouses, the fishers' sheds and the Ash Market's stalls.
-        (87, 90, 7, 4, 2), (89, 103, 6, 5, 2), (84, 95, 3, 3, 1), (90, 96, 3, 2, 1), (95, 104, 3, 2, 1),
+        ("High Street, to the east gate", 39, 61, 9, 3),
+        ("Chapel Row, west", 15, 55, 9, 2),
+        ("Chapel Row, east", 39, 55, 8, 2),
+        ("Mill Lane", 15, 61, 9, 2),
+        ("Tanners' Row", 15, 67, 9, 2),
+        ("Granary Row", 39, 67, 8, 2),
+        ("South Gate Road", 30, 68, 3, 12),
+        ("South Lane", 15, 74, 32, 2),
+        ("Back Lane", 15, 48, 32, 2),
+        ("Church Walk", 27, 50, 2, 5),
+        ("Smiths' Cut", 38, 50, 1, 5),
     ];
 
-    /// <summary>How many of <see cref="Buildings"/> are in the town, ahead of the docks'.</summary>
-    private const int TownBuildings = 20;
+    /// <summary>The square, which is cobbled in grey, so it reads as a place to stand and not a road.</summary>
+    private static readonly (int X, int Y, int W, int D) Square = (24, 55, 15, 12);
 
-    /// <summary>The fields round the town: left, top, width, depth, and whether their furrows run along x.</summary>
-    private static readonly (int X, int Y, int W, int D, bool Across)[] Fields =
+    /// <summary>The fields round the town: left, top, width, depth and what's on them. Straight edges, as a field has.</summary>
+    private static readonly (string Name, int X, int Y, int W, int D, string Crop)[] Fields =
     [
-        (34, 8, 12, 12, true), (34, 22, 12, 11, false), (34, 34, 8, 4, false),
-        (34, 87, 10, 9, true), (34, 98, 14, 11, false), (45, 87, 5, 9, true),
+        ("Mayor's Forty", 34, 8, 13, 13, Stubble),
+        ("Long Acre", 34, 23, 13, 10, Ploughed),
+        ("Hearthfield", 18, 33, 14, 9, Stubble),
+        ("Gate Close", 34, 34, 13, 8, Ploughed),
+        ("Southfield", 16, 82, 13, 8, Stubble),
+        ("Wardens' Strip", 33, 82, 8, 12, Ploughed),
+        ("Low Field", 42, 83, 9, 12, Stubble),
+        ("Ten Rods", 34, 97, 14, 12, Ploughed),
     ];
 
-    /// <summary>The camp's low hide tents: left, top, width, depth.</summary>
-    private static readonly (int X, int Y, int W, int D)[] Tents = [(126, 19, 3, 3), (131, 17, 4, 3), (137, 20, 3, 4), (125, 25, 3, 3), (138, 26, 3, 2)];
+    /// <summary>A building of the town kit, with its footprint's back corner at (<paramref name="X"/>, <paramref name="Y"/>). Every door in the kit faces +y, so a row stands on the north side of its street.</summary>
+    private sealed record Building(string Id, string Variant, int X, int Y);
+
+    /// <summary>Emberwick, by what it's for. Warm stone walls and towers come after, from <see cref="TownTowers"/> and <see cref="TownGates"/>.</summary>
+    private static readonly Building[] Emberwick =
+    [
+        // The square's north side, every door on it.
+        new("tavern", "red", 24, 53),               // The Last Coal
+        new("chapel", "warm", 29, 52),              // the Church of the Hearth
+        new("store", "green", 33, 53),              // the general store
+        new("smithy", "oak", 36, 53),               // Tobin's
+
+        // The market, across the south of the square, with the road to the south gate running through it.
+        new("stall", "red", 25, 65), new("stall", "yellow", 26, 65), new("stall", "blue", 28, 65),
+        new("stall", "green", 34, 65), new("stall", "purple", 35, 65),
+        new("clutter_produce", "mixed", 27, 65), new("clutter_produce", "mixed", 36, 65),
+        new("notice_board_u", "oak", 37, 57),
+
+        // Clutter by the doors.
+        new("clutter_barrels", "oak", 23, 54), new("clutter_crates", "oak", 32, 54), new("clutter_barrels", "oak", 35, 54),
+
+        // Chapel Row, west and east of the square.
+        new("house", "green", 15, 53), new("cottage", "thatch_green", 18, 53), new("house", "red", 21, 53),
+        new("cottage", "slate_blue", 40, 53), new("house", "blue", 43, 53),
+
+        // Mill Lane, and the High Street to the east gate.
+        new("cottage", "shakes_oak", 15, 59), new("house", "blue", 18, 59), new("cottage", "thatch_red", 21, 59),
+        new("house", "green", 40, 59), new("cottage", "shakes_oak", 43, 59),
+
+        // Tanners' Row and Granary Row.
+        new("cottage", "slate_blue", 15, 65), new("cottage", "thatch_green", 18, 65), new("house", "red", 21, 65),
+        new("house", "blue", 40, 65), new("cottage", "thatch_red", 43, 65),
+
+        // Back Lane, under the north wall.
+        new("cottage", "thatch_red", 18, 46), new("house", "green", 24, 46), new("cottage", "shakes_oak", 35, 46), new("cottage", "slate_blue", 41, 46),
+
+        // South Lane, low, so they don't hide the square.
+        new("cottage", "thatch_green", 16, 72), new("cottage", "shakes_oak", 20, 72), new("cottage", "slate_blue", 25, 72), new("cottage", "thatch_red", 34, 72),
+
+        // The granaries. The kit has no barn, so they're two big plank-roofed sheds in a fenced yard.
+        new("cottage", "shakes_oak", 40, 72), new("cottage", "shakes_oak", 43, 72),
+        new("clutter_crates", "oak", 42, 73), new("clutter_barrels", "oak", 45, 73),
+
+        // Clutter down the lanes.
+        new("clutter_barrels", "oak", 17, 60), new("clutter_crates", "oak", 42, 60), new("clutter_produce", "mixed", 17, 66),
+        new("clutter_crates", "oak", 45, 54), new("clutter_barrels", "oak", 23, 66),
+    ];
+
+    /// <summary>The wall's towers, at its corners, in the middle of its runs and either side of each gate.</summary>
+    private static readonly (int X, int Y)[] TownTowers =
+    [
+        (TownLeft, TownTop), (30, TownTop), (TownRight, TownTop),
+        (TownLeft, 61), (TownRight, 60), (TownRight, 64),
+        (TownLeft, TownBottom), (29, TownBottom), (33, TownBottom), (TownRight, TownBottom),
+    ];
+
+    /// <summary>The gates: the road east, and the lane to the south fields.</summary>
+    private static readonly Building[] TownGates = [new("gate_v", "warm", TownRight, 61), new("gate_u", "warm", 30, TownBottom)];
+
+    /// <summary>The wall, in warm stone, round the town from tower to tower, leaving out the gates.</summary>
+    private static IEnumerable<Building> TownWall()
+    {
+        var taken = TownTowers.ToHashSet();
+        var gates = TownGates.SelectMany(g => g.Id == "gate_v" ? Enumerable.Range(0, 3).Select(i => (g.X, g.Y + i)) : Enumerable.Range(0, 3).Select(i => (g.X + i, g.Y))).ToHashSet();
+        foreach (var (x, y) in TownTowers)
+            yield return new Building("wall_tower", "warm", x, y);
+        foreach (var gate in TownGates)
+            yield return gate;
+        for (var x = TownLeft + 1; x < TownRight; x++)
+            foreach (var y in new[] { TownTop, TownBottom })
+                if (!taken.Contains((x, y)) && !gates.Contains((x, y)))
+                    yield return new Building("wall_u", "warm", x, y);
+        for (var y = TownTop + 1; y < TownBottom; y++)
+            foreach (var x in new[] { TownLeft, TownRight })
+                if (!taken.Contains((x, y)) && !gates.Contains((x, y)))
+                    yield return new Building("wall_v", "warm", x, y);
+    }
+
+    /// <summary>What stands in Emberwick that isn't a building.</summary>
+    private static readonly Stand[] InEmberwick =
+    [
+        new("well", "stone", (31, 60)),
+        new("lamp_post", "iron", (25, 57), (37, 59), (25, 63), (37, 63), (28, 61), (34, 61)),       // the square
+        new("lamp_post", "iron", (17, 54), (20, 54), (39, 54), (42, 54)),                           // Chapel Row
+        new("lamp_post", "iron", (20, 60), (45, 60), (39, 60), (20, 66), (45, 66), (39, 66)),       // Mill Lane, the High Street, the rows
+        new("lamp_post", "iron", (22, 47), (33, 47), (40, 47)),                                     // Back Lane
+        new("lamp_post", "iron", (23, 73), (29, 73), (33, 73), (39, 73)),                           // South Lane
+        new("torch", "fire", (46, 60), (46, 64), (29, 78), (33, 78)),                               // inside the gates
+        new("sack", "burlap", (39, 72), (42, 71), (43, 71), (44, 70), (39, 70)),                    // the granary yard
+        new("crate", "oak", (41, 71)),
+        new("cart", "hay", (45, 70)),
+        new("tree", "autumn", (46, 57), (16, 57), (19, 70), (36, 51), (20, 51), (16, 50)),
+    ];
+
+    /// <summary>What stands, of one kind, on these tiles.</summary>
+    private sealed record Stand(string Id, string? Variant, params (int X, int Y)[] At);
+
+    /// <summary>The farms outside the walls: one mill, one steading, fences along the field edges with a gap to walk through, and hay on the stubble.</summary>
+    private static readonly Building[] OnTheFarms =
+    [
+        new("windmill", "stone", 49, 35),
+        new("cottage", "thatch_red", 29, 84),       // the reeve's
+    ];
+
+    /// <summary>The ground a building out on the land stands on, made flat: left, top, width, depth and height.</summary>
+    private static readonly (int X, int Y, int W, int D, int Height)[] Levelled = [(48, 34, 5, 6, TownLevel), (28, 83, 4, 5, TownLevel)];
+
+    /// <summary>A straight run of something, from one end to the other, every <paramref name="Step"/> tiles.</summary>
+    private static (int X, int Y)[] Run((int X, int Y) from, (int X, int Y) to, int step = 1)
+    {
+        var count = Math.Max(Math.Abs(to.X - from.X), Math.Abs(to.Y - from.Y)) / step;
+        return [.. Enumerable.Range(0, count + 1).Select(i => (from.X + Math.Sign(to.X - from.X) * i * step, from.Y + Math.Sign(to.Y - from.Y) * i * step))];
+    }
+
+    private static readonly Stand[] InTheFields =
+    [
+        .. FarmFenceStands(),
+        new("haystack", "hay", (37, 11), (41, 14), (44, 10), (38, 17), (21, 36), (26, 38), (29, 35), (19, 85), (24, 86), (20, 87), (26, 84), (45, 87), (48, 91)),
+        new("training_dummy", "straw", (40, 28), (37, 87), (36, 17)),                               // scarecrows, set among the stubble fields
+        new("crop_wheat_stubble", "gold",
+            (35, 11), (45, 18), (36, 26), (44, 30), (18, 39), (24, 34), (31, 38), (36, 36), (44, 40),
+            (17, 87), (28, 86), (34, 88), (39, 90), (43, 90), (49, 84),
+            (36, 100), (40, 100), (44, 100), (36, 105), (40, 105), (44, 105)),                         // grain left standing in short, open rows
+        new("farm_goat", "rust", (22, 83), (46, 89)),                                                   // two quiet goats in separate enclosed fields
+        new("pack_mule", "grey", (50, 23)),                                                            // grain panniers beside the cart at Long Acre's gate
+        new("cart", "hay", (48, 23)),
+        new("well", "stone", (30, 89)),
+        new("torch", "fire", (28, 87)),
+        new("tree", "autumn", (47, 7), (47, 21), (16, 43), (15, 81), (41, 96)),
+    ];
+
+    /// <summary>Ordinary wild neighbours of the farms: rooks at the scarecrows, mallards in the river shallows, and a fox at the wood's edge.</summary>
+    private static readonly Stand[] Wildlife =
+    [
+        new("field_crow", "charcoal", (42, 28), (39, 87)),
+        new("river_duck", "mallard", (116, 89), (115, 100)),
+        new("red_fox", "russet", (82, 38)),
+    ];
+
+    /// <summary>One short fence around each field, with gaps left as gates and a shared opening between the two lower farms.</summary>
+    private static Stand[] FarmFenceStands()
+    {
+        var across = new HashSet<(int X, int Y)>();
+        var along = new HashSet<(int X, int Y)>();
+        var corners = new HashSet<(string Variant, (int X, int Y) Tile)>();
+        void Horizontal(int y, int left, int right, int gateLeft = int.MaxValue, int gateRight = int.MinValue)
+        {
+            for (var x = left; x <= right; x++)
+                if (x < gateLeft || x > gateRight)
+                    across.Add((x, y));
+        }
+        void Vertical(int x, int top, int bottom, int gateTop = int.MaxValue, int gateBottom = int.MinValue)
+        {
+            for (var y = top; y <= bottom; y++)
+                if (y < gateTop || y > gateBottom)
+                    along.Add((x, y));
+        }
+        void Plot(int left, int top, int right, int bottom, int gateX, int gateY, int sideGapX = int.MinValue, int sideGapTop = int.MinValue, bool openLeft = false)
+        {
+            Horizontal(top, left, right, gateY == top ? gateX : int.MaxValue, gateY == top ? gateX + 1 : int.MinValue);
+            Horizontal(bottom, left, right, gateY == bottom ? gateX : int.MaxValue, gateY == bottom ? gateX + 1 : int.MinValue);
+            if (!openLeft)
+                Vertical(left, top, bottom, sideGapX == left ? sideGapTop : int.MaxValue, sideGapX == left ? sideGapTop + 1 : int.MinValue);
+            Vertical(right, top, bottom, sideGapX == right ? sideGapTop : int.MaxValue, sideGapX == right ? sideGapTop + 1 : int.MinValue);
+            if (!openLeft)
+                corners.Add(("nw", (left, top)));
+            corners.Add(("ne", (right, top)));
+            if (!openLeft)
+                corners.Add(("sw", (left, bottom)));
+            corners.Add(("se", (right, bottom)));
+        }
+
+        Plot(33, 7, 47, 21, 39, 21);                     // Mayor's Forty, gate south
+        Plot(33, 22, 47, 33, 39, 33);                    // Long Acre, gate into Gate Close
+        Plot(33, 33, 47, 42, 39, 42);                    // Gate Close shares the fence at y=33
+        Plot(17, 32, 32, 42, 23, 42);                    // Hearthfield
+        Plot(15, 81, 29, 88, 21, 81, 29, 85, openLeft: true); // Southfield opens at the reeve's door and follows the cliff edge
+        Plot(32, 81, 41, 92, 36, 81, 41, 87, openLeft: true); // Wardens' Strip ends above the scarp
+        Plot(41, 82, 51, 92, 45, 82, 41, 87);                // Low Field shares the path opening and the set-back south rail
+        Plot(33, 96, 48, 106, 39, 96, openLeft: true);       // Ten Rods ends above the scarp
+
+        // Two adjoining pens meet the same shared rail at these points. Give that rail a three-way join instead of
+        // drawing a second complete fence through it. Every other corner is a two-arm join with one shared post.
+        corners.RemoveWhere(c => c.Tile is (33, 33) or (47, 33) or (41, 82) or (41, 92));
+        corners.Add(("tee_sw", (33, 33)));
+        corners.Add(("tee_sw", (47, 33)));
+        corners.Add(("tee_sw", (41, 82)));
+        corners.Add(("tee_sw", (41, 92)));
+        foreach (var corner in corners)
+        {
+            across.Remove(corner.Tile);
+            along.Remove(corner.Tile);
+        }
+
+        return
+        [
+            new Stand("fence", "oak", [.. across]),
+            new Stand("fence", "oak_reversed", [.. along]),
+            new Stand("fence_join", "nw", corners.Where(c => c.Variant == "nw").Select(c => c.Tile).ToArray()),
+            new Stand("fence_join", "ne", corners.Where(c => c.Variant == "ne").Select(c => c.Tile).ToArray()),
+            new Stand("fence_join", "sw", corners.Where(c => c.Variant == "sw").Select(c => c.Tile).ToArray()),
+            new Stand("fence_join", "se", corners.Where(c => c.Variant == "se").Select(c => c.Tile).ToArray()),
+            new Stand("fence_join", "tee_sw", corners.Where(c => c.Variant == "tee_sw").Select(c => c.Tile).ToArray()),
+        ];
+    }
+
+    /// <summary>The road east: a signpost at each fork, a cart or two left on the verge, a wall of the scarp's crags to its west.</summary>
+    private static readonly Stand[] OnTheRoad =
+    [
+        new("signpost", "oak", (51, 63), (66, 9), (88, 49)),
+        new("cart", "oak", (53, 30), (92, 41)),
+        new("crag", "grey", (56, 62), (58, 50), (60, 40), (63, 32), (58, 74), (57, 88), (56, 100), (60, 46), (57, 56), (60, 68), (56, 80), (59, 94), (55, 108), (58, 114), (65, 28)),
+        new("rock_cluster", "grey", (59, 56), (57, 66), (61, 36), (58, 82), (57, 94), (66, 24), (62, 44), (60, 62), (55, 72), (60, 86), (58, 104), (56, 118), (68, 22)),
+        new("boulder", "grey", (55, 58), (63, 50), (54, 76), (63, 72), (62, 90), (53, 96), (61, 110)),
+        new("rock_large", "grey", (53, 72), (52, 84)),
+    ];
+
+    /// <summary>The burned ground: a farm the fire took, stones split by it, and nothing that grows.</summary>
+    private static readonly Stand[] OnTheBurnedGround =
+    [
+        new("ruin_wall", "dark", (84, 44), (85, 44), (84, 46), (87, 47)),               // what's left of a farmhouse by the road
+        new("rubble", "dark", (85, 45), (86, 46), (83, 45), (86, 44), (88, 45), (84, 47)),
+        new("rubble", "ashen", (72, 58), (74, 73), (88, 68), (82, 84), (125, 66), (136, 74), (148, 70), (121, 84)),
+        new("boulder", "dark", (86, 72), (78, 56), (127, 69), (140, 78)),
+        new("gravestone", "ashen", (74, 76), (75, 76), (77, 77)),                       // whoever the fire caught
+    ];
+
+    /// <summary>
+    /// Round the Ford Bridge. The goblins' fires burn on the far bank and their banners stand back from the stamp, so a tall thing never hides a fight. The old Warden stones
+    /// stand at the town's end of the bridge. What's nearest the road is low.
+    /// </summary>
+    private static readonly Stand[] AtTheFord =
+    [
+        new("pillar_broken", "grey", (97, 53), (98, 67), (94, 66), (92, 55)),           // the Warden stones
+        new("pillar_broken", "grey", (91, 59), (95, 59), (93, 64), (97, 64)),             // down each side of their causeway
+        new("pillar_broken", "grey", (119, 56), (123, 56), (118, 61), (122, 61)),       // and on the far bank
+        new("ruin_arch", "grey", (96, 68), (94, 58)),
+        new("ruin_wall", "grey", (100, 49), (101, 50)),                                 // the bridge's west abutment
+        new("rubble", "ashen", (95, 67), (97, 66), (89, 53), (96, 51), (102, 50), (101, 46), (100, 47), (91, 60), (98, 64)),
+        new("campfire", "fire", (119, 53), (119, 62), (123, 55), (116, 66)),            // goblin fires on the far bank
+        new("banner", "goblin", (118, 50), (121, 64), (124, 52), (120, 68)),
+        new("banner", "goblin", (103, 47), (99, 59), (98, 64), (118, 55), (118, 62)),   // and their claim on the old bridge, and on both ends of the crossing
+        new("skull_pike", "bone", (118, 56), (118, 60), (116, 50), (99, 58), (99, 65), (103, 49)),
+        new("torch", "fire", (96, 60), (98, 63)),                                       // their pickets on the near bank
+        new("barricade", "oak", (114, 53), (114, 62), (96, 59), (96, 64)),
+        new("barricade", "oak", (116, 55), (116, 61)),
+        new("crate", "oak", (122, 53), (120, 60)),
+        new("signpost", "oak", (127, 55)),
+        new("tall_grass", "dry", (98, 52), (98, 55), (99, 67), (114, 66), (115, 68), (112, 66), (101, 65)),
+    ];
+
+    /// <summary>
+    /// The old Warden bridge, upstream of the ford and behind it, so it never hides a fight. River Crossing's map is a ford, its tiles can't change, and the crossing has to stay
+    /// the only one, so what's left of the bridge is a stump from each bank with a span gone, on piers of its own stone. It can't be walked: its tiles are still the river.
+    /// </summary>
+    private static readonly Building[] OldBridge = [new("bridge_u", "grey", 105, 48), new("bridge_u", "grey", 106, 48), new("bridge_u", "grey", 108, 48)];
+
+    /// <summary>The bridge's deck stands this high, level with the east bank and clear of the water.</summary>
+    private const int BridgeDeck = 3;
+
+    /// <summary>The Wardens' paved road, what's left of it, either side of the crossing: x, y for each end.</summary>
+    private static readonly (double X, double Y)[][] Causeways = [[(88, 61), (99.5, 61.5)], [(113.5, 58), (124, 58)]];
+
+    /// <summary>The docks' sheds on their yard, each door on the lane behind the quay. The market's stalls stand on the quay itself.</summary>
+    private static readonly Building[] AtTheDocks =
+    [
+        new("cottage", "shakes_oak", 88, 90), new("house", "blue", 91, 90),         // the fishers'
+        new("cottage", "thatch_green", 88, 98), new("store", "blue", 91, 98),       // the chandler's
+        new("clutter_crates", "oak", 90, 91), new("clutter_barrels", "oak", 90, 99),
+        new("stall", "purple", 96, 92), new("stall", "red", 96, 95),                // the Ash Market
+        new("stall", "blue", 96, 103), new("stall", "purple", 96, 106),
+        new("clutter_crates", "oak", 97, 101), new("clutter_barrels", "oak", 95, 108),
+    ];
+
+    /// <summary>The River Docks. By day it's fish, and by night the Ash Market lights its lanterns: they're all that lights the place.</summary>
+    private static readonly Stand[] OnTheDocks =
+    [
+        new("fishing_skiff", "oak", (105, 95), (105, 101), (105, 107)),
+        new("lantern_iron", "iron", (98, 91), (98, 96), (98, 102), (98, 107), (107, 93), (107, 99), (107, 105)),
+        new("barrel", "oak", (100, 93), (101, 93), (100, 105)),
+        new("crate", "oak", (102, 99), (103, 99), (101, 105)),
+        new("sack", "burlap", (104, 93), (105, 105), (94, 91), (95, 100)),
+        new("cart", "oak", (92, 87)),
+    ];
+
+    /// <summary>
+    /// The Skarrow camp is four hide tents pulled in round one fire, a hide stretched on its rack, a barricade across the way in and a low palisade behind, on ground trodden to frozen
+    /// mud that stops where the camp stops. There's no food to be seen, and it's dark past the fire.
+    /// </summary>
+    private static readonly Stand[] AtTheCamp =
+    [
+        new("tent", "hide", (130, 22), (132, 20), (135, 20), (136, 23)),
+        new("campfire", "fire", (133, 22)),
+        new("mantlet", "hide", (130, 24)),                                                  // the drying rack, with nothing much on it
+        new("log", "oak", (131, 24)),
+        new("stump", "oak", (135, 22)),
+        new("ribcage", "bleached", (129, 20)),
+        new("cage", "rust", (137, 20)),
+        new("sack", "burlap", (134, 20)),
+        new("banner", "goblin", (131, 19), (136, 19)),
+        new("skull_pike", "bone", (129, 26), (137, 26)),
+        new("barricade", "oak", (131, 26), (132, 27), (136, 27)),
+        new("palisade", "log", (128, 21), (128, 22), (128, 23), (129, 18), (130, 18), (132, 17), (133, 17), (134, 17), (136, 18), (137, 19), (138, 21), (138, 22)),
+    ];
+
+    /// <summary>The Skarrow Hills: bare terraces of frost and rock, a few snowbound pines, and the crags that close them.</summary>
+    private static readonly Stand[] InTheHills =
+    [
+        new("pine_snowy", "snow", (122, 26), (119, 30), (141, 36), (146, 38), (126, 38), (150, 42)),
+        new("crag", "dark", (116, 22), (130, 40), (143, 28), (152, 34), (122, 30), (127, 16), (136, 12), (146, 18), (150, 24), (156, 30), (146, 34), (138, 38), (124, 12), (114, 16)),
+        new("rock_cluster", "dark", (122, 44), (136, 43), (147, 44), (118, 32), (128, 34), (141, 22), (119, 18), (132, 14), (148, 30), (154, 42), (140, 14)),
+        new("boulder", "dark", (127, 42), (140, 41), (121, 36), (125, 22), (134, 36), (144, 37), (150, 38), (116, 28), (142, 24)),
+        new("dead_tree", "dark", (116, 44), (132, 46), (144, 48)),
+    ];
+
+    /// <summary>Old Maud's hut, alone on the burned bank.</summary>
+    private static readonly Building[] AtMauds = [new("cottage", "thatch_green", 130, 88)];
+
+    /// <summary>The charms she's hung about it, the dead trees that stand round it, and nothing else for a long way.</summary>
+    private static readonly Stand[] RoundMauds =
+    [
+        new("dead_tree", "dark", (125, 85), (127, 92), (136, 86), (138, 93), (129, 97), (134, 98)),
+        new("skull_pike", "bone", (128, 90), (133, 88), (134, 91), (129, 87)),
+        new("shrine", "stone", (127, 88)),
+        new("grave_cross", "ashen", (136, 90), (137, 89)),
+        new("torch", "fire", (132, 90)),
+    ];
+
+    /// <summary>The reeds, in beds along both banks: from a row to a row, north to south, clear of the stamp. A bed fills every other bank tile that touches water.</summary>
+    private static readonly (int From, int To)[] Reedbeds = [(26, 50), (66, 86)];
+
+    /// <summary>A wood: its trees stand about every <paramref name="Every"/> tiles inside <paramref name="Outline"/>, jittered, clear of the roads, and of <see cref="WoodPaths"/>.</summary>
+    private sealed record Wood(string Name, int Every, (string Id, string? Variant)[] Trees, (double X, double Y)[] Outline, bool Floor = false);
+
+    /// <summary>Living woods far from the fire, thinning to dead standing timber by the ford.</summary>
+    private static readonly Wood[] Woods =
+    [
+        new("Scarpfoot Wood", 2, [("pine", "green"), ("tree", "autumn"), ("pine", "green")], [(65, 22), (73, 20), (79, 28), (80, 38), (74, 46), (67, 46), (64, 34)], Floor: true),
+        new("Bridgewood", 2, [("tree", "autumn"), ("pine", "green"), ("tree", "autumn")], [(82, 4), (100, 5), (98, 18), (91, 24), (86, 18)], Floor: true),
+        new("Cinder Wood", 2, [("dead_tree", "grey"), ("dead_tree", "dark")], [(66, 52), (82, 50), (86, 60), (84, 80), (72, 96), (64, 88)]),
+        new("Black Stand", 3, [("dead_tree", "dark"), ("dead_tree", "grey")], [(120, 72), (146, 66), (152, 86), (146, 106), (124, 110), (118, 96)]),
+    ];
+
+    /// <summary>The share of a wood's spots with no tree, so it's never a wall.</summary>
+    private const double WoodGaps = 0.06;
+
+    /// <summary>What grows under a living wood's trees, on some of the tiles they leave: all of it low, and most of it to walk through.</summary>
+    private static readonly (string Id, string? Variant)[] Undergrowth =
+    [
+        ("bush", "autumn"), ("fern", "autumn"), ("tall_grass", "dry"), ("fern", "autumn"), ("bush", "green"), ("mushroom_cluster", "brown"), ("stump", "oak"), ("log", "oak"),
+    ];
+
+    /// <summary>How far apart undergrowth stands, and the share of its spots left bare.</summary>
+    private const int UndergrowthEvery = 2;
+
+    private const double UndergrowthGaps = 0.4;
+
+    /// <summary>How far anything in a wood stands from a road or a way through it.</summary>
+    private const double WoodClear = 1.9;
+
+    /// <summary>Ways through the woods, a tile or so each side, so a party can walk them: left along the wood's length, not across it.</summary>
+    private static readonly Line[] WoodPaths =
+    [
+        new((80.0, 26.0), (72.0, 34.0), (70.0, 46.0)),
+        new((90.0, 12.0), (92.0, 24.0)),
+        new((74.0, 50.0), (78.0, 66.0), (72.0, 88.0)),
+        new((130.0, 72.0), (140.0, 90.0), (128.0, 106.0)),
+    ];
+
+    /// <summary>All of it, place by place.</summary>
+    private static readonly Stand[] Everything = [.. InEmberwick, .. InTheFields, .. Wildlife, .. OnTheRoad, .. OnTheBurnedGround, .. AtTheFord, .. OnTheDocks, .. AtTheCamp, .. InTheHills, .. RoundMauds];
+
+    /// <summary>Someone standing on a tile, looking one way, and walking a loop if they've somewhere to pace.</summary>
+    private static RegionPerson Stood(string preset, int x, int y, string face, params (int X, int Y)[] walk)
+        => new(preset, new Tile(x, y), face, walk.Length == 0 ? default : [.. walk.Select(t => new Tile(t.X, t.Y))]);
+
+    /// <summary>
+    /// Who lives where the lore says. Pip stands on the mayor's beat, as he opens it, and a beat's figure stands in for its own person (<c>WorldPeople</c>), so nobody shows twice. Lark
+    /// and Corvin have no scene in this chapter, so they're where a singer and a scholar would be: on the square by the well, and reading the notice board.
+    /// </summary>
+    private static readonly RegionPerson[] Named =
+    [
+        Stood("mayor", 29, 62, "se"),                   // Halden Varrow, on the square
+        Stood("innkeeper", 25, 55, "sw"),               // Bree Tallow, at The Last Coal's door
+        Stood("priest", 30, 55, "sw"),                  // Mother Aubrine, at the chapel
+        Stood("blacksmith", 36, 55, "se"),              // Tobin Fell, at the smithy
+        Stood("guard_captain", 45, 64, "ne"),           // Dagna Holt, at the east gate
+        Stood("hermit", 130, 90, "sw"),                 // Old Maud, at her hut
+        Stood("goblin_shaman", 134, 24, "nw"),          // Mother Skarrow, by the fire
+        Stood("child", 33, 59, "sw"),                   // Pip
+        Stood("minstrel", 29, 58, "sw"),                // Lark, playing to the square
+        Stood("sage", 36, 58, "ne"),                    // Corvin Ashby, at the notice board
+        Stood("noble", 41, 68, "se"),                   // Celandine Marrowby, watching her granary
+    ];
+
+    /// <summary>Everyone else, by place: no one on a road's line or a door, so the party walks past them and not through them.</summary>
+    private static readonly RegionPerson[] Townsfolk =
+    [
+        // The market: a stallholder behind each stall, and a customer or two.
+        Stood("merchant", 26, 64, "sw"), Stood("merchant", 28, 64, "sw"), Stood("merchant", 35, 64, "sw"),
+        Stood("farmer", 26, 66, "ne"), Stood("barmaid", 35, 66, "ne"),
+        Stood("child", 30, 59, "se", (30, 60), (30, 61), (31, 61), (32, 61), (32, 60), (32, 59), (31, 59)),     // running round the well
+        Stood("farmhand", 37, 60, "sw", (37, 61), (36, 61), (36, 60)),
+
+        // The gates.
+        Stood("guard", 46, 61, "sw"), Stood("guard", 46, 63, "ne"), Stood("guard", 30, 78, "se"), Stood("guard", 32, 78, "sw"), Stood("guard", 48, 60, "sw"),
+
+        // The streets.
+        Stood("farmer", 41, 61, "se", (42, 61), (43, 61), (43, 62), (42, 62), (41, 62)),
+        Stood("barmaid", 20, 62, "se", (21, 62), (22, 62), (22, 61), (21, 61), (20, 61)),
+        Stood("child", 18, 56, "nw"), Stood("guard", 26, 49, "se", (27, 49), (28, 49), (29, 49), (29, 48), (28, 48), (27, 48), (26, 48)),
+
+        // The fields.
+        Stood("farmer", 38, 13, "sw"), Stood("farmhand", 22, 37, "se"), Stood("farmer", 25, 87, "ne"), Stood("farmhand", 37, 85, "sw"), Stood("farmer", 30, 86, "se"),
+        Stood("merchant", 52, 31, "se"),                // and his cart, on the verge
+
+        // The docks: fishers on the jetties, and the Ash Market's stallholders.
+        Stood("fisher", 102, 93, "se"), Stood("fisher", 105, 92, "sw"), Stood("fisher", 104, 99, "se"), Stood("fisher", 103, 104, "se"), Stood("merchant", 97, 93, "sw"), Stood("merchant", 97, 104, "sw"),
+
+        // The camp, thin and cold, and the goblins who hold the ford's approach.
+        Stood("goblin_spear", 132, 25, "se"), Stood("goblin_archer", 135, 25, "sw"), Stood("goblin_cutthroat", 132, 23, "se"), Stood("goblin_spear", 134, 27, "sw", (134, 28), (133, 28), (133, 27)),
+        Stood("goblin_spear", 99, 63, "nw"), Stood("goblin_spear", 99, 64, "se"), Stood("goblin_archer", 95, 58, "se"),
+        Stood("goblin_spear", 117, 55, "sw"), Stood("goblin_spear", 117, 61, "ne"), Stood("goblin_cutthroat", 120, 54, "se"), Stood("goblin_archer", 120, 63, "sw"),
+    ];
 
     /// <summary>The party starts on the square, in front of the inn.</summary>
-    private static readonly Tile StartSpawn = new(30, 65);
+    private static readonly Tile StartSpawn = new(26, 58);
 
-    /// <summary>A defeat wakes the party at the chapel door, on the square the road runs through: the Church of the Hearth takes in the wounded.</summary>
-    private static readonly Tile RecoverySpawn = new(30, 55);
+    /// <summary>A defeat wakes the party at the chapel door: the Church of the Hearth takes in the wounded.</summary>
+    private static readonly Tile RecoverySpawn = new(31, 57);
 
     /// <summary>
     /// The beats. The three at the ford stand clear of the stamp, as a step into it starts its fight. Force walks in from Emberwick, so
@@ -119,13 +560,13 @@ public static class AshenFordDraft
     /// </summary>
     private static readonly (string Beat, int X, int Y)[] Spots =
     [
-        ("ch1_mayors_request", 34, 59),
+        ("ch1_mayors_request", 33, 59),
         ("ch1_the_ford_choice", 94, 59),
         ("ch1_ford_assault", 96, 63),
         ("ch1_river_crossing", 117, 58),
         ("ch1_old_maud", 132, 93),
-        ("ch1_granary", 38, 70),
-        ("ch1_skarrow_song", 133, 23),
+        ("ch1_granary", 42, 70),
+        ("ch1_skarrow_song", 133, 24),
         ("ch1_the_ember", 99, 99),
     ];
 
@@ -139,6 +580,7 @@ public static class AshenFordDraft
         land.RaiseHills();
         land.CutWater();
         land.PlantFields();
+        land.Level();
         land.BuildTown();
         land.BuildDocks();
         foreach (var road in Roads)
@@ -153,12 +595,119 @@ public static class AshenFordDraft
         land.FillSealed(StartSpawn);
         land.EaseSteps();
         land.FaceTerraces();
+        land.PaveCauseways();
+        land.RaiseOldBridge();
 
         var source = new RegionSource(Id, "The Ashen Ford", 1, Width, Height) { Start = StartSpawn, Recovery = RecoverySpawn };
         land.CopyTo(source);
         source.Stamp(crossing, StampAt, WaterLevel);
         source.Beats.AddRange(Spots.Select(s => new BeatSpot(s.Beat, new Tile(s.X, s.Y))));
+        source.Buildings.AddRange(Emberwick.Concat(TownWall()).Concat(OnTheFarms).Concat(AtTheDocks).Concat(AtMauds).Concat(OldBridge).Select(b => new RegionBuilding(b.Id, b.Variant, new Tile(b.X, b.Y))));
+        source.People.AddRange(Named.Concat(Townsfolk));
         return source;
+    }
+
+    /// <summary>Dresses the region with what stands in each place: the lists above, by name.</summary>
+    public static void Dress(RegionSource source, RulesPack? pack = null)
+    {
+        if (source.Props.Count > 0)
+            throw new InvalidOperationException("The scene already has props.");
+
+        var placed = new Dictionary<Tile, (string Id, string? Variant)>();
+        foreach (var stand in Everything)
+            foreach (var (x, y) in stand.At)
+            {
+                var tile = new Tile(x, y);
+                // Farm boundaries follow the land; never stand a fence on an impassable cliff face or its broken steps.
+                if ((stand.Id is "fence" or "fence_join") && FenceOnCliff(source, tile))
+                    continue;
+                placed.TryAdd(tile, (stand.Id, stand.Variant));
+            }
+        PlantWoods(source, placed);
+        GrowReeds(source, placed);
+        foreach (var group in placed.GroupBy(p => p.Value))
+            source.Props.Add(new RegionProps(group.Key.Id, group.Key.Variant, [.. group.Select(p => p.Key).Order()]));
+    }
+
+    private static bool FenceOnCliff(RegionSource source, Tile tile)
+    {
+        if (source.Get(tile) is not { } ground || ground.Flags.HasFlag(TileFlags.Impassable) || ground.Material.StartsWith("cave_floor/", StringComparison.Ordinal))
+            return true;
+
+        foreach (var (x, y) in new[] { (tile.X + 1, tile.Y), (tile.X - 1, tile.Y), (tile.X, tile.Y + 1), (tile.X, tile.Y - 1) })
+            if (source.Get(new Tile(x, y)) is { } neighbour && Math.Abs(neighbour.Height - ground.Height) > 1)
+                return true;
+
+        return false;
+    }
+
+    /// <summary>Fills <see cref="Reedbeds"/>: a reed on every other bank tile with water beside it.</summary>
+    private static void GrowReeds(RegionSource source, Dictionary<Tile, (string Id, string? Variant)> placed)
+    {
+        (int X, int Y)[] beside = [(1, 0), (-1, 0), (0, 1), (0, -1)];
+        foreach (var (from, to) in Reedbeds)
+            for (var y = from; y <= to; y++)
+                for (var x = 90; x < 125; x++)
+                {
+                    var tile = new Tile(x, y);
+                    if ((x + y) % 2 == 0 && source.Get(tile) is { Flags: TileFlags.None } ground && ground.Material is not (Deck or Quay) && !RoadMaterials.Contains(ground.Material)
+                        && beside.Any(b => source.Get(new Tile(x + b.X, y + b.Y)) is { } next && next.Flags.HasFlag(TileFlags.Water)))
+                        placed.TryAdd(tile, ("reeds", "swamp"));
+                }
+    }
+
+    /// <summary>Stands each wood's trees in its outline, each on its own spot of a grid, moved a tile or so. Only this is seeded.</summary>
+    private static void PlantWoods(RegionSource source, Dictionary<Tile, (string Id, string? Variant)> placed)
+    {
+        var random = new Random(Seed);
+        var roads = Roads.Concat(Tracks).Select(r => r.Line).Concat(WoodPaths).ToArray();
+        foreach (var wood in Woods)
+        {
+            var (left, right) = ((int)wood.Outline.Min(p => p.X), (int)wood.Outline.Max(p => p.X));
+            var (top, bottom) = ((int)wood.Outline.Min(p => p.Y), (int)wood.Outline.Max(p => p.Y));
+            // A living wood has a second stand of trees in the gaps of the first, thinner, so it isn't a grid.
+            foreach (var (offset, gaps) in wood.Floor ? [(0, WoodGaps), (1, 0.5)] : new[] { (0, WoodGaps) })
+                for (var y = top + offset; y <= bottom; y += wood.Every)
+                    for (var x = left + offset; x <= right; x += wood.Every)
+                {
+                    var tile = new Tile(x + random.Next(wood.Every / 2 + 1), y + random.Next(wood.Every / 2 + 1));
+                    var tree = wood.Trees[random.Next(wood.Trees.Length)];
+                    if (random.NextDouble() < gaps)
+                        continue;
+                    if (Inside(wood.Outline, tile.X, tile.Y) && source.Get(tile) is { Flags: TileFlags.None } ground && !RoadMaterials.Contains(ground.Material)
+                        && ground.Material != Quay && roads.All(r => r.Nearest(tile.X, tile.Y).Distance > WoodClear))
+                        placed.TryAdd(tile, tree);
+                }
+
+            if (wood.Floor)
+                Plant(source, placed, wood, roads, random);
+        }
+    }
+
+    /// <summary>Stands <see cref="Undergrowth"/> through a wood, on what the trees left, jittered as they are.</summary>
+    private static void Plant(RegionSource source, Dictionary<Tile, (string Id, string? Variant)> placed, Wood wood, Line[] roads, Random random)
+    {
+        var (left, right) = ((int)wood.Outline.Min(p => p.X), (int)wood.Outline.Max(p => p.X));
+        var (top, bottom) = ((int)wood.Outline.Min(p => p.Y), (int)wood.Outline.Max(p => p.Y));
+        for (var y = top + 1; y <= bottom; y += UndergrowthEvery)
+            for (var x = left + 1; x <= right; x += UndergrowthEvery)
+            {
+                var tile = new Tile(x + random.Next(2), y + random.Next(2));
+                var plant = Undergrowth[random.Next(Undergrowth.Length)];
+                if (random.NextDouble() >= UndergrowthGaps && Inside(wood.Outline, tile.X, tile.Y) && source.Get(tile) is { Flags: TileFlags.None } ground && !RoadMaterials.Contains(ground.Material)
+                    && roads.All(r => r.Nearest(tile.X, tile.Y).Distance > WoodClear))
+                    placed.TryAdd(tile, plant);
+            }
+    }
+
+    /// <summary>Whether a point's inside an outline.</summary>
+    private static bool Inside((double X, double Y)[] outline, double x, double y)
+    {
+        var inside = false;
+        for (var (i, j) = (0, outline.Length - 1); i < outline.Length; j = i++)
+            if ((outline[i].Y > y) != (outline[j].Y > y) && x < (outline[j].X - outline[i].X) * (y - outline[i].Y) / (outline[j].Y - outline[i].Y) + outline[i].X)
+                inside = !inside;
+        return inside;
     }
 
     private static double Smooth(double t)
@@ -187,6 +736,7 @@ public static class AshenFordDraft
     {
         public Line Line { get; } = new(Points);
     }
+
 
     /// <summary>A smoothed line in tile coordinates, with a value carried along it. It keeps its end points.</summary>
     private sealed class Line
@@ -257,6 +807,9 @@ public static class AshenFordDraft
         /// <summary>The terraced tiles, which <see cref="FaceTerraces"/> finishes.</summary>
         private readonly bool[,] _terraced = new bool[Width, Height];
 
+        /// <summary>The stamp's size, once it's down.</summary>
+        private (int W, int H) _stamp;
+
         public Land(Random random)
         {
             for (var i = 0; i < _noise.Length; i++)
@@ -313,43 +866,29 @@ public static class AshenFordDraft
             return Math.Max(dome, spur) + (Rough(x, y, 15, 2) - 0.5) * 0.28;
         }
 
-        /// <summary>How burned the far bank is at a tile, from 0, rising to 1 near the ford and fading into the hills and against the stamp's green.</summary>
-        private double Burn(int x, int y)
-        {
-            var clearOfStamp = Smooth((Math.Max(Math.Abs(x - (StampAt.X + 7.0)) - 7, Math.Abs(y - (StampAt.Y + 6.0)) - 6)) / 12);
-            var hillside = 1 - Smooth(Hill(x, y) / 0.22);
-            return (1.45 - Distance(x, y, 107, 60) / 105 + (Rough(x, y, 11, 4) - 0.5) * 0.8) * clearOfStamp * hillside;
-        }
+        /// <summary>How far a tile is from the fire: from the ford, or from the bank it burned down. A slow wobble keeps the rings from being circles.</summary>
+        private double FromFire(int x, int y)
+            => Math.Min(Distance(x, y, Ford.X, Ford.Y), BurnedBank.Nearest(x, y).Distance + 10) + (Noise(x, y, 26, 4) - 0.5) * 16;
 
-        /// <summary>The rolling land under everything: warm green round the town, autumn beyond, the woods past the scarp and the far bank's ash.</summary>
+        /// <summary>What the ground is at a tile, by how far it is from the fire.</summary>
+        private string Ring(int x, int y) => FromFire(x, y) switch
+        {
+            < AshEnds => Ash,
+            < ScorchEnds => Scorch,
+            _ => Thin,
+        };
+
+        /// <summary>The rolling land under everything, one level from top to bottom, and each tile's ring.</summary>
         public void Ground()
         {
             foreach (var (x, y) in Everywhere())
             {
-                var (swell, patch, fine) = (Rough(x, y, 26, 6), Rough(x, y, 13, 8), Rough(x, y, 5, 10));
-                var height = 2 + (swell > 0.5 ? 1 : 0) + (swell > 0.62 ? 1 : 0);
-                if (FarBank(x, y))
-                {
-                    Paint(x, y, 2 + (swell > 0.55 ? 1 : 0), Dry);
-                    continue;
-                }
-
-                var warmth = 1 - Distance(x, y, 30, 62) / 44 + (patch - 0.5) * 0.5;
-                var inWoods = x is > 66 and < 96;
-                var material = warmth switch
-                {
-                    > 0.42 => fine > 0.52 ? Lush : Green,
-                    > 0.3 => patch > 0.5 ? Green : Autumn,
-                    _ when inWoods && patch > 0.5 => fine > 0.5 ? Leaves : Moss,
-                    _ when patch > 0.6 => Dry,
-                    _ when fine > 0.66 => Earth,
-                    _ => Autumn,
-                };
-                Paint(x, y, height, material);
+                var height = FarBank(x, y) || x > 64 ? 2 : 2 + (Rough(x, y, 40, 6) > 0.5 ? 1 : 0);
+                Paint(x, y, height, Ring(x, y));
             }
         }
 
-        /// <summary>The scarp: a wall of rock with stepped shoulders, and a rise past its tip for the road to climb.</summary>
+        /// <summary>The scarp: a wall of rock with a stepped shoulder, and a rise past its tip for the road to climb.</summary>
         public void RaiseScarp()
         {
             foreach (var (x, y) in Everywhere())
@@ -358,22 +897,20 @@ public static class AshenFordDraft
                 if (saddle > 0)
                     _heights[x, y] += (int)Math.Round(saddle * 3);
 
-                var distance = Scarp.Nearest(x, y).Distance + (Rough(x, y, 9, 12) - 0.5) * 5;
+                var distance = Scarp.Nearest(x, y).Distance + (Rough(x, y, 14, 12) - 0.5) * 4;
                 if (distance < 3)
-                    Paint(x, y, 5 + (int)(Rough(x, y, 6, 14) * 5), Rough(x, y, 5, 15) > 0.5 ? Rock : DarkRock, TileFlags.Impassable);
-                else if (distance < 8)
+                    Paint(x, y, 6 + (int)(Rough(x, y, 12, 14) * 4), Rock, TileFlags.Impassable);
+                else if (distance < 7)
                 {
-                    var shoulder = (8 - distance) / 5;
-                    _heights[x, y] = Math.Max(_heights[x, y], _heights[x, y] + (int)Math.Round(shoulder * 2) * 2 - 1);
+                    var shoulder = (7 - distance) / 4;
+                    _heights[x, y] += (int)Math.Round(shoulder * 2) * 2 - 1;
                     if (shoulder > 0.5)
-                        _materials[x, y] = Rough(x, y, 4, 16) > 0.45 ? Rock : DarkEarth;
-                    else if (shoulder > 0.2)
-                        _materials[x, y] = Dry;
+                        _materials[x, y] = Rock;
                 }
             }
         }
 
-        /// <summary>The far bank: terraces two levels apart climbing to the north-east, and the burned ground, with its streaks running out from the ford.</summary>
+        /// <summary>The far bank: terraces two levels apart climbing to the north-east, frozen mud and then cold rock, and the burned ground at their foot.</summary>
         public void RaiseHills()
         {
             foreach (var (x, y) in Everywhere())
@@ -382,41 +919,13 @@ public static class AshenFordDraft
                     continue;
 
                 var hill = Hill(x, y);
-                if (hill > 0.05)
-                {
-                    var level = hill switch { > 0.76 => 9, > 0.5 => 7, > 0.27 => 5, _ => 3 };
-                    var patch = Rough(x, y, 8, 18);
-                    var material = level switch
-                    {
-                        9 => patch > 0.5 ? DarkRock : Rock,
-                        7 => patch > 0.55 ? Dry : Needles,
-                        5 => patch > 0.52 ? Autumn : Dry,
-                        _ => patch > 0.6 ? Autumn : Dry,
-                    };
-                    Paint(x, y, level, material, level == 9 ? TileFlags.Impassable : TileFlags.None);
-                    _terraced[x, y] = true;
-                }
-
-                var burn = Burn(x, y);
-                if (burn < 0.15)
+                if (hill <= 0.05)
                     continue;
 
-                var angle = Math.Atan2(y - 60, x - 107);
-                var streak = Noise(angle * 16, Distance(x, y, 107, 60) / 9, 1, 20);
-                var outcrop = Rough(x, y, 7, 22);
-                var material2 = burn switch
-                {
-                    < 0.28 => DarkEarth,
-                    _ when streak > 0.68 || outcrop > 0.64 => Basalt,
-                    _ => Ash,
-                };
-                _materials[x, y] = material2;
-                if (burn > 0.4 && outcrop > 0.66)
-                {
-                    _heights[x, y] += outcrop > 0.72 ? 3 : 1;
-                    if (outcrop > 0.72)
-                        (_materials[x, y], _flags[x, y]) = (Basalt, TileFlags.Impassable);
-                }
+                var level = hill switch { > 0.76 => 9, > 0.5 => 7, > 0.27 => 5, _ => 3 };
+                var loose = Rough(x, y, 10, 20) > (level >= 7 ? 0.48 : 0.55);
+                Paint(x, y, level, loose ? Scree : level >= 7 ? DarkRock : Frost, level == 9 ? TileFlags.Impassable : TileFlags.None);
+                _terraced[x, y] = true;
             }
         }
 
@@ -430,9 +939,9 @@ public static class AshenFordDraft
                 var harbour = Smooth((y - 90) / 8.0) * Smooth((116 - y) / 8.0);
                 var deep = 1 + away * (3.2 + harbour * 1.6);
                 var (shallow, bank) = (deep + away * 2.6, deep + 1 + away * 3.4);
-                var river = River.Nearest(x, y).Distance + (Rough(x, y, 9, 28) - 0.5) * 3 * away;
+                var river = River.Nearest(x, y).Distance + (Rough(x, y, 12, 28) - 0.5) * 3 * away;
                 if (river < bank)
-                    Wet(x, y, river, deep, shallow, bank, (FarBank(x, y) ? Rough(x, y, 6, 30) > 0.5 ? DarkEarth : Ash : Rough(x, y, 6, 30) > 0.68 ? Sand : Earth));
+                    Wet(x, y, river, deep, shallow, bank, _terraced[x, y] ? Frost : Ring(x, y) == Thin ? Scorch : Ring(x, y));
             }
         }
 
@@ -449,78 +958,47 @@ public static class AshenFordDraft
             _terraced[x, y] = false;
         }
 
-        /// <summary>The warm fields: strips of turned earth and green, hedged in mossy ground.</summary>
+        /// <summary>The fields, each one crop from edge to edge, flat, at the town's level.</summary>
         public void PlantFields()
         {
-            foreach (var (left, top, width, depth, across) in Fields)
+            foreach (var (_, left, top, width, depth, crop) in Fields)
                 foreach (var (x, y) in Rectangle(left, top, width, depth))
                 {
-                    var (along, row) = across ? (x - left, y - top) : (y - top, x - left);
-                    var edge = along == 0 || row == 0 || along == (across ? width : depth) - 1 || row == (across ? depth : width) - 1;
-                    var crop = row / 2 % 3 == 2 ? Green : row / 2 % 3 == 1 ? DarkEarth : Earth;
                     if (Walkable(x, y) && !IsWater(x, y))
-                        Paint(x, y, TownLevel, edge ? Moss : crop);
+                        Paint(x, y, TownLevel, crop);
                     _fixed[x, y] = true;
                 }
         }
 
-        /// <summary>Emberwick: a low stone wall with two gates, four streets, the square and its well, and the buildings' footprints.</summary>
+        /// <summary>The flats for what stands out on the land, and a wood's floor where it has one: drifts of needles over dark earth, so the art's green patches don't repeat across it.</summary>
+        public void Level()
+        {
+            foreach (var (left, top, width, depth, height) in Levelled)
+                foreach (var (x, y) in Rectangle(left, top, width, depth))
+                {
+                    _heights[x, y] = height;
+                    _fixed[x, y] = true;
+                }
+
+            foreach (var wood in Woods.Where(w => w.Floor))
+                foreach (var (x, y) in Everywhere().Where(t => Inside(wood.Outline, t.X, t.Y) && Walkable(t.X, t.Y)))
+                    _materials[x, y] = Rough(x, y, 8, 60) > 0.5 ? Needles : Mud;
+        }
+
+        /// <summary>Emberwick's ground, flat so that a building stands square on it: grass in the yards, its streets and its square.</summary>
         public void BuildTown()
         {
-            const int left = 10, top = 39, right = 49, bottom = 85;
-            foreach (var (x, y) in Rectangle(left, top, right - left + 1, bottom - top + 1))
+            foreach (var (x, y) in Rectangle(TownLeft, TownTop, TownRight - TownLeft + 1, TownBottom - TownTop + 1))
             {
-                var patch = Rough(x, y, 5, 32);
-                Paint(x, y, TownLevel, patch > 0.54 ? Earth : patch > 0.42 ? Lush : Green);
+                Paint(x, y, TownLevel, Thin);
                 _fixed[x, y] = true;
             }
 
-            foreach (var (x, y) in Rectangle(left, top, right - left + 1, bottom - top + 1))
-                if (x is left or right || y is top or bottom)
-                    Paint(x, y, TownLevel + 1, Wall, TileFlags.Impassable);
-
-            void Street(int x, int y, int width, int depth, string material = AshenFordDraft.Street)
-            {
-                foreach (var (sx, sy) in Rectangle(x, y, width, depth))
-                    Paint(sx, sy, TownLevel, material);
-            }
-
-            Street(left + 1, 61, right - left - 1, 3);     // the High Street, through to the east gate
-            Street(right, 61, 1, 3);
-            Street(left, 61, 1, 3);
-            Street(21, 44, 2, 40);                         // the two cross streets
-            Street(38, 44, 2, 40);
-            Street(11, 79, 37, 2, Track);                  // the lanes behind the buildings
-            Street(11, 44, 13, 2, Track);
-            Street(37, 44, 12, 2, Track);
-            Street(23, 54, 15, 16, Square);
-
-            // The well.
-            foreach (var (x, y) in Rectangle(28, 56, 3, 3))
-                Paint(x, y, TownLevel + 1, Wall, TileFlags.Impassable);
-            Paint(29, 57, TownLevel, Water, TileFlags.Water | TileFlags.Impassable);
-
-            for (var i = 0; i < TownBuildings; i++)
-                Raise(i);
-        }
-
-        /// <summary>A building's footprint, its walls, and a roof stepping up to a ridge. Every other roof is the other way about, so a street doesn't read as one long shed.</summary>
-        private void Raise(int index)
-        {
-            var (left, top, width, depth, walls) = Buildings[index];
-            var (eaves, ridge) = index == 0 ? (Quay, Roof) : index % 2 == 0 ? (Deck, Roof) : (Roof, Deck);
-            Raise(left, top, width, depth, walls, eaves, ridge);
-        }
-
-        private void Raise(int left, int top, int width, int depth, int walls, string eaves, string ridge)
-        {
-            var ground = _heights[left, top];
-            foreach (var (x, y) in Rectangle(left, top, width, depth))
-            {
-                var inset = Math.Min(Math.Min(x - left, left + width - 1 - x), Math.Min(y - top, top + depth - 1 - y));
-                Paint(x, y, Math.Min(WorldRegion.MaxHeight, ground + walls + Math.Min(inset, 2)), inset == 0 ? eaves : ridge, TileFlags.Impassable);
-                _fixed[x, y] = true;
-            }
+            foreach (var (_, left, top, width, depth) in Streets)
+                foreach (var (x, y) in Rectangle(left, top, width, depth))
+                    Paint(x, y, TownLevel, Street);
+            foreach (var (x, y) in Rectangle(Square.X, Square.Y, Square.W, Square.D))
+                Paint(x, y, TownLevel, Plaza);
         }
 
         /// <summary>Lays a road or track. It settles its own tiles to its heights and draws the land each side towards them.</summary>
@@ -536,6 +1014,10 @@ public static class AshenFordDraft
                 if (_fixed[x, y] && _materials[x, y] == Track && road.Surface != Track)
                     continue;
 
+                // A road ends at the town's wall: its streets go on from there.
+                if (InTown(x, y))
+                    continue;
+
                 var level = (int)Math.Round(height);
                 if (distance <= road.Half)
                 {
@@ -546,8 +1028,7 @@ public static class AshenFordDraft
                 {
                     if (!IsWater(x, y) && !_fixed[x, y])
                     {
-                        var verge = distance <= road.Half + road.Shoulder * (Rough(x, y, 3, 34) - 0.1);
-                        Paint(x, y, level, verge ? road.Verge : _materials[x, y]);
+                        Paint(x, y, level, road.Verge);
                         _fixed[x, y] = true;
                     }
                 }
@@ -559,61 +1040,52 @@ public static class AshenFordDraft
             }
         }
 
-        /// <summary>The River Docks: a stone quay, plank piers out over the shallows with boats moored at them, and the warehouses behind.</summary>
+        private static bool InTown(int x, int y) => x >= TownLeft && x <= TownRight && y >= TownTop && y <= TownBottom;
+
+        /// <summary>The River Docks: a stone quay, plank piers out over the shallows, and a hull moored at each.</summary>
         public void BuildDocks()
         {
             foreach (var (x, y) in Rectangle(86, 88, 15, 22))
             {
                 if (_flags[x, y].HasFlag(TileFlags.Deep) || (x < 95 && IsWater(x, y)))
                     continue;
-                Paint(x, y, WaterLevel + 1, x > 95 || Rough(x, y, 3, 36) > 0.5 ? Quay : Earth);
+                Paint(x, y, WaterLevel + 1, x >= 94 ? Quay : Scorch);
                 _fixed[x, y] = true;
             }
 
             foreach (var pier in (ReadOnlySpan<int>)[92, 98, 104])
             {
-                foreach (var (x, y) in Rectangle(99, pier, 9, 2))
+                // The quay ends at x=100; start the timber on the first water tile so it
+                // meets the stone edge cleanly instead of laying two tiles over the plaza.
+                foreach (var (x, y) in Rectangle(101, pier, 7, 2))
                 {
                     Paint(x, y, WaterLevel + 1, Deck);
                     _fixed[x, y] = true;
                 }
                 foreach (var (x, y) in Rectangle(103, pier + 2, 4, 2))
                 {
-                    Paint(x, y, WaterLevel + 1, Roof, TileFlags.Impassable);
+                    Paint(x, y, WaterLevel, Water, DeepWater);
                     _fixed[x, y] = true;
                 }
             }
-
-            for (var i = TownBuildings; i < Buildings.Length; i++)
-                Raise(i);
         }
 
-        /// <summary>The Skarrow camp: a clearing on the third terrace, with low tents round a ring of stones.</summary>
+        /// <summary>The Skarrow camp: a clearing of trodden frozen mud on the third terrace, no bigger than what stands on it.</summary>
         public void PitchCamp()
         {
             foreach (var (x, y) in Everywhere())
             {
-                var distance = Distance(x, y, 133, 23);
-                if (distance < 10.5 + (Rough(x, y, 5, 38) - 0.5) * 4)
+                var distance = Distance(x, y, 133, 22.5);
+                if (distance < 5.4 + (Rough(x, y, 7, 38) - 0.5) * 1.6)
                 {
-                    Paint(x, y, 7, distance < 6 || Rough(x, y, 4, 40) > 0.5 ? DarkEarth : Needles);
+                    Paint(x, y, 7, Mud);
                     _fixed[x, y] = true;
                     _terraced[x, y] = false;
                 }
             }
-
-            foreach (var (left, top, width, depth) in Tents)
-                foreach (var (x, y) in Rectangle(left, top, width, depth))
-                {
-                    var inset = Math.Min(Math.Min(x - left, left + width - 1 - x), Math.Min(y - top, top + depth - 1 - y));
-                    Paint(x, y, 7 + 1 + Math.Min(inset, 1), inset == 0 ? Earth : DarkEarth, TileFlags.Impassable);
-                }
-
-            foreach (var (x, y) in Rectangle(131, 25, 3, 3))
-                Paint(x, y, 7, x == 132 && y == 26 ? Ash : Basalt, TileFlags.Impassable);
         }
 
-        /// <summary>Old Maud's hut: a small roofed footprint on a knoll of burned ground, with a yard of basalt in front.</summary>
+        /// <summary>Old Maud's knoll, of bare ash, flat on top for the one hut.</summary>
         public void RaiseMauds()
         {
             foreach (var (x, y) in Everywhere())
@@ -621,12 +1093,10 @@ public static class AshenFordDraft
                 var distance = Distance(x, y, 132, 91);
                 if (distance < 11)
                 {
-                    var height = 4 - (int)(distance / 3.6);
-                    Paint(x, y, Math.Max(height, 2), distance < 6 ? Ash : Rough(x, y, 4, 42) > 0.5 ? Ash : Basalt);
-                    _fixed[x, y] = distance < 6;
+                    Paint(x, y, distance < 7 ? 4 : distance < 9 ? 3 : 2, Ash);
+                    _fixed[x, y] = distance < 7;
                 }
             }
-            Raise(129, 85, 5, 4, 2, Deck, Roof);
         }
 
         /// <summary>Rock round the whole region, which leaves only the deep water, the roads and the void corners' edges.</summary>
@@ -635,20 +1105,19 @@ public static class AshenFordDraft
             foreach (var (x, y) in Everywhere())
             {
                 var edge = EdgeDistance(x, y);
-                var thick = 1.5 + (Rough(x, y, 11, 44) - 0.2) * 12;
+                var thick = 1.5 + (Rough(x, y, 16, 44) - 0.2) * 12;
                 if (edge >= thick || _fixed[x, y] || _flags[x, y].HasFlag(TileFlags.Deep))
                     continue;
-                var dark = Rough(x, y, 5, 47) > 0.5;
-                var rock = FarBank(x, y) && y > 50 ? dark ? Basalt : DarkRock : dark ? DarkRock : Rock;
-                var height = 4 + (int)((thick - edge) * 0.6) + (int)(Rough(x, y, 5, 46) * 3.4);
-                Paint(x, y, Math.Min(height, WorldRegion.MaxHeight), rock, TileFlags.Impassable);
+                var height = 4 + (int)((thick - edge) * 0.6) + (int)(Rough(x, y, 9, 46) * 3.4);
+                Paint(x, y, Math.Min(height, WorldRegion.MaxHeight), DarkRock, TileFlags.Impassable);
                 _fixed[x, y] = true;
             }
         }
 
-        /// <summary>River Crossing's tiles, and the land round them drawn to their heights and their grass so the stamp doesn't sit like a tile on a table.</summary>
+        /// <summary>River Crossing's tiles, and the land round them drawn to their heights so the stamp doesn't sit like a tile on a table. Its ridge's rock runs on a little past it.</summary>
         public void Stamp(BattleMap map)
         {
+            _stamp = (map.Width, map.Height);
             var stamped = StampBrush.Cells(map, StampAt, WaterLevel).ToDictionary(c => (c.At.X, c.At.Y));
             foreach (var cell in stamped.Values)
             {
@@ -665,15 +1134,8 @@ public static class AshenFordDraft
                 var cell = stamped[(edgeX, edgeY)];
                 var distance = Math.Max(Math.Abs(x - edgeX), Math.Abs(y - edgeY));
                 _heights[x, y] = (int)Math.Round(cell.Height + (_heights[x, y] - cell.Height) * Smooth(distance / 6.0));
-                var fade = distance + Rough(x, y, 5, 48) * 8;
-                if (cell.Material == Rock && fade < 7)
+                if (cell.Material == StampRock && distance + Rough(x, y, 8, 48) * 6 < 6)
                     _materials[x, y] = Rock;
-                else if (cell.Material != Rock && fade < 7)
-                    _materials[x, y] = Lush;
-                else if (cell.Material != Rock && fade < 10)
-                    _materials[x, y] = Green;
-                else if (fade < 13 && _materials[x, y] is not (Earth or Rock))
-                    _materials[x, y] = Dry;
             }
         }
 
@@ -767,14 +1229,41 @@ public static class AshenFordDraft
             }
         }
 
-        /// <summary>Faces each terrace's edge with bare rock, so the steps read from a distance.</summary>
+        /// <summary>The Wardens' stone road either side of the crossing, grey and broken at the edges, over what's there and at its height.</summary>
+        public void PaveCauseways()
+        {
+            foreach (var causeway in Causeways)
+            {
+                var line = new Line(causeway);
+                foreach (var (x, y) in Everywhere())
+                    if (line.Nearest(x, y).Distance + (Rough(x, y, 5, 52) - 0.5) * 2.4 < 1.3 && Walkable(x, y) && !IsWater(x, y) && !InStamp(x, y))
+                        _materials[x, y] = Plaza;
+            }
+        }
+
+        /// <summary>The old bridge's river tiles, raised under its deck, which keep them what they are, and a ramp of its stone at the west end.</summary>
+        public void RaiseOldBridge()
+        {
+            foreach (var span in OldBridge)
+            {
+                _heights[span.X, span.Y] = BridgeDeck;
+                _flags[span.X, span.Y] = DeepWater;
+                _materials[span.X, span.Y] = Water;
+            }
+            Paint(104, 48, BridgeDeck, Plaza);
+            Paint(103, 48, BridgeDeck - 1, Plaza);
+        }
+
+        private bool InStamp(int x, int y) => x >= StampAt.X && y >= StampAt.Y && x < StampAt.X + _stamp.W && y < StampAt.Y + _stamp.H;
+
+        /// <summary>Faces each terrace's edge with scree, so the steps read from a distance and no terrace ends in a straight line of one stuff.</summary>
         public void FaceTerraces()
         {
             var faces = Everywhere().Where(t => _terraced[t.X, t.Y] && Walkable(t.X, t.Y) && !_fixed[t.X, t.Y]
                 && ((t.X + 1 < Width && _heights[t.X + 1, t.Y] < _heights[t.X, t.Y] - 1) || (t.Y + 1 < Height && _heights[t.X, t.Y + 1] < _heights[t.X, t.Y] - 1)
                     || (t.X > 0 && _heights[t.X - 1, t.Y] < _heights[t.X, t.Y] - 1) || (t.Y > 0 && _heights[t.X, t.Y - 1] < _heights[t.X, t.Y] - 1))).ToList();
             foreach (var (x, y) in faces)
-                _materials[x, y] = Rough(x, y, 4, 50) > 0.5 ? Rock : DarkRock;
+                _materials[x, y] = DarkRock;
         }
 
         public void CopyTo(RegionSource source)

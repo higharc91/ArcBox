@@ -13,8 +13,10 @@ public partial class Commands : Node
     private const string Usage = """
         Commands, after -- on Godot's command line:
           --draft=<id>             write Claude's draft of a region into its scene; refuses if the scene exists
+          --dress=<id>             dress Claude's draft of a region with props; refuses if props already exist
           --new=<id>               make an empty region scene in regions/; --chapter=<n> --size=<w>x<h> --name=<name> are optional
           --export=<id or scene>   export a region; --rules=<folder> writes to that pack instead of the base pack
+          --remap-props=<id>       remap a scene's prop atlas after a rebuild; requires --old-props=<manifest>; repeat --replace-prop=old@variant=new@variant to change painted variants
           --swatches               write the palette's images (then run Godot's --import)
           --tilesets               write the palette's tile sets
           --sample=<scene>         write a small test scene with a stamp; --map=<id> picks the map, --tamper paints over a stamped tile
@@ -54,8 +56,12 @@ public partial class Commands : Node
     {
         if (Arg("export") is { } export)
             return Export(export);
+        if (Arg("remap-props") is { } remap)
+            return RemapProps(remap);
         if (Arg("draft") is { } draft)
             return DraftScene.Run(draft);
+        if (Arg("dress") is { } dress)
+            return DraftScene.Dress(dress);
         if (Arg("new") is { } id)
             return New(id);
         if (Arg("sample") is { } sample)
@@ -85,6 +91,74 @@ public partial class Commands : Node
             GD.Print($"PROBLEM: {problem}");
         GD.Print(result.Status);
         return result.Written is null ? 1 : 0;
+    }
+
+    private static int RemapProps(string idOrPath)
+    {
+        var oldManifest = Arg("old-props");
+        if (oldManifest is null || !File.Exists(oldManifest))
+        {
+            GD.PrintErr("--remap-props requires --old-props=<path to the previous props/manifest.json>.");
+            return 2;
+        }
+        var path = RegionPaths.Scene(idOrPath);
+        if (ResourceLoader.Load<PackedScene>(path)?.Instantiate() is not Region root)
+        {
+            GD.PrintErr($"{path} isn't a region scene.");
+            return 2;
+        }
+        try
+        {
+            var replacements = OS.GetCmdlineUserArgs().Where(a => a.StartsWith("--replace-prop=", StringComparison.Ordinal))
+                .Select(a => a["--replace-prop=".Length..].Split('=', 2))
+                .ToDictionary(parts => ParsePropKey(parts[0]), parts => ParsePropKey(parts[1]));
+            var oldSwatches = PaletteBuilder.PropSwatches(oldManifest)
+                .Select(swatch => replacements.TryGetValue((swatch.Id, swatch.Variant), out var target)
+                    ? swatch with { Id = target.Id, Variant = target.Variant }
+                    : swatch)
+                .ToArray();
+            var newSwatches = PaletteBuilder.AllPropSwatches(RegionPaths.Content);
+            var remap = PaletteBuilder.PropAtlasRemap(oldSwatches, newSwatches);
+            var layer = root.GetNodeOrNull<TileMapLayer>(RegionScene.PropsLayer);
+            if (layer is null)
+            {
+                GD.PrintErr($"{path} has no Props layer.");
+                return 2;
+            }
+            foreach (var cell in layer.GetUsedCells())
+            {
+                var old = layer.GetCellAtlasCoords(cell);
+                if (!remap.TryGetValue((old.X, old.Y), out var next))
+                {
+                    GD.PrintErr($"The old props palette has no swatch at ({old.X},{old.Y}).");
+                    return 2;
+                }
+                layer.SetCell(cell, layer.GetCellSourceId(cell), new Vector2I(next.X, next.Y), layer.GetCellAlternativeTile(cell));
+            }
+            var packed = new PackedScene();
+            var error = packed.Pack(root);
+            if (error == Error.Ok)
+                error = ResourceSaver.Save(packed, path);
+            if (error != Error.Ok)
+            {
+                GD.PrintErr($"Couldn't save {path}: {error}.");
+                return 2;
+            }
+            GD.Print($"Remapped {layer.GetUsedCells().Count} prop cells in {path}.");
+            return 0;
+        }
+        finally
+        {
+            root.Free();
+        }
+    }
+
+    private static (string Id, string? Variant) ParsePropKey(string value)
+    {
+        var parts = value.Split('@', 2);
+        if (parts.Length != 2 || parts.Any(string.IsNullOrWhiteSpace))
+            throw new ArgumentException($"Prop keys must be written as id@variant, not '{value}'.");
+        return (parts[0], parts[1]);
     }
 
     /// <summary>An empty scene for a new region, which refuses to replace one that exists, as painted work is never overwritten.</summary>

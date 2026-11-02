@@ -69,6 +69,33 @@ public sealed class WorldDrawingTests
         Assert.Equal(plan.ItemsOver(area, after), found.Select(at => plan.Blocks[at.Block].Lit.Items[at.Item]));
     }
 
+    [Theory]
+    [InlineData(30, 65)]
+    [InlineData(31, 60)]
+    [InlineData(47, 62)]
+    [InlineData(106, 48)]
+    [InlineData(133, 24)]
+    [InlineData(72, 34)]
+    [InlineData(0, 0)]
+    [InlineData(159, 119)]
+    public void What_the_grid_finds_is_what_reading_every_item_finds_once_each(int x, int y)
+    {
+        var plan = Ford.Value;
+        var feet = BoardProjection.Corner(x + 0.5f, y + 0.5f, 3);
+        var area = new ArtArea(feet - new Vector2(16, 48), feet + new Vector2(16, 4));
+        var after = BoardOrder.Key(new Tile(x, y), BoardLayer.Unit);
+
+        Assert.Equal(plan.OverByReadingEverything(area, after), plan.Over(area, after));
+    }
+
+    [Fact]
+    public void A_box_off_the_region_finds_nothing()
+    {
+        var far = new Vector2(1e6f, 1e6f);
+
+        Assert.Empty(Ford.Value.Over(new ArtArea(far, far + new Vector2(32, 48)), 0));
+    }
+
     /// <summary>Round a block corner, what's repainted comes from several blocks, and a later block isn't a later item: only the sort puts them right.</summary>
     [Fact]
     public void What_goes_over_a_unit_at_a_block_corner_is_in_painters_order_not_block_order()
@@ -155,7 +182,7 @@ public sealed class WorldDrawingTests
     {
         var plan = Ford.Value;
 
-        Assert.Equal(plan.Images.Length, plan.Images.Select(i => (i.Image.Path, i.Flat)).Distinct().Count());
+        Assert.Equal(plan.Images.Length, plan.Images.Select(i => (i.Image.Key, i.Flat)).Distinct().Count());
         Assert.Contains(plan.Images, i => i.Flat && i.Image.Path.EndsWith("ash_grey.png", StringComparison.Ordinal));
         Assert.Contains(plan.Images, i => !i.Flat && i.Image.Frames == 1);
         Assert.Contains(plan.Images, i => i.Image.Frames > 1);

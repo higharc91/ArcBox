@@ -492,7 +492,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         }
         if (_walk is null)
         {
-            _walk = new WalkShow(plan.Terrain, art, _sound);
+            _walk = new WalkShow(plan.Terrain, art, _sound, world.Ground?.People ?? default);
             _fed = null;
             _things = ThingsFor(plan.Terrain, art);
             (_thingsFed, _plugsAsked) = (null, []);
@@ -509,7 +509,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         world.Aim(frame.Tile, frame.Velocity);
         var things = _things?.Frame(delta, _walk.Pixels, world.View);
         Plug(world, things?.Plugs ?? []);
-        world.ShowUnits(things is { Units.IsEmpty: false } shown ? ThingShow.Merge(frame.Units, shown.Units) : frame.Units, art);
+        world.ShowUnits(things is { Units.IsEmpty: false } shown ? ThingShow.Merge(frame.Units, shown.Units) : frame.Units, frame.Walkers, art);
         world.ShowEffects(things?.Effects ?? []);
         foreach (var sound in things?.Sounds ?? [])
         {
@@ -523,7 +523,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             Bumped(frame);
         }
-        _worldHud?.Clear(frame.Units, frame.Fit);
+        _worldHud?.Clear(frame.Walkers, frame.Fit);
         WalkMoments(world, frame, delta);
     }
 

@@ -68,5 +68,5 @@ internal static class Vault
     }
 
     /// <summary>The plain ground of <paramref name="def"/>.</summary>
-    public static WorldGround Ground(RegionDef? def = null) => WorldGround.Of(WorldRegion.From(def ?? Region()), new Dictionary<string, BattleMap>());
+    public static WorldGround Ground(RegionDef? def = null) => WorldGround.Of(WorldRegion.From(def ?? Region()), new Dictionary<string, BattleMap>(), ArtManifest.None);
 }

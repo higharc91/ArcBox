@@ -23,8 +23,9 @@ namespace ArcBox.Host.Games.Tactics;
 /// it. A build still under way is cancelled, what it was doing goes nowhere, and the textures go at once.
 /// </para>
 /// <para>
-/// Each frame, the board over it paints the units with only the items that sort after them and cross their rectangles (<see cref="WorldPlan.Over"/>).
-/// Those are the same pixels again, in the same baked light, so nothing but what's behind them changes, except that what's half see-through blends twice.
+/// Each frame, the board over it paints the units with only the items that sort after them and cross their rectangles, and whatever's fading, in its place
+/// (<see cref="WorldPlan.PaintOver"/>). Those are the same pixels again, in the same baked light, so nothing but what's behind them changes, except that what's half see-through
+/// blends twice. A faded prop is left out of its block (<see cref="WorldBlock.Leave"/>) so nothing solid shows through it.
 /// </para>
 /// <para>
 /// A fight in the world (overworld 5c) draws on a board of its own over that one, in the battle map's pixels, from the region's own tiles
@@ -57,9 +58,11 @@ internal sealed partial class WorldCanvas : CanvasLayer
     private sealed record Built(WorldGround Ground, WorldPlan Plan, object[][] Items, string Times);
 
     private const int BelowUi = -1;
+    private const int BlockDepth = 64;
     private const float ViewMargin = 64;                    // art pixels round the view for halos, the widest sway of any flame
     private const double FirstGuessMsPerItem = 0.005;       // until a block's been timed
     private static readonly Color Dark = new(0.043f, 0.051f, 0.078f);
+    private static readonly Color DuskSky = new(0.082f, 0.063f, 0.133f);    // mockup 02's, at the world's edge
 
     private readonly BoardPainter _painter = new();
     private readonly FrameTextures _frames = new();
@@ -71,14 +74,19 @@ internal sealed partial class WorldCanvas : CanvasLayer
     private readonly CancellationTokenSource _closing = new();
 
     private Task<Built> _building = null!;
+    private readonly Action<ItemAt, bool> _leave;
     private Node2D _world = null!;
+    private PropFade? _propFade;
+    private WorldAmbient? _ambient;
     private BoardCanvas _over = null!;
     private ColorRect _back = null!;
     private ColorRect _fade = null!;
     private BlockQueue _queue = null!;
     private object[][] _items = [];
+    private string[] _sheets = [];
     private int _texture;
     private double _clock;
+    private double _delta;
     private double _fading;
     private double _msPerItem = FirstGuessMsPerItem;
     private int _backAt;
@@ -99,6 +107,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         _painter.Frames = _frames;
         _ground = ground;
         _blockSize = blockSize;
+        _leave = (at, left) => _blocks[at.Block].Leave(at.Item, left);
         Layer = BelowUi;
     }
 
@@ -123,7 +132,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         }
         if (_stage is null)
         {
-            _stage = new BoardCanvas(_painter) { ZIndex = Plan.Blocks.Max(b => b.Z) + 2 };
+            _stage = new BoardCanvas(_painter) { ZIndex = Plan.Blocks.Max(b => b.Z) * BlockDepth + BlockDepth + 1 };
             _world.AddChild(_stage);
         }
         if (!ReferenceEquals(plan, _staged))
@@ -141,6 +150,12 @@ internal sealed partial class WorldCanvas : CanvasLayer
         }
         _stage.Clock = _clock;
         _stage.Visible = true;
+        if (_propFade is { InFight: false } fade)
+        {
+            fade.InFight = true;
+            fade.TakeChanges(_leave);
+            _over.SetDrawn([], []);
+        }
         _over.SetView(System.Numerics.Vector2.Zero, System.Numerics.Vector2.Zero);    // the stage has the halos round it: they'd show twice
         return _stage;
     }
@@ -154,6 +169,10 @@ internal sealed partial class WorldCanvas : CanvasLayer
         }
         stage.Visible = false;
         _staged = null;
+        if (_propFade is not null)
+        {
+            _propFade.InFight = false;
+        }
         _over.SetView(_view.Min - new System.Numerics.Vector2(ViewMargin), _view.Max + new System.Numerics.Vector2(ViewMargin));
     }
 
@@ -250,8 +269,11 @@ internal sealed partial class WorldCanvas : CanvasLayer
     /// <summary>How long the board over the world took to draw, in milliseconds.</summary>
     public double OverDrawMs => _over.LastDrawMs;
 
-    /// <summary>True when every block was recorded exactly once.</summary>
+    /// <summary>True when every block was recorded exactly once, not counting what fading left out.</summary>
     public bool RecordedOnce => _blocks.Count > 0 && _blocks.All(b => b.Recorded == 1);
+
+    /// <summary>How many times a block has been recorded again as something started or stopped fading.</summary>
+    public int Rerecorded => _blocks.Sum(b => b.Rerecorded);
 
     /// <summary>The items in a block.</summary>
     public int BlockItems(int block) => _blocks[block].Items;
@@ -304,6 +326,8 @@ internal sealed partial class WorldCanvas : CanvasLayer
         _items = [];
         _painter.Release();
         _frames.Release();
+        _propFade = null;
+        _ambient = null;
         Plan = null;
         GD.Print("WORLD closed");
     }
@@ -349,8 +373,8 @@ internal sealed partial class WorldCanvas : CanvasLayer
             items[block.Index] = [.. block.Lit.Items.Select(i => BoardPainter.Prepare(i, baked))];
         }
         plan.DropProbes();
-        var prepared = clock.Elapsed.TotalMilliseconds;
-        return new Built(ground, plan, items, $"ground {parsed:0} ms, plan+light {planned - parsed:0} ms, bake {prepared - planned:0} ms, total {prepared:0} ms");
+        var preparedTime = clock.Elapsed.TotalMilliseconds;
+        return new Built(ground, plan, items, $"ground {parsed:0} ms, plan+light {planned - parsed:0} ms, bake {preparedTime - planned:0} ms, total {preparedTime:0} ms");
     }
 
     /// <summary>Puts the world where <paramref name="fit"/> says.</summary>
@@ -389,8 +413,8 @@ internal sealed partial class WorldCanvas : CanvasLayer
     /// <summary>Where blocks are queued around: the party's tile and its speed in tiles a second.</summary>
     public void Aim(System.Numerics.Vector2 tile, System.Numerics.Vector2 velocity) => _aim = BlockQueue.Aim(tile, velocity);
 
-    /// <summary>Shows <paramref name="units"/>, with what stands in front of each painted over them.</summary>
-    public void ShowUnits(ImmutableArray<BoardUnit> units, UnitArt art)
+    /// <summary>Shows <paramref name="units"/>, with what stands in front of each painted over them. Only <paramref name="walkers"/> fade what they're behind: a townsman behind a house stays behind it.</summary>
+    public void ShowUnits(ImmutableArray<BoardUnit> units, ImmutableArray<BoardUnit> walkers, UnitArt art)
     {
         if (Plan is null || _over is null)
         {
@@ -398,20 +422,22 @@ internal sealed partial class WorldCanvas : CanvasLayer
         }
         var clock = Stopwatch.GetTimestamp();
         var plan = Plan;
-        var over = plan.Overlay(units, _plugs);
+        _propFade?.Update(walkers, _delta);
+        _propFade?.TakeChanges(_leave);
+        var over = plan.PaintOver(units, _propFade, _plugs);
         QueryMs = Stopwatch.GetElapsedTime(clock).TotalMilliseconds;
         OverItems = over.Length;
         if (_plugs.IsEmpty)
         {
-            _over.SetDrawn(over.Select(at => _items[at.Block][at.Item]), over.Select(plan.OrderOf));
+            _over.SetDrawn(over.Select(o => _items[o.At.Block][o.At.Item]), over.Select(o => plan.OrderOf(o.At)), over.Select(o => o.Alpha));
         }
         else
         {
             // The plugs among what goes over the units, in painter's order: before what stands in front of them.
-            var drawn = over.Select(at => (Item: _items[at.Block][at.Item], Order: plan.OrderOf(at), Plug: false))
-                .Concat(_plugs.Select((p, i) => (Item: _plugsDrawn[i], p.Order, Plug: true)))
+            var drawn = over.Select(o => (Item: _items[o.At.Block][o.At.Item], Order: plan.OrderOf(o.At), o.Alpha, Plug: false))
+                .Concat(_plugs.Select((p, i) => (Item: _plugsDrawn[i], p.Order, Alpha: 1f, Plug: true)))
                 .OrderBy(d => d.Order).ThenBy(d => d.Plug ? 0 : 1).ToArray();
-            _over.SetDrawn(drawn.Select(d => d.Item), drawn.Select(d => d.Order));
+            _over.SetDrawn(drawn.Select(d => d.Item), drawn.Select(d => d.Order), drawn.Select(d => d.Alpha));
         }
         _over.SetUnits(units, art);
     }
@@ -431,8 +457,10 @@ internal sealed partial class WorldCanvas : CanvasLayer
 
     public override void _Process(double delta)
     {
+        _delta = delta;
         _clock += delta;
         _frames.Step(_clock);
+        _ambient?.Update(_view, _clock);
         SwapRepainted();
         if (_stage is { Visible: true } stage)
         {
@@ -476,18 +504,35 @@ internal sealed partial class WorldCanvas : CanvasLayer
         var built = _building.Result;
         BuildTimes = built.Times;
         (Ground, Plan) = (built.Ground, built.Plan);
+        _propFade = new PropFade(Plan);
+        _sheets = [.. Ground.People.Select(p => p.Preset).Distinct().Select(UnitArt.SheetOf)];
         _items = built.Items;
         _queue = new BlockQueue(Plan.Blocks);
         foreach (var block in Plan.Blocks)
         {
-            var node = new WorldBlock(_painter, _items[block.Index], block.Z);
+            var node = new WorldBlock(_painter, _items[block.Index], block.Z * BlockDepth);
             _blocks.Add(node);
             _world.AddChild(node);
         }
 
-        _over = new BoardCanvas(_painter) { ZIndex = Plan.Blocks.Max(b => b.Z) + 1 };
+        _back.Color = Plan.Lighting.Ambient == BoardLighting.Dusk ? DuskSky : Dark;
+        var overZ = Plan.Blocks.Max(b => b.Z) * BlockDepth + BlockDepth - 1;
+        var fauna = new WorldFauna(_painter.Root, Ground.Map, new Color(Plan.Lighting.Ambient.R, Plan.Lighting.Ambient.G, Plan.Lighting.Ambient.B))
+        {
+            ZIndex = 0,
+        };
+        _world.AddChild(fauna);
+        _over = new BoardCanvas(_painter) { ZIndex = overZ };
         _world.AddChild(_over);
         _over.JoinWorld(Plan.Lighting.Active ? Plan.Lighting : null);
+
+        var ambientManifest = AmbientManifest.Load(_painter.Root);
+        var dusk = Plan.Lighting.Ambient == BoardLighting.Dusk;
+        var ambientPlan = new AmbientPlan(new BoardTerrain(Ground!.Map, null), Ground.Map, ambientManifest, seed: Ground.Map.Id.Sum(c => c), dusk: dusk);
+        var light = Plan.Lighting.Ambient;
+        _ambient = new WorldAmbient(ambientPlan, System.IO.Path.Combine(_painter.Root, "ambient"), _painter.Root, Ground.Map, new Color(light.R, light.G, light.B), overZ, fauna);
+        _world.AddChild(_ambient);
+
         if (_view.Max == _view.Min)
         {
             Place(WorldView.Centred(BoardProjection.Corner(0, 0, 0)));
@@ -508,6 +553,11 @@ internal sealed partial class WorldCanvas : CanvasLayer
         else if (_texture < images + plan.Halos.Length)
         {
             _painter.Load(plan.Halos[_texture++ - images]);
+        }
+        else if (_texture < images + plan.Halos.Length + _sheets.Length)
+        {
+            // Someone's sheet is 100 ms of a decoded image if it's first needed as they come into view.
+            _painter.Load(_sheets[_texture++ - images - plan.Halos.Length]);
         }
         else
         {

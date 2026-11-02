@@ -178,6 +178,16 @@ public sealed class StageEndTests
         map["tiles"] = Convert.ToBase64String(tiles);
         File.WriteAllText(mapPath, map.ToJsonString());
 
+        // The rebuilt Ashen Ford has the old bridge's deck north of the stamp, (105, 48) to (108, 48): the river there too, or it's a way round.
+        var river = new Tile(106, 47);
+        foreach (var deck in Enumerable.Range(105, 4).Select(x => new Tile(x, 48)))
+        {
+            var source = Chunk(river, out _);
+            var bytes = Chunk(deck, out var chunk);
+            Array.Copy(source, WorldIndex(river), bytes, WorldIndex(deck), 3);
+            chunk["tiles"] = Convert.ToBase64String(bytes);
+        }
+
         var hither = region["spawns"]!["recovery"]!.DeepClone();
         foreach (var beat in region["beats"]!.AsArray())
             if (beat!["at"]![0]!.GetValue<int>() >= stage.Origin.X + 8)
@@ -700,6 +710,18 @@ public sealed class StageEndTests
                 bytes.CopyTo(Chunk(to), Index(to));
             foreach (var (node, tiles) in chunks.Values)
                 node["tiles"] = Convert.ToBase64String(tiles);
+            // What's painted or standing where the stamp now is goes, as a repaint must clear it: the loader refuses a prop or a person on a stamp.
+            var moved = old with { Origin = new Tile(old.Origin.X + dx, old.Origin.Y + dy) };
+            static Tile TileOf(JsonNode t) => new(t[0]!.GetValue<int>(), t[1]!.GetValue<int>());
+            foreach (var group in region["props"]?.AsArray() ?? [])
+            {
+                var tiles = group!["at"]!.AsArray();
+                foreach (var t in tiles.Where(t => moved.Holds(TileOf(t!))).ToArray())
+                    tiles.Remove(t);
+            }
+            if (region["people"] is JsonArray people)
+                foreach (var person in people.Where(p => moved.Holds(TileOf(p!["at"]!))).ToArray())
+                    people.Remove(person);
         }
         File.WriteAllText(path, region.ToJsonString());
     });

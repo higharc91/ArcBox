@@ -84,7 +84,7 @@ internal static class Vault
             File.WriteAllText(Path.Combine(dir.FullName, "world", "vault.json"), JsonSerializer.Serialize(region, ArcJson.Options), utf8);
             File.WriteAllText(Path.Combine(dir.FullName, "interactables", "vault.json"),
                 $$"""{ "region": "vault", "interactables": [ {{string.Join(", ", things)}} ] }""", utf8);
-            return RulesPack.Load([ContentRules(), dir.FullName]);
+            return RulesPack.Load([ContentRules(), dir.FullName], ArtManifests.Load(ContentBase()));
         }
         finally
         {
@@ -104,7 +104,7 @@ internal static class Vault
                 """{ "id": "ford_things", "rulesVersion": 1, "requires": ["base"], "files": ["interactables/ashen_ford.json"] }""", utf8);
             File.WriteAllText(Path.Combine(dir.FullName, "interactables", "ashen_ford.json"),
                 $$"""{ "region": "ashen_ford", "interactables": [ {{string.Join(", ", things)}} ] }""", utf8);
-            return RulesPack.Load([ContentRules(), dir.FullName]);
+            return RulesPack.Load([ContentRules(), dir.FullName], ArtManifests.Load(ContentBase()));
         }
         finally
         {

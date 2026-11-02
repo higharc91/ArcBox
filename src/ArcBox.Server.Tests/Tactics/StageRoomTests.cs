@@ -29,7 +29,7 @@ public sealed class StageRoomTests
         throw new DirectoryNotFoundException("No ArcBox.slnx above the test binaries.");
     });
 
-    private static readonly Lazy<RulesPack> Pack = new(() => RulesPack.Load([Path.Combine(BasePack.Value, "rules")]));
+    private static readonly Lazy<RulesPack> Pack = new(() => RulesPack.Load([Path.Combine(BasePack.Value, "rules")], ArtManifests.Load(BasePack.Value)));
 
     private static readonly Lazy<LoreBook> Lore = new(() => LoreBook.Load(BasePack.Value));
 

@@ -147,7 +147,7 @@ public static class ThingsDemo
         ImmutableArray<RegionChunk> chunks = [.. Enumerable.Range(0, rows).SelectMany(r => Enumerable.Range(0, columns).Select(c => Chunk(tiles, c, r)))];
         var def = new RegionDef(Region, "Things to interact with", 0, [Width, Height], [.. Materials], chunks, [], [],
             new RegionSpawns(LeaderOf(0), LeaderOf(0)), []);
-        return WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap>());
+        return WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap>(), ArtManifest.None);
     }
 
     private static bool Near(HashSet<Tile> floor, Tile at)

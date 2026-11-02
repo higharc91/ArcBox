@@ -93,6 +93,13 @@ public static class Interactables
     public static bool Plugged(InteractableDef def, InteractableSave save, IReadOnlySet<string> flags)
         => KindOf(def).Family == InteractableFamily.Passage && Blocks(def, save, flags) && !Visible(def, save, flags);
 
+    /// <summary>
+    /// True for a thing that may stand in the way whatever has happened (a chest, a barrel): neither a passage, whose state opens it, nor a trap
+    /// on the ground, which only blocks once seen. The content checks and the story-order walk keep these in the way, with every passage open.
+    /// </summary>
+    public static bool Solid(InteractableDef def)
+        => KindOf(def).Family is not (InteractableFamily.Passage or InteractableFamily.FloorTrap) && (def.Blocks ?? KindOf(def).Blocks);
+
     /// <summary>The tiles the things of a region block now, in tile order.</summary>
     public static ImmutableSortedSet<Tile> Blocking(IEnumerable<InteractableDef> defs, IReadOnlyDictionary<string, InteractableSave>? saves,
         IReadOnlySet<string> flags)

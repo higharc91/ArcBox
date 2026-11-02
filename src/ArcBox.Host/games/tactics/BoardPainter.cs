@@ -1,4 +1,5 @@
 using Godot;
+using Tactics.Logic;
 using Tactics.Presentation.Board;
 
 namespace ArcBox.Host.Games.Tactics;
@@ -77,8 +78,11 @@ internal sealed class BoardPainter
         if (drawn is DrawnFace face)
         {
             var lit = face.Lit;
-            face.Texture = lit.Art ? Texture(lit.Face.Image, lit.Face.Facing == Facing.Up) : null;
-            face.Glow = lit.Glow && lit.Face.Image is { Glow: { } rule } image ? Glow(image, null, rule.Colour) : null;
+            face.Texture = lit.Art ? Texture(lit.Face.Image, lit.Face.Flat) : null;
+            face.Glow = !lit.Glow ? null
+                : lit.Face.Lights is { } lights ? Texture(lights, false)
+                : lit.Face.Image is { Glow: { } rule } image ? Glow(image, null, rule.Colour)
+                : null;
             face.OneFrame = Moves(lit.Face.Image);
         }
         else if (drawn is DrawnSprite sprite)
@@ -94,15 +98,18 @@ internal sealed class BoardPainter
     public void Preload(ArtImage image, bool flat) => Texture(image, flat);
 
     /// <summary>Paints one item on <paramref name="canvas"/> as things stand at <paramref name="clock"/>. With no <paramref name="now"/>, its colours are as prepared.</summary>
-    public void Paint(CanvasItem canvas, object drawn, BoardLighting? now, double clock)
+    public void Paint(CanvasItem canvas, object drawn, BoardLighting? now, double clock) => Paint(canvas, drawn, now, clock, 1f);
+
+    /// <summary>Paints one item on <paramref name="canvas"/> with <paramref name="alpha"/> modulation.</summary>
+    public void Paint(CanvasItem canvas, object drawn, BoardLighting? now, double clock, float alpha)
     {
         if (drawn is DrawnFace face)
         {
-            PaintFace(canvas, face, now, clock);
+            PaintFace(canvas, face, now, clock, alpha);
         }
         else if (drawn is DrawnSprite sprite)
         {
-            PaintSprite(canvas, sprite, now, clock);
+            PaintSprite(canvas, sprite, now, clock, alpha);
         }
     }
 
@@ -151,9 +158,13 @@ internal sealed class BoardPainter
         {
             return null;
         }
+        if (image.Blend >= 0)
+        {
+            return LoadBlend(image);
+        }
         if (Moves(image))
         {
-            return Frames!.Of(image.Path) ?? ((flat ? Turned(image) : Pixels(image.Path)) is { } strip ? Strip(image.Path, image, strip) : Load(image.Path));
+            return Frames!.Of(image.Key) ?? ((flat ? Turned(image) : Pixels(image.Path)) is { } strip ? Strip(image.Key, image, strip) : Load(image.Path));
         }
         return flat ? LoadTop(image) : Load(image.Path);
     }
@@ -167,6 +178,24 @@ internal sealed class BoardPainter
             return known;
         }
         return _tops[image.Path] = Turned(image) is { } top ? Upload(top) : Load(image.Path);   // which warns
+    }
+
+    /// <summary>A top through one of <see cref="GroundBlend"/>'s masks, baked once for each ground and way the world uses. The art's files don't change.</summary>
+    private Texture2D? LoadBlend(ArtImage image)
+    {
+        if (_tops.TryGetValue(image.Key, out var known))
+        {
+            return known;
+        }
+        if (Pixels(image.Path) is not { } art)
+        {
+            return _tops[image.Key] = null;
+        }
+        var doubled = DitherTexels.Always(art.GetData(), art.GetWidth(), art.GetHeight());
+        art.Dispose();
+        var masked = GroundBlend.Masked(doubled, image.Blend, image.Span);
+        var size = (int)Math.Sqrt(masked.Length / sizeof(uint));
+        return _tops[image.Key] = Upload(Image.CreateFromData(size, size, false, Image.Format.Rgba8, masked));
     }
 
     /// <summary>A top's pixels as they go to the TV: doubled if it has dither, and as they are if not.</summary>
@@ -192,7 +221,9 @@ internal sealed class BoardPainter
         Vector2[] points = [.. face.Points.Select(p => new Vector2(p.X, p.Y))];
         Vector2[] uvs = [.. face.Uvs.Select(p => new Vector2(p.X, p.Y))];
         var colour = Colour(face.Tint, face.Alpha);
-        Color[] colours = [colour, colour, colour, colour];
+        Color[] colours = face.VertexTints.IsDefaultOrEmpty
+            ? [colour, colour, colour, colour]
+            : [.. face.VertexTints.Select(t => Colour(t, face.Alpha))];
         if (baked is not null)
         {
             for (var i = 0; i < colours.Length; i++)
@@ -211,10 +242,21 @@ internal sealed class BoardPainter
             baked is null ? Colors.White : Colour(lit.MeanLight(baked)));
     }
 
-    private static void PaintFace(CanvasItem canvas, DrawnFace drawn, BoardLighting? now, double clock)
+    private static void PaintFace(CanvasItem canvas, DrawnFace drawn, BoardLighting? now, double clock, float alpha = 1f)
     {
         LightUp(drawn, now);
         var uvs = drawn.OneFrame ? drawn.Uvs : FrameUvs(drawn, clock);
+        if (alpha < 1f)
+        {
+            // Only what's fading comes here, and it fades as whole faces: nothing else in a frame pays for this.
+            var colours = drawn.Colours.Select(c => new Color(c.R, c.G, c.B, c.A * alpha)).ToArray();
+            canvas.DrawPrimitive(drawn.Points, colours, uvs, drawn.Texture);
+            if (drawn.Glow is not null)
+            {
+                canvas.DrawPrimitive(drawn.Points, Unlit.Select(c => c with { A = alpha }).ToArray(), uvs, drawn.Glow);
+            }
+            return;
+        }
         if (drawn.Lit.Art)
         {
             if (drawn.Texture is null)
@@ -264,16 +306,21 @@ internal sealed class BoardPainter
         return drawn.FrameUvs;
     }
 
-    private static void PaintSprite(CanvasItem canvas, DrawnSprite drawn, BoardLighting? now, double clock)
+    private static void PaintSprite(CanvasItem canvas, DrawnSprite drawn, BoardLighting? now, double clock, float alpha = 1f)
     {
         if (drawn.Texture is not null)
         {
             var source = new Rect2(new Vector2(drawn.OneFrame ? 0 : drawn.Lit.Sprite.Image.FrameAt(clock) * drawn.Size.X, 0), drawn.Size);
             var light = now is null ? drawn.Baked : Colour(drawn.Lit.LightNow(now));
+            if (alpha < 1f)
+            {
+                light = new Color(light.R, light.G, light.B, light.A * alpha);
+            }
             canvas.DrawTextureRectRegion(drawn.Texture, drawn.Target, source, light);
             if (drawn.Glow is not null)
             {
-                canvas.DrawTextureRectRegion(drawn.Glow, drawn.Target, source);
+                var glow = alpha < 1f ? new Color(1, 1, 1, alpha) : Colors.White;
+                canvas.DrawTextureRectRegion(drawn.Glow, drawn.Target, source, glow);
             }
         }
     }

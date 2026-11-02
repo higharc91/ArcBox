@@ -60,6 +60,13 @@ Expect 3,603 .NET tests and 335 web tests, all passing, with 0 warnings. If they
 
 Reports and proof shots are in `docs/superpowers/reports/2026-10-31-tactics-overworld/`.
 
+**World dressing (merged from the user's local session, 2026-11-02):** props, buildings and people in the world, the woods, Ashen Ford
+rebuilt and dressed, the props painting layer, tall-prop fading and dusk light. Its design is
+[the world-dressing spec](../specs/2026-11-01-tactics-world-dressing-design.md) and [plan](2026-11-01-tactics-world-dressing.md); where
+Ashen Ford stood at that handoff, and what's left there, is [the Ashen Ford handoff](2026-11-01-ashen-ford-handoff.md). Painted props and
+things to interact with both block walking through `WorldGround`; the loader refuses a painted prop on a thing's tile, and the export
+warns about a blocking prop beside a door or lever ([interactables design](../specs/2026-11-02-tactics-interactables-design.md), last section).
+
 ## 4. What to do, in order
 
 Each milestone's plan is complete: read everything above its "### Task 1" first, because the flags and defaults there bind you.

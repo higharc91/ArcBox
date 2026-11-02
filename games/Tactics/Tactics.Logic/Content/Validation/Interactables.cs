@@ -126,7 +126,11 @@ internal sealed partial class Validation
         List<Loaded<RegionThing>> things, IReadOnlySet<string> injuries)
     {
         private readonly RegionDef _def = region.Def;
-        private readonly WorldGround _world = WorldGround.Of(region, maps);
+        /// <summary>The ground, or null for a pack loaded with no art and a region that needs some: what it blocks can't be said, so walking isn't judged.</summary>
+        private readonly WorldGround? _world = v.Art is null && WorldGround.NeedsArt(region.Def) ? null : WorldGround.Of(region, maps, v.Art ?? ArtManifest.None);
+        /// <summary>The ground, once it's known there is one: only the reach checks read it.</summary>
+        private WorldGround World => _world ?? throw new InvalidOperationException("The reach of things is judged only on a ground.");
+
         private readonly List<(InteractableDef Def, string File, string Ptr)> _things = [.. things.Select(t => (t.Def.Def, t.File, t.Pointer))];
 
         private static InteractableFamily Family(InteractableDef d) => Interactables.KindOf(d).Family;
@@ -136,7 +140,7 @@ internal sealed partial class Validation
             var placed = Placement();
             Levers();
             Injuries();
-            if (placed)
+            if (placed && _world is not null)
                 Reach();
         }
 
@@ -149,6 +153,10 @@ internal sealed partial class Validation
             var ok = true;
             var byTile = new Dictionary<Tile, string>();
             var spots = _def.Beats.ToDictionary(b => b.At, b => b.Beat);
+            var props = new Dictionary<Tile, string>();
+            foreach (var group in _def.Props.IsDefault ? [] : _def.Props)
+                foreach (var tile in group.At)
+                    props.TryAdd(tile, group.Id);
             foreach (var t in _things)
             {
                 var (def, at) = (t.Def, t.Def.At);
@@ -166,7 +174,9 @@ internal sealed partial class Validation
                     Error(t, "at", $"'{def.Id}' at {at} is on a spawn, where the party stands.");
                 if (spots.TryGetValue(at, out var beat))
                     Error(t, "at", $"'{def.Id}' at {at} is on the spot of the beat '{beat}', where its figure stands.");
-                if (!_world.Terrain.Walkable(at))
+                if (props.TryGetValue(at, out var prop))
+                    Error(t, "at", $"'{def.Id}' at {at} is on the painted prop '{prop}': a thing stands on a tile of its own, as a prop can't be on a stamp. Move the thing, or paint the prop off its tile.");
+                else if (_world is not null && !_world.Terrain.Walkable(at))
                     Error(t, "at", $"'{def.Id}' at {at} isn't on ground that can be walked: a thing stands on open ground, and a passage is open ground while it's open.");
             }
             return ok;
@@ -224,8 +234,7 @@ internal sealed partial class Validation
         /// </summary>
         private (HashSet<Tile> Reached, HashSet<string> Keys, List<InteractableDef> Shut) Closure(bool optimistic, Tile? from = null)
         {
-            var solid = _things.Where(t => Family(t.Def) is not (InteractableFamily.Passage or InteractableFamily.FloorTrap)
-                && (t.Def.Blocks ?? Interactables.KindOf(t.Def).Blocks)).Select(t => t.Def.At).ToHashSet();
+            var solid = _things.Where(t => Interactables.Solid(t.Def)).Select(t => t.Def.At).ToHashSet();
             var worked = Interactables.Worked(_things.Select(t => t.Def));
             var shut = optimistic ? [] : _things.Where(t => Family(t.Def) == InteractableFamily.Passage && (!t.Def.Open || worked.Contains(t.Def.Id)))
                 .Select(t => t.Def).ToList();
@@ -234,7 +243,7 @@ internal sealed partial class Validation
             var start = from ?? _def.Spawns.Start;
             while (true)
             {
-                var ground = _world.With([.. solid, .. shut.Select(d => d.At)]);
+                var ground = World.With([.. solid, .. shut.Select(d => d.At)]);
                 var reached = ground.Walkable(start) ? WorldWalk.Reach(ground, start, ClassDef.DefaultJump) : [];
                 bool Near(InteractableDef d) => Neighbours(d.At).Any(n => reached.Contains(n) && Interactables.InReach(ground, n, d));
                 var before = keys.Count;
@@ -259,11 +268,10 @@ internal sealed partial class Validation
 
         private void Reach()
         {
-            if (!_world.Terrain.Walkable(_def.Spawns.Start))
+            if (!World.Terrain.Walkable(_def.Spawns.Start))
                 return;     // the region check reports it, and nothing can be judged from it
             var (open, _, _) = Closure(optimistic: true);
-            var ground = _world.With([.. _things.Where(t => Family(t.Def) is not (InteractableFamily.Passage or InteractableFamily.FloorTrap)
-                && (t.Def.Blocks ?? Interactables.KindOf(t.Def).Blocks)).Select(t => t.Def.At)]);
+            var ground = World.With([.. _things.Where(t => Interactables.Solid(t.Def)).Select(t => t.Def.At)]);
             foreach (var t in _things.Where(t => !Neighbours(t.Def.At).Any(n => open.Contains(n) && Interactables.InReach(ground, n, t.Def))))
                 Error(t, "at", $"'{t.Def.Id}' at {t.Def.At} can't be reached from the start, even with every passage open.");
 
@@ -276,9 +284,8 @@ internal sealed partial class Validation
             foreach (var stamp in stamps)
                 if (maps.GetValueOrDefault(stamp.Map)?.Zones.GetValueOrDefault("party_spawn") is { IsDefault: false } zone)
                     required.AddRange(zone.Select(z => ($"the party spawn of the stamp '{stamp.Map}'", stamp.ToWorld(z))));
-            var solid = string.Join(", ", _things.Where(t => Family(t.Def) is not (InteractableFamily.Passage or InteractableFamily.FloorTrap)
-                && (t.Def.Blocks ?? Interactables.KindOf(t.Def).Blocks)).Select(t => $"'{t.Def.Id}'"));
-            var painted = WorldWalk.Reach(_world.Terrain, _def.Spawns.Start, ClassDef.DefaultJump);     // what the region check judges
+            var solid = string.Join(", ", _things.Where(t => Interactables.Solid(t.Def)).Select(t => $"'{t.Def.Id}'"));
+            var painted = WorldWalk.Reach(World.Terrain, _def.Spawns.Start, ClassDef.DefaultJump);     // what the region check judges
             foreach (var (what, at) in required.Where(r => !open.Contains(r.At) && painted.Contains(r.At)).DistinctBy(r => r.What))
                 v.Error(things[0].File, Pointer.Append(things[0].Pointer, "at"),
                     $"{Interactables.Capital(what)} at {at} is walled off by things that stand in the way ({solid}).");

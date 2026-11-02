@@ -21,6 +21,9 @@ public static class RegionScene
     /// <summary>The Flags layer's node name.</summary>
     public const string FlagsLayer = "Flags";
 
+    /// <summary>The Props layer's node name.</summary>
+    public const string PropsLayer = "Props";
+
     /// <summary>The node holding <see cref="BeatMarker"/>s.</summary>
     public const string Beats = "Beats";
 
@@ -30,9 +33,17 @@ public static class RegionScene
     /// <summary>The node holding <see cref="SpawnMarker"/>s.</summary>
     public const string Spawns = "Spawns";
 
-    private static readonly string[] Layers = [MaterialLayer, HeightLayer, FlagsLayer];
+    /// <summary>The node holding <see cref="BuildingMarker"/>s.</summary>
+    public const string Buildings = "Buildings";
 
-    private static readonly string[] Groups = [Beats, Stamps, Spawns];
+    /// <summary>The node holding <see cref="PersonMarker"/>s.</summary>
+    public const string People = "People";
+
+    private static readonly string[] Layers = [MaterialLayer, HeightLayer, FlagsLayer, PropsLayer];
+
+    private static readonly string[] RequiredLayers = [MaterialLayer, HeightLayer, FlagsLayer];
+
+    private static readonly string[] Groups = [Beats, Stamps, Spawns, Buildings, People];
 
     /// <summary>
     /// Exports the scene. The plugin's button and the headless <c>--export</c> command both call this. It writes
@@ -50,6 +61,7 @@ public static class RegionScene
         var material = root.GetNode<TileMapLayer>(MaterialLayer);
         var height = root.GetNode<TileMapLayer>(HeightLayer);
         var flags = root.GetNode<TileMapLayer>(FlagsLayer);
+        var props = root.GetNodeOrNull<TileMapLayer>(PropsLayer);
         var spawns = root.GetNode(Spawns).GetChildren().OfType<SpawnMarker>().ToList();
         var scene = root.SceneFilePath;
 
@@ -62,12 +74,21 @@ public static class RegionScene
                 var at = flags.GetCellAtlasCoords(cell);
                 return PaletteBuilder.FlagsAt(at.X, at.Y);
             }),
+            Props = props is null
+                ? System.Collections.Immutable.ImmutableDictionary<Tile, (string Id, string? Variant)>.Empty
+                : props.GetUsedCells().ToDictionary(ToTile, cell =>
+                {
+                    var at = props.GetCellAtlasCoords(cell);
+                    return PaletteBuilder.PropAt(at.X, at.Y);
+                }),
             Beats = [.. root.GetNode(Beats).GetChildren().OfType<BeatMarker>().Select(b => new BeatSpot(b.Beat, b.Tile))],
             Stamps = [.. root.GetNode(Stamps).GetChildren().OfType<StampMarker>().Select(s => new RegionStamp(s.Map, s.Tile, s.HeightOffset))],
+            Buildings = [.. root.GetNode(Buildings).GetChildren().OfType<BuildingMarker>().Select(b => new RegionBuilding(b.Building, b.Variant, b.Tile))],
+            People = [.. root.GetNode(People).GetChildren().OfType<PersonMarker>().Select(p => new RegionPerson(p.Preset, p.Tile, p.Face, PersonText.Walk(p.Walk)))],
             Starts = [.. spawns.Where(s => s.Kind == SpawnMarker.SpawnKind.Start).Select(s => s.Tile)],
             Recoveries = [.. spawns.Where(s => s.Kind == SpawnMarker.SpawnKind.Recovery).Select(s => s.Tile)],
             OldStamps = [.. root.GetNode(Stamps).GetChildren().OfType<StampMarker>().SelectMany(s => s.Pending)],
-            MovedNodes = [.. Layers.Concat(Groups).Where(name => root.GetNode<Node2D>(name).Transform != Transform2D.Identity)],
+            MovedNodes = [.. Layers.Concat(Groups).Where(name => root.GetNodeOrNull<Node2D>(name)?.Transform != Transform2D.Identity && root.GetNodeOrNull<Node2D>(name) is not null)],
             Strays = Strays(root),
             SceneFile = scene.Length > 0 ? Path.GetFileNameWithoutExtension(scene) : null,
         };
@@ -76,7 +97,7 @@ public static class RegionScene
     /// <summary>What the scene lacks of the convention, as lines for the problem list.</summary>
     public static IReadOnlyList<string> MissingParts(Region root)
     {
-        var layers = Layers.Where(name => root.GetNodeOrNull<TileMapLayer>(name) is null)
+        var layers = RequiredLayers.Where(name => root.GetNodeOrNull<TileMapLayer>(name) is null)
             .Select(name => $"The scene has no {name} tile layer. Add a TileMapLayer called {name} under the Region node, or make the scene with --new.");
         var groups = Groups.Where(name => root.GetNodeOrNull<Node2D>(name) is null)
             .Select(name => $"The scene has no {name} node. Add a Node2D called {name} under the Region node, or make the scene with --new.");
@@ -116,6 +137,17 @@ public static class RegionScene
                 flags.SetCell(cell, 0, flagsTile);
         }
 
+        if (ResourceLoader.Exists(Palette.Props))
+        {
+            var props = AddLayer(root, PropsLayer, GD.Load<TileSet>(Palette.Props));
+            foreach (var group in source.Props)
+            {
+                var (px, py) = PaletteBuilder.PropAtlas(group.Id, group.Variant);
+                foreach (var tile in group.At)
+                    props.SetCell(new Vector2I(tile.X, tile.Y), 0, new Vector2I(px, py));
+            }
+        }
+
         var beats = AddGroup(root, Beats);
         foreach (var beat in source.Beats)
             AddMarker(root, beats, new BeatMarker { Beat = beat.Beat }, beat.Beat, beat.At);
@@ -125,6 +157,12 @@ public static class RegionScene
         var spawns = AddGroup(root, Spawns);
         AddMarker(root, spawns, new SpawnMarker { Kind = SpawnMarker.SpawnKind.Start }, "Start", source.Start);
         AddMarker(root, spawns, new SpawnMarker { Kind = SpawnMarker.SpawnKind.Recovery }, "Recovery", source.Recovery);
+        var buildings = AddGroup(root, Buildings);
+        for (var i = 0; i < source.Buildings.Count; i++)
+            AddMarker(root, buildings, new BuildingMarker { Building = source.Buildings[i].Id, Variant = source.Buildings[i].Variant }, $"{source.Buildings[i].Id}_{i}", source.Buildings[i].At);
+        var people = AddGroup(root, People);
+        for (var i = 0; i < source.People.Count; i++)
+            AddMarker(root, people, new PersonMarker { Preset = source.People[i].Preset, Face = source.People[i].Face, Walk = PersonText.Walk(source.People[i].Walk) }, $"{source.People[i].Preset}_{i}", source.People[i].At);
         return root;
     }
 
@@ -199,7 +237,7 @@ public static class RegionScene
         return layer.TileSet.HasSource(id) ? layer.TileSet.GetSource(id).ResourceName : $"source {id}";
     }
 
-    private static TileMapLayer AddLayer(Region root, string name, TileSet tiles)
+    public static TileMapLayer AddLayer(Region root, string name, TileSet tiles)
     {
         // Behind the root, so its outline of the region's size stays on top of the paint.
         var layer = new TileMapLayer { TileSet = tiles, ShowBehindParent = true };

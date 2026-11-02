@@ -54,6 +54,54 @@ internal sealed partial class Validation
                     Error(file, Pointer.Append(Pointer.Append(Pointer.Append(ptr, "edges"), i), "side"),
                         $"The side '{def.Edges[i].Side}' must be north, east, south or west.");
 
+            if (!def.Props.IsDefault)
+            {
+                for (var i = 0; i < def.Props.Length; i++)
+                {
+                    var group = def.Props[i];
+                    var groupPtr = Pointer.Append(Pointer.Append(ptr, "props"), i);
+                    if (art is not null)
+                    {
+                        if (!art.Props.TryGetValue(group.Id, out var propDef))
+                            Error(file, Pointer.Append(groupPtr, "id"), $"Unknown prop '{group.Id}'.");
+                        else if (group.Variant is not null && !propDef.Variants.Contains(group.Variant))
+                            Error(file, Pointer.Append(groupPtr, "variant"), $"Unknown variant '{group.Variant}' for prop '{group.Id}'.");
+                    }
+                    for (var j = 0; j < group.At.Length; j++)
+                    {
+                        var tile = group.At[j];
+                        var tilePtr = Pointer.Append(Pointer.Append(groupPtr, "at"), j);
+                        if (tile.X < 0 || tile.Y < 0 || tile.X >= w || tile.Y >= h)
+                            Error(file, tilePtr, $"Prop '{group.Id}' at {tile} is outside the {w}x{h} region.");
+                        else if (!seen.Contains((tile.X / WorldRegion.ChunkSize, tile.Y / WorldRegion.ChunkSize)))
+                            Error(file, tilePtr, $"Prop '{group.Id}' at {tile} is in a void chunk.");
+                    }
+                }
+            }
+
+            if (!def.Buildings.IsDefault)
+            {
+                for (var i = 0; i < def.Buildings.Length; i++)
+                {
+                    var building = def.Buildings[i];
+                    var at = Pointer.Append(Pointer.Append(ptr, "buildings"), i);
+                    BuildingArtDef? known = null;
+                    if (art is not null)
+                    {
+                        if (!art.Buildings.TryGetValue(building.Id, out known))
+                            Error(file, Pointer.Append(at, "id"), $"Unknown building '{building.Id}'.");
+                        else if (!known.Variants.Contains(building.Variant))
+                            Error(file, Pointer.Append(at, "variant"), $"Unknown variant '{building.Variant}' for building '{building.Id}'.");
+                    }
+
+                    var tiles = known?.Footprint(building.At).ToList() ?? [building.At];
+                    if (tiles.Any(t => t.X < 0 || t.Y < 0 || t.X >= w || t.Y >= h))
+                        Error(file, Pointer.Append(at, "at"), $"The building '{building.Id}' at {building.At} is outside the {w}x{h} region.");
+                    else if (tiles.Any(t => !seen.Contains((t.X / WorldRegion.ChunkSize, t.Y / WorldRegion.ChunkSize))))
+                        Error(file, Pointer.Append(at, "at"), $"The building '{building.Id}' at {building.At} is in a void chunk.");
+                }
+            }
+
             return Errors.Count == errors ? def : null;
         });
 
@@ -104,7 +152,8 @@ internal sealed partial class Validation
         IReadOnlyDictionary<string, BattleMap> maps, string file, string ptr)
     {
         private readonly RegionDef _def = region.Def;
-        private readonly Terrain _ground = WorldGround.Of(region, maps).Terrain;
+        /// <summary>The ground, or null for a pack loaded with no art and a region that needs some: what it blocks can't be said, so walking isn't judged.</summary>
+        private readonly Terrain? _ground = v.Art is null && WorldGround.NeedsArt(region.Def) ? null : WorldGround.Of(region, maps, v.Art ?? ArtManifest.None).Terrain;
 
         /// <summary>A stamp that sits inside the region, on a known map.</summary>
         private sealed record Placed(int Index, RegionStamp Stamp, BattleMap Map)
@@ -133,10 +182,110 @@ internal sealed partial class Validation
         public ImmutableArray<BattleStage> Run()
         {
             var placed = Stamps();
+            Props(placed);
+            Buildings(placed);
+            People(placed);
             Spawns(placed);
             Reachable(placed);
             Edges();
             return [.. placed.Select(p => p.Stage)];
+        }
+
+        private void Props(List<Placed> stamps)
+        {
+            if (_def.Props.IsDefault)
+                return;
+            for (var i = 0; i < _def.Props.Length; i++)
+            {
+                var group = _def.Props[i];
+                var groupPtr = Pointer.Append(Pointer.Append(ptr, "props"), i);
+                for (var j = 0; j < group.At.Length; j++)
+                {
+                    var tile = group.At[j];
+                    foreach (var stamp in stamps.Where(s => s.Stage.Holds(tile)))
+                    {
+                        var at = Pointer.Append(Pointer.Append(groupPtr, "at"), j);
+                        v.Error(file, at, $"Prop '{group.Id}' at {tile} is on the stamp '{stamp.Stamp.Map}'.");
+                    }
+                }
+            }
+        }
+
+        /// <summary>A footprint can't be on a stamp, whose tiles must match its map, or on another footprint. <see cref="Region"/> has seen that each one fits.</summary>
+        private void Buildings(List<Placed> stamps)
+        {
+            var taken = new Dictionary<Tile, RegionBuilding>();
+            for (var i = 0; i < region.Buildings.Length; i++)
+            {
+                var building = region.Buildings[i];
+                var at = Pointer.Append(At("buildings", i), "at");
+                var tiles = v.Art?.Buildings.GetValueOrDefault(building.Id)?.Footprint(building.At).ToList() ?? [building.At];
+                foreach (var stamp in stamps.Where(s => tiles.Any(s.Stage.Holds)))
+                    v.Error(file, at, $"The building '{building.Id}' at {building.At} is on the stamp '{stamp.Stamp.Map}'.");
+                foreach (var other in tiles.Select(taken.GetValueOrDefault).OfType<RegionBuilding>().Distinct())
+                    v.Error(file, at, $"The building '{building.Id}' at {building.At} overlaps the building '{other.Id}' at {other.At}.");
+                foreach (var tile in tiles)
+                    taken.TryAdd(tile, building);
+            }
+        }
+
+        /// <summary>
+        /// Everyone a region shows has to be drawable and has to stand where someone could: on the region, off the stamps, where a fight would run through them, and not on what
+        /// blocks the party. A walk has to be one a person could walk: back to where it began, a step at a time. With no art, what's drawable can't be said, and with no ground, nor can what blocks.
+        /// </summary>
+        private void People(List<Placed> stamps)
+        {
+            for (var i = 0; i < region.People.Length; i++)
+            {
+                var person = region.People[i];
+                var at = At("people", i);
+                if (v.Art is { } art && !art.Keys.Contains($"characters.{person.Preset}"))
+                    v.Error(file, Pointer.Append(at, "preset"), $"Unknown character preset '{person.Preset}'.");
+                if (!RegionPerson.Faces.Contains(person.Face))
+                    v.Error(file, Pointer.Append(at, "face"), $"The {person.Preset} at {person.At} faces '{person.Face}', which is none of {string.Join(", ", RegionPerson.Faces)}.");
+                if (!Standing(person, person.At, stamps, Pointer.Append(at, "at")))
+                    continue;
+
+                var walk = person.Walk.IsDefault ? [] : person.Walk;
+                if (walk.Length > RegionPerson.MostSteps)
+                    v.Error(file, Pointer.Append(at, "walk"), $"The {person.Preset} at {person.At} walks {walk.Length} tiles, and a walk is at most {RegionPerson.MostSteps}.");
+                var from = person.At;
+                for (var j = 0; j < walk.Length && Standing(person, walk[j], stamps, Pointer.Append(Pointer.Append(at, "walk"), j)); j++)
+                {
+                    Stepped(person, from, walk[j], Pointer.Append(Pointer.Append(at, "walk"), j));
+                    from = walk[j];
+                }
+                if (walk.Length > 0 && from == walk[^1])
+                    Stepped(person, from, person.At, Pointer.Append(at, "walk"));
+            }
+        }
+
+        private bool Standing(RegionPerson person, Tile tile, List<Placed> stamps, string at)
+        {
+            if (region.TileAt(tile) is null)
+            {
+                v.Error(file, at, $"The {person.Preset} at {tile} is off the region.");
+                return false;
+            }
+            foreach (var stamp in stamps.Where(s => s.Stage.Holds(tile)))
+            {
+                v.Error(file, at, $"The {person.Preset} at {tile} is on the stamp '{stamp.Stamp.Map}'.");
+                return false;
+            }
+            if (_ground is not null && !_ground.Walkable(tile))
+            {
+                v.Error(file, at, $"The {person.Preset} at {tile} stands on a tile that blocks.");
+                return false;
+            }
+            return true;
+        }
+
+        private void Stepped(RegionPerson person, Tile from, Tile to, string at)
+        {
+            if (Math.Abs(from.X - to.X) + Math.Abs(from.Y - to.Y) != 1)
+                v.Error(file, at, $"The {person.Preset}'s walk goes from {from} to {to}, which isn't a step.");
+            else if (Math.Abs(region.TileAt(from)!.Height - region.TileAt(to)!.Height) > ClassDef.DefaultJump)
+                v.Error(file, at, $"The {person.Preset}'s walk goes from {from} to {to}, which is too steep to walk.");
         }
 
         private string At(string list, int index) => Pointer.Append(Pointer.Append(ptr, list), index);
@@ -236,6 +385,8 @@ internal sealed partial class Validation
         /// </summary>
         private void Reachable(List<Placed> stamps)
         {
+            if (_ground is null)
+                return;
             var spawns = Pointer.Append(ptr, "spawns");
             var start = _def.Spawns.Start;
             if (!_ground.Walkable(start))

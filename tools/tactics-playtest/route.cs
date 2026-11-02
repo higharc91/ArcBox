@@ -19,7 +19,7 @@ if (args.Length is not (5 or 6) || (args.Length == 6 && args[2] != "beat"))
     Console.Error.WriteLine("usage: route.cs <rules dir> <region> <map> <x> <y>  |  route.cs <rules dir> <region> beat <beat id> <x> <y>");
     return 2;
 }
-var rules = RulesPack.Load([args[0]]);
+var rules = RulesPack.Load([args[0]], ArtManifests.Load(Directory.GetParent(Path.TrimEndingDirectorySeparator(Path.GetFullPath(args[0])))!.FullName));
 var region = rules.RegionFor(args[1]) ?? throw new ArgumentException($"No region {args[1]}.");
 var terrain = rules.GroundFor(region.Def.Id)!.Terrain;
 var start = new Tile(int.Parse(args[^2]), int.Parse(args[^1]));

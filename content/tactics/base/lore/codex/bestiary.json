@@ -9,6 +9,22 @@
       "related": ["codex_skarrow"]
     },
     {
+      "id": "bestiary_emberwick_stock",
+      "title": "The Stock of Emberwick",
+      "category": "bestiary",
+      "subject": "pack_mule",
+      "body": "The farms around Emberwick keep patient mules for the grain road and small goats to browse the rough field edges. The mules carry sacks between the outlying steads, the mill and the town granary; a little brass bell muffled in leather lets a handler find one in the dusk without ringing across the river. The goats know every gate in the fences and crowd close to the reeve's warm-walled cottage when the evening turns cold. They are ordinary, stubborn creatures, and the people who tend them count them as carefully as the last good sheaves.",
+      "related": ["codex_ashen_ford"]
+    },
+    {
+      "id": "bestiary_ashen_ford_wildlife",
+      "title": "Wild Neighbours of the Ford",
+      "category": "bestiary",
+      "subject": "wildlife",
+      "body": "Rooks work the cut fields behind the scarecrows, turning over stubble for grubs after the harvest. Mallards settle in the quieter bends below the ford, well away from the toll bridge. At dusk a red fox comes down from Scarpfoot Wood to hunt mice along the old field edges. The farmers say the foxes have been seen closer to town since the hills began sending game down and the fields stopped holding warmth. None of them are omens; they are hungry neighbours, like everyone else in the Vale.",
+      "related": ["codex_ashen_ford"]
+    },
+    {
       "id": "bestiary_hobgoblin",
       "title": "Hobgoblins",
       "category": "bestiary",

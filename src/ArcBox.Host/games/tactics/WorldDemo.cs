@@ -18,10 +18,14 @@ namespace ArcBox.Host.Games.Tactics;
 internal sealed partial class WorldDemo : Node
 {
     private const string Stress = "hilly";
+    private const string WoodSpec = "wood";
+    private const string TavernSpec = "tavern";
+    private const string TownSpec = "town";
+    private const string SwatchSpec = "swatches";
     private const float StepsPerSecond = 2 / 0.3f;      // twice the walking pace of a tile per 0.3 s
     private const double RegularFrameMs = 16;           // the task's line: a frame over this, regularly, stops the work
     private const double ColdSeconds = 1;               // frames this close to the start have the JIT in them
-    private const int SettleFrames = 3;                 // before a shot, for the overlay to have drawn what the shot is of
+    private const int FadeFrames = 40;                  // before a shot, for a fade to have finished, which also has the overlay drawn
     private const double SecondLook = 0.3;              // between two shots of water, to see that it moved
 
     private enum Stage { Loading, Crossing, Spots, Done }
@@ -31,9 +35,12 @@ internal sealed partial class WorldDemo : Node
     private readonly string _spec;
     private readonly string _pack;
     private readonly string? _shots;
+    private readonly string? _looks;
+    private readonly string? _walk;
     private readonly List<Frame> _frames = [];
 
     private WorldCanvas _canvas = null!;
+    private WorldPeople? _people;
     private UnitArt _art = null!;
     private WorldGround? _ground;
     private ImmutableArray<Tile> _route = [];
@@ -50,9 +57,11 @@ internal sealed partial class WorldDemo : Node
     private bool _secondShot;
     private bool _logged;
 
-    public WorldDemo(string spec, string packRoot, string? shots)
+    public WorldDemo(string spec, string packRoot, string? shots, string? looks = null, string? walk = null)
     {
         _shots = shots;
+        _looks = looks;
+        _walk = walk;
         _spec = spec;
         _pack = packRoot;
     }
@@ -66,17 +75,48 @@ internal sealed partial class WorldDemo : Node
         RenderingServer.ViewportSetMeasureRenderTime(GetViewport().GetViewportRid(), true);
         _art = UnitArt.Load(_pack);
         var parts = _spec.Split(':');
-        var blocks = parts.Length > 1 ? int.Parse(parts[1], CultureInfo.InvariantCulture) : WorldTuning.BlockSize;
+        var blocks = parts.Length > 1 && int.TryParse(parts[1], CultureInfo.InvariantCulture, out var b) ? b : WorldTuning.BlockSize;
         _canvas = new WorldCanvas(_pack, () => Ground(parts[0]), blocks);
         AddChild(_canvas);
     }
 
     private WorldGround Ground(string region)
     {
-        var ground = region == Stress ? DemoRegion.Hilly(160, 120) : DemoRegion.FromPack(_pack, region);
-        var start = region == Stress ? new Tile(80, 60) : RegionStart(region);
-        _route = WorldRoute.Across(ground.Terrain, start, ClassDef.DefaultJump);
-        _spots = WorldSpots.Of(new BoardTerrain(ground.Map, null), ground.Terrain);
+        var ground = region switch
+        {
+            Stress => DemoRegion.Hilly(160, 120),
+            WoodSpec => DemoRegion.Wood(160, 120),
+            TavernSpec => DemoRegion.Tavern(_pack),
+            TownSpec => DemoRegion.Town(_pack),
+            SwatchSpec => DemoRegion.Swatches(_pack),
+            _ => DemoRegion.FromPack(_pack, region),
+        };
+        var start = region switch
+        {
+            Stress => new Tile(80, 60),
+            WoodSpec => DemoRegion.WoodStart(160, 120),
+            TavernSpec => DemoRegion.TavernWalk()[0],
+            TownSpec => DemoRegion.TownWalk()[0],
+            SwatchSpec => DemoRegion.SwatchLooks()[0].Stand,
+            _ when _walk is not null => WorldSpots.Route(_walk)[0],
+            _ => RegionStart(region),
+        };
+        _route = region switch
+        {
+            _ when _walk is not null => WorldSpots.Route(_walk),
+            _ when _looks is not null || region == SwatchSpec => [start, start],
+            TavernSpec => DemoRegion.TavernWalk(),
+            TownSpec => DemoRegion.TownWalk(),
+            _ => WorldRoute.Across(ground.Terrain, start, ClassDef.DefaultJump),
+        };
+        _spots = region switch
+        {
+            _ when _looks is not null => WorldSpots.Parse(_looks),
+            SwatchSpec => DemoRegion.SwatchLooks(),
+            TavernSpec => DemoRegion.TavernSpots(),
+            TownSpec => DemoRegion.TownSpots(),
+            _ => WorldSpots.Of(new BoardTerrain(ground.Map, null), ground.Terrain),
+        };
         _ground = ground;
         return ground;
     }
@@ -156,8 +196,17 @@ internal sealed partial class WorldDemo : Node
         var heading = WorldRoute.Heading(_route, steps);
         _canvas.Place(WorldView.Centred(place.Feet));
         _canvas.Aim(place.Map, heading * StepsPerSecond);
-        _canvas.ShowUnits(DemoRegion.StandIn(terrain, _art, place, heading, _clock), _art);
+        Show(terrain, place, heading);
         return place;
+    }
+
+    /// <summary>The stand-in, and the region's people round where the camera is, as the TV has them.</summary>
+    private void Show(BoardTerrain terrain, UnitPlace place, System.Numerics.Vector2 heading, System.Numerics.Vector2? looking = null)
+    {
+        _people ??= new WorldPeople(_canvas.Ground!.People, terrain, _art);
+        var walkers = DemoRegion.StandIn(terrain, _art, place, heading, _clock);
+        ImmutableArray<BoardUnit> units = [.. walkers.Concat(_people.Units(_clock, looking ?? place.Feet, [])).OrderBy(u => u.Order)];
+        _canvas.ShowUnits(units, walkers, _art);
     }
 
     private void Cross(double delta)
@@ -196,7 +245,7 @@ internal sealed partial class WorldDemo : Node
         Log($"_Draw per block, first time: {Spread(_canvas.BlockMs)}, sum {_canvas.BlockMs.Sum():0.0} ms");
         Log($"render CPU ms {Spread(all.Select(f => f.RenderCpu))}; GPU ms {Spread(all.Select(f => f.RenderGpu))}; at most {all.Max(f => f.DrawCalls):N0} draw calls");
         Log($"overlay query ms {Spread(all.Select(f => f.Query))}; draw ms {Spread(all.Select(f => f.Draw))}; items {Spread(all.Select(f => (double)f.Items))}");
-        Log($"blocks recorded once, whatever the walk did: {_canvas.RecordedOnce}");
+        Log($"blocks recorded once, whatever the walk did: {_canvas.RecordedOnce}; recorded again for a fade: {_canvas.Rerecorded}");
         Log($"memory at end of crossing: {MemoryText()}");
     }
 
@@ -211,8 +260,8 @@ internal sealed partial class WorldDemo : Node
         var terrain = _canvas.Plan!.Terrain;
         var place = UnitPlace.On(terrain, spot.Stand);
         _canvas.Place(WorldView.Centred(terrain.Centre(spot.Look)));
-        _canvas.ShowUnits(DemoRegion.StandIn(terrain, _art, place, new System.Numerics.Vector2(1, 0), _clock), _art);
-        if (++_settling < SettleFrames)
+        Show(terrain, place, new System.Numerics.Vector2(1, 0), terrain.Centre(spot.Look));
+        if (++_settling < FadeFrames)
         {
             return;
         }

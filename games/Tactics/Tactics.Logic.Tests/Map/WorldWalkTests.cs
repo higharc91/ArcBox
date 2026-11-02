@@ -17,7 +17,7 @@ public sealed class WorldWalkTests
     {
         var def = new RegionDef("r", "R", 1, [64, 32], ["grass/lush"], [new RegionChunk(0, 0, RegionTests.Tiles())], [new RegionStamp("ascii", new Tile(4, 5), 0)], [],
             new RegionSpawns(Origin, Origin), []);
-        return WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap> { ["ascii"] = AsciiMap.Parse("0. 0C") });
+        return WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap> { ["ascii"] = AsciiMap.Parse("0. 0C") }, ArtManifest.None);
     }
 
     [Fact]
@@ -35,6 +35,96 @@ public sealed class WorldWalkTests
     {
         Assert.Null(WorldWalk.Next(Stamped().Terrain, new Tile(4, 5), WalkDir.SE, Jump, null));
         Assert.NotNull(WorldWalk.Next(Stamped().Terrain, new Tile(4, 5), WalkDir.NW, Jump, null));
+
+        var def = new RegionDef("r", "R", 1, [64, 32], ["grass/lush"], [new RegionChunk(0, 0, RegionTests.Tiles())], [], [],
+            new RegionSpawns(Origin, Origin), [],
+            [new RegionProps("tree", "autumn", [new Tile(1, 0)])]);
+        var ground = WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap>(),
+            new ArtManifest([], ImmutableDictionary<string, PropArtDef>.Empty.Add("tree", new("tree", ["autumn"], true, Cover.Total, 4))));
+        Assert.Null(WorldWalk.Next(ground.Terrain, Origin, WalkDir.E, Jump, null));
+    }
+
+    private static readonly ArtManifest Town = ArtManifests.Load(ContentPaths.ContentBase);
+
+    /// <summary>A flat chunk with <paramref name="buildings"/> standing on it.</summary>
+    private static WorldGround Built(params RegionBuilding[] buildings)
+    {
+        var def = new RegionDef("r", "R", 1, [32, 32], ["grass/lush"], [new RegionChunk(0, 0, RegionTests.Tiles())], [], [],
+            new RegionSpawns(Origin, Origin), [], Buildings: [.. buildings]);
+        return WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap>(), Town);
+    }
+
+    [Fact]
+    public void Every_tile_of_a_buildings_footprint_stops_the_party_as_its_manifest_says()
+    {
+        var terrain = Built(new RegionBuilding("tavern", "red", new Tile(10, 10))).Terrain;
+
+        foreach (var tile in Town.Buildings["tavern"].Footprint(new Tile(10, 10)))
+            Assert.False(terrain.Walkable(tile), $"{tile}");
+        Assert.True(terrain.Walkable(new Tile(13, 10)));
+        Assert.True(terrain.Walkable(new Tile(10, 12)));
+    }
+
+    [Theory]
+    [InlineData("gate_u", 11, 10, 10, 10, 12, 10)]
+    [InlineData("gate_v", 10, 11, 10, 10, 10, 12)]
+    public void A_gates_middle_stays_walkable_and_its_towers_dont(string gate, int middleX, int middleY, int leftX, int leftY, int rightX, int rightY)
+    {
+        var terrain = Built(new RegionBuilding(gate, "grey", new Tile(10, 10))).Terrain;
+
+        Assert.True(terrain.Walkable(new Tile(middleX, middleY)));
+        Assert.False(terrain.Walkable(new Tile(leftX, leftY)));
+        Assert.False(terrain.Walkable(new Tile(rightX, rightY)));
+    }
+
+    [Fact]
+    public void A_bridge_deck_stays_walkable()
+        => Assert.True(Built(new RegionBuilding("bridge_u", "grey", new Tile(10, 10))).Terrain.Walkable(new Tile(10, 10)));
+
+    [Fact]
+    public void The_map_knows_each_building_and_the_ground_it_stands_on()
+    {
+        var map = Built(new RegionBuilding("stall", "red", new Tile(10, 10))).Map;
+
+        Assert.Equal(new BuildingPlacement("stall", "red", new Tile(10, 10), 0), Assert.Single(map.Buildings));
+    }
+
+    [Fact]
+    public void A_doors_step_is_the_tile_outside_it()
+    {
+        // The pack's doors are all on the +y face, the side nearest the sofa on the left.
+        Assert.Equal([new Tile(11, 12)], Town.Buildings["tavern"].DoorSteps(new Tile(10, 10)));
+        Assert.Equal([new Tile(10, 12)], Town.Buildings["cottage"].DoorSteps(new Tile(10, 10)));
+        Assert.Equal([new Tile(10, 11)], Town.Buildings["watchtower"].DoorSteps(new Tile(10, 10)));
+    }
+
+    [Fact]
+    public void A_prop_nothing_defines_cant_quietly_be_walkable()
+    {
+        var def = new RegionDef("r", "R", 1, [32, 32], ["grass/lush"], [new RegionChunk(0, 0, RegionTests.Tiles())], [], [],
+            new RegionSpawns(Origin, Origin), [], [new RegionProps("tree", "autumn", [new Tile(1, 0)])]);
+
+        Assert.Contains("'tree'", Assert.Throws<ArgumentException>(() => WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap>(), ArtManifest.None)).Message);
+    }
+
+    [Fact]
+    public void A_building_nothing_defines_cant_quietly_be_walkable()
+    {
+        var def = new RegionDef("r", "R", 1, [32, 32], ["grass/lush"], [new RegionChunk(0, 0, RegionTests.Tiles())], [], [],
+            new RegionSpawns(Origin, Origin), [], Buildings: [new RegionBuilding("tavern", "red", new Tile(1, 0))]);
+
+        Assert.Contains("'tavern'", Assert.Throws<ArgumentException>(() => WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap>(), ArtManifest.None)).Message);
+    }
+
+    [Fact]
+    public void A_soft_prop_doesnt()
+    {
+        var def = new RegionDef("r", "R", 1, [64, 32], ["grass/lush"], [new RegionChunk(0, 0, RegionTests.Tiles())], [], [],
+            new RegionSpawns(Origin, Origin), [],
+            [new RegionProps("bush", null, [new Tile(1, 0)])]);
+        var ground = WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap>(),
+            new ArtManifest([], ImmutableDictionary<string, PropArtDef>.Empty.Add("bush", new("bush", [], false, Cover.None, 1))));
+        Assert.NotNull(WorldWalk.Next(ground.Terrain, Origin, WalkDir.E, Jump, null));
     }
 
     [Fact]
@@ -290,7 +380,7 @@ public sealed class WorldWalkTests
     [Fact]
     public void The_pack_shares_one_ground_per_region()
     {
-        var rules = RulesPack.Load([ContentPaths.BaseRules]);
+        var rules = RulesPack.Load([ContentPaths.BaseRules], Town);
         var id = rules.Regions.Keys.First();
 
         Assert.Same(rules.GroundFor(id), rules.GroundFor(id));
@@ -304,7 +394,7 @@ public sealed class WorldWalkTests
     [Fact]
     public void The_pack_shares_one_flood_from_each_regions_start()
     {
-        var rules = RulesPack.Load([ContentPaths.BaseRules]);
+        var rules = RulesPack.Load([ContentPaths.BaseRules], ArtManifests.Load(ContentPaths.ContentBase));
         var (id, region) = rules.Regions.First();
 
         var reach = rules.ReachFor(id)!;

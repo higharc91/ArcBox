@@ -41,7 +41,9 @@ public static class StoryOrder
     public static StoryWalk Check(WorldRegion region, RulesPack rules, string contentBase)
     {
         var (legs, retries, problems) = (new List<StoryLeg>(), new List<StoryLeg>(), new List<string>());
-        var walk = new RegionWalk(region, rules.Maps);
+        // The painted ground, with the things that always stand in the way (a chest, a barrel) and every passage open, as the content check judges reach.
+        var solid = rules.Interactables.GetValueOrDefault(region.Def.Id, []).Where(Interactables.Solid).Select(d => d.At).ToList();
+        var walk = new RegionWalk(WorldGround.Of(region, rules.Maps, rules.Art ?? ArtManifest.None).With(solid));
         var trapped = walk.Trapped(region.Def.Spawns.Start);
         if (trapped.Count > 0)
             problems.Add($"{TileSpread.Say(trapped, "can be walked into but has no way back", "can be walked into but have no way back")}. Paint a way out, climbing no more than {ClassDef.DefaultJump} levels a step, or raise {TileSpread.It(trapped)}.");

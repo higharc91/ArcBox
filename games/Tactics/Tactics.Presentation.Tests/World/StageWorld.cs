@@ -70,7 +70,7 @@ internal static class StageWorld
         var def = new RegionDef("test_region", "Test region", 1, [width, depth], Materials, chunks.ToImmutable(), [new RegionStamp(map.Id, at, raise)], [],
             new RegionSpawns(new Tile(0, 0), new Tile(0, 0)), []);
         var region = WorldRegion.From(def);
-        return (WorldGround.Of(region, new Dictionary<string, BattleMap> { [map.Id] = map }), BattleStage.Of(region, map)!.Value);
+        return (WorldGround.Of(region, new Dictionary<string, BattleMap> { [map.Id] = map }, ArtManifest.None), BattleStage.Of(region, map)!.Value);
     }
 
     public static TileInfo Flat(int height, byte material = Grass, TileFlags flags = TileFlags.None) => new(height, material, flags);
