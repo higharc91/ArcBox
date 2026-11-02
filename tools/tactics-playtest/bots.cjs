@@ -61,7 +61,7 @@
 //
 // BOTS_DEBUG=1 in the environment logs the board as each bot sees it on each of its turn views.
 //
-//   --shop                    walk to Wenna, sell starting items to fund a potion, buy, retry its trade id, sell and leave.
+//   --shop                    walk to Wenna, sell a starting item to fund their own smoke bomb, buy, retry its trade id, sell and leave.
 //
 // The story (overworld 5d), in place of the battle list:
 //
@@ -1133,36 +1133,40 @@ async function playShop(bots, watch, state) {
   await walkToBeat(bots, watch, 'ashen_ford', { beat: 'shop:af_market_herbalist' });
   await until('the shop on every phone', () => bots.every(b => b.view?.screen === 'shop'));
   clearInterval(timer);
-  const purse = () => bots[0].view.data.gold;
+  const buyer = bots[1] ?? bots[0]; // A follower trades independently after the leader opens the shop.
+  const purse = () => buyer.view.data.gold;
   async function trade(bot, action, row, count) {
     const before = bot.view.viewId;
+    const otherPurses = bots.filter(b => b !== bot).map(b => [b, b.view.data.gold, b.view.viewId, JSON.stringify(b.view.data.sell)]);
     const expected = bot.view.data.gold + (action === 'shopBuy' ? -1 : 1) * row.price * count;
     const id = require('crypto').randomUUID();
     await bot.input(action, { shop: bot.view.data.shop.id, item: row.item, member: row.member, count, trade: id });
-    await until('trade confirmation', () => bot.view.viewId !== before && bots.every(b => b.view?.data?.gold === expected));
+    await until('trade confirmation', () => bot.view.viewId !== before && bot.view.data.gold === expected && otherPurses.every(([b, gold, viewId, bag]) => b.view?.viewId !== viewId && b.view?.data?.gold === gold && JSON.stringify(b.view.data.sell) === bag));
     log(`SHOP ${action} ${count} ${row.item}: ${purse()} gold`);
     return id;
   }
-  while (purse() < 50) {
-    const seller = bots.find(b => b.view.data.sell.some(x => x.price > 0 && x.count > 0));
-    if (!seller) throw new Error('The starting bags cannot fund a potion');
+  const item = "smoke_bomb";
+  const price = buyer.view.data.items.find(x => x.item === item).price;
+  while (purse() < price) {
+    const seller = buyer.view.data.sell.some(x => x.price > 0 && x.count > 0) ? buyer : null;
+    if (!seller) throw new Error("The buyer's starting bag cannot fund a smoke bomb");
     await trade(seller, 'shopSell', seller.view.data.sell.find(x => x.price > 0 && x.count > 0), 1);
   }
-  const buyer = bots[0];
-  const row = buyer.view.data.items.find(x => x.item === 'potion_of_healing');
+  const row = buyer.view.data.items.find(x => x.item === item);
   const before = purse();
   const id = await trade(buyer, 'shopBuy', row, 1);
-  if (purse() !== before - row.price) throw new Error('Purchase did not debit the shared purse');
+  if (purse() !== before - row.price) throw new Error("Purchase did not debit the buyer's own purse");
   await buyer.input('shopBuy', { shop: buyer.view.data.shop.id, item: row.item, count: 1, trade: id });
   await sleep(500);
   if (purse() !== before - row.price) throw new Error('Repeated trade charged twice');
-  await trade(buyer, 'shopSell', buyer.view.data.sell.find(x => x.item === row.item), 1);
-  if (purse() !== before - row.price + 25) throw new Error('Sale did not credit the purse');
+  const sale = buyer.view.data.sell.find(x => x.item === row.item);
+  await trade(buyer, 'shopSell', sale, 1);
+  if (purse() !== before - row.price + sale.price) throw new Error('Sale did not credit the purse');
   await bots.find(b => b.view.data.leader).input('shopLeave', { shop: buyer.view.data.shop.id });
   await until('walking after trade', () => onWalk(bots));
   await bots[0].input('endSession');
   await until('the session to end', () => bots[0].ended);
-  log('SHOP OK: bought, replayed the trade id, sold, left');
+  log('SHOP OK: own purse and bag, other purses unchanged, bought, replayed the trade id, sold, left');
 }
 
 (async () => {

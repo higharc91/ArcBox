@@ -521,10 +521,11 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         _doc = _doc with
         {
             Members = members, PartyLevel = Math.Max(level, _doc.PartyLevel),
-            Gold = ShopRules.Gold(_doc.Gold, result.Outcome == BattleOutcome.Won ? Rules.Encounters[save.Encounter].Gold : 0),
             Completed = result.Outcome == BattleOutcome.Won ? _doc.Completed.Add(save.Encounter) : _doc.Completed,
             World = StoryAfter(save, result),
         };
+        if (result.Outcome == BattleOutcome.Won)
+            _doc = _doc.ChangeGold(Rules.Encounters[save.Encounter].Gold, save.Members.Select(m => m.Value));
         // The story first, then the place, so that the place keeps clear of a stamp the story has just armed; both before the checkpoint,
         // so a restart at Results resumes on the new tile with the beat done.
         Land(save, result.Outcome);

@@ -206,7 +206,7 @@ public sealed record ExploreView(string Region, string Name, int Epoch, int Seq,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<ThingView>? Things = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<ThingEventView>? ThingEvents = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<WallPlug>? Plugs = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Gold = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] long? Gold = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<TraderView>? Traders = null);
 
 /// <summary>A reachable trader marker, never the full shop stock.</summary>
@@ -367,7 +367,11 @@ public sealed record TacticsHostView(string Phase, string Banner, string? Notice
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ShopView? Shop = null);
 
 /// <summary>The TV shop panel, sent separately from the walking packet.</summary>
-public sealed record ShopView(string Id, string Name, string Keeper, string Greeting, int Gold, int Seq, ImmutableArray<ShopItemView> Items, ImmutableArray<string> Feed, string? Portrait = null);
+public sealed record ShopView(string Id, string Name, string Keeper, string Greeting, long Gold, int Seq, ImmutableArray<ShopItemView> Items, ImmutableArray<string> Feed, string? Portrait = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<PurseView> Purses = default);
+
+/// <summary>A character's individual purse, for the shared TV shop display.</summary>
+public sealed record PurseView(string Member, string Name, int Gold);
 /// <summary>One stock row.</summary>
 public sealed record ShopItemView(string Item, string Name, int Price, int Count);
 
@@ -459,7 +463,7 @@ public sealed partial class TacticsGame
         }, ArcJson.Options)!.AsObject();
         // Everything in reach, for the phone's list (interactables design §2.5): it changes only as things come into reach or go. Only in a
         // region that has things, so a walk screen anywhere else is exactly as it was.
-        if (VisibleGold is { } gold) data["gold"] = gold;
+        if (VisibleGold(profile) is { } gold) data["gold"] = gold;
         if (!AllThings.IsEmpty || !RegionShops.IsEmpty)
         {
             if (leads && InteractLabel() is null && targets.Length > 0) data["interact"] = targets[0].Label;

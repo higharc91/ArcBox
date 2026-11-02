@@ -16,7 +16,7 @@ public partial class TacticsScene
     private Label? _shopPurse;
     private Label? _goldGain;
     private ShopView? _lastShop;
-    private int? _lastPurse;
+    private long? _lastPurse;
 
     private void ShowShop(TacticsHostView view)
     {
@@ -70,7 +70,11 @@ public partial class TacticsScene
                 else _shopRows.AddChild(heading);
             }
             else _shopRows.AddChild(heading);
-            _shopRows.AddChild(ArcTheme.Label($"◆ {shop.Gold} gold in the party purse", ArcTheme.Bold, 28));
+            var purses = shop.Purses.IsDefaultOrEmpty ? "Trade from your own purse on your phone"
+                : string.Join(" · ", shop.Purses.Select(p => $"{p.Name}: {p.Gold} gold"));
+            var purseLabel = ArcTheme.Label(purses, ArcTheme.Bold, 24);
+            purseLabel.AutowrapMode = TextServer.AutowrapMode.WordSmart;
+            _shopRows.AddChild(purseLabel);
             var greeting = ArcTheme.Label(shop.Greeting, ArcTheme.SemiBold, 23);
             greeting.AutowrapMode = TextServer.AutowrapMode.WordSmart;
             _shopRows.AddChild(greeting);

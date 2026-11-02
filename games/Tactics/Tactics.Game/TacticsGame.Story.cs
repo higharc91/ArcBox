@@ -295,8 +295,8 @@ public sealed partial class TacticsGame
     private void EnterNode(SceneDef scene, string id)
     {
         var node = scene.Node(id)!;
-        if (!Cursor!.Played.Contains(node.Id) && (long)_doc.Gold + node.Gold < 0) { Note($"Needs {-(long)node.Gold} gold."); StageDone(); return; }
-        if (!Cursor!.Played.Contains(node.Id)) _doc = _doc with { Gold = ShopRules.Gold(_doc.Gold, node.Gold) };
+        if (!Cursor!.Played.Contains(node.Id) && !CanPayGold(node.Gold)) { Note($"Needs {-(long)node.Gold} gold."); StageDone(); return; }
+        if (!Cursor!.Played.Contains(node.Id)) ChangePartyGold(node.Gold);
         AddFlags(node.Sets);
         var c = Cursor!;
         SetCursor(c with { Scene = scene.Id, Node = node.Id, Line = 0, Played = c.Played.Contains(node.Id) ? c.Played : c.Played.Add(node.Id), Roll = null, Checking = null });
@@ -609,7 +609,7 @@ public sealed partial class TacticsGame
         var c = Cursor!;
         _offered = SceneRun.Offered(node, StoryFlags(), PartyTags.Of(Party().Select(m => m.Character)), c.Played.ToHashSet(StringComparer.Ordinal));
         _shopOptions = _offered;
-        _offered = [.. _offered.Where(o => (long)_doc.Gold + o.Gold >= 0)];
+        _offered = [.. _offered.Where(o => CanPayGold(o.Gold))];
         if (c.Checking is { } decided)
         {
             SetCursor(c with { Checking = null });
@@ -836,6 +836,7 @@ public sealed partial class TacticsGame
     private void Decide(SceneOption option)
     {
         var (scene, beat) = (CurrentScene()!, CursorBeat());
+        if (!CanPayGold(option.Gold)) { CloseQuestion(); OpenQuestion(scene, CurrentNode()!); return; }
         if (option.Check is not null)
         {
             var offered = _offered;
@@ -848,7 +849,7 @@ public sealed partial class TacticsGame
             return;
         }
         CloseQuestion();
-        _doc = _doc with { Gold = ShopRules.Gold(_doc.Gold, option.Gold) };
+        ChangePartyGold(option.Gold);
         AddFlags(SceneRun.Sets(option, beat));
         EnterNode(scene, SceneRun.Target(option));
     }
@@ -865,11 +866,12 @@ public sealed partial class TacticsGame
     /// </summary>
     private void Roll(SceneOption option, string member)
     {
+        if (!CanPayGold(option.Gold)) { CloseQuestion(); OpenQuestion(CurrentScene()!, CurrentNode()!); return; }
         var check = option.Check!;
         var bonus = SkillCheck.Bonus(_doc.Members[member].Character, check.Skill, Rules);
         var die = _ctx.Random.Next(1, 21);
         var result = SkillCheck.Roll(die, bonus, check.Dc);
-        _doc = _doc with { Gold = ShopRules.Gold(_doc.Gold, option.Gold) };
+        ChangePartyGold(option.Gold);
         AddFlags(SceneRun.Sets(option, CursorBeat()));
         SetCursor(Cursor! with
         {
@@ -1002,7 +1004,7 @@ public sealed partial class TacticsGame
         var node = System.Text.Json.JsonSerializer.SerializeToNode(new { id = option.Id, label = option.Label, skill = option.Check?.Skill, dc = option.Check?.Dc }, ArcJson.Options)!.AsObject();
         if (option.Gold < 0)
         {
-            node["can"] = (long)_doc.Gold + option.Gold >= 0;
+            node["can"] = CanPayGold(option.Gold);
             node["needs"] = $"needs {-(long)option.Gold} gold";
         }
         return node;
@@ -1013,7 +1015,7 @@ public sealed partial class TacticsGame
         var votes = LiveVotes().ToList();
         var of = PartyQuestion ? Voters().Select(p => p.Profile!.Value.Value).Union(votes.Select(v => v.Key)).Count() : 1;
         return new StoryAskView(PartyQuestion, votes.Count, of, Away(), _telling == StoryStates.TieBreak, Decider() is { } d ? PlayerName(d) : null,
-            _closeAt, [.. OptionsShown().Select(o => new StoryOptionView(o.Id, (long)_doc.Gold + o.Gold < 0 ? $"{o.Label} (needs {-(long)o.Gold} gold)" : o.Label, o.Check?.Skill, o.Check?.Dc, PartyQuestion
+            _closeAt, [.. OptionsShown().Select(o => new StoryOptionView(o.Id, !CanPayGold(o.Gold) ? $"{o.Label} (needs {-(long)o.Gold} gold)" : o.Label, o.Check?.Skill, o.Check?.Dc, PartyQuestion
                 ? [.. _players.Where(p => votes.Any(v => v.Key == p.Profile?.Value && v.Value == o.Id)).Select(p => p.Name)]
                 : votes.Any(v => v.Value == o.Id) && Leader is { } leader ? [leader.Name] : []))], _closeAt is null ? null : _span);
     }

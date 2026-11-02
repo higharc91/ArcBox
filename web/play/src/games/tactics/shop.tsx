@@ -40,7 +40,7 @@ export function Shop({ data, send, viewId }: CustomScreenProps) {
   return <section class="tx tx-shop">
     {d.vip && <HostMenu canBattle={false} keep="Keep trading" send={send} />}
     <header><span class="tx-eyebrow">Trader · {d.shop.keeper}</span><h1>{d.shop.name}</h1>
-      <strong class="tx-shop-gold" aria-live="polite">{d.gold} gold</strong><p>{d.shop.greeting}</p></header>
+      <span class="tx-eyebrow">Your purse</span><strong class="tx-shop-gold" aria-live="polite">{d.gold} gold</strong><p>{d.shop.greeting}</p></header>
     <div class="tx-shop-tabs" role="tablist" aria-label="Trade">
       <button class="tx-btn" role="tab" aria-selected={tab === "buy"} onClick={() => setTab("buy")}>Buy</button>
       <button class="tx-btn" role="tab" aria-selected={tab === "sell"} onClick={() => setTab("sell")}>Sell</button>

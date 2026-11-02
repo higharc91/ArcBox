@@ -18,6 +18,7 @@ it("sends a unique trade id and waits for server confirmation without changing t
   render(<Shop data={data} send={send} stream={send} viewId="one" />);
   fireEvent.click(screen.getByRole("button", { name: "Buy Potion of Healing" }));
   expect(send).toHaveBeenCalledWith("shopBuy", expect.objectContaining({ shop: "herbalist", item: "potion", count: 1, trade: expect.any(String) }));
+  expect(screen.getByText("Your purse")).toBeTruthy();
   expect(screen.getByText("100 gold")).toBeTruthy();
   expect(screen.getByRole("button", { name: "Buy Potion of Healing" }).hasAttribute("disabled")).toBe(true);
 });

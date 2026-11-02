@@ -35,7 +35,7 @@ public sealed class ShopTests
         var doc = s.Game.Document;
         var target = new InteractableDef("shop", "stall", new Tile(26, 64));
         var at = Rules.ReachFor("ashen_ford")!.Where(t => t != target.At && Interactables.InReach(Rules.GroundFor("ashen_ford")!.Terrain, t, target)).Order().First();
-        doc = doc with { Gold = gold, World = doc.World! with { At = at, Facing = target.At } };
+        doc = doc with { Members = Ordinal.Map(doc.Members.Select(m => (m.Key, m.Value with { Gold = gold }))), World = doc.World! with { At = at, Facing = target.At } };
         var next = new Session(document: doc.ToJson(), game: new TacticsGame(rules ?? Rules, battleList: true));
         next.Harness.Resume(next.Lease);
         for (var i = 0; i < 4; i++) next.Harness.SetConnected(i, true);
@@ -66,18 +66,22 @@ public sealed class ShopTests
         s.Send(0, "interact", new { target = "shop:af_market_herbalist" });
         Assert.Equal(TacticsPhase.Story, s.Game.Phase);
         var member = s.Profiles[1]!.Value.Value;
+        var others = s.Game.Document.Members.Remove(member);
         var before = s.Game.Document.Members[member].Character.Bag.Sum(x => x.Item.Value == "potion_of_healing" ? x.Count : 0);
         var trade = new { shop = "af_market_herbalist", item = "potion_of_healing", count = 1, trade = "buy-one" };
         s.Send(1, "shopBuy", trade);
-        Assert.Equal(50, s.Game.Document.Gold);
+        Assert.Equal(50, s.Game.Document.Members[member].Gold);
         Assert.Equal(before + 1, s.Game.Document.Members[member].Character.Bag.Sum(x => x.Item.Value == "potion_of_healing" ? x.Count : 0));
+        Assert.Equal(others, s.Game.Document.Members.Remove(member));
+        Assert.Equal(100, s.Screen(0)!.Data.GetProperty("gold").GetInt32());
+        Assert.Equal(50, s.Screen(1)!.Data.GetProperty("gold").GetInt32());
         var again = new Session(document: s.Lease.Document);
         again.Harness.Resume(again.Lease);
         for (var i = 0; i < 4; i++) again.Harness.SetConnected(i, true);
         again.Send(1, "shopBuy", trade);
-        Assert.Equal(50, again.Game.Document.Gold);
+        Assert.Equal(50, again.Game.Document.Members[member].Gold);
         again.Send(1, "shopSell", new { trade.shop, trade.item, count = 1, member, trade = "sell-one" });
-        Assert.Equal(75, again.Game.Document.Gold);
+        Assert.Equal(75, again.Game.Document.Members[member].Gold);
         again.Send(0, "shopLeave", new { trade.shop });
         Assert.Equal(TacticsPhase.Exploration, again.Game.Phase);
     }
@@ -94,7 +98,7 @@ public sealed class ShopTests
         var after = s.Lease.Document.GetRawText();
         s.Send(2, "shopBuy", new { shop = "af_market_herbalist", item = "potion_of_healing", count = 1, trade = "too-late" });
         Assert.Equal(after, s.Lease.Document.GetRawText());
-        Assert.Equal(350, s.Game.Document.Gold);
+        Assert.Equal([400, 450, 500, 500], s.Game.Document.Members.Values.Select(m => m.Gold));
     }
 
     [Fact]
@@ -118,13 +122,13 @@ public sealed class ShopTests
         var rules = Vault.Load(["""{ "id": "coins", "kind": "pickup", "at": [3,1], "loot": [{ "gold": 25 }] }"""]);
         var s = Vault.At(new Tile(2, 1), rules);
         s.Send(0, "interact", new { target = "coins" });
-        Assert.Equal(25, s.Game.Document.Gold);
+        Assert.Equal([7, 6, 6, 6], s.Game.Document.Members.Values.Select(m => m.Gold));
         Assert.Contains("25 gold", s.Host.Notice);
         var again = new Session(document: s.Lease.Document, game: new TacticsGame(rules));
         again.Harness.Resume(again.Lease);
         for (var i = 0; i < 4; i++) again.Harness.SetConnected(i, true);
         again.Send(0, "interact", new { target = "coins" });
-        Assert.Equal(25, again.Game.Document.Gold);
+        Assert.Equal([7, 6, 6, 6], again.Game.Document.Members.Values.Select(m => m.Gold));
     }
 
     [Fact]
@@ -168,7 +172,8 @@ public sealed class ShopTests
         again.Harness.Resume(again.Lease);
         for (var i = 0; i < 4; i++) again.Harness.SetConnected(i, true);
         Assert.NotNull(again.Host.Shop);
-        Assert.Equal(100, again.Host.Shop.Gold);
+        Assert.Equal(400, again.Host.Shop.Gold);
+        Assert.All(again.Host.Shop.Purses, p => Assert.Equal(100, p.Gold));
     }
 
     [Theory]
@@ -188,11 +193,11 @@ public sealed class ShopTests
         var lore = StoryTests.EditedLore(scenes => scenes.First(s => s!["beat"]!.GetValue<string>() == StoryTests.Mayor)!["nodes"]![0]!["gold"] = 25);
         var s = StoryTests.Near(StoryTests.Mayor, lore);
         s.Send(0, "interact");
-        Assert.Equal(25, s.Game.Document.Gold);
+        Assert.Equal([7, 6, 6, 6], s.Game.Document.Members.Values.Select(m => m.Gold));
         var again = new Session(document: s.Lease.Document, game: new TacticsGame(Rules, lore: lore));
         again.Harness.Resume(again.Lease);
         for (var i = 0; i < 4; i++) again.Harness.SetConnected(i, true);
-        Assert.Equal(25, again.Game.Document.Gold);
+        Assert.Equal([7, 6, 6, 6], again.Game.Document.Members.Values.Select(m => m.Gold));
         Assert.Equal(StoryTests.Cursor(s)!.Node, StoryTests.Cursor(again)!.Node);
     }
 
@@ -219,8 +224,8 @@ public sealed class ShopTests
         funded.Harness.Resume(funded.Lease);
         for (var i = 0; i < 4; i++) funded.Harness.SetConnected(i, true);
         funded.Send(0, "vote", new { option = "cases" });
-        StoryVoteTests.Until(funded, () => funded.Game.Document.Gold == 10, "the paid choice");
-        Assert.Equal(10, funded.Game.Document.Gold);
+        StoryVoteTests.Until(funded, () => funded.Game.Document.Members.Values.Sum(m => m.Gold) == 10, "the paid choice");
+        Assert.Equal([3, 3, 2, 2], funded.Game.Document.Members.Values.Select(m => m.Gold));
     }
 
     [Fact]
@@ -237,7 +242,67 @@ public sealed class ShopTests
         s.ToBattle(everyoneAway: true);
         s.PlayOut();
         Assert.Equal(TacticsPhase.Results, s.Game.Phase);
-        Assert.Equal(37, s.Game.Document.Gold);
-        Assert.Equal(37, TacticsDocument.Read(s.Lease.Checkpoints.Single().Doc).Gold);
+        Assert.Equal([10, 9, 9, 9], s.Game.Document.Members.Values.Select(m => m.Gold));
+        Assert.Equal([10, 9, 9, 9], TacticsDocument.Read(s.Lease.Checkpoints.Single().Doc).Members.Values.Select(m => m.Gold));
+    }
+
+    [Fact]
+    public void A_poor_player_cannot_spend_a_rich_players_gold_or_spoof_the_buyer()
+    {
+        var start = AtShop(0);
+        var rich = start.Profiles[0]!.Value.Value;
+        var poor = start.Profiles[1]!.Value.Value;
+        var doc = start.Game.Document;
+        doc = doc with { Members = doc.Members.SetItem(rich, doc.Members[rich] with { Gold = 200 }) };
+        var s = new Session(document: doc.ToJson());
+        s.Harness.Resume(s.Lease);
+        for (var i = 0; i < 4; i++) s.Harness.SetConnected(i, true);
+        s.Send(0, "interact", new { target = "shop:af_market_herbalist" });
+        Assert.True(s.Screen(0)!.Data.GetProperty("items")[0].GetProperty("can").GetBoolean());
+        Assert.False(s.Screen(1)!.Data.GetProperty("items")[0].GetProperty("can").GetBoolean());
+        var before = s.Lease.Document.GetRawText();
+        s.Send(1, "shopBuy", new { shop = "af_market_herbalist", item = "potion_of_healing", count = 1, member = rich, trade = "spoof" });
+        Assert.Equal(before, s.Lease.Document.GetRawText());
+        // A non-leader sells and buys using only their own purse and bag.
+        s.Send(1, "shopSell", new { shop = "af_market_herbalist", item = "potion_of_healing", count = 1, member = poor, trade = "fund" });
+        Assert.Equal(25, s.Game.Document.Members[poor].Gold);
+        s.Send(1, "shopBuy", new { shop = "af_market_herbalist", item = "smoke_bomb", count = 1, member = rich, trade = "own-buy" });
+        Assert.Equal(0, s.Game.Document.Members[poor].Gold);
+        Assert.Equal(doc.ToJson().GetProperty("members").GetProperty(rich).GetRawText(), s.Game.Document.ToJson().GetProperty("members").GetProperty(rich).GetRawText());
+    }
+
+    [Fact]
+    public void Legacy_shared_gold_is_split_once_preserving_existing_purses_and_the_total()
+    {
+        var doc = AtShop(10).Game.Document with { Gold = 25 };
+        var migrated = TacticsDocument.Read(doc.ToJson());
+        Assert.Equal([17, 16, 16, 16], migrated.Members.Values.Select(m => m.Gold));
+        Assert.Equal(0, migrated.Gold);
+        Assert.False(migrated.ToJson().TryGetProperty("gold", out _));
+        Assert.Equal(migrated.ToJson().GetRawText(), TacticsDocument.Read(migrated.ToJson()).ToJson().GetRawText());
+    }
+
+    [Fact]
+    public void Loot_is_split_among_present_characters_only()
+    {
+        var rules = Vault.Load(["""{ "id": "coins", "kind": "pickup", "at": [3,1], "loot": [{ "gold": 25 }] }"""]);
+        var s = Vault.At(new Tile(2, 1), rules);
+        s.Harness.SetConnected(3, false);
+        s.Send(0, "interact", new { target = "coins" });
+        Assert.Equal([9, 8, 8, 0], s.Game.Document.Members.Values.Select(m => m.Gold));
+    }
+
+    [Fact]
+    public void Shared_payments_use_available_individual_balances_without_negative_purses()
+    {
+        var doc = AtShop(0).Game.Document;
+        var rich = doc.Members.Keys.Last();
+        doc = doc with { Members = doc.Members.SetItem(rich, doc.Members[rich] with { Gold = 30 }) };
+        var paid = doc.ChangeGold(-20, doc.Members.Keys);
+        Assert.Equal([0, 0, 0, 10], paid.Members.Values.Select(m => m.Gold));
+        Assert.Throws<RulesInvariantException>(() => doc.ChangeGold(-31, doc.Members.Keys));
+        var full = doc with { Members = Ordinal.Map(doc.Members.Select(m => (m.Key, m.Value with { Gold = int.MaxValue }))) };
+        full = full with { Members = full.Members.SetItem(rich, full.Members[rich] with { Gold = 0 }) };
+        Assert.Equal(25, full.ChangeGold(25, full.Members.Keys).Members[rich].Gold);
     }
 }

@@ -9,7 +9,7 @@ namespace Tactics.Game;
 /// <summary>
 /// A campaign member's character, the XP it has earned, whether it has been in a battle (<see cref="HasFought"/>; a lost
 /// battle can be worth 0 XP), whether its one free remake after fighting is used (<see cref="Remade"/>) and the player's
-/// colour (<see cref="Color"/>).
+/// colour (<see cref="Color"/>) and individual purse (<see cref="Gold"/>).
 /// </summary>
 /// <param name="Color">
 /// The player's colour, "#rrggbb", as picked at character creation or on the sheet (<see cref="PlayerColors"/>), for their TV ring, vote
@@ -19,7 +19,8 @@ namespace Tactics.Game;
 public sealed record MemberRecord(CharacterRecord Character, int Xp,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Fought = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Remade = false,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Color = null)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Color = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Gold = 0)
 {
     /// <summary>True once the character has been in a battle (or earned XP, for documents from before the flag).</summary>
     [JsonIgnore]
@@ -214,14 +215,45 @@ public sealed record TacticsDocument(int Version, string? RulesHash, int PartyLe
                   ?? throw new JsonException("The campaign document is null.");
         if (doc.Version is < 0 or > CurrentVersion)
             throw new JsonException($"Campaign document version {doc.Version} isn't supported (this build reads 0 to {CurrentVersion}).");
-        return doc with
+        doc = doc with
         {
             Version = CurrentVersion,
             Gold = Math.Max(0, doc.Gold),
             Completed = doc.Completed.IsDefault ? [] : doc.Completed,
             Members = Ordinal.Map((doc.Members ?? Ordinal.Map<MemberRecord>()).Where(m => m.Value?.Character is not null)
-                .Select(m => (m.Key, m.Value with { Character = Whole(m.Value.Character) }))),
+                .Select(m => (m.Key, m.Value with { Character = Whole(m.Value.Character), Gold = Math.Max(0, m.Value.Gold) }))),
         };
+        // The first shop build stored a shared purse. Split it once, then omit the legacy field on future writes.
+        return doc.Gold > 0 && !doc.Members.IsEmpty
+            ? (doc with { Gold = 0 }).ChangeGold(doc.Gold, doc.Members.Keys) : doc;
+    }
+
+    /// <summary>
+    /// Divides a reward (or a shared story payment) across these members' own purses. Whole-gold remainders go in stable
+    /// profile order; capped/full purses or empty purses on payment redistribute their share without losing gold.
+    /// </summary>
+    public TacticsDocument ChangeGold(int amount, IEnumerable<string> profiles)
+    {
+        var ids = profiles.Distinct(StringComparer.Ordinal).Where(Members.ContainsKey).Order(StringComparer.Ordinal).ToArray();
+        if (amount == 0 || ids.Length == 0) return this;
+        var members = Members;
+        var remaining = Math.Abs((long)amount);
+        long Capacity(string id) => amount > 0 ? int.MaxValue - (long)members[id].Gold : members[id].Gold;
+        if (ids.Sum(Capacity) < remaining) throw new RulesInvariantException("The participating purses cannot cover this gold change.");
+        while (remaining > 0)
+        {
+            var active = ids.Where(id => Capacity(id) > 0).ToArray();
+            var share = remaining / active.Length;
+            var extra = remaining % active.Length;
+            for (var i = 0; i < active.Length; i++)
+            {
+                var id = active[i];
+                var part = (int)Math.Min(Capacity(id), share + (i < extra ? 1 : 0));
+                members = members.SetItem(id, members[id] with { Gold = ShopRules.Gold(members[id].Gold, amount > 0 ? part : -part) });
+                remaining -= part;
+            }
+        }
+        return this with { Members = members };
     }
 
     /// <summary>

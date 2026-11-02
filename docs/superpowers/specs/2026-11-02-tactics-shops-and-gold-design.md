@@ -44,42 +44,41 @@ mini-games, stealing, player-to-player trade, a party stash UI beyond what selli
 
 ## 2. Gold
 
-### 2.1 Where it lives — USER DECISION A
+### 2.1 Where it lives — owner decision A2
 
-| Option | Pros | Cons |
-|---|---|---|
-| **A1. One party purse (default)** | Simple; one number on the TV; no "whose gold" arguments in a room game; matches the shared campaign document. | Less individual ownership. |
-| A2. Per character | Like D&D/BG3; supports "I'll buy my own". | Every purchase asks "whose gold"; transfers needed; splitting loot becomes a decision. |
+Each player's `MemberRecord` saves its own non-negative `Gold` integer alongside its own character and bag. The authenticated
+phone buys with that purse and receives the item in that bag; sale proceeds return to the seller. Other players' balances and
+inventories do not change. Interacting with the keeper opens trading on every phone; each connected player with a character can
+trade independently until the leader leaves.
 
-**Default A1.** `WorldSave` is per region-walk; the purse is campaign-wide, so it goes on `TacticsDocument`:
+No save version bump is required. A missing personal balance reads as zero and zero is omitted. A save from the initial shop build
+with a root `TacticsDocument.Gold` balance migrates by splitting that balance across its saved members once, preserving existing
+personal balances and the total. The root field is retained only to read legacy saves and is omitted once migrated.
 
-```csharp
-public sealed record TacticsDocument(..., WorldSave? World = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Gold = 0,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ShopsSave? Shops = null)
-```
-
-No version bump (as 5b/5d/interactables did). A document from before reads `Gold = 0`. Gold is a non-negative `int` (gp). Every change
-goes through one method that refuses to go below 0 (`RulesInvariantException` if code tries; content errors at load).
+**Owner reward decision:** split **all** gold rewards evenly, including chests/pickups. Battle rewards go to the saved battle
+participants, including a participant whose phone disconnected during the fight. Exploration and story rewards go to present
+players with characters. Whole-gold remainders go in stable profile order, so no gold is lost and a restart cannot change the
+allocation. Shared story costs are divided across present players' available balances; an empty purse's share is covered by the
+others. Shop purchases always use the buyer's balance alone.
 
 ### 2.2 How gold is earned — USER DECISION B
 
 Defaults, all content-driven and each switchable off:
 - **Loot.** Interactables' `loot` gains `{ "gold": 25 }` entries alongside `{ item, count }` (containers, caches, pickups — the
-  `pickups.coin_pile` art key already exists). Goes to the purse, never to a bag. Line: "Found: 25 gold."
+  `pickups.coin_pile` art key already exists). Split across present players' purses, never put into a bag. Line: "Found: 25 gold."
 - **Battles.** An encounter may carry `gold` (a fixed number per encounter in its file; default none). Paid on a **win** only (the loss
   rule already pays no XP; same here).
-- **Story.** A scene option or node can `gold: +N / -N` (a reward, a bribe). `-N` needs the purse to cover it: the option is disabled
+- **Story.** A scene option or node can `gold: +N / -N` (a reward, a bribe). `-N` needs the present players' balances to cover it: the option is disabled
   (shown with "needs 20 gold") when it can't. check.py and `LoreBook` validate it.
 - **Selling** (§4).
-- **Starting gold:** default 0. USER DECISION: a starting purse per party (e.g. 15 gp × members)?
+- **Starting gold:** 0 per player.
 
 Not by default: gold per kill, gold that scales with level, gold from the overworld mobs idea (that's tied to the farming question in §8).
 
 ### 2.3 What players see
-- **TV:** the purse on the party banner while walking ("◆ 42 gold"), and a "+25 gold" pop like XP's. Hidden while it's 0 and no shop
+- **TV:** the total across player purses on the party banner while walking (explicitly labelled), individual balances in the shop, and a "+25 gold" pop like XP's. Hidden while it's 0 and no shop
   has ever been seen, so Ashen Ford's TV frame is unchanged until gold exists (keep the size budget: see §6.4).
-- **Phone:** on the walk screen's party strip, only when > 0 or in a region with shops (byte-identical otherwise).
+- **Phone:** the viewer's own balance on the walk screen's party strip and labelled "Your purse" in the shop, only when > 0 or in a region with shops (byte-identical otherwise).
 
 ## 3. Prices and the item catalogue
 
@@ -169,8 +168,7 @@ A new **Shop** sub-state of the Story phase (as interactions reuse Story): walki
 (or a sibling optional field), so a restart lands back in the shop screen.
 
 1. The leader picks the target → the TV shows the keeper's greeting (one narrated line, 5d style, voiced if a clip exists).
-2. **Shop open.** Every phone shows the shop screen (§6.2); the TV shows the shop panel (§6.1). Anyone present can buy or sell (USER
-   DECISION F: default **anyone**; alternatives: the leader only, or a vote per purchase over N gold).
+2. **Shop open.** Every phone shows the shop screen (§6.2); the TV shows the shop panel (§6.1). Every present player with a character can buy or sell from their own purse and bag.
 3. **Leave.** The leader's "Leave" (or the last phone leaving) closes it with the farewell line, back to walking.
 
 ### 5.2 Buying and selling: inputs and idempotency
@@ -181,16 +179,15 @@ New inputs, accepted only while that shop is open:
 - (`shopHaggle { shop }` if decision E is on — starts the Persuasion check; the shop screen returns afterwards.)
 
 `trade` is a client-generated id (a UUID per tap). The server keeps the last 32 trade ids per shop in `ShopsSave`; a repeated id is a
-no-op that re-sends the current state. Each trade is **one atomic change of the document**: purse, stock and the bag in a single
+no-op that re-sends the current state. Each trade is **one atomic change of the document**: the authenticated player's purse, stock and their bag in a single
 `_doc with { … }` and a single save, exactly as `LootDue` loot is applied. Checks, in order, all server-side: the shop is open and is
 this one; the player is present; the item is in stock (buy) or in that member's bag (sell) with enough count; the keeper buys that tag
-(sell); the purse covers the price (buy). A refused trade answers with a reason the phone shows ("Not enough gold", "Sold out").
+(sell); that player's own purse covers the price (buy). A refused trade answers with a reason the phone shows ("Not enough gold", "Sold out").
 
-**Whose bag gets a bought item — USER DECISION G.** Default: **the buyer's own character** (the phone that tapped Buy). If they have
-no character (a spectator), Buy is disabled. Alternatives: the leader's bag (as loot today), or a pick list on the phone.
+**Whose bag gets a bought item — owner decision G.** **The buyer's own character** (the phone that tapped Buy). If they have
+no character (a spectator), Buy is disabled.
 
-**Selling from whose bag:** the seller picks one of the **party's** characters' bags (default: only their own; USER DECISION H: allow
-selling a companion's items?).
+**Selling from whose bag:** only the authenticated seller's own bag. Sale proceeds return to that player's purse.
 
 ### 5.3 Concurrency
 Two phones buying the last potion: the server serialises inputs (it already does per room); the second gets "Sold out". The phone
@@ -202,7 +199,7 @@ Default: no weight or slot limit (the bag is a list of stacks). Optional cap per
 ## 6. Views and contract
 
 ### 6.1 TV
-- **Shop panel:** keeper portrait/name, the shop name, the stock list (icon, name, price, count; sold out greyed), the purse, and a
+- **Shop panel:** keeper portrait/name, the shop name, the stock list (icon, name, price, count; sold out greyed), individual character balances, and a
   short feed of trades ("Ana bought a Potion of Healing — 50"). Reuse the story panel's frame and fonts.
 - **Sounds:** `ui_coin_buy`, `ui_coin_sell`, `ui_shop_open`, `ui_shop_close` (keys only — **don't generate audio**; fall back to
   `ui_loot`/`ui_confirm`, as ThingSounds falls back).
@@ -212,7 +209,7 @@ Default: no weight or slot limit (the bag is a list of stacks). Optional cap per
 ### 6.2 Phone: the shop screen
 `{ screen: "shop", shop: { id, name, keeper }, gold, items: [{ item, name, price, count, can }], sell: [{ member, item, name, price,
 count }], you: { member?, canBuy }, leader: bool, haggle?: {...} }`. Buy row: name, price, stock, a −/+ count and Buy. Sell tab: the
-bags you may sell from, with the sell price. Leave (leader). Item details reuse the character screens' details popup (what it does in
+viewer's own bag, with the sell price. `gold` is always the viewer's own balance. Leave (leader). Item details reuse the character screens' details popup (what it does in
 play, from the rules pack). Large tap targets; works one-handed (same rules as walk.tsx).
 
 ### 6.3 Contract changes
@@ -285,7 +282,7 @@ TDD throughout; `dotnet test` (solution) and `cd web/play && npm test` green wit
 1. **Logic:** `ItemDef.Price`, a `shops` def + loader + validation (§4.2), the `stall` kind, `ShopRules` (buy/sell price with
    `priceMod`, ratio, haggle), with unit tests. Pack: prices in `items.json`, `SellRatio` in a rules file, `rules/shops/ashen_ford.json`
    with one shop (use a merchant person in the Ash Market area; check the tile is reachable).
-2. **Save:** `TacticsDocument.Gold`, `ShopsSave`, round-trip tests incl. an old document and a default-not-written check.
+2. **Save:** `MemberRecord.Gold` (legacy `TacticsDocument.Gold` migrates once), `ShopsSave`, round-trip tests incl. an old document and a default-not-written check.
 3. **Earning:** interactable `loot` gold entries; encounter `gold` on a win; story `gold` options (check.py + `LoreBook` parity
    tests); the "+N gold" line/event.
 4. **The trade flow:** targets for keepers, the Shop sub-state, inputs with trade ids, atomic apply, restart and reconnect tests
@@ -299,16 +296,16 @@ TDD throughout; `dotnet test` (solution) and `cd web/play && npm test` green wit
 
 ## Implementation decisions (issue #68)
 
-Built on `shops-and-gold`. The following **USER DECISION** defaults from the issue are the implemented baseline, pending any owner override:
+Built on `shops-and-gold`. The following **USER DECISION** defaults from the issue are the implemented baseline, with the owner's subsequent purse/reward correction applied:
 
 | Decision | Implemented default |
 |---|---|
-| A | One campaign-wide party purse. |
+| A | One saved purse and bag per player. All gold rewards split evenly among participants, including chest gold. Legacy shared gold splits once on load. |
 | B / B2 | Content-defined loot, winning encounters and story rewards/payments; zero starting gold; no per-kill gold. |
 | C | Healing 50 gp; greater healing 150 gp; alchemist's fire 50 gp; smoke bomb 25 gp. Oil remains absent; its future default is 10 gp. |
 | D | Content sellRatio 0.5, rounded down after the shop's rounded-up buy price. |
 | E | Haggling off. The DC is validated content metadata; no haggle input or discount is enabled. |
-| F / G / H | Any connected player with a character trades; purchases go to their own bag; selling companions' bags is refused. |
+| F / G / H | Every connected player with a character trades from their own phone once the keeper opens; purchases use their own purse and go to their own bag; selling companions' bags is refused. |
 | I | No gameplay bag limit; integer overflow is refused. |
 | J | Per-line chapter restock or never. Rest is reserved content metadata; no rest mechanic exists. |
 | K | One herbalist, Wenna's Remedies, at merchant person 30 in Ashen Ford's painted market. Accepts potion and obscure tags (the existing smoke-bomb tag). |

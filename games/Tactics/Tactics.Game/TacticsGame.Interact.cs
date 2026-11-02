@@ -240,7 +240,7 @@ public sealed partial class TacticsGame
     private void GiveLoot(InteractableDef def, string member)
     {
         foreach (var loot in def.Loot.Where(l => l.Gold > 0))
-            _doc = _doc with { Gold = ShopRules.Gold(_doc.Gold, loot.Gold) };
+            ChangePartyGold(loot.Gold);
         if (def.Loot.IsEmpty || !_doc.Members.TryGetValue(member, out var record))
             return;
         var bag = record.Character.Bag.ToList();

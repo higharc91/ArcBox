@@ -54,7 +54,7 @@ public static class ShopRules
     /// <summary>Whether the keeper accepts this priced consumable.</summary>
     public static bool Accepts(ItemDef item, ShopDef shop) => item.Price is not null && item.Tags.Any(shop.Buys.Contains);
 
-    /// <summary>A checked party-purse change; never negative or wrapped.</summary>
+    /// <summary>A checked individual-purse change; never negative or wrapped.</summary>
     public static int Gold(int before, int change)
     {
         var after = (long)before + change;

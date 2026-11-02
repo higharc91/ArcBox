@@ -10,8 +10,14 @@ public sealed partial class TacticsGame
 {
     private ImmutableArray<ShopDef> RegionShops => _region is null ? [] : Rules.ShopsIn(_region.Def.Id);
     private ShopDef? OpenShop => _doc.World?.Shop is { } visit ? RegionShops.FirstOrDefault(s => s.Id == visit.ShopId && ShopRules.Present(s, StoryFlags())) : null;
-    private int? VisibleGold => _doc.Gold > 0 || !RegionShops.IsEmpty || _doc.Shops is not null ? _doc.Gold : null;
-    private int? WorldGold => _doc.Gold > 0 || _doc.Shops is not null ? _doc.Gold : null;
+    private int? VisibleGold(ProfileId profile) => _doc.For(profile) is { } member
+        && (member.Gold > 0 || !RegionShops.IsEmpty || _doc.Shops is not null) ? member.Gold : null;
+    private long TotalGold => _doc.Members.Values.Sum(m => (long)m.Gold);
+    private long? WorldGold => TotalGold > 0 || _doc.Shops is not null ? TotalGold : null;
+    private IEnumerable<string> GoldParticipants => Party().Where(m => m.Here).Select(m => m.Member);
+    private long StoryGold => GoldParticipants.Sum(id => (long)_doc.Members[id].Gold);
+    private bool CanPayGold(int change) => change >= 0 || StoryGold + change >= 0;
+    private void ChangePartyGold(int change) => _doc = _doc.ChangeGold(change, GoldParticipants);
     private readonly List<string> _tradeFeed = [];
 
     private Tile KeeperTile(ShopDef shop) => shop.Keeper.Person is { } person
@@ -95,8 +101,8 @@ public sealed partial class TacticsGame
         if (!buy && (Str(input.Data, "member") != profile.Value || stack is null || stack.Count < count)) { Toast(player.Id, "You may only sell items in your own bag."); return; }
         if (!buy && !ShopRules.Accepts(item, shop)) { Toast(player.Id, "The keeper does not buy that item."); return; }
         var total = (long)(buy ? ShopRules.Buy(item, shop) : ShopRules.Sell(item, shop)) * count;
-        if (total > int.MaxValue || !buy && (long)_doc.Gold + total > int.MaxValue) { Toast(player.Id, "That trade exceeds the gold limit."); return; }
-        if (buy && _doc.Gold < total) { Toast(player.Id, "Not enough gold"); return; }
+        if (total > int.MaxValue || !buy && (long)member.Gold + total > int.MaxValue) { Toast(player.Id, "That trade exceeds the gold limit."); return; }
+        if (buy && member.Gold < total) { Toast(player.Id, "Not enough gold"); return; }
         var newCount = (long)(stack?.Count ?? 0) + (buy ? count : -count);
         if (newCount > int.MaxValue) { Toast(player.Id, "That stack is too large."); return; }
         if (stack is not null) bag = bag.Remove(stack);
@@ -107,8 +113,7 @@ public sealed partial class TacticsGame
         var shops = (_doc.Shops?.Shops ?? Ordinal.Map<ShopSave>()).SetItem(shop.Id, stock);
         _doc = _doc with
         {
-            Gold = ShopRules.Gold(_doc.Gold, buy ? -(int)total : (int)total),
-            Members = _doc.Members.SetItem(profile.Value, member with { Character = member.Character with { Bag = bag } }),
+            Members = _doc.Members.SetItem(profile.Value, member with { Gold = ShopRules.Gold(member.Gold, buy ? -(int)total : (int)total), Character = member.Character with { Bag = bag } }),
             Shops = new ShopsSave(shops, stock.Chapter),
             World = _doc.World! with { Shop = _doc.World.Shop! with { Seq = stock.Seq } },
         };
@@ -125,9 +130,9 @@ public sealed partial class TacticsGame
         return Custom("shop", new
         {
             shop = new { id = shop.Id, name = shop.Name, keeper = shop.Name, greeting = shop.Greeting },
-            gold = _doc.Gold,
+            gold = member?.Gold ?? 0,
             items = shop.Stock.Select(s => new { item = s.Item.Value, name = Rules.Items[s.Item].Name, price = ShopRules.Buy(Rules.Items[s.Item], shop),
-                count = stock.Stock[s.Item.Value], can = member is not null && _online.Contains(player.Id) && stock.Stock[s.Item.Value] != 0 && _doc.Gold >= ShopRules.Buy(Rules.Items[s.Item], shop),
+                count = stock.Stock[s.Item.Value], can = member is not null && _online.Contains(player.Id) && stock.Stock[s.Item.Value] != 0 && member.Gold >= ShopRules.Buy(Rules.Items[s.Item], shop),
                 detail = Tooltips.For(Rules.Abilities[Rules.Items[s.Item].Use], _doc.PartyLevel, Rules) }),
             sell = member is null ? [] : member.Character.Bag.Where(s => ShopRules.Accepts(Rules.Items[s.Item], shop))
                 .Select(s => new { member = profile.Value, item = s.Item.Value, name = Rules.Items[s.Item].Name, price = ShopRules.Sell(Rules.Items[s.Item], shop), count = s.Count }).ToArray(),
@@ -140,7 +145,8 @@ public sealed partial class TacticsGame
     }
 
     private ShopView? ShopViewOf() => OpenShop is not { } shop ? null : new ShopView(shop.Id, shop.Name, shop.Name,
-        shop.Greeting, _doc.Gold, StockOf(shop).Seq,
+        shop.Greeting, TotalGold, StockOf(shop).Seq,
         [.. shop.Stock.Select(s => new ShopItemView(s.Item.Value, Rules.Items[s.Item].Name, ShopRules.Buy(Rules.Items[s.Item], shop), StockOf(shop).Stock[s.Item.Value]))],
-        [.. _tradeFeed], shop.Keeper.Person is { } person ? "characters." + _region!.Def.People[person].Preset : null);
+        [.. _tradeFeed], shop.Keeper.Person is { } person ? "characters." + _region!.Def.People[person].Preset : null,
+        [.. Party().Select(m => new PurseView(m.Member, m.Character.Name, _doc.Members[m.Member].Gold))]);
 }
