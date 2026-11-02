@@ -262,71 +262,66 @@ public static class AshenFordDraft
         new("red_fox", "russet", (82, 38)),
     ];
 
-    /// <summary>One short fence around each field, with gaps left as gates and a shared opening between the two lower farms.</summary>
+    /// <summary>
+    /// A fence round each field, standing on the field's own level, with gaps for gates. Neighbouring fields share one rail (a tee where three
+    /// arms meet), a rail stops against rock rather than on its lip, and the sunken lanes between the southern fields are left open as tracks.
+    /// </summary>
     private static Stand[] FarmFenceStands()
     {
-        var across = new HashSet<(int X, int Y)>();
-        var along = new HashSet<(int X, int Y)>();
-        var corners = new HashSet<(string Variant, (int X, int Y) Tile)>();
-        void Horizontal(int y, int left, int right, int gateLeft = int.MaxValue, int gateRight = int.MinValue)
+        var fence = new Dictionary<(int X, int Y), string>();
+        void Across(int y, int left, int right, params int[] gates)
         {
             for (var x = left; x <= right; x++)
-                if (x < gateLeft || x > gateRight)
-                    across.Add((x, y));
+                if (!gates.Contains(x))
+                    fence[(x, y)] = "oak";
         }
-        void Vertical(int x, int top, int bottom, int gateTop = int.MaxValue, int gateBottom = int.MinValue)
+        void Along(int x, int top, int bottom, params int[] gates)
         {
             for (var y = top; y <= bottom; y++)
-                if (y < gateTop || y > gateBottom)
-                    along.Add((x, y));
+                if (!gates.Contains(y))
+                    fence[(x, y)] = "oak_reversed";
         }
-        void Plot(int left, int top, int right, int bottom, int gateX, int gateY, int sideGapX = int.MinValue, int sideGapTop = int.MinValue, bool openLeft = false)
-        {
-            Horizontal(top, left, right, gateY == top ? gateX : int.MaxValue, gateY == top ? gateX + 1 : int.MinValue);
-            Horizontal(bottom, left, right, gateY == bottom ? gateX : int.MaxValue, gateY == bottom ? gateX + 1 : int.MinValue);
-            if (!openLeft)
-                Vertical(left, top, bottom, sideGapX == left ? sideGapTop : int.MaxValue, sideGapX == left ? sideGapTop + 1 : int.MinValue);
-            Vertical(right, top, bottom, sideGapX == right ? sideGapTop : int.MaxValue, sideGapX == right ? sideGapTop + 1 : int.MinValue);
-            if (!openLeft)
-                corners.Add(("nw", (left, top)));
-            corners.Add(("ne", (right, top)));
-            if (!openLeft)
-                corners.Add(("sw", (left, bottom)));
-            corners.Add(("se", (right, bottom)));
-        }
+        void Join(int x, int y, string variant) => fence[(x, y)] = "join_" + variant;
 
-        Plot(33, 7, 47, 21, 39, 21);                     // Mayor's Forty, gate south
-        Plot(33, 22, 47, 33, 39, 33);                    // Long Acre, gate into Gate Close
-        Plot(33, 33, 47, 42, 39, 42);                    // Gate Close shares the fence at y=33
-        Plot(17, 32, 32, 42, 23, 42);                    // Hearthfield
-        Plot(15, 81, 29, 88, 21, 81, 29, 85, openLeft: true); // Southfield opens at the reeve's door and follows the cliff edge
-        Plot(32, 81, 41, 92, 36, 81, 41, 87, openLeft: true); // Wardens' Strip ends above the scarp
-        Plot(41, 82, 51, 92, 45, 82, 41, 87);                // Low Field shares the path opening and the set-back south rail
-        Plot(33, 96, 48, 106, 39, 96, openLeft: true);       // Ten Rods ends above the scarp
+        // Mayor's Forty, Long Acre and Gate Close, one above the other, share their rails; Hearthfield shares Gate Close's west one.
+        Across(8, 34, 45); Join(46, 8, "ne");
+        Along(46, 9, 20); Join(46, 21, "tee_sw");
+        Across(21, 35, 45, 39, 40);                         // Mayor's Forty opens into Long Acre
+        Along(46, 22, 32); Join(46, 33, "tee_sw");
+        Join(33, 33, "nw"); Across(33, 34, 45, 39, 40);     // Long Acre into Gate Close
+        Along(46, 34, 41); Join(46, 42, "se");
+        Along(33, 34, 41); Join(33, 42, "tee_sw");
+        Across(42, 34, 45, 39, 40);                         // Gate Close to the lane under the town wall
+        Across(42, 18, 32, 23, 24);                         // Hearthfield's gate
+        Along(17, 37, 41); Join(17, 42, "sw");
 
-        // Two adjoining pens meet the same shared rail at these points. Give that rail a three-way join instead of
-        // drawing a second complete fence through it. Every other corner is a two-arm join with one shared post.
-        corners.RemoveWhere(c => c.Tile is (33, 33) or (47, 33) or (41, 82) or (41, 92));
-        corners.Add(("tee_sw", (33, 33)));
-        corners.Add(("tee_sw", (47, 33)));
-        corners.Add(("tee_sw", (41, 82)));
-        corners.Add(("tee_sw", (41, 92)));
-        foreach (var corner in corners)
-        {
-            across.Remove(corner.Tile);
-            along.Remove(corner.Tile);
-        }
-        along.Remove((29, 84));      // the reeve's cottage stands there, at the head of Southfield's east side
+        // Southfield, the reeve's: its cottage at (29, 84) stands in the east rail, and its door opens at (29, 86).
+        Join(16, 82, "nw"); Across(82, 17, 28, 21, 22); Join(29, 82, "ne");
+        Along(16, 83, 87); Join(16, 88, "sw");
+        Across(88, 17, 28); Join(29, 88, "se");
+        Along(29, 83, 87, 84, 85, 86);
 
+        // Wardens' Strip and Low Field, with the sunken track at x 41 between them.
+        Join(32, 82, "nw"); Across(82, 33, 39, 36, 37); Join(40, 82, "ne");
+        Along(32, 83, 89);
+        Along(40, 83, 91, 87, 88); Join(40, 92, "se");
+        Across(92, 33, 39);
+        Join(42, 82, "nw"); Across(82, 43, 49, 45, 46); Join(50, 82, "ne");
+        Along(42, 83, 91, 87, 88); Join(42, 92, "sw");
+        Along(50, 83, 90);                                  // it stops where the bank drops to the stream
+        Across(92, 43, 49);
+
+        // Ten Rods, above the scarp, its gate on the lane at y 96.
+        Across(97, 40, 46, 42, 43); Join(47, 97, "ne");
+        Along(47, 98, 105); Join(47, 106, "se");
+        Across(106, 34, 46);
+
+        Stand Of(string id, string variant, string key) => new(id, variant, [.. fence.Where(f => f.Value == key).Select(f => f.Key).Order()]);
         return
         [
-            new Stand("fence", "oak", [.. across]),
-            new Stand("fence", "oak_reversed", [.. along]),
-            new Stand("fence_join", "nw", corners.Where(c => c.Variant == "nw").Select(c => c.Tile).ToArray()),
-            new Stand("fence_join", "ne", corners.Where(c => c.Variant == "ne").Select(c => c.Tile).ToArray()),
-            new Stand("fence_join", "sw", corners.Where(c => c.Variant == "sw").Select(c => c.Tile).ToArray()),
-            new Stand("fence_join", "se", corners.Where(c => c.Variant == "se").Select(c => c.Tile).ToArray()),
-            new Stand("fence_join", "tee_sw", corners.Where(c => c.Variant == "tee_sw").Select(c => c.Tile).ToArray()),
+            Of("fence", "oak", "oak"),
+            Of("fence", "oak_reversed", "oak_reversed"),
+            .. new[] { "nw", "ne", "sw", "se", "tee_sw" }.Select(v => Of("fence_join", v, "join_" + v)),
         ];
     }
 
@@ -619,7 +614,7 @@ public static class AshenFordDraft
             foreach (var (x, y) in stand.At)
             {
                 var tile = new Tile(x, y);
-                // Farm boundaries follow the land; never stand a fence on an impassable cliff face or its broken steps.
+                // Farm boundaries follow the land; never stand a fence on an impassable cliff face or a drop's lip.
                 if ((stand.Id is "fence" or "fence_join") && FenceOnCliff(source, tile))
                     continue;
                 placed.TryAdd(tile, (stand.Id, stand.Variant));
@@ -635,8 +630,9 @@ public static class AshenFordDraft
         if (source.Get(tile) is not { } ground || ground.Flags.HasFlag(TileFlags.Impassable) || ground.Material.StartsWith("cave_floor/", StringComparison.Ordinal))
             return true;
 
+        // A fence may end against rock that rises beside it, but never stands on the lip of a drop.
         foreach (var (x, y) in new[] { (tile.X + 1, tile.Y), (tile.X - 1, tile.Y), (tile.X, tile.Y + 1), (tile.X, tile.Y - 1) })
-            if (source.Get(new Tile(x, y)) is { } neighbour && Math.Abs(neighbour.Height - ground.Height) > 1)
+            if (source.Get(new Tile(x, y)) is { } neighbour && ground.Height - neighbour.Height > 1)
                 return true;
 
         return false;

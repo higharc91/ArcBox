@@ -900,6 +900,29 @@ public sealed class AshenFordDraftTests
     }
 
     [Fact]
+    public void Each_fence_stands_on_its_fields_level_and_no_rail_is_doubled()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var fences = Props(source).Where(p => p.Id is "fence" or "fence_join").ToDictionary(p => p.At, p => p.Variant);
+        var roads = new HashSet<string>(["path/packed", "cobble/grey", "cobble/warm", "flagstone/grey"]);
+
+        Assert.NotEmpty(fences);
+        foreach (var (at, variant) in fences)
+        {
+            var ground = source.Get(at)!;
+            Tile[] round = [new(at.X + 1, at.Y), new(at.X - 1, at.Y), new(at.X, at.Y + 1), new(at.X, at.Y - 1)];
+            Assert.DoesNotContain(ground.Material, roads);
+            Assert.All(round.Where(fences.ContainsKey), n => Assert.True(Math.Abs(source.Get(n)!.Height - ground.Height) <= 1, $"The rail steps up a cliff at {at}."));
+            Assert.All(round.Select(source.Get).OfType<TileInfoNamed>(), n => Assert.True(ground.Height - n.Height <= 1, $"The fence at {at} stands on a lip."));
+            // Two fields side by side share a rail, rather than each having its own a tile apart.
+            Assert.False(variant == "oak" && fences.GetValueOrDefault(new Tile(at.X, at.Y + 1)) == "oak", $"A doubled rail at {at}.");
+            Assert.False(variant == "oak_reversed" && fences.GetValueOrDefault(new Tile(at.X + 1, at.Y)) == "oak_reversed", $"A doubled rail at {at}.");
+        }
+    }
+
+    [Fact]
     public void A_wood_is_dense_enough_to_be_one_and_the_road_through_it_stays_open()
     {
         var draft = Draft.Value;
