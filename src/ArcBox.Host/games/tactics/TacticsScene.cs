@@ -64,6 +64,10 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private string? _worldRegion;
     private string? _unreadableWorld;
     private WalkShow? _walk;
+    private ThingShow? _things;
+    private ThingArt? _thingArt;
+    private ExploreView? _thingsFed;    // the last view the things were given
+    private bool _thingsOff;            // the pack's art for things can't be read: they're left out, and nothing else stops
     private WorldHud? _worldHud;
     private ExploreView? _explore;
     private WalkStats? _walkStats;
@@ -384,6 +388,66 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _fed = next.View;
     }
 
+    /// <summary>
+    /// The things to interact with, for a newly opened world: drawn with the pack's art for them, its effects and its sounds. With the art
+    /// check (<c>--world-demo=things</c>), each is labelled with its key and where its picture came from.
+    /// </summary>
+    private ThingShow? ThingsFor(BoardTerrain terrain, UnitArt art)
+    {
+        if (_thingsOff || !_content.TryGetValue(BasePack, out var root))
+        {
+            return null;
+        }
+        try
+        {
+            _thingArt ??= ThingArt.Load(root);
+            _fx ??= FxArt.Load(root);
+        }
+        catch (Exception ex) when (ex is IOException or JsonException or FormatException or ArgumentException or InvalidOperationException or KeyNotFoundException)
+        {
+            _thingsOff = true;
+            GD.PushError($"Tactics world: can't read the art for things, so they're left out: {ex.Message}");
+            return null;
+        }
+        return new ThingShow(terrain, art, _thingArt, _fx, _sound, _thingCaptions);
+    }
+
+    /// <summary>Labels every thing with its art key and source: the art check's (<see cref="ThingsDemo"/>).</summary>
+    public bool ThingCaptions
+    {
+        get => _thingCaptions;
+        set
+        {
+            _thingCaptions = value;
+            if (_things is { } things)
+            {
+                things.Captions = value;
+            }
+        }
+    }
+
+    private bool _thingCaptions;
+
+    /// <summary>The things on screen, or nearly: only those cost the overlay anything, so a region thick with them costs no more than a few.</summary>
+    private static IEnumerable<BoardUnit> InView(WorldCanvas world, IEnumerable<BoardUnit> things)
+    {
+        var view = world.View;
+        var near = new ArtArea(view.Min - new System.Numerics.Vector2(ThingMargin), view.Max + new System.Numerics.Vector2(ThingMargin));
+        return things.Where(u => WorldPlan.AreaOf(u).Overlaps(near));
+    }
+
+    private const float ThingMargin = 96;     // art pixels: an emote over a tall door still comes in from the edge
+
+    /// <summary>Gives the things each new view of this region, whatever the walk is following: they're drawn as the server says, all through a fight.</summary>
+    private void FeedThings()
+    {
+        if (_things is { } things && _explore is { } explore && !ReferenceEquals(explore, _thingsFed) && explore.Region == _worldRegion)
+        {
+            things.Receive(explore);
+            _thingsFed = explore;
+        }
+    }
+
     /// <summary>A frame of walking: everything that moves, moved. It touches no node that isn't moving, and it doesn't wait for anything.</summary>
     private void WalkOn(WorldCanvas world, double delta)
     {
@@ -409,8 +473,11 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         {
             _walk = new WalkShow(plan.Terrain, art, _sound);
             _fed = null;
+            _things = ThingsFor(plan.Terrain, art);
+            _thingsFed = null;
         }
         FeedWalk();
+        FeedThings();
 
         var frame = _lastWalk = _walk.Frame(delta, _cover.Reveal.Revealed, _director is { } director ? WalkStage.Of(director, _stageShake) : null);
         if (frame.Cut)
@@ -419,7 +486,13 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         }
         world.Place(frame.Fit);
         world.Aim(frame.Tile, frame.Velocity);
-        world.ShowUnits(frame.Units, art);
+        var things = _things?.Frame(delta, _walk.Pixels);
+        world.ShowUnits(things is { Units.IsEmpty: false } shown ? [.. frame.Units.Concat(InView(world, shown.Units)).OrderBy(u => u.Order)] : frame.Units, art);
+        world.ShowEffects(things?.Effects ?? []);
+        foreach (var sound in things?.Sounds ?? [])
+        {
+            _audio.Play(sound, ThingSounds.Db);
+        }
         if (frame.Footstep is { } step)
         {
             _audio.Play(step, WorldTuning.FootstepDb);
@@ -905,11 +978,11 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private void OpenWorld(string root, string region)
     {
         _worldRegion = region;
-        _walk = null;
+        (_walk, _things) = (null, null);
         (_revealed, _loadingShot) = (false, false);
         _walkStats = LogWalks ? new WalkStats() : null;
         _walkLog = LogWalks ? new WalkLog() : null;
-        _world = new WorldCanvas(root, () => DemoRegion.FromPack(root, region));
+        _world = new WorldCanvas(root, () => DemoRegion.Load(root, region));
         (_stagePlan, _worldSaid, _fed) = (null, null, null);
         _groundShown = new StageGround();
         _repaints.Take();       // the old world's blocks are gone with it
@@ -925,7 +998,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             RemoveChild(world);
             world.QueueFree();
         }
-        (_world, _walk, _worldRegion) = (null, null, null);
+        (_world, _walk, _things, _worldRegion) = (null, null, null, null);
     }
 
     /// <summary>

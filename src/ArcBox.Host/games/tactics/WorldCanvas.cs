@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Godot;
 using Tactics.Logic;
+using Tactics.Presentation.Beats;
 using Tactics.Presentation.Board;
 using Tactics.Presentation.World;
 
@@ -382,6 +383,19 @@ internal sealed partial class WorldCanvas : CanvasLayer
         _over.SetDrawn(over.Select(at => _items[at.Block][at.Item]), over.Select(plan.OrderOf));
         _over.SetUnits(units, art);
     }
+
+    /// <summary>Plays <paramref name="draws"/>, the pack's effects over the world (a puff as a door swings), over the units.</summary>
+    public void ShowEffects(ImmutableArray<FxDraw> draws)
+    {
+        if (_over is null || (draws.IsEmpty && !_effects))
+        {
+            return;
+        }
+        _effects = !draws.IsEmpty;
+        _over.SetEffects(draws, System.Numerics.Vector2.Zero);
+    }
+
+    private bool _effects;
 
     public override void _Process(double delta)
     {

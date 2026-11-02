@@ -67,6 +67,9 @@ public sealed class WalkShow
     private bool _bumped;
     private IReadOnlyDictionary<string, UnitPlace> _places = new Dictionary<string, UnitPlace>();
 
+    /// <summary>Where feet go on the screen's pixels (<see cref="WorldCamera.OnGround"/>): for what stands in the world beside the party.</summary>
+    public Func<Vector2, bool, Vector2> Pixels => _pixels;
+
     /// <summary>The newest step this show has heard of.</summary>
     public int Seq => _seq;
 

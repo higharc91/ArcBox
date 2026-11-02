@@ -263,6 +263,11 @@ public partial class BoardCanvas : Node2D
         {
             return;     // only its emote, which UnitMarks draws
         }
+        if (unit.Thing is { } thing)
+        {
+            DrawThing(unit, thing);
+            return;
+        }
         var feet = new Vector2(unit.Feet.X, unit.Feet.Y);
         var clock = _clock + unit.Phase;
         DrawRing(feet, unit);
@@ -293,6 +298,66 @@ public partial class BoardCanvas : Node2D
             DrawEffect(effect, feet + shift, clock);
         }
     }
+
+    /// <summary>
+    /// A thing to interact with (<see cref="Tactics.Presentation.World.ThingShow"/>): its sprite, lit as a figure is, scaled about its feet and
+    /// tinted as its look says, or its plain marker, unlit. Everything here was worked out there.
+    /// </summary>
+    private void DrawThing(BoardUnit unit, ThingLook look)
+    {
+        if (look.Alpha <= 0)
+        {
+            return;
+        }
+        var feet = new Vector2(unit.Feet.X, unit.Feet.Y);
+        DrawSetTransform(feet, 0, new Vector2(look.Scale.X, look.Scale.Y));
+        if (look.Marker is { } marker)
+        {
+            DrawMarker(marker, feet, look.Alpha);
+        }
+        else if (Load(unit.Sprite.Path) is { } texture)
+        {
+            var sprite = unit.Sprite;
+            var size = new Vector2(sprite.Width, sprite.Height);
+            var corner = -new Vector2(unit.Mirror ? sprite.Width - sprite.AnchorX : sprite.AnchorX, sprite.AnchorY);
+            var source = sprite.Source(unit.Anim.FrameAt(_clock), 0);
+            var light = _lighting is { } lighting ? Colour(lighting.ForFigure(BoardLighting.BodyOf(unit.Feet, sprite.Height))) : Colors.White;
+            var tint = new Color(light.R * look.Tint.R, light.G * look.Tint.G, light.B * look.Tint.B, look.Alpha);
+            DrawTextureRectRegion(texture, new Rect2(corner, unit.Mirror ? new Vector2(-size.X, size.Y) : size),
+                new Rect2(source.X, source.Y, source.Width, source.Height), tint);
+        }
+        DrawSetTransform(Vector2.Zero, 0, Vector2.One);
+    }
+
+    private void DrawMarker(ThingMarker marker, Vector2 feet, float alpha)
+    {
+        Vector2[] Points(IEnumerable<System.Numerics.Vector2> points) => [.. points.Select(p => new Vector2(p.X, p.Y) - feet)];
+        var line = Colour(marker.Line, alpha);
+        var diamond = Points(marker.Diamond);
+        if (marker.FillAlpha > 0)
+        {
+            DrawColoredPolygon(diamond, Colour(marker.Fill, marker.FillAlpha * alpha));
+        }
+        DrawPolyline([.. diamond, diamond[0]], line, ThingLineWidth);
+        if (marker.Slab is { } slab)
+        {
+            var face = Points(slab);
+            DrawColoredPolygon(face, new Color(SlabShade, SlabShade, SlabShade * 1.2f, SlabAlpha * alpha));
+            DrawColoredPolygon(face, Colour(marker.Fill, 0.25f * alpha));
+            DrawPolyline([.. face, face[0]], line, ThingLineWidth);
+        }
+        if (marker.Handle is { } handle)
+        {
+            var h = Points(handle);
+            DrawLine(h[0], h[1], line, ThingLineWidth * 1.5f);
+            DrawLine(h[2], h[3], line, ThingLineWidth);
+            DrawCircle(h[3], 2.5f, line);
+        }
+    }
+
+    private const float ThingLineWidth = 1.5f;
+    private const float SlabShade = 0.1f;
+    private const float SlabAlpha = 0.75f;
 
     /// <summary>The ring at a unit's feet, on the slant of the tile.</summary>
     private void DrawRing(Vector2 feet, BoardUnit unit)

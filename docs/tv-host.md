@@ -60,6 +60,7 @@ Everything after `--` on the Godot command line; all optional.
 | `--beat-log` | Dev only: print a `BEAT` line for each Tactics beat played: when it ran, how long it took and what was in it. |
 | `--tactics-demo[=<map>[:changed\|:fight]]` | Dev only: show a Tactics board without a server, with the art from the repository's `content/` (default `river_crossing`). `:changed` adds zones, raised tiles and the bridge's tiles sunk; `:fight` adds one of every kind of unit. With `--shots` it saves `…-tactics-battle-<map>.png`. |
 | `--world-demo[=<region>\|hilly[:<block tiles>]]` | Dev only: open a whole region the way the TV will, without a server, with the art and region from the repository's `content/` (default `ashen_ford`; `hilly` is `DemoRegion`'s stress case), walk a stand-in the length of it at twice walking pace, print what it cost in `WORLD` lines and quit. Use `--res=1920x1080`. With `--shots` it saves `world-<spec>.png`, then one `world-<spot>.png` for each place `WorldSpots` finds: behind a cliff, behind a crate, water at a block edge, a block corner, the region's edge and both sides of the void. See [the world](#the-world). |
+| `--world-demo=things` | Dev only: the art check for things to interact with (`ThingsDemo` in Tactics.Presentation), without a server: a generated courtyard with every kind in every state the art brief draws, on three labelled gallery screens (each label is the art key, without `interactables.`, and where its picture came from: `art`, `stand-in: <key>` or `marker`), then a chest opened, a hidden cache found, traps seen, set off and disarmed, a lever working a gate both ways, a locked door unlocked and opened, a secret door found and opened, a key picked up, a note read and a shrine used. Use `--res=1920x1080`; with `--shots` it saves a `things-*` shot of each moment, then quits. See [things to interact with](#things-to-interact-with). |
 | `--walk-log` | Dev only: print `WALK <seq> <x> <y> <ms>` as each step reaches the TV, `<ms>` being the wall clock in Unix milliseconds; `WALKAT <ms> <seq> <held 0\|1> <leader x> <leader y> <widest gap> <name> <x> <y> …`, where the TV drew each walker, at most every 0.25 s while anything moves and once when it comes to rest; `BUMP <ms> <x> <y>` when the leader bumps a wall; `TACTICS walk snapped to <x> <y>` when the party is put somewhere rather than walked there (a first view, a new epoch, a reconnect); and a `WALKSTATS` line every 288 frames of walking and once more when the party stops: frame times, and how many pixels the leader and the ground moved a frame. The formats are in [the Tactics README](../games/Tactics/README.md#bot-phones-and-the-tv-end-to-end). See [walking](#walking). |
 | `--story-demo[=<step>]` | Dev only: play the story over the world without a server (`StoryDemo` in Tactics.Presentation), from the real lore and region: the "!" over Pip, the narrator and speakers with their faces and clips, a leader's choice, a party vote that ties and is broken, eleven long options, six roller cards, a pass and a fail, the gap between scenes and the chapter card. `<step>` starts at `marker`, `line`, `choice`, `gap`, `vote`, `tie`, `many`, `check`, `pass`, `fail` or `card`. With `--shots` it saves a `tactics-story-*` shot of each. |
 | `--story-log` | Dev only: print `STORY <seq> <line> said\|shown <state>` for each line of a scene the TV takes: `said` when it spoke it; `STORY marker <beat> <x> <y> <emote\|->` for each beat on offer whenever they change (`STORY marker none` for none); and `STORY card <chapter>` as a chapter's card comes up. See [the story](#the-story). |
@@ -398,3 +399,34 @@ either branch, is `ARCBOX_CHAPTER=1 ARCBOX_BRANCH=force|parley tools/tv-e2e.sh`,
    for, and should carry the sequence number of the event it acknowledges.
 
 Until the scene exists, the TV shows a "scene not installed" screen with the raw view JSON, and nothing crashes.
+
+## Things to interact with
+
+The region's chests, doors, levers, traps and the rest (interactables design, `docs/superpowers/specs/2026-11-02-tactics-interactables-design.md`)
+come in `ExploreView.Things`, each in its state, and what happens to them in `ExploreView.ThingEvents`. `ThingShow` (Tactics.Presentation)
+decides everything: it turns each thing into a figure sorted among the walkers and the props (`BoardUnit.Thing`), so the world's overlay paints
+what stands in front of it, and it plays a moment from each event newer than the last it saw, never from a change of state, so a TV that joins
+or comes back draws what's there and replays nothing. `BoardCanvas` and `UnitMarks` only draw what it gives.
+
+- **Its picture** (`ThingArt`): its own art, `interactables.<kind>.<state>`, whenever the pack has that very variant; else the stand-in the
+  server names for that state (`props.chest`, `pickups.loot_sack`…); else the plain marker: a gold diamond on the tile with its name, filled
+  while it stands in the way, a slab standing along its wall for a shut passage, and a post and handle for a lever. A shut passage sorts after
+  the next tile of its wall, so the wall's raised top doesn't cut it.
+- **The art drops in by key.** Copy the art brief's manifest (`docs/superpowers/specs/2026-11-02-tactics-interactables-art.json`) to
+  `content/tactics/base/interactables/manifest.json` and put its files beside it: the TV uses each state it finds, and a transition strip
+  (`<kind>_opening`, tagged `transition`, `from:` and `to:`) plays once as the state changes, backwards for the other way (a gate shutting, a
+  lever going off), and holds its last frame. A missing state falls back to the stand-in, never to another state. No code changes.
+  Check it with `--world-demo=things --shots=<dir>`.
+- **Moments** (each under a second, but a find's "!?" at 1.6 s): an opening squashes and glows (a passage puffs dust), an unlock flashes, a
+  failed way shakes, a find pops in with a puff and the `surprise` emote, a seen trap flashes red and keeps the `skull` emote while it's set, a
+  trap going off shakes red in smoke, a disarm flashes, a lever's handle swings and its passage's slab sinks or rises a stagger later, a taken
+  pickup or emptied cache rises and fades where it was, a shrine glows with the `bless` effect, and a read or a look hops. Events in one view
+  play `ThingShow.Stagger` (0.2 s) apart, and a thing waits in its old state for its turn.
+- **Sound** (`ThingSounds`): each event names the sfx ids it wants, the best first, at -8 dB. The pack has none of them yet but `ui_loot`
+  (a pickup), so the rest are silent until sounds with these ids are added to `sfx/manifest.json`: `door_open`, `door_close`, `gate_open`,
+  `gate_close`, `drawbridge_lower`, `drawbridge_raise`, `secret_door_open`, `secret_door_close`, `chest_open`, `crate_open`, `barrel_open`,
+  `sack_open`, `cache_open`, `lever_pull`, `lock_open`, `lock_fail`, `secret_found`, `trap_spotted`, `trap_spring`, `trap_disarm`,
+  `item_pickup`, `page_turn`, `shrine_use`, `well_draw`, `altar_use`.
+- **Cost:** nothing for a region with no things; otherwise only the things near the view go to the overlay.
+- A hidden thing isn't sent until it's found, so an unfound secret door is the floor of its gap in the wall, as the region is painted.
+

@@ -213,7 +213,16 @@ public sealed record ExploreView(string Region, string Name, int Epoch, int Seq,
 /// <param name="Blocks">True while it stands in the way of walking.</param>
 /// <param name="Trapped">True for a thing whose trap is set and has been seen: the TV warns of it.</param>
 public sealed record ThingView(string Id, string Kind, Tile At, string Facing, string Art, string State, string? StandIn, string Name, bool Blocks,
-    bool Trapped);
+    bool Trapped)
+{
+    /// <summary>
+    /// <paramref name="def"/> as the TV is sent it in <paramref name="save"/>'s state with <paramref name="flags"/> set, whether or not it's
+    /// <see cref="Interactables.Visible"/> (the caller sends only what is): the server's views, and the art check's (<c>--world-demo=things</c>).
+    /// </summary>
+    public static ThingView Of(InteractableDef def, InteractableSave save, IReadOnlySet<string> flags)
+        => new(def.Id, def.Kind, def.At, def.Facing ?? "sw", Interactables.ArtOf(def), Interactables.ArtState(def, save), Interactables.StandInOf(def, save),
+            Interactables.TitleOf(def), Interactables.Blocks(def, save, flags), Interactables.Trapped(def, save));
+}
 
 /// <summary>Something that happened to a thing, for the TV to animate (interactables design §2.8).</summary>
 /// <param name="Seq">Its number, which only goes up in a session.</param>

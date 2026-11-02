@@ -80,6 +80,12 @@ public sealed record BoardUnit(long Order, UnitId Id, UnitTone Tone, Vector2 Fee
     public bool Away { get; init; }
 
     /// <summary>
+    /// A thing to interact with (<see cref="World.ThingShow"/>), drawn with no ring: its sprite under <see cref="ThingLook.Scale"/> and
+    /// <see cref="ThingLook.Tint"/>, or its plain marker, and its label. Null for anyone else.
+    /// </summary>
+    public ThingLook? Thing { get; init; }
+
+    /// <summary>
     /// A ring goes over a dark one (<see cref="UnitPlan.RingOutline"/>), so it reads on grass as well as stone: a walker's, and a hero's in a
     /// fight who has a player's colour. Anyone else in a fight has their side's ring alone, as ever.
     /// </summary>

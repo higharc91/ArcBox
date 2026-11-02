@@ -155,6 +155,18 @@ public partial class Main : Control
             AddChild(new Games.Tactics.StoryDemoFeeder(storyPack, storyFrom, view => OnHostView(new HostViewEvent("tactics", view))));
             return;
         }
+        if (_args.WorldDemo is "things" or global::Tactics.Presentation.World.ThingsDemo.Region)
+        {
+            // Dev only: the art check for things to interact with, every kind in every state and each event, through the normal host-view path.
+            GD.Print("Things demo: no server connection");
+            ShowGame("tactics");
+            var thingsPack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "tactics", "base"));
+            (_scene as IContentScene)?.SetContentRoots(new Dictionary<string, string> { ["base"] = thingsPack });
+            var tactics = _scene as Games.Tactics.TacticsScene;
+            AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)),
+                captions => { if (tactics is not null) tactics.ThingCaptions = captions; }, _shots));
+            return;
+        }
         if (_args.WorldDemo is { } region)
         {
             // Dev only: a whole region in blocks, measured; the art comes from the repository.

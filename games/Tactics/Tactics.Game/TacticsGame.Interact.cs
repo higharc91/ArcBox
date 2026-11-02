@@ -408,8 +408,6 @@ public sealed partial class TacticsGame
             return null;
         var flags = StoryFlags();
         return [.. Things.Select(d => (Def: d, Save: ThingState(d))).Where(t => Interactables.Visible(t.Def, t.Save, flags) && Interactables.Drawn(t.Def, t.Save))
-            .Select(t => new ThingView(t.Def.Id, t.Def.Kind, t.Def.At, t.Def.Facing ?? "sw", Interactables.ArtOf(t.Def),
-                Interactables.ArtState(t.Def, t.Save), Interactables.StandInOf(t.Def, t.Save), Interactables.TitleOf(t.Def),
-                Interactables.Blocks(t.Def, t.Save, flags), Interactables.Trapped(t.Def, t.Save)))];
+            .Select(t => ThingView.Of(t.Def, t.Save, flags))];
     }
 }

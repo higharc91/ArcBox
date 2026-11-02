@@ -29,6 +29,9 @@ public static class DemoRegion
     private static readonly string[] Plain = ["tree", "pine", "bush", "rock_medium", "rock_large", "tall_grass", "stump", "boulder", "dead_tree", "crate"];
     private static readonly string[] Lit = ["torch", "campfire", "lamp_post", "lantern"];
 
+    /// <summary>The region the TV opens for <paramref name="id"/>: the pack's, or the art check's courtyard (<see cref="ThingsDemo"/>), which no pack has.</summary>
+    public static WorldGround Load(string packRoot, string id) => id == ThingsDemo.Region ? ThingsDemo.Ground() : FromPack(packRoot, id);
+
     /// <summary>The region <paramref name="id"/> as the base pack at <paramref name="packRoot"/> has it, with only its stamped maps read.</summary>
     public static WorldGround FromPack(string packRoot, string id)
     {
