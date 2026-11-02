@@ -32,13 +32,15 @@ def rest(role,race,back):
     c,p,layers=character(role,race,back)
     return p,{name:layer.ramp_map() for name,layer in layers.items()}
 
-def transform(name,pose):
+def transform(name,pose,race=None):
     drop=(6 if pose.kneel else 10 if pose.sit else 2*pose.crouch)
     torso=(pose.lean*2,pose.bob*2+drop-pose.rise*2)
     head=(torso[0]+pose.head[0]*2,torso[1]+pose.head[1]*2)
     if name in ('head','hair','headgear','class-headwear','race-details'):
         motion=translate(*head)
-        if name=='hair':motion=motion@translate(pose.drag[0],pose.drag[1])
+        # The dwarf's cropped hair is attached to the skull. Applying cloth
+        # trailing to the whole hair layer made it slide against the face/beard.
+        if name=='hair' and race!='dwarf':motion=motion@translate(pose.drag[0],pose.drag[1])
     elif name in ('weapon','near-hand','far-arm','offhand'):
         near=name in ('weapon','near-hand')
         offset=pose.hand_n if near else pose.hand_f
@@ -98,8 +100,8 @@ def frame(role,race,back,pose):
             a=np.array(right).copy();a[:,:32]=0;right=Image.fromarray(a)
             image=Image.new('RGBA',FRAME)
             for limb,offset,default in ((left,pose.foot_f,-1),(right,pose.foot_n,1)):
-                image.alpha_composite(warp(limb,transform(name,pose)@translate((offset[0]-default)*1.5,-offset[1]*1.5)))
-        else:image=warp(image,transform(name,pose))
+                image.alpha_composite(warp(limb,transform(name,pose,race)@translate((offset[0]-default)*1.5,-offset[1]*1.5)))
+        else:image=warp(image,transform(name,pose,race))
         data=np.array(image)
         mask=data[:,:,3]>0
         out.slot[mask]=data[:,:,0][mask]//16
