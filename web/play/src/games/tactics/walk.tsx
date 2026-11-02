@@ -465,6 +465,7 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
           </div>
         )}
         <Party party={d.party} />
+        {d.gold !== undefined && <span class="tx-shop-gold">◆ {d.gold} gold</span>}
         {d.portal && !d.leader ? <p><a class="tx-link" href={d.portal} target="_blank" rel="noopener">Your character</a></p> : null}
         {d.leader && d.search ? (
           <div class="tx-walk-dock">

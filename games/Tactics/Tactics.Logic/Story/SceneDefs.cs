@@ -33,7 +33,7 @@ public sealed record OptionTags(ImmutableArray<string> Background, ImmutableArra
 /// <see cref="Choice"/> names the <c>arcs.json</c> choice it stands for. <see cref="Requires"/> are tested as the node shows.
 /// </summary>
 public sealed record SceneOption(string Id, string Label, string? To, string? Choice, ImmutableArray<string> Sets,
-    ImmutableArray<string> Requires, OptionTags Tags, SceneCheck? Check)
+    ImmutableArray<string> Requires, OptionTags Tags, SceneCheck? Check, int Gold = 0)
 {
     /// <summary>
     /// Every node this option names: its <see cref="To"/>, then its check's pass and fail. A check decides where it goes (<see
@@ -49,7 +49,7 @@ public sealed record SceneOption(string Id, string Label, string? To, string? Ch
 /// vote when <see cref="Vote"/>), <see cref="Next"/>, or <see cref="End"/>.
 /// </summary>
 public sealed record SceneNode(string Id, ImmutableArray<SceneLine> Lines, ImmutableArray<string> Sets, ImmutableArray<SceneOption> Options,
-    bool Vote, string? Next, bool End)
+    bool Vote, string? Next, bool End, int Gold = 0)
 {
     /// <summary>Every node this one can lead to, in the order it's written.</summary>
     public IEnumerable<string> Targets => Next is { } next ? [next] : Options.SelectMany(o => o.Targets);

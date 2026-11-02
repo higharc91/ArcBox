@@ -103,6 +103,8 @@ public static class InteractScenes
         var text = Interactables.TextOf(def);
         switch (kind.Family)
         {
+            case InteractableFamily.Trade:
+                return new InstantPlan(null, text[0]);
             case InteractableFamily.Ambient:
                 return new InstantPlan(null, text[0]);
             case InteractableFamily.Notice:
@@ -189,7 +191,7 @@ public static class InteractScenes
 
     /// <summary>The items of its loot, in words: "2 × Potion of Healing, Smoke Bomb".</summary>
     public static string Loot(InteractableDef def, Func<ItemId, string> itemName)
-        => string.Join(", ", def.Loot.Select(l => l.Count == 1 ? itemName(l.Item) : $"{l.Count} × {itemName(l.Item)}"));
+        => string.Join(", ", def.Loot.Select(l => l.Gold > 0 ? $"{l.Gold} gold" : l.Count == 1 ? itemName(l.Item) : $"{l.Count} × {itemName(l.Item)}"));
 
     // ---- Containers and passages ---------------------------------------------------------------------------------------------------
 

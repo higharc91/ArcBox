@@ -48,6 +48,7 @@ internal sealed partial class Validation
         else if (family == InteractableFamily.Ambient)
             At("art", "An ambient thing has no art of its kind, so it needs an art key of the pack's, such as \"props.cart\".");
 
+        if (family == InteractableFamily.Trade && def.Hidden is not null) At("hidden", "A stall cannot be hidden.");
         if (def.Hidden is { } hidden)
         {
             Dc(hidden.Dc, "hidden", "The hidden");
@@ -116,7 +117,13 @@ internal sealed partial class Validation
         for (var i = 0; i < def.Loot.Length; i++)
         {
             var at = Pointer.Append(Pointer.Append(ptr, "loot"), i);
-            Ref(RefKind.Item, def.Loot[i].Item.Value, file, Pointer.Append(at, "item"));
+            var loot = def.Loot[i];
+            if (loot.Gold != 0)
+            {
+                if (loot.Gold < 0 || !string.IsNullOrEmpty(loot.Item.Value)) Error(file, at, "Loot is either a positive gold amount or an item, never both.");
+            }
+            else if (string.IsNullOrEmpty(loot.Item.Value)) Error(file, at, "Loot needs an item or positive gold.");
+            else Ref(RefKind.Item, loot.Item.Value, file, Pointer.Append(at, "item"));
             if (def.Loot[i].Count is < 1 or > 99)
                 Error(file, Pointer.Append(at, "count"), $"The count {def.Loot[i].Count} must be 1 to 99.");
         }

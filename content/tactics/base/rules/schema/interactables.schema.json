@@ -19,14 +19,51 @@
             "description": "Unique across the whole pack: the campaign keeps each thing's state by it."
           },
           "kind": {
-            "enum": ["chest", "crate", "barrel", "sack", "cache", "door", "gate", "drawbridge", "secret_door", "lever", "note", "plaque", "book", "gravestone", "signpost", "pickup", "shrine", "well", "altar", "ambient", "trap", "tracks", "scratches", "disturbed_earth", "bloodstain", "draft", "carving", "rune", "remains", "hidden_path"]
+            "enum": [
+              "chest",
+              "crate",
+              "barrel",
+              "sack",
+              "cache",
+              "door",
+              "gate",
+              "drawbridge",
+              "secret_door",
+              "lever",
+              "note",
+              "plaque",
+              "book",
+              "gravestone",
+              "signpost",
+              "pickup",
+              "shrine",
+              "well",
+              "altar",
+              "ambient",
+              "trap",
+              "tracks",
+              "scratches",
+              "disturbed_earth",
+              "bloodstain",
+              "draft",
+              "carving",
+              "rune",
+              "remains",
+              "hidden_path",
+              "stall"
+            ]
           },
           "at": {
             "$ref": "common.schema.json#/$defs/tile",
             "description": "Its world tile: walkable ground, outside every stamp, off the spawns and the beat spots."
           },
           "facing": {
-            "enum": ["ne", "se", "sw", "nw"]
+            "enum": [
+              "ne",
+              "se",
+              "sw",
+              "nw"
+            ]
           },
           "name": {
             "type": "string",
@@ -137,7 +174,9 @@
                 "description": "An item id, one of which leaves the bag of whoever sprang it. Supported, unused until the user decides."
               }
             },
-            "required": ["spot"],
+            "required": [
+              "spot"
+            ],
             "additionalProperties": false
           },
           "hidden": {
@@ -157,11 +196,22 @@
                     "maximum": 30
                   },
                   "skill": {
-                    "enum": ["perception", "investigation", "insight", "survival", "nature", "arcana", "history", "religion"],
+                    "enum": [
+                      "perception",
+                      "investigation",
+                      "insight",
+                      "survival",
+                      "nature",
+                      "arcana",
+                      "history",
+                      "religion"
+                    ],
                     "description": "The passive skill that finds it; perception when left out."
                   }
                 },
-                "required": ["dc"],
+                "required": [
+                  "dc"
+                ],
                 "additionalProperties": false
               }
             ],
@@ -193,10 +243,45 @@
                   "type": "integer",
                   "minimum": 1,
                   "maximum": 99
+                },
+                "gold": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647
                 }
               },
-              "required": ["item"],
-              "additionalProperties": false
+              "additionalProperties": false,
+              "oneOf": [
+                {
+                  "required": [
+                    "item"
+                  ],
+                  "not": {
+                    "required": [
+                      "gold"
+                    ]
+                  }
+                },
+                {
+                  "required": [
+                    "gold"
+                  ],
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "item"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "count"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
             },
             "description": "What a container holds or a pickup is. It goes to the leader's bag."
           },
@@ -216,11 +301,18 @@
             "description": "Whether it stands in the way; the kind's when left out. Not for passages or floor traps."
           }
         },
-        "required": ["id", "kind", "at"],
+        "required": [
+          "id",
+          "kind",
+          "at"
+        ],
         "additionalProperties": false
       }
     }
   },
-  "required": ["region", "interactables"],
+  "required": [
+    "region",
+    "interactables"
+  ],
   "additionalProperties": false
 }

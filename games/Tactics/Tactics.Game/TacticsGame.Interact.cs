@@ -101,7 +101,9 @@ public sealed partial class TacticsGame
 
     private ImmutableSortedDictionary<string, InteractableSave>? ThingSaves => _doc.World?.Things;
 
-    private InteractableSave ThingState(InteractableDef def) => Interactables.StateOf(def, ThingSaves);
+    private InteractableSave ThingState(InteractableDef def) => def.Kind == "stall"
+        ? new InteractableSave(RegionShops.Any(s => s.Keeper.Thing == def.Id && ShopRules.Present(s, StoryFlags())) ? "open" : "closed")
+        : Interactables.StateOf(def, ThingSaves);
 
     private InteractableDef? ThingNamed(string id) => AllThings.FirstOrDefault(d => d.Id == id);
 
@@ -125,7 +127,7 @@ public sealed partial class TacticsGame
     /// <summary>What the leader can use now, with each one's button, the nearest first (<see cref="Interactables.Targets"/>).</summary>
     private ImmutableArray<(InteractableDef Def, string Label)> ThingTargets()
         => _phase != TacticsPhase.Exploration || _region is null || Things.IsEmpty ? []
-            : Interactables.Targets(Things, ThingSaves, StoryFlags(), WalkGround(), _at, _facing);
+            : Interactables.Targets(Things.Where(d => !RegionShops.Any(s => s.Keeper.Thing == d.Id && ShopRules.Present(s, StoryFlags()))), ThingSaves, StoryFlags(), WalkGround(), _at, _facing);
 
     /// <summary>
     /// The leader's Interact: <c>{target}</c> names the thing, as the phone's list does; with none, the beat in reach, or else the first thing
@@ -141,6 +143,13 @@ public sealed partial class TacticsGame
             InteractBeat(player);
             return;
         }
+        var shops = ShopTargets();
+        var shopPick = target is null && ThingTargets().IsEmpty ? shops.FirstOrDefault().Def?.Id : target;
+        if (shopPick is not null && shopPick.StartsWith("shop:", StringComparison.Ordinal)
+            && shops.Any(s => s.Def.Id == shopPick) && RegionShops.FirstOrDefault(s => "shop:" + s.Id == shopPick) is { } shop)
+        { StartShop(shop); return; }
+        if (target is not null && RegionShops.FirstOrDefault(s => s.Keeper.Thing == target && ShopRules.Present(s, StoryFlags())) is { } stall
+            && shops.Any(s => s.Def.Id == "shop:" + stall.Id)) { StartShop(stall); return; }
         var targets = ThingTargets();
         var pick = target is null ? targets.FirstOrDefault() : targets.FirstOrDefault(t => t.Def.Id == target);
         if (pick.Def is not null)
@@ -233,10 +242,12 @@ public sealed partial class TacticsGame
     /// <summary>The thing's loot goes into <paramref name="member"/>'s bag, stacking with what's there (design §3.1, USER DECISION 1).</summary>
     private void GiveLoot(InteractableDef def, string member)
     {
+        foreach (var loot in def.Loot.Where(l => l.Gold > 0))
+            _doc = _doc with { Gold = ShopRules.Gold(_doc.Gold, loot.Gold) };
         if (def.Loot.IsEmpty || !_doc.Members.TryGetValue(member, out var record))
             return;
         var bag = record.Character.Bag.ToList();
-        foreach (var loot in def.Loot.Where(l => Rules.Items.ContainsKey(l.Item)))
+        foreach (var loot in def.Loot.Where(l => l.Gold == 0 && Rules.Items.ContainsKey(l.Item)))
         {
             var at = bag.FindIndex(s => s.Item == loot.Item);
             if (at >= 0)

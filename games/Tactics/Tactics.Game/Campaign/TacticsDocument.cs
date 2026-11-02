@@ -172,7 +172,8 @@ public sealed record WorldSave(string Region, Tile At, Tile Facing, string? Last
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int StorySeq = 0,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull), JsonConverter(typeof(OrdinalJsonConverter))]
     ImmutableSortedDictionary<string, InteractableSave>? Things = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int ThingSeq = 0)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]     int ThingSeq = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ShopCursor? Shop = null)
 {
     /// <summary>The story flags set so far; never a default array, so a read or a write can't throw.</summary>
     public ImmutableArray<string> Flags { get => field.IsDefault ? [] : field; init; } = Flags;
@@ -188,7 +189,9 @@ public sealed record WorldSave(string Region, Tile At, Tile Facing, string? Last
 /// </summary>
 public sealed record TacticsDocument(int Version, string? RulesHash, int PartyLevel,
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedDictionary<string, MemberRecord> Members,
-    ImmutableArray<string> Completed, BattleSave? Battle, WorldSave? World = null)
+    ImmutableArray<string> Completed, BattleSave? Battle, WorldSave? World = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Gold = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ShopsSave? Shops = null)
 {
     /// <summary>The document version this code reads and writes.</summary>
     public const int CurrentVersion = 1;
@@ -214,6 +217,7 @@ public sealed record TacticsDocument(int Version, string? RulesHash, int PartyLe
         return doc with
         {
             Version = CurrentVersion,
+            Gold = Math.Max(0, doc.Gold),
             Completed = doc.Completed.IsDefault ? [] : doc.Completed,
             Members = Ordinal.Map((doc.Members ?? Ordinal.Map<MemberRecord>()).Where(m => m.Value?.Character is not null)
                 .Select(m => (m.Key, m.Value with { Character = Whole(m.Value.Character) }))),

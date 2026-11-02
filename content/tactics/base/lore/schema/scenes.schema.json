@@ -106,6 +106,12 @@
         },
         "end": {
           "const": true
+        },
+        "gold": {
+          "type": "integer",
+          "minimum": -2147483647,
+          "maximum": 2147483647,
+          "description": "Party gold gained or spent once when resolved."
         }
       },
       "required": [
@@ -229,6 +235,12 @@
             "fail"
           ],
           "additionalProperties": false
+        },
+        "gold": {
+          "type": "integer",
+          "minimum": -2147483647,
+          "maximum": 2147483647,
+          "description": "Party gold gained or spent once when resolved."
         }
       },
       "required": [

@@ -112,7 +112,12 @@ public sealed class WalkShow
             _told = view.Seq;        // what's in a first view was walked before this TV came
         (_started, _epoch, _seq, _party, Held) = (true, view.Epoch, view.Seq, view.Party.IsDefault ? [] : view.Party, view.Held);
         _markers = view.Markers is { IsDefault: false } markers ? markers : [];
+        if (view.Traders is { } traders)
+            _markers = [.. _markers, .. traders.Where(t => Math.Max(Math.Abs(t.At.X - view.At.X), Math.Abs(t.At.Y - view.At.Y)) <= 1)
+                .Where(t => !t.Open).Select(t => new StoryMarker("shop:" + t.Id, t.At, null, "shop"))];
         _cast = view.Cast is { IsDefault: false } cast ? cast : [];
+        if (view.Traders is { } openTraders)
+            _cast = [.. _cast, .. openTraders.Where(t => t.Open && t.Sprite is not null).Select(t => new CastView("trader:" + t.Id, t.Id, t.Sprite!, t.At, view.At))];
         _track.Keep([.. _cast.Select(c => c.At)]);      // followers stand clear of the scene's cast
         _track.Receive(view);       // a press into a wall turns the leader to face it there
         _bumped |= _bump.Receive(view);     // and leans them into it, in Frame

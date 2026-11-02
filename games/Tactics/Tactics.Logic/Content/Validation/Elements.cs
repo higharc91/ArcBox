@@ -129,7 +129,10 @@ internal sealed partial class Validation
         {
             var def = Deserialize<ItemDef>(e, file, ptr);
             if (def is not null)
+            {
                 Ref(RefKind.Ability, def.Use.Value, file, Pointer.Append(ptr, "use"));
+                if (def.Price is < 0) Error(file, Pointer.Append(ptr, "price"), "A price cannot be negative.");
+            }
             return def;
         });
 
@@ -138,13 +141,19 @@ internal sealed partial class Validation
         => Guarded(file, ptr, () =>
         {
             var def = Deserialize<WeaponDef>(e, file, ptr);
+            if (def?.Price is < 0) Error(file, Pointer.Append(ptr, "price"), "A price cannot be negative.");
             if (def is { Range: < 1 })
                 Error(file, Pointer.Append(ptr, "range"), "The range must be at least 1.");
             return def;
         });
 
     /// <summary>A suit of armour.</summary>
-    public ArmorDef? Armor(JsonElement e, string file, string ptr) => Guarded(file, ptr, () => Deserialize<ArmorDef>(e, file, ptr));
+    public ArmorDef? Armor(JsonElement e, string file, string ptr) => Guarded(file, ptr, () =>
+    {
+        var def = Deserialize<ArmorDef>(e, file, ptr);
+        if (def?.Price is < 0) Error(file, Pointer.Append(ptr, "price"), "A price cannot be negative.");
+        return def;
+    });
 
     /// <summary>An injury: a weight of at least 1, its hook name and its effects, which need a hook to run on.</summary>
     public InjuryDef? Injury(JsonElement e, string file, string ptr)
