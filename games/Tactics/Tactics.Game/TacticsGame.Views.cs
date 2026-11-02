@@ -442,7 +442,7 @@ public sealed partial class TacticsGame
         var character = _doc.For(profile)!.Character;
         var vip = IsVip(player);
         var leads = _lead == profile.Value;
-        var targets = leads ? ThingTargets() : [];
+        var targets = leads ? TradeTargets() : [];
         var data = JsonSerializer.SerializeToNode(new
         {
             leader = leads,
@@ -459,8 +459,6 @@ public sealed partial class TacticsGame
         }, ArcJson.Options)!.AsObject();
         // Everything in reach, for the phone's list (interactables design §2.5): it changes only as things come into reach or go. Only in a
         // region that has things, so a walk screen anywhere else is exactly as it was.
-        if (!RegionShops.IsEmpty)
-            targets = [.. targets, .. (leads ? ShopTargets() : [])];
         if (VisibleGold is { } gold) data["gold"] = gold;
         if (!AllThings.IsEmpty || !RegionShops.IsEmpty)
         {
@@ -483,7 +481,7 @@ public sealed partial class TacticsGame
         [.. Walkers().Select(w => new WalkerView(w.Player.Profile!.Value.Value, w.Player.Name,
             HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{w.Character.Class}"])!, w.Here, w.Leads, ColorOf(w.Player.Profile!.Value.Value)))],
         Leader?.Name, region.Def.Chapter, _dir is not null && _blocked && !_unseenWall, _bumps, _arrived, Markers(), CastOf(), ThingViews(),
-        Things.IsEmpty ? null : _thingEvents, PlugViews(), VisibleGold, ShopTargets().IsEmpty ? null :
+        Things.IsEmpty ? null : _thingEvents, PlugViews(), WorldGold, ShopTargets().IsEmpty ? null :
             [.. RegionShops.Where(s => ShopTargets().Any(t => t.Def.Id == "shop:" + s.Id)).Select(s => new TraderView(s.Id, KeeperTile(s), s.Keeper.Person, OpenShop?.Id == s.Id, s.Keeper.Person is { } person ? "characters." + region.Def.People[person].Preset : null))]);
 
     private ControllerView BattleScreen(ProfileId profile)

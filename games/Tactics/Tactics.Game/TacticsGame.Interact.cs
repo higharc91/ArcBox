@@ -143,17 +143,14 @@ public sealed partial class TacticsGame
             InteractBeat(player);
             return;
         }
-        var shops = ShopTargets();
-        var shopPick = target is null && ThingTargets().IsEmpty ? shops.FirstOrDefault().Def?.Id : target;
-        if (shopPick is not null && shopPick.StartsWith("shop:", StringComparison.Ordinal)
-            && shops.Any(s => s.Def.Id == shopPick) && RegionShops.FirstOrDefault(s => "shop:" + s.Id == shopPick) is { } shop)
+        var targets = TradeTargets();
+        var pick = target is null ? targets.FirstOrDefault() : targets.FirstOrDefault(t => t.Def.Id == target);
+        if (pick.Def is not null && pick.Def.Id.StartsWith("shop:", StringComparison.Ordinal)
+            && RegionShops.FirstOrDefault(s => "shop:" + s.Id == pick.Def.Id) is { } shop)
         { StartShop(shop); return; }
         if (target is not null && RegionShops.FirstOrDefault(s => s.Keeper.Thing == target && ShopRules.Present(s, StoryFlags())) is { } stall
-            && shops.Any(s => s.Def.Id == "shop:" + stall.Id)) { StartShop(stall); return; }
-        var targets = ThingTargets();
-        var pick = target is null ? targets.FirstOrDefault() : targets.FirstOrDefault(t => t.Def.Id == target);
-        if (pick.Def is not null)
-            Use(pick.Def);
+            && targets.Any(t => t.Def.Id == "shop:" + stall.Id)) { StartShop(stall); return; }
+        if (pick.Def is not null) Use(pick.Def);
     }
 
     /// <summary>Uses <paramref name="def"/>: at once, or as an interaction's scene.</summary>

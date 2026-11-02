@@ -16,18 +16,47 @@ public sealed class ShopTests
         Assert.Null(TacticsDocument.Read(json).Shops);
     }
 
-    internal static Session AtShop(int gold = 100)
+    [Fact]
+    public void The_TV_hides_an_unseen_empty_purse_while_the_shop_regions_phone_shows_it()
     {
-        var s = new Session();
+        var s = AtShop(0);
+        Assert.Null(s.Host.Explore!.Gold);
+        Assert.Equal(0, s.Screen(0)!.Data.GetProperty("gold").GetInt32());
+        s.Send(0, "interact", new { target = "shop:af_market_herbalist" });
+        Assert.Equal(0, s.Host.Explore.Gold);
+        s.Send(0, "shopLeave", new { shop = "af_market_herbalist" });
+        Assert.Equal(0, s.Host.Explore.Gold);
+    }
+
+    internal static Session AtShop(int gold = 100, RulesPack? rules = null)
+    {
+        var s = new Session(game: new TacticsGame(rules ?? Rules, battleList: true));
         s.ToWalking();
         var doc = s.Game.Document;
         var target = new InteractableDef("shop", "stall", new Tile(26, 64));
         var at = Rules.ReachFor("ashen_ford")!.Where(t => t != target.At && Interactables.InReach(Rules.GroundFor("ashen_ford")!.Terrain, t, target)).Order().First();
         doc = doc with { Gold = gold, World = doc.World! with { At = at, Facing = target.At } };
-        var next = new Session(document: doc.ToJson());
+        var next = new Session(document: doc.ToJson(), game: new TacticsGame(rules ?? Rules, battleList: true));
         next.Harness.Resume(next.Lease);
         for (var i = 0; i < 4; i++) next.Harness.SetConnected(i, true);
         return next;
+    }
+
+    [Fact]
+    public void Traders_and_things_share_the_stable_target_order_and_default_interact()
+    {
+        var rules = ExplorationTests.EditedRules(folder =>
+        {
+            var file = Path.Combine(folder, "interactables", "ashen_ford.json");
+            var json = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(file))!;
+            json["interactables"]!.AsArray().Add(System.Text.Json.Nodes.JsonNode.Parse("""{ "id": "test_coin", "kind": "pickup", "at": [26,64], "loot": [{"gold":1}] }"""));
+            File.WriteAllText(file, json.ToJsonString());
+        });
+        var s = AtShop(0, rules);
+        Assert.Equal("shop:af_market_herbalist", s.Screen(0)!.Data.GetProperty("targets")[0].GetProperty("id").GetString());
+        s.Send(0, "interact");
+        Assert.NotNull(s.Host.Shop);
+        Assert.Equal(0, s.Game.Document.Gold);
     }
 
     [Fact]

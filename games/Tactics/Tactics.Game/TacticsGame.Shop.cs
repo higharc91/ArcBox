@@ -11,6 +11,7 @@ public sealed partial class TacticsGame
     private ImmutableArray<ShopDef> RegionShops => _region is null ? [] : Rules.ShopsIn(_region.Def.Id);
     private ShopDef? OpenShop => _doc.World?.Shop is { } visit ? RegionShops.FirstOrDefault(s => s.Id == visit.ShopId && ShopRules.Present(s, StoryFlags())) : null;
     private int? VisibleGold => _doc.Gold > 0 || !RegionShops.IsEmpty || _doc.Shops is not null ? _doc.Gold : null;
+    private int? WorldGold => _doc.Gold > 0 || _doc.Shops is not null ? _doc.Gold : null;
     private readonly List<string> _tradeFeed = [];
 
     private Tile KeeperTile(ShopDef shop) => shop.Keeper.Person is { } person
@@ -20,6 +21,11 @@ public sealed partial class TacticsGame
         => _region is null ? [] : [.. RegionShops.Where(s => ShopRules.Present(s, StoryFlags()))
             .Select(s => (Def: new InteractableDef("shop:" + s.Id, "stall", KeeperTile(s)), Label: "Trade with " + s.Name))
             .Where(t => Interactables.InReach(WalkGround(), _at, t.Def))];
+
+    private ImmutableArray<(InteractableDef Def, string Label)> TradeTargets()
+        => [.. ThingTargets().Concat(ShopTargets())
+            .OrderBy(t => Math.Abs(t.Def.At.X - _at.X) + Math.Abs(t.Def.At.Y - _at.Y))
+            .ThenBy(t => t.Def.At == _facing ? 0 : 1).ThenBy(t => t.Def.Id, StringComparer.Ordinal)];
 
     private void StartShop(ShopDef shop)
     {
