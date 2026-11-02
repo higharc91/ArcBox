@@ -452,6 +452,42 @@ public sealed class RegionExportTests : IDisposable
         Assert.EndsWith("Fix that file, then export again.", problem, StringComparison.Ordinal);
     }
 
+    /// <summary>The region's things to interact with (interactables design §2.1), in their own file beside it, listed in the manifest.</summary>
+    private void AddThings(string json, string id = "r")
+    {
+        Directory.CreateDirectory(Path.Combine(_rules, "interactables"));
+        File.WriteAllText(Path.Combine(_rules, "interactables", $"{id}.json"), json);
+        var path = Path.Combine(_rules, "manifest.json");
+        var manifest = JsonNode.Parse(File.ReadAllText(path))!;
+        manifest["files"]!.AsArray().Add($"interactables/{id}.json");
+        File.WriteAllText(path, manifest.ToJsonString());
+    }
+
+    private const string Chest = """{ "region": "r", "interactables": [{ "id": "r_chest", "kind": "chest", "at": [2, 2] }] }""";
+
+    [Fact]
+    public void A_region_whose_things_fit_is_written_and_loads_with_them()
+    {
+        AddThings(Chest);
+
+        Assert.Empty(Export(Field()).Problems);
+        ListInManifest();
+        Assert.Equal(new Tile(2, 2), Assert.Single(RulesPack.Load([_rules]).InteractablesIn("r")).At);
+    }
+
+    [Fact]
+    public void A_painting_that_walls_over_a_thing_is_refused_naming_the_things_file_and_nothing_is_written()
+    {
+        AddThings(Chest);
+
+        var problems = Export(Field() with { Flags = new Dictionary<Tile, TileFlags> { [new Tile(2, 2)] = TileFlags.Impassable } }).Problems;
+
+        Assert.NotEmpty(problems);
+        Assert.All(problems, p => Assert.StartsWith("base/interactables/r.json: ", p, StringComparison.Ordinal));
+        Assert.All(problems, p => Assert.EndsWith(RegionExport.ThingsAdvice, p, StringComparison.Ordinal));
+        Assert.False(File.Exists(RegionFile()));
+    }
+
     [Theory]
     [InlineData("")]
     [InlineData("../escape")]

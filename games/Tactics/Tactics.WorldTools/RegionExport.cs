@@ -249,7 +249,10 @@ public static partial class RegionExport
         }
         catch (ContentException ex)
         {
-            return ([.. ex.Errors.Select(e => e.File.EndsWith(entry, StringComparison.Ordinal) ? $"{e.Message} {Advice(e.Message)}" : $"{e.File}: {e.Message} Fix that file, then export again.")], null);
+            var things = $"interactables/{id}.json";
+            return ([.. ex.Errors.Select(e => e.File.EndsWith(entry, StringComparison.Ordinal) ? $"{e.Message} {Advice(e.Message)}"
+                : e.File.EndsWith(things, StringComparison.Ordinal) ? $"{e.File}: {e.Message} {ThingsAdvice}"
+                : $"{e.File}: {e.Message} Fix that file, then export again.")], null);
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException)
         {
@@ -260,6 +263,14 @@ public static partial class RegionExport
             Discard(copy);
         }
     }
+
+    /// <summary>
+    /// What a painter does about a thing to interact with that no longer fits the painting (interactables design §5): the things are in their
+    /// own hand-written file beside the region's, <c>interactables/&lt;id&gt;.json</c>, which an export never writes, and the export's check
+    /// loads them against the new painting, as the game will.
+    /// </summary>
+    public const string ThingsAdvice = "That file's things to interact with must fit the painting: move the thing there (it's written by hand, "
+        + "and the export never changes it), or paint round it.";
 
     /// <summary>What a painter does about a message from the pack loader, which speaks for the game and doesn't know about the editor.</summary>
     private static string Advice(string message)

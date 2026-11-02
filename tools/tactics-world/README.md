@@ -127,6 +127,7 @@ clicking a line that names a tile goes to it.
 | the scene is named X but its Id is Y | Two scenes could overwrite each other's file | Rename the scene, or change `Id` |
 | Save the scene first | It couldn't be saved | Check it isn't read-only, or use Save Scene As |
 | couldn't be read, couldn't be written | Something's holding a file | Close it, and export again |
+| a thing in `interactables/<id>.json` (not on walkable ground, in a stamp, can't be reached…) | The region's things to interact with are in their own hand-written file beside the region, which the export never writes; its check loads them against the new painting, as the game will | Move the thing in that file, or paint round it |
 
 | Warning (the file is still written) | What it means | What to do |
 |---|---|---|
