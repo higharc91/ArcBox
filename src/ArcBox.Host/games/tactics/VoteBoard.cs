@@ -1,5 +1,6 @@
 using ArcBox.Host.Shell;
 using Godot;
+using Tactics.Presentation.Board;
 using Tactics.Presentation.Story;
 
 namespace ArcBox.Host.Games.Tactics;
@@ -115,18 +116,20 @@ public sealed partial class VoteBoard : Control
         }
     }
 
-    /// <summary>A voter as a pip with their initial: seats have no colour of their own yet (the user's list, decision 14).</summary>
-    private static Control Voter(string name, float s)
+    /// <summary>A voter as a pip in their colour, with their initial in the ink that reads on it (<see cref="VoterPip"/>).</summary>
+    private static Control Voter(VoterPip voter, float s)
     {
-        var initial = StoryArt.Text(name.Length > 0 ? name[..1].ToUpperInvariant() : "?", ArcTheme.Black, Px(16, s), new Color("2a1b04"));
+        var initial = StoryArt.Text(voter.Initial, ArcTheme.Black, Px(16, s), Colour(voter.Ink));
         initial.HorizontalAlignment = HorizontalAlignment.Center;
         initial.VerticalAlignment = VerticalAlignment.Center;
-        var box = new StyleBoxFlat { BgColor = HudLayer.Gold };
+        var box = new StyleBoxFlat { BgColor = Colour(voter.Fill) };
         box.SetCornerRadiusAll(Pip);
         var pip = ArcTheme.Panel(box, initial);
         pip.CustomMinimumSize = new Vector2(Pip, Pip) * s;
         return pip;
     }
+
+    private static Color Colour(Rgb c) => new(c.R, c.G, c.B);
 
     private static int Px(int size, float scale) => Math.Max(12, (int)MathF.Round(size * scale));
 }

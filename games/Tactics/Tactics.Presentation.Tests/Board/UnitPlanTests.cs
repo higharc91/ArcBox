@@ -46,15 +46,55 @@ public sealed class UnitPlanTests
         Assert.Equal(places["a"].Feet, crowned.Feet);
     }
 
-    // Interaction review 5b, item 11: the party's green ring faded into grass. A walker's ring now goes over a dark one; a fight's rings
-    // are as they were. Seat colours wait for a seat number the phone and the TV share (5d's vote dots).
+    // Interaction review 5b, item 11: the party's green ring faded into grass. A walker's ring now goes over a dark one; in a fight only a
+    // hero with a player's colour has one, so a hero's ring is the same in the world and in a fight.
     [Fact]
-    public void A_walkers_ring_is_outlined_and_a_fights_isnt()
+    public void A_walkers_ring_is_outlined_and_a_fights_only_for_a_coloured_hero()
     {
         var places = new Dictionary<string, UnitPlace> { ["a"] = new(new Vector2(3.5f, 3.5f), 0), ["b"] = new(new Vector2(2.5f, 3.5f), 0) };
 
         Assert.All(UnitPlan.Walkers(Walkers("a", "b"), places, new Dictionary<string, UnitPose>(), Art.Value), u => Assert.True(u.Outlined));
-        Assert.False(One(null, Unit("hero", "Party", 3, 3)).Outlined);
+        Assert.False(One(null, Unit("ally1", "Party", 3, 3)).Outlined);
+        Assert.False(One(null, Unit("goblin", "Enemy", 3, 3)).Outlined);
+        Assert.True(One(null, Unit("hero1", "Party", 3, 3) with { Color = "#7ccbff" }).Outlined);
+    }
+
+    // The user's answer 14: a walker's ring is their player's colour; with none, or one that isn't a colour, it's the party's green.
+    [Fact]
+    public void A_walkers_ring_is_their_players_colour_else_the_partys_green()
+    {
+        var places = new Dictionary<string, UnitPlace> { ["a"] = new(new Vector2(3.5f, 3.5f), 0), ["b"] = new(new Vector2(2.5f, 3.5f), 0),
+            ["c"] = new(new Vector2(1.5f, 3.5f), 0), ["d"] = new(new Vector2(1.5f, 2.5f), 0) };
+        WalkerView[] party = [new("a", "a", "characters.class_rogue", true, true, "#7ccbff"), new("b", "b", "characters.class_rogue", false, false, "#FFD23F"),
+            new("c", "c", "characters.class_rogue", true, false), new("d", "d", "characters.class_rogue", true, false, "teal")];
+
+        var rings = UnitPlan.Walkers(party, places, new Dictionary<string, UnitPose>(), Art.Value).ToDictionary(u => u.Id.Value, u => u.RingColour);
+
+        Assert.Equal(Rgb.Hex("#7ccbff"), rings["a"]);
+        Assert.Equal(Rgb.Hex("#ffd23f"), rings["b"]);       // away, still theirs: the canvas dims it as it dims them
+        Assert.Equal(UnitPlan.PartyRing, rings["c"]);
+        Assert.Equal(UnitPlan.PartyRing, rings["d"]);
+    }
+
+    // In a fight a hero wears their colour, a companion the party's green, a goblin its red. A hero keeps their colour on their own turn
+    // (the turn's gold hid whose it was, and matched the palette's Gold); anyone else has the turn's gold on theirs.
+    [Theory]
+    [InlineData("hero2")]
+    [InlineData("ally1")]
+    [InlineData("goblin")]
+    public void A_fights_rings_are_the_heros_colour_the_sides_and_the_turns_gold(string active)
+    {
+        UnitView[] units = [Unit("hero1", "Party", 3, 3) with { Color = "#ffab94" }, Unit("hero2", "Party", 4, 3) with { Color = "#8ff0c4" },
+            Unit("ally1", "Party", 5, 3), Unit("goblin", "Enemy", 9, 5) with { Color = "#ffab94" }];
+
+        var rings = Plan(active, units).ToDictionary(u => u.Id.Value);
+
+        Assert.Equal(Rgb.Hex("#ffab94"), rings["hero1"].RingColour);
+        Assert.Equal(Rgb.Hex("#8ff0c4"), rings["hero2"].RingColour);
+        Assert.Equal(active == "ally1" ? UnitPlan.ActiveRing : UnitPlan.PartyRing, rings["ally1"].RingColour);
+        Assert.Equal(active == "goblin" ? UnitPlan.ActiveRing : UnitPlan.EnemyRing, rings["goblin"].RingColour);   // a colour on a foe is never drawn
+        Assert.Null(rings["goblin"].Colour);
+        Assert.True(rings[active].Active);
     }
 
     [Fact]

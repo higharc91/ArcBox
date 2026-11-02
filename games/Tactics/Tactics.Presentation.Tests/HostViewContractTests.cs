@@ -66,6 +66,44 @@ public sealed class HostViewContractTests
         Assert.All(units, u => Assert.DoesNotContain("presets/bandit", u.Sprite.Path));   // nobody needed a stand-in
     }
 
+    // The user's answer 14: a hero's ring in a fight is their player's colour, the one their walker wears. It's the TV's alone: a phone's
+    // view of the same units never carries it.
+    [Fact]
+    public void A_heros_ring_in_a_fight_is_their_walkers_colour_and_no_phone_hears_of_it()
+    {
+        var rules = Pack.Value;
+        ProfileId?[] profiles = [new ProfileId("pr_ana"), new ProfileId("pr_bo"), new ProfileId("pr_cy"), new ProfileId("pr_di")];
+        var game = new TacticsGame(rules, battleList: true);
+        var h = new GameHarness<TacticsGame>(game, playerCount: 4, seed: 3, profiles: profiles);
+        var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", profiles[0]!.Value,
+            [.. profiles.Select((p, i) => new CampaignMember(p!.Value, $"Player{i + 1}", CampaignRole.Player, DateTimeOffset.UnixEpoch))], 1);
+        h.StartCampaign(new FakeCampaignLease(info, new TacticsCampaignRules(rules).NewDocument(info)));
+        foreach (var (cls, i) in new[] { "fighter", "cleric", "wizard", "rogue" }.Select((c, i) => (c, i)))
+            h.Input(i, new { action = "pickClass", data = new { @class = cls } });
+        var walkers = OverTheWire(game).Explore!.Party;
+        h.Input(0, new { action = "battles" });
+        h.Input(0, new { action = "pickEncounter", data = new { encounter = "river_crossing" } });
+
+        var battle = OverTheWire(game).Battle!;
+        var heroes = battle.Units.Where(u => u.Id.Value.StartsWith("hero", StringComparison.Ordinal)).OrderBy(u => u.Id.Value).ToArray();
+        Assert.Equal(walkers.Select(w => w.Color), heroes.Select(u => u.Color));
+        Assert.Equal(4, heroes.Select(u => u.Color).Distinct().Count());
+        Assert.All(battle.Units.Except(heroes), u => Assert.Null(u.Color));     // companions and goblins keep their side's ring
+
+        var units = UnitPlan.Build(battle, new BoardTerrain(Board.Pack.Map("river_crossing"), battle.Board), UnitArt.Load(Board.Pack.Root),
+            BoardFit.For(new BoardTerrain(Board.Pack.Map("river_crossing"), null), Board.Pack.Art));
+        foreach (var hero in heroes)
+        {
+            var unit = units.Single(u => u.Id == hero.Id);
+            Assert.True(unit.Outlined);
+            Assert.Equal(Rgb.Hex(hero.Color!), unit.Colour);
+        }
+        Assert.All(units.Where(u => u.Id.Value.StartsWith("ally", StringComparison.Ordinal)), u => Assert.Equal(UnitPlan.PartyRing, u.RingColour));
+
+        for (var i = 0; i < 4; i++)
+            Assert.DoesNotContain("\"color\"", JsonSerializer.Serialize(h.PlayerView(i), ArcJson.Options), StringComparison.Ordinal);
+    }
+
     [Fact]
     public void Every_phase_of_a_real_session_reaches_the_tv()
     {

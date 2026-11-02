@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Text;
 using Tactics.Game;
 using Tactics.Logic;
+using Tactics.Presentation.Board;
 using Tactics.Presentation.Hud;
 
 namespace Tactics.Presentation.Story;
@@ -28,13 +29,28 @@ public sealed record StoryCaption(string Line, string? Speaker, HudPortrait? Por
     public override int GetHashCode() => HashCode.Combine(Line, Speaker, Portrait, Contents.Hash(Rows, Contents.Rows<CaptionRun>.Instance));
 }
 
+/// <summary>A voter's pip on the vote panel: their initial, in <paramref name="Ink"/>, on their colour.</summary>
+/// <param name="Name">The voter's player's name.</param>
+/// <param name="Initial">Its first letter, in capitals; "?" for an empty name.</param>
+/// <param name="Fill">Their colour (<see cref="StoryAskView.Colors"/>), or the panel's gold with none (<see cref="PlayerInk.PipFallback"/>).</param>
+/// <param name="Ink">Black or white, whichever reads on <paramref name="Fill"/> (<see cref="PlayerInk.InkOn"/>).</param>
+public sealed record VoterPip(string Name, string Initial, Rgb Fill, Rgb Ink)
+{
+    /// <summary>The pip of <paramref name="name"/> in <paramref name="hex"/>, their colour as the server sends it.</summary>
+    public static VoterPip Of(string name, string? hex)
+    {
+        var fill = PlayerInk.Of(hex) ?? PlayerInk.PipFallback;
+        return new VoterPip(name, name.Length > 0 ? name[..1].ToUpperInvariant() : "?", fill, PlayerInk.InkOn(fill));
+    }
+}
+
 /// <summary>An option on the vote panel.</summary>
 /// <param name="Id">The option's id.</param>
 /// <param name="Letter">"A", "B" and so on, in the node's order.</param>
 /// <param name="Label">What it says, in quotes, wrapped to <see cref="StoryScreen.LabelColumns"/>.</param>
 /// <param name="Detail">"Persuasion check · DC 15" for a check, else null.</param>
-/// <param name="Voters">Who voted for it, by name: the TV's alone (5d flag 7).</param>
-public sealed record VoteRow(string Id, string Letter, ImmutableArray<string> Label, string? Detail, ImmutableArray<string> Voters)
+/// <param name="Voters">Who voted for it, as pips: the TV's alone (5d flag 7).</param>
+public sealed record VoteRow(string Id, string Letter, ImmutableArray<string> Label, string? Detail, ImmutableArray<VoterPip> Voters)
 {
     /// <summary>By its words and voters (<see cref="Contents"/>).</summary>
     public bool Equals(VoteRow? other)
@@ -78,8 +94,10 @@ public sealed record VotePanel(string Heading, bool Party, bool Tie, string? Clo
 /// <param name="Chosen">This one rolls.</param>
 /// <param name="Here">Their phone is here.</param>
 /// <param name="Votes">How many picked them.</param>
+/// <param name="Who">The line under the name (<see cref="WhoOf"/>).</param>
+/// <param name="Colour">Their player's colour, for the card's edge (<see cref="StoryCardView.Color"/>); null for no edge.</param>
 public sealed record CheckCard(string Member, string Name, string Player, string? Sprite, string Bonus, string Note, string? Tag, bool Chosen, bool Here, int Votes,
-    string Who = "")
+    string Who = "", Rgb? Colour = null)
 {
     /// <summary>How many picked them, in words for under the card: "1 vote", "3 votes", or empty for none.</summary>
     public string VotesText => Votes switch { <= 0 => "", 1 => "1 vote", _ => string.Create(CultureInfo.InvariantCulture, $"{Votes} votes") };
@@ -321,7 +339,7 @@ public sealed record StoryScreen(int Seq, string Scene, string Title, string Sta
         {
             (rows, scale) = ([.. ask.Options.Select((o, i) => new VoteRow(o.Id, Letter(i), Label(o.Label, VoteLayout.Columns(size)),
                 o.Skill is { } skill && o.Dc is { } dc ? $"{SkillName(skill)} check · DC {dc.ToString(CultureInfo.InvariantCulture)}" : null,
-                o.Voters.IsDefault ? [] : o.Voters))], size);
+                o.Voters.IsDefault ? [] : [.. o.Voters.Select(v => VoterPip.Of(v, ask.Colors?.GetValueOrDefault(v)))]))], size);
             if (VoteLayout.Height(rows, size) <= VoteLayout.MaxHeight)
                 break;
         }
@@ -379,7 +397,7 @@ public sealed record StoryScreen(int Seq, string Scene, string Title, string Sta
             Typeset($"“{check.Title}”"),
             [.. cards.Select(c => new CheckCard(c.Member, c.Name, c.Player, c.Sprite, Signed(c.Bonus), c.Note,
                 c.Member == check.Chosen ? "Rolls for the party" : c.Here ? null : $"{c.Player} away", c.Member == check.Chosen, c.Here, c.Votes,
-                CheckCard.WhoOf(c.Name, c.Player, c.Class)))],
+                CheckCard.WhoOf(c.Name, c.Player, c.Class), PlayerInk.Of(c.Color)))],
             roll is null && check.Deadline is not null ? clock : null, footer, roll);
     }
 

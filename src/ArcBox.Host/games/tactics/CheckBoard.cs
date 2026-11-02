@@ -16,6 +16,8 @@ public sealed partial class CheckBoard : Control
     private const int FaceSize = 150;
     private const int DieSize = 132;
     private const float Dim = 0.6f;
+    private const int EdgeHeight = 6;
+    private const float AwayEdge = 0.55f;   // an away player's edge, dimmed as their face is
 
     private readonly StoryArt _art;
     private readonly ColorRect _dim;
@@ -137,6 +139,7 @@ public sealed partial class CheckBoard : Control
             return l;
         }
         var inside = ArcTheme.VBox(6,
+            Edge(card),
             face,
             Centred(StoryArt.Text(card.Name.ToUpperInvariant(), ArcTheme.Spaced("Bold", 3), 30, HudLayer.Ink)),
             Centred(StoryArt.Text(card.Who, ArcTheme.SemiBold, 22, HudLayer.Muted)),
@@ -154,6 +157,26 @@ public sealed partial class CheckBoard : Control
         var tab = ArcTheme.Panel(ArcTheme.Flat(card.Chosen ? HudLayer.Gold : new Color("3a6fb0"), 4), label);
         tab.SizeFlagsHorizontal = SizeFlags.ShrinkCenter;
         return ArcTheme.VBox(4, tab, box);
+    }
+
+    /// <summary>
+    /// A stripe across the top of the card in its player's colour (<see cref="CheckCard.Colour"/>), dimmed with the face when they're away;
+    /// with no colour, the same room left empty, so every card's face sits at the same height.
+    /// </summary>
+    private static Control Edge(CheckCard card)
+    {
+        var size = new Vector2(0, EdgeHeight);
+        if (card.Colour is not { } c)
+        {
+            return new Control { CustomMinimumSize = size, MouseFilter = MouseFilterEnum.Ignore };
+        }
+        var colour = new Color(c.R, c.G, c.B, card.Here ? 1 : AwayEdge);
+        var box = ArcTheme.Flat(colour);
+        box.SetCornerRadiusAll(EdgeHeight / 2);
+        var edge = ArcTheme.Panel(box);
+        edge.CustomMinimumSize = size;
+        edge.MouseFilter = MouseFilterEnum.Ignore;
+        return edge;
     }
 
     /// <summary>The room a card's tab takes, so the cards without one line up with those with.</summary>

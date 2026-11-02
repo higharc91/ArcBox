@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using Tactics.Game;
 using Tactics.Logic;
 using Tactics.Presentation.Board;
@@ -181,7 +182,51 @@ public sealed class StoryScreenTests
         Assert.Equal("4 of 4 voted · 2–2 tie, Sam decides", vote.Tally);
         Assert.Equal("Tie-break", vote.Heading);
         Assert.Equal(["A", "B"], vote.Rows.Select(r => r.Letter));
-        Assert.Equal(["Jess", "Marcus"], vote.Rows[0].Voters);
+        Assert.Equal(["Jess", "Marcus"], vote.Rows[0].Voters.Select(v => v.Name));
+    }
+
+    // The user's answer 14: a voter's pip is their colour, with their initial in whichever of black and white reads on it.
+    [Fact]
+    public void A_voters_pip_is_their_colour_with_an_initial_that_reads_on_it()
+    {
+        var ask = Ask(true, 3, 4, [Option("force", "We'll clear the ford by force.", "jess", "Marcus"), Option("parley", "We'll parley.", "Priya")],
+            deadline: T0.AddSeconds(30)) with
+        {
+            Colors = new Dictionary<string, string> { ["jess"] = "#7ccbff", ["Marcus"] = "#1a1e3a", ["Sam"] = "#ffd23f" }.ToImmutableSortedDictionary(StringComparer.Ordinal),
+        };
+
+        var rows = Screen(Showing(4, Line("ch1_mayor_halden_4"), States.Asking, ask)).Vote!.Rows;
+
+        var (jess, marcus) = (rows[0].Voters[0], rows[0].Voters[1]);
+        Assert.Equal(new VoterPip("jess", "J", Rgb.Hex("#7ccbff"), PlayerInk.Dark), jess);
+        Assert.Equal(new VoterPip("Marcus", "M", Rgb.Hex("#1a1e3a"), PlayerInk.Light), marcus);    // a dark colour gets white
+        Assert.Equal(new VoterPip("Priya", "P", PlayerInk.PipFallback, PlayerInk.Dark), rows[1].Voters[0]);   // no colour: the gold
+    }
+
+    [Fact]
+    public void Without_colours_every_pip_is_the_panels_gold()
+    {
+        var ask = Ask(true, 2, 2, [Option("a", "Yes.", "Jess", ""), Option("b", "No.")], deadline: T0.AddSeconds(30));
+
+        var pips = Screen(Showing(4, Line("ch1_mayor_halden_4"), States.Asking, ask)).Vote!.Rows[0].Voters;
+
+        Assert.All(pips, p => Assert.Equal((PlayerInk.PipFallback, PlayerInk.Dark), (p.Fill, p.Ink)));
+        Assert.Equal(["J", "?"], pips.Select(p => p.Initial));
+    }
+
+    // A colour changing under a vote is a new row, so the TV redraws the pip rather than keep the old one.
+    [Fact]
+    public void A_pips_colour_tells_two_rows_apart()
+    {
+        var ask = Ask(true, 1, 2, [Option("a", "Yes.", "Jess")], deadline: T0.AddSeconds(30));
+        StoryAskView Coloured(string hex) => ask with { Colors = new Dictionary<string, string> { ["Jess"] = hex }.ToImmutableSortedDictionary(StringComparer.Ordinal) };
+
+        var gold = Screen(Showing(4, Line("ch1_mayor_halden_4"), States.Asking, Coloured("#ffd23f"))).Vote!;
+        var sky = Screen(Showing(4, Line("ch1_mayor_halden_4"), States.Asking, Coloured("#7ccbff"))).Vote!;
+
+        Assert.NotEqual(gold.Rows[0], sky.Rows[0]);
+        Assert.NotEqual(gold, sky);
+        Assert.Equal(gold, Screen(Showing(4, Line("ch1_mayor_halden_4"), States.Asking, Coloured("#ffd23f"))).Vote!);
     }
 
     [Fact]
@@ -357,6 +402,19 @@ public sealed class StoryScreenTests
 
         Assert.Equal(["Priya · Rogue", "Cleric", "Jess"], cards.Select(c => c.Who));
         Assert.Equal(["2 votes", "1 vote", ""], cards.Select(c => c.VotesText));
+    }
+
+    // The user's answer 14: each roller's card has an edge in their player's colour; one the server sent none for (or a bad one) has none.
+    [Fact]
+    public void A_card_has_its_players_colour_for_its_edge()
+    {
+        var view = CheckOf() with { Cards = [Card("pr_wren", "Wren", "Priya", 5) with { Color = "#FFAB94" }, Card("pr_bo", "Bo", "Bo", 1),
+            Card("pr_kara", "Kara", "Jess", 0) with { Color = "coral" }] };
+
+        var cards = Screen(Showing(4, null, States.PickRoller, check: view)).Check!.Cards;
+
+        Assert.Equal([Rgb.Hex("#ffab94"), null, null], cards.Select(c => c.Colour));
+        Assert.NotEqual(cards[0], cards[0] with { Colour = Rgb.Hex("#7ccbff") });    // a new colour redraws the card
     }
 
     [Fact]

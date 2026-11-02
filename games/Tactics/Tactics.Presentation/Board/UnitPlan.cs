@@ -80,10 +80,21 @@ public sealed record BoardUnit(long Order, UnitId Id, UnitTone Tone, Vector2 Fee
     public bool Away { get; init; }
 
     /// <summary>
-    /// A walker's ring goes over a dark one (<see cref="UnitPlan.RingOutline"/>), so the party's green reads on grass as well as stone; a unit in a
-    /// fight has its side's ring alone, as ever.
+    /// A ring goes over a dark one (<see cref="UnitPlan.RingOutline"/>), so it reads on grass as well as stone: a walker's, and a hero's in a
+    /// fight who has a player's colour. Anyone else in a fight has their side's ring alone, as ever.
     /// </summary>
     public bool Outlined { get; init; }
+
+    /// <summary>Their player's own colour (<see cref="PlayerInk.Of"/>), for a walker or a hero; null for the side's.</summary>
+    public Rgb? Colour { get; init; }
+
+    /// <summary>
+    /// The colour its ring is drawn in: its player's colour, always, even on their turn, when the canvas only draws it wider and the turn's
+    /// arrow says whose turn it is. The turn's gold would hide whose hero it is, and is all but the palette's own "Gold", so on the turn of
+    /// the player beside the gold one the TV showed two gold rings (seen on the TV, 2026-11-01). With no player's colour: the turn's gold on
+    /// the unit whose turn it is, else its side's (<see cref="UnitPlan.ToneRing"/>), so a walker with none keeps the party's green.
+    /// </summary>
+    public Rgb RingColour => Colour ?? (Active ? UnitPlan.ActiveRing : UnitPlan.ToneRing(Tone));
 }
 
 /// <summary>
@@ -94,6 +105,26 @@ public static class UnitPlan
 {
     /// <summary>What a walker's ring is drawn over, so it reads on any ground.</summary>
     public static readonly Rgb RingOutline = Rgb.Hex("#0b0b10");
+
+    /// <summary>The party's ring with no player's colour: ui/manifest.json's palette's hp green.</summary>
+    public static readonly Rgb PartyRing = Rgb.Hex("#63d36f");
+
+    /// <summary>An enemy's ring: the palette's enemy red.</summary>
+    public static readonly Rgb EnemyRing = Rgb.Hex("#e2534c");
+
+    /// <summary>Anyone else's ring.</summary>
+    public static readonly Rgb NeutralRing = Rgb.Hex("#dbceb7");
+
+    /// <summary>The ring of the unit whose turn it is: the palette's gold.</summary>
+    public static readonly Rgb ActiveRing = Rgb.Hex("#ffe794");
+
+    /// <summary>A side's ring.</summary>
+    public static Rgb ToneRing(UnitTone tone) => tone switch
+    {
+        UnitTone.Party => PartyRing,
+        UnitTone.Enemy => EnemyRing,
+        _ => NeutralRing,
+    };
 
     /// <summary>An HP bar's width.</summary>
     public const int BarWidth = 30;
@@ -161,6 +192,7 @@ public static class UnitPlan
             CrownAt = walker.Leads ? Overhead(feet, sprite) : null,
             Away = !walker.Here,
             Outlined = true,
+            Colour = PlayerInk.Of(walker.Color),
         };
     }
 
@@ -192,6 +224,7 @@ public static class UnitPlan
         var effects = looks.Select(l => l.Effect).OfType<StatusEffect>().DistinctBy(e => e.Path).ToArray();
         ImmutableArray<ArtRect> icons = [.. looks.Select(l => l.Icon).OfType<ArtRect>().Distinct().Take(MaxIcons)];
         var isActive = unit.Id == active;
+        var colour = tone == UnitTone.Party ? PlayerInk.Of(unit.Color) : null;     // a hero's player's, as their walker's ring was
 
         // The marks stack up from the head. If the stack would reach the top strip, all of it comes down onto the unit.
         var feet = place.Feet;
@@ -217,7 +250,11 @@ public static class UnitPlan
             downed ? null : new UnitBar(new Vector2(feet.X - BarWidth / 2f, markTop + shift), BarWidth, Fill(unit.Hp, unit.MaxHp, art.Bar(tone))),
             downed ? new UnitCountdown(new Vector2(feet.X, (markTop + mark) / 2 + shift), unit.Countdown.ToString(CultureInfo.InvariantCulture)) : null,
             icons, new Vector2(feet.X - icons.Length * IconStep / 2f, iconsTop + shift),
-            isActive ? new Vector2(feet.X, arrow + shift) : null);
+            isActive ? new Vector2(feet.X, arrow + shift) : null)
+        {
+            Colour = colour,
+            Outlined = colour is not null,
+        };
     }
 
     /// <summary>A unit's place in the idle cycle, from its id: from its place in a list, a unit leaving would make the rest jump.</summary>

@@ -29,14 +29,10 @@ public partial class BoardCanvas : Node2D
     private const int RingPoints = 28;
     private const float RingWidth = 1.5f;
     private const float ActiveRingWidth = 2.5f;
-    private const float OutlinedRingWidth = 2f;       // a walker's ring, over a dark one, so the party's green reads on grass
+    private const float OutlinedRingWidth = 2f;       // a walker's or a coloured hero's ring, over a dark one, so it reads on grass
     private const float RingOutlineWidth = 4f;
     private const float RingOutlineAlpha = 0.8f;
 
-    private static readonly Color PartyRing = new("63d36f");    // ui/manifest.json's palette: hp, enemy, gold
-    private static readonly Color EnemyRing = new("e2534c");
-    private static readonly Color NeutralRing = new("dbceb7");
-    private static readonly Color ActiveRing = new("ffe794");
     private static readonly Color AwayShade = new(0.68f, 0.68f, 0.74f, 0.82f);     // a walker whose phone has gone: still one of the party
 
     private readonly BoardPainter _painter;
@@ -307,28 +303,22 @@ public partial class BoardCanvas : Node2D
             var angle = Mathf.Tau * i / RingPoints;
             points[i] = feet + new Vector2(Mathf.Cos(angle) * unit.Ring, Mathf.Sin(angle) * unit.Ring / 2);
         }
+        var ring = Colour(unit.RingColour);
         if (unit.Outlined)
         {
-            DrawPolyline(points, Colour(UnitPlan.RingOutline, RingOutlineAlpha), RingOutlineWidth);
-            DrawPolyline(points, unit.Away ? ToneColour(unit.Tone) * AwayShade : ToneColour(unit.Tone), OutlinedRingWidth);
+            DrawPolyline(points, Colour(UnitPlan.RingOutline, RingOutlineAlpha), RingOutlineWidth + (unit.Active ? ActiveRingWidth - OutlinedRingWidth : 0));
+            DrawPolyline(points, unit.Away ? ring * AwayShade : ring, unit.Active ? ActiveRingWidth : OutlinedRingWidth);
             return;
         }
-        DrawPolyline(points, unit.Active ? ActiveRing : ToneColour(unit.Tone), unit.Active ? ActiveRingWidth : RingWidth);
+        DrawPolyline(points, ring, unit.Active ? ActiveRingWidth : RingWidth);
     }
 
     /// <summary>What's left when a sprite's file is missing: a marker in the unit's colour, so it's still on the board.</summary>
     private void DrawTokenFor(BoardUnit unit, Vector2 feet)
     {
         var (halfWidth, height) = (unit.Ring * 0.7f, 26f);
-        DrawColoredPolygon([feet, feet + new Vector2(halfWidth, -height / 2), feet + new Vector2(0, -height), feet + new Vector2(-halfWidth, -height / 2)], ToneColour(unit.Tone));
+        DrawColoredPolygon([feet, feet + new Vector2(halfWidth, -height / 2), feet + new Vector2(0, -height), feet + new Vector2(-halfWidth, -height / 2)], Colour(unit.Colour ?? UnitPlan.ToneRing(unit.Tone)));
     }
-
-    private static Color ToneColour(UnitTone tone) => tone switch
-    {
-        UnitTone.Party => PartyRing,
-        UnitTone.Enemy => EnemyRing,
-        _ => NeutralRing,
-    };
 
     private void DrawEffect(StatusEffect effect, Vector2 anchor, double clock)
     {

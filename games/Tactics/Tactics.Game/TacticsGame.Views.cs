@@ -1,13 +1,19 @@
 using System.Collections.Immutable;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using ArcBox.Sdk;
 using Tactics.Logic;
 
 namespace Tactics.Game;
 
 /// <summary>A unit as the TV and phones draw it.</summary>
+/// <param name="Color">
+/// The TV's alone (spec §4.5): a hero's player's colour, "#rrggbb" (<see cref="WalkerView.Color"/>), for their ring in the fight; null for
+/// everyone else, and always on a phone, which never sees it.
+/// </param>
 public sealed record UnitView(UnitId Id, string Name, string Side, string? Sprite, Tile At, int Hp, int MaxHp, int TempHp,
-    string Life, int Countdown, ImmutableArray<string> Conditions, string? Player);
+    string Life, int Countdown, ImmutableArray<string> Conditions, string? Player,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Color = null);
 
 /// <summary>
 /// An ability on the phone's turn screen. <see cref="Targets"/> are the targets that affect someone (with their
@@ -488,13 +494,25 @@ public sealed partial class TacticsGame
         var save = Save_;
         var state = save.State;
         return new BattleView(save.Encounter, state.MapId, state.Round, state.Order, state.Active,
-            [.. state.Units.Values.Select(u => UnitViewOf(u) with { Sprite = HostSprite.Of(u.Sheet.Sprite, u.Sheet.Tags) })],
+            [.. state.Units.Values.Select(u => UnitViewOf(u) with { Sprite = HostSprite.Of(u.Sheet.Sprite, u.Sheet.Tags), Color = HeroColor(save, u.Id) })],
             save.Log.IsDefault ? [] : save.Log, state.Outcome?.ToString(), BoardChanges.Of(state), state.Objectives.Current,
             state.Pending is ReactionOffer offer && IsPlayed(offer.Reactor) ? offer.Reactor : null,
             Rules.Encounters.GetValueOrDefault(save.Encounter)?.Name,
             StageOf(save) is { } stage
                 ? new StageView(_region!.Def.Id, stage.Origin, stage.Height, [.. save.Members.Select(m => m.Value)])
                 : null);
+    }
+
+    /// <summary>
+    /// The colour of the member <paramref name="unit"/> is (<c>hero&lt;n&gt;</c> is <see cref="BattleSave.Members"/>' n-th), whoever plays it
+    /// now; null for a companion, a monster, or a member with no colour kept.
+    /// </summary>
+    private string? HeroColor(BattleSave save, UnitId unit)
+    {
+        for (var i = 0; i < save.Members.Length; i++)
+            if (UnitFor(i) == unit)
+                return PlayerColors.Parse(_doc.Members.GetValueOrDefault(save.Members[i].Value)?.Color);
+        return null;
     }
 
     private UnitView UnitViewOf(UnitState u)
