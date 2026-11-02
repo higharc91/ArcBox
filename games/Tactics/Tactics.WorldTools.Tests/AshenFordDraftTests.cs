@@ -447,6 +447,7 @@ public sealed class AshenFordDraftTests
         Pit(source, pit);
         source.Beats[source.Beats.FindIndex(b => b.Beat == "ch1_mayors_request")] = new BeatSpot("ch1_mayors_request", pit);
         var rules = RegionExportTests.CopyRules();
+        RegionExportTests.WithoutThings(rules, "ashen_ford");     // the things' own check refuses a beat it can't walk back from: this is the story's warning
         try
         {
             var result = RegionExport.Export(Painted(source), rules, ContentPaths.ContentBase);
@@ -487,6 +488,7 @@ public sealed class AshenFordDraftTests
         Pit(source, pit);
         source.Recovery = pit;
         var rules = RegionExportTests.CopyRules();
+        RegionExportTests.WithoutThings(rules, "ashen_ford");     // the things' check says the same in its own words: this is the region's
         try
         {
             var problem = Assert.Single(RegionExport.Export(Painted(source), rules, ContentPaths.ContentBase).Problems);

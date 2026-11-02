@@ -871,8 +871,27 @@ public sealed class WalkingTests
 
         Hold(s, "se", 15);
 
-        // A kilobyte, plus each walker's colour (",\"color\":\"#rrggbb\"", 20 bytes; the character screens, 2026-11-01).
-        Assert.True(JsonSerializer.SerializeToUtf8Bytes(Party(s), ArcJson.Options).Length < 1024 + 4 * 20);
+        // A kilobyte, plus each walker's colour (",\"color\":\"#rrggbb\"", 20 bytes; the character screens, 2026-11-01). The walk's own part:
+        // the region's things ride along beside it, and are weighed on their own below.
+        Assert.True(JsonSerializer.SerializeToUtf8Bytes(WalkingPart(Party(s)), ArcJson.Options).Length < 1024 + 4 * 20);
+    }
+
+    /// <summary>The view without the region's things and their events: what walking itself costs a step.</summary>
+    private static ExploreView WalkingPart(ExploreView view) => view with { Things = null, ThingEvents = null };
+
+    [Fact]
+    public void Ashen_fords_things_cost_the_explore_view_a_known_amount()
+    {
+        // Every view carries every thing that's there and seen (interactables design §2.9), so each step's view grows by all of them: about
+        // 190 bytes a thing (2.9 KB for Ashen Ford's 15 seen things), which takes a step's view past one packet (1420 bytes); this pins what they cost, so a
+        // change to what a thing sends, or a much fuller region, is seen here.
+        var s = At(Road());
+        Hold(s, "se", 3);
+        var view = Party(s);
+        var things = JsonSerializer.SerializeToUtf8Bytes(view, ArcJson.Options).Length - JsonSerializer.SerializeToUtf8Bytes(WalkingPart(view), ArcJson.Options).Length;
+
+        Assert.Equal(15, view.Things!.Value.Length);
+        Assert.InRange(things, 1, 15 * 200);
     }
 
     [Fact]
@@ -896,7 +915,7 @@ public sealed class WalkingTests
         var party = h.HostView<TacticsHostView>().Explore!;
         Assert.Equal(12, party.Legs.Length);
         Assert.Equal(6, party.Party.Length);
-        Assert.True(JsonSerializer.SerializeToUtf8Bytes(party, ArcJson.Options).Length < 1300 + 6 * 20);     // and each colour
+        Assert.True(JsonSerializer.SerializeToUtf8Bytes(WalkingPart(party), ArcJson.Options).Length < 1300 + 6 * 20);     // and each colour
     }
 
     [Fact]

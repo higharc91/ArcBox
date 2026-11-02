@@ -111,6 +111,24 @@ public sealed class RegionExportTests : IDisposable
         File.WriteAllText(path, manifest.ToJsonString());
     }
 
+    /// <summary>
+    /// Takes <paramref name="id"/>'s things to interact with out of the copied rules: a test that paints a small field under a real region's id
+    /// is about the story, and the real region's things don't stand on its six by six tiles.
+    /// </summary>
+    private void WithoutThings(string id) => WithoutThings(_rules, id);
+
+    /// <summary><paramref name="id"/>'s things to interact with, taken out of the copied <paramref name="rules"/>.</summary>
+    internal static void WithoutThings(string rules, string id)
+    {
+        var path = Path.Combine(rules, "manifest.json");
+        var manifest = JsonNode.Parse(File.ReadAllText(path))!;
+        var files = manifest["files"]!.AsArray();
+        foreach (var file in files.Where(f => f!.GetValue<string>() == $"interactables/{id}.json").ToArray())
+            files.Remove(file);
+        File.WriteAllText(path, manifest.ToJsonString());
+        File.Delete(Path.Combine(rules, "interactables", $"{id}.json"));
+    }
+
     private static Dictionary<Tile, string> Grid(int width, int height, string material = Grass)
         => Enumerable.Range(0, width * height).ToDictionary(i => new Tile(i % width, i / width), _ => material);
 
@@ -845,6 +863,7 @@ public sealed class RegionExportTests : IDisposable
     [Fact]
     public void A_region_that_breaks_the_story_is_written_with_warnings_that_say_what_to_do()
     {
+        WithoutThings("ashen_ford");
         var field = Field("ashen_ford");
         var result = Export(field with { Beats = [.. field.Beats, new BeatSpot("ch1_ford_assault", new Tile(3, 3))] });
 
@@ -877,6 +896,7 @@ public sealed class RegionExportTests : IDisposable
                 File.Copy(file, to);
             }
             File.WriteAllText(Path.Combine(content, "lore", "scenes", "ch1.json"), "{ not json");
+            WithoutThings("ashen_ford");
             var before = File.ReadAllBytes(RegionFile("ashen_ford"));
             var field = Field("ashen_ford");
 

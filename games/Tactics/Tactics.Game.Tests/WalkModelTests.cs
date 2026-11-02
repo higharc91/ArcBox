@@ -25,7 +25,11 @@ public sealed class WalkModelTests
     private static readonly Lazy<Tile[]> Tiles = new(() => [.. WorldWalk.Reach(Ground, Rules.RegionFor("ashen_ford")!.Def.Spawns.Start, ClassDef.DefaultJump).Order()]);
     private static readonly Lazy<JsonElement> BaseDocument = new(() => DocumentAt(null));
 
-    private static Terrain Ground => Rules.GroundFor("ashen_ford")!.Terrain;
+    /// <summary>Ashen Ford as the party walks it: the painted ground, and its things that stand in the way (none is opened in these runs).</summary>
+    private static Terrain Ground => WalkedGround.Value;
+
+    private static readonly Lazy<Terrain> WalkedGround = new(() => Rules.GroundFor("ashen_ford")!.With(
+        [.. Interactables.Blocking(Rules.InteractablesIn("ashen_ford"), null, new HashSet<string>())]));
 
     /// <summary>One thing that happens. <paramref name="Player"/> -1 means whoever leads.</summary>
     private sealed record Event(string Kind, int Player = 0, string? Dir = null, int Ms = 0);
@@ -481,7 +485,11 @@ public sealed class WalkModelTests
         {
             var node = System.Text.Json.Nodes.JsonNode.Parse(phone)!;
             if (node["data"] is System.Text.Json.Nodes.JsonObject data)
+            {
                 data.Remove("interact");
+                data.Remove("targets");     // the things in reach and whether the button is a beat's (interactables design §2.5),
+                data.Remove("beat");        // which a step changes as it does Interact's word
+            }
             return node.ToJsonString();
         }
 
@@ -659,7 +667,7 @@ public sealed class WalkModelTests
             (_lastCommit, _lastMs) = (now, leg.Ms);
             _commits++;
             if (before.Phase == after.Phase && before.Party.Leader == after.Party.Leader && e.Kind is not ("disc" or "conn"))
-                // Only the leader's Interact may change on a step, and only as a beat's spot comes into reach or goes out of it (5d flag 8).
+                // Only the leader's Interact (and its list of things in reach) may change on a step, as a beat's spot or a thing comes into reach or goes out of it (5d flag 8).
                 Must(before.Phones.Select(WithoutInteract).SequenceEqual(after.Phones.Select(WithoutInteract)), "a phone changed on a step");
         }
 

@@ -362,13 +362,15 @@ public sealed class InteractTests
     }
 
     [Fact]
-    public void Ashen_ford_has_no_things_and_its_views_say_so()
+    public void Ashen_fords_things_are_sent_but_the_hidden_one_and_none_is_saved_until_one_changes()
     {
         var s = new Session();
         s.ToWalking();
-        Assert.Null(s.Host.Explore!.Things);
-        Assert.Null(s.Host.Explore!.ThingEvents);
-        Assert.False(Walk(s).TryGetProperty("targets", out _));           // the walk screen is as it was before things
+        var placed = Rules.InteractablesIn("ashen_ford");
+        Assert.InRange(placed.Length, 12, 18);
+        Assert.Equal(placed.Where(t => t.Hidden is null).Select(t => t.Id), s.Host.Explore!.Things!.Value.Select(t => t.Id));    // the cache isn't found yet
+        Assert.Empty(s.Host.Explore!.ThingEvents!.Value);                   // nothing has happened to one yet
+        Assert.True(Walk(s).TryGetProperty("targets", out _));            // a region with things gives the leader's walk screen its list
         Assert.Null(Doc(s).World!.Things);
         Assert.DoesNotContain("things", Doc(s).ToJson().GetProperty("world").EnumerateObject().Select(p => p.Name));      // not written
     }

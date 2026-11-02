@@ -46,7 +46,9 @@
     "vip": true,
     "canBattle": false,
     "portal": "/c/ABCD",
-    "interact": "Talk"
+    "interact": "Talk",
+    "targets": [],
+    "beat": true
   },
   "viewId": "v1",
   "deadlineUtc": null,

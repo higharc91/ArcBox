@@ -204,7 +204,7 @@ public static class AshenFordDraft
     /// <summary>What stands in Emberwick that isn't a building.</summary>
     private static readonly Stand[] InEmberwick =
     [
-        new("well", "stone", (31, 60)),
+        // The square's well at (31, 60) and the signpost at the east fork (51, 63) are things to use (interactables/ashen_ford.json), not props.
         new("lamp_post", "iron", (25, 57), (37, 59), (25, 63), (37, 63), (28, 61), (34, 61)),       // the square
         new("lamp_post", "iron", (17, 54), (20, 54), (39, 54), (42, 54)),                           // Chapel Row
         new("lamp_post", "iron", (20, 60), (45, 60), (39, 60), (20, 66), (45, 66), (39, 66)),       // Mill Lane, the High Street, the rows
@@ -328,7 +328,7 @@ public static class AshenFordDraft
     /// <summary>The road east: a signpost at each fork, a cart or two left on the verge, a wall of the scarp's crags to its west.</summary>
     private static readonly Stand[] OnTheRoad =
     [
-        new("signpost", "oak", (51, 63), (66, 9), (88, 49)),
+        new("signpost", "oak", (66, 9), (88, 49)),
         new("cart", "oak", (53, 30), (92, 41)),
         new("crag", "grey", (56, 62), (58, 50), (60, 40), (63, 32), (58, 74), (57, 88), (56, 100), (60, 46), (57, 56), (60, 68), (56, 80), (59, 94), (55, 108), (58, 114), (65, 28)),
         new("rock_cluster", "grey", (59, 56), (57, 66), (61, 36), (58, 82), (57, 94), (66, 24), (62, 44), (60, 62), (55, 72), (60, 86), (58, 104), (56, 118), (68, 22)),

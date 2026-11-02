@@ -32,15 +32,21 @@ public sealed class WalkingRoomTests
 
     private static JsonElement Input(object o) => JsonSerializer.SerializeToElement(o, ArcJson.Options);
 
-    /// <summary>A direction with at least <paramref name="steps"/> plain, straight steps ahead of <paramref name="from"/>: 300 ms each.</summary>
+    /// <summary>
+    /// A direction with at least <paramref name="steps"/> plain, straight steps ahead of <paramref name="from"/>: 300 ms each. None brings a
+    /// thing to interact with into reach (a tile away), which rightly changes the leader's screen (its <c>targets</c>).
+    /// </summary>
     private static string OpenWay(JsonElement from, int steps = 12)
     {
         var terrain = Pack.Value.GroundFor("ashen_ford")!.Terrain;
+        var things = Pack.Value.InteractablesIn("ashen_ford").Select(t => t.At).ToArray();
+        bool Clear(Tile t) => things.All(at => Math.Max(Math.Abs(at.X - t.X), Math.Abs(at.Y - t.Y)) > 1);
         foreach (var dir in Enum.GetValues<WalkDir>())
         {
             var at = new Tile(from[0].GetInt32(), from[1].GetInt32());
             var taken = 0;
-            while (taken < steps && WorldWalk.Next(terrain, at, dir, ClassDef.DefaultJump, null) is { Slid: false, Cost: 1, Diagonal: false } move)
+            while (taken < steps && WorldWalk.Next(terrain, at, dir, ClassDef.DefaultJump, null) is { Slid: false, Cost: 1, Diagonal: false } move
+                && Clear(move.To))
             {
                 at = move.To;
                 taken++;
