@@ -130,7 +130,8 @@ describe("things to interact with, on the walk screen", () => {
     show("walk-things-follower");
     expect(screen.queryByRole("button", { name: "Search" })).toBeNull();
     cleanup();
-    show("walk-leader");
+    // Ashen Ford has things now, so its leader's screen stands in for a region without, as the server sends one: no list, no Search.
+    show("walk-leader", (d) => { delete d.targets; delete d.beat; delete d.search; });
     expect(screen.queryByRole("button", { name: "Search" })).toBeNull();
   });
 
