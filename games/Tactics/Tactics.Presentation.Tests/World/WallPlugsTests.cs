@@ -64,7 +64,8 @@ public sealed class WallPlugsTests
     {
         var steps = ThingsDemo.Steps();
         var found = steps.ToList().FindIndex(s => s.Label == "secret-found");
-        Assert.All(steps.Take(found), s => Assert.Equal([Gap], s.View.Explore!.Plugs!.Value));
-        Assert.All(steps.Skip(found), s => Assert.Empty(s.View.Explore!.Plugs!.Value));
+        // Only the secret door's gap: the hidden path's plug (design §7.3) is ThingsDemoTests'.
+        Assert.All(steps.Take(found), s => Assert.Equal([Gap], s.View.Explore!.Plugs!.Value.Where(p => p.At == Gap.At)));
+        Assert.All(steps.Skip(found), s => Assert.DoesNotContain(s.View.Explore!.Plugs!.Value, p => p.At == Gap.At));
     }
 }
