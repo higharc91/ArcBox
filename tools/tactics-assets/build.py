@@ -523,6 +523,8 @@ def build_anim_previews() -> None:
 
 SETS = {"palettes": build_palettes, "characters": build_characters, "anims": build_anim_previews,
         "terrain": build_terrain}
+from parts.tactical_art.build import build as build_tactical
+SETS["tactical"] = build_tactical
 
 # Sets that live in their own module: parts/<name>.py with a build() function. Each writes under
 # content/tactics/base/<name>/ and previews/, using arcpix.out.

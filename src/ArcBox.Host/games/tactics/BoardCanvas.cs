@@ -226,13 +226,14 @@ public partial class BoardCanvas : Node2D
         }
 
         var sprite = unit.Sprite;
-        var size = new Vector2(sprite.Width, sprite.Height);
-        var corner = feet - new Vector2(unit.Mirror ? sprite.Width - sprite.AnchorX : sprite.AnchorX, sprite.AnchorY);
+        var size = new Vector2(sprite.WorldWidth, sprite.WorldHeight);
+        var corner = feet - new Vector2(unit.Mirror ? sprite.Width - sprite.AnchorX : sprite.AnchorX, sprite.AnchorY) * sprite.PixelScale;
         if (Load(sprite.Path) is { } texture)
         {
             var source = sprite.Source(unit.Anim.FrameAt(clock), unit.Row);
             var target = new Rect2(corner, unit.Mirror ? new Vector2(-size.X, size.Y) : size);   // a negative width flips, in the same place
-            var light = _lighting is { } lighting ? Colour(lighting.ForFigure(BoardLighting.BodyOf(unit.Feet, sprite.Height))) : Colors.White;
+            var light = _lighting is { } lighting ? Colour(lighting.ForFigure(BoardLighting.BodyOf(unit.Feet,
+                sprite.FootprintHeight > 0 ? sprite.FootprintHeight : sprite.WorldHeight))) : Colors.White;
             DrawTextureRectRegion(texture, target, new Rect2(source.X, source.Y, source.Width, source.Height), light);
         }
         else

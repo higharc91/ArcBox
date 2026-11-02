@@ -124,7 +124,7 @@ public static class UnitPlan
 
         // The marks stack up from the head. If the stack would reach the top strip, all of it comes down onto the unit.
         var feet = place.Feet;
-        var head = downed ? feet.Y - LyingHeight : feet.Y - sprite.AnchorY + sprite.HeadTop;
+        var head = downed ? feet.Y - LyingHeight : feet.Y - sprite.HeadLift;
         var y = head - Gap;
         var mark = y;
         y -= downed ? DigitHeight * CountdownScale : BarHeight;
@@ -141,7 +141,7 @@ public static class UnitPlan
             downed ? new UnitAnim([sprite.Down.Frames[^1]], 1, false)
                 : pose is not null ? new UnitAnim([sprite.Anim(pose.Anim).FrameAt(pose.Seconds)], 1, false)
                 : sprite.Idle,
-            PhaseOf(unit.Id), row, mirror, Math.Min(sprite.Width * RingShare, MaxRing), isActive,
+            PhaseOf(unit.Id), row, mirror, Math.Min((sprite.FootprintWidth > 0 ? sprite.FootprintWidth : sprite.WorldWidth) * RingShare, MaxRing), isActive,
             [.. effects.Where(e => e.Under)], [.. effects.Where(e => !e.Under)],
             downed ? null : new UnitBar(new Vector2(feet.X - BarWidth / 2f, markTop + shift), BarWidth, Fill(unit.Hp, unit.MaxHp, art.Bar(tone))),
             downed ? new UnitCountdown(new Vector2(feet.X, (markTop + mark) / 2 + shift), unit.Countdown.ToString(CultureInfo.InvariantCulture)) : null,
@@ -163,7 +163,7 @@ public static class UnitPlan
     /// cut it, so it goes after its whole diagonal. It's still before the diagonal in front, so what's in front hides it.
     /// </summary>
     private static long OrderOf(Tile tile, UnitSprite sprite)
-        => BoardOrder.Key(sprite.Width > BoardProjection.HalfWidth * 2 ? new Tile(tile.X + tile.Y, 0) : tile, BoardLayer.Unit);
+        => BoardOrder.Key((sprite.FootprintWidth > 0 ? sprite.FootprintWidth : sprite.WorldWidth) > BoardProjection.HalfWidth * 2 ? new Tile(tile.X + tile.Y, 0) : tile, BoardLayer.Unit);
 
     /// <summary>The tone for a view's side.</summary>
     public static UnitTone ToneOf(string side) => side switch

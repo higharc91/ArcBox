@@ -17,6 +17,37 @@ python3 tools/tactics-assets/build.py characters    # one set
 Needs Python 3.11+ with Pillow and numpy. `dev_preview.py` and `dev_zoom.py` are quick-look helpers used while
 drawing.
 
+## Tactical player characters (runtime)
+
+`python3 tools/tactics-assets/build.py tactical` builds the approved tactical art
+into `content/tactics/base/tactical/`. This is the live player-character set: 11
+races × 12 classes, each with all 38 production animations (189 frames per facing).
+Run `python3 tools/tactics-assets/test_tactical.py` to validate coverage, atlas
+addressing, extreme poses, renderer/export agreement and deterministic rebakes.
+
+The authoring canvas is 64×80. Body, garments, head/hair, headwear, cloak, weapon,
+offhand and hands are independent indexed layers in `parts/tactical_art/`; race
+traits and build fitting are applied before animation. The existing production
+pose timings drive per-layer articulation, foot motion, weapon rotation, blinking,
+cloth trailing and collapse. This pass does not add a new appearance editor or
+persist arbitrary per-item cosmetic choices; the live sheets use the class kit.
+
+Runtime atlases use padded 160×160 frames in 24 columns, with each facing occupying
+eight rows. The manifest specifies frame dimensions, anchor, columns, frame count,
+animations, texture density and per-character head position. Padding leaves room
+for raised weapons and lying poses; it is excluded from ground rings and body
+lighting. The host draws at half texture density, preserving the existing world
+footprint, and crops HUD faces rather than shrinking the padded frame.
+
+`characters.<race>_<class>` selects a tactical sheet. `characters.class_<class>`
+is a human alias; named party presets with race/class metadata resolve to the
+matching tactical art. Monsters, NPCs and old packs without a tactical manifest
+continue to use their existing character sheets. Explicit monster/wild-shape
+sprites override race/class selection. Legacy campaign race tags are understood.
+
+The classic `characters/` layer library below remains the format for existing
+NPCs, enemies and asset-tool consumers; its frame size has not changed.
+
 ## How the art is built
 
 - **Indexed drawing.** A canvas pixel is a `(slot, shade)` pair, not a colour. A *slot* is a material: `skin`,

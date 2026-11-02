@@ -41,7 +41,6 @@ public sealed class HudArtTests
     }
 
     [Theory]
-    [InlineData("characters.class_fighter", UnitTone.Party, "portraits/class_fighter_idle.png", "portraits/backdrops/ally.png")]
     [InlineData("characters.goblin_cutthroat", UnitTone.Enemy, "portraits/goblin_cutthroat_idle.png", "portraits/backdrops/enemy.png")]
     [InlineData("characters.farmer", UnitTone.Neutral, "portraits/farmer_idle.png", "portraits/backdrops/neutral.png")]
     public void A_character_has_its_portrait_on_its_sides_backdrop(string sprite, UnitTone tone, string path, string backdrop)
@@ -51,6 +50,15 @@ public sealed class HudArtTests
         Assert.Equal(path, portrait.Path);
         Assert.Equal(backdrop, portrait.Backdrop);
         Assert.Equal(new ArtRect(0, 0, 40, 40), portrait.Source);
+    }
+
+    [Fact]
+    public void Tactical_portraits_crop_the_face_instead_of_shrinking_the_padded_frame()
+    {
+        var portrait = Art.Value.Portrait("characters.tiefling_warlock", UnitTone.Party);
+        var sprite = Units.Value.Sprite("characters.tiefling_warlock")!;
+        Assert.Equal(sprite.Path, portrait.Path);
+        Assert.Equal(new ArtRect(sprite.AnchorX - 20, sprite.HeadTop - 4, 40, 40), portrait.Source);
     }
 
     [Fact]

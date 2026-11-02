@@ -146,7 +146,7 @@ public sealed record BattleHud(string Title, string Round, string? Turn, string?
 
     private static float Top(BoardUnit unit)
     {
-        var top = unit.Feet.Y - unit.Sprite.AnchorY + unit.Sprite.HeadTop;
+        var top = unit.Feet.Y - unit.Sprite.HeadLift;
         if (unit.Bar is { } bar)
             top = MathF.Min(top, bar.TopLeft.Y);
         if (unit.Countdown is { } countdown)

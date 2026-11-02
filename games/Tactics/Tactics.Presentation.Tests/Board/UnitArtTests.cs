@@ -72,7 +72,72 @@ public sealed class UnitArtTests
         Assert.Equal(Pack.Frames("characters", "idle"), goblin.Idle.Frames);
         Assert.Equal(Pack.Frames("characters", "down"), goblin.Down.Frames);
         Assert.Equal(8, Art.Value.Sprite("characters.bandit")!.HeadTop);
-        Assert.Equal(4, fighter.HeadTop);
+        Assert.Equal(.5f, fighter.PixelScale);
+        Assert.Equal(32, fighter.FootprintWidth);
+    }
+
+    [Fact]
+    public void Tactical_atlas_rows_wrap_and_the_rear_facing_starts_after_all_front_rows()
+    {
+        var sprite = Art.Value.Sprite("characters.tiefling_warlock")!;
+        Assert.Equal("tactical/tiefling_warlock.png", sprite.Path);
+        Assert.True(OnDisk(sprite.Path));
+        Assert.Equal(new ArtRect(0, 160, 160, 160), sprite.Source(24, 0));
+        Assert.Equal(new ArtRect(0, 1280, 160, 160), sprite.Source(0, 1));
+        Assert.Equal(32, sprite.FootprintWidth);
+        Assert.Equal(80, sprite.WorldWidth);
+        Assert.Equal(80, sprite.WorldHeight);
+        Assert.Equal(Pack.Frames("characters", "walk"), sprite.Anim("walk").Frames);
+    }
+
+    [Fact]
+    public void Every_tactical_race_class_sheet_resolves_and_has_its_final_rear_frame_in_bounds()
+    {
+        using var doc = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.Combine(Pack.Root, "tactical", "manifest.json")));
+        var presets = doc.RootElement.GetProperty("presets").EnumerateArray().ToArray();
+        Assert.Equal(132, presets.Length);
+        foreach (var preset in presets)
+        {
+            var sprite = Art.Value.Sprite("characters." + preset.GetString())!;
+            Assert.True(OnDisk(sprite.Path));
+            var last = sprite.Source(188, 1);
+            Assert.InRange(last.X + last.Width, 1, 3840);
+            Assert.InRange(last.Y + last.Height, 1, 2560);
+            Assert.Equal(32, sprite.FootprintWidth);
+        }
+    }
+
+    [Fact]
+    public void A_pack_without_tactical_art_keeps_its_classic_character_format()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "arcbox-classic-art-" + Guid.NewGuid());
+        try
+        {
+            foreach (var set in new[] { "characters", "beasts", "bosses", "status", "icons", "ui" })
+            {
+                Directory.CreateDirectory(Path.Combine(root, set));
+                File.Copy(Path.Combine(Pack.Root, set, "manifest.json"), Path.Combine(root, set, "manifest.json"));
+            }
+            Directory.CreateDirectory(Path.Combine(root, "characters", "presets"));
+            File.Copy(Path.Combine(Pack.Root, "characters", "presets", "class_fighter.json"),
+                Path.Combine(root, "characters", "presets", "class_fighter.json"));
+            var sprite = UnitArt.Load(root).Sprite("characters.class_fighter")!;
+            Assert.Equal("characters/presets/class_fighter.png", sprite.Path);
+            Assert.Equal((32, 40, 1f), (sprite.Width, sprite.Height, sprite.PixelScale));
+        }
+        finally
+        {
+            if (Directory.Exists(root))
+                Directory.Delete(root, true);
+        }
+    }
+
+    [Fact]
+    public void Named_party_presets_use_their_race_and_class_without_replacing_enemy_art()
+    {
+        Assert.Equal("tactical/human_fighter.png", Art.Value.Sprite("characters.kara")!.Path);
+        Assert.Equal("tactical/elf_wizard.png", Art.Value.Sprite("characters.ilyra")!.Path);
+        Assert.Equal("characters/presets/goblin_archer.png", Art.Value.Sprite("characters.goblin_archer")!.Path);
     }
 
     [Theory]
@@ -198,7 +263,10 @@ public sealed class UnitArtTests
     public void Overhead_effects_follow_the_head_a_tall_sprite_lifts_them_a_small_one_lowers_them()
     {
         Assert.Equal(0, Art.Value.Sprite("characters.bandit")!.EffectShift);                // standard build
-        Assert.Equal(-4, Art.Value.Sprite("characters.class_fighter")!.EffectShift);        // large build
+        var fighter = Art.Value.Sprite("characters.class_fighter")!;
+        var dwarf = Art.Value.Sprite("characters.dwarf_fighter")!;
+        Assert.Equal((int)MathF.Round(29 - fighter.HeadLift), fighter.EffectShift);
+        Assert.True(dwarf.EffectShift > fighter.EffectShift);
         Assert.Equal(-23, Art.Value.Sprite("bosses.troll.troll")!.EffectShift);
         Assert.Equal(7, Art.Value.Sprite("bosses.imp.crimson")!.EffectShift);
     }
