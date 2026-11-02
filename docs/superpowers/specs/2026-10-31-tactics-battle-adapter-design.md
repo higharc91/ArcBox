@@ -102,6 +102,17 @@ Absent members are disconnected from the start (platform v2 §3.2), so they begi
 
 When `state.Outcome` is set, the adapter calls `Battle.Result(state, rules)`, which gives XP, injuries, items used and loot table ids. It then goes to Results (§3, step 4).
 
+### 4.6 Engine failures
+
+Rules-engine spec §8: an engine call that throws (a broken invariant, `RulesInvariantException`, or any other exception from `Battle.Apply`, `Battle.Start`, `Battle.Result`, `Battle.Hand`, `Ai.Plan` or `Ai.React`) is caught in the adapter (`TacticsGame.Faults.cs`), never by `GameSession.Guard`, so the room lives.
+
+- **The state from before stands.** The engine is pure, so nothing changes and nothing new is saved: the save holds the last good state and stays loadable.
+- **Who's told:** the TV's `Notice` reads "Something went wrong with that move." for at least `TacticsTiming.FaultNotice` (4 s), until a command applies normally. A player whose own command failed also gets the toast "Something went wrong with that move. Try something else.", and their turn or prompt is still theirs, with its timer running.
+- **The AI skips, deterministically.** A step that fails ends the unit's turn, a turn it can't plan is ended, and a reaction it can't make (only ever a player's prompt that timed out, since the engine decides AI reactors itself) is passed. A save whose next AI step fails therefore moves on the same way each time it's opened.
+- **When skipping isn't enough, the battle is called off:** if the end of the turn or the pass fails too, or more AI steps in a row are skipped than there are units in the turn order (every unit failing, a whole round). The skip count is in memory only: a reopened save starts it from 0, which is still bounded, and the same on every open. A battle whose `Battle.Result` fails is called off the same way. It's dropped as if never fought: no XP, injuries, win or loss, no Results and no checkpoint. The document keeps no battle, and the party goes where Results would have sent it, with the notice "Something went wrong with that battle, so it was called off. Nothing was won or lost." A battle that fails to start leaves the VIP on the list with a toast; one that fails to restart under new rules (§7) is called off, with only the call-off notice.
+- **A seat the engine fails to hand over** (`Battle.Hand`) keeps its controller: a leaving player's hero is played by the AI anyway, and a returning player gets the toast "Something went wrong handing your hero back, so the AI plays it for now."
+- **Logging:** `TacticsGame.FaultLogged` gets an `EngineFault` with what failed, the encounter, seed, last beat, round, turn, the command as JSON and the state from before as JSON, which `Battle.Apply` fails on again. The server logs the summary as an error and the state at Debug. A handler or a state that throws loses the log line, never the room.
+
 ## 5. Engine additions
 
 The adapter needs three small things from `Tactics.Logic`. They're added with tests, like any engine change.
@@ -168,7 +179,7 @@ Because the engine's state includes the RNG and any pending reaction, the battle
 | Screen | When | Data |
 |---|---|---|
 | `pickClass` | Muster, no character | the 12 classes with role and one line each |
-| `pickEncounter` | VIP, Encounter pick | the encounters (§3) |
+| `pickEncounter` | VIP, Encounter pick | the encounters (§3), and `canWalk`: whether "Back to walking" has a world to go back to (false in a pack with no region) |
 | `turn` | your turn | your unit, the economy pips, `TurnChoices` (§5), a mini-map of nearby tiles |
 | `react` | your reaction | the trigger ("The goblin is leaving your reach"), the options with odds, and a 10 s deadline (`DeadlineUtc`) |
 | `status` | anyone else's turn | whose turn it is, "you're up in n" (exact, rules-engine §3.2), and your HP and conditions |
@@ -187,6 +198,8 @@ Because the engine's state includes the RNG and any pending reaction, the battle
 | 4 | The VIP picks the encounter from the whole pack | Gate by `completed` / chapter order once sub-project 5 adds a story map |
 | 5 | Reaction window 10 s, turn 60 s (spec), AI pacing fallback 400 ms + 250 ms per event | Constants in one place (`TacticsTiming`) |
 | 6 | `lease.Save` after every command | Throttle it (e.g. at most once a second, plus at every turn end) if storage load shows up |
+| 7 | An engine failure the AI can't skip calls the battle off with nothing won or lost (§4.6) | Count it as a loss (no XP, the fight's injuries tended, consumables spent) instead; `CallOffBattle` is the one place |
+| 8 | The watchdog catches any exception from the engine, not only `RulesInvariantException` | Narrow `IsEngineFailure` |
 
 ## 10. Testing
 

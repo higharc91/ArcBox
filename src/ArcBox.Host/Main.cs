@@ -145,6 +145,36 @@ public partial class Main : Control
             OnHostView(new HostViewEvent("tactics", JsonSerializer.SerializeToElement(global::Tactics.Presentation.Board.DemoBattle.View(board), ArcJson.Options)));
             return;
         }
+        if (_args.StoryDemo is { } storyFrom)
+        {
+            // Dev only: the story's panels and voice over the world, scripted from the real lore, no server; the art comes from the repository.
+            GD.Print("Story demo: no server connection");
+            ShowGame("tactics");
+            var storyPack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "tactics", "base"));
+            (_scene as IContentScene)?.SetContentRoots(new Dictionary<string, string> { ["base"] = storyPack });
+            AddChild(new Games.Tactics.StoryDemoFeeder(storyPack, storyFrom, view => OnHostView(new HostViewEvent("tactics", view))));
+            return;
+        }
+        if (_args.WorldDemo is "things" or global::Tactics.Presentation.World.ThingsDemo.Region)
+        {
+            // Dev only: the art check for things to interact with, every kind in every state and each event, through the normal host-view path.
+            GD.Print("Things demo: no server connection");
+            ShowGame("tactics");
+            var thingsPack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "tactics", "base"));
+            (_scene as IContentScene)?.SetContentRoots(new Dictionary<string, string> { ["base"] = thingsPack });
+            var tactics = _scene as Games.Tactics.TacticsScene;
+            AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)),
+                captions => { if (tactics is not null) tactics.ThingCaptions = captions; }, _shots));
+            return;
+        }
+        if (_args.WorldDemo is { } region)
+        {
+            // Dev only: a whole region in blocks, measured; the art comes from the repository.
+            GD.Print("World demo: no server connection");
+            var worldPack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "tactics", "base"));
+            AddChild(new Games.Tactics.WorldDemo(region, worldPack, _args.ShotsDir, _args.WorldLooks, _args.WorldRoute));
+            return;
+        }
         if (_args.Demo == AppArgs.DemoCampaignLobby)
         {
             // Dev only: the lobby of a campaign game with a built-in campaign list and roster, no server.
@@ -426,6 +456,7 @@ public partial class Main : Control
                 if (!_wasReconnecting)
                 {
                     _wasReconnecting = true;
+                    (_scene as IConnectionScene)?.ConnectionLost();
                     SetBanner("Connection lost · reconnecting…");
                     _shots?.Capture("reconnecting");
                 }
@@ -552,8 +583,14 @@ public partial class Main : Control
         _content.Clear();
         _contentHttp?.Dispose();
         _contentHttp = new System.Net.Http.HttpClient { BaseAddress = new Uri(server.AbsoluteUri.TrimEnd('/') + "/") };
-        _contentCache = new ContentCache(ProjectSettings.GlobalizePath("user://content"), _contentHttp);
+        _contentCache = new ContentCache(ProjectSettings.GlobalizePath("user://content"), _contentHttp, installed: LogInstall);
     }
+
+    /// <summary>One line per pack version installed (on a pool thread; GD.Print is thread-safe): what came over the network.</summary>
+    private static void LogInstall(ContentInstall i) =>
+        GD.Print($"Content {i.GameId}/{i.PackId}@{i.Hash[..Math.Min(8, i.Hash.Length)]} installed: fetched {i.FetchedFiles} of {i.Files} files, "
+            + $"{i.FetchedBytes} bytes + {i.IndexBytes} bytes of index; reused {i.ReusedFiles} files, {i.ReusedBytes} bytes"
+            + (i.Evicted.Count > 0 ? $"; evicted {string.Join(", ", i.Evicted.Select(e => e[..Math.Min(e.Length, e.LastIndexOf('/') + 9)]))}" : ""));
 
     /// <summary>
     /// A cached pack is answered here at once (so the loading card doesn't even flash); a download runs on the thread pool,
@@ -864,6 +901,8 @@ public partial class Main : Control
         if (node is global::ArcBox.Host.Games.Tactics.TacticsScene tactics)
         {
             tactics.LogBeats = _args.BeatLog;
+            tactics.LogWalks = _args.WalkLog;
+            tactics.LogStory = _args.StoryLog;
         }
     }
 

@@ -45,6 +45,7 @@ drag with the middle mouse to move around. Ctrl+Z undoes.
 | `Material` | What a tile is made of. Each swatch is the corner of the real texture, so it won't line up the way it does in the game | Void. Fine for a whole 32x32 chunk. In a chunk with any paint it's a hole, which the export refuses |
 | `Height` | The tile's height, 0 to 9 | Height 0 |
 | `Flags` | How a tile plays. A swatch is a combination of marks, and the palette has all 32 | Plain ground |
+| `Props` | Props and scenery. Swatches show the prop's art at a small size; blocking props are marked with a red X in the corner | No prop on the tile. Erasing a prop leaves the ground underneath alone |
 
 **The Height ramp** is a contour map: clear is 0, then 1 blue, 2 cyan, 3 green, 4 lime, 5 yellow, 6 orange, 7 red, 8 pink and 9 violet.
 The number is on each tile when you're zoomed in. A party can climb 2 levels in a step, and can drop any distance. So a drop of 3 or more is
@@ -81,8 +82,16 @@ gets dragged, Ctrl+Z, or the export tells you to set its Position back to zero.
 | `Beats` | `BeatMarker`, where a story beat happens | `Beat`, an id from `lore/arcs.json` for the region's chapter |
 | `Stamps` | `StampMarker`, a battle map placed at its corner | `Map`, `HeightOffset` |
 | `Spawns` | `SpawnMarker`, one of each | `Kind`: `Start` or `Recovery` (where a beaten party wakes) |
+| `Buildings` | `BuildingMarker`, a piece of the town kit, on its footprint's back corner | `Building`, an id from `town/manifest.json`, and `Variant`. It snaps to the tile grid and outlines the full footprint |
+| `People` | `PersonMarker`, a person placed on one tile | `Preset` from `characters/manifest.json`, `Face`, and an optional `Walk` loop. People are decorative in the TV world and don't block walking |
 
 **To move one,** select it in the Scene dock and drag it. It snaps to tiles and outlines the tile it's on. A stamp is different: see below.
+
+**Props** are painted on the `Props` layer. Choose the id and variant from the swatches; a red X means the prop blocks walking. Erase only the prop cell to leave the terrain unchanged. The sprite size, anchor, and height come from `props/manifest.json`.
+
+**Buildings** snap to their back corner. Their orange outline shows the full footprint, divided into tiles. The outline comes from `town/manifest.json`; the building's blocked footprint and door positions are checked on export. A building can cover more than one tile, so leave its whole footprint clear of props and stamps.
+
+**People** are placed under `People` with `PersonMarker`. Choose a preset and facing in the Inspector. `Walk` is an optional short list of tiles for a local idle loop; leave it empty for someone who stands still. They are scenery and never affect path checks.
 
 **To add one,** right-click the group, choose Add Child Node, and pick the marker type. It has to be under the right group, or the export
 says so.
@@ -114,6 +123,7 @@ clicking a line that names a tile goes to it.
 | undefined flag bits, heights outside 0 to 9 | A cell a swatch can't make | Repaint it |
 | uses too many materials | Over the limit for one region | Repaint some tiles with fewer materials |
 | can't be reached from the start | A marker no one can walk to | Paint a way, climbing 2 or less a step, or move the marker |
+| can't walk back to the start | The Recovery marker is below a one-way drop, so a beaten party would wake with no way back | Paint a way out, climbing 2 or less a step, or move the marker |
 | can't be stood on | The Start marker is on Impassable or Deep | Move it, or clear the flag |
 | doesn't match its map | Paint inside a stamp | Select its marker, press Apply stamp |
 | doesn't fit, overlaps, stamped twice | A stamp is misplaced | Move the marker or delete one. A map can only be stamped once |
@@ -126,10 +136,15 @@ clicking a line that names a tile goes to it.
 | the scene is named X but its Id is Y | Two scenes could overwrite each other's file | Rename the scene, or change `Id` |
 | Save the scene first | It couldn't be saved | Check it isn't read-only, or use Save Scene As |
 | couldn't be read, couldn't be written | Something's holding a file | Close it, and export again |
+| a thing in `interactables/<id>.json` (not on walkable ground, in a stamp, can't be reached…) | The region's things to interact with are in their own hand-written file beside the region, which the export never writes; its check loads them against the new painting, as the game will | Move the thing in that file, or paint round it |
 
 | Warning (the file is still written) | What it means | What to do |
 |---|---|---|
 | old stamp at (x, y) may still be in the world | A pending area | Repaint it, then Done repainting |
+| a blocking prop on a road | A tree or obstacle blocking a road or street | Move the prop off the road, or change the material |
+| a prop on a beat spot | A prop placed on a story beat's tile | Move the prop, or move the beat marker |
+| a prop on a spawn | A prop placed on the Start or Recovery spawn | Move the prop, or move the spawn marker |
+| a tall prop in front of a stamp | A prop of height 2 or more within 4 tiles in front of a battle stamp (+X or +Y), where it would hide the fight | Move the prop, or move the stamp |
 | a beat has no spot | The story reaches a beat with no marker | Add a `BeatMarker` |
 | a battle beat has no stamp | Its encounter's map isn't stamped here | Add a `StampMarker`, press Apply stamp |
 | party can't walk to a beat | The story can't get there in order, or, for a battle, can't reach its spot or a step into its stamp | Paint a way there, or move the marker |
@@ -202,9 +217,9 @@ scene: it refuses without `--rules=<a copy of the pack>`. `--click-first-problem
 presses Go to tile. These print `Parameter "t" is null` as they save: it's Godot failing to make the scene's thumbnail with no renderer, and
 it's harmless.
 
-**A region file is in the rules pack, so any change to it changes the pack's hash.** A battle saved under the old hash starts again, with a
-notice, the next time that campaign opens, and each TV downloads the whole pack again. So don't deploy every export: send them in batches.
-The restart lasts until milestone 5b, which takes `rules/world/` out of the hash a battle save compares. The TV's download stays.
+**A region file is in the rules pack, so any change to it changes the pack's download hash.** Each TV downloads the whole pack again, so
+don't deploy every export: send them in batches. A saved battle doesn't notice: `rules/world/` isn't in the hash a battle save compares, so a
+repaint doesn't restart a fight. Listing a new region in `manifest.json` does, as the manifest is in that hash.
 
 ## Rebuilding the palette
 

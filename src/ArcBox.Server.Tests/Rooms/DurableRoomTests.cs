@@ -88,6 +88,47 @@ public sealed class DurableRoomTests
         return [.. Enumerable.Range(0, reader.FieldCount).Select(i => reader.IsDBNull(i) ? "" : Convert.ToString(reader.GetValue(i))!)];
     }
 
+    /// <summary>
+    /// A disk that fails with SQLite's "disk I/O error" while a game runs (the chapter e2e that hung on a full disk): the room goes on
+    /// taking input and sending views, its saves wait in the writer, which backs off, and once the disk recovers the newest of them lands.
+    /// </summary>
+    [Fact]
+    public async Task A_failing_disk_never_holds_up_the_room_and_its_saves_land_once_it_recovers()
+    {
+        await using var h = new Harness(db => new StorageWriterTests.FailingDisk(db) { Broken = true });
+        await h.Writer.StartAsync(Ct);
+        await using var m = new RoomManager(h.Services);
+        var (room, created) = await m.CreateRoomAsync("h1");
+        await room.JoinAsync("c1", "Ann");
+        await room.SelectGameAsync("h1", "counter");
+        await room.StartGameAsync("h1");
+        await WaitUntilAsync(() =>
+        {
+            h.Time.Advance(TimeSpan.FromMilliseconds(250));
+            return h.Writer.Failing;
+        }, "the writer to find the disk failing");
+
+        for (var i = 0; i < 5; i++)
+            await room.SendInputAsync("c1", h.Sender.LastViewId("c1"), Json(new { pressed = "press" }));
+
+        var host = (JsonElement)h.Sender.Of("h1", ClientMethods.HostView).Last().Args[1]!;
+        Assert.Equal(5, host.GetProperty("rows")[0].GetProperty("count").GetInt32());     // the game went on
+        Assert.Equal(RoomStatus.InGame, await room.GetStatusAsync());
+        Assert.Equal(0, h.RowCount(created.Code));
+        Assert.True(h.Writer.Failing);
+
+        h.Disk!.Broken = false;
+        await WaitUntilAsync(() =>
+        {
+            h.Time.Advance(TimeSpan.FromMilliseconds(250));
+            return !h.Writer.Failing;
+        }, "the writer to write again");
+
+        Assert.Equal(1, h.RowCount(created.Code));
+        Assert.Equal(TimeSpan.Zero, h.Writer.OldestPendingAge);
+        await h.Writer.StopAsync(Ct);
+    }
+
     /// <summary>A database file in its own temp directory, deleted (with its WAL files) on dispose.</summary>
     private sealed class TempDb : IDisposable
     {
@@ -106,9 +147,11 @@ public sealed class DurableRoomTests
     {
         private readonly ArcDb _db = StorageTestSupport.NewMemoryDb();
 
-        public Harness()
+        /// <summary>A harness whose writer opens its connections through <paramref name="disk"/>, if given: a disk that can fail.</summary>
+        public Harness(Func<ArcDb, StorageWriterTests.FailingDisk>? disk = null)
         {
-            Writer = new StorageWriter(_db, Time, NullLogger<StorageWriter>.Instance);
+            Disk = disk?.Invoke(_db);
+            Writer = new StorageWriter(_db, Time, NullLogger<StorageWriter>.Instance) { Connect = Disk is { } d ? d.Open : null };
             Store = new RoomStore(_db, Writer, Time);
             var registry = new GameRegistry([new(() => new CounterGame()), new(() => new HangerGame())]);
             var rules = new CampaignRulesRegistry([]);
@@ -120,6 +163,7 @@ public sealed class DurableRoomTests
         public FakeTimeProvider Time { get; } = new(new DateTimeOffset(2026, 1, 1, 0, 0, 0, TimeSpan.Zero));
         public RecordingSender Sender { get; } = new();
         public StorageWriter Writer { get; }
+        public StorageWriterTests.FailingDisk? Disk { get; }
         public RoomStore Store { get; }
         public RoomServices Services { get; }
 

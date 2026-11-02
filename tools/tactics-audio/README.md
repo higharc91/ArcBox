@@ -6,7 +6,7 @@ import script that turns the downloaded clips into the game's `sfx` and `music` 
 | File | What it is |
 | --- | --- |
 | `sfx-list.json` | Every sound effect and ambience loop: prompt, length, variants, group, what triggers it. |
-| `music-list.json` | The music cues, same format, plus a fixed `seed` per cue. |
+| `music-list.json` | The music cues, same format, plus a fixed `seed` per cue and `instrumental` (below). |
 | `sfx-assets.json`, `music-assets.json` | What was generated: model, team, project, and per clip its Scenario asset id and job. |
 | `audio.py` | `plan`, `status`, `check` and `import` (needs ffmpeg). |
 
@@ -32,6 +32,12 @@ Output: `content/tactics/base/sfx/` and `content/tactics/base/music/`, each with
 }
 ```
 
+Every music cue also says `"instrumental": true` or `false`: whether its generation forces an instrumental take.
+A cue written for voices (the title's monks, the finale's ritual choir, victory_boss's wordless choir) is `false`, so
+the model may sing; `plan` refuses a music cue without it and passes it on in each music job. The `duration` is the
+length asked for; a one-shot sting comes out shorter once `import` trims its silence (victory and defeat are about
+7.8 s, victory_boss about 13.3 s), so read the encoded file for its real length.
+
 Creature prompts are the family's `voices[family].description` word for word plus an action ("short pained yelp when
 struck"), all generated with the family's seed, so a goblin's attack, hurt and death cries sound like the same goblin.
 To add a creature sound, reuse that prefix and seed. A sound with `variants: 1` has one clip, `<id>`; with n it has
@@ -42,10 +48,12 @@ To add a creature sound, reuse that prefix and seed. A sound with `variants: 1` 
 ```bash
 python3 tools/tactics-audio/audio.py plan                # clips listed but not yet in *-assets.json (JSON jobs)
 # generate each job with Scenario (SFX: model_mirelo-sfx-2-0-text-to-audio, wav; music: model_elevenlabs-music-v2-5),
+# with a music job's "instrumental" as the model's instrumental-only setting,
 # record the asset ids in *-assets.json, download each clip to <dir>/<clip id>.wav (or .mp3)
 python3 tools/tactics-audio/audio.py check  <dir>        # length, loudness, peak; flags silent, clipped, off-length clips
 python3 tools/tactics-audio/audio.py import <dir>        # encode everything found, drop stale files, write manifests
 python3 tools/tactics-audio/audio.py status [<dir>]
+python3 -m unittest discover -s tools/tactics-audio      # the lists' and plan's tests
 ```
 
 `import` trims silence from one-shots (with 5 ms edge fades) and leaves loops at full length, crossfading each loop's

@@ -16,6 +16,13 @@ public static class BoardMap
             .ToBattleMap();
 }
 
+/// <summary>A rectangle of tiles: <see cref="X"/> and <see cref="Y"/> are its first tile.</summary>
+public readonly record struct TileRect(int X, int Y, int W, int H)
+{
+    /// <summary>True when <paramref name="tile"/> is inside.</summary>
+    public bool Contains(Tile tile) => tile.X >= X && tile.Y >= Y && tile.X < X + W && tile.Y < Y + H;
+}
+
 /// <summary>
 /// The map as the board draws it now: the map file plus what the battle changed, with each tile's look and the height its
 /// top is drawn at. That height isn't always the rules' (a void is drawn sunk), so anything standing on a tile takes its
@@ -39,21 +46,28 @@ public sealed class BoardTerrain
     private readonly float[] _tops;
     private readonly bool[] _deep;
 
-    /// <summary>The board for <paramref name="map"/> with <paramref name="changes"/> (null: none) applied.</summary>
-    public BoardTerrain(BattleMap map, BoardChanges? changes)
+    /// <summary>
+    /// The board for <paramref name="map"/> with <paramref name="changes"/> (null: none) applied. A sunk tile takes the look of
+    /// <paramref name="chasm"/>, or by default of the map's own first deep tile, and the outer skirt goes down to <paramref name="skirt"/>, or by
+    /// default a step below the map's lowest tile. A window cut from a region (<see cref="World.StagePlan"/>) passes both, so it draws as the
+    /// battle map and the region would.
+    /// </summary>
+    public BoardTerrain(BattleMap map, BoardChanges? changes, string? chasm = null, float? skirt = null)
     {
         Map = map;
         Changes = changes ?? BoardChanges.None;
         var heights = Changes.Heights.ToImmutableSortedDictionary(h => h.At, h => h.Delta);
         var sunk = Changes.Sunk.ToImmutableSortedSet();
         var terrain = new Terrain(map, heights, [], sunk);
+        Rules = terrain;
         var (width, count) = (map.Width, map.Width * map.Height);
         _looks = new MaterialLook[count];
         _tops = new float[count];
         _deep = new bool[count];
 
-        var chasm = MaterialLook.Of(ChasmMaterial(map));
+        var chasmLook = MaterialLook.Of(chasm ?? ChasmMaterial(map));
         var looks = map.Materials.Select(MaterialLook.Of).ToArray();
+        Ranks = [.. map.Materials.Select(GroundBlend.Rank)];
         var lowest = int.MaxValue;
         foreach (var tile in Tiles)
         {
@@ -61,15 +75,23 @@ public sealed class BoardTerrain
             var height = terrain.HeightAt(tile);
             var deep = terrain.Deep(tile);
             lowest = Math.Min(lowest, map[tile].Height);
-            _looks[i] = sunk.Contains(tile) ? chasm : looks[map[tile].Material];
+            var stamped = map.StampedTiles.Contains(tile);
+            _looks[i] = sunk.Contains(tile)
+                ? chasmLook
+                : stamped
+                    ? looks[map[tile].Material]
+                    : MaterialLook.Of(MaterialLook.ArtMaterial(map.Id, map.Materials[map[tile].Material]));
             _deep[i] = deep;
             _tops[i] = height + (_looks[i].Void ? -VoidSink
                 : _looks[i].Water && deep ? -WaterSink
                 : map[tile].Flags.HasFlag(TileFlags.Impassable) ? WallRise
                 : 0);
         }
-        Base = lowest - 1;
+        Base = skirt ?? lowest - 1;
     }
+
+    /// <summary>How firmly each of the map's materials lies (<see cref="GroundBlend.Rank"/>).</summary>
+    public ImmutableArray<int> Ranks { get; }
 
     /// <summary>The map file.</summary>
     public BattleMap Map { get; }
@@ -77,11 +99,22 @@ public sealed class BoardTerrain
     /// <summary>What the battle changed.</summary>
     public BoardChanges Changes { get; }
 
+    /// <summary>The same ground as the rules see it: what can be stood on and walked to.</summary>
+    public Terrain Rules { get; }
+
     /// <summary>The height the board's outer skirt goes down to, in steps: from the map file, so a fight doesn't change it.</summary>
     public float Base { get; }
 
     /// <summary>Every tile, row by row.</summary>
     public IEnumerable<Tile> Tiles => Enumerable.Range(0, Map.Height).SelectMany(y => Enumerable.Range(0, Map.Width).Select(x => new Tile(x, y)));
+
+    /// <summary>The tiles of <paramref name="rect"/> that are on the map, row by row.</summary>
+    public IEnumerable<Tile> TilesIn(TileRect rect)
+    {
+        for (var y = Math.Max(rect.Y, 0); y < Math.Min(rect.Y + rect.H, Map.Height); y++)
+            for (var x = Math.Max(rect.X, 0); x < Math.Min(rect.X + rect.W, Map.Width); x++)
+                yield return new Tile(x, y);
+    }
 
     /// <summary>How a tile looks. A tile sunk in the battle takes the look of the map's chasm.</summary>
     public MaterialLook Look(Tile tile) => _looks[Index(tile)];
@@ -109,10 +142,12 @@ public sealed class BoardTerrain
         return all.Where(Map.InBounds);
     }
 
-    private static string ChasmMaterial(BattleMap map)
+    /// <summary>What a tile sunk in a battle on <paramref name="map"/> is drawn as: the material of its first deep tile, row by row, in <paramref name="rect"/> if given.</summary>
+    public static string ChasmMaterial(BattleMap map, TileRect? rect = null)
     {
-        for (var y = 0; y < map.Height; y++)
-            for (var x = 0; x < map.Width; x++)
+        var (x0, y0, w, h) = rect is { } r ? (r.X, r.Y, r.W, r.H) : (0, 0, map.Width, map.Height);
+        for (var y = Math.Max(y0, 0); y < Math.Min(y0 + h, map.Height); y++)
+            for (var x = Math.Max(x0, 0); x < Math.Min(x0 + w, map.Width); x++)
                 if (map[new Tile(x, y)] is { } info && info.Flags.HasFlag(TileFlags.Deep))
                     return map.Materials[info.Material];
         return "void/deep";

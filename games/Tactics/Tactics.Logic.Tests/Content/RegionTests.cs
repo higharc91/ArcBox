@@ -26,6 +26,8 @@ public sealed class RegionTests
 
     private static string Json(RegionDef def) => JsonSerializer.Serialize(def, ArcJson.Options);
 
+    private static bool Standable(WorldRegion region, Tile t) => WorldGround.Of(region, new Dictionary<string, BattleMap>(), ArtManifest.None).Terrain.Walkable(t);
+
     private static IReadOnlyList<ContentError> ErrorsOf(string json)
         => ValidationTests.ErrorsOfChapter(("world/r.json", json));
 
@@ -57,8 +59,8 @@ public sealed class RegionTests
         var region = WorldRegion.From(Region(64, 32, new RegionChunk(0, 0, Tiles())));
 
         Assert.Null(region.TileAt(new Tile(32, 0)));
-        Assert.False(region.Walkable(new Tile(32, 0)));
-        Assert.True(region.Walkable(new Tile(31, 0)));
+        Assert.False(Standable(region, new Tile(32, 0)));
+        Assert.True(Standable(region, new Tile(31, 0)));
     }
 
     [Theory]
@@ -72,7 +74,7 @@ public sealed class RegionTests
         var region = WorldRegion.From(Region(40, 20, new RegionChunk(0, 0, Tiles()), new RegionChunk(1, 0, Tiles())));
 
         Assert.Null(region.TileAt(new Tile(x, y)));
-        Assert.False(region.Walkable(new Tile(x, y)));
+        Assert.False(Standable(region, new Tile(x, y)));
     }
 
     [Fact]
@@ -82,10 +84,10 @@ public sealed class RegionTests
             (1, 0, 0, 0, TileFlags.Impassable), (2, 0, 0, 0, TileFlags.Deep | TileFlags.Water),
             (3, 0, 0, 0, TileFlags.Water | TileFlags.Difficult | TileFlags.Hazard)))));
 
-        Assert.True(region.Walkable(new Tile(0, 0)));
-        Assert.False(region.Walkable(new Tile(1, 0)));
-        Assert.False(region.Walkable(new Tile(2, 0)));
-        Assert.True(region.Walkable(new Tile(3, 0)));   // shallow water, difficult ground and hazards can all be walked
+        Assert.True(Standable(region, new Tile(0, 0)));
+        Assert.False(Standable(region, new Tile(1, 0)));
+        Assert.False(Standable(region, new Tile(2, 0)));
+        Assert.True(Standable(region, new Tile(3, 0)));   // shallow water, difficult ground and hazards can all be walked
     }
 
     [Fact]
@@ -127,12 +129,12 @@ public sealed class RegionTests
     }
 
     [Fact]
-    public void A_regions_bytes_are_in_the_content_hash()
+    public void A_regions_bytes_arent_in_the_content_hash()
     {
         var one = ValidationTests.LoadChapter(("world/r.json", Json(Region(32, 32, new RegionChunk(0, 0, Tiles())))));
         var other = ValidationTests.LoadChapter(("world/r.json", Json(Region(32, 32, new RegionChunk(0, 0, Tiles((0, 0, 1, 0, TileFlags.None)))))));
 
-        Assert.NotEqual(one.Hash, other.Hash);
+        Assert.Equal(one.Hash, other.Hash);
     }
 
     [Fact]
@@ -165,7 +167,7 @@ public sealed class RegionTests
         var def = Region(33, 33, new RegionChunk(1, 1, Tiles())) with { Spawns = new RegionSpawns(new Tile(32, 32), new Tile(32, 32)) };
         var pack = ValidationTests.LoadChapter(("world/r.json", Json(def)));
 
-        Assert.True(pack.RegionFor("r")!.Walkable(new Tile(32, 32)));
+        Assert.True(pack.GroundFor("r")!.Terrain.Walkable(new Tile(32, 32)));
     }
 
     [Fact]
@@ -211,6 +213,23 @@ public sealed class RegionTests
     public void A_bad_size_is_a_content_error(int[] size)
         => Assert.Equal([new ContentError(RegionFile, "/size", "The size must be [w, h], both at least 1.")],
             ErrorsOf(Region(32, 32) with { Size = [.. size] }));
+
+    [Theory]
+    [InlineData(20000, 20000)]
+    [InlineData(1025, 32)]
+    [InlineData(32, 1025)]
+    [InlineData(int.MaxValue, int.MaxValue)]
+    public void A_size_over_the_limit_is_a_content_error(int width, int height)
+        => Assert.Equal([new ContentError(RegionFile, "/size", $"The size {width}x{height} is over the limit of 1024 tiles a side.")],
+            ErrorsOf(Region(32, 32) with { Size = [width, height] }));
+
+    [Fact]
+    public void A_size_at_the_limit_loads()
+        => Assert.NotNull(ValidationTests.LoadChapter(("world/r.json", Json(Region(1024, 32, new RegionChunk(0, 0, Tiles()))))));
+
+    [Fact]
+    public void A_region_over_the_limit_cant_be_built()
+        => Assert.Throws<ArgumentException>(() => WorldRegion.From(Region(1025, 32)));
 
     [Fact]
     public void An_unknown_key_in_a_region_is_a_content_error()

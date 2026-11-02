@@ -99,6 +99,34 @@ public sealed class LoaderTests
         Assert.Equal("Mighty Strike", pack.Abilities[new AbilityId("test.strike")].Name);
     }
 
+    [Theory]
+    [InlineData("world/ashen_ford.json", "The Ashen Ford", true)]
+    [InlineData("maps/river_crossing.json", "\"zones\"", false)]
+    public void Only_a_region_can_change_without_changing_the_hash(string file, string text, bool same)
+    {
+        var rules = Directory.CreateTempSubdirectory("tactics-hash-test-");
+        try
+        {
+            foreach (var from in Directory.EnumerateFiles(ContentPaths.BaseRules, "*", SearchOption.AllDirectories))
+            {
+                var to = Path.Combine(rules.FullName, Path.GetRelativePath(ContentPaths.BaseRules, from));
+                Directory.CreateDirectory(Path.GetDirectoryName(to)!);
+                File.Copy(from, to);
+            }
+            var path = Path.Combine(rules.FullName, file);
+            var before = File.ReadAllText(path);
+            var after = before.Replace(text, $" {text}", StringComparison.Ordinal);
+            Assert.NotEqual(before, after);
+            File.WriteAllText(path, after);
+
+            Assert.Equal(same, RulesPack.Load([ContentPaths.BaseRules]).Hash == RulesPack.Load([rules.FullName]).Hash);
+        }
+        finally
+        {
+            rules.Delete(recursive: true);
+        }
+    }
+
     [Fact]
     public void Hash_is_stable_and_order_independent_of_file_listing()
     {

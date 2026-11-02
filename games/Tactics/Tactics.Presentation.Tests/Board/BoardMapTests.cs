@@ -29,7 +29,7 @@ public sealed class BoardMapTests
         var map = Pack.Map("river_crossing");
 
         Assert.Equal((14, 12), (map.Width, map.Height));
-        Assert.Equal("water/clear", map.Materials[map[new Tile(6, 0)].Material]);
+        Assert.Equal("ford_water/clear", map.Materials[map[new Tile(6, 0)].Material]);   // the ford's own water, matching Ashen Ford
         Assert.True(map[new Tile(6, 0)].Flags.HasFlag(TileFlags.Deep));
         Assert.False(map[new Tile(6, 7)].Flags.HasFlag(TileFlags.Deep));   // the ford
         Assert.Equal(3, map[new Tile(10, 0)].Height);                      // the ridge

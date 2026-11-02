@@ -4,6 +4,7 @@ using System.Text.Json;
 using Tactics.Game;
 using Tactics.Logic;
 using Tactics.Presentation.Board;
+using Tactics.Presentation.World;
 
 namespace Tactics.Presentation.Tests.Board;
 
@@ -48,7 +49,9 @@ public sealed class BoardLightingTests
     /// <summary>Most of the finale's lights by their step: what the real data gives, and it's more than half of the curve's eight.</summary>
     private const int LavaPhases = 5;
 
-    /// <summary>Each map's light, stated here by hand: a room of the recipe, or null for open air. A new map fails until it's looked at.</summary>
+    private const string Dusk = "dusk";
+
+    /// <summary>Each map and region's light, stated here by hand: a room of the recipe, or null for open air. A new one fails until it's looked at.</summary>
     private static readonly Dictionary<string, string?> StatedLight = new()
     {
         ["crypt_hall"] = "crypt",
@@ -56,8 +59,9 @@ public sealed class BoardLightingTests
         ["hall_of_the_flame"] = "hall",
         ["forest_ruins"] = null,
         ["keep_gate"] = null,
-        ["river_crossing"] = null,
+        ["river_crossing"] = Dusk,
         ["warlord_bridge"] = null,
+        ["ashen_ford"] = Dusk,
     };
 
     private static LitBoard LitOf(BattleMap map, BoardChanges? changes = null) => LitBoard.Build(Plan(map, changes), Lit(map, changes));
@@ -168,7 +172,6 @@ public sealed class BoardLightingTests
     }
 
     [Theory]
-    [InlineData("river_crossing")]
     [InlineData("forest_ruins")]
     [InlineData("warlord_bridge")]
     [InlineData("keep_gate")]
@@ -372,21 +375,124 @@ public sealed class BoardLightingTests
     }
 
     [Fact]
-    public void Every_map_says_what_light_it_has_so_a_new_one_cant_slip_in_by_a_word_in_its_name()
+    public void Dusk_at_the_ford_is_warm_low_and_a_little_purple()
     {
-        var maps = Directory.GetFiles(Path.Combine(Pack.Root, "rules", "maps"), "*.json").Select(f => Path.GetFileNameWithoutExtension(f)!).ToArray();
+        var dusk = BoardLighting.Dusk;
+
+        Assert.True(dusk.R > dusk.G && dusk.B > dusk.G, $"{dusk}");     // warm and purple: both red and blue over green
+        Assert.True(dusk.R > dusk.B, $"{dusk}");                        // warm first
+        Assert.True(Math.Max(dusk.R, Math.Max(dusk.G, dusk.B)) < 0.8f, $"{dusk}");
+        Assert.Equal(dusk, Lit(Pack.Ground("ashen_ford").Map).Ambient);
+    }
+
+    [Fact]
+    public void At_dusk_the_ford_stays_lit_where_nothing_burns_and_a_figure_stays_readable()
+    {
+        var lighting = Lit(Pack.Ground("ashen_ford").Map);
+
+        var figure = lighting.ForFigure(new Vector2(-100_000, -100_000));
+
+        Assert.Equal(lighting.Ambient, lighting.At(new Vector2(-100_000, -100_000)));
+        Assert.True(Math.Min(figure.R, Math.Min(figure.G, figure.B)) >= BoardLighting.FigureFloor);
+    }
+
+    [Fact]
+    public void A_lamp_lights_its_surroundings_at_dusk_through_its_own_light_data()
+    {
+        var plan = WorldPlan.Build(new BoardTerrain(DemoRegion.Town(Pack.Root).Map, null), Pack.Art);
+        var lamp = plan.Lighting.Lights.First(l => l.Halo is not null);
+
+        var near = plan.Lighting.MeanAt(lamp.Ground);
+
+        Assert.Equal(BoardLighting.Dusk, plan.Lighting.Ambient);
+        Assert.True(near.R > BoardLighting.Dusk.R + 0.3f, $"{near}");
+    }
+
+    [Fact]
+    public void A_buildings_lights_show_at_dusk_and_a_wall_reads_the_light_at_its_corners()
+    {
+        var plan = WorldPlan.Build(new BoardTerrain(DemoRegion.Town(Pack.Root).Map, null), Pack.Art);
+
+        var columns = plan.Blocks.SelectMany(b => b.Lit.Items).OfType<LitFace>().Where(f => f.Face.Kind == FaceKind.Building && f.Face.Lights is not null).ToArray();
+
+        Assert.NotEmpty(columns);
+        Assert.All(columns, c =>
+        {
+            Assert.True(c.Glow);
+            Assert.Equal(4, c.Probes.Length);
+        });
+    }
+
+    [Fact]
+    public void A_buildings_lights_stay_off_in_daylight()
+    {
+        var plan = WorldPlan.Build(new BoardTerrain(DemoRegion.Tavern(Pack.Root).Map, null), Pack.Art);
+
+        Assert.All(plan.Blocks.SelectMany(b => b.Lit.Items).OfType<LitFace>().Where(f => f.Face.Kind == FaceKind.Building), c => Assert.False(c.Glow));
+    }
+
+    [Fact]
+    public void A_forge_and_its_open_door_give_light_at_dusk()
+    {
+        var map = BattleMap.FromBytes("ashen_ford", 24, 24, new byte[24 * 24 * 3], ["cobble/warm"], [], ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty, null,
+            [new BuildingPlacement("smithy", "oak", new Tile(10, 10), 0)]);
+        var noon = BattleMap.FromBytes("demo", 24, 24, new byte[24 * 24 * 3], ["cobble/warm"], [], ImmutableSortedDictionary<string, ImmutableArray<Tile>>.Empty, null,
+            [new BuildingPlacement("smithy", "oak", new Tile(10, 10), 0)]);
+
+        Assert.NotEmpty(Lit(map).Lights);
+        Assert.Empty(Lit(noon).Lights);
+    }
+
+    [Fact]
+    public void Every_map_and_region_says_what_light_it_has_so_a_new_one_cant_slip_in_by_a_word_in_its_name()
+    {
+        string[] Files(string folder) => [.. Directory.GetFiles(Path.Combine(Pack.Root, "rules", folder), "*.json").Select(f => Path.GetFileNameWithoutExtension(f)!)];
+        var (maps, regions) = (Files("maps"), Files("world"));
         var rooms = Pack.Manifest("dungeon").RootElement.GetProperty("lighting").GetProperty("ambient");
 
-        Assert.Equal(StatedLight.Keys.Order(), maps.Order());
-        foreach (var id in maps)
+        Assert.Equal(StatedLight.Keys.Order(), maps.Concat(regions).Order());
+        foreach (var id in maps.Concat(regions))
         {
             float Lifted(JsonElement a, int c) => a[c].GetSingle() + (1 - a[c].GetSingle()) * BoardLighting.AmbientLift;
-            var stated = StatedLight[id] is { } room
+            var stated = StatedLight[id] == Dusk ? BoardLighting.Dusk : StatedLight[id] is { } room
                 ? new Rgb(Lifted(rooms.GetProperty(room), 0), Lifted(rooms.GetProperty(room), 1), Lifted(rooms.GetProperty(room), 2))
                 : new Rgb(1, 1, 1);
 
-            Assert.Equal(stated, Lit(Pack.Map(id)).Ambient);
+            Assert.Equal(stated, Lit(regions.Contains(id) ? Pack.Ground(id).Map : Pack.Map(id)).Ambient);
         }
+    }
+
+    [Fact]
+    public void A_baked_colour_is_the_mean_whatever_the_flicker_was_last_stepped_to()
+    {
+        var map = Map("test", ["cobble/grey"], [Prop("torch", 2, 2)], Flat(6, 6));
+        var lighting = Lit(map);
+        var lit = LitBoard.Build(Plan(map), lighting);
+        var face = lit.Items.OfType<LitFace>().First(f => f.Art && f.Face.Kind == FaceKind.Top && f.Face.Tile == new Tile(4, 4));   // near the torch the light is at its ceiling, and wouldn't flicker
+        var sprite = lit.Items.OfType<LitSprite>().Single();
+
+        var (faces, sprites, nows) = (new HashSet<Rgb>(), new HashSet<Rgb>(), new HashSet<Rgb>());
+        foreach (var seconds in new[] { 0, 0.13, 0.4, 0.71, 1.9, 7.3 })
+        {
+            lighting.Step(seconds);
+            faces.Add(face.MeanColourAt(0, lighting));
+            sprites.Add(sprite.MeanLight(lighting));
+            nows.Add(face.ColourAt(0, lighting));
+        }
+
+        Assert.True(nows.Count > 1, "The torch never flickered, so this proves nothing.");
+        Assert.Equal(face.Face.Tint.Times(lighting.MeanAt(face.Face.Points[0])), Assert.Single(faces));
+        Assert.Equal(lighting.MeanAt(sprite.Sprite.TopLeft + sprite.Sprite.Size / 2), Assert.Single(sprites));
+    }
+
+    [Fact]
+    public void What_takes_no_light_has_no_mean_either()
+    {
+        var map = Map("test", ["cobble/grey"], [Prop("crate", 2, 2)], Flat(4, 4));
+        var lit = LitBoard.Build(Plan(map), Lit(map));
+
+        Assert.All(lit.Items.OfType<LitFace>(), f => Assert.Equal(f.Face.Tint, f.MeanColourAt(0, lit.Lighting)));
+        Assert.All(lit.Items.OfType<LitSprite>(), s => Assert.Equal(new Rgb(1, 1, 1), s.MeanLight(lit.Lighting)));
     }
 
     [Fact]
@@ -605,7 +711,7 @@ public sealed class BoardLightingTests
     [Fact]
     public void In_the_open_air_a_board_draws_as_it_is_with_nothing_to_read()
     {
-        var map = Pack.Map("river_crossing");
+        var map = Pack.Map("forest_ruins");
 
         var lit = LitOf(map);
 
@@ -722,7 +828,7 @@ public sealed class BoardLightingTests
     [Fact]
     public void In_the_open_air_a_figure_stays_as_drawn()
     {
-        var lighting = Lit(Pack.Map("river_crossing"));
+        var lighting = Lit(Pack.Map("forest_ruins"));
 
         Assert.Equal(new Rgb(1, 1, 1), lighting.ForFigure(new Vector2(0, 0)));
     }

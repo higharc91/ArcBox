@@ -50,6 +50,15 @@ public interface IPreloadScene
 }
 
 /// <summary>
+/// A scene that wants to know its connection to the server dropped. The scene and its views survive a websocket reconnect, so whatever
+/// the first view after it says is a fresh look at the room, not news of something that just happened.
+/// </summary>
+public interface IConnectionScene
+{
+    void ConnectionLost();
+}
+
+/// <summary>
 /// A scene that speaks: gets the shell's shared <see cref="Audio.Narrator"/> before its first <see cref="IGameScene.Render"/>
 /// (and when it starts warming up behind the lobby). Scenes say lines in their own voice themes, e.g.
 /// <c>narrator.Say(text, "redline.questions", NarrationPriority.Question)</c>; the narrator handles the server voice,

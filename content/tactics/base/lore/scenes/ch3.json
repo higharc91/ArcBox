@@ -1522,6 +1522,7 @@
     {
       "id": "ch3_crypt_records",
       "beat": "ch3_buried_crypt",
+      "after": true,
       "title": "What the Wardens Buried",
       "cast": [
         "narrator",

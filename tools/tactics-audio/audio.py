@@ -3,7 +3,7 @@
 The sound and music lists live next to this script:
 
     sfx-list.json     {"voices": {...}, "<id>": {"prompt", "negative", "duration", "variants", "group", "loop", "use"}}
-    music-list.json   {"<id>": {"prompt", "duration", "variants", "group", "loop", "use", "seed"}}
+    music-list.json   {"<id>": {"prompt", "duration", "variants", "group", "loop", "use", "seed", "instrumental"}}
     sfx-assets.json   {"model", "team", "project", "clips": {"<clip id>": {"asset", "job", ...}}}
     music-assets.json (same shape)
 
@@ -62,9 +62,13 @@ def load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
 
 
+def entries(k: dict) -> dict[str, dict]:
+    """A list's sound entries (the sfx list's top-level `voices` table describes creature families, not a sound)."""
+    return {s: v for s, v in load(k["list"]).items() if s != "voices" and isinstance(v, dict) and "prompt" in v}
+
+
 def sounds(kind: str) -> dict[str, dict]:
-    """The list's sound entries (the sfx list's top-level `voices` table describes creature families, not a sound)."""
-    return {k: v for k, v in load(KINDS[kind]["list"]).items() if k != "voices" and isinstance(v, dict) and "prompt" in v}
+    return entries(KINDS[kind])
 
 
 def clip_ids(sid: str, spec: dict) -> list[str]:
@@ -202,17 +206,28 @@ def write_manifests() -> dict[str, int]:
     return counts
 
 
-def cmd_plan() -> int:
+def plan_jobs(kinds: dict) -> list[dict]:
+    """One job per sound with clips not yet generated. A music job says whether to force an instrumental take, so a
+    cue written for a choir (`instrumental: false`) is generated with its voices; every music cue must say."""
     jobs = []
-    for kind, k in KINDS.items():
+    for kind, k in kinds.items():
         done = load(k["assets"]).get("clips", {})
-        for sid, spec in sorted(sounds(kind).items()):
+        for sid, spec in sorted(entries(k).items()):
+            if kind == "music" and not isinstance(spec.get("instrumental"), bool):
+                raise SystemExit(f"music cue {sid} must say \"instrumental\": true or false")
             missing = [c for c in clip_ids(sid, spec) if c not in done]
             if missing:
-                jobs.append({"kind": kind, "id": sid, "clips": missing, "prompt": spec["prompt"],
-                             "negative": spec.get("negative"), "duration": spec["duration"],
-                             "numOutputs": len(missing), "seed": spec.get("seed"), "loop": spec.get("loop", False)})
-    print(json.dumps(jobs, indent=1))
+                job = {"kind": kind, "id": sid, "clips": missing, "prompt": spec["prompt"],
+                       "negative": spec.get("negative"), "duration": spec["duration"],
+                       "numOutputs": len(missing), "seed": spec.get("seed"), "loop": spec.get("loop", False)}
+                if kind == "music":
+                    job["instrumental"] = spec["instrumental"]
+                jobs.append(job)
+    return jobs
+
+
+def cmd_plan() -> int:
+    print(json.dumps(plan_jobs(KINDS), indent=1))
     return 0
 
 

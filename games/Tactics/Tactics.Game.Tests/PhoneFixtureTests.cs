@@ -14,11 +14,11 @@ namespace Tactics.Game.Tests;
 /// </summary>
 public sealed class PhoneFixtureTests
 {
-    private static readonly Lazy<RulesPack> Pack = new(() =>
+    internal static readonly Lazy<RulesPack> Pack = new(() =>
     {
         for (var dir = new DirectoryInfo(AppContext.BaseDirectory); dir is not null; dir = dir.Parent)
             if (File.Exists(Path.Combine(dir.FullName, "ArcBox.slnx")))
-                return RulesPack.Load([Path.Combine(dir.FullName, "content", "tactics", "base", "rules")]);
+                return RulesPack.Load([Path.Combine(dir.FullName, "content", "tactics", "base", "rules")], ArtManifests.Load(Path.Combine(dir.FullName, "content", "tactics", "base")));
         throw new DirectoryNotFoundException("No ArcBox.slnx above the test binaries.");
     });
 
@@ -34,8 +34,131 @@ public sealed class PhoneFixtureTests
     public void Every_phone_screen_matches_its_fixture()
     {
         var screens = Capture();
-        Assert.Equal([.. new[] { "pickClass", "pickEncounter", "react", "results", "status", "turn" }], screens.Keys.Order(StringComparer.Ordinal));
+        Assert.Equal([.. new[] { "pickClass", "pickEncounter", "react", "results", "status", "turn", "walk-follower", "walk-leader" }], screens.Keys.Order(StringComparer.Ordinal));
+        Assert.True(screens["pickEncounter"]["data"]!["canWalk"]!.GetValue<bool>());       // a world to go back to
 
+        Check(screens);
+    }
+
+    /// <summary>
+    /// The story's phone screens (overworld 5d §9), from the ford choice played with the base pack's lore: Interact on the walk screen, a line
+    /// for a follower and for the leader, the leader's choice and how everyone else sees it, a party vote with a vote in, a tie-break, and a skill check being picked and
+    /// rolled. Each is a real view from a real session, as the others are.
+    /// </summary>
+    [Fact]
+    public void Every_story_screen_matches_its_fixture()
+    {
+        var screens = CaptureStory();
+        Assert.Equal([.. new[] { "check-pick", "check-rolled", "choice-follower", "choice-leader", "dialogue", "dialogue-leader", "vote", "vote-tie", "walk-interact" }],
+            screens.Keys.Order(StringComparer.Ordinal));
+
+        Check(screens);
+    }
+
+    /// <summary>
+    /// The walk screen in a region with things to interact with (interactables design §2.5): the leader a step from the vault's chest and its
+    /// key, with both in the list and the nearer one on the button, and a follower, whose list is empty.
+    /// </summary>
+    [Fact]
+    public void The_walk_screen_with_things_in_reach_matches_its_fixture()
+    {
+        var s = Vault.At(new Tile(7, 2));
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal)
+        {
+            ["walk-things"] = Node(s.Harness.PlayerView(0)),
+            ["walk-things-follower"] = Node(s.Harness.PlayerView(1)),
+        });
+    }
+
+    /// <summary>
+    /// The leader's Search (interactables design §7.4) in the vault: the check screen, with no DC, as the party picks who rolls, and its roll,
+    /// which has none either. Nothing hidden is near, and it plays the same.
+    /// </summary>
+    [Fact]
+    public void The_search_check_matches_its_fixture()
+    {
+        var s = Vault.At(new Tile(7, 2));
+        s.Send(0, "search");
+        StoryVoteTests.Until(s, () => s.Host.Story?.State == TacticsGame.StoryStates.PickRoller, "the pick of who rolls");
+        var picking = Node(s.Harness.PlayerView(1));
+        StoryVoteTests.Until(s, () => s.Host.Story?.State == TacticsGame.StoryStates.Rolled, "the roll");
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal)
+        {
+            ["check-search"] = picking,
+            ["check-search-rolled"] = Node(s.Harness.PlayerView(1)),
+        });
+    }
+
+    private static JsonNode Node(ControllerView view) => JsonSerializer.SerializeToNode<ControllerView>(view with { ViewId = "v1" }, ArcJson.Options)!;
+
+    private static SortedDictionary<string, JsonNode> CaptureStory()
+    {
+        var seen = new SortedDictionary<string, JsonNode>(StringComparer.Ordinal);
+        TacticsGameTests.Session Ford()
+        {
+            var s = new TacticsGameTests.Session(seed: 3, game: new TacticsGame(Pack.Value, lore: StoryTests.Lore,
+                seed: StoryTests.SeedFor(StoryTests.FordChoice) with { At = StoryTests.NearSpot(StoryTests.FordChoice) }));
+            s.ToWalking();
+            return s;
+        }
+        void Until(TacticsGameTests.Session s, Func<bool> done)
+        {
+            for (var i = 0; i < 3_000 && !done(); i++)
+                s.Harness.Advance(TimeSpan.FromMilliseconds(100));
+            Assert.True(done());
+        }
+        StoryView Story(TacticsGameTests.Session s) => s.Host.Story!;
+
+        // The leader is seat 0, the session's first member.
+        var s = Ford();
+        seen["walk-interact"] = Node(s.Harness.PlayerView(0));
+        s.Send(0, "interact");
+        StoryTests.LineEnds(s);
+        StoryTests.LineEnds(s);     // a line with a speaker who has a portrait
+        seen["dialogue-leader"] = Node(s.Harness.PlayerView(0));
+        seen["dialogue"] = Node(s.Harness.PlayerView(1));
+        Until(s, () => Story(s).State == TacticsGame.StoryStates.Asking);
+        seen["choice-leader"] = Node(s.Harness.PlayerView(0));
+        s.Send(0, "vote", new { option = "cases" });
+        seen["choice-follower"] = Node(s.Harness.PlayerView(1));     // read-only, with the leader's pick
+        Until(s, () => Story(s).State == TacticsGame.StoryStates.Asking && StoryTests.Cursor(s)!.Node == "vote");
+        s.Harness.SetConnected(3, false);
+        s.Send(1, "vote", new { option = "force" });
+        seen["vote"] = Node(s.Harness.PlayerView(1));
+        s.Send(2, "vote", new { option = "parley" });
+        s.Harness.Advance(Story(s).Ask!.Deadline!.Value - s.Harness.Now);
+        Assert.Equal(TacticsGame.StoryStates.TieBreak, Story(s).State);
+        seen["vote-tie"] = Node(s.Harness.PlayerView(0));
+
+        var c = Ford();
+        c.Send(0, "interact");
+        Until(c, () => Story(c).State == TacticsGame.StoryStates.Asking);
+        c.Send(0, "vote", new { option = "cases" });
+        Until(c, () => Story(c).State == TacticsGame.StoryStates.Asking && StoryTests.Cursor(c)!.Node == "vote");
+        c.Harness.SetConnected(3, false);       // an away card
+        for (var p = 0; p < 3; p++)
+            c.Send(p, "vote", new { option = "pay" });
+        Until(c, () => Story(c).State == TacticsGame.StoryStates.PickRoller);
+        c.Send(1, "pickRoller", new { member = "pr_member3" });
+        seen["check-pick"] = Node(c.Harness.PlayerView(1));
+        for (var p = 0; p < 3; p++)
+            c.Send(p, "pickRoller", new { member = "pr_member3" });
+        Until(c, () => Story(c).State == TacticsGame.StoryStates.Rolled);
+        seen["check-rolled"] = Node(c.Harness.PlayerView(1));
+        return seen;
+    }
+
+    /// <summary>
+    /// A pack with no region sends the phones what it always did, but for the battle list's <c>canWalk</c>, which is false there: its
+    /// own fixture, <c>pickEncounter-noWalk</c>, from which the phone hides "Back to walking".
+    /// </summary>
+    [Fact]
+    public void A_pack_with_no_region_sends_the_phones_what_it_always_did()
+    {
+        var screens = Capture(ExplorationTests.NoRegion.Value);
+        Assert.True(screens.Remove("pickEncounter", out var list));
+        Assert.False(list["data"]!["canWalk"]!.GetValue<bool>());
+        screens["pickEncounter-noWalk"] = list;
         Check(screens);
     }
 
@@ -91,37 +214,55 @@ public sealed class PhoneFixtureTests
         }
     }
 
-    /// <summary>Plays a four-member session until each screen has been seen once, keeping the first of each.</summary>
-    private static SortedDictionary<string, JsonNode> Capture()
+    /// <summary>
+    /// Plays a four-member session until each screen has been seen once, keeping the first of each. The walk screens come first from a
+    /// game as it's played, with no battle list; the rest from one with the Development battle list, which is the way to a fight that
+    /// doesn't depend on the story.
+    /// </summary>
+    private static SortedDictionary<string, JsonNode> Capture(RulesPack? pack = null)
     {
-        var rules = Pack.Value;
+        var rules = pack ?? Pack.Value;
         ProfileId?[] profiles = [.. Enumerable.Range(1, 4).Select(i => (ProfileId?)new ProfileId($"pr_member{i}"))];
-        var game = new TacticsGame(rules);
-        var h = new GameHarness<TacticsGame>(game, playerCount: 4, seed: 3, profiles: profiles);
-        var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", profiles[0]!.Value,
-            [.. profiles.Select((p, i) => new CampaignMember(p!.Value, $"Player{i + 1}", CampaignRole.Player, DateTimeOffset.UnixEpoch))], 1);
-        var lease = new FakeCampaignLease(info, new TacticsCampaignRules(rules).NewDocument(info));
         var seen = new SortedDictionary<string, JsonNode>(StringComparer.Ordinal);
+        string[] classes = ["fighter", "cleric", "rogue", "wizard"];
 
-        void Look()
+        // One screen, two ways to see it: only the leader has the pad.
+        static string Named(CustomView view) => view.Screen != TacticsGame.Screens.Walk ? view.Screen
+            : view.Data.GetProperty("leader").GetBoolean() ? "walk-leader" : "walk-follower";
+
+        (TacticsGame Game, GameHarness<TacticsGame> H, Action Look) Mustered(bool battleList)
         {
-            for (var p = 0; p < 4; p++)
-                if (h.PlayerView(p) is CustomView view && !seen.ContainsKey(view.Screen))
-                    // As the base type, as the server sends it, so the "kind" discriminator is written.
-                    seen[view.Screen] = JsonSerializer.SerializeToNode<ControllerView>(view with { ViewId = "v1" }, ArcJson.Options)!;
+            var game = new TacticsGame(rules, battleList: battleList);
+            var h = new GameHarness<TacticsGame>(game, playerCount: 4, seed: 3, profiles: profiles);
+            var info = new CampaignInfo("c1", "ABCD", TacticsGame.Id, "Embers", profiles[0]!.Value,
+                [.. profiles.Select((p, i) => new CampaignMember(p!.Value, $"Player{i + 1}", CampaignRole.Player, DateTimeOffset.UnixEpoch))], 1);
+            void Look()
+            {
+                for (var p = 0; p < 4; p++)
+                    if (h.PlayerView(p) is CustomView view && !seen.ContainsKey(Named(view)))
+                        // As the base type, as the server sends it, so the "kind" discriminator is written.
+                        seen[Named(view)] = JsonSerializer.SerializeToNode<ControllerView>(view with { ViewId = "v1" }, ArcJson.Options)!;
+            }
+            h.StartCampaign(new FakeCampaignLease(info, new TacticsCampaignRules(rules).NewDocument(info)));
+            Look();
+            for (var i = 0; i < 4; i++)
+                h.Input(i, new { action = "pickClass", data = new { @class = classes[i] } });
+            Look();
+            return (game, h, Look);
         }
 
-        h.StartCampaign(lease);
-        Look();
-        string[] classes = ["fighter", "cleric", "rogue", "wizard"];
-        for (var i = 0; i < 4; i++)
-            h.Input(i, new { action = "pickClass", data = new { @class = classes[i] } });
+        Mustered(battleList: false);
+        var (game, h, Look) = Mustered(battleList: true);
+        h.Input(0, new { action = "battles" });
         Look();
         h.Input(0, new { action = "pickEncounter", data = new { encounter = "river_crossing" } });
+        // Fought in the world, its opening beat waits for the TV's walk-in (overworld 5c), which a TV here has shown.
+        if (((TacticsHostView)game.HostView()).Battle is { Stage: not null } battle)
+            h.HostSignal("shown", new { seq = battle.Beats[^1].Seq });
 
         // Players end their turns at once (after the first turn screen is seen) so enemies walk past them and draw
         // reactions; reactions are left to time out.
-        for (var step = 0; step < 5_000 && game.Phase == TacticsPhase.Battle && seen.Count < 5; step++)
+        for (var step = 0; step < 5_000 && game.Phase == TacticsPhase.Battle && seen.Count < (rules.Regions.IsEmpty ? 5 : 7); step++)
         {
             Look();
             for (var p = 0; p < 4; p++)

@@ -1,0 +1,34 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "vote",
+  "data": {
+    "party": true,
+    "canChoose": true,
+    "options": [
+      {
+        "id": "force",
+        "label": "We\u0027ll clear the ford by force.",
+        "skill": null,
+        "dc": null
+      },
+      {
+        "id": "parley",
+        "label": "We\u0027ll go and parley with the chief.",
+        "skill": null,
+        "dc": null
+      }
+    ],
+    "mine": null,
+    "chosen": null,
+    "tie": true,
+    "decider": "Player1",
+    "away": [
+      "Player4"
+    ],
+    "vip": true
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:02:13.4001248\u002B00:00",
+  "header": null
+}

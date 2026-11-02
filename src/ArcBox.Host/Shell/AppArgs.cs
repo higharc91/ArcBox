@@ -12,8 +12,13 @@ namespace ArcBox.Host.Shell;
 /// car, e.g. one whose country plays the theme only) and <c>--autostart=&lt;gameId&gt;[:&lt;players&gt;]</c>
 /// (select that game and start it once enough players are in; for scripted runs), and <c>--perf</c> (F3 overlay on
 /// from the start, logged every 5 s), and <c>--audio-log</c> (print <c>AUDIO &lt;bus&gt; &lt;name&gt;</c> for every sound played),
-/// the dev-only <c>--tactics-demo[=&lt;map&gt;[:changed]]</c> (show a battle's board, without a server)
+/// the dev-only <c>--tactics-demo[=&lt;map&gt;[:changed]]</c> (show a battle's board, without a server),
+/// the dev-only <c>--world-demo[=&lt;region&gt;|hilly[:&lt;block tiles&gt;]]</c> (draw a whole region in blocks, pan over it and print what it cost;
+/// <c>--world-demo=things</c> is the art check for things to interact with instead: every kind in every state, then each event, no server),
+/// the dev-only <c>--walk-log</c> (print a <c>WALK</c> line for each step shown, and <c>WALKAT</c> lines with where the party is drawn),
 /// the dev-only <c>--drop-signals</c> (never send a host signal, so a game runs on its fallback timers),
+/// the dev-only <c>--story-demo[=&lt;step&gt;]</c> (play the story's panels and voice over the world from the real lore, without a server),
+/// the dev-only <c>--story-log</c> (print a <c>STORY</c> line for each line of a scene the TV says or shows),
 /// the dev-only <c>--beat-log</c> (print a <c>BEAT</c> line with each Tactics beat's timing)
 /// and the dev-only <c>--demo=campaign-lobby</c> (show the lobby with a built-in campaign and roster, without a server).
 /// </summary>
@@ -41,11 +46,29 @@ public sealed record AppArgs
     /// <summary>Dev only: the board to show instead of connecting (<c>Tactics.Presentation.Board.DemoBattle</c>), or null.</summary>
     public string? TacticsDemo { get; init; }
 
+    /// <summary>Dev only: the region to draw and measure instead of connecting (<c>Tactics.Presentation.World.DemoRegion</c>), or null.</summary>
+    public string? WorldDemo { get; init; }
+
+    /// <summary>Dev only: <c>name@x,y;…</c>, places to look at with <see cref="WorldDemo"/> instead of walking it, or null.</summary>
+    public string? WorldLooks { get; init; }
+
+    /// <summary>Dev only: <c>x,y;x,y;…</c>, corners of a walk for <see cref="WorldDemo"/> to take and time in place of its own, or null.</summary>
+    public string? WorldRoute { get; init; }
+
+    /// <summary>Dev only: print a <c>WALK</c> line for each step the TV shows.</summary>
+    public bool WalkLog { get; init; }
+
     /// <summary>Dev only: the TV never sends a host signal, to prove a game doesn't need them.</summary>
     public bool DropSignals { get; init; }
 
     /// <summary>Dev only: print a <c>BEAT</c> line for each Tactics beat played.</summary>
     public bool BeatLog { get; init; }
+
+    /// <summary>Dev only: print a <c>STORY</c> line for each line of a Tactics scene the TV says or shows.</summary>
+    public bool StoryLog { get; init; }
+
+    /// <summary>Dev only: play the scripted story (<c>Tactics.Presentation.Story.StoryDemo</c>) instead of connecting, from this step; "" for the start.</summary>
+    public string? StoryDemo { get; init; }
 
     /// <summary>Dev only: a built-in screen to show instead of connecting (<see cref="DemoCampaignLobby"/>), or null.</summary>
     public string? Demo { get; init; }
@@ -96,11 +119,29 @@ public sealed record AppArgs
                 case "--tactics-demo":
                     args = args with { TacticsDemo = string.IsNullOrWhiteSpace(value) ? "river_crossing" : value };
                     break;
+                case "--world-demo":
+                    args = args with { WorldDemo = string.IsNullOrWhiteSpace(value) ? "wood" : value };
+                    break;
+                case "--world-looks" when !string.IsNullOrWhiteSpace(value):
+                    args = args with { WorldLooks = value };
+                    break;
+                case "--world-route" when !string.IsNullOrWhiteSpace(value):
+                    args = args with { WorldRoute = value };
+                    break;
+                case "--walk-log" when value is null:
+                    args = args with { WalkLog = true };
+                    break;
                 case "--drop-signals" when value is null:
                     args = args with { DropSignals = true };
                     break;
                 case "--beat-log" when value is null:
                     args = args with { BeatLog = true };
+                    break;
+                case "--story-log" when value is null:
+                    args = args with { StoryLog = true };
+                    break;
+                case "--story-demo":
+                    args = args with { StoryDemo = value ?? "" };
                     break;
                 case "--demo" when value == DemoCampaignLobby:
                     args = args with { Demo = value };

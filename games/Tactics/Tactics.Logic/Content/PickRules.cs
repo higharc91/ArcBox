@@ -55,6 +55,22 @@ internal static class PickRules
         return problems;
     }
 
+    /// <summary>
+    /// Which <c>choose</c> feature each of <paramref name="picks"/> fills, by the same matching <see cref="Check"/> uses: one list per
+    /// feature of <paramref name="choices"/>, in the order given, holding the picks placed there in pick order. A pick no feature offers,
+    /// or one with no slot left, is in none; a repeated pick counts once.
+    /// </summary>
+    public static ImmutableArray<ImmutableArray<AbilityId>> Assign(IReadOnlyList<AbilityId> picks, IReadOnlyList<(int Level, FeatureRef Feature)> choices)
+    {
+        var counted = picks.Distinct().Select((pick, i) => (Index: i, Pick: pick)).ToList();
+        var slotOwner = new int?[choices.Count][];
+        for (var f = 0; f < choices.Count; f++)
+            slotOwner[f] = new int?[choices[f].Feature.Choose ?? 0];
+        for (var p = 0; p < counted.Count; p++)
+            Place(p, counted, choices, slotOwner, new bool[choices.Count]);
+        return [.. slotOwner.Select(slots => slots.Where(s => s is not null).Select(s => s!.Value).Order().Select(s => counted[s].Pick).ToImmutableArray())];
+    }
+
     /// <summary>Finds a slot for pick <paramref name="p"/>, moving earlier picks along augmenting paths when needed.</summary>
     private static bool Place(int p, List<(int Index, AbilityId Pick)> picks, IReadOnlyList<(int Level, FeatureRef Feature)> choices,
         int?[][] slotOwner, bool[] visited)

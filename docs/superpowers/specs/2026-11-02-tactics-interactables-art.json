@@ -1,0 +1,1020 @@
+{
+  "props": {
+    "chest": {
+      "variants": {
+        "closed": "chest_closed.png",
+        "open": "chest_open.png"
+      },
+      "size": [
+        26,
+        26
+      ],
+      "anchor": [
+        13,
+        25
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "interactable"
+      ]
+    },
+    "chest_opening": {
+      "variants": {
+        "strip": "chest_opening.png"
+      },
+      "size": [
+        26,
+        26
+      ],
+      "anchor": [
+        13,
+        25
+      ],
+      "frames": 4,
+      "fps": 10.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:closed",
+        "to:open"
+      ]
+    },
+    "crate": {
+      "variants": {
+        "closed": "crate_closed.png",
+        "open": "crate_open.png"
+      },
+      "size": [
+        26,
+        28
+      ],
+      "anchor": [
+        13,
+        27
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "interactable"
+      ]
+    },
+    "crate_opening": {
+      "variants": {
+        "strip": "crate_opening.png"
+      },
+      "size": [
+        26,
+        28
+      ],
+      "anchor": [
+        13,
+        27
+      ],
+      "frames": 4,
+      "fps": 10.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:closed",
+        "to:open"
+      ]
+    },
+    "barrel": {
+      "variants": {
+        "closed": "barrel_closed.png",
+        "open": "barrel_open.png"
+      },
+      "size": [
+        18,
+        26
+      ],
+      "anchor": [
+        9,
+        25
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "interactable"
+      ]
+    },
+    "barrel_opening": {
+      "variants": {
+        "strip": "barrel_opening.png"
+      },
+      "size": [
+        18,
+        26
+      ],
+      "anchor": [
+        9,
+        25
+      ],
+      "frames": 3,
+      "fps": 10.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:closed",
+        "to:open"
+      ]
+    },
+    "sack": {
+      "variants": {
+        "closed": "sack_closed.png",
+        "open": "sack_open.png"
+      },
+      "size": [
+        16,
+        16
+      ],
+      "anchor": [
+        8,
+        15
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "interactable"
+      ],
+      "layer": "ground"
+    },
+    "sack_opening": {
+      "variants": {
+        "strip": "sack_opening.png"
+      },
+      "size": [
+        16,
+        16
+      ],
+      "anchor": [
+        8,
+        15
+      ],
+      "frames": 3,
+      "fps": 10.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:closed",
+        "to:open"
+      ],
+      "layer": "ground"
+    },
+    "cache": {
+      "variants": {
+        "closed": "cache_closed.png",
+        "open": "cache_open.png"
+      },
+      "size": [
+        24,
+        16
+      ],
+      "anchor": [
+        12,
+        15
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable"
+      ],
+      "layer": "ground"
+    },
+    "cache_opening": {
+      "variants": {
+        "strip": "cache_opening.png"
+      },
+      "size": [
+        24,
+        16
+      ],
+      "anchor": [
+        12,
+        15
+      ],
+      "frames": 4,
+      "fps": 10.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:closed",
+        "to:open"
+      ],
+      "layer": "ground"
+    },
+    "door": {
+      "variants": {
+        "closed": "door_closed.png",
+        "open": "door_open.png"
+      },
+      "size": [
+        32,
+        56
+      ],
+      "anchor": [
+        16,
+        48
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 3,
+      "tags": [
+        "interactable"
+      ]
+    },
+    "door_opening": {
+      "variants": {
+        "strip": "door_opening.png"
+      },
+      "size": [
+        32,
+        56
+      ],
+      "anchor": [
+        16,
+        48
+      ],
+      "frames": 4,
+      "fps": 10.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 3,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:closed",
+        "to:open"
+      ]
+    },
+    "gate": {
+      "variants": {
+        "closed": "gate_closed.png",
+        "open": "gate_open.png"
+      },
+      "size": [
+        40,
+        56
+      ],
+      "anchor": [
+        20,
+        44
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 3,
+      "tags": [
+        "interactable"
+      ]
+    },
+    "gate_opening": {
+      "variants": {
+        "strip": "gate_opening.png"
+      },
+      "size": [
+        40,
+        56
+      ],
+      "anchor": [
+        20,
+        44
+      ],
+      "frames": 6,
+      "fps": 10.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 3,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:closed",
+        "to:open"
+      ]
+    },
+    "drawbridge": {
+      "variants": {
+        "closed": "drawbridge_closed.png",
+        "open": "drawbridge_open.png"
+      },
+      "size": [
+        64,
+        48
+      ],
+      "anchor": [
+        32,
+        40
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "none",
+      "height": 3,
+      "tags": [
+        "interactable"
+      ]
+    },
+    "drawbridge_opening": {
+      "variants": {
+        "strip": "drawbridge_opening.png"
+      },
+      "size": [
+        64,
+        48
+      ],
+      "anchor": [
+        32,
+        40
+      ],
+      "frames": 8,
+      "fps": 8.0,
+      "blocks": true,
+      "cover": "none",
+      "height": 3,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:closed",
+        "to:open"
+      ]
+    },
+    "secret_door": {
+      "variants": {
+        "closed": "secret_door_closed.png",
+        "open": "secret_door_open.png"
+      },
+      "size": [
+        32,
+        56
+      ],
+      "anchor": [
+        16,
+        48
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 3,
+      "tags": [
+        "interactable"
+      ]
+    },
+    "secret_door_opening": {
+      "variants": {
+        "strip": "secret_door_opening.png"
+      },
+      "size": [
+        32,
+        56
+      ],
+      "anchor": [
+        16,
+        48
+      ],
+      "frames": 6,
+      "fps": 8.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 3,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:closed",
+        "to:open"
+      ]
+    },
+    "lever": {
+      "variants": {
+        "off": "lever_off.png",
+        "on": "lever_on.png"
+      },
+      "size": [
+        16,
+        24
+      ],
+      "anchor": [
+        8,
+        23
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "interactable"
+      ]
+    },
+    "lever_pulling": {
+      "variants": {
+        "strip": "lever_pulling.png"
+      },
+      "size": [
+        16,
+        24
+      ],
+      "anchor": [
+        8,
+        23
+      ],
+      "frames": 3,
+      "fps": 12.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:off",
+        "to:on"
+      ]
+    },
+    "note": {
+      "variants": {
+        "unread": "note_unread.png",
+        "read": "note_read.png"
+      },
+      "size": [
+        16,
+        12
+      ],
+      "anchor": [
+        8,
+        11
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable"
+      ],
+      "layer": "ground"
+    },
+    "plaque": {
+      "variants": {
+        "unread": "plaque_unread.png",
+        "read": "plaque_read.png"
+      },
+      "size": [
+        20,
+        20
+      ],
+      "anchor": [
+        10,
+        19
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "interactable"
+      ]
+    },
+    "book": {
+      "variants": {
+        "unread": "book_unread.png",
+        "read": "book_read.png"
+      },
+      "size": [
+        24,
+        30
+      ],
+      "anchor": [
+        12,
+        29
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 2,
+      "tags": [
+        "interactable"
+      ]
+    },
+    "gravestone": {
+      "variants": {
+        "unread": "gravestone_unread.png",
+        "read": "gravestone_read.png"
+      },
+      "size": [
+        18,
+        24
+      ],
+      "anchor": [
+        9,
+        23
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "interactable"
+      ]
+    },
+    "signpost": {
+      "variants": {
+        "unread": "signpost_unread.png",
+        "read": "signpost_read.png"
+      },
+      "size": [
+        24,
+        34
+      ],
+      "anchor": [
+        12,
+        33
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 1,
+      "tags": [
+        "interactable"
+      ]
+    },
+    "pickup": {
+      "variants": {
+        "here": "pickup_here.png",
+        "taken": "pickup_taken.png"
+      },
+      "size": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        23
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable"
+      ],
+      "layer": "ground"
+    },
+    "shrine": {
+      "variants": {
+        "ready": "shrine_ready.png",
+        "used": "shrine_used.png"
+      },
+      "size": [
+        36,
+        52
+      ],
+      "anchor": [
+        18,
+        40
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 2,
+      "tags": [
+        "interactable"
+      ]
+    },
+    "shrine_using": {
+      "variants": {
+        "strip": "shrine_using.png"
+      },
+      "size": [
+        36,
+        52
+      ],
+      "anchor": [
+        18,
+        40
+      ],
+      "frames": 6,
+      "fps": 8.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 2,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:ready",
+        "to:used"
+      ]
+    },
+    "well": {
+      "variants": {
+        "ready": "well_ready.png",
+        "used": "well_used.png"
+      },
+      "size": [
+        34,
+        40
+      ],
+      "anchor": [
+        17,
+        39
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 2,
+      "tags": [
+        "interactable"
+      ]
+    },
+    "well_using": {
+      "variants": {
+        "strip": "well_using.png"
+      },
+      "size": [
+        34,
+        40
+      ],
+      "anchor": [
+        17,
+        39
+      ],
+      "frames": 4,
+      "fps": 8.0,
+      "blocks": true,
+      "cover": "full",
+      "height": 2,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:ready",
+        "to:used"
+      ]
+    },
+    "altar": {
+      "variants": {
+        "ready": "altar_ready.png",
+        "used": "altar_used.png"
+      },
+      "size": [
+        32,
+        28
+      ],
+      "anchor": [
+        16,
+        27
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "interactable"
+      ]
+    },
+    "altar_using": {
+      "variants": {
+        "strip": "altar_using.png"
+      },
+      "size": [
+        32,
+        28
+      ],
+      "anchor": [
+        16,
+        27
+      ],
+      "frames": 6,
+      "fps": 8.0,
+      "blocks": true,
+      "cover": "half",
+      "height": 1,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:ready",
+        "to:used"
+      ]
+    },
+    "trap": {
+      "variants": {
+        "armed": "trap_armed.png",
+        "disarmed": "trap_disarmed.png",
+        "sprung": "trap_sprung.png"
+      },
+      "size": [
+        32,
+        16
+      ],
+      "anchor": [
+        16,
+        15
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable"
+      ],
+      "layer": "ground"
+    },
+    "trap_springing": {
+      "variants": {
+        "strip": "trap_springing.png"
+      },
+      "size": [
+        32,
+        16
+      ],
+      "anchor": [
+        16,
+        15
+      ],
+      "frames": 4,
+      "fps": 12.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "transition",
+        "from:armed",
+        "to:sprung"
+      ],
+      "layer": "ground"
+    },
+    "tracks": {
+      "variants": {
+        "noticed": "tracks_noticed.png"
+      },
+      "size": [
+        32,
+        16
+      ],
+      "anchor": [
+        16,
+        15
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "notice"
+      ],
+      "layer": "ground"
+    },
+    "scratches": {
+      "variants": {
+        "noticed": "scratches_noticed.png"
+      },
+      "size": [
+        24,
+        16
+      ],
+      "anchor": [
+        12,
+        15
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "notice"
+      ],
+      "layer": "ground"
+    },
+    "disturbed_earth": {
+      "variants": {
+        "noticed": "disturbed_earth_noticed.png"
+      },
+      "size": [
+        32,
+        16
+      ],
+      "anchor": [
+        16,
+        15
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "notice"
+      ],
+      "layer": "ground"
+    },
+    "bloodstain": {
+      "variants": {
+        "noticed": "bloodstain_noticed.png"
+      },
+      "size": [
+        28,
+        14
+      ],
+      "anchor": [
+        14,
+        13
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "notice"
+      ],
+      "layer": "ground"
+    },
+    "draft": {
+      "variants": {
+        "noticed": "draft_noticed.png"
+      },
+      "size": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        23
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "notice"
+      ],
+      "layer": "ground"
+    },
+    "carving": {
+      "variants": {
+        "noticed": "carving_noticed.png"
+      },
+      "size": [
+        24,
+        16
+      ],
+      "anchor": [
+        12,
+        15
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "notice"
+      ],
+      "layer": "ground"
+    },
+    "rune": {
+      "variants": {
+        "noticed": "rune_noticed.png"
+      },
+      "size": [
+        24,
+        16
+      ],
+      "anchor": [
+        12,
+        15
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "notice"
+      ],
+      "layer": "ground"
+    },
+    "remains": {
+      "variants": {
+        "noticed": "remains_noticed.png"
+      },
+      "size": [
+        32,
+        20
+      ],
+      "anchor": [
+        16,
+        19
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "notice"
+      ],
+      "layer": "ground"
+    },
+    "hidden_path": {
+      "variants": {
+        "found": "hidden_path_found.png"
+      },
+      "size": [
+        32,
+        16
+      ],
+      "anchor": [
+        16,
+        15
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "path"
+      ],
+      "layer": "ground"
+    }
+  },
+  "notes": {
+    "about": "The art brief's keys (docs/superpowers/specs/2026-11-02-tactics-interactables-design.md section 4), as the manifest of a new set, content/tactics/base/interactables/manifest.json, in props/manifest.json's shape, so it loads with ArtManifests as it is: each kind's variants are its states (interactables.chest.open = ThingView.Art + '.' + ThingView.State), drawn as one frame each; each transition is an asset of its own, <kind>_<transition>, one strip played once from its first state to its last, then the state holds. Drawn at 1x, shown at 2x, facing sw; the TV mirrors for the other facings. ambient has no art of its own.",
+    "anchor": "the ground contact pixel; stand it on the tile centre",
+    "frames": "a transition is a horizontal strip, played once at fps",
+    "cover": "none | half | full, for ranged attacks (a passage: when closed)",
+    "height": "in height steps (16 px), for line of sight",
+    "layer": "absent = over (a billboard, sorted with units); ground = lies flat under units",
+    "blocks": "a passage's blocks is true and means closed: when open the engine says it doesn't",
+    "empty": "a pickup's taken and a cache's open draw nothing: the TV isn't sent them, so they may be left out",
+    "totals": "29 kinds, 50 state frames, 14 transition strips of 65 frames: 115 frames in all",
+    "notice": "the notices (tracks, scratches, disturbed_earth, bloodstain, draft, carving, rune, remains) and hidden_path are one state each, drawn only once found: no transition. Ground layer, never in the way.",
+    "prompts": {
+      "tracks": "interactables.tracks.noticed, 32x16, anchor [16, 15]: a short trail of fresh animal paw prints (wolf-sized, four toes and a pad) pressed into earth, running diagonally from the bottom-left to the top-right corner of the tile, the prints a shade darker than the ground with a 1 px lighter rim on their top-left edges. No ground colour fill around them: only the prints, so they sit on any terrain. Pixel art drawn at 1x (the TV shows it at 2x), lit from the top-left with hue-shifted 6-shade ramps, no pure black or white (darkest outline #140f1a), selective dark outline, shading in clusters of 2+ pixels, transparent background. Seen from the isometric 2:1 overworld camera; it lies flat on one 32x16 diamond tile and faces sw (towards the bottom left). Keep it subtle: it is a clue the party noticed, so it must read at a glance but never look like something to pick up.",
+      "scratches": "interactables.scratches.noticed, 24x16, anchor [12, 15]: three or four parallel claw gouges scored into a flat stone or packed earth, pale fresh-cut lines with darker depths, a few chips of grit scattered beside them. Pixel art drawn at 1x (the TV shows it at 2x), lit from the top-left with hue-shifted 6-shade ramps, no pure black or white (darkest outline #140f1a), selective dark outline, shading in clusters of 2+ pixels, transparent background. Seen from the isometric 2:1 overworld camera; it lies flat on one 32x16 diamond tile and faces sw (towards the bottom left). Keep it subtle: it is a clue the party noticed, so it must read at a glance but never look like something to pick up.",
+      "disturbed_earth": "interactables.disturbed_earth.noticed, 32x16, anchor [16, 15]: a low patch of loose, freshly turned soil, darker and clumpier than the ground around it, with a few clods and a broken root poking out, edges ragged; it should say \"something was buried here\". Pixel art drawn at 1x (the TV shows it at 2x), lit from the top-left with hue-shifted 6-shade ramps, no pure black or white (darkest outline #140f1a), selective dark outline, shading in clusters of 2+ pixels, transparent background. Seen from the isometric 2:1 overworld camera; it lies flat on one 32x16 diamond tile and faces sw (towards the bottom left). Keep it subtle: it is a clue the party noticed, so it must read at a glance but never look like something to pick up.",
+      "bloodstain": "interactables.bloodstain.noticed, 28x14, anchor [14, 13]: an old dried bloodstain splashed on the ground, deep brown-red at the centre fading to rust at the spatter, two or three drops trailing away to the top-right. Muted, not gory. Pixel art drawn at 1x (the TV shows it at 2x), lit from the top-left with hue-shifted 6-shade ramps, no pure black or white (darkest outline #140f1a), selective dark outline, shading in clusters of 2+ pixels, transparent background. Seen from the isometric 2:1 overworld camera; it lies flat on one 32x16 diamond tile and faces sw (towards the bottom left). Keep it subtle: it is a clue the party noticed, so it must read at a glance but never look like something to pick up.",
+      "draft": "interactables.draft.noticed, 24x24, anchor [12, 23]: a faint breath of cold air leaking from a wall's foot: two or three thin, curling pale blue-white wisps rising from a hairline crack, drawn at about 50% opacity so the ground shows through. It's the only notice that rises off the ground; keep it lower than a character's knee. Pixel art drawn at 1x (the TV shows it at 2x), lit from the top-left with hue-shifted 6-shade ramps, no pure black or white (darkest outline #140f1a), selective dark outline, shading in clusters of 2+ pixels, transparent background. Seen from the isometric 2:1 overworld camera; it lies flat on one 32x16 diamond tile and faces sw (towards the bottom left). Keep it subtle: it is a clue the party noticed, so it must read at a glance but never look like something to pick up.",
+      "carving": "interactables.carving.noticed, 24x16, anchor [12, 15]: a worn carving cut into a flagstone: a crude sigil, a circle crossed by a line and three notches, the cuts in shade 1 of the stone ramp with lit top-left edges, moss in one corner. Pixel art drawn at 1x (the TV shows it at 2x), lit from the top-left with hue-shifted 6-shade ramps, no pure black or white (darkest outline #140f1a), selective dark outline, shading in clusters of 2+ pixels, transparent background. Seen from the isometric 2:1 overworld camera; it lies flat on one 32x16 diamond tile and faces sw (towards the bottom left). Keep it subtle: it is a clue the party noticed, so it must read at a glance but never look like something to pick up.",
+      "rune": "interactables.rune.noticed, 24x16, anchor [12, 15]: a single arcane rune etched into stone, angular strokes filled with a faint cyan glow (#7fc8e8-ish, never pure white), with a soft 1 px halo; it looks dormant, warm to the touch, not a trap. Pixel art drawn at 1x (the TV shows it at 2x), lit from the top-left with hue-shifted 6-shade ramps, no pure black or white (darkest outline #140f1a), selective dark outline, shading in clusters of 2+ pixels, transparent background. Seen from the isometric 2:1 overworld camera; it lies flat on one 32x16 diamond tile and faces sw (towards the bottom left). Keep it subtle: it is a clue the party noticed, so it must read at a glance but never look like something to pick up.",
+      "remains": "interactables.remains.noticed, 32x20, anchor [16, 19]: a small scatter of old bones half-sunk in the ground, a skull on its side, a few ribs and a long bone, bleached and chipped, a scrap of rotted cloth. Lies flat; the stand-in until it's drawn is props.ribcage. Pixel art drawn at 1x (the TV shows it at 2x), lit from the top-left with hue-shifted 6-shade ramps, no pure black or white (darkest outline #140f1a), selective dark outline, shading in clusters of 2+ pixels, transparent background. Seen from the isometric 2:1 overworld camera; it lies flat on one 32x16 diamond tile and faces sw (towards the bottom left). Keep it subtle: it is a clue the party noticed, so it must read at a glance but never look like something to pick up.",
+      "hidden_path": "interactables.hidden_path.found, 32x16, anchor [16, 15]: a narrow, trodden way through the tile once it has been found: a goat track of flattened grass and bare earth, or stepping stones through reeds, running diagonally across the diamond from bottom-left to top-right. Its edges are parted stems bent outwards, so it reads as a gap in whatever hid it (a hedge, reeds, scrub). Pixel art drawn at 1x (the TV shows it at 2x), lit from the top-left with hue-shifted 6-shade ramps, no pure black or white (darkest outline #140f1a), selective dark outline, shading in clusters of 2+ pixels, transparent background. Seen from the isometric 2:1 overworld camera; it lies flat on one 32x16 diamond tile and faces sw (towards the bottom left). Keep it subtle: it is a clue the party noticed, so it must read at a glance but never look like something to pick up.",
+      "fx_notice": "fx.notice (fx/manifest.json, an effect like fx.poof): 24x24 frames, 6 frames at 12 fps, played once over a notice the moment it's noticed. A quiet glint, not a puff: a small four-point sparkle that grows from one pixel, flares pale clue-blue (#7fc8e8) with a warm centre, and fades out with two specks drifting up. Additive blend, anchored at the tile centre. Until it exists the TV plays fx.poof."
+    }
+  }
+}

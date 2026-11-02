@@ -14,7 +14,11 @@ namespace ArcBox.Host.Games.Tactics;
 /// Light is in the vertex colours, read from <see cref="BoardLighting"/>: art x light, as the pack's recipe has it, and what light does to
 /// each item is worked out in <see cref="LitBoard"/>. So there's no extra pass and no shader, and what's drawn unmodulated, like rings, is
 /// simply unlit. Why not Light2D is in docs/tv-host.md. What glows by itself is drawn again, unlit, in its place in the painter's order,
-/// so what stands in front of it still hides it.
+/// so what stands in front of it still hides it. The items themselves are painted by <see cref="BoardPainter"/>, which a world's blocks share.
+/// </para>
+/// <para>
+/// Over a world it paints no board of its own: <see cref="SetDrawn"/> gives it, frame by frame, only what stands in front of the units, already
+/// baked by <see cref="WorldCanvas"/>, and the units, their marks and the halos in view go through here as they do in a battle.
 /// </para>
 /// </summary>
 public partial class BoardCanvas : Node2D
@@ -22,29 +26,21 @@ public partial class BoardCanvas : Node2D
     /// <summary>How often animated art redraws: fast enough for its fastest strip (10 fps).</summary>
     private const double TicksPerSecond = 20;
 
-    private sealed record DrawnFace(LitFace Lit, Vector2[] Points, Vector2[]? Outline, Vector2[] Uvs, Vector2[] FrameUvs, Color[] Colours,
-        Texture2D? Texture, Texture2D? Glow);
-
-    private sealed record DrawnSprite(LitSprite Lit, Rect2 Target, Vector2 Size, Texture2D? Texture, Texture2D? Glow);
-
     private const int RingPoints = 28;
     private const float RingWidth = 1.5f;
     private const float ActiveRingWidth = 2.5f;
+    private const float OutlinedRingWidth = 2f;       // a walker's or a coloured hero's ring, over a dark one, so it reads on grass
+    private const float RingOutlineWidth = 4f;
+    private const float RingOutlineAlpha = 0.8f;
 
-    private static readonly Color GridLine = new(0, 0, 0, 0.22f);
-    private static readonly Color PartyRing = new("63d36f");    // ui/manifest.json's palette: hp, enemy, gold
-    private static readonly Color EnemyRing = new("e2534c");
-    private static readonly Color NeutralRing = new("dbceb7");
-    private static readonly Color ActiveRing = new("ffe794");
-    private static readonly Color[] Unlit = [Colors.White, Colors.White, Colors.White, Colors.White];
+    private static readonly Color AwayShade = new(0.68f, 0.68f, 0.74f, 0.82f);     // a walker whose phone has gone: still one of the party
 
-    private readonly Dictionary<string, Texture2D?> _textures = [];
-    private readonly Dictionary<string, Texture2D?> _glows = [];
+    private readonly BoardPainter _painter;
     private readonly List<object> _items = [];
     private readonly List<long> _orders = [];
+    private readonly List<float> _alphas = [];
     private ImmutableArray<BoardUnit> _units = [];
     private int[] _sequence = [];
-    private string _root = "";
     private bool _animated;
     private double _clock;
     private long _tick;
@@ -54,9 +50,22 @@ public partial class BoardCanvas : Node2D
     private readonly FxLayer _over;
     private BoardLighting? _lighting;
     private Vector2 _origin;
+    private bool _baked;
+    private (System.Numerics.Vector2 Min, System.Numerics.Vector2 Max)? _view;
+    private float _gridAlpha = 1;
+    private bool _clocked;
+    private readonly bool _ownsPainter;
 
     public BoardCanvas()
+        : this(new BoardPainter())
     {
+        _ownsPainter = true;
+    }
+
+    /// <summary>A board that shares <paramref name="painter"/>'s textures, as one over a world does.</summary>
+    internal BoardCanvas(BoardPainter painter)
+    {
+        _painter = painter;
         TextureFilter = TextureFilterEnum.Nearest;
         TextureRepeat = TextureRepeatEnum.Enabled;   // a side deeper than its texture repeats
         _halos = new FxLayer(Load, additive: true);
@@ -72,22 +81,123 @@ public partial class BoardCanvas : Node2D
     /// <summary>Shows <paramref name="plan"/> in its light <paramref name="lit"/>, loading its art from <paramref name="packRoot"/>, placed by <paramref name="fit"/>.</summary>
     public void SetPlan(BoardPlan plan, LitBoard lit, BoardFit fit, string packRoot)
     {
-        _root = packRoot;
+        Planned = true;
+        _painter.Root = packRoot;
         _lighting = lit.Lighting.Active ? lit.Lighting : null;
         _items.Clear();
         _orders.Clear();
+        _alphas.Clear();
         foreach (var item in lit.Items)
         {
-            _items.Add(item is LitFace face ? Prepare(face) : Prepare((LitSprite)item));
+            var drawn = BoardPainter.Prepare(item);
+            _painter.Bind(drawn);
+            _items.Add(drawn);
             _orders.Add(item.Order);
+            _alphas.Add(1);
         }
-        _halos.Show(_lighting?.Halos(_clock) ?? []);
+        _halos.Show(HalosNow());
         _animated = plan.Animated;
         _origin = new Vector2(fit.Origin.X, fit.Origin.Y);
         Position = _origin;
         Scale = new Vector2(fit.Scale, fit.Scale);
         Merge();
     }
+
+    /// <summary>It has a plan from <see cref="SetPlan"/>, and the textures for it, since it was made or last let go (<see cref="LetGo"/>).</summary>
+    public bool Planned { get; private set; }
+
+    /// <summary>
+    /// Lets go of the plan, the units, the effects and every texture, at once. For the plain board once its fight has gone onto the world, which
+    /// has its own copy of the same art: kept, they'd sit in video memory beside the world's for as long as the scene lasts (the hardware check's
+    /// 55.6 MB against 38.2 MB, after a TV came back mid-fight). Nothing's drawn until the next <see cref="SetPlan"/>, which loads what it needs.
+    /// Only a board with a painter of its own: a world's board shares the world's.
+    /// </summary>
+    public void LetGo()
+    {
+        if (!_ownsPainter || !Planned)
+        {
+            return;
+        }
+        Planned = false;
+        _items.Clear();
+        _orders.Clear();
+        _alphas.Clear();
+        (_units, _sequence, _lighting) = ([], [], null);
+        _marks.Clear();
+        _halos.Show([]);
+        _light.Show([]);
+        _over.Show([]);
+        // What was drawn last is still recorded, textures and all, and a hidden node isn't drawn again to replace it: clear it now.
+        foreach (var item in new CanvasItem[] { this, _halos, _marks, _light, _over })
+        {
+            RenderingServer.CanvasItemClear(item.GetCanvasItem());
+        }
+        _painter.Release();
+    }
+
+    /// <summary>Moves the board to <paramref name="fit"/> without building anything again: a fight in the world goes where the stage is.</summary>
+    public void SetFit(BoardFit fit)
+    {
+        _origin = new Vector2(fit.Origin.X, fit.Origin.Y);
+        Position = _origin;
+        Scale = new Vector2(fit.Scale, fit.Scale);
+    }
+
+    /// <summary>How much of the grid shows, 0 to 1 (<see cref="Tactics.Presentation.World.StageDirector.GridAlpha"/>).</summary>
+    public float GridAlpha
+    {
+        get => _gridAlpha;
+        set
+        {
+            if (value != _gridAlpha)
+            {
+                _gridAlpha = value;
+                QueueRedraw();
+            }
+        }
+    }
+
+    /// <summary>The board's clock, in seconds: what its units bob and its art steps by. Over a world it's the world's, so nothing steps at the seam.</summary>
+    public double Clock
+    {
+        get => _clock;
+        set => (_clock, _clocked) = (value, true);
+    }
+
+    /// <summary>How long the last drawing took, in milliseconds.</summary>
+    public double LastDrawMs { get; private set; }
+
+    /// <summary>Draws over a world lit by <paramref name="lighting"/>, with items whose colours are baked. Units still read the light as it flickers.</summary>
+    internal void JoinWorld(BoardLighting? lighting)
+    {
+        _lighting = lighting;
+        _baked = true;
+    }
+
+    /// <summary>
+    /// Paints <paramref name="items"/>, prepared by <see cref="BoardPainter.Prepare(LitItem, BoardLighting?)"/> and bound, in place of a plan. Their <paramref name="orders"/> are the
+    /// painter's order, and <paramref name="alphas"/>, if any, what each is painted at.
+    /// </summary>
+    internal void SetDrawn(IEnumerable<object> items, IEnumerable<long> orders, IEnumerable<float>? alphas = null)
+    {
+        _items.Clear();
+        _items.AddRange(items);
+        _orders.Clear();
+        _orders.AddRange(orders);
+        _alphas.Clear();
+        if (alphas is null)
+        {
+            _alphas.AddRange(Enumerable.Repeat(1f, _items.Count));
+        }
+        else
+        {
+            _alphas.AddRange(alphas);
+        }
+        Merge();
+    }
+
+    /// <summary>Limits the halos to a view of the board, in art pixels, as a region has far more of them than a screen.</summary>
+    internal void SetView(System.Numerics.Vector2 min, System.Numerics.Vector2 max) => _view = (min, max);
 
     /// <summary>Shows <paramref name="units"/> over the current plan, which stays as it is, so this can run on every frame.</summary>
     public void SetUnits(ImmutableArray<BoardUnit> units, UnitArt art)
@@ -117,109 +227,69 @@ public partial class BoardCanvas : Node2D
         {
             return;
         }
-        _clock += delta;
+        if (!_clocked)
+        {
+            _clock += delta;
+        }
         var tick = (long)(_clock * TicksPerSecond);
         if (tick != _tick)
         {
             _tick = tick;
             _marks.Tick(_clock);
-            _halos.Show(_lighting?.Halos(_clock) ?? []);
+            _halos.Show(HalosNow());
             QueueRedraw();
         }
     }
 
+    private ImmutableArray<FxDraw> HalosNow()
+    {
+        if (_lighting is null)
+        {
+            return [];
+        }
+        return _view is { } view ? _lighting.Halos(_clock, view.Min, view.Max) : _lighting.Halos(_clock);
+    }
+
     public override void _Draw()
     {
+        var clock = System.Diagnostics.Stopwatch.GetTimestamp();
         _lighting?.Step(_clock);
+        var light = _baked ? null : _lighting;
+        BoardPainter.GridAlpha = _gridAlpha;
         foreach (var step in _sequence)
         {
             if (step < 0)
             {
                 DrawUnit(_units[~step]);
             }
-            else if (_items[step] is DrawnFace face)
-            {
-                DrawFace(face);
-            }
-            else if (_items[step] is DrawnSprite sprite)
-            {
-                DrawSprite(sprite);
-            }
-        }
-    }
-
-    private void DrawFace(DrawnFace drawn)
-    {
-        LightUp(drawn);
-        var uvs = FrameUvs(drawn);
-        if (drawn.Lit.Art)
-        {
-            if (drawn.Texture is null)
-            {
-                DrawColoredPolygon(drawn.Points, drawn.Colours[0]);
-            }
             else
             {
-                DrawPrimitive(drawn.Points, drawn.Colours, uvs, drawn.Texture);
+                _painter.Paint(this, _items[step], light, _clock, _alphas[step]);
             }
         }
-        if (drawn.Glow is not null)
-        {
-            DrawPrimitive(drawn.Points, Unlit, uvs, drawn.Glow);
-        }
-        if (drawn.Outline is not null)
-        {
-            DrawPolyline(drawn.Outline, GridLine, 0.5f);
-        }
-    }
-
-    private void LightUp(DrawnFace drawn)
-    {
-        if (drawn.Lit.Probes.IsEmpty || _lighting is not { } lighting)
-        {
-            return;
-        }
-        for (var i = 0; i < drawn.Colours.Length; i++)
-        {
-            drawn.Colours[i] = Colour(drawn.Lit.ColourAt(i, lighting), drawn.Lit.Face.Alpha);
-        }
+        BoardPainter.GridAlpha = 1;
+        LastDrawMs = System.Diagnostics.Stopwatch.GetElapsedTime(clock).TotalMilliseconds;
     }
 
     private static Color Colour(Rgb colour, float alpha = 1) => new(colour.R, colour.G, colour.B, alpha);
 
-    private Vector2[] FrameUvs(DrawnFace drawn)
-    {
-        if (drawn.Lit.Face.Image is not { Frames: > 1 } image)
-        {
-            return drawn.Uvs;
-        }
-        var frame = image.FrameAt(_clock);
-        for (var i = 0; i < drawn.Uvs.Length; i++)
-        {
-            drawn.FrameUvs[i] = new Vector2(image.FrameU(drawn.Uvs[i].X, frame), drawn.Uvs[i].Y);
-        }
-        return drawn.FrameUvs;
-    }
-
-    private void DrawSprite(DrawnSprite drawn)
-    {
-        if (drawn.Texture is not null)
-        {
-            var source = new Rect2(new Vector2(drawn.Lit.Sprite.Image.FrameAt(_clock) * drawn.Size.X, 0), drawn.Size);
-            var light = _lighting is { } lighting ? Colour(drawn.Lit.LightNow(lighting)) : Colors.White;
-            DrawTextureRectRegion(drawn.Texture, drawn.Target, source, light);
-            if (drawn.Glow is not null)
-            {
-                DrawTextureRectRegion(drawn.Glow, drawn.Target, source);
-            }
-        }
-    }
-
     private void DrawUnit(BoardUnit unit)
     {
+        if (unit.MarksOnly)
+        {
+            return;     // only its emote, which UnitMarks draws
+        }
+        if (unit.Thing is { } thing)
+        {
+            DrawThing(unit, thing);
+            return;
+        }
         var feet = new Vector2(unit.Feet.X, unit.Feet.Y);
         var clock = _clock + unit.Phase;
-        DrawRing(feet, unit);
+        if (unit.Ring > 0)
+        {
+            DrawRing(feet, unit);
+        }
         foreach (var effect in unit.Under)
         {
             DrawEffect(effect, feet, clock);
@@ -234,6 +304,7 @@ public partial class BoardCanvas : Node2D
             var target = new Rect2(corner, unit.Mirror ? new Vector2(-size.X, size.Y) : size);   // a negative width flips, in the same place
             var light = _lighting is { } lighting ? Colour(lighting.ForFigure(BoardLighting.BodyOf(unit.Feet,
                 sprite.FootprintHeight > 0 ? sprite.FootprintHeight : sprite.WorldHeight))) : Colors.White;
+            light = unit.Away ? light * AwayShade : light;
             DrawTextureRectRegion(texture, target, new Rect2(source.X, source.Y, source.Width, source.Height), light);
         }
         else
@@ -248,6 +319,66 @@ public partial class BoardCanvas : Node2D
         }
     }
 
+    /// <summary>
+    /// A thing to interact with (<see cref="Tactics.Presentation.World.ThingShow"/>): its sprite, lit as a figure is, scaled about its feet and
+    /// tinted as its look says, or its plain marker, unlit. Everything here was worked out there.
+    /// </summary>
+    private void DrawThing(BoardUnit unit, ThingLook look)
+    {
+        if (look.Alpha <= 0)
+        {
+            return;
+        }
+        var feet = new Vector2(unit.Feet.X, unit.Feet.Y);
+        DrawSetTransform(feet, 0, new Vector2(look.Scale.X, look.Scale.Y));
+        if (look.Marker is { } marker)
+        {
+            DrawMarker(marker, feet, look.Alpha);
+        }
+        else if (Load(unit.Sprite.Path) is { } texture)
+        {
+            var sprite = unit.Sprite;
+            var size = new Vector2(sprite.Width, sprite.Height);
+            var corner = -new Vector2(unit.Mirror ? sprite.Width - sprite.AnchorX : sprite.AnchorX, sprite.AnchorY);
+            var source = sprite.Source(unit.Anim.FrameAt(_clock), 0);
+            var light = _lighting is { } lighting ? Colour(lighting.ForFigure(BoardLighting.BodyOf(unit.Feet, sprite.Height))) : Colors.White;
+            var tint = new Color(light.R * look.Tint.R, light.G * look.Tint.G, light.B * look.Tint.B, look.Alpha);
+            DrawTextureRectRegion(texture, new Rect2(corner, unit.Mirror ? new Vector2(-size.X, size.Y) : size),
+                new Rect2(source.X, source.Y, source.Width, source.Height), tint);
+        }
+        DrawSetTransform(Vector2.Zero, 0, Vector2.One);
+    }
+
+    private void DrawMarker(ThingMarker marker, Vector2 feet, float alpha)
+    {
+        Vector2[] Points(IEnumerable<System.Numerics.Vector2> points) => [.. points.Select(p => new Vector2(p.X, p.Y) - feet)];
+        var line = Colour(marker.Line, alpha);
+        var diamond = Points(marker.Diamond);
+        if (marker.FillAlpha > 0)
+        {
+            DrawColoredPolygon(diamond, Colour(marker.Fill, marker.FillAlpha * alpha));
+        }
+        DrawPolyline([.. diamond, diamond[0]], line, ThingLineWidth);
+        if (marker.Slab is { } slab)
+        {
+            var face = Points(slab);
+            DrawColoredPolygon(face, new Color(SlabShade, SlabShade, SlabShade * 1.2f, SlabAlpha * alpha));
+            DrawColoredPolygon(face, Colour(marker.Fill, 0.25f * alpha));
+            DrawPolyline([.. face, face[0]], line, ThingLineWidth);
+        }
+        if (marker.Handle is { } handle)
+        {
+            var h = Points(handle);
+            DrawLine(h[0], h[1], line, ThingLineWidth * 1.5f);
+            DrawLine(h[2], h[3], line, ThingLineWidth);
+            DrawCircle(h[3], 2.5f, line);
+        }
+    }
+
+    private const float ThingLineWidth = 1.5f;
+    private const float SlabShade = 0.1f;
+    private const float SlabAlpha = 0.75f;
+
     /// <summary>The ring at a unit's feet, on the slant of the tile.</summary>
     private void DrawRing(Vector2 feet, BoardUnit unit)
     {
@@ -257,22 +388,22 @@ public partial class BoardCanvas : Node2D
             var angle = Mathf.Tau * i / RingPoints;
             points[i] = feet + new Vector2(Mathf.Cos(angle) * unit.Ring, Mathf.Sin(angle) * unit.Ring / 2);
         }
-        DrawPolyline(points, unit.Active ? ActiveRing : ToneColour(unit.Tone), unit.Active ? ActiveRingWidth : RingWidth);
+        var ring = Colour(unit.RingColour);
+        if (unit.Outlined)
+        {
+            DrawPolyline(points, Colour(UnitPlan.RingOutline, RingOutlineAlpha), RingOutlineWidth + (unit.Active ? ActiveRingWidth - OutlinedRingWidth : 0));
+            DrawPolyline(points, unit.Away ? ring * AwayShade : ring, unit.Active ? ActiveRingWidth : OutlinedRingWidth);
+            return;
+        }
+        DrawPolyline(points, ring, unit.Active ? ActiveRingWidth : RingWidth);
     }
 
     /// <summary>What's left when a sprite's file is missing: a marker in the unit's colour, so it's still on the board.</summary>
     private void DrawTokenFor(BoardUnit unit, Vector2 feet)
     {
         var (halfWidth, height) = (unit.Ring * 0.7f, 26f);
-        DrawColoredPolygon([feet, feet + new Vector2(halfWidth, -height / 2), feet + new Vector2(0, -height), feet + new Vector2(-halfWidth, -height / 2)], ToneColour(unit.Tone));
+        DrawColoredPolygon([feet, feet + new Vector2(halfWidth, -height / 2), feet + new Vector2(0, -height), feet + new Vector2(-halfWidth, -height / 2)], Colour(unit.Colour ?? UnitPlan.ToneRing(unit.Tone)));
     }
-
-    private static Color ToneColour(UnitTone tone) => tone switch
-    {
-        UnitTone.Party => PartyRing,
-        UnitTone.Enemy => EnemyRing,
-        _ => NeutralRing,
-    };
 
     private void DrawEffect(StatusEffect effect, Vector2 anchor, double clock)
     {
@@ -286,88 +417,5 @@ public partial class BoardCanvas : Node2D
         DrawTextureRectRegion(texture, new Rect2(corner, size), new Rect2(new Vector2(frame * size.X, 0), size));
     }
 
-    private DrawnFace Prepare(LitFace lit)
-    {
-        var face = lit.Face;
-        Vector2[] points = [.. face.Points.Select(p => new Vector2(p.X, p.Y))];
-        Vector2[] uvs = [.. face.Uvs.Select(p => new Vector2(p.X, p.Y))];
-        var colour = Colour(face.Tint, face.Alpha);
-        return new DrawnFace(lit, points, face.Grid ? [.. points, points[0]] : null, uvs, new Vector2[uvs.Length], [colour, colour, colour, colour],
-            lit.Art ? Load(face.Image?.Path) : null, lit.Glow && face.Image is { Glow: { } rule } image ? Glow(image.Path, null, rule.Colour) : null);
-    }
-
-    private DrawnSprite Prepare(LitSprite lit)
-    {
-        var sprite = lit.Sprite;
-        var size = new Vector2(sprite.Size.X, sprite.Size.Y);
-        var glow = lit.Glow && sprite.Light is { } light ? Glow(sprite.Image.Path, light.Mask, light.Colour) : null;
-        return new DrawnSprite(lit, new Rect2(new Vector2(sprite.TopLeft.X, sprite.TopLeft.Y), size), size, Load(sprite.Image.Path), glow);
-    }
-
-    /// <summary>What of a strip of the pack glows by itself, as a texture of its own: once each, as it's work over every pixel.</summary>
-    private Texture2D? Glow(string file, string? mask, Rgb colour)
-    {
-        if (_glows.TryGetValue(file, out var known))
-        {
-            return known;
-        }
-        return _glows[file] = Bake(file, mask, colour);
-    }
-
-    private Texture2D? Bake(string file, string? mask, Rgb colour)
-    {
-        if (Pixels(file) is not { } art)
-        {
-            return null;
-        }
-        var pixels = art.GetData();
-        byte[] glow;
-        if (mask is null)
-        {
-            glow = GlowMask.FromColour(pixels, colour);
-        }
-        else if (Pixels(mask, Image.Format.L8) is { } masked && masked.GetSize() == art.GetSize())
-        {
-            glow = GlowMask.FromMask(pixels, masked.GetData());
-        }
-        else
-        {
-            return null;
-        }
-        return ImageTexture.CreateFromImage(Image.CreateFromData(art.GetWidth(), art.GetHeight(), false, Image.Format.Rgba8, glow));
-    }
-
-    private Image? Pixels(string file, Image.Format format = Image.Format.Rgba8)
-    {
-        var path = System.IO.Path.Combine(_root, file);
-        var image = System.IO.File.Exists(path) ? Image.LoadFromFile(path) : null;
-        if (image is null || image.IsEmpty())
-        {
-            return null;
-        }
-        image.Convert(format);
-        return image;
-    }
-
-    /// <summary>A file of the pack, relative to its root, or null if there's none or it can't be read.</summary>
-    private Texture2D? Load(string? file)
-    {
-        if (file is null)
-        {
-            return null;
-        }
-        if (_textures.TryGetValue(file, out var known))
-        {
-            return known;
-        }
-
-        var path = System.IO.Path.Combine(_root, file);
-        var loaded = System.IO.File.Exists(path) ? Image.LoadFromFile(path) : null;
-        if (loaded is null || loaded.IsEmpty())
-        {
-            GD.PushWarning($"Tactics board: can't load {path}");
-            return _textures[file] = null;
-        }
-        return _textures[file] = ImageTexture.CreateFromImage(loaded);
-    }
+    private Texture2D? Load(string? file) => _painter.Load(file);
 }

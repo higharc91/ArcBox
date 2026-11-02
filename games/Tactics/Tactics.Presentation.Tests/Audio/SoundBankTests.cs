@@ -117,6 +117,12 @@ public sealed class SoundBankTests
     [InlineData("grass/lush", "step_grass")]
     [InlineData("dirt/dark", "step_dirt")]
     [InlineData("water/clear", "step_water")]
+    [InlineData("ford_water/clear", "step_water")]
+    [InlineData("grass_ford/autumn", "step_grass")]
+    [InlineData("dirt_ford/wet", "step_dirt")]
+    [InlineData("path_ford/packed", "step_dirt")]
+    [InlineData("rock_ford/bank", "step_stone")]
+    [InlineData("ash_ford/charred", "step_dirt")]
     [InlineData("rock/grey", "step_stone")]
     [InlineData("mine_boards/oak", "step_wood")]
     [InlineData("lava/molten", "step_lava")]
@@ -259,5 +265,16 @@ public sealed class SoundBankTests
         var real = Rules.Value.Conditions.Keys.Select(k => k.Value).ToHashSet();
 
         Assert.All(SoundChoice.Conditions, c => Assert.Contains(c, real));
+    }
+
+    [Fact]
+    public void A_step_on_a_regions_ground_is_read_from_that_ground()
+    {
+        var map = Pack.Ground("ashen_ford").Map;
+        var tile = Enumerable.Range(0, map.Width).SelectMany(x => Enumerable.Range(0, map.Height).Select(y => new Tile(x, y)))
+            .First(t => map.Materials[map[t].Material].StartsWith("cobble", StringComparison.Ordinal));
+
+        Assert.Equal("step_stone", Bank.Value.Step(map, tile));
+        Assert.Equal(SoundChoice.DefaultStep, Bank.Value.Step(map, new Tile(-1, -1)));
     }
 }

@@ -25,6 +25,15 @@ public sealed record PaintedRegion(string Id, string Name, int Chapter, int Widt
     /// <summary>The Flags layer.</summary>
     public IReadOnlyDictionary<Tile, TileFlags> Flags { get; init; } = ImmutableDictionary<Tile, TileFlags>.Empty;
 
+    /// <summary>The Props layer: a prop id and its variant on each painted tile.</summary>
+    public IReadOnlyDictionary<Tile, (string Id, string? Variant)> Props { get; init; } = ImmutableDictionary<Tile, (string Id, string? Variant)>.Empty;
+
+    /// <summary>The building markers, each on its footprint's back corner.</summary>
+    public IReadOnlyList<RegionBuilding> Buildings { get; init; } = [];
+
+    /// <summary>The person markers.</summary>
+    public IReadOnlyList<RegionPerson> People { get; init; } = [];
+
     /// <summary>The beat markers.</summary>
     public IReadOnlyList<BeatSpot> Beats { get; init; } = [];
 
@@ -68,8 +77,12 @@ public sealed record PaintedRegion(string Id, string Name, int Chapter, int Widt
         foreach (var (tile, material) in Materials)
             source.Set(tile, Heights.GetValueOrDefault(tile), material, Flags.GetValueOrDefault(tile));
         source.Beats.AddRange(Beats);
+        source.Buildings.AddRange(Buildings);
+        source.People.AddRange(People);
         foreach (var stamp in Stamps)
             source.AddStamp(stamp);
+        foreach (var group in Props.GroupBy(p => (p.Value.Id, p.Value.Variant)))
+            source.Props.Add(new RegionProps(group.Key.Id, group.Key.Variant, [.. group.Select(p => p.Key).Distinct().Order()]));
 
         var problems = new List<string>();
         if (SceneFile is { } file && file != Id)
@@ -78,6 +91,7 @@ public sealed record PaintedRegion(string Id, string Name, int Chapter, int Widt
         problems.AddRange(Strays.Select(s => $"The {s.Node} at {s.At} is under {s.Parent}, so it isn't exported. {s.Fix}."));
         AddBare(Heights.Keys, "a height", "Height");
         AddBare(Flags.Keys, "flags", "Flags");
+        AddBare(Props.Keys, "a prop", "Props");
         AddHoles();
         AddSpawn(Starts, "start", "Start");
         AddSpawn(Recoveries, "recovery", "Recovery");

@@ -36,6 +36,10 @@ The app prints `ROOM <CODE>` on stdout whenever it creates or resumes a room, so
 `tools/tv-e2e.sh` uses that to run the TV, the server and bot phones together and collect screenshots from both
 ([`redline-tv.md`](redline-tv.md#toolstv-e2esh-tv-server-and-phones-together)).
 
+Saving a shot stalls the frame it's taken on, so don't judge hitches or frame times from a run with `--shots`: on an RTX 5080 a
+fight's start took 216 ms with shots and 2 to 5 ms without. `ARCBOX_SHOTS=0 tools/tv-e2e.sh` runs the TV without them (and skips
+the checks for them); add `TV_ARGS=--perf` for the frame times.
+
 ## Arguments
 
 Everything after `--` on the Godot command line; all optional.
@@ -55,6 +59,13 @@ Everything after `--` on the Godot command line; all optional.
 | `--drop-signals` | Dev only: the TV never sends a host signal, so a game runs on its fallback timers. Proves a game doesn't need them. |
 | `--beat-log` | Dev only: print a `BEAT` line for each Tactics beat played: when it ran, how long it took and what was in it. |
 | `--tactics-demo[=<map>[:changed\|:fight]]` | Dev only: show a Tactics board without a server, with the art from the repository's `content/` (default `river_crossing`). `:changed` adds zones, raised tiles and the bridge's tiles sunk; `:fight` adds one of every kind of unit. With `--shots` it saves `…-tactics-battle-<map>.png`. |
+| `--world-demo[=<region>\|hilly\|wood\|tavern\|town[:<block tiles>]]` | Dev only: open a whole region the way the TV will, without a server, with the art and region from the repository's `content/` (default `ashen_ford`; `hilly` and `wood` are `DemoRegion`'s stress cases, `tavern` its one building, `town` a small square at the ford's dusk, and `swatches` a band of each ground material in the ford's light, for choosing them), walk a stand-in the length of it at twice walking pace, print what it cost in `WORLD` lines and quit. Use `--res=1920x1080`. With `--shots` it saves `world-<spec>.png`, then one `world-<spot>.png` for each place `WorldSpots` finds: behind a cliff, behind a crate, water at a block edge, a block corner, the region's edge and both sides of the void. See [the world](#the-world). |
+| `--world-demo=things` | Dev only: the art check for things to interact with (`ThingsDemo` in Tactics.Presentation), without a server: a generated courtyard with every kind in every state the art brief draws, on four labelled gallery screens (each label is the art key, without `interactables.`, and where its picture came from: `art`, `stand-in: <key>` or `marker`), then a chest opened, a hidden cache found, traps seen, set off and disarmed, a lever working a gate both ways, a locked door unlocked and opened, a secret door found and opened, a key picked up, a note read and a shrine used; then the hidden things (design §7): tracks noticed that lead to a cache, a rune noticed by Arcana, the other notices in a row, a goat track through a hedge found, and a Search with its hidden DC finding a loose flagstone. Use `--res=1920x1080`; with `--shots` it saves a `things-*` shot of each moment, then quits. See [things to interact with](#things-to-interact-with). |
+| `--world-looks=<name>@<x>,<y>[@<x>,<y>];…` | Dev only: with `--world-demo` and `--shots`, go to these places instead of walking, and save `world-<name>.png` of each, with the figure on the second tile if there is one. It's how `place-*.png` were taken. |
+| `--world-route=<x>,<y>;…` | Dev only: with `--world-demo`, time a walk along these corners in place of the demo's own: a walk through a town, say. |
+| `--walk-log` | Dev only: print `WALK <seq> <x> <y> <ms>` as each step reaches the TV, `<ms>` being the wall clock in Unix milliseconds; `WALKAT <ms> <seq> <held 0\|1> <leader x> <leader y> <widest gap> <name> <x> <y> …`, where the TV drew each walker, at most every 0.25 s while anything moves and once when it comes to rest; `BUMP <ms> <x> <y>` when the leader bumps a wall; `TACTICS walk snapped to <x> <y>` when the party is put somewhere rather than walked there (a first view, a new epoch, a reconnect); and a `WALKSTATS` line every 288 frames of walking and once more when the party stops: frame times, and how many pixels the leader and the ground moved a frame. The formats are in [the Tactics README](../games/Tactics/README.md#bot-phones-and-the-tv-end-to-end). See [walking](#walking). |
+| `--story-demo[=<step>]` | Dev only: play the story over the world without a server (`StoryDemo` in Tactics.Presentation), from the real lore and region: the "!" over Pip, the narrator and speakers with their faces and clips, a leader's choice, a party vote that ties and is broken, eleven long options, six roller cards, a pass and a fail, the gap between scenes and the chapter card. `<step>` starts at `marker`, `line`, `choice`, `gap`, `vote`, `tie`, `many`, `check`, `pass`, `fail` or `card`. With `--shots` it saves a `tactics-story-*` shot of each. |
+| `--story-log` | Dev only: print `STORY <seq> <line> said\|shown <state>` for each line of a scene the TV takes: `said` when it spoke it; `STORY marker <beat> <x> <y> <emote\|->` for each beat on offer whenever they change (`STORY marker none` for none); and `STORY card <chapter>` as a chapter's card comes up. See [the story](#the-story). |
 | `--demo=campaign-lobby` | Dev only: show the lobby with a built-in campaign game selected, its campaign list and a roster with seated and away members (`Shell/CampaignLobbyDemo.cs`), without a server. With `--shots` it saves `001-lobby.png`. |
 
 Unknown arguments are reported as warnings and ignored.
@@ -72,7 +83,14 @@ the lobby exactly as before.
 The server sends `ContentRequired(gameId, packs)` when a game is selected, when it starts and on resume (spec §3.6). The TV
 caches each pack under `user://content/<gameId>/<packId>/<hash>/` (on Linux
 `~/.local/share/godot/app_userdata/ArcBox/content/`), downloading it from the server it's connected to and verifying every
-file; the newest 3 hashes of each pack are kept. A game with no packs (REDLINE, Counter) is shown at once, as before.
+file. A new hash (a new export) downloads only the files that changed: a file an installed version of the pack already
+has, at the same path and with the SHA-256 the server's index lists, is copied from disk and checked instead
+(`ContentPlan.Sources`). Changing one region file of the Tactics pack fetches that file and the index (about 0.66 MB)
+rather than all 4,309 files (122 MB); an unchanged pack fetches nothing, not even the index. This needs nothing from the
+server that it didn't already send, so old servers and old caches work. Up to 3 hashes of each pack are kept, and the
+least recently used go first once the cache is over 1 GiB, though never a pack's newest hash or the one before it, which a
+running game may still read (`ContentPlan.Evict`). Each install logs a `Content <game>/<pack>@<hash> installed: fetched
+… reused …` line. A game with no packs (REDLINE, Counter) is shown at once, as before.
 Otherwise, if a pack isn't cached yet when the game starts, the TV shows a "Loading content… 42%" card (the average
 across the game's packs) and shows the game once every pack is in, with the newest view it was sent meanwhile. If a
 download or its verification fails, the card says "Couldn't load game content" with **Retry** (click or Enter), and the
@@ -226,11 +244,14 @@ went solid yellow), and flames were lit like anything else. Fixing that means sp
 canvas item, at 16 as far as I recall; that's from memory, unchecked, and no map has over 10 lights. Neither approach has been measured on
 a modest TV box.
 
-The base pack now holds a region, `rules/world/ashen_ford.json`, which the TV downloads with the rest of the pack but doesn't read until milestone 5b. Re-exporting a region changes the pack's hash, so a TV fetches the whole pack again, and a battle saved mid-fight restarts until 5b takes `rules/world/` out of the hash a battle save compares.
+The base pack now holds a region, `rules/world/ashen_ford.json`, which the TV downloads with the rest of the pack. Re-exporting a region changes the pack's download hash, so a TV fetches the whole pack again. A battle saved mid-fight doesn't restart, as `rules/world/` isn't in the hash a battle save compares.
 
 A region's blocks can share one `BoardLighting` (`Of` takes several plans), so a pool doesn't stop at a block's edge. Reads go through a
 grid of tile-sized buckets, and `MeanAt` reads each light at its mean for baked art, whatever `Step` has done. Only `Step` is unsafe
 beside another thread's reads of "now".
+
+`BoardPainter` paints `LitBoard` items for both. A board passes its lighting at every draw; a world's blocks bake from the whole region's lighting when they're prepared
+(`LitFace.MeanColourAt`, `LitSprite.MeanLight`, which no `Step` moves) and paint with none.
 
 What glows by itself (`GlowMask`, from the pack's masks or, where the pack has none, the brightest shades of the light's colour) is
 baked once and drawn again unlit, in its place in the painter's order, so a unit in front still hides it. Sources get the pack's
@@ -255,6 +276,152 @@ To run the TV against a real game without
 phones or a browser, `tools/tactics-playtest/bots.cjs` joins a room as N players and plays a whole session over the real
 hub; its header has the commands.
 
+## The world
+
+A region is drawn from cached blocks: `WorldPlan` cuts `BoardPlan`'s items into 16-tile squares (`BoardPlan.BuildBlock`, the same code with `WorldGround`'s real neighbours, so there's no
+seam or skirt) that share one `BoardLighting`, and `WorldBlock` records each one's items in `_Draw` once, so moving the camera changes only a transform. `Blocks` is in draw order: `ZIndex` is
+block column + row, with the column breaking ties. That agrees with `BoardOrder` for anything up to two tiles wide, and the pack's widest prop is 56 px. `BlockQueue` hands out unrecorded blocks
+nearest first, around where the party will be in 2 s.
+
+`WorldCanvas` is a `CanvasLayer` under the UI, because a block's Z sorts across its whole layer. It opens behind a fade: the plan and its baked colours off the main thread, then a texture a frame, then the blocks in view. Only then does the fade lift, and the rest go at 4 ms a frame, while the party is already moving. A block seen before its turn logs `WORLD late block`. Colours are baked at each light's mean, and the probes are then dropped, so floors don't flicker; flicker stays on halos and units, and halos are limited to the view. Water and flames go on moving in blocks recorded once because `FrameTextures` rewrites a single-frame texture in place, with a second one for what glows.
+
+Over the blocks, a `BoardCanvas` (`SetDrawn`) paints each frame's units with what stands in front of them (`WorldPlan.Overlay`), the same pixels in the same baked light. That's what sorts after a unit and crosses it, and then, because an item is repainted whole, what sorts after a repainted item and crosses that, until nothing more does. Without those, a tile repainted for one corner would go over its neighbour in front. Items cross by the shapes they cover: on open ground every tile's box overlaps the next one's, so going by boxes would run away across the map, where diamonds only meet. It comes to a mean of 1.0 items a frame and at most 23 on a walk across Ashen Ford with three walkers, and 8.5 and 55 on `hilly`. `OverlayPictureTests` rasters such walks, blocks then overlay, against true painter's order: no pixel differs. Painting something twice would show if it were half see-through, but no lip or prop in the pack has a partly clear pixel. A unit's marks stand above everything, so a bar or the crown stays visible over a figure hidden by a cliff.
+
+The pack's tops are square and lie turned 45 degrees on a tile, so a checker dither's diagonals run straight down the screen, and at scale 2 every patch of dither was a comb of vertical stripes. `DitherTexels` keeps a top's dither a checker: the TV gets the top at twice its size, which samples exactly as it did at any scale, and only texels that are part of a checker get a pattern that lands upright, in the same two colours. No filter or UV can do this, because outlines must stay where the turn puts them. A top with no dither (cobble, planks, water) is drawn as it is. See [the proof](superpowers/reports/2026-10-31-tactics-overworld/stripes-art-before-after.png): the art, then before, then after. A tall side clamps as the manifest says, so a drop deeper than `chasm_side` shows its art at its own size and goes on as its last row. Doubling costs four times the memory, so it's for tops with real dither: a frame needs `LeastPatch` (8) texels of dither touching, and the art's real dither comes in patches of 80 and up, while specks in sand, flagstone and dungeon floors, and the crypt's runes, are 7 at most.
+
+**Ground dressing and props:** In the world, `WorldPlan` adds decals and vertex tint to ground tiles. Decals (`flowers`, `leaves`, `pebbles`, `scorch_burnt`, `bones_bone`, `cracks_dark`, `puddle_water`, `puddle_swamp`, `blood_red`) are placed at ~1 tile in 6 by deterministic hash of tile coordinates and material. Ordinary ground skips blood and bones. Stamped tiles get no decals and no tint, ensuring a battle stage draws identically to its battle map. Ground tint is a slow continuous sine drift baked into vertex colours across block boundaries, stopping ash and water repeating every 4 tiles with no new art and zero draw calls. Region props are drawn with their specified variants on their tiles, in the static blocks in painter's order, tall or low, and props with light data light up the ground via the shared `BoardLighting`. What they block comes from the pack's art manifest, read explicitly by the server (`RulesPack.Load`) and the TV (`DemoRegion.FromPack`) alike: `WorldGround.Of` refuses a prop or building it has no definition for, so a missing definition can't mean walkable, and the two can't disagree on a tile. `StagePlan` draws region props near the fight so a fight retains its surroundings. Battle boards built with `BoardPlan.Build` remain completely unchanged.
+
+**Buildings** (`town/manifest.json`, placed by a region's `buildings`) are planned by `BuildingPlan`, pure, and drawn by the same painter as everything else, so the blocks, the overlay, the stage and the light all take them with no new path. A building is cut into the manifest's 32 px screen columns from its origin, each a quad sorted at the frontmost footprint tile it crosses (`BuildingArt.FrontOf`), at 1 px = 1 texel. A quad, and not a sprite, so a lamp lights a wall smoothly across columns. Over a tile that's walked under, as a gate's arch is, a column sorts after whoever's on that tile; steps and bridge decks sort under them, by the manifest's `walkable`. The manifest doesn't say where the art has pixels, and a frame leaves its right side to the shadow, so `BuildingShape` reads each PNG once: columns are trimmed to their pixels and empty ones aren't drawn, which also stops a walker in clear air fading anything. The shadow is one face a tile at the ground's own place in the order, sampled pixel for pixel, so it's under whatever stands on the tile and goes down steps with the ground. It's in cells as a lit top is, because it's see-through and may only be repainted over what's repainted. Smoke and signs are pinned to `attach` with their `anchor`, and loop at their `fps` through `FrameTextures`, so every chimney of a kind smokes in step.
+
+A building in front of a walker fades whole, with its smoke and sign. Column by column was tried and looked at: a walker's two or three columns gone from a house leave a hard vertical cut down it, which moves as they walk, and the house reads as torn. The whole of it going see-through reads at once, as a tree's fade does. See [whole](superpowers/reports/2026-10-31-tactics-overworld/building-fade-whole.png) and [columns](superpowers/reports/2026-10-31-tactics-overworld/building-fade-columns.png). `--world-demo=tavern` walks twice round one tavern, across the corner of four blocks, and shoots it from each side.
+
+**Dusk.** Ashen Ford and its fight (`river_crossing`, for a fight with no world to stand in) stand in `BoardLighting.Dusk`, stated by id: warm, low and a little purple, (0.56, 0.44, 0.54), and not lifted as a room's light is, since the map's own lights do the rest. It goes through the same `art x light` as everything else, in vertex colours, so there's no shader and no extra pass. Lamp posts, lanterns and fires light their surroundings from their props' light data, baked at the mean. A building's `lights` image goes over it, unlit, in the same quad, and only below daylight (`LitFace.Glow`). Its forge (`attach.light`) and each door of a building with lights throw a short warm pool with a halo, which stands in for bloom: no shader. `--world-demo=town` is a small square in that light for judging it against mockup 02. Figures keep `FigureFloor`, and rings, bars and the HUD aren't lit. The stage shares the world's light by the region's id and bakes from the same items, so a fight on the spot has no seam.
+
+Measured with `--world-demo` (2026-10-31, one run each, RTX 5080, 1920x1080, the usual Debug build, capped at the project's 144 fps, so 6.94 ms is the floor, with the owner's other programs running), on a full walk at twice walking pace that starts as the fade lifts. `_Draw` is a first recording, while the JIT is cold.
+
+| | Ashen Ford (170 tiles) | `hilly` (120 tiles, 3840 props, 960 lights) |
+|---|---|---|
+| Items, lit | 30,434 | 85,563 |
+| Off-thread build, with the bake | 449 ms | 658 ms |
+| Textures, behind the fade: total, worst | 50, 10.2 ms | 24, 6.2 ms |
+| Binding, behind the fade | 6 ms | 14 ms |
+| Blocks still to record at reveal | 49 of 80 | 57 of 80 |
+| `_Draw` per block, worst, median | 1.04, 0.25 ms | 2.37, 0.80 ms |
+| Recording in a frame, worst, over how many frames | 4.23 ms, 4 | 4.77 ms, 12 |
+| Frame during recording, worst | 12.34 ms | 7.14 ms |
+| Frame after the first second, worst | 6.94 ms | 6.94 ms |
+| Frames over 16 ms | 0 of 3,650 | 0 of 2,571 |
+| Overlay a frame: query, draw, p99 | 0.03, 0.07 ms | 0.05, 0.09 ms |
+| Render CPU, median, worst | 0.96, 2.33 ms | 1.80, 2.61 ms |
+| Draw calls in view, at most | 2,936 | 3,839 |
+| Added memory: managed, engine | 24, 11 MB | 63, 19 MB |
+
+The overlay query's worst is about 6.5 ms, once, on its first call behind the fade, as the JIT compiles it.
+
+So recording costs about 0.6 µs an item, and the cost that's left in a frame is the draw calls, as texture changes break the batches: a battle's board has about 500. No modest TV box has been measured.
+
+### Fading
+
+A prop of height 2 or more that stands in front of a walker fades, and comes back when the walker has gone. Every prop is in its block, in painter's order, so it's right against the ground and against everything else, and a block never has to be sorted against a layer of its own. `PropFade` says what's faded. A faded prop is left out of its recorded block (`WorldBlock.Leave`), which records that block again, once as the fade starts and once as it ends, never as the alpha eases (`PropFade.TakeChanges`). It's painted in its sorted place in the frame's overlay at its alpha, with the units (`WorldPlan.PaintOver`): over a walker behind it and under one in front. What stands in front of a faded prop goes over it as it goes over a unit, so a crate in front of a faded tree stays clear. In a fight nothing fades: `PropFade.InFight` makes what's faded solid at once, as a fight's frames don't read it.
+
+`OverlayPictureTests` holds all this to true painter's order, in rastered pixels: the whole region as its blocks record it, a walk across Ashen Ford, 25 walks past trees one tile beside them, a party stopped behind a tree and a party split across one, with what fades in play: 0 wrong pixels. A separate layer for tall props, at a block's Z, can't pass: it drew over terrain and low props in front (4,169 pixels on 38 of 153 props of Ashen Ford, worst 951 on one boulder), and faded trees above everything lay over walkers in front of them.
+
+Measured with no `--shots` (2026-11-01, RTX 5080, 1920×1080, Debug build, capped at 144 fps, one run each, on a crossing at twice walking pace). This repeats the fading spike, which predated decals and measured a layer that's gone: its best of 1,954 draw calls on `wood` isn't comparable, as that layer got them by drawing trees out of order.
+
+| | Ashen Ford (171 tiles, 153 tall props) | `wood` (230 tiles, 7,200 tall props) | `hilly` (120 tiles, 3,840 props, 960 lights) |
+|---|---|---|---|
+| Items, lit | 33,435 | 75,758 | 88,554 |
+| Off-thread build, with bake | 341 ms | 435 ms | 507 ms |
+| Frame ms after the first second: median, p95, p99, worst | 6.94, 6.94, 6.94, 6.94 | 6.94, 7.14, 8.33, 9.90 | 6.94, 6.94, 6.94, 6.94 |
+| Frames over 16 ms | 0 of 3,671 | 1 of 4,916, the first frame | 0 of 2,571 |
+| Render CPU ms: median, worst | 0.87, 1.83 | 1.11, 2.22 | 1.46, 2.31 |
+| GPU ms: median, worst | 0.07, 0.28 | 0.14, 0.53 | 0.13, 0.59 |
+| Draw calls, at most | 3,430 | 3,829 | 4,359 |
+| Blocks recorded again for a fade | 16 | 231 | 49 |
+| Overlay: query ms median, p99, worst | 0.03, 0.42, 2.98 | 0.31, 5.63, 6.95 | 0.11, 1.91, 7.83 |
+| Items over the blocks: p99, worst | 18, 19 | 182, 204 | 58, 67 |
+| Added engine memory at end | +12.3 MB | +15.9 MB | +19.2 MB |
+
+Dusk changed none of the Ashen Ford row: 3,430 draw calls and 0 frames over 16 ms of 3,673, the same 16 blocks recorded again, and battles hold at 420 draw calls (`river_crossing`) and 521 (`hall_of_the_flame:fight`). `--world-demo=town`, 21 buildings: 961 draw calls at most, 0 frames over 16 ms of 1,319, 25 blocks recorded again, overlay 0.31 ms median, 1.42 p99, 5.66 worst, 78 items at most. The overlay is what a dense town costs: `wood`'s p99 of 5.63 ms shows where it goes with hundreds of items, and it runs on the main thread.
+
+### Ambient life (2026-11-01)
+
+**The ground at dusk.** `GroundGrade` multiplies a material's art by region, which is how Ashen Ford's autumn loses its red, its ash stays grey in a purple light and the stamp's green burns out without a tile of the stamp changing. It's for the world and fights in it: a fight on a plain board is drawn as its map was tuned. `--world-demo=swatches` shows the materials in that light.
+
+**Where two grounds meet.** The pack has no transition art: `terrain/manifest.json` has tops, sides, lips and decals, and nothing between two tops. So in the world, and only there, a looser ground runs over a firmer one's tile in the pack's own upright dither (`GroundBlend`): solid at the seam, checker, sparse, gone, with a slow wobble, along eight masks over a top's four by four tiles. Each is the neighbour's own top again, in its own grade and drift, through a mask, baked once per ground and way the region uses (`BoardPainter.LoadBlend`), so no art changed and no top changed for a battle. Ground only blends at one level. What was laid by hand, or flows, keeps its hard edge. A stamp's tile never takes one, but a stamp's ground runs out into the world round it, so its outline softens and its tiles don't change. Measured when it went in, on the same region as the row below: 3,178 faces more (42,088 items, up 8%), 61 masked tops, 3,431 to 4,026 draw calls at most, 0 frames over 16 ms of 3,704, median 6.94, p99 7.97, worst 8.72, render CPU 1.12 ms median, and textures 43.0 MB in all, of which the masked tops are about 16 MB.
+
+**The rebuilt Ford, measured** (2026-11-01, one run each, RTX 5080, 1920x1080, the usual Debug build, capped at 144 fps, one walker, no shots): 194 buildings, of which 132 are pieces of the town wall, 446 props, 433 lights, 38,910 items. The demo's walk across the region, 173 tiles: 0 frames over 16 ms of 3,713, median 6.94, p99 7.41, worst 10.26, overlay 0.07 ms median, 5.30 p99, 8.15 worst, 3,431 draw calls at most. A walk down every street of Emberwick (`--world-route`), 206 tiles: 0 frames over 16 ms of 4,364, median 6.94, p99 9.09, worst 12.99, overlay 0.79 median, 6.87 p99, 10.17 worst, 329 items at most. So the query isn't indexed yet. It's the closure of what a walker stands behind that costs, and it's shared, so a party costs little more than one, but the people of step 6 walk in the same town: measure again then.
+
+Ambient particles (a few butterflies over grass, or at dusk fireflies over the fields, fish jumping in deep water, chimney smoke, and steam off stamped water, thinning up and down the river) are chosen once, by hash, by `AmbientPlan`, bounded strictly to the camera view, and drawn by `WorldAmbient` in the world's light, all but what glows. Measured with `--world-demo=wood` at 1920×1080 with ambient on: walking median frame time holds at 6.94 ms, 0 frames over 16 ms, and render CPU remains ~0.98 ms.
+
+**Animals** (2026-11-02). The region's `pack_mule`, `farm_goat`, `red_fox`, `river_duck` and `field_crow` props (`WorldAnimalIds`) aren't baked: `WorldFauna` draws each from its `*_anim` strip and lets it wander. Their art was made far bigger than the world (a mule two and a half people tall), so the strips carry the props manifest's `scale` (0.2 to 0.38) and the TV shrinks them once, at load, to whole pixels (`SpriteShrink`: each frame on its own, an average of the opaque pixels a box covers, alpha 0 or 255, the generator's magenta fringe dropped). Where they go is `FaunaRange`: a step of at most one level, so nothing runs up a cliff; land animals stay off water and ducks on it; nothing stands on a prop or just behind one or a building, since their layer can't be painted over by what stands in front; and an animal placed in a fenced pen stays in it. They're drawn in their block's depth, over its props, so the "just behind" rule is what keeps a goat off a haystack's top.
+
+A build that fails, on a bad or half-downloaded pack, logs its error once. The scene then frees the world and shows the header with the region's name, and fights still work.
+
+## Walking
+
+In Exploration the TV shows the world instead of the header and table, and the shell's background is hidden, as the world's layer is under it. The first view of Exploration opens the world behind its fade. It's built once for a scene: joining a party that's already walking, or a reconnect, only feeds it views, and a TV that comes back in a new scene builds its own while the old one's cancelled build goes nowhere. A fight or the battle list suspends it (`WorldCanvas.Suspend`): hidden and not running, with everything kept, and with nothing to do but fade back in. Its canvas item is hidden in the rendering server, not on the node, because Godot redraws a node each time it's shown: hiding the node recorded all 80 blocks again on the way back. It's freed when the scene is, with its textures disposed at once rather than left to the collector. Four sessions in a row end at the same memory: textures 36.7 MB, engine 80.8 MB.
+
+`Render` only feeds `WalkShow`, 3 to 5 times a second, and touches no node that hasn't changed. Everything that moves runs in `TacticsScene.WalkOn` each frame, whether a view came or not: `WalkShow.Frame` advances `WalkTrack`, reads the places, follows with `WorldCamera` (`Snap` when `Cuts` changes), and builds the units. Nothing is sent back, so a slow or missing TV costs a late picture and nothing else. A connection lost mid-walk heals by itself: what's missed is filled in from `Legs` or skipped along the path, and a gap past `Legs` snaps.
+
+**The party** stays on the screen's pixels. The camera rounds its origin, and a moving figure rounded on its own would shake against the frame by a pixel at the walk's beat, as often as 117 times in 288 frames. So what's moving lands where the unrounded camera puts it (`WorldCamera.OnPixels`): it holds still on the screen and the ground goes by under it in whole pixels. What's standing locks to the ground (`OnGround`), so it doesn't creep as the camera settles. The party keeps within `PartyReach` of the view's middle, which outranks `EdgeMargin`: a tile is 128 pixels wide, so at 16 tiles from an edge the party would otherwise walk off the screen. A walker whose phone has gone (`Here` false) is drawn a little dim. The leader's crown is the `crown` row of `emotes/manifest.json`, in `UnitMarks`, so it shows over a cliff.
+
+**The panels** (`WorldHud`, worded by `WalkHud`) are the chapter and region at the top left and the leader at the top right, in the battle HUD's glass and gold. They go see-through over the party, as the battle's do. The chapter comes in the host view's `ExploreView.Chapter`, which phones don't get.
+
+**The sound.** Footsteps go by distance, a foot every `FootstepTiles` of the leader's walk, by the ground underfoot (`SoundBank.Step`), at `FootstepDb` under a battle's. What's skipped or snapped past makes no sound. The Ashen Ford plays `town_emberwick`, as the manifest gives it.
+
+## Fights in the world
+
+A battle on a stamped map (overworld 5c) is drawn where it stands. `StageDirector` (Tactics.Presentation) has every host view and says
+what the fight looks like: the walk-in, the grid, the camera, the fade, who's hidden, and which `ExploreView` the walk may follow, so the new
+epoch waits for the results. `PhaseScreen.Of(view, director)` reads it, and only it, so the screen and the stage can't disagree; without a
+director every fight is on the plain board, as before the world.
+
+- **The board** is a `BoardCanvas` inside the world's own node (`WorldCanvas.ShowStage`), above the blocks and the walkers' overlay, at the
+  stamp's offset in art pixels (`BoardFit.StageOffset`), drawing `StagePlan`: the stamp and 10 tiles on along +x and +y, built from the
+  region's tiles, so it meets the world with no seam and no skirt. It shares the world's painter, so its water and flames step with the
+  world's (`FrameTextures`), and its colours are baked in the same light. Units come from `UnitPlan.Build(..., worldOffset)`; the beat's
+  shake goes to the camera (`WalkStage.Shake`), so the world and the board shake together. The stage has the halos while it's up.
+- **Beats** wait for the walk-in: `BeatLoop.Step` runs only while `StageDirector.BeatsRun`. The walk-in is at most 2.2 s, inside the game's
+  3 s `FormUp`, so this only ever delays a picture. `LastBlowPlayed` goes to the director when the results are shown.
+- **The ground**: `StageGround` says what each shown board needs. A changed board rebuilds the stage on the frame (about 5 ms on the
+  stress region); a raised or sunk tile also has the world's blocks round it rebuilt off the main thread (`WorldCanvas.Repaint`, 13-24 ms
+  of work) and swapped in, and healed the same way when the fight is over.
+- **The screen**: in the fight, the battle's HUD and no header, table or world panels (`WorldCover.Look`); at Results and Resuming,
+  the header and table straight over the world (`OverWorld`). `--shots` takes the battle and results screens as before, and
+  `tactics-beat-stage-*` shots of the walk-in, the grid and each step of the timeline.
+- **The world isn't ready**: the plain board plays the fight and the stage takes over, with a 0.25 s fade, once the world opens. A world
+  that can't be drawn leaves the fight on the plain board. A world brought back for a fight comes back with no card and no fade.
+- **End to end**: `ARCBOX_STAGE=1 tools/tv-e2e.sh` has bot phones walk into River Crossing's stamp, lose, wake at the recovery spawn,
+  walk back and fight it again (won or lost: a retry after a loss is often lost too), with `ARCBOX_RECONNECT=1`, `ARCBOX_RESTART=1` or `ARCBOX_DROP_SIGNALS=1` for a TV killed, a server restarted or
+  no signals at all ([the Tactics README](../games/Tactics/README.md#bot-phones-and-the-tv-end-to-end)). A TV that falls behind the
+  game (bots play faster than software rendering draws) skips a results screen the game has already left: the bots' VIP waits for
+  the TV's `TACTICS screen tactics-results` before going on, as someone watching the TV would.
+
+## The story
+
+A scene (overworld 5d) plays over the world. `StoryTrack` (Tactics.Presentation) has every host view and decides what's said and shown;
+`StoryLayer` and its panels only draw `StoryScreen`:
+
+- **The voice**: a new line on a running track says its clip at Question priority, cutting the last. A TV that watched the party walk up
+  says the scene's first line; one that joins mid-line, mid-question or mid-roll, or while a story waits to resume, shows it silently. A
+  line is never said twice in one campaign (`StoryView.Campaign`), so a restart's replayed line is shown, not said. A TV that had the story and watched it wait at Resuming says the saved line as it starts again if it never heard it (the server may have moved on to it just before it stopped). No view is dropped: a lower Seq means the server went back, and is shown, question and all. After a reconnect the first view only shows. A cut stops the voice only while it's still the story's own line (`StoryVoice.Owns`). A line with no clip shows its caption (`StoryVoice.Fallback`, the user's decision 1).
+- **The panels** (1920×1080 layout, the HUD's pieces): `StoryPanel`, the caption at the bottom left with the speaker's face in the line's
+  mood and their name on the dialogue tab, the question lit in gold; `VoteBoard`, the question at the bottom right, growing upward, its rows
+  sized by `VoteLayout` so eleven fit; `CheckBoard`, the skill check full over the dimmed world, with a card for each roller and the d20
+  that tumbles for 1.2 s and lands on the roll; `ChapterBoard`, the chapter's card. The countdown reads the server's deadline against
+  `StoryAskView.Span`, so a skewed TV clock can't show the wrong time.
+- **The world**: the beat on offer has its figure at the spot, with the `alert` emote over them until its scene starts (`StoryMarks`,
+  drawn among the party by `WalkShow`). While a scene plays, its speakers stand there instead (`ExploreView.Cast`, the user's answer to
+  item 21): the server picks their tiles (`SceneCast`), each looks at the leader, and `WalkTrack.Keep` keeps followers off them. The dice and the verdict play `ui_dice_roll`, then `ui_confirm` or `ui_error`.
+- **Shots**: `tactics-story-marker`, `-line-narrator`, `-line-speaker`, `-choice`, `-vote`, `-vote-tally`, `-tie`, `-vote-many`, `-check`,
+  `-roll-tumbling`, `-roll-pass`, `-roll-fail`, `-gap` and `-card`, at most two of each.
+
+The bots play it with `node tools/tactics-playtest/bots.cjs --story[=<scenes>] [--story-pick=<option ids>]` against a server seeded by the
+beat (`Tactics__Seed__At__0`/`__1`, and `Tactics__Seed__Beats__0` for a later beat). All of Chapter 1, from a fresh campaign to the card on
+either branch, is `ARCBOX_CHAPTER=1 ARCBOX_BRANCH=force|parley tools/tv-e2e.sh`, which the bots play with `--chapter` from the TV's
+`STORY marker` lines ([the Tactics README](../games/Tactics/README.md#bot-phones-and-the-tv-end-to-end)).
+
 ## Adding a game scene
 
 1. Create `res://games/<id>/<Name>Scene.tscn` whose root script implements `IGameScene`:
@@ -278,3 +445,48 @@ hub; its header has the commands.
    for, and should carry the sequence number of the event it acknowledges.
 
 Until the scene exists, the TV shows a "scene not installed" screen with the raw view JSON, and nothing crashes.
+
+## Things to interact with
+
+The region's chests, doors, levers, traps and the rest (interactables design, `docs/superpowers/specs/2026-11-02-tactics-interactables-design.md`)
+come in `ExploreView.Things`, each in its state, and what happens to them in `ExploreView.ThingEvents`. `ThingShow` (Tactics.Presentation)
+decides everything: it turns each thing into a figure sorted among the walkers and the props (`BoardUnit.Thing`), so the world's overlay paints
+what stands in front of it, and it plays a moment from each event newer than the last it saw, never from a change of state, so a TV that joins
+or comes back draws what's there and replays nothing. `BoardCanvas` and `UnitMarks` only draw what it gives.
+
+- **Its picture** (`ThingArt`): its own art, `interactables.<kind>.<state>`, whenever the pack has that very variant; else the stand-in the
+  server names for that state (`props.chest`, `pickups.loot_sack`…); else the plain marker: a gold diamond on the tile with its name, filled
+  while it stands in the way, a slab standing along its wall for a shut passage, and a post and handle for a lever. A shut passage sorts after
+  the next tile of its wall, so the wall's raised top doesn't cut it.
+- **The art drops in by key.** Copy the art brief's manifest (`docs/superpowers/specs/2026-11-02-tactics-interactables-art.json`) to
+  `content/tactics/base/interactables/manifest.json` and put its files beside it: the TV uses each state it finds, and a transition strip
+  (`<kind>_opening`, tagged `transition`, `from:` and `to:`) plays once as the state changes, backwards for the other way (a gate shutting, a
+  lever going off), and holds its last frame. A missing state falls back to the stand-in, never to another state. No code changes.
+  Check it with `--world-demo=things --shots=<dir>`.
+- **Moments** (each under a second, but a find's "!?" at 1.6 s): an opening squashes and glows (a passage puffs dust), an unlock flashes, a
+  failed way shakes, a find pops in with a puff and the `surprise` emote, a seen trap flashes red and keeps the `skull` emote while it's set, a
+  trap going off shakes red in smoke, a disarm flashes, a lever's handle swings and its passage's slab sinks or rises a stagger later, a taken
+  pickup or emptied cache rises and fades where it was, a shrine glows with the `bless` effect, and a read or a look hops. Events in one view
+  play `ThingShow.Stagger` (0.2 s) apart, and a thing waits in its old state for its turn.
+- **Sound** (`ThingSounds`): each event names the sfx ids it wants, the best first, at -8 dB. The pack has none of them yet but `ui_loot`
+  (a pickup), so the rest are silent until sounds with these ids are added to `sfx/manifest.json`: `door_open`, `door_close`, `gate_open`,
+  `gate_close`, `drawbridge_lower`, `drawbridge_raise`, `secret_door_open`, `secret_door_close`, `chest_open`, `crate_open`, `barrel_open`,
+  `sack_open`, `cache_open`, `lever_pull`, `lock_open`, `lock_fail`, `secret_found`, `trap_spotted`, `trap_spring`, `trap_disarm`,
+  `item_pickup`, `page_turn`, `shrine_use`, `well_draw`, `altar_use`.
+- **Cost:** nothing for a region with no things; otherwise only the things near the view are built (`ThingShow.Frame`'s view), pictures,
+  markers and labels are kept between frames, and the things join the walkers by a merge, not a sort: 50 things cost about 0.09 ms and
+  27 KB a frame (a Debug test, `Fifty_things_cost_a_frame_little_and_allocate_little`).
+- **Secret doors.** A hidden thing isn't sent until it's found. The region is painted with a secret door's gap open, so the server sends a
+  plug instead (`ExploreView.Plugs`: the tile and which way the wall runs, nothing else), and `WallPlugs` draws it as the wall beside it
+  (the taller neighbour along the run: its height, material and flags), built off the main thread and lit as the world's blocks are, with
+  what stands in front painted over it. When the door is found the plug goes as the door pops in (`ThingShow` holds it until then).
+- **Hidden things** (design §7). A notice (tracks, a bloodstain, a rune…) pops in with the `question` emote and `fx.notice` (the find's
+  `fx.poof` until the pack has it), and is drawn flat as the marker in clue blue (`ThingShow.Clue`) until its art exists; `noticed` wants the
+  sound `notice`, else `secret_found`. A hidden path is sent as a plug until it's found, as a secret door is, so it's drawn as the hedge or
+  water along its facing's run; found, it's the marker in trail green (`ThingShow.Trail`), flat. A search's check has no DC (`Dc` null):
+  "DC hidden", and its roll "Found something" or "Nothing found", with no "vs DC".
+- **Numbers.** `ThingEvents` numbers go on across a server restart (`WorldSave.ThingSeq`), so a TV that stayed up plays what's new to it
+  and nothing it played. Numbers that go back (an older server) start the count again, with nothing played.
+- **A strip plays once**, for the event that changes what's drawn (an opening, not the unlock before it), and only between two states
+  drawn with the thing's own art.
+

@@ -15,6 +15,9 @@ public sealed class WorldRegion
     /// <summary>The bytes of a decoded chunk: three per tile.</summary>
     public const int ChunkBytes = ChunkSize * ChunkSize * 3;
 
+    /// <summary>The most tiles along a side of a region, well above any real one: <see cref="WorldGround"/> holds every tile in memory.</summary>
+    public const int MaxSide = 1024;
+
     /// <summary>The highest a tile can be, as on a battle map.</summary>
     public const int MaxHeight = 9;
 
@@ -33,14 +36,20 @@ public sealed class WorldRegion
     /// <summary>The region as written.</summary>
     public RegionDef Def { get; }
 
+    /// <summary>The buildings standing in the region, as written.</summary>
+    public ImmutableArray<RegionBuilding> Buildings => Def.Buildings.IsDefault ? [] : Def.Buildings;
+
+    /// <summary>The people standing in the region, as written. The rules never read them: a region's walk is the same with or without.</summary>
+    public ImmutableArray<RegionPerson> People => Def.People.IsDefault ? [] : Def.People;
+
     /// <summary>
     /// Builds the region, decoding every chunk. Throws <see cref="ArgumentException"/> on a bad size, a repeated chunk or bad
     /// chunk bytes; the loader reports those as content errors first. Only the loader checks that chunks are inside the region.
     /// </summary>
     public static WorldRegion From(RegionDef def)
     {
-        if (def.Size is not [var width and > 0, var height and > 0])
-            throw new ArgumentException($"Region '{def.Id}' needs a size of [w, h].", nameof(def));
+        if (def.Size is not [var width and > 0 and <= MaxSide, var height and > 0 and <= MaxSide])
+            throw new ArgumentException($"Region '{def.Id}' needs a size of [w, h], at most {MaxSide} a side.", nameof(def));
 
         var chunks = new Dictionary<(int X, int Y), TileInfo[]>();
         foreach (var chunk in def.Chunks)
@@ -63,8 +72,11 @@ public sealed class WorldRegion
             : null;
     }
 
-    /// <summary>True when the party may walk on the tile: not void, not impassable, not deep, as on a battle map.</summary>
-    public bool Walkable(Tile t) => TileAt(t) is { } tile && (tile.Flags & (TileFlags.Impassable | TileFlags.Deep)) == 0;
+    /// <summary>
+    /// The stamp of the battle map <paramref name="map"/>, or null if the region doesn't stamp it. The loader allows a map one stamp,
+    /// so an encounter on it resolves to one place.
+    /// </summary>
+    public RegionStamp? StampFor(string map) => Def.Stamps.FirstOrDefault(s => s.Map == map);
 
     /// <summary>
     /// Decodes one chunk for <paramref name="materials"/> listed materials, or returns null with what's wrong with it. The first

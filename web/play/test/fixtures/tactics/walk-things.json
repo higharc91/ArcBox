@@ -1,0 +1,66 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "walk",
+  "data": {
+    "leader": true,
+    "leaderName": "Player1",
+    "region": "The Vault",
+    "objective": "Explore the region",
+    "me": {
+      "name": "Player1",
+      "cls": "Fighter",
+      "level": 1,
+      "color": "#ffd23f"
+    },
+    "party": [
+      {
+        "name": "Player1",
+        "cls": "Fighter",
+        "here": true,
+        "leads": true,
+        "color": "#ffd23f"
+      },
+      {
+        "name": "Player2",
+        "cls": "Cleric",
+        "here": true,
+        "leads": false,
+        "color": "#7ccbff"
+      },
+      {
+        "name": "Player3",
+        "cls": "Rogue",
+        "here": true,
+        "leads": false,
+        "color": "#ffab94"
+      },
+      {
+        "name": "Player4",
+        "cls": "Wizard",
+        "here": true,
+        "leads": false,
+        "color": "#8ff0c4"
+      }
+    ],
+    "vip": true,
+    "canBattle": false,
+    "portal": "/c/ABCD",
+    "interact": "Pick up the iron key",
+    "targets": [
+      {
+        "id": "key",
+        "label": "Pick up the iron key"
+      },
+      {
+        "id": "chest",
+        "label": "Open the chest"
+      }
+    ],
+    "beat": false,
+    "search": true
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}

@@ -33,6 +33,15 @@ public sealed class RegionSource(string id, string name, int chapter, int width,
     /// <summary>The beat spots.</summary>
     public List<BeatSpot> Beats { get; } = [];
 
+    /// <summary>The props placed in the region.</summary>
+    public List<RegionProps> Props { get; } = [];
+
+    /// <summary>The buildings placed in the region.</summary>
+    public List<RegionBuilding> Buildings { get; } = [];
+
+    /// <summary>The people standing in the region.</summary>
+    public List<RegionPerson> People { get; } = [];
+
     /// <summary>Where the party starts.</summary>
     public Tile Start { get; set; }
 
@@ -53,8 +62,8 @@ public sealed class RegionSource(string id, string name, int chapter, int width,
 
     /// <summary>
     /// Places a battle map with its tile (0, 0) at <paramref name="at"/>: copies every tile exactly, adding
-    /// <paramref name="heightOffset"/> to its height, and records the stamp. The world holds no props, so a blocking prop's tile
-    /// is copied as the plain ground under it.
+    /// <paramref name="heightOffset"/> to its height, and records the stamp. Props aren't tiles: a blocking prop's tile is copied as the
+    /// plain ground under it, and <see cref="WorldGround"/> stands the map's props back on it.
     /// </summary>
     public void Stamp(BattleMap map, Tile at, int heightOffset)
     {

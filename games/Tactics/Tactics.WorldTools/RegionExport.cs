@@ -36,8 +36,10 @@ public sealed record ExportResult(string? Written, ImmutableArray<string> Proble
     private string Pending => Warnings.Length switch
     {
         0 => "",
-        1 => " 1 old stamp area still needs repainting.",
-        var count => $" {count} old stamp areas still need repainting.",
+        1 when Warnings[0].Contains("old stamp") => " 1 old stamp area still needs repainting.",
+        1 => " 1 warning.",
+        var count when Warnings.All(w => w.Contains("old stamp")) => $" {count} old stamp areas still need repainting.",
+        var count => $" {count} warnings.",
     };
 
     private string Story => StoryWarnings.Length switch
@@ -54,6 +56,9 @@ public sealed record ExportResult(string? Written, ImmutableArray<string> Proble
 /// </summary>
 public static partial class RegionExport
 {
+    /// <summary>The materials that count as roads: blocking props on them produce a warning.</summary>
+    public static readonly ImmutableHashSet<string> RoadMaterials = AshenFordDraft.RoadMaterials;
+
     /// <summary>What a region is called while it's checked, if its own id can't name a file.</summary>
     private const string StandInId = "region_being_checked";
 
@@ -123,13 +128,124 @@ public static partial class RegionExport
         return [.. painted.OldStamps.Select(old => StampBrush.PendingWarning(old, StampMaps.Read(rulesDirectory, old.Map), covered)).OfType<string>()];
     }
 
+    private static List<string> PropWarnings(PaintedRegion painted, string rulesDirectory, string contentBase)
+    {
+        if (painted.Props.Count == 0)
+            return [];
+
+        // With no art nothing can be said about a prop here, and the pack's own check of the file reports that.
+        IReadOnlyDictionary<string, PropArtDef>? propDefs = null;
+        if (Directory.Exists(contentBase))
+            propDefs = ArtManifests.Load(contentBase).Props;
+
+        var warnings = new List<string>();
+
+        // 1. Blocking prop on road tile
+        foreach (var (tile, (id, _)) in painted.Props.OrderBy(p => p.Key.Y).ThenBy(p => p.Key.X))
+        {
+            if (painted.Materials.TryGetValue(tile, out var mat) && RoadMaterials.Contains(mat))
+            {
+                var blocks = propDefs?.TryGetValue(id, out var def) == true ? def.Blocks : false;
+                if (blocks)
+                    warnings.Add($"The tile {tile} has a blocking prop '{id}' on a road. Move the prop off the road, or change the material.");
+            }
+        }
+
+        // 2. Prop on beat spot
+        foreach (var (tile, (id, _)) in painted.Props.OrderBy(p => p.Key.Y).ThenBy(p => p.Key.X))
+        {
+            if (painted.Beats.FirstOrDefault(b => b.At == tile) is { } beat)
+                warnings.Add($"The tile {tile} has a prop '{id}' on the beat '{beat.Beat}'. Move the prop, or move the beat marker.");
+        }
+
+        // 3. Prop on spawn
+        foreach (var (tile, (id, _)) in painted.Props.OrderBy(p => p.Key.Y).ThenBy(p => p.Key.X))
+        {
+            if (painted.Starts.Contains(tile))
+                warnings.Add($"The tile {tile} has a prop '{id}' on the start spawn. Move the prop, or move the spawn marker.");
+            if (painted.Recoveries.Contains(tile))
+                warnings.Add($"The tile {tile} has a prop '{id}' on the recovery spawn. Move the prop, or move the spawn marker.");
+        }
+
+        // 4. Tall prop within 4 tiles in front of a stamp (+x or +y)
+        foreach (var stamp in painted.Stamps)
+        {
+            var map = StampMaps.Read(rulesDirectory, stamp.Map);
+            if (map is null)
+                continue;
+
+            var (left, top, right, bottom) = (stamp.At.X, stamp.At.Y, stamp.At.X + map.Width, stamp.At.Y + map.Height);
+            foreach (var (tile, (id, _)) in painted.Props.OrderBy(p => p.Key.Y).ThenBy(p => p.Key.X))
+            {
+                var height = propDefs?.TryGetValue(id, out var def) == true ? def.Height : 1;
+                if (height >= 2)
+                {
+                    if (tile.X >= left && tile.X < right && tile.Y >= top && tile.Y < bottom)
+                        continue;
+
+                    var inFrontX = tile.X >= right && tile.X < right + 4 && tile.Y >= top && tile.Y < bottom + 4;
+                    var inFrontY = tile.Y >= bottom && tile.Y < bottom + 4 && tile.X >= left && tile.X < right + 4;
+                    if (inFrontX || inFrontY)
+                        warnings.Add($"The tile {tile} has a tall prop '{id}' in front of the stamp '{stamp.Map}'. Move the prop, or move the stamp.");
+                }
+            }
+        }
+
+        warnings.AddRange(ThingWarnings(painted, rulesDirectory, propDefs));
+        return warnings;
+    }
+
+    /// <summary>
+    /// A blocking prop painted beside a door or lever of the region's things (<c>interactables/&lt;id&gt;.json</c>, interactables design, last
+    /// section): it stands where the party would walk through the door or work the lever, so it can leave either unreachable. The loader refuses a
+    /// prop on a thing's own tile, and one that walls a thing off for good; this is the painter's warning before that. A file that can't be read
+    /// warns of nothing here: the pack's own check of it reports that.
+    /// </summary>
+    private static IEnumerable<string> ThingWarnings(PaintedRegion painted, string rulesDirectory, IReadOnlyDictionary<string, PropArtDef>? propDefs)
+    {
+        var path = Path.Combine(rulesDirectory, "interactables", $"{painted.Id}.json");
+        if (propDefs is null || !ValidId(painted.Id) || !File.Exists(path))
+            return [];
+        InteractablesFile? file;
+        try
+        {
+            file = JsonSerializer.Deserialize<InteractablesFile>(File.ReadAllBytes(path), ArcJson.Options);
+        }
+        catch (JsonException)
+        {
+            return [];
+        }
+        var warnings = new List<string>();
+        foreach (var thing in file?.Interactables.IsDefault == false ? file.Interactables : [])
+        {
+            if (InteractableKinds.Of(thing.Kind) is not { Family: InteractableFamily.Passage or InteractableFamily.Switch } kind)
+                continue;
+            var what = kind.Family == InteractableFamily.Passage ? "door" : "lever";
+            foreach (var beside in new[] { new Tile(thing.At.X, thing.At.Y - 1), new Tile(thing.At.X + 1, thing.At.Y), new Tile(thing.At.X, thing.At.Y + 1), new Tile(thing.At.X - 1, thing.At.Y) })
+                if (painted.Props.TryGetValue(beside, out var prop) && propDefs.TryGetValue(prop.Id, out var def) && def.Blocks)
+                    warnings.Add($"The tile {beside} has a blocking prop '{prop.Id}' beside the {what} '{thing.Id}' at {thing.At}, which it can make unreachable. Move the prop, or clear that tile.");
+        }
+        return warnings;
+    }
+
+    /// <summary>A door opening onto what nobody can stand on: nothing's broken, as a door does nothing yet, but it looks like a mistake.</summary>
+    private static IEnumerable<string> DoorWarnings(RegionDef region, RulesPack pack)
+    {
+        if (region.Buildings.IsDefault || pack.Art is not { } art || pack.GroundFor(region.Id) is not { } ground)
+            yield break;
+        foreach (var building in region.Buildings)
+            foreach (var step in art.Buildings[building.Id].DoorSteps(building.At).Distinct())
+                if (!ground.Map.InBounds(step) || !ground.Terrain.Walkable(step))
+                    yield return $"The door of the '{building.Id}' at {building.At} opens onto {step}, which can't be stood on. Move the building, or clear that tile.";
+    }
+
     private static ExportResult Run(PaintedRegion painted, string rulesDirectory, string contentBase)
     {
         if (!File.Exists(Path.Combine(rulesDirectory, "manifest.json")))
             return new ExportResult(null, [$"{rulesDirectory} isn't a rules pack: it has no manifest.json. Copy content/tactics/base/rules there, or fix --rules."]);
 
         var problems = new List<string>();
-        ImmutableArray<string> warnings = [.. PendingWarnings(painted, rulesDirectory)];
+        ImmutableArray<string> warnings = [.. PendingWarnings(painted, rulesDirectory), .. PropWarnings(painted, rulesDirectory, contentBase)];
         if (!ValidId(painted.Id))
             problems.Add($"The region id '{painted.Id}' must be lower-case letters, digits and underscores. Change Id on the Region node.");
 
@@ -154,13 +270,17 @@ public static partial class RegionExport
             return new ExportResult(null, [.. problems]) { Warnings = warnings };
 
         var bytes = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(region, FileOptions) + "\n");
-        var checks = Check(rulesDirectory, region.Id, bytes);
+        var checks = Check(rulesDirectory, region.Id, bytes, contentBase);
+        if (checks.Pack is { } checkedPack)
+            warnings = [.. warnings, .. DoorWarnings(region, checkedPack)];
         problems.AddRange(painted.Starts.Count == 0 ? checks.Problems.Where(p => !NeedsTheStart(p)) : checks.Problems);
         if (problems.Count > 0)
             return new ExportResult(null, [.. problems]) { Warnings = warnings };
 
         // Before the file moves, so nothing thrown here can report "not written" for a file that was.
-        ImmutableArray<string> story = checks.Pack is { } pack ? StoryOrder.Check(pack.RegionFor(region.Id)!, pack, contentBase).Problems : [];
+        ImmutableArray<string> story = checks.Pack is { } pack && (pack.Art is not null || !WorldGround.NeedsArt(region))
+            ? StoryOrder.Check(pack.RegionFor(region.Id)!, pack, contentBase).Problems
+            : [];
         var path = Path.Combine(rulesDirectory, "world", $"{region.Id}.json");
         if (Replace(path, bytes) is { } failure)
             return new ExportResult(null, [failure]) { Warnings = warnings };
@@ -203,14 +323,15 @@ public static partial class RegionExport
     }
 
     private static bool NeedsTheStart(string problem)
-        => problem.Contains("can't be reached from the start", StringComparison.Ordinal) || problem.StartsWith("The start spawn", StringComparison.Ordinal);
+        => problem.Contains("can't be reached from the start", StringComparison.Ordinal) || problem.Contains("can't walk back to the start", StringComparison.Ordinal)
+           || problem.StartsWith("The start spawn", StringComparison.Ordinal);
 
     /// <summary>
     /// Loads a copy of the pack with this region in it, as the game will. It's a copy of the same pack, not a pack on top, because a
     /// region already listed would then have its id twice; the copy also means an old file there is replaced, not checked. Gives what's
     /// wrong, or the loaded pack if nothing is.
     /// </summary>
-    private static (List<string> Problems, RulesPack? Pack) Check(string rulesDirectory, string id, byte[] region)
+    private static (List<string> Problems, RulesPack? Pack) Check(string rulesDirectory, string id, byte[] region, string contentBase)
     {
         var copy = Directory.CreateTempSubdirectory("tactics-region-check-").FullName;
         var entry = $"world/{id}.json";
@@ -244,11 +365,15 @@ public static partial class RegionExport
                 files.Add(entry);
             File.WriteAllText(manifestPath, manifest.ToJsonString());
 
-            return ([], RulesPack.Load([copy]));
+            var art = Directory.Exists(contentBase) ? ArtManifests.Load(contentBase) : null;
+            return ([], RulesPack.Load([copy], art));
         }
         catch (ContentException ex)
         {
-            return ([.. ex.Errors.Select(e => e.File.EndsWith(entry, StringComparison.Ordinal) ? $"{e.Message} {Advice(e.Message)}" : $"{e.File}: {e.Message} Fix that file, then export again.")], null);
+            var things = $"interactables/{id}.json";
+            return ([.. ex.Errors.Select(e => e.File.EndsWith(entry, StringComparison.Ordinal) ? $"{e.Message} {Advice(e.Message)}"
+                : e.File.EndsWith(things, StringComparison.Ordinal) ? $"{e.File}: {e.Message} {ThingsAdvice}"
+                : $"{e.File}: {e.Message} Fix that file, then export again.")], null);
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException)
         {
@@ -260,6 +385,14 @@ public static partial class RegionExport
         }
     }
 
+    /// <summary>
+    /// What a painter does about a thing to interact with that no longer fits the painting (interactables design §5): the things are in their
+    /// own hand-written file beside the region's, <c>interactables/&lt;id&gt;.json</c>, which an export never writes, and the export's check
+    /// loads them against the new painting, as the game will.
+    /// </summary>
+    public const string ThingsAdvice = "That file's things to interact with must fit the painting: move the thing there (it's written by hand, "
+        + "and the export never changes it), or paint round it.";
+
     /// <summary>What a painter does about a message from the pack loader, which speaks for the game and doesn't know about the editor.</summary>
     private static string Advice(string message)
     {
@@ -267,6 +400,10 @@ public static partial class RegionExport
 
         if (Has("can't be reached from the start"))
             return $"Paint a walkable way to it, climbing no more than {ClassDef.DefaultJump} levels a step, or move the marker.";
+        if (Has("can't walk back to the start"))
+            return $"Paint a way out, climbing no more than {ClassDef.DefaultJump} levels a step, or move the marker.";
+        if (Has("spawn at") && Has("is inside the stamp"))
+            return "Move the marker off the stamp.";
         if (Has("can't be stood on"))
             return "Move the Start marker onto walkable ground, or clear the tile's Impassable or Deep flag.";
         if (Has("doesn't match its map"))

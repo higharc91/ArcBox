@@ -99,8 +99,11 @@ public sealed partial class SoundBank
             var path = Path.Combine(_root, "rules", "maps", $"{map}.json");
             _maps[map] = known = File.Exists(path) ? BoardMap.Parse(File.ReadAllText(path)) : null;
         }
-        return known is not null && known.InBounds(tile) ? SoundChoice.Step(known.Materials[known[tile].Material]) : SoundChoice.DefaultStep;
+        return known is not null ? Step(known, tile) : SoundChoice.DefaultStep;
     }
+
+    /// <summary>The footstep for <paramref name="tile"/> of a map already in hand, as a region's ground is. Off the map it's the default one.</summary>
+    public string Step(BattleMap map, Tile tile) => map.InBounds(tile) ? SoundChoice.Step(map.Materials[map[tile].Material]) : SoundChoice.DefaultStep;
 
     private UnitGear WorkOutGear(string sprite)
     {

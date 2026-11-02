@@ -29,7 +29,8 @@ public static class StoryOrder
 {
     private sealed record Choice(string Id, ImmutableArray<string> Sets);
 
-    private sealed record Beat(string Id, string Kind, string Place, string? Encounter, ImmutableArray<string> Requires, ImmutableArray<string> Sets, ImmutableArray<Choice> Choices);
+    /// <summary>A beat of the arc. <see cref="Place"/> is null for one set anywhere, as <c>LoreBook</c> reads it.</summary>
+    private sealed record Beat(string Id, string Kind, string? Place, string? Encounter, ImmutableArray<string> Requires, ImmutableArray<string> Sets, ImmutableArray<Choice> Choices);
 
     private sealed record Scene(string Beat, string? Place, ImmutableArray<string> Requires, ImmutableArray<string> Unless);
 
@@ -40,7 +41,9 @@ public static class StoryOrder
     public static StoryWalk Check(WorldRegion region, RulesPack rules, string contentBase)
     {
         var (legs, retries, problems) = (new List<StoryLeg>(), new List<StoryLeg>(), new List<string>());
-        var walk = new RegionWalk(region, rules.Maps);
+        // The painted ground, with the things that always stand in the way (a chest, a barrel) and every passage open, as the content check judges reach.
+        var solid = rules.Interactables.GetValueOrDefault(region.Def.Id, []).Where(Interactables.Solid).Select(d => d.At).ToList();
+        var walk = new RegionWalk(WorldGround.Of(region, rules.Maps, rules.Art ?? ArtManifest.None).With(solid));
         var trapped = walk.Trapped(region.Def.Spawns.Start);
         if (trapped.Count > 0)
             problems.Add($"{TileSpread.Say(trapped, "can be walked into but has no way back", "can be walked into but have no way back")}. Paint a way out, climbing no more than {ClassDef.DefaultJump} levels a step, or raise {TileSpread.It(trapped)}.");
@@ -72,7 +75,7 @@ public static class StoryOrder
         ImmutableArray<Choice> choices = e.TryGetProperty("choices", out var list)
             ? [.. list.EnumerateArray().Select(c => new Choice(c.GetProperty("id").GetString()!, Strings(c, "sets")))]
             : [];
-        return new Beat(e.GetProperty("id").GetString()!, e.GetProperty("kind").GetString()!, e.GetProperty("place").GetString()!,
+        return new Beat(e.GetProperty("id").GetString()!, e.GetProperty("kind").GetString()!, e.TryGetProperty("place", out var place) ? place.GetString() : null,
             e.TryGetProperty("encounter", out var encounter) ? encounter.GetString() : null, Strings(e, "requires"), Strings(e, "sets"), choices);
     }
 
@@ -117,9 +120,12 @@ public static class StoryOrder
 
         public IEnumerable<Progress> Run(Progress progress)
         {
+            // This is StoryRules.Available's rule in Tactics.Logic, copied: the two must change together. It applies a beat's own
+            // sets and its choices' sets, but never a battle's FlagsSet from the encounter, which the game merges on a win.
             while (beats.FirstOrDefault(b => !progress.Done.Contains(b.Id) && b.Requires.All(progress.Flags.Contains)) is { } beat)
             {
-                var chained = beat.Kind == "battle" && beat.Place == progress.Place;
+                // A battle chains only from a place: a battle set nowhere in particular is walked to, like any other beat.
+                var chained = beat.Kind == "battle" && beat.Place is not null && beat.Place == progress.Place;
                 progress = Walk(progress with { Done = progress.Done.Add(beat.Id), Flags = progress.Flags.Union(beat.Sets) }, beat, chained);
                 if (beat.Choices.Length > 0)
                     return beat.Choices.SelectMany(choice => Run(Chose(progress, beat, choice)));

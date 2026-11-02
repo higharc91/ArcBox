@@ -28,7 +28,11 @@ describe("tactics phone module", () => {
   it("renders every screen the game sends", () => {
     const names = Object.keys(fixtures).map((k) => k.replace("./fixtures/tactics/", "").replace(".json", ""))
       .filter((n) => !n.startsWith("portal-")).sort();
-    expect(names).toEqual(["pickClass", "pickEncounter", "react", "results", "status", "turn"]);
+    expect(names).toEqual([
+      "check-pick", "check-rolled", "check-search", "check-search-rolled", "choice-follower", "choice-leader", "dialogue", "dialogue-leader", "pickClass", "pickEncounter",
+      "pickEncounter-noWalk",
+      "react", "results", "status", "turn", "vote", "vote-tie", "walk-follower", "walk-interact", "walk-leader", "walk-things", "walk-things-follower",
+    ]);
     for (const name of names) {
       render(<ControllerScreen view={view(name)} send={() => {}} me="ALEX" game="tactics" />);
       expect(screen.queryByText("This screen needs a newer app")).toBeNull();
@@ -211,11 +215,35 @@ describe("tactics phone module", () => {
     expect(screen.getByRole("link", { name: /Your character/ }).getAttribute("href")).toBe("/c/ABCD");
   });
 
-  it("results: the VIP goes on to the next battle", () => {
+  it("results: the VIP carries on, back to the world (the action is still next)", () => {
     const send = show("results");
     expect(screen.getByText("Victory")).toBeTruthy();
-    fireEvent.click(screen.getByRole("button", { name: "Next battle" }));
+    fireEvent.click(screen.getByRole("button", { name: "Carry on" }));
     expect(send).toHaveBeenLastCalledWith({ action: "next" });
+  });
+
+  it("results after a win list each hero's XP and injuries, and no loss line", () => {
+    const v = view("results");
+    (v.data as unknown as { lines: { injuries: string[] }[] }).lines[0]!.injuries = ["Black Eye"];
+    render(<ControllerScreen view={v} send={() => {}} me="ALEX" game="tactics" />);
+    expect(screen.getAllByText("+250 XP").length).toBeGreaterThan(0);
+    expect(screen.getByText("Black Eye")).toBeTruthy();
+    expect(document.querySelector(".tx-result-note")).toBeNull();
+  });
+
+  it("results after a loss show the server's one line, and no XP or injuries on the heroes", () => {
+    const note = "You wake at the recovery point. Wounds tended — no XP. Potions used are gone.";
+    const v = view("results");
+    const d = v.data as unknown as { outcome: string; note: string | null; lines: { xp: number; injuries: string[] }[] };
+    d.outcome = "Lost";
+    d.note = note;
+    for (const l of d.lines) l.xp = 0;
+    d.lines[0]!.injuries = ["Black Eye"];       // even if a server sent one, a loss tended it
+    render(<ControllerScreen view={v} send={() => {}} me="ALEX" game="tactics" />);
+    expect(screen.getByText("Defeat")).toBeTruthy();
+    expect(screen.getByText(note)).toBeTruthy();
+    expect(screen.queryByText(/XP$/)).toBeNull();
+    expect(screen.queryByText("Black Eye")).toBeNull();
   });
 
   it("status: says who is acting and when you're up", () => {

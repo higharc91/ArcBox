@@ -13,6 +13,12 @@ public sealed partial class TacticsGame
     /// <summary>The beat the TV has to show before the next AI step, or null when nothing is waiting on it.</summary>
     private int? _awaitShown;
 
+    /// <summary>
+    /// The walk-in of a fight in the world (5c §5): its opening beat, and when its hold runs out. Until the TV shows that beat or the time
+    /// is up, no AI step goes, even if a player acts and so asks the TV to show a later beat with a shorter wait. Null with no walk-in.
+    /// </summary>
+    private (int Beat, DateTimeOffset Until)? _formUp;
+
     /// <summary>The rest of the AI's plan for the unit whose turn it is.</summary>
     private (UnitId Unit, int Round, int TurnIndex, Queue<Command> Commands)? _plan;
 
@@ -43,15 +49,35 @@ public sealed partial class TacticsGame
 
     // ---- Starting and continuing --------------------------------------------------------------------------------------
 
-    private void StartBattle(string encounter, ulong seed, ImmutableArray<ProfileId> members, ImmutableArray<CharacterRecord> companions)
+    /// <summary>
+    /// Starts a battle, or returns false if the engine failed to (logged), with nothing changed. <paramref name="beat"/> is the story beat
+    /// it is, if any. A battle on a stamped map is drawn in the world, where the TV first walks the party in, so its opening beat holds the
+    /// AI until it's shown, or for <see cref="TacticsTiming.FormUp"/> (5c §5): a player whose turn is first can still act.
+    /// </summary>
+    private bool StartBattle(string encounter, ulong seed, ImmutableArray<ProfileId> members, ImmutableArray<CharacterRecord> companions,
+        string? beat = null)
     {
-        _lastBattle = null;
-        var resolution = Begin(encounter, seed, members, companions);
-        _doc = _doc with { Battle = new BattleSave(encounter, seed, members, resolution.State, [], companions.IsEmpty ? default : companions) };
+        if (TryBegin(encounter, seed, members, companions) is not { } resolution)
+            return false;
+        (_lastBattle, _arrived) = (null, null);
+        // Whatever the TV said before, of the story, the start or the walk, isn't the fight's: it comes down, as it would on a step (review).
+        (_notice, _leadNote) = (null, null);
+        var stage = StageFor(resolution.State.MapId);
+        _doc = _doc with
+        {
+            Battle = new BattleSave(encounter, seed, members, resolution.State, [], companions.IsEmpty ? default : companions, beat,
+                stage is { } st ? new SavedStage(st.Origin, st.Height) : null, Plain: stage is null),
+        };
         _seq = 0;
-        AddBeat(null, resolution.Events);
+        if (AddBeat(null, resolution.Events) is { } opening && stage is not null)
+        {
+            _awaitShown = opening;
+            _formUp = (opening, _ctx.Now + _timing.FormUp);
+            _ctx.SetTimer(Timers.Pace, _timing.FormUp);
+        }
         _phase = TacticsPhase.Battle;
         Drive();
+        return true;
     }
 
     /// <summary>
@@ -66,16 +92,25 @@ public sealed partial class TacticsGame
             .. (companions.IsDefault ? [] : companions).Select((c, i) =>
                 new PartyMember(new UnitId($"ally{i + 1}"), c, new AiControlled(Companion))),
         ];
-        return Battle.Start(Encounters.Setup(encounter, party, Difficulty.Normal, Rules), Rules, seed);
+        return StartEngine(Encounters.Setup(encounter, party, Difficulty.Normal, Rules), Rules, seed);
     }
 
-    /// <summary>Starts a saved battle over from its encounter and seed (the rules pack changed under it, spec §7).</summary>
-    private void RestartBattle(BattleSave save)
+    /// <summary>
+    /// Starts a saved battle over from its encounter and seed (the rules pack changed under it, spec §7). If the engine fails
+    /// to, the battle is called off and this returns false.
+    /// </summary>
+    private bool RestartBattle(BattleSave save)
     {
-        var resolution = Begin(save.Encounter, save.Seed, save.Members, save.Companions);
+        if (TryBegin(save.Encounter, save.Seed, save.Members, save.Companions) is not { } resolution)
+        {
+            CallOffBattle();     // its notice only: the battle doesn't start again after all
+            return false;
+        }
+        Note("The rules changed since this battle began, so it starts again.");
         _doc = _doc with { Battle = save with { State = resolution.State, Log = [] } };
         _seq = 0;
         AddBeat(null, resolution.Events);
+        return true;
     }
 
     /// <summary>Back to a saved battle: each member goes to its player if they're here, else to the companion AI.</summary>
@@ -86,7 +121,12 @@ public sealed partial class TacticsGame
         var state = State;
         for (var i = 0; i < Save_.Members.Length; i++)
             if (state.Units.ContainsKey(UnitFor(i)))
-                state = Battle.Hand(state, UnitFor(i), ControllerFor(Save_.Members[i]));
+            {
+                if (TryHand(state, UnitFor(i), ControllerFor(Save_.Members[i])) is { } handed)
+                    state = handed;
+                else
+                    HandBackFailedFor(Save_.Members[i]);     // it keeps the controller it was saved with
+            }
         SetState(state);
         Save();
         Drive();
@@ -96,13 +136,26 @@ public sealed partial class TacticsGame
     {
         if (UnitOf(profile) is not { } unit || !State.Units.ContainsKey(unit))
             return;
-        if (connected && _aiFinishing == unit)
-            (_aiFinishing, _plan) = (null, null);     // back in time: what's left of the turn is theirs again
-        SetState(Battle.Hand(State, unit, connected ? new PlayerControlled(profile) : new AiControlled(Companion)));
+        // If the engine fails to hand the unit over it keeps its controller: a returning player's hero stays the AI's (they're
+        // told), and a leaving player's is played by the AI anyway, since a player who isn't here doesn't decide for it.
+        if (TryHand(State, unit, connected ? new PlayerControlled(profile) : new AiControlled(Companion)) is { } handed)
+        {
+            if (connected && _aiFinishing == unit)
+                (_aiFinishing, _plan) = (null, null);     // back in time: what's left of the turn is theirs again
+            SetState(handed);
+        }
+        else if (connected)
+            HandBackFailedFor(profile);
         if (!connected && State.Active == unit && State.Pending is null)
             _aiFinishing = unit;     // the AI finishes what's left of the turn
         Save();
         Drive();
+    }
+
+    private void HandBackFailedFor(ProfileId profile)
+    {
+        if (_players.FirstOrDefault(p => p.Profile == profile && _online.Contains(p.Id)) is { } player)
+            Toast(player.Id, HandBackFailed);
     }
 
     // ---- The loop -----------------------------------------------------------------------------------------------------
@@ -144,7 +197,7 @@ public sealed partial class TacticsGame
 
             if (state.Pending is ReactionOffer offer)
             {
-                ApplyAi(new React(offer.Reactor, Ai.React(state, offer, Rules)), aiFinished: false);
+                AnswerForReactor(state, offer);
                 continue;
             }
 
@@ -160,11 +213,15 @@ public sealed partial class TacticsGame
                 }
                 return;
             }
-            ApplyAi(NextAiCommand(state, active), aiFinished: _aiFinishing == active);
+            if (NextAiCommand(state, active) is { } next)
+                ApplyAi(next, aiFinished: _aiFinishing == active);
+            else
+                SkipFailedStep(state, null, aiFinished: _aiFinishing == active);
         }
     }
 
-    private Command NextAiCommand(BattleState state, UnitId active)
+    /// <summary>The next step of the AI's plan for <paramref name="active"/>, or null if planning failed (logged).</summary>
+    private Command? NextAiCommand(BattleState state, UnitId active)
     {
         if (_plan is not { } plan || plan.Unit != active || plan.Round != state.Round || plan.TurnIndex != state.TurnIndex
             || plan.Commands.Count == 0)
@@ -174,23 +231,60 @@ public sealed partial class TacticsGame
                 : state.Units[active].Controller is AiControlled { Profile: Companion }
                     ? new AiOptions(AllowItems: true)     // an absent member: the companion's one-potion rule applies
                     : new AiOptions();
-            var commands = Ai.Plan(state, active, Rules, options).Commands;
+            ImmutableArray<Command> commands;
+            try
+            {
+                commands = PlanEngine(state, active, Rules, options).Commands;
+            }
+            catch (Exception e) when (IsEngineFailure(e))
+            {
+                Fault("plan", state, null, e);
+                return null;
+            }
             plan = (active, state.Round, state.TurnIndex, new Queue<Command>(commands.IsDefaultOrEmpty ? [new EndTurn(active)] : commands));
             _plan = plan;
         }
         return plan.Commands.Dequeue();
     }
 
-    private void ApplyAi(Command command, bool aiFinished)
+    /// <summary>
+    /// Answers <paramref name="offer"/> by the AI's rule. If choosing fails (logged), the reaction is passed, and that pass is
+    /// a skip like any other (<see cref="SkipFailedStep"/>).
+    /// </summary>
+    private void AnswerForReactor(BattleState state, ReactionOffer offer)
+    {
+        ReactionChoice choice;
+        try
+        {
+            choice = ReactEngine(state, offer, Rules);
+        }
+        catch (Exception e) when (IsEngineFailure(e))
+        {
+            Fault("reaction", state, null, e);
+            if (!SkippedTooMany(state))
+                ApplyAi(new React(offer.Reactor, Pass(offer)), aiFinished: false, skipping: true);
+            return;
+        }
+        ApplyAi(new React(offer.Reactor, choice), aiFinished: false);
+    }
+
+    /// <param name="command">The AI's step, or the step taken for a player whose time ran out.</param>
+    /// <param name="aiFinished">The AI is finishing a played unit's turn.</param>
+    /// <param name="skipping">This is what a failed step fell back to, which doesn't count as the battle going normally.</param>
+    private void ApplyAi(Command command, bool aiFinished, bool skipping = false)
     {
         var before = State;
-        var resolution = Battle.Apply(before, command, Rules, aiFinished);
+        if (TryApply(before, command, aiFinished, "ai") is not { } resolution)
+        {
+            SkipFailedStep(before, command, aiFinished);
+            return;
+        }
         if (resolution.Rejected is not null && command is React react && before.Pending is ReactionOffer offer)
         {
             // An answer the engine won't take: pass rather than ask again forever.
-            var pass = offer.Options.FirstOrDefault(o => o.Id == Reactions.Pass) ?? offer.Options[0];
+            var pass = Pass(offer);
             if (react.Choice.Id != pass.Id)
-                ApplyAi(new React(react.Actor, pass), aiFinished);
+                ApplyAi(new React(react.Actor, pass), aiFinished, skipping);
             return;
         }
         if (resolution.Rejected is not null)
@@ -199,9 +293,11 @@ public sealed partial class TacticsGame
             // for the active unit, so this always moves the battle on.
             _plan = null;
             if (command is not EndTurn && before.Active == command.Actor && before.Pending is null)
-                ApplyAi(new EndTurn(command.Actor), aiFinished);
+                ApplyAi(new EndTurn(command.Actor), aiFinished, skipping);
             return;
         }
+        if (!skipping)
+            Recovered();
         SetState(resolution.State);
         var after = resolution.State;
         if (after.Active != command.Actor || after.Pending is not null
@@ -242,12 +338,19 @@ public sealed partial class TacticsGame
             }
         }
 
-        var resolution = Battle.Apply(state, command, Rules);
+        if (TryApply(state, command, aiFinished: false, "command") is not { } resolution)
+        {
+            // The state from before stands, and so does the turn or the prompt: they can try something else, and the
+            // timers that would answer for them still run.
+            Toast(player.Id, MoveFailedTryAgain);
+            return;
+        }
         if (resolution.Rejected is { } rejected)
         {
             Toast(player.Id, rejected.Reason);
             return;
         }
+        Recovered();
         _toasts.Remove(player.Id);
         _plan = null;   // the player decided: nothing the AI planned for this turn still applies
         SetState(resolution.State);
@@ -266,7 +369,27 @@ public sealed partial class TacticsGame
         if (seq is null)
             return;
         _awaitShown = seq;
-        _ctx.SetTimer(Timers.Pace, _timing.Pace(events));
+        var wait = _timing.Pace(events);
+        if (_formUp is { Until: var until } && until - _ctx.Now > wait)
+            wait = until - _ctx.Now;        // the walk-in isn't over: the AI still waits for it
+        _ctx.SetTimer(Timers.Pace, wait);
+        _paceEvents = events;
+    }
+
+    /// <summary>How many events the beat the AI waits on has, for its fallback wait once the walk-in is over.</summary>
+    private int _paceEvents;
+
+    /// <summary>
+    /// The TV has shown the walk-in's beat: the hold is over. If the AI now waits on a later beat, its wait goes back to that beat's own,
+    /// from now.
+    /// </summary>
+    private void FormedUp(int shown)
+    {
+        if (_formUp is not { Beat: var opening } || shown < opening)
+            return;
+        _formUp = null;
+        if (_awaitShown is { } awaited && awaited > shown)
+            _ctx.SetTimer(Timers.Pace, _timing.Pace(_paceEvents));
     }
 
     private static Command? ParseCommand(UnitId unit, CustomInput input)
@@ -313,13 +436,8 @@ public sealed partial class TacticsGame
         _reactTimerFor = null;
         if (State.Pending is ReactionOffer offer && IsPlayed(offer.Reactor) && timedOut?.Reactor == offer.Reactor)
         {
-            // No answer: the same rule the AI uses (rules-engine spec §5.5).
-            var resolution = Battle.Apply(State, new React(offer.Reactor, Ai.React(State, offer, Rules)), Rules);
-            if (resolution.Rejected is null)
-            {
-                SetState(resolution.State);
-                Pace(AddBeat(offer.Reactor, resolution.Events), resolution.Events.Length);
-            }
+            // No answer: the same rule the AI uses (rules-engine spec §5.5), and the same fallbacks if it fails.
+            AnswerForReactor(State, offer);
         }
         Drive();
     }
@@ -351,6 +469,6 @@ public sealed partial class TacticsGame
         _ctx.CancelTimer(Timers.Turn);
         _ctx.CancelTimer(Timers.React);
         _ctx.CancelTimer(Timers.Pace);
-        (_turnTimerFor, _reactTimerFor, _awaitShown, _plan, _aiFinishing) = (null, null, null, null, null);
+        (_turnTimerFor, _reactTimerFor, _awaitShown, _plan, _aiFinishing, _faultAt, _skips, _formUp) = (null, null, null, null, null, null, 0, null);
     }
 }

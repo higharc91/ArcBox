@@ -120,12 +120,16 @@ public static class Objectives
 
     /// <summary>
     /// Ends the battle with <paramref name="outcome"/>, unless it is already over: sets <see cref="BattleState.Outcome"/>,
-    /// clears the queue (the turn hand-off included) and any pending decision, and emits <see cref="BattleEnded"/>.
+    /// halts any walk still under way (<see cref="MoveStep.Halt"/>: the steps it drops won't run, and a walker part-way
+    /// through an ally can't stay on its tile), clears the queue (the turn hand-off included) and any pending decision, and
+    /// emits <see cref="BattleEnded"/>.
     /// </summary>
     internal static void End(BattleWriter w, BattleOutcome outcome)
     {
         if (w.State.Outcome is not null)
             return;
+        while (w.State.Queue.OfType<MoveStep>().FirstOrDefault() is { } walk)
+            walk.Halt(w);
         w.State = w.State with { Outcome = outcome, Queue = [], Pending = null };
         w.Emit(new BattleEnded(outcome));
     }
@@ -139,7 +143,8 @@ public static partial class Battle
     /// What the campaign takes from an ended battle (spec §2.5, §3.9), or null while it goes on:
     /// <list type="bullet">
     /// <item>XP for every party member, AI-played or not (summons, helpers and protected NPCs aren't party members): the
-    /// encounter's full <see cref="BattleState.Xp"/> on a win, half of it (rounded down) on a loss or a flight;</item>
+    /// encounter's full <see cref="BattleState.Xp"/> on a win, half of it (rounded down) on a flight, and none on a loss (the user's rule,
+    /// 2026-11-01: a lost fight can be retried, so paying for it could be farmed);</item>
     /// <item>the injuries and items used, grouped by unit in the order they happened;</item>
     /// <item>the loot tables to roll, on a win only, and the story flags set.</item>
     /// </list>
@@ -149,7 +154,7 @@ public static partial class Battle
         if (state.Outcome is not { } outcome)
             return null;
 
-        var award = outcome == BattleOutcome.Won ? state.Xp : state.Xp / 2;
+        var award = outcome switch { BattleOutcome.Won => state.Xp, BattleOutcome.Fled => state.Xp / 2, _ => 0 };
         var xp = state.Units.Values
             .Where(u => Objectives.HasTag(u, Objectives.PartyTag))
             .ToImmutableSortedDictionary(u => u.Id, _ => award);

@@ -41,10 +41,12 @@ public sealed class RegionCheckTests
 
     private static (string, string) Map(string id, string json) => ($"maps/{id}.json", json);
 
-    private static IReadOnlyList<ContentError> ErrorsOf(RegionDef def) => ValidationTests.ErrorsOfChapter(World(def), Map("ford", FordMap));
+    private static readonly ArtManifest Art = ArtManifests.Load(ContentPaths.ContentBase);
+
+    private static IReadOnlyList<ContentError> ErrorsOf(RegionDef def) => ValidationTests.ErrorsOfChapter(Art, World(def), Map("ford", FordMap));
 
     private static void Loads(params RegionDef[] defs)
-        => Assert.NotNull(ValidationTests.LoadChapter([.. defs.Select(World), Map("ford", FordMap)]));
+        => Assert.NotNull(ValidationTests.LoadChapter(Art, [.. defs.Select(World), Map("ford", FordMap)]));
 
     [Fact]
     public void A_stamp_that_matches_its_map_loads_though_its_materials_are_listed_in_another_order()
@@ -210,7 +212,7 @@ public sealed class RegionCheckTests
         // Columns 0 to 7 stand 3 levels up, and a wall down column 9 leaves column 8 as the foot of the drop and nothing else.
         var def = Region([.. Plain(0, 7, 3), .. Enumerable.Range(0, 32).Select(y => (9, y, (byte)0, Grass, TileFlags.Impassable))]) with
         {
-            Spawns = new RegionSpawns(new Tile(0, 0), new Tile(8, 0)),
+            Spawns = new RegionSpawns(new Tile(0, 0), new Tile(1, 0)),
             Beats = [new BeatSpot("foot", new Tile(8, 31))],
         };
 
@@ -302,6 +304,62 @@ public sealed class RegionCheckTests
         => Assert.NotNull(ValidationTests.LoadChapter(GateFiles("""{ "party_spawn": [] }""")));
 
     [Fact]
+    public void A_marker_only_reachable_through_a_prop_is_an_error()
+    {
+        // A 3x1 corridor whose middle tile holds a crate, walled so the crate is the only way to its east end.
+        const string door = """{ "id": "door", "size": [3, 1], "tiles": "AAEAAAEAAAEA", "materials": ["water/river", "grass/lush"], "props": [{ "id": "crate", "at": [1, 0], "blocks": true, "cover": "half" }], "zones": {} }""";
+        var def = Region(
+            (5, 4, 0, Grass, TileFlags.Impassable), (6, 4, 0, Grass, TileFlags.Impassable), (7, 5, 0, Grass, TileFlags.Impassable),
+            (5, 6, 0, Grass, TileFlags.Impassable), (6, 6, 0, Grass, TileFlags.Impassable)) with
+        {
+            Stamps = [new RegionStamp("door", new Tile(4, 5), 0)],
+            Beats = [new BeatSpot("b", new Tile(6, 5))],
+        };
+
+        Assert.Equal(
+            [new ContentError(RegionFile, "/beats/0/at", "The beat 'b' at (6, 5) can't be reached from the start.")],
+            ValidationTests.ErrorsOfChapter(World(def), Map("door", door)));
+    }
+
+    /// <summary>A whole chunk 3 levels up with a one-tile pit at (9, 9) that can be dropped into and not climbed out of.</summary>
+    private static (int X, int Y, byte Height, byte Material, TileFlags Flags)[] Pit()
+        => [.. Plain(0, 31, 3).Where(t => (t.X, t.Y) != (9, 9)), (9, 9, 0, Grass, TileFlags.None)];
+
+    /// <summary>A beaten party wakes here whatever the story's order, so it's the one marker the loader can say this about.</summary>
+    [Fact]
+    public void A_pocket_you_cant_walk_back_from_is_an_error()
+        => Assert.Equal(
+            [new ContentError(RegionFile, "/spawns/recovery", "The recovery spawn at (9, 9) can't walk back to the start.")],
+            ErrorsOf(Region(Pit()) with { Spawns = new RegionSpawns(new Tile(0, 0), new Tile(9, 9)) }));
+
+    /// <summary>The loader can't read lore, so only <c>StoryOrder</c> can tell a story that ends in the pit from one that needs to leave it.</summary>
+    [Fact]
+    public void A_story_can_end_in_a_pit_whichever_order_the_beats_are_listed()
+    {
+        BeatSpot pit = new("in_the_pit", new Tile(9, 9)), far = new("far", new Tile(20, 20));
+
+        Loads(Region(Pit()) with { Beats = [far, pit] });
+        Loads(Region(Pit()) with { Beats = [pit, far] });
+    }
+
+    [Fact]
+    public void A_stamp_in_a_pit_is_left_to_the_story()
+    {
+        var map = MapJson("hole", 1, 1, FordMaterials, [0, 1, 0], """{ "party_spawn": [[0, 0]] }""");
+        var def = Region(Pit()) with { Stamps = [new RegionStamp("hole", new Tile(9, 9), 0)], Beats = [new BeatSpot("far", new Tile(20, 20))] };
+
+        Assert.NotNull(ValidationTests.LoadChapter(World(def), Map("hole", map)));
+    }
+
+    /// <summary>
+    /// The story never sends anyone in, so this one is <c>StoryOrder</c>'s warning at export, where a painter part way through still gets
+    /// the file, rather than a pack the game refuses.
+    /// </summary>
+    [Fact]
+    public void A_pit_with_no_marker_in_it_loads()
+        => Loads(Region(Pit()) with { Beats = [new BeatSpot("far", new Tile(20, 20))] });
+
+    [Fact]
     public void Two_stamps_that_overlap_are_an_error()
     {
         var other = MapJson("bank", 1, 1, FordMaterials, [2, 1, 0]);
@@ -320,6 +378,28 @@ public sealed class RegionCheckTests
 
         Assert.NotNull(ValidationTests.LoadChapter(World(def), Map("ford", FordMap), Map("bank", other)));
     }
+
+    [Fact]
+    public void A_recovery_spawn_inside_a_stamp_is_an_error()
+        => Assert.Equal(
+            [new ContentError(RegionFile, "/spawns/recovery", "The recovery spawn at (5, 6) is inside the stamp 'ford', so a beaten party would wake on its battlefield.")],
+            ErrorsOf(Stamped(FordStamp) with { Spawns = new RegionSpawns(new Tile(0, 0), new Tile(5, 6)) }));
+
+    [Fact]
+    public void A_start_spawn_inside_a_stamp_is_an_error()
+        => Assert.Equal(
+            [new ContentError(RegionFile, "/spawns/start", "The start spawn at (4, 5) is inside the stamp 'ford', so a new campaign would begin on its battlefield.")],
+            ErrorsOf(Stamped(FordStamp) with { Spawns = new RegionSpawns(new Tile(4, 5), new Tile(0, 0)) }));
+
+    /// <summary>The stamp covers (4, 5) to (5, 6): a spawn on any side of it, touching it, is outside.</summary>
+    [Theory]
+    [InlineData(3, 5)]
+    [InlineData(6, 5)]
+    [InlineData(4, 4)]
+    [InlineData(5, 7)]
+    [InlineData(6, 7)]
+    public void A_spawn_just_outside_a_stamp_loads(int x, int y)
+        => Loads(Stamped(FordStamp) with { Spawns = new RegionSpawns(new Tile(x, y), new Tile(x, y)) });
 
     private static RegionDef WithEdges(string id, params RegionEdge[] edges) => Region(id) with { Edges = [.. edges] };
 
@@ -386,5 +466,245 @@ public sealed class RegionCheckTests
         var errors = ValidationTests.ErrorsOfChapter(World(WithEdges("a", new RegionEdge("b", "east", 12))), World(broken));
 
         Assert.Equal("chapter-01/world/b.json", Assert.Single(errors).File);
+    }
+
+    [Fact]
+    public void An_unknown_prop_is_an_error()
+    {
+        var def = Region(FordTiles) with
+        {
+            Props = [new RegionProps("nonexistent_prop", null, [new Tile(2, 2)])]
+        };
+        var errors = ErrorsOf(def);
+        Assert.Contains(errors, e => e.Pointer == "/props/0/id" && e.Message.Contains("Unknown prop 'nonexistent_prop'"));
+    }
+
+    [Fact]
+    public void An_unknown_variant_is_an_error()
+    {
+        var def = Region(FordTiles) with
+        {
+            Props = [new RegionProps("tree", "rainbow", [new Tile(2, 2)])]
+        };
+        var errors = ErrorsOf(def);
+        Assert.Contains(errors, e => e.Pointer == "/props/0/variant" && e.Message.Contains("Unknown variant 'rainbow'"));
+    }
+
+    [Fact]
+    public void A_prop_outside_the_region_is_an_error()
+    {
+        var def = Region(FordTiles) with
+        {
+            Props = [new RegionProps("tree", "autumn", [new Tile(35, 10)])]
+        };
+        var errors = ErrorsOf(def);
+        Assert.Contains(errors, e => e.Pointer == "/props/0/at/0" && e.Message.Contains("outside the 32x32 region"));
+    }
+
+    [Fact]
+    public void A_prop_in_a_void_chunk_is_an_error()
+    {
+        var def = new RegionDef("r", "r", 1, [64, 32], ["grass/lush"], [new RegionChunk(0, 0, RegionTests.Tiles())], [], [],
+            new RegionSpawns(new Tile(0, 0), new Tile(1, 0)), [],
+            [new RegionProps("tree", "autumn", [new Tile(40, 10)])]);
+        var errors = ErrorsOf(def);
+        Assert.Contains(errors, e => e.Pointer == "/props/0/at/0" && e.Message.Contains("in a void chunk"));
+    }
+
+    [Fact]
+    public void A_prop_on_a_stamp_is_an_error()
+    {
+        var def = Stamped(FordStamp) with
+        {
+            Props = [new RegionProps("tree", "autumn", [new Tile(4, 5)])]
+        };
+        var errors = ErrorsOf(def);
+        Assert.Contains(errors, e => e.Pointer == "/props/0/at/0" && e.Message.Contains("on the stamp 'ford'"));
+    }
+
+    [Fact]
+    public void A_beat_walled_off_by_props_is_an_error()
+    {
+        var props = Enumerable.Range(0, 32).Select(y => new Tile(8, y)).ToArray();
+        var def = Region(FordTiles) with
+        {
+            Beats = [new BeatSpot("ch1_beat", new Tile(10, 0))],
+            Props = [new RegionProps("tree", "autumn", [.. props])]
+        };
+        var errors = ErrorsOf(def);
+        Assert.Contains(errors, e => e.Pointer == "/beats/0/at" && e.Message.Contains("can't be reached from the start"));
+    }
+
+    private static RegionDef WithPeople(params RegionPerson[] people) => Region(FordTiles) with { People = [.. people] };
+
+    private static RegionPerson Person(int x, int y, params (int X, int Y)[] walk)
+        => new("guard", new Tile(x, y), "sw", walk.Length == 0 ? default : [.. walk.Select(t => new Tile(t.X, t.Y))]);
+
+    [Fact]
+    public void Someone_standing_on_open_ground_loads() => Loads(WithPeople(Person(10, 10)));
+
+    [Fact]
+    public void Someone_walking_a_loop_loads() => Loads(WithPeople(Person(10, 10, (11, 10), (11, 11), (10, 11))));
+
+    [Fact]
+    public void Someone_with_an_unknown_preset_is_an_error()
+        => Assert.Contains(ErrorsOf(WithPeople(Person(10, 10) with { Preset = "wizard_of_oz" })), e => e.Message.Contains("Unknown character preset 'wizard_of_oz'.", StringComparison.Ordinal));
+
+    [Fact]
+    public void Someone_facing_nowhere_is_an_error()
+        => Assert.Contains(ErrorsOf(WithPeople(Person(10, 10) with { Face = "up" })), e => e.Message.Contains("faces 'up'", StringComparison.Ordinal));
+
+    [Theory]
+    [InlineData(-1, 0)]
+    [InlineData(32, 5)]
+    [InlineData(40, 40)]
+    public void Someone_off_the_region_is_an_error(int x, int y)
+        => Assert.Contains(ErrorsOf(WithPeople(Person(x, y))), e => e.Message.Contains("is off the region", StringComparison.Ordinal));
+
+    [Fact]
+    public void Someone_on_a_stamp_is_an_error()
+    {
+        var def = Stamped(FordStamp) with { People = [Person(5, 5)] };
+        Assert.Contains(ErrorsOf(def), e => e.Message.Contains("is on the stamp 'ford'", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void Someone_on_a_tile_that_blocks_is_an_error()
+    {
+        var def = Region([.. Wall()]) with { People = [Person(8, 3)] };
+        Assert.Contains(ErrorsOf(def), e => e.Message.Contains("stands on a tile that blocks", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void Someone_in_a_prop_that_blocks_is_an_error()
+    {
+        var def = Region(FordTiles) with { Props = [new RegionProps("crate", "oak", [new Tile(10, 10)])], People = [Person(10, 10)] };
+        Assert.Contains(ErrorsOf(def), e => e.Message.Contains("stands on a tile that blocks", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void A_walk_that_jumps_is_an_error()
+        => Assert.Contains(ErrorsOf(WithPeople(Person(10, 10, (12, 10), (11, 10)))), e => e.Message.Contains("goes from (10, 10) to (12, 10), which isn't a step", StringComparison.Ordinal));
+
+    [Fact]
+    public void A_walk_that_doesnt_come_back_is_an_error()
+        => Assert.Contains(ErrorsOf(WithPeople(Person(10, 10, (11, 10), (12, 10)))), e => e.Message.Contains("goes from (12, 10) to (10, 10)", StringComparison.Ordinal));
+
+    [Fact]
+    public void A_walk_up_a_cliff_is_an_error()
+    {
+        var def = Region([(11, 10, (byte)9, Grass, TileFlags.None)]) with { People = [Person(10, 10, (11, 10))] };
+        Assert.Contains(ErrorsOf(def), e => e.Message.Contains("too steep to walk", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void A_walk_through_a_wall_is_an_error()
+    {
+        var def = Region([.. Wall()]) with { People = [Person(7, 3, (8, 3))] };
+        Assert.Contains(ErrorsOf(def), e => e.Message.Contains("(8, 3) stands on a tile that blocks", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void A_long_walk_is_an_error()
+    {
+        var there = Enumerable.Range(1, 7).Select(i => (10 + i, 10));
+        var back = Enumerable.Range(0, 7).Select(i => (17 - i, 11));
+        Assert.Contains(ErrorsOf(WithPeople(Person(10, 10, [.. there, .. back, (10, 11)]))), e => e.Message.Contains("a walk is at most 12", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void People_stay_out_of_the_battle_hash_and_change_no_tile()
+    {
+        var plain = ValidationTests.LoadChapter(World(Region(FordTiles)), Map("ford", FordMap));
+        var peopled = ValidationTests.LoadChapter(Art, World(WithPeople(Person(10, 10))), Map("ford", FordMap));
+
+        Assert.Equal(plain.Hash, peopled.Hash);
+        Assert.Equal(plain.RegionFor("r")!.TileAt(new Tile(10, 10)), peopled.RegionFor("r")!.TileAt(new Tile(10, 10)));
+        Assert.True(peopled.GroundFor("r")!.Terrain.Walkable(new Tile(10, 10)));
+        Assert.Single(peopled.GroundFor("r")!.People);
+    }
+
+    private static RegionDef WithBuildings(params RegionBuilding[] buildings) => Region(FordTiles) with { Buildings = [.. buildings] };
+
+    [Fact]
+    public void A_building_on_open_ground_loads()
+        => Loads(WithBuildings(new RegionBuilding("tavern", "red", new Tile(10, 10))));
+
+    [Fact]
+    public void An_unknown_building_is_an_error()
+        => Assert.Contains(ErrorsOf(WithBuildings(new RegionBuilding("castle", "red", new Tile(10, 10)))),
+            e => e.Pointer == "/buildings/0/id" && e.Message.Contains("Unknown building 'castle'"));
+
+    [Fact]
+    public void An_unknown_variant_of_a_building_is_an_error()
+        => Assert.Contains(ErrorsOf(WithBuildings(new RegionBuilding("tavern", "purple", new Tile(10, 10)))),
+            e => e.Pointer == "/buildings/0/variant" && e.Message.Contains("Unknown variant 'purple' for building 'tavern'"));
+
+    [Theory]
+    [InlineData(30, 10)]    // the tavern is three tiles along x, so its last column is off the region
+    [InlineData(10, 31)]    // and two along y
+    [InlineData(-1, 10)]
+    public void A_footprint_off_the_region_is_an_error(int x, int y)
+        => Assert.Contains(ErrorsOf(WithBuildings(new RegionBuilding("tavern", "red", new Tile(x, y)))),
+            e => e.Pointer == "/buildings/0/at" && e.Message.Contains("outside the 32x32 region"));
+
+    [Fact]
+    public void A_footprint_reaching_into_a_void_chunk_is_an_error()
+    {
+        var def = new RegionDef("r", "R", 1, [64, 32], ["grass/lush", "water/river"], [new RegionChunk(0, 0, RegionTests.Tiles())], [], [],
+            new RegionSpawns(new Tile(0, 0), new Tile(1, 0)), [], Buildings: [new RegionBuilding("tavern", "red", new Tile(30, 10))]);
+
+        Assert.Contains(ErrorsOf(def), e => e.Pointer == "/buildings/0/at" && e.Message.Contains("in a void chunk"));
+    }
+
+    [Fact]
+    public void A_footprint_on_a_stamp_is_an_error()
+    {
+        var def = Stamped(FordStamp) with { Buildings = [new RegionBuilding("tavern", "red", new Tile(3, 4))] };
+
+        Assert.Contains(ErrorsOf(def), e => e.Pointer == "/buildings/0/at" && e.Message.Contains("on the stamp 'ford'"));
+    }
+
+    [Fact]
+    public void Footprints_that_overlap_are_an_error()
+    {
+        var errors = ErrorsOf(WithBuildings(new RegionBuilding("tavern", "red", new Tile(10, 10)), new RegionBuilding("cottage", "slate_blue", new Tile(12, 11))));
+
+        Assert.Contains(errors, e => e.Pointer == "/buildings/1/at" && e.Message.Contains("overlaps the building 'tavern'"));
+    }
+
+    [Fact]
+    public void Footprints_that_only_touch_are_not_an_error()
+        => Loads(WithBuildings(new RegionBuilding("tavern", "red", new Tile(10, 10)), new RegionBuilding("cottage", "slate_blue", new Tile(13, 10))));
+
+    [Fact]
+    public void A_beat_walled_off_by_buildings_is_an_error()
+    {
+        var wall = Enumerable.Range(0, 32).Select(y => new RegionBuilding("wall_v", "grey", new Tile(8, y)));
+        var def = Region(FordTiles) with { Beats = [new BeatSpot("ch1_beat", new Tile(10, 0))], Buildings = [.. wall] };
+
+        Assert.Contains(ErrorsOf(def), e => e.Pointer == "/beats/0/at" && e.Message.Contains("can't be reached from the start"));
+    }
+
+    [Fact]
+    public void Buildings_stay_out_of_the_battle_hash()
+    {
+        var pack1 = ValidationTests.LoadChapter(World(Region(FordTiles)), Map("ford", FordMap));
+        var pack2 = ValidationTests.LoadChapter(World(WithBuildings(new RegionBuilding("tavern", "red", new Tile(10, 10)))), Map("ford", FordMap));
+
+        Assert.Equal(pack1.Hash, pack2.Hash);
+    }
+
+    [Fact]
+    public void Region_props_stay_out_of_the_battle_hash()
+    {
+        var withoutProps = Region(FordTiles);
+        var withProps = Region(FordTiles) with
+        {
+            Props = [new RegionProps("tree", "autumn", [new Tile(2, 2)])]
+        };
+        var pack1 = ValidationTests.LoadChapter(World(withoutProps), Map("ford", FordMap));
+        var pack2 = ValidationTests.LoadChapter(World(withProps), Map("ford", FordMap));
+        Assert.Equal(pack1.Hash, pack2.Hash);
     }
 }

@@ -46,7 +46,7 @@ The "Choose a battle" list becomes a world the party travels through. Players wa
 
 **Battles.** Reaching a battle area, or a story choice that leads to one, starts the fight there. The party forms up on the map's `party_spawn` zone, the grid fades in and enemies step out. The battle then plays exactly as it does today. Afterwards the grid fades, Results show, and walking resumes from that spot.
 
-**Defeat.** The campaign goes on. The party wakes at the region's recovery spawn with XP and injuries as they are today, and the battle can be tried again.
+**Defeat.** The campaign goes on. The party wakes at the region's recovery spawn and the battle can be tried again. By the user's rule (2026-11-01), a lost fight pays no XP, its injuries heal (earlier ones stay) and the consumables used in it stay spent.
 
 **Ending a session.** The party can stop anywhere. Position, flags and completed beats are saved with the campaign. A chapter ends when its last beat is done.
 

@@ -1,0 +1,226 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/interactables.schema.json",
+  "title": "Things to interact with in a region",
+  "description": "interactables/<region>.json, written by hand beside the region file the painting workspace generates (docs/superpowers/specs/2026-11-02-tactics-interactables-design.md). Documentation only: the C# loader (Tactics.Logic PackLoader, Validation and InteractableKinds) is the authority and also checks meaning: what each kind allows, where a thing stands, that it can be reached, and that every lock has a way through it. Not part of the battle hash.",
+  "type": "object",
+  "properties": {
+    "region": {
+      "$ref": "common.schema.json#/$defs/id",
+      "description": "The region the things stand in."
+    },
+    "interactables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "common.schema.json#/$defs/id",
+            "description": "Unique across the whole pack: the campaign keeps each thing's state by it."
+          },
+          "kind": {
+            "enum": ["chest", "crate", "barrel", "sack", "cache", "door", "gate", "drawbridge", "secret_door", "lever", "note", "plaque", "book", "gravestone", "signpost", "pickup", "shrine", "well", "altar", "ambient", "trap", "tracks", "scratches", "disturbed_earth", "bloodstain", "draft", "carving", "rune", "remains", "hidden_path"]
+          },
+          "at": {
+            "$ref": "common.schema.json#/$defs/tile",
+            "description": "Its world tile: walkable ground, outside every stamp, off the spawns and the beat spots."
+          },
+          "facing": {
+            "enum": ["ne", "se", "sw", "nw"]
+          },
+          "name": {
+            "type": "string",
+            "description": "What it's called on the button and the TV (\"old chest\"); the kind's name when left out."
+          },
+          "art": {
+            "type": "string",
+            "description": "An art key, without its state. Required for an ambient thing, which has no art of its kind."
+          },
+          "text": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": "A readable's words, a shrine's lines, an ambient thing's bark, what a notice is (\"Fresh wolf tracks lead north, into the trees.\"). Required for readables, shrines and notices."
+          },
+          "requires": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Story flags that must all be set for it to be there."
+          },
+          "unless": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Story flags that take it away."
+          },
+          "sets": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Flags its main outcome sets: opened, read, taken, used, or a lever first turned on. A key is a flag a thing sets."
+          },
+          "lock": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string",
+                "description": "The story flag that's its key."
+              },
+              "keyName": {
+                "type": "string",
+                "description": "The key's name on the button (\"iron key\")."
+              },
+              "pick": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 30,
+                "description": "Sleight of Hand DC."
+              },
+              "force": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 30,
+                "description": "Athletics DC."
+              },
+              "seal": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 30,
+                "description": "Arcana DC, for a magic seal."
+              }
+            },
+            "additionalProperties": false,
+            "description": "Containers and passages only. At least one way through it. A failed check is spent for this lock."
+          },
+          "trap": {
+            "type": "object",
+            "properties": {
+              "spot": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 30,
+                "description": "The passive Perception DC that sees it."
+              },
+              "disarm": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 30,
+                "description": "Sleight of Hand DC to take it apart. Required on a floor trap."
+              },
+              "text": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "What's said when it goes off."
+              },
+              "sets": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Flags set when it goes off."
+              },
+              "injury": {
+                "type": "string",
+                "description": "An injury id given to whoever sprang it. Supported, unused until the user decides (design, USER DECISION 3)."
+              },
+              "lose": {
+                "type": "string",
+                "description": "An item id, one of which leaves the bag of whoever sprang it. Supported, unused until the user decides."
+              }
+            },
+            "required": ["spot"],
+            "additionalProperties": false
+          },
+          "hidden": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 30,
+                "description": "The passive Perception DC that finds it."
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "dc": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 30
+                  },
+                  "skill": {
+                    "enum": ["perception", "investigation", "insight", "survival", "nature", "arcana", "history", "religion"],
+                    "description": "The passive skill that finds it; perception when left out."
+                  }
+                },
+                "required": ["dc"],
+                "additionalProperties": false
+              }
+            ],
+            "description": "How it's found: the party's best passive score (10 + the skill's bonus) as the leader passes, or an active Search's Investigation roll. Required for a cache, a secret door, every notice and a hidden path."
+          },
+          "reveals": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A notice only: hidden things of this region found the moment it's noticed (tracks that lead to a cache), and theirs in turn."
+          },
+          "range": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 6,
+            "description": "How far from the leader, in tiles along x and y, the party's passive skills find it or see its trap; 3 when left out."
+          },
+          "loot": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "item": {
+                  "type": "string",
+                  "description": "An item id of items.json."
+                },
+                "count": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 99
+                }
+              },
+              "required": ["item"],
+              "additionalProperties": false
+            },
+            "description": "What a container holds or a pickup is. It goes to the leader's bag."
+          },
+          "targets": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "For a lever: the passages of this region it opens when on and shuts when off."
+          },
+          "open": {
+            "type": "boolean",
+            "description": "A passage that starts open, or a lever that starts on."
+          },
+          "blocks": {
+            "type": "boolean",
+            "description": "Whether it stands in the way; the kind's when left out. Not for passages or floor traps."
+          }
+        },
+        "required": ["id", "kind", "at"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["region", "interactables"],
+  "additionalProperties": false
+}

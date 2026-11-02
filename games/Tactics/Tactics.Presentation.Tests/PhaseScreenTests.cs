@@ -27,6 +27,112 @@ public sealed class PhaseScreenTests
     }
 
     [Fact]
+    public void Exploration_says_where_the_party_is_and_has_no_board()
+    {
+        var view = View("Exploration", "Ana leads the party", battle: Fight()) with
+        {
+            Explore = new ExploreView("ashen_ford", "The Ashen Ford", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], "Ana"),
+        };
+
+        var screen = PhaseScreen.Of(view);
+
+        Assert.Equal("Exploration · The Ashen Ford", screen.Meta);
+        Assert.Equal("Ana leads the party", screen.Title);
+        Assert.Equal("tactics-exploration", screen.Shot);
+        Assert.Null(screen.Board);
+    }
+
+    /// <summary>A scene plays over the world, as walking does (overworld 5d): the TV draws the scene's panels on it in Task 10.</summary>
+    [Fact]
+    public void A_scene_keeps_the_world_and_says_which_it_is()
+    {
+        var explore = new ExploreView("ashen_ford", "The Ashen Ford", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], "Ana", Chapter: 1);
+        var story = new StoryView(3, "ch1_mayor", "Emberwick at Dusk", "lines", null, null, null, null);
+
+        var screen = PhaseScreen.Of(View("Story", "Emberwick at Dusk", level: 2) with { Explore = explore, Story = story });
+
+        Assert.Equal("Story · Emberwick at Dusk", screen.Meta);
+        Assert.Same(explore, screen.World);
+        Assert.Equal("Chapter I · The Ashen Ford", screen.Walk!.Title);
+        Assert.Equal("tactics-story", screen.Shot);
+        Assert.Null(screen.Board);
+        Assert.Equal("Story", PhaseScreen.Of(View("Story")).Meta);      // and still reads with nothing to draw
+    }
+
+    /// <summary>A scene waiting for the party after a restart keeps the world behind the wait; a battle's wait off the world doesn't change.</summary>
+    [Fact]
+    public void A_scene_waiting_to_resume_keeps_the_world_behind_it()
+    {
+        var explore = new ExploreView("ashen_ford", "The Ashen Ford", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], null, Chapter: 1);
+
+        var waiting = PhaseScreen.Of(View("Resuming", "Resuming the story…") with { Explore = explore });
+
+        Assert.Same(explore, waiting.World);
+        Assert.True(waiting.OverWorld);
+        Assert.Equal("Waiting for the players to come back", waiting.Empty);
+        Assert.Equal("Chapter I · The Ashen Ford", waiting.Walk!.Title);
+        var battle = PhaseScreen.Of(View("Resuming", battle: Fight()) with { Explore = explore });
+        Assert.Null(battle.World);
+        Assert.False(battle.OverWorld);
+    }
+
+    [Fact]
+    public void Exploration_draws_the_world_and_has_no_table()
+    {
+        var explore = new ExploreView("ashen_ford", "The Ashen Ford", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], "Ana", Chapter: 1);
+
+        var screen = PhaseScreen.Of(View("Exploration", level: 3) with { Explore = explore });
+
+        Assert.Same(explore, screen.World);
+        Assert.Empty(screen.Rows);
+        Assert.Equal("The Ashen Ford", screen.Empty);       // for a TV that can't draw the world
+        Assert.Equal("Chapter I · The Ashen Ford", screen.Walk!.Title);
+        Assert.Equal("Exploring · Party level 3", screen.Walk.Detail);
+        Assert.Equal("Ana", screen.Walk.Leader);
+    }
+
+    [Theory]
+    [InlineData(1, "I")]
+    [InlineData(2, "II")]
+    [InlineData(3, "III")]
+    [InlineData(4, "IV")]
+    [InlineData(5, "V")]
+    public void A_chapter_is_in_roman_numerals(int chapter, string numeral)
+    {
+        var explore = new ExploreView("r", "Region", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], "Ana", chapter);
+
+        Assert.Equal($"Chapter {numeral} · Region", PhaseScreen.Of(View("Exploration") with { Explore = explore }).Walk!.Title);
+    }
+
+    [Fact]
+    public void The_leaders_panel_shows_who_leads_or_says_nobody_does()
+    {
+        WalkerView[] party = [new("a", "Ana", "characters.class_rogue", true, false), new("b", "Bo", "characters.class_cleric", true, true)];
+        var explore = new ExploreView("r", "Region", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [.. party], "Bo", 1);
+
+        var led = PhaseScreen.Of(View("Exploration") with { Explore = explore }).Walk!;
+        var none = PhaseScreen.Of(View("Exploration") with { Explore = explore with { Leader = null, Party = [party[0]] } }).Walk!;
+
+        Assert.Equal(("Bo", "characters.class_cleric"), (led.Leader, led.LeaderSprite));
+        Assert.Equal(("Nobody's here to lead", null), (none.Leader, none.LeaderSprite));
+    }
+
+    [Theory]
+    [InlineData("Muster")]
+    [InlineData("EncounterPick")]
+    [InlineData("Battle")]
+    [InlineData("Results")]
+    public void Only_exploration_shows_the_world(string phase)     // and a scene and its wait to resume: see above
+    {
+        var explore = new ExploreView("r", "Region", 1, 0, new Tile(1, 2), new Tile(2, 2), false, [], [], "Ana", 1);
+
+        Assert.Null(PhaseScreen.Of(View(phase) with { Explore = explore }).World);
+    }
+
+    [Fact]
+    public void Exploration_with_no_region_in_the_view_still_reads() => Assert.Equal("Exploration", PhaseScreen.Of(View("Exploration")).Meta);
+
+    [Fact]
     public void A_phase_number_this_build_does_not_define_only_shows_the_banner()
     {
         var screen = PhaseScreen.Of(View("99", "Hello", battle: Fight()));
@@ -132,6 +238,18 @@ public sealed class PhaseScreenTests
         Assert.Equal("tactics-results", screen.Shot);
         Assert.Equal(new ScreenRow("Ana", "No injuries", null, "+120 XP"), screen.Rows[0]);
         Assert.Equal(new ScreenRow("Bo", "Broken Rib, Scar", null, "+80 XP"), screen.Rows[1]);
+    }
+
+    /// <summary>After a loss (the user's rule): the game's one line in the notice slot, and no injury words or "+0 XP" on the heroes.</summary>
+    [Fact]
+    public void A_lost_battle_shows_the_games_one_line_and_no_xp_or_injuries()
+    {
+        var note = TacticsGame.LossNote(woke: true);
+        var screen = PhaseScreen.Of(View("Results", outcome: "Lost", results: [new ResultLine("Ana", 0, []), new ResultLine("Bo", 0, [])])
+            with { ResultNote = note });
+
+        Assert.Equal("You wake at the recovery point. Wounds tended — no XP. Potions used are gone.", screen.Notice);
+        Assert.Equal([new ScreenRow("Ana", "", null, null), new ScreenRow("Bo", "", null, null)], screen.Rows);
     }
 
     [Theory]

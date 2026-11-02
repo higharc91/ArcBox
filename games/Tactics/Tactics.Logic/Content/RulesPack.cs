@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Collections.Immutable;
 
 namespace Tactics.Logic;
@@ -11,9 +12,10 @@ public sealed partial class RulesPack
     private RulesPack(string hash, ImmutableSortedDictionary<AbilityId, AbilityDef> abilities,
         ImmutableSortedDictionary<string, PassiveDef> passives, ImmutableSortedDictionary<ConditionId, ConditionDef> conditions,
         ImmutableSortedDictionary<InjuryId, InjuryDef> injuries, ImmutableSortedDictionary<string, BattleMap> maps,
-        Catalog? catalog = null, ImmutableSortedDictionary<string, UnitSheet>? monsterSheets = null)
+        Catalog? catalog = null, ImmutableSortedDictionary<string, UnitSheet>? monsterSheets = null, ArtManifest? art = null)
     {
         _monsterSheets = monsterSheets ?? Ordinal.Map<UnitSheet>();
+        Art = art;
         Hash = hash;
         Abilities = abilities;
         Passives = passives;
@@ -32,6 +34,11 @@ public sealed partial class RulesPack
         AiProfiles = catalog.AiProfiles;
         Xp = catalog.Xp;
         Regions = catalog.Regions;
+        Interactables = catalog.Interactables ?? ImmutableSortedDictionary.Create<string, ImmutableArray<InteractableDef>>(StringComparer.Ordinal);
+        _grounds = Regions.ToImmutableSortedDictionary(r => r.Key, r => new Lazy<WorldGround>(() => WorldGround.Of(r.Value, maps, art ?? ArtManifest.None)), StringComparer.Ordinal);
+        _reach = Regions.ToImmutableSortedDictionary(r => r.Key,
+            r => new Lazy<FrozenSet<Tile>>(() => WorldWalk.Reach(GroundFor(r.Key)!.Terrain, r.Value.Def.Spawns.Start, ClassDef.DefaultJump).ToFrozenSet()),
+            StringComparer.Ordinal);
         _injuryPassives = injuries.Values.ToImmutableSortedDictionary(i => InjuryPassiveId(i.Id),
             i => new PassiveDef(InjuryPassiveId(i.Id), i.Hook, null, i.Effects.IsDefault ? [] : i.Effects, i.Static with { MaxHp = 0 },
                 Target: PassiveTarget.Self), StringComparer.Ordinal);
@@ -39,8 +46,13 @@ public sealed partial class RulesPack
 
     private readonly ImmutableSortedDictionary<string, UnitSheet> _monsterSheets;
     private readonly ImmutableSortedDictionary<string, PassiveDef> _injuryPassives;
+    private readonly ImmutableSortedDictionary<string, Lazy<WorldGround>> _grounds;
+    private readonly ImmutableSortedDictionary<string, Lazy<FrozenSet<Tile>>> _reach;
 
-    /// <summary>The content hash; a battle records it in <see cref="BattleState.ContentHash"/>.</summary>
+    /// <summary>The art manifest the pack was loaded with, if any.</summary>
+    public ArtManifest? Art { get; }
+
+    /// <summary>The hash of everything a battle runs under; a battle records it in <see cref="BattleState.ContentHash"/>. Regions aren't in it.</summary>
     public string Hash { get; }
 
     /// <summary>Abilities by id.</summary>
@@ -91,11 +103,27 @@ public sealed partial class RulesPack
     /// <summary>Overworld regions by id, ordinal.</summary>
     public ImmutableSortedDictionary<string, WorldRegion> Regions { get; }
 
+    /// <summary>The things to interact with in each region (<c>interactables/*.json</c>), by region id, in the order they're written.</summary>
+    public ImmutableSortedDictionary<string, ImmutableArray<InteractableDef>> Interactables { get; }
+
+    /// <summary>The things to interact with in the region with this id: none for a region with no <c>interactables</c> file.</summary>
+    public ImmutableArray<InteractableDef> InteractablesIn(string region) => Interactables.GetValueOrDefault(region, []);
+
     /// <summary>The base map with this id, or null.</summary>
     public BattleMap? MapFor(string id) => Maps.GetValueOrDefault(id);
 
     /// <summary>The overworld region with this id, or null.</summary>
     public WorldRegion? RegionFor(string id) => Regions.GetValueOrDefault(id);
+
+    /// <summary>The ground of the region with this id, or null: one shared instance, built the first time it's asked for, since every room walks the same ground.</summary>
+    public WorldGround? GroundFor(string id) => _grounds.GetValueOrDefault(id)?.Value;
+
+    /// <summary>
+    /// Every tile of the region with this id that can be walked to from its start spawn (<see cref="WorldWalk.Reach"/> with
+    /// <see cref="ClassDef.DefaultJump"/>), or null: one shared set, flooded the first time it's asked for, as <see cref="GroundFor"/> is.
+    /// A place the party stands, lands or travels to has to be in it.
+    /// </summary>
+    public IReadOnlySet<Tile>? ReachFor(string id) => _reach.GetValueOrDefault(id)?.Value;
 
     /// <summary>
     /// The id of the passive that carries an injury's static modifiers (<c>"injury:&lt;id&gt;"</c>). <see cref="SheetBuilder"/>
@@ -129,13 +157,15 @@ public sealed partial class RulesPack
     /// Loads rules packs (spec §4.9) in dependency order, <c>"base"</c> first and then by <c>requires</c>, whatever order the
     /// folders are given in; each folder holds a pack's <c>manifest.json</c> and the files it lists. Every file is validated
     /// (spec §4.10), and the art keys too when <paramref name="art"/> is given. <see cref="Hash"/> is the
-    /// <see cref="ContentHash"/> of every loaded file. Throws <see cref="ContentException"/> with every error found.
+    /// <see cref="ContentHash"/> of every loaded file but the regions in <c>world/</c>, which no battle reads, so repainting one
+    /// doesn't restart a saved battle; a stamped map's tiles stay pinned by its map file. Throws <see cref="ContentException"/> with
+    /// every error found.
     /// </summary>
     public static RulesPack Load(IEnumerable<string> packDirectories, ArtManifest? art = null)
     {
         var loaded = PackLoader.Load(packDirectories, art);
         return new RulesPack(loaded.Hash, loaded.Abilities, loaded.Passives, loaded.Conditions, loaded.Injuries, loaded.Maps,
-            loaded.Catalog);
+            loaded.Catalog, art: art);
     }
 
     /// <summary>The rest of a loaded pack's content, which an in-memory pack leaves empty.</summary>
@@ -144,7 +174,8 @@ public sealed partial class RulesPack
         ImmutableSortedDictionary<string, MonsterDef> Monsters, ImmutableSortedDictionary<ItemId, ItemDef> Items,
         ImmutableSortedDictionary<string, WeaponDef> Weapons, ImmutableSortedDictionary<string, ArmorDef> Armors,
         ImmutableSortedDictionary<string, EncounterDef> Encounters, ImmutableSortedDictionary<string, AiProfileDef> AiProfiles,
-        XpTable Xp, ImmutableSortedDictionary<string, WorldRegion> Regions)
+        XpTable Xp, ImmutableSortedDictionary<string, WorldRegion> Regions,
+        ImmutableSortedDictionary<string, ImmutableArray<InteractableDef>>? Interactables = null)
     {
         public static Catalog Empty { get; } = new(Ordinal.Map<ClassDef>(), Ordinal.Map<RaceDef>(), Ordinal.Map<BackgroundDef>(),
             Ordinal.Map<MonsterDef>(), ImmutableSortedDictionary<ItemId, ItemDef>.Empty, Ordinal.Map<WeaponDef>(),
