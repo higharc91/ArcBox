@@ -272,3 +272,21 @@ Other knobs: `ARCBOX_E2E_OUT` (output folder), `TV_RES`, `TV_PRESET`, `ARCBOX_SE
 - **The cloud container had no Godot or software Vulkan.** Godot 4.7.2 .NET was unpacked into `/root/godot/`, and Xvfb and `mesa-vulkan-drivers` (lavapipe) were installed with apt, by hand. The handoff (§7) expected Godot might be missing; installing it is what made every TV run in this report possible. The .NET 10 SDK is in `/root/.dotnet`.
 - **The setup script the user was given** (`setup-environment.sh` in the scratchpad, not committed) installs all three and is safe to re-run. Its fix: the old script failed at line 5, where the PATH lines ran together. Each `.bashrc` line is now its own `echo`, behind an `ARCBOX_ENV` marker so it's added once. It also exports `GODOT`. I haven't seen it run in a fresh environment.
 - **4 cores:** don't run two `dotnet build` or `dotnet test` in one checkout at once. Software rendering draws a frame every 30 to 50 ms, so cloud timings are not TV timings.
+
+## Added after this report: world interactables
+
+Built after the report was first written, at the user's request (engine only, no art).
+- **Design, catalogue and art brief:** `docs/superpowers/specs/2026-11-02-tactics-interactables-design.md` and `…-interactables-art.json`.
+  It ends with a note on how this fits the world-dressing plan.
+- **Engine** (`0f08ea7`, `8c8e5d1`, `9bee2bd`):
+  - 21 kinds, saved per thing in `WorldSave.Things`;
+  - doors and chests block walking through `WorldGround.With`;
+  - checks reuse the 5d story flow, restart-safe;
+  - validation proves every teleport destination can walk back under the worst lever states.
+- **TV and phone** (`937745c`, `3a2b290`, `b00b6fd`, `c32236a`, `7875b11`, `51d8b03`):
+  - stand-ins or markers, animated from events;
+  - `--world-demo=things` shows every kind in every state for the art AI;
+  - secret doors draw as unbroken wall until found;
+  - the leader's Interact names the nearest thing, with a picker when several are in reach.
+- **Verified:** 5,069 .NET and 474 web tests; independent reviews of both stages; real-TV shots in the scratchpad `things/` folder.
+- **Not verified:** sounds (none exist yet but `ui_loot`), a live session with things (no pack region has any), and the user's art.

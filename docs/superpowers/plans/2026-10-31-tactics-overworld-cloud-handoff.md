@@ -145,6 +145,17 @@ The local session was on Windows with an RTX 5080. Check what you have.
 - **Scene cast:** every scene places its non-narrator speakers at the scene's spot in the world while it plays. (21) *To build.*
 - **"Back to walking":** hidden when there's no world, using a new canWalk flag (a small contract change). (9, 29) *To build.*
 - **Spawn clash:** a walker on a spawn's tile steps to the nearest free walkable tile. (8) *Built.*
+- **World interactables (the user's request, 2026-11-02): built, engine only, no art.** 21 kinds (containers, locks, doors and gates, levers, readables, traps, hidden finds, pickups, shrines and wells, ambient barks); the design is in `docs/superpowers/specs/2026-11-02-tactics-interactables-design.md`. The TV draws stand-ins or markers until the user's art AI drops `interactables.*` art in (see the art JSON and `docs/tv-host.md`; check it with `--world-demo=things`). *Built.* Open choices, each with the default in use:
+  1. loot goes to the leader's bag;
+  2. a failed attempt is spent, and a failed disarm springs the trap;
+  3. traps outside battle are harmless (a message and flags only);
+  4. passive Perception uses the party's best score within 3 tiles;
+  5. keys are story flags;
+  6. shrines set flags only;
+  7. hidden chests and crates don't block until found, and secret doors draw as wall until found;
+  8. quick-action results show on the TV only;
+  9. 25 sounds are missing (`chest_open`, `door_open`, `lever_pull`, `trap_spring`, …); each plays once its sfx id exists;
+  10. Ashen Ford has no things yet; the test region and the demo hold them.
 - **Character screens need much better explanations** (the user's note after reviewing the phone screens). Explain:
   - racial benefits (traits, ability bonuses, speed, senses, and what each means in play);
   - class benefits (role, hit die, proficiencies, key features by level, spellcasting);
