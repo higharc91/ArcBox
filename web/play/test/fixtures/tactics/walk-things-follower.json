@@ -47,7 +47,8 @@
     "canBattle": false,
     "portal": "/c/ABCD",
     "interact": null,
-    "targets": []
+    "targets": [],
+    "beat": false
   },
   "viewId": "v1",
   "deadlineUtc": null,

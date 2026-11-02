@@ -384,4 +384,153 @@ public sealed class ThingShowTests
         show.Receive(With([Gate("open", "nw")]));
         Assert.Equal(BoardOrder.Key(GateAt, BoardLayer.Prop), Of(show.Frame(Frame), "gate").Order);
     }
+
+    [Fact]
+    public void A_TV_that_missed_the_first_view_after_a_restart_plays_only_what_it_hadnt()
+    {
+        var show = Show();
+        show.Receive(With([Chest(), Lever()], E(6, "lever", ThingEvents.Looked), E(7, "chest", ThingEvents.Looked)));
+        show.Receive(With([Chest(), Lever()], E(6, "lever", ThingEvents.Looked), E(7, "chest", ThingEvents.Looked)) with { Epoch = 2 });
+        Assert.Empty(show.Playing);
+        // The server came back with its numbers kept; the view with 8 never reached this TV.
+        show.Receive(With([Chest("open"), Lever("on")], E(8, "chest", ThingEvents.Opened), E(9, "lever", ThingEvents.Toggled)) with { Epoch = 3 });
+        Assert.Equal(["opened chest", "toggled lever"], show.Playing);
+    }
+
+    [Fact]
+    public void Numbers_that_go_back_start_the_count_again_so_the_next_new_one_still_plays()
+    {
+        var show = Show();
+        show.Receive(With([Chest()], E(40, "chest", ThingEvents.Looked)));
+        show.Receive(With([Chest()], E(1, "chest", ThingEvents.Looked)) with { Epoch = 2 });
+        Assert.Empty(show.Playing);
+        show.Receive(With([Chest()], E(1, "chest", ThingEvents.Looked), E(2, "chest", ThingEvents.Read)) with { Epoch = 2 });
+        Assert.Equal(["read chest"], show.Playing);
+    }
+
+    [Fact]
+    public void An_unlock_and_an_opening_in_one_view_play_the_opening_strip_once_after_the_unlock()
+    {
+        var show = Show(ThingArt.Load(ThingArtTests.WithArt.Value));
+        show.Receive(With([Chest()]));
+        show.Frame(Frame);
+        show.Receive(With([Chest("open")], E(1, "chest", ThingEvents.Unlocked), E(2, "chest", ThingEvents.Opened)));
+
+        var paths = new List<string>();
+        for (var t = 0.0; t < 1.2; t += 0.05)
+            paths.Add(Of(show.Frame(0.05), "chest").Sprite.Path);
+        var strip = paths.Select((p, i) => (p, i)).Where(x => x.p == "interactables/chest_opening.png").Select(x => x.i).ToList();
+        Assert.NotEmpty(strip);
+        Assert.Equal(strip.Count, strip[^1] - strip[0] + 1);                 // one run of it, not two
+        Assert.All(paths.Take(strip[0]), p => Assert.Equal("interactables/chest_closed.png", p));     // shut through the unlock
+        Assert.All(paths.Skip(strip[^1] + 1), p => Assert.Equal("interactables/chest_open.png", p));
+        Assert.True(strip[0] * 0.05 >= ThingShow.Stagger - 0.06);
+    }
+
+    [Fact]
+    public void A_partial_art_drop_never_plays_a_strip_that_ends_on_a_stand_in()
+    {
+        var root = Directory.CreateTempSubdirectory("tactics-things-strip-").FullName;
+        foreach (var set in new[] { "props", "pickups" })
+        {
+            Directory.CreateDirectory(Path.Combine(root, set));
+            File.Copy(Path.Combine(Pack.Root, set, "manifest.json"), Path.Combine(root, set, "manifest.json"));
+        }
+        Directory.CreateDirectory(Path.Combine(root, ThingArt.Set));
+        File.WriteAllText(Path.Combine(root, ThingArt.Set, "manifest.json"), """
+            { "props": {
+              "chest": { "variants": { "closed": "chest_closed.png" }, "size": [26, 26], "anchor": [13, 25], "frames": 1, "fps": 0 },
+              "chest_opening": { "variants": { "strip": "chest_opening.png" }, "size": [26, 26], "anchor": [13, 25], "frames": 4, "fps": 10,
+                "tags": ["interactable", "transition", "from:closed", "to:open"] } } }
+            """);
+        var art = ThingArt.Load(root);
+        Assert.Null(art.Strip(Chest("open"), "closed", "open"));
+
+        var show = Show(art);
+        show.Receive(With([Chest()]));
+        show.Frame(Frame);
+        show.Receive(With([Chest("open")], E(1, "chest", ThingEvents.Opened)));
+        for (var t = 0.0; t < 1; t += 0.05)
+            Assert.NotEqual("interactables/chest_opening.png", Of(show.Frame(0.05), "chest").Sprite.Path);
+        Assert.Equal("props/chest_open_oak.png", Of(show.Frame(Frame), "chest").Sprite.Path);
+    }
+
+    private static readonly WallPlug Seam = new(new Tile(14, 10), "sw");
+
+    private static ThingView Secret(string state = "closed")
+        => new("seam", "secret_door", Seam.At, "sw", "interactables.secret_door", state, null, "Hidden door", state == "closed", false);
+
+    [Fact]
+    public void Plugs_are_drawn_where_the_server_says_and_one_stays_until_its_door_pops_in()
+    {
+        var show = Show();
+        show.Receive(With([Chest()]) with { Plugs = [Seam] });
+        Assert.Equal([Seam], show.Frame(Frame).Plugs);
+
+        show.Receive(With([Chest(), Secret()], E(1, "chest", ThingEvents.Looked), E(2, "seam", ThingEvents.Revealed)) with { Plugs = [] });
+        Assert.Equal([Seam], show.Frame(Frame).Plugs);                          // its door waits its turn behind the look: still wall
+        Assert.Equal([Seam], show.Frame(ThingShow.Stagger).Plugs);              // just popping in
+        Assert.Empty(show.Frame(ThingShow.PopSeconds).Plugs);                   // the door is there now
+        Assert.Empty(show.Frame(Frame).Plugs);
+    }
+
+    [Fact]
+    public void A_first_view_or_a_rejoin_draws_the_plugs_as_they_are()
+    {
+        var show = Show();
+        show.Receive(With([Secret()], E(5, "seam", ThingEvents.Revealed)) with { Plugs = [] });
+        Assert.Empty(show.Frame(Frame).Plugs);
+        Assert.Empty(new ThingShow(Ground, Units.Value, Things.Value).Frame(Frame).Plugs);
+    }
+
+    [Fact]
+    public void Only_what_is_near_the_view_is_built()
+    {
+        var show = Show();
+        var far = Chest() with { Id = "far", At = new Tile(28, 28) };
+        show.Receive(With([Chest(), far]));
+        var feet = UnitPlace.On(Ground, ChestAt).Feet;
+        var frame = show.Frame(Frame, view: new ArtArea(feet - new Vector2(100), feet + new Vector2(100)));
+        Assert.Equal(["thing:chest"], frame.Units.Select(u => u.Id.Value));
+        Assert.Equal(2, show.Frame(Frame).Units.Length);
+    }
+
+    [Fact]
+    public void Merge_keeps_painters_order_without_sorting_again()
+    {
+        var a = UnitPlan.Figure("a", "characters.class_fighter", UnitPlace.On(Ground, new Tile(3, 3)), Units.Value);
+        var c = UnitPlan.Figure("c", "characters.class_fighter", UnitPlace.On(Ground, new Tile(12, 12)), Units.Value);
+        var show = Show();
+        show.Receive(With([Chest(), Trap()]));
+        var things = show.Frame(Frame).Units;
+        var merged = ThingShow.Merge([a, c], things);
+        Assert.Equal(merged.Select(u => u.Order).Order(), merged.Select(u => u.Order));
+        Assert.Equal(4, merged.Length);
+    }
+
+    [Fact]
+    public void Fifty_things_cost_a_frame_little_and_allocate_little()
+    {
+        var show = Show();
+        var many = Enumerable.Range(0, 50).Select(i => (i % 3) switch
+        {
+            0 => Chest() with { Id = $"c{i}", At = new Tile(2 + i % 25, 2 + i / 25 * 3) },
+            1 => Gate() with { Id = $"g{i}", At = new Tile(2 + i % 25, 3 + i / 25 * 3) },
+            _ => Lever() with { Id = $"l{i}", At = new Tile(2 + i % 25, 4 + i / 25 * 3) },
+        }).ToList();
+        show.Receive(With(many));
+        for (var i = 0; i < 100; i++)
+            show.Frame(1.0 / 60);                                               // warm: the caches fill
+        var bytes = GC.GetAllocatedBytesForCurrentThread();
+        var clock = System.Diagnostics.Stopwatch.StartNew();
+        const int Frames = 1000;
+        for (var i = 0; i < Frames; i++)
+            Assert.Equal(50, show.Frame(1.0 / 60).Units.Length);
+        var ms = clock.Elapsed.TotalMilliseconds / Frames;
+        var kb = (GC.GetAllocatedBytesForCurrentThread() - bytes) / 1024.0 / Frames;
+        Console.WriteLine($"THINGS 50 things: {ms:0.000} ms and {kb:0.0} KB a frame");
+        Assert.True(ms < 0.5, $"{ms:0.000} ms a frame");
+        Assert.True(kb < 64, $"{kb:0.0} KB a frame");
+    }
 }
+

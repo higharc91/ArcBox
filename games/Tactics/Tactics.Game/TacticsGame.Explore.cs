@@ -211,6 +211,7 @@ public sealed partial class TacticsGame
         // Not 0: a server restart restarts Seq under a TV that may have stayed up, and to it only a new Epoch means "snap".
         _epoch = (int)(_ctx.Now.ToUnixTimeSeconds() % int.MaxValue);
         _storySeq = Math.Max(saved?.StorySeq ?? 0, saved?.Story?.Seq ?? 0);     // the TV's line number goes on from where it was
+        _thingSeq = Math.Max(_thingSeq, saved?.ThingSeq ?? 0);                     // and so does its thing events' number
         var start = region.Def.Spawns.Start;
         if (saved is not null && saved.Region == region.Def.Id && CanStandOn(saved.At))
             (_at, _facing) = (saved.At, saved.Facing);

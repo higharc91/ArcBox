@@ -192,14 +192,25 @@ public sealed record WalkerView(string Id, string Name, string Sprite, bool Here
 /// written, each in its state. A hidden thing or a trap nobody has seen isn't sent. Null, and left out of the JSON, for a region with no things.
 /// </param>
 /// <param name="ThingEvents">
-/// What has just happened to things, oldest first, for the TV to animate (design §2.8): the last few, each numbered. A new
-/// <paramref name="Epoch"/> may start the numbers again. Null, and left out of the JSON, for a region with no things.
+/// What has just happened to things, oldest first, for the TV to animate (design §2.8): the last few, each numbered. The numbers go on
+/// across a server restart (<see cref="WorldSave.ThingSeq"/>). Null, and left out of the JSON, for a region with no things.
+/// </param>
+/// <param name="Plugs">
+/// Where the TV draws wall over a gap: each shut passage nobody has found (a secret door), by tile and which way its wall runs, and nothing
+/// else, so it gives nothing away; the region is painted with the gap open. In tile order. Null, and left out of the JSON, for a region with
+/// no things.
 /// </param>
 public sealed record ExploreView(string Region, string Name, int Epoch, int Seq, Tile At, Tile Facing, bool Held,
     ImmutableArray<WalkLeg> Legs, ImmutableArray<WalkerView> Party, string? Leader, int Chapter = 0, bool Blocked = false, int Bumps = 0,
     string? Arrived = null, ImmutableArray<StoryMarker>? Markers = null, ImmutableArray<CastView>? Cast = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<ThingView>? Things = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<ThingEventView>? ThingEvents = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<ThingEventView>? ThingEvents = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<WallPlug>? Plugs = null);
+
+/// <summary>A plug of wall for the TV to draw over a gap (<see cref="ExploreView.Plugs"/>): only where, and which way the wall runs.</summary>
+/// <param name="At">The gap's tile.</param>
+/// <param name="Facing">Which way its wall runs, as a passage's facing: <c>sw</c> and <c>ne</c> along x, <c>se</c> and <c>nw</c> along y.</param>
+public sealed record WallPlug(Tile At, string Facing);
 
 /// <summary>A thing to interact with, as the TV draws it (interactables design §2.9, §4).</summary>
 /// <param name="Id">Its id.</param>
@@ -437,7 +448,10 @@ public sealed partial class TacticsGame
         // Everything in reach, for the phone's list (interactables design §2.5): it changes only as things come into reach or go. Only in a
         // region that has things, so a walk screen anywhere else is exactly as it was.
         if (!AllThings.IsEmpty)
+        {
             data["targets"] = JsonSerializer.SerializeToNode(targets.Select(t => new { id = t.Def.Id, label = t.Label }), ArcJson.Options);
+            data["beat"] = leads && InteractLabel() is not null;     // the button is the beat's, not the first thing's
+        }
         return Custom(Screens.Walk, data);
     }
 
@@ -452,7 +466,7 @@ public sealed partial class TacticsGame
         [.. Walkers().Select(w => new WalkerView(w.Player.Profile!.Value.Value, w.Player.Name,
             HostSprite.Of(null, [$"{SheetBuilder.ClassTag}{w.Character.Class}"])!, w.Here, w.Leads, ColorOf(w.Player.Profile!.Value.Value)))],
         Leader?.Name, region.Def.Chapter, _dir is not null && _blocked && !_unseenWall, _bumps, _arrived, Markers(), CastOf(), ThingViews(),
-        Things.IsEmpty ? null : _thingEvents);
+        Things.IsEmpty ? null : _thingEvents, PlugViews());
 
     private ControllerView BattleScreen(ProfileId profile)
     {

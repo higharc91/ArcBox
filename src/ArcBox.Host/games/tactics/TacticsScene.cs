@@ -1,4 +1,6 @@
+using System.Collections.Immutable;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Text.Json;
 using ArcBox.Host.Audio;
 using ArcBox.Host.Core.Audio;
@@ -428,15 +430,34 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
 
     private bool _thingCaptions;
 
-    /// <summary>The things on screen, or nearly: only those cost the overlay anything, so a region thick with them costs no more than a few.</summary>
-    private static IEnumerable<BoardUnit> InView(WorldCanvas world, IEnumerable<BoardUnit> things)
+    /// <summary>
+    /// Draws wall over each gap the server says a secret door nobody has found stands in (<see cref="WallPlugs"/>): built off the main thread
+    /// when the plugs change, which is only when a door is found, and swapped in when it's ready. Meanwhile the last stay.
+    /// </summary>
+    private void Plug(WorldCanvas world, ImmutableArray<WallPlug> plugs)
     {
-        var view = world.View;
-        var near = new ArtArea(view.Min - new System.Numerics.Vector2(ThingMargin), view.Max + new System.Numerics.Vector2(ThingMargin));
-        return things.Where(u => WorldPlan.AreaOf(u).Overlaps(near));
+        if (_plugBuild is { IsCompleted: true } done)
+        {
+            _plugBuild = null;
+            if (done.IsCompletedSuccessfully && ReferenceEquals(done.Result.World, world))
+            {
+                world.SetPlugs(done.Result.Items);
+            }
+            else if (!done.IsCompletedSuccessfully)
+            {
+                GD.PushError($"Tactics world: the wall over a gap can't be built: {done.Exception?.GetBaseException().Message}");
+            }
+        }
+        if (_plugBuild is not null || plugs.SequenceEqual(_plugsAsked) || world.Plan is not { } plan || world.Art is not { } art)
+        {
+            return;
+        }
+        _plugsAsked = plugs;
+        _plugBuild = Task.Run(() => (world, WallPlugs.Items(plan, art, plugs)));
     }
 
-    private const float ThingMargin = 96;     // art pixels: an emote over a tall door still comes in from the edge
+    private Task<(WorldCanvas World, ImmutableArray<LitItem> Items)>? _plugBuild;
+    private ImmutableArray<WallPlug> _plugsAsked = [];
 
     /// <summary>Gives the things each new view of this region, whatever the walk is following: they're drawn as the server says, all through a fight.</summary>
     private void FeedThings()
@@ -474,7 +495,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _walk = new WalkShow(plan.Terrain, art, _sound);
             _fed = null;
             _things = ThingsFor(plan.Terrain, art);
-            _thingsFed = null;
+            (_thingsFed, _plugsAsked) = (null, []);
         }
         FeedWalk();
         FeedThings();
@@ -486,8 +507,9 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         }
         world.Place(frame.Fit);
         world.Aim(frame.Tile, frame.Velocity);
-        var things = _things?.Frame(delta, _walk.Pixels);
-        world.ShowUnits(things is { Units.IsEmpty: false } shown ? [.. frame.Units.Concat(InView(world, shown.Units)).OrderBy(u => u.Order)] : frame.Units, art);
+        var things = _things?.Frame(delta, _walk.Pixels, world.View);
+        Plug(world, things?.Plugs ?? []);
+        world.ShowUnits(things is { Units.IsEmpty: false } shown ? ThingShow.Merge(frame.Units, shown.Units) : frame.Units, art);
         world.ShowEffects(things?.Effects ?? []);
         foreach (var sound in things?.Sounds ?? [])
         {

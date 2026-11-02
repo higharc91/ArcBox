@@ -191,7 +191,11 @@ public static class ThingsDemo
             door = Def("door", "door", DoorAt) with { Lock = new LockDef(Pick: 12) }, secret = Def("secret", "secret_door", SecretAt),
             key = Def("key", "pickup", KeyAt) with { Name = "iron key" }, note = Def("note", "note", NoteAt), shrine = Def("shrine", "shrine", ShrineAt);
 
-        void Put(InteractableDef def, InteractableSave save) => scene[def.Id] = ThingView.Of(def, save, NoFlags);
+        var saves = new Dictionary<string, InteractableSave>(StringComparer.Ordinal);
+        void Put(InteractableDef def, InteractableSave save) => (scene[def.Id], saves[def.Id]) = (ThingView.Of(def, save, NoFlags), save);
+        // The secret door is a plug of wall until it's found, as the server sends it (Interactables.Plugged).
+        ImmutableArray<WallPlug> Plugs() => [.. new[] { secret }.Where(d => Interactables.Plugged(d, saves.GetValueOrDefault(d.Id) ?? Interactables.Initial(d), NoFlags))
+            .Select(d => new WallPlug(d.At, d.Facing ?? "sw"))];
         Put(chest, new InteractableSave("closed"));
         Put(gate, new InteractableSave("closed"));
         Put(lever, new InteractableSave("off"));
@@ -205,7 +209,7 @@ public static class ThingsDemo
         {
             var explore = new ExploreView(Region, "Things to interact with", epoch, 0, at, new Tile(at.X + 1, at.Y), false, [],
                 [new WalkerView("m0", "Ana", "characters.class_rogue", true, true), new WalkerView("m1", "Bo", "characters.class_fighter", true, false)],
-                "Ana", 0, Things: [.. gallery, .. scene.Values], ThingEvents: events);
+                "Ana", 0, Things: [.. gallery, .. scene.Values], ThingEvents: events, Plugs: Plugs());
             return new TacticsHostView(nameof(TacticsPhase.Exploration), "Ana leads the party", notice, 1, ["Ana", "Bo"], null, null, null, null,
                 Explore: explore);
         }
@@ -223,6 +227,8 @@ public static class ThingsDemo
             foreach (var (def, what, save) in happened)
             {
                 events = events.Add(new ThingEventView(++seq, def.Id, what, "Ana", null));
+                if (save is not null)
+                    saves[def.Id] = save;
                 if (save is null)
                     scene.Remove(def.Id);
                 else

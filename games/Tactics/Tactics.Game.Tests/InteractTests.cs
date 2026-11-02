@@ -489,4 +489,62 @@ public sealed class InteractTests
         Assert.Equal("open", Saved(s, "cache")!.State);
         Assert.Null(Thing(s, "cache"));
     }
+
+    [Fact]
+    public void An_unfound_secret_door_is_a_plug_of_wall_on_the_tv_that_says_nothing_else_and_goes_when_its_found()
+    {
+        string[] things = ["""{ "id": "seam", "kind": "secret_door", "at": [4, 3], "facing": "sw", "name": "seam in the stone", "hidden": 30 }"""];
+        var s = Vault.At(new Tile(4, 1), Vault.Load(things));
+
+        var plug = Assert.Single(s.Host.Explore!.Plugs!.Value);
+        Assert.Equal(new WallPlug(new Tile(4, 3), "sw"), plug);
+        var json = JsonSerializer.Serialize(s.Host.Explore, ArcJson.Options);
+        Assert.Contains("\"plugs\":[{\"at\":", json);
+        foreach (var leak in new[] { "seam", "secret_door", "hidden" })
+            Assert.DoesNotContain(leak, json, StringComparison.OrdinalIgnoreCase);
+        foreach (var seat in new[] { 0, 1 })
+            Assert.DoesNotContain("seam", Walk(s, seat).GetRawText(), StringComparison.Ordinal);
+
+        var found = Vault.At(new Tile(4, 1), Vault.Load(things), w => w with { Things = Ordinal.Map(("seam", new InteractableSave("closed", Found: true))) });
+        Assert.Empty(found.Host.Explore!.Plugs!.Value);
+        Assert.NotNull(Thing(found, "seam"));
+        var open = Vault.At(new Tile(4, 1), Vault.Load(things), w => w with { Things = Ordinal.Map(("seam", new InteractableSave("open", Found: true))) });
+        Assert.Empty(open.Host.Explore!.Plugs!.Value);
+    }
+
+    [Fact]
+    public void Only_an_unfound_shut_passage_is_plugged()
+    {
+        string[] things =
+        [
+            """{ "id": "lever", "kind": "lever", "at": [2, 2], "targets": ["gate"] }""",
+            """{ "id": "gate", "kind": "gate", "at": [4, 3] }""",
+            """{ "id": "cache", "kind": "cache", "at": [8, 8], "hidden": 30 }""",
+        ];
+        Assert.Empty(Vault.At(new Tile(2, 1), Vault.Load(things)).Host.Explore!.Plugs!.Value);
+        Assert.Empty(Vault.At(new Tile(2, 1)).Host.Explore!.Plugs!.Value);
+    }
+
+    [Fact]
+    public void Thing_event_numbers_go_on_across_a_server_restart()
+    {
+        var s = Vault.At(new Tile(2, 2));
+        Interact(s, "cart");                                           // a look at the cart: an event, at once
+        var before = s.Host.Explore!.ThingEvents!.Value.Max(e => e.Seq);
+        Assert.Equal(before, Doc(s).World!.ThingSeq);
+
+        var again = Again(s);
+        Assert.Empty(again.Host.Explore!.ThingEvents!.Value);            // not saved: a TV that stayed up has played them
+        Interact(again, "cart");
+        Assert.Equal(before + 1, Assert.Single(again.Host.Explore!.ThingEvents!.Value).Seq);
+    }
+
+    [Fact]
+    public void The_walk_screen_says_when_the_button_is_a_beats()
+    {
+        var s = Vault.At(new Tile(6, 1));
+        Assert.False(Walk(s).GetProperty("beat").GetBoolean());
+        Assert.False(Walk(s, 1).GetProperty("beat").GetBoolean());
+    }
 }
+

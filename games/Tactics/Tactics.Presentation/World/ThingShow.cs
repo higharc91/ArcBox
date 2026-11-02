@@ -12,7 +12,16 @@ namespace Tactics.Presentation.World;
 /// <param name="Units">Each thing, as a figure sorted among the walkers and the props (<see cref="BoardUnit.Thing"/>).</param>
 /// <param name="Effects">The pack's effects playing over them: a puff as a door swings, smoke as a trap goes off.</param>
 /// <param name="Sounds">The sounds that start this frame, by the sfx manifest's ids, to play at <see cref="ThingSounds.Db"/>.</param>
-public sealed record ThingFrame(ImmutableArray<BoardUnit> Units, ImmutableArray<FxDraw> Effects, ImmutableArray<string> Sounds);
+/// <param name="Plugs">
+/// Where wall is drawn over a gap (<see cref="ExploreView.Plugs"/>): the server's, and one it has just taken away while its secret door is
+/// still waiting to pop in, so the gap never shows open first.
+/// </param>
+public sealed record ThingFrame(ImmutableArray<BoardUnit> Units, ImmutableArray<FxDraw> Effects, ImmutableArray<string> Sounds,
+    ImmutableArray<WallPlug> Plugs = default)
+{
+    /// <summary>The plugs; never a default array.</summary>
+    public ImmutableArray<WallPlug> Plugs { get => field.IsDefault ? [] : field; init; } = Plugs;
+}
 
 /// <summary>
 /// The things to interact with on the TV (interactables design §2.8, §2.9, §4.3): drawn where <see cref="ExploreView.Things"/> says, in their
@@ -88,9 +97,24 @@ public sealed class ThingShow
     private readonly SoundBank? _sounds;
     private readonly List<ThingView> _shown = [];
     private readonly List<Moment> _moments = [];
+    private readonly Dictionary<ThingView, ThingPick> _picks = [];
+    private readonly Dictionary<(ThingView, Vector2), ThingMarker> _markers = [];
+    private readonly Dictionary<(ThingView, Vector2, bool), ThingLabel?> _labels = [];
+    private readonly List<(WallPlug Plug, Moment For)> _held = [];
+    private ImmutableArray<WallPlug> _plugs = [];
     private bool _started;
     private int _seen;
     private double _clock;
+
+    /// <summary>A cache this big is dropped and started again: things don't change often, but a session's worth mustn't pile up.</summary>
+    private const int CacheLimit = 512;
+
+    /// <summary>How far past the view, in art pixels, a thing is still drawn: a tall door or its emote comes in from the edge.</summary>
+    public const float ViewMargin = 96;
+
+    /// <summary>The events that change what a thing is drawn as. The rest (an unlock, a failure, a look) leave it as it stands.</summary>
+    private static readonly ImmutableHashSet<string> Changes = [ThingEvents.Opened, ThingEvents.Toggled, ThingEvents.Sprung, ThingEvents.Disarmed,
+        ThingEvents.Used, ThingEvents.Read, ThingEvents.Taken, ThingEvents.Revealed, ThingEvents.Spotted];
 
     /// <summary>
     /// A show on <paramref name="terrain"/>, drawing with <paramref name="things"/>. With <paramref name="captions"/> (the art check), every
@@ -113,8 +137,9 @@ public sealed class ThingShow
 
     /// <summary>
     /// Takes a view. The first one only says what's there: its events happened before this TV was watching. After that, each event newer than
-    /// the last starts its moment, a <see cref="Stagger"/> after the one before it in the same view. Numbers that start again (a server
-    /// restart's new <see cref="ExploreView.Epoch"/>) are taken as the new count, with nothing replayed.
+    /// the last starts its moment, a <see cref="Stagger"/> after the one before it in the same view. The server's numbers go on across a
+    /// restart (<c>WorldSave.ThingSeq</c>), so a view this TV missed costs nothing: what's newer than the last it played still plays, and
+    /// nothing older plays again. Numbers that go back (a server from before they were kept) are taken as the new count, with nothing played.
     /// </summary>
     public void Receive(ExploreView view)
     {
@@ -122,6 +147,8 @@ public sealed class ThingShow
         var events = view.ThingEvents is { IsDefault: false } e ? e : [];
         var newest = events.IsEmpty ? 0 : events.Max(x => x.Seq);
         var before = _shown.ToDictionary(t => t.Id, StringComparer.Ordinal);
+        var plugsBefore = _plugs;
+        _plugs = view.Plugs is { IsDefault: false } plugs ? plugs : [];
         _shown.Clear();
         _shown.AddRange(things);
         if (!_started || newest < _seen)
@@ -137,17 +164,23 @@ public sealed class ThingShow
             var after = now.GetValueOrDefault(happened.Id);
             if (after is null && was is null)
                 continue;       // nothing this TV was ever shown: a passage that isn't there, moved by a lever
-            _moments.Add(MomentOf(happened, start, was, after));
+            var moment = MomentOf(happened, start, was, after);
+            _moments.Add(moment);
+            // What it's drawn as from here: an unlock before an opening leaves it shut, so the opening is the one that changes it, once.
+            before[happened.Id] = moment.To;
+            if (moment.Appears && plugsBefore.FirstOrDefault(p => p.At == moment.To.At) is { } plug && !_plugs.Contains(plug))
+                _held.Add((plug, moment));
             start += Stagger;
         }
-        _seen = newest;
+        _seen = Math.Max(_seen, newest);
     }
 
     private Moment MomentOf(ThingEventView happened, double start, ThingView? was, ThingView? after)
     {
-        var to = after ?? was!;
+        var changes = Changes.Contains(happened.What) || was is null;
+        var to = changes ? after ?? was! : was ?? after!;
         var from = happened.What == ThingEvents.Revealed ? null : was;
-        var changed = from is not null && after is not null && from.State != after.State;
+        var changed = changes && from is not null && after is not null && from.State != after.State;
         var strip = changed ? _things.Strip(after!, from!.State, after!.State) : null;
         var fx = happened.What switch
         {
@@ -160,7 +193,7 @@ public sealed class ThingShow
         };
         return new Moment(happened.Id, happened.What, start, from, to, strip, fx, ThingSounds.For(happened.What, to.Kind, to.State, _sounds))
         {
-            Gone = after is null,
+            Gone = changes && after is null,
             Appears = was is null && after is not null,
         };
     }
@@ -171,17 +204,33 @@ public sealed class ThingShow
     /// Moves on by <paramref name="seconds"/> and gives the things to draw. <paramref name="pixels"/> is the walk's (<see cref="WalkShow.Pixels"/>):
     /// where feet go on the screen's pixels, so a thing stands still against the ground as the camera moves.
     /// </summary>
-    public ThingFrame Frame(double seconds, Func<Vector2, bool, Vector2>? pixels = null)
+    /// <remarks>
+    /// With <paramref name="view"/> (what the screen shows, in art pixels), only what's in it or near it is built: a region thick with things
+    /// costs a frame no more than the few on screen.
+    /// </remarks>
+    public ThingFrame Frame(double seconds, Func<Vector2, bool, Vector2>? pixels = null, ArtArea? view = null)
     {
         _clock += seconds;
         _moments.RemoveAll(m => _clock - m.Start > m.Seconds);
+        _held.RemoveAll(h => !_moments.Contains(h.For) || _clock - h.For.Start > PopSeconds / 2);
+        var plugs = _held.Count == 0 ? _plugs : [.. _plugs, .. _held.Select(h => h.Plug).Distinct()];
         if (_shown.Count == 0 && _moments.Count == 0)
-            return new ThingFrame([], [], []);
+            return new ThingFrame([], [], [], plugs);
+        var near = view is { } v ? new ArtArea(v.Min - new Vector2(ViewMargin), v.Max + new Vector2(ViewMargin)) : (ArtArea?)null;
+        bool Seen(Tile at)
+        {
+            if (!_terrain.Map.InBounds(at))
+                return false;
+            if (near is not { } area)
+                return true;
+            var feet = Feet(at, pixels);
+            return feet.X >= area.Min.X && feet.X <= area.Max.X && feet.Y >= area.Min.Y && feet.Y <= area.Max.Y;
+        }
 
         var units = ImmutableArray.CreateBuilder<BoardUnit>();
         foreach (var thing in _shown)
         {
-            if (!_terrain.Map.InBounds(thing.At))
+            if (!Seen(thing.At))
                 continue;
             // A moment still to come holds the thing as it was: a gate waits for its lever, and a find stays unseen until its turn.
             var next = _moments.FirstOrDefault(m => m.Id == thing.Id && m.Start > _clock);
@@ -189,7 +238,7 @@ public sealed class ThingShow
             units.Add(Unit(next?.From ?? thing, now, pixels, waiting: next is { Appears: true } && now is null));
         }
         foreach (var gone in _moments.Where(m => m.Gone && m.Start <= _clock && _shown.All(t => t.Id != m.Id)).GroupBy(m => m.Id).Select(g => g.First()))
-            if (_terrain.Map.InBounds(gone.To.At))
+            if (Seen(gone.To.At))
                 units.Add(Unit(gone.To, gone, pixels, waiting: false));
 
         var effects = ImmutableArray.CreateBuilder<FxDraw>();
@@ -202,10 +251,42 @@ public sealed class ThingShow
                 if (moment.Sound is { } sound)
                     sounds.Add(sound);
             }
-            if (moment.Fx is { } key && _fx?.Clip(key) is { } clip && _clock - moment.Start < clip.Seconds && _terrain.Map.InBounds(moment.To.At))
+            if (moment.Fx is { } key && _fx?.Clip(key) is { } clip && _clock - moment.Start < clip.Seconds && Seen(moment.To.At))
                 effects.Add(Effect(clip, Feet(moment.To.At, pixels), _clock - moment.Start));
         }
-        return new ThingFrame([.. units.OrderBy(u => u.Order)], effects.ToImmutable(), sounds.ToImmutable());
+        if (units.Count > 1)
+            units.Sort((a, b) => a.Order.CompareTo(b.Order));
+        return new ThingFrame(units.ToImmutable(), effects.ToImmutable(), sounds.ToImmutable(), plugs);
+    }
+
+    /// <summary>
+    /// Two lists already in painter's order as one, <paramref name="first"/>'s first on a tie: the walkers and the things, each frame, without
+    /// sorting them all again.
+    /// </summary>
+    public static ImmutableArray<BoardUnit> Merge(ImmutableArray<BoardUnit> first, ImmutableArray<BoardUnit> second)
+    {
+        if (second.IsDefaultOrEmpty)
+            return first;
+        if (first.IsDefaultOrEmpty)
+            return second;
+        var merged = ImmutableArray.CreateBuilder<BoardUnit>(first.Length + second.Length);
+        var (i, j) = (0, 0);
+        while (i < first.Length && j < second.Length)
+            merged.Add(second[j].Order < first[i].Order ? second[j++] : first[i++]);
+        while (i < first.Length)
+            merged.Add(first[i++]);
+        while (j < second.Length)
+            merged.Add(second[j++]);
+        return merged.MoveToImmutable();
+    }
+
+    private ThingPick PickOf(ThingView thing)
+    {
+        if (_picks.TryGetValue(thing, out var pick))
+            return pick;
+        if (_picks.Count >= CacheLimit)
+            _picks.Clear();
+        return _picks[thing] = _things.Pick(thing);
     }
 
     private Vector2 Feet(Tile at, Func<Vector2, bool, Vector2>? pixels)
@@ -223,7 +304,7 @@ public sealed class ThingShow
 
     private BoardUnit Unit(ThingView thing, Moment? moment, Func<Vector2, bool, Vector2>? pixels, bool waiting)
     {
-        var pick = _things.Pick(thing);
+        var pick = PickOf(thing);
         var feet = Feet(thing.At, pixels);
         var t = moment is null ? double.MaxValue : _clock - moment.Start;
         var motion = waiting ? Motion.Hidden : moment is null ? Motion.Still : MotionOf(moment, t);
@@ -235,10 +316,10 @@ public sealed class ThingShow
             (sprite, anim) = (strip.Sprite, new UnitAnim([strip.FrameAt(t)], 1, false));
 
         var drawn = feet + motion.Offset;
-        var marker = pick.Sprite is null ? MarkerOf(thing, moment, t, drawn) : null;
+        var marker = pick.Sprite is null ? (moment is null ? StillMarker(thing, drawn) : MarkerOf(thing, moment, t, drawn)) : null;
         var flat = pick.Flat;
         var tile = OrderTile(thing, sprite);
-        var look = new ThingLook(marker, LabelOf(thing, pick, feet), motion.Scale, motion.Tint, motion.Alpha);
+        var look = new ThingLook(marker, LabelFor(thing, pick, feet), motion.Scale, motion.Tint, motion.Alpha);
 
         var emote = waiting ? null
             : moment is { What: ThingEvents.Revealed } && t < FoundSeconds ? _art.Emote(Found)
@@ -393,6 +474,25 @@ public sealed class ThingShow
             handle = [foot, top, pivot, pivot + new Vector2(MathF.Sin(angle), -MathF.Cos(angle)) * 14];
         }
         return new ThingMarker(diamond, slab, handle, line, fill, fillAlpha);
+    }
+
+    /// <summary>The marker of a thing with nothing playing, kept: it's the same every frame it stands still.</summary>
+    private ThingMarker StillMarker(ThingView thing, Vector2 feet)
+    {
+        if (_markers.TryGetValue((thing, feet), out var marker))
+            return marker;
+        if (_markers.Count >= CacheLimit)
+            _markers.Clear();
+        return _markers[(thing, feet)] = MarkerOf(thing, null, double.MaxValue, feet);
+    }
+
+    private ThingLabel? LabelFor(ThingView thing, ThingPick pick, Vector2 feet)
+    {
+        if (_labels.TryGetValue((thing, feet, Captions), out var label))
+            return label;
+        if (_labels.Count >= CacheLimit)
+            _labels.Clear();
+        return _labels[(thing, feet, Captions)] = LabelOf(thing, pick, feet);
     }
 
     private ThingLabel? LabelOf(ThingView thing, ThingPick pick, Vector2 feet)

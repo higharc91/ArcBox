@@ -83,6 +83,13 @@ public static class Interactables
         };
     }
 
+    /// <summary>
+    /// True for a shut passage nobody has found (a secret door): it blocks, but the TV isn't told it's there, so the TV is sent a plug of wall
+    /// for its tile instead (<c>ExploreView.Plugs</c>), or its gap would give it away.
+    /// </summary>
+    public static bool Plugged(InteractableDef def, InteractableSave save, IReadOnlySet<string> flags)
+        => KindOf(def).Family == InteractableFamily.Passage && Blocks(def, save, flags) && !Visible(def, save, flags);
+
     /// <summary>The tiles the things of a region block now, in tile order.</summary>
     public static ImmutableSortedSet<Tile> Blocking(IEnumerable<InteractableDef> defs, IReadOnlyDictionary<string, InteractableSave>? saves,
         IReadOnlySet<string> flags)

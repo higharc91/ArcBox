@@ -427,6 +427,15 @@ or comes back draws what's there and replays nothing. `BoardCanvas` and `UnitMar
   `gate_close`, `drawbridge_lower`, `drawbridge_raise`, `secret_door_open`, `secret_door_close`, `chest_open`, `crate_open`, `barrel_open`,
   `sack_open`, `cache_open`, `lever_pull`, `lock_open`, `lock_fail`, `secret_found`, `trap_spotted`, `trap_spring`, `trap_disarm`,
   `item_pickup`, `page_turn`, `shrine_use`, `well_draw`, `altar_use`.
-- **Cost:** nothing for a region with no things; otherwise only the things near the view go to the overlay.
-- A hidden thing isn't sent until it's found, so an unfound secret door is the floor of its gap in the wall, as the region is painted.
+- **Cost:** nothing for a region with no things; otherwise only the things near the view are built (`ThingShow.Frame`'s view), pictures,
+  markers and labels are kept between frames, and the things join the walkers by a merge, not a sort: 50 things cost about 0.09 ms and
+  27 KB a frame (a Debug test, `Fifty_things_cost_a_frame_little_and_allocate_little`).
+- **Secret doors.** A hidden thing isn't sent until it's found. The region is painted with a secret door's gap open, so the server sends a
+  plug instead (`ExploreView.Plugs`: the tile and which way the wall runs, nothing else), and `WallPlugs` draws it as the wall beside it
+  (the taller neighbour along the run: its height, material and flags), built off the main thread and lit as the world's blocks are, with
+  what stands in front painted over it. When the door is found the plug goes as the door pops in (`ThingShow` holds it until then).
+- **Numbers.** `ThingEvents` numbers go on across a server restart (`WorldSave.ThingSeq`), so a TV that stayed up plays what's new to it
+  and nothing it played. Numbers that go back (an older server) start the count again, with nothing played.
+- **A strip plays once**, for the event that changes what's drawn (an opening, not the unlock before it), and only between two states
+  drawn with the thing's own art.
 

@@ -117,12 +117,15 @@ public sealed class ThingArt
     /// <summary>
     /// The strip that plays as <paramref name="thing"/> goes from <paramref name="from"/> to <paramref name="to"/>, from its own set: an asset
     /// named after its art (<c>chest_opening</c> for <c>interactables.chest</c>) tagged <c>transition</c>, <c>from:</c> and <c>to:</c>. One
-    /// drawn the other way plays backwards. Null without one, or when the thing isn't drawn with its own art.
+    /// drawn the other way plays backwards. Null without one, or unless both states are drawn with its own art.
     /// </summary>
     public ThingStrip? Strip(ThingView thing, string from, string to)
     {
         var parts = thing.Art.Split('.');
         if (parts.Length != 2 || parts[0] != Set || from == to)
+            return null;
+        // Only between two states drawn with its own art: a strip that ends on a stand-in would snap to another picture.
+        if (Find($"{thing.Art}.{from}", exact: true) is null || Find($"{thing.Art}.{to}", exact: true) is null)
             return null;
         foreach (var (key, asset) in _assets)
         {

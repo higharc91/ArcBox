@@ -173,7 +173,13 @@ public sealed class WorldPlan
     /// again too, until nothing more does. Items cross by the shapes they cover, not their boxes: on open ground every tile's box overlaps the next one's, and
     /// the closure would run away across the map, where their diamonds only meet.
     /// </summary>
-    public ImmutableArray<ItemAt> Overlay(IEnumerable<BoardUnit> units)
+    public ImmutableArray<ItemAt> Overlay(IEnumerable<BoardUnit> units) => Overlay(units, []);
+
+    /// <summary>
+    /// As <see cref="Overlay(IEnumerable{BoardUnit})"/>, with <paramref name="extra"/> items drawn over the world as well (a secret door's plug of
+    /// wall, <see cref="WallPlugs"/>): what stands in front of them goes again over them too.
+    /// </summary>
+    public ImmutableArray<ItemAt> Overlay(IEnumerable<BoardUnit> units, IEnumerable<LitItem> extra)
     {
         var (chosen, waiting) = (new HashSet<ItemAt>(), new Stack<ItemAt>());
         void Add(ItemAt at)
@@ -184,6 +190,8 @@ public sealed class WorldPlan
 
         foreach (var unit in units)
             Touching(Shape.Of(AreaOf(unit)), default, unit.Order, Add);
+        foreach (var item in extra)
+            Touching(ShapeOf(item), default, item.Order, Add);
         while (waiting.TryPop(out var at))
         {
             var shape = _shapes[at.Block][at.Item];

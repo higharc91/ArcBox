@@ -87,6 +87,8 @@ internal sealed partial class WorldCanvas : CanvasLayer
     private System.Numerics.Vector2 _aim;
     private System.Numerics.Vector2? _hurry;     // where to record first this frame, ahead of the party (Shows)
     private BoardCanvas? _stage;
+    private ImmutableArray<LitItem> _plugs = [];
+    private object[] _plugsDrawn = [];
     private StagePlan? _staged;
     private Task<(BlockPlan Block, object[] Items)[]>? _repainting;
 
@@ -199,6 +201,24 @@ internal sealed partial class WorldCanvas : CanvasLayer
 
     /// <summary>The plan, once it's built.</summary>
     public WorldPlan? Plan { get; private set; }
+
+    /// <summary>The pack's board art the plan was built with, once it's built.</summary>
+    public ArtIndex? Art { get; private set; }
+
+    /// <summary>
+    /// Draws <paramref name="items"/> (<see cref="WallPlugs.Items"/>, built off the main thread) over the world from the next frame, in place of
+    /// the last: the wall over each gap where a secret door nobody has found stands. What stands in front of them is painted over them again.
+    /// </summary>
+    public void SetPlugs(ImmutableArray<LitItem> items)
+    {
+        var baked = Plan?.Lighting is { Active: true } lighting ? lighting : null;
+        var drawn = items.Select(i => BoardPainter.Prepare(i, baked)).ToArray();
+        foreach (var item in drawn)
+        {
+            _painter.Bind(item);
+        }
+        (_plugs, _plugsDrawn) = (items, drawn);
+    }
 
     /// <summary>How the build went.</summary>
     public string BuildTimes { get; private set; } = "";
@@ -316,6 +336,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         var parsed = clock.Elapsed.TotalMilliseconds;
         closing.ThrowIfCancellationRequested();
         var art = ArtIndex.Load(_painter.Root);
+        Art = art;
         var plan = WorldPlan.Build(new BoardTerrain(ground.Map, null), art, _blockSize);
         StagePlan.Warm(ground);      // what every stage of the region shares, worked out here, so a fight's first frame doesn't
         var planned = clock.Elapsed.TotalMilliseconds;
@@ -377,10 +398,21 @@ internal sealed partial class WorldCanvas : CanvasLayer
         }
         var clock = Stopwatch.GetTimestamp();
         var plan = Plan;
-        var over = plan.Overlay(units);
+        var over = plan.Overlay(units, _plugs);
         QueryMs = Stopwatch.GetElapsedTime(clock).TotalMilliseconds;
         OverItems = over.Length;
-        _over.SetDrawn(over.Select(at => _items[at.Block][at.Item]), over.Select(plan.OrderOf));
+        if (_plugs.IsEmpty)
+        {
+            _over.SetDrawn(over.Select(at => _items[at.Block][at.Item]), over.Select(plan.OrderOf));
+        }
+        else
+        {
+            // The plugs among what goes over the units, in painter's order: before what stands in front of them.
+            var drawn = over.Select(at => (Item: _items[at.Block][at.Item], Order: plan.OrderOf(at), Plug: false))
+                .Concat(_plugs.Select((p, i) => (Item: _plugsDrawn[i], p.Order, Plug: true)))
+                .OrderBy(d => d.Order).ThenBy(d => d.Plug ? 0 : 1).ToArray();
+            _over.SetDrawn(drawn.Select(d => d.Item), drawn.Select(d => d.Order));
+        }
         _over.SetUnits(units, art);
     }
 

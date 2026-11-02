@@ -56,7 +56,8 @@
         "id": "chest",
         "label": "Open the chest"
       }
-    ]
+    ],
+    "beat": false
   },
   "viewId": "v1",
   "deadlineUtc": null,

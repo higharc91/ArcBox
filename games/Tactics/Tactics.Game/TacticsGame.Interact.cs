@@ -16,7 +16,10 @@ public sealed partial class TacticsGame
     /// <summary>How many of the things' events <see cref="ExploreView.ThingEvents"/> keeps. The TV takes only the newest view each frame.</summary>
     private const int ThingEventsKept = 8;
 
-    /// <summary>The number of the last thing event, which only goes up within a session; a new <see cref="ExploreView.Epoch"/> starts it again.</summary>
+    /// <summary>
+    /// The number of the last thing event. It only goes up, across a server restart too (<see cref="WorldSave.ThingSeq"/>): a TV that stayed
+    /// up would otherwise take the new numbers for ones it had played, and drop them.
+    /// </summary>
     private int _thingSeq;
 
     private ImmutableArray<ThingEventView> _thingEvents = [];
@@ -270,6 +273,8 @@ public sealed partial class TacticsGame
     {
         var name = by is null ? null : _doc.Members.GetValueOrDefault(by)?.Character.Name;
         var e = new ThingEventView(++_thingSeq, def.Id, what, name, line);
+        if (_doc.World is { } world)
+            _doc = _doc with { World = world with { ThingSeq = _thingSeq } };
         _thingEvents = (_thingEvents.Length < ThingEventsKept ? _thingEvents : _thingEvents.RemoveAt(0)).Add(e);
     }
 
@@ -400,6 +405,15 @@ public sealed partial class TacticsGame
     }
 
     // ---- Views ----------------------------------------------------------------------------------------------------------------
+
+    /// <summary>The plugs of wall over the region's unfound shut passages (<see cref="ExploreView.Plugs"/>). Null for a region with no things.</summary>
+    private ImmutableArray<WallPlug>? PlugViews()
+    {
+        if (Things.IsEmpty)
+            return null;
+        var flags = StoryFlags();
+        return [.. Things.Where(d => Interactables.Plugged(d, ThingState(d), flags)).OrderBy(d => d.At).Select(d => new WallPlug(d.At, d.Facing ?? "sw"))];
+    }
 
     /// <summary>What the TV draws of the region's things: only what's there and has been seen (design §2.9). Null for a region with none.</summary>
     private ImmutableArray<ThingView>? ThingViews()

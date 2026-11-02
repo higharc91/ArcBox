@@ -160,7 +160,8 @@ public sealed record WorldSave(string Region, Tile At, Tile Facing, string? Last
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] StorySave? Story = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int StorySeq = 0,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull), JsonConverter(typeof(OrdinalJsonConverter))]
-    ImmutableSortedDictionary<string, InteractableSave>? Things = null)
+    ImmutableSortedDictionary<string, InteractableSave>? Things = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int ThingSeq = 0)
 {
     /// <summary>The story flags set so far; never a default array, so a read or a write can't throw.</summary>
     public ImmutableArray<string> Flags { get => field.IsDefault ? [] : field; init; } = Flags;
