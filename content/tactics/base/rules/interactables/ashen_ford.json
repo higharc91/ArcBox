@@ -134,6 +134,15 @@
       ]
     },
     {
+      "id": "af_ash_market_scuffs",
+      "kind": "disturbed_earth",
+      "at": [93, 98],
+      "name": "scuffed boards",
+      "hidden": 10,
+      "text": ["Boot scuffs in the ash, all heading the same way and stopping at nothing in particular."],
+      "reveals": ["af_ash_market_cache"]
+    },
+    {
       "id": "af_ash_market_cache",
       "kind": "cache",
       "at": [92, 96],

@@ -48,7 +48,8 @@
     "portal": "/c/ABCD",
     "interact": "Talk",
     "targets": [],
-    "beat": true
+    "beat": true,
+    "search": true
   },
   "viewId": "v1",
   "deadlineUtc": null,
