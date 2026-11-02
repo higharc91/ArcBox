@@ -15,7 +15,8 @@ public sealed record ArtRef(string Family, string Variant);
 /// <param name="Glow">A texture's rule for glowing by itself, or null.</param>
 /// <param name="Phase">How many frames ahead it runs, so that one strip can loop out of step with itself. Each phase is a texture of its own on the TV.</param>
 /// <param name="Blend">A top laid over its neighbour (<see cref="GroundBlend"/>): which mask it goes through, or -1. Each is a texture of its own on the TV.</param>
-public sealed record ArtImage(string Path, int Frames, double Fps, int Height = 32, TextureGlow? Glow = null, int Phase = 0, int Blend = -1)
+/// <param name="Span">How many world tiles a terrain top covers on each side.</param>
+public sealed record ArtImage(string Path, int Frames, double Fps, int Height = 32, TextureGlow? Glow = null, int Phase = 0, int Blend = -1, int Span = 4)
 {
     /// <summary>What tells it from the same strip in another phase, or the same top through another mask.</summary>
     public string Key => Blend >= 0 ? $"{Path}~{Blend}" : Phase == 0 ? Path : $"{Path}#{Phase}";
@@ -40,7 +41,7 @@ public sealed record HazardArt(ArtImage Ground, ArtImage? Over, Vector2 Frame, V
 /// </summary>
 public sealed class ArtIndex
 {
-    private sealed record Family(ImmutableArray<(string Name, string Path)> Variants, int Frames, double Fps, int Height,
+    private sealed record Family(ImmutableArray<(string Name, string Path)> Variants, int Frames, double Fps, int Height, int Span,
         ImmutableDictionary<string, TextureGlow> Glows);
 
     private sealed record PropFamily(ImmutableArray<(string Name, string Path)> Variants, int Frames, double Fps,
@@ -94,7 +95,7 @@ public sealed class ArtIndex
         if (!_textures.TryGetValue(art.Family, out var family))
             return null;
         var (name, path) = Pick(family.Variants, [art.Variant]);
-        return new ArtImage(path, family.Frames, family.Fps, family.Height, family.Glows.GetValueOrDefault(name));
+        return new ArtImage(path, family.Frames, family.Fps, family.Height, family.Glows.GetValueOrDefault(name), Span: family.Span);
     }
 
     /// <summary>The prop in the first of <paramref name="prefer"/>'s variants it has, else its first; null if there's no such prop.</summary>
@@ -194,8 +195,10 @@ public sealed class ArtIndex
         foreach (var entry in textures.EnumerateObject())
         {
             var e = entry.Value;
+            var size = e.GetProperty("size");
+            var span = e.TryGetProperty("span", out var spanValue) ? spanValue.GetInt32() : e.GetProperty("kind").GetString() == "top" ? size[0].GetInt32() / 32 : 4;
             _textures[entry.Name] = new Family(Variants(e, prefix), e.GetProperty("frames").GetInt32(), e.GetProperty("fps").GetDouble(),
-                e.GetProperty("size")[1].GetInt32(), Glows(e));
+                size[1].GetInt32(), span, Glows(e));
         }
     }
 

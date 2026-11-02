@@ -193,8 +193,9 @@ internal sealed class BoardPainter
         }
         var doubled = DitherTexels.Always(art.GetData(), art.GetWidth(), art.GetHeight());
         art.Dispose();
-        var masked = GroundBlend.Masked(doubled, image.Blend);
-        return _tops[image.Key] = Upload(Image.CreateFromData(GroundBlend.Size, GroundBlend.Size, false, Image.Format.Rgba8, masked));
+        var masked = GroundBlend.Masked(doubled, image.Blend, image.Span);
+        var size = (int)Math.Sqrt(masked.Length / sizeof(uint));
+        return _tops[image.Key] = Upload(Image.CreateFromData(size, size, false, Image.Format.Rgba8, masked));
     }
 
     /// <summary>A top's pixels as they go to the TV: doubled if it has dither, and as they are if not.</summary>

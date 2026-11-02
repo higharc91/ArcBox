@@ -82,9 +82,16 @@ gets dragged, Ctrl+Z, or the export tells you to set its Position back to zero.
 | `Beats` | `BeatMarker`, where a story beat happens | `Beat`, an id from `lore/arcs.json` for the region's chapter |
 | `Stamps` | `StampMarker`, a battle map placed at its corner | `Map`, `HeightOffset` |
 | `Spawns` | `SpawnMarker`, one of each | `Kind`: `Start` or `Recovery` (where a beaten party wakes) |
-| `Buildings` | `BuildingMarker`, a piece of the town kit, on its footprint's back corner | `Building`, an id from `town/manifest.json`, and `Variant`. It draws its corner and its name, not its footprint, for now |
+| `Buildings` | `BuildingMarker`, a piece of the town kit, on its footprint's back corner | `Building`, an id from `town/manifest.json`, and `Variant`. It snaps to the tile grid and outlines the full footprint |
+| `People` | `PersonMarker`, a person placed on one tile | `Preset` from `characters/manifest.json`, `Face`, and an optional `Walk` loop. People are decorative in the TV world and don't block walking |
 
 **To move one,** select it in the Scene dock and drag it. It snaps to tiles and outlines the tile it's on. A stamp is different: see below.
+
+**Props** are painted on the `Props` layer. Choose the id and variant from the swatches; a red X means the prop blocks walking. Erase only the prop cell to leave the terrain unchanged. The sprite size, anchor, and height come from `props/manifest.json`.
+
+**Buildings** snap to their back corner. Their orange outline shows the full footprint, divided into tiles. The outline comes from `town/manifest.json`; the building's blocked footprint and door positions are checked on export. A building can cover more than one tile, so leave its whole footprint clear of props and stamps.
+
+**People** are placed under `People` with `PersonMarker`. Choose a preset and facing in the Inspector. `Walk` is an optional short list of tiles for a local idle loop; leave it empty for someone who stands still. They are scenery and never affect path checks.
 
 **To add one,** right-click the group, choose Add Child Node, and pick the marker type. It has to be under the right group, or the export
 says so.

@@ -1,59 +1,73 @@
-[gd_resource type="TileSet" format=3 uid="uid://ci202gi2p1d3v"]
+[gd_resource type="TileSet" format=3]
 
-[ext_resource type="Texture2D" uid="uid://bevq2acwvm65r" path="res://palette/materials/ash_grey.png" id="1_w3tq6"]
-[ext_resource type="Texture2D" uid="uid://dix5ey70w3yeq" path="res://palette/materials/basalt_dark.png" id="2_nn202"]
-[ext_resource type="Texture2D" uid="uid://b82o4qbm4wclc" path="res://palette/materials/flagstone_dark.png" id="3_2db1o"]
-[ext_resource type="Texture2D" uid="uid://cat21lncqtbc1" path="res://palette/materials/flagstone_grey.png" id="4_0fh6j"]
-[ext_resource type="Texture2D" uid="uid://kc0dwt0g4wl7" path="res://palette/materials/flagstone_warm.png" id="5_yputj"]
-[ext_resource type="Texture2D" uid="uid://tx2ci22pmlky" path="res://palette/materials/forest_floor_leafy.png" id="6_x524c"]
-[ext_resource type="Texture2D" uid="uid://ckm6n1o7flj86" path="res://palette/materials/forest_floor_mossy.png" id="7_msc7k"]
-[ext_resource type="Texture2D" uid="uid://bar3iu1ou068m" path="res://palette/materials/forest_needles_pine.png" id="8_444ej"]
-[ext_resource type="Texture2D" uid="uid://demd7tfe060aj" path="res://palette/materials/forest_needles_snowy.png" id="9_ydl3l"]
-[ext_resource type="Texture2D" uid="uid://dws8so2bckfh0" path="res://palette/materials/grass_autumn.png" id="10_w2lna"]
-[ext_resource type="Texture2D" uid="uid://d1l7gw8pdmm5s" path="res://palette/materials/grass_dry.png" id="11_qjyqp"]
-[ext_resource type="Texture2D" uid="uid://clkdo23ngs8bt" path="res://palette/materials/grass_frost.png" id="12_0kv8j"]
-[ext_resource type="Texture2D" uid="uid://do518u87tja1f" path="res://palette/materials/bog_duckweed.png" id="13_pweyj"]
-[ext_resource type="Texture2D" uid="uid://7m77k26g6ooi" path="res://palette/materials/grass_green.png" id="14_5amqg"]
-[ext_resource type="Texture2D" uid="uid://dln5cml54px84" path="res://palette/materials/grass_lush.png" id="15_g6rh4"]
-[ext_resource type="Texture2D" uid="uid://06iml4ipcuk7" path="res://palette/materials/ice_clear.png" id="16_wk7xm"]
-[ext_resource type="Texture2D" uid="uid://ba5d77bk5vfpd" path="res://palette/materials/lava_molten.png" id="17_t4cys"]
-[ext_resource type="Texture2D" uid="uid://dymvq5p5qynt5" path="res://palette/materials/mud_swamp.png" id="18_hn5ws"]
-[ext_resource type="Texture2D" uid="uid://ccel08tf6asx2" path="res://palette/materials/path_packed.png" id="19_xuq3w"]
-[ext_resource type="Texture2D" uid="uid://n7x42h5qxtq4" path="res://palette/materials/pavers_dark.png" id="20_wve4q"]
-[ext_resource type="Texture2D" uid="uid://cm5gjca8txhda" path="res://palette/materials/pavers_grey.png" id="21_24omw"]
-[ext_resource type="Texture2D" uid="uid://c48dnic26litr" path="res://palette/materials/pavers_warm.png" id="22_acfjv"]
-[ext_resource type="Texture2D" uid="uid://bcc0qbkb1uuq" path="res://palette/materials/planks_dark.png" id="23_fx5pb"]
-[ext_resource type="Texture2D" uid="uid://ci72f0ye32bre" path="res://palette/materials/bog_murk.png" id="24_xnbp8"]
-[ext_resource type="Texture2D" uid="uid://b0te70ekbsyq2" path="res://palette/materials/planks_oak.png" id="25_ikmad"]
-[ext_resource type="Texture2D" uid="uid://c602uch6gurep" path="res://palette/materials/rock_dark.png" id="26_fu31y"]
-[ext_resource type="Texture2D" uid="uid://b5hpuvvdafyih" path="res://palette/materials/rock_grey.png" id="27_31ls7"]
-[ext_resource type="Texture2D" uid="uid://bcecdgwxw2g1" path="res://palette/materials/sand_desert.png" id="28_aqfcl"]
-[ext_resource type="Texture2D" uid="uid://cxrdc7o0f1l0i" path="res://palette/materials/sandstone_ochre.png" id="29_52jmy"]
-[ext_resource type="Texture2D" uid="uid://c08kxj4f5q6lc" path="res://palette/materials/sandstone_red.png" id="30_seu6d"]
-[ext_resource type="Texture2D" uid="uid://d2nbk6df1o28a" path="res://palette/materials/snow_fresh.png" id="31_7g6o2"]
-[ext_resource type="Texture2D" uid="uid://4kceh2idyivm" path="res://palette/materials/water_bog.png" id="32_2rbut"]
-[ext_resource type="Texture2D" uid="uid://boohewk543jtw" path="res://palette/materials/water_clear.png" id="33_vlr00"]
-[ext_resource type="Texture2D" uid="uid://plkawc3gool8" path="res://palette/materials/water_swamp.png" id="34_tsff1"]
-[ext_resource type="Texture2D" uid="uid://b522mguurd6tj" path="res://palette/materials/cobble_grey.png" id="35_j1yf7"]
-[ext_resource type="Texture2D" uid="uid://b8aqy0hy2drhx" path="res://palette/materials/cave_floor_cool.png" id="36_g6rh4"]
-[ext_resource type="Texture2D" uid="uid://ol1f1ophdml0" path="res://palette/materials/cobble_warm.png" id="36_hd6im"]
-[ext_resource type="Texture2D" uid="uid://dosfyesjjk1vp" path="res://palette/materials/dirt_brown.png" id="37_m3fug"]
-[ext_resource type="Texture2D" uid="uid://4lluirgmif2o" path="res://palette/materials/crypt_tile_dark.png" id="37_wk7xm"]
-[ext_resource type="Texture2D" uid="uid://csrkyfa8vrmyy" path="res://palette/materials/dirt_dark.png" id="38_ncsiy"]
-[ext_resource type="Texture2D" uid="uid://i8any834mm0s" path="res://palette/materials/crypt_tiles_fel.png" id="38_t4cys"]
-[ext_resource type="Texture2D" uid="uid://bg7ahdo8b05oy" path="res://palette/materials/dungeon_floor_dark.png" id="39_hn5ws"]
-[ext_resource type="Texture2D" uid="uid://df7qn2orqo3pa" path="res://palette/materials/dunes_gold.png" id="39_kfubj"]
-[ext_resource type="Texture2D" uid="uid://bgktc2d1q6dhj" path="res://palette/materials/dunes_pale.png" id="40_2r8ai"]
-[ext_resource type="Texture2D" uid="uid://bov2ko0v4bxsc" path="res://palette/materials/dungeon_floor_warm.png" id="40_xuq3w"]
-[ext_resource type="Texture2D" uid="uid://3brenj33cgdy" path="res://palette/materials/dungeon_floor_cracked_grey.png" id="41_wve4q"]
-[ext_resource type="Texture2D" uid="uid://38eathbxt6is" path="res://palette/materials/dungeon_floor_mossy_dark.png" id="42_24omw"]
-[ext_resource type="Texture2D" uid="uid://igxplewij4pk" path="res://palette/materials/dungeon_wall_dark.png" id="43_acfjv"]
-[ext_resource type="Texture2D" uid="uid://dbcnb42c6g2d4" path="res://palette/materials/dungeon_wall_grey.png" id="44_fx5pb"]
-[ext_resource type="Texture2D" uid="uid://bcupa32sg1ou4" path="res://palette/materials/flagstone_mossy.png" id="45_xnbp8"]
-[ext_resource type="Texture2D" uid="uid://br0vpkkxpqilx" path="res://palette/materials/mine_boards_oak.png" id="47_ikmad"]
-[ext_resource type="Texture2D" uid="uid://bemcd6mpy1o4t" path="res://palette/materials/mine_gravel_brown.png" id="48_fu31y"]
-[ext_resource type="Texture2D" uid="uid://bw4ikatsa4kah" path="res://palette/materials/void_deep.png" id="49_31ls7"]
-[ext_resource type="Texture2D" uid="uid://dn3kccwu2mt53" path="res://palette/materials/wet_stone_glow.png" id="50_aqfcl"]
+[ext_resource type="Texture2D" path="res://palette/materials/ash_grey.png" id="1_w3tq6"]
+[ext_resource type="Texture2D" path="res://palette/materials/basalt_dark.png" id="2_nn202"]
+[ext_resource type="Texture2D" path="res://palette/materials/flagstone_dark.png" id="3_2db1o"]
+[ext_resource type="Texture2D" path="res://palette/materials/flagstone_grey.png" id="4_0fh6j"]
+[ext_resource type="Texture2D" path="res://palette/materials/flagstone_warm.png" id="5_yputj"]
+[ext_resource type="Texture2D" path="res://palette/materials/forest_floor_leafy.png" id="6_x524c"]
+[ext_resource type="Texture2D" path="res://palette/materials/forest_floor_mossy.png" id="7_msc7k"]
+[ext_resource type="Texture2D" path="res://palette/materials/forest_needles_pine.png" id="8_444ej"]
+[ext_resource type="Texture2D" path="res://palette/materials/forest_needles_snowy.png" id="9_ydl3l"]
+[ext_resource type="Texture2D" path="res://palette/materials/grass_autumn.png" id="10_w2lna"]
+[ext_resource type="Texture2D" path="res://palette/materials/grass_dry.png" id="11_qjyqp"]
+[ext_resource type="Texture2D" path="res://palette/materials/grass_frost.png" id="12_0kv8j"]
+[ext_resource type="Texture2D" path="res://palette/materials/bog_duckweed.png" id="13_pweyj"]
+[ext_resource type="Texture2D" path="res://palette/materials/grass_green.png" id="14_5amqg"]
+[ext_resource type="Texture2D" path="res://palette/materials/grass_lush.png" id="15_g6rh4"]
+[ext_resource type="Texture2D" path="res://palette/materials/ice_clear.png" id="16_wk7xm"]
+[ext_resource type="Texture2D" path="res://palette/materials/lava_molten.png" id="17_t4cys"]
+[ext_resource type="Texture2D" path="res://palette/materials/mud_swamp.png" id="18_hn5ws"]
+[ext_resource type="Texture2D" path="res://palette/materials/path_packed.png" id="19_xuq3w"]
+[ext_resource type="Texture2D" path="res://palette/materials/pavers_dark.png" id="20_wve4q"]
+[ext_resource type="Texture2D" path="res://palette/materials/pavers_grey.png" id="21_24omw"]
+[ext_resource type="Texture2D" path="res://palette/materials/pavers_warm.png" id="22_acfjv"]
+[ext_resource type="Texture2D" path="res://palette/materials/planks_dark.png" id="23_fx5pb"]
+[ext_resource type="Texture2D" path="res://palette/materials/bog_murk.png" id="24_xnbp8"]
+[ext_resource type="Texture2D" path="res://palette/materials/planks_oak.png" id="25_ikmad"]
+[ext_resource type="Texture2D" path="res://palette/materials/rock_dark.png" id="26_fu31y"]
+[ext_resource type="Texture2D" path="res://palette/materials/rock_grey.png" id="27_31ls7"]
+[ext_resource type="Texture2D" path="res://palette/materials/sand_desert.png" id="28_aqfcl"]
+[ext_resource type="Texture2D" path="res://palette/materials/sandstone_ochre.png" id="29_52jmy"]
+[ext_resource type="Texture2D" path="res://palette/materials/sandstone_red.png" id="30_seu6d"]
+[ext_resource type="Texture2D" path="res://palette/materials/snow_fresh.png" id="31_7g6o2"]
+[ext_resource type="Texture2D" path="res://palette/materials/water_bog.png" id="32_2rbut"]
+[ext_resource type="Texture2D" path="res://palette/materials/water_clear.png" id="33_vlr00"]
+[ext_resource type="Texture2D" path="res://palette/materials/water_swamp.png" id="34_tsff1"]
+[ext_resource type="Texture2D" path="res://palette/materials/cobble_grey.png" id="35_j1yf7"]
+[ext_resource type="Texture2D" path="res://palette/materials/cave_floor_cool.png" id="36_g6rh4"]
+[ext_resource type="Texture2D" path="res://palette/materials/cobble_warm.png" id="36_hd6im"]
+[ext_resource type="Texture2D" path="res://palette/materials/dirt_brown.png" id="37_m3fug"]
+[ext_resource type="Texture2D" path="res://palette/materials/crypt_tile_dark.png" id="37_wk7xm"]
+[ext_resource type="Texture2D" path="res://palette/materials/dirt_dark.png" id="38_ncsiy"]
+[ext_resource type="Texture2D" path="res://palette/materials/crypt_tiles_fel.png" id="38_t4cys"]
+[ext_resource type="Texture2D" path="res://palette/materials/dungeon_floor_dark.png" id="39_hn5ws"]
+[ext_resource type="Texture2D" path="res://palette/materials/dunes_gold.png" id="39_kfubj"]
+[ext_resource type="Texture2D" path="res://palette/materials/dunes_pale.png" id="40_2r8ai"]
+[ext_resource type="Texture2D" path="res://palette/materials/dungeon_floor_warm.png" id="40_xuq3w"]
+[ext_resource type="Texture2D" path="res://palette/materials/dungeon_floor_cracked_grey.png" id="41_wve4q"]
+[ext_resource type="Texture2D" path="res://palette/materials/dungeon_floor_mossy_dark.png" id="42_24omw"]
+[ext_resource type="Texture2D" path="res://palette/materials/dungeon_wall_dark.png" id="43_acfjv"]
+[ext_resource type="Texture2D" path="res://palette/materials/dungeon_wall_grey.png" id="44_fx5pb"]
+[ext_resource type="Texture2D" path="res://palette/materials/flagstone_mossy.png" id="45_xnbp8"]
+[ext_resource type="Texture2D" path="res://palette/materials/mine_boards_oak.png" id="47_ikmad"]
+[ext_resource type="Texture2D" path="res://palette/materials/mine_gravel_brown.png" id="48_fu31y"]
+[ext_resource type="Texture2D" path="res://palette/materials/void_deep.png" id="49_31ls7"]
+[ext_resource type="Texture2D" path="res://palette/materials/wet_stone_glow.png" id="50_aqfcl"]
+[ext_resource type="Texture2D" path="res://palette/materials/ash_ford.png" id="51_wve4q"]
+[ext_resource type="Texture2D" path="res://palette/materials/dirt_ford.png" id="52_24omw"]
+[ext_resource type="Texture2D" path="res://palette/materials/ford_water_clear.png" id="53_acfjv"]
+[ext_resource type="Texture2D" path="res://palette/materials/grass_ford.png" id="54_fx5pb"]
+[ext_resource type="Texture2D" path="res://palette/materials/rock_ford.png" id="55_xnbp8"]
+[ext_resource type="Texture2D" path="res://palette/materials/ash_ford_charred.png" id="56_31ls7"]
+[ext_resource type="Texture2D" path="res://palette/materials/dirt_ford_dry.png" id="58_aqfcl"]
+[ext_resource type="Texture2D" path="res://palette/materials/dirt_ford_wet.png" id="59_52jmy"]
+[ext_resource type="Texture2D" path="res://palette/materials/grass_ford_autumn.png" id="60_seu6d"]
+[ext_resource type="Texture2D" path="res://palette/materials/grass_ford_dry.png" id="61_7g6o2"]
+[ext_resource type="Texture2D" path="res://palette/materials/path_ford_packed.png" id="62_2rbut"]
+[ext_resource type="Texture2D" path="res://palette/materials/rock_ford_bank.png" id="63_vlr00"]
+[ext_resource type="Texture2D" path="res://palette/materials/planks_ford_dark.png" id="64_52jmy"]
+[ext_resource type="Texture2D" path="res://palette/materials/planks_ford_oak.png" id="65_seu6d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k7yja"]
 resource_name = "ash/grey"
@@ -355,9 +369,93 @@ texture = ExtResource("50_aqfcl")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ikmad"]
+resource_name = "ash/ford"
+texture = ExtResource("51_wve4q")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fu31y"]
+resource_name = "dirt/ford"
+texture = ExtResource("52_24omw")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_31ls7"]
+resource_name = "ford_water/clear"
+texture = ExtResource("53_acfjv")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aqfcl"]
+resource_name = "grass/ford"
+texture = ExtResource("54_fx5pb")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0082m"]
+resource_name = "rock/ford"
+texture = ExtResource("55_xnbp8")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v6ico"]
+resource_name = "ash_ford/charred"
+texture = ExtResource("56_31ls7")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kwx2t"]
 resource_name = "dirt/brown"
 texture = ExtResource("37_m3fug")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xlqx6"]
+resource_name = "dirt_ford/dry"
+texture = ExtResource("58_aqfcl")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_letfe"]
+resource_name = "dirt_ford/wet"
+texture = ExtResource("59_52jmy")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xgtvn"]
+resource_name = "grass_ford/autumn"
+texture = ExtResource("60_seu6d")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b3hik"]
+resource_name = "grass_ford/dry"
+texture = ExtResource("61_7g6o2")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e6pxb"]
+resource_name = "path_ford/packed"
+texture = ExtResource("62_2rbut")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xifr2"]
+resource_name = "rock_ford/bank"
+texture = ExtResource("63_vlr00")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_of5to"]
+resource_name = "planks_ford/dark"
+texture = ExtResource("64_52jmy")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xbi54"]
+resource_name = "planks_ford/oak"
+texture = ExtResource("65_seu6d")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
@@ -435,3 +533,17 @@ sources/50 = SubResource("TileSetAtlasSource_kfubj")
 sources/51 = SubResource("TileSetAtlasSource_2r8ai")
 sources/52 = SubResource("TileSetAtlasSource_rrpte")
 sources/53 = SubResource("TileSetAtlasSource_nkl3w")
+sources/54 = SubResource("TileSetAtlasSource_ikmad")
+sources/55 = SubResource("TileSetAtlasSource_fu31y")
+sources/56 = SubResource("TileSetAtlasSource_31ls7")
+sources/57 = SubResource("TileSetAtlasSource_aqfcl")
+sources/58 = SubResource("TileSetAtlasSource_0082m")
+sources/59 = SubResource("TileSetAtlasSource_v6ico")
+sources/60 = SubResource("TileSetAtlasSource_xlqx6")
+sources/61 = SubResource("TileSetAtlasSource_letfe")
+sources/62 = SubResource("TileSetAtlasSource_xgtvn")
+sources/63 = SubResource("TileSetAtlasSource_b3hik")
+sources/64 = SubResource("TileSetAtlasSource_e6pxb")
+sources/65 = SubResource("TileSetAtlasSource_xifr2")
+sources/66 = SubResource("TileSetAtlasSource_of5to")
+sources/67 = SubResource("TileSetAtlasSource_xbi54")

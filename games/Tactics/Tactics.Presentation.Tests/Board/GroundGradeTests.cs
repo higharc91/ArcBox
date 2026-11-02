@@ -96,4 +96,14 @@ public sealed class GroundGradeTests
         Assert.Contains(decals, p => p.Contains("scorch", StringComparison.Ordinal));
         Assert.DoesNotContain(decals, p => p.Contains("blood", StringComparison.Ordinal) || p.Contains("bones", StringComparison.Ordinal));
     }
+
+    [Theory]
+    [InlineData("ash_ford/charred")]
+    [InlineData("grass_ford/autumn")]
+    [InlineData("dirt_ford/wet")]
+    [InlineData("rock_ford/bank")]
+    [InlineData("ford_water/clear")]
+    [InlineData("path_ford/packed")]
+    public void The_fords_painted_ground_keeps_its_surface_clean(string material)
+        => Assert.Empty(Decals(material));
 }

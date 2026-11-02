@@ -122,6 +122,48 @@ public sealed class GroundBlendTests
     }
 
     [Fact]
+    public void A_high_resolution_top_uses_the_same_ground_edge_at_double_resolution()
+    {
+        const int size = GroundBlend.Size * 2;
+        var top = new byte[size * size * 4];
+        new Random(1).NextBytes(top);
+        for (var i = 3; i < top.Length; i += 4)
+            top[i] = 255;
+        var way = MaskOf(1, 0);
+        var mask = GroundBlend.Mask(way, size, 8);
+
+        var masked = GroundBlend.Masked(top, way, 8);
+        var hasSoftEdge = false;
+
+        for (var y = 0; y < size; y += 2)
+            for (var x = 0; x < size; x += 2)
+            {
+                var originalIndex = (y * size + x) * 4;
+                var maskIndex = y * size + x;
+                if (mask[maskIndex] is > 0 and < 255)
+                {
+                    hasSoftEdge = true;
+                    Assert.Equal(mask[maskIndex], masked[originalIndex + 3]);
+                }
+                else if (mask[maskIndex] == 255)
+                    Assert.True(top.AsSpan(originalIndex, 4).SequenceEqual(masked.AsSpan(originalIndex, 4)));
+                else
+                    Assert.Equal(0, masked[originalIndex + 3]);
+            }
+        Assert.True(hasSoftEdge);
+    }
+
+    [Fact]
+    public void Ford_tops_fade_over_a_broad_soft_band()
+    {
+        const int size = GroundBlend.Size * 2;
+        var mask = GroundBlend.Mask(MaskOf(1, 0), size, 8);
+        var partial = Enumerable.Range(0, size).Count(x => mask[128 * size + x] is > 0 and < 255);
+
+        Assert.InRange(partial, 300, 460);
+    }
+
+    [Fact]
     public void Only_the_looser_ground_runs_into_the_other()
     {
         var map = Map("test", ["ash/grey", "dirt/dark"], null, "01");

@@ -43,7 +43,7 @@ public static class AshenFordDraft
 
     /// <summary>The hills' and the scarp's bare stone is the pack's rough cave floor, as the top meant for rock is laid in slabs the size of a house. The stamp's own rock stays as its map has it.</summary>
     private const string Rock = "cave_floor/cool", DarkRock = "cave_floor/cool", StampRock = "rock/grey", Scree = "mine_gravel/brown";
-    private const string Street = "cobble/warm", Plaza = "cobble/grey", Quay = "flagstone/grey", Deck = "planks/oak", Hull = "planks/dark";
+    private const string Street = "cobble/warm", Plaza = "cobble/grey", Quay = "flagstone/grey", Deck = "planks/oak";
 
     /// <summary>What the road is made of: the packed path and the town's cobbled streets. Things stand on a square, but not on a road.</summary>
     public static readonly ImmutableHashSet<string> RoadMaterials = ["cobble/warm", "path/packed"];
@@ -117,7 +117,7 @@ public static class AshenFordDraft
         ("Long Acre", 34, 23, 13, 10, Ploughed),
         ("Hearthfield", 18, 33, 14, 9, Stubble),
         ("Gate Close", 34, 34, 13, 8, Ploughed),
-        ("Southfield", 16, 82, 13, 12, Stubble),
+        ("Southfield", 16, 82, 13, 8, Stubble),
         ("Wardens' Strip", 33, 82, 8, 12, Ploughed),
         ("Low Field", 42, 83, 9, 12, Stubble),
         ("Ten Rods", 34, 97, 14, 12, Ploughed),
@@ -214,7 +214,6 @@ public static class AshenFordDraft
         new("sack", "burlap", (39, 72), (42, 71), (43, 71), (44, 70), (39, 70)),                    // the granary yard
         new("crate", "oak", (41, 71)),
         new("cart", "hay", (45, 70)),
-        new("fence", "oak", (38, 69), (39, 69), (40, 69), (43, 69), (44, 69), (45, 69), (46, 69)),
         new("tree", "autumn", (46, 57), (16, 57), (19, 70), (36, 51), (20, 51), (16, 50)),
     ];
 
@@ -240,18 +239,95 @@ public static class AshenFordDraft
 
     private static readonly Stand[] InTheFields =
     [
-        new("fence", "oak", [.. Run((34, 33), (39, 33)), .. Run((42, 33), (46, 33))]),              // between Long Acre and Gate Close
-        new("fence", "oak", [.. Run((18, 43), (23, 43)), .. Run((26, 43), (31, 43))]),              // under Hearthfield
-        new("fence", "oak", [.. Run((16, 81), (21, 81)), .. Run((24, 81), (28, 81))]),              // along Southfield
-        new("fence", "oak", [.. Run((42, 82), (46, 82)), .. Run((48, 82), (50, 82))]),              // along Low Field
-        new("fence", "oak", (28, 88), (29, 88), (30, 88)),                                          // the reeve's yard
-        new("haystack", "hay", (37, 11), (41, 14), (44, 10), (38, 17), (21, 36), (26, 38), (29, 35), (19, 85), (24, 88), (20, 91), (26, 84), (45, 87), (48, 91)),
-        new("training_dummy", "straw", (40, 28), (37, 87)),                                         // scarecrows
+        .. FarmFenceStands(),
+        new("haystack", "hay", (37, 11), (41, 14), (44, 10), (38, 17), (21, 36), (26, 38), (29, 35), (19, 85), (24, 86), (20, 87), (26, 84), (45, 87), (48, 91)),
+        new("training_dummy", "straw", (40, 28), (37, 87), (36, 17)),                               // scarecrows, set among the stubble fields
+        new("crop_wheat_stubble", "gold",
+            (35, 11), (45, 18), (36, 26), (44, 30), (18, 39), (24, 34), (31, 38), (36, 36), (44, 40),
+            (17, 87), (28, 86), (34, 88), (39, 90), (43, 90), (49, 84),
+            (36, 100), (40, 100), (44, 100), (36, 105), (40, 105), (44, 105)),                         // grain left standing in short, open rows
+        new("farm_goat", "rust", (22, 83), (46, 89)),                                                   // two quiet goats in separate enclosed fields
+        new("pack_mule", "grey", (50, 23)),                                                            // grain panniers beside the cart at Long Acre's gate
         new("cart", "hay", (48, 23)),
         new("well", "stone", (30, 89)),
         new("torch", "fire", (28, 87)),
         new("tree", "autumn", (47, 7), (47, 21), (16, 43), (15, 81), (41, 96)),
     ];
+
+    /// <summary>Ordinary wild neighbours of the farms: rooks at the scarecrows, mallards in the river shallows, and a fox at the wood's edge.</summary>
+    private static readonly Stand[] Wildlife =
+    [
+        new("field_crow", "charcoal", (42, 28), (39, 87)),
+        new("river_duck", "mallard", (116, 89), (115, 100)),
+        new("red_fox", "russet", (82, 38)),
+    ];
+
+    /// <summary>One short fence around each field, with gaps left as gates and a shared opening between the two lower farms.</summary>
+    private static Stand[] FarmFenceStands()
+    {
+        var across = new HashSet<(int X, int Y)>();
+        var along = new HashSet<(int X, int Y)>();
+        var corners = new HashSet<(string Variant, (int X, int Y) Tile)>();
+        void Horizontal(int y, int left, int right, int gateLeft = int.MaxValue, int gateRight = int.MinValue)
+        {
+            for (var x = left; x <= right; x++)
+                if (x < gateLeft || x > gateRight)
+                    across.Add((x, y));
+        }
+        void Vertical(int x, int top, int bottom, int gateTop = int.MaxValue, int gateBottom = int.MinValue)
+        {
+            for (var y = top; y <= bottom; y++)
+                if (y < gateTop || y > gateBottom)
+                    along.Add((x, y));
+        }
+        void Plot(int left, int top, int right, int bottom, int gateX, int gateY, int sideGapX = int.MinValue, int sideGapTop = int.MinValue, bool openLeft = false)
+        {
+            Horizontal(top, left, right, gateY == top ? gateX : int.MaxValue, gateY == top ? gateX + 1 : int.MinValue);
+            Horizontal(bottom, left, right, gateY == bottom ? gateX : int.MaxValue, gateY == bottom ? gateX + 1 : int.MinValue);
+            if (!openLeft)
+                Vertical(left, top, bottom, sideGapX == left ? sideGapTop : int.MaxValue, sideGapX == left ? sideGapTop + 1 : int.MinValue);
+            Vertical(right, top, bottom, sideGapX == right ? sideGapTop : int.MaxValue, sideGapX == right ? sideGapTop + 1 : int.MinValue);
+            if (!openLeft)
+                corners.Add(("nw", (left, top)));
+            corners.Add(("ne", (right, top)));
+            if (!openLeft)
+                corners.Add(("sw", (left, bottom)));
+            corners.Add(("se", (right, bottom)));
+        }
+
+        Plot(33, 7, 47, 21, 39, 21);                     // Mayor's Forty, gate south
+        Plot(33, 22, 47, 33, 39, 33);                    // Long Acre, gate into Gate Close
+        Plot(33, 33, 47, 42, 39, 42);                    // Gate Close shares the fence at y=33
+        Plot(17, 32, 32, 42, 23, 42);                    // Hearthfield
+        Plot(15, 81, 29, 88, 21, 81, 29, 85, openLeft: true); // Southfield opens at the reeve's door and follows the cliff edge
+        Plot(32, 81, 41, 92, 36, 81, 41, 87, openLeft: true); // Wardens' Strip ends above the scarp
+        Plot(41, 82, 51, 92, 45, 82, 41, 87);                // Low Field shares the path opening and the set-back south rail
+        Plot(33, 96, 48, 106, 39, 96, openLeft: true);       // Ten Rods ends above the scarp
+
+        // Two adjoining pens meet the same shared rail at these points. Give that rail a three-way join instead of
+        // drawing a second complete fence through it. Every other corner is a two-arm join with one shared post.
+        corners.RemoveWhere(c => c.Tile is (33, 33) or (47, 33) or (41, 82) or (41, 92));
+        corners.Add(("tee_sw", (33, 33)));
+        corners.Add(("tee_sw", (47, 33)));
+        corners.Add(("tee_sw", (41, 82)));
+        corners.Add(("tee_sw", (41, 92)));
+        foreach (var corner in corners)
+        {
+            across.Remove(corner.Tile);
+            along.Remove(corner.Tile);
+        }
+
+        return
+        [
+            new Stand("fence", "oak", [.. across]),
+            new Stand("fence", "oak_reversed", [.. along]),
+            new Stand("fence_join", "nw", corners.Where(c => c.Variant == "nw").Select(c => c.Tile).ToArray()),
+            new Stand("fence_join", "ne", corners.Where(c => c.Variant == "ne").Select(c => c.Tile).ToArray()),
+            new Stand("fence_join", "sw", corners.Where(c => c.Variant == "sw").Select(c => c.Tile).ToArray()),
+            new Stand("fence_join", "se", corners.Where(c => c.Variant == "se").Select(c => c.Tile).ToArray()),
+            new Stand("fence_join", "tee_sw", corners.Where(c => c.Variant == "tee_sw").Select(c => c.Tile).ToArray()),
+        ];
+    }
 
     /// <summary>The road east: a signpost at each fork, a cart or two left on the verge, a wall of the scarp's crags to its west.</summary>
     private static readonly Stand[] OnTheRoad =
@@ -269,10 +345,9 @@ public static class AshenFordDraft
     [
         new("ruin_wall", "dark", (84, 44), (85, 44), (84, 46), (87, 47)),               // what's left of a farmhouse by the road
         new("rubble", "dark", (85, 45), (86, 46), (83, 45), (86, 44), (88, 45), (84, 47)),
-        new("rubble", "grey", (72, 58), (74, 73), (88, 68), (82, 84), (125, 66), (136, 74), (148, 70), (121, 84)),
+        new("rubble", "ashen", (72, 58), (74, 73), (88, 68), (82, 84), (125, 66), (136, 74), (148, 70), (121, 84)),
         new("boulder", "dark", (86, 72), (78, 56), (127, 69), (140, 78)),
-        new("fence", "oak", (82, 42), (84, 42)),                                        // and of its fence
-        new("gravestone", "dark", (74, 76), (75, 76), (77, 77)),                        // whoever the fire caught
+        new("gravestone", "ashen", (74, 76), (75, 76), (77, 77)),                       // whoever the fire caught
     ];
 
     /// <summary>
@@ -286,7 +361,7 @@ public static class AshenFordDraft
         new("pillar_broken", "grey", (119, 56), (123, 56), (118, 61), (122, 61)),       // and on the far bank
         new("ruin_arch", "grey", (96, 68), (94, 58)),
         new("ruin_wall", "grey", (100, 49), (101, 50)),                                 // the bridge's west abutment
-        new("rubble", "grey", (95, 67), (97, 66), (89, 53), (96, 51), (102, 50), (101, 46), (100, 47), (91, 60), (98, 64)),
+        new("rubble", "ashen", (95, 67), (97, 66), (89, 53), (96, 51), (102, 50), (101, 46), (100, 47), (91, 60), (98, 64)),
         new("campfire", "fire", (119, 53), (119, 62), (123, 55), (116, 66)),            // goblin fires on the far bank
         new("banner", "goblin", (118, 50), (121, 64), (124, 52), (120, 68)),
         new("banner", "goblin", (103, 47), (99, 59), (98, 64), (118, 55), (118, 62)),   // and their claim on the old bridge, and on both ends of the crossing
@@ -325,7 +400,8 @@ public static class AshenFordDraft
     /// <summary>The River Docks. By day it's fish, and by night the Ash Market lights its lanterns: they're all that lights the place.</summary>
     private static readonly Stand[] OnTheDocks =
     [
-        new("lantern", "stone", (98, 91), (98, 96), (98, 102), (98, 107), (107, 93), (107, 99), (107, 105)),
+        new("fishing_skiff", "oak", (105, 95), (105, 101), (105, 107)),
+        new("lantern_iron", "iron", (98, 91), (98, 96), (98, 102), (98, 107), (107, 93), (107, 99), (107, 105)),
         new("barrel", "oak", (100, 93), (101, 93), (100, 105)),
         new("crate", "oak", (102, 99), (103, 99), (101, 105)),
         new("sack", "burlap", (104, 93), (105, 105), (94, 91), (95, 100)),
@@ -338,7 +414,7 @@ public static class AshenFordDraft
     /// </summary>
     private static readonly Stand[] AtTheCamp =
     [
-        new("tent", "canvas", (130, 22), (132, 20), (135, 20), (136, 23)),
+        new("tent", "hide", (130, 22), (132, 20), (135, 20), (136, 23)),
         new("campfire", "fire", (133, 22)),
         new("mantlet", "hide", (130, 24)),                                                  // the drying rack, with nothing much on it
         new("log", "oak", (131, 24)),
@@ -371,7 +447,7 @@ public static class AshenFordDraft
         new("dead_tree", "dark", (125, 85), (127, 92), (136, 86), (138, 93), (129, 97), (134, 98)),
         new("skull_pike", "bone", (128, 90), (133, 88), (134, 91), (129, 87)),
         new("shrine", "stone", (127, 88)),
-        new("grave_cross", "dark", (136, 90), (137, 89)),
+        new("grave_cross", "ashen", (136, 90), (137, 89)),
         new("torch", "fire", (132, 90)),
     ];
 
@@ -417,7 +493,7 @@ public static class AshenFordDraft
     ];
 
     /// <summary>All of it, place by place.</summary>
-    private static readonly Stand[] Everything = [.. InEmberwick, .. InTheFields, .. OnTheRoad, .. OnTheBurnedGround, .. AtTheFord, .. OnTheDocks, .. AtTheCamp, .. InTheHills, .. RoundMauds];
+    private static readonly Stand[] Everything = [.. InEmberwick, .. InTheFields, .. Wildlife, .. OnTheRoad, .. OnTheBurnedGround, .. AtTheFord, .. OnTheDocks, .. AtTheCamp, .. InTheHills, .. RoundMauds];
 
     /// <summary>Someone standing on a tile, looking one way, and walking a loop if they've somewhere to pace.</summary>
     private static RegionPerson Stood(string preset, int x, int y, string face, params (int X, int Y)[] walk)
@@ -540,11 +616,29 @@ public static class AshenFordDraft
         var placed = new Dictionary<Tile, (string Id, string? Variant)>();
         foreach (var stand in Everything)
             foreach (var (x, y) in stand.At)
-                placed.TryAdd(new Tile(x, y), (stand.Id, stand.Variant));
+            {
+                var tile = new Tile(x, y);
+                // Farm boundaries follow the land; never stand a fence on an impassable cliff face or its broken steps.
+                if ((stand.Id is "fence" or "fence_join") && FenceOnCliff(source, tile))
+                    continue;
+                placed.TryAdd(tile, (stand.Id, stand.Variant));
+            }
         PlantWoods(source, placed);
         GrowReeds(source, placed);
         foreach (var group in placed.GroupBy(p => p.Value))
             source.Props.Add(new RegionProps(group.Key.Id, group.Key.Variant, [.. group.Select(p => p.Key).Order()]));
+    }
+
+    private static bool FenceOnCliff(RegionSource source, Tile tile)
+    {
+        if (source.Get(tile) is not { } ground || ground.Flags.HasFlag(TileFlags.Impassable) || ground.Material.StartsWith("cave_floor/", StringComparison.Ordinal))
+            return true;
+
+        foreach (var (x, y) in new[] { (tile.X + 1, tile.Y), (tile.X - 1, tile.Y), (tile.X, tile.Y + 1), (tile.X, tile.Y - 1) })
+            if (source.Get(new Tile(x, y)) is { } neighbour && Math.Abs(neighbour.Height - ground.Height) > 1)
+                return true;
+
+        return false;
     }
 
     /// <summary>Fills <see cref="Reedbeds"/>: a reed on every other bank tile with water beside it.</summary>
@@ -556,7 +650,7 @@ public static class AshenFordDraft
                 for (var x = 90; x < 125; x++)
                 {
                     var tile = new Tile(x, y);
-                    if ((x + y) % 2 == 0 && source.Get(tile) is { Flags: TileFlags.None } ground && ground.Material is not (Deck or Quay or Hull) && !RoadMaterials.Contains(ground.Material)
+                    if ((x + y) % 2 == 0 && source.Get(tile) is { Flags: TileFlags.None } ground && ground.Material is not (Deck or Quay) && !RoadMaterials.Contains(ground.Material)
                         && beside.Any(b => source.Get(new Tile(x + b.X, y + b.Y)) is { } next && next.Flags.HasFlag(TileFlags.Water)))
                         placed.TryAdd(tile, ("reeds", "swamp"));
                 }
@@ -961,14 +1055,16 @@ public static class AshenFordDraft
 
             foreach (var pier in (ReadOnlySpan<int>)[92, 98, 104])
             {
-                foreach (var (x, y) in Rectangle(99, pier, 9, 2))
+                // The quay ends at x=100; start the timber on the first water tile so it
+                // meets the stone edge cleanly instead of laying two tiles over the plaza.
+                foreach (var (x, y) in Rectangle(101, pier, 7, 2))
                 {
                     Paint(x, y, WaterLevel + 1, Deck);
                     _fixed[x, y] = true;
                 }
                 foreach (var (x, y) in Rectangle(103, pier + 2, 4, 2))
                 {
-                    Paint(x, y, WaterLevel, Hull, TileFlags.Impassable);
+                    Paint(x, y, WaterLevel, Water, DeepWater);
                     _fixed[x, y] = true;
                 }
             }

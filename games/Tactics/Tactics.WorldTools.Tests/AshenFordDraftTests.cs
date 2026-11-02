@@ -737,7 +737,7 @@ public sealed class AshenFordDraftTests
         foreach (var (at, id, _) in Props(source))
         {
             var tile = source.Get(at);
-            Assert.True(tile is not null && (tile.Flags & (TileFlags.Water | TileFlags.Impassable)) == 0 || id is "crag" or "rock_cluster", $"The {id} at {at} stands on {tile}.");
+            Assert.True(tile is not null && (tile.Flags & (TileFlags.Water | TileFlags.Impassable)) == 0 || id is "crag" or "rock_cluster" or "fishing_skiff", $"The {id} at {at} stands on {tile}.");
             Assert.False(built.Contains(at), $"The {id} at {at} is inside a building.");
         }
     }
@@ -770,7 +770,31 @@ public sealed class AshenFordDraftTests
         var docks = draft.Spot("ch1_the_ember");
         Assert.True(source.Buildings.Count(b => b.Id == "stall" && Distance(b.At, docks) <= 12) >= 3);
         Assert.True(source.Buildings.Count(b => b.Id is "cottage" or "house" or "store" && Distance(b.At, docks) <= 14) >= 3);
-        Assert.True(Props(source).Count(p => p.Id == "lantern" && Distance(p.At, docks) <= 12) >= 5);
+        Assert.True(Props(source).Count(p => p.Id == "lantern_iron" && Distance(p.At, docks) <= 12) >= 5);
+    }
+
+    [Fact]
+    public void The_docks_moor_skiffs_in_open_water_beside_their_piers()
+    {
+        var draft = Draft.Value;
+        var source = AshenFordDraft.Build(draft.Pack);
+        AshenFordDraft.Dress(source, draft.Pack);
+        var boats = source.Props.Single(p => p.Id == "fishing_skiff");
+
+        Assert.Equal(3, boats.At.Length);
+        foreach (var pier in new[] { 92, 98, 104 })
+        {
+            Assert.Equal("flagstone/grey", source.Get(new Tile(100, pier))!.Material);
+            Assert.Equal("planks/oak", source.Get(new Tile(101, pier))!.Material);
+        }
+        Assert.All(boats.At, tile =>
+        {
+            var water = source.Get(tile)!;
+            Assert.Equal("water/clear", water.Material);
+            Assert.True(water.Flags.HasFlag(TileFlags.Water));
+            Assert.True(water.Flags.HasFlag(TileFlags.Deep));
+            Assert.False(water.Flags.HasFlag(TileFlags.Impassable));
+        });
     }
 
     [Fact]

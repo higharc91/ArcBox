@@ -18,19 +18,28 @@ public static class GroundGrade
     private static readonly ImmutableDictionary<string, Rgb> Ford = new Dictionary<string, Rgb>(StringComparer.Ordinal)
     {
         ["ash/grey"] = new(0.98f, 1.12f, 1.08f),
+        ["ash_ford/charred"] = new(1f, 1.08f, 1.04f),
         ["dirt/dark"] = new(0.8f, 1.0f, 1.04f),
-        ["dirt/brown"] = new(0.76f, 0.9f, 0.95f),
+        ["dirt_ford/wet"] = new(0.9f, 0.96f, 0.94f),
+        ["dirt_ford/dry"] = new(1.0f, 0.98f, 0.94f),
         ["path/packed"] = new(1.0f, 1.12f, 1.12f),
+        ["path_ford/packed"] = new(0.96f, 1.0f, 1.0f),
+        ["planks_ford/oak"] = new(0.9f, 0.85f, 0.76f),
+        ["planks_ford/dark"] = new(0.82f, 0.78f, 0.72f),
         ["cave_floor/cool"] = new(0.74f, 0.92f, 0.72f),
         ["mine_gravel/brown"] = new(0.82f, 0.98f, 0.9f),
         ["grass/autumn"] = new(0.72f, 0.88f, 1f),
+        ["grass_ford/autumn"] = new(0.88f, 0.92f, 0.8f),
+        ["grass_ford/dry"] = new(1.0f, 0.98f, 0.92f),
         ["grass/dry"] = new(0.88f, 0.78f, 0.74f),
         ["grass/frost"] = new(0.54f, 0.66f, 0.52f),
         ["forest_needles/pine"] = new(0.74f, 0.66f, 0.68f),
         ["grass/lush"] = new(1.2f, 0.56f, 0.66f),
         ["rock/grey"] = new(0.74f, 0.82f, 0.8f),
+        ["rock_ford/bank"] = new(0.86f, 0.88f, 0.84f),
         ["rock/dark"] = new(0.74f, 0.82f, 0.8f),
         ["water/clear"] = new(0.72f, 0.82f, 0.84f),
+        ["ford_water/clear"] = new(0.9f, 0.94f, 0.96f),
     }.ToImmutableDictionary(StringComparer.Ordinal);
 
     private static readonly ImmutableDictionary<string, ImmutableDictionary<string, Rgb>> Regions = new Dictionary<string, ImmutableDictionary<string, Rgb>>(StringComparer.Ordinal)

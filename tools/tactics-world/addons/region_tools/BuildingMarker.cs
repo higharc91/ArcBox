@@ -1,4 +1,6 @@
 using Godot;
+using Tactics.Logic;
+using Tactics.WorldTools;
 
 namespace Tactics.World.Editor;
 
@@ -11,6 +13,7 @@ public partial class BuildingMarker : TileMarker
 
     private string _building = "";
     private string _variant = "";
+    private static readonly Lazy<ArtManifest> Art = new(() => ArtManifests.Load(RegionPaths.Content));
 
     /// <inheritdoc />
     public override string Group => RegionScene.Buildings;
@@ -47,7 +50,20 @@ public partial class BuildingMarker : TileMarker
     {
         if (!Engine.IsEditorHint())
             return;
-        DrawTile(Ink);
-        DrawString(ThemeDB.FallbackFont, new Vector2(4, -4), Building.Length > 0 ? Building : "(no Building id)", modulate: Ink);
+        var origin = PlaceOn(Tile) - Position;
+        if (Building.Length > 0 && Art.Value.Buildings.TryGetValue(Building, out var art))
+        {
+            var size = new Vector2(art.Width, art.Depth) * PaintedRegion.TilePixels;
+            DrawRect(new Rect2(origin, size), Ink, filled: false, width: 2);
+            for (var x = 1; x < art.Width; x++)
+                DrawLine(origin + new Vector2(x * PaintedRegion.TilePixels, 0), origin + new Vector2(x * PaintedRegion.TilePixels, size.Y), Ink with { A = 0.45f });
+            for (var y = 1; y < art.Depth; y++)
+                DrawLine(origin + new Vector2(0, y * PaintedRegion.TilePixels), origin + new Vector2(size.X, y * PaintedRegion.TilePixels), Ink with { A = 0.45f });
+        }
+        else
+        {
+            DrawTile(Ink);
+        }
+        DrawString(ThemeDB.FallbackFont, origin + new Vector2(4, -4), Building.Length > 0 ? Building : "(no Building id)", modulate: Ink);
     }
 }

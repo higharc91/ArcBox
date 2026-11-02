@@ -1,6 +1,6 @@
-[gd_resource type="TileSet" format=3]
+[gd_resource type="TileSet" format=3 uid="uid://lkcax7br6o1o"]
 
-[ext_resource type="Texture2D" path="res://palette/props.png" id="1_5cyie"]
+[ext_resource type="Texture2D" uid="uid://t0740laekl5g" path="res://palette/props.png" id="1_5cyie"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_32jsr"]
 resource_name = "props"

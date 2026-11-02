@@ -185,6 +185,29 @@ public static class PaletteBuilder
         return list;
     }
 
+    /// <summary>Maps each cell in an existing prop atlas to the cell for the same prop in a rebuilt atlas.</summary>
+    public static IReadOnlyDictionary<(int X, int Y), (int X, int Y)> PropAtlasRemap(
+        IReadOnlyList<PropSwatch> oldSwatches, IReadOnlyList<PropSwatch> newSwatches)
+    {
+        var newCells = new Dictionary<(string Id, string? Variant), (int X, int Y)>();
+        for (var i = 0; i < newSwatches.Count; i++)
+        {
+            var swatch = newSwatches[i];
+            if (!newCells.TryAdd((swatch.Id, swatch.Variant), (i % PropAtlasColumns, i / PropAtlasColumns)))
+                throw new ArgumentException($"The new prop atlas contains '{swatch.Id}/{swatch.Variant}' more than once.", nameof(newSwatches));
+        }
+
+        var remap = new Dictionary<(int X, int Y), (int X, int Y)>();
+        for (var i = 0; i < oldSwatches.Count; i++)
+        {
+            var swatch = oldSwatches[i];
+            if (!newCells.TryGetValue((swatch.Id, swatch.Variant), out var target))
+                throw new ArgumentException($"The rebuilt prop atlas has no '{swatch.Id}/{swatch.Variant}' swatch.", nameof(newSwatches));
+            remap.Add((i % PropAtlasColumns, i / PropAtlasColumns), target);
+        }
+        return remap;
+    }
+
     /// <summary>Every prop swatch from <paramref name="contentBase"/>'s <c>props/manifest.json</c>.</summary>
     public static IReadOnlyList<PropSwatch> AllPropSwatches(string contentBase)
         => PropSwatches(Path.Combine(contentBase, "props", "manifest.json"));

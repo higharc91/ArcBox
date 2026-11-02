@@ -22,6 +22,39 @@ public sealed class WorldPlanTests
     public static TheoryData<string> Regions => ["ashen_ford", "hills"];
 
     [Fact]
+    public void Ashen_ford_bridge_deck_is_walkable_from_bank_to_bank()
+    {
+        var ground = FordGround.Value;
+        var deck = Enumerable.Range(105, 4).Select(x => new Tile(x, 48)).ToArray();
+
+        Assert.All(deck, tile => Assert.True(ground.Terrain.Walkable(tile), $"Bridge deck tile {tile} is blocked."));
+        Assert.Contains(new Tile(109, 48), WorldWalk.Reach(ground.Terrain, new Tile(104, 48), ClassDef.DefaultJump));
+    }
+
+    [Fact]
+    public void Ashen_ford_repaints_legacy_hills_and_calmly_blends_the_ground()
+    {
+        var map = FordGround.Value.Map;
+        Tile Find(string name) => Enumerable.Range(0, map.Height)
+            .SelectMany(y => Enumerable.Range(0, map.Width).Select(x => new Tile(x, y)))
+            .First(tile => !map.StampedTiles.Contains(tile) && map.Materials[map[tile].Material] == name);
+        var terrain = FordPlan.Value.Terrain;
+        var oldGrass = Find("grass/frost");
+        var oldRock = Find("cave_floor/cool");
+        var oldWater = Find("water/clear");
+        var oldPlanks = Find("planks/oak");
+
+        Assert.Equal("grass_ford", terrain.Look(oldGrass).Top.Family);
+        Assert.Equal("rock_ford", terrain.Look(oldRock).Top.Family);
+        Assert.Equal("ford_water", terrain.Look(oldWater).Top.Family);
+        Assert.Equal("planks_ford", terrain.Look(oldPlanks).Top.Family);
+        Assert.DoesNotContain(FordPlan.Value.Blocks.SelectMany(block => block.Plan.Items).OfType<Face>(),
+            face => face.Tile == oldGrass && face.Kind == FaceKind.Decal);
+        Assert.DoesNotContain(FordPlan.Value.Blocks.SelectMany(block => block.Plan.Items).OfType<Face>(),
+            face => face.Tile == oldRock && face.Kind == FaceKind.Decal);
+    }
+
+    [Fact]
     public void Wood_region_has_at_least_1500_tall_props_in_view_and_walkable_trail()
     {
         var ground = DemoRegion.Wood(160, 120);

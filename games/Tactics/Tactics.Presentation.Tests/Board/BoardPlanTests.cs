@@ -62,6 +62,27 @@ public sealed class BoardPlanTests
     }
 
     [Fact]
+    public void A_ford_cliff_face_uses_its_full_eight_tile_span()
+    {
+        var plan = Plan(Map(["rock_ford/bank"], [], "1:0:0 0:0:0"));
+        var side = Assert.Single(SidesOf(plan, new Tile(0, 0)), face => face.Facing == Facing.U);
+
+        Assert.Equal("cliff_ford_grey.png", Path.GetFileName(side.Image!.Path));
+        Assert.Equal(1f / 8, side.Uvs[1].X);
+    }
+
+    [Fact]
+    public void Ashen_ford_repaints_legacy_surfaces_but_preserves_stamped_tiles()
+    {
+        var map = BattleMap.FromBytes("ashen_ford", 2, 1, [0, 0, 0, 0, 0, 0], ["grass/frost"], [], NoZones,
+            ImmutableHashSet.Create(new Tile(1, 0)));
+        var terrain = new BoardTerrain(map, null);
+
+        Assert.Equal("grass_ford", terrain.Look(new Tile(0, 0)).Top.Family);
+        Assert.Equal("grass", terrain.Look(new Tile(1, 0)).Top.Family);
+    }
+
+    [Fact]
     public void A_top_stands_at_its_height()
     {
         var plan = Plan(Map(["rock/grey"], [], "3:0:0"));

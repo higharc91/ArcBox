@@ -226,6 +226,33 @@ public sealed class PaletteTests
     }
 
     [Fact]
+    public void A_prop_atlas_rebuild_maps_old_cells_to_their_new_coordinates()
+    {
+        var old = new[] { Swatch("tree", "green"), Swatch("crate", "oak") };
+        var updated = new[] { Swatch("crate", "oak"), Swatch("tree", "green"), Swatch("lantern_iron", "iron") };
+
+        var remap = PaletteBuilder.PropAtlasRemap(old, updated);
+
+        Assert.Equal((1, 0), remap[(0, 0)]);
+        Assert.Equal((0, 0), remap[(1, 0)]);
+    }
+
+    [Fact]
+    public void A_prop_variant_can_be_mapped_to_a_new_variant_without_moving_its_cell()
+    {
+        var old = new[] { Swatch("tent", "canvas") };
+        var updated = new[] { Swatch("tent", "hide") };
+        var renamed = old.Select(s => s with { Variant = "hide" }).ToArray();
+
+        var remap = PaletteBuilder.PropAtlasRemap(renamed, updated);
+
+        Assert.Equal((0, 0), remap[(0, 0)]);
+    }
+
+    private static PropSwatch Swatch(string id, string variant)
+        => new(id, variant, false, Cover.None, 1, $"props/{id}_{variant}.png", $"{id}_{variant}.png");
+
+    [Fact]
     public void A_blocking_prop_swatch_is_marked()
     {
         var tile = new byte[PaletteBuilder.TileSize * PaletteBuilder.TileSize * 4];

@@ -211,7 +211,7 @@ public sealed class RegionExportTests : IDisposable
 
         Assert.Null(result.Written);
         Assert.Equal(
-            ["The stamp 'river_crossing' doesn't match its map at (4, 4): the region has material 'ash/grey', the map has 'grass/lush'. Select its marker and press Apply stamp to put the map back."],
+            ["The stamp 'river_crossing' doesn't match its map at (4, 4): the region has material 'ash/grey', the map has 'grass_ford/autumn'. Select its marker and press Apply stamp to put the map back."],
             result.Problems);
         Assert.False(File.Exists(RegionFile()));
     }

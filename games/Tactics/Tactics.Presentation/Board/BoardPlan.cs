@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using System.Numerics;
 using Tactics.Game;
 using Tactics.Logic;
+using Tactics.Presentation.World;
 
 namespace Tactics.Presentation.Board;
 
@@ -169,7 +170,7 @@ public sealed record Sprite(long Order, Tile Tile, ArtImage Image, Vector2 TopLe
 /// <param name="Animated">Some art is animated, so the board needs redrawing as time passes.</param>
 public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vector2 Max, bool Animated)
 {
-    private const int TilesPerTexture = 4;    // a texture covers 4 x 4 tiles (the manifests' "span")
+    private const int TilesPerTexture = 4;    // standard terrain textures cover 4 x 4 tiles
     private const float TileTexels = 32;      // a side texture's repeat
     private const float LipDepth = 12;        // the lips' height, in pixels (at most; each lip is transparent below its edge)
     private const float ShadeU = 0.62f;       // the +U faces are in shadow, the +V ones half so: it's what shows the steps
@@ -212,7 +213,7 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
         var items = new List<BoardItem>();
         foreach (var tile in terrain.TilesIn(rect))
             AddTile(items, terrain, art, tile, world, origin);
-        AddProps(items, terrain, art, rect);
+        AddProps(items, terrain, art, rect, world);
         BuildingPlan.Add(items, terrain, art, rect);
         AddZones(items, terrain, art, rect);
 
@@ -331,20 +332,23 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
     /// </summary>
     public static ArtImage? DecalFor(Tile tile, string material, ArtIndex art)
     {
+        var family = material.Split('/')[0];
+        if (family is "ash_ford" or "grass_ford" or "dirt_ford" or "rock_ford" or "ford_water" or "path_ford")
+            return null;
+
         var h = DecalHash(tile.X, tile.Y, material);
         if (h % 6 != 0)
             return null;
 
-        var family = material.Split('/')[0];
         ImmutableArray<ArtRef> pool = family switch
         {
             "grass" when material is "grass/green" or "grass/lush" => [.. Flowers, .. Leaves, .. Pebbles],
-            "grass" or "forest_floor" or "forest_needles" => [.. FallenLeaves, .. Pebbles],
-            "dirt" or "path" or "sand" => [.. Pebbles, .. FallenLeaves],
+            "grass_ford" or "grass" or "forest_floor" or "forest_needles" => [.. FallenLeaves, .. Pebbles],
+            "dirt_ford" or "dirt" or "path" or "sand" => [.. Pebbles, .. FallenLeaves],
             "swamp" => [PuddleSwamp, CracksDark, .. Leaves],
             "mud" => [PuddleSwamp, .. Pebbles],
-            "rock" or "basalt" => [.. Pebbles],
-            "ash" or "scorch" => [ScorchBurnt, CracksDark, .. Pebbles, .. Pebbles],
+            "rock_ford" or "rock" or "basalt" => [.. Pebbles],
+            "ash_ford" or "ash" or "scorch" => [ScorchBurnt, CracksDark, .. Pebbles, .. Pebbles],
             "bone" or "crypt_tile" or "crypt_tiles" or "ruin" or "dungeon_floor" or "dungeon_floor_mossy" or "dungeon_floor_cracked" or "dungeon_wall"
                 => [ScorchBurnt, CracksDark, BonesBone, BloodRed, .. Pebbles],
             _ => [],
@@ -359,6 +363,7 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
     private static void AddTile(List<BoardItem> items, BoardTerrain terrain, ArtIndex art, Tile tile, bool world = false, Tile origin = default)
     {
         var look = terrain.Look(tile);
+        var isStamped = terrain.Map.StampedTiles.Contains(tile);
         var height = terrain.Top(tile);
         if (terrain.Spans(tile))
         {
@@ -376,7 +381,6 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
         {
             Grid = !look.Void && !terrain.Map[tile].Flags.HasFlag(TileFlags.Impassable),
         };
-        var isStamped = terrain.Map.StampedTiles.Contains(tile);
         var inRegion = new Tile(tile.X + origin.X, tile.Y + origin.Y);
         var graded = world ? top.Tint.Times(GradeOf(terrain, tile)) : top.Tint;
         if (world && !isStamped)
@@ -404,7 +408,7 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
 
         if (world && !isStamped && !look.Void && !look.Water && !terrain.Changes.Sunk.Contains(tile))
         {
-            var material = terrain.Map.Materials[terrain.Map[tile].Material];
+            var material = MaterialLook.ArtMaterial(terrain.Map.Id, terrain.Map.Materials[terrain.Map[tile].Material]);
             if (DecalFor(inRegion, material, art) is { } decalImage)
             {
                 var (x, y) = (tile.X, tile.Y);
@@ -421,9 +425,10 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
     {
         foreach (var edge in GroundBlend.Of(terrain, tile))
         {
-            if (art.Texture(MaterialLook.Of(edge.Material).Top) is not { } image)
+            var material = edge.Stamped ? edge.Material : MaterialLook.ArtMaterial(terrain.Map.Id, edge.Material);
+            if (art.Texture(MaterialLook.Of(material).Top) is not { } image)
                 continue;
-            var graded = top.Tint.Times(GroundGrade.Of(terrain.Map.Id, edge.Material));
+            var graded = top.Tint.Times(GroundGrade.Of(terrain.Map.Id, material));
             var (x, y) = (inRegion.X, inRegion.Y);
             ImmutableArray<Rgb> tints = edge.Stamped
                 ? [graded, graded, graded, graded]
@@ -435,7 +440,12 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
     private static Rgb GradeOf(BoardTerrain terrain, Tile tile)
     {
         var material = terrain.Map[tile].Material;
-        return material < terrain.Map.Materials.Length ? GroundGrade.Of(terrain.Map.Id, terrain.Map.Materials[material]) : new Rgb(1, 1, 1);
+        if (material >= terrain.Map.Materials.Length)
+            return new Rgb(1, 1, 1);
+        var name = terrain.Map.Materials[material];
+        if (!terrain.Map.StampedTiles.Contains(tile))
+            name = MaterialLook.ArtMaterial(terrain.Map.Id, name);
+        return GroundGrade.Of(terrain.Map.Id, name);
     }
 
     private static void AddSide(List<BoardItem> items, BoardTerrain terrain, ArtIndex art, Tile tile, Facing facing, bool world)
@@ -456,8 +466,9 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
         var chasm = inside && (terrain.Look(next).Void || terrain.Spans(next));
         var image = art.Texture(chasm && !deck ? look.Chasm : look.Side);
         var depth = (top - bottom) * BoardProjection.HeightStep;
-        var along = (facing == Facing.U ? tile.Y : tile.X) % TilesPerTexture / (float)TilesPerTexture;
-        var (u0, u1) = (along, along + 1f / TilesPerTexture);
+        var tilesPerTexture = image?.Span ?? TilesPerTexture;
+        var along = (facing == Facing.U ? tile.Y : tile.X) % tilesPerTexture / (float)tilesPerTexture;
+        var (u0, u1) = (along, along + 1f / tilesPerTexture);
         var clamps = image is { Height: > (int)TileTexels };     // a tall texture clamps, others repeat
         var drawn = clamps ? Math.Min(depth, image!.Height) : depth;
         var rows = clamps ? drawn / image!.Height : depth / TileTexels;
@@ -496,21 +507,25 @@ public sealed record BoardPlan(ImmutableArray<BoardItem> Items, Vector2 Min, Vec
     /// <summary>A tile-sized diamond at a height, its texture laid in world space.</summary>
     private static Face Flat(FaceKind kind, long order, Tile tile, float height, ArtImage? image, float shade)
     {
+        var span = image?.Span ?? TilesPerTexture;
         var (x, y) = (tile.X, tile.Y);
-        var u = x % TilesPerTexture / (float)TilesPerTexture;
-        var v = y % TilesPerTexture / (float)TilesPerTexture;
-        var step = 1f / TilesPerTexture;
+        var u = x % span / (float)span;
+        var v = y % span / (float)span;
+        var step = 1f / span;
         return new Face(order, tile, kind, Facing.Up,
             [BoardProjection.Corner(x, y, height), BoardProjection.Corner(x + 1, y, height),
                 BoardProjection.Corner(x + 1, y + 1, height), BoardProjection.Corner(x, y + 1, height)],
             [new(u, v), new(u + step, v), new(u + step, v + step), new(u, v + step)], image, image is null ? NoArt : null, shade);
     }
 
-    private static void AddProps(List<BoardItem> items, BoardTerrain terrain, ArtIndex art, TileRect? within = null)
+    private static void AddProps(List<BoardItem> items, BoardTerrain terrain, ArtIndex art, TileRect? within = null, bool world = false)
     {
         var mapVariants = terrain.Map.Materials.Select(m => MaterialLook.Of(m).Variant).ToArray();
         foreach (var prop in terrain.Map.Props.Where(p => terrain.Map.InBounds(p.At) && within?.Contains(p.At) != false))
         {
+            // Living world creatures are drawn by the TV's actor layer. Battle maps keep the same art baked into the board.
+            if (world && WorldAnimalIds.Contains(prop.Id))
+                continue;
             // A prop takes its variant if specified, then the colour of the ground under it, or failing that of anything on the map.
             var prefer = prop.Variant is not null
                 ? mapVariants.Prepend(terrain.Look(prop.At).Variant).Prepend(prop.Variant)

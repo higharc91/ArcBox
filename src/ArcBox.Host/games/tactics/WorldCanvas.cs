@@ -57,6 +57,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
     private sealed record Built(WorldGround Ground, WorldPlan Plan, object[][] Items, string Times);
 
     private const int BelowUi = -1;
+    private const int BlockDepth = 64;
     private const float ViewMargin = 64;                    // art pixels round the view for halos, the widest sway of any flame
     private const double FirstGuessMsPerItem = 0.005;       // until a block's been timed
     private static readonly Color Dark = new(0.043f, 0.051f, 0.078f);
@@ -128,7 +129,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         }
         if (_stage is null)
         {
-            _stage = new BoardCanvas(_painter) { ZIndex = Plan.Blocks.Max(b => b.Z) + 2 };
+            _stage = new BoardCanvas(_painter) { ZIndex = Plan.Blocks.Max(b => b.Z) * BlockDepth + BlockDepth + 1 };
             _world.AddChild(_stage);
         }
         if (!ReferenceEquals(plan, _staged))
@@ -463,13 +464,19 @@ internal sealed partial class WorldCanvas : CanvasLayer
         _queue = new BlockQueue(Plan.Blocks);
         foreach (var block in Plan.Blocks)
         {
-            var node = new WorldBlock(_painter, _items[block.Index], block.Z);
+            var node = new WorldBlock(_painter, _items[block.Index], block.Z * BlockDepth);
             _blocks.Add(node);
             _world.AddChild(node);
         }
 
         _back.Color = Plan.Lighting.Ambient == BoardLighting.Dusk ? DuskSky : Dark;
-        _over = new BoardCanvas(_painter) { ZIndex = Plan.Blocks.Max(b => b.Z) + 1 };
+        var overZ = Plan.Blocks.Max(b => b.Z) * BlockDepth + BlockDepth - 1;
+        var fauna = new WorldFauna(_painter.Root, Ground.Map, new Color(Plan.Lighting.Ambient.R, Plan.Lighting.Ambient.G, Plan.Lighting.Ambient.B))
+        {
+            ZIndex = 0,
+        };
+        _world.AddChild(fauna);
+        _over = new BoardCanvas(_painter) { ZIndex = overZ };
         _world.AddChild(_over);
         _over.JoinWorld(Plan.Lighting.Active ? Plan.Lighting : null);
 
@@ -477,7 +484,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
         var dusk = Plan.Lighting.Ambient == BoardLighting.Dusk;
         var ambientPlan = new AmbientPlan(new BoardTerrain(Ground!.Map, null), Ground.Map, ambientManifest, seed: Ground.Map.Id.Sum(c => c), dusk: dusk);
         var light = Plan.Lighting.Ambient;
-        _ambient = new WorldAmbient(ambientPlan, System.IO.Path.Combine(_painter.Root, "ambient"), new Color(light.R, light.G, light.B), Plan.Blocks.Max(b => b.Z) + 1);
+        _ambient = new WorldAmbient(ambientPlan, System.IO.Path.Combine(_painter.Root, "ambient"), _painter.Root, Ground.Map, new Color(light.R, light.G, light.B), overZ, fauna);
         _world.AddChild(_ambient);
 
         if (_view.Max == _view.Min)

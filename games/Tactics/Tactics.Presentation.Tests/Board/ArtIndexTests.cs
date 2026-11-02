@@ -39,6 +39,56 @@ public sealed class ArtIndexTests
     public void Fel_crypt_tiles_stand_on_dark_walls_as_the_pack_has_no_fel_ones()
         => Assert.Equal(new ArtRef("dungeon_wall", "dark"), MaterialLook.Of("crypt_tiles/fel").Side);
 
+    [Theory]
+    [InlineData("grass_ford/autumn", "grass_ford.png")]
+    [InlineData("dirt_ford/wet", "dirt_ford.png")]
+    [InlineData("rock_ford/bank", "rock_ford.png")]
+    [InlineData("ash_ford/charred", "ash_ford.png")]
+    [InlineData("ford_water/clear", "ford_water_clear.png")]
+    [InlineData("path_ford/packed", "path_ford.png")]
+    [InlineData("planks_ford/oak", "planks_ford_oak.png")]
+    public void The_ford_materials_resolve_to_their_local_art(string material, string file)
+    {
+        var look = MaterialLook.Of(material);
+
+        var top = Pack.Art.Texture(look.Top)!;
+        Assert.EndsWith(file, top.Path);
+        Assert.Equal(8, top.Span);
+        AssertExists(Pack.Art.Texture(look.Side), $"{material} side");
+        AssertExists(Pack.Art.Texture(look.Chasm), $"{material} chasm side");
+        if (look.Lip is { } lip)
+            AssertExists(Pack.Art.Texture(lip), $"{material} lip");
+    }
+
+    [Fact]
+    public void Ford_water_keeps_the_sunk_water_rendering()
+        => Assert.True(MaterialLook.Of("ford_water/clear").Water);
+
+    [Fact]
+    public void Ford_rock_uses_the_painted_cliff_face()
+    {
+        var side = MaterialLook.Of("rock_ford/bank").Side;
+        Assert.Equal("cliff_ford", side.Family);
+        AssertExists(Pack.Art.Texture(side), "Ford rock cliff face");
+        Assert.Equal("cliff_ford", MaterialLook.Of("rock_ford/bank").Chasm.Family);
+    }
+
+    [Theory]
+    [InlineData("ash/grey", "ash_ford/charred")]
+    [InlineData("dirt/dark", "dirt_ford/wet")]
+    [InlineData("grass/frost", "grass_ford/dry")]
+    [InlineData("cave_floor/cool", "rock_ford/bank")]
+    [InlineData("mine_gravel/brown", "rock_ford/bank")]
+    [InlineData("planks/oak", "planks_ford/oak")]
+    [InlineData("planks/dark", "planks_ford/dark")]
+    [InlineData("water/clear", "ford_water/clear")]
+    public void Ashen_ford_gives_legacy_surfaces_its_local_art(string source, string expected)
+        => Assert.Equal(expected, MaterialLook.ArtMaterial("ashen_ford", source));
+
+    [Fact]
+    public void Other_regions_keep_their_material_art()
+        => Assert.Equal("grass/frost", MaterialLook.ArtMaterial("skarrow_hills", "grass/frost"));
+
     public static TheoryData<string> Props()
         => new(Pack.Maps.SelectMany(id => Pack.Map(id).Props).Select(p => p.Id).Distinct());
 
@@ -58,6 +108,10 @@ public sealed class ArtIndexTests
         Assert.Equal("dungeon/textures/top/mine_boards_mine.png", Pack.Art.Texture(new ArtRef("mine_boards", "oak"))!.Path);
         Assert.Equal("terrain/top/flagstone_grey.png", Pack.Art.Texture(new ArtRef("flagstone", "mossy"))!.Path);
     }
+
+    [Fact]
+    public void Ashen_ford_fishing_skiff_has_art()
+        => AssertExists(Pack.Art.Prop("fishing_skiff", ["oak"])?.Image, "Ashen Ford fishing skiff");
 
     [Fact]
     public void Art_the_pack_does_not_have_is_null()

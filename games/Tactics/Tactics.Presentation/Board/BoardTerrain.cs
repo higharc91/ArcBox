@@ -75,7 +75,12 @@ public sealed class BoardTerrain
             var height = terrain.HeightAt(tile);
             var deep = terrain.Deep(tile);
             lowest = Math.Min(lowest, map[tile].Height);
-            _looks[i] = sunk.Contains(tile) ? chasmLook : looks[map[tile].Material];
+            var stamped = map.StampedTiles.Contains(tile);
+            _looks[i] = sunk.Contains(tile)
+                ? chasmLook
+                : stamped
+                    ? looks[map[tile].Material]
+                    : MaterialLook.Of(MaterialLook.ArtMaterial(map.Id, map.Materials[map[tile].Material]));
             _deep[i] = deep;
             _tops[i] = height + (_looks[i].Void ? -VoidSink
                 : _looks[i].Water && deep ? -WaterSink

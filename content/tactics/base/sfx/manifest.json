@@ -1,5 +1,5 @@
 {
-  "about": "Generated sfx: id -> Ogg Vorbis files in this folder (pick one at random when there are several). See tools/tactics-audio/audio.py.",
+  "about": "Generated sfx: id -> audio files in this folder (gameplay effects are Ogg Vorbis; nearby world-animal calls may be WAV). Pick one at random when there are several. See tools/tactics-audio/audio.py.",
   "model": "model_mirelo-sfx-2-0-text-to-audio",
   "sounds": {
     "amb_campfire": {
@@ -73,6 +73,46 @@
       "loop": true,
       "group": "ambience",
       "use": "Town and market maps"
+    },
+    "animal_crow_caw": {
+      "files": [
+        "animal_crow_caw.wav"
+      ],
+      "loop": false,
+      "group": "ambience",
+      "use": "Occasional nearby rook calls over farm fields; positional world ambience"
+    },
+    "animal_duck_quack": {
+      "files": [
+        "animal_duck_quack.wav"
+      ],
+      "loop": false,
+      "group": "ambience",
+      "use": "Occasional nearby mallard call at the river; positional world ambience"
+    },
+    "animal_fox_yip": {
+      "files": [
+        "animal_fox_yip.wav"
+      ],
+      "loop": false,
+      "group": "ambience",
+      "use": "Rare distant red fox call at the woodland edge; positional world ambience"
+    },
+    "animal_goat_bleat": {
+      "files": [
+        "animal_goat_bleat.wav"
+      ],
+      "loop": false,
+      "group": "ambience",
+      "use": "Occasional nearby goat call in Ashen Ford; positional world ambience"
+    },
+    "animal_mule_call": {
+      "files": [
+        "animal_mule_call.wav"
+      ],
+      "loop": false,
+      "group": "ambience",
+      "use": "Occasional nearby pack mule call in Ashen Ford; positional world ambience"
     },
     "arrow_armor": {
       "files": [

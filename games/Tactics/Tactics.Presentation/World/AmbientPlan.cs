@@ -167,7 +167,7 @@ public sealed class AmbientPlan
                             steam.Add(At(tile, 3));
                     }
                 }
-                else if (dusk ? material is "grass/autumn" or "dirt/brown" : material.Contains("grass", StringComparison.OrdinalIgnoreCase))
+                else if (dusk ? IsDuskField(material) : material.Contains("grass", StringComparison.OrdinalIgnoreCase))
                 {
                     if (At(tile, 1).Hash % (dusk ? FireflyEvery : ButterflyEvery) == 0)
                         flitting.Add(At(tile, 1));
@@ -285,4 +285,7 @@ public sealed class AmbientPlan
         h ^= h >> 16;
         return h & int.MaxValue;
     }
+
+    private static bool IsDuskField(string material)
+        => material is "grass_ford/autumn" or "grass_ford/dry" or "dirt_ford/wet" or "dirt_ford/dry" or "grass/autumn" or "dirt/brown";
 }
