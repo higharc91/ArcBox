@@ -351,11 +351,12 @@ public sealed partial class TacticsGame
             var flags = StoryFlags();
             var found = 0;
             foreach (var (def, finding, skill) in Interactables.Finds(near, ThingSaves, flags, _at, s => passives[s].Passive))
-                found += Find(def, finding, passives[skill].Who!, lines, searched: false) ? 1 : 0;
-            // What a notice noticed earlier still reveals: a thing that wasn't there then, or was under the leader.
+                found += Find(def, finding, passives[skill].Who!, lines, FindHow.Passive) ? 1 : 0;
+            // What a notice noticed earlier still reveals: a thing that wasn't there then, or was under the leader. Who noticed it isn't kept,
+            // so the line names nobody: "The hidden cache is found."
             foreach (var notice in near.Where(d => Interactables.KindOf(d).Family == InteractableFamily.Notice && ThingState(d).Found))
                 foreach (var (def, finding) in Interactables.Revealing(notice, near, ThingSaves, StoryFlags()))
-                    found += Find(def, finding, passives[HiddenDef.Perception].Who!, lines, searched: false) ? 1 : 0;
+                    found += Find(def, finding, null, lines, FindHow.Later) ? 1 : 0;
             if (found == 0)
                 break;
             any = true;
@@ -365,22 +366,35 @@ public sealed partial class TacticsGame
         return any;
     }
 
+    /// <summary>How a thing came to be found, for its line: by a passive skill, by a search's roll, led to by a notice, or by a notice later.</summary>
+    private enum FindHow
+    {
+        Passive,
+        Search,
+        Revealed,
+        Later,
+    }
+
     /// <summary>
     /// <paramref name="who"/> finds <paramref name="def"/> (design §2.6, §7): a hidden thing is found, a notice noticed (its flags set, its
     /// words said, and what it reveals found with it), a hidden path found (its flags set), or a trap seen. Its line goes on
-    /// <paramref name="lines"/>. False, and nothing done, if it already was. The caller saves.
+    /// <paramref name="lines"/>. False, and nothing done, if it already was, or if it isn't there with the flags as they are now: a notice found
+    /// a moment before may have set a flag that takes it away (review). <paramref name="who"/> is null when nobody is named (a notice's
+    /// later reveal: who noticed it isn't kept). The caller saves.
     /// </summary>
-    private bool Find(InteractableDef def, Interactables.Finding finding, string who, List<string> lines, bool searched)
+    private bool Find(InteractableDef def, Interactables.Finding finding, string? who, List<string> lines, FindHow how)
     {
+        if (!Interactables.Present(def, StoryFlags()))
+            return false;
         var save = ThingState(def);
-        var name = _doc.Members.GetValueOrDefault(who)?.Character.Name ?? who;
+        var name = who is null ? null : _doc.Members.GetValueOrDefault(who)?.Character.Name ?? who;
         string line;
         if (finding == Interactables.Finding.Spotted)
         {
             if (save.TrapSpotted || save.Trap is not null)
                 return false;
             SetThing(def, save with { TrapSpotted = true });
-            line = $"{name} spots a trap.";
+            line = name is null ? "A trap is seen." : $"{name} spots a trap.";
             Event(def, ThingEvents.Spotted, who, line);
             lines.Add(line);
             return true;
@@ -390,15 +404,25 @@ public sealed partial class TacticsGame
         SetThing(def, save with { Found = true });
         if (Interactables.FoundIsItsOutcome(def))
             AddFlags(def.Sets);
-        var verb = searched ? "finds" : def.Hidden?.Skill is "arcana" or "religion" ? "senses" : "spots";
-        line = finding == Interactables.Finding.Noticed
-            ? $"{name} notices: {InteractScenes.NoticeText(def)}"
-            : $"{name} {verb} a {Interactables.NameOf(def)}.";
+        // Only what the finder's own skill found says how ("senses" for Arcana and Religion): something a notice led to is just spotted.
+        var verb = how switch
+        {
+            FindHow.Search => "finds",
+            FindHow.Passive when def.Hidden?.Skill is "arcana" or "religion" => "senses",
+            _ => "spots",
+        };
+        line = (finding, name) switch
+        {
+            (Interactables.Finding.Noticed, null) => $"Noticed: {InteractScenes.NoticeText(def)}",
+            (Interactables.Finding.Noticed, _) => $"{name} notices: {InteractScenes.NoticeText(def)}",
+            (_, null) => $"The {Interactables.NameOf(def)} is found.",
+            _ => $"{name} {verb} a {Interactables.NameOf(def)}.",
+        };
         Event(def, finding == Interactables.Finding.Noticed ? ThingEvents.Noticed : ThingEvents.Revealed, who, line);
         lines.Add(line);
         if (finding == Interactables.Finding.Noticed)
-            foreach (var (next, how) in Interactables.Revealing(def, Things.Where(d => d.At != _at), ThingSaves, StoryFlags()))
-                Find(next, how, who, lines, searched: false);
+            foreach (var (next, nextFinding) in Interactables.Revealing(def, Things.Where(d => d.At != _at), ThingSaves, StoryFlags()))
+                Find(next, nextFinding, who, lines, how == FindHow.Later ? FindHow.Later : FindHow.Revealed);
         return true;
     }
 
@@ -411,13 +435,14 @@ public sealed partial class TacticsGame
     /// </summary>
     private void Search(Player player)
     {
-        if (player.Profile?.Value != _lead || _region is null || AllThings.IsEmpty)
-            return;
+        if (player.Profile?.Value != _lead || _region is null || AllThings.IsEmpty || !Party().Any())
+            return;     // as LookAround: with nobody's character in the party, there's nobody to roll
         var looked = Interactables.Searchable(Things, ThingSaves, StoryFlags(), _at);
         LeaveExploration();
         _toasts.Clear();
         _phase = TacticsPhase.Story;
-        var thing = new ThingCursor("", new InteractableSave(InteractScenes.SearchId), _lead!, Cursor, [.. looked.Select(d => d.Id)]);
+        var thing = new ThingCursor("", new InteractableSave(InteractScenes.SearchId), _lead!, Cursor, [.. looked.Select(d => d.Id)],
+            [.. looked.Select(d => d.Hidden!.Dc)]);
         SetCursor(new StorySave("", StorySave.Lead, InteractScenes.SearchId, null, 0, _storySeq, Thing: thing));
         var scene = ThingPlan(thing)!.Scene;
         EnterNode(scene, scene.Start);
@@ -426,7 +451,9 @@ public sealed partial class TacticsGame
     /// <summary>
     /// A node of the search is entered. Its first: the option is decided at once, so the line goes straight on to the party's pick of who
     /// rolls (saved as <see cref="StorySave.Checking"/>, as any decided check is). Its result, with the roll that led there: each thing it
-    /// looked for that's there and not found is found if the roll meets its own DC, and is otherwise searched for, for good.
+    /// looked for that's there and not found is found if the roll meets its own DC as it was when the search began (kept in the cursor, as the
+    /// check routed by the same DCs: so "Something turns up." always finds something, whatever a content update did meanwhile), and is
+    /// otherwise searched for, for good. Each is judged with the flags as they are by then: a notice it found may have taken another away.
     /// </summary>
     private void SearchNodeEntered(ThingCursor cursor, SceneNode node, StoryRoll? roll)
     {
@@ -439,20 +466,29 @@ public sealed partial class TacticsGame
             return;
         var total = roll.Die + roll.Bonus;
         var lines = new List<string>();
-        var flags = StoryFlags();
-        foreach (var def in cursor.Search.Select(ThingNamed).OfType<InteractableDef>())
+        for (var i = 0; i < cursor.Search.Length; i++)
         {
-            var save = ThingState(def);
-            if (def.Hidden is not { } hidden || save.Found || !Interactables.Present(def, flags))
+            if (ThingNamed(cursor.Search[i]) is not { Hidden: not null } def)
                 continue;
-            if (total >= hidden.Dc)
-                Find(def, Interactables.FindingOf(def), roll.Member, lines, searched: true);
+            var save = ThingState(def);
+            if (save.Found || !Interactables.Present(def, StoryFlags()))
+                continue;
+            var dc = SearchDc(cursor, i, def);
+            if (node.Id == InteractScenes.SearchFound && total >= dc)
+                Find(def, Interactables.FindingOf(def), roll.Member, lines, FindHow.Search);
             else
                 SetThing(def, save with { Searched = true });
         }
+        // Only if what it would have found is gone from the pack since: the line said something turned up, so say what came of it.
+        if (node.Id == InteractScenes.SearchFound && lines.Count == 0)
+            lines.Add("It was nothing after all.");
         if (lines.Count > 0)
             Say(string.Join(" ", lines));
     }
+
+    /// <summary>The DC of the <paramref name="i"/>th thing a search looks for, as it was when it began; a search saved before DCs were kept uses today's.</summary>
+    private static int SearchDc(ThingCursor cursor, int i, InteractableDef? def)
+        => !cursor.SearchDcs.IsDefault && i < cursor.SearchDcs.Length ? cursor.SearchDcs[i] : def?.Hidden?.Dc ?? InteractScenes.NothingToFind;
 
     // ---- Interactions as scenes -------------------------------------------------------------------------------------------------
 
@@ -462,7 +498,7 @@ public sealed partial class TacticsGame
         if (_thingPlan is { } cached && ReferenceEquals(cached.Cursor, cursor))
             return cached.Plan;
         var plan = cursor.Searching
-            ? new ScenePlan(InteractScenes.SearchScene(cursor.Search.Select(ThingNamed).OfType<InteractableDef>().Select(d => d.Hidden?.Dc ?? InteractScenes.NothingToFind)),
+            ? new ScenePlan(InteractScenes.SearchScene(cursor.Search.Select((id, i) => SearchDc(cursor, i, ThingNamed(id)))),
                 ImmutableDictionary<string, InteractOutcome>.Empty)
             : ThingNamed(cursor.Id) is { } def
             ? InteractScenes.Plan(def, cursor.From, StoryFlags(), Interactables.Worked(AllThings).Contains(def.Id), ItemName, again: true) as ScenePlan

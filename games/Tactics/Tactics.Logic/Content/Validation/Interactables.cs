@@ -71,6 +71,8 @@ internal sealed partial class Validation
             At("reveals", $"'{def.Id}' reveals itself.");
         if (family == InteractableFamily.Notice && def.Text.IsEmpty)
             At("text", $"A {kind.Id} needs its words: what the party notices (\"Fresh wolf tracks lead north, into the trees.\").");
+        if (family == InteractableFamily.Path && def.Facing is null)
+            At("facing", "A hidden path needs its facing: which way the hedge, wall or water it hides in runs (sw or ne along x, se or nw along y), so the TV draws it as that until it's found.");
         if (family == InteractableFamily.Path && (!def.Requires.IsEmpty || !def.Unless.IsEmpty))
             At(def.Requires.IsEmpty ? "unless" : "requires", "A hidden path is always there: one that came and went would open and wall the ground under the party's feet. Gate what it leads to instead.");
         if (def.Text.Any(string.IsNullOrWhiteSpace))

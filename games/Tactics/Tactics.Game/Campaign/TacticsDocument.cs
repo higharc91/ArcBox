@@ -135,11 +135,13 @@ public sealed record StorySave(string Beat, string Stage, string? Scene, string?
 /// <paramref name="Under"/> is the cursor the interaction set aside, a battle beat waiting at its fight, which it puts back when it ends.
 /// <paramref name="Search"/> marks an active Search instead (interactables design §7.4): the ids of the hidden things it looks for, fixed as it
 /// began, so a restart plays the same scene and judges the same things; then <paramref name="Id"/> is empty and <paramref name="From"/> unused.
+/// <paramref name="SearchDcs"/> are their DCs as it began, by position, which the check routes by and each is judged by.
 /// One more optional field and no version bump: a document from before reads with none, and none isn't written.
 /// </summary>
 public sealed record ThingCursor(string Id, InteractableSave From, string By,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] StorySave? Under = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> Search = default)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> Search = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<int> SearchDcs = default)
 {
     /// <summary>True for an active Search, not an interaction with one thing.</summary>
     [JsonIgnore]

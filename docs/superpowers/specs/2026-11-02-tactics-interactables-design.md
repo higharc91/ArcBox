@@ -414,7 +414,7 @@ At load (the loader, `Validation/Interactables.cs`), each with a failing test in
    is set by the arc (beats, choices, scene nodes and options, encounter triggers) or by a thing; and no thing sets a flag a choice sets.
 8b. **Hidden things (§7.5):** `hidden.skill` one of the eight passive skills; `range` 1 to 6 and only on something hidden or trapped; notices
    have words and are hidden, and never `blocks: true`; only a notice `reveals`, never itself, and only hidden things of its own region; a
-   hidden path is hidden, has no `requires`/`unless`, no lock, and no `blocks`. Rule 6 counts a hidden path as shut, as a hidden door.
+   hidden path is hidden, gives its `facing`, has no `requires`/`unless`, no lock, and no `blocks`. Rule 6 counts a hidden path as shut, as a hidden door.
 9. **check.py parity:** nothing here touches lore files, so no `check.py` change is needed now. Story hooks (§1.11) will need one, with parity
    tests, because hook scenes have no beat.
 
@@ -467,7 +467,11 @@ trees."). It never stands in the way and has one state, `noticed`, in which it's
   tracks lead there), each with its own event (`revealed`, or `noticed` for a notice, whose own `reveals` follow in turn, each thing once).
   Everything one look finds goes on the notice together, the notice's line first.
 - A reveal target that isn't there yet (its `requires`) or is under the leader's feet stays hidden, and is found by the notice as soon as
-  it is there or the leader steps off (every look checks the notices already noticed).
+  it is there or the leader steps off (every look checks the notices already noticed). Who noticed the notice isn't kept, so that later
+  find names nobody: "The hidden cache is found." What a notice leads to at once is credited to its finder, and always "spotted", never
+  "sensed" by the target's own skill.
+- Nothing is found that isn't there **with the flags as they are by then**: a notice's `sets`, set as it's noticed, can take away a thing
+  found in the same look (its `unless`), and that thing isn't found, evented or sent.
 - **Look:** the leader's button "Look at the tracks" ("Feel the draft") says the line again (`looked`) and changes nothing.
 - **Range:** any hidden or trapped thing may set `range`, 1 to 6 tiles (default 3), how far away the party's passive skills find it or see its
   trap: tracks across a field (6), a hairline crack you must be beside (1).
@@ -477,7 +481,7 @@ trees."). It never stands in the way and has one state, `noticed`, in which it's
 `hidden_path`, a family of its own: a tile that **stands in the way until it's found**, then is ground the party walks, drawn as a path
 (a ford through reeds, a gap in a hedge, a goat track). It must be hidden, can't be gated by flags (one that came and went would open and wall
 the ground under the party), takes no lock and no `blocks`; its `sets` are set when it's found. The region paints the tile walkable, as a
-passage is painted open. Until it's found:
+passage is painted open, and it must give its `facing`: which way what it hides in runs. Until it's found:
 
 - a step onto it is refused **without a bump** (the unseen-wall rule, §2.4), so nothing gives it away;
 - the TV isn't sent it, but a **plug** for its tile (`ExploreView.Plugs`, as a secret door's): the TV draws the tile as its neighbours along
@@ -497,7 +501,9 @@ up." or "Nothing turns up."
 
 - **What it looks for** is fixed as it begins and kept in the cursor (`ThingCursor.Search`): every hidden thing within **2 tiles** along x and
   y, not found, not already searched for, not under the leader. A restart plays the same scene and judges the same things.
-- **The roll** is compared with each thing's own `hidden` DC (whatever skill hides it): each it meets is found ("Bo finds a loose
+- **The roll** is compared with each thing's own `hidden` DC (whatever skill hides it), **as it was when the search began**
+  (`ThingCursor.SearchDcs`, the same DCs the check routes by, so "Something turns up." always finds something even across a content
+  update; if all it would have found was removed from the pack meanwhile, the notice says "It was nothing after all."): each it meets is found ("Bo finds a loose
   flagstone.", a notice noticed and its reveals with it); each it misses is **searched** (`InteractableSave.Searched`) and is never searched
   for again (as a failed lock is spent, USER DECISION 2), though the party's passive skills may still find it later.
 - **No DC is shown**, on the TV or a phone, before or after the roll (`StoryCheckView.Dc` and the phone's `dc` are null, the TV's roll has
@@ -538,9 +544,11 @@ walk fixtures gained `search`, and `check-search`/`check-search-rolled` were add
 ### 7.8 Not done
 
 - **StoryOrder** (the export's replay) walks hidden paths as open, as it does doors (§5 "Not checked yet").
-- **The plug of a low wall** (a hedge one step high) is drawn as its neighbours' top, but its front face doesn't quite match theirs: a sharp
-  eye sees a seam on the TV (the shots of `--world-demo=things`, `path-0-unfound`). A secret door's plug in a tall wall shows the same seam
-  faintly. It's the plug renderer's (`WallPlugs`), and a fix there helps both.
+- **The plug of a low wall** (a hedge one step high) doesn't quite hide the gap on the TV: the flat tile under it still shows as a lighter
+  notch without the hedge's front face (the shots of `--world-demo=things`, `path-0-unfound`). A secret door's plug in a tall wall shows a
+  faint seam too. It's the plug renderer's (`WallPlugs`): building the plug as a world block (grading, decals) didn't change it, so the cause
+  is deeper (likely how the plug's block is ordered against the world's own tile); left for a TV pass.
+- **A search ignores unseen traps** on what it finds (the coordinator's review note 5), for the user to decide.
 - **Ashen Ford** has no hidden things yet; the demo region shows each (`--world-demo=things`: a fourth gallery of the notices and the path,
   then tracks that lead to a cache, a rune noticed by Arcana, the other notices in a row, a goat track through a hedge found by Survival, and
   a Search finding a loose flagstone hidden by Investigation).

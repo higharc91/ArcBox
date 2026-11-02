@@ -108,11 +108,65 @@ public sealed class HiddenThingsGameTests
         Assert.Equal(ThingEvents.Looked, again.Host.Explore!.ThingEvents!.Value[^1].What);
     }
 
+    /// <summary>Review: a notice's flags, set as it's noticed, can take away a thing found in the same look; it must not be found, or sent.</summary>
+    [Fact]
+    public void A_thing_a_notice_takes_away_as_its_noticed_is_not_found_in_the_same_look()
+    {
+        var rules = Vault.Load(
+        [
+            """{ "id": "a_tracks", "kind": "tracks", "at": [3, 2], "hidden": 1, "text": ["Tracks."], "sets": ["gone"], "reveals": ["c_far"] }""",
+            """{ "id": "b_near", "kind": "cache", "at": [4, 2], "hidden": 1, "unless": ["gone"] }""",
+            """{ "id": "c_far", "kind": "cache", "at": [8, 8], "hidden": 30, "unless": ["gone"] }""",
+            """{ "id": "door", "kind": "door", "at": [4, 3] }""",
+            """{ "id": "gate", "kind": "gate", "at": [5, 6], "open": true }""",
+        ]);
+        var s = Vault.At(new Tile(2, 1), rules);
+        Assert.True(Saved(s, "a_tracks")!.Found);
+        Assert.Contains("gone", Doc(s).World!.Flags);
+        Assert.True(Saved(s, "b_near") is null or { Found: false });
+        Assert.True(Saved(s, "c_far") is null or { Found: false });
+        Assert.DoesNotContain(s.Host.Explore!.ThingEvents!.Value, e => e.Id is "b_near" or "c_far");
+        Assert.DoesNotContain("near", s.Host.Notice);
+        Assert.DoesNotContain("\"b_near\"", Sent(s));
+        Assert.DoesNotContain("\"c_far\"", Sent(s));
+    }
+
+    /// <summary>
+    /// Review: what a notice leads to is spotted by its finder, never "sensed" by the target's own skill; and what it reveals later, when the
+    /// leader steps off it, names nobody, as who noticed it isn't kept.
+    /// </summary>
+    [Fact]
+    public void A_reveal_is_credited_to_the_notices_finder_at_once_and_to_nobody_later()
+    {
+        string[] things =
+        [
+            """{ "id": "tracks", "kind": "tracks", "at": [7, 2], "hidden": 1, "range": 1, "text": ["Tracks."], "reveals": ["cache"] }""",
+            """{ "id": "cache", "kind": "cache", "at": [8, 8], "hidden": { "dc": 30, "skill": "arcana" } }""",
+            """{ "id": "door", "kind": "door", "at": [4, 3] }""",
+            """{ "id": "gate", "kind": "gate", "at": [5, 6], "open": true }""",
+        ];
+        var rules = Vault.Load(things);
+        var s = Vault.At(new Tile(6, 1), rules);
+        var tracks = s.Host.Explore!.ThingEvents!.Value.Single(e => e.Id == "tracks");
+        Assert.Equal($"{tracks.By} spots a hidden cache.", s.Host.Explore!.ThingEvents!.Value.Single(e => e.Id == "cache").Line);
+
+        // The tracks were noticed before; the leader stands on the cache, so it waits, and is found as they step off it.
+        var under = Vault.At(new Tile(8, 8), rules, w => w with
+        {
+            Things = Ordinal.Map(("tracks", new InteractableSave(InteractableKinds.Noticed, Found: true))),
+        });
+        Assert.True(Saved(under, "cache") is null or { Found: false });
+        Step(under, "nw");
+        Assert.True(Saved(under, "cache")!.Found);
+        var e = under.Host.Explore!.ThingEvents!.Value.Single(e => e.Id == "cache");
+        Assert.Equal((ThingEvents.Revealed, (string?)null, "The hidden cache is found."), (e.What, e.By, e.Line));
+    }
+
     // ---- Hidden paths -----------------------------------------------------------------------------------------------------------
 
     private static readonly Lazy<RulesPack> Ford = new(() => Vault.Load(
     [
-        """{ "id": "ford", "kind": "hidden_path", "at": [4, 3], "name": "goat track", "hidden": 30, "sets": ["found_ford"] }""",
+        """{ "id": "ford", "kind": "hidden_path", "at": [4, 3], "facing": "sw", "name": "goat track", "hidden": 30, "sets": ["found_ford"] }""",
         """{ "id": "gate", "kind": "gate", "at": [5, 6], "open": true }""",
     ]));
 
@@ -228,6 +282,31 @@ public sealed class HiddenThingsGameTests
         var back = Again(picking, Stash.Value);
         Until(back, () => Story(back).State == TacticsGame.StoryStates.PickRoller, "the pick again");
         Assert.Equal(["easy", "hard"], Cursor(back)!.Thing!.Search);
+    }
+
+    /// <summary>
+    /// Review: a content update between the roll and its result can't make "Something turns up." find nothing, or "Nothing turns up." find
+    /// something: the search judges by the DCs it began with, kept in the cursor.
+    /// </summary>
+    [Fact]
+    public void A_search_judges_by_the_dcs_it_began_with_whatever_a_content_update_did_since()
+    {
+        var s = Searching();
+        Assert.Equal([1, 30], Cursor(s)!.Thing!.SearchDcs);
+        Until(s, () => Cursor(s)?.Roll is not null, "the roll");
+        Assert.True(Cursor(s)!.Roll!.Passed);
+        var harder = Vault.Load(
+        [
+            """{ "id": "easy", "kind": "cache", "at": [7, 2], "name": "loose flagstone", "hidden": { "dc": 30, "skill": "investigation" }, "range": 1 }""",
+            """{ "id": "hard", "kind": "cache", "at": [3, 2], "hidden": 1, "range": 1 }""",
+            """{ "id": "door", "kind": "door", "at": [4, 3] }""",
+            """{ "id": "gate", "kind": "gate", "at": [5, 6], "open": true }""",
+        ]);
+        var again = Again(s, harder);
+        Assert.Equal(TacticsGame.StoryStates.Rolled, Story(again).State);
+        Finish(again);
+        Assert.True(Saved(again, "easy")!.Found);           // as the DC it began with said
+        Assert.Contains("finds a loose flagstone.", again.Host.Explore!.ThingEvents!.Value.Single(e => e.Id == "easy").Line);
     }
 
     [Fact]

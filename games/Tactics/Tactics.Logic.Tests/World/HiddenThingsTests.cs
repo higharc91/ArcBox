@@ -101,7 +101,7 @@ public sealed class HiddenThingsTests
     [Fact]
     public void A_hidden_path_is_in_the_way_unseen_until_its_found_and_then_its_ground_with_nothing_to_do()
     {
-        var path = Vault.Def("""{ "id": "p", "kind": "hidden_path", "at": [4, 3], "hidden": { "dc": 12, "skill": "survival" } }""");
+        var path = Vault.Def("""{ "id": "p", "kind": "hidden_path", "at": [4, 3], "facing": "sw", "hidden": { "dc": 12, "skill": "survival" } }""");
         var found = S(path) with { Found = true };
         Assert.Equal(InteractableKinds.FoundPath, found.State);
         Assert.True(Interactables.Blocks(path, S(path), NoFlags));
@@ -168,10 +168,11 @@ public sealed class HiddenThingsTests
     [InlineData("""{ "id": "x", "kind": "tracks", "at": [2, 2], "hidden": 10, "text": ["T."], "blocks": true }""", "/interactables/0/blocks", "never stands in the way")]
     [InlineData("""{ "id": "x", "kind": "tracks", "at": [2, 2], "hidden": 10, "text": ["T."], "reveals": ["x"] }""", "/interactables/0/reveals", "reveals itself")]
     [InlineData("""{ "id": "x", "kind": "chest", "at": [2, 2], "reveals": ["y"] }""", "/interactables/0/reveals", "Only a notice reveals")]
-    [InlineData("""{ "id": "x", "kind": "hidden_path", "at": [4, 3] }""", "/interactables/0/hidden", "always hidden")]
-    [InlineData("""{ "id": "x", "kind": "hidden_path", "at": [4, 3], "hidden": 10, "requires": ["a"] }""", "/interactables/0/requires", "always there")]
-    [InlineData("""{ "id": "x", "kind": "hidden_path", "at": [4, 3], "hidden": 10, "blocks": false }""", "/interactables/0/blocks", "depends on its state")]
-    [InlineData("""{ "id": "x", "kind": "hidden_path", "at": [4, 3], "hidden": 10, "lock": { "pick": 10 } }""", "/interactables/0/lock", "can't be locked")]
+    [InlineData("""{ "id": "x", "kind": "hidden_path", "at": [4, 3], "facing": "sw" }""", "/interactables/0/hidden", "always hidden")]
+    [InlineData("""{ "id": "x", "kind": "hidden_path", "at": [4, 3], "hidden": 10 }""", "/interactables/0/facing", "needs its facing")]
+    [InlineData("""{ "id": "x", "kind": "hidden_path", "at": [4, 3], "facing": "sw", "hidden": 10, "requires": ["a"] }""", "/interactables/0/requires", "always there")]
+    [InlineData("""{ "id": "x", "kind": "hidden_path", "at": [4, 3], "facing": "sw", "hidden": 10, "blocks": false }""", "/interactables/0/blocks", "depends on its state")]
+    [InlineData("""{ "id": "x", "kind": "hidden_path", "at": [4, 3], "facing": "sw", "hidden": 10, "lock": { "pick": 10 } }""", "/interactables/0/lock", "can't be locked")]
     public void A_hidden_thing_the_rules_dont_allow_is_an_error(string thing, string pointer, string part)
     {
         var error = Assert.Single(ErrorsOf(thing));
@@ -206,12 +207,12 @@ public sealed class HiddenThingsTests
     public void What_the_story_needs_cant_lie_beyond_a_hidden_path_that_may_never_be_found()
     {
         var region = Vault.Region() with { Spawns = new RegionSpawns(Vault.Start, new Tile(4, 4)) };
-        var errors = ValidationTests.ErrorsOfChapter(Vault.World(region), Vault.Things("vault", """{ "id": "ford", "kind": "hidden_path", "at": [4, 3], "hidden": 12 }"""));
+        var errors = ValidationTests.ErrorsOfChapter(Vault.World(region), Vault.Things("vault", """{ "id": "ford", "kind": "hidden_path", "at": [4, 3], "facing": "sw", "hidden": 12 }"""));
         Assert.StartsWith("The recovery spawn at (4, 4) is behind a passage that may never open ('ford')", Assert.Single(errors).Message);
         Assert.Contains("hidden door or path never found", errors[0].Message);
         // Behind it, things are still reachable as far as placement goes: with every way open, the path is open too.
         Assert.Single(ValidationTests.LoadChapter(Vault.World(Vault.Region()), Vault.Things("vault",
-            """{ "id": "ford", "kind": "hidden_path", "at": [4, 3], "hidden": 12 }""", """{ "id": "chest", "kind": "chest", "at": [8, 5] }"""))
+            """{ "id": "ford", "kind": "hidden_path", "at": [4, 3], "facing": "sw", "hidden": 12 }""", """{ "id": "chest", "kind": "chest", "at": [8, 5] }"""))
             .InteractablesIn("vault").Where(t => t.Id == "chest"));
     }
 }
