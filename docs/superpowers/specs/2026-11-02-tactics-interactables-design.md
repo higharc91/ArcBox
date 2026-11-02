@@ -427,11 +427,11 @@ whose key comes from a later beat). When a region first has a door, `StoryOrder`
 1. Everything in §3.
 2. **Where things are edited:** hand-written files now. Do you want markers in the painting workspace (drag a chest in Godot, set its lock in
    the Inspector), which the export writes into this same file?
-3. **Ashen Ford's first things** (2026-11-02, stand-in art): 16 in `interactables/ashen_ford.json`: a council notice by the notice board,
-   the square's well and a hearthstone by the chapel, Coll's and Annet's graves, a signpost at the east fork (the well and signpost replace
+3. **Ashen Ford's first things** (2026-11-02, stand-in art): 17 in `interactables/ashen_ford.json`: a council notice by the notice board,
+   the square's well, a hearthstone and Coll's and Annet's graves in the nook beside the chapel, a signpost at the east fork (the well and signpost replace
    painted props), a crate, sack and barrel at the granary, a market crate, the reeve's key in Southfield and his locked chest (a Potion of
-   Healing), a trapped crate (harmless) and a barrel on the piers, an Ash Market tally and a hidden cache (passive Perception 12, a Smoke
-   Bomb) by the docks. No doors: a building's doorway opens onto its own blocked footprint, so a door thing would stand in the street.
+   Healing), a trapped crate (harmless) and a barrel on the piers, an Ash Market tally, and scuffs (Perception 10) that lead to a hidden
+   cache (Perception 12 on its own, a Smoke Bomb) by the docks. No doors: a building's doorway opens onto its own blocked footprint, so a door thing would stand in the street.
    Every step's explore view now carries them, about 190 bytes each (2.9 KB), past the one-packet budget the walking tests keep for the
    walk's own part: sending things only when they change, or only near the party, would win it back.
 4. **The phone's list:** a second button row under Interact, or a picker that opens from it? And should the walk screen show the keys the

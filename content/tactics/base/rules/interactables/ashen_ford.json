@@ -4,10 +4,10 @@
     {
       "id": "af_square_notice",
       "kind": "note",
-      "at": [38, 56],
+      "at": [35, 61],
       "name": "council notice",
       "text": [
-        "By order of the council: bread at the granary gate, one loaf a household, at noon. Nobody is to cross the ford. H. Varrow, Mayor.",
+        "Nailed to the lamp post: by order of the council, bread at the granary gate, one loaf a household, at noon. Nobody is to cross the ford. H. Varrow, Mayor.",
         "Under it, in another hand: \"Ask the Marrowbys where their grain went.\""
       ]
     },
@@ -24,17 +24,17 @@
     {
       "id": "af_hearth_shrine",
       "kind": "shrine",
-      "at": [31, 51],
+      "at": [27, 68],
       "name": "hearthstone",
       "text": [
-        "A hearthstone of the Church of the Hearth, set beside the chapel. Someone keeps it swept.",
+        "A hearthstone of the Church of the Hearth, out on the green where the town buries its own. Someone keeps it swept.",
         "You lay a hand on it. For a moment the cold goes out of your fingers."
       ]
     },
     {
       "id": "af_grave_coll",
       "kind": "gravestone",
-      "at": [33, 51],
+      "at": [25, 68],
       "name": "Coll's grave",
       "text": [
         "COLL. GUARD OF EMBERWICK. HE HELD THE BRIDGE END.",
@@ -44,7 +44,7 @@
     {
       "id": "af_grave_annet",
       "kind": "gravestone",
-      "at": [34, 51],
+      "at": [26, 68],
       "name": "Annet's grave",
       "text": [
         "ANNET. GUARD OF EMBERWICK.",
