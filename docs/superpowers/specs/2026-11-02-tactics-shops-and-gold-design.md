@@ -1,6 +1,6 @@
 # Wardenflame: gold and shops, design
 
-- **Status:** design for another implementer. Nothing here is built. Placeholders only: no art, and no generated audio.
+- **Status:** implemented for issue #68; see the implementation decisions below and `../reports/2026-11-02-shops/README.md`. Placeholders only: no art, and no generated audio.
 - **Date:** 2026-11-02.
 - **Sub-project:** the trading half of sub-project 6 ("loot rolling, need/greed, inventories, trading and shops":
   docs/superpowers/specs/2026-10-30-tactics-rules-engine-design.md §616). It needs only the smallest inventory. Need/greed and a full
@@ -11,7 +11,7 @@
 - **Reference:** Baldur's Gate 3's trading: talk to a trader, a two-sided trade window, buy and sell at prices moved by a check.
   Here it's simpler and multiplayer-first: one room, many phones, one TV.
 
-## 0. Where things stand (read before building)
+## 0. Pre-implementation baseline
 
 | Piece | Today | Where |
 |---|---|---|
@@ -296,3 +296,26 @@ TDD throughout; `dotnet test` (solution) and `cd web/play && npm test` green wit
 7. **Docs:** USER DECISIONs, `docs/tv-host.md`, the art JSON (§7), the handoff §8.
 8. **e2e:** extend the bots to walk to the shop, buy one potion, sell it back, and leave; run `tools/tv-e2e.sh` in that mode, and the
    Chapter 1 run (`ARCBOX_CHAPTER=1 ARCBOX_BRANCH=force`) to show nothing else moved.
+
+## Implementation decisions (issue #68)
+
+Built on `shops-and-gold`. The following **USER DECISION** defaults from the issue are the implemented baseline, pending any owner override:
+
+| Decision | Implemented default |
+|---|---|
+| A | One campaign-wide party purse. |
+| B / B2 | Content-defined loot, winning encounters and story rewards/payments; zero starting gold; no per-kill gold. |
+| C | Healing 50 gp; greater healing 150 gp; alchemist's fire 50 gp; smoke bomb 25 gp. Oil remains absent; its future default is 10 gp. |
+| D | Content sellRatio 0.5, rounded down after the shop's rounded-up buy price. |
+| E | Haggling off. The DC is validated content metadata; no haggle input or discount is enabled. |
+| F / G / H | Any connected player with a character trades; purchases go to their own bag; selling companions' bags is refused. |
+| I | No gameplay bag limit; integer overflow is refused. |
+| J | Per-line chapter restock or never. Rest is reserved content metadata; no rest mechanic exists. |
+| K | One herbalist, Wenna's Remedies, at merchant person 30 in Ashen Ford's painted market. Accepts potion and obscure tags (the existing smoke-bomb tag). |
+| L | No new fees, bribes, or other Chapter 1 balance changes. |
+
+Gold and prices are integers. Positive fractional modified buy prices round up; sales round down. Accepted trade IDs are retained per shop for the most recent 32 trades; older IDs are outside that bounded replay window. The stock save also retains its content starting counts so normal sales survive reloads, while a changed content baseline is clamped and removed lines disappear. A saved shop cursor sits beside `WorldSave.Story`, preserving a paused beat's cursor. Last-phone departure closes the shop; ending a session preserves the visit for resumption.
+
+All prior phone fixtures are retained byte-for-byte. Their pre-shop contract is exercised using a test pack without shops; six new fixtures exercise the real base shop. Item-price and manifest changes update `Rules.Hash`, so a saved battle is restarted once by the existing compatibility path.
+
+Art and audio remain stand-ins. The new art brief is `2026-11-02-tactics-shops-art.json`; no generated files or sfx-list additions are included. `--world-demo=shop` shows the marker, panel, buy, sell, gold pop and departure. The actual town-stall sprites are supported as the stall's fallback. The existing gallery includes the new stall states.

@@ -490,3 +490,9 @@ or comes back draws what's there and replays nothing. `BoardCanvas` and `UnitMar
 - **A strip plays once**, for the event that changes what's drawn (an opening, not the unlock before it), and only between two states
   drawn with the thing's own art.
 
+
+## Wardenflame shops (issue #68)
+
+The walk banner shows the party purse when gold or shops are relevant. A reachable trader has a stand-in notice marker; while trading, the keeper faces the party. The TV's separate shop panel shows the keeper's existing portrait, greeting, stock, prices, purse and recent trades. Phones select quantities and buy/sell from their own bags; the leader leaves. Purchases are confirmed by the server, never applied optimistically. Gold gains produce a fading `+N gold` label. Sound keys `ui_coin_buy`, `ui_coin_sell`, `ui_shop_open`, `ui_shop_close` fall back to existing `ui_loot`/`ui_confirm` sounds. No new art or audio is required.
+
+Art review: `godot --path src/ArcBox.Host -- --world-demo=shop --shots=/tmp/arcbox-shop-shots --preset=low --res=1280x720`. It uses the existing demo courtyard and exits after its shots. Live check: `ARCBOX_SHOP=1 tools/tv-e2e.sh --skip-build`; bot phones walk to Wenna, sell starting consumables to fund a potion, buy, replay the trade ID, sell, and leave. Chapter regression: `ARCBOX_CHAPTER=1 ARCBOX_BRANCH=force tools/tv-e2e.sh --skip-build`. On machines without Vulkan, use `TV_RENDERING_DRIVER=opengl3 TV_ENGINE_ARGS='--rendering-method gl_compatibility --audio-driver Dummy'`; this selects supported software rendering rather than starting a failing Vulkan driver.

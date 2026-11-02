@@ -134,6 +134,9 @@ The local session was on Windows with an RTX 5080. Check what you have.
 
 ## 8. The user's list
 
+**Gold and shops (#68), USER DECISION defaults used:** A party purse; B loot + battle wins + story; B2 starting gold 0; C healing 50 / greater 150 / fire 50 / smoke 25 (future oil 10); D sell at 50%; E no haggling; F any present player; G purchases to the buyer; H sell only own bag; I no bag cap; J chapter restock per line; K one Ashen Ford herbalist; L no other gold sinks. These are the issue's defaults, not new owner balance choices. See the shops design's implementation section and shops art JSON. Old saves remain v1 and old phone fixtures remain unchanged. Rules hash changes restart a saved battle once. Balance follow-up: pre-fight character remakes still replace their starting kit under the existing rules; selling starting items is enabled, so the owner should consider their interaction before tuning the economy. No remake or starting-kit balance change was made here.
+
+
 **The user's answers, 2026-11-01** (these settle the matching items below):
 - **Boss music:** Rime Tower also gets the boss theme and the boss victory fanfare. Ford Assault stays ordinary. (27) *To build.*
 - **Losing (refined after comparing with BG3, Divinity, FFT, Fire Emblem, XCOM and Darkest Dungeon):** a lost fight's injuries heal, so the retry is fair and there's no death spiral. The penalty is **no XP for a loss** (this also closes the farming hole) and **consumables used in the lost fight stay spent**. Earlier injuries stay. Results after a loss shows no injuries, just: "You wake at the recovery point. Wounds tended — no XP. Potions used are gone." This is the user's rules change. (3, 18) *Built.*
