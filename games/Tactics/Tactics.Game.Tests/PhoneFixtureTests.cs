@@ -55,6 +55,21 @@ public sealed class PhoneFixtureTests
         Check(screens);
     }
 
+    /// <summary>
+    /// The walk screen in a region with things to interact with (interactables design §2.5): the leader a step from the vault's chest and its
+    /// key, with both in the list and the nearer one on the button, and a follower, whose list is empty.
+    /// </summary>
+    [Fact]
+    public void The_walk_screen_with_things_in_reach_matches_its_fixture()
+    {
+        var s = Vault.At(new Tile(7, 2));
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal)
+        {
+            ["walk-things"] = Node(s.Harness.PlayerView(0)),
+            ["walk-things-follower"] = Node(s.Harness.PlayerView(1)),
+        });
+    }
+
     private static JsonNode Node(ControllerView view) => JsonSerializer.SerializeToNode<ControllerView>(view with { ViewId = "v1" }, ArcJson.Options)!;
 
     private static SortedDictionary<string, JsonNode> CaptureStory()

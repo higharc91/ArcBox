@@ -526,8 +526,20 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 
 /* The leader's Interact: at the foot of the info column, stuck in view while it scrolls, never over the pad. */
 /* No glow: the scrolling column would clip it to a box. */
-.tx .tx-btn.gold.tx-interact { position: sticky; bottom: 0; z-index: 2; flex: none; margin-top: auto; min-height: 56px; font-size: 19px; box-shadow: none;
+.tx .tx-interact-dock { position: sticky; bottom: 0; z-index: 2; flex: none; margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
+.tx .tx-interact-row { display: flex; gap: 8px; }
+.tx .tx-btn.gold.tx-interact { flex: 1 1 auto; min-width: 0; min-height: 56px; font-size: 19px; box-shadow: none;
   animation: tx-interact-in 0.45s ease-out both; }
+/* With more than one thing in reach: how many, and a caret that opens the list of them, a thumb wide. */
+.tx .tx-btn.tx-interact-more { flex: none; min-width: 64px; min-height: 56px; gap: 6px; font: 800 19px/1 var(--wf-sans); background: #15172e; }
+.tx .tx-interact-caret { width: 9px; height: 9px; border-right: 2px solid currentColor; border-top: 2px solid currentColor; transform: rotate(-45deg) translate(-1px, 2px); }
+.tx .tx-interact-more[aria-expanded="true"] .tx-interact-caret { transform: rotate(135deg) translate(-1px, 2px); }
+/* The list, over the button that opened it: each thing a full-width button a thumb tall, then Back. */
+.tx .tx-interact-pick { display: flex; flex-direction: column; gap: 8px; padding: 10px; border: 1px solid rgba(230, 189, 92, 0.45);
+  border-radius: 14px; background: rgba(12, 14, 34, 0.96); animation: tx-interact-in 0.25s ease-out both; }
+.tx .tx-interact-pick .tx-btn { min-height: 52px; font-size: 17px; box-shadow: none; }
+.tx .tx-interact-pick .tx-btn[aria-disabled="true"] { opacity: 0.55; }
+@media (prefers-reduced-motion: reduce) { .tx .tx-btn.gold.tx-interact, .tx .tx-interact-pick { animation: none; } }
 .tx .tx-interact .tx-line-icon { width: 22px; height: 22px; }
 .tx .tx-interact[aria-disabled="true"] { opacity: 1; color: var(--wf-muted); background: #15172e; border-color: rgba(230, 189, 92, 0.35); box-shadow: none;
   font-family: var(--wf-sans); letter-spacing: 0.02em; }

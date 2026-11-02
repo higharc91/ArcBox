@@ -31,7 +31,7 @@ describe("tactics phone module", () => {
     expect(names).toEqual([
       "check-pick", "check-rolled", "choice-follower", "choice-leader", "dialogue", "dialogue-leader", "pickClass", "pickEncounter",
       "pickEncounter-noWalk",
-      "react", "results", "status", "turn", "vote", "vote-tie", "walk-follower", "walk-interact", "walk-leader",
+      "react", "results", "status", "turn", "vote", "vote-tie", "walk-follower", "walk-interact", "walk-leader", "walk-things", "walk-things-follower",
     ]);
     for (const name of names) {
       render(<ControllerScreen view={view(name)} send={() => {}} me="ALEX" game="tactics" />);

@@ -222,34 +222,100 @@ export function HostMenu({ canBattle, send, keep = "Keep walking" }: { canBattle
   );
 }
 
+/** How long the list of what's in reach stays open untouched before it closes by itself. */
+const PICK_MS = 12000;
+
+/** One thing the leader can use: a beat's spot (no target, so the server does the beat) or a thing to interact with. */
+export interface InteractChoice {
+  label: string;
+  target: string | null;
+}
+
 /**
- * The leader's Interact button, while a beat's spot is in reach: "Talk", "Look around"… It sits at the foot of the info
- * column, never between the pad and the thumb, so its coming and going doesn't move the pad. One tap starts the beat; a
- * second tap of a double tap is dropped, and the button wakes again if the server didn't take it (out of reach by then).
+ * What the leader can use, the button's first: the beat in reach, when the button says the beat's word (the server puts a beat first),
+ * then each thing in reach, nearest first (interactables design §2.5). A server that sends no list gives the button alone.
  */
-function Interact({ label, send, viewId }: { label: string; send: CustomScreenProps["send"]; viewId: string }) {
+export function interactChoices(interact: string | null | undefined, targets: WalkData["targets"]): InteractChoice[] {
+  const things = (targets ?? []).map((t) => ({ label: t.label, target: t.id }));
+  const beat = interact && things[0]?.label !== interact ? [{ label: interact, target: null }] : [];
+  return [...beat, ...things];
+}
+
+/**
+ * The leader's Interact button, while a beat's spot or a thing is in reach: "Talk", "Open the chest"… It sits at the foot of the info
+ * column, never between the pad and the thumb, so its coming and going doesn't move the pad. With more than one in reach, a second button
+ * beside it opens the list of all of them, and a pick uses that one. One use per view: a second tap of a double tap is dropped, and it
+ * wakes again if the server didn't take it (out of reach by then).
+ */
+function Interact({ choices, send, viewId }: { choices: InteractChoice[]; send: CustomScreenProps["send"]; viewId: string }) {
   const sfx = useSfx();
   const [sent, setSent] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
   const sentFor = useRef<string | null>(null);
+  const more = useRef<HTMLButtonElement>(null);
+  const main = useRef<HTMLButtonElement>(null);
+  const list = useRef<HTMLDivElement>(null);
+  const shown = open && choices.length > 1;
   useEffect(() => {
     if (!sent) return;
     const id = setTimeout(() => { sentFor.current = null; setSent(null); }, INTERACT_REARM_MS);
     return () => clearTimeout(id);
   }, [sent]);
+  useEffect(() => {
+    if (!shown) return;
+    list.current?.querySelector<HTMLButtonElement>("button")?.focus();
+    const id = setTimeout(() => setOpen(false), PICK_MS);
+    return () => clearTimeout(id);
+  }, [shown]);
+  useEffect(() => {
+    if (open && choices.length < 2) setOpen(false);
+  }, [open, choices.length]);
+
   // Asleep, it's only aria-disabled, not disabled: a disabled button would drop the keyboard's focus to the page.
   const busy = sent === viewId;
+  const use = (choice: InteractChoice) => {
+    if (sentFor.current === viewId) return;
+    sentFor.current = viewId;
+    setSent(viewId);
+    sfx("confirm");
+    if (choice.target === null) send("interact");
+    else send("interact", { target: choice.target });
+  };
+  const close = () => {
+    sfx("cancel");
+    setOpen(false);
+    more.current?.focus();
+  };
+  const first = choices[0]!;
   return (
-    <button type="button" class="tx-btn gold tx-interact" aria-disabled={busy}
-      onClick={() => {
-        if (sentFor.current === viewId) return;
-        sentFor.current = viewId;
-        setSent(viewId);
-        sfx("confirm");
-        send("interact");
-      }}>
-      <LineIcon name="speech" />
-      {label}
-    </button>
+    <div class="tx-interact-dock">
+      {shown ? (
+        <div class="tx-interact-pick" role="group" aria-label="What to use" ref={list}
+          onKeyDown={(e) => { if (e.key === "Escape") close(); }}>
+          {choices.map((c) => (
+            <button key={c.target ?? ""} type="button" class="tx-btn gold" aria-disabled={busy}
+              onClick={() => { use(c); setOpen(false); main.current?.focus(); }}>
+              {c.label}
+            </button>
+          ))}
+          <button type="button" class="tx-btn ghost" onClick={close}>Back</button>
+        </div>
+      ) : null}
+      <div class="tx-interact-row">
+        <button type="button" class="tx-btn gold tx-interact" aria-disabled={busy} ref={main} onClick={() => use(first)}>
+          <LineIcon name="speech" />
+          {first.label}
+        </button>
+        {choices.length > 1 ? (
+          <button type="button" class="tx-btn ghost tx-interact-more" ref={more} aria-expanded={shown}
+            aria-label={`${choices.length} things in reach: choose one`}
+            onClick={() => { if (shown) close(); else { sfx("select"); setOpen(true); } }}>
+            <span aria-hidden="true">{choices.length}</span>
+            <span class="tx-interact-caret" aria-hidden="true" />
+          </button>
+        ) : null}
+      </div>
+    </div>
   );
 }
 
@@ -279,6 +345,7 @@ const classId = (name: string) => name.toLowerCase().replaceAll(" ", "_");
 export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
   const d = data as WalkData;
   const sfx = useSfx();
+  const choices = useMemo(() => interactChoices(d.interact, d.targets), [d.interact, d.targets]);
 
   // The screen's `stream` closes over its view's id, so timers must reach the newest one, or all they send is dropped.
   const out = useRef(stream);
@@ -355,7 +422,7 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
         )}
         <Party party={d.party} />
         {d.portal && !d.leader ? <p><a class="tx-link" href={d.portal} target="_blank" rel="noopener">Your character</a></p> : null}
-        {d.leader && d.interact ? <Interact label={d.interact} send={send} viewId={viewId} /> : null}
+        {d.leader && choices.length > 0 ? <Interact choices={choices} send={send} viewId={viewId} /> : null}
       </div>
       {d.leader ? <Pad sender={sender} /> : null}
     </div>
