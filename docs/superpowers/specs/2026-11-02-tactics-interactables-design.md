@@ -413,3 +413,26 @@ whose key comes from a later beat). When a region first has a door, `StoryOrder`
 6. **Story hooks** (§1.11): worth the lore schema change now, or after Chapter 1 is tuned?
 7. **Mobs and fog of war** (your later ideas) would both read things: fog would hide them until explored, and roaming mobs could guard a chest.
    Nothing here blocks either.
+
+---
+
+## How this fits the world-dressing plan
+
+The user's local work has a world-dressing design and plan on branch `world-dressing-design`
+(`docs/superpowers/specs/2026-11-01-tactics-world-dressing-design.md`, `docs/superpowers/plans/2026-11-01-tactics-world-dressing.md`).
+The user chose to keep both pieces of work, so read this before changing `WorldGround` or a region's files.
+
+- **Two layers, two files.** World dressing paints *props* into the region file the painting workspace exports
+  (`rules/world/<region>.json`, `props`). Things to interact with live in a separate hand-written file,
+  `rules/interactables/<region>.json`. Neither file edits the other.
+- **One source of blocking.** Both block walking through `WorldGround`: painted props from the region and the props manifest, and things laid
+  over the ground with `WorldGround.With` (closed doors, chests, seen traps). Every walking consumer (steps, reach, `CanStandOn`, landing,
+  travel, the scene cast, region checks, `StoryOrder` once it learns about things) must see both.
+- **No prop on a thing's tile.** The loader should refuse a painted prop on any interactable's tile, the same way it refuses props on battle
+  stamps, and the export should warn about a blocking prop next to a door or lever that would make it unreachable. Add this check when world
+  dressing lands (it can't be added here first, because `props` doesn't exist on this branch yet).
+- **Overlap with world dressing's sub-project 6.** "Inventory with looting and Perception" is partly built here: containers, pickups, loot into
+  the leader's bag and passive Perception exist now. Sub-project 6 should extend this engine (a real inventory, shared loot, active Search,
+  gathering nodes) rather than build a second one. World dressing's "out of scope: containers, pickups" stays true for its own milestone.
+- **Art.** Painted props use the pack's prop art; things use `interactables.*` keys (§4 and the art JSON), falling back to existing props
+  meanwhile. The user's art AI works from both lists.
