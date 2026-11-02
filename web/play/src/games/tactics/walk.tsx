@@ -333,6 +333,36 @@ function Interact({ choices, send, viewId }: { choices: InteractChoice[]; send: 
   );
 }
 
+/**
+ * The leader's Search (interactables design §7.4), in a region with things: the party's Investigation check for whatever is hidden
+ * nearby. It's there whether or not anything is, so it gives nothing away, and it never comes and goes under a thumb. One send per
+ * view, as Interact's: a double tap sends once, and it wakes again if the server didn't take it.
+ */
+function Search({ send, viewId }: { send: CustomScreenProps["send"]; viewId: string }) {
+  const sfx = useSfx();
+  const [sent, setSent] = useState<string | null>(null);
+  const sentFor = useRef<string | null>(null);      // a ref, so the second tap of a double tap sees the first before a render
+  useEffect(() => {
+    if (!sent) return;
+    const id = setTimeout(() => { sentFor.current = null; setSent(null); }, INTERACT_REARM_MS);
+    return () => clearTimeout(id);
+  }, [sent]);
+  const busy = sent === viewId;
+  const search = () => {
+    if (sentFor.current === viewId) return;
+    sentFor.current = viewId;
+    setSent(viewId);
+    sfx("confirm");
+    send("search");
+  };
+  return (
+    <button type="button" class="tx-btn ghost tx-search" aria-disabled={busy} onClick={search}>
+      <LineIcon name="search" />
+      Search
+    </button>
+  );
+}
+
 function Party({ party }: { party: WalkMember[] }) {
   return (
     <ul class="tx-walk-party" aria-label="The party">
@@ -436,7 +466,12 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
         )}
         <Party party={d.party} />
         {d.portal && !d.leader ? <p><a class="tx-link" href={d.portal} target="_blank" rel="noopener">Your character</a></p> : null}
-        {d.leader && choices.length > 0 ? <Interact choices={choices} send={send} viewId={viewId} /> : null}
+        {d.leader && d.search ? (
+          <div class="tx-walk-dock">
+            {choices.length > 0 ? <Interact choices={choices} send={send} viewId={viewId} /> : null}
+            <Search send={send} viewId={viewId} />
+          </div>
+        ) : d.leader && choices.length > 0 ? <Interact choices={choices} send={send} viewId={viewId} /> : null}
       </div>
       {d.leader ? <Pad sender={sender} /> : null}
     </div>

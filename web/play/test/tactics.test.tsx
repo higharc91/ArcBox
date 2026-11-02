@@ -29,7 +29,7 @@ describe("tactics phone module", () => {
     const names = Object.keys(fixtures).map((k) => k.replace("./fixtures/tactics/", "").replace(".json", ""))
       .filter((n) => !n.startsWith("portal-")).sort();
     expect(names).toEqual([
-      "check-pick", "check-rolled", "choice-follower", "choice-leader", "dialogue", "dialogue-leader", "pickClass", "pickEncounter",
+      "check-pick", "check-rolled", "check-search", "check-search-rolled", "choice-follower", "choice-leader", "dialogue", "dialogue-leader", "pickClass", "pickEncounter",
       "pickEncounter-noWalk",
       "react", "results", "status", "turn", "vote", "vote-tie", "walk-follower", "walk-interact", "walk-leader", "walk-things", "walk-things-follower",
     ]);

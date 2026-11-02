@@ -170,6 +170,11 @@ export interface WalkData {
   targets?: { id: string; label: string }[];
   /** With `targets`: true when the leader's button is a beat's (`interact` is its word, sent with no target); false when it's the first thing's. */
   beat?: boolean;
+  /**
+   * With `targets`: true on the leader's screen, where a Search button sends `search` (interactables design §7.4): the party's
+   * Investigation check for what's hidden nearby. False for everyone else; absent in a region with no things.
+   */
+  search?: boolean;
 }
 
 /**
@@ -234,14 +239,16 @@ export interface CheckRoll {
   die: number;
   bonus: number;
   total: number;
-  dc: number;
+  /** Null for a search, whose DC isn't shown. */
+  dc: number | null;
   success: boolean;
 }
 
 /** A skill check: the party picks who rolls, by a vote on the same rules, then the roll. */
 export interface CheckData {
   skill: string;
-  dc: number;
+  /** Null for a search (interactables design §7.4): each thing it looks for has its own DC, and it mustn't say whether there are any. */
+  dc: number | null;
   /** The option it's for. */
   title: string;
   cards: CheckCard[];

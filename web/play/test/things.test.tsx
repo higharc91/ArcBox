@@ -109,6 +109,31 @@ describe("things to interact with, on the walk screen", () => {
     expect(screen.queryByRole("button", { name: /Pick up|Open|choose one/ })).toBeNull();
   });
 
+  it("the leader can Search where there are things, and it sends once for a double tap", () => {
+    const { send } = show("walk-things");
+    const search = screen.getByRole("button", { name: "Search" });
+    act(() => {
+      search.click();
+      search.click();
+    });
+    expect(send.mock.calls.map((c) => c[0])).toEqual([{ action: "search" }]);
+    expect(search.getAttribute("aria-disabled")).toBe("true");
+    act(() => { vi.advanceTimersByTime(3_000); });
+    expect(search.getAttribute("aria-disabled")).toBe("false");
+  });
+
+  it("Search stays with nothing in reach, and a follower and a region with no things have none", () => {
+    show("walk-things", (d) => { d.interact = null; d.targets = []; });
+    expect(screen.getByRole("button", { name: "Search" })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: /Pick up|Open/ })).toBeNull();
+    cleanup();
+    show("walk-things-follower");
+    expect(screen.queryByRole("button", { name: "Search" })).toBeNull();
+    cleanup();
+    show("walk-leader");
+    expect(screen.queryByRole("button", { name: "Search" })).toBeNull();
+  });
+
   it("a server that sends no list keeps the old button, which names no target", () => {
     const { send } = show("walk-interact");
     expect(screen.queryByRole("button", { name: /choose one/ })).toBeNull();

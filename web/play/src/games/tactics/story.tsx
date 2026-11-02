@@ -316,14 +316,18 @@ function D20({ value }: { value: number }) {
 function RollPanel({ roll, by, question }: { roll: CheckRoll; by: CheckCard | undefined; question: string }) {
   // A reconnect re-sends the rolled view: its remount stays quiet and still, as an alert's does.
   const fresh = useAlertOnMount("dice", question);
-  const verdict = roll.success ? "Success" : "Failure";
+  // A search's DC isn't shown (dc null): the verdict says what it found instead.
+  const hidden = roll.dc === null;
+  const verdict = hidden ? (roll.success ? "Found something" : "Nothing found") : roll.success ? "Success" : "Failure";
+  const against = hidden ? "" : ` against DC ${roll.dc}`;
   return (
     <div class={`tx-roll ${roll.success ? "ok" : "bad"}${fresh ? " fresh" : ""}`} role="status"
-      aria-label={`${by?.name ?? "The party"} rolled ${roll.die}, ${signed(roll.bonus)}, ${roll.total} against DC ${roll.dc}: ${verdict}`}>
+      aria-label={`${by?.name ?? "The party"} rolled ${roll.die}, ${signed(roll.bonus)}, ${roll.total}${against}: ${verdict}`}>
       <D20 value={roll.die} />
       <div class="tx-roll-text">
         <p class="tx-roll-sum">
-          {roll.die} {roll.bonus < 0 ? "−" : "+"} {Math.abs(roll.bonus)} = <b>{roll.total}</b> <small>vs DC</small> {roll.dc}
+          {roll.die} {roll.bonus < 0 ? "−" : "+"} {Math.abs(roll.bonus)} = <b>{roll.total}</b>
+          {hidden ? null : <> <small>vs DC</small> {roll.dc}</>}
         </p>
         <p class="tx-roll-verdict">{verdict}</p>
         <p class="tx-note">{`${by?.name ?? "The party"} rolled`}</p>
@@ -371,7 +375,7 @@ function CheckQuestion({ data, send, viewId, question }: CustomScreenProps & { q
       <div class="tx-check-head">
         <span class="tx-eyebrow">Skill check</span>
         <h2 class="tx-check-skill">{skillName(d.skill)}</h2>
-        <p class="tx-check-for"><span class="tx-dc">DC {d.dc}</span><span>“{d.title}”</span></p>
+        <p class="tx-check-for"><span class="tx-dc">{d.dc === null ? "DC hidden" : `DC ${d.dc}`}</span><span>“{d.title}”</span></p>
         {roll ? null : <Clock />}
       </div>
       {roll ? <Rolled roll={roll} by={d.cards.find((c) => c.id === roll.member)} question={question} /> : (

@@ -336,6 +336,28 @@ describe("skill checks", () => {
   });
 });
 
+describe("a search's check (interactables design §7.4)", () => {
+  it("shows no DC while the party picks who rolls", () => {
+    show("check-search");
+    const head = document.querySelector(".tx-check-head")!;
+    expect(head.textContent).toContain("DC hidden");
+    expect(head.textContent).toContain("Search the area");
+    expect(head.textContent).not.toMatch(/DC \d/);
+  });
+
+  it("rolls with no DC, and says what it found", () => {
+    show("check-search-rolled");
+    const roll = document.querySelector(".tx-roll")! as HTMLElement;
+    expect(roll.textContent).toMatch(/5\s*\+\s*5\s*=\s*10/);
+    expect(roll.textContent).not.toContain("vs DC");
+    expect(within(roll).getByText("Nothing found")).toBeTruthy();
+    expect(roll.getAttribute("aria-label")).not.toContain("DC");
+    cleanup();
+    show("check-search-rolled", (d) => { (d.roll as { success: boolean }).success = true; });
+    expect(within(document.querySelector(".tx-roll")! as HTMLElement).getByText("Found something")).toBeTruthy();
+  });
+});
+
 describe("alerts", () => {
   it("a who-rolls question right after a vote alerts too: the quiet window is the vote's, not every question's", () => {
     const p = phone();

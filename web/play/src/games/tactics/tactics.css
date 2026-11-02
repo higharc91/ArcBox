@@ -528,6 +528,10 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 /* No glow: the scrolling column would clip it to a box. */
 .tx .tx-interact-dock { position: sticky; bottom: 0; z-index: 2; flex: none; margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
 .tx .tx-interact-row { display: flex; gap: 8px; }
+/* With a Search beside it (a region with things, interactables design §7.4) the dock is the pair's, and Search sits under Interact. */
+.tx .tx-walk-dock { position: sticky; bottom: 0; z-index: 2; flex: none; margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
+.tx .tx-walk-dock .tx-interact-dock { position: static; margin-top: 0; }
+.tx .tx-btn.tx-search { min-height: 48px; font-size: 17px; gap: 8px; box-shadow: none; }
 .tx .tx-btn.gold.tx-interact { flex: 1 1 auto; min-width: 0; min-height: 56px; font-size: 19px; box-shadow: none;
   animation: tx-interact-in 0.45s ease-out both; }
 /* With more than one thing in reach: how many, and a caret that opens the list of them, a thumb wide. */
