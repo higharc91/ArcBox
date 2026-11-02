@@ -392,7 +392,7 @@ public sealed class StagePlanTests(ITestOutputHelper output)
         var skirt = StagePlan.Build(ground, stage, null, Pack.Art).Plan.Items.OfType<Face>()
             .Where(f => f.Kind is FaceKind.Top or FaceKind.Decal && !ground.Map.StampedTiles.Contains(f.Tile)).ToArray();
 
-        Assert.Contains(skirt, f => f.Kind == FaceKind.Decal);
+        Assert.Contains(skirt, f => f.Kind == FaceKind.Top);       // the ford's own ground art takes no decals (BoardPlan.DecalFor), so the tops carry it
         Assert.All(skirt, f => Assert.Equal(Whole(world[(f.Tile, f.Kind)]).Split(' ').Skip(3), Whole(f).Split(' ').Skip(3)));
         foreach (var missing in skirt.Where(f => f.Kind == FaceKind.Top).Select(f => f.Tile).Where(t => world.ContainsKey((t, FaceKind.Decal))))
             Assert.Contains(skirt, f => f.Tile == missing && f.Kind == FaceKind.Decal);

@@ -27,6 +27,35 @@ public sealed class ArtIndexTests
             AssertExists(Pack.Art.Texture(lip), $"{material} lip");
     }
 
+    public static TheoryData<string, string> PropVariants()
+    {
+        using var manifest = System.Text.Json.JsonDocument.Parse(File.ReadAllBytes(Path.Combine(Pack.Root, "props", "manifest.json")));
+        var data = new TheoryData<string, string>();
+        foreach (var prop in manifest.RootElement.GetProperty("props").EnumerateObject())
+            foreach (var variant in prop.Value.GetProperty("variants").EnumerateObject())
+                data.Add(prop.Name, variant.Name);
+        return data;
+    }
+
+    /// <summary>
+    /// What draws a prop is the size its manifest gives it, or its variant's own look: an image that isn't that size, or a whole multiple of it, is
+    /// stretched and stands off its tile. A new look beside older, smaller art needs a look of its own (<c>looks</c>).
+    /// </summary>
+    [Theory]
+    [MemberData(nameof(PropVariants))]
+    public void Every_prop_image_is_the_size_its_manifest_draws_it_at(string id, string variant)
+    {
+        var art = Pack.Art.Prop(id, [variant])!;
+        var path = Path.Combine(Pack.Root, art.Image.Path);
+        Span<byte> header = stackalloc byte[24];
+        using (var file = File.OpenRead(path))
+            file.ReadExactly(header);
+        var (width, height) = (System.Buffers.Binary.BinaryPrimitives.ReadInt32BigEndian(header[16..]), System.Buffers.Binary.BinaryPrimitives.ReadInt32BigEndian(header[20..]));
+        var scale = height / art.Height;
+        Assert.True(scale >= 1 && height == art.Height * scale && width == art.Width * art.Image.Frames * scale,
+            $"{id}/{variant}: {art.Image.Path} is {width}x{height}, drawn as {art.Image.Frames} frame(s) of {art.Width}x{art.Height}");
+    }
+
     [Theory]
     [InlineData("lava/molten", "lava_side")]
     [InlineData("basalt/dark", "basalt_side")]

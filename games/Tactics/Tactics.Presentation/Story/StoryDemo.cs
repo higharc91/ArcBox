@@ -20,7 +20,7 @@ public static class StoryDemo
 
     private const string Region = "ashen_ford";
     private const string Campaign = "story-demo";
-    private static readonly Tile Spot = new(34, 59);
+    private static readonly Tile Spot = new(33, 59);      // ch1_mayors_request's spot, where Pip stands
     private static readonly Tile Party = new(33, 61);
     private static readonly string[] Players = ["Jess", "Dave", "Priya", "Sam", "Marcus", "Ana"];
     private static readonly string[] Classes = ["fighter", "cleric", "rogue", "wizard", "paladin", "bard"];

@@ -125,7 +125,10 @@ public sealed class WorldPlanTests
         var baseBlocks = blocks.Where(i => i is not Face { Kind: FaceKind.Decal or FaceKind.Blend }).ToArray();
 
         Assert.DoesNotContain(baseBlocks, i => i is Face { Grid: true });
-        Assert.Equal(whole.Items.Select(i => i is Face f ? Key(f with { Grid = false }) : Key(i)), baseBlocks.Select(Key));
+        // The world's creatures are drawn by the TV's actor layer (WorldAnimalIds), not baked into its blocks; a battle board keeps them.
+        var animals = terrain.Map.Props.Where(p => WorldAnimalIds.Contains(p.Id)).Select(p => p.At).ToHashSet();
+        Assert.Equal(whole.Items.Where(i => i is not Sprite s || !animals.Contains(s.Tile)).Select(i => i is Face f ? Key(f with { Grid = false }) : Key(i)),
+            baseBlocks.Select(Key));
         Assert.Contains(blocks, i => i is Face { Kind: FaceKind.Decal });
     }
 

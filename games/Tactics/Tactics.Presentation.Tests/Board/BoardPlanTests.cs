@@ -362,7 +362,7 @@ public sealed class BoardPlanTests
     [Fact]
     public void The_plan_says_whether_it_needs_a_clock()
     {
-        Assert.True(Plan(Pack.Map("river_crossing")).Animated);    // water
+        Assert.True(Plan(Map(["water/clear"], [], "0:0:1")).Animated);    // water: river_crossing's ford water is still
         Assert.False(Plan(Map(["cobble/grey"], [], "1:0:0")).Animated);
     }
 

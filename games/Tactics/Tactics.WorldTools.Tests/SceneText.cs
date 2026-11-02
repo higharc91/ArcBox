@@ -192,7 +192,8 @@ internal static partial class SceneText
         short At(int offset) => BitConverter.ToInt16(bytes, offset);
         var cells = new List<Cell>();
         for (var i = 2; i < bytes.Length; i += CellBytes)
-            cells.Add(new Cell(new Tile(At(i), At(i + 2)), At(i + 4), At(i + 6), At(i + 8)));
+            if (At(i + 4) >= 0)     // a cell with source -1 is an erased one, which Godot can keep in the data: GetUsedCells leaves it out
+                cells.Add(new Cell(new Tile(At(i), At(i + 2)), At(i + 4), At(i + 6), At(i + 8)));
         return cells;
     }
 }

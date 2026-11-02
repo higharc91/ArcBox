@@ -737,7 +737,7 @@ public sealed class AshenFordDraftTests
         foreach (var (at, id, _) in Props(source))
         {
             var tile = source.Get(at);
-            Assert.True(tile is not null && (tile.Flags & (TileFlags.Water | TileFlags.Impassable)) == 0 || id is "crag" or "rock_cluster" or "fishing_skiff", $"The {id} at {at} stands on {tile}.");
+            Assert.True(tile is not null && (tile.Flags & (TileFlags.Water | TileFlags.Impassable)) == 0 || id is "crag" or "rock_cluster" or "fishing_skiff" or "river_duck", $"The {id} at {at} stands on {tile}.");
             Assert.False(built.Contains(at), $"The {id} at {at} is inside a building.");
         }
     }

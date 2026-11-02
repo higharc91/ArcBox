@@ -804,13 +804,16 @@
         "red": "tent_red.png"
       },
       "size": [
-        96,
-        89
+        44,
+        34
       ],
       "anchor": [
-        60,
-        88
+        22,
+        33
       ],
+      "looks": {
+        "hide": { "size": [96, 89], "anchor": [60, 88] }
+      },
       "frames": 1,
       "fps": 0.0,
       "blocks": true,
@@ -978,13 +981,16 @@
         "ashen": "gravestone_ashen.png"
       },
       "size": [
-        24,
-        38
+        18,
+        24
       ],
       "anchor": [
-        16,
-        37
+        9,
+        23
       ],
+      "looks": {
+        "ashen": { "size": [24, 38], "anchor": [16, 37] }
+      },
       "frames": 1,
       "fps": 0.0,
       "blocks": true,
@@ -1000,13 +1006,16 @@
         "ashen": "grave_cross_ashen.png"
       },
       "size": [
-        24,
-        35
+        18,
+        24
       ],
       "anchor": [
-        15,
-        34
+        9,
+        23
       ],
+      "looks": {
+        "ashen": { "size": [24, 35], "anchor": [15, 34] }
+      },
       "frames": 1,
       "fps": 0.0,
       "blocks": true,
@@ -1099,13 +1108,16 @@
         "ashen": "rubble_ashen.png"
       },
       "size": [
-        56,
-        39
+        28,
+        16
       ],
       "anchor": [
-        37,
-        38
+        14,
+        15
       ],
+      "looks": {
+        "ashen": { "size": [56, 39], "anchor": [28, 38] }
+      },
       "frames": 1,
       "fps": 0.0,
       "blocks": false,

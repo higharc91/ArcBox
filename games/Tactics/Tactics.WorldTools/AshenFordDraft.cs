@@ -316,6 +316,7 @@ public static class AshenFordDraft
             across.Remove(corner.Tile);
             along.Remove(corner.Tile);
         }
+        along.Remove((29, 84));      // the reeve's cottage stands there, at the head of Southfield's east side
 
         return
         [

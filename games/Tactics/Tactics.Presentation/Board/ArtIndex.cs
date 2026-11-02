@@ -45,7 +45,11 @@ public sealed class ArtIndex
         ImmutableDictionary<string, TextureGlow> Glows);
 
     private sealed record PropFamily(ImmutableArray<(string Name, string Path)> Variants, int Frames, double Fps,
-        int Width, int Height, int AnchorX, int AnchorY, int TileHeight, PropLight? Light, ImmutableDictionary<string, Rgb> Colours);
+        int Width, int Height, int AnchorX, int AnchorY, int TileHeight, PropLight? Light, ImmutableDictionary<string, Rgb> Colours,
+        ImmutableDictionary<string, PropLook> Looks);
+
+    /// <summary>A variant drawn at a size and anchor of its own (the manifest's <c>looks</c>): a new look added beside older, smaller art.</summary>
+    private sealed record PropLook(int Width, int Height, int AnchorX, int AnchorY);
 
     private sealed record BuildingVariant(string Image, string? Shadow, string? Lights);
 
@@ -104,7 +108,8 @@ public sealed class ArtIndex
         if (!_props.TryGetValue(id, out var prop))
             return null;
         var (name, path) = Pick(prop.Variants, prefer);
-        return new PropArt(new ArtImage(path, prop.Frames, prop.Fps, prop.Height), prop.Width, prop.Height, prop.AnchorX, prop.AnchorY,
+        var look = prop.Looks.GetValueOrDefault(name) ?? new PropLook(prop.Width, prop.Height, prop.AnchorX, prop.AnchorY);
+        return new PropArt(new ArtImage(path, prop.Frames, prop.Fps, look.Height), look.Width, look.Height, look.AnchorX, look.AnchorY,
             prop.Light is { } light ? light with { Colour = prop.Colours.GetValueOrDefault(name, light.Colour) } : null,
             prop.TileHeight);
     }
@@ -214,7 +219,11 @@ public sealed class ArtIndex
             _props[entry.Name] = new PropFamily(Variants(e, prefix), e.GetProperty("frames").GetInt32(), e.GetProperty("fps").GetDouble(),
                 size[0].GetInt32(), size[1].GetInt32(), anchor[0].GetInt32(), anchor[1].GetInt32(), tileHeight,
                 lit ? Light(light, Point(anchor), prefix) : null,
-                lit ? Colours(light.GetProperty("colour")) : ImmutableDictionary<string, Rgb>.Empty);
+                lit ? Colours(light.GetProperty("colour")) : ImmutableDictionary<string, Rgb>.Empty,
+                e.TryGetProperty("looks", out var looks)
+                    ? looks.EnumerateObject().ToImmutableDictionary(l => l.Name, l => new PropLook(l.Value.GetProperty("size")[0].GetInt32(), l.Value.GetProperty("size")[1].GetInt32(),
+                        l.Value.GetProperty("anchor")[0].GetInt32(), l.Value.GetProperty("anchor")[1].GetInt32()), StringComparer.Ordinal)
+                    : ImmutableDictionary<string, PropLook>.Empty);
         }
     }
 
