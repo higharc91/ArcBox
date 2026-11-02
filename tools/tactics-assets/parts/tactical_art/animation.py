@@ -13,7 +13,8 @@ from arcpix.palette import OUTLINE
 from parts.characters import SLOTS
 from parts.rig import Pose
 from .roster import character
-from .common import composite
+from .attachments import ATTACHMENTS,HAND_POINTS,SHOULDERS
+from .races import fit_point
 
 FRAME=(160,160)
 ANCHOR=(80,123)
@@ -30,7 +31,7 @@ def rotate(degrees,pivot):
 @lru_cache(maxsize=264)
 def rest(role,race,back):
     c,p,layers=character(role,race,back)
-    return p,{name:layer.ramp_map() for name,layer in layers.items()}
+    return p,{name:layer.ramp_map() for name,layer in layers.items() if layer.slot.any()}
 
 def transform(name,pose,race=None):
     drop=(6 if pose.kneel else 10 if pose.sit else 2*pose.crouch)
@@ -72,22 +73,92 @@ def warp(image,matrix):
     inverse=(e/det,-b/det,(b*f-e*c)/det,-d/det,a/det,(d*c-a*f)/det)
     return image.transform(FRAME,Image.Transform.AFFINE,inverse,Image.Resampling.NEAREST)
 
-def dagger_grip(name,race):
-    """Grip in fitted source pixels, before pose articulation."""
-    x,y=(44,51) if name=='weapon' else (19,48)
-    width={'dwarf':1.10,'halfling':.88,'gnome':.88,'half_orc':1.12,'goliath':1.12}.get(race,1)
-    heights={'dwarf':[0,24,44,57,75,80],'halfling':[0,25,45,58,75,80],
-        'gnome':[0,25,45,58,75,80],'half_orc':[0,9,30,49,75,80],
-        'goliath':[0,9,30,49,75,80]}.get(race,[0,12,33,50,75,80])
-    return np.array([32+(x-32)*width,np.interp(y,[0,12,33,50,75,80],heights),1.])
+def world_transform(pose):
+    return translate(*OFFSET)@translate(pose.shift*2,0)@rotate(-pose.tilt,(32,75))
 
-def dagger_transform(name,pose,race):
-    # Map the grip through the exact arm transform. Rotating the blade around
-    # that mapped point keeps it attached even when the arm stretches or turns.
-    grip=dagger_grip(name,race)
-    arm=transform('near-hand' if name=='weapon' else 'far-arm',pose,race)
-    target=arm@grip
-    return translate(target[0],target[1])@rotate(pose.weapon-25-pose.tilt,(0,0))@translate(-grip[0],-grip[1])
+def hand_target(role,side,pose,race,back=False):
+    """World position of the actual palm socket, including race fit and pose."""
+    if role=='bard' and side=='far':
+        # The plucking hand follows the same rigid lute as the neck hand.
+        layer='instrument-back' if back else 'weapon'
+        return item_transform(role,layer,pose,race,back)@np.r_[fit_point((27,53),race),1.]
+    definitions=ATTACHMENTS[role]
+    layer='weapon' if side=='near' else 'offhand'
+    if role=='bard' and back and side=='near':layer='instrument-back'
+    definition=definitions.get(layer)
+    socket=definition.grip if definition else HAND_POINTS[side]
+    offset=pose.hand_n if side=='near' else pose.hand_f
+    default=(1,0) if side=='near' else (-1,0)
+    drop=6 if pose.kneel else 10 if pose.sit else 2*pose.crouch
+    delta=np.array([pose.lean*2+(offset[0]-default[0])*1.5,
+        pose.bob*2+drop-pose.rise*2+offset[1]*1.5])
+    return world_transform(pose)@np.r_[fit_point(socket,race)+delta,1.]
+
+@lru_cache(maxsize=32768)
+def arm_transform(role,side,pose,race,back=False):
+    shoulder=fit_point(SHOULDERS[side],race)
+    grip=fit_point(HAND_POINTS[side],race)
+    target_world=hand_target(role,side,pose,race,back)
+    world=world_transform(pose)
+    # Undo the whole-character rotation before solving the local limb.
+    target=np.linalg.solve(world,target_world)[:2]
+    drop=6 if pose.kneel else 10 if pose.sit else 2*pose.crouch
+    shifted=shoulder+np.array([pose.lean*2,pose.bob*2+drop-pose.rise*2])
+    v=grip-shoulder;w=target-shifted
+    length=max(.01,np.linalg.norm(w))/np.linalg.norm(v)
+    angle=math.atan2(w[1],w[0])-math.atan2(v[1],v[0])
+    c,s=math.cos(angle),math.sin(angle)
+    turn=np.array([[c,-s],[s,c]])
+    axis=v/np.linalg.norm(v)
+    # Stretch along the original arm axis, preserving its thickness. The old
+    # screen-Y scaling did not map the wrist exactly onto the moving grip.
+    linear=turn@(np.eye(2)+(length-1)*np.outer(axis,axis))
+    affine=np.eye(3);affine[:2,:2]=linear;affine[:2,2]=shifted-linear@shoulder
+    return world@affine
+
+@lru_cache(maxsize=32768)
+def item_transform(role,name,pose,race,back=False):
+    definition=ATTACHMENTS[role][name]
+    source=fit_point(definition.grip,race)
+    target=hand_target(role,definition.hand,pose,race,back)
+    angle=(pose.weapon-25 if definition.rotate else 0)-pose.tilt
+    return translate(target[0],target[1])@rotate(angle,(0,0))@translate(-source[0],-source[1])
+
+def layer_transform(role,name,pose,race,back=False):
+    if name in ATTACHMENTS[role]:return item_transform(role,name,pose,race,back)
+    if name in ('near-hand','far-arm'):
+        return arm_transform(role,'near' if name=='near-hand' else 'far',pose,race,back)
+    if name in ('near-palm','far-palm'):
+        side='near' if name=='near-palm' else 'far'
+        source=fit_point(HAND_POINTS[side],race)
+        v=source-fit_point(SHOULDERS[side],race)
+        moved=arm_transform(role,side,pose,race,back)[:2,:2]@v
+        angle=math.degrees(math.atan2(moved[1],moved[0])-math.atan2(v[1],v[0]))
+        target=hand_target(role,side,pose,race,back)
+        return translate(target[0],target[1])@rotate(angle,(0,0))@translate(-source[0],-source[1])
+    return transform(name,pose,race)
+
+def validate_contacts(role,race,back,pose,posed):
+    """Fail a bake on a detached held object, using actual rasterized coverage.
+
+    One adjacent pixel is allowed for nearest-neighbour rotation/outline coverage;
+    the check is local to the declared palm, not a blade touching some other limb.
+    """
+    for name,definition in ATTACHMENTS[role].items():
+        if name not in posed or definition.kind!='held':continue
+        arm='near-palm' if definition.hand=='near' else 'far-palm'
+        target=hand_target(role,definition.hand,pose,race,back)
+        x,y=np.rint(target[:2]).astype(int)
+        x0,x1=max(0,x-4),min(FRAME[0],x+5)
+        y0,y1=max(0,y-4),min(FRAME[1],y+5)
+        palm=posed[arm][y0:y1,x0:x1]
+        item=posed[name][y0:y1,x0:x1]
+        padded=np.pad(item,1)
+        touching=np.zeros_like(item)
+        for dy in range(3):
+            for dx in range(3):touching|=padded[dy:dy+item.shape[0],dx:dx+item.shape[1]]
+        if not np.any(palm&touching):
+            raise ValueError(f'Detached {race}/{role}/{name}, back={back}, grip=({x},{y}), pose={pose}')
 
 @lru_cache(maxsize=132)
 def colour_table(role,race):
@@ -104,6 +175,7 @@ def colour_table(role,race):
 def frame(role,race,back,pose):
     palette,layers=rest(role,race,back)
     out=Canvas(*FRAME,SLOTS)
+    posed={}
     for name,image in layers.items():
         if name=='head' and not back and (pose.blink or pose.expression in ('shut','pain') or pose.kneel):
             data=np.array(image).copy()
@@ -119,13 +191,16 @@ def frame(role,race,back,pose):
             for limb,offset,default in ((left,pose.foot_f,-1),(right,pose.foot_n,1)):
                 image.alpha_composite(warp(limb,transform(name,pose,race)@translate((offset[0]-default)*1.5,-offset[1]*1.5)))
         else:
-            motion=dagger_transform(name,pose,race) if role=='rogue' and name in ('weapon','offhand') else transform(name,pose,race)
+            motion=layer_transform(role,name,pose,race,back)
             image=warp(image,motion)
         data=np.array(image)
         mask=data[:,:,3]>0
+        if name in ATTACHMENTS[role] or name in ('near-hand','far-arm','near-palm','far-palm'):
+            posed[name]=mask
         out.slot[mask]=data[:,:,0][mask]//16
         out.shade[mask]=data[:,:,1][mask]//32
         out.flags[mask]=0
+    validate_contacts(role,race,back,pose,posed)
     # Same selective-outline neighbor priority as Canvas.outline, vectorized for
     # the ~50,000 runtime frames rather than scanning the padded empty pixels.
     rim=np.zeros_like(out.slot)

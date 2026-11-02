@@ -9,16 +9,26 @@ import json
 
 
 
+def build_profile(race):
+    width={'dwarf':1.10,'halfling':.88,'gnome':.88,'half_orc':1.12,'goliath':1.12}.get(race,1)
+    heights={'dwarf':[0,24,44,57,75,80],'halfling':[0,25,45,58,75,80],
+        'gnome':[0,25,45,58,75,80],'half_orc':[0,9,30,49,75,80],
+        'goliath':[0,9,30,49,75,80]}.get(race,[0,12,33,50,75,80])
+    return width,heights
+
+def fit_point(point,race):
+    """Fit attachment sockets with exactly the same build profile as the art."""
+    width,heights=build_profile(race)
+    x,y=point
+    return np.array([32+(x-32)*width,np.interp(y,[0,12,33,50,75,80],heights)])
+
 def reshape(canvas,race):
     """Warp indexed geometry, preserving material ids and outline flags.
 
     Heads retain their pixel density; short builds shorten the torso/legs rather
     than uniformly shrinking the finished sprite. The foot anchor stays at y=75.
     """
-    width={'dwarf':1.10,'halfling':.88,'gnome':.88,'half_orc':1.12,'goliath':1.12}.get(race,1)
-    ys={'dwarf':[0,24,44,57,75,80],'halfling':[0,25,45,58,75,80],
-        'gnome':[0,25,45,58,75,80],'half_orc':[0,9,30,49,75,80],
-        'goliath':[0,9,30,49,75,80]}.get(race,[0,12,33,50,75,80])
+    width,ys=build_profile(race)
     x=np.clip(np.rint((np.arange(64)-32)/width+32).astype(int),0,63)
     y=np.clip(np.rint(np.interp(np.arange(80),ys,[0,12,33,50,75,80])).astype(int),0,79)
     out=Canvas(64,80,SLOTS)

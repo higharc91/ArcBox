@@ -48,6 +48,30 @@ sprites override race/class selection. Legacy campaign race tags are understood.
 The classic `characters/` layer library below remains the format for existing
 NPCs, enemies and asset-tool consumers; its frame size has not changed.
 
+### Held-item attachment contracts
+
+`parts/tactical_art/attachments.py` declares each carried item's hand, grip point,
+rotation behavior and whether it is held or an intentionally floating effect.
+The same race-fitting profile positions the artwork, shoulder, palm and grip.
+Arms solve exactly for the fitted socket, and items rotate about that moving
+socket. The bard's second hand follows the lute, and its rear instrument stays
+in the equipment system rather than receiving cloak motion.
+
+Palms are separate rigid layers; sleeves/forearms can bend and stretch without
+shrinking the hand out of the image. The arm solver, palm and carried item share
+the same fitted socket. Do not add palms or a second weapon into another hand's
+layer, as that would give them the wrong motion owner.
+
+Every rendered runtime frame checks the actual rasterized hand/item contact at
+the grip (allowing one adjacent pixel for nearest-neighbor sampling and outlines).
+A detached held object or equipment layer missing its attachment metadata fails
+the build with the race, class, facing and pose. Floating spells are explicitly
+exempt from physical contact; they still follow their assigned hand. Regression
+tests cover all race/class/facing/pose attachment transforms, pixel contact for
+every walking frame and animation endpoints, and deliberate failure cases.
+Rebuilds stage the entire set before publishing it, preserving the last working
+sheets if any animation frame fails its contact check.
+
 ## How the art is built
 
 - **Indexed drawing.** A canvas pixel is a `(slot, shade)` pair, not a colour. A *slot* is a material: `skin`,

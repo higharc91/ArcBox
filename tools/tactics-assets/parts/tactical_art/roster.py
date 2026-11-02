@@ -51,6 +51,8 @@ def character(role,race='human',back=False,outfit=None):
         layers['weapon']=weapon; layers['offhand']=offhand
         # Quiver is only appropriate for archers, not every leather-clad class.
         layers['cape-behind'].slot[:31,14:29]=0
+    # A real far palm is required even when a shield or book normally hides it.
+    R(layers['far-arm'],17,47,20,50,'skin',3)
     if role=='rogue':
         P(headwear,[(21,25),(21,16),(25,11),(32,8),(39,12),(42,18),(42,28),(37,32),(26,31)],'cloth1',2)
         if not back:
@@ -109,9 +111,8 @@ def character(role,race='human',back=False,outfit=None):
         L(weapon,30,55,46,36,'horn',4);L(weapon,32,55,47,37,'horn',3)
         if back:
             # Keep the lute behind the torso when viewing from the rear.
-            layers['cape-behind']=weapon
+            layers['instrument-back']=weapon
             layers['weapon']=Canvas(64,80,SLOTS)
-        else: R(hand,26,52,29,54,'skin',3)
         for y in (36,40,44):R(extra,30,y,31,y,'trim',3)
     elif role=='warlock':
         P(extra,[(24,34),(24,29),(29,32),(32,37),(37,31),(40,29),(41,35),(36,40),(28,38)],'cloth2',1)
@@ -129,9 +130,9 @@ def character(role,race='human',back=False,outfit=None):
             L(extra,25,34,32,46,'cloth2',3)
         P(extra,[(24,47),(38,45),(40,49),(25,52)],'cloth2',3)
         if not back:P(extra,[(34,50),(37,50),(40,62),(36,60)],'cloth2',2)
-        for x in (18,41):
-            R(hand,x,47,x+4,50,'horn',3)
-            L(hand,x,48,x+4,48,'horn',1)
+        for target,x in ((layers['far-arm'],18),(hand,41)):
+            R(target,x,47,x+4,50,'horn',3)
+            L(target,x,48,x+4,48,'horn',1)
         E(headwear,31,9,3,2,'hair',2)
     elif role=='barbarian':
         # Bare torso and fur shoulder mantle, not a recoloured jerkin.
@@ -157,8 +158,9 @@ def character(role,race='human',back=False,outfit=None):
             P(extra,[(25,48),(38,44),(39,48),(25,52)],'trim',2)
             R(extra,31,40,33,43,'magic',3)
         for x,y,s in ((14,43,4),(49,39,6)):
-            P(weapon,[(x,y-s),(x+2,y-1),(x+s,y),(x+3,y+4),(x-2,y+5),(x-s,y+1),(x-2,y-2)],'magic',3)
-            P(weapon,[(x,y-2),(x+2,y+1),(x,y+3),(x-2,y+1)],'magic',5)
+            target=offhand if x==14 else weapon
+            P(target,[(x,y-s),(x+2,y-1),(x+s,y),(x+3,y+4),(x-2,y+5),(x-s,y+1),(x-2,y-2)],'magic',3)
+            P(target,[(x,y-2),(x+2,y+1),(x,y+3),(x-2,y+1)],'magic',5)
     # Race anatomy is separate from clothing, and shared across all class recipes.
     _,_,racial=race_character(race,back,fitted=False)
     traits=racial['race-details']
@@ -177,18 +179,38 @@ def character(role,race='human',back=False,outfit=None):
         layers['hair']=human['hair']
     # Hood must hide the rear hair, horns deliberately remain above headwear.
     if role=='rogue' and back: layers['hair']=Canvas(64,80,SLOTS)
+    # Palms stay rigid while the sleeve/forearm can stretch toward a socket.
+    # Scaling the palm with a very bent arm could shrink it out of a pixel frame.
+    for arm,palm_name,rect,point in (
+        ('near-hand','near-palm',(41,49,47,55),(44,51)),
+        ('far-arm','far-palm',(16,46,22,52),(19,48))):
+        source=layers[arm];palm=Canvas(64,80,SLOTS)
+        x0,y0,x1,y1=rect
+        region=np.zeros_like(source.slot,dtype=bool);region[y0:y1,x0:x1]=True
+        region&=source.slot>0
+        for attr in ('slot','shade','flags'):getattr(palm,attr)[region]=getattr(source,attr)[region]
+        # Leave a cuff underneath the rigid palm, extending the limb to the wrist.
+        cuff=int(source.slot[point[1]-3,point[0]]) or SLOTS.id('cloth1')
+        source.slot[region]=cuff;source.shade[region]=2
+        layers[palm_name]=palm
     layers['class-details']=extra
     layers['class-headwear']=headwear
     # Reinsert headwear directly above head/hair, before rear cloak and weapons.
     ordered={}
     ordered['tail-behind']=racial['tail-behind']
     for name,layer in layers.items():
-        if name in ('class-details','class-headwear'): continue
+        if name in ('class-details','class-headwear','instrument-back','near-palm','far-palm'): continue
         ordered[name]=layer
+        if name=='far-arm':ordered['far-palm']=layers['far-palm']
+        if name=='near-hand':ordered['near-palm']=layers['near-palm']
+        if name=='cape-behind' and 'instrument-back' in layers:
+            ordered['instrument-back']=layers['instrument-back']
         if name=='garment': ordered['class-details']=extra
         if name=='headgear':
             ordered['class-headwear']=headwear;ordered['race-details']=traits
     if back and 'tail-back' in racial: ordered['tail-back']=racial['tail-back']
     # Race build fitting happens once, after independently authoring the layers.
     fitted={name:reshape(layer,race) for name,layer in ordered.items()}
+    from .attachments import validate_attachments
+    validate_attachments(role,fitted)
     return composite(fitted),pal,fitted
