@@ -14,8 +14,8 @@
 ## Summary
 
 A region gets a hand-written file of **things**: `rules/interactables/<region>.json`, beside the region file the painting workspace generates.
-Each thing is one of 21 **kinds** in 8 families (container, passage, switch, readable, pickup, shrine, ambient, floor trap). The kind is a small
-state machine in C#; content gives the tile, the words, the lock, the trap, the loot and the flags.
+Each thing is one of 30 **kinds** in 10 families (container, passage, switch, readable, pickup, shrine, ambient, floor trap, and since §7 notice
+and hidden path). The kind is a small state machine in C#; content gives the tile, the words, the lock, the trap, the loot and the flags.
 
 The leader uses a thing within one tile of them. Anything with nothing to decide (an unlocked chest, a lever, a pickup, a bark) happens at
 once, in the world. Anything with a choice, a check or words to read is **a scene in 5d's own format**, played by the existing story runtime in
@@ -104,11 +104,12 @@ On a container or passage, or on the ground (`kind: trap`).
 
 Thieves' tools aren't modelled: Sleight of Hand stands in for them (USER DECISION 7).
 
-### 1.7 Hidden finds: cache, secret door, anything with `hidden`. **Core now; active search later.**
+### 1.7 Hidden finds: cache, secret door, anything with `hidden`. **Core now; active Search built (§7).**
 
 Any thing may carry `hidden: <DC>`; a cache and a secret door must. Passive Perception (as for traps) finds it as the party passes, with a
-`revealed` event and "Ana spots a hidden cache." on the TV. Until then it isn't sent anywhere, and a hidden door is a wall. An active
-**Search** (Investigation, taking time) is later.
+`revealed` event and "Ana spots a hidden cache." on the TV. Until then it isn't sent anywhere, and a hidden door is a wall. Since §7 a thing
+may be hidden by any passive skill (`{ "dc": 14, "skill": "arcana" }`), the leader can **Search** (Investigation), and there are notices
+(tracks, a draft…) and hidden paths.
 
 ### 1.8 Loot on the ground: pickup. **Core now.**
 
@@ -136,7 +137,7 @@ set a choice's flags (the §5.6 check already does for things).
 
 - **Pressure plates** (a switch worked by standing on it), **breakable walls** (Athletics, once), **bookshelf doors** (a hidden lever: hidden
   and lever-worked together is refused today).
-- **Searching** (Investigation) and **listening at doors**.
+- **Listening at doors.** (Searching is built: §7.4.)
 - **Coins and gold**: no currency until sub-project 6 (`pickups.coin_pile` exists).
 - **NPC barks on a thing**, using the voiced lines' clips.
 - **Things in the painting workspace**: markers you drag in Godot, exported with the region (§2.1).
@@ -168,7 +169,9 @@ fight. Several packs can each add a file for one region; ids are unique across t
 | `sets` | Flags its main outcome sets. |
 | `lock` | `key`, `keyName`, `pick`, `force`, `seal`. |
 | `trap` | `spot` (required), `disarm`, `text`, `sets`, `injury`, `lose`. |
-| `hidden` | Passive Perception DC to find it. |
+| `hidden` | Passive Perception DC to find it, or `{ "dc", "skill" }` for another passive skill (§7.1). |
+| `reveals` | A notice's: hidden things of its region found the moment it's noticed (§7.2). |
+| `range` | 1 to 6: how far the party's passive skills find it or see its trap (default 3, §7.2). |
 | `loot` | `[{ item, count }]` from `items.json`. |
 | `targets`, `open` | A lever's passages; a passage that starts open, a lever that starts on. |
 | `blocks` | Override the kind's (not for passages or floor traps). |
@@ -192,11 +195,14 @@ and overrides per thing. A pack-level `kinds` file is easy to add later if the u
 | Shrine | shrine, well, altar | ready, used | yes |
 | Ambient | ambient | idle | no |
 | Floor trap | trap | idle (its trap is `armed`, `disarmed`, `sprung`) | while seen and set |
+| Notice (§7.2) | tracks, scratches, disturbed_earth, bloodstain, draft, carving, rune, remains | noticed | no |
+| Hidden path (§7.3) | hidden_path | found | until found |
 
 ### 2.3 Saved state
 
 `WorldSave.Things: { id → InteractableSave }`, written only once something changes, so documents from before read with none (no version
-bump, as 5b and 5d did). `InteractableSave(State, Found, Unlocked, TrapSpotted, Trap, Spent)`. A thing not in it is as it started; a state its
+bump, as 5b and 5d did). `InteractableSave(State, Found, Unlocked, TrapSpotted, Trap, Spent, Searched)` (`Searched` since §7.4, not written
+while false). A thing not in it is as it started; a state its
 kind no longer has (a content change) reads as the start.
 
 **It never goes back** (`Interactables.Regressed`): found stays found, unlocked stays unlocked, a trap stays dealt with, a failed way stays
@@ -263,7 +269,7 @@ the story's "has changed" notice, undoing nothing.
 ### 2.8 Events
 
 `ExploreView.ThingEvents`: the last 8 `ThingEventView(seq, id, what, by, line)`, with `what` one of `opened`, `unlocked`, `failed`,
-`revealed`, `spotted`, `sprung`, `disarmed`, `toggled`, `taken`, `read`, `used`, `looked`. `by` is the character's name. The TV animates
+`revealed`, `spotted`, `sprung`, `disarmed`, `toggled`, `taken`, `read`, `used`, `looked`, and since §7 `noticed`. `by` is the character's name. The TV animates
 from these, as it does from walk legs, and takes state from `Things` when it joins late. They aren't saved; a new `Epoch` may restart the
 numbers. The thing's line also shows as the TV's notice, which the next step clears.
 
@@ -271,7 +277,8 @@ numbers. The thing's line also shows as the TV's notice, which the next step cle
 
 - **TV:** `ExploreView.Things`: `ThingView(id, kind, at, facing, art, state, standIn, name, blocks, trapped)` for what's there and has been
   seen, in file order; left out of the JSON for a region with none, as `ThingEvents` is, so Ashen Ford's view is byte for byte as before. During an interaction's scene, `StoryView` as for any scene (title = the thing's name).
-- **Phones:** in a region that has things, the leader's walk screen gains `targets`, and everyone else's an empty list. In any other region,
+- **Phones:** in a region that has things, the leader's walk screen gains `targets` and `search: true` (§7.4), and everyone else's an empty
+  list and `search: false`. In any other region,
   Ashen Ford today, the walk screen is exactly as before: no field is added, and the phone fixtures are unchanged. In a scene, the 5d screens.
 - **Never sent:** a hidden thing not found, an unseen floor trap, a thing whose flags don't hold, a thing in a state that draws nothing (a
   pickup taken, a cache emptied), and any event of a passage that isn't there (a lever still moves it, unseen). (The content pack's own files
@@ -292,6 +299,7 @@ Nothing below is decided. Each is what the engine supports, and the default it u
 | 7 | **Thieves' tools.** | Not modelled: Sleight of Hand. | Proficiency from the rogue's kit adding its bonus, or advantage. |
 | 8 | **Keys.** | Story flags, shown by name on the button only. | A key ring on the character sheet. |
 | 9 | **A lever and the party.** | It won't shut a passage on the leader's tile. Followers are only on the TV, so they can't be checked. | Also refuse when any walker could be there (the trail). |
+| 10–17 | **Hidden things and passive checks** | See §7.7. | |
 
 ## 4. Art brief, for the user's art AI
 
@@ -344,9 +352,18 @@ Sizes are proposals matched to the nearest existing prop; keep the anchor at the
 | `interactables.altar` | ready, used | using 6 @ 8 | 32×28, [16, 27] | As `props.altar`. |
 | `interactables.trap` | armed, disarmed, sprung | springing 4 @ 12 | 32×16, [16, 15] | Ground layer: a plate or a pit cover, seen; `sprung` = jaws shut or a shallow pit. |
 | `interactables.ambient` | | | | No art: an ambient thing names an existing prop. |
+| `interactables.tracks` | noticed | | 32×16, [16, 15] | §7.6. Ground layer, as every notice. |
+| `interactables.scratches` | noticed | | 24×16, [12, 15] | |
+| `interactables.disturbed_earth` | noticed | | 32×16, [16, 15] | |
+| `interactables.bloodstain` | noticed | | 28×14, [14, 13] | |
+| `interactables.draft` | noticed | | 24×24, [12, 23] | Wisps at half opacity. |
+| `interactables.carving` | noticed | | 24×16, [12, 15] | |
+| `interactables.rune` | noticed | | 24×16, [12, 15] | |
+| `interactables.remains` | noticed | | 32×20, [16, 19] | |
+| `interactables.hidden_path` | found | | 32×16, [16, 15] | A trodden way through what hid it. |
 
-The manifest is `docs/superpowers/specs/2026-11-02-tactics-interactables-art.json`: 20 kinds and 14 transition assets, 41 state frames and
-65 transition frames, 106 frames in all.
+The manifest is `docs/superpowers/specs/2026-11-02-tactics-interactables-art.json`: 29 kinds and 14 transition assets, 50 state frames and
+65 transition frames, 115 frames in all. Its `notes.prompts` has a prompt for each asset §7 added, and for the `fx.notice` effect.
 
 ### 4.3 Meanwhile
 
@@ -364,6 +381,9 @@ a taken pickup or an emptied cache isn't sent at all.
 | shrine, well, altar | `props.shrine`, `props.well`, `props.altar` |
 | door, gate, drawbridge, secret door, lever, note, plaque, book, trap | none: the plain marker |
 | ambient | its own `art` |
+| remains | `props.ribcage` |
+| tracks, scratches, disturbed earth, bloodstain, draft, carving, rune | none: the plain marker in clue blue (§7.6) |
+| hidden path | none: the plain marker in trail green, once found (§7.6) |
 
 A test checks every stand-in key is in the pack's art manifests.
 
@@ -392,6 +412,9 @@ At load (the loader, `Validation/Interactables.cs`), each with a failing test in
    behind its own door, not hidden, not in a container whose lock can be failed).
 8. **Flags against the story** (`InteractableLore`, a base pack test, since the loader can't read lore): every `requires`, `unless` and key flag
    is set by the arc (beats, choices, scene nodes and options, encounter triggers) or by a thing; and no thing sets a flag a choice sets.
+8b. **Hidden things (§7.5):** `hidden.skill` one of the eight passive skills; `range` 1 to 6 and only on something hidden or trapped; notices
+   have words and are hidden, and never `blocks: true`; only a notice `reveals`, never itself, and only hidden things of its own region; a
+   hidden path is hidden, has no `requires`/`unless`, no lock, and no `blocks`. Rule 6 counts a hidden path as shut, as a hidden door.
 9. **check.py parity:** nothing here touches lore files, so no `check.py` change is needed now. Story hooks (§1.11) will need one, with parity
    tests, because hook scenes have no beat.
 
@@ -413,6 +436,114 @@ whose key comes from a later beat). When a region first has a door, `StoryOrder`
 6. **Story hooks** (§1.11): worth the lore schema change now, or after Chapter 1 is tuned?
 7. **Mobs and fog of war** (your later ideas) would both read things: fog would hide them until explored, and roaming mobs could guard a chest.
    Nothing here blocks either.
+
+---
+
+## 7. Hidden things and passive checks
+
+> **Status:** built and tested (2026-11-02): Tactics.Logic (`HiddenDef`, the notice and path kinds, `Interactables.Finds`/`Revealing`/
+> `Searchable`, `InteractScenes.SearchScene`, the loader's checks), Tactics.Game (`TacticsGame.Interact.cs`: passives by skill, notices,
+> the Search), the TV (`ThingShow`, `ThingsDemo`) and the phone (`walk.tsx`, `story.tsx`). No art: stand-ins and the art brief's prompts
+> (§7.6). Every default below is a **USER DECISION** in §7.7.
+
+The user asked for "hidden things and passive checks (again no art yet, just place holders and prompts for the ai model for art)".
+
+### 7.1 Hidden by any passive skill
+
+`hidden` stays a number, the Perception DC, so every file written before reads as it did. It may also be `{ "dc": 14, "skill": "arcana" }`,
+with the skill one of **perception, investigation, insight, survival, nature, arcana, history, religion** (`HiddenDef.Skills`). The passive
+score is 10 + the skill's bonus (SRD), the party's best in that skill, away characters included, within the thing's range along x and y, as
+passive Perception was (USER DECISION 4). Whoever has that best score is the finder: "Bo notices: …" or "Bo senses a hidden door." (Arcana
+and Religion "sense"; the rest "spot"). Traps are still seen by Perception alone.
+
+### 7.2 Notices
+
+A new family of things that are only ever found: **tracks, scratches, disturbed earth, a bloodstain, a draft (a breath of air from a wall),
+a carving, a rune, remains**. A notice must be hidden and must have `text`, what is noticed ("Fresh wolf tracks lead north, into the
+trees."). It never stands in the way and has one state, `noticed`, in which it's drawn once found.
+
+- **Noticed:** a `noticed` event, "Ana notices: Fresh wolf tracks lead north, into the trees." on the TV's notice, its `sets` flags, and its
+  optional `reveals: [ids]`: those hidden things of its region are found at the same moment, wherever they are and whatever their DC (the
+  tracks lead there), each with its own event (`revealed`, or `noticed` for a notice, whose own `reveals` follow in turn, each thing once).
+  Everything one look finds goes on the notice together, the notice's line first.
+- A reveal target that isn't there yet (its `requires`) or is under the leader's feet stays hidden, and is found by the notice as soon as
+  it is there or the leader steps off (every look checks the notices already noticed).
+- **Look:** the leader's button "Look at the tracks" ("Feel the draft") says the line again (`looked`) and changes nothing.
+- **Range:** any hidden or trapped thing may set `range`, 1 to 6 tiles (default 3), how far away the party's passive skills find it or see its
+  trap: tracks across a field (6), a hairline crack you must be beside (1).
+
+### 7.3 Hidden paths
+
+`hidden_path`, a family of its own: a tile that **stands in the way until it's found**, then is ground the party walks, drawn as a path
+(a ford through reeds, a gap in a hedge, a goat track). It must be hidden, can't be gated by flags (one that came and went would open and wall
+the ground under the party), takes no lock and no `blocks`; its `sets` are set when it's found. The region paints the tile walkable, as a
+passage is painted open. Until it's found:
+
+- a step onto it is refused **without a bump** (the unseen-wall rule, §2.4), so nothing gives it away;
+- the TV isn't sent it, but a **plug** for its tile (`ExploreView.Plugs`, as a secret door's): the TV draws the tile as its neighbours along
+  its facing's run (`sw`/`ne` along x, `se`/`nw` along y), the hedge or the deep water it hides in, until it pops in found;
+- **validation** treats it as shut (rule 6): what the story needs (the recovery spawn, a beat's spot, a stamp's party spawn, a key) can't lie
+  only beyond one, and the error names it, as for a hidden door.
+
+Found, the plug goes, it's walked like any ground, and it has no button.
+
+### 7.4 Search
+
+The leader's walk screen, in a region with things, has a **Search** button (`search: true`; `search` input). It's there whether or not
+anything is hidden nearby, so it gives nothing away. It runs a **5d check scene** (the check-scene route, not the instant roll): one line
+("The party searches the ground nearby."), then straight to the party's pick of who rolls **Investigation** (the leader isn't asked to choose
+again: the option is decided as the scene starts, saved as a decided check), the roll saved with the node it leads to, then "Something turns
+up." or "Nothing turns up."
+
+- **What it looks for** is fixed as it begins and kept in the cursor (`ThingCursor.Search`): every hidden thing within **2 tiles** along x and
+  y, not found, not already searched for, not under the leader. A restart plays the same scene and judges the same things.
+- **The roll** is compared with each thing's own `hidden` DC (whatever skill hides it): each it meets is found ("Bo finds a loose
+  flagstone.", a notice noticed and its reveals with it); each it misses is **searched** (`InteractableSave.Searched`) and is never searched
+  for again (as a failed lock is spent, USER DECISION 2), though the party's passive skills may still find it later.
+- **No DC is shown**, on the TV or a phone, before or after the roll (`StoryCheckView.Dc` and the phone's `dc` are null, the TV's roll has
+  `Vs` 0): "DC hidden", then "11 + 5 = 16 · Found something" or "Nothing found". With nothing to find the scene plays exactly the same and
+  fails. (The check routes by the lowest DC it looks for, or 99 with none, so it passes exactly when it finds something.)
+- It costs nothing else: there's no clock in the world yet.
+
+### 7.5 What's sent, and what isn't
+
+Nothing hidden or unnoticed reaches the TV or a phone (§2.9): not a hidden thing, not a notice, not a reveal target, not an unfound path
+(only its plug, which is drawn as its surroundings), not what a search looked for or missed, and not the DC. The walk screen's `search` is
+added only in regions with things, so Ashen Ford's phone fixtures (and every region without things) are byte for byte as before; the vault's
+walk fixtures gained `search`, and `check-search`/`check-search-rolled` were added.
+
+### 7.6 Stand-ins, art and sound
+
+- **TV meanwhile:** a notice is the plain marker in **clue blue** (`ThingShow.Clue`, `#7fc8e8`), flat on the ground with its name; remains use
+  `props.ribcage`. A found path is the marker in **trail green** (`ThingShow.Trail`, `#9ad46a`). Noticing pops it in with a **"?"** emote (a
+  find has "!?") and the effect `fx.notice`, which the pack doesn't have yet: the find's `fx.poof` plays meanwhile.
+- **Art keys** (`interactables.<kind>.<state>`): `tracks`, `scratches`, `disturbed_earth`, `bloodstain`, `draft`, `carving`, `rune`,
+  `remains` in `noticed`, and `hidden_path` in `found`, all ground layer, one frame, no transition; with a prompt each in the art JSON's
+  `notes.prompts` (§4.2), plus `fx_notice` for the glint. Drop them in and the TV draws them by key.
+- **Sound:** `noticed` wants `notice` (a quieter cue, not made) and plays `secret_found` meanwhile. No audio was generated.
+
+### 7.7 USER DECISIONs (defaults the engine uses)
+
+| # | USER DECISION | Default now | The choice |
+|---|---|---|---|
+| 10 | **Passive skills.** Which skills can hide things. | Perception, Investigation, Insight, Survival, Nature, Arcana, History, Religion; the party's best, as Perception (4). | Fewer (Perception and Investigation only); the finder's own range; a passive only for those here. |
+| 11 | **Notices and reveals.** | A notice reveals its targets wherever they are, whatever their DC; a target that isn't there yet is revealed when it appears. | Reveal only within range; reveal by a second check. |
+| 12 | **Range.** | 3 tiles, or the thing's own 1–6. | One range for everything. |
+| 13 | **Hidden paths.** | Block until found; drawn as their surroundings meanwhile; can't be flag-gated; can't carry what the story needs. | Allow flags; a path that's always visible but "unsure" (a check to cross). |
+| 14 | **Search route.** | A 5d check scene: the party picks who rolls Investigation (20 s, best bonus if nobody picks). | An instant roll by the best Investigation, with no scene. |
+| 15 | **Search range and retries.** | 2 tiles; a thing a search missed can't be searched for again (passives still can). | Free retries; a retry after a rest; a larger range. |
+| 16 | **Search cost.** | Nothing (no time model). | Time passing (once there's a clock), a wandering-monster roll, a limit per region. |
+| 17 | **Hidden DCs.** | No DC is shown for a search, ever. | Show "DC ?" with the roll's verdict per thing. |
+
+### 7.8 Not done
+
+- **StoryOrder** (the export's replay) walks hidden paths as open, as it does doors (§5 "Not checked yet").
+- **The plug of a low wall** (a hedge one step high) is drawn as its neighbours' top, but its front face doesn't quite match theirs: a sharp
+  eye sees a seam on the TV (the shots of `--world-demo=things`, `path-0-unfound`). A secret door's plug in a tall wall shows the same seam
+  faintly. It's the plug renderer's (`WallPlugs`), and a fix there helps both.
+- **Ashen Ford** has no hidden things yet; the demo region shows each (`--world-demo=things`: a fourth gallery of the notices and the path,
+  then tracks that lead to a cache, a rune noticed by Arcana, the other notices in a row, a goat track through a hedge found by Survival, and
+  a Search finding a loose flagstone hidden by Investigation).
 
 ---
 
