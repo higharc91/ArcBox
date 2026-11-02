@@ -203,11 +203,11 @@ public sealed class BoardLightingTests
     }
 
     [Fact]
-    public void Ash_only_glimmers_one_tile_in_four()
+    public void Century_old_ashen_ford_soil_does_not_cast_firelight()
     {
         var map = Map("test", ["ash/grey"], [], Flat(8, 8));
 
-        Assert.Equal(16, Lit(map).Lights.Length);
+        Assert.Empty(Lit(map).Lights);
     }
 
     [Fact]
@@ -785,7 +785,7 @@ public sealed class BoardLightingTests
     {
         Assert.NotNull(Pack.Art.Texture(new ArtRef("lava", "molten"))!.Glow);
         Assert.NotNull(Pack.Art.Texture(new ArtRef("lava_side", "molten"))!.Glow);
-        Assert.NotNull(Pack.Art.Texture(new ArtRef("ash", "grey"))!.Glow);
+        Assert.Null(Pack.Art.Texture(new ArtRef("ash", "grey"))!.Glow);
         Assert.Null(Pack.Art.Texture(new ArtRef("cobble", "grey"))!.Glow);
     }
 

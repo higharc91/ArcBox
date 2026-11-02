@@ -267,20 +267,7 @@
       "size": [
         128,
         128
-      ],
-      "emissive": {
-        "slot": "glow",
-        "light": {
-          "every": 4,
-          "radius": 1.0,
-          "lift": 2,
-          "flicker": "pulse",
-          "power": 0.25
-        },
-        "colour": {
-          "grey": "#ffa94b"
-        }
-      }
+      ]
     },
     "basalt": {
       "kind": "top",
@@ -429,7 +416,8 @@
     "plank_side": {
       "kind": "side",
       "variants": {
-        "oak": "side/plank_side_oak.png"
+        "oak": "side/plank_side_oak.png",
+        "dark": "side/plank_side_dark.png"
       },
       "frames": 1,
       "fps": 0.0,

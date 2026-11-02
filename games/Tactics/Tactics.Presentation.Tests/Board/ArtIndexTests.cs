@@ -39,6 +39,39 @@ public sealed class ArtIndexTests
     public void Fel_crypt_tiles_stand_on_dark_walls_as_the_pack_has_no_fel_ones()
         => Assert.Equal(new ArtRef("dungeon_wall", "dark"), MaterialLook.Of("crypt_tiles/fel").Side);
 
+    [Theory]
+    [InlineData("path/packed", "dirt_side", "brown")]
+    [InlineData("ash/grey", "dirt_side", "dark")]
+    [InlineData("mud/swamp", "dirt_side", "dark")]
+    [InlineData("bog/duckweed", "dirt_side", "dark")]
+    [InlineData("forest_floor/leafy", "dirt_side", "brown")]
+    [InlineData("forest_needles/pine", "dirt_side", "brown")]
+    [InlineData("sand/desert", "sandstone_side", "desert")]
+    [InlineData("dunes/gold", "sandstone_side", "desert")]
+    [InlineData("sandstone/red", "sandstone_side", "red")]
+    [InlineData("snow/fresh", "ice_side", "glacier")]
+    [InlineData("ice/clear", "ice_side", "clear")]
+    [InlineData("planks/dark", "plank_side", "dark")]
+    [InlineData("cobble/warm", "ashlar_side", "warm")]
+    [InlineData("flagstone/warm", "ashlar_side", "warm")]
+    [InlineData("pavers/warm", "ashlar_side", "warm")]
+    public void Landscape_surfaces_keep_their_own_material_at_exposed_edges(string material, string family, string variant)
+    {
+        var look=MaterialLook.Of(material);
+        Assert.Equal(new ArtRef(family,variant),look.Side);
+        AssertExists(Pack.Art.Texture(look.Side),material);
+    }
+
+    [Fact]
+    public void Wooden_walkways_are_decks_and_snow_keeps_its_cap()
+    {
+        Assert.True(MaterialLook.Of("planks/oak").Deck);
+        Assert.True(MaterialLook.Of("planks/dark").Deck);
+        Assert.Equal(new ArtRef("snow_lip","fresh"),MaterialLook.Of("snow/fresh").Lip);
+        Assert.Equal(new ArtRef("snow_lip","fresh"),MaterialLook.Of("grass/frost").Lip);
+        Assert.Equal(new ArtRef("snow_lip","fresh"),MaterialLook.Of("forest_needles/snowy").Lip);
+    }
+
     public static TheoryData<string> Props()
         => new(Pack.Maps.SelectMany(id => Pack.Map(id).Props).Select(p => p.Id).Distinct());
 

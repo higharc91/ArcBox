@@ -30,13 +30,24 @@ public sealed record MaterialLook(string Variant, ArtRef Top, ArtRef Side, ArtRe
         var top = new ArtRef(family, variant);
         MaterialLook With(ArtRef side, ArtRef chasm) => new(variant, top, side, chasm);
         var cliff = new ArtRef("cliff_side", variant);
-        var ashlar = new ArtRef("ashlar_side", "grey");
+        var ashlar = new ArtRef("ashlar_side", variant == "warm" ? "warm" : "grey");
         var dungeon = new ArtRef("dungeon_wall", variant);
         var cave = new ArtRef("cave_wall", "cool");
         return family switch
         {
-            "grass" => With(new ArtRef("dirt_side", "brown"), EarthChasm) with { Lip = new ArtRef("grass_lip", variant) },
+            "grass" => With(new ArtRef("dirt_side", "brown"), EarthChasm) with
+                { Lip = variant == "frost" ? new ArtRef("snow_lip", "fresh") : new ArtRef("grass_lip", variant) },
             "dirt" => With(new ArtRef("dirt_side", variant), EarthChasm),
+            "path" => With(new ArtRef("dirt_side", "brown"), EarthChasm),
+            "ash" or "mud" or "bog" => With(new ArtRef("dirt_side", "dark"), EarthChasm),
+            "forest_floor" or "forest_needles" => With(new ArtRef("dirt_side", "brown"), EarthChasm)
+                with { Lip = variant == "snowy" ? new ArtRef("snow_lip", "fresh") : new ArtRef("moss_lip", "green") },
+            "sand" or "dunes" => With(new ArtRef("sandstone_side", "desert"), EarthChasm),
+            "sandstone" => With(new ArtRef("sandstone_side", variant), EarthChasm),
+            "snow" => With(new ArtRef("ice_side", "glacier"), EarthChasm) with { Lip = new ArtRef("snow_lip", "fresh") },
+            "ice" => With(new ArtRef("ice_side", "clear"), EarthChasm),
+            "planks" => With(new ArtRef("plank_side", variant == "dark" ? "dark" : "oak"), EarthChasm) with { Deck = true },
+            "pavers" => With(ashlar, EarthChasm),
             "rock" => With(cliff, EarthChasm),
             "lava" => With(new ArtRef("lava_side", variant), EarthChasm),
             "basalt" => With(new ArtRef("basalt_side", variant), EarthChasm),

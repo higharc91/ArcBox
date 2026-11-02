@@ -1737,8 +1737,11 @@ def chapel(v: dict, night: bool = False, frame: int = 0) -> Model:
     m.poly([(13, -1, 176), (13, 37, 176), apex], None, (-0.82, 0, 0.58), part=sp)
     m.poly([(51, -1, 176), (13, -1, 176), apex], None, (0, -0.82, 0.58), part=sp)
     gold = solid("metal/gold", 4)
-    m.box(31, 33, 17, 19, 226, 242, gold, gold, part=sp)
-    m.box(27, 37, 17, 19, 235, 237, gold, gold, part=sp)
+    # The Church of the Hearth: a small gilded flame above a brazier, rather
+    # than the kit's generic cross. This is a metal finial, not magical fire.
+    m.box(30, 34, 16, 20, 226, 230, gold, gold, part=sp)
+    m.poly([(28,19,231),(27,19,235),(32,19,243),(31,19,238),
+            (36,19,234),(34,19,231)],gold,(0,1,0),part=sp)
     # nave
     m.box(6, 58, 30, 92, 0, 88, V_WALL(stone, decals=[(10, 0, ("door", "oak")), (10, 56, ("rose_window", "stained") if
                                                                                 not night else rose)]),
@@ -2364,16 +2367,24 @@ _BUILDING = {b.id: b for b in BUILDINGS}
 
 
 @lru_cache(maxsize=None)
+def building_bounds(bid: str) -> tuple[int,int,int,int]:
+    """One projection frame for every variant, lighting state and animation.
+
+    The manifest has a family-wide size/origin/anchor. Variant-local bounds
+    moved roofs and doorways when a different material was selected.
+    """
+    b=_BUILDING[bid]
+    return union(model_bounds(b.make(v,night,f))
+        for v in b.variants.values() for night in (False,True) for f in range(b.frames))
+
+
+@lru_cache(maxsize=None)
 def render_frames(bid: str, variant: str | None = None, night: bool = False) -> tuple[Rendered, ...]:
-    """Every frame of one building variant, in one shared frame (size and origin)."""
+    """Every variant and lighting state uses the family's common frame."""
     b = _BUILDING[bid]
     v = b.variants[variant or next(iter(b.variants))]
     models = [b.make(v, night, f) for f in range(b.frames)]
-    bounds = union(model_bounds(md) for md in models)
-    if night:                                    # day and night share a frame too, so the lights overlay lines up
-        bounds = union([bounds] + [model_bounds(b.make(v, False, f)) for f in range(b.frames)])
-    else:
-        bounds = union([bounds] + [model_bounds(b.make(v, True, f)) for f in range(b.frames)])
+    bounds = building_bounds(bid)
     return tuple(render(md, bounds=bounds) for md in models)
 
 

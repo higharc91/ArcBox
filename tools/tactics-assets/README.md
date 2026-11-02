@@ -103,6 +103,27 @@ asset reviews, not Godot screenshots; review the game camera as well.
 
 ## How the art is built
 
+### Overworld review
+
+The [individual asset review](../../docs/superpowers/reports/overworld-art-review/README.md)
+covers all shipped terrain, props, town buildings and textures, ambient animations,
+map icons, and their shadow/light masks. `audit_overworld.py` produces a searchable
+standalone gallery plus per-image JSON decisions and checks every PNG against its
+manifest. Unknown families require an explicit assessment in
+`parts/overworld_review.py`. Run `python3 tools/tactics-assets/test_overworld.py`
+for the environment-specific regression contracts.
+
+Town families share one frame across every roof/material variant, animation frame
+and day/night state; use the manifest's common size, origin and anchor. Ordinary
+`ash/grey` is cold, non-emissive ash. The `river_steam` ambient asset is low-opacity
+mist anchored to warm water, with no emitted light. `worldmap.placeIcons` overrides
+generic map icons for specific lore place ids and must inherit their lore unlocks.
+
+Ashen Ford's saved region currently has terrain and markers, not detailed prop or
+building placements. The walking renderer is not yet implemented in this checkout.
+The detailed town/effect/landmark art is a library for that work; the shared terrain
+and prop refinements also apply to the live battle renderer.
+
 - **Indexed drawing.** A canvas pixel is a `(slot, shade)` pair, not a colour. A *slot* is a material: `skin`,
   `hair`, `cloth1`, `metal`, and so on. A *shade* indexes a 6-step, hue-shifted ramp (`arcpix/palette.py`).
   Shadows drift cool, highlights drift warm, so one palette swap recolours the art without flattening it.

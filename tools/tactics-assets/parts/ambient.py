@@ -406,6 +406,28 @@ def smoke_column(n: int = 12, w: int = 24, h: int = 56, *, puffs: int = 12, base
 
 
 # ------------------------------------------------------------------------------------------------ terrain animation
+def river_steam(variant: str = 'mist', n: int = 16) -> list[Image.Image]:
+    """Low, translucent curls over the warm ford; no smoke column or glow.
+
+    Modest alpha and a footprint below one tile keep the crossing/party visible.
+    Periodic phases share the loop seam; the emitter anchor stays on the water.
+    """
+    w,h=48,32;ys,xs=np.mgrid[0:h,0:w];out=[]
+    for f in range(n):
+        t=2*math.pi*f/n;field=np.zeros((h,w))
+        for i in range(3):
+            a=t+i*2*math.pi/3
+            cx=12+i*11+2*math.sin(a)
+            cy=19-3*math.cos(a)
+            d=((xs-cx)/(8+i))**2+((ys-cy)/(3+i*.4))**2
+            field=np.maximum(field,np.clip(1-d,0,1))
+        alpha=(np.floor(field*3)*20).astype(np.uint8)
+        rgba=np.zeros((h,w,4),np.uint8);rgba[:,:,:3]=(198,204,207);rgba[:,:,3]=alpha
+        rgba[alpha==0,:3]=0
+        out.append(Image.fromarray(rgba,'RGBA'))
+    return out
+
+
 SIDE_W, SIDE_H, DECAL = 128, 32, 32
 
 
@@ -1463,6 +1485,9 @@ CATALOGUE: list[Amb] = [
         lambda: smoke_column(16, 20, 52, puffs=10, base_r=1.3, grow=3.6, drift=8.0, seed=33),
         {"grey": _v(smoke="smoke"), "soot": _v(smoke="soot"), "steam": _v(smoke="steam")}, 8, (8, 51),
         note="anchor on the chimney top; leans right with the wind (mirror for a west wind)"),
+    Amb("river_steam", "Warm ford steam", "terrain", river_steam, {'mist':{}},
+        8,(24,28),rgba=True,
+        note="local curls over warm water only; phase-offset sparse instances; no light emission; do not obscure the crossing"),
     Amb("rain", "Rain sheet", "weather", rain_sheet, {k: {} for k in _RAIN}, 16, (0, 0), layer="screen",
         kind="overlay", rgba=True, extra={"tile": [OVERLAY, OVERLAY]},
         note="tile across the screen; the fall is in the frames (no scroll); pair with rain_splash"),

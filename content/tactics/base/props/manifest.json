@@ -697,7 +697,8 @@
     "tent": {
       "variants": {
         "canvas": "tent_canvas.png",
-        "red": "tent_red.png"
+        "red": "tent_red.png",
+        "hide": "tent_hide.png"
       },
       "size": [
         44,
@@ -1868,7 +1869,7 @@
   },
   "lighting": {
     "light": "at: image px of the light's source in frame 0 (or one list per frame for animated props, since flames sway); radius: in tiles; colour: per variant, hex; flicker: a curve name in lighting.flicker; emissive: an L8 mask strip (same frames as the sprite) of the pixels that glow by themselves",
-    "place": "world position = the prop's anchor on its tile + (at - anchor) in sprite px, one sprite px = 1/16 tile across and 1/8 height step up the screen (sprites draw at 2x)",
+    "place": "world position = the prop's anchor on its tile + (at - anchor) in sprite px, one sprite px = one screen art pixel; the current board draws props at native density. Use the owning renderer's projection when converting screen offsets into world space",
     "godot": "an OmniLight3D per light at that point: light_color = colour, omni_range = radius tiles, light_energy = base energy x flicker[(frame + phase) % 8] where phase varies per instance; on the sprite material, emission = albedo x emissive mask, so the glowing pixels skip lighting and feed bloom",
     "flicker": {
       "fire": [
