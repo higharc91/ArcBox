@@ -1,0 +1,298 @@
+# Wardenflame: gold and shops, design
+
+- **Status:** design for another implementer. Nothing here is built. Placeholders only: no art, and no generated audio.
+- **Date:** 2026-11-02.
+- **Sub-project:** the trading half of sub-project 6 ("loot rolling, need/greed, inventories, trading and shops":
+  docs/superpowers/specs/2026-10-30-tactics-rules-engine-design.md §616). It needs only the smallest inventory. Need/greed and a full
+  inventory screen are out of scope (§9).
+- **Builds on:** the world interactables engine (docs/superpowers/specs/2026-11-02-tactics-interactables-design.md, read it first,
+  especially §2 the model, §2.7 interacting, §2.9 what's sent, §3 decisions, §4 the art brief conventions, §5 validation) and the story
+  runtime (5d: scenes, votes, the leader's choice, presence holds, restart safety).
+- **Reference:** Baldur's Gate 3's trading: talk to a trader, a two-sided trade window, buy and sell at prices moved by a check.
+  Here it's simpler and multiplayer-first: one room, many phones, one TV.
+
+## 0. Where things stand (read before building)
+
+| Piece | Today | Where |
+|---|---|---|
+| Currency | **None.** No gold anywhere in the save or the rules. | — |
+| Prices | **None.** `ItemDef(Id, Name, Use, Tags, Replaces)` has no value. Weapons and armour have no price either. | `Tactics.Logic/Content/Defs.cs:371`, `rules/items.json` (4 items: potion_of_healing, greater_healing, alchemists_fire, smoke_bomb), `weapons.json`, `armor.json` |
+| Inventory | Each character's `CharacterRecord.Bag` (`ImmutableArray<ItemStack>`), filled from the class's starting kit; consumables used in a fight stay spent. Interactables put loot into the **leader's** bag (`TacticsGame.Interact.cs:238`). No equipping beyond the starting `Weapon`/`Armor`/`Shield`. No shared stash. | `Tactics.Logic/Content/SheetBuilder.cs:13`, `Tactics.Logic/State/UnitState.cs:26` |
+| Save | `TacticsDocument` v1 → `MemberRecord(CharacterRecord, Xp, …)` per profile, `WorldSave` with `Flags`, `Things` (per-interactable state). New optional fields are added **without a version bump** (absent reads as default, default isn't written). | `Tactics.Game/Campaign/TacticsDocument.cs` |
+| Interactions | `InteractScenes.Plan` → `InstantPlan` or `ScenePlan` (5d `SceneDef` + an outcome per node). Outcomes are absolute and applied in the same save as the node's first line, so a restart can't double them (`LootDue`). | `Tactics.Logic/World/InteractScenes.cs`, `Tactics.Game/TacticsGame.Interact.cs` |
+| Merchants | **Scenery only.** Ashen Ford has 5 people with `"preset": "merchant"` at stalls (`rules/world/ashen_ford.json` `people`). The town kit has animated shop signs. | |
+| A coin art key | `pickups.coin_pile` exists; nothing gives coins. | interactables art spec |
+| Inputs | `walk`, `battles`, `backToWalk`, `endSession`, `interact {target}`, `search`, `skip`, `vote`, `pickRoller`. | `TacticsGame.Explore.cs:122` |
+| Phone contract | Screens are JSON; fixtures in `web/play/test/fixtures`, regenerated with `UPDATE_FIXTURES=1` via `Tactics.Game.Tests/PhoneFixtureTests.cs`. Regions and screens without a new feature must stay **byte-identical**. | |
+| Rules hash | Any change to a file in `rules/manifest.json` changes `Rules.Hash`, so a saved battle restarts once. Fine; mention it. | |
+
+The user's earlier answers that bear on this: oil flasks come "from loot (interactable chests) and future merchants, not starting kits"
+(environmental tiles answer 9). Balance decisions are the user's: every number below is a **default to confirm** (§8).
+
+## 1. Goals and non-goals
+
+**Goals.**
+1. Gold exists, is saved, and is earned and spent.
+2. A trader in the world (a person or a stall) opens a **shop** the whole room sees on the TV, and the players buy and sell from their phones.
+3. Prices, stock and restocking are content, not code.
+4. Restart-safe and idempotent: a server restart or a dropped phone mid-trade never charges twice, never gives an item twice, and never
+   loses gold.
+5. Nothing changes for regions, saves or screens without shops (byte-identical fixtures, old saves read unchanged).
+
+**Non-goals now** (§9): equipment trading that changes AC or weapons, need/greed loot rolls, a full inventory/equip screen, haggling
+mini-games, stealing, player-to-player trade, a party stash UI beyond what selling needs.
+
+## 2. Gold
+
+### 2.1 Where it lives — USER DECISION A
+
+| Option | Pros | Cons |
+|---|---|---|
+| **A1. One party purse (default)** | Simple; one number on the TV; no "whose gold" arguments in a room game; matches the shared campaign document. | Less individual ownership. |
+| A2. Per character | Like D&D/BG3; supports "I'll buy my own". | Every purchase asks "whose gold"; transfers needed; splitting loot becomes a decision. |
+
+**Default A1.** `WorldSave` is per region-walk; the purse is campaign-wide, so it goes on `TacticsDocument`:
+
+```csharp
+public sealed record TacticsDocument(..., WorldSave? World = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Gold = 0,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ShopsSave? Shops = null)
+```
+
+No version bump (as 5b/5d/interactables did). A document from before reads `Gold = 0`. Gold is a non-negative `int` (gp). Every change
+goes through one method that refuses to go below 0 (`RulesInvariantException` if code tries; content errors at load).
+
+### 2.2 How gold is earned — USER DECISION B
+
+Defaults, all content-driven and each switchable off:
+- **Loot.** Interactables' `loot` gains `{ "gold": 25 }` entries alongside `{ item, count }` (containers, caches, pickups — the
+  `pickups.coin_pile` art key already exists). Goes to the purse, never to a bag. Line: "Found: 25 gold."
+- **Battles.** An encounter may carry `gold` (a fixed number per encounter in its file; default none). Paid on a **win** only (the loss
+  rule already pays no XP; same here).
+- **Story.** A scene option or node can `gold: +N / -N` (a reward, a bribe). `-N` needs the purse to cover it: the option is disabled
+  (shown with "needs 20 gold") when it can't. check.py and `LoreBook` validate it.
+- **Selling** (§4).
+- **Starting gold:** default 0. USER DECISION: a starting purse per party (e.g. 15 gp × members)?
+
+Not by default: gold per kill, gold that scales with level, gold from the overworld mobs idea (that's tied to the farming question in §8).
+
+### 2.3 What players see
+- **TV:** the purse on the party banner while walking ("◆ 42 gold"), and a "+25 gold" pop like XP's. Hidden while it's 0 and no shop
+  has ever been seen, so Ashen Ford's TV frame is unchanged until gold exists (keep the size budget: see §6.4).
+- **Phone:** on the walk screen's party strip, only when > 0 or in a region with shops (byte-identical otherwise).
+
+## 3. Prices and the item catalogue
+
+### 3.1 Prices on items
+`ItemDef` gains `int? Price` (gp, the **buy** price; null = can't be bought or sold). Optional and `WhenWritingNull`, so packs and
+fixtures that don't set it are unchanged. Weapons and armour get the same field for later (§9); shops in this slice only trade
+`items.json` consumables. Default prices (SRD-flavoured, **USER DECISION C**):
+
+| Item | Price | Note |
+|---|---|---|
+| potion_of_healing | 50 | SRD |
+| greater_healing | 150 | SRD |
+| alchemists_fire | 50 | SRD |
+| smoke_bomb | 25 | house |
+| oil_flask (when env tiles add it) | 1 → **10** | SRD is 1 gp; house price so it isn't free fire damage |
+
+### 3.2 Sell price — USER DECISION D
+Default: **half** the price, rounded down (`SellRatio = 0.5` in a rules file, not code). Items without a price can't be sold. Story
+items (keys, quest things — today these are flags, not bag items) can't be sold by construction.
+
+### 3.3 A Persuasion discount — USER DECISION E (default off)
+BG3 moves prices by attitude/Persuasion. Optional: when a shop opens, the party may try **Haggle** once per shop per visit: a 5d check
+(party picks who rolls Persuasion, DC from the shop, default 15). Pass: buy prices −10% and sell +10% (from the ratio) for this visit;
+fail: no change (no penalty). The roll is saved like every 5d roll. Off by default: it's balance.
+
+## 4. Shops
+
+### 4.1 Content: `rules/shops/<region>.json`
+Separate files, listed in `rules/manifest.json`, like interactables (one source of truth per concern).
+
+```json
+{
+  "region": "ashen_ford",
+  "shops": [
+    {
+      "id": "af_market_herbalist",
+      "name": "Wenna's Remedies",
+      "keeper": { "person": 3 },
+      "greeting": "Wenna wipes her hands on her apron. \"Potions, salves. Coin first.\"",
+      "farewell": "\"Mind the ford.\"",
+      "stock": [
+        { "item": "potion_of_healing", "count": 3, "restock": "chapter" },
+        { "item": "smoke_bomb", "count": 2, "restock": "never" }
+      ],
+      "buys": ["potion", "bomb"],
+      "priceMod": 1.0,
+      "requires": [], "unless": ["af_market_burned"],
+      "haggle": 15
+    }
+  ]
+}
+```
+
+| Field | Meaning |
+|---|---|
+| `keeper` | **Who you talk to.** `{ "person": <index into the region's people> }` (a townsperson; it then can't wander and gets an Interact target), or `{ "thing": "<interactable id>" }` of a new kind `stall` (§4.4). Exactly one. |
+| `stock` | Item, starting count (or `"infinite"`), `restock`: `never` / `chapter` (back to its count when a chapter starts) / `rest` (later, needs a rest model). |
+| `buys` | Item tags the keeper will buy from the party (empty = buys nothing). |
+| `priceMod` | Multiplier on item prices for this shop (a greedy fence 1.25, a grateful village 0.8). |
+| `requires`/`unless` | Flags, as scenes and things: a shop that isn't there has no target and isn't sent. |
+| `haggle` | Optional Persuasion DC (only used if decision E is on). |
+
+### 4.2 Validation (load time, like interactables §5)
+Unknown item / tag / person index / thing id → `ContentException` naming the file and JSON pointer. A keeper person must stand on a
+walkable tile reachable from the region's start (reuse the interactables reachability). A person can keep at most one shop. A `stall`
+thing can't be hidden, locked or trapped. Items in `stock` must have a `Price`. `priceMod` in (0, 4]. No shop on a stamp tile.
+
+### 4.3 Saved state
+`ShopsSave` on `TacticsDocument`: `{ shop id → { Stock: { item → count }, Chapter: int, Seq } }`, written only once something changes
+(absent = as the content says). Content changes: an item no longer in stock is dropped; a count above the content's start is clamped.
+`Regressed` doesn't apply (stock goes both ways), so idempotency comes from §5.2's trade ids instead.
+
+### 4.4 The `stall` kind
+A new interactable family `trade` with kind `stall` (states `open`, `closed`; blocks: yes), so a shop can be a market stall with nobody
+drawn. Its art key `interactables.stall.open|closed`; stand-in `town.stall` (the town kit has stalls). Interacting with it opens its shop.
+
+### 4.5 Talking to a keeper person
+People in the world become Interact targets **only** when they keep a shop (no other dialogue yet; NPC talk is its own sub-project).
+Reach and choosing are exactly the interactables' (§2.5 of that doc): the walk screen's `targets` gains `{ id: "shop:<id>", label:
+"Trade with Wenna" }` in reach. The person faces the party when the shop opens and goes back to their pose when it closes.
+
+## 5. The trade flow
+
+### 5.1 Phase
+A new **Shop** sub-state of the Story phase (as interactions reuse Story): walking stops, presence holds and End session work as in
+5d, a restart resumes into the open shop. The cursor: `ShopCursor(ShopId, OpenedBy, Seq, Haggled?, Basket?)` saved in `WorldSave.Story`
+(or a sibling optional field), so a restart lands back in the shop screen.
+
+1. The leader picks the target → the TV shows the keeper's greeting (one narrated line, 5d style, voiced if a clip exists).
+2. **Shop open.** Every phone shows the shop screen (§6.2); the TV shows the shop panel (§6.1). Anyone present can buy or sell (USER
+   DECISION F: default **anyone**; alternatives: the leader only, or a vote per purchase over N gold).
+3. **Leave.** The leader's "Leave" (or the last phone leaving) closes it with the farewell line, back to walking.
+
+### 5.2 Buying and selling: inputs and idempotency
+New inputs, accepted only while that shop is open:
+- `shopBuy { shop, item, count, trade }`
+- `shopSell { shop, member, item, count, trade }`
+- `shopLeave { shop }`
+- (`shopHaggle { shop }` if decision E is on — starts the Persuasion check; the shop screen returns afterwards.)
+
+`trade` is a client-generated id (a UUID per tap). The server keeps the last 32 trade ids per shop in `ShopsSave`; a repeated id is a
+no-op that re-sends the current state. Each trade is **one atomic change of the document**: purse, stock and the bag in a single
+`_doc with { … }` and a single save, exactly as `LootDue` loot is applied. Checks, in order, all server-side: the shop is open and is
+this one; the player is present; the item is in stock (buy) or in that member's bag (sell) with enough count; the keeper buys that tag
+(sell); the purse covers the price (buy). A refused trade answers with a reason the phone shows ("Not enough gold", "Sold out").
+
+**Whose bag gets a bought item — USER DECISION G.** Default: **the buyer's own character** (the phone that tapped Buy). If they have
+no character (a spectator), Buy is disabled. Alternatives: the leader's bag (as loot today), or a pick list on the phone.
+
+**Selling from whose bag:** the seller picks one of the **party's** characters' bags (default: only their own; USER DECISION H: allow
+selling a companion's items?).
+
+### 5.3 Concurrency
+Two phones buying the last potion: the server serialises inputs (it already does per room); the second gets "Sold out". The phone
+shows optimistic "buying…" only until the next screen arrives; it never decrements locally.
+
+### 5.4 Bag limits — USER DECISION I
+Default: no weight or slot limit (the bag is a list of stacks). Optional cap per stack (e.g. 5 potions) to stop hoarding.
+
+## 6. Views and contract
+
+### 6.1 TV
+- **Shop panel:** keeper portrait/name, the shop name, the stock list (icon, name, price, count; sold out greyed), the purse, and a
+  short feed of trades ("Ana bought a Potion of Healing — 50"). Reuse the story panel's frame and fonts.
+- **Sounds:** `ui_coin_buy`, `ui_coin_sell`, `ui_shop_open`, `ui_shop_close` (keys only — **don't generate audio**; fall back to
+  `ui_loot`/`ui_confirm`, as ThingSounds falls back).
+- **World:** a keeper person gets a small coin marker over their head when in reach, like a beat's "!" (stand-in: `fx.notice` / a
+  gold ring). A `stall` draws its stand-in.
+
+### 6.2 Phone: the shop screen
+`{ screen: "shop", shop: { id, name, keeper }, gold, items: [{ item, name, price, count, can }], sell: [{ member, item, name, price,
+count }], you: { member?, canBuy }, leader: bool, haggle?: {...} }`. Buy row: name, price, stock, a −/+ count and Buy. Sell tab: the
+bags you may sell from, with the sell price. Leave (leader). Item details reuse the character screens' details popup (what it does in
+play, from the rules pack). Large tap targets; works one-handed (same rules as walk.tsx).
+
+### 6.3 Contract changes
+New screen type, new inputs, optional `gold` on the walk screen and on `ExploreView`, optional `price` on item details. Add fixtures:
+`shop-open`, `shop-sold-out`, `shop-poor`, `shop-sell`, `shop-spectator`, and `walk-with-gold`. **Every existing fixture must stay
+byte-identical**: only emit `gold`/shop fields where gold > 0 or the region has shops.
+
+### 6.4 Size
+The explore view is already over the 1420-byte one-packet budget in Ashen Ford (things; see the handoff §8). The shop screen is
+sent only to phones in the shop and only on change; keep the TV's shop state out of `ExploreView` (a `ShopView` sent while open).
+
+## 7. Art and audio brief (placeholders only)
+
+Follow the interactables art brief conventions (`docs/superpowers/specs/2026-11-02-tactics-interactables-design.md` §4.1: pixel art
+at 1×, shown at 2×, the pack's palette, anchors at the feet, strips left to right). Add these keys to a new
+`docs/superpowers/specs/2026-11-02-tactics-shops-art.json` in the same format as the interactables art JSON, each with a prompt:
+
+| Key | What | Size (1×) |
+|---|---|---|
+| `icons.gold` | A small stack of gold coins for the purse | 12×12 |
+| `icons.gold_large` | A coin pouch, for the shop panel header | 24×24 |
+| `fx.coin` | A coin spinning up and fading (6 frames), for "+gold" | 16×16 ×6 |
+| `fx.trader` | The trade marker over a keeper (a coin glint, 4-frame loop) | 12×12 ×4 |
+| `interactables.stall.open` / `.closed` | A market stall with awning, goods out / covered | match `town.stall` |
+| `ui.shop_frame` | Optional 9-slice for the TV shop panel, in the story panel's style | 48×48 9-slice |
+| `portraits.<keeper>` | Keepers use their person preset's portrait (no new art) | — |
+
+Example prompt style (write one per key): "Pixel art game icon, 12×12, a small stack of three gold coins with a 1-px dark outline,
+light from the top-left, warm gold with two highlight pixels, transparent background, no anti-aliasing, matches a 16-bit fantasy
+tactics UI." The user's art AI fills `content/tactics/base/icons|fx|interactables` from this file; until then use stand-ins (a gold
+circle, `ui_loot`, the `town.stall` prop).
+
+Sound keys (no generation; list them in `tools/tactics-audio/sfx-list.json` only if the user asks): `ui_coin_buy` ("coins counted
+onto a wooden counter, short"), `ui_coin_sell` ("a coin pouch set down, two clinks"), `ui_shop_open` ("a wooden shop door with a
+small bell"), `ui_shop_close` ("the bell again, softer").
+
+## 8. Questions for the user (each with the default the build uses)
+
+| # | Question | Default |
+|---|---|---|
+| A | Party purse or per character? | **Party purse** |
+| B | Where gold comes from | **Loot + battle wins (per encounter) + story**; no per-kill gold |
+| B2 | Starting gold | **0** |
+| C | Item prices | **SRD-ish table in §3.1** |
+| D | Sell price | **50%** of price |
+| E | Haggling (Persuasion) | **Off** |
+| F | Who may trade while a shop is open | **Anyone present** |
+| G | Whose bag gets a bought item | **The buyer's own character** |
+| H | Sell from companions' bags | **No, only your own** |
+| I | Bag limits | **None** |
+| J | Restock | **Per chapter**, per stock line |
+| K | Where the first shops go | **One** in Ashen Ford (the market herbalist), stocking potions and smoke bombs; Emberwick later |
+| L | Does gold affect anything else (fees, ferry, bribes in Chapter 1)? | **No** until the user writes it in |
+
+Record these in the doc as **USER DECISION**s with the defaults, like the interactables doc §3, and add them to the handoff's §8 list.
+
+## 9. Later, noted (don't build now)
+- Weapons and armour for sale and equipping (changes AC, attacks: a rules change and an equip screen).
+- Need/greed loot rolls and a shared stash screen.
+- Player-to-player trades and gifting.
+- Stealing (Sleight of Hand) and a fence.
+- A rest model (restock on rest; inns that cost gold).
+- Gold sinks: injury healing at a temple (ties into "injuries never heal"), training, a ferry fare.
+- Overworld mobs paying gold (blocked on the farming question).
+
+## 10. Build plan (for the implementer)
+
+TDD throughout; `dotnet test` (solution) and `cd web/play && npm test` green with 0 warnings after each task; small commits.
+
+1. **Logic:** `ItemDef.Price`, a `shops` def + loader + validation (§4.2), the `stall` kind, `ShopRules` (buy/sell price with
+   `priceMod`, ratio, haggle), with unit tests. Pack: prices in `items.json`, `SellRatio` in a rules file, `rules/shops/ashen_ford.json`
+   with one shop (use a merchant person in the Ash Market area; check the tile is reachable).
+2. **Save:** `TacticsDocument.Gold`, `ShopsSave`, round-trip tests incl. an old document and a default-not-written check.
+3. **Earning:** interactable `loot` gold entries; encounter `gold` on a win; story `gold` options (check.py + `LoreBook` parity
+   tests); the "+N gold" line/event.
+4. **The trade flow:** targets for keepers, the Shop sub-state, inputs with trade ids, atomic apply, restart and reconnect tests
+   (restart after a buy, a repeated trade id, two phones on the last item, a phone that leaves mid-trade, End session in a shop).
+5. **Phone:** the shop screen, gold on the walk strip, fixtures (§6.3), tests.
+6. **TV:** the shop panel, the trader marker, "+gold" pop, sound keys with fallbacks; a `--world-demo=shop` mode (like `things`) with
+   shots of the panel and the marker.
+7. **Docs:** USER DECISIONs, `docs/tv-host.md`, the art JSON (§7), the handoff §8.
+8. **e2e:** extend the bots to walk to the shop, buy one potion, sell it back, and leave; run `tools/tv-e2e.sh` in that mode, and the
+   Chapter 1 run (`ARCBOX_CHAPTER=1 ARCBOX_BRANCH=force`) to show nothing else moved.
