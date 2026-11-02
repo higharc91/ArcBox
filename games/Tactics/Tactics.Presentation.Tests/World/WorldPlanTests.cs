@@ -22,13 +22,25 @@ public sealed class WorldPlanTests
     public static TheoryData<string> Regions => ["ashen_ford", "hills"];
 
     [Fact]
-    public void Ashen_ford_bridge_deck_is_walkable_from_bank_to_bank()
+    public void Ashen_ford_old_bridge_is_broken_and_its_river_cant_be_walked()
     {
         var ground = FordGround.Value;
-        var deck = Enumerable.Range(105, 4).Select(x => new Tile(x, 48)).ToArray();
+        var underTheBridge = Enumerable.Range(105, 4).Select(x => new Tile(x, 48)).ToArray();
 
-        Assert.All(deck, tile => Assert.True(ground.Terrain.Walkable(tile), $"Bridge deck tile {tile} is blocked."));
-        Assert.Contains(new Tile(109, 48), WorldWalk.Reach(ground.Terrain, new Tile(104, 48), ClassDef.DefaultJump));
+        Assert.All(underTheBridge, tile => Assert.False(ground.Terrain.Walkable(tile), $"The river under the old bridge at {tile} can be walked."));
+        Assert.All(underTheBridge, tile => Assert.True(ground.Terrain.Deep(tile), $"The river under the old bridge at {tile} isn't deep."));
+    }
+
+    [Fact]
+    public void Ashen_ford_the_ford_is_the_only_way_across_the_river()
+    {
+        var ground = FordGround.Value;
+        var (westBank, eastBank) = (new Tile(104, 48), new Tile(109, 48));
+
+        // Through the ford's stamp, one bank reaches the other; with the stamp closed, nothing does.
+        Assert.Contains(eastBank, WorldWalk.Reach(ground.Terrain, westBank, ClassDef.DefaultJump));
+        Assert.DoesNotContain(eastBank, WorldWalk.Reach(ground.Terrain, westBank, ClassDef.DefaultJump, ground.Map.StampedTiles));
+        Assert.DoesNotContain(westBank, WorldWalk.Reach(ground.Terrain, eastBank, ClassDef.DefaultJump, ground.Map.StampedTiles));
     }
 
     [Fact]
