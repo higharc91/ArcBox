@@ -179,7 +179,9 @@ internal sealed partial class Validation
         {
             var ok = true;
             var byTile = new Dictionary<Tile, string>();
-            var spots = _def.Beats.ToDictionary(b => b.At, b => b.Beat);
+            var spots = new Dictionary<Tile, string>();     // two beats may share a spot: name the first
+            foreach (var b in _def.Beats)
+                spots.TryAdd(b.At, b.Beat);
             var props = new Dictionary<Tile, string>();
             foreach (var group in _def.Props.IsDefault ? [] : _def.Props)
                 foreach (var tile in group.At)

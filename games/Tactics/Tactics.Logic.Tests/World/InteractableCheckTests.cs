@@ -165,6 +165,16 @@ public sealed class InteractableCheckTests
     }
 
     [Fact]
+    public void Two_beats_on_one_spot_still_have_their_things_checked()
+    {
+        // A region may put two beats on one tile (a test that washes out the ford moves the far bank's there); the check must still run.
+        var region = Vault.Region() with { Beats = [new BeatSpot("b1", new Tile(2, 7)), new BeatSpot("b2", new Tile(2, 7))] };
+        var errors = ValidationTests.ErrorsOfChapter(Vault.World(region), Vault.Things("vault", """{ "id": "y", "kind": "sack", "at": [2, 7] }"""));
+        Assert.Contains("'y' at (2, 7) is on the spot of the beat 'b1', where its figure stands.", errors.Select(e => e.Message));
+        Assert.DoesNotContain(errors, e => e.Message.Contains("couldn't be checked", StringComparison.Ordinal));
+    }
+
+    [Fact]
     public void A_thing_walled_in_is_unreachable()
         => Assert.Equal("'x' at (8, 8) can't be reached from the start, even with every passage open.",
             Message("""{ "id": "x", "kind": "sack", "at": [8, 8] }""", """{ "id": "c1", "kind": "chest", "at": [5, 6] }"""));
