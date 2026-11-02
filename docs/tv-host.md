@@ -354,6 +354,8 @@ Dusk changed none of the Ashen Ford row: 3,430 draw calls and 0 frames over 16 m
 
 Ambient particles (a few butterflies over grass, or at dusk fireflies over the fields, fish jumping in deep water, chimney smoke, and steam off stamped water, thinning up and down the river) are chosen once, by hash, by `AmbientPlan`, bounded strictly to the camera view, and drawn by `WorldAmbient` in the world's light, all but what glows. Measured with `--world-demo=wood` at 1920×1080 with ambient on: walking median frame time holds at 6.94 ms, 0 frames over 16 ms, and render CPU remains ~0.98 ms.
 
+**Animals** (2026-11-02). The region's `pack_mule`, `farm_goat`, `red_fox`, `river_duck` and `field_crow` props (`WorldAnimalIds`) aren't baked: `WorldFauna` draws each from its `*_anim` strip and lets it wander. Their art was made far bigger than the world (a mule two and a half people tall), so the strips carry the props manifest's `scale` (0.2 to 0.38) and the TV shrinks them once, at load, to whole pixels (`SpriteShrink`: each frame on its own, an average of the opaque pixels a box covers, alpha 0 or 255, the generator's magenta fringe dropped). Where they go is `FaunaRange`: a step of at most one level, so nothing runs up a cliff; land animals stay off water and ducks on it; nothing stands on a prop or just behind one or a building, since their layer can't be painted over by what stands in front; and an animal placed in a fenced pen stays in it. They're drawn in their block's depth, over its props, so the "just behind" rule is what keeps a goat off a haystack's top.
+
 A build that fails, on a bad or half-downloaded pack, logs its error once. The scene then frees the world and shows the header with the region's name, and fights still work.
 
 ## Walking
