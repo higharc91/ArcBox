@@ -227,6 +227,12 @@ Keep this list, add to it, and put it at the top of your final report. Don't sto
 - **Mobs out in the overworld:** wild enemies roaming the regions, away from the stamped story battles. Open questions: how often fights happen, whether they pay XP (decision 3's farming problem), which encounters and maps they use given that battles need a matching map, and whether the party can avoid them. A cheap visual step that changes no rules: the armed stamp's enemies idle or pace inside their area before the party arrives.
 - **Fog of war in the overworld:** the region hidden until the party explores it. Open questions: whether explored ground stays revealed across sessions (it'd live in the campaign save), how far the party sees (and whether heights block sight), and how it reads on the TV from the sofa.
 
+**From merging world dressing (2026-11-02, 227e39b), for the user:**
+- **A second crossing.** The new Ashen Ford has a walkable bridge deck at (105..108, 48), north of the ford stamp, so the ford is no longer the only way across. The Ashen Ford handoff says the ford must stay the only crossing, but that branch's own tests assert the deck is walkable. Kept walkable for now; say which you want.
+- **Fixed in the merge:** the tip failed 12 tests and the lore check on its own branch. The causes were new art sizes stretching old prop variants (a variant can now have its own `looks`), a fence inside the reeve's cottage, and two bestiary subjects that aren't monsters.
+- **Moved to fit the new map:** the start (30,65)→(26,58), recovery (30,55)→(31,57), `ch1_mayors_request` →(33,59), `ch1_granary` →(42,70), `ch1_skarrow_song` →(133,24).
+- **Interactable sounds:** all 25 exist now (601755a, 116 CU).
+
 **Defaults the user can overrule:** the 8-way pad; the session leader taking the lead back once stopped; hazards harmless; the loader refusing a recovery spawn below a one-way drop; lines advancing by themselves; one beat at a time; skill rolls with no natural 20 or 1; a skill-to-stat table of 18 SRD lines; `ch1_kindler` having no `place`.
 
 **Only the user can check:**
