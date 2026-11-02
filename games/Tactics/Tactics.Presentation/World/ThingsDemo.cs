@@ -73,7 +73,7 @@ public static class ThingsDemo
         return new InteractableDef(id, kind, at, facing, Art: kind == "ambient" ? "props.cart" : null, Name: kind == "ambient" ? "cart" : null,
             Text: k.Family is InteractableFamily.Readable or InteractableFamily.Shrine or InteractableFamily.Ambient ? ["Words."] : [],
             Requires: [], Unless: [], Sets: [], Loot: [], Targets: [],
-            Hidden: k.MustHide ? 10 : null, Trap: k.Family == InteractableFamily.FloorTrap ? new TrapDef(10, 10) : null);
+            Hidden: k.MustHide ? new HiddenDef(10) : null, Trap: k.Family == InteractableFamily.FloorTrap ? new TrapDef(10, 10) : null);
     }
 
     /// <summary>The save that puts <paramref name="def"/> in the art state <paramref name="state"/>, found if it's hidden, a floor trap seen.</summary>

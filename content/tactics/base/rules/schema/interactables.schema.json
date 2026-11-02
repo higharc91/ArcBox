@@ -19,7 +19,7 @@
             "description": "Unique across the whole pack: the campaign keeps each thing's state by it."
           },
           "kind": {
-            "enum": ["chest", "crate", "barrel", "sack", "cache", "door", "gate", "drawbridge", "secret_door", "lever", "note", "plaque", "book", "gravestone", "signpost", "pickup", "shrine", "well", "altar", "ambient", "trap"]
+            "enum": ["chest", "crate", "barrel", "sack", "cache", "door", "gate", "drawbridge", "secret_door", "lever", "note", "plaque", "book", "gravestone", "signpost", "pickup", "shrine", "well", "altar", "ambient", "trap", "tracks", "scratches", "disturbed_earth", "bloodstain", "draft", "carving", "rune", "remains", "hidden_path"]
           },
           "at": {
             "$ref": "common.schema.json#/$defs/tile",
@@ -42,7 +42,7 @@
               "type": "string",
               "minLength": 1
             },
-            "description": "A readable's words, a shrine's lines, an ambient thing's bark. Required for readables and shrines."
+            "description": "A readable's words, a shrine's lines, an ambient thing's bark, what a notice is (\"Fresh wolf tracks lead north, into the trees.\"). Required for readables, shrines and notices."
           },
           "requires": {
             "type": "array",
@@ -141,10 +141,44 @@
             "additionalProperties": false
           },
           "hidden": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 30,
+                "description": "The passive Perception DC that finds it."
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "dc": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 30
+                  },
+                  "skill": {
+                    "enum": ["perception", "investigation", "insight", "survival", "nature", "arcana", "history", "religion"],
+                    "description": "The passive skill that finds it; perception when left out."
+                  }
+                },
+                "required": ["dc"],
+                "additionalProperties": false
+              }
+            ],
+            "description": "How it's found: the party's best passive score (10 + the skill's bonus) as the leader passes, or an active Search's Investigation roll. Required for a cache, a secret door, every notice and a hidden path."
+          },
+          "reveals": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A notice only: hidden things of this region found the moment it's noticed (tracks that lead to a cache), and theirs in turn."
+          },
+          "range": {
             "type": "integer",
             "minimum": 1,
-            "maximum": 30,
-            "description": "The passive Perception DC that finds it. Required for a cache and a secret door."
+            "maximum": 6,
+            "description": "How far from the leader, in tiles along x and y, the party's passive skills find it or see its trap; 3 when left out."
           },
           "loot": {
             "type": "array",

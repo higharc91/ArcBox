@@ -784,6 +784,213 @@
         "to:sprung"
       ],
       "layer": "ground"
+    },
+    "tracks": {
+      "variants": {
+        "noticed": "tracks_noticed.png"
+      },
+      "size": [
+        32,
+        16
+      ],
+      "anchor": [
+        16,
+        15
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "notice"
+      ],
+      "layer": "ground"
+    },
+    "scratches": {
+      "variants": {
+        "noticed": "scratches_noticed.png"
+      },
+      "size": [
+        24,
+        16
+      ],
+      "anchor": [
+        12,
+        15
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "notice"
+      ],
+      "layer": "ground"
+    },
+    "disturbed_earth": {
+      "variants": {
+        "noticed": "disturbed_earth_noticed.png"
+      },
+      "size": [
+        32,
+        16
+      ],
+      "anchor": [
+        16,
+        15
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "notice"
+      ],
+      "layer": "ground"
+    },
+    "bloodstain": {
+      "variants": {
+        "noticed": "bloodstain_noticed.png"
+      },
+      "size": [
+        28,
+        14
+      ],
+      "anchor": [
+        14,
+        13
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "notice"
+      ],
+      "layer": "ground"
+    },
+    "draft": {
+      "variants": {
+        "noticed": "draft_noticed.png"
+      },
+      "size": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        23
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "notice"
+      ],
+      "layer": "ground"
+    },
+    "carving": {
+      "variants": {
+        "noticed": "carving_noticed.png"
+      },
+      "size": [
+        24,
+        16
+      ],
+      "anchor": [
+        12,
+        15
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "notice"
+      ],
+      "layer": "ground"
+    },
+    "rune": {
+      "variants": {
+        "noticed": "rune_noticed.png"
+      },
+      "size": [
+        24,
+        16
+      ],
+      "anchor": [
+        12,
+        15
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "notice"
+      ],
+      "layer": "ground"
+    },
+    "remains": {
+      "variants": {
+        "noticed": "remains_noticed.png"
+      },
+      "size": [
+        32,
+        20
+      ],
+      "anchor": [
+        16,
+        19
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "notice"
+      ],
+      "layer": "ground"
+    },
+    "hidden_path": {
+      "variants": {
+        "found": "hidden_path_found.png"
+      },
+      "size": [
+        32,
+        16
+      ],
+      "anchor": [
+        16,
+        15
+      ],
+      "frames": 1,
+      "fps": 0.0,
+      "blocks": false,
+      "cover": "none",
+      "height": 0,
+      "tags": [
+        "interactable",
+        "path"
+      ],
+      "layer": "ground"
     }
   },
   "notes": {
@@ -795,6 +1002,19 @@
     "layer": "absent = over (a billboard, sorted with units); ground = lies flat under units",
     "blocks": "a passage's blocks is true and means closed: when open the engine says it doesn't",
     "empty": "a pickup's taken and a cache's open draw nothing: the TV isn't sent them, so they may be left out",
-    "totals": "20 kinds, 41 state frames, 14 transition strips of 65 frames: 106 frames in all"
+    "totals": "29 kinds, 50 state frames, 14 transition strips of 65 frames: 115 frames in all",
+    "notice": "the notices (tracks, scratches, disturbed_earth, bloodstain, draft, carving, rune, remains) and hidden_path are one state each, drawn only once found: no transition. Ground layer, never in the way.",
+    "prompts": {
+      "tracks": "interactables.tracks.noticed, 32x16, anchor [16, 15]: a short trail of fresh animal paw prints (wolf-sized, four toes and a pad) pressed into earth, running diagonally from the bottom-left to the top-right corner of the tile, the prints a shade darker than the ground with a 1 px lighter rim on their top-left edges. No ground colour fill around them: only the prints, so they sit on any terrain. Pixel art drawn at 1x (the TV shows it at 2x), lit from the top-left with hue-shifted 6-shade ramps, no pure black or white (darkest outline #140f1a), selective dark outline, shading in clusters of 2+ pixels, transparent background. Seen from the isometric 2:1 overworld camera; it lies flat on one 32x16 diamond tile and faces sw (towards the bottom left). Keep it subtle: it is a clue the party noticed, so it must read at a glance but never look like something to pick up.",
+      "scratches": "interactables.scratches.noticed, 24x16, anchor [12, 15]: three or four parallel claw gouges scored into a flat stone or packed earth, pale fresh-cut lines with darker depths, a few chips of grit scattered beside them. Pixel art drawn at 1x (the TV shows it at 2x), lit from the top-left with hue-shifted 6-shade ramps, no pure black or white (darkest outline #140f1a), selective dark outline, shading in clusters of 2+ pixels, transparent background. Seen from the isometric 2:1 overworld camera; it lies flat on one 32x16 diamond tile and faces sw (towards the bottom left). Keep it subtle: it is a clue the party noticed, so it must read at a glance but never look like something to pick up.",
+      "disturbed_earth": "interactables.disturbed_earth.noticed, 32x16, anchor [16, 15]: a low patch of loose, freshly turned soil, darker and clumpier than the ground around it, with a few clods and a broken root poking out, edges ragged; it should say \"something was buried here\". Pixel art drawn at 1x (the TV shows it at 2x), lit from the top-left with hue-shifted 6-shade ramps, no pure black or white (darkest outline #140f1a), selective dark outline, shading in clusters of 2+ pixels, transparent background. Seen from the isometric 2:1 overworld camera; it lies flat on one 32x16 diamond tile and faces sw (towards the bottom left). Keep it subtle: it is a clue the party noticed, so it must read at a glance but never look like something to pick up.",
+      "bloodstain": "interactables.bloodstain.noticed, 28x14, anchor [14, 13]: an old dried bloodstain splashed on the ground, deep brown-red at the centre fading to rust at the spatter, two or three drops trailing away to the top-right. Muted, not gory. Pixel art drawn at 1x (the TV shows it at 2x), lit from the top-left with hue-shifted 6-shade ramps, no pure black or white (darkest outline #140f1a), selective dark outline, shading in clusters of 2+ pixels, transparent background. Seen from the isometric 2:1 overworld camera; it lies flat on one 32x16 diamond tile and faces sw (towards the bottom left). Keep it subtle: it is a clue the party noticed, so it must read at a glance but never look like something to pick up.",
+      "draft": "interactables.draft.noticed, 24x24, anchor [12, 23]: a faint breath of cold air leaking from a wall's foot: two or three thin, curling pale blue-white wisps rising from a hairline crack, drawn at about 50% opacity so the ground shows through. It's the only notice that rises off the ground; keep it lower than a character's knee. Pixel art drawn at 1x (the TV shows it at 2x), lit from the top-left with hue-shifted 6-shade ramps, no pure black or white (darkest outline #140f1a), selective dark outline, shading in clusters of 2+ pixels, transparent background. Seen from the isometric 2:1 overworld camera; it lies flat on one 32x16 diamond tile and faces sw (towards the bottom left). Keep it subtle: it is a clue the party noticed, so it must read at a glance but never look like something to pick up.",
+      "carving": "interactables.carving.noticed, 24x16, anchor [12, 15]: a worn carving cut into a flagstone: a crude sigil, a circle crossed by a line and three notches, the cuts in shade 1 of the stone ramp with lit top-left edges, moss in one corner. Pixel art drawn at 1x (the TV shows it at 2x), lit from the top-left with hue-shifted 6-shade ramps, no pure black or white (darkest outline #140f1a), selective dark outline, shading in clusters of 2+ pixels, transparent background. Seen from the isometric 2:1 overworld camera; it lies flat on one 32x16 diamond tile and faces sw (towards the bottom left). Keep it subtle: it is a clue the party noticed, so it must read at a glance but never look like something to pick up.",
+      "rune": "interactables.rune.noticed, 24x16, anchor [12, 15]: a single arcane rune etched into stone, angular strokes filled with a faint cyan glow (#7fc8e8-ish, never pure white), with a soft 1 px halo; it looks dormant, warm to the touch, not a trap. Pixel art drawn at 1x (the TV shows it at 2x), lit from the top-left with hue-shifted 6-shade ramps, no pure black or white (darkest outline #140f1a), selective dark outline, shading in clusters of 2+ pixels, transparent background. Seen from the isometric 2:1 overworld camera; it lies flat on one 32x16 diamond tile and faces sw (towards the bottom left). Keep it subtle: it is a clue the party noticed, so it must read at a glance but never look like something to pick up.",
+      "remains": "interactables.remains.noticed, 32x20, anchor [16, 19]: a small scatter of old bones half-sunk in the ground, a skull on its side, a few ribs and a long bone, bleached and chipped, a scrap of rotted cloth. Lies flat; the stand-in until it's drawn is props.ribcage. Pixel art drawn at 1x (the TV shows it at 2x), lit from the top-left with hue-shifted 6-shade ramps, no pure black or white (darkest outline #140f1a), selective dark outline, shading in clusters of 2+ pixels, transparent background. Seen from the isometric 2:1 overworld camera; it lies flat on one 32x16 diamond tile and faces sw (towards the bottom left). Keep it subtle: it is a clue the party noticed, so it must read at a glance but never look like something to pick up.",
+      "hidden_path": "interactables.hidden_path.found, 32x16, anchor [16, 15]: a narrow, trodden way through the tile once it has been found: a goat track of flattened grass and bare earth, or stepping stones through reeds, running diagonally across the diamond from bottom-left to top-right. Its edges are parted stems bent outwards, so it reads as a gap in whatever hid it (a hedge, reeds, scrub). Pixel art drawn at 1x (the TV shows it at 2x), lit from the top-left with hue-shifted 6-shade ramps, no pure black or white (darkest outline #140f1a), selective dark outline, shading in clusters of 2+ pixels, transparent background. Seen from the isometric 2:1 overworld camera; it lies flat on one 32x16 diamond tile and faces sw (towards the bottom left). Keep it subtle: it is a clue the party noticed, so it must read at a glance but never look like something to pick up.",
+      "fx_notice": "fx.notice (fx/manifest.json, an effect like fx.poof): 24x24 frames, 6 frames at 12 fps, played once over a notice the moment it's noticed. A quiet glint, not a puff: a small four-point sparkle that grows from one pixel, flares pale clue-blue (#7fc8e8) with a warm centre, and fades out with two specks drifting up. Additive blend, anchored at the tile centre. Until it exists the TV plays fx.poof."
+    }
   }
 }

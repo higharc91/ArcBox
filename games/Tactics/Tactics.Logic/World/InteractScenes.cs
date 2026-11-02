@@ -29,6 +29,8 @@ public static class ThingEvents
     public const string Used = "used";
     /// <summary>Something said its line and didn't change.</summary>
     public const string Looked = "looked";
+    /// <summary>A notice was noticed (design §7.2): its line is said, and what it reveals is found with it.</summary>
+    public const string Noticed = "noticed";
 }
 
 /// <summary>
@@ -103,6 +105,10 @@ public static class InteractScenes
         {
             case InteractableFamily.Ambient:
                 return new InstantPlan(null, text[0]);
+            case InteractableFamily.Notice:
+                return new InstantPlan(null, NoticeText(def));        // "Look" says it again; nothing changes
+            case InteractableFamily.Path:
+                return null;                                          // ground, once found: nothing to do
             case InteractableFamily.Switch:
                 var on = save.State != InteractableKinds.On;
                 return new InstantPlan(new InteractOutcome(ThingEvents.Toggled, on ? InteractableKinds.On : InteractableKinds.Off,
@@ -140,6 +146,46 @@ public static class InteractScenes
 
     private static ImmutableArray<string> SprungText(InteractableDef def)
         => def.Trap!.Text.IsDefaultOrEmpty ? ["Click. A trap goes off, but it does no harm."] : def.Trap.Text;
+
+    /// <summary>A notice's words, as one line: what was noticed.</summary>
+    public static string NoticeText(InteractableDef def) => string.Join(" ", Interactables.TextOf(def));
+
+    // ---- An active Search (design §7.4) ----------------------------------------------------------------------------------------
+
+    /// <summary>The search's scene id. No thing's scene has it: theirs start <see cref="ScenePrefix"/>.</summary>
+    public const string SearchId = "search";
+
+    /// <summary>The search's one option: its Investigation check, which the party picks who rolls for.</summary>
+    public const string SearchOption = "search";
+
+    /// <summary>The node a search goes to when its roll finds something.</summary>
+    public const string SearchFound = "found";
+
+    /// <summary>The node a search goes to when it finds nothing.</summary>
+    public const string SearchNothing = "nothing";
+
+    /// <summary>The DC a search with nothing to find routes by: past any roll, so it's always "nothing". Never shown: a search's DC isn't.</summary>
+    public const int NothingToFind = 99;
+
+    /// <summary>
+    /// The scene of an active Search (design §7.4): a line, then straight to the party's pick of who rolls Investigation (the game decides the
+    /// option at once, so the leader isn't asked twice), then "Something turns up." or "Nothing turns up." The check routes by the lowest DC
+    /// of <paramref name="dcs"/>, the things it looks for, so it passes exactly when it finds at least one; each is then found or not by its
+    /// own DC. With nothing to look for it plays the same, and fails, and neither the TV nor a phone is shown a DC.
+    /// </summary>
+    public static SceneDef SearchScene(IEnumerable<int> dcs)
+    {
+        var dc = dcs.DefaultIfEmpty(NothingToFind).Min();
+        SceneLine Line(string node, string text) => new($"{SearchId}.{node}.0", SceneDef.Narrator, text, SceneLine.DefaultMood);
+        var option = Option(SearchOption, "Search the area", null, check: new SceneCheck(Interactables.SearchSkill, dc, SearchFound, SearchNothing));
+        ImmutableArray<SceneNode> nodes =
+        [
+            new(SearchId, [Line(SearchId, "The party searches the ground nearby.")], [], [option], false, null, false),
+            new(SearchFound, [Line(SearchFound, "Something turns up.")], [], [], false, null, true),
+            new(SearchNothing, [Line(SearchNothing, "Nothing turns up.")], [], [], false, null, true),
+        ];
+        return new SceneDef(SearchId, SearchId, null, "Search", [], [], [SceneDef.Narrator], SearchId, nodes, false);
+    }
 
     /// <summary>The items of its loot, in words: "2 × Potion of Healing, Smoke Bomb".</summary>
     public static string Loot(InteractableDef def, Func<ItemId, string> itemName)

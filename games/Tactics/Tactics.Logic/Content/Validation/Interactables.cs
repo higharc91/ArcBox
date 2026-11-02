@@ -48,9 +48,31 @@ internal sealed partial class Validation
         else if (family == InteractableFamily.Ambient)
             At("art", "An ambient thing has no art of its kind, so it needs an art key of the pack's, such as \"props.cart\".");
 
-        Dc(def.Hidden, "hidden", "The hidden");
+        if (def.Hidden is { } hidden)
+        {
+            Dc(hidden.Dc, "hidden", "The hidden");
+            if (!HiddenDef.Skills.Contains(hidden.Skill))
+                At("hidden/skill", $"A thing is hidden by a passive skill: '{hidden.Skill}' isn't one of {string.Join(", ", HiddenDef.Skills)}.");
+        }
         if (kind.MustHide && def.Hidden is null)
-            At("hidden", $"A {kind.Id} is always hidden: give the passive Perception DC that finds it.");
+            At("hidden", $"A {kind.Id} is always hidden: give the passive Perception DC that finds it, or {{ \"dc\", \"skill\" }} for another passive skill.");
+        if (def.Range is { } range)
+        {
+            if (range is < 1 or > Interactables.MaxRange)
+                At("range", $"The range {range} must be 1 to {Interactables.MaxRange}.");
+            if (def.Hidden is null && def.Trap is null)
+                At("range", "A range is how far away the party's passive skills find a thing or see its trap: this one is neither hidden nor trapped.");
+        }
+        if (!def.Reveals.IsEmpty && family != InteractableFamily.Notice)
+            At("reveals", $"Only a notice reveals other things, not a {kind.Id}.");
+        if (def.Reveals.Any(string.IsNullOrWhiteSpace))
+            At("reveals", "An id is empty.");
+        if (def.Reveals.Contains(def.Id))
+            At("reveals", $"'{def.Id}' reveals itself.");
+        if (family == InteractableFamily.Notice && def.Text.IsEmpty)
+            At("text", $"A {kind.Id} needs its words: what the party notices (\"Fresh wolf tracks lead north, into the trees.\").");
+        if (family == InteractableFamily.Path && (!def.Requires.IsEmpty || !def.Unless.IsEmpty))
+            At(def.Requires.IsEmpty ? "unless" : "requires", "A hidden path is always there: one that came and went would open and wall the ground under the party's feet. Gate what it leads to instead.");
         if (def.Text.Any(string.IsNullOrWhiteSpace))
             At("text", "A line is empty.");
         if (family is InteractableFamily.Readable or InteractableFamily.Shrine && def.Text.IsEmpty)
@@ -105,8 +127,10 @@ internal sealed partial class Validation
             At("targets", "A lever that works nothing and sets no flag does nothing.");
         if (def.Open && family is not (InteractableFamily.Passage or InteractableFamily.Switch))
             At("open", $"Only a passage can start open, or a lever on; not a {kind.Id}.");
-        if (def.Blocks is not null && family is InteractableFamily.Passage or InteractableFamily.FloorTrap)
+        if (def.Blocks is not null && family is InteractableFamily.Passage or InteractableFamily.FloorTrap or InteractableFamily.Path)
             At("blocks", $"Whether a {kind.Id} is in the way depends on its state, so it can't be set.");
+        if (def.Blocks == true && family == InteractableFamily.Notice)
+            At("blocks", $"A {kind.Id} is only ever noticed: it never stands in the way.");
         if (!def.Sets.IsEmpty && family is InteractableFamily.Ambient or InteractableFamily.FloorTrap)
             At("sets", family == InteractableFamily.Ambient
                 ? "An ambient thing never changes, so it sets nothing."
@@ -139,6 +163,7 @@ internal sealed partial class Validation
         {
             var placed = Placement();
             Levers();
+            Reveals();
             Injuries();
             if (placed && _world is not null)
                 Reach();
@@ -212,6 +237,21 @@ internal sealed partial class Validation
                 }
         }
 
+        /// <summary>A notice reveals hidden things of its own region (design §7.2).</summary>
+        private void Reveals()
+        {
+            var byId = _things.ToDictionary(t => t.Def.Id, StringComparer.Ordinal);
+            foreach (var notice in _things.Where(t => !t.Def.Reveals.IsDefaultOrEmpty))
+                for (var i = 0; i < notice.Def.Reveals.Length; i++)
+                {
+                    var id = notice.Def.Reveals[i];
+                    if (!byId.TryGetValue(id, out var target))
+                        Error(notice, $"reveals/{i}", $"'{notice.Def.Id}' reveals '{id}', which isn't in this region.");
+                    else if (target.Def.Hidden is null)
+                        Error(notice, $"reveals/{i}", $"'{notice.Def.Id}' reveals '{id}', which isn't hidden: there's nothing to find.");
+                }
+        }
+
         private void Injuries()
         {
             foreach (var t in _things)
@@ -236,7 +276,9 @@ internal sealed partial class Validation
         {
             var solid = _things.Where(t => Interactables.Solid(t.Def)).Select(t => t.Def.At).ToHashSet();
             var worked = Interactables.Worked(_things.Select(t => t.Def));
-            var shut = optimistic ? [] : _things.Where(t => Family(t.Def) == InteractableFamily.Passage && (!t.Def.Open || worked.Contains(t.Def.Id)))
+            // A hidden path is shut until it's found, which may never be: it counts as a hidden door does (design §7.3).
+            var shut = optimistic ? [] : _things.Where(t => Family(t.Def) == InteractableFamily.Path
+                    || (Family(t.Def) == InteractableFamily.Passage && (!t.Def.Open || worked.Contains(t.Def.Id))))
                 .Select(t => t.Def).ToList();
             var keys = new HashSet<string>(StringComparer.Ordinal);
             var levers = _things.Where(t => Family(t.Def) == InteractableFamily.Switch).Select(t => t.Def).ToList();
@@ -293,7 +335,7 @@ internal sealed partial class Validation
             foreach (var (what, at) in required.Where(r => open.Contains(r.At) && !sure.Contains(r.At)).DistinctBy(r => r.What))
                 v.Error(things[0].File, Pointer.Append(things[0].Pointer, "at"),
                     $"{Interactables.Capital(what)} at {at} is behind a passage that may never open ({blamed}): a check can be failed for good and a hidden door "
-                    + "never found, so give it a key the party is sure to find first, or leave another way round.");
+                    + "or path never found, so give it a key the party is sure to find first, or leave another way round.");
 
             var givers = _things.SelectMany(t => t.Def.Sets.Select(s => (Flag: s, t.Def))).ToLookup(g => g.Flag, g => g.Def, StringComparer.Ordinal);
             foreach (var t in _things.Where(t => t.Def.Lock?.Key is { } key && givers.Contains(key) && !keys.Contains(key)))

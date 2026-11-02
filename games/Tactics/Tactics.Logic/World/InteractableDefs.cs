@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Tactics.Logic;
@@ -45,6 +46,72 @@ public sealed record LockDef(string? Key = null, string? KeyName = null, int? Pi
 public sealed record TrapDef([property: JsonRequired] int Spot, int? Disarm = null, ImmutableArray<string> Text = default,
     ImmutableArray<string> Sets = default, string? Injury = null, ItemId? Lose = null);
 
+/// <summary>
+/// How a hidden thing is found (design §7, Hidden things and passive checks): the party's best passive <see cref="Skill"/> (10 + the skill's
+/// bonus, SRD) against <see cref="Dc"/> as the leader passes, or an active Search's Investigation roll against <see cref="Dc"/>. Content writes
+/// a plain number for Perception (<c>"hidden": 14</c>), as it always has, or <c>{ "dc": 14, "skill": "investigation" }</c>.
+/// </summary>
+[JsonConverter(typeof(HiddenDefJsonConverter))]
+public sealed record HiddenDef(int Dc, string Skill = HiddenDef.Perception)
+{
+    /// <summary>The skill a plain number means.</summary>
+    public const string Perception = "perception";
+
+    /// <summary>The passive skills a thing may be hidden by (design §7.1): the ones a character might notice something with, unasked.</summary>
+    public static readonly ImmutableArray<string> Skills = [Perception, "investigation", "insight", "survival", "nature", "arcana", "history", "religion"];
+
+    /// <summary>A plain DC is Perception's, so <c>Hidden: 12</c> reads as it always did.</summary>
+    public static implicit operator HiddenDef(int dc) => new(dc);
+}
+
+/// <summary>Reads <see cref="HiddenDef"/> from a number (Perception) or <c>{ "dc", "skill" }</c>, and writes a Perception one as a number.</summary>
+public sealed class HiddenDefJsonConverter : JsonConverter<HiddenDef>
+{
+    /// <inheritdoc />
+    public override HiddenDef Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        if (reader.TokenType == JsonTokenType.Number)
+            return new HiddenDef(reader.GetInt32());
+        if (reader.TokenType != JsonTokenType.StartObject)
+            throw new JsonException("hidden is a DC, or an object with \"dc\" and \"skill\".");
+        int? dc = null;
+        var skill = HiddenDef.Perception;
+        while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+        {
+            var key = reader.GetString();
+            reader.Read();
+            switch (key)
+            {
+                case "dc" when reader.TokenType == JsonTokenType.Number:
+                    dc = reader.GetInt32();
+                    break;
+                case "skill" when reader.TokenType == JsonTokenType.String:
+                    skill = reader.GetString()!;
+                    break;
+                case "dc" or "skill":
+                    throw new JsonException($"hidden's \"{key}\" is {(key == "dc" ? "a number" : "a skill's id")}.");
+                default:
+                    throw new JsonException($"Unknown key '{key}' in hidden (expected \"dc\" and \"skill\").");
+            }
+        }
+        return new HiddenDef(dc ?? throw new JsonException("hidden needs its \"dc\"."), skill);
+    }
+
+    /// <inheritdoc />
+    public override void Write(Utf8JsonWriter writer, HiddenDef value, JsonSerializerOptions options)
+    {
+        if (value.Skill == HiddenDef.Perception)
+        {
+            writer.WriteNumberValue(value.Dc);
+            return;
+        }
+        writer.WriteStartObject();
+        writer.WriteNumber("dc", value.Dc);
+        writer.WriteString("skill", value.Skill);
+        writer.WriteEndObject();
+    }
+}
+
 /// <summary>An item found in a container or on the ground: <see cref="Count"/> of the rules pack's <see cref="Item"/>.</summary>
 public sealed record LootDef([property: JsonRequired] ItemId Item, int Count = 1);
 
@@ -65,15 +132,21 @@ public sealed record LootDef([property: JsonRequired] ItemId Item, int Count = 1
 /// <param name="Sets">Flags its main outcome sets: opened, read, taken, used, or a lever first turned on.</param>
 /// <param name="Lock">Its lock, for a container or a passage.</param>
 /// <param name="Trap">Its trap: on a container or a passage, or what a floor trap is.</param>
-/// <param name="Hidden">The passive Perception DC that finds it; null when it's in plain sight.</param>
+/// <param name="Hidden">How it's found (<see cref="HiddenDef"/>): a passive Perception DC, or another passive skill's; null when it's in plain sight.</param>
 /// <param name="Loot">What a container holds, or a pickup is.</param>
 /// <param name="Targets">For a lever: the passages it opens when on and shuts when off.</param>
 /// <param name="Open">True for a passage that starts open, or a lever that starts on.</param>
 /// <param name="Blocks">Whether it stands in the way; the kind's when null. Never for a passage, whose state decides.</param>
+/// <param name="Reveals">For a notice: the hidden things of its region found the moment it's noticed (tracks leading to a cache).</param>
+/// <param name="Range">
+/// How far from the leader, in tiles along x and y, the party's passive skills find it and see its trap: 1 to 6, <see cref="Interactables.RevealRange"/>
+/// when null.
+/// </param>
 public sealed record InteractableDef(string Id, string Kind, [property: JsonRequired] Tile At, string? Facing = null, string? Name = null,
     string? Art = null, ImmutableArray<string> Text = default, ImmutableArray<string> Requires = default, ImmutableArray<string> Unless = default,
-    ImmutableArray<string> Sets = default, LockDef? Lock = null, TrapDef? Trap = null, int? Hidden = null,
-    ImmutableArray<LootDef> Loot = default, ImmutableArray<string> Targets = default, bool Open = false, bool? Blocks = null);
+    ImmutableArray<string> Sets = default, LockDef? Lock = null, TrapDef? Trap = null, HiddenDef? Hidden = null,
+    ImmutableArray<LootDef> Loot = default, ImmutableArray<string> Targets = default, bool Open = false, bool? Blocks = null,
+    ImmutableArray<string> Reveals = default, int? Range = null);
 
 /// <summary>
 /// How a thing to interact with is, as the campaign keeps it (design §2.3). Every field only moves one way, except a lever's
@@ -84,13 +157,15 @@ public sealed record InteractableDef(string Id, string Kind, [property: JsonRequ
 /// <param name="Unlocked">True once its lock is open.</param>
 /// <param name="TrapSpotted">True once its trap has been seen.</param>
 /// <param name="Trap">Null while its trap is set; <c>disarmed</c> or <c>sprung</c> after.</param>
+/// <param name="Searched">True once an active Search has failed to find it: it can't be searched for again, though passive skills still may.</param>
 /// <param name="Spent">The ways through its lock, or at its trap, that have failed (<see cref="Interactables.PickApproach"/> and the rest).</param>
 public sealed record InteractableSave(string State,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Found = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Unlocked = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool TrapSpotted = false,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Trap = null,
-    ImmutableArray<string> Spent = default)
+    ImmutableArray<string> Spent = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Searched = false)
 {
     /// <summary>The ways that have failed; never a default array.</summary>
     public ImmutableArray<string> Spent { get => field.IsDefault ? [] : field; init; } = Spent;

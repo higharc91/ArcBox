@@ -21,6 +21,13 @@ public enum InteractableFamily
     Ambient,
     /// <summary>A trap on the ground: sprung by a step, unless it's seen first.</summary>
     FloorTrap,
+    /// <summary>
+    /// Something only ever noticed, never used beyond a look (design §7.2): tracks, scratches, disturbed earth, a bloodstain, a draft, a carving,
+    /// a rune, remains. Always hidden; noticing it says its words, sets its flags and finds what it <see cref="InteractableDef.Reveals"/>.
+    /// </summary>
+    Notice,
+    /// <summary>A hidden path (design §7.3): a tile that stands in the way until it's found, then is walked like any ground.</summary>
+    Path,
 }
 
 /// <summary>
@@ -84,6 +91,12 @@ public static class InteractableKinds
     /// <summary>The one state of an ambient object, and of a floor trap (whose trap is in <see cref="InteractableSave.Trap"/>).</summary>
     public const string Idle = "idle";
 
+    /// <summary>The one state of a notice: it's drawn only once it's been noticed (<see cref="InteractableSave.Found"/>).</summary>
+    public const string Noticed = "noticed";
+
+    /// <summary>The one state of a hidden path: it's drawn only once it's been found.</summary>
+    public const string FoundPath = "found";
+
     private static ImmutableSortedDictionary<string, string> Stand(params (string State, string Key)[] keys)
         => keys.ToImmutableSortedDictionary(k => k.State, k => k.Key, StringComparer.Ordinal);
 
@@ -104,6 +117,11 @@ public static class InteractableKinds
 
     private static InteractableKind Shrine(string id, string name, string standIn, string line)
         => new(id, InteractableFamily.Shrine, name, $"interactables.{id}", [Ready, Used], true, Stand((Ready, standIn), (Used, standIn)), [line]);
+
+    /// <summary>A notice: always hidden, never in the way, its words content's. Its stand-in is a prop the pack has for it, or the plain marker.</summary>
+    private static InteractableKind Notice(string id, string name, string line, string? standIn = null)
+        => new(id, InteractableFamily.Notice, name, $"interactables.{id}", [Noticed], false, standIn is null ? Stand() : Stand((Noticed, standIn)), [line],
+            MustHide: true);
 
     /// <summary>Every kind, by id.</summary>
     public static ImmutableSortedDictionary<string, InteractableKind> All { get; } = new[]
@@ -130,6 +148,16 @@ public static class InteractableKinds
         Shrine("altar", "altar", "props.altar", "The candles have burnt low."),
         new InteractableKind("ambient", InteractableFamily.Ambient, "something", "interactables.ambient", [Idle], false, Stand(), ["Nothing to see."]),
         new InteractableKind("trap", InteractableFamily.FloorTrap, "trap", "interactables.trap", [Idle], false, Stand(), ["Click."]),
+        Notice("tracks", "tracks", "Tracks in the dirt."),
+        Notice("scratches", "scratches", "Scratches, deep and fresh."),
+        Notice("disturbed_earth", "disturbed earth", "The earth here has been dug and put back."),
+        Notice("bloodstain", "bloodstain", "Old blood, dried brown."),
+        Notice("draft", "draft", "A breath of cold air, from the stone itself."),
+        Notice("carving", "carving", "Something is carved here."),
+        Notice("rune", "rune", "A rune, faint as frost."),
+        Notice("remains", "remains", "Bones, picked clean.", "props.ribcage"),
+        new InteractableKind("hidden_path", InteractableFamily.Path, "hidden path", "interactables.hidden_path", [FoundPath], false, Stand(),
+            ["A way through."], MustHide: true),
     }.ToImmutableSortedDictionary(k => k.Id, k => k, StringComparer.Ordinal);
 
     /// <summary>The kind with this id, or null.</summary>

@@ -26,6 +26,21 @@ public static class Interactables
     /// <summary>How far from the leader, in tiles along x and y, the party's passive Perception finds hidden things and traps (design §2.6).</summary>
     public const int RevealRange = 3;
 
+    /// <summary>The farthest a thing's own <see cref="InteractableDef.Range"/> may reach (design §7.2).</summary>
+    public const int MaxRange = 6;
+
+    /// <summary>How far from the leader, in tiles along x and y, an active Search looks (design §7.4).</summary>
+    public const int SearchRange = 2;
+
+    /// <summary>The skill an active Search rolls (design §7.4).</summary>
+    public const string SearchSkill = "investigation";
+
+    /// <summary>How far the party's passive skills reach for <paramref name="def"/>: its own range, else <see cref="RevealRange"/>.</summary>
+    public static int RangeOf(InteractableDef def) => def.Range ?? RevealRange;
+
+    /// <summary>True for a kind whose finding is its whole outcome (a notice, a hidden path): its <c>sets</c> are set as it's found.</summary>
+    public static bool FoundIsItsOutcome(InteractableDef def) => KindOf(def).Family is InteractableFamily.Notice or InteractableFamily.Path;
+
     /// <summary>The highest passive Perception DC content may set, and the highest check DC: the SRD's "nearly impossible".</summary>
     public const int MaxDc = 30;
 
@@ -76,6 +91,8 @@ public static class Interactables
         if (!Present(def, flags))
             return false;
         var kind = KindOf(def);
+        if (kind.Family == InteractableFamily.Path)
+            return !save.Found;         // a hidden path is in the way until it's found, and then it's ground (design §7.3)
         if (def.Hidden is not null && !save.Found && kind.Family != InteractableFamily.Passage)
             return false;
         return kind.Family switch
@@ -87,11 +104,12 @@ public static class Interactables
     }
 
     /// <summary>
-    /// True for a shut passage nobody has found (a secret door): it blocks, but the TV isn't told it's there, so the TV is sent a plug of wall
-    /// for its tile instead (<c>ExploreView.Plugs</c>), or its gap would give it away.
+    /// True for a shut passage nobody has found (a secret door), or a hidden path nobody has found (design §7.3): it blocks, but the TV isn't
+    /// told it's there, so the TV is sent a plug for its tile instead (<c>ExploreView.Plugs</c>), drawn as its neighbours along its facing's
+    /// run (the wall, the hedge, the deep water it hides in), or its gap would give it away.
     /// </summary>
     public static bool Plugged(InteractableDef def, InteractableSave save, IReadOnlySet<string> flags)
-        => KindOf(def).Family == InteractableFamily.Passage && Blocks(def, save, flags) && !Visible(def, save, flags);
+        => KindOf(def).Family is InteractableFamily.Passage or InteractableFamily.Path && Blocks(def, save, flags) && !Visible(def, save, flags);
 
     /// <summary>
     /// True for a thing that may stand in the way whatever has happened (a chest, a barrel): neither a passage, whose state opens it, nor a trap
@@ -181,6 +199,7 @@ public static class Interactables
             InteractableFamily.Shrine when save.State == InteractableKinds.Ready => kind.Id == "well" ? $"Draw from the {name}" : $"Kneel at the {name}",
             InteractableFamily.Ambient => $"Look at the {name}",
             InteractableFamily.FloorTrap when save.TrapSpotted && save.Trap is null => $"Disarm the {name}",
+            InteractableFamily.Notice => kind.Id == "draft" ? $"Feel the {name}" : $"Look at the {name}",
             _ => null,
         };
     }
@@ -205,7 +224,10 @@ public static class Interactables
     }
 
     /// <summary>A character's passive Perception (SRD): 10 plus their Perception bonus (<see cref="SkillCheck.Bonus(UnitSheet, string)"/>).</summary>
-    public static int Passive(UnitSheet sheet) => 10 + SkillCheck.Bonus(sheet, "perception");
+    public static int Passive(UnitSheet sheet) => Passive(sheet, HiddenDef.Perception);
+
+    /// <summary>A character's passive <paramref name="skill"/> (SRD): 10 plus their bonus in it (design §7.1).</summary>
+    public static int Passive(UnitSheet sheet, string skill) => 10 + SkillCheck.Bonus(sheet, skill);
 
     /// <summary>What a passive Perception of <paramref name="passive"/> finds from <paramref name="at"/>.</summary>
     public enum Finding
@@ -214,33 +236,80 @@ public static class Interactables
         Revealed,
         /// <summary>A trap is seen.</summary>
         Spotted,
+        /// <summary>A notice is noticed: its words are said, and what it reveals is found with it.</summary>
+        Noticed,
     }
 
+    /// <summary>What finding <paramref name="def"/> is: a notice is noticed, anything else revealed.</summary>
+    public static Finding FindingOf(InteractableDef def) => KindOf(def).Family == InteractableFamily.Notice ? Finding.Noticed : Finding.Revealed;
+
     /// <summary>
-    /// What the party's best passive Perception <paramref name="passive"/> finds with the leader at <paramref name="at"/> (design §2.6): every
-    /// hidden thing there and not yet found, and every trap still set and not yet seen, within <see cref="RevealRange"/> tiles along x and
-    /// y, whose DC it meets. A trap on a hidden thing is seen only once the thing is found, which can be in the same pass. In id order.
+    /// The hidden things found with <paramref name="notice"/> (design §7.2): those of <paramref name="defs"/> it names in its <c>reveals</c>, that
+    /// are there with these flags and not found yet, and theirs in turn if they're notices, in that order, each once. Range and skill don't
+    /// matter: the tracks lead there. A thing that isn't there isn't found, and stays hidden for when it is.
     /// </summary>
+    public static ImmutableArray<(InteractableDef Def, Finding Found)> Revealing(InteractableDef notice, IEnumerable<InteractableDef> defs,
+        IReadOnlyDictionary<string, InteractableSave>? saves, IReadOnlySet<string> flags)
+    {
+        var byId = defs.GroupBy(d => d.Id, StringComparer.Ordinal).ToDictionary(g => g.Key, g => g.First(), StringComparer.Ordinal);
+        var seen = new HashSet<string>(StringComparer.Ordinal) { notice.Id };
+        var found = ImmutableArray.CreateBuilder<(InteractableDef, Finding)>();
+        var open = new Queue<InteractableDef>([notice]);
+        while (open.TryDequeue(out var from))
+            foreach (var id in from.Reveals.IsDefault ? [] : from.Reveals)
+            {
+                if (!seen.Add(id) || !byId.TryGetValue(id, out var def) || def.Hidden is null || !Present(def, flags) || StateOf(def, saves).Found)
+                    continue;
+                found.Add((def, FindingOf(def)));
+                open.Enqueue(def);
+            }
+        return found.ToImmutable();
+    }
+
+    /// <summary>What the party's best passive Perception <paramref name="passive"/> finds: <see cref="Finds(IEnumerable{InteractableDef}, IReadOnlyDictionary{string, InteractableSave}?, IReadOnlySet{string}, Tile, Func{string, int})"/> with every skill at it.</summary>
     public static ImmutableArray<(InteractableDef Def, Finding Found)> Finds(IEnumerable<InteractableDef> defs,
         IReadOnlyDictionary<string, InteractableSave>? saves, IReadOnlySet<string> flags, Tile at, int passive)
+        => [.. Finds(defs, saves, flags, at, _ => passive).Select(f => (f.Def, f.Found))];
+
+    /// <summary>
+    /// What the party's best passive skills (<paramref name="passive"/>, by skill) find with the leader at <paramref name="at"/> (design §2.6,
+    /// §7.1): every hidden thing there and not yet found whose skill's passive meets its DC, and every trap still set and not yet seen whose
+    /// spot DC passive Perception meets, each within its <see cref="RangeOf"/> tiles along x and y. A trap on a hidden thing is seen only once
+    /// the thing is found, which can be in the same pass. In id order, each with the skill that found it. What a notice reveals isn't here:
+    /// <see cref="Revealing"/> says, as it's applied.
+    /// </summary>
+    public static ImmutableArray<(InteractableDef Def, Finding Found, string Skill)> Finds(IEnumerable<InteractableDef> defs,
+        IReadOnlyDictionary<string, InteractableSave>? saves, IReadOnlySet<string> flags, Tile at, Func<string, int> passive)
     {
-        var found = new List<(InteractableDef, Finding)>();
+        var found = new List<(InteractableDef, Finding, string)>();
         foreach (var def in defs.OrderBy(d => d.Id, StringComparer.Ordinal))
         {
-            if (!Present(def, flags) || Math.Max(Math.Abs(at.X - def.At.X), Math.Abs(at.Y - def.At.Y)) > RevealRange)
+            if (!Present(def, flags) || Math.Max(Math.Abs(at.X - def.At.X), Math.Abs(at.Y - def.At.Y)) > RangeOf(def))
                 continue;
             var save = StateOf(def, saves);
             var seen = def.Hidden is null || save.Found;
-            if (!seen && passive >= def.Hidden!.Value)
+            if (!seen && passive(def.Hidden!.Skill) >= def.Hidden.Dc)
             {
-                found.Add((def, Finding.Revealed));
+                found.Add((def, FindingOf(def), def.Hidden.Skill));
                 seen = true;
             }
-            if (seen && def.Trap is { } trap && save.Trap is null && !save.TrapSpotted && passive >= trap.Spot)
-                found.Add((def, Finding.Spotted));
+            if (seen && def.Trap is { } trap && save.Trap is null && !save.TrapSpotted && passive(HiddenDef.Perception) >= trap.Spot)
+                found.Add((def, Finding.Spotted, HiddenDef.Perception));
         }
         return [.. found];
     }
+
+    /// <summary>
+    /// What an active Search from <paramref name="at"/> looks for (design §7.4): every hidden thing there, not found, not already searched
+    /// for, within <see cref="SearchRange"/> tiles along x and y, and not on the leader's own tile (found there it would stand on them), in
+    /// id order. The scene doesn't say how many: it plays the same with none.
+    /// </summary>
+    public static ImmutableArray<InteractableDef> Searchable(IEnumerable<InteractableDef> defs, IReadOnlyDictionary<string, InteractableSave>? saves,
+        IReadOnlySet<string> flags, Tile at)
+        => [.. defs.Where(d => d.Hidden is not null && d.At != at && Present(d, flags)
+                && Math.Max(Math.Abs(at.X - d.At.X), Math.Abs(at.Y - d.At.Y)) <= SearchRange
+                && StateOf(d, saves) is { Found: false, Searched: false })
+            .OrderBy(d => d.Id, StringComparer.Ordinal)];
 
     /// <summary>
     /// True when <paramref name="after"/> has gone back on <paramref name="before"/>: something found lost, a lock locked again, a trap
@@ -250,7 +319,7 @@ public static class Interactables
     public static bool Regressed(InteractableDef def, InteractableSave before, InteractableSave after, bool worked)
     {
         if ((before.Found && !after.Found) || (before.Unlocked && !after.Unlocked) || (before.TrapSpotted && !after.TrapSpotted)
-            || (before.Trap is not null && after.Trap != before.Trap) || before.Spent.Except(after.Spent).Any())
+            || (before.Trap is not null && after.Trap != before.Trap) || before.Spent.Except(after.Spent).Any() || (before.Searched && !after.Searched))
             return true;
         var kind = KindOf(def);
         if (kind.Family == InteractableFamily.Switch || (kind.Family == InteractableFamily.Passage && worked))
