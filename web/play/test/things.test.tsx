@@ -28,6 +28,7 @@ const interacts = (send: ReturnType<typeof vi.fn>) =>
 /** A beat's word on the button, with the vault's chest in reach as well. */
 const beatAndChest = (d: Record<string, unknown>) => {
   d.interact = "Talk";
+  d.beat = true;
   d.targets = [{ id: "chest", label: "Open the chest" }];
 };
 
@@ -78,6 +79,22 @@ describe("things to interact with, on the walk screen", () => {
     expect(interacts(second.send)).toEqual([{ action: "interact" }]);
   });
 
+  it("the server says which the button is: a beat whose word matches a thing's is still the beat's, and a thing's is never taken for one", () => {
+    const same = show("walk-things", (d) => {
+      d.interact = "Open the chest";
+      d.beat = true;
+      d.targets = [{ id: "chest", label: "Open the chest" }];
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Open the chest" }));
+    expect(interacts(same.send)).toEqual([{ action: "interact" }]);          // the beat, though its word is the chest's too
+    expect(screen.getByRole("button", { name: "2 things in reach: choose one" })).toBeTruthy();
+
+    cleanup();
+    const thing = show("walk-things", (d) => { d.interact = "Talk"; d.beat = false; d.targets = [{ id: "talker", label: "Talk" }]; });
+    fireEvent.click(screen.getByRole("button", { name: "Talk" }));
+    expect(interacts(thing.send)).toEqual([{ action: "interact", data: { target: "talker" } }]);
+  });
+
   it("one thing in reach has no picker", () => {
     show("walk-things", (d) => {
       d.interact = "Open the chest";
@@ -107,7 +124,7 @@ describe("things to interact with, on the walk screen", () => {
     expect(document.activeElement?.textContent).toBe("Pick up the iron key");
     fireEvent.click(screen.getByRole("button", { name: "Back" }));
     expect(screen.queryByRole("group", { name: "What to use" })).toBeNull();
-    expect(document.activeElement).toBe(screen.getByRole("button", { name: "2 things in reach: choose one" }));
+    expect(document.activeElement).toBe(screen.getByRole("button", { name: "Pick up the iron key" }));
 
     fireEvent.click(screen.getByRole("button", { name: "2 things in reach: choose one" }));
     fireEvent.keyDown(screen.getByRole("group", { name: "What to use" }), { key: "Escape" });
@@ -124,8 +141,8 @@ describe("things to interact with, on the walk screen", () => {
     expect(interacts(send)).toHaveLength(1);
     expect(button.getAttribute("aria-disabled")).toBe("true");
     fireEvent.click(screen.getByRole("button", { name: "2 things in reach: choose one" }));
-    fireEvent.click(screen.getByRole("button", { name: "Open the chest" }));
-    expect(interacts(send)).toHaveLength(1);                       // one use per view: the server answers the first
+    expect(screen.queryByRole("group", { name: "What to use" })).toBeNull();    // one use per view: the list waits too
+    expect(interacts(send)).toHaveLength(1);
 
     await vi.advanceTimersByTimeAsync(2500);
     fireEvent.click(screen.getByRole("button", { name: "Pick up the iron key" }));
@@ -147,14 +164,52 @@ describe("things to interact with, on the walk screen", () => {
     }, "v3"));
     expect(screen.queryByRole("group", { name: "What to use" })).toBeNull();
     expect(screen.getByRole("button", { name: "Open the chest" })).toBeTruthy();
+    expect(document.activeElement).toBe(screen.getByRole("button", { name: "Open the chest" }));    // not lost to the page
   });
 
-  it("closes by itself after a while, so a forgotten list doesn't sit on the screen", () => {
+  it("closes by itself after a while, so a forgotten list doesn't sit on the screen, and the focus goes back to the button", () => {
     show("walk-things");
     fireEvent.click(screen.getByRole("button", { name: "2 things in reach: choose one" }));
     act(() => {
       vi.advanceTimersByTime(15_000);
     });
     expect(screen.queryByRole("group", { name: "What to use" })).toBeNull();
+    expect(document.activeElement).toBe(screen.getByRole("button", { name: "Pick up the iron key" }));
+  });
+
+  it("any touch in the list starts its wait again", () => {
+    show("walk-things");
+    fireEvent.click(screen.getByRole("button", { name: "2 things in reach: choose one" }));
+    act(() => {
+      vi.advanceTimersByTime(10_000);
+    });
+    fireEvent.pointerDown(screen.getByRole("button", { name: "Open the chest" }));
+    act(() => {
+      vi.advanceTimersByTime(10_000);
+    });
+    expect(screen.getByRole("group", { name: "What to use" })).toBeTruthy();
+    fireEvent.keyDown(screen.getByRole("group", { name: "What to use" }), { key: "ArrowDown" });
+    act(() => {
+      vi.advanceTimersByTime(10_000);
+    });
+    expect(screen.getByRole("group", { name: "What to use" })).toBeTruthy();
+    act(() => {
+      vi.advanceTimersByTime(3_000);
+    });
+    expect(screen.queryByRole("group", { name: "What to use" })).toBeNull();
+  });
+
+  it("the list button names the list it opens, and sleeps with the rest while a use is on its way", () => {
+    show("walk-things");
+    const more = screen.getByRole("button", { name: "2 things in reach: choose one" });
+    expect(more.getAttribute("aria-disabled")).toBe("false");
+    fireEvent.click(more);
+    const list = screen.getByRole("group", { name: "What to use" });
+    expect(more.getAttribute("aria-controls")).toBe(list.id);
+    expect(list.id).not.toBe("");
+    fireEvent.click(within(list).getByRole("button", { name: "Open the chest" }));
+    expect(more.getAttribute("aria-disabled")).toBe("true");
+    fireEvent.click(more);
+    expect(screen.queryByRole("group", { name: "What to use" })).toBeNull();      // asleep: nothing to choose until it wakes
   });
 });

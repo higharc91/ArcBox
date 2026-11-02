@@ -1,5 +1,5 @@
 import type { JSX } from "preact";
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "preact/hooks";
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "preact/hooks";
 import { useFeedback } from "../../feedback/feedback";
 import type { CustomScreenProps } from "../module";
 import { Portrait } from "./art";
@@ -232,13 +232,13 @@ export interface InteractChoice {
 }
 
 /**
- * What the leader can use, the button's first: the beat in reach, when the button says the beat's word (the server puts a beat first),
- * then each thing in reach, nearest first (interactables design §2.5). A server that sends no list gives the button alone.
+ * What the leader can use, the button's first: the beat in reach, when the server says the button is the beat's (`beat`), then each thing
+ * in reach, nearest first (interactables design §2.5). A server that sends no list gives the button alone, as the beat's.
  */
-export function interactChoices(interact: string | null | undefined, targets: WalkData["targets"]): InteractChoice[] {
+export function interactChoices(interact: string | null | undefined, targets: WalkData["targets"], beat?: boolean): InteractChoice[] {
   const things = (targets ?? []).map((t) => ({ label: t.label, target: t.id }));
-  const beat = interact && things[0]?.label !== interact ? [{ label: interact, target: null }] : [];
-  return [...beat, ...things];
+  const isBeat = targets === undefined ? !!interact : beat === true;
+  return [...(isBeat && interact ? [{ label: interact, target: null }] : []), ...things];
 }
 
 /**
@@ -252,23 +252,36 @@ function Interact({ choices, send, viewId }: { choices: InteractChoice[]; send: 
   const [sent, setSent] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const sentFor = useRef<string | null>(null);
+  // Each touch in the list starts its wait again, so it never closes under a hand that's still choosing.
+  const [touched, setTouched] = useState(0);
   const more = useRef<HTMLButtonElement>(null);
   const main = useRef<HTMLButtonElement>(null);
   const list = useRef<HTMLDivElement>(null);
+  const listId = useId();
   const shown = open && choices.length > 1;
+  /** Back to the Interact button, if the keyboard's focus was in the list (or on what closed it): it's never left on nothing. */
+  const refocus = () => {
+    const at = document.activeElement;
+    if (!at || at === document.body || list.current?.contains(at) || at === more.current) main.current?.focus();
+  };
   useEffect(() => {
     if (!sent) return;
     const id = setTimeout(() => { sentFor.current = null; setSent(null); }, INTERACT_REARM_MS);
     return () => clearTimeout(id);
   }, [sent]);
   useEffect(() => {
-    if (!shown) return;
-    list.current?.querySelector<HTMLButtonElement>("button")?.focus();
-    const id = setTimeout(() => setOpen(false), PICK_MS);
-    return () => clearTimeout(id);
+    if (shown) list.current?.querySelector<HTMLButtonElement>("button")?.focus();
   }, [shown]);
   useEffect(() => {
-    if (open && choices.length < 2) setOpen(false);
+    if (!shown) return;
+    const id = setTimeout(() => { refocus(); setOpen(false); }, PICK_MS);
+    return () => clearTimeout(id);
+  }, [shown, touched]);
+  useEffect(() => {
+    if (open && choices.length < 2) {
+      setOpen(false);
+      main.current?.focus();      // the list went from under it: the focus goes back to the button, not to the page
+    }
   }, [open, choices.length]);
 
   // Asleep, it's only aria-disabled, not disabled: a disabled button would drop the keyboard's focus to the page.
@@ -283,15 +296,16 @@ function Interact({ choices, send, viewId }: { choices: InteractChoice[]; send: 
   };
   const close = () => {
     sfx("cancel");
+    refocus();
     setOpen(false);
-    more.current?.focus();
   };
+  const touch = () => setTouched((n) => n + 1);
   const first = choices[0]!;
   return (
     <div class="tx-interact-dock">
       {shown ? (
-        <div class="tx-interact-pick" role="group" aria-label="What to use" ref={list}
-          onKeyDown={(e) => { if (e.key === "Escape") close(); }}>
+        <div class="tx-interact-pick" id={listId} role="group" aria-label="What to use" ref={list}
+          onPointerDown={touch} onFocusIn={touch} onKeyDown={(e) => { touch(); if (e.key === "Escape") close(); }}>
           {choices.map((c) => (
             <button key={c.target ?? ""} type="button" class="tx-btn gold" aria-disabled={busy}
               onClick={() => { use(c); setOpen(false); main.current?.focus(); }}>
@@ -307,9 +321,9 @@ function Interact({ choices, send, viewId }: { choices: InteractChoice[]; send: 
           {first.label}
         </button>
         {choices.length > 1 ? (
-          <button type="button" class="tx-btn ghost tx-interact-more" ref={more} aria-expanded={shown}
-            aria-label={`${choices.length} things in reach: choose one`}
-            onClick={() => { if (shown) close(); else { sfx("select"); setOpen(true); } }}>
+          <button type="button" class="tx-btn ghost tx-interact-more" ref={more} aria-expanded={shown} aria-controls={listId}
+            aria-disabled={busy} aria-label={`${choices.length} things in reach: choose one`}
+            onClick={() => { if (shown) close(); else if (!busy) { sfx("select"); setOpen(true); } }}>
             <span aria-hidden="true">{choices.length}</span>
             <span class="tx-interact-caret" aria-hidden="true" />
           </button>
@@ -345,7 +359,7 @@ const classId = (name: string) => name.toLowerCase().replaceAll(" ", "_");
 export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
   const d = data as WalkData;
   const sfx = useSfx();
-  const choices = useMemo(() => interactChoices(d.interact, d.targets), [d.interact, d.targets]);
+  const choices = useMemo(() => interactChoices(d.interact, d.targets, d.beat), [d.interact, d.targets, d.beat]);
 
   // The screen's `stream` closes over its view's id, so timers must reach the newest one, or all they send is dropped.
   const out = useRef(stream);

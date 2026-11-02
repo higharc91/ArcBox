@@ -168,6 +168,8 @@ export interface WalkData {
    * button uses the first, unless a beat is in reach (then `interact` is the beat's word); with more than one choice, a list beside it has them all.
    */
   targets?: { id: string; label: string }[];
+  /** With `targets`: true when the leader's button is a beat's (`interact` is its word, sent with no target); false when it's the first thing's. */
+  beat?: boolean;
 }
 
 /**
