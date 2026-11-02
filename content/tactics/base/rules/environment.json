@@ -124,7 +124,8 @@
       "id": "ignite",
       "damage": "fire",
       "tiles": "fuel",
-      "surface": "burning"
+      "surface": "burning",
+      "consumes": true
     },
     {
       "id": "freeze",

@@ -489,7 +489,7 @@ public sealed partial class TacticsGame
                     id = o.Id,
                     label = o.Ability is { } a ? Rules.Abilities.GetValueOrDefault(a)?.Name ?? a.Value : "Don't react",
                     target = o.Target,
-                    tooltip = o.Ability is { } ta && Rules.Abilities.TryGetValue(ta, out var def) ? Tooltips.For(def, me.Sheet.Level, Rules) : null,
+                    tooltip = o.Ability is { } ta && Rules.Abilities.TryGetValue(ta, out var def) ? Tooltips.For(def, me.Sheet.Level, Rules, state.Environment) : null,
                 }),
             }) with { DeadlineUtc = _ctx.TimerDeadline(Timers.React) };
         if (state.Active == unit && state.Pending is null && IsPlayed(unit) && _aiFinishing != unit)

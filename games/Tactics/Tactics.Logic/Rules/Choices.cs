@@ -88,7 +88,7 @@ public static class Choices
             if (targets.Count == 0)
                 continue;
             var name = item is { } i ? rules.Items[i].Name : ability.Name;
-            choices.Add(new AbilityChoice(command, item, name, Tooltips.For(ability, me.Sheet.Level, rules), ability.Cost,
+            choices.Add(new AbilityChoice(command, item, name, Tooltips.For(ability, me.Sheet.Level, rules, state.Environment), ability.Cost,
                 targets.ToImmutable()));
         }
         return choices.ToImmutable();

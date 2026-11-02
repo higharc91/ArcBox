@@ -20,7 +20,8 @@ public sealed record TurnEconomy(int MoveLeft, bool Action, bool Bonus, bool Rea
 public sealed record ActiveCondition(ConditionId Id, UnitId? Source, int? RoundsLeft, bool UntilSave, int SaveDc,
     Stat SaveStat, bool Concentration,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool AppliedThisTurn = false,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] StaticMods? Mods = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] StaticMods? Mods = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? SourceZone = null);
 
 /// <summary>A stack of one item in a unit's bag.</summary>
 public sealed record ItemStack(ItemId Item, int Count);

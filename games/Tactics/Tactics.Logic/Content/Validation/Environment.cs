@@ -45,6 +45,9 @@ internal sealed partial class Validation
                 Error(file, Pointer.Append(at, "leaves"), $"Unknown surface '{leaves}'.");
             if (surface.Spreads && (surface.Rounds is null || surface.Leaves is null))
                 Error(file, at, "A spreading surface needs a finite duration and a permanent spent-fuel surface.");
+            if (surface.Spreads && surface.Leaves is { } spent && def.Surfaces.TryGetValue(spent, out var remainder)
+                && (remainder.Fuel || remainder.Spreads || remainder.Rounds is not null))
+                Error(file, Pointer.Append(at, "leaves"), "Spent fuel must be permanent and cannot burn or spread again.");
         }
         var ids = new HashSet<string>(StringComparer.Ordinal);
         for (var i = 0; i < def.Reactions.Length; i++)

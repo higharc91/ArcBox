@@ -11,9 +11,10 @@ public sealed class EffectContext
 {
     /// <summary>A context for running effects of <paramref name="ability"/> from <paramref name="source"/>.</summary>
     public EffectContext(BattleWriter w, RulesPack rules, UnitId source, UnitId? target, Tile? aim, AbilityDef? ability,
-        RollResult? last = null, bool halfDamage = false, Stat? saveStat = null, int? resolution = null)
+        RollResult? last = null, bool halfDamage = false, Stat? saveStat = null, int? resolution = null, int? sourceZone = null)
     {
         Resolution = resolution;
+        SourceZone = sourceZone;
         W = w;
         Rules = rules;
         Source = source;
@@ -121,8 +122,11 @@ public sealed class EffectContext
     {
         if (!effects.IsDefaultOrEmpty)
             W.PushFront(new RunEffectsStep(Source, Target, Aim, Ability?.Id, effects, last, halfDamage, saveStat, W.HookDepth,
-                Resolution: Resolution));
+                Resolution: Resolution, SourceZone: SourceZone));
     }
+
+    /// <summary>The zone whose passive caused these effects, retained across nested branches.</summary>
+    public int? SourceZone { get; }
 
     /// <summary>The modifier of <paramref name="sheet"/>'s casting stat, or 0 without one.</summary>
     public static int CastingModifierOf(UnitSheet sheet)

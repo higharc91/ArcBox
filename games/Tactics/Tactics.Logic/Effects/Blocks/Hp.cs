@@ -106,6 +106,7 @@ public sealed class DamageBlock : EffectBlock<DamageEffect>
     /// <inheritdoc />
     protected override void Run(DamageEffect def, EffectContext ctx)
     {
+        Surfaces.RecordDamage(ctx, def);
         var target = ctx.TargetUnit(Key);
         var sheet = ctx.SourceUnit.Sheet;
         var crit = ctx.Last?.Crit == true;

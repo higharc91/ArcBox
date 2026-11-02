@@ -5,7 +5,7 @@ namespace Tactics.Logic;
 /// <summary>
 /// Tooltip text generated from the content (spec §4.1 point 4), so a description can't drift from the rules: each effect
 /// block supplies its own phrase (<see cref="IEffectBlock.Describe"/>) and this class assembles them. A block with no phrase
-/// makes <see cref="For(AbilityDef, int, RulesPack)"/> throw <see cref="InvalidOperationException"/> naming its key, which is
+/// makes <see cref="For(AbilityDef, int, RulesPack, bool)"/> throw <see cref="InvalidOperationException"/> naming its key, which is
 /// how content tests catch a block or hook that can't be described.
 /// <list type="bullet">
 /// <item>Ability: <c>"{header}: {effects}"</c> with <c>" — {flavour}"</c> after. The header is
@@ -25,7 +25,7 @@ namespace Tactics.Logic;
 public static class Tooltips
 {
     /// <summary>The tooltip for <paramref name="a"/> as used by a unit of <paramref name="level"/>.</summary>
-    public static string For(AbilityDef a, int level, RulesPack rules)
+    public static string For(AbilityDef a, int level, RulesPack rules, bool environment = false)
     {
         var effects = a.Effects.IsDefault ? ImmutableArray<EffectDef>.Empty : a.Effects;
         var lead = effects.Length > 0 ? effects[0] : null;
@@ -50,7 +50,48 @@ public static class Tooltips
         if (a.Target.Kind == TargetKind.Self && a.Target.Area.Shape is AreaShape.Self or AreaShape.Single)
             parts = [.. parts.Select(SecondPerson)];
         var text = parts.Count == 0 ? header : $"{header}: {string.Join("; ", parts)}";
+        if (environment)
+        {
+            var types = EffectTree.All(effects).OfType<DamageEffect>().Select(d => d.Type).ToHashSet();
+            foreach (var reaction in rules.Environment.Reactions.Where(r => r.Damage is { } type && types.Contains(type)))
+                text += ". " + For(reaction, level, rules);
+        }
         return string.IsNullOrEmpty(a.Flavor) ? text : $"{text} — {a.Flavor}";
+    }
+
+    /// <summary>A reaction's content-derived range, duration, damage and saving throws.</summary>
+    public static string For(EnvironmentReactionDef reaction, int level, RulesPack rules)
+    {
+        var label = reaction.Damage is { } type ? TooltipText.Capitalise(type) : "Water";
+        if (reaction.Conduct is { } conduct)
+            return $"{label}: runs through connected water ({TooltipText.Tiles(conduct.Reach)}); all standing units, {conduct.Save} save{(conduct.Half ? " for half" : "")}; ice blocks it";
+        if (reaction.Remove is { } condition)
+            return $"{label}: removes {TooltipText.Condition(new ConditionId(condition), rules)} on entry";
+        var tiles = reaction.Tiles switch
+        {
+            "fuel" => "fuel", "shallows" => "shallow water", "water" => "water",
+            { } t when t.StartsWith("zone:", StringComparison.Ordinal) => t[5..] + " tiles",
+            { } t when t.StartsWith("surface:", StringComparison.Ordinal) => t[8..].Replace('_', ' '),
+            _ => "tiles",
+        };
+        if (reaction.Ends)
+            return $"{label}: removes {tiles}";
+        if (reaction.Surface is not { } kind || !rules.Environment.Surfaces.TryGetValue(kind, out var surface))
+            return $"{label}: reacts with {tiles}";
+        var rounds = reaction.Rounds ?? surface.Rounds;
+        var duration = rounds is { } n ? $" for {n} {(n == 1 ? "round" : "rounds")}" : "";
+        var detail = (reaction.Passives.IsDefaultOrEmpty ? surface.Passives : reaction.Passives);
+        var traits = new List<string>();
+        if (surface.Difficult) traits.Add("difficult terrain");
+        if (surface.Spreads) traits.Add("spreads each round");
+        if (!detail.IsDefaultOrEmpty)
+            foreach (var passive in detail)
+            {
+                var saves = EffectTree.All(passive.Effects).OfType<SaveEffect>().Where(s => s.Dc is not null)
+                    .Select(s => $"{s.Stat} DC {s.Dc}").Distinct().ToArray();
+                traits.Add(For(passive, level, rules) + (saves.Length == 0 ? "" : $" ({string.Join(", ", saves)})"));
+            }
+        return $"{label}: {tiles} becomes {kind.Replace('_', ' ')}{duration}" + (traits.Count == 0 ? "" : $" ({string.Join("; ", traits)})");
     }
 
     /// <summary>"target {verb}" at the start of a phrase, said to the unit itself ("target gains" → "you gain").</summary>

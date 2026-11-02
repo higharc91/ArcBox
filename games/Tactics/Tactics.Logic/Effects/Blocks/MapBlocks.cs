@@ -34,10 +34,10 @@ public static class ZoneRules
     /// leaves incapacitated loses its concentration. Units already there aren't "entering" it.
     /// </summary>
     public static Zone Create(BattleWriter w, UnitId? owner, string kind, ImmutableArray<Tile> tiles, int? rounds,
-        bool concentration, bool difficult, ImmutableArray<PassiveDef> passives, bool blocksSight = false)
+        bool concentration, bool difficult, ImmutableArray<PassiveDef> passives, bool blocksSight = false, bool surface = false, string? source = null, bool? appliedThisTurn = null)
     {
         var zone = new Zone(w.State.NextSerial, owner, kind, tiles, rounds, concentration, difficult,
-            passives.IsDefault ? [] : passives, AppliedThisTurn: owner is { } id && w.State.Active == id, BlocksSight: blocksSight);
+            passives.IsDefault ? [] : passives, AppliedThisTurn: appliedThisTurn ?? (owner is { } id && w.State.Active == id), BlocksSight: blocksSight, Surface: surface, Source: source);
         w.State = w.State with { Zones = w.State.Zones.Add(zone), NextSerial = w.State.NextSerial + 1 };
         w.Emit(new ZoneCreated(zone));
         foreach (var unit in w.State.Units.Values.Where(u => DownedRules.InBattle(u) && tiles.Contains(u.Pos)).Select(u => u.Id).ToArray())
@@ -61,13 +61,13 @@ public static class ZoneRules
     /// conditions (<see cref="Conditions.EndTurn"/>): one at 0 rounds ends; one made this turn only loses that mark; any
     /// other loses a round and ends at 0.
     /// </summary>
-    internal static void EndTurn(BattleWriter w, UnitId unit) => Tick(w, z => z.Owner == unit);
+    internal static void EndTurn(BattleWriter w, UnitId unit) => Tick(w, z => !z.Surface && z.Owner == unit);
 
     /// <summary>A new round: zones whose owner is no longer in the battle (or that have none) tick, as their owner would have.</summary>
     internal static void TickOrphans(BattleWriter w)
     {
         var units = w.State.Units;
-        Tick(w, z => z.Owner is not { } owner || !units.TryGetValue(owner, out var u) || !DownedRules.InBattle(u));
+        Tick(w, z => !z.Surface && (z.Owner is not { } owner || !units.TryGetValue(owner, out var u) || !DownedRules.InBattle(u)));
     }
 
     private static void Tick(BattleWriter w, Func<Zone, bool> ticks)
@@ -209,6 +209,7 @@ public sealed class AlterTerrainBlock : EffectBlock<AlterTerrainEffect>
 
         var sunk = ctx.W.State.Sunk ?? [];
         ctx.W.State = ctx.W.State with { Sunk = sunk.Union(sinking.Select(s => s.Tile)) };
+        Surfaces.TerrainChanged(ctx.W);
         foreach (var (tile, drop) in sinking)
             foreach (var unit in ctx.W.State.Units.Values.Where(u => u.Pos == tile && DownedRules.InBattle(u)).Select(u => u.Id).ToArray())
                 Motion.FallIn(ctx.W, unit, drop);   // more than one mid-walk: a mover shares an ally's tile as it passes

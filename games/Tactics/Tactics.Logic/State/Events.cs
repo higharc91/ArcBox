@@ -33,6 +33,7 @@ namespace Tactics.Logic;
 [JsonDerivedType(typeof(Died), nameof(Died))]
 [JsonDerivedType(typeof(TurnSkipped), nameof(TurnSkipped))]
 [JsonDerivedType(typeof(BattleEnded), nameof(BattleEnded))]
+[JsonDerivedType(typeof(TileReacted), nameof(TileReacted))]
 [JsonDerivedType(typeof(ZoneCreated), nameof(ZoneCreated))]
 [JsonDerivedType(typeof(ZoneEnded), nameof(ZoneEnded))]
 [JsonDerivedType(typeof(TerrainAltered), nameof(TerrainAltered))]
@@ -198,3 +199,6 @@ public sealed record CameraHint(Tile Tile) : BattleEvent;
 
 /// <summary>A boss entered phase <see cref="Number"/>: it gained the phase's abilities and passives.</summary>
 public sealed record PhaseEntered(UnitId Unit, int Number) : BattleEvent;
+
+/// <summary>An environmental cause, emitted before its zone, save, damage or condition events.</summary>
+public sealed record TileReacted(string Rule, UnitId? Source, ImmutableArray<Tile> Tiles) : BattleEvent;

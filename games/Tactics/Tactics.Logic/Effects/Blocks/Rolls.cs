@@ -38,7 +38,7 @@ public sealed class AttackBlock : EffectBlock<AttackEffect>
         var target = ctx.TargetUnit(Key);
         if (def.Kind is not ("weapon" or "spell"))
             throw new InvalidOperationException($"'attack' kind must be \"weapon\" or \"spell\", not '{def.Kind}'.");
-        ctx.W.PushFront(new AttackStep(ctx.Source, target.Id, ctx.Aim, ctx.Ability?.Id, def, HookDepth: ctx.W.HookDepth));
+        ctx.W.PushFront(new AttackStep(ctx.Source, target.Id, ctx.Aim, ctx.Ability?.Id, def, HookDepth: ctx.W.HookDepth, SourceZone: ctx.SourceZone));
         Hooks.Fire(ctx.W, HookKind.BeforeAttackRoll,
             new HookArgs(ctx.Source, target.Id, Tile: target.Pos, Ability: ctx.Ability?.Id, AttackKind: def.Kind), ctx.Rules);
     }
@@ -74,7 +74,8 @@ public sealed class AttackBlock : EffectBlock<AttackEffect>
 /// </summary>
 public sealed record AttackStep(UnitId Source, UnitId Target, Tile? Aim, AbilityId? Ability, EffectDef Attack,
     RollResult? Roll = null, int Cover = 0, Edge Edge = Edge.None, int HookDepth = 0,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Resolution = null) : Step
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Resolution = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? SourceZone = null) : Step
 {
     /// <inheritdoc />
     public override void Run(BattleWriter w, RulesPack rules)
@@ -157,6 +158,8 @@ public sealed record AttackStep(UnitId Source, UnitId Target, Tile? Aim, Ability
                            || Modifiers.For(w, Target, rules).CritWhenAdjacent && Reach.Distance(source.Pos, target.Pos) == 1);
         var roll = rolled with { Vs = ac, Success = hit, Crit = crit };
         w.Emit(new AttackResolved(Source, Target, hit, crit));
+        if (HookDepth == 0)
+            Surfaces.RecordHit(w, Source, Ability, hit);
 
         var hooks = new List<Step>();
         Hooks.Collect(w, hit ? HookKind.OnAttackHit : HookKind.OnAttackMiss,
@@ -170,7 +173,7 @@ public sealed record AttackStep(UnitId Source, UnitId Target, Tile? Aim, Ability
                 hooks[i] = hook with { Resolution = Resolution };   // the hit's own extra damage (sneak attack) is the same hit
         if (!branch.IsDefaultOrEmpty)
             hooks.Insert(0, new RunEffectsStep(Source, Target, Aim, Ability, branch, roll, HookDepth: HookDepth,
-                Resolution: Resolution));
+                Resolution: Resolution, SourceZone: SourceZone));
         if (hooks.Count > 0)
             w.PushFront([.. hooks]);
     }

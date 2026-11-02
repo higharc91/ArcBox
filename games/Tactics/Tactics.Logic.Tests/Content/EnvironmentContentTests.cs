@@ -26,6 +26,7 @@ public sealed class EnvironmentContentTests
     [InlineData("damage", "/reactions/0/damage")]
     [InlineData("duration", "/surfaces/burning/rounds")]
     [InlineData("condition", "/surfaces/burning/passives/0/effects/0/apply")]
+    [InlineData("renewable", "/surfaces/burning/leaves")]
     public void Bad_environment_references_have_precise_json_pointers(string mutation, string pointer)
     {
         using var pack = new EnvironmentPack(root =>
@@ -36,6 +37,7 @@ public sealed class EnvironmentContentTests
                 case "surface": root["reactions"]![0]!["surface"] = "__missing__"; break;
                 case "damage": root["reactions"]![0]!["damage"] = "__missing__"; break;
                 case "duration": root["surfaces"]!["burning"]!["rounds"] = 0; break;
+                case "renewable": root["surfaces"]!["scorched"]!["fuel"] = true; break;
                 case "condition": root["surfaces"]!["burning"]!["passives"]![0]!["effects"] = JsonNode.Parse("[{\"apply\":\"__missing__\"}]"); break;
             }
         });

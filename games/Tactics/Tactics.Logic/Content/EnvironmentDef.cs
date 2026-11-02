@@ -8,6 +8,9 @@ public sealed record EnvironmentDef(ImmutableArray<string> Fuel,
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedDictionary<string, SurfaceDef> Surfaces,
     ImmutableArray<EnvironmentReactionDef> Reactions, ImmutableArray<string> ZoneFuel = default, string? Replaces = null, ImmutableArray<string> MaterialFamilies = default)
 {
+    public bool IsFuelMaterial(string material) => Fuel.Any(pattern => pattern.EndsWith("/*", StringComparison.Ordinal)
+        ? material.StartsWith(pattern[..^1], StringComparison.Ordinal) : material == pattern);
+
     public const string Id = "environment";
     public static EnvironmentDef None { get; } = new([], Ordinal.Map<SurfaceDef>(), [], []);
 }
