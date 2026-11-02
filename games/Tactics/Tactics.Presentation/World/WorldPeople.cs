@@ -82,14 +82,16 @@ public sealed class WorldPeople
     }
 
     /// <summary>
-    /// Everyone to draw at <paramref name="clock"/> near <paramref name="around"/> (art pixels), in painter's order, less those <paramref name="markers"/> have taken over.
+    /// Everyone to draw at <paramref name="clock"/> near <paramref name="around"/> (art pixels), in painter's order, less those <paramref name="markers"/> and a scene's
+    /// <paramref name="cast"/> have taken over, so Pip at the well doesn't stand beside Pip speaking to the party.
     /// <paramref name="pixels"/> is the walk's, as for the party, so a figure stands still against the ground as the camera moves.
     /// </summary>
-    public ImmutableArray<BoardUnit> Units(double clock, Vector2 around, ImmutableArray<StoryMarker> markers, Func<Vector2, bool, Vector2>? pixels = null)
+    public ImmutableArray<BoardUnit> Units(double clock, Vector2 around, ImmutableArray<StoryMarker> markers, Func<Vector2, bool, Vector2>? pixels = null,
+        ImmutableArray<CastView> cast = default)
     {
         if (_people.IsEmpty)
             return [];
-        var taken = Taken(markers);
+        var taken = Taken([.. (markers.IsDefault ? [] : markers).Select(m => (m.At, m.Sprite)), .. (cast.IsDefault ? [] : cast).Select(c => (c.At, (string?)c.Sprite))]);
         var units = ImmutableArray.CreateBuilder<BoardUnit>();
         for (var i = 0; i < _people.Length; i++)
         {
@@ -103,8 +105,8 @@ public sealed class WorldPeople
         return units.ToImmutable();
     }
 
-    /// <summary>Which people a beat's figure stands in for. The markers are few.</summary>
-    private int[] Taken(ImmutableArray<StoryMarker> markers)
+    /// <summary>Which people a beat's figure, or a scene's cast, stands in for: the nearest of each one's preset. They're few.</summary>
+    private int[] Taken(ImmutableArray<(Tile At, string? Sprite)> markers)
     {
         if (markers.IsDefaultOrEmpty)
             return [];

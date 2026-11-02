@@ -179,7 +179,7 @@ public sealed class WalkShow
         ImmutableArray<BoardUnit> walkers = stage?.Hidden == true ? [] : [.. UnitPlan.Walkers(_party, drawn, _track.Poses, _art, _pixels)
             .Concat(StoryMarks.Of(_markers, _terrain, _art, _pixels).Select(m => m.Unit).OfType<BoardUnit>())
             .Concat(StoryMarks.Cast(_cast, _terrain, _art, _pixels)).OrderBy(u => u.Order)];
-        var people = _people?.Units(Clock, focus.Feet, _markers, _pixels) ?? [];
+        var people = _people?.Units(Clock, focus.Feet, _markers, _pixels, _cast) ?? [];
         ImmutableArray<BoardUnit> units = people.IsEmpty ? walkers : [.. walkers.Concat(people).OrderBy(u => u.Order)];
         var fit = stage is { Shake: var shake } && shake != Vector2.Zero ? _camera.Fit with { Origin = _camera.Fit.Origin + shake * _camera.Fit.Scale } : _camera.Fit;
         return new WalkFrame(units, fit, focus.Map, _track.Heading * TilesPerSecond, footstep, cut, _track.Walked, focus.Feet, bumped, bump) { Walkers = walkers };

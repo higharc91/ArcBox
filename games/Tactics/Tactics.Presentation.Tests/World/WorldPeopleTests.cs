@@ -138,6 +138,19 @@ public sealed class WorldPeopleTests
     }
 
     [Fact]
+    public void A_scenes_cast_replaces_the_person_it_is_as_a_beats_figure_does()
+    {
+        // Pip stands at the well; once the scene starts the marker's gone, and Pip speaks from beside the party instead.
+        var people = ImmutableArray.Create(Person("child", 5, 5), Person("guard", 6, 6));
+        ImmutableArray<CastView> cast = [new CastView("pip", "Pip Ashdown", "characters.child", new Tile(9, 9), new Tile(8, 8))];
+
+        var units = new WorldPeople(people, Ground, Art.Value).Units(0, Everywhere, [], cast: cast);
+
+        Assert.DoesNotContain(units, u => u.Sprite == Art.Value.Sprite("characters.child"));
+        Assert.Contains(units, u => u.Sprite == Art.Value.Sprite("characters.guard"));
+    }
+
+    [Fact]
     public void A_beat_with_nobody_to_show_replaces_nobody()
         => Assert.Single(At(0, [Person("guard", 5, 5)], [new StoryMarker("beat", new Tile(9, 9), null, "alert")]));
 

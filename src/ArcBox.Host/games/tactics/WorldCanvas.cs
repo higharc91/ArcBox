@@ -480,7 +480,14 @@ internal sealed partial class WorldCanvas : CanvasLayer
                 FinishBuild();
                 break;
             case Stage.Textures:
-                LoadOneTexture();
+                // As many as fit the frame's budget, and always one: a world dressed with props and people has hundreds, and on a slow
+                // renderer one a frame took longer than the title card waits.
+                var started = Stopwatch.GetTimestamp();
+                do
+                {
+                    LoadOneTexture();
+                }
+                while (Now == Stage.Textures && Stopwatch.GetElapsedTime(started).TotalMilliseconds < WorldTuning.TextureBudgetMs);
                 break;
             case Stage.Near:
                 Tally();

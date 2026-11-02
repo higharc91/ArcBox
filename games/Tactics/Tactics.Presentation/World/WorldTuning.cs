@@ -9,6 +9,9 @@ public static class WorldTuning
     /// <summary>How long a frame may spend recording blocks, in milliseconds.</summary>
     public const double BlockBudgetMs = 4;
 
+    /// <summary>How long a frame spends loading the world's textures while it opens, in milliseconds: always one, then as many more as fit.</summary>
+    public const double TextureBudgetMs = 8;
+
     /// <summary>Layout pixels per art pixel: fixed, so a region isn't shrunk to fit as a board is.</summary>
     public const int Scale = 2;
 
