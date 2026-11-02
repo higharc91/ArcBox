@@ -227,7 +227,7 @@ public sealed class ThingShowTests
         show.Receive(With([], E(1, "key", ThingEvents.Taken)));
 
         var first = show.Frame(Frame);
-        Assert.Equal(["ui_loot"], first.Sounds);                     // the pack's own loot sound
+        Assert.Equal(["item_pickup"], first.Sounds);                 // the pack's pickup sound, ui_loot only without it
         var mid = Of(show.Frame(ThingShow.VanishSeconds / 2), "key");
         Assert.InRange(mid.Thing!.Alpha, 0.05f, 0.95f);
         Assert.True(mid.Feet.Y < UnitPlace.On(Ground, new Tile(8, 12)).Feet.Y);
