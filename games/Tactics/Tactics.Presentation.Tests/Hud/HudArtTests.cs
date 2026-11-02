@@ -62,14 +62,14 @@ public sealed class HudArtTests
     }
 
     [Fact]
-    public void A_beast_with_no_portrait_is_its_own_sprites_first_idle_frame()
+    public void A_creature_portrait_uses_its_authored_region_or_first_idle_frame()
     {
         var sprite = Units.Value.Sprite("beasts.wolf.grey")!;
 
         var portrait = Art.Value.Portrait("beasts.wolf.grey", UnitTone.Enemy);
 
         Assert.Equal(sprite.Path, portrait.Path);
-        Assert.Equal(sprite.Source(sprite.Idle.Frames[0], 0), portrait.Source);
+        Assert.Equal(sprite.PortraitSource ?? sprite.Source(sprite.Idle.Frames[0], 0), portrait.Source);
     }
 
     [Theory]

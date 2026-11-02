@@ -191,11 +191,11 @@ public static class UnitPlan
     private static BoardUnit Walker(WalkerView walker, UnitPlace place, UnitPose? pose, UnitArt art, Func<Vector2, bool, Vector2>? pixels)
     {
         var sprite = art.Sprite(walker.Sprite) ?? art.StandIn(UnitTone.Party);
-        var (row, mirror) = pose?.Facing is { } look ? Looking(look.X, look.Y) : (0, false);
+        var (row, mirror) = pose?.Facing is { } look ? sprite.Looking(look.X, look.Y) : (0, false);
         var feet = pixels?.Invoke(place.Feet, pose is null || pose.Anim == Idling) ?? place.Feet;
         var id = new UnitId(walker.Id);
         var anim = pose is null || pose.Anim == Idling ? sprite.Idle : new UnitAnim([sprite.Anim(pose.Anim).FrameAt(pose.Seconds)], 1, false);
-        return new BoardUnit(OrderOf(place.Over, sprite), id, UnitTone.Party, feet, sprite, anim, PhaseOf(id), row, mirror, Math.Min(sprite.Width * RingShare, MaxRing),
+        return new BoardUnit(OrderOf(place.Over, sprite), id, UnitTone.Party, feet, sprite, anim, PhaseOf(id), row, mirror, Math.Min((sprite.FootprintWidth > 0 ? sprite.FootprintWidth : sprite.WorldWidth) * RingShare, MaxRing),
             false, [], [], null, null, [], feet, null)
         {
             CrownAt = walker.Leads ? Overhead(feet, sprite) : null,
@@ -215,7 +215,7 @@ public static class UnitPlan
         var drawn = art.Sprite(sprite) ?? art.StandIn(UnitTone.Neutral);
         var feet = pixels?.Invoke(place.Feet, true) ?? place.Feet;
         var unit = new UnitId(id);
-        var (row, mirror) = look is { } way && way != Vector2.Zero ? Looking(way.X, way.Y) : (0, false);
+        var (row, mirror) = look is { } way && way != Vector2.Zero ? drawn.Looking(way.X, way.Y) : (0, false);
         return new BoardUnit(OrderOf(place.Over, drawn), unit, UnitTone.Neutral, feet, drawn, drawn.Idle, PhaseOf(unit), row, mirror, 0, false, [], [], null,
             null, [], feet, null);
     }
@@ -228,20 +228,20 @@ public static class UnitPlan
         var drawn = art.Sprite(sprite)!;
         var feet = pixels?.Invoke(place.Feet, walking is null) ?? place.Feet;
         var unit = new UnitId(id);
-        var (row, mirror) = Looking(looking.X, looking.Y);
+        var (row, mirror) = drawn.Looking(looking.X, looking.Y);
         return new BoardUnit(OrderOf(place.Over, drawn), unit, UnitTone.Neutral, feet, drawn, walking is null ? drawn.Idle : drawn.Anim(walking), PhaseOf(unit), row, mirror, 0, false, [], [], null,
             null, [], feet, null) { Dressing = true };
     }
 
     /// <summary>Where the tail of an emote over a standing figure goes: a crown's or a "!"'s, just over the head of <paramref name="sprite"/> at <paramref name="feet"/>.</summary>
-    public static Vector2 Overhead(Vector2 feet, UnitSprite sprite) => new(feet.X, feet.Y - sprite.AnchorY + sprite.HeadTop - Gap);
+    public static Vector2 Overhead(Vector2 feet, UnitSprite sprite) => new(feet.X, feet.Y - sprite.HeadLift - Gap);
 
     private static BoardUnit Unit(UnitView unit, UnitView[] all, UnitId? active, UnitArt art, float top, UnitPlace place, UnitPose? pose, Tile offset)
     {
         var tone = ToneOf(unit.Side);
         var sprite = art.Sprite(unit.Sprite) ?? art.StandIn(tone);
         var downed = unit.Life == "Downed";
-        var (row, mirror) = pose?.Facing is { } look ? Looking(look.X, look.Y) : Facing(unit, tone, all);
+        var (row, mirror) = pose?.Facing is { } look ? sprite.Looking(look.X, look.Y) : Facing(unit, tone, all, sprite);
         var looks = unit.Conditions.Where(c => !(downed && c == Prone)).Select(art.Condition).OfType<ConditionLook>().ToArray();
         var effects = looks.Select(l => l.Effect).OfType<StatusEffect>().DistinctBy(e => e.Path).ToArray();
         ImmutableArray<ArtRect> icons = [.. looks.Select(l => l.Icon).OfType<ArtRect>().Distinct().Take(MaxIcons)];
@@ -316,7 +316,7 @@ public static class UnitPlan
     /// The view has no facing, so a unit looks at its nearest foe. The art's row 0 looks to the lower right and row 1 to the
     /// upper left (characters/manifest.json), and the others are those, mirrored. With no foe a unit looks at the viewer.
     /// </summary>
-    private static (int Row, bool Mirror) Facing(UnitView unit, UnitTone tone, UnitView[] all)
+    private static (int Row, bool Mirror) Facing(UnitView unit, UnitTone tone, UnitView[] all, UnitSprite sprite)
     {
         var foes = all.Where(u => tone switch
         {
@@ -328,12 +328,7 @@ public static class UnitPlan
             .FirstOrDefault() is not { } foe)
             return (0, false);
 
-        return Looking(foe.At.X - unit.At.X, foe.At.Y - unit.At.Y);
+        return sprite.Looking(foe.At.X - unit.At.X, foe.At.Y - unit.At.Y);
     }
 
-    private static (int Row, bool Mirror) Looking(float du, float dv)
-    {
-        var (across, down) = (du - dv, du + dv);
-        return down >= 0 ? (0, across < 0) : (1, across > 0);
-    }
 }

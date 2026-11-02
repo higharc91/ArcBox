@@ -169,9 +169,9 @@ public sealed class WorldDrawingTests
 
             var area = WorldPlan.AreaOf(unit);
 
-            var left = feet.X - (mirror ? sprite.Width - sprite.AnchorX : sprite.AnchorX);
-            Assert.True(area.Min.X <= left && area.Max.X >= left + sprite.Width);
-            Assert.True(area.Min.Y <= feet.Y - sprite.AnchorY && area.Max.Y >= feet.Y - sprite.AnchorY + sprite.Height);
+            var left = feet.X - (mirror ? sprite.Width - sprite.AnchorX : sprite.AnchorX) * sprite.PixelScale;
+            Assert.True(area.Min.X <= left && area.Max.X >= left + sprite.WorldWidth);
+            Assert.True(area.Min.Y <= feet.Y - sprite.AnchorY * sprite.PixelScale && area.Max.Y >= feet.Y - sprite.AnchorY * sprite.PixelScale + sprite.WorldHeight);
             Assert.True(area.Min.X <= feet.X - 40 && area.Max.X >= feet.X + 40);
             Assert.True(area.Max.Y >= feet.Y + 20);
         }

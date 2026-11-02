@@ -1,0 +1,3370 @@
+{
+  "status": "complete",
+  "loops_complete": 224,
+  "loops_expected": 224,
+  "pending": [],
+  "errors": [],
+  "policy": "Fixed native frame and palette per family; exact opening/closing pose; no frame recentering or resizing; duplicate closing frame excluded from playback.",
+  "loops": [
+    {
+      "key": "wolf/animations/south/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 317,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wolf/animations/south/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 19386,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wolf/animations/south-west/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 458,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wolf/animations/south-west/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 18948,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wolf/animations/west/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 524,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wolf/animations/west/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 18430,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wolf/animations/north-west/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 18594,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wolf/animations/north-west/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 18727,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wolf/animations/north/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 19237,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wolf/animations/north/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 19302,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wolf/animations/north-east/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 18687,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wolf/animations/north-east/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 18823,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wolf/animations/east/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 18420,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wolf/animations/east/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 18543,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wolf/animations/south-east/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wolf/animations/south-east/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "boar/animations/south/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 18749,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "boar/animations/south/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 18902,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "boar/animations/south-west/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 17947,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "boar/animations/south-west/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 18051,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "boar/animations/west/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 17737,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "boar/animations/west/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 17774,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "boar/animations/north-west/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 394,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "boar/animations/north-west/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 18200,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "boar/animations/north/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 18975,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "boar/animations/north/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 120,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "boar/animations/north-east/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 390,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "boar/animations/north-east/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 18191,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "boar/animations/east/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 489,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "boar/animations/east/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 17836,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "boar/animations/south-east/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "boar/animations/south-east/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bear/animations/south/idle",
+      "canvas": [
+        176,
+        176
+      ],
+      "anchor": [
+        88,
+        148
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 26312,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bear/animations/south/move",
+      "canvas": [
+        176,
+        176
+      ],
+      "anchor": [
+        88,
+        148
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 26236,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bear/animations/south-west/idle",
+      "canvas": [
+        176,
+        176
+      ],
+      "anchor": [
+        88,
+        148
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 631,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bear/animations/south-west/move",
+      "canvas": [
+        176,
+        176
+      ],
+      "anchor": [
+        88,
+        148
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 25643,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bear/animations/west/idle",
+      "canvas": [
+        176,
+        176
+      ],
+      "anchor": [
+        88,
+        148
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 931,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bear/animations/west/move",
+      "canvas": [
+        176,
+        176
+      ],
+      "anchor": [
+        88,
+        148
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 25333,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bear/animations/north-west/idle",
+      "canvas": [
+        176,
+        176
+      ],
+      "anchor": [
+        88,
+        148
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 25703,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bear/animations/north-west/move",
+      "canvas": [
+        176,
+        176
+      ],
+      "anchor": [
+        88,
+        148
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 25749,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bear/animations/north/idle",
+      "canvas": [
+        176,
+        176
+      ],
+      "anchor": [
+        88,
+        148
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 26341,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bear/animations/north/move",
+      "canvas": [
+        176,
+        176
+      ],
+      "anchor": [
+        88,
+        148
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 26506,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bear/animations/north-east/idle",
+      "canvas": [
+        176,
+        176
+      ],
+      "anchor": [
+        88,
+        148
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 714,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bear/animations/north-east/move",
+      "canvas": [
+        176,
+        176
+      ],
+      "anchor": [
+        88,
+        148
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 26099,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bear/animations/east/idle",
+      "canvas": [
+        176,
+        176
+      ],
+      "anchor": [
+        88,
+        148
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 25696,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bear/animations/east/move",
+      "canvas": [
+        176,
+        176
+      ],
+      "anchor": [
+        88,
+        148
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 25937,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bear/animations/south-east/idle",
+      "canvas": [
+        176,
+        176
+      ],
+      "anchor": [
+        88,
+        148
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 459,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bear/animations/south-east/move",
+      "canvas": [
+        176,
+        176
+      ],
+      "anchor": [
+        88,
+        148
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "spider/animations/south/idle",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 1098,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "spider/animations/south/move",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 35200,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "spider/animations/south-west/idle",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 1639,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "spider/animations/south-west/move",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 35714,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "spider/animations/west/idle",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 35355,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "spider/animations/west/move",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 35631,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "spider/animations/north-west/idle",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 35617,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "spider/animations/north-west/move",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 35689,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "spider/animations/north/idle",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 531,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "spider/animations/north/move",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 35537,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "spider/animations/north-east/idle",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 35540,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "spider/animations/north-east/move",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 35417,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "spider/animations/east/idle",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 35755,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "spider/animations/east/move",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 35948,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "spider/animations/south-east/idle",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 784,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "spider/animations/south-east/move",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "slime/animations/south/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 309,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "slime/animations/south/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 17519,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "slime/animations/south-west/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 197,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "slime/animations/south-west/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 17517,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "slime/animations/west/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 251,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "slime/animations/west/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 17337,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "slime/animations/north-west/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 130,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "slime/animations/north-west/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 17214,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "slime/animations/north/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 17425,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "slime/animations/north/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 17331,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "slime/animations/north-east/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 17118,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "slime/animations/north-east/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 17191,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "slime/animations/east/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 174,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "slime/animations/east/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 17405,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "slime/animations/south-east/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 153,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "slime/animations/south-east/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bat/animations/south/idle",
+      "canvas": [
+        240,
+        240
+      ],
+      "anchor": [
+        120,
+        212
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 1123,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bat/animations/south/move",
+      "canvas": [
+        240,
+        240
+      ],
+      "anchor": [
+        120,
+        212
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 1196,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bat/animations/south-west/idle",
+      "canvas": [
+        240,
+        240
+      ],
+      "anchor": [
+        120,
+        212
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 1331,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bat/animations/south-west/move",
+      "canvas": [
+        240,
+        240
+      ],
+      "anchor": [
+        120,
+        212
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 1490,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bat/animations/west/idle",
+      "canvas": [
+        240,
+        240
+      ],
+      "anchor": [
+        120,
+        212
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 1077,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bat/animations/west/move",
+      "canvas": [
+        240,
+        240
+      ],
+      "anchor": [
+        120,
+        212
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 1131,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bat/animations/north-west/idle",
+      "canvas": [
+        240,
+        240
+      ],
+      "anchor": [
+        120,
+        212
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 1867,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bat/animations/north-west/move",
+      "canvas": [
+        240,
+        240
+      ],
+      "anchor": [
+        120,
+        212
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 1779,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bat/animations/north/idle",
+      "canvas": [
+        240,
+        240
+      ],
+      "anchor": [
+        120,
+        212
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 1708,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bat/animations/north/move",
+      "canvas": [
+        240,
+        240
+      ],
+      "anchor": [
+        120,
+        212
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 1695,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bat/animations/north-east/idle",
+      "canvas": [
+        240,
+        240
+      ],
+      "anchor": [
+        120,
+        212
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 1622,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bat/animations/north-east/move",
+      "canvas": [
+        240,
+        240
+      ],
+      "anchor": [
+        120,
+        212
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 1806,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bat/animations/east/idle",
+      "canvas": [
+        240,
+        240
+      ],
+      "anchor": [
+        120,
+        212
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 3924,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bat/animations/east/move",
+      "canvas": [
+        240,
+        240
+      ],
+      "anchor": [
+        120,
+        212
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 1093,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bat/animations/south-east/idle",
+      "canvas": [
+        240,
+        240
+      ],
+      "anchor": [
+        120,
+        212
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "bat/animations/south-east/move",
+      "canvas": [
+        240,
+        240
+      ],
+      "anchor": [
+        120,
+        212
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "drake/animations/south/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        232
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 57967,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "drake/animations/south/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        232
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 58101,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "drake/animations/south-west/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        232
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 58336,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "drake/animations/south-west/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        232
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 58640,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "drake/animations/west/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        232
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 58333,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "drake/animations/west/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        232
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 58777,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "drake/animations/north-west/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        232
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 58458,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "drake/animations/north-west/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        232
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 59481,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "drake/animations/north/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        232
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 57345,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "drake/animations/north/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        232
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 58473,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "drake/animations/north-east/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        232
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 59458,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "drake/animations/north-east/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        232
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 59331,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "drake/animations/east/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        232
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 59341,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "drake/animations/east/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        232
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 59684,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "drake/animations/south-east/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        232
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 2068,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "drake/animations/south-east/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        232
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "warg/animations/south/idle",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 34799,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "warg/animations/south/move",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 35292,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "warg/animations/south-west/idle",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 33626,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "warg/animations/south-west/move",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 34271,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "warg/animations/west/idle",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 33330,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "warg/animations/west/move",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 33756,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "warg/animations/north-west/idle",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 34297,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "warg/animations/north-west/move",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 34561,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "warg/animations/north/idle",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 35165,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "warg/animations/north/move",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 35417,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "warg/animations/north-east/idle",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 34271,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "warg/animations/north-east/move",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 34704,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "warg/animations/east/idle",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 463,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "warg/animations/east/move",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 33713,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "warg/animations/south-east/idle",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "warg/animations/south-east/move",
+      "canvas": [
+        200,
+        200
+      ],
+      "anchor": [
+        100,
+        172
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "hookbeak/animations/south/idle",
+      "canvas": [
+        232,
+        232
+      ],
+      "anchor": [
+        116,
+        204
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 43393,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "hookbeak/animations/south/move",
+      "canvas": [
+        232,
+        232
+      ],
+      "anchor": [
+        116,
+        204
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 43796,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "hookbeak/animations/south-west/idle",
+      "canvas": [
+        232,
+        232
+      ],
+      "anchor": [
+        116,
+        204
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 42421,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "hookbeak/animations/south-west/move",
+      "canvas": [
+        232,
+        232
+      ],
+      "anchor": [
+        116,
+        204
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 43174,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "hookbeak/animations/west/idle",
+      "canvas": [
+        232,
+        232
+      ],
+      "anchor": [
+        116,
+        204
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 42367,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "hookbeak/animations/west/move",
+      "canvas": [
+        232,
+        232
+      ],
+      "anchor": [
+        116,
+        204
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 42649,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "hookbeak/animations/north-west/idle",
+      "canvas": [
+        232,
+        232
+      ],
+      "anchor": [
+        116,
+        204
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 41878,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "hookbeak/animations/north-west/move",
+      "canvas": [
+        232,
+        232
+      ],
+      "anchor": [
+        116,
+        204
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 42966,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "hookbeak/animations/north/idle",
+      "canvas": [
+        232,
+        232
+      ],
+      "anchor": [
+        116,
+        204
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 43971,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "hookbeak/animations/north/move",
+      "canvas": [
+        232,
+        232
+      ],
+      "anchor": [
+        116,
+        204
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 43812,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "hookbeak/animations/north-east/idle",
+      "canvas": [
+        232,
+        232
+      ],
+      "anchor": [
+        116,
+        204
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 42544,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "hookbeak/animations/north-east/move",
+      "canvas": [
+        232,
+        232
+      ],
+      "anchor": [
+        116,
+        204
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 43086,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "hookbeak/animations/east/idle",
+      "canvas": [
+        232,
+        232
+      ],
+      "anchor": [
+        116,
+        204
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 41307,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "hookbeak/animations/east/move",
+      "canvas": [
+        232,
+        232
+      ],
+      "anchor": [
+        116,
+        204
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 42671,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "hookbeak/animations/south-east/idle",
+      "canvas": [
+        232,
+        232
+      ],
+      "anchor": [
+        116,
+        204
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "hookbeak/animations/south-east/move",
+      "canvas": [
+        232,
+        232
+      ],
+      "anchor": [
+        116,
+        204
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "scorpion/animations/south/idle",
+      "canvas": [
+        208,
+        208
+      ],
+      "anchor": [
+        104,
+        180
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 37999,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "scorpion/animations/south/move",
+      "canvas": [
+        208,
+        208
+      ],
+      "anchor": [
+        104,
+        180
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 38139,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "scorpion/animations/south-west/idle",
+      "canvas": [
+        208,
+        208
+      ],
+      "anchor": [
+        104,
+        180
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 38019,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "scorpion/animations/south-west/move",
+      "canvas": [
+        208,
+        208
+      ],
+      "anchor": [
+        104,
+        180
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 37655,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "scorpion/animations/west/idle",
+      "canvas": [
+        208,
+        208
+      ],
+      "anchor": [
+        104,
+        180
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 37466,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "scorpion/animations/west/move",
+      "canvas": [
+        208,
+        208
+      ],
+      "anchor": [
+        104,
+        180
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 37347,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "scorpion/animations/north-west/idle",
+      "canvas": [
+        208,
+        208
+      ],
+      "anchor": [
+        104,
+        180
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 37755,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "scorpion/animations/north-west/move",
+      "canvas": [
+        208,
+        208
+      ],
+      "anchor": [
+        104,
+        180
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 38045,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "scorpion/animations/north/idle",
+      "canvas": [
+        208,
+        208
+      ],
+      "anchor": [
+        104,
+        180
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 39102,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "scorpion/animations/north/move",
+      "canvas": [
+        208,
+        208
+      ],
+      "anchor": [
+        104,
+        180
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 39301,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "scorpion/animations/north-east/idle",
+      "canvas": [
+        208,
+        208
+      ],
+      "anchor": [
+        104,
+        180
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 38415,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "scorpion/animations/north-east/move",
+      "canvas": [
+        208,
+        208
+      ],
+      "anchor": [
+        104,
+        180
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 38082,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "scorpion/animations/east/idle",
+      "canvas": [
+        208,
+        208
+      ],
+      "anchor": [
+        104,
+        180
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 37896,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "scorpion/animations/east/move",
+      "canvas": [
+        208,
+        208
+      ],
+      "anchor": [
+        104,
+        180
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 37542,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "scorpion/animations/south-east/idle",
+      "canvas": [
+        208,
+        208
+      ],
+      "anchor": [
+        104,
+        180
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "scorpion/animations/south-east/move",
+      "canvas": [
+        208,
+        208
+      ],
+      "anchor": [
+        104,
+        180
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "harpy/animations/south/idle",
+      "canvas": [
+        216,
+        216
+      ],
+      "anchor": [
+        108,
+        188
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 2190,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "harpy/animations/south/move",
+      "canvas": [
+        216,
+        216
+      ],
+      "anchor": [
+        108,
+        188
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 2463,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "harpy/animations/south-west/idle",
+      "canvas": [
+        216,
+        216
+      ],
+      "anchor": [
+        108,
+        188
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 3001,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "harpy/animations/south-west/move",
+      "canvas": [
+        216,
+        216
+      ],
+      "anchor": [
+        108,
+        188
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 2949,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "harpy/animations/west/idle",
+      "canvas": [
+        216,
+        216
+      ],
+      "anchor": [
+        108,
+        188
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 2041,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "harpy/animations/west/move",
+      "canvas": [
+        216,
+        216
+      ],
+      "anchor": [
+        108,
+        188
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 1920,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "harpy/animations/north-west/idle",
+      "canvas": [
+        216,
+        216
+      ],
+      "anchor": [
+        108,
+        188
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 3352,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "harpy/animations/north-west/move",
+      "canvas": [
+        216,
+        216
+      ],
+      "anchor": [
+        108,
+        188
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 3367,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "harpy/animations/north/idle",
+      "canvas": [
+        216,
+        216
+      ],
+      "anchor": [
+        108,
+        188
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 3427,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "harpy/animations/north/move",
+      "canvas": [
+        216,
+        216
+      ],
+      "anchor": [
+        108,
+        188
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 3495,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "harpy/animations/north-east/idle",
+      "canvas": [
+        216,
+        216
+      ],
+      "anchor": [
+        108,
+        188
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 3095,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "harpy/animations/north-east/move",
+      "canvas": [
+        216,
+        216
+      ],
+      "anchor": [
+        108,
+        188
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 3013,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "harpy/animations/east/idle",
+      "canvas": [
+        216,
+        216
+      ],
+      "anchor": [
+        108,
+        188
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 1571,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "harpy/animations/east/move",
+      "canvas": [
+        216,
+        216
+      ],
+      "anchor": [
+        108,
+        188
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 1697,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "harpy/animations/south-east/idle",
+      "canvas": [
+        216,
+        216
+      ],
+      "anchor": [
+        108,
+        188
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "harpy/animations/south-east/move",
+      "canvas": [
+        216,
+        216
+      ],
+      "anchor": [
+        108,
+        188
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wisp/animations/south/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wisp/animations/south/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wisp/animations/south-west/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wisp/animations/south-west/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wisp/animations/west/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wisp/animations/west/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wisp/animations/north-west/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wisp/animations/north-west/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wisp/animations/north/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wisp/animations/north/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wisp/animations/north-east/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wisp/animations/north-east/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wisp/animations/east/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wisp/animations/east/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wisp/animations/south-east/idle",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "wisp/animations/south-east/move",
+      "canvas": [
+        144,
+        144
+      ],
+      "anchor": [
+        72,
+        116
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "gargoyle/animations/south/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 2892,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "gargoyle/animations/south/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 3650,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "gargoyle/animations/south-west/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 3436,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "gargoyle/animations/south-west/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 4116,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "gargoyle/animations/west/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 2972,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "gargoyle/animations/west/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 3131,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "gargoyle/animations/north-west/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 2930,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "gargoyle/animations/north-west/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 3580,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "gargoyle/animations/north/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 3068,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "gargoyle/animations/north/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 3693,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "gargoyle/animations/north-east/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 2821,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "gargoyle/animations/north-east/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 3451,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "gargoyle/animations/east/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 2682,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "gargoyle/animations/east/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 2919,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "gargoyle/animations/south-east/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 2381,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "gargoyle/animations/south-east/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "crab/animations/south/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 1385,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "crab/animations/south/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 1608,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "crab/animations/south-west/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 2001,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "crab/animations/south-west/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 2008,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "crab/animations/west/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 1470,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "crab/animations/west/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 1390,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "crab/animations/north-west/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 1573,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "crab/animations/north-west/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 1701,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "crab/animations/north/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 2188,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "crab/animations/north/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 1938,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "crab/animations/north-east/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 2002,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "crab/animations/north-east/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 1806,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "crab/animations/east/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 1664,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "crab/animations/east/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 1656,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "crab/animations/south-east/idle",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 4,
+      "downloaded_count": 5,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    },
+    {
+      "key": "crab/animations/south-east/move",
+      "canvas": [
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        228
+      ],
+      "frame_count": 8,
+      "downloaded_count": 9,
+      "closing_pixels_restored": 0,
+      "pixel_scale": 0.5
+    }
+  ]
+}

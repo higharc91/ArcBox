@@ -31,7 +31,10 @@ public sealed class UnitArtTests
     [InlineData("characters.bash", "attack")]
     [InlineData("nonsense", "attack")]
     public void An_animation_a_sheet_lacks_falls_back_to_one_it_has(string key, string anim)
-        => Assert.Equal(Pack.Frames("beasts", anim), Art.Value.Sprite("beasts.wolf.grey")!.Anim(key).Frames);
+    {
+        var wolf = Art.Value.Sprite("beasts.wolf.grey")!;
+        Assert.Same(wolf.Anims[anim], wolf.Anim(key));
+    }
 
     [Fact]
     public void A_dodge_on_a_sheet_with_none_stands_still_rather_than_swinging()
@@ -141,7 +144,6 @@ public sealed class UnitArtTests
     }
 
     [Theory]
-    [InlineData("beasts.wolf.dire", "beasts/wolf_dire.png", 48, 48, 24, 44)]
     [InlineData("bosses.troll.ogre", "bosses/troll_ogre.png", 64, 64, 32, 60)]
     [InlineData("bosses.dragon.red", "bosses/dragon_red.png", 96, 96, 48, 90)]
     [InlineData("bosses.imp.violet", "bosses/imp_violet.png", 32, 32, 16, 30)]
@@ -156,8 +158,9 @@ public sealed class UnitArtTests
     [Fact]
     public void A_monster_key_with_no_or_an_unknown_variant_takes_the_first()
     {
-        Assert.Equal("beasts/wolf_grey.png", Art.Value.Sprite("beasts.wolf")!.Path);
-        Assert.Equal("beasts/wolf_grey.png", Art.Value.Sprite("beasts.wolf.nonsense")!.Path);
+        var primary = Art.Value.Sprite("beasts.wolf.grey");
+        Assert.Same(primary, Art.Value.Sprite("beasts.wolf"));
+        Assert.Same(primary, Art.Value.Sprite("beasts.wolf.nonsense"));
     }
 
     [Theory]

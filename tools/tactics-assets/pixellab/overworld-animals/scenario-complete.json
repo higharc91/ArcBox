@@ -1,0 +1,261 @@
+{
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "scope": {
+    "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+    "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp"
+  },
+  "records": [
+    {
+      "id": "mule",
+      "parameters": {
+        "prompt": "Original production concept art for Wardenflame, Embers of the Vale. Match the attached village reference ONLY in painted rendering style: grounded humane tactical fantasy, melancholy with warmth, practical worn materials, restrained natural palette, warm top-left highlights and cooler shadows, clean readable silhouettes and clearly separated material planes. Do not copy its buildings or landscape. No lettering, labels, interface, watermark or franchise designs. Create ONE primary mule specimen: Pack mule with grain panniers; preserve harness and bags on every view and gait. The animal belongs naturally in Ashen Ford\u2019s farms, woodland edges or river. Healthy plausible anatomy and species proportions, not a monster, toy, plush or anthropomorphic character. Four natural weight-bearing legs with coherent joints. Keep both modest woven grain panniers firmly strapped to a leather pack saddle. No rider. Composition: full animal in a low top-down three-quarter view facing down-right, occupying the upper 70% of a 3:2 sheet, all tail, ears, wing tips and feet inside generous blank warm parchment margins. Lower 25% is one separate small SIDE VIEW scale inset of the same animal beside a neutral adult human silhouette on the same baseline. Human height 1.75 metres. Scale ratio in stylized game pixels: adult human 29 pixels high, animal dimensions {\"back\": 18, \"ears\": 26} pixels. Honor the relative size, but draw painted concepts, not pixel art. Do not include any other subject in the large main panel. Avoid dust, sparks, smoke, ground shadow, scenery or decorative particles. This concept is a clean reference for later tiny pixel sprites and animation.",
+        "referenceImages": [
+          "asset_j5wC1LrjrchvvM2NNv2si3PX"
+        ],
+        "aspectRatio": "3:2",
+        "resolution": "2K",
+        "thinkingLevel": "HIGH",
+        "numOutputs": 1,
+        "useGoogleSearch": false
+      },
+      "run": {
+        "model_id": "model_google-gemini-nano-banana-2-1",
+        "job_id": "job_9UjKeK6VRwacc4CVd6VgzAcw",
+        "status": "in-progress",
+        "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_9UjKeK6VRwacc4CVd6VgzAcw' (one call waits on up to 32 jobs)."
+      },
+      "result": {
+        "jobId": "job_9UjKeK6VRwacc4CVd6VgzAcw",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-02T18:45:49.374Z",
+        "updatedAt": "2026-11-02T18:46:22.194Z",
+        "modelId": "model_google-gemini-nano-banana-2-1",
+        "assetIds": [
+          "asset_LrQZviiAaJJ9dWDs1uUNE4gh"
+        ],
+        "cuCost": 13
+      },
+      "download": {
+        "mimeType": "image/png"
+      }
+    },
+    {
+      "id": "goat",
+      "parameters": {
+        "prompt": "Original production concept art for Wardenflame, Embers of the Vale. Match the attached village reference ONLY in painted rendering style: grounded humane tactical fantasy, melancholy with warmth, practical worn materials, restrained natural palette, warm top-left highlights and cooler shadows, clean readable silhouettes and clearly separated material planes. Do not copy its buildings or landscape. No lettering, labels, interface, watermark or franchise designs. Create ONE primary goat specimen: Brown-and-white farm goat; horns fixed to skull and four cloven hooves. The animal belongs naturally in Ashen Ford\u2019s farms, woodland edges or river. Healthy plausible anatomy and species proportions, not a monster, toy, plush or anthropomorphic character. Four natural weight-bearing legs with coherent joints. No armor, weapons, equipment or magical effects. Composition: full animal in a low top-down three-quarter view facing down-right, occupying the upper 70% of a 3:2 sheet, all tail, ears, wing tips and feet inside generous blank warm parchment margins. Lower 25% is one separate small SIDE VIEW scale inset of the same animal beside a neutral adult human silhouette on the same baseline. Human height 1.75 metres. Scale ratio in stylized game pixels: adult human 29 pixels high, animal dimensions {\"back\": 10, \"horns\": 15} pixels. Honor the relative size, but draw painted concepts, not pixel art. Do not include any other subject in the large main panel. Avoid dust, sparks, smoke, ground shadow, scenery or decorative particles. This concept is a clean reference for later tiny pixel sprites and animation.",
+        "referenceImages": [
+          "asset_j5wC1LrjrchvvM2NNv2si3PX"
+        ],
+        "aspectRatio": "3:2",
+        "resolution": "2K",
+        "thinkingLevel": "HIGH",
+        "numOutputs": 1,
+        "useGoogleSearch": false
+      },
+      "run": {
+        "model_id": "model_google-gemini-nano-banana-2-1",
+        "job_id": "job_u7SXA93ybQWsp7BKiN1Sv4gB",
+        "status": "in-progress",
+        "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_u7SXA93ybQWsp7BKiN1Sv4gB' (one call waits on up to 32 jobs)."
+      },
+      "result": {
+        "jobId": "job_u7SXA93ybQWsp7BKiN1Sv4gB",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-02T18:45:51.766Z",
+        "updatedAt": "2026-11-02T18:46:46.310Z",
+        "modelId": "model_google-gemini-nano-banana-2-1",
+        "assetIds": [
+          "asset_p4a8G9gvegbrwMTMsbWypQJF"
+        ],
+        "cuCost": 13
+      },
+      "download": {
+        "mimeType": "image/png"
+      }
+    },
+    {
+      "id": "fox",
+      "parameters": {
+        "prompt": "Original production concept art for Wardenflame, Embers of the Vale. Match the attached village reference ONLY in painted rendering style: grounded humane tactical fantasy, melancholy with warmth, practical worn materials, restrained natural palette, warm top-left highlights and cooler shadows, clean readable silhouettes and clearly separated material planes. Do not copy its buildings or landscape. No lettering, labels, interface, watermark or franchise designs. Create ONE primary fox specimen: Red fox with white-tipped bushy tail; light quadrupedal gait. The animal belongs naturally in Ashen Ford\u2019s farms, woodland edges or river. Healthy plausible anatomy and species proportions, not a monster, toy, plush or anthropomorphic character. Four natural weight-bearing legs with coherent joints. No armor, weapons, equipment or magical effects. Composition: full animal in a low top-down three-quarter view facing down-right, occupying the upper 70% of a 3:2 sheet, all tail, ears, wing tips and feet inside generous blank warm parchment margins. Lower 25% is one separate small SIDE VIEW scale inset of the same animal beside a neutral adult human silhouette on the same baseline. Human height 1.75 metres. Scale ratio in stylized game pixels: adult human 29 pixels high, animal dimensions {\"back\": 7, \"ears\": 10} pixels. Honor the relative size, but draw painted concepts, not pixel art. Do not include any other subject in the large main panel. Avoid dust, sparks, smoke, ground shadow, scenery or decorative particles. This concept is a clean reference for later tiny pixel sprites and animation.",
+        "referenceImages": [
+          "asset_j5wC1LrjrchvvM2NNv2si3PX"
+        ],
+        "aspectRatio": "3:2",
+        "resolution": "2K",
+        "thinkingLevel": "HIGH",
+        "numOutputs": 1,
+        "useGoogleSearch": false
+      },
+      "run": {
+        "model_id": "model_google-gemini-nano-banana-2-1",
+        "job_id": "job_gPgDbY7fJnUswJ5FxihTUrdW",
+        "status": "in-progress",
+        "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_gPgDbY7fJnUswJ5FxihTUrdW' (one call waits on up to 32 jobs)."
+      },
+      "result": {
+        "jobId": "job_gPgDbY7fJnUswJ5FxihTUrdW",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-02T18:45:53.441Z",
+        "updatedAt": "2026-11-02T18:46:35.217Z",
+        "modelId": "model_google-gemini-nano-banana-2-1",
+        "assetIds": [
+          "asset_f3LQNARm3Ew4RHv7h44D76oU"
+        ],
+        "cuCost": 13
+      },
+      "download": {
+        "mimeType": "image/png"
+      }
+    },
+    {
+      "id": "duck",
+      "parameters": {
+        "prompt": "Original production concept art for Wardenflame, Embers of the Vale. Match the attached village reference ONLY in painted rendering style: grounded humane tactical fantasy, melancholy with warmth, practical worn materials, restrained natural palette, warm top-left highlights and cooler shadows, clean readable silhouettes and clearly separated material planes. Do not copy its buildings or landscape. No lettering, labels, interface, watermark or franchise designs. Create ONE primary duck specimen: Mallard duck; swimming paddle cycle and land waddle, stable waterline for swimming. The animal belongs naturally in Ashen Ford\u2019s farms, woodland edges or river. Healthy plausible anatomy and species proportions, not a monster, toy, plush or anthropomorphic character. Exactly two legs and two feathered wings; both wings folded in the main view. No armor, weapons, equipment or magical effects. Composition: full animal in a low top-down three-quarter view facing down-right, occupying the upper 70% of a 3:2 sheet, all tail, ears, wing tips and feet inside generous blank warm parchment margins. Lower 25% is one separate small SIDE VIEW scale inset of the same animal beside a neutral adult human silhouette on the same baseline. Human height 1.75 metres. Scale ratio in stylized game pixels: adult human 29 pixels high, animal dimensions {\"height\": 7} pixels. Honor the relative size, but draw painted concepts, not pixel art. Do not include any other subject in the large main panel. Avoid dust, sparks, smoke, ground shadow, scenery or decorative particles. This concept is a clean reference for later tiny pixel sprites and animation.",
+        "referenceImages": [
+          "asset_j5wC1LrjrchvvM2NNv2si3PX"
+        ],
+        "aspectRatio": "3:2",
+        "resolution": "2K",
+        "thinkingLevel": "HIGH",
+        "numOutputs": 1,
+        "useGoogleSearch": false
+      },
+      "run": {
+        "model_id": "model_google-gemini-nano-banana-2-1",
+        "job_id": "job_vLsFXQaD9tfjrqYkYwQuH2bd",
+        "status": "in-progress",
+        "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_vLsFXQaD9tfjrqYkYwQuH2bd' (one call waits on up to 32 jobs)."
+      },
+      "result": {
+        "jobId": "job_vLsFXQaD9tfjrqYkYwQuH2bd",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-02T18:45:55.343Z",
+        "updatedAt": "2026-11-02T18:46:39.311Z",
+        "modelId": "model_google-gemini-nano-banana-2-1",
+        "assetIds": [
+          "asset_KAFbhnSaUNtzCbPtH6fQKjup"
+        ],
+        "cuCost": 13
+      },
+      "download": {
+        "mimeType": "image/png"
+      }
+    },
+    {
+      "id": "crow",
+      "parameters": {
+        "prompt": "Original production concept art for Wardenflame, Embers of the Vale. Match the attached village reference ONLY in painted rendering style: grounded humane tactical fantasy, melancholy with warmth, practical worn materials, restrained natural palette, warm top-left highlights and cooler shadows, clean readable silhouettes and clearly separated material planes. Do not copy its buildings or landscape. No lettering, labels, interface, watermark or franchise designs. Create ONE primary crow specimen: Small charcoal crow; hop, peck and flap loops, coherent folded and extended wings. The animal belongs naturally in Ashen Ford\u2019s farms, woodland edges or river. Healthy plausible anatomy and species proportions, not a monster, toy, plush or anthropomorphic character. Exactly two legs and two feathered wings; both wings folded in the main view. No armor, weapons, equipment or magical effects. Composition: full animal in a low top-down three-quarter view facing down-right, occupying the upper 70% of a 3:2 sheet, all tail, ears, wing tips and feet inside generous blank warm parchment margins. Lower 25% is one separate small SIDE VIEW scale inset of the same animal beside a neutral adult human silhouette on the same baseline. Human height 1.75 metres. Scale ratio in stylized game pixels: adult human 29 pixels high, animal dimensions {\"height\": 6} pixels. Honor the relative size, but draw painted concepts, not pixel art. Do not include any other subject in the large main panel. Avoid dust, sparks, smoke, ground shadow, scenery or decorative particles. This concept is a clean reference for later tiny pixel sprites and animation.",
+        "referenceImages": [
+          "asset_j5wC1LrjrchvvM2NNv2si3PX"
+        ],
+        "aspectRatio": "3:2",
+        "resolution": "2K",
+        "thinkingLevel": "HIGH",
+        "numOutputs": 1,
+        "useGoogleSearch": false
+      },
+      "run": {
+        "model_id": "model_google-gemini-nano-banana-2-1",
+        "job_id": "job_MBWCqjSWGcN6dVGaPBCrPPFC",
+        "status": "in-progress",
+        "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_MBWCqjSWGcN6dVGaPBCrPPFC' (one call waits on up to 32 jobs)."
+      },
+      "result": {
+        "jobId": "job_MBWCqjSWGcN6dVGaPBCrPPFC",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-02T18:45:56.997Z",
+        "updatedAt": "2026-11-02T18:46:38.636Z",
+        "modelId": "model_google-gemini-nano-banana-2-1",
+        "assetIds": [
+          "asset_jyLKNnk1RMTk55YuePVMJDck"
+        ],
+        "cuCost": 13
+      },
+      "download": {
+        "mimeType": "image/png"
+      }
+    },
+    {
+      "id": "dog",
+      "parameters": {
+        "prompt": "Original production concept art for Wardenflame, Embers of the Vale. Match the attached village reference ONLY in painted rendering style: grounded humane tactical fantasy, melancholy with warmth, practical worn materials, restrained natural palette, warm top-left highlights and cooler shadows, clean readable silhouettes and clearly separated material planes. Do not copy its buildings or landscape. No lettering, labels, interface, watermark or franchise designs. Create ONE primary dog specimen: Village farm dog, distinct from the wolf and giant warg; exactly four legs. The animal belongs naturally in Ashen Ford\u2019s farms, woodland edges or river. Healthy plausible anatomy and species proportions, not a monster, toy, plush or anthropomorphic character. Four natural weight-bearing legs with coherent joints. No armor, weapons, equipment or magical effects. Composition: full animal in a low top-down three-quarter view facing down-right, occupying the upper 70% of a 3:2 sheet, all tail, ears, wing tips and feet inside generous blank warm parchment margins. Lower 25% is one separate small SIDE VIEW scale inset of the same animal beside a neutral adult human silhouette on the same baseline. Human height 1.75 metres. Scale ratio in stylized game pixels: adult human 29 pixels high, animal dimensions {\"back\": 9, \"ears\": 12} pixels. Honor the relative size, but draw painted concepts, not pixel art. Do not include any other subject in the large main panel. Avoid dust, sparks, smoke, ground shadow, scenery or decorative particles. This concept is a clean reference for later tiny pixel sprites and animation.",
+        "referenceImages": [
+          "asset_j5wC1LrjrchvvM2NNv2si3PX"
+        ],
+        "aspectRatio": "3:2",
+        "resolution": "2K",
+        "thinkingLevel": "HIGH",
+        "numOutputs": 1,
+        "useGoogleSearch": false
+      },
+      "run": {
+        "model_id": "model_google-gemini-nano-banana-2-1",
+        "job_id": "job_H56c5jzDHTeFaXsErRf1h693",
+        "status": "in-progress",
+        "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_H56c5jzDHTeFaXsErRf1h693' (one call waits on up to 32 jobs)."
+      },
+      "result": {
+        "jobId": "job_H56c5jzDHTeFaXsErRf1h693",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-02T18:45:58.535Z",
+        "updatedAt": "2026-11-02T18:46:57.752Z",
+        "modelId": "model_google-gemini-nano-banana-2-1",
+        "assetIds": [
+          "asset_mpo7Kid8HEpUfqJRhnLSJFky"
+        ],
+        "cuCost": 13
+      },
+      "download": {
+        "mimeType": "image/png"
+      }
+    },
+    {
+      "id": "sheep",
+      "parameters": {
+        "prompt": "Original production concept art for Wardenflame, Embers of the Vale. Match the attached village reference ONLY in painted rendering style: grounded humane tactical fantasy, melancholy with warmth, practical worn materials, restrained natural palette, warm top-left highlights and cooler shadows, clean readable silhouettes and clearly separated material planes. Do not copy its buildings or landscape. No lettering, labels, interface, watermark or franchise designs. Create ONE primary sheep specimen: Farm sheep with compact wool silhouette; four short cloven-hoofed legs. The animal belongs naturally in Ashen Ford\u2019s farms, woodland edges or river. Healthy plausible anatomy and species proportions, not a monster, toy, plush or anthropomorphic character. Four natural weight-bearing legs with coherent joints. No armor, weapons, equipment or magical effects. Composition: full animal in a low top-down three-quarter view facing down-right, occupying the upper 70% of a 3:2 sheet, all tail, ears, wing tips and feet inside generous blank warm parchment margins. Lower 25% is one separate small SIDE VIEW scale inset of the same animal beside a neutral adult human silhouette on the same baseline. Human height 1.75 metres. Scale ratio in stylized game pixels: adult human 29 pixels high, animal dimensions {\"back\": 10} pixels. Honor the relative size, but draw painted concepts, not pixel art. Do not include any other subject in the large main panel. Avoid dust, sparks, smoke, ground shadow, scenery or decorative particles. This concept is a clean reference for later tiny pixel sprites and animation.",
+        "referenceImages": [
+          "asset_j5wC1LrjrchvvM2NNv2si3PX"
+        ],
+        "aspectRatio": "3:2",
+        "resolution": "2K",
+        "thinkingLevel": "HIGH",
+        "numOutputs": 1,
+        "useGoogleSearch": false
+      },
+      "run": {
+        "model_id": "model_google-gemini-nano-banana-2-1",
+        "job_id": "job_8mJVU3sJLJ4Pfi23ksxUo8Bx",
+        "status": "in-progress",
+        "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_8mJVU3sJLJ4Pfi23ksxUo8Bx' (one call waits on up to 32 jobs)."
+      },
+      "result": {
+        "jobId": "job_8mJVU3sJLJ4Pfi23ksxUo8Bx",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-02T18:46:00.231Z",
+        "updatedAt": "2026-11-02T18:46:56.764Z",
+        "modelId": "model_google-gemini-nano-banana-2-1",
+        "assetIds": [
+          "asset_1pEavzPtYgFsLH6BjNqQdXaj"
+        ],
+        "cuCost": 13
+      },
+      "download": {
+        "mimeType": "image/png"
+      }
+    }
+  ]
+}

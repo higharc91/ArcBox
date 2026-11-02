@@ -33,6 +33,28 @@ public sealed record UnitSprite(string Path, int Width, int Height, int AnchorX,
 {
     /// <summary>Texture density relative to board pixels; padding is excluded from the footprint.</summary>
     public float PixelScale { get; init; } = 1;
+    /// <summary>Self-lit material such as a will-o'-wisp; scene lighting does not dim its core.</summary>
+    public bool Unlit { get; init; }
+    public ArtRect? PortraitSource { get; init; }
+    private static readonly string[] Compass = ["south", "south-west", "west", "north-west", "north", "north-east", "east", "south-east"];
+    /// <summary>Authored compass rows. Empty keeps the original two-row mirrored sheets.</summary>
+    public ImmutableArray<string> Directions { get; init; } = [];
+
+    /// <summary>Select a real facing from a tile-space vector; old sheets retain their mirrored quadrants.</summary>
+    public (int Row, bool Mirror) Looking(float du, float dv)
+    {
+        var across = du - dv;
+        var down = du + dv;
+        if (Directions.IsEmpty)
+            return down >= 0 ? (0, across < 0) : (1, across > 0);
+        if (du == 0 && dv == 0)
+            return (Directions.IndexOf("south"), false);
+        // Isometric map pixels are 32 across for each 16 down.
+        var angle = MathF.Atan2(across, down * 0.5f);
+        var octant = ((int)MathF.Round(-angle / (MathF.PI / 4)) % 8 + 8) % 8;
+        return (Directions.IndexOf(Compass[octant]), false);
+    }
+
     public int Columns { get; init; }
     public int RowsPerDirection { get; init; } = 1;
     public float FootprintWidth { get; init; }
@@ -232,6 +254,13 @@ public sealed class UnitArt
         art.ReadCrown(packRoot);
         foreach (var set in new[] { art._beasts, art._bosses })
             art.ReadMonsters(set, set.Name == "beasts" ? beasts.RootElement.GetProperty("beasts") : bosses.RootElement.GetProperty("monsters"));
+        var bestiaryPath = Path.Combine(packRoot, "bestiary", "manifest.json");
+        if (File.Exists(bestiaryPath))
+        {
+            using var bestiary = JsonDocument.Parse(File.ReadAllText(bestiaryPath));
+            art.ReadMonsters(new ManifestSet("bestiary", bestiary.RootElement), bestiary.RootElement.GetProperty("creatures"));
+        }
+        art.ReadCreatureSprites(packRoot);
         return art;
     }
 
@@ -336,6 +365,59 @@ public sealed class UnitArt
                     _sprites[$"{set.Name}.{monster.Name}"] = sprite;
                 first = false;
             }
+        }
+    }
+
+    private void ReadCreatureSprites(string root)
+    {
+        var path = Path.Combine(root, "creatures", "manifest.json");
+        if (!File.Exists(path))
+            return;
+        using var doc = JsonDocument.Parse(File.ReadAllText(path));
+        if (doc.RootElement.TryGetProperty("legacyOverrides", out var legacy))
+        {
+            foreach (var item in legacy.EnumerateObject())
+            {
+                if (!_sprites.TryGetValue(item.Name, out var original))
+                    continue;
+                var e = item.Value;
+                var scale = e.GetProperty("pixelScale").GetSingle();
+                var head = e.GetProperty("headTop").GetInt32();
+                _sprites[item.Name] = original with
+                {
+                    PixelScale = scale, HeadTop = head,
+                    FootprintWidth = e.GetProperty("footprintWidth").GetSingle(),
+                    FootprintHeight = (original.AnchorY - head) * scale,
+                    EffectShift = (int)MathF.Round(29 - (original.AnchorY - head) * scale),
+                };
+            }
+        }
+        foreach (var entry in doc.RootElement.GetProperty("sprites").EnumerateObject())
+        {
+            var e = entry.Value;
+            var frame = e.GetProperty("frame");
+            var anchor = frame.GetProperty("anchor");
+            var anims = e.GetProperty("anims");
+            var scale = e.GetProperty("pixelScale").GetSingle();
+            var head = e.GetProperty("headTop").GetInt32();
+            var ay = anchor[1].GetInt32();
+            var sprite = new UnitSprite("creatures/" + e.GetProperty("file").GetString(),
+                frame.GetProperty("width").GetInt32(), frame.GetProperty("height").GetInt32(),
+                anchor[0].GetInt32(), ay, head, Anim(anims, "idle"), Anim(anims, "down"),
+                (int)MathF.Round(29 - (ay - head) * scale),
+                anims.EnumerateObject().ToImmutableDictionary(a => a.Name, a => Anim(anims, a.Name), StringComparer.Ordinal))
+            {
+                PixelScale = scale,
+                Unlit = e.TryGetProperty("unlit", out var unlit) && unlit.GetBoolean(),
+                PortraitSource = e.TryGetProperty("portrait", out var portrait) ? Rect(portrait) : null,
+                Columns = e.GetProperty("columns").GetInt32(),
+                RowsPerDirection = e.GetProperty("rowsPerDirection").GetInt32(),
+                Directions = [.. e.GetProperty("directions").EnumerateArray().Select(d => d.GetString()!)],
+                FootprintWidth = e.GetProperty("footprintWidth").GetSingle(),
+                FootprintHeight = e.GetProperty("footprintHeight").GetSingle(),
+            };
+            foreach (var key in e.GetProperty("keys").EnumerateArray())
+                _sprites[key.GetString()!] = sprite;
         }
     }
 
