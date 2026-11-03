@@ -388,11 +388,18 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
         var way = burst.Toward is { } toward ? terrain.Centre(toward) - from : Vector2.UnitX;
         var angle = MathF.Atan2(way.Y, way.X);
 
+        var progress = (float)Math.Clamp(into / burst.Length, 0, 1);
+        var scale = burst.Scale * (burst.Steam ? 1 + 0.18f * progress : 1);
+        var fade = Math.Clamp((progress - 0.15f) / 0.85f, 0, 1);
+        var alpha = burst.Alpha * (burst.Steam ? 1 - fade * fade * (3 - 2 * fade) : 1);
+        var rise = burst.Steam ? 12 * progress : 0;
+        var seconds = burst.Steam ? into * clip.Seconds / burst.Length : into;
+
         // Drawing turns around the frame's middle, so its anchor is put where it should land after the turn.
-        var size = new Vector2(clip.Width, clip.Height) * burst.Scale;
-        var anchor = Vector2.Transform(new Vector2(clip.AnchorX, clip.AnchorY) * burst.Scale - size / 2, Matrix3x2.CreateRotation(angle));
-        var at = from - new Vector2(0, clip.Lift) - anchor - size / 2;
-        draws.Add(new FxDraw(clip.Path, new ArtRect(clip.FrameAt(into) * clip.Width, 0, clip.Width, clip.Height), at, size, angle, clip.Additive, burst.Alpha));
+        var size = new Vector2(clip.Width, clip.Height) * scale;
+        var anchor = Vector2.Transform(new Vector2(clip.AnchorX, clip.AnchorY) * scale - size / 2, Matrix3x2.CreateRotation(angle));
+        var at = from - new Vector2(0, clip.Lift + rise) - anchor - size / 2;
+        draws.Add(new FxDraw(clip.Path, new ArtRect(clip.FrameAt(seconds) * clip.Width, 0, clip.Width, clip.Height), at, size, angle, clip.Additive, alpha));
     }
 
     private static void DrawFlight(FlightCue flight, double into, float share, BoardTerrain terrain, ImmutableArray<FxDraw>.Builder draws)

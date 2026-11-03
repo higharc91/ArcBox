@@ -96,6 +96,9 @@ public static class BeatTiming
     /// <summary>A reaction's minimum hold, including the arrival of its new surface.</summary>
     public const double SurfaceHold = 0.6;
 
+    /// <summary>Steam dissipates beyond its action's beat, without holding up the next turn.</summary>
+    public const double Steam = 2.4;
+
     /// <summary>A boss changing phase.</summary>
     public const double Phase = 0.8;
 
@@ -144,6 +147,9 @@ public sealed record BurstCue(double At, double Length, FxClip Clip, Tile Tile, 
 
     /// <summary>Brightness of this burst, before its clip's blend mode.</summary>
     public float Alpha { get; init; } = 1;
+
+    /// <summary>Slow the clip to its lifetime, gently expand and rise, and fade as steam disperses.</summary>
+    public bool Steam { get; init; }
 }
 
 /// <summary>A transient hazard, with its ground and over art sorted around the figures.</summary>
@@ -320,10 +326,10 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
 
         private void Apply(BattleEvent e) => _cues.Add(new ApplyCue(_t, e));
 
-        private void Burst(string? key, Tile? tile, double? at = null, Tile? toward = null, float scale = 1, float alpha = 1)
+        private void Burst(string? key, Tile? tile, double? at = null, Tile? toward = null, float scale = 1, float alpha = 1, bool steam = false)
         {
             if (key is not null && tile is { } place && fx.Clip(key) is { } clip)
-                _cues.Add(new BurstCue(at ?? _t, clip.Loop ? BeatTiming.BurstMost : clip.Seconds, clip, place, toward) { Scale = scale, Alpha = alpha });
+                _cues.Add(new BurstCue(at ?? _t, steam ? BeatTiming.Steam : clip.Loop ? BeatTiming.BurstMost : clip.Seconds, clip, place, toward) { Scale = scale, Alpha = alpha, Steam = steam });
         }
 
         private void Moment(string label, double after = 0) => _cues.Add(new MomentCue(_t + after, label));
@@ -545,7 +551,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 var at = _t + Front(i);
                 var tile = reaction.Tiles[i];
                 var fire = reaction.Rule is "ignite" or "spread" or "burn_web";
-                Burst(effect, tile, at, scale: fire ? 0.8f : 1, alpha: fire ? 0.7f : 1);
+                Burst(effect, tile, at, scale: fire ? 0.8f : 1, alpha: fire ? 0.7f : 1, steam: reaction.Rule is "thaw" or "douse");
                 if (reaction.Rule == "freeze")
                     Burst("fx.dust.snow", tile, at + 0.08);
                 if (reaction.Rule == "conduct")

@@ -52,14 +52,14 @@ public sealed class BeatScriptTests
     [InlineData("freeze", "fx/ice_frost.png")]
     [InlineData("thaw", "fx/misty_mist.png")]
     [InlineData("douse", "fx/poof_white.png")]
-    public void Surface_reactions_use_pack_clips_and_finish_in_under_a_second(string rule, string path)
+    public void Surface_reactions_use_pack_clips_and_keep_the_action_under_a_second(string rule, string path)
     {
         var tiles = Enumerable.Range(0, 60).Select(x => new Tile(x, 3)).ToImmutableArray();
         var script = Script(Near, new TileReacted(rule, Hero, tiles),
             new ZoneCreated(new Zone(1, null, "burning", tiles, 2, false, false, [])));
         var bursts = script.Cues.OfType<BurstCue>().Where(c => c.Clip.Path == path).ToArray();
         Assert.Equal(tiles, bursts.Select(c => c.Tile));
-        Assert.All(bursts, c => Assert.InRange(c.At + c.Length, 0.01, 0.999));
+        Assert.All(bursts, c => Assert.InRange(c.At + c.Length, 0.01, rule is "thaw" or "douse" ? 2.5 : 0.999));
         Assert.InRange(script.Length, 0.5, 0.999);
         Assert.Contains(script.Cues.OfType<MomentCue>(), c => c.Label == "reaction-" + rule);
     }

@@ -61,6 +61,28 @@ public sealed class BeatPlayerTests
         Assert.Equal(BoardChanges.None, player.Shown!.Board);
     }
 
+    [Theory]
+    [InlineData("thaw")]
+    [InlineData("douse")]
+    public void Steam_lingers_after_the_beat_rises_and_softly_dissipates(string rule)
+    {
+        var player = Player();
+        player.Receive(View(3, 10));
+        player.Receive(View(3, 10, new Beat(1, Hero, [new TileReacted(rule, Hero, [new Tile(6, 7)])])));
+        var shown = Run(player, 0.9);
+        Assert.Equal([1], shown);
+        var early = Assert.Single(player.Frame(River).Draws);
+        Run(player, 0.7);
+        var late = Assert.Single(player.Frame(River).Draws);
+        Assert.True(late.Alpha < early.Alpha);
+        Assert.True(late.TopLeft.Y < early.TopLeft.Y);
+        Assert.True(late.Size.X > early.Size.X);
+        Assert.True(late.Source.X > early.Source.X);
+        Run(player, 1);
+        Assert.Empty(player.Frame(River).Draws);
+        Assert.Empty(Run(player, 1));
+    }
+
     [Fact]
     public void Ignition_bursts_leave_room_for_the_figures_and_stay_anchored_to_the_floor()
     {
