@@ -54,6 +54,8 @@ public sealed class WalkShow
     private readonly SoundBank? _sounds;
     private readonly WalkTrack _track = new();
     private readonly WorldPeople? _people;
+    private BarkView? _bark;
+    private ImmutableHashSet<string> _peopleFlags = ImmutableHashSet<string>.Empty;
     private readonly WalkBump _bump = new();
     private readonly WorldCamera _camera;
     private readonly Func<Vector2, bool, Vector2> _pixels;
@@ -116,6 +118,9 @@ public sealed class WalkShow
             _markers = [.. _markers, .. traders.Where(t => Math.Max(Math.Abs(t.At.X - view.At.X), Math.Abs(t.At.Y - view.At.Y)) <= 1)
                 .Where(t => !t.Open).Select(t => new StoryMarker("shop:" + t.Id, t.At, null, "shop"))];
         _cast = view.Cast is { IsDefault: false } cast ? cast : [];
+        _bark = view.Bark;
+        if (view.PeopleFlags is { } flags && !_peopleFlags.SetEquals(flags)) _peopleFlags = flags.ToImmutableHashSet(StringComparer.Ordinal);
+        if (view.PeopleFlags is null) _peopleFlags = ImmutableHashSet<string>.Empty;
         if (view.Traders is { } openTraders)
             _cast = [.. _cast, .. openTraders.Where(t => t.Open && t.Sprite is not null).Select(t => new CastView("trader:" + t.Id, t.Id, t.Sprite!, t.At, view.At))];
         _track.Keep([.. _cast.Select(c => c.At)]);      // followers stand clear of the scene's cast
@@ -184,7 +189,8 @@ public sealed class WalkShow
         ImmutableArray<BoardUnit> walkers = stage?.Hidden == true ? [] : [.. UnitPlan.Walkers(_party, drawn, _track.Poses, _art, _pixels)
             .Concat(StoryMarks.Of(_markers, _terrain, _art, _pixels).Select(m => m.Unit).OfType<BoardUnit>())
             .Concat(StoryMarks.Cast(_cast, _terrain, _art, _pixels)).OrderBy(u => u.Order)];
-        var people = _people?.Units(Clock, focus.Feet, _markers, _pixels, _cast) ?? [];
+        var people = _people?.Units(Clock, focus.Feet, _markers, _pixels, _cast, _peopleFlags,
+            new Tile((int)MathF.Floor(focus.Map.X), (int)MathF.Floor(focus.Map.Y)), _bark) ?? [];
         ImmutableArray<BoardUnit> units = people.IsEmpty ? walkers : [.. walkers.Concat(people).OrderBy(u => u.Order)];
         var fit = stage is { Shake: var shake } && shake != Vector2.Zero ? _camera.Fit with { Origin = _camera.Fit.Origin + shake * _camera.Fit.Scale } : _camera.Fit;
         return new WalkFrame(units, fit, focus.Map, _track.Heading * TilesPerSecond, footstep, cut, _track.Walked, focus.Feet, bumped, bump) { Walkers = walkers };

@@ -81,7 +81,7 @@ export function Turn({ data, send }: CustomScreenProps) {
   const targetUnit = target?.target.unit && target.target.unit !== me.id ? byId.get(target.target.unit) : undefined;
 
   return (
-    <div class={`tx tx-turn${ability ? " aiming" : ""}`}>
+    <div class={`tx tx-controls-layout tx-turn${ability ? " aiming" : ""}`}><div class="tx-controls-scroll">
       <SurfaceScene kinds={(data as TurnData).surfaces} />
       {ability ? (
         <MeCard me={me} title={ability.name} subtitle={target ? "Ready: check the TV, then use it" : aimHint(ability)}
@@ -108,7 +108,8 @@ export function Turn({ data, send }: CustomScreenProps) {
 
       {ability ? null : <AbilityList abilities={choices.abilities} cls={cls} onPick={pick} />}
 
-      {/* The commit buttons stay on screen (a sticky footer), so they're in reach without scrolling past the map. */}
+      </div>
+      {/* Actions have their own row, outside the scrolling map and ability list. */}
       {ability ? (
         <div class="tx-foot tx-commit aim">
           <button type="button" class="tx-btn ghost" onClick={back}>Back</button>

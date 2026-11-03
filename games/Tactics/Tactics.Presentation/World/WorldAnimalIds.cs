@@ -5,7 +5,7 @@ public static class WorldAnimalIds
 {
     private static readonly HashSet<string> Ids = new(StringComparer.Ordinal)
     {
-        "farm_goat", "pack_mule", "field_crow", "river_duck", "red_fox",
+        "farm_goat", "pack_mule", "field_crow", "river_duck", "red_fox", "farm_dog", "farm_sheep",
     };
 
     /// <summary>Whether a prop is one of the overworld's living creatures.</summary>

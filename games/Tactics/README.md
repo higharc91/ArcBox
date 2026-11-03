@@ -145,3 +145,7 @@ Recovery screens share `RecoveryMemberView` (battle-ready HP, class resources an
 The phone `InjuryIcon` resolves `injury_icons/manifest.json`; the TV reads the same data. The eight 32×32 images were generated in
 PixelLab at the owner's request, with prompts and provenance in `docs/superpowers/specs/2026-11-03-tactics-injury-icons.json`.
 Tap an injury to inspect its effect or confirm treatment. Ordinary shop/controller fixtures remain unchanged.
+
+## NPCs and side quests
+
+Ashen Ford has flag-gated people, rotating voiced town barks, eight named conversations and three side quests. Conversations reuse the story vote/check/restart system. Rewards are paid atomically once; away members receive quest XP. Everyone can read the parchment journal privately; the leader opens it on the TV and pins one active quest. Visible targets get a waypoint, with no secret coordinates sent. See the [NPC/quest design](../../docs/superpowers/specs/2026-11-03-tactics-npcs-and-quests-design.md), [voice plan](../../tools/tactics-lore/VOICE-PLAN.md) and [validation report](../../docs/superpowers/reports/2026-11-03-npcs-quests/README.md).

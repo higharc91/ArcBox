@@ -126,6 +126,49 @@ class CheckTests(unittest.TestCase):
         self.assertTrue(any("camp scene cannot also" in e for e in errors), errors)
         self.assertFalse(any("reflection" in e or "lead-in" in e for e in errors), errors)
 
+    def test_side_content_rejects_bad_entries_targets_unset_stages_and_main_flag_actions(self):
+        import shutil
+        with tempfile.TemporaryDirectory() as tmp:
+            content = Path(tmp) / "base"
+            shutil.copytree(check.CONTENT / "lore", content / "lore", ignore=shutil.ignore_patterns("*.ogg"))
+            shutil.copytree(check.CONTENT / "rules", content / "rules")
+            # Keep real art lookup on the original content; cross references are the same stable IDs.
+            lore = content / "lore"
+            def edit(file, change):
+                p = lore / file; d = json.loads(p.read_text()); change(d); p.write_text(json.dumps(d))
+            edit("conversations/halden_varrow.json", lambda d: d["entries"][0].update(node="missing_entry"))
+            edit("quests.json", lambda d: d["quests"][0]["stages"][0].update(when=["sq_unset_stage"], target={"tile":[9999,9999]}))
+            edit("conversations/tobin_fell.json", lambda d: d["nodes"][0]["options"][0].update(sets=["ch1_skarrow_slain"]))
+            # Removing the start action makes its former first-stage flag genuinely unreachable.
+            edit("conversations/halden_varrow.json", lambda d: [o.pop("quest",None) for n in d["nodes"] for o in n.get("options",[]) if o.get("quest",{}).get("start")])
+            edit("barks/mother_skarrow.json", lambda d: d["events"].pop("town"))
+            errors = check.check([lore])
+        self.assertTrue(any("mother_skarrow" in e and "neither conversation nor barks" in e for e in errors), errors)
+        self.assertTrue(any("missing_entry" in e for e in errors), errors)
+        self.assertTrue(any("stage 'asked'" in e and "nothing" in e for e in errors), errors)
+        self.assertTrue(any("outside" in e for e in errors), errors)
+        self.assertTrue(any("main-story" in e for e in errors), errors)
+
+    def test_optional_beat_hooks_cannot_set_main_flags_or_be_aftermaths(self):
+        def scene(id_, **kw):
+            return dict(id=id_, cast=["narrator"], start="n", nodes=[dict(id="n", lines=[
+                dict(id=id_+"_1", speaker="narrator", text="Hello.")], end=True, sets=["sq_hook_seen"])], **kw)
+        with tempfile.TemporaryDirectory() as tmp:
+            pack = Path(tmp) / "hooks"
+            (pack / "scenes").mkdir(parents=True)
+            (pack / "pack.json").write_text(json.dumps(dict(id="hooks", loreVersion=1,
+                requires=["story"], files=["scenes/hooks.json"])))
+            good = scene("good")
+            bad = scene("bad", after=True)
+            main = scene("main")
+            main["nodes"][0]["sets"] = ["mill_found"]
+            (pack / "scenes/hooks.json").write_text(json.dumps(dict(scenes=[good, bad, main])))
+            errors = check.check([FIXTURES / "valid" / "base", FIXTURES / "story", pack])
+        mine = [e for e in errors if "scenes/hooks.json" in e]
+        self.assertFalse(any("/scenes/0" in e for e in mine), mine)
+        self.assertTrue(any("aftermath" in e for e in mine), mine)
+        self.assertTrue(any("main-story" in e for e in mine), mine)
+
     def test_after_is_only_for_a_battle_beat(self):
         def scene(id_: str, beat: str, after: bool | None) -> dict:
             s = {"id": id_, "beat": beat, "cast": ["narrator"], "start": "n",

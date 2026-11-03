@@ -1747,6 +1747,16 @@
       ]
     },
     {
+      "id": "farm_dog",
+      "variant": "brown",
+      "at": [
+        [
+          52,
+          26
+        ]
+      ]
+    },
+    {
       "id": "farm_goat",
       "variant": "rust",
       "at": [
@@ -1755,8 +1765,22 @@
           83
         ],
         [
-          46,
+          45,
           89
+        ]
+      ]
+    },
+    {
+      "id": "farm_sheep",
+      "variant": "cream",
+      "at": [
+        [
+          24,
+          89
+        ],
+        [
+          27,
+          90
         ]
       ]
     },
@@ -6110,7 +6134,9 @@
         38,
         13
       ],
-      "face": "sw"
+      "face": "sw",
+      "id": "af_farmer_1",
+      "voice": "townsfolk_farmer"
     },
     {
       "preset": "goblin_cutthroat",
@@ -6118,7 +6144,13 @@
         132,
         23
       ],
-      "face": "se"
+      "face": "se",
+      "id": "af_goblin_cutthroat_1",
+      "unless": [
+        "ch1_skarrow_slain",
+        "ch1_skarrow_spared"
+      ],
+      "voice": "townsfolk_goblin_cutthroat"
     },
     {
       "preset": "goblin_shaman",
@@ -6126,7 +6158,12 @@
         134,
         24
       ],
-      "face": "nw"
+      "face": "nw",
+      "id": "mother_skarrow",
+      "character": "mother_skarrow",
+      "unless": [
+        "ch1_skarrow_slain"
+      ]
     },
     {
       "preset": "goblin_spear",
@@ -6134,7 +6171,13 @@
         132,
         25
       ],
-      "face": "se"
+      "face": "se",
+      "id": "af_goblin_spear_1",
+      "unless": [
+        "ch1_skarrow_slain",
+        "ch1_skarrow_spared"
+      ],
+      "voice": "townsfolk_goblin_spear"
     },
     {
       "preset": "goblin_archer",
@@ -6142,7 +6185,13 @@
         135,
         25
       ],
-      "face": "sw"
+      "face": "sw",
+      "id": "af_goblin_archer_1",
+      "unless": [
+        "ch1_skarrow_slain",
+        "ch1_skarrow_spared"
+      ],
+      "voice": "townsfolk_goblin_archer"
     },
     {
       "preset": "goblin_spear",
@@ -6164,7 +6213,13 @@
           133,
           27
         ]
-      ]
+      ],
+      "id": "af_goblin_spear_2",
+      "unless": [
+        "ch1_skarrow_slain",
+        "ch1_skarrow_spared"
+      ],
+      "voice": "townsfolk_goblin_spear"
     },
     {
       "preset": "merchant",
@@ -6172,7 +6227,9 @@
         52,
         31
       ],
-      "face": "se"
+      "face": "se",
+      "id": "af_merchant_1",
+      "voice": "townsfolk_merchant"
     },
     {
       "preset": "farmhand",
@@ -6180,7 +6237,9 @@
         22,
         37
       ],
-      "face": "se"
+      "face": "se",
+      "id": "af_farmhand_1",
+      "voice": "townsfolk_farmhand"
     },
     {
       "preset": "guard",
@@ -6218,7 +6277,9 @@
           26,
           48
         ]
-      ]
+      ],
+      "id": "af_guard_1",
+      "voice": "townsfolk_guard"
     },
     {
       "preset": "goblin_cutthroat",
@@ -6226,7 +6287,13 @@
         120,
         54
       ],
-      "face": "se"
+      "face": "se",
+      "id": "af_goblin_cutthroat_2",
+      "unless": [
+        "ch1_skarrow_slain",
+        "ch1_skarrow_spared"
+      ],
+      "voice": "townsfolk_goblin_cutthroat"
     },
     {
       "preset": "innkeeper",
@@ -6234,7 +6301,9 @@
         25,
         55
       ],
-      "face": "sw"
+      "face": "sw",
+      "id": "bree_tallow",
+      "character": "bree_tallow"
     },
     {
       "preset": "priest",
@@ -6242,7 +6311,9 @@
         30,
         55
       ],
-      "face": "sw"
+      "face": "sw",
+      "id": "mother_aubrine",
+      "character": "mother_aubrine"
     },
     {
       "preset": "blacksmith",
@@ -6250,7 +6321,9 @@
         36,
         55
       ],
-      "face": "se"
+      "face": "se",
+      "id": "tobin_fell",
+      "character": "tobin_fell"
     },
     {
       "preset": "goblin_spear",
@@ -6258,7 +6331,13 @@
         117,
         55
       ],
-      "face": "sw"
+      "face": "sw",
+      "id": "af_goblin_spear_3",
+      "unless": [
+        "ch1_skarrow_slain",
+        "ch1_skarrow_spared"
+      ],
+      "voice": "townsfolk_goblin_spear"
     },
     {
       "preset": "child",
@@ -6266,7 +6345,9 @@
         18,
         56
       ],
-      "face": "nw"
+      "face": "nw",
+      "id": "af_child_1",
+      "voice": "townsfolk_child"
     },
     {
       "preset": "minstrel",
@@ -6274,7 +6355,9 @@
         29,
         58
       ],
-      "face": "sw"
+      "face": "sw",
+      "id": "lark",
+      "character": "lark"
     },
     {
       "preset": "sage",
@@ -6282,7 +6365,9 @@
         36,
         58
       ],
-      "face": "ne"
+      "face": "ne",
+      "id": "corvin_ashby",
+      "character": "corvin_ashby"
     },
     {
       "preset": "goblin_archer",
@@ -6290,7 +6375,13 @@
         95,
         58
       ],
-      "face": "se"
+      "face": "se",
+      "id": "af_goblin_archer_2",
+      "unless": [
+        "ch1_skarrow_slain",
+        "ch1_skarrow_spared"
+      ],
+      "voice": "townsfolk_goblin_archer"
     },
     {
       "preset": "child",
@@ -6328,7 +6419,9 @@
           31,
           59
         ]
-      ]
+      ],
+      "id": "pip_ashdown",
+      "character": "pip_ashdown"
     },
     {
       "preset": "child",
@@ -6336,7 +6429,9 @@
         33,
         59
       ],
-      "face": "sw"
+      "face": "sw",
+      "id": "af_child_3",
+      "voice": "townsfolk_child"
     },
     {
       "preset": "farmhand",
@@ -6358,7 +6453,9 @@
           36,
           60
         ]
-      ]
+      ],
+      "id": "af_farmhand_2",
+      "voice": "townsfolk_farmhand"
     },
     {
       "preset": "guard",
@@ -6366,7 +6463,9 @@
         48,
         60
       ],
-      "face": "sw"
+      "face": "sw",
+      "id": "af_guard_2",
+      "voice": "townsfolk_guard"
     },
     {
       "preset": "farmer",
@@ -6396,7 +6495,9 @@
           41,
           62
         ]
-      ]
+      ],
+      "id": "af_farmer_2",
+      "voice": "townsfolk_farmer"
     },
     {
       "preset": "guard",
@@ -6404,7 +6505,9 @@
         46,
         61
       ],
-      "face": "sw"
+      "face": "sw",
+      "id": "af_guard_3",
+      "voice": "townsfolk_guard"
     },
     {
       "preset": "goblin_spear",
@@ -6412,7 +6515,13 @@
         117,
         61
       ],
-      "face": "ne"
+      "face": "ne",
+      "id": "af_goblin_spear_4",
+      "unless": [
+        "ch1_skarrow_slain",
+        "ch1_skarrow_spared"
+      ],
+      "voice": "townsfolk_goblin_spear"
     },
     {
       "preset": "barmaid",
@@ -6442,7 +6551,9 @@
           20,
           61
         ]
-      ]
+      ],
+      "id": "af_barmaid_1",
+      "voice": "townsfolk_barmaid"
     },
     {
       "preset": "mayor",
@@ -6450,7 +6561,9 @@
         29,
         62
       ],
-      "face": "se"
+      "face": "se",
+      "id": "halden_varrow",
+      "character": "halden_varrow"
     },
     {
       "preset": "guard",
@@ -6458,7 +6571,9 @@
         46,
         63
       ],
-      "face": "ne"
+      "face": "ne",
+      "id": "af_guard_4",
+      "voice": "townsfolk_guard"
     },
     {
       "preset": "goblin_spear",
@@ -6466,7 +6581,13 @@
         99,
         63
       ],
-      "face": "nw"
+      "face": "nw",
+      "id": "af_goblin_spear_5",
+      "unless": [
+        "ch1_skarrow_slain",
+        "ch1_skarrow_spared"
+      ],
+      "voice": "townsfolk_goblin_spear"
     },
     {
       "preset": "goblin_archer",
@@ -6474,7 +6595,13 @@
         120,
         63
       ],
-      "face": "sw"
+      "face": "sw",
+      "id": "af_goblin_archer_3",
+      "unless": [
+        "ch1_skarrow_slain",
+        "ch1_skarrow_spared"
+      ],
+      "voice": "townsfolk_goblin_archer"
     },
     {
       "preset": "merchant",
@@ -6482,7 +6609,9 @@
         26,
         64
       ],
-      "face": "sw"
+      "face": "sw",
+      "id": "af_merchant_2",
+      "voice": "townsfolk_merchant"
     },
     {
       "preset": "merchant",
@@ -6490,7 +6619,9 @@
         28,
         64
       ],
-      "face": "sw"
+      "face": "sw",
+      "id": "af_merchant_3",
+      "voice": "townsfolk_merchant"
     },
     {
       "preset": "merchant",
@@ -6498,7 +6629,9 @@
         35,
         64
       ],
-      "face": "sw"
+      "face": "sw",
+      "id": "af_merchant_4",
+      "voice": "townsfolk_merchant"
     },
     {
       "preset": "guard_captain",
@@ -6506,7 +6639,9 @@
         45,
         64
       ],
-      "face": "ne"
+      "face": "ne",
+      "id": "dagna_holt",
+      "character": "dagna_holt"
     },
     {
       "preset": "goblin_spear",
@@ -6514,7 +6649,13 @@
         99,
         64
       ],
-      "face": "se"
+      "face": "se",
+      "id": "af_goblin_spear_6",
+      "unless": [
+        "ch1_skarrow_slain",
+        "ch1_skarrow_spared"
+      ],
+      "voice": "townsfolk_goblin_spear"
     },
     {
       "preset": "farmer",
@@ -6522,7 +6663,9 @@
         26,
         66
       ],
-      "face": "ne"
+      "face": "ne",
+      "id": "af_farmer_3",
+      "voice": "townsfolk_farmer"
     },
     {
       "preset": "barmaid",
@@ -6530,7 +6673,9 @@
         35,
         66
       ],
-      "face": "ne"
+      "face": "ne",
+      "id": "af_barmaid_2",
+      "voice": "townsfolk_barmaid"
     },
     {
       "preset": "noble",
@@ -6538,7 +6683,9 @@
         41,
         68
       ],
-      "face": "se"
+      "face": "se",
+      "id": "celandine_marrowby",
+      "character": "celandine_marrowby"
     },
     {
       "preset": "guard",
@@ -6546,7 +6693,9 @@
         30,
         78
       ],
-      "face": "se"
+      "face": "se",
+      "id": "af_guard_5",
+      "voice": "townsfolk_guard"
     },
     {
       "preset": "guard",
@@ -6554,7 +6703,9 @@
         32,
         78
       ],
-      "face": "sw"
+      "face": "sw",
+      "id": "af_guard_6",
+      "voice": "townsfolk_guard"
     },
     {
       "preset": "farmhand",
@@ -6562,7 +6713,9 @@
         37,
         85
       ],
-      "face": "sw"
+      "face": "sw",
+      "id": "af_farmhand_3",
+      "voice": "townsfolk_farmhand"
     },
     {
       "preset": "farmer",
@@ -6570,7 +6723,9 @@
         30,
         86
       ],
-      "face": "se"
+      "face": "se",
+      "id": "af_farmer_4",
+      "voice": "townsfolk_farmer"
     },
     {
       "preset": "farmer",
@@ -6578,7 +6733,9 @@
         25,
         87
       ],
-      "face": "ne"
+      "face": "ne",
+      "id": "af_farmer_5",
+      "voice": "townsfolk_farmer"
     },
     {
       "preset": "hermit",
@@ -6586,7 +6743,9 @@
         130,
         90
       ],
-      "face": "sw"
+      "face": "sw",
+      "id": "old_maud",
+      "character": "old_maud"
     },
     {
       "preset": "fisher",
@@ -6594,7 +6753,9 @@
         105,
         92
       ],
-      "face": "sw"
+      "face": "sw",
+      "id": "af_fisher_1",
+      "voice": "townsfolk_fisher"
     },
     {
       "preset": "merchant",
@@ -6602,7 +6763,9 @@
         97,
         93
       ],
-      "face": "sw"
+      "face": "sw",
+      "id": "af_merchant_5",
+      "voice": "townsfolk_merchant"
     },
     {
       "preset": "fisher",
@@ -6610,7 +6773,9 @@
         102,
         93
       ],
-      "face": "se"
+      "face": "se",
+      "id": "af_fisher_2",
+      "voice": "townsfolk_fisher"
     },
     {
       "preset": "fisher",
@@ -6618,7 +6783,9 @@
         104,
         99
       ],
-      "face": "se"
+      "face": "se",
+      "id": "af_fisher_3",
+      "voice": "townsfolk_fisher"
     },
     {
       "preset": "merchant",
@@ -6626,7 +6793,9 @@
         97,
         104
       ],
-      "face": "sw"
+      "face": "sw",
+      "id": "af_merchant_6",
+      "voice": "townsfolk_merchant"
     },
     {
       "preset": "fisher",
@@ -6634,7 +6803,25 @@
         103,
         104
       ],
-      "face": "se"
+      "face": "se",
+      "id": "af_fisher_4",
+      "voice": "townsfolk_fisher"
+    },
+    {
+      "preset": "bandit_captain",
+      "at": [
+        104,
+        104
+      ],
+      "face": "se",
+      "id": "rook",
+      "character": "rook",
+      "requires": [
+        "sq_forge_contact"
+      ],
+      "unless": [
+        "sq_forge_done"
+      ]
     }
   ]
 }

@@ -159,6 +159,26 @@ public sealed class RegionWriterTests
         Assert.Equal(person.Walk, read.Walk);
     }
 
+    [Fact]
+    public void Named_people_keep_identity_voice_and_flag_gates_through_the_painting_file()
+    {
+        var source = Source();
+        source.Set(new Tile(0, 0), 1, Grass, TileFlags.None);
+        var person = new RegionPerson("merchant", new Tile(3, 9), "se", Id: "trader", Character: "rook",
+            Requires: ["sq_forge_contact"], Unless: ["gone"], Bark: "dock", Voice: "townsfolk_merchant");
+        source.People.Add(person);
+        var json = JsonSerializer.Serialize(Written(source), ArcJson.Options);
+        var back = JsonSerializer.Deserialize<RegionDef>(json, ArcJson.Options)!;
+        Assert.Equal(json, JsonSerializer.Serialize(back, ArcJson.Options));
+        var read = Assert.Single(back.People);
+        Assert.Equal("trader", read.Id);
+        Assert.Equal("rook", read.Character);
+        Assert.Equal(person.Requires, read.Requires);
+        Assert.Equal(person.Unless, read.Unless);
+        Assert.Equal("townsfolk_merchant", read.Voice);
+        Assert.Equal("dock", read.Bark);
+    }
+
     [Theory]
     [InlineData("", 0)]
     [InlineData("31,59", 1)]

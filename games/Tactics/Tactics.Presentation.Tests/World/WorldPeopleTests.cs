@@ -11,6 +11,50 @@ namespace Tactics.Presentation.Tests.World;
 /// <summary><see cref="WorldPeople"/>: who stands about in the world, drawn by the TV alone (spec §3.2).</summary>
 public sealed class WorldPeopleTests
 {
+    [Fact]
+    public void A_walking_person_stops_for_their_bark_and_resumes_without_sliding_or_jumping()
+    {
+        var person = Person("farmer", 5, 5, "se", (6,5), (6,6)) with { Id = "farmer" };
+        var people = new WorldPeople([person], Ground, Art.Value);
+        people.Units(0, Everywhere, []);
+        var bark = new BarkView("farmer",1,DateTimeOffset.MaxValue,new StoryLineView("hello","townsfolk_farmer","Farmer",null,"idle","Hello."));
+        var first = Assert.Single(people.Units(5, Everywhere, [], leader: new Tile(4,5), bark: bark));
+        var held = Assert.Single(people.Units(7, Everywhere, [], leader: new Tile(4,5), bark: bark));
+        Assert.Equal(first.Feet, held.Feet);
+        Assert.Equal(Art.Value.Emote("question"), held.Emote);
+        Assert.Equal(UnitPlan.Overhead(held.Feet, held.Sprite), held.EmoteAt);
+        var resumed = Assert.Single(people.Units(7.01, Everywhere, [], leader: new Tile(4,5)));
+        Assert.True(Vector2.Distance(held.Feet,resumed.Feet) < 1);
+        Assert.Null(resumed.Emote);
+    }
+
+    [Fact]
+    public void A_departing_person_fades_without_renumbering_the_people_who_remain()
+    {
+        var people = new WorldPeople([Person("guard", 5, 5) with { Id = "watch", Unless = ["gone"] }, Person("farmer", 6, 5)], Ground, Art.Value);
+        var before = people.Units(0, Everywhere, [], flags: new HashSet<string>());
+        var survivor = before.Single(u => u.Id.Value != "watch").Id;
+        Assert.Equal(2, before.Length);
+        people.Units(1, Everywhere, [], flags: new HashSet<string> { "gone" });
+        var fading = people.Units(1.1, Everywhere, [], flags: new HashSet<string> { "gone" });
+        Assert.InRange(fading.Single(u => u.Id.Value == "watch").Opacity, 0.01f, 0.99f);
+        Assert.Equal(survivor, Assert.Single(people.Units(2, Everywhere, [], flags: new HashSet<string> { "gone" })).Id);
+    }
+
+    [Fact]
+    public void An_arrival_waits_until_behind_the_party_and_never_appears_on_the_leader()
+    {
+        var people = new WorldPeople([Person("guard", 5, 5) with { Requires = ["arrived"] }], Ground, Art.Value);
+        var flags = new HashSet<string>();
+        Assert.Empty(people.Units(0, Everywhere, [], flags: flags, leader: new Tile(5, 5)));
+        flags.Add("arrived");
+        Assert.Empty(people.Units(1, Everywhere, [], flags: flags, leader: new Tile(5, 5)));
+        Assert.Empty(people.Units(2, Everywhere, [], flags: flags, leader: new Tile(4, 4)));
+        people.Units(3, Everywhere, [], flags: flags, leader: new Tile(8, 8));
+        Assert.InRange(Assert.Single(people.Units(3.1, Everywhere, [], flags: flags, leader: new Tile(8, 8))).Opacity, 0.01f, 0.99f);
+        Assert.Equal(1, Assert.Single(people.Units(4, Everywhere, [], flags: flags, leader: new Tile(8, 8))).Opacity);
+    }
+
     private static readonly Lazy<UnitArt> Art = new(() => UnitArt.Load(Pack.Root));
     private static readonly BoardTerrain Ground = WalkFeed.Ground(60, 60, (x, y) => x >= 30 ? 4 : 0);
     private static readonly Vector2 Everywhere = BoardProjection.Corner(5, 5, 0);

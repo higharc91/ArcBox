@@ -33,7 +33,7 @@ public sealed record OptionTags(ImmutableArray<string> Background, ImmutableArra
 /// <see cref="Choice"/> names the <c>arcs.json</c> choice it stands for. <see cref="Requires"/> are tested as the node shows.
 /// </summary>
 public sealed record SceneOption(string Id, string Label, string? To, string? Choice, ImmutableArray<string> Sets,
-    ImmutableArray<string> Requires, OptionTags Tags, SceneCheck? Check, int Gold = 0)
+    ImmutableArray<string> Requires, OptionTags Tags, SceneCheck? Check, int Gold = 0, SceneQuest? Quest = null, string? Give = null, string? Service = null, ImmutableArray<string> Unless = default)
 {
     /// <summary>
     /// Every node this option names: its <see cref="To"/>, then its check's pass and fail. A check decides where it goes (<see
@@ -56,12 +56,12 @@ public sealed record SceneNode(string Id, ImmutableArray<SceneLine> Lines, Immut
 }
 
 /// <summary>
-/// A scene of <c>lore/scenes</c>: the dialogue of one <see cref="Beat"/>, as a graph of <see cref="Nodes"/> from <see cref="Start"/>.
+/// A scene of <c>lore/scenes</c>: the dialogue of an optional <see cref="Beat"/>, as a graph of <see cref="Nodes"/> from <see cref="Start"/>.
 /// <see cref="Place"/> is where it's set, null for the beat's own place. It plays only when every flag of <see cref="Requires"/> is set
 /// and none of <see cref="Unless"/>, tested as it starts. <see cref="After"/> marks a battle beat's aftermath, which plays after the fight;
 /// the others are its lead-in.
 /// </summary>
-public sealed record SceneDef(string Id, string Beat, string? Place, string Title, ImmutableArray<string> Requires, ImmutableArray<string> Unless,
+public sealed record SceneDef(string Id, string? Beat, string? Place, string Title, ImmutableArray<string> Requires, ImmutableArray<string> Unless,
     ImmutableArray<string> Cast, string Start, ImmutableArray<SceneNode> Nodes, bool After, bool Camp = false)
 {
     /// <summary>The speaker who isn't a character.</summary>

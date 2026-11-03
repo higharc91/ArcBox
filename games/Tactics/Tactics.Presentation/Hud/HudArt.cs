@@ -63,9 +63,13 @@ public sealed class HudArt
     public HudPortrait Portrait(string? sprite, UnitTone tone)
     {
         var parts = sprite?.Split('.') ?? [];
+        var figure = _units.Sprite(sprite) ?? _units.StandIn(tone);
+        if (figure.PortraitSource is { } authored)
+            return new HudPortrait(figure.Path, authored, _backdrops[tone]);
+        if (parts is [CharacterSet, ..] && figure.PixelScale < 1)
+            return new HudPortrait(figure.Path, new ArtRect(figure.AnchorX - 20, Math.Max(0, figure.HeadTop - 4), 40, 40), _backdrops[tone]);
         if (parts is [CharacterSet, var preset, ..] && _portraits.TryGetValue(preset, out var file))
             return new HudPortrait(file, new ArtRect(0, 0, _portraitSize, _portraitSize), _backdrops[tone]);
-        var figure = _units.Sprite(sprite) ?? _units.StandIn(tone);
         return new HudPortrait(figure.Path, figure.Source(figure.Idle.Frames[0], 0), _backdrops[tone]);
     }
 

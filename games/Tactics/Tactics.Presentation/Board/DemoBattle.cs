@@ -15,6 +15,7 @@ public static class DemoBattle
 {
     private const string Changed = ":changed";
     private const string Fight = ":fight";
+    private const string Creatures = ":creatures";
 
     private static UnitView Unit(string id, string side, string? sprite, int x, int y, int hp, int maxHp, string life = "Up", int countdown = 0,
         params string[] conditions)
@@ -41,6 +42,19 @@ public static class DemoBattle
         Unit("mystery", "Enemy", "nonsense.key", 11, 11, 4, 8),
         Unit("dead", "Enemy", "characters.bandit", 9, 3, 0, 8, "Dead"),
     ];
+
+    /// <summary>Art review only: every primary creature beside a party figure, using the real battle renderer.</summary>
+    private static ImmutableArray<UnitView> CreatureUnits()
+    {
+        string[] keys = ["beasts.wolf.grey", "beasts.boar.brown", "beasts.bear.brown", "beasts.spider.black",
+            "beasts.slime.green", "beasts.bat.dusk", "beasts.drake.red", "bestiary.warg.black",
+            "bestiary.hookbeak.brown", "bestiary.scorpion.sand", "bestiary.harpy.dusk", "bestiary.wisp.marsh",
+            "bestiary.gargoyle.granite", "bestiary.crab.shore"];
+        Tile[] spots = [new(2,1),new(5,1),new(8,1),new(11,1),new(2,4),new(5,4),new(8,4),new(11,4),
+            new(2,7),new(5,7),new(8,7),new(11,7),new(3,10),new(10,10)];
+        return [.. keys.Select((key,i) => Unit(key.Split('.')[1], "Enemy", key, spots[i].X, spots[i].Y, 10, 10)),
+            Unit("human reference", "Party", "characters.class_fighter", 6, 11, 30, 30)];
+    }
 
     private static BoardChanges Changes()
     {
@@ -80,8 +94,9 @@ public static class DemoBattle
     {
         var changed = spec.EndsWith(Changed, StringComparison.Ordinal);
         var fight = spec.EndsWith(Fight, StringComparison.Ordinal);
-        var map = changed ? spec[..^Changed.Length] : fight ? spec[..^Fight.Length] : spec;
-        var units = fight ? Units() : [];
+        var creatures = spec.EndsWith(Creatures, StringComparison.Ordinal);
+        var map = creatures ? spec[..^Creatures.Length] : changed ? spec[..^Changed.Length] : fight ? spec[..^Fight.Length] : spec;
+        var units = creatures ? CreatureUnits() : fight ? Units() : [];
         var battle = new BattleView(map, map, 2, [.. units.Select(u => u.Id)], fight ? new UnitId("fighter") : null, units, [], null,
             changed ? Changes() : BoardChanges.None, ObjectivesDef.Default, fight ? new UnitId("rogue") : null);
         return new TacticsHostView("Battle", fight ? "rogue can react" : "Board demo", null, 1, [], null, battle, null, null);

@@ -1,0 +1,189 @@
+{
+  "id": "talk_tobin_fell",
+  "character": "tobin_fell",
+  "title": "Tobin Fell",
+  "cast": [
+    "tobin_fell"
+  ],
+  "start": "offer",
+  "entries": [
+    {
+      "node": "done",
+      "requires": [
+        "sq_forge_done"
+      ],
+      "unless": []
+    },
+    {
+      "node": "return",
+      "requires": [
+        "sq_forge_fuel"
+      ],
+      "unless": [
+        "sq_forge_done"
+      ]
+    },
+    {
+      "node": "waiting",
+      "requires": [
+        "sq_forge_asked"
+      ],
+      "unless": []
+    },
+    {
+      "node": "offer",
+      "requires": [],
+      "unless": []
+    }
+  ],
+  "nodes": [
+    {
+      "id": "offer",
+      "lines": [
+        {
+          "id": "sq_tobin_fell_001",
+          "speaker": "tobin_fell",
+          "text": "Fire is thinning. Last shard came on market credit. I am not buying another winter on those terms.",
+          "mood": "idle",
+          "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch."
+        }
+      ],
+      "options": [
+        {
+          "id": "honest",
+          "label": "We will find honest fuel at the docks.",
+          "to": "honest",
+          "quest": {
+            "start": "sq_cold_forge"
+          },
+          "sets": [
+            "sq_forge_honest"
+          ]
+        },
+        {
+          "id": "rook",
+          "label": "We could ask Rook about supplies.",
+          "to": "rook",
+          "quest": {
+            "start": "sq_cold_forge"
+          },
+          "sets": [
+            "sq_forge_contact"
+          ]
+        },
+        {
+          "id": "leave",
+          "label": "We will leave you to your work.",
+          "to": "bye"
+        }
+      ],
+      "vote": true
+    },
+    {
+      "id": "honest",
+      "lines": [
+        {
+          "id": "sq_tobin_fell_002",
+          "speaker": "tobin_fell",
+          "text": "Dry charcoal in the dock stores, if any is left. Not a shard. I need a working fire, not another debt.",
+          "mood": "idle",
+          "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "rook",
+      "lines": [
+        {
+          "id": "sq_tobin_fell_003",
+          "speaker": "tobin_fell",
+          "text": "Rook works the lower landing. Tell them I want fuel, not promises. And get the terms before you shake hands.",
+          "mood": "idle",
+          "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "waiting",
+      "lines": [
+        {
+          "id": "sq_tobin_fell_004",
+          "speaker": "tobin_fell",
+          "text": "Dock stores for charcoal, or Rook at the lower landing. Corvin might tell you why the cold bites so deep.",
+          "mood": "idle",
+          "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "return",
+      "lines": [
+        {
+          "id": "sq_tobin_fell_005",
+          "speaker": "tobin_fell",
+          "text": "Dry charcoal. That will hold the heat long enough for a day's work. What terms am I taking?",
+          "mood": "idle",
+          "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch."
+        }
+      ],
+      "options": [
+        {
+          "id": "give",
+          "label": "The fuel is yours. Keep the forge working.",
+          "to": "fixed",
+          "quest": {
+            "complete": "sq_cold_forge"
+          }
+        },
+        {
+          "id": "leave",
+          "label": "We will come back.",
+          "to": "bye"
+        }
+      ],
+      "vote": true
+    },
+    {
+      "id": "fixed",
+      "lines": [
+        {
+          "id": "sq_tobin_fell_006",
+          "speaker": "tobin_fell",
+          "text": "A day's fire is a day's work. Take this oil. Good tools deserve looking after.",
+          "mood": "idle",
+          "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "done",
+      "lines": [
+        {
+          "id": "sq_tobin_fell_007",
+          "speaker": "tobin_fell",
+          "text": "Still needs tending. But it is a fire I can pay for.",
+          "mood": "idle",
+          "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "bye",
+      "lines": [
+        {
+          "id": "sq_tobin_fell_008",
+          "speaker": "tobin_fell",
+          "text": "Shut the door behind you. Saves what heat there is.",
+          "mood": "idle",
+          "direction": "Orus's natural conversational register, working blacksmith, dry and laconic; do not force an extra bass pitch."
+        }
+      ],
+      "end": true
+    }
+  ]
+}

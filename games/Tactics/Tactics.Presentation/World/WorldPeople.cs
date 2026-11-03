@@ -8,7 +8,7 @@ namespace Tactics.Presentation.World;
 
 /// <summary>
 /// The people of a region (spec §3.2): dressing the TV draws from the region's own file, standing idle or walking a short loop, sorted among the party by their tiles and passing
-/// through the same overlay. The server never hears of them, so there's no phone change and no state, and nobody can be walled in by one. Everything here is worked out from a clock.
+/// through the same overlay. The server checks identity, reach and presence for interactions; people never block paths. Everything here is worked out from a clock.
 /// <para>
 /// When a beat's figure is someone who's already standing about, it replaces them: of everyone in that preset, the one nearest the beat steps out of the picture, so nobody shows twice.
 /// Only those near the screen are drawn: each one costs the overlay its closure, and the rest of a region's people have no reason to.
@@ -36,6 +36,12 @@ public sealed class WorldPeople
     private readonly string[] _sprites;
     private readonly string[] _ids;
     private readonly Vector2[] _feet;
+    private readonly bool?[] _present;
+    private readonly float[] _opacity;
+    private readonly double[] _paused;
+    private double _lastClock;
+    private const float FadeSeconds = 0.35f;
+    private static readonly ImmutableHashSet<string> NoFlags = ImmutableHashSet<string>.Empty;
 
     /// <summary>The people of <paramref name="people"/> on <paramref name="terrain"/>. Anyone the pack has no sprite for is left out, as a stand-in would read as someone who's there.</summary>
     public WorldPeople(ImmutableArray<RegionPerson> people, BoardTerrain terrain, UnitArt art)
@@ -43,8 +49,11 @@ public sealed class WorldPeople
         (_terrain, _art) = (terrain, art);
         _people = [.. people.Where(p => art.Sprite(SpriteOf(p)) is not null && terrain.Map.InBounds(p.At))];
         _sprites = [.. _people.Select(SpriteOf)];
-        _ids = [.. _people.Select((p, i) => $"person:{i}:{p.Preset}")];
+        _ids = [.. _people.Select((p, i) => RegionPeople.Id(p, i))];
         _feet = [.. _people.Select(p => UnitPlace.On(terrain, p.At).Feet)];
+        _present = new bool?[_people.Length];
+        _opacity = new float[_people.Length];
+        _paused = new double[_people.Length];
     }
 
     /// <summary>Where someone is, and whether they're on their way.</summary>
@@ -87,19 +96,43 @@ public sealed class WorldPeople
     /// <paramref name="pixels"/> is the walk's, as for the party, so a figure stands still against the ground as the camera moves.
     /// </summary>
     public ImmutableArray<BoardUnit> Units(double clock, Vector2 around, ImmutableArray<StoryMarker> markers, Func<Vector2, bool, Vector2>? pixels = null,
-        ImmutableArray<CastView> cast = default)
+        ImmutableArray<CastView> cast = default, IReadOnlySet<string>? flags = null, Tile? leader = null, Tactics.Game.BarkView? bark = null)
     {
         if (_people.IsEmpty)
             return [];
         var taken = Taken([.. (markers.IsDefault ? [] : markers).Select(m => (m.At, m.Sprite)), .. (cast.IsDefault ? [] : cast).Select(c => (c.At, (string?)c.Sprite))]);
         var units = ImmutableArray.CreateBuilder<BoardUnit>();
+        var elapsed = (float)Math.Max(0, clock - _lastClock);
+        _lastClock = clock;
         for (var i = 0; i < _people.Length; i++)
         {
-            if (Array.IndexOf(taken, i) >= 0 || Math.Abs(_feet[i].X - around.X) > ScreenX || Math.Abs(_feet[i].Y - around.Y) > ScreenY)
-                continue;
             var person = _people[i];
-            var stance = PlaceAt(person, clock + Phase(person));
-            units.Add(UnitPlan.Person(_ids[i], _sprites[i], stance.Place, stance.Heading, stance.Walking ? Walk : null, _art, pixels));
+            var outside = Math.Abs(_feet[i].X - around.X) > ScreenX || Math.Abs(_feet[i].Y - around.Y) > ScreenY;
+            var visible = RegionPeople.Present(person, flags ?? NoFlags);
+            if (_present[i] is null)
+            {
+                _present[i] = visible;
+                _opacity[i] = visible ? 1 : 0;
+            }
+            else if (visible != _present[i])
+            {
+                // An arriving person waits until off-screen or behind the party. Never materialise under its leader.
+                if (!visible || outside || leader is null || (leader != person.At && BoardOrder.Key(person.At, BoardLayer.Unit) < BoardOrder.Key(leader.Value, BoardLayer.Unit)))
+                    _present[i] = visible;
+            }
+            else
+                _opacity[i] = Math.Clamp(_opacity[i] + (_present[i] == true ? elapsed : -elapsed) / FadeSeconds, 0, 1);
+            if (_opacity[i] <= 0 || outside || Array.IndexOf(taken, i) >= 0)
+                continue;
+            var speaking = bark is not null && _ids[i] == bark.Person;
+            if (speaking) _paused[i] += elapsed;
+            var stance = PlaceAt(person, clock + Phase(person) - _paused[i]);
+            if (speaking && leader is { } party)
+                stance = new Stance(stance.Place, false, new Vector2(party.X + .5f - stance.Place.Map.X, party.Y + .5f - stance.Place.Map.Y));
+            var unit = UnitPlan.Person(_ids[i], _sprites[i], stance.Place, stance.Heading, stance.Walking ? Walk : null, _art, pixels) with { Opacity = _opacity[i] };
+            if (speaking && _art.Emote("question") is { } emote)
+                unit = unit with { Emote = emote, EmoteAt = UnitPlan.Overhead(unit.Feet, unit.Sprite) };
+            units.Add(unit);
         }
         units.Sort((a, b) => a.Order.CompareTo(b.Order));
         return units.ToImmutable();

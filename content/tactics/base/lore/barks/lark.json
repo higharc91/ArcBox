@@ -117,6 +117,29 @@
         "text": "You'll want to tell this one well, when you're old. I'd start practising.",
         "mood": "happy"
       }
+    ],
+    "town": [
+      {
+        "id": "bark_lark_town_1",
+        "text": "There's a last verse to the Song of the Seven. Nobody's sung it in two hundred years. I'll find it.",
+        "speaker": "lark",
+        "mood": "idle",
+        "direction": "androgynous, musical"
+      },
+      {
+        "id": "bark_lark_town_2",
+        "text": "Songs don't burn. That's why I keep them.",
+        "speaker": "lark",
+        "mood": "idle",
+        "direction": "androgynous, musical"
+      },
+      {
+        "id": "bark_lark_town_3",
+        "text": "Hum along if you know it. Nobody ever knows it.",
+        "speaker": "lark",
+        "mood": "happy",
+        "direction": "humming first"
+      }
     ]
   }
 }

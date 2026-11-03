@@ -1,0 +1,130 @@
+{
+  "id": "talk_corvin_ashby",
+  "character": "corvin_ashby",
+  "title": "Corvin Ashby",
+  "cast": [
+    "corvin_ashby"
+  ],
+  "start": "greet",
+  "entries": [
+    {
+      "node": "greet",
+      "requires": [],
+      "unless": []
+    }
+  ],
+  "nodes": [
+    {
+      "id": "greet",
+      "lines": [
+        {
+          "id": "sq_corvin_ashby_001",
+          "speaker": "corvin_ashby",
+          "text": "The river steams, the soil chills, and everyone calls it weather. Forgive me. What did you want to ask?",
+          "mood": "idle",
+          "direction": "Light, quick, a little anxious; precise educated words with warm, distracted curiosity."
+        }
+      ],
+      "options": [
+        {
+          "id": "arcana",
+          "label": "Read the cold with Corvin.",
+          "check": {
+            "skill": "arcana",
+            "dc": 11,
+            "fail": "uncertain",
+            "pass": "read"
+          },
+          "requires": [
+            "sq_forge_asked"
+          ],
+          "unless": [
+            "sq_forge_done"
+          ]
+        },
+        {
+          "id": "history",
+          "label": "Ask about older forge methods.",
+          "check": {
+            "skill": "history",
+            "dc": 11,
+            "fail": "uncertain",
+            "pass": "read"
+          },
+          "requires": [
+            "sq_forge_asked"
+          ],
+          "unless": [
+            "sq_forge_done"
+          ]
+        },
+        {
+          "id": "town",
+          "label": "What should we watch for?",
+          "to": "town"
+        },
+        {
+          "id": "leave",
+          "label": "We will let you think.",
+          "to": "bye"
+        }
+      ],
+      "vote": true
+    },
+    {
+      "id": "read",
+      "lines": [
+        {
+          "id": "sq_corvin_ashby_002",
+          "speaker": "corvin_ashby",
+          "text": "The forge needs dry fuel and a proper draught. That will not cure the Vale, but it will let Tobin work without another shard.",
+          "mood": "idle",
+          "direction": "Light, quick, a little anxious; precise educated words with warm, distracted curiosity."
+        }
+      ],
+      "sets": [
+        "sq_forge_read"
+      ],
+      "end": true
+    },
+    {
+      "id": "uncertain",
+      "lines": [
+        {
+          "id": "sq_corvin_ashby_003",
+          "speaker": "corvin_ashby",
+          "text": "Not enough to be certain. Try dry charcoal first. A modest experiment is better than a grand mistake.",
+          "mood": "idle",
+          "direction": "Light, quick, a little anxious; precise educated words with warm, distracted curiosity."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "town",
+      "lines": [
+        {
+          "id": "sq_corvin_ashby_004",
+          "speaker": "corvin_ashby",
+          "text": "Watch what changes. The waterline, the birds, the heat in a stone. Memory is useful; measurements are kinder to an argument.",
+          "mood": "idle",
+          "direction": "Light, quick, a little anxious; precise educated words with warm, distracted curiosity."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "bye",
+      "lines": [
+        {
+          "id": "sq_corvin_ashby_005",
+          "speaker": "corvin_ashby",
+          "text": "If you find a warm stone where it should be cold, bring it. Carefully.",
+          "mood": "idle",
+          "direction": "Light, quick, a little anxious; precise educated words with warm, distracted curiosity."
+        }
+      ],
+      "end": true
+    }
+  ]
+}

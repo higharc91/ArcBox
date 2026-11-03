@@ -28,6 +28,19 @@ public static class InteractableLore
             if (beat.Encounter is { } id && rules.Encounters.TryGetValue(id, out var encounter))
                 flags.UnionWith(encounter.Triggers.SelectMany(t => t.Do).Select(a => a.SetFlag).OfType<string>());
         }
+        foreach (var scene in lore.Scenes.Where(s => s.Beat is null))
+            foreach (var node in scene.Nodes)
+            {
+                flags.UnionWith(node.Sets);
+                flags.UnionWith(node.Options.SelectMany(o => o.Sets));
+            }
+        foreach (var quest in lore.Quests.Where(q => q.Region == arc.Region))
+        {
+            flags.UnionWith(quest.Stages.SelectMany(s => s.When));
+            flags.UnionWith(quest.Done.When);
+            if (quest.Failed is { } failed) flags.UnionWith(failed.When);
+            if (!quest.Rewards.Sets.IsDefault) flags.UnionWith(quest.Rewards.Sets);
+        }
         return flags.ToImmutable();
     }
 

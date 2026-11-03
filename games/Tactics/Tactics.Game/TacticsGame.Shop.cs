@@ -29,7 +29,7 @@ public sealed partial class TacticsGame
             .Where(t => Interactables.InReach(WalkGround(), _at, t.Def))];
 
     private ImmutableArray<(InteractableDef Def, string Label)> TradeTargets()
-        => [.. ThingTargets().Concat(ShopTargets())
+        => [.. ThingTargets().Concat(ShopTargets()).Concat(PersonTargets())
             .OrderBy(t => Math.Abs(t.Def.At.X - _at.X) + Math.Abs(t.Def.At.Y - _at.Y))
             .ThenBy(t => t.Def.At == _facing ? 0 : 1).ThenBy(t => t.Def.Id, StringComparer.Ordinal)];
 

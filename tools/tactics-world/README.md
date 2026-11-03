@@ -91,7 +91,7 @@ gets dragged, Ctrl+Z, or the export tells you to set its Position back to zero.
 
 **Buildings** snap to their back corner. Their orange outline shows the full footprint, divided into tiles. The outline comes from `town/manifest.json`; the building's blocked footprint and door positions are checked on export. A building can cover more than one tile, so leave its whole footprint clear of props and stamps.
 
-**People** are placed under `People` with `PersonMarker`. Choose a preset and facing in the Inspector. `Walk` is an optional short list of tiles for a local idle loop; leave it empty for someone who stands still. They are scenery and never affect path checks.
+**People** are placed under `People` with `PersonMarker`. Choose a preset and facing in the Inspector. `Walk` is an optional short list of tiles for a local idle loop; leave it empty for someone who stands still. They never affect path checks. Optional `Id` is a stable interaction identity; `Character` names a lore character. `Requires` and `Unless` are comma-separated story flags: all required flags must hold and no excluded flag may hold. `Bark` overrides the bark set; `Voice` selects a townsfolk cast. Blank fields are omitted on export. Keep IDs stable when moving markers. The game fades people when their gates change; ending gates settle after the corresponding battle is won.
 
 **To add one,** right-click the group, choose Add Child Node, and pick the marker type. It has to be under the right group, or the export
 says so.

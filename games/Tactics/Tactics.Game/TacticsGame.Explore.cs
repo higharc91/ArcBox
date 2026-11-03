@@ -268,6 +268,7 @@ public sealed partial class TacticsGame
     {
         _toasts.Clear();
         _phase = TacticsPhase.Exploration;
+        ShowPendingQuestNotice();
         NoteAppeared();
         if (LookAround())       // what the party sees as it comes into the world, or back from a fight or a scene
         {
@@ -296,6 +297,8 @@ public sealed partial class TacticsGame
     /// </summary>
     private void EndSession()
     {
+        _ctx.CancelTimer("townBark");
+        _ctx.CancelTimer("questResult");
         if (_phase == TacticsPhase.Exploration)
             LeaveExploration();
         else if (_phase == TacticsPhase.Story)
@@ -316,6 +319,7 @@ public sealed partial class TacticsGame
     /// </summary>
     private void WalkInput(Player player, JsonElement? data)
     {
+        if (QuestLogOpen) return;
         if (!ReadDir(data, out var dir) || player.Profile?.Value != _lead)
             return;
         if (dir is null)
@@ -638,6 +642,7 @@ public sealed partial class TacticsGame
         }
         var was = _lead;
         _lead = wanted;
+        if (was != wanted) _questLogLeader = null;
         (_heardAt, _settledAt) = (_ctx.Now, _ctx.Now);      // a stand-in gets the pad for at least TakebackAfter, however long the party stood before
         if (_phase == TacticsPhase.Exploration && was is not null && !_electionOpen && Leader is { } leader)     // not a seat found empty at Start
             SayLeader(leader.Name);

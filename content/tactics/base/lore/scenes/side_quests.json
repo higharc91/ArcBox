@@ -1,0 +1,343 @@
+{
+  "scenes": [
+    {
+      "id": "sq_grain_sack",
+      "cast": [
+        "narrator"
+      ],
+      "start": "look",
+      "nodes": [
+        {
+          "id": "look",
+          "lines": [
+            {
+              "id": "sq_narrator_001",
+              "speaker": "narrator",
+              "text": "A slit seam, a scatter of seed, and a chalk mark used by the Ash Market. Someone carried this sack away before it was counted.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold."
+            }
+          ],
+          "options": [
+            {
+              "id": "trace",
+              "label": "Follow the market mark.",
+              "to": "noted",
+              "requires": [
+                "sq_grain_asked"
+              ],
+              "unless": [
+                "sq_grain_done"
+              ],
+              "quest": {
+                "advance": "sq_missing_grain",
+                "stage": "clue"
+              }
+            },
+            {
+              "id": "leave",
+              "label": "Leave the sack as it is.",
+              "to": "leave"
+            }
+          ],
+          "vote": true
+        },
+        {
+          "id": "noted",
+          "lines": [
+            {
+              "id": "sq_narrator_002",
+              "speaker": "narrator",
+              "text": "The market tally should show where the seed went.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold."
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "leave",
+          "lines": [
+            {
+              "id": "sq_narrator_003",
+              "speaker": "narrator",
+              "text": "The seed lies cold against the stones.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold."
+            }
+          ],
+          "end": true
+        }
+      ],
+      "requires": [
+        "sq_grain_asked"
+      ],
+      "unless": [
+        "sq_grain_done"
+      ]
+    },
+    {
+      "id": "sq_grain_tally",
+      "cast": [
+        "narrator"
+      ],
+      "start": "look",
+      "nodes": [
+        {
+          "id": "look",
+          "lines": [
+            {
+              "id": "sq_narrator_004",
+              "speaker": "narrator",
+              "text": "Town seed, entered as a private transfer. The countermark belongs to the Marrowby account.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold."
+            }
+          ],
+          "options": [
+            {
+              "id": "record",
+              "label": "Keep a careful copy of the entry.",
+              "to": "noted",
+              "requires": [
+                "sq_grain_clue"
+              ],
+              "unless": [
+                "sq_grain_done"
+              ],
+              "quest": {
+                "advance": "sq_missing_grain",
+                "stage": "tally"
+              }
+            },
+            {
+              "id": "leave",
+              "label": "Close the tally.",
+              "to": "leave"
+            }
+          ],
+          "vote": true
+        },
+        {
+          "id": "noted",
+          "lines": [
+            {
+              "id": "sq_narrator_005",
+              "speaker": "narrator",
+              "text": "Ink, date, and countermark. Enough to ask a direct question.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold."
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "leave",
+          "lines": [
+            {
+              "id": "sq_narrator_006",
+              "speaker": "narrator",
+              "text": "The ledger closes with a dry whisper.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold."
+            }
+          ],
+          "end": true
+        }
+      ],
+      "requires": [
+        "sq_grain_clue"
+      ],
+      "unless": [
+        "sq_grain_done"
+      ]
+    },
+    {
+      "id": "sq_forge_docks",
+      "cast": [
+        "narrator"
+      ],
+      "start": "look",
+      "nodes": [
+        {
+          "id": "look",
+          "lines": [
+            {
+              "id": "sq_narrator_007",
+              "speaker": "narrator",
+              "text": "Under an oiled cover, a store of charcoal has stayed dry. The dockmaster's mark releases one bundle for the town forge.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold."
+            }
+          ],
+          "options": [
+            {
+              "id": "fuel",
+              "label": "Take the allotted forge bundle.",
+              "to": "taken",
+              "requires": [
+                "sq_forge_asked"
+              ],
+              "unless": [
+                "sq_forge_fuel",
+                "sq_forge_done"
+              ],
+              "quest": {
+                "advance": "sq_cold_forge",
+                "stage": "fuel"
+              },
+              "sets": [
+                "sq_forge_honest_fuel"
+              ]
+            },
+            {
+              "id": "leave",
+              "label": "Leave the stores covered.",
+              "to": "leave"
+            }
+          ],
+          "vote": true
+        },
+        {
+          "id": "taken",
+          "lines": [
+            {
+              "id": "sq_narrator_008",
+              "speaker": "narrator",
+              "text": "Ordinary charcoal, carefully kept. Enough to put heat back into Tobin's work.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold."
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "leave",
+          "lines": [
+            {
+              "id": "sq_narrator_009",
+              "speaker": "narrator",
+              "text": "The cover settles over the dry stores.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold."
+            }
+          ],
+          "end": true
+        }
+      ],
+      "requires": [
+        "sq_forge_asked"
+      ],
+      "unless": [
+        "sq_forge_done"
+      ]
+    },
+    {
+      "id": "sq_whistle_grave",
+      "cast": [
+        "narrator"
+      ],
+      "start": "look",
+      "nodes": [
+        {
+          "id": "look",
+          "lines": [
+            {
+              "id": "sq_narrator_010",
+              "speaker": "narrator",
+              "text": "Annet's whistle rests beside her stone, its cord tucked out of the mud. There is no need to sound it.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold."
+            }
+          ],
+          "options": [
+            {
+              "id": "leave_whistle",
+              "label": "Leave it here, safe beside her stone.",
+              "to": "left",
+              "requires": [
+                "sq_whistle_asked"
+              ],
+              "unless": [
+                "sq_whistle_done"
+              ],
+              "quest": {
+                "complete": "sq_guards_whistle"
+              },
+              "sets": [
+                "sq_whistle_left"
+              ]
+            },
+            {
+              "id": "bring",
+              "label": "Carry it carefully to Pip.",
+              "to": "taken",
+              "requires": [
+                "sq_whistle_asked"
+              ],
+              "unless": [
+                "sq_whistle_found",
+                "sq_whistle_done"
+              ],
+              "quest": {
+                "advance": "sq_guards_whistle",
+                "stage": "found"
+              }
+            },
+            {
+              "id": "quiet",
+              "label": "Sit a moment, then leave.",
+              "to": "quiet"
+            }
+          ],
+          "vote": true
+        },
+        {
+          "id": "left",
+          "lines": [
+            {
+              "id": "sq_narrator_011",
+              "speaker": "narrator",
+              "text": "You straighten the cord and leave the whistle where Pip can visit it. A small kindness, without an audience.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold."
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "taken",
+          "lines": [
+            {
+              "id": "sq_narrator_012",
+              "speaker": "narrator",
+              "text": "You wrap the whistle for the walk back. Pip should decide what happens next.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold."
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "quiet",
+          "lines": [
+            {
+              "id": "sq_narrator_013",
+              "speaker": "narrator",
+              "text": "For a moment, even the river seems far away.",
+              "mood": "idle",
+              "direction": "Quiet, clear storyteller; intimate and grounded, leave room for the cold."
+            }
+          ],
+          "end": true
+        }
+      ],
+      "requires": [
+        "sq_whistle_asked"
+      ],
+      "unless": [
+        "sq_whistle_done"
+      ]
+    }
+  ]
+}

@@ -175,6 +175,7 @@
 #                    (a 216 ms fight start with them, 2 to 5 ms without, on an RTX 5080), so judge hitches and frame times only from a
 #                    run with ARCBOX_SHOTS=0 and TV_ARGS=--perf. REDLINE's phones take theirs either way (their folder is set here)
 #   TV_ENGINE_ARGS   extra Godot engine arguments, before the --, e.g. --position 160,100 to place the window; Godot counts from the left edge of the leftmost monitor, so x can't be negative
+#   TV_RENDERING_DRIVER Linux renderer (default vulkan); use opengl3 with --rendering-method gl_compatibility on CI machines without Vulkan surface support
 #   TV_REMATCH       1 (with ARCBOX_FULL=1) = after the race, the VIP phone starts a second one in the same room
 #                    and plays it to its first Reveal (shots in <out>/phones-rematch)
 #
@@ -189,6 +190,7 @@ SHOP=${ARCBOX_SHOP:-}
 STAGE=${ARCBOX_STAGE:-}
 CHAPTER=${ARCBOX_CHAPTER:-}
 CAMP=${ARCBOX_CAMP:-}
+QUESTS=${ARCBOX_QUESTS:-}
 SILENT=${ARCBOX_SILENT:-}
 BRANCH=${ARCBOX_BRANCH:-force}
 LINE_S=${ARCBOX_LINE:-2.5}
@@ -666,7 +668,7 @@ if [[ "$GAME" == "tactics" && "$CHAPTER" == "1" ]]; then
   fi
   set +e
   : > "$OUT/phones.log"
-  node "$ROOT/tools/tactics-playtest/bots.cjs" --server="$URL" --room="$CODE" --players="$PHONES" --chapter $([[ "$CAMP" == "1" ]] && echo --camp) --branch="$VOTE" \
+  node "$ROOT/tools/tactics-playtest/bots.cjs" --server="$URL" --room="$CODE" --players="$PHONES" --chapter $([[ "$QUESTS" == "1" ]] && echo --quests) $([[ "$CAMP" == "1" ]] && echo --camp) --branch="$VOTE" \
     --line="$LINE_S" ${ARCBOX_BOT_ARGS:---fight} $([[ "$SILENT" == "1" ]] && echo --silent) --hold="$HOLD" --timeout=1800 \
     --tv-log="$OUT/tv.log" > >(tee "$OUT/phones.log") 2>&1 &
   PHONES_PID=$!
@@ -711,6 +713,11 @@ if [[ "$GAME" == "tactics" && "$CHAPTER" == "1" ]]; then
   if [[ -n "$ERRORS" ]]; then
     log "errors in the TV log:"
     echo "$ERRORS"
+  fi
+  if [[ "$QUESTS" == "1" ]]; then
+    grep -q 'QUEST OK:' "$OUT/phones.log" || chapter_fail "grain quest completed and unpinned"
+    grep -q 'QUEST journal sq_missing_grain' "$OUT/tv.log" || chapter_fail "journal shown on TV"
+    grep -q 'QUEST tracker sq_missing_grain' "$OUT/tv.log" || chapter_fail "tracker shown on TV"
   fi
   CHECK_ARGS=()
   (( KILL_AT > 0 )) && CHECK_ARGS+=(--relaunched-at="$(after "$KILL_AT" '/^Godot Engine /')")

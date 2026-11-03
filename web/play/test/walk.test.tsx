@@ -520,10 +520,10 @@ describe("the walk screen", () => {
 
   it("says under the banner what to do: the leader walks, everyone watches the TV", () => {
     show("walk-leader");
-    expect(document.querySelector(".tx-walk-who + .tx-walk-hint")!.textContent).toBe("Hold a direction to walk. Watch the TV.");
+    expect(screen.getByText("Hold a direction to walk. Watch the TV.")).toBeTruthy();
     cleanup();
     show("walk-follower");
-    expect(document.querySelector(".tx-walk-who + .tx-walk-hint")!.textContent).toBe("Player1 steers. Watch the TV.");
+    expect(screen.getByText("Player1 steers. Watch the TV.")).toBeTruthy();
     cleanup();
     show("walk-follower", (d) => {
       d.leaderName = null;

@@ -30,7 +30,7 @@ public sealed record Arc(string Id, int Chapter, string Region, string Title, Im
 /// needs to play: every field it reads is there and of the right type, and each scene's graph holds together (see
 /// <see cref="ReadScene"/>). A pack with no lore, or whose lore lists no <c>arcs.json</c>, has no arcs and no scenes.
 /// </summary>
-public sealed class LoreBook
+public sealed partial class LoreBook
 {
     private readonly ImmutableSortedDictionary<string, Arc> _byRegion;
     private readonly ImmutableDictionary<string, ImmutableArray<SceneDef>> _scenesByBeat;
@@ -47,7 +47,7 @@ public sealed class LoreBook
         Arcs = arcs;
         Scenes = scenes;
         _byRegion = arcs.ToImmutableSortedDictionary(a => a.Region, a => a, StringComparer.Ordinal);
-        _scenesByBeat = scenes.Where(s => !s.Camp).GroupBy(s => s.Beat, StringComparer.Ordinal)
+        _scenesByBeat = scenes.Where(s => !s.Camp && s.Beat is not null).GroupBy(s => s.Beat!, StringComparer.Ordinal)
             .ToImmutableDictionary(g => g.Key, g => g.ToImmutableArray(), StringComparer.Ordinal);
         _characters = characters.ToImmutableDictionary(c => c.Id, c => c, StringComparer.Ordinal);
         _clipFiles = clipFiles;
@@ -55,6 +55,9 @@ public sealed class LoreBook
 
     /// <summary>A book with no arcs, for a game with no lore: no beat is ever available.</summary>
     public static LoreBook Empty { get; } = new([], [], [], ImmutableDictionary<string, string>.Empty, ImmutableDictionary<string, string>.Empty, []);
+
+    /// <summary>Town barks available for people interactions.</summary>
+    public BarkBook Barks { get; private init; } = BarkBook.Empty;
 
     /// <summary>Every arc, in the file's order.</summary>
     public ImmutableArray<Arc> Arcs { get; }
@@ -75,6 +78,9 @@ public sealed class LoreBook
 
     /// <summary>The scenes of <paramref name="beat"/>, in the order they play (lore §7, Order); empty for a beat with none.</summary>
     public ImmutableArray<SceneDef> ScenesOf(string beat) => _scenesByBeat.GetValueOrDefault(beat, []);
+
+    /// <summary>A scene by stable ID, including standalone interaction scenes.</summary>
+    public SceneDef? Scene(string id) => Scenes.FirstOrDefault(s => s.Id == id);
 
     /// <summary>The character with this id, or null: the narrator isn't one, and neither is an id the pack doesn't have.</summary>
     public LoreCharacter? Character(string id) => _characters.GetValueOrDefault(id);
@@ -157,13 +163,44 @@ public sealed class LoreBook
                     throw new InvalidDataException($"{scenePath}: the scene '{scene.Id}' is already in the pack.");
                 // A battle beat plays its lead-in, the fight, then its aftermath, so in the pack's order no lead-in can follow an aftermath.
                 if (!scene.Camp && scene.After)
-                    aftermath.Add(scene.Beat);
-                else if (!scene.Camp && aftermath.Contains(scene.Beat))
+                    aftermath.Add(scene.Beat!);
+                else if (!scene.Camp && scene.Beat is { } sceneBeat && aftermath.Contains(sceneBeat))
                     throw new InvalidDataException($"{scenePath}: the scene '{scene.Id}' is a lead-in of '{scene.Beat}', and comes after one of its aftermath scenes.");
                 scenes.Add(scene);
                 warnings.AddRange(Unshown(scene, choiceBeats).Select(w => $"{scenePath}: {w}"));
             }
         }
+
+        var conversations = ImmutableArray.CreateBuilder<ConversationDef>();
+        foreach (var file in files.Where(f => f.StartsWith("conversations/", StringComparison.Ordinal)))
+        {
+            var conversation = Read(Path.Combine(lore, file), root => ReadConversation(root, beats));
+            if (!seen.Add(conversation.Scene.Id)) throw new InvalidDataException($"{file}: duplicate scene '{conversation.Scene.Id}'.");
+            if (!characters.Any(c => c.Id == conversation.Character)) throw new InvalidDataException($"{file}: unknown character '{conversation.Character}'.");
+            if (conversations.Any(c => c.Character == conversation.Character)) throw new InvalidDataException($"{file}: duplicate conversation for '{conversation.Character}'.");
+            conversations.Add(conversation);
+            scenes.Add(conversation.Scene);
+        }
+        var quests = files.Contains("quests.json") ? Read(Path.Combine(lore, "quests.json"), root =>
+            List(root, "quests", "quests", required: true).Select(ReadQuest).ToImmutableArray()) : [];
+        if (quests.Select(q => q.Id).Distinct().Count() != quests.Length) throw new InvalidDataException("quests.json: duplicate quest ID.");
+        foreach (var action in scenes.SelectMany(s => s.Nodes).SelectMany(n => n.Options).Select(o => o.Quest).OfType<SceneQuest>())
+        {
+            var questId = action.Start ?? action.Advance ?? action.Complete;
+            var quest = quests.FirstOrDefault(q => q.Id == questId) ?? throw new InvalidDataException($"unknown quest '{questId}'.");
+            if (action.Advance is not null && !quest.Stages.Any(s => s.Id == action.Stage)) throw new InvalidDataException($"quest '{questId}' has no stage '{action.Stage}'.");
+        }
+        var mainFlags = arcs.SelectMany(a => a.Beats).SelectMany(b => b.Sets.Concat(b.Choices.SelectMany(c => c.Sets)))
+            .Concat(scenes.Where(s => s.Beat is not null && !s.Camp).SelectMany(s => s.Nodes)
+                .SelectMany(n => n.Sets.Concat(n.Options.SelectMany(o => o.Sets))))
+            .ToImmutableHashSet(StringComparer.Ordinal);
+        foreach (var hook in scenes.Where(s => s.Beat is null))
+            foreach (var flag in hook.Nodes.SelectMany(n => n.Sets.Concat(n.Options.SelectMany(o => o.Sets))))
+                if (mainFlags.Contains(flag))
+                    throw new InvalidDataException($"the hook scene '{hook.Id}' sets the main-story flag '{flag}'.");
+
+        var barks = BarkBook.Load(lore, files);
+        ValidateSideContent(basePack, quests, scenes, conversations, characters, mainFlags, barks);
 
         var regionsPath = Path.Combine(lore, "regions.json");
         var places = files.Contains("regions.json")
@@ -175,9 +212,9 @@ public sealed class LoreBook
         if (places.GroupBy(p => p.Id, StringComparer.Ordinal).FirstOrDefault(g => g.Count() > 1) is { } named)
             throw new InvalidDataException($"{regionsPath}: the place '{named.Key}' is listed twice.");
 
-        var lines = scenes.SelectMany(s => s.Lines).Select(l => l.Id).ToImmutableHashSet(StringComparer.Ordinal);
+        var lines = scenes.SelectMany(s => s.Lines).Select(l => l.Id).Concat(barks.LineIds).ToImmutableHashSet(StringComparer.Ordinal);
         return new LoreBook(arcs, scenes.ToImmutable(), characters, Clips(Path.Combine(lore, "audio"), lines),
-            places.ToImmutableDictionary(p => p.Id, p => p.Name, StringComparer.Ordinal), warnings.ToImmutable());
+            places.ToImmutableDictionary(p => p.Id, p => p.Name, StringComparer.Ordinal), warnings.ToImmutable()) { Barks = barks, Conversations = conversations.ToImmutable(), Quests = quests };
     }
 
     /// <summary>What of <paramref name="scene"/> can never show (<see cref="Warnings"/>), node by node.</summary>
@@ -283,8 +320,9 @@ public sealed class LoreBook
     {
         var id = Required(e, "id", "a scene");
         var where = $"the scene '{id}'";
-        var beat = Required(e, "beat", where);
-        if (!beats.TryGetValue(beat, out var kind))
+        var beat = Optional(e, "beat", where);
+        var kind = beat is not null ? beats.GetValueOrDefault(beat) : null;
+        if (beat is not null && kind is null)
             throw new BadLore($"{where} plays the beat '{beat}', which no arc has.");
         if (Field(e, "camp", where).ValueKind == JsonValueKind.Null)
             throw new BadLore($"{where} has a 'camp' that isn't true or false.");
@@ -348,7 +386,7 @@ public sealed class LoreBook
         if (to is null && check is null)
             throw new BadLore($"{where} needs 'to' or a 'check'.");
         return new(id, Required(e, "label", where), to, Optional(e, "choice", where), Strings(e, "sets", where), Strings(e, "requires", where),
-            tags, check, Gold(e, where));
+            tags, check, Gold(e, where), QuestAction(e, where), Optional(e, "give", where), Optional(e, "service", where), Strings(e, "unless", where));
     }
 
     private static JsonElement Field(JsonElement e, string name, string where)

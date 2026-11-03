@@ -3,11 +3,17 @@ using Tactics.WorldTools;
 
 namespace Tactics.World.Editor;
 
-/// <summary>Someone the TV draws, under <c>People</c>, on the tile they stand on. They're dressing: they block nobody, and the server never hears of them.</summary>
+/// <summary>Someone the TV draws, under <c>People</c>, on the tile they stand on. Their identity and gates support server interactions; they never block paths.</summary>
 [Tool]
 [GlobalClass]
 public partial class PersonMarker : TileMarker
 {
+    [Export] public string Id { get; set; } = "";
+    [Export] public string Character { get; set; } = "";
+    [Export] public string Requires { get; set; } = "";
+    [Export] public string Unless { get; set; } = "";
+    [Export] public string Bark { get; set; } = "";
+    [Export] public string Voice { get; set; } = "";
     private static readonly Color Ink = new(0.45f, 1f, 0.6f);
 
     private string _preset = "";

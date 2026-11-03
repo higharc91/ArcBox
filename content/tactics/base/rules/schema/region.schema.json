@@ -48,7 +48,7 @@
           "tiles": {
             "type": "string",
             "contentEncoding": "base64",
-            "description": "32 × 32 × 3 bytes, row-major: height (0 to 9), material index, flags (water 1, difficult 2, impassable 4, hazard 8, deep 16)."
+            "description": "32 \u00d7 32 \u00d7 3 bytes, row-major: height (0 to 9), material index, flags (water 1, difficult 2, impassable 4, hazard 8, deep 16)."
           }
         },
         "required": [
@@ -58,7 +58,7 @@
         ],
         "additionalProperties": false
       },
-      "description": "32 × 32 tile chunks. x and y count chunks, not tiles, and each may appear once. A chunk that isn't listed is void: impassable. Unpainted tiles in a listed chunk must be written Impassable, because a tile of zero bytes is walkable ground at height 0."
+      "description": "32 \u00d7 32 tile chunks. x and y count chunks, not tiles, and each may appear once. A chunk that isn't listed is void: impassable. Unpainted tiles in a listed chunk must be written Impassable, because a tile of zero bytes is walkable ground at height 0."
     },
     "stamps": {
       "type": "array",
@@ -210,6 +210,74 @@
         "additionalProperties": false
       },
       "description": "Where the region meets its neighbours."
+    },
+    "people": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "preset": {
+            "type": "string"
+          },
+          "at": {
+            "$ref": "common.schema.json#/$defs/tile"
+          },
+          "face": {
+            "type": "string",
+            "enum": [
+              "se",
+              "sw",
+              "nw",
+              "ne"
+            ]
+          },
+          "walk": {
+            "type": "array",
+            "maxItems": 12,
+            "items": {
+              "$ref": "common.schema.json#/$defs/tile"
+            }
+          },
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "character": {
+            "type": "string",
+            "minLength": 1
+          },
+          "bark": {
+            "type": "string",
+            "minLength": 1
+          },
+          "voice": {
+            "type": "string",
+            "minLength": 1
+          },
+          "requires": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "unless": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "preset",
+          "at",
+          "face"
+        ],
+        "additionalProperties": false
+      }
     }
   },
   "required": [

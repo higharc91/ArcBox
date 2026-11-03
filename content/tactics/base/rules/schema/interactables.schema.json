@@ -300,6 +300,10 @@
           "blocks": {
             "type": "boolean",
             "description": "Whether it stands in the way; the kind's when left out. Not for passages or floor traps."
+          },
+          "scene": {
+            "type": "string",
+            "description": "Optional standalone lore scene hook, used while its flag gates hold."
           }
         },
         "required": [

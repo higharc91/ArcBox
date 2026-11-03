@@ -31,6 +31,37 @@ public sealed record UnitAnim(ImmutableArray<int> Frames, double Fps, bool Loop)
 public sealed record UnitSprite(string Path, int Width, int Height, int AnchorX, int AnchorY, int HeadTop, UnitAnim Idle, UnitAnim Down, int EffectShift,
     ImmutableDictionary<string, UnitAnim> Anims)
 {
+    /// <summary>Texture density relative to board pixels; padding is excluded from the footprint.</summary>
+    public float PixelScale { get; init; } = 1;
+    /// <summary>Self-lit material such as a will-o'-wisp; scene lighting does not dim its core.</summary>
+    public bool Unlit { get; init; }
+    public ArtRect? PortraitSource { get; init; }
+    private static readonly string[] Compass = ["south", "south-west", "west", "north-west", "north", "north-east", "east", "south-east"];
+    /// <summary>Authored compass rows. Empty keeps the original two-row mirrored sheets.</summary>
+    public ImmutableArray<string> Directions { get; init; } = [];
+
+    /// <summary>Select a real facing from a tile-space vector; old sheets retain their mirrored quadrants.</summary>
+    public (int Row, bool Mirror) Looking(float du, float dv)
+    {
+        var across = du - dv;
+        var down = du + dv;
+        if (Directions.IsEmpty)
+            return down >= 0 ? (0, across < 0) : (1, across > 0);
+        if (du == 0 && dv == 0)
+            return (Directions.IndexOf("south"), false);
+        // Isometric map pixels are 32 across for each 16 down.
+        var angle = MathF.Atan2(across, down * 0.5f);
+        var octant = ((int)MathF.Round(-angle / (MathF.PI / 4)) % 8 + 8) % 8;
+        return (Directions.IndexOf(Compass[octant]), false);
+    }
+
+    public int Columns { get; init; }
+    public int RowsPerDirection { get; init; } = 1;
+    public float FootprintWidth { get; init; }
+    public float FootprintHeight { get; init; }
+    public float WorldWidth => Width * PixelScale;
+    public float WorldHeight => Height * PixelScale;
+    public float HeadLift => (AnchorY - HeadTop) * PixelScale;
     private const string Special = "special";
     private const string Attack = "attack";
     private const string Cast = "cast";
@@ -55,7 +86,9 @@ public sealed record UnitSprite(string Path, int Width, int Height, int AnchorX,
     }
 
     /// <summary>A frame's place in the sheet.</summary>
-    public ArtRect Source(int column, int row) => new(column * Width, row * Height, Width, Height);
+    public ArtRect Source(int column, int row) => Columns > 0
+        ? new(column % Columns * Width, (row * RowsPerDirection + column / Columns) * Height, Width, Height)
+        : new(column * Width, row * Height, Width, Height);
 }
 
 /// <summary>An emote: a row of emotes/manifest.json's sheet that plays through once and then loops its tail.</summary>
@@ -163,6 +196,9 @@ public sealed class UnitArt
     private readonly Dictionary<string, int> _heads = new(StringComparer.Ordinal);
     private readonly Dictionary<string, int> _headOffsets = new(StringComparer.Ordinal);
     private ManifestSet _characters = null!;
+    private ManifestSet? _tactical;
+    private readonly HashSet<string> _tacticalPresets = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, int> _tacticalHeads = new(StringComparer.Ordinal);
     private ManifestSet _beasts = null!;
     private ManifestSet _bosses = null!;
     private BarArt _partyBar = null!;
@@ -202,6 +238,15 @@ public sealed class UnitArt
         using var icons = Parse(packRoot, "icons");
         using var ui = Parse(packRoot, "ui");
         art.ReadCharacters(characters.RootElement);
+        var tacticalPath = Path.Combine(packRoot, "tactical", "manifest.json");
+        if (File.Exists(tacticalPath))
+        {
+            using var tactical = JsonDocument.Parse(File.ReadAllText(tacticalPath));
+            art._tactical = new ManifestSet("tactical", tactical.RootElement);
+            art._tacticalPresets.UnionWith(tactical.RootElement.GetProperty("presets").EnumerateArray().Select(p => p.GetString()!));
+            foreach (var head in tactical.RootElement.GetProperty("heads").EnumerateObject())
+                art._tacticalHeads[head.Name] = head.Value.GetInt32();
+        }
         art._beasts = new ManifestSet("beasts", beasts.RootElement);
         art._bosses = new ManifestSet("bosses", bosses.RootElement);
         art.ReadStatus(status.RootElement, icons.RootElement);
@@ -209,6 +254,13 @@ public sealed class UnitArt
         art.ReadCrown(packRoot);
         foreach (var set in new[] { art._beasts, art._bosses })
             art.ReadMonsters(set, set.Name == "beasts" ? beasts.RootElement.GetProperty("beasts") : bosses.RootElement.GetProperty("monsters"));
+        var bestiaryPath = Path.Combine(packRoot, "bestiary", "manifest.json");
+        if (File.Exists(bestiaryPath))
+        {
+            using var bestiary = JsonDocument.Parse(File.ReadAllText(bestiaryPath));
+            art.ReadMonsters(new ManifestSet("bestiary", bestiary.RootElement), bestiary.RootElement.GetProperty("creatures"));
+        }
+        art.ReadCreatureSprites(packRoot);
         return art;
     }
 
@@ -241,7 +293,7 @@ public sealed class UnitArt
         if (parts.Length < 2)
             return null;
         if (parts[0] == CharacterSet)
-            return _presets.Contains(parts[1]) ? _sprites[key] = Character(parts[1]) : null;
+            return _presets.Contains(parts[1]) || _tacticalPresets.Contains(parts[1]) ? _sprites[key] = Character(parts[1]) : null;
         return _sprites.GetValueOrDefault($"{parts[0]}.{parts[1]}");   // the first variant
     }
 
@@ -316,6 +368,59 @@ public sealed class UnitArt
         }
     }
 
+    private void ReadCreatureSprites(string root)
+    {
+        var path = Path.Combine(root, "creatures", "manifest.json");
+        if (!File.Exists(path))
+            return;
+        using var doc = JsonDocument.Parse(File.ReadAllText(path));
+        if (doc.RootElement.TryGetProperty("legacyOverrides", out var legacy))
+        {
+            foreach (var item in legacy.EnumerateObject())
+            {
+                if (!_sprites.TryGetValue(item.Name, out var original))
+                    continue;
+                var e = item.Value;
+                var scale = e.GetProperty("pixelScale").GetSingle();
+                var head = e.GetProperty("headTop").GetInt32();
+                _sprites[item.Name] = original with
+                {
+                    PixelScale = scale, HeadTop = head,
+                    FootprintWidth = e.GetProperty("footprintWidth").GetSingle(),
+                    FootprintHeight = (original.AnchorY - head) * scale,
+                    EffectShift = (int)MathF.Round(29 - (original.AnchorY - head) * scale),
+                };
+            }
+        }
+        foreach (var entry in doc.RootElement.GetProperty("sprites").EnumerateObject())
+        {
+            var e = entry.Value;
+            var frame = e.GetProperty("frame");
+            var anchor = frame.GetProperty("anchor");
+            var anims = e.GetProperty("anims");
+            var scale = e.GetProperty("pixelScale").GetSingle();
+            var head = e.GetProperty("headTop").GetInt32();
+            var ay = anchor[1].GetInt32();
+            var sprite = new UnitSprite("creatures/" + e.GetProperty("file").GetString(),
+                frame.GetProperty("width").GetInt32(), frame.GetProperty("height").GetInt32(),
+                anchor[0].GetInt32(), ay, head, Anim(anims, "idle"), Anim(anims, "down"),
+                (int)MathF.Round(29 - (ay - head) * scale),
+                anims.EnumerateObject().ToImmutableDictionary(a => a.Name, a => Anim(anims, a.Name), StringComparer.Ordinal))
+            {
+                PixelScale = scale,
+                Unlit = e.TryGetProperty("unlit", out var unlit) && unlit.GetBoolean(),
+                PortraitSource = e.TryGetProperty("portrait", out var portrait) ? Rect(portrait) : null,
+                Columns = e.GetProperty("columns").GetInt32(),
+                RowsPerDirection = e.GetProperty("rowsPerDirection").GetInt32(),
+                Directions = [.. e.GetProperty("directions").EnumerateArray().Select(d => d.GetString()!)],
+                FootprintWidth = e.GetProperty("footprintWidth").GetSingle(),
+                FootprintHeight = e.GetProperty("footprintHeight").GetSingle(),
+            };
+            foreach (var key in e.GetProperty("keys").EnumerateArray())
+                _sprites[key.GetString()!] = sprite;
+        }
+    }
+
     private void ReadStatus(JsonElement status, JsonElement icons)
     {
         foreach (var offset in status.GetProperty("headOffset").EnumerateObject())
@@ -362,6 +467,32 @@ public sealed class UnitArt
 
     private UnitSprite Character(string preset)
     {
+        var tacticalKey = preset.StartsWith("class_", StringComparison.Ordinal) ? "human_" + preset[6..] : preset;
+        if (_tactical is not null && !_tacticalPresets.Contains(tacticalKey) && _presets.Contains(preset))
+        {
+            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(_root, CharacterSet, "presets", $"{preset}.json")));
+            var data = recipe.RootElement;
+            if (data.TryGetProperty("race", out var race) && race.ValueKind == JsonValueKind.String &&
+                data.TryGetProperty("class", out var cls) && cls.ValueKind == JsonValueKind.String)
+                tacticalKey = $"{race.GetString()}_{cls.GetString()}";
+        }
+        if (_tactical is { } tactical && _tacticalPresets.Contains(tacticalKey))
+        {
+            var root = tactical.Root;
+            var columns = root.GetProperty("columns").GetInt32();
+            var count = root.GetProperty("framesPerDirection").GetInt32();
+            var headTop = _tacticalHeads[tacticalKey];
+            var pixelScale = root.GetProperty("pixelScale").GetSingle();
+            var effectShift = (int)MathF.Round(29 - (tactical.AnchorY - headTop) * pixelScale);
+            return new UnitSprite($"tactical/{tacticalKey}.png", tactical.Width, tactical.Height, tactical.AnchorX, tactical.AnchorY,
+                headTop, tactical.Idle, tactical.Down, effectShift, tactical.Anims)
+            {
+                PixelScale = pixelScale, Columns = columns,
+                RowsPerDirection = (count + columns - 1) / columns,
+                FootprintWidth = root.GetProperty("footprintWidth").GetSingle(),
+                FootprintHeight = 40,
+            };
+        }
         var build = BuildOf(preset);
         return new UnitSprite(SheetOf(preset), _characters.Width, _characters.Height, _characters.AnchorX, _characters.AnchorY,
             _heads.GetValueOrDefault(build), _characters.Idle, _characters.Down, _headOffsets.GetValueOrDefault(build), _characters.Anims);

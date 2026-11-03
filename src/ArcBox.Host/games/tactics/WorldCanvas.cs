@@ -537,7 +537,7 @@ internal sealed partial class WorldCanvas : CanvasLayer
 
         _back.Color = Plan.Lighting.Ambient == BoardLighting.Dusk ? DuskSky : Dark;
         var overZ = Plan.Blocks.Max(b => b.Z) * BlockDepth + BlockDepth - 1;
-        var fauna = new WorldFauna(_painter.Root, Ground.Map, new Color(Plan.Lighting.Ambient.R, Plan.Lighting.Ambient.G, Plan.Lighting.Ambient.B))
+        var fauna = new WorldFauna(_painter.Root, Ground.Map, Plan.Lighting)
         {
             ZIndex = 0,
         };

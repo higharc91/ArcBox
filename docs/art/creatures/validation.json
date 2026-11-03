@@ -1,0 +1,9 @@
+{
+  "presentation_tests": { "passed": 2378, "failed": 0 },
+  "game_tests": { "passed": 525, "failed": 0 },
+  "host_build": { "warnings": 0, "errors": 0, "sdk": ".NET 10" },
+  "source_rebuild": { "runtime_atlases": 40, "byte_mismatches": 0 },
+  "browser_review": { "families_loaded": 21, "javascript_required": false, "external_requests": 0 },
+  "godot_review": { "renderer": "software OpenGL via Xvfb", "battle": true, "overworld_species": 7, "hardware_performance_claimed": false },
+  "known_scope": "Eight structurally distinct special variants retain original art. Directionless wisp reuses its compass motion. Special attacks share basic attacks; hurt is a rest pose. Duck motion is authored buoyancy."
+}

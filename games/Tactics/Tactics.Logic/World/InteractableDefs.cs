@@ -147,7 +147,8 @@ public sealed record InteractableDef(string Id, string Kind, [property: JsonRequ
     string? Art = null, ImmutableArray<string> Text = default, ImmutableArray<string> Requires = default, ImmutableArray<string> Unless = default,
     ImmutableArray<string> Sets = default, LockDef? Lock = null, TrapDef? Trap = null, HiddenDef? Hidden = null,
     ImmutableArray<LootDef> Loot = default, ImmutableArray<string> Targets = default, bool Open = false, bool? Blocks = null,
-    ImmutableArray<string> Reveals = default, int? Range = null);
+    ImmutableArray<string> Reveals = default, int? Range = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Scene = null);
 
 /// <summary>
 /// How a thing to interact with is, as the campaign keeps it (design §2.3). Every field only moves one way, except a lever's

@@ -1,0 +1,160 @@
+{
+  "type": "object",
+  "properties": {
+    "quests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "name": {
+            "$ref": "common.schema.json#/$defs/text"
+          },
+          "giver": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "region": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "stages": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "common.schema.json#/$defs/id"
+                },
+                "objective": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 40
+                },
+                "log": {
+                  "$ref": "common.schema.json#/$defs/text"
+                },
+                "when": {
+                  "$ref": "common.schema.json#/$defs/flags"
+                },
+                "target": {
+                  "type": "object",
+                  "properties": {
+                    "person": {
+                      "$ref": "common.schema.json#/$defs/id"
+                    },
+                    "thing": {
+                      "$ref": "common.schema.json#/$defs/id"
+                    },
+                    "tile": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      },
+                      "minItems": 2,
+                      "maxItems": 2
+                    }
+                  },
+                  "required": [],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "id",
+                "objective",
+                "log",
+                "when"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1
+          },
+          "done": {
+            "type": "object",
+            "properties": {
+              "when": {
+                "$ref": "common.schema.json#/$defs/flags"
+              },
+              "log": {
+                "$ref": "common.schema.json#/$defs/text"
+              }
+            },
+            "required": [
+              "when",
+              "log"
+            ],
+            "additionalProperties": false
+          },
+          "failed": {
+            "type": "object",
+            "properties": {
+              "when": {
+                "$ref": "common.schema.json#/$defs/flags"
+              },
+              "log": {
+                "$ref": "common.schema.json#/$defs/text"
+              }
+            },
+            "required": [
+              "when",
+              "log"
+            ],
+            "additionalProperties": false
+          },
+          "rewards": {
+            "type": "object",
+            "properties": {
+              "gold": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "xp": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "item": {
+                      "$ref": "common.schema.json#/$defs/id"
+                    },
+                    "count": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "item",
+                    "count"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "sets": {
+                "$ref": "common.schema.json#/$defs/flags"
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "giver",
+          "region",
+          "stages",
+          "done",
+          "rewards"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "quests"
+  ],
+  "additionalProperties": false
+}

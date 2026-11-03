@@ -1,0 +1,763 @@
+{
+  "families": [
+    {
+      "id": "mule",
+      "source_prop": "pack_mule",
+      "source_variant": "grey",
+      "source_status": "present in latest fetched props manifest",
+      "target_native_frame": [
+        32,
+        30
+      ],
+      "target_visible_dimensions_px": {
+        "back": 18,
+        "ears": 26
+      },
+      "notes": "Pack mule with grain panniers; preserve harness and bags on every view and gait.",
+      "status": "queued",
+      "canvas": [
+        124,
+        124
+      ],
+      "anchor": [
+        62,
+        96
+      ],
+      "source_file": "mule/native.png",
+      "translation": [
+        12,
+        16
+      ],
+      "pixel_scale": 0.5,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "input_canvas": [
+        92,
+        92
+      ],
+      "palette": [
+        "#020001",
+        "#776657",
+        "#6e5d4e",
+        "#030102",
+        "#4d413d",
+        "#8b6e52",
+        "#615349",
+        "#ad8e68",
+        "#a38460",
+        "#987c5c",
+        "#cfbfad",
+        "#856649",
+        "#322927",
+        "#413735",
+        "#5d412e",
+        "#684a33",
+        "#37251c",
+        "#785a3f",
+        "#b99c6f",
+        "#c3af9a",
+        "#050304",
+        "#2b1d18",
+        "#4c382d",
+        "#1e1411",
+        "#a9998c"
+      ],
+      "pose_translations": {
+        "south": [
+          16,
+          16
+        ],
+        "south-west": [
+          16,
+          16
+        ],
+        "west": [
+          16,
+          19
+        ],
+        "north-west": [
+          16,
+          16
+        ],
+        "north": [
+          16,
+          14
+        ],
+        "north-east": [
+          16,
+          16
+        ],
+        "east": [
+          16,
+          19
+        ],
+        "south-east": [
+          16,
+          16
+        ]
+      }
+    },
+    {
+      "id": "goat",
+      "source_prop": "farm_goat",
+      "source_variant": "rust",
+      "source_status": "present in latest fetched props manifest",
+      "target_native_frame": [
+        20,
+        18
+      ],
+      "target_visible_dimensions_px": {
+        "back": 10,
+        "horns": 15
+      },
+      "notes": "Brown-and-white farm goat; horns fixed to skull and four cloven hooves.",
+      "status": "queued",
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "source_file": "goat/full-body.png",
+      "translation": [
+        12,
+        21
+      ],
+      "pixel_scale": 0.5,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "input_canvas": [
+        72,
+        72
+      ],
+      "palette": [
+        "#040000",
+        "#e0d1bf",
+        "#9d7d65",
+        "#826d5d",
+        "#734c3a",
+        "#593d30",
+        "#040101",
+        "#493126",
+        "#92684e",
+        "#7d5e4a",
+        "#37241c",
+        "#a28c78",
+        "#cdb49e",
+        "#b79f8c",
+        "#d9c7b3",
+        "#070100",
+        "#080402",
+        "#a78a72",
+        "#694736",
+        "#765541"
+      ],
+      "pose_translations": {
+        "south": [
+          16,
+          16
+        ],
+        "south-west": [
+          16,
+          16
+        ],
+        "west": [
+          16,
+          16
+        ],
+        "north-west": [
+          16,
+          16
+        ],
+        "north": [
+          16,
+          16
+        ],
+        "north-east": [
+          16,
+          16
+        ],
+        "east": [
+          16,
+          16
+        ],
+        "south-east": [
+          16,
+          16
+        ]
+      }
+    },
+    {
+      "id": "fox",
+      "source_prop": "red_fox",
+      "source_variant": "russet",
+      "source_status": "present in latest fetched props manifest",
+      "target_native_frame": [
+        20,
+        12
+      ],
+      "target_visible_dimensions_px": {
+        "back": 7,
+        "ears": 10
+      },
+      "notes": "Red fox with white-tipped bushy tail; light quadrupedal gait.",
+      "status": "queued",
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "source_file": "fox/base/frame-000.png",
+      "translation": [
+        12,
+        40
+      ],
+      "pixel_scale": 0.5,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "input_canvas": [
+        88,
+        88
+      ],
+      "palette": [
+        "#230c13",
+        "#d6682a",
+        "#db6a29",
+        "#f7d4bb",
+        "#cd652e",
+        "#efd4c1",
+        "#d26b31",
+        "#21070c",
+        "#4f2f25",
+        "#eaccb7",
+        "#c26032",
+        "#280e15",
+        "#9d4426",
+        "#ce6832",
+        "#190509",
+        "#52352a",
+        "#27090f",
+        "#f5ccaf",
+        "#c66636",
+        "#b9663c",
+        "#bb572c",
+        "#2d0d11",
+        "#f0dbcb",
+        "#311217",
+        "#ddaf92",
+        "#cc6c39",
+        "#7c280f",
+        "#3b1d1c",
+        "#a05336",
+        "#ae5434",
+        "#c77b51",
+        "#ffbb87"
+      ],
+      "pose_translations": {
+        "south": [
+          16,
+          16
+        ],
+        "south-west": [
+          16,
+          16
+        ],
+        "west": [
+          16,
+          21
+        ],
+        "north-west": [
+          16,
+          19
+        ],
+        "north": [
+          16,
+          18
+        ],
+        "north-east": [
+          16,
+          19
+        ],
+        "east": [
+          16,
+          21
+        ],
+        "south-east": [
+          16,
+          16
+        ]
+      }
+    },
+    {
+      "id": "duck",
+      "source_prop": "river_duck",
+      "source_variant": "mallard",
+      "source_status": "present in latest fetched props manifest",
+      "target_native_frame": [
+        14,
+        10
+      ],
+      "target_visible_dimensions_px": {
+        "height": 7
+      },
+      "notes": "Mallard duck; swimming paddle cycle and land waddle, stable waterline for swimming.",
+      "status": "queued",
+      "canvas": [
+        104,
+        104
+      ],
+      "anchor": [
+        52,
+        76
+      ],
+      "source_file": "duck/swim-front.png",
+      "translation": [
+        12,
+        30
+      ],
+      "pixel_scale": 0.5,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "input_canvas": [
+        72,
+        72
+      ],
+      "palette": [
+        "#110e14",
+        "#277848",
+        "#0b090e",
+        "#732427",
+        "#4a1a23",
+        "#1c6744",
+        "#b09579",
+        "#7a6155",
+        "#9e3929",
+        "#836c5e",
+        "#5c9c39",
+        "#72594e",
+        "#1d131a",
+        "#33161e",
+        "#162a2a",
+        "#fcb649",
+        "#13131a",
+        "#aa422a",
+        "#f28c27",
+        "#f8f1e5",
+        "#180d16",
+        "#b38765",
+        "#ae8b71",
+        "#174d3d",
+        "#4c1e25",
+        "#406749",
+        "#773e38",
+        "#49403a",
+        "#6c352e",
+        "#3c191d",
+        "#251116",
+        "#13090e"
+      ],
+      "pose_translations": {
+        "south": [
+          36,
+          55
+        ],
+        "south-west": [
+          36,
+          59
+        ],
+        "west": [
+          36,
+          59
+        ],
+        "north-west": [
+          36,
+          54
+        ],
+        "north": [
+          36,
+          54
+        ],
+        "north-east": [
+          36,
+          55
+        ],
+        "east": [
+          36,
+          58
+        ],
+        "south-east": [
+          36,
+          58
+        ]
+      }
+    },
+    {
+      "id": "crow",
+      "source_prop": "field_crow",
+      "source_variant": "charcoal",
+      "source_status": "present in latest fetched props manifest",
+      "target_native_frame": [
+        10,
+        8
+      ],
+      "target_visible_dimensions_px": {
+        "height": 6
+      },
+      "notes": "Small charcoal crow; hop, peck and flap loops, coherent folded and extended wings.",
+      "status": "queued",
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "source_file": "crow/base/frame-000.png",
+      "translation": [
+        12,
+        27
+      ],
+      "pixel_scale": 0.5,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "input_canvas": [
+        64,
+        64
+      ],
+      "palette": [
+        "#050610",
+        "#22293a",
+        "#343d4e",
+        "#394152",
+        "#04050a",
+        "#2b3344",
+        "#3c4455",
+        "#212637",
+        "#3d4858",
+        "#090a11",
+        "#232a3c",
+        "#404859",
+        "#14192b",
+        "#434d5e",
+        "#0f1324",
+        "#020309",
+        "#3a4555",
+        "#32394a",
+        "#1b2132",
+        "#1e2537",
+        "#0d0f1c",
+        "#080b1b",
+        "#293042",
+        "#020311",
+        "#191c2b",
+        "#090e21",
+        "#282d3d",
+        "#2f3749",
+        "#555b76",
+        "#a3a4aa",
+        "#d9dbda"
+      ],
+      "pose_translations": {
+        "south": [
+          16,
+          16
+        ],
+        "south-west": [
+          16,
+          17
+        ],
+        "west": [
+          16,
+          20
+        ],
+        "north-west": [
+          36,
+          49
+        ],
+        "north": [
+          36,
+          49
+        ],
+        "north-east": [
+          36,
+          49
+        ],
+        "east": [
+          16,
+          20
+        ],
+        "south-east": [
+          16,
+          17
+        ]
+      }
+    },
+    {
+      "id": "dog",
+      "source_prop": null,
+      "source_variant": null,
+      "source_status": "requested; documented in art spec but not yet in fetched props manifest",
+      "target_native_frame": [
+        20,
+        14
+      ],
+      "target_visible_dimensions_px": {
+        "back": 9,
+        "ears": 12
+      },
+      "notes": "Village farm dog, distinct from the wolf and giant warg; exactly four legs.",
+      "status": "queued",
+      "canvas": [
+        120,
+        120
+      ],
+      "anchor": [
+        60,
+        92
+      ],
+      "source_file": "dog/base/frame-000.png",
+      "translation": [
+        12,
+        37
+      ],
+      "pixel_scale": 0.5,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "input_canvas": [
+        88,
+        88
+      ],
+      "palette": [
+        "#0a0506",
+        "#0b0808",
+        "#45312d",
+        "#886041",
+        "#977353",
+        "#593e32",
+        "#6f513f",
+        "#64483a",
+        "#7d593e",
+        "#513931",
+        "#b98454",
+        "#11090a",
+        "#6a4732",
+        "#070203",
+        "#724d35",
+        "#4e342a",
+        "#af8053",
+        "#ba8c5e",
+        "#a3744d",
+        "#976c48",
+        "#956641",
+        "#64422f",
+        "#392726",
+        "#a17955",
+        "#402a25",
+        "#8b6b52",
+        "#301d1a",
+        "#5c463d",
+        "#c69159",
+        "#1e0d0e",
+        "#e9ddce",
+        "#d4a270"
+      ],
+      "pose_translations": {
+        "south": [
+          16,
+          16
+        ],
+        "south-west": [
+          16,
+          20
+        ],
+        "west": [
+          16,
+          28
+        ],
+        "north-west": [
+          16,
+          33
+        ],
+        "north": [
+          16,
+          35
+        ],
+        "north-east": [
+          16,
+          33
+        ],
+        "east": [
+          16,
+          28
+        ],
+        "south-east": [
+          16,
+          20
+        ]
+      }
+    },
+    {
+      "id": "sheep",
+      "source_prop": null,
+      "source_variant": null,
+      "source_status": "requested; documented in art spec but not yet in fetched props manifest",
+      "target_native_frame": [
+        20,
+        16
+      ],
+      "target_visible_dimensions_px": {
+        "back": 10
+      },
+      "notes": "Farm sheep with compact wool silhouette; four short cloven-hoofed legs.",
+      "status": "queued",
+      "canvas": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        68
+      ],
+      "source_file": "sheep/native.png",
+      "translation": [
+        12,
+        15
+      ],
+      "pixel_scale": 0.5,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "input_canvas": [
+        64,
+        64
+      ],
+      "palette": [
+        "#e8d0a7",
+        "#040302",
+        "#c3a785",
+        "#c9aa85",
+        "#e0c69c",
+        "#ead4aa",
+        "#d3b88f",
+        "#be9e7b",
+        "#3a2e2b",
+        "#574440",
+        "#010101",
+        "#d5c09e",
+        "#5f4f4a",
+        "#b28a6d",
+        "#836755",
+        "#947c65",
+        "#897059",
+        "#716154",
+        "#eadbc1"
+      ],
+      "pose_translations": {
+        "south": [
+          16,
+          16
+        ],
+        "south-west": [
+          16,
+          16
+        ],
+        "west": [
+          16,
+          18
+        ],
+        "north-west": [
+          16,
+          15
+        ],
+        "north": [
+          16,
+          15
+        ],
+        "north-east": [
+          16,
+          15
+        ],
+        "east": [
+          16,
+          18
+        ],
+        "south-east": [
+          16,
+          16
+        ]
+      }
+    }
+  ],
+  "directions": [
+    "south",
+    "south-west",
+    "west",
+    "north-west",
+    "north",
+    "north-east",
+    "east",
+    "south-east"
+  ],
+  "pixel_scale": 0.5
+}

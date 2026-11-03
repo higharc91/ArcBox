@@ -1,0 +1,455 @@
+{
+  "policy": "Fixed primary-variant game palette per creature across every frame; no dithering, no frame recentering, native dimensions preserved.",
+  "creatures": [
+    {
+      "id": "wolf",
+      "palette": [
+        "#8a8f9c",
+        "#272433",
+        "#56586b",
+        "#b5b8c2",
+        "#454459",
+        "#9092a1",
+        "#5c5a6f",
+        "#727386",
+        "#6d7181",
+        "#302d3c",
+        "#a8aeba",
+        "#443838",
+        "#cbcfd8",
+        "#bc7729"
+      ],
+      "alpha": "binary",
+      "seams": [
+        {
+          "animation": "idle",
+          "returned_closing_pixels_different": 44,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        },
+        {
+          "animation": "move",
+          "returned_closing_pixels_different": 92,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        }
+      ]
+    },
+    {
+      "id": "boar",
+      "palette": [
+        "#241319",
+        "#6a4a36",
+        "#583629",
+        "#927355",
+        "#3d1918",
+        "#49251f",
+        "#bba991",
+        "#a28a76",
+        "#c2b39a",
+        "#443536",
+        "#d9cbb0",
+        "#ffa47b",
+        "#e8dfc3",
+        "#443838",
+        "#f1e9cf"
+      ],
+      "alpha": "binary",
+      "seams": [
+        {
+          "animation": "idle",
+          "returned_closing_pixels_different": 23,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        },
+        {
+          "animation": "move",
+          "returned_closing_pixels_different": 104,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        }
+      ]
+    },
+    {
+      "id": "bear",
+      "palette": [
+        "#281217",
+        "#653a25",
+        "#54271c",
+        "#9f7b4f",
+        "#7a5232",
+        "#e3d8bd",
+        "#461814",
+        "#bba991",
+        "#a28a76",
+        "#d9cbb0",
+        "#443536",
+        "#1f1a26",
+        "#443838",
+        "#8c7061",
+        "#a387aa"
+      ],
+      "alpha": "binary",
+      "seams": [
+        {
+          "animation": "idle",
+          "returned_closing_pixels_different": 2,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        },
+        {
+          "animation": "move",
+          "returned_closing_pixels_different": 188,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        }
+      ]
+    },
+    {
+      "id": "spider",
+      "palette": [
+        "#15111b",
+        "#201c27",
+        "#443838",
+        "#2b2632",
+        "#3a3340",
+        "#9f4b46",
+        "#fa8c79",
+        "#17141e",
+        "#75677d",
+        "#7a2a30",
+        "#fff8e1",
+        "#651f2e",
+        "#3d102c",
+        "#e95a57",
+        "#e3d8bd",
+        "#f1e9cf"
+      ],
+      "alpha": "binary",
+      "seams": [
+        {
+          "animation": "idle",
+          "returned_closing_pixels_different": 227,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        },
+        {
+          "animation": "move",
+          "returned_closing_pixels_different": 467,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        }
+      ]
+    },
+    {
+      "id": "slime",
+      "palette": [
+        "#409751",
+        "#6fd36a",
+        "#93e484",
+        "#b7f5a0",
+        "#1f3c2d",
+        "#100e18",
+        "#53b35a",
+        "#a387aa"
+      ],
+      "alpha": "binary",
+      "seams": [
+        {
+          "animation": "idle",
+          "returned_closing_pixels_different": 70,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        },
+        {
+          "animation": "move",
+          "returned_closing_pixels_different": 67,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        }
+      ]
+    },
+    {
+      "id": "bat",
+      "palette": [
+        "#443838",
+        "#181321",
+        "#2b2236",
+        "#6a4a62",
+        "#926d85",
+        "#231728",
+        "#392c43",
+        "#fa8c79",
+        "#583a54",
+        "#7c6283",
+        "#4a3a52",
+        "#e3d8bd",
+        "#492d49",
+        "#f1e9cf"
+      ],
+      "alpha": "binary",
+      "seams": [
+        {
+          "animation": "idle",
+          "returned_closing_pixels_different": 594,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        },
+        {
+          "animation": "move",
+          "returned_closing_pixels_different": 401,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        }
+      ]
+    },
+    {
+      "id": "drake",
+      "palette": [
+        "#2b0f22",
+        "#36111a",
+        "#7f261f",
+        "#b8483c",
+        "#992c33",
+        "#4f0f2e",
+        "#783019",
+        "#691636",
+        "#b8673c",
+        "#d09159",
+        "#99422c",
+        "#7f1f35",
+        "#d07559",
+        "#3c1c19",
+        "#e8a47a",
+        "#361125",
+        "#fff8e1",
+        "#443838",
+        "#904e24",
+        "#c2b39a",
+        "#e3d8bd",
+        "#ad7332"
+      ],
+      "alpha": "binary",
+      "seams": [
+        {
+          "animation": "idle",
+          "returned_closing_pixels_different": 1094,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        },
+        {
+          "animation": "move",
+          "returned_closing_pixels_different": 1154,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        }
+      ]
+    },
+    {
+      "id": "warg",
+      "palette": [
+        "#5f4a3c",
+        "#1b1319",
+        "#271b19",
+        "#302420",
+        "#443838",
+        "#4a4038",
+        "#8a7a62",
+        "#ab9e81",
+        "#7f7264",
+        "#3c302b",
+        "#73604d",
+        "#bc7729",
+        "#ffe27a",
+        "#4f382f",
+        "#e3d8bd"
+      ],
+      "alpha": "binary",
+      "seams": [
+        {
+          "animation": "idle",
+          "returned_closing_pixels_different": 335,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        },
+        {
+          "animation": "move",
+          "returned_closing_pixels_different": 512,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        }
+      ]
+    },
+    {
+      "id": "hookbeak",
+      "palette": [
+        "#251318",
+        "#5b3a28",
+        "#90582a",
+        "#3c211b",
+        "#4c291e",
+        "#6e5034",
+        "#aa7938",
+        "#dcc266",
+        "#c9a24a",
+        "#d6c49a",
+        "#e6daaf",
+        "#433330",
+        "#ffe27a",
+        "#efd885",
+        "#957a52",
+        "#b9a17e"
+      ],
+      "alpha": "binary",
+      "seams": [
+        {
+          "animation": "idle",
+          "returned_closing_pixels_different": 182,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        },
+        {
+          "animation": "move",
+          "returned_closing_pixels_different": 638,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        }
+      ]
+    },
+    {
+      "id": "scorpion",
+      "palette": [
+        "#341c1b",
+        "#432d26",
+        "#b08a4a",
+        "#926638",
+        "#65311e",
+        "#794829",
+        "#e3cf87",
+        "#caaf66",
+        "#e7d389"
+      ],
+      "alpha": "binary",
+      "seams": [
+        {
+          "animation": "idle",
+          "returned_closing_pixels_different": 82,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        },
+        {
+          "animation": "move",
+          "returned_closing_pixels_different": 338,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        }
+      ]
+    },
+    {
+      "id": "harpy",
+      "palette": [
+        "#171019",
+        "#3a2a30",
+        "#7a5a48",
+        "#654338",
+        "#9f8168",
+        "#25181f",
+        "#2e2027",
+        "#d79c74",
+        "#1d1219",
+        "#e7ba8d",
+        "#755961",
+        "#54302b",
+        "#9a5847",
+        "#b6775b",
+        "#462121",
+        "#443838",
+        "#c4ac8c",
+        "#f1e9cf",
+        "#b07025"
+      ],
+      "alpha": "binary",
+      "seams": [
+        {
+          "animation": "idle",
+          "returned_closing_pixels_different": 687,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        },
+        {
+          "animation": "move",
+          "returned_closing_pixels_different": 1968,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        }
+      ]
+    },
+    {
+      "id": "wisp",
+      "palette": [
+        "#5dacad",
+        "#29414b",
+        "#8fe8d8",
+        "#a5f5df",
+        "#4f5b5e",
+        "#f1fff8",
+        "#74c8c2"
+      ],
+      "alpha": "stepped FX alpha",
+      "seams": [
+        {
+          "animation": "idle",
+          "returned_closing_pixels_different": 21,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        },
+        {
+          "animation": "move",
+          "returned_closing_pixels_different": 32,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        }
+      ]
+    },
+    {
+      "id": "gargoyle",
+      "palette": [
+        "#191520",
+        "#a7957e",
+        "#63616e",
+        "#4a4652",
+        "#383541",
+        "#8a7563",
+        "#504d5b",
+        "#25212d",
+        "#403d4b",
+        "#c9bba0",
+        "#f2eacf",
+        "#3a2d2e",
+        "#7c7a84",
+        "#9f9ca7"
+      ],
+      "alpha": "binary",
+      "seams": [
+        {
+          "animation": "idle",
+          "returned_closing_pixels_different": 568,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        },
+        {
+          "animation": "move",
+          "returned_closing_pixels_different": 2732,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        }
+      ]
+    },
+    {
+      "id": "crab",
+      "palette": [
+        "#360e1e",
+        "#120e19",
+        "#d0724b",
+        "#453332",
+        "#b8452e",
+        "#906956",
+        "#7f1621",
+        "#17131e",
+        "#e8a16e",
+        "#c2a482",
+        "#a7846a",
+        "#992320",
+        "#690e25",
+        "#e0c8a0"
+      ],
+      "alpha": "binary",
+      "seams": [
+        {
+          "animation": "idle",
+          "returned_closing_pixels_different": 251,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        },
+        {
+          "animation": "move",
+          "returned_closing_pixels_different": 1055,
+          "closing_pose": "Exact opening pose; duplicate omitted from playback."
+        }
+      ]
+    }
+  ]
+}

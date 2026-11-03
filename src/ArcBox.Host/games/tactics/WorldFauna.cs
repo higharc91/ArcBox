@@ -13,6 +13,8 @@ internal sealed partial class WorldFauna : Node2D
     private sealed class Actor
     {
         public required string Id { get; init; }
+        public UnitSprite? Art { get; init; }
+        public int FacingRow { get; set; }
         public required Tile Home { get; init; }
         public required Sprite2D Sprite { get; init; }
         public required Random Random { get; init; }
@@ -39,13 +41,21 @@ internal sealed partial class WorldFauna : Node2D
     }
 
     private readonly BattleMap _map;
+    private readonly BoardLighting? _lighting;
     private readonly List<Actor> _actors = [];
     private double _clock;
+
+    public WorldFauna(string packRoot, BattleMap map, BoardLighting lighting)
+        : this(packRoot, map, new Color(lighting.Ambient.R, lighting.Ambient.G, lighting.Ambient.B))
+    {
+        _lighting = lighting;
+    }
 
     public WorldFauna(string packRoot, BattleMap map, Color light)
     {
         _map = map;
         var artIndex = ArtIndex.Load(packRoot);
+        var units = UnitArt.Load(packRoot);
         var animals = map.Props.Where(p => WorldAnimalIds.Contains(p.Id) && map.InBounds(p.At)).ToArray();
         var free = FaunaRange.Free(map, artIndex.PropHeight);
 
@@ -58,6 +68,8 @@ internal sealed partial class WorldFauna : Node2D
                 "field_crow" => (4, false, 0.78f, 1.2f, 3.5f),
                 "river_duck" => (5, true, 0.42f, 2.0f, 5.0f),
                 "red_fox" => (5, false, 0.38f, 3.5f, 7.0f),
+                "farm_dog" => (4, false, 0.52f, 2.0f, 5.0f),
+                "farm_sheep" => (3, false, 0.34f, 2.5f, 5.5f),
                 _ => throw new InvalidOperationException($"No world movement profile for '{prop.Id}'."),
             };
 
@@ -66,7 +78,8 @@ internal sealed partial class WorldFauna : Node2D
                 prop.Variant is null ? map.Materials : map.Materials.Prepend(prop.Variant));
             if (art is null)
                 continue;
-            var imagePath = Path.Combine(packRoot, art.Image.Path);
+            var creature = units.Sprite("fauna." + prop.Id);
+            var imagePath = Path.Combine(packRoot, creature?.Path ?? art.Image.Path);
             if (!File.Exists(imagePath))
                 continue;
             var image = Image.LoadFromFile(imagePath);
@@ -75,7 +88,9 @@ internal sealed partial class WorldFauna : Node2D
 
             // Art made bigger than the world is shrunk to whole pixels once, here, at the manifest's scale.
             var (frameWidth, frameHeight, anchorX, anchorY) = (art.Width, art.Height, art.AnchorX, art.AnchorY);
-            if (art.Scale < 1)
+            if (creature is not null)
+                (frameWidth, frameHeight, anchorX, anchorY) = (creature.Width, creature.Height, creature.AnchorX, creature.AnchorY);
+            else if (art.Scale < 1)
             {
                 image.Convert(Image.Format.Rgba8);
                 var strip = SpriteShrink.Shrink(image.GetData(), image.GetWidth(), image.GetHeight(), art.Image.Frames, art.Scale);
@@ -95,12 +110,13 @@ internal sealed partial class WorldFauna : Node2D
                 Modulate = light,
                 TextureFilter = CanvasItem.TextureFilterEnum.Nearest,
                 ZIndex = DepthAt(prop.At),
+                Scale = Vector2.One * (creature?.PixelScale ?? 1),
             };
             AddChild(sprite);
             var seed = StableSeed(prop.Id, prop.At);
             var actor = new Actor
             {
-                Id = prop.Id, Home = prop.At, Current = prop.At, Target = prop.At,
+                Id = prop.Id, Art = creature, Home = prop.At, Current = prop.At, Target = prop.At,
                 Sprite = sprite, Random = new Random(seed), Domain = domain, WaterOnly = water,
                 RestOffset = new Vector2(-anchorX, -anchorY),
                 FrameWidth = frameWidth, FrameHeight = frameHeight, Frames = art.Image.Frames,
@@ -132,7 +148,13 @@ internal sealed partial class WorldFauna : Node2D
                 actor.Progress = 0.0001f;
                 actor.StartedAt = _clock;
                 actor.Direction = actor.To.X >= actor.From.X ? 1 : -1;
-                actor.Sprite.FlipH = actor.Direction < 0;
+                if (actor.Art is { } art)
+                {
+                    actor.FacingRow = art.Looking(actor.Target.X - actor.Current.X, actor.Target.Y - actor.Current.Y).Row;
+                    actor.Sprite.FlipH = false;
+                }
+                else
+                    actor.Sprite.FlipH = actor.Direction < 0;
                 actor.Sprite.ZIndex = DepthAt(actor.Target);
             }
 
@@ -152,6 +174,13 @@ internal sealed partial class WorldFauna : Node2D
             }
 
             AnimatePose(actor, moving);
+            var position = actor.Sprite.Position;
+            var body = BoardLighting.BodyOf(new System.Numerics.Vector2(position.X, position.Y), actor.Art?.HeadLift ?? actor.FrameHeight);
+            if (_lighting is { } lighting)
+            {
+                var tint = lighting.ForFigure(body);
+                actor.Sprite.Modulate = new Color(tint.R, tint.G, tint.B);
+            }
         }
     }
 
@@ -180,6 +209,25 @@ internal sealed partial class WorldFauna : Node2D
 
     private void AnimatePose(Actor actor, bool moving)
     {
+        if (actor.Art is { } art)
+        {
+            var anim = moving ? art.Anim("walk") : art.Idle;
+            var phase = actor.AnimationPhase;
+            if (!moving && actor.Id == "field_crow" && art.Anims.TryGetValue("flap", out var flap))
+            {
+                var stretch = phase % 18 - 16.8f;
+                if (stretch >= 0 && stretch < flap.Frames.Length / flap.Fps)
+                {
+                    anim = flap;
+                    phase = stretch;
+                }
+            }
+            var source = art.Source(anim.FrameAt(phase), actor.FacingRow);
+            actor.Sprite.RegionRect = new Rect2(source.X, source.Y, source.Width, source.Height);
+            actor.Sprite.Offset = actor.RestOffset;
+            actor.Sprite.Rotation = 0;
+            return;
+        }
         var animateAtRest = actor.Id is "field_crow" or "river_duck";
         var frame = 0;
         if (actor.Frames > 1 && (moving || animateAtRest))

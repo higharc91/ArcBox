@@ -89,6 +89,33 @@
         "direction": "barely a rasp, very slow",
         "weight": 3
       }
+    ],
+    "town": [
+      {
+        "id": "bark_mother_skarrow_town_1",
+        "text": "Valley people. Walking. Not running at me with spears. This is new.",
+        "speaker": "mother_skarrow",
+        "mood": "idle",
+        "direction": "cracked and rasping; slow, deliberate valley tongue, as a courtesy"
+      },
+      {
+        "id": "bark_mother_skarrow_town_2",
+        "text": "Forty winters I have held this clan. Do not ask me if I can hold it one more.",
+        "speaker": "mother_skarrow",
+        "mood": "angry",
+        "direction": "too sharp, and she knows it"
+      },
+      {
+        "id": "bark_mother_skarrow_town_3",
+        "text": "Sit. You are guests now, which is worse than enemies. Guests we have to feed.",
+        "speaker": "mother_skarrow",
+        "mood": "idle",
+        "direction": "dry",
+        "requires": [
+          "ch1_skarrow_spared",
+          "ch1_halden_confessed"
+        ]
+      }
     ]
   }
 }

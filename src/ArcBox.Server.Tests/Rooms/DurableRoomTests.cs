@@ -18,6 +18,8 @@ using Microsoft.Extensions.Time.Testing;
 namespace ArcBox.Server.Tests.Rooms;
 
 /// <summary>Durable rooms (spec §3.5): membership survives a restart or an idle break; game state does not.</summary>
+// These tests share HangerGame's static gate and must not reset it concurrently.
+[Collection("Hanger game")]
 public sealed class DurableRoomTests
 {
     private const string Restarted = "Game interrupted: the server restarted.";
@@ -511,7 +513,7 @@ public sealed class DurableRoomTests
 
             _ = room.SendInputAsync("c1", h.Sender.LastViewId("c1"), Json(new { pressed = "x" }));
             Assert.True(HangerGame.Entered.Wait(TimeSpan.FromSeconds(5), Ct));
-            h.Time.Advance(TimeSpan.FromSeconds(3));
+            h.Time.Advance(h.Services.Options.GameCallTimeout + TimeSpan.FromSeconds(1));
             await m.SweepAsync();
 
             Assert.Equal(0, m.Count);

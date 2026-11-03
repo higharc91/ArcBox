@@ -25,7 +25,7 @@ CONTENT = ROOT / "content" / "tactics" / "base"
 SCHEMAS = CONTENT / "lore" / "schema"
 FILE_SCHEMA = {"world": "world", "timeline": "timeline", "factions": "factions", "regions": "regions",
                "characters": "characters", "codex": "codex", "barks": "barks", "voices": "voices",
-               "backgrounds": "backgrounds", "arcs": "arcs", "scenes": "scenes"}
+               "backgrounds": "backgrounds", "arcs": "arcs", "scenes": "scenes", "townsfolk": "townsfolk", "conversations": "conversations", "quests": "quests"}
 NARRATOR = "narrator"
 
 
@@ -155,6 +155,8 @@ def portrait_moods(content: Path) -> set[str]:
 # ---- Packs -----------------------------------------------------------------------------------------------------------
 
 def _kind(file: str) -> str:
+    if file == "barks/townsfolk.json":
+        return "townsfolk"
     return file.split("/")[0].removesuffix(".json")
 
 
@@ -241,8 +243,8 @@ def check(lore_dirs: list[Path], content: Path = CONTENT) -> Errors:
                         _define(defs["beat"], beat, where, f"/arcs/{n}/beats/{b}", "beat", errors)
                 for n, ending in enumerate(doc["endings"]):
                     _define(defs["ending"], ending, where, f"/endings/{n}", "ending", errors)
-            elif kind == "scenes":
-                for n, scene in enumerate(doc["scenes"]):
+            elif kind in ("scenes", "conversations"):
+                for n, scene in enumerate(doc["scenes"] if kind == "scenes" else [doc]):
                     _define(defs["scene"], scene, where, f"/scenes/{n}", "scene", errors)
                     scenes.append((scene, f"{where}#/scenes/{n}"))
                     for k, node in enumerate(scene["nodes"]):
@@ -253,6 +255,20 @@ def check(lore_dirs: list[Path], content: Path = CONTENT) -> Errors:
                             line_ids[line["id"]] = where
                             if "mood" in line and line["mood"] not in moods:
                                 errors.add(where, f"{at}/id", f"mood '{line['mood']}' has no portrait")
+            if kind == "townsfolk":
+                for preset, data in doc["presets"].items():
+                    if sum(not ln.get("requires") and not ln.get("unless") for ln in data["lines"]) < 3:
+                        errors.add(where, f"/presets/{preset}", "a placed preset needs at least 3 unconditional barks")
+                    for n, line in enumerate(data["lines"]):
+                        at = f"/presets/{preset}/lines/{n}"
+                        if line["id"] in line_ids:
+                            errors.add(where, at, f"line id '{line['id']}' is already used")
+                        line_ids[line["id"]] = where
+                        for field in ("mood", "direction", "speaker"):
+                            if not line.get(field):
+                                errors.add(where, at, f"a townsfolk line needs '{field}'")
+                        if line.get("speaker") != data["speaker"]:
+                            errors.add(where, at, "line speaker differs from preset cast")
             if kind == "voices":
                 _define(defs["voice"], doc, where, "", "voice set", errors)
             if kind in ("barks", "voices"):
@@ -267,8 +283,18 @@ def check(lore_dirs: list[Path], content: Path = CONTENT) -> Errors:
                         if "mood" in line and line["mood"] not in moods:
                             errors.add(where, at, f"mood '{line['mood']}' has no portrait")
 
+    townsfolk = next((d["presets"] for d, w in docs if w.endswith("/barks/townsfolk.json")), None)
+    if townsfolk is not None:
+        manifest = content / "rules" / "manifest.json"
+        if manifest.exists():
+            for file in json.loads(manifest.read_text())["files"]:
+                if file.startswith("world/"):
+                    for person in json.loads((content / "rules" / file).read_text()).get("people", []):
+                        if not person.get("character") and person["preset"] not in townsfolk:
+                            errors.add("townsfolk", "/presets", f"placed preset '{person['preset']}' has no bark set")
     rules = rules_ids(content)
     _references(defs, barks, art, rules, errors)
+    _side_content(defs, docs, scenes, content, errors)
     _scenes(defs, scenes, rules, errors)
     if defs["arc"]:
         _flags(defs, docs, rules, errors)
@@ -284,6 +310,14 @@ def _flags(defs: dict, docs: list, rules: dict | None, errors: Errors) -> None:
             set_by.update(entry.get("sets", []))
             for choice in entry.get("choices", []):
                 set_by.update(choice["sets"])
+    for doc, where in docs:
+        for key, value, _ in _walk(doc):
+            if key == "sets" and isinstance(value, list):
+                set_by.update(value)
+    for doc, where in docs:
+        for key, value, _ in _walk(doc):
+            if key == "when" and isinstance(value, list):
+                set_by.update(value)
     for doc, where in docs:
         for key, value, ptr in _walk(doc):
             waits = ([value["flag"]] if key == "unlock" and "flag" in value
@@ -376,6 +410,103 @@ def _references(defs: dict, barks: list, art: set[str], rules: dict | None, erro
             errors.add(where, "/speaker", f"no character has the id '{doc['speaker']}' (or use '{NARRATOR}')")
 
 
+def _side_content(defs, docs, scenes, content, errors):
+    listed = [q for d, w in docs if w.endswith("/quests.json") for q in d["quests"]]
+    quests = {q["id"]: q for q in listed}
+    if len(quests) != len(listed): errors.add("quests.json", "/quests", "duplicate quest ID")
+    convos = {d["character"]: (d, w) for d, w in docs if "/conversations/" in w}
+    main_flags = {f for beat, _ in defs["beat"].values() for f in beat.get("sets", [])}
+    main_flags.update(f for b, _ in defs["beat"].values() for c in b.get("choices", []) for f in c.get("sets", []))
+    setters = set(main_flags)
+    for scene, _ in scenes:
+        for key, value, _ in _walk(scene):
+            if key == "sets" and isinstance(value, list):
+                setters.update(value)
+                if scene.get("beat") and not scene.get("camp"):
+                    main_flags.update(value)
+    people, things, regions, items, services = {}, {}, {}, set(), set()
+    manifest = content / "rules" / "manifest.json"
+    if manifest.exists():
+        for file in json.loads(manifest.read_text())["files"]:
+            data = json.loads((content / "rules" / file).read_text())
+            for key, value, _ in _walk(data):
+                if key == "sets" and isinstance(value, list): setters.update(value)
+                if key == "setFlag" and isinstance(value, str): setters.add(value)
+            if file.startswith("world/"):
+                regions[data["id"]] = data
+                people[data["id"]] = {p.get("id"):p for p in data.get("people", []) if p.get("id")}
+            if file.startswith("interactables/"):
+                things[data["region"]] = {t["id"]:t for t in data["interactables"]}
+            if file == "items.json" or file.startswith("items/"):
+                items.update(x["id"] for x in (data if isinstance(data,list) else [data]))
+            if file.startswith("shops/"):
+                services.update(s["id"] for s in data["shops"])
+    for scene, loc in scenes:
+        for node in scene["nodes"]:
+            for option in node.get("options", []):
+                action = option.get("quest")
+                if action is None: continue
+                kinds = [k for k in ("start", "advance", "complete") if k in action]
+                if len(kinds) != 1:
+                    errors.add(loc, "/quest", "quest action needs exactly one of start, advance or complete")
+                    continue
+                kind = kinds[0]; quest = quests.get(action[kind])
+                if quest is None:
+                    errors.add(loc, "/quest", f"unknown quest '{action[kind]}'")
+                    continue
+                stage = next((s for s in quest["stages"] if s["id"] == action.get("stage")), None)
+                if kind == "advance" and stage is None:
+                    errors.add(loc, "/quest", f"quest '{quest['id']}' has no stage '{action.get('stage')}'")
+                    continue
+                assigned = (quest["stages"][0] if kind == "start" else quest["done"] if kind == "complete" else stage)["when"]
+                setters.update(assigned)
+                if not scene.get("beat") and set(assigned) & main_flags:
+                    errors.add(loc, "/quest", "a hook cannot set main-story flags through a quest action")
+            for option in node.get("options", []):
+                if option.get("give") and option["give"] not in items: errors.add(loc, "/give", f"unknown reward item '{option['give']}'")
+                if option.get("service") and option["service"] not in services: errors.add(loc, "/service", f"unknown service '{option['service']}'")
+    for region_id, region in things.items():
+        if region_id not in defs["region"]: continue
+        for thing in region.values():
+            if "scene" in thing and not any(s["id"]==thing["scene"] and not s.get("beat") for s,_ in scenes):
+                errors.add("things", "/scene", f"unknown standalone scene '{thing['scene']}'")
+    for who, (scene, where) in convos.items():
+        if who not in defs["character"]: errors.add(where, "/character", f"unknown character '{who}'")
+        if scene.get("beat") or scene.get("after") or scene.get("camp"): errors.add(where, "", "a conversation must be a standalone scene")
+        nodes = {n["id"] for n in scene["nodes"]}
+        for e in scene["entries"]:
+            if e["node"] not in nodes: errors.add(where, "/entries", f"entry '{e['node']}' is not a node")
+        for node in scene["nodes"]:
+            for line in node["lines"]:
+                if not line.get("mood") or not line.get("direction"): errors.add(where, "/lines", f"line '{line['id']}' needs mood and direction")
+    for q in quests.values():
+        where = "quests.json/"+q["id"]
+        if q["giver"] not in defs["character"]: errors.add(where,"/giver","unknown giver")
+        if q["region"] not in regions: errors.add(where,"/region","unknown quest region")
+        if len({s["id"] for s in q["stages"]}) != len(q["stages"]): errors.add(where,"/stages","duplicate stage ID")
+        if not q["done"]["when"]: errors.add(where,"/done","a quest needs completing flags")
+        for stage in q["stages"]:
+            if not stage["when"] or set(stage["when"]) - setters:
+                errors.add(where, "/stages", f"stage '{stage['id']}' has flags nothing in the pack can set")
+            target = stage.get("target", {})
+            if target and len(target) != 1: errors.add(where,"/target","target must name one person, thing or tile")
+            for kind, value in target.items():
+                if kind == "person" and value not in people.get(q["region"], {}): errors.add(where,"/target",f"unknown person '{value}'")
+                if kind == "thing" and value not in things.get(q["region"], {}): errors.add(where,"/target",f"unknown thing '{value}'")
+                if kind == "tile" and q["region"] in regions:
+                    width,height = regions[q["region"]]["size"]
+                    if len(value)!=2 or not (0<=value[0]<width and 0<=value[1]<height): errors.add(where,"/target","target is outside the quest region")
+        for item in q["rewards"].get("items", []):
+            if item["item"] not in items: errors.add(where,"/rewards",f"unknown item '{item['item']}'")
+        if set(q["rewards"].get("sets", [])) & main_flags: errors.add(where,"/rewards","side rewards cannot set main-story flags")
+    # Only complete game packs opt into people coverage; small validator fixtures have no townsfolk file.
+    if any(w.endswith("/barks/townsfolk.json") for _, w in docs):
+        bark_speakers = {d["speaker"] for d,w in docs if "/barks/" in w and "speaker" in d and d.get("events", {}).get("town")}
+        for region in people.values():
+            for p in region.values():
+                if p.get("character") and p["character"] not in convos and p["character"] not in bark_speakers:
+                    errors.add("people", "/character", f"'{p['character']}' has neither conversation nor barks")
+
 def _scenes(defs: dict, scenes: list, rules: dict | None, errors: Errors) -> None:
     """What a schema can't say about scenes: the graph holds together, the scene belongs to a real beat, its votes are
     that beat's choices, speakers and tags exist, and every flag it sets is one arcs.json (or an encounter) already
@@ -388,11 +519,22 @@ def _scenes(defs: dict, scenes: list, rules: dict | None, errors: Errors) -> Non
                 arc_flags.update(choice["sets"])
     # Camp reflections may declare their own outcome flags without adding a beat to the main story chain.
     for scene, _ in scenes:
-        if scene.get("camp"):
+        if scene.get("camp") or "beat" not in scene:
             for node in scene.get("nodes", []):
                 arc_flags.update(node.get("sets", []))
                 for option in node.get("options", []):
                     arc_flags.update(option.get("sets", []))
+    main_flags = set()
+    for entry, _ in defs["beat"].values():
+        main_flags.update(entry.get("sets", []))
+        for choice in entry.get("choices", []):
+            main_flags.update(choice.get("sets", []))
+    for scene, _ in scenes:
+        if "beat" in scene and not scene.get("camp"):
+            for node in scene.get("nodes", []):
+                main_flags.update(node.get("sets", []))
+                for option in node.get("options", []):
+                    main_flags.update(option.get("sets", []))
     tagged = {"background": set(defs["background"]) | (rules["backgrounds"] if rules else set()),
               "race": rules["races"] if rules else None, "class": rules["classes"] if rules else None}
     covered: dict[str, set[str]] = {}
@@ -400,17 +542,18 @@ def _scenes(defs: dict, scenes: list, rules: dict | None, errors: Errors) -> Non
 
     for scene, loc in scenes:
         where, _, ptr = loc.partition("#")
-        beat = defs["beat"].get(scene["beat"])
-        if beat is None:
+        beat_id = scene.get("beat")
+        beat = defs["beat"].get(beat_id)
+        if beat_id is not None and beat is None:
             errors.add(where, f"{ptr}/beat", f"no beat has the id '{scene['beat']}'")
         # A battle beat plays its lead-in, then the fight, then its aftermath, so the two kinds can't interleave in file order.
         if scene.get("camp") and scene.get("after"):
             errors.add(where, f"{ptr}/camp", "a camp scene cannot also be a battle aftermath")
         if scene.get("after") and not scene.get("camp"):
-            if beat is not None and beat[0]["kind"] != "battle":
-                errors.add(where, f"{ptr}/after", f"only a battle beat has an aftermath, and '{scene['beat']}' is a {beat[0]['kind']} beat")
-            aftermath.add(scene["beat"])
-        elif not scene.get("camp") and scene["beat"] in aftermath:
+            if beat is None or beat[0]["kind"] != "battle":
+                errors.add(where, f"{ptr}/after", "only a battle beat has an aftermath" if beat is None else f"only a battle beat has an aftermath, and '{beat_id}' is a {beat[0]['kind']} beat")
+            aftermath.add(beat_id)
+        elif not scene.get("camp") and beat_id is not None and beat_id in aftermath:
             errors.add(where, ptr, f"a lead-in of '{scene['beat']}' comes after one of its aftermath scenes; move it before them")
         if "place" in scene and scene["place"] not in defs["place"]:
             errors.add(where, f"{ptr}/place", f"no place has the id '{scene['place']}'")
@@ -435,6 +578,8 @@ def _scenes(defs: dict, scenes: list, rules: dict | None, errors: Errors) -> Non
                 if line["speaker"] not in scene["cast"]:
                     errors.add(where, f"{at}/lines/{i}/speaker", f"'{line['speaker']}' isn't in the scene's cast")
             for i, flag in enumerate(node.get("sets", [])):
+                if beat_id is None and flag in main_flags:
+                    errors.add(where, f"{at}/sets/{i}", f"a hook cannot set the main-story flag '{flag}'")
                 if flag not in arc_flags:
                     errors.add(where, f"{at}/sets/{i}", f"no beat, choice, ending or encounter sets '{flag}'")
             out = edges.setdefault(node["id"], set())
@@ -455,9 +600,11 @@ def _scenes(defs: dict, scenes: list, rules: dict | None, errors: Errors) -> Non
                     if not node.get("vote"):
                         errors.add(where, f"{oat}/choice", "only a vote's options can be an arcs.json choice")
                     if option["choice"] not in choices:
-                        errors.add(where, f"{oat}/choice", f"the beat '{scene['beat']}' has no choice '{option['choice']}'")
-                    covered.setdefault(scene["beat"], set()).add(option["choice"])
+                        errors.add(where, f"{oat}/choice", f"the beat '{scene.get('beat')}' has no choice '{option['choice']}'")
+                    covered.setdefault(beat_id, set()).add(option["choice"])
                 for i, flag in enumerate(option.get("sets", [])):
+                    if beat_id is None and flag in main_flags:
+                        errors.add(where, f"{oat}/sets/{i}", f"a hook cannot set the main-story flag '{flag}'")
                     if flag not in arc_flags:
                         errors.add(where, f"{oat}/sets/{i}", f"no beat, choice, ending or encounter sets '{flag}'")
                 for kind, ids in option.get("tags", {}).items():
@@ -478,7 +625,7 @@ def _scenes(defs: dict, scenes: list, rules: dict | None, errors: Errors) -> Non
                 if target not in nodes:
                     errors.add(where, at, f"leads to '{target}', which isn't a node in this scene")
         # Every node must be reachable from the start, and at least one path must end.
-        seen, todo = set(), [scene["start"]] if scene["start"] in nodes else []
+        seen, todo = set(), [n for n in [scene["start"], *[e["node"] for e in scene.get("entries", [])]] if n in nodes]
         while todo:
             n = todo.pop()
             if n not in seen:

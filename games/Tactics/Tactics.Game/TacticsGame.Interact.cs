@@ -30,6 +30,16 @@ public sealed partial class TacticsGame
     /// <summary>The party's best passive score in each skill a thing may be hidden by and whose it is, and the members and players it was worked out for.</summary>
     private (ImmutableSortedDictionary<string, MemberRecord> Members, IReadOnlyList<Player> Players, ImmutableDictionary<string, (int Passive, string? Who)> Best)? _passive;
 
+    private ScenePlan? HookPlan(InteractableDef def, ScenePlan? ordinary, string? continuing = null)
+    {
+        if (def.Scene is not { } id || Lore.Scene(id) is not { Beat: null } hook
+            || continuing != id && !SceneRun.Plays(hook, StoryFlags())) return null;
+        var outcomes = ImmutableDictionary<string, InteractOutcome>.Empty;
+        if (ordinary?.Outcomes.Values.FirstOrDefault() is { } outcome)
+            outcomes = outcomes.Add(hook.Start, outcome);
+        return new ScenePlan(hook, outcomes);
+    }
+
     /// <summary>The scene of the interaction under way, and the cursor it was built for: it's built again only when that changes.</summary>
     private (ThingCursor Cursor, ScenePlan? Plan)? _thingPlan;
 
@@ -135,7 +145,7 @@ public sealed partial class TacticsGame
     /// </summary>
     private void Interact(Player player, JsonElement? data)
     {
-        if (player.Profile?.Value != _lead)
+        if (QuestLogOpen || player.Profile?.Value != _lead)
             return;
         var target = Str(data, "target");
         if (target is null && InteractLabel() is not null)
@@ -150,6 +160,7 @@ public sealed partial class TacticsGame
         { StartShop(shop); return; }
         if (target is not null && RegionShops.FirstOrDefault(s => s.Keeper.Thing == target && ShopRules.Present(s, StoryFlags())) is { } stall
             && targets.Any(t => t.Def.Id == "shop:" + stall.Id)) { StartShop(stall); return; }
+        if (pick.Def is not null && pick.Def.Id.StartsWith("person:", StringComparison.Ordinal)) { TalkToPerson(pick.Def.Id); return; }
         if (pick.Def is not null) Use(pick.Def);
     }
 
@@ -159,7 +170,9 @@ public sealed partial class TacticsGame
         if (def.Kind == "campfire") { ProposeRest("camp", def.Id, def.At); return; }
         var save = ThingState(def);
         var worked = Interactables.Worked(AllThings).Contains(def.Id);
-        switch (InteractScenes.Plan(def, save, StoryFlags(), worked, ItemName))
+        var ordinary = InteractScenes.Plan(def, save, StoryFlags(), worked, ItemName);
+        var planned = HookPlan(def, ordinary as ScenePlan) ?? ordinary;
+        switch (planned)
         {
             case InstantPlan instant:
                 Halt();
@@ -450,7 +463,7 @@ public sealed partial class TacticsGame
     /// </summary>
     private void Search(Player player)
     {
-        if (player.Profile?.Value != _lead || _region is null || AllThings.IsEmpty || !Party().Any())
+        if (QuestLogOpen || player.Profile?.Value != _lead || _region is null || AllThings.IsEmpty || !Party().Any())
             return;     // as LookAround: with nobody's character in the party, there's nobody to roll
         var looked = Interactables.Searchable(Things, ThingSaves, StoryFlags(), _at);
         LeaveExploration();
@@ -518,6 +531,8 @@ public sealed partial class TacticsGame
             : ThingNamed(cursor.Id) is { } def
             ? InteractScenes.Plan(def, cursor.From, StoryFlags(), Interactables.Worked(AllThings).Contains(def.Id), ItemName, again: true) as ScenePlan
             : null;
+        if (!cursor.Searching && ThingNamed(cursor.Id) is { } hooked)
+            plan = HookPlan(hooked, plan, Cursor?.Scene) ?? plan;
         _thingPlan = (cursor, plan);
         return plan;
     }

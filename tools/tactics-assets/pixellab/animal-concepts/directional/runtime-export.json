@@ -1,0 +1,283 @@
+{
+  "families": [
+    {
+      "family": "wolf",
+      "crop": [
+        141,
+        148,
+        266,
+        249
+      ],
+      "native_frame": [
+        125,
+        101
+      ],
+      "anchor": [
+        59,
+        96
+      ],
+      "facings": 8,
+      "frames_per_direction": 18
+    },
+    {
+      "family": "boar",
+      "crop": [
+        130,
+        139,
+        271,
+        248
+      ],
+      "native_frame": [
+        141,
+        109
+      ],
+      "anchor": [
+        70,
+        105
+      ],
+      "facings": 8,
+      "frames_per_direction": 18
+    },
+    {
+      "family": "bear",
+      "crop": [
+        139,
+        152,
+        291,
+        281
+      ],
+      "native_frame": [
+        152,
+        129
+      ],
+      "anchor": [
+        77,
+        124
+      ],
+      "facings": 8,
+      "frames_per_direction": 18
+    },
+    {
+      "family": "spider",
+      "crop": [
+        140,
+        149,
+        317,
+        355
+      ],
+      "native_frame": [
+        177,
+        206
+      ],
+      "anchor": [
+        88,
+        151
+      ],
+      "facings": 8,
+      "frames_per_direction": 18
+    },
+    {
+      "family": "slime",
+      "crop": [
+        138,
+        152,
+        263,
+        251
+      ],
+      "native_frame": [
+        125,
+        99
+      ],
+      "anchor": [
+        62,
+        92
+      ],
+      "facings": 8,
+      "frames_per_direction": 18
+    },
+    {
+      "family": "bat",
+      "crop": [
+        9,
+        32,
+        232,
+        218
+      ],
+      "native_frame": [
+        223,
+        186
+      ],
+      "anchor": [
+        111,
+        180
+      ],
+      "facings": 8,
+      "frames_per_direction": 18
+    },
+    {
+      "family": "drake",
+      "crop": [
+        140,
+        147,
+        386,
+        370
+      ],
+      "native_frame": [
+        246,
+        223
+      ],
+      "anchor": [
+        116,
+        213
+      ],
+      "facings": 8,
+      "frames_per_direction": 18
+    },
+    {
+      "family": "warg",
+      "crop": [
+        139,
+        154,
+        319,
+        306
+      ],
+      "native_frame": [
+        180,
+        152
+      ],
+      "anchor": [
+        89,
+        146
+      ],
+      "facings": 8,
+      "frames_per_direction": 18
+    },
+    {
+      "family": "hookbeak",
+      "crop": [
+        138,
+        144,
+        351,
+        346
+      ],
+      "native_frame": [
+        213,
+        202
+      ],
+      "anchor": [
+        106,
+        188
+      ],
+      "facings": 8,
+      "frames_per_direction": 18
+    },
+    {
+      "family": "scorpion",
+      "crop": [
+        147,
+        144,
+        334,
+        312
+      ],
+      "native_frame": [
+        187,
+        168
+      ],
+      "anchor": [
+        85,
+        164
+      ],
+      "facings": 8,
+      "frames_per_direction": 18
+    },
+    {
+      "family": "harpy",
+      "crop": [
+        2,
+        5,
+        212,
+        191
+      ],
+      "native_frame": [
+        210,
+        186
+      ],
+      "anchor": [
+        106,
+        183
+      ],
+      "facings": 8,
+      "frames_per_direction": 18
+    },
+    {
+      "family": "wisp",
+      "crop": [
+        60,
+        49,
+        95,
+        119
+      ],
+      "native_frame": [
+        35,
+        70
+      ],
+      "anchor": [
+        12,
+        67
+      ],
+      "facings": 8,
+      "frames_per_direction": 18
+    },
+    {
+      "family": "gargoyle",
+      "crop": [
+        138,
+        155,
+        373,
+        365
+      ],
+      "native_frame": [
+        235,
+        210
+      ],
+      "anchor": [
+        118,
+        201
+      ],
+      "facings": 8,
+      "frames_per_direction": 18
+    },
+    {
+      "family": "crab",
+      "crop": [
+        148,
+        157,
+        364,
+        365
+      ],
+      "native_frame": [
+        216,
+        208
+      ],
+      "anchor": [
+        108,
+        199
+      ],
+      "facings": 8,
+      "frames_per_direction": 18
+    }
+  ],
+  "palette_variants_exported": 40,
+  "preserved_distinct_forms": [
+    "beasts.wolf.alpha",
+    "beasts.bear.undead",
+    "beasts.spider.phase",
+    "beasts.slime.crystal",
+    "beasts.bat.vampire",
+    "bestiary.warg.rider",
+    "bestiary.scorpion.black",
+    "bestiary.crab.deep"
+  ],
+  "pending": [],
+  "issues": []
+}

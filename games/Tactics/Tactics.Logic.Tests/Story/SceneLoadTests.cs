@@ -54,6 +54,34 @@ public sealed class SceneLoadTests
     }
 
     [Fact]
+    public void Hook_scenes_have_no_beat_and_are_looked_up_by_id_only()
+    {
+        var hooks = Scenes.Replace("\"beat\": \"talk\",", "");
+        var book = Load(("arcs.json", Arcs), ("scenes/hooks.json", hooks));
+        Assert.Null(book.Scene("s1")!.Beat);
+        Assert.Empty(book.ScenesOf("talk"));
+        Assert.Equal("s2", Assert.Single(book.ScenesOf("fight")).Id);
+        Assert.Null(book.Scene("absent"));
+    }
+
+    [Fact]
+    public void Hook_nodes_and_options_cannot_set_main_story_flags()
+    {
+        var arcs = Arcs.Replace("\"kind\": \"story\"", "\"kind\": \"story\", \"sets\": [\"went\"]");
+        var hooks = Scenes.Replace("\"beat\": \"talk\",", "");
+        var error = Assert.Throws<InvalidDataException>(() => Load(("arcs.json", arcs), ("scenes/hooks.json", hooks)));
+        Assert.Contains("main-story flag 'went'", error.Message);
+    }
+
+    [Fact]
+    public void A_hook_cannot_be_a_battle_aftermath()
+    {
+        var hooks = Scenes.Replace("\"beat\": \"fight\",", "");
+        var error = Assert.Throws<InvalidDataException>(() => Load(("arcs.json", Arcs), ("scenes/hooks.json", hooks)));
+        Assert.Contains("aftermath", error.Message);
+    }
+
+    [Fact]
     public void A_scene_reads_as_it_is_written()
     {
         var book = Load(("arcs.json", Arcs), ("characters.json", Characters), ("scenes/one.json", Scenes));
