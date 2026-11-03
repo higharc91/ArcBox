@@ -102,7 +102,10 @@ public sealed record AppArgs
                     args = args with { NewRoom = true };
                     break;
                 case "--shots" when !string.IsNullOrWhiteSpace(value):
-                    args = args with { ShotsDir = value };
+                    if (System.IO.Path.IsPathFullyQualified(value))
+                        args = args with { ShotsDir = value };
+                    else
+                        unknown.Add($"--shots requires an absolute path: {value}");
                     break;
                 case "--quit-after" when double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out var s) && s > 0:
                     args = args with { QuitAfterSeconds = s };
