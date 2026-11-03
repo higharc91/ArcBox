@@ -6,8 +6,10 @@
 - [D — oil flask](milestone-d.md): the item, one-use fire coating, two approved loot placements and persistent rewards.
 - [E — TV surfaces and animations](milestone-e.md): layered reactions, readable ignition, surfaced ground, and an actual TV motion reel. [Steam refinement](steam-refinement.md) slows its dissipation after user review.
 
+- [F — phone forecasts and terrain effects](milestone-f.md): movement risk, secondary spread, conducted-unit previews and current-tile animation.
+
 ## Current status — 2026-11-03 (UTC)
 
-After user review and authorization, A was merged through `dccfab9f`, then **B/C were merged and pushed through `ea90c2e2`** into `ccr-18ad4510-q68nad`. D and E are implemented in separate commits on `environmental-tiles`. No encounter has opted in.
+After user review and authorization, A was merged through `dccfab9f`, then **B/C were merged and pushed through `ea90c2e2`** into `ccr-18ad4510-q68nad`. D, E and F are implemented in separate commits on `environmental-tiles`. No encounter has opted in.
 
-The [agreed plan's](../../plans/2026-11-02-tactics-environmental-tiles.md#milestones) A-before-C review/landing gate is complete. F–G remain: phone risk/spread additions and encounter opt-ins with balance simulations. The oil price of 10 awaits the separate shops/economy branch. No PR has been opened.
+The [agreed plan's](../../plans/2026-11-02-tactics-environmental-tiles.md#milestones) A-before-C review/landing gate is complete. G remains: encounter opt-ins, Ford Assault’s lightning shaman and balance simulations. The oil price of 10 awaits the separate shops/economy branch. No PR has been opened.
