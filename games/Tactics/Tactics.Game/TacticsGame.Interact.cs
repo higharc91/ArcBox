@@ -557,6 +557,8 @@ public sealed partial class TacticsGame
     /// <summary>The interaction's scene has ended: the cursor goes, and the party walks again.</summary>
     private void FinishInteraction()
     {
+        if (Cursor is { Node: "enter", Thing: { } cursor } && ThingNamed(cursor.Id) is { To: not null } mouth
+            && TravelThrough(mouth, cursor.Under)) return;
         EndTelling();
         SetCursor(Cursor?.Thing?.Under);        // a battle beat that was waiting at its fight goes on waiting
         KeepWorld();
@@ -572,6 +574,8 @@ public sealed partial class TacticsGame
     {
         var scene = ThingPlan(thing)?.Scene;
         var node = c.Node is null ? null : scene?.Node(c.Node);
+        if (scene?.Id == c.Scene && node is { End: true, Lines.IsEmpty: true } && ThingNamed(thing.Id)?.To is not null)
+        { _phase = TacticsPhase.Story; StageDone(); return; }
         if (scene is null || scene.Id != c.Scene || (c.Node is not null && (node is null || c.Line < 0 || c.Line >= node.Lines.Length)))
         {
             Note(StoryChanged);

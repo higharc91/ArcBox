@@ -8,6 +8,17 @@ public sealed class PaintedRegionTests
 
     private static readonly Tile A = new(1, 2), B = new(3, 4);
 
+    [Fact]
+    public void Named_markers_keep_their_destination_and_report_duplicate_names()
+    {
+        var painted = Painted() with { NamedSpawns = [("cave_return", new Tile(5, 2))] };
+        var (source, problems) = painted.ToSource();
+        Assert.Empty(problems);
+        Assert.Equal(new Tile(5, 2), source.NamedSpawns["cave_return"]);
+        var duplicate = painted with { NamedSpawns = [("cave_return", new Tile(5, 2)), ("cave_return", new Tile(6, 2))] };
+        Assert.Contains(duplicate.ToSource().Problems, p => p.Contains("'cave_return' is repeated", StringComparison.Ordinal));
+    }
+
     /// <summary>An 8x8 region with every tile painted, so a test's only problem is the one it sets up.</summary>
     private static PaintedRegion Painted() => new("r", "Region", 1, 8, 8)
     {

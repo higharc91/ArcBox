@@ -30,6 +30,7 @@
           "place": "ford_bridge",
           "encounter": "ford_assault",
           "requires": ["ch1_skarrow_slain"],
+          "sets": ["ch1_ford_settled"],
           "summary": "By force: the party storms the ford at dawn. Mother Skarrow leads her clan's warriors herself, and dies on the bridge."
         },
         {
@@ -38,6 +39,7 @@
           "place": "ford_bridge",
           "encounter": "river_crossing",
           "requires": ["ch1_skarrow_spared"],
+          "sets": ["ch1_ford_settled"],
           "summary": "After the parley, the clan's young hotheads, who answer to Vorga, refuse the truce and hold the crossing."
         },
         {

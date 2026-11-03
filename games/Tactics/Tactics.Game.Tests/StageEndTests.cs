@@ -226,7 +226,7 @@ public sealed class StageEndTests
         var world = Saved(s);
         Assert.Equal(Force.Beats, world.Beats);
         Assert.Equal(new StorySave("ch1_ford_assault", StorySave.After, null, null, 0, world.Story!.Seq) with { Played = [] }, world.Story with { Played = [] });
-        Assert.Equal(["ch1_skarrow_slain", "bridge_held"], world.Flags);
+        Assert.Equal(["ch1_skarrow_slain", "bridge_held", "ch1_ford_settled"], world.Flags);
         Assert.Contains("ford_assault", TacticsDocument.Read(s.Lease.Document).Completed);
 
         s.Send(0, "next");

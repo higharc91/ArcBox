@@ -62,7 +62,17 @@ public sealed record RegionStamp(string Map, [property: JsonRequired] Tile At, [
 public sealed record BeatSpot(string Beat, [property: JsonRequired] Tile At);
 
 /// <summary>Where the party starts in a region, and where it recovers.</summary>
-public sealed record RegionSpawns([property: JsonRequired] Tile Start, [property: JsonRequired] Tile Recovery);
+public sealed record RegionSpawns([property: JsonRequired] Tile Start, [property: JsonRequired] Tile Recovery,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ImmutableSortedDictionary<string, Tile>? Named = null)
+{
+    /// <summary>A built-in or authored destination; absent names never silently land at (0, 0).</summary>
+    public Tile? Find(string name) => name switch
+    {
+        "start" => Start,
+        "recovery" => Recovery,
+        _ => Named is not null && Named.TryGetValue(name, out var at) ? at : null,
+    };
+}
 
 /// <summary>
 /// Where a region meets its neighbour: the region it joins and on which side. <see cref="Offset"/> is how far along the shared

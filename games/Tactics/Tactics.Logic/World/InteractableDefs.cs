@@ -116,6 +116,9 @@ public sealed class HiddenDefJsonConverter : JsonConverter<HiddenDef>
 public sealed record LootDef(ItemId Item = default, int Count = 1,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Gold = 0);
 
+/// <summary>A voted passage to an authored spawn in another region.</summary>
+public sealed record EntranceDestination(string Region, string Spawn);
+
 /// <summary>
 /// One thing to interact with (design §2.1). <see cref="Kind"/> names a kind of <see cref="InteractableKinds"/>, which gives everything
 /// left out. It stands on <see cref="At"/>, facing <see cref="Facing"/> (<c>ne</c>, <c>se</c>, <c>sw</c> or <c>nw</c>, the four ways an
@@ -148,7 +151,8 @@ public sealed record InteractableDef(string Id, string Kind, [property: JsonRequ
     ImmutableArray<string> Sets = default, LockDef? Lock = null, TrapDef? Trap = null, HiddenDef? Hidden = null,
     ImmutableArray<LootDef> Loot = default, ImmutableArray<string> Targets = default, bool Open = false, bool? Blocks = null,
     ImmutableArray<string> Reveals = default, int? Range = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Scene = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Scene = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] EntranceDestination? To = null);
 
 /// <summary>
 /// How a thing to interact with is, as the campaign keeps it (design §2.3). Every field only moves one way, except a lever's

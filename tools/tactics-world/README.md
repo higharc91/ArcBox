@@ -81,7 +81,7 @@ gets dragged, Ctrl+Z, or the export tells you to set its Position back to zero.
 |---|---|---|
 | `Beats` | `BeatMarker`, where a story beat happens | `Beat`, an id from `lore/arcs.json` for the region's chapter |
 | `Stamps` | `StampMarker`, a battle map placed at its corner | `Map`, `HeightOffset` |
-| `Spawns` | `SpawnMarker`, one of each | `Kind`: `Start` or `Recovery` (where a beaten party wakes) |
+| `Spawns` | `SpawnMarker`, one Start and one Recovery, plus optional named destinations | `Kind`: `Start`, `Recovery` (where a beaten party wakes), or `Named` with a unique `SpawnName` |
 | `Buildings` | `BuildingMarker`, a piece of the town kit, on its footprint's back corner | `Building`, an id from `town/manifest.json`, and `Variant`. It snaps to the tile grid and outlines the full footprint |
 | `People` | `PersonMarker`, a person placed on one tile | `Preset` from `characters/manifest.json`, `Face`, and an optional `Walk` loop. People are decorative in the TV world and don't block walking |
 
@@ -95,6 +95,10 @@ gets dragged, Ctrl+Z, or the export tells you to set its Position back to zero.
 
 **To add one,** right-click the group, choose Add Child Node, and pick the marker type. It has to be under the right group, or the export
 says so.
+
+**Region entrances (#74 foundation):** a `Named` spawn exports under optional `spawns.named`, sorted by destination name. Existing scenes without named markers export without that field. Names must be nonempty and cannot replace `start` or `recovery`. Keep destinations off battle stamps and on walkable ground that can reach the start and return.
+
+A hand-authored `cave_mouth` interactable links to `{ "to": { "region": "cinder_hollow", "spawn": "entrance" } }`. The mouth is always open; `requires` controls when it is available. Put a return mouth in the destination region and its named return spawn beside the source mouth. The loader checks destination names and return reachability, including passages that might otherwise strand the party. Only the leader proposes travel, followed by a 20-second party vote. Unanswered votes count as Enter; a strict majority is required. Travel preserves a paused regional story cursor, saves the destination and uses the existing epoch/fade presentation. The actual Cinder Hollow scene and Ford mouths remain to be authored.
 
 **A stamp is a tuned battle,** so its tiles must match the map exactly. Don't paint inside its outline.
 

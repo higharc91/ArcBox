@@ -138,6 +138,7 @@ public static class InteractableKinds
         Container("sack", "sack", false, "props.sack", "props.sack", "Old grain."),
         Container("cache", "hidden cache", false, "pickups.loot_sack", null, "Someone hid this, and took it back.", hide: true),
         Passage("door", "door", "The door is shut."),
+        new InteractableKind("cave_mouth", InteractableFamily.Passage, "cave", "interactables.cave_mouth", [Idle], false, Stand(), ["A passage leads into the rock."]),
         Passage("gate", "gate", "The gate is shut."),
         Passage("drawbridge", "drawbridge", "The bridge is raised."),
         Passage("secret_door", "hidden door", "A seam in the stone.", hide: true),

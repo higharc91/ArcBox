@@ -171,6 +171,11 @@
         },
         "recovery": {
           "$ref": "common.schema.json#/$defs/tile"
+        },
+        "named": {
+          "type": "object",
+          "propertyNames": { "minLength": 1, "not": { "enum": ["start", "recovery"] } },
+          "additionalProperties": { "$ref": "common.schema.json#/$defs/tile" }
         }
       },
       "required": [

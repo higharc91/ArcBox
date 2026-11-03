@@ -54,6 +54,7 @@ public static class Interactables
         var kind = KindOf(def);
         var state = kind.Family switch
         {
+            InteractableFamily.Passage when def.Kind == "cave_mouth" => InteractableKinds.Idle,
             InteractableFamily.Passage => def.Open ? InteractableKinds.Opened : InteractableKinds.Closed,
             InteractableFamily.Switch => def.Open ? InteractableKinds.On : InteractableKinds.Off,
             _ => kind.States[0],
@@ -189,6 +190,7 @@ public static class Interactables
             return null;
         var name = NameOf(def);
         var kind = KindOf(def);
+        if (def.To is not null) return $"Enter {name}";
         return kind.Family switch
         {
             InteractableFamily.Container when save.State == InteractableKinds.Closed => $"Open the {name}",

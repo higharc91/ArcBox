@@ -47,6 +47,19 @@ public sealed class SceneTextTests : IDisposable
 
     public void Dispose() => _folder.Delete(recursive: true);
 
+    [Fact]
+    public void A_named_spawn_marker_reads_its_explicit_destination_name()
+    {
+        var scene = Read("""
+            [node name="Return" type="Marker2D" parent="Spawns" unique_id=8]
+            script = ExtResource("4_d")
+            position = Vector2(96, 64)
+            Kind = 2
+            SpawnName = "cave_return"
+            """);
+        Assert.Equal(("cave_return", new Tile(3, 2)), Assert.Single(scene.NamedSpawns));
+    }
+
     private PaintedRegion Read(string rest, string head = Head)
     {
         var (scene, materials) = (Path.Combine(_folder.FullName, "r.tscn"), Path.Combine(_folder.FullName, "materials.tres"));

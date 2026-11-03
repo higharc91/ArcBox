@@ -29,7 +29,7 @@ public sealed class BaseLoreTests
 
         Assert.Equal(("battle", "ford_bridge", "river_crossing"), (beat.Kind, beat.Place, beat.Encounter));
         Assert.Equal(["ch1_skarrow_spared"], beat.Requires);
-        Assert.Empty(beat.Sets);
+        Assert.Equal(["ch1_ford_settled"], beat.Sets);
         Assert.Empty(beat.Choices);
 
         var choice = Book.Value.ArcFor("ashen_ford")!.Beats.Single(b => b.Id == "ch1_the_ford_choice");

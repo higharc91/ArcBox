@@ -13,6 +13,16 @@ namespace Tactics.Game;
 /// </summary>
 public sealed partial class TacticsGame
 {
+    /// <summary>Older saves predate the bounty flag; a completed main-story battle is already proof of victory.</summary>
+    private void RestoreFordSettlement()
+    {
+        const string settled = "ch1_ford_settled";
+        if (_doc.World is not { } world || world.Flags.Contains(settled)) return;
+        var ford = Lore.ArcFor("ashen_ford");
+        if (ford is null || !ford.Beats.Any(b => b.Kind == ArcBeat.Battle && b.Sets.Contains(settled) && world.Beats.Contains(b.Id))) return;
+        _doc = _doc with { World = world with { Flags = world.Flags.Add(settled) } };
+    }
+
     /// <summary>What a scene is doing: the values of <see cref="StoryView.State"/>.</summary>
     public static class StoryStates
     {
@@ -301,6 +311,8 @@ public sealed partial class TacticsGame
         var c = Cursor!;
         SetCursor(c with { Scene = scene.Id, Node = node.Id, Line = 0, Played = c.Played.Contains(node.Id) ? c.Played : c.Played.Add(node.Id), Roll = null, Checking = null });
         ThingNodeEntered(node, c.Roll);     // an interaction's outcome, saved with this node's first line; the roll that led here, for a search
+        if (node.End && node.Lines.IsEmpty)
+        { KeepWorld(); Save(); StageDone(); return; }
         PlayLine(scene, node, 0);
     }
 
@@ -640,7 +652,7 @@ public sealed partial class TacticsGame
     }
 
     /// <summary>How long the open question has (5d default 4).</summary>
-    private TimeSpan QuestionLength() => CampVote ? TimeSpan.FromSeconds(20) : _telling switch
+    private TimeSpan QuestionLength() => CampVote || EntranceVote ? TimeSpan.FromSeconds(20) : _telling switch
     {
         StoryStates.TieBreak => Tell.TieBreak,
         StoryStates.PickRoller => Tell.Roller,
@@ -799,6 +811,7 @@ public sealed partial class TacticsGame
     private void QuestionDue()
     {
         if (CampVote) { RestVoteDue(); return; }
+        if (EntranceVote) { EntranceVoteDue(); return; }
         if (!Questioning || CurrentNode() is null)
             return;
         switch (_telling)
