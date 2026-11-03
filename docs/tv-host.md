@@ -101,7 +101,7 @@ error is logged; **Esc** ends the game as usual.
 After creating a room the host writes `user://session.json` = `{serverUrl, code, hostToken}`
 (on Linux `~/.local/share/godot/app_userdata/ArcBox/session.json`). On the next launch it calls `ResumeHost` with
 it, so killing and relaunching the TV keeps the room, its players and any game in progress: the server re-sends the
-lobby (and the current host view), and the TV redraws from that snapshot. If the resume fails (the server restarted,
+lobby (and the current host view), and the TV redraws from that snapshot. While a game runs, the TV asks for **patches**: after the first whole view it's sent only what changed, which keeps a Tactics overworld step in one network packet. A walking step patch is about 450 bytes, against a whole view of about 4.3 KB in Ashen Ford. `HostClient` applies them and hands the scene whole views as before, and any rebind, new game or unreadable patch brings a whole view again. See [the platform spec](superpowers/specs/2026-10-18-arcbox-platform-design.md) §4.1, "Host view patches", and issue #77. If the resume fails (the server restarted,
 or the room expired), the file is deleted and a new room is created. A session saved for a different server URL is
 ignored.
 
