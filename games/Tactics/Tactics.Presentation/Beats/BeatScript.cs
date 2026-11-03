@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using Tactics.Game;
 using Tactics.Logic;
 using Tactics.Presentation.Audio;
+using Tactics.Presentation.Board;
 
 namespace Tactics.Presentation.Beats;
 
@@ -83,6 +84,18 @@ public static class BeatTiming
     /// <summary>Between the tiles of something big: a collapse alters its tiles one event at a time.</summary>
     public const double Ripple = 0.06;
 
+    /// <summary>A connected surface's ripple, compressed on very large fronts.</summary>
+    public const double SurfaceRipple = 0.04;
+
+    /// <summary>The longest electrical front, leaving room for its arcs before a second passes.</summary>
+    public const double ConductFront = 0.24;
+
+    /// <summary>A fire or frost front: the long flame clip still finishes inside a second.</summary>
+    public const double SurfaceFront = 0.10;
+
+    /// <summary>A reaction's minimum hold, including the arrival of its new surface.</summary>
+    public const double SurfaceHold = 0.6;
+
     /// <summary>A boss changing phase.</summary>
     public const double Phase = 0.8;
 
@@ -124,7 +137,17 @@ public sealed record PoseCue(double At, double Length, UnitId Unit, string Anim,
 public sealed record FlightCue(double At, double Length, ShotArt Art, Tile From, Tile To) : Cue(At, Length);
 
 /// <summary>An effect on a tile, turned toward another if it's <see cref="FxClip.Aimed"/>.</summary>
-public sealed record BurstCue(double At, double Length, FxClip Clip, Tile Tile, Tile? Toward = null) : Cue(At, Length);
+public sealed record BurstCue(double At, double Length, FxClip Clip, Tile Tile, Tile? Toward = null) : Cue(At, Length)
+{
+    /// <summary>Size about the manifest's anchor; smaller fronts keep neighboring figures readable.</summary>
+    public float Scale { get; init; } = 1;
+
+    /// <summary>Brightness of this burst, before its clip's blend mode.</summary>
+    public float Alpha { get; init; } = 1;
+}
+
+/// <summary>A transient hazard, with its ground and over art sorted around the figures.</summary>
+public sealed record HazardCue(double At, double Length, string Hazard, Tile Tile) : Cue(At, Length);
 
 /// <summary>How a number pops.</summary>
 public enum PopStyle { Damage, Heal, Crit }
@@ -203,6 +226,11 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         private bool _shot;            // this ability's blow arrived through the air
         private bool _voiced;          // this ability's effect has a sound of its own
 
+        private TileReacted? _reaction;
+        private double _reactionStart;
+        private double _reactionFinish;
+        private int _reactionEnd = -1;
+
         public BeatScript Build()
         {
             _big = beat.Events.OfType<TerrainAltered>().Sum(a => a.Tiles.Length) > 2;
@@ -213,8 +241,15 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     _areaEnd = AreaEnd(_at);
                 if (!PartOfTheFall(e))
                     Flush();
+                if (_reaction is not null)
+                    _t = ReactionTime(e);
                 Play(e);
                 _view = DisplayedBattle.Apply(_view, e, live);
+                if (_at == _reactionEnd)
+                {
+                    _t = _reactionFinish;
+                    _reaction = null;
+                }
                 if (_at == _areaEnd)
                 {
                     Moment("area");
@@ -231,7 +266,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         private bool PartOfTheFall(BattleEvent e)
             => e is Fell || (_collapsing && e is TerrainAltered or Downed or Died or UnitOut or ConditionApplied or ConditionRemoved or PassiveTriggered);
 
-        private bool InArea => _at <= _areaEnd;
+        private bool InArea => _reaction is not null || _at <= _areaEnd;
 
         /// <summary>
         /// The index of the last event of the ability at <paramref name="start"/> on one of its targets if it's an area effect, or
@@ -243,7 +278,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         private int AreaEnd(int start)
         {
             var source = ((AbilityUsed)beat.Events[start]).Source;
-            var window = beat.Events.Skip(start + 1).TakeWhile(e => e is not (AbilityUsed or TurnEnded)).ToArray();
+            var window = beat.Events.Skip(start + 1).TakeWhile(e => e is not (AbilityUsed or TurnEnded or TileReacted)).ToArray();
             var rolled = window.Select(RolledAgainst).OfType<UnitId>().Where(u => u != source).ToHashSet();
             var targets = rolled.Count > 0
                 ? rolled
@@ -285,10 +320,10 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
 
         private void Apply(BattleEvent e) => _cues.Add(new ApplyCue(_t, e));
 
-        private void Burst(string? key, Tile? tile, double? at = null, Tile? toward = null)
+        private void Burst(string? key, Tile? tile, double? at = null, Tile? toward = null, float scale = 1, float alpha = 1)
         {
             if (key is not null && tile is { } place && fx.Clip(key) is { } clip)
-                _cues.Add(new BurstCue(at ?? _t, clip.Loop ? BeatTiming.BurstMost : clip.Seconds, clip, place, toward));
+                _cues.Add(new BurstCue(at ?? _t, clip.Loop ? BeatTiming.BurstMost : clip.Seconds, clip, place, toward) { Scale = scale, Alpha = alpha });
         }
 
         private void Moment(string label, double after = 0) => _cues.Add(new MomentCue(_t + after, label));
@@ -415,15 +450,18 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     Apply(e);
                     _t += BeatTiming.Puff;
                     break;
+                case TileReacted reaction:
+                    PlayReaction(reaction);
+                    break;
                 case ZoneCreated:
-                    Sound("zone_created");
+                    Sound(_reaction is null ? "zone_created" : null);
                     Apply(e);
                     Moment("zone", BeatTiming.Zone * 0.8);
-                    _t += BeatTiming.Zone;
+                    _t += _reaction is null ? BeatTiming.Zone : 0;
                     break;
                 case ZoneEnded:
                     Apply(e);
-                    _t += BeatTiming.Condition;
+                    _t += _reaction is null ? BeatTiming.Condition : 0;
                     break;
                 case TerrainAltered altered:
                     PlayTerrain(altered);
@@ -460,6 +498,62 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     Apply(e);
                     break;
             }
+        }
+
+        // Only the ordinary consequences of this reaction belong to its front. A new action, round,
+        // turn or reaction starts its own clock; sounds and pops never multiply the wait per victim.
+        private static bool ReactionConsequence(BattleEvent e) => e is ZoneCreated or ZoneEnded or Rolled
+            or Damaged or ConditionApplied or ConditionRemoved or Downed or Died or UnitOut
+            or PassiveTriggered or ConcentrationBroken;
+
+        private double Front(int index)
+        {
+            var count = _reaction!.Tiles.Length;
+            var cap = _reaction.Rule == "conduct" ? BeatTiming.ConductFront : BeatTiming.SurfaceFront;
+            return index * Math.Min(BeatTiming.SurfaceRipple, cap / Math.Max(1, count - 1));
+        }
+
+        private double ReactionTime(BattleEvent e)
+        {
+            var unit = e is Rolled roll ? roll.Roller : Touched(e);
+            var tile = unit is { } id ? TileOf(id) : null;
+            var index = tile is { } at ? _reaction!.Tiles.IndexOf(at) : -1;
+            return _reactionStart + (index >= 0 ? Front(index) : BeatTiming.SurfaceFront);
+        }
+
+        private void PlayReaction(TileReacted reaction)
+        {
+            Apply(reaction);
+            _reaction = reaction;
+            _reactionStart = _t;
+            _reactionEnd = _at;
+            while (_reactionEnd + 1 < beat.Events.Length && ReactionConsequence(beat.Events[_reactionEnd + 1]))
+                _reactionEnd++;
+            var (effect, sound) = reaction.Rule switch
+            {
+                "ignite" or "spread" or "burn_web" => ("fx.flames.fire", "spell_fire_aura"),
+                "freeze" => ("fx.ice.frost", "spell_ice"),
+                "thaw" => ("fx.misty.mist", "smoke_poof"),
+                "douse" => ("fx.poof.white", "smoke_poof"),
+                "conduct" => ((string?)null, "spell_lightning"),
+                _ => (null, (string?)null),
+            };
+            Sound(sound);
+            var tail = fx.Clip(effect ?? "")?.Seconds ?? BeatTiming.SurfaceHold;
+            for (var i = 0; i < reaction.Tiles.Length; i++)
+            {
+                var at = _t + Front(i);
+                var tile = reaction.Tiles[i];
+                var fire = reaction.Rule is "ignite" or "spread" or "burn_web";
+                Burst(effect, tile, at, scale: fire ? 0.8f : 1, alpha: fire ? 0.7f : 1);
+                if (reaction.Rule == "freeze")
+                    Burst("fx.dust.snow", tile, at + 0.08);
+                if (reaction.Rule == "conduct")
+                    _cues.Add(new HazardCue(at, BeatTiming.SurfaceHold, "electrified", tile));
+            }
+            var front = Front(Math.Max(0, reaction.Tiles.Length - 1));
+            _reactionFinish = _t + Math.Max(BeatTiming.SurfaceHold, front + tail);
+            Moment("reaction-" + reaction.Rule, Math.Min(0.25, front + 0.12));
         }
 
         private void PlayWalk(Moved moved)
@@ -576,7 +670,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             _cues.Add(new BadgeCue(_t, BeatTiming.Badge, unit, tile, roll.Kept, roll.Success));
             Sound("ui_dice_roll");
             Moment("save", 0.1);
-            _t += _rolls++ == 0 ? BeatTiming.BadgeHold : BeatTiming.Stagger;   // a second roll is an area's: they resolve together
+            _t += _reaction is not null ? 0 : _rolls++ == 0 ? BeatTiming.BadgeHold : BeatTiming.Stagger;   // a second roll is an area's: they resolve together
             _rolled = true;
         }
 
@@ -599,7 +693,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
 
         private void PlayDamage(Damaged hit)
         {
-            Burst(hit.Type is { } type && !Physical.Contains(type) ? Magic : Spark, TileOf(hit.Unit));
+            Burst(_reaction?.Rule == "conduct" ? "fx.shock.storm" : hit.Type is { } type && !Physical.Contains(type) ? Magic : Spark, TileOf(hit.Unit));
             if (hit.Amount > 0)
                 Pop(hit.Unit, $"-{hit.Amount}", PopStyle.Damage);
             _cues.Add(new PoseCue(_t, BeatTiming.Impact, hit.Unit, Hurt));
@@ -613,6 +707,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         // A blow takes its moment; the rest of an area effect's targets follow close behind it.
         private void Land()
         {
+            if (_reaction is not null)
+                return;
             if (!InArea)
                 _t += _hits++ == 0 ? BeatTiming.Impact : BeatTiming.Stagger;
             else if (!_rolled)
@@ -641,7 +737,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         private void PlayLoss(BattleEvent e, UnitId unit)
         {
             _cues.Add(new PoseCue(_t, BeatTiming.Down, unit, Down));
-            var fallen = _t + BeatTiming.Down;
+            var fallen = _t + (_reaction is not null ? BeatTiming.Condition : BeatTiming.Down);
             Cry(unit, "death");
             Sound("died", fallen);
             Burst(Puff, TileOf(unit), fallen);

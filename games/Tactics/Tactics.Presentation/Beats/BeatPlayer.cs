@@ -22,6 +22,14 @@ public sealed record FxDraw(string Path, ArtRect Source, Vector2 TopLeft, Vector
 {
     /// <summary>It's a mark for the people watching, a number or a die badge, rather than part of the scene: it goes when the units' marks do (<see cref="MarkRule"/>).</summary>
     public bool Mark { get; init; }
+
+    /// <summary>A transient surface sorts into the board here; other effects draw over the scene.</summary>
+    public long? Order { get; init; }
+
+    /// <summary>Stage art stays in battle pixels, but sorts beside figures and scenery on the region's tiles.</summary>
+    public FxDraw AtWorldOrigin(Tile origin) => Order is { } order
+        ? this with { Order = order + BoardOrder.Key(origin, BoardLayer.Under) }
+        : this;
 }
 
 /// <summary>Where a number that pops up over a unit is drawn this moment, in art pixels.</summary>
@@ -261,7 +269,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
             case SoundCue sound:
                 heard.Add(sound.Id);
                 break;
-            case BurstCue or PopCue or BadgeCue or FlightCue:
+            case BurstCue or PopCue or BadgeCue or FlightCue or HazardCue:
                 _fading.Add((cue, _now - (_clock - cue.At)));
                 break;
         }
@@ -344,6 +352,20 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
         var share = (float)(into / cue.Length);
         switch (cue)
         {
+            case HazardCue hazard when fx.Hazard(hazard.Hazard) is { } art:
+                var centre = terrain.Centre(hazard.Tile);
+                // A quick arrival and a soft release avoid the whole water patch blinking off together.
+                var alpha = (float)Math.Min(1, Math.Min(into / 0.04, (hazard.Length - into) / 0.18));
+                void Layer(ArtImage image, Vector2 size, Vector2 origin, BoardLayer layer)
+                {
+                    var frame = (int)(into * image.Fps) % image.Frames;
+                    draws.Add(new FxDraw(image.Path, new ArtRect(frame * (int)size.X, 0, (int)size.X, (int)size.Y),
+                        centre - origin, size, 0, false, Math.Clamp(alpha, 0, 1)) { Order = BoardOrder.Key(hazard.Tile, layer) });
+                }
+                Layer(art.Ground, art.Frame, art.Origin, BoardLayer.Ground);
+                if (art.Over is { } over)
+                    Layer(over, art.OverFrame, art.OverOrigin, BoardLayer.Over);
+                break;
             case BurstCue burst:
                 DrawBurst(burst, into, terrain, draws);
                 break;
@@ -367,10 +389,10 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
         var angle = MathF.Atan2(way.Y, way.X);
 
         // Drawing turns around the frame's middle, so its anchor is put where it should land after the turn.
-        var size = new Vector2(clip.Width, clip.Height);
-        var anchor = Vector2.Transform(new Vector2(clip.AnchorX, clip.AnchorY) - size / 2, Matrix3x2.CreateRotation(angle));
+        var size = new Vector2(clip.Width, clip.Height) * burst.Scale;
+        var anchor = Vector2.Transform(new Vector2(clip.AnchorX, clip.AnchorY) * burst.Scale - size / 2, Matrix3x2.CreateRotation(angle));
         var at = from - new Vector2(0, clip.Lift) - anchor - size / 2;
-        draws.Add(new FxDraw(clip.Path, new ArtRect(clip.FrameAt(into) * clip.Width, 0, clip.Width, clip.Height), at, size, angle, clip.Additive, 1));
+        draws.Add(new FxDraw(clip.Path, new ArtRect(clip.FrameAt(into) * clip.Width, 0, clip.Width, clip.Height), at, size, angle, clip.Additive, burst.Alpha));
     }
 
     private static void DrawFlight(FlightCue flight, double into, float share, BoardTerrain terrain, ImmutableArray<FxDraw>.Builder draws)

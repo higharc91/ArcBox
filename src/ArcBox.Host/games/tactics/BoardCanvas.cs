@@ -41,6 +41,7 @@ public partial class BoardCanvas : Node2D
     private readonly List<float> _alphas = [];
     private ImmutableArray<BoardUnit> _units = [];
     private int[] _sequence = [];
+    private ImmutableArray<FxDraw> _surfaceDraws = [];
     private bool _animated;
     private double _clock;
     private long _tick;
@@ -210,6 +211,10 @@ public partial class BoardCanvas : Node2D
     /// <summary>Shows a beat's effects, numbers and badges over everything, with the board <paramref name="shake"/> art pixels off its place.</summary>
     public void SetEffects(ImmutableArray<FxDraw> draws, System.Numerics.Vector2 shake)
     {
+        var hadSurfaces = !_surfaceDraws.IsEmpty;
+        _surfaceDraws = [.. draws.Where(d => d.Order is not null).OrderBy(d => d.Order)];
+        if (hadSurfaces || !_surfaceDraws.IsEmpty)
+            QueueRedraw();
         _light.Show(draws);
         _over.Show(draws);
         Position = _origin + new Vector2(shake.X, shake.Y) * Scale;
@@ -256,8 +261,12 @@ public partial class BoardCanvas : Node2D
         _lighting?.Step(_clock);
         var light = _baked ? null : _lighting;
         BoardPainter.GridAlpha = _gridAlpha;
+        var surface = 0;
         foreach (var step in _sequence)
         {
+            var order = step < 0 ? _units[~step].Order : _orders[step];
+            while (surface < _surfaceDraws.Length && _surfaceDraws[surface].Order <= order)
+                DrawSurface(_surfaceDraws[surface++]);
             if (step < 0)
             {
                 DrawUnit(_units[~step]);
@@ -267,8 +276,19 @@ public partial class BoardCanvas : Node2D
                 _painter.Paint(this, _items[step], light, _clock, _alphas[step]);
             }
         }
+        while (surface < _surfaceDraws.Length)
+            DrawSurface(_surfaceDraws[surface++]);
         BoardPainter.GridAlpha = 1;
         LastDrawMs = System.Diagnostics.Stopwatch.GetElapsedTime(clock).TotalMilliseconds;
+    }
+
+    private void DrawSurface(FxDraw draw)
+    {
+        if (Load(draw.Path) is not { } texture)
+            return;
+        DrawTextureRectRegion(texture,
+            new Rect2(draw.TopLeft.X, draw.TopLeft.Y, draw.Size.X, draw.Size.Y),
+            new Rect2(draw.Source.X, draw.Source.Y, draw.Source.Width, draw.Source.Height), new Color(1, 1, 1, draw.Alpha));
     }
 
     private static Color Colour(Rgb colour, float alpha = 1) => new(colour.R, colour.G, colour.B, alpha);
