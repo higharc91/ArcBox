@@ -91,7 +91,7 @@ def _soft_mask(field: np.ndarray, t: float, dither: float) -> np.ndarray:
     return (field > t + dither) | ((field > t - dither) & ck)
 
 
-def grass(seed: int = 11, *, density: float = 4.2) -> Canvas:
+def grass(seed: int = 11, *, density: float = 8.0) -> Canvas:
     """Meadow grass: broad light and shadow masses, patches of a neighbouring green (the `alt` ramp) so a field is
     never one flat hue, and blades drawn as *clumps*: a dark root pool with three to six tufts standing in it,
     tips lit from the top-left. Sparse single tufts fill the gaps."""
@@ -107,20 +107,22 @@ def grass(seed: int = 11, *, density: float = 4.2) -> Canvas:
             xx, yy = (x + (lean * k) // 2) % T, (y - k) % T
             shade[yy, xx] = min(5, max(1, b + (2 if k == hgt - 1 and hgt > 2 else 1 if k else -1)))
 
-    for cx, cy in tex.poisson(T, T, 9.0, r, tries=1800):
+    for cx, cy in tex.poisson(T, T, 15.0, r, tries=1800):
         b = int(base[cy, cx])
         for dx in range(-2, 3):                                       # the clump's shadowed root pool
             shade[(cy + 1) % T, (cx + dx) % T] = max(1, b - 1)
         shade[(cy + 2) % T, (cx + 1) % T] = max(1, b - 1)
-        k = int(r.integers(4, 7))
+        k = int(r.integers(3, 5))
         for i in range(k):                                            # blades fan out from the root
             off = int(round((i - (k - 1) / 2) * 1.2))
             lean = -1 if off < -1 else (1 if off > 1 else 0)
-            blade(cx + off, cy, b, int(r.integers(3, 6)) - (abs(off) > 1), lean)
+            blade(cx + off, cy, b, int(r.integers(2, 5)) - (abs(off) > 1), lean)
     for x, y in tex.poisson(T, T, density * 1.5, r, tries=2500):
         if shade[y, x] == base[y, x]:
             blade(x, y, int(base[y, x]), int(r.integers(2, 4)), int(r.choice([-1, 0, 0, 1])))
-    return _canvas(T, T, shade, slot)
+    # The floor supports small characters: light tips stop at shade 4 rather
+    # than filling the entire meadow with isolated, near-white highlights.
+    return _canvas(T, T, np.minimum(shade,4), slot)
 
 
 def _pebble(shade: np.ndarray, x: int, y: int, w: int) -> None:
@@ -540,8 +542,11 @@ def sandstone_top(seed: int = 271) -> Canvas:
 
 
 def ash(seed: int = 281) -> Canvas:
-    """Volcanic ash flats: soft grey drifts, scattered cinders that cast tiny shadows, and a few embers still
-    glowing in the ash (glow slot, emissive)."""
+    """Cold ash drifts and charred fragments, a century after the Fall.
+
+    Ashen Ford's soil retains warmth; ordinary ash is not a field of glowing
+    coals. Active fire is represented by explicit lava, vents and campfires.
+    """
     r = tex.rng(seed)
     n = tex.fbm(T, T, 4, r, octaves=3, aspect=1.5)
     shade = tex.quantize(n, [(0.3, 2), (0.72, 4)], 3, dither=0.04)
@@ -555,11 +560,6 @@ def ash(seed: int = 281) -> Canvas:
         for dx in range(1, sw + 1):
             if slot[(y + 2) % T, (x + dx) % T] == SLOTS.id("main"):
                 shade[(y + 2) % T, (x + dx) % T] = 1
-    for x, y in tex.poisson(T, T, 18, r, tries=300):
-        slot[y, x] = SLOTS.id("glow")
-        shade[y, x] = 5
-        slot[y, (x + 1) % T] = SLOTS.id("glow")
-        shade[y, (x + 1) % T] = 3
     return _canvas(T, T, shade, slot)
 
 
@@ -1195,7 +1195,7 @@ CATALOGUE: list[TerrainTex] = [
     TerrainTex("dunes", "top", dunes, {"gold": _v(main="tr/dune"), "pale": _v(main="sand")}),
     TerrainTex("sandstone", "top", sandstone_top, {"ochre": _v(main="tr/sandstone", alt="tr/sandstone_red"),
                                                     "red": _v(main="tr/sandstone_red", alt="tr/sandstone")}),
-    TerrainTex("ash", "top", ash, {"grey": _v(main="tr/ash", alt="tr/obsidian", glow="lava")}, tags=["emissive"]),
+    TerrainTex("ash", "top", ash, {"grey": _v(main="tr/ash", alt="tr/obsidian")}),
     TerrainTex("basalt", "top", basalt, {"dark": _v(main="tr/basalt", alt="tr/ash")}),
     TerrainTex("pavers", "top", pavers, {"grey": _v(main="tr/paver", grout="mortar", moss="moss"),
                                           "dark": _v(main="tr/paver_dark", grout="mortar", moss="moss"),
@@ -1219,7 +1219,8 @@ CATALOGUE: list[TerrainTex] = [
     TerrainTex("ice_side", "side", ice_side, {"glacier": _v(main="tr/glacier", alt="snow"),
                                               "clear": _v(main="ice", alt="snow")}),
     TerrainTex("basalt_side", "side", basalt_side, {"dark": _v(main="tr/basalt")}),
-    TerrainTex("plank_side", "side", plank_side, {"oak": _v(main="planks", metal="metal/iron")}),
+    TerrainTex("plank_side", "side", plank_side, {"oak": _v(main="planks", metal="metal/iron"),
+                                                 "dark": _v(main="wood/dark", metal="metal/iron")}),
     # lips
     TerrainTex("grass_lip", "lip", lambda: lip(191, kind="grass"), {
         "green": _v(main="grass"), "lush": _v(main="grass_lush"), "dry": _v(main="grass_dry"),
@@ -1248,10 +1249,9 @@ CATALOGUE: list[TerrainTex] = [
 LIGHTS = {
     # Point lights for glowing textures, for the renderer to scatter over them: one light per `every` tiles (in a
     # staggered grid), lifted `lift` texels above the surface, `radius` in tiles, with a flicker curve from the
-    # props manifest's lighting.flicker. Lava lights its surroundings; ash and cooling crust only glimmer.
+    # props manifest's lighting.flicker. Only explicitly active volcanic materials glow.
     "lava": {"every": 2, "radius": 2.5, "lift": 4, "flicker": "pulse", "power": 0.8},
     "lava_side": {"every": 2, "radius": 1.5, "lift": 0, "flicker": "pulse", "power": 0.5},
-    "ash": {"every": 4, "radius": 1.0, "lift": 2, "flicker": "pulse", "power": 0.25},
 }
 
 

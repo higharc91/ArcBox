@@ -17,6 +17,7 @@ public partial class Commands : Node
           --new=<id>               make an empty region scene in regions/; --chapter=<n> --size=<w>x<h> --name=<name> are optional
           --export=<id or scene>   export a region; --rules=<folder> writes to that pack instead of the base pack
           --remap-props=<id>       remap a scene's prop atlas after a rebuild; requires --old-props=<manifest>; repeat --replace-prop=old@variant=new@variant to change painted variants
+          --edit-props=<id>        change single props in a scene and leave its paint alone; repeat --clear-prop=<x>,<y> and --place-prop=<id>@<variant>@<x>,<y>
           --swatches               write the palette's images (then run Godot's --import)
           --tilesets               write the palette's tile sets
           --sample=<scene>         write a small test scene with a stamp; --map=<id> picks the map, --tamper paints over a stamped tile
@@ -58,6 +59,8 @@ public partial class Commands : Node
             return Export(export);
         if (Arg("remap-props") is { } remap)
             return RemapProps(remap);
+        if (Arg("edit-props") is { } edit)
+            return EditProps(edit);
         if (Arg("draft") is { } draft)
             return DraftScene.Run(draft);
         if (Arg("dress") is { } dress)
@@ -91,6 +94,56 @@ public partial class Commands : Node
             GD.Print($"PROBLEM: {problem}");
         GD.Print(result.Status);
         return result.Written is null ? 1 : 0;
+    }
+
+    private static int EditProps(string idOrPath)
+    {
+        var path = RegionPaths.Scene(idOrPath);
+        if (ResourceLoader.Load<PackedScene>(path)?.Instantiate() is not Region root)
+        {
+            GD.PrintErr($"{path} isn't a region scene.");
+            return 2;
+        }
+        try
+        {
+            var layer = root.GetNodeOrNull<TileMapLayer>(RegionScene.PropsLayer);
+            if (layer is null)
+            {
+                GD.PrintErr($"{path} has no Props layer.");
+                return 2;
+            }
+            var args = OS.GetCmdlineUserArgs();
+            foreach (var value in args.Where(a => a.StartsWith("--clear-prop=", StringComparison.Ordinal)))
+                layer.EraseCell(ParseCell(value["--clear-prop=".Length..]));
+            foreach (var value in args.Where(a => a.StartsWith("--place-prop=", StringComparison.Ordinal)))
+            {
+                var cut = value.LastIndexOf('@');
+                var (id, variant) = ParsePropKey(value["--place-prop=".Length..cut]);
+                var (x, y) = PaletteBuilder.PropAtlas(id, variant);
+                layer.SetCell(ParseCell(value[(cut + 1)..]), 0, new Vector2I(x, y));
+            }
+            var packed = new PackedScene();
+            var error = packed.Pack(root);
+            if (error == Error.Ok)
+                error = ResourceSaver.Save(packed, path);
+            if (error != Error.Ok)
+            {
+                GD.PrintErr($"Couldn't save {path}: {error}.");
+                return 2;
+            }
+            GD.Print($"{path} now has {layer.GetUsedCells().Count} prop cells.");
+            return 0;
+        }
+        finally
+        {
+            root.Free();
+        }
+    }
+
+    private static Vector2I ParseCell(string value)
+    {
+        var parts = value.Split(',', 2);
+        return new Vector2I(int.Parse(parts[0]), int.Parse(parts[1]));
     }
 
     private static int RemapProps(string idOrPath)

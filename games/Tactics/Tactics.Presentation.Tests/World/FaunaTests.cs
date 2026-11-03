@@ -33,8 +33,9 @@ public sealed class FaunaTests
     [Fact]
     public void Every_animal_in_the_pack_is_drawn_at_about_its_size_beside_a_person()
     {
-        // A person in the pack's sheets stands about 29 px from heel to crown (frame 40, feet at 37, head top at 8): the user's measures.
+        // Keep the original animal/person ratios when the party art changes its authored density.
         var art = ArtIndex.Load(Pack.Root);
+        var referenceScale = UnitArt.Load(Pack.Root).Sprite("characters.class_fighter")!.HeadLift / 29f;
         (string Id, string Variant, int Least, int Most)[] animals =
         [
             ("pack_mule_anim", "grey", 22, 32),      // shoulder height at the back, the head above it
@@ -42,6 +43,8 @@ public sealed class FaunaTests
             ("red_fox_anim", "russet", 7, 13),       // smaller than a dog
             ("river_duck_anim", "mallard", 5, 9),
             ("field_crow_anim", "charcoal", 4, 8),   // tiny
+            ("farm_dog_anim", "brown", 9, 17),
+            ("farm_sheep_anim", "cream", 10, 18),
         ];
         foreach (var (id, variant, least, most) in animals)
         {
@@ -49,7 +52,7 @@ public sealed class FaunaTests
             var (rgba, width, height) = PngPixels.Read(Path.Combine(Pack.Root, prop.Image.Path));
             var strip = SpriteShrink.Shrink(rgba, width, height, prop.Image.Frames, prop.Scale);
             var rows = Enumerable.Range(0, strip.Height).Where(y => Enumerable.Range(0, strip.Width).Any(x => strip.Rgba[(y * strip.Width + x) * 4 + 3] != 0)).ToArray();
-            Assert.InRange(rows.Max() - rows.Min() + 1, least, most);
+            Assert.InRange(rows.Max() - rows.Min() + 1, (int)MathF.Round(least * referenceScale), (int)MathF.Ceiling(most * referenceScale));
             Assert.Equal(SpriteShrink.Anchor(prop.AnchorX, prop.AnchorY, prop.Width, prop.Height, prop.Scale).Y, rows.Max());   // feet on the ground
         }
     }
@@ -162,5 +165,22 @@ public sealed class FaunaTests
 
         Assert.NotEmpty(domain);
         Assert.All(domain, t => Assert.True(t.X is > 2 and < 8 && t.Y is > 2 and < 8, $"{t} is outside the pen"));
+    }
+    [Fact]
+    public void Every_live_overworld_animal_starts_on_clear_ground_in_its_habitat()
+    {
+        var art = ArtIndex.Load(Pack.Root);
+        var map = Pack.Ground("ashen_ford").Map;
+        var free = FaunaRange.Free(map, art.PropHeight);
+        var animals = map.Props.Where(p => WorldAnimalIds.Contains(p.Id)).ToArray();
+        Assert.Contains(animals, a => a.Id == "farm_dog");
+        Assert.Equal(2, animals.Count(a => a.Id == "farm_sheep"));
+        foreach (var animal in animals)
+        {
+            Assert.True(free.Contains(animal.At), $"{animal.Id} at {animal.At} is covered by a prop or building");
+            var water = (map[animal.At].Flags & TileFlags.Water) != 0;
+            Assert.Equal(animal.Id == "river_duck", water);
+            Assert.True(FaunaRange.Domain(map, free, animal.At, 3, water).Length > 1, $"{animal.Id} has nowhere to wander");
+        }
     }
 }

@@ -17,7 +17,112 @@ python3 tools/tactics-assets/build.py characters    # one set
 Needs Python 3.11+ with Pillow and numpy. `dev_preview.py` and `dev_zoom.py` are quick-look helpers used while
 drawing.
 
+## Tactical player characters (runtime)
+
+`python3 tools/tactics-assets/build.py tactical` builds the approved tactical art
+into `content/tactics/base/tactical/`. This is the live player-character set: 11
+races × 12 classes, each with all 38 production animations (189 frames per facing).
+Run `python3 tools/tactics-assets/test_tactical.py` to validate coverage, atlas
+addressing, extreme poses, renderer/export agreement and deterministic rebakes.
+
+The authoring canvas is 64×80. Body, garments, head/hair, headwear, cloak, weapon,
+offhand and hands are independent indexed layers in `parts/tactical_art/`; race
+traits and build fitting are applied before animation. The existing production
+pose timings drive per-layer articulation, foot motion, weapon rotation, blinking,
+cloth trailing and collapse. This pass does not add a new appearance editor or
+persist arbitrary per-item cosmetic choices; the live sheets use the class kit.
+
+Runtime atlases use padded 160×160 frames in 24 columns, with each facing occupying
+eight rows. The manifest specifies frame dimensions, anchor, columns, frame count,
+animations, texture density and per-character head position. Padding leaves room
+for raised weapons and lying poses; it is excluded from ground rings and body
+lighting. The host draws at half texture density, preserving the existing world
+footprint, and crops HUD faces rather than shrinking the padded frame.
+
+`characters.<race>_<class>` selects a tactical sheet. `characters.class_<class>`
+is a human alias; named party presets with race/class metadata resolve to the
+matching tactical art. Monsters, NPCs and old packs without a tactical manifest
+continue to use their existing character sheets. Explicit monster/wild-shape
+sprites override race/class selection. Legacy campaign race tags are understood.
+
+The classic `characters/` layer library below remains the format for existing
+NPCs, enemies and asset-tool consumers; its frame size has not changed.
+
+### Held-item attachment contracts
+
+`parts/tactical_art/attachments.py` declares each carried item's hand, grip point,
+rotation behavior and whether it is held or an intentionally floating effect.
+The same race-fitting profile positions the artwork, shoulder, palm and grip.
+Arms solve exactly for the fitted socket, and items rotate about that moving
+socket. The bard's second hand follows the lute, and its rear instrument stays
+in the equipment system rather than receiving cloak motion.
+
+Palms are separate rigid layers; sleeves/forearms can bend and stretch without
+shrinking the hand out of the image. The arm solver, palm and carried item share
+the same fitted socket. Do not add palms or a second weapon into another hand's
+layer, as that would give them the wrong motion owner.
+
+Every rendered runtime frame checks the actual rasterized hand/item contact at
+the grip (allowing one adjacent pixel for nearest-neighbor sampling and outlines).
+A detached held object or equipment layer missing its attachment metadata fails
+the build with the race, class, facing and pose. Floating spells are explicitly
+exempt from physical contact; they still follow their assigned hand. Regression
+tests cover all race/class/facing/pose attachment transforms, pixel contact for
+every walking frame and animation endpoints, and deliberate failure cases.
+Rebuilds stage the entire set before publishing it, preserving the last working
+sheets if any animation frame fails its contact check.
+
+### Material finishing and review
+
+`parts/tactical_art/materials.py` authors broad cloth folds, turned leather planes,
+plate bevels and sleeve/boot shading before race fitting. Its stencils change only
+shades inside the matching material; they cannot grow silhouettes or repaint trim.
+The posed compositor adds one authoring pixel of contact shadow under overlapping
+opaque parts, following the current hand/equipment masks. Emissive spell pixels
+neither cast these shadows nor receive them. Keep folds broad enough to survive
+the runtime's half-density draw; isolated texture specks usually disappear or flicker.
+
+`parts/material_finish.py` applies the same material direction to the classic
+32×40 library, including all 19 humanoid enemy recipes and NPCs. Those details
+are authored from rig points before cloth trailing and whole-body rotation, and
+are exported in both the recolourable layers and the baked preset sheets.
+Beasts and large bosses keep their separate art pipelines.
+
+To compare a revision, save the previous `tactical/` and `characters/presets/`
+directories, then run:
+
+```bash
+python3 tools/tactics-assets/review_materials.py --before /path/to/snapshot
+```
+
+The generated `material-refinement.png` compares identical
+poses at runtime pixel density; `material-world-comparison.png` uses identical
+world layouts with terrain, props and enemies. These software compositions are
+asset reviews, not Godot screenshots; review the game camera as well.
+`material-enemies.png` shows the finishing pass on every humanoid enemy.
+
 ## How the art is built
+
+### Overworld review
+
+The [individual asset review](../../docs/superpowers/reports/overworld-art-review/README.md)
+covers all shipped terrain, props, town buildings and textures, ambient animations,
+map icons, and their shadow/light masks. `audit_overworld.py` produces a searchable
+standalone gallery plus per-image JSON decisions and checks every PNG against its
+manifest. Unknown families require an explicit assessment in
+`parts/overworld_review.py`. Run `python3 tools/tactics-assets/test_overworld.py`
+for the environment-specific regression contracts.
+
+Town families share one frame across every roof/material variant, animation frame
+and day/night state; use the manifest's common size, origin and anchor. Ordinary
+`ash/grey` is cold, non-emissive ash. The `river_steam` ambient asset is low-opacity
+mist anchored to warm water, with no emitted light. `worldmap.placeIcons` overrides
+generic map icons for specific lore place ids and must inherit their lore unlocks.
+
+Ashen Ford's saved region currently has terrain and markers, not detailed prop or
+building placements. The walking renderer is not yet implemented in this checkout.
+The detailed town/effect/landmark art is a library for that work; the shared terrain
+and prop refinements also apply to the live battle renderer.
 
 - **Indexed drawing.** A canvas pixel is a `(slot, shade)` pair, not a colour. A *slot* is a material: `skin`,
   `hair`, `cloth1`, `metal`, and so on. A *shade* indexes a 6-step, hue-shifted ramp (`arcpix/palette.py`).

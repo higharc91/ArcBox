@@ -1,0 +1,131 @@
+{
+  "families": [
+    {
+      "id": "mule",
+      "prop": "pack_mule",
+      "frame": [
+        74,
+        82
+      ],
+      "anchor": [
+        36,
+        74
+      ],
+      "pixel_scale": 0.5,
+      "editor_frame": [
+        37,
+        41
+      ],
+      "directions": 8
+    },
+    {
+      "id": "goat",
+      "prop": "farm_goat",
+      "frame": [
+        50,
+        48
+      ],
+      "anchor": [
+        26,
+        42
+      ],
+      "pixel_scale": 0.5,
+      "editor_frame": [
+        25,
+        24
+      ],
+      "directions": 8
+    },
+    {
+      "id": "fox",
+      "prop": "red_fox",
+      "frame": [
+        52,
+        68
+      ],
+      "anchor": [
+        26,
+        62
+      ],
+      "pixel_scale": 0.5,
+      "editor_frame": [
+        26,
+        34
+      ],
+      "directions": 8
+    },
+    {
+      "id": "duck",
+      "prop": "river_duck",
+      "frame": [
+        32,
+        28
+      ],
+      "anchor": [
+        16,
+        24
+      ],
+      "pixel_scale": 0.5,
+      "editor_frame": [
+        16,
+        14
+      ],
+      "directions": 8
+    },
+    {
+      "id": "crow",
+      "prop": "field_crow",
+      "frame": [
+        44,
+        52
+      ],
+      "anchor": [
+        22,
+        44
+      ],
+      "pixel_scale": 0.4,
+      "editor_frame": [
+        18,
+        21
+      ],
+      "directions": 8
+    },
+    {
+      "id": "dog",
+      "prop": "farm_dog",
+      "frame": [
+        56,
+        58
+      ],
+      "anchor": [
+        28,
+        50
+      ],
+      "pixel_scale": 0.5,
+      "editor_frame": [
+        28,
+        29
+      ],
+      "directions": 8
+    },
+    {
+      "id": "sheep",
+      "prop": "farm_sheep",
+      "frame": [
+        56,
+        52
+      ],
+      "anchor": [
+        28,
+        46
+      ],
+      "pixel_scale": 0.5,
+      "editor_frame": [
+        28,
+        26
+      ],
+      "directions": 8
+    }
+  ],
+  "pending": []
+}

@@ -1,0 +1,481 @@
+{
+  "source_commit": "b1acfe5a7b83704fe28de98830c2a70df9e8b24e",
+  "families": [
+    {
+      "id": "wolf",
+      "name": "Wolf",
+      "source_pack": "beasts",
+      "source_manifest": "content/tactics/base/beasts/manifest.json",
+      "source_frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "source_variants": {
+        "grey": "wolf_grey.png",
+        "timber": "wolf_timber.png",
+        "dire": "wolf_dire.png",
+        "frost": "wolf_frost.png",
+        "wildshape": "wolf_wildshape.png",
+        "alpha": "wolf_alpha.png"
+      },
+      "variant_count": 6,
+      "reference_variant": "grey",
+      "source_file": "content/tactics/base/beasts/wolf_grey.png",
+      "source_visible_bounds": [
+        0,
+        14,
+        45,
+        46
+      ],
+      "tags": [
+        "beast",
+        "wildshape"
+      ],
+      "flying": false,
+      "status": "integrated: eight facings, idle, movement, basic attack and defeated poses; distinct structural forms retained"
+    },
+    {
+      "id": "boar",
+      "name": "Boar",
+      "source_pack": "beasts",
+      "source_manifest": "content/tactics/base/beasts/manifest.json",
+      "source_frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "source_variants": {
+        "brown": "boar_brown.png",
+        "dark": "boar_dark.png"
+      },
+      "variant_count": 2,
+      "reference_variant": "brown",
+      "source_file": "content/tactics/base/beasts/boar_brown.png",
+      "source_visible_bounds": [
+        5,
+        20,
+        41,
+        46
+      ],
+      "tags": [
+        "beast"
+      ],
+      "flying": false,
+      "status": "integrated: eight facings, idle, movement, basic attack and defeated poses; distinct structural forms retained"
+    },
+    {
+      "id": "bear",
+      "name": "Bear",
+      "source_pack": "beasts",
+      "source_manifest": "content/tactics/base/beasts/manifest.json",
+      "source_frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "source_variants": {
+        "brown": "bear_brown.png",
+        "black": "bear_black.png",
+        "polar": "bear_polar.png",
+        "wildshape": "bear_wildshape.png",
+        "undead": "bear_undead.png"
+      },
+      "variant_count": 5,
+      "reference_variant": "brown",
+      "source_file": "content/tactics/base/beasts/bear_brown.png",
+      "source_visible_bounds": [
+        2,
+        15,
+        44,
+        47
+      ],
+      "tags": [
+        "beast",
+        "large",
+        "wildshape"
+      ],
+      "flying": false,
+      "status": "integrated: eight facings, idle, movement, basic attack and defeated poses; distinct structural forms retained"
+    },
+    {
+      "id": "spider",
+      "name": "Giant Spider",
+      "source_pack": "beasts",
+      "source_manifest": "content/tactics/base/beasts/manifest.json",
+      "source_frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "source_variants": {
+        "black": "spider_black.png",
+        "red": "spider_red.png",
+        "phase": "spider_phase.png"
+      },
+      "variant_count": 3,
+      "reference_variant": "black",
+      "source_file": "content/tactics/base/beasts/spider_black.png",
+      "source_visible_bounds": [
+        6,
+        15,
+        45,
+        46
+      ],
+      "tags": [
+        "beast"
+      ],
+      "flying": false,
+      "status": "integrated: eight facings, idle, movement, basic attack and defeated poses; distinct structural forms retained"
+    },
+    {
+      "id": "slime",
+      "name": "Slime",
+      "source_pack": "beasts",
+      "source_manifest": "content/tactics/base/beasts/manifest.json",
+      "source_frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "source_variants": {
+        "green": "slime_green.png",
+        "blue": "slime_blue.png",
+        "magma": "slime_magma.png",
+        "crystal": "slime_crystal.png"
+      },
+      "variant_count": 4,
+      "reference_variant": "green",
+      "source_file": "content/tactics/base/beasts/slime_green.png",
+      "source_visible_bounds": [
+        11,
+        28,
+        37,
+        46
+      ],
+      "tags": [
+        "ooze"
+      ],
+      "flying": false,
+      "status": "integrated: eight facings, idle, movement, basic attack and defeated poses; distinct structural forms retained"
+    },
+    {
+      "id": "bat",
+      "name": "Giant Bat",
+      "source_pack": "beasts",
+      "source_manifest": "content/tactics/base/beasts/manifest.json",
+      "source_frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "source_variants": {
+        "dusk": "bat_dusk.png",
+        "vampire": "bat_vampire.png"
+      },
+      "variant_count": 2,
+      "reference_variant": "dusk",
+      "source_file": "content/tactics/base/beasts/bat_dusk.png",
+      "source_visible_bounds": [
+        5,
+        2,
+        44,
+        29
+      ],
+      "tags": [
+        "beast"
+      ],
+      "flying": true,
+      "status": "integrated: eight facings, idle, movement, basic attack and defeated poses; distinct structural forms retained"
+    },
+    {
+      "id": "drake",
+      "name": "Drake",
+      "source_pack": "beasts",
+      "source_manifest": "content/tactics/base/beasts/manifest.json",
+      "source_frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "source_variants": {
+        "red": "drake_red.png",
+        "green": "drake_green.png",
+        "blue": "drake_blue.png"
+      },
+      "variant_count": 3,
+      "reference_variant": "red",
+      "source_file": "content/tactics/base/beasts/drake_red.png",
+      "source_visible_bounds": [
+        0,
+        16,
+        46,
+        46
+      ],
+      "tags": [
+        "dragon",
+        "boss"
+      ],
+      "flying": false,
+      "status": "integrated: eight facings, idle, movement, basic attack and defeated poses; distinct structural forms retained"
+    },
+    {
+      "id": "warg",
+      "name": "Warg",
+      "source_pack": "bestiary",
+      "source_manifest": "content/tactics/base/bestiary/manifest.json",
+      "source_frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "source_variants": {
+        "black": "warg_black.png",
+        "ash": "warg_ash.png",
+        "rider": "warg_rider.png"
+      },
+      "variant_count": 3,
+      "reference_variant": "black",
+      "source_file": "content/tactics/base/bestiary/warg_black.png",
+      "source_visible_bounds": [
+        0,
+        11,
+        47,
+        46
+      ],
+      "tags": [
+        "beast",
+        "mount"
+      ],
+      "flying": false,
+      "status": "integrated: eight facings, idle, movement, basic attack and defeated poses; distinct structural forms retained"
+    },
+    {
+      "id": "hookbeak",
+      "name": "Hookbeak",
+      "source_pack": "bestiary",
+      "source_manifest": "content/tactics/base/bestiary/manifest.json",
+      "source_frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "source_variants": {
+        "brown": "hookbeak_brown.png",
+        "snow": "hookbeak_snow.png"
+      },
+      "variant_count": 2,
+      "reference_variant": "brown",
+      "source_file": "content/tactics/base/bestiary/hookbeak_brown.png",
+      "source_visible_bounds": [
+        2,
+        12,
+        46,
+        47
+      ],
+      "tags": [
+        "beast",
+        "large",
+        "hybrid"
+      ],
+      "flying": false,
+      "status": "integrated: eight facings, idle, movement, basic attack and defeated poses; distinct structural forms retained"
+    },
+    {
+      "id": "scorpion",
+      "name": "Giant Scorpion",
+      "source_pack": "bestiary",
+      "source_manifest": "content/tactics/base/bestiary/manifest.json",
+      "source_frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "source_variants": {
+        "sand": "scorpion_sand.png",
+        "black": "scorpion_black.png",
+        "ember": "scorpion_ember.png"
+      },
+      "variant_count": 3,
+      "reference_variant": "sand",
+      "source_file": "content/tactics/base/bestiary/scorpion_sand.png",
+      "source_visible_bounds": [
+        5,
+        16,
+        44,
+        46
+      ],
+      "tags": [
+        "beast",
+        "venom"
+      ],
+      "flying": false,
+      "status": "integrated: eight facings, idle, movement, basic attack and defeated poses; distinct structural forms retained"
+    },
+    {
+      "id": "harpy",
+      "name": "Harpy",
+      "source_pack": "bestiary",
+      "source_manifest": "content/tactics/base/bestiary/manifest.json",
+      "source_frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "source_variants": {
+        "dusk": "harpy_dusk.png",
+        "storm": "harpy_storm.png"
+      },
+      "variant_count": 2,
+      "reference_variant": "dusk",
+      "source_file": "content/tactics/base/bestiary/harpy_dusk.png",
+      "source_visible_bounds": [
+        3,
+        6,
+        45,
+        38
+      ],
+      "tags": [
+        "monstrosity",
+        "flying"
+      ],
+      "flying": true,
+      "status": "integrated: eight facings, idle, movement, basic attack and defeated poses; distinct structural forms retained"
+    },
+    {
+      "id": "wisp",
+      "name": "Will-o'-Wisp",
+      "source_pack": "bestiary",
+      "source_manifest": "content/tactics/base/bestiary/manifest.json",
+      "source_frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "source_variants": {
+        "marsh": "wisp_marsh.png",
+        "ember": "wisp_ember.png"
+      },
+      "variant_count": 2,
+      "reference_variant": "marsh",
+      "source_file": "content/tactics/base/bestiary/wisp_marsh.png",
+      "source_visible_bounds": [
+        10,
+        10,
+        35,
+        26
+      ],
+      "tags": [
+        "fey",
+        "incorporeal",
+        "light"
+      ],
+      "flying": true,
+      "status": "integrated: eight facings, idle, movement, basic attack and defeated poses; distinct structural forms retained"
+    },
+    {
+      "id": "gargoyle",
+      "name": "Gargoyle",
+      "source_pack": "bestiary",
+      "source_manifest": "content/tactics/base/bestiary/manifest.json",
+      "source_frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "source_variants": {
+        "granite": "gargoyle_granite.png",
+        "obsidian": "gargoyle_obsidian.png"
+      },
+      "variant_count": 2,
+      "reference_variant": "granite",
+      "source_file": "content/tactics/base/bestiary/gargoyle_granite.png",
+      "source_visible_bounds": [
+        12,
+        11,
+        35,
+        48
+      ],
+      "tags": [
+        "construct",
+        "flying"
+      ],
+      "flying": false,
+      "status": "integrated: eight facings, idle, movement, basic attack and defeated poses; distinct structural forms retained"
+    },
+    {
+      "id": "crab",
+      "name": "Giant Crab",
+      "source_pack": "bestiary",
+      "source_manifest": "content/tactics/base/bestiary/manifest.json",
+      "source_frame": {
+        "width": 48,
+        "height": 48,
+        "anchor": [
+          24,
+          44
+        ]
+      },
+      "source_variants": {
+        "shore": "crab_shore.png",
+        "deep": "crab_deep.png"
+      },
+      "variant_count": 2,
+      "reference_variant": "shore",
+      "source_file": "content/tactics/base/bestiary/crab_shore.png",
+      "source_visible_bounds": [
+        0,
+        23,
+        43,
+        45
+      ],
+      "tags": [
+        "beast",
+        "aquatic"
+      ],
+      "flying": false,
+      "status": "integrated: eight facings, idle, movement, basic attack and defeated poses; distinct structural forms retained"
+    }
+  ],
+  "total_families": 14,
+  "total_variants": 41
+}

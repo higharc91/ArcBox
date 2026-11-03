@@ -1,0 +1,13 @@
+{
+  "automatic_previews": {
+    "loaded": 21,
+    "animate_without_javascript": true,
+    "http_requests": 0
+  },
+  "inspector": {
+    "decoded_atlases": 21,
+    "north_movement": true,
+    "defeated_selection": true,
+    "script_errors": []
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "input_translation": [
+    -9,
+    -33
+  ],
+  "input_canvas": [
+    256,
+    256
+  ],
+  "canonical_canvas": [
+    256,
+    256
+  ],
+  "policy": "One fixed translation for the whole loop, reversed on runtime export; no per-frame recentering."
+}

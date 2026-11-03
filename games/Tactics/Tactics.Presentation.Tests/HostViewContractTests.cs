@@ -57,7 +57,7 @@ public sealed class HostViewContractTests
         Assert.Equal(10, units.Length);
         var party = battle.Units.Where(u => u.Side == "Party").ToArray();
         Assert.Equal([.. map.Zones["party_spawn"].Take(4)], party.Select(u => u.At));
-        Assert.Equal(classes.Select(c => $"characters.class_{c}"), party.Select(u => u.Sprite));
+        Assert.Equal(classes.Select(c => $"characters.human_{c}"), party.Select(u => u.Sprite));
         Assert.Equal(["goblin.1", "goblin.2", "goblin.3", "goblin.4", "goblin_archer.1", "goblin_archer.2"],
             battle.Units.Where(u => u.Side == "Enemy").Select(u => u.Id.Value));
         Assert.Equal([new Tile(9, 5), new Tile(10, 5), new Tile(9, 6), new Tile(10, 6)],

@@ -175,6 +175,7 @@
 #                    (a 216 ms fight start with them, 2 to 5 ms without, on an RTX 5080), so judge hitches and frame times only from a
 #                    run with ARCBOX_SHOTS=0 and TV_ARGS=--perf. REDLINE's phones take theirs either way (their folder is set here)
 #   TV_ENGINE_ARGS   extra Godot engine arguments, before the --, e.g. --position 160,100 to place the window; Godot counts from the left edge of the leftmost monitor, so x can't be negative
+#   TV_RENDERING_DRIVER Linux renderer (default vulkan); use opengl3 with --rendering-method gl_compatibility on CI machines without Vulkan surface support
 #   TV_REMATCH       1 (with ARCBOX_FULL=1) = after the race, the VIP phone starts a second one in the same room
 #                    and plays it to its first Reveal (shots in <out>/phones-rematch)
 #

@@ -171,7 +171,7 @@ public sealed class PropFade
             {
                 for (var w = 0; prop.Covers && !_covered[prop.Group] && w < walkers.Count; w++)
                 {
-                    _covered[prop.Group] = prop.Order > walkers[w].Order && prop.Area.Overlaps(WorldPlan.AreaOf(walkers[w]));
+                    _covered[prop.Group] = prop.Order > walkers[w].Order && prop.Area.Overlaps(WorldPlan.BodyAreaOf(walkers[w]));
                 }
             }
         }

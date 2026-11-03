@@ -29,6 +29,14 @@
       "oasis": "icons/oasis.png",
       "volcano": "icons/volcano.png",
       "glacier": "icons/glacier.png",
+      "stone_bridge": "icons/stone_bridge.png",
+      "rope_bridge": "icons/rope_bridge.png",
+      "hut": "icons/hut.png",
+      "inn": "icons/inn.png",
+      "crater": "icons/crater.png",
+      "heartpool": "icons/heartpool.png",
+      "flame_hall": "icons/flame_hall.png",
+      "ice_cave": "icons/ice_cave.png",
       "party": "icons/party.png",
       "quest": "icons/quest.png"
     },
@@ -44,5 +52,15 @@
     }
   },
   "sample": "sample_map.png",
+  "placeIcons": {
+    "the_last_coal": "inn",
+    "ford_bridge": "stone_bridge",
+    "maud_hut": "hut",
+    "canyon_bridge": "rope_bridge",
+    "the_crater": "crater",
+    "the_heartpool": "heartpool",
+    "flame_hall": "flame_hall",
+    "cold_ember_caves": "ice_cave"
+  },
   "notes": "Compose a campaign map from parchment + region washes + icons; the sample shows the style"
 }
