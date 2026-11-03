@@ -1,0 +1,50 @@
+[
+  {
+    "id": "rime_spider",
+    "name": "Giant Spider",
+    "cr": "1",
+    "xp": 200,
+    "level": 2,
+    "jump": 4,
+    "scores": {
+      "str": 14,
+      "dex": 16,
+      "con": 12,
+      "int": 2,
+      "wis": 11,
+      "cha": 4
+    },
+    "hp": {
+      "1": 26,
+      "7": 38
+    },
+    "ac": 14,
+    "weapon": {
+      "id": "bite",
+      "damage": "1d10",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [
+      "spider.web"
+    ],
+    "passives": [
+      "spider.venom"
+    ],
+    "skills": [
+      "stealth"
+    ],
+    "tags": [
+      "beast"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "beasts.spider.black"
+  }
+]

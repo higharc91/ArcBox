@@ -42,6 +42,7 @@
     "classes/warlock.json",
     "classes/barbarian.json",
     "classes/sorcerer.json",
+    "monsters/rime-nest.json",
     "monsters/goblinoids.json",
     "monsters/undead.json",
     "monsters/humanoids.json",

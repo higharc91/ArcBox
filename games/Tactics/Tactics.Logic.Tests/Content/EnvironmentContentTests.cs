@@ -19,7 +19,7 @@ public sealed class EnvironmentContentTests
         Assert.Null(rules.Environment.Surfaces["scorched"].Rounds);
         Assert.True(rules.Encounters["river_crossing"].Environment);
         Assert.True(rules.Encounters["ford_assault"].Environment);
-        string[] enabled = ["ford_assault", "forest_ruins", "river_crossing", "warlord_bridge"];
+        string[] enabled = ["crystal_cave", "ford_assault", "forest_ruins", "river_crossing", "warlord_bridge"];
         Assert.Equal(enabled, rules.Encounters.Where(e => e.Value.Environment).Select(e => e.Key));
     }
 

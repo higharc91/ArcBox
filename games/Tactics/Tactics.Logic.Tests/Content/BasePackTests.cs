@@ -53,7 +53,7 @@ public sealed class BasePackTests
             "dire_wolf", "dragon", "drake", "earth_elemental", "elder_bear", "fire_elemental", "giant_bat", "giant_spider",
             "goblin", "goblin_archer", "goblin_boss", "goblin_ford_shaman", "goblin_shaman", "golem", "halvard", "hobgoblin", "hound", "imp",
             "ivo_rime", "kobold", "kobold_slinger", "lich", "maren_sorrel", "mimic", "mother_skarrow", "necromancer",
-            "orc_brute", "sapling", "skeleton", "skeleton_archer", "slime", "troll", "vorga", "water_elemental", "wolf",
+            "orc_brute", "rime_spider", "sapling", "skeleton", "skeleton_archer", "slime", "troll", "vorga", "water_elemental", "wolf",
             "wraith", "zombie",
         ];
         Assert.Equal(monsters, pack.Monsters.Keys);
