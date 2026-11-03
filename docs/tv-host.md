@@ -548,3 +548,21 @@ saved job poses, native fire/prop art, sleep and sunrise. The inn room screen us
 optional camp conversation, vote and story check screens; ordinary story packets are untouched. Phone art loads through the normal
 hashed content-pack URLs, has a non-interactive fallback, and honors reduced-motion. TV headings, embers, sleep marks, failed-cook
 smoke, sunrise rays and inn hearth flicker add atmosphere without changing recovery rules.
+
+## NPCs and the quest journal (issue #73)
+
+The leader's **Interact** target starts named conversations or an instant voiced town bark. Conversations use the existing story voting and party-picked checks. **Quest log** opens a shared TV book; the leader's selection mirrors on the TV and stops walking until closed. Other phones can read privately. A leader can pin one active quest; the tracker, visible target waypoint and edge arrow return after scenes and fights. Completion remains visible for seven walking seconds before unpinning. A phone banner long-press pins an active quest.
+
+```sh
+# Standalone visual demonstration: markers, speech, book, tracker, target, gates.
+godot --path src/ArcBox.Host -- --world-demo=npcs --shots=/tmp/npcs --audio-log --story-log
+# Real phones + TV, grain quest then Chapter 1. Repeat with ARCBOX_BRANCH=parley.
+ARCBOX_GAME=tactics ARCBOX_CHAPTER=1 ARCBOX_QUESTS=1 ARCBOX_BRANCH=force tools/tv-e2e.sh
+# Vite fixture preview and browser layout regression (44 screens × 6 viewports).
+# Requires Playwright + Chromium, with require("playwright") resolving as for play.cjs.
+cd web/play && npm run dev -- --host 127.0.0.1
+# From repository root in another terminal:
+node tools/tactics-playtest/phone-layout.cjs http://127.0.0.1:5173 /tmp/phone-layout
+```
+
+Use Godot 4.7.2 .NET. Import fonts before standalone launches. The dev-only `web/play/journal.html?screen=questlog-leader` preview accepts any Tactics fixture name and is excluded from production entry points. Phone walking, battle and encounter controls occupy a separate row from scrolling content. See the [design](superpowers/specs/2026-11-03-tactics-npcs-and-quests-design.md) and [report](superpowers/reports/2026-11-03-npcs-quests/README.md).

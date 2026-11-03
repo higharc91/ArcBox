@@ -121,8 +121,8 @@ Ashen Ford has scuffs and a cache, but no hidden path or door. The open items ar
 ### OW-34 · Places still short of the lore · `todo`
 No granary building, because the kit has none: (42,70) is sacks and crates. Maud's hut is a plain cottage with no charms. Both are art requests, so ask before generating.
 
-### OW-35 · NPCs and side quests · `doing`, issue #73
-Named conversations, voiced townsfolk barks, three lore-checked Ashen Ford quests, and the shared/pinned quest journal. Work: `npcs-and-quests`. Rest/recovery and the character/palette board are integrated as prerequisites on this branch; OW-07 is part of this work.
+### OW-35 · NPCs and side quests · `done`, issue #73
+Eight named conversations, voiced townsfolk barks, three lore-checked Ashen Ford quests, atomic rewards and the shared/private pinned quest journal. Completed on `npcs-and-quests` (main unchanged). Rest/recovery and the character/palette board are integrated as prerequisites; OW-07 is complete. Full suite: 6,079 .NET and 504 phone tests. Mobile layout audit: 264 cases, including movement-wheel clearance. Actual force/parley chapter runs and the grain quest passed. [Report](../reports/2026-11-03-npcs-quests/README.md).
 
 ## P3: later, needs design with the user
 

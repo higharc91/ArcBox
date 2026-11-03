@@ -1,0 +1,38 @@
+Running tests from /workspace/arcbox-npcs/games/Counter/Counter.Logic.Tests/bin/Release/net10.0/Counter.Logic.Tests.dll (net10.0|x64)
+/workspace/arcbox-npcs/games/Counter/Counter.Logic.Tests/bin/Release/net10.0/Counter.Logic.Tests.dll (net10.0|x64) passed (1s 092ms)
+Running tests from /workspace/arcbox-npcs/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+/workspace/arcbox-npcs/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64) passed (44s 818ms)
+Running tests from /workspace/arcbox-npcs/src/ArcBox.Host.Core.Tests/bin/Release/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64)
+/workspace/arcbox-npcs/src/ArcBox.Host.Core.Tests/bin/Release/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64) passed (5s 112ms)
+Running tests from /workspace/arcbox-npcs/src/ArcBox.Server.Tests/bin/Release/net10.0/ArcBox.Server.Tests.dll (net10.0|x64)
+/workspace/arcbox-npcs/src/ArcBox.Server.Tests/bin/Release/net10.0/ArcBox.Server.Tests.dll (net10.0|x64) passed (31s 356ms)
+Running tests from /workspace/arcbox-npcs/games/Redline/Redline.Logic.Tests/bin/Release/net10.0/Redline.Logic.Tests.dll (net10.0|x64)
+/workspace/arcbox-npcs/games/Redline/Redline.Logic.Tests/bin/Release/net10.0/Redline.Logic.Tests.dll (net10.0|x64) passed (1s 553ms)
+Running tests from /workspace/arcbox-npcs/games/Redline/Redline.Presentation.Tests/bin/Release/net10.0/Redline.Presentation.Tests.dll (net10.0|x64)
+/workspace/arcbox-npcs/games/Redline/Redline.Presentation.Tests/bin/Release/net10.0/Redline.Presentation.Tests.dll (net10.0|x64) passed (34s 800ms)
+Running tests from /workspace/arcbox-npcs/games/Tactics/Tactics.Game.Tests/bin/Release/net10.0/Tactics.Game.Tests.dll (net10.0|x64)
+/workspace/arcbox-npcs/games/Tactics/Tactics.Game.Tests/bin/Release/net10.0/Tactics.Game.Tests.dll (net10.0|x64) passed (1m 23s 258ms)
+Running tests from /workspace/arcbox-npcs/games/Tactics/Tactics.Presentation.Tests/bin/Release/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+/workspace/arcbox-npcs/games/Tactics/Tactics.Presentation.Tests/bin/Release/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64) passed (1m 26s 243ms)
+Running tests from /workspace/arcbox-npcs/games/Tactics/Tactics.WorldTools.Tests/bin/Release/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64)
+/workspace/arcbox-npcs/games/Tactics/Tactics.WorldTools.Tests/bin/Release/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64) passed (52s 734ms)
+Running tests from /workspace/arcbox-npcs/src/ArcBox.Sdk.Tests/bin/Release/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64)
+/workspace/arcbox-npcs/src/ArcBox.Sdk.Tests/bin/Release/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64) passed (1s 228ms)
+
+Test run summary: Passed!
+  /workspace/arcbox-npcs/src/ArcBox.Sdk.Tests/bin/Release/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64) passed (1s 228ms)
+  /workspace/arcbox-npcs/games/Counter/Counter.Logic.Tests/bin/Release/net10.0/Counter.Logic.Tests.dll (net10.0|x64) passed (1s 092ms)
+  /workspace/arcbox-npcs/games/Tactics/Tactics.Game.Tests/bin/Release/net10.0/Tactics.Game.Tests.dll (net10.0|x64) passed (1m 23s 258ms)
+  /workspace/arcbox-npcs/src/ArcBox.Host.Core.Tests/bin/Release/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64) passed (5s 112ms)
+  /workspace/arcbox-npcs/games/Redline/Redline.Logic.Tests/bin/Release/net10.0/Redline.Logic.Tests.dll (net10.0|x64) passed (1s 553ms)
+  /workspace/arcbox-npcs/games/Tactics/Tactics.WorldTools.Tests/bin/Release/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64) passed (52s 734ms)
+  /workspace/arcbox-npcs/src/ArcBox.Server.Tests/bin/Release/net10.0/ArcBox.Server.Tests.dll (net10.0|x64) passed (31s 356ms)
+  /workspace/arcbox-npcs/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64) passed (44s 818ms)
+  /workspace/arcbox-npcs/games/Tactics/Tactics.Presentation.Tests/bin/Release/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64) passed (1m 26s 243ms)
+  /workspace/arcbox-npcs/games/Redline/Redline.Presentation.Tests/bin/Release/net10.0/Redline.Presentation.Tests.dll (net10.0|x64) passed (34s 800ms)
+
+  total: 6079
+  failed: 0
+  succeeded: 6079
+  skipped: 0
+  duration: 5m 45s 043ms
